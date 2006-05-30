@@ -117,7 +117,13 @@ namespace zypp
         const Pathname mediaFile() const;
         
         void readContentFile();
-
+        
+        /**
+         * reads the media file and installs
+         * a media verifier if available
+         */
+        void readMediaFile();
+        
         TmpDir downloadMetadata();
         bool downloadNeeded();
         

@@ -90,6 +90,47 @@ namespace zypp
         return true;
       }
       
+      void SuseTagsImpl::readMediaFile()
+      {
+        media::MediaManager media_mgr;
+        
+        std::ifstream pfile( mediaFile().asString().c_str() );
+        if ( pfile.bad() ) {
+          ZYPP_THROW(Exception("Error parsing media.1/media") );
+        }
+        _vendor = str::getline( pfile, str::TRIM );
+        if ( pfile.fail() ) {
+          ZYPP_THROW(Exception("Error parsing media.1/media") );
+        }
+        _media_id = str::getline( pfile, str::TRIM );
+        if ( pfile.fail() ) {
+          ZYPP_THROW(Exception("Error parsing media.1/media") );
+        }
+        std::string media_count_str = str::getline( pfile, str::TRIM );
+        if ( pfile.fail() ) {
+          ZYPP_THROW(Exception("Error parsing media.1/media") );
+        }
+        _media_count = str::strtonum<unsigned>( media_count_str );
+
+        try {
+          MIL << "Adding susetags media verifier: " << endl;
+          MIL << "Vendor: " << _vendor << endl;
+          MIL << "Media ID: " << _media_id << endl;
+
+          // get media ID, but not attaching
+          media::MediaAccessId _media = _media_set->getMediaAccessId(1, true);
+          media_mgr.delVerifier(_media);
+          media_mgr.addVerifier(_media, media::MediaVerifierRef(
+              new SourceImpl::Verifier (_vendor, _media_id) ));
+        }
+        catch (const Exception & excpt_r)
+        {
+#warning FIXME: If media data is not set, verifier is not set. Should the media
+          ZYPP_CAUGHT(excpt_r);
+          WAR << "Verifier not found" << endl;
+        }
+      }
+      
       TmpDir SuseTagsImpl::downloadMetadata()
       {
         
@@ -115,6 +156,9 @@ namespace zypp
         catch(Exception &e) {
           ZYPP_THROW(Exception("Can't provide " + _path.asString() + "/media.1 from " + url().asString() ));
         }
+        
+        // media is provided, now we can install a media verifier.
+        readMediaFile();
         
         try {
           descr_src = provideDirTree(_orig_descr_dir);        
@@ -194,7 +238,6 @@ namespace zypp
         
         return tmpdir;
       }
-      
       
       void SuseTagsImpl::initCacheDir(const Pathname & cache_dir_r)
       {
