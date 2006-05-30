@@ -118,6 +118,8 @@ namespace zypp
         
         void readContentFile();
 
+        TmpDir downloadMetadata();
+        
 	void provideProducts(Source_Ref source_r, ResStore& store);
 	void providePackages(Source_Ref source_r, ResStore& store);
 	void provideSelections(Source_Ref source_r, ResStore& store);

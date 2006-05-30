@@ -70,6 +70,98 @@ namespace zypp
         return _cache_dir + "MEDIA/media.1/media";
       }
       
+      TmpDir SuseTagsImpl::downloadMetadata()
+      {
+        
+        TmpDir tmpdir;
+        int copy_result;
+        MIL << "Downloading metadata to " << tmpdir.path() << std::endl;
+        
+        Pathname local_dir = tmpdir.path();
+        
+        Pathname new_media_file = provideFile("media.1/media");
+        // before really download all the data and init the cache, check
+        // if the source has really changed, otherwise, make it quick
+        Pathname cached_media_file = mediaFile();
+        if ( cacheExists() )
+        {
+          CheckSum old_media_file_checksum( "SHA1", filesystem::sha1sum(cached_media_file));
+          CheckSum new_media_file_checksum( "SHA1", filesystem::sha1sum(new_media_file));
+          if ( (new_media_file_checksum == old_media_file_checksum) && (!new_media_file_checksum.empty()) && (! old_media_file_checksum.empty()))
+          {
+            MIL << "susetags source " << alias() << " has not changed. Refresh completed. SHA1 of media.1/media file is " << old_media_file_checksum.checksum() << std::endl;
+            //return;
+          }
+        }
+        MIL << "susetags source " << alias() << " has changed. Re-reading metadata into " << local_dir << endl;
+        
+        // (#163196)
+        // before we used _descr_dir, which is is wrong if we 
+        // store metadata already running from cache
+        // because it points to a local file and not
+        // to the media. So use the original media descr_dir.
+        Pathname media_src = provideDirTree("media.1");
+        Pathname descr_src = provideDirTree(_orig_descr_dir);        
+        Pathname content_src = provideFile( _path + "content"); 
+        
+        initCacheDir(local_dir);
+        
+        // get the list of cache keys
+        std::list<std::string> files;
+        dirInfo( 1, files, _path);
+                
+        if (0 != assert_dir((local_dir + "DATA"), 0755))
+        {
+          ZYPP_THROW(Exception("Cannot create cache DATA directory: " + (local_dir + "DATA").asString()));
+        }
+        else
+        {
+          filesystem::copy_dir(descr_src, local_dir + "DATA");
+          MIL << "cached descr directory" << std::endl;
+          filesystem::copy(content_src, local_dir + "DATA/content");
+          MIL << "cached content file" << std::endl;
+        }
+        
+        if (0 != assert_dir((local_dir + "PUBLICKEYS"), 0755))
+        {
+          ZYPP_THROW(Exception("Cannot create cache PUBLICKEYS directory: " + (local_dir + "PUBLICKEYS").asString()));
+        }
+        else
+        {
+          // cache all the public keys
+          for( std::list<std::string>::const_iterator it = files.begin(); it != files.end(); ++it)
+          {
+            std::string filename = *it;
+            if ( filename.substr(0, 10) == "gpg-pubkey" )
+            {
+              Pathname key_src = provideFile(_path + filename);
+              MIL << "Trying to cache " << key_src << std::endl;
+              filesystem::copy(key_src, local_dir + "PUBLICKEYS/" + filename);
+              MIL << "cached " << filename << std::endl;
+            }
+            else if( (filename == "content.asc") || (filename == "content.key"))
+            {
+              Pathname src_data = provideFile(_path + filename);
+              filesystem::copy( src_data, local_dir + "DATA/" + filename);
+              MIL << "cached " << filename << std::endl;
+            }
+          }
+        }
+
+        if (0 != assert_dir((local_dir + "MEDIA"), 0755))
+        {
+          ZYPP_THROW(Exception("Cannot create cache MEDIA directory: " + (local_dir + "MEDIA").asString()));
+        }
+        else
+        {
+          filesystem::copy_dir(media_src, local_dir + "MEDIA");
+          MIL << "cached media directory" << std::endl;
+        }
+        
+        return tmpdir;
+      }
+      
+      
       void SuseTagsImpl::initCacheDir(const Pathname & cache_dir_r)
       {
         // refuse to use stupid paths as cache dir
