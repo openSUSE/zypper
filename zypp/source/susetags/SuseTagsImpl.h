@@ -103,7 +103,7 @@ namespace zypp
         /** Stream output. */
         virtual std::ostream & dumpOn( std::ostream & str ) const;
         void initCacheDir(const Pathname & cache_dir_r);
-        bool cacheExists();
+        bool cacheExists() const;
       private:
         /** Ctor substitute.
          * Actually get the metadata.
@@ -119,6 +119,7 @@ namespace zypp
         void readContentFile();
 
         TmpDir downloadMetadata();
+        bool downloadNeeded();
         
 	void provideProducts(Source_Ref source_r, ResStore& store);
 	void providePackages(Source_Ref source_r, ResStore& store);

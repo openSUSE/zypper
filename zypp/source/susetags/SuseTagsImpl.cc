@@ -70,15 +70,8 @@ namespace zypp
         return _cache_dir + "MEDIA/media.1/media";
       }
       
-      TmpDir SuseTagsImpl::downloadMetadata()
+      bool SuseTagsImpl::downloadNeeded()
       {
-        
-        TmpDir tmpdir;
-        int copy_result;
-        MIL << "Downloading metadata to " << tmpdir.path() << std::endl;
-        
-        Pathname local_dir = tmpdir.path();
-        
         Pathname new_media_file = provideFile("media.1/media");
         // before really download all the data and init the cache, check
         // if the source has really changed, otherwise, make it quick
@@ -90,10 +83,23 @@ namespace zypp
           if ( (new_media_file_checksum == old_media_file_checksum) && (!new_media_file_checksum.empty()) && (! old_media_file_checksum.empty()))
           {
             MIL << "susetags source " << alias() << " has not changed. Refresh completed. SHA1 of media.1/media file is " << old_media_file_checksum.checksum() << std::endl;
-            //return;
+            return false;
           }
         }
-        MIL << "susetags source " << alias() << " has changed. Re-reading metadata into " << local_dir << endl;
+        MIL << "susetags source " << alias() << " has changed. Refresh needed." << std::endl;
+        return true;
+      }
+      
+      TmpDir SuseTagsImpl::downloadMetadata()
+      {
+        
+        TmpDir tmpdir;
+        int copy_result;
+        MIL << "Downloading metadata to " << tmpdir.path() << std::endl;
+        
+        Pathname local_dir = tmpdir.path();
+        
+        
         
         // (#163196)
         // before we used _descr_dir, which is is wrong if we 
@@ -268,7 +274,7 @@ namespace zypp
         }
       }
 
-      bool SuseTagsImpl::cacheExists()
+      bool SuseTagsImpl::cacheExists() const
       {
         MIL << "Checking if source cache exists in "<< _cache_dir << std::endl;
         bool exists = true;
