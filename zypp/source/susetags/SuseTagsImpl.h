@@ -22,6 +22,9 @@
 #include "zypp/CheckSum.h"
 #include "zypp/source/susetags/SuseTagsProductImpl.h"
 #include "zypp/source/susetags/SuseTagsPackageImpl.h"
+#include "zypp/TmpPath.h"
+
+using namespace zypp::filesystem;
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -107,7 +110,12 @@ namespace zypp
          * \throw EXCEPTION on fail
         */
         virtual void factoryInit();
-
+        
+        const Pathname contentFile() const;
+        const Pathname contentFileKey() const;
+        const Pathname contentFileSignature() const;
+        const Pathname mediaFile() const;
+        
         void readContentFile();
 
 	void provideProducts(Source_Ref source_r, ResStore& store);

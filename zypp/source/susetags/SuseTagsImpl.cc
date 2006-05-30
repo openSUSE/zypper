@@ -50,6 +50,26 @@ namespace zypp
       SuseTagsImpl::SuseTagsImpl()
       {}
 
+      const Pathname SuseTagsImpl::contentFile() const
+      {
+        return _cache_dir + "DATA/content";
+      }
+      
+      const Pathname SuseTagsImpl::contentFileSignature() const
+      {
+        return _cache_dir + "DATA/content.asc";
+      }
+      
+      const Pathname SuseTagsImpl::contentFileKey() const
+      {
+        return _cache_dir + "DATA/content.key";
+      }
+      
+      const Pathname SuseTagsImpl::mediaFile() const
+      {
+        return _cache_dir + "MEDIA/media.1/media";
+      }
+      
       void SuseTagsImpl::initCacheDir(const Pathname & cache_dir_r)
       {
         // refuse to use stupid paths as cache dir
