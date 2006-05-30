@@ -24,8 +24,10 @@
 #include "zypp/Product.h"
 #include "zypp/Selection.h"
 #include "zypp/Pattern.h"
+#include "zypp/TmpPath.h"
 
 using namespace zypp::parser::yum;
+using namespace zypp::filesystem;
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -36,6 +38,10 @@ namespace zypp
     namespace yum
     { //////////////////////////////////////////////////////////////
 
+      /**
+       * class representing a YUM collection of metadata
+       */
+      
       ///////////////////////////////////////////////////////////////////
       //
       //        CLASS NAME : YUMSourceImpl
@@ -45,6 +51,7 @@ namespace zypp
       class YUMSourceImpl : public SourceImpl
       {
       public:
+        
         /** Default Ctor.
          * Just initilizes data members. Metadata retrieval
          * is delayed untill \ref factoryInit.
@@ -68,6 +75,11 @@ namespace zypp
 
 	virtual void createResolvables(Source_Ref source_r);
 
+        /**
+         * is the download of metadata from the url needed
+         */
+        bool downloadNeeded();
+        
 	Package::Ptr createPackage(
 	  Source_Ref source_r,
 	  const zypp::parser::yum::YUMPrimaryData & parsed,
@@ -127,15 +139,17 @@ namespace zypp
         /** Check checksums of metadata files
          * \throw EXCEPTION on fail
          */
-        void checkMetadataChecksums(bool from_cache);
-
+        void checkMetadataChecksums() const;
+        void checkMetadataSignature() const;
       private:
         bool cacheExists();
-	std::list<Pathname> _metadata_files;
-        Pathname _repomd_file;
-        Pathname _repomd_signature;
-        Pathname _repomd_key;
-
+        const TmpDir downloadMetadata();
+        const Pathname repomdFile() const;
+        const Pathname repomdFileSignature() const;
+        const Pathname repomdFileKey() const;
+        
+        TmpDir _tmp_metadata_dir;
+        
 	typedef struct {
 	    zypp::detail::ResImplTraits<zypp::source::yum::YUMPackageImpl>::Ptr impl;
 	    zypp::Package::Ptr package;
