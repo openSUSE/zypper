@@ -219,6 +219,9 @@ namespace zypp
           }// end of patches file parsing
         } // end of copying
         
+        // check signature
+        checkMetadataSignature();
+        
         // ok, now we have a consistent repo in the tmpdir.
         return tmpdir;
       }
@@ -262,8 +265,6 @@ namespace zypp
             storeMetadata(_cache_dir);
           }
         }
-                  
-        checkMetadataSignature();
       }
 
       void YUMSourceImpl::checkMetadataSignature() const
@@ -351,8 +352,7 @@ namespace zypp
         }
         catch(Exception &e)
         {
-          ERR << "Can't check if source has changed or not. Aborting refresh." << std::endl;
-          return;
+          ZYPP_THROW(Exception("Can't check if source has changed or not. Aborting refresh."));
         }
         
         if ( need_to_refresh )
@@ -371,8 +371,7 @@ namespace zypp
         }
         catch(Exception &e)
         {
-          ERR << "Downloading metadata failed or user did not accept remote source. Aborting refresh." << std::endl;
-          return;
+          ZYPP_THROW(Exception("Downloading metadata failed (is YUM source?) or user did not accept remote source. Aborting refresh."));
         }
         
         // refuse to use stupid paths as cache dir
@@ -388,9 +387,8 @@ namespace zypp
        
         if ( copy_dir_content( download_tmp_dir, cache_dir_r) != 0)
         {
-          ERR << "Can't copy downloaded data to cache dir. Cleaning cache." << std::endl;
           filesystem::clean_dir(cache_dir_r);
-          return;
+          ZYPP_THROW(Exception( "Can't copy downloaded data to cache dir. Cache cleaned."));
         }
         // download_tmp_dir go out of scope now but it is ok as we already copied the content.
         _cache_dir = cache_dir_r;
