@@ -133,6 +133,7 @@ namespace zypp
         
         
         void readContentFile();
+        void checkMetadataSignature() const;
         
         /**
          * reads the media file and installs

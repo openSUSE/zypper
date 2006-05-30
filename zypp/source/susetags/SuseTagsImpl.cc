@@ -573,6 +573,18 @@ namespace zypp
         return PathInfo(_content_file).mtime();
       }
       
+      void SuseTagsImpl::checkMetadataSignature() const
+      {
+        ZYpp::Ptr z = getZYpp();
+        MIL << "SuseTags source: checking 'content' file vailidity using digital signature.." << endl;
+        // verify the content file
+        bool valid = z->keyRing()->verifyFileSignatureWorkflow( contentFile(), (path() + "content").asString() + " (" + url().asString() + ")", contentFileSignature());
+          
+        // the source is not valid and the user did not want to continue
+        if (!valid)
+          ZYPP_THROW (Exception( "Error. Source signature does not validate and user does not want to continue. "));
+      }
+      
       void SuseTagsImpl::readContentFile()
       {
         Pathname p;
