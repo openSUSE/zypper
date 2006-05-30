@@ -194,6 +194,8 @@ namespace zypp
         // cache all the public keys
         for( std::list<std::string>::const_iterator it = files.begin(); it != files.end(); ++it)
         {
+          ZYpp::Ptr z = getZYpp();
+          
           std::string filename = *it;
           if ( filename.substr(0, 10) == "gpg-pubkey" )
           {
@@ -211,6 +213,7 @@ namespace zypp
               ZYPP_THROW(Exception("Unable to copy key " + key_src.asString() + " to " + (local_dir + "PUBLICKEYS").asString()));
            
             MIL << "cached " << filename << std::endl;
+            z->keyRing()->importKey(local_dir + "PUBLICKEYS/" + filename, false);  
           }
           else if( (filename == "content.asc") || (filename == "content.key"))
           {
@@ -224,7 +227,10 @@ namespace zypp
             
             if ( filesystem::copy( src_data, local_dir + "DATA/" + filename) != 0 )
               ZYPP_THROW(Exception("Unable to copy " + filename + " to " + (local_dir + "/DATA").asString()));
-                
+            
+            if ( filename == "content.key" )
+              z->keyRing()->importKey(contentFileKey(), false);  
+              
             MIL << "cached " << filename << std::endl;
           }
         }
