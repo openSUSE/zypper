@@ -1,4 +1,15 @@
 -------------------------------------------------------------------
+Tue May 30 12:43:47 CEST 2006 - dmacvicar@suse.de
+
+- make yum more robust. Never parse from provideFile
+  but only from local disk. Make sure the cache
+  is consistent before recreating it.
+  the code is easier to follow and probably
+  faster. checksum and signatures are
+  checked on caching not on parsing.
+  Required to implement refresh for #154990
+
+-------------------------------------------------------------------
 Wed May 24 16:57:54 CEST 2006 - dmacvicar@suse.de
 
 - implement timestamp for YUM and SuseTags
