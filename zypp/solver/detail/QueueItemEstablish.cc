@@ -134,10 +134,13 @@ QueueItemEstablish::process (ResolverContext_Ptr context, QueueItemList & qil)
     }
 
     // if we have freshens but none of the freshen deps were met, mark the _item as unneeded
+    // else we look at its supplements as an additional condition
+    // (freshens AND supplements must be true. true means either empty or at least one match)
+    //
     // else we look at its requires to set it to satisfied or incomplete
 
     if (freshens.size() > 0				// have freshens !
-	&& iter == freshens.end())
+	&& iter == freshens.end())			// but none matched
     {
 	_XDEBUG(_item << " freshens nothing -> unneeded");
 	if (_item->kind() != ResTraits<Package>::kind)
@@ -170,6 +173,17 @@ QueueItemEstablish::process (ResolverContext_Ptr context, QueueItemList & qil)
 		return true;
 	    }
 	}
+
+	// the conditions (freshens, supplements) are true (either empty or at least one match)
+	// for a package, these are sufficient to trigger its installation. (packages only get
+	//  'established' if they have freshens or supplements).
+	//  While this is fine for e.g. fonts etc. its problematic for kernel driver packages.
+	//  We must not install kernel driver packages which (via their dependencies) will install
+	//  additional kernels. So for kernel driver packages, checking their requires is indeed
+	//  the right thing. (see #178721)
+
+	// for other kind of resolvables, we now look at their requirements and set their
+	//  'state modifier' accordingly.
 
 
 	CapSet requires = _item->dep(Dep::REQUIRES);			// check requirements
