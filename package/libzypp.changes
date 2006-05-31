@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Wed May 31 15:27:38 CEST 2006 - kkaempf@suse.de
+
+- schedule a package for installation if
+  - it freshens / supplements something
+  - it is not installed yet
+  (#178721)
+- rev 3473 
+
+-------------------------------------------------------------------
 Wed May 31 15:22:43 CEST 2006 - dmacvicar@suse.de
 
 - make susetags also implement download and check first. 
