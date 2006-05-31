@@ -381,6 +381,7 @@ namespace zypp
           MIL << "Cached metadata found in [" << _cache_dir << "]." << endl;
           // we need to read the content file to init data dir and descr dir
           // in the media.
+          readMediaFile(mediaFile());
           readContentFile(contentFile());
         }
         else
@@ -403,6 +404,7 @@ namespace zypp
         MIL << "   Path     : " << path() << std::endl;
         MIL << "   Data     : " << dataDir() << std::endl;
         MIL << "   Metadata : " << metadataRoot() << (_cache_dir.empty() ? " [TMP]" : " [CACHE]") << std::endl;
+        MIL << "   N-Media  : " << numberOfMedia() << std::endl;
       }
 
       void SuseTagsImpl::createResolvables(Source_Ref source_r)
