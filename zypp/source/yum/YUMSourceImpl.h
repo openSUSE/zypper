@@ -77,8 +77,9 @@ namespace zypp
 
         /**
          * is the download of metadata from the url needed
+         * \param localdir
          */
-        bool downloadNeeded();
+        bool downloadNeeded(const Pathname & localdir);
         
 	Package::Ptr createPackage(
 	  Source_Ref source_r,
@@ -145,6 +146,7 @@ namespace zypp
         const Pathname metadataRoot() const;
         bool cacheExists();
         const TmpDir downloadMetadata();
+        void saveMetadataTo(const Pathname & dir_r);
         const Pathname repomdFile() const;
         const Pathname repomdFileSignature() const;
         const Pathname repomdFileKey() const;

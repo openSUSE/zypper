@@ -90,12 +90,12 @@ namespace zypp
         return _media_descr_dir;
       }
       
-      bool SuseTagsImpl::downloadNeeded()
+      bool SuseTagsImpl::downloadNeeded(const Pathname & localdir)
       {
         Pathname new_media_file = provideFile("media.1/media");
         // before really download all the data and init the cache, check
         // if the source has really changed, otherwise, make it quick
-        Pathname cached_media_file = mediaFile();
+        Pathname cached_media_file = localdir + "/MEDIA/media.1/media";
         if ( cacheExists() )
         {
           CheckSum old_media_file_checksum( "SHA1", filesystem::sha1sum(cached_media_file));
@@ -291,14 +291,21 @@ namespace zypp
         //filesystem::mkdir(cache_dir_r + "DESCRIPTION");
         filesystem::mkdir(cache_dir_r + "PUBLICKEYS");
       }
-
+      
       void SuseTagsImpl::storeMetadata(const Pathname & cache_dir_r)
+      {
+        saveMetadataTo(cache_dir_r);
+        MIL << "Metadata saved in " << cache_dir_r << ". Setting as cache." << std::endl;
+        _cache_dir = cache_dir_r;
+      }
+      
+      void SuseTagsImpl::saveMetadataTo(const Pathname & dir_r)
       {
         TmpDir download_tmp_dir;
         
         bool need_to_refresh = true;
         try {
-          need_to_refresh = downloadNeeded();
+          need_to_refresh = downloadNeeded(dir_r);
         }
         catch(Exception &e) {
           ZYPP_THROW(Exception("Can't check if source has changed or not. Aborting refresh."));
@@ -306,7 +313,7 @@ namespace zypp
         
         if ( need_to_refresh )
         {
-          MIL << "SuseTags source " << alias() << "has changed since last download. Re-reading metadata into " << cache_dir_r << endl;
+          MIL << "SuseTags source " << alias() << "has changed since last download. Re-reading metadata into " << dir_r << endl;
         }
         else
         {
@@ -322,20 +329,20 @@ namespace zypp
         }
         
         // refuse to use stupid paths as cache dir
-        if (cache_dir_r == Pathname("/") )
-          ZYPP_THROW(Exception("I refuse to use / as cache dir"));
+        if (dir_r == Pathname("/") )
+          ZYPP_THROW(Exception("I refuse to use / as local dir"));
 
-        if (0 != assert_dir(cache_dir_r, 0755))
-          ZYPP_THROW(Exception("Cannot create cache directory" + cache_dir_r.asString()));
+        if (0 != assert_dir(dir_r, 0755))
+          ZYPP_THROW(Exception("Cannot create local directory" + dir_r.asString()));
 
         MIL << "Cleaning up cache dir" << std::endl;
-        filesystem::clean_dir(cache_dir_r);
-        MIL << "Copying " << download_tmp_dir << " content to cache : " << cache_dir_r << std::endl;
+        filesystem::clean_dir(dir_r);
+        MIL << "Copying " << download_tmp_dir << " content to cache : " << dir_r << std::endl;
        
-        if ( copy_dir_content( download_tmp_dir, cache_dir_r) != 0)
+        if ( copy_dir_content( download_tmp_dir, dir_r) != 0)
         {
-          filesystem::clean_dir(cache_dir_r);
-            ZYPP_THROW(Exception( "Can't copy downloaded data to cache dir. Cache cleaned."));
+          filesystem::clean_dir(dir_r);
+            ZYPP_THROW(Exception( "Can't copy downloaded data to local dir. local dir cleaned."));
         }
         // download_tmp_dir go out of scope now but it is ok as we already copied the content.
       }
@@ -391,6 +398,11 @@ namespace zypp
             storeMetadata(_cache_dir);
           }
         }
+        MIL << "SUSETags source initialized." << std::endl;
+        MIL << "   Url      : " << url() << std::endl;
+        MIL << "   Path     : " << path() << std::endl;
+        MIL << "   Data     : " << dataDir() << std::endl;
+        MIL << "   Metadata : " << metadataRoot() << (_cache_dir.empty() ? " [TMP]" : " [CACHE]") << std::endl;
       }
 
       void SuseTagsImpl::createResolvables(Source_Ref source_r)

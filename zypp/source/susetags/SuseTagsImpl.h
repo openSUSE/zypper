@@ -118,6 +118,8 @@ namespace zypp
         const Pathname descrDir() const;
         const Pathname mediaFile() const;
         
+        void saveMetadataTo(const Pathname & dir_r);
+        
         /**
          * description dir in original media
          * it is not always the same so it
@@ -156,7 +158,7 @@ namespace zypp
         void readMediaFile(const Pathname &p);
         
         TmpDir downloadMetadata();
-        bool downloadNeeded();
+        bool downloadNeeded(const Pathname &localdir);
         
 	void provideProducts(Source_Ref source_r, ResStore& store);
 	void providePackages(Source_Ref source_r, ResStore& store);

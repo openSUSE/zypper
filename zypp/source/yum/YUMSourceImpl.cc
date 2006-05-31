@@ -264,14 +264,19 @@ namespace zypp
             DBG << "Cache dir not set. Downloading to temp dir: " << _tmp_metadata_dir << std::endl;
             // as we have no local dir set we use a tmp one, but we use a member variable because
             // it cant go out of scope while the source exists.
-            storeMetadata(_tmp_metadata_dir);
+            saveMetadataTo(_tmp_metadata_dir);
           }
           else
           {
             DBG << "Cached metadata not found in [" << _cache_dir << "]. Will download." << std::endl;
-            storeMetadata(_cache_dir);
+            saveMetadataTo(_cache_dir);
           }
         }
+        
+        MIL << "SUSETags source initialized." << std::endl;
+        MIL << "   Url      : " << url() << std::endl;
+        MIL << "   Path     : " << path() << std::endl;
+        MIL << "   Metadata : " << metadataRoot() << (_cache_dir.empty() ? " [TMP]" : " [CACHE]") << std::endl;
       }
 
       void YUMSourceImpl::checkMetadataChecksums() const
@@ -315,7 +320,7 @@ namespace zypp
         }
       }
 
-      bool YUMSourceImpl::downloadNeeded()
+      bool YUMSourceImpl::downloadNeeded(const Pathname & localdir)
       {
         // we can only assume repomd intact means the source changed if the source is signed.
         if ( cacheExists() && PathInfo( repomdFileSignature() ).isExist() )
@@ -330,7 +335,7 @@ namespace zypp
             ZYPP_THROW(Exception("Can't provide " + _path.asString() + "/repodata/repomd.xml from " + url().asString() ));
           }
           
-          CheckSum old_repomd_checksum( "SHA1", filesystem::sha1sum(repomdFile()));
+          CheckSum old_repomd_checksum( "SHA1", filesystem::sha1sum(localdir + "/repodata/repomd.xml"));
           CheckSum new_repomd_checksum( "SHA1", filesystem::sha1sum(remote_repomd));
           if ( (new_repomd_checksum == old_repomd_checksum) && (!new_repomd_checksum.empty()) && (! old_repomd_checksum.empty()))
           {
@@ -342,12 +347,19 @@ namespace zypp
       
       void YUMSourceImpl::storeMetadata(const Pathname & cache_dir_r)
       {
+        saveMetadataTo(cache_dir_r);
+        MIL << "Metadata saved in " << cache_dir_r << ". Setting as cache." << std::endl;
+        _cache_dir = cache_dir_r;
+      }
+      
+      void YUMSourceImpl::saveMetadataTo(const Pathname & dir_r)
+      {
         TmpDir download_tmp_dir;
         
         bool need_to_refresh = true;
         try
         {
-          need_to_refresh = downloadNeeded();
+          need_to_refresh = downloadNeeded(dir_r);
         }
         catch(Exception &e)
         {
@@ -356,7 +368,7 @@ namespace zypp
         
         if ( need_to_refresh )
         {
-          MIL << "YUM source " << alias() << "has changed since last download. Re-reading metadata into " << cache_dir_r << endl;
+          MIL << "YUM source " << alias() << "has changed since last download. Re-reading metadata into " << dir_r << endl;
         }
         else
         {
@@ -374,20 +386,20 @@ namespace zypp
         }
         
         // refuse to use stupid paths as cache dir
-        if (cache_dir_r == Pathname("/") )
-          ZYPP_THROW(Exception("I refuse to use / as cache dir"));
+        if (dir_r == Pathname("/") )
+          ZYPP_THROW(Exception("I refuse to use / as local dir"));
 
-        if (0 != assert_dir(cache_dir_r, 0755))
-          ZYPP_THROW(Exception("Cannot create cache directory" + cache_dir_r.asString()));
+        if (0 != assert_dir(dir_r, 0755))
+          ZYPP_THROW(Exception("Cannot create local directory" + dir_r.asString()));
 
         MIL << "Cleaning up cache dir" << std::endl;
-        filesystem::clean_dir(cache_dir_r);
-        MIL << "Copying " << download_tmp_dir << " content to cache : " << cache_dir_r << std::endl;
+        filesystem::clean_dir(dir_r);
+        MIL << "Copying " << download_tmp_dir << " content to local dir : " << dir_r << std::endl;
        
-        if ( copy_dir_content( download_tmp_dir, cache_dir_r) != 0)
+        if ( copy_dir_content( download_tmp_dir, dir_r) != 0)
         {
-          filesystem::clean_dir(cache_dir_r);
-          ZYPP_THROW(Exception( "Can't copy downloaded data to cache dir. Cache cleaned."));
+          filesystem::clean_dir(dir_r);
+          ZYPP_THROW(Exception( "Can't copy downloaded data to local dir. Dir cleaned."));
         }
         // download_tmp_dir go out of scope now but it is ok as we already copied the content.
       }
