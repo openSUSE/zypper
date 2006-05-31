@@ -2,6 +2,7 @@
 Wed May 31 17:06:48 CEST 2006 - dmacvicar@suse.de
 
 - set cache dir only if storeMetadata is called as a public method.´ 
+- rev 3475
 
 -------------------------------------------------------------------
 Wed May 31 15:27:38 CEST 2006 - kkaempf@suse.de
