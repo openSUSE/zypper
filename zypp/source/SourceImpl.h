@@ -261,7 +261,7 @@ namespace zypp
 				 bool cached = false,
 				 bool checkonly = false);
 
-
+      void copyLocalMetadata(const Pathname &src, const Pathname &dst) const;
     protected:
       /** All resolvables provided by this source. */
       ResStore _store;

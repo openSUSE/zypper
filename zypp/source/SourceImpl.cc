@@ -288,7 +288,26 @@ namespace zypp
       return media_mgr.localPath( _media, file );
     }
 
+    void SourceImpl::copyLocalMetadata(const Pathname &src, const Pathname &dst) const
+    {
+      // refuse to use stupid paths as cache dir
+      if (dst == Pathname("/") )
+        ZYPP_THROW(Exception("I refuse to use / as local dir"));
 
+      if (0 != assert_dir(dst, 0755))
+        ZYPP_THROW(Exception("Cannot create local directory" + dst.asString()));
+
+      MIL << "Cleaning up local dir" << std::endl;
+      filesystem::clean_dir(dst);
+      MIL << "Copying " << src << " content to local : " << dst << std::endl;
+       
+      if ( copy_dir_content( src, dst) != 0)
+      {
+        filesystem::clean_dir(dst);
+        ZYPP_THROW(Exception( "Can't copy downloaded data to local dir. local dir cleaned."));
+      }
+    }
+    
     const Pathname SourceImpl::provideJustFile(const Pathname & file_r,
 					   const unsigned media_nr,
 					   bool cached,
