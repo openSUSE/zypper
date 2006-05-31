@@ -168,6 +168,7 @@ QueueItemEstablish::process (ResolverContext_Ptr context, QueueItemList & qil)
 	    PoolItem_Ref installed = Helper::findInstalledItem( pool(), _item );
 	    if (!installed) {								// not installed -> install
 		// have supplements and at least one triggers -> install
+		_DEBUG("Uninstalled " << _item << " supplements " << *iter << " -> install");
 		QueueItemInstall_Ptr install_item = new QueueItemInstall( pool(), _item, true );
 		qil.push_front( install_item );
 		return true;
@@ -181,6 +182,10 @@ QueueItemEstablish::process (ResolverContext_Ptr context, QueueItemList & qil)
 	//  We must not install kernel driver packages which (via their dependencies) will install
 	//  additional kernels. So for kernel driver packages, checking their requires is indeed
 	//  the right thing. (see #178721)
+
+	// So the current code checks all requirements and only triggers an install if
+	//  - all requirements are already fulfilled
+	//  - the package is not already installed (so we do only fresh installs, no upgrades here)
 
 	// for other kind of resolvables, we now look at their requirements and set their
 	//  'state modifier' accordingly.
@@ -205,13 +210,24 @@ QueueItemEstablish::process (ResolverContext_Ptr context, QueueItemList & qil)
 		_XDEBUG("all requirements of " << _item << " unneeded -> unneeded");
 		context->unneeded( _item, _other_penalty );
 	    }
+	    else if (_item->kind() == ResTraits<Package>::kind)		// install package if not installed yet.
+	    {
+		PoolItem_Ref installed = Helper::findInstalledItem( pool(), _item );
+		if (!installed) {
+		    // freshens and at least one triggers -> install
+		    _DEBUG("Uninstalled " << _item << " freshens -> install");
+		    QueueItemInstall_Ptr install_item = new QueueItemInstall( pool(), _item, true );
+		    qil.push_front( install_item );
+		    return true;
+		}
+	    }
 	    else
 	    {
 		_XDEBUG("all requirements of " << _item << " met -> satisfied");
 		context->satisfy( _item, _other_penalty );
 	    }
 	}
-	else {
+	else {								// some requirements are unfulfilled
 	    // If the item stays installed, blame the user
 	    if ((_item->kind() != ResTraits<Package>::kind
 		 && _item->kind() != ResTraits<Atom>::kind)
@@ -223,7 +239,13 @@ QueueItemEstablish::process (ResolverContext_Ptr context, QueueItemList & qil)
 	    }
 	    else if (status.staysUninstalled())			// not installed -> schedule for installation
 	    {
-		_XDEBUG("Uninstalled " << _item << " has unfulfilled requirement " << *iter << " -> install");
+		// This is probably plain wrong.
+		// It installs a resolvable if its freshens/supplements triggers and
+		// some of its requirements are unfulfilled.
+		// What if a resolvable of the same name is already installed ?
+		// What if a 'better' resolvable is already scheduled for installation ?
+
+		_DEBUG("Uninstalled " << _item << " has unfulfilled requirement " << *iter << " -> install");
 		QueueItemInstall_Ptr install_item = new QueueItemInstall( pool(), _item );
 		qil.push_front( install_item );
 	    }
