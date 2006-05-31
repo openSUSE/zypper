@@ -111,6 +111,7 @@ namespace zypp
         */
         virtual void factoryInit();
         
+        const Pathname metadataRoot() const;
         const Pathname contentFile() const;
         const Pathname contentFileKey() const;
         const Pathname contentFileSignature() const;
@@ -131,15 +132,28 @@ namespace zypp
          */
         const Pathname dataDir() const;
         
-        
-        void readContentFile();
-        void checkMetadataSignature() const;
+         /**
+         * reads content file, initializes the
+         * data and media descr dir
+         * and saves the product object
+         * but it does not add it to the store yet
+          */
+        void readContentFile(const Pathname &p);
+         
+        /**
+         * checks metadata
+         * against it checksums
+         * requires reading content file first
+         * \param dir Download directory
+         * \throw EXCEPTION on fail
+         **/
+        void checkMetadataChecksums(const Pathname &dir) const;
         
         /**
-         * reads the media file and installs
+         * reads a media file and installs
          * a media verifier if available
          */
-        void readMediaFile();
+        void readMediaFile(const Pathname &p);
         
         TmpDir downloadMetadata();
         bool downloadNeeded();
@@ -153,20 +167,19 @@ namespace zypp
          /**
          * verify media mode (use the new META tags)
           */
-        bool verifyChecksumsMode();
+        bool verifyChecksumsMode() const;
 
         /**
          * Verify file checksum
          * \throw EXCEPTION on verification file
          */
-        void verifyFile( const Pathname &path, const std::string &key);
+        void verifyFile( const Pathname &path, const std::string &key) const;
 
         unsigned _media_count;
 
-        // descr dir we are using
+        // data dir we are using
         // depends if we are on media or
         // cache
-        Pathname _descr_dir;
         Pathname _data_dir;
 
         // descr dir on media.
@@ -174,10 +187,9 @@ namespace zypp
         // already running from cache
         Pathname _media_descr_dir;
 
-        Pathname _content_file;
-        Pathname _content_file_sig;
-        Pathname _content_file_key;
-
+        // in case we dont have cache
+        TmpDir _tmp_metadata_dir;
+        
         std::string _vendor;
         std::string _media_id;
         /**
