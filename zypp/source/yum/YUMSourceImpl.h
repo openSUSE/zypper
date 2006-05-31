@@ -140,7 +140,6 @@ namespace zypp
          * \throw EXCEPTION on fail
          */
         void checkMetadataChecksums() const;
-        void checkMetadataSignature() const;
       private:
         bool cacheExists();
         const TmpDir downloadMetadata();

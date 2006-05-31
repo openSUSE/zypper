@@ -220,7 +220,9 @@ namespace zypp
         } // end of copying
         
         // check signature
-        checkMetadataSignature();
+        MIL << "Checking [" << (local_dir + "/repodata/repomd.xml") << "] signature"  << endl;
+        if (! getZYpp()->keyRing()->verifyFileSignatureWorkflow(local_dir + "/repodata/repomd.xml", (_path + "/repodata/repomd.xml").asString()+ " (" + url().asString() + ")", local_dir + "/repodata/repomd.xml.asc"))
+          ZYPP_THROW(Exception(N_("Signed repomd.xml file fails signature check")));
         
         // ok, now we have a consistent repo in the tmpdir.
         return tmpdir;
@@ -267,14 +269,6 @@ namespace zypp
         }
       }
 
-      void YUMSourceImpl::checkMetadataSignature() const
-      {
-        MIL << "Checking [" << repomdFile() << "] signature"  << endl;
-
-        if (! getZYpp()->keyRing()->verifyFileSignatureWorkflow(repomdFile(), (_path + "/repodata/repomd.xml").asString()+ " (" + url().asString() + ")", repomdFileSignature()))
-          ZYPP_THROW(Exception(N_("Signed repomd.xml file fails signature check")));
-      }
-      
       void YUMSourceImpl::checkMetadataChecksums() const
       {
         DBG << "Reading file " << repomdFile() << " to check integrity of metadata." << endl;
