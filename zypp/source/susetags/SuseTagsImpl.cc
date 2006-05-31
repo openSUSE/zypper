@@ -294,7 +294,16 @@ namespace zypp
       
       void SuseTagsImpl::storeMetadata(const Pathname & cache_dir_r)
       {
-        saveMetadataTo(cache_dir_r);
+        if ( !_cache_dir.empty() )
+        {
+          saveMetadataTo(cache_dir_r);
+        }
+        else
+        {
+          // no previous cache, use the data read temporarely
+          copyLocalMetadata(_tmp_metadata_dir.path(), cache_dir_r);
+        }
+        
         MIL << "Metadata saved in " << cache_dir_r << ". Setting as cache." << std::endl;
         _cache_dir = cache_dir_r;
       }
@@ -328,22 +337,8 @@ namespace zypp
           ZYPP_THROW(Exception("Downloading metadata failed (is a susetags source?) or user did not accept remote source. Aborting refresh."));
         }
         
-        // refuse to use stupid paths as cache dir
-        if (dir_r == Pathname("/") )
-          ZYPP_THROW(Exception("I refuse to use / as local dir"));
-
-        if (0 != assert_dir(dir_r, 0755))
-          ZYPP_THROW(Exception("Cannot create local directory" + dir_r.asString()));
-
-        MIL << "Cleaning up cache dir" << std::endl;
-        filesystem::clean_dir(dir_r);
-        MIL << "Copying " << download_tmp_dir << " content to cache : " << dir_r << std::endl;
-       
-        if ( copy_dir_content( download_tmp_dir, dir_r) != 0)
-        {
-          filesystem::clean_dir(dir_r);
-            ZYPP_THROW(Exception( "Can't copy downloaded data to local dir. local dir cleaned."));
-        }
+        copyLocalMetadata(download_tmp_dir, dir_r);
+        
         // download_tmp_dir go out of scope now but it is ok as we already copied the content.
       }
 
@@ -391,12 +386,12 @@ namespace zypp
             MIL << "Cache dir not set. Downloading to temp dir: " << _tmp_metadata_dir << std::endl;
             // as we have no local dir set we use a tmp one, but we use a member variable because
             // it cant go out of scope while the source exists.
-            storeMetadata(_tmp_metadata_dir);
+            saveMetadataTo(_tmp_metadata_dir);
           }
           else
           {
             MIL << "Cached metadata not found in [" << _cache_dir << "]. Will download." << std::endl;
-            storeMetadata(_cache_dir);
+            saveMetadataTo(_cache_dir);
           }
         }
         MIL << "SUSETags source initialized." << std::endl;

@@ -346,8 +346,17 @@ namespace zypp
       }
       
       void YUMSourceImpl::storeMetadata(const Pathname & cache_dir_r)
-      {
-        saveMetadataTo(cache_dir_r);
+      {        
+        if ( !_cache_dir.empty() )
+        {
+          saveMetadataTo(cache_dir_r);
+        }
+        else
+        {
+          // no previous cache, use the data read temporarely
+          copyLocalMetadata(_tmp_metadata_dir.path(), cache_dir_r);
+        }
+        
         MIL << "Metadata saved in " << cache_dir_r << ". Setting as cache." << std::endl;
         _cache_dir = cache_dir_r;
       }
@@ -385,22 +394,8 @@ namespace zypp
           ZYPP_THROW(Exception("Downloading metadata failed (is YUM source?) or user did not accept remote source. Aborting refresh."));
         }
         
-        // refuse to use stupid paths as cache dir
-        if (dir_r == Pathname("/") )
-          ZYPP_THROW(Exception("I refuse to use / as local dir"));
-
-        if (0 != assert_dir(dir_r, 0755))
-          ZYPP_THROW(Exception("Cannot create local directory" + dir_r.asString()));
-
-        MIL << "Cleaning up cache dir" << std::endl;
-        filesystem::clean_dir(dir_r);
-        MIL << "Copying " << download_tmp_dir << " content to local dir : " << dir_r << std::endl;
-       
-        if ( copy_dir_content( download_tmp_dir, dir_r) != 0)
-        {
-          filesystem::clean_dir(dir_r);
-          ZYPP_THROW(Exception( "Can't copy downloaded data to local dir. Dir cleaned."));
-        }
+        copyLocalMetadata(download_tmp_dir, dir_r);
+        
         // download_tmp_dir go out of scope now but it is ok as we already copied the content.
       }
 
