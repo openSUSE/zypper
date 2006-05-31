@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed May 31 15:22:43 CEST 2006 - dmacvicar@suse.de
+
+- make susetags also implement download and check first. 
+- rev 3470
+
+-------------------------------------------------------------------
 Tue May 30 12:43:47 CEST 2006 - dmacvicar@suse.de
 
 - make yum more robust. Never parse from provideFile
