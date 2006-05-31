@@ -141,6 +141,8 @@ namespace zypp
          */
         void checkMetadataChecksums() const;
       private:
+        
+        const Pathname metadataRoot() const;
         bool cacheExists();
         const TmpDir downloadMetadata();
         const Pathname repomdFile() const;

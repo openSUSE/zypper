@@ -79,19 +79,24 @@ namespace zypp
         return exists;
       }
       
+      const Pathname YUMSourceImpl::metadataRoot() const
+      {
+        return _cache_dir.empty() ? _tmp_metadata_dir : _cache_dir;
+      }
+      
       const Pathname YUMSourceImpl::repomdFile() const
       {
-        return _cache_dir + "/repodata/repomd.xml";
+        return metadataRoot() + "/repodata/repomd.xml";
       }
       
       const Pathname YUMSourceImpl::repomdFileSignature() const
       {
-        return _cache_dir + "/repodata/repomd.xml.asc";
+        return metadataRoot() + "/repodata/repomd.xml.asc";
       }
       
       const Pathname YUMSourceImpl::repomdFileKey() const
       {
-        return _cache_dir + "/repodata/repomd.xml.key";
+        return metadataRoot() + "/repodata/repomd.xml.key";
       }
       
       const TmpDir YUMSourceImpl::downloadMetadata()
@@ -283,7 +288,7 @@ namespace zypp
           }
           else
           {
-            Pathname file_to_check = _cache_dir + _path + (*repomd)->location;
+            Pathname file_to_check = metadataRoot() + _path + (*repomd)->location;
             if (! checkCheckSum( file_to_check, (*repomd)->checksumType, (*repomd)->checksum))
             {
               ZYPP_THROW(Exception( (*repomd)->location + " " + N_("fails checksum verification.") ));
@@ -299,7 +304,7 @@ namespace zypp
               YUMPatchesParser patch(st, "");
               for (; !patch.atEnd(); ++patch)
               {
-                Pathname patch_filename = _cache_dir + _path + (*patch)->location;
+                Pathname patch_filename = metadataRoot() + _path + (*patch)->location;
                 if (! checkCheckSum(patch_filename, (*patch)->checksumType, (*patch)->checksum))
                 {
                   ZYPP_THROW(Exception( (*patch)->location + " " + N_("fails checksum verification.") ));
@@ -385,7 +390,6 @@ namespace zypp
           ZYPP_THROW(Exception( "Can't copy downloaded data to cache dir. Cache cleaned."));
         }
         // download_tmp_dir go out of scope now but it is ok as we already copied the content.
-        _cache_dir = cache_dir_r;
       }
 
       void YUMSourceImpl::createResolvables(Source_Ref source_r)
@@ -448,7 +452,7 @@ namespace zypp
 	      it != repo_files.end();
 	      it++)
 	  {
-            Pathname filename = _cache_dir + (*it)->location;
+            Pathname filename = metadataRoot() + (*it)->location;
 	    DBG << "Reading ifgz file " << filename << endl;
 	    ifgzstream st( filename.asString().c_str() );
 
@@ -509,7 +513,7 @@ namespace zypp
 	// now read primary data, merge them with filelist and changelog
 	  for (std::list<YUMRepomdData_Ptr>::const_iterator it = repo_primary.begin(); it != repo_primary.end(); it++)
           {
-            Pathname filename = _cache_dir + (*it)->location;
+            Pathname filename = metadataRoot() + (*it)->location;
             DBG << "Reading file " << filename << endl;
 	    ifgzstream st ( filename.asString().c_str() );
 	    YUMPrimaryParser prim(st, "");
@@ -560,7 +564,7 @@ namespace zypp
 	        it != repo_group.end();
 	        it++)
           {
-            Pathname filename = _cache_dir + (*it)->location;
+            Pathname filename = metadataRoot() + (*it)->location;
             DBG << "Reading file " << filename << endl;
 	    ifgzstream st ( filename.asString().c_str() );
 	    YUMGroupParser group(st, "");
@@ -586,7 +590,7 @@ namespace zypp
           for (std::list<YUMRepomdData_Ptr>::const_iterator it = repo_pattern.begin();
                it != repo_pattern.end(); it++)
           {
-            Pathname filename = _cache_dir + (*it)->location;
+            Pathname filename = metadataRoot() + (*it)->location;
 
 	    DBG << "Reading file " << filename << endl;
 	    ifgzstream st ( filename.asString().c_str() );
@@ -612,7 +616,7 @@ namespace zypp
             it != repo_product.end();
             it++)
           {
-            Pathname filename = _cache_dir + (*it)->location;
+            Pathname filename = metadataRoot() + (*it)->location;
             ifgzstream st ( filename.asString().c_str() );
             YUMProductParser product(st, "");
             for (; !product.atEnd(); ++product)
@@ -637,7 +641,7 @@ namespace zypp
               it != repo_patches.end();
               it++)
           {
-            Pathname filename = _cache_dir + (*it)->location;
+            Pathname filename = metadataRoot() + (*it)->location;
 
             DBG << "Reading file " << filename << endl;
             ifgzstream st ( filename.asString().c_str() );
@@ -660,7 +664,7 @@ namespace zypp
               it != patch_files.end();
               it++)
            {
-              Pathname filename = _cache_dir + *it;
+             Pathname filename = metadataRoot() + *it;
                 DBG << "Reading file " << filename << endl;
                 ifgzstream st ( filename.asString().c_str() );
                 YUMPatchParser ptch(st, "");
