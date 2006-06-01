@@ -79,8 +79,7 @@ namespace zypp
     TargetImpl::TargetImpl(const Pathname & root_r)
     : _root(root_r)
     {
-      _rpm.setPaths(_root);
-      _rpm.initDatabase();
+      _rpm.initDatabase(root_r);
       _storage_enabled = false;
       MIL << "Initialized target on " << _root << endl;
     }

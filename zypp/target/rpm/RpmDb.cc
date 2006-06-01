@@ -59,29 +59,29 @@ namespace zypp {
         {
           connect();
         }
-
+        
         ~KeyRingSignalReceiver()
         {
           disconnect();
         }
-
+        
         virtual void trustedKeyAdded( const KeyRing &keyring, const std::string &keyid, const std::string &keyname, const std::string &fingerprint )
         {
           MIL << "trusted key added to zypp Keyring. Syncronizing keys with rpm keyring" << std::endl;
           _rpmdb.importZyppKeyRingTrustedKeys();
           _rpmdb.exportTrustedKeysInZyppKeyRing();
         }
-
+        
         virtual void trustedKeyRemoved( const KeyRing &keyring, const std::string &keyid, const std::string &keyname, const std::string &fingerprint )
         {
-
+        
         }
-
+        
         RpmDb &_rpmdb;
       };
-
+                  
       static shared_ptr<KeyRingSignalReceiver> sKeyRingReceiver;
-
+      
 unsigned diffFiles(const std::string file1, const std::string file2, std::string& out, int maxlines)
 {
     const char* argv[] =
@@ -106,7 +106,7 @@ unsigned diffFiles(const std::string file1, const std::string file2, std::string
 	if(maxlines<0?true:count<maxlines)
 	    out+=line;
     }
-
+    
     return prog.close();
 }
 
@@ -393,32 +393,32 @@ std::ostream & RpmDb::dumpOn( std::ostream & str ) const
 //	METHOD NAME : RpmDb::initDatabase
 //	METHOD TYPE : PMError
 //
-void RpmDb::initDatabase()
+void RpmDb::initDatabase( Pathname root_r, Pathname dbPath_r )
 {
   ///////////////////////////////////////////////////////////////////
   // Check arguments
   ///////////////////////////////////////////////////////////////////
-  if ( _root.empty() )
-    _root = "/";
+  if ( root_r.empty() )
+    root_r = "/";
 
-  if ( _dbPath.empty() )
-    _dbPath = "/var/lib/rpm";
+  if ( dbPath_r.empty() )
+    dbPath_r = "/var/lib/rpm";
 
-  if ( ! (_root.absolute() && _dbPath.absolute()) ) {
-    ERR << "Illegal root or dbPath: " << stringPath( _root, _dbPath ) << endl;
-    ZYPP_THROW(RpmInvalidRootException(_root, _dbPath));
+  if ( ! (root_r.absolute() && dbPath_r.absolute()) ) {
+    ERR << "Illegal root or dbPath: " << stringPath( root_r, dbPath_r ) << endl;
+    ZYPP_THROW(RpmInvalidRootException(root_r, dbPath_r));
   }
 
-  MIL << "Calling initDatabase: " << stringPath( _root, _dbPath ) << endl;
+  MIL << "Calling initDatabase: " << stringPath( root_r, dbPath_r ) << endl;
 
   ///////////////////////////////////////////////////////////////////
   // Check whether already initialized
   ///////////////////////////////////////////////////////////////////
   if ( initialized() ) {
-    if ( _root == _o_root && _dbPath == _o_dbPath ) {
+    if ( root_r == _root && dbPath_r == _dbPath ) {
       return;
     } else {
-      ZYPP_THROW(RpmDbAlreadyOpenException(_root, _dbPath, _o_root, _o_dbPath));
+      ZYPP_THROW(RpmDbAlreadyOpenException(_root, _dbPath, root_r, dbPath_r));
     }
   }
 
@@ -428,7 +428,7 @@ void RpmDb::initDatabase()
   librpmDb::unblockAccess();
   DbStateInfoBits info = DbSI_NO_INIT;
   try {
-    internal_initDatabase( _root, _dbPath, info );
+    internal_initDatabase( root_r, dbPath_r, info );
   }
   catch (const RpmException & excpt_r)
   {
@@ -439,15 +439,15 @@ void RpmDb::initDatabase()
     if ( dbsi_has( info, DbSI_MADE_V4 ) ) {
       // remove the newly created rpm4 database and
       // any backup created on conversion.
-      removeV4( _root + _dbPath, dbsi_has( info, DbSI_MADE_V3TOV4 ) );
+      removeV4( root_r + dbPath_r, dbsi_has( info, DbSI_MADE_V3TOV4 ) );
     }
     ZYPP_RETHROW(excpt_r);
   }
   if ( dbsi_has( info, DbSI_HAVE_V3 ) ) {
-    if ( _root == "/" || dbsi_has( info, DbSI_MODIFIED_V4 ) ) {
+    if ( root_r == "/" || dbsi_has( info, DbSI_MODIFIED_V4 ) ) {
       // Move obsolete rpm3 database beside.
       MIL << "Cleanup: state " << info << endl;
-      removeV3( _root + _dbPath, dbsi_has( info, DbSI_MADE_V3TOV4 ) );
+      removeV3( root_r + dbPath_r, dbsi_has( info, DbSI_MADE_V3TOV4 ) );
       dbsi_clr( info, DbSI_HAVE_V3 );
     } else {
 	// Performing an update: Keep the original rpm3 database
@@ -458,6 +458,8 @@ void RpmDb::initDatabase()
   }
 #warning CHECK: notify root about conversion backup.
 
+  _root   = root_r;
+  _dbPath = dbPath_r;
   _dbStateInfo = info;
 
 #warning Add rebuild database once have the info about context
@@ -475,25 +477,12 @@ void RpmDb::initDatabase()
   // by librpm. On demand it will be reopened readonly and should
   // not hold any lock.
   librpmDb::dbRelease( true );
-
+  
   MIL << "Syncronizing keys with zypp keyring" << std::endl;
   importZyppKeyRingTrustedKeys();
   exportTrustedKeysInZyppKeyRing();
-
+  
   MIL << "InitDatabase: " << *this << endl;
-  _o_root = _root;
-  _o_dbPath = _dbPath;
-}
-
-Date RpmDb::lastModification() const
-{
-  return Date(PathInfo(Pathname(_root + _dbPath)).mtime());
-}
-
-void RpmDb::setPaths(Pathname root_r, Pathname dbPath_r)
-{
-  _root = root_r;
-  _dbPath = dbPath_r;
 }
 
 ///////////////////////////////////////////////////////////////////
@@ -869,12 +858,12 @@ void RpmDb::doRebuildDatabase(callback::SendReport<RebuildDBReport> & report)
 void RpmDb::exportTrustedKeysInZyppKeyRing()
 {
   MIL << "Exporting rpm keyring into zypp trusted keyring" <<std::endl;
-
+  
   std::set<Edition> rpm_keys = pubkeyEditions();
-
+  
   std::list<PublicKey> zypp_keys;
   zypp_keys = getZYpp()->keyRing()->trustedPublicKeys();
-
+  
   for ( std::set<Edition>::const_iterator it = rpm_keys.begin(); it != rpm_keys.end(); ++it)
   {
     // search the zypp key into the rpm keys
@@ -907,7 +896,7 @@ void RpmDb::exportTrustedKeysInZyppKeyRing()
         ERR << "Could not dump key " << (*it) << " in tmp file " << file.path() << std::endl;
         // just ignore the key
       }
-
+      
       // now import the key in zypp
       try
       {
@@ -919,21 +908,21 @@ void RpmDb::exportTrustedKeysInZyppKeyRing()
         ERR << "Could not import key " << (*it) << " in zypp keyring" << std::endl;
       }
     }
-  }
+  }  
 }
 
 void RpmDb::importZyppKeyRingTrustedKeys()
 {
   MIL << "Importing zypp trusted keyring" << std::endl;
-
+  
   std::list<PublicKey> rpm_keys = pubkeys();
-
+  
   std::list<PublicKey> zypp_keys;
-
+  
   zypp_keys = getZYpp()->keyRing()->trustedPublicKeys();
-
+  
   for ( std::list<PublicKey>::const_iterator it = zypp_keys.begin(); it != zypp_keys.end(); ++it)
-  {
+  { 
     // we find only the left part of the long gpg key, as rpm does not support long ids
     std::list<PublicKey>::iterator ik = find( rpm_keys.begin(), rpm_keys.end(), (*it));
     if ( ik != rpm_keys.end() )
@@ -959,7 +948,7 @@ void RpmDb::importZyppKeyRingTrustedKeys()
         ERR << "Could not dump key " << (*it).id << " (" << (*it).name << ") in tmp file " << file.path() << std::endl;
         // just ignore the key
       }
-
+      
       // now import the key in rpm
       try
       {
@@ -1253,6 +1242,17 @@ const std::list<Package::Ptr> & RpmDb::doGetPackages(callback::SendReport<ScanDB
       continue;
     }
     Date installtime = iter->tag_installtime();
+#if 0
+This prevented from having packages multiple times
+    Package::Ptr & nptr = _packages._index[name]; // be sure to get a reference!
+
+    if ( nptr ) {
+      WAR << "Multiple entries for package '" << name << "' in rpmdb" << endl;
+      if ( nptr->installtime() > installtime )
+	continue;
+      // else overwrite previous entry
+    }
+#endif
 
     Package::Ptr pptr = makePackageFromHeader( *iter, &_filerequires, location, Source_Ref() );
 
@@ -1282,6 +1282,47 @@ const std::list<Package::Ptr> & RpmDb::doGetPackages(callback::SendReport<ScanDB
   ///////////////////////////////////////////////////////////////////
   return _packages._list;
 }
+
+#warning Uncomment this function if it is needed
+#if 0
+///////////////////////////////////////////////////////////////////
+//
+//
+//	METHOD NAME : RpmDb::traceFileRel
+//	METHOD TYPE : void
+//
+//	DESCRIPTION :
+//
+void RpmDb::traceFileRel( const PkgRelation & rel_r )
+{
+  if ( ! rel_r.isFileRel() )
+    return;
+
+  if ( ! _filerequires.insert( rel_r.name() ).second )
+    return; // already got it in _filerequires
+
+  if ( ! _packages._valid )
+    return; // collect only. Evaluated in first call to getPackages()
+
+  //
+  // packages already initialized. Must check and insert here
+  //
+  librpmDb::db_const_iterator iter;
+  if ( iter.dbError() ) {
+    ERR << "No database access: " << iter.dbError() << endl;
+    return;
+  }
+
+  for ( iter.findByFile( rel_r.name() ); *iter; ++iter ) {
+    Package::Ptr pptr = _packages.lookup( iter->tag_name() );
+    if ( !pptr ) {
+      WAR << "rpmdb.findByFile returned unpknown package " << *iter << endl;
+      continue;
+    }
+    pptr->addProvides( rel_r.name() );
+  }
+}
+#endif
 
 ///////////////////////////////////////////////////////////////////
 //
@@ -1681,73 +1722,20 @@ RpmDb::run_rpm (const RpmArgVec& opts,
 bool
 RpmDb::systemReadLine(string &line)
 {
-  line.erase();
+    line.erase();
 
-  if ( process == NULL )
-    return false;
+    if ( process == NULL )
+	return false;
 
-  if ( process->inputFile() )
-    {
-      process->setBlocking( false );
-      FILE * inputfile = process->inputFile();
-      int    inputfileFd = ::fileno( inputfile );
-      do
-      {
-        /* Watch inputFile to see when it has input. */
-        fd_set rfds;
-        FD_ZERO( &rfds );
-        FD_SET( inputfileFd, &rfds );
+    line = process->receiveLine();
 
-        /* Wait up to 5 seconds. */
-        struct timeval tv;
-        tv.tv_sec = 5;
-        tv.tv_usec = 0;
+    if (line.length() == 0)
+	return false;
 
-        int retval = select( inputfileFd+1, &rfds, NULL, NULL, &tv );
+    if (line[line.length() - 1] == '\n')
+	line.erase(line.length() - 1);
 
-        if ( retval == -1 )
-          {
-            ERR << "select error: " << strerror(errno) << endl;
-            if ( errno != EINTR )
-              return false;
-          }
-        else if ( retval )
-          {
-            // Data is available now.
-            size_t linebuffer_size = 0;
-            char * linebuffer = 0;
-            ssize_t nread = getline( &linebuffer, &linebuffer_size, inputfile );
-            //DBG << "getline " << nread << " " << ::feof( inputfile ) << " " << ::ferror( inputfile ) << endl;
-
-            if ( nread == -1 )
-              {
-                if ( ::feof( inputfile ) )
-                  return line.size(); // in case of pending output
-              }
-            else
-              {
-                if ( nread > 0 )
-                  {
-                    if ( linebuffer[nread-1] == '\n' )
-                      --nread;
-                    line += string( linebuffer, nread );
-                  }
-
-                if ( ! ::ferror( inputfile ) || ::feof( inputfile ) )
-                  return true; // complete line
-              }
-            clearerr( inputfile );
-          }
-        else
-          {
-            // No data within time.
-            if ( ! process->running() )
-              return false;
-          }
-      } while ( true );
-    }
-
-  return false;
+    return true;
 }
 
 /*--------------------------------------------------------------*/
