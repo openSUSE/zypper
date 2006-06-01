@@ -263,7 +263,7 @@ XMLFilesBackend::initBackend()
   DBG << "Creating directory structure " << topdir << std::endl;
 
   if (0 != assert_dir(topdir, 0755))
-      ZYPP_THROW(Exception("Cannot create XMLBackend db directory" + topdir.asString()));
+      ZYPP_THROW(Exception("Cannot create XMLBackend db directory " + topdir.asString()));
 
   // create dir for resolvables
   std::set<Resolvable::Kind>::const_iterator it_kinds;
@@ -272,7 +272,7 @@ XMLFilesBackend::initBackend()
     Resolvable::Kind kind = (*it_kinds);
     Pathname p(dirForResolvableKind(kind));
     if (0 != assert_dir(p, 0755))
-      ZYPP_THROW(Exception("Cannot create directory" + p.asString()));
+      ZYPP_THROW(Exception("Cannot create directory " + p.asString()));
     else
       MIL << "Created " << p.asString() << std::endl;
   }
@@ -283,7 +283,7 @@ XMLFilesBackend::initBackend()
     Resolvable::Kind kind = (*it_kinds);
     Pathname p(dirForResolvableKindFlags(kind));
     if (0 != assert_dir(p, 0755))
-      ZYPP_THROW(Exception("Cannot create directory" + p.asString()));
+      ZYPP_THROW(Exception("Cannot create directory " + p.asString()));
     else
       MIL << "Created " << p.asString() << std::endl;
   }
@@ -291,14 +291,14 @@ XMLFilesBackend::initBackend()
   // dir for named flags
   Pathname namedflags(dirForNamedFlags());
   if (0 != assert_dir(namedflags, 0755))
-    ZYPP_THROW(Exception("Cannot create directory" + namedflags.asString()));
+    ZYPP_THROW(Exception("Cannot create directory " + namedflags.asString()));
   else
     MIL << "Created " << namedflags.asString() << std::endl;
 
   // create dir for source list
   Pathname source_p = d->root + Pathname(ZYPP_DB_DIR) + Pathname("/sources/");
   if (0 != assert_dir(source_p, 0700))
-    ZYPP_THROW(Exception("Cannot create directory" + source_p.asString()));
+    ZYPP_THROW(Exception("Cannot create directory " + source_p.asString()));
   else
     MIL << "Created " << source_p.asString() << std::endl;
 }
