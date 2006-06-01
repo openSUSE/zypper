@@ -1,4 +1,14 @@
 -------------------------------------------------------------------
+Thu Jun  1 15:11:47 CEST 2006 - schubi@suse.de
+
+-All installed resolvables has been set to "satisfied" in 
+ ResolverContext::unneeded . BUT:
+ Patch concerning resolvables have to be set to
+ "unneeded" although they are installed. In order
+ getting the state "no longer applicable" (Bug 171590) 
+- rev 3496
+
+-------------------------------------------------------------------
 Thu Jun  1 14:54:02 CEST 2006 - kkaempf@suse.de
 
 - compute status for scripts and messages so their freshens get
