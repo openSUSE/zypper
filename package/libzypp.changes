@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Jun  1 13:57:48 CEST 2006 - dmacvicar@suse.de
+
+- revert not-used-yet rpmdb timestamp, as
+  it broke rpmdb::init(). (#180040)
+- rev 3490 
+
+-------------------------------------------------------------------
 Thu Jun  1 11:03:34 CEST 2006 - schubi@suse.de
 
 - updating gmo files, if po files has been changed; bug 164449 
