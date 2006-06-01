@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Jun  1 14:54:02 CEST 2006 - kkaempf@suse.de
+
+- compute status for scripts and messages so their freshens get
+  properly honored (aj with postgresql-server)
+- rev 3494
+
+-------------------------------------------------------------------
 Thu Jun  1 13:57:48 CEST 2006 - dmacvicar@suse.de
 
 - revert not-used-yet rpmdb timestamp, as
