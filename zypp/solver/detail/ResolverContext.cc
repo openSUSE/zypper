@@ -547,12 +547,21 @@ ResolverContext::unneeded (PoolItem_Ref item, int other_penalty)
     status = getStatus(item);
 
     if (status.wasInstalled()) {
-	setStatus (item, ResStatus::satisfied);
+	if (item->kind() != ResTraits<Patch>::kind
+	    && item->kind() != ResTraits<Atom>::kind
+	    && item->kind() != ResTraits<Script>::kind
+	    && item->kind() != ResTraits<Message>::kind) {
+	    setStatus (item, ResStatus::satisfied);
+	} else {
+	    // Patch concerning resolvables have to be set to
+	    // "unneeded" although they are installed. In order
+	    // to get the state "no longer applicable" (Bug 171590)
+	    setStatus (item, ResStatus::unneeded);	    
+	}
     }
     else if (status.wasUninstalled()) {
 	setStatus (item, ResStatus::unneeded);
     }
-
     return true;
 }
 
