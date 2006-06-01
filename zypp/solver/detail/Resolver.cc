@@ -411,6 +411,8 @@ Resolver::establishState( ResolverContext_Ptr context )
     static KindList ordered;
     if (ordered.empty()) {
 	ordered.push_back (ResTraits<zypp::Atom>::kind);
+	ordered.push_back (ResTraits<zypp::Message>::kind);
+	ordered.push_back (ResTraits<zypp::Script>::kind);
 	ordered.push_back (ResTraits<zypp::Patch>::kind);
 	ordered.push_back (ResTraits<zypp::Pattern>::kind);
 	ordered.push_back (ResTraits<zypp::Product>::kind);
