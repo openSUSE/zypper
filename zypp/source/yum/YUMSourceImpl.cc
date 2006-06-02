@@ -273,7 +273,7 @@ namespace zypp
           }
         }
         
-        MIL << "SUSETags source initialized." << std::endl;
+        MIL << "YUM source initialized." << std::endl;
         MIL << "   Url      : " << url() << std::endl;
         MIL << "   Path     : " << path() << std::endl;
         MIL << "   Metadata : " << metadataRoot() << (_cache_dir.empty() ? " [TMP]" : " [CACHE]") << std::endl;
