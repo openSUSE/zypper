@@ -1,4 +1,4 @@
-# translation of zypp.po to suomi
+# translation of zypp.po to Suomi
 # translation of zypp.po to
 # translation of zypp.fi.po to
 # Copyright (C) 2005 SUSE Linux Products GmbH.
@@ -12,10 +12,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: translation@suse.de\n"
-"POT-Creation-Date: 2006-05-15 15:07+0200\n"
-"PO-Revision-Date: 2006-04-06 23:09+0300\n"
+"POT-Creation-Date: 2006-05-23 15:16+0200\n"
+"PO-Revision-Date: 2006-05-22 10:30+0300\n"
 "Last-Translator: Jyri Palokangas <jmp@netti.fi>\n"
-"Language-Team: suomi <yast-trans-fi@kotoistaminen.novell.fi>\n"
+"Language-Team: Suomi <yast-trans-fi@kotoistaminen.novell.fi>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2049,23 +2049,23 @@ msgstr "zulu"
 msgid "Zuni"
 msgstr "zuni"
 
-#: zypp/ZYppFactory.cc:271 zypp/ZYppFactory.cc:326
+#: zypp/ZYppFactory.cc:279 zypp/ZYppFactory.cc:334
 msgid "Cannot aquire zypp lock."
-msgstr ""
+msgstr "zypp lukon hankkiminen ei onnistu"
 
-#: zypp/target/rpm/RpmDb.cc:1824
+#: zypp/target/rpm/RpmDb.cc:1825
 #, c-format
 msgid "Changed configuration files for %s:"
 msgstr "Muuttuneet määritystiedostot paketille %s:"
 
-#: zypp/target/rpm/RpmDb.cc:1977
+#: zypp/target/rpm/RpmDb.cc:1978
 #, c-format
 msgid "rpm saved %s as %s but it was impossible to determine the difference"
 msgstr ""
 "rpm tallensi tiedoston %s tiedostona %s, mutta erojen selvittäminen on "
 "mahdotonta"
 
-#: zypp/target/rpm/RpmDb.cc:1979
+#: zypp/target/rpm/RpmDb.cc:1980
 #, c-format
 msgid ""
 "rpm saved %s as %s.\n"
@@ -2074,13 +2074,13 @@ msgstr ""
 "rpm tallensi tiedoston %s tiedostona %s.\n"
 "Tässä on ensimmäiset 25 erilaista riviä:\n"
 
-#: zypp/target/rpm/RpmDb.cc:1982
+#: zypp/target/rpm/RpmDb.cc:1983
 #, c-format
 msgid "rpm created %s as %s but it was impossible to determine the difference"
 msgstr ""
 "rpm loi tiedoston %s tiedostona %s, mutta erojen selivttäminen on mahdotonta"
 
-#: zypp/target/rpm/RpmDb.cc:1984
+#: zypp/target/rpm/RpmDb.cc:1985
 #, c-format
 msgid ""
 "rpm created %s as %s.\n"
@@ -2089,76 +2089,76 @@ msgstr ""
 "rpm loi tiedoston %s tiedostona %s.\n"
 "Tässä on ensimmäiset 25 erilaista riviä:\n"
 
-#: zypp/target/rpm/RpmDb.cc:1989
+#: zypp/target/rpm/RpmDb.cc:1990
 #, c-format
 msgid "%s install failed"
 msgstr "%s asennus epäonnistui"
 
-#: zypp/target/rpm/RpmDb.cc:1990 zypp/target/rpm/RpmDb.cc:2098
+#: zypp/target/rpm/RpmDb.cc:1991 zypp/target/rpm/RpmDb.cc:2099
 msgid "rpm output:"
 msgstr "rpm-tuloste:"
 
-#: zypp/target/rpm/RpmDb.cc:1994
+#: zypp/target/rpm/RpmDb.cc:1995
 #, c-format
 msgid "%s installed ok"
 msgstr "%s asentui"
 
-#: zypp/target/rpm/RpmDb.cc:1996 zypp/target/rpm/RpmDb.cc:2103
+#: zypp/target/rpm/RpmDb.cc:1997 zypp/target/rpm/RpmDb.cc:2104
 msgid "Additional rpm output:"
 msgstr "rpm-lisätuloste:"
 
-#: zypp/target/rpm/RpmDb.cc:2097
+#: zypp/target/rpm/RpmDb.cc:2098
 #, c-format
 msgid "%s remove failed"
 msgstr "%s poistaminen epäonnistui"
 
-#: zypp/target/rpm/RpmDb.cc:2101
+#: zypp/target/rpm/RpmDb.cc:2102
 #, c-format
 msgid "%s remove ok"
 msgstr "%s poistaminen onnistui"
 
-#: zypp/target/rpm/RpmDb.cc:2117
+#: zypp/target/rpm/RpmDb.cc:2118
 msgid "Ok"
 msgstr "Ok"
 
-#: zypp/target/rpm/RpmDb.cc:2120
+#: zypp/target/rpm/RpmDb.cc:2121
 msgid "The package is not OK for the following reasons:"
 msgstr "Paketti ei ole kunnossa seuraavista syistä:"
 
-#: zypp/target/rpm/RpmDb.cc:2126
+#: zypp/target/rpm/RpmDb.cc:2127
 msgid "The package contains different version than expected"
 msgstr "Paketti sisälsi eri version kuin odotettiin"
 
-#: zypp/target/rpm/RpmDb.cc:2132
+#: zypp/target/rpm/RpmDb.cc:2133
 msgid "The package file has incorrect MD5 sum"
 msgstr "Pakettitiedoston MD5-summa on väärä"
 
-#: zypp/target/rpm/RpmDb.cc:2138
+#: zypp/target/rpm/RpmDb.cc:2139
 msgid "The package is not signed"
 msgstr "Paketti ei ole allekirjoitettu"
 
-#: zypp/target/rpm/RpmDb.cc:2144
+#: zypp/target/rpm/RpmDb.cc:2145
 msgid "The package has no MD5 sum"
 msgstr "Paketissa ei ole MD5-summaa"
 
-#: zypp/target/rpm/RpmDb.cc:2150
+#: zypp/target/rpm/RpmDb.cc:2151
 msgid "The package has incorrect signature"
 msgstr "Paketin allekirjoitus on virheellinen"
 
-#: zypp/target/rpm/RpmDb.cc:2156
+#: zypp/target/rpm/RpmDb.cc:2157
 msgid "The package archive has incorrect MD5 sum"
 msgstr "Pakettiarkistolla on väärä MD5-summa"
 
-#: zypp/target/rpm/RpmDb.cc:2162
+#: zypp/target/rpm/RpmDb.cc:2163
 msgid "rpm failed for unkown reason, see log file"
 msgstr "rpm epäonnistui tuntemattomasta syystä, katso lokitiedosto"
 
-#: zypp/target/rpm/RpmDb.cc:2306
+#: zypp/target/rpm/RpmDb.cc:2307
 #, c-format
 msgid "created backup %s"
 msgstr "luotiin varmuuskopio %s"
 
-#: zypp/target/TargetImpl.cc:482
+#: zypp/target/TargetImpl.cc:495
 msgid "Target commit aborted by user."
 msgstr "Käyttäjä keskeytti kohteen kirjoituksen."
 
@@ -2319,7 +2319,7 @@ msgid "do not install %s"
 msgstr "älä asenna %s"
 
 #: zypp/solver/detail/Resolver_problems.cc:434
-#, fuzzy, c-format
+#, c-format
 msgid "%s has unfulfilled requirements"
 msgstr "Osalla %s on täyttämättömiä vaatimuksia"
 
@@ -2678,18 +2678,19 @@ msgstr "Poistetaan näiden osien lukitus"
 #: zypp/source/yum/YUMSourceImpl.cc:166
 msgid "Signed repomd.xml file fails signature check"
 msgstr ""
+"Allekirjoitetun repomd.xml tiedoston allekirjoituksen tarkistus epäonnistui"
 
 #: zypp/source/yum/YUMSourceImpl.cc:183 zypp/source/yum/YUMSourceImpl.cc:199
 msgid "fails checksum verification."
-msgstr ""
+msgstr "tarkistussumman varmistaminen epäonnistui."
 
 #: zypp/source/yum/YUMSourceImpl.cc:431 zypp/source/yum/YUMSourceImpl.cc:644
 msgid "Failed check for the metadata file check sum"
-msgstr ""
+msgstr "Metadata-tiedoston tarkistussumman tarkistus epäonnistui"
 
 #: zypp/source/yum/YUMScriptImpl.cc:78 zypp/source/yum/YUMScriptImpl.cc:102
 msgid "Failed check for the script file check sum"
-msgstr ""
+msgstr "Komentojonon tarkistussumman tarkistus epäonnistui"
 
 #: zypp/CountryCode.cc:135
 msgid "Unknown country: "
