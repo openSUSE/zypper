@@ -74,7 +74,7 @@ namespace zypp
 
   public:
     /** Default ctor */
-    KeyRing();
+    KeyRing(const Pathname &baseTmpDir);
     //explicit
     //KeyRing(const Pathname &general_kr, const Pathname &trusted_kr);
 

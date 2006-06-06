@@ -24,7 +24,6 @@
 #include "zypp/Product.h"
 #include "zypp/Selection.h"
 #include "zypp/Pattern.h"
-#include "zypp/TmpPath.h"
 
 using namespace zypp::parser::yum;
 using namespace zypp::filesystem;
@@ -150,8 +149,6 @@ namespace zypp
         const Pathname repomdFile() const;
         const Pathname repomdFileSignature() const;
         const Pathname repomdFileKey() const;
-        
-        TmpDir _tmp_metadata_dir;
         
 	typedef struct {
 	    zypp::detail::ResImplTraits<zypp::source::yum::YUMPackageImpl>::Ptr impl;

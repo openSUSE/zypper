@@ -11,9 +11,11 @@
 */
 
 #include <sys/utsname.h>
+#include <unistd.h>
 #include <iostream>
 #include <fstream>
 #include "zypp/base/Logger.h"
+#include "zypp/base/String.h"
 
 #include "zypp/zypp_detail/ZYppImpl.h"
 #include "zypp/detail/ResImplTraits.h"
@@ -72,10 +74,10 @@ namespace zypp
     , _disk_usage()
     {
       MIL << "defaultTextLocale: '" << _textLocale << "'" << endl;
-
+      
       MIL << "initializing keyring..." << std::endl;
       //_keyring = new KeyRing(homePath() + Pathname("/keyring/all"), homePath() + Pathname("/keyring/trusted"));
-      _keyring = new KeyRing();
+      _keyring = new KeyRing(tmpPath());
 
       // detect the true architecture
       struct utsname buf;
@@ -357,12 +359,18 @@ namespace zypp
     //------------------------------------------------------------------------
     // target store path
 
-    Pathname ZYppImpl::homePath() const
+    const Pathname ZYppImpl::homePath() const
     { return _home_path.empty() ? Pathname("/var/lib/zypp") : _home_path; }
 
     void ZYppImpl::setHomePath( const Pathname & path )
     { _home_path = path; }
 
+    const Pathname ZYppImpl::tmpPath() const
+    { 
+      static TmpDir zypp_tmp_dir("/var/tmp", "zypp.");
+      return zypp_tmp_dir.path();
+    }
+    
     /******************************************************************
      **
      **	FUNCTION NAME : operator<<

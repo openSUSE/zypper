@@ -25,6 +25,7 @@
 #include "zypp/Pathname.h"
 #include "zypp/media/MediaManager.h"
 #include "zypp/source/MediaSet.h"
+#include "zypp/TmpPath.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -289,6 +290,7 @@ namespace zypp
       /** source contains base product? */
       bool _base_source;
 
+      filesystem::TmpDir _tmp_metadata_dir;
       ///////////////////////////////////////////////////////////////////
       // no playground below this line ;)
       ///////////////////////////////////////////////////////////////////

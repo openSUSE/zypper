@@ -14,6 +14,7 @@
 
 #include <iosfwd>
 
+#include "zypp/TmpPath.h"
 #include "zypp/ResPoolManager.h"
 #include "zypp/SourceFeed.h"
 #include "zypp/Target.h"
@@ -22,6 +23,8 @@
 #include "zypp/KeyRing.h"
 #include "zypp/ZYppCommit.h"
 #include "zypp/DiskUsageCounter.h"
+
+using namespace zypp::filesystem;
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -125,7 +128,11 @@ namespace zypp
       void setArchitecture( const Arch & arch );
 
       /** Get the path where zypp related plugins store persistent data and caches   */
-      Pathname homePath() const;
+      const Pathname homePath() const;
+      
+      /** Get the path where zypp related plugins store tmp data   */
+      const Pathname tmpPath() const;
+      
       /** set the home, if you need to change it */
       void setHomePath( const Pathname & path );
 

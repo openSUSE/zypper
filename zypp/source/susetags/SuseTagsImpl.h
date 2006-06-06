@@ -22,7 +22,6 @@
 #include "zypp/CheckSum.h"
 #include "zypp/source/susetags/SuseTagsProductImpl.h"
 #include "zypp/source/susetags/SuseTagsPackageImpl.h"
-#include "zypp/TmpPath.h"
 
 using namespace zypp::filesystem;
 
@@ -189,9 +188,6 @@ namespace zypp
         // already running from cache
         Pathname _media_descr_dir;
 
-        // in case we dont have cache
-        TmpDir _tmp_metadata_dir;
-        
         std::string _vendor;
         std::string _media_id;
         /**

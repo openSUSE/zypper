@@ -879,7 +879,7 @@ void RpmDb::exportTrustedKeysInZyppKeyRing()
       // we export the rpm key into a file
       RpmHeader::constPtr result = new RpmHeader();
       getData( std::string("gpg-pubkey"), *it, result );
-      TmpFile file;
+      TmpFile file(getZYpp()->tmpPath());
       std::ofstream os;
       try
       {
@@ -933,7 +933,7 @@ void RpmDb::importZyppKeyRingTrustedKeys()
     {
       // key does not exists, we need to import it into rpm
       // create a temporary file
-      TmpFile file;
+      TmpFile file(getZYpp()->tmpPath());
       // open the file for writing
       std::ofstream os;
       try
@@ -1021,7 +1021,7 @@ list<PublicKey> RpmDb::pubkeys() const
       // we export the rpm key into a file
       RpmHeader::constPtr result = new RpmHeader();
       getData( std::string("gpg-pubkey"), edition, result );
-      TmpFile file;
+      TmpFile file(getZYpp()->tmpPath());
       std::ofstream os;
       try
       {
