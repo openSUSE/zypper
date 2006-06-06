@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Wed Jun  7 01:00:05 CEST 2006 - dmacvicar@suse.de
+
+- Merge fix for stalle tmpdir due to cyclic references, using a master
+  TmpDir for zypp. (#178292) . There is still 1 tmpdir to fix.
+- rev 3521
+
+-------------------------------------------------------------------
 Wed Jun  7 00:02:18 CEST 2006 - ma@suse.de
 
 - fixed memory leak in PersistentStorage (#168690)
