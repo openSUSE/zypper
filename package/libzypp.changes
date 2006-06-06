@@ -2,6 +2,7 @@
 Wed Jun  7 00:02:18 CEST 2006 - ma@suse.de
 
 - fixed memory leak in PersistentStorage (#168690)
+- revision 3519
 
 -------------------------------------------------------------------
 Tue Jun  6 22:24:00 CEST 2006 - ma@suse.de
