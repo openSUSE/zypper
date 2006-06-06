@@ -18,14 +18,13 @@
 #include <zypp/parser/LibXMLHelper.h>
 #include <list>
 
-typedef zypp::storage::PersistentStorage::SourceData* SourceData_Ptr;
-
 namespace zypp
 {
 namespace parser
 {
 namespace xmlstore
 {
+     typedef shared_ptr<storage::PersistentStorage::SourceData> SourceData_Ptr;
 
      /*
       * Use this class as an iterator that produces, one after one,
@@ -48,13 +47,13 @@ namespace xmlstore
       */
 
       class XMLSourceCacheParser : public zypp::parser::XMLNodeIterator<SourceData_Ptr>
-      { 
+      {
       public:
         XMLSourceCacheParser(std::istream &is, const std::string &baseUrl);
         XMLSourceCacheParser();
         XMLSourceCacheParser(SourceData_Ptr & entry);
         virtual ~XMLSourceCacheParser();
-        
+
       private:
         virtual bool isInterested(const xmlNodePtr nodePtr);
         virtual SourceData_Ptr process(const xmlTextReaderPtr reader);

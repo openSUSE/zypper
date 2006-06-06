@@ -30,32 +30,32 @@ namespace xmlstore {
 
       XMLSourceCacheParser::XMLSourceCacheParser()
       { }
-      
+
       XMLSourceCacheParser::XMLSourceCacheParser(SourceData_Ptr& entry)
       : zypp::parser::XMLNodeIterator<SourceData_Ptr>(entry)
       { }
-      
-      
+
+
       XMLSourceCacheParser::~XMLSourceCacheParser()
       { }
-      
-      
+
+
       // select for which elements process() will be called
-      bool 
+      bool
       XMLSourceCacheParser::isInterested(const xmlNodePtr nodePtr)
       {
         return _helper.isElement(nodePtr) && _helper.name(nodePtr) == "source";
       }
-      
+
       // do the actual processing
       SourceData_Ptr
       XMLSourceCacheParser::process(const xmlTextReaderPtr reader)
       {
         assert(reader);
-        SourceData_Ptr dataPtr = new PersistentStorage::SourceData;
+        SourceData_Ptr dataPtr( new PersistentStorage::SourceData );
         xmlNodePtr dataNode = xmlTextReaderExpand(reader);
         assert(dataNode);
-        
+
         for (xmlNodePtr child = dataNode->children; child && child != dataNode; child = child->next)
         {
           if (_helper.isElement(child))
@@ -98,13 +98,13 @@ namespace xmlstore {
         }
         return dataPtr;
       } /* end process */
-      
-      
+
+
       XMLSourceCacheParser::XMLSourceCacheParser(istream &is, const string &baseUrl)
   : zypp::parser::XMLNodeIterator<SourceData_Ptr>(is, baseUrl, SOURCESCHEMA)
-      { 
+      {
         fetchNext();
       }
-}      
+}
 } // namespace parser
 } // namespace zypp

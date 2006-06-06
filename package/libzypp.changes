@@ -1,17 +1,22 @@
 -------------------------------------------------------------------
+Tue Jun  6 22:24:00 CEST 2006 - ma@suse.de
+
+- fixed memory leak in XMLSourceCacheParser (#168690)
+
+-------------------------------------------------------------------
 Fri Jun  2 16:09:03 CEST 2006 - schubi@suse.de
 
 -latest fi translation added
- Revision 3502 
+ Revision 3502
 
 -------------------------------------------------------------------
 Thu Jun  1 15:11:47 CEST 2006 - schubi@suse.de
 
--All installed resolvables has been set to "satisfied" in 
+-All installed resolvables has been set to "satisfied" in
  ResolverContext::unneeded . BUT:
  Patch concerning resolvables have to be set to
  "unneeded" although they are installed. In order
- getting the state "no longer applicable" (Bug 171590) 
+ getting the state "no longer applicable" (Bug 171590)
 - rev 3496
 
 -------------------------------------------------------------------
@@ -26,24 +31,24 @@ Thu Jun  1 13:57:48 CEST 2006 - dmacvicar@suse.de
 
 - revert not-used-yet rpmdb timestamp, as
   it broke rpmdb::init(). (#180040)
-- rev 3490 
+- rev 3490
 
 -------------------------------------------------------------------
 Thu Jun  1 11:03:34 CEST 2006 - schubi@suse.de
 
-- updating gmo files, if po files has been changed; bug 164449 
+- updating gmo files, if po files has been changed; bug 164449
 
 -------------------------------------------------------------------
 Wed May 31 18:32:58 CEST 2006 - dmacvicar@suse.de
 
 - Dont download twice if starting from 1st time
 - fix typo
-- rev 3481 
+- rev 3481
 
 -------------------------------------------------------------------
 Wed May 31 17:06:48 CEST 2006 - dmacvicar@suse.de
 
-- set cache dir only if storeMetadata is called as a public method.´ 
+- set cache dir only if storeMetadata is called as a public method.´
 - rev 3475
 
 -------------------------------------------------------------------
@@ -53,12 +58,12 @@ Wed May 31 15:27:38 CEST 2006 - kkaempf@suse.de
   - it freshens / supplements something
   - it is not installed yet
   (#178721)
-- rev 3473 
+- rev 3473
 
 -------------------------------------------------------------------
 Wed May 31 15:22:43 CEST 2006 - dmacvicar@suse.de
 
-- make susetags also implement download and check first. 
+- make susetags also implement download and check first.
 - rev 3470
 
 -------------------------------------------------------------------
@@ -80,7 +85,7 @@ Wed May 24 16:57:54 CEST 2006 - dmacvicar@suse.de
 - actually use the license to confirm in yum patches
 - add prerequires tag in yum optonally to the bad designed
   and nonintuitive pre=1
-- rev 3448 
+- rev 3448
 
 -------------------------------------------------------------------
 Wed May 24 15:30:32 CEST 2006 - dmacvicar@suse.de
@@ -88,8 +93,8 @@ Wed May 24 15:30:32 CEST 2006 - dmacvicar@suse.de
 - dont pass root on init but before.
 - implement rpm db modification timestamp
   not used yet
-- move Helix source to testsuite out of the solver 
-  so we can use it for target, storage tests 
+- move Helix source to testsuite out of the solver
+  so we can use it for target, storage tests
 - add Source_Ref::timestamp(), default to now()
   in order to implement smart sync of sources by zmd
 - don't parse desc and summary twice
@@ -100,7 +105,7 @@ Wed May 24 15:30:32 CEST 2006 - dmacvicar@suse.de
 -------------------------------------------------------------------
 Tue May 23 20:53:27 CEST 2006 - dmacvicar@suse.de
 
-- dont accept corrupt sources, improve logs 
+- dont accept corrupt sources, improve logs
 
 -------------------------------------------------------------------
 Tue May 23 17:26:41 CEST 2006 - ma@suse.de
