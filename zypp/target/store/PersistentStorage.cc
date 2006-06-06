@@ -29,10 +29,9 @@ namespace storage
 //	CLASS NAME : PersistentStoragePrivate
 //
 ///////////////////////////////////////////////////////////////////
-class PersistentStorage::Private
+struct PersistentStorage::Private
 {
-  public:
-  Backend *backend;
+  shared_ptr<Backend> backend;
 };
 
 ///////////////////////////////////////////////////////////////////
@@ -47,20 +46,19 @@ class PersistentStorage::Private
 //	METHOD TYPE : Ctor
 //
 PersistentStorage::PersistentStorage()
+: d( new Private )
 {
-  d = new Private;
   DBG << "  Creating XML Files backend" << endl;
-  d->backend = 0L;
 }
 
 void PersistentStorage::init(const Pathname &root)
 {
-  d->backend = new XMLFilesBackend(root);
+  d->backend.reset( new XMLFilesBackend(root) );
 }
 
 bool PersistentStorage::isInitialized() const
 {
-  return ! (d->backend == 0L);
+  return d->backend;
 }
 
 ///////////////////////////////////////////////////////////////////
@@ -137,7 +135,7 @@ PersistentStorage::doesObjectHasFlag( ResObject::constPtr resolvable, const std:
 // Named Flags API
 ////////////////////////////////////////////////////////
 
-void 
+void
 PersistentStorage::setFlag( const std::string &key, const std::string &flag )
 {
   d->backend->setFlag(key, flag);

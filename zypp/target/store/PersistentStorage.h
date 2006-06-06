@@ -43,7 +43,7 @@ namespace zypp
       /** Dtor */
       ~PersistentStorage();
       void doTest();
-      
+
       struct SourceData
       {
         SourceData()
@@ -51,7 +51,7 @@ namespace zypp
           enabled = true;
           autorefresh = false;
         };
-       
+
         bool enabled;
         bool autorefresh;
         Pathname product_dir;
@@ -142,7 +142,7 @@ namespace zypp
 
     private:
       class Private;
-      Private *d;
+      shared_ptr<Private> d;
     };
     ///////////////////////////////////////////////////////////////////
     /** \relates PersistentStorage Stream output */
