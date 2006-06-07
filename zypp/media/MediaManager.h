@@ -164,7 +164,7 @@ namespace zypp
      * The access handler for media on CD / DVD drives.
      *   - Scheme:
      *     - <b>cd</b>: Requires a drive supporting CD media.
-     *     - <b>dvd</b>: Requires a drive supporting DVD media.
+     *     - <b>dvd</b>: Prefers a drive supporting DVD media.
      *   - Examples:
      *     \code
      *       "cd:/"
