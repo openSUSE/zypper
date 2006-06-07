@@ -472,15 +472,15 @@ void RpmDb::initDatabase( Pathname root_r, Pathname dbPath_r )
   }
 #endif
 
+  MIL << "Syncronizing keys with zypp keyring" << std::endl;
+  importZyppKeyRingTrustedKeys();
+  exportTrustedKeysInZyppKeyRing();
+  
   // Close the database in case any write acces (create/convert)
   // happened during init. This should drop any lock acquired
   // by librpm. On demand it will be reopened readonly and should
   // not hold any lock.
   librpmDb::dbRelease( true );
-  
-  MIL << "Syncronizing keys with zypp keyring" << std::endl;
-  importZyppKeyRingTrustedKeys();
-  exportTrustedKeysInZyppKeyRing();
   
   MIL << "InitDatabase: " << *this << endl;
 }

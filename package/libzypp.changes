@@ -1,10 +1,9 @@
 -------------------------------------------------------------------
-Wed Jun  7 11:40:46 CEST 2006 - mt@suse.de
+Wed Jun  7 13:55:23 CEST 2006 - visnov@suse.cz
 
-- Changed to just prefer DVD drives in "dvd:" scheme, instead of
-  filter out the non-DVD drives completely. Allows a fallback to
-  drives without the dvd HAL property e.g. in VMWare. (#177457)
-- rev 3530
+- Synchronize keys with rpm database before 
+  closing access to it (#182338) 
+- rev 3533
 
 -------------------------------------------------------------------
 Wed Jun  7 01:00:05 CEST 2006 - dmacvicar@suse.de
