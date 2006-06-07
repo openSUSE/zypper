@@ -235,22 +235,7 @@ namespace zypp
       
       void YUMSourceImpl::factoryInit()
       {
-        try
-        {
-          media::MediaManager media_mgr;
-          MIL << "Adding no media verifier" << endl;
-
-          // don't try to attach media
-          media::MediaAccessId _media = _media_set->getMediaAccessId(1, true);
-          media_mgr.delVerifier(_media);
-          media_mgr.addVerifier(_media, media::MediaVerifierRef(new media::NoVerifier()));
-        }
-        catch (const Exception & excpt_r)
-        {
-          #warning FIXME: If media data is not set, verifier is not set. Should the media be refused instead?
-          ZYPP_CAUGHT(excpt_r);
-          WAR << "Verifier not found" << endl;
-        }
+        resetMediaVerifier();
         
         bool cache = cacheExists();
         if ( cache )

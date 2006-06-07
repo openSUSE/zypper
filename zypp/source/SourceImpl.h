@@ -263,6 +263,12 @@ namespace zypp
 				 bool checkonly = false);
 
       void copyLocalMetadata(const Pathname &src, const Pathname &dst) const;
+
+        /**
+         * reset the media verifier to no verifier
+         */
+        void resetMediaVerifier();
+
     protected:
       /** All resolvables provided by this source. */
       ResStore _store;
