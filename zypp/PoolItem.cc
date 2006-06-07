@@ -14,6 +14,7 @@
 
 #include "zypp/PoolItem.h"
 #include "zypp/Package.h"
+#include "zypp/SystemResObject.h"
 #include "zypp/VendorAttr.h"
 
 using std::endl;
@@ -108,7 +109,7 @@ namespace zypp
   inline bool PoolItem_Ref::Impl::autoprotect() const
   {
     // always lock System resolvable
-    if ( isKind<System>( _resolvable ) )
+    if ( isKind<SystemResObject>( _resolvable ) )
       {
         _status.setLock( true, zypp::ResStatus::USER );
         return true;
