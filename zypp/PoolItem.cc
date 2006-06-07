@@ -107,6 +107,13 @@ namespace zypp
 
   inline bool PoolItem_Ref::Impl::autoprotect() const
   {
+    // always lock System resolvable
+    if ( isKind<System>( _resolvable ) )
+      {
+        _status.setLock( true, zypp::ResStatus::USER );
+        return true;
+      }
+
     if ( _status.isInstalled()
          && isKind<Package>( _resolvable )
          && VendorAttr::instance().autoProtect( _resolvable->vendor() ) )
