@@ -6,6 +6,14 @@ Wed Jun  7 13:55:23 CEST 2006 - visnov@suse.cz
 - rev 3533
 
 -------------------------------------------------------------------
+Wed Jun  7 11:40:46 CEST 2006 - mt@suse.de
+
+- Changed to just prefer DVD drives in "dvd:" scheme, instead of
+  filter out the non-DVD drives completely. Allows a fallback to
+  drives without the dvd HAL property e.g. in VMWare. (#177457)
+- rev 3530
+
+-------------------------------------------------------------------
 Wed Jun  7 01:00:05 CEST 2006 - dmacvicar@suse.de
 
 - Merge fix for stalle tmpdir due to cyclic references, using a master
