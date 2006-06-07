@@ -295,6 +295,7 @@ namespace zypp {
 
 	  if( drv)
 	  {
+	    bool supportsDVD=false;
 	    if( supportingDVD)
 	    {
 	      std::vector<std::string> caps;
@@ -306,15 +307,12 @@ namespace zypp {
 		ZYPP_CAUGHT(e);
 	      }
 
-	      bool found=false;
 	      std::vector<std::string>::const_iterator ci;
 	      for( ci=caps.begin(); ci != caps.end(); ++ci)
 	      {
 		if( *ci == "dvd")
-		  found = true;
+		  supportsDVD = true;
 	      }
-	      if( !found)
-		continue;
 	    }
 
 	    MediaSource media("cdrom", drv.getDeviceFile(),
@@ -322,7 +320,14 @@ namespace zypp {
 				       drv.getDeviceMinor());
 	    DBG << "Found " << drv_udis[d] << ": "
 			    << media.asString() << std::endl;
-	    detected.push_back(media);
+	    if( supportingDVD && supportsDVD)
+	    {
+	      detected.push_front(media);
+	    }
+	    else
+	    {
+	      detected.push_back(media);
+	    }
 	  }
 	}
       }
