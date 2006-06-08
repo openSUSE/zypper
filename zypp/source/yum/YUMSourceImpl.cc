@@ -136,7 +136,7 @@ namespace zypp
           remote_repomd_signature = tryToProvideFile( _path + "/repodata/repomd.xml.asc");
         }
         catch( const Exception &e ) {
-          WAR << "Repository does not contain repomd signinature" << std::endl;
+          WAR << "Repository does not contain repomd signature" << std::endl;
         }
         
         copy_result = filesystem::copy( remote_repomd, local_dir + "/repodata/repomd.xml");
