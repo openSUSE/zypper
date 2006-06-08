@@ -3,7 +3,7 @@ Thu Jun  8 16:24:55 CEST 2006 - ma@suse.de
 
 - Installation: Assert product information is stored to libzypp
   database before reboot. (#181198)
-- Version 1.2.0;
+- Version 1.2.0; revision 3553
 
 -------------------------------------------------------------------
 Wed Jun  7 13:55:23 CEST 2006 - visnov@suse.cz
