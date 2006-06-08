@@ -99,13 +99,13 @@ InstallOrder::computeNextSet()
     for (Nodes::iterator it = _nodes.begin(); it != _nodes.end(); ++it)
     {
 	if (it->second.order == 0
-	    && it->second.item)			// the default Nodes constructor leaves this empty 
+	    && it->second.item)			// the default Nodes constructor leaves this empty
 	{
 	    if (isKind<SystemResObject>( it->second.item.resolvable() ))
 		continue;
 
 	    XXX << "InstallOrder::computeNextSet found " << ITEMNAME(it->second.item) << endl;
-	
+
 	    newlist.push_back(it->second.item);
 	}
     }
@@ -180,7 +180,7 @@ InstallOrder::findProviderInSet( const Capability requirement, const PoolItemSet
 struct CollectProviders
 {
     const PoolItem_Ref requestor;
-    PoolItemList result;   
+    PoolItemList result;
     const PoolItemSet & limitto;		// limit search to members of this set
 
     CollectProviders (const PoolItem_Ref pi, const PoolItemSet & limit)
@@ -227,18 +227,20 @@ InstallOrder::rdfsvisit (const PoolItem_Ref item)
 
     // put prerequires first and requires last on list to ensure
     // that prerequires are processed first
-
     for (CapSet::const_iterator it = item->dep (Dep::PREREQUIRES).begin(); it != item->dep (Dep::PREREQUIRES).end(); ++it)
     {
 	const Capability cap = *it;
 	requires.push_back(cap);
     }
 
-    for (CapSet::const_iterator it = item->dep (Dep::REQUIRES).begin(); it != item->dep (Dep::REQUIRES).end(); ++it)
-    {
-	const Capability cap = *it;
-	requires.push_back(cap);
-    }
+    if ( ! isKind<Product>( item.resolvable() ) )
+      {
+        for (CapSet::const_iterator it = item->dep (Dep::REQUIRES).begin(); it != item->dep (Dep::REQUIRES).end(); ++it)
+          {
+            const Capability cap = *it;
+            requires.push_back(cap);
+          }
+      }
 
     for (CapList::const_iterator iter = requires.begin(); iter != requires.end(); ++iter)
     {

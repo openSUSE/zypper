@@ -1,8 +1,15 @@
 -------------------------------------------------------------------
+Thu Jun  8 16:24:55 CEST 2006 - ma@suse.de
+
+- Installation: Assert product information is stored to libzypp
+  database before reboot. (#181198)
+- Version 1.2.0;
+
+-------------------------------------------------------------------
 Wed Jun  7 13:55:23 CEST 2006 - visnov@suse.cz
 
-- Synchronize keys with rpm database before 
-  closing access to it (#182338) 
+- Synchronize keys with rpm database before
+  closing access to it (#182338)
 - rev 3533
 
 -------------------------------------------------------------------
@@ -17,7 +24,7 @@ Wed Jun  7 11:40:46 CEST 2006 - mt@suse.de
 Wed Jun  7 01:00:05 CEST 2006 - dmacvicar@suse.de
 
 - Merge fix for stalle tmpdir due to cyclic references, using a master
-Â  TmpDir for zypp. (#178292) . There is still 1 tmpdir to fix.
+  TmpDir for zypp. (#178292) . There is still 1 tmpdir to fix.
 - rev 3521
 
 -------------------------------------------------------------------

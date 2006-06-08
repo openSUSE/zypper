@@ -30,7 +30,16 @@ dnl 6) If any interfaces have been removed since the last public release, then
 dnl    set age to 0.
 dnl
 dnl ==================================================
+
+
+dnl !!! Next time LIBZYPP_CURRENT is INCREMENTED, change
+dnl     configure.ac:
+dnl
+dnl - AC_INIT([zypp], [LIBZYPP_CURRENT.LIBZYPP_REVISION.LIBZYPP_AGE])
+dnl + AC_INIT([zypp], [LIBZYPP_CURRENT.LIBZYPP_AGE.LIBZYPP_REVISION])
+dnl
+
 m4_define([LIBZYPP_CURRENT], 	[1])
-m4_define([LIBZYPP_REVISION],	[1])
+m4_define([LIBZYPP_REVISION],	[2])
 m4_define([LIBZYPP_AGE],	[0])
 dnl ==================================================

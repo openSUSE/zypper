@@ -342,6 +342,9 @@ namespace zypp
     for( std::list<storage::PersistentStorage::SourceData>::iterator it = new_sources.begin();
 	it != new_sources.end(); ++it)
     {
+      // prepend root prefix!
+      it->cache_dir = root_r / it->cache_dir;
+
       // Note: Url(it->url).asString() to hide password in logs
       MIL << "Restoring source: url:[" << Url(it->url).asString() << "] product_dir:[" << it->product_dir << "] alias:[" << it->alias << "] cache_dir:[" << it->cache_dir << "]" << endl;
 

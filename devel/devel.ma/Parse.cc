@@ -149,14 +149,16 @@ struct StatusReset : public SetTransactValue
 
 inline bool selectForTransact( const NameKindProxy & nkp )
 {
-  if ( nkp.availableEmpty() )
+  if ( nkp.availableEmpty() ) {
+    ERR << "No Item to select: " << nkp << endl;
     return false;
+    ZYPP_THROW( Exception("No Item to select") );
+  }
 
   return nkp.availableBegin()->status().setTransact( true, ResStatus::USER );
 }
 
 ///////////////////////////////////////////////////////////////////
-
 /******************************************************************
 **
 **      FUNCTION NAME : main
@@ -177,14 +179,16 @@ int main( int argc, char * argv[] )
     }
 
   if ( 1 ) {
-    zypp::base::LogControl::TmpLineWriter shutUp;
+    //zypp::base::LogControl::TmpLineWriter shutUp;
     SourceManager::sourceManager()->restore( sysRoot );
     if ( SourceManager::sourceManager()->allSources().empty() )
       {
-        Source_Ref src1( createSource( "dir:///Local/SUSE-Linux-10.1-Build_830-i386/CD1" ) );
-        Source_Ref src2( createSource( "dir:///Local/SUSE-Linux-10.1-Build_830-Addon-BiArch/CD1" ) );
+        Source_Ref src1( createSource( "dir:///mounts/machcd2/CDs/SLES-10-CD-x86_64-Build_1304/CD1" ) );
         SourceManager::sourceManager()->addSource( src1 );
+#if 0
+        Source_Ref src2( createSource( "dir:///Local/SUSE-Linux-10.1-Build_830-Addon-BiArch/CD1" ) );
         SourceManager::sourceManager()->addSource( src2 );
+#endif
         SourceManager::sourceManager()->store( sysRoot, true );
       }
     for_each( SourceManager::sourceManager()->Source_begin(), SourceManager::sourceManager()->Source_end(),
@@ -196,16 +200,37 @@ int main( int argc, char * argv[] )
 
   MIL << *SourceManager::sourceManager() << endl;
   MIL << pool << endl;
-  //dumpRange( USR << "Pool: " << pool,
-  //           pool.begin(), pool.end()
-  //           ) << endl;
 
-  if ( 0 )
+  if ( 1 )
     {
-      selectForTransact( nameKindProxy<Pattern>( pool, "default" ) );
-      selectForTransact( nameKindProxy<Pattern>( pool, "x11" ) );
-      selectForTransact( nameKindProxy<Pattern>( pool, "kde" ) );
-      selectForTransact( nameKindProxy<Pattern>( pool, "OOo" ) );
+#if 0
+2006-06-02 14:54:37 <1> 10.10.2.245(3269) [solver] Resolver.cc(resolvePool):947 Resolver::resolvePool()
+2006-06-02 14:54:37 <0> 10.10.2.245(3269) [solver] Resolver.cc(show_pool):913 1: U_Tu_[S0:0][language]en_US-.noarch
+2006-06-02 14:54:37 <0> 10.10.2.245(3269) [solver] Resolver.cc(show_pool):913 4: U_Th_[S2:0][product]SUSE-Linux-Enterprise-Server-ia64-10-0.ia64
+2006-06-02 14:54:37 <0> 10.10.2.245(3269) [solver] Resolver.cc(show_pool):913 39: U_Th_[S2:0][pattern]apparmor-10-51.13.ia64
+2006-06-02 14:54:37 <0> 10.10.2.245(3269) [solver] Resolver.cc(show_pool):913 50: U_Th_[S2:0][pattern]x86-10-51.13.ia64
+2006-06-02 14:54:37 <0> 10.10.2.245(3269) [solver] Resolver.cc(show_pool):913 52: U_Th_[S2:0][pattern]base-10-51.13.ia64
+2006-06-02 14:54:37 <0> 10.10.2.245(3269) [solver] Resolver.cc(show_pool):913 187: U_Th_[S2:1][package]fpswa-1.18-81.ia64
+2006-06-02 14:54:37 <0> 10.10.2.245(3269) [solver] Resolver.cc(show_pool):913 226: U_Th_[S2:0][pattern]x11-10-51.13.ia64
+2006-06-02 14:54:37 <0> 10.10.2.245(3269) [solver] Resolver.cc(show_pool):913 969: U_Th_[S2:1][package]kernel-default-2.6.16.18-1.4.ia64
+2006-06-02 14:54:37 <0> 10.10.2.245(3269) [solver] Resolver.cc(show_pool):913 1995: U_Th_[S2:0][pattern]print_server-10-51.13.ia64
+2006-06-02 14:54:37 <0> 10.10.2.245(3269) [solver] Resolver.cc(show_pool):913 2069: U_Th_[S2:0][pattern]gnome-10-51.13.ia64
+2006-06-02 14:54:37 <0> 10.10.2.245(3269) [solver] Resolver.cc(show_pool):913 2130: U_Th_[S2:1][package]yast2-trans-en_US-2.13.5-7.1.noarch
+2006-06-02 14:54:37 <1> 10.10.2.245(3269) [solver] Resolver.cc(resolveDependencies):606 Resolver::resolveDependencies()
+#endif
+#define selt(K,N) selectForTransact( nameKindProxy<K>( pool, #N ) )
+
+      selt( Language, en_US );
+      selt( Product, SUSE-Linux-Enterprise-Server-x86_64 );
+      selt( Pattern, apparmor );
+      //selt( Pattern, x86 );
+      selt( Pattern, base );
+      selt( Pattern, x11 );
+      selt( Pattern, print_server );
+      selt( Pattern, gnome );
+      selt( Package, fpswa );
+      selt( Package, kernel-default );
+      selt( Package, yast2-trans-en_US );
     }
   else
     {
@@ -215,20 +240,20 @@ int main( int argc, char * argv[] )
       selectForTransact( nameKindProxy<Selection>( pool, "Office" ) );
     }
 
-  //getZYpp()->commit( ZYppCommitPolicy() ),
-
   vdumpPoolStats( USR << "Transacting:"<< endl,
                   make_filter_begin<resfilter::ByTransact>(pool),
                   make_filter_end<resfilter::ByTransact>(pool) ) << endl;
 
-  bool eres, rres;
-  {
-    zypp::base::LogControl::TmpLineWriter shutUp;
-    zypp::base::LogControl::instance().logfile( "SOLVER" );
-    eres = getZYpp()->resolver()->establishPool();
-    rres = getZYpp()->resolver()->resolvePool();
+  if ( 1 ) {
+    bool eres, rres;
+    {
+      zypp::base::LogControl::TmpLineWriter shutUp;
+      zypp::base::LogControl::instance().logfile( "SOLVER" );
+      eres = getZYpp()->resolver()->establishPool();
+      rres = getZYpp()->resolver()->resolvePool();
+    }
+    MIL << "est " << eres << " slv " << rres << endl;
   }
-  MIL << "est " << eres << " slv " << rres << endl;
 
   dumpPoolStats( USR << "Transacting:"<< endl,
                   make_filter_begin<resfilter::ByTransact>(pool),
@@ -237,7 +262,6 @@ int main( int argc, char * argv[] )
 
   pool::GetResolvablesToInsDel collect( pool );
   MIL << "GetResolvablesToInsDel:" << endl << collect << endl;
-
 
   if ( 1 )
     {

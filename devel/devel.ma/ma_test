@@ -38,4 +38,4 @@ $MAKE $PRG || exit 1
 
 export ZYPP_LOGFILE=-
 export ZYPP_KEYRING_DEFAULT_ACCEPT_ALL=1
-$SUDO ./$PRG "$@" 2> $LPIPE
+$SUDO ./$PRG "$@" 2>&1 | tee log > $LPIPE
