@@ -16,7 +16,7 @@
 #include <map>
 
 namespace zypp {
-  namespace media {
+  namespace base {
     namespace sysconfig {
 
       std::map<std::string,std::string> read( const Pathname & _path );
