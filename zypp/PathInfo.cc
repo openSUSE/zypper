@@ -10,9 +10,14 @@
  *
 */
 
+#include <sys/types.h> // for ::minor, ::major macros
+
 #include <iostream>
 #include <fstream>
 #include <iomanip>
+
+#include <boost/filesystem/operations.hpp>
+#include <boost/filesystem/exception.hpp>
 
 #include "zypp/base/Logger.h"
 #include "zypp/base/String.h"
@@ -22,9 +27,6 @@
 #include "zypp/PathInfo.h"
 #include "zypp/Digest.h"
 
-#include <boost/filesystem/operations.hpp>
-
-#include <sys/types.h> // for ::minor, ::major macros
 
 using std::string;
 
@@ -380,16 +382,18 @@ namespace zypp
         return _Log_Result( ENOTDIR );
       }
 
-      // #182672, do not call external programs in global destructors.
+      try
+        {
+          boost::filesystem::path bp( path.asString(), boost::filesystem::native );
+          boost::filesystem::remove_all( bp );
+        }
+      catch ( boost::filesystem::filesystem_error & excpt )
+        {
+          DBG << " FAILED: " << excpt.what() << std::endl;
+          return -1;
+        }
 
-      // do not throw on dotdirs
-      // http://www.boost.org/libs/filesystem/doc/portability_guide.htm#name_check­_functions
-      boost::filesystem::path bp( path.asString(), boost::filesystem::native );
-      // Only throws if path is empty
-      unsigned long count = boost::filesystem::remove_all( bp );
-      DBG << count << " objects removed" << std::endl;
-
-      return count != 0;
+      return _Log_Result( 0 );
     }
 
     ///////////////////////////////////////////////////////////////////
