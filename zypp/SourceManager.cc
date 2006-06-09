@@ -321,7 +321,7 @@ namespace zypp
   /** \todo Broken design: either use return value or Exception to
   * indicate errors, not both.
   */
-  bool SourceManager::restore( Pathname root_r, bool use_caches )
+  bool SourceManager::restore( Pathname root_r, bool use_caches, std::string alias_filter )
   {
     MIL << "SourceManager restore '" << root_r << ( use_caches ? "' (use_caches)" : "'" )
         << " ..." << endl;
@@ -405,6 +405,10 @@ namespace zypp
 	    src.disable();
 	}
 	src.setAutorefresh ( it->autorefresh );
+        
+        // user only wanted one source
+        if ( (alias_filter.size() > 0) && (alias_filter ==src.alias()) )
+          break;
     }
 
     if( !report.empty() )
