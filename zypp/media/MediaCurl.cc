@@ -15,6 +15,7 @@
 #include "zypp/base/Logger.h"
 #include "zypp/ExternalProgram.h"
 #include "zypp/base/String.h"
+#include "zypp/base/Sysconfig.h"
 
 #include "zypp/media/MediaCurl.h"
 #include "zypp/media/proxyinfo/ProxyInfos.h"
@@ -480,7 +481,7 @@ void MediaCurl::attachTo (bool next)
         if( h_info.isDir()  && h_info.owner() == getuid() &&
             c_info.isFile() && c_info.owner() == getuid())
 	{
-      	  map<string,string> rc_data = proxyinfo::sysconfigRead(curlrcFile);
+      	  map<string,string> rc_data = base::sysconfig::read( curlrcFile );
 
       	  map<string,string>::const_iterator it = rc_data.find("proxy-user");
       	  if (it != rc_data.end())
