@@ -139,6 +139,20 @@ namespace zypp
     void reset() ;
 
     /**
+     * List the known aliases ( no need to restore first )
+     *
+     * \throws Exception
+     */
+    std::list<std::string> knownAliases(const Pathname &root_r);
+    
+    /**
+     * List the known urls ( no need to restore first )
+     *
+     * \throws Exception
+     */
+    std::list<Url> knownUrls(const Pathname &root_r);
+    
+    /**
      * Store the current state to the given path
      *
      * \param root_r root path for storing the source definitions

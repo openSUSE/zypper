@@ -342,9 +342,6 @@ namespace zypp
     for( std::list<storage::PersistentStorage::SourceData>::iterator it = new_sources.begin();
 	it != new_sources.end(); ++it)
     {
-      // prepend root prefix!
-      it->cache_dir = root_r / it->cache_dir;
-
       // Note: Url(it->url).asString() to hide password in logs
       MIL << "Restoring source: url:[" << Url(it->url).asString() << "] product_dir:[" << it->product_dir << "] alias:[" << it->alias << "] cache_dir:[" << it->cache_dir << "]" << endl;
 
@@ -438,7 +435,42 @@ namespace zypp
     }
   }
 
+  std::list<std::string> SourceManager::knownAliases(const Pathname &root_r)
+  {
+    storage::PersistentStorage store;
+    std::list<std::string> aliases;
+    store.init( root_r );
 
+    std::list<storage::PersistentStorage::SourceData> sources = store.storedSources();
+
+    MIL << "Found sources: " << sources.size() << endl;
+
+    for( std::list<storage::PersistentStorage::SourceData>::iterator it = sources.begin();
+         it != sources.end(); ++it)
+    {
+      aliases.push_back(it->alias);
+    }
+    return aliases;
+  }
+    
+  std::list<Url> SourceManager::knownUrls(const Pathname &root_r)
+  {
+    storage::PersistentStorage store;
+    std::list<Url> urls;
+    store.init( root_r );
+
+    std::list<storage::PersistentStorage::SourceData> sources = store.storedSources();
+
+    MIL << "Found sources: " << sources.size() << endl;
+
+    for( std::list<storage::PersistentStorage::SourceData>::iterator it = sources.begin();
+         it != sources.end(); ++it)
+    {
+      urls.push_back(it->url);
+    }
+    return urls;
+  }
+  
   /******************************************************************
   **
   **	FUNCTION NAME : operator<<
