@@ -145,10 +145,10 @@ namespace zypp
 
   public:
     /** Get the path where zypp related plugins store persistent data and caches   */
-    const Pathname homePath() const;
+    Pathname homePath() const;
     
     /** Get the path where zypp related plugins store temp data   */
-    const Pathname tmpPath() const;
+    Pathname tmpPath() const;
     
     /** set the home, if you need to change it */
     void setHomePath( const Pathname & path );

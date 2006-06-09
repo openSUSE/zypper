@@ -359,13 +359,13 @@ namespace zypp
     //------------------------------------------------------------------------
     // target store path
 
-    const Pathname ZYppImpl::homePath() const
+    Pathname ZYppImpl::homePath() const
     { return _home_path.empty() ? Pathname("/var/lib/zypp") : _home_path; }
 
     void ZYppImpl::setHomePath( const Pathname & path )
     { _home_path = path; }
 
-    const Pathname ZYppImpl::tmpPath() const
+    Pathname ZYppImpl::tmpPath() const
     { 
       static TmpDir zypp_tmp_dir("/var/tmp", "zypp.");
       return zypp_tmp_dir.path();

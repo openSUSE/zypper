@@ -131,10 +131,10 @@ namespace zypp
   void ZYpp::setArchitecture( const Arch & arch )
   { _pimpl->setArchitecture( arch ); }
 
-  const Pathname ZYpp::homePath() const
+  Pathname ZYpp::homePath() const
   { return _pimpl->homePath(); }
 
-  const Pathname ZYpp::tmpPath() const
+  Pathname ZYpp::tmpPath() const
   { return _pimpl->tmpPath(); }
   
   void ZYpp::setHomePath( const Pathname & path )
