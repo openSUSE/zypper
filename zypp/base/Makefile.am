@@ -35,6 +35,7 @@ baseinclude_HEADERS =	\
 	PtrTypes.h	\
 	String.h	\
 	Unit.h		\
+	Sysconfig.h	\
 		\
 	Counter.h	\
 		\
@@ -56,6 +57,7 @@ lib@PACKAGE@_base_la_SOURCES =	\
 	ExternalDataSource.cc \
 	\
 	Exception.cc		\
+	Sysconfig.cc		\
 	LogControl.cc
 # NO entries below LogControl.cc
 # The static LogControlImpl singleton musr be initialized first!

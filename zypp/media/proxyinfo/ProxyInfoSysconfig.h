@@ -15,6 +15,7 @@
 #include <string>
 #include <map>
 
+#include "zypp/base/Sysconfig.h"
 #include "zypp/media/ProxyInfo.h"
 #include "zypp/media/proxyinfo/ProxyInfoImpl.h"
 
@@ -43,10 +44,6 @@ namespace zypp {
       ProxyInfo::NoProxyList _no_proxy;
       std::map<std::string,std::string> _proxies;
     };
-
-    namespace proxyinfo {
-      std::map<std::string,std::string> sysconfigRead(const Pathname & _path);
-    } // namespace proxyinfo
 
 ///////////////////////////////////////////////////////////////////
 
