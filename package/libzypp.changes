@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Jun  9 16:28:11 CEST 2006 - dmacvicar@suse.de
+
+- Allow to restore by alias
+- r3568
+
+-------------------------------------------------------------------
 Fri Jun  9 13:06:16 CEST 2006 - mvidner@suse.cz
 
 - Do not fork in a global destructor, perl dislikes it (#182672).
@@ -30,7 +36,7 @@ Wed Jun  7 11:40:46 CEST 2006 - mt@suse.de
 Wed Jun  7 01:00:05 CEST 2006 - dmacvicar@suse.de
 
 - Merge fix for stalle tmpdir due to cyclic references, using a master
-  TmpDir for zypp. (#178292) . There is still 1 tmpdir to fix.
+ TmpDir for zypp. (#178292) . There is still 1 tmpdir to fix.
 - rev 3521
 
 -------------------------------------------------------------------
