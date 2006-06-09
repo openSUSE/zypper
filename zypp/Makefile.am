@@ -182,6 +182,7 @@ lib@PACKAGE@_la_LIBADD =        thread/lib@PACKAGE@_thread.la		\
 				ui/lib@PACKAGE@_ui.la			\
 				\
 				base/lib@PACKAGE@_base.la		\
+				-lboost_filesystem			\
 				-lutil
 # !!! base/lib@PACKAGE@_base.la MUST BE THE LAST zypp lib linked
 

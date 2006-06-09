@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Jun  9 13:06:16 CEST 2006 - mvidner@suse.cz
+
+- Do not fork in a global destructor, perl dislikes it (#182672).
+  Fixes hanging ag_ldapserver and yast2-perl-bindings tests.
+
+-------------------------------------------------------------------
 Thu Jun  8 16:24:55 CEST 2006 - ma@suse.de
 
 - Installation: Assert product information is stored to libzypp
