@@ -321,10 +321,11 @@ namespace zypp
   /** \todo Broken design: either use return value or Exception to
   * indicate errors, not both.
   */
-  bool SourceManager::restore( Pathname root_r, bool use_caches, const std::string &alias_filter )
+  bool SourceManager::restore( Pathname root_r, bool use_caches, const std::string &alias_filter, const std::string &url_filter )
   {
     MIL << "SourceManager restore ('" << root_r << ( use_caches ? "' (use_caches)" : "'" )
-	<< ", alias_filter '" << alias_filter << "')" << endl;
+	<< ", alias_filter '" << alias_filter
+	<< ", url_filter '" << url_filter << "')" << endl;
 
     if (! _sources.empty() )
 	ZYPP_THROW(SourcesAlreadyRestoredException());
@@ -341,8 +342,14 @@ namespace zypp
 
     for( std::list<storage::PersistentStorage::SourceData>::iterator it = new_sources.begin(); it != new_sources.end(); ++it)
     {
-	if ( !alias_filter.empty()			// check filter, if set
+	if ( !alias_filter.empty()			// check alias filter, if set
 	    && (alias_filter != it->alias) )
+	{
+	    continue;
+	}
+
+	if ( !url_filter.empty()			// check url filter, if set
+	    && (url_filter != it->url.asString()) )
 	{
 	    continue;
 	}

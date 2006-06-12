@@ -170,12 +170,18 @@ namespace zypp
      * \param use_caches  if true, source creation will try to use source cache
      * and it's behavior on autorefresh. If false, it will not use
      * the cache at all.
+     * \param alias_filter  if non-empty, restore only a source matching
+     * this alias.
+     * \param url_filter  if non-empty, restore only a source matching
+     * this url.
+     *
+     * The alias_filter take precedence over the url_filter.
      *
      * \return true on success
      *
      * \throws Exception
      */
-    bool restore(Pathname root_r, bool use_caches = true, const std::string &alias_filter = "" );
+    bool restore(Pathname root_r, bool use_caches = true, const std::string &alias_filter = "", const std::string &url_filter = "" );
 
     /**
      * Find a source with a specified ID
