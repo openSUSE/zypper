@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!--
+   load patch data from armstrong.suse.de
+-->
+<test>
+<setup>
+  <arch name="i586"/>
+  <system file="patchA-installed.xml"/>
+  <channel file="patchB-new.xml" name="new_source"/>
+</setup>
+<trial>
+  <install channel="new_source" kind="patch" package="patch-B1"/>
+  <reportproblems/>
+</trial>
+</test>
