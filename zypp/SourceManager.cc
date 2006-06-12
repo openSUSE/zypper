@@ -339,10 +339,9 @@ namespace zypp
 
     MIL << "Found sources: " << new_sources.size() << endl;
 
-    for( std::list<storage::PersistentStorage::SourceData>::iterator it = new_sources.begin();
-	it != new_sources.end(); ++it)
+    for( std::list<storage::PersistentStorage::SourceData>::iterator it = new_sources.begin(); it != new_sources.end(); ++it)
     {
-      if ( (alias_filter.size() == 0) || ( alias_filter == it->alias()) )
+      if ( (alias_filter.empty() == 0) || ( alias_filter.compare(it->alias) == 0 ) )
       {
         // Note: Url(it->url).asString() to hide password in logs
         MIL << "Restoring source: url:[" << Url(it->url).asString() << "] product_dir:[" << it->product_dir << "] alias:[" << it->alias << "] cache_dir:[" << it->cache_dir << "]" << endl;
