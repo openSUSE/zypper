@@ -175,7 +175,7 @@ namespace zypp
      *
      * \throws Exception
      */
-    bool restore(Pathname root_r, bool use_caches = true, const std::string &alias_filter = std::string());
+    bool restore(Pathname root_r, bool use_caches = true, const std::string &alias_filter = "" );
 
     /**
      * Find a source with a specified ID

@@ -59,7 +59,7 @@ namespace zypp
     {
       void operator()( const SourceMap::value_type & el ) const
       {
-        _str << endl << "    - " << el.second;
+	_str << endl << "    - " << el.second;
       }
       PrintSourceMapEntry( std::ostream & str )
       : _str( str )
@@ -70,23 +70,23 @@ namespace zypp
     inline std::ostream & dumpSourceTableOn( std::ostream & str, bool trailingENDL = true )
     {
       str << "SourceManager: =========================" << endl
-          << "  known Sources " << _sources.size();
+	  << "  known Sources " << _sources.size();
       std::for_each( _sources.begin(), _sources.end(), PrintSourceMapEntry(str) );
 
       str << endl
-          << "  deleted Sources " << _deleted_sources.size();
+	  << "  deleted Sources " << _deleted_sources.size();
       std::for_each( _deleted_sources.begin(), _deleted_sources.end(), PrintSourceMapEntry(str) );
       str << endl
-          << "========================================";
+	  << "========================================";
       if ( trailingENDL )
-        str << endl;
+	str << endl;
       return str;
     }
 
     inline bool sourceTableRemove( SourceMap::iterator it )
     {
       if ( it == _sources.end() )
-        return false;
+	return false;
 
       MIL << "SourceManager remove " << it->second << endl;
       _deleted_sources[it->second.numericId()] = it->second;
@@ -102,18 +102,18 @@ namespace zypp
     inline SourceManager::SourceId sourceTableAdd( Source_Ref source_r )
     {
       if ( source_r.numericId() )
-        {
-          MIL << "SourceManager add " << source_r << endl;
-          _sources[source_r.numericId()] = source_r;
+	{
+	  MIL << "SourceManager add " << source_r << endl;
+	  _sources[source_r.numericId()] = source_r;
 
-          dumpSourceTableOn( DBG );
-        }
+	  dumpSourceTableOn( DBG );
+	}
       else
-        {
-          // Not worth an Exception. Request to add noSource, adds no Source,
-          // and returns the noSource Id.
-          WAR << "SourceManager does not add Source::noSource" << endl;
-        }
+	{
+	  // Not worth an Exception. Request to add noSource, adds no Source,
+	  // and returns the noSource Id.
+	  WAR << "SourceManager does not add Source::noSource" << endl;
+	}
       return source_r.numericId();
     }
 
@@ -173,7 +173,7 @@ namespace zypp
   {
     if ( ! sourceTableRemove( _sources.find(id) ) )
       {
-        WAR << "SourceManager remove: no source with SourceId " << id << endl;
+	WAR << "SourceManager remove: no source with SourceId " << id << endl;
       }
   }
 
@@ -185,7 +185,7 @@ namespace zypp
 
     if ( ! sourceTableRemove( it ) )
       {
-        WAR << "SourceManager remove: no source with alias " << alias_r << endl;
+	WAR << "SourceManager remove: no source with alias " << alias_r << endl;
       }
   }
 
@@ -250,7 +250,7 @@ namespace zypp
   void SourceManager::store(Pathname root_r, bool metadata_cache )
   {
     MIL << "SourceManager store '" << root_r << ( metadata_cache ? "' (metadata_cache)" : "'" )
-        << " ..." << endl;
+	<< " ..." << endl;
 
     storage::PersistentStorage store;
     store.init( root_r );
@@ -262,8 +262,8 @@ namespace zypp
 	// make sure our root exists
 
 	filesystem::assert_dir( root_r / getZYpp()->homePath() );
-        Pathname topdir( root_r / ZYPP_METADATA_PREFIX );
-        filesystem::assert_dir( topdir );
+	Pathname topdir( root_r / ZYPP_METADATA_PREFIX );
+	filesystem::assert_dir( topdir );
     	MIL << "Created..." << topdir << std::endl;
     }
 
@@ -283,20 +283,20 @@ namespace zypp
 	storage::PersistentStorage::SourceData descr;
 
 	descr.url = it->second.url().asCompleteString();
-        descr.enabled = it->second.enabled();
-        descr.alias = it->second.alias();
+	descr.enabled = it->second.enabled();
+	descr.alias = it->second.alias();
 	descr.autorefresh = it->second.autorefresh();
 	descr.type = it->second.type();
 	descr.product_dir = it->second.path();
 
 	descr.cache_dir = it->second.cacheDir();
 
-        if( metadata_cache && descr.cache_dir.empty() )
+	if( metadata_cache && descr.cache_dir.empty() )
 	{
 	    if( descr.cache_dir.empty() )
 	    {
-              filesystem::TmpDir newCache( root_r /  ZYPP_METADATA_PREFIX, "Source." );
-              descr.cache_dir = ZYPP_METADATA_PREFIX + newCache.path().basename();
+	      filesystem::TmpDir newCache( root_r /  ZYPP_METADATA_PREFIX, "Source." );
+	      descr.cache_dir = ZYPP_METADATA_PREFIX + newCache.path().basename();
 	    }
 
 	    filesystem::assert_dir ( root_r.asString() + descr.cache_dir );
@@ -323,8 +323,8 @@ namespace zypp
   */
   bool SourceManager::restore( Pathname root_r, bool use_caches, const std::string &alias_filter )
   {
-    MIL << "SourceManager restore '" << root_r << ( use_caches ? "' (use_caches)" : "'" )
-        << " ..." << endl;
+    MIL << "SourceManager restore ('" << root_r << ( use_caches ? "' (use_caches)" : "'" )
+	<< ", alias_filter '" << alias_filter << "')" << endl;
 
     if (! _sources.empty() )
 	ZYPP_THROW(SourcesAlreadyRestoredException());
@@ -341,72 +341,75 @@ namespace zypp
 
     for( std::list<storage::PersistentStorage::SourceData>::iterator it = new_sources.begin(); it != new_sources.end(); ++it)
     {
-      if ( (alias_filter.empty() == 0) || ( alias_filter.compare(it->alias) == 0 ) )
-      {
-        // Note: Url(it->url).asString() to hide password in logs
-        MIL << "Restoring source: url:[" << Url(it->url).asString() << "] product_dir:[" << it->product_dir << "] alias:[" << it->alias << "] cache_dir:[" << it->cache_dir << "]" << endl;
+	if ( !alias_filter.empty()			// check filter, if set
+	    && (alias_filter != it->alias) )
+	{
+	    continue;
+	}
+
+	// Note: Url(it->url).asString() to hide password in logs
+	MIL << "Restoring source: url:[" << Url(it->url).asString() << "] product_dir:[" << it->product_dir << "] alias:[" << it->alias << "] cache_dir:[" << it->cache_dir << "]" << endl;
   
-          SourceId id = 0;
+	  SourceId id = 0;
   
-          try {
-            id = addSource( SourceFactory().createFrom(it->type, it->url, it->product_dir, it->alias, it->cache_dir) );
-          }
-          catch (const Exception &expt )
-          {
-              // Note: Url(it->url).asString() to hide password in logs
-              ERR << "Unable to restore source from " << Url(it->url).asString()
-                  << endl;
+	  try {
+	    id = addSource( SourceFactory().createFrom(it->type, it->url, it->product_dir, it->alias, it->cache_dir) );
+	  }
+	  catch (const Exception &expt )
+	  {
+	      // Note: Url(it->url).asString() to hide password in logs
+	      ERR << "Unable to restore source from " << Url(it->url).asString()
+	          << endl;
   
-              id = 0;
-              Url url2;
-              try {
-                  url2 = it->url;
-                  std::string scheme( url2.getScheme());
+	      id = 0;
+	      Url url2;
+	      try {
+	          url2 = it->url;
+	          std::string scheme( url2.getScheme());
   
-                  if( (scheme == "cd" || scheme == "dvd") &&
-                      !url2.getQueryParam("devices").empty())
-                  {
-                      url2.setQueryParam("devices", "");
+	          if( (scheme == "cd" || scheme == "dvd") &&
+	              !url2.getQueryParam("devices").empty())
+	          {
+	              url2.setQueryParam("devices", "");
   
-                      DBG << "CD/DVD devices changed - try again without a devices list"
-                          << std::endl;
+	              DBG << "CD/DVD devices changed - try again without a devices list"
+	                  << std::endl;
   
-                      id = addSource( SourceFactory().createFrom(url2, it->product_dir, it->alias, it->cache_dir) );
+	              id = addSource( SourceFactory().createFrom(url2, it->product_dir, it->alias, it->cache_dir) );
   
-                      // This worked ... update it->url ?
-                      //it->url = url2.asCompleteString();
-                  }
-              }
-              catch (const Exception &e2)
-              {
-                  // Note: Url(it->url).asString() to hide password in logs
-                  ERR << "Unable to restore source from " << url2.asString()
-                      << endl;
-                  id = 0;
-                  ZYPP_CAUGHT(e2);
-              }
+	              // This worked ... update it->url ?
+	              //it->url = url2.asCompleteString();
+	          }
+	      }
+	      catch (const Exception &e2)
+	      {
+	          // Note: Url(it->url).asString() to hide password in logs
+	          ERR << "Unable to restore source from " << url2.asString()
+	              << endl;
+	          id = 0;
+	          ZYPP_CAUGHT(e2);
+	      }
   
-              if( id == 0)
-              {
-                report.append( it->url.asString() + it->product_dir.asString(), it->alias, expt );
-                  continue;
-              }
-          }
+	      if( id == 0)
+	      {
+	        report.append( it->url.asString() + it->product_dir.asString(), it->alias, expt );
+	          continue;
+	      }
+	  }
   
-          DBG << "Added source as id " << id << endl;
-          // should not throw, we've just created the source
-          Source_Ref src = findSource( id );
+	  DBG << "Added source as id " << id << endl;
+	  // should not throw, we've just created the source
+	  Source_Ref src = findSource( id );
   
-          if ( it->enabled ) {
-              DBG << "enable source" << endl;
-              src.enable();
-          }
-          else {
-              DBG << "disable source" << endl;
-              src.disable();
-          }
-          src.setAutorefresh ( it->autorefresh );
-      }
+	  if ( it->enabled ) {
+	      DBG << "enable source" << endl;
+	      src.enable();
+	  }
+	  else {
+	      DBG << "disable source" << endl;
+	      src.disable();
+	  }
+	  src.setAutorefresh ( it->autorefresh );
     }
 
     if( !report.empty() )
@@ -448,7 +451,7 @@ namespace zypp
     MIL << "Found sources: " << sources.size() << endl;
 
     for( std::list<storage::PersistentStorage::SourceData>::iterator it = sources.begin();
-         it != sources.end(); ++it)
+	 it != sources.end(); ++it)
     {
       aliases.push_back(it->alias);
     }
@@ -466,7 +469,7 @@ namespace zypp
     MIL << "Found sources: " << sources.size() << endl;
 
     for( std::list<storage::PersistentStorage::SourceData>::iterator it = sources.begin();
-         it != sources.end(); ++it)
+	 it != sources.end(); ++it)
     {
       urls.push_back(it->url);
     }
