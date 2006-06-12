@@ -101,11 +101,20 @@ QueueItemInstall::QueueItemInstall (const ResPool & pool, PoolItem_Ref item, boo
     , _explicitly_requested (false)
 {
     Resolvable::constPtr res = item.resolvable();
-    Package::constPtr pkg = asKind<Package>(res);			// try to access it as a package
-    if (pkg == NULL
-	|| !pkg->installOnly()) {
 
-	// check if this install upgrades anything			// only if its a 'rpm -U' package
+    // Atoms are by default parallel installable (cf #181103)
+    bool install_in_parallel = isKind<Atom>( res );
+
+    // if its not an atom, check if its a package with 'install-only' set
+    if (!install_in_parallel) {
+	Package::constPtr pkg = asKind<Package>( res );
+	install_in_parallel = (pkg != NULL) && pkg->installOnly();
+    }
+
+    // if its not parallel installable
+    //   check if this install upgrades anything
+
+    if (!install_in_parallel) {
 	_upgrades = Helper::findInstalledItem (pool, item);
     }
 
