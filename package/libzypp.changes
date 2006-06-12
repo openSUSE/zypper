@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Jun 12 16:27:46 CEST 2006 - kkaempf@suse.de
+
+- honor parallel installs in resolver context (#181103)
+- rev 3592
+
+-------------------------------------------------------------------
 Mon Jun 12 15:15:07 CEST 2006 - dmacvicar@suse.de
 
 - fix #182003 YUM packages without size 

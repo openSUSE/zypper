@@ -903,15 +903,24 @@ upgrade_item_cb (PoolItem_Ref item, const ResStatus & status, void *data)
 {
     UpgradeInfo *info = (UpgradeInfo *)data;
 
-    PoolItem_Ref to_be_upgraded;
+    PoolItem_Ref installed_item;
 
     if (status.isToBeInstalled()
 	&& ! item.status().isInstalled ())
     {
-	to_be_upgraded = Helper::findInstalledItem(info->pool, item);
-	if (to_be_upgraded) {
+	// check if there is already an installed item with same name and kind
+	installed_item = Helper::findInstalledItem( info->pool, item );
+	if (installed_item) {
+
+	    // there is an installed item, check its status
+	    ResStatus installed_status( info->context->getStatus( installed_item ) );
+
+	    // if it does not transact, it does not get updated (we have an allowed parallel install)
+	    if (!installed_status.transacts())
+		return;
+
 	    if (info->fn) {
-		info->fn (item, status, to_be_upgraded, info->context->getStatus(to_be_upgraded), info->data);
+		info->fn (item, status, installed_item, installed_status, info->data);
 	    }
 	    ++info->count;
 	}
