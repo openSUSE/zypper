@@ -5,6 +5,12 @@ Mon Jun 12 14:58:55 CEST 2006 - kkaempf@suse.de
 - rev 3583
 
 -------------------------------------------------------------------
+Mon Jun 12 13:07:31 CEST 2006 - kkaempf@suse.de
+
+- make atoms parallel installable (#181103)
+- rev 3580
+
+-------------------------------------------------------------------
 Fri Jun  9 16:28:11 CEST 2006 - dmacvicar@suse.de
 
 - Allow to restore by alias
