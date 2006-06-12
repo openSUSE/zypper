@@ -2,12 +2,13 @@
 <!--
    patch-B1 will be installed. patch-A1 has an atom with the same
    same. No error concerning parallel installation of the atom will
-   be displayed and patch-B1 will be installed
+   be displayed BUT atom of patch-A1 NEEDS the older version of 
+   package A. So this error will be displayed.
 -->
 <test>
 <setup>
   <arch name="i586"/>
-  <system file="patchA-installed.xml"/>
+  <system file="patchA-fail-installed.xml"/>
   <channel file="patchB-new.xml" name="new_source"/>
 </setup>
 <trial>

@@ -38,7 +38,7 @@
     <dep kind="package" name="A"/>
   </freshens>
   <requires>
-    <dep kind="package" name="A" op="&gt;" version="1.0" release="1"/>
+    <dep kind="package" name="A" op="=" version="1.0" release="1"/>
   </requires>
 </atom>
 </subchannel></channel>

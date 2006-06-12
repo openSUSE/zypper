@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!--
+   patch-A1 with the NEW version installed. patch-A1 has an atom with the same
+   same. No error concerning parallel installation of the atom will
+   be displayed and patch-A1 will be updated.
+-->
+<test>
+<setup>
+  <arch name="i586"/>
+  <system file="patchA-installed.xml"/>
+  <channel file="patchA-new.xml" name="new_source"/>
+</setup>
+<trial>
+  <install channel="new_source" kind="patch" package="patch-A1"/>
+  <reportproblems/>
+</trial>
+</test>

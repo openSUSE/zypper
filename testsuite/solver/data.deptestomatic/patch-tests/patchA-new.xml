@@ -9,7 +9,7 @@
       <hid>12345</hid>
       <arch>i586</arch>
       <epoch>0</epoch>
-      <version>1.0</version>
+      <version>2.0</version>
       <release>1</release>
       <filename>foo.bar</filename>
       <filesize>123</filesize>
@@ -23,22 +23,22 @@
 <patch>
   <name>patch-A1</name>
   <arch>noarch</arch>
-  <version>1</version>
+  <version>2</version>
   <release>0</release>
   <requires>
-    <dep kind="atom" name="A" op="=" version="1.0" release="1"/>
+    <dep kind="atom" name="A" op="=" version="2.0" release="1"/>
   </requires>
 </patch>
 <atom>
   <name>A</name>
   <arch>i586</arch>
-  <version>1.0</version>
+  <version>2.0</version>
   <release>1</release>
   <freshens>
     <dep kind="package" name="A"/>
   </freshens>
   <requires>
-    <dep kind="package" name="A" op="&gt;" version="1.0" release="1"/>
+    <dep kind="package" name="A" op="=" version="2.0" release="1"/>
   </requires>
 </atom>
 </subchannel></channel>
