@@ -189,6 +189,18 @@ namespace zypp
       }
   }
 
+  void SourceManager::removeSourceByUrl( const Url & url_r )
+  {
+    SourceMap::iterator it = _sources.begin();
+    for ( ; it != _sources.end() && it->second.url().asString() != url_r.asString(); ++it )
+      ; // empty body
+
+    if ( ! sourceTableRemove( it ) )
+      {
+	WAR << "SourceManager remove: no source with Url " << url_r << endl;
+      }
+  }
+
   void SourceManager::releaseAllSources()
   {
     MIL << "SourceManager releasing all sources ..." << endl;

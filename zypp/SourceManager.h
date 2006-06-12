@@ -231,6 +231,9 @@ namespace zypp
     /** Remove an existing source by Alias. */
     void removeSource(const std::string & alias_r);
 
+    /** Remove an existing source by Url. */
+    void removeSourceByUrl(const Url & url_r);
+
     /**
      * Release all medias held by all sources
      *
