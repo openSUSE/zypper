@@ -1060,6 +1060,7 @@ foreach_system_upgrade (solver::detail::Resolver_Ptr resolver)
 
     for (PoolItemSet::iterator iter = installed.begin(); iter != installed.end(); ++iter) {
 	PoolItem_Ref p = *iter;
+	if (!p.status().transacts()) continue;
 	info.installed = p;
 	invokeOnEach( God->pool().byNameBegin( p->name() ), God->pool().byNameEnd( p->name() ),
 			functor::chain( resfilter::ByUninstalled(), resfilter::ByKind( p->kind() ) ),
