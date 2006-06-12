@@ -140,10 +140,12 @@ namespace zypp
 	std::list<PatchRpm> _patch_rpms;
 
 	bool _install_only;
+        
+        unsigned int _package_size;
+        unsigned int _size;
+        
 /*
 	unsigned _size_package;
-	unsigned _size_installed;
-	unsigned _size_archive;
 	std::string _sourcepkg;
 	std::list<DirSize> _dir_sizes;
 */

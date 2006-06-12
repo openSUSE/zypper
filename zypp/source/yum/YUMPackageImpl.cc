@@ -43,7 +43,7 @@ namespace zypp
       : _summary(parsed.summary),
 	_description(parsed.description),
 	_license_to_confirm(parsed.license_to_confirm), // TODO add to metadata
-	_buildtime(strtol(parsed.timeBuild.c_str(), 0, 10)),
+        _buildtime(str::strtonum<time_t>(parsed.timeBuild)),
 	_buildhost(parsed.buildhost),
 	_url(parsed.url),
 	_vendor( parsed.vendor),
@@ -54,7 +54,9 @@ namespace zypp
 	_type(parsed.type),
 	_authors(parsed.authors),
 	_keywords( parsed.keywords),
-	_mediaNumber(strtol(parsed.media.c_str(), 0, 10)),
+        _mediaNumber(str::strtonum<unsigned int>(parsed.media)),
+        _size(str::strtonum<unsigned int>(parsed.sizeInstalled)),
+        _package_size(str::strtonum<unsigned int>(parsed.sizePackage)),
 	_checksum(parsed.checksumType,
 		  parsed.checksum),
 	_filenames(),
@@ -96,7 +98,7 @@ namespace zypp
       : _summary(parsed.summary),
 	_description(parsed.description),
 	_license_to_confirm(parsed.license_to_confirm),
-	_buildtime(strtol(parsed.timeBuild.c_str(), 0, 10)),
+        _buildtime(str::strtonum<time_t>(parsed.timeBuild)),
 	_buildhost(parsed.buildhost),
 	_url(parsed.url),
 	_vendor( parsed.vendor),
@@ -107,11 +109,13 @@ namespace zypp
 	_type(parsed.type),
 	_authors(parsed.authors),
 	_keywords( parsed.keywords),
-	_mediaNumber(strtol(parsed.media.c_str(), 0, 10)),
+	_mediaNumber(str::strtonum<unsigned int>(parsed.media)),
+        _size(str::strtonum<unsigned int>(parsed.sizeInstalled)),
+        _package_size(str::strtonum<unsigned int>(parsed.sizePackage)),
 	_checksum(parsed.checksumType,
 		  parsed.checksum),
 	_filenames(),
-  _location( parsed.plainRpms.empty() ? Pathname() : parsed.plainRpms.front().filename),
+        _location( parsed.plainRpms.empty() ? Pathname() : parsed.plainRpms.front().filename),
 	_delta_rpms(),
 	_patch_rpms(),
 
@@ -207,8 +211,7 @@ namespace zypp
 
       /** */
       ByteCount YUMPackageImpl::size() const
-#warning fixme
-      { return 0; }
+      { return _size; }
 
       /** */
       Date YUMPackageImpl::buildtime() const
@@ -288,8 +291,7 @@ namespace zypp
 
       /** */
       ByteCount YUMPackageImpl::archivesize() const
-#warning fixme
-      { return 0; }
+      { return _package_size; }
 
       /** */
       std::list<std::string> YUMPackageImpl::authors() const
