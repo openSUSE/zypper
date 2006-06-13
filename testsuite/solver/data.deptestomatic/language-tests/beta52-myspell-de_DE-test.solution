@@ -1,18 +1,9 @@
 >!> Requesting locale de_DE
 >!> Installing OpenOffice_org from channel beta52
->!> 1 problems found:
->!> Problem:
->!> Cannot install myspell-german-old because it is conflicting with myspell-german
->!> 
->!>    Solution:
->!>       do not install myspell-german-old
->!>       do not install myspell-german-old-20030428-112.noarch[beta52]
->!>    Solution:
->!>       do not install myspell-german
->!>       do not install myspell-german-20051213-7.noarch[beta52]
+>!> No problems so far
 >!> Taking solution: 0
 >!> For problem:     0
->!> No problems so far
+>!> Wrong problem number (0--1)
 >!> No problems so far
 >!> Solution #1:
 >!> install Mesa-6.4.2-4.i586[beta52]
