@@ -282,4 +282,9 @@
       <empty/>
     </element>
   </define>
+  <define name="element-license-to-confirm">
+    <element name="license-to-confirm">
+      <ref name="localized-string"/>
+    </element>
+  </define>
 </grammar>

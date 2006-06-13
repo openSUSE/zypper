@@ -116,3 +116,6 @@ freshens =
 
 element-install-only =
     element install-only { empty }
+
+element-license-to-confirm =
+    element license-to-confirm { localized-string }

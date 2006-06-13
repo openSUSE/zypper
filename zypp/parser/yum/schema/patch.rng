@@ -62,11 +62,11 @@
     <text/>
   </define>
   <define name="patch">
-    <attribute name="engine"/>
     <attribute name="patchid"/>
     <attribute name="timestamp">
       <data type="nonNegativeInteger"/>
     </attribute>
+    <attribute name="engine"/>
     <ref name="element-name"/>
     <ref name="element-summary"/>
     <ref name="element-description"/>
@@ -74,7 +74,9 @@
       <ref name="element-license-to-confirm"/>
     </zeroOrMore>
     <ref name="element-version"/>
-    <ref name="dependency-block"/>
+    <optional>
+      <ref name="dependency-block"/>
+    </optional>
     <ref name="element-category"/>
     <optional>
       <element name="reboot-needed">

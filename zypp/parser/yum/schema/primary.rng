@@ -75,9 +75,11 @@
     </element>
   </define>
   <define name="version">
-    <attribute name="epoch">
-      <data type="nonNegativeInteger"/>
-    </attribute>
+    <optional>
+      <attribute name="epoch">
+        <data type="nonNegativeInteger"/>
+      </attribute>
+    </optional>
     <attribute name="ver"/>
     <attribute name="rel"/>
     <empty/>

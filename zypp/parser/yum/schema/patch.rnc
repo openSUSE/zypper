@@ -23,15 +23,15 @@ localized-string =
   text
 
 patch =
-  attribute engine { text },
   attribute patchid { text },
   attribute timestamp { xsd:nonNegativeInteger },
+  attribute engine { text },
   element-name,
   element-summary,
   element-description,
   element-license-to-confirm*,
   element-version,
-  dependency-block,
+  dependency-block?,
   element-category,
   element reboot-needed { empty }?,
   element package-manager { empty }?,

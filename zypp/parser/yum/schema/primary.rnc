@@ -58,7 +58,7 @@ element-version =
     element version { version }
 
 version =
-    attribute epoch { xsd:nonNegativeInteger },
+    attribute epoch { xsd:nonNegativeInteger }?,
     attribute ver { text },
     attribute rel { text },
     empty
