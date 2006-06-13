@@ -2,7 +2,7 @@
 >!> Installing foo from channel test
 >!> 1 problems found:
 >!> Problem:
->!> Cannot install foo because it is conflicting with foonew
+>!> Cannot install foo-2.0-1.noarch[test] because it is conflicting with foonew
 >!> A conflict over foo == 2.0-1 (foo) requires the removal of to-be-installed foo-2.0-1.noarch[test]
 >!>    Solution:
 >!>       do not install foo

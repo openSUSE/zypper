@@ -1,7 +1,7 @@
 >!> Installing unfulfilled from channel test
 >!> 1 problems found:
 >!> Problem:
->!> unfulfilled cannot be installed due to missing dependencies
+>!> unfulfilled-1.0-1.noarch[test] cannot be installed due to missing dependencies
 >!> There are no installable providers of nothere for unfulfilled-1.0-1.noarch[test]
 >!>    Solution:
 >!>       do not install unfulfilled

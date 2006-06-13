@@ -1,7 +1,7 @@
 >!> Installing libident-dev from channel test
 >!> 1 problems found:
 >!> Problem:
->!> Cannot install libident because it is conflicting with smail
+>!> Cannot install libident-2.0-1.noarch[test] because it is conflicting with smail
 >!> A conflict over libident == 2.0-1 (libident >= 2.0) requires the removal of to-be-installed libident-2.0-1.noarch[test]
 >!>    Solution:
 >!>       do not install libident

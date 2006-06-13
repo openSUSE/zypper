@@ -3,11 +3,11 @@
 >!> Requesting locale de_AT
 >!> Requesting locale ja
 >!> Requesting locale zh
->!>1: U_Tu_[language]de-.noarch
->!>2: U_Tu_[language]de_AT-.noarch
->!>3: U_Tu_[language]de_DE-.noarch
->!>4: U_Tu_[language]ja-.noarch
->!>5: U_Tu_[language]zh-.noarch
+>!>1: U_Tu_[S0:0][language]de-.noarch
+>!>2: U_Tu_[S0:0][language]de_AT-.noarch
+>!>3: U_Tu_[S0:0][language]de_DE-.noarch
+>!>4: U_Tu_[S0:0][language]ja-.noarch
+>!>5: U_Tu_[S0:0][language]zh-.noarch
 >!> Solution #1:
 >!> install language:de-.noarch
 >!> install language:de_AT-.noarch

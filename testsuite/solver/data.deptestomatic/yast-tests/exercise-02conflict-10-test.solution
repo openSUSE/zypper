@@ -1,7 +1,7 @@
 >!> Installing baz3 from channel test
 >!> 1 problems found:
 >!> Problem:
->!> Cannot install baz3 because it is conflicting with foo3
+>!> Cannot install baz3-1.0-1.noarch[test] because it is conflicting with foo3
 >!> A conflict over baz31 (baz31) requires the removal of to-be-installed baz3-1.0-1.noarch[test]
 >!>    Solution:
 >!>       do not install baz3

@@ -1,5 +1,5 @@
 >!> Establishing state ...
 >!> Established context
 >!> patch:Patch-A-1.1-1.noarch[test] UI_s_
->!> atom:Atom-B-1.1-1.noarch[test] UU_s_
 >!> atom:Atom-A-1.1-1.noarch[test] UI_s_
+>!> atom:Atom-B-1.1-1.noarch[test] UU_s_

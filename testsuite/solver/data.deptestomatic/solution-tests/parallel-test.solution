@@ -2,7 +2,7 @@
 >!> Installing foo from channel test2
 >!> 1 problems found:
 >!> Problem:
->!> Cannot install foo
+>!> Cannot install foo-2.0-1.noarch[test2]
 >!> Can't install foo-2.0-1.noarch[test2], since foo-2.0-1.noarch[test1] is already marked as needing to be installed
 >!>    Solution:
 >!>       do not install foo-2.0-1.noarch[test2]

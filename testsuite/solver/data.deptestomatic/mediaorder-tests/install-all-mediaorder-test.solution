@@ -1790,7 +1790,7 @@
 >!> install selection:Laptop-10.0-115.noarch[selections]
 >!> install selection:Latex-10.0-115.noarch[selections]
 >!> install selection:Min-10.0-115.noarch[selections]
->!> install selection:Mobile-10.0-115.i586[selections]
+>!> install selection:Mobile-10.0-115.i686[selections]
 >!> install selection:Mono-10.0-115.noarch[selections]
 >!> install selection:Multimedia-10.0-115.noarch[selections]
 >!> install selection:Network-10.0-115.noarch[selections]

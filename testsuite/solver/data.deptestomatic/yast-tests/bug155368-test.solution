@@ -1,7 +1,7 @@
 >!> Uninstalling yast2-transfer
 >!> 19 problems found:
 >!> Problem:
->!> autoyast2-installation has missing dependencies
+>!> autoyast2-installation-2.13.19-2.noarch has missing dependencies
 >!> There are no alternative installed providers of yast2-transfer for autoyast2-installation-2.13.19-2.noarch
 >!>    Solution:
 >!>       keep yast2-transfer
@@ -16,7 +16,7 @@
 >!>       Ignore this requirement generally
 >!>       
 >!> Problem:
->!> yast2-backup has missing dependencies
+>!> yast2-backup-2.13.1-2.noarch has missing dependencies
 >!> There are no alternative installed providers of autoyast2-installation for yast2-backup-2.13.1-2.noarch
 >!>    Solution:
 >!>       keep autoyast2-installation
@@ -31,7 +31,7 @@
 >!>       Ignore this requirement generally
 >!>       
 >!> Problem:
->!> yast2-bootloader has missing dependencies
+>!> yast2-bootloader-2.13.18-3.x86_64 has missing dependencies
 >!> There are no alternative installed providers of yast2-storage for yast2-bootloader-2.13.18-3.x86_64
 >!>    Solution:
 >!>       keep yast2-storage
@@ -46,7 +46,7 @@
 >!>       Ignore this requirement generally
 >!>       
 >!> Problem:
->!> yast2-http-server has missing dependencies
+>!> yast2-http-server-2.13.9-4.noarch has missing dependencies
 >!> There are no alternative installed providers of yast2-network for yast2-http-server-2.13.9-4.noarch
 >!>    Solution:
 >!>       keep yast2-network
@@ -61,7 +61,7 @@
 >!>       Ignore this requirement generally
 >!>       
 >!> Problem:
->!> yast2-inetd has missing dependencies
+>!> yast2-inetd-2.13.2-2.noarch has missing dependencies
 >!> There are no alternative installed providers of yast2-packager for yast2-inetd-2.13.2-2.noarch
 >!>    Solution:
 >!>       keep yast2-packager
@@ -76,7 +76,7 @@
 >!>       Ignore this requirement generally
 >!>       
 >!> Problem:
->!> yast2-installation has missing dependencies
+>!> yast2-installation-2.13.28-2.noarch has missing dependencies
 >!> There are no alternative installed providers of autoyast2-installation for yast2-installation-2.13.28-2.noarch
 >!>    Solution:
 >!>       keep autoyast2-installation
@@ -91,7 +91,7 @@
 >!>       Ignore this requirement generally
 >!>       
 >!> Problem:
->!> yast2-network has missing dependencies
+>!> yast2-network-2.13.29-2.x86_64 has missing dependencies
 >!> There are no alternative installed providers of yast2-packager for yast2-network-2.13.29-2.x86_64
 >!>    Solution:
 >!>       keep yast2-packager
@@ -106,7 +106,7 @@
 >!>       Ignore this requirement generally
 >!>       
 >!> Problem:
->!> yast2-nfs-server has missing dependencies
+>!> yast2-nfs-server-2.13.2-5.noarch has missing dependencies
 >!> There are no alternative installed providers of yast2-packager for yast2-nfs-server-2.13.2-5.noarch
 >!>    Solution:
 >!>       keep yast2-packager
@@ -121,7 +121,7 @@
 >!>       Ignore this requirement generally
 >!>       
 >!> Problem:
->!> yast2-nis-server has missing dependencies
+>!> yast2-nis-server-2.13.1-5.noarch has missing dependencies
 >!> There are no alternative installed providers of yast2-network for yast2-nis-server-2.13.1-5.noarch
 >!>    Solution:
 >!>       keep yast2-network
@@ -136,7 +136,7 @@
 >!>       Ignore this requirement generally
 >!>       
 >!> Problem:
->!> yast2-packager has missing dependencies
+>!> yast2-packager-2.13.39-2.x86_64 has missing dependencies
 >!> There are no alternative installed providers of yast2-installation for yast2-packager-2.13.39-2.x86_64
 >!>    Solution:
 >!>       keep yast2-installation
@@ -151,7 +151,7 @@
 >!>       Ignore this requirement generally
 >!>       
 >!> Problem:
->!> yast2-powertweak has missing dependencies
+>!> yast2-powertweak-2.13.5-4.noarch has missing dependencies
 >!> There are no alternative installed providers of yast2-sysconfig for yast2-powertweak-2.13.5-4.noarch
 >!>    Solution:
 >!>       keep yast2-sysconfig
@@ -166,7 +166,7 @@
 >!>       Ignore this requirement generally
 >!>       
 >!> Problem:
->!> yast2-repair has missing dependencies
+>!> yast2-repair-2.13.3-4.noarch has missing dependencies
 >!> There are no alternative installed providers of yast2-storage for yast2-repair-2.13.3-4.noarch
 >!>    Solution:
 >!>       keep yast2-storage
@@ -181,7 +181,7 @@
 >!>       Ignore this requirement generally
 >!>       
 >!> Problem:
->!> yast2-restore has missing dependencies
+>!> yast2-restore-2.13.1-2.noarch has missing dependencies
 >!> There are no alternative installed providers of yast2-installation for yast2-restore-2.13.1-2.noarch
 >!>    Solution:
 >!>       keep yast2-installation
@@ -196,7 +196,7 @@
 >!>       Ignore this requirement generally
 >!>       
 >!> Problem:
->!> yast2-samba-server has missing dependencies
+>!> yast2-samba-server-2.13.6-2.noarch has missing dependencies
 >!> There are no alternative installed providers of yast2-network for yast2-samba-server-2.13.6-2.noarch
 >!>    Solution:
 >!>       keep yast2-network
@@ -211,7 +211,7 @@
 >!>       Ignore this requirement generally
 >!>       
 >!> Problem:
->!> yast2-storage has missing dependencies
+>!> yast2-storage-2.13.33-2.x86_64 has missing dependencies
 >!> There are no alternative installed providers of yast2-installation for yast2-storage-2.13.33-2.x86_64
 >!>    Solution:
 >!>       keep yast2-installation
@@ -226,7 +226,7 @@
 >!>       Ignore this requirement generally
 >!>       
 >!> Problem:
->!> yast2-sysconfig has missing dependencies
+>!> yast2-sysconfig-2.13.5-4.noarch has missing dependencies
 >!> There are no alternative installed providers of yast2-installation for yast2-sysconfig-2.13.5-4.noarch
 >!>    Solution:
 >!>       keep yast2-installation
@@ -241,7 +241,7 @@
 >!>       Ignore this requirement generally
 >!>       
 >!> Problem:
->!> yast2-tv has missing dependencies
+>!> yast2-tv-2.13.7-2.noarch has missing dependencies
 >!> There are no alternative installed providers of yast2-packager for yast2-tv-2.13.7-2.noarch
 >!>    Solution:
 >!>       keep yast2-packager
@@ -256,7 +256,7 @@
 >!>       Ignore this requirement generally
 >!>       
 >!> Problem:
->!> yast2-update has missing dependencies
+>!> yast2-update-2.13.3-2.x86_64 has missing dependencies
 >!> There are no alternative installed providers of yast2-installation for yast2-update-2.13.3-2.x86_64
 >!>    Solution:
 >!>       keep yast2-installation
@@ -271,7 +271,7 @@
 >!>       Ignore this requirement generally
 >!>       
 >!> Problem:
->!> yast2-vm has missing dependencies
+>!> yast2-vm-2.13.22-2.x86_64 has missing dependencies
 >!> There are no alternative installed providers of yast2-installation for yast2-vm-2.13.22-2.x86_64
 >!>    Solution:
 >!>       keep yast2-installation

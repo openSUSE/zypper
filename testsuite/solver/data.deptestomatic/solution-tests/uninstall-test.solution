@@ -1,7 +1,7 @@
 >!> Uninstalling foo
 >!> 1 problems found:
 >!> Problem:
->!> foo2 has missing dependencies
+>!> foo2-1.0-1.noarch has missing dependencies
 >!> There are no alternative installed providers of foo for foo2-1.0-1.noarch
 >!>    Solution:
 >!>       keep foo
