@@ -55,16 +55,15 @@ namespace zypp
 	_authors(parsed.authors),
 	_keywords( parsed.keywords),
         _mediaNumber(str::strtonum<unsigned int>(parsed.media)),
-        _size(str::strtonum<unsigned int>(parsed.sizeInstalled)),
-        _package_size(str::strtonum<unsigned int>(parsed.sizePackage)),
 	_checksum(parsed.checksumType,
 		  parsed.checksum),
 	_filenames(),
 	_location(parsed.location),
 	_delta_rpms(),
 	_patch_rpms(),
-
 	_install_only(parsed.installOnly),
+        _package_size(str::strtonum<unsigned int>(parsed.sizePackage)),
+        _size(str::strtonum<unsigned int>(parsed.sizeInstalled)),
 	_source(source_r)
 #if 0
       : _size_package(strtol(parsed.sizePackage.c_str(), 0, 10)),
@@ -110,16 +109,15 @@ namespace zypp
 	_authors(parsed.authors),
 	_keywords( parsed.keywords),
 	_mediaNumber(str::strtonum<unsigned int>(parsed.media)),
-        _size(str::strtonum<unsigned int>(parsed.sizeInstalled)),
-        _package_size(str::strtonum<unsigned int>(parsed.sizePackage)),
 	_checksum(parsed.checksumType,
 		  parsed.checksum),
 	_filenames(),
         _location( parsed.plainRpms.empty() ? Pathname() : parsed.plainRpms.front().filename),
 	_delta_rpms(),
 	_patch_rpms(),
-
 	_install_only(parsed.installOnly),
+        _package_size(str::strtonum<unsigned int>(parsed.sizePackage)),
+        _size(str::strtonum<unsigned int>(parsed.sizeInstalled)),
 	_source(source_r)
 #if 0
       : _size_package( strtol(parsed.sizePackage.c_str(), 0, 10)),
