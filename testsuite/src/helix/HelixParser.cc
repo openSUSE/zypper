@@ -467,6 +467,7 @@ HelixParser::toplevelStart(const std::string & token, const xmlChar **attrs)
 
 	fileSize = 0;
 	installedSize = 0;
+	location = 0;
 	installOnly = false;
 	installed = false;
 
