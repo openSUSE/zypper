@@ -102,7 +102,7 @@ namespace zypp
 				 bool checkonly = false);
       /**
        * Provide a file to local filesystem
-       * if the file does not exists, throws an exception, but 
+       * if the file does not exists, throws an exception, but
        * does not release the media, useful to provide
        * optional files you want to check if they exists
        *
@@ -128,8 +128,7 @@ namespace zypp
 			    const bool recursive = false);
 
       const Pathname providePackage( Package::constPtr package );
-      const Pathname providePackageInteractive( Package::constPtr package );
-      
+
       /**
        * Provide info about a directory
        *
@@ -160,7 +159,7 @@ namespace zypp
       void refresh();
 
       virtual void storeMetadata(const Pathname & cache_dir_r);
-      
+
       /**
         * default implementation returns now()
         * so the source is always reread when in doubt
@@ -224,7 +223,7 @@ namespace zypp
 
       /**
        * Get media verifier for the specified medium. In the
-       * default installation, an instance of media::NoVerifier is 
+       * default installation, an instance of media::NoVerifier is
        * returned. The specific implementations of the sources
        * should overload this method to return a proper verifier.
        *
@@ -238,13 +237,13 @@ namespace zypp
       Source_Ref selfSourceRef()
       { return Source_Ref( this ); }
     protected:
-      
+
 
       /**
        * Provide a file to local filesystem on the given path,
        * no checking or progress information redirection.
        * used by \ref provideFile and \ref providePackage.
-       * If \c checkonly is true, no media change callback 
+       * If \c checkonly is true, no media change callback
        * will be invoked.
        *
        * \param path file with a path to be provided by the source
@@ -341,7 +340,7 @@ namespace zypp
       /** Whether the ResStore is initialized.
        * If we know that noone has seen the resolvables yet, we can skip
        * them too, eg. when deleting a source. (#174840)
-       */      
+       */
       bool resStoreInitialized () const
       { return _res_store_initialized; }
 
