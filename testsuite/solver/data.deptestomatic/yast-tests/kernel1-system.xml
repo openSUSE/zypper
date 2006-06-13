@@ -9,7 +9,7 @@
       <hid>12345</hid>
       <version>2.6.1</version>
       <release>2</release>
-      <arch>x86_64</arch>
+      <arch>i586</arch>
     </update>
   </history>
   <provides>
@@ -17,11 +17,11 @@
     <dep name='kernel-default-nongpl' />
     <dep name='k_deflt' />
     <dep name='kernel(arch_i386_kernel_cpu_mtrr)' op='=' version='badf815515a4fe72' />
-    <dep name='kernel(arch_x86_64_ia32)' op='=' version='f2b399f001cd962f' />
-    <dep name='kernel(arch_x86_64_kernel)' op='=' version='3e35902e27909451' />
-    <dep name='kernel(arch_x86_64_kernel_acpi)' op='=' version='b3c4009d03c84eee' />
-    <dep name='kernel(arch_x86_64_lib)' op='=' version='fcba93b45952eb63' />
-    <dep name='kernel(arch_x86_64_mm)' op='=' version='dcbf78f107b35862' />
+    <dep name='kernel(arch_i586_ia32)' op='=' version='f2b399f001cd962f' />
+    <dep name='kernel(arch_i586_kernel)' op='=' version='3e35902e27909451' />
+    <dep name='kernel(arch_i586_kernel_acpi)' op='=' version='b3c4009d03c84eee' />
+    <dep name='kernel(arch_i586_lib)' op='=' version='fcba93b45952eb63' />
+    <dep name='kernel(arch_i586_mm)' op='=' version='dcbf78f107b35862' />
     <dep name='kernel(block)' op='=' version='37337a8e12c85963' />
     <dep name='kernel(crypto)' op='=' version='66b8f65def368586' />
     <dep name='kernel(drivers)' op='=' version='f651153e9e3fadaf' />
@@ -211,7 +211,7 @@
       <hid>12345</hid>
       <version>1_2.6.1</version>
       <release>5</release>
-      <arch>x86_64</arch>
+      <arch>i586</arch>
     </update>
   </history>
   <requires>

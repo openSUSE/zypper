@@ -1,14 +1,8 @@
 >!> Uninstalling SuSE-Documentation
 >!> No problems so far
 >!> Solution #1:
->!> remove  htdig-3.2.0b6-14.i586[packages]
->!> remove  info2html-1.4-9.noarch[packages]
 >!> remove  man-pages-2.25-2.noarch
->!> remove  man-pages-2.25-2.noarch[packages]
 >!> remove  selection:SuSE-Documentation-10-46.noarch
->!> remove  susehelp-2006.03.03-5.noarch[packages]
 >!> remove  susehelp_en-2006.03.03-5.noarch
->!> remove  susehelp_en-2006.03.03-5.noarch[packages]
 >!> remove  suselinux-manual_en-10.1-10.noarch
->!> remove  wget-1.10.2-8.i586[packages]
 >!> installs=0, upgrades=0, uninstalls=4

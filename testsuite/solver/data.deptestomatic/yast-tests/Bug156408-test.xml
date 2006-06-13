@@ -14,10 +14,6 @@
 <trial>
   <install channel="sles_packages" kind="product" name="SUSE SLES"/>
   <install channel="sl10_packages" kind="product" name="SUSE LINUX"/>
-  <install channel="sles_packages" kind="pattern" name="ccb"/>
-  <install channel="sles_packages" kind="pattern" name="Basis-Devel"/>
-  <install channel="sles_packages" kind="pattern" name="default"/>
-  <install channel="sles_packages" kind="pattern" name="kde"/>
   <install channel="sl10_packages" kind="package" name="grub"/>
   <install channel="sl10_packages" kind="package" name="kernel-default"/>
   <install channel="sl10_packages" kind="package" name="yast2-trans-de"/>

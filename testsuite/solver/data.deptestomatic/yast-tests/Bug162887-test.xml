@@ -10,7 +10,6 @@
   <mediaid/>
 </setup>
 <trial>
-  <install channel="sl10_packages" kind="product" name="SUSE LINUX"/>
   <install channel="sl10_selections" kind="selection" name="Multimedia"/>
   <install channel="sl10_selections" kind="selection" name="Basis-Devel"/>
   <install channel="sl10_selections" kind="selection" name="Java"/>
@@ -23,14 +22,12 @@
   <install channel="sl10_selections" kind="selection" name="default"/>
   <install channel="sl10_selections" kind="selection" name="Fonts"/>
   <install channel="sl10_packages" kind="package" name="OpenOffice_org"/>
-  <install channel="sl10_packages" kind="package" name="acroread"/>
   <install channel="sl10_packages" kind="package" name="bluez-cups"/>
   <install channel="sl10_packages" kind="package" name="bluez-firmware"/>
   <install channel="sl10_packages" kind="package" name="bluez-hcidump"/>
   <install channel="sl10_packages" kind="package" name="bluez-utils"/>
   <install channel="sl10_packages" kind="package" name="grub"/>
   <install channel="sl10_packages" kind="package" name="ial"/>
-  <install channel="sl10_packages" kind="package" name="ipw-firmware"/>
   <install channel="sl10_packages" kind="package" name="toshutils"/>
   <install channel="sl10_packages" kind="package" name="unixODBC"/>
   <install channel="sl10_packages" kind="package" name="wget"/>
