@@ -82,9 +82,10 @@ namespace zypp
   /** KeyRing implementation. */
   struct KeyRing::Impl
   {
-    Impl(const Pathname &baseTmpDir) :  _general_tmp_dir(baseTmpDir)
-        , _trusted_tmp_dir(baseTmpDir)
-        
+    Impl(const Pathname &baseTmpDir)
+    : _trusted_tmp_dir(baseTmpDir)
+    ,  _general_tmp_dir(baseTmpDir)
+
     {
       _base_dir = baseTmpDir;
     }
@@ -128,7 +129,7 @@ namespace zypp
 
     const Pathname generalKeyRing() const;
     const Pathname trustedKeyRing() const;
-    
+
     // Used for trusted and untrusted keyrings
     TmpDir _trusted_tmp_dir;
     TmpDir _general_tmp_dir;
@@ -148,17 +149,17 @@ namespace zypp
     { return new Impl( *this ); }
   };
 
-  
+
   const Pathname KeyRing::Impl::generalKeyRing() const
   {
     return _general_tmp_dir.path();
   }
-  
+
   const Pathname KeyRing::Impl::trustedKeyRing() const
   {
     return _trusted_tmp_dir.path();
   }
-  
+
   void KeyRing::Impl::importKey( const Pathname &keyfile, bool trusted)
   {
     importKey( keyfile, trusted ? trustedKeyRing() : generalKeyRing() );
@@ -344,7 +345,7 @@ namespace zypp
   PublicKey KeyRing::Impl::readPublicKey( const Pathname &keyfile )
   {
     TmpDir dir(_base_dir);
-    
+
     const char* argv[] =
     {
       "gpg",
@@ -521,7 +522,7 @@ namespace zypp
     // HACK create a tmp keyring with no keys
     TmpDir dir(_base_dir);
     TmpFile fakeData(_base_dir);
-    
+
     const char* argv[] =
     {
       "gpg",
