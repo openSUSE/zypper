@@ -12,6 +12,7 @@
 #ifndef ZYPP_CHECKSUM_H
 #define ZYPP_CHECKSUM_H
 
+#include <iosfwd>
 #include <string>
 
 #include "zypp/base/String.h"
@@ -42,11 +43,6 @@ namespace zypp
     CheckSum()
     {}
 
-    inline bool operator==( const CheckSum &rhs )
-    {
-      return ((rhs.type() == _type) && (rhs.checksum() == _checksum));
-    }
-    
     std::string type() const
     { return _type; }
     std::string checksum() const
@@ -58,6 +54,19 @@ namespace zypp
     std::string _type;
     std::string _checksum;
   };
+
+  /** \relates CheckSum Stream output. */
+  inline std::ostream & operator<<( std::ostream & str, const CheckSum & obj )
+  { return str << (obj.empty() ? obj.type()+"-"+obj.checksum() : std::string("NoCheckSum") ); }
+
+  /** \relates CheckSum */
+  inline bool operator==( const CheckSum & lhs, const CheckSum & rhs )
+  { return lhs.checksum() == rhs.checksum() && lhs.type() == rhs.type(); }
+
+  /** \relates CheckSum */
+  inline bool operator!=( const CheckSum & lhs, const CheckSum & rhs )
+  { return ! ( lhs == rhs ); }
+
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
 #endif // ZYPP_CHECKSUM_H
