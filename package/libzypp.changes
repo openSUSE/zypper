@@ -1,4 +1,17 @@
 -------------------------------------------------------------------
+Wed Jun 14 12:06:57 CEST 2006 - mt@suse.de
+
+- Implemented transfer timeout inside of the progress callback.
+  The timeout value can be set using timeout url parameter, the
+  default transfer timeout is 180 seconds. (#181602)
+- Added ssl_verify and ssl_capath url options used in https scheme,
+  allowing to change or disable the ssl verify options. (#171622)
+- Added fallback on read failures of /etc/mtab to /proc/mounts.
+  Improved verbosity in mount and mount check related failure cases,
+  incl. /etc/mtab dump. (#181606)
+- rev 3620
+
+-------------------------------------------------------------------
 Wed Jun 14 10:49:10 CEST 2006 - kkaempf@suse.de
 
 - combine knownAliases and knownUrls in a single function.
