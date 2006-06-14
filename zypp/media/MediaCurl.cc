@@ -33,6 +33,7 @@
 
 #define  DETECT_DIR_INDEX       0
 
+
 using namespace std;
 using namespace zypp::base;
 
@@ -266,22 +267,80 @@ void MediaCurl::attachTo (bool next)
     }
   }
 
-  if ( _url.getScheme() == "https" ) {
-    ret = curl_easy_setopt( _curl, CURLOPT_SSL_VERIFYPEER, 1 );
+  if ( _url.getScheme() == "https" )
+  {
+    bool verify_peer = false;
+    bool verify_host = false;
+
+    std::string verify( _url.getQueryParam("ssl_verify"));
+    if( verify.empty() ||
+        verify == "yes")
+    {
+      verify_peer = true;
+      verify_host = true;
+    }
+    else
+    if( verify == "no")
+    {
+      verify_peer = false;
+      verify_host = false;
+    }
+    else
+    {
+      std::vector<std::string>                 flags;
+      std::vector<std::string>::const_iterator flag;
+      str::split( verify, std::back_inserter(flags), ",");
+      for(flag = flags.begin(); flag != flags.end(); ++flag)
+      {
+	if( *flag == "host")
+	{
+	  verify_host = true;
+	}
+	else
+	if( *flag == "peer")
+	{
+	  verify_peer = true;
+	}
+	else
+	{
+      	  disconnectFrom();
+	  ZYPP_THROW(MediaBadUrlException(_url, "Unknown ssl_verify flag"));
+	}
+      }
+    }
+
+    _ca_path = Pathname(_url.getQueryParam("ssl_capath")).asString();
+    if( _ca_path.empty())
+    {
+	_ca_path = "/etc/ssl/certs/";
+    }
+    else
+    if( !PathInfo(_ca_path).isDir() || !Pathname(_ca_path).absolute())
+    {
+        disconnectFrom();
+	ZYPP_THROW(MediaBadUrlException(_url, "Invalid ssl_capath path"));
+    }
+
+    if( verify_peer || verify_host)
+    {
+      ret = curl_easy_setopt( _curl, CURLOPT_CAPATH, _ca_path.c_str());
+      if ( ret != 0 ) {
+        disconnectFrom();
+        ZYPP_THROW(MediaCurlSetOptException(_url, _curlError));
+      }
+    }
+
+    ret = curl_easy_setopt( _curl, CURLOPT_SSL_VERIFYPEER, verify_peer ? 1L : 0L);
     if ( ret != 0 ) {
       disconnectFrom();
       ZYPP_THROW(MediaCurlSetOptException(_url, _curlError));
     }
-    ret = curl_easy_setopt( _curl, CURLOPT_CAPATH, "/etc/ssl/certs/" );
+    ret = curl_easy_setopt( _curl, CURLOPT_SSL_VERIFYHOST, verify_host ? 2L : 0L);
     if ( ret != 0 ) {
       disconnectFrom();
       ZYPP_THROW(MediaCurlSetOptException(_url, _curlError));
     }
-    ret = curl_easy_setopt( _curl, CURLOPT_SSL_VERIFYHOST, 2 );
-    if ( ret != 0 ) {
-      disconnectFrom();
-      ZYPP_THROW(MediaCurlSetOptException(_url, _curlError));
-    }
+
     ret = curl_easy_setopt ( _curl, CURLOPT_USERAGENT, _agent.c_str() );
     if ( ret != 0) {
       disconnectFrom();
