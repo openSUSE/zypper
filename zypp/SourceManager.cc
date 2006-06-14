@@ -459,10 +459,10 @@ namespace zypp
     }
   }
 
-  SourceManager::AliasUrlList SourceManager::knownAliasesAndUrls(const Pathname &root_r)
+  SourceManager::SourceInfoList SourceManager::knownSourceInfos(const Pathname &root_r)
   {
     storage::PersistentStorage store;
-    AliasUrlList result;
+    SourceInfoList result;
     store.init( root_r );
 
     std::list<storage::PersistentStorage::SourceData> sources = store.storedSources();
@@ -472,7 +472,8 @@ namespace zypp
     for( std::list<storage::PersistentStorage::SourceData>::iterator it = sources.begin();
 	 it != sources.end(); ++it)
     {
-      result.push_back( make_pair( it->alias, it->url ) );
+      SourceInfo info = { it->alias, it->url, it->type, it->autorefresh };
+      result.push_back( info );
     }
     return result;
   }

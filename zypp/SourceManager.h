@@ -143,8 +143,9 @@ namespace zypp
      *
      * \throws Exception
      */
-    typedef std::list<std::pair<std::string, Url> > AliasUrlList;
-    AliasUrlList knownAliasesAndUrls(const Pathname &root_r);
+    typedef struct { std::string alias; Url url; std::string type; bool autorefresh; } SourceInfo;
+    typedef std::list<SourceInfo> SourceInfoList;
+    SourceInfoList knownSourceInfos(const Pathname &root_r);
     
     /**
      * Store the current state to the given path
