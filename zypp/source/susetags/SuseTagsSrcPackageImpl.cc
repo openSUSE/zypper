@@ -28,8 +28,8 @@ namespace zypp
       //	METHOD TYPE : Ctor
       //
       SuseTagsSrcPackageImpl::SuseTagsSrcPackageImpl(Source_Ref source_r)
-      : _media_number( 1 )
-      , _source( source_r )
+      : _source( source_r )
+      , _media_number( 1 )
       {}
 
       ///////////////////////////////////////////////////////////////////

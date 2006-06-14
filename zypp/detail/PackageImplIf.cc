@@ -80,10 +80,10 @@ namespace zypp
       std::list<std::string> PackageImplIf::filenames() const
       { return std::list<std::string>(); }
 
-      std::list<DeltaRpm> PackageImplIf::deltaRpms() const
+      std::list<PackageImplIf::DeltaRpm> PackageImplIf::deltaRpms() const
       { return std::list<DeltaRpm>(); }
 
-      std::list<PatchRpm> PackageImplIf::patchRpms() const
+      std::list<PackageImplIf::PatchRpm> PackageImplIf::patchRpms() const
       { return std::list<PatchRpm>(); }
 
     /////////////////////////////////////////////////////////////////

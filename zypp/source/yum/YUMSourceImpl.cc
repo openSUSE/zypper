@@ -67,7 +67,7 @@ namespace zypp
       {
         return PathInfo(repomdFile()).mtime();
       }
-      
+
       bool YUMSourceImpl::cacheExists()
       {
         bool exists = PathInfo(repomdFile()).isExist();
@@ -78,39 +78,39 @@ namespace zypp
 
         return exists;
       }
-      
+
       const Pathname YUMSourceImpl::metadataRoot() const
       {
         return _cache_dir.empty() ? _tmp_metadata_dir : _cache_dir;
       }
-      
+
       const Pathname YUMSourceImpl::repomdFile() const
       {
         return metadataRoot() + "/repodata/repomd.xml";
       }
-      
+
       const Pathname YUMSourceImpl::repomdFileSignature() const
       {
         return metadataRoot() + "/repodata/repomd.xml.asc";
       }
-      
+
       const Pathname YUMSourceImpl::repomdFileKey() const
       {
         return metadataRoot() + "/repodata/repomd.xml.key";
       }
-      
+
       const TmpDir YUMSourceImpl::downloadMetadata()
       {
         TmpDir tmpdir;
         int copy_result;
         MIL << "Downloading metadata to " << tmpdir.path() << std::endl;
-        
+
         Pathname local_dir = tmpdir.path();
         if (0 != assert_dir(local_dir + "/repodata" , 0755))
           ZYPP_THROW(Exception("Cannot create /repodata in download directory"));
-        
+
         MIL << "Storing data to tmp dir " << local_dir << endl;
-        
+
         // first read list of all files in the repository
         Pathname remote_repomd;
         try
@@ -131,18 +131,18 @@ namespace zypp
         catch( const Exception &e ) {
           WAR << "Repository does not contain repomd signing key" << std::endl;
         }
-        
+
         try {
           remote_repomd_signature = tryToProvideFile( _path + "/repodata/repomd.xml.asc");
         }
         catch( const Exception &e ) {
           WAR << "Repository does not contain repomd signature" << std::endl;
         }
-        
+
         copy_result = filesystem::copy( remote_repomd, local_dir + "/repodata/repomd.xml");
         if ( copy_result != 0 )
           ZYPP_THROW(Exception("Can't copy " + remote_repomd.asString() + " to " + local_dir.asString() + "/repodata/repomd.xml"));
-          
+
         if (PathInfo(remote_repomd_key).isExist())
         {
           copy_result = filesystem::copy( remote_repomd_key, local_dir + "/repodata/repomd.xml.key");
@@ -150,14 +150,14 @@ namespace zypp
             ZYPP_THROW(Exception("Can't copy " + remote_repomd_key.asString() + " to " + local_dir.asString() + "/repodata/repomd.xml.key"));
           getZYpp()->keyRing()->importKey(local_dir + "/repodata/repomd.xml.key" , false);
         }
-        
+
         if (PathInfo(remote_repomd_signature).isExist())
-        {  
+        {
           copy_result = filesystem::copy( remote_repomd_signature, local_dir + "/repodata/repomd.xml.asc");
           if ( copy_result != 0 )
             ZYPP_THROW(Exception("Can't copy " + remote_repomd_signature.asString() + " to " + local_dir.asString() + "/repodata/repomd.xml.asc"));
         }
-        
+
         DBG << "Reading file " << remote_repomd << endl;
         ifstream repo_st(remote_repomd.asString().c_str());
         YUMRepomdParser repomd(repo_st, "");
@@ -178,17 +178,17 @@ namespace zypp
           }
 
           Pathname dst = local_dir + (*repomd)->location;
-          
+
           //if (0 != assert_dir(dst, 0755))
           //  ZYPP_THROW(Exception("Cannot create directory: " + dst.asString()));
-          
+
           if ( filesystem::copy(src, dst) != 0 )
             ZYPP_THROW(Exception("Can't copy " + src.asString() + " to " + dst.asString()));
-          
+
           if (! checkCheckSum( dst, (*repomd)->checksumType, (*repomd)->checksum))
             ZYPP_THROW(Exception( (*repomd)->location + " " + N_(" fails checksum verification.") ));
-          
-            
+
+
           // if it is a patch, we read the patches individually
           if ((*repomd)->type == "patches")
           {
@@ -211,32 +211,32 @@ namespace zypp
                 ZYPP_CAUGHT(e);
                 ZYPP_THROW(Exception("Can't provide patch " + _path.asString() + (*repomd)->location + " from " + url().asString()));
               }
-              
+
               patch_dst = local_dir + filename;
-                
+
               if ( filesystem::copy(patch_src, patch_dst) != 0 )
                 ZYPP_THROW(Exception("Can't copy patch file " + patch_src.asString() + " to " + patch_dst.asString()));
-                
+
               // check patch checksum
               if (! checkCheckSum( patch_dst, (*patch)->checksumType, (*patch)->checksum))
                 ZYPP_THROW(Exception( (*repomd)->location + " " + N_(" fails checksum verification.") ));
             } // end of single patch parsing
           }// end of patches file parsing
         } // end of copying
-        
+
         // check signature
         MIL << "Checking [" << (local_dir + "/repodata/repomd.xml") << "] signature"  << endl;
         if (! getZYpp()->keyRing()->verifyFileSignatureWorkflow(local_dir + "/repodata/repomd.xml", (_path + "/repodata/repomd.xml").asString()+ " (" + url().asString() + ")", local_dir + "/repodata/repomd.xml.asc"))
           ZYPP_THROW(Exception(N_("Signed repomd.xml file fails signature check")));
-        
+
         // ok, now we have a consistent repo in the tmpdir.
         return tmpdir;
       }
-      
+
       void YUMSourceImpl::factoryInit()
       {
         resetMediaVerifier();
-        
+
         bool cache = cacheExists();
         if ( cache )
         {
@@ -257,7 +257,7 @@ namespace zypp
             saveMetadataTo(_cache_dir);
           }
         }
-        
+
         MIL << "YUM source initialized." << std::endl;
         MIL << "   Url      : " << url() << std::endl;
         MIL << "   Path     : " << path() << std::endl;
@@ -319,7 +319,7 @@ namespace zypp
           {
             ZYPP_THROW(Exception("Can't provide " + _path.asString() + "/repodata/repomd.xml from " + url().asString() ));
           }
-          
+
           CheckSum old_repomd_checksum( "SHA1", filesystem::sha1sum(localdir + "/repodata/repomd.xml"));
           CheckSum new_repomd_checksum( "SHA1", filesystem::sha1sum(remote_repomd));
           if ( (new_repomd_checksum == old_repomd_checksum) && (!new_repomd_checksum.empty()) && (! old_repomd_checksum.empty()))
@@ -329,9 +329,9 @@ namespace zypp
         }
         return true;
       }
-      
+
       void YUMSourceImpl::storeMetadata(const Pathname & cache_dir_r)
-      {        
+      {
         if ( !_cache_dir.empty() )
         {
           saveMetadataTo(cache_dir_r);
@@ -341,15 +341,15 @@ namespace zypp
           // no previous cache, use the data read temporarely
           copyLocalMetadata(_tmp_metadata_dir.path(), cache_dir_r);
         }
-        
+
         MIL << "Metadata saved in " << cache_dir_r << ". Setting as cache." << std::endl;
         _cache_dir = cache_dir_r;
       }
-      
+
       void YUMSourceImpl::saveMetadataTo(const Pathname & dir_r)
       {
         TmpDir download_tmp_dir;
-        
+
         bool need_to_refresh = true;
         try
         {
@@ -359,17 +359,17 @@ namespace zypp
         {
           ZYPP_THROW(Exception("Can't check if source has changed or not. Aborting refresh."));
         }
-        
+
         if ( need_to_refresh )
         {
           MIL << "YUM source " << alias() << "has changed since last download. Re-reading metadata into " << dir_r << endl;
         }
         else
         {
-          MIL << "YUM source " << alias() << "has not changed. Refresh completed. SHA1 of repomd.xml file is  the same." << std::endl;    
+          MIL << "YUM source " << alias() << "has not changed. Refresh completed. SHA1 of repomd.xml file is  the same." << std::endl;
           return;
         }
-        
+
         try
         {
           download_tmp_dir = downloadMetadata();
@@ -378,9 +378,9 @@ namespace zypp
         {
           ZYPP_THROW(Exception("Downloading metadata failed (is YUM source?) or user did not accept remote source. Aborting refresh."));
         }
-        
+
         copyLocalMetadata(download_tmp_dir, dir_r);
-        
+
         // download_tmp_dir go out of scope now but it is ok as we already copied the content.
       }
 
@@ -400,7 +400,7 @@ namespace zypp
 
         //---------------------------------
         // repomd
-        
+
         try
         {
           DBG << "Reading ifgz file " << repomdFile() << endl;
@@ -512,7 +512,7 @@ namespace zypp
 	    for (; !prim.atEnd(); ++prim)
 	    {
 	      if (*prim == NULL) continue;	// incompatible arch detected during parsing
-              
+
               Arch arch;
               if (!(*prim)->arch.empty())
                 arch = Arch((*prim)->arch);
@@ -602,7 +602,7 @@ namespace zypp
 
         //---------------------------------
         // products
-        try 
+        try
         {
           for (std::list<YUMRepomdData_Ptr>::const_iterator it = repo_product.begin();
             it != repo_product.end();
@@ -638,20 +638,20 @@ namespace zypp
             DBG << "Reading file " << filename << endl;
             ifgzstream st ( filename.asString().c_str() );
             YUMPatchesParser patch(st, "");
-            
+
             for (; !patch.atEnd(); ++patch)
             {
               string filename = (*patch)->location;
               patch_files.push_back(filename);
             }
-            
+
             if (patch.errorStatus())
-              ZYPP_THROW(Exception(patch.errorStatus()->msg()));            
+              ZYPP_THROW(Exception(patch.errorStatus()->msg()));
            }
 
             //---------------------------------
             // now the individual patch files
-    
+
            for (std::list<std::string>::const_iterator it = patch_files.begin();
               it != patch_files.end();
               it++)
@@ -779,22 +779,22 @@ namespace zypp
 	  impl->_install_only = parsed.installOnly;
 
 	  //DBG << "Inserting patch RPMs" << endl;
-	  impl->_patch_rpms = std::list<PatchRpm>();
+	  impl->_patch_rpms = std::list<YUMPackageImpl::PatchRpm>();
 	  for (std::list<YUMPatchRpm>::const_iterator it = parsed.patchRpms.begin();
 	    it != parsed.patchRpms.end(); ++it)
 	  {
-	    std::list<BaseVersion> bv_list;
+	    std::list<YUMPackageImpl::BaseVersion> bv_list;
 	    for (std::list<YUMBaseVersion>::const_iterator bvit = it->baseVersions.begin();
 	      bvit != it->baseVersions.end(); ++bvit)
 	    {
-	      BaseVersion bv(
+	      YUMPackageImpl::BaseVersion bv(
 		Edition (bvit->ver, bvit->rel, bvit->epoch),
                 CheckSum("md5", bvit->md5sum),
 		strtol(bvit->buildtime.c_str(), 0, 10)
 	      );
 	      bv_list.push_back(bv);
 	    }
-	    PatchRpm patch_rpm(
+	    YUMPackageImpl::PatchRpm patch_rpm(
 	      Arch(it->arch),
 	      Pathname(it->location),
 	      strtol(it->downloadsize.c_str(), 0, 10),
@@ -808,17 +808,17 @@ namespace zypp
 
 	  //DBG << "Inserting delta RPMs" << endl;
 
-	  impl->_delta_rpms = std::list<DeltaRpm>();
+	  impl->_delta_rpms = std::list<YUMPackageImpl::DeltaRpm>();
 	  for (std::list<YUMDeltaRpm>::const_iterator it = parsed.deltaRpms.begin();
 	    it != parsed.deltaRpms.end(); ++it)
 	  {
-	    DeltaRpm delta_rpm(
+	    YUMPackageImpl::DeltaRpm delta_rpm(
 	      Arch(it->arch),
 	      Pathname(it->location),
 	      strtol(it->downloadsize.c_str(), 0, 10),
 	      CheckSum (it->checksumType, it->checksum),
 	      strtol(it->buildtime.c_str(), 0, 10),
-	      BaseVersion(
+	      YUMPackageImpl::BaseVersion(
 		Edition (it->baseVersion.ver, it->baseVersion.rel, it->baseVersion.epoch),
                 CheckSum("md5", it->baseVersion.md5sum),
 		strtol(it->baseVersion.buildtime.c_str(), 0, 10)
@@ -1178,7 +1178,7 @@ namespace zypp
     {
         _deps[Dep::PREREQUIRES].insert(createCapability(*it, my_kind));
     }
-    
+
     for (std::list<YUMDependency>::const_iterator it = parsed.requires.begin();
 	it != parsed.requires.end();
 	it++)

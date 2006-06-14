@@ -17,8 +17,6 @@
 #include "zypp/parser/yum/YUMParserData.h"
 #include "zypp/Changelog.h"
 #include "zypp/CheckSum.h"
-#include "zypp/PatchRpm.h"
-#include "zypp/DeltaRpm.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -134,16 +132,14 @@ namespace zypp
 	CheckSum _checksum;
 	std::list<std::string> _filenames;
 	Pathname _location;
-//	std::list<PlainRpm> _plain_rpms;
-#warning shouldn't be a list
 	std::list<DeltaRpm> _delta_rpms;
 	std::list<PatchRpm> _patch_rpms;
 
 	bool _install_only;
-        
+
         unsigned int _package_size;
         unsigned int _size;
-        
+
 /*
 	unsigned _size_package;
 	std::string _sourcepkg;

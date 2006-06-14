@@ -19,9 +19,8 @@
 #include "zypp/Edition.h"
 #include "zypp/Arch.h"
 #include "zypp/Changelog.h"
-#include "zypp/PatchRpm.h"
-#include "zypp/DeltaRpm.h"
 #include "zypp/DiskUsage.h"
+#include "zypp/source/PackageDelta.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -43,6 +42,11 @@ namespace zypp
     {
     public:
       typedef Package ResType;
+
+    public:
+      typedef packagedelta::BaseVersion BaseVersion;
+      typedef packagedelta::DeltaRpm    DeltaRpm;
+      typedef packagedelta::PatchRpm    PatchRpm;
 
     public:
       /** \name Rpm Package Attributes. */

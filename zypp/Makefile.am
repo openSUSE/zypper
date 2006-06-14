@@ -77,9 +77,6 @@ pkginclude_HEADERS = NeedAType.h \
 	DiskUsage.h	\
 	DiskUsageCounter.h	\
 	CheckSum.h	\
-	BaseVersion.h	\
-	PatchRpm.h	\
-	DeltaRpm.h	\
 	VendorAttr.h	\
 	UpgradeStatistics.h	\
 	TranslatedText.h \

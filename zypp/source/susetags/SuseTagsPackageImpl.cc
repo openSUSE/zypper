@@ -147,11 +147,11 @@ namespace zypp
       std::list<std::string> SuseTagsPackageImpl::filenames() const
       { return std::list<std::string>(); }
 
-      std::list<DeltaRpm> SuseTagsPackageImpl::deltaRpms() const
-      { return std::list<DeltaRpm>(); }
+      std::list<detail::PackageImplIf::DeltaRpm> SuseTagsPackageImpl::deltaRpms() const
+      { return detail::PackageImplIf::deltaRpms(); }
 
-      std::list<PatchRpm> SuseTagsPackageImpl::patchRpms() const
-      { return std::list<PatchRpm>(); }
+      std::list<detail::PackageImplIf::PatchRpm> SuseTagsPackageImpl::patchRpms() const
+      { return detail::PackageImplIf::patchRpms(); }
 
       bool SuseTagsPackageImpl::installOnly() const
       { return false; }

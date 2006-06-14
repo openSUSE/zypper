@@ -316,10 +316,10 @@ namespace zypp
       CheckSum YUMPackageImpl::checksum() const
       { return _checksum; }
 
-      std::list<DeltaRpm> YUMPackageImpl::deltaRpms() const
+      std::list<detail::PackageImplIf::DeltaRpm> YUMPackageImpl::deltaRpms() const
       { return _delta_rpms; }
 
-      std::list<PatchRpm> YUMPackageImpl::patchRpms() const
+      std::list<detail::PackageImplIf::PatchRpm> YUMPackageImpl::patchRpms() const
       { return _patch_rpms; }
 
       Source_Ref YUMPackageImpl::source() const
