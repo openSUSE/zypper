@@ -4,23 +4,17 @@ namespace yum = "http://linux.duke.edu/metadata/common"
 
 include "suse-primary.rnc" {
   start = element-patch
-  # patches use localized summary and description fields
+
+# patches use localized summary and description fields
   element-summary = element summary { localized-string }+
   element-description = element description { localized-string }+
-  element-license-to-confirm = element license-to-confirm { localized-string }
-  # packages in patches have an additional rpmfiles element
-  element-package = element yum:package { package, element-pkgfiles, element license-to-confirm { localized-string }+ }
-  # names in dependencies can include a "kind". Should not be used for packages.
-  attribute-name =
-    attribute kind { "package" | "patch" | "script" | "message" | "product" }?,
-    attribute name { text }
+  element-license-to-confirm = element license-to-confirm { localized-string }  
+# packages in patches have an additional rpmfiles element
+  element-package = element yum:package { package & element-pkgfiles & (element license-to-confirm { localized-string }?) }
 }
 
-element-patch = element patch { patch }
 
-localized-string =
-  attribute lang { text },
-  text
+element-patch = element patch { patch }
 
 patch =
   attribute patchid { text },
@@ -31,24 +25,16 @@ patch =
   element-description,
   element-license-to-confirm*,
   element-version,
-  dependency-block?,
+  ( element-provides | element-conflicts | element-obsoletes | element-requires | element-freshens | element-recommends | element-suggests | element-supplements | element-enhances )*,
   element-category,
   element reboot-needed { empty }?,
   element package-manager { empty }?,
   element-update-script?,
   element atoms { (element-package | element-script | element-message)+ }+
 
+# shortcut since all atoms have the same dependency section
 dependency-block =
-  # shortcut since all atoms have the same dependency section
-  element-provides?,
-  element-conflicts?,
-  element-obsoletes?,
-  element-freshens?,
-  element-requires?,
-  element-recommends?,
-  element-suggests?,
-  element-supplements?,
-  element-enhances?
+  ( element-provides | element-conflicts | element-obsoletes | element-requires | element-freshens | element-recommends | element-suggests | element-supplements | element-enhances )*
 
 element-category =
   element category { "youfix" | "security" | "recommended" | "bonus" | "beta" }

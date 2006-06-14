@@ -1,25 +1,13 @@
 default namespace = "http://linux.duke.edu/metadata/rpm"
 namespace ns1 = "http://linux.duke.edu/metadata/common"
-
+namespace rpm = "http://linux.duke.edu/metadata/rpm"
 
 element-format = 
     element ns1:format { format }
 
 format =
-    element-license,
-    element-vendor,
-    element-group,
-    element-buildhost,
-    element-sourcerpm,
-    element-header-range,
-    element-provides?,
-    element-conflicts?,
-    element-obsoletes?,
-    element-requires?,
-    element-recommends?,
-    element-enhances?,
-    element-supplements?,
-    element-suggests?,
+    ( element-license & element-vendor & element-group & element-buildhost & element-sourcerpm & element-header-range ),
+    ( element-provides | element-conflicts | element-obsoletes | element-requires | element-recommends | element-enhances | element-supplements | element-suggests )*,
     element-file*
 
 
@@ -46,13 +34,10 @@ header-range =
     attribute end { xsd:nonNegativeInteger },
     empty
 
-shared-entry-attributes =
-     attribute epoch { xsd:nonNegativeInteger },
-     attribute ver { text },
-     attribute rel { text }?
+# rel="1" flags="LE" pre="1" ver="4.0" name
 
 attribute-kind = 
-  attribute kind { "package" | "patch" | "script" | "message" | "product"}
+  attribute kind { "package" | "patch" | "script" | "message" | "product" | "atom" }
 
 attribute-flags-provides =
   attribute flags { "EQ" | "LE" | "GE" }
@@ -64,16 +49,38 @@ attribute-flags =
 attribute-name =
      attribute name { text }
 
-usual-entry-content =
-  (
-    attribute-kind?,            # new compared to rpm-ns
-    attribute-name,
-    (
-      shared-entry-attributes,
-      attribute-flags
-    )?,
-    empty
-  )
+shared-entry-attributes =
+    (attribute-kind? & attribute-name & (attribute epoch { xsd:nonNegativeInteger }?) & (attribute rel { text }?) & (attribute ver { text }?) )
+
+usual-entry-content = 
+(
+    (shared-entry-attributes & attribute-flags?)
+    , empty
+)
+  
+element-obsoletes-entry = 
+(
+  element entry {
+    (shared-entry-attributes & attribute-flags-obsoletes?)
+    , empty
+  }
+)  
+  
+element-provides-entry = 
+(
+  element entry {
+    (shared-entry-attributes & attribute-flags-provides?)
+    , empty
+}
+)  
+  
+element-requires-entry = 
+(
+  element entry {
+    ( shared-entry-attributes & attribute-flags? & (attribute pre { "1" | "0" }?))
+    , empty
+  }
+)    
   
 element-entry =
   element entry {
@@ -84,107 +91,49 @@ element-provides =
     element provides { provides }
     
 provides =
-    element entry {
-      attribute-name,
-      (
-        shared-entry-attributes,
-        attribute-flags-provides
-      )?,
-      empty
-    }+
+    element-provides-entry*
 
 element-conflicts =
     element conflicts { conflicts }
 
 conflicts =
-    element entry {
-      attribute-name,
-      (
-        shared-entry-attributes,
-        attribute-flags
-      )?,
-      empty
-    }+
+    element-entry*
 
 
 element-obsoletes =
     element obsoletes { obsoletes }
 
 obsoletes =
-    element entry {
-      attribute-name,
-      (
-        shared-entry-attributes,
-        attribute-flags-obsoletes
-      )?,
-      empty
-    }+
+    element-obsoletes-entry*
 
 element-requires =
     element requires { requires }
 
-requires =
-    element entry {
-      attribute-name,
-      (
-        shared-entry-attributes,
-        attribute-flags
-      )?,
-      attribute pre { "1" | "0" }?,
-        empty
-      }*
+requires = element-requires-entry*
 
 element-suggests =
     element suggests { suggests }
 
 suggests =
-    element entry {
-      attribute-name,
-      (
-        shared-entry-attributes,
-        attribute-flags
-      )?,
-      empty
-      }*
+    element-entry*
 
 element-recommends =
     element recommends { recommends }
 
 recommends =
-    element entry {
-      attribute-name,
-      (
-        shared-entry-attributes,
-        attribute-flags
-      )?,
-      empty
-      }*
+    element-entry*
 
 element-enhances =
     element enhances { enhances }
 
 enhances =
-    element entry {
-      attribute-name,
-      (
-        shared-entry-attributes,
-        attribute-flags
-      )?,
-      empty
-      }*
+    element-entry*
 
 element-supplements =
     element supplements { supplements }
 
 supplements =
-    element entry {
-      attribute-name,
-      (
-        shared-entry-attributes,
-        attribute-flags
-      )?,
-      empty
-      }*
+    element-entry*
 
 element-file =
     element ns1:file { file }
@@ -195,3 +144,13 @@ file =
 
 dependencies =
     element-provides? & element-conflicts? & element-obsoletes? & element-requires? & element-suggests? & element-enhances? & element-supplements? & element-recommends?
+
+#dependencies =
+#    element-provides?,
+#    element-conflicts?,
+#    element-obsoletes?,
+#    element-requires?,
+#    element-suggests?,
+#    element-enhances?,
+#    element-supplements?,
+#    element-recommends?

@@ -27,39 +27,22 @@
     <!-- packages in patches have an additional rpmfiles element -->
     <define name="element-package">
       <element name="yum:package">
-        <ref name="package"/>
-        <ref name="element-pkgfiles"/>
-        <oneOrMore>
-          <element name="license-to-confirm">
-            <ref name="localized-string"/>
-          </element>
-        </oneOrMore>
+        <interleave>
+          <ref name="package"/>
+          <ref name="element-pkgfiles"/>
+          <optional>
+            <element name="license-to-confirm">
+              <ref name="localized-string"/>
+            </element>
+          </optional>
+        </interleave>
       </element>
-    </define>
-    <!-- names in dependencies can include a "kind". Should not be used for packages. -->
-    <define name="attribute-name">
-      <optional>
-        <attribute name="kind">
-          <choice>
-            <value>package</value>
-            <value>patch</value>
-            <value>script</value>
-            <value>message</value>
-            <value>product</value>
-          </choice>
-        </attribute>
-      </optional>
-      <attribute name="name"/>
     </define>
   </include>
   <define name="element-patch">
     <element name="patch">
       <ref name="patch"/>
     </element>
-  </define>
-  <define name="localized-string">
-    <attribute name="lang"/>
-    <text/>
   </define>
   <define name="patch">
     <attribute name="patchid"/>
@@ -74,9 +57,19 @@
       <ref name="element-license-to-confirm"/>
     </zeroOrMore>
     <ref name="element-version"/>
-    <optional>
-      <ref name="dependency-block"/>
-    </optional>
+    <zeroOrMore>
+      <choice>
+        <ref name="element-provides"/>
+        <ref name="element-conflicts"/>
+        <ref name="element-obsoletes"/>
+        <ref name="element-requires"/>
+        <ref name="element-freshens"/>
+        <ref name="element-recommends"/>
+        <ref name="element-suggests"/>
+        <ref name="element-supplements"/>
+        <ref name="element-enhances"/>
+      </choice>
+    </zeroOrMore>
     <ref name="element-category"/>
     <optional>
       <element name="reboot-needed">
@@ -103,35 +96,21 @@
       </element>
     </oneOrMore>
   </define>
+  <!-- shortcut since all atoms have the same dependency section -->
   <define name="dependency-block">
-    <optional>
-      <!-- shortcut since all atoms have the same dependency section -->
-      <ref name="element-provides"/>
-    </optional>
-    <optional>
-      <ref name="element-conflicts"/>
-    </optional>
-    <optional>
-      <ref name="element-obsoletes"/>
-    </optional>
-    <optional>
-      <ref name="element-freshens"/>
-    </optional>
-    <optional>
-      <ref name="element-requires"/>
-    </optional>
-    <optional>
-      <ref name="element-recommends"/>
-    </optional>
-    <optional>
-      <ref name="element-suggests"/>
-    </optional>
-    <optional>
-      <ref name="element-supplements"/>
-    </optional>
-    <optional>
-      <ref name="element-enhances"/>
-    </optional>
+    <zeroOrMore>
+      <choice>
+        <ref name="element-provides"/>
+        <ref name="element-conflicts"/>
+        <ref name="element-obsoletes"/>
+        <ref name="element-requires"/>
+        <ref name="element-freshens"/>
+        <ref name="element-recommends"/>
+        <ref name="element-suggests"/>
+        <ref name="element-supplements"/>
+        <ref name="element-enhances"/>
+      </choice>
+    </zeroOrMore>
   </define>
   <define name="element-category">
     <element name="category">

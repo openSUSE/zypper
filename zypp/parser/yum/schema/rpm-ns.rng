@@ -1,41 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<grammar xmlns:ns1="http://linux.duke.edu/metadata/common" ns="http://linux.duke.edu/metadata/rpm" xmlns="http://relaxng.org/ns/structure/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+<grammar xmlns:ns1="http://linux.duke.edu/metadata/common" xmlns:rpm="http://linux.duke.edu/metadata/rpm" ns="http://linux.duke.edu/metadata/rpm" xmlns="http://relaxng.org/ns/structure/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
   <define name="element-format">
     <element name="ns1:format">
       <ref name="format"/>
     </element>
   </define>
   <define name="format">
-    <ref name="element-license"/>
-    <ref name="element-vendor"/>
-    <ref name="element-group"/>
-    <ref name="element-buildhost"/>
-    <ref name="element-sourcerpm"/>
-    <ref name="element-header-range"/>
-    <optional>
-      <ref name="element-provides"/>
-    </optional>
-    <optional>
-      <ref name="element-conflicts"/>
-    </optional>
-    <optional>
-      <ref name="element-obsoletes"/>
-    </optional>
-    <optional>
-      <ref name="element-requires"/>
-    </optional>
-    <optional>
-      <ref name="element-recommends"/>
-    </optional>
-    <optional>
-      <ref name="element-enhances"/>
-    </optional>
-    <optional>
-      <ref name="element-supplements"/>
-    </optional>
-    <optional>
-      <ref name="element-suggests"/>
-    </optional>
+    <interleave>
+      <ref name="element-license"/>
+      <ref name="element-vendor"/>
+      <ref name="element-group"/>
+      <ref name="element-buildhost"/>
+      <ref name="element-sourcerpm"/>
+      <ref name="element-header-range"/>
+    </interleave>
+    <zeroOrMore>
+      <choice>
+        <ref name="element-provides"/>
+        <ref name="element-conflicts"/>
+        <ref name="element-obsoletes"/>
+        <ref name="element-requires"/>
+        <ref name="element-recommends"/>
+        <ref name="element-enhances"/>
+        <ref name="element-supplements"/>
+        <ref name="element-suggests"/>
+      </choice>
+    </zeroOrMore>
     <zeroOrMore>
       <ref name="element-file"/>
     </zeroOrMore>
@@ -79,15 +69,7 @@
     </attribute>
     <empty/>
   </define>
-  <define name="shared-entry-attributes">
-    <attribute name="epoch">
-      <data type="nonNegativeInteger"/>
-    </attribute>
-    <attribute name="ver"/>
-    <optional>
-      <attribute name="rel"/>
-    </optional>
-  </define>
+  <!-- rel="1" flags="LE" pre="1" ver="4.0" name -->
   <define name="attribute-kind">
     <attribute name="kind">
       <choice>
@@ -96,6 +78,7 @@
         <value>script</value>
         <value>message</value>
         <value>product</value>
+        <value>atom</value>
       </choice>
     </attribute>
   </define>
@@ -132,17 +115,74 @@
   <define name="attribute-name">
     <attribute name="name"/>
   </define>
+  <define name="shared-entry-attributes">
+    <interleave>
+      <optional>
+        <ref name="attribute-kind"/>
+      </optional>
+      <ref name="attribute-name"/>
+      <optional>
+        <attribute name="epoch">
+          <data type="nonNegativeInteger"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="rel"/>
+      </optional>
+      <optional>
+        <attribute name="ver"/>
+      </optional>
+    </interleave>
+  </define>
   <define name="usual-entry-content">
-    <optional>
-      <ref name="attribute-kind"/>
-    </optional>
-    <!-- new compared to rpm-ns -->
-    <ref name="attribute-name"/>
-    <optional>
+    <interleave>
       <ref name="shared-entry-attributes"/>
-      <ref name="attribute-flags"/>
-    </optional>
+      <optional>
+        <ref name="attribute-flags"/>
+      </optional>
+    </interleave>
     <empty/>
+  </define>
+  <define name="element-obsoletes-entry">
+    <element name="entry">
+      <interleave>
+        <ref name="shared-entry-attributes"/>
+        <optional>
+          <ref name="attribute-flags-obsoletes"/>
+        </optional>
+      </interleave>
+      <empty/>
+    </element>
+  </define>
+  <define name="element-provides-entry">
+    <element name="entry">
+      <interleave>
+        <ref name="shared-entry-attributes"/>
+        <optional>
+          <ref name="attribute-flags-provides"/>
+        </optional>
+      </interleave>
+      <empty/>
+    </element>
+  </define>
+  <define name="element-requires-entry">
+    <element name="entry">
+      <interleave>
+        <ref name="shared-entry-attributes"/>
+        <optional>
+          <ref name="attribute-flags"/>
+        </optional>
+        <optional>
+          <attribute name="pre">
+            <choice>
+              <value>1</value>
+              <value>0</value>
+            </choice>
+          </attribute>
+        </optional>
+      </interleave>
+      <empty/>
+    </element>
   </define>
   <define name="element-entry">
     <element name="entry">
@@ -155,16 +195,9 @@
     </element>
   </define>
   <define name="provides">
-    <oneOrMore>
-      <element name="entry">
-        <ref name="attribute-name"/>
-        <optional>
-          <ref name="shared-entry-attributes"/>
-          <ref name="attribute-flags-provides"/>
-        </optional>
-        <empty/>
-      </element>
-    </oneOrMore>
+    <zeroOrMore>
+      <ref name="element-provides-entry"/>
+    </zeroOrMore>
   </define>
   <define name="element-conflicts">
     <element name="conflicts">
@@ -172,16 +205,9 @@
     </element>
   </define>
   <define name="conflicts">
-    <oneOrMore>
-      <element name="entry">
-        <ref name="attribute-name"/>
-        <optional>
-          <ref name="shared-entry-attributes"/>
-          <ref name="attribute-flags"/>
-        </optional>
-        <empty/>
-      </element>
-    </oneOrMore>
+    <zeroOrMore>
+      <ref name="element-entry"/>
+    </zeroOrMore>
   </define>
   <define name="element-obsoletes">
     <element name="obsoletes">
@@ -189,16 +215,9 @@
     </element>
   </define>
   <define name="obsoletes">
-    <oneOrMore>
-      <element name="entry">
-        <ref name="attribute-name"/>
-        <optional>
-          <ref name="shared-entry-attributes"/>
-          <ref name="attribute-flags-obsoletes"/>
-        </optional>
-        <empty/>
-      </element>
-    </oneOrMore>
+    <zeroOrMore>
+      <ref name="element-obsoletes-entry"/>
+    </zeroOrMore>
   </define>
   <define name="element-requires">
     <element name="requires">
@@ -207,22 +226,7 @@
   </define>
   <define name="requires">
     <zeroOrMore>
-      <element name="entry">
-        <ref name="attribute-name"/>
-        <optional>
-          <ref name="shared-entry-attributes"/>
-          <ref name="attribute-flags"/>
-        </optional>
-        <optional>
-          <attribute name="pre">
-            <choice>
-              <value>1</value>
-              <value>0</value>
-            </choice>
-          </attribute>
-        </optional>
-        <empty/>
-      </element>
+      <ref name="element-requires-entry"/>
     </zeroOrMore>
   </define>
   <define name="element-suggests">
@@ -232,14 +236,7 @@
   </define>
   <define name="suggests">
     <zeroOrMore>
-      <element name="entry">
-        <ref name="attribute-name"/>
-        <optional>
-          <ref name="shared-entry-attributes"/>
-          <ref name="attribute-flags"/>
-        </optional>
-        <empty/>
-      </element>
+      <ref name="element-entry"/>
     </zeroOrMore>
   </define>
   <define name="element-recommends">
@@ -249,14 +246,7 @@
   </define>
   <define name="recommends">
     <zeroOrMore>
-      <element name="entry">
-        <ref name="attribute-name"/>
-        <optional>
-          <ref name="shared-entry-attributes"/>
-          <ref name="attribute-flags"/>
-        </optional>
-        <empty/>
-      </element>
+      <ref name="element-entry"/>
     </zeroOrMore>
   </define>
   <define name="element-enhances">
@@ -266,14 +256,7 @@
   </define>
   <define name="enhances">
     <zeroOrMore>
-      <element name="entry">
-        <ref name="attribute-name"/>
-        <optional>
-          <ref name="shared-entry-attributes"/>
-          <ref name="attribute-flags"/>
-        </optional>
-        <empty/>
-      </element>
+      <ref name="element-entry"/>
     </zeroOrMore>
   </define>
   <define name="element-supplements">
@@ -283,14 +266,7 @@
   </define>
   <define name="supplements">
     <zeroOrMore>
-      <element name="entry">
-        <ref name="attribute-name"/>
-        <optional>
-          <ref name="shared-entry-attributes"/>
-          <ref name="attribute-flags"/>
-        </optional>
-        <empty/>
-      </element>
+      <ref name="element-entry"/>
     </zeroOrMore>
   </define>
   <define name="element-file">
@@ -338,3 +314,14 @@
     </interleave>
   </define>
 </grammar>
+<!--
+  dependencies =
+     element-provides?,
+     element-conflicts?,
+     element-obsoletes?,
+     element-requires?,
+     element-suggests?,
+     element-enhances?,
+     element-supplements?,
+     element-recommends?
+-->

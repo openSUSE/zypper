@@ -26,21 +26,27 @@
     </element>
   </define>
   <define name="package">
-    <attribute name="type">
-      <value>rpm</value>
-    </attribute>
-    <ref name="element-name"/>
-    <ref name="element-arch"/>
-    <ref name="element-version"/>
-    <ref name="element-checksum"/>
-    <ref name="element-summary"/>
-    <ref name="element-description"/>
-    <ref name="element-packager"/>
-    <ref name="element-url"/>
-    <ref name="element-time"/>
-    <ref name="element-size"/>
-    <ref name="element-location"/>
-    <ref name="element-format"/>
+    <interleave>
+      <attribute name="type">
+        <value>rpm</value>
+      </attribute>
+      <ref name="element-name"/>
+      <ref name="element-arch"/>
+      <ref name="element-version"/>
+      <ref name="element-checksum"/>
+      <zeroOrMore>
+        <ref name="element-summary"/>
+      </zeroOrMore>
+      <zeroOrMore>
+        <ref name="element-description"/>
+      </zeroOrMore>
+      <ref name="element-packager"/>
+      <ref name="element-url"/>
+      <ref name="element-time"/>
+      <ref name="element-size"/>
+      <ref name="element-location"/>
+      <ref name="element-format"/>
+    </interleave>
   </define>
   <define name="element-name">
     <element name="name">
@@ -104,14 +110,20 @@
     </attribute>
     <text/>
   </define>
+  <define name="localized-string">
+    <optional>
+      <attribute name="lang"/>
+    </optional>
+    <text/>
+  </define>
   <define name="element-summary">
     <element name="summary">
-      <text/>
+      <ref name="localized-string"/>
     </element>
   </define>
   <define name="element-description">
     <element name="description">
-      <text/>
+      <ref name="localized-string"/>
     </element>
   </define>
   <define name="element-packager">

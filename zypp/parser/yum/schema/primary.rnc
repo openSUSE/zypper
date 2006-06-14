@@ -19,18 +19,18 @@ element-package =
   element package { package }
 
 package = 
-    attribute type { "rpm" },
-    element-name,
-    element-arch,
-    element-version,
-    element-checksum,
-    element-summary,
-    element-description,
-    element-packager,
-    element-url,
-    element-time,
-    element-size,
-    element-location,
+    attribute type { "rpm" } &
+    element-name &
+    element-arch &
+    element-version &
+    element-checksum &
+    (element-summary*) &
+    (element-description*) &
+    element-packager &
+    element-url &
+    element-time &
+    element-size &
+    element-location &
     element-format
 
 element-name =
@@ -71,11 +71,15 @@ checksum =
     attribute pkgid { "YES" | "NO" },
     text
     
+localized-string =
+  attribute lang { text }?,
+  text    
+    
 element-summary =
-    element summary { text }
+    element summary { localized-string }
 
 element-description =
-    element description { text }
+    element description { localized-string }
 
 element-packager =
     element packager { text }

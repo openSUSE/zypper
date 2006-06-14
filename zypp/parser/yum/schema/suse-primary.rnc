@@ -6,38 +6,8 @@ namespace ns2 = "http://linux.duke.edu/metadata/rpm"
 include "primary.rnc" {
 
   element-format = 
-    element ns1:format { suse-format }
-   
-  element-provides =
-    ( element suse:provides { suse-provides } | element ns2:provides { provides } )
-  element-requires =
-    ( element suse:requires { suse-requires } | element ns2:requires { requires } )
-  element-conflicts =
-    ( element suse:conflicts { suse-conflicts } | element ns2:conflicts { conflicts } )
-  element-recommends =
-    ( element suse:recommends { suse-recommends } | element ns2:recommends { recommends } )
-  element-enhances =
-    ( element suse:enhances { suse-enhances }  | element ns2:enhances { enhances } )
-  element-supplements = 
-    ( element suse:supplements { suse-supplements }  | element ns2:supplements { supplements } )
-  element-suggests =
-    ( element suse:suggests { suse-suggests }  | element ns2:suggests { suggests } )
-  element-obsoletes =
-    ( element suse:obsoletes { suse-obsoletes }  | element ns2:obsoletes { obsoletes } )
-    
-  dependencies = suse-dependencies
+  element ns1:format { suse-format }
 }
-
-element-capability =
-  element ns1:capability {
-    attribute-kind?,
-    text
-}
-
-usual-entry-or-capability = (
-  element-entry |
-  element-capability
-)
 
 suse-format =
     format&
@@ -51,26 +21,6 @@ suse-additional-format =
     element-freshens?,
     element-install-only?,
     element license-to-confirm { localized-string }*
-
-suse-provides =
-    usual-entry-or-capability+
-suse-requires =
-    usual-entry-or-capability+
-suse-conflicts =
-    usual-entry-or-capability+
-suse-recommends =
-    usual-entry-or-capability+
-suse-enhances =
-    usual-entry-or-capability+
-suse-supplements =
-    usual-entry-or-capability+
-suse-suggests =
-    usual-entry-or-capability+
-suse-obsoletes =
-    usual-entry-or-capability+
-
-suse-dependencies = 
-    element-provides? & element-conflicts? & element-obsoletes? & freshens? & element-requires? & element-suggests? & element-enhances? & element-supplements? & element-recommends?
 
 element-authors =
   element authors { authors }
@@ -109,10 +59,10 @@ dirsize =
     empty
 
 element-freshens =
-    ( element suse:freshens { freshens } | element freshens { freshens } )
+    element freshens { freshens }
 
 freshens =
-    usual-entry-or-capability+
+    element-entry*
 
 element-install-only =
     element install-only { empty }
