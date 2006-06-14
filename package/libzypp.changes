@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Jun 14 22:43:40 CEST 2006 - kkaempf@suse.de
+
+- Atoms might only be installed via patches (#184714)
+- rev 3642
+
+-------------------------------------------------------------------
 Wed Jun 14 17:26:39 CEST 2006 - dmacvicar@suse.de
 
 - fix for the last stall tmpfile (#178292)
