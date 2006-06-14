@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Jun 14 10:49:10 CEST 2006 - kkaempf@suse.de
+
+- combine knownAliases and knownUrls in a single function.
+- rev 3616
+
+-------------------------------------------------------------------
 Mon Jun 12 16:27:46 CEST 2006 - kkaempf@suse.de
 
 - honor parallel installs in resolver context (#181103)

@@ -459,10 +459,10 @@ namespace zypp
     }
   }
 
-  std::list<std::string> SourceManager::knownAliases(const Pathname &root_r)
+  SourceManager::AliasUrlList SourceManager::knownAliasesAndUrls(const Pathname &root_r)
   {
     storage::PersistentStorage store;
-    std::list<std::string> aliases;
+    AliasUrlList result;
     store.init( root_r );
 
     std::list<storage::PersistentStorage::SourceData> sources = store.storedSources();
@@ -472,29 +472,11 @@ namespace zypp
     for( std::list<storage::PersistentStorage::SourceData>::iterator it = sources.begin();
 	 it != sources.end(); ++it)
     {
-      aliases.push_back(it->alias);
+      result.push_back( make_pair( it->alias, it->url ) );
     }
-    return aliases;
+    return result;
   }
     
-  std::list<Url> SourceManager::knownUrls(const Pathname &root_r)
-  {
-    storage::PersistentStorage store;
-    std::list<Url> urls;
-    store.init( root_r );
-
-    std::list<storage::PersistentStorage::SourceData> sources = store.storedSources();
-
-    MIL << "Found sources: " << sources.size() << endl;
-
-    for( std::list<storage::PersistentStorage::SourceData>::iterator it = sources.begin();
-	 it != sources.end(); ++it)
-    {
-      urls.push_back(it->url);
-    }
-    return urls;
-  }
-  
   /******************************************************************
   **
   **	FUNCTION NAME : operator<<
