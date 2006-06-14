@@ -598,6 +598,7 @@ namespace zypp
 
     void SourceImpl::refresh()
     {
+	MIL << "Refreshing" << endl;
 	// TODO: will this work in chroot?
 	// TODO: better download somewhere else and then copy over
 	try{
