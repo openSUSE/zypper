@@ -9,7 +9,7 @@ Wed Jun 14 12:06:57 CEST 2006 - mt@suse.de
 - Added fallback on read failures of /etc/mtab to /proc/mounts.
   Improved verbosity in mount and mount check related failure cases,
   incl. /etc/mtab dump. (#181606)
-- rev 3620
+- rev 3623
 
 -------------------------------------------------------------------
 Wed Jun 14 10:49:10 CEST 2006 - kkaempf@suse.de
