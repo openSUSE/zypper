@@ -20,8 +20,9 @@ noinst_LTLIBRARIES =	lib@PACKAGE@_source.la
 
 ## ##################################################
 
-lib@PACKAGE@_source_la_SOURCES =	\
-	SourceImpl.cc			\
+lib@PACKAGE@_source_la_SOURCES = \
+	SourceImpl.cc	\
+	PackageDelta.cc	\
 	MediaSet.cc
 
 

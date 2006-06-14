@@ -13,6 +13,7 @@
 #define ZYPP_SOURCE_PACKAGEDELTA_H
 
 #include <iosfwd>
+#include <list>
 
 #include "zypp/Date.h"
 #include "zypp/ByteCount.h"
@@ -56,11 +57,29 @@ namespace zypp
       Date     _buildtime;
     };
 
+    /** \relates BaseVersion Stream output. */
+    std::ostream & operator<<( std::ostream & str, const BaseVersion & obj );
+
+    /** \relates BaseVersion */
     inline bool operator==( const BaseVersion & lhs, const BaseVersion & rhs )
     { return lhs.edition() == rhs.edition(); }
 
+    /** \relates BaseVersion */
     inline bool operator!=( const BaseVersion & lhs, const BaseVersion & rhs )
     { return ! (lhs == rhs); }
+
+    ///////////////////////////////////////////////////////////////////
+
+    ///////////////////////////////////////////////////////////////////
+    namespace detail
+    { /////////////////////////////////////////////////////////////////
+
+
+
+      /////////////////////////////////////////////////////////////////
+    } // namespace detail
+    ///////////////////////////////////////////////////////////////////
+
 
     ///////////////////////////////////////////////////////////////////
 
@@ -98,7 +117,7 @@ namespace zypp
       Date buildtime() const
       { return _buildtime; }
 
-      std::list<BaseVersion> baseVersions() const
+      const std::list<BaseVersion> & baseVersions() const
       { return _base_versions; }
 
       unsigned mediaNr() const
