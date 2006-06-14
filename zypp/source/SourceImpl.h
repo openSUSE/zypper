@@ -351,10 +351,7 @@ namespace zypp
       /** Ctor, excl. for nullimpl only.
        * Nullimpl has no Id (\c 0).
       */
-      SourceImpl( const null & )
-      : base::ProvideNumericId<SourceImpl,Source_Ref::NumericId>( NULL )
-      , _res_store_initialized(true)
-      {}
+      SourceImpl( const null & );
 
     public:
       /** Offer default Impl. */
