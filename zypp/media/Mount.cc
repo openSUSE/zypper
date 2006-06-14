@@ -259,14 +259,28 @@ void Mount::Kill()
 MountEntries
 Mount::getEntries(const std::string &mtab)
 {
-  MountEntries entries;
-  std::string  _mtab( mtab.empty() ? "/etc/mtab" : mtab);
-
-  if(_mtab == "/etc/mtab"  ||
-     _mtab == "/etc/fstab" ||
-     _mtab == "/proc/mounts")
+  MountEntries             entries;
+  std::vector<std::string> mtabs;
+  bool                     verbose = false;
+ 
+  if( mtab.empty())
   {
-    FILE *fp = setmntent(_mtab.c_str(), "r");
+    mtabs.push_back("/etc/mtab");
+    mtabs.push_back("/proc/mounts");
+  }
+  else
+  {
+    mtabs.push_back(mtab);
+  }
+
+  std::vector<std::string>::const_iterator t;
+  for( t=mtabs.begin(); t != mtabs.end(); ++t)
+  {
+    if( verbose)
+    {
+      DBG << "Reading mount table from '" << *t << "'" << std::endl;
+    }
+    FILE *fp = setmntent(t->c_str(), "r");
     if( fp)
     {
       char          buf[PATH_MAX * 4];
@@ -295,6 +309,27 @@ Mount::getEntries(const std::string &mtab)
         }
       }
       endmntent(fp);
+
+      if( entries.empty())
+      {
+        WAR << "Unable to read any entry from the mount table '" << *t << "'"
+	    << std::endl;
+      }
+      else
+      {
+	// OK, have a non-empty mount table.
+        t = mtabs.end();
+	break;
+      }
+    }
+    else
+    {
+      int err = errno;
+      verbose = true;
+      WAR << "Failed to read the mount table '" << *t << "': "
+          << ::strerror(err)
+	  << std::endl;
+      errno = err;
     }
   }
   return entries;

@@ -333,7 +333,7 @@ MediaHandler::createAttachPoint(const Pathname &attach_root) const
   }
 
   PathInfo adir( attach_root);
-  if( !adir.isDir() || !adir.userMayRWX()) {
+  if( !adir.isDir() || (getuid() != 0 && !adir.userMayRWX())) {
     DBG << "Create attach point: attach root is not a writable directory: '"
         << attach_root << "'" << std::endl;
     return apoint;
@@ -529,6 +529,19 @@ MediaHandler::checkAttached(bool matchMountFs) const
 
       if( !_isAttached)
       {
+	if(  entries.empty())
+	{
+	  ERR << "Unable to find any entry in the /etc/mtab file" << std::endl;
+	}
+	else
+	{
+	  MountEntries::const_iterator e;
+	  for( e = entries.begin(); e != entries.end(); ++e)
+	  {
+	    XXX << "mount entry: " << e->src << " on " << e->dir
+	        << " type " << e->type << "(" << e->opts << ")" << endl;
+	  }
+	}
 	if( old_mtime > 0)
 	{
           ERR << "Attached media not in mount table any more - forcing reset!"

@@ -124,9 +124,10 @@ namespace zypp {
 	*
 	* @param mtab The name of the (mounted) file system description
 	*             file to read from. This file should be one /etc/mtab,
-	*             /etc/fstab or /proc/mounts. Defaults is /etc/mtab.
-	* @returns A vector with mount entries or empty vector if the
-	*          \p mtab parameter was not allowed or read error occurs.
+	*             /etc/fstab or /proc/mounts. Default is to try the
+	*             /etc/mtab and fail back to /proc/mounts.
+	* @returns A vector with mount entries or empty vector if reading
+	*          or parsing of the mtab file(s) failed.
 	*/
 	static MountEntries
 	getEntries(const std::string &mtab = "");

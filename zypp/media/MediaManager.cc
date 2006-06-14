@@ -360,13 +360,21 @@ namespace zypp
       static inline time_t
       getMountTableMTime()
       {
-        return zypp::PathInfo("/etc/mtab").mtime();
+        time_t mtime = zypp::PathInfo("/etc/mtab").mtime();
+        if( mtime <= 0)
+        {
+          WAR << "Failed to retrieve modification time of '/etc/mtab'"
+              << std::endl;
+        }
+        return mtime;
       }
 
       static inline MountEntries
       getMountEntries()
       {
-        return Mount::getEntries("/etc/mtab");
+        // use "/etc/mtab" by default,
+        // fallback to "/proc/mounts"
+        return Mount::getEntries(/* "/etc/mtab" */);
       }
 
     };
