@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Thu Jun 15 07:26:29 CEST 2006 - kkaempf@suse.de
+
+- Dont use getZYpp in static constructor (#185198)
+  Bugfix #178292 was wrong.
+- Only warn on incompleting installed resolvables (#185197)
+- rev 3644
+
+-------------------------------------------------------------------
 Wed Jun 14 22:43:40 CEST 2006 - kkaempf@suse.de
 
 - Atoms might only be installed via patches (#184714)
