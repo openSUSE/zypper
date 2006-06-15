@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Jun 15 17:53:40 CEST 2006 - mvidner@suse.cz
+
+- autodocs: use find+xargs to overcome command length limit,
+  do not call doxygen unnecessarily (#185334).
+
+-------------------------------------------------------------------
 Thu Jun 15 07:26:29 CEST 2006 - kkaempf@suse.de
 
 - Dont use getZYpp in static constructor (#185198)
