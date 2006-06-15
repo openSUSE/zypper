@@ -97,9 +97,10 @@ namespace zypp
     /** Ctor, excl. for nullimpl only.
      * Nullimpl has no Id (\c 0).
      */
-    SourceImpl::SourceImpl( const null & ) : base::ProvideNumericId<SourceImpl,Source_Ref::NumericId>( NULL )
+    SourceImpl::SourceImpl( const null & )
+	: base::ProvideNumericId<SourceImpl,Source_Ref::NumericId>( NULL )
+        , _tmp_metadata_dir("/var/tmp/zypp.0") 
         , _res_store_initialized(true)
-        , _tmp_metadata_dir(getZYpp()->tmpPath()) 
     {}
     
     ///////////////////////////////////////////////////////////////////
