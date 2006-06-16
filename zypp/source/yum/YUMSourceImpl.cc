@@ -362,11 +362,11 @@ namespace zypp
 
         if ( need_to_refresh )
         {
-          MIL << "YUM source " << alias() << "has changed since last download. Re-reading metadata into " << dir_r << endl;
+          MIL << "YUM source '" << alias() << "' has changed since last download. Re-reading metadata into " << dir_r << endl;
         }
         else
         {
-          MIL << "YUM source " << alias() << "has not changed. Refresh completed. SHA1 of repomd.xml file is  the same." << std::endl;
+          MIL << "YUM source '" << alias() << "' has not changed. Refresh completed. SHA1 of repomd.xml file is  the same." << std::endl;
           return;
         }
 
