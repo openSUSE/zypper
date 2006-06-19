@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Jun 19 13:52:14 CEST 2006 - dmacvicar@suse.de
+
+- right fix for tmpdir initialized in static constructor
+- catch around provideJustFile in providePackage
+
+-------------------------------------------------------------------
 Thu Jun 15 17:53:40 CEST 2006 - mvidner@suse.cz
 
 - autodocs: use find+xargs to overcome command length limit,
