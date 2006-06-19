@@ -73,7 +73,7 @@ namespace zypp
 	else if (_do_location != "" && _do_location != "/")
 	{
 	  Pathname script = source().provideFile(_do_location, _do_media);
-	  if (! YUMSourceImpl::checkCheckSum(script, _do_checksum.type(), _do_checksum.checksum()))
+          if (! filesystem::is_checksum(script, _do_checksum))
 	  {
 	    ZYPP_THROW(Exception(N_("Failed check for the script file check sum")));
 	  }
@@ -97,7 +97,7 @@ namespace zypp
 	else if (_undo_location != "" && _undo_location != "/")
 	{
 	  Pathname script = source().provideFile(_undo_location, _undo_media);
-	  if (! YUMSourceImpl::checkCheckSum(script, _undo_checksum.type(), _undo_checksum.checksum()))
+          if (! filesystem::is_checksum(script, _undo_checksum) )
 	  {
 	    ZYPP_THROW(Exception(N_("Failed check for the script file check sum")));
 	  }

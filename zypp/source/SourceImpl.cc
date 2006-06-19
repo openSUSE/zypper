@@ -281,6 +281,77 @@ namespace zypp
       return file;
     }
 
+    const Pathname SourceImpl::downloadMetadataFile( const Pathname &file_to_download )
+    {
+      
+      Pathname downloaded_file;
+      
+      bool retry = true;
+      callback::SendReport<source::DownloadFileReport> report;
+      report->start( selfSourceRef(), url() ); 
+      while (retry)
+      {
+        try
+        {
+          downloaded_file = provideFile(file_to_download);
+          report->finish( url(), DownloadFileReport::NO_ERROR, file_to_download.asString() + " downloaded " + url().asString() );
+          retry = false;
+        }
+        catch (const Exception &e)
+        {
+          if ( report->problem(url(), DownloadFileReport::IO, "Can't provide " + file_to_download.asString() + " from " + url().asString()) != DownloadFileReport::RETRY )
+          {
+            report->finish( url(), DownloadFileReport::IO, "Can't provide " + file_to_download.asString() + " from " + url().asString() );
+            ZYPP_THROW(Exception("Can't provide " + file_to_download.asString() + " from " + url().asString() ));
+          }
+        }
+      }
+      return downloaded_file;
+    }
+    
+    void SourceImpl::getPossiblyCachedMetadataFile( const Pathname &file_to_download, const Pathname &destination, const Pathname &cached_file, const CheckSum &checksum )
+    {
+        Url file_url( url().asString() + file_to_download.asString() );
+        // if we have a cached file and its the same
+        if ( PathInfo(cached_file).isExist() && (! checksum.empty()) && is_checksum( cached_file, checksum ) )
+        {
+          MIL << "file " << file_url << " found in previous cache. Using cached copy." << std::endl;
+          // checksum is already checked.
+          // we could later implement double failover and try to download if file copy fails.
+          if ( filesystem::copy(cached_file, destination) != 0 )
+            ZYPP_THROW(Exception("Can't copy " + cached_file.asString() + " to " + destination.asString()));
+        }
+        else
+        {
+          // we dont have it or its not the same, download it.
+          Pathname downloaded_file = downloadMetadataFile( file_to_download);
+          
+          if ( filesystem::copy(downloaded_file, destination) != 0 )
+            ZYPP_THROW(Exception("Can't copy " + downloaded_file.asString() + " to " + destination.asString()));
+
+          callback::SendReport<DigestReport> report;
+          if ( checksum.empty() )
+          {
+            MIL << "File " <<  file_url << " has no checksum available." << std::endl;
+            if ( report->askUserToAcceptNoDigest(file_to_download) )
+            {
+              MIL << "User accepted " <<  file_url << " with no checksum." << std::endl;
+              return;
+            }
+            else
+            {
+              ZYPP_THROW(Exception( file_url.asString() + " " + N_(" miss checksum.") ));
+            }
+          }
+          else
+          {
+            if (! is_checksum( destination, checksum))
+              ZYPP_THROW(Exception( file_url.asString() + " " + N_(" fails checksum verification.") ));
+          }
+          
+        }
+    }
+
     void SourceImpl::resetMediaVerifier()
     {
       try

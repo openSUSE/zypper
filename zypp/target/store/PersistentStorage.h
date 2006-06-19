@@ -19,6 +19,7 @@
 #include "zypp/base/PtrTypes.h"
 #include <zypp/Pathname.h>
 #include <zypp/Url.h>
+#include <zypp/Date.h>
 #include <zypp/Patch.h>
 
 ///////////////////////////////////////////////////////////////////
@@ -73,6 +74,11 @@ namespace zypp
        */
        bool isInitialized() const;
 
+       /**
+        * last modification
+        */
+       Date timestamp() const;
+       
       /**
        * Stores a Resolvable in the active backend.
        */

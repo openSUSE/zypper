@@ -144,6 +144,7 @@ namespace zypp
         
         const Pathname metadataRoot() const;
         bool cacheExists();
+
         const TmpDir downloadMetadata();
         void saveMetadataTo(const Pathname & dir_r);
         const Pathname repomdFile() const;
@@ -157,9 +158,6 @@ namespace zypp
 
 	typedef std::map<zypp::NVRA, ImplAndPackage> PackageImplMapT;
 	PackageImplMapT _package_impl;
-
-      public:
-	static bool checkCheckSum (const Pathname & filename, std::string csum_type, const std::string & csum);
 
       };
 

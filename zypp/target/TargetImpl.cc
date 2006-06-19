@@ -538,6 +538,36 @@ namespace zypp
       srclist_r.swap( collect._toSrcinstall );
     }
 
+    Date TargetImpl::timestamp() const
+    {
+      Date ts_rpm;
+      Date ts_store;
+      
+      PathInfo rpmdb_info(root() + "/var/lib/rpm/Packages"); 
+      if ( rpmdb_info.isExist() )
+        ts_rpm = rpmdb_info.mtime();
+          
+      if ( isStorageEnabled() )
+        ts_store = _storage.timestamp();      
+      
+      if ( ts_rpm > ts_store )
+      {
+        return ts_rpm;
+      }
+      else if (ts_rpm < ts_store)
+      {
+        return ts_store;
+      }
+      else
+      {
+        // they are the same
+        if ( ts_rpm != 0 )
+          return ts_rpm;
+        else
+          return Date::now();
+      }
+    }
+    
     /////////////////////////////////////////////////////////////////
   } // namespace target
   ///////////////////////////////////////////////////////////////////

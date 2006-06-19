@@ -100,6 +100,9 @@ namespace zypp
   bool Target::setInstallationLogfile(const Pathname & path_r)
   { return _pimpl->setInstallationLogfile(path_r); }
 
+  Date Target::timestamp() const
+  { return _pimpl->timestamp(); }
+  
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////

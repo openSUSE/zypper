@@ -7,6 +7,12 @@ Mon Jun 19 15:17:17 CEST 2006 - mt@suse.de
 -------------------------------------------------------------------
 Mon Jun 19 13:52:14 CEST 2006 - dmacvicar@suse.de
 
+- merge download algorithm and refactoring from branch
+  (#181204)
+  
+-------------------------------------------------------------------
+Mon Jun 12 15:37:10 CEST 2006 - dmacvicar@suse.de
+
 - right fix for tmpdir initialized in static constructor
 - catch around provideJustFile in providePackage
 -rev 3654
@@ -133,6 +139,14 @@ Tue Jun  6 22:24:00 CEST 2006 - ma@suse.de
 
 - fixed memory leak in XMLSourceCacheParser (#168690)
 - revision 3517
+
+-------------------------------------------------------------------
+Wed Jun  7 01:00:05 CEST 2006 - dmacvicar@suse.de
+
+- Fixes unneeded file download, and add download callbacks
+  (still need yast side) #181204 and #160206
+- Fix stalle tmpdir due to cyclic references, using a master
+  TmpDir for zypp. # 178292
 
 -------------------------------------------------------------------
 Fri Jun  2 16:09:03 CEST 2006 - schubi@suse.de

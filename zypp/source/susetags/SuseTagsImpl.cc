@@ -92,7 +92,16 @@ namespace zypp
       
       bool SuseTagsImpl::downloadNeeded(const Pathname & localdir)
       {
-        Pathname new_media_file = provideFile("media.1/media");
+        Pathname new_media_file;
+        try {
+          new_media_file = tryToProvideFile("media.1/media");
+        }
+        catch( const Exception &e )
+        {
+          MIL << "media file used to determine if source changed not found. Assuming refresh needed." << std::endl;
+          return true;
+        }
+        
         // before really download all the data and init the cache, check
         // if the source has really changed, otherwise, make it quick
         Pathname cached_media_file = localdir + "/MEDIA/media.1/media";
@@ -263,18 +272,39 @@ namespace zypp
         // now we have the content file copied, we need to init data and descrdir from the product
         readContentFile(local_dir + "/DATA/content");
         
-        try {
-          descr_src = provideDirTree(mediaDescrDir());        
-        }
-        catch(Exception &e) {
-          ZYPP_THROW(Exception("Can't provide " + _path.asString() + "  " + mediaDescrDir().asString() + " from " + url().asString() ));
-        }
+        // make sure a local descr dir exists
+        if ( assert_dir( local_dir + "/DATA/descr") != 0 )
+          ZYPP_THROW (Exception( "Error. Can't create local descr directory. "));
         
-        if ( filesystem::copy_dir(descr_src, local_dir + "DATA") != 0 )
-          ZYPP_THROW(Exception("Unable to copy the descr dir to " + (local_dir + "DATA").asString()));
-        
-        // now we have descr dir cached and keys, lets validate checksums
-        checkMetadataChecksums(local_dir);
+        // we can get the list of files in description dir in 2 ways
+        // from the checksum list, or ls'ing the dir via directory.yast
+        if ( ! _prodImpl->_descr_files_checksums.empty() )
+        {
+          // iterate through all available checksums
+          for ( std::map<std::string, CheckSum>::const_iterator it = _prodImpl->_descr_files_checksums.begin(); it != _prodImpl->_descr_files_checksums.end(); ++it)
+          {
+            std::string key = it->first;
+            getPossiblyCachedMetadataFile( mediaDescrDir() + key, local_dir + "/DATA/descr" + key, _cache_dir + "/DATA/descr" + key,  _prodImpl->_descr_files_checksums[key] );
+          }
+        }
+        else
+        {
+          // in case we dont have list of valid files in content file, we just glob for them
+          std::list<std::string> descr_dir_file_list;
+          try {
+            dirInfo( 1, descr_dir_file_list, _path);
+          }
+          catch(Exception &e) {
+            ZYPP_THROW(Exception("Can't list description directory content from " + url().asString() ));
+          }
+          
+          for( std::list<std::string>::const_iterator it = descr_dir_file_list.begin(); it != descr_dir_file_list.end(); ++it)
+          {
+            std::string filename = *it;
+            getPossiblyCachedMetadataFile( mediaDescrDir() + filename, local_dir + "/DATA/descr" + filename, _cache_dir + "/DATA/descr" + filename, CheckSum() );
+          }
+        }
+             
         return tmpdir;
       }
       
@@ -324,11 +354,11 @@ namespace zypp
         
         if ( need_to_refresh )
         {
-          MIL << "SuseTags source " << alias() << "has changed since last download. Re-reading metadata into " << dir_r << endl;
+          MIL << "SuseTags source " << alias() << " has changed since last download. Re-reading metadata into " << dir_r << endl;
         }
         else
         {
-          MIL << "SUSEtags source " << alias() << "has not changed. Refresh completed. timestamp of media file is  the same." << std::endl;    
+          MIL << "SUSEtags source " << alias() << " has not changed. Refresh completed. timestamp of media file is  the same." << std::endl;    
           return;
         }
         
@@ -365,11 +395,6 @@ namespace zypp
         return exists;
       }
 
-      bool SuseTagsImpl::verifyChecksumsMode() const
-      {
-        return ! _prodImpl->_descr_files_checksums.empty();
-      }
-      
       void SuseTagsImpl::factoryInit()
       {
         bool cache = cacheExists();
@@ -514,59 +539,6 @@ namespace zypp
       {
         MIL << "Adding product: " << _product->summary() << " to the store" << endl;
         store.insert( _product );
-      }
-      
-      void SuseTagsImpl::checkMetadataChecksums(const Pathname &p) const
-      {
-        // iterate through all available checksums
-        for ( std::map<std::string, CheckSum>::const_iterator it = _prodImpl->_descr_files_checksums.begin(); it != _prodImpl->_descr_files_checksums.end(); ++it)
-        {
-          std::string key = it->first;
-          verifyFile( p + "/DATA/descr" + key, key);
-        }
-        
-        // FIXME add and check the gpg keys
-      }
-      
-      void SuseTagsImpl::verifyFile( const Pathname &path, const std::string &key) const
-      {
-        // for old products, we dont check anything.
-        if ( verifyChecksumsMode() )
-        {
-          MIL << "Going to check " << path << " file checksum" << std::endl;
-          std::ifstream file(path.asString().c_str());
-          if (!file) {
-            ZYPP_THROW (Exception( "Can't open " + path.asString() ) );
-          }  
-          
-          // get the checksum for that file.
-          CheckSum checksum = _prodImpl->_descr_files_checksums[key];
-          if (checksum.empty())
-          {
-	    callback::SendReport<DigestReport> report;
-
-	    if ( report->askUserToAcceptNoDigest(path) )
-	    {
-		MIL << path << " user accepted file without a checksum " << endl;
-		return;
-	    }
-
-            ZYPP_THROW (Exception( "Error, Missing checksum for " + path.asString() ) ); 
-          }
-          else
-          {
-            std::string found_checksum = Digest::digest( checksum.type(), file);
-            if ( found_checksum != checksum.checksum() )
-            {
-              ZYPP_THROW (Exception( "Corrupt source, Expected " + checksum.type() + " " + checksum.checksum() + ", got " + found_checksum + " for " + path.asString() ) );
-            }
-            else
-            {
-              MIL << path << " checksum ok (" << checksum.type() << " " << checksum.checksum() << ")" << std::endl;
-              return;
-            }
-          }
-        }
       }
       
       void SuseTagsImpl::providePackages(Source_Ref source_r, ResStore &store)

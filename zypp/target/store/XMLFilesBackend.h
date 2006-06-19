@@ -65,6 +65,9 @@ public:
     * initialize the storage backend
     */
   virtual void initBackend();
+  
+  virtual Date timestamp() const;
+  
   /**
     * Stores a Resolvable in the active backend.
     */
@@ -111,6 +114,8 @@ public:
   
   void writeFlagsInFile( const std::string &filename, const std::set<std::string> &pflags );
   std::set<std::string> flagsFromFile( const std::string &filename ) const;
+  
+  void updateTimestamp() const;
   /////////////////////////////////////////////////////////
   // SOURCES API
   ////////////////////////////////////////////////////////

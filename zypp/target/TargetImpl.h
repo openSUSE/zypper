@@ -131,6 +131,9 @@ namespace zypp
       /** Set the log file for target */
       bool setInstallationLogfile(const Pathname & path_r);
 
+      /** return the last modification date of the target */
+      Date timestamp() const;
+      
     protected:
       /** All resolvables provided by the target. */
       ResStore _store;

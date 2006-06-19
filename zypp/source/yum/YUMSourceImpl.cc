@@ -167,59 +167,20 @@ namespace zypp
           if ((*repomd)->type == "other")     // don't parse 'other.xml' (#159316)
             continue;
 
-          Pathname src;
-          try
-          {
-            src = provideFile(_path + (*repomd)->location);
-          }
-          catch (const Exception &e)
-          {
-            ZYPP_THROW(Exception("Can't provide " + _path.asString() + (*repomd)->location + " from " + url().asString() ));
-          }
-
-          Pathname dst = local_dir + (*repomd)->location;
-
-          //if (0 != assert_dir(dst, 0755))
-          //  ZYPP_THROW(Exception("Cannot create directory: " + dst.asString()));
-
-          if ( filesystem::copy(src, dst) != 0 )
-            ZYPP_THROW(Exception("Can't copy " + src.asString() + " to " + dst.asString()));
-
-          if (! checkCheckSum( dst, (*repomd)->checksumType, (*repomd)->checksum))
-            ZYPP_THROW(Exception( (*repomd)->location + " " + N_(" fails checksum verification.") ));
-
+          getPossiblyCachedMetadataFile( _path + (*repomd)->location, local_dir + (*repomd)->location, _cache_dir + (*repomd)->location, CheckSum((*repomd)->checksumType, (*repomd)->checksum) );
 
           // if it is a patch, we read the patches individually
           if ((*repomd)->type == "patches")
           {
             // use the local copy now
-            Pathname patches_list = dst;
+            Pathname patches_list = local_dir + (*repomd)->location;
             MIL << "Reading patches file " << patches_list << std::endl;
             ifgzstream st ( patches_list.asString().c_str() );
             YUMPatchesParser patch(st, "");
             for (; !patch.atEnd(); ++patch)
             {
-              string filename = (*patch)->location;
-              Pathname patch_src;
-              Pathname patch_dst;
-              try
-              {
-                patch_src = provideFile(_path + filename);
-              }
-              catch (const Exception &e)
-              {
-                ZYPP_CAUGHT(e);
-                ZYPP_THROW(Exception("Can't provide patch " + _path.asString() + (*repomd)->location + " from " + url().asString()));
-              }
 
-              patch_dst = local_dir + filename;
-
-              if ( filesystem::copy(patch_src, patch_dst) != 0 )
-                ZYPP_THROW(Exception("Can't copy patch file " + patch_src.asString() + " to " + patch_dst.asString()));
-
-              // check patch checksum
-              if (! checkCheckSum( patch_dst, (*patch)->checksumType, (*patch)->checksum))
-                ZYPP_THROW(Exception( (*repomd)->location + " " + N_(" fails checksum verification.") ));
+              getPossiblyCachedMetadataFile( _path + (*patch)->location, local_dir + (*patch)->location, _cache_dir + (*patch)->location, CheckSum((*patch)->checksumType, (*patch)->checksum) );
             } // end of single patch parsing
           }// end of patches file parsing
         } // end of copying
@@ -279,7 +240,7 @@ namespace zypp
           else
           {
             Pathname file_to_check = metadataRoot() + _path + (*repomd)->location;
-            if (! checkCheckSum( file_to_check, (*repomd)->checksumType, (*repomd)->checksum))
+            if (! filesystem::is_checksum( file_to_check, CheckSum((*repomd)->checksumType, (*repomd)->checksum)))
             {
               ZYPP_THROW(Exception( (*repomd)->location + " " + N_("fails checksum verification.") ));
             }
@@ -295,7 +256,7 @@ namespace zypp
               for (; !patch.atEnd(); ++patch)
               {
                 Pathname patch_filename = metadataRoot() + _path + (*patch)->location;
-                if (! checkCheckSum(patch_filename, (*patch)->checksumType, (*patch)->checksum))
+                if (! filesystem::is_checksum(patch_filename, CheckSum((*patch)->checksumType, (*patch)->checksum)))
                 {
                   ZYPP_THROW(Exception( (*patch)->location + " " + N_("fails checksum verification.") ));
                 }
@@ -1278,42 +1239,6 @@ namespace zypp
     }
     return cap;
   }
-
-
-
-
-      bool YUMSourceImpl::checkCheckSum (const Pathname & filename, std::string csum_type, const std::string & csum)
-      {
-	MIL << "Checking checksum for " << filename << " as type: " << csum_type << "; value: " << csum << endl;
-	if (str::toLower(csum_type) == "sha")
-	{
-	  if (csum.size() == 40)
-	    csum_type = "sha1";
-	  else if (csum.size() == 64)
-	    csum_type = "sha256";
-	  DBG << "Checksum size is " << csum.size() << ", checksum type set to " << csum_type << endl;
-	}
-	ifstream st(filename.asString().c_str());
-	std::string dig = Digest::digest (csum_type, st, 4096);
-	if (dig == "")
-	{
-	  ERR << "Cannot compute the checksum" << endl;
-	  return false;
-	}
-	dig = str::toLower (dig);
-	bool ret = (dig == str::toLower(csum));
-	if (ret)
-        {
-	  MIL << "Checksums are the same" << endl;
-          return true;
-        }
-	else
-        {
-          WAR << "Checksum missmatch: metadata: " << csum << "; real: " << dig << endl;
-          return false;
-        }
-        return false;
-      }
 
     } // namespace yum
     /////////////////////////////////////////////////////////////////

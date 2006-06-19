@@ -91,6 +91,8 @@ namespace zypp
     /** Return the root set for this target */
     Pathname root() const;
 
+    /** return the last modification date of the target */
+    Date timestamp() const;
   public:
     /** Ctor */
     explicit

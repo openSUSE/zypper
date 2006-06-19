@@ -79,6 +79,12 @@ void PersistentStorage::doTest()
   d->backend->doTest();
 }
 
+Date
+PersistentStorage::timestamp() const
+{
+  return d->backend->timestamp();
+}
+
 void
 PersistentStorage::storeObject( ResObject::constPtr resolvable )
 {

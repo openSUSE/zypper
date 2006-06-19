@@ -142,6 +142,20 @@ XMLFilesBackend::XMLFilesBackend(const Pathname &root) : Backend(root)
    }
 }
 
+Date XMLFilesBackend::timestamp() const
+{
+  PathInfo ts_info = PathInfo( d->root + Pathname(ZYPP_DB_DIR) + "timestamp" );
+  if ( ts_info.isExist() )
+  {
+    return Date(ts_info.mtime());
+  }
+  else
+  {
+    updateTimestamp();
+    return Date::now();
+  }
+}
+
 // Taken from KApplication
 int XMLFilesBackend::random() const
 {
@@ -488,8 +502,9 @@ XMLFilesBackend::writeFlagsInFile( const std::string &filename, const std::set<s
   }
   catch( std::exception &e )
   {
-    //ZYPP_RETHROW(e);
+    ZYPP_THROW (Exception( "Can't write flags to store") );
   }
+  updateTimestamp();
 }
 
 std::set<std::string>
@@ -516,6 +531,18 @@ XMLFilesBackend::flagsFromFile( const std::string &filename ) const
   }
   //MIL << "Read " << flags.size() << " flags for " << resolvable->name() << " " << resolvable->edition() << std::endl;
   return _flags;
+}
+
+void
+XMLFilesBackend::updateTimestamp() const
+{
+  Pathname filename = d->root + Pathname(ZYPP_DB_DIR) + "timestamp";
+  std::ofstream file(filename.asString().c_str(), std::ios::out);
+  if (!file)
+  {
+    ZYPP_THROW (Exception( "Can't open timestamp file " + filename.asString() ) );
+  }
+  file.close();
 }
 
 /////////////////////////////////////////////////////////
@@ -550,6 +577,7 @@ XMLFilesBackend::storeObject( ResObject::constPtr resolvable )
     ERR << "Error saving resolvable " << resolvable << std::endl;
     ZYPP_THROW(Exception(e.what()));
   }
+  updateTimestamp();
 }
 
 void
@@ -565,6 +593,7 @@ XMLFilesBackend::deleteObject( ResObject::constPtr resolvable )
       ERR << "Error removing resolvable " << resolvable << std::endl;
       ZYPP_THROW(Exception("Error deleting " + filename));
     }
+    updateTimestamp();
   }
   catch(std::exception &e)
   {
@@ -1234,6 +1263,7 @@ XMLFilesBackend::storeSource(const PersistentStorage::SourceData &data)
     ERR << "Error saving source " << data.alias << " in the cache" << std::endl;
     ZYPP_THROW(Exception(e.what()));
   }
+  updateTimestamp();
 }
 
 void
@@ -1252,6 +1282,7 @@ XMLFilesBackend::deleteSource(const std::string &alias)
     ERR << "Error deleting source " << alias << " in the cache" << std::endl;
     ZYPP_THROW(Exception(e.what()));
   }
+  updateTimestamp();
 }
 
 /////////////////////////////////////////////////////////////////

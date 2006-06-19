@@ -43,11 +43,10 @@ using namespace zypp::source::yum;
 
 int main()
 {
- 
-  NVRAD a("hola", Edition("2.0-3"));
-  NVRAD b("hola", Edition("2.0-3"));
-  
-  MIL << "a==b : " << (a==b) << std::endl;
+  std::ofstream file;
+  file.open("lala.txt", ios::out);
+    //file << xml;
+    file.close();
 }
 
 

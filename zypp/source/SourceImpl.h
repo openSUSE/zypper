@@ -23,6 +23,7 @@
 #include "zypp/Source.h"
 #include "zypp/ResStore.h"
 #include "zypp/Pathname.h"
+#include "zypp/CheckSum.h"
 #include "zypp/media/MediaManager.h"
 #include "zypp/source/MediaSet.h"
 #include "zypp/TmpPath.h"
@@ -35,7 +36,6 @@ namespace zypp
   { /////////////////////////////////////////////////////////////////
 
     DEFINE_PTR_TYPE(SourceImpl);
-
     ///////////////////////////////////////////////////////////////////
     //
     //	CLASS NAME : SourceImpl
@@ -263,16 +263,31 @@ namespace zypp
 
       void copyLocalMetadata(const Pathname &src, const Pathname &dst) const;
 
+      /**
+       * function that creates the tmp metadata dir if it was not created.
+       * this directory is used when cache_dir is not set (design flaw FIXME)
+       */
+      Pathname tmpMetadataDir() const;
+
+      /**
+         * wrapper around provideFile
+         * downloads a single file, providing download information callbacks
+         * \throw EXCEPTION on download failure and user abort
+         */
+        const Pathname downloadMetadataFile( const Pathname &file_to_download );
+
         /**
          * reset the media verifier to no verifier
          */
         void resetMediaVerifier();
         
-      /**
-         * function that creates the tmp metadata dir if it was not created.
-         * this directory is used when cache_dir is not set (design flaw FIXME)
-       */
-      Pathname tmpMetadataDir() const;
+        /**
+         * checks if a file exists in cache
+         * if no, downloads it, copies it in given destination, and check matching checksum
+         * if yes, compares checksum and copies it to destination locally
+         * \throw EXCEPTION on download/copy failure and user abort
+         */
+        void getPossiblyCachedMetadataFile( const Pathname &file_to_download, const Pathname &destination, const Pathname &cached_file, const CheckSum &checksum );
 
     protected:
       /** All resolvables provided by this source. */

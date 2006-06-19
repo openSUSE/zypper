@@ -54,6 +54,11 @@ public:
   virtual void initBackend() = 0;
 
   /**
+   * timestamp of last modification
+   */
+  virtual Date timestamp() const = 0;
+  
+  /**
   * Stores a Resolvable in the active backend.
   */
   virtual void storeObject( ResObject::constPtr resolvable )  = 0;

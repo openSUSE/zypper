@@ -140,15 +140,6 @@ namespace zypp
          * but it does not add it to the store yet
           */
         void readContentFile(const Pathname &p);
-         
-        /**
-         * checks metadata
-         * against it checksums
-         * requires reading content file first
-         * \param dir Download directory
-         * \throw EXCEPTION on fail
-         **/
-        void checkMetadataChecksums(const Pathname &dir) const;
         
         /**
          * reads a media file and installs
@@ -164,17 +155,6 @@ namespace zypp
 	void provideSelections(Source_Ref source_r, ResStore& store);
         void provideSelection(Source_Ref source_r, ResStore& store);
 	void providePatterns(Source_Ref source_r, ResStore& store);
-
-         /**
-         * verify media mode (use the new META tags)
-          */
-        bool verifyChecksumsMode() const;
-
-        /**
-         * Verify file checksum
-         * \throw EXCEPTION on verification file
-         */
-        void verifyFile( const Pathname &path, const std::string &key) const;
 
         unsigned _media_count;
 
