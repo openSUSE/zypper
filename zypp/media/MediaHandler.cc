@@ -19,6 +19,8 @@
 #include "zypp/media/MediaHandler.h"
 #include "zypp/media/MediaManager.h"
 #include "zypp/media/Mount.h"
+#include <limits.h>
+#include <stdlib.h>
 
 using namespace std;
 
@@ -27,6 +29,29 @@ using namespace std;
 
 namespace zypp {
   namespace media {
+
+  namespace {
+    std::string getRealPath(const std::string &path)
+    {
+      std::string real;
+#if __GNUC__ > 2
+      char *ptr = ::realpath(path.c_str(), NULL);
+      if( ptr != NULL)
+      {
+        real = ptr;
+        free( ptr);
+      }
+#else
+      char buff[PATH_MAX + 2];
+      memset(buff, '\0', sizeof(buff));
+      if( ::realpath(path.c_str(), buff) != NULL)
+      {
+	real = buff;
+      }
+#endif
+      return real;
+    }
+  };
 
   Pathname MediaHandler::_attachPrefix("");
 
@@ -57,12 +82,14 @@ MediaHandler::MediaHandler ( const Url &      url_r,
     , _url( url_r )
     , _parentId(0)
 {
-  if ( !attach_point_r.empty() ) {
+  Pathname real_attach_point( getRealPath(attach_point_r.asString()));
+
+  if ( !real_attach_point.empty() ) {
     ///////////////////////////////////////////////////////////////////
     // check if provided attachpoint is usable.
     ///////////////////////////////////////////////////////////////////
 
-    PathInfo adir( attach_point_r );
+    PathInfo adir( real_attach_point );
     //
     // The verify if attach_point_r isn't a mountpoint of another
     // device is done in the particular media handler (if needed).
@@ -73,14 +100,14 @@ MediaHandler::MediaHandler ( const Url &      url_r,
     if ( !adir.isDir()
 	 || (_url.getScheme() != "file"
 	     && _url.getScheme() != "dir"
-	     && !attach_point_r.absolute()) )
+	     && !real_attach_point.absolute()) )
     {
       ERR << "Provided attach point is not a absolute directory: "
           << adir << endl;
     }
     else {
-      attachPointHint( attach_point_r, false);
-      setAttachPoint( attach_point_r, false);
+      attachPointHint( real_attach_point, false);
+      setAttachPoint( real_attach_point, false);
     }
   }
 }
@@ -352,7 +379,13 @@ MediaHandler::createAttachPoint(const Pathname &attach_root) const
     if ( ! adir.isExist() ) {
       int err = mkdir( adir.path() );
       if (err == 0 ) {
-        apoint = adir.path();
+        apoint = getRealPath(adir.asString());
+	if( apoint.empty())
+	{
+	  ERR << "Unable to resolve a real path for "
+	      << adir.path() << std::endl;
+	  rmdir(adir.path());
+	}
         break;
       }
       else
