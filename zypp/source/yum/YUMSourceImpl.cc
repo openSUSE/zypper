@@ -81,7 +81,7 @@ namespace zypp
 
       const Pathname YUMSourceImpl::metadataRoot() const
       {
-        return _cache_dir.empty() ? _tmp_metadata_dir : _cache_dir;
+        return _cache_dir.empty() ? tmpMetadataDir() : _cache_dir;
       }
 
       const Pathname YUMSourceImpl::repomdFile() const
@@ -246,10 +246,10 @@ namespace zypp
         {
           if ( _cache_dir.empty() || !PathInfo(_cache_dir).isExist() )
           {
-            DBG << "Cache dir not set. Downloading to temp dir: " << _tmp_metadata_dir << std::endl;
+            DBG << "Cache dir not set. Downloading to temp dir: " << tmpMetadataDir() << std::endl;
             // as we have no local dir set we use a tmp one, but we use a member variable because
             // it cant go out of scope while the source exists.
-            saveMetadataTo(_tmp_metadata_dir);
+            saveMetadataTo(tmpMetadataDir());
           }
           else
           {
@@ -339,7 +339,7 @@ namespace zypp
         else
         {
           // no previous cache, use the data read temporarely
-          copyLocalMetadata(_tmp_metadata_dir.path(), cache_dir_r);
+          copyLocalMetadata(tmpMetadataDir(), cache_dir_r);
         }
 
         MIL << "Metadata saved in " << cache_dir_r << ". Setting as cache." << std::endl;

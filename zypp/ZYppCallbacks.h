@@ -29,7 +29,8 @@ namespace zypp
     {
       enum Action { 
         ABORT,  // abort and return error
-        RETRY	// retry
+        RETRY,	// retry
+        IGNORE, // ignore this resolvable but continue
       }; 
       
       enum Error {

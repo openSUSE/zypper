@@ -267,6 +267,12 @@ namespace zypp
          * reset the media verifier to no verifier
          */
         void resetMediaVerifier();
+        
+      /**
+         * function that creates the tmp metadata dir if it was not created.
+         * this directory is used when cache_dir is not set (design flaw FIXME)
+       */
+      Pathname tmpMetadataDir() const;
 
     protected:
       /** All resolvables provided by this source. */
@@ -295,7 +301,8 @@ namespace zypp
       /** source contains base product? */
       bool _base_source;
 
-      filesystem::TmpDir _tmp_metadata_dir;
+    private:
+      mutable shared_ptr<filesystem::TmpDir> _tmp_metadata_dir_ptr;
       ///////////////////////////////////////////////////////////////////
       // no playground below this line ;)
       ///////////////////////////////////////////////////////////////////

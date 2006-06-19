@@ -99,7 +99,6 @@ namespace zypp
      */
     SourceImpl::SourceImpl( const null & )
 	: base::ProvideNumericId<SourceImpl,Source_Ref::NumericId>( NULL )
-        , _tmp_metadata_dir("/var/tmp/zypp.0") 
         , _res_store_initialized(true)
     {}
     
@@ -115,7 +114,6 @@ namespace zypp
     , _priority_unsubscribed (0)
     , _subscribed(false)
     , _base_source(false)
-    , _tmp_metadata_dir(getZYpp()->tmpPath())
     , _res_store_initialized(false)
     {
     }
@@ -195,6 +193,13 @@ namespace zypp
       return const_cast<SourceImpl*>(this)->provideResolvables(self, kind);
     }
 
+    Pathname SourceImpl::tmpMetadataDir() const
+    {
+      if ( !_tmp_metadata_dir_ptr )
+        _tmp_metadata_dir_ptr.reset(new filesystem::TmpDir(getZYpp()->tmpPath()));
+      return _tmp_metadata_dir_ptr->path();
+    }     
+    
     Date SourceImpl::timestamp() const
     {
       return Date::now();
@@ -224,8 +229,16 @@ namespace zypp
 
 	callback::TempConnect<media::DownloadProgressReport> tmp_download( download_report );
 
-        file = provideJustFile( package->location(), package->sourceMediaNr());
-
+        try
+        {
+          file = provideJustFile( package->location(), package->sourceMediaNr());
+        }
+        catch (const Exception &e)
+        {
+          ERR << "Failed to provide " << package << " from " << url() << " in source " << alias() << std::endl;
+          ZYPP_RETHROW (e);
+        }
+        
         report->finish( package, source::DownloadResolvableReport::NO_ERROR, "" );
 
         CheckSum checksum = package->checksum();
