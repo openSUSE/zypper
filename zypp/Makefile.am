@@ -87,6 +87,7 @@ pkginclude_HEADERS = NeedAType.h \
 	ZYppFactory.h	\
 	ZYppCallbacks.h	\
 	SilentCallbacks.h \
+	PublicKey.h \
 	KeyRing.h
 
 ## ##################################################
@@ -160,6 +161,7 @@ lib@PACKAGE@_la_SOURCES = \
 	ZYppCommitResult.cc	\
 	TranslatedText.cc \
 	ZYppFactory.cc \
+	PublicKey.cc \
 	KeyRing.cc
 
 
