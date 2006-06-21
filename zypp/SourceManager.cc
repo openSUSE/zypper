@@ -339,9 +339,34 @@ namespace zypp
 	<< ", alias_filter '" << alias_filter
 	<< ", url_filter '" << url_filter << "')" << endl;
 
-    if (! _sources.empty() )
-	ZYPP_THROW(SourcesAlreadyRestoredException());
-//Exception ( N_("At least one source already registered, cannot restore sources from persistent store.") ) );
+    if (! _sources.empty() ) {
+
+	// if we've already restored sources and this is an unfiltered call, reject it.
+
+	if (alias_filter.empty()
+	    && url_filter.empty())
+	{
+	    ZYPP_THROW(SourcesAlreadyRestoredException());
+	    //Exception ( N_("At least one source already registered, cannot restore sources from persistent store.") ) );
+	}
+
+	// check filters against already restore sources and check for duplicates.
+	//
+	for (SourceMap::const_iterator it = _sources.begin(); it != _sources.end(); ++it) {
+	    if (!alias_filter.empty()
+		&& (alias_filter == it->second.alias()) )
+	    {
+		MIL << "Source with alias '" << alias_filter << "' already restored.";
+		return true;
+	    }
+	    if (!url_filter.empty()
+		&& (url_filter == it->second.url().asString()) )
+	    {
+		MIL << "Source with url '" << url_filter << "' already restored.";
+		return true;
+	    }
+	}
+    }
 
     FailedSourcesRestoreException report;
 

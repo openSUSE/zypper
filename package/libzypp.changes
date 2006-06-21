@@ -1,4 +1,43 @@
 -------------------------------------------------------------------
+Wed Jun 21 15:47:39 CEST 2006 - ma@suse.de
+
+- Strip self provides without edition in Resolvable ctor.
+  (#186079)
+- revision 3673
+
+-------------------------------------------------------------------
+Wed Jun 21 15:26:49 CEST 2006 - dmacvicar@suse.de
+
+- Source::provideResolvables not implemented in yum source type.
+  Product not set for packages that are available from update source
+  (#186920)
+- r3670
+
+-------------------------------------------------------------------
+Wed Jun 21 12:41:00 CEST 2006 - kkaempf@suse.de
+
+- Hook modalias() supplements without package to "kernel" (#184840)
+- rev 3669
+
+-------------------------------------------------------------------
+Wed Jun 21 10:12:50 CEST 2006 - kkaempf@suse.de
+
+- Allow on-demand SourceManager::restore() (#186678)
+- rev 3667
+
+-------------------------------------------------------------------
+Wed Jun 21 12:41:00 CEST 2006 - kkaempf@suse.de
+
+- Hook modalias() supplements without package to "kernel" (#184840)
+- rev 3669
+
+-------------------------------------------------------------------
+Wed Jun 21 10:12:50 CEST 2006 - kkaempf@suse.de
+
+- Allow on-demand SourceManager::restore() (#186678)
+- rev 3667
+
+-------------------------------------------------------------------
 Mon Jun 19 15:17:17 CEST 2006 - mt@suse.de
 
 - Fix adding resolving of path names for mount points (#181606)
@@ -42,7 +81,7 @@ Wed Jun 14 22:43:40 CEST 2006 - kkaempf@suse.de
 Wed Jun 14 17:26:39 CEST 2006 - dmacvicar@suse.de
 
 - fix for the last stall tmpfile (#178292)
-- r3637 
+- r3637
 
 -------------------------------------------------------------------
 Wed Jun 14 12:06:57 CEST 2006 - mt@suse.de
@@ -72,7 +111,7 @@ Mon Jun 12 16:27:46 CEST 2006 - kkaempf@suse.de
 -------------------------------------------------------------------
 Mon Jun 12 15:15:07 CEST 2006 - dmacvicar@suse.de
 
-- fix #182003 YUM packages without size 
+- fix #182003 YUM packages without size
 - rev 3587
 
 -------------------------------------------------------------------
