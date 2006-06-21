@@ -1,41 +1,16 @@
 -------------------------------------------------------------------
-Wed Jun 21 15:47:39 CEST 2006 - ma@suse.de
+Wed Jun 21 15:47:39 CEST 2006 - dmacvicar@suse.de
 
+- backport from sle branch
 - Strip self provides without edition in Resolvable ctor.
   (#186079)
-- revision 3673
-
--------------------------------------------------------------------
-Wed Jun 21 15:26:49 CEST 2006 - dmacvicar@suse.de
-
 - Source::provideResolvables not implemented in yum source type.
   Product not set for packages that are available from update source
   (#186920)
-- r3670
-
--------------------------------------------------------------------
-Wed Jun 21 12:41:00 CEST 2006 - kkaempf@suse.de
-
 - Hook modalias() supplements without package to "kernel" (#184840)
-- rev 3669
-
--------------------------------------------------------------------
-Wed Jun 21 10:12:50 CEST 2006 - kkaempf@suse.de
-
 - Allow on-demand SourceManager::restore() (#186678)
-- rev 3667
-
--------------------------------------------------------------------
-Wed Jun 21 12:41:00 CEST 2006 - kkaempf@suse.de
-
 - Hook modalias() supplements without package to "kernel" (#184840)
-- rev 3669
-
--------------------------------------------------------------------
-Wed Jun 21 10:12:50 CEST 2006 - kkaempf@suse.de
-
-- Allow on-demand SourceManager::restore() (#186678)
-- rev 3667
+- rev 3676
 
 -------------------------------------------------------------------
 Mon Jun 19 15:17:17 CEST 2006 - mt@suse.de
