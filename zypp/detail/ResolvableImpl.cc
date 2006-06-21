@@ -116,16 +116,21 @@ namespace zypp
     {
       CapSet supplements;
       to[Dep::SUPPLEMENTS].clear();
-      
+
       FilterExtraDependency flp( to );
 
       std::remove_copy_if( from[Dep::SUPPLEMENTS].begin(), from[Dep::SUPPLEMENTS].end(),
                            std::inserter( supplements, supplements.end() ),
                            flp );
       to[Dep::SUPPLEMENTS].insert(supplements.begin(), supplements.end());
-    }      
+    }
   }
 
+  ///////////////////////////////////////////////////////////////////
+  //
+  //	METHOD NAME : Resolvable::Impl::Impl
+  //	METHOD TYPE : Ctor
+  //
   Resolvable::Impl::Impl( const Kind & kind_r,
                           const NVRAD & nvrad_r )
   : _kind( kind_r )
@@ -136,10 +141,19 @@ namespace zypp
   {
     // check if we provide/supplements any extra ('locale(...)', 'modalias(...)', ...) tags
     // and split them up to freshens/supplements (except for SystemResObject)
-      if ( _kind != ResTraits<SystemResObject>::kind ) {
-	  filterExtraSupplements( nvrad_r, _deps );
-	  filterExtraProvides( nvrad_r, _deps );
+    if ( _kind != ResTraits<SystemResObject>::kind )
+      {
+        filterExtraSupplements( nvrad_r, _deps );
+        filterExtraProvides( nvrad_r, _deps );
       }
+
+    // remove malicious self provides
+    CapSet::iterator it = _deps[Dep::PROVIDES].find( CapFactory().parse( _kind, _name ) );
+      if ( it != _deps[Dep::PROVIDES].end() )
+        {
+          dumpOn( WAR << "Strip self provides without edition in " ) << endl;
+          _deps[Dep::PROVIDES].erase( it );
+        }
 
     // assert self provides
     _deps[Dep::PROVIDES].insert( CapFactory()

@@ -345,142 +345,112 @@ namespace zypp
         // download_tmp_dir go out of scope now but it is ok as we already copied the content.
       }
 
-      void YUMSourceImpl::createResolvables(Source_Ref source_r)
+        
+      void YUMSourceImpl::readRepomd()
       {
-	std::list<YUMRepomdData_Ptr> repo_primary;
-	std::list<YUMRepomdData_Ptr> repo_files;
-	//std::list<YUMRepomdData_Ptr> repo_other;
-	std::list<YUMRepomdData_Ptr> repo_group;
-	std::list<YUMRepomdData_Ptr> repo_pattern;
-	std::list<YUMRepomdData_Ptr> repo_product;
-	std::list<YUMRepomdData_Ptr> repo_patches;
-
-	callback::SendReport<CreateSourceReport> report;
-
-	report->startData( url() );
-
-        //---------------------------------
-        // repomd
-
         try
         {
           DBG << "Reading ifgz file " << repomdFile() << endl;
           ifgzstream repo_st(repomdFile().asString().c_str());
-	  YUMRepomdParser repomd(repo_st, "");
+          YUMRepomdParser repomd(repo_st, "");
           for(; ! repomd.atEnd(); ++repomd)
-	  {
+          {
             // note that we skip adding other.xml to the list of files to provide
-	    if ((*repomd)->type == "primary")
-	      repo_primary.push_back(*repomd);
-	    else if ((*repomd)->type == "filelists")
-	      repo_files.push_back(*repomd);
-	    else if ((*repomd)->type == "group")
-	      repo_group.push_back(*repomd);
-	    else if ((*repomd)->type == "pattern")
-	      repo_pattern.push_back(*repomd);
-	    else if ((*repomd)->type == "product")
-	      repo_product.push_back(*repomd);
-	    else if ((*repomd)->type == "patches")
-	      repo_patches.push_back(*repomd);
-	    else if ((*repomd)->type != "other")	// type "other" is ok, anything else not
-	      ERR << "Unknown type of repo file: " << (*repomd)->type << endl;
-	   }
+            if ((*repomd)->type == "primary")
+              _repo_primary.push_back(*repomd);
+            else if ((*repomd)->type == "filelists")
+              _repo_files.push_back(*repomd);
+            else if ((*repomd)->type == "group")
+              _repo_group.push_back(*repomd);
+            else if ((*repomd)->type == "pattern")
+              _repo_pattern.push_back(*repomd);
+            else if ((*repomd)->type == "product")
+              _repo_product.push_back(*repomd);
+            else if ((*repomd)->type == "patches")
+              _repo_patches.push_back(*repomd);
+            else if ((*repomd)->type != "other")        // type "other" is ok, anything else not
+              ERR << "Unknown type of repo file: " << (*repomd)->type << endl;
+          }
         }
         catch( const Exception &  excpt_r )
         {
-	  ZYPP_CAUGHT( excpt_r );	// log the caught exception
-	  ZYPP_THROW( Exception("Cannot read repomd file, cannot initialize source") );
+          ZYPP_CAUGHT( excpt_r );       // log the caught exception
+          ZYPP_THROW( Exception("Cannot read repomd file, cannot initialize source") );
         }
-
-        //---------------------------------
-        // files mentioned within repomd
-
+      }
+      
+      void YUMSourceImpl::provideProducts(Source_Ref source_r, ResStore& store)
+      {
         try
         {
-	  // now put other and filelist data to structures for easier find
-	  map<NVRA, YUMFileListData_Ptr> files_data;
-	  map<NVRA, YUMOtherData_Ptr> other_data;
-	  for (std::list<YUMRepomdData_Ptr>::const_iterator it
-		  = repo_files.begin();
-	      it != repo_files.end();
-	      it++)
-	  {
+          for (std::list<YUMRepomdData_Ptr>::const_iterator it = _repo_product.begin();
+               it != _repo_product.end();
+               it++)
+          {
             Pathname filename = metadataRoot() + (*it)->location;
-	    DBG << "Reading ifgz file " << filename << endl;
-	    ifgzstream st( filename.asString().c_str() );
+            ifgzstream st ( filename.asString().c_str() );
+            YUMProductParser product(st, "");
+            for (; !product.atEnd(); ++product)
+            {
+              Product::Ptr p = createProduct( source_r, **product );
+              store.insert (p);
+            }
+            if (product.errorStatus())
+              ZYPP_THROW(Exception(product.errorStatus()->msg()));
+          }
+        }
+        catch (...) {
+          ERR << "Cannot read products information" << endl;
+        }
+      }
+      
+      void YUMSourceImpl::providePackages(Source_Ref source_r, ResStore& store)
+      {
+        try
+        {
+          // now put other and filelist data to structures for easier find
+          map<NVRA, YUMFileListData_Ptr> files_data;
+          map<NVRA, YUMOtherData_Ptr> other_data;
+          for (std::list<YUMRepomdData_Ptr>::const_iterator it
+               = _repo_files.begin();
+               it != _repo_files.end();
+               it++)
+          {
+            Pathname filename = metadataRoot() + (*it)->location;
+            DBG << "Reading ifgz file " << filename << endl;
+            ifgzstream st( filename.asString().c_str() );
 
-	    YUMFileListParser filelist ( st, "" );
-	    for (; ! filelist.atEnd(); ++filelist)
-	    {
-              if (*filelist == NULL) continue;	// skip incompatible archs
-		NVRA nvra( (*filelist)->name,
-			   Edition( (*filelist)->ver, (*filelist)->rel, str::strtonum<int>( (*filelist)->epoch ) ),
-			   Arch ( (*filelist)->arch ) );
-		files_data[nvra] = *filelist;
-	    }
-	    if (filelist.errorStatus())
+            YUMFileListParser filelist ( st, "" );
+            for (; ! filelist.atEnd(); ++filelist)
+            {
+              if (*filelist == NULL) continue;  // skip incompatible archs
+              NVRA nvra( (*filelist)->name,
+                           Edition( (*filelist)->ver, (*filelist)->rel, str::strtonum<int>( (*filelist)->epoch ) ),
+                           Arch ( (*filelist)->arch ) );
+              files_data[nvra] = *filelist;
+            }
+            if (filelist.errorStatus())
               ZYPP_THROW(Exception(filelist.errorStatus()->msg()));
-	  }
-
-#if 0	// don't parse 'other.xml' (#159316)
-
-	  for (std::list<YUMRepomdData_Ptr>::const_iterator it
-		  = repo_other.begin();
-	      it != repo_other.end();
-	      it++)
-	  {
-            Pathname filename = cacheExists()
-              ? _cache_dir + (*it)->location
-              : provideFile(_path + (*it)->location);
-            if (!cacheExists())
-	    {
-	      if (! checkCheckSum(filename, (*it)->checksumType, (*it)->checksum))
-	      {
-	        ZYPP_THROW(Exception(N_("Failed check for the metadata file check sum")));
-	      }
-	    }
-	    _metadata_files.push_back((*it)->location);
-	    DBG << "Reading file " << filename << endl;
-
-	    ifgzstream st ( filename.asString().c_str() );
-	    YUMOtherParser other(st, "");
-	    for (;
-		  ! other.atEnd();
-		  ++other)
-	    {
-		if (*other == NULL) continue;	// skip incompatible archs
-                Arch arch;
-                if (!(*other)->arch.empty())
-                  arch = Arch((*other)->arch);
-
-		NVRA nvra( (*other)->name,
-			   Edition( (*other)->ver, (*other)->rel, str::strtonum<int>( (*other)->epoch ) ),
-			   arch );
-		other_data[nvra] = *other;
-	    }
-	    if (other.errorStatus())
-	      throw *other.errorStatus();
-	}
-#endif
-
-	// now read primary data, merge them with filelist and changelog
-	  for (std::list<YUMRepomdData_Ptr>::const_iterator it = repo_primary.begin(); it != repo_primary.end(); it++)
+          }
+          
+        // now read primary data, merge them with filelist and changelog
+          for (std::list<YUMRepomdData_Ptr>::const_iterator it = _repo_primary.begin(); it != _repo_primary.end(); it++)
           {
             Pathname filename = metadataRoot() + (*it)->location;
             DBG << "Reading file " << filename << endl;
-	    ifgzstream st ( filename.asString().c_str() );
-	    YUMPrimaryParser prim(st, "");
-	    for (; !prim.atEnd(); ++prim)
-	    {
-	      if (*prim == NULL) continue;	// incompatible arch detected during parsing
+            ifgzstream st ( filename.asString().c_str() );
+            YUMPrimaryParser prim(st, "");
+            for (; !prim.atEnd(); ++prim)
+            {
+              if (*prim == NULL) continue;      // incompatible arch detected during parsing
 
               Arch arch;
               if (!(*prim)->arch.empty())
                 arch = Arch((*prim)->arch);
 
               NVRA nvra( (*prim)->name,
-			   Edition( (*prim)->ver, (*prim)->rel, str::strtonum<int>( (*prim)->epoch ) ),
-			   arch );
+                           Edition( (*prim)->ver, (*prim)->rel, str::strtonum<int>( (*prim)->epoch ) ),
+                           arch );
               map<NVRA, YUMOtherData_Ptr>::iterator found_other = other_data.find( nvra );
               map<NVRA, YUMFileListData_Ptr>::iterator found_files = files_data.find( nvra );
 
@@ -488,45 +458,46 @@ namespace zypp
               YUMOtherData other_empty;
               ResImplTraits<YUMPackageImpl>::Ptr impl;
               Package::Ptr p = createPackage( source_r, **prim, found_files != files_data.end()
-		    ? *(found_files->second)
-		    : filelist_empty,
-		  found_other != other_data.end()
-		    ? *(found_other->second)
-	       	     : other_empty,
-		  impl
-		);
-		ImplAndPackage iap = { impl, p };
-		_package_impl[nvra] = iap;
+                  ? *(found_files->second)
+                : filelist_empty,
+                  found_other != other_data.end()
+                      ? *(found_other->second)
+                : other_empty,
+                  impl
+                                            );
+              ImplAndPackage iap = { impl, p };
+              _package_impl[nvra] = iap;
 //                MIL << "inserting package "<< p->name() << std::endl;
-		_store.insert (p);
-	     }
-	     if (prim.errorStatus())
+              store.insert (p);
+            }
+            if (prim.errorStatus())
               ZYPP_THROW(Exception(prim.errorStatus()->msg()));
-	   }
+          }
         }
         catch (...)
         {
-	 ERR << "Cannot read package information" << endl;
+          ERR << "Cannot read package information" << endl;
         }
-
-        //---------------------------------
-        // groups
+      }
+      
+      void YUMSourceImpl::provideSelections(Source_Ref source_r, ResStore& store)
+      {
         try
         {
-          for (std::list<YUMRepomdData_Ptr>::const_iterator it = repo_group.begin();
-	        it != repo_group.end();
-	        it++)
+          for (std::list<YUMRepomdData_Ptr>::const_iterator it = _repo_group.begin();
+               it != _repo_group.end();
+               it++)
           {
             Pathname filename = metadataRoot() + (*it)->location;
             DBG << "Reading file " << filename << endl;
-	    ifgzstream st ( filename.asString().c_str() );
-	    YUMGroupParser group(st, "");
-	    for (; !group.atEnd(); ++group)
-	    {
+            ifgzstream st ( filename.asString().c_str() );
+            YUMGroupParser group(st, "");
+            for (; !group.atEnd(); ++group)
+            {
               Selection::Ptr p = createGroup( source_r, **group );
-              _store.insert (p);
-	    }
-	    if (group.errorStatus())
+              store.insert (p);
+            }
+            if (group.errorStatus())
               ZYPP_THROW(Exception(group.errorStatus()->msg()));
           }
         }
@@ -535,64 +506,43 @@ namespace zypp
           ERR << "Cannot read package groups information" << endl;
         }
 
-        //---------------------------------
-        // patterns
-
+      }
+      
+      void YUMSourceImpl::providePatterns(Source_Ref source_r, ResStore& store)
+      {
         try
         {
-          for (std::list<YUMRepomdData_Ptr>::const_iterator it = repo_pattern.begin();
-               it != repo_pattern.end(); it++)
+          for (std::list<YUMRepomdData_Ptr>::const_iterator it = _repo_pattern.begin();
+               it != _repo_pattern.end(); it++)
           {
             Pathname filename = metadataRoot() + (*it)->location;
 
-	    DBG << "Reading file " << filename << endl;
-	    ifgzstream st ( filename.asString().c_str() );
-	    YUMPatternParser pattern(st, "");
-	    for (; !pattern.atEnd(); ++pattern)
-	    {
+            DBG << "Reading file " << filename << endl;
+            ifgzstream st ( filename.asString().c_str() );
+            YUMPatternParser pattern(st, "");
+            for (; !pattern.atEnd(); ++pattern)
+            {
               Pattern::Ptr p = createPattern( source_r, **pattern );
-              _store.insert (p);
-	    }
-	    if (pattern.errorStatus())
+              store.insert (p);
+            }
+            if (pattern.errorStatus())
               ZYPP_THROW(Exception(pattern.errorStatus()->msg()));
           }
         }
         catch (...) {
-	  ERR << "Cannot read installation patterns information" << endl;
+          ERR << "Cannot read installation patterns information" << endl;
         }
 
-        //---------------------------------
-        // products
-        try
-        {
-          for (std::list<YUMRepomdData_Ptr>::const_iterator it = repo_product.begin();
-            it != repo_product.end();
-            it++)
-          {
-            Pathname filename = metadataRoot() + (*it)->location;
-            ifgzstream st ( filename.asString().c_str() );
-            YUMProductParser product(st, "");
-            for (; !product.atEnd(); ++product)
-            {
-              Product::Ptr p = createProduct( source_r, **product );
-              _store.insert (p);
-            }
-            if (product.errorStatus())
-              ZYPP_THROW(Exception(product.errorStatus()->msg()));
-          }
-        }
-        catch (...) {
-        ERR << "Cannot read products information" << endl;
-        }
-
-        //---------------------------------
-        // patches, first the patches.xml index
+      }
+      
+      void YUMSourceImpl::providePatches(Source_Ref source_r, ResStore& store)
+      {
         try
         {
           std::list<std::string> patch_files;
-          for (std::list<YUMRepomdData_Ptr>::const_iterator it = repo_patches.begin();
-              it != repo_patches.end();
-              it++)
+          for (std::list<YUMRepomdData_Ptr>::const_iterator it = _repo_patches.begin();
+               it != _repo_patches.end();
+               it++)
           {
             Pathname filename = metadataRoot() + (*it)->location;
 
@@ -608,45 +558,84 @@ namespace zypp
 
             if (patch.errorStatus())
               ZYPP_THROW(Exception(patch.errorStatus()->msg()));
-           }
+          }
 
             //---------------------------------
             // now the individual patch files
 
-           for (std::list<std::string>::const_iterator it = patch_files.begin();
-              it != patch_files.end();
-              it++)
-           {
-             Pathname filename = metadataRoot() + *it;
-                DBG << "Reading file " << filename << endl;
-                ifgzstream st ( filename.asString().c_str() );
-                YUMPatchParser ptch(st, "");
-                for(;
-                        !ptch.atEnd();
-                        ++ptch)
-                {
-                      Patch::Ptr p = createPatch(
-                        source_r,
-                        **ptch
-                      );
-                      _store.insert (p);
-                      Patch::AtomList atoms = p->atoms();
-                      for (Patch::AtomList::iterator at = atoms.begin();
-                          at != atoms.end();
-                          at++)
-                      {
-                        _store.insert (*at);
-                      }
-                }
-                if (ptch.errorStatus())
-                  ZYPP_THROW(Exception(ptch.errorStatus()->msg()));
-           }
-         }
+          for (std::list<std::string>::const_iterator it = patch_files.begin();
+               it != patch_files.end();
+               it++)
+          {
+            Pathname filename = metadataRoot() + *it;
+            DBG << "Reading file " << filename << endl;
+            ifgzstream st ( filename.asString().c_str() );
+            YUMPatchParser ptch(st, "");
+            for(;
+                 !ptch.atEnd();
+                 ++ptch)
+            {
+              Patch::Ptr p = createPatch(
+                  source_r,
+              **ptch
+                                        );
+              store.insert (p);
+              Patch::AtomList atoms = p->atoms();
+              for (Patch::AtomList::iterator at = atoms.begin();
+                   at != atoms.end();
+                   at++)
+              {
+                _store.insert (*at);
+              }
+            }
+            if (ptch.errorStatus())
+              ZYPP_THROW(Exception(ptch.errorStatus()->msg()));
+          }
+        }
         catch (...)
         {
-            ERR << "Cannot read patch metadata" << endl;
+          ERR << "Cannot read patch metadata" << endl;
         }
+      }
+      
+      ResStore YUMSourceImpl::provideResolvablesByKind(Source_Ref source_r, zypp::Resolvable::Kind kind)
+      {
+        ResStore store;
+        callback::SendReport<CreateSourceReport> report;
 
+        report->startData( url() );
+
+        readRepomd();
+        
+        if ( kind == ResTraits<Product>::kind )
+          provideProducts ( selfSourceRef(), store );
+        else if ( kind == ResTraits<Package>::kind )
+          providePackages (selfSourceRef(), store );
+        else if ( kind == ResTraits<Selection>::kind )
+          provideSelections ( selfSourceRef(), store );
+        else if ( kind == ResTraits<Pattern>::kind )
+          providePatterns ( selfSourceRef(), store );
+        else if ( kind == ResTraits<Pattern>::kind )
+          providePatches ( selfSourceRef(), store );
+        
+        report->finishData( url(), CreateSourceReport::NO_ERROR, "" );
+        
+        return store;
+      }  
+      
+      void YUMSourceImpl::createResolvables(Source_Ref source_r)
+      {
+        callback::SendReport<CreateSourceReport> report;
+
+        report->startData( url() );
+
+        readRepomd();
+        provideProducts(selfSourceRef(), _store);
+        providePackages(selfSourceRef(), _store);
+        provideSelections(selfSourceRef(), _store);
+        providePatterns(selfSourceRef(), _store);
+        providePatches(selfSourceRef(), _store);
+        
         report->finishData( url(), CreateSourceReport::NO_ERROR, "" );
       }
 

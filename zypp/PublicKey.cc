@@ -16,14 +16,17 @@
 #include "zypp/PublicKey.h"
 #include "zypp/ExternalProgram.h"
 #include "zypp/TmpPath.h"
+#include "zypp/PathInfo.h"
 #include "zypp/base/Exception.h"
+#include "zypp/base/Logger.h"
 
 using std::endl;
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
-
+namespace devel
+{      
   ///////////////////////////////////////////////////////////////////
   //
   //	CLASS NAME : PublicKey::Impl
@@ -36,7 +39,8 @@ namespace zypp
 
     Impl(const Pathname &file)
     {
-    
+      readFromFile(file);
+      MIL << "Done reading key" << std::endl;
     }
     
     Impl(const std::istream &data)
@@ -72,6 +76,9 @@ namespace zypp
       
      void readFromFile( const Pathname &keyfile)
      {
+       if ( !PathInfo(keyfile).isExist() )
+         ZYPP_THROW(Exception("Can't read public key from " + keyfile.asString() + ", file not found"));
+         
        filesystem::TmpDir dir;
   
         const char* argv[] =
@@ -197,3 +204,4 @@ namespace zypp
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
+}

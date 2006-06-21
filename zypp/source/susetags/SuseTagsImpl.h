@@ -73,7 +73,7 @@ namespace zypp
         virtual void createResolvables(Source_Ref source_r);
 
 	/** Provide only resolvables of a certain kind. */
-        virtual ResStore provideResolvables(Source_Ref source_r, zypp::Resolvable::Kind kind);
+        virtual ResStore createResolvablesByKind(Source_Ref source_r, zypp::Resolvable::Kind kind);
 
         virtual std::string type(void) const
         { return typeString(); }

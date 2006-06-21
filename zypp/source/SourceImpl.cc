@@ -190,7 +190,7 @@ namespace zypp
     const ResStore SourceImpl::resolvables(zypp::Resolvable::Kind kind) const
     {
       Source_Ref self( const_cast<SourceImpl*>(this)->selfSourceRef() );
-      return const_cast<SourceImpl*>(this)->provideResolvables(self, kind);
+      return const_cast<SourceImpl*>(this)->provideResolvablesByKind(self, kind);
     }
 
     Pathname SourceImpl::tmpMetadataDir() const
@@ -678,11 +678,13 @@ namespace zypp
     }
 
     void SourceImpl::createResolvables(Source_Ref source_r)
-    {}
-
-    ResStore SourceImpl::provideResolvables(Source_Ref source_r, zypp::Resolvable::Kind kind)
     {
-	WAR << "provideResolvables not implemented by the source" << endl;
+      WAR << "createResolvables not implemented by the source" << endl;
+    }
+
+    ResStore SourceImpl::provideResolvablesByKind(Source_Ref source_r, zypp::Resolvable::Kind kind)
+    {
+      WAR << "provideResolvablesByKind not implemented by the source" << endl;
 	return ResStore();
     }
 

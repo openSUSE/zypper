@@ -72,8 +72,6 @@ namespace zypp
 	static std::string typeString(void)
 	{ return "YUM"; }
 
-	virtual void createResolvables(Source_Ref source_r);
-
         /**
          * is the download of metadata from the url needed
          * \param localdir
@@ -140,6 +138,26 @@ namespace zypp
          * \throw EXCEPTION on fail
          */
         void checkMetadataChecksums() const;
+        
+        void readRepomd();
+        
+        virtual void createResolvables(Source_Ref source_r);
+        virtual ResStore provideResolvablesByKind(Source_Ref source_r, zypp::Resolvable::Kind kind);
+        
+        void provideProducts(Source_Ref source_r, ResStore& store);
+        void providePackages(Source_Ref source_r, ResStore& store);
+        void provideSelections(Source_Ref source_r, ResStore& store);
+        void providePatterns(Source_Ref source_r, ResStore& store);
+        void providePatches(Source_Ref source_r, ResStore& store);
+        
+        std::list<YUMRepomdData_Ptr> _repo_primary;
+        std::list<YUMRepomdData_Ptr> _repo_files;
+        std::list<YUMRepomdData_Ptr> _repo_group;
+        std::list<YUMRepomdData_Ptr> _repo_pattern;
+        std::list<YUMRepomdData_Ptr> _repo_product;
+        std::list<YUMRepomdData_Ptr> _repo_patches;
+        
+        
       private:
         
         const Pathname metadataRoot() const;
