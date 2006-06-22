@@ -246,7 +246,8 @@ AC_OUTPUT(	 po/Makefile.in\
 	zypp/source/plaindir/Makefile	\
 	zypp/source/susetags/Makefile	\
 	zypp/source/yum/Makefile	\
-	zypp/media/Makefile		\
+	zypp/source/sqlite-source/Makefile \
+  zypp/media/Makefile		\
 	zypp/media/proxyinfo/Makefile	\
 	zypp/ui/Makefile		\
 	zypp/url/Makefile		\
