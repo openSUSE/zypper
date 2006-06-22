@@ -10,7 +10,6 @@
 #include "zypp/ResPoolProxy.h"
 #include <zypp/SourceManager.h>
 #include <zypp/SourceFactory.h>
-#include "zypp/CapFactory.h"
 
 #include "zypp/NVRAD.h"
 #include "zypp/ResPool.h"
@@ -193,7 +192,7 @@ int main( int argc, char * argv[] )
     }
 
   if ( 1 ) {
-    //zypp::base::LogControl::TmpLineWriter shutUp;
+    zypp::base::LogControl::TmpLineWriter shutUp;
     //SourceManager::sourceManager()->restore( sysRoot );
     if ( 1 || SourceManager::sourceManager()->allSources().empty() )
       {
@@ -212,21 +211,6 @@ int main( int argc, char * argv[] )
 
   MIL << *SourceManager::sourceManager() << endl;
   MIL << pool << endl;
-
-
-  NameKindProxy rug( nameKindProxy<Package>( pool, "rug" ) );
-  INT << rug << endl;
-  if ( ! rug.availableEmpty() )
-    {
-      PoolItem rugAv( *rug.availableBegin() );
-      CapSet rugPrv( rugAv->dep( Dep::PROVIDES ) );
-      dumpRange( USR << "rug prv: " << endl,
-                 rugPrv.begin(), rugPrv.end() ) << endl;
-
-    }
-
-  INT << rug << endl;
-  return 0;
 
 
   if ( 1 )
@@ -268,9 +252,9 @@ Resolver.cc(show_pool):915 1: U_Th_[S2:0][product]SUSE-Linux-Enterprise-Server-i
                   make_filter_begin<resfilter::ByTransact>(pool),
                   make_filter_end<resfilter::ByTransact>(pool) ) << endl;
 
-  vdumpPoolStats( SEC,
-                  pool.byKindBegin<Package>(),
-                  pool.byKindEnd<Package>() ) << endl;
+  //vdumpPoolStats( SEC,
+  //                pool.byKindBegin<Package>(),
+  //                pool.byKindEnd<Package>() ) << endl;
 
   if ( 1 ) {
     bool eres, rres;
@@ -288,7 +272,7 @@ Resolver.cc(show_pool):915 1: U_Th_[S2:0][product]SUSE-Linux-Enterprise-Server-i
                   make_filter_end<resfilter::ByTransact>(pool) ) << endl;
 
 
-  pool::GetResolvablesToInsDel collect( pool );
+  pool::GetResolvablesToInsDel collect( pool, pool::GetResolvablesToInsDel::ORDER_BY_MEDIANR );
   MIL << "GetResolvablesToInsDel:" << endl << collect << endl;
 
   if ( 1 )

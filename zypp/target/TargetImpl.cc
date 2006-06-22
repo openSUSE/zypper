@@ -162,7 +162,16 @@ namespace zypp
       TargetImpl::PoolItemList to_uninstall;
       TargetImpl::PoolItemList to_install;
       TargetImpl::PoolItemList to_srcinstall;
-      getResolvablesToInsDel( pool_r, to_uninstall, to_install, to_srcinstall );
+      {
+
+        pool::GetResolvablesToInsDel
+          collect( pool_r, policy_r.restrictToMedia() ? pool::GetResolvablesToInsDel::ORDER_BY_MEDIANR
+                                                      : pool::GetResolvablesToInsDel::ORDER_BY_SOURCE );
+        MIL << "GetResolvablesToInsDel: " << endl << collect << endl;
+        to_uninstall.swap( collect._toDelete );
+        to_install.swap( collect._toInstall );
+        to_srcinstall.swap( collect._toSrcinstall );
+      }
 
       if ( policy_r.restrictToMedia() ) {
         MIL << "Restrict to media number " << policy_r.restrictToMedia() << endl;
