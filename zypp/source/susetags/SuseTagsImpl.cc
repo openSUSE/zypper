@@ -292,7 +292,7 @@ namespace zypp
           // in case we dont have list of valid files in content file, we just glob for them
           std::list<std::string> descr_dir_file_list;
           try {
-            dirInfo( 1, descr_dir_file_list, _path);
+            dirInfo( 1, descr_dir_file_list, mediaDescrDir());
           }
           catch(Exception &e) {
             ZYPP_THROW(Exception("Can't list description directory content from " + url().asString() ));
