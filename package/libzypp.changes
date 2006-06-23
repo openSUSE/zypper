@@ -1,7 +1,14 @@
 -------------------------------------------------------------------
+Fri Jun 23 13:41:18 CEST 2006 - ma@suse.de
+
+- forward port from SLE branch
+- Set default permission for logfiles to 0640. (#187044)
+- revision 3696
+
+-------------------------------------------------------------------
 Thu Jun 22 16:01:15 CEST 2006 - ma@suse.de
 
-- backport from sle branch
+- forward port from SLE branch
 - Fixed installation of SP or Add-On product switching to media 2
   too early. (#186607)
 - revision 3686
@@ -9,7 +16,7 @@ Thu Jun 22 16:01:15 CEST 2006 - ma@suse.de
 -------------------------------------------------------------------
 Wed Jun 21 15:47:39 CEST 2006 - dmacvicar@suse.de
 
-- backport from sle branch
+- forward port from SLE branch
 - Strip self provides without edition in Resolvable ctor.
   (#186079)
 - Source::provideResolvables not implemented in yum source type.
