@@ -29,6 +29,7 @@
 
 #include <zypp/CapFactory.h>
 #include <zypp/KeyRing.h>
+#include <zypp/PublicKey.h>
 
 using namespace zypp::detail;
 
@@ -43,10 +44,12 @@ using namespace zypp::source::yum;
 
 int main()
 {
-  std::ofstream file;
-  file.open("lala.txt", ios::out);
-    //file << xml;
-    file.close();
+  zypp::devel::PublicKey k("/suse/dmacvicar/duncan.txt");
+  
+  cout << k.id() << std::endl;
+  cout << k.fingerprint() << std::endl;
+  cout << k.name() << std::endl;
+  
 }
 
 

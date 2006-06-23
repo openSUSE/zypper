@@ -181,7 +181,7 @@ int main( int argc, char * argv[] )
 {
   //zypp::base::LogControl::instance().logfile( "log.restrict" );
   INT << "===[START]==========================================" << endl;
-
+  return 0;
   ResPool pool( getZYpp()->pool() );
 
   if ( 0 )

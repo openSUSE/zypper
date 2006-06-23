@@ -79,11 +79,13 @@ namespace zypp
       void setLineFormater( const shared_ptr<LineFormater> & formater_r );
 
       /** Set path for the logfile.
-       * An empty pathname turns off logging.
-       * <tt>"-"</tt> logs to std::err.
+       * Permission for logfiles is set to 0640 unless an explicit mode_t
+       * value is given. An empty pathname turns off logging. <tt>"-"</tt>
+       * logs to std::err.
        * \throw if \a logfile_r is not usable.
       */
       void logfile( const Pathname & logfile_r );
+      void logfile( const Pathname & logfile_r, mode_t mode_r );
 
       /** Turn off logging. */
       void logNothing();

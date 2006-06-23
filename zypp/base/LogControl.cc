@@ -17,6 +17,7 @@
 #include "zypp/base/LogControl.h"
 #include "zypp/base/String.h"
 #include "zypp/Date.h"
+#include "zypp/PathInfo.h"
 
 using std::endl;
 
@@ -66,15 +67,20 @@ namespace zypp
       ///////////////////////////////////////////////////////////////////
       struct FileWriter : public LogControl::LineWriter
       {
-        FileWriter( const Pathname & logfile_r )
-        : _logfile( logfile_r )
-        {}
-        Pathname _logfile;
+        FileWriter( const Pathname & logfile_r, mode_t mode_r )
+        {
+          // set unbuffered write
+          _outs.rdbuf()->pubsetbuf(0,0);
+          _outs.open( logfile_r.asString().c_str(), std::ios_base::app );
+          // not filesystem::chmod, as filesystem:: functions log,
+          // and this FileWriter is not yet in place.
+          ::chmod( logfile_r.asString().c_str(), mode_r );
+        }
+        std::ofstream _outs;
 
         virtual void writeOut( const std::string & formated_r )
         {
-          std::ofstream outs( _logfile.asString().c_str(), std::ios_base::app );
-          outs << formated_r << endl;
+          _outs << formated_r << endl;
         }
       };
       ///////////////////////////////////////////////////////////////////
@@ -226,14 +232,14 @@ namespace zypp
             _lineFormater.reset( new LogControl::LineFormater );
         }
 
-        void logfile( const Pathname & logfile_r )
+        void logfile( const Pathname & logfile_r, mode_t mode_r = 0640 )
         {
           if ( logfile_r.empty() )
             setLineWriter( shared_ptr<LogControl::LineWriter>() );
           else if ( logfile_r == Pathname( "-" ) )
             setLineWriter( shared_ptr<LogControl::LineWriter>(new StdErrWriter) );
           else
-            setLineWriter( shared_ptr<LogControl::LineWriter>(new FileWriter(logfile_r)) );
+            setLineWriter( shared_ptr<LogControl::LineWriter>(new FileWriter(logfile_r, mode_r)) );
         }
 
       private:
@@ -364,6 +370,9 @@ namespace zypp
 
     void LogControl::logfile( const Pathname & logfile_r )
     { LogControlImpl::instance.logfile( logfile_r ); }
+
+    void LogControl::logfile( const Pathname & logfile_r, mode_t mode_r )
+    { LogControlImpl::instance.logfile( logfile_r, mode_r ); }
 
     void LogControl::setLineWriter( const shared_ptr<LineWriter> & writer_r )
     { LogControlImpl::instance.setLineWriter( writer_r ); }
