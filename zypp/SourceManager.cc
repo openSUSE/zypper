@@ -292,12 +292,12 @@ namespace zypp
 
     for( SourceMap::iterator it = _sources.begin(); it != _sources.end(); it++)
     {
-	storage::PersistentStorage::SourceData descr;
-
+        source::SourceInfo descr;
+        
 	descr.url = it->second.url().asCompleteString();
-	descr.enabled = it->second.enabled();
+        descr.enabled = it->second.enabled() ? SourceInfo::Enabled : SourceInfo::Disabled;
 	descr.alias = it->second.alias();
-	descr.autorefresh = it->second.autorefresh();
+        descr.autorefresh = it->second.autorefresh() ? SourceInfo::Enabled : SourceInfo::Disabled;
 	descr.type = it->second.type();
 	descr.product_dir = it->second.path();
 
@@ -373,11 +373,11 @@ namespace zypp
     storage::PersistentStorage store;
     store.init( root_r );
 
-    std::list<storage::PersistentStorage::SourceData> new_sources = store.storedSources();
+    std::list<source::SourceInfo> new_sources = store.storedSources();
 
     MIL << "Found sources: " << new_sources.size() << endl;
 
-    for( std::list<storage::PersistentStorage::SourceData>::iterator it = new_sources.begin(); it != new_sources.end(); ++it)
+    for( std::list<source::SourceInfo>::iterator it = new_sources.begin(); it != new_sources.end(); ++it)
     {
 	if ( !alias_filter.empty()			// check alias filter, if set
 	    && (alias_filter != it->alias) )
@@ -471,36 +471,28 @@ namespace zypp
     storage::PersistentStorage store;
     store.init( root_r );
 
-    std::list<storage::PersistentStorage::SourceData> new_sources = store.storedSources();
+    std::list<source::SourceInfo> new_sources = store.storedSources();
 
     MIL << "Disabling all sources in store at " << root_r << endl;
 
-    for( std::list<storage::PersistentStorage::SourceData>::iterator it = new_sources.begin();
+    for( std::list<source::SourceInfo>::iterator it = new_sources.begin();
 	it != new_sources.end(); ++it)
     {
 	MIL << "Disabling source " << it->alias << endl;
-	it->enabled = false;
+        it->enabled = SourceInfo::Disabled;
 	store.storeSource( *it );
     }
   }
 
-  SourceManager::SourceInfoList SourceManager::knownSourceInfos(const Pathname &root_r)
+  source::SourceInfoList SourceManager::knownSourceInfos(const Pathname &root_r)
   {
     storage::PersistentStorage store;
     SourceInfoList result;
     store.init( root_r );
 
-    std::list<storage::PersistentStorage::SourceData> sources = store.storedSources();
-
+    source::SourceInfoList sources = store.storedSources();
     MIL << "Found sources: " << sources.size() << endl;
-
-    for( std::list<storage::PersistentStorage::SourceData>::iterator it = sources.begin();
-	 it != sources.end(); ++it)
-    {
-      SourceInfo info = { it->alias, it->url, it->type, it->autorefresh };
-      result.push_back( info );
-    }
-    return result;
+    return sources;
   }
     
   /******************************************************************

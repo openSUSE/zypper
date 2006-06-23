@@ -117,7 +117,7 @@ template<>
 std::string toXML( const Language::constPtr &obj );
 
 template<>
-std::string toXML( const PersistentStorage::SourceData &obj );
+std::string toXML( const source::SourceInfo &obj );
 
 /////////////////////////////////////////////////////////////////
 } // namespace storage

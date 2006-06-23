@@ -169,14 +169,14 @@ PersistentStorage::hasFlag( const std::string &key, const std::string &flag ) co
 // SOURCES API
 ////////////////////////////////////////////////////////
 
-std::list<PersistentStorage::SourceData>
+source::SourceInfoList
 PersistentStorage::storedSources() const
 {
   return d->backend->storedSources();
 }
 
 void
-PersistentStorage::storeSource(const PersistentStorage::SourceData &data)
+PersistentStorage::storeSource(const source::SourceInfo &data)
 {
   d->backend->storeSource(data);
 }

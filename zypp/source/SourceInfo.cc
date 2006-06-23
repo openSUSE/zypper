@@ -6,11 +6,12 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file zypp/SourceCreateContext.h
+/** \file zypp/SourceInfo.cc
  *
 */
-#ifndef ZYPP_SourceCreateContext_H
-#define ZYPP_SourceCreateContext_H
+
+#include <string>
+#include "zypp/source/SourceInfo.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -18,13 +19,17 @@ namespace zypp
 namespace source
 {
   
-  struct SourceCreateContext
+  std::ostream & operator<<( std::ostream & str, const SourceInfo::EnabledState & obj )
   {
-  
-  }  
+    if ( obj == SourceInfo::Enabled )
+      return str << std::string("true");
+    if ( obj == SourceInfo::Disabled )
+      return str << std::string("false");
+    else
+      return str << std::string("not-set");
+  }
   
 }
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
-#endif // ZYPP_SourceCreateContext_H

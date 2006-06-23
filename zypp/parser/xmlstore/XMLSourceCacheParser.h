@@ -13,7 +13,7 @@
 #ifndef XMLSourceCacheParser_h
 #define XMLSourceCacheParser_h
 
-#include <zypp/target/store/PersistentStorage.h>
+#include <zypp/source/SourceInfo.h>
 #include <zypp/parser/XMLNodeIterator.h>
 #include <zypp/parser/LibXMLHelper.h>
 #include <list>
@@ -24,7 +24,7 @@ namespace parser
 {
 namespace xmlstore
 {
-     typedef shared_ptr<storage::PersistentStorage::SourceData> SourceData_Ptr;
+     typedef shared_ptr<source::SourceInfo> SourceInfo_Ptr;
 
      /*
       * Use this class as an iterator that produces, one after one,
@@ -46,18 +46,18 @@ namespace xmlstore
       * You can query the exit status with errorStatus().
       */
 
-      class XMLSourceCacheParser : public zypp::parser::XMLNodeIterator<SourceData_Ptr>
+      class XMLSourceCacheParser : public zypp::parser::XMLNodeIterator<SourceInfo_Ptr>
       {
       public:
         XMLSourceCacheParser(std::istream &is, const std::string &baseUrl);
         XMLSourceCacheParser();
-        XMLSourceCacheParser(SourceData_Ptr & entry);
+        XMLSourceCacheParser(SourceInfo_Ptr & entry);
         virtual ~XMLSourceCacheParser();
 
       private:
         virtual bool isInterested(const xmlNodePtr nodePtr);
-        virtual SourceData_Ptr process(const xmlTextReaderPtr reader);
-        void parseSourceList(SourceData_Ptr dataPtr, xmlNodePtr node);
+        virtual SourceInfo_Ptr process(const xmlTextReaderPtr reader);
+        void parseSourceList(SourceInfo_Ptr dataPtr, xmlNodePtr node);
         zypp::parser::LibXMLHelper _helper;
       };
   } // namespace parser

@@ -22,6 +22,8 @@
 
 #include "zypp/base/Gettext.h" // move with FailedSourcesRestoreException & SourcesAlreadyRestoredException
 
+#include "zypp/source/SourceInfo.h"
+
 #include "zypp/Source.h"
 #include "zypp/Url.h"
 #include "zypp/Pathname.h"
@@ -143,9 +145,7 @@ namespace zypp
      *
      * \throws Exception
      */
-    typedef struct { std::string alias; Url url; std::string type; bool autorefresh; } SourceInfo;
-    typedef std::list<SourceInfo> SourceInfoList;
-    SourceInfoList knownSourceInfos(const Pathname &root_r);
+    source::SourceInfoList knownSourceInfos(const Pathname &root_r);
     
     /**
      * Store the current state to the given path

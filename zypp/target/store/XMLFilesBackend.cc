@@ -1202,18 +1202,18 @@ std::ostream & operator<<( std::ostream & str, const XMLFilesBackend & obj )
 // SOURCES API
 ////////////////////////////////////////////////////////
 
-std::list<PersistentStorage::SourceData>
+source::SourceInfoList
 XMLFilesBackend::storedSources() const
 {
   path source_p = path(d->root.asString()) / path(ZYPP_DB_DIR) / path ("sources");
-  std::list<PersistentStorage::SourceData> sources;
+  source::SourceInfoList sources;
   DBG << "Reading source cache in " << source_p.string() << std::endl;
   directory_iterator end_iter;
   // return empty list if the dir does not exist
   if ( !exists( source_p ) )
   {
     ERR << "path " << source_p.string() << " does not exists. Required to read source cache " << std::endl;
-    return std::list<PersistentStorage::SourceData>();
+    return source::SourceInfoList();
   }
 
   for ( directory_iterator dir_itr( source_p ); dir_itr != end_iter; ++dir_itr )
@@ -1224,7 +1224,7 @@ XMLFilesBackend::storedSources() const
     std::ifstream anIstream(full_path.c_str());
     zypp::parser::xmlstore::XMLSourceCacheParser iter(anIstream, "");
     for (; ! iter.atEnd(); ++iter) {
-      PersistentStorage::SourceData data = **iter;
+      source::SourceInfo data = **iter;
       sources.push_back(data);
     }
   }
@@ -1234,7 +1234,7 @@ XMLFilesBackend::storedSources() const
 }
 
 void
-XMLFilesBackend::storeSource(const PersistentStorage::SourceData &data)
+XMLFilesBackend::storeSource(const source::SourceInfo &data)
 {
   // serialize and save a file
   std::string xml = toXML(data);

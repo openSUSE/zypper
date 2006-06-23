@@ -21,6 +21,9 @@
 #include <zypp/Url.h>
 #include <zypp/Date.h>
 #include <zypp/Patch.h>
+#include <zypp/source/SourceInfo.h>
+
+using namespace zypp::source;
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -44,23 +47,6 @@ namespace zypp
       /** Dtor */
       ~PersistentStorage();
       void doTest();
-
-      struct SourceData
-      {
-        SourceData()
-        {
-          enabled = true;
-          autorefresh = false;
-        };
-
-        bool enabled;
-        bool autorefresh;
-        Pathname product_dir;
-        std::string type;
-        Url url;
-        Pathname cache_dir;
-        std::string alias;
-      };
 
     public:
       /**
@@ -136,11 +122,11 @@ namespace zypp
       /**
        * Query for installed Sources
        */
-      std::list<SourceData> storedSources() const;
+      std::list<SourceInfo> storedSources() const;
       /**
        * Add a new installed source
        */
-      void storeSource(const SourceData &data);
+      void storeSource(const SourceInfo &data);
       /**
        * Delete an installed source
        */

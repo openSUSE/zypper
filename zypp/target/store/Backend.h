@@ -105,11 +105,11 @@ public:
   /**
     * Query for installed Sources
     */
-  virtual std::list<PersistentStorage::SourceData> storedSources() const = 0;
+  virtual source::SourceInfoList storedSources() const = 0;
   /**
     * Query for installed Sources
     */
-  virtual void storeSource(const PersistentStorage::SourceData &data) = 0;
+  virtual void storeSource(const source::SourceInfo &data) = 0;
   /**
     * Query for installed Sources
     */

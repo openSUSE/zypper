@@ -19,10 +19,9 @@
 #include <zypp/base/Logger.h>
 #include <zypp/parser/xmlstore/schemanames.h>
 
-#include <zypp/parser/xmlstore/XMLSourceCacheParser.h>
+#include "XMLSourceCacheParser.h"
 
 using namespace std;
-using namespace zypp::storage;
 
 namespace zypp {
 namespace parser {
@@ -31,8 +30,8 @@ namespace xmlstore {
       XMLSourceCacheParser::XMLSourceCacheParser()
       { }
 
-      XMLSourceCacheParser::XMLSourceCacheParser(SourceData_Ptr& entry)
-      : zypp::parser::XMLNodeIterator<SourceData_Ptr>(entry)
+      XMLSourceCacheParser::XMLSourceCacheParser(SourceInfo_Ptr &entry)
+        : zypp::parser::XMLNodeIterator<SourceInfo_Ptr>(entry)
       { }
 
 
@@ -48,11 +47,11 @@ namespace xmlstore {
       }
 
       // do the actual processing
-      SourceData_Ptr
+      SourceInfo_Ptr
       XMLSourceCacheParser::process(const xmlTextReaderPtr reader)
       {
         assert(reader);
-        SourceData_Ptr dataPtr( new PersistentStorage::SourceData );
+        SourceInfo_Ptr dataPtr( new source::SourceInfo );
         xmlNodePtr dataNode = xmlTextReaderExpand(reader);
         assert(dataNode);
 
@@ -63,11 +62,21 @@ namespace xmlstore {
             string name = _helper.name(child);
             if (name == "enabled")
             {
-              dataPtr->enabled = (_helper.content(child) == "true") ? true : false;
+              if ( _helper.content(child) == "true" )
+                dataPtr->enabled = source::SourceInfo::Enabled;
+              if ( _helper.content(child) == "false" )
+                dataPtr->enabled = source::SourceInfo::Disabled;
+              else
+                dataPtr->enabled = source::SourceInfo::NotSet;
             }
             else if (name == "auto-refresh")
             {
-              dataPtr->autorefresh = (_helper.content(child) == "true") ? true : false;
+              if ( _helper.content(child) == "true" )
+                dataPtr->autorefresh = source::SourceInfo::Enabled;
+              if ( _helper.content(child) == "false" )
+                dataPtr->autorefresh = source::SourceInfo::Disabled;
+              else
+                dataPtr->autorefresh = source::SourceInfo::NotSet;
             }
             else if (name == "type")
             {
@@ -101,7 +110,7 @@ namespace xmlstore {
 
 
       XMLSourceCacheParser::XMLSourceCacheParser(istream &is, const string &baseUrl)
-  : zypp::parser::XMLNodeIterator<SourceData_Ptr>(is, baseUrl, SOURCESCHEMA)
+        : zypp::parser::XMLNodeIterator<SourceInfo_Ptr>(is, baseUrl, SOURCESCHEMA)
       {
         fetchNext();
       }

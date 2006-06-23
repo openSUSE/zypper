@@ -431,13 +431,13 @@ std::string toXML( const Patch::constPtr &obj )
 }
 
 template<> 
-std::string toXML( const PersistentStorage::SourceData &obj )
+std::string toXML( const source::SourceInfo &obj )
 {
   stringstream out;
   out << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" << std::endl;
   out << "<source  xmlns=\"http://www.novell.com/metadata/zypp/xml-store\">" << std::endl;
-  out << "  <enabled>" << (obj.enabled ? "true" : "false" ) << "</enabled>" << std::endl;
-  out << "  <auto-refresh>" << ( obj.autorefresh ? "true" : "false" ) << "</auto-refresh>" << std::endl;
+  out << "  <enabled>" << obj.enabled << "</enabled>" << std::endl;
+  out << "  <auto-refresh>" << obj.autorefresh << "</auto-refresh>" << std::endl;
   out << "  <product-dir>" << obj.product_dir << "</product-dir>" << std::endl;
   out << "  <cache-dir>" << obj.cache_dir << "</cache-dir>" << std::endl;
   out << "  <type>" << xml_escape(obj.type) << "</type>" << std::endl;
