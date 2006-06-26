@@ -43,10 +43,11 @@ namespace zypp
       static Source_Ref::Impl_Ptr createSourceImpl( const media::MediaId & media_r,
                                                     const Pathname & path_r,
                                                     const std::string & alias_r,
-                                                    const Pathname & cache_dir_r)
+                                                    const Pathname & cache_dir_r,
+                                                    bool auto_refresh )
       {
         Source_Ref::Impl_Ptr impl( new _SourceImpl );
-        impl->factoryCtor( media_r, path_r, alias_r, cache_dir_r, false );
+        impl->factoryCtor( media_r, path_r, alias_r, cache_dir_r, false, auto_refresh );
         return impl;
       }
 
@@ -57,10 +58,11 @@ namespace zypp
       static Source_Ref::Impl_Ptr createBaseSourceImpl( const media::MediaId & media_r,
                                                     const Pathname & path_r,
                                                     const std::string & alias_r,
-                                                    const Pathname & cache_dir_r)
+                                                    const Pathname & cache_dir_r,
+                                                    bool auto_refresh )
       {
         Source_Ref::Impl_Ptr impl( new _SourceImpl );
-        impl->factoryCtor( media_r, path_r, alias_r, cache_dir_r, true );
+        impl->factoryCtor( media_r, path_r, alias_r, cache_dir_r, true, auto_refresh);
         return impl;
       }
 
@@ -128,7 +130,7 @@ namespace zypp
     return Source_Ref::noSource;  
   }
   
-  Source_Ref SourceFactory::createFrom( const Url & url_r, const Pathname & path_r, const std::string & alias_r, const Pathname & cache_dir_r, const bool base_source )
+  Source_Ref SourceFactory::createFrom( const Url & url_r, const Pathname & path_r, const std::string & alias_r, const Pathname & cache_dir_r, bool base_source )
   {
     if (! url_r.isValid())
       ZYPP_THROW( Exception("Empty URL passed to SourceFactory") );
@@ -153,12 +155,13 @@ namespace zypp
       MIL << "Initializing from cache" << endl;
     }
 
+    bool auto_refresh = media::MediaAccess::canBeVolatile( url_r );
     try
     {
       MIL << "Trying the YUM source" << endl;
       Source_Ref::Impl_Ptr impl( base_source
-	? Impl::createBaseSourceImpl<yum::YUMSourceImpl>(id, path_r, alias_r, cache_dir_r)
-	: Impl::createSourceImpl<yum::YUMSourceImpl>(id, path_r, alias_r, cache_dir_r) );
+          ? Impl::createBaseSourceImpl<yum::YUMSourceImpl>(id, path_r, alias_r, cache_dir_r, auto_refresh)
+        : Impl::createSourceImpl<yum::YUMSourceImpl>(id, path_r, alias_r, cache_dir_r, auto_refresh) );
       MIL << "Found the YUM source" << endl;
 
       report->endProbe (url_r);
@@ -174,8 +177,8 @@ namespace zypp
     {
       MIL << "Trying the SUSE tags source" << endl;
       Source_Ref::Impl_Ptr impl( base_source
-	? Impl::createBaseSourceImpl<susetags::SuseTagsImpl>(id, path_r, alias_r, cache_dir_r)
-	: Impl::createSourceImpl<susetags::SuseTagsImpl>(id, path_r, alias_r, cache_dir_r) );
+          ? Impl::createBaseSourceImpl<susetags::SuseTagsImpl>(id, path_r, alias_r, cache_dir_r, auto_refresh)
+        : Impl::createSourceImpl<susetags::SuseTagsImpl>(id, path_r, alias_r, cache_dir_r, auto_refresh) );
       MIL << "Found the SUSE tags source" << endl;
 
       report->endProbe (url_r);
@@ -216,7 +219,7 @@ namespace zypp
     return Source_Ref(); // not reached!!
   }
 
-  Source_Ref SourceFactory::createFrom( const std::string & type, const Url & url_r, const Pathname & path_r, const std::string & alias_r, const Pathname & cache_dir_r, const bool base_source )
+  Source_Ref SourceFactory::createFrom( const std::string & type, const Url & url_r, const Pathname & path_r, const std::string & alias_r, const Pathname & cache_dir_r, bool base_source, tribool auto_refresh )
   {
     if (! url_r.isValid())
       ZYPP_THROW( Exception("Empty URL passed to SourceFactory") );
@@ -241,6 +244,10 @@ namespace zypp
       MIL << "Initializing from cache" << endl;
     }
 
+    // Sane default for unknown autorefresh 
+    if ( auto_refresh == indeterminate )
+      auto_refresh = media::MediaAccess::canBeVolatile( url_r );
+    
     try
     {
 
@@ -249,20 +256,20 @@ namespace zypp
       if( type == yum::YUMSourceImpl::typeString() ) {
         MIL << "Trying the YUM source" << endl;
         impl = Source_Ref::Impl_Ptr( base_source
-	  ? Impl::createBaseSourceImpl<yum::YUMSourceImpl>(id, path_r, alias_r, cache_dir_r)
-	  : Impl::createSourceImpl<yum::YUMSourceImpl>(id, path_r, alias_r, cache_dir_r) );
+	  ? Impl::createBaseSourceImpl<yum::YUMSourceImpl>(id, path_r, alias_r, cache_dir_r, auto_refresh)
+          : Impl::createSourceImpl<yum::YUMSourceImpl>(id, path_r, alias_r, cache_dir_r, auto_refresh) );
         MIL << "Found the YUM source" << endl;
       } else if ( type == susetags::SuseTagsImpl::typeString() ) {
         MIL << "Trying the SUSE tags source" << endl;
         impl = Source_Ref::Impl_Ptr( base_source
-	  ? Impl::createBaseSourceImpl<susetags::SuseTagsImpl>(id, path_r, alias_r, cache_dir_r)
-	  : Impl::createSourceImpl<susetags::SuseTagsImpl>(id, path_r, alias_r, cache_dir_r) );
+            ? Impl::createBaseSourceImpl<susetags::SuseTagsImpl>(id, path_r, alias_r, cache_dir_r, auto_refresh)
+          : Impl::createSourceImpl<susetags::SuseTagsImpl>(id, path_r, alias_r, cache_dir_r, auto_refresh) );
         MIL << "Found the SUSE tags source" << endl;
       } else if ( type == PlaindirImpl::typeString() ) {
         MIL << "Trying the Plaindir source" << endl;
         impl = Source_Ref::Impl_Ptr( base_source
-	  ? Impl::createBaseSourceImpl<PlaindirImpl>(id, path_r, alias_r, cache_dir_r)
-	  : Impl::createSourceImpl<PlaindirImpl>(id, path_r, alias_r, cache_dir_r) );
+            ? Impl::createBaseSourceImpl<PlaindirImpl>(id, path_r, alias_r, cache_dir_r, auto_refresh)
+          : Impl::createSourceImpl<PlaindirImpl>(id, path_r, alias_r, cache_dir_r, auto_refresh) );
         MIL << "Found the Plaindir source" << endl;
       } else {
 	ZYPP_THROW( Exception ("Cannot create source of unknown type '" + type + "'"));

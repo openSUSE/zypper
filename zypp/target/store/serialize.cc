@@ -35,13 +35,13 @@ namespace zypp
 namespace storage
 { /////////////////////////////////////////////////////////////////
 
-std::string xml_escape( const std::string &text )
+static std::string xml_escape( const std::string &text )
 {
   iobind::parser::xml_escape_parser parser;
   return parser.escape(text);
 }
 
-std::string xml_tag_enclose( const std::string &text, const std::string &tag, bool escape = false )
+static std::string xml_tag_enclose( const std::string &text, const std::string &tag, bool escape = false )
 {
   std::string result;
   result += "<" + tag + ">";
@@ -53,6 +53,16 @@ std::string xml_tag_enclose( const std::string &text, const std::string &tag, bo
 
   result += "</" + tag + ">";
   return result;
+}
+
+static std::ostream & operator<<( std::ostream & str, const tribool obj )
+{
+  if (obj)
+    return str << "true";
+  else if (!obj)
+    return str << "false";
+  else
+    return str << "indeterminate";
 }
 
 /**

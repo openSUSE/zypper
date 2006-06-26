@@ -74,10 +74,10 @@ namespace zypp
        * \throw EXCEPTION on fail
       */
       void factoryCtor( const media::MediaId & media_r,
-                        const Pathname & path_r = "/",
-                        const std::string & alias_r = "",
-                        const Pathname cache_dir_r = "",
-			const bool base_source = false);
+                        const Pathname & path_r,
+                        const std::string & alias_r,
+                        const Pathname cache_dir_r,
+			bool base_source, bool auto_refresh);
 
       /** SourceImpl MediaVerifier. */
       class Verifier;

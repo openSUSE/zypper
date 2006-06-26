@@ -71,7 +71,7 @@ SqliteSources::createDummy( const Url & url, const string & catalog )
     try {
 
 	SqliteSourceImpl *impl = new SqliteSourceImpl ();
-	impl->factoryCtor( mediaid, Pathname(), catalog );
+	impl->factoryCtor( mediaid, Pathname(), catalog, "", false, false );
 	impl->setId( catalog );
 	impl->setZmdName( catalog );
 	impl->setZmdDescription ( catalog );
@@ -212,7 +212,7 @@ SqliteSources::sources( bool zypp_restore, bool refresh )
 	try {
 
 	    SqliteSourceImpl *impl = new SqliteSourceImpl ();
-	    impl->factoryCtor( mediaid, Pathname(), alias );
+	    impl->factoryCtor( mediaid, Pathname(), alias, "", false, false );
 	    impl->setId( id );
 	    impl->setZmdName( name );
 	    impl->setZmdDescription ( desc );

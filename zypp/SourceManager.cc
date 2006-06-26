@@ -392,12 +392,12 @@ namespace zypp
 	}
 
 	// Note: Url(it->url).asString() to hide password in logs
-        MIL << "Restoring source: url:[" << it->url().asString() << "] product_dir:[" << it->path() << "] alias:[" << it->alias() << "] cache_dir:[" << it->cacheDir() << "]" << endl;
+        MIL << "Restoring source: url:[" << it->url().asString() << "] product_dir:[" << it->path() << "] alias:[" << it->alias() << "] cache_dir:[" << it->cacheDir() << "] auto_refresh:[ " << it->autorefresh() << "]" << endl;
   
 	  SourceId id = 0;
   
 	  try {
-            id = addSource( SourceFactory().createFrom(it->type(), it->url(), it->path(), it->alias(), it->cacheDir()) );
+            id = addSource( SourceFactory().createFrom(it->type(), it->url(), it->path(), it->alias(), it->cacheDir(), false, it->autorefresh()) );
 	  }
 	  catch (const Exception &expt )
 	  {
@@ -419,7 +419,7 @@ namespace zypp
 	              DBG << "CD/DVD devices changed - try again without a devices list"
 	                  << std::endl;
   
-                      id = addSource( SourceFactory().createFrom(url2, it->path(), it->alias(), it->cacheDir()) );
+                      id = addSource( SourceFactory().createFrom(url2, it->path(), it->alias(), it->cacheDir(), false ) );
   
 	              // This worked ... update it->url ?
 	              //it->url = url2.asCompleteString();
@@ -453,7 +453,6 @@ namespace zypp
 	      DBG << "disable source" << endl;
 	      src.disable();
 	  }
-          src.setAutorefresh ( it->autorefresh() );
     }
 
     if( !report.empty() )

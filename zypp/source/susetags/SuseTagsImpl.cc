@@ -405,6 +405,9 @@ namespace zypp
           // in the media.
           readMediaFile(mediaFile());
           readContentFile(contentFile());
+          
+          if ( autorefresh() )
+            storeMetadata(_cache_dir);
         }
         else
         {

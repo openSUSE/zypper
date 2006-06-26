@@ -127,7 +127,8 @@ namespace zypp
                                   const Pathname & path_r,
                                   const std::string & alias_r,
                                   const Pathname cache_dir_r,
-				  const bool base_source)
+				  bool base_source,
+                                  bool auto_refresh )
     {
       _media_set = new MediaSet( selfSourceRef() );
       _url = media_mgr.url( media_r );
@@ -137,10 +138,8 @@ namespace zypp
       _cache_dir = cache_dir_r;
       _subscribed = true;
       _base_source = base_source;
-
-      // for sources which are neither CD nor DVD we enable autorefresh by default
-      _autorefresh = media::MediaAccess::canBeVolatile( _url );
-
+      _autorefresh = auto_refresh;
+      
       try
         {
           factoryInit();

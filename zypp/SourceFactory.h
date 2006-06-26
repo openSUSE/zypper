@@ -15,6 +15,7 @@
 #include <iosfwd>
 #include <string>
 #include <set>
+#include <boost/logic/tribool.hpp>
 
 #include "zypp/base/PtrTypes.h"
 
@@ -22,6 +23,8 @@
 #include "zypp/source/SourceInfo.h"
 #include "zypp/Url.h"
 #include "zypp/Pathname.h"
+
+using namespace boost;
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -59,12 +62,12 @@ namespace zypp
     /** Construct source.
      * \throw EXCEPTION on fail
     */
-    Source_Ref createFrom( const Url & url_r, const Pathname & path_r = "/", const std::string & alias_r = "", const Pathname & cache_dir_r = "", const bool base_source = false );
+    Source_Ref createFrom( const Url & url_r, const Pathname & path_r = "/", const std::string & alias_r = "", const Pathname & cache_dir_r = "", bool base_source = false );
 
     /** Construct source of a given type.
      * \throw EXCEPTION on fail
     */
-    Source_Ref createFrom( const std::string & type,  const Url & url_r, const Pathname & path_r = "/", const std::string & alias_r = "", const Pathname & cache_dir_r = "", const bool base_source = false );
+    Source_Ref createFrom( const std::string & type,  const Url & url_r, const Pathname & path_r, const std::string & alias_r, const Pathname & cache_dir_r, bool base_source, tribool auto_refresh );
 
   private:
     /** Implementation  */
