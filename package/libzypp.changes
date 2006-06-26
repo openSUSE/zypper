@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Mon Jun 26 17:14:53 CEST 2006 - dmacvicar@suse.de
+
+- fix autorefresh (#186115)
+- revision 3708
+-------------------------------------------------------------------
 Fri Jun 23 13:41:18 CEST 2006 - ma@suse.de
 
 - forward port from SLE branch
