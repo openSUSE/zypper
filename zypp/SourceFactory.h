@@ -19,6 +19,7 @@
 #include "zypp/base/PtrTypes.h"
 
 #include "zypp/Source.h"
+#include "zypp/source/SourceInfo.h"
 #include "zypp/Url.h"
 #include "zypp/Pathname.h"
 
@@ -45,6 +46,11 @@ namespace zypp
     ~SourceFactory();
 
   public:
+    /** Construct source.
+     * \throw EXCEPTION on fail
+     */
+    Source_Ref createFrom( const source::SourceInfo & context );
+    
     /** Construct source from an implementation.
      * Returns Source_Ref::noSource on NULL \a impl_r.
     */

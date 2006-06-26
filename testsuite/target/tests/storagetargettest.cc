@@ -14,6 +14,7 @@
 #include "zypp/base/Exception.h"
 ///////////////////////////////////////////////////////////////////
 
+#include "zypp/source/SourceInfo.h"
 #include "zypp/target/store/PersistentStorage.h"
 #include "zypp/target/store/XMLFilesBackend.h"
 
@@ -35,9 +36,6 @@
 #include "zypp/ZYppFactory.h"
 
 #include "zypp/target/store/serialize.h"
-
-#include "boost/filesystem/operations.hpp" // includes boost/filesystem/path.hpp
-#include "boost/filesystem/fstream.hpp"    // ditto
 
 #include "Benchmark.h"
 
@@ -106,8 +104,8 @@ struct StorageTargetTest
     if (zyppvar == "/var")
       ZYPP_THROW(Exception("I refuse to delete /var"));
     
-    filesystem::recursive_rmdir( zyppvar );
-    filesystem::recursive_rmdir( zyppcache );
+//    filesystem::recursive_rmdir( zyppvar );
+//    filesystem::recursive_rmdir( zyppcache );
     _store.clear();
   }
   
@@ -192,10 +190,10 @@ struct StorageTargetTest
   void storeKnownSources()
   {
     INT << "===[SOURCES]==========================================" << endl;
-    PersistentStorage::SourceData data;
-    data.url = _source.url().asString();
-    data.type = _source.type();
-    data.alias = _source.alias();
+    source::SourceInfo data;
+    data.setUrl(_source.url());
+    data.setType(_source.type());
+    data.setAlias(_source.alias());
 
     _backend->storeSource(data);
     MIL << "Wrote 1 source" << std::endl;
@@ -247,7 +245,7 @@ struct StorageTargetTest
     clean();
     unpackDatabase("db.tar.gz");
     initStorageBackend();
-    std::list<PersistentStorage::SourceData> sources = _backend->storedSources();
+    source::SourceInfoList sources = _backend->storedSources();
     MIL << "Read " << sources.size() << " sources" << std::endl;
     if ( sources.size() != 2 )
       ZYPP_THROW(Exception("Known Sources read FAILED")); 

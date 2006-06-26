@@ -15,6 +15,7 @@
 #include "zypp/base/Exception.h"
 ///////////////////////////////////////////////////////////////////
 
+#include "zypp/source/SourceInfo.h"
 #include "zypp/target/store/PersistentStorage.h"
 #include "zypp/target/store/XMLFilesBackend.h"
 #include "zypp/parser/tagfile/TagFileParser.h"
@@ -32,9 +33,6 @@
 #include "zypp/CapFactory.h"
 
 #include "zypp/target/store/serialize.h"
-
-#include "boost/filesystem/operations.hpp" // includes boost/filesystem/path.hpp
-#include "boost/filesystem/fstream.hpp"    // ditto
 
 using namespace zypp::detail;
 using namespace std;
@@ -65,7 +63,7 @@ using namespace boost::filesystem;
 */
 struct OldPMSourceParser : public parser::tagfile::TagFileParser
 {
-  PersistentStorage::SourceData result;
+  source::SourceInfo result;
   
   virtual void beginParse()
   {
@@ -74,18 +72,18 @@ struct OldPMSourceParser : public parser::tagfile::TagFileParser
   virtual void consume( const SingleTag & stag_r )
   {
     if ( stag_r.name == "Type" )
-      result.type = stag_r.value;
+      result.setType(stag_r.value);
     if ( stag_r.name == "URL" )
     {
-      result.url = stag_r.value;
-      result.alias = stag_r.value;
+      result.setUrl(stag_r.value);
+      result.setAlias(stag_r.value);
     }
     if ( stag_r.name == "ProductDir" )
-      result.product_dir = stag_r.value;
+      result.setPath(stag_r.value);
     if ( stag_r.name == "Default_activate" )
-      result.enabled = (stag_r.value == "1") ? true : false;
+      result.setEnabled( (stag_r.value == "1") ? true : false );
     if ( stag_r.name == "Default_refresh" )
-      result.autorefresh = (stag_r.value == "1") ? true : false;
+      result.setAutorefresh( (stag_r.value == "1") ? true : false );
   }
   
   /* Consume MulitTag data. */

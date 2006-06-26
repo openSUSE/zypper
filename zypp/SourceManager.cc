@@ -294,33 +294,33 @@ namespace zypp
     {
         source::SourceInfo descr;
         
-	descr.url = it->second.url().asCompleteString();
-        descr.enabled = it->second.enabled() ? SourceInfo::Enabled : SourceInfo::Disabled;
-	descr.alias = it->second.alias();
-        descr.autorefresh = it->second.autorefresh() ? SourceInfo::Enabled : SourceInfo::Disabled;
-	descr.type = it->second.type();
-	descr.product_dir = it->second.path();
+        descr.setUrl(it->second.url());
+        descr.setEnabled( it->second.enabled() );
+        descr.setAlias( it->second.alias() );
+        descr.setAutorefresh( it->second.autorefresh() );
+        descr.setType( it->second.type() );
+        descr.setPath( it->second.path() );
 
-	descr.cache_dir = it->second.cacheDir();
+        descr.setCacheDir( it->second.cacheDir() );
 
-	if( metadata_cache && descr.cache_dir.empty() )
+        if( metadata_cache && descr.cacheDir().empty() )
 	{
-	    if( descr.cache_dir.empty() )
+          if( descr.cacheDir().empty() )
 	    {
 	      filesystem::TmpDir newCache( root_r /  ZYPP_METADATA_PREFIX, "Source." );
-	      descr.cache_dir = ZYPP_METADATA_PREFIX + newCache.path().basename();
+              descr.setCacheDir( ZYPP_METADATA_PREFIX + newCache.path().basename() ); 
 	    }
 
-	    filesystem::assert_dir ( root_r.asString() + descr.cache_dir );
+            filesystem::assert_dir ( root_r.asString() + descr.cacheDir() );
 
-	    MIL << "Storing metadata to (" << root_r.asString() << ")/" << descr.cache_dir << endl;
+            MIL << "Storing metadata to (" << root_r.asString() << ")/" << descr.cacheDir() << endl;
 
 	    try {
-		it->second.storeMetadata( root_r.asString() + descr.cache_dir );
+              it->second.storeMetadata( root_r.asString() + descr.cacheDir() );
 	    }
 	    catch(const Exception &excp) {
 		WAR << "Creating local metadata cache failed, not using cache" << endl;
-		descr.cache_dir = "";
+                descr.setCacheDir("");
 	    }
 	}
 
@@ -380,35 +380,35 @@ namespace zypp
     for( std::list<source::SourceInfo>::iterator it = new_sources.begin(); it != new_sources.end(); ++it)
     {
 	if ( !alias_filter.empty()			// check alias filter, if set
-	    && (alias_filter != it->alias) )
+             && (alias_filter != it->alias()) )
 	{
 	    continue;
 	}
 
 	if ( !url_filter.empty()			// check url filter, if set
-	    && (url_filter != it->url.asString()) )
+                     && (url_filter != it->url().asString()) )
 	{
 	    continue;
 	}
 
 	// Note: Url(it->url).asString() to hide password in logs
-	MIL << "Restoring source: url:[" << Url(it->url).asString() << "] product_dir:[" << it->product_dir << "] alias:[" << it->alias << "] cache_dir:[" << it->cache_dir << "]" << endl;
+        MIL << "Restoring source: url:[" << it->url().asString() << "] product_dir:[" << it->path() << "] alias:[" << it->alias() << "] cache_dir:[" << it->cacheDir() << "]" << endl;
   
 	  SourceId id = 0;
   
 	  try {
-	    id = addSource( SourceFactory().createFrom(it->type, it->url, it->product_dir, it->alias, it->cache_dir) );
+            id = addSource( SourceFactory().createFrom(it->type(), it->url(), it->path(), it->alias(), it->cacheDir()) );
 	  }
 	  catch (const Exception &expt )
 	  {
 	      // Note: Url(it->url).asString() to hide password in logs
-	      ERR << "Unable to restore source from " << Url(it->url).asString()
+            ERR << "Unable to restore source from " << it->url().asString()
 	          << endl;
   
 	      id = 0;
 	      Url url2;
 	      try {
-	          url2 = it->url;
+                url2 = it->url();
 	          std::string scheme( url2.getScheme());
   
 	          if( (scheme == "cd" || scheme == "dvd") &&
@@ -419,7 +419,7 @@ namespace zypp
 	              DBG << "CD/DVD devices changed - try again without a devices list"
 	                  << std::endl;
   
-	              id = addSource( SourceFactory().createFrom(url2, it->product_dir, it->alias, it->cache_dir) );
+                      id = addSource( SourceFactory().createFrom(url2, it->path(), it->alias(), it->cacheDir()) );
   
 	              // This worked ... update it->url ?
 	              //it->url = url2.asCompleteString();
@@ -436,7 +436,7 @@ namespace zypp
   
 	      if( id == 0)
 	      {
-	        report.append( it->url.asString() + it->product_dir.asString(), it->alias, expt );
+                report.append( it->url().asString() + it->path().asString(), it->alias(), expt );
 	          continue;
 	      }
 	  }
@@ -445,7 +445,7 @@ namespace zypp
 	  // should not throw, we've just created the source
 	  Source_Ref src = findSource( id );
   
-	  if ( it->enabled ) {
+          if ( it->enabled() ) {
 	      DBG << "enable source" << endl;
 	      src.enable();
 	  }
@@ -453,7 +453,7 @@ namespace zypp
 	      DBG << "disable source" << endl;
 	      src.disable();
 	  }
-	  src.setAutorefresh ( it->autorefresh );
+          src.setAutorefresh ( it->autorefresh() );
     }
 
     if( !report.empty() )
@@ -478,8 +478,8 @@ namespace zypp
     for( std::list<source::SourceInfo>::iterator it = new_sources.begin();
 	it != new_sources.end(); ++it)
     {
-	MIL << "Disabling source " << it->alias << endl;
-        it->enabled = SourceInfo::Disabled;
+        MIL << "Disabling source " << it->alias() << endl;
+        it->setEnabled(false);
 	store.storeSource( *it );
     }
   }

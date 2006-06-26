@@ -63,40 +63,36 @@ namespace xmlstore {
             if (name == "enabled")
             {
               if ( _helper.content(child) == "true" )
-                dataPtr->enabled = source::SourceInfo::Enabled;
-              if ( _helper.content(child) == "false" )
-                dataPtr->enabled = source::SourceInfo::Disabled;
+                dataPtr->setEnabled(true);
               else
-                dataPtr->enabled = source::SourceInfo::NotSet;
+                dataPtr->setEnabled(false);
             }
             else if (name == "auto-refresh")
             {
               if ( _helper.content(child) == "true" )
-                dataPtr->autorefresh = source::SourceInfo::Enabled;
-              if ( _helper.content(child) == "false" )
-                dataPtr->autorefresh = source::SourceInfo::Disabled;
+                dataPtr->setAutorefresh(true);
               else
-                dataPtr->autorefresh = source::SourceInfo::NotSet;
+                dataPtr->setAutorefresh(false);
             }
             else if (name == "type")
             {
-              dataPtr->type = _helper.content(child);
+              dataPtr->setType(_helper.content(child));
             }
             else if (name == "product-dir")
             {
-              dataPtr->product_dir = _helper.content(child);
+              dataPtr->setPath(_helper.content(child));
             }
             else if (name == "cache-dir")
             {
-              dataPtr->cache_dir = _helper.content(child);
+              dataPtr->setCacheDir(_helper.content(child));
             }
             else if (name == "alias")
             {
-              dataPtr->alias = _helper.content(child);
+              dataPtr->setAlias(_helper.content(child));
             }
             else if (name == "url")
             {
-              dataPtr->url = _helper.content(child);
+              dataPtr->setUrl(_helper.content(child));
             }
             else
             {

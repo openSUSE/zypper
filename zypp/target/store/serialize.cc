@@ -436,13 +436,13 @@ std::string toXML( const source::SourceInfo &obj )
   stringstream out;
   out << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" << std::endl;
   out << "<source  xmlns=\"http://www.novell.com/metadata/zypp/xml-store\">" << std::endl;
-  out << "  <enabled>" << obj.enabled << "</enabled>" << std::endl;
-  out << "  <auto-refresh>" << obj.autorefresh << "</auto-refresh>" << std::endl;
-  out << "  <product-dir>" << obj.product_dir << "</product-dir>" << std::endl;
-  out << "  <cache-dir>" << obj.cache_dir << "</cache-dir>" << std::endl;
-  out << "  <type>" << xml_escape(obj.type) << "</type>" << std::endl;
-  out << "  <url>" << xml_escape(obj.url.asCompleteString()) << "</url>" << std::endl;
-  out << "  <alias>" << xml_escape(obj.alias) << "</alias>" << std::endl;
+  out << "  <enabled>" << obj.enabled() << "</enabled>" << std::endl;
+  out << "  <auto-refresh>" << obj.autorefresh() << "</auto-refresh>" << std::endl;
+  out << "  <product-dir>" << obj.path() << "</product-dir>" << std::endl;
+  out << "  <cache-dir>" << obj.cacheDir() << "</cache-dir>" << std::endl;
+  out << "  <type>" << xml_escape(obj.type()) << "</type>" << std::endl;
+  out << "  <url>" << xml_escape(obj.url().asCompleteString()) << "</url>" << std::endl;
+  out << "  <alias>" << xml_escape(obj.alias()) << "</alias>" << std::endl;
   out << "</source>" << std::endl;
   return out.str();
 }

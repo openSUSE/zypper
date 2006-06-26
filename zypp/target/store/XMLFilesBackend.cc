@@ -1241,7 +1241,7 @@ XMLFilesBackend::storeSource(const source::SourceInfo &data)
   path source_p = path(d->root.asString()) / path(ZYPP_DB_DIR) / path ("sources");
 
   // generate a filename
-  if (data.alias.size() == 0)
+  if (data.alias().size() == 0)
   {
     ZYPP_THROW(Exception("Cant save source with empty alias"));
   }
@@ -1251,7 +1251,7 @@ XMLFilesBackend::storeSource(const source::SourceInfo &data)
   //DBG << filename << std::endl;
   try
   {
-    std::stringstream message_stream(data.alias);
+    std::stringstream message_stream(data.alias());
     std::string full_path = (source_p / Digest::digest("MD5", message_stream)).string();
 
     file.open(full_path.c_str());
@@ -1260,7 +1260,7 @@ XMLFilesBackend::storeSource(const source::SourceInfo &data)
   }
   catch ( std::exception &e )
   {
-    ERR << "Error saving source " << data.alias << " in the cache" << std::endl;
+    ERR << "Error saving source " << data.alias() << " in the cache" << std::endl;
     ZYPP_THROW(Exception(e.what()));
   }
   updateTimestamp();

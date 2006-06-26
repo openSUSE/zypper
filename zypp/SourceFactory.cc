@@ -123,6 +123,11 @@ namespace zypp
     media_mgr.release(id);
   }
 
+  Source_Ref SourceFactory::createFrom( const source::SourceInfo &context )
+  {
+    return Source_Ref::noSource;  
+  }
+  
   Source_Ref SourceFactory::createFrom( const Url & url_r, const Pathname & path_r, const std::string & alias_r, const Pathname & cache_dir_r, const bool base_source )
   {
     if (! url_r.isValid())
