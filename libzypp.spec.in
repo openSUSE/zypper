@@ -11,7 +11,7 @@
 # norootforbuild
 
 Name:           libzypp
-BuildRequires:  boost-devel curl-devel dejagnu doxygen e2fsprogs-devel gcc-c++ graphviz hal-devel libxml2-devel rpm-devel
+BuildRequires:  boost-devel curl-devel dejagnu doxygen e2fsprogs-devel gcc-c++ graphviz hal-devel libxml2-devel rpm-devel sqlite-devel
 License:        GPL
 Group:          System/Packages
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
@@ -41,7 +41,7 @@ Authors:
 %package devel
 Requires:       libzypp
 Requires:       libxml2-devel curl-devel openssl-devel rpm-devel glibc-devel zlib-devel e2fsprogs-devel
-Requires:       bzip2 popt-devel dbus-1-devel glib2-devel hal-devel boost-devel libstdc++-devel
+Requires:       bzip2 popt-devel dbus-1-devel glib2-devel hal-devel boost-devel libstdc++-devel sqlite-devel
 Summary:        Package, Patch, Pattern, and Product Management - developers files
 Group:          System/Packages
 Provides:       yast2-packagemanager-devel
