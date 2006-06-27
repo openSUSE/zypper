@@ -19,8 +19,6 @@
  * 02111-1307, USA.
  */
 
-#include <sys/utsname.h>
-
 #include "zypp/solver/detail/Resolver.h"
 #include "zypp/solver/detail/Helper.h"
 
@@ -41,6 +39,14 @@
 /////////////////////////////////////////////////////////////////////////
 namespace zypp
 { ///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////
+  namespace zypp_detail
+  { /////////////////////////////////////////////////////////////////
+    Arch defaultArchitecture();
+    /////////////////////////////////////////////////////////////////
+  } // namespace zypp_detail
+  ///////////////////////////////////////////////////////////////////
+
   ///////////////////////////////////////////////////////////////////////
   namespace solver
   { /////////////////////////////////////////////////////////////////////
@@ -61,7 +67,7 @@ Resolver::dumpOn( std::ostream & os ) const
 }
 
 // Generating a system resolvable in the pool in order to trigger
-// modaliases and hals	
+// modaliases and hals
 void assertSystemResObjectInPool()
 {
   ResPool pool( getZYpp()->pool() );
@@ -80,7 +86,7 @@ void assertSystemResObjectInPool()
     {
       WAR << "Unable to set SystemResObject to lock" << endl;
     }
-}	
+}
 
 //---------------------------------------------------------------------------
 
@@ -92,18 +98,10 @@ Resolver::Resolver (const ResPool & pool)
     , _valid_solution_count (0)
     , _best_context (NULL)
     , _timed_out (false)
+    , _architecture( zypp_detail::defaultArchitecture() )
     , _forceResolve (false)
     , _upgradeMode (false)
-{
-    struct utsname buf;
-    if (uname (&buf) < 0) {
-	ERR << "Can't determine system architecture" << endl;
-    }
-    else {
-	MIL << "System architecture is '" << buf.machine << "'" << endl;
-	_architecture = Arch(buf.machine);
-    }
-}
+{}
 
 
 Resolver::~Resolver()
@@ -1114,7 +1112,7 @@ transactCaps( const ResPool & pool, const CapSet & caps, bool install, bool soft
 		added_items.push_back( just_added );
 	    }
 	}
-	
+
     }
     return result;
 }

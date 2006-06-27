@@ -60,6 +60,66 @@ namespace zypp
       return ret;
     }
 
+    Arch defaultArchitecture()
+    {
+      Arch architecture;
+
+      // detect the true architecture
+      struct utsname buf;
+      if ( uname( &buf ) < 0 )
+        {
+          ERR << "Can't determine system architecture" << endl;
+        }
+      else
+        {
+          architecture = Arch( buf.machine );
+          DBG << "uname architecture is '" << buf.machine << "'" << endl;
+
+          // some CPUs report i686 but dont implement cx8 and cmov
+          // check for both flags in /proc/cpuinfo and downgrade
+          // to i586 if either is missing (cf bug #18885)
+
+          if ( architecture == Arch_i686 )
+            {
+              std::ifstream cpuinfo( "/proc/cpuinfo" );
+              if ( !cpuinfo )
+                {
+                  ERR << "Cant open /proc/cpuinfo" << endl;
+                }
+              else
+                {
+                  char infoline[1024];
+                  while ( cpuinfo.good() )
+                    {
+                      if ( !cpuinfo.getline( infoline, 1024, '\n' ) )
+                        {
+                          if ( cpuinfo.eof() )
+                            break;
+                        }
+                      if ( strncmp( infoline, "flags", 5 ) == 0 )
+                        {
+                          std::string flagsline( infoline );
+                          if ( flagsline.find( "cx8" ) == std::string::npos
+                               || flagsline.find( "cmov" ) == std::string::npos )
+                            {
+                              architecture = Arch_i586;
+                              DBG << "CPU lacks 'cx8' or 'cmov': architecture downgraded to '" << architecture << "'" << endl;
+                            }
+                          break;
+                        } // flags found
+                    } // read proc/cpuinfo
+                } // proc/cpuinfo opened
+            } // i686 extra flags check
+        }
+
+      if ( getenv( "ZYPP_TESTSUITE_FAKE_ARCH" ) )
+      {
+        architecture = Arch( getenv( "ZYPP_TESTSUITE_FAKE_ARCH" ) );
+        WAR << "ZYPP_TESTSUITE_FAKE_ARCH: Setting fake system architecture for test purpuses to: '" << architecture << "'" << endl;
+      }
+
+      return architecture;
+    }
     ///////////////////////////////////////////////////////////////////
     //
     //	METHOD NAME : ZYppImpl::ZYppImpl
@@ -71,79 +131,15 @@ namespace zypp
     , _sourceFeed( _pool )
     , _target(0)
     , _resolver( new Resolver(_pool.accessor()) )
+    , _architecture( defaultArchitecture() )
     , _disk_usage()
     {
       MIL << "defaultTextLocale: '" << _textLocale << "'" << endl;
-      
+      MIL << "System architecture is '" << _architecture << "'" << endl;
+
       MIL << "initializing keyring..." << std::endl;
       //_keyring = new KeyRing(homePath() + Pathname("/keyring/all"), homePath() + Pathname("/keyring/trusted"));
       _keyring = new KeyRing(tmpPath());
-
-      // detect the true architecture
-      struct utsname buf;
-      if (uname (&buf) < 0) {
-        ERR << "Can't determine system architecture" << endl;
-      }
-      else {
-        _architecture = Arch( buf.machine );
-
-        MIL << "uname architecture is '" << buf.machine << "'" << endl;
-
-        // some CPUs report i686 but dont implement cx8 and cmov
-        // check for both flags in /proc/cpuinfo and downgrade
-        // to i586 if either is missing (cf bug #18885)
-
-        if (_architecture == Arch_i686)
-        {
-            std::ifstream cpuinfo ("/proc/cpuinfo");
-            if (!cpuinfo)
-            {
-                ERR << "Cant open /proc/cpuinfo" << endl;
-            }
-            else
-            {
-                char infoline[1024];
-                while (cpuinfo.good())
-                {
-                    if (!cpuinfo.getline (infoline, 1024, '\n'))
-                    {
-                        if (cpuinfo.eof())
-                            break;
-                    }
-                    if (strncmp (infoline, "flags", 5) == 0)
-                    {
-                        std::string flagsline (infoline);
-                        if ((flagsline.find( "cx8" ) == std::string::npos)
-                            || (flagsline.find( "cmov" ) == std::string::npos))
-                        {
-                            _architecture = Arch_i586;
-                        }
-                        break;
-                    } // flags found
-                } // read proc/cpuinfo
-            } // proc/cpuinfo opened
-        } // i686 extra flags check
-
-        MIL << "System architecture is '" << _architecture << "'" << endl;
-      }
-    
-
-      
-      if ( getenv("ZYPP_TESTSUITE_FAKE_ARCH") ) 
-      {
-        Arch already_set = _architecture;
-        
-        std::string fakearch(getenv("ZYPP_TESTSUITE_FAKE_ARCH"));
-        try
-        { 
-          _architecture = Arch( fakearch );
-          MIL << "ZYPP_TESTSUITE_FAKE_ARCH: Setting fake system architecture for test purpuses (warning! commit will be disabled!) to: '" << _architecture << "'" << endl;
-        }
-        catch(...)
-        {
-          ERR << "ZYPP_TESTSUITE_FAKE_ARCH: Wrong architecture specified on env variable, using: '" << _architecture << "'" << endl;
-        }
-      }
     }
 
     ///////////////////////////////////////////////////////////////////
@@ -233,7 +229,7 @@ namespace zypp
       {
         ZYPP_THROW( Exception("ZYPP_TESTSUITE_FAKE_ARCH set. Commit not allowed and disabled.") );
       }
-        
+
       MIL << "Attempt to commit (" << policy_r << ")" << endl;
       if (! _target)
 	ZYPP_THROW( Exception("Target not initialized.") );
@@ -366,11 +362,11 @@ namespace zypp
     { _home_path = path; }
 
     Pathname ZYppImpl::tmpPath() const
-    { 
+    {
       static TmpDir zypp_tmp_dir("/var/tmp", "zypp.");
       return zypp_tmp_dir.path();
     }
-    
+
     /******************************************************************
      **
      **	FUNCTION NAME : operator<<
