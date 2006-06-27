@@ -15,41 +15,28 @@
 #include <zypp/TranslatedText.h>
 ///////////////////////////////////////////////////////////////////
 
-#include <zypp/parser/yum/YUMParser.h>
 #include <zypp/base/Logger.h>
-#include <zypp/NVRAD.h>
-#include <zypp/target/rpm/RpmDb.h>
-#include <zypp/source/yum/YUMScriptImpl.h>
-#include <zypp/source/yum/YUMMessageImpl.h>
-#include <zypp/source/yum/YUMPackageImpl.h>
-#include <zypp/source/yum/YUMSourceImpl.h>
+
 
 #include <map>
 #include <set>
 
-#include <zypp/CapFactory.h>
-#include <zypp/KeyRing.h>
-#include <zypp/PublicKey.h>
+#include "zypp/CapFactory.h"
+#include "zypp/KeyRing.h"
+#include "zypp/PublicKey.h"
+
+#include "zypp/cache/KnownSourcesCache.h"
 
 using namespace zypp::detail;
 
 using namespace std;
 using namespace zypp;
-using namespace zypp::parser::yum;
-using namespace zypp::source::yum;
-
-
 
 //using namespace DbXml;
 
 int main()
 {
-  zypp::devel::PublicKey k("/suse/dmacvicar/duncan.txt");
-  
-  cout << k.id() << std::endl;
-  cout << k.fingerprint() << std::endl;
-  cout << k.name() << std::endl;
-  
+  cache::KnownSourcesCache("/");
 }
 
 
