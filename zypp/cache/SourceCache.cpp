@@ -27,7 +27,7 @@ namespace zypp
 namespace cache
 { /////////////////////////////////////////////////////////////////
 
-static int int_to_tribool( boost::tribool b )
+static int tribool_to_int( boost::tribool b )
 {
   if (b)
     return 1;
@@ -37,19 +37,19 @@ static int int_to_tribool( boost::tribool b )
     return 2;
 }  
   
-static boost::tribool b tribool_to_int( int i )
+static boost::tribool int_to_tribool( int i )
 {
   if (i==1)
     return true;
   else if (i==0)
     return false;
   else
-    return boost;indeterminate;
+    return boost::indeterminate;
 }
   
 static std::string checksum_to_string( const CheckSum &checksum )
 {
-  return checksum.type() + ":" checksum.checksum();
+  return checksum.type() + ":" + checksum.checksum();
 }  
   
 static CheckSum string_to_checksum( const std::string &checksum )
@@ -58,7 +58,7 @@ static CheckSum string_to_checksum( const std::string &checksum )
   if ( str::split( checksum, std::back_inserter(words), ":" ) != 2 )
     return CheckSum();
   
-  return CheckSum( words[0], words[19);
+  return CheckSum( words[0], words[19]);
 }
   
 #define SOURCES_TABLE_SCHEMA "create table sources ( alias varchar primary key, type varchar, description varchar,  url varchar, path varchar,  enabled integer, autorefresh integer, timestamp varchar, checksum varchar);"   
@@ -128,7 +128,7 @@ source::SourceInfoList SourceCache::knownSources() const
         info.setPath(reader.getstring(4));
         info.setEnabled( int_to_tribool(reader.getint(5)) );
         info.setAutorefresh( int_to_tribool( reader.getint(6) ));
-        info.setTimestamp(reader.getstring(7));
+        //info.setTimestamp(Date(reader.getstring(7)));
         info.setChecksum(string_to_checksum(reader.getstring(8)));
         sources.push_back(info);
       }

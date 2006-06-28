@@ -43,7 +43,7 @@ namespace source
     SourceInfo & setCacheDir( const Pathname &p );
     SourceInfo & setDescription( const std::string &description );
     SourceInfo & setChecksum( const CheckSum &checksum );
-    SourceInfo & setTimesamp( const Date &timestamp );
+    SourceInfo & setTimestamp( const Date &timestamp );
     boost::tribool enabled() const;
     boost::tribool autorefresh() const;
     Pathname cacheDir() const;

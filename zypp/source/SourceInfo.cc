@@ -94,7 +94,7 @@ namespace source
     return *this;
   }
   
-  SourceInfo & SourceInfo::setTimesamp( const Date &timestamp )
+  SourceInfo & SourceInfo::setTimestamp( const Date &timestamp )
   {
     _timestamp = timestamp;
     return *this;
