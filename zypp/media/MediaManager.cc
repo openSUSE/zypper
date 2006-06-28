@@ -27,6 +27,8 @@
 #include <iostream>
 #include <typeinfo>
 
+#define  DISABLE_AUTOMOUNTER      0
+
 
 //////////////////////////////////////////////////////////////////////
 namespace zypp
@@ -141,6 +143,7 @@ namespace zypp
         using namespace zypp::target::hal;
 
         AutoMounterCleanUp cleanup(NONE);
+#if DISABLE_AUTOMOUNTER
         try
         {
           HalContext hal(true);
@@ -207,6 +210,7 @@ namespace zypp
           WAR << "Unable to disable HAL volume handling (automounter)"
               << std::endl;
         }
+#endif // DISABLE_AUTOMOUNTER
         return cleanup;
       }
 
@@ -219,6 +223,7 @@ namespace zypp
         if(cleanup == NONE)
           return;
 
+#if DISABLE_AUTOMOUNTER
         try
         {
           HalContext hal(true);
@@ -254,6 +259,7 @@ namespace zypp
           WAR << "Unable to restore HAL volume handling (automounter)"
               << std::endl;
         }
+#endif // DISABLE_AUTOMOUNTER
       }
 
       ////////////////////////////////////////////////////////////////
