@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Wed Jun 28 13:22:22 CEST 2006 - mt@suse.de
+
+- deactivated media manager code that was disabling the
+  automounter (#172419)
+- rev 3724
+
+-------------------------------------------------------------------
 Mon Jun 26 17:14:53 CEST 2006 - dmacvicar@suse.de
 
 - fix autorefresh (#186115)
