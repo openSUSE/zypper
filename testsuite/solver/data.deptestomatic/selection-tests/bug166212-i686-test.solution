@@ -1,0 +1,4 @@
+>!> Installing x11 from channel selections
+>!> Solution #1:
+>!> install selection:x11-10-41.noarch[selections]
+>!> installs=1, upgrades=0, uninstalls=0
