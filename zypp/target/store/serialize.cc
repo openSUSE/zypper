@@ -55,7 +55,7 @@ static std::string xml_tag_enclose( const std::string &text, const std::string &
   return result;
 }
 
-static std::ostream & operator<<( std::ostream & str, const tribool obj )
+static std::ostream & operator<<( std::ostream & str, const boost::tribool obj )
 {
   if (obj)
     return str << "true";

@@ -18,8 +18,6 @@
 #include "zypp/Pathname.h"
 #include "zypp/Url.h"
 
-using namespace boost;
-
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
@@ -30,97 +28,42 @@ namespace source
   {
     public:
       
-    SourceInfo() :
-        _enabled (indeterminate),
-        _autorefresh(indeterminate)
-    {
-      
-    }
+    SourceInfo();
     
-    SourceInfo( const Url & url, const Pathname & path, const std::string & alias = "", const Pathname & cache_dir = "", tribool autorefresh = indeterminate)
-      : _enabled (true),
-    _autorefresh(autorefresh),
-    _url(url),
-    _cache_dir(cache_dir),
-    _path(path),
-    _alias(alias)
-    {
-      
-    }
+    SourceInfo( const Url & url, const Pathname & path, const std::string & alias = "", const Pathname & cache_dir = "", boost::tribool autorefresh = boost::indeterminate);
     
-    SourceInfo & setEnabled( bool enabled )
-    {
-      _enabled = enabled;
-      return *this;
-    }
+    SourceInfo & setEnabled( boost::tribool enabled );
+    SourceInfo & setAutorefresh( boost::tribool autorefresh );
+    SourceInfo & setUrl( const Url &url );
+    SourceInfo & setPath( const Pathname &p );
+    SourceInfo & setAlias( const std::string &alias );
+    SourceInfo & setType( const std::string &t );
+    SourceInfo & setCacheDir( const Pathname &p );
+    boost::tribool enabled() const;
+    boost::tribool autorefresh() const;
+    Pathname cacheDir() const;
+    Pathname path() const;
+    std::string alias() const;
+    std::string type() const;
+    Url url() const;
     
-    SourceInfo & setAutorefresh( bool autorefresh )
-    {
-      _autorefresh = autorefresh;
-      return *this;
-    }
-    
-    SourceInfo & setUrl( const Url &url )
-    {
-      _url = url;
-      return *this;
-    }
-    
-    SourceInfo & setPath( const Pathname &p )
-    {
-      _path = p;
-      return *this;
-    }
-    
-    SourceInfo & setAlias( const std::string &alias )
-    {
-      _alias = alias;
-      return *this;
-    }
-    
-    SourceInfo & setType( const std::string &t )
-    {
-      _type = t;
-      return *this;
-    }
-    
-    SourceInfo & setCacheDir( const Pathname &p )
-    {
-      _cache_dir = p;
-      return *this;
-    }
-     
-    tribool enabled() const
-    { return _enabled; }
-        
-    tribool autorefresh() const
-    { return _enabled; }    
-    
-    Pathname cacheDir() const
-    { return _cache_dir; }
-    
-    Pathname path() const
-    { return _path; }
-    
-    std::string alias() const
-    { return _alias; }
-    
-    std::string type() const
-    { return _type; }
-    
-    Url url() const
-    { return _url; }
+    /** Overload to realize stream output. */
+    std::ostream & dumpOn( std::ostream & str ) const;
     
     private:
     
-    tribool _enabled;
-    tribool _autorefresh;
+    boost::tribool _enabled;
+    boost::tribool _autorefresh;
     std::string _type;
     Url _url;
     Pathname _cache_dir;
     Pathname _path;
     std::string _alias;
   };  
+  
+  /** \relates SourceInfo Stream output */
+  inline std::ostream & operator<<( std::ostream & str, const SourceInfo & obj )
+  { return obj.dumpOn( str ); }
   
   typedef std::list<SourceInfo> SourceInfoList;
 }
