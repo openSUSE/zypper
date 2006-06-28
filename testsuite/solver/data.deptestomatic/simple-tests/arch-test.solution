@@ -1,0 +1,14 @@
+>!> Installing B from channel test
+>!> 1 problems found:
+>!> Problem:
+>!> B-1.0-2.x86_64[test] cannot be installed due to missing dependencies
+>!> There are no installable providers of A == 1.1 for B-1.0-2.x86_64[test]
+>!>    Solution:
+>!>       Install A although it would change the architecture
+>!>       A-1.1-2.x86_64[test] provides this dependency but would changed the architecture of the installed item
+>!>    Solution:
+>!>       do not install B
+>!>       do not install B-1.0-2.x86_64[test]
+>!>    Solution:
+>!>       Ignore this requirement just here
+>!>       

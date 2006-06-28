@@ -14,5 +14,6 @@
 </setup>
 <trial>
   <install channel="test" package="B"/>
+  <reportproblems/>
 </trial>
 </test>

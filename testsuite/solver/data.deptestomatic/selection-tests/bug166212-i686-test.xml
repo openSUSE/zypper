@@ -11,5 +11,6 @@
   <showpool/>
   <install channel="selections" kind="selection" name="x11"/>
   <transact kind="selection"/>
+  <reportproblems/>
 </trial>
 </test>
