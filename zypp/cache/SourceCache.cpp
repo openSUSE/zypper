@@ -7,8 +7,11 @@
 |                                                                      |
 \---------------------------------------------------------------------*/
 
+#include <vector>
+
 #include "zypp/base/Logger.h"
-#include "zypp/cache/KnownSourcesCache.h"
+#include "zypp/base/String.h"
+#include "zypp/cache/SourceCache.h"
 #include "zypp/target/store/PersistentStorage.h"
 #include "zypp/cache/sqlite3x/sqlite3x.hpp"
 
@@ -24,7 +27,45 @@ namespace zypp
 namespace cache
 { /////////////////////////////////////////////////////////////////
 
-KnownSourcesCache::KnownSourcesCache( const Pathname &root_r )
+static int int_to_tribool( boost::tribool b )
+{
+  if (b)
+    return 1;
+  else if (!b)
+    return 0;
+  else
+    return 2;
+}  
+  
+static boost::tribool b tribool_to_int( int i )
+{
+  if (i==1)
+    return true;
+  else if (i==0)
+    return false;
+  else
+    return boost;indeterminate;
+}
+  
+static std::string checksum_to_string( const CheckSum &checksum )
+{
+  return checksum.type() + ":" checksum.checksum();
+}  
+  
+static CheckSum string_to_checksum( const std::string &checksum )
+{
+  std::vector<std::string> words;
+  if ( str::split( checksum, std::back_inserter(words), ":" ) != 2 )
+    return CheckSum();
+  
+  return CheckSum( words[0], words[19);
+}
+  
+#define SOURCES_TABLE_SCHEMA "create table sources ( alias varchar primary key, type varchar, description varchar,  url varchar, path varchar,  enabled integer, autorefresh integer, timestamp varchar, checksum varchar);"   
+  
+// alias 0 , type 1, desc 2, url 3, path 4, enabled 5, autorefresh 6, timestamp 7, checksum 8
+  
+SourceCache::SourceCache( const Pathname &root_r )
 {
   try
   {
@@ -34,7 +75,7 @@ KnownSourcesCache::KnownSourcesCache( const Pathname &root_r )
       int count = con.executeint("select count(*) from sqlite_master where type='table' and name='sources';");
       if( count==0 )
       {
-        con.executenonquery("create table sources (  id integer primary key autoincrement,  alias varchar,  url varchar,  description varchar,  enabled integer, autorefresh integer, type varchar, cachedir varchar, path varchar);");
+        con.executenonquery(SOURCES_TABLE_SCHEMA);
         
         try
         {
@@ -61,11 +102,11 @@ KnownSourcesCache::KnownSourcesCache( const Pathname &root_r )
   } 
 }
 
-KnownSourcesCache::~KnownSourcesCache()
+SourceCache::~SourceCache()
 {
 }
 
-source::SourceInfoList KnownSourcesCache::knownSources() const
+source::SourceInfoList SourceCache::knownSources() const
 {
   source::SourceInfoList sources;
   
@@ -78,14 +119,17 @@ source::SourceInfoList KnownSourcesCache::knownSources() const
 
       while(reader.read())
       {
+        // alias 0 , type 1, desc 2, url 3, path 4, enabled 5, autorefresh 6, timestamp 7, checksum 8
         source::SourceInfo info;
-        info.setAlias(reader.getstring(1));
-        info.setUrl(reader.getstring(2));
-        info.setEnabled( (reader.getint(4) == 1 ) ? true : false );
-        info.setAutorefresh( (reader.getint(5) == 1 ) ? true : false );
-        info.setType(reader.getstring(6));
-        info.setCacheDir(reader.getstring(7));
-        info.setPath(reader.getstring(8));
+        info.setAlias(reader.getstring(0));
+        info.setType(reader.getstring(1));
+        info.setDescription(reader.getstring(2));
+        info.setUrl(reader.getstring(3));
+        info.setPath(reader.getstring(4));
+        info.setEnabled( int_to_tribool(reader.getint(5)) );
+        info.setAutorefresh( int_to_tribool( reader.getint(6) ));
+        info.setTimestamp(reader.getstring(7));
+        info.setChecksum(string_to_checksum(reader.getstring(8)));
         sources.push_back(info);
       }
     }
@@ -97,7 +141,7 @@ source::SourceInfoList KnownSourcesCache::knownSources() const
   return sources;
 }
 
-void KnownSourcesCache::storeSource( const source::SourceInfo &info )
+void SourceCache::storeSource( const source::SourceInfo &info )
 {
   try
   {
@@ -105,15 +149,18 @@ void KnownSourcesCache::storeSource( const source::SourceInfo &info )
     sqlite3_transaction trans(con);
 
     {
-      sqlite3_command cmd(con, "insert into sources ( alias, url, description, enabled, autorefresh, type, cachedir, path) values ( ?, ?, ?, ? , ?, ?, ?, ?);");
-      cmd.bind(1, info.alias());
-      cmd.bind(2, info.url().asCompleteString());
-      // FIXME no description
-      cmd.bind(4, info.enabled() ? 1 : 0 );
-      cmd.bind(5, info.autorefresh() ? 1 : 0 );
-      cmd.bind(6, info.type());
-      cmd.bind(7, info.cacheDir().asString());
-      cmd.bind(8, info.path().asString());
+      // alias 0 , type 1, desc 2, url 3, path 4, enabled 5, autorefresh 6, timestamp 7, checksum 8
+        
+      sqlite3_command cmd(con, "insert into sources ( alias, type, description, url, path, enabled, autorefresh, timestamp, checksum ) values ( ?, ?, ?, ? , ?, ?, ?, ?, ?);");
+      cmd.bind(0, info.alias());
+      cmd.bind(1, info.type());
+      cmd.bind(2, info.description());
+      cmd.bind(3, info.url().asCompleteString());
+      cmd.bind(4, info.path().asString());
+      cmd.bind(5, tribool_to_int(info.enabled()) );
+      cmd.bind(6, tribool_to_int(info.autorefresh()) );
+      cmd.bind(7, info.timestamp().asString());
+      cmd.bind(8, checksum_to_string(info.checksum()) );
       
       cmd.executenonquery();
     }
@@ -127,7 +174,7 @@ void KnownSourcesCache::storeSource( const source::SourceInfo &info )
   }
 } 
 
-std::ostream & KnownSourcesCache::dumpOn( std::ostream & str ) const
+std::ostream & SourceCache::dumpOn( std::ostream & str ) const
 {
   return str;
 }

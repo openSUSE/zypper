@@ -82,6 +82,24 @@ namespace source
     return *this;
   }
      
+  SourceInfo & SourceInfo::setDescription( const std::string &description )
+  {
+    _description = description;
+    return *this;
+  }
+  
+  SourceInfo & SourceInfo::setChecksum( const CheckSum &checksum )
+  {
+    _checksum = checksum;
+    return *this;
+  }
+  
+  SourceInfo & SourceInfo::setTimesamp( const Date &timestamp )
+  {
+    _timestamp = timestamp;
+    return *this;
+  }
+  
   tribool SourceInfo::enabled() const
   { return _enabled; }
         
@@ -96,7 +114,16 @@ namespace source
     
   std::string SourceInfo::alias() const
   { return _alias; }
+  
+  std::string SourceInfo::description() const
+  { return _description; }
     
+  CheckSum SourceInfo::checksum() const
+  { return _checksum; }
+  
+  Date SourceInfo::timestamp() const
+  { return _timestamp; }
+  
   std::string SourceInfo::type() const
   { return _type; }
     

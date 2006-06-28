@@ -6,11 +6,11 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file	zypp/KnownSourcesCache.h
+/** \file	zypp/SourceCache.h
  *
 */
-#ifndef ZYPP_KnownSourcesCache_H
-#define ZYPP_KnownSourcesCache_H
+#ifndef ZYPP_SourceCache_H
+#define ZYPP_SourceCache_H
 
 #include <iosfwd>
 #include <string>
@@ -28,20 +28,20 @@ namespace zypp
   namespace cache
   { /////////////////////////////////////////////////////////////////
 
-    DEFINE_PTR_TYPE(KnownSourcesCache);
+    DEFINE_PTR_TYPE(SourceCache);
 
     ///////////////////////////////////////////////////////////////////
     //
-    //	CLASS NAME : KnownSourcesCache
+    //	CLASS NAME : SourceCache
     //
-    class KnownSourcesCache : public base::ReferenceCounted, private base::NonCopyable
+    class SourceCache : public base::ReferenceCounted, private base::NonCopyable
     {
-      friend std::ostream & operator<<( std::ostream & str, const KnownSourcesCache & obj );
+      friend std::ostream & operator<<( std::ostream & str, const SourceCache & obj );
 
     public:
       /** root path */
-      KnownSourcesCache( const Pathname &root_r );
-      ~KnownSourcesCache();
+      SourceCache( const Pathname &root_r );
+      ~SourceCache();
       source::SourceInfoList knownSources() const;
       void storeSource( const source::SourceInfo &info );    
     protected:
@@ -52,8 +52,8 @@ namespace zypp
     };
     ///////////////////////////////////////////////////////////////////
 
-    /** \relates KnownSourcesCache Stream output */
-    inline std::ostream & operator<<( std::ostream & str, const KnownSourcesCache & obj )
+    /** \relates SourceCache Stream output */
+    inline std::ostream & operator<<( std::ostream & str, const SourceCache & obj )
     { return obj.dumpOn( str ); }
 
 
@@ -63,4 +63,4 @@ namespace zypp
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
-#endif // ZYPP_SOURCE_KnownSourcesCache_H
+#endif // ZYPP_SOURCE_SourceCache_H
