@@ -1,5 +1,5 @@
 >!> Establishing state ...
 >!> Established context
+>!> message:foo-patch-message-1-1-2.noarch[test] UU_s_
 >!> patch:foo-0-2.noarch[test] UU_s_
 >!> script:foo-patch-script-1-1-2.noarch[test] UU_s_
->!> message:foo-patch-message-1-1-2.noarch[test] UU_s_
