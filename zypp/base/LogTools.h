@@ -61,6 +61,11 @@ namespace zypp
       return str << extro;
     }
 
+  template<class _Iterator>
+    std::ostream & dumpRangeLine( std::ostream & str,
+                                  _Iterator begin, _Iterator end )
+    { return dumpRange( str, begin, end, "(", "", ", ", "", ")" ); }
+
   template<class _Tp>
     std::ostream & operator<<( std::ostream & str, const std::vector<_Tp> & obj )
     { return dumpRange( str, obj.begin(), obj.end() ); }
