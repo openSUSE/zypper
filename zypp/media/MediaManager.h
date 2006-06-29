@@ -378,7 +378,31 @@ namespace zypp
      *     - <tt>proxyuser</tt>:
      *       The proxy username.
      *     - <tt>proxypass</tt>:
-     *       The proxy password. 
+     *       The proxy password.
+     *     - <tt>ssl_capath</tt>:
+     *       The absolute CA directory to use, default is /etc/ssl/certs.
+     *     - <tt>ssl_verify</tt>: Flag to modify the ssl verify behaviour.
+     *       Valid values are: 'yes', 'no' and a comma separated list of
+     *       'host' and 'peer' flags.
+     *       - 'no':
+     *         disables ssl verify
+     *       - 'yes':
+     *         enables ssl verify, this is the default
+     *         and is equivalent to 'host,peer'.
+     *       - 'host': The server is considered the intended one, when the
+     *         'Common Name' field or a 'Subject Alternate Name' field in 
+     *         the certificate matches the host name in the URL.
+     *       - 'peer': Verifies whether the certificate provided by the
+     *         server is authentic against the chain of digital signatures
+     *         found in <tt>ssl_capath</tt>. 
+     *     - <tt>timeout</tt>:
+     *       Transfer timeout in seconds between 0 and 3600, 0 disables
+     *       the timeout, default timeout is 180 seconds.
+     *     - <tt>auth</tt>: A comma separated list of http authentication
+     *       method names to use: 'basic', 'digest', 'ntlm', 'negotiate',
+     *       'spnego', 'gssnego'.
+     *       Note, that this list depends on the list of methods supported
+     *       by the curl library. 
      *   - Authority:
      *     The authority component has to provide a hostname. Optionally
      *     also a username and password. In case of the 'ftp' scheme,
@@ -387,6 +411,17 @@ namespace zypp
      *     Mandatory URL component, that specifies the path name on the
      *     server, where the desired files are located.
      *
+     *   Proxy settings: If no proxy settings are present in tha URLs
+     *   query parameters, the media handler reads the system wide proxy
+     *   settings from the <tt>/etc/sysconfig/proxy</tt> file.
+     *   If a proxy setting was present, but the proxy password not,
+     *   it attempts to read the <tt>proxy-user</tt> variable from the
+     *   <tt>~/.curlrc</tt> (<tt>/root/.curlrc</tt>) file.
+     *   <br>
+     *   If no proxy setting was present, then libzypp does not pass any
+     *   proxy settings to curl, but curl fallbacks to use the content of
+     *   the <tt>http_proxy</tt>, <tt>ftp_proxy</tt>, etc environment
+     *   variables.
      */
     class MediaManager: private zypp::base::NonCopyable
     {
