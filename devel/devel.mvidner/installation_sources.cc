@@ -9,6 +9,8 @@
 #include <list>
 #include <string>
 
+#include <boost/format.hpp>
+
 #include <zypp/ZYpp.h>
 #include <zypp/ZYppFactory.h>
 #include <zypp/SourceFactory.h>
@@ -18,20 +20,29 @@
 #include <zypp/base/LogControl.h>
 #include <zypp/base/Logger.h>
 #include <zypp/base/Exception.h>
-#include <zypp/base/Algorithm.h>
 
 #undef ZYPP_BASE_LOGGER_LOGGROUP
 #define ZYPP_BASE_LOGGER_LOGGROUP "installation_sources"
 
 using namespace std;
 using namespace zypp;
+using boost::format;
 
 bool callbackAnswer = false;
 
 static
 bool readCallbackAnswer()
 {
+  cerr << "> " << (callbackAnswer? "yes": "no") << endl;
   return callbackAnswer;
+}
+
+static
+bool askIt (const boost::format & msg)
+{
+  MIL << msg << endl;
+  cerr << msg << endl;
+  return readCallbackAnswer ();
 }
 
 ///////////////////////////////////////////////////////////////////
@@ -39,83 +50,75 @@ bool readCallbackAnswer()
 ///////////////////////////////////////////////////////////////////
 struct KeyRingReceive : public zypp::callback::ReceiveReport<zypp::KeyRingReport>
 {
-  bool _enabled;
-  KeyRingReceive()
-    : _enabled( true )
-    {
-    }
-
-  void disable( bool value )
-    {
-      _enabled = !value;
-      MIL << "KeyRingReceive is now " << (_enabled ? "en" : "dis") << "abled." << std::endl;
-    }
- 
   virtual bool askUserToAcceptUnsignedFile( const std::string &file )
     {
-      if (!_enabled) return true;
-      DBG << "21|" << file << std::endl;
-      std::cout << "21|" << file << std::endl;
-      return readCallbackAnswer();
+      return askIt (
+	format(_("File %s is not signed.\n"
+		 "Use it anyway?"))
+	% file
+	);
     }
+
   virtual bool askUserToAcceptUnknownKey( const std::string &file, const std::string &keyid, const std::string &keyname, const std::string &fingerprint )
     {
-      if (!_enabled) return true;
-      DBG << "22|" << file << "|" << keyid << "|" << keyname << "|" << fingerprint << std::endl;
-      std::cout << "22|" << file << "|" << keyid << "|" << keyname << "|" << fingerprint << std::endl;
-      return readCallbackAnswer();
+      return askIt (
+	format(_("File %s is signed with an unknown key:\n"
+		 "%s|%s|%s\n"
+		 "Use the file anyway?"))
+	% file % keyid % keyname % fingerprint
+	);
     }
+
   virtual bool askUserToTrustKey( const std::string &keyid, const std::string &keyname, const std::string &fingerprint )
     {
-      if (!_enabled) return true;
-      DBG << "23|" << keyid << "|" << keyname <<  "|" << fingerprint << std::endl;
-      std::cout << "23|" << keyid << "|" << keyname <<  "|" << fingerprint << std::endl;
-      return readCallbackAnswer();
+      return askIt (
+	format(_("Untrusted key found:\n"
+		 "%s|%s|%s\n"
+		 "Trust key?"))
+	% keyid % keyname % fingerprint
+	);
     }
+
   virtual bool askUserToAcceptVerificationFailed( const std::string &file, const std::string &keyid, const std::string &keyname, const std::string &fingerprint )
     {
-      if (!_enabled) return true;
-      DBG << "24|" << file << "|" << keyid << "|" << keyname << "|" << fingerprint << std::endl;
-      std::cout << "24|" << file << "|" << keyid << "|" << keyname << "|" << fingerprint << std::endl;
-      return readCallbackAnswer();
+      return askIt (
+	format(_("File %s failed integrity check with the folowing key:\n"
+		 "%s|%s|%s\n"
+		 "Use the file anyway?"))
+	% file % keyid % keyname % fingerprint
+	);
     }
 };
 
 
 struct DigestReceive : public zypp::callback::ReceiveReport<zypp::DigestReport>
 {
-  bool _enabled;
-  DigestReceive()
-    : _enabled( true )
-    {
-    }
-
-  void disable( bool value )
-    {
-      _enabled = !value;
-      MIL << "DigestReceive is now " << (_enabled ? "en" : "dis") << "abled." << std::endl;
-    }
- 
   virtual bool askUserToAcceptNoDigest( const zypp::Pathname &file )
     {
-      if (!_enabled) return true;
-      DBG << "25|" << file << std::endl;
-      std::cout << "25|" << file << std::endl;
-      return readCallbackAnswer();
+      return askIt (
+	format(_("File %s does not have a checksum.\n"
+		 "Use the file anyway?"))
+	% file
+	);
     }
+
   virtual bool askUserToAccepUnknownDigest( const Pathname &file, const std::string &name )
     {
-      if (!_enabled) return true;
-      DBG << "26|" << file << "|" << name << std::endl;
-      std::cout << "26|" << file << "|" << name << std::endl;
-      return readCallbackAnswer();
+      return askIt (
+	format(_("File %s has an unknown checksum %s.\n"
+		 "Use the file anyway?"))
+	% file % name
+	);
     }
+
   virtual bool askUserToAcceptWrongDigest( const Pathname &file, const std::string &requested, const std::string &found )
     {
-      if (!_enabled) return true;
-      DBG << "27|" << file << "|" << requested << "|" << found << std::endl;
-      std::cout << "27|" << file << "|" << requested << "|" << found << std::endl;
-      return readCallbackAnswer();
+      return askIt (
+	format(_("File %s has an invalid checksum.\n"
+		 "Expected %s, found %s\n"
+		 "Use the file anyway?"))
+	% file % requested % found
+	);
     }
 };
 
@@ -126,12 +129,12 @@ std::string timestamp ()
     struct tm * tmp = localtime(&t);
 
     if (tmp == NULL) {
-        return "";
+	return "";
     }
 
     char outstr[50];
     if (strftime(outstr, sizeof(outstr), "%Y%m%d-%H%M%S", tmp) == 0) {
-        return "";
+	return "";
     }
     return outstr;
 }
@@ -164,10 +167,6 @@ int main( int argc, char **argv )
   if (logfile == NULL)
     logfile = "/var/log/YaST2/y2log";
   zypp::base::LogControl::instance().logfile( logfile );
-/*
-  else
-  zypp::base::LogControl::instance().logfile( ZMD_BACKEND_LOG );
-*/
 
   MIL << "START" << endl;
 
