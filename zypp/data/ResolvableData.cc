@@ -28,7 +28,23 @@ IMPL_PTR_TYPE(Message);
 IMPL_PTR_TYPE(Selection);  
 IMPL_PTR_TYPE(Pattern);
   
-  
+/*
+std::ostream& operator<<(std::ostream& out, const ResObject &data)
+{
+	out << "Script Data: " << endl
+      << "  name: " << data.name << endl
+      << "  edition: " << data.edition << endl
+      << "  provides: " << data.provides << endl
+      << "  conflicts: " << data.conflicts << endl
+      << "  obsoletes: " << data.obsoletes << endl
+      << "  freshens: " << data.freshens << endl
+      << "  requires: " << data.requires << endl
+      << "  recommends:" << endl << data.recommends << endl
+      << "  suggests:" << endl << data.suggests << endl
+      << "  supplements:" << endl << data.supplements << endl
+      << "  enhances:" << endl << data.enhances << endl
+}
+
 std::ostream& operator<<(std::ostream& out, const zypp::shared_ptr<AtomBase> data)
 {
   out << "Atom data" << endl;
@@ -54,20 +70,6 @@ std::ostream& operator<<(std::ostream& out, const zypp::shared_ptr<AtomBase> dat
   
 std::ostream& operator<<(std::ostream& out, const Script& data)
 {
-  out << "Script Data: " << endl
-      << "  name: " << data.name << endl
-      << "  epoch: " << data.epoch << endl
-      << "  version: " << data.ver << endl
-      << "  release: " << data.rel << endl
-      << "  provides: " << data.provides << endl
-      << "  conflicts: " << data.conflicts << endl
-      << "  obsoletes: " << data.obsoletes << endl
-      << "  freshens: " << data.freshens << endl
-      << "  requires: " << data.requires << endl
-      << "  recommends:" << endl << data.recommends << endl
-      << "  suggests:" << endl << data.suggests << endl
-      << "  supplements:" << endl << data.supplements << endl
-      << "  enhances:" << endl << data.enhances << endl
       << "  do script: " << data.do_script << endl
       << "  undo script: " << data.undo_script << endl
       << "  do script location: " << data.do_location << endl
@@ -99,7 +101,8 @@ std::ostream& operator<<(std::ostream& out, const Message& data)
       << "  enhances:" << endl << data.enhances << endl
       << "  text: " << data.text << endl;
   return out;
-}  
+}
+*/
   
 } // namespace cache
 } // namespace zypp

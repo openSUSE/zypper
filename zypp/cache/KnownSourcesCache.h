@@ -6,11 +6,11 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file	zypp/SourceCache.h
+/** \file	zypp/KnownSourcesCache.h
  *
 */
-#ifndef ZYPP_SourceCache_H
-#define ZYPP_SourceCache_H
+#ifndef ZYPP_KnownSourcesCache_H
+#define ZYPP_KnownSourcesCache_H
 
 #include <iosfwd>
 #include <string>
@@ -19,7 +19,6 @@
 #include "zypp/base/NonCopyable.h"
 #include "zypp/base/PtrTypes.h"
 #include "zypp/source/SourceInfo.h"
-#include "zypp/data/ResolvableData.h"
 #include "zypp/Pathname.h"
 #include "zypp/cache/sqlite3x/sqlite3x.hpp"
 
@@ -30,32 +29,36 @@ namespace zypp
   namespace cache
   { /////////////////////////////////////////////////////////////////
 
-    DEFINE_PTR_TYPE(SourceCache);
+    DEFINE_PTR_TYPE(KnownSourcesCache);
 
     ///////////////////////////////////////////////////////////////////
     //
-    //	CLASS NAME : SourceCache
+    //	CLASS NAME : KnownSourcesCache
     //
-    class SourceCache : public base::ReferenceCounted, private base::NonCopyable
+    class KnownSourcesCache : public base::ReferenceCounted, private base::NonCopyable
     {
-      friend std::ostream & operator<<( std::ostream & str, const SourceCache & obj );
+      friend std::ostream & operator<<( std::ostream & str, const KnownSourcesCache & obj );
 
     public:
-      /** Creates a source cache */
-      SourceCache( const Pathname &root_r, const std::string alias );
-      ~SourceCache();
-      void cachePattern( const data::Pattern pattern );
+      /** root path */
+      KnownSourcesCache( const Pathname &root_r );
+      ~KnownSourcesCache();
+      source::SourceInfoList knownSources() const;
+      void storeSource( const source::SourceInfo &info );    
     protected:
-      void cacheResolvable( const data::ResObject );
+			bool tablesCreated() const;
+			void createTables();
+			void importOldSources();
       /** Overload to realize stream output. */
       virtual std::ostream & dumpOn( std::ostream & str ) const;
       //typedef std::map<media::MediaNr, media::MediaAccessId> MediaMap
-      shared_ptr<sqlite3x::sqlite3_connection> _con;
+			shared_ptr<sqlite3x::sqlite3_connection> _con;
+			Pathname _root;
     };
     ///////////////////////////////////////////////////////////////////
 
-    /** \relates SourceCache Stream output */
-    inline std::ostream & operator<<( std::ostream & str, const SourceCache & obj )
+    /** \relates KnownSourcesCache Stream output */
+    inline std::ostream & operator<<( std::ostream & str, const KnownSourcesCache & obj )
     { return obj.dumpOn( str ); }
 
 
@@ -65,4 +68,4 @@ namespace zypp
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
-#endif // ZYPP_SOURCE_SourceCache_H
+#endif // ZYPP_SOURCE_KnownSourcesCache_H

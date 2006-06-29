@@ -135,11 +135,11 @@ namespace data
   };
   
   /* Easy output */
-  std::ostream& operator<<(std::ostream &out, const Dependency& data);
-  std::ostream& operator<<(std::ostream &out, const ResObject& data);
-  std::ostream& operator<<(std::ostream &out, const Product& data);
-  std::ostream& operator<<(std::ostream &out, const Pattern& data);
-  std::ostream& operator<<(std::ostream &out, const Selection& data);
+//   std::ostream& operator<<(std::ostream &out, const Dependency& data);
+//   std::ostream& operator<<(std::ostream &out, const ResObject& data);
+//   std::ostream& operator<<(std::ostream &out, const Product& data);
+//   std::ostream& operator<<(std::ostream &out, const Pattern& data);
+//   std::ostream& operator<<(std::ostream &out, const Selection& data);
   
 } // namespace data
 } // namespace zypp

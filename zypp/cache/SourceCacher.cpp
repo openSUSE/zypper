@@ -21,6 +21,7 @@ namespace cache
 
 SourceCacher::SourceCacher( const Pathname &root_r )
 {
+  
 }
 
 SourceCacher::~SourceCacher()
