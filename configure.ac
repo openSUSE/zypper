@@ -251,6 +251,7 @@ AC_OUTPUT(	 po/Makefile.in\
 	zypp/pool/Makefile		\
 	zypp/solver/Makefile		\
 	zypp/solver/detail/Makefile	\
+  zypp/data/Makefile \
 	zypp/cache/Makefile \
   zypp/cache/sqlite3x/Makefile
   zypp/source/Makefile		\

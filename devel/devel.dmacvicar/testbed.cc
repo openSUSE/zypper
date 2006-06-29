@@ -36,7 +36,13 @@ using namespace zypp;
 
 int main()
 {
-  cache::KnownSourcesCache("/");
+  cache::KnownSourcesCache cache("/");
+  
+  source::SourceInfoList srcs = cache.knownSources();
+  for ( source::SourceInfoList::const_iterator it = srcs.begin(); it != srcs.end(); ++it)
+  {
+    cout << *it << endl;
+  }
 }
 
 

@@ -27,6 +27,10 @@ SourceCacher::~SourceCacher()
 {
 }
 
+std::ostream & SourceCacher::dumpOn( std::ostream & str ) const
+{
+  return str;
+}
 
 }
 }

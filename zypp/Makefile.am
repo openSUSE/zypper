@@ -2,7 +2,7 @@
 ## ##################################################
 
 SUBDIRS = base thread url media capability detail pool parser \
-	source cache target solver zypp_detail ui
+	data source cache target solver zypp_detail ui
 
 AM_CXXFLAGS = -DZYPP_BASE_LOGGER_LOGGROUP=\"zypp\"
 
@@ -174,6 +174,7 @@ lib@PACKAGE@_la_LIBADD =        thread/lib@PACKAGE@_thread.la		\
 				parser/lib@PACKAGE@_parser.la		\
 				source/lib@PACKAGE@_source.la		\
 				cache/lib@PACKAGE@_cache.la		\
+				data/lib@PACKAGE@_data.la		\
 				media/lib@PACKAGE@_media.la		\
 				url/lib@PACKAGE@_url.la			\
 				target/lib@PACKAGE@_target.la		\
