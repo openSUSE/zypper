@@ -13,7 +13,8 @@ noinst_PROGRAMS = Arch Url1 Url2 Url3 Url4 Url5 Url \
 	Capabilities	\
 	PtrTypes \
 	TranslatedText \
-	CheckSum
+	CheckSum \
+	PublicKey
 
 ## ##################################################
 
