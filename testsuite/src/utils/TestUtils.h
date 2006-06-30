@@ -12,6 +12,7 @@ namespace zypp
   {
     namespace utils
     {
+      void assert_equal( const std::string &got, const std::string &expected);
       void dump( const ResStore &store, bool descr = false, bool deps = false );  
       void dump( const std::list<ResObject::Ptr> &list, bool descr = false, bool deps = false );  
     }  

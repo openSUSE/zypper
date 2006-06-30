@@ -37,9 +37,12 @@ namespace zypp
     }
 
     if (
-          ( (str::toLower(type) == "md5"   ) && (checksum.size() != 32) ) ||
-          ( (str::toLower(type) == "sha1"  ) && (checksum.size() != 40) ) ||
-          ( (str::toLower(type) == "sha256") && (checksum.size() != 64) ) )
+          ( (str::toLower(type) == "md2"     ) && (checksum.size() != 32) ) ||
+          ( (str::toLower(type) == "md4"     ) && (checksum.size() != 32) ) ||
+          ( (str::toLower(type) == "md5"     ) && (checksum.size() != 32) ) ||
+          ( (str::toLower(type) == "sha1"    ) && (checksum.size() != 40) ) ||
+          ( (str::toLower(type) == "rmd160"  ) && (checksum.size() != 40) ) ||
+          ( (str::toLower(type) == "sha256"  ) && (checksum.size() != 64) ) )
     {
       ZYPP_THROW(Exception("Bad checksum, " + type + " algorithm of size " + str::numstring(checksum.size())));
     }
@@ -59,16 +62,16 @@ namespace zypp
   { return (checksum().empty() || type().empty()); }
   
   /** \relates CheckSum Stream output. */
-  inline std::ostream & operator<<( std::ostream & str, const CheckSum & obj )
+  std::ostream & operator<<( std::ostream & str, const CheckSum & obj )
   { return str << (obj.empty() ? std::string("NoCheckSum")
                                : obj.type()+"-"+obj.checksum()  ); }
 
   /** \relates CheckSum */
-  inline bool operator==( const CheckSum & lhs, const CheckSum & rhs )
+  bool operator==( const CheckSum & lhs, const CheckSum & rhs )
   { return lhs.checksum() == rhs.checksum() && lhs.type() == rhs.type(); }
 
   /** \relates CheckSum */
-  inline bool operator!=( const CheckSum & lhs, const CheckSum & rhs )
+  bool operator!=( const CheckSum & lhs, const CheckSum & rhs )
   { return ! ( lhs == rhs ); }
 
 } // namespace zypp

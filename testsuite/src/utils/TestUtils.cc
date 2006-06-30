@@ -1,5 +1,6 @@
 
 #include <iostream>
+#include "zypp/base/Exception.h"
 #include "zypp/Dependencies.h"
 #include "zypp/Capability.h"
 #include "zypp/ResObject.h"
@@ -15,6 +16,14 @@ namespace zypp
   {
     namespace utils
     {
+      void assert_equal( const std::string &got, const std::string &expected)
+      {
+        if (got != expected)
+        {
+          ZYPP_THROW(Exception("Expected '" + expected + "', got '" + got + "'"));
+        }
+      }
+
       static void dumpCapSet( const CapSet &caps, const std::string &deptype)
       {
         cout << "   " << "<" << deptype << ">" << std::endl;

@@ -8,17 +8,11 @@
 #include "zypp/PublicKey.h"
 #include "zypp/ZYppFactory.h"
 #include "zypp/ZYpp.h"
+#include "testsuite/src/utils/TestUtils.h"
 
 using namespace std;
 using namespace zypp;
-
-static void assert_equal( const std::string &got, const std::string &expected)
-{
-  if (got != expected)
-  {
-    ZYPP_THROW(Exception("Expected '" + expected + "', got '" + got + "'"));
-  }
-}
+using namespace zypp::testsuite::utils;
 
 int main( int argc, char * argv[] )
 {

@@ -41,13 +41,13 @@ namespace zypp
   };
 
   /** \relates CheckSum Stream output. */
-  inline std::ostream & operator<<( std::ostream & str, const CheckSum & obj );
+  std::ostream & operator<<( std::ostream & str, const CheckSum & obj );
 
   /** \relates CheckSum */
-  inline bool operator==( const CheckSum & lhs, const CheckSum & rhs );
+  bool operator==( const CheckSum & lhs, const CheckSum & rhs );
 
   /** \relates CheckSum */
-  inline bool operator!=( const CheckSum & lhs, const CheckSum & rhs );
+  bool operator!=( const CheckSum & lhs, const CheckSum & rhs );
 
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////

@@ -12,11 +12,12 @@ noinst_PROGRAMS = Arch Url1 Url2 Url3 Url4 Url5 Url \
 	Edition		\
 	Capabilities	\
 	PtrTypes \
-	TranslatedText
+	TranslatedText \
+	CheckSum
 
 ## ##################################################
 
-LDADD =	$(top_srcdir)/zypp/lib@PACKAGE@.la
+LDADD =	$(top_srcdir)/zypp/lib@PACKAGE@.la -lboost_unit_test_framework
 
 ## ##################################################
 
@@ -28,6 +29,8 @@ Url4_SOURCES = Url4.cc
 Url5_SOURCES = Url5.cc
 Url_SOURCES  = Url.cc
 TranslatedText_SOURCES  = TranslatedText.cc
+PublicKey_SOURCES = PublicKey.cc
+CheckSum_SOURCES = CheckSum.cc
 RWPtr_SOURCES = RWPtr.cc
 Edition_SOURCES = Edition.cc
 Capabilities_SOURCES = Capabilities.cc
