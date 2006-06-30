@@ -17,6 +17,19 @@ using boost::unit_test::test_case;
 using namespace std;
 using namespace zypp;
 
+//BOOST_CHECK( m_account.balance() >= 0.0 );
+        // BOOST_REQUIRE
+        //BOOST_CHECK_MESSAGE( m_account.balance() > 1.0,
+        //                     "Initial balance should be more then 1, was " << m_account.balance() );
+        //BOOST_CHECK_EQUAL( m_account.balance(), 5.0 );
+        //BOOST_CHECK_CLOSE( m_account.balance(), 10.0, /* tolerance */ 1e-10 );
+        //BOOST_REQUIRE_MESSAGE( m_account.balance() > 500.1,
+        //                       "Balance should be more than 500.1, was " << m_account.balance());
+
+        //BOOST_REQUIRE_PREDICATE( std::not_equal_to<double>(), (m_account.balance())(999.9) );
+        //BOOST_REQUIRE_PREDICATE( close_at_tolerance<double>( 1e-9 ), (m_account.balance())(605.5) );
+        // BOOST_CHECK_THROW( m_account.withdraw( m_account.balance() + 1 ), std::runtime_error );
+
 void publickey_test()
 {
   BOOST_CHECK_THROW( zypp::devel::PublicKey("nonexistant"), Exception );
