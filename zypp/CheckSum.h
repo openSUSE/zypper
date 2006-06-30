@@ -24,51 +24,30 @@ namespace zypp
   class CheckSum
   {
   public:
-    CheckSum(const std::string & type, const std::string & checksum)
-    {
-      _checksum = checksum;
-      if (str::toLower(type) == "sha")
-      {
-        if (checksum.size() == 40)
-          _type = "sha1";
-        else if (checksum.size() == 64)
-          _type = "sha256";
-      }
-      else
-      {
-        _type = type;
-      }
-    }
+    /**
+     * Creates a checksum for algorithm \param type
+     * \throws if the checksum is invalid and can't be constructed
+     */
+    CheckSum(const std::string & type, const std::string & checksum);
+    CheckSum();
 
-    CheckSum()
-    {}
+    std::string type() const;
+    std::string checksum() const;
 
-    std::string type() const
-    { return _type; }
-    
-    std::string checksum() const
-    { return _checksum; }
-
-    bool empty() const
-    { return (checksum().empty() || type().empty()); }
-    
+    bool empty() const;
   private:
     std::string _type;
     std::string _checksum;
   };
 
   /** \relates CheckSum Stream output. */
-  inline std::ostream & operator<<( std::ostream & str, const CheckSum & obj )
-  { return str << (obj.empty() ? std::string("NoCheckSum")
-                               : obj.type()+"-"+obj.checksum()  ); }
+  inline std::ostream & operator<<( std::ostream & str, const CheckSum & obj );
 
   /** \relates CheckSum */
-  inline bool operator==( const CheckSum & lhs, const CheckSum & rhs )
-  { return lhs.checksum() == rhs.checksum() && lhs.type() == rhs.type(); }
+  inline bool operator==( const CheckSum & lhs, const CheckSum & rhs );
 
   /** \relates CheckSum */
-  inline bool operator!=( const CheckSum & lhs, const CheckSum & rhs )
-  { return ! ( lhs == rhs ); }
+  inline bool operator!=( const CheckSum & lhs, const CheckSum & rhs );
 
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////

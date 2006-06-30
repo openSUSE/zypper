@@ -105,6 +105,7 @@ lib@PACKAGE@_la_SOURCES = \
 	CapFactory.cc	\
 	CapMatch.cc	\
 	CapSet.cc	\
+	CheckSum.cc \
 	CountryCode.cc	\
 	Date.cc		\
 	Dep.cc		\
