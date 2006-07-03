@@ -6,11 +6,9 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file	zypp/KnownSourcesCache.h
- *
-*/
-#ifndef ZYPP_KnownSourcesCache_H
-#define ZYPP_KnownSourcesCache_H
+
+#ifndef ZYPP_SourceCacheInitializer_H
+#define ZYPP_SourceCacheInitializer_H
 
 #include <iosfwd>
 #include <string>
@@ -18,7 +16,6 @@
 #include "zypp/base/ReferenceCounted.h"
 #include "zypp/base/NonCopyable.h"
 #include "zypp/base/PtrTypes.h"
-#include "zypp/source/SourceInfo.h"
 #include "zypp/Pathname.h"
 #include "zypp/cache/sqlite3x/sqlite3x.hpp"
 
@@ -29,34 +26,44 @@ namespace zypp
   namespace cache
   { /////////////////////////////////////////////////////////////////
 
-    DEFINE_PTR_TYPE(KnownSourcesCache);
+    DEFINE_PTR_TYPE(SourceCacheInitializer);
 
     ///////////////////////////////////////////////////////////////////
     //
-    //	CLASS NAME : KnownSourcesCache
+    //	CLASS NAME : SourceCacheInitializer
     //
-    class KnownSourcesCache : public base::ReferenceCounted, private base::NonCopyable
+    class SourceCacheInitializer : public base::ReferenceCounted, private base::NonCopyable
     {
-      friend std::ostream & operator<<( std::ostream & str, const KnownSourcesCache & obj );
+      friend std::ostream & operator<<( std::ostream & str, const SourceCacheInitializer & obj );
 
     public:
-      /** root path */
-      KnownSourcesCache( const Pathname &root_r );
-      ~KnownSourcesCache();
-      source::SourceInfoList knownSources() const;
-      void storeSource( const source::SourceInfo &info );    
-      void importOldSources();
+      /**
+       * Tries to initialize the source cache if it was not
+       * \throws When cant initialize
+       */
+      SourceCacheInitializer( const Pathname &root_r, const Pathname &db_file );
+      ~SourceCacheInitializer();
+
+      /**
+       * only true when cache was not initialized before
+       * and was just initialized with success
+       */
+      bool justInitialized() const;
     protected:
+      bool tablesCreated() const;
+			void createTables();
       /** Overload to realize stream output. */
       virtual std::ostream & dumpOn( std::ostream & str ) const;
       //typedef std::map<media::MediaNr, media::MediaAccessId> MediaMap
-			shared_ptr<sqlite3x::sqlite3_connection> _con;
-			Pathname _root;
+      shared_ptr<sqlite3x::sqlite3_connection> _con;
+      Pathname _root;
+      bool _just_initialized;
+      
     };
     ///////////////////////////////////////////////////////////////////
 
-    /** \relates KnownSourcesCache Stream output */
-    inline std::ostream & operator<<( std::ostream & str, const KnownSourcesCache & obj )
+    /** \relates SourceCacheInitializer Stream output */
+    inline std::ostream & operator<<( std::ostream & str, const SourceCacheInitializer & obj )
     { return obj.dumpOn( str ); }
 
 
@@ -66,4 +73,4 @@ namespace zypp
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
-#endif // ZYPP_SOURCE_KnownSourcesCache_H
+#endif // ZYPP_SOURCE_SourceCacheInitializer_H

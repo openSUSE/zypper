@@ -9,6 +9,7 @@
 
 #include "zypp/base/Logger.h"
 #include "zypp/cache/KnownSourcesCache.h"
+#include "zypp/cache/SourceCacheInitializer.h"
 #include "zypp/target/store/PersistentStorage.h"
 
 #define ZYPP_DB_FILE "/var/lib/zypp/zypp.db"
@@ -27,7 +28,9 @@ KnownSourcesCache::KnownSourcesCache( const Pathname &root_r ) : _root(root_r)
 {
   try
   {
-    _con.reset( new sqlite3_connection(ZYPP_DB_FILE) );
+    SourceCacheInitializer init(_root, ZYPP_DB_FILE);
+    if (init.justInitialized())
+      importOldSources();
   }
   catch(exception &ex)
   {
@@ -36,38 +39,19 @@ KnownSourcesCache::KnownSourcesCache( const Pathname &root_r ) : _root(root_r)
 
   try
   {
-      if( ! tablesCreated() )
-      {
-        try
-        {
-          importOldSources();
-        }
-        catch(std::exception &e)
-        {
-          ERR << "Exception Occured: " << e.what() << endl;
-        } 
-      }
+    _con.reset( new sqlite3_connection(ZYPP_DB_FILE) );
   }
   catch(exception &ex)
   {
     ERR << "Exception Occured: " << ex.what() << endl;
   }
+
+  
 }
 
 KnownSourcesCache::~KnownSourcesCache()
 {
   _con->close();
-}
-
-bool KnownSourcesCache::tablesCreated() const
-{
-	unsigned int count = _con->executeint("select count(*) from sqlite_master where type='table' and name='sources';");
-	return ( count > 0 );
-}
-
-void KnownSourcesCache::createTables()
-{
-	_con->executenonquery("create table sources (  id integer primary key autoincrement,  alias varchar,  url varchar,  description varchar,  enabled integer, autorefresh integer, type varchar, cachedir varchar, path varchar);");
 }
 
 void KnownSourcesCache::importOldSources()

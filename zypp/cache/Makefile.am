@@ -6,7 +6,7 @@ INCLUDES = -DZYPP_BASE_LOGGER_LOGGROUP=\"cache\"
 
 cacheincludedir = $(pkgincludedir)/cache
 
-cacheinclude_HEADERS = SourceCache.h SourceCacher.h KnownSourcesCache.h Utils.h
+cacheinclude_HEADERS = SourceCache.h SourceCacheInitializer.h SourceCacher.h KnownSourcesCache.h Utils.h
 
 ## ##################################################
 
@@ -14,7 +14,7 @@ noinst_LTLIBRARIES =	lib@PACKAGE@_cache.la
 
 ## ##################################################
 
-lib@PACKAGE@_cache_la_SOURCES =	SourceCache.cpp SourceCacher.cpp KnownSourcesCache.cpp Utils.cpp
+lib@PACKAGE@_cache_la_SOURCES =	SourceCache.cpp SourceCacheInitializer.cpp SourceCacher.cpp KnownSourcesCache.cpp Utils.cpp
 
 lib@PACKAGE@_cache_la_LDFLAGS = @LIBZYPP_VERSION_INFO@
 
