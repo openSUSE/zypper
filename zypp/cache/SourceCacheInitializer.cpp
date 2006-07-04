@@ -27,7 +27,7 @@ namespace zypp
 namespace cache
 { /////////////////////////////////////////////////////////////////
   
-#define SOURCES_TABLE_SCHEMA "create table sources ( alias varchar primary key, type varchar, description varchar,  url varchar, path varchar,  enabled integer, autorefresh integer, timestamp varchar, checksum varchar);"   
+#define SOURCES_TABLE_SCHEMA "create table sources ( alias varchar primary key, type varchar, description varchar,  url varchar, path varchar,  enabled integer, autorefresh integer, timestamp varchar, checksum varchar);"
 // alias 0 , type 1, desc 2, url 3, path 4, enabled 5, autorefresh 6, timestamp 7, checksum 8
   
 SourceCacheInitializer::SourceCacheInitializer( const Pathname &root_r, const Pathname &db_file )
@@ -48,13 +48,18 @@ SourceCacheInitializer::SourceCacheInitializer( const Pathname &root_r, const Pa
       createTables();
       _just_initialized = true;
       _con->close();
+      MIL << "Source cache initialized" << std::endl;
+    }
+    else
+    {
+      MIL << "Source cache already initialized" << std::endl;
     }
   }
   catch(exception &ex)
   {
     ERR << "Exception Occured: " << ex.what() << endl;
   }
-
+  
 }
 
 bool SourceCacheInitializer::justInitialized() const

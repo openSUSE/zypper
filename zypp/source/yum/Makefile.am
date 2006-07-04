@@ -19,7 +19,8 @@ sourceyuminclude_HEADERS =		\
 	YUMPatchImpl.h			\
 	YUMGroupImpl.h			\
 	YUMPatternImpl.h		\
-	YUMProductImpl.h
+	YUMProductImpl.h \
+	YUMSourceCacher.h
 
 
 noinst_LTLIBRARIES =	lib@PACKAGE@_source_yum.la
@@ -35,6 +36,7 @@ lib@PACKAGE@_source_yum_la_SOURCES =	\
 	YUMPatchImpl.cc			\
 	YUMGroupImpl.cc			\
 	YUMPatternImpl.cc		\
-	YUMProductImpl.cc	
+	YUMProductImpl.cc \
+	YUMSourceCacher.cc
 
 ## ##################################################

@@ -15,7 +15,8 @@ sourceinclude_HEADERS =	\
 	Builtin.h	\
 	PackageDelta.h	\
 	MediaSet.h \
-	SourceInfo.h
+	SourceInfo.h \
+	SourceMediaAccess.h
 
 noinst_LTLIBRARIES =	lib@PACKAGE@_source.la
 
@@ -25,7 +26,8 @@ lib@PACKAGE@_source_la_SOURCES = \
 	SourceImpl.cc	\
 	PackageDelta.cc	\
 	MediaSet.cc \
-	SourceInfo.cc
+	SourceInfo.cc \
+	SourceMediaAccess.cc
 
 
 lib@PACKAGE@_source_la_LIBADD = \
