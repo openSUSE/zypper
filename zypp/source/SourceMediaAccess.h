@@ -55,13 +55,29 @@ namespace zypp
       friend std::ostream & operator<<( std::ostream & str, const SourceMediaAccess & obj );
 
     public:
-      SourceMediaAccess( const Url &url, const Pathname &path, std::vector<media::MediaVerifierRef> verifiers );
+      /**
+       * creates a callback enabled media access  for \param url and \param path.
+       * with only  media no verified
+       */
+      SourceMediaAccess( const Url &url, const Pathname &path );
       ~SourceMediaAccess();
+      /**
+       * the media change callbacks depend on the verifiers given for each media.
+       */
+      void setVerifiers( const std::vector<media::MediaVerifierRef> &verifiers );
+      const Pathname provideFile(const Pathname & file, const unsigned media_nr = 1 );
+      
     protected:
+      Url rewriteUrl (const Url & url_r, const media::MediaNr medianr);
+      media::MediaAccessId getMediaAccessId (media::MediaNr medianr);
       virtual std::ostream & dumpOn( std::ostream & str ) const;
     private:
       Url _url;
       Pathname _path;
+      std::vector<media::MediaVerifierRef> _verifiers;
+      typedef std::map<media::MediaNr, media::MediaAccessId> MediaMap;
+      /** Mapping between each CD and Media Access ID */
+      MediaMap medias;
     };
     ///////////////////////////////////////////////////////////////////
 
