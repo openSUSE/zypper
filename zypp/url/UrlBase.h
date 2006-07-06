@@ -181,8 +181,7 @@ namespace zypp
       /**
        * Create instance with default combination of view options.
        */
-      ViewOption(): opt(DEFAULTS.opt)
-      {}
+      ViewOption();
 
 
       /**
@@ -232,7 +231,7 @@ namespace zypp
       }
 
     private:
-      ViewOption(int o): opt(o) {}
+      ViewOption(int option);
       int opt;
     };
 

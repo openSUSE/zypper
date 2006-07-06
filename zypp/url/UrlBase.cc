@@ -55,32 +55,43 @@ namespace zypp
     /*
     ** URL asString() view option constants:
     */
-    const ViewOptions ViewOptions::WITH_SCHEME       = 0x0001;
-    const ViewOptions ViewOptions::WITH_USERNAME     = 0x0002;
-    const ViewOptions ViewOptions::WITH_PASSWORD     = 0x0004;
-    const ViewOptions ViewOptions::WITH_HOST         = 0x0008;
-    const ViewOptions ViewOptions::WITH_PORT         = 0x0010;
-    const ViewOptions ViewOptions::WITH_PATH_NAME    = 0x0020;
-    const ViewOptions ViewOptions::WITH_PATH_PARAMS  = 0x0040;
-    const ViewOptions ViewOptions::WITH_QUERY_STR    = 0x0080;
-    const ViewOptions ViewOptions::WITH_FRAGMENT     = 0x0100;
-    const ViewOptions ViewOptions::EMPTY_AUTHORITY   = 0x0200;
-    const ViewOptions ViewOptions::EMPTY_PATH_NAME   = 0x0400;
-    const ViewOptions ViewOptions::EMPTY_PATH_PARAMS = 0x0800;
-    const ViewOptions ViewOptions::EMPTY_QUERY_STR   = 0x1000;
-    const ViewOptions ViewOptions::EMPTY_FRAGMENT    = 0x2000;
-    const ViewOptions ViewOptions::DEFAULTS          = 0x07bb;
+    const ViewOption  ViewOption::WITH_SCHEME       = 0x0001;
+    const ViewOption  ViewOption::WITH_USERNAME     = 0x0002;
+    const ViewOption  ViewOption::WITH_PASSWORD     = 0x0004;
+    const ViewOption  ViewOption::WITH_HOST         = 0x0008;
+    const ViewOption  ViewOption::WITH_PORT         = 0x0010;
+    const ViewOption  ViewOption::WITH_PATH_NAME    = 0x0020;
+    const ViewOption  ViewOption::WITH_PATH_PARAMS  = 0x0040;
+    const ViewOption  ViewOption::WITH_QUERY_STR    = 0x0080;
+    const ViewOption  ViewOption::WITH_FRAGMENT     = 0x0100;
+    const ViewOption  ViewOption::EMPTY_AUTHORITY   = 0x0200;
+    const ViewOption  ViewOption::EMPTY_PATH_NAME   = 0x0400;
+    const ViewOption  ViewOption::EMPTY_PATH_PARAMS = 0x0800;
+    const ViewOption  ViewOption::EMPTY_QUERY_STR   = 0x1000;
+    const ViewOption  ViewOption::EMPTY_FRAGMENT    = 0x2000;
+    const ViewOption  ViewOption::DEFAULTS          = 0x07bb;
     /*
-                      ViewOptions::WITH_SCHEME       +
-                      ViewOptions::WITH_USERNAME     +
-                      ViewOptions::WITH_HOST         +
-                      ViewOptions::WITH_PORT         +
-                      ViewOptions::WITH_PATH_NAME    +
-                      ViewOptions::WITH_QUERY_STR    +
-                      ViewOptions::WITH_FRAGMENT     +
-                      ViewOptions::EMPTY_AUTHORITY   +
-                      ViewOptions::EMPTY_PATH_NAME;
+    const ViewOption  ViewOption::DEFAULTS          =
+                      ViewOption::WITH_SCHEME       +
+                      ViewOption::WITH_USERNAME     +
+                      ViewOption::WITH_HOST         +
+                      ViewOption::WITH_PORT         +
+                      ViewOption::WITH_PATH_NAME    +
+                      ViewOption::WITH_QUERY_STR    +
+                      ViewOption::WITH_FRAGMENT     +
+                      ViewOption::EMPTY_AUTHORITY   +
+                      ViewOption::EMPTY_PATH_NAME;
     */
+
+    // ---------------------------------------------------------------
+    ViewOption::ViewOption()
+      : opt(0x07bb)
+    {}
+
+    // ---------------------------------------------------------------
+    ViewOption::ViewOption(int option)
+      : opt(option)
+    {}
 
 
     // ---------------------------------------------------------------
@@ -906,7 +917,7 @@ namespace zypp
         else
         {
           m_data->fragment = zypp::url::encode(
-            fragment, config("safe_password")
+            fragment, config("safe_fragment")
           );
         }
       }
