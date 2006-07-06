@@ -25,24 +25,22 @@
 #include "zypp/KeyRing.h"
 #include "zypp/PublicKey.h"
 
-#include "zypp/cache/KnownSourcesCache.h"
+#include "zypp/MediaSetAccess.h"
 
 using namespace zypp::detail;
 
 using namespace std;
 using namespace zypp;
-
+using namespace zypp::source;
 //using namespace DbXml;
 
 int main()
 {
-  cache::KnownSourcesCache cache("/");
+  MediaSetAccess ma( Url("cd:///"), Pathname("/"));
+  MIL << "done 1" << srd::endl;
+  Pathname local = ma.provideFile("content", 1);
+  MIL << local << std::endl;
   
-  source::SourceInfoList srcs = cache.knownSources();
-  for ( source::SourceInfoList::const_iterator it = srcs.begin(); it != srcs.end(); ++it)
-  {
-    cout << *it << endl;
-  }
 }
 
 

@@ -6,16 +6,14 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file	zypp/source/SourceMediaAccess.cc
- *
-*/
+
 #include <iostream>
 #include <fstream>
 
 #include "zypp/base/LogTools.h"
 #include "zypp/ZYppCallbacks.h"
-#include "zypp/source/SourceMediaAccess.h"
-//#include "zypp/source/SourceMediaAccessReportReceivers.h"
+#include "zypp/MediaSetAccess.h"
+//#include "zypp/source/MediaSetAccessReportReceivers.h"
 
 using std::endl;
 
@@ -23,33 +21,50 @@ using std::endl;
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////
-namespace source
-{ /////////////////////////////////////////////////////////////////
 
-
-  SourceMediaAccess::SourceMediaAccess(  const Url &url, const Pathname &path )
+  MediaSetAccess::MediaSetAccess(  const Url &url, const Pathname &path )
       : _url(url),
         _path(path)
   {
-    std::vector<media::MediaVerifierRef> single_media;
-    single_media[0] = media::MediaVerifierRef(new media::NoVerifier());
-    _verifiers = single_media;
+    MIL << "initializing.." << std::endl;
+    //std::vector<media::MediaVerifierRef> single_media;
+    //single_media[0] = media::MediaVerifierRef(new media::NoVerifier());
+    //_verifiers = single_media;
   }
   
-  SourceMediaAccess::~SourceMediaAccess()
+  MediaSetAccess::~MediaSetAccess()
   {
   }
 
-  void SourceMediaAccess::setVerifiers( const std::vector<media::MediaVerifierRef> &verifiers )
+  void MediaSetAccess::setVerifiers( const std::vector<media::MediaVerifierRef> &verifiers )
   {
     _verifiers = verifiers;
   }
 
-  const Pathname SourceMediaAccess::provideFile(const Pathname & file, const unsigned media_nr )
+//       callback::SendReport<source::DownloadFileReport> report;
+//       DownloadProgressFileReceiver download_report( report );
+//       SourceFactory source_factory;
+//       Url file_url( url().asString() + file_r.asString() );
+//       report->start( source_factory.createFrom(this), file_url );
+//       callback::TempConnect<media::DownloadProgressReport> tmp_download( download_report );
+//       Pathname file = provideJustFile( file_r, media_nr, cached, checkonly );
+//       report->finish( file_url, source::DownloadFileReport::NO_ERROR, "" );
+//       return file;
+
+  const Pathname MediaSetAccess::provideFile(const Pathname & file, const unsigned media_nr )
+  {
+    return provideFileInternal( file, media_nr, false, false);
+  }
+
+  const Pathname MediaSetAccess::tryToProvideFile(const Pathname & file, const unsigned media_nr )
+  {
+    return provideFileInternal( file, media_nr, false, false);
+  }
+
+  const Pathname MediaSetAccess::provideFileInternal(const Pathname & file, const unsigned media_nr, bool cached, bool checkonly )
   {
     callback::SendReport<media::MediaChangeReport> report;
     media::MediaManager media_mgr;
-    bool checkonly = false;
     // get the mediaId, but don't try to attach it here
     media::MediaAccessId media = getMediaAccessId( media_nr);
       
@@ -124,7 +139,7 @@ namespace source
           else if ( user == media::MediaChangeReport::IGNORE )
           {
             DBG << "Skipping" << endl;
-            ZYPP_THROW ( SkipRequestedException("User-requested skipping of a file") );
+            ZYPP_THROW ( source::SkipRequestedException("User-requested skipping of a file") );
           }
           else if ( user == media::MediaChangeReport::EJECT )
           {
@@ -165,7 +180,7 @@ namespace source
     return media_mgr.localPath( media, file );
   }
 
-  media::MediaAccessId SourceMediaAccess::getMediaAccessId (media::MediaNr medianr)
+  media::MediaAccessId MediaSetAccess::getMediaAccessId (media::MediaNr medianr)
   {
     media::MediaManager media_mgr;
 
@@ -197,7 +212,7 @@ namespace source
     return id;
   }
 
-  Url SourceMediaAccess::rewriteUrl (const Url & url_r, const media::MediaNr medianr)
+  Url MediaSetAccess::rewriteUrl (const Url & url_r, const media::MediaNr medianr)
   {
     std::string scheme = url_r.getScheme();
     if (scheme == "cd" || scheme == "dvd")
@@ -236,21 +251,21 @@ namespace source
     return url_r;
   }
 
-  std::ostream & SourceMediaAccess::dumpOn( std::ostream & str ) const
+  std::ostream & MediaSetAccess::dumpOn( std::ostream & str ) const
   {
     return str;
   }
 
-//     media::MediaVerifierRef SourceMediaAccess::verifier(unsigned media_nr)
+//     media::MediaVerifierRef MediaSetAccess::verifier(unsigned media_nr)
 //     { return media::MediaVerifierRef(new media::NoVerifier()); }
 
-  SourceMediaVerifier::SourceMediaVerifier(const std::string & vendor_r, const std::string & id_r, const media::MediaNr media_nr)
+  MediaVerifier::MediaVerifier(const std::string & vendor_r, const std::string & id_r, const media::MediaNr media_nr)
     : _media_vendor(vendor_r)
       , _media_id(id_r)
       , _media_nr(media_nr)
   {}
 
-  bool SourceMediaVerifier::isDesiredMedia(const media::MediaAccessRef &ref)
+  bool MediaVerifier::isDesiredMedia(const media::MediaAccessRef &ref)
   {
     if (_media_vendor.empty() || _media_id.empty())
       return true;
@@ -272,7 +287,4 @@ namespace source
 
 /////////////////////////////////////////////////////////////////
 } // namespace source
-///////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////
-} // namespace zypp
 ///////////////////////////////////////////////////////////////////
