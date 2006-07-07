@@ -10,19 +10,16 @@
 #include "zypp/base/Logger.h"
 #include "zypp/Arch.h"
 
+// Boost.Test
+#include <boost/test/floating_point_comparison.hpp>
+#include <boost/test/unit_test.hpp>
+
+using boost::unit_test::test_suite;
+using boost::unit_test::test_case;
+using boost::test_tools::close_at_tolerance;
+
 using namespace std;
 using namespace zypp;
-
-static int
-arch_exception ()
-{
-  try {
-    Arch _arch1(NULL);	// bad value, should raise exception
-  } catch (exception exp) {
-    return 0;		// exception raised
-  }
-  return 1;		// no exception
-}
 
 /******************************************************************
 **
@@ -32,27 +29,25 @@ arch_exception ()
 **
 **      DESCRIPTION :
 */
-int main( int argc, char * argv[] )
+void arch_test()
 {
   Arch _arch32( "i386" );
 
-  if (_arch32 != Arch_i386) return 1;
+  BOOST_CHECK_EQUAL( _arch32, Arch_i386 );
+  BOOST_CHECK_EQUAL( _arch32.asString(), string("i386"));
+  BOOST_REQUIRE( _arch32.compatibleWith (Arch_x86_64));
+  BOOST_CHECK_THROW( Arch(NULL), exception);
+  BOOST_CHECK_EQUAL( Arch(), Arch_noarch );
+  BOOST_REQUIRE( Arch("") != Arch_noarch );
+  BOOST_REQUIRE( Arch("").empty() );
+  BOOST_REQUIRE( ! Arch_noarch.empty() );
+  BOOST_REQUIRE( ! ( _arch32.compare(Arch_x86_64) >= 0) );
+}
 
-  if (_arch32.asString() != string("i386")) return 2;
-
-  if (!_arch32.compatibleWith (Arch_x86_64)) return 3;
-
-  if (arch_exception() != 0) return 4;
-
-  if ( Arch() != Arch_noarch ) return 5;
-
-  if ( Arch("") == Arch_noarch ) return 6;
-
-  if ( ! Arch("").empty() ) return 7;
-
-  if ( Arch_noarch.empty() ) return 8;
-
-  if (_arch32.compare(Arch_x86_64) >= 0) return 9;
-
-  return 0;
+test_suite*
+init_unit_test_suite( int, char* [] )
+{
+    test_suite* test= BOOST_TEST_SUITE( "ArchTest" );
+    test->add( BOOST_TEST_CASE( &arch_test ), 0 /* expected zero error */ );
+    return test;
 }

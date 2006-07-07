@@ -42,12 +42,14 @@ proc runBinary { prog {path ""} {expected_result 0} } {
 # expect prog to pass
 
 proc shouldPass { prog {path ""} } {
+  setenv "ZYPP_TEST_BASE" $path
   return [runBinary $prog $path 0]
 }
 
 # expect prog to fail
 
 proc shouldFail { prog {path ""} } {
+  setenv "ZYPP_TEST_BASE" $path
   return [runBinary $prog $path 1]
 }
 

@@ -4,45 +4,59 @@
 //
 #include <string>
 
+// Boost.Test
+#include <boost/test/floating_point_comparison.hpp>
+#include <boost/test/unit_test.hpp>
+
 #include "zypp/base/Logger.h"
 #include "zypp/CapFactory.h"
+
+using boost::unit_test::test_suite;
+using boost::unit_test::test_case;
+using boost::test_tools::close_at_tolerance;
 
 using namespace std;
 using namespace zypp;
 
-int main( int argc, char * argv[] )
+void capabilities_test()
 {
     Resolvable::Kind kind = ResTraits<zypp::Package>::kind;
     CapFactory factory;
 
     Edition edition ("1.0", "42");
     Capability cap = factory.parse ( kind, "foo", "=", "1.0-42");
-    if (cap.asString() != "foo == 1.0-42") return 1;
-    if (cap.index() != "foo") return 2;
-    if (cap.op() != Rel::EQ) return 3;
-    if (cap.edition() != edition) return 4;
+    BOOST_CHECK_EQUAL( cap.asString(), "foo == 1.0-42" );
+    BOOST_CHECK_EQUAL( cap.index(), "foo");
+    BOOST_CHECK_EQUAL( cap.op(), Rel::EQ);
+    BOOST_CHECK_EQUAL( cap.edition(), edition);
 
     Capability cap2 = factory.parse ( kind, "foo", Rel::EQ, edition);
-    if (cap2.index() != cap.index()) return 10;
-    if (cap2.op() != cap.op()) return 11;
-    if (cap2.edition() != cap.edition()) return 12;
+    BOOST_CHECK_EQUAL( cap2.index(), cap.index());
+    BOOST_CHECK_EQUAL( cap2.op(), cap.op());
+    BOOST_CHECK_EQUAL( cap2.edition(), cap.edition());
 
     Capability cap3 = factory.parse ( kind, "foo = 1.0-42");
-    if (cap3.index() != cap.index()) return 20;
-    if (cap3.op() != cap.op()) return 21;
-    if (cap3.edition() != cap.edition()) return 22;
+    BOOST_CHECK_EQUAL( cap3.index(), cap.index());
+    BOOST_CHECK_EQUAL( cap3.op(), cap.op());
+    BOOST_CHECK_EQUAL( cap3.edition(), cap.edition());
 
     string bash = "/bin/bash";
     Capability cap4 = factory.parse ( kind, bash);
-    if (cap4.index() != bash) return 30;
-    if (cap4.op() != Rel::NONE) return 31;
-    if (cap4.edition() != Edition::noedition) return 32;
+    BOOST_CHECK_EQUAL(cap4.index(), bash);
+    BOOST_CHECK_EQUAL(cap4.op(), Rel::NONE);
+    BOOST_CHECK_EQUAL(cap4.edition(), Edition::noedition);
 
     string hal = "hal(smp)";
     Capability cap5 = factory.parse ( kind, hal);
-    if (cap5.index() != hal) return 40;
-    if (cap5.op() != Rel::NONE) return 41;
-    if (cap5.edition() != Edition::noedition) return 42;
+    BOOST_CHECK_EQUAL(cap5.index(), hal);
+    BOOST_CHECK_EQUAL(cap5.op(), Rel::NONE);
+    BOOST_CHECK_EQUAL(cap5.edition(), Edition::noedition);
+}
 
-    return 0;
+test_suite*
+init_unit_test_suite( int, char* [] )
+{
+    test_suite* test= BOOST_TEST_SUITE( "CapabilitiesTest" );
+    test->add( BOOST_TEST_CASE( &capabilities_test ), 0 /* expected zero error */ );
+    return test;
 }

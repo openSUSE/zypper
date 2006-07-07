@@ -6,46 +6,39 @@
 #include "zypp/base/Logger.h"
 #include "zypp/Edition.h"
 
+#include <boost/test/unit_test.hpp>
+
+using boost::unit_test::test_suite;
+using boost::unit_test::test_case;
+
 using namespace std;
 using namespace zypp;
 
-static int
-edition_exception (const std::string &value)
+void edition_test()
 {
-  try {
-    Edition _ed(value);	// bad value, should raise exception
-  } catch (exception exp) {
-    return 0;		// exception raised
-  }
-  return 1;		// no exception
-}
-
-/******************************************************************
-**
-**
-**      FUNCTION NAME : main
-**      FUNCTION TYPE : int
-**
-**      DESCRIPTION :
-*/
-int main( int argc, char * argv[] )
-{
-  if (edition_exception (string("A::foo--foo"))) return 1;
+  BOOST_CHECK_THROW( Edition(string("A::foo--foo")), exception );
+  
   Edition _ed1 ("1");
   Edition _ed2 ("1.1");
   Edition _ed3 ("1:1");
   Edition _ed4 ("1:1-1");
 
-  if (_ed2.version() != "1.1") return 2;
-  if (_ed2.release() != "") return 3;
-  if (_ed2.epoch() != 0) return 4;
-  if (_ed4.epoch() != 1) return 5;
+  BOOST_CHECK_EQUAL(_ed2.version(), "1.1");
+  BOOST_CHECK_EQUAL(_ed2.release(), "");
+  BOOST_CHECK_EQUAL(_ed2.epoch(), 0);
+  BOOST_CHECK_EQUAL(_ed4.epoch(), 1);
 
-  if (_ed1 != Edition ("1", "")) return 6;
-  if (_ed2 != Edition ("1.1", "")) return 7;
-  if (_ed3 != Edition ("1", "", "1")) return 8;
-  if (_ed3 != Edition ("1", "", 1)) return 9;
-  if (_ed4 != Edition ("1", "1", 1)) return 10;
+  BOOST_CHECK_EQUAL(_ed1, Edition ("1", ""));
+  BOOST_CHECK_EQUAL(_ed2, Edition ("1.1", ""));
+  BOOST_CHECK_EQUAL(_ed3, Edition ("1", "", "1"));
+  BOOST_CHECK_EQUAL(_ed3, Edition ("1", "", 1));
+  BOOST_CHECK_EQUAL(_ed4, Edition ("1", "1", 1));
+}
 
-  return 0;
+test_suite*
+init_unit_test_suite( int, char* [] )
+{
+    test_suite* test= BOOST_TEST_SUITE( "EditionTest" );
+    test->add( BOOST_TEST_CASE( &edition_test ), 0 /* expected zero error */ );
+    return test;
 }

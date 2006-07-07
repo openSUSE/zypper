@@ -13,6 +13,7 @@
 #include "zypp/base/LogTools.h"
 #include "zypp/ZYppCallbacks.h"
 #include "zypp/MediaSetAccess.h"
+#include "zypp/PathInfo.h"
 //#include "zypp/source/MediaSetAccessReportReceivers.h"
 
 using std::endl;
@@ -21,6 +22,16 @@ using std::endl;
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////
+
+  ChecksumFileChecker::ChecksumFileChecker( const CheckSum &checksum )
+  {
+  
+  }
+
+  bool ChecksumFileChecker::operator()( const Pathname &file )
+  {
+
+  }
 
   MediaSetAccess::MediaSetAccess(  const Url &url, const Pathname &path )
       : _url(url),

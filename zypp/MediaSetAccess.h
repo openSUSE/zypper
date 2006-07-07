@@ -65,10 +65,10 @@ namespace zypp
     class ChecksumFileChecker
     {
       public:
-      ChecksumFileChecker( const CheckSum &checksum )
-      {}
-      bool operator()( const Pathname &file)
-      { return true; }
+      ChecksumFileChecker( const CheckSum &checksum );
+      bool operator()( const Pathname &file );
+      private:
+      CheckSum _checksum;
     };
 
     ///////////////////////////////////////////////////////////////////

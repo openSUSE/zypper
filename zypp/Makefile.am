@@ -88,6 +88,7 @@ pkginclude_HEADERS = NeedAType.h \
 	ZYppCallbacks.h	\
 	SilentCallbacks.h \
 	PublicKey.h \
+	Signature.h \
 	KeyRing.h \
 	MediaSetAccess.h
 
@@ -164,6 +165,7 @@ lib@PACKAGE@_la_SOURCES = \
 	TranslatedText.cc \
 	ZYppFactory.cc \
 	PublicKey.cc \
+	Signature.cc \
 	KeyRing.cc \
 	MediaSetAccess.cc
 
