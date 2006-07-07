@@ -24,13 +24,23 @@ namespace zypp
 ///////////////////////////////////////////////////////////////////
 
   ChecksumFileChecker::ChecksumFileChecker( const CheckSum &checksum )
+    : _checksum(checksum)
   {
-  
   }
 
   bool ChecksumFileChecker::operator()( const Pathname &file )
   {
-
+    // FIXME probably this funcionality should be in CheckSum itself
+    CheckSum real_checksum( _checksum.type(), filesystem::checksum( file, _checksum.type() ));
+    if ( real_checksum == _checksum )
+    {
+      return true;
+    }
+    else
+    {
+      ERR << "Got " << real_checksum << ", expected " << _checksum << std::endl;
+      return false;
+    }
   }
 
   MediaSetAccess::MediaSetAccess(  const Url &url, const Pathname &path )
@@ -67,9 +77,15 @@ namespace zypp
     return provideFileInternal( file, media_nr, false, false);
   }
 
-  const Pathname MediaSetAccess::tryToProvideFile(const Pathname & file, const unsigned media_nr )
+  const Pathname  MediaSetAccess::provideFile(const Pathname & file, const unsigned media_nr, FileChecker checker )
   {
-    return provideFileInternal( file, media_nr, false, false);
+    Pathname p = provideFileInternal( file, media_nr, false, false);
+    
+    if ( ! checker(p) )
+    {
+      ZYPP_THROW(Exception("Error checker"));
+    }
+    return p;
   }
 
   const Pathname MediaSetAccess::provideFileInternal(const Pathname & file, const unsigned media_nr, bool cached, bool checkonly )

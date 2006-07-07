@@ -43,9 +43,6 @@ namespace devel
       MIL << "Done reading key" << std::endl;
     }
     
-    Impl(const std::istream &data)
-    {}
-    
     public:
       /** Offer default Impl. */
       static shared_ptr<Impl> nullimpl()
@@ -153,15 +150,6 @@ namespace devel
   //
   PublicKey::PublicKey()
   : _pimpl( Impl::nullimpl() )
-  {}
-
-  ///////////////////////////////////////////////////////////////////
-  //
-  //	METHOD NAME : PublicKey::PublicKey
-  //	METHOD TYPE : Ctor
-  //
-  PublicKey::PublicKey( const std::istream &data )
-  : _pimpl( new Impl(data) )
   {}
 
   PublicKey::PublicKey(   const Pathname &file )

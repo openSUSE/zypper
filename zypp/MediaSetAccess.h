@@ -91,7 +91,7 @@ namespace zypp
        */
       void setVerifiers( const std::vector<media::MediaVerifierRef> &verifiers );
       const Pathname provideFile(const Pathname & file, const unsigned media_nr = 1 );
-      const Pathname tryToProvideFile(const Pathname & file, const unsigned media_nr = 1 );
+      const Pathname provideFile(const Pathname & file, const unsigned media_nr, const FileChecker checker );
     protected:
       const Pathname provideFileInternal(const Pathname & file, const unsigned media_nr, bool checkonly, bool cached);
       Url rewriteUrl (const Url & url_r, const media::MediaNr medianr);

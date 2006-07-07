@@ -45,7 +45,6 @@ namespace devel
    /** Ctor 
     * \throws when data does not make a key
     */
-    PublicKey(const std::istream &data);
     PublicKey(const Pathname &file);
     ~PublicKey();
     

@@ -63,8 +63,8 @@ namespace zypp
   
   /** \relates CheckSum Stream output. */
   std::ostream & operator<<( std::ostream & str, const CheckSum & obj )
-  { return str << (obj.empty() ? std::string("NoCheckSum")
-                               : obj.type()+"-"+obj.checksum()  ); }
+  { return str << (obj.empty() ? std::string("(no checksum)")
+                               : obj.type()+":"+obj.checksum()  ); }
 
   /** \relates CheckSum */
   bool operator==( const CheckSum & lhs, const CheckSum & rhs )
