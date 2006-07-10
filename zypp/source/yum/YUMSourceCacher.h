@@ -14,7 +14,9 @@
 #include <string>
 
 #include "zypp/cache/SourceCacher.h"
+#include "zypp/data/ResolvableData.h"
 #include "zypp/Pathname.h"
+#include "zypp/TmpPath.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -40,7 +42,11 @@ namespace zypp
       /** root path */
       YUMSourceCacher( const Pathname &root_r );
       ~YUMSourceCacher();
+      void cache( const Url &url, const Pathname &path );
+
+      void packageParsed( const data::Package &package);
     protected:
+      filesystem::TmpDir downloadMetadata(const Url &url, const Pathname &path);
 
       /** Overload to realize stream output. */
       virtual std::ostream & dumpOn( std::ostream & str ) const;

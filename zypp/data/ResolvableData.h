@@ -16,6 +16,9 @@
 #include "zypp/Pathname.h"
 #include "zypp/Edition.h"
 #include "zypp/Arch.h"
+#include "zypp/CheckSum.h"
+#include "zypp/Url.h"
+#include "zypp/Date.h"
 #include "zypp/TranslatedText.h"
 #include <string>
 #include <list>
@@ -107,6 +110,12 @@ namespace data
       //std::list<PackageReq> packageList;
   };
 
+  class Patch : public ResObject
+  {
+    public:
+      Patch() {};
+  };
+
   class Pattern : public ResObject
   {
     public:
@@ -133,10 +142,41 @@ namespace data
         // those are suse specific tags
       std::string releasenotesurl;
   };
+
+  class Package : public ResObject
+  {
+    public:
+      Package() {};
+      ~Package() {};
+
+      std::string type;
+      CheckSum checksum;
+      std::string packager;
+      Url url;
+      unsigned int archive_size;
+      unsigned int installed_size;
+      Date build_time;
+      Pathname location;
+      std::string license;
+      std::string vendor;
+      std::string group;
+      std::string buildhost;
+      
+      //std::list<FileData> files;
+
+      // SuSE specific data
+      std::list<std::string> authors;
+      std::list<std::string> keywords;
+      //std::string  media;
+      //std::list<YUMDirSize> dirSizes;
+      //bool installOnly;
+      //TranslatedText license_to_confirm;
+  };
   
   /* Easy output */
 //   std::ostream& operator<<(std::ostream &out, const Dependency& data);
-//   std::ostream& operator<<(std::ostream &out, const ResObject& data);
+   std::ostream& operator<<(std::ostream &out, const ResObject& data);
+   //std::ostream& operator<<(std::ostream &out, const Package& data);
 //   std::ostream& operator<<(std::ostream &out, const Product& data);
 //   std::ostream& operator<<(std::ostream &out, const Pattern& data);
 //   std::ostream& operator<<(std::ostream &out, const Selection& data);

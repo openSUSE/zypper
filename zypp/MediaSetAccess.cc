@@ -16,7 +16,7 @@
 #include "zypp/PathInfo.h"
 //#include "zypp/source/MediaSetAccessReportReceivers.h"
 
-using std::endl;
+using namespace std;
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -41,6 +41,11 @@ namespace zypp
       ERR << "Got " << real_checksum << ", expected " << _checksum << std::endl;
       return false;
     }
+  }
+
+  bool NullFileChecker::operator()(const Pathname &file )
+  {
+    return true;
   }
 
   MediaSetAccess::MediaSetAccess(  const Url &url, const Pathname &path )
@@ -72,12 +77,35 @@ namespace zypp
 //       report->finish( file_url, source::DownloadFileReport::NO_ERROR, "" );
 //       return file;
 
-  const Pathname MediaSetAccess::provideFile(const Pathname & file, const unsigned media_nr )
+
+  void MediaSetAccess::providePossiblyCachedMetadataFile( const Pathname &file_to_download, unsigned medianr, const Pathname &destination, const Pathname &cached_file, const CheckSum &checksum )
+  {
+    Url file_url( _url.asString() + file_to_download.asString() );
+    // if we have a cached file and its the same
+    if ( PathInfo(cached_file).isExist() && (! checksum.empty()) && is_checksum( cached_file, checksum ) )
+    {
+      MIL << "file " << file_url << " found in previous cache. Using cached copy." << std::endl;
+      // checksum is already checked.
+      // we could later implement double failover and try to download if file copy fails.
+      if ( filesystem::copy(cached_file, destination) != 0 )
+        ZYPP_THROW(Exception("Can't copy " + cached_file.asString() + " to " + destination.asString()));
+    }
+    else
+    {
+      // we dont have it or its not the same, download it.
+      Pathname downloaded_file = provideFile( file_to_download, medianr, ChecksumFileChecker(checksum) );
+      
+      if ( filesystem::copy(downloaded_file, destination) != 0 )
+        ZYPP_THROW(Exception("Can't copy " + downloaded_file.asString() + " to " + destination.asString()));      
+    }
+  }
+
+  Pathname MediaSetAccess::provideFile(const Pathname & file, unsigned media_nr )
   {
     return provideFileInternal( file, media_nr, false, false);
   }
 
-  const Pathname  MediaSetAccess::provideFile(const Pathname & file, const unsigned media_nr, FileChecker checker )
+  Pathname  MediaSetAccess::provideFile(const Pathname & file, unsigned media_nr, FileChecker checker )
   {
     Pathname p = provideFileInternal( file, media_nr, false, false);
     
@@ -88,7 +116,7 @@ namespace zypp
     return p;
   }
 
-  const Pathname MediaSetAccess::provideFileInternal(const Pathname & file, const unsigned media_nr, bool cached, bool checkonly )
+  Pathname MediaSetAccess::provideFileInternal(const Pathname & file, unsigned media_nr, bool cached, bool checkonly )
   {
     callback::SendReport<media::MediaChangeReport> report;
     media::MediaManager media_mgr;

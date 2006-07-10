@@ -45,6 +45,7 @@ namespace zypp
       SourceCache( const Pathname &root_r, const std::string alias );
       ~SourceCache();
       void cachePattern( const data::Pattern pattern );
+      void cachePackage( const data::Package package );
     protected:
       void cacheResolvable( const data::ResObject );
       /** Overload to realize stream output. */

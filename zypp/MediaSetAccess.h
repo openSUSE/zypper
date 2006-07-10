@@ -13,6 +13,7 @@
 #include <iosfwd>
 #include <string>
 #include <vector>
+#include <boost/function.hpp>
 
 #include "zypp/base/ReferenceCounted.h"
 #include "zypp/base/NonCopyable.h"
@@ -58,8 +59,7 @@ namespace zypp
     class NullFileChecker
     {
       public:
-      bool operator()( const Pathname &file )
-      { return true; }
+      bool operator()( const Pathname &file );
     };
 
     class ChecksumFileChecker
@@ -90,10 +90,11 @@ namespace zypp
        * the media change callbacks depend on the verifiers given for each media.
        */
       void setVerifiers( const std::vector<media::MediaVerifierRef> &verifiers );
-      const Pathname provideFile(const Pathname & file, const unsigned media_nr = 1 );
-      const Pathname provideFile(const Pathname & file, const unsigned media_nr, const FileChecker checker );
+      Pathname provideFile(const Pathname & file, unsigned media_nr = 1 );
+      Pathname provideFile(const Pathname & file, unsigned media_nr, const FileChecker checker );
+      void providePossiblyCachedMetadataFile( const Pathname &file_to_download, unsigned medianr, const Pathname &destination, const Pathname &cached_file, const CheckSum &checksum );
     protected:
-      const Pathname provideFileInternal(const Pathname & file, const unsigned media_nr, bool checkonly, bool cached);
+      Pathname provideFileInternal(const Pathname & file, unsigned media_nr, bool checkonly, bool cached);
       Url rewriteUrl (const Url & url_r, const media::MediaNr medianr);
       media::MediaAccessId getMediaAccessId (media::MediaNr medianr);
       virtual std::ostream & dumpOn( std::ostream & str ) const;

@@ -27,8 +27,10 @@ namespace zypp
 namespace cache
 { /////////////////////////////////////////////////////////////////
   
-#define SOURCES_TABLE_SCHEMA "create table sources ( alias varchar primary key, type varchar, description varchar,  url varchar, path varchar,  enabled integer, autorefresh integer, timestamp varchar, checksum varchar);"
-// alias 0 , type 1, desc 2, url 3, path 4, enabled 5, autorefresh 6, timestamp 7, checksum 8
+
+static const char * SOURCES_TABLE_SCHEMA = "create table sources ( id integer primary key autoincrement, alias varchar unique, type varchar, description varchar,  url varchar, path varchar,  enabled integer, autorefresh integer, timestamp varchar, checksum varchar);";
+
+// id 0, alias 1 , type 2, desc 3, url 4, path 5, enabled 6, autorefresh 7, timestamp 8, checksum 9
   
 SourceCacheInitializer::SourceCacheInitializer( const Pathname &root_r, const Pathname &db_file )
   : _root(root_r), _just_initialized(false)

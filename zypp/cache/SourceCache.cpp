@@ -49,6 +49,11 @@ SourceCache::~SourceCache()
   _con->close();
 }
 
+void SourceCache::cachePackage( const data::Package package )
+{
+  MIL << "caching: " << package << std::endl;
+}
+
 void SourceCache::cachePattern( const data::Pattern pattern )
 {
 

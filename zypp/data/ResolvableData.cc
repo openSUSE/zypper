@@ -28,23 +28,23 @@ IMPL_PTR_TYPE(Message);
 IMPL_PTR_TYPE(Selection);  
 IMPL_PTR_TYPE(Pattern);
   
-/*
+
 std::ostream& operator<<(std::ostream& out, const ResObject &data)
 {
-	out << "Script Data: " << endl
-      << "  name: " << data.name << endl
-      << "  edition: " << data.edition << endl
-      << "  provides: " << data.provides << endl
-      << "  conflicts: " << data.conflicts << endl
-      << "  obsoletes: " << data.obsoletes << endl
-      << "  freshens: " << data.freshens << endl
-      << "  requires: " << data.requires << endl
-      << "  recommends:" << endl << data.recommends << endl
-      << "  suggests:" << endl << data.suggests << endl
-      << "  supplements:" << endl << data.supplements << endl
-      << "  enhances:" << endl << data.enhances << endl
+      out << "[ " << data.name << " " << data.edition << " ]" << endl;
+      return out;
+//       << "  provides: " << data.provides << endl
+//       << "  conflicts: " << data.conflicts << endl
+//       << "  obsoletes: " << data.obsoletes << endl
+//       << "  freshens: " << data.freshens << endl
+//       << "  requires: " << data.requires << endl
+//       << "  recommends:" << endl << data.recommends << endl
+//       << "  suggests:" << endl << data.suggests << endl
+//       << "  supplements:" << endl << data.supplements << endl
+//       << "  enhances:" << endl << data.enhances << endl
 }
 
+/*
 std::ostream& operator<<(std::ostream& out, const zypp::shared_ptr<AtomBase> data)
 {
   out << "Atom data" << endl;
@@ -70,7 +70,7 @@ std::ostream& operator<<(std::ostream& out, const zypp::shared_ptr<AtomBase> dat
   
 std::ostream& operator<<(std::ostream& out, const Script& data)
 {
-      << "  do script: " << data.do_script << endl
+      out << "  do script: " << data.do_script << endl
       << "  undo script: " << data.undo_script << endl
       << "  do script location: " << data.do_location << endl
       << "  undo script location: " << data.undo_location << endl
