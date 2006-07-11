@@ -15,6 +15,7 @@
 
 #include "zypp/cache/SourceCacher.h"
 #include "zypp/data/ResolvableData.h"
+#include "zypp/data/ResolvableDataConsumer.h"
 #include "zypp/Pathname.h"
 #include "zypp/TmpPath.h"
 
@@ -34,7 +35,7 @@ namespace zypp
     //
     //	CLASS NAME : SourceCacher
     //
-    class YUMSourceCacher : public cache::SourceCacher
+    class YUMSourceCacher : public cache::SourceCacher, public data::ResolvableDataConsumer
     {
       friend std::ostream & operator<<( std::ostream & str, const YUMSourceCacher & obj );
 
@@ -44,7 +45,7 @@ namespace zypp
       ~YUMSourceCacher();
       void cache( const Url &url, const Pathname &path );
 
-      void packageParsed( const data::Package &package);
+      void consumePackage( const data::Package &package);
     protected:
       filesystem::TmpDir downloadMetadata(const Url &url, const Pathname &path);
 

@@ -1,7 +1,7 @@
 ## Process this file with automake to produce Makefile.in
 ## ##################################################
 
-SUBDIRS = yum tagfile xmlstore
+SUBDIRS = yum2 yum tagfile xmlstore
 
 INCLUDES = -I$(oldincludedir)/libxml2	\
 	-DZYPP_BASE_LOGGER_LOGGROUP=\"parser\"
@@ -27,6 +27,7 @@ lib@PACKAGE@_parser_la_SOURCES = \
 	SAXParser.cc
 
 lib@PACKAGE@_parser_la_LIBADD =	yum/lib@PACKAGE@_parser_yum.la	\
+				yum2/lib@PACKAGE@_parser_yum2.la	\
 				-lxml2	\
 				-lz	\
 				tagfile/lib@PACKAGE@_parser_tagfile.la	\

@@ -17,10 +17,11 @@
 #include "zypp/parser/yum/YUMParser.h"
 
 #include "zypp/parser/SAXParser.h"
+#include "zypp/parser/yum/YUMParser.h"
+#include "zypp/parser/yum2/YUMPrimaryParser.h"
 #include "zypp/source/yum/YUMSourceCacher.h"
 
 using namespace std;
-using namespace zypp::parser::yum;
 
 //////////////////////////////////////////////////////////////////
 namespace zypp
@@ -31,51 +32,6 @@ namespace yum
 { /////////////////////////////////////////////////////////////////
 
 
-class YUMPrimaryReader : public parser::SAXParser
-{
-  public:
-  YUMPrimaryReader( YUMSourceCacher &cacher )
-  {
-    _cacher.reset(&cacher);
-  }
-  
-  virtual void startElement(const std::string name, const xmlChar **atts)
-  {
-    if ( name == "package" )
-      _package.reset(new zypp::data::Package());
-  }
-
-  virtual void characters(const xmlChar *ch, int len)
-  {
-    _buffer.append( (const char *)ch, len);
-  }
-
-  virtual void endElement(const std::string name)
-  {
-    if ( name == "name" )
-      _package->name = popBuffer();
-    if ( name == "arch" )
-      _package->arch = Arch(popBuffer());
-
-    if ( name == "package" )
-    {
-      _cacher->packageParsed(*_package);
-    }
-  }
-  
-  std::string popBuffer()
-  {
-    std::string rt = _buffer;
-    _buffer.clear();
-    return rt;
-  }
-
-  private:
-  shared_ptr<zypp::data::Package> _package;
-  shared_ptr<YUMSourceCacher> _cacher;
-  std::string _buffer;
-};
-
 YUMSourceCacher::YUMSourceCacher( const Pathname &root_r ) : zypp::cache::SourceCacher(root_r)
 {
   
@@ -85,15 +41,15 @@ YUMSourceCacher::~YUMSourceCacher()
 {
 }
 
-void YUMSourceCacher::packageParsed( const data::Package &package)
+void YUMSourceCacher::consumePackage( const data::Package &package)
 {
-  MIL << "caching " << package << std::endl;
+  MIL << "caching " << package.name << " " << package.arch << std::endl;
 }
 
 void YUMSourceCacher::cache( const Url &url, const Pathname &path )
 {
   filesystem::TmpDir tmpdir = downloadMetadata(url, path);
-  YUMPrimaryReader reader(*this);
+  parser::yum2::YUMPrimaryParser reader(*this);
   reader.parseFile( tmpdir.path() + "/repodata/primary.xml.gz");
 
 }
@@ -163,7 +119,7 @@ filesystem::TmpDir YUMSourceCacher::downloadMetadata(const Url &url, const Pathn
 
   DBG << "Reading file " << remote_repomd << endl;
   ifstream repo_st(remote_repomd.asString().c_str());
-  YUMRepomdParser repomd(repo_st, "");
+  parser::yum::YUMRepomdParser repomd(repo_st, "");
 
   for(; ! repomd.atEnd(); ++repomd)
   {
@@ -182,7 +138,7 @@ filesystem::TmpDir YUMSourceCacher::downloadMetadata(const Url &url, const Pathn
       Pathname patches_list = local_dir + (*repomd)->location;
       MIL << "Reading patches file " << patches_list << std::endl;
       ifgzstream st ( patches_list.asString().c_str() );
-      YUMPatchesParser patch(st, "");
+      parser::yum::YUMPatchesParser patch(st, "");
       for (; !patch.atEnd(); ++patch)
       {
 

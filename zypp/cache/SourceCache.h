@@ -44,6 +44,7 @@ namespace zypp
       /** Creates a source cache */
       SourceCache( const Pathname &root_r, const std::string alias );
       ~SourceCache();
+
       void cachePattern( const data::Pattern pattern );
       void cachePackage( const data::Package package );
     protected:

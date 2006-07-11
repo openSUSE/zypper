@@ -11,7 +11,8 @@ INCLUDES = -I$(oldincludedir)/libxml2	\
 parserincludedir = $(pkgincludedir)/data
 
 parserinclude_HEADERS = \
-	ResolvableData.h
+	ResolvableData.h \
+	ResolvableDataConsumer.h
 	
 noinst_LTLIBRARIES =	lib@PACKAGE@_data.la
 
