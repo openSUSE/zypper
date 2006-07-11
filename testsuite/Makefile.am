@@ -1,4 +1,4 @@
 #
 # Makefile.am for libzypp/testsuite
 #
-SUBDIRS = src zypp target solver source media parser
+SUBDIRS = src zypp cache target solver source media parser

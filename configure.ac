@@ -224,6 +224,7 @@ AC_OUTPUT(	 po/Makefile.in\
   testsuite/src/Makefile \
 	testsuite/src/utils/Makefile	\
 	testsuite/zypp/Makefile		\
+  testsuite/cache/Makefile \
 	testsuite/zypp/tests/Makefile	\
 	testsuite/solver/Makefile	\
 	testsuite/solver/src/Makefile	\
