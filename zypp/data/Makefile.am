@@ -20,4 +20,5 @@ noinst_LTLIBRARIES =	lib@PACKAGE@_data.la
 ## ##################################################
 
 lib@PACKAGE@_data_la_SOURCES = \
-	ResolvableData.cc
+	ResolvableData.cc \
+	ResolvableDataConsumer.cc
