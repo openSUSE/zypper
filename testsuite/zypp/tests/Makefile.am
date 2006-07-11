@@ -7,7 +7,19 @@ SUBDIRS =
 
 ## ##################################################
 
-noinst_PROGRAMS = Arch Url1 Url2 Url3 Url4 Url5 Url \
+TESTS = Arch Url \
+	RWPtr \
+	Edition		\
+	Capabilities	\
+	PtrTypes \
+	TranslatedText \
+	CheckSum \
+	PublicKey \
+	PathInfo \
+	Digest \
+	Signature
+
+check_PROGRAMS = Arch Url \
 	RWPtr \
 	Edition		\
 	Capabilities	\
@@ -27,13 +39,6 @@ LDADD =	$(top_srcdir)/zypp/lib@PACKAGE@.la
 
 Arch_SOURCES = Arch.cc
 Arch_LDADD = $(LDADD) -lboost_unit_test_framework
-
-Url1_SOURCES = Url1.cc
-Url2_SOURCES = Url2.cc
-Url3_SOURCES = Url3.cc
-Url4_SOURCES = Url4.cc
-Url5_SOURCES = Url5.cc
-Url_SOURCES  = Url.cc
 
 TranslatedText_SOURCES  = TranslatedText.cc
 
@@ -61,6 +66,10 @@ Digest_LDADD  = $(LDADD) -lboost_unit_test_framework
 
 Signature_SOURCES = Signature.cc
 Signature_LDADD  = $(LDADD) -lboost_unit_test_framework
+
+Url_SOURCES = Url.cc
+Url_LDADD  = $(LDADD) -lboost_unit_test_framework
+
 
 ## ##################################################
 

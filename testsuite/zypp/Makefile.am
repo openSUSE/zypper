@@ -4,7 +4,7 @@
 SUBDIRS = tests
 
 PACKAGE=zypp
-AUTOMAKE_OPTIONS = dejagnu
+#AUTOMAKE_OPTIONS = dejagnu
 
 ## ##################################################
 

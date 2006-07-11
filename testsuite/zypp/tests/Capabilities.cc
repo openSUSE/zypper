@@ -48,7 +48,7 @@ void capabilities_test()
 
     string hal = "hal(smp)";
     Capability cap5 = factory.parse ( kind, hal);
-    BOOST_CHECK_EQUAL(cap5.index(), hal);
+    BOOST_CHECK_EQUAL(cap5.index(), "hal()");
     BOOST_CHECK_EQUAL(cap5.op(), Rel::NONE);
     BOOST_CHECK_EQUAL(cap5.edition(), Edition::noedition);
 }
