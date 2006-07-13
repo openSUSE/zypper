@@ -13,6 +13,7 @@
 #include "zypp/Arch.h"
 #include "zypp/Edition.h"
 #include "zypp/base/Gettext.h"
+#include "zypp/ZYppFactory.h"
 
 #include "zypp/source/yum/YUMSourceImpl.h"
 
@@ -64,11 +65,14 @@ namespace zypp
       Pathname YUMScriptImpl::do_script() const {
 	if (_do_script != "")
 	{
-	  _tmp_file = filesystem::TmpFile();
-	  Pathname pth = _tmp_file.path();
-	  ofstream st(pth.asString().c_str());
-	  st << _do_script << endl;
-	  return pth;
+	  if ( !_tmp_do_script )
+            _tmp_do_script.reset(new filesystem::TmpDir(getZYpp()->tmpPath()));
+
+          Pathname pth = _tmp_do_script->path();
+          // FIXME check success
+          ofstream st(pth.asString().c_str());
+          st << _do_script << endl;
+          return pth;
 	}
 	else if (_do_location != "" && _do_location != "/")
 	{
@@ -85,14 +89,18 @@ namespace zypp
 	}
       }
       /** Get the script to undo the change */
-     Pathname YUMScriptImpl::undo_script() const {
+     Pathname YUMScriptImpl::undo_script() const
+     {
 	if (_undo_script != "")
 	{
-	  _tmp_file = filesystem::TmpFile();
-	  Pathname pth = _tmp_file.path();
-	  ofstream st(pth.asString().c_str());
-	  st << _undo_script << endl;
-	  return pth;
+          if ( !_tmp_undo_script )
+            _tmp_undo_script.reset(new filesystem::TmpDir(getZYpp()->tmpPath()));
+
+          Pathname pth = _tmp_undo_script->path();
+          // FIXME check success
+          ofstream st(pth.asString().c_str());
+          st << _undo_script << endl;
+          return pth;
 	}
 	else if (_undo_location != "" && _undo_location != "/")
 	{
