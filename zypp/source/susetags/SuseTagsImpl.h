@@ -168,7 +168,7 @@ namespace zypp
         // already running from cache
         Pathname _media_descr_dir;
 
-        std::string _vendor;
+        std::string _media_vendor;
         std::string _media_id;
         /**
          * pointer to the product implementation

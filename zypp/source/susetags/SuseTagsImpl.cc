@@ -122,12 +122,12 @@ namespace zypp
       void SuseTagsImpl::readMediaFile(const Pathname &p)
       {
         media::MediaManager media_mgr;
-        
+       
         std::ifstream pfile( p.asString().c_str() );
         if ( pfile.bad() ) {
           ZYPP_THROW(Exception("Error parsing media.1/media") );
         }
-        _vendor = str::getline( pfile, str::TRIM );
+        _media_vendor = str::getline( pfile, str::TRIM );
         if ( pfile.fail() ) {
           ZYPP_THROW(Exception("Error parsing media.1/media") );
         }
@@ -143,14 +143,14 @@ namespace zypp
 
         try {
           MIL << "Adding susetags media verifier: " << endl;
-          MIL << "Vendor: " << _vendor << endl;
+          MIL << "Vendor: " << _media_vendor << endl;
           MIL << "Media ID: " << _media_id << endl;
 
           // get media ID, but not attaching
           media::MediaAccessId _media = _media_set->getMediaAccessId(1, true);
           media_mgr.delVerifier(_media);
           media_mgr.addVerifier(_media, media::MediaVerifierRef(
-              new SourceImpl::Verifier (_vendor, _media_id) ));
+              new SourceImpl::Verifier ( _media_vendor, _media_id) ));
         }
         catch (const Exception & excpt_r)
         {
@@ -496,14 +496,14 @@ namespace zypp
       media::MediaVerifierRef SuseTagsImpl::verifier(media::MediaNr media_nr)
       {
 	return media::MediaVerifierRef(
-    	    new SourceImpl::Verifier (_vendor, _media_id, media_nr));
+    	    new SourceImpl::Verifier (_media_vendor, _media_id, media_nr));
       }
 
       unsigned SuseTagsImpl::numberOfMedia(void) const
       { return _media_count; }
 
       std::string SuseTagsImpl::vendor (void) const
-      { return _vendor; }
+      { return _prodImpl->vendor(); }
 
       std::string SuseTagsImpl::unique_id (void) const
       { return _media_id; }
