@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Mon Jul 17 12:54:39 CEST 2006 - ma@suse.de
+
+- Add "openSUSE", "ATI Technologies Inc." and "Nvidia" to
+  trusted vendors. (#189573)
+- revision 3804
+
+-------------------------------------------------------------------
 Thu Jul 13 12:52:58 CEST 2006 - dmacvicar@suse.de
 
 - backport fix for stalle tmpfile (#191311)
@@ -56,7 +63,7 @@ Mon Jun 19 13:52:14 CEST 2006 - dmacvicar@suse.de
 
 - merge download algorithm and refactoring from branch
   (#181204)
-  
+
 -------------------------------------------------------------------
 Mon Jun 12 15:37:10 CEST 2006 - dmacvicar@suse.de
 
