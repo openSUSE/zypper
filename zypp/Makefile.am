@@ -2,7 +2,7 @@
 ## ##################################################
 
 SUBDIRS = base thread url media capability detail pool parser \
-	data source cache target solver zypp_detail ui
+	data source target solver zypp_detail ui
 
 AM_CXXFLAGS = -DZYPP_BASE_LOGGER_LOGGROUP=\"zypp\"
 
