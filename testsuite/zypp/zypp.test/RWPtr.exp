@@ -1,4 +1,0 @@
-# RWPtr.exp
-# run tests for RWPtr
-
-  shouldPass "RWPtr"

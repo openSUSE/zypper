@@ -1,4 +1,0 @@
-# Arch.exp
-# run tests for Arch
-
-  shouldPass "Arch"

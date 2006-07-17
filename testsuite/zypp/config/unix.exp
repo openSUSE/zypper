@@ -1,5 +1,0 @@
-load_lib "libzypp_init.exp"
-
-proc libzypp_exit {} {}
-proc libzypp_version {} {}
-

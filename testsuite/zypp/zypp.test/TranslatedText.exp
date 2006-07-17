@@ -1,4 +1,0 @@
-# TranslatedText.exp
-# run tests for TranslatedText
-
-  shouldPass "TranslatedText"

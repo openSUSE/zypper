@@ -1,4 +1,0 @@
-# Edition.exp
-# run tests for Edition
-
-  shouldPass "Edition"
