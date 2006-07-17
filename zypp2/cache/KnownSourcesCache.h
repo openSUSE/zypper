@@ -20,7 +20,7 @@
 #include "zypp/base/PtrTypes.h"
 #include "zypp/source/SourceInfo.h"
 #include "zypp/Pathname.h"
-#include "zypp/cache/sqlite3x/sqlite3x.hpp"
+#include "zypp2/cache/sqlite3x/sqlite3x.hpp"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

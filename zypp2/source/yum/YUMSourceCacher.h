@@ -13,7 +13,7 @@
 #include <iosfwd>
 #include <string>
 
-#include "zypp/cache/SourceCacher.h"
+#include "zypp2/cache/SourceCacher.h"
 #include "zypp/data/ResolvableData.h"
 #include "zypp/data/ResolvableDataConsumer.h"
 #include "zypp/Pathname.h"

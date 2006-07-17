@@ -11,10 +11,10 @@
 
 #include "zypp/base/Logger.h"
 #include "zypp/base/String.h"
-#include "zypp/cache/SourceCache.h"
+#include "zypp2/cache/SourceCache.h"
 #include "zypp/target/store/PersistentStorage.h"
-#include "zypp/cache/SourceCacheInitializer.h"
-#include "zypp/cache/Utils.h"
+#include "zypp2/cache/SourceCacheInitializer.h"
+#include "zypp2/cache/Utils.h"
 
 #define ZYPP_DB_FILE "/var/lib/zypp/zypp.db"
 

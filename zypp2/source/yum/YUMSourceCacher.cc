@@ -11,7 +11,7 @@
 
 #include "zypp/base/Logger.h"
 #include "zypp/MediaSetAccess.h"
-#include "zypp/cache/SourceCacher.h"
+#include "zypp2/cache/SourceCacher.h"
 
 #include "zypp/base/GzStream.h"
 #include "zypp/parser/yum/YUMParser.h"
@@ -19,7 +19,7 @@
 #include "zypp/parser/SAXParser.h"
 #include "zypp/parser/yum/YUMParser.h"
 #include "zypp/parser/yum2/YUMPrimaryParser.h"
-#include "zypp/source/yum/YUMSourceCacher.h"
+#include "zypp2/source/yum/YUMSourceCacher.h"
 
 using namespace std;
 

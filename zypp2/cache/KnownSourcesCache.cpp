@@ -8,8 +8,8 @@
 \---------------------------------------------------------------------*/
 
 #include "zypp/base/Logger.h"
-#include "zypp/cache/KnownSourcesCache.h"
-#include "zypp/cache/SourceCacheInitializer.h"
+#include "zypp2/cache/KnownSourcesCache.h"
+#include "zypp2/cache/SourceCacheInitializer.h"
 #include "zypp/target/store/PersistentStorage.h"
 
 #define ZYPP_DB_FILE "/var/lib/zypp/zypp.db"

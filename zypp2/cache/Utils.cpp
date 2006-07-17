@@ -12,7 +12,7 @@
 #include "zypp/base/Logger.h"
 #include "zypp/base/String.h"
 
-#include "zypp/cache/Utils.h"
+#include "zypp2/cache/Utils.h"
 
 using namespace std;
 

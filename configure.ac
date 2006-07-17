@@ -225,7 +225,6 @@ AC_OUTPUT(	 po/Makefile.in\
 	testsuite/src/utils/Makefile	\
 	testsuite/zypp/Makefile		\
   testsuite/cache/Makefile \
-	testsuite/zypp/tests/Makefile	\
 	testsuite/solver/Makefile	\
 	testsuite/solver/src/Makefile	\
 	testsuite/src/helix/Makefile	\
@@ -254,6 +253,7 @@ AC_OUTPUT(	 po/Makefile.in\
 	zypp/solver/Makefile		\
 	zypp/solver/detail/Makefile	\
   zypp/data/Makefile \
+  zypp2/Makefile \
 	zypp2/cache/Makefile \
   zypp2/cache/sqlite3x/Makefile
   zypp2/source/Makefile \

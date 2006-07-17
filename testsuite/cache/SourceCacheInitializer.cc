@@ -6,13 +6,13 @@
 #include "zypp/base/Logger.h"
 #include "zypp/Arch.h"
 #include "zypp/TmpPath.h"
-#include "zypp/cache/SourceCacheInitializer.h"
+#include "zypp2/cache/SourceCacheInitializer.h"
 
 // Boost.Test
 #include <boost/test/floating_point_comparison.hpp>
 #include <boost/test/unit_test.hpp>
 
-#include "zypp/cache/sqlite3x/sqlite3x.hpp"
+#include "zypp2/cache/sqlite3x/sqlite3x.hpp"
 
 using boost::unit_test::test_suite;
 using boost::unit_test::test_case;

@@ -8,7 +8,7 @@
 \---------------------------------------------------------------------*/
 
 #include "zypp/base/Logger.h"
-#include "zypp/cache/SourceCacher.h"
+#include "zypp2/cache/SourceCacher.h"
 
 using namespace std;
 

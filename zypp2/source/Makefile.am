@@ -16,9 +16,9 @@ noinst_LTLIBRARIES =	lib@PACKAGE@2_source.la
 
 ## ##################################################
 
-lib@PACKAGE@2_source_la_SOURCES =
+lib@PACKAGE@2_source_la_SOURCES = dummy.cc
 
-lib@PACKAGE@_source_la_LIBADD = \
+lib@PACKAGE@2_source_la_LIBADD = \
 		yum/lib@PACKAGE@2_source_yum.la
 
 ## ##################################################
