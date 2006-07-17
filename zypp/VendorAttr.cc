@@ -83,10 +83,13 @@ namespace zypp
     char * vendors[] = {
       "jpackage project",
       "novell",
+      "opensuse",
       "sgi",
       "silicon graphics",
-      "suse"
-    };
+      "suse",
+      "ati technologies inc.",
+      "nvidia"
+   };
     _trustedVendors.insert( vendors, vendors+(sizeof(vendors)/sizeof(char *)) );
     MIL << "Trusted Vendors: " << _trustedVendors << endl;
   }
