@@ -178,7 +178,6 @@ lib@PACKAGE@_la_LIBADD =        thread/lib@PACKAGE@_thread.la		\
 				pool/lib@PACKAGE@_pool.la		\
 				parser/lib@PACKAGE@_parser.la		\
 				source/lib@PACKAGE@_source.la		\
-				cache/lib@PACKAGE@_cache.la		\
 				data/lib@PACKAGE@_data.la		\
 				media/lib@PACKAGE@_media.la		\
 				url/lib@PACKAGE@_url.la			\
