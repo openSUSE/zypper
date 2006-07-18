@@ -28,7 +28,7 @@ lib@PACKAGE@2_la_LIBADD =        cache/lib@PACKAGE@2_cache.la \
 
 ## ##################################################
 
-EXTRA_DIST = @DOXYGEN/*
+#EXTRA_DIST = @DOXYGEN/*
 
 #<INSTALL-HEADER-TARGET>
 
