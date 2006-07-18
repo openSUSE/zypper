@@ -11,7 +11,7 @@ pkginclude_HEADERS =
 
 ## ##################################################
 
-lib_LTLIBRARIES =	lib@PACKAGE@2.la
+noinst_LTLIBRARIES =	lib@PACKAGE@2.la
 
 ## ##################################################
 
