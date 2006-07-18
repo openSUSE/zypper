@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Tue Jul 18 17:42:45 CEST 2006 - dmacvicar@suse.de
+
+- susetags: parse product parser regexp only once
+- parse yum factory 5 sec. (from 30) faster using
+  another string find algorithm
+- rev 3824
+
+-------------------------------------------------------------------
 Tue Jul 18 12:56:17 CEST 2006 - dmacvicar@suse.de
 
 - Digest: Don't read the stream character wise but reading blocks,
