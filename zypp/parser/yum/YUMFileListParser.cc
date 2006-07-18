@@ -10,8 +10,6 @@
  *
 */
 
-
-
 #include <zypp/parser/yum/YUMFileListParser.h>
 #include <istream>
 #include <string>
@@ -24,13 +22,15 @@
 #include <iostream>
 #include <zypp/base/Logger.h>
 #include <zypp/ZYppFactory.h>
-
+#include <boost/regex.hpp>
+#include <boost/algorithm/string.hpp>
 
 using namespace std;
 namespace zypp {
   namespace parser {
     namespace yum {
 
+static boost::regex filenameRegex("^.*(/bin/|/sbin/|/lib/|/lib64/|/etc/|/usr/share/dict/words/|/usr/games/|/usr/share/magic\\.mime|/opt/gnome/games).*$"); 
 
       YUMFileListParser::YUMFileListParser(istream &is, const string& baseUrl)
       : XMLNodeIterator<YUMFileListData_Ptr>(is, baseUrl,FILELISTSCHEMA)
@@ -105,16 +105,32 @@ namespace zypp {
 		}
 		else if (name == "file") {
 		    string filename = _helper.content( child );
-		    if (filename.find("/bin/") != string::npos
-			|| filename.find("/sbin/") != string::npos
-			|| filename.find("/lib/") != string::npos
-			|| filename.find("/lib64/") != string::npos
-			|| filename.find("/etc/") != string::npos
-			|| filename.find("/usr/games/") != string::npos
-			|| filename.find("/usr/share/dict/words") != string::npos
-			|| filename.find("/usr/share/magic.mime") != string::npos
-			|| filename.find("/opt/gnome/games") != string::npos)
-		    {
+#if 0
+		    if ( boost::regex_match(filename, filenameRegex) )
+#endif
+#if 0
+                    if (filename.find("/bin/") != string::npos
+                       || filename.find("/sbin/") != string::npos
+                       || filename.find("/lib/") != string::npos
+                       || filename.find("/lib64/") != string::npos
+                       || filename.find("/etc/") != string::npos
+                       || filename.find("/usr/games/") != string::npos
+                       || filename.find("/usr/share/dict/words") != string::npos
+                       || filename.find("/usr/share/magic.mime") != string::npos
+                       || filename.find("/opt/gnome/games") != string::npos)
+#endif
+#if 1
+                    if (  boost::find_first(filename, "/bin/")
+                       || boost::find_first(filename, "/sbin/")
+                       || boost::find_first(filename, "/lib/")
+                       || boost::find_first(filename, "/lib64/")
+                       || boost::find_first(filename, "/etc/")
+                       || boost::find_first(filename, "/usr/games/")
+                       || boost::find_first(filename, "/usr/share/dict/words")
+                       || boost::find_first(filename, "/usr/share/magic.mime")
+                       || boost::find_first(filename, "/opt/gnome/games") )
+#endif
+                    {
 			dataPtr->files.push_back( FileData( filename, _helper.attribute( child, "type" ) ) );
 		    }
 		}
@@ -124,6 +140,7 @@ namespace zypp {
 		}
 	    }
 	}
+        //std::cout << dataPtr->files.size() << std::endl;
 	return dataPtr;
       }
 
