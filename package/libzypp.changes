@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue Jul 18 12:56:17 CEST 2006 - dmacvicar@suse.de
+
+- Digest: Don't read the stream character wise but reading blocks,
+  as advised by matz profiling. 
+- r3819
+
+-------------------------------------------------------------------
 Mon Jul 17 12:54:39 CEST 2006 - ma@suse.de
 
 - Add "openSUSE", "ATI Technologies Inc." and "Nvidia" to
