@@ -66,10 +66,10 @@ namespace zypp
 
         std::string buffer;
 	volatile_content = false;
+        boost::regex e("^(([A-Z]+)(\\.([_A-Z0-9a-z]+)){0,1}) (.+)$");
         while(file && !file.eof())
         {
           getline(file, buffer);
-          boost::regex e("^(([A-Z]+)(\\.([_A-Z0-9a-z]+)){0,1}) (.+)$");
           boost::smatch what;
           if(boost::regex_match(buffer, what, e, boost::match_extra))
           {
