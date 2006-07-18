@@ -193,17 +193,19 @@ namespace zypp {
     	return string();
     
       char buf[bufsize];
-      size_t num;
+      size_t num = 0;
     
       Digest digest;
       if(!digest.create(name))
     	return string();
     
+      
       while(is.good())
       {
-    	for(num = 0; num < bufsize && is.get(buf[num]).good(); ++num);
-    
-    	if(num && !digest.update(buf, num))
+        int readed;
+        is.read(buf, bufsize);
+    	readed = is.gcount();
+        if(readed && !digest.update(buf, readed))
     	    return string();
       }
     
