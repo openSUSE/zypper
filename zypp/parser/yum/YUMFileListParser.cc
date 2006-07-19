@@ -10,6 +10,9 @@
  *
 */
 
+#include <sys/types.h>
+#include <regex.h>
+
 #include <zypp/parser/yum/YUMFileListParser.h>
 #include <istream>
 #include <string>
@@ -31,6 +34,9 @@ namespace zypp {
     namespace yum {
 
 static boost::regex filenameRegex("^.*(/bin/|/sbin/|/lib/|/lib64/|/etc/|/usr/share/dict/words/|/usr/games/|/usr/share/magic\\.mime|/opt/gnome/games).*$"); 
+	static regex_t filenameRegexT;
+	static bool filenameRegexOk = false;
+	static bool useboost;
 
       YUMFileListParser::YUMFileListParser(istream &is, const string& baseUrl)
       : XMLNodeIterator<YUMFileListData_Ptr>(is, baseUrl,FILELISTSCHEMA)
@@ -105,34 +111,19 @@ static boost::regex filenameRegex("^.*(/bin/|/sbin/|/lib/|/lib64/|/etc/|/usr/sha
 		}
 		else if (name == "file") {
 		    string filename = _helper.content( child );
-#if 0
-		    if ( boost::regex_match(filename, filenameRegex) )
-#endif
-#if 0
-                    if (filename.find("/bin/") != string::npos
-                       || filename.find("/sbin/") != string::npos
-                       || filename.find("/lib/") != string::npos
-                       || filename.find("/lib64/") != string::npos
-                       || filename.find("/etc/") != string::npos
-                       || filename.find("/usr/games/") != string::npos
-                       || filename.find("/usr/share/dict/words") != string::npos
-                       || filename.find("/usr/share/magic.mime") != string::npos
-                       || filename.find("/opt/gnome/games") != string::npos)
-#endif
-#if 1
-                    if (  boost::find_first(filename, "/bin/")
-                       || boost::find_first(filename, "/sbin/")
-                       || boost::find_first(filename, "/lib/")
-                       || boost::find_first(filename, "/lib64/")
-                       || boost::find_first(filename, "/etc/")
-                       || boost::find_first(filename, "/usr/games/")
-                       || boost::find_first(filename, "/usr/share/dict/words")
-                       || boost::find_first(filename, "/usr/share/magic.mime")
-                       || boost::find_first(filename, "/opt/gnome/games") )
-#endif
-                    {
-			dataPtr->files.push_back( FileData( filename, _helper.attribute( child, "type" ) ) );
+		    if (!filenameRegexOk)
+		    {
+			const char * filenameRegexPattern = "/(s?bin|lib(64)?|etc)/|^/usr/(games/|share/(dict/words|magic\\.mime)$)|^/opt/gnome/games/";
+			int r = regcomp (&filenameRegexT, filenameRegexPattern, REG_EXTENDED | REG_NOSUB);
+			//MIL << "regcomp " << r;
+			filenameRegexOk = true;
 		    }
+
+		    bool match;
+		    match = !regexec (&filenameRegexT, filename.c_str(), 0 /*nmatch*/, NULL /*pmatch*/, 0 /*flags*/);
+		    
+		    if (match)
+			dataPtr->files.push_back( FileData( filename, _helper.attribute( child, "type" ) ) );
 		}
 		else {
 		   WAR << "YUM <filelists> contains the unknown element <" << name << "> "
