@@ -188,7 +188,6 @@ lib@PACKAGE@_la_LIBADD =        thread/lib@PACKAGE@_thread.la		\
 				\
 				base/lib@PACKAGE@_base.la		\
 				-lboost_filesystem			\
-				-lsqlite3 \
 				-lutil
 # !!! base/lib@PACKAGE@_base.la MUST BE THE LAST zypp lib linked
 
