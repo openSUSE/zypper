@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Jul 19 13:50:57 CEST 2006 - dmacvicar@suse.de
+
+- dont link sqlite in the main lib.
+- rev 3826 
+
+-------------------------------------------------------------------
 Tue Jul 18 17:42:45 CEST 2006 - dmacvicar@suse.de
 
 - susetags: parse product parser regexp only once
