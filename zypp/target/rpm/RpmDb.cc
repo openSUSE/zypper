@@ -24,6 +24,8 @@
 #include <vector>
 #include <algorithm>
 
+#include <boost/regex.hpp>
+
 #include "zypp/base/Logger.h"
 
 #include "zypp/Date.h"
@@ -1105,6 +1107,9 @@ const std::list<Package::Ptr> & RpmDb::getPackages()
 // return NULL on error
 //
 
+static regex_t filenameRegexT;
+static bool filenameRegexOk = false;
+
 Package::Ptr RpmDb::makePackageFromHeader( const RpmHeader::constPtr header, std::set<std::string> * filerequires, const Pathname & location, Source_Ref source )
 {
     Package::Ptr pptr;
@@ -1156,15 +1161,18 @@ Package::Ptr RpmDb::makePackageFromHeader( const RpmHeader::constPtr header, std
 	 filename != filenames.end();
 	 filename++)
     {
-      if (filename->find("/bin/") != string::npos
-	|| filename->find("/sbin/") != string::npos
-	|| filename->find("/lib/") != string::npos
-	|| filename->find("/lib64/") != string::npos
-	|| filename->find("/etc/") != string::npos
-	|| filename->find("/usr/games/") != string::npos
-	|| filename->find("/usr/share/dict/words") != string::npos
-	|| filename->find("/usr/share/magic.mime") != string::npos
-	|| filename->find("/opt/gnome/games") != string::npos)
+      if (!filenameRegexOk)
+      {
+        const char * filenameRegexPattern = "/(s?bin|lib(64)?|etc)/|^/usr/(games/|share/(dict/words|magic\\.mime)$)|^/opt/gnome/games/";
+        int r;
+        r = regcomp (&filenameRegexT, filenameRegexPattern, REG_EXTENDED | REG_NOSUB);
+        //MIL << "regcomp " << r;
+        filenameRegexOk = true;
+      }
+      bool match;
+      match = !regexec (&filenameRegexT, (*filename).c_str(), 0 /*nmatch*/, NULL /*pmatch*/, 0 /*flags*/);
+      
+      if (match)
       {
 	try {
 	  dataCollect[Dep::PROVIDES].insert( capfactory.parse(ResTraits<Package>::kind, *filename) );
