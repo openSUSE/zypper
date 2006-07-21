@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Fri Jul 21 10:58:58 CEST 2006 - dmacvicar@suse.de
+
+- link correctly 
+
+-------------------------------------------------------------------
 Wed Jul 19 13:50:57 CEST 2006 - dmacvicar@suse.de
 
 - dont link sqlite in the main lib.
