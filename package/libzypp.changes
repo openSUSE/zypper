@@ -1,4 +1,15 @@
 -------------------------------------------------------------------
+Tue Aug  1 13:37:29 CEST 2006 - dmacvicar@suse.de
+
+- forward port:
+  rev 3786 fix to stalle tmpfiles broke patches.
+  SLES was released with this broken. 10.1 has a blocked
+  zypp update because this.
+  Attempt to fix this. (#192535)
+- fix configure.ac sqlite-source build path
+- rev 3858
+
+-------------------------------------------------------------------
 Fri Jul 21 10:58:58 CEST 2006 - dmacvicar@suse.de
 
 - link correctly 
