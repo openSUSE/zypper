@@ -61,8 +61,8 @@ namespace zypp
 	/** Media number of the undo script */
 	unsigned _undo_media;
 
-        mutable shared_ptr<filesystem::TmpDir> _tmp_do_script;
-        mutable shared_ptr<filesystem::TmpDir> _tmp_undo_script;
+        mutable shared_ptr<filesystem::TmpFile> _tmp_do_script;
+        mutable shared_ptr<filesystem::TmpFile> _tmp_undo_script;
 
 	CheckSum _do_checksum;
 	CheckSum _undo_checksum;

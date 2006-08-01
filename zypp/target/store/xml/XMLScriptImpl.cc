@@ -30,8 +30,8 @@ namespace zypp
     /** Default ctor */
     XMLScriptImpl::XMLScriptImpl()
     {
-      _do_script = TmpFile( TmpPath::defaultLocation(), "zypp-xmlstore-do-script-");
-      _undo_script = TmpFile( TmpPath::defaultLocation(), "zypp-xmlstore-undo-script-");
+      _do_script.reset( new TmpFile( TmpPath::defaultLocation(), "zypp-xmlstore-do-script-") );
+      _undo_script.reset( new TmpFile( TmpPath::defaultLocation(), "zypp-xmlstore-undo-script-"));
     }
     
     /** Dtor */
@@ -39,15 +39,15 @@ namespace zypp
     {}
 
     Pathname XMLScriptImpl::do_script() const {
-      return _do_script.path();
+      return _do_script->path();
     }
 
     Pathname XMLScriptImpl::undo_script() const {
-        return _undo_script.path();
+        return _undo_script->path();
     }
 
     bool XMLScriptImpl::undo_available() const {
-      return _undo_script != "";
+      return *_undo_script != "";
     }
 
     /////////////////////////////////////////////////////////////////

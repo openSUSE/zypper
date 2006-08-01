@@ -66,11 +66,17 @@ namespace zypp
 	if (_do_script != "")
 	{
 	  if ( !_tmp_do_script )
-            _tmp_do_script.reset(new filesystem::TmpDir(getZYpp()->tmpPath()));
+            _tmp_do_script.reset(new filesystem::TmpFile(getZYpp()->tmpPath(), "zypp-yum-do-script-"));
 
           Pathname pth = _tmp_do_script->path();
           // FIXME check success
           ofstream st(pth.asString().c_str());
+
+          if ( !st )
+          {
+            ZYPP_THROW(Exception(N_("Can't write the patch script to a temporary file.")));
+          }
+
           st << _do_script << endl;
           return pth;
 	}
@@ -94,11 +100,17 @@ namespace zypp
 	if (_undo_script != "")
 	{
           if ( !_tmp_undo_script )
-            _tmp_undo_script.reset(new filesystem::TmpDir(getZYpp()->tmpPath()));
+            _tmp_undo_script.reset(new filesystem::TmpFile(getZYpp()->tmpPath(), "zypp-yum-undo-script-"));
 
           Pathname pth = _tmp_undo_script->path();
           // FIXME check success
           ofstream st(pth.asString().c_str());
+        
+          if ( !st )
+          {
+            ZYPP_THROW(Exception(N_("Can't write the patch script to a temporary file.")));
+          }
+
           st << _undo_script << endl;
           return pth;
 	}

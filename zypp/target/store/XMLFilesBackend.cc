@@ -908,11 +908,18 @@ XMLFilesBackend::createScript(const zypp::parser::xmlstore::XMLPatchScriptData &
     detail::ResImplTraits<XMLScriptImpl>::Ptr impl(new XMLScriptImpl());
 
     ofstream file;
-    file.open(impl->_do_script.path().asString().c_str());
+    file.open(impl->_do_script->path().asString().c_str());
+
+    if ( ! file )
+      ZYPP_THROW(Exception(N_("Can't write the patch script to a temporary file.")));
+
     file << parsed.do_script;;
     file.close();
 
-    file.open(impl->_undo_script.path().asString().c_str());
+    file.open(impl->_undo_script->path().asString().c_str());
+    if ( ! file )
+      ZYPP_THROW(Exception(N_("Can't write the patch script to a temporary file.")));
+
     file << parsed.undo_script;;
     file.close();
 

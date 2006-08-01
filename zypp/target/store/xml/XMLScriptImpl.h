@@ -68,9 +68,9 @@ namespace zypp
       /** Check whether script to undo the change is available */
       virtual bool undo_available() const;
       
-      TmpFile _do_script;
-      TmpFile _undo_script;
-      
+      mutable shared_ptr<filesystem::TmpFile> _do_script;
+      mutable shared_ptr<filesystem::TmpFile> _undo_script;      
+
       TranslatedText _summary;
       TranslatedText _description;
       
