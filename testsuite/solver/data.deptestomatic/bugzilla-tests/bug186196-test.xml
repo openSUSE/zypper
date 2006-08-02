@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!--
+   Install Build 1355
+-->
+<test>
+<setup arch="i686">
+  <source url="file:/mounts/machcd2/CDs/SLED-10-DVD-i386-Build_1355/DVD1" name="Build1355"/>
+</setup>
+<trial>
+  <install channel="Build1355" package="spamassassin"/>
+</trial>
+<trial>
+  <install channel="Build1355" package="evolution"/>
+</trial>
+</test>
