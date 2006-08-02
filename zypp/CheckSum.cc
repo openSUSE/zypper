@@ -118,6 +118,13 @@ namespace zypp
     return str << ( obj.type().empty() ? std::string("UNKNOWN") : obj.type() ) << '-' << obj.checksum();
   }
 
+   /** \relates CheckSum */
+  bool operator==( const CheckSum & lhs, const CheckSum & rhs )
+  { return lhs.checksum() == rhs.checksum() && lhs.type() == rhs.type(); }
+
+  /** \relates CheckSum */
+  bool operator!=( const CheckSum & lhs, const CheckSum & rhs )
+  { return ! ( lhs == rhs ); }
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
