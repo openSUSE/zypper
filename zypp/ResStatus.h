@@ -254,6 +254,10 @@ namespace zypp
     bool isToBeInstalledSoft () const
     { return isToBeInstalled() && fieldValueIs<TransactDetailField>( SOFT_INSTALL ); }
 
+    bool isToBeInstalledNotSoft () const
+    { return isToBeInstalled() && !fieldValueIs<TransactDetailField>( SOFT_INSTALL ); }
+      
+
     bool isToBeUninstalledSoft () const
     { return isToBeUninstalled() && fieldValueIs<TransactDetailField>( SOFT_REMOVE ); }
 

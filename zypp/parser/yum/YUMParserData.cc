@@ -10,7 +10,7 @@
  *
 */
 
-
+#include <iostream>
 
 #include <zypp/parser/yum/YUMParserData.h>
 
@@ -580,18 +580,6 @@ namespace zypp {
         return out;
       }
 
-      std::ostream& operator<<(std::ostream& out, const YUMBaseVersion& data)
-      {
-        out << "    Base version:" << endl
-          << "      epoch: " << data.epoch << endl
-          << "      version: " << data.ver << endl
-          << "      release: " << data.rel << endl
-          << "      MD5: " << data.md5sum << endl
-          << "      build time: " << data.buildtime << endl
-          << "      source info: " << data.source_info << endl;
-        return out;
-      }
-
       std::ostream& operator<<(std::ostream& out, const YUMPlainRpm& data)
       {
         out << "  Plain RPM:" << endl
@@ -600,6 +588,21 @@ namespace zypp {
           << "    download size: " << data.downloadsize << endl
           << "    MD5: " << data.md5sum << endl
           << "    build time: " << data.buildtime << endl;
+        return out;
+      }
+
+      std::ostream& operator<<(std::ostream& out, const YUMEdition& data)
+      {
+        out << "    epoch: " << data.epoch << endl
+          << "    version: " << data.ver << endl
+          << "    release: " << data.rel << endl;
+        return out;
+      }
+
+      std::ostream& operator<<(std::ostream& out, const YUMPatchBaseVersion& data)
+      {
+        out << "    Patch base version:" << endl
+          << data.edition;
         return out;
       }
 
@@ -616,6 +619,16 @@ namespace zypp {
           << "    MD5: " << data.md5sum << endl
           << "    build time: " << data.buildtime << endl
           << data.baseVersions;
+        return out;
+      }
+
+      std::ostream& operator<<(std::ostream& out, const YUMDeltaBaseVersion& data)
+      {
+        out << "    Delta base version:" << endl
+          << data.edition
+          << "      MD5: " << data.md5sum << endl
+          << "      build time: " << data.buildtime << endl
+          << "      sequence info: " << data.sequence_info << endl;
         return out;
       }
 

@@ -191,6 +191,55 @@ Helper::findReinstallItem (const ResPool & pool, PoolItem_Ref item)
     return info.uninstalled;
 }
 
+//----------------------------------------------------------------------------
+
+class CheckIfBest : public resfilter::PoolItemFilterFunctor
+{
+  public:
+    PoolItem_Ref _item;
+    bool is_best;
+
+    CheckIfBest( PoolItem_Ref item )
+	: _item( item )
+	, is_best( true )		// assume we already have the best
+    {}
+
+    // check if provider is better. If yes, end the search.
+
+    bool operator()( PoolItem_Ref provider )
+    {
+	int archcmp = _item->arch().compare( provider->arch() );
+	if (((archcmp < 0) 							// provider has a better architecture
+	     || ((archcmp == 0)
+		 && (_item->edition().compare( provider->edition() ) < 0)))	// or a better edition
+	    && !provider.status().isLocked())					// and is not locked
+	{
+	    is_best = false;
+	    return false;
+	}
+	return true;
+    }
+};
+
+
+// check if the given item is the best one of the pool
+
+bool
+Helper::isBestUninstalledItem (const ResPool & pool, PoolItem_Ref item)
+{
+    CheckIfBest info( item );
+
+    invokeOnEach( pool.byNameBegin( item->name() ),
+		  pool.byNameEnd( item->name() ),
+		  functor::chain( resfilter::ByUninstalled(),			// ByUninstalled
+				  resfilter::ByKind( item->kind() ) ),		// equal kind
+		  functor::functorRef<bool,PoolItem>( info ) );
+
+    _XDEBUG("Helper::isBestUninstalledItem(" << item << ") => " << info.is_best);
+    return info.is_best;
+}
+
+
 ///////////////////////////////////////////////////////////////////
     };// namespace detail
     /////////////////////////////////////////////////////////////////////

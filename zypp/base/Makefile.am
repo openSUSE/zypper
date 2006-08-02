@@ -17,6 +17,7 @@ baseinclude_HEADERS =	\
 	\
 	Algorithm.h	\
 	Exception.h	\
+	Function.h	\
 	Functional.h	\
 	Iterator.h	\
 	Logger.h	\

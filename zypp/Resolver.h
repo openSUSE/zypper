@@ -141,6 +141,12 @@ namespace zypp
     ResolverProblemList problems();
 
     /**
+     * Return more solver information if an error has happened.
+     **/
+      
+    std::list<std::string> problemDescription( void ) const;      
+
+    /**
      * Apply problem solutions. No more than one solution per problem
      * can be applied.
      **/

@@ -89,7 +89,7 @@ namespace zypp
       "suse",
       "ati technologies inc.",
       "nvidia"
-   };
+    };
     _trustedVendors.insert( vendors, vendors+(sizeof(vendors)/sizeof(char *)) );
     MIL << "Trusted Vendors: " << _trustedVendors << endl;
   }

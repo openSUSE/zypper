@@ -27,12 +27,12 @@ namespace zypp
     // progress for downloading a resolvable
     struct DownloadResolvableReport : public callback::ReportBase
     {
-      enum Action { 
+      enum Action {
         ABORT,  // abort and return error
         RETRY,	// retry
         IGNORE, // ignore this resolvable but continue
-      }; 
-      
+      };
+
       enum Error {
 	NO_ERROR,
         NOT_FOUND, 	// the requested Url was not found
@@ -45,8 +45,50 @@ namespace zypp
 	, Url url
       ) {}
 
+
+      // Dowmload delta rpm:
+      // - path below url reported on start()
+      // - expected download size (0 if unknown)
+      // - download is interruptable
+      // - problems are just informal
+      virtual void startDeltaDownload( const Pathname & filename, const ByteCount & downloadsize )
+      {}
+
+      virtual bool progressDeltaDownload( int value )
+      { return true; }
+
+      virtual void problemDeltaDownload( std::string description )
+      {}
+
+      // Apply delta rpm:
+      // - local path of downloaded delta
+      // - aplpy is not interruptable
+      // - problems are just informal
+      virtual void startDeltaApply( const Pathname & filename )
+      {}
+
+      virtual void progressDeltaApply( int value )
+      {}
+
+      virtual void problemDeltaApply( std::string description )
+      {}
+
+      // Dowmload patch rpm:
+      // - path below url reported on start()
+      // - expected download size (0 if unknown)
+      // - download is interruptable
+      virtual void startPatchDownload( const Pathname & filename, const ByteCount & downloadsize )
+      {}
+
+      virtual bool progressPatchDownload( int value )
+      { return true; }
+
+      virtual void problemPatchDownload( std::string description )
+      {}
+
+
       // return false if the download should be aborted right now
-      virtual bool progress(int value, Resolvable::constPtr resolvable_ptr) 
+      virtual bool progress(int value, Resolvable::constPtr resolvable_ptr)
       { return true; }
 
       virtual Action problem(
@@ -60,16 +102,16 @@ namespace zypp
 	, std::string reason
       ) {}
     };
-    
+
 
     // progress for downloading a specific file
     struct DownloadFileReport : public callback::ReportBase
     {
-      enum Action { 
+      enum Action {
         ABORT,  // abort and return error
         RETRY	// retry
-      }; 
-      
+      };
+
       enum Error {
 	NO_ERROR,
         NOT_FOUND, 	// the requested Url was not found
@@ -81,7 +123,7 @@ namespace zypp
 	, Url url
       ) {}
 
-      virtual bool progress(int value, Url url) 
+      virtual bool progress(int value, Url url)
       { return true; }
 
       virtual Action problem(
@@ -100,12 +142,12 @@ namespace zypp
     // progress for refreshing a source data
     struct RefreshSourceReport : public callback::ReportBase
     {
-      enum Action { 
+      enum Action {
         ABORT,  // abort and return error
         RETRY,	// retry
 	IGNORE  // skip refresh, ignore failed refresh
-      }; 
-      
+      };
+
       enum Error {
 	NO_ERROR,
         NOT_FOUND, 	// the requested Url was not found
@@ -117,7 +159,7 @@ namespace zypp
 	, Url url
       ) {}
 
-      virtual bool progress(int value, Source_Ref source) 
+      virtual bool progress(int value, Source_Ref source)
       { return true; }
 
       virtual Action problem(
@@ -136,11 +178,11 @@ namespace zypp
     // progress for creating a source (download and parsing)
     struct CreateSourceReport : public callback::ReportBase
     {
-      enum Action { 
+      enum Action {
         ABORT,  // abort and return error
         RETRY	// retry
-      }; 
-      
+      };
+
       enum Error {
 	NO_ERROR,
         NOT_FOUND, 	// the requested Url was not found
@@ -151,12 +193,12 @@ namespace zypp
       virtual void startData(
 	Url source_url
       ) {}
-      
+
       virtual void startProbe(Url url) {}
 
       virtual void endProbe(Url url) {}
 
-      virtual bool progressData(int value, Url url) 
+      virtual bool progressData(int value, Url url)
       { return true; }
 
       virtual Action problem(
@@ -171,34 +213,34 @@ namespace zypp
 	, std::string reason
       ) {}
     };
-    
+
     /////////////////////////////////////////////////////////////////
   } // namespace source
   ///////////////////////////////////////////////////////////////////
-  
+
   ///////////////////////////////////////////////////////////////////
-  namespace media 
-  { 
+  namespace media
+  {
     // media change request callback
     struct MediaChangeReport : public callback::ReportBase
     {
-      enum Action { 
+      enum Action {
         ABORT,  // abort and return error
         RETRY,	// retry
 	IGNORE, // ignore this media in future, not available anymore
 	IGNORE_ID,	// ignore wrong medium id
 	CHANGE_URL,	// change media URL
 	EJECT		// eject the medium
-      }; 
+      };
 
-      enum Error { 
+      enum Error {
 	NO_ERROR,
         NOT_FOUND,  // the medie not found at all
         IO,	// error accessing the media
 	INVALID, // media is broken
 	WRONG	// wrong media, need a different one
-      };       
-      
+      };
+
       virtual Action requestMedia(
         const Source_Ref source
 	, unsigned mediumNr
@@ -210,21 +252,21 @@ namespace zypp
     // progress for downloading a file
     struct DownloadProgressReport : public callback::ReportBase
     {
-        enum Action { 
+        enum Action {
           ABORT,  // abort and return error
           RETRY,	// retry
 	  IGNORE	// ignore the failure
-        }; 
-      
+        };
+
         enum Error {
 	  NO_ERROR,
           NOT_FOUND, 	// the requested Url was not found
 	  IO		// IO error
         };
-      
+
         virtual void start( Url file, Pathname localfile ) {}
 
-        virtual bool progress(int value, Url file) 
+        virtual bool progress(int value, Url file)
         { return true; }
 
         virtual Action problem(
@@ -239,43 +281,43 @@ namespace zypp
 	  , std::string reason
         ) {}
     };
-    
+
     /////////////////////////////////////////////////////////////////
   } // namespace media
   ///////////////////////////////////////////////////////////////////
 
   ///////////////////////////////////////////////////////////////////
-  namespace target 
-  { 
-  
+  namespace target
+  {
+
     // resolvable Message
     struct MessageResolvableReport : public callback::ReportBase
     {
         virtual void show(
 	  Message::constPtr message
-        ) {}	
+        ) {}
     };
-  
+
     ///////////////////////////////////////////////////////////////////
-    namespace rpm 
-    { 
+    namespace rpm
+    {
 
       // progress for installing a resolvable
       struct InstallResolvableReport : public callback::ReportBase
       {
-        enum Action { 
+        enum Action {
           ABORT,  // abort and return error
           RETRY,	// retry
 	  IGNORE	// ignore the failure
-        }; 
-      
+        };
+
         enum Error {
 	  NO_ERROR,
           NOT_FOUND, 	// the requested Url was not found
 	  IO,		// IO error
 	  INVALID		// th resolvable is invalid
         };
-      
+
         // the level of RPM pushing
         enum RpmLevel {
             RPM,
@@ -287,7 +329,7 @@ namespace zypp
 	  Resolvable::constPtr resolvable
         ) {}
 
-        virtual bool progress(int value, Resolvable::constPtr resolvable) 
+        virtual bool progress(int value, Resolvable::constPtr resolvable)
         { return true; }
 
         virtual Action problem(
@@ -304,28 +346,28 @@ namespace zypp
 	  , RpmLevel level
         ) {}
       };
-    
+
       // progress for removing a resolvable
       struct RemoveResolvableReport : public callback::ReportBase
       {
-        enum Action { 
+        enum Action {
           ABORT,  // abort and return error
           RETRY,	// retry
 	  IGNORE	// ignore the failure
-        }; 
-      
+        };
+
         enum Error {
 	  NO_ERROR,
           NOT_FOUND, 	// the requested Url was not found
 	  IO,		// IO error
 	  INVALID		// th resolvable is invalid
         };
-      
+
         virtual void start(
 	  Resolvable::constPtr resolvable
         ) {}
 
-        virtual bool progress(int value, Resolvable::constPtr resolvable) 
+        virtual bool progress(int value, Resolvable::constPtr resolvable)
         { return true; }
 
         virtual Action problem(
@@ -340,25 +382,25 @@ namespace zypp
 	  , std::string reason
         ) {}
       };
-    
+
       // progress for rebuilding the database
       struct RebuildDBReport : public callback::ReportBase
       {
-        enum Action { 
+        enum Action {
           ABORT,  // abort and return error
           RETRY,	// retry
 	  IGNORE	// ignore the failure
-        }; 
-      
+        };
+
         enum Error {
 	  NO_ERROR,
 	  FAILED		// failed to rebuild
         };
-      
+
         virtual void start(Pathname path) {}
 
-        virtual bool progress(int value, Pathname path) 
-        { return true; } 
+        virtual bool progress(int value, Pathname path)
+        { return true; }
 
         virtual Action problem(
 	  Pathname path
@@ -376,22 +418,22 @@ namespace zypp
       // progress for converting the database
       struct ConvertDBReport : public callback::ReportBase
       {
-        enum Action { 
+        enum Action {
           ABORT,  // abort and return error
           RETRY,	// retry
 	  IGNORE	// ignore the failure
-        }; 
-      
+        };
+
         enum Error {
 	  NO_ERROR,
 	  FAILED		// conversion failed
         };
-      
+
         virtual void start(
 	  Pathname path
         ) {}
 
-        virtual bool progress(int value, Pathname path) 
+        virtual bool progress(int value, Pathname path)
         { return true; }
 
         virtual Action problem(
@@ -410,21 +452,21 @@ namespace zypp
        // progress for scanning the database
       struct ScanDBReport : public callback::ReportBase
       {
-        enum Action { 
+        enum Action {
           ABORT,  // abort and return error
           RETRY,	// retry
 	  IGNORE	// ignore the failure
-        }; 
-      
+        };
+
         enum Error {
 	  NO_ERROR,
 	  FAILED		// conversion failed
         };
-      
+
         virtual void start(
         ) {}
 
-        virtual bool progress(int value) 
+        virtual bool progress(int value)
         { return true; }
 
         virtual Action problem(

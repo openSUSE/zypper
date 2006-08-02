@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!--
+  An kernel patch which has ONLY the kernel packages will be triggered
+  for installation. He has to update packages (*kmp*, apparmor,...) from
+  an older patch too ( lokated in multi_source )
+-->
+<test>
+<setup>
+  <arch name="i586"/>
+  <system file="kernel-installed.xml"/>
+  <channel file="patch-kernel1.xml" name="multi_source"/>
+  <channel file="patch-kernel2.xml" name="single_source"/>
+</setup>
+<trial>
+  <showpool all="yes"/>
+  <establish/>
+  <showpool all="true" prefix="ESTABLISHED:"/>
+  <install channel="single_source" kind="patch" package="single-kernel"/>
+</trial>
+</test>

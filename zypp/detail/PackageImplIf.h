@@ -44,7 +44,6 @@ namespace zypp
       typedef Package ResType;
 
     public:
-      typedef packagedelta::BaseVersion BaseVersion;
       typedef packagedelta::DeltaRpm    DeltaRpm;
       typedef packagedelta::PatchRpm    PatchRpm;
 

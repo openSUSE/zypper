@@ -6,14 +6,13 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file	zypp/source/PackageDelta.cc
+/** \file	zypp/source/OnMediaLocation.cc
  *
 */
 #include <iostream>
+//#include "zypp/base/Logger.h"
 
-#include "zypp/base/LogTools.h"
-
-#include "zypp/source/PackageDelta.h"
+#include "zypp/source/OnMediaLocation.h"
 
 using std::endl;
 
@@ -21,34 +20,22 @@ using std::endl;
 namespace zypp
 { /////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////
-  namespace packagedelta
+  namespace source
   { /////////////////////////////////////////////////////////////////
 
-
-    std::ostream & operator<<( std::ostream & str, const PatchRpm & obj )
+    /******************************************************************
+    **
+    **	FUNCTION NAME : operator<<
+    **	FUNCTION TYPE : std::ostream &
+    */
+    std::ostream & operator<<( std::ostream & str, const OnMediaLocation & obj )
     {
-      str
-      << "PatchRpm(" << obj.location()
-      << '|' << obj.buildtime()
-      << '|';
-      return dumpRangeLine( str, obj.baseversions().begin(), obj.baseversions().end() )
-      << ')';
-    }
-
-    std::ostream & operator<<( std::ostream & str, const DeltaRpm & obj )
-    {
-      return str
-      << "DeltaRpm(" << obj.location()
-      << '|' << obj.buildtime()
-      << '|' << obj.baseversion().edition()
-      << ',' << obj.baseversion().buildtime()
-      << ',' << obj.baseversion().checksum()
-      << ',' << obj.baseversion().sequenceinfo()
-      << ')';
+      return str << "[" << obj.medianr() << "]" << obj.filename()
+                 << "{" << obj.downloadsize() << "|" << obj.checksum() << "}";
     }
 
     /////////////////////////////////////////////////////////////////
-  } // namespace packagedelta
+  } // namespace source
   ///////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

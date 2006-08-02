@@ -166,8 +166,10 @@ QueueItemEstablish::process (ResolverContext_Ptr context, QueueItemList & qil)
 	    }
 
 	    PoolItem_Ref installed = Helper::findInstalledItem( pool(), _item );
-	    if (!installed) {								// not installed -> install
-		// have supplements and at least one triggers -> install
+	    if (!installed								// not installed
+		&& Helper::isBestUninstalledItem( pool(), _item ))			// and no better available -> install
+	    {
+		// not yet installed, have supplements, and at least one triggers -> install
 		_DEBUG("Uninstalled " << _item << " supplements " << *iter << " -> install");
 		QueueItemInstall_Ptr install_item = new QueueItemInstall( pool(), _item, true );
 		qil.push_front( install_item );
@@ -213,7 +215,9 @@ QueueItemEstablish::process (ResolverContext_Ptr context, QueueItemList & qil)
 	    else if (_item->kind() == ResTraits<Package>::kind)		// install package if not installed yet.
 	    {
 		PoolItem_Ref installed = Helper::findInstalledItem( pool(), _item );
-		if (!installed) {
+		if (!installed								// not installed
+		    && Helper::isBestUninstalledItem( pool(), _item ))			// and no better available -> install
+		{
 		    // freshens and at least one triggers -> install
 		    _DEBUG("Uninstalled " << _item << " freshens -> install");
 		    QueueItemInstall_Ptr install_item = new QueueItemInstall( pool(), _item, true );
@@ -239,16 +243,19 @@ QueueItemEstablish::process (ResolverContext_Ptr context, QueueItemList & qil)
 	    }
 	    else if (status.staysUninstalled())			// not installed -> schedule for installation
 	    {
-		if (_item->kind() != ResTraits<Atom>::kind) {	// bug #184714
-		// This is probably plain wrong.
-		// It installs a resolvable if its freshens/supplements triggers and
-		// some of its requirements are unfulfilled.
-		// What if a resolvable of the same name is already installed ?
-		// What if a 'better' resolvable is already scheduled for installation ?
+		if (_item->kind() == ResTraits<Atom>::kind) {	// Bug 190272
+		    _XDEBUG("Atom " << _item << " has unfulfilled requirement " << *iter << " -> incomplete");
+		    context->incomplete( _item, _other_penalty );
+		}
+		else if( Helper::isBestUninstalledItem( pool(), _item ) ) {	// bug #184714, #191483
+		    // This is probably plain wrong.
+		    // It installs a resolvable if its freshens/supplements triggers and
+		    // some of its requirements are unfulfilled.
+		    // What if a resolvable of the same name is already installed ?
 
-		_DEBUG("Uninstalled " << _item << " has unfulfilled requirement " << *iter << " -> install");
-		QueueItemInstall_Ptr install_item = new QueueItemInstall( pool(), _item );
-		qil.push_front( install_item );
+		    _DEBUG("Uninstalled " << _item << " has unfulfilled requirement " << *iter << " -> install");
+		    QueueItemInstall_Ptr install_item = new QueueItemInstall( pool(), _item );
+		    qil.push_front( install_item );
 		}
 	    }
 	    else {

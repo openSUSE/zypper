@@ -3,6 +3,8 @@
 
 SUBDIRS =
 
+AM_CXXFLAGS = -DZYPP_BASE_LOGGER_LOGGROUP=\"detail\"
+
 ## ##################################################
 
 detailincludedir = $(pkgincludedir)/detail

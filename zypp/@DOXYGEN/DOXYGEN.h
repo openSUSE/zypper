@@ -42,3 +42,12 @@
  * \verbinclude g_Functor
 */
 ////////////////////////////////////////////////////////////////////////////////
+/** \defgroup BOOST Boost libraries.
+ * Boost provides free peer-reviewed portable C++ source libraries.
+ * Several \c ::boost names were dragged or typedefed into
+ * namespace \c ::zypp.
+ * \see http://www.boost.org/
+ */
+/** \ref BOOST */
+namespace boost {}
+////////////////////////////////////////////////////////////////////////////////

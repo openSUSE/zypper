@@ -72,6 +72,9 @@ class Helper {
 
     static PoolItem_Ref findUpdateItem (const ResPool & pool, PoolItem_Ref item);
 
+    // for item, check if this is the 'best' uninstalled (best arch, best version) item
+    static bool isBestUninstalledItem (const ResPool & pool, PoolItem_Ref item);
+
     friend std::ostream& operator<<(std::ostream&, const PoolItemList & itemlist);
 
 };

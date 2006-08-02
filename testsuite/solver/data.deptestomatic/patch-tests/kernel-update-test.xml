@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!--
+  Update a kernel patch which include ALL *kmp*, apparmor,....
+-->
+<test>
+<setup>
+  <arch name="i586"/>
+  <system file="kernel-installed.xml"/>
+  <channel file="patch-kernel1.xml" name="new_source"/>
+</setup>
+<trial>
+  <showpool all="yes"/>
+  <establish/>
+  <showpool all="true" prefix="ESTABLISHED:"/>
+  <install channel="new_source" kind="patch" package="kernel"/>
+</trial>
+</test>

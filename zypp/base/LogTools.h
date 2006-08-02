@@ -78,6 +78,26 @@ namespace zypp
     std::ostream & operator<<( std::ostream & str, const std::list<_Tp> & obj )
     { return dumpRange( str, obj.begin(), obj.end() ); }
 
+  /** Print stream status bits.
+   * Prints the values of a streams \c good, \c eof, \c failed and \c bad bit.
+   *
+   * \code
+   *  [g___] - good
+   *  [_eF_] - eof and fail bit set
+   *  [__FB] - fail and bad bit set
+   * \endcode
+  */
+  inline std::ostream & operator<<( std::ostream & str, const std::basic_ios<char> & obj )
+  {
+    std::string ret( "[" );
+    ret += ( obj.good() ? 'g' : '_' );
+    ret += ( obj.eof()  ? 'e' : '_' );
+    ret += ( obj.fail() ? 'F' : '_' );
+    ret += ( obj.bad()  ? 'B' : '_' );
+    ret += "]";
+    return str << ret;
+  }
+
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////

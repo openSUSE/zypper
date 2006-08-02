@@ -44,10 +44,6 @@ namespace zypp
 	  const zypp::parser::yum::YUMFileListData & filelist,
 	  const zypp::parser::yum::YUMOtherData & other
 	);
-	YUMPackageImpl(
-	  Source_Ref source_r,
-	  const zypp::parser::yum::YUMPatchPackage & parsed
-	);
 
 	/** Package summary */
 	virtual TranslatedText summary() const;

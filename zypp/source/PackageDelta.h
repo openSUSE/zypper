@@ -15,12 +15,10 @@
 #include <iosfwd>
 #include <list>
 
-#include "zypp/Date.h"
-#include "zypp/ByteCount.h"
-#include "zypp/Arch.h"
+#include "zypp/source/OnMediaLocation.h"
 #include "zypp/Edition.h"
-#include "zypp/CheckSum.h"
-#include "zypp/Pathname.h"
+#include "zypp/Date.h"
+//#include "zypp/Arch.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -31,106 +29,31 @@ namespace zypp
 
     ///////////////////////////////////////////////////////////////////
 
-    class BaseVersion
-    {
-    public:
-      BaseVersion( const Edition & edition,
-                   const CheckSum & checksum,
-                   const Date & buildtime )
-      : _edition( edition )
-      , _checksum( checksum )
-      , _buildtime( buildtime )
-      {}
-
-      Edition edition() const
-      { return _edition; }
-
-      CheckSum checksum() const
-      { return _checksum; }
-
-      Date buildtime() const
-      { return _buildtime; }
-
-    private:
-      Edition  _edition;
-      CheckSum _checksum;
-      Date     _buildtime;
-    };
-
-    /** \relates BaseVersion Stream output. */
-    std::ostream & operator<<( std::ostream & str, const BaseVersion & obj );
-
-    /** \relates BaseVersion */
-    inline bool operator==( const BaseVersion & lhs, const BaseVersion & rhs )
-    { return lhs.edition() == rhs.edition(); }
-
-    /** \relates BaseVersion */
-    inline bool operator!=( const BaseVersion & lhs, const BaseVersion & rhs )
-    { return ! (lhs == rhs); }
-
-    ///////////////////////////////////////////////////////////////////
-
-    ///////////////////////////////////////////////////////////////////
-    namespace detail
-    { /////////////////////////////////////////////////////////////////
-
-
-
-      /////////////////////////////////////////////////////////////////
-    } // namespace detail
-    ///////////////////////////////////////////////////////////////////
-
-
-    ///////////////////////////////////////////////////////////////////
-
     class PatchRpm
     {
     public:
-      PatchRpm( const Arch & arch,
-                const Pathname & filename,
-                const ByteCount & downloadsize,
-                const CheckSum & checksum,
-                const Date & buildtime,
-                const std::list<BaseVersion> & base_versions,
-                const unsigned media_nr )
-      : _arch( arch)
-      , _filename( filename )
-      , _downloadsize( downloadsize )
-      , _checksum( checksum )
-      , _buildtime( buildtime )
-      , _base_versions( base_versions )
-      , _media_nr( media_nr )
+      typedef Edition                BaseVersion;
+      typedef std::list<BaseVersion> BaseVersions;
+
+    public:
+      PatchRpm()
       {}
 
-      Arch arch() const
-      { return _arch; }
+    public:
+      const source::OnMediaLocation & location()     const { return _location; }
+      const BaseVersions &            baseversions() const { return _baseversions; }
+      const Date &                    buildtime()    const { return _buildtime;}
 
-      Pathname filename() const
-      { return _filename; }
-
-      ByteCount downloadsize() const
-      { return _downloadsize; }
-
-      CheckSum checksum() const
-      { return _checksum; }
-
-      Date buildtime() const
-      { return _buildtime; }
-
-      const std::list<BaseVersion> & baseVersions() const
-      { return _base_versions; }
-
-      unsigned mediaNr() const
-      { return _media_nr; }
+    public:
+      PatchRpm & location( const source::OnMediaLocation & val_r ) { _location = val_r; return *this; }
+      PatchRpm & baseversions( const BaseVersions & val_r )        { _baseversions = val_r; return *this; }
+      PatchRpm & baseversion( const BaseVersion & val_r )          { _baseversions.push_back( val_r ); return *this; }
+      PatchRpm & buildtime( const Date & val_r )                   { _buildtime = val_r; return *this; }
 
     private:
-      Arch                   _arch;
-      Pathname               _filename;
-      ByteCount              _downloadsize;
-      CheckSum               _checksum;
-      Date                   _buildtime;
-      std::list<BaseVersion> _base_versions;
-      unsigned               _media_nr;
+      source::OnMediaLocation _location;
+      BaseVersions            _baseversions;
+      Date                    _buildtime;
     };
 
     /** \relates PatchRpm Stream output. */
@@ -138,55 +61,54 @@ namespace zypp
 
     ///////////////////////////////////////////////////////////////////
 
-
     class DeltaRpm
     {
     public:
-      DeltaRpm( const Arch & arch,
-                const Pathname & filename,
-                const ByteCount & downloadsize,
-                const CheckSum & checksum,
-                const Date & buildtime,
-                const BaseVersion & base_version,
-                const unsigned media_nr )
-      : _arch( arch)
-      , _filename( filename )
-      , _downloadsize( downloadsize )
-      , _checksum( checksum )
-      , _buildtime( buildtime )
-      , _base_version( base_version )
-      , _media_nr( media_nr )
+      class BaseVersion
+      {
+      public:
+        BaseVersion()
+        {}
+
+      public:
+        const Edition &     edition()      const { return _edition; }
+        const Date &        buildtime()    const { return _buildtime; }
+        const CheckSum &    checksum()     const { return _checksum; }
+        const std::string & sequenceinfo() const { return _sequenceinfo; }
+
+      public:
+        BaseVersion & edition( const Edition & val_r )          { _edition = val_r; return *this; }
+        BaseVersion & buildtime( const Date & val_r )           { _buildtime = val_r; return *this; }
+        BaseVersion & checksum( const CheckSum & val_r )        { _checksum = val_r; return *this; }
+        BaseVersion & sequenceinfo( const std::string & val_r ) { _sequenceinfo = val_r; return *this; }
+
+      private:
+        Edition     _edition;
+        Date        _buildtime;
+        CheckSum    _checksum;
+        std::string _sequenceinfo;
+      };
+
+      typedef std::list<BaseVersion> BaseVersions;
+
+    public:
+      DeltaRpm()
       {}
 
-      Arch arch() const
-      { return _arch; }
+    public:
+      const source::OnMediaLocation & location()     const { return _location; }
+      const BaseVersion &             baseversion()  const { return _baseversion; }
+      const Date &                    buildtime()    const { return _buildtime;}
 
-      Pathname filename() const
-      { return _filename; }
-
-      ByteCount downloadsize() const
-      { return _downloadsize; }
-
-      CheckSum checksum() const
-      { return _checksum; }
-
-      Date buildtime() const
-      { return _buildtime; }
-
-      BaseVersion baseVersion() const
-      { return _base_version; }
-
-      unsigned mediaNr() const
-      { return _media_nr; }
+    public:
+      DeltaRpm & location( const source::OnMediaLocation & val_r ) { _location = val_r; return *this; }
+      DeltaRpm & baseversion( const BaseVersion & val_r )          { _baseversion = val_r; return *this; }
+      DeltaRpm & buildtime( const Date & val_r )                   { _buildtime = val_r; return *this; }
 
     private:
-      Arch        _arch;
-      Pathname    _filename;
-      ByteCount   _downloadsize;
-      CheckSum    _checksum;
-      Date        _buildtime;
-      BaseVersion _base_version;
-      unsigned    _media_nr;
+      source::OnMediaLocation _location;
+      BaseVersion             _baseversion;
+      Date                    _buildtime;
     };
 
     /** \relates DeltaRpm Stream output. */

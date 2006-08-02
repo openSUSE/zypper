@@ -6,50 +6,30 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file	zypp/source/PackageDelta.cc
+/** \file	zypp/source/ManagedFile.h
  *
 */
-#include <iostream>
+#ifndef ZYPP_SOURCE_MANAGEDFILE_H
+#define ZYPP_SOURCE_MANAGEDFILE_H
 
-#include "zypp/base/LogTools.h"
+#include <iosfwd>
 
-#include "zypp/source/PackageDelta.h"
-
-using std::endl;
+#include "zypp/Pathname.h"
+#include "zypp/AutoDispose.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////
-  namespace packagedelta
+  namespace source
   { /////////////////////////////////////////////////////////////////
 
-
-    std::ostream & operator<<( std::ostream & str, const PatchRpm & obj )
-    {
-      str
-      << "PatchRpm(" << obj.location()
-      << '|' << obj.buildtime()
-      << '|';
-      return dumpRangeLine( str, obj.baseversions().begin(), obj.baseversions().end() )
-      << ')';
-    }
-
-    std::ostream & operator<<( std::ostream & str, const DeltaRpm & obj )
-    {
-      return str
-      << "DeltaRpm(" << obj.location()
-      << '|' << obj.buildtime()
-      << '|' << obj.baseversion().edition()
-      << ',' << obj.baseversion().buildtime()
-      << ',' << obj.baseversion().checksum()
-      << ',' << obj.baseversion().sequenceinfo()
-      << ')';
-    }
+    typedef AutoDispose<const Pathname> ManagedFile;
 
     /////////////////////////////////////////////////////////////////
-  } // namespace packagedelta
+  } // namespace source
   ///////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
+#endif // ZYPP_SOURCE_MANAGEDFILE_H

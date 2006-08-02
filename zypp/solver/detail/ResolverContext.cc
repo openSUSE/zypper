@@ -374,14 +374,15 @@ ResolverContext::uninstall (PoolItem_Ref item, bool part_of_upgrade, bool due_to
 
     if ( ( (forceResolve() // This is the behaviour of ZMD
 	    || upgradeMode())
-	  && (status.isToBeInstalled()             // \ The resolvable will be installed
-	      || item.status().isToBeInstalled())) // / explicit.
+	  && (status.isToBeInstalledNotSoft()             // \ The resolvable will be installed
+	      || item.status().isToBeInstalledNotSoft())) // / explicit. (And not by WEAK dependencies like supplements)
 	 
 	 || ( (!forceResolve() // This is the bahaviour of YaST
 	       && !upgradeMode())
-	      && ((status.staysInstalled() || status.isToBeInstalled())                   //   \ We will have the resolvable
-		  && (item.status().staysInstalled() || item.status().isToBeInstalled())  //   / available.
-		  || status.isToBeInstalled())                                            //   is to be installed e.g. due solver requirement
+	      && ((status.staysInstalled() || status.isToBeInstalledNotSoft())                   //   \ We will have the resolvable
+		  && (item.status().staysInstalled() || item.status().isToBeInstalledNotSoft())  //   / available.
+		  || status.isToBeInstalledNotSoft())                                            //   is to be installed e.g. due solver requirement
+	                                                                                         //   (And not by WEAK dependencies like supplements)
 	      && !part_of_upgrade
 	      && !due_to_obsolete
 	      && !due_to_unlink)) {
@@ -629,7 +630,7 @@ ResolverContext::isPresent (PoolItem_Ref item, bool *unneeded)
 {
     ResStatus status = getStatus(item);
 
-    bool res = (status.staysInstalled()
+    bool res = ((status.staysInstalled() && !status.isIncomplete())
 		|| (status.isToBeInstalled() && !status.isNeeded())
 		|| status.isUnneeded()
 		|| status.isSatisfied());

@@ -965,10 +965,41 @@ Resolver::resolvePool ()
 #endif
     }
     else {
-	MIL << "!!! Have NO solution !!!" << endl;
+	MIL << "!!! Have NO solution !!! Additional solver information:" << endl;
+	int counter = 0;
+	for (ResolverQueueList::iterator iter = _invalid_queues.begin();
+	     iter != _invalid_queues.end(); iter++) {
+	    counter++;
+	    MIL << "-----------------------------------------------------------------" << endl;
+	    MIL << counter++ << "'st faild queue:" << endl;
+	    ResolverQueue_Ptr invalid =	*iter;    
+	    invalid->context()->spewInfo ();
+	    MIL << *invalid->context() << endl;
+	    MIL << "-----------------------------------------------------------------" << endl;		
+	}
     }
     return have_solution;
 }
+
+
+static void
+get_info_foreach_cb (ResolverInfo_Ptr info, void *data)
+{
+    list<string> *stringList = (list<string> *)data;
+    stringList->push_back (info->message());
+}
+
+
+// returns a string list of ResolverInfo of the LAST not valid solution
+std::list<std::string> Resolver::problemDescription( void ) const
+{
+    list<string> retList;
+    if (_invalid_queues.empty()) return retList;
+    ResolverQueue_Ptr invalid = _invalid_queues.front();
+    invalid->context()->foreachInfo (PoolItem_Ref(), -1, get_info_foreach_cb, (void *)&retList);;
+    return retList;
+}
+
 
 //-----------------------------------------------------------------------------
 

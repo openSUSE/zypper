@@ -6,73 +6,119 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
+/** \file	zypp/CheckSum.cc
+ *
+*/
 
-#include <iosfwd>
-#include <string>
+#include "zypp/base/Logger.h"
+#include "zypp/base/String.h"
 
-#include "zypp/base/Exception.h"
 #include "zypp/CheckSum.h"
+#include "zypp/Digest.h"
+
+using std::endl;
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
-  CheckSum::CheckSum(const std::string & type, const std::string & checksum)
-  {
-    _checksum = checksum;
+  const std::string & CheckSum::md5Type()
+  { static std::string _type( "md5" ); return _type; }
 
-    // correct ambiguous algorithm
-    if (str::toLower(type) == "sha")
-    {
-      if (checksum.size() == 40)
-        _type = "sha1";
-      else if (checksum.size() == 64)
-        _type = "sha256";
-      else
-        ZYPP_THROW(Exception("Bad " + type + " algorithm of size " + str::numstring(checksum.size()) + " specified. Can't determine if it is sha1 or sha256 from size."));
-    }
-    else
-    {
-      _type = type;
-    }
+  const std::string & CheckSum::shaType()
+  { static std::string _type( "sha" ); return _type; }
 
-    if (
-          ( (str::toLower(type) == "md2"     ) && (checksum.size() != 32) ) ||
-          ( (str::toLower(type) == "md4"     ) && (checksum.size() != 32) ) ||
-          ( (str::toLower(type) == "md5"     ) && (checksum.size() != 32) ) ||
-          ( (str::toLower(type) == "sha1"    ) && (checksum.size() != 40) ) ||
-          ( (str::toLower(type) == "rmd160"  ) && (checksum.size() != 40) ) ||
-          ( (str::toLower(type) == "sha256"  ) && (checksum.size() != 64) ) )
-    {
-      ZYPP_THROW(Exception("Bad checksum, " + type + " algorithm of size " + str::numstring(checksum.size())));
-    }
+  const std::string & CheckSum::sha1Type()
+  { static std::string _type( "sha1" ); return _type; }
 
-  }
+  const std::string & CheckSum::sha256Type()
+  { static std::string _type( "sha256" ); return _type; }
+
 
   CheckSum::CheckSum()
   {}
 
-  std::string CheckSum::type() const
-  { return _type; }
-  
-  std::string CheckSum::checksum() const
-  { return _checksum; }
+  CheckSum::CheckSum( const std::string & type, const std::string & checksum )
+  : _type( str::toLower( type ) )
+  , _checksum( checksum )
+  {
+    switch ( checksum.size() )
+      {
+      case 64:
+        if ( _type == sha256Type() )
+          return;
+        if ( _type.empty() || _type == shaType() )
+          {
+            _type = sha256Type();
+            return;
+          }
+        // else: dubious
+        break;
 
-  bool CheckSum::empty() const
-  { return (checksum().empty() || type().empty()); }
-  
-  /** \relates CheckSum Stream output. */
+      case 40:
+        if ( _type == sha1Type() )
+          return;
+        if ( _type.empty() || _type == shaType() )
+          {
+            _type = sha1Type();
+            return;
+          }
+        // else: dubious
+        break;
+
+      case 32:
+        if (  _type == md5Type() )
+          return;
+        if ( _type.empty() )
+          {
+            _type = md5Type();
+            return;
+          }
+        // else: dubious
+        break;
+
+      case 0:
+        return; // empty checksum is ok
+        break;
+
+      default:
+        if ( _type.empty() )
+          {
+            WAR << "Can't determine type of " << checksum.size() << " byte checksum '" << _checksum << "'" << endl;
+            return;
+          }
+        // else: dubious
+        break;
+      }
+
+    // dubious
+    WAR << "Dubious type '" << _type << "' for " << checksum.size() << " byte checksum '" << _checksum << "'" << endl;
+  }
+
+  CheckSum::CheckSum( const std::string & type_r, std::istream & input_r )
+  {
+    if ( input_r.good() && ! type_r.empty() )
+      {
+        _type = str::toLower( type_r );
+        _checksum = Digest::digest( _type, input_r );
+        if ( ! input_r.eof() || _checksum.empty() )
+          {
+            _type = _checksum = std::string();
+          }
+      }
+  }
+
   std::ostream & operator<<( std::ostream & str, const CheckSum & obj )
-  { return str << (obj.empty() ? std::string("(no checksum)")
-                               : obj.type()+":"+obj.checksum()  ); }
+  {
+    if ( obj.checksum().empty() )
+      {
+        return str << std::string("NoCheckSum");
+      }
 
-  /** \relates CheckSum */
-  bool operator==( const CheckSum & lhs, const CheckSum & rhs )
-  { return lhs.checksum() == rhs.checksum() && lhs.type() == rhs.type(); }
+    return str << ( obj.type().empty() ? std::string("UNKNOWN") : obj.type() ) << '-' << obj.checksum();
+  }
 
-  /** \relates CheckSum */
-  bool operator!=( const CheckSum & lhs, const CheckSum & rhs )
-  { return ! ( lhs == rhs ); }
 
+  /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////

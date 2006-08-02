@@ -187,8 +187,8 @@ ResolverInfo::dumpOn( std::ostream & os ) const
 	os << toString (_affected);
     }
 
-    if (_error) os << _(" Error!");
-    if (_important) os << _(" Important!");
+    if (_error) os << " " << _(" Error!");
+    if (_important) os << " " << _(" Important!");
 
     return os;
 }

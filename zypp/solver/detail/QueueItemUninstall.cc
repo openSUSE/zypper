@@ -28,6 +28,8 @@
 #include "zypp/ResPool.h"
 #include "zypp/ResFilters.h"
 #include "zypp/CapFilters.h"
+#include "zypp/CapFactory.h"
+#include "zypp/Patch.h"
 
 #include "zypp/solver/detail/QueueItemUninstall.h"
 #include "zypp/solver/detail/QueueItemEstablish.h"
@@ -273,6 +275,35 @@ struct ProvidesItem
 };
 
 
+// Uninstall atom of a to-be-uninstalled patch
+
+struct UninstallItem
+{
+    ResPool pool;
+    ResolverContext_Ptr context;
+    QueueItemList & qil;
+    bool soft;
+
+    UninstallItem( const ResPool & p, ResolverContext_Ptr ct, QueueItemList & l, bool s )
+	: pool( p )
+	, context( ct )
+	, qil( l )
+	, soft( s )
+    { }
+
+    bool operator()( const CapAndItem & cai )
+    {
+	PoolItem item( cai.item );
+
+	_XDEBUG( "UninstallItem (unlink) " << item );
+	QueueItemUninstall_Ptr uninstall_item = new QueueItemUninstall( pool, item, QueueItemUninstall::EXPLICIT, soft );
+	uninstall_item->setUnlink();
+	qil.push_front( uninstall_item );
+
+	return true;
+    }
+};
+
 
 //-----------------------------------------------------------------------------
 
@@ -406,6 +437,27 @@ QueueItemUninstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 			  pool().byCapabilityIndexEnd( iter->index(), dep ),
 			  resfilter::ByCapMatch( *iter ),
 			  functor::functorRef<bool,CapAndItem>( establish ) );
+	}
+
+	// if its a patch, uninstall all its atoms
+
+	if (_item->kind() == ResTraits<Patch>::kind) {
+	    Patch::constPtr patch = asKind<Patch>( _item );
+	    Patch::AtomList atoms = patch->atoms();
+	    UninstallItem callback( pool(), context, qil, _soft );
+	    CapFactory factory;
+	    Dep dep(Dep::PROVIDES);
+
+	    // loop over atom, find matching installed PoolItem and schedule this for removal
+
+	    for (Patch::AtomList::const_iterator it = atoms.begin(); it != atoms.end(); ++it) {
+		Resolvable::constPtr res = *it;
+		Capability capAtom =  factory.parse ( res->kind(), res->name(), Rel::EQ, res->edition());
+		invokeOnEach( pool().byCapabilityIndexBegin( capAtom.index(), dep ),
+			      pool().byCapabilityIndexEnd( capAtom.index(), dep ),
+			      functor::chain( resfilter::ByCaIInstalled(), resfilter::ByCapMatch( capAtom ) ),
+			      functor::functorRef<bool,CapAndItem>( callback ) );
+	    }
 	}
 
 	// soft-remove the installed items which have been recommended by the to-be-uninstalled

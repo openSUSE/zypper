@@ -12,11 +12,23 @@
 #ifndef ZYPP_BASE_FUNCTIONAL_H
 #define ZYPP_BASE_FUNCTIONAL_H
 
-#include <functional>
+//#include <functional>
+#include <boost/functional.hpp>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
+
+  /* http://www.boost.org/libs/functional/mem_fun.html
+
+   The header functional.hpp includes improved versions of
+   the full range of member function adapters from the the
+   C++ Standard Library.
+  */
+  using boost::mem_fun;
+  using boost::mem_fun_ref;
+
+
   ///////////////////////////////////////////////////////////////////
   namespace functor
   { /////////////////////////////////////////////////////////////////

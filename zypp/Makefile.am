@@ -11,6 +11,7 @@ AM_CXXFLAGS = -DZYPP_BASE_LOGGER_LOGGROUP=\"zypp\"
 pkginclude_HEADERS = NeedAType.h \
 	Arch.h		\
 	Atom.h		\
+	AutoDispose.h	\
 	Bit.h		\
 	ByteCount.h	\
 	CapAndItem.h	\
@@ -59,6 +60,7 @@ pkginclude_HEADERS = NeedAType.h \
 	SourceFeed.h	\
 	SrcPackage.h	\
 	Target.h	\
+	TriBool.h	\
 	Selection.h	\
 	Pattern.h	\
 	Message.h	\

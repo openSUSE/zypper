@@ -29,31 +29,31 @@ namespace zypp {
 
       YUMPatchParser::~YUMPatchParser()
       { }
-      
+
       YUMPatchParser::YUMPatchParser(istream &is, const string& baseUrl)
       : XMLNodeIterator<YUMPatchData_Ptr>(is, baseUrl,PATCHSCHEMA)
 	, _zypp_architecture( getZYpp()->architecture() )
       {
 	fetchNext();
       }
-      
+
       YUMPatchParser::YUMPatchParser()
 	: _zypp_architecture( getZYpp()->architecture() )
       { }
-      
+
       YUMPatchParser::YUMPatchParser(YUMPatchData_Ptr& entry)
       : XMLNodeIterator<YUMPatchData_Ptr>(entry)
 	, _zypp_architecture( getZYpp()->architecture() )
       { }
-      
-      
+
+
       // select for which elements process() will be called
-      bool 
+      bool
       YUMPatchParser::isInterested(const xmlNodePtr nodePtr)
       {
 	return _helper.isElement(nodePtr) && _helper.name(nodePtr) == "patch";
       }
-      
+
       // do the actual processing
       YUMPatchData_Ptr
       YUMPatchParser::process(const xmlTextReaderPtr reader)
@@ -65,15 +65,15 @@ namespace zypp {
 	patchPtr->timestamp = _helper.attribute(dataNode,"timestamp");
 	patchPtr->patchId = _helper.attribute(dataNode,"patchid");
 	patchPtr->engine = _helper.attribute(dataNode,"engine");
-      
+
 	// default values for optional entries
 	patchPtr->rebootNeeded = false;
 	patchPtr->packageManager = false;
-      
-	// FIXME move the respective method to a common class, inherit it  
+
+	// FIXME move the respective method to a common class, inherit it
 	YUMPrimaryParser prim;
-      
-	for (xmlNodePtr child = dataNode->children; 
+
+	for (xmlNodePtr child = dataNode->children;
 	     child && child != dataNode;
 	     child = child->next) {
 	  if (_helper.isElement(child)) {
@@ -164,14 +164,14 @@ namespace zypp {
 	}
 	return patchPtr;
       } /* end process */
-      
-      
-      void 
+
+
+      void
       YUMPatchParser::parseAtomsNode(YUMPatchData_Ptr dataPtr,
 		                     xmlNodePtr formatNode)
       {
 	xml_assert(formatNode);
-	for (xmlNodePtr child = formatNode->children; 
+	for (xmlNodePtr child = formatNode->children;
 	     child != 0;
 	     child = child ->next) {
 	  if (_helper.isElement(child)) {
@@ -196,19 +196,19 @@ XXX << "parseAtomsNode(" << name << ")" << endl;
 	  }
 	}
       }
-      
-      void 
+
+      void
       YUMPatchParser::parseFormatNode(YUMPatchPackage *dataPtr,
 		                              xmlNodePtr formatNode)
       {
 	xml_assert(formatNode);
 	dataPtr->installOnly = false;
 	dataPtr->media = "1";
-      
-	// FIXME move the respective method to a common class, inherit it  
+
+	// FIXME move the respective method to a common class, inherit it
 	YUMPrimaryParser prim;
-      
-	for (xmlNodePtr child = formatNode->children; 
+
+	for (xmlNodePtr child = formatNode->children;
 	     child != 0;
 	     child = child ->next) {
 	  if (_helper.isElement(child)) {
@@ -291,7 +291,7 @@ XXX << "parseAtomsNode(" << name << ")" << endl;
 	  }
 	}
       }
-      
+
       void
       YUMPatchParser::parsePkgPlainRpmNode(YUMPatchPackage *dataPtr,
 					xmlNodePtr formatNode)
@@ -302,7 +302,7 @@ XXX << "parseAtomsNode(" << name << ")" << endl;
 	plainRpm.downloadsize = _helper.attribute( formatNode, "downloadsize" );
 	plainRpm.md5sum = _helper.attribute( formatNode, "md5sum" );
 	plainRpm.buildtime = _helper.attribute( formatNode, "buildtime" );
-	for (xmlNodePtr child = formatNode->children; 
+	for (xmlNodePtr child = formatNode->children;
 	     child != 0;
 	     child = child ->next) {
 	  if (_helper.isElement(child)) {
@@ -314,7 +314,7 @@ XXX << "parseAtomsNode(" << name << ")" << endl;
 	}
 	dataPtr->plainRpms.push_back(plainRpm);
       }
-      
+
       void
       YUMPatchParser::parsePkgPatchRpmNode(YUMPatchPackage *dataPtr,
 					xmlNodePtr formatNode)
@@ -326,14 +326,14 @@ XXX << "parseAtomsNode(" << name << ")" << endl;
 	patchRpm.md5sum = _helper.attribute( formatNode, "md5sum" );
 	patchRpm.buildtime = _helper.attribute( formatNode, "buildtime" );
 	patchRpm.media = "1";
-	for (xmlNodePtr child = formatNode->children; 
+	for (xmlNodePtr child = formatNode->children;
 	     child != 0;
 	     child = child ->next) {
 	  if (_helper.isElement(child)) {
 	    string name = _helper.name(child);
 	    if (name == "base-version") {
-	      YUMBaseVersion base_version;
-	      parsePkgBaseVersionNode( &base_version, child);
+	      YUMPatchBaseVersion base_version;
+	      parsePkgPatchBaseVersionNode( &base_version, child);
 	      patchRpm.baseVersions.push_back( base_version );
 	    }
             else if (name == "location") {
@@ -347,13 +347,10 @@ XXX << "parseAtomsNode(" << name << ")" << endl;
 	      patchRpm.checksum = _helper.content(child);
 	    }
             else if (name == "time") {
-//              patchRpm.timeFile = _helper.attribute(child,"file");
               patchRpm.buildtime = _helper.attribute(child,"build");
             }
             else if (name == "size") {
-//              patchRpm.sizePackage = _helper.attribute(child,"package");
-//              patchRpm.sizeInstalled = _helper.attribute(child,"installed");
-              patchRpm.downloadsize = _helper.attribute(child,"archive");
+              patchRpm.downloadsize = _helper.attribute(child,"package");
             }
 	    else {
 	      WAR << "YUM <atom/package/pkgfiles/patch> contains the unknown element <"
@@ -364,7 +361,7 @@ XXX << "parseAtomsNode(" << name << ")" << endl;
 	}
 	dataPtr->patchRpms.push_back(patchRpm);
       }
-      
+
       void
       YUMPatchParser::parsePkgDeltaRpmNode(YUMPatchPackage *dataPtr,
 					xmlNodePtr formatNode)
@@ -376,13 +373,13 @@ XXX << "parseAtomsNode(" << name << ")" << endl;
 	deltaRpm.md5sum = _helper.attribute( formatNode, "md5sum" );
 	deltaRpm.buildtime = _helper.attribute( formatNode, "buildtime" );
 	deltaRpm.media = "1";
-	for (xmlNodePtr child = formatNode->children; 
+	for (xmlNodePtr child = formatNode->children;
 	     child != 0;
 	     child = child ->next) {
 	  if (_helper.isElement(child)) {
 	    string name = _helper.name(child);
 	    if (name == "base-version") {
-	      parsePkgBaseVersionNode( &(deltaRpm.baseVersion), child);
+	      parsePkgDeltaBaseVersionNode( &(deltaRpm.baseVersion), child);
 	    }
             else if (name == "location") {
 		deltaRpm.location = _helper.attribute(child,"href");
@@ -395,13 +392,10 @@ XXX << "parseAtomsNode(" << name << ")" << endl;
 	      deltaRpm.checksum = _helper.content(child);
 	    }
             else if (name == "time") {
-//              deltaRpm.timeFile = _helper.attribute(child,"file");
               deltaRpm.buildtime = _helper.attribute(child,"build");
             }
             else if (name == "size") {
-//              deltaRpm.sizePackage = _helper.attribute(child,"package");
-//              deltaRpm.sizeInstalled = _helper.attribute(child,"installed");
-              deltaRpm.downloadsize = _helper.attribute(child,"archive");
+              deltaRpm.downloadsize = _helper.attribute(child,"package");
             }
 	    else {
 	      WAR << "YUM <atom/package/pkgfiles/delta> contains the unknown element <"
@@ -412,25 +406,34 @@ XXX << "parseAtomsNode(" << name << ")" << endl;
 	}
 	dataPtr->deltaRpms.push_back(deltaRpm);
       }
-      
-      
+
+
       void
-      YUMPatchParser::parsePkgBaseVersionNode(YUMBaseVersion *dataPtr,
+      YUMPatchParser::parsePkgPatchBaseVersionNode(YUMPatchBaseVersion *dataPtr,
 						xmlNodePtr formatNode)
       {
-	dataPtr->epoch = _helper.attribute( formatNode, "epoch" );
-	dataPtr->ver = _helper.attribute( formatNode, "ver" );
-	dataPtr->rel = _helper.attribute( formatNode, "rel" );
+	dataPtr->edition.epoch = _helper.attribute( formatNode, "epoch" );
+	dataPtr->edition.ver = _helper.attribute( formatNode, "ver" );
+	dataPtr->edition.rel = _helper.attribute( formatNode, "rel" );
+      }
+
+      void
+      YUMPatchParser::parsePkgDeltaBaseVersionNode(YUMDeltaBaseVersion *dataPtr,
+						xmlNodePtr formatNode)
+      {
+	dataPtr->edition.epoch = _helper.attribute( formatNode, "epoch" );
+	dataPtr->edition.ver = _helper.attribute( formatNode, "ver" );
+	dataPtr->edition.rel = _helper.attribute( formatNode, "rel" );
 	dataPtr->md5sum = _helper.attribute( formatNode, "md5sum" );
 	dataPtr->buildtime = _helper.attribute( formatNode, "buildtime" );
-	dataPtr->source_info = _helper.attribute( formatNode, "source-info" );
+	dataPtr->sequence_info = _helper.attribute( formatNode, "sequence_info" );
       }
-      
+
       void
       YUMPatchParser::parsePkgFilesNode(YUMPatchPackage *dataPtr,
 					 xmlNodePtr formatNode)
       {
-	for (xmlNodePtr child = formatNode->children; 
+	for (xmlNodePtr child = formatNode->children;
 	     child != 0;
 	     child = child ->next) {
 	  if (_helper.isElement(child)) {
@@ -452,12 +455,12 @@ XXX << "parseAtomsNode(" << name << ")" << endl;
 	  }
 	}
       }
-      
-      
-      
-      
-      
-      
+
+
+
+
+
+
       void
       YUMPatchParser::parsePackageNode(YUMPatchData_Ptr dataPtr,
 		                     xmlNodePtr formatNode)
@@ -466,11 +469,11 @@ XXX << "parseAtomsNode(" << name << ")" << endl;
 	package->type = _helper.attribute(formatNode,"type");
 	package->installOnly = false;
 	package->media = "1";
-      
-	// FIXME move the respective method to a common class, inherit it  
+
+	// FIXME move the respective method to a common class, inherit it
 	YUMPrimaryParser prim;
-      
-	for (xmlNodePtr child = formatNode->children; 
+
+	for (xmlNodePtr child = formatNode->children;
 	     child != 0;
 	     child = child ->next) {
 	  if (_helper.isElement(child)) {
@@ -536,7 +539,7 @@ XXX << "parsePackageNode(" << name << ")" << endl;
 	}
 	dataPtr->atoms.push_back(package);
       }
-      
+
       void
       YUMPatchParser::parseScriptNode(YUMPatchData_Ptr dataPtr,
 		                     xmlNodePtr formatNode)
@@ -544,11 +547,11 @@ XXX << "parsePackageNode(" << name << ")" << endl;
 	shared_ptr<YUMPatchScript> script(new YUMPatchScript);
 	script->do_media = "1";
 	script->undo_media = "1";
-      
-	// FIXME move the respective method to a common class, inherit it  
+
+	// FIXME move the respective method to a common class, inherit it
 	YUMPrimaryParser prim;
-      
-	for (xmlNodePtr child = formatNode->children; 
+
+	for (xmlNodePtr child = formatNode->children;
 	     child != 0;
 	     child = child ->next) {
 	  if (_helper.isElement(child)) {
@@ -626,17 +629,17 @@ XXX << "parsePackageNode(" << name << ")" << endl;
 	}
 	dataPtr->atoms.push_back(script);
       }
-      
+
       void
       YUMPatchParser::parseMessageNode(YUMPatchData_Ptr dataPtr,
 		                     xmlNodePtr formatNode)
       {
 	shared_ptr<YUMPatchMessage> message(new YUMPatchMessage);
-      
-	// FIXME move the respective method to a common class, inherit it  
+
+	// FIXME move the respective method to a common class, inherit it
 	YUMPrimaryParser prim;
-      
-	for (xmlNodePtr child = formatNode->children; 
+
+	for (xmlNodePtr child = formatNode->children;
 	     child != 0;
 	     child = child ->next) {
 	  if (_helper.isElement(child)) {

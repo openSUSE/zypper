@@ -10,12 +10,15 @@
  *
 */
 #include <iostream>
+#include <string>
+#include <map>
 #include "zypp/base/Logger.h"
 
 #include "zypp/ZYpp.h"
 #include "zypp/ZYppFactory.h"
 
 #include "zypp/base/Algorithm.h"
+#include "zypp/base/Sysconfig.h"
 #include "zypp/detail/ResolvableImpl.h"
 #include "zypp/capability/CapabilityImpl.h"
 #include "zypp/capability/Capabilities.h"
@@ -130,6 +133,76 @@ namespace zypp
                            flp );
       to[Dep::SUPPLEMENTS].insert(supplements.begin(), supplements.end());
     }
+
+    // rewrite dependencies from
+    //   kernel(xxx) = yyy
+    // to
+    //   kernel($FLAVOR:xxx) = yyy
+    // $flavor is determined by searching through
+    //   PROVIDES (for kernel-$flavor, by kernel package)
+    // or
+    //   REQUIRES (for kernel-$flavor, by kmp package)
+    // see bugzilla #190163
+    //
+
+    std::string findKernelFlavor( const CapSet & cset, const Dep & dep )
+    {
+      for (CapSet::iterator it = cset.begin(); it != cset.end(); ++it) {
+
+	// check for "kernel-" in deps
+	// if its a requires, take it as is
+	// if its a provides, check for non-empty edition since
+	//   kernels provide "kernel-flavor-nongpl" (empty edition)
+	//     and "kernel-flavor = x.y" (non-empty edition)
+
+	if ( it->index().substr( 0, 7 ) == "kernel-"
+	     && (dep == Dep::REQUIRES
+		|| it->edition() != Edition::noedition ) )
+	{
+	  return it->index().erase( 0, 7 );	// erase "kernel-"
+	}
+      }
+      return "";
+    }
+
+    void rewriteKernelDeps( Dependencies & deps )
+    {
+      // check the smaller set (requires) first
+      Dep dep = Dep::REQUIRES;
+      CapSet cset = deps[dep];
+      std::string flavor( findKernelFlavor( cset, dep ) );
+      if (flavor.empty()) {
+	dep = Dep::PROVIDES;
+	cset = deps[dep];
+	flavor = findKernelFlavor( cset, dep );
+      }
+
+      if (flavor.empty())		// not a kernel / kmp package
+	return;
+
+      // flavor == kernel flavor
+      // cset == CapSet to be rewritten (provides for kernel, requires for kmp)
+      // dep == deps to be set in 'to'
+
+      DBG << "flavor '" << flavor << "'" << std::endl;
+
+      flavor.append( ":" );
+      CapFactory factory;
+      deps[dep].clear();
+      for (CapSet::iterator it = cset.begin(); it != cset.end(); ++it) {
+	std::string idx( it->index() );
+	if ( idx.substr( 0, 7 ) == "kernel("		// capability is "kernel(..."
+	     && idx.find( ":" ) == std::string::npos )	//  without a colon
+	{
+	  deps[dep].insert( factory.parse( it->refers(), idx.insert( 7, flavor ), it->op(), it->edition() ) );
+	}
+	else {
+	  deps[dep].insert( *it );
+	}
+      }
+      return;
+    }
+
   }
 
   ///////////////////////////////////////////////////////////////////
@@ -146,7 +219,7 @@ namespace zypp
   , _deps( nvrad_r )
   {
     // check if we provide/supplements any extra ('locale(...)', 'modalias(...)', ...) tags
-    // and split them up to freshens/supplements (except for SystemResObject)
+    //  and split them up to freshens/supplements (except for SystemResObject)
     if ( _kind != ResTraits<SystemResObject>::kind )
       {
         filterExtraSupplements( nvrad_r, _deps );
@@ -169,10 +242,17 @@ namespace zypp
     filterUnwantedReq( nvrad_r[Dep::PREREQUIRES], _deps[Dep::PREREQUIRES] );
     filterUnwantedReq( nvrad_r[Dep::REQUIRES], _deps[Dep::REQUIRES] );
 
+    // check for kernel(xxx) and rewrite them to kernel(flavor:xxx)
+    if ( _kind == ResTraits<Package>::kind
+	 && checkKernelDepsRewrite() )
+      {
+	dumpOn( DBG << "rewriteKernelDeps()" ) << std::endl;
+	rewriteKernelDeps( _deps );   
+      }
+
     // assert all prerequires are in requires too
     _deps[Dep::REQUIRES].insert( _deps[Dep::PREREQUIRES].begin(),
                                  _deps[Dep::PREREQUIRES].end() );
-
 
     if ( _arch.empty() )
       dumpOn( WAR << "Has empty Arch: " ) << std::endl;
@@ -182,6 +262,29 @@ namespace zypp
   {
     return str << '[' << kind() << ']'
                << name() << '-' << edition() << '.' << arch();
+  }
+
+  bool Resolvable::Impl::checkKernelDepsRewrite()
+  {
+    static int rewrite_kernel_deps = 0;	// 0 = undef, 1 = no, 2 = yes
+    if (rewrite_kernel_deps == 0) {
+#define ZYPPPATH "/etc/sysconfig/zypp"
+#define REWRITE_TAG "REWRITE_KERNEL_DEPS"
+      std::map<std::string,std::string> data = zypp::base::sysconfig::read( ZYPPPATH );
+      std::map<std::string,std::string>::const_iterator it = data.find( REWRITE_TAG );
+      if (it != data.end()
+	  && it->second == "yes")
+      {
+	rewrite_kernel_deps = 2;
+	DBG << "Rewriting kernel deps" << std::endl;
+      }
+      else {
+	rewrite_kernel_deps = 1;
+	DBG << "Leaving kernel deps alone" << std::endl;
+      }
+#undef ZYPPPATH
+    }
+    return (rewrite_kernel_deps == 2);
   }
 
   /////////////////////////////////////////////////////////////////

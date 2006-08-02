@@ -25,7 +25,7 @@
 #include "zypp/TranslatedText.h"
 #include <string>
 #include <list>
-#include <iostream>
+#include <iosfwd>
 #include <zypp/base/PtrTypes.h>
 
 using namespace zypp::base;
@@ -148,16 +148,6 @@ namespace zypp {
         std::string entry;
       };
 
-      class YUMBaseVersion {
-      public:
-        std::string epoch;
-        std::string ver;
-        std::string rel;
-        std::string md5sum;
-        std::string buildtime;
-        std::string source_info;
-      };
-
       class YUMObjectData : public base::ReferenceCounted, private base::NonCopyable {
       public:
 
@@ -193,33 +183,54 @@ namespace zypp {
 	std::string buildtime;
       };
 
-      class YUMPatchRpm {
-      public:
-	std::string arch;
-	std::string filename;
-	std::string downloadsize;
-	std::string md5sum;
-	std::string buildtime;
-	std::list<YUMBaseVersion> baseVersions;
-        std::string checksumType;
-        std::string checksum;
-	std::string location;
-	std::string media;
+      struct YUMEdition {
+        std::string epoch;
+        std::string ver;
+        std::string rel;
       };
+      std::ostream& operator<<(std::ostream& out, const YUMEdition& data);
 
-      class YUMDeltaRpm {
-      public:
+      struct YUMPatchBaseVersion {
+        YUMEdition edition;
+      };
+      std::ostream& operator<<(std::ostream& out, const YUMPatchBaseVersion& data);
+
+      struct YUMPatchRpm {
 	std::string arch;
 	std::string filename;
 	std::string downloadsize;
 	std::string md5sum;
 	std::string buildtime;
-	YUMBaseVersion baseVersion;
+	std::list<YUMPatchBaseVersion> baseVersions;
         std::string checksumType;
         std::string checksum;
 	std::string location;
 	std::string media;
       };
+      std::ostream& operator<<(std::ostream& out, const YUMPatchRpm& data);
+
+      struct YUMDeltaBaseVersion {
+        YUMEdition edition;
+        std::string md5sum;
+        std::string buildtime;
+        std::string sequence_info;
+      };
+      std::ostream& operator<<(std::ostream& out, const YUMDeltaBaseVersion& data);
+
+      struct YUMDeltaRpm {
+	std::string arch;
+	std::string filename;
+	std::string downloadsize;
+	std::string md5sum;
+	std::string buildtime;
+	YUMDeltaBaseVersion baseVersion;
+        std::string checksumType;
+        std::string checksum;
+	std::string location;
+	std::string media;
+      };
+      std::ostream& operator<<(std::ostream& out, const YUMDeltaRpm& data);
+
 
 
       class YUMPatchPackage : public YUMPatchAtom {
@@ -454,7 +465,7 @@ namespace zypp {
 
         std::string type;
         std::string vendor;
-        std::string name; 
+        std::string name;
         TranslatedText summary;
         TranslatedText description;
 	TranslatedText short_name;
@@ -462,7 +473,7 @@ namespace zypp {
         std::string releasenotesurl;
       };
 
-      /* Easy output */
+      /* Easy output (\todo move to class decl.) */
       std::ostream& operator<<(std::ostream &out, const YUMDependency& data);
       std::ostream& operator<<(std::ostream &out, const YUMDirSize& data);
       std::ostream& operator<<(std::ostream &out, const YUMRepomdData& data);
@@ -483,10 +494,7 @@ namespace zypp {
       std::ostream& operator<<(std::ostream& out, const YUMPatchMessage& data);
       std::ostream& operator<<(std::ostream& out, const YUMPatchScript& data);
       std::ostream& operator<<(std::ostream& out, const YUMPatchPackage& data);
-      std::ostream& operator<<(std::ostream& out, const YUMBaseVersion& data);
       std::ostream& operator<<(std::ostream& out, const YUMPlainRpm& data);
-      std::ostream& operator<<(std::ostream& out, const YUMPatchRpm& data);
-      std::ostream& operator<<(std::ostream& out, const YUMDeltaRpm& data);
 
     } // namespace yum
   } // namespace parser

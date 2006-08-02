@@ -32,12 +32,14 @@ namespace zypp
 
   public:
 
+    typedef time_t ValueType;
+
     /** Default ctor: 0 */
     Date()
     : _date( 0 )
     {}
     /** Ctor taking time_t value. */
-    Date( time_t date_r )
+    Date( ValueType date_r )
     : _date( date_r )
     {}
     //Date( const std::string & seconds_r ) : _date( fromSECONDS (seconds_r) ) {}
@@ -48,7 +50,7 @@ namespace zypp
 
   public:
     /** Conversion to time_t. */
-    operator time_t() const
+    operator ValueType() const
     { return _date; }
 
     /** \name Arithmetic operations.
@@ -93,7 +95,7 @@ namespace zypp
      * The number of seconds elapsed since 00:00:00 on January 1, 1970,
      * Coordinated Universal Time (UTC).
      **/
-    time_t _date;
+    ValueType _date;
   };
   ///////////////////////////////////////////////////////////////////
 

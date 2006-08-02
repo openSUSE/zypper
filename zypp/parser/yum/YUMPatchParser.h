@@ -52,7 +52,7 @@ namespace zypp {
         YUMPatchParser();
         YUMPatchParser(YUMPatchData_Ptr& entry);
         virtual ~YUMPatchParser();
-    
+
       private:
         virtual bool isInterested(const xmlNodePtr nodePtr);
         virtual YUMPatchData_Ptr process(const xmlTextReaderPtr reader);
@@ -65,7 +65,8 @@ namespace zypp {
         void parsePkgPlainRpmNode(YUMPatchPackage *dataPtr, xmlNodePtr formatNode);
         void parsePkgPatchRpmNode(YUMPatchPackage *dataPtr, xmlNodePtr formatNode);
         void parsePkgDeltaRpmNode(YUMPatchPackage *dataPtr, xmlNodePtr formatNode);
-        void parsePkgBaseVersionNode(YUMBaseVersion *dataPtr, xmlNodePtr formatNode);
+        void parsePkgPatchBaseVersionNode(YUMPatchBaseVersion *dataPtr, xmlNodePtr formatNode);
+        void parsePkgDeltaBaseVersionNode(YUMDeltaBaseVersion *dataPtr, xmlNodePtr formatNode);
         LibXMLHelper _helper;
 	Arch _zypp_architecture;
       };

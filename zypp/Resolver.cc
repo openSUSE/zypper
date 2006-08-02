@@ -70,6 +70,8 @@ namespace zypp
   { return _pimpl->context(); }
   ResolverProblemList Resolver::problems ()
   { return _pimpl->problems (); }
+  std::list<std::string> Resolver::problemDescription( void ) const
+  { return _pimpl->problemDescription (); }    
   void Resolver::applySolutions( const ProblemSolutionList & solutions )
   { _pimpl->applySolutions (solutions); }      
   void Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )

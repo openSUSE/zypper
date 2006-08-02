@@ -201,6 +201,8 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
 
     ResolverProblemList problems (void) const;
     void applySolutions (const ProblemSolutionList &solutions);
+    // returns a string list of ResolverInfo of the LAST not valid solution
+    std::list<std::string> problemDescription( void ) const;
 
     // reset all SOLVER transaction in pool
     void undo(void);

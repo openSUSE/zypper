@@ -732,53 +732,57 @@ namespace zypp
 
 	  //DBG << "Inserting patch RPMs" << endl;
 	  impl->_patch_rpms = std::list<YUMPackageImpl::PatchRpm>();
-	  for (std::list<YUMPatchRpm>::const_iterator it = parsed.patchRpms.begin();
-	    it != parsed.patchRpms.end(); ++it)
-	  {
-	    std::list<YUMPackageImpl::BaseVersion> bv_list;
-	    for (std::list<YUMBaseVersion>::const_iterator bvit = it->baseVersions.begin();
-	      bvit != it->baseVersions.end(); ++bvit)
-	    {
-	      YUMPackageImpl::BaseVersion bv(
-		Edition (bvit->ver, bvit->rel, bvit->epoch),
-                CheckSum("md5", bvit->md5sum),
-		strtol(bvit->buildtime.c_str(), 0, 10)
-	      );
-	      bv_list.push_back(bv);
-	    }
-	    YUMPackageImpl::PatchRpm patch_rpm(
-	      Arch(it->arch),
-	      Pathname(it->location),
-	      strtol(it->downloadsize.c_str(), 0, 10),
-	      CheckSum (it->checksumType, it->checksum),
-	      strtol(it->buildtime.c_str(), 0, 10),
-	      bv_list,
-	      strtol(it->media.c_str(), 0, 10)
-	    );
-	    impl->_patch_rpms.push_back(patch_rpm);
-	  }
+	  for ( std::list<YUMPatchRpm>::const_iterator it = parsed.patchRpms.begin();
+                it != parsed.patchRpms.end(); ++it )
+            {
+              YUMPackageImpl::PatchRpm patch_rpm;
+
+              patch_rpm.location( source::OnMediaLocation()
+                                  .medianr( str::strtonum<unsigned>( it->media ) )
+                                  .filename( it->location )
+                                  .checksum( CheckSum( it->checksumType, it->checksum ) )
+                                  .downloadsize( str::strtonum<ByteCount::SizeType>( it->downloadsize ) ) );
+
+              for ( std::list<YUMPatchBaseVersion>::const_iterator bvit = it->baseVersions.begin();
+                    bvit != it->baseVersions.end(); ++bvit )
+                {
+                  patch_rpm.baseversion( Edition( bvit->edition.ver,
+                                                  bvit->edition.rel,
+                                                  bvit->edition.epoch ) );
+                }
+
+              patch_rpm.buildtime( str::strtonum<Date::ValueType>( it->buildtime ) );
+
+             impl->_patch_rpms.push_back( patch_rpm );
+            }
 
 	  //DBG << "Inserting delta RPMs" << endl;
-
 	  impl->_delta_rpms = std::list<YUMPackageImpl::DeltaRpm>();
-	  for (std::list<YUMDeltaRpm>::const_iterator it = parsed.deltaRpms.begin();
-	    it != parsed.deltaRpms.end(); ++it)
-	  {
-	    YUMPackageImpl::DeltaRpm delta_rpm(
-	      Arch(it->arch),
-	      Pathname(it->location),
-	      strtol(it->downloadsize.c_str(), 0, 10),
-	      CheckSum (it->checksumType, it->checksum),
-	      strtol(it->buildtime.c_str(), 0, 10),
-	      YUMPackageImpl::BaseVersion(
-		Edition (it->baseVersion.ver, it->baseVersion.rel, it->baseVersion.epoch),
-                CheckSum("md5", it->baseVersion.md5sum),
-		strtol(it->baseVersion.buildtime.c_str(), 0, 10)
-	      ),
-	      strtol(it->media.c_str(), 0, 10)
-	    );
-	    impl->_delta_rpms.push_back(delta_rpm);
-	  }
+	  for ( std::list<YUMDeltaRpm>::const_iterator it = parsed.deltaRpms.begin();
+                it != parsed.deltaRpms.end(); ++it )
+            {
+              YUMPackageImpl::DeltaRpm delta_rpm;
+
+              delta_rpm.location( source::OnMediaLocation()
+                                  .medianr( str::strtonum<unsigned>( it->media ) )
+                                  .filename( it->location )
+                                  .checksum( CheckSum( it->checksumType, it->checksum ) )
+                                  .downloadsize( str::strtonum<ByteCount::SizeType>( it->downloadsize ) ) );
+
+              const YUMDeltaBaseVersion & ybv( it->baseVersion );
+              delta_rpm.baseversion( YUMPackageImpl::DeltaRpm::BaseVersion()
+                                     .edition( Edition( ybv.edition.ver,
+                                                        ybv.edition.rel,
+                                                        ybv.edition.epoch ) )
+                                     .buildtime( str::strtonum<Date::ValueType>( ybv.buildtime ) )
+                                     .checksum( CheckSum::md5( ybv.md5sum ) )
+                                     .sequenceinfo( ybv.sequence_info )
+                                     );
+
+              delta_rpm.buildtime( str::strtonum<Date::ValueType>( it->buildtime ) );
+
+              impl->_delta_rpms.push_back( delta_rpm );
+            }
         }
 	return atom;
     }

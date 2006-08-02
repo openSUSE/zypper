@@ -72,6 +72,8 @@ namespace zypp
     Arch _arch;
     /**  */
     Dependencies _deps;
+
+    static bool checkKernelDepsRewrite();
   };
   ///////////////////////////////////////////////////////////////////
 
