@@ -9,6 +9,10 @@
 #
 # run a prg file for several times ( defined in subdirectory <programname> )
 #
+  if { ![info exists env(HELIXPARSE) ] } {
+    return
+  }
+
   set prog "src/helixparse"
   set datadir "data.deptestomatic"
   set errorOccured 0

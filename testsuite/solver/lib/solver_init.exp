@@ -157,6 +157,10 @@ proc multi-run { src } {
 	continue
       }
 
+      if { [lsearch $dirignores "$testBase_name/"] != -1} {
+	continue
+      }
+
       # clean old results
 
       exec sh -c "rm -rf $dircase/*.diff $dircase/*.out $dircase/*.mistake"

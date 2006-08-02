@@ -713,17 +713,30 @@ load_source (const string & alias, const string & filename, const string & type,
     Pathname pathname = globalPath + filename;
     int count = 0;
 
-    try {
-	Source_Ref src;
+    Source_Ref src;
 
-	if (type == "url") {
+    if (type == "url") {
+	try {
 	    Url url( filename );
 	    cout << "Load from Url '" << url << "' (" << filename << ")" << endl;
-	    pathname = "";
+	    if (url.getScheme() == "file") {
+		pathname = url.getPathName();
+		url = Url( "file:/" );
+	    }
+	    else
+		pathname = "";
+		
 	    Pathname cache_dir( "" );
 	    src = Source_Ref( SourceFactory().createFrom( url, pathname, alias, cache_dir ) );
 	}
-	else {
+	catch ( Exception & excpt_r ) {
+	    ZYPP_CAUGHT (excpt_r);
+	    cout << "Couldn't load packages from Url '" << filename << "'" << endl;
+	    return -1;
+	}
+    }
+    else {
+	try {
 	   Url url("file:/");
 
 	   media::MediaManager mmgr;
@@ -733,6 +746,14 @@ load_source (const string & alias, const string & filename, const string & type,
 	   impl->factoryCtor (mediaid, pathname, alias);
 	   src = Source_Ref( SourceFactory().createFrom( impl ) );
 	}
+	catch ( Exception & excpt_r ) {
+	    ZYPP_CAUGHT (excpt_r);
+	    cout << "Couldn't load packages from XML file '" << filename << "'" << endl;
+	    return -1;
+	}
+    }
+
+    try {
 	manager->addSource (src);
 	count = src.resolvables().size();
 	cout << "Added source '" << alias << "' with " << count << " resolvables" << endl;
@@ -743,7 +764,7 @@ load_source (const string & alias, const string & filename, const string & type,
     }
     catch ( Exception & excpt_r ) {
 	ZYPP_CAUGHT (excpt_r);
-	cout << "Loaded NO package(s) from " << (pathname.empty() ? filename : pathname) << endl;
+	cout << "Loaded NO package(s) from " << src << endl;
 	count = -1;
     }
 
