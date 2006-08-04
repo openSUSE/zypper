@@ -496,7 +496,7 @@ struct StorageTargetTest
 
 int main()
 { 
-  getZYpp()->initTarget("/", false);
+  getZYpp()->initTarget("/");
   try
   {  
     //RUN_TEST(armstrong_yum_source_source_read);

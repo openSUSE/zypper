@@ -11,7 +11,7 @@ AM_LDFLAGS =
 AM_CXXFLAGS =
 # gperf:	-pg
 
-LDADD =		-L$(top_srcdir)/zypp/.libs -lzypp -lboost_regex -lxml2 -lz
+LDADD =		-L$(top_srcdir)/zypp/.libs -L$(top_srcdir)/zypp2/.libs -lzypp -lzypp2 -lboost_regex -lxml2 -lz
 
 ## ##################################################
 
@@ -33,7 +33,7 @@ yumparser_LDFLAGS =	-static
 
 .PHONY:        always
 
-$(noinst_PROGRAMS):    $(top_srcdir)/zypp/lib@PACKAGE@.la
+$(noinst_PROGRAMS):    $(top_srcdir)/zypp/lib@PACKAGE@.la $(top_srcdir)/zypp2/lib@PACKAGE@2.la
 
 $(top_srcdir)/zypp/lib@PACKAGE@.la:     always
 	$(MAKE) -C $(top_srcdir)/zypp

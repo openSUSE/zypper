@@ -96,8 +96,8 @@ namespace zypp
   Target_Ptr ZYpp::target() const
   { return _pimpl->target(); }
 
-  void ZYpp::initTarget(const Pathname & root, bool commit_only)
-  { _pimpl->initTarget(root, commit_only); }
+  void ZYpp::initTarget(const Pathname & root)
+  { _pimpl->initTarget(root); }
 
   void ZYpp::finishTarget()
   { _pimpl->finishTarget(); }

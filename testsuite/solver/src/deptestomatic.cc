@@ -451,7 +451,7 @@ print_solution (ResolverContext_Ptr context, int *count, ChecksumList & checksum
     if (mediaorder) {
 	cout << endl;
 	RESULT << "Media Order:" << endl << endl;
-	God->initTarget("/", true);			// init, but don't populate pool
+	God->initTarget("/");			// init, but don't populate pool
 	Target::PoolItemList dellist;
 	Target::PoolItemList inslist;
 	Target::PoolItemList srclist;

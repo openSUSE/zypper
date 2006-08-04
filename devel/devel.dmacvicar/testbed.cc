@@ -25,8 +25,10 @@
 #include "zypp/KeyRing.h"
 #include "zypp/PublicKey.h"
 
+#include "zypp/ZYppFactory.h"
+
 #include "zypp/MediaSetAccess.h"
-#include "zypp/source/yum/YUMSourceCacher.h"
+#include "zypp2/source/yum/YUMSourceCacher.h"
 
 using namespace zypp::detail;
 
@@ -44,8 +46,11 @@ int main()
   //MIL << local << std::endl;
   try
   {
-    zypp::source::yum::YUMSourceCacher cacher(Pathname("/"));
-    cacher.cache( Url("http://ftp-1.gwdg.de/pub/opensuse/distribution/SL-OSS-factory/inst-source/suse"), Pathname("/"));
+    //zypp::source::yum::YUMSourceCacher cacher(Pathname("/"));
+    //cacher.cache( Url("dir:/space/tmp/factory-yum"), Pathname("/"));
+    ZYpp::Ptr z = getZYpp();
+    z->initTarget("/", false);
+    
   }
   catch ( const Exception &e )
   {

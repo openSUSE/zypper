@@ -18,6 +18,7 @@
 
 #include "zypp/base/ReferenceCounted.h"
 #include "zypp/base/NonCopyable.h"
+#include "zypp/base/DefaultFalseBool.h"
 #include "zypp/base/PtrTypes.h"
 #include "zypp/ResStore.h"
 #include "zypp/PoolItem.h"
@@ -82,6 +83,11 @@ namespace zypp
       /** All resolvables in the target. */
       const ResStore & resolvables();
 
+      /**
+        * resolvables of certain kind
+        */
+      ResStore resolvablesByKind( const Resolvable::Kind kind );
+
       /** The root set for this target */
       Pathname root() const;
 
@@ -135,6 +141,7 @@ namespace zypp
       Date timestamp() const;
       
     protected:
+      void loadKindResolvables( const Resolvable::Kind kind );
       /** All resolvables provided by the target. */
       ResStore _store;
       /** Path to the target */
@@ -144,6 +151,7 @@ namespace zypp
 #ifndef STORAGE_DISABLED
       zypp::storage::PersistentStorage _storage;
       bool _storage_enabled;
+      std::map< const Resolvable::Kind, DefaultFalseBool> _resstore_loaded;
 #endif
     private:
       /** Null implementation */

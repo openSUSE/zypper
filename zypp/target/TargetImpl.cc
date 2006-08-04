@@ -24,6 +24,8 @@
 #include "zypp/Resolvable.h"
 #include "zypp/ResObject.h"
 #include "zypp/Package.h"
+#include "zypp/Pattern.h"
+#include "zypp/Selection.h"
 #include "zypp/Script.h"
 #include "zypp/Message.h"
 #include "zypp/Source.h"
@@ -77,10 +79,9 @@ namespace zypp
     //	METHOD TYPE : Ctor
     //
     TargetImpl::TargetImpl(const Pathname & root_r)
-    : _root(root_r)
+    : _root(root_r), _storage_enabled(false)
     {
       _rpm.initDatabase(root_r);
-      _storage_enabled = false;
       MIL << "Initialized target on " << _root << endl;
     }
 
@@ -112,38 +113,70 @@ namespace zypp
       return _root;
     }
 
-    const ResStore & TargetImpl::resolvables()
+    void TargetImpl::loadKindResolvables( const Resolvable::Kind kind )
     {
-      _store.clear();
-      // RPM objects
-      std::list<Package::Ptr> packages = _rpm.getPackages();
-      for (std::list<Package::Ptr>::const_iterator it = packages.begin();
-           it != packages.end();
-           it++)
-      {
-        _store.insert(*it);
-      }
+      if ( _resstore_loaded[kind] )
+        return;
 
-      if ( isStorageEnabled() )
+      if ( kind == ResTraits<zypp::Package>::kind )
       {
-        // resolvables stored in the zypp storage database
-        std::list<ResObject::Ptr> resolvables = _storage.storedObjects();
-        for (std::list<ResObject::Ptr>::iterator it = resolvables.begin();
-            it != resolvables.end();
+           std::list<Package::Ptr> packages = _rpm.getPackages();
+          for (std::list<Package::Ptr>::const_iterator it = packages.begin();
+            it != packages.end();
             it++)
-        {
-          _store.insert(*it);
-        }
+          {
+            _store.insert(*it);
+          }
+          _resstore_loaded[kind] = true;
       }
       else
       {
-        WAR << "storage target not enabled" << std::endl;
-      }
-
-      return _store;
+          if ( isStorageEnabled() )
+          {
+            // resolvables stored in the zypp storage database
+            std::list<ResObject::Ptr> resolvables = _storage.storedObjects(kind);
+            for (std::list<ResObject::Ptr>::iterator it = resolvables.begin();
+                it != resolvables.end();
+                it++)
+            {
+              _store.insert(*it);
+            }
+          }
+          else
+          {
+            WAR << "storage target not enabled" << std::endl;
+          }
+          _resstore_loaded[kind] = true;
+      } // end switch
     }
 
+    ResStore TargetImpl::resolvablesByKind( const Resolvable::Kind kind )
+    {
+      ResStore tmp_store;
+      
+      // load all resolvables of Kind kind in internal store
+      loadKindResolvables(kind);
 
+      for (ResStore::const_iterator it = _store.begin(); it != _store.end(); ++it)
+      {
+        // insert them in the tmp store we will return
+        if ((*it)->kind() == kind) {
+          tmp_store.insert(*it);
+        }
+      }
+      return tmp_store;
+    }
+
+    const ResStore & TargetImpl::resolvables()
+    {
+      loadKindResolvables( ResTraits<zypp::Patch>::kind );
+      loadKindResolvables( ResTraits<zypp::Selection>::kind );
+      loadKindResolvables( ResTraits<zypp::Pattern>::kind );
+      loadKindResolvables( ResTraits<zypp::Product>::kind );
+      loadKindResolvables( ResTraits<zypp::Language>::kind );
+      loadKindResolvables( ResTraits<zypp::Package>::kind );
+      return _store;
+    }
 
     ZYppCommitResult TargetImpl::commit( ResPool pool_r, const ZYppCommitPolicy & policy_rX )
     {

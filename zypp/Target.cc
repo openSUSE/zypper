@@ -67,6 +67,9 @@ namespace zypp
   const ResStore & Target::resolvables()
   { return _pimpl->resolvables(); }
 
+  ResStore Target::resolvablesByKind( const Resolvable::Kind kind )
+  { return _pimpl->resolvablesByKind(kind); }
+
   target::rpm::RpmDb & Target::rpmDb()
   { return _pimpl->rpm(); }
 

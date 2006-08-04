@@ -58,6 +58,14 @@ namespace zypp
     /** All resolvables provided by the target. */
     const ResStore & resolvables();
 
+    /**
+     * load resolvables of certain kind in the internal store
+     * and return a store with only that kind
+     * successive calls will be faster as resolvables are cached-
+     */
+    ResStore resolvablesByKind( const Resolvable::Kind kind );
+    
+
     /** Null implementation */
     static Target_Ptr nullimpl();
 
