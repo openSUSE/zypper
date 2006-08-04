@@ -1,4 +1,20 @@
 -------------------------------------------------------------------
+Fri Aug  4 15:20:13 CEST 2006 - dmacvicar@suse.de
+
+- Separate target init from adding resolvables, getting rid of the
+uggly bool flag.
+- dont clear the store each time Target::resolvables is called
+- Load target resolvables on demand by kind, keep them cached later
+- add Target::resolvablesByKind(kind) to allow query specific kind
+  without reading all kinds. Used to port TargetProduct, which
+  was reading the whole rpm database only to displayy base product
+  name in YaST help.
+- commit to pkg-bindings and packager will follow.
+- jsrain will port more yast stuff, especially inst_source which
+  startup time should by reduced by half afterwards. 
+- rev 3880
+
+-------------------------------------------------------------------
 Tue Aug  1 13:37:29 CEST 2006 - dmacvicar@suse.de
 
 - forward port:
