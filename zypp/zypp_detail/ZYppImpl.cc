@@ -193,7 +193,7 @@ namespace zypp
       return _target;
      }
 
-    void ZYppImpl::initTarget(const Pathname & root)
+    void ZYppImpl::initializeTarget(const Pathname & root)
     {
       MIL << "initTarget( " << root << endl;
       if (_target) {
@@ -206,6 +206,26 @@ namespace zypp
       _target = new Target( root );
       _target->enableStorage( root );
     }
+    
+    void ZYppImpl::initTarget(const Pathname & root, bool commit_only)
+    {
+      MIL << "initTarget( " << root << ", " << commit_only << ")" << endl;
+      if (_target) {
+        if (_target->root() == root) {
+          MIL << "Repeated call to initTarget()" << endl;
+          return;
+        }
+        removeInstalledResolvables( );
+      }
+      _target = new Target( root );
+      _target->enableStorage( root );
+      if (!commit_only)
+      {
+        _target->enableStorage( root );
+        addResolvables( _target->resolvables(), true );
+      }
+    }
+
 
     void ZYppImpl::finishTarget()
     {

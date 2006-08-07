@@ -87,9 +87,16 @@ namespace zypp
 
     /**
      * \throws Exception
+     * just init the target, dont populate store or pool
      */
-    void initTarget(const Pathname & root);
+    void initializeTarget(const Pathname & root);
 
+    /**
+     * \throws Exception
+     * if commit_only == true, just init the target, dont populate store or pool
+     */
+    ZYPP_DEPRECATED void initTarget(const Pathname & root, bool commit_only = false);  
+    
     /**
      * \throws Exception
      */
