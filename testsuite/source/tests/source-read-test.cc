@@ -65,7 +65,7 @@ int main( int argc, char * argv[] )
 	cerr << "Can't aquire ZYPP lock" << endl;
 	return 1;
     }
-    God->initTarget("/");
+    God->initializeTarget("/");
     int argpos = 1;
 
     while ( argpos  < argc - 1 )
