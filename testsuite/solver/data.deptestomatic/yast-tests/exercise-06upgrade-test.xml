@@ -7,7 +7,7 @@
 
 <trial>
   <subscribe channel="test"/>
-  <upgrade/>
+  <distupgrade/>
 </trial>
 
 </test>

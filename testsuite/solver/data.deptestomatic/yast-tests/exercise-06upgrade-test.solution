@@ -1,2 +1,66 @@
->!> Checking for upgrades...
->!> System is up-to-date, no upgrades required
+>!> Doing distribution upgrade ...
+>!> 1: I__s_[S1:0][package]p1-1.0-1.noarch
+>!> 2: U__s_[S2:0][package]p1-1.0-1.noarch
+>!> 3: I_Th_[S1:0][package]p10-1.0-1.noarch
+>!> 4: I_Th_[S1:0][package]p10a-1.0-1.noarch
+>!> 5: U__s_[S2:0][package]p10new-2.0-1.noarch
+>!> 6: U_Th_[S2:0][package]p10new2-2.0-1.noarch
+>!> 7: I__s_[S1:0][package]p11-1.0-1.noarch
+>!> 8: I_Th_[S1:0][package]p11a-1.0-1.noarch
+>!> 9: U__s_[S2:0][package]p11new-2.0-1.noarch
+>!> 10: U_Th_[S2:0][package]p11new2-2.0-1.noarch
+>!> 11: U__s_[S2:0][package]p11new3-2.0-1.noarch
+>!> 12: I__s_[S1:0][package]p2-1.0-1.noarch
+>!> 13: U_Th_[S2:0][package]p2-2.0-1.noarch
+>!> 14: I__s_[S1:0][package]p3-1.0-1.noarch
+>!> 15: U_Th_[S2:0][package]p3-2.0-1.noarch
+>!> 16: U__s_[S2:0][package]p3a-2.0-1.noarch
+>!> 17: I__s_[S1:0][package]p4-1.0-1.noarch
+>!> 18: U_Th_[S2:0][package]p4-2.0-1.noarch
+>!> 19: I__s_[S1:0][package]p4a-1.0-1.noarch
+>!> 20: U_Th_[S2:0][package]p4a-2.0-1.noarch
+>!> 21: I__s_[S1:0][package]p5-1.0-1.noarch
+>!> 22: U_Th_[S2:0][package]p5-2.0-1.noarch
+>!> 23: I_Th_[S1:0][package]p5a-1.0-1.noarch
+>!> 24: I_Th_[S1:0][package]p5b-1.0-1.noarch
+>!> 25: I__s_[S1:0][package]p6-1.0-1.noarch
+>!> 26: U_Th_[S2:0][package]p6-2.0-1.noarch
+>!> 27: U__s_[S2:0][package]p6a-2.0-1.noarch
+>!> 28: U__s_[S2:0][package]p6b-2.0-1.noarch
+>!> 29: U__s_[S2:0][package]p6c-2.0-1.noarch
+>!> 30: I_Th_[S1:0][package]p7-1.0-1.noarch
+>!> 31: U__s_[S2:0][package]p7new-2.0-1.noarch
+>!> 32: I__s_[S1:0][package]p8-1.0-1.noarch
+>!> 33: U_Th_[S2:0][package]p8-2.0-1.noarch
+>!> 34: I__s_[S1:0][package]p8a-1.0-1.noarch
+>!> 35: U_Th_[S2:0][package]p8a-2.0-1.noarch
+>!> 36: I__s_[S1:0][package]p9-1.0-1.noarch
+>!> 37: U_Th_[S2:0][package]p9-2.0-1.noarch
+>!> 38: U__s_[S2:0][package]p9a-2.0-1.noarch
+>!> 39: U__s_[S2:0][package]p9b-2.0-1.noarch
+>!> 40: U__s_[S2:0][package]p9c-2.0-1.noarch
+>!> Solution #1:
+>!> install p10new2-2.0-1.noarch[test]
+>!> install p11new2-2.0-1.noarch[test]
+>!> install p3a-2.0-1.noarch[test]
+>!> install p6c-2.0-1.noarch[test]
+>!> install p9a-2.0-1.noarch[test]
+>!> install p9b-2.0-1.noarch[test]
+>!> install p9c-2.0-1.noarch[test]
+>!> remove  p10-1.0-1.noarch
+>!> remove  p10a-1.0-1.noarch
+>!> remove  p11a-1.0-1.noarch
+>!> remove  p5a-1.0-1.noarch
+>!> remove  p5b-1.0-1.noarch
+>!> remove  p7-1.0-1.noarch
+>!> upgrade p2-1.0-1.noarch => p2-2.0-1.noarch[test]
+>!> upgrade p3-1.0-1.noarch => p3-2.0-1.noarch[test]
+>!> upgrade p4-1.0-1.noarch => p4-2.0-1.noarch[test]
+>!> upgrade p4a-1.0-1.noarch => p4a-2.0-1.noarch[test]
+>!> upgrade p5-1.0-1.noarch => p5-2.0-1.noarch[test]
+>!> upgrade p6-1.0-1.noarch => p6-2.0-1.noarch[test]
+>!> upgrade p8-1.0-1.noarch => p8-2.0-1.noarch[test]
+>!> upgrade p8a-1.0-1.noarch => p8a-2.0-1.noarch[test]
+>!> upgrade p9-1.0-1.noarch => p9-2.0-1.noarch[test]
+>!> |unflag p6b-2.0-1.noarch[test]
+>!> installs=7, upgrades=9, uninstalls=6

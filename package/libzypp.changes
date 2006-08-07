@@ -1,11 +1,13 @@
 -------------------------------------------------------------------
-Mon Aug  7 15:53:31 CEST 2006 ma@suse.de
+Mon Aug  7 15:10:08 CEST 2006 - dmacvicar@suse.de
 
+- forward port from SLES10 branch , till 3888
 - Prefer to use available DeltaRpm or PatchRpm instead of downloading
   full packages. (#168844)
-- rev 3892
+- rpmdb : Do not use the deprecated POSIX API, but boost::regex
 - version 2.0.0
-    
+- rev 3893
+
 -------------------------------------------------------------------
 Fri Aug  4 15:20:13 CEST 2006 - dmacvicar@suse.de
 

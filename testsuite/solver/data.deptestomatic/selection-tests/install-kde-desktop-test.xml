@@ -1,12 +1,12 @@
 <?xml version="1.0"?>
 <!--
-  install minmal selection
+  install kde selection
 -->
 <test>
 <setup>
   <arch name="i686"/>
   <locale name="de"/>
-  <channel name="packages" file="sl10.1-beta38-packages.xml"/>
+  <channel name="packages" file="../repos/sles10/sles-10-i386-1407-packages.xml"/>
   <channel name="selections" file="sl10.1-beta38-selections.xml"/>
   <mediaid/>
 </setup>

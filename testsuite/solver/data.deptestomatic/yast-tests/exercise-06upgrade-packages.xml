@@ -325,9 +325,6 @@
           <md5sum>0f55f36a3240858038a281911605024e</md5sum>
         </update>
       </history>
-      <requires>
-        <dep name='p9d'/>
-      </requires>
     </package>
     <package>
       <name>p9c</name>
@@ -345,9 +342,6 @@
           <md5sum>0f55f36a3240858038a281911605024e</md5sum>
         </update>
       </history>
-      <requires>
-        <dep name='p9d'/>
-      </requires>
     </package>
     <package>
       <name>p10new</name>

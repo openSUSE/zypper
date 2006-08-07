@@ -1,0 +1,9 @@
+>!> setting HardwareInfo to: ./kernel-hardware
+>!> Installing nvidia-gfx-kmp-default from channel packages
+>!> 1 problems found:
+>!> Problem:
+>!> This would invalidate novfs-kmp-default-1.2.0_2.6.16_rc5_git14_3c-8.i586.
+>!> novfs-kmp-default-1.2.0_2.6.16_rc5_git14_3c-8.i586 has unfulfilled requirements
+>!>    Solution:
+>!>       delete novfs-kmp-default
+>!>       delete novfs-kmp-default-1.2.0_2.6.16_rc5_git14_3c-8.i586
