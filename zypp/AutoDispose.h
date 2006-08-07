@@ -37,7 +37,7 @@ namespace zypp
    *
    * Pass a filename to the application and provide the appropriate
    * code to be exectued when the file is no longer needed:
-   * <code>
+   * \code
    * struct FileCache
    * {
    *   Pathname getFile();
@@ -72,10 +72,10 @@ namespace zypp
    *       return AutoDispose<const Pathname>();
    *     }
    * }
-   * <\code>
+   * \endcode
    *
    * Exception safe handling of temporary files:
-   * <code>
+   * \code
    * void provideFileAt( const Pathname & destination )
    * {
    *   AutoDispose<const Pathname> guard( destination, unlink );
@@ -86,7 +86,7 @@ namespace zypp
    *   // On success: reset the dispose function to NOOP.
    *   guard.resetDispose();
    * }
-   * <\code>
+   * \endcode
   */
   template<class _Tp>
     class AutoDispose

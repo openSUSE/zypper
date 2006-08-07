@@ -10,6 +10,7 @@
  *
 */
 #include <iostream>
+#include <sstream>
 #include "zypp/base/Logger.h"
 
 #include "zypp/source/PackageProvider.h"
@@ -27,8 +28,43 @@ namespace zypp
   namespace source
   { /////////////////////////////////////////////////////////////////
 
-    PackageProvider::PackageProvider( const Package::constPtr & package )
-    : _package( package )
+    ///////////////////////////////////////////////////////////////////
+    //
+    //	CLASS NAME : PackageProviderPolicy
+    //
+    ///////////////////////////////////////////////////////////////////
+
+    bool PackageProviderPolicy::queryInstalled( const std::string & name_r, const Edition & ed_r ) const
+    {
+      if ( _queryInstalledCB )
+        return _queryInstalledCB( name_r, ed_r );
+      return false;
+    }
+
+    ///////////////////////////////////////////////////////////////////
+    //
+    //	CLASS NAME : PackageProvider
+    //
+    ///////////////////////////////////////////////////////////////////
+
+    ///////////////////////////////////////////////////////////////////
+    namespace
+    { /////////////////////////////////////////////////////////////////
+
+      inline std::string defRpmFileName( const Package::constPtr & package )
+      {
+        std::ostringstream ret;
+        ret << package->name() << '-' << package->edition() << '.' << package->arch() << ".rpm";
+        return ret.str();
+      }
+
+      /////////////////////////////////////////////////////////////////
+    } // namespace source
+    ///////////////////////////////////////////////////////////////////
+    PackageProvider::PackageProvider( const Package::constPtr & package,
+                                      const PackageProviderPolicy & policy_r )
+    : _policy( policy_r )
+    , _package( package )
     , _implPtr( detail::ImplConnect::resimpl( _package ) )
     {}
 
@@ -53,57 +89,50 @@ namespace zypp
             ZYPP_RETHROW( excpt );
           }
       } while ( _retry );
+
       report()->finish( _package, source::DownloadResolvableReport::NO_ERROR, std::string() );
       MIL << "provided Package " << _package << " at " << ret << endl;
       return ret;
     }
 
-    bool PackageProvider::considerDeltas() const
-    {
-#warning ADD DOWNLOADING MEDIA CONDITION
-      return applydeltarpm::haveApplydeltarpm();
-    }
-
-    bool PackageProvider::considerPatches() const
-    {
-#warning ADD DOWNLOADING MEDIA CONDITION
-      return _installedEdition != Edition::noedition;
-    }
-
     ManagedFile PackageProvider::doProvidePackage() const
     {
-      if ( considerDeltas() )
+      // check whether to process patch/delta rpms
+      if ( _package->source().remote() )
         {
           std::list<DeltaRpm> deltaRpms( _implPtr->deltaRpms() );
-          if ( ! deltaRpms.empty() )
-            {
-              for( std::list<DeltaRpm>::const_iterator it = deltaRpms.begin();
-                   it != deltaRpms.end(); ++it )
-                {
-                  DBG << "tryDelta " << *it << endl;
-                  ManagedFile ret( tryDelta( *it ) );
-                  if ( ! ret->empty() )
-                    return ret;
-                }
-            }
-        }
-
-      if ( considerPatches() )
-        {
           std::list<PatchRpm> patchRpms( _implPtr->patchRpms() );
-          if ( ! patchRpms.empty() )
+
+          if ( ! ( deltaRpms.empty() && patchRpms.empty() )
+               && queryInstalled() )
             {
-              for( std::list<PatchRpm>::const_iterator it = patchRpms.begin();
-                   it != patchRpms.end(); ++it )
+              if ( ! deltaRpms.empty() && applydeltarpm::haveApplydeltarpm() )
                 {
-                  DBG << "tryPatch " << *it << endl;
-                  ManagedFile ret( tryPatch( *it ) );
-                  if ( ! ret->empty() )
-                    return ret;
+                  for( std::list<DeltaRpm>::const_iterator it = deltaRpms.begin();
+                       it != deltaRpms.end(); ++it )
+                    {
+                      DBG << "tryDelta " << *it << endl;
+                      ManagedFile ret( tryDelta( *it ) );
+                      if ( ! ret->empty() )
+                        return ret;
+                    }
+                }
+
+              if ( ! patchRpms.empty() )
+                {
+                  for( std::list<PatchRpm>::const_iterator it = patchRpms.begin();
+                       it != patchRpms.end(); ++it )
+                    {
+                      DBG << "tryPatch " << *it << endl;
+                      ManagedFile ret( tryPatch( *it ) );
+                      if ( ! ret->empty() )
+                        return ret;
+                    }
                 }
             }
         }
 
+      // no patch/delta -> provide full package
       ManagedFile ret;
       source::OnMediaLocation loc;
       loc.medianr( _package->sourceMediaNr() )
@@ -120,6 +149,10 @@ namespace zypp
 
     ManagedFile PackageProvider::tryDelta( const DeltaRpm & delta_r ) const
     {
+      if ( delta_r.baseversion().edition() != Edition::noedition
+           && ! queryInstalled( delta_r.baseversion().edition() ) )
+        return ManagedFile();
+
       if ( ! applydeltarpm::quickcheck( delta_r.baseversion().sequenceinfo() ) )
         return ManagedFile();
 
@@ -145,8 +178,13 @@ namespace zypp
           return ManagedFile();
         }
 
-#warning FIX FIX PATHNAME
-      Pathname destination( "/tmp/delta.rpm" );
+
+      Pathname destination( Pathname::dirname( delta ) / defRpmFileName( _package ) );
+      /* just to ease testing with non remote sources */
+      if ( ! _package->source().remote() )
+        destination = Pathname("/tmp") / defRpmFileName( _package );
+      /**/
+
       if ( ! applydeltarpm::provide( delta, destination,
                                      bind( &PackageProvider::progressDeltaApply, this, _1 ) ) )
         {
@@ -161,8 +199,10 @@ namespace zypp
     {
       // installed edition is in baseversions?
       const PatchRpm::BaseVersions & baseversions( patch_r.baseversions() );
-      if ( std::find( baseversions.begin(), baseversions.end(),
-                      _installedEdition ) == baseversions.end() )
+
+      if ( std::find_if( baseversions.begin(), baseversions.end(),
+                         bind( &PackageProvider::queryInstalled, this, _1 ) )
+           == baseversions.end() )
         return ManagedFile();
 
       report()->startPatchDownload( patch_r.location().filename(),
@@ -224,6 +264,10 @@ namespace zypp
         }
       return true; // anyway a failure
     }
+
+    bool PackageProvider::queryInstalled( const Edition & ed_r ) const
+    { return _policy.queryInstalled( _package->name(), ed_r ); }
+
 
     /////////////////////////////////////////////////////////////////
   } // namespace source

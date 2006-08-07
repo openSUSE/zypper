@@ -30,6 +30,29 @@ namespace zypp
 
     ///////////////////////////////////////////////////////////////////
     //
+    //	CLASS NAME : PackageProviderPolicy
+    //
+    /** */
+    class PackageProviderPolicy
+    {
+    public:
+      /** Get installed Editions callback signature. */
+      typedef function<bool ( const std::string &, const Edition & )> QueryInstalledCB;
+
+      /** Set callback. */
+      PackageProviderPolicy & queryInstalledCB( QueryInstalledCB queryInstalledCB_r )
+      { _queryInstalledCB = queryInstalledCB_r; return *this; }
+
+      /** Evaluate callback. */
+      bool queryInstalled( const std::string & name_r, const Edition & ed_r = Edition() ) const;
+
+    private:
+      QueryInstalledCB _queryInstalledCB;
+    };
+    ///////////////////////////////////////////////////////////////////
+
+    ///////////////////////////////////////////////////////////////////
+    //
     //	CLASS NAME : PackageProvider
     //
     /** Provide a package from a Source.
@@ -47,7 +70,8 @@ namespace zypp
 
     public:
       /** Ctor taking the Package to provide. */
-      PackageProvider( const Package::constPtr & package );
+      PackageProvider( const Package::constPtr & package,
+                       const PackageProviderPolicy & policy_r = PackageProviderPolicy() );
       ~PackageProvider();
 
     public:
@@ -57,8 +81,6 @@ namespace zypp
       ManagedFile providePackage() const;
 
     private:
-      bool considerDeltas() const;
-      bool considerPatches() const;
       ManagedFile doProvidePackage() const;
       ManagedFile tryDelta( const DeltaRpm & delta_r ) const;
       ManagedFile tryPatch( const PatchRpm & patch_r ) const;
@@ -71,13 +93,15 @@ namespace zypp
       bool progressPatchDownload( int value ) const;
       bool progressPackageDownload( int value ) const;
       bool failOnChecksumError() const;
+      bool queryInstalled( const Edition & ed_r = Edition() ) const;
 
     private:
+      PackageProviderPolicy      _policy;
       Package::constPtr          _package;
       PackageImpl_constPtr       _implPtr;
-      Edition                    _installedEdition;
       mutable bool               _retry;
       mutable shared_ptr<Report> _report;
+
     };
     ///////////////////////////////////////////////////////////////////
 

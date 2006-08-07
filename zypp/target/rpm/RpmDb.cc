@@ -1448,6 +1448,20 @@ bool RpmDb::hasPackage( const string & name_r ) const
 ///////////////////////////////////////////////////////////////////
 //
 //
+//	METHOD NAME : RpmDb::hasPackage
+//	METHOD TYPE : bool
+//
+//	DESCRIPTION :
+//
+bool RpmDb::hasPackage( const string & name_r, const Edition & ed_r ) const
+{
+  librpmDb::db_const_iterator it;
+  return it.findPackage( name_r, ed_r );
+}
+
+///////////////////////////////////////////////////////////////////
+//
+//
 //	METHOD NAME : RpmDb::getData
 //	METHOD TYPE : PMError
 //

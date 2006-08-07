@@ -36,6 +36,7 @@
 
 #include "zypp/pool/GetResolvablesToInsDel.h"
 #include "zypp/solver/detail/Helper.h"
+#include "zypp/source/PackageProvider.h"
 
 using namespace std;
 using zypp::solver::detail::Helper;
@@ -48,17 +49,23 @@ namespace zypp
   namespace target
   { /////////////////////////////////////////////////////////////////
 
-    ///////////////////////////////////////////////////////////////////
-    namespace
-    { /////////////////////////////////////////////////////////////////
+    /** Helper for PackageProvider queries during commit. */
+    struct QueryInstalledEditionHelper
+    {
+      QueryInstalledEditionHelper( rpm::RpmDb & rpmdb_r )
+      : _rpmdb( rpmdb_r )
+      {}
 
-      struct PubKeyHelper
+      bool operator()( const std::string & name_r, const Edition & ed_r ) const
       {
-      };
+        if ( ed_r == Edition::noedition )
+          return _rpmdb.hasPackage( name_r );
+        return _rpmdb.hasPackage( name_r, ed_r );
+      }
+    private:
+      rpm::RpmDb & _rpmdb;
+    };
 
-      /////////////////////////////////////////////////////////////////
-    } // namespace
-    ///////////////////////////////////////////////////////////////////
 
     IMPL_PTR_TYPE(TargetImpl);
 
@@ -280,6 +287,12 @@ namespace zypp
       // remember the last used source (if any)
       Source_Ref lastUsedSource;
 
+      // Redirect PackageProvider queries for installed editions
+      // (in case of patch/delta rpm processing) to rpmDb.
+      source::PackageProviderPolicy packageProviderPolicy;
+      packageProviderPolicy.queryInstalledCB( QueryInstalledEditionHelper(_rpm) );
+
+
       for (TargetImpl::PoolItemList::const_iterator it = items_r.begin(); it != items_r.end(); it++)
       {
         if (isKind<Package>(it->resolvable()))
@@ -287,9 +300,10 @@ namespace zypp
           Package::constPtr p = dynamic_pointer_cast<const Package>(it->resolvable());
           if (it->status().isToBeInstalled())
           {
-	    Pathname localfile;
+	    source::ManagedFile localfile;
 	    try {
-            	localfile = p->source().providePackage(p);
+                source::PackageProvider pkgProvider( p, packageProviderPolicy );
+            	localfile = pkgProvider.providePackage();
 	    }
 	    catch( const source::SkipRequestedException & e )
 	    {
