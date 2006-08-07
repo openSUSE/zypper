@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Mon Aug  7 15:53:31 CEST 2006 ma@suse.de
+
+- Prefer to use available DeltaRpm or PatchRpm instead of downloading
+  full packages. (#168844)
+- rev 3892
+- version 2.0.0
+    
+-------------------------------------------------------------------
 Fri Aug  4 15:20:13 CEST 2006 - dmacvicar@suse.de
 
 - Separate target init from adding resolvables, getting rid of the
