@@ -6,7 +6,7 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file zypp/target/rpm/RpmDb.h
+/** \file zypp/target/rpm/RpmDb.cc
  *
 */
 #include "librpm.h"
@@ -24,9 +24,8 @@
 #include <vector>
 #include <algorithm>
 
-#include <boost/regex.hpp>
-
 #include "zypp/base/Logger.h"
+#include "zypp/base/String.h"
 
 #include "zypp/Date.h"
 #include "zypp/Pathname.h"
@@ -61,29 +60,29 @@ namespace zypp {
         {
           connect();
         }
-        
+
         ~KeyRingSignalReceiver()
         {
           disconnect();
         }
-        
+
         virtual void trustedKeyAdded( const KeyRing &keyring, const std::string &keyid, const std::string &keyname, const std::string &fingerprint )
         {
           MIL << "trusted key added to zypp Keyring. Syncronizing keys with rpm keyring" << std::endl;
           _rpmdb.importZyppKeyRingTrustedKeys();
           _rpmdb.exportTrustedKeysInZyppKeyRing();
         }
-        
+
         virtual void trustedKeyRemoved( const KeyRing &keyring, const std::string &keyid, const std::string &keyname, const std::string &fingerprint )
         {
-        
+
         }
-        
+
         RpmDb &_rpmdb;
       };
-                  
+
       static shared_ptr<KeyRingSignalReceiver> sKeyRingReceiver;
-      
+
 unsigned diffFiles(const std::string file1, const std::string file2, std::string& out, int maxlines)
 {
     const char* argv[] =
@@ -108,7 +107,7 @@ unsigned diffFiles(const std::string file1, const std::string file2, std::string
 	if(maxlines<0?true:count<maxlines)
 	    out+=line;
     }
-    
+
     return prog.close();
 }
 
@@ -477,13 +476,13 @@ void RpmDb::initDatabase( Pathname root_r, Pathname dbPath_r )
   MIL << "Syncronizing keys with zypp keyring" << std::endl;
   importZyppKeyRingTrustedKeys();
   exportTrustedKeysInZyppKeyRing();
-  
+
   // Close the database in case any write acces (create/convert)
   // happened during init. This should drop any lock acquired
   // by librpm. On demand it will be reopened readonly and should
   // not hold any lock.
   librpmDb::dbRelease( true );
-  
+
   MIL << "InitDatabase: " << *this << endl;
 }
 
@@ -860,12 +859,12 @@ void RpmDb::doRebuildDatabase(callback::SendReport<RebuildDBReport> & report)
 void RpmDb::exportTrustedKeysInZyppKeyRing()
 {
   MIL << "Exporting rpm keyring into zypp trusted keyring" <<std::endl;
-  
+
   std::set<Edition> rpm_keys = pubkeyEditions();
-  
+
   std::list<PublicKey> zypp_keys;
   zypp_keys = getZYpp()->keyRing()->trustedPublicKeys();
-  
+
   for ( std::set<Edition>::const_iterator it = rpm_keys.begin(); it != rpm_keys.end(); ++it)
   {
     // search the zypp key into the rpm keys
@@ -898,7 +897,7 @@ void RpmDb::exportTrustedKeysInZyppKeyRing()
         ERR << "Could not dump key " << (*it) << " in tmp file " << file.path() << std::endl;
         // just ignore the key
       }
-      
+
       // now import the key in zypp
       try
       {
@@ -910,21 +909,21 @@ void RpmDb::exportTrustedKeysInZyppKeyRing()
         ERR << "Could not import key " << (*it) << " in zypp keyring" << std::endl;
       }
     }
-  }  
+  }
 }
 
 void RpmDb::importZyppKeyRingTrustedKeys()
 {
   MIL << "Importing zypp trusted keyring" << std::endl;
-  
+
   std::list<PublicKey> rpm_keys = pubkeys();
-  
+
   std::list<PublicKey> zypp_keys;
-  
+
   zypp_keys = getZYpp()->keyRing()->trustedPublicKeys();
-  
+
   for ( std::list<PublicKey>::const_iterator it = zypp_keys.begin(); it != zypp_keys.end(); ++it)
-  { 
+  {
     // we find only the left part of the long gpg key, as rpm does not support long ids
     std::list<PublicKey>::iterator ik = find( rpm_keys.begin(), rpm_keys.end(), (*it));
     if ( ik != rpm_keys.end() )
@@ -950,7 +949,7 @@ void RpmDb::importZyppKeyRingTrustedKeys()
         ERR << "Could not dump key " << (*it).id << " (" << (*it).name << ") in tmp file " << file.path() << std::endl;
         // just ignore the key
       }
-      
+
       // now import the key in rpm
       try
       {
@@ -1106,10 +1105,6 @@ const std::list<Package::Ptr> & RpmDb::getPackages()
 // make Package::Ptr from RpmHeader
 // return NULL on error
 //
-
-static regex_t filenameRegexT;
-static bool filenameRegexOk = false;
-
 Package::Ptr RpmDb::makePackageFromHeader( const RpmHeader::constPtr header, std::set<std::string> * filerequires, const Pathname & location, Source_Ref source )
 {
     Package::Ptr pptr;
@@ -1157,23 +1152,17 @@ Package::Ptr RpmDb::makePackageFromHeader( const RpmHeader::constPtr header, std
     list<string> filenames = impl->filenames();
     dataCollect[Dep::PROVIDES] = header->tag_provides ( filerequires );
     CapFactory capfactory;
+
+    static str::smatch what;
+    static const str::regex filenameRegex( "/(s?bin|lib(64)?|etc)/|^/usr/(games/|share/(dict/words|magic\\.mime)$)|^/opt/gnome/games/",
+                                           str::regex::optimize|str::regex::nosubs );
+
     for (list<string>::const_iterator filename = filenames.begin();
 	 filename != filenames.end();
-	 filename++)
+	 ++filename)
     {
-      if (!filenameRegexOk)
-      {
-        const char * filenameRegexPattern = "/(s?bin|lib(64)?|etc)/|^/usr/(games/|share/(dict/words|magic\\.mime)$)|^/opt/gnome/games/";
-        int r;
-        r = regcomp (&filenameRegexT, filenameRegexPattern, REG_EXTENDED | REG_NOSUB);
-        //MIL << "regcomp " << r;
-        filenameRegexOk = true;
-      }
-      bool match;
-      match = !regexec (&filenameRegexT, (*filename).c_str(), 0 /*nmatch*/, NULL /*pmatch*/, 0 /*flags*/);
-      
-      if (match)
-      {
+      if ( str::regex_search( filename->begin(), filename->end(), what, filenameRegex ) )
+       {
 	try {
 	  dataCollect[Dep::PROVIDES].insert( capfactory.parse(ResTraits<Package>::kind, *filename) );
 	}
