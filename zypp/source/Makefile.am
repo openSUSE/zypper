@@ -19,7 +19,7 @@ sourceinclude_HEADERS =	\
 	PackageProvider.h	\
 	PackageDelta.h	\
 	MediaSet.h \
-	SourceInfo.h
+	SourceInfo.h \
 	Applydeltarpm.h	\
 	MediaSet.h
 
