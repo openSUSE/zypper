@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Mon Aug  7 17:57:26 CEST 2006 - dmacvicar@suse.de
+
+- rename the new initTarget to initializeTarget,
+  leave the old one as is, but deprecate it. 
+- r3903
+
+-------------------------------------------------------------------
 Mon Aug  7 15:10:08 CEST 2006 - dmacvicar@suse.de
 
 - forward port from SLES10 branch , till 3888
