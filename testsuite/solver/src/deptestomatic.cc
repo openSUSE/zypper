@@ -283,7 +283,6 @@ print_sep (void)
     cout << endl << "------------------------------------------------" << endl << endl;
 }
 
-
 static void
 print_important (const string & str)
 {
@@ -291,12 +290,11 @@ print_important (const string & str)
 }
 
 static void
-print_stringList (StringList &stringList )
+print_items (StringList & items)
 {
-    stringList.sort ();       
-
-    for (StringList::const_iterator iter = stringList.begin(); iter != stringList.end(); iter++) {
-        RESULT << iter->c_str() << endl;
+    items.sort();
+    for (StringList::const_iterator iter = items.begin(); iter != items.end(); iter++) {
+        RESULT << (*iter).c_str() << endl;
     }
 }
 
@@ -1134,6 +1132,7 @@ print_marked_cb (PoolItem_Ref poolItem, const ResStatus & status, void *data)
         s << " " << status;
         slist->push_back (s.str());
     }
+
     return;
 }
 
@@ -1323,9 +1322,10 @@ parse_xml_trial (XmlNode_Ptr node, const ResPool & pool)
 	    }
 	    else {
 		RESULT << "Established context" << endl;
-                StringList stringList;
-		resolver->context()->foreachMarked (print_marked_cb, &stringList); // output moved to stringList
-                print_stringList (stringList);
+                StringList items;
+                
+		resolver->context()->foreachMarked (print_marked_cb, &items);
+                print_items (items);
 //		print_pool( MARKER, false );
 		if (!freshen.empty()) {
 		    RESULT << "Freshening ..." << endl;
@@ -1342,7 +1342,10 @@ parse_xml_trial (XmlNode_Ptr node, const ResPool & pool)
 	    }
 	    else {
 		RESULT << "Freshened context" << endl;
-		resolver->context()->foreachMarked (print_marked_cb, NULL);
+                StringList items;                    
+                
+		resolver->context()->foreachMarked (print_marked_cb, &items);
+                print_items (items);
 	    }
 
 	} else if (node->equals ("instorder")) {

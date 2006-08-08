@@ -1,3 +1,5 @@
 conflict-bug153328-test.xml
 conflict-postfix-sendmail-test.xml
 unfulfilled-3-test.xml
+# works correctly but can not compare solution (order)
+parallel-test.xml

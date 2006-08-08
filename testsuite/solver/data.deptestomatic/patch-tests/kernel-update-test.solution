@@ -1,0 +1,55 @@
+>!> Establishing state ...
+>!> Established context
+>!> atom:apparmor-docs-2.0-17.4.noarch[new_source] UI_s_
+>!> atom:apparmor-parser-2.0-21.4.i586[new_source] UI_s_
+>!> atom:apparmor-profiles-2.0-34.8.noarch[new_source] UI_s_
+>!> atom:apparmor-utils-2.0-23.4.noarch[new_source] UI_s_
+>!> atom:cloop-kmp-default-2.01_2.6.16.21_0.6-22.2.i586[new_source] UI_s_
+>!> atom:cloop-kmp-xen-2.01_2.6.16.21_0.6-22.2.i586[new_source] UI_s_
+>!> atom:kernel-default-2.6.16.21-0.6.i586[new_source] UI_s_
+>!> atom:kernel-xen-2.6.16.21-0.6.i586[new_source] UI_s_
+>!> atom:kernel-xenpae-2.6.16.21-0.6.i586[new_source] UI_s_
+>!> atom:mkinitrd-1.2-106.14.i586[new_source] UI_s_
+>!> atom:novfs-kmp-default-1.2.0_2.6.16.21_0.6-9.2.i586[new_source] UI_s_
+>!> atom:omnibook-kmp-default-20060126_2.6.16.21_0.6-3.1.i586[new_source] UI_s_
+>!> atom:omnibook-kmp-xen-20060126_2.6.16.21_0.6-3.1.i586[new_source] UI_s_
+>!> atom:wlan-kmp-default-1_2.6.16.21_0.6-12.6.i586[new_source] UI_s_
+>!> atom:wlan-kmp-xen-1_2.6.16.21_0.6-12.6.i586[new_source] UI_s_
+>!> atom:yast2-apparmor-2.0-27.4.noarch[new_source] UI_s_
+>!> patch:kernel-1703-0.noarch[new_source] UI_s_
+>!> Installing kernel from channel new_source
+>!> Solution #1:
+>!> install atom:apparmor-docs-2.0-17.4.noarch[new_source]
+>!> install atom:apparmor-parser-2.0-21.4.i586[new_source]
+>!> install atom:apparmor-profiles-2.0-34.8.noarch[new_source]
+>!> install atom:apparmor-utils-2.0-23.4.noarch[new_source]
+>!> install atom:cloop-kmp-default-2.01_2.6.16.21_0.6-22.2.i586[new_source]
+>!> install atom:cloop-kmp-xen-2.01_2.6.16.21_0.6-22.2.i586[new_source]
+>!> install atom:kernel-default-2.6.16.21-0.6.i586[new_source]
+>!> install atom:kernel-xen-2.6.16.21-0.6.i586[new_source]
+>!> install atom:kernel-xenpae-2.6.16.21-0.6.i586[new_source]
+>!> install atom:mkinitrd-1.2-106.14.i586[new_source]
+>!> install atom:novfs-kmp-default-1.2.0_2.6.16.21_0.6-9.2.i586[new_source]
+>!> install atom:omnibook-kmp-default-20060126_2.6.16.21_0.6-3.1.i586[new_source]
+>!> install atom:omnibook-kmp-xen-20060126_2.6.16.21_0.6-3.1.i586[new_source]
+>!> install atom:wlan-kmp-default-1_2.6.16.21_0.6-12.6.i586[new_source]
+>!> install atom:wlan-kmp-xen-1_2.6.16.21_0.6-12.6.i586[new_source]
+>!> install atom:yast2-apparmor-2.0-27.4.noarch[new_source]
+>!> install patch:kernel-1703-0.noarch[new_source]
+>!> upgrade apparmor-docs-2.0-13.noarch => apparmor-docs-2.0-14.7.noarch[new_source]
+>!> upgrade apparmor-parser-2.0-19.i586 => apparmor-parser-2.0-21.4.i586[new_source]
+>!> upgrade apparmor-profiles-2.0-31.noarch => apparmor-profiles-2.0-34.8.noarch[new_source]
+>!> upgrade apparmor-utils-2.0-21.noarch => apparmor-utils-2.0-23.4.noarch[new_source]
+>!> upgrade cloop-kmp-default-2.01_2.6.16.13_4-22.i586 => cloop-kmp-default-2.01_2.6.16.21_0.6-22.2.i586[new_source]
+>!> upgrade cloop-kmp-xen-2.01_2.6.16.13_4-22.i586 => cloop-kmp-xen-2.01_2.6.16.21_0.6-22.2.i586[new_source]
+>!> upgrade kernel-default-2.6.16.13-4.i586 => kernel-default-2.6.16.21-0.6.i586[new_source]
+>!> upgrade kernel-xen-2.6.16.13-4.i586 => kernel-xen-2.6.16.21-0.6.i586[new_source]
+>!> upgrade kernel-xenpae-2.6.16.13-4.i586 => kernel-xenpae-2.6.16.21-0.6.i586[new_source]
+>!> upgrade mkinitrd-1.2-103.i586 => mkinitrd-1.2-106.14.i586[new_source]
+>!> upgrade novfs-kmp-default-1.2.0_2.6.16.13_4-10.i586 => novfs-kmp-default-1.2.0_2.6.16.21_0.6-9.2.i586[new_source]
+>!> upgrade omnibook-kmp-default-20060126_2.6.16.13_4-4.i586 => omnibook-kmp-default-20060126_2.6.16.21_0.6-3.1.i586[new_source]
+>!> upgrade omnibook-kmp-xen-20060126_2.6.16.13_4-4.i586 => omnibook-kmp-xen-20060126_2.6.16.21_0.6-3.1.i586[new_source]
+>!> upgrade wlan-kmp-default-1_2.6.16.13_4-13.i586 => wlan-kmp-default-1_2.6.16.21_0.6-12.6.i586[new_source]
+>!> upgrade wlan-kmp-xen-1_2.6.16.13_4-13.i586 => wlan-kmp-xen-1_2.6.16.21_0.6-12.6.i586[new_source]
+>!> upgrade yast2-apparmor-2.0-27.noarch => yast2-apparmor-2.0-27.4.noarch[new_source]
+>!> installs=17, upgrades=16, uninstalls=0
