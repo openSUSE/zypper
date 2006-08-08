@@ -14,6 +14,7 @@
 
 #include "zypp/ResPoolManager.h"
 #include "zypp/SourceFeed.h"
+#include "zypp/ResStore.h"
 
 using std::endl;
 

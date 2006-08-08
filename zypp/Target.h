@@ -39,7 +39,7 @@ namespace zypp
   }
 
   DEFINE_PTR_TYPE(Target);
-
+  
   ///////////////////////////////////////////////////////////////////
   //
   //	CLASS NAME : Target
@@ -57,14 +57,14 @@ namespace zypp
 
     /** All resolvables provided by the target. */
     const ResStore & resolvables();
-
+    
     /**
      * load resolvables of certain kind in the internal store
-     * and return a store with only that kind
+     * and return a iterator
      * successive calls will be faster as resolvables are cached-
      */
-    ResStore resolvablesByKind( const Resolvable::Kind kind );
-    
+    ResStore::resfilter_const_iterator byKindBegin( const ResObject::Kind & kind_r  ) const;
+    ResStore::resfilter_const_iterator byKindEnd( const ResObject::Kind & kind_r ) const;
 
     /** Null implementation */
     static Target_Ptr nullimpl();

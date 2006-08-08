@@ -17,6 +17,8 @@
 #include <list>
 #include <set>
 
+#include <boost/iterator/filter_iterator.hpp>
+
 #include "zypp/base/Logger.h"
 #include "zypp/base/Exception.h"
 #include "zypp/base/Gettext.h"
@@ -31,6 +33,7 @@
 #include "zypp/Source.h"
 #include "zypp/Url.h"
 
+#include "zypp/ResFilters.h"
 #include "zypp/target/TargetImpl.h"
 #include "zypp/target/TargetCallbackReceiver.h"
 
@@ -39,6 +42,8 @@
 #include "zypp/source/PackageProvider.h"
 
 using namespace std;
+using namespace zypp;
+using namespace zypp::resfilter;
 using zypp::solver::detail::Helper;
 //using zypp::solver::detail::InstallOrder;
 
@@ -157,21 +162,20 @@ namespace zypp
       } // end switch
     }
 
-    ResStore TargetImpl::resolvablesByKind( const Resolvable::Kind kind )
+    ResStore::resfilter_const_iterator TargetImpl::byKindBegin( const ResObject::Kind & kind_r ) const
     {
-      ResStore tmp_store;
-      
-      // load all resolvables of Kind kind in internal store
-      loadKindResolvables(kind);
-
-      for (ResStore::const_iterator it = _store.begin(); it != _store.end(); ++it)
-      {
-        // insert them in the tmp store we will return
-        if ((*it)->kind() == kind) {
-          tmp_store.insert(*it);
-        }
-      }
-      return tmp_store;
+      TargetImpl *ptr = const_cast<TargetImpl *>(this);
+      ptr->loadKindResolvables(kind_r);
+      resfilter::ResFilter filter = ByKind(kind_r); 
+      return boost::make_filter_iterator( filter, _store.begin(), _store.end() );
+    }
+    
+    ResStore::resfilter_const_iterator TargetImpl::byKindEnd( const ResObject::Kind & kind_r  ) const
+    {
+      TargetImpl *ptr = const_cast<TargetImpl *>(this);
+      ptr->loadKindResolvables(kind_r);
+      resfilter::ResFilter filter = ByKind(kind_r); 
+      return boost::make_filter_iterator( filter, _store.end(), _store.end() );
     }
 
     const ResStore & TargetImpl::resolvables()

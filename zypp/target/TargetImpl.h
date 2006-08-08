@@ -84,10 +84,13 @@ namespace zypp
       const ResStore & resolvables();
 
       /**
-        * resolvables of certain kind
-        */
-      ResStore resolvablesByKind( const Resolvable::Kind kind );
-
+       * load resolvables of certain kind in the internal store
+       * and return a iterator
+       * successive calls will be faster as resolvables are cached-
+       */
+      ResStore::resfilter_const_iterator byKindBegin( const ResObject::Kind & kind_r  ) const;
+      ResStore::resfilter_const_iterator byKindEnd( const ResObject::Kind & kind_r ) const;
+      
       /** The root set for this target */
       Pathname root() const;
 

@@ -12,12 +12,13 @@
 #ifndef ZYPP_RESFILTERS_H
 #define ZYPP_RESFILTERS_H
 
+#include <boost/function.hpp>
+
 #include "zypp/base/Functional.h"
 #include "zypp/Resolvable.h"
 #include "zypp/CapFilters.h"
 
 #include "zypp/Source.h"
-#include "zypp/source/SourceImpl.h"
 
 #include "zypp/PoolItem.h"
 #include "zypp/CapAndItem.h"
@@ -148,7 +149,8 @@ namespace zypp
 
     /** */
     typedef std::unary_function<ResObject::constPtr, bool> ResObjectFilterFunctor;
-
+    typedef boost::function<bool ( ResObject::constPtr )> ResFilter;
+    
     /** Select ResObject by kind. */
     struct ByKind : public ResObjectFilterFunctor
     {

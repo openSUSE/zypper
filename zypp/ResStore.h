@@ -17,6 +17,7 @@
 
 #include "zypp/base/PtrTypes.h"
 #include "zypp/ResObject.h"
+#include "zypp/ResFilters.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -47,6 +48,7 @@ namespace zypp
     typedef StorageT::size_type      size_type;
     typedef StorageT::iterator       iterator;
     typedef StorageT::const_iterator const_iterator;
+    typedef boost::filter_iterator<resfilter::ResFilter, const_iterator>  resfilter_const_iterator;
 
   public:
     /** Default ctor */
