@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue Aug  8 16:51:45 CEST 2006 - dmacvicar@suse.de
+
+- Move the target query by kind function to
+  a iterator, so we dont make a copy of the restore
+  the iterator works loading by demand too 
+
+-------------------------------------------------------------------
 Mon Aug  7 17:57:26 CEST 2006 - dmacvicar@suse.de
 
 - rename the new initTarget to initializeTarget,
