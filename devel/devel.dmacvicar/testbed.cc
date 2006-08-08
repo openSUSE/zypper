@@ -23,6 +23,8 @@
 
 #include "zypp/CapFactory.h"
 #include "zypp/KeyRing.h"
+#include "zypp/Product.h"
+#include "zypp/Selection.h"
 #include "zypp/PublicKey.h"
 
 #include "zypp/ZYppFactory.h"
@@ -37,6 +39,8 @@ using namespace zypp;
 using namespace zypp::source;
 //using namespace DbXml;
 
+#define TestKind Selection
+
 int main()
 {
   //MediaSetAccess ma( Url("cd:///"), Pathname("/"));
@@ -49,7 +53,13 @@ int main()
     //zypp::source::yum::YUMSourceCacher cacher(Pathname("/"));
     //cacher.cache( Url("dir:/space/tmp/factory-yum"), Pathname("/"));
     ZYpp::Ptr z = getZYpp();
-    z->initTarget("/", false);
+    z->initializeTarget("/");
+    
+    for (ResStore::resfilter_const_iterator it = z->target()->byKindBegin(ResTraits<TestKind>::kind); it != z->target()->byKindEnd(ResTraits<TestKind>::kind); ++it)
+    {
+      zypp::TestKind::constPtr res = asKind<const zypp::TestKind>( *it );
+      MIL << res->name() << " " << res->edition() << std::endl;
+    }
     
   }
   catch ( const Exception &e )
