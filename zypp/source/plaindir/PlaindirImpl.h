@@ -14,6 +14,9 @@
 
 #include <iosfwd>
 
+#include <zypp/target/rpm/RpmHeader.h>
+#include <zypp/target/rpm/RpmDb.h>
+
 #include "zypp/source/SourceImpl.h"
 
 ///////////////////////////////////////////////////////////////////
@@ -58,6 +61,7 @@ namespace zypp
          * \throw EXCEPTION on fail
         */
         virtual void factoryInit();
+        int extract_packages_from_directory (ResStore & store, const Pathname & path, Source_Ref source, bool recursive);
 
       };
       ///////////////////////////////////////////////////////////////////

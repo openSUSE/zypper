@@ -191,26 +191,28 @@ namespace zypp
       MIL << "Not SUSE tags source, trying next type" << endl;
     }
 
-#warning Plaindir disabled in autoprobing
-#if 0
     try
+    {
+      if ( ! ( ( url_r.getScheme() == "file") || ( url_r.getScheme() == "dir ") ) )
       {
         MIL << "Trying the Plaindir source" << endl;
         Source_Ref::Impl_Ptr impl( base_source
-                                   ? Impl::createBaseSourceImpl<PlaindirImpl>(id, path_r, alias_r, cache_dir_r)
-                                   : Impl::createSourceImpl<PlaindirImpl>(id, path_r, alias_r, cache_dir_r) );
-        MIL << "Found the Plaindir source" << endl;
-
+            ? Impl::createBaseSourceImpl<plaindir::PlaindirImpl>(id, path_r, alias_r, cache_dir_r, auto_refresh)
+          : Impl::createSourceImpl<plaindir::PlaindirImpl>(id, path_r, alias_r, cache_dir_r, auto_refresh) );
+        MIL << "Using the Plaindir source" << endl;
         report->endProbe (url_r);
-
         return Source_Ref(impl);
       }
+      else
+      {
+        ZYPP_THROW(Exception("Url scheme " + url_r.getScheme() + " not compatible with plaindir sources. Only local paths supported"));
+      }
+    }
     catch (const Exception & excpt_r)
       {
             ZYPP_CAUGHT(excpt_r);
             MIL << "Not Plaindir source, trying next type" << endl;
       }
-#endif
 
     report->endProbe (url_r);
 
