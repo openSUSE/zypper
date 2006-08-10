@@ -1244,7 +1244,7 @@ parse_xml_trial (XmlNode_Ptr node, const ResPool & pool)
 
 	    poolItem = get_poolItem (source_alias, name, kind_name);
 	    if (poolItem) {
-		RESULT << "Installing " << name << " from channel " << source_alias << endl;;
+		RESULT << "Installing " << ((poolItem->kind() != ResTraits<zypp::Package>::kind) ? (poolItem->kind().asString() + ":") : "") << name << " from channel " << source_alias << endl;;
 		poolItem.status().setToBeInstalled(ResStatus::USER);
 		if (!soft.empty())
 		    poolItem.status().setSoftInstall(true);
