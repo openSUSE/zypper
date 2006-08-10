@@ -108,7 +108,8 @@ parse_dep_attrs(bool *is_obsolete, bool *is_pre, const xmlChar **attrs)
 	const string value ((const char *)attrs[i]);
 
 	if (attr == "name")		dname = value;
-	else if (attr == "kind")	dkind = string2kind (value);
+	else if ((attr == "kind")
+		|| (attr == "refers"))	dkind = string2kind (value);
 	else if (attr == "op") {	op_present = true; relation = Rel(value); }
 	else if (attr == "epoch")	depoch = str::strtonum<int>( value );
 	else if (attr == "version")	dversion = value;
