@@ -217,7 +217,7 @@ assemble_uninstall_cb (PoolItem_Ref poolItem, const ResStatus & status, void *da
 {
     StringList *slist = (StringList *)data;
     ostringstream s;
-MIL << "assemble_uninstall_cb(" << poolItem << "):" << status << endl;
+//MIL << "assemble_uninstall_cb(" << poolItem << "):" << status << endl;
     s << str::form ("%-7s ", poolItem.status().isImpossible () ? "|unflag" : "remove");
     printRes (s, poolItem.resolvable());
 
@@ -230,7 +230,7 @@ assemble_impossible_cb (PoolItem_Ref poolItem, const ResStatus & status, void *d
 {
     StringList *slist = (StringList *)data;
     ostringstream s;
-MIL << "assemble_impossible_cb(" << poolItem << "):" << status << endl;
+//MIL << "assemble_impossible_cb(" << poolItem << "):" << status << endl;
     s << str::form ("%-7s ", "|unflag");
     printRes (s, poolItem.resolvable());
 
