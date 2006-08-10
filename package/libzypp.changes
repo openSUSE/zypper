@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Aug 10 16:32:36 CEST 2006 - dmacvicar@suse.de
+
+- Initial support for plain directory with rpms as source
+- r3935 
+
+-------------------------------------------------------------------
 Tue Aug  8 16:51:45 CEST 2006 - dmacvicar@suse.de
 
 - Move the target query by kind function to
