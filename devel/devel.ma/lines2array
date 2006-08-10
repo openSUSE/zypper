@@ -1,0 +1,30 @@
+#! /bin/bash
+
+OFILE=${1:-array}
+
+cat $1 | awk -vOFILE=$OFILE '
+BEGIN {
+	sep = " "
+	printf "#ifndef ARRAY_%s_h\n", OFILE
+	printf "#define ARRAY_%s_h\n", OFILE
+	printf "\n"
+	printf "#include <list>\n"
+	printf "#include <string>\n"
+	printf "\n"
+	printf "std::list<std::string> %s()\n", OFILE
+	printf "{\n"
+	printf "  const char *const val[] = {\n"
+}
+{
+	printf "    %s\"%s\"\n", sep, $0
+	sep = ","
+}
+END {
+	printf "  };\n"
+	printf "  const char *const* e = val + sizeof( val ) / sizeof( const char *const );\n"
+	printf "  return std::list<std::string>( val, e );\n"
+	printf "}\n"
+	printf "\n"
+	printf "#endif // ARRAY_%s_h\n", OFILE
+}
+' > $OFILE.h
