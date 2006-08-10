@@ -1,8 +1,6 @@
 #
-# Makefile.am for zypp/solver/testsuite/src
+# Makefile.am for zypp/testsuite/solver/src
 #
-
-SUBDIRS = 
 
 INCLUDES = -I/usr/include/libxml2	\
 	-Ihelix				\
