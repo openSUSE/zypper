@@ -50,7 +50,7 @@ int main()
   try
   {
     ZYpp::Ptr z = getZYpp();
-    z->initializeTarget("/");
+    //z->initializeTarget("/");
     
     //SourceManager_Ptr manager = SourceManager::sourceManager();
     

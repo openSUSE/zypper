@@ -43,13 +43,17 @@ void PlaindirImpl::factoryInit()
     ZYPP_THROW( Exception( "Plaindir only supports local paths, scheme [" + url().getScheme() + "] is not local" ) );
   }
   
+  MIL << "Plaindir source initialized." << std::endl;
+  MIL << "   Url      : " << url() << std::endl;
+  MIL << "   Path     : " << path() << std::endl;
+}
+
+void PlaindirImpl::createResolvables(Source_Ref source_r)
+{
   Pathname thePath = Pathname(url().getPathName()) + path();
   MIL << "Going to read dir " << thePath << std::endl;
   
   extract_packages_from_directory( _store, thePath, selfSourceRef(), true );
-  MIL << "Plaindir source initialized." << std::endl;
-  MIL << "   Url      : " << url() << std::endl;
-  MIL << "   Path     : " << path() << std::endl;
 }
 
 int PlaindirImpl::extract_packages_from_directory (ResStore & store, const Pathname & path, Source_Ref source, bool recursive)
@@ -92,6 +96,7 @@ int PlaindirImpl::extract_packages_from_directory (ResStore & store, const Pathn
 
     for (std::list<std::string>::const_iterator it = dircontent.begin(); it != dircontent.end(); ++it) {
       Pathname file_path = path + *it;
+      //Pathname file_path = *it;
       PathInfo file_info( file_path );
       if (recursive && file_info.isDir()) {
 
@@ -105,8 +110,8 @@ int PlaindirImpl::extract_packages_from_directory (ResStore & store, const Pathn
         if (string(*it, ++dotpos) != "rpm")
           continue;
         target::rpm::RpmHeader::constPtr header = target::rpm::RpmHeader::readPackage( file_path );
-        Package::Ptr package = target::rpm::RpmDb::makePackageFromHeader( header, NULL, file_path, source );
-
+        //Package::Ptr package = target::rpm::RpmDb::makePackageFromHeader( header, NULL, file_path, source );
+        Package::Ptr package = target::rpm::RpmDb::makePackageFromHeader( header, NULL, *it, source );
         if (package != NULL) {
           DBG << "Adding package " << *package << endl;
           store.insert( package );

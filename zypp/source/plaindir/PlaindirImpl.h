@@ -55,6 +55,9 @@ namespace zypp
         virtual std::string type() const
         { return typeString(); }
 
+        virtual void createResolvables(Source_Ref source_r);
+        
+        
       private:
         /** Ctor substitute.
          * Actually get the metadata.
