@@ -247,7 +247,7 @@ namespace zypp
         }
         if( conn)
         {
-          dbus_connection_disconnect(conn);
+          dbus_connection_close(conn);
           dbus_connection_unref(conn);
         }
       }
