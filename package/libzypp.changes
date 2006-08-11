@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Fri Aug 11 11:48:44 CEST 2006 - dmacvicar@suse.de
+
+- Introduce examples/
+- fix some svn ignores
+- fix compilation. Use: dbus_connection_close
+- rev 3943
+
+-------------------------------------------------------------------
 Thu Aug 10 16:32:36 CEST 2006 - dmacvicar@suse.de
 
 - Initial support for plain directory with rpms as source
