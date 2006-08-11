@@ -170,6 +170,7 @@ namespace zypp
           report()->problemDeltaDownload( excpt.asUserString() );
           return ManagedFile();
         }
+      report()->finishDeltaDownload();
 
       report()->startDeltaApply( delta );
       if ( ! applydeltarpm::check( delta_r.baseversion().sequenceinfo() ) )
@@ -177,7 +178,6 @@ namespace zypp
           report()->problemDeltaApply( "applydeltarpm check failed." );
           return ManagedFile();
         }
-
 
       Pathname destination( Pathname::dirname( delta ) / defRpmFileName( _package ) );
       /* just to ease testing with non remote sources */
@@ -191,6 +191,7 @@ namespace zypp
           report()->problemDeltaApply( "applydeltarpm failed." );
           return ManagedFile();
         }
+      report()->finishDeltaApply();
 
       return ManagedFile( destination, filesystem::unlink );
     }
@@ -219,6 +220,7 @@ namespace zypp
           report()->problemPatchDownload( excpt.asUserString() );
           return ManagedFile();
         }
+      report()->finishPatchDownload();
 
       return patch;
     }

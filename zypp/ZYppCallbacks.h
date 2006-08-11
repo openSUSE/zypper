@@ -60,6 +60,9 @@ namespace zypp
       virtual void problemDeltaDownload( std::string description )
       {}
 
+      virtual void finishDeltaDownload()
+      {}
+
       // Apply delta rpm:
       // - local path of downloaded delta
       // - aplpy is not interruptable
@@ -73,6 +76,9 @@ namespace zypp
       virtual void problemDeltaApply( std::string description )
       {}
 
+      virtual void finishDeltaApply()
+      {}
+
       // Dowmload patch rpm:
       // - path below url reported on start()
       // - expected download size (0 if unknown)
@@ -84,6 +90,9 @@ namespace zypp
       { return true; }
 
       virtual void problemPatchDownload( std::string description )
+      {}
+
+      virtual void finishPatchDownload()
       {}
 
 
