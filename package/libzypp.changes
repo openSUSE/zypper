@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Fri Aug 11 17:01:33 CEST 2006 - dmacvicar@suse.de
+
+- forward port 3924:3939
+- Add explicit finish callbacks for subtasks during ProvidePackage
+  to avoid UI confusion. 
+- rev3957
+
+-------------------------------------------------------------------
 Fri Aug 11 11:48:44 CEST 2006 - dmacvicar@suse.de
 
 - Introduce examples/
