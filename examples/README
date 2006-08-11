@@ -1,0 +1,8 @@
+
+ZyPP Examples
+=============
+
+* read_plaindir_source.cc
+  Read a sirectory with rpm files (no metadata) and loop over the resolvables.
+  
+  
