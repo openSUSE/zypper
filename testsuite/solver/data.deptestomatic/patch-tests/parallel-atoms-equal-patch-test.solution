@@ -1,4 +1,4 @@
->!> Installing patch-A1 from channel new_source
+>!> Installing patch:patch-A1 from channel new_source
 >!> No problems so far
 >!> Solution #1:
 >!> upgrade A-1.0-1.i586 => A-2.0-1.i586[new_source]

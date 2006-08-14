@@ -2,10 +2,10 @@
 >!> Requesting locale ja
 >!> Requesting locale ja_JP
 >!> Requesting locale de_DE
->!> Installing default from channel selections
->!> Installing Basis-Sound from channel selections
->!> Installing Kde-Desktop from channel selections
->!> Installing SuSE-Documentation from channel selections
+>!> Installing selection:default from channel selections
+>!> Installing selection:Basis-Sound from channel selections
+>!> Installing selection:Kde-Desktop from channel selections
+>!> Installing selection:SuSE-Documentation from channel selections
 >!> No problems so far
 >!> Solution #1:
 >!> install 3ddiag-0.729-7.i586[packages]

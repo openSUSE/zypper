@@ -1,9 +1,9 @@
->!> Installing default from channel selections
->!> Installing apparmor from channel selections
->!> Installing base from channel selections
->!> Installing x11 from channel selections
->!> Installing gnome from channel selections
->!> Installing print_server from channel selections
+>!> Installing selection:default from channel selections
+>!> Installing selection:apparmor from channel selections
+>!> Installing selection:base from channel selections
+>!> Installing selection:x11 from channel selections
+>!> Installing selection:gnome from channel selections
+>!> Installing selection:print_server from channel selections
 >!> Installing sendmail from channel packages
 >!> Installing postfix from channel packages
 >!> Installing kernel-default from channel packages

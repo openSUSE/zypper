@@ -1,5 +1,5 @@
->!> Installing default from channel selections
->!> Installing Laptop from channel selections
+>!> Installing selection:default from channel selections
+>!> Installing selection:Laptop from channel selections
 >!> Installing ial from channel packages
 >!> Installing kernel-default from channel packages
 >!> Installing toshutils from channel packages

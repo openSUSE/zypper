@@ -1,15 +1,15 @@
 >!> Requesting locale de
 >!> Requesting locale de_DE
->!> Installing SUSE SLES from channel sles_packages
->!> Installing SUSE LINUX from channel sl10_packages
+>!> Installing product:SUSE SLES from channel sles_packages
+>!> Installing product:SUSE LINUX from channel sl10_packages
 >!> Installing grub from channel sl10_packages
 >!> Installing kernel-default from channel sl10_packages
 >!> Installing yast2-trans-de from channel sl10_packages
->!> Installing default from channel sl10_selections
->!> Installing X11 from channel sl10_selections
->!> Installing Kde-Desktop from channel sl10_selections
->!> Installing SuSE-Documentation from channel sl10_selections
->!> Installing Laptop from channel sl10_selections
+>!> Installing selection:default from channel sl10_selections
+>!> Installing selection:X11 from channel sl10_selections
+>!> Installing selection:Kde-Desktop from channel sl10_selections
+>!> Installing selection:SuSE-Documentation from channel sl10_selections
+>!> Installing selection:Laptop from channel sl10_selections
 >!> 2 problems found:
 >!> Problem:
 >!> Cannot install suse-release-10.0.42-18.i586[sl10_packages] because it is conflicting with sles-release

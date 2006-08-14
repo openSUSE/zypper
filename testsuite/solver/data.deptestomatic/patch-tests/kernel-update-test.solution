@@ -17,7 +17,7 @@
 >!> atom:wlan-kmp-xen-1_2.6.16.21_0.6-12.6.i586[new_source] UI_s_
 >!> atom:yast2-apparmor-2.0-27.4.noarch[new_source] UI_s_
 >!> patch:kernel-1703-0.noarch[new_source] UI_s_
->!> Installing kernel from channel new_source
+>!> Installing patch:kernel from channel new_source
 >!> Solution #1:
 >!> install atom:apparmor-docs-2.0-17.4.noarch[new_source]
 >!> install atom:apparmor-parser-2.0-21.4.i586[new_source]

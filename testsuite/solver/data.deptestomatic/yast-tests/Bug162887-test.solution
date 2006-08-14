@@ -1,15 +1,15 @@
 >!> Requesting locale de_DE
->!> Installing Multimedia from channel sl10_selections
->!> Installing Basis-Devel from channel sl10_selections
->!> Installing Java from channel sl10_selections
->!> Installing Hacker from channel sl10_selections
->!> Installing Kde-Devel from channel sl10_selections
->!> Installing Games from channel sl10_selections
->!> Installing Latex from channel sl10_selections
->!> Installing Kde from channel sl10_selections
->!> Installing Laptop from channel sl10_selections
->!> Installing default from channel sl10_selections
->!> Installing Fonts from channel sl10_selections
+>!> Installing selection:Multimedia from channel sl10_selections
+>!> Installing selection:Basis-Devel from channel sl10_selections
+>!> Installing selection:Java from channel sl10_selections
+>!> Installing selection:Hacker from channel sl10_selections
+>!> Installing selection:Kde-Devel from channel sl10_selections
+>!> Installing selection:Games from channel sl10_selections
+>!> Installing selection:Latex from channel sl10_selections
+>!> Installing selection:Kde from channel sl10_selections
+>!> Installing selection:Laptop from channel sl10_selections
+>!> Installing selection:default from channel sl10_selections
+>!> Installing selection:Fonts from channel sl10_selections
 >!> Installing OpenOffice_org from channel sl10_packages
 >!> Installing bluez-cups from channel sl10_packages
 >!> Installing bluez-firmware from channel sl10_packages

@@ -1,4 +1,4 @@
->!> Installing patch-B1 from channel new_source
+>!> Installing patch:patch-B1 from channel new_source
 >!> No problems so far
 >!> Solution #1:
 >!> install patch:patch-B1-1-0.noarch[new_source]

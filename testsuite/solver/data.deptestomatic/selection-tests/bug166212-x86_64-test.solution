@@ -1,4 +1,4 @@
->!> Installing x11 from channel selections
+>!> Installing selection:x11 from channel selections
 >!> Solution #1:
 >!> install 3ddiag-0.729-5.x86_64[packages]
 >!> install 855resolution-0.4-10.x86_64[packages]
