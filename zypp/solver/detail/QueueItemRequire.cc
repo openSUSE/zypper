@@ -418,8 +418,9 @@ QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_item
     IgnoreMap ignoreMap = context->getIgnoreRequires();
     for (IgnoreMap::iterator it = ignoreMap.begin();
 	 it != ignoreMap.end(); it++) {
-	if (it->first == _requiring_item
-	    && it->second == _capability) {
+	if ( (!(it->first) // ignore ALL requirements on this capability
+	      || it->first == _requiring_item)
+	     && it->second == _capability) {
 	    _XDEBUG("Found ignoring requires " << _capability << " for " << _requiring_item);
 	    return true;
 	} else {

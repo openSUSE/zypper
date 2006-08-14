@@ -657,22 +657,26 @@ Resolver::problems (void) const
 	// from QueueItemConflict
 	    case RESOLVER_INFO_TYPE_CONFLICT_CANT_INSTALL: {		// to-be-installed p conflicts with q due to c
 		ResolverInfoMisc_constPtr misc_info = dynamic_pointer_cast<const ResolverInfoMisc>(info);
-		// TranslatorExplanation %s = name of package, patch, selection ...				
-		what = str::form (_("Cannot install %s because it is conflicting with %s"),
-				  who.c_str(),
-				  misc_info->other()->name().c_str());				
+		// TranslatorExplanation %s = name of package, patch, selection ...
+		if (misc_info->other())
+		    what = str::form (_("Cannot install %s because it is conflicting with %s"),
+				      who.c_str(),
+				      misc_info->other()->name().c_str());
+		else
+		    what = str::form (_("Cannot install %s because it is conflicting"),
+				      who.c_str());
 		details = misc_info->message();
 		ResolverProblem_Ptr problem = new ResolverProblem (what, details);		
 		// Uninstall p
 		problem->addSolution (new ProblemSolutionUninstall (problem, item));
-		// Uninstall q
-		problem->addSolution (new ProblemSolutionUninstall (problem, misc_info->other()));
+		if (misc_info->other())
+		    // Uninstall q
+		    problem->addSolution (new ProblemSolutionUninstall (problem, misc_info->other()));
 		// Remove conflict in the resolvable which has to be installed
 		problem->addSolution (new ProblemSolutionIgnoreConflicts (problem, item, misc_info->other_capability(),
-									  misc_info->other())); 
+									  misc_info->other()));
 		problems.push_back (problem);
 		problem_created = true;
-		
 	    }
 	    break;
 	    case RESOLVER_INFO_TYPE_CONFLICT_UNINSTALLABLE: {		// uninstalled p is marked uninstallable it conflicts [with q] due to c

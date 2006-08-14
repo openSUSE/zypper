@@ -19,6 +19,7 @@
 #include "zypp/Capability.h"
 #include "zypp/CapAndItem.h"
 #include "zypp/Dep.h"
+#include "zypp/ResStatus.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -91,6 +92,10 @@ namespace zypp
       typedef shared_ptr<const PoolImpl> Impl_constPtr;
       typedef PoolImplInserter           Inserter;
       typedef PoolImplDeleter            Deleter;
+
+      /** Map of CapSet and "who" has set it*/
+      typedef std::map<ResStatus::TransactByValue,CapSet>		AdditionalCapSet;
+	
     };
     ///////////////////////////////////////////////////////////////////
 

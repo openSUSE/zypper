@@ -42,11 +42,11 @@ namespace zypp
 
       public:
 
-      typedef PoolTraits::ItemContainerT	ItemContainerT;
-      typedef PoolTraits::NameItemContainerT	ContainerT;
-      typedef PoolTraits::size_type		size_type;
-      typedef PoolTraits::iterator		iterator;
-      typedef PoolTraits::const_iterator	const_iterator;
+      typedef PoolTraits::ItemContainerT	 ItemContainerT;
+      typedef PoolTraits::NameItemContainerT	 ContainerT;
+      typedef PoolTraits::size_type		 size_type;
+      typedef PoolTraits::iterator		 iterator;
+      typedef PoolTraits::const_iterator	 const_iterator;
 
       private:
 	ItemContainerT & getItemContainer( const std::string & tag_r );
@@ -191,6 +191,7 @@ namespace zypp
     typedef PoolTraits::size_type		size_type;
     typedef PoolTraits::Inserter		Inserter;
     typedef PoolTraits::Deleter			Deleter;
+    typedef PoolTraits::AdditionalCapSet 	AdditionalCapSet;	
 
     public:
       /** Default ctor */
@@ -231,11 +232,57 @@ namespace zypp
       const_iterator end() const
       { return _store.end(); }
 
+      /**
+       *  Handling additional requirement. E.G. need package "foo" and package 
+       *  "foo1" which has a greater version than 1.0:
+       *
+       *  Capset capset;
+       *  capset.insert (CapFactory().parse( ResTraits<Package>::kind, "foo"));    
+       *  capset.insert (CapFactory().parse( ResTraits<Package>::kind, "foo1 > 1.0"));
+       *
+       *  setAdditionalRequire( capset );
+       */
+	void setAdditionalRequire( const AdditionalCapSet & capset ) const
+	    { _additionalRequire = capset; }
+	AdditionalCapSet & additionalRequire() const
+	    { return _additionalRequire; }
+
+       /**
+	*  Handling additional conflicts. E.G. do not install anything which provides "foo":
+	*
+	*  Capset capset;    
+	*  capset.insert (CapFactory().parse( ResTraits<Package>::kind, "foo"));
+	*
+	*  setAdditionalConflict( capset );    
+	*/      
+	void setAdditionalConflict( const AdditionalCapSet & capset ) const
+	    { _additionaConflict = capset; } 
+	AdditionalCapSet & additionaConflict() const
+	    { return _additionaConflict; }
+      
+	/**
+	 *  Handling additional provides. This is used for ignoring a requirement.
+	 *  e.G. Do ignore the requirement "foo":
+	 *
+	 *  Capset capset;    
+	 *  capset.insert (CapFactory().parse( ResTraits<Package>::kind, "foo"));
+	 *
+	 *  setAdditionalProvide( cap );    
+	 */      
+	void setAdditionalProvide( const AdditionalCapSet & capset ) const
+	    { _additionaProvide = capset; }
+	AdditionalCapSet & additionaProvide() const
+	    { return _additionaProvide; }
+
       /** */
       void clear()
       { _store.clear();
 	_caphash.clear();
 	_namehash.clear();
+        _additionalRequire.clear();
+	_additionaConflict.clear();
+	_additionaProvide.clear();
+
 	return;
       }
 
@@ -255,6 +302,9 @@ namespace zypp
       ContainerT _store;
       NameHash _namehash;
       CapHash _caphash;
+      mutable AdditionalCapSet _additionalRequire;
+      mutable AdditionalCapSet _additionaConflict;
+      mutable AdditionalCapSet _additionaProvide;
 
     public:
       ResPoolProxy proxy( ResPool self ) const

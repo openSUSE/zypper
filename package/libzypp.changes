@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Mon Aug 14 16:50:53 CEST 2006 - schubi@suse.de
+
+- Added new API calls:
+  setAdditionalProvide 
+  setAdditionalConflict
+  setAdditionalRequire 
+
+-------------------------------------------------------------------
 Mon Aug 14 11:26:20 CEST 2006 - dmacvicar@suse.de
 
 - don't link examples to testsuite library. 

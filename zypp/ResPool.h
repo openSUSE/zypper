@@ -45,6 +45,7 @@ namespace zypp
     typedef pool::PoolTraits::const_iterator	         const_iterator;
     typedef pool::PoolTraits::byName_iterator            byName_iterator;
     typedef pool::PoolTraits::byCapabilityIndex_iterator byCapabilityIndex_iterator;
+    typedef pool::PoolTraits::AdditionalCapSet		 AdditionalCapSet;
 
   public:
     /** Default ctor: empty pool */
@@ -107,6 +108,63 @@ namespace zypp
 
    byCapabilityIndex_iterator byCapabilityIndexEnd( const std::string & index_r, Dep depType_r ) const;
    //@}
+
+ public:
+   /** \name Handling addition capabilities in the pool in order for solving it in
+    *  a solver run. This is used for tasks like needing a package with the name "foo".
+    *  The solver has to evaluate a proper package by his own.
+    *
+    *  CAUTION: This has another semantic in the solver. The required resolvable has
+    *  been set for installation (in the pool) only AFTER a solver run.
+   */
+
+   /**
+    *  Handling additional requirement. E.G. need package "foo" and package 
+    *  "foo1" which has a greater version than 1.0:
+    *
+    *  CapSet capset;
+    *  capset.insert (CapFactory().parse( ResTraits<Package>::kind, "foo"));    
+    *  capset.insert (CapFactory().parse( ResTraits<Package>::kind, "foo1 > 1.0"));
+    *
+    *  // The user is setting this capablility
+    *  ResPool::AdditionalCapSet aCapSet;
+    *  aCapSet[ResStatus::USER] = capset;
+    *
+    *  setAdditionalRequire( aCapSet );
+    */
+   void setAdditionalRequire( const AdditionalCapSet & capset ) const;
+   AdditionalCapSet & additionalRequire() const;
+
+   /**
+    *  Handling additional conflicts. E.G. do not install anything which provides "foo":
+    *
+    *  CapSet capset;    
+    *  capset.insert (CapFactory().parse( ResTraits<Package>::kind, "foo"));
+    *
+    *  // The user is setting this capablility
+    *  ResPool::AdditionalCapSet aCapSet;
+    *  aCapSet[ResStatus::USER] = capset;
+    *
+    *  setAdditionalConflict( aCapSet );    
+    */      
+   void setAdditionalConflict( const AdditionalCapSet & capset ) const;
+   AdditionalCapSet & additionaConflict() const;
+      
+   /**
+    *  Handling additional provides. This is used for ignoring a requirement.
+    *  e.G. Do ignore the requirement "foo":
+    *
+    *  CapSet capset;    
+    *  capset.insert (CapFactory().parse( ResTraits<Package>::kind, "foo"));
+    *
+    *  // The user is setting this capablility
+    *  ResPool::AdditionalCapSet aCapSet;
+    *  aCapSet[ResStatus::USER] = capset;
+    *
+    *  setAdditionalProvide( aCapSet );    
+    */      
+   void setAdditionalProvide( const AdditionalCapSet & capset ) const;
+   AdditionalCapSet & additionaProvide() const;                  
 
   private:
     /** */
