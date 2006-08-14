@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Mon Aug 14 11:26:20 CEST 2006 - dmacvicar@suse.de
+
+- don't link examples to testsuite library. 
+
+-------------------------------------------------------------------
 Fri Aug 11 17:01:33 CEST 2006 - dmacvicar@suse.de
 
 - forward port 3924:3939
