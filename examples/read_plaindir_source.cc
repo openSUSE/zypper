@@ -10,7 +10,6 @@
 #include "zypp/Package.h"
 
 #include "zypp/SourceFactory.h"
-#include "testsuite/src/utils/TestUtils.h"
 
 using namespace std;
 using namespace zypp;
