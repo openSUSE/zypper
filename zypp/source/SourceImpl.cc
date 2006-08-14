@@ -279,37 +279,10 @@ namespace zypp
       }
       return file;
     }
-
-    const Pathname SourceImpl::downloadMetadataFile( const Pathname &file_to_download )
-    {
-      
-      Pathname downloaded_file;
-      
-      bool retry = true;
-      callback::SendReport<source::DownloadFileReport> report;
-      report->start( selfSourceRef(), url() ); 
-      while (retry)
-      {
-        try
-        {
-          downloaded_file = provideFile(file_to_download);
-          report->finish( url(), DownloadFileReport::NO_ERROR, file_to_download.asString() + " downloaded " + url().asString() );
-          retry = false;
-        }
-        catch (const Exception &e)
-        {
-          if ( report->problem(url(), DownloadFileReport::IO, "Can't provide " + file_to_download.asString() + " from " + url().asString()) != DownloadFileReport::RETRY )
-          {
-            report->finish( url(), DownloadFileReport::IO, "Can't provide " + file_to_download.asString() + " from " + url().asString() );
-            ZYPP_THROW(Exception("Can't provide " + file_to_download.asString() + " from " + url().asString() ));
-          }
-        }
-      }
-      return downloaded_file;
-    }
     
     void SourceImpl::getPossiblyCachedMetadataFile( const Pathname &file_to_download, const Pathname &destination, const Pathname &cached_file, const CheckSum &checksum )
     {
+        Pathname downloaded_file;
         Url file_url( url().asString() + file_to_download.asString() );
         // if we have a cached file and its the same
         if ( PathInfo(cached_file).isExist() && (! checksum.empty()) && is_checksum( cached_file, checksum ) )
@@ -323,7 +296,7 @@ namespace zypp
         else
         {
           // we dont have it or its not the same, download it.
-          Pathname downloaded_file = downloadMetadataFile( file_to_download);
+          downloaded_file = provideFile( file_to_download);
           
           if ( filesystem::copy(downloaded_file, destination) != 0 )
             ZYPP_THROW(Exception("Can't copy " + downloaded_file.asString() + " to " + destination.asString()));
@@ -375,22 +348,34 @@ namespace zypp
 					   bool cached,
 					   bool checkonly )
     {
+      bool retry = true;
+      Pathname downloaded_file;
       callback::SendReport<source::DownloadFileReport> report;
       DownloadProgressFileReceiver download_report( report );
-
-      SourceFactory source_factory;
-
       Url file_url( url().asString() + file_r.asString() );
 
-      report->start( source_factory.createFrom(this), file_url );
-
+      report->start( selfSourceRef(), file_url );
       callback::TempConnect<media::DownloadProgressReport> tmp_download( download_report );
-
-      Pathname file = provideJustFile( file_r, media_nr, cached, checkonly );
-
-      report->finish( file_url, source::DownloadFileReport::NO_ERROR, "" );
-
-      return file;
+      
+      while (retry)
+      {
+        try
+        {
+          downloaded_file = provideJustFile(file_r, media_nr, cached, checkonly);
+          report->finish( url(), DownloadFileReport::NO_ERROR, file_r.asString() + " downloaded " + url().asString() );
+          retry = false;
+        }
+        catch (const Exception &e)
+        {
+          if ( report->problem(url(), DownloadFileReport::IO, "Can't provide " + file_r.asString() + " from " + url().asString()) != DownloadFileReport::RETRY )
+          {
+            report->finish( url(), DownloadFileReport::IO, "Can't provide " + file_r.asString() + " from " + url().asString() );
+            ZYPP_THROW(Exception("Can't provide " + file_r.asString() + " from " + url().asString() ));
+          }
+        }
+      
+      }
+      return downloaded_file;
     }
 
     const Pathname SourceImpl::tryToProvideFile( const Pathname & file, const unsigned media_nr )

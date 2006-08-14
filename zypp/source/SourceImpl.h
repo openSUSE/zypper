@@ -269,13 +269,6 @@ namespace zypp
        */
       Pathname tmpMetadataDir() const;
 
-      /**
-         * wrapper around provideFile
-         * downloads a single file, providing download information callbacks
-         * \throw EXCEPTION on download failure and user abort
-         */
-        const Pathname downloadMetadataFile( const Pathname &file_to_download );
-
         /**
          * reset the media verifier to no verifier
          */
