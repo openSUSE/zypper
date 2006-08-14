@@ -104,6 +104,9 @@ static int sys_res_install = 0;
 typedef list<unsigned int> ChecksumList;
 typedef set<PoolItem_Ref> PoolItemSet;
 
+enum DepKind { PROVIDE, CONFLICT, REQUIRE };
+
+
 #define MARKER ">!> "
 #define RESULT cout << MARKER
 
@@ -195,6 +198,33 @@ string2kind (const std::string & str)
 // helper functions
 
 typedef list<string> StringList;
+
+void addDependencies( const string & kind, const string & name,
+                      const DepKind & depKind, const ResPool & pool )
+{
+    CapSet capset;    
+    vector<string> names;
+    str::split( name, back_inserter(names), "," );
+    for (int i=0; i < names.size(); i++) {
+        capset.insert (CapFactory().parse (string2kind (kind), names[i]));        
+    }
+    
+    ResPool::AdditionalCapSet aCapSet;
+    aCapSet[ResStatus::USER] = capset;
+    
+    switch (depKind) {
+        case PROVIDE:
+             pool.setAdditionalProvide( aCapSet );
+            break;
+        case CONFLICT:
+             pool.setAdditionalConflict( aCapSet );
+            break;
+        case REQUIRE:
+             pool.setAdditionalRequire( aCapSet );
+            break;
+    }
+}
+
 
 static void
 assemble_install_cb (PoolItem_Ref poolItem, const ResStatus & status, void *data)
@@ -1435,7 +1465,12 @@ parse_xml_trial (XmlNode_Ptr node, const ResPool & pool)
 		    }
 		}
 	    }
-
+	} else if (node->equals ("addProvide")) {
+	    addDependencies (node->getProp ("kind") , node->getProp ("name"), PROVIDE, pool);
+	} else if (node->equals ("addConflict")) {
+	    addDependencies (node->getProp ("kind") , node->getProp ("name"), CONFLICT, pool);
+	} else if (node->equals ("addRequire")) {
+	    addDependencies (node->getProp ("kind") , node->getProp ("name"), REQUIRE, pool);
 	} else if (node->equals ("reportproblems")) {
 	    if (resolver->resolvePool() == true) {
 		RESULT << "No problems so far" << endl;

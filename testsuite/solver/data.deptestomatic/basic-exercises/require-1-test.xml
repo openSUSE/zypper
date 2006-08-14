@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<test allow_virtual_conflicts="yes">
+<setup>
+  <system file="exercise-1-system.xml"/>
+  <channel name="test" file="require-packages.xml"/>
+</setup>
+<trial>
+  <addRequire kind="package" name="A"/>
+</trial>
+</test>

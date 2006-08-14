@@ -1,0 +1,11 @@
+>!> Installing A from channel test
+>!> 1 problems found:
+>!> Problem:
+>!> Cannot install A-2.0-1.noarch[test] because it is conflicting
+>!> A conflict over A == 2.0-1 () requires the removal of to-be-installed A-2.0-1.noarch[test]
+>!>    Solution:
+>!>       do not install A
+>!>       do not install A-2.0-1.noarch[test]
+>!>    Solution:
+>!>       Ignore this conflict of A
+>!>       

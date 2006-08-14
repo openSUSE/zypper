@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<test allow_virtual_conflicts="yes">
+<setup>
+  <system file="exercise-1-system.xml"/>
+  <channel name="test" file="provide-packages.xml"/>
+</setup>
+<trial>
+  <addProvide kind="package" name="b"/>
+  <install channel="test" package="A"/>
+</trial>
+</test>
