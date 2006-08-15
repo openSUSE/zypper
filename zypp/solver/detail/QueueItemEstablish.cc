@@ -233,12 +233,11 @@ QueueItemEstablish::process (ResolverContext_Ptr context, QueueItemList & qil)
 	}
 	else {								// some requirements are unfulfilled
 	    // If the item stays installed, blame the user
-	    if ((_item->kind() != ResTraits<Package>::kind
-		 && _item->kind() != ResTraits<Atom>::kind)
+	    if (_item->kind() == ResTraits<Patch>::kind			// bug 198379, set incomplete for all patches, installed or uninstalled
 		|| status.staysInstalled()
 		|| context->establishing())
 	    {
-		_XDEBUG("Non-Package/Installed/Establishing " << _item << " has unfulfilled requirement " << *iter << " -> incomplete");
+		_XDEBUG("Patch/Installed/Establishing " << _item << " has unfulfilled requirement " << *iter << " -> incomplete");
 		context->incomplete( _item, _other_penalty );
 	    }
 	    else if (status.staysUninstalled())			// not installed -> schedule for installation
