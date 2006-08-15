@@ -98,6 +98,7 @@ static ZYpp::LocaleSet locales;
 static ZYpp::Ptr God;
 static SourceManager_Ptr manager;
 static bool forceResolve;
+static int maxSolverPasses = 0;
 
 static int sys_res_install = 0;
 
@@ -205,7 +206,7 @@ void addDependencies( const string & kind, const string & name,
     CapSet capset;    
     vector<string> names;
     str::split( name, back_inserter(names), "," );
-    for (int i=0; i < names.size(); i++) {
+    for (unsigned i=0; i < names.size(); i++) {
         capset.insert (CapFactory().parse (string2kind (kind), names[i]));        
     }
     
@@ -845,8 +846,11 @@ parse_xml_setup (XmlNode_Ptr node)
 	    continue;
 	}
 	if (node->equals ("forceResolve")) {
-
 	    forceResolve = true;
+            
+        } else if (node->equals ("maxSolverPasses")) {
+            maxSolverPasses = atoi ((node->getProp ("value")).c_str());
+
 	} else if (node->equals ("system")) {
 
 	    string file = node->getProp ("file");
@@ -1218,6 +1222,7 @@ parse_xml_trial (XmlNode_Ptr node, const ResPool & pool)
     resolver->setArchitecture( God->architecture() );
     resolver->setTesting ( true );			// continue despite missing target
     resolver->setForceResolve( forceResolve );
+    resolver->setMaxSolverPasses( maxSolverPasses );
 
     if (!locales.empty()) {
 	God->setRequestedLocales( locales );
@@ -1383,7 +1388,10 @@ parse_xml_trial (XmlNode_Ptr node, const ResPool & pool)
 	    RESULT << "Calculating installation order ..." << endl;
 
 	    instorder = true;
-
+            
+        } else if (node->equals ("maxSolverPasses")) {
+            maxSolverPasses = atoi ((node->getProp ("value")).c_str());
+            
 	} else if (node->equals ("mediaorder")) {
 
 	    RESULT << "Calculating media installation order ..." << endl;
