@@ -207,7 +207,7 @@ namespace zypp
     void setTimeout( int seconds );
 
     /**
-     * Getting solver timeout in secondes
+     * Getting solver timeout in seconds
      *
      */
     int timeout();      
