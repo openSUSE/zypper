@@ -200,7 +200,7 @@ namespace zypp
         hctx = libhal_ctx_new();
         if( !hctx)
         {
-          dbus_connection_disconnect(conn);
+          dbus_connection_close(conn);
           dbus_connection_unref(conn);
           conn = NULL;
 
@@ -214,7 +214,7 @@ namespace zypp
           libhal_ctx_free(hctx);
           hctx = NULL;
 
-          dbus_connection_disconnect(conn);
+          dbus_connection_close(conn);
           dbus_connection_unref(conn);
           conn = NULL;
 
@@ -228,7 +228,7 @@ namespace zypp
           libhal_ctx_free(hctx);
           hctx = NULL;
 
-          dbus_connection_disconnect(conn);
+          dbus_connection_close(conn);
           dbus_connection_unref(conn);
           conn = NULL;
 

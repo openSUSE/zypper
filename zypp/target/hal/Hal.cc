@@ -92,7 +92,7 @@ struct Hal::Impl
 	    } else {
 		report_error ("libhal_ctx_new: Can't create libhal context", error);
 	    }
-	    dbus_connection_disconnect (_connection);
+	    dbus_connection_close (_connection);
 	    dbus_connection_unref (_connection);
 	    _connection = NULL;
 	} else {
@@ -108,7 +108,7 @@ struct Hal::Impl
 	    libhal_ctx_free (_context);
 	}
 	if (_connection) {
-	    dbus_connection_disconnect (_connection);
+	    dbus_connection_close (_connection);
 	    dbus_connection_unref (_connection);
 	}
     }
