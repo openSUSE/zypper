@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue Aug 15 11:30:50 CEST 2006 - kkaempf@suse.de
+
+- Don't set 'incomplete' for uninstalled patterns or products.
+  (#198379)
+- rev 3968
+
+-------------------------------------------------------------------
 Mon Aug 14 16:50:53 CEST 2006 - schubi@suse.de
 
 - Added new API calls:
