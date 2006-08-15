@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Aug 15 12:01:31 CEST 2006 - dmacvicar@suse.de
+
+- more dbus_connection_close fixes
+- r3974
+
+-------------------------------------------------------------------
 Tue Aug 15 11:41:41 CEST 2006 - kkaempf@suse.de
 
 - clean up 'incomplete' handling in QueueItemEstablish.
