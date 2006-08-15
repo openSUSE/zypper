@@ -64,6 +64,7 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
     ResPool _pool;
 
     int _timeout_seconds;
+    int _maxSolverPasses;
     bool _verifying;
     bool _testing;
 
@@ -151,6 +152,9 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
     // ---------------------------------- methods
 
     void setTimeout (int seconds) { _timeout_seconds = seconds; }
+    void setMaxSolverPasses (int count) { _maxSolverPasses = count; }
+    int timeout () { return _timeout_seconds; }
+    int maxSolverPasses () { return _maxSolverPasses; }
 
     ResPool pool (void) const;
     void setPool (const ResPool & pool) { _pool = pool; }

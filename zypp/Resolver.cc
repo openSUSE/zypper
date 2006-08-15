@@ -92,6 +92,14 @@ namespace zypp
   { _pimpl->transactReset( causer ); }
   std::list<PoolItem_Ref> Resolver::problematicUpdateItems( void ) const
   { return _pimpl->problematicUpdateItems(); }
+  void Resolver::setTimeout( int seconds )
+  { _pimpl->setTimeout( seconds ); }
+  void Resolver::setMaxSolverPasses (int count)
+  { _pimpl->setMaxSolverPasses( count ); }
+  int Resolver::timeout()
+  { return _pimpl->timeout(); }
+  int Resolver::maxSolverPasses()
+  { return _pimpl->maxSolverPasses(); }    	    
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

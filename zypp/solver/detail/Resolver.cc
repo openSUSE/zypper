@@ -93,6 +93,7 @@ void assertSystemResObjectInPool()
 Resolver::Resolver (const ResPool & pool)
     : _pool (pool)
     , _timeout_seconds (0)
+    , _maxSolverPasses (0)
     , _verifying (false)
     , _testing (false)
     , _valid_solution_count (0)
@@ -119,7 +120,6 @@ Resolver::pool (void) const
 void
 Resolver::reset (void)
 {
-    _timeout_seconds = 0;
     _verifying = false;
 
     _initial_items.clear();
@@ -774,10 +774,23 @@ Resolver::resolveDependencies (const ResolverContext_Ptr context)
 		    time (&t_now);
 		    if (difftime (t_now, t_start) > _timeout_seconds) {
 			_timed_out = true;
+		    MIL << "Timeout " << _timeout_seconds << " seconds reached"
+			<< " -> exit" << endl;
 		    break;
 		}
-	    }
-
+	      }
+	      if (_maxSolverPasses > 0) {
+		  if (_maxSolverPasses <= _complete_queues.size() +
+		      _pruned_queues.size() +
+		      _deferred_queues.size() +
+		      _invalid_queues.size()) {
+		      _timed_out = true;
+		      MIL << "Max solver runs ( " << _maxSolverPasses
+			  << " ) reached -> exit" << endl;
+		      break;
+		  }
+	      }		    
+	      
 	    ResolverQueue_Ptr queue = _pending_queues.front();
 	    _pending_queues.pop_front();
 	    ResolverContext_Ptr context = queue->context();

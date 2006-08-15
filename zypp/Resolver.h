@@ -197,6 +197,36 @@ namespace zypp
      */
     void transactReset( ResStatus::TransactByValue causer );
 
+    /**
+     * Setting solver timeout
+     *
+     * Stop solving after a given timeframe (seconds) 
+     * seconds = 0 : No timeout
+     *
+     */
+    void setTimeout( int seconds );
+
+    /**
+     * Getting solver timeout in secondes
+     *
+     */
+    int timeout();      
+
+    /**
+     * Restricting solver passes
+     *
+     * Stop solving after a given amount of passes
+     * count = 0 : No restriction
+     *
+     */
+    void setMaxSolverPasses (int count);
+
+    /**
+     * Count of max solver passes
+     *
+     */
+    int maxSolverPasses ();
+
   protected:
 
   private:
