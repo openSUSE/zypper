@@ -12,6 +12,11 @@ Mon Aug 14 11:26:20 CEST 2006 - dmacvicar@suse.de
 - don't link examples to testsuite library. 
 
 -------------------------------------------------------------------
+Sat Aug 12 17:30:30 CEST 2006 - schwab@suse.de
+
+- Disable profiling to work around compiler bug.
+
+-------------------------------------------------------------------
 Fri Aug 11 17:01:33 CEST 2006 - dmacvicar@suse.de
 
 - forward port 3924:3939
