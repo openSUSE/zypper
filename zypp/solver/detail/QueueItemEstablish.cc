@@ -233,29 +233,13 @@ QueueItemEstablish::process (ResolverContext_Ptr context, QueueItemList & qil)
 	}
 	else {								// some requirements are unfulfilled
 	    // If the item stays installed, blame the user
-	    if (_item->kind() == ResTraits<Patch>::kind			// bug 198379, set incomplete for all patches, installed or uninstalled
+	    if ((_item->kind() == ResTraits<Patch>::kind	// bug 198379, set incomplete for all patches, installed or uninstalled
+		 || _item->kind() == ResTraits<Atom>::kind)	// Bug 190272,  - same for atoms
 		|| status.staysInstalled()
 		|| context->establishing())
 	    {
-		_XDEBUG("Patch/Installed/Establishing " << _item << " has unfulfilled requirement " << *iter << " -> incomplete");
+		_XDEBUG("Atom/Patch/Installed/Establishing " << _item << " has unfulfilled requirement " << *iter << " -> incomplete");
 		context->incomplete( _item, _other_penalty );
-	    }
-	    else if (status.staysUninstalled())			// not installed -> schedule for installation
-	    {
-		if (_item->kind() == ResTraits<Atom>::kind) {	// Bug 190272
-		    _XDEBUG("Atom " << _item << " has unfulfilled requirement " << *iter << " -> incomplete");
-		    context->incomplete( _item, _other_penalty );
-		}
-		else if( Helper::isBestUninstalledItem( pool(), _item ) ) {	// bug #184714, #191483
-		    // This is probably plain wrong.
-		    // It installs a resolvable if its freshens/supplements triggers and
-		    // some of its requirements are unfulfilled.
-		    // What if a resolvable of the same name is already installed ?
-
-		    _DEBUG("Uninstalled " << _item << " has unfulfilled requirement " << *iter << " -> install");
-		    QueueItemInstall_Ptr install_item = new QueueItemInstall( pool(), _item );
-		    qil.push_front( install_item );
-		}
 	    }
 	    else {
 		_XDEBUG("Transacted " << _item << " has unfulfilled requirement " << *iter << " -> leave");

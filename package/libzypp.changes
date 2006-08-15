@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Aug 15 11:41:41 CEST 2006 - kkaempf@suse.de
+
+- clean up 'incomplete' handling in QueueItemEstablish.
+- rev 3973.
+
+-------------------------------------------------------------------
 Tue Aug 15 11:30:50 CEST 2006 - kkaempf@suse.de
 
 - Don't set 'incomplete' for uninstalled patterns or products.
