@@ -415,6 +415,16 @@ class MediaHandler {
 	 **/
         virtual void getDirInfo( filesystem::DirContent & retlist,
                                  const Pathname & dirname, bool dots = true ) const = 0;
+        
+        /**
+         * check if a file exists
+         *
+         * Asserted that url is a file and not a dir.
+         *
+         * \throws MediaException
+         *
+         **/
+        virtual bool getDoesFileExist( const Pathname & filename ) const = 0;
 
   protected:
 
@@ -656,6 +666,17 @@ class MediaHandler {
 	 **/
 	void dirInfo( filesystem::DirContent & retlist,
                       const Pathname & dirname, bool dots = true ) const;
+                
+        /**
+         * check if a file exists
+         *
+         * Asserted that url is a file and not a dir.
+         *
+         * \throws MediaException
+         *
+         **/
+        bool doesFileExist( const Pathname & filename ) const;
+
 };
 
 ///////////////////////////////////////////////////////////////////
@@ -669,7 +690,8 @@ class MediaHandler {
         virtual void getDirInfo( std::list<std::string> & retlist,	\
 			            const Pathname & dirname, bool dots = true ) const;	\
         virtual void getDirInfo( filesystem::DirContent & retlist,	\
-			            const Pathname & dirname, bool dots = true ) const;
+			            const Pathname & dirname, bool dots = true ) const; \
+        virtual bool getDoesFileExist( const Pathname & filename ) const;                     
 
   } // namespace media
 } // namespace zypp

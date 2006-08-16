@@ -421,6 +421,11 @@ namespace zypp {
       MediaHandler::getDirInfo( retlist, dirname, dots );
     }
 
+    bool MediaDISK::getDoesFileExist( const Pathname & filename ) const
+    {
+      return MediaHandler::getDoesFileExist( filename );
+    }    
+    
   } // namespace media
 } // namespace zypp
 // vim: set ts=8 sts=2 sw=2 ai noet:

@@ -146,5 +146,10 @@ namespace zypp {
       MediaHandler::getDirInfo( retlist, dirname, dots );
     }
 
+    bool MediaDIR::getDoesFileExist( const Pathname & filename ) const
+    {
+      return MediaHandler::getDoesFileExist( filename );
+    }    
+    
   } // namespace media
 } // namespace zypp

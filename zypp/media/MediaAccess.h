@@ -315,6 +315,16 @@ namespace zypp {
 	void dirInfo( filesystem::DirContent & retlist,
                       const Pathname & dirname, bool dots = true ) const;
 
+        /**
+         * check if a file exists
+         *
+         * Asserted that url is a file and not a dir.
+         *
+         * \throws MediaException
+         *
+         **/
+        bool doesFileExist( const Pathname & filename ) const;
+        
 	/**
 	 * Destructor
 	 **/

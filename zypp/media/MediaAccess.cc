@@ -371,6 +371,17 @@ MediaAccess::dirInfo( filesystem::DirContent & retlist, const Pathname & dirname
   _handler->dirInfo( retlist, dirname, dots );
 }
 
+// return if a file exists
+bool 
+MediaAccess::doesFileExist( const Pathname & filename ) const
+{
+  if ( !_handler ) {
+    ZYPP_THROW(MediaNotOpenException("doesFileExist(" + filename.asString() + ")"));
+  }
+
+  return _handler->doesFileExist( filename );
+}  
+
 std::ostream &
 MediaAccess::dumpOn( std::ostream & str ) const
 {

@@ -1,7 +1,7 @@
 ## Process this file with automake to produce Makefile.in
 ## ##################################################
 
-noinst_PROGRAMS = test lock testbed aj yumparser 
+noinst_PROGRAMS = test lock testbed aj yumparser media
 
 ## ##################################################
 
@@ -14,6 +14,9 @@ AM_CXXFLAGS =
 LDADD =		-L$(top_srcdir)/zypp/.libs -L$(top_srcdir)/zypp2/.libs -lzypp -lzypp2 -lboost_regex -lxml2 -lz $(top_srcdir)/testsuite/src/utils/lib@PACKAGE@_testsuite_utils.la
 
 ## ##################################################
+
+media_SOURCES = media-glob.cc
+media_LDFLAGS =	-static
 
 test_SOURCES = 	zypp-keyring.cc
 test_LDFLAGS =	-static

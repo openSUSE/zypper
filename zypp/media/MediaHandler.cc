@@ -1097,6 +1097,25 @@ void MediaHandler::dirInfo( filesystem::DirContent & retlist,
 ///////////////////////////////////////////////////////////////////
 //
 //
+//      METHOD NAME : MediaHandler::doesFileExist
+//      METHOD TYPE : PMError
+//
+//      DESCRIPTION :
+//
+bool MediaHandler::doesFileExist( const Pathname & filename ) const
+{
+  // TODO do some logging
+  if ( !isAttached() ) {
+    INT << "Error Not attached on doesFileExist(" << filename << ")" << endl;
+    ZYPP_THROW(MediaNotAttachedException(url()));
+  }
+  return getDoesFileExist( filename );
+  MIL << "doesFileExist(" << filename << ")" << endl;
+}    
+
+///////////////////////////////////////////////////////////////////
+//
+//
 //	METHOD NAME : MediaHandler::getDirectoryYast
 //	METHOD TYPE : PMError
 //
@@ -1302,6 +1321,25 @@ void MediaHandler::getDirInfo( filesystem::DirContent & retlist,
   }
 #endif
 }
+
+///////////////////////////////////////////////////////////////////
+//
+//
+//      METHOD NAME : MediaHandler::getDoesFileExist
+//      METHOD TYPE : PMError
+//
+//      DESCRIPTION : Asserted that file is not a directory
+//                    Default implementation of pure virtual.
+//
+bool MediaHandler::getDoesFileExist( const Pathname & filename ) const
+{
+  PathInfo info( localPath( filename ) );
+  if( ! info.isDir() ) {
+    ZYPP_THROW(MediaNotAFileException(url(), localPath(filename)));
+  }
+  return info.isExist();
+}
+
 
   } // namespace media
 } // namespace zypp

@@ -691,6 +691,105 @@ void MediaCurl::getFileCopy( const Pathname & filename , const Pathname & target
   report->finish(url, zypp::media::DownloadProgressReport::NO_ERROR, "");
 }
 
+bool MediaCurl::getDoesFileExist( const Pathname & filename ) const
+{
+  DBG << filename.asString() << endl;
+
+  if(!_url.isValid())
+    ZYPP_THROW(MediaBadUrlException(_url));
+
+  if(_url.getHost().empty())
+    ZYPP_THROW(MediaBadUrlEmptyHostException(_url));
+  
+  string path = _url.getPathName();
+  if ( !path.empty() && path != "/" && *path.rbegin() == '/' &&
+        filename.absolute() ) {
+      // If url has a path with trailing slash, remove the leading slash from
+      // the absolute file name
+    path += filename.asString().substr( 1, filename.asString().size() - 1 );
+  } else if ( filename.relative() ) {
+      // Add trailing slash to path, if not already there
+    if ( !path.empty() && *path.rbegin() != '/' ) path += "/";
+    // Remove "./" from begin of relative file name
+    path += filename.asString().substr( 2, filename.asString().size() - 2 );
+  } else {
+    path += filename.asString();
+  }
+
+  Url url( _url );
+  url.setPathName( path );
+
+  DBG << "URL: " << url.asString() << endl;
+    // Use URL without options and without username and passwd
+    // (some proxies dislike them in the URL).
+    // Curl seems to need the just scheme, hostname and a path;
+    // the rest was already passed as curl options (in attachTo).
+  Url curlUrl( url );
+
+    // Use asString + url::ViewOptions instead?
+  curlUrl.setUsername( "" );
+  curlUrl.setPassword( "" );
+  curlUrl.setPathParams( "" );
+  curlUrl.setQueryString( "" );
+  curlUrl.setFragment( "" );
+  
+  //
+    // See also Bug #154197 and ftp url definition in RFC 1738:
+    // The url "ftp://user@host/foo/bar/file" contains a path,
+    // that is relative to the user's home.
+    // The url "ftp://user@host//foo/bar/file" (or also with
+    // encoded slash as %2f) "ftp://user@host/%2ffoo/bar/file"
+    // contains an absolute path.
+  //
+  string urlBuffer( curlUrl.asString());
+  CURLcode ret = curl_easy_setopt( _curl, CURLOPT_URL,
+                                   urlBuffer.c_str() );
+  if ( ret != 0 ) {
+    ZYPP_THROW(MediaCurlSetOptException(url, _curlError));
+  }
+  
+  // set no data, because we only want to check if the file exists
+  //ret = curl_easy_setopt( _curl, CURLOPT_NOBODY, 1 );
+  //if ( ret != 0 ) {
+  //    ZYPP_THROW(MediaCurlSetOptException(url, _curlError));
+  //}    
+  
+  // instead of returning no data with NOBODY, we return 
+  // little data, that works with broken servers, and
+  // works for ftp as well, because retrieving only headers
+  // ftp will return always OK code ?
+  ret = curl_easy_setopt( _curl, CURLOPT_RANGE, "0-100" );
+  if ( ret != 0 ) {
+      ZYPP_THROW(MediaCurlSetOptException(url, _curlError));
+  }    
+  
+  FILE *file = ::fopen( "/dev/null", "w" );
+  if ( !file ) {
+      ::fclose(file);
+      ERR << "fopen failed for /dev/null" << endl;
+      ZYPP_THROW(MediaWriteException("/dev/null"));
+  }
+
+  ret = curl_easy_setopt( _curl, CURLOPT_WRITEDATA, file );
+  if ( ret != 0 ) {
+      ::fclose(file);
+      ZYPP_THROW(MediaCurlSetOptException(url, _curlError));
+  }
+    // Set callback and perform.
+  //ProgressData progressData(_xfer_timeout, url, &report);
+  //report->start(url, dest);
+  //if ( curl_easy_setopt( _curl, CURLOPT_PROGRESSDATA, &progressData ) != 0 ) {
+  //  WAR << "Can't set CURLOPT_PROGRESSDATA: " << _curlError << endl;;
+  //}
+
+  CURLcode ok = curl_easy_perform( _curl );
+  MIL << "perform code: " << ok << " [ " << curl_easy_strerror(ok) << " ]" << endl;
+  return ( ok = CURLE_OK );
+  //if ( curl_easy_setopt( _curl, CURLOPT_PROGRESSDATA, NULL ) != 0 ) {
+  //  WAR << "Can't unset CURLOPT_PROGRESSDATA: " << _curlError << endl;;
+  //}
+}    
+
 void MediaCurl::doGetFileCopy( const Pathname & filename , const Pathname & target, callback::SendReport<DownloadProgressReport> & report) const
 {
     DBG << filename.asString() << endl;

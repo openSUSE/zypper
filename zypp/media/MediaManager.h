@@ -776,7 +776,11 @@ namespace zypp
               const Pathname         &dirname,
               bool                   dots = true) const;
 
-
+      /**
+       * FIXME: see MediaAccess class.
+       */
+      bool doesFileExist(MediaAccessId  accessId,
+                         const Pathname & filename ) const;
     public:
       /**
        * Get the modification time of the /etc/mtab file.

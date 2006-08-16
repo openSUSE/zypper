@@ -854,6 +854,19 @@ namespace zypp
     }
 
     // ---------------------------------------------------------------
+    bool
+    MediaManager::doesFileExist(MediaAccessId  accessId, const Pathname & filename ) const
+    {
+      MutexLock glock(g_Mutex);
+      ManagedMedia &ref( m_impl->findMM(accessId));
+
+      // FIXME: ref.checkDesired(accessId); ???
+      ref.checkAttached(accessId);
+
+      return ref.handler->doesFileExist(filename);
+    }
+    
+    // ---------------------------------------------------------------
     // STATIC
     time_t
     MediaManager::getMountTableMTime()
