@@ -74,7 +74,7 @@ int main(void)
   {
 
     //id = mm.open(zypp::Url("cd:/"), "");
-    id = mm.open(zypp::Url("http://duncan.mac-vicar.com/photos/"), "");
+    id = mm.open(zypp::Url("http://ftp.kernel.org/pub/"), "");
     //mm.addVerifier( id, verifier);
     mm.attach(id);
     //mm.provideFile(id, Pathname("/directory.yast"));
@@ -86,9 +86,9 @@ int main(void)
     //stringlist retlist;
     //mm.dirInfo(id, retlist, "/");
     
-    mm.doesFileExist(id, "bateria.jpg");
+    mm.doesFileExist(id, "README");
     
-    mm.doesFileExist(id, "fdsfsd.jpg");
+    mm.doesFileExist(id, "fdsfsd");
     
     id2 = mm.open( zypp::Url("ftp://ftp.kernel.org/pub/"), "");
     mm.attach(id2);
