@@ -8,11 +8,6 @@ SUBDIRS = zypp zypp2 examples testsuite po doc
 
 ## ##################################################
 
-.PHONY: package
-
-package: dist
-
-
 #ACLOCAL_AMFLAGS = -I m4
 ACLOCAL_AMFLAGS =
 
