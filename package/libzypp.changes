@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Wed Aug 16 17:41:40 CEST 2006 - dmacvicar@suse.de
+
+- Implement initial verson of Media 
+  doesFileExist, for future source probing.
+- r3984 
+
+-------------------------------------------------------------------
 Tue Aug 15 12:01:31 CEST 2006 - dmacvicar@suse.de
 
 - more dbus_connection_close fixes
