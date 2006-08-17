@@ -490,7 +490,11 @@ namespace zypp
               bool success = false;
               try
               {
-		if (isKind<Message>(it->resolvable()))
+                if (isKind<Atom>(it->resolvable()))
+                {
+                  DBG << "Uninstalling atom - no-op" << endl;
+                }
+		else if (isKind<Message>(it->resolvable()))
 		{
 		  DBG << "Uninstalling message - no-op" << endl;
 		}

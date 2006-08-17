@@ -583,6 +583,15 @@ XMLFilesBackend::storeObject( ResObject::constPtr resolvable )
 void
 XMLFilesBackend::deleteObject( ResObject::constPtr resolvable )
 {
+  // only ignore if it is not a supported resolvable kind
+  std::set<Resolvable::Kind>::const_iterator it;
+  it = find(d->kinds.begin(), d->kinds.end(), resolvable->kind() );
+  if (it == d->kinds.end())
+  {
+    ERR << "This backend was not designed to store resolvable of kind " << resolvableKindToString(resolvable->kind()) << ", ignoring..." << std::endl;
+    return;
+  }
+  
   // only remove the file
   std::string filename = fullPathForResolvable(resolvable);
   try
