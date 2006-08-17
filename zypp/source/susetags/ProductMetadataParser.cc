@@ -301,15 +301,18 @@ namespace zypp
 	    ++next;
 	    if (next != splitted.end()) {			// check for "op edition"
 		string val = *next;
-		if (val.find_first_of("<>=") != string::npos)
+		if (val.find_first_of("<>=") != string::npos)	// next token is op
 		{
-		    if (++next != splitted.end()) {
+		    if (++next != splitted.end()) {		// ensure edition follows
+			name += " ";
 			name += val;
+			name += " ";
 			name += *next;
 			it = next;
 		    }
 		}
 	    }
+	    DBG << "parsing[" << name << "]" << endl;
 	    try {
 		deps[deptag].insert( f.parse( kind, name ) );
 	    }
