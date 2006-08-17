@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Aug 17 18:15:14 CEST 2006 - dmacvicar@suse.de
+
+- fix uninstalling of atoms (noop)
+- r3995 
+
+-------------------------------------------------------------------
 Wed Aug 16 17:41:40 CEST 2006 - dmacvicar@suse.de
 
 - Implement initial verson of Media 
