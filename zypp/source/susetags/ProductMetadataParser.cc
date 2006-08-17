@@ -234,7 +234,7 @@ namespace zypp
 
 	  MIL << "Product arch is " << prodarch << endl;
 
-          NVRAD dataCollect( prodImpl->_dist, Edition( prodImpl->_dist_version ), prodarch, prodImpl->_deps );
+          NVRAD dataCollect( prodImpl->_name, Edition( prodImpl->_version ), prodarch, prodImpl->_deps );
           result = detail::makeResolvableFromImpl( dataCollect, prodImpl );
         }
         catch (const Exception & excpt_r)
