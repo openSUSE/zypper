@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri Aug 18 14:57:35 CEST 2006 - kkaempf@suse.de
+
+- remove the /etc/sysconfig/zypp:REWRITE_KERNEL_DEPS = yes check;
+  see rev 3810 below. (#190163)
+- rev 3998
+
+-------------------------------------------------------------------
 Thu Aug 17 18:15:14 CEST 2006 - dmacvicar@suse.de
 
 - fix uninstalling of atoms (noop)

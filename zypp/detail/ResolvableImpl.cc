@@ -243,8 +243,7 @@ namespace zypp
     filterUnwantedReq( nvrad_r[Dep::REQUIRES], _deps[Dep::REQUIRES] );
 
     // check for kernel(xxx) and rewrite them to kernel(flavor:xxx)
-    if ( _kind == ResTraits<Package>::kind
-	 && checkKernelDepsRewrite() )
+    if ( _kind == ResTraits<Package>::kind )
       {
 	dumpOn( DBG << "rewriteKernelDeps()" ) << std::endl;
 	rewriteKernelDeps( _deps );   
@@ -262,29 +261,6 @@ namespace zypp
   {
     return str << '[' << kind() << ']'
                << name() << '-' << edition() << '.' << arch();
-  }
-
-  bool Resolvable::Impl::checkKernelDepsRewrite()
-  {
-    static int rewrite_kernel_deps = 0;	// 0 = undef, 1 = no, 2 = yes
-    if (rewrite_kernel_deps == 0) {
-#define ZYPPPATH "/etc/sysconfig/zypp"
-#define REWRITE_TAG "REWRITE_KERNEL_DEPS"
-      std::map<std::string,std::string> data = zypp::base::sysconfig::read( ZYPPPATH );
-      std::map<std::string,std::string>::const_iterator it = data.find( REWRITE_TAG );
-      if (it != data.end()
-	  && it->second == "yes")
-      {
-	rewrite_kernel_deps = 2;
-	DBG << "Rewriting kernel deps" << std::endl;
-      }
-      else {
-	rewrite_kernel_deps = 1;
-	DBG << "Leaving kernel deps alone" << std::endl;
-      }
-#undef ZYPPPATH
-    }
-    return (rewrite_kernel_deps == 2);
   }
 
   /////////////////////////////////////////////////////////////////

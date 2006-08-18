@@ -73,7 +73,6 @@ namespace zypp
     /**  */
     Dependencies _deps;
 
-    static bool checkKernelDepsRewrite();
   };
   ///////////////////////////////////////////////////////////////////
 
