@@ -7,11 +7,11 @@ SUBDIRS =
 
 ## ##################################################
 
-TESTS = media1
+TESTS = media1 fileexists
 
-noinst_PROGRAMS = media2 media3 media4
+noinst_PROGRAMS = media2 media3 media4 fileexists
 
-check_PROGRAMS = media1
+check_PROGRAMS = media1 fileexists
 
 
 ## ##################################################
@@ -23,6 +23,9 @@ LDADD =	$(top_srcdir)/zypp/lib@PACKAGE@.la
 media1_SOURCES = media1.cc
 media1_LDADD = $(LDADD) -lboost_unit_test_framework
 
+fileexists_SOURCES = file_exists_test.cc
+fileexists_LDADD = $(LDADD) -lboost_unit_test_framework
+
 media2_SOURCES = media2.cc
 media2_LDADD = $(LDADD)
 
@@ -31,6 +34,7 @@ media3_LDADD = $(LDADD)
 
 media4_SOURCES = media4.cc
 media4_LDADD = $(LDADD)
+
 ## ##################################################
 
 .PHONY:        always
