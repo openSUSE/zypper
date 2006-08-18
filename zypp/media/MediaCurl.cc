@@ -784,7 +784,7 @@ bool MediaCurl::getDoesFileExist( const Pathname & filename ) const
 
   CURLcode ok = curl_easy_perform( _curl );
   MIL << "perform code: " << ok << " [ " << curl_easy_strerror(ok) << " ]" << endl;
-  return ( ok = CURLE_OK );
+  return ( ok == CURLE_OK );
   //if ( curl_easy_setopt( _curl, CURLOPT_PROGRESSDATA, NULL ) != 0 ) {
   //  WAR << "Can't unset CURLOPT_PROGRESSDATA: " << _curlError << endl;;
   //}
