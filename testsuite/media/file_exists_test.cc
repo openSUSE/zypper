@@ -6,6 +6,7 @@
 #include <string>
 #include <list>
 #include <iostream>
+#include <unistd.h>
 
 #include <boost/test/unit_test.hpp>
 
@@ -59,6 +60,12 @@ void ftp_test()
 
 void iso_test()
 {
+   if ( geteuid() != 0 )
+   {
+     BOOST_ERROR( "ISO test requires root permissions! (mount)");
+     return;
+   }
+  
   MediaManager     mm;
   media::MediaId   id;
   
@@ -78,6 +85,12 @@ void iso_test()
 
 void nfs_test()
 {
+   if ( geteuid() != 0 )
+   {
+     BOOST_ERROR( "NFS test requires root permissions! (mount)");
+     return;
+   }
+  
   MediaManager     mm;
   media::MediaId   id;
   Url url("nfs://dist.suse.de/dist/install");
