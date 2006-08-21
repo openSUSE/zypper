@@ -1,4 +1,0 @@
-# pattern.exp
-# run tests for patterntagparsertest
-
-  shouldPass "patterntagparsertest"

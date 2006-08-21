@@ -1,4 +1,0 @@
-load_lib "source_init.exp"
-proc source_exit {} {}
-proc source_version {} {}
-
