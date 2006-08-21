@@ -1334,7 +1334,7 @@ void MediaHandler::getDirInfo( filesystem::DirContent & retlist,
 bool MediaHandler::getDoesFileExist( const Pathname & filename ) const
 {
   PathInfo info( localPath( filename ) );
-  if( ! info.isDir() ) {
+  if( info.isDir() ) {
     ZYPP_THROW(MediaNotAFileException(url(), localPath(filename)));
   }
   return info.isExist();
