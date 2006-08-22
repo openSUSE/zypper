@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Tue Aug 22 17:56:53 CEST 2006 - mt@suse.de
+
+- Fixed getDoesFileExist to reset the transfer range
+- Added logging of curl debug messages to the zypp log.
+  The env var ZYPP_MEDIA_CURL_DEBUG=1 logs curl infos,
+  ZYPP_MEDIA_CURL_DEBUG=2 logs the in/out headers.
+- r4018
+
+-------------------------------------------------------------------
 Fri Aug 18 14:57:35 CEST 2006 - kkaempf@suse.de
 
 - remove the /etc/sysconfig/zypp:REWRITE_KERNEL_DEPS = yes check;
