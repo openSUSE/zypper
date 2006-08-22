@@ -11,6 +11,7 @@
 */
 
 #include <iostream>
+#include <list>
 
 #include "zypp/base/Logger.h"
 #include "zypp/ExternalProgram.h"
@@ -76,6 +77,32 @@ namespace
   inline void globalInitOnce()
   {
     zypp::thread::callOnce(g_InitOnceFlag, _do_init_once);
+  }
+
+  int log_curl(CURL *curl, curl_infotype info,
+               char *ptr, size_t len, void *max_lvl)
+  {
+    std::string pfx(" ");
+    long        lvl = 0;
+    switch( info)
+    {
+      case CURLINFO_TEXT:       lvl = 1; pfx = "*"; break;
+      case CURLINFO_HEADER_IN:  lvl = 2; pfx = "<"; break;
+      case CURLINFO_HEADER_OUT: lvl = 2; pfx = ">"; break;
+      default:                                      break;
+    }
+    if( lvl > 0 && max_lvl != NULL && lvl <= *((long *)max_lvl))
+    {
+      std::string                            msg(ptr, len);
+      std::list<std::string>                 lines;
+      std::list<std::string>::const_iterator line;
+      zypp::str::split(msg, std::back_inserter(lines), "\r\n");
+      for(line = lines.begin(); line != lines.end(); ++line)
+      {
+        DBG << pfx << " " << *line << endl;
+      }
+    }
+    return 0;
   }
 }
 
@@ -144,6 +171,7 @@ MediaCurl::MediaCurl( const Url &      url_r,
       _curl( NULL )
 {
   _curlError[0] = '\0';
+  _curlDebug = 0L;
 
   MIL << "MediaCurl::MediaCurl(" << url_r << ", " << attach_point_hint_r << ")" << endl;
 
@@ -227,6 +255,17 @@ void MediaCurl::attachTo (bool next)
   _curl = curl_easy_init();
   if ( !_curl ) {
     ZYPP_THROW(MediaCurlInitException(_url));
+  }
+
+  {
+    char *ptr = getenv("ZYPP_MEDIA_CURL_DEBUG");
+    _curlDebug = (ptr && *ptr) ? str::strtonum<long>( ptr) : 0L;
+    if( _curlDebug > 0)
+    {
+      curl_easy_setopt( _curl, CURLOPT_VERBOSE, 1);
+      curl_easy_setopt( _curl, CURLOPT_DEBUGFUNCTION, log_curl);
+      curl_easy_setopt( _curl, CURLOPT_DEBUGDATA, &_curlDebug);
+    }
   }
 
   CURLcode ret = curl_easy_setopt( _curl, CURLOPT_ERRORBUFFER, _curlError );
@@ -758,7 +797,7 @@ bool MediaCurl::getDoesFileExist( const Pathname & filename ) const
   // little data, that works with broken servers, and
   // works for ftp as well, because retrieving only headers
   // ftp will return always OK code ?
-  ret = curl_easy_setopt( _curl, CURLOPT_RANGE, "0-100" );
+  ret = curl_easy_setopt( _curl, CURLOPT_RANGE, "0-1" );
   if ( ret != 0 ) {
       ZYPP_THROW(MediaCurlSetOptException(url, _curlError));
   }    
@@ -767,13 +806,22 @@ bool MediaCurl::getDoesFileExist( const Pathname & filename ) const
   if ( !file ) {
       ::fclose(file);
       ERR << "fopen failed for /dev/null" << endl;
+      curl_easy_setopt( _curl, CURLOPT_RANGE, NULL );
+      if ( ret != 0 ) {
+	  ZYPP_THROW(MediaCurlSetOptException(url, _curlError));
+      }
       ZYPP_THROW(MediaWriteException("/dev/null"));
   }
 
   ret = curl_easy_setopt( _curl, CURLOPT_WRITEDATA, file );
   if ( ret != 0 ) {
       ::fclose(file);
-      ZYPP_THROW(MediaCurlSetOptException(url, _curlError));
+      std::string err( _curlError);
+      curl_easy_setopt( _curl, CURLOPT_RANGE, NULL );
+      if ( ret != 0 ) {
+	  ZYPP_THROW(MediaCurlSetOptException(url, _curlError));
+      }
+      ZYPP_THROW(MediaCurlSetOptException(url, err));
   }
     // Set callback and perform.
   //ProgressData progressData(_xfer_timeout, url, &report);
@@ -784,6 +832,12 @@ bool MediaCurl::getDoesFileExist( const Pathname & filename ) const
 
   CURLcode ok = curl_easy_perform( _curl );
   MIL << "perform code: " << ok << " [ " << curl_easy_strerror(ok) << " ]" << endl;
+
+  ret = curl_easy_setopt( _curl, CURLOPT_RANGE, NULL );
+  if ( ret != 0 ) {
+	  ZYPP_THROW(MediaCurlSetOptException(url, _curlError));
+  }
+
   return ( ok == CURLE_OK );
   //if ( curl_easy_setopt( _curl, CURLOPT_PROGRESSDATA, NULL ) != 0 ) {
   //  WAR << "Can't unset CURLOPT_PROGRESSDATA: " << _curlError << endl;;

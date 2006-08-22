@@ -79,6 +79,7 @@ class MediaCurl : public MediaHandler {
   private:
     CURL *_curl;
     char _curlError[ CURL_ERROR_SIZE ];
+    long _curlDebug;
 
     std::string _userpwd;
     std::string _proxy;
