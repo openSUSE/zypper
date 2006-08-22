@@ -35,6 +35,21 @@ namespace zypp
     namespace susetags
     { /////////////////////////////////////////////////////////////////
 
+      /**
+       * Functor to probe
+       */
+      class SuseTagsProber : public SourceProber
+      {
+        public:
+          SuseTagsProber( media::MediaAccessId media_id, const Pathname &path ) : SourceProber( media_id, path )
+          {}
+        
+          virtual ~SuseTagsProber()
+          {}
+        
+          virtual bool operator()();
+      };
+      
       struct SuseTagsPackageImplData
       {
         SuseTagsPackageImplData()
@@ -57,6 +72,7 @@ namespace zypp
       class SuseTagsImpl : public SourceImpl
       {
       public:
+        typedef source::susetags::SuseTagsProber Prober;
         typedef intrusive_ptr<SuseTagsImpl>       Ptr;
         typedef intrusive_ptr<const SuseTagsImpl> constPtr;
 

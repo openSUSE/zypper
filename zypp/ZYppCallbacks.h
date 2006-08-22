@@ -184,7 +184,7 @@ namespace zypp
       ) {}
     };
 
-    // progress for creating a source (download and parsing)
+    // DEPRECATED
     struct CreateSourceReport : public callback::ReportBase
     {
       enum Action {
@@ -193,14 +193,14 @@ namespace zypp
       };
 
       enum Error {
-	NO_ERROR,
+        NO_ERROR,
         NOT_FOUND, 	// the requested Url was not found
-	IO,		// IO error
-	INVALID		// th source is invalid
+        IO,		// IO error
+        INVALID		// th source is invalid
       };
 
       virtual void startData(
-	Url source_url
+        Url source_url
       ) {}
 
       virtual void startProbe(Url url) {}
@@ -212,17 +212,77 @@ namespace zypp
 
       virtual Action problem(
         Url url
-	, Error error
-	, std::string description
+          , Error error
+          , std::string description
       ) { return ABORT; }
 
       virtual void finishData(
         Url url
         , Error error
-	, std::string reason
+        , std::string reason
       ) {}
     };
 
+    // progress for probing a source
+    struct ProbeSourceReport : public callback::ReportBase
+    {
+      enum Action {
+        ABORT,  // abort and return error
+        RETRY	// retry
+      };
+
+      enum Error {
+        NO_ERROR,
+        NOT_FOUND, 	// the requested Url was not found
+        IO,		// IO error
+        INVALID		// th source is invalid
+      };
+
+      virtual void start(const Url &url) {}
+      virtual void failedProbe( const Url &url, const std::string &type ) {}
+      virtual void successProbe( const Url &url, const std::string &type ) {}
+      virtual void finish(const Url &url, Error error, std::string reason ) {}
+
+      virtual bool progress(const Url &url, int value)
+      { return true; }
+
+      virtual Action problem( const Url &url, Error error, std::string description ) { return ABORT; }
+    };
+    
+    // progress for refreshing a source data
+    struct SourceProcessReport : public callback::ReportBase
+    {
+      enum Action {
+        ABORT,  // abort and return error
+        RETRY,	// retry
+        IGNORE  // skip refresh, ignore failed refresh
+      };
+
+      enum Error {
+        NO_ERROR,
+        NOT_FOUND, 	// the requested Url was not found
+        IO,		// IO error
+        INVALID		// th source is invalid
+      };
+      
+      virtual void start( Source_Ref source ) {}
+      virtual bool progress(int value, Source_Ref source)
+      { return true; }
+
+      virtual Action problem(
+          Source_Ref source
+          , Error error
+          , std::string description )
+      { return ABORT; }
+
+      virtual void finish(
+          Source_Ref source
+          , Error error
+          , std::string reason )
+      {}
+    };
+    
+    
     /////////////////////////////////////////////////////////////////
   } // namespace source
   ///////////////////////////////////////////////////////////////////
@@ -236,25 +296,25 @@ namespace zypp
       enum Action {
         ABORT,  // abort and return error
         RETRY,	// retry
-	IGNORE, // ignore this media in future, not available anymore
-	IGNORE_ID,	// ignore wrong medium id
-	CHANGE_URL,	// change media URL
-	EJECT		// eject the medium
+        IGNORE, // ignore this media in future, not available anymore
+        IGNORE_ID,	// ignore wrong medium id
+        CHANGE_URL,	// change media URL
+        EJECT		// eject the medium
       };
 
       enum Error {
-	NO_ERROR,
+        NO_ERROR,
         NOT_FOUND,  // the medie not found at all
         IO,	// error accessing the media
-	INVALID, // media is broken
-	WRONG	// wrong media, need a different one
+        INVALID, // media is broken
+        WRONG	// wrong media, need a different one
       };
 
       virtual Action requestMedia(
         const Source_Ref source
-	, unsigned mediumNr
-	, Error error
-	, std::string description
+        , unsigned mediumNr
+        , Error error
+        , std::string description
       ) { return ABORT; }
     };
 
@@ -264,13 +324,13 @@ namespace zypp
         enum Action {
           ABORT,  // abort and return error
           RETRY,	// retry
-	  IGNORE	// ignore the failure
+          IGNORE	// ignore the failure
         };
 
         enum Error {
-	  NO_ERROR,
+          NO_ERROR,
           NOT_FOUND, 	// the requested Url was not found
-	  IO		// IO error
+          IO		// IO error
         };
 
         virtual void start( Url file, Pathname localfile ) {}

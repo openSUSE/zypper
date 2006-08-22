@@ -36,6 +36,30 @@ namespace zypp
   { /////////////////////////////////////////////////////////////////
 
     DEFINE_PTR_TYPE(SourceImpl);
+    
+    /** Base class for Source prober.
+     *
+     * Source probe implementations get a attached media id
+     * and return a bool, wether the source is a source
+     * of this type
+     */
+    class SourceProber
+    {
+      public:
+        SourceProber( media::MediaAccessId media_id, const Pathname &path )
+          : _media_id(media_id), _path(path)
+        {}
+        
+        virtual ~SourceProber()
+        {}
+        
+        virtual bool operator()() = 0;
+
+      protected:
+        media::MediaAccessId _media_id;
+        Pathname _path;
+    };
+    
     ///////////////////////////////////////////////////////////////////
     //
     //	CLASS NAME : SourceImpl

@@ -38,6 +38,22 @@ namespace zypp
     { //////////////////////////////////////////////////////////////
 
       /**
+       * Functor to probe
+       */
+      class YUMProber : public SourceProber
+      {
+      public:
+        YUMProber( media::MediaAccessId media_id, const Pathname &path ) : SourceProber( media_id, path )
+        {}
+        
+        virtual ~YUMProber()
+        {}
+        
+        virtual bool operator()();
+
+      };
+      
+      /**
        * class representing a YUM collection of metadata
        */
       
@@ -50,6 +66,8 @@ namespace zypp
       class YUMSourceImpl : public SourceImpl
       {
       public:
+        
+        typedef source::yum::YUMProber     Prober;
         
         /** Default Ctor.
          * Just initilizes data members. Metadata retrieval

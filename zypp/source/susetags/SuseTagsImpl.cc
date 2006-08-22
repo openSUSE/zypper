@@ -42,6 +42,23 @@ namespace zypp
     namespace susetags
     { /////////////////////////////////////////////////////////////////
       
+      bool SuseTagsProber::operator()()
+      {
+        MIL << "Probing for YaST source..." << std::endl;
+        bool result = false;
+        media::MediaManager mm;
+        result = mm.doesFileExist(_media_id, _path + Pathname("/content"));
+
+        if ( result )
+        {
+          MIL << "YaST source detected..." << std::endl;
+          return true;
+        }
+        
+         MIL << "Not a YaST source..." << std::endl;
+         return false;
+      }
+      
       ///////////////////////////////////////////////////////////////////
       //
       //	METHOD NAME : SuseTagsImpl::SuseTagsImpl

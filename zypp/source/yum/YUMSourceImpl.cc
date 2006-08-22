@@ -54,6 +54,23 @@ namespace zypp
   { /////////////////////////////////////////////////////////////////
     namespace yum
     {
+      
+      bool YUMProber::operator()()
+      {
+        MIL << "Probing for YUM source..." << std::endl;
+        bool result = false;
+        media::MediaManager mm;
+        result = mm.doesFileExist(_media_id, _path + Pathname("/repodata/repomd.xml"));
+        if ( result )
+        {
+          MIL << "YUM source detected..." << std::endl;
+          return true;
+        }
+          
+        MIL << "Not a YUM source..." << std::endl;
+        return false;
+      }
+      
       ///////////////////////////////////////////////////////////////////
       //
       //        CLASS NAME : YUMSourceImpl
@@ -196,35 +213,35 @@ namespace zypp
 
       void YUMSourceImpl::factoryInit()
       {
-        resetMediaVerifier();
-
-        bool cache = cacheExists();
-        if ( cache )
-        {
-          DBG << "Cached metadata found in [" << _cache_dir << "]." << endl;
-          if ( autorefresh() )
-            storeMetadata(_cache_dir);
-        }
-        else
-        {
-          if ( _cache_dir.empty() || !PathInfo(_cache_dir).isExist() )
+          resetMediaVerifier();
+  
+          bool cache = cacheExists();
+          if ( cache )
           {
-            DBG << "Cache dir not set. Downloading to temp dir: " << tmpMetadataDir() << std::endl;
-            // as we have no local dir set we use a tmp one, but we use a member variable because
-            // it cant go out of scope while the source exists.
-            saveMetadataTo(tmpMetadataDir());
+            DBG << "Cached metadata found in [" << _cache_dir << "]." << endl;
+            if ( autorefresh() )
+              storeMetadata(_cache_dir);
           }
           else
           {
-            DBG << "Cached metadata not found in [" << _cache_dir << "]. Will download." << std::endl;
-            saveMetadataTo(_cache_dir);
+            if ( _cache_dir.empty() || !PathInfo(_cache_dir).isExist() )
+            {
+              DBG << "Cache dir not set. Downloading to temp dir: " << tmpMetadataDir() << std::endl;
+              // as we have no local dir set we use a tmp one, but we use a member variable because
+              // it cant go out of scope while the source exists.
+              saveMetadataTo(tmpMetadataDir());
+            }
+            else
+            {
+              DBG << "Cached metadata not found in [" << _cache_dir << "]. Will download." << std::endl;
+              saveMetadataTo(_cache_dir);
+            }
           }
-        }
-
-        MIL << "YUM source initialized." << std::endl;
-        MIL << "   Url      : " << url() << std::endl;
-        MIL << "   Path     : " << path() << std::endl;
-        MIL << "   Metadata : " << metadataRoot() << (_cache_dir.empty() ? " [TMP]" : " [CACHE]") << std::endl;
+  
+          MIL << "YUM source initialized." << std::endl;
+          MIL << "   Url      : " << url() << std::endl;
+          MIL << "   Path     : " << path() << std::endl;
+          MIL << "   Metadata : " << metadataRoot() << (_cache_dir.empty() ? " [TMP]" : " [CACHE]") << std::endl;
       }
 
       void YUMSourceImpl::checkMetadataChecksums() const

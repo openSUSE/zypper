@@ -140,15 +140,17 @@ namespace zypp
       _base_source = base_source;
       _autorefresh = auto_refresh;
       
+      callback::SendReport<source::CreateSourceReport> report;
+      
       try
-        {
-          factoryInit();
-        }
+      {
+        factoryInit();
+      }
       catch ( Exception & excpt )
-        {
-          _store.clear();
-          ZYPP_RETHROW( excpt );
-        }
+      {
+        _store.clear();
+        ZYPP_RETHROW( excpt );
+      }
     }
 
     ///////////////////////////////////////////////////////////////////

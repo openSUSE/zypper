@@ -112,14 +112,13 @@ namespace zypp
     Pathname products_file = Pathname("media.1/products");
 
     try  {
-	media_mgr.provideFile (id, products_file);
-	products_file = media_mgr.localPath (id, products_file);
-	scanProductsFile (products_file, products_r);
+      media_mgr.provideFile (id, products_file);
+      products_file = media_mgr.localPath (id, products_file);
+      scanProductsFile (products_file, products_r);
     }
     catch ( const Exception & excpt ) {
-	ZYPP_CAUGHT(excpt);
-
-	MIL << "No products description found on the Url" << endl;
+      ZYPP_CAUGHT(excpt);
+      MIL << "No products description found on the Url" << endl;
     }
 
     media_mgr.release(id);
@@ -130,14 +129,17 @@ namespace zypp
     return Source_Ref::noSource;  
   }
   
+//   bool SourceFactory::probeSource( const std::string name, boost::function<bool()> prober, callback::SendReport<CreateSourceReport> &report )
+//   {
+//   
+//   }
+  
   Source_Ref SourceFactory::createFrom( const Url & url_r, const Pathname & path_r, const std::string & alias_r, const Pathname & cache_dir_r, bool base_source )
   {
     if (! url_r.isValid())
       ZYPP_THROW( Exception("Empty URL passed to SourceFactory") );
 
-    callback::SendReport<CreateSourceReport> report;
-
-    report->startProbe (url_r);
+    callback::SendReport<ProbeSourceReport> report;
 
 #warning if cache_dir is provided, no need to open the original url
     // open the media
@@ -156,41 +158,88 @@ namespace zypp
     }
 
     bool auto_refresh = media::MediaAccess::canBeVolatile( url_r );
+    
+    report->start(url_r);
+    
+    //////////////////////////////////////////////////////////////////
+    // TRY YUM
+    //////////////////////////////////////////////////////////////////
     try
     {
-      MIL << "Trying the YUM source" << endl;
-      Source_Ref::Impl_Ptr impl( base_source
-          ? Impl::createBaseSourceImpl<yum::YUMSourceImpl>(id, path_r, alias_r, cache_dir_r, auto_refresh)
-        : Impl::createSourceImpl<yum::YUMSourceImpl>(id, path_r, alias_r, cache_dir_r, auto_refresh) );
-      MIL << "Found the YUM source" << endl;
-
-      report->endProbe (url_r);
-
-      return Source_Ref(impl);
+      boost::function<bool()> probe = yum::YUMSourceImpl::Prober( id, path_r );
+ 
+      if ( probe() )
+      {
+        report->successProbe(url_r, "YUM");
+        report->finish(url_r, ProbeSourceReport::NO_ERROR, "");
+        try
+        {
+          Source_Ref::Impl_Ptr impl( base_source
+            ? Impl::createBaseSourceImpl<yum::YUMSourceImpl>(id, path_r, alias_r, cache_dir_r, auto_refresh)
+            : Impl::createSourceImpl<yum::YUMSourceImpl>(id, path_r, alias_r, cache_dir_r, auto_refresh) );
+          
+          return Source_Ref(impl);
+        }
+        catch (const Exception & excpt_r)
+        {
+          ZYPP_CAUGHT(excpt_r);
+          MIL << "Not YUM source, trying next type" << endl;
+        }
+      }
+      else
+      {
+        report->failedProbe(url_r, "YUM");
+      }
     }
     catch (const Exception & excpt_r)
     {
-      ZYPP_CAUGHT(excpt_r);
-      MIL << "Not YUM source, trying next type" << endl;
+      report->finish(url_r, ProbeSourceReport::NO_ERROR, "");
     }
+
+    //////////////////////////////////////////////////////////////////
+    // TRY YAST
+    //////////////////////////////////////////////////////////////////
     try
     {
-      MIL << "Trying the SUSE tags source" << endl;
-      Source_Ref::Impl_Ptr impl( base_source
-          ? Impl::createBaseSourceImpl<susetags::SuseTagsImpl>(id, path_r, alias_r, cache_dir_r, auto_refresh)
-        : Impl::createSourceImpl<susetags::SuseTagsImpl>(id, path_r, alias_r, cache_dir_r, auto_refresh) );
-      MIL << "Found the SUSE tags source" << endl;
-
-      report->endProbe (url_r);
-
-      return Source_Ref(impl);
+      boost::function<bool()> probe = susetags::SuseTagsImpl::Prober( id, path_r );
+ 
+      if ( probe() )
+      {
+        report->successProbe(url_r, "YaST");
+        report->finish(url_r, ProbeSourceReport::NO_ERROR, "");
+        try
+        {
+          Source_Ref::Impl_Ptr impl( base_source
+              ? Impl::createBaseSourceImpl<susetags::SuseTagsImpl>(id, path_r, alias_r, cache_dir_r, auto_refresh)
+            : Impl::createSourceImpl<susetags::SuseTagsImpl>(id, path_r, alias_r, cache_dir_r, auto_refresh) );
+          return Source_Ref(impl);
+        }
+        catch (const Exception & excpt_r)
+        {
+          ZYPP_CAUGHT(excpt_r);
+          MIL << "Not YUM source, trying next type" << endl;
+        }
+      }
+      else
+      {
+        report->failedProbe(url_r, "YaST");
+      }
     }
     catch (const Exception & excpt_r)
     {
-      ZYPP_CAUGHT(excpt_r);
-      MIL << "Not SUSE tags source, trying next type" << endl;
-    }
-
+      report->finish(url_r, ProbeSourceReport::NO_ERROR, "");
+    } 
+    
+    //////////////////////////////////////////////////////////////////
+    // TRY PLAINDIR
+    //////////////////////////////////////////////////////////////////
+    //FIXME disabled
+    report->finish(url_r, ProbeSourceReport::INVALID, "Unknown source type");
+    ZYPP_THROW( Exception("Unknown source type for " + url_r.asString() ) );
+    
+    
+    return Source_Ref(); // not reached!!
+    
     try
     {
       if ( ! ( ( url_r.getScheme() == "file") || ( url_r.getScheme() == "dir ") ) )
@@ -200,7 +249,7 @@ namespace zypp
             ? Impl::createBaseSourceImpl<plaindir::PlaindirImpl>(id, path_r, alias_r, cache_dir_r, auto_refresh)
           : Impl::createSourceImpl<plaindir::PlaindirImpl>(id, path_r, alias_r, cache_dir_r, auto_refresh) );
         MIL << "Using the Plaindir source" << endl;
-        report->endProbe (url_r);
+        //report->endProbe (url_r);
         return Source_Ref(impl);
       }
       else
@@ -209,12 +258,10 @@ namespace zypp
       }
     }
     catch (const Exception & excpt_r)
-      {
+    {
             ZYPP_CAUGHT(excpt_r);
             MIL << "Not Plaindir source, trying next type" << endl;
-      }
-
-    report->endProbe (url_r);
+    }
 
     ERR << "No next type of source" << endl;
     ZYPP_THROW(Exception("Cannot create the installation source"));

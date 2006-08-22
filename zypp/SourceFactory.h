@@ -30,6 +30,10 @@ using namespace boost;
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
+  template<class T>
+  bool probeSource( media::MediaAccessId media_id );
+  
+  
   ///////////////////////////////////////////////////////////////////
   //
   //	CLASS NAME : SourceFactory
@@ -94,8 +98,8 @@ namespace zypp
      * \throw Exception or MediaException on fail
      */
     void listProducts( const Url & url_r, ProductSet & products_r );
-
   private:
+//     bool probeSource( const std::string name, boost::function<bool()> prober, callback::SendReport<CreateSourceReport> &report );
     void scanProductsFile( const Pathname & file_r, ProductSet & pset_r ) const;
   };
   ///////////////////////////////////////////////////////////////////
