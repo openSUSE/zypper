@@ -21,6 +21,9 @@ LIBZYPP_CURRENT=$((LIBZYPP_MAJOR * 100 + LIBZYPP_MINOR))
 LIBZYPP_AGE=$((LIBZYPP_MINOR - LIBZYPP_COMPATMINOR))
 LIBZYPP_VERSION_INFO="-version-info $LIBZYPP_CURRENT:LIBZYPP_PATCH:$LIBZYPP_AGE"
 AC_SUBST(LIBZYPP_VERSION_INFO)
+
+# just to display the library name at the end of configure
+LIBZYPP_LIBRARY_NAME=lib${PACKAGE}.so.$((${LIBZYPP_CURRENT}-${LIBZYPP_AGE})).${LIBZYPP_AGE}.LIBZYPP_PATCH
 dnl ==================================================
 
 # libzypp compile time features/option tags,
@@ -285,7 +288,9 @@ Configuration:
 
   PACKAGE:              ${PACKAGE}
   VERSION:              ${VERSION}
-  LIBZYPP_VERSION_INFO  ${LIBZYPP_VERSION_INFO}
+
+  LIBZYPP_VERSION_INFO: ${LIBZYPP_VERSION_INFO}
+  LIBZYPP_LIBRARY_NAME: ${LIBZYPP_LIBRARY_NAME}
 
   FEATURES:             ${ZYPP_FEATURES}
 
