@@ -29,7 +29,7 @@ namespace zypp {
     //   or '1\n' -> true
     // reads characters from stdin until newline. Defaults to 'false'
     static bool
-        readCallbackAnswer()
+    readCallbackAnswer()
     {
         return true;
     }
