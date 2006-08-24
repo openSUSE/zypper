@@ -13,5 +13,6 @@
 </setup>
 <trial>
   <showpool all="yes" prefix=">!>"/>
+  <install channel="beta52" name="scim"/>
 </trial>
 </test>
