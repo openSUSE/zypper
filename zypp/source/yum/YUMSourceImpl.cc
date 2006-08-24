@@ -165,6 +165,7 @@ namespace zypp
           copy_result = filesystem::copy( remote_repomd_key, local_dir + "/repodata/repomd.xml.key");
           if ( copy_result != 0 )
             ZYPP_THROW(Exception("Can't copy " + remote_repomd_key.asString() + " to " + local_dir.asString() + "/repodata/repomd.xml.key"));
+          
           getZYpp()->keyRing()->importKey(local_dir + "/repodata/repomd.xml.key" , false);
         }
 

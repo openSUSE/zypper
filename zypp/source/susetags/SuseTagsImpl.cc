@@ -270,7 +270,7 @@ namespace zypp
               ZYPP_THROW(Exception("Unable to copy " + filename + " to " + (local_dir + "/DATA").asString()));
             
             if ( filename == "content.key" )
-              z->keyRing()->importKey(contentFileKey(), false);  
+              z->keyRing()->importKey(local_dir + "DATA/content.key", false);  
               
             MIL << "cached " << filename << std::endl;
           }

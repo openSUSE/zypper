@@ -237,7 +237,7 @@ size_t *susekey_size=&_susekey_size;
 
 void publickey_test()
 {
-  BOOST_CHECK_THROW( zypp::devel::PublicKey("nonexistant"), Exception );
+  BOOST_CHECK_THROW( zypp::PublicKey("nonexistant"), Exception );
   
   filesystem::TmpFile file;
   ofstream str(file.path().asString().c_str(),ofstream::out);
@@ -249,12 +249,16 @@ void publickey_test()
   str.flush();
   str.close();
  
-  zypp::devel::PublicKey k2(file.path());
+  zypp::PublicKey k2(file.path());
   
   BOOST_CHECK_EQUAL( k2.id(), "A84EDAE89C800ACA" );
   BOOST_CHECK_EQUAL( k2.name(), "SuSE Package Signing Key <build@suse.de>" );
   BOOST_CHECK_EQUAL( k2.fingerprint(), "79C179B2E1C820C1890F9994A84EDAE89C800ACA" );
-    
+  BOOST_REQUIRE( k2.path() != Pathname() );
+  BOOST_REQUIRE( k2 == k2 );
+  // test for a empty key
+  zypp::PublicKey empty_key;
+  BOOST_REQUIRE( ! empty_key.isValid() );
 }
 
 test_suite*

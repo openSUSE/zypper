@@ -312,7 +312,7 @@ int main(int argc, char **argv)
   
   if (vm.count("sources"))
   {
-    vector<string> sources = vm["input-file"].as< vector<string> >();
+    vector<string> sources = vm["sources"].as< vector<string> >();
     //MIL << "Additional sources are: " << sources << "\n";
     for ( vector<string>::const_iterator it = sources.begin(); it != sources.end(); ++it )
     {

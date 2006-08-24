@@ -1,4 +1,24 @@
 -------------------------------------------------------------------
+Thu Aug 24 15:34:45 CEST 2006 - dmacvicar@suse.de
+
+- new keyring callbacks
+- separate trust key from import key
+- use PublicKey class instead of params, to be able
+  to add more info like photos later (pending #181682)
+- update zmart with those callbacks.
+- better error handling (Exception types)
+- make tmp file names more readable depending on the context
+- r4026 
+
+-------------------------------------------------------------------
+Tue Aug 22 22:35:30 CEST 2006 - dmacvicar@suse.de
+
+- decouple probing from source creation, using the new
+  media test for existence functions.
+- r4019 
+
+-------------------------------------------------------------------
+
 Tue Aug 22 17:56:53 CEST 2006 - mt@suse.de
 
 - Fixed getDoesFileExist to reset the transfer range

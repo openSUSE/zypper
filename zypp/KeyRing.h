@@ -22,6 +22,7 @@
 #include "zypp/Callback.h"
 #include "zypp/base/PtrTypes.h"
 #include "zypp/Locale.h"
+#include "zypp/PublicKey.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -32,32 +33,39 @@ namespace zypp
   struct KeyRingReport : public callback::ReportBase
   {
     virtual bool askUserToAcceptUnsignedFile( const std::string &file );
-    virtual bool askUserToAcceptUnknownKey( const std::string &file, const std::string &keyid, const std::string &keyname, const std::string &fingerprint );
-    virtual bool askUserToTrustKey( const std::string &keyid, const std::string &keyname, const std::string &fingerprint);
-    virtual bool askUserToAcceptVerificationFailed( const std::string &file, const std::string &keyid, const std::string &keyname, const std::string &fingerprint );
+    virtual bool askUserToAcceptUnknownKey( const std::string &file, const std::string &id );
+    virtual bool askUserToTrustKey( const PublicKey &key);
+    virtual bool askUserToImportKey( const PublicKey &key);
+    virtual bool askUserToAcceptVerificationFailed( const std::string &file, const PublicKey &key );
   };
   
   struct KeyRingSignals : public callback::ReportBase
   {
-    virtual void trustedKeyAdded( const KeyRing &keyring, const std::string &keyid, const std::string &keyname, const std::string &fingerprint )
+    virtual void trustedKeyAdded( const KeyRing &keyring, const PublicKey &key )
     {}
-    virtual void trustedKeyRemoved( const KeyRing &keyring, const std::string &keyid, const std::string &keyname, const std::string &fingerprint )
+    virtual void trustedKeyRemoved( const KeyRing &keyring, const PublicKey &key )
     {}
-  };
-  
-  struct PublicKey
-  {
-    bool operator==(PublicKey b)
-    { return (b.id == id) && (b.fingerprint == fingerprint); }
-    
-    bool operator==(std::string sid)
-    { return sid == id; }
-    
-    std::string id;
-    std::string name;
-    std::string fingerprint;
   };
 
+  class KeyRingException : public Exception
+   {
+     public:
+       /** Ctor taking message.
+      * Use \ref ZYPP_THROW to throw exceptions.
+        */
+       KeyRingException()
+       : Exception( "Bad Key Exception" )
+       {}
+       /** Ctor taking message.
+        * Use \ref ZYPP_THROW to throw exceptions.
+        */
+       KeyRingException( const std::string & msg_r )
+       : Exception( msg_r )
+       {}
+       /** Dtor. */
+       virtual ~KeyRingException() throw() {};
+   };
+  
   ///////////////////////////////////////////////////////////////////
   //
   //	CLASS NAME : KeyRing
@@ -82,8 +90,7 @@ namespace zypp
      * imports a key from a file.
      * throw if key was not imported
      */
-    void importKey( const Pathname &keyfile, bool trusted = false);
-    PublicKey readPublicKey( const Pathname &keyfile );
+    void importKey( const PublicKey &key, bool trusted = false);
     
     void dumpTrustedPublicKey( const std::string &id, std::ostream &stream )
     { dumpPublicKey(id, true, stream); }
@@ -112,7 +119,6 @@ namespace zypp
      * The boolr eturned depends on user desicion to trust or not.
      */
     bool verifyFileSignatureWorkflow( const Pathname &file, const std::string filedesc, const Pathname &signature);
-    
     bool verifyFileSignature( const Pathname &file, const Pathname &signature);
     bool verifyFileTrustedSignature( const Pathname &file, const Pathname &signature);
 

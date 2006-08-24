@@ -66,15 +66,18 @@ namespace zypp
   bool KeyRingReport::askUserToAcceptUnsignedFile( const std::string &file )
   { return _keyRingDefaultAccept; }
 
-  bool KeyRingReport::askUserToAcceptUnknownKey( const std::string &file, const std::string &keyid, const std::string &keyname, const std::string &fingerprint )
+  bool KeyRingReport::askUserToAcceptUnknownKey( const std::string &file, const std::string &id )
   { return _keyRingDefaultAccept; }
 
-  bool KeyRingReport::askUserToTrustKey( const std::string &keyid, const std::string &keyname, const std::string &fingerprint )
+  bool KeyRingReport::askUserToTrustKey( const PublicKey &key )
   { return _keyRingDefaultAccept; }
 
-  bool KeyRingReport::askUserToAcceptVerificationFailed( const std::string &file, const std::string &keyid, const std::string &keyname, const std::string &fingerprint )
+  bool KeyRingReport::askUserToImportKey( const PublicKey &key)
   { return _keyRingDefaultAccept; }
-
+  
+  bool KeyRingReport::askUserToAcceptVerificationFailed( const std::string &file, const PublicKey &key )
+  { return _keyRingDefaultAccept; }
+  
   ///////////////////////////////////////////////////////////////////
   //
   //	CLASS NAME : KeyRing::Impl
@@ -83,11 +86,11 @@ namespace zypp
   struct KeyRing::Impl
   {
     Impl(const Pathname &baseTmpDir)
-    : _trusted_tmp_dir(baseTmpDir)
-    ,  _general_tmp_dir(baseTmpDir)
+    : _trusted_tmp_dir(baseTmpDir, "zypp-trusted-kr")
+   ,  _general_tmp_dir(baseTmpDir, "zypp-general-kr")
+   , _base_dir( baseTmpDir )
 
     {
-      _base_dir = baseTmpDir;
     }
 
     /*
@@ -101,11 +104,11 @@ namespace zypp
     }
     */
 
-    void importKey( const Pathname &keyfile, bool trusted = false);
-    PublicKey readPublicKey( const Pathname &keyfile );
-    std::string readSignatureKeyId( const Pathname &signature );
-
+    void importKey( const PublicKey &key, bool trusted = false);
     void deleteKey( const std::string &id, bool trusted );
+    
+    std::string readSignatureKeyId( const Pathname &signature );
+    
     std::list<PublicKey> trustedPublicKeys();
     std::list<PublicKey> publicKeys();
 
@@ -119,9 +122,8 @@ namespace zypp
     //mutable std::map<Locale, std::string> translations;
     bool verifyFile( const Pathname &file, const Pathname &signature, const Pathname &keyring);
     void importKey( const Pathname &keyfile, const Pathname &keyring);
-
-    void exportKey( std::string id, const Pathname &keyfile, bool trusted);
-
+    PublicKey exportKey( std::string id, const Pathname &keyring);
+    void dumpPublicKey( const std::string &id, const Pathname &keyring, std::ostream &stream );
     void deleteKey( const std::string &id, const Pathname &keyring );
     std::list<PublicKey> publicKeys(const Pathname &keyring);
 
@@ -160,9 +162,9 @@ namespace zypp
     return _trusted_tmp_dir.path();
   }
 
-  void KeyRing::Impl::importKey( const Pathname &keyfile, bool trusted)
+  void KeyRing::Impl::importKey( const PublicKey &key, bool trusted)
   {
-    importKey( keyfile, trusted ? trustedKeyRing() : generalKeyRing() );
+    importKey( key.path(), trusted ? trustedKeyRing() : generalKeyRing() );
   }
 
   void KeyRing::Impl::deleteKey( const std::string &id, bool trusted)
@@ -196,28 +198,44 @@ namespace zypp
     std::list<PublicKey> keys = publicKeys(keyring);
     for (std::list<PublicKey>::const_iterator it = keys.begin(); it != keys.end(); it++)
     {
-      if ( id == (*it).id )
+      if ( id == (*it).id() )
         return true;
     }
     return false;
   }
-
-  void KeyRing::Impl::exportKey( std::string id, const Pathname &keyfile, bool trusted)
+  
+  PublicKey KeyRing::Impl::exportKey( std::string id, const Pathname &keyring)
   {
+    TmpFile tmp_file( _base_dir, "pubkey-"+id+"-" );
+    Pathname keyfile = tmp_file.path();
+    MIL << "Going to export key " << id << " from " << keyring << " to " << keyfile << endl;
+     
     try {
       std::ofstream os(keyfile.asString().c_str());
-      dumpPublicKey( id, trusted, os );
+      dumpPublicKey( id, keyring, os );
       os.close();
+      PublicKey key(keyfile);
+      return key;
+    }
+    catch (BadKeyException &e)
+    {
+      ERR << "Cannot create public key " << id << " from " << keyring << " keyring  to file " << e.keyFile() << std::endl;
+      ZYPP_THROW(Exception("Cannot create public key " + id + " from " + keyring.asString() + " keyring to file " + e.keyFile().asString() ) );
     }
     catch (std::exception &e)
     {
-      ERR << "Cannot export key " << id << " from " << (trusted ? "trusted" : "untrusted ") << " keyring  to file " << keyfile << std::endl;
+      ERR << "Cannot export key " << id << " from " << keyring << " keyring  to file " << keyfile << std::endl;
     }
+    return PublicKey();
   }
 
   void KeyRing::Impl::dumpPublicKey( const std::string &id, bool trusted, std::ostream &stream )
   {
-    Pathname keyring = trusted ? trustedKeyRing() : generalKeyRing();
+     dumpPublicKey( id, ( trusted ? trustedKeyRing() : generalKeyRing() ), stream );
+  }
+  
+  void KeyRing::Impl::dumpPublicKey( const std::string &id, const Pathname &keyring, std::ostream &stream )
+  {
     const char* argv[] =
     {
       "gpg",
@@ -254,9 +272,9 @@ namespace zypp
     // if signature does not exists, ask user if he wants to accept unsigned file.
     if( signature.empty() || (!PathInfo(signature).isExist()) )
     {
-	bool res = report->askUserToAcceptUnsignedFile( filedesc );
-	MIL << "User decision on unsigned file: " << res << endl;
-	return res;
+      bool res = report->askUserToAcceptUnsignedFile( filedesc );
+      MIL << "User decision on unsigned file: " << res << endl;
+      return res;
     }
 
     // get the id of the signature
@@ -265,38 +283,44 @@ namespace zypp
     // doeskey exists in trusted keyring
     if ( publicKeyExists( id, trustedKeyRing() ) )
     {
-      TmpFile trustedKey(_base_dir);
-      exportKey( id, trustedKey.path(), true);
-      PublicKey key = readPublicKey(trustedKey.path());
-      MIL << "Key " << id << " " << key.name << " is trusted" << std::endl;
+      PublicKey key = exportKey( id, trustedKeyRing() );
+      
+      MIL << "Key " << id << " " << key.name() << " is trusted" << std::endl;
       // it exists, is trusted, does it validates?
       if ( verifyFile( file, signature, trustedKeyRing() ) )
         return true;
       else
-        return report->askUserToAcceptVerificationFailed( filedesc, key.id, key.name, key.fingerprint );
+        return report->askUserToAcceptVerificationFailed( filedesc, key );
     }
     else
     {
       if ( publicKeyExists( id, generalKeyRing() ) )
       {
-        TmpFile unKey(_base_dir);
-        exportKey( id, unKey.path(), false);
-        MIL << "Exported key " << id << " to " << unKey << std::endl;
-
-        PublicKey key = readPublicKey(unKey.path());
-        MIL << "Key " << id << " " << key.name << " is not trusted" << std::endl;
+        PublicKey key =  exportKey( id, generalKeyRing());
+        MIL << "Exported key " << id << " to " << key.path() << std::endl;
+        MIL << "Key " << id << " " << key.name() << " is not trusted" << std::endl;
         // ok the key is not trusted, ask the user to trust it or not
-#warning We need the key details passed to the callback
-        if ( report->askUserToTrustKey(key.id, key.name, key.fingerprint) )
+        #warning We need the key details passed to the callback
+        if ( report->askUserToTrustKey( key ) )
         {
-          MIL << "User wants to trust key " << id << " " << key.name << std::endl;
+          MIL << "User wants to trust key " << id << " " << key.name() << std::endl;
           //dumpFile(unKey.path());
 
-          importKey( unKey.path(), trustedKeyRing() );
-          emitSignal->trustedKeyAdded( (const KeyRing &)(*this), id, key.name, key.fingerprint );
+          Pathname which_keyring;
+          if ( report->askUserToImportKey( key ) )
+          {
+            MIL << "User wants to import key " << id << " " << key.name() << std::endl;
+            importKey( key.path(), trustedKeyRing() );
+            emitSignal->trustedKeyAdded( (const KeyRing &)(*this), key );
+            which_keyring = trustedKeyRing();
+          }
+          else
+          {
+            which_keyring = generalKeyRing();
+          }
 
           // emit key added
-          if ( verifyFile( file, signature, trustedKeyRing() ) )
+          if ( verifyFile( file, signature, which_keyring ) )
           {
             MIL << "File signature is verified" << std::endl;
             return true;
@@ -304,7 +328,7 @@ namespace zypp
           else
           {
             MIL << "File signature check fails" << std::endl;
-            if ( report->askUserToAcceptVerificationFailed( filedesc, key.id, key.name, key.fingerprint ) )
+            if ( report->askUserToAcceptVerificationFailed( filedesc, key ) )
             {
               MIL << "User continues anyway." << std::endl;
               return true;
@@ -318,7 +342,7 @@ namespace zypp
         }
         else
         {
-          MIL << "User does not want to trust key " << id << " " << key.name << std::endl;
+          MIL << "User does not want to trust key " << id << " " << key.name() << std::endl;
           return false;
         }
       }
@@ -326,7 +350,7 @@ namespace zypp
       {
         // unknown key...
         MIL << "File [" << file << "] ( " << filedesc << " ) signed with unknown key [" << id << "]" << std::endl;
-        if ( report->askUserToAcceptUnknownKey( filedesc, id, "", "" ) )
+        if ( report->askUserToAcceptUnknownKey( filedesc, id ) )
         {
           MIL << "User wants to accept unknown key " << id << std::endl;
           return true;
@@ -339,62 +363,6 @@ namespace zypp
       }
     }
     return false;
-  }
-
-
-  PublicKey KeyRing::Impl::readPublicKey( const Pathname &keyfile )
-  {
-    TmpDir dir(_base_dir);
-
-    const char* argv[] =
-    {
-      "gpg",
-      "--no-default-keyring",
-      "--homedir",
-      dir.path().asString().c_str(),
-      "--with-fingerprint",
-      "--with-colons",
-      "--quiet",
-      "--no-tty",
-      "--no-greeting",
-      "--batch",
-      "--status-fd",
-      "1",
-      keyfile.asString().c_str(),
-      NULL
-    };
-
-    ExternalProgram prog(argv,ExternalProgram::Discard_Stderr, false, -1, true);
-
-    std::string line;
-    int count = 0;
-
-    str::regex rxColons("^([^:]*):([^:]*):([^:]*):([^:]*):([^:]*):([^:]*):([^:]*):([^:]*):([^:]*):([^:]*):\n$");
-
-    // pub:-:1024:17:A84EDAE89C800ACA:2000-10-19:2008-06-21::-:SuSE Package Signing Key <build@suse.de>:
-
-    PublicKey key;
-    for(line = prog.receiveLine(), count=0; !line.empty(); line = prog.receiveLine(), count++ )
-    {
-      //MIL << "[" << line << "]" << std::endl;
-      str::smatch what;
-      if(str::regex_match(line, what, rxColons, str::match_extra))
-      {
-        if ( what[1] == "pub" )
-        {
-          key.id = what[5];
-          key.name = what[10];
-          //return key;
-        }
-        else if ( what[1] == "fpr" )
-        {
-          key.fingerprint = what[10];
-        }
-        //dumpRegexpResults(what);
-      }
-    }
-    prog.close();
-    return key;
   }
 
   std::list<PublicKey> KeyRing::Impl::publicKeys(const Pathname &keyring)
@@ -431,12 +399,11 @@ namespace zypp
       str::smatch what;
       if(str::regex_match(line, what, rxColons, str::match_extra))
       {
-        PublicKey key;
+        string id;
         if ( what[1] == "pub" )
         {
-          key.id = what[5];
-          key.name = what[10];
-
+          id = what[5];
+          
           std::string line2;
           for(line2 = prog.receiveLine(); !line2.empty(); line2 = prog.receiveLine(), count++ )
           {
@@ -445,13 +412,14 @@ namespace zypp
             {
               if ( (what2[1] == "fpr") && (what2[1] != "pub") && (what2[1] !="sub"))
               {
-                key.fingerprint = what2[10];
+                //key.fingerprint = what2[10];
                 break;
               }
             }
           }
+          PublicKey key(exportKey( id, keyring ));
           keys.push_back(key);
-          MIL << "Found key " << "[" << key.id << "]" << " [" << key.name << "]" << " [" << key.fingerprint << "]" << std::endl;
+          MIL << "Found key " << "[" << key.id() << "]" << " [" << key.name() << "]" << " [" << key.fingerprint() << "]" << std::endl;
         }
         //dumpRegexpResults(what);
       }
@@ -459,9 +427,12 @@ namespace zypp
     prog.close();
     return keys;
   }
-
+    
   void KeyRing::Impl::importKey( const Pathname &keyfile, const Pathname &keyring)
   {
+    if ( ! PathInfo(keyfile).isExist() )
+      ZYPP_THROW(KeyRingException("Tried to import not existant key " + keyfile.asString() + " into keyring " + keyring.asString()));
+    
     const char* argv[] =
     {
       "gpg",
@@ -520,8 +491,8 @@ namespace zypp
   {
     MIL << "Deetermining key id if signature " << signature << std::endl;
     // HACK create a tmp keyring with no keys
-    TmpDir dir(_base_dir);
-    TmpFile fakeData(_base_dir);
+    TmpDir dir(_base_dir, "fake-keyring");
+    TmpFile fakeData(_base_dir, "fake-data");
 
     const char* argv[] =
     {
@@ -639,16 +610,12 @@ namespace zypp
   //
   ///////////////////////////////////////////////////////////////////
 
-  void KeyRing::importKey( const Pathname &keyfile, bool trusted)
+  
+  void KeyRing::importKey( const PublicKey &key, bool trusted )
   {
-    _pimpl->importKey(keyfile, trusted);
+    _pimpl->importKey( key.path(), trusted );
   }
-
-  PublicKey KeyRing::readPublicKey( const Pathname &keyfile )
-  {
-    return _pimpl->readPublicKey(keyfile);
-  }
-
+  
   std::string KeyRing::readSignatureKeyId( const Pathname &signature )
   {
     return _pimpl->readSignatureKeyId(signature);

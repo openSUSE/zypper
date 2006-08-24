@@ -16,7 +16,7 @@ LDADD =		-L$(top_srcdir)/zypp/.libs -lzypp -lboost_regex -lboost_program_options
 ## ##################################################
 
 zmart_SOURCES = 	zmart.cc
-zmart_LDFLAGS =	-static
+#zmart_LDFLAGS =	-static
 
 .PHONY:        always
 

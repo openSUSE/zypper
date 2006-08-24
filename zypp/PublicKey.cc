@@ -24,10 +24,7 @@ using std::endl;
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
-{ /////////////////////////////////////////////////////////////////
-namespace devel
-{      
-  ///////////////////////////////////////////////////////////////////
+{ /////////////////////////////////////////////////////////////////    
   //
   //	CLASS NAME : PublicKey::Impl
   //
@@ -54,7 +51,7 @@ namespace devel
      
     std::string asString() const
     {
-      return "GPG KEY";  
+      return "[" + id() + "] [" + name() + "] [" + fingerprint() + "]";
     }
     
     std::string armoredData() const
@@ -69,13 +66,25 @@ namespace devel
     std::string fingerprint() const
     { return _fingerprint; }
     
+    Pathname path() const
+    { 
+      return _data_file.path();
+      //return _data_file;
+    }
+    
     protected:
       
      void readFromFile( const Pathname &keyfile)
      {
-       if ( !PathInfo(keyfile).isExist() )
+       PathInfo info(keyfile);
+       MIL << "Reading pubkey from " << keyfile << " of size " << info.size() << " and sha1 " << filesystem::checksum(keyfile, "sha1")<< endl; 
+       if ( !info.isExist() )
          ZYPP_THROW(Exception("Can't read public key from " + keyfile.asString() + ", file not found"));
          
+       if ( copy( keyfile, _data_file.path() ) != 0 )
+         ZYPP_THROW(Exception("Can't copy public key data from " + keyfile.asString() + " to " +  _data_file.path().asString() ));
+
+       
        filesystem::TmpDir dir;
   
         const char* argv[] =
@@ -92,7 +101,7 @@ namespace devel
           "--batch",
           "--status-fd",
           "1",
-          keyfile.asString().c_str(),
+          _data_file.path().asString().c_str(),
           NULL
         };
   
@@ -127,7 +136,7 @@ namespace devel
         prog.close();
         
         if (_id.size() == 0 )
-          ZYPP_THROW(Exception("Can't read public key from " + keyfile.asString()));
+          ZYPP_THROW(BadKeyException("File " + keyfile.asString() + " doesn't contain public key data" , keyfile));
      }
     
   private:
@@ -135,6 +144,8 @@ namespace devel
     std::string _name;
     std::string _fingerprint;
     std::string _data;
+    filesystem::TmpFile _data_file;
+    //Pathname _data_file;
   private:
     friend Impl * rwcowClone<Impl>( const Impl * rhs );
     /** clone for RWCOW_pointer */
@@ -152,7 +163,7 @@ namespace devel
   : _pimpl( Impl::nullimpl() )
   {}
 
-  PublicKey::PublicKey(   const Pathname &file )
+  PublicKey::PublicKey( const Pathname &file )
   : _pimpl( new Impl(file) )
   {}
   ///////////////////////////////////////////////////////////////////
@@ -185,11 +196,10 @@ namespace devel
     
   std::string PublicKey::fingerprint() const
   { return _pimpl->fingerprint(); }
-    
-//   std::string PublicKey::text( const Locale &lang ) const
-//   { return _pimpl->text( lang ); }
+  
+  Pathname PublicKey::path() const
+  { return _pimpl->path(); }
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
-}

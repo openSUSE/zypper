@@ -30,6 +30,7 @@
 #include "zypp/Date.h"
 #include "zypp/Pathname.h"
 #include "zypp/PathInfo.h"
+#include "zypp/PublicKey.h"
 
 #include "zypp/target/rpm/RpmDb.h"
 #include "zypp/target/rpm/RpmCallbacks.h"
@@ -66,14 +67,14 @@ namespace zypp {
           disconnect();
         }
 
-        virtual void trustedKeyAdded( const KeyRing &keyring, const std::string &keyid, const std::string &keyname, const std::string &fingerprint )
+        virtual void trustedKeyAdded( const KeyRing &keyring, const PublicKey &key )
         {
           MIL << "trusted key added to zypp Keyring. Syncronizing keys with rpm keyring" << std::endl;
           _rpmdb.importZyppKeyRingTrustedKeys();
           _rpmdb.exportTrustedKeysInZyppKeyRing();
         }
 
-        virtual void trustedKeyRemoved( const KeyRing &keyring, const std::string &keyid, const std::string &keyname, const std::string &fingerprint )
+        virtual void trustedKeyRemoved( const KeyRing &keyring, const PublicKey &key  )
         {
 
         }
@@ -928,37 +929,19 @@ void RpmDb::importZyppKeyRingTrustedKeys()
     std::list<PublicKey>::iterator ik = find( rpm_keys.begin(), rpm_keys.end(), (*it));
     if ( ik != rpm_keys.end() )
     {
-      MIL << "Key " << (*it).id << " (" << (*it).name << ") is already in rpm database." << std::endl;
+      MIL << "Key " << (*it).id() << " (" << (*it).name() << ") is already in rpm database." << std::endl;
     }
     else
     {
-      // key does not exists, we need to import it into rpm
-      // create a temporary file
-      TmpFile file(getZYpp()->tmpPath());
-      // open the file for writing
-      std::ofstream os;
-      try
-      {
-        os.open(file.path().asString().c_str());
-        // dump zypp key into the tmp file
-        getZYpp()->keyRing()->dumpTrustedPublicKey( (*it).id, os );
-        os.close();
-      }
-      catch (std::exception &e)
-      {
-        ERR << "Could not dump key " << (*it).id << " (" << (*it).name << ") in tmp file " << file.path() << std::endl;
-        // just ignore the key
-      }
-
       // now import the key in rpm
       try
       {
-        importPubkey(file.path());
-        MIL << "Trusted key " << (*it).id << " (" << (*it).name << ") imported in rpm database." << std::endl;
+        importPubkey((*it).path());
+        MIL << "Trusted key " << (*it).id() << " (" << (*it).name() << ") imported in rpm database." << std::endl;
       }
       catch (RpmException &e)
       {
-        ERR << "Could not dump key " << (*it).id << " (" << (*it).name << ") in tmp file " << file.path() << std::endl;
+        ERR << "Could not import key " << (*it).id() << " (" << (*it).name() << " from " << (*it).path() << " in rpm database" << std::endl;
       }
     }
   }
@@ -1034,7 +1017,7 @@ list<PublicKey> RpmDb::pubkeys() const
         //MIL << "-----------------------------------------------" << std::endl;
         os.close();
         // read the public key from the dumped file
-        PublicKey key = getZYpp()->keyRing()->readPublicKey(file.path());
+        PublicKey key(file.path());
         ret.push_back(key);
       }
       catch (std::exception &e)

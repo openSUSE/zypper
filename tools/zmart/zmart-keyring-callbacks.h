@@ -29,9 +29,17 @@ namespace zypp {
     //   or '1\n' -> true
     // reads characters from stdin until newline. Defaults to 'false'
     static bool
-    readCallbackAnswer()
+    readBoolAnswer()
     {
+      char c = 0;
+      int  count = 0;
+      while ( (c != 'y') && (c != 'Y') && (c != 'N') && (c != 'n') )
+        cin >> c ;
+      
+      if ( ( c == 'y' ) || ( c == 'Y' ) ) 
         return true;
+      else
+        return false;
     }
 
     ///////////////////////////////////////////////////////////////////
@@ -41,19 +49,30 @@ namespace zypp {
     {
       virtual bool askUserToAcceptUnsignedFile( const std::string &file )
       {
-        return readCallbackAnswer();
+        cout << file << " is unsigned, continue? [y/n]: " << endl;
+        return readBoolAnswer();
       }
-      virtual bool askUserToAcceptUnknownKey( const std::string &file, const std::string &keyid, const std::string &keyname, const std::string &fingerprint )
+      
+      virtual bool askUserToImportKey( const PublicKey &key )
       {
-        return readCallbackAnswer();
+        cout << "Import key " << key.id() << " in trusted keyring? [y/n]: " << endl;
+        return readBoolAnswer();
+      } 
+      
+      virtual bool askUserToAcceptUnknownKey( const std::string &file, const std::string &id )
+      {
+        cout << file << " is signed with an unknown key id: " << id << ", continue? [y/n]: " << endl;
+        return readBoolAnswer();
       }
-      virtual bool askUserToTrustKey( const std::string &keyid, const std::string &keyname, const std::string &fingerprint )
+      virtual bool askUserToTrustKey( const PublicKey &key )
       {
-        return readCallbackAnswer();
+        cout  << "Do you want to trust key id " << key.id() << " " << key.name() << " fingerprint:" << key.fingerprint() << " ? [y/n]: " << endl;
+        return readBoolAnswer();
       }
-      virtual bool askUserToAcceptVerificationFailed( const std::string &file, const std::string &keyid, const std::string &keyname, const std::string &fingerprint )
+      virtual bool askUserToAcceptVerificationFailed( const std::string &file,const PublicKey &key )
       {
-        return readCallbackAnswer();
+        cout << file << "Signature verification for " << file << " with public key id " << key.id() << " " << key.name() << " fingerprint:" << key.fingerprint() << " failed, THIS IS RISKY!. continue? [y/n]: " << endl;
+        return readBoolAnswer();
       }
     };
 
@@ -62,15 +81,15 @@ namespace zypp {
     {
       virtual bool askUserToAcceptNoDigest( const zypp::Pathname &file )
       {
-        return readCallbackAnswer();
+        return readBoolAnswer();
       }
       virtual bool askUserToAccepUnknownDigest( const Pathname &file, const std::string &name )
       {
-        return readCallbackAnswer();
+        return readBoolAnswer();
       }
       virtual bool askUserToAcceptWrongDigest( const Pathname &file, const std::string &requested, const std::string &found )
       {
-        return readCallbackAnswer();
+        return readBoolAnswer();
       }
     };
 
