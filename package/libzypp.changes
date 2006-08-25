@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri Aug 25 11:35:48 CEST 2006 - dmacvicar@suse.de
+
+- libzypp 2.1.0
+- bump version due to incompatible callback changes in KeyRing
+  Sources 
+
+-------------------------------------------------------------------
 Thu Aug 24 15:34:45 CEST 2006 - dmacvicar@suse.de
 
 - new keyring callbacks
