@@ -10,6 +10,7 @@
  *
 */
 #include <iostream>
+#include <sstream>
 #include <string>
 #include <map>
 #include "zypp/base/Logger.h"
@@ -165,7 +166,8 @@ namespace zypp
       return "";
     }
 
-    void rewriteKernelDeps( Dependencies & deps )
+    void rewriteKernelDeps( Dependencies & deps,
+			    const std::string & name)
     {
       // check the smaller set (requires) first
       Dep dep = Dep::REQUIRES;
@@ -183,7 +185,7 @@ namespace zypp
       // flavor == kernel flavor
       // cset == CapSet to be rewritten (provides for kernel, requires for kmp)
       // dep == deps to be set in 'to'
-
+      DBG << "rewriteKernelDeps() " << name << std::endl;
       DBG << "flavor '" << flavor << "'" << std::endl;
 
       flavor.append( ":" );
@@ -245,8 +247,9 @@ namespace zypp
     // check for kernel(xxx) and rewrite them to kernel(flavor:xxx)
     if ( _kind == ResTraits<Package>::kind )
       {
-	dumpOn( DBG << "rewriteKernelDeps()" ) << std::endl;
-	rewriteKernelDeps( _deps );   
+	  std::ostringstream name;
+	  dumpOn( name );
+	  rewriteKernelDeps( _deps, name.str() );   
       }
 
     // assert all prerequires are in requires too
