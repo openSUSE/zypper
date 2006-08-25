@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri Aug 25 13:05:33 CEST 2006 - schubi@suse.de
+
+- New behaviour in the solver: try with 'best' package first, try with 'all'
+  packages if this fails. 
+  Bug :Bug 191983
+
+-------------------------------------------------------------------
 Fri Aug 25 11:35:48 CEST 2006 - dmacvicar@suse.de
 
 - libzypp 2.1.0

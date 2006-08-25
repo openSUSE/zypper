@@ -34,7 +34,8 @@
 #include "zypp/ZYppFactory.h"
 #include "zypp/SystemResObject.h"
 
-
+#define MAX_SECOND_RUNS 3
+#define TIMOUT_SECOND_RUN 30
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp
@@ -96,6 +97,8 @@ Resolver::Resolver (const ResPool & pool)
     , _maxSolverPasses (0)
     , _verifying (false)
     , _testing (false)
+    , _tryAllPossibilities (false)
+    , _scippedPossibilities (false)
     , _valid_solution_count (0)
     , _best_context (NULL)
     , _timed_out (false)
@@ -142,6 +145,10 @@ Resolver::reset (void)
 
     _best_context = NULL;
     _timed_out = false;
+    
+    _tryAllPossibilities = false;
+    _scippedPossibilities = false;
+    
 }
 
 
@@ -670,6 +677,8 @@ Resolver::resolveDependencies (const ResolverContext_Ptr context)
 				    _ignoreArchitectureItem);
     initial_queue->context()->setForceResolve( _forceResolve );
     initial_queue->context()->setUpgradeMode( _upgradeMode );
+    initial_queue->context()->setTryAllPossibilities( _tryAllPossibilities );
+    initial_queue->context()->setScippedPossibilities( _scippedPossibilities );
 
     /* If this is a verify, we do a "soft resolution" */
 
@@ -853,6 +862,44 @@ Resolver::resolveDependencies (const ResolverContext_Ptr context)
 		   << " / Prun " << (long) _pruned_queues.size()
 		   << " / Defr " << (long) _deferred_queues.size()
 		   << " / Invl " << (long) _invalid_queues.size() );
+    
+    
+    if ( !(_best_context && _best_context->isValid()) // no valid solution
+	 && !_tryAllPossibilities ) { // a second run with ALL possibilities has not been tried
+
+	for (ResolverQueueList::iterator iter = _invalid_queues.begin();
+	     iter != _invalid_queues.end(); iter++) {
+	    // evaluate if there are other possibilities which have not been regarded
+	    ResolverQueue_Ptr invalid =	*iter;    	    
+	    if (invalid->context()->scippedPossibilities()) {
+		_scippedPossibilities = true;
+		break;
+	    }
+	}
+	
+	if (_scippedPossibilities) { // possible other solutions scipped	 
+	    // lets try a second run with ALL possibilities
+	    _tryAllPossibilities = true;
+	    MIL << "================================================================"
+		<< endl;
+	    MIL << "No valid solution, lets try a second run with ALL possibilities"
+		<< endl;
+	    if (_maxSolverPasses <= 0) 
+		_maxSolverPasses = MAX_SECOND_RUNS;	    
+	    if (_timeout_seconds <= 0) 
+		_timeout_seconds = TIMOUT_SECOND_RUN;
+
+	    MIL << "But no longer than " << MAX_SECOND_RUNS << " runs or "
+		<< TIMOUT_SECOND_RUN << " seconds" << endl;
+	    MIL << "================================================================"
+		<< endl;
+	    // saving invalid queue
+	    ResolverQueueList   save_queues = _invalid_queues;
+	    resolveDependencies ();
+	    if (!(_best_context && _best_context->isValid()))
+		_invalid_queues = save_queues; // take the old
+	}
+    }
 
     return _best_context && _best_context->isValid();
 }

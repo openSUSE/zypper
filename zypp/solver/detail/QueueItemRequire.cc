@@ -221,32 +221,40 @@ struct RequireProcess
 	    }
 
 
-	    // if we already have same name
-	    //   check for better architecture, then edition
-	    //   see yast2-pkg-bindings, Package.cc, ProvideProcess
+	    if (!_context->tryAllPossibilities()) {
+		// if we already have same name
+		//   check for better architecture, then edition
+		//   see yast2-pkg-bindings, Package.cc, ProvideProcess
 
-	    UniqMap::iterator upos = uniq.find( provider->name() );
-	    if (upos != uniq.end()) {
-		if ((upos->second->arch().compare( provider->arch() ) < 0)	// better arch
-		    || ((upos->second->arch().compare( provider->arch() ) == 0)		    // or same arch
-		        && (upos->second->edition().compare( provider->edition() ) < 0) ) ) // and better edition
-		{
-		    // new provider is 'better'
+		UniqMap::iterator upos = uniq.find( provider->name() );
 
-		    // erase the old provider
-		    for (PoolItemList::iterator it = providers.begin(); it != providers.end(); ++it) {
-			if (*it == upos->second) {
-			    _XDEBUG("Kicking " << *it << " for " << provider)
-			    providers.erase( it );
-			    break;
-			}
-		    } 
-		    upos = uniq.end();	// trigger insertion of new provider below
+		if (upos != uniq.end()) {
+		    if ((upos->second->arch().compare( provider->arch() ) < 0)	// better arch
+			|| ((upos->second->arch().compare( provider->arch() ) == 0)		    // or same arch
+			    && (upos->second->edition().compare( provider->edition() ) < 0) ) ) // and better edition
+		    {
+			// new provider is 'better'
+
+			// erase the old provider
+			for (PoolItemList::iterator it = providers.begin(); it != providers.end(); ++it) {
+			    if (*it == upos->second) {
+				_context->setScippedPossibilities( true ); // Flag that there are other possibilities
+				// which we are currently ignore
+				_XDEBUG("Kicking " << *it << " for " << provider)
+				    providers.erase( it );
+				break;
+			    }
+			} 
+			upos = uniq.end();	// trigger insertion of new provider below
+		    }
 		}
-	    }
-	    if (upos == uniq.end()) {
+		if (upos == uniq.end()) {
+		    providers.push_front( provider );
+		    uniq[provider->name()] = provider;
+		}
+	    } else {
+		// try all alternatives
 		providers.push_front( provider );
-		uniq[provider->name()] = provider;
 	    }
 	}
 

@@ -99,6 +99,8 @@ ResolverContext::ResolverContext (const ResPool & pool, const Arch & arch, Resol
     , _architecture(arch)
     , _forceResolve(false)
     , _upgradeMode(false)
+    , _tryAllPossibilities(false)
+    , _scippedPossibilities(false)
       
 {
 _XDEBUG( "ResolverContext[" << this << "]::ResolverContext(" << parent << ")" );
@@ -119,6 +121,9 @@ _XDEBUG( "ResolverContext[" << this << "]::ResolverContext(" << parent << ")" );
 	_ignoreArchitectureItem = parent->_ignoreArchitectureItem;	
 	_forceResolve        = parent->_forceResolve;
 	_upgradeMode         = parent->_upgradeMode;
+	_tryAllPossibilities = parent->_tryAllPossibilities;
+	_scippedPossibilities = parent->_scippedPossibilities;
+	
     } else {
 	_min_priority = MAXINT;
     }

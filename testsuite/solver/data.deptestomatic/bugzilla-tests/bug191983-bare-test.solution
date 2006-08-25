@@ -1,0 +1,15 @@
+>!> Installing apache2-mod_python from channel sles10
+>!> Installing apache2-prefork from channel sles10
+>!> 1 problems found:
+>!> Problem:
+>!> Cannot install apache2-2.2.0-21.2.i586[sles10]
+>!> Can't install apache2-2.2.0-21.2.i586[sles10], since apache2-2.2.2-5.i586[stable] is already marked as needing to be installed
+>!>    Solution:
+>!>       do not install apache2-2.2.0-21.2.i586[sles10]
+>!>       
+>!>    Solution:
+>!>       do not install apache2-2.2.2-5.i586[stable]
+>!>       
+>!>    Solution:
+>!>       Ignore that apache2 is already set to install
+>!>       

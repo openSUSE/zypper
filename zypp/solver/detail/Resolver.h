@@ -67,6 +67,15 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
     int _maxSolverPasses;
     bool _verifying;
     bool _testing;
+    
+    // In order reducing solver time we are reducing the branches
+    // by skipping resolvables which have worse architecture,edition
+    // than a resolvable which provides the same cababilities.
+    // BUT if there is no valid solution we will regard the "other"
+    // resolvables in a second solver run too.
+    bool _tryAllPossibilities; // Try ALL alternatives
+    bool _scippedPossibilities;// Flag that there are other possibilities
+                               // which we are currently ignore
 
     // list populated by calls to addPoolItemTo*()
     QueueItemList _initial_items;
