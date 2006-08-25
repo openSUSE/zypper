@@ -5,7 +5,7 @@ noinst_PROGRAMS = zmart
 
 ## ##################################################
 
-INCLUDES = -I$(oldincludedir)/libxml2
+INCLUDES = -I$(top_srcdir)/tools/zmart -I$(oldincludedir)/libxml2
 AM_LDFLAGS =
 
 AM_CXXFLAGS =
