@@ -55,7 +55,8 @@ namespace zypp
 
 	copycaps( result, self()->dep( Dep::REQUIRES ) );
 	copycaps( result, self()->dep( Dep::RECOMMENDS) );
-
+	copycaps( result, self()->dep( Dep::SUGGESTS) );
+	
 	return result;
     }
 
