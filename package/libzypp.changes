@@ -3,6 +3,7 @@ Fri Aug 25 14:32:07 CEST 2006 - schubi@suse.de
 
 - zyppPattern->install_packages returns SUGGESTED package too.
   Bug 201476 
+  Revision 4036
 
 -------------------------------------------------------------------
 Fri Aug 25 13:05:33 CEST 2006 - schubi@suse.de
