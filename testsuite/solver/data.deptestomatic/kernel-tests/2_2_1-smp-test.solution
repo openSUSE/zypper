@@ -724,7 +724,7 @@
 >!> 2 problems found:
 >!> Problem:
 >!> cloop-kmp-smp-2.01_2.6.16_rc5_git14_3c-15.i586[packages] cannot be installed due to missing dependencies
->!> There are no installable providers of kernel(arch_i386_mm) == 9d18e89996aa1d23 for cloop-kmp-smp-2.01_2.6.16_rc5_git14_3c-15.i586[packages]
+>!> There are no installable providers of kernel(smp:fs) == 9783012b647b4e22 for cloop-kmp-smp-2.01_2.6.16_rc5_git14_3c-15.i586[packages]
 >!>    Solution:
 >!>       do not install cloop-kmp-smp
 >!>       do not install cloop-kmp-smp-2.01_2.6.16_rc5_git14_3c-15.i586[packages]
@@ -733,7 +733,7 @@
 >!>       
 >!> Problem:
 >!> nvidia-gfx-kmp-smp-1.0.8178_2.6.16_rc5_git14_3c-1.i586[packages] cannot be installed due to missing dependencies
->!> There are no installable providers of kernel(fs_proc) == 0dfc345d54329f9d for nvidia-gfx-kmp-smp-1.0.8178_2.6.16_rc5_git14_3c-1.i586[packages]
+>!> There are no installable providers of kernel(smp:fs_proc) == 0dfc345d54329f9d for nvidia-gfx-kmp-smp-1.0.8178_2.6.16_rc5_git14_3c-1.i586[packages]
 >!>    Solution:
 >!>       do not install nvidia-gfx-kmp-smp
 >!>       do not install nvidia-gfx-kmp-smp-1.0.8178_2.6.16_rc5_git14_3c-1.i586[packages]

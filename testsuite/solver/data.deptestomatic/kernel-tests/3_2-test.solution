@@ -2,62 +2,13 @@
 >!> Requesting locale de_DE
 >!> Installing tpctl from channel sl10_packages
 >!> Installing kernel-default from channel sl10_packages
->!> No problems so far
->!> Solution #1:
->!> install [1]aaa_base-10.0.42-59.i586[sl10_packages]
->!> install [1]aaa_skel-2006.2.24-3.i586[sl10_packages]
->!> install [1]ash-1.6.1-8.i586[sl10_packages]
->!> install [1]bash-3.1-11.i586[sl10_packages]
->!> install [1]bzip2-1.0.3-10.i586[sl10_packages]
->!> install [1]coreutils-5.93-13.i586[sl10_packages]
->!> install [1]cpio-2.6-11.i586[sl10_packages]
->!> install [1]cracklib-2.8.6-5.i586[sl10_packages]
->!> install [1]cyrus-sasl-2.1.21-9.i586[sl10_packages]
->!> install [1]db-4.3.29-8.i686[sl10_packages]
->!> install [1]diffutils-2.8.7-9.i586[sl10_packages]
->!> install [1]e2fsprogs-1.38-18.i586[sl10_packages]
->!> install [1]filesystem-10.0.42-11.i586[sl10_packages]
->!> install [1]fillup-1.42-111.i586[sl10_packages]
->!> install [1]findutils-4.2.27-6.i586[sl10_packages]
->!> install [1]gawk-3.1.5-10.i586[sl10_packages]
->!> install [1]gdbm-1.8.3-236.i586[sl10_packages]
->!> install [1]glibc-2.3.91-4.i686[sl10_packages]
->!> install [1]gpg-1.4.2-14.i586[sl10_packages]
->!> install [1]grep-2.5.1a-11.i586[sl10_packages]
->!> install [1]gzip-1.3.5-150.i586[sl10_packages]
->!> install [1]info-4.8-15.i586[sl10_packages]
->!> install [1]insserv-1.04.0-12.i586[sl10_packages]
->!> install [1]kernel-default-2.6.16_rc5_git9-2.i586[sl10_packages]
->!> install [1]libacl-2.2.34-5.i586[sl10_packages]
->!> install [1]libattr-2.4.28-6.i586[sl10_packages]
->!> install [1]libcom_err-1.38-18.i586[sl10_packages]
->!> install [1]libgcc-4.1.0-3.i586[sl10_packages]
->!> install [1]libstdc++-4.1.0-3.i586[sl10_packages]
->!> install [1]libzio-0.1-10.i586[sl10_packages]
->!> install [1]logrotate-3.7.3-6.i586[sl10_packages]
->!> install [1]mingetty-0.9.6s-81.i586[sl10_packages]
->!> install [1]mkinitrd-1.2-74.i586[sl10_packages]
->!> install [1]mktemp-1.5-737.i586[sl10_packages]
->!> install [1]module-init-tools-3.2.2-12.i586[sl10_packages]
->!> install [1]ncurses-5.5-10.i586[sl10_packages]
->!> install [1]openldap2-client-2.3.19-8.i586[sl10_packages]
->!> install [1]openssl-0.9.8a-10.i586[sl10_packages]
->!> install [1]pam-0.99.3.0-12.i586[sl10_packages]
->!> install [1]pciutils-2.2.1-7.i586[sl10_packages]
->!> install [1]perl-5.8.8-7.i586[sl10_packages]
->!> install [1]perl-Bootloader-0.2.13-2.i586[sl10_packages]
->!> install [1]permissions-2006.2.24-3.i586[sl10_packages]
->!> install [1]popt-1.7-250.i586[sl10_packages]
->!> install [1]readline-5.1-11.i586[sl10_packages]
->!> install [1]rpm-4.4.2-22.i586[sl10_packages]
->!> install [1]sed-4.1.4-10.i586[sl10_packages]
->!> install [1]suse-build-key-1.0-674.noarch[sl10_packages]
->!> install [1]suse-release-10.0.42-18.i586[sl10_packages]
->!> install [1]tpctl-kmp-default-4.17_2.6.16_rc5_git9_2-17.i586[sl10_packages]
->!> install [1]udev-085-6.i586[sl10_packages]
->!> install [1]util-linux-2.12r-16.i586[sl10_packages]
->!> install [1]zlib-1.2.3-8.i586[sl10_packages]
->!> install [2]tpctl-4.17-17.i586[sl10_packages]
->!> install language:de-.noarch
->!> install language:de_DE-.noarch
->!> installs=56, upgrades=0, uninstalls=0
+>!> 1 problems found:
+>!> Problem:
+>!> tpctl-4.17-17.i586[sl10_packages] cannot be installed due to missing dependencies
+>!> There are no installable providers of tpctl-kmp for tpctl-4.17-17.i586[sl10_packages]
+>!>    Solution:
+>!>       do not install tpctl
+>!>       do not install tpctl-4.17-17.i586[sl10_packages]
+>!>    Solution:
+>!>       Ignore this requirement just here
+>!>       

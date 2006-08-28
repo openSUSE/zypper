@@ -215,7 +215,7 @@
     </update>
   </history>
   <requires>
-    <dep name='kernel' />
+    <dep name='kernel-default' />
   </requires>
   <provides>
     <dep name='wlan-kmp' op='=' version='1_2.6.1' />

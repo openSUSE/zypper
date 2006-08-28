@@ -8421,7 +8421,7 @@ name="bootloader-theme"/></provides></deps></package>
     <dep name='/bin/sh' pre='1' />
     <dep name='/bin/sh' pre='1' />
     <dep name='/bin/sh' pre='1' />
-    <dep name='kernel' />
+    <dep name='kernel-default' />
     <dep name='/bin/sh' />
     <dep name='/bin/sh' />
     <dep name='/bin/sh' />

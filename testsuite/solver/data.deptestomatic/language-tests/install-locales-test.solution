@@ -2709,6 +2709,7 @@
 >!>2704: U__s_[S1:5][package]zope-2.7.8-5.i586
 >!>2705: U__s_[S1:1][package]zsh-4.2.6-7.i586
 >!>2706: U__s_[S1:2][package]zvbi-0.2.16-8.i586
+>!> Installing scim from channel beta52
 >!> Solution #1:
 >!> install Mesa-6.4.2-4.i586[beta52]
 >!> install anthy-7307-4.i586[beta52]
