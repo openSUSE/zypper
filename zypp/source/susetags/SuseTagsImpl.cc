@@ -19,6 +19,7 @@
 #include "zypp/CheckSum.h"
 #include "zypp/KeyRing.h"
 
+#include "zypp/parser/ParserProgress.h"
 #include "zypp/source/susetags/SuseTagsImpl.h"
 #include "zypp/source/susetags/PackagesParser.h"
 #include "zypp/source/susetags/PackagesLangParser.h"
@@ -41,6 +42,18 @@ namespace zypp
     ///////////////////////////////////////////////////////////////////
     namespace susetags
     { /////////////////////////////////////////////////////////////////
+      
+      
+      struct NullParseProgress
+      {
+        NullParseProgress( Pathname file ) : _file(file)
+        {}
+        void operator()( int p )
+        {
+          MIL << "Progress " << p << " %" << std::endl;
+        }
+        Pathname _file;
+      };
       
       bool SuseTagsProber::operator()()
       {
@@ -451,15 +464,10 @@ namespace zypp
 
       void SuseTagsImpl::createResolvables(Source_Ref source_r)
       {
-        callback::SendReport<CreateSourceReport> report;
-        report->startData( url() );
-
-	provideProducts ( source_r, _store );
-	providePackages ( source_r, _store );
-	provideSelections ( source_r, _store );
-	providePatterns ( source_r, _store );
-
-        report->finishData( url(), CreateSourceReport::NO_ERROR, "" );
+        provideProducts ( source_r, _store );
+        providePackages ( source_r, _store );
+        provideSelections ( source_r, _store );
+        providePatterns ( source_r, _store );
       }
 
       const std::list<Pathname> SuseTagsImpl::publicKeys()
@@ -478,23 +486,17 @@ namespace zypp
 
       ResStore SuseTagsImpl::createResolvablesByKind(Source_Ref source_r, Resolvable::Kind kind)
       {
-        callback::SendReport<CreateSourceReport> report;
-        report->startData( url() );
+        ResStore store;
 
-	ResStore store;
-
-	if ( kind == ResTraits<Product>::kind )
-	    provideProducts ( source_r, store );
-	else if ( kind == ResTraits<Package>::kind )
-	    providePackages ( source_r, store );
-	else if ( kind == ResTraits<Selection>::kind )
-	    provideSelections ( source_r, store );
-	else if ( kind == ResTraits<Pattern>::kind )
-	    providePatterns ( source_r, store );
-
-        report->finishData( url(), CreateSourceReport::NO_ERROR, "" );
-
-	return store;
+        if ( kind == ResTraits<Product>::kind )
+          provideProducts ( source_r, store );
+        else if ( kind == ResTraits<Package>::kind )
+          providePackages ( source_r, store );
+        else if ( kind == ResTraits<Selection>::kind )
+          provideSelections ( source_r, store );
+        else if ( kind == ResTraits<Pattern>::kind )
+          providePatterns ( source_r, store );
+        return store;
       }
 
       ///////////////////////////////////////////////////////////////////
@@ -568,7 +570,11 @@ namespace zypp
         //verifyFile( p, "packages");
         
         DBG << "Going to parse " << p << endl;
-        PkgContent content( parsePackages( source_r, this, p ) );
+    
+        parser::ParserProgress::Ptr progress;
+        NullParseProgress npp(p);
+        progress.reset( new parser::ParserProgress(npp) );
+        PkgContent content( parsePackages( progress, source_r, this, p ) );
 
 #warning Should use correct locale and locale fallback list
         // note, this locale detection has nothing to do with translated text.
@@ -613,7 +619,10 @@ namespace zypp
                 MIL << packages_lang_name << " found" << std::endl;
                 DBG << "Going to parse " << p << endl;
                 //verifyFile( p, packages_lang_name);
-                parsePackagesLang( this, p, lang, content );
+                parser::ParserProgress::Ptr progress;
+                NullParseProgress npp(p);
+                progress.reset( new parser::ParserProgress(npp) );
+                parsePackagesLang( progress, this, p, lang, content );
                 trymore = false;
               }
               else
@@ -651,7 +660,10 @@ namespace zypp
         {
           p = descrDir() +  + "packages.DU";
           //verifyFile( p, "packages.DU");
-          du = parsePackagesDiskUsage(p);
+          parser::ParserProgress::Ptr progress;
+          NullParseProgress npp(p);
+          progress.reset( new parser::ParserProgress(npp) );
+          du = parsePackagesDiskUsage(progress, p);
         }
         catch (Exception & excpt_r)
         {
@@ -704,7 +716,10 @@ namespace zypp
             //verifyFile( file, selfile);
             
             MIL << "Selection file to parse " << file << endl;
-            Selection::Ptr sel( parseSelection( source_r, file ) );
+            parser::ParserProgress::Ptr progress;
+            NullParseProgress npp(file);
+            progress.reset( new parser::ParserProgress(npp) );
+            Selection::Ptr sel( parseSelection( progress, source_r, file ) );
 
             if (sel)
             {
@@ -753,7 +768,10 @@ namespace zypp
             Pathname file = descrDir() + patfile;
             
             MIL << "Pattern file to parse " << file << endl;
-            Pattern::Ptr pat( parsePattern( source_r, file ) );
+            parser::ParserProgress::Ptr progress;
+            NullParseProgress npp(file);
+            progress.reset( new parser::ParserProgress(npp) );
+            Pattern::Ptr pat( parsePattern( progress, source_r, file ) );
 
             if (pat)
             {

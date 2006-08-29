@@ -37,26 +37,27 @@ namespace zypp
       struct PackagesLangParser : public parser::tagfile::TagFileParser
       {
         const PkgContent & _content;
-	const Locale & _lang;
-	PkgImplPtr _current;
+        const Locale & _lang;
+        PkgImplPtr _current;
 
         NVRA _nvra;
-	int _count;
+        int _count;
         std::set<NVRA> _notfound;
-	Arch _system_arch;
+        Arch _system_arch;
 
         SuseTagsImpl::Ptr _sourceImpl;
 
-        PackagesLangParser ( SuseTagsImpl::Ptr sourceimpl , const PkgContent & content_r, const Locale & lang_r)
-	    : _content( content_r )
-	    , _lang( lang_r)
-	    , _count(0)
+        PackagesLangParser ( parser::ParserProgress::Ptr progress, SuseTagsImpl::Ptr sourceimpl , const PkgContent & content_r, const Locale & lang_r )
+          : parser::tagfile::TagFileParser(progress)
+            ,_content( content_r )
+            , _lang( lang_r)
+            , _count(0)
             , _sourceImpl( sourceimpl )
 
         {
-	    ZYpp::Ptr z = getZYpp();
-	    _system_arch = z->architecture();
-	}
+          ZYpp::Ptr z = getZYpp();
+          _system_arch = z->architecture();
+        }
 
         /* Consume SingleTag data. */
         virtual void consume( const SingleTag & stag_r )
@@ -69,22 +70,21 @@ namespace zypp
             if ( str::split( stag_r.value, std::back_inserter(words) ) != 4 )
               ZYPP_THROW( ParseException( "[" + _file_r.asString() + "] Parse error in tag Pkg, expected [name version release arch], found: [" + stag_r.value + "]" ) );
 
-	    Arch arch( words[3] );
+            Arch arch( words[3] );
             _nvra = NVRA( words[0], Edition(words[1],words[2]), arch );
             // only discard the package if it is not compatible AND it does not provide data
             // to other packages
                
             if (!arch.compatibleWith( _system_arch ) && !_sourceImpl->_provides_shared_data[_nvra])
             {
-		_current = NULL;
-		return;
-	    }
-            
+              _current = NULL;
+              return;
+            }            
             _count++;
           }
-	  else if ( stag_r.name == "Sum" )
+          else if ( stag_r.name == "Sum" )
           {
-	     _sourceImpl->_package_data[_nvra]._summary = TranslatedText( stag_r.value, _lang);
+            _sourceImpl->_package_data[_nvra]._summary = TranslatedText( stag_r.value, _lang);
           }
         }
 
@@ -115,9 +115,9 @@ namespace zypp
 
       ////////////////////////////////////////////////////////////////////////////
 
-      void parsePackagesLang( SuseTagsImpl::Ptr sourceimpl, const Pathname & file_r, const Locale & lang_r, const PkgContent & content_r )
+      void parsePackagesLang( parser::ParserProgress::Ptr progress, SuseTagsImpl::Ptr sourceimpl, const Pathname & file_r, const Locale & lang_r, const PkgContent & content_r )
       {
-        PackagesLangParser p ( sourceimpl, content_r, lang_r);
+        PackagesLangParser p( progress, sourceimpl, content_r, lang_r);
         MIL <<  "Package descriptions/translations parser: [" << file_r << "]. Source [" << sourceimpl->selfSourceRef().alias() << "] at URL:[" << sourceimpl->selfSourceRef().url().asString() << "]. Starting with " << content_r.size() << " packages" << std::endl;
         try
         {

@@ -199,15 +199,13 @@ namespace zypp
         INVALID		// th source is invalid
       };
 
-      virtual void startData(
+      virtual void start(
         Url source_url
       ) {}
 
-      virtual void startProbe(Url url) {}
+      virtual void end(Url url) {}
 
-      virtual void endProbe(Url url) {}
-
-      virtual bool progressData(int value, Url url)
+      virtual bool progress(int value, Url url)
       { return true; }
 
       virtual Action problem(

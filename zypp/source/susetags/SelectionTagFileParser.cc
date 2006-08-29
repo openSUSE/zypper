@@ -22,6 +22,7 @@
 #include "zypp/CapFactory.h"
 #include "zypp/ZYpp.h"
 
+#include "zypp/parser/ParserProgress.h"
 #include "zypp/source/susetags/SelectionTagFileParser.h"
 #include <boost/regex.hpp>
 
@@ -41,11 +42,11 @@ namespace zypp
     namespace susetags
     { /////////////////////////////////////////////////////////////////
 
-      Selection::Ptr parseSelection( Source_Ref source_r, const Pathname & file_r )
+      Selection::Ptr parseSelection( parser::ParserProgress::Ptr progress, Source_Ref source_r, const Pathname & file_r )
       {
         MIL <<  "Parsing selection " << file_r << " on source [" << source_r.alias() << "] at URL:[" << source_r.url().asString() << "]." << std::endl;
         
-        SelectionTagFileParser p;
+        SelectionTagFileParser p(progress);
         try
         {
           p.parse( file_r );
@@ -63,7 +64,8 @@ namespace zypp
 
       }
 
-      SelectionTagFileParser::SelectionTagFileParser()
+      SelectionTagFileParser::SelectionTagFileParser( parser::ParserProgress::Ptr progress )
+        : parser::tagfile::TagFileParser(progress)
       {
         selImpl = new SuseTagsSelectionImpl;
         _locales = zypp::getZYpp()->getRequestedLocales();

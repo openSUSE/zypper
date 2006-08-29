@@ -40,10 +40,10 @@ namespace zypp
     namespace susetags
     { /////////////////////////////////////////////////////////////////
 
-      Pattern::Ptr parsePattern(  Source_Ref source_r, const Pathname & file_r )
+      Pattern::Ptr parsePattern( parser::ParserProgress::Ptr progress, Source_Ref source_r, const Pathname & file_r )
       {
         MIL << "Starting to parse pattern " << file_r << std::endl;
-        PatternTagFileParser p;
+        PatternTagFileParser p(progress);
         try
         {
           p.parse( file_r );
@@ -59,7 +59,8 @@ namespace zypp
         return p.result;
       }
 
-      PatternTagFileParser::PatternTagFileParser()
+      PatternTagFileParser::PatternTagFileParser( parser::ParserProgress::Ptr progress )
+        : parser::tagfile::TagFileParser(progress)
       {
         patImpl = new SuseTagsPatternImpl;
       }

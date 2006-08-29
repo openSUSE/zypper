@@ -17,11 +17,11 @@
 #include <map>
 #include <list>
 
+
 #include "zypp/parser/tagfile/TagFileParser.h"
 #include "zypp/parser/tagfile/ParseException.h"
 #include "zypp/Pattern.h"
 #include "zypp/source/susetags/SuseTagsPatternImpl.h"
-
 #include "zypp/Pathname.h"
 
 ///////////////////////////////////////////////////////////////////
@@ -44,7 +44,7 @@ namespace zypp
         Pattern::Ptr result;
         detail::ResImplTraits<SuseTagsPatternImpl>::Ptr patImpl;
 
-        PatternTagFileParser();
+        PatternTagFileParser( parser::ParserProgress::Ptr progress );
         virtual ~PatternTagFileParser()
         {}
 
@@ -56,7 +56,7 @@ namespace zypp
       /**
        * returns null if parse fails
        */
-      Pattern::Ptr parsePattern( Source_Ref source_r, const Pathname & file_r );
+      Pattern::Ptr parsePattern( parser::ParserProgress::Ptr progress, Source_Ref source_r, const Pathname & file_r );
       /////////////////////////////////////////////////////////////////
     } // namespace source
     ///////////////////////////////////////////////////////////////////

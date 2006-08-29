@@ -273,9 +273,9 @@ namespace zypp
     if (! url_r.isValid())
       ZYPP_THROW( Exception("Empty URL passed to SourceFactory") );
 
-    callback::SendReport<CreateSourceReport> report;
+    //callback::SendReport<CreateSourceReport> report;
 
-    report->startProbe (url_r);
+    //report->startProbe (url_r);
 
 #warning if cache_dir is provided, no need to open the original url
     // open the media
@@ -324,7 +324,7 @@ namespace zypp
 	ZYPP_THROW( Exception ("Cannot create source of unknown type '" + type + "'"));
       }
 
-      report->endProbe (url_r);
+      //report->endProbe (url_r);
 
       return Source_Ref(impl);
     }
@@ -334,7 +334,7 @@ namespace zypp
       MIL << "Creating a source of type " << type << " failed " << endl;
     }
 
-    report->endProbe (url_r);
+    //report->endProbe (url_r);
 
     ERR << "No next type of source" << endl;
     ZYPP_THROW(Exception("Cannot create the installation source"));

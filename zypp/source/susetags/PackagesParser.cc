@@ -39,13 +39,17 @@ namespace zypp
       using namespace parser::tagfile;
 
 
-      struct PackageDiskUsageParser : public parser::tagfile::TagFileParser
+      class PackageDiskUsageParser : public parser::tagfile::TagFileParser
       {
-	PkgDiskUsage result;
-	NVRAD _current_nvrad;
-	bool _pkg_pending;
-	boost::regex sizeEntryRX;
+        public:
+        PkgDiskUsage result;
+        NVRAD _current_nvrad;
+        bool _pkg_pending;
+        boost::regex sizeEntryRX;
 
+        PackageDiskUsageParser( parser::ParserProgress::Ptr progress ) : parser::tagfile::TagFileParser(progress)
+        {}
+        
 	virtual void beginParse()
 	{
 	  _pkg_pending = false;
@@ -126,15 +130,17 @@ namespace zypp
 
 	Arch _system_arch;
 
-	PackagesParser(Source_Ref source, SuseTagsImpl::Ptr sourceimpl)
-	       : _source( source )
-	       , _sourceImpl( sourceimpl )
-	       , _isPendingPkg( false )
-               , _isShared( false )
-	{
-	    ZYpp::Ptr z = getZYpp();
-	    _system_arch = z->architecture();
-	}
+  PackagesParser( parser::ParserProgress::Ptr progress, Source_Ref source, SuseTagsImpl::Ptr sourceimpl)
+          : parser::tagfile::TagFileParser(progress) 
+          , _source( source )
+          , _sourceImpl( sourceimpl )
+          , _isPendingPkg( false )
+          , _isShared( false )
+              
+   {
+      ZYpp::Ptr z = getZYpp();
+      _system_arch = z->architecture();
+    }
 
 	PkgContent result() const
 	{ return _result; }
@@ -353,10 +359,10 @@ namespace zypp
 
       ////////////////////////////////////////////////////////////////////////////
 
-      PkgContent parsePackages( Source_Ref source_r, SuseTagsImpl::Ptr sourceImpl_r, const Pathname & file_r )
+      PkgContent parsePackages( parser::ParserProgress::Ptr progress, Source_Ref source_r, SuseTagsImpl::Ptr sourceImpl_r, const Pathname & file_r )
       {
 	MIL << "Starting to parse packages " << file_r << std::endl;
-	PackagesParser p( source_r, sourceImpl_r );
+	PackagesParser p( progress, source_r, sourceImpl_r );
         try
         {
 	  p.parse( file_r );
@@ -370,10 +376,10 @@ namespace zypp
 	return p.result();
       }
 
-      PkgDiskUsage parsePackagesDiskUsage( const Pathname & file_r )
+      PkgDiskUsage parsePackagesDiskUsage( parser::ParserProgress::Ptr progress, const Pathname & file_r )
       {
 	MIL << "Starting to parse packages disk usage " << file_r << std::endl;
-	PackageDiskUsageParser duParser;
+  PackageDiskUsageParser duParser(progress);
         try
         {
 	  duParser.parse(file_r);

@@ -20,6 +20,7 @@
 #include "zypp/Package.h"
 #include "zypp/DiskUsage.h"
 #include "zypp/NVRAD.h"
+#include "zypp/parser/ParserProgress.h"
 #include "zypp/source/susetags/SuseTagsImpl.h"
 #include "zypp/source/susetags/SuseTagsPackageImpl.h"
 #include "zypp/source/susetags/SuseTagsSrcPackageImpl.h"
@@ -42,8 +43,8 @@ namespace zypp
       /** \deprecated Just temporary.
        * \throws ParseException and others.
       */
-      PkgContent parsePackages( Source_Ref source_r, SuseTagsImpl::Ptr, const Pathname & file_r );
-      PkgDiskUsage parsePackagesDiskUsage( const Pathname & file_r );
+      PkgContent parsePackages( parser::ParserProgress::Ptr progress, Source_Ref source_r, SuseTagsImpl::Ptr, const Pathname & file_r );
+      PkgDiskUsage parsePackagesDiskUsage( parser::ParserProgress::Ptr progress, const Pathname & file_r );
 
       /////////////////////////////////////////////////////////////////
     } // namespace susetags

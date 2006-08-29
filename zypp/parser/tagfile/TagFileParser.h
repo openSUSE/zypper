@@ -18,6 +18,7 @@
 
 #include <boost/regex.hpp>
 
+#include "zypp/parser/ParserProgress.h"
 #include "zypp/parser/tagfile/ParseException.h"
 #include "zypp/Pathname.h"
 
@@ -38,10 +39,9 @@ namespace zypp
       //	CLASS NAME : TagFileParser
       //
       /** Tagfile parser. */
-      struct TagFileParser
+      class TagFileParser
       { 
-        Pathname _file_r;
-
+        public:
         struct MultiTag
         {
           std::string name;
@@ -56,7 +56,7 @@ namespace zypp
           std::string value;
         };
 
-        TagFileParser();
+        TagFileParser( ParserProgress::Ptr progress );
         virtual ~TagFileParser()
         {}
 
@@ -82,6 +82,12 @@ namespace zypp
          * Called when the parse is done
          */ 
         virtual void endParse();
+        
+        protected:
+          ParserProgress::Ptr _progress;
+          Pathname _file_r;
+          int _file_size;
+          int _no_lines;
       };
       /////////////////////////////////////////////////////////////////
     } // namespace parser

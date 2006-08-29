@@ -19,7 +19,7 @@
 #include "zypp/base/Logger.h"
 #include "zypp/base/PtrTypes.h"
 #include "zypp/base/String.h"
-
+#include "zypp/PathInfo.h"
 
 #include "zypp/parser/tagfile/TagFileParser.h"
 #include "zypp/parser/tagfile/ParseException.h"
@@ -57,7 +57,7 @@ namespace zypp
         }
       }
 
-      TagFileParser::TagFileParser()
+      TagFileParser::TagFileParser( ParserProgress::Ptr progress ) : _progress(progress)
       {
       }
 
@@ -85,19 +85,24 @@ namespace zypp
       void TagFileParser::parse( const Pathname & file_r)
       {
         // save parsed filename for debug
+        int previous_progress = 0;
+        int new_progress = 0;
         _file_r = file_r;
-        
+        _file_size = 0;
+        _no_lines = 0;
+        _file_size = PathInfo(file_r).size();
         std::ifstream file(file_r.asString().c_str());
-
+        int readed = 0;
+        
         boost::regex rxComment("^[[:space:]]*#(.*)$");
         boost::regex rxMStart("^\\+([^[:space:]^\\.]+)(\\.([^[:space:]]+))?:$");
         boost::regex rxMEnd("^\\-([^[:space:]^\\.]+)(\\.([^[:space:]]+))?:$");
         boost::regex rxSStart("^=([^[:space:]^\\.]+)(\\.([^[:space:]]+))?:[[:space:]]*(.*)$");
         boost::regex rxEmpty("^([[:space:]]*)$");
 
-	if (!file) {
-	    ZYPP_THROW (ParseException( "Can't open " + file_r.asString() ) );
-	}
+	     if (!file) {
+	       ZYPP_THROW (ParseException( "Can't open " + file_r.asString() ) );
+       }
 
         std::string buffer;
         // read vendor
@@ -106,6 +111,8 @@ namespace zypp
         while(file && !file.eof())
         {
           getline(file, buffer);
+          readed +=  buffer.size();
+          
           boost::smatch what;
           if(boost::regex_match(buffer, what, rxComment, boost::match_extra))
           {
@@ -128,6 +135,7 @@ namespace zypp
             std::string element;
             boost::smatch element_what;
             getline(file, element);
+            readed +=  element.size();
             // while we dont find the list terminator
             while(!file.eof())
             {
@@ -161,6 +169,7 @@ namespace zypp
               tag.values.push_back(element);
               XXX << element << std::endl;
               getline(file, element);
+              readed +=  element.size();
               //dumpRegexpResults(element_what);
             }
             XXX << "end list" << std::endl;
@@ -193,6 +202,12 @@ namespace zypp
             //ZYPP_THROW(ParseException("parse error: " + buffer));
             ERR << "Parse error, unrecognized format [" << buffer << "]. Be sure " << _file_r << "does not contains a single tag with new lines." << std::endl;
           }
+          
+          new_progress = (int)((((float)readed)/((float)_file_size))*100);
+          if ( new_progress != previous_progress )
+            _progress->progress( new_progress );
+          previous_progress = new_progress;
+          
         }
         endParse();
         MIL << "Done parsing " << file_r << std::endl;

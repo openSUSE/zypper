@@ -621,10 +621,7 @@ namespace zypp
       ResStore YUMSourceImpl::provideResolvablesByKind(Source_Ref source_r, zypp::Resolvable::Kind kind)
       {
         ResStore store;
-        callback::SendReport<CreateSourceReport> report;
-
-        report->startData( url() );
-
+    
         readRepomd();
         
         if ( kind == ResTraits<Product>::kind )
@@ -638,17 +635,12 @@ namespace zypp
         else if ( kind == ResTraits<Pattern>::kind )
           providePatches ( selfSourceRef(), store );
         
-        report->finishData( url(), CreateSourceReport::NO_ERROR, "" );
-        
         return store;
       }  
       
       void YUMSourceImpl::createResolvables(Source_Ref source_r)
       {
-        callback::SendReport<CreateSourceReport> report;
-
-        report->startData( url() );
-
+   
         readRepomd();
         provideProducts(selfSourceRef(), _store);
         providePackages(selfSourceRef(), _store);
@@ -656,7 +648,6 @@ namespace zypp
         providePatterns(selfSourceRef(), _store);
         providePatches(selfSourceRef(), _store);
         
-        report->finishData( url(), CreateSourceReport::NO_ERROR, "" );
       }
 
 
