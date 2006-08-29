@@ -42,6 +42,13 @@ using namespace zypp::source;
 
 using namespace boost::filesystem;
 
+using namespace zypp::parser;
+
+void progress( int p )
+{
+  cout << p << "%" << endl;
+}
+
 /*
 =Type: UnitedLinux
 =URL: ftp://dist.suse.de//next-i386
@@ -64,6 +71,11 @@ using namespace boost::filesystem;
 struct OldPMSourceParser : public parser::tagfile::TagFileParser
 {
   source::SourceInfo result;
+  
+  OldPMSourceParser( ParserProgress::Ptr pp ) : tagfile::TagFileParser( pp )
+  {
+    
+  }
   
   virtual void beginParse()
   {
@@ -116,7 +128,9 @@ static int import_old_sources()
       {
         DBG << dir_itr->leaf() << std::endl;
         Pathname full(Pathname(dir_path.string()) + dir_itr->leaf() + "/DESCRIPTION/description");
-        OldPMSourceParser parser;
+        ParserProgress::Ptr pptr;
+        pptr.reset( new ParserProgress( &progress ) );
+        OldPMSourceParser parser( pptr );
         MIL << "Going to parse " << full << std::endl;
         parser.parse(full);
         backend.storeSource(parser.result);

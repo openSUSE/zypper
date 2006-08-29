@@ -27,8 +27,9 @@ int main()
   {
     ZYpp::Ptr z = getZYpp();
     
-    PublicKey key("repomd.xml.key");
-    cout << key << endl;
+    //PublicKey key("repomd.xml.key");
+    //cout << key << endl;
+    z->initializeTarget("/");
         
   }
   catch ( const Exception &e )

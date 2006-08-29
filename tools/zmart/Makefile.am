@@ -5,6 +5,14 @@ noinst_PROGRAMS = zmart
 
 ## ##################################################
 
+zmartincludedir = $(pkgincludedir)/source
+
+zmartinclude_HEADERS =	\
+	AliveCursor.h \
+	zmart-keyring-callbacks.h  \
+	zmart-rpm-callbacks.h  \
+	zmart-source-callbacks.h
+
 INCLUDES = -I$(top_srcdir)/tools/zmart -I$(oldincludedir)/libxml2
 AM_LDFLAGS =
 
