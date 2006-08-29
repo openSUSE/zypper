@@ -7,6 +7,8 @@ SUBDIRS =
 
 ## ##################################################
 
+mediatestincludes_HEADERS = mymediaverifier.h
+
 TESTS = media1 fileexists
 
 noinst_PROGRAMS = media2 media3 media4 fileexists
