@@ -42,19 +42,18 @@ namespace zypp
     ///////////////////////////////////////////////////////////////////
     namespace susetags
     { /////////////////////////////////////////////////////////////////
-      
-      
+
+
       struct NullParseProgress
       {
-        NullParseProgress( Pathname file ) : _file(file)
+        NullParseProgress( Pathname /*file*/ )
+        //: _file(file)
         {}
-        void operator()( int p )
-        {
-          MIL << "Progress " << p << " %" << std::endl;
-        }
-        Pathname _file;
+        void operator()( int /*p*/ )
+        {}
+        //Pathname _file;
       };
-      
+
       bool SuseTagsProber::operator()()
       {
         MIL << "Probing for YaST source..." << std::endl;
@@ -67,11 +66,11 @@ namespace zypp
           MIL << "YaST source detected..." << std::endl;
           return true;
         }
-        
+
          MIL << "Not a YaST source..." << std::endl;
          return false;
       }
-      
+
       ///////////////////////////////////////////////////////////////////
       //
       //	METHOD NAME : SuseTagsImpl::SuseTagsImpl
@@ -84,42 +83,42 @@ namespace zypp
       {
         return _cache_dir.empty() ? tmpMetadataDir() : _cache_dir;
       }
-      
+
       const Pathname SuseTagsImpl::contentFile() const
       {
         return metadataRoot() + "/DATA" + "content";
       }
-      
+
       const Pathname SuseTagsImpl::contentFileSignature() const
       {
         return metadataRoot() + "/DATA" + "content.asc";
       }
-      
+
       const Pathname SuseTagsImpl::contentFileKey() const
       {
         return metadataRoot() + "/DATA" + "/content.key";
       }
-      
+
       const Pathname SuseTagsImpl::mediaFile() const
       {
         return metadataRoot() + "MEDIA/media.1/media";
       }
-      
+
       const Pathname SuseTagsImpl::descrDir() const
       {
         return metadataRoot() + "DATA/descr";
       }
-      
+
       const Pathname SuseTagsImpl::dataDir() const
       {
         return _data_dir;
       }
-      
+
       const Pathname SuseTagsImpl::mediaDescrDir() const
       {
         return _media_descr_dir;
       }
-      
+
       bool SuseTagsImpl::downloadNeeded(const Pathname & localdir)
       {
         Pathname new_media_file;
@@ -131,7 +130,7 @@ namespace zypp
           MIL << "media file used to determine if source changed not found. Assuming refresh needed." << std::endl;
           return true;
         }
-        
+
         // before really download all the data and init the cache, check
         // if the source has really changed, otherwise, make it quick
         Pathname cached_media_file = localdir + "/MEDIA/media.1/media";
@@ -148,11 +147,11 @@ namespace zypp
         MIL << "susetags source " << alias() << " has changed. Refresh needed." << std::endl;
         return true;
       }
-      
+
       void SuseTagsImpl::readMediaFile(const Pathname &p)
       {
         media::MediaManager media_mgr;
-       
+
         std::ifstream pfile( p.asString().c_str() );
         if ( pfile.bad() ) {
           ZYPP_THROW(Exception("Error parsing media.1/media") );
@@ -189,25 +188,25 @@ namespace zypp
           WAR << "Verifier not found" << endl;
         }
       }
-      
+
       TmpDir SuseTagsImpl::downloadMetadata()
       {
         resetMediaVerifier();
-        
+
         TmpDir tmpdir;
         MIL << "Downloading metadata to " << tmpdir.path() << std::endl;
-        
+
         Pathname local_dir = tmpdir.path();
-        
+
         // (#163196)
-        // before we used _descr_dir, which is is wrong if we 
+        // before we used _descr_dir, which is is wrong if we
         // store metadata already running from cache
         // because it points to a local file and not
         // to the media. So use the original media descr_dir.
         Pathname media_src;
         Pathname descr_src;
-        Pathname content_src;    
-            
+        Pathname content_src;
+
         // init the cache structure
         if (0 != assert_dir(local_dir + "DATA", 0755))
           ZYPP_THROW(Exception("Cannot create /DATA directory in download dir." + local_dir.asString()));
@@ -215,41 +214,41 @@ namespace zypp
           ZYPP_THROW(Exception("Cannot create /MEDIA directory in download dir." + local_dir.asString()));
         if (0 != assert_dir(local_dir + "PUBLICKEYS", 0755))
           ZYPP_THROW(Exception("Cannot create /PUBLICKEYS directory in download dir." + local_dir.asString()));
-        
+
         try {
           media_src = provideDirTree("media.1");
         }
         catch(Exception &e) {
           ZYPP_THROW(Exception("Can't provide " + _path.asString() + "/media.1 from " + url().asString() ));
         }
-        
+
         if ( filesystem::copy_dir(media_src, local_dir + "MEDIA") != 0 )
           ZYPP_THROW(Exception("Unable to copy media directory to " + (local_dir + "/MEDIA").asString()));
-    
+
         MIL << "cached media directory" << std::endl;
 
         // media is provided, now we can install a media verifier.
         readMediaFile(local_dir + "/MEDIA/media.1/media");
-        
+
         try {
           content_src = provideFile( _path + "content");
         }
         catch(Exception &e) {
           ZYPP_THROW(Exception("Can't provide " + _path.asString() + "/content from " + url().asString() ));
         }
-        
+
         if ( filesystem::copy(content_src, local_dir + "DATA/content") != 0)
           ZYPP_THROW(Exception("Unable to copy the content file to " + (local_dir + "DATA/content").asString()));
-        
+
         // get the list of cache keys
         std::list<std::string> files;
         dirInfo( 1, files, _path);
-        
+
         // cache all the public keys
         for( std::list<std::string>::const_iterator it = files.begin(); it != files.end(); ++it)
         {
           ZYpp::Ptr z = getZYpp();
-          
+
           std::string filename = *it;
           if ( filename.substr(0, 10) == "gpg-pubkey" )
           {
@@ -260,14 +259,14 @@ namespace zypp
             catch(Exception &e) {
               ZYPP_THROW(Exception("Can't provide " + (_path + filename).asString() + " from " + url().asString() ));
             }
-            
+
             MIL << "Trying to cache " << key_src << std::endl;
-            
+
             if ( filesystem::copy(key_src, local_dir + "PUBLICKEYS/" + filename) != 0 )
               ZYPP_THROW(Exception("Unable to copy key " + key_src.asString() + " to " + (local_dir + "PUBLICKEYS").asString()));
-           
+
             MIL << "cached " << filename << std::endl;
-            z->keyRing()->importKey(local_dir + "PUBLICKEYS/" + filename, false);  
+            z->keyRing()->importKey(local_dir + "PUBLICKEYS/" + filename, false);
           }
           else if( (filename == "content.asc") || (filename == "content.key"))
           {
@@ -278,13 +277,13 @@ namespace zypp
             catch(Exception &e) {
               ZYPP_THROW(Exception("Can't provide " + filename + " from " + url().asString() + ". File was listed as available."));
             }
-            
+
             if ( filesystem::copy( src_data, local_dir + "DATA/" + filename) != 0 )
               ZYPP_THROW(Exception("Unable to copy " + filename + " to " + (local_dir + "/DATA").asString()));
-            
+
             if ( filename == "content.key" )
-              z->keyRing()->importKey(local_dir + "DATA/content.key", false);  
-              
+              z->keyRing()->importKey(local_dir + "DATA/content.key", false);
+
             MIL << "cached " << filename << std::endl;
           }
         }
@@ -294,18 +293,18 @@ namespace zypp
         MIL << "SuseTags source: checking 'content' file vailidity using digital signature.." << endl;
         // verify the content file
         bool valid = z->keyRing()->verifyFileSignatureWorkflow( local_dir + "/DATA/content", (path() + "content").asString() + " (" + url().asString() + ")", local_dir + "/DATA/content.asc");
-          
+
         // the source is not valid and the user did not want to continue
         if (!valid)
           ZYPP_THROW (Exception( "Error. Source signature does not validate and user does not want to continue. "));
-        
+
         // now we have the content file copied, we need to init data and descrdir from the product
         readContentFile(local_dir + "/DATA/content");
-        
+
         // make sure a local descr dir exists
         if ( assert_dir( local_dir + "/DATA/descr") != 0 )
           ZYPP_THROW (Exception( "Error. Can't create local descr directory. "));
-        
+
         // we can get the list of files in description dir in 2 ways
         // from the checksum list, or ls'ing the dir via directory.yast
         if ( ! _prodImpl->_descr_files_checksums.empty() )
@@ -327,17 +326,17 @@ namespace zypp
           catch(Exception &e) {
             ZYPP_THROW(Exception("Can't list description directory content from " + url().asString() ));
           }
-          
+
           for( std::list<std::string>::const_iterator it = descr_dir_file_list.begin(); it != descr_dir_file_list.end(); ++it)
           {
             std::string filename = *it;
             getPossiblyCachedMetadataFile( mediaDescrDir() + filename, local_dir + "/DATA/descr" + filename, _cache_dir + "/DATA/descr" + filename, CheckSum() );
           }
         }
-             
+
         return tmpdir;
       }
-      
+
       void SuseTagsImpl::initCacheDir(const Pathname & cache_dir_r)
       {
         // refuse to use stupid paths as cache dir
@@ -353,7 +352,7 @@ namespace zypp
         //filesystem::mkdir(cache_dir_r + "DESCRIPTION");
         filesystem::mkdir(cache_dir_r + "PUBLICKEYS");
       }
-      
+
       void SuseTagsImpl::storeMetadata(const Pathname & cache_dir_r)
       {
         if ( !_cache_dir.empty() )
@@ -365,15 +364,15 @@ namespace zypp
           // no previous cache, use the data read temporarely
           copyLocalMetadata(tmpMetadataDir(), cache_dir_r);
         }
-        
+
         MIL << "Metadata saved in " << cache_dir_r << ". Setting as cache." << std::endl;
         _cache_dir = cache_dir_r;
       }
-      
+
       void SuseTagsImpl::saveMetadataTo(const Pathname & dir_r)
       {
         TmpDir download_tmp_dir;
-        
+
         bool need_to_refresh = true;
         try {
           need_to_refresh = downloadNeeded(dir_r);
@@ -381,26 +380,26 @@ namespace zypp
         catch(Exception &e) {
           ZYPP_THROW(Exception("Can't check if source has changed or not. Aborting refresh."));
         }
-        
+
         if ( need_to_refresh )
         {
           MIL << "SuseTags source " << alias() << " has changed since last download. Re-reading metadata into " << dir_r << endl;
         }
         else
         {
-          MIL << "SUSEtags source " << alias() << " has not changed. Refresh completed. timestamp of media file is  the same." << std::endl;    
+          MIL << "SUSEtags source " << alias() << " has not changed. Refresh completed. timestamp of media file is  the same." << std::endl;
           return;
         }
-        
+
         try {
           download_tmp_dir = downloadMetadata();
         }
         catch(Exception &e) {
           ZYPP_THROW(Exception("Downloading metadata failed (is a susetags source?) or user did not accept remote source. Aborting refresh."));
         }
-        
+
         copyLocalMetadata(download_tmp_dir, dir_r);
-        
+
         // download_tmp_dir go out of scope now but it is ok as we already copied the content.
       }
 
@@ -435,7 +434,7 @@ namespace zypp
           // in the media.
           readMediaFile(mediaFile());
           readContentFile(contentFile());
-          
+
           if ( autorefresh() )
             storeMetadata(_cache_dir);
         }
@@ -531,24 +530,24 @@ namespace zypp
       {
         return PathInfo(contentFile()).mtime();
       }
-      
+
       void SuseTagsImpl::readContentFile(const Pathname &content_file)
-      { 
-        SourceFactory factory; 
+      {
+        SourceFactory factory;
         try {
           DBG << "Going to parse content file " << content_file << endl;
-          
+
           ProductMetadataParser p;
           p.parse( content_file, factory.createFrom(this) );
           _product = p.result;
-          
+
           // data dir is the same, it is determined by the content file
           _data_dir = _path + p.prodImpl->_data_dir;
-          // description dir also changes when using cache  
-          _media_descr_dir = _path + p.prodImpl->_description_dir;        
-          
+          // description dir also changes when using cache
+          _media_descr_dir = _path + p.prodImpl->_description_dir;
+
           MIL << "Read product: " << _product->summary() << endl;
-          
+
           _prodImpl = p.prodImpl;
 	  _autorefresh = p.volatile_content && media::MediaAccess::canBeVolatile( _url );
         }
@@ -562,15 +561,15 @@ namespace zypp
         MIL << "Adding product: " << _product->summary() << " to the store" << endl;
         store.insert( _product );
       }
-      
+
       void SuseTagsImpl::providePackages(Source_Ref source_r, ResStore &store)
       {
         Pathname p = descrDir() + "packages";
-        
+
         //verifyFile( p, "packages");
-        
+
         DBG << "Going to parse " << p << endl;
-    
+
         parser::ParserProgress::Ptr progress;
         NullParseProgress npp(p);
         progress.reset( new parser::ParserProgress(npp) );
@@ -591,7 +590,7 @@ namespace zypp
         // get the list of available packages.X trsnlation files
         std::list<std::string> all_files;
         filesystem::readdir(all_files, descrDir());
-        
+
         std::list<std::string> _pkg_translations;
         for( std::list<std::string>::const_iterator it = all_files.begin(); it != all_files.end(); ++it)
         {
@@ -601,7 +600,7 @@ namespace zypp
             _pkg_translations.push_back(*it);
           }
         }
-        
+
         // find the most apropiate file
         bool trymore = true;
         while ( (lang != Locale()) && trymore )
@@ -641,20 +640,20 @@ namespace zypp
           }
           lang = lang.fallback();
         }
-        
+
         MIL << _package_data.size() << " packages holding real data" << std::endl;
         MIL << content.size() << " packages parsed" << std::endl;
-        
+
         int counter =0;
         for ( std::map<NVRA, DefaultFalseBool>::const_iterator it = _is_shared.begin(); it != _is_shared.end(); ++it)
         {
           if( it->second)
             counter++;
         }
-        
+
         MIL << counter << " packages sharing data" << std::endl;
-        
-        
+
+
         PkgDiskUsage du;
         try
         {
@@ -675,11 +674,11 @@ namespace zypp
           it->second->_diskusage = du[it->first /* NVRAD */];
           Package::Ptr pkg = detail::makeResolvableFromImpl( it->first, it->second );
           store.insert( pkg );
-         
+
           //MIL << "Package " << pkg->summary() << std::endl;
           //MIL << "        " << pkg->description() << std::endl;
           //MIL << "----------------------------------" << std::endl;
-          
+
         }
         DBG << "SuseTagsImpl (fake) from " << p << ": "
             << content.size() << " packages" << endl;
@@ -714,7 +713,7 @@ namespace zypp
 
             Pathname file = descrDir() + selfile;
             //verifyFile( file, selfile);
-            
+
             MIL << "Selection file to parse " << file << endl;
             parser::ParserProgress::Ptr progress;
             NullParseProgress npp(file);
@@ -750,7 +749,7 @@ namespace zypp
           MIL << p << " not found." << endl;
           file_found = false;
         }
-        
+
         if ( file_found )
         {
           //verifyFile( p, "patterns");
@@ -766,7 +765,7 @@ namespace zypp
             DBG << "Going to parse pattern " << patfile << endl;
 
             Pathname file = descrDir() + patfile;
-            
+
             MIL << "Pattern file to parse " << file << endl;
             parser::ParserProgress::Ptr progress;
             NullParseProgress npp(file);
