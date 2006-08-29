@@ -14,7 +14,8 @@ parserinclude_HEADERS = \
 	XMLNodeIterator.h	\
 	SAXParser.h	\
 	LibXMLHelper.h		\
-	xml_parser_assert.h
+	xml_parser_assert.h \
+	ParserProgress.h
 
 noinst_LTLIBRARIES =	lib@PACKAGE@_parser.la
 
