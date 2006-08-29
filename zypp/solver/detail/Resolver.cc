@@ -1203,7 +1203,7 @@ struct FindIandU
 //
 
 static bool
-transactCaps( const ResPool & pool, const CapSet & caps, bool install, bool soft, std::list<PoolItem_Ref> & added_items )
+transactCaps( const ResPool & pool, const CapSet & caps, bool install, bool soft, std::set<PoolItem_Ref> & added_items )
 {
     bool result = true;
 
@@ -1231,7 +1231,7 @@ transactCaps( const ResPool & pool, const CapSet & caps, bool install, bool soft
 	    else if (just_added) {
 		// transactItems just selected an item of the same kind we're currently processing
 		// add it to the list and handle it equivalent to the origin item
-		added_items.push_back( just_added );
+		added_items.insert( just_added );
 	    }
 	}
 
@@ -1333,12 +1333,19 @@ struct TransactLanguage : public resfilter::PoolItemFilterFunctor
 //    required and recommended PoolItems
 
 bool
-Resolver::transactResObject( ResObject::constPtr robj, bool install)
+Resolver::transactResObject( ResObject::constPtr robj, bool install,
+			     bool recursive)
 {
+    static std::set<PoolItem_Ref> alreadyTransactedObjects;
+
+    if (!recursive) {
+	alreadyTransactedObjects.clear(); // first call
+    }
+    
     if (robj == NULL) {
 	ERR << "NULL ResObject" << endl;
     }
-    _XDEBUG( "transactResObject(" << *robj << ", " << (install?"install":"remove") << ")" );
+    _XDEBUG ( "transactResObject(" << *robj << ", " << (install?"install":"remove") << ")");
 
     if (robj->kind() == ResTraits<Language>::kind) {
 	TransactLanguage callback( *this, robj, install );
@@ -1348,7 +1355,7 @@ Resolver::transactResObject( ResObject::constPtr robj, bool install)
 		      functor::functorRef<bool,CapAndItem>( callback ) );
 
     }
-    std::list<PoolItem_Ref> added;
+    std::set<PoolItem_Ref> added;
 
     // loop over 'recommends' and 'requires' of this item and collect additional
     //  items of the same kind on the way
@@ -1361,9 +1368,17 @@ Resolver::transactResObject( ResObject::constPtr robj, bool install)
     //   and this function is only called for already selected items. So added really only contains
     //   'new' items.
 
-    for (std::list<PoolItem_Ref>::const_iterator it = added.begin(); it != added.end(); ++it) {
+    for (std::set<PoolItem_Ref>::const_iterator it = added.begin(); it != added.end(); ++it) {
 	if ((*it)->kind() == robj->kind()) {
-	    transactResObject( it->resolvable(), install );
+	    std::set<PoolItem_Ref>::const_iterator itCmp = alreadyTransactedObjects.find (*it);
+	    if (itCmp == alreadyTransactedObjects.end())
+	    {
+		// not already transacted
+		alreadyTransactedObjects.insert (*it);
+		transactResObject( it->resolvable(), install,
+				   true //recursive
+				   );
+	    }
 	}
     }
 
@@ -1400,7 +1415,6 @@ bool
 Resolver::transactResKind( Resolvable::Kind kind )
 {
     TransactKind callback (*this);
-
     _XDEBUG( "transactResKind(" << kind << ")" );
 
     // check all uninstalls

@@ -204,7 +204,9 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
     bool resolveDependencies (const ResolverContext_Ptr context = NULL);
     bool resolvePool (void);
 
-    bool transactResObject( ResObject::constPtr robj, bool install = true);
+    bool transactResObject( ResObject::constPtr robj,
+			    bool install = true,
+			    bool recursive = false);
     bool transactResKind( Resolvable::Kind kind );
     void transactReset( ResStatus::TransactByValue causer );
 

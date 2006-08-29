@@ -1611,7 +1611,8 @@ parse_xml_trial (XmlNode_Ptr node, const ResPool & pool)
 	    }
 
 	    if (name.empty()) {		// assume kind
-		resolver->transactResKind( string2kind( kind_name ) );
+                RESULT << "Calling transactResKind( " << kind_name << " )" << endl;;                
+ 		resolver->transactResKind( string2kind( kind_name ) );
 	    }
 	    else {
 		PoolItem_Ref poolItem;

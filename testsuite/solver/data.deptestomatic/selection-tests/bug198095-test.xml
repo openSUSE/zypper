@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!--
+Bug 198095 - YaST2 Installaler crashes when selecting Gnome pattern to a KDE -->
+<!--installation; This is an endless loop in transactResObject
+-->
+<test>
+  <setup arch="x86_64">
+  <channel name="packages" file="beta6-packages.xml"/>
+  <channel name="selections" file="bug198095-selections.xml"/>
+</setup>
+<trial>
+  <install channel="selections" kind="selection" name="base"/>
+  <transact kind="selection"/>
+</trial>
+</test>

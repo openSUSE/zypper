@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Aug 29 16:58:20 CEST 2006 - schubi@suse.de
+
+- Fixed endless loop in transactResObject
+  Bug 198095 - YaST2 Installaler crashes when selecting Gnome pattern to a KDE installation 
+
+-------------------------------------------------------------------
 Tue Aug 29 12:05:09 CEST 2006 - dmacvicar@suse.de
 
 - fix some testcases for tar file parser changes 
