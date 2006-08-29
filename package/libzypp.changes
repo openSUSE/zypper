@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Aug 29 12:05:09 CEST 2006 - dmacvicar@suse.de
+
+- fix some testcases for tar file parser changes 
+- r4045
+
+-------------------------------------------------------------------
 Tue Aug 29 11:19:53 CEST 2006 - dmacvicar@suse.de
 
 - missing includes
