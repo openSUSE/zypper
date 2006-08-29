@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue Aug 29 11:19:53 CEST 2006 - dmacvicar@suse.de
+
+- missing includes
+- clean old callbacks
+- r4041 
+
+-------------------------------------------------------------------
 Fri Aug 25 14:32:07 CEST 2006 - schubi@suse.de
 
 - zyppPattern->install_packages returns SUGGESTED package too.
