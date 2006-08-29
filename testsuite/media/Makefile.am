@@ -7,7 +7,6 @@ SUBDIRS =
 
 ## ##################################################
 
-mediatestincludes_HEADERS = mymediaverifier.h
 
 TESTS = media1 fileexists
 
@@ -22,19 +21,19 @@ LDADD =	$(top_srcdir)/zypp/lib@PACKAGE@.la
 
 ## ##################################################
 
-media1_SOURCES = media1.cc
+media1_SOURCES = media1.cc mymediaverifier.h
 media1_LDADD = $(LDADD) -lboost_unit_test_framework
 
-fileexists_SOURCES = file_exists_test.cc
+fileexists_SOURCES = file_exists_test.cc mymediaverifier.h
 fileexists_LDADD = $(LDADD) -lboost_unit_test_framework
 
-media2_SOURCES = media2.cc
+media2_SOURCES = media2.cc mymediaverifier.h
 media2_LDADD = $(LDADD)
 
-media3_SOURCES = media3.cc
+media3_SOURCES = media3.cc mymediaverifier.h
 media3_LDADD = $(LDADD)
 
-media4_SOURCES = media4.cc
+media4_SOURCES = media4.cc mymediaverifier.h
 media4_LDADD = $(LDADD)
 
 ## ##################################################
