@@ -5,9 +5,17 @@
 #include "zypp/base/LogControl.h"
 #include "zypp/base/Exception.h"
 #include "zypp/Pathname.h"
+#include "zypp/parser/ParserProgress.h"
 
 using namespace std;
 using namespace zypp;
+
+using namespace zypp::parser;
+
+void progress( int p )
+{
+  cout << p << "%" << endl;
+}
 
 void usage() {
   std::cerr << "SelectionTagFileParserTest usage: "<< endl
@@ -29,7 +37,10 @@ int main(int argc, char **argv)
 
   try
   {
-    selection = zypp::source::susetags::parseSelection( s, Pathname(argv[1]) );
+    ParserProgress::Ptr pptr;
+    pptr.reset( new ParserProgress( &progress ) );
+    
+    selection = zypp::source::susetags::parseSelection( pptr, s, Pathname(argv[1]) );
     cout << zypp::storage::toXML(selection) << endl;
   }
   catch (Exception & excpt_r)

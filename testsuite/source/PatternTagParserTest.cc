@@ -5,8 +5,16 @@
 #include "zypp/base/Exception.h"
 #include "zypp/Pathname.h"
 
+#include "zypp/parser/ParserProgress.h"
+
 using namespace std;
 using namespace zypp;
+using namespace zypp::parser;
+
+void progress( int p )
+{
+  cout << p << "%" << endl;
+}
 
 int main()
 {
@@ -14,14 +22,16 @@ int main()
 
   Pattern::Ptr pattern;
   Source_Ref s;
-
+  ParserProgress::Ptr pptr;
+  pptr.reset( new ParserProgress( &progress ) );
+  
   try {
-    pattern = zypp::source::susetags::parsePattern( s, Pathname("patfiles/default.pat"));
+    pattern = zypp::source::susetags::parsePattern( pptr, s, Pathname("patfiles/default.pat"));
     cout << *pattern << endl;
-    pattern = zypp::source::susetags::parsePattern( s, Pathname("patfiles/NOTTHERE.pat"));
+    pattern = zypp::source::susetags::parsePattern( pptr, s, Pathname("patfiles/NOTTHERE.pat"));
     cout << *pattern << endl;
     
-    pattern = zypp::source::susetags::parsePattern( s, Pathname("patfiles/base-10-33.i586.pat"));
+    pattern = zypp::source::susetags::parsePattern( pptr, s, Pathname("patfiles/base-10-33.i586.pat"));
     if (pattern->userVisible())
     {
       ERR << "Error parsing userVisible" << std::endl;
