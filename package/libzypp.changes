@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Wed Aug 30 17:42:40 CEST 2006 - schubi@suse.de
+
+- Do not regarding SATISFIED/UNNEEDED in isPresent if it is
+  a package/script/message  
+  Bug: 192535
+
+-------------------------------------------------------------------
 Wed Aug 30 14:29:45 CEST 2006 - ma@suse.de
 
 - Speedup computation of number of rpm database entries.
