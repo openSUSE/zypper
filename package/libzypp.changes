@@ -1,11 +1,13 @@
 -------------------------------------------------------------------
-Wed Aug 30 22:52:34 CEST 2006 - ma@suse.de
+Wed Aug 30 23:50:55 CEST 2006 - ma@suse.de
 
+- Fixed RpmDb::makePackageFromHeader: Catch NULL Header passed as argument and refuse
+  to create a Package from a source package header.
 - Added method Pathname::extension: Return all of the characters in name
   after and including the last dot in the last element of name.
 - PlaindirImpl: Disable rpm signature verification when scaning a directory for
   rpms. Otherwise we'd need access to the rpm database to get the keys.
-- revision 4067
+- revision 4069
 
 -------------------------------------------------------------------
 Wed Aug 30 17:42:40 CEST 2006 - schubi@suse.de
