@@ -122,13 +122,33 @@ int main( int argc, char * argv[] )
       Source_Ref src;
       try
         {
-          src = SourceFactory().createFrom( Url(*argv), "/", "" );
+          Url url(*argv);
+          try
+            {
+              src = SourceFactory().createFrom( url, "/", "" );
+            }
+          catch ( const Exception & except_r )
+            {
+              static string unk( "Unknown source type" );
+              if ( except_r.asString().substr( 0, unk.size() ) == unk )
+                {
+                  source::SourceInfo inf;
+                  inf.setType( "Plaindir" )
+                     .setUrl( url );
+                  SEC << endl;
+                  src = SourceFactory().createFrom( inf );
+                  SEC << src << endl;
+                }
+              else
+                throw;
+            }
         }
       catch ( const Exception & except_r )
         {
           LOG << "***Failed: " << except_r << endl;
           continue;
         }
+      LOG << "type:           " << src.type() << endl;
       LOG << "numberOfMedia:  " << src.numberOfMedia() << endl;
       LOG << "alias:          " << src.alias() << endl;
       LOG << "vendor:         " << src.vendor() << endl;
@@ -136,6 +156,7 @@ int main( int argc, char * argv[] )
       LOG << "zmdName:        " << src.zmdName() << endl;
       LOG << "zmdDescription: " << src.zmdDescription() << endl;
       LOG << "baseSource:     " << src.baseSource() << endl;
+      LOG << "autorefresh:    " << src.autorefresh() << endl;
       LOG << "publicKeys:     " << src.publicKeys() << endl;
 
       LOG << "===Parse content..." << endl;
