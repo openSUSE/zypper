@@ -213,7 +213,7 @@ namespace zypp
     string Pathname::basename( const Pathname & name_tv )
     {
       if ( name_tv.empty() )
-        return "";
+        return string();
 
       string ret_t( name_tv.asString() );
       ret_t.erase( 0, name_tv.prfx_i );
@@ -223,6 +223,23 @@ namespace zypp
       }
 
       return ret_t;
+    }
+
+    ///////////////////////////////////////////////////////////////////
+    //
+    //	METHOD NAME : Pathname::extension
+    //	METHOD TYPE : string
+    //
+    string Pathname::extension( const Pathname & name_tv )
+    {
+      if ( name_tv.empty() )
+        return string();
+
+      string base( basename( name_tv ) );
+      string::size_type pos = base.rfind( '.' );
+      if ( pos == string::npos )
+        return string();
+      return base.substr( pos );
     }
 
     ///////////////////////////////////////////////////////////////////

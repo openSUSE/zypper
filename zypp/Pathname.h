@@ -92,6 +92,13 @@ namespace zypp
       std::string basename() const { return basename( *this ); }
       static std::string basename( const Pathname & name_tv );
 
+      /** Return all of the characters in name after and including
+       * the last dot in the last element of name.  If there is no dot
+       * in the last element of name then returns the empty string.
+      */
+      std::string extension() const { return extension( *this ); }
+      static std::string extension( const Pathname & name_tv );
+
       /** Return this path, adding a leading '/' if relative. */
       Pathname absolutename() const { return absolutename( *this ); }
       static Pathname absolutename( const Pathname & name_tv )
