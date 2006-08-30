@@ -1090,6 +1090,15 @@ const std::list<Package::Ptr> & RpmDb::getPackages()
 //
 Package::Ptr RpmDb::makePackageFromHeader( const RpmHeader::constPtr header, std::set<std::string> * filerequires, const Pathname & location, Source_Ref source )
 {
+    if ( ! header )
+      return 0;
+
+    if ( header->isSrc() )
+      {
+        WAR << "Can't make Package from SourcePackage header" << endl;
+        return 0;
+      }
+
     Package::Ptr pptr;
 
     string name = header->tag_name();
@@ -1102,8 +1111,6 @@ Package::Ptr RpmDb::makePackageFromHeader( const RpmHeader::constPtr header, std
 	impl->setLocation( location );
 
     Edition edition;
-    Arch arch;
-
     try {
 	edition = Edition( header->tag_version(),
 			   header->tag_release(),
@@ -1118,6 +1125,7 @@ Package::Ptr RpmDb::makePackageFromHeader( const RpmHeader::constPtr header, std
 	return pptr;
     }
 
+    Arch arch;
     try {
 	arch = Arch( header->tag_arch() );
     }
