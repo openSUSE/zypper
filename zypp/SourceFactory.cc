@@ -126,14 +126,31 @@ namespace zypp
 
   Source_Ref SourceFactory::createFrom( const source::SourceInfo &context )
   {
-    return Source_Ref::noSource;  
+    if ( context.type().empty() )
+      {
+        return createFrom( context.url(),
+                           context.path(),
+                           context.alias(),
+                           context.cacheDir(),
+                           context.baseSource() );
+      }
+    else
+      {
+        return createFrom( context.type(),
+                           context.url(),
+                           context.path(),
+                           context.alias(),
+                           context.cacheDir(),
+                           context.baseSource(),
+                           context.autorefresh() );
+      }
   }
-  
+
 //   bool SourceFactory::probeSource( const std::string name, boost::function<bool()> prober, callback::SendReport<CreateSourceReport> &report )
 //   {
-//   
+//
 //   }
-  
+
   Source_Ref SourceFactory::createFrom( const Url & url_r, const Pathname & path_r, const std::string & alias_r, const Pathname & cache_dir_r, bool base_source )
   {
     if (! url_r.isValid())
@@ -158,16 +175,16 @@ namespace zypp
     }
 
     bool auto_refresh = media::MediaAccess::canBeVolatile( url_r );
-    
+
     report->start(url_r);
-    
+
     //////////////////////////////////////////////////////////////////
     // TRY YUM
     //////////////////////////////////////////////////////////////////
     try
     {
       boost::function<bool()> probe = yum::YUMSourceImpl::Prober( id, path_r );
- 
+
       if ( probe() )
       {
         report->successProbe(url_r, "YUM");
@@ -177,7 +194,7 @@ namespace zypp
           Source_Ref::Impl_Ptr impl( base_source
             ? Impl::createBaseSourceImpl<yum::YUMSourceImpl>(id, path_r, alias_r, cache_dir_r, auto_refresh)
             : Impl::createSourceImpl<yum::YUMSourceImpl>(id, path_r, alias_r, cache_dir_r, auto_refresh) );
-          
+
           return Source_Ref(impl);
         }
         catch (const Exception & excpt_r)
@@ -202,7 +219,7 @@ namespace zypp
     try
     {
       boost::function<bool()> probe = susetags::SuseTagsImpl::Prober( id, path_r );
- 
+
       if ( probe() )
       {
         report->successProbe(url_r, "YaST");
@@ -228,18 +245,18 @@ namespace zypp
     catch (const Exception & excpt_r)
     {
       report->finish(url_r, ProbeSourceReport::NO_ERROR, "");
-    } 
-    
+    }
+
     //////////////////////////////////////////////////////////////////
     // TRY PLAINDIR
     //////////////////////////////////////////////////////////////////
     //FIXME disabled
     report->finish(url_r, ProbeSourceReport::INVALID, "Unknown source type");
     ZYPP_THROW( Exception("Unknown source type for " + url_r.asString() ) );
-    
-    
+
+
     return Source_Ref(); // not reached!!
-    
+
     try
     {
       if ( ! ( ( url_r.getScheme() == "file") || ( url_r.getScheme() == "dir ") ) )
@@ -293,10 +310,10 @@ namespace zypp
       MIL << "Initializing from cache" << endl;
     }
 
-    // Sane default for unknown autorefresh 
+    // Sane default for unknown autorefresh
     if ( auto_refresh == indeterminate )
       auto_refresh = media::MediaAccess::canBeVolatile( url_r );
-    
+
     try
     {
 

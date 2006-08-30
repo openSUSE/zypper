@@ -25,17 +25,18 @@ namespace zypp
 { /////////////////////////////////////////////////////////////////
 namespace source
 {
-  
+
   class SourceInfo
   {
     public:
-      
+
     SourceInfo();
-    
+
     SourceInfo( const Url & url, const Pathname & path, const std::string & alias = "", const Pathname & cache_dir = "", boost::tribool autorefresh = boost::indeterminate);
-    
+
     SourceInfo & setEnabled( boost::tribool enabled );
     SourceInfo & setAutorefresh( boost::tribool autorefresh );
+    SourceInfo & setBaseSource( bool val_r );
     SourceInfo & setUrl( const Url &url );
     SourceInfo & setPath( const Pathname &p );
     SourceInfo & setAlias( const std::string &alias );
@@ -46,6 +47,7 @@ namespace source
     SourceInfo & setTimestamp( const Date &timestamp );
     boost::tribool enabled() const;
     boost::tribool autorefresh() const;
+    bool baseSource() const;
     Pathname cacheDir() const;
     Pathname path() const;
     std::string alias() const;
@@ -54,15 +56,16 @@ namespace source
     CheckSum checksum() const;
     Date timestamp() const;
     Url url() const;
-    
-    
+
+
     /** Overload to realize stream output. */
     std::ostream & dumpOn( std::ostream & str ) const;
-    
+
     private:
-    
+
     boost::tribool _enabled;
     boost::tribool _autorefresh;
+    bool _baseSource;
     std::string _type;
     Url _url;
     Pathname _cache_dir;
@@ -71,12 +74,12 @@ namespace source
     std::string _description;
     CheckSum _checksum;
     Date _timestamp;
-  };  
-  
+  };
+
   /** \relates SourceInfo Stream output */
   inline std::ostream & operator<<( std::ostream & str, const SourceInfo & obj )
   { return obj.dumpOn( str ); }
-  
+
   typedef std::list<SourceInfo> SourceInfoList;
 }
   /////////////////////////////////////////////////////////////////
