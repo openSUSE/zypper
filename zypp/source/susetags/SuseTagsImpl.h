@@ -43,13 +43,13 @@ namespace zypp
         public:
           SuseTagsProber( media::MediaAccessId media_id, const Pathname &path ) : SourceProber( media_id, path )
           {}
-        
+
           virtual ~SuseTagsProber()
           {}
-        
+
           virtual bool operator()();
       };
-      
+
       struct SuseTagsPackageImplData
       {
         SuseTagsPackageImplData()
@@ -86,11 +86,6 @@ namespace zypp
         ~SuseTagsImpl();
 
       public:
-        virtual void createResolvables(Source_Ref source_r);
-
-	/** Provide only resolvables of a certain kind. */
-        virtual ResStore createResolvablesByKind(Source_Ref source_r, zypp::Resolvable::Kind kind);
-
         virtual std::string type(void) const
         { return typeString(); }
 
@@ -125,30 +120,35 @@ namespace zypp
          * \throw EXCEPTION on fail
         */
         virtual void factoryInit();
-        
+        virtual void createResolvables(Source_Ref source_r);
+
+	/** Provide only resolvables of a certain kind. */
+        virtual ResStore createResolvablesByKind(Source_Ref source_r, zypp::Resolvable::Kind kind);
+
+
         const Pathname metadataRoot() const;
         const Pathname contentFile() const;
         const Pathname contentFileKey() const;
         const Pathname contentFileSignature() const;
         const Pathname descrDir() const;
         const Pathname mediaFile() const;
-        
+
         void saveMetadataTo(const Pathname & dir_r);
-        
+
         /**
          * description dir in original media
          * it is not always the same so it
          * requires the content file to be parsed
          */
         const Pathname mediaDescrDir() const;
-        
+
         /**
          * data dir in original media
          * it is not always the same so it
          * requires the content file to be parsed
          */
         const Pathname dataDir() const;
-        
+
          /**
          * reads content file, initializes the
          * data and media descr dir
@@ -156,16 +156,16 @@ namespace zypp
          * but it does not add it to the store yet
           */
         void readContentFile(const Pathname &p);
-        
+
         /**
          * reads a media file and installs
          * a media verifier if available
          */
         void readMediaFile(const Pathname &p);
-        
+
         TmpDir downloadMetadata();
         bool downloadNeeded(const Pathname &localdir);
-        
+
 	void provideProducts(Source_Ref source_r, ResStore& store);
 	void providePackages(Source_Ref source_r, ResStore& store);
 	void provideSelections(Source_Ref source_r, ResStore& store);
