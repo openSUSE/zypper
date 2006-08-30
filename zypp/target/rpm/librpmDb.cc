@@ -85,18 +85,7 @@ class librpmDb::D {
 
     ~D() {
       if ( _db ) {
-#if 0
-	// login here may cause a SEGV, if call is caused by
-	// static variables being deleted. Might be that PMError
-	// static strings or logstreams are already destructed.
-	int res = ::rpmdbClose( _db );
-	if ( res ) {
-	  WAR << "::rpmdbClose error(" << res << ")" << endl;
-	}
-	DBG << "DBCLOSE " << *this << endl;
-#else
       ::rpmdbClose( _db );
-#endif
       }
     }
 };
@@ -428,6 +417,36 @@ shared_ptr<RpmException> librpmDb::error() const
 bool librpmDb::empty() const
 {
   return( valid() && ! *db_const_iterator( this ) );
+}
+
+///////////////////////////////////////////////////////////////////
+//
+//
+//	METHOD NAME : librpmDb::size
+//	METHOD TYPE : unsigned
+//
+unsigned librpmDb::size() const
+{
+  unsigned count = 0;
+  if ( valid() )
+    {
+      dbiIndex dbi = dbiOpen( _d._db, RPMTAG_NAME, 0 );
+      if ( dbi )
+        {
+          DBC * dbcursor = 0;
+          dbiCopen( dbi, dbi->dbi_txnid, &dbcursor, 0 );
+
+          DBT key, data;
+          memset( &key, 0, sizeof(key) );
+          memset( &data, 0, sizeof(data) );
+          while ( dbiGet( dbi, dbcursor, &key, &data, DB_NEXT ) == 0 )
+            count += data.size / dbi->dbi_jlen;
+
+          dbiCclose( dbi, dbcursor, 0 );
+          /* no need to close dbi */
+        }
+    }
+  return count;
 }
 
 ///////////////////////////////////////////////////////////////////

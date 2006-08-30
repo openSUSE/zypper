@@ -32,7 +32,7 @@ namespace zypp {
       /**
        * @short Manage access to librpm database.
        **/
-      class librpmDb : public base::ReferenceCounted, private base::NonCopyable 
+      class librpmDb : public base::ReferenceCounted, private base::NonCopyable
       {
         public:
 	  typedef intrusive_ptr<librpmDb> Ptr;
@@ -48,38 +48,38 @@ namespace zypp {
          *
          **/
         static void dbAccess( librpmDb::Ptr & ptr_r );
-      
+
         public:
-      
+
           ///////////////////////////////////////////////////////////////////
           //
           //	static interface
           //
           ///////////////////////////////////////////////////////////////////
         private:
-      
+
           /**
            * Current root directory for all operations.
            * (initialy /)
            **/
           static Pathname _defaultRoot;
-      
+
           /**
            * Current directory (below root) that contains the rpmdb.
            * (initialy /var/lib/rpm)
            **/
           static Pathname _defaultDbPath;
-      
+
           /**
            * Current rpmdb handle.
            **/
           static librpmDb::constPtr _defaultDb;
-      
+
           /**
            * Wheter access is blocked (no _defaultDb will be available).
            **/
           static bool _dbBlocked;
-      
+
           /**
            * For internal use. Pointer returned should immediately be
            * wrapped into librpmDb::Ptr.
@@ -88,7 +88,7 @@ namespace zypp {
            *
            **/
           static librpmDb * newLibrpmDb( Pathname root_r, Pathname dbPath_r, bool readonly_r );
-      
+
           /**
            * Access the database at the current default location. If necessary
            * (eg. after @ref dbRelease), the database is opened. This just creates
@@ -102,9 +102,9 @@ namespace zypp {
            *
            **/
           static void dbAccess();
-      
+
         public:
-      
+
           /**
            * Initialize lib librpm (read configfiles etc.). It's called
            * on demand but you may call it anytime.
@@ -112,31 +112,31 @@ namespace zypp {
            * @return Whether librpm is initialized.
            **/
           static bool globalInit();
-      
+
           /**
            * @return librpm macro expansion.
            **/
           static std::string expand( const std::string & macro_r );
-      
+
           /**
            * @return String '(root_r)sub_r' used in debug output.
            **/
           static std::string stringPath( const Pathname & root_r, const Pathname & sub_r ) {
             return std::string( "'(" ) + root_r.asString() + ")" + sub_r.asString() + "'";
           }
-      
+
         public:
-      
+
           /**
            * @return Current root directory for all operations.
            **/
           static const Pathname & defaultRoot() { return _defaultRoot; }
-      
+
           /**
            * @return Current directory (below root) that contains the rpmdb.
            **/
           static const Pathname & defaultDbPath() { return _defaultDbPath; }
-      
+
           /**
            * Adjust access to the given database location, making it the new
            * default location on success. No relative Pathnames are allowed.
@@ -152,7 +152,7 @@ namespace zypp {
            *
            **/
           static void dbAccess( const Pathname & root_r, const Pathname & dbPath_r );
-      
+
           /**
            * Same as &ref dbAccess(), but returns the database handle if
            * avaialble, otherwise NULL. This creates an external reference, thus
@@ -163,7 +163,7 @@ namespace zypp {
            *
            **/
           static void dbAccess( librpmDb::constPtr & ptr_r );
-      
+
           /**
            * If there are no outstanding references to the database (e.g. by @ref db_const_iterator),
            * the database is closed. Subsequent calls to @ref dbAccess may however
@@ -177,7 +177,7 @@ namespace zypp {
            * if database was physically closed.
            **/
           static unsigned dbRelease( bool force_r = false );
-      
+
           /**
            * Blocks further access to rpmdb. Basically the same as @ref dbRelease( true ),
            * but subsequent calls to @ref dbAccess will fail returning E_RpmDB_access_blocked.
@@ -186,7 +186,7 @@ namespace zypp {
            * if database was physically closed.
            **/
           static unsigned blockAccess();
-      
+
           /**
            * Allow access to rpmdb e.g. after @ref blockAccess. Subsequent calls to
            * @ref dbAccess will perform.
@@ -198,104 +198,109 @@ namespace zypp {
            * if database was physically closed.
            **/
           static void unblockAccess();
-      
+
           /**
            * @return Whether database access is blocked.
            **/
           static bool isBlocked() { return _dbBlocked; }
-      
+
           /**
            * Dump debug info.
            **/
           static std::ostream & dumpState( std::ostream & str );
-      
+
         public:
-      
+
           /**
            * Collect info about what kind of rpmdb seems to be present by
            * looking at paths and filenames.
            **/
           class DbDirInfo;
-      
+
           /**
            * Subclass to retrieve database content.
            **/
           class db_const_iterator;
-      
+
         private:
           ///////////////////////////////////////////////////////////////////
           //
           //	internal database handle interface (nonstatic)
           //
           ///////////////////////////////////////////////////////////////////
-      
+
           /**
            * Hides librpm specific data
            **/
           class D;
           D & _d;
-      
+
         protected:
-      
+
           /**
            * Private constructor! librpmDb objects are to be created via
            * static interface only.
            **/
           librpmDb( const Pathname & root_r, const Pathname & dbPath_r, bool readonly_r );
-      
+
           /**
            * Trigger from @ref Rep, after refCount was decreased.
            **/
           virtual void unref_to( unsigned refCount_r ) const;
-      
+
         public:
-      
+
           /**
            * Destructor. Closes rpmdb.
            **/
           virtual ~librpmDb();
-      
+
           /**
            * @return This handles root directory for all operations.
            **/
           const Pathname & root() const;
-      
+
           /**
            * @return This handles directory that contains the rpmdb.
            **/
           const Pathname & dbPath() const;
-      
+
           /**
            * Return any database error. Usg. if the database was
            * blocked by calling @ref dbRelease(true) or @ref blockAccess.
            **/
           shared_ptr<RpmException> error() const;
-      
+
           /**
-           * @return Whether
+           * @return Whether handle is valid.
            **/
           bool valid() const { return( ! error() ); }
-      
+
           /**
            * @return True if handle is valid and database is empty.
            **/
           bool empty() const;
-      
+
+          /**
+           * @return Number of entries in the database (0 if not valid).
+           **/
+          unsigned size() const;
+
         public:
-      
+
           /**
            * Dont call it ;) It's for development and testing only.
            **/
           void * dont_call_it() const;
-      
+
           /**
            * Dump debug info.
            **/
           virtual std::ostream & dumpOn( std::ostream & str ) const;
       };
-      
+
       ///////////////////////////////////////////////////////////////////
-      
+
       ///////////////////////////////////////////////////////////////////
       //
       //	CLASS NAME : librpmDb::DbDirInfo
@@ -305,122 +310,122 @@ namespace zypp {
        **/
       class librpmDb::DbDirInfo {
         friend std::ostream & operator<<( std::ostream & str, const DbDirInfo & obj );
-      
+
         private:
-      
+
           /**
            * Root directory for all operations.
            **/
           Pathname _root;
-      
+
           /**
            * Directory that contains the rpmdb.
            **/
           Pathname _dbPath;
-      
+
           /**
            * database directory (unset on illegal constructor arguments)
            **/
           PathInfo _dbDir;
-      
+
           /**
            * rpmV4 database (_dbDir/Packages)
            **/
           PathInfo _dbV4;
-      
+
           /**
            * rpmV3 database (_dbDir/packages.rpm)
            **/
           PathInfo _dbV3;
-      
+
           /**
            * rpmV3 database backup created on conversion to rpmV4 (_dbDir/packages.rpm3)
            **/
           PathInfo _dbV3ToV4;
-      
+
         public:
-      
+
           /**
            * For Constructor arguments see @ref accessPath. On illegal
            * arguments @ref _dbDir is unset.
            **/
           DbDirInfo( const Pathname & root_r, const Pathname & dbPath_r );
-      
+
         public:
-      
+
           /**
            * Root directory for all operations.
            **/
           const Pathname & root() const { return _root; }
-      
+
           /**
            * Directory that contains the rpmdb.
            **/
           const Pathname & dbPath() const { return _dbPath; }
-      
+
           /**
            * database directory (unset on illegal constructor arguments)
            **/
           const PathInfo & dbDir() const { return _dbDir; }
-      
+
           /**
            * rpmV4 database (_dbDir/Packages)
            **/
           const PathInfo & dbV4() const { return _dbV4; }
-      
+
           /**
            * rpmV3 database (_dbDir/packages.rpm)
            **/
           const PathInfo & dbV3() const { return _dbV3; }
-      
+
           /**
            * rpmV3 database backup created on conversion to rpmV4 (_dbDir/packages.rpm3)
            **/
           const PathInfo & dbV3ToV4() const { return _dbV3ToV4; }
-      
+
         public:
-      
+
           /**
            * Restat all paths
            **/
           void restat();
-      
+
         public:
-      
+
           /**
            * Whether constructor arguments were illegal.
            **/
           bool illegalArgs() const { return _dbDir.path().empty(); }
-      
+
           /**
            * Whether constructor arguments were llegal and dbDir either
            * is a directory or may be created (path does not exist).
            **/
           bool usableArgs() const { return _dbDir.isDir() || ! ( _dbDir.path().empty() || _dbDir.isExist() ); }
-      
+
           /**
            * Whether dbDir directory exists.
            **/
           bool hasDbDir() const { return _dbDir.isDir(); }
-      
+
           /**
            * Whether dbV4 file exists.
            **/
           bool hasDbV4() const { return _dbV4.isFile(); }
-      
+
           /**
            * Whether dbV3 file exists.
            **/
           bool hasDbV3() const { return _dbV3.isFile(); }
-      
+
           /**
            * Whether dbV3ToV4 file exists.
            **/
           bool hasDbV3ToV4() const { return _dbV3ToV4.isFile(); }
       };
-      
+
       ///////////////////////////////////////////////////////////////////
-      
+
       ///////////////////////////////////////////////////////////////////
       //
       //	CLASS NAME : librpmDb::db_const_iterator
@@ -434,17 +439,17 @@ namespace zypp {
         db_const_iterator ( const db_const_iterator & );            // NO COPY!
         friend std::ostream & operator<<( std::ostream & str, const db_const_iterator & obj );
         friend class librpmDb;
-      
+
         private:
-      
+
           /**
            * Hides librpm specific data
            **/
           class D;
           D & _d;
-      
+
         public:
-      
+
           /**
            * Constructor. Iterator is initialized to @ref findAll.
            * The default form accesses librpmDb's default database.
@@ -452,12 +457,12 @@ namespace zypp {
            * neccesary, except for testing.
            **/
           db_const_iterator( librpmDb::constPtr dbptr_r = 0 );
-      
+
           /**
            * Destructor.
            **/
           ~db_const_iterator();
-      
+
           /**
            * Return any database error.
            *
@@ -466,33 +471,33 @@ namespace zypp {
            * iteration will proceed to its end. Then the database is dropped.
            **/
           shared_ptr<RpmException> dbError() const;
-      
+
           /**
            * Advance to next RpmHeader::constPtr.
            **/
           void operator++();
-      
+
           /**
            * Returns the current headers index in database,
            * 0 if no header.
            **/
           unsigned dbHdrNum() const;
-      
+
           /**
            * Returns the current RpmHeader::constPtr or
            * NULL, if no more entries available.
            **/
           const RpmHeader::constPtr & operator*() const;
-      
+
           /**
            * Forwards to the current RpmHeader::constPtr.
            **/
           const RpmHeader::constPtr & operator->() const {
             return operator*();
           }
-      
+
         public:
-      
+
           /**
            * Reset to iterate all packages. Returns true if iterator
            * contains at least one entry.
@@ -502,27 +507,27 @@ namespace zypp {
            * @ref dbError to check this.
            **/
           bool findAll();
-      
+
           /**
            * Reset to iterate all packages that own a certain file.
            **/
           bool findByFile( const std::string & file_r );
-      
+
           /**
            * Reset to iterate all packages that provide a certain tag.
            **/
           bool findByProvides( const std::string & tag_r );
-      
+
           /**
            * Reset to iterate all packages that require a certain tag.
            **/
           bool findByRequiredBy( const std::string & tag_r );
-      
+
           /**
            * Reset to iterate all packages that conflict with a certain tag.
            **/
           bool findByConflicts( const std::string & tag_r );
-      
+
           /**
            * Reset to iterate all packages with a certain name.
            *
@@ -534,9 +539,9 @@ namespace zypp {
            * 'gpg-pubkey', which in fact exist in multiple instances.
            **/
           bool findByName( const std::string & name_r );
-      
+
         public:
-      
+
           /**
            * Find package by name.
            *
@@ -545,7 +550,7 @@ namespace zypp {
            * is returned.
            **/
           bool findPackage( const std::string & name_r );
-      
+
           /**
            * Find package by name and edition.
            * Commonly used by PMRpmPackageDataProvider.

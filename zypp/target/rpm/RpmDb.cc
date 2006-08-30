@@ -1183,32 +1183,19 @@ const std::list<Package::Ptr> & RpmDb::doGetPackages(callback::SendReport<ScanDB
     return _packages._list;
   }
 
-// FIXME  Timecount _t( "RpmDb::getPackages" );
-
-#warning how to detect corrupt db while reading.
-
   _packages.clear();
 
   ///////////////////////////////////////////////////////////////////
-  // Collect package data. A map is used to check whethere there are
-  // multiple entries for the same string. If so we consider the last
-  // one installed to be the one we're interesed in.
+  // Collect package data.
   ///////////////////////////////////////////////////////////////////
   unsigned expect = 0;
-  librpmDb::db_const_iterator iter; // findAll
-  {
-    // quick check
-    for ( ; *iter; ++iter ) {
-      ++expect;
-    }
-    if ( iter.dbError() ) {
-      ERR << "No database access: " << iter.dbError() << endl;
-      ZYPP_THROW(*(iter.dbError()));
-    }
-  }
-  unsigned current = 0;
+  librpmDb::constPtr dbptr;
+  librpmDb::dbAccess( dbptr );
+  expect = dbptr->size();
   DBG << "Expecting " << expect << " packages" << endl;
 
+  librpmDb::db_const_iterator iter;
+  unsigned current = 0;
   CapFactory _f;
   Pathname location;
 
@@ -1222,17 +1209,6 @@ const std::list<Package::Ptr> & RpmDb::doGetPackages(callback::SendReport<ScanDB
       continue;
     }
     Date installtime = iter->tag_installtime();
-#if 0
-This prevented from having packages multiple times
-    Package::Ptr & nptr = _packages._index[name]; // be sure to get a reference!
-
-    if ( nptr ) {
-      WAR << "Multiple entries for package '" << name << "' in rpmdb" << endl;
-      if ( nptr->installtime() > installtime )
-	continue;
-      // else overwrite previous entry
-    }
-#endif
 
     Package::Ptr pptr = makePackageFromHeader( *iter, &_filerequires, location, Source_Ref() );
 
@@ -1262,47 +1238,6 @@ This prevented from having packages multiple times
   ///////////////////////////////////////////////////////////////////
   return _packages._list;
 }
-
-#warning Uncomment this function if it is needed
-#if 0
-///////////////////////////////////////////////////////////////////
-//
-//
-//	METHOD NAME : RpmDb::traceFileRel
-//	METHOD TYPE : void
-//
-//	DESCRIPTION :
-//
-void RpmDb::traceFileRel( const PkgRelation & rel_r )
-{
-  if ( ! rel_r.isFileRel() )
-    return;
-
-  if ( ! _filerequires.insert( rel_r.name() ).second )
-    return; // already got it in _filerequires
-
-  if ( ! _packages._valid )
-    return; // collect only. Evaluated in first call to getPackages()
-
-  //
-  // packages already initialized. Must check and insert here
-  //
-  librpmDb::db_const_iterator iter;
-  if ( iter.dbError() ) {
-    ERR << "No database access: " << iter.dbError() << endl;
-    return;
-  }
-
-  for ( iter.findByFile( rel_r.name() ); *iter; ++iter ) {
-    Package::Ptr pptr = _packages.lookup( iter->tag_name() );
-    if ( !pptr ) {
-      WAR << "rpmdb.findByFile returned unpknown package " << *iter << endl;
-      continue;
-    }
-    pptr->addProvides( rel_r.name() );
-  }
-}
-#endif
 
 ///////////////////////////////////////////////////////////////////
 //
