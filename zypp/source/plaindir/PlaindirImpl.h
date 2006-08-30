@@ -55,15 +55,14 @@ namespace zypp
         virtual std::string type() const
         { return typeString(); }
 
-        virtual void createResolvables(Source_Ref source_r);
-        
-        
       private:
         /** Ctor substitute.
          * Actually get the metadata.
          * \throw EXCEPTION on fail
         */
         virtual void factoryInit();
+        virtual void createResolvables(Source_Ref source_r);
+
         int extract_packages_from_directory (ResStore & store, const Pathname & path, Source_Ref source, bool recursive);
 
       };
