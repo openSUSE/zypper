@@ -1,13 +1,19 @@
 -------------------------------------------------------------------
+Wed Aug 30 14:29:45 CEST 2006 - ma@suse.de
+
+- Speedup computation of number of rpm database entries.
+- revision 4058
+
+-------------------------------------------------------------------
 Tue Aug 29 16:58:20 CEST 2006 - schubi@suse.de
 
 - Fixed endless loop in transactResObject
-  Bug 198095 - YaST2 Installaler crashes when selecting Gnome pattern to a KDE installation 
+  Bug 198095 - YaST2 Installaler crashes when selecting Gnome pattern to a KDE installation
 
 -------------------------------------------------------------------
 Tue Aug 29 12:05:09 CEST 2006 - dmacvicar@suse.de
 
-- fix some testcases for tar file parser changes 
+- fix some testcases for tar file parser changes
 - r4045
 
 -------------------------------------------------------------------
@@ -15,20 +21,20 @@ Tue Aug 29 11:19:53 CEST 2006 - dmacvicar@suse.de
 
 - missing includes
 - clean old callbacks
-- r4041 
+- r4041
 
 -------------------------------------------------------------------
 Fri Aug 25 14:32:07 CEST 2006 - schubi@suse.de
 
 - zyppPattern->install_packages returns SUGGESTED package too.
-  Bug 201476 
+  Bug 201476
   Revision 4036
 
 -------------------------------------------------------------------
 Fri Aug 25 13:05:33 CEST 2006 - schubi@suse.de
 
 - New behaviour in the solver: try with 'best' package first, try with 'all'
-  packages if this fails. 
+  packages if this fails.
   Bug :Bug 191983
 
 -------------------------------------------------------------------
@@ -36,7 +42,7 @@ Fri Aug 25 11:35:48 CEST 2006 - dmacvicar@suse.de
 
 - libzypp 2.1.0
 - bump version due to incompatible callback changes in KeyRing
-  Sources 
+  Sources
 
 -------------------------------------------------------------------
 Thu Aug 24 15:34:45 CEST 2006 - dmacvicar@suse.de
@@ -48,14 +54,14 @@ Thu Aug 24 15:34:45 CEST 2006 - dmacvicar@suse.de
 - update zmart with those callbacks.
 - better error handling (Exception types)
 - make tmp file names more readable depending on the context
-- r4026 
+- r4026
 
 -------------------------------------------------------------------
 Tue Aug 22 22:35:30 CEST 2006 - dmacvicar@suse.de
 
 - decouple probing from source creation, using the new
   media test for existence functions.
-- r4019 
+- r4019
 
 -------------------------------------------------------------------
 
@@ -78,14 +84,14 @@ Fri Aug 18 14:57:35 CEST 2006 - kkaempf@suse.de
 Thu Aug 17 18:15:14 CEST 2006 - dmacvicar@suse.de
 
 - fix uninstalling of atoms (noop)
-- r3995 
+- r3995
 
 -------------------------------------------------------------------
 Wed Aug 16 17:41:40 CEST 2006 - dmacvicar@suse.de
 
-- Implement initial verson of Media 
+- Implement initial verson of Media
   doesFileExist, for future source probing.
-- r3984 
+- r3984
 
 -------------------------------------------------------------------
 Tue Aug 15 12:01:31 CEST 2006 - dmacvicar@suse.de
@@ -110,14 +116,14 @@ Tue Aug 15 11:30:50 CEST 2006 - kkaempf@suse.de
 Mon Aug 14 16:50:53 CEST 2006 - schubi@suse.de
 
 - Added new API calls:
-  setAdditionalProvide 
+  setAdditionalProvide
   setAdditionalConflict
-  setAdditionalRequire 
+  setAdditionalRequire
 
 -------------------------------------------------------------------
 Mon Aug 14 11:26:20 CEST 2006 - dmacvicar@suse.de
 
-- don't link examples to testsuite library. 
+- don't link examples to testsuite library.
 
 -------------------------------------------------------------------
 Sat Aug 12 17:30:30 CEST 2006 - schwab@suse.de
@@ -129,7 +135,7 @@ Fri Aug 11 17:01:33 CEST 2006 - dmacvicar@suse.de
 
 - forward port 3924:3939
 - Add explicit finish callbacks for subtasks during ProvidePackage
-  to avoid UI confusion. 
+  to avoid UI confusion.
 - rev3957
 
 -------------------------------------------------------------------
@@ -144,20 +150,20 @@ Fri Aug 11 11:48:44 CEST 2006 - dmacvicar@suse.de
 Thu Aug 10 16:32:36 CEST 2006 - dmacvicar@suse.de
 
 - Initial support for plain directory with rpms as source
-- r3935 
+- r3935
 
 -------------------------------------------------------------------
 Tue Aug  8 16:51:45 CEST 2006 - dmacvicar@suse.de
 
 - Move the target query by kind function to
   a iterator, so we dont make a copy of the restore
-  the iterator works loading by demand too 
+  the iterator works loading by demand too
 
 -------------------------------------------------------------------
 Mon Aug  7 17:57:26 CEST 2006 - dmacvicar@suse.de
 
 - rename the new initTarget to initializeTarget,
-  leave the old one as is, but deprecate it. 
+  leave the old one as is, but deprecate it.
 - r3903
 
 -------------------------------------------------------------------
@@ -183,7 +189,7 @@ uggly bool flag.
   name in YaST help.
 - commit to pkg-bindings and packager will follow.
 - jsrain will port more yast stuff, especially inst_source which
-  startup time should by reduced by half afterwards. 
+  startup time should by reduced by half afterwards.
 - rev 3880
 
 -------------------------------------------------------------------
@@ -200,13 +206,13 @@ Tue Aug  1 13:37:29 CEST 2006 - dmacvicar@suse.de
 -------------------------------------------------------------------
 Fri Jul 21 10:58:58 CEST 2006 - dmacvicar@suse.de
 
-- link correctly 
+- link correctly
 
 -------------------------------------------------------------------
 Wed Jul 19 13:50:57 CEST 2006 - dmacvicar@suse.de
 
 - dont link sqlite in the main lib.
-- rev 3826 
+- rev 3826
 
 -------------------------------------------------------------------
 Tue Jul 18 17:42:45 CEST 2006 - dmacvicar@suse.de
@@ -220,7 +226,7 @@ Tue Jul 18 17:42:45 CEST 2006 - dmacvicar@suse.de
 Tue Jul 18 12:56:17 CEST 2006 - dmacvicar@suse.de
 
 - Digest: Don't read the stream character wise but reading blocks,
-  as advised by matz profiling. 
+  as advised by matz profiling.
 - r3819
 
 -------------------------------------------------------------------
