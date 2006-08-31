@@ -76,8 +76,8 @@ namespace zypp
       MIL << "provide Package " << _package << endl;
       ScopedGuard guardReport( newReport() );
       ManagedFile ret;
-      _retry = false;
       do {
+        _retry = false;
         report()->start( _package, _package->source().url() );
         try  // ELIMINATE try/catch by providing a log-guard
           {
@@ -86,7 +86,10 @@ namespace zypp
         catch ( const Exception & excpt )
           {
             ERR << "Failed to provide Package " << _package << endl;
-            ZYPP_RETHROW( excpt );
+            if ( ! _retry )
+              {
+                ZYPP_RETHROW( excpt );
+              }
           }
       } while ( _retry );
 
