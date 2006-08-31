@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Aug 31 15:16:11 CEST 2006 - ma@suse.de
+
+- PackageProvider: Fixed broken retry. (#202163)
+- revision 4071
+
+-------------------------------------------------------------------
 Wed Aug 30 23:50:55 CEST 2006 - ma@suse.de
 
 - Fixed RpmDb::makePackageFromHeader: Catch NULL Header passed as argument and refuse
