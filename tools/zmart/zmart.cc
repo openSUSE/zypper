@@ -91,6 +91,11 @@ int main(int argc, char **argv)
     return 1;
   }
 
+  if (vm.count("version")) {
+    cout << "zmart 0.1" << endl;
+    return 1;
+  }
+
   if (vm.count("disable-system-sources"))
   {
     MIL << "system sources disabled" << endl;
