@@ -90,6 +90,7 @@ struct SourceReportReceiver  : public zypp::callback::ReceiveReport<zypp::source
   virtual bool progress( int value )
   {
     display_step(value);
+    return true;
   }
   
   virtual Action problem( zypp::Source_Ref source, Error error, std::string description )
