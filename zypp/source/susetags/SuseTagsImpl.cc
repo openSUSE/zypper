@@ -11,6 +11,9 @@
 */
 #include <iostream>
 #include <fstream>
+
+#include <boost/bind.hpp>
+
 #include "zypp/base/Logger.h"
 #include "zypp/base/Exception.h"
 
@@ -54,6 +57,20 @@ namespace zypp
         //Pathname _file;
       };
 
+      struct SourceEventHandler
+      {
+        SourceEventHandler( callback::SendReport<SourceReport> &report ) : _report(report)
+        {}
+        
+        void operator()( int p )
+        {
+          _report->progress(p);
+        }
+        
+        callback::SendReport<SourceReport> &_report;
+      };
+      
+      
       bool SuseTagsProber::operator()()
       {
         MIL << "Probing for YaST source..." << std::endl;
@@ -571,21 +588,27 @@ namespace zypp
         DBG << "Going to parse " << p << endl;
 
         parser::ParserProgress::Ptr progress;
-        NullParseProgress npp(p);
-        progress.reset( new parser::ParserProgress(npp) );
+        //progress.reset( new parser::ParserProgress(npp) );
+        
+        callback::SendReport<SourceReport> report;
+        SourceEventHandler npp(report);
+        
+        progress.reset( new parser::ParserProgress( npp ) );
+        report->start( selfSourceRef(), "Parsing packages file" );
         PkgContent content( parsePackages( progress, source_r, this, p ) );
-
+        report->finish( selfSourceRef(), "Parsing packages file", source::SourceReport::NO_ERROR, "" );
+        
 #warning Should use correct locale and locale fallback list
         // note, this locale detection has nothing to do with translated text.
         // basically we are only loading the data we need. Instead of parsing all
         // package description we fill the TranslatedText properties only
         // with the detected locale.
 
-	ZYpp::Ptr z = getZYpp();
+        ZYpp::Ptr z = getZYpp();
         Locale lang( z->getTextLocale() );
 
         std::string packages_lang_prefix( "packages." );
-	std::string packages_lang_name;
+        std::string packages_lang_name;
 
         // get the list of available packages.X trsnlation files
         std::list<std::string> all_files;

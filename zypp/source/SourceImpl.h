@@ -60,6 +60,29 @@ namespace zypp
         Pathname _path;
     };
     
+    class SourceEventHandler
+    {
+      public:
+        typedef boost::shared_ptr<SourceEventHandler> Ptr;
+        SourceEventHandler( boost::function<void (int)> fnc )
+        : _fnc(fnc)
+        {
+        
+        };
+        ~SourceEventHandler()
+        {};
+        void progress(int p)
+        {
+          if (_fnc)
+            _fnc(p);
+        }
+      
+      private:
+        boost::function<void (int)> _fnc;
+        int _file_size;
+        int no_lines;
+    };
+    
     ///////////////////////////////////////////////////////////////////
     //
     //	CLASS NAME : SourceImpl

@@ -34,15 +34,15 @@ namespace zypp
       };
 
       enum Error {
-	NO_ERROR,
+        NO_ERROR,
         NOT_FOUND, 	// the requested Url was not found
-	IO,		// IO error
-	INVALID		// the downloaded file is invalid
+        IO,		// IO error
+        INVALID		// the downloaded file is invalid
       };
 
       virtual void start(
         Resolvable::constPtr resolvable_ptr
-	, Url url
+        , const Url &url
       ) {}
 
 
@@ -102,120 +102,11 @@ namespace zypp
 
       virtual Action problem(
         Resolvable::constPtr resolvable_ptr
-	, Error error
-	, std::string description
-      ) { return ABORT; }
-
-      virtual void finish(Resolvable::constPtr resolvable_ptr
-        , Error error
-	, std::string reason
-      ) {}
-    };
-
-
-    // progress for downloading a specific file
-    struct DownloadFileReport : public callback::ReportBase
-    {
-      enum Action {
-        ABORT,  // abort and return error
-        RETRY	// retry
-      };
-
-      enum Error {
-	NO_ERROR,
-        NOT_FOUND, 	// the requested Url was not found
-	IO,		// IO error
-	INVALID		// the downloaded file is invalid
-      };
-      virtual void start(
-	Source_Ref source
-	, Url url
-      ) {}
-
-      virtual bool progress(int value, Url url)
-      { return true; }
-
-      virtual Action problem(
-        Url url
-	, Error error
-	, std::string description
-      ) { return ABORT; }
-
-      virtual void finish(
-        Url url
-        , Error error
-	, std::string reason
-      ) {}
-    };
-
-    // progress for refreshing a source data
-    struct RefreshSourceReport : public callback::ReportBase
-    {
-      enum Action {
-        ABORT,  // abort and return error
-        RETRY,	// retry
-	IGNORE  // skip refresh, ignore failed refresh
-      };
-
-      enum Error {
-	NO_ERROR,
-        NOT_FOUND, 	// the requested Url was not found
-	IO,		// IO error
-	INVALID		// th source is invalid
-      };
-      virtual void start(
-	Source_Ref source
-	, Url url
-      ) {}
-
-      virtual bool progress(int value, Source_Ref source)
-      { return true; }
-
-      virtual Action problem(
-        Source_Ref source
-	, Error error
-	, std::string description
-      ) { return ABORT; }
-
-      virtual void finish(
-        Source_Ref source
-        , Error error
-	, std::string reason
-      ) {}
-    };
-
-    // DEPRECATED
-    struct CreateSourceReport : public callback::ReportBase
-    {
-      enum Action {
-        ABORT,  // abort and return error
-        RETRY	// retry
-      };
-
-      enum Error {
-        NO_ERROR,
-        NOT_FOUND, 	// the requested Url was not found
-        IO,		// IO error
-        INVALID		// th source is invalid
-      };
-
-      virtual void start(
-        Url source_url
-      ) {}
-
-      virtual void end(Url url) {}
-
-      virtual bool progress(int value, Url url)
-      { return true; }
-
-      virtual Action problem(
-        Url url
           , Error error
           , std::string description
       ) { return ABORT; }
 
-      virtual void finishData(
-        Url url
+      virtual void finish(Resolvable::constPtr resolvable_ptr
         , Error error
         , std::string reason
       ) {}
@@ -233,7 +124,8 @@ namespace zypp
         NO_ERROR,
         NOT_FOUND, 	// the requested Url was not found
         IO,		// IO error
-        INVALID		// th source is invalid
+        INVALID,		// th source is invalid
+        UNKNOWN    
       };
 
       virtual void start(const Url &url) {}
@@ -247,8 +139,41 @@ namespace zypp
       virtual Action problem( const Url &url, Error error, std::string description ) { return ABORT; }
     };
     
-    // progress for refreshing a source data
-    struct SourceProcessReport : public callback::ReportBase
+    struct SourceCreateReport : public callback::ReportBase
+    {
+      enum Action {
+        ABORT,  // abort and return error
+        RETRY,	// retry
+        IGNORE  // skip refresh, ignore failed refresh
+      };
+
+      enum Error {
+        NO_ERROR,
+        NOT_FOUND, 	// the requested Url was not found
+        IO,		// IO error
+        REJECTED,
+        INVALID, // th source is invali
+        UNKNOWN
+      };
+      
+      virtual void start( const zypp::Url &url ) {}
+      virtual bool progress( int value )
+      { return true; }
+
+      virtual Action problem(
+          const zypp::Url &url
+          , Error error
+          , std::string description )
+      { return ABORT; }
+
+      virtual void finish(
+          const zypp::Url &url
+          , Error error
+          , std::string reason )
+      {}
+    };
+    
+    struct SourceReport : public callback::ReportBase
     {
       enum Action {
         ABORT,  // abort and return error
@@ -263,8 +188,8 @@ namespace zypp
         INVALID		// th source is invalid
       };
       
-      virtual void start( Source_Ref source ) {}
-      virtual bool progress(int value, Source_Ref source)
+      virtual void start( Source_Ref source, const std::string &task ) {}
+      virtual bool progress( int value )
       { return true; }
 
       virtual Action problem(
@@ -275,6 +200,7 @@ namespace zypp
 
       virtual void finish(
           Source_Ref source
+          , const std::string task
           , Error error
           , std::string reason )
       {}
@@ -331,19 +257,19 @@ namespace zypp
           IO		// IO error
         };
 
-        virtual void start( Url file, Pathname localfile ) {}
+        virtual void start( const Url &file, Pathname localfile ) {}
 
-        virtual bool progress(int value, Url file)
+        virtual bool progress(int value, const Url &file)
         { return true; }
 
         virtual Action problem(
-          Url file
+          const Url &file
   	  , Error error
   	  , std::string description
         ) { return ABORT; }
 
         virtual void finish(
-          Url file
+          const Url &file
           , Error error
 	  , std::string reason
         ) {}

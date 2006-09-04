@@ -11,7 +11,10 @@ zmartinclude_HEADERS =	\
 	AliveCursor.h \
 	zmart-keyring-callbacks.h  \
 	zmart-rpm-callbacks.h  \
-	zmart-source-callbacks.h
+	zmart-source-callbacks.h \
+	zmart-sources.h \
+	zmart-misc.h \
+  zmart.h
 
 INCLUDES = -I$(top_srcdir)/tools/zmart -I$(oldincludedir)/libxml2
 AM_LDFLAGS =
@@ -23,7 +26,7 @@ LDADD =		-L$(top_srcdir)/zypp/.libs -lzypp -lboost_regex -lboost_program_options
 
 ## ##################################################
 
-zmart_SOURCES = 	zmart.cc
+zmart_SOURCES = 	zmart.cc zmart-sources.cc zmart-misc.cc
 #zmart_LDFLAGS =	-static
 
 .PHONY:        always

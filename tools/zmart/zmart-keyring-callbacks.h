@@ -49,24 +49,27 @@ namespace zypp {
     {
       virtual bool askUserToAcceptUnsignedFile( const std::string &file )
       {
-        cout << file << " is unsigned, continue? [y/n]: " << endl;
+        cout << "\x1B 2K\r" << file << " is unsigned, continue? [y/n]: ";
         return readBoolAnswer();
       }
       
       virtual bool askUserToImportKey( const PublicKey &key )
       {
-        cout << "Import key " << key.id() << " in trusted keyring? [y/n]: " << endl;
+        if ( geteuid() != 0 )
+          return false;
+        
+        cout << "\x1B 2K\r" << "Import key " << key.id() << " in trusted keyring? [y/n]: ";
         return readBoolAnswer();
       } 
       
       virtual bool askUserToAcceptUnknownKey( const std::string &file, const std::string &id )
       {
-        cout << file << " is signed with an unknown key id: " << id << ", continue? [y/n]: " << endl;
+        cout << "\x1B 2K\r" << file << " is signed with an unknown key id: " << id << ", continue? [y/n]: ";
         return readBoolAnswer();
       }
       virtual bool askUserToTrustKey( const PublicKey &key )
       {
-        cout  << "Do you want to trust key id " << key.id() << " " << key.name() << " fingerprint:" << key.fingerprint() << " ? [y/n]: " << endl;
+        cout  << "\x1B 2K\r" << "Do you want to trust key id " << key.id() << " " << key.name() << " fingerprint:" << key.fingerprint() << " ? [y/n]: " ;
         return readBoolAnswer();
       }
       virtual bool askUserToAcceptVerificationFailed( const std::string &file,const PublicKey &key )

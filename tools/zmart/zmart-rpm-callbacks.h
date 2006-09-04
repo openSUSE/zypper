@@ -29,6 +29,15 @@ using namespace std;
 namespace ZmartRecipients
 {
 
+// // resolvable Message
+//   struct MessageResolvableReportReceiver : public zypp::callback::ReceiveReport<zypp::target::MessageResolvableReport>
+// {
+//   virtual void show( Message::constPtr message )
+//   {
+//   
+//   }
+// };
+
 ///////////////////////////////////////////////////////////////////
 // 
 ///////////////////////////////////////////////////////////////////

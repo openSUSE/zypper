@@ -19,6 +19,9 @@
 #include <zypp/KeyRing.h>
 #include <zypp/Digest.h>
 #include <zypp/Url.h>
+#include <zypp/Source.h>
+
+#include "AliveCursor.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace ZmartRecipients
@@ -63,24 +66,66 @@ namespace ZmartRecipients
     };
     
     
+
+
+struct SourceReportReceiver  : public zypp::callback::ReceiveReport<zypp::source::SourceReport>
+{     
+  virtual void start( zypp::Source_Ref source, const std::string &task )
+  {
+    if ( source != _source )
+      cout << endl;
+
+    _task = task;
+    _source = source;
+    
+    display_step(0);
+  }
+  
+  void display_step( int value )
+  {
+    cout << "\x1B 2K\r" << _cursor << " " <<  _task << " [" << value << " %]  ";
+    ++_cursor;
+  }
+  
+  virtual bool progress( int value )
+  {
+    display_step(value);
+  }
+  
+  virtual Action problem( zypp::Source_Ref source, Error error, std::string description )
+  { return ABORT; }
+
+  virtual void finish( zypp::Source_Ref source, const std::string task, Error error, std::string reason )
+  {
+    if ( error == SourceReportReceiver::NO_ERROR )
+      display_step(100);
+  }
+  
+  AliveCursor _cursor;
+  std::string _task;
+  zypp::Source_Ref _source;
+};
+
     ///////////////////////////////////////////////////////////////////
-}; // namespace zypp
+}; // namespace ZmartRecipients
 ///////////////////////////////////////////////////////////////////
 
 class SourceCallbacks {
 
   private:
-    ZmartRecipients::ProbeSourceReceive _sourceReport;
-
+    ZmartRecipients::ProbeSourceReceive _sourceProbeReport;
+    ZmartRecipients::SourceReportReceiver _SourceReport;
   public:
     SourceCallbacks()
     {
-      _sourceReport.connect();
+      _sourceProbeReport.connect();
+      _SourceReport.connect();
     }
 
     ~SourceCallbacks()
     {
-      _sourceReport.disconnect();
+      _sourceProbeReport.disconnect();
+      _SourceReport.disconnect();
     }
 
 };

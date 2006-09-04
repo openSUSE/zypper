@@ -6,28 +6,13 @@
 
 #include <boost/program_options.hpp>
 
-#include <zypp/base/LogControl.h>
-#include <zypp/base/Logger.h>
-#include <zypp/base/String.h>
-#include <zypp/Locale.h>
-#include <zypp/ZYpp.h>
-#include <zypp/ZYppFactory.h>
-#include <zypp/zypp_detail/ZYppReadOnlyHack.h>
-#include <zypp/SourceManager.h>
-#include <zypp/SourceFactory.h>
-#include <zypp/ResStore.h>
-#include <zypp/base/String.h>
-#include <zypp/Digest.h>
-#include <zypp/CapFactory.h>
+#include "zmart.h"
+#include "zmart-sources.h"
+#include "zmart-misc.h"
 
 #include "zmart-rpm-callbacks.h"
 #include "zmart-keyring-callbacks.h"
 #include "zmart-source-callbacks.h"
-
-#undef  ZYPP_BASE_LOGGER_LOGGROUP
-#define ZYPP_BASE_LOGGER_LOGGROUP "zypp::zmart"
-
-#define RANDOM_TOKEN "sad987432JJDJD948394DDDxxx22"
 
 using namespace zypp::detail;
 
@@ -37,245 +22,70 @@ using namespace boost;
 
 namespace po = boost::program_options;
 
-#define ZYPP_CHECKPATCHES_LOG "/var/log/zypp-zmart.log"
-
-//using namespace DbXml;
-
 ZYpp::Ptr God;
-
-struct Settings
-{
-  Settings()
-  : previous_token(RANDOM_TOKEN),
-  previous_code(-1),
-  disable_system_sources(false)
-  {}
-
-  std::list<Url> additional_sources;
-  std::string previous_token;
-  int previous_code;
-  std::string command;
-  bool disable_system_sources;
-};
-
-struct RuntimeData
-{
-  RuntimeData()
-  : patches_count(0),
-    security_patches_count(0)
-  {}
-    
-  std::list<Source_Ref> sources;
-  int patches_count;
-  int security_patches_count;
-  vector<string> packages_to_install; 
-};
-
 RuntimeData gData;
 Settings gSettings;
 
 RpmCallbacks rpm_callbacks;
 SourceCallbacks source_callbacks;
 
-void output_simple( const ResStore &store )
-{
-}
-
-void output_nice( const ResStore &store )
-{ 
-}
-
-void init_system_sources()
-{
-  SourceManager_Ptr manager;
-  manager = SourceManager::sourceManager();
-  try
-  {
-    cout << "Restoring system sources..." << endl;
-    manager->restore("/");
-  }
-  catch (Exception & excpt_r)
-  {
-    ZYPP_CAUGHT (excpt_r);
-    ERR << "Couldn't restore sources" << endl;
-    cout << "Fail to restore sources" << endl;
-    exit(-1);
-  }
-    
-  for ( SourceManager::Source_const_iterator it = manager->Source_begin(); it !=  manager->Source_end(); ++it )
-  {
-    Source_Ref src = manager->findSource(it->alias());
-    gData.sources.push_back(src);
-  }
-}
-
-void add_source_by_url( const Url &url )
-{
-  Source_Ref src;
-  try
-  {
-    cout << "Creating source from " << url << endl;
-    src = SourceFactory().createFrom(url, "/", url.asString(), "");
-  }
-  catch( const Exception & excpt_r )
-  {
-    cerr << "Can't access repository" << endl;
-    ZYPP_CAUGHT( excpt_r );
-    exit(-1);
-  }
-  gData.sources.push_back(src);
-}
-
-void mark_package_for_install( const std::string &name )
-{
-  CapSet capset;
-  capset.insert (CapFactory().parse( ResTraits<Package>::kind, name));
-  //capset.insert (CapFactory().parse( ResTraits<Package>::kind, "foo1 > 1.0"));
-  // The user is setting this capablility
-  ResPool::AdditionalCapSet aCapSet;
-  aCapSet[ResStatus::USER] = capset;
-  God->pool().setAdditionalRequire( aCapSet );
-}
-
-void show_summary()
-{
-  MIL << "Pool contains " << God->pool().size() << " items." << std::endl;
-  for ( ResPool::const_iterator it = God->pool().begin(); it != God->pool().end(); ++it )
-  {
-    Resolvable::constPtr res = it->resolvable();
-    if ( it->status().isToBeInstalled() || it->status().isToBeUninstalled() )
-    {
-      if ( it->status().isToBeInstalled() )
-        cout << "<install>   ";
-      if ( it->status().isToBeUninstalled() )
-        cout << "<uninstall> ";
-      cout << res->name() << " " << res->edition() << "]" << std::endl;
-    }
-  } 
-}
-
-std::string calculate_token()
-{
-  SourceManager_Ptr manager;
-  manager = SourceManager::sourceManager();
-  
-  std::string token;
-  stringstream token_stream;
-  for ( std::list<Source_Ref>::iterator it = gData.sources.begin(); it !=  gData.sources.end(); ++it )
-  {
-    Source_Ref src = *it;
-    
-//     if ( gSettings.disable_system_sources == SourcesFromSystem )
-//     {
-//       if ( gSettings.output_type == OutputTypeNice )
-//         cout << "Refreshing source " <<  src.alias() << endl;
-//       src.refresh();
-//     }
-    
-    token_stream << "[" << src.alias() << "| " << src.url() << src.timestamp() << "]";
-    MIL << "Source: " << src.alias() << " from " << src.timestamp() << std::endl;  
-  }
-  
-  token_stream << "[" << "target" << "| " << God->target()->timestamp() << "]";
-  
-  //static std::string digest(const std::string& name, std::istream& is
-  token = Digest::digest("sha1", token_stream);
-  
-  //if ( gSettings.output_type == OutputTypeSimple )
-  //  cout << token;
-  
-  MIL << "new token [" << token << "]" << " previous: [" << gSettings.previous_token << "] previous code: " << gSettings.previous_code << std::endl;
-  
-  return token;
-}
-
-void load_target()
-{
-  cout << "Adding system resolvables to pool..." << endl;
-  God->addResolvables( God->target()->resolvables(), true);
-}
-
-void load_sources()
-{
-  for ( std::list<Source_Ref>::iterator it = gData.sources.begin(); it !=  gData.sources.end(); ++it )
-  {
-    Source_Ref src = *it;
-    // skip non YUM sources for now
-    //if ( it->type() == "YUM" )
-    //{
-      cout << "Adding " << it->alias() << " resolvables to the pool..." << endl;
-      God->addResolvables(it->resolvables());
-    //}
-  }
-}
-
-void resolve()
-{
-  cout << "Resolving dependencies ..." << endl;
-  God->resolver()->establishPool();
-  God->resolver()->resolvePool();
-}
-
-void show_pool()
-{
-  MIL << "Pool contains " << God->pool().size() << " items. Checking whether available patches are needed." << std::endl;
-  for ( ResPool::byKind_iterator it = God->pool().byKindBegin<Patch>(); it != God->pool().byKindEnd<Patch>(); ++it )
-  {
-    Resolvable::constPtr res = it->resolvable();
-    Patch::constPtr patch = asKind<Patch>(res);
-    //cout << patch->name() << " " << patch->edition() << " " << "[" << patch->category() << "]" << ( it->status().isNeeded() ? " [needed]" : " [unneeded]" )<< std::endl;
-    if ( it->status().isNeeded() )
-    {
-      gData.patches_count++;
-      if (patch->category() == "security")
-        gData.security_patches_count++;
-        
-      cerr << patch->name() << " " << patch->edition() << " " << "[" << patch->category() << "]" << std::endl;
-    }
-  } 
-  cout << gData.patches_count << " patches needed. ( " << gData.security_patches_count << " security patches )"  << std::endl;
-}
-
-void usage(int argc, char **argv)
-{
-  cerr << "usage: " << argv[0] << " [<previous token>] [previous result]" << endl;
-  exit(-1);
-}
-
-
 int main(int argc, char **argv)
-{ 
+{
+  po::positional_options_description pos_options;
+  pos_options.add("command", -1);
+  
   po::options_description general_options("General options");
   general_options.add_options()
-      ("help", "produce a help message")
-      ("version", "output the version number")
-      ;
-
-  po::options_description source_options("Source options");
-  source_options.add_options()
-      ("disable-system-sources", "Don't read the system sources.")
-      ("sources", po::value< vector<string> >(), "Read from additional sources")
+      ("help,h", "produce a help message")
+      ("version,v", "output the version number")
       ;
 
   po::options_description operation_options("Operations");
   operation_options.add_options()
-      ("install", po::value< vector<string> >(), "install packages or resolvables")
+      ("install,i", po::value< vector<string> >(), "install packages or resolvables")
+      ("list-system-sources,l", "Show available system sources")
+      ("add-source,a", po::value< string >(), "Add a new source from a URL")
+      ;
+  
+  po::options_description source_options("Source options");
+  source_options.add_options()
+      ("disable-system-sources,D", "Don't read the system sources.")
+      ("sources,S", po::value< vector<string> >(), "Read from additional sources")
+      ;
+  
+  po::options_description target_options("Target options");
+  target_options.add_options()
+      ("disable-system-resolvables,T", "Don't read system installed resolvables.")
       ;
 
   // Declare an options description instance which will include
   // all the options
   po::options_description all_options("Allowed options");
-  all_options.add(general_options).add(source_options).add(operation_options);
+  all_options.add(general_options).add(source_options).add(operation_options).add(target_options);
 
   // Declare an options description instance which will be shown
   // to the user
   po::options_description visible_options("Allowed options");
-  visible_options.add(general_options).add(source_options).add(operation_options);
+  visible_options.add(general_options).add(source_options).add(operation_options).add(target_options);
 
   po::variables_map vm;
-  po::store(po::parse_command_line(argc, argv, visible_options), vm);
+  //po::store(po::parse_command_line(argc, argv, visible_options), vm);
+  po::store(po::command_line_parser(argc, argv).options(visible_options).positional(pos_options).run(), vm);
   po::notify(vm);
 
+  
+  if (vm.count("list-system-sources"))
+  {
+    if ( geteuid() != 0 )
+    {
+      cout << "Sorry, you need root privileges to view system sources." << endl;
+      exit(-1);
+    }
+    
+    list_system_sources();
+    return 1;
+  }
+  
   if (vm.count("help")) {
     cout << visible_options << "\n";
     return 1;
@@ -300,6 +110,40 @@ int main(int argc, char **argv)
     }
   }
 
+  if (vm.count("add-source"))
+  {
+    string urlStr = vm["add-source"].as< string >();
+    Url url;
+    try {
+      url = Url( urlStr );
+    }
+    catch ( const Exception & excpt_r )
+    {
+      ZYPP_CAUGHT( excpt_r );
+      cerr << "URL is invalid." << endl;
+      cerr << excpt_r.asUserString() << endl;
+      exit( 1 );
+    }
+    
+    try {
+      add_source_by_url(url, "aliasfixme");
+    }
+    catch ( const Exception & excpt_r )
+    {
+      cerr << excpt_r.asUserString() << endl;
+      exit(1);
+    }
+    
+    exit(0);
+  }
+  
+  if (vm.count("disable-system-resolvables"))
+  {
+    MIL << "system resolvables disabled" << endl;
+    cout << "Ignoring installed resolvables..." << endl;
+    gSettings.disable_system_resolvables = true;
+  }
+  
   if (vm.count("install"))
   {
     vector<string> to_install = vm["install"].as< vector<string> >();
@@ -361,8 +205,10 @@ int main(int argc, char **argv)
   
   for ( std::list<Url>::const_iterator it = gSettings.additional_sources.begin(); it != gSettings.additional_sources.end(); ++it )
   {
-    add_source_by_url( *it );
+    include_source_by_url( *it );
   }
+  
+  cout << endl;
   
   if ( gData.sources.empty() )
   {
@@ -378,7 +224,9 @@ int main(int argc, char **argv)
   {
     // something changed
     load_sources();
-    load_target();
+    
+    if ( ! gSettings.disable_system_resolvables )
+      load_target();
     
     for ( vector<string>::const_iterator it = gData.packages_to_install.begin(); it != gData.packages_to_install.end(); ++it )
     {

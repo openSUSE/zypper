@@ -73,6 +73,9 @@ namespace zypp
     */
     Source_Ref createFrom( const std::string & type,  const Url & url_r, const Pathname & path_r, const std::string & alias_r, const Pathname & cache_dir_r, bool base_source, tribool auto_refresh );
 
+    protected:
+    template<class _SourceImpl>
+        Source_Ref createSourceImplWorkflow( media::MediaId id, const source::SourceInfo &context );
   private:
     /** Implementation  */
     class Impl;

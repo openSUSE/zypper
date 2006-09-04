@@ -25,7 +25,7 @@ namespace source
   SourceInfo::SourceInfo()
   : _enabled (indeterminate)
   , _autorefresh(indeterminate)
-  , _baseSource( false )
+  , _base_source( indeterminate )
   {
 
   }
@@ -33,7 +33,7 @@ namespace source
   SourceInfo::SourceInfo( const Url & url, const Pathname & path, const std::string & alias, const Pathname & cache_dir, tribool autorefresh)
   : _enabled (true),
   _autorefresh(autorefresh),
-  _baseSource( false ),
+  _base_source( indeterminate ),
   _url(url),
   _cache_dir(cache_dir),
   _path(path),
@@ -56,7 +56,7 @@ namespace source
 
   SourceInfo & SourceInfo::setBaseSource( bool val_r )
   {
-    _baseSource = val_r;
+    _base_source = val_r;
     return *this;
   }
 
@@ -114,8 +114,8 @@ namespace source
   tribool SourceInfo::autorefresh() const
   { return _enabled; }
 
-  bool SourceInfo::baseSource() const
-  { return _baseSource; }
+  boost::tribool SourceInfo::baseSource() const
+  { return _base_source; }
 
   Pathname SourceInfo::cacheDir() const
   { return _cache_dir; }

@@ -43,9 +43,58 @@ namespace zypp
     */
     class SkipRequestedException : public Exception {
     public:
-	SkipRequestedException ( const std::string & msg_r ) : Exception( msg_r ) {}
+      SkipRequestedException ( const std::string & msg_r ) : Exception( msg_r ) {}
     };
 
+    ///////////////////////////////////////////////////////////////////
+    //
+    //    CLASS NAME : SourceUserRejectedException
+    //
+    /**
+     * A specialized exception to inform the caller that user
+     * specifically rejected the source
+     */
+    class SourceUserRejectedException : public Exception
+    {
+      public:
+        SourceUserRejectedException ( const std::string & msg_r ) : Exception( msg_r ) {}
+    };
+
+    /**
+     * A specialized exception to inform the caller that the metadata is invalid
+     */
+    class SourceMetadataException : public Exception
+    {
+      public:
+        SourceMetadataException ( const std::string & msg_r ) : Exception( msg_r ) {}
+    };
+    
+    /**
+     * A specialized exception to inform the caller that there is an IO error
+     */
+    class SourceIOException : public Exception
+    {
+      public:
+        SourceIOException ( const std::string & msg_r ) : Exception( msg_r ) {}
+    };
+    
+    /**
+     * A specialized exception to inform the caller that the source URL does not exist
+     */
+    class SourceNotFoundException : public Exception
+    {
+      public:
+        SourceNotFoundException ( const std::string & msg_r ) : Exception( msg_r ) {}
+    };
+    
+    /**
+     * A specialized exception to inform the caller that the source is not known
+     */
+    class SourceUnknownTypeException : public Exception
+    {
+      public:
+        SourceUnknownTypeException ( const std::string & msg_r ) : Exception( msg_r ) {}
+    };
   }
   class ResStore;
 

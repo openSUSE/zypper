@@ -41,31 +41,16 @@ namespace zypp
     */
     template<class _SourceImpl>
       static Source_Ref::Impl_Ptr createSourceImpl( const media::MediaId & media_r,
-                                                    const Pathname & path_r,
-                                                    const std::string & alias_r,
-                                                    const Pathname & cache_dir_r,
-                                                    bool auto_refresh )
+                                                    const SourceInfo &context )
       {
+        std::cout << "pre pass type: " << _SourceImpl::typeString() << endl;
         Source_Ref::Impl_Ptr impl( new _SourceImpl );
-        impl->factoryCtor( media_r, path_r, alias_r, cache_dir_r, false, auto_refresh );
+        std::cout << "pass type: " << _SourceImpl::typeString() << endl;
+        // note, base_source is a tribool, if indeterminate we fallback to false
+        impl->factoryCtor( media_r, context.path(), context.alias(), context.cacheDir(), context.baseSource(), context.autorefresh() );
+        std::cout << "pass 2 type: " << _SourceImpl::typeString() << endl;
         return impl;
       }
-
-    /** Try to create a \a _SourceImpl kind of Source.
-     * \throw EXCEPTION if creation fails
-    */
-    template<class _SourceImpl>
-      static Source_Ref::Impl_Ptr createBaseSourceImpl( const media::MediaId & media_r,
-                                                    const Pathname & path_r,
-                                                    const std::string & alias_r,
-                                                    const Pathname & cache_dir_r,
-                                                    bool auto_refresh )
-      {
-        Source_Ref::Impl_Ptr impl( new _SourceImpl );
-        impl->factoryCtor( media_r, path_r, alias_r, cache_dir_r, true, auto_refresh);
-        return impl;
-      }
-
   };
   ///////////////////////////////////////////////////////////////////
 
@@ -146,17 +131,80 @@ namespace zypp
       }
   }
 
-//   bool SourceFactory::probeSource( const std::string name, boost::function<bool()> prober, callback::SendReport<CreateSourceReport> &report )
-//   {
-//
-//   }
+  template<typename _SourceImpl>
+  static bool probeSource(const Url &url_r, const Pathname &path_r, media::MediaId id, const std::string &type, callback::SendReport<ProbeSourceReport> &report )
+  {
+    try
+    {
+      boost::function<bool()> probe = typename _SourceImpl::Prober( id, path_r );
 
+      if ( probe() )
+      {
+        report->successProbe(url_r, type);
+        return true;
+      }
+      else
+      {
+        report->failedProbe(url_r, type);
+        return false;
+      }
+    }
+    catch (const Exception & excpt_r)
+    {
+      report->finish(url_r, ProbeSourceReport::UNKNOWN, excpt_r.asUserString());
+    }
+    return false;
+  }
+  
+  template<class _SourceImpl>
+  Source_Ref SourceFactory::createSourceImplWorkflow( media::MediaId id, const SourceInfo &context )
+  {
+    MIL << "Trying (pre) to create source of type " << _SourceImpl::typeString() << endl;
+      callback::SendReport<SourceCreateReport> report;
+      bool retry = true;
+      while (retry)
+      {
+        report->start( context.url() );
+          try
+          {
+            MIL << "Trying to create source of type " << _SourceImpl::typeString() << endl;
+            Source_Ref::Impl_Ptr impl( Impl::createSourceImpl<_SourceImpl>( id, context ) );
+            std::cout << "created source " << impl->type() << endl;
+            report->finish( context.url(), SourceCreateReport::NO_ERROR, std::string() );
+            return Source_Ref(impl);
+          }
+          catch (const SourceUserRejectedException & excpt_r)
+          {
+            ZYPP_CAUGHT(excpt_r);
+            report->problem( context.url(), SourceCreateReport::REJECTED, "Source rejected by the user" );
+            report->finish( context.url(), SourceCreateReport::NO_ERROR, "" );
+            ZYPP_THROW(Exception( "Source Rejected: " + excpt_r.asUserString() ));
+          }
+          catch ( const SourceMetadataException & excpt_r )
+          {
+            ZYPP_CAUGHT(excpt_r);
+            report->problem( context.url(), SourceCreateReport::REJECTED, "Source metadata is invalid: " + excpt_r.asUserString() );
+            report->finish( context.url(), SourceCreateReport::REJECTED, ""  );
+            ZYPP_THROW(Exception( "Invalid Source: " + excpt_r.asUserString() ));
+          } 
+          catch (const Exception & excpt_r)
+          {
+            ZYPP_CAUGHT(excpt_r);
+            if ( report->problem( context.url(), SourceCreateReport::UNKNOWN, "Unknown Error: " + excpt_r.asUserString() ) != SourceCreateReport::RETRY )
+            {
+              report->finish( context.url(), SourceCreateReport::UNKNOWN, std::string("Unknown Error: ") + excpt_r.asUserString() );
+              ZYPP_THROW(Exception( "Unknown Error: " + excpt_r.asUserString() ));
+            }
+          }
+      }
+      // never reached
+      return Source_Ref();
+  }    
+      
   Source_Ref SourceFactory::createFrom( const Url & url_r, const Pathname & path_r, const std::string & alias_r, const Pathname & cache_dir_r, bool base_source )
   {
     if (! url_r.isValid())
       ZYPP_THROW( Exception("Empty URL passed to SourceFactory") );
-
-    callback::SendReport<ProbeSourceReport> report;
 
 #warning if cache_dir is provided, no need to open the original url
     // open the media
@@ -176,83 +224,45 @@ namespace zypp
 
     bool auto_refresh = media::MediaAccess::canBeVolatile( url_r );
 
+    SourceInfo context;
+    SourceInfo( url_r, path_r, alias_r, cache_dir_r, auto_refresh );
+    context.setBaseSource( base_source );
+    
+    callback::SendReport<ProbeSourceReport> report;
+    bool probeYUM, probeYaST;
+    
     report->start(url_r);
-
-    //////////////////////////////////////////////////////////////////
-    // TRY YUM
-    //////////////////////////////////////////////////////////////////
-    try
+    if ( probeYUM = probeSource<yum::YUMSourceImpl>( url_r, path_r, id, "YUM", report ) )
     {
-      boost::function<bool()> probe = yum::YUMSourceImpl::Prober( id, path_r );
-
-      if ( probe() )
-      {
-        report->successProbe(url_r, "YUM");
-        report->finish(url_r, ProbeSourceReport::NO_ERROR, "");
-        try
-        {
-          Source_Ref::Impl_Ptr impl( base_source
-            ? Impl::createBaseSourceImpl<yum::YUMSourceImpl>(id, path_r, alias_r, cache_dir_r, auto_refresh)
-            : Impl::createSourceImpl<yum::YUMSourceImpl>(id, path_r, alias_r, cache_dir_r, auto_refresh) );
-
-          return Source_Ref(impl);
-        }
-        catch (const Exception & excpt_r)
-        {
-          ZYPP_CAUGHT(excpt_r);
-          MIL << "Not YUM source, trying next type" << endl;
-        }
-      }
-      else
-      {
-        report->failedProbe(url_r, "YUM");
-      }
+      // nothing
     }
-    catch (const Exception & excpt_r)
+    else if ( probeYaST = probeSource<susetags::SuseTagsImpl>( url_r, path_r, id, "YaST", report ) )
     {
-      report->finish(url_r, ProbeSourceReport::NO_ERROR, "");
+      // nohing
     }
-
-    //////////////////////////////////////////////////////////////////
-    // TRY YAST
-    //////////////////////////////////////////////////////////////////
-    try
+    report->finish(url_r, ProbeSourceReport::NO_ERROR, "");
+    
+    if ( probeYUM )
     {
-      boost::function<bool()> probe = susetags::SuseTagsImpl::Prober( id, path_r );
-
-      if ( probe() )
-      {
-        report->successProbe(url_r, "YaST");
-        report->finish(url_r, ProbeSourceReport::NO_ERROR, "");
-        try
-        {
-          Source_Ref::Impl_Ptr impl( base_source
-              ? Impl::createBaseSourceImpl<susetags::SuseTagsImpl>(id, path_r, alias_r, cache_dir_r, auto_refresh)
-            : Impl::createSourceImpl<susetags::SuseTagsImpl>(id, path_r, alias_r, cache_dir_r, auto_refresh) );
-          return Source_Ref(impl);
-        }
-        catch (const Exception & excpt_r)
-        {
-          ZYPP_CAUGHT(excpt_r);
-          MIL << "Not YUM source, trying next type" << endl;
-        }
-      }
-      else
-      {
-        report->failedProbe(url_r, "YaST");
-      }
+      Source_Ref source(createSourceImplWorkflow<source::yum::YUMSourceImpl>( id, context ));
+      return source;
     }
-    catch (const Exception & excpt_r)
+    else if ( probeYaST )
     {
-      report->finish(url_r, ProbeSourceReport::NO_ERROR, "");
+      Source_Ref source(createSourceImplWorkflow<susetags::SuseTagsImpl>( id, context ));
+      return source;
+    }
+    else
+    {
+      ZYPP_THROW( Exception("Unknown source type for " + url_r.asString() ) );
     }
 
     //////////////////////////////////////////////////////////////////
     // TRY PLAINDIR
     //////////////////////////////////////////////////////////////////
     //FIXME disabled
-    report->finish(url_r, ProbeSourceReport::INVALID, "Unknown source type");
-    ZYPP_THROW( Exception("Unknown source type for " + url_r.asString() ) );
+    
+    
 
 
     return Source_Ref(); // not reached!!
@@ -262,12 +272,13 @@ namespace zypp
       if ( ! ( ( url_r.getScheme() == "file") || ( url_r.getScheme() == "dir ") ) )
       {
         MIL << "Trying the Plaindir source" << endl;
-        Source_Ref::Impl_Ptr impl( base_source
-            ? Impl::createBaseSourceImpl<plaindir::PlaindirImpl>(id, path_r, alias_r, cache_dir_r, auto_refresh)
-          : Impl::createSourceImpl<plaindir::PlaindirImpl>(id, path_r, alias_r, cache_dir_r, auto_refresh) );
+        //Source_Ref::Impl_Ptr impl( base_source
+        //    ? Impl::createBaseSourceImpl<plaindir::PlaindirImpl>(id, path_r, alias_r, cache_dir_r, auto_refresh)
+        //  : Impl::createSourceImpl<plaindir::PlaindirImpl>(id, path_r, alias_r, cache_dir_r, auto_refresh) );
         MIL << "Using the Plaindir source" << endl;
         //report->endProbe (url_r);
-        return Source_Ref(impl);
+        //return Source_Ref(impl);
+        return Source_Ref();
       }
       else
       {
@@ -314,35 +325,38 @@ namespace zypp
     if ( auto_refresh == indeterminate )
       auto_refresh = media::MediaAccess::canBeVolatile( url_r );
 
+    SourceInfo context;
+    SourceInfo( url_r, path_r, alias_r, cache_dir_r, auto_refresh );
+    context.setBaseSource( base_source );
+    context.setType( type );
+    
     try
     {
-
       Source_Ref::Impl_Ptr impl;
 
-      if( type == yum::YUMSourceImpl::typeString() ) {
+      if( type == yum::YUMSourceImpl::typeString() )
+      {
         MIL << "Trying the YUM source" << endl;
-        impl = Source_Ref::Impl_Ptr( base_source
-	  ? Impl::createBaseSourceImpl<yum::YUMSourceImpl>(id, path_r, alias_r, cache_dir_r, auto_refresh)
-          : Impl::createSourceImpl<yum::YUMSourceImpl>(id, path_r, alias_r, cache_dir_r, auto_refresh) );
-        MIL << "Found the YUM source" << endl;
-      } else if ( type == susetags::SuseTagsImpl::typeString() ) {
-        MIL << "Trying the SUSE tags source" << endl;
-        impl = Source_Ref::Impl_Ptr( base_source
-            ? Impl::createBaseSourceImpl<susetags::SuseTagsImpl>(id, path_r, alias_r, cache_dir_r, auto_refresh)
-          : Impl::createSourceImpl<susetags::SuseTagsImpl>(id, path_r, alias_r, cache_dir_r, auto_refresh) );
-        MIL << "Found the SUSE tags source" << endl;
-      } else if ( type == PlaindirImpl::typeString() ) {
-        MIL << "Trying the Plaindir source" << endl;
-        impl = Source_Ref::Impl_Ptr( base_source
-            ? Impl::createBaseSourceImpl<PlaindirImpl>(id, path_r, alias_r, cache_dir_r, auto_refresh)
-          : Impl::createSourceImpl<PlaindirImpl>(id, path_r, alias_r, cache_dir_r, auto_refresh) );
-        MIL << "Found the Plaindir source" << endl;
-      } else {
-	ZYPP_THROW( Exception ("Cannot create source of unknown type '" + type + "'"));
+        impl = Source_Ref::Impl_Ptr( Impl::createSourceImpl<yum::YUMSourceImpl>(id, context ) );
+        MIL << "YUM source created" << endl;
       }
-
-      //report->endProbe (url_r);
-
+      else if ( type == susetags::SuseTagsImpl::typeString() )
+      {
+        MIL << "Trying the SUSE tags source" << endl;
+        impl = Source_Ref::Impl_Ptr( Impl::createSourceImpl<susetags::SuseTagsImpl>(id, context ) );
+        MIL << "YaST source created" << endl;
+      }
+      else if ( type == PlaindirImpl::typeString() )
+      {
+        MIL << "Trying the Plaindir source" << endl;
+        impl = Source_Ref::Impl_Ptr( Impl::createSourceImpl<PlaindirImpl>(id, context ) );
+        MIL << "Plaindir source created" << endl;
+      }
+      else
+      {
+        ZYPP_THROW( Exception ("Cannot create source of unknown type '" + type + "'"));
+      }
+      
       return Source_Ref(impl);
     }
     catch (const Exception & excpt_r)

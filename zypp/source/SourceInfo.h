@@ -32,7 +32,7 @@ namespace source
 
     SourceInfo();
 
-    SourceInfo( const Url & url, const Pathname & path, const std::string & alias = "", const Pathname & cache_dir = "", boost::tribool autorefresh = boost::indeterminate);
+    SourceInfo( const Url & url, const Pathname & path, const std::string & alias = "", const Pathname & cache_dir = "", boost::tribool autorefresh = boost::indeterminate );
 
     SourceInfo & setEnabled( boost::tribool enabled );
     SourceInfo & setAutorefresh( boost::tribool autorefresh );
@@ -47,7 +47,7 @@ namespace source
     SourceInfo & setTimestamp( const Date &timestamp );
     boost::tribool enabled() const;
     boost::tribool autorefresh() const;
-    bool baseSource() const;
+    boost::tribool baseSource() const;
     Pathname cacheDir() const;
     Pathname path() const;
     std::string alias() const;
@@ -65,7 +65,7 @@ namespace source
 
     boost::tribool _enabled;
     boost::tribool _autorefresh;
-    bool _baseSource;
+    boost::tribool _base_source;
     std::string _type;
     Url _url;
     Pathname _cache_dir;

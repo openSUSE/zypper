@@ -53,3 +53,4 @@ inline std::ostream & operator<<( std::ostream & str, const AliveCursor & obj )
 { return str << obj.current(); }
 
 #endif
+

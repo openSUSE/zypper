@@ -32,66 +32,54 @@ namespace zypp
     IMPL_PTR_TYPE(SourceImpl);
 
 
-    class DownloadProgressPackageReceiver
-	: public callback::ReceiveReport<media::DownloadProgressReport>
+    class DownloadProgressPackageReceiver : public callback::ReceiveReport<media::DownloadProgressReport>
     {
-	callback::SendReport <DownloadResolvableReport> & _report;
-	Resolvable::constPtr _resolvable;
+      callback::SendReport <DownloadResolvableReport> & _report;
+      Resolvable::constPtr _resolvable;
 
       public:
 
-	DownloadProgressPackageReceiver (
-	    callback::SendReport <DownloadResolvableReport> & report_r,
-	    Resolvable::constPtr resolvable_r
-	)
-	: _report (report_r)
-	, _resolvable (resolvable_r)
-	{}
+      DownloadProgressPackageReceiver ( callback::SendReport <DownloadResolvableReport> & report_r, Resolvable::constPtr resolvable_r )
+        : _report (report_r), _resolvable (resolvable_r)
+      {}
 
-	virtual ~DownloadProgressPackageReceiver () {}
-
-	virtual void reportbegin() {}
-
-	virtual void reportend() {}
+      virtual ~DownloadProgressPackageReceiver () {}
+      virtual void reportbegin() {}
+      virtual void reportend() {}
 
         /**
          * Inform about progress
          * Return true on abort
          */
-        virtual bool progress( int percent, Url )
-	{
-	    return _report->progress( percent, _resolvable );
-	}
+      virtual bool progress( int percent, Url )
+      {
+        return _report->progress( percent, _resolvable );
+      }
     };
 
 
-    class DownloadProgressFileReceiver
-	: public callback::ReceiveReport<media::DownloadProgressReport>
+    class DownloadProgressFileReceiver : public callback::ReceiveReport<media::DownloadProgressReport>
     {
-	callback::SendReport <DownloadFileReport> & _report;
+      callback::SendReport<SourceReport> & _report;
 
       public:
 
-	DownloadProgressFileReceiver (
-	    callback::SendReport <DownloadFileReport> & report_r
-	)
-	: _report (report_r)
-	{}
+      DownloadProgressFileReceiver ( callback::SendReport<SourceReport> & report_r )
+        : _report (report_r)
+      {}
 
-	virtual ~DownloadProgressFileReceiver () {}
+      virtual ~DownloadProgressFileReceiver () {}
+      virtual void reportbegin() {}
+      virtual void reportend() {}
 
-	virtual void reportbegin() {}
-
-	virtual void reportend() {}
-
-        /**
-         * Inform about progress
-         * Return true on abort
-         */
-        virtual bool progress( int percent, Url url )
-	{
-	    return _report->progress( percent, url );
-	}
+      /**
+       * Inform about progress
+       * Return true on abort
+       */
+      virtual bool progress( int percent, Url url )
+      {
+        return _report->progress( percent);
+      }
     };
 
     /** Ctor, excl. for nullimpl only.
@@ -139,9 +127,7 @@ namespace zypp
       _subscribed = true;
       _base_source = base_source;
       _autorefresh = auto_refresh;
-      
-      callback::SendReport<source::CreateSourceReport> report;
-      
+
       try
       {
         factoryInit();
@@ -171,8 +157,8 @@ namespace zypp
     SourceImpl::~SourceImpl()
     {
       if (_media_set) {
-	media::MediaAccessId _media = _media_set->getMediaAccessId( 1 );
-	media_mgr.release (_media, false);
+        media::MediaAccessId _media = _media_set->getMediaAccessId( 1 );
+        media_mgr.release (_media, false);
       }
     }
 
@@ -182,8 +168,8 @@ namespace zypp
       {
         // cast away const to allow late init
         Source_Ref self( const_cast<SourceImpl*>(this)->selfSourceRef() );
-	const_cast<SourceImpl*>(this)->createResolvables(self);
-	const_cast<SourceImpl*>(this)->_res_store_initialized = true;
+        const_cast<SourceImpl*>(this)->createResolvables(self);
+        const_cast<SourceImpl*>(this)->_res_store_initialized = true;
       }
       return _store;
      }
@@ -228,7 +214,7 @@ namespace zypp
       {
         report->start( package, package->source().url() );
 
-	callback::TempConnect<media::DownloadProgressReport> tmp_download( download_report );
+        callback::TempConnect<media::DownloadProgressReport> tmp_download( download_report );
 
         try
         {
@@ -352,26 +338,26 @@ namespace zypp
     {
       bool retry = true;
       Pathname downloaded_file;
-      callback::SendReport<source::DownloadFileReport> report;
+      callback::SendReport<source::SourceReport> report;
       DownloadProgressFileReceiver download_report( report );
       Url file_url( url().asString() + file_r.asString() );
-
-      report->start( selfSourceRef(), file_url );
+      
       callback::TempConnect<media::DownloadProgressReport> tmp_download( download_report );
       
       while (retry)
       {
+        report->start( selfSourceRef(), "Downloading " + file_url.asString() );
         try
         {
           downloaded_file = provideJustFile(file_r, media_nr, cached, checkonly);
-          report->finish( url(), DownloadFileReport::NO_ERROR, file_r.asString() + " downloaded " + url().asString() );
+          report->finish( selfSourceRef(), "Downloading " + file_url.asString(), SourceReport::NO_ERROR, file_r.asString() + " downloaded " + url().asString() );
           retry = false;
         }
         catch (const Exception &e)
         {
-          if ( report->problem(url(), DownloadFileReport::IO, "Can't provide " + file_r.asString() + " from " + url().asString()) != DownloadFileReport::RETRY )
+          if ( report->problem(selfSourceRef(), SourceReport::IO, "Can't provide " + file_r.asString() + " from " + url().asString()) != SourceReport::RETRY )
           {
-            report->finish( url(), DownloadFileReport::IO, "Can't provide " + file_r.asString() + " from " + url().asString() );
+            report->finish( selfSourceRef(), "Downloading " + file_url.asString(), SourceReport::IO, "Can't provide " + file_r.asString() + " from " + url().asString() );
             ZYPP_THROW(Exception("Can't provide " + file_r.asString() + " from " + url().asString() ));
           }
         }
