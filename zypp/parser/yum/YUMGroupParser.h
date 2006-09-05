@@ -49,7 +49,7 @@ namespace zypp {
       class YUMGroupParser : public XMLNodeIterator<YUMGroupData_Ptr>
       {
       public:
-        YUMGroupParser(std::istream &is, const std::string &baseUrl);
+        YUMGroupParser(std::istream &is, const std::string &baseUrl, parser::ParserProgress::Ptr progress = parser::ParserProgress::Ptr() );
         YUMGroupParser();
         YUMGroupParser(YUMGroupData_Ptr& entry);
         virtual ~YUMGroupParser();

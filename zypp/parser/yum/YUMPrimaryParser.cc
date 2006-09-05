@@ -28,8 +28,8 @@ namespace zypp {
     namespace yum {
       
       
-      YUMPrimaryParser::YUMPrimaryParser(istream &is, const string& baseUrl)
-        : XMLNodeIterator<YUMPrimaryData_Ptr>(is, baseUrl,PRIMARYSCHEMA)
+      YUMPrimaryParser::YUMPrimaryParser(istream &is, const string& baseUrl, parser::ParserProgress::Ptr progress )
+        : XMLNodeIterator<YUMPrimaryData_Ptr>(is, baseUrl,PRIMARYSCHEMA, progress)
 	, _zypp_architecture( getZYpp()->architecture() )
       {
 	if (is.fail()) {

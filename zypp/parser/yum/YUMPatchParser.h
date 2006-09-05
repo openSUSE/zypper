@@ -48,7 +48,7 @@ namespace zypp {
       class YUMPatchParser : public XMLNodeIterator<YUMPatchData_Ptr>
       {
       public:
-        YUMPatchParser(std::istream &is, const std::string &baseUrl);
+        YUMPatchParser(std::istream &is, const std::string &baseUrl, parser::ParserProgress::Ptr progress = parser::ParserProgress::Ptr());
         YUMPatchParser();
         YUMPatchParser(YUMPatchData_Ptr& entry);
         virtual ~YUMPatchParser();

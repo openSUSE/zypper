@@ -152,10 +152,10 @@ namespace zypp
         */
         virtual void factoryInit();
         
-        /** Check checksums of metadata files
-         * \throw EXCEPTION on fail
-         */
-        void checkMetadataChecksums() const;
+        ///** Check checksums of metadata files
+        // * \throw EXCEPTION on fail
+        // */
+        //void checkMetadataChecksums() const;
         
         void readRepomd();
         

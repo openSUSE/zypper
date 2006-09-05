@@ -82,8 +82,8 @@ namespace zypp {
       } /* end process */
       
         
-      YUMRepomdParser::YUMRepomdParser(istream &is, const string &baseUrl)
-      : XMLNodeIterator<YUMRepomdData_Ptr>(is, baseUrl,REPOMDSCHEMA)
+      YUMRepomdParser::YUMRepomdParser(istream &is, const string &baseUrl, parser::ParserProgress::Ptr progress)
+      : XMLNodeIterator<YUMRepomdData_Ptr>(is, baseUrl,REPOMDSCHEMA, progress)
       {
         fetchNext();
       }

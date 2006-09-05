@@ -18,6 +18,7 @@
 #include <ostream>
 #include <sstream>
 #include "zypp/parser/xml_parser_assert.h"
+#include "zypp/parser/ParserProgress.h"
 #include <iterator>
 
 extern "C" {
@@ -140,7 +141,7 @@ namespace zypp {
        */
       XMLNodeIteratorBase(std::istream &input,
                           const std::string &baseUrl,
-                          const char *validationPath = 0);
+                          const char *validationPath, parser::ParserProgress::Ptr progress );
 
       /**
        * Constructor for an empty iterator.
@@ -287,6 +288,12 @@ namespace zypp {
        * contains the base URL of the xml documentation
        */
       std::string _baseUrl;
+      
+      /**
+       * last progress information
+       */
+      parser::ParserProgress::Ptr _progress;
+      
     }; /* end class XMLNodeIteratorBase */
 
 
@@ -305,8 +312,9 @@ namespace zypp {
        */
       XMLNodeIterator(std::istream &input,
                       const std::string &baseUrl,
-                      const char *validationPath = 0)
-        : XMLNodeIteratorBase(input, baseUrl, validationPath), _current(0)
+                      const char *validationPath = 0,
+                      parser::ParserProgress::Ptr progress = parser::ParserProgress::Ptr() )
+        : XMLNodeIteratorBase(input, baseUrl, validationPath, progress), _current(0)
       {
         /* Derived classes must call fetchNext() in their constructors themselves,
            XMLNodeIterator has no access to their virtual functions during

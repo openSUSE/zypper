@@ -121,12 +121,12 @@ namespace zypp {
 
     XMLNodeIteratorBase::XMLNodeIteratorBase(std::istream &input,
                                              const std::string &baseUrl,
-                                             const char *validationPath)
+                                             const char *validationPath, parser::ParserProgress::Ptr progress)
       : _error(0),
       _input(& input),
       _reader(xmlReaderForIO(ioread, ioclose, _input, baseUrl.c_str(), "utf-8",
                              XML_PARSE_PEDANTIC)),
-      _baseUrl(baseUrl)
+      _baseUrl(baseUrl), _progress(progress)
     {
       xmlTextReaderSetErrorHandler(_reader, (xmlTextReaderErrorFunc) errorHandler, this);
       // xmlTextReaderSetStructuredErrorHandler(_reader, structuredErrorHandler, this);
@@ -145,7 +145,7 @@ namespace zypp {
     }
 
     XMLNodeIteratorBase::XMLNodeIteratorBase()
-    : _error(0), _input(0), _reader(0)
+      : _error(0), _input(0), _reader(0)
     { }
 
 
@@ -193,15 +193,20 @@ namespace zypp {
           /* this is a trivial iterator over (max) only one element,
              and we reach the end now. */
         ;
+        if ( _progress )
+          _progress->progress( 100 );
       }
       else {
           /* repeat as long as we successfully read nodes
              breaks out when an interesting node has been found */
         while ((status = xmlTextReaderRead(_reader))==1) {
           xmlNodePtr node = xmlTextReaderCurrentNode(_reader);
-          if (isInterested(node)) {
+          if (isInterested(node))
+          {
               // xmlDebugDumpNode(stdout,node,5);
             _process(_reader);
+            if ( _progress )
+              _progress->progress( xmlTextReaderByteConsumed (_reader) );
               // _currentDataPtr.reset(new ENTRYTYPE(process(_reader)));
             status = xmlTextReaderNext(_reader);
             break;

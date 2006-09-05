@@ -143,8 +143,8 @@ namespace zypp {
       
       
       
-      YUMGroupParser::YUMGroupParser(istream &is, const string &baseUrl)
-      : XMLNodeIterator<YUMGroupData_Ptr>(is, baseUrl,GROUPSCHEMA)
+      YUMGroupParser::YUMGroupParser(istream &is, const string &baseUrl, parser::ParserProgress::Ptr progress )
+      : XMLNodeIterator<YUMGroupData_Ptr>(is, baseUrl,GROUPSCHEMA, progress)
       { 
         fetchNext();
       }

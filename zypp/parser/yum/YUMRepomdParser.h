@@ -46,7 +46,7 @@ namespace zypp {
       class YUMRepomdParser : public XMLNodeIterator<YUMRepomdData_Ptr>
       {
       public:
-        YUMRepomdParser(std::istream &is, const std::string &baseUrl);
+        YUMRepomdParser(std::istream &is, const std::string &baseUrl, parser::ParserProgress::Ptr progress = parser::ParserProgress::Ptr() );
         YUMRepomdParser();
         YUMRepomdParser(YUMRepomdData_Ptr& entry);
         virtual ~YUMRepomdParser();

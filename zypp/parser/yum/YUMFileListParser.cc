@@ -36,10 +36,9 @@ namespace zypp {
 static boost::regex filenameRegex("^.*(/bin/|/sbin/|/lib/|/lib64/|/etc/|/usr/share/dict/words/|/usr/games/|/usr/share/magic\\.mime|/opt/gnome/games).*$"); 
 	static regex_t filenameRegexT;
 	static bool filenameRegexOk = false;
-	static bool useboost;
 
-      YUMFileListParser::YUMFileListParser(istream &is, const string& baseUrl)
-      : XMLNodeIterator<YUMFileListData_Ptr>(is, baseUrl,FILELISTSCHEMA)
+  YUMFileListParser::YUMFileListParser(istream &is, const string& baseUrl, parser::ParserProgress::Ptr progress )
+      : XMLNodeIterator<YUMFileListData_Ptr>(is, baseUrl,FILELISTSCHEMA, progress)
 	, _zypp_architecture( getZYpp()->architecture() )
       {
 	fetchNext();
@@ -114,7 +113,7 @@ static boost::regex filenameRegex("^.*(/bin/|/sbin/|/lib/|/lib64/|/etc/|/usr/sha
 		    if (!filenameRegexOk)
 		    {
 			const char * filenameRegexPattern = "/(s?bin|lib(64)?|etc)/|^/usr/(games/|share/(dict/words|magic\\.mime)$)|^/opt/gnome/games/";
-			int r = regcomp (&filenameRegexT, filenameRegexPattern, REG_EXTENDED | REG_NOSUB);
+			regcomp (&filenameRegexT, filenameRegexPattern, REG_EXTENDED | REG_NOSUB);
 			//MIL << "regcomp " << r;
 			filenameRegexOk = true;
 		    }

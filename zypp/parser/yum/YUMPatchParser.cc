@@ -30,8 +30,8 @@ namespace zypp {
       YUMPatchParser::~YUMPatchParser()
       { }
 
-      YUMPatchParser::YUMPatchParser(istream &is, const string& baseUrl)
-      : XMLNodeIterator<YUMPatchData_Ptr>(is, baseUrl,PATCHSCHEMA)
+      YUMPatchParser::YUMPatchParser(istream &is, const string& baseUrl, parser::ParserProgress::Ptr progress )
+      : XMLNodeIterator<YUMPatchData_Ptr>(is, baseUrl,PATCHSCHEMA, progress)
 	, _zypp_architecture( getZYpp()->architecture() )
       {
 	fetchNext();

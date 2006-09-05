@@ -53,7 +53,7 @@ namespace zypp {
          * @param is the istream to read from
          * @param baseUrl the base URL of the XML document. Can be left empty.
          */
-        YUMOtherParser(std::istream &is, const std::string &baseUrl);
+        YUMOtherParser(std::istream &is, const std::string &baseUrl, parser::ParserProgress::Ptr progress = parser::ParserProgress::Ptr() );
     
         YUMOtherParser();
         YUMOtherParser(YUMOtherData_Ptr& entry);

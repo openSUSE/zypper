@@ -71,6 +71,19 @@ namespace zypp
         return false;
       }
       
+      struct YUMSourceEventHandler
+      {
+        YUMSourceEventHandler( callback::SendReport<SourceReport> &report ) : _report(report)
+        {}
+        
+        void operator()( int p )
+        {
+          _report->progress(p);
+        }
+        
+        callback::SendReport<SourceReport> &_report;
+      };
+      
       ///////////////////////////////////////////////////////////////////
       //
       //        CLASS NAME : YUMSourceImpl
@@ -136,7 +149,8 @@ namespace zypp
         }
         catch(Exception &e)
         {
-          ZYPP_THROW(Exception("Can't provide " + _path.asString() + "/repodata/repomd.xml from " + url().asString() ));
+          ZYPP_CAUGHT(e);
+          ZYPP_THROW(SourceIOException("Can't provide " + _path.asString() + "/repodata/repomd.xml from " + url().asString() ));
         }
 
         // provide optional files
@@ -158,13 +172,13 @@ namespace zypp
 
         copy_result = filesystem::copy( remote_repomd, local_dir + "/repodata/repomd.xml");
         if ( copy_result != 0 )
-          ZYPP_THROW(Exception("Can't copy " + remote_repomd.asString() + " to " + local_dir.asString() + "/repodata/repomd.xml"));
+          ZYPP_THROW(SourceIOException("Can't copy " + remote_repomd.asString() + " to " + local_dir.asString() + "/repodata/repomd.xml"));
 
         if (PathInfo(remote_repomd_key).isExist())
         {
           copy_result = filesystem::copy( remote_repomd_key, local_dir + "/repodata/repomd.xml.key");
           if ( copy_result != 0 )
-            ZYPP_THROW(Exception("Can't copy " + remote_repomd_key.asString() + " to " + local_dir.asString() + "/repodata/repomd.xml.key"));
+            ZYPP_THROW(SourceIOException("Can't copy " + remote_repomd_key.asString() + " to " + local_dir.asString() + "/repodata/repomd.xml.key"));
           
           getZYpp()->keyRing()->importKey(local_dir + "/repodata/repomd.xml.key" , false);
         }
@@ -173,13 +187,17 @@ namespace zypp
         {
           copy_result = filesystem::copy( remote_repomd_signature, local_dir + "/repodata/repomd.xml.asc");
           if ( copy_result != 0 )
-            ZYPP_THROW(Exception("Can't copy " + remote_repomd_signature.asString() + " to " + local_dir.asString() + "/repodata/repomd.xml.asc"));
+            ZYPP_THROW(SourceIOException("Can't copy " + remote_repomd_signature.asString() + " to " + local_dir.asString() + "/repodata/repomd.xml.asc"));
         }
 
         DBG << "Reading file " << remote_repomd << endl;
         ifstream repo_st(remote_repomd.asString().c_str());
+        
+        callback::SendReport<SourceReport> report;
+        report->start( selfSourceRef(), "Parsing index files" );
         YUMRepomdParser repomd(repo_st, "");
-
+        
+        
         for(; ! repomd.atEnd(); ++repomd)
         {
           if ((*repomd)->type == "other")     // don't parse 'other.xml' (#159316)
@@ -197,12 +215,13 @@ namespace zypp
             YUMPatchesParser patch(st, "");
             for (; !patch.atEnd(); ++patch)
             {
-
               getPossiblyCachedMetadataFile( _path + (*patch)->location, local_dir + (*patch)->location, _cache_dir + (*patch)->location, CheckSum((*patch)->checksumType, (*patch)->checksum) );
             } // end of single patch parsing
           }// end of patches file parsing
         } // end of copying
-
+        report->finish( selfSourceRef(), "Parsing index files", source::SourceReport::NO_ERROR, "" );
+        
+          
         // check signature
         MIL << "Checking [" << (local_dir + "/repodata/repomd.xml") << "] signature"  << endl;
         if (! getZYpp()->keyRing()->verifyFileSignatureWorkflow(local_dir + "/repodata/repomd.xml", (_path + "/repodata/repomd.xml").asString()+ " (" + url().asString() + ")", local_dir + "/repodata/repomd.xml.asc"))
@@ -245,6 +264,7 @@ namespace zypp
           MIL << "   Metadata : " << metadataRoot() << (_cache_dir.empty() ? " [TMP]" : " [CACHE]") << std::endl;
       }
 
+      /*
       void YUMSourceImpl::checkMetadataChecksums() const
       {
         DBG << "Reading file " << repomdFile() << " to check integrity of metadata." << endl;
@@ -285,6 +305,7 @@ namespace zypp
           }
         }
       }
+      */
 
       bool YUMSourceImpl::downloadNeeded(const Pathname & localdir)
       {
@@ -368,11 +389,17 @@ namespace zypp
         
       void YUMSourceImpl::readRepomd()
       {
+        parser::ParserProgress::Ptr progress;
+        callback::SendReport<SourceReport> report;
+        YUMSourceEventHandler npp(report);
+        progress.reset( new parser::ParserProgress( npp, PathInfo(repomdFile()).size()  ) );
+        
+        report->start( selfSourceRef(), "Parsing index file" );
         try
         {
           DBG << "Reading ifgz file " << repomdFile() << endl;
           ifgzstream repo_st(repomdFile().asString().c_str());
-          YUMRepomdParser repomd(repo_st, "");
+          YUMRepomdParser repomd(repo_st, "", progress);
           for(; ! repomd.atEnd(); ++repomd)
           {
             // note that we skip adding other.xml to the list of files to provide
@@ -391,46 +418,74 @@ namespace zypp
             else if ((*repomd)->type != "other")        // type "other" is ok, anything else not
               ERR << "Unknown type of repo file: " << (*repomd)->type << endl;
           }
+          report->finish( selfSourceRef(), "Parsing index file", source::SourceReport::NO_ERROR, "" );
         }
         catch( const Exception &  excpt_r )
         {
           ZYPP_CAUGHT( excpt_r );       // log the caught exception
-          ZYPP_THROW( Exception("Cannot read repomd file, cannot initialize source") );
+          report->finish( selfSourceRef(), "Parsing index file", source::SourceReport::INVALID, "" );
+          ZYPP_THROW( SourceMetadataException("Error parsing repomd.xml file") );
+          
         }
       }
       
       void YUMSourceImpl::provideProducts(Source_Ref source_r, ResStore& store)
       {
+        Pathname filename;
+        callback::SendReport<SourceReport> report;
+        
         try
         {
           for (std::list<YUMRepomdData_Ptr>::const_iterator it = _repo_product.begin();
                it != _repo_product.end();
                it++)
           {
-            Pathname filename = metadataRoot() + (*it)->location;
+            filename = metadataRoot() + (*it)->location;
             ifgzstream st ( filename.asString().c_str() );
-            YUMProductParser product(st, "");
+            
+            parser::ParserProgress::Ptr progress;
+            callback::SendReport<SourceReport> report;
+            YUMSourceEventHandler npp(report);
+            progress.reset( new parser::ParserProgress( npp ) );
+            
+            YUMProductParser product(st, "", progress);
             for (; !product.atEnd(); ++product)
             {
               Product::Ptr p = createProduct( source_r, **product );
               store.insert (p);
             }
+            
             if (product.errorStatus())
-              ZYPP_THROW(Exception(product.errorStatus()->msg()));
+            {
+              report->finish( selfSourceRef(), "Parsing product from " + filename.asString(), source::SourceReport::INVALID, product.errorStatus()->msg() );
+              ZYPP_THROW(SourceMetadataException( "Error parsing product from " + filename.asString()+ " : " + product.errorStatus()->msg()));
+            }
+            else
+            {
+              report->finish( selfSourceRef(), "Parsing product from " + filename.asString(), source::SourceReport::NO_ERROR, "" );
+            }
           }
         }
-        catch (...) {
-          ERR << "Cannot read products information" << endl;
+        catch ( const Exception &e )
+        {
+          ZYPP_CAUGHT(e);
+          report->finish( selfSourceRef(), "Parsing product from " + filename.asString(), source::SourceReport::INVALID, e.msg() );
+          ZYPP_THROW(SourceMetadataException(e.msg()));
         }
+        
       }
       
       void YUMSourceImpl::providePackages(Source_Ref source_r, ResStore& store)
       {
+        Pathname filename;
+        callback::SendReport<SourceReport> report;
+        
+        // now put other and filelist data to structures for easier find
+        map<NVRA, YUMFileListData_Ptr> files_data;
+        map<NVRA, YUMOtherData_Ptr> other_data;
+          
         try
         {
-          // now put other and filelist data to structures for easier find
-          map<NVRA, YUMFileListData_Ptr> files_data;
-          map<NVRA, YUMOtherData_Ptr> other_data;
           for (std::list<YUMRepomdData_Ptr>::const_iterator it
                = _repo_files.begin();
                it != _repo_files.end();
@@ -440,7 +495,12 @@ namespace zypp
             DBG << "Reading ifgz file " << filename << endl;
             ifgzstream st( filename.asString().c_str() );
 
-            YUMFileListParser filelist ( st, "" );
+            parser::ParserProgress::Ptr progress;
+            YUMSourceEventHandler npp(report);
+            progress.reset( new parser::ParserProgress( npp, PathInfo(filename).size() ) );
+            report->start( selfSourceRef(), "Parsing filelist from " + filename.asString() );
+            
+            YUMFileListParser filelist ( st, "", progress );
             for (; ! filelist.atEnd(); ++filelist)
             {
               if (*filelist == NULL) continue;  // skip incompatible archs
@@ -449,17 +509,41 @@ namespace zypp
                            Arch ( (*filelist)->arch ) );
               files_data[nvra] = *filelist;
             }
+            
             if (filelist.errorStatus())
-              ZYPP_THROW(Exception(filelist.errorStatus()->msg()));
+            {
+              report->finish( selfSourceRef(), "Parsing filelist from " + filename.asString(), source::SourceReport::INVALID, filelist.errorStatus()->msg() );
+              ZYPP_THROW(SourceMetadataException( "Error filelists from " + filename.asString()+ " : " + filelist.errorStatus()->msg()));
+            }
+            else
+            {
+              report->finish( selfSourceRef(), "Parsing packages from " + filename.asString(), source::SourceReport::NO_ERROR, "" );
+            }
           }
-          
+        }
+        catch ( const Exception &e )
+        {
+          ZYPP_CAUGHT(e);
+          report->finish( selfSourceRef(), "Parsing filelist from " + filename.asString(), source::SourceReport::INVALID, e.msg() );
+          ZYPP_THROW(SourceMetadataException(e.msg()));
+        }
+        
+        try
+        {
         // now read primary data, merge them with filelist and changelog
           for (std::list<YUMRepomdData_Ptr>::const_iterator it = _repo_primary.begin(); it != _repo_primary.end(); it++)
           {
-            Pathname filename = metadataRoot() + (*it)->location;
+            filename = metadataRoot() + (*it)->location;
             DBG << "Reading file " << filename << endl;
+            
+            parser::ParserProgress::Ptr progress;
+            YUMSourceEventHandler npp(report);
+            progress.reset( new parser::ParserProgress( npp, PathInfo(filename).size() ) );
+            report->start( selfSourceRef(), "Parsing packages from " + filename.asString() );
+            
             ifgzstream st ( filename.asString().c_str() );
-            YUMPrimaryParser prim(st, "");
+            
+            YUMPrimaryParser prim(st, "", progress);
             for (; !prim.atEnd(); ++prim)
             {
               if (*prim == NULL) continue;      // incompatible arch detected during parsing
@@ -490,18 +574,31 @@ namespace zypp
 //                MIL << "inserting package "<< p->name() << std::endl;
               store.insert (p);
             }
+            
             if (prim.errorStatus())
-              ZYPP_THROW(Exception(prim.errorStatus()->msg()));
+            {
+              report->finish( selfSourceRef(), "Parsing packages from " + filename.asString(), source::SourceReport::INVALID, prim.errorStatus()->msg() );
+              ZYPP_THROW(SourceMetadataException( "Error packages from " + filename.asString()+ " : " + prim.errorStatus()->msg()));
+            }
+            else
+            {
+              report->finish( selfSourceRef(), "Parsing packages from " + filename.asString(), source::SourceReport::NO_ERROR, "" );
+            }
           }
         }
-        catch (...)
+        catch ( const Exception &e )
         {
-          ERR << "Cannot read package information" << endl;
+          ZYPP_CAUGHT(e);
+          report->finish( selfSourceRef(), "Parsing packages from " + filename.asString(), source::SourceReport::INVALID, e.msg() );
+          ZYPP_THROW(SourceMetadataException(e.msg()));
         }
+        
       }
       
       void YUMSourceImpl::provideSelections(Source_Ref source_r, ResStore& store)
       {
+        callback::SendReport<SourceReport> report;
+        Pathname filename;
         try
         {
           for (std::list<YUMRepomdData_Ptr>::const_iterator it = _repo_group.begin();
@@ -511,25 +608,43 @@ namespace zypp
             Pathname filename = metadataRoot() + (*it)->location;
             DBG << "Reading file " << filename << endl;
             ifgzstream st ( filename.asString().c_str() );
-            YUMGroupParser group(st, "");
+            
+            parser::ParserProgress::Ptr progress;
+            YUMSourceEventHandler npp(report);
+            progress.reset( new parser::ParserProgress( npp, PathInfo(filename).size() ) );
+            report->start( selfSourceRef(), "Parsing selection " + filename.asString() );
+            
+            YUMGroupParser group(st, "", progress);
             for (; !group.atEnd(); ++group)
             {
               Selection::Ptr p = createGroup( source_r, **group );
               store.insert (p);
             }
+            
             if (group.errorStatus())
-              ZYPP_THROW(Exception(group.errorStatus()->msg()));
+            {
+              report->finish( selfSourceRef(), "Parsing selection " + filename.asString(), source::SourceReport::INVALID, group.errorStatus()->msg() );
+              ZYPP_THROW(SourceMetadataException( "Error Parsing selection " + filename.asString()+ " : " + group.errorStatus()->msg()));
+            }
+            else
+            {
+              report->finish( selfSourceRef(), "Parsing selection " + filename.asString(), source::SourceReport::NO_ERROR, "" );
+            }
           }
         }
-        catch (...)
+        catch ( const Exception &e )
         {
-          ERR << "Cannot read package groups information" << endl;
+          ZYPP_CAUGHT(e);
+          report->finish( selfSourceRef(), "Parsing selecton " + filename.asString(), source::SourceReport::INVALID, e.msg() );
+          ZYPP_THROW(SourceMetadataException(e.msg()));
         }
 
       }
       
       void YUMSourceImpl::providePatterns(Source_Ref source_r, ResStore& store)
       {
+        callback::SendReport<SourceReport> report;
+        Pathname filename;
         try
         {
           for (std::list<YUMRepomdData_Ptr>::const_iterator it = _repo_pattern.begin();
@@ -539,36 +654,61 @@ namespace zypp
 
             DBG << "Reading file " << filename << endl;
             ifgzstream st ( filename.asString().c_str() );
-            YUMPatternParser pattern(st, "");
+            
+            parser::ParserProgress::Ptr progress;
+            YUMSourceEventHandler npp(report);
+            progress.reset( new parser::ParserProgress( npp, PathInfo(filename).size() )  );
+            report->start( selfSourceRef(), "Parsing pattern " + filename.asString() );
+            
+            YUMPatternParser pattern(st, "", progress);
             for (; !pattern.atEnd(); ++pattern)
             {
               Pattern::Ptr p = createPattern( source_r, **pattern );
               store.insert (p);
             }
+            
             if (pattern.errorStatus())
-              ZYPP_THROW(Exception(pattern.errorStatus()->msg()));
+            {
+              report->finish( selfSourceRef(), "Parsing pattern " + filename.asString(), source::SourceReport::INVALID, pattern.errorStatus()->msg() );
+              ZYPP_THROW(SourceMetadataException( "Error parsing pattern" + filename.asString()+ " : " + pattern.errorStatus()->msg()));
+            }
+            else
+            {
+              report->finish( selfSourceRef(), "Parsing pattern " + filename.asString(), source::SourceReport::NO_ERROR, "" );
+            }
           }
         }
-        catch (...) {
-          ERR << "Cannot read installation patterns information" << endl;
+        catch ( const Exception &e )
+        {
+          ZYPP_CAUGHT(e);
+          report->finish( selfSourceRef(), "Parsing pattern " + filename.asString(), source::SourceReport::INVALID, e.msg() );
+          ZYPP_THROW(SourceMetadataException(e.msg()));
         }
 
       }
       
       void YUMSourceImpl::providePatches(Source_Ref source_r, ResStore& store)
       {
+        std::list<std::string> patch_files;
+        callback::SendReport<SourceReport> report;
+        Pathname filename;
+        
         try
         {
-          std::list<std::string> patch_files;
           for (std::list<YUMRepomdData_Ptr>::const_iterator it = _repo_patches.begin();
                it != _repo_patches.end();
                it++)
           {
-            Pathname filename = metadataRoot() + (*it)->location;
+            filename = metadataRoot() + (*it)->location;
 
             DBG << "Reading file " << filename << endl;
             ifgzstream st ( filename.asString().c_str() );
-            YUMPatchesParser patch(st, "");
+            
+            parser::ParserProgress::Ptr progress;
+            YUMSourceEventHandler npp(report);
+            progress.reset( new parser::ParserProgress( npp, PathInfo(filename).size() ) );
+            report->start( selfSourceRef(), "Parsing patches index " + filename.asString() );
+            YUMPatchesParser patch(st, "", progress);
 
             for (; !patch.atEnd(); ++patch)
             {
@@ -577,44 +717,72 @@ namespace zypp
             }
 
             if (patch.errorStatus())
-              ZYPP_THROW(Exception(patch.errorStatus()->msg()));
+            {
+              report->finish( selfSourceRef(), "Parsing patch " + filename.asString(), source::SourceReport::INVALID, patch.errorStatus()->msg() );
+              ZYPP_THROW(SourceMetadataException( "Error Parsing patch " + filename.asString()+ " : " + patch.errorStatus()->msg()));
+            }
+            else
+            {
+              report->finish( selfSourceRef(), "Parsing patch " + filename.asString(), source::SourceReport::NO_ERROR, "" );
+            }
           }
-
-            //---------------------------------
-            // now the individual patch files
-
+        }
+        catch ( const Exception &e )
+        {
+          ZYPP_CAUGHT(e);
+          report->finish( selfSourceRef(), "Parsing patch index" + filename.asString(), source::SourceReport::INVALID, e.msg() );
+          ZYPP_THROW(SourceMetadataException(e.msg()));
+        }
+        
+        try
+        {
+          //---------------------------------
+          // now the individual patch files
           for (std::list<std::string>::const_iterator it = patch_files.begin();
                it != patch_files.end();
                it++)
           {
-            Pathname filename = metadataRoot() + *it;
+            filename = metadataRoot() + *it;
             DBG << "Reading file " << filename << endl;
+            
+            //FIXME error handling
             ifgzstream st ( filename.asString().c_str() );
-            YUMPatchParser ptch(st, "");
-            for(;
-                 !ptch.atEnd();
-                 ++ptch)
+            
+            parser::ParserProgress::Ptr progress;
+            YUMSourceEventHandler npp(report);
+            progress.reset( new parser::ParserProgress( npp, PathInfo(filename).size() ) );
+        
+            report->start( selfSourceRef(), "Parsing patch " + filename.asString() );
+            
+            YUMPatchParser ptch(st, "", progress);
+            for(; !ptch.atEnd(); ++ptch)
             {
-              Patch::Ptr p = createPatch(
-                  source_r,
-              **ptch
-                                        );
+              Patch::Ptr p = createPatch( source_r, **ptch );
               store.insert (p);
               Patch::AtomList atoms = p->atoms();
-              for (Patch::AtomList::iterator at = atoms.begin();
-                   at != atoms.end();
-                   at++)
+              for (Patch::AtomList::iterator at = atoms.begin(); at != atoms.end(); at++)
               {
                 _store.insert (*at);
               }
             }
+            
             if (ptch.errorStatus())
-              ZYPP_THROW(Exception(ptch.errorStatus()->msg()));
+            {
+              report->finish( selfSourceRef(), "Parsing patch " + filename.asString(), source::SourceReport::INVALID, ptch.errorStatus()->msg() );
+              ZYPP_THROW(SourceMetadataException( "Error Parsing patch " + filename.asString()+ " : " + ptch.errorStatus()->msg()));
+            }
+            else
+            {
+              report->finish( selfSourceRef(), "Parsing patch " + filename.asString(), source::SourceReport::NO_ERROR, "" );
+            }
           }
         }
-        catch (...)
+        catch ( const Exception &e )
         {
           ERR << "Cannot read patch metadata" << endl;
+          ZYPP_CAUGHT(e);
+          report->finish( selfSourceRef(), "Parsing patch " + filename.asString(), source::SourceReport::INVALID, e.msg() );
+          ZYPP_THROW(SourceMetadataException(e.msg()));
         }
       }
       

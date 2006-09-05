@@ -30,8 +30,8 @@ namespace zypp {
     namespace yum {
 
 
-      YUMOtherParser::YUMOtherParser(istream &is, const string& baseUrl)
-	: XMLNodeIterator<YUMOtherData_Ptr>(is, baseUrl,OTHERSCHEMA)
+      YUMOtherParser::YUMOtherParser(istream &is, const string& baseUrl, parser::ParserProgress::Ptr progress )
+	: XMLNodeIterator<YUMOtherData_Ptr>(is, baseUrl,OTHERSCHEMA, progress)
 	, _zypp_architecture( getZYpp()->architecture() )
       {
         fetchNext();

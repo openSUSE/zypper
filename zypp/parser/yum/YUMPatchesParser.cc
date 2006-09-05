@@ -29,8 +29,8 @@ namespace zypp {
       YUMPatchesParser::~YUMPatchesParser()
       { }
       
-      YUMPatchesParser::YUMPatchesParser(istream &is, const string& baseUrl)
-      : XMLNodeIterator<YUMPatchesData_Ptr>(is, baseUrl,PATCHESSCHEMA)
+      YUMPatchesParser::YUMPatchesParser(istream &is, const string& baseUrl, parser::ParserProgress::Ptr progress )
+      : XMLNodeIterator<YUMPatchesData_Ptr>(is, baseUrl,PATCHESSCHEMA, progress)
       {
         fetchNext();
       }
