@@ -24,7 +24,6 @@
 #include <sys/mount.h>
 #include <errno.h>
 #include <dirent.h>
-#include <blkid/blkid.h>
 
 #define DELAYED_VERIFY 1
 
@@ -102,7 +101,7 @@ namespace zypp {
 	return false;
       }
 
-      // check using /dev/disk/by-uuid links first
+      // check if a volume using /dev/disk/by-uuid links first
       {
 	Pathname            dpath("/dev/disk/by-uuid");
 	std::list<Pathname> dlist;
@@ -116,7 +115,8 @@ namespace zypp {
 	                            vol_info.minor() == dev_info.minor())
 	    {
 	      DBG << "Specified device name " << dev_name
-		  << " is a volume (uuid link " << vol_info.path() << ")"
+		  << " is a volume (disk/by-uuid link "
+		  << vol_info.path() << ")"
 		  << std::endl;
 	      return true;
 	    }
@@ -124,75 +124,27 @@ namespace zypp {
 	}
       }
 
-      // check using libblkid
+      // check if a volume using /dev/disk/by-label links
+      // (e.g. vbd mapped volumes in a XEN vm)
       {
-	std::string type, uuid;
-	blkid_cache cache = NULL;
-
-	if( blkid_get_cache(&cache, NULL) < 0)
-	  WAR << "Unable to read blkid cache" << std::endl;
-
-	blkid_dev dev = blkid_get_dev(cache, dev_name.asString().c_str(),
-	                                     BLKID_DEV_NORMAL);
-	if( dev)
+	Pathname            dpath("/dev/disk/by-label");
+	std::list<Pathname> dlist;
+	if( zypp::filesystem::readdir(dlist, dpath) == 0)
 	{
-	  blkid_tag_iterate iter;
-	  const char *key, *val;
-
-	  iter = blkid_tag_iterate_begin(dev);
-	  while( blkid_tag_next( iter, &key, &val) == 0)
+	  std::list<Pathname>::const_iterator it;
+	  for(it = dlist.begin(); it != dlist.end(); ++it)
 	  {
-	    std::string tag(key);
-	    if(tag == "TYPE")
-	      type = val;
-	    else
-	    if(tag == "UUID")
-	      uuid = val;
+	    PathInfo vol_info(*it);
+	    if( vol_info.isBlk() && vol_info.major() == dev_info.major() &&
+	                            vol_info.minor() == dev_info.minor())
+	    {
+	      DBG << "Specified device name " << dev_name
+		  << " is a volume (disk/by-label link "
+		  << vol_info.path() << ")"
+		  << std::endl;
+	      return true;
+	    }
 	  }
-	  blkid_tag_iterate_end(iter);
-	}
-	blkid_put_cache(cache);
-
-	if( !type.empty())
-	{
-	  if(type == "swap")
-	  {
-	    //
-	    // Refuse to mount swap devices ...
-	    //
-	    DBG << "Specified device name " << dev_name
-		<< " is a " << type << " device"
-		<< std::endl;
-	    return false;
-	  }
-	  else
-	  if(type == "iso9660" || type == "udf")
-	  {
-	    //
-	    // XEN maps CD/DVD devices using vbd (Bug #158529).
-	    //
-	    DBG << "Specified device name " << dev_name
-		<< " is a CD/DVD volume (type " << type << ")"
-		<< std::endl;
-	    return true;
-	  }
-	  else
-	  if( !uuid.empty())
-	  {
-	    //
-	    // OK, have a filesystem type and a uuid.
-	    //
-	    DBG << "Specified device name " << dev_name
-		<< " is a volume (type " << type << ", uuid " << uuid << ")"
-		<< std::endl;
-	    return true;
-	  }
-	}
-	else
-	{
-	  DBG << "Unable to detect filesystem type on "
-	      << dev_name
-	      << " using libblkid" << std::endl;
 	}
       }
 

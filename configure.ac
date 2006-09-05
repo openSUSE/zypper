@@ -137,10 +137,6 @@ AC_SUBST(CURL_CFLAGS)
 AC_SUBST(CURL_LIBS)
 
 dnl ==================================================
-PKG_CHECK_MODULES(BLKID, [blkid])
-AC_SUBST(BLKID_CFLAGS)
-AC_SUBST(BLKID_LIBS)
-
 dnl sqlite
 AM_CONDITIONAL(BUILD_ZMD, true)
 PKG_CHECK_MODULES(SQLITE, sqlite3, pkg_sqlite=yes, pkg_sqlite=no)
@@ -181,9 +177,6 @@ AC_CHECK_HEADERS([boost/scoped_ptr.hpp],
 AC_CHECK_HEADERS([curl/curl.h],
         [],
         AC_MSG_ERROR([libcurl header not found. please install curl-devel.]))
-AC_CHECK_HEADERS([blkid/blkid.h],
-        [],
-        AC_MSG_ERROR([libblkid header not found. please install e2fsprogs-devel.]))
 AC_CHECK_HEADERS([idn-free.h],
         [],
         AC_MSG_ERROR([libidn header not found. please install libidn-devel.]))

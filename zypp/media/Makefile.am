@@ -4,7 +4,7 @@
 SUBDIRS = proxyinfo
 
 INCLUDES = -I$(oldincludedir)/libxml2	\
-	$(CURL_CFLAGS) $(BLKID_CFLAGS)	\
+	$(CURL_CFLAGS)			\
 	-DZYPP_BASE_LOGGER_LOGGROUP=\"media\"
 
 
@@ -52,6 +52,6 @@ lib@PACKAGE@_media_la_SOURCES = \
 
 
 lib@PACKAGE@_media_la_LIBADD =	proxyinfo/lib@PACKAGE@_media_proxyinfo.la \
-				$(CURL_LIBS) $(BLKID_LIBS)
+				$(CURL_LIBS)
 
 ## ##################################################
