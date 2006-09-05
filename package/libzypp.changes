@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Tue Sep  5 19:22:56 CEST 2006 - mt@suse.de
+
+- Removed libblkid dependency - the workaround using libblkid to
+  check filesystem on XEN vbd mapped devices is obsolete, because
+  the info is avaliable via /dev/disk/by-label link now. (#197107)
+- revision 4087
+
+-------------------------------------------------------------------
 Thu Aug 31 15:16:11 CEST 2006 - ma@suse.de
 
 - PackageProvider: Fixed broken retry. (#202163)
