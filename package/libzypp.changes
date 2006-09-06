@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Sep  6 18:31:20 CEST 2006 - dmacvicar@suse.de
+
+- better error propagation
+- r4096 
+
+-------------------------------------------------------------------
 Tue Sep  5 19:22:56 CEST 2006 - mt@suse.de
 
 - Removed libblkid dependency - the workaround using libblkid to
