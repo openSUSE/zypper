@@ -57,6 +57,51 @@ void include_source_by_url( const Url &url )
   
 }
 
+static void print_source_list( const std::list<zypp::source::SourceInfo> &sources )
+{
+  for( std::list<zypp::source::SourceInfo>::const_iterator it = sources.begin() ;
+       it != sources.end() ; ++it )
+  {
+    SourceInfo source = *it;
+    cout << ( source.enabled() ? "[x]" : "[ ]" );
+    cout << ( source.autorefresh() ? "* " : "  " );
+    if ( source.alias() != source.url().asString() )
+      cout << source.alias() << " (" << source.url() << ")" << endl;
+    else
+      cout << source.url() << endl;
+  }
+}
+
+static void print_source_list_rug_style( const std::list<zypp::source::SourceInfo> &sources )
+{
+  cout << " Sub'd? | Name                                                   | Service" << endl;
+  cout << "-------+--------------------------------------------------------+-------------------------------------------------------" << endl;
+  
+  for( std::list<zypp::source::SourceInfo>::const_iterator it = sources.begin() ;
+       it != sources.end() ; ++it )
+  {
+    SourceInfo source = *it;
+    cout << ( source.enabled() ? "[x]" : "[ ]" );
+    cout << ( source.autorefresh() ? "* " : "  " );
+    if ( source.alias() != source.url().asString() )
+      cout << source.alias() << " (" << source.url() << ")" << endl;
+    else
+      cout << source.url() << endl;
+  }
+  
+  /*   
+  Sub'd? | Name                                                   | Service
+  -------+--------------------------------------------------------+-------------------------------------------------------
+  Yes    | non-oss                                                | non-oss
+  Yes    | 20060629-170551                                        | 20060629-170551
+  Yes    | 20060824-092918                                        | 20060824-092918
+  Yes    | mozilla                                                | mozilla
+  Yes    | 20060612-143432                                        | 20060612-143432
+  | SUSE-Linux-10.1-Updates                                | SUSE-Linux-10.1-Updates
+  Yes    | SUSE-Linux-10.1-DVD9-x86-x86_64-10.1-0-20060505-104407 | SUSE-Linux-10.1-DVD9-x86-x86_64-10.1-0-20060505-104407
+  */
+}
+
 void list_system_sources()
 {
   zypp::storage::PersistentStorage store;
@@ -74,29 +119,7 @@ void list_system_sources()
     exit(-1); 
   }
   
-  for( std::list<zypp::source::SourceInfo>::const_iterator it = sources.begin() ;
-       it != sources.end() ; ++it )
-  {
-    SourceInfo source = *it;
-    cout << ( source.enabled() ? "[x]" : "[ ]" );
-    cout << ( source.autorefresh() ? "* " : "  " );
-    if ( source.alias() != source.url().asString() )
-      cout << source.alias() << " (" << source.url() << ")" << endl;
-    else
-      cout << source.url() << endl;
-  }
-    
-  /*   
-  Sub'd? | Name                                                   | Service
-  -------+--------------------------------------------------------+-------------------------------------------------------
-  Yes    | non-oss                                                | non-oss
-  Yes    | 20060629-170551                                        | 20060629-170551
-  Yes    | 20060824-092918                                        | 20060824-092918
-  Yes    | mozilla                                                | mozilla
-  Yes    | 20060612-143432                                        | 20060612-143432
-  | SUSE-Linux-10.1-Updates                                | SUSE-Linux-10.1-Updates
-  Yes    | SUSE-Linux-10.1-DVD9-x86-x86_64-10.1-0-20060505-104407 | SUSE-Linux-10.1-DVD9-x86-x86_64-10.1-0-20060505-104407
-  */
+  print_source_list(sources);
 }
 
 static
