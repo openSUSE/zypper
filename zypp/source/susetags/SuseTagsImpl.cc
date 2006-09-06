@@ -171,19 +171,19 @@ namespace zypp
 
         std::ifstream pfile( p.asString().c_str() );
         if ( pfile.bad() ) {
-          ZYPP_THROW(Exception("Error parsing media.1/media") );
+          ZYPP_THROW(SourceIOException("Can't read media.1/media") );
         }
         _media_vendor = str::getline( pfile, str::TRIM );
         if ( pfile.fail() ) {
-          ZYPP_THROW(Exception("Error parsing media.1/media") );
+          ZYPP_THROW(SourceIOException("Can't read media.1/media") );
         }
         _media_id = str::getline( pfile, str::TRIM );
         if ( pfile.fail() ) {
-          ZYPP_THROW(Exception("Error parsing media.1/media") );
+          ZYPP_THROW(SourceIOException("Can't read media.1/media") );
         }
         std::string media_count_str = str::getline( pfile, str::TRIM );
         if ( pfile.fail() ) {
-          ZYPP_THROW(Exception("Error parsing media.1/media") );
+          ZYPP_THROW(SourceIOException("Can't read media.1/media") );
         }
         _media_count = str::strtonum<unsigned>( media_count_str );
 
@@ -226,21 +226,21 @@ namespace zypp
 
         // init the cache structure
         if (0 != assert_dir(local_dir + "DATA", 0755))
-          ZYPP_THROW(Exception("Cannot create /DATA directory in download dir." + local_dir.asString()));
+          ZYPP_THROW(SourceIOException("Cannot create /DATA directory in download dir." + local_dir.asString()));
         if (0 != assert_dir(local_dir + "MEDIA", 0755))
-          ZYPP_THROW(Exception("Cannot create /MEDIA directory in download dir." + local_dir.asString()));
+          ZYPP_THROW(SourceIOException("Cannot create /MEDIA directory in download dir." + local_dir.asString()));
         if (0 != assert_dir(local_dir + "PUBLICKEYS", 0755))
-          ZYPP_THROW(Exception("Cannot create /PUBLICKEYS directory in download dir." + local_dir.asString()));
+          ZYPP_THROW(SourceIOException("Cannot create /PUBLICKEYS directory in download dir." + local_dir.asString()));
 
         try {
           media_src = provideDirTree("media.1");
         }
         catch(Exception &e) {
-          ZYPP_THROW(Exception("Can't provide " + _path.asString() + "/media.1 from " + url().asString() ));
+          ZYPP_THROW(SourceIOException("Can't provide " + _path.asString() + "/media.1 from " + url().asString() ));
         }
 
         if ( filesystem::copy_dir(media_src, local_dir + "MEDIA") != 0 )
-          ZYPP_THROW(Exception("Unable to copy media directory to " + (local_dir + "/MEDIA").asString()));
+          ZYPP_THROW(SourceIOException("Unable to copy media directory to " + (local_dir + "/MEDIA").asString()));
 
         MIL << "cached media directory" << std::endl;
 
@@ -251,11 +251,11 @@ namespace zypp
           content_src = provideFile( _path + "content");
         }
         catch(Exception &e) {
-          ZYPP_THROW(Exception("Can't provide " + _path.asString() + "/content from " + url().asString() ));
+          ZYPP_THROW(SourceIOException("Can't provide " + _path.asString() + "/content from " + url().asString() ));
         }
 
         if ( filesystem::copy(content_src, local_dir + "DATA/content") != 0)
-          ZYPP_THROW(Exception("Unable to copy the content file to " + (local_dir + "DATA/content").asString()));
+          ZYPP_THROW(SourceIOException("Unable to copy the content file to " + (local_dir + "DATA/content").asString()));
 
         // get the list of cache keys
         std::list<std::string> files;
@@ -274,13 +274,13 @@ namespace zypp
               key_src = provideFile(_path + filename);
             }
             catch(Exception &e) {
-              ZYPP_THROW(Exception("Can't provide " + (_path + filename).asString() + " from " + url().asString() ));
+              ZYPP_THROW(SourceIOException("Can't provide " + (_path + filename).asString() + " from " + url().asString() ));
             }
 
             MIL << "Trying to cache " << key_src << std::endl;
 
             if ( filesystem::copy(key_src, local_dir + "PUBLICKEYS/" + filename) != 0 )
-              ZYPP_THROW(Exception("Unable to copy key " + key_src.asString() + " to " + (local_dir + "PUBLICKEYS").asString()));
+              ZYPP_THROW(SourceIOException("Unable to copy key " + key_src.asString() + " to " + (local_dir + "PUBLICKEYS").asString()));
 
             MIL << "cached " << filename << std::endl;
             z->keyRing()->importKey(local_dir + "PUBLICKEYS/" + filename, false);
@@ -292,11 +292,11 @@ namespace zypp
               src_data = provideFile(_path + filename);
             }
             catch(Exception &e) {
-              ZYPP_THROW(Exception("Can't provide " + filename + " from " + url().asString() + ". File was listed as available."));
+              ZYPP_THROW(SourceIOException("Can't provide " + filename + " from " + url().asString() + ". File was listed as available."));
             }
 
             if ( filesystem::copy( src_data, local_dir + "DATA/" + filename) != 0 )
-              ZYPP_THROW(Exception("Unable to copy " + filename + " to " + (local_dir + "/DATA").asString()));
+              ZYPP_THROW(SourceIOException("Unable to copy " + filename + " to " + (local_dir + "/DATA").asString()));
 
             if ( filename == "content.key" )
               z->keyRing()->importKey(local_dir + "DATA/content.key", false);
@@ -313,14 +313,14 @@ namespace zypp
 
         // the source is not valid and the user did not want to continue
         if (!valid)
-          ZYPP_THROW (Exception( "Error. Source signature does not validate and user does not want to continue. "));
+          ZYPP_THROW (SourceUserRejectedException( "Error. Source signature does not validate and user does not want to continue. "));
 
         // now we have the content file copied, we need to init data and descrdir from the product
         readContentFile(local_dir + "/DATA/content");
 
         // make sure a local descr dir exists
         if ( assert_dir( local_dir + "/DATA/descr") != 0 )
-          ZYPP_THROW (Exception( "Error. Can't create local descr directory. "));
+          ZYPP_THROW (SourceIOException( "Error. Can't create local descr directory. "));
 
         // we can get the list of files in description dir in 2 ways
         // from the checksum list, or ls'ing the dir via directory.yast
@@ -341,7 +341,7 @@ namespace zypp
             dirInfo( 1, descr_dir_file_list, mediaDescrDir());
           }
           catch(Exception &e) {
-            ZYPP_THROW(Exception("Can't list description directory content from " + url().asString() ));
+            ZYPP_THROW(SourceIOException("Can't list description directory content from " + url().asString() ));
           }
 
           for( std::list<std::string>::const_iterator it = descr_dir_file_list.begin(); it != descr_dir_file_list.end(); ++it)
@@ -358,10 +358,10 @@ namespace zypp
       {
         // refuse to use stupid paths as cache dir
         if (cache_dir_r == Pathname("/") )
-          ZYPP_THROW(Exception("I refuse to use / as cache dir"));
+          ZYPP_THROW(SourceIOException("I refuse to use / as cache dir"));
 
         if (0 != assert_dir(cache_dir_r.dirname(), 0700))
-          ZYPP_THROW(Exception("Cannot create cache directory" + cache_dir_r.asString()));
+          ZYPP_THROW(SourceIOException("Cannot create cache directory" + cache_dir_r.asString()));
 
         filesystem::clean_dir(cache_dir_r);
         filesystem::mkdir(cache_dir_r + "DATA");
@@ -395,7 +395,7 @@ namespace zypp
           need_to_refresh = downloadNeeded(dir_r);
         }
         catch(Exception &e) {
-          ZYPP_THROW(Exception("Can't check if source has changed or not. Aborting refresh."));
+          ZYPP_THROW(SourceIOException("Can't check if source has changed or not. Aborting refresh."));
         }
 
         if ( need_to_refresh )
@@ -408,13 +408,7 @@ namespace zypp
           return;
         }
 
-        try {
-          download_tmp_dir = downloadMetadata();
-        }
-        catch(Exception &e) {
-          ZYPP_THROW(Exception("Downloading metadata failed (is a susetags source?) or user did not accept remote source. Aborting refresh."));
-        }
-
+        download_tmp_dir = downloadMetadata();
         copyLocalMetadata(download_tmp_dir, dir_r);
 
         // download_tmp_dir go out of scope now but it is ok as we already copied the content.
@@ -551,7 +545,8 @@ namespace zypp
       void SuseTagsImpl::readContentFile(const Pathname &content_file)
       {
         SourceFactory factory;
-        try {
+        try
+        {
           DBG << "Going to parse content file " << content_file << endl;
 
           ProductMetadataParser p;
@@ -566,10 +561,10 @@ namespace zypp
           MIL << "Read product: " << _product->summary() << endl;
 
           _prodImpl = p.prodImpl;
-	  _autorefresh = p.volatile_content && media::MediaAccess::canBeVolatile( _url );
+          _autorefresh = p.volatile_content && media::MediaAccess::canBeVolatile( _url );
         }
-        catch (Exception & excpt_r) {
-          ZYPP_THROW (Exception( "cannot parse content file."));
+        catch ( const Exception & e ) {
+          ZYPP_THROW (SourceMetadataException("Cannot parse content file: " + e.msg()));
         }
       }
 
@@ -595,7 +590,17 @@ namespace zypp
         
         progress.reset( new parser::ParserProgress( npp ) );
         report->start( selfSourceRef(), "Parsing packages file" );
-        PkgContent content( parsePackages( progress, source_r, this, p ) );
+        
+        PkgContent content;
+        
+        try {
+          content = parsePackages( progress, source_r, this, p );
+        }
+        catch ( const Exception &e )
+        {
+          report->finish( selfSourceRef(), "Parsing packages file", source::SourceReport::INVALID, e.msg() );
+          ZYPP_THROW(SourceMetadataException("Can't parse packages file: " + e.msg()));
+        }
         report->finish( selfSourceRef(), "Parsing packages file", source::SourceReport::NO_ERROR, "" );
         
 #warning Should use correct locale and locale fallback list
@@ -641,11 +646,13 @@ namespace zypp
                 MIL << packages_lang_name << " found" << std::endl;
                 DBG << "Going to parse " << p << endl;
                 //verifyFile( p, packages_lang_name);
-                parser::ParserProgress::Ptr progress;
-                NullParseProgress npp(p);
-                progress.reset( new parser::ParserProgress(npp) );
+                
+                SourceEventHandler lang_progress_handler(report);
+                progress.reset( new parser::ParserProgress( lang_progress_handler ) );
+                report->start( selfSourceRef(), "Parsing translation: " + packages_lang_name );
                 parsePackagesLang( progress, this, p, lang, content );
                 trymore = false;
+                report->finish( selfSourceRef(), "Parsing translation: " + packages_lang_name, source::SourceReport::NO_ERROR, "" );
               }
               else
               {
@@ -657,9 +664,10 @@ namespace zypp
               MIL << "Skipping translation candidate " << packages_lang_name << " (not present in media)" << endl;
             }
           }
-          catch (Exception & excpt_r)
+          catch ( const Exception &e )
           {
-            ZYPP_CAUGHT(excpt_r);
+            report->finish( selfSourceRef(), "Parsing translation: " + packages_lang_name, source::SourceReport::INVALID, e.msg() );
+            ZYPP_CAUGHT(e);
           }
           lang = lang.fallback();
         }
