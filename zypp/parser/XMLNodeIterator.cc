@@ -126,7 +126,7 @@ namespace zypp {
       _input(& input),
       _reader(xmlReaderForIO(ioread, ioclose, _input, baseUrl.c_str(), "utf-8",
                              XML_PARSE_PEDANTIC)),
-      _baseUrl(baseUrl), _progress(progress)
+      _baseUrl(baseUrl), _progress(progress), _stream_size(0), _bytes_consumed(0)
     {
       xmlTextReaderSetErrorHandler(_reader, (xmlTextReaderErrorFunc) errorHandler, this);
       // xmlTextReaderSetStructuredErrorHandler(_reader, structuredErrorHandler, this);
@@ -160,8 +160,13 @@ namespace zypp {
     bool
     XMLNodeIteratorBase::atEnd() const
     {
-      return (_error.get() != 0
-              || getCurrent() == 0);
+      if ( _error.get() != 0 || getCurrent() == 0 )
+      {
+        if ( _progress )
+          _progress->finish();
+        return true;
+      }
+      return false;
     }
 
 
@@ -185,6 +190,19 @@ namespace zypp {
     void XMLNodeIteratorBase::fetchNext()
     {
       xml_assert(_reader);
+      
+      if ( _progress )
+      {
+        long int consumed = xmlTextReaderByteConsumed (_reader);
+        //MIL <<  consumed << " bytes consumed." << endl;
+        // only report every 4k or more
+        if ( ( consumed - _bytes_consumed > 4096 ) )
+        {
+          _progress->progress(consumed);
+          _bytes_consumed = consumed;
+        }
+      }
+      
       int status;
       /* throw away the old entry */
       setCurrent(0);
@@ -193,20 +211,18 @@ namespace zypp {
           /* this is a trivial iterator over (max) only one element,
              and we reach the end now. */
         ;
-        if ( _progress )
-          _progress->progress( 100 );
       }
       else {
           /* repeat as long as we successfully read nodes
              breaks out when an interesting node has been found */
-        while ((status = xmlTextReaderRead(_reader))==1) {
+        while ((status = xmlTextReaderRead(_reader))==1)
+        { 
           xmlNodePtr node = xmlTextReaderCurrentNode(_reader);
+          
           if (isInterested(node))
           {
               // xmlDebugDumpNode(stdout,node,5);
             _process(_reader);
-            if ( _progress )
-              _progress->progress( xmlTextReaderByteConsumed (_reader) );
               // _currentDataPtr.reset(new ENTRYTYPE(process(_reader)));
             status = xmlTextReaderNext(_reader);
             break;

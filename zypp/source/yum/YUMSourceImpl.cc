@@ -84,6 +84,21 @@ namespace zypp
         callback::SendReport<SourceReport> &_report;
       };
       
+      static long int get_stream_size( const Pathname &p )
+      {
+        ifgzstream input( p.asString().c_str() );
+        
+        if ( input.bad() )
+          ZYPP_THROW(Exception("Can't read " + p.asString() + " to calculate compressed stream size"));
+        
+        // get the size of the stream
+        DBG << "Getting size of the stream." << std::endl;
+        input.seekg (0, ios::end);
+        long int stream_size = input.tellg();
+        DBG << "XML stream size: " << stream_size << std::endl;
+        return stream_size;
+      }
+      
       ///////////////////////////////////////////////////////////////////
       //
       //        CLASS NAME : YUMSourceImpl
@@ -392,7 +407,7 @@ namespace zypp
         parser::ParserProgress::Ptr progress;
         callback::SendReport<SourceReport> report;
         YUMSourceEventHandler npp(report);
-        progress.reset( new parser::ParserProgress( npp, PathInfo(repomdFile()).size()  ) );
+        progress.reset( new parser::ParserProgress( npp ) );
         
         report->start( selfSourceRef(), "Parsing index file" );
         try
@@ -497,7 +512,7 @@ namespace zypp
 
             parser::ParserProgress::Ptr progress;
             YUMSourceEventHandler npp(report);
-            progress.reset( new parser::ParserProgress( npp, PathInfo(filename).size() ) );
+            progress.reset( new parser::ParserProgress( npp, get_stream_size(filename) ) );
             report->start( selfSourceRef(), "Parsing filelist from " + filename.asString() );
             
             YUMFileListParser filelist ( st, "", progress );
@@ -538,7 +553,7 @@ namespace zypp
             
             parser::ParserProgress::Ptr progress;
             YUMSourceEventHandler npp(report);
-            progress.reset( new parser::ParserProgress( npp, PathInfo(filename).size() ) );
+            progress.reset( new parser::ParserProgress( npp ) );
             report->start( selfSourceRef(), "Parsing packages from " + filename.asString() );
             
             ifgzstream st ( filename.asString().c_str() );
@@ -611,7 +626,7 @@ namespace zypp
             
             parser::ParserProgress::Ptr progress;
             YUMSourceEventHandler npp(report);
-            progress.reset( new parser::ParserProgress( npp, PathInfo(filename).size() ) );
+            progress.reset( new parser::ParserProgress( npp ) );
             report->start( selfSourceRef(), "Parsing selection " + filename.asString() );
             
             YUMGroupParser group(st, "", progress);
@@ -657,7 +672,7 @@ namespace zypp
             
             parser::ParserProgress::Ptr progress;
             YUMSourceEventHandler npp(report);
-            progress.reset( new parser::ParserProgress( npp, PathInfo(filename).size() )  );
+            progress.reset( new parser::ParserProgress( npp )  );
             report->start( selfSourceRef(), "Parsing pattern " + filename.asString() );
             
             YUMPatternParser pattern(st, "", progress);
@@ -706,7 +721,7 @@ namespace zypp
             
             parser::ParserProgress::Ptr progress;
             YUMSourceEventHandler npp(report);
-            progress.reset( new parser::ParserProgress( npp, PathInfo(filename).size() ) );
+            progress.reset( new parser::ParserProgress( npp ) );
             report->start( selfSourceRef(), "Parsing patches index " + filename.asString() );
             YUMPatchesParser patch(st, "", progress);
 
@@ -750,7 +765,7 @@ namespace zypp
             
             parser::ParserProgress::Ptr progress;
             YUMSourceEventHandler npp(report);
-            progress.reset( new parser::ParserProgress( npp, PathInfo(filename).size() ) );
+            progress.reset( new parser::ParserProgress( npp ) );
         
             report->start( selfSourceRef(), "Parsing patch " + filename.asString() );
             

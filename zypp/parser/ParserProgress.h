@@ -27,11 +27,11 @@ namespace parser
       /**
        * initializes a progress objetc, with a callback functor
        * if you are not reporting percentage, then set
-       * the metric to the goal, and report using the same
+       * the total_steps to the goal, and report using the same
        * unit, then
        */
-      ParserProgress( boost::function<void (int)> fnc, int metric = 100 )
-      : _fnc(fnc), _previous_progress(0), _metric(metric)
+      ParserProgress( boost::function<void (long int)> fnc, long int total_steps = 100 )
+      : _fnc(fnc), _previous_progress(0), _total_steps(total_steps)
       {
         
       };
@@ -45,12 +45,13 @@ namespace parser
        * this progress object to update progress
        * information
        */
-      void progress(int p)
+      void progress(long int p)
       {
-        if ( _metric != 100 )
+        //std::cout << "real " << p << std::endl;
+        if ( _total_steps != 100 )
         {
-          int current_done = p;
-          p = (int)((float) current_done/(float) _metric);
+          long int current_done = p;
+          p = (long int)(((double) current_done/(double) _total_steps)*100);
         }
         
         if (_fnc && ( p !=  _previous_progress ))
@@ -58,6 +59,11 @@ namespace parser
           _previous_progress = p;
           _fnc(p);
         }
+      }
+      
+      void setTotalSteps( long int total_steps )
+      {
+        _total_steps = total_steps;
       }
       
       /**
@@ -87,9 +93,9 @@ namespace parser
       }
       
     private:
-      boost::function<void (int)> _fnc;
-      int _previous_progress;
-      int _metric;
+      boost::function<void (long int)> _fnc;
+      long int _previous_progress;
+      long int _total_steps;
   };
 
 } // namespace parser

@@ -294,6 +294,14 @@ namespace zypp {
        */
       parser::ParserProgress::Ptr _progress;
       
+      /**
+       * size of the stream to parse
+       */
+      long int _stream_size;
+      /**
+       * bytes consumed in last report
+       */
+      long int _bytes_consumed;
     }; /* end class XMLNodeIteratorBase */
 
 
