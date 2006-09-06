@@ -80,7 +80,10 @@ void list_system_sources()
     SourceInfo source = *it;
     cout << ( source.enabled() ? "[x]" : "[ ]" );
     cout << ( source.autorefresh() ? "* " : "  " );
-    cout << source.alias() << " (" << source.url() << ")" << endl;
+    if ( source.alias() != source.url().asString() )
+      cout << source.alias() << " (" << source.url() << ")" << endl;
+    else
+      cout << source.url() << endl;
   }
     
   /*   
