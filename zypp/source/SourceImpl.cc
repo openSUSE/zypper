@@ -279,15 +279,23 @@ namespace zypp
           // checksum is already checked.
           // we could later implement double failover and try to download if file copy fails.
           if ( filesystem::copy(cached_file, destination) != 0 )
-            ZYPP_THROW(Exception("Can't copy " + cached_file.asString() + " to " + destination.asString()));
+            ZYPP_THROW(SourceIOException("Can't copy " + cached_file.asString() + " to " + destination.asString()));
         }
         else
         {
-          // we dont have it or its not the same, download it.
-          downloaded_file = provideFile( file_to_download);
+          try
+          {
+            // we dont have it or its not the same, download it.
+            downloaded_file = provideFile( file_to_download);
+          }
+          catch (const Exception & excpt_r)
+          {
+            ZYPP_CAUGHT(excpt_r);
+            ZYPP_THROW(SourceIOException("Can't provide " + downloaded_file.asString() + " : " + excpt_r.msg() ));
+          }
           
           if ( filesystem::copy(downloaded_file, destination) != 0 )
-            ZYPP_THROW(Exception("Can't copy " + downloaded_file.asString() + " to " + destination.asString()));
+            ZYPP_THROW(SourceIOException("Can't copy " + downloaded_file.asString() + " to " + destination.asString()));
 
           callback::SendReport<DigestReport> report;
           if ( checksum.empty() )
@@ -300,13 +308,13 @@ namespace zypp
             }
             else
             {
-              ZYPP_THROW(Exception( file_url.asString() + " " + N_(" miss checksum.") ));
+              ZYPP_THROW(SourceMetadataException( file_url.asString() + " " + N_(" miss checksum.") ));
             }
           }
           else
           {
             if (! is_checksum( destination, checksum))
-              ZYPP_THROW(Exception( file_url.asString() + " " + N_(" fails checksum verification.") ));
+              ZYPP_THROW(SourceMetadataException( file_url.asString() + " " + N_(" fails checksum verification.") ));
           }
           
         }
