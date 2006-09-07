@@ -213,6 +213,8 @@ namespace zypp
         */
       virtual Date timestamp() const;
 
+      virtual std::string checksum() const;
+      
       std::string alias (void) const
       { return _alias; }
 
