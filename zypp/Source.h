@@ -141,6 +141,15 @@ namespace zypp
 
   public:
 
+  /**
+   * an aproxmate checksum that should change 
+   * when the source changes
+   * can be used to determine if 
+   * the source needs to be read again or not.
+   * (read as parse its metadata, not about downloading)
+   */
+    std::string checksum() const;
+    
     /**
      * aproximate age of the source, can be used to determine if 
      * the source needs to be read again or not.

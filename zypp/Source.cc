@@ -95,6 +95,9 @@ namespace zypp
   Date Source_Ref::timestamp() const
   { return _pimpl->timestamp(); }
   
+  std::string Source_Ref::checksum() const
+  { return _pimpl->checksum(); }
+  
   const bool Source_Ref::autorefresh() const
   { return _pimpl->autorefresh(); }
 
