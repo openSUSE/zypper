@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Sep  7 14:32:38 CEST 2006 - mvidner@suse.cz
+
+- Implemented fgzstreambuf::compressed_tell and fXstream::getbuf to
+  enable progress reporting on compressed streams.
+
+-------------------------------------------------------------------
 Wed Sep  6 18:31:20 CEST 2006 - dmacvicar@suse.de
 
 - better error propagation

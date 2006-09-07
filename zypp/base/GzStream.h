@@ -83,7 +83,8 @@ namespace zypp
     public:
 
       fgzstreambuf( unsigned bufferSize_r = 512 )
-      : _file( NULL )
+      : _fd( -1 )
+      ,_file( NULL )
       , _mode( std::ios_base::openmode(0) )
       , _buffer( (bufferSize_r?bufferSize_r:1), 0 )
       {}
@@ -109,6 +110,10 @@ namespace zypp
 
         fgzstreambuf *
         close();
+
+	//! Tell the file position in the compressed file.
+	//! Analogous to tell(2), complementary to gztell.
+	pos_type compressed_tell() const;
 
         /**
          * The last error returned fron zlib.
@@ -139,6 +144,9 @@ namespace zypp
     private:
 
       typedef std::vector<char> buffer_type;
+
+      //! file descriptor of the compressed file
+      int		       _fd;
 
       gzFile                   _file;
 
@@ -231,6 +239,11 @@ namespace zypp
         zError() const
         { return _streambuf.zError(); }
 
+	//! Similar to ios::rdbuf.
+	//! But it returns our specific type, not the generic streambuf *.
+	const streambuf_type&
+        getbuf() const
+        { return _streambuf; }
 
       private:
 

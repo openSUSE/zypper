@@ -21,6 +21,10 @@
 
 #include "zypp/base/GzStream.h"
 
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
@@ -66,10 +70,17 @@ namespace zypp
       fgzstreambuf * ret = NULL;
       if ( ! isOpen() )
         {
+	  // we expect gzdopen to handle errors of ::open
           if ( mode_r == std::ios_base::in )
-            _file = gzopen( name_r, "rb" );
+	  {
+            _fd = ::open( name_r, O_RDONLY );
+            _file = gzdopen( _fd, "rb" );
+	  }
           else if ( mode_r == std::ios_base::out )
-            _file = gzopen( name_r, "wb" );
+	  {
+            _fd = ::open( name_r, O_WRONLY );
+            _file = gzdopen( _fd, "wb" );
+	  }
           // else: not supported
 
           if ( isOpen() )
@@ -108,6 +119,7 @@ namespace zypp
           bool failed = false;
           if ( sync() != 0 )
             failed = true;
+	  // it also closes _fd, fine
           if ( gzclose( _file ) != Z_OK )
             {
               failed = true;
@@ -115,6 +127,7 @@ namespace zypp
             }
 
           // Reset everything
+	  _fd = -1;
           _file = NULL;
           _mode = std::ios_base::openmode(0);
           setp( NULL, NULL );
@@ -324,6 +337,14 @@ namespace zypp
             }
         }
       return ret;
+    }
+
+    fgzstreambuf::pos_type
+    fgzstreambuf::compressed_tell() const
+    {
+	off_t pos = lseek (_fd, 0, SEEK_CUR);
+	// hopefully the conversion is ok
+	return pos;
     }
 
     /////////////////////////////////////////////////////////////////
