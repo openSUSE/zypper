@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Sep  7 16:19:36 CEST 2006 - dmacvicar@suse.de
+
+- add Source_Ref::checksum() which in combination with
+  timestamp can give an idea of a source change.
+- r4106
+
+-------------------------------------------------------------------
 Thu Sep  7 14:32:38 CEST 2006 - mvidner@suse.cz
 
 - Implemented fgzstreambuf::compressed_tell and fXstream::getbuf to
