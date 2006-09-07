@@ -637,7 +637,8 @@ ResolverContext::isPresent (PoolItem_Ref item, bool *unneeded)
 
     bool res = ((status.staysInstalled() && !status.isIncomplete())
 		|| (status.isToBeInstalled() && !status.isNeeded())
-		|| ((status.isUnneeded() || status.isSatisfied())
+		|| status.isUnneeded()
+		|| (status.isSatisfied()
 		    // regarding only resolvables where the status is useful Bug:192535
 		    && item->kind() != ResTraits<Package>::kind
 		    && item->kind() != ResTraits<Script>::kind

@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Sep  7 18:31:46 CEST 2006 - schubi@suse.de
+
+- Do not regarding SATISFIED (regarding UNNEEDED) in isPresent if it is
+  a package/script/message
+  Bug: 192535 
+
+-------------------------------------------------------------------
 Thu Sep  7 16:19:36 CEST 2006 - dmacvicar@suse.de
 
 - add Source_Ref::checksum() which in combination with

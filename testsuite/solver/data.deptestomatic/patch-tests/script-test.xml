@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!--
+   load patch data from you.suse.de and install script(is satisfied)
+   but not message ( is unneeded )
+-->
+<test>
+<setup>
+  <system file="glibc-i586-package.xml"/>
+  <channel file="patch-fetchmsttfonts.sh-1829.xml" name="script"/>
+  <channel file="patch-message.xml" name="message"/>
+</setup>
+<trial>
+  <establish/>
+  <showpool all="true" prefix=">!> ESTABLISHED:"/>
+  <install channel="script" kind="patch" name="fetchmsttfonts.sh"/>
+</trial>
+</test>

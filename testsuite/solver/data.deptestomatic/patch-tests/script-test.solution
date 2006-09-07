@@ -1,0 +1,20 @@
+>!> Establishing state ...
+>!> Established context
+>!> atom:A-2.0-1.i586[message] UU_s_
+>!> message:message for patch-A1-1829-1.noarch[message] UU_s_
+>!> patch:fetchmsttfonts.sh-1829-0.noarch[script] UI_s_
+>!> patch:patch-A1-2-0.noarch[message] UU_s_
+>!> script:fetchmsttfonts.sh-patch-fetchmsttfonts.sh-2-1829-1.noarch[script] US_s_
+>!> ESTABLISHED:1: U__s_[S3:0][package]A-2.0-1.i586
+>!> ESTABLISHED:2: UU_s_[S3:0][atom]A-2.0-1.i586
+>!> ESTABLISHED:3: I__s_[S1:0][package]glibc-0.0.8-100.i586
+>!> ESTABLISHED:4: UU_s_[S3:0][message]message for patch-A1-1829-1.noarch
+>!> ESTABLISHED:5: UI_s_[S2:0][patch]fetchmsttfonts.sh-1829-0.noarch
+>!> ESTABLISHED:6: UU_s_[S3:0][patch]patch-A1-2-0.noarch
+>!> ESTABLISHED:7: US_s_[S2:0][script]fetchmsttfonts.sh-patch-fetchmsttfonts.sh-2-1829-1.noarch
+>!> ESTABLISHED:8: I_Lu_[S0:0][system]system-.noarch
+>!> Installing fetchmsttfonts.sh from channel script
+>!> Solution #1:
+>!> install patch:fetchmsttfonts.sh-1829-0.noarch[script]
+>!> install script:fetchmsttfonts.sh-patch-fetchmsttfonts.sh-2-1829-1.noarch[script]
+>!> installs=2, upgrades=0, uninstalls=0
