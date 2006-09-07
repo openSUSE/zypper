@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!--
+   distupgrade rename single package with version capability
+-->
+<test>
+<setup>
+  <system file="version-rename-system.xml"/>
+  <channel name="upgrade" file="version-rename-package.xml"/>
+</setup>
+<trial>
+  <distupgrade/>
+</trial>
+</test>

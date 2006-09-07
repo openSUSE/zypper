@@ -1,0 +1,12 @@
+>!> Doing distribution upgrade ...
+>!> 1: I_Th_[S1:0][package]A-1.0-1.noarch
+>!> 2: U_Th_[S2:0][package]A_new-2.0-1.noarch
+>!> 3: I_Th_[S1:0][package]B-1.0-1.noarch
+>!> 4: U_Th_[S2:0][package]B_new-2.0-1.noarch
+>!> 5: U__s_[S2:0][package]C_new-2.0-1.noarch
+>!> Solution #1:
+>!> install A_new-2.0-1.noarch[upgrade]
+>!> install B_new-2.0-1.noarch[upgrade]
+>!> remove  A-1.0-1.noarch
+>!> remove  B-1.0-1.noarch
+>!> installs=2, upgrades=0, uninstalls=2
