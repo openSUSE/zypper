@@ -1,20 +1,9 @@
 ## Process this file with automake to produce Makefile.in
 ## ##################################################
 
-noinst_PROGRAMS = zmart
+noinst_PROGRAMS = zmart zypp-checkpatches
 
 ## ##################################################
-
-zmartincludedir = $(pkgincludedir)/source
-
-zmartinclude_HEADERS =	\
-	AliveCursor.h \
-	zmart-keyring-callbacks.h  \
-	zmart-rpm-callbacks.h  \
-	zmart-source-callbacks.h \
-	zmart-sources.h \
-	zmart-misc.h \
-  zmart.h
 
 INCLUDES = -I$(top_srcdir)/tools/zmart -I$(oldincludedir)/libxml2
 AM_LDFLAGS =
@@ -26,7 +15,18 @@ LDADD =		-L$(top_srcdir)/zypp/.libs -lzypp -lboost_regex -lboost_program_options
 
 ## ##################################################
 
-zmart_SOURCES = 	zmart.cc zmart-sources.cc zmart-misc.cc
+zmart_SOURCES = 	zmart.cc zmart-sources.cc zmart-misc.cc \
+	AliveCursor.h \
+	zmart-keyring-callbacks.h  \
+	zmart-rpm-callbacks.h  \
+	zmart-media-callbacks.h  \
+	zmart-source-callbacks.h \
+	zmart-sources.h \
+	zmart-misc.h \
+  zmart.h
+
+zypp_checkpatches_SOURCES = 	zypp-checkpatches.cc zmart-sources.cc \
+	checkpatches-keyring-callbacks.h
 #zmart_LDFLAGS =	-static
 
 .PHONY:        always

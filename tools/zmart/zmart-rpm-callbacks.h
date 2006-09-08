@@ -6,12 +6,9 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file zmd/backend/RpmCallbacks.cc
- *
-*/
 
-#ifndef ZMD_BACKEND_RPMCALLBACKS_H
-#define ZMD_BACKEND_RPMCALLBACKS_H
+#ifndef ZMART_RPM_CALLBACKS_H
+#define ZMART_RPM_CALLBACKS_H
 
 #include <iostream>
 #include <string>
@@ -19,7 +16,7 @@
 #include <zypp/base/Logger.h>
 #include <zypp/ZYppCallbacks.h>
 #include <zypp/Package.h>
-#include <zypp/target/rpm/RpmCallbacks.h>
+//#include <zypp/target/rpm/RpmCallbacks.h>
 
 #include "AliveCursor.h"
 
@@ -29,14 +26,14 @@ using namespace std;
 namespace ZmartRecipients
 {
 
-// // resolvable Message
-//   struct MessageResolvableReportReceiver : public zypp::callback::ReceiveReport<zypp::target::MessageResolvableReport>
-// {
-//   virtual void show( Message::constPtr message )
-//   {
-//   
-//   }
-// };
+// resolvable Message
+struct MessageResolvableReportReceiver : public zypp::callback::ReceiveReport<zypp::target::MessageResolvableReport>
+{
+  virtual void show( zypp::Message::constPtr message )
+  {
+   
+  }
+};
 
 ///////////////////////////////////////////////////////////////////
 // 
@@ -99,6 +96,55 @@ struct ScanRpmDbReceive : public zypp::callback::ReceiveReport<zypp::target::rpm
   }
 };
 
+ // progress for removing a resolvable
+struct RemoveResolvableReportReceiver : public zypp::callback::ReceiveReport<zypp::target::rpm::RemoveResolvableReport>
+{
+  virtual void start( zypp::Resolvable::constPtr resolvable )
+  {}
+
+  virtual bool progress(int value, zypp::Resolvable::constPtr resolvable)
+  { return true; }
+
+  virtual Action problem( zypp::Resolvable::constPtr resolvable, Error error, std::string description )
+  { return ABORT; }
+
+  virtual void finish( zypp::Resolvable::constPtr resolvable, Error error, std::string reason )
+  {}
+};
+
+// progress for installing a resolvable
+struct InstallResolvableReportReceiver : public zypp::callback::ReceiveReport<zypp::target::rpm::InstallResolvableReport>
+{
+  AliveCursor _cursor;
+  zypp::Resolvable::constPtr _resolvable;
+  
+  void display_step( zypp::Resolvable::constPtr resolvable, int value )
+  {
+    cout << "\x1B 2K\r" << _cursor << " Installing " <<  resolvable << " [" << value << " %]  ";
+    ++_cursor;
+  }
+  
+  virtual void start( zypp::Resolvable::constPtr resolvable )
+  {
+    _resolvable = resolvable;
+  }
+
+  virtual bool progress(int value, zypp::Resolvable::constPtr resolvable)
+  {
+    display_step( resolvable, value );
+  }
+
+  virtual Action problem( zypp::Resolvable::constPtr resolvable, Error error, std::string description, RpmLevel level )
+  {
+    std::cout << resolvable << " " << description << std::endl;
+    return ABORT;
+  }
+
+  virtual void finish( zypp::Resolvable::constPtr resolvable, Error error, std::string reason, RpmLevel level )
+  {}
+};
+
+
 ///////////////////////////////////////////////////////////////////
 }; // namespace ZyppRecipients
 ///////////////////////////////////////////////////////////////////
@@ -106,9 +152,10 @@ struct ScanRpmDbReceive : public zypp::callback::ReceiveReport<zypp::target::rpm
 class RpmCallbacks {
 
   private:
-    //ZyppRecipients::InstallPkgReceive _installReceiver;
-    //ZyppRecipients::RemovePkgReceive _removeReceiver;
+    ZmartRecipients::MessageResolvableReportReceiver _messageReceiver;
     ZmartRecipients::ScanRpmDbReceive _readReceiver;
+    ZmartRecipients::RemoveResolvableReportReceiver _installReceiver;
+    ZmartRecipients::InstallResolvableReportReceiver _removeReceiver;
     int _step_counter;
 
   public:
@@ -117,18 +164,19 @@ class RpmCallbacks {
 	//, _removeReceiver( _step_counter )
 	, _step_counter( 0 )
     {
-      //_installReceiver.connect();
-      //_removeReceiver.connect();
+      _messageReceiver.connect();
+      _installReceiver.connect();
+      _removeReceiver.connect();
       _readReceiver.connect();
     }
 
     ~RpmCallbacks()
     {
-      //_installReceiver.disconnect();
-      //_removeReceiver.disconnect();
+      _messageReceiver.disconnect();
+      _installReceiver.disconnect();
+      _removeReceiver.disconnect();
       _readReceiver.connect();
     }
-
 };
 
 #endif // ZMD_BACKEND_RPMCALLBACKS_H

@@ -13,6 +13,7 @@
 #include <string>
 #include "zypp/Url.h"
 
+bool readBoolAnswer();
 void mark_package_for_install( const std::string &name );
 void show_summary();
 std::string calculate_token();

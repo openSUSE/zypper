@@ -15,6 +15,23 @@ extern ZYpp::Ptr God;
 extern RuntimeData gData;
 extern Settings gSettings;
 
+// read callback answer
+//   can either be '0\n' -> false
+//   or '1\n' -> true
+// reads characters from stdin until newline. Defaults to 'false'
+bool readBoolAnswer()
+{
+  char c = 0;
+  int  count = 0;
+  while ( (c != 'y') && (c != 'Y') && (c != 'N') && (c != 'n') )
+    cin >> c ;
+      
+  if ( ( c == 'y' ) || ( c == 'Y' ) ) 
+    return true;
+  else
+    return false;
+}
+
 void mark_package_for_install( const std::string &name )
 {
   CapSet capset;

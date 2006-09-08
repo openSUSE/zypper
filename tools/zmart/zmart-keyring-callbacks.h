@@ -19,28 +19,11 @@
 #include <zypp/KeyRing.h>
 #include <zypp/Digest.h>
 
+#include "zmart-misc.h"
+
 ///////////////////////////////////////////////////////////////////
 namespace zypp {
-///////////////////////////////////////////////////////////////////
-
-
-    // read callback answer
-    //   can either be '0\n' -> false
-    //   or '1\n' -> true
-    // reads characters from stdin until newline. Defaults to 'false'
-    static bool
-    readBoolAnswer()
-    {
-      char c = 0;
-      int  count = 0;
-      while ( (c != 'y') && (c != 'Y') && (c != 'N') && (c != 'n') )
-        cin >> c ;
-      
-      if ( ( c == 'y' ) || ( c == 'Y' ) ) 
-        return true;
-      else
-        return false;
-    }
+/////////////////////////////////////////////////////////////////
 
     ///////////////////////////////////////////////////////////////////
     // KeyRingReceive

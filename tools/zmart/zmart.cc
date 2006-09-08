@@ -13,6 +13,7 @@
 #include "zmart-rpm-callbacks.h"
 #include "zmart-keyring-callbacks.h"
 #include "zmart-source-callbacks.h"
+#include "zmart-media-callbacks.h"
 
 using namespace zypp::detail;
 
@@ -28,6 +29,7 @@ Settings gSettings;
 
 RpmCallbacks rpm_callbacks;
 SourceCallbacks source_callbacks;
+MediaCallbacks media_callbacks;
 
 int main(int argc, char **argv)
 {
@@ -241,13 +243,16 @@ int main(int argc, char **argv)
     resolve();
     
     show_summary();
+      
+    std::cout << "Continue? [y/n] ";
+    if (readBoolAnswer())
+    {
+      ZYppCommitResult result = God->commit( ZYppCommitPolicy() );
+      std::cout << result << std::endl; 
+    }
+}
   
-    if ( gData.security_patches_count > 0 )
-      return 2;
   
-    if ( gData.patches_count > 0 )
-      return 1;
-  }
   
   return 0;
 }
