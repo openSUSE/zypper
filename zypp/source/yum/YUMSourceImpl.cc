@@ -240,7 +240,7 @@ namespace zypp
         // check signature
         MIL << "Checking [" << (local_dir + "/repodata/repomd.xml") << "] signature"  << endl;
         if (! getZYpp()->keyRing()->verifyFileSignatureWorkflow(local_dir + "/repodata/repomd.xml", (_path + "/repodata/repomd.xml").asString()+ " (" + url().asString() + ")", local_dir + "/repodata/repomd.xml.asc"))
-          ZYPP_THROW(Exception(N_("Signed repomd.xml file fails signature check")));
+          ZYPP_THROW(SourceMetadataException(N_("Signed repomd.xml file fails signature check")));
 
         // ok, now we have a consistent repo in the tmpdir.
         return tmpdir;
@@ -559,6 +559,7 @@ namespace zypp
             ifgzstream st ( filename.asString().c_str() );
             
             YUMPrimaryParser prim(st, "", progress);
+            //YUMPrimaryParser prim(filename.asString(), "", progress);
             for (; !prim.atEnd(); ++prim)
             {
               if (*prim == NULL) continue;      // incompatible arch detected during parsing

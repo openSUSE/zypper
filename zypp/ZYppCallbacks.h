@@ -57,7 +57,7 @@ namespace zypp
       virtual bool progressDeltaDownload( int value )
       { return true; }
 
-      virtual void problemDeltaDownload( std::string description )
+      virtual void problemDeltaDownload( const std::string &description )
       {}
 
       virtual void finishDeltaDownload()
@@ -73,7 +73,7 @@ namespace zypp
       virtual void progressDeltaApply( int value )
       {}
 
-      virtual void problemDeltaApply( std::string description )
+      virtual void problemDeltaApply( const std::string &description )
       {}
 
       virtual void finishDeltaApply()
@@ -89,7 +89,7 @@ namespace zypp
       virtual bool progressPatchDownload( int value )
       { return true; }
 
-      virtual void problemPatchDownload( std::string description )
+      virtual void problemPatchDownload( const std::string &description )
       {}
 
       virtual void finishPatchDownload()
@@ -103,12 +103,12 @@ namespace zypp
       virtual Action problem(
         Resolvable::constPtr resolvable_ptr
           , Error error
-          , std::string description
+          , const std::string &description
       ) { return ABORT; }
 
       virtual void finish(Resolvable::constPtr resolvable_ptr
         , Error error
-        , std::string reason
+        , const std::string &reason
       ) {}
     };
 
@@ -131,12 +131,12 @@ namespace zypp
       virtual void start(const Url &url) {}
       virtual void failedProbe( const Url &url, const std::string &type ) {}
       virtual void successProbe( const Url &url, const std::string &type ) {}
-      virtual void finish(const Url &url, Error error, std::string reason ) {}
+      virtual void finish(const Url &url, Error error, const std::string &reason ) {}
 
       virtual bool progress(const Url &url, int value)
       { return true; }
 
-      virtual Action problem( const Url &url, Error error, std::string description ) { return ABORT; }
+      virtual Action problem( const Url &url, Error error, const std::string &description ) { return ABORT; }
     };
     
     struct SourceCreateReport : public callback::ReportBase
@@ -163,14 +163,14 @@ namespace zypp
       virtual Action problem(
           const zypp::Url &url
           , Error error
-          , std::string description )
+          , const std::string &description )
       { return ABORT; }
 
       virtual void finish(
           const zypp::Url &url
-          , Error error
-          , std::string reason )
-      {}
+          , Error error            
+          , const std::string &reason )
+      {}                 
     };
     
     struct SourceReport : public callback::ReportBase
@@ -195,14 +195,14 @@ namespace zypp
       virtual Action problem(
           Source_Ref source
           , Error error
-          , std::string description )
+          , const std::string &description )
       { return ABORT; }
 
       virtual void finish(
           Source_Ref source
-          , const std::string task
+          , const std::string &task
           , Error error
-          , std::string reason )
+          , const std::string &reason )
       {}
     };
     
@@ -238,7 +238,7 @@ namespace zypp
         const Source_Ref source
         , unsigned mediumNr
         , Error error
-        , std::string description
+        , const std::string &description
       ) { return ABORT; }
     };
 
@@ -265,13 +265,13 @@ namespace zypp
         virtual Action problem(
           const Url &file
   	  , Error error
-  	  , std::string description
+  	  , const std::string &description
         ) { return ABORT; }
 
         virtual void finish(
           const Url &file
           , Error error
-	  , std::string reason
+	  , const std::string &reason
         ) {}
     };
 
@@ -328,14 +328,14 @@ namespace zypp
         virtual Action problem(
           Resolvable::constPtr resolvable
   	  , Error error
-  	  , std::string description
+   	  , const std::string &description
 	  , RpmLevel level
         ) { return ABORT; }
 
         virtual void finish(
           Resolvable::constPtr resolvable
           , Error error
-	  , std::string reason
+	  , const std::string &reason
 	  , RpmLevel level
         ) {}
       };
@@ -366,13 +366,13 @@ namespace zypp
         virtual Action problem(
           Resolvable::constPtr resolvable
   	  , Error error
-  	  , std::string description
+  	  , const std::string &description
         ) { return ABORT; }
 
         virtual void finish(
           Resolvable::constPtr resolvable
           , Error error
-	  , std::string reason
+	  , const std::string &reason
         ) {}
       };
 
@@ -398,13 +398,13 @@ namespace zypp
         virtual Action problem(
 	  Pathname path
   	 , Error error
-  	 , std::string description
+  	 , const std::string &description
         ) { return ABORT; }
 
         virtual void finish(
 	  Pathname path
           , Error error
-	  , std::string reason
+	  , const std::string &reason
         ) {}
       };
 
@@ -432,14 +432,14 @@ namespace zypp
         virtual Action problem(
 	  Pathname path
   	  , Error error
-  	 , std::string description
+  	 , const std::string &description
         ) { return ABORT; }
 
         virtual void finish(
 	  Pathname path
           , Error error
-	  , std::string reason
-        ) {}
+          , const std::string &reason
+        ) {}           
       };
 
        // progress for scanning the database
@@ -464,12 +464,12 @@ namespace zypp
 
         virtual Action problem(
   	  Error error
-  	 , std::string description
+  	 , const std::string &description
         ) { return ABORT; }
 
         virtual void finish(
           Error error
-	  , std::string reason
+	  , const std::string &reason
         ) {}
       };
 

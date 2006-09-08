@@ -10,6 +10,14 @@
  *
 */
 
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+
 #include <zypp/parser/XMLNodeIterator.h>
 #include <zypp/base/Logger.h>
 #include <libxml2/libxml/xmlreader.h>
@@ -118,6 +126,32 @@ namespace zypp {
       return out;
     }
 
+    XMLNodeIteratorBase::XMLNodeIteratorBase( const Pathname xml_file_path,
+                                             const std::string &baseUrl,
+                                             const char *validationPath, parser::ParserProgress::Ptr progress)
+      : _error(0), _file(0), _baseUrl(baseUrl), _progress(progress), _stream_size(0), _bytes_consumed(0)
+    {
+     
+      int fd = open( xml_file_path.asString().c_str(), O_RDONLY );
+      if ( fd < 0 )
+        ZYPP_THROW(Exception("Cant't open " + xml_file_path.asString()));
+      
+      _reader = xmlReaderForFd( fd, baseUrl.c_str(), "utf-8", XML_PARSE_PEDANTIC)
+          ;
+      xmlTextReaderSetErrorHandler(_reader, (xmlTextReaderErrorFunc) errorHandler, this);
+      if (_reader )
+      {
+        if ( validationPath )
+        {
+          if (xmlTextReaderRelaxNGValidate(_reader,validationPath)==-1)
+            WAR << "Could not enable validation of document using " << validationPath << std::endl;
+        }
+        // otherwise validation is disabled.
+      }
+        /* Derived classes must call fetchNext() in their constructors themselves,
+      XMLNodeIterator has no access to their virtual functions during
+      construction */
+    }
 
     XMLNodeIteratorBase::XMLNodeIteratorBase(std::istream &input,
                                              const std::string &baseUrl,

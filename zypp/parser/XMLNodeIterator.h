@@ -18,6 +18,7 @@
 #include <ostream>
 #include <sstream>
 #include "zypp/parser/xml_parser_assert.h"
+#include "zypp/Pathname.h"
 #include "zypp/parser/ParserProgress.h"
 #include <iterator>
 
@@ -143,6 +144,17 @@ namespace zypp {
                           const std::string &baseUrl,
                           const char *validationPath, parser::ParserProgress::Ptr progress );
 
+      /**
+       * Constructor. Derived classes must call fetchNext() here.
+       * @param xml_file_path is the xml file
+       * @param baseUrl is the base URL of the xml document
+       * FIXME: use XMLParserError::operator<< instead of doing it on my own.
+       */
+      
+      XMLNodeIteratorBase( const Pathname xml_file_path,
+          const std::string &baseUrl,
+          const char *validationPath, parser::ParserProgress::Ptr progress);
+      
       /**
        * Constructor for an empty iterator.
        * An empty iterator is already at its end.
@@ -278,6 +290,13 @@ namespace zypp {
        * Can be 0 if at end or if the current element is the only element left.
        **/
       std::istream* _input;
+      
+      /**
+       * contains the file to read the xml file from.
+       * Can be 0 if at end or if the current element is the only element left.
+       **/
+      FILE* _file;
+      
 
       /**
        * contains the xmlTextReader used to parse the xml file.
@@ -329,7 +348,18 @@ namespace zypp {
            construction */
       }
 
-
+      /**
+       * Constructor. Derived classes must call fetchNext() here.
+       * @param xml_file_path is  the xml file
+       * @param baseUrl is the base URL of the xml document
+       * FIXME: use XMLParserError::operator<< instead of doing it on my own.
+       */
+      XMLNodeIterator( const Pathname xml_file_path, const std::string &baseUrl
+                      , const char *validationPath, parser::ParserProgress::Ptr progress)
+          : XMLNodeIteratorBase( xml_file_path, baseUrl, validationPath, progress), _current(0)
+      {
+      }
+      
       /**
        * Constructor for a trivial iterator.
        * A trivial iterator contains only one element.

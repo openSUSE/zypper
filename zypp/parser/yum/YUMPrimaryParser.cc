@@ -38,6 +38,13 @@ namespace zypp {
         fetchNext();
       }
       
+      YUMPrimaryParser::YUMPrimaryParser(const Pathname &filename, const std::string &baseUrl, parser::ParserProgress::Ptr progress )
+        : XMLNodeIterator<YUMPrimaryData_Ptr>(filename, baseUrl,PRIMARYSCHEMA, progress)
+          , _zypp_architecture( getZYpp()->architecture() )
+      {
+        fetchNext();
+      }    
+          
       YUMPrimaryParser::YUMPrimaryParser()
 	: _zypp_architecture( getZYpp()->architecture() )
       { }

@@ -32,7 +32,7 @@ namespace ZmartRecipients
 
   struct MediaChangeReportReceiver : public zypp::callback::ReceiveReport<MediaChangeReport>
   {
-    virtual MediaChangeReport::Action requestMedia( const zypp::Source_Ref source, unsigned mediumNr, MediaChangeReport::Error error, std::string description )
+    virtual MediaChangeReport::Action requestMedia( const zypp::Source_Ref source, unsigned mediumNr, MediaChangeReport::Error error, const std::string &description )
     { return MediaChangeReport::ABORT; }
   };
 
@@ -45,10 +45,10 @@ namespace ZmartRecipients
     virtual bool progress(int value, const zypp::Url &file)
     { return true; }
 
-    virtual DownloadProgressReport::Action problem( const zypp::Url &file, DownloadProgressReport::Error error, std::string description )
+    virtual DownloadProgressReport::Action problem( const zypp::Url &file, DownloadProgressReport::Error error, const std::string &description )
     { return DownloadProgressReport::ABORT; }
 
-    virtual void finish( const zypp::Url &file, Error error, std::string reason )
+    virtual void finish( const zypp::Url &file, Error error, const std::string &konreason )
     {}
   };
   

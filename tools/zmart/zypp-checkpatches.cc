@@ -3,6 +3,8 @@
 #include <sstream>
 #include <streambuf>
 
+#include <boost/program_options.hpp>
+
 #include <zypp/base/LogControl.h>
 #include <zypp/base/Logger.h>
 #include <zypp/base/String.h>
@@ -28,7 +30,9 @@ using namespace zypp::detail;
 
 using namespace std;
 using namespace zypp;
+using namespace boost;
 
+namespace po = boost::program_options;
 #define ZYPP_CHECKPATCHES_LOG "/var/log/zypp-checkpatches.log"
 
 ZYpp::Ptr God;
@@ -36,6 +40,36 @@ RuntimeData gData;
 Settings gSettings;
 
 //using namespace DbXml;
+
+void render_xml( const zypp::ResPool &pool )
+{
+  int count = 0;
+  int security_count = 0;
+  
+  cout << "<?xml>" << std::endl;
+  cout << "<update-status>" << std::endl;
+  cout << " <update-list>" << std::endl;
+  for ( ResPool::byKind_iterator it = pool.byKindBegin<Patch>(); it != pool.byKindEnd<Patch>(); ++it )
+  {
+    Resolvable::constPtr res = it->resolvable();
+    Patch::constPtr patch = asKind<Patch>(res);
+    MIL << patch->name() << " " << patch->edition() << " " << "[" << patch->category() << "]" << ( it->status().isNeeded() ? " [needed]" : " [unneeded]" )<< std::endl;
+    if ( it->status().isNeeded() )
+    {
+      cout << " <update category=\"" << patch ->category() << "\">" << std::endl;
+      cout << "  <name>" << patch->name() << "</name>" <<endl;
+      cout << "  <edition>" << patch->edition() << "</edition>" <<endl;
+      
+      
+      count++;
+      if (patch->category() == "security")
+        security_count++;
+    }
+  }
+  cout << " </update-list>" << std::endl;
+  cout << " <update-summary total=\"" << count << "\" security=\"" << security_count << "\"/>" << std::endl;
+  cout << "</update-status>" << std::endl;
+}
 
 int main(int argc, char **argv)
 {
@@ -45,20 +79,61 @@ int main(int argc, char **argv)
   else
     zypp::base::LogControl::instance().logfile( ZYPP_CHECKPATCHES_LOG );
   
-  std::string previous_token;
-  int previous_code = -1;
+  po::positional_options_description pos_options;
+  pos_options.add("command", -1);
   
-  if (argc != 3)
-  {
-    cerr << "usage: " << argv[0] << " [<previous token>] [previous result]" << endl;
-    exit(-1);
+  po::options_description general_options("General options");
+  general_options.add_options()
+      ("help,h", "produce a help message")
+      ("version,v", "output the version number")
+      ;
+
+  po::options_description check_options("Check options");
+  check_options.add_options()
+      ("previous-token,t", po::value< string >(), "The token got from last run.")
+      ("previous-result,r", po::value< int >(), "Previous result. If repositories are the same as last run, this will be shown.")
+      ;
+  
+  //po::options_description source_options("Source options");
+  //source_options.add_options()
+  //    ("disable-system-sources,D", "Don't read the system sources.")
+  //    ("sources,S", po::value< vector<string> >(), "Read from additional sources")
+  //    ;
+  
+  // Declare an options description instance which will include
+  // all the options
+  po::options_description all_options("Allowed options");
+  all_options.add(general_options).add(check_options);
+
+  // Declare an options description instance which will be shown
+  // to the user
+  po::options_description visible_options("Allowed options");
+  visible_options.add(general_options).add(check_options);
+
+  po::variables_map vm;
+  //po::store(po::parse_command_line(argc, argv, visible_options), vm);
+  po::store(po::command_line_parser(argc, argv).options(visible_options).positional(pos_options).run(), vm);
+  po::notify(vm);
+ 
+  if (vm.count("help")) {
+    cout << visible_options << "\n";
+    return 1;
   }
   
-  MIL << argv[0] << " started with arguments " << argv[1] << " " << argv[2] << std::endl;
+  std::string previous_token;
+  if (vm.count("previous-token"))
+  {
+    previous_token = vm["previous-token"].as< string >();
+  }
   
-  previous_token = std::string(argv[1]);
-  previous_code = str::strtonum<int>(argv[2]);
+  int previous_code = -1;
+  if (vm.count("previous-result"))
+  {
+    previous_code = vm["previous-result"].as< int >();
+  }
   
+  MIL << argv[0] << " started with arguments " << previous_token << " " << previous_code << std::endl;
+   
   ZYpp::Ptr God = NULL;
   try
   {
@@ -132,22 +207,11 @@ int main(int argc, char **argv)
   int count = 0;
   int security_count = 0;
   MIL << "Pool contains " << God->pool().size() << " items. Checking whether available patches are needed." << std::endl;
-  for ( ResPool::byKind_iterator it = God->pool().byKindBegin<Patch>(); it != God->pool().byKindEnd<Patch>(); ++it )
-  {
-    Resolvable::constPtr res = it->resolvable();
-    Patch::constPtr patch = asKind<Patch>(res);
-    MIL << patch->name() << " " << patch->edition() << " " << "[" << patch->category() << "]" << ( it->status().isNeeded() ? " [needed]" : " [unneeded]" )<< std::endl;
-    if ( it->status().isNeeded() )
-    {
-      count++;
-      if (patch->category() == "security")
-        security_count++;
-      
-      cerr << patch->name() << " " << patch->edition() << " " << "[" << patch->category() << "]" << std::endl;
-    }
-  }
   
-  MIL << "Patches " << security_count << " " << count << std::endl;
+  
+  render_xml(God->pool());
+  
+  //MIL << "Patches " << security_count << " " << count << std::endl;
   
   if ( security_count > 0 )
     return 2;

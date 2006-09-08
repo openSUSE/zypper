@@ -49,6 +49,7 @@ namespace zypp {
       {
       public:
         YUMPrimaryParser(std::istream &is, const std::string &baseUrl, parser::ParserProgress::Ptr progress = parser::ParserProgress::Ptr() );
+        YUMPrimaryParser(const Pathname &filename, const std::string &baseUrl, parser::ParserProgress::Ptr progress = parser::ParserProgress::Ptr() );
         YUMPrimaryParser();
         YUMPrimaryParser(YUMPrimaryData_Ptr& entry);
         virtual ~YUMPrimaryParser();

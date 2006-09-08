@@ -132,6 +132,7 @@ struct InstallResolvableReportReceiver : public zypp::callback::ReceiveReport<zy
   virtual bool progress(int value, zypp::Resolvable::constPtr resolvable)
   {
     display_step( resolvable, value );
+    return true;
   }
 
   virtual Action problem( zypp::Resolvable::constPtr resolvable, Error error, std::string description, RpmLevel level )
