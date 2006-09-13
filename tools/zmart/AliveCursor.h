@@ -2,6 +2,9 @@
 #ifndef ALIVE_CURSOR_H
 #define ALIVE_CURSOR_H
 
+// VT 100
+#define CLEARLN "\x1B[2K\r"
+
 class AliveCursor
 {
   public:

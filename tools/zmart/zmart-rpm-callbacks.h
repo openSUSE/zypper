@@ -120,7 +120,7 @@ struct InstallResolvableReportReceiver : public zypp::callback::ReceiveReport<zy
   
   void display_step( zypp::Resolvable::constPtr resolvable, int value )
   {
-    cout << "\x1B 2K\r" << _cursor << " Installing " <<  resolvable << " [" << value << " %]  ";
+    cout << CLEARLN << _cursor << " Installing " <<  resolvable << " [" << value << " %]  " << flush;
     ++_cursor;
   }
   

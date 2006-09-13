@@ -85,7 +85,7 @@ struct DownloadResolvableReportReceiver : public zypp::callback::ReceiveReport<z
    
   void display_step( const std::string &what, int value )
   {
-    cout << "\x1B 2K\r" << _cursor << " " <<  what << " [" << value << " %]  ";
+    cout << CLEARLN << _cursor << " " <<  what << " [" << value << " %]  " << flush;
     ++_cursor;
   }
   
@@ -102,6 +102,7 @@ struct DownloadResolvableReportReceiver : public zypp::callback::ReceiveReport<z
   virtual bool progressDeltaDownload( int value )
   {
     display_step( "Downloading delta " + _delta.asString(), value );
+    return true;
   }
   
   virtual void problemDeltaDownload( const std::string &description )
@@ -192,7 +193,7 @@ struct SourceReportReceiver  : public zypp::callback::ReceiveReport<zypp::source
   
   void display_step( int value )
   {
-    cout << "\x1B 2K\r" << _cursor << " " <<  _task << " [" << value << " %]  ";
+    cout << CLEARLN << _cursor << " " <<  _task << " [" << value << " %]  " << flush;
     ++_cursor;
   }
   

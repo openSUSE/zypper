@@ -19,6 +19,7 @@
 #include <zypp/KeyRing.h>
 #include <zypp/Digest.h>
 
+#include "AliveCursor.h"
 #include "zmart-misc.h"
 
 ///////////////////////////////////////////////////////////////////
@@ -32,7 +33,7 @@ namespace zypp {
     {
       virtual bool askUserToAcceptUnsignedFile( const std::string &file )
       {
-        cout << "\x1B 2K\r" << file << " is unsigned, continue? [y/n]: ";
+        cout << CLEARLN << file << " is unsigned, continue? [y/n]: " << flush;
         return readBoolAnswer();
       }
       
@@ -41,18 +42,18 @@ namespace zypp {
         if ( geteuid() != 0 )
           return false;
         
-        cout << "\x1B 2K\r" << "Import key " << key.id() << " in trusted keyring? [y/n]: ";
+        cout << CLEARLN << "Import key " << key.id() << " in trusted keyring? [y/n]: " << flush;
         return readBoolAnswer();
       } 
       
       virtual bool askUserToAcceptUnknownKey( const std::string &file, const std::string &id )
       {
-        cout << "\x1B 2K\r" << file << " is signed with an unknown key id: " << id << ", continue? [y/n]: ";
+        cout << CLEARLN << file << " is signed with an unknown key id: " << id << ", continue? [y/n]: " << flush;
         return readBoolAnswer();
       }
       virtual bool askUserToTrustKey( const PublicKey &key )
       {
-        cout  << "\x1B 2K\r" << "Do you want to trust key id " << key.id() << " " << key.name() << " fingerprint:" << key.fingerprint() << " ? [y/n]: " ;
+        cout  << CLEARLN << "Do you want to trust key id " << key.id() << " " << key.name() << " fingerprint:" << key.fingerprint() << " ? [y/n]: "  << flush;
         return readBoolAnswer();
       }
       virtual bool askUserToAcceptVerificationFailed( const std::string &file,const PublicKey &key )
