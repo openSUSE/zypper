@@ -23,7 +23,7 @@ namespace zypp
     struct SilentMediaChange : public callback::ReceiveReport<MediaChangeReport>
     {
       virtual Action requestMedia(
-        const Source_Ref source
+        const Source_Ref /*source*/
 	, unsigned 
 	, Error 
 	, std::string

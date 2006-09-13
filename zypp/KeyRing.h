@@ -41,9 +41,9 @@ namespace zypp
   
   struct KeyRingSignals : public callback::ReportBase
   {
-    virtual void trustedKeyAdded( const KeyRing &keyring, const PublicKey &key )
+    virtual void trustedKeyAdded( const KeyRing &/*keyring*/, const PublicKey &/*key*/ )
     {}
-    virtual void trustedKeyRemoved( const KeyRing &keyring, const PublicKey &key )
+    virtual void trustedKeyRemoved( const KeyRing &/*keyring*/, const PublicKey &/*key*/ )
     {}
   };
 
@@ -138,7 +138,7 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
 
   /** \relates KeyRing Stream output */
-  inline std::ostream & operator<<( std::ostream & str, const KeyRing & obj )
+  inline std::ostream & operator<<( std::ostream & str, const KeyRing & /*obj*/ )
   {
     //return str << obj.asString();
     return str;

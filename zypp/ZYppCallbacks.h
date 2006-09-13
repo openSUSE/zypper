@@ -41,8 +41,8 @@ namespace zypp
       };
 
       virtual void start(
-        Resolvable::constPtr resolvable_ptr
-        , const Url &url
+        Resolvable::constPtr /*resolvable_ptr*/
+        , const Url &/*url*/
       ) {}
 
 
@@ -51,13 +51,13 @@ namespace zypp
       // - expected download size (0 if unknown)
       // - download is interruptable
       // - problems are just informal
-      virtual void startDeltaDownload( const Pathname & filename, const ByteCount & downloadsize )
+      virtual void startDeltaDownload( const Pathname & /*filename*/, const ByteCount & /*downloadsize*/ )
       {}
 
-      virtual bool progressDeltaDownload( int value )
+      virtual bool progressDeltaDownload( int /*value*/ )
       { return true; }
 
-      virtual void problemDeltaDownload( const std::string &description )
+      virtual void problemDeltaDownload( const std::string &/*description*/ )
       {}
 
       virtual void finishDeltaDownload()
@@ -67,13 +67,13 @@ namespace zypp
       // - local path of downloaded delta
       // - aplpy is not interruptable
       // - problems are just informal
-      virtual void startDeltaApply( const Pathname & filename )
+      virtual void startDeltaApply( const Pathname & /*filename*/ )
       {}
 
-      virtual void progressDeltaApply( int value )
+      virtual void progressDeltaApply( int /*value*/ )
       {}
 
-      virtual void problemDeltaApply( const std::string &description )
+      virtual void problemDeltaApply( const std::string &/*description*/ )
       {}
 
       virtual void finishDeltaApply()
@@ -83,13 +83,13 @@ namespace zypp
       // - path below url reported on start()
       // - expected download size (0 if unknown)
       // - download is interruptable
-      virtual void startPatchDownload( const Pathname & filename, const ByteCount & downloadsize )
+      virtual void startPatchDownload( const Pathname & /*filename*/, const ByteCount & /*downloadsize*/ )
       {}
 
-      virtual bool progressPatchDownload( int value )
+      virtual bool progressPatchDownload( int /*value*/ )
       { return true; }
 
-      virtual void problemPatchDownload( const std::string &description )
+      virtual void problemPatchDownload( const std::string &/*description*/ )
       {}
 
       virtual void finishPatchDownload()
@@ -97,18 +97,18 @@ namespace zypp
 
 
       // return false if the download should be aborted right now
-      virtual bool progress(int value, Resolvable::constPtr resolvable_ptr)
+      virtual bool progress(int /*value*/, Resolvable::constPtr /*resolvable_ptr*/) 
       { return true; }
 
       virtual Action problem(
-        Resolvable::constPtr resolvable_ptr
-          , Error error
-          , const std::string &description
+        Resolvable::constPtr /*resolvable_ptr*/
+	, Error /*error*/
+	, const std::string &/*description*/
       ) { return ABORT; }
 
-      virtual void finish(Resolvable::constPtr resolvable_ptr
-        , Error error
-        , const std::string &reason
+      virtual void finish(Resolvable::constPtr /*resolvable_ptr*/
+        , Error /*error*/
+        , const std::string &/*reason*/
       ) {}
     };
 
@@ -128,15 +128,15 @@ namespace zypp
         UNKNOWN    
       };
 
-      virtual void start(const Url &url) {}
-      virtual void failedProbe( const Url &url, const std::string &type ) {}
-      virtual void successProbe( const Url &url, const std::string &type ) {}
-      virtual void finish(const Url &url, Error error, const std::string &reason ) {}
+      virtual void start(const Url &/*url*/) {}
+      virtual void failedProbe( const Url &/*url*/, const std::string &/*type*/ ) {}
+      virtual void successProbe( const Url &/*url*/, const std::string &/*type*/ ) {}
+      virtual void finish(const Url &/*url*/, Error /*error*/, const std::string &/*reason*/ ) {}
 
-      virtual bool progress(const Url &url, int value)
+      virtual bool progress(const Url &/*url*/, int /*value*/)
       { return true; }
 
-      virtual Action problem( const Url &url, Error error, const std::string &description ) { return ABORT; }
+      virtual Action problem( const Url &/*url*/, Error /*error*/, const std::string &/*description*/ ) { return ABORT; }
     };
     
     struct SourceCreateReport : public callback::ReportBase
@@ -156,20 +156,20 @@ namespace zypp
         UNKNOWN
       };
       
-      virtual void start( const zypp::Url &url ) {}
-      virtual bool progress( int value )
+      virtual void start( const zypp::Url &/*url*/ ) {}
+      virtual bool progress( int /*value*/ )
       { return true; }
 
       virtual Action problem(
-          const zypp::Url &url
-          , Error error
-          , const std::string &description )
+          const zypp::Url &/*url*/
+          , Error /*error*/
+          , const std::string &/*description*/ )
       { return ABORT; }
 
       virtual void finish(
-          const zypp::Url &url
-          , Error error            
-          , const std::string &reason )
+          const zypp::Url &/*url*/
+          , Error /*error*/
+          , const std::string &/*reason*/ )
       {}                 
     };
     
@@ -188,21 +188,21 @@ namespace zypp
         INVALID		// th source is invalid
       };
       
-      virtual void start( Source_Ref source, const std::string &task ) {}
-      virtual bool progress( int value )
+      virtual void start( Source_Ref /*source*/, const std::string &/*task*/ ) {}
+      virtual bool progress( int /*value*/ )
       { return true; }
 
       virtual Action problem(
-          Source_Ref source
-          , Error error
-          , const std::string &description )
+          Source_Ref /*source*/
+          , Error /*error*/
+          , const std::string &/*description*/ )
       { return ABORT; }
 
       virtual void finish(
-          Source_Ref source
-          , const std::string &task
-          , Error error
-          , const std::string &reason )
+          Source_Ref /*source*/
+          , const std::string &/*task*/
+          , Error /*error*/
+          , const std::string &/*reason*/ )
       {}
     };
     
@@ -235,10 +235,10 @@ namespace zypp
       };
 
       virtual Action requestMedia(
-        const Source_Ref source
-        , unsigned mediumNr
-        , Error error
-        , const std::string &description
+        const Source_Ref /*source*/
+        , unsigned /*mediumNr*/
+        , Error /*error*/
+        , const std::string &/*description*/
       ) { return ABORT; }
     };
 
@@ -257,21 +257,21 @@ namespace zypp
           IO		// IO error
         };
 
-        virtual void start( const Url &file, Pathname localfile ) {}
+        virtual void start( const Url &/*file*/, Pathname /*localfile*/ ) {}
 
-        virtual bool progress(int value, const Url &file)
+        virtual bool progress(int /*value*/, const Url &/*file*/)
         { return true; }
 
         virtual Action problem(
-          const Url &file
-  	  , Error error
-  	  , const std::string &description
+          const Url &/*file*/
+  	  , Error /*error*/
+  	  , const std::string &/*description*/
         ) { return ABORT; }
 
         virtual void finish(
-          const Url &file
-          , Error error
-	  , const std::string &reason
+          const Url &/*file*/
+          , Error /*error*/
+	  , const std::string &/*reason*/
         ) {}
     };
 
@@ -287,7 +287,7 @@ namespace zypp
     struct MessageResolvableReport : public callback::ReportBase
     {
         virtual void show(
-	  Message::constPtr message
+	  Message::constPtr /*message*/
         ) {}
     };
 
@@ -319,24 +319,24 @@ namespace zypp
         };
 
         virtual void start(
-	  Resolvable::constPtr resolvable
+	  Resolvable::constPtr /*resolvable*/
         ) {}
 
-        virtual bool progress(int value, Resolvable::constPtr resolvable)
+        virtual bool progress(int /*value*/, Resolvable::constPtr /*resolvable*/)
         { return true; }
 
         virtual Action problem(
-          Resolvable::constPtr resolvable
-  	  , Error error
-   	  , const std::string &description
-	  , RpmLevel level
+          Resolvable::constPtr /*resolvable*/
+  	  , Error /*error*/
+   	  , const std::string &/*description*/
+	  , RpmLevel /*level*/
         ) { return ABORT; }
 
         virtual void finish(
-          Resolvable::constPtr resolvable
-          , Error error
-	  , const std::string &reason
-	  , RpmLevel level
+          Resolvable::constPtr /*resolvable*/
+          , Error /*error*/
+	  , const std::string &/*reason*/
+	  , RpmLevel /*level*/
         ) {}
       };
 
@@ -357,22 +357,22 @@ namespace zypp
         };
 
         virtual void start(
-	  Resolvable::constPtr resolvable
+	  Resolvable::constPtr /*resolvable*/
         ) {}
 
-        virtual bool progress(int value, Resolvable::constPtr resolvable)
+        virtual bool progress(int /*value*/, Resolvable::constPtr /*resolvable*/)
         { return true; }
 
         virtual Action problem(
-          Resolvable::constPtr resolvable
-  	  , Error error
-  	  , const std::string &description
+          Resolvable::constPtr /*resolvable*/
+  	  , Error /*error*/
+  	  , const std::string &/*description*/
         ) { return ABORT; }
 
         virtual void finish(
-          Resolvable::constPtr resolvable
-          , Error error
-	  , const std::string &reason
+          Resolvable::constPtr /*resolvable*/
+          , Error /*error*/
+	  , const std::string &/*reason*/
         ) {}
       };
 
@@ -390,21 +390,21 @@ namespace zypp
 	  FAILED		// failed to rebuild
         };
 
-        virtual void start(Pathname path) {}
+        virtual void start(Pathname /*path*/) {}
 
-        virtual bool progress(int value, Pathname path)
+        virtual bool progress(int /*value*/, Pathname /*path*/)
         { return true; }
 
         virtual Action problem(
-	  Pathname path
-  	 , Error error
-  	 , const std::string &description
+	  Pathname /*path*/
+  	 , Error /*error*/
+  	 , const std::string &/*description*/
         ) { return ABORT; }
 
         virtual void finish(
-	  Pathname path
-          , Error error
-	  , const std::string &reason
+	  Pathname /*path*/
+          , Error /*error*/
+	  , const std::string &/*reason*/
         ) {}
       };
 
@@ -423,22 +423,22 @@ namespace zypp
         };
 
         virtual void start(
-	  Pathname path
+	  Pathname /*path*/
         ) {}
 
-        virtual bool progress(int value, Pathname path)
+        virtual bool progress(int /*value*/, Pathname /*path*/)
         { return true; }
 
         virtual Action problem(
-	  Pathname path
-  	  , Error error
-  	 , const std::string &description
+	  Pathname /*path*/
+  	  , Error /*error*/
+  	 , const std::string &/*description*/
         ) { return ABORT; }
 
         virtual void finish(
-	  Pathname path
-          , Error error
-          , const std::string &reason
+	  Pathname /*path*/
+          , Error /*error*/
+          , const std::string &/*reason*/
         ) {}           
       };
 
@@ -459,17 +459,17 @@ namespace zypp
         virtual void start(
         ) {}
 
-        virtual bool progress(int value)
+        virtual bool progress(int /*value*/)
         { return true; }
 
         virtual Action problem(
-  	  Error error
-  	 , const std::string &description
+  	  Error /*error*/
+  	 , const std::string &/*description*/
         ) { return ABORT; }
 
         virtual void finish(
-          Error error
-	  , const std::string &reason
+          Error /*error*/
+	  , const std::string &/*reason*/
         ) {}
       };
 

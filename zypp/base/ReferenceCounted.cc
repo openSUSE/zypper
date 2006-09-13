@@ -26,7 +26,7 @@ namespace zypp
     : _counter( 0 )
     {}
 
-    ReferenceCounted::ReferenceCounted( const ReferenceCounted & rhs )
+    ReferenceCounted::ReferenceCounted( const ReferenceCounted & /*rhs*/ )
     : _counter( 0 )
     {}
 

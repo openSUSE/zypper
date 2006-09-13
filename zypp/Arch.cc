@@ -316,7 +316,7 @@ namespace zypp
       { "sparc64", "sparc64" },
       { "sun4u",   "sparc64" },
       { "sparcv9", "sparc64" },
-      { 0 }
+      { 0, 0 }
     };
 
     for (canonical *ptr = canonical_archs; ptr->from; ptr++) {

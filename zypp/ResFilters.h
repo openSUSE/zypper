@@ -341,7 +341,7 @@ namespace zypp
     */
     struct ByCapabilityIndex
     {
-      bool operator()( const CapAndItem & cai ) const
+      bool operator()( const CapAndItem & /*cai*/ ) const
       {
 	return true;			// its all in the PoolImpl !
       }
