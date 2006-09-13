@@ -291,10 +291,12 @@ namespace zypp {
           kindFlags   = RPMTAG_CONFLICTFLAGS;
           kindVersion = RPMTAG_CONFLICTVERSION;
           break;
+#ifdef HAVE_RPM_ENHANCES
         case RPMTAG_ENHANCESNAME:
           kindFlags   = RPMTAG_ENHANCESFLAGS;
           kindVersion = RPMTAG_ENHANCESVERSION;
           break;
+#endif
 #warning NEEDS RPMTAG_SUPPLEMENTSNAME
 #if 0
         case RPMTAG_SUPPLEMENTSNAME:
@@ -452,7 +454,11 @@ namespace zypp {
       //
       CapSet RpmHeader::tag_enhances( set<string> * freq_r ) const
       {
+#ifdef HAVE_RPM_ENHANCES
         return PkgRelList_val( RPMTAG_ENHANCESNAME, false, freq_r );
+#else
+	return CapSet();
+#endif
       }
 
       ///////////////////////////////////////////////////////////////////

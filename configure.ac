@@ -195,6 +195,17 @@ AM_GNU_GETTEXT
 
 dnl ==================================================
 dnl checks for typedefs
+
+AH_TEMPLATE([HAVE_RPM_ENHANCES], [the new enhances dependency])
+AC_MSG_CHECKING([for librpm features])
+hre=no
+AC_COMPILE_IFELSE(
+  [AC_LANG_PROGRAM([#include "librpm.h"],
+	 	  [int i = RPMTAG_ENHANCESNAME;])],
+  [AC_DEFINE([HAVE_RPM_ENHANCES]) hre=yes]
+)
+AC_MSG_RESULT([$hre])
+
 dnl ==================================================
 dnl checks for structures
 dnl ==================================================
