@@ -197,10 +197,10 @@ dnl ==================================================
 dnl checks for typedefs
 
 AH_TEMPLATE([HAVE_RPM_ENHANCES], [the new enhances dependency])
-AC_MSG_CHECKING([for librpm features])
+AC_MSG_CHECKING([for Enhances in librpm])
 hre=no
 AC_COMPILE_IFELSE(
-  [AC_LANG_PROGRAM([#include "librpm.h"],
+  [AC_LANG_PROGRAM([#include <rpm/rpmlib.h>],
 	 	  [int i = RPMTAG_ENHANCESNAME;])],
   [AC_DEFINE([HAVE_RPM_ENHANCES]) hre=yes]
 )

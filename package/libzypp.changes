@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Sep 14 10:21:02 CEST 2006 - mvidner@suse.cz
+
+- Use RPM Enhances only if detected at configure time, to allow
+  compilation with older rpm.
+- callback params: use const string & instead of string (dmacvicar)
+
+-------------------------------------------------------------------
 Thu Sep  7 18:31:46 CEST 2006 - schubi@suse.de
 
 - Do not regarding SATISFIED (regarding UNNEEDED) in isPresent if it is
