@@ -76,7 +76,6 @@ QueueItemRequire::dumpOn( std::ostream & os ) const
 	os << ", Lost " << _lost_item;
     }
     if (_remove_only) os << ", Remove Only";
-    if (_is_child) os << ", Child";
     return os << "]";
 }
 
@@ -87,7 +86,6 @@ QueueItemRequire::QueueItemRequire (const ResPool & pool, const Capability & cap
     , _capability (cap)
     , _soft (soft)
     , _remove_only (false)
-    , _is_child (false)
 {
     _XDEBUG("QueueItemRequire::QueueItemRequire(" << cap << (soft?", soft":"") << ")");
 }
@@ -417,7 +415,16 @@ QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_item
 {
     _XDEBUG("QueueItemRequire::process(" << *this << ")");
 
-    if (context->requirementIsMet (_capability, _is_child)) {
+    bool fulfilled = false;
+	    
+    if (_requiring_item)
+    {
+	fulfilled = context->requirementIsInstalledOrUnneeded (_requiring_item->kind(),_capability);
+    } else {
+	fulfilled = context->requirementIsMet (_capability);
+    }
+    
+    if (fulfilled) {
 	_XDEBUG("requirement is already met in current context");
 	return true;
     }
@@ -436,7 +443,7 @@ QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_item
  	}
     }
 
-    RequireProcess info (_requiring_item, _is_child ? _capability : Capability(), context,  pool());
+    RequireProcess info (_requiring_item,  Capability(), context,  pool());
 
     int num_providers = 0;
 

@@ -223,13 +223,23 @@ class ResolverContext : public base::ReferenceCounted, private base::NonCopyable
 
     /**
      *\return \c true if \c item is \a installed or \a to-be-installed */
-    bool isPresent (PoolItem_Ref item, bool *unneeded = NULL);
+    bool isPresent (PoolItem_Ref item, bool *unneeded = NULL,
+		    bool *installed = NULL);
 
     /**
      *\return \c true if \c item is \a uninstalled or \a to-be-uninstalled */
     bool isAbsent (PoolItem_Ref item);
 
-    bool requirementIsMet (const Capability & cap, bool is_child = false, bool *unneeded = NULL);
+    bool requirementIsMet (const Capability & cap, bool *unneeded = NULL,
+			   bool *installed = NULL);
+    /**
+     *\return \c true if the requirement is already fulfilled.
+     *either by an installed item or the requirement is unneeded.
+     *The behaviour depends on the item kind (package,patch,..)
+     *which requires this capability.
+     */
+    bool requirementIsInstalledOrUnneeded (const ResObject::Kind & kind,
+					   const Capability & capability);
     bool requirementIsPossible (const Capability & cap);
     bool itemIsPossible (const PoolItem_Ref item);
     bool isParallelInstall (const PoolItem_Ref item) const;

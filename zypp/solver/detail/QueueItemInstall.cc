@@ -444,14 +444,21 @@ QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 
 	    const Capability cap = *iter;
 	    _XDEBUG("this requires " << cap);
+	    bool fulfilled = false;
+	    
+	    if (_item)
+	    {
+		fulfilled = context->requirementIsInstalledOrUnneeded (_item->kind(), cap);
+	    } else {
+		fulfilled = context->requirementIsMet (cap);
+	    }
 
-	    if (!context->requirementIsMet (cap)) {
+	    if (!fulfilled) {
 		_XDEBUG("this requirement is still unfulfilled");
 		QueueItemRequire_Ptr req_item = new QueueItemRequire (pool(), cap );
 		req_item->addPoolItem (_item);
 		qil.push_front (req_item);
-	    }
-
+	    }		
 	}
 
 	caps = _item->dep (Dep::RECOMMENDS);

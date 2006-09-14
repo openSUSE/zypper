@@ -62,7 +62,6 @@ class QueueItemRequire : public QueueItem {
     PoolItem_Ref _lost_item;
 
     bool _remove_only;
-    bool _is_child;
 
   public:
 

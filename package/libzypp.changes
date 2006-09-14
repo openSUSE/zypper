@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Thu Sep 14 15:59:47 CEST 2006 - schubi@suse.de
+
+- Replaced requirementIsMet by requirementIsInstalledOrUnneeded 
+  in QueueItemInstall and QueueItemRequire
+  Bug 192535/204913
+  removed fix:Thu Sep  7 18:31:46 CEST 2006 - schubi@suse.de
+
+-------------------------------------------------------------------
 Thu Sep 14 12:44:53 CEST 2006 - lslezak@suse.cz
 
 - fixed SourceFactory::createFrom() - don't loose alias,

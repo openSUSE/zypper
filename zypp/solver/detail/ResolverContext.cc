@@ -627,25 +627,22 @@ ResolverContext::incomplete (PoolItem_Ref item, int other_penalty)
 
 //---------------------------------------------------------------------------
 
-// is it installed (after transaction) ?
+// is it installed (after transaction), is unneeded or satisfied
 // if yes, install/requires requests are considered done
 
 bool
-ResolverContext::isPresent (PoolItem_Ref item, bool *unneeded)
+ResolverContext::isPresent (PoolItem_Ref item, bool *unneeded, bool *installed)
 {
     ResStatus status = getStatus(item);
 
     bool res = ((status.staysInstalled() && !status.isIncomplete())
 		|| (status.isToBeInstalled() && !status.isNeeded())
 		|| status.isUnneeded()
-		|| (status.isSatisfied()
-		    // regarding only resolvables where the status is useful Bug:192535
-		    && item->kind() != ResTraits<Package>::kind
-		    && item->kind() != ResTraits<Script>::kind
-		    && item->kind() != ResTraits<Message>::kind)
+		|| status.isSatisfied()
 		);
 
    if (unneeded) *unneeded = status.isUnneeded();
+   if (installed) *installed = status.staysInstalled() || status.isToBeInstalled();
 
 _XDEBUG("ResolverContext::itemIsPresent(<" << status << ">" << item << ") " << (res?"Y":"N"));
 
@@ -1431,15 +1428,15 @@ ResolverContext::spewInfo (void) const
 struct RequirementMet
 {
     ResolverContext_Ptr context;
-    const Capability capability;
     bool flag;
     bool unneeded;
+    bool *installed;
 
-    RequirementMet (ResolverContext_Ptr ctx, const Capability & c)
+    RequirementMet (ResolverContext_Ptr ctx, bool *inst)
 	: context (ctx)
-	, capability (c)
 	, flag (false)
 	, unneeded( false )
+	, installed( inst )
     { }
 
 
@@ -1450,9 +1447,7 @@ struct RequirementMet
 	// capability is set for item set children. If it is set, query the
 	//   exact version only.
 	bool my_unneeded = false;
-	if ((capability == Capability::noCap
-	     || capability == match)
-	    && context->isPresent( provider, &my_unneeded ))
+	if (context->isPresent( provider, &my_unneeded, installed ))
 	{
 	    unneeded = my_unneeded;
 	    flag = true;
@@ -1460,16 +1455,20 @@ struct RequirementMet
 
 //	ERR << "RequirementMet(" <<  provider << ", " << match << ") [capability " <<
 //	  capability << "] -> " <<  (flag ? "true" : "false") << endl;
-
+	
+	if ( installed // Checking as long as we have found an installed item
+	     && !*installed )
+	    return true;
+	
 	return ! flag;
     }
 };
 
 
 bool
-ResolverContext::requirementIsMet (const Capability & capability, bool is_child, bool *unneeded)
+ResolverContext::requirementIsMet (const Capability & capability, bool *unneeded, bool *installed)
 {
-    RequirementMet info (this, is_child ? capability : Capability::noCap);
+    RequirementMet info (this, installed);
 
     //    world()->foreachProviding (capability, requirement_met_cb, (void *)&info);
 
@@ -1486,6 +1485,41 @@ _XDEBUG( "ResolverContext::requirementIsMet(" << capability << ") " << (info.fla
 
     return info.flag;
 }
+
+//---------------------------------------------------------------------------
+/**
+ *\return \c true if the requirement is already fulfilled.
+ *either by an installed item or the requirement is unneeded.
+ *The behaviour depends on the item kind (package,patch,..)
+ *which requires this capability.
+ */
+bool
+ResolverContext::requirementIsInstalledOrUnneeded (const ResObject::Kind & kind,
+						   const Capability & capability)
+{
+    bool fulfilled = false;
+           
+    if (kind != ResTraits<Package>::kind
+	|| kind != ResTraits<Script>::kind
+	|| kind != ResTraits<Message>::kind)
+    {
+       bool unneeded, installed;
+       fulfilled = requirementIsMet (capability, &unneeded, &installed);
+       if (!fulfilled
+           || (!unneeded
+               && !installed)) {
+           fulfilled = false;
+           _XDEBUG("Requirement is not unneeded and not installed.");
+           // "low" level resolvables will be installed if they are not unneeded
+           // Bug 192535/204913
+       }
+    }else {
+       fulfilled = requirementIsMet (capability);
+    }
+
+    return fulfilled;
+}
+
 
 
 //---------------------------------------------------------------------------

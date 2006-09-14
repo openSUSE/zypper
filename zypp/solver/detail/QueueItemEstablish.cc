@@ -199,7 +199,7 @@ QueueItemEstablish::process (ResolverContext_Ptr context, QueueItemList & qil)
 	for (iter = requires.begin(); iter != requires.end(); iter++) {
 	    missing = *iter;
 	    bool unneeded;
-	    if (!context->requirementIsMet (missing, false, &unneeded)) {
+	    if (!context->requirementIsMet (missing, &unneeded)) {
 		all_unneeded = false;
 		break;
 	    }

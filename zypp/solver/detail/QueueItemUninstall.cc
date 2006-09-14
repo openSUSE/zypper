@@ -190,7 +190,7 @@ struct UninstallProcess
 	if (! context->isPresent (requirer))				// its not installed -> dont care
 	    return true;
 
-	if (context->requirementIsMet( cai.cap, false ))		// its provided by another installed resolvable -> dont care
+	if (context->requirementIsMet( cai.cap ))		// its provided by another installed resolvable -> dont care
 	    return true;
 
 	if (context->getStatus(requirer).isSatisfied()) {		// it is just satisfied, check freshens and supplements

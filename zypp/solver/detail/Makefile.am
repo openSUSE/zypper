@@ -45,7 +45,8 @@ solverdetailinclude_HEADERS = \
 	ProblemSolutionUninstall.h	\
 	ProblemSolutionIgnore.h		\
 	ProblemSolutionUnlock.h		\
-	SolutionAction.h
+	SolutionAction.h		\
+	Testcase.h
 
 noinst_LTLIBRARIES =	lib@PACKAGE@_solver_detail.la
 
@@ -81,4 +82,5 @@ lib@PACKAGE@_solver_detail_la_SOURCES =			\
 	ProblemSolutionUninstall.cc			\
 	ProblemSolutionIgnore.cc			\
 	ProblemSolutionUnlock.cc			\
-	SolutionAction.cc
+	SolutionAction.cc				\
+	Testcase.cc
