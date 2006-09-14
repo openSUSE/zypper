@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Sep 14 12:44:53 CEST 2006 - lslezak@suse.cz
+
+- fixed SourceFactory::createFrom() - don't loose alias,
+  cachedir,... parameters
+
+-------------------------------------------------------------------
 Thu Sep 14 10:21:02 CEST 2006 - mvidner@suse.cz
 
 - Use RPM Enhances only if detected at configure time, to allow
