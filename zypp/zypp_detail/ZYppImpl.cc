@@ -198,7 +198,7 @@ namespace zypp
       MIL << "initTarget( " << root << endl;
       if (_target) {
 	if (_target->root() == root) {
-	    MIL << "Repeated call to initTarget()" << endl;
+	    MIL << "Repeated call to initializeTarget()" << endl;
 	    return;
 	}
 	removeInstalledResolvables( );
@@ -221,7 +221,6 @@ namespace zypp
       _target->enableStorage( root );
       if (!commit_only)
       {
-        _target->enableStorage( root );
         addResolvables( _target->resolvables(), true );
       }
     }
