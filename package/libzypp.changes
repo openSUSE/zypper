@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Sep 18 15:19:53 CEST 2006 - lslezak@suse.cz
+
+- SourceFactory::createFrom() - don't loose url,...
+- r4160
+
+-------------------------------------------------------------------
 Thu Sep 14 15:59:47 CEST 2006 - schubi@suse.de
 
 - Replaced requirementIsMet by requirementIsInstalledOrUnneeded 

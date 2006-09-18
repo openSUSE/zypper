@@ -224,8 +224,7 @@ namespace zypp
 
     bool auto_refresh = media::MediaAccess::canBeVolatile( url_r );
 
-    SourceInfo context;
-    SourceInfo( url_r, path_r, alias_r, cache_dir_r, auto_refresh );
+    SourceInfo context( url_r, path_r, alias_r, cache_dir_r, auto_refresh );
     context.setBaseSource( base_source );
     
     callback::SendReport<ProbeSourceReport> report;
