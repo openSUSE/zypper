@@ -1,7 +1,7 @@
 ## Process this file with automake to produce Makefile.in
 ## ##################################################
 
-noinst_PROGRAMS = zmart zypp-checkpatches
+noinst_PROGRAMS = zmart zypper zypp-checkpatches
 
 ## ##################################################
 
@@ -16,6 +16,16 @@ LDADD =		-L$(top_srcdir)/zypp/.libs -lzypp -lboost_regex -lboost_program_options
 ## ##################################################
 
 zmart_SOURCES = 	zmart.cc zmart-sources.cc zmart-misc.cc \
+	AliveCursor.h \
+	zmart-keyring-callbacks.h  \
+	zmart-rpm-callbacks.h  \
+	zmart-media-callbacks.h  \
+	zmart-source-callbacks.h \
+	zmart-sources.h \
+	zmart-misc.h \
+  zmart.h
+
+zypper_SOURCES = 	zypper.cc zmart-sources.cc zmart-misc.cc \
 	AliveCursor.h \
 	zmart-keyring-callbacks.h  \
 	zmart-rpm-callbacks.h  \
