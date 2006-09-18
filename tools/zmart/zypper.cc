@@ -1,10 +1,18 @@
+// zypper - a command line interface for libzypp
+// http://en.opensuse.org/User:Mvidner
+
+// (initially based on dmacvicar's zmart)
+
 #include <iostream>
 #include <fstream>
 #include <sstream>
 #include <streambuf>
-#include <unistd.h>
+#include <list>
+#include <map>
+#include <iterator>
 
-#include <boost/program_options.hpp>
+#include <unistd.h>
+#include <getopt.h>
 
 #include "zmart.h"
 #include "zmart-sources.h"
@@ -15,26 +23,196 @@
 #include "zmart-source-callbacks.h"
 #include "zmart-media-callbacks.h"
 
-using namespace zypp::detail;
 
 using namespace std;
-using namespace zypp;
 using namespace boost;
-
-namespace po = boost::program_options;
+using namespace zypp;
+using namespace zypp::detail;
 
 ZYpp::Ptr God;
 RuntimeData gData;
 Settings gSettings;
 
+/*
 RpmCallbacks rpm_callbacks;
 SourceCallbacks source_callbacks;
 MediaCallbacks media_callbacks;
+*/
+typedef map<string, list<string> > parsed_opts;
+
+static struct option global_options[] = {
+  {"help", no_argument, 0, 'h'},
+  {"verbose", no_argument, 0, 'v'},
+  {"version", no_argument, 0, 'V'},
+  {"req", required_argument, 0, 'r'},
+  {"opt", optional_argument, 0, 'o'},
+  {0, 0, 0, 0}
+};
+
+string longopts2optstring (const struct option *longopts) {
+  // + - do not permute, stop at the 1st nonoption, which is the command
+  // : - return : to indicate missing arg, not ?
+  string optstring = "+:";
+  for (; longopts && longopts->name; ++longopts) {
+    if (!longopts->flag && longopts->val) {
+      optstring += (char) longopts->val;
+      if (longopts->has_arg == required_argument)
+	optstring += ':';
+      else if (longopts->has_arg == optional_argument)
+	optstring += "::";
+    }
+  }
+  return optstring;
+}
+
+typedef map<int,const char *> short2long_t;
+
+short2long_t make_short2long (const struct option *longopts) {
+  short2long_t result;
+  for (; longopts && longopts->name; ++longopts) {
+    if (!longopts->flag && longopts->val) {
+      result[longopts->val] = longopts->name;
+    }
+  }
+  return result;
+}
+
+// longopts.flag must be NULL
+parsed_opts parse_options (int argc, char **argv,
+			   const struct option *longopts) {
+  parsed_opts result;
+  opterr = 0; 			// we report errors on our own
+  int optc;
+  const char *optstring = longopts2optstring (longopts).c_str ();
+  short2long_t short2long = make_short2long (longopts);
+  cerr << "OS " << optstring << endl;
+  while (1) {
+    int option_index = 0;
+    optc = getopt_long (argc, argv, optstring,
+			longopts, &option_index);
+    if (optc == -1)
+      break;			// options done
+
+    switch (optc) {
+    case '?':
+      cerr << "Unknown option " << argv[optind - 1] << endl;
+      break;
+    case ':':
+      cerr << "Missing argument for " << argv[optind - 1] << endl;
+      break;
+    default:
+      const char *mapidx = optc? short2long[optc] : longopts[option_index].name;
+
+      // creates if not there
+      list<string>& value = result[mapidx];
+      if (optarg)
+	value.push_back (optarg);
+      break;
+    }
+  }
+  return result;
+}
+
 
 int main(int argc, char **argv)
 {
+  parsed_opts gopts = parse_options (argc, argv, global_options);
+
+  if (gopts.count("help"))
+    cerr << "Global help" << endl;
+  if (gopts.count("opt")) {
+    cerr << "Opt arg: ";
+    std::copy (gopts["opt"].begin(), gopts["opt"].end(),
+	       ostream_iterator<string> (cerr, ", "));
+    cerr << endl;
+  }
+  if (gopts.count("req")) {
+    cerr << "Req arg: ";
+    std::copy (gopts["req"].begin(), gopts["req"].end(),
+	       ostream_iterator<string> (cerr, ", "));
+    cerr << endl;
+  }
+  string command;
+  if (optind < argc) {
+    command = argv[optind++];
+    cout << "COMMAND: " << command << endl;
+  }
+
+  struct option * specific_options = NULL;
+  const char * specific_optstr = NULL;
+  if (command == "service-list" || command == "sl") {
+    static struct option service_list_options[] = {
+      {"terse", no_argument, 0, 't'},
+      {0, 0, 0, 0}
+    };
+
+    specific_options = service_list_options;
+    specific_optstr = "+t";
+  }
+  else if (command == "service-add" || command == "sa") {
+    static struct option service_add_options[] = {
+      {"disabled", no_argument, 0, 'd'},
+      {"no-refresh", no_argument, 0, 'n'},
+      {0, 0, 0, 0}
+    };
+
+    specific_options = service_add_options;
+    specific_optstr = "+dn";
+  }
+  else {
+    cerr << "Unknown command" << endl;
+    return 1;
+  }
+
+  int optc;
+  while (1) {
+    int option_index = 0;
+
+    // +: do not permute, stop at the 1st nonoption, which is the command
+    optc = getopt_long (argc, argv, specific_optstr,
+                        specific_options, &option_index);
+    if (optc == -1)
+      break;			// options done
+
+    switch (optc) {
+    case 0:
+      printf ("option %s", specific_options[option_index].name);
+      if (optarg)
+	printf (" with arg %s", optarg);
+      printf ("\n");
+      break;
+
+    case 'd':
+      cout << "Disabled" << endl;
+      break;
+    case 'n':
+      cout << "Norefresh" << option_index << endl;
+      break;
+    case 't':
+      cout << "Terse" << endl;
+      break;
+
+    case '?':
+      cout << "Unknown option " << optopt << ':' << argv[optind-1] <<endl;
+      break;
+
+    default:
+      printf ("?? getopt returned character code 0%o ??\n", optc);
+    }
+  }
+
+  if (optind < argc) {
+    printf ("non-option ARGV-elements: ");
+    while (optind < argc)
+      printf ("%s ", argv[optind++]);
+    printf ("\n");
+  }
+
+
+  /*
+  // the 1st non-option is interpreted as --command
   po::positional_options_description pos_options;
-  pos_options.add("command", -1);
+  pos_options.add("command", 1);
   
   po::options_description general_options("General options");
   general_options.add_options()
@@ -74,8 +252,9 @@ int main(int argc, char **argv)
   //po::store(po::parse_command_line(argc, argv, visible_options), vm);
   po::store(po::command_line_parser(argc, argv).options(visible_options).positional(pos_options).run(), vm);
   po::notify(vm);
+  */
 
-  
+  /*  
   if (vm.count("list-system-sources"))
   {
     if ( geteuid() != 0 )
@@ -250,10 +429,10 @@ int main(int argc, char **argv)
       ZYppCommitResult result = God->commit( ZYppCommitPolicy() );
       std::cout << result << std::endl; 
     }
-}
+  }
   
   
-  
+  */  
   return 0;
 }
 
