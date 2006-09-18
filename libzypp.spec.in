@@ -70,6 +70,7 @@ grep -v devel/ x > configure.ac
 gettextize -f
 autoreconf --force --install --symlink --verbose
 %{?suse_update_config:%{suse_update_config -f}}
+CXXFLAGS="$RPM_OPT_FLAGS" \
 ./configure --prefix=%{prefix} --libdir=%{_libdir} --mandir=%{_mandir} --disable-static
 make %{?jobs:-j %jobs}
 #make check

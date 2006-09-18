@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Mon Sep 18 17:42:26 CEST 2006 - lslezak@suse.cz
+
+- use RPM_OPT_FLAGS (meissner@suse.de)
+
+-------------------------------------------------------------------
 Mon Sep 18 15:19:53 CEST 2006 - lslezak@suse.cz
 
 - SourceFactory::createFrom() - don't loose url,...
