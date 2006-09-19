@@ -32,6 +32,7 @@ using namespace zypp::detail;
 ZYpp::Ptr God;
 RuntimeData gData;
 Settings gSettings;
+int verbose = 0;
 
 /*
 RpmCallbacks rpm_callbacks;
@@ -39,15 +40,6 @@ SourceCallbacks source_callbacks;
 MediaCallbacks media_callbacks;
 */
 typedef map<string, list<string> > parsed_opts;
-
-static struct option global_options[] = {
-  {"help", no_argument, 0, 'h'},
-  {"verbose", no_argument, 0, 'v'},
-  {"version", no_argument, 0, 'V'},
-  {"req", required_argument, 0, 'r'},
-  {"opt", optional_argument, 0, 'o'},
-  {0, 0, 0, 0}
-};
 
 string longopts2optstring (const struct option *longopts) {
   // + - do not permute, stop at the 1st nonoption, which is the command
@@ -85,7 +77,7 @@ parsed_opts parse_options (int argc, char **argv,
   int optc;
   const char *optstring = longopts2optstring (longopts).c_str ();
   short2long_t short2long = make_short2long (longopts);
-  cerr << "OS " << optstring << endl;
+
   while (1) {
     int option_index = 0;
     optc = getopt_long (argc, argv, optstring,
@@ -113,41 +105,97 @@ parsed_opts parse_options (int argc, char **argv,
   return result;
 }
 
+static struct option global_options[] = {
+  {"help", no_argument, 0, 'h'},
+  {"verbose", no_argument, 0, 'v'},
+  {"version", no_argument, 0, 'V'},
+  {"req", required_argument, 0, 'r'},
+  {"opt", optional_argument, 0, 'o'},
+  {0, 0, 0, 0}
+};
+
+//! a constructor wrapper catching exceptions
+// returns an empty one on error
+Url make_url (const string & url_s) {
+  Url u;
+  try {
+    u = Url (url_s);
+  }
+  catch ( const Exception & excpt_r ) {
+    ZYPP_CAUGHT( excpt_r );
+    cerr << "URL is invalid." << endl;
+    cerr << excpt_r.asUserString() << endl;
+    
+  }
+  return u;
+}
 
 int main(int argc, char **argv)
 {
   parsed_opts gopts = parse_options (argc, argv, global_options);
 
-  if (gopts.count("help"))
-    cerr << "Global help" << endl;
+  if (gopts.count("help")) {
+    cerr << "  Options:\n"
+	"\t--help, -h\t\tHelp\n"
+	"\t--version, -V\t\tOutput the version number\n"
+	"\t--verbose, -v\t\tIncrease verbosity\n"
+	"\t--terse, -t\t\tTerse output for machine consumption\n"
+	;
+    
+  }
+
+  if (gopts.count("version")) {
+    cerr << "zypper 0.1" << endl;
+  }
+
+  if (gopts.count("verbose")) {
+    verbose += gopts.count("verbose");
+    cerr << "verbosity " << verbose << endl;
+  }
+
+  // testing option
   if (gopts.count("opt")) {
     cerr << "Opt arg: ";
     std::copy (gopts["opt"].begin(), gopts["opt"].end(),
 	       ostream_iterator<string> (cerr, ", "));
     cerr << endl;
   }
+
+  // testing option
   if (gopts.count("req")) {
     cerr << "Req arg: ";
     std::copy (gopts["req"].begin(), gopts["req"].end(),
 	       ostream_iterator<string> (cerr, ", "));
     cerr << endl;
   }
+
   string command;
   if (optind < argc) {
     command = argv[optind++];
-    cout << "COMMAND: " << command << endl;
   }
+  if (command.empty())
+    command = "help";
+  cout << "COMMAND: " << command << endl;
 
-  struct option * specific_options = NULL;
-  const char * specific_optstr = NULL;
-  if (command == "service-list" || command == "sl") {
-    static struct option service_list_options[] = {
-      {"terse", no_argument, 0, 't'},
-      {0, 0, 0, 0}
-    };
+  struct option no_options = {0, 0, 0, 0};
+  struct option *specific_options = &no_options;
 
-    specific_options = service_list_options;
-    specific_optstr = "+t";
+  string help_commands = "  Commands:\n"
+      "\tinstall, in\t\tInstall packages or resolvables\n"
+      "\tservice-list, sl\t\tList services aka installation sources\n"
+      "\tservice-add, sa\t\tAdd a new service\n"
+      ;
+
+  string help_global_source_options = "  Source options:\n"
+      "\t--disable-system-sources, -D\t\tDon't read the system sources\n"
+      "\t--source, -S\t\tRead additional source\n"
+      ;
+
+  string help_global_target_options = "  Target options:\n"
+      "\t--disable-system-resolvables, -T\t\tDon't read system installed resolvables\n"
+      ;
+
+  if (command == "install" || command == "in") {
   }
   else if (command == "service-add" || command == "sa") {
     static struct option service_add_options[] = {
@@ -157,127 +205,65 @@ int main(int argc, char **argv)
     };
 
     specific_options = service_add_options;
-    specific_optstr = "+dn";
+  }
+  else if (command == "service-list" || command == "sl") {
+    static struct option service_list_options[] = {
+      {"terse", no_argument, 0, 't'},
+      {0, 0, 0, 0}
+    };
+
+    specific_options = service_list_options;
   }
   else {
-    cerr << "Unknown command" << endl;
-    return 1;
+    // no options. or make this an exhaustive thing?
+    //    cerr << "Unknown command" << endl;
+    //    return 1;
   }
 
-  int optc;
-  while (1) {
-    int option_index = 0;
+  parsed_opts copts = parse_options (argc, argv, specific_options);
 
-    // +: do not permute, stop at the 1st nonoption, which is the command
-    optc = getopt_long (argc, argv, specific_optstr,
-                        specific_options, &option_index);
-    if (optc == -1)
-      break;			// options done
-
-    switch (optc) {
-    case 0:
-      printf ("option %s", specific_options[option_index].name);
-      if (optarg)
-	printf (" with arg %s", optarg);
-      printf ("\n");
-      break;
-
-    case 'd':
-      cout << "Disabled" << endl;
-      break;
-    case 'n':
-      cout << "Norefresh" << option_index << endl;
-      break;
-    case 't':
-      cout << "Terse" << endl;
-      break;
-
-    case '?':
-      cout << "Unknown option " << optopt << ':' << argv[optind-1] <<endl;
-      break;
-
-    default:
-      printf ("?? getopt returned character code 0%o ??\n", optc);
-    }
-  }
-
+  list<string> arguments;
   if (optind < argc) {
-    printf ("non-option ARGV-elements: ");
-    while (optind < argc)
-      printf ("%s ", argv[optind++]);
-    printf ("\n");
+    cerr << "non-option ARGV-elements: ";
+    while (optind < argc) {
+      string argument = argv[optind++];
+      cerr << argument << ' ';
+      arguments.push_back (argument);
+    }
+    cerr << endl;
+  }
+
+  if (copts.count("disabled")) {
+      cout << "FAKE Disabled" << endl;
+  }
+
+  if (copts.count("no-refresh")) {
+      cout << "FAKE No Refresh" << endl;
+  }
+
+  if (copts.count("terse")) {
+      cout << "FAKE Terse" << endl;
   }
 
 
-  /*
-  // the 1st non-option is interpreted as --command
-  po::positional_options_description pos_options;
-  pos_options.add("command", 1);
-  
-  po::options_description general_options("General options");
-  general_options.add_options()
-      ("help,h", "produce a help message")
-      ("version,v", "output the version number")
-      ;
-
-  po::options_description operation_options("Operations");
-  operation_options.add_options()
-      ("install,i", po::value< vector<string> >(), "install packages or resolvables")
-      ("list-system-sources,l", "Show available system sources")
-      ("add-source,a", po::value< string >(), "Add a new source from a URL")
-      ;
-  
-  po::options_description source_options("Source options");
-  source_options.add_options()
-      ("disable-system-sources,D", "Don't read the system sources.")
-      ("sources,S", po::value< vector<string> >(), "Read from additional sources")
-      ;
-  
-  po::options_description target_options("Target options");
-  target_options.add_options()
-      ("disable-system-resolvables,T", "Don't read system installed resolvables.")
-      ;
-
-  // Declare an options description instance which will include
-  // all the options
-  po::options_description all_options("Allowed options");
-  all_options.add(general_options).add(source_options).add(operation_options).add(target_options);
-
-  // Declare an options description instance which will be shown
-  // to the user
-  po::options_description visible_options("Allowed options");
-  visible_options.add(general_options).add(source_options).add(operation_options).add(target_options);
-
-  po::variables_map vm;
-  //po::store(po::parse_command_line(argc, argv, visible_options), vm);
-  po::store(po::command_line_parser(argc, argv).options(visible_options).positional(pos_options).run(), vm);
-  po::notify(vm);
-  */
-
-  /*  
-  if (vm.count("list-system-sources"))
+  if (command == "service-list" || command == "sl")
   {
     if ( geteuid() != 0 )
     {
       cout << "Sorry, you need root privileges to view system sources." << endl;
-      exit(-1);
+      return 1;
     }
     
     list_system_sources();
-    return 1;
+    return 0;
   }
   
-  if (vm.count("help")) {
-    cout << visible_options << "\n";
-    return 1;
+  if (command == "help") {
+    cout << "Help command" << endl;
+    return 0;
   }
 
-  if (vm.count("version")) {
-    cout << "zmart 0.1" << endl;
-    return 1;
-  }
-
-  if (vm.count("disable-system-sources"))
+  if (gopts.count("disable-system-sources"))
   {
     MIL << "system sources disabled" << endl;
     gSettings.disable_system_sources = true;
@@ -296,20 +282,11 @@ int main(int argc, char **argv)
     }
   }
 
-  if (vm.count("add-source"))
+  if (command == "service-add" || command == "sa")
   {
-    string urlStr = vm["add-source"].as< string >();
-    Url url;
-    try {
-      url = Url( urlStr );
-    }
-    catch ( const Exception & excpt_r )
-    {
-      ZYPP_CAUGHT( excpt_r );
-      cerr << "URL is invalid." << endl;
-      cerr << excpt_r.asUserString() << endl;
-      exit( 1 );
-    }
+    Url url = make_url (arguments.front());
+    if (!url.isValid())
+      return 1;
     
     try {
       add_source_by_url(url, "aliasfixme");
@@ -317,52 +294,38 @@ int main(int argc, char **argv)
     catch ( const Exception & excpt_r )
     {
       cerr << excpt_r.asUserString() << endl;
-      exit(1);
+      return 1;
     }
-    
-    exit(0);
+    return 0;
   }
   
-  if (vm.count("disable-system-resolvables"))
+  if (gopts.count("disable-system-resolvables"))
   {
     MIL << "system resolvables disabled" << endl;
     cout << "Ignoring installed resolvables..." << endl;
     gSettings.disable_system_resolvables = true;
   }
   
-  if (vm.count("install"))
+  if (command == "install" || command == "in")
   {
-    vector<string> to_install = vm["install"].as< vector<string> >();
-    //MIL << "Additional installs are: " << to_install << "\n";
-    for ( vector<string>::const_iterator it = to_install.begin(); it != to_install.end(); ++it )
-    {
-      gData.packages_to_install = to_install;
-    }
+    gData.packages_to_install = vector<string>(arguments.begin(), arguments.end());
   }
   
-  if (vm.count("sources"))
-  {
-    vector<string> sources = vm["sources"].as< vector<string> >();
-    //MIL << "Additional sources are: " << sources << "\n";
-    for ( vector<string>::const_iterator it = sources.begin(); it != sources.end(); ++it )
+  if (gopts.count("source")) {
+    list<string> sources = gopts["source"];
+    for (list<string>::const_iterator it = sources.begin(); it != sources.end(); ++it )
     {
-      try
-      {
-        gSettings.additional_sources.push_back(Url(*it)); 
-      }
-      catch ( const Exception &e )
-      {
-        cout << "wrong url " << *it << std::endl;
-        exit(-1);
-      }
+      Url url = make_url (*it);
+      if (!url.isValid())
+	return 1;
+      gSettings.additional_sources.push_back(url); 
     }
   }
   
   const char *logfile = getenv("ZYPP_LOGFILE");
-  if (logfile != NULL)
-    zypp::base::LogControl::instance().logfile( logfile );
-  else
-    zypp::base::LogControl::instance().logfile( ZYPP_CHECKPATCHES_LOG );
+  if (logfile == NULL)
+    logfile = ZYPP_CHECKPATCHES_LOG;
+  zypp::base::LogControl::instance().logfile( logfile );
   
   std::string previous_token;
   
@@ -377,7 +340,7 @@ int main(int argc, char **argv)
     ERR  << "a ZYpp transaction is already in progress." << endl;
     cerr << "a ZYpp transaction is already in progress." << endl;
     cout << RANDOM_TOKEN;
-    return -1;
+    return 1;
   }
   
   SourceManager_Ptr manager;
@@ -432,7 +395,7 @@ int main(int argc, char **argv)
   }
   
   
-  */  
+
   return 0;
 }
 
