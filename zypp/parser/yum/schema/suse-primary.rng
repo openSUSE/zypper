@@ -21,9 +21,6 @@
       <ref name="element-keywords"/>
     </optional>
     <optional>
-      <ref name="element-media"/>
-    </optional>
-    <optional>
       <ref name="element-dirsizes"/>
     </optional>
     <optional>
@@ -62,15 +59,6 @@
         <text/>
       </element>
     </oneOrMore>
-    <empty/>
-  </define>
-  <define name="element-media">
-    <element name="media">
-      <ref name="media"/>
-    </element>
-  </define>
-  <define name="media">
-    <attribute name="mediaid"/>
     <empty/>
   </define>
   <define name="element-dirsizes">

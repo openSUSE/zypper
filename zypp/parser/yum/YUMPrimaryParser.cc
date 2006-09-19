@@ -142,6 +142,10 @@ namespace zypp {
             }
             else if (name == "location") {
               dataPtr->location = _helper.attribute(child,"href");
+	      dataPtr->media = _helper.attribute(child,"base","#1");
+	      int pos = dataPtr->media.find("#");
+	      if (pos > 0)
+		dataPtr->media = dataPtr->media.substr(pos + 1);
             }
             else if (name == "format") {
               parseFormatNode(dataPtr, child);
@@ -168,7 +172,6 @@ namespace zypp {
 	if (dataPtr == NULL) return;			// skipping
         xml_assert(formatNode);
         dataPtr->installOnly = false;
-	dataPtr->media = "1";
         for (xmlNodePtr child = formatNode->children; 
              child != 0;
              child = child ->next) {
@@ -231,9 +234,6 @@ namespace zypp {
             }
             else if (name == "keywords") {
               parseKeywordEntries(& dataPtr->keywords, child);
-            }
-            else if (name == "media") {
-              dataPtr->media = _helper.attribute(child,"mediaid");
             }
             else if (name == "dirsizes") {
               parseDirsizeEntries(& dataPtr->dirSizes, child);

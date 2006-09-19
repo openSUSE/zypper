@@ -156,12 +156,6 @@
         </element>
       </optional>
       <optional>
-        <element name="do-media">
-          <attribute name="mediaid"/>
-          <empty/>
-        </element>
-      </optional>
-      <optional>
         <element name="do-checksum">
           <attribute name="type">
             <choice>
@@ -182,12 +176,6 @@
           <attribute name="href">
             <data type="anyURI"/>
           </attribute>
-          <empty/>
-        </element>
-      </optional>
-      <optional>
-        <element name="undo-media">
-          <attribute name="mediaid"/>
           <empty/>
         </element>
       </optional>
@@ -247,11 +235,6 @@
         </attribute>
         <empty/>
       </element>
-      <optional>
-        <element name="media">
-          <text/>
-        </element>
-      </optional>
       <element name="checksum">
         <attribute name="type">
           <choice>
@@ -282,11 +265,6 @@
         </attribute>
         <empty/>
       </element>
-      <optional>
-        <element name="media">
-          <text/>
-        </element>
-      </optional>
       <element name="checksum">
         <attribute name="type">
           <choice>

@@ -52,10 +52,6 @@ element-script =
       attribute href { xsd:anyURI },
       empty
     }?,
-    element do-media { 
-      attribute mediaid { text },
-      empty
-    }?,
     element do-checksum {
       attribute type { "md5" | "sha" },
       text
@@ -63,10 +59,6 @@ element-script =
     element undo-location {
       attribute xml:base { xsd:anyURI }?,
       attribute href { xsd:anyURI },
-      empty
-    }?,
-    element undo-media { 
-      attribute mediaid { text },
       empty
     }?,
     element undo-checksum {
@@ -100,7 +92,6 @@ element-patchrpm =
       attribute href { xsd:anyURI },
       empty
     },
-    element media { text }?,
     element checksum {
       attribute type { "md5" | "sha" },
       text
@@ -119,7 +110,6 @@ element-deltarpm =
       attribute href { xsd:anyURI },
       empty
     },
-    element media { text }?,
     element checksum {
       attribute type { "md5" | "sha" },
       text

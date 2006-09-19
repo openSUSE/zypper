@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Sep 19 10:59:24 CEST 2006 - jsrain@suse.cz
+
+- adapted multi-media YUM sources according to official YUM
+  specification (F300743)
+
+-------------------------------------------------------------------
 Mon Sep 18 17:42:26 CEST 2006 - lslezak@suse.cz
 
 - use RPM_OPT_FLAGS (meissner@suse.de)

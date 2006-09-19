@@ -203,7 +203,6 @@ XXX << "parseAtomsNode(" << name << ")" << endl;
       {
 	xml_assert(formatNode);
 	dataPtr->installOnly = false;
-	dataPtr->media = "1";
 
 	// FIXME move the respective method to a common class, inherit it
 	YUMPrimaryParser prim;
@@ -271,9 +270,6 @@ XXX << "parseAtomsNode(" << name << ")" << endl;
 	    else if (name == "keywords") {
 	      prim.parseKeywordEntries(& dataPtr->keywords, child);
 	    }
-	    else if (name == "media") {
-	      dataPtr->media = _helper.attribute(child,"mediaid");
-	    }
 	    else if (name == "dirsizes") {
 	      prim.parseDirsizeEntries(& dataPtr->dirSizes, child);
 	    }
@@ -337,7 +333,11 @@ XXX << "parseAtomsNode(" << name << ")" << endl;
 	      patchRpm.baseVersions.push_back( base_version );
 	    }
             else if (name == "location") {
-		patchRpm.location = _helper.attribute(child,"href");
+	      patchRpm.location = _helper.attribute(child,"href");
+	      patchRpm.media = _helper.attribute(child,"base","#1");
+	      int pos = patchRpm.media.find("#");
+	      if (pos > 0)
+		patchRpm.media = patchRpm.media.substr(pos + 1);
 	    }
 	    else if (name == "media") {
 		patchRpm.media = _helper.content(child);
@@ -382,7 +382,11 @@ XXX << "parseAtomsNode(" << name << ")" << endl;
 	      parsePkgDeltaBaseVersionNode( &(deltaRpm.baseVersion), child);
 	    }
             else if (name == "location") {
-		deltaRpm.location = _helper.attribute(child,"href");
+	      deltaRpm.location = _helper.attribute(child,"href");
+	      deltaRpm.media = _helper.attribute(child,"base","#1");
+	      int pos = deltaRpm.media.find("#");
+	      if (pos > 0)
+		deltaRpm.media = deltaRpm.media.substr(pos + 1);
 	    }
 	    else if (name == "media") {
 		deltaRpm.media = _helper.content(child);
@@ -518,6 +522,10 @@ XXX << "parsePackageNode(" << name << ")" << endl;
 	    }
 	    else if (name == "location") {
 	      package->location = _helper.attribute(child,"href");
+	      package->media = _helper.attribute(child,"base","#1");
+	      int pos = package->media.find("#");
+	      if (pos > 0)
+		package->media = package->media.substr(pos + 1);
 	    }
 	    else if (name == "format") {
 		parseFormatNode (&*package, child);
@@ -571,16 +579,18 @@ XXX << "parsePackageNode(" << name << ")" << endl;
 		script->undo_script = _helper.content(child);
 	    }
             else if (name == "do-location") {
-		script->do_location = _helper.attribute(child,"href");
+	      script->do_location = _helper.attribute(child,"href");
+	      script->do_media = _helper.attribute(child,"base","#1");
+	      int pos = script->do_media.find("#");
+	      if (pos > 0)
+		script->do_media = script->do_media.substr(pos + 1);
 	    }
             else if (name == "undo-location") {
-		script->undo_location = _helper.attribute(child,"href");
-	    }
-	    else if (name == "do-media") {
-		script->do_media = _helper.attribute(child,"mediaid");
-	    }
-	    else if (name == "undo-media") {
-		script->undo_media = _helper.attribute(child,"mediaid");
+	      script->undo_location = _helper.attribute(child,"href");
+	      script->undo_media = _helper.attribute(child,"base","#1");
+	      int pos = script->undo_media.find("#");
+	      if (pos > 0)
+		script->undo_media = script->undo_media.substr(pos + 1);
 	    }
 	    else if (name == "do-checksum") {
 	      script->do_checksum_type = _helper.attribute(child,"type");
