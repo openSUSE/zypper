@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--PATCHINFO id="24a033fa07027d73c61a0fa63df1c970"!-->
+<patch
+    xmlns="http://novell.com/package/metadata/suse/patch"
+    xmlns:yum="http://linux.duke.edu/metadata/common"
+    xmlns:rpm="http://linux.duke.edu/metadata/rpm"
+    xmlns:suse="http://novell.com/package/metadata/suse/common"
+    patchid="bash-1456"
+    timestamp="1149258871"
+    engine="1.0">
+  <yum:name>bash</yum:name>
+  <summary lang="en">BASH can do a segmentation fault</summary>
+  <summary lang="de">BASH kann eine Speicherschutzverletzung aufweisen</summary>
+  <description lang="en">The BASH can do a segmentation fault on large UTF-8 strings 
+if the Internal Field Separator is used for sorting.
+</description>
+  <description lang="de">Die BASH kann beim Sortieren langer UTF-8 Zeilen mit dem 
+Internal Field Separator eine Speicherschutzverletzung 
+aufweisen.
+</description>
+  <yum:version ver="1456" rel="0"/>
+  <rpm:requires>
+  <rpm:entry kind="atom" name="bash" epoch="0" ver="3.1" rel="24.3" flags="EQ"/>
+  </rpm:requires>
+  <category>recommended</category>
+  <atoms>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>bash</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="3.1" rel="24.3"/>
+      <checksum type="sha" pkgid="YES">5eafb2f50231956bded6e8809bd01b9934c7dee2</checksum>
+      <time file="1149329099" build="1149258871"/>
+      <size package="724984" installed="2627780" archive="2631428"/>
+      <location href="rpm/i586/bash-3.1-24.3.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="bash" epoch="0" ver="3.1" rel="24.3" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="bash"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/bash-3.1-24.3.i586.patch.rpm"/>
+          <checksum type="sha">613672f7bdcf987364a58e2d8db91fd2cbf1c005</checksum>
+          <time file="1149332406" build="1149258871"/>
+          <size package="448584" archive="1954780"/>
+          <base-version epoch="0" ver="3.1" rel="22"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/bash-3.1-22_24.3.i586.delta.rpm"/>
+          <checksum type="sha">a020ccfd9227544bb6a980a81050fd7f0be5d2ba</checksum>
+          <time file="1149332409" build="1149258871"/>
+          <size package="42280" archive="0"/>
+          <base-version epoch="0" ver="3.1" rel="22" md5sum="7483c65aeee367b3336b9821edc8adbb" buildtime="1145756783" sequence_info="bash-3.1-22-b19a313a2d338370a6c1601d56d6d2d883"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>bash</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="3.1" rel="24.3"/>
+      <checksum type="sha" pkgid="YES">4a4651a9d4ecd3d5a9f9550c77f6fa54eee6ea11</checksum>
+      <time file="1149330719" build="1149258931"/>
+      <size package="736005" installed="2702360" archive="2706008"/>
+      <location href="rpm/ppc/bash-3.1-24.3.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="bash" epoch="0" ver="3.1" rel="24.3" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="bash"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/bash-3.1-24.3.ppc.patch.rpm"/>
+          <checksum type="sha">d4c6e1c67ef6ac29fa00da2103baf01cf7618662</checksum>
+          <time file="1149332411" build="1149258931"/>
+          <size package="464392" archive="2029360"/>
+          <base-version epoch="0" ver="3.1" rel="22"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/bash-3.1-22_24.3.ppc.delta.rpm"/>
+          <checksum type="sha">19c9f91d3f2c57c61fc90e11b35aed992afa6e68</checksum>
+          <time file="1149332413" build="1149258931"/>
+          <size package="38775" archive="0"/>
+          <base-version epoch="0" ver="3.1" rel="22" md5sum="9cb6c3b5133448dabb45b0c3c7014f4d" buildtime="1145772851" sequence_info="bash-3.1-22-f3fc120d272e41d41adb5af95aac2a6183"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>bash</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="3.1" rel="24.3"/>
+      <checksum type="sha" pkgid="YES">a8523d880ee0b25086e4752c6f64ac04a0b6fa1f</checksum>
+      <time file="1149328964" build="1149258105"/>
+      <size package="759940" installed="2697840" archive="2701488"/>
+      <location href="rpm/x86_64/bash-3.1-24.3.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="bash" epoch="0" ver="3.1" rel="24.3" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="bash"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/bash-3.1-24.3.x86_64.patch.rpm"/>
+          <checksum type="sha">f937c8e766efeb5adb14f7ee5099bec3bd8663f1</checksum>
+          <time file="1149332415" build="1149258105"/>
+          <size package="487086" archive="2024840"/>
+          <base-version epoch="0" ver="3.1" rel="22"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/bash-3.1-22_24.3.x86_64.delta.rpm"/>
+          <checksum type="sha">4ed267b8a535c97e6ab33928eed0ee125a957ff8</checksum>
+          <time file="1149332417" build="1149258105"/>
+          <size package="53676" archive="0"/>
+          <base-version epoch="0" ver="3.1" rel="22" md5sum="3fd870149bf3d56313a40d8268220043" buildtime="1145753461" sequence_info="bash-3.1-22-2b7d512727c3ab07b7ad5e4197db66d183"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+  </atoms>
+</patch>

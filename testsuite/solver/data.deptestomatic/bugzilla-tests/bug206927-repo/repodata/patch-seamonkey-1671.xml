@@ -1,0 +1,671 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--PATCHINFO id="5bac3dc0312445d1ac0ab2f8aa87a5b7"!-->
+<patch
+    xmlns="http://novell.com/package/metadata/suse/patch"
+    xmlns:yum="http://linux.duke.edu/metadata/common"
+    xmlns:rpm="http://linux.duke.edu/metadata/rpm"
+    xmlns:suse="http://novell.com/package/metadata/suse/common"
+    patchid="seamonkey-1671"
+    timestamp="1150676713"
+    engine="1.0">
+  <yum:name>seamonkey</yum:name>
+  <summary lang="en">seamonkey: Security Update to version 1.0.2</summary>
+  <summary lang="de">seamonkey: Sicherheitsupdate auf Version 1.0.2</summary>
+  <description lang="en">This security update fixes the following Problem in the 
+Seamonkey suite:  MFSA 2006-40/CVE-2006-2781: Double-free 
+vulnerability in Mozilla Thunderbird before 1.5.0.4 and 
+SeaMonkey before 1.0.2 allows remote attackers to cause a 
+denial of service (hang) and possibly execute arbitrary 
+code via a VCard that contains invalid base64 characters.
+</description>
+  <description lang="de">Dieses Sicherheitsupdate behebt das folgende Problem in der 
+Seamonkey Suite:  MFSA 2006-40/CVE-2006-2781: Double-free 
+vulnerability in Mozilla Thunderbird before 1.5.0.4 and 
+SeaMonkey before 1.0.2 allows remote attackers to cause a 
+denial of service (hang) and possibly execute arbitrary 
+code via a VCard that contains invalid base64 characters.
+</description>
+  <yum:version ver="1671" rel="0"/>
+  <rpm:requires>
+  <rpm:entry kind="atom" name="seamonkey" epoch="0" ver="1.0.2" rel="1.1" flags="EQ"/>
+  <rpm:entry kind="atom" name="seamonkey-calendar" epoch="0" ver="1.0.2" rel="1.1" flags="EQ"/>
+  <rpm:entry kind="atom" name="seamonkey-dom-inspector" epoch="0" ver="1.0.2" rel="1.1" flags="EQ"/>
+  <rpm:entry kind="atom" name="seamonkey-irc" epoch="0" ver="1.0.2" rel="1.1" flags="EQ"/>
+  <rpm:entry kind="atom" name="seamonkey-mail" epoch="0" ver="1.0.2" rel="1.1" flags="EQ"/>
+  <rpm:entry kind="atom" name="seamonkey-spellchecker" epoch="0" ver="1.0.2" rel="1.1" flags="EQ"/>
+  <rpm:entry kind="atom" name="seamonkey-venkman" epoch="0" ver="1.0.2" rel="1.1" flags="EQ"/>
+  </rpm:requires>
+  <category>security</category>
+  <atoms>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>seamonkey</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="1.0.2" rel="1.1"/>
+      <checksum type="sha" pkgid="YES">9622c340d4ea43022b45203d0a2fb814b20c3946</checksum>
+      <time file="1150977410" build="1150676713"/>
+      <size package="8873836" installed="29325953" archive="29385476"/>
+      <location href="rpm/i586/seamonkey-1.0.2-1.1.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="seamonkey" epoch="0" ver="1.0.2" rel="1.1" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="seamonkey"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/seamonkey-1.0.2-1.1.i586.patch.rpm"/>
+          <checksum type="sha">06a13febc5589be321a333e0858af575aaa4eb03</checksum>
+          <time file="1150977623" build="1150676713"/>
+          <size package="7195535" archive="22989464"/>
+          <base-version epoch="0" ver="1.0" rel="27"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/seamonkey-1.0_1.0.2-27_1.1.i586.delta.rpm"/>
+          <checksum type="sha">e9b46ee3f738de62e81acf85a20f40d232b6b395</checksum>
+          <time file="1150977643" build="1150676713"/>
+          <size package="889331" archive="0"/>
+          <base-version epoch="0" ver="1.0" rel="27" md5sum="a69753b2a9f0b5156424848d3e210ae0" buildtime="1146622761" sequence_info="seamonkey-1.0-27-c6f8439cabb0cd3a7171dace3db6071fa42831e831d71be1"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>seamonkey</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="1.0.2" rel="1.1"/>
+      <checksum type="sha" pkgid="YES">27e18d69c510317edac2ca1e977666caa2b87d0e</checksum>
+      <time file="1150977479" build="1150603487"/>
+      <size package="9414869" installed="33867131" archive="33926652"/>
+      <location href="rpm/ppc/seamonkey-1.0.2-1.1.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="seamonkey" epoch="0" ver="1.0.2" rel="1.1" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="seamonkey"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/seamonkey-1.0.2-1.1.ppc.patch.rpm"/>
+          <checksum type="sha">18e964240ea09bf7f98884f0b6531fdec3a4292c</checksum>
+          <time file="1150977665" build="1150603487"/>
+          <size package="7290005" archive="25985624"/>
+          <base-version epoch="0" ver="1.0" rel="27"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/seamonkey-1.0_1.0.2-27_1.1.ppc.delta.rpm"/>
+          <checksum type="sha">557a09bd94b14cde53ba4c03b2d281141557e4dc</checksum>
+          <time file="1150977684" build="1150603487"/>
+          <size package="1108519" archive="0"/>
+          <base-version epoch="0" ver="1.0" rel="27" md5sum="95af06dcc46649df2233d88b79f591da" buildtime="1146635053" sequence_info="seamonkey-1.0-27-67016588288f9870150470b1467b0e06a42831e831d71be1"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>seamonkey</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="1.0.2" rel="1.1"/>
+      <checksum type="sha" pkgid="YES">574cd83c18ff5d59eefbe6e773536a2daec0b873</checksum>
+      <time file="1150977378" build="1150570286"/>
+      <size package="10030591" installed="34906164" archive="34966532"/>
+      <location href="rpm/x86_64/seamonkey-1.0.2-1.1.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="seamonkey" epoch="0" ver="1.0.2" rel="1.1" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="seamonkey"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/seamonkey-1.0.2-1.1.x86_64.patch.rpm"/>
+          <checksum type="sha">c4116015e309db8504d0f5295e350a692b3f1740</checksum>
+          <time file="1150977705" build="1150570286"/>
+          <size package="8012016" archive="27382412"/>
+          <base-version epoch="0" ver="1.0" rel="27"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/seamonkey-1.0_1.0.2-27_1.1.x86_64.delta.rpm"/>
+          <checksum type="sha">7d7f03e7b3a013a91c8b973c48a0351c2d4fb32b</checksum>
+          <time file="1150977729" build="1150570286"/>
+          <size package="1682716" archive="0"/>
+          <base-version epoch="0" ver="1.0" rel="27" md5sum="1d7bc303854af140e7c0b468c92d03e8" buildtime="1146621828" sequence_info="seamonkey-1.0-27-35fac0c74c85343a79e530fa3854bb23a42831e831d71be1"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>seamonkey-calendar</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="1.0.2" rel="1.1"/>
+      <checksum type="sha" pkgid="YES">f7be5a9ec10a0af143ada677b009b6685217a330</checksum>
+      <time file="1150977414" build="1150676713"/>
+      <size package="505386" installed="2456147" archive="2460824"/>
+      <location href="rpm/i586/seamonkey-calendar-1.0.2-1.1.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="seamonkey-calendar" epoch="0" ver="1.0.2" rel="1.1" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="seamonkey-calendar"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/seamonkey-calendar-1.0.2-1.1.i586.patch.rpm"/>
+          <checksum type="sha">ae3c0d663f0b020bed71ded15c0456f7790422f8</checksum>
+          <time file="1150977737" build="1150676713"/>
+          <size package="152289" archive="476956"/>
+          <base-version epoch="0" ver="1.0" rel="27"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/seamonkey-calendar-1.0_1.0.2-27_1.1.i586.delta.rpm"/>
+          <checksum type="sha">75d4c224349b59ca612512b26639b82d2c195236</checksum>
+          <time file="1150977738" build="1150676713"/>
+          <size package="34398" archive="0"/>
+          <base-version epoch="0" ver="1.0" rel="27" md5sum="89a375d9d88c7ef61eb56b053c559cd4" buildtime="1146622761" sequence_info="seamonkey-calendar-1.0-27-7d5eb5d7bf7e397cf072db0441f8450ac3"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>seamonkey-calendar</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="1.0.2" rel="1.1"/>
+      <checksum type="sha" pkgid="YES">156e179cf86fd44be4aee0fd7d3a38a15e4bd5df</checksum>
+      <time file="1150977482" build="1150603487"/>
+      <size package="505792" installed="2533563" archive="2538240"/>
+      <location href="rpm/ppc/seamonkey-calendar-1.0.2-1.1.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="seamonkey-calendar" epoch="0" ver="1.0.2" rel="1.1" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="seamonkey-calendar"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/seamonkey-calendar-1.0.2-1.1.ppc.patch.rpm"/>
+          <checksum type="sha">b63d5cc1fa9200c1c791c8a3901abffd851976f0</checksum>
+          <time file="1150977742" build="1150603487"/>
+          <size package="152123" archive="554372"/>
+          <base-version epoch="0" ver="1.0" rel="27"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/seamonkey-calendar-1.0_1.0.2-27_1.1.ppc.delta.rpm"/>
+          <checksum type="sha">6804aa0c1095558f5b0075cfa28119b92ce28f44</checksum>
+          <time file="1150977744" build="1150603487"/>
+          <size package="34424" archive="0"/>
+          <base-version epoch="0" ver="1.0" rel="27" md5sum="1cc162af911d2f2cbf6a6f8a2840a82a" buildtime="1146635053" sequence_info="seamonkey-calendar-1.0-27-11c0ec77679754b6b4e07e964d5c407bc3"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>seamonkey-calendar</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="1.0.2" rel="1.1"/>
+      <checksum type="sha" pkgid="YES">58fe0ad221dfe2ee7fd0be4a26476e8849a06ac0</checksum>
+      <time file="1150977378" build="1150570286"/>
+      <size package="523974" installed="2556535" archive="2561272"/>
+      <location href="rpm/x86_64/seamonkey-calendar-1.0.2-1.1.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="seamonkey-calendar" epoch="0" ver="1.0.2" rel="1.1" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="seamonkey-calendar"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/seamonkey-calendar-1.0.2-1.1.x86_64.patch.rpm"/>
+          <checksum type="sha">1d5f034cfd8316e7c37f4e65029cdef36a0efc88</checksum>
+          <time file="1150977748" build="1150570286"/>
+          <size package="170157" archive="576784"/>
+          <base-version epoch="0" ver="1.0" rel="27"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/seamonkey-calendar-1.0_1.0.2-27_1.1.x86_64.delta.rpm"/>
+          <checksum type="sha">272fe33b5b647fcdceaccc1684538fc5a108709d</checksum>
+          <time file="1150977749" build="1150570286"/>
+          <size package="34551" archive="0"/>
+          <base-version epoch="0" ver="1.0" rel="27" md5sum="a0ba4aa3cf533b2df8abe69e029ccd0d" buildtime="1146621828" sequence_info="seamonkey-calendar-1.0-27-10ad86d4deea5395b6684e7525e375c4c3"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>seamonkey-dom-inspector</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="1.0.2" rel="1.1"/>
+      <checksum type="sha" pkgid="YES">71236b4671dcbdb67c476ed0f07b20780032cced</checksum>
+      <time file="1150977421" build="1150676713"/>
+      <size package="162046" installed="844966" archive="846236"/>
+      <location href="rpm/i586/seamonkey-dom-inspector-1.0.2-1.1.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="seamonkey-dom-inspector" epoch="0" ver="1.0.2" rel="1.1" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="seamonkey-dom-inspector"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/seamonkey-dom-inspector-1.0.2-1.1.i586.patch.rpm"/>
+          <checksum type="sha">d51b627aa2242703b62a91940fb4f5530cc97533</checksum>
+          <time file="1150977753" build="1150676713"/>
+          <size package="53144" archive="54768"/>
+          <base-version epoch="0" ver="1.0" rel="27"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/seamonkey-dom-inspector-1.0_1.0.2-27_1.1.i586.delta.rpm"/>
+          <checksum type="sha">03c0cb8c826701bb84a98155880f8b8584019528</checksum>
+          <time file="1150977754" build="1150676713"/>
+          <size package="31769" archive="0"/>
+          <base-version epoch="0" ver="1.0" rel="27" md5sum="199441caeab6d2ce50e7a0f12b761f7d" buildtime="1146622761" sequence_info="seamonkey-dom-inspector-1.0-27-1abd82824828192b0c56e85d8e1a16d470"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>seamonkey-dom-inspector</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="1.0.2" rel="1.1"/>
+      <checksum type="sha" pkgid="YES">21043e81351967a64038f5148f247bbf0d9a6b1a</checksum>
+      <time file="1150977487" build="1150603487"/>
+      <size package="164909" installed="865490" archive="866760"/>
+      <location href="rpm/ppc/seamonkey-dom-inspector-1.0.2-1.1.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="seamonkey-dom-inspector" epoch="0" ver="1.0.2" rel="1.1" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="seamonkey-dom-inspector"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/seamonkey-dom-inspector-1.0.2-1.1.ppc.patch.rpm"/>
+          <checksum type="sha">8af67ddfcd9c19375b61f5f6bd48f41c3dc8dfa0</checksum>
+          <time file="1150977757" build="1150603487"/>
+          <size package="55869" archive="75292"/>
+          <base-version epoch="0" ver="1.0" rel="27"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/seamonkey-dom-inspector-1.0_1.0.2-27_1.1.ppc.delta.rpm"/>
+          <checksum type="sha">ac223273984521d8b1f9b7b45ca6825972a552df</checksum>
+          <time file="1150977757" build="1150603487"/>
+          <size package="31770" archive="0"/>
+          <base-version epoch="0" ver="1.0" rel="27" md5sum="9dafe88eb7660e165ee7635c2b2cb861" buildtime="1146635053" sequence_info="seamonkey-dom-inspector-1.0-27-b080bdac30fdf076141eded4ef0f26f370"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>seamonkey-dom-inspector</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="1.0.2" rel="1.1"/>
+      <checksum type="sha" pkgid="YES">954cb26db49ae6607314b6bd838e74310053a788</checksum>
+      <time file="1150977386" build="1150570286"/>
+      <size package="167937" installed="869562" archive="870848"/>
+      <location href="rpm/x86_64/seamonkey-dom-inspector-1.0.2-1.1.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="seamonkey-dom-inspector" epoch="0" ver="1.0.2" rel="1.1" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="seamonkey-dom-inspector"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/seamonkey-dom-inspector-1.0.2-1.1.x86_64.patch.rpm"/>
+          <checksum type="sha">f4117b71435d6212cd368cf22e93981f62083416</checksum>
+          <time file="1150977760" build="1150570286"/>
+          <size package="58207" archive="79124"/>
+          <base-version epoch="0" ver="1.0" rel="27"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/seamonkey-dom-inspector-1.0_1.0.2-27_1.1.x86_64.delta.rpm"/>
+          <checksum type="sha">705cca814013ff88bbdbcf10212339026a87bad0</checksum>
+          <time file="1150977761" build="1150570286"/>
+          <size package="31932" archive="0"/>
+          <base-version epoch="0" ver="1.0" rel="27" md5sum="c0170f074e647ffeaa97bd945ba4cc62" buildtime="1146621828" sequence_info="seamonkey-dom-inspector-1.0-27-0f12e44f737c1629ab9c0afef7fc886c70"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>seamonkey-irc</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="1.0.2" rel="1.1"/>
+      <checksum type="sha" pkgid="YES">6b72ad9302d4cecdbc2274987fa6c1afa5698e2f</checksum>
+      <time file="1150977421" build="1150676713"/>
+      <size package="241248" installed="1044022" archive="1044820"/>
+      <location href="rpm/i586/seamonkey-irc-1.0.2-1.1.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="seamonkey-irc" epoch="0" ver="1.0.2" rel="1.1" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="seamonkey-irc"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/seamonkey-irc-1.0.2-1.1.i586.patch.rpm"/>
+          <checksum type="sha">b46810cac52f33204f60b4c3b9c2d4d25f5ccfad</checksum>
+          <time file="1150977764" build="1150676713"/>
+          <size package="30474" archive="124"/>
+          <base-version epoch="0" ver="1.0" rel="27"/>
+        </patchrpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>seamonkey-irc</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="1.0.2" rel="1.1"/>
+      <checksum type="sha" pkgid="YES">59b48c2cb77ef6e30daa4b1adb3697f745de828e</checksum>
+      <time file="1150977488" build="1150603487"/>
+      <size package="241086" installed="1044022" archive="1044820"/>
+      <location href="rpm/ppc/seamonkey-irc-1.0.2-1.1.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="seamonkey-irc" epoch="0" ver="1.0.2" rel="1.1" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="seamonkey-irc"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/seamonkey-irc-1.0.2-1.1.ppc.patch.rpm"/>
+          <checksum type="sha">2bf9b19b7346ecc8839cf8ed24200640ed2fefa7</checksum>
+          <time file="1150977767" build="1150603487"/>
+          <size package="30458" archive="124"/>
+          <base-version epoch="0" ver="1.0" rel="27"/>
+        </patchrpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>seamonkey-irc</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="1.0.2" rel="1.1"/>
+      <checksum type="sha" pkgid="YES">22c83603f6d9fc2511829e16e5a446a7adc54028</checksum>
+      <time file="1150977386" build="1150570286"/>
+      <size package="241205" installed="1044022" archive="1044828"/>
+      <location href="rpm/x86_64/seamonkey-irc-1.0.2-1.1.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="seamonkey-irc" epoch="0" ver="1.0.2" rel="1.1" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="seamonkey-irc"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/seamonkey-irc-1.0.2-1.1.x86_64.patch.rpm"/>
+          <checksum type="sha">abe3f95194b61cacf81bbb400947bd81d839107d</checksum>
+          <time file="1150977770" build="1150570286"/>
+          <size package="30470" archive="124"/>
+          <base-version epoch="0" ver="1.0" rel="27"/>
+        </patchrpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>seamonkey-mail</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="1.0.2" rel="1.1"/>
+      <checksum type="sha" pkgid="YES">e177c23ad4b600b955cd120e90d9c4c8a31ac77c</checksum>
+      <time file="1150977421" build="1150676713"/>
+      <size package="1973388" installed="7391787" archive="7401028"/>
+      <location href="rpm/i586/seamonkey-mail-1.0.2-1.1.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="seamonkey-mail" epoch="0" ver="1.0.2" rel="1.1" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="seamonkey-mail"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/seamonkey-mail-1.0.2-1.1.i586.patch.rpm"/>
+          <checksum type="sha">53589031f084537c4d769b7c1d98d7e6d19ce0e6</checksum>
+          <time file="1150977777" build="1150676713"/>
+          <size package="1791012" archive="6812452"/>
+          <base-version epoch="0" ver="1.0" rel="27"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/seamonkey-mail-1.0_1.0.2-27_1.1.i586.delta.rpm"/>
+          <checksum type="sha">b4c92f350de95c5cd1052f5086af4a48d18b489e</checksum>
+          <time file="1150977781" build="1150676713"/>
+          <size package="122746" archive="0"/>
+          <base-version epoch="0" ver="1.0" rel="27" md5sum="31f3632537153bc2fa69955776fcaafc" buildtime="1146622761" sequence_info="seamonkey-mail-1.0-27-6295c3aa3c662ed469b8ddd50ad4d55e97"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>seamonkey-mail</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="1.0.2" rel="1.1"/>
+      <checksum type="sha" pkgid="YES">6de926cfb9b6ee3004e2531dd78a4a23cffbcf6c</checksum>
+      <time file="1150977488" build="1150603487"/>
+      <size package="2098648" installed="8274739" archive="8283980"/>
+      <location href="rpm/ppc/seamonkey-mail-1.0.2-1.1.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="seamonkey-mail" epoch="0" ver="1.0.2" rel="1.1" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="seamonkey-mail"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/seamonkey-mail-1.0.2-1.1.ppc.patch.rpm"/>
+          <checksum type="sha">b914303e1174a0646cf6a97096346ac772788f4f</checksum>
+          <time file="1150977788" build="1150603487"/>
+          <size package="1783945" archive="7249016"/>
+          <base-version epoch="0" ver="1.0" rel="27"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/seamonkey-mail-1.0_1.0.2-27_1.1.ppc.delta.rpm"/>
+          <checksum type="sha">623fe0ea8e7c0b76805fa6c0327dcd825e97ea70</checksum>
+          <time file="1150977792" build="1150603487"/>
+          <size package="92189" archive="0"/>
+          <base-version epoch="0" ver="1.0" rel="27" md5sum="865271bccc6506e4f6be3148a4903582" buildtime="1146635053" sequence_info="seamonkey-mail-1.0-27-c42a49509ecd62360db484b4875ab31f97"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>seamonkey-mail</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="1.0.2" rel="1.1"/>
+      <checksum type="sha" pkgid="YES">0964835b69272ccd6a73e06d6c1b5a0d352e0cef</checksum>
+      <time file="1150977386" build="1150570286"/>
+      <size package="2204903" installed="8408411" archive="8417760"/>
+      <location href="rpm/x86_64/seamonkey-mail-1.0.2-1.1.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="seamonkey-mail" epoch="0" ver="1.0.2" rel="1.1" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="seamonkey-mail"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/seamonkey-mail-1.0.2-1.1.x86_64.patch.rpm"/>
+          <checksum type="sha">de805333ad5df141effd3f5961f589faca1c0329</checksum>
+          <time file="1150977799" build="1150570286"/>
+          <size package="1987196" archive="7695652"/>
+          <base-version epoch="0" ver="1.0" rel="27"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/seamonkey-mail-1.0_1.0.2-27_1.1.x86_64.delta.rpm"/>
+          <checksum type="sha">1d3da3169074ff932b9ce3362c996445a3e3eeef</checksum>
+          <time file="1150977804" build="1150570286"/>
+          <size package="141727" archive="0"/>
+          <base-version epoch="0" ver="1.0" rel="27" md5sum="11d519d83dfb3171375e70b8f485dab3" buildtime="1146621828" sequence_info="seamonkey-mail-1.0-27-d74d96e6b102515d57aff8256943a96b97"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>seamonkey-spellchecker</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="1.0.2" rel="1.1"/>
+      <checksum type="sha" pkgid="YES">0c054073e01d9a1116e9edc3e9d8fe6d3a0097f6</checksum>
+      <time file="1150977421" build="1150676713"/>
+      <size package="338688" installed="799863" archive="800936"/>
+      <location href="rpm/i586/seamonkey-spellchecker-1.0.2-1.1.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="seamonkey-spellchecker" epoch="0" ver="1.0.2" rel="1.1" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="seamonkey-spellchecker"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/seamonkey-spellchecker-1.0.2-1.1.i586.patch.rpm"/>
+          <checksum type="sha">b1b75f4f06fc151d3c247f6ebda12a398fdbdf99</checksum>
+          <time file="1150977806" build="1150676713"/>
+          <size package="31362" archive="124"/>
+          <base-version epoch="0" ver="1.0" rel="27"/>
+        </patchrpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>seamonkey-spellchecker</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="1.0.2" rel="1.1"/>
+      <checksum type="sha" pkgid="YES">95d811c8cba25b96bcf2a918b3083f2d890be4ee</checksum>
+      <time file="1150977488" build="1150603487"/>
+      <size package="341808" installed="821715" archive="822788"/>
+      <location href="rpm/ppc/seamonkey-spellchecker-1.0.2-1.1.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="seamonkey-spellchecker" epoch="0" ver="1.0.2" rel="1.1" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="seamonkey-spellchecker"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/seamonkey-spellchecker-1.0.2-1.1.ppc.patch.rpm"/>
+          <checksum type="sha">e6678155d65efe8776877f9528762c4368beacab</checksum>
+          <time file="1150977809" build="1150603487"/>
+          <size package="31346" archive="124"/>
+          <base-version epoch="0" ver="1.0" rel="27"/>
+        </patchrpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>seamonkey-spellchecker</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="1.0.2" rel="1.1"/>
+      <checksum type="sha" pkgid="YES">4825e3e93ebb89d4d2e926cdfcd994bfd1b26264</checksum>
+      <time file="1150977386" build="1150570286"/>
+      <size package="344141" installed="822459" archive="823548"/>
+      <location href="rpm/x86_64/seamonkey-spellchecker-1.0.2-1.1.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="seamonkey-spellchecker" epoch="0" ver="1.0.2" rel="1.1" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="seamonkey-spellchecker"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/seamonkey-spellchecker-1.0.2-1.1.x86_64.patch.rpm"/>
+          <checksum type="sha">47a60416b5e4b8d27e24d00f17c4491b33b0c280</checksum>
+          <time file="1150977813" build="1150570286"/>
+          <size package="31478" archive="124"/>
+          <base-version epoch="0" ver="1.0" rel="27"/>
+        </patchrpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>seamonkey-venkman</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="1.0.2" rel="1.1"/>
+      <checksum type="sha" pkgid="YES">1ad2151b6ffc5a6796c4a30a34e23578725cdb62</checksum>
+      <time file="1150977422" build="1150676713"/>
+      <size package="206761" installed="869117" archive="869904"/>
+      <location href="rpm/i586/seamonkey-venkman-1.0.2-1.1.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="seamonkey-venkman" epoch="0" ver="1.0.2" rel="1.1" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="seamonkey-venkman"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/seamonkey-venkman-1.0.2-1.1.i586.patch.rpm"/>
+          <checksum type="sha">08a2c547e62626c34e750c654aaf4ede6280296c</checksum>
+          <time file="1150977816" build="1150676713"/>
+          <size package="30514" archive="124"/>
+          <base-version epoch="0" ver="1.0" rel="27"/>
+        </patchrpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>seamonkey-venkman</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="1.0.2" rel="1.1"/>
+      <checksum type="sha" pkgid="YES">fcef241ca763e581713334e52c0447e7500891ae</checksum>
+      <time file="1150977488" build="1150603487"/>
+      <size package="206207" installed="869117" archive="869904"/>
+      <location href="rpm/ppc/seamonkey-venkman-1.0.2-1.1.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="seamonkey-venkman" epoch="0" ver="1.0.2" rel="1.1" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="seamonkey-venkman"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/seamonkey-venkman-1.0.2-1.1.ppc.patch.rpm"/>
+          <checksum type="sha">4ad029b05fea7cce75f047c79c2f7bc41268bd19</checksum>
+          <time file="1150977820" build="1150603487"/>
+          <size package="30498" archive="124"/>
+          <base-version epoch="0" ver="1.0" rel="27"/>
+        </patchrpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>seamonkey-venkman</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="1.0.2" rel="1.1"/>
+      <checksum type="sha" pkgid="YES">67edac14973b69260a0055787ea72c83237ad589</checksum>
+      <time file="1150977386" build="1150570286"/>
+      <size package="206755" installed="869117" archive="869912"/>
+      <location href="rpm/x86_64/seamonkey-venkman-1.0.2-1.1.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="seamonkey-venkman" epoch="0" ver="1.0.2" rel="1.1" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="seamonkey-venkman"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/seamonkey-venkman-1.0.2-1.1.x86_64.patch.rpm"/>
+          <checksum type="sha">58888d55de7c9f124c972b2c64c5f8ba688dbf62</checksum>
+          <time file="1150977824" build="1150570286"/>
+          <size package="30510" archive="124"/>
+          <base-version epoch="0" ver="1.0" rel="27"/>
+        </patchrpm>
+      </pkgfiles>
+    </package>
+  </atoms>
+</patch>

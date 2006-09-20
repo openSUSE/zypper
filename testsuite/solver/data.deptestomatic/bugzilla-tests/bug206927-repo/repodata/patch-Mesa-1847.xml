@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--PATCHINFO id="4aad529ebe84e9e97385b91579cebe60"!-->
+<patch
+    xmlns="http://novell.com/package/metadata/suse/patch"
+    xmlns:yum="http://linux.duke.edu/metadata/common"
+    xmlns:rpm="http://linux.duke.edu/metadata/rpm"
+    xmlns:suse="http://novell.com/package/metadata/suse/common"
+    patchid="Mesa-1847"
+    timestamp="1153357809"
+    engine="1.0">
+  <yum:name>Mesa</yum:name>
+  <summary lang="en">Mesa: Permits the coexistance of Mesa and NVIDIA driver.</summary>
+  <summary lang="de">Mesa: Ermöglicht die Parallelinstallation von Mesa und NVIDIA Treiber.</summary>
+  <description lang="en">This update permits the coexistance of Mesa and NVIDIA
+driver.
+</description>
+  <description lang="de">Dieses Update ermöglicht die Parallelinstallation von Mesa
+und dem NVIDIA Treiber.
+</description>
+  <yum:version ver="1847" rel="0"/>
+  <rpm:requires>
+    <rpm:entry kind="atom" name="Mesa" epoch="0" ver="6.4.2" rel="19.7" flags="EQ"/>
+    <rpm:entry kind="atom" name="Mesa-32bit" epoch="0" ver="6.4.2" rel="19.7" flags="EQ"/>
+    <rpm:entry kind="atom" name="Mesa-64bit" epoch="0" ver="6.4.2" rel="19.7" flags="EQ"/>
+    <rpm:entry kind="atom" name="Mesa-devel" epoch="0" ver="6.4.2" rel="19.7" flags="EQ"/>
+    <rpm:entry kind="atom" name="Mesa-devel-32bit" epoch="0" ver="6.4.2" rel="19.7" flags="EQ"/>
+    <rpm:entry kind="atom" name="Mesa-devel-64bit" epoch="0" ver="6.4.2" rel="19.7" flags="EQ"/>
+  </rpm:requires>
+  <category>recommended</category>
+  <atoms>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>Mesa</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="6.4.2" rel="19.7"/>
+      <checksum type="sha" pkgid="YES">58625a39a60c06cdb6e00056c7baa29c8fc7eb81</checksum>
+      <time file="1153407619" build="1153357809"/>
+      <size package="13420654" installed="38809070" archive="38836212"/>
+      <location href="rpm/i586/Mesa-6.4.2-19.7.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="Mesa" epoch="0" ver="6.4.2" rel="19.7" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="Mesa"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/Mesa-6.4.2-19.7.i586.patch.rpm"/>
+          <checksum type="sha">3dead5b9a9e7dbf3bafba8d8345c55f6c52d743e</checksum>
+          <time file="1153409534" build="1153357809"/>
+          <size package="2668800" archive="7683440"/>
+          <base-version epoch="0" ver="6.4.2" rel="19"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/Mesa-6.4.2-19_19.7.i586.delta.rpm"/>
+          <checksum type="sha">945e693a6fbc1ef529348317eb36a31a0d57963f</checksum>
+          <time file="1153409551" build="1153357809"/>
+          <size package="213309" archive="0"/>
+          <base-version epoch="0" ver="6.4.2" rel="19" md5sum="495c49670def246ecdf780044bb34231" buildtime="1146557880" sequence_info="Mesa-6.4.2-19-02b649b5a030e800f32e993dd93b40e89810"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>Mesa</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="6.4.2" rel="19.7"/>
+      <checksum type="sha" pkgid="YES">f8e44e7218fd3a4ab61caae64676686fa1016a29</checksum>
+      <time file="1153408209" build="1153358355"/>
+      <size package="6353182" installed="20998182" archive="21023796"/>
+      <location href="rpm/ppc/Mesa-6.4.2-19.7.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="Mesa" epoch="0" ver="6.4.2" rel="19.7" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="Mesa"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/Mesa-6.4.2-19.7.ppc.patch.rpm"/>
+          <checksum type="sha">561c09199c8841f61b2f8369f6df60580df35917</checksum>
+          <time file="1153409560" build="1153358355"/>
+          <size package="254986" archive="1256784"/>
+          <base-version epoch="0" ver="6.4.2" rel="19"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/Mesa-6.4.2-19_19.7.ppc.delta.rpm"/>
+          <checksum type="sha">f522ceda136a8819458791666fc28a2dfb2243cf</checksum>
+          <time file="1153409569" build="1153358355"/>
+          <size package="181380" archive="0"/>
+          <base-version epoch="0" ver="6.4.2" rel="19" md5sum="992c92ab62424c435ccad3d6b2ee913f" buildtime="1146558910" sequence_info="Mesa-6.4.2-19-f03f07392d3c0d4e6263f10aa3c0fac7f6"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>Mesa</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="6.4.2" rel="19.7"/>
+      <checksum type="sha" pkgid="YES">5ed408ae741fa41c065ee78b76ebac85d3d4d4cb</checksum>
+      <time file="1153407289" build="1153356970"/>
+      <size package="9757218" installed="28056646" archive="28082924"/>
+      <location href="rpm/x86_64/Mesa-6.4.2-19.7.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="Mesa" epoch="0" ver="6.4.2" rel="19.7" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="Mesa"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/Mesa-6.4.2-19.7.x86_64.patch.rpm"/>
+          <checksum type="sha">2f1467d6574e8cf7fe25814f89d5465d5cd12748</checksum>
+          <time file="1153409588" build="1153356970"/>
+          <size package="9280329" archive="26120308"/>
+          <base-version epoch="0" ver="6.4.2" rel="19"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/Mesa-6.4.2-19_19.7.x86_64.delta.rpm"/>
+          <checksum type="sha">560ebbe17993598f56aa509ba5c3409fcff58e24</checksum>
+          <time file="1153409608" build="1153356970"/>
+          <size package="468908" archive="0"/>
+          <base-version epoch="0" ver="6.4.2" rel="19" md5sum="92a73c4a781699a9a421f41e2dc7760d" buildtime="1146558532" sequence_info="Mesa-6.4.2-19-723d0cf4371dda7e308b23ac9511423ab7"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>Mesa-32bit</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="6.4.2" rel="19.7"/>
+      <checksum type="sha" pkgid="YES">3479f67ad9a87a9374c2b039fd1d92eda049fd9b</checksum>
+      <time file="1153407617" build="1153358107"/>
+      <size package="13190168" installed="37418092" archive="37423244"/>
+      <location href="rpm/x86_64/Mesa-32bit-6.4.2-19.7.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="Mesa-32bit" epoch="0" ver="6.4.2" rel="19.7" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="Mesa-32bit"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/Mesa-32bit-6.4.2-19.7.x86_64.patch.rpm"/>
+          <checksum type="sha">abc66ce9846dc304aab1d6bb64d1b14762011eee</checksum>
+          <time file="1153409623" build="1153358107"/>
+          <size package="2656172" archive="7683440"/>
+          <base-version epoch="0" ver="6.4.2" rel="19"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/Mesa-32bit-6.4.2-19_19.7.x86_64.delta.rpm"/>
+          <checksum type="sha">f5535e232932c29711c325f6cdf029903a26eeee</checksum>
+          <time file="1153409638" build="1153358107"/>
+          <size package="39576" archive="0"/>
+          <base-version epoch="0" ver="6.4.2" rel="19" md5sum="435bd811de16b977f572390875bb50b0" buildtime="1146558043" sequence_info="Mesa-32bit-6.4.2-19-40c6af86b8860d76d81bc0a126a4e8b094"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>Mesa-64bit</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="6.4.2" rel="19.7"/>
+      <checksum type="sha" pkgid="YES">4686654ac759caeb793d7de7238e1c4129edaade</checksum>
+      <time file="1153407935" build="1153357844"/>
+      <size package="14569587" installed="52509014" archive="52514220"/>
+      <location href="rpm/ppc/Mesa-64bit-6.4.2-19.7.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="Mesa-64bit" epoch="0" ver="6.4.2" rel="19.7" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="Mesa-64bit"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/Mesa-64bit-6.4.2-19.7.ppc.patch.rpm"/>
+          <checksum type="sha">007a20d80716a56984a38b99e74a9aac15f956d3</checksum>
+          <time file="1153409669" build="1153357844"/>
+          <size package="14337195" archive="51788988"/>
+          <base-version epoch="0" ver="6.4.2" rel="19"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/Mesa-64bit-6.4.2-19_19.7.ppc.delta.rpm"/>
+          <checksum type="sha">11219faa6526858467c0042cd609e6ad7e21542a</checksum>
+          <time file="1153409687" build="1153357844"/>
+          <size package="14410" archive="0"/>
+          <base-version epoch="0" ver="6.4.2" rel="19" md5sum="6103899ad16b376d362a59bb1c6c8afc" buildtime="1146555494" sequence_info="Mesa-64bit-6.4.2-19-128e38ee797877cc3523e8e2c2cb544594"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>Mesa-devel</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="6.4.2" rel="19.7"/>
+      <checksum type="sha" pkgid="YES">ba72f3b03c7452ecccef2c30fc2a0fa0ca73305f</checksum>
+      <time file="1153407624" build="1153357809"/>
+      <size package="398324" installed="344456" archive="425640"/>
+      <location href="rpm/i586/Mesa-devel-6.4.2-19.7.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="Mesa-devel" epoch="0" ver="6.4.2" rel="19.7" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="Mesa-devel"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/Mesa-devel-6.4.2-19.7.i586.patch.rpm"/>
+          <checksum type="sha">1a30a206006e1008c28637666332b2b8fb83a7d0</checksum>
+          <time file="1153409691" build="1153357809"/>
+          <size package="398279" archive="425068"/>
+          <base-version epoch="0" ver="6.4.2" rel="19"/>
+        </patchrpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>Mesa-devel</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="6.4.2" rel="19.7"/>
+      <checksum type="sha" pkgid="YES">32b55eaff4d3a82658dff4801dc0ea188d59cd22</checksum>
+      <time file="1153408212" build="1153358355"/>
+      <size package="398880" installed="344456" archive="425640"/>
+      <location href="rpm/ppc/Mesa-devel-6.4.2-19.7.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="Mesa-devel" epoch="0" ver="6.4.2" rel="19.7" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="Mesa-devel"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/Mesa-devel-6.4.2-19.7.ppc.patch.rpm"/>
+          <checksum type="sha">4d5424f98a9ce9c1eee5957512badfca490b53da</checksum>
+          <time file="1153409693" build="1153358355"/>
+          <size package="398883" archive="425068"/>
+          <base-version epoch="0" ver="6.4.2" rel="19"/>
+        </patchrpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>Mesa-devel</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="6.4.2" rel="19.7"/>
+      <checksum type="sha" pkgid="YES">bba09e1a3b4a0327d8b87bbbc85fd42ff106ac19</checksum>
+      <time file="1153407294" build="1153356970"/>
+      <size package="398593" installed="344456" archive="425640"/>
+      <location href="rpm/x86_64/Mesa-devel-6.4.2-19.7.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="Mesa-devel" epoch="0" ver="6.4.2" rel="19.7" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="Mesa-devel"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/Mesa-devel-6.4.2-19.7.x86_64.patch.rpm"/>
+          <checksum type="sha">21ca3a6c7ebb8351d834ec5d622461c16fbc9621</checksum>
+          <time file="1153409695" build="1153356970"/>
+          <size package="398565" archive="425068"/>
+          <base-version epoch="0" ver="6.4.2" rel="19"/>
+        </patchrpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>Mesa-devel-32bit</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="6.4.2" rel="19.7"/>
+      <checksum type="sha" pkgid="YES">0da7fa5ec6abb614c5add73f2b4f87d46a6ba9c3</checksum>
+      <time file="1153407624" build="1153358130"/>
+      <size package="6544" installed="0" archive="564"/>
+      <location href="rpm/x86_64/Mesa-devel-32bit-6.4.2-19.7.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="Mesa-devel-32bit" epoch="0" ver="6.4.2" rel="19.7" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="Mesa-devel-32bit"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/Mesa-devel-32bit-6.4.2-19.7.x86_64.patch.rpm"/>
+          <checksum type="sha">0174ce5e408c57bda7935afab1f8a440065d6ca0</checksum>
+          <time file="1153409697" build="1153358130"/>
+          <size package="6528" archive="124"/>
+          <base-version epoch="0" ver="6.4.2" rel="19"/>
+        </patchrpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>Mesa-devel-64bit</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="6.4.2" rel="19.7"/>
+      <checksum type="sha" pkgid="YES">27a80cd8a701a78f7a11ce13c5ff8ef8289e65c7</checksum>
+      <time file="1153407943" build="1153357867"/>
+      <size package="6511" installed="0" archive="564"/>
+      <location href="rpm/ppc/Mesa-devel-64bit-6.4.2-19.7.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="Mesa-devel-64bit" epoch="0" ver="6.4.2" rel="19.7" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="Mesa-devel-64bit"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/Mesa-devel-64bit-6.4.2-19.7.ppc.patch.rpm"/>
+          <checksum type="sha">daf4258f738c1ba05a8eb966f5b5e3263ea9d0c5</checksum>
+          <time file="1153409699" build="1153357867"/>
+          <size package="6496" archive="124"/>
+          <base-version epoch="0" ver="6.4.2" rel="19"/>
+        </patchrpm>
+      </pkgfiles>
+    </package>
+  </atoms>
+</patch>

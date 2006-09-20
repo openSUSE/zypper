@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--PATCHINFO id="bf43b8439114607d695cc78101410da0"!-->
+<patch
+    xmlns="http://novell.com/package/metadata/suse/patch"
+    xmlns:yum="http://linux.duke.edu/metadata/common"
+    xmlns:rpm="http://linux.duke.edu/metadata/rpm"
+    xmlns:suse="http://novell.com/package/metadata/suse/common"
+    patchid="opera-1697"
+    timestamp="1151520042"
+    engine="1.0">
+  <yum:name>opera</yum:name>
+  <summary lang="en">opera: Security update to version 9.0</summary>
+  <summary lang="de">opera: Sicherheitsupdate auf Version 9.0</summary>
+  <description lang="en">The webbrowser Opera has been upgraded to version 9.0 to
+add lots of new features, and to fix the following security
+problem:
+
+CVE-2006-3198: An integer overflow vulnerability exists in
+the Opera Web Browser due to the improper handling of JPEG
+files.
+
+If excessively large height and width values are specified
+in certain fields of a JPEG file, an integer overflow may
+cause Opera to allocate insufficient memory for the image.
+This will lead to a buffer overflow when the image is
+loaded into memory, which can be exploited to execute
+arbitrary code.
+</description>
+  <description lang="de">Der Webbrowser Opera wurde in Version 9.0 herausgegeben.
+Diese Version bringt nicht nur viele neue Features, sondern
+behebt auch folgendes Sicherheitsproblem:
+
+CVE-2006-3198: In der Verarbeitung von JPEG im Webbrowser
+Opera existiert ein Integerüberlauf.
+
+Wenn sehr große Höhen/Breiten Werte in speziellen
+Datenfeldern im JPEG spezifiziert werden, kann ein
+Integerüberlauf Opera dazu veranlassen, zu wenig Speicher
+für das Bild zu reservieren. Dadurch kann es zu  einem
+Pufferüberlauf kommen, welcher potentiell zum Ausführen von
+Code als der Opera Benutzer verwendet werden kann.
+</description>
+  <yum:version ver="1697" rel="0"/>
+  <rpm:requires>
+  <rpm:entry kind="atom" name="opera" epoch="0" ver="9.0" rel="1.1" flags="EQ"/>
+  </rpm:requires>
+  <category>security</category>
+  <atoms>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>opera</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="9.0" rel="1.1"/>
+      <checksum type="sha" pkgid="YES">92113f786a1a5d9e9b94694c142605bb05e22efc</checksum>
+      <time file="1151598435" build="1151520042"/>
+      <size package="5747201" installed="15197412" archive="15214644"/>
+      <location href="rpm/i586/opera-9.0-1.1.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="opera" epoch="0" ver="9.0" rel="1.1" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="opera"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/opera-9.0-1.1.i586.patch.rpm"/>
+          <checksum type="sha">1fd7b0bc746fdf4223b120d5e29dcc4378702380</checksum>
+          <time file="1151598976" build="1151520042"/>
+          <size package="4994963" archive="12077940"/>
+          <base-version epoch="0" ver="8.52" rel="12"/>
+          <base-version epoch="0" ver="8.54" rel="0.1"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/opera-8.52_9.0-12_1.1.i586.delta.rpm"/>
+          <checksum type="sha">daaa098ad34197f5a57140740f55536b631ba6d8</checksum>
+          <time file="1151598988" build="1151520042"/>
+          <size package="4177468" archive="0"/>
+          <base-version epoch="0" ver="8.52" rel="12" md5sum="82e5cdcfee3fab1415aca7328d3a0c2c" buildtime="1146555773" sequence_info="opera-8.52-12-ca58820bc49ab68a7a6e50094b6a003203ee10"/>
+        </deltarpm>
+        <deltarpm>
+          <location href="rpm/i586/opera-8.54_9.0-0.1_1.1.i586.delta.rpm"/>
+          <checksum type="sha">3b95d2873502efb1d24d974b5d2579482ba9526f</checksum>
+          <time file="1151598999" build="1151520042"/>
+          <size package="4414591" archive="0"/>
+          <base-version epoch="0" ver="8.54" rel="0.1" md5sum="6e690043332dbbb515d82d2f2df2529d" buildtime="1147258124" sequence_info="opera-8.54-0.1-6582cd6e1f0d70535a90afc1d08394e703c51942f4"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>opera</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="9.0" rel="1.1"/>
+      <checksum type="sha" pkgid="YES">fd8d66348d0d6cc676479228ae299a2d29474fe1</checksum>
+      <time file="1151598502" build="1151519864"/>
+      <size package="7338801" installed="21209316" archive="21226548"/>
+      <location href="rpm/ppc/opera-9.0-1.1.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="opera" epoch="0" ver="9.0" rel="1.1" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="opera"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/opera-9.0-1.1.ppc.patch.rpm"/>
+          <checksum type="sha">a4a3571c5b33794f4789229d56191d664e3470c2</checksum>
+          <time file="1151599011" build="1151519864"/>
+          <size package="6575827" archive="18089004"/>
+          <base-version epoch="0" ver="8.52" rel="12"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/opera-8.52_9.0-12_1.1.ppc.delta.rpm"/>
+          <checksum type="sha">69c5eb91d3a93390efab4108bf23bdee20cb820a</checksum>
+          <time file="1151599027" build="1151519864"/>
+          <size package="5720963" archive="0"/>
+          <base-version epoch="0" ver="8.52" rel="12" md5sum="eca4fd1b76a3ce60aab883057a0953c8" buildtime="1146604619" sequence_info="opera-8.52-12-9d7874da1595c9ada2a8b0d52e0213c203ee10"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>opera</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="9.0" rel="1.1"/>
+      <checksum type="sha" pkgid="YES">00d87a99dfc9fb30e26d2c315bb351b6dbc171b4</checksum>
+      <time file="1151598380" build="1151520393"/>
+      <size package="5746852" installed="15197412" archive="15214644"/>
+      <location href="rpm/x86_64/opera-9.0-1.1.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="opera" epoch="0" ver="9.0" rel="1.1" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="opera"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/opera-9.0-1.1.x86_64.patch.rpm"/>
+          <checksum type="sha">79a64778a0579fce98d9bdc6998a18b60a0d0827</checksum>
+          <time file="1151599037" build="1151520393"/>
+          <size package="4994381" archive="12077940"/>
+          <base-version epoch="0" ver="8.52" rel="12"/>
+          <base-version epoch="0" ver="8.54" rel="0.1"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/opera-8.52_9.0-12_1.1.x86_64.delta.rpm"/>
+          <checksum type="sha">8c601e5d1d933d8acbb99898799a56b13d9a5969</checksum>
+          <time file="1151599050" build="1151520393"/>
+          <size package="4175854" archive="0"/>
+          <base-version epoch="0" ver="8.52" rel="12" md5sum="302478bddfa1b85fe5c11e4168f2a674" buildtime="1146556684" sequence_info="opera-8.52-12-ca58820bc49ab68a7a6e50094b6a003203ee10"/>
+        </deltarpm>
+        <deltarpm>
+          <location href="rpm/x86_64/opera-8.54_9.0-0.1_1.1.x86_64.delta.rpm"/>
+          <checksum type="sha">48d227c9094983234aea59482c2659ff8af119e3</checksum>
+          <time file="1151599060" build="1151520393"/>
+          <size package="4414695" archive="0"/>
+          <base-version epoch="0" ver="8.54" rel="0.1" md5sum="f2de16c567f24e5ce962cf77b376982f" buildtime="1147258221" sequence_info="opera-8.54-0.1-6582cd6e1f0d70535a90afc1d08394e703c51942f4"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+  </atoms>
+</patch>

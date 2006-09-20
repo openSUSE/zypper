@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--PATCHINFO id="93b3aed24fa1c7a30b12b7f45ea85649"!-->
+<patch
+    xmlns="http://novell.com/package/metadata/suse/patch"
+    xmlns:yum="http://linux.duke.edu/metadata/common"
+    xmlns:rpm="http://linux.duke.edu/metadata/rpm"
+    xmlns:suse="http://novell.com/package/metadata/suse/common"
+    patchid="horde-1600"
+    timestamp="1150137324"
+    engine="1.0">
+  <yum:name>horde</yum:name>
+  <summary lang="en">Cross-Site-Scripting  vulnerability fixed.</summary>
+  <summary lang="de">Cross-Site-Scripting-Fehler behoben.</summary>
+  <description lang="en">This update of horde fixes some cross-site-scripting
+vulnerabilities. (CVE-2005-4190,CVE-2006-2195)
+</description>
+  <description lang="de">Mit diesem Update vom horde behebt man einige
+Cross-Site-Scripting-Fehler. (CVE-2005-4190,CVE-2006-2195)
+</description>
+  <yum:version ver="1600" rel="0"/>
+  <rpm:requires>
+    <rpm:entry kind="atom" name="horde" epoch="0" ver="3.0.9" rel="19.2" flags="EQ"/>
+  </rpm:requires>
+  <category>security</category>
+  <atoms>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>horde</name>
+      <arch>noarch</arch>
+      <version epoch="0" ver="3.0.9" rel="19.2"/>
+      <checksum type="sha" pkgid="YES">75f281d2c7c7e265b8c6296abe4d24eb4275bdf7</checksum>
+      <time file="1150213766" build="1150137324"/>
+      <size package="2146165" installed="8519834" archive="8776180"/>
+      <location href="rpm/noarch/horde-3.0.9-19.2.noarch.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="horde" epoch="0" ver="3.0.9" rel="19.2" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="horde"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/noarch/horde-3.0.9-19.2.noarch.patch.rpm"/>
+          <checksum type="sha">81c181910a9abe45deffd3c70d95a744329de1d5</checksum>
+          <time file="1150247301" build="1150137324"/>
+          <size package="148246" archive="16772"/>
+          <base-version epoch="0" ver="3.0.9" rel="19"/>
+        </patchrpm>
+      </pkgfiles>
+    </package>
+  </atoms>
+</patch>

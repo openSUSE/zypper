@@ -1,0 +1,2211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--PATCHINFO id="170af31761d5553866c9b4b64d59a4ba"!-->
+<patch
+    xmlns="http://novell.com/package/metadata/suse/patch"
+    xmlns:yum="http://linux.duke.edu/metadata/common"
+    xmlns:rpm="http://linux.duke.edu/metadata/rpm"
+    xmlns:suse="http://novell.com/package/metadata/suse/common"
+    patchid="libzypp-1839"
+    timestamp="1153193030"
+    engine="1.0">
+  <yum:name>libzypp</yum:name>
+  <summary lang="en">libzypp update</summary>
+  <summary lang="de">libzypp update</summary>
+  <description lang="en">This update includes fixes for the following bugs:
+* Fixed updating rug.rpm and other packages that &quot;Provide&quot;
+  themselves without edition (#186079)
+* Fixed progress reporting when installing from YUM sources
+  (#182003)
+* Fixes for autorefresh (#186115, #181613, #181182)
+* parse-metadata consumed much memory because of
+  duplicating entries in zmd.db (#187779)
+* Do a media change request for CD or DVD only (#183315)
+* ZENworks automatically subscribes to YUM services (single
+  catalog, #175721)
+* Do not complain if ZMD cannot be stopped (#166900)
+* Handle passwords in URLs (#186978, #186842, #186804)
+* Do not leave stale temporary files (#178292)
+* Handle signing in zen-updater, zmd
+* Fix some bugs in interaction of libzypp and zmd
+* Fix applying of kernel patch to not install kernel-kdump
+  (#191483)
+</description>
+  <description lang="de">Dieses Update behebt unter anderem die folgenden Probleme:
+* Behebt Update von rug.rpm und anderen Paketen, die sich
+  selbst ohne Edition &quot;Providen&quot; (#186079)
+* Behebt Progressreporting falls von YUM Quellen
+  installiert  wird (#182003)
+* Fixes für den automatischen Refresh (#186115, #181613,
+  #181182)
+* parse-metadata verbrauchte zu viel Speicher Aufgrund von
+  duplizierten Einträgen in zmd.db (#187779)
+* Medien-Wechselaufforderungen gibt es nun nur für CD und
+  DVD (#183315)
+* ZENworks subscribiert nun automatisch YUM services
+  (einzelner catalog, #175721)
+* Bessere Lösung falls ZMD nicht gestoppt werden kann
+  (#166900)
+* Behandlung von Passwörtern in URLs (#186978, #186842,
+  #186804)
+* Löschen von nicht mehr benutzen temporären Dateien
+  (#178292)
+* Behandlung von signierten Repositories in zen-updater, zmd
+* Behebt einige Bugs in der Interaktion von libzypp und zmd
+* Behebt das Installieren des Kernel Patches, so dass
+  kernel-kdump nicht nachinstalliert wird (#191483)
+</description>
+  <yum:version ver="1839" rel="0"/>
+  <rpm:requires>
+    <rpm:entry kind="atom" name="autoyast2" epoch="0" ver="2.13.69" rel="0.3" flags="EQ"/>
+    <rpm:entry kind="atom" name="autoyast2-installation" epoch="0" ver="2.13.69" rel="0.3" flags="EQ"/>
+    <rpm:entry kind="atom" name="autoyast2-utils" epoch="0" ver="2.13.69" rel="0.3" flags="EQ"/>
+    <rpm:entry kind="atom" name="libzypp" epoch="0" ver="1.2.0" rel="1.27" flags="EQ"/>
+    <rpm:entry kind="atom" name="libzypp-devel" epoch="0" ver="1.2.0" rel="1.27" flags="EQ"/>
+    <rpm:entry kind="atom" name="libzypp-zmd-backend" epoch="0" ver="7.1.1.0" rel="42.46" flags="EQ"/>
+    <rpm:entry kind="atom" name="ruby-zypp" epoch="0" ver="0.0" rel="8.2" flags="EQ"/>
+    <rpm:entry kind="atom" name="rug" epoch="0" ver="7.1.1.0" rel="18.24" flags="EQ"/>
+    <rpm:entry kind="atom" name="suseRegister" epoch="0" ver="1.0" rel="63.9" flags="EQ"/>
+    <rpm:entry kind="atom" name="yast2" epoch="0" ver="2.13.64.2" rel="0.2" flags="EQ"/>
+    <rpm:entry kind="atom" name="yast2-devel" epoch="0" ver="2.13.64.2" rel="0.2" flags="EQ"/>
+    <rpm:entry kind="atom" name="yast2-installation" epoch="0" ver="2.13.132.4" rel="0.3" flags="EQ"/>
+    <rpm:entry kind="atom" name="yast2-instserver" epoch="0" ver="2.13.11" rel="1.3" flags="EQ"/>
+    <rpm:entry kind="atom" name="yast2-ncurses" epoch="0" ver="2.13.40" rel="1.3" flags="EQ"/>
+    <rpm:entry kind="atom" name="yast2-online-update" epoch="0" ver="2.13.43" rel="1.3" flags="EQ"/>
+    <rpm:entry kind="atom" name="yast2-online-update-frontend" epoch="0" ver="2.13.43" rel="1.3" flags="EQ"/>
+    <rpm:entry kind="atom" name="yast2-packager" epoch="0" ver="2.13.139" rel="1.3" flags="EQ"/>
+    <rpm:entry kind="atom" name="yast2-perl-bindings" epoch="0" ver="2.13.5" rel="1.3" flags="EQ"/>
+    <rpm:entry kind="atom" name="yast2-pkg-bindings" epoch="0" ver="2.13.88" rel="1.3" flags="EQ"/>
+    <rpm:entry kind="atom" name="yast2-qt" epoch="0" ver="2.13.60" rel="0.4" flags="EQ"/>
+    <rpm:entry kind="atom" name="yast2-security" epoch="0" ver="2.13.4" rel="0.3" flags="EQ"/>
+    <rpm:entry kind="atom" name="zen-updater" epoch="0" ver="7.1.0" rel="51.29" flags="EQ"/>
+    <rpm:entry kind="atom" name="zmd" epoch="0" ver="7.1.1.0" rel="39.50" flags="EQ"/>
+    <rpm:entry kind="atom" name="zmd-devel" epoch="0" ver="7.1.1.0" rel="39.50" flags="EQ"/>
+  </rpm:requires>
+  <package-manager/>
+  <category>recommended</category>
+  <atoms>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>autoyast2</name>
+      <arch>noarch</arch>
+      <version epoch="0" ver="2.13.69" rel="0.3"/>
+      <checksum type="sha" pkgid="YES">3a6f55a1245907d0ba90c70f5bbb9b6c5336a2ee</checksum>
+      <time file="1153240075" build="1153193030"/>
+      <size package="846288" installed="1872197" archive="1914084"/>
+      <location href="rpm/noarch/autoyast2-2.13.69-0.3.noarch.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="autoyast2" epoch="0" ver="2.13.69" rel="0.3" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="autoyast2"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/noarch/autoyast2-2.13.69-0.3.noarch.patch.rpm"/>
+          <checksum type="sha">e08da43f0250df0f8ebd7a856e94dfa22a8df676</checksum>
+          <time file="1153242965" build="1153193030"/>
+          <size package="299598" archive="659560"/>
+          <base-version epoch="0" ver="2.13.56" rel="3"/>
+          <base-version epoch="0" ver="2.13.65" rel="0.2"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/noarch/autoyast2-2.13.56_2.13.69-3_0.3.noarch.delta.rpm"/>
+          <checksum type="sha">5441c154781c00da3ccea282414158abe2d49b33</checksum>
+          <time file="1153242966" build="1153193030"/>
+          <size package="108471" archive="0"/>
+          <base-version epoch="0" ver="2.13.56" rel="3" md5sum="020c38f1a2d617898ac729e0b4115700" buildtime="1146679425" sequence_info="autoyast2-2.13.56-3-b35146f56913f806a694e91e91e671d9fe30"/>
+        </deltarpm>
+        <deltarpm>
+          <location href="rpm/noarch/autoyast2-2.13.65_2.13.69-0.2_0.3.noarch.delta.rpm"/>
+          <checksum type="sha">be345f0e42ad84c6323db9fc6a39fe4866237fb2</checksum>
+          <time file="1153242967" build="1153193030"/>
+          <size package="63152" archive="0"/>
+          <base-version epoch="0" ver="2.13.65" rel="0.2" md5sum="e3c476cf8202791f4fcd9f4d0801e36a" buildtime="1149559112" sequence_info="autoyast2-2.13.65-0.2-86b0f949b847f300c64450898c8d5f48fe30"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>autoyast2-installation</name>
+      <arch>noarch</arch>
+      <version epoch="0" ver="2.13.69" rel="0.3"/>
+      <checksum type="sha" pkgid="YES">5a783dae4221812c21ebf8904e16e6db4d2d8114</checksum>
+      <time file="1153240075" build="1153193030"/>
+      <size package="179684" installed="1174215" archive="1188768"/>
+      <location href="rpm/noarch/autoyast2-installation-2.13.69-0.3.noarch.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="autoyast2-installation" epoch="0" ver="2.13.69" rel="0.3" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="autoyast2-installation"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/noarch/autoyast2-installation-2.13.69-0.3.noarch.patch.rpm"/>
+          <checksum type="sha">ba4325f5ebdef7b4f05cbd8a9b411609fae6fce9</checksum>
+          <time file="1153242972" build="1153193030"/>
+          <size package="111091" archive="692404"/>
+          <base-version epoch="0" ver="2.13.56" rel="3"/>
+          <base-version epoch="0" ver="2.13.65" rel="0.2"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/noarch/autoyast2-installation-2.13.56_2.13.69-3_0.3.noarch.delta.rpm"/>
+          <checksum type="sha">7b9bb148a5521de3d7be6ae5ae9b14c8d41a2bd8</checksum>
+          <time file="1153242973" build="1153193030"/>
+          <size package="49899" archive="0"/>
+          <base-version epoch="0" ver="2.13.56" rel="3" md5sum="1f4f0941fec45fdb617a7095bdef7f5d" buildtime="1146679425" sequence_info="autoyast2-installation-2.13.56-3-a6dd9218e7ef9a4af4239822f091440ceb10"/>
+        </deltarpm>
+        <deltarpm>
+          <location href="rpm/noarch/autoyast2-installation-2.13.65_2.13.69-0.2_0.3.noarch.delta.rpm"/>
+          <checksum type="sha">8bc9395cd69d4b6ed02cd6e7256f5b71bc534418</checksum>
+          <time file="1153242973" build="1153193030"/>
+          <size package="48090" archive="0"/>
+          <base-version epoch="0" ver="2.13.65" rel="0.2" md5sum="5cb90f55149aad965edea3f3a38d2094" buildtime="1149559112" sequence_info="autoyast2-installation-2.13.65-0.2-5ded1dbaaf5245d351146df1b89da242eb10"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>autoyast2-utils</name>
+      <arch>noarch</arch>
+      <version epoch="0" ver="2.13.69" rel="0.3"/>
+      <checksum type="sha" pkgid="YES">42aea35cb9dce1f9f715f625af080e0b291e5c40</checksum>
+      <time file="1153240075" build="1153193030"/>
+      <size package="42371" installed="26228" archive="26640"/>
+      <location href="rpm/noarch/autoyast2-utils-2.13.69-0.3.noarch.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="autoyast2-utils" epoch="0" ver="2.13.69" rel="0.3" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="autoyast2-utils"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/noarch/autoyast2-utils-2.13.69-0.3.noarch.patch.rpm"/>
+          <checksum type="sha">a44f4c8c3394e683bf1a70d906e637db08077085</checksum>
+          <time file="1153242976" build="1153193030"/>
+          <size package="35133" archive="124"/>
+          <base-version epoch="0" ver="2.13.56" rel="3"/>
+          <base-version epoch="0" ver="2.13.65" rel="0.2"/>
+        </patchrpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>libzypp</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="1.2.0" rel="1.27"/>
+      <checksum type="sha" pkgid="YES">abec2a59d583f1fbf2340de72d549aac51ae8c84</checksum>
+      <time file="1153240046" build="1153175198"/>
+      <size package="1918289" installed="5796466" archive="5809804"/>
+      <location href="rpm/i586/libzypp-1.2.0-1.27.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="libzypp" epoch="0" ver="1.2.0" rel="1.27" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="libzypp"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/libzypp-1.2.0-1.27.i586.patch.rpm"/>
+          <checksum type="sha">245b28bb0546edc8a7b927f748d1cadb00214511</checksum>
+          <time file="1153242983" build="1153175198"/>
+          <size package="1916526" archive="5786576"/>
+          <base-version epoch="0" ver="0.0.8" rel="154"/>
+          <base-version epoch="0" ver="1.1.0" rel="1.11"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/libzypp-0.0.8_1.2.0-154_1.27.i586.delta.rpm"/>
+          <checksum type="sha">1f7f1d34e3a141bc553a41cc1f12e902d06a0e90</checksum>
+          <time file="1153242989" build="1153175198"/>
+          <size package="1164266" archive="0"/>
+          <base-version epoch="0" ver="0.0.8" rel="154" md5sum="6a8fc0c24c206cce50331547a8bbe8b1" buildtime="1146758662" sequence_info="libzypp-0.0.8-154-63a89b8d7a7f3c9798f9231133979434ea10"/>
+        </deltarpm>
+        <deltarpm>
+          <location href="rpm/i586/libzypp-1.1.0_1.2.0-1.11_1.27.i586.delta.rpm"/>
+          <checksum type="sha">98e85a81adc5a195f478ff2af48999df4577a3b5</checksum>
+          <time file="1153242994" build="1153175198"/>
+          <size package="822559" archive="0"/>
+          <base-version epoch="0" ver="1.1.0" rel="1.11" md5sum="fed4af06c854350d686897f2684b9ef1" buildtime="1149533726" sequence_info="libzypp-1.1.0-1.11-03ab5c4adad449f90f327a0b2374f04eea10"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>libzypp</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="1.2.0" rel="1.27"/>
+      <checksum type="sha" pkgid="YES">7cf0fb5de88b061e214dc1c30b3d95caf321d562</checksum>
+      <time file="1153239916" build="1153180008"/>
+      <size package="1852168" installed="5979666" archive="5993004"/>
+      <location href="rpm/ppc/libzypp-1.2.0-1.27.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="libzypp" epoch="0" ver="1.2.0" rel="1.27" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="libzypp"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/libzypp-1.2.0-1.27.ppc.patch.rpm"/>
+          <checksum type="sha">06ef1b1c910a71e0891ed9d815cfc6ec09ecdb8c</checksum>
+          <time file="1153243007" build="1153180008"/>
+          <size package="1850454" archive="5969776"/>
+          <base-version epoch="0" ver="0.0.8" rel="154"/>
+          <base-version epoch="0" ver="1.1.0" rel="1.11"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/libzypp-0.0.8_1.2.0-154_1.27.ppc.delta.rpm"/>
+          <checksum type="sha">9369af0300fdf85daaee166ff4af0472c14ec3bf</checksum>
+          <time file="1153243014" build="1153180008"/>
+          <size package="1060993" archive="0"/>
+          <base-version epoch="0" ver="0.0.8" rel="154" md5sum="dbcd5b012c1abb9949cfe7864a758964" buildtime="1146758917" sequence_info="libzypp-0.0.8-154-cc8091b5636c15d0cbd6c23991cbe96dea10"/>
+        </deltarpm>
+        <deltarpm>
+          <location href="rpm/ppc/libzypp-1.1.0_1.2.0-1.11_1.27.ppc.delta.rpm"/>
+          <checksum type="sha">79826489821d92cd2ae86cb6671b87c941166092</checksum>
+          <time file="1153243018" build="1153180008"/>
+          <size package="741401" archive="0"/>
+          <base-version epoch="0" ver="1.1.0" rel="1.11" md5sum="fb8eef91099fd8405bfefcc21c153f63" buildtime="1149545571" sequence_info="libzypp-1.1.0-1.11-f31b890912e017ea4f9ca61ae7e5c627ea10"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>libzypp</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="1.2.0" rel="1.27"/>
+      <checksum type="sha" pkgid="YES">3be151f4706c3be0c5015387f7e4f97c6f5edd72</checksum>
+      <time file="1153240041" build="1153171714"/>
+      <size package="1908101" installed="5798158" archive="5811496"/>
+      <location href="rpm/x86_64/libzypp-1.2.0-1.27.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="libzypp" epoch="0" ver="1.2.0" rel="1.27" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="libzypp"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/libzypp-1.2.0-1.27.x86_64.patch.rpm"/>
+          <checksum type="sha">77c6f98cdd74f9c70dda1cb29077eee89a6b9679</checksum>
+          <time file="1153243028" build="1153171714"/>
+          <size package="1906423" archive="5788268"/>
+          <base-version epoch="0" ver="0.0.8" rel="154"/>
+          <base-version epoch="0" ver="1.1.0" rel="1.11"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/libzypp-0.0.8_1.2.0-154_1.27.x86_64.delta.rpm"/>
+          <checksum type="sha">b542d39b2594f90ed7d5a67c5cc520968d4badd6</checksum>
+          <time file="1153243038" build="1153171714"/>
+          <size package="1165909" archive="0"/>
+          <base-version epoch="0" ver="0.0.8" rel="154" md5sum="b386d31ce200bcf1c00ebb87fbe5e19e" buildtime="1146758603" sequence_info="libzypp-0.0.8-154-8a1faffcd1d2d4b447959632a55ed7e9ea10"/>
+        </deltarpm>
+        <deltarpm>
+          <location href="rpm/x86_64/libzypp-1.1.0_1.2.0-1.11_1.27.x86_64.delta.rpm"/>
+          <checksum type="sha">8b14086a55b2c8d0b0969c8b8a104d8f5d08ed03</checksum>
+          <time file="1153243044" build="1153171714"/>
+          <size package="826559" archive="0"/>
+          <base-version epoch="0" ver="1.1.0" rel="1.11" md5sum="cd7ff5bde6d61e3ce3698c24cf0f65b7" buildtime="1149534802" sequence_info="libzypp-1.1.0-1.11-c1665ae1715b1eb3ac1710d0973b1d62ea10"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>libzypp-devel</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="1.2.0" rel="1.27"/>
+      <checksum type="sha" pkgid="YES">af1e66f77cdbea109dcd998131c57f7e32851c67</checksum>
+      <time file="1153240048" build="1153175198"/>
+      <size package="3811691" installed="41492042" archive="42105328"/>
+      <location href="rpm/i586/libzypp-devel-1.2.0-1.27.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="libzypp-devel" epoch="0" ver="1.2.0" rel="1.27" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="libzypp-devel"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/libzypp-devel-1.2.0-1.27.i586.patch.rpm"/>
+          <checksum type="sha">fb0616a804742246694279c50c66c9ded8c34fe7</checksum>
+          <time file="1153243080" build="1153175198"/>
+          <size package="3175267" archive="40502128"/>
+          <base-version epoch="0" ver="0.0.8" rel="154"/>
+          <base-version epoch="0" ver="1.1.0" rel="1.11"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/libzypp-devel-0.0.8_1.2.0-154_1.27.i586.delta.rpm"/>
+          <checksum type="sha">ab798b5ab857f2884982bd679918e3b8d5cdaf08</checksum>
+          <time file="1153243094" build="1153175198"/>
+          <size package="800753" archive="0"/>
+          <base-version epoch="0" ver="0.0.8" rel="154" md5sum="aae3c86576a67a324ebb5e2651b8f5bc" buildtime="1146758662" sequence_info="libzypp-devel-0.0.8-154-5392282295a985aa6508b85700d5006ecfa6"/>
+        </deltarpm>
+        <deltarpm>
+          <location href="rpm/i586/libzypp-devel-1.1.0_1.2.0-1.11_1.27.i586.delta.rpm"/>
+          <checksum type="sha">df14f83184f67307e3eba576a3c24d102b3695fa</checksum>
+          <time file="1153243107" build="1153175198"/>
+          <size package="631089" archive="0"/>
+          <base-version epoch="0" ver="1.1.0" rel="1.11" md5sum="331f8f2ef800c8129ff848d55f223076" buildtime="1149533726" sequence_info="libzypp-devel-1.1.0-1.11-3ef79b61d36e31a8e421bf7ac238ab4daab6"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>libzypp-devel</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="1.2.0" rel="1.27"/>
+      <checksum type="sha" pkgid="YES">5ea8abd527287ace265cadc8163bc1f74c7ce938</checksum>
+      <time file="1153239920" build="1153180008"/>
+      <size package="3808403" installed="41492066" archive="42105348"/>
+      <location href="rpm/ppc/libzypp-devel-1.2.0-1.27.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="libzypp-devel" epoch="0" ver="1.2.0" rel="1.27" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="libzypp-devel"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/libzypp-devel-1.2.0-1.27.ppc.patch.rpm"/>
+          <checksum type="sha">a1a10b7f1eb7e4994548e3b529390d94fbe7b99c</checksum>
+          <time file="1153243146" build="1153180008"/>
+          <size package="3173006" archive="40502132"/>
+          <base-version epoch="0" ver="0.0.8" rel="154"/>
+          <base-version epoch="0" ver="1.1.0" rel="1.11"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/libzypp-devel-0.0.8_1.2.0-154_1.27.ppc.delta.rpm"/>
+          <checksum type="sha">f59032f5dda0950d4d6162a13aa0418fd75f8b0d</checksum>
+          <time file="1153243165" build="1153180008"/>
+          <size package="800150" archive="0"/>
+          <base-version epoch="0" ver="0.0.8" rel="154" md5sum="f83199dba670c2823bc01468ad2b81f3" buildtime="1146758917" sequence_info="libzypp-devel-0.0.8-154-dca8b2319d61e4303857dcf2f57d8959cfa6"/>
+        </deltarpm>
+        <deltarpm>
+          <location href="rpm/ppc/libzypp-devel-1.1.0_1.2.0-1.11_1.27.ppc.delta.rpm"/>
+          <checksum type="sha">734552e0bb53eb0d4620253f1a369cac7c352bbf</checksum>
+          <time file="1153243179" build="1153180008"/>
+          <size package="628647" archive="0"/>
+          <base-version epoch="0" ver="1.1.0" rel="1.11" md5sum="12993592b01fe16a51d96466e977c780" buildtime="1149545571" sequence_info="libzypp-devel-1.1.0-1.11-2fba32ddfc92c2a41dd72c580a79af64aab6"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>libzypp-devel</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="1.2.0" rel="1.27"/>
+      <checksum type="sha" pkgid="YES">74252c6e25c83d70cee121d99f141bb19cafeda4</checksum>
+      <time file="1153240042" build="1153171714"/>
+      <size package="3814193" installed="41492079" archive="42105372"/>
+      <location href="rpm/x86_64/libzypp-devel-1.2.0-1.27.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="libzypp-devel" epoch="0" ver="1.2.0" rel="1.27" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="libzypp-devel"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/libzypp-devel-1.2.0-1.27.x86_64.patch.rpm"/>
+          <checksum type="sha">b6c45f4ea05b83dc682797733f07be9af75087f7</checksum>
+          <time file="1153243212" build="1153171714"/>
+          <size package="3176949" archive="40502156"/>
+          <base-version epoch="0" ver="0.0.8" rel="154"/>
+          <base-version epoch="0" ver="1.1.0" rel="1.11"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/libzypp-devel-0.0.8_1.2.0-154_1.27.x86_64.delta.rpm"/>
+          <checksum type="sha">46a6101f91865a2570cac3240fdd9b8fe71efd8c</checksum>
+          <time file="1153243229" build="1153171714"/>
+          <size package="801897" archive="0"/>
+          <base-version epoch="0" ver="0.0.8" rel="154" md5sum="43dbd6610d5f527e4599e8e758c0a7d8" buildtime="1146758603" sequence_info="libzypp-devel-0.0.8-154-fe6a92eb065ab3d0b3cb991a003e320ecfa6"/>
+        </deltarpm>
+        <deltarpm>
+          <location href="rpm/x86_64/libzypp-devel-1.1.0_1.2.0-1.11_1.27.x86_64.delta.rpm"/>
+          <checksum type="sha">729a3a4760b3bdd844f3b5cdecaea9e0c757499f</checksum>
+          <time file="1153243245" build="1153171714"/>
+          <size package="631109" archive="0"/>
+          <base-version epoch="0" ver="1.1.0" rel="1.11" md5sum="ed0ef194c617b7d780d6027c4015faed" buildtime="1149534802" sequence_info="libzypp-devel-1.1.0-1.11-cf113c05038857d47fa9b2350f1facdbaab6"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>libzypp-zmd-backend</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="7.1.1.0" rel="42.46"/>
+      <checksum type="sha" pkgid="YES">8cb72dc5b41d65a07d11d5e208161c3c54aaf1e2</checksum>
+      <time file="1153240056" build="1153176170"/>
+      <size package="205555" installed="612232" archive="615360"/>
+      <location href="rpm/i586/libzypp-zmd-backend-7.1.1.0-42.46.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="libzypp-zmd-backend" epoch="0" ver="7.1.1.0" rel="42.46" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="libzypp-zmd-backend"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/libzypp-zmd-backend-7.1.1.0-42.46.i586.patch.rpm"/>
+          <checksum type="sha">303f1893ad526164b46a839aa818e3c4c514dcb1</checksum>
+          <time file="1153243250" build="1153176170"/>
+          <size package="204855" archive="611848"/>
+          <base-version epoch="0" ver="7.1.1.0" rel="40"/>
+          <base-version epoch="0" ver="7.1.1.0" rel="42.21"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/libzypp-zmd-backend-7.1.1.0-40_42.46.i586.delta.rpm"/>
+          <checksum type="sha">d6c39728a8fe75e48e7cb27fd97a889ebd1fd46c</checksum>
+          <time file="1153243252" build="1153176170"/>
+          <size package="162117" archive="0"/>
+          <base-version epoch="0" ver="7.1.1.0" rel="40" md5sum="c9564015063ddf602331bede56125df7" buildtime="1146676132" sequence_info="libzypp-zmd-backend-7.1.1.0-40-eb15ca454de7d2f9aa2ef5a89b2ac49eb2"/>
+        </deltarpm>
+        <deltarpm>
+          <location href="rpm/i586/libzypp-zmd-backend-7.1.1.0-42.21_42.46.i586.delta.rpm"/>
+          <checksum type="sha">e422f425b6f7b375905f094f2a1ae1b367a69e83</checksum>
+          <time file="1153243252" build="1153176170"/>
+          <size package="154872" archive="0"/>
+          <base-version epoch="0" ver="7.1.1.0" rel="42.21" md5sum="623d0c633ce5d05c1f3e1a89baac83db" buildtime="1149534431" sequence_info="libzypp-zmd-backend-7.1.1.0-42.21-0a8298287414a11ba1f4ed75c95fb427b2"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>libzypp-zmd-backend</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="7.1.1.0" rel="42.46"/>
+      <checksum type="sha" pkgid="YES">99fba893bdc66ca53993b69f48f2bf0bc7b163b4</checksum>
+      <time file="1153239930" build="1153182190"/>
+      <size package="219318" installed="706403" archive="709528"/>
+      <location href="rpm/ppc/libzypp-zmd-backend-7.1.1.0-42.46.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="libzypp-zmd-backend" epoch="0" ver="7.1.1.0" rel="42.46" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="libzypp-zmd-backend"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/libzypp-zmd-backend-7.1.1.0-42.46.ppc.patch.rpm"/>
+          <checksum type="sha">1987d3aaa5563325765b1e215c70b2812bedd84b</checksum>
+          <time file="1153243256" build="1153182190"/>
+          <size package="218519" archive="706012"/>
+          <base-version epoch="0" ver="7.1.1.0" rel="40"/>
+          <base-version epoch="0" ver="7.1.1.0" rel="42.21"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/libzypp-zmd-backend-7.1.1.0-40_42.46.ppc.delta.rpm"/>
+          <checksum type="sha">6831e76e0e11ddf8b11d4ec0fcd6a02e45a25667</checksum>
+          <time file="1153243257" build="1153182190"/>
+          <size package="167982" archive="0"/>
+          <base-version epoch="0" ver="7.1.1.0" rel="40" md5sum="e2659bf4f8e2076060cceb491f20bf29" buildtime="1146676664" sequence_info="libzypp-zmd-backend-7.1.1.0-40-660169d6a67dc65f55c250927cfa63c8b2"/>
+        </deltarpm>
+        <deltarpm>
+          <location href="rpm/ppc/libzypp-zmd-backend-7.1.1.0-42.21_42.46.ppc.delta.rpm"/>
+          <checksum type="sha">be4e820e19c524ce3cac61c902207187f7131017</checksum>
+          <time file="1153243258" build="1153182190"/>
+          <size package="164642" archive="0"/>
+          <base-version epoch="0" ver="7.1.1.0" rel="42.21" md5sum="f4e8a47a133cde4939657edeea2656ca" buildtime="1149547838" sequence_info="libzypp-zmd-backend-7.1.1.0-42.21-919a041440c714f2ccacf864c5e6bd35b2"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>libzypp-zmd-backend</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="7.1.1.0" rel="42.46"/>
+      <checksum type="sha" pkgid="YES">6a5280c90eb1c21a4b5116998841605b3ba100f7</checksum>
+      <time file="1153240049" build="1153174815"/>
+      <size package="209880" installed="674568" archive="677724"/>
+      <location href="rpm/x86_64/libzypp-zmd-backend-7.1.1.0-42.46.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="libzypp-zmd-backend" epoch="0" ver="7.1.1.0" rel="42.46" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="libzypp-zmd-backend"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/libzypp-zmd-backend-7.1.1.0-42.46.x86_64.patch.rpm"/>
+          <checksum type="sha">6ab6048adb1f39e4891850d73a5006d961b0001a</checksum>
+          <time file="1153243262" build="1153174815"/>
+          <size package="209034" archive="674200"/>
+          <base-version epoch="0" ver="7.1.1.0" rel="40"/>
+          <base-version epoch="0" ver="7.1.1.0" rel="42.21"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/libzypp-zmd-backend-7.1.1.0-40_42.46.x86_64.delta.rpm"/>
+          <checksum type="sha">398cc3641246d9efeffb2d717000ddbd5357cd53</checksum>
+          <time file="1153243263" build="1153174815"/>
+          <size package="184255" archive="0"/>
+          <base-version epoch="0" ver="7.1.1.0" rel="40" md5sum="e7cd1885b083d6762d6c03e1ccee2fb3" buildtime="1146674910" sequence_info="libzypp-zmd-backend-7.1.1.0-40-dac3e508dd2c7db1f3fa27aa33887b8eb2"/>
+        </deltarpm>
+        <deltarpm>
+          <location href="rpm/x86_64/libzypp-zmd-backend-7.1.1.0-42.21_42.46.x86_64.delta.rpm"/>
+          <checksum type="sha">ce47c074ee82260be585e27febfe8833e428b5a3</checksum>
+          <time file="1153243264" build="1153174815"/>
+          <size package="175101" archive="0"/>
+          <base-version epoch="0" ver="7.1.1.0" rel="42.21" md5sum="8f9683d8b3ad8afbef2df069a58e76b3" buildtime="1149536273" sequence_info="libzypp-zmd-backend-7.1.1.0-42.21-b58ed27bc19fcef9a8eecac846246c11b2"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>ruby-zypp</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="0.0" rel="8.2"/>
+      <checksum type="sha" pkgid="YES">6ad4c2189ce0c673b8e2720de50551a28aa6bcba</checksum>
+      <time file="1153240187" build="1153175895"/>
+      <size package="38929" installed="95096" archive="98044"/>
+      <location href="rpm/i586/ruby-zypp-0.0-8.2.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="ruby-zypp" epoch="0" ver="0.0" rel="8.2" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="ruby-zypp"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/ruby-zypp-0.0-8.2.i586.patch.rpm"/>
+          <checksum type="sha">5c7281788727f87f1330e69625a139035d665b05</checksum>
+          <time file="1153243268" build="1153175895"/>
+          <size package="36104" archive="85652"/>
+          <base-version epoch="0" ver="0.0" rel="8"/>
+          <base-version epoch="0" ver="0.0" rel="8.1"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/ruby-zypp-0.0-8_8.2.i586.delta.rpm"/>
+          <checksum type="sha">4af1a37b3aafd6dd0004b6200bf94d50539a43f0</checksum>
+          <time file="1153243268" build="1153175895"/>
+          <size package="16237" archive="0"/>
+          <base-version epoch="0" ver="0.0" rel="8" md5sum="99338e62ced5d6f7ae278b1b39bfc9d4" buildtime="1146676054" sequence_info="ruby-zypp-0.0-8-e9ff54ec5999c2c4dbf23a6bfa28c03a20"/>
+        </deltarpm>
+        <deltarpm>
+          <location href="rpm/i586/ruby-zypp-0.0-8.1_8.2.i586.delta.rpm"/>
+          <checksum type="sha">f8f34cc10f16d8683b1232d1239649fd7aa192b2</checksum>
+          <time file="1153243269" build="1153175895"/>
+          <size package="14325" archive="0"/>
+          <base-version epoch="0" ver="0.0" rel="8.1" md5sum="10e75681515076b8c754dca7c4d7e57f" buildtime="1149534376" sequence_info="ruby-zypp-0.0-8.1-224a4d9cc85d4bfe955aa8603636f5a120"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>ruby-zypp</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="0.0" rel="8.2"/>
+      <checksum type="sha" pkgid="YES">07946cf6e89800eac7978767a72b0d2b88755f59</checksum>
+      <time file="1153218024" build="1153217526"/>
+      <size package="43906" installed="117728" archive="120676"/>
+      <location href="rpm/ppc/ruby-zypp-0.0-8.2.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="ruby-zypp" epoch="0" ver="0.0" rel="8.2" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="ruby-zypp"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/ruby-zypp-0.0-8.2.ppc.patch.rpm"/>
+          <checksum type="sha">875c1e06379079d854395dec3d4aad659bd4c711</checksum>
+          <time file="1153243271" build="1153217526"/>
+          <size package="41075" archive="108284"/>
+          <base-version epoch="0" ver="0.0" rel="8"/>
+          <base-version epoch="0" ver="0.0" rel="8.1"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/ruby-zypp-0.0-8_8.2.ppc.delta.rpm"/>
+          <checksum type="sha">3e7c732b40a476016f3eb8bc8a74a8413b1e6060</checksum>
+          <time file="1153243273" build="1153217526"/>
+          <size package="20420" archive="0"/>
+          <base-version epoch="0" ver="0.0" rel="8" md5sum="fd5af852d06a4c6b0c6c23dbe63a339c" buildtime="1146676375" sequence_info="ruby-zypp-0.0-8-af46b5b5ea717fe282af06292b319f6020"/>
+        </deltarpm>
+        <deltarpm>
+          <location href="rpm/ppc/ruby-zypp-0.0-8.1_8.2.ppc.delta.rpm"/>
+          <checksum type="sha">1590dd086a057f6483a1727dba8dd09bc80b3fd6</checksum>
+          <time file="1153243273" build="1153217526"/>
+          <size package="17817" archive="0"/>
+          <base-version epoch="0" ver="0.0" rel="8.1" md5sum="78dba1e4ef7745354dc9c67a6680a5a6" buildtime="1149548063" sequence_info="ruby-zypp-0.0-8.1-11bf59cb16494c9eaceccca13282836220"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>ruby-zypp</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="0.0" rel="8.2"/>
+      <checksum type="sha" pkgid="YES">c9aad0ab3fcbeb2254dd713191d829b6aac37deb</checksum>
+      <time file="1153240166" build="1153175419"/>
+      <size package="40315" installed="101160" archive="104112"/>
+      <location href="rpm/x86_64/ruby-zypp-0.0-8.2.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="ruby-zypp" epoch="0" ver="0.0" rel="8.2" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="ruby-zypp"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/ruby-zypp-0.0-8.2.x86_64.patch.rpm"/>
+          <checksum type="sha">8a9f1b29c4f9b77afc8de0a096b0a50f1ff636a5</checksum>
+          <time file="1153243275" build="1153175419"/>
+          <size package="37503" archive="91720"/>
+          <base-version epoch="0" ver="0.0" rel="8"/>
+          <base-version epoch="0" ver="0.0" rel="8.1"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/ruby-zypp-0.0-8_8.2.x86_64.delta.rpm"/>
+          <checksum type="sha">8edf345371e1734e03365bb9746fc2af71b11c24</checksum>
+          <time file="1153243276" build="1153175419"/>
+          <size package="16612" archive="0"/>
+          <base-version epoch="0" ver="0.0" rel="8" md5sum="d2b59372ef2187d241d26a73fd726c70" buildtime="1146674874" sequence_info="ruby-zypp-0.0-8-e1fde6c075aa99ad6d48668e8e3d37c020"/>
+        </deltarpm>
+        <deltarpm>
+          <location href="rpm/x86_64/ruby-zypp-0.0-8.1_8.2.x86_64.delta.rpm"/>
+          <checksum type="sha">036e64499b4649a50cda726109684f704a82f8c5</checksum>
+          <time file="1153243276" build="1153175419"/>
+          <size package="14797" archive="0"/>
+          <base-version epoch="0" ver="0.0" rel="8.1" md5sum="91ad8622e21844cbaa4bfc8e04d8be9c" buildtime="1149536690" sequence_info="ruby-zypp-0.0-8.1-e84efe5dac974693a3c91215bee4f15720"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>rug</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="7.1.1.0" rel="18.24"/>
+      <checksum type="sha" pkgid="YES">8db92ad5adbba469f4199172ccb82637ec6c6e60</checksum>
+      <time file="1153240181" build="1153187543"/>
+      <size package="202425" installed="606085" archive="616272"/>
+      <location href="rpm/i586/rug-7.1.1.0-18.24.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="rug" epoch="0" ver="7.1.1.0" rel="18.24" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="rug"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/rug-7.1.1.0-18.24.i586.patch.rpm"/>
+          <checksum type="sha">87ec4eba7f275a1840642663d44aa54780146f15</checksum>
+          <time file="1153243278" build="1153187543"/>
+          <size package="191635" archive="586932"/>
+          <base-version epoch="0" ver="7.1.1.0" rel="18"/>
+          <base-version epoch="0" ver="7.1.1.0" rel="18.9"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/rug-7.1.1.0-18_18.24.i586.delta.rpm"/>
+          <checksum type="sha">986f2282fe192848f728cafb6594d133ee01d13c</checksum>
+          <time file="1153243279" build="1153187543"/>
+          <size package="165166" archive="0"/>
+          <base-version epoch="0" ver="7.1.1.0" rel="18" md5sum="3ee169ca06aea8f2733f67186d6cb846" buildtime="1146676584" sequence_info="rug-7.1.1.0-18-891049813f706a97efd4d8aff8c8e47466d1"/>
+        </deltarpm>
+        <deltarpm>
+          <location href="rpm/i586/rug-7.1.1.0-18.9_18.24.i586.delta.rpm"/>
+          <checksum type="sha">5ba4b4203779439aa40c60e681b63519f3119f61</checksum>
+          <time file="1153243279" build="1153187543"/>
+          <size package="149619" archive="0"/>
+          <base-version epoch="0" ver="7.1.1.0" rel="18.9" md5sum="316c356a59d92a9d6d48890c930482ec" buildtime="1149555058" sequence_info="rug-7.1.1.0-18.9-55c90e8345dfe1256d525c11aa6d39f866522210"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>rug</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="7.1.1.0" rel="18.24"/>
+      <checksum type="sha" pkgid="YES">46cc319ce132e7bc5a18d6cbfbd2ebe446e704e7</checksum>
+      <time file="1153240021" build="1153201196"/>
+      <size package="202083" installed="606597" archive="616784"/>
+      <location href="rpm/ppc/rug-7.1.1.0-18.24.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="rug" epoch="0" ver="7.1.1.0" rel="18.24" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="rug"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/rug-7.1.1.0-18.24.ppc.patch.rpm"/>
+          <checksum type="sha">d269a51e39aa593ccaa513c81e073f82e50a041f</checksum>
+          <time file="1153243282" build="1153201196"/>
+          <size package="191636" archive="587444"/>
+          <base-version epoch="0" ver="7.1.1.0" rel="18"/>
+          <base-version epoch="0" ver="7.1.1.0" rel="18.9"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/rug-7.1.1.0-18_18.24.ppc.delta.rpm"/>
+          <checksum type="sha">745f79f06b7ca3a65421805d6fc45884031b3cec</checksum>
+          <time file="1153243283" build="1153201196"/>
+          <size package="165292" archive="0"/>
+          <base-version epoch="0" ver="7.1.1.0" rel="18" md5sum="6bb0d099479aa3b2be9e20f3f2adc26c" buildtime="1146676960" sequence_info="rug-7.1.1.0-18-655e34342428ab64294dcf5d223ff63c66d1"/>
+        </deltarpm>
+        <deltarpm>
+          <location href="rpm/ppc/rug-7.1.1.0-18.9_18.24.ppc.delta.rpm"/>
+          <checksum type="sha">24d743dac3d5553aabf79b5e81b13ff51c5f9cb9</checksum>
+          <time file="1153243283" build="1153201196"/>
+          <size package="149709" archive="0"/>
+          <base-version epoch="0" ver="7.1.1.0" rel="18.9" md5sum="26f6202f1ba1cf28f352df4bac5cdcfa" buildtime="1149573271" sequence_info="rug-7.1.1.0-18.9-cfb8a5d389b3e40409f75bc6c618b7f366522210"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>rug</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="7.1.1.0" rel="18.24"/>
+      <checksum type="sha" pkgid="YES">5bef65103b4a94431ded4ee99c076940c4127844</checksum>
+      <time file="1153240146" build="1153186516"/>
+      <size package="202255" installed="606095" archive="616296"/>
+      <location href="rpm/x86_64/rug-7.1.1.0-18.24.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="rug" epoch="0" ver="7.1.1.0" rel="18.24" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="rug"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/rug-7.1.1.0-18.24.x86_64.patch.rpm"/>
+          <checksum type="sha">1164612bf5a69ac629778114d03d0de8749f7d93</checksum>
+          <time file="1153243286" build="1153186516"/>
+          <size package="191579" archive="586940"/>
+          <base-version epoch="0" ver="7.1.1.0" rel="18"/>
+          <base-version epoch="0" ver="7.1.1.0" rel="18.9"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/rug-7.1.1.0-18_18.24.x86_64.delta.rpm"/>
+          <checksum type="sha">41b4af1fc942301f8173c9657c6c281c75a053d6</checksum>
+          <time file="1153243286" build="1153186516"/>
+          <size package="165761" archive="0"/>
+          <base-version epoch="0" ver="7.1.1.0" rel="18" md5sum="a4e116987addee74581aa4cea354da45" buildtime="1146675226" sequence_info="rug-7.1.1.0-18-128a1f411804b349223b66c6141236cf66d1"/>
+        </deltarpm>
+        <deltarpm>
+          <location href="rpm/x86_64/rug-7.1.1.0-18.9_18.24.x86_64.delta.rpm"/>
+          <checksum type="sha">c7eace8bb77e6ad88140ab796fbe6f9e3a459d45</checksum>
+          <time file="1153243287" build="1153186516"/>
+          <size package="150543" archive="0"/>
+          <base-version epoch="0" ver="7.1.1.0" rel="18.9" md5sum="ddb21ba9132017cbfef0ad8b1ba01fcd" buildtime="1149554976" sequence_info="rug-7.1.1.0-18.9-73e01f49c75948a255d15b6853c049e766522210"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>suseRegister</name>
+      <arch>noarch</arch>
+      <version epoch="0" ver="1.0" rel="63.9"/>
+      <checksum type="sha" pkgid="YES">a8fe89d03800f246775483899058ba9d1f6fc31c</checksum>
+      <time file="1153240057" build="1153146124"/>
+      <size package="31797" installed="112049" archive="113660"/>
+      <location href="rpm/noarch/suseRegister-1.0-63.9.noarch.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="suseRegister" epoch="0" ver="1.0" rel="63.9" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="suseRegister"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/noarch/suseRegister-1.0-63.9.noarch.patch.rpm"/>
+          <checksum type="sha">c66558af68b8ac37d9ab259b1ccac74cc9899bb7</checksum>
+          <time file="1153243289" build="1153146124"/>
+          <size package="22255" archive="71692"/>
+          <base-version epoch="0" ver="1.0" rel="55"/>
+          <base-version epoch="0" ver="1.0" rel="63.3"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/noarch/suseRegister-1.0-63.3_63.9.noarch.delta.rpm"/>
+          <checksum type="sha">c2facb2c9c1a9cdf025845308ce63ecd7fb0d971</checksum>
+          <time file="1153243290" build="1153146124"/>
+          <size package="19300" archive="0"/>
+          <base-version epoch="0" ver="1.0" rel="63.3" md5sum="cb6c70dc1246c4ca41b3cf6b94ae92a4" buildtime="1149274053" sequence_info="suseRegister-1.0-63.3-5dc43199d0cc2e91a607ce98cc024ad10160"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>yast2</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="2.13.64.2" rel="0.2"/>
+      <checksum type="sha" pkgid="YES">67ac434efa7d19beb89ceb617c3ec6a72dc208e1</checksum>
+      <time file="1153240051" build="1153177106"/>
+      <size package="498470" installed="2207257" archive="2240720"/>
+      <location href="rpm/i586/yast2-2.13.64.2-0.2.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="yast2" epoch="0" ver="2.13.64.2" rel="0.2" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="yast2"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/yast2-2.13.64.2-0.2.i586.patch.rpm"/>
+          <checksum type="sha">2954a1803be723945d9c75e6c7c8f284baf69a9b</checksum>
+          <time file="1153243293" build="1153177106"/>
+          <size package="342361" archive="1184224"/>
+          <base-version epoch="0" ver="2.13.54" rel="5"/>
+          <base-version epoch="0" ver="2.13.61" rel="0.2"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/yast2-2.13.54_2.13.64.2-5_0.2.i586.delta.rpm"/>
+          <checksum type="sha">e6d4d136cf6bc41adfe45ae33c9c7548c894634e</checksum>
+          <time file="1153243294" build="1153177106"/>
+          <size package="207871" archive="0"/>
+          <base-version epoch="0" ver="2.13.54" rel="5" md5sum="c79dfacfc82f0998b26e3451534d131c" buildtime="1146676799" sequence_info="yast2-2.13.54-5-87fbf7ce851218f2a4f58028dcd1d365bb30"/>
+        </deltarpm>
+        <deltarpm>
+          <location href="rpm/i586/yast2-2.13.61_2.13.64.2-0.2.i586.delta.rpm"/>
+          <checksum type="sha">2d1de9e5e2a9b8e20b2d1d4a350fb44495c571e5</checksum>
+          <time file="1153243295" build="1153177106"/>
+          <size package="191943" archive="0"/>
+          <base-version epoch="0" ver="2.13.61" rel="0.2" md5sum="514d3affad2668740c4d782c6412b029" buildtime="1149551528" sequence_info="yast2-2.13.61-0.2-211a82a263e077b994eaf35fe299d0989b3110"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>yast2</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="2.13.64.2" rel="0.2"/>
+      <checksum type="sha" pkgid="YES">e59750c1dd93bdaa8a8d251aa01d52cfeda1512e</checksum>
+      <time file="1153239925" build="1153184525"/>
+      <size package="498529" installed="2207257" archive="2240720"/>
+      <location href="rpm/ppc/yast2-2.13.64.2-0.2.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="yast2" epoch="0" ver="2.13.64.2" rel="0.2" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="yast2"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/yast2-2.13.64.2-0.2.ppc.patch.rpm"/>
+          <checksum type="sha">7090b12edcd0e6b41cf3c1f55577db148f07db1b</checksum>
+          <time file="1153243304" build="1153184525"/>
+          <size package="342387" archive="1184224"/>
+          <base-version epoch="0" ver="2.13.54" rel="5"/>
+          <base-version epoch="0" ver="2.13.61" rel="0.2"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/yast2-2.13.54_2.13.64.2-5_0.2.ppc.delta.rpm"/>
+          <checksum type="sha">5116b9d99ae961bfd615b46a915ec2fc064927d8</checksum>
+          <time file="1153243306" build="1153184525"/>
+          <size package="208091" archive="0"/>
+          <base-version epoch="0" ver="2.13.54" rel="5" md5sum="040811442c46c5e5d6510e416a5cc7e8" buildtime="1146677412" sequence_info="yast2-2.13.54-5-3e12760ddd4d55c94d42e3489ffb26e3bb30"/>
+        </deltarpm>
+        <deltarpm>
+          <location href="rpm/ppc/yast2-2.13.61_2.13.64.2-0.2.ppc.delta.rpm"/>
+          <checksum type="sha">d0d3a51f029175e6ca1c2ca720f49df1b343a54b</checksum>
+          <time file="1153243306" build="1153184525"/>
+          <size package="192074" archive="0"/>
+          <base-version epoch="0" ver="2.13.61" rel="0.2" md5sum="37c14fc3fb9dacdfd4adf7d13fd54fcd" buildtime="1149551340" sequence_info="yast2-2.13.61-0.2-77b5daea99da082e099af37c9b2d198d9b3110"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>yast2</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="2.13.64.2" rel="0.2"/>
+      <checksum type="sha" pkgid="YES">6471f8a360a93386df9358bcaba9894d9a06d14c</checksum>
+      <time file="1153240045" build="1153177277"/>
+      <size package="498508" installed="2207257" archive="2240720"/>
+      <location href="rpm/x86_64/yast2-2.13.64.2-0.2.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="yast2" epoch="0" ver="2.13.64.2" rel="0.2" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="yast2"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/yast2-2.13.64.2-0.2.x86_64.patch.rpm"/>
+          <checksum type="sha">15d33a87d8858964a0abab4895cff999ab61454d</checksum>
+          <time file="1153243316" build="1153177277"/>
+          <size package="343443" archive="1202164"/>
+          <base-version epoch="0" ver="2.13.54" rel="5"/>
+          <base-version epoch="0" ver="2.13.61" rel="0.2"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/yast2-2.13.54_2.13.64.2-5_0.2.x86_64.delta.rpm"/>
+          <checksum type="sha">1bfee957b10aeae8816d6cbca5f9834a15b6aac9</checksum>
+          <time file="1153243317" build="1153177277"/>
+          <size package="208073" archive="0"/>
+          <base-version epoch="0" ver="2.13.54" rel="5" md5sum="3a023663172591ba0147173aaf02a5b1" buildtime="1146675312" sequence_info="yast2-2.13.54-5-d9fe8cf3dda357764198818af09239f6bb30"/>
+        </deltarpm>
+        <deltarpm>
+          <location href="rpm/x86_64/yast2-2.13.61_2.13.64.2-0.2.x86_64.delta.rpm"/>
+          <checksum type="sha">d9fb25490106bb2efb0dd190f9ff984f186cb912</checksum>
+          <time file="1153243318" build="1153177277"/>
+          <size package="191939" archive="0"/>
+          <base-version epoch="0" ver="2.13.61" rel="0.2" md5sum="54a27953b736e42f03e732eed26173a6" buildtime="1149550456" sequence_info="yast2-2.13.61-0.2-ea722d142d5f4777e0d152899077c55d9b3110"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>yast2-devel</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="2.13.64.2" rel="0.2"/>
+      <checksum type="sha" pkgid="YES">c09a02e9742bdb653b884e673368b8914c82e350</checksum>
+      <time file="1153240051" build="1153177106"/>
+      <size package="497421" installed="1590824" archive="1637004"/>
+      <location href="rpm/i586/yast2-devel-2.13.64.2-0.2.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="yast2-devel" epoch="0" ver="2.13.64.2" rel="0.2" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="yast2-devel"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/yast2-devel-2.13.64.2-0.2.i586.patch.rpm"/>
+          <checksum type="sha">99cb4499b8bd1e564979e8ffac44dfabcbe68ea0</checksum>
+          <time file="1153243332" build="1153177106"/>
+          <size package="228702" archive="648980"/>
+          <base-version epoch="0" ver="2.13.54" rel="5"/>
+          <base-version epoch="0" ver="2.13.61" rel="0.2"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/yast2-devel-2.13.54_2.13.64.2-5_0.2.i586.delta.rpm"/>
+          <checksum type="sha">1a8c92214ccba1a6e3e00efeacf896794de1984f</checksum>
+          <time file="1153243333" build="1153177106"/>
+          <size package="196308" archive="0"/>
+          <base-version epoch="0" ver="2.13.54" rel="5" md5sum="9269c2bf6288c1eb6757bf9b46cdf435" buildtime="1146676799" sequence_info="yast2-devel-2.13.54-5-aa688ea8b8529c8b34a19d77b5515f8fa940"/>
+        </deltarpm>
+        <deltarpm>
+          <location href="rpm/i586/yast2-devel-2.13.61_2.13.64.2-0.2.i586.delta.rpm"/>
+          <checksum type="sha">2e35c5114d33cec3dba90400807561621fc8660f</checksum>
+          <time file="1153243334" build="1153177106"/>
+          <size package="192917" archive="0"/>
+          <base-version epoch="0" ver="2.13.61" rel="0.2" md5sum="e6fa512f88e994ed289cc033473f3b12" buildtime="1149551528" sequence_info="yast2-devel-2.13.61-0.2-b0b138234a493ff8e0fc5ecdb43a77ecb940"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>yast2-devel</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="2.13.64.2" rel="0.2"/>
+      <checksum type="sha" pkgid="YES">0d2e45b40df57b197dd1d83af8d33eb38820a3bc</checksum>
+      <time file="1153239925" build="1153184525"/>
+      <size package="497508" installed="1590824" archive="1637004"/>
+      <location href="rpm/ppc/yast2-devel-2.13.64.2-0.2.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="yast2-devel" epoch="0" ver="2.13.64.2" rel="0.2" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="yast2-devel"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/yast2-devel-2.13.64.2-0.2.ppc.patch.rpm"/>
+          <checksum type="sha">dd5127028c2ddd9f4f7e0db83f5652eeb1ca96fe</checksum>
+          <time file="1153243338" build="1153184525"/>
+          <size package="228621" archive="648980"/>
+          <base-version epoch="0" ver="2.13.54" rel="5"/>
+          <base-version epoch="0" ver="2.13.61" rel="0.2"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/yast2-devel-2.13.54_2.13.64.2-5_0.2.ppc.delta.rpm"/>
+          <checksum type="sha">011ad975b1aae358c9080628d35e933f975c4c13</checksum>
+          <time file="1153243339" build="1153184525"/>
+          <size package="196372" archive="0"/>
+          <base-version epoch="0" ver="2.13.54" rel="5" md5sum="6ed353e2c31ef36515efeb287a4e24de" buildtime="1146677412" sequence_info="yast2-devel-2.13.54-5-aa688ea8b8529c8b34a19d77b5515f8fa940"/>
+        </deltarpm>
+        <deltarpm>
+          <location href="rpm/ppc/yast2-devel-2.13.61_2.13.64.2-0.2.ppc.delta.rpm"/>
+          <checksum type="sha">801165f79b6f2e2d00b02cd96ad90fefd68c3492</checksum>
+          <time file="1153243340" build="1153184525"/>
+          <size package="192961" archive="0"/>
+          <base-version epoch="0" ver="2.13.61" rel="0.2" md5sum="6993e5593949274ff201e0b25794eab3" buildtime="1149551340" sequence_info="yast2-devel-2.13.61-0.2-b0b138234a493ff8e0fc5ecdb43a77ecb940"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>yast2-devel</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="2.13.64.2" rel="0.2"/>
+      <checksum type="sha" pkgid="YES">c865075d5b2aeeab5f90835ffd86c5a4010b4f3c</checksum>
+      <time file="1153240045" build="1153177277"/>
+      <size package="498184" installed="1590824" archive="1637004"/>
+      <location href="rpm/x86_64/yast2-devel-2.13.64.2-0.2.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="yast2-devel" epoch="0" ver="2.13.64.2" rel="0.2" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="yast2-devel"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/yast2-devel-2.13.64.2-0.2.x86_64.patch.rpm"/>
+          <checksum type="sha">2764569153dbc320c0daeeb926aa134f6384f32c</checksum>
+          <time file="1153243344" build="1153177277"/>
+          <size package="228650" archive="648980"/>
+          <base-version epoch="0" ver="2.13.54" rel="5"/>
+          <base-version epoch="0" ver="2.13.61" rel="0.2"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/yast2-devel-2.13.54_2.13.64.2-5_0.2.x86_64.delta.rpm"/>
+          <checksum type="sha">0d7813ea519d3abab2e2cc8c610c3853b3834496</checksum>
+          <time file="1153243345" build="1153177277"/>
+          <size package="196347" archive="0"/>
+          <base-version epoch="0" ver="2.13.54" rel="5" md5sum="24e81ce12333953b95e78cbb7ccb23b2" buildtime="1146675312" sequence_info="yast2-devel-2.13.54-5-aa688ea8b8529c8b34a19d77b5515f8fa940"/>
+        </deltarpm>
+        <deltarpm>
+          <location href="rpm/x86_64/yast2-devel-2.13.61_2.13.64.2-0.2.x86_64.delta.rpm"/>
+          <checksum type="sha">c36f595d14d7caeb37dc919c41578a3de766bcd6</checksum>
+          <time file="1153243346" build="1153177277"/>
+          <size package="192934" archive="0"/>
+          <base-version epoch="0" ver="2.13.61" rel="0.2" md5sum="6d3daa587eeb1b53f798cb5d012e16cf" buildtime="1149550456" sequence_info="yast2-devel-2.13.61-0.2-b0b138234a493ff8e0fc5ecdb43a77ecb940"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>yast2-installation</name>
+      <arch>noarch</arch>
+      <version epoch="0" ver="2.13.132.4" rel="0.3"/>
+      <checksum type="sha" pkgid="YES">e4e9fec00a8fe5d26dfe6e060199be7396f0dcf5</checksum>
+      <time file="1153240058" build="1153183094"/>
+      <size package="411729" installed="1263350" archive="1310928"/>
+      <location href="rpm/noarch/yast2-installation-2.13.132.4-0.3.noarch.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="yast2-installation" epoch="0" ver="2.13.132.4" rel="0.3" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="yast2-installation"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/noarch/yast2-installation-2.13.132.4-0.3.noarch.patch.rpm"/>
+          <checksum type="sha">1c307f26e12895e1f908d93a6dbcbf14403f05ce</checksum>
+          <time file="1153243349" build="1153183094"/>
+          <size package="298536" archive="756428"/>
+          <base-version epoch="0" ver="2.13.119" rel="1.2"/>
+          <base-version epoch="0" ver="2.13.97" rel="4"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/noarch/yast2-installation-2.13.97_2.13.132.4-4_0.3.noarch.delta.rpm"/>
+          <checksum type="sha">9e3a54e546fdee0012d3d8072465aa0c370f24d4</checksum>
+          <time file="1153243351" build="1153183094"/>
+          <size package="152525" archive="0"/>
+          <base-version epoch="0" ver="2.13.97" rel="4" md5sum="3e04678f5032e3c475a3cd38d68c81fd" buildtime="1146677451" sequence_info="yast2-installation-2.13.97-4-4aae988320aa886976de84911022ab08d940"/>
+        </deltarpm>
+        <deltarpm>
+          <location href="rpm/noarch/yast2-installation-2.13.119_2.13.132.4-1.2_0.3.noarch.delta.rpm"/>
+          <checksum type="sha">a39a163c57ad0faacfb3f674c3d65881e97ba968</checksum>
+          <time file="1153243351" build="1153183094"/>
+          <size package="144068" archive="0"/>
+          <base-version epoch="0" ver="2.13.119" rel="1.2" md5sum="14c4b61d91f34352c6e0bc6484ec91b7" buildtime="1149554078" sequence_info="yast2-installation-2.13.119-1.2-bed704bbda8a1ecbd2206d815aacdb52d940"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>yast2-instserver</name>
+      <arch>noarch</arch>
+      <version epoch="0" ver="2.13.11" rel="1.3"/>
+      <checksum type="sha" pkgid="YES">b42d77c3e16789da4f625c9eb1caa21eb0da108e</checksum>
+      <time file="1153240081" build="1153184279"/>
+      <size package="72141" installed="272730" archive="278224"/>
+      <location href="rpm/noarch/yast2-instserver-2.13.11-1.3.noarch.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="yast2-instserver" epoch="0" ver="2.13.11" rel="1.3" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="yast2-instserver"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/noarch/yast2-instserver-2.13.11-1.3.noarch.patch.rpm"/>
+          <checksum type="sha">dbabf7fa670a4eae67f2c354d7e18cadfe5774de</checksum>
+          <time file="1153243354" build="1153184279"/>
+          <size package="37364" archive="157788"/>
+          <base-version epoch="0" ver="2.13.7" rel="12"/>
+          <base-version epoch="0" ver="2.13.9" rel="0.2"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/noarch/yast2-instserver-2.13.7_2.13.11-12_1.3.noarch.delta.rpm"/>
+          <checksum type="sha">645b6b1fb7114a90367ab9b86870483b9ae80bc7</checksum>
+          <time file="1153243355" build="1153184279"/>
+          <size package="13768" archive="0"/>
+          <base-version epoch="0" ver="2.13.7" rel="12" md5sum="b2d5e1562f349ca7c529eb13c4e81e45" buildtime="1146677384" sequence_info="yast2-instserver-2.13.7-12-5d5d5e30975cc5fb02f692064129001594"/>
+        </deltarpm>
+        <deltarpm>
+          <location href="rpm/noarch/yast2-instserver-2.13.9_2.13.11-0.2_1.3.noarch.delta.rpm"/>
+          <checksum type="sha">924cb585636f9f907d69a2b93408dddb3a661fd4</checksum>
+          <time file="1153243355" build="1153184279"/>
+          <size package="12462" archive="0"/>
+          <base-version epoch="0" ver="2.13.9" rel="0.2" md5sum="08ab89d8e3d74e894ed40918b529fe9e" buildtime="1149553837" sequence_info="yast2-instserver-2.13.9-0.2-7ad28fbce322f8e231d1b273f008182894"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>yast2-ncurses</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="2.13.40" rel="1.3"/>
+      <checksum type="sha" pkgid="YES">ea94c76419c36d7df7f3cf1842b08c9e4892e84a</checksum>
+      <time file="1153240076" build="1153176135"/>
+      <size package="572992" installed="1540558" archive="1542124"/>
+      <location href="rpm/i586/yast2-ncurses-2.13.40-1.3.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="yast2-ncurses" epoch="0" ver="2.13.40" rel="1.3" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="yast2-ncurses"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/yast2-ncurses-2.13.40-1.3.i586.patch.rpm"/>
+          <checksum type="sha">133c8a9cb100c7f5857656643495ec90b158a1ee</checksum>
+          <time file="1153243359" build="1153176135"/>
+          <size package="563956" archive="1505072"/>
+          <base-version epoch="0" ver="2.13.27" rel="3"/>
+          <base-version epoch="0" ver="2.13.36" rel="1.2"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/yast2-ncurses-2.13.27_2.13.40-3_1.3.i586.delta.rpm"/>
+          <checksum type="sha">90c276e4d6627090f5dd532d614ce1ac51dedc01</checksum>
+          <time file="1153243360" build="1153176135"/>
+          <size package="246396" archive="0"/>
+          <base-version epoch="0" ver="2.13.27" rel="3" md5sum="4df0a4a946c090bceddde967ee7ce146" buildtime="1146676074" sequence_info="yast2-ncurses-2.13.27-3-c3064dea4fc2d8742c72305135a7025991"/>
+        </deltarpm>
+        <deltarpm>
+          <location href="rpm/i586/yast2-ncurses-2.13.36_2.13.40-1.2_1.3.i586.delta.rpm"/>
+          <checksum type="sha">1c2b10be65dce44d69fba322aebfdd7e469e5f41</checksum>
+          <time file="1153243361" build="1153176135"/>
+          <size package="112195" archive="0"/>
+          <base-version epoch="0" ver="2.13.36" rel="1.2" md5sum="4afeec2b41f2708ee5accc56e3651ba7" buildtime="1149534522" sequence_info="yast2-ncurses-2.13.36-1.2-3992149388c8758330fe6b9a3e54e10f91"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>yast2-ncurses</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="2.13.40" rel="1.3"/>
+      <checksum type="sha" pkgid="YES">40db0a01a37c17b3a573516461f7379ec0ffffc0</checksum>
+      <time file="1153239941" build="1153182810"/>
+      <size package="593050" installed="1693290" archive="1694856"/>
+      <location href="rpm/ppc/yast2-ncurses-2.13.40-1.3.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="yast2-ncurses" epoch="0" ver="2.13.40" rel="1.3" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="yast2-ncurses"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/yast2-ncurses-2.13.40-1.3.ppc.patch.rpm"/>
+          <checksum type="sha">134bdfb4f76fab21e843d11fc5c3c8b762239848</checksum>
+          <time file="1153243364" build="1153182810"/>
+          <size package="583791" archive="1657804"/>
+          <base-version epoch="0" ver="2.13.27" rel="3"/>
+          <base-version epoch="0" ver="2.13.36" rel="1.2"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/yast2-ncurses-2.13.27_2.13.40-3_1.3.ppc.delta.rpm"/>
+          <checksum type="sha">7b1f56f34c96c66d9f65abaacffb753cfed086b5</checksum>
+          <time file="1153243366" build="1153182810"/>
+          <size package="243294" archive="0"/>
+          <base-version epoch="0" ver="2.13.27" rel="3" md5sum="f8168f54dc05b6cabb864e53b8882318" buildtime="1146676987" sequence_info="yast2-ncurses-2.13.27-3-7602dbcdf42be4291f475211517ef3f691"/>
+        </deltarpm>
+        <deltarpm>
+          <location href="rpm/ppc/yast2-ncurses-2.13.36_2.13.40-1.2_1.3.ppc.delta.rpm"/>
+          <checksum type="sha">e53c7e6c462ec4f3ae740814d0f4cd8dd45d4be5</checksum>
+          <time file="1153243367" build="1153182810"/>
+          <size package="146613" archive="0"/>
+          <base-version epoch="0" ver="2.13.36" rel="1.2" md5sum="2b679c934c3cbcddb2ef37cade289d63" buildtime="1149548386" sequence_info="yast2-ncurses-2.13.36-1.2-e6bb001b98cf1371a2aef6ab2881252b91"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>yast2-ncurses</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="2.13.40" rel="1.3"/>
+      <checksum type="sha" pkgid="YES">4e223933eff9f79c4f74610a2dd4285fc5b05926</checksum>
+      <time file="1153240064" build="1153175070"/>
+      <size package="599086" installed="1648314" archive="1649888"/>
+      <location href="rpm/x86_64/yast2-ncurses-2.13.40-1.3.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="yast2-ncurses" epoch="0" ver="2.13.40" rel="1.3" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="yast2-ncurses"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/yast2-ncurses-2.13.40-1.3.x86_64.patch.rpm"/>
+          <checksum type="sha">b0ac0b6cd9c6126999b0dec09d55fd3e69497f31</checksum>
+          <time file="1153243370" build="1153175070"/>
+          <size package="588884" archive="1612832"/>
+          <base-version epoch="0" ver="2.13.27" rel="3"/>
+          <base-version epoch="0" ver="2.13.36" rel="1.2"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/yast2-ncurses-2.13.27_2.13.40-3_1.3.x86_64.delta.rpm"/>
+          <checksum type="sha">46f803053acc8fa9da5d5d840a651318d5a43098</checksum>
+          <time file="1153243371" build="1153175070"/>
+          <size package="300774" archive="0"/>
+          <base-version epoch="0" ver="2.13.27" rel="3" md5sum="8012c7ccf8a221363de9ae8170950aeb" buildtime="1146675094" sequence_info="yast2-ncurses-2.13.27-3-5a9cb04d76489ad4a6513ab69c6300a391"/>
+        </deltarpm>
+        <deltarpm>
+          <location href="rpm/x86_64/yast2-ncurses-2.13.36_2.13.40-1.2_1.3.x86_64.delta.rpm"/>
+          <checksum type="sha">fdfd1eb4c1ceadf5b86310b818ace78d6bd4045b</checksum>
+          <time file="1153243373" build="1153175070"/>
+          <size package="122245" archive="0"/>
+          <base-version epoch="0" ver="2.13.36" rel="1.2" md5sum="e39c94417006ec172985d45f21760d61" buildtime="1149537446" sequence_info="yast2-ncurses-2.13.36-1.2-2a2cf30e2771b514e81a0229f3aadcfa91"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>yast2-online-update</name>
+      <arch>noarch</arch>
+      <version epoch="0" ver="2.13.43" rel="1.3"/>
+      <checksum type="sha" pkgid="YES">7117d79ad6a8781fa5e2046d8d9a452424768fe0</checksum>
+      <time file="1153240077" build="1153192554"/>
+      <size package="68066" installed="241521" archive="249120"/>
+      <location href="rpm/noarch/yast2-online-update-2.13.43-1.3.noarch.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="yast2-online-update" epoch="0" ver="2.13.43" rel="1.3" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="yast2-online-update"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/noarch/yast2-online-update-2.13.43-1.3.noarch.patch.rpm"/>
+          <checksum type="sha">5deba732e985a42c55490059b40ceb33d5d702c5</checksum>
+          <time file="1153243375" build="1153192554"/>
+          <size package="44676" archive="93152"/>
+          <base-version epoch="0" ver="2.13.35" rel="4"/>
+          <base-version epoch="0" ver="2.13.40" rel="0.2"/>
+          <base-version epoch="0" ver="2.13.42" rel="1.2"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/noarch/yast2-online-update-2.13.35_2.13.43-4_1.3.noarch.delta.rpm"/>
+          <checksum type="sha">5fda04a078a61ae40a53ff9415c1183dded24142</checksum>
+          <time file="1153243375" build="1153192554"/>
+          <size package="28785" archive="0"/>
+          <base-version epoch="0" ver="2.13.35" rel="4" md5sum="9e65c9cb10c68030a666ab6e260fbe2c" buildtime="1146679041" sequence_info="yast2-online-update-2.13.35-4-76a4db6de0734b79067284f925df72fab5"/>
+        </deltarpm>
+        <deltarpm>
+          <location href="rpm/noarch/yast2-online-update-2.13.42_2.13.43-1.2_1.3.noarch.delta.rpm"/>
+          <checksum type="sha">e86b976a2cee50865d67dfad4ceb1cf0bb4fcf17</checksum>
+          <time file="1153243375" build="1153192554"/>
+          <size package="28119" archive="0"/>
+          <base-version epoch="0" ver="2.13.42" rel="1.2" md5sum="33af988a744545138ccdefd3cb02c240" buildtime="1150893419" sequence_info="yast2-online-update-2.13.42-1.2-06da5e56493138e94bc19ce0067ac0dab5"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>yast2-online-update-frontend</name>
+      <arch>noarch</arch>
+      <version epoch="0" ver="2.13.43" rel="1.3"/>
+      <checksum type="sha" pkgid="YES">4f3f6a1a5e10f1a0a3c88f8d1eef46a6dc0af416</checksum>
+      <time file="1153240077" build="1153192554"/>
+      <size package="24729" installed="11191" archive="11640"/>
+      <location href="rpm/noarch/yast2-online-update-frontend-2.13.43-1.3.noarch.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="yast2-online-update-frontend" epoch="0" ver="2.13.43" rel="1.3" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="yast2-online-update-frontend"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/noarch/yast2-online-update-frontend-2.13.43-1.3.noarch.patch.rpm"/>
+          <checksum type="sha">cee6f65990eba19af7d775a27257af863772c5dc</checksum>
+          <time file="1153243379" build="1153192554"/>
+          <size package="24898" archive="11640"/>
+          <base-version epoch="0" ver="2.13.35" rel="4"/>
+          <base-version epoch="0" ver="2.13.40" rel="0.2"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/noarch/yast2-online-update-frontend-2.13.35_2.13.43-4_1.3.noarch.delta.rpm"/>
+          <checksum type="sha">4edb3107520794c1cb8506370ec3604449d04e1f</checksum>
+          <time file="1153243380" build="1153192554"/>
+          <size package="21819" archive="0"/>
+          <base-version epoch="0" ver="2.13.35" rel="4" md5sum="1e00b11517976026eb9767c2c274a39d" buildtime="1146679041" sequence_info="yast2-online-update-frontend-2.13.35-4-91d59d5ce6f401502c335e55a782152d20"/>
+        </deltarpm>
+        <deltarpm>
+          <location href="rpm/noarch/yast2-online-update-frontend-2.13.40_2.13.43-0.2_1.3.noarch.delta.rpm"/>
+          <checksum type="sha">d141433a8fd8cdee91fd2b48913a5e2e30cb5652</checksum>
+          <time file="1153243380" build="1153192554"/>
+          <size package="21730" archive="0"/>
+          <base-version epoch="0" ver="2.13.40" rel="0.2" md5sum="cf5385b4edccb6510a72307495910e1d" buildtime="1149559016" sequence_info="yast2-online-update-frontend-2.13.40-0.2-c89463ef03ab81eec13f32cbc310209020"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>yast2-packager</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="2.13.139" rel="1.3"/>
+      <checksum type="sha" pkgid="YES">73a393d26cbb9c1597b173ebfe7233a4a8d28d1f</checksum>
+      <time file="1153240070" build="1153191649"/>
+      <size package="187511" installed="755877" archive="765868"/>
+      <location href="rpm/i586/yast2-packager-2.13.139-1.3.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="yast2-packager" epoch="0" ver="2.13.139" rel="1.3" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="yast2-packager"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/yast2-packager-2.13.139-1.3.i586.patch.rpm"/>
+          <checksum type="sha">b3c5c043ce8aa232a19998e1a18b8a8812173ec5</checksum>
+          <time file="1153243382" build="1153191649"/>
+          <size package="145653" archive="519948"/>
+          <base-version epoch="0" ver="2.13.105" rel="3"/>
+          <base-version epoch="0" ver="2.13.125" rel="0.2"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/yast2-packager-2.13.105_2.13.139-3_1.3.i586.delta.rpm"/>
+          <checksum type="sha">53dc162d26cd614693162e2a3df9c6a078e8f198</checksum>
+          <time file="1153243383" build="1153191649"/>
+          <size package="83931" archive="0"/>
+          <base-version epoch="0" ver="2.13.105" rel="3" md5sum="7f740b5485333fe5d522dea0aa6b595c" buildtime="1146678615" sequence_info="yast2-packager-2.13.105-3-a15ff59d066a1f7ef4bba0cd61c556229810"/>
+        </deltarpm>
+        <deltarpm>
+          <location href="rpm/i586/yast2-packager-2.13.125_2.13.139-0.2_1.3.i586.delta.rpm"/>
+          <checksum type="sha">ce99e13f63025890189d7c1a6cca48752aae02af</checksum>
+          <time file="1153243383" build="1153191649"/>
+          <size package="71100" archive="0"/>
+          <base-version epoch="0" ver="2.13.125" rel="0.2" md5sum="d4a621e9477c6d1d5c41244458d9fbca" buildtime="1149557957" sequence_info="yast2-packager-2.13.125-0.2-ab4ae1cbcd9d61be2505d8cb6820e486c810"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>yast2-packager</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="2.13.139" rel="1.3"/>
+      <checksum type="sha" pkgid="YES">5c4c4f3a9df9ca9afaf5dcde7254e2f22a430c57</checksum>
+      <time file="1153239940" build="1153204211"/>
+      <size package="187454" installed="755877" archive="765868"/>
+      <location href="rpm/ppc/yast2-packager-2.13.139-1.3.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="yast2-packager" epoch="0" ver="2.13.139" rel="1.3" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="yast2-packager"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/yast2-packager-2.13.139-1.3.ppc.patch.rpm"/>
+          <checksum type="sha">7871ada99d5ad957bdcd2dc087521f00c91f2769</checksum>
+          <time file="1153243385" build="1153204211"/>
+          <size package="137696" archive="446420"/>
+          <base-version epoch="0" ver="2.13.105" rel="3"/>
+          <base-version epoch="0" ver="2.13.125" rel="0.2"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/yast2-packager-2.13.105_2.13.139-3_1.3.ppc.delta.rpm"/>
+          <checksum type="sha">1689b944cd11100ff32a258052e05a18fcb787fa</checksum>
+          <time file="1153243386" build="1153204211"/>
+          <size package="83792" archive="0"/>
+          <base-version epoch="0" ver="2.13.105" rel="3" md5sum="dabf19468ce6bfb3fc921fa539d2c27b" buildtime="1146679733" sequence_info="yast2-packager-2.13.105-3-34d28d03923679692585a8d3c11df6509810"/>
+        </deltarpm>
+        <deltarpm>
+          <location href="rpm/ppc/yast2-packager-2.13.125_2.13.139-0.2_1.3.ppc.delta.rpm"/>
+          <checksum type="sha">4631510e026d8815fc9501f2f0704a2f9dedc14e</checksum>
+          <time file="1153243387" build="1153204211"/>
+          <size package="70952" archive="0"/>
+          <base-version epoch="0" ver="2.13.125" rel="0.2" md5sum="d17ed97a82386f6ae9fa3aaed6f8743d" buildtime="1149563857" sequence_info="yast2-packager-2.13.125-0.2-c337ab8dcdf2e9f39ea5030f0674de74c810"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>yast2-packager</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="2.13.139" rel="1.3"/>
+      <checksum type="sha" pkgid="YES">fc64fdab1e0126225e412bb66719a3388557b9a1</checksum>
+      <time file="1153240063" build="1153187400"/>
+      <size package="187375" installed="755877" archive="765868"/>
+      <location href="rpm/x86_64/yast2-packager-2.13.139-1.3.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="yast2-packager" epoch="0" ver="2.13.139" rel="1.3" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="yast2-packager"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/yast2-packager-2.13.139-1.3.x86_64.patch.rpm"/>
+          <checksum type="sha">64530d5d3d00d9654792866263cd4c90490f49b5</checksum>
+          <time file="1153243389" build="1153187400"/>
+          <size package="137594" archive="446420"/>
+          <base-version epoch="0" ver="2.13.105" rel="3"/>
+          <base-version epoch="0" ver="2.13.125" rel="0.2"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/yast2-packager-2.13.105_2.13.139-3_1.3.x86_64.delta.rpm"/>
+          <checksum type="sha">8e9f78691a11262ef80a81e899489d88e92af4a3</checksum>
+          <time file="1153243390" build="1153187400"/>
+          <size package="83921" archive="0"/>
+          <base-version epoch="0" ver="2.13.105" rel="3" md5sum="85c9ec43e54d338935341e4a4d0e7ff7" buildtime="1146677212" sequence_info="yast2-packager-2.13.105-3-2f6144a2c7a34ec39f42208ceb56f2eb9810"/>
+        </deltarpm>
+        <deltarpm>
+          <location href="rpm/x86_64/yast2-packager-2.13.125_2.13.139-0.2_1.3.x86_64.delta.rpm"/>
+          <checksum type="sha">8d54a8982ec1549e34d8a952c0f92bc20eb58835</checksum>
+          <time file="1153243390" build="1153187400"/>
+          <size package="71094" archive="0"/>
+          <base-version epoch="0" ver="2.13.125" rel="0.2" md5sum="dde10f57323c85e8d074c53b09f423e5" buildtime="1149557203" sequence_info="yast2-packager-2.13.125-0.2-603a1d9ffa50c8773c6e6fbd3ae5db0ac810"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>yast2-perl-bindings</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="2.13.5" rel="1.3"/>
+      <checksum type="sha" pkgid="YES">502215085aa42510a15a44bf4deaf42de3c542dd</checksum>
+      <time file="1153240055" build="1153175865"/>
+      <size package="128343" installed="380093" archive="388176"/>
+      <location href="rpm/i586/yast2-perl-bindings-2.13.5-1.3.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="yast2-perl-bindings" epoch="0" ver="2.13.5" rel="1.3" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="yast2-perl-bindings"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/yast2-perl-bindings-2.13.5-1.3.i586.patch.rpm"/>
+          <checksum type="sha">403851db755dfd6eb9f9da7015eaddb08edf85b3</checksum>
+          <time file="1153243392" build="1153175865"/>
+          <size package="102393" archive="269676"/>
+          <base-version epoch="0" ver="2.13.4" rel="17"/>
+          <base-version epoch="0" ver="2.13.4" rel="17.1"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/yast2-perl-bindings-2.13.4_2.13.5-17_1.3.i586.delta.rpm"/>
+          <checksum type="sha">94d3f91586f7788721ff15d0a8084358fab7f0de</checksum>
+          <time file="1153243393" build="1153175865"/>
+          <size package="16580" archive="0"/>
+          <base-version epoch="0" ver="2.13.4" rel="17" md5sum="ce4564f5fecb25d848c3cbe6e09573bc" buildtime="1146676101" sequence_info="yast2-perl-bindings-2.13.4-17-1d9c7740b2b4fc3d026a88e06719ba05d5"/>
+        </deltarpm>
+        <deltarpm>
+          <location href="rpm/i586/yast2-perl-bindings-2.13.4_2.13.5-17.1_1.3.i586.delta.rpm"/>
+          <checksum type="sha">879c5b145fb648c5c15af473aece50431ee6c8de</checksum>
+          <time file="1153243393" build="1153175865"/>
+          <size package="16547" archive="0"/>
+          <base-version epoch="0" ver="2.13.4" rel="17.1" md5sum="c64b6ace2895ff44896f601dc274c8e5" buildtime="1149534324" sequence_info="yast2-perl-bindings-2.13.4-17.1-a95a90a58cb007347a0902b9a8151849d5"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>yast2-perl-bindings</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="2.13.5" rel="1.3"/>
+      <checksum type="sha" pkgid="YES">87f8f27e88afa43454face74bcb6701e7815220c</checksum>
+      <time file="1153239929" build="1153181946"/>
+      <size package="131508" installed="392015" archive="400140"/>
+      <location href="rpm/ppc/yast2-perl-bindings-2.13.5-1.3.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="yast2-perl-bindings" epoch="0" ver="2.13.5" rel="1.3" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="yast2-perl-bindings"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/yast2-perl-bindings-2.13.5-1.3.ppc.patch.rpm"/>
+          <checksum type="sha">3de596bd5543319a834cf3ef848389b669afcc52</checksum>
+          <time file="1153243395" build="1153181946"/>
+          <size package="105246" archive="281608"/>
+          <base-version epoch="0" ver="2.13.4" rel="17"/>
+          <base-version epoch="0" ver="2.13.4" rel="17.1"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/yast2-perl-bindings-2.13.4_2.13.5-17_1.3.ppc.delta.rpm"/>
+          <checksum type="sha">42300e79cb0ccaaa7e77069dae8274e6cfd249d6</checksum>
+          <time file="1153243395" build="1153181946"/>
+          <size package="16560" archive="0"/>
+          <base-version epoch="0" ver="2.13.4" rel="17" md5sum="c6b971d8886b00ea7e8e038d7fc0e3ff" buildtime="1146676377" sequence_info="yast2-perl-bindings-2.13.4-17-4f5f6ae2074e804d7c7c1db823da6e7ed5"/>
+        </deltarpm>
+        <deltarpm>
+          <location href="rpm/ppc/yast2-perl-bindings-2.13.4_2.13.5-17.1_1.3.ppc.delta.rpm"/>
+          <checksum type="sha">73b3b8aa3b1fa8305ced7b1704a902d4469831fd</checksum>
+          <time file="1153243396" build="1153181946"/>
+          <size package="16551" archive="0"/>
+          <base-version epoch="0" ver="2.13.4" rel="17.1" md5sum="9ea96f7b87c8e53d71baa1e24953dcd0" buildtime="1149547816" sequence_info="yast2-perl-bindings-2.13.4-17.1-f9a53692683dce3433c8913c4832fd69d5"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>yast2-perl-bindings</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="2.13.5" rel="1.3"/>
+      <checksum type="sha" pkgid="YES">1166085c19b9f13679da45969521e0ca7ae41709</checksum>
+      <time file="1153240048" build="1153174810"/>
+      <size package="134968" installed="402134" archive="410232"/>
+      <location href="rpm/x86_64/yast2-perl-bindings-2.13.5-1.3.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="yast2-perl-bindings" epoch="0" ver="2.13.5" rel="1.3" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="yast2-perl-bindings"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/yast2-perl-bindings-2.13.5-1.3.x86_64.patch.rpm"/>
+          <checksum type="sha">b59565756296cea820661873eb256ec690a816f7</checksum>
+          <time file="1153243398" build="1153174810"/>
+          <size package="108575" archive="291720"/>
+          <base-version epoch="0" ver="2.13.4" rel="17"/>
+          <base-version epoch="0" ver="2.13.4" rel="17.1"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/yast2-perl-bindings-2.13.4_2.13.5-17_1.3.x86_64.delta.rpm"/>
+          <checksum type="sha">a5d9c5c2193ac4f9a7c05cb6d59930cab9ad885b</checksum>
+          <time file="1153243398" build="1153174810"/>
+          <size package="16685" archive="0"/>
+          <base-version epoch="0" ver="2.13.4" rel="17" md5sum="62cc432a8c65b46d207b187f8a2d454e" buildtime="1146674897" sequence_info="yast2-perl-bindings-2.13.4-17-5ffa70b06ba8e11b92f8d22bba51c65bd5"/>
+        </deltarpm>
+        <deltarpm>
+          <location href="rpm/x86_64/yast2-perl-bindings-2.13.4_2.13.5-17.1_1.3.x86_64.delta.rpm"/>
+          <checksum type="sha">99f0557415f8a348ad6751701c29edc1eb578b7a</checksum>
+          <time file="1153243398" build="1153174810"/>
+          <size package="16669" archive="0"/>
+          <base-version epoch="0" ver="2.13.4" rel="17.1" md5sum="888cd7bc3a3cdf16d8199cf741595384" buildtime="1149537192" sequence_info="yast2-perl-bindings-2.13.4-17.1-8124c9217bc5cc36864c7d11bd2b6c38d5"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>yast2-pkg-bindings</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="2.13.88" rel="1.3"/>
+      <checksum type="sha" pkgid="YES">ee138b862ebc99ffd1d120b271d099e75c114933</checksum>
+      <time file="1153240050" build="1153176115"/>
+      <size package="379361" installed="1427550" archive="1460424"/>
+      <location href="rpm/i586/yast2-pkg-bindings-2.13.88-1.3.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="yast2-pkg-bindings" epoch="0" ver="2.13.88" rel="1.3" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="yast2-pkg-bindings"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/yast2-pkg-bindings-2.13.88-1.3.i586.patch.rpm"/>
+          <checksum type="sha">8c919829b205602b6c4bf8997771135b1fd81bb4</checksum>
+          <time file="1153243401" build="1153176115"/>
+          <size package="335264" archive="1366360"/>
+          <base-version epoch="0" ver="2.13.68" rel="4"/>
+          <base-version epoch="0" ver="2.13.82" rel="1.2"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/yast2-pkg-bindings-2.13.68_2.13.88-4_1.3.i586.delta.rpm"/>
+          <checksum type="sha">4240d9154b4d72f042332934f8c2c4c03764f26d</checksum>
+          <time file="1153243402" build="1153176115"/>
+          <size package="202974" archive="0"/>
+          <base-version epoch="0" ver="2.13.68" rel="4" md5sum="ec9791dba0a8efb488fc1e38a88e2162" buildtime="1146676168" sequence_info="yast2-pkg-bindings-2.13.68-4-c17ea26b7fa99ac1de722899125b97e99d20"/>
+        </deltarpm>
+        <deltarpm>
+          <location href="rpm/i586/yast2-pkg-bindings-2.13.82_2.13.88-1.2_1.3.i586.delta.rpm"/>
+          <checksum type="sha">bad43b88bf41a40f64d686b1937ab9dea247bda2</checksum>
+          <time file="1153243403" build="1153176115"/>
+          <size package="157477" archive="0"/>
+          <base-version epoch="0" ver="2.13.82" rel="1.2" md5sum="585f009df48e5bfda77027e459b896ac" buildtime="1149549567" sequence_info="yast2-pkg-bindings-2.13.82-1.2-c693629efb1fde55b54f6d1324f6e70aad20"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>yast2-pkg-bindings</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="2.13.88" rel="1.3"/>
+      <checksum type="sha" pkgid="YES">d9a385ee338a3b877076c1aa7d49cfce601403ab</checksum>
+      <time file="1153239923" build="1153182536"/>
+      <size package="374698" installed="1481046" archive="1513920"/>
+      <location href="rpm/ppc/yast2-pkg-bindings-2.13.88-1.3.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="yast2-pkg-bindings" epoch="0" ver="2.13.88" rel="1.3" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="yast2-pkg-bindings"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/yast2-pkg-bindings-2.13.88-1.3.ppc.patch.rpm"/>
+          <checksum type="sha">d053495831aadc0ea8331e5a72c0cdd42945bf3b</checksum>
+          <time file="1153243406" build="1153182536"/>
+          <size package="326361" archive="1419856"/>
+          <base-version epoch="0" ver="2.13.68" rel="4"/>
+          <base-version epoch="0" ver="2.13.82" rel="1.2"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/yast2-pkg-bindings-2.13.68_2.13.88-4_1.3.ppc.delta.rpm"/>
+          <checksum type="sha">fc2b07f388233c08c03c8eac3a536fea5597c158</checksum>
+          <time file="1153243407" build="1153182536"/>
+          <size package="192430" archive="0"/>
+          <base-version epoch="0" ver="2.13.68" rel="4" md5sum="2500f458aeb9c0aa5134c640434f9280" buildtime="1146676719" sequence_info="yast2-pkg-bindings-2.13.68-4-363588b67921e17e75fd6b1ffafbb99c9d20"/>
+        </deltarpm>
+        <deltarpm>
+          <location href="rpm/ppc/yast2-pkg-bindings-2.13.82_2.13.88-1.2_1.3.ppc.delta.rpm"/>
+          <checksum type="sha">929513c06832114d47f1536054df41aa56aea9a7</checksum>
+          <time file="1153243408" build="1153182536"/>
+          <size package="153183" archive="0"/>
+          <base-version epoch="0" ver="2.13.82" rel="1.2" md5sum="f29856a00c6ea7a1a8d083e231a80fd9" buildtime="1149548982" sequence_info="yast2-pkg-bindings-2.13.82-1.2-6758ce9cce3de040e89a1d2d25735d30ad20"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>yast2-pkg-bindings</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="2.13.88" rel="1.3"/>
+      <checksum type="sha" pkgid="YES">21766144d4e9b02623c9399099a53b95cd51567c</checksum>
+      <time file="1153240044" build="1153174746"/>
+      <size package="375773" installed="1473886" archive="1506736"/>
+      <location href="rpm/x86_64/yast2-pkg-bindings-2.13.88-1.3.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="yast2-pkg-bindings" epoch="0" ver="2.13.88" rel="1.3" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="yast2-pkg-bindings"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/yast2-pkg-bindings-2.13.88-1.3.x86_64.patch.rpm"/>
+          <checksum type="sha">00c2dbac6eb3caf2bdc71856888e00da6dc2ed15</checksum>
+          <time file="1153243411" build="1153174746"/>
+          <size package="331686" archive="1412668"/>
+          <base-version epoch="0" ver="2.13.68" rel="4"/>
+          <base-version epoch="0" ver="2.13.82" rel="1.2"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/yast2-pkg-bindings-2.13.68_2.13.88-4_1.3.x86_64.delta.rpm"/>
+          <checksum type="sha">141cdcce0befbf29599509ad8d4446dbe18f3410</checksum>
+          <time file="1153243413" build="1153174746"/>
+          <size package="220437" archive="0"/>
+          <base-version epoch="0" ver="2.13.68" rel="4" md5sum="11e824a4a4afb8cd6154323a3a922e46" buildtime="1146674919" sequence_info="yast2-pkg-bindings-2.13.68-4-18aeb4954c2513cee4a0b39f0ab7d18c9d20"/>
+        </deltarpm>
+        <deltarpm>
+          <location href="rpm/x86_64/yast2-pkg-bindings-2.13.82_2.13.88-1.2_1.3.x86_64.delta.rpm"/>
+          <checksum type="sha">f39e9205c83508a41ea4bcac6b8cb5c1e9804c16</checksum>
+          <time file="1153243414" build="1153174746"/>
+          <size package="171922" archive="0"/>
+          <base-version epoch="0" ver="2.13.82" rel="1.2" md5sum="d0b3066770652eeafe8e6c2406c84664" buildtime="1149549082" sequence_info="yast2-pkg-bindings-2.13.82-1.2-0623ef29731e35101963e76bf2fcac97ad20"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>yast2-qt</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="2.13.60" rel="0.4"/>
+      <checksum type="sha" pkgid="YES">3b98f0133c77f3f49283900e0f1caa67836e2659</checksum>
+      <time file="1153240078" build="1153176332"/>
+      <size package="2318820" installed="3729292" archive="3733692"/>
+      <location href="rpm/i586/yast2-qt-2.13.60-0.4.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="yast2-qt" epoch="0" ver="2.13.60" rel="0.4" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="yast2-qt"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/yast2-qt-2.13.60-0.4.i586.patch.rpm"/>
+          <checksum type="sha">24733796a0c496fb1a4a36e021f385a4facb4228</checksum>
+          <time file="1153243417" build="1153176332"/>
+          <size package="633647" archive="1787264"/>
+          <base-version epoch="0" ver="2.13.53" rel="4"/>
+          <base-version epoch="0" ver="2.13.60" rel="0.2"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/yast2-qt-2.13.53_2.13.60-4_0.4.i586.delta.rpm"/>
+          <checksum type="sha">a87e649fc17386e1313be5a5a7bbaa8c023fc2b7</checksum>
+          <time file="1153243420" build="1153176332"/>
+          <size package="165867" archive="0"/>
+          <base-version epoch="0" ver="2.13.53" rel="4" md5sum="779eeff3fc334dbd19c6bd0879d5c509" buildtime="1146676129" sequence_info="yast2-qt-2.13.53-4-310c3dab93e55a8bd252e2a98a5d8b6711a3"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>yast2-qt</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="2.13.60" rel="0.4"/>
+      <checksum type="sha" pkgid="YES">8d08ad06bf37358da72b8fff7135d101f4ed3154</checksum>
+      <time file="1153239942" build="1153183223"/>
+      <size package="2320030" installed="4073668" archive="4078068"/>
+      <location href="rpm/ppc/yast2-qt-2.13.60-0.4.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="yast2-qt" epoch="0" ver="2.13.60" rel="0.4" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="yast2-qt"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/yast2-qt-2.13.60-0.4.ppc.patch.rpm"/>
+          <checksum type="sha">c5c855e232f348301fd2ce85ef7c2b9f093cfe92</checksum>
+          <time file="1153243427" build="1153183223"/>
+          <size package="637897" archive="2131640"/>
+          <base-version epoch="0" ver="2.13.53" rel="4"/>
+          <base-version epoch="0" ver="2.13.60" rel="0.2"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/yast2-qt-2.13.53_2.13.60-4_0.4.ppc.delta.rpm"/>
+          <checksum type="sha">4a816c7fcd7790ef3788426b6314ba72b9f3553a</checksum>
+          <time file="1153243430" build="1153183223"/>
+          <size package="217951" archive="0"/>
+          <base-version epoch="0" ver="2.13.53" rel="4" md5sum="9fce453232e1123b329408cbc3338ff2" buildtime="1146676588" sequence_info="yast2-qt-2.13.53-4-62a33e4d31dbd8072647d59912e4e87311a3"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>yast2-qt</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="2.13.60" rel="0.4"/>
+      <checksum type="sha" pkgid="YES">0040cde655192fa148c7ff43131a2b2cfd66fd5e</checksum>
+      <time file="1153240065" build="1153175045"/>
+      <size package="2328841" installed="4103176" archive="4107584"/>
+      <location href="rpm/x86_64/yast2-qt-2.13.60-0.4.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="yast2-qt" epoch="0" ver="2.13.60" rel="0.4" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="yast2-qt"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/yast2-qt-2.13.60-0.4.x86_64.patch.rpm"/>
+          <checksum type="sha">2382117928aab27e9c144e49a6075a355cf4c6ae</checksum>
+          <time file="1153243437" build="1153175045"/>
+          <size package="649108" archive="2161152"/>
+          <base-version epoch="0" ver="2.13.53" rel="4"/>
+          <base-version epoch="0" ver="2.13.60" rel="0.2"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/yast2-qt-2.13.53_2.13.60-4_0.4.x86_64.delta.rpm"/>
+          <checksum type="sha">3f4acdf5f445ce423e597f0eff9611cc05056135</checksum>
+          <time file="1153243441" build="1153175045"/>
+          <size package="169659" archive="0"/>
+          <base-version epoch="0" ver="2.13.53" rel="4" md5sum="37576d85e720131ae05b4f39fbfc9533" buildtime="1146675246" sequence_info="yast2-qt-2.13.53-4-85d82cb6888bb893381bc5554519050a11a3"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>yast2-security</name>
+      <arch>noarch</arch>
+      <version epoch="0" ver="2.13.4" rel="0.3"/>
+      <checksum type="sha" pkgid="YES">197888ecd71db7e1b8a480aa740c89295d632a07</checksum>
+      <time file="1153240052" build="1153179507"/>
+      <size package="50338" installed="211801" archive="218884"/>
+      <location href="rpm/noarch/yast2-security-2.13.4-0.3.noarch.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="yast2-security" epoch="0" ver="2.13.4" rel="0.3" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="yast2-security"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/noarch/yast2-security-2.13.4-0.3.noarch.patch.rpm"/>
+          <checksum type="sha">2d7b4a30402bce8b31130e5a33701f7f0cfd3d2e</checksum>
+          <time file="1153243446" build="1153179507"/>
+          <size package="29450" archive="68652"/>
+          <base-version epoch="0" ver="2.13.2" rel="14"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/noarch/yast2-security-2.13.2_2.13.4-14_0.3.noarch.delta.rpm"/>
+          <checksum type="sha">25b78fc63049611f808d00dcf0d4fdfb3bedb07a</checksum>
+          <time file="1153243447" build="1153179507"/>
+          <size package="17085" archive="0"/>
+          <base-version epoch="0" ver="2.13.2" rel="14" md5sum="eb9d955b03f5aa35909903ddb2af9023" buildtime="1146677386" sequence_info="yast2-security-2.13.2-14-a9609458f020d1e7c6d57bf18c368d9db5"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>zen-updater</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="7.1.0" rel="51.29"/>
+      <checksum type="sha" pkgid="YES">f54002cfc8df40309b3a29f87c172fa449c68b24</checksum>
+      <time file="1153240171" build="1153194984"/>
+      <size package="202679" installed="947700" archive="573728"/>
+      <location href="rpm/i586/zen-updater-7.1.0-51.29.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="zen-updater" epoch="0" ver="7.1.0" rel="51.29" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="zen-updater"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/zen-updater-7.1.0-51.29.i586.patch.rpm"/>
+          <checksum type="sha">e3e4916b80ae99adda0c5293bebfe1460412ccfd</checksum>
+          <time file="1153243449" build="1153194984"/>
+          <size package="194761" archive="550824"/>
+          <base-version epoch="0" ver="7.1.0" rel="51"/>
+          <base-version epoch="0" ver="7.1.0" rel="51.13"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/zen-updater-7.1.0-51_51.29.i586.delta.rpm"/>
+          <checksum type="sha">fdb3c9d08af815514bb4e45633658bc9e28cabc8</checksum>
+          <time file="1153243450" build="1153194984"/>
+          <size package="142432" archive="0"/>
+          <base-version epoch="0" ver="7.1.0" rel="51" md5sum="885a08e5db8332a07c90a4f8545fcbcd" buildtime="1146676650" sequence_info="zen-updater-7.1.0-51-97b7acaf0f9cbed3152d2428f277e84bc810"/>
+        </deltarpm>
+        <deltarpm>
+          <location href="rpm/i586/zen-updater-7.1.0-51.13_51.29.i586.delta.rpm"/>
+          <checksum type="sha">6a3a0c396827cfba4b1bb4062445f415a2c4ca79</checksum>
+          <time file="1153243450" build="1153194984"/>
+          <size package="128817" archive="0"/>
+          <base-version epoch="0" ver="7.1.0" rel="51.13" md5sum="e4336f086f72f72f12da158e4dd79f06" buildtime="1149569735" sequence_info="zen-updater-7.1.0-51.13-e84fd39c447c3059031a02174519df23a11d6310"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>zen-updater</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="7.1.0" rel="51.29"/>
+      <checksum type="sha" pkgid="YES">adc9cdfeeb6cfb9917c277f584126b904d0c5d59</checksum>
+      <time file="1153240026" build="1153211469"/>
+      <size package="206253" installed="967692" archive="583724"/>
+      <location href="rpm/ppc/zen-updater-7.1.0-51.29.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="zen-updater" epoch="0" ver="7.1.0" rel="51.29" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="zen-updater"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/zen-updater-7.1.0-51.29.ppc.patch.rpm"/>
+          <checksum type="sha">c8c90e3f34c0e072e135c21050079defc444a31a</checksum>
+          <time file="1153243453" build="1153211469"/>
+          <size package="202235" archive="573100"/>
+          <base-version epoch="0" ver="7.1.0" rel="51"/>
+          <base-version epoch="0" ver="7.1.0" rel="51.13"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/zen-updater-7.1.0-51_51.29.ppc.delta.rpm"/>
+          <checksum type="sha">e6b038958be9cade26d57836ae280fcc346d783d</checksum>
+          <time file="1153243453" build="1153211469"/>
+          <size package="142961" archive="0"/>
+          <base-version epoch="0" ver="7.1.0" rel="51" md5sum="627949483223865d8fd6f5ca6ae1be44" buildtime="1146677061" sequence_info="zen-updater-7.1.0-51-b59b4b81823480e7f928c44be6dfd069c810"/>
+        </deltarpm>
+        <deltarpm>
+          <location href="rpm/ppc/zen-updater-7.1.0-51.13_51.29.ppc.delta.rpm"/>
+          <checksum type="sha">30bfadb41bbb9a10b923e56a4da51c4925de0c10</checksum>
+          <time file="1153243454" build="1153211469"/>
+          <size package="123226" archive="0"/>
+          <base-version epoch="0" ver="7.1.0" rel="51.13" md5sum="da1065caf87d634b3003f680e3bce38b" buildtime="1149576046" sequence_info="zen-updater-7.1.0-51.13-46b95e9502e4217c69a7f31d4800ed06881310"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>zen-updater</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="7.1.0" rel="51.29"/>
+      <checksum type="sha" pkgid="YES">c92e5a0e1b35ebabc5e43d8222585ae92c04f482</checksum>
+      <time file="1153240153" build="1153196575"/>
+      <size package="203646" installed="572789" archive="583800"/>
+      <location href="rpm/x86_64/zen-updater-7.1.0-51.29.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="zen-updater" epoch="0" ver="7.1.0" rel="51.29" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="zen-updater"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/zen-updater-7.1.0-51.29.x86_64.patch.rpm"/>
+          <checksum type="sha">418e2d9eec42e0ca461557aca12fcd35f3972ba9</checksum>
+          <time file="1153243457" build="1153196575"/>
+          <size package="199568" archive="573016"/>
+          <base-version epoch="0" ver="7.1.0" rel="51"/>
+          <base-version epoch="0" ver="7.1.0" rel="51.13"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/zen-updater-7.1.0-51_51.29.x86_64.delta.rpm"/>
+          <checksum type="sha">4515c329c42214215063fddf8ec3647dd5fd3deb</checksum>
+          <time file="1153243457" build="1153196575"/>
+          <size package="142496" archive="0"/>
+          <base-version epoch="0" ver="7.1.0" rel="51" md5sum="4bfdf25749622c6c5629ea213fb5fffd" buildtime="1146675231" sequence_info="zen-updater-7.1.0-51-ba1ab89e6dd08ee664b6c6f29153889bd810"/>
+        </deltarpm>
+        <deltarpm>
+          <location href="rpm/x86_64/zen-updater-7.1.0-51.13_51.29.x86_64.delta.rpm"/>
+          <checksum type="sha">cbe77e9cfdc33cb80d6dee01a04c8ee4c745824d</checksum>
+          <time file="1153243458" build="1153196575"/>
+          <size package="124175" archive="0"/>
+          <base-version epoch="0" ver="7.1.0" rel="51.13" md5sum="05efe08c544a6d2c2c80aef9f3d6c3bb" buildtime="1149561755" sequence_info="zen-updater-7.1.0-51.13-8420bc9c4e329b71963c6201510f0f8e981310"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>zmd</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="7.1.1.0" rel="39.50"/>
+      <checksum type="sha" pkgid="YES">e43811d96c066e574bf996378ba332fb2863b902</checksum>
+      <time file="1153240080" build="1153179735"/>
+      <size package="481642" installed="1209803" archive="1227284"/>
+      <location href="rpm/i586/zmd-7.1.1.0-39.50.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="zmd" epoch="0" ver="7.1.1.0" rel="39.50" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="zmd"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/zmd-7.1.1.0-39.50.i586.patch.rpm"/>
+          <checksum type="sha">f40a3404edb9712bac3611fde2b2202c4eb4e1c0</checksum>
+          <time file="1153243461" build="1153179735"/>
+          <size package="368364" archive="952968"/>
+          <base-version epoch="0" ver="7.1.1.0" rel="35"/>
+          <base-version epoch="0" ver="7.1.1.0" rel="39.15"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/zmd-7.1.1.0-35_39.50.i586.delta.rpm"/>
+          <checksum type="sha">8f009504881d0bf788f7fc3231c1b2ac872c6bd7</checksum>
+          <time file="1153243462" build="1153179735"/>
+          <size package="236627" archive="0"/>
+          <base-version epoch="0" ver="7.1.1.0" rel="35" md5sum="cd563d1fa48489503ce92b7b64d4f83c" buildtime="1146647904" sequence_info="zmd-7.1.1.0-35-0fae95e95789aa4dedce9b0f00ed5fca391b41d2"/>
+        </deltarpm>
+        <deltarpm>
+          <location href="rpm/i586/zmd-7.1.1.0-39.15_39.50.i586.delta.rpm"/>
+          <checksum type="sha">d67777cc5c7d641347f88bcb6927ba4fa19db57c</checksum>
+          <time file="1153243463" build="1153179735"/>
+          <size package="183421" archive="0"/>
+          <base-version epoch="0" ver="7.1.1.0" rel="39.15" md5sum="b5bc20ed3a57f0941a0b623a4a9f9580" buildtime="1149553606" sequence_info="zmd-7.1.1.0-39.15-2a132b78d4401e25e174e3911dc34be1391b41e2"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>zmd</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="7.1.1.0" rel="39.50"/>
+      <checksum type="sha" pkgid="YES">4ef9b78dcb34d7ba235fc92cff1ffe031f3a7191</checksum>
+      <time file="1153239945" build="1153191609"/>
+      <size package="486717" installed="1219227" archive="1236708"/>
+      <location href="rpm/ppc/zmd-7.1.1.0-39.50.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="zmd" epoch="0" ver="7.1.1.0" rel="39.50" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="zmd"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/zmd-7.1.1.0-39.50.ppc.patch.rpm"/>
+          <checksum type="sha">30a29df2f477890d27d1c6f155df020ddc68e646</checksum>
+          <time file="1153243467" build="1153191609"/>
+          <size package="372455" archive="960828"/>
+          <base-version epoch="0" ver="7.1.1.0" rel="35"/>
+          <base-version epoch="0" ver="7.1.1.0" rel="39.15"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/zmd-7.1.1.0-35_39.50.ppc.delta.rpm"/>
+          <checksum type="sha">2d6eed4fde851c49e533684b0a7523929d32f815</checksum>
+          <time file="1153243468" build="1153191609"/>
+          <size package="237676" archive="0"/>
+          <base-version epoch="0" ver="7.1.1.0" rel="35" md5sum="13fcb6d2e63bd105610e1220d600b0dd" buildtime="1146648972" sequence_info="zmd-7.1.1.0-35-2934e79903748508ad3fda019fbab8a6391b41d2"/>
+        </deltarpm>
+        <deltarpm>
+          <location href="rpm/ppc/zmd-7.1.1.0-39.15_39.50.ppc.delta.rpm"/>
+          <checksum type="sha">fc2d8303cbbff6a3f2e2eee443e5b0a72d364451</checksum>
+          <time file="1153243469" build="1153191609"/>
+          <size package="183969" archive="0"/>
+          <base-version epoch="0" ver="7.1.1.0" rel="39.15" md5sum="fcd6a52077d5b99e31c5372b16f954dc" buildtime="1149557344" sequence_info="zmd-7.1.1.0-39.15-e3f488eced68949cc1d8481a97ea8f33391b41e2"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>zmd</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="7.1.1.0" rel="39.50"/>
+      <checksum type="sha" pkgid="YES">10062e813ef2e5f5fd3a2bb790ab1edf164659ec</checksum>
+      <time file="1153240067" build="1153179864"/>
+      <size package="480646" installed="1215979" archive="1233600"/>
+      <location href="rpm/x86_64/zmd-7.1.1.0-39.50.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="zmd" epoch="0" ver="7.1.1.0" rel="39.50" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="zmd"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/zmd-7.1.1.0-39.50.x86_64.patch.rpm"/>
+          <checksum type="sha">4cf9c156ad146e91cac4ca0d98597cb613d1ebf1</checksum>
+          <time file="1153243473" build="1153179864"/>
+          <size package="369857" archive="956492"/>
+          <base-version epoch="0" ver="7.1.1.0" rel="35"/>
+          <base-version epoch="0" ver="7.1.1.0" rel="39.15"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/zmd-7.1.1.0-35_39.50.x86_64.delta.rpm"/>
+          <checksum type="sha">59dc473963a61086cbfbf15efa3f1780a6d7329f</checksum>
+          <time file="1153243474" build="1153179864"/>
+          <size package="236989" archive="0"/>
+          <base-version epoch="0" ver="7.1.1.0" rel="35" md5sum="27a50e48a97d68dee91fc50c98533e44" buildtime="1146647634" sequence_info="zmd-7.1.1.0-35-d2b3d6cf1b85c516aa43e1057c54ca1a391c41d2"/>
+        </deltarpm>
+        <deltarpm>
+          <location href="rpm/x86_64/zmd-7.1.1.0-39.15_39.50.x86_64.delta.rpm"/>
+          <checksum type="sha">58549dcffaa499c25792cb62300ec1dc644f5982</checksum>
+          <time file="1153243475" build="1153179864"/>
+          <size package="184843" archive="0"/>
+          <base-version epoch="0" ver="7.1.1.0" rel="39.15" md5sum="c04c05a917a014d6c02a40d8fc7b0598" buildtime="1149552304" sequence_info="zmd-7.1.1.0-39.15-83345319524ddb3409cf348254fe3b02391c41e2"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>zmd-devel</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="7.1.1.0" rel="39.50"/>
+      <checksum type="sha" pkgid="YES">becbffb587f321cec227de04931f9885c8267600</checksum>
+      <time file="1153240081" build="1153179735"/>
+      <size package="27280" installed="325" archive="592"/>
+      <location href="rpm/i586/zmd-devel-7.1.1.0-39.50.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="zmd-devel" epoch="0" ver="7.1.1.0" rel="39.50" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="zmd-devel"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/zmd-devel-7.1.1.0-39.50.i586.patch.rpm"/>
+          <checksum type="sha">33047d177e892e5199e8f5a1b9465d9ea8c7c4ac</checksum>
+          <time file="1153243478" build="1153179735"/>
+          <size package="27140" archive="124"/>
+          <base-version epoch="0" ver="7.1.1.0" rel="35"/>
+          <base-version epoch="0" ver="7.1.1.0" rel="39.15"/>
+        </patchrpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>zmd-devel</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="7.1.1.0" rel="39.50"/>
+      <checksum type="sha" pkgid="YES">fbe3d6194c12d2cb32a07e8c797fe4abfdba6150</checksum>
+      <time file="1153239945" build="1153191609"/>
+      <size package="27277" installed="325" archive="592"/>
+      <location href="rpm/ppc/zmd-devel-7.1.1.0-39.50.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="zmd-devel" epoch="0" ver="7.1.1.0" rel="39.50" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="zmd-devel"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/zmd-devel-7.1.1.0-39.50.ppc.patch.rpm"/>
+          <checksum type="sha">a469ce44012bfc9263659ff7500175449d2f4615</checksum>
+          <time file="1153243480" build="1153191609"/>
+          <size package="27120" archive="124"/>
+          <base-version epoch="0" ver="7.1.1.0" rel="35"/>
+          <base-version epoch="0" ver="7.1.1.0" rel="39.15"/>
+        </patchrpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>zmd-devel</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="7.1.1.0" rel="39.50"/>
+      <checksum type="sha" pkgid="YES">14eb60fe2ab5aeb730160d9bf189196faa371eef</checksum>
+      <time file="1153240067" build="1153179864"/>
+      <size package="27281" installed="329" archive="596"/>
+      <location href="rpm/x86_64/zmd-devel-7.1.1.0-39.50.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="zmd-devel" epoch="0" ver="7.1.1.0" rel="39.50" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="zmd-devel"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/zmd-devel-7.1.1.0-39.50.x86_64.patch.rpm"/>
+          <checksum type="sha">0c65783e3ed6da38f06972cc9b8fe2f2d1f2a03f</checksum>
+          <time file="1153243482" build="1153179864"/>
+          <size package="27128" archive="124"/>
+          <base-version epoch="0" ver="7.1.1.0" rel="35"/>
+          <base-version epoch="0" ver="7.1.1.0" rel="39.15"/>
+        </patchrpm>
+      </pkgfiles>
+    </package>
+  </atoms>
+</patch>

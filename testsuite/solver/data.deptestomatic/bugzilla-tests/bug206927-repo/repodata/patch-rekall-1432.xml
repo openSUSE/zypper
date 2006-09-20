@@ -1,0 +1,605 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--PATCHINFO id="c5ba0f7c4258f8c5d9b80aaec4f7b838"!-->
+<patch
+    xmlns="http://novell.com/package/metadata/suse/patch"
+    xmlns:yum="http://linux.duke.edu/metadata/common"
+    xmlns:rpm="http://linux.duke.edu/metadata/rpm"
+    xmlns:suse="http://novell.com/package/metadata/suse/common"
+    patchid="rekall-1432"
+    timestamp="1148383892"
+    engine="1.0">
+  <yum:name>rekall</yum:name>
+  <summary lang="en">Crash fixes while creating a new database.</summary>
+  <summary lang="de">Behebt einen Absturz beim Anlegen einer neuen Datenbank.</summary>
+  <description lang="en">This update fixes several crashes and misbehaviour in the 
+package.
+</description>
+  <description lang="de">Dieses Update behebt mehrere Abstürze und Fehlverhalten des 
+Programmes.
+</description>
+  <yum:version ver="1432" rel="0"/>
+  <rpm:requires>
+  <rpm:entry kind="atom" name="rekall" epoch="0" ver="2.2.6" rel="17.2" flags="EQ"/>
+  <rpm:entry kind="atom" name="rekall-examples" epoch="0" ver="2.2.6" rel="17.2" flags="EQ"/>
+  <rpm:entry kind="atom" name="rekall-mysql" epoch="0" ver="2.2.6" rel="17.2" flags="EQ"/>
+  <rpm:entry kind="atom" name="rekall-postgresql" epoch="0" ver="2.2.6" rel="17.2" flags="EQ"/>
+  <rpm:entry kind="atom" name="rekall-unisql" epoch="0" ver="2.2.6" rel="17.2" flags="EQ"/>
+  <rpm:entry kind="atom" name="rekall-xbase" epoch="0" ver="2.2.6" rel="17.2" flags="EQ"/>
+  </rpm:requires>
+  <category>recommended</category>
+  <atoms>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>rekall</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="2.2.6" rel="17.2"/>
+      <checksum type="sha" pkgid="YES">8a8eefe523189f2b926c99785f64c16cbe030817</checksum>
+      <time file="1148396109" build="1148383892"/>
+      <size package="3305103" installed="8724651" archive="8828800"/>
+      <location href="rpm/i586/rekall-2.2.6-17.2.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="rekall" epoch="0" ver="2.2.6" rel="17.2" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="rekall"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/rekall-2.2.6-17.2.i586.patch.rpm"/>
+          <checksum type="sha">198ebaf3212fbd99a4ba95ed8e93057f730e130c</checksum>
+          <time file="1148464824" build="1148383892"/>
+          <size package="1858018" archive="6067612"/>
+          <base-version epoch="0" ver="2.2.6" rel="17"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/rekall-2.2.6-17_17.2.i586.delta.rpm"/>
+          <checksum type="sha">574ae1dee512c322838febdacc7592ef97928b9e</checksum>
+          <time file="1148464833" build="1148383892"/>
+          <size package="806622" archive="0"/>
+          <base-version epoch="0" ver="2.2.6" rel="17" md5sum="e4e89322930de6962121c24c6c16db74" buildtime="1146572827" sequence_info="rekall-2.2.6-17-fe7f71ce879bd10ca599781f0a453a188d91"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>rekall</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="2.2.6" rel="17.2"/>
+      <checksum type="sha" pkgid="YES">6a0e991ac2c6751b7707c9f9a4b2e483486f2841</checksum>
+      <time file="1148391983" build="1148384181"/>
+      <size package="3404767" installed="9924266" archive="10028412"/>
+      <location href="rpm/ppc/rekall-2.2.6-17.2.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="rekall" epoch="0" ver="2.2.6" rel="17.2" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="rekall"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/rekall-2.2.6-17.2.ppc.patch.rpm"/>
+          <checksum type="sha">de520fbc2234e8c08b661cfed1fc7051afbd7c1f</checksum>
+          <time file="1148464842" build="1148384181"/>
+          <size package="2115944" archive="7389812"/>
+          <base-version epoch="0" ver="2.2.6" rel="16"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/rekall-2.2.6-16_17.2.ppc.delta.rpm"/>
+          <checksum type="sha">84e17d642d959b04c0e345a78110b8d34e3e75a3</checksum>
+          <time file="1148464852" build="1148384181"/>
+          <size package="912482" archive="0"/>
+          <base-version epoch="0" ver="2.2.6" rel="16" md5sum="48be5d4d2f0af8a1e1e0bcf7a7ed3b9b" buildtime="1146333386" sequence_info="rekall-2.2.6-16-a86eb59bee70b377fb88587013424d378d91"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>rekall</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="2.2.6" rel="17.2"/>
+      <checksum type="sha" pkgid="YES">29527ad3446f7c23f18e0d67f2ae43150354e36b</checksum>
+      <time file="1148391870" build="1148383480"/>
+      <size package="3535793" installed="10536039" archive="10640336"/>
+      <location href="rpm/x86_64/rekall-2.2.6-17.2.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="rekall" epoch="0" ver="2.2.6" rel="17.2" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="rekall"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/rekall-2.2.6-17.2.x86_64.patch.rpm"/>
+          <checksum type="sha">deb035e407ef44031d14827b0b681a824a4c9f99</checksum>
+          <time file="1148464861" build="1148383480"/>
+          <size package="2105186" archive="7877968"/>
+          <base-version epoch="0" ver="2.2.6" rel="17"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/rekall-2.2.6-17_17.2.x86_64.delta.rpm"/>
+          <checksum type="sha">2c536357f45907055c9f7df85ab7df93e8952ef4</checksum>
+          <time file="1148464872" build="1148383480"/>
+          <size package="926596" archive="0"/>
+          <base-version epoch="0" ver="2.2.6" rel="17" md5sum="9550d4ded75131ea21882d5fd4691c52" buildtime="1146572056" sequence_info="rekall-2.2.6-17-870fd4ddbdc9a91aeff259b53126b35d8d91"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>rekall-examples</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="2.2.6" rel="17.2"/>
+      <checksum type="sha" pkgid="YES">fd6fef7024d8bc297c25f94e9c9e95c22b28b759</checksum>
+      <time file="1148396114" build="1148383892"/>
+      <size package="4490247" installed="5332093" archive="5338980"/>
+      <location href="rpm/i586/rekall-examples-2.2.6-17.2.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="rekall-examples" epoch="0" ver="2.2.6" rel="17.2" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="rekall-examples"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/rekall-examples-2.2.6-17.2.i586.patch.rpm"/>
+          <checksum type="sha">65526350378f6ef1cd8a300d3814fff03222f2fd</checksum>
+          <time file="1148464877" build="1148383892"/>
+          <size package="7260" archive="124"/>
+          <base-version epoch="0" ver="2.2.6" rel="17"/>
+        </patchrpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>rekall-examples</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="2.2.6" rel="17.2"/>
+      <checksum type="sha" pkgid="YES">0b0c9653f52ac7e464e30fc5769b6f2bb3c582c7</checksum>
+      <time file="1148391986" build="1148384181"/>
+      <size package="4489861" installed="5332093" archive="5338980"/>
+      <location href="rpm/ppc/rekall-examples-2.2.6-17.2.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="rekall-examples" epoch="0" ver="2.2.6" rel="17.2" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="rekall-examples"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/rekall-examples-2.2.6-17.2.ppc.patch.rpm"/>
+          <checksum type="sha">37d1ae1f7b8d7664767fd22212760a821c3a6b5d</checksum>
+          <time file="1148464886" build="1148384181"/>
+          <size package="7232" archive="124"/>
+          <base-version epoch="0" ver="2.2.6" rel="16"/>
+        </patchrpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>rekall-examples</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="2.2.6" rel="17.2"/>
+      <checksum type="sha" pkgid="YES">64e00ec4aebb19a631b19356a09b453385c1c06a</checksum>
+      <time file="1148391874" build="1148383480"/>
+      <size package="4489692" installed="5332093" archive="5338980"/>
+      <location href="rpm/x86_64/rekall-examples-2.2.6-17.2.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="rekall-examples" epoch="0" ver="2.2.6" rel="17.2" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="rekall-examples"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/rekall-examples-2.2.6-17.2.x86_64.patch.rpm"/>
+          <checksum type="sha">d528e59f09f5f77705ed9d42a4ade135a283d2f9</checksum>
+          <time file="1148464895" build="1148383480"/>
+          <size package="7252" archive="124"/>
+          <base-version epoch="0" ver="2.2.6" rel="17"/>
+        </patchrpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>rekall-mysql</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="2.2.6" rel="17.2"/>
+      <checksum type="sha" pkgid="YES">d44a46264cafff0b04dec47d1b9c37c1b128d45f</checksum>
+      <time file="1148396115" build="1148383892"/>
+      <size package="30282" installed="68229" archive="68836"/>
+      <location href="rpm/i586/rekall-mysql-2.2.6-17.2.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="rekall-mysql" epoch="0" ver="2.2.6" rel="17.2" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="rekall-mysql"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/rekall-mysql-2.2.6-17.2.i586.patch.rpm"/>
+          <checksum type="sha">b42d06e9e697109a91b4f5b100886a9c26c42df0</checksum>
+          <time file="1148464901" build="1148383892"/>
+          <size package="29283" archive="66328"/>
+          <base-version epoch="0" ver="2.2.6" rel="17"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/rekall-mysql-2.2.6-17_17.2.i586.delta.rpm"/>
+          <checksum type="sha">743763109bf646dfeffc400abe61f8680613e03d</checksum>
+          <time file="1148464901" build="1148383892"/>
+          <size package="15182" archive="0"/>
+          <base-version epoch="0" ver="2.2.6" rel="17" md5sum="58e61f424fc2b7d902a5557dd13613c0" buildtime="1146572827" sequence_info="rekall-mysql-2.2.6-17-a080c7c914e8bc3366fd79a3855a392c30"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>rekall-mysql</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="2.2.6" rel="17.2"/>
+      <checksum type="sha" pkgid="YES">9d43c90b50fc9ced7f1f146bed94b45128540688</checksum>
+      <time file="1148391986" build="1148384181"/>
+      <size package="33120" installed="81249" archive="81856"/>
+      <location href="rpm/ppc/rekall-mysql-2.2.6-17.2.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="rekall-mysql" epoch="0" ver="2.2.6" rel="17.2" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="rekall-mysql"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/rekall-mysql-2.2.6-17.2.ppc.patch.rpm"/>
+          <checksum type="sha">af1d732c67758ba883fb8641a6b19f14713dcc82</checksum>
+          <time file="1148464902" build="1148384181"/>
+          <size package="32110" archive="79312"/>
+          <base-version epoch="0" ver="2.2.6" rel="16"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/rekall-mysql-2.2.6-16_17.2.ppc.delta.rpm"/>
+          <checksum type="sha">2549ed8624ba7c78bc8364d0ddfb83cd8ec906ed</checksum>
+          <time file="1148464903" build="1148384181"/>
+          <size package="18319" archive="0"/>
+          <base-version epoch="0" ver="2.2.6" rel="16" md5sum="29084fc1f95cbc630f1cf154d93223cb" buildtime="1146333386" sequence_info="rekall-mysql-2.2.6-16-0f7b21d87b5c3c4eef4efa59738a4c2630"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>rekall-mysql</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="2.2.6" rel="17.2"/>
+      <checksum type="sha" pkgid="YES">1ad7a04af57e1c350798a26b119bc5747b79a4b9</checksum>
+      <time file="1148391874" build="1148383480"/>
+      <size package="33138" installed="83705" archive="84312"/>
+      <location href="rpm/x86_64/rekall-mysql-2.2.6-17.2.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="rekall-mysql" epoch="0" ver="2.2.6" rel="17.2" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="rekall-mysql"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/rekall-mysql-2.2.6-17.2.x86_64.patch.rpm"/>
+          <checksum type="sha">108a99e9433da15064d5fcea8033c6efaa240a56</checksum>
+          <time file="1148464904" build="1148383480"/>
+          <size package="32142" archive="81748"/>
+          <base-version epoch="0" ver="2.2.6" rel="17"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/rekall-mysql-2.2.6-17_17.2.x86_64.delta.rpm"/>
+          <checksum type="sha">3cd6897dec3acdca19b8ff00c8395977cdec5f35</checksum>
+          <time file="1148464905" build="1148383480"/>
+          <size package="22004" archive="0"/>
+          <base-version epoch="0" ver="2.2.6" rel="17" md5sum="638d12a1d425371f5853ff16adc6a22e" buildtime="1146572056" sequence_info="rekall-mysql-2.2.6-17-ff0edbdede0c6f6f7ebfa8fbbb0b890330"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>rekall-postgresql</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="2.2.6" rel="17.2"/>
+      <checksum type="sha" pkgid="YES">fdd65191ac9a1c05e59550911249c1d3737ef331</checksum>
+      <time file="1148396115" build="1148383892"/>
+      <size package="49293" installed="127078" archive="127688"/>
+      <location href="rpm/i586/rekall-postgresql-2.2.6-17.2.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="rekall-postgresql" epoch="0" ver="2.2.6" rel="17.2" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="rekall-postgresql"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/rekall-postgresql-2.2.6-17.2.i586.patch.rpm"/>
+          <checksum type="sha">77caaf91160a626710db801539f7c311d0ec730e</checksum>
+          <time file="1148464906" build="1148383892"/>
+          <size package="48281" archive="125196"/>
+          <base-version epoch="0" ver="2.2.6" rel="17"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/rekall-postgresql-2.2.6-17_17.2.i586.delta.rpm"/>
+          <checksum type="sha">f72532be4a688e3a1af34f77d4a5bde5aee1d83f</checksum>
+          <time file="1148464907" build="1148383892"/>
+          <size package="28683" archive="0"/>
+          <base-version epoch="0" ver="2.2.6" rel="17" md5sum="920d47b9a184900b08fee6e77ab888cf" buildtime="1146572827" sequence_info="rekall-postgresql-2.2.6-17-8532d9c70d1c51c7c7093aad5d8ca4a130"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>rekall-postgresql</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="2.2.6" rel="17.2"/>
+      <checksum type="sha" pkgid="YES">1b33830efdf6f912f216da154a738663b1c955a8</checksum>
+      <time file="1148391986" build="1148384181"/>
+      <size package="53122" installed="146462" archive="147072"/>
+      <location href="rpm/ppc/rekall-postgresql-2.2.6-17.2.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="rekall-postgresql" epoch="0" ver="2.2.6" rel="17.2" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="rekall-postgresql"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/rekall-postgresql-2.2.6-17.2.ppc.patch.rpm"/>
+          <checksum type="sha">27b1201f124c44f7bf4471f4c511367d129c1faf</checksum>
+          <time file="1148464908" build="1148384181"/>
+          <size package="52039" archive="144544"/>
+          <base-version epoch="0" ver="2.2.6" rel="16"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/rekall-postgresql-2.2.6-16_17.2.ppc.delta.rpm"/>
+          <checksum type="sha">90cf4e1de5fa6d173b7b61e7d5b8d98e2efe284b</checksum>
+          <time file="1148464911" build="1148384181"/>
+          <size package="28762" archive="0"/>
+          <base-version epoch="0" ver="2.2.6" rel="16" md5sum="e4c362d3be1a370a2b05c26956c00038" buildtime="1146333386" sequence_info="rekall-postgresql-2.2.6-16-c4c4590114208e3e443bec4ee574f76430"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>rekall-postgresql</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="2.2.6" rel="17.2"/>
+      <checksum type="sha" pkgid="YES">59f48e5ffa8de35c9729a8f48793422bcecc0f71</checksum>
+      <time file="1148391874" build="1148383480"/>
+      <size package="54016" installed="147330" archive="147940"/>
+      <location href="rpm/x86_64/rekall-postgresql-2.2.6-17.2.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="rekall-postgresql" epoch="0" ver="2.2.6" rel="17.2" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="rekall-postgresql"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/rekall-postgresql-2.2.6-17.2.x86_64.patch.rpm"/>
+          <checksum type="sha">408dc8a7ca157cad42f1f6403f7356ad71e9e574</checksum>
+          <time file="1148464912" build="1148383480"/>
+          <size package="52996" archive="145396"/>
+          <base-version epoch="0" ver="2.2.6" rel="17"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/rekall-postgresql-2.2.6-17_17.2.x86_64.delta.rpm"/>
+          <checksum type="sha">a9f102ea071ec50a90439f016d115c3861e69dcb</checksum>
+          <time file="1148464912" build="1148383480"/>
+          <size package="30293" archive="0"/>
+          <base-version epoch="0" ver="2.2.6" rel="17" md5sum="c87832203fac13b6e6d30f2e2f6a28bb" buildtime="1146572056" sequence_info="rekall-postgresql-2.2.6-17-2352dcc30386f03917e4ddb46f95d09a30"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>rekall-unisql</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="2.2.6" rel="17.2"/>
+      <checksum type="sha" pkgid="YES">86d6e7ce48b78e8a30aa5eb8b2e569f197ca2454</checksum>
+      <time file="1148396116" build="1148383892"/>
+      <size package="37813" installed="93908" archive="94900"/>
+      <location href="rpm/i586/rekall-unisql-2.2.6-17.2.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="rekall-unisql" epoch="0" ver="2.2.6" rel="17.2" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="rekall-unisql"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/rekall-unisql-2.2.6-17.2.i586.patch.rpm"/>
+          <checksum type="sha">de18b3bac10ac86aa91c058f4516a92ecf5ec2da</checksum>
+          <time file="1148464914" build="1148383892"/>
+          <size package="36960" archive="92368"/>
+          <base-version epoch="0" ver="2.2.6" rel="17"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/rekall-unisql-2.2.6-17_17.2.i586.delta.rpm"/>
+          <checksum type="sha">af5a5267aeed62d3672c921efbed8259523c781c</checksum>
+          <time file="1148464914" build="1148383892"/>
+          <size package="17914" archive="0"/>
+          <base-version epoch="0" ver="2.2.6" rel="17" md5sum="56a0bf836a2ec13dbb88f6c567c77232" buildtime="1146572827" sequence_info="rekall-unisql-2.2.6-17-b9df543c5dd640e913f94b259ea11e0550"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>rekall-unisql</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="2.2.6" rel="17.2"/>
+      <checksum type="sha" pkgid="YES">cc2813964f5e9410171ae80276625ec0a1b4e6e7</checksum>
+      <time file="1148391987" build="1148384181"/>
+      <size package="41088" installed="112128" archive="113120"/>
+      <location href="rpm/ppc/rekall-unisql-2.2.6-17.2.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="rekall-unisql" epoch="0" ver="2.2.6" rel="17.2" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="rekall-unisql"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/rekall-unisql-2.2.6-17.2.ppc.patch.rpm"/>
+          <checksum type="sha">73c16619d702bbf56c12ddea0465215db1915349</checksum>
+          <time file="1148464916" build="1148384181"/>
+          <size package="40174" archive="110552"/>
+          <base-version epoch="0" ver="2.2.6" rel="16"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/rekall-unisql-2.2.6-16_17.2.ppc.delta.rpm"/>
+          <checksum type="sha">b1abf6f180ec4ccadaccfbefc6dac51622f2cc21</checksum>
+          <time file="1148464916" build="1148384181"/>
+          <size package="19922" archive="0"/>
+          <base-version epoch="0" ver="2.2.6" rel="16" md5sum="a994aa5b290ea51ff631e15e86cf5504" buildtime="1146333386" sequence_info="rekall-unisql-2.2.6-16-2c1c433c77d2c191ed58aaae84e1891450"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>rekall-unisql</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="2.2.6" rel="17.2"/>
+      <checksum type="sha" pkgid="YES">f787a9a42a36d8488ae70081f8e28b9440088a2e</checksum>
+      <time file="1148391874" build="1148383480"/>
+      <size package="41169" installed="122468" archive="123468"/>
+      <location href="rpm/x86_64/rekall-unisql-2.2.6-17.2.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="rekall-unisql" epoch="0" ver="2.2.6" rel="17.2" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="rekall-unisql"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/rekall-unisql-2.2.6-17.2.x86_64.patch.rpm"/>
+          <checksum type="sha">d0f4771c1ae9208c5a9f7d301d54abdb6402472f</checksum>
+          <time file="1148464918" build="1148383480"/>
+          <size package="40210" archive="120876"/>
+          <base-version epoch="0" ver="2.2.6" rel="17"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/rekall-unisql-2.2.6-17_17.2.x86_64.delta.rpm"/>
+          <checksum type="sha">256a090c179930fc89f3767a40413fc6a0809a79</checksum>
+          <time file="1148464919" build="1148383480"/>
+          <size package="25353" archive="0"/>
+          <base-version epoch="0" ver="2.2.6" rel="17" md5sum="72d9c42100cbb8289b25823389bddccb" buildtime="1146572056" sequence_info="rekall-unisql-2.2.6-17-51a532ba8c373726099ce4027015604e50"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>rekall-xbase</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="2.2.6" rel="17.2"/>
+      <checksum type="sha" pkgid="YES">2dae9070fab27f49adf668df98c6492f717d63fc</checksum>
+      <time file="1148396116" build="1148383892"/>
+      <size package="27116" installed="63342" archive="64320"/>
+      <location href="rpm/i586/rekall-xbase-2.2.6-17.2.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="rekall-xbase" epoch="0" ver="2.2.6" rel="17.2" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="rekall-xbase"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/rekall-xbase-2.2.6-17.2.i586.patch.rpm"/>
+          <checksum type="sha">dbe147f8c60e4512faf9a5f89508c10fb5ba3f30</checksum>
+          <time file="1148464921" build="1148383892"/>
+          <size package="26085" archive="61536"/>
+          <base-version epoch="0" ver="2.2.6" rel="17"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/rekall-xbase-2.2.6-17_17.2.i586.delta.rpm"/>
+          <checksum type="sha">5bbcb80822aff2883f830de705543330d8065acb</checksum>
+          <time file="1148464922" build="1148383892"/>
+          <size package="12508" archive="0"/>
+          <base-version epoch="0" ver="2.2.6" rel="17" md5sum="7e740c11a9b1936bec306b92c858b1bb" buildtime="1146572827" sequence_info="rekall-xbase-2.2.6-17-e814807229692facdc144f6d47147cb450"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>rekall-xbase</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="2.2.6" rel="17.2"/>
+      <checksum type="sha" pkgid="YES">6024b654546600d29cca648e72e86fe7256862e6</checksum>
+      <time file="1148391987" build="1148384181"/>
+      <size package="29926" installed="76026" archive="77004"/>
+      <location href="rpm/ppc/rekall-xbase-2.2.6-17.2.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="rekall-xbase" epoch="0" ver="2.2.6" rel="17.2" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="rekall-xbase"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/rekall-xbase-2.2.6-17.2.ppc.patch.rpm"/>
+          <checksum type="sha">cc6ee605b2d9e0149b9c7378b658d745725e357f</checksum>
+          <time file="1148464923" build="1148384181"/>
+          <size package="28898" archive="74184"/>
+          <base-version epoch="0" ver="2.2.6" rel="16"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/rekall-xbase-2.2.6-16_17.2.ppc.delta.rpm"/>
+          <checksum type="sha">d81692a28b44fed3b644d280efe874f6b28fc03e</checksum>
+          <time file="1148464924" build="1148384181"/>
+          <size package="16540" archive="0"/>
+          <base-version epoch="0" ver="2.2.6" rel="16" md5sum="ff7e3894b30a6f38f6bebb49a3076d8f" buildtime="1146333386" sequence_info="rekall-xbase-2.2.6-16-28442372c21541d15f461fbc6be9ea3d50"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>rekall-xbase</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="2.2.6" rel="17.2"/>
+      <checksum type="sha" pkgid="YES">9adae47203680a7e7438731d9f739cb6392d6c35</checksum>
+      <time file="1148391874" build="1148383480"/>
+      <size package="29641" installed="75774" archive="76760"/>
+      <location href="rpm/x86_64/rekall-xbase-2.2.6-17.2.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="rekall-xbase" epoch="0" ver="2.2.6" rel="17.2" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="rekall-xbase"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/rekall-xbase-2.2.6-17.2.x86_64.patch.rpm"/>
+          <checksum type="sha">12e8b57dde51205cb8416af5d640ebb75ca5a05a</checksum>
+          <time file="1148464925" build="1148383480"/>
+          <size package="28588" archive="73916"/>
+          <base-version epoch="0" ver="2.2.6" rel="17"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/rekall-xbase-2.2.6-17_17.2.x86_64.delta.rpm"/>
+          <checksum type="sha">4ce1593b23d9175002919e797629d23586411d71</checksum>
+          <time file="1148464926" build="1148383480"/>
+          <size package="15932" archive="0"/>
+          <base-version epoch="0" ver="2.2.6" rel="17" md5sum="210bed46a3bd5865fafc9f2fa47bbb0d" buildtime="1146572056" sequence_info="rekall-xbase-2.2.6-17-d027c70d806ba58e362d86ed97fc112d50"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+  </atoms>
+</patch>

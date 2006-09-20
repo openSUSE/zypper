@@ -1,0 +1,380 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--PATCHINFO id="bf80760f4510e5321a589a70b1afac41"!-->
+<patch
+    xmlns="http://novell.com/package/metadata/suse/patch"
+    xmlns:yum="http://linux.duke.edu/metadata/common"
+    xmlns:rpm="http://linux.duke.edu/metadata/rpm"
+    xmlns:suse="http://novell.com/package/metadata/suse/common"
+    patchid="CASA-1849"
+    timestamp="1153376120"
+    engine="1.0">
+  <yum:name>CASA</yum:name>
+  <summary lang="en">CASA: Securityfixes for problems found in audit.</summary>
+  <summary lang="de">CASA: Sicherheitsupdate für beim Auditing gefundene Probleme</summary>
+  <description lang="en">Various bugs and problems were fixed in the CASA
+authentication framework, some of them security relevant:
+- Secrets with special characters inside were handled
+  incorrectly.
+- Enhanced Salt generation.
+</description>
+  <description lang="de">Verschiedene Bugs wurden im CASA
+Authentifizierungsframework behoben, davon sind einige
+sicherheitsrelevant:
+- Passwörter mit Sonderzeichen wurden verschiedentlich
+  falsch behandelt.
+- Verbesserte Salt Generierung.
+</description>
+  <yum:version ver="1849" rel="0"/>
+  <rpm:requires>
+    <rpm:entry kind="atom" name="CASA" epoch="0" ver="1.6.659" rel="1.4" flags="EQ"/>
+    <rpm:entry kind="atom" name="CASA-32bit" epoch="0" ver="1.6.659" rel="1.4" flags="EQ"/>
+    <rpm:entry kind="atom" name="CASA-64bit" epoch="0" ver="1.6.659" rel="1.4" flags="EQ"/>
+    <rpm:entry kind="atom" name="CASA-devel" epoch="0" ver="1.6.659" rel="1.4" flags="EQ"/>
+    <rpm:entry kind="atom" name="CASA-gui" epoch="0" ver="1.6.659" rel="1.4" flags="EQ"/>
+  </rpm:requires>
+  <category>security</category>
+  <atoms>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>CASA</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="1.6.659" rel="1.4"/>
+      <checksum type="sha" pkgid="YES">b06a13867de8c6cabc164c404a363d5d9f4969af</checksum>
+      <time file="1153407695" build="1153376120"/>
+      <size package="812104" installed="1086437" archive="1090184"/>
+      <location href="rpm/i586/CASA-1.6.659-1.4.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="CASA" epoch="0" ver="1.6.659" rel="1.4" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="CASA"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/CASA-1.6.659-1.4.i586.patch.rpm"/>
+          <checksum type="sha">b7dbf3b95944a9471fc1d547809f2884efe28436</checksum>
+          <time file="1153411203" build="1153376120"/>
+          <size package="798980" archive="1045624"/>
+          <base-version epoch="0" ver="1.6.497" rel="6"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/CASA-1.6.497_1.6.659-6_1.4.i586.delta.rpm"/>
+          <checksum type="sha">752efdf0741e7e6c6daa22fef2336d46f66ef1c0</checksum>
+          <time file="1153411205" build="1153376120"/>
+          <size package="447084" archive="0"/>
+          <base-version epoch="0" ver="1.6.497" rel="6" md5sum="94f21fd9b2609ec28358d28a87035f3b" buildtime="1146622325" sequence_info="CASA-1.6.497-6-babd6a786f722dde92a318f07f1dfb01f2"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>CASA</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="1.6.659" rel="1.4"/>
+      <checksum type="sha" pkgid="YES">2e1aadc6081b810808178f158787e85409eae26e</checksum>
+      <time file="1153408242" build="1153376927"/>
+      <size package="815179" installed="1088865" archive="1092612"/>
+      <location href="rpm/ppc/CASA-1.6.659-1.4.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="CASA" epoch="0" ver="1.6.659" rel="1.4" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="CASA"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/CASA-1.6.659-1.4.ppc.patch.rpm"/>
+          <checksum type="sha">21a0f20b0c99cc1079ec75e06f25d2c9008e3de9</checksum>
+          <time file="1153411207" build="1153376927"/>
+          <size package="802018" archive="1048052"/>
+          <base-version epoch="0" ver="1.6.497" rel="6"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/CASA-1.6.497_1.6.659-6_1.4.ppc.delta.rpm"/>
+          <checksum type="sha">92f7d324e79424976336659ff25b3ae819913f37</checksum>
+          <time file="1153411209" build="1153376927"/>
+          <size package="447085" archive="0"/>
+          <base-version epoch="0" ver="1.6.497" rel="6" md5sum="85b64fddfd798fc6502df25eddd77dc2" buildtime="1146627864" sequence_info="CASA-1.6.497-6-175e9d96ace53d55a76c004ced8cd590f2"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>CASA</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="1.6.659" rel="1.4"/>
+      <checksum type="sha" pkgid="YES">2cf3704703d7e413df758e24c3115e77b20b5632</checksum>
+      <time file="1153407319" build="1153376201"/>
+      <size package="814939" installed="1089583" archive="1093352"/>
+      <location href="rpm/x86_64/CASA-1.6.659-1.4.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="CASA" epoch="0" ver="1.6.659" rel="1.4" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="CASA"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/CASA-1.6.659-1.4.x86_64.patch.rpm"/>
+          <checksum type="sha">6933d14737099b5e3a3abfcdf75dc97e84ad1435</checksum>
+          <time file="1153411211" build="1153376201"/>
+          <size package="802094" archive="1048784"/>
+          <base-version epoch="0" ver="1.6.497" rel="6"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/CASA-1.6.497_1.6.659-6_1.4.x86_64.delta.rpm"/>
+          <checksum type="sha">0c7dd786057cde9cb4cdb17cc4356c4c8c519d57</checksum>
+          <time file="1153411213" build="1153376201"/>
+          <size package="447306" archive="0"/>
+          <base-version epoch="0" ver="1.6.497" rel="6" md5sum="5c36a4ec03b7456eb4e66d5f446a025e" buildtime="1146622385" sequence_info="CASA-1.6.497-6-b9b647fbc9b31fe8cb89fab76410cf3bf2"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>CASA-32bit</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="1.6.659" rel="1.4"/>
+      <checksum type="sha" pkgid="YES">243e05a62d1847ae0440c8ded3bd22296a9f2f7d</checksum>
+      <time file="1153407695" build="1153376149"/>
+      <size package="49543" installed="57656" archive="58952"/>
+      <location href="rpm/x86_64/CASA-32bit-1.6.659-1.4.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="CASA-32bit" epoch="0" ver="1.6.659" rel="1.4" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="CASA-32bit"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/CASA-32bit-1.6.659-1.4.x86_64.patch.rpm"/>
+          <checksum type="sha">f9dd2f3e85392d3cda5d2572572765ed2e7d719a</checksum>
+          <time file="1153411214" build="1153376149"/>
+          <size package="49576" archive="58200"/>
+          <base-version epoch="0" ver="1.6.497" rel="6"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/CASA-32bit-1.6.497_1.6.659-6_1.4.x86_64.delta.rpm"/>
+          <checksum type="sha">83f40c8b49461047028a73279286ec452b2fdf4a</checksum>
+          <time file="1153411214" build="1153376149"/>
+          <size package="31877" archive="0"/>
+          <base-version epoch="0" ver="1.6.497" rel="6" md5sum="d71f8c5e10187090a502f1f391fb9d97" buildtime="1146622349" sequence_info="CASA-32bit-1.6.497-6-07db0ac11725b91534dfb7068a36977081"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>CASA-64bit</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="1.6.659" rel="1.4"/>
+      <checksum type="sha" pkgid="YES">1357da6265943ce444bc6cb32ff4110acfffbd1e</checksum>
+      <time file="1153410568" build="1153385032"/>
+      <size package="51139" installed="73568" archive="74884"/>
+      <location href="rpm/ppc/CASA-64bit-1.6.659-1.4.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="CASA-64bit" epoch="0" ver="1.6.659" rel="1.4" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="CASA-64bit"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/CASA-64bit-1.6.659-1.4.ppc.patch.rpm"/>
+          <checksum type="sha">83d8869323cceba139483437915f6e5c43f79928</checksum>
+          <time file="1153411215" build="1153385032"/>
+          <size package="51227" archive="74124"/>
+          <base-version epoch="0" ver="1.6.497" rel="6"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/CASA-64bit-1.6.497_1.6.659-6_1.4.ppc.delta.rpm"/>
+          <checksum type="sha">8423b869491e8bdee36ce07617efa0ee873351f5</checksum>
+          <time file="1153411216" build="1153385032"/>
+          <size package="31061" archive="0"/>
+          <base-version epoch="0" ver="1.6.497" rel="6" md5sum="8a3dff5c0401acd9bd8a87940a9a6abe" buildtime="1146627518" sequence_info="CASA-64bit-1.6.497-6-06f7ecb9e652b5b4551161945241e0c081"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>CASA-devel</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="1.6.659" rel="1.4"/>
+      <checksum type="sha" pkgid="YES">2465e1d55667c544afe90def22f3dc0f7e5c1024</checksum>
+      <time file="1153407696" build="1153376120"/>
+      <size package="38783" installed="23282" archive="23820"/>
+      <location href="rpm/i586/CASA-devel-1.6.659-1.4.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="CASA-devel" epoch="0" ver="1.6.659" rel="1.4" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="CASA-devel"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/CASA-devel-1.6.659-1.4.i586.patch.rpm"/>
+          <checksum type="sha">6adbf082ea025a69a1d0d0dbe58c83311662089d</checksum>
+          <time file="1153411217" build="1153376120"/>
+          <size package="33629" archive="5792"/>
+          <base-version epoch="0" ver="1.6.497" rel="6"/>
+        </patchrpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>CASA-devel</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="1.6.659" rel="1.4"/>
+      <checksum type="sha" pkgid="YES">cd5cd7a6f7a8a1292f09d049a3e97bcae3a4ec2b</checksum>
+      <time file="1153408243" build="1153376927"/>
+      <size package="38736" installed="23272" archive="23812"/>
+      <location href="rpm/ppc/CASA-devel-1.6.659-1.4.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="CASA-devel" epoch="0" ver="1.6.659" rel="1.4" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="CASA-devel"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/CASA-devel-1.6.659-1.4.ppc.patch.rpm"/>
+          <checksum type="sha">8b0de94c85476df2ab1c80556d1eb290baaae967</checksum>
+          <time file="1153411219" build="1153376927"/>
+          <size package="33560" archive="5784"/>
+          <base-version epoch="0" ver="1.6.497" rel="6"/>
+        </patchrpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>CASA-devel</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="1.6.659" rel="1.4"/>
+      <checksum type="sha" pkgid="YES">c362c29f7bb410797fa570267aab9135cfd90554</checksum>
+      <time file="1153407319" build="1153376201"/>
+      <size package="38783" installed="23282" archive="23824"/>
+      <location href="rpm/x86_64/CASA-devel-1.6.659-1.4.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="CASA-devel" epoch="0" ver="1.6.659" rel="1.4" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="CASA-devel"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/CASA-devel-1.6.659-1.4.x86_64.patch.rpm"/>
+          <checksum type="sha">246bcb16415e92d973507adec334c56b95f54eb5</checksum>
+          <time file="1153411220" build="1153376201"/>
+          <size package="33630" archive="5796"/>
+          <base-version epoch="0" ver="1.6.497" rel="6"/>
+        </patchrpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>CASA-gui</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="1.6.659" rel="1.4"/>
+      <checksum type="sha" pkgid="YES">4d31c4de2eacd3ceae5b1adc2b475a4077a1ef1c</checksum>
+      <time file="1153407696" build="1153376120"/>
+      <size package="415781" installed="1103984" archive="1113856"/>
+      <location href="rpm/i586/CASA-gui-1.6.659-1.4.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="CASA-gui" epoch="0" ver="1.6.659" rel="1.4" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="CASA-gui"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/CASA-gui-1.6.659-1.4.i586.patch.rpm"/>
+          <checksum type="sha">db730c894e5ebd14cd96277a174d0da1755ae5d9</checksum>
+          <time file="1153411222" build="1153376120"/>
+          <size package="359077" archive="978896"/>
+          <base-version epoch="0" ver="1.6.497" rel="6"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/CASA-gui-1.6.497_1.6.659-6_1.4.i586.delta.rpm"/>
+          <checksum type="sha">94b62c67bbc7bd9ea2256d4be7590f369bfcc007</checksum>
+          <time file="1153411225" build="1153376120"/>
+          <size package="274769" archive="0"/>
+          <base-version epoch="0" ver="1.6.497" rel="6" md5sum="1845ac5deaafc495c68945819c15efa1" buildtime="1146622325" sequence_info="CASA-gui-1.6.497-6-220aaf255e62401ac4eee5783b34008cc6"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>CASA-gui</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="1.6.659" rel="1.4"/>
+      <checksum type="sha" pkgid="YES">b0c120f496b04a6db0dcd21109c20a9e3e744f9d</checksum>
+      <time file="1153408243" build="1153376927"/>
+      <size package="423334" installed="1125700" archive="1135572"/>
+      <location href="rpm/ppc/CASA-gui-1.6.659-1.4.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="CASA-gui" epoch="0" ver="1.6.659" rel="1.4" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="CASA-gui"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/CASA-gui-1.6.659-1.4.ppc.patch.rpm"/>
+          <checksum type="sha">0727783063a31aa8b081f64a979f4cce8c5d9e53</checksum>
+          <time file="1153411227" build="1153376927"/>
+          <size package="366562" archive="1000612"/>
+          <base-version epoch="0" ver="1.6.497" rel="6"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/CASA-gui-1.6.497_1.6.659-6_1.4.ppc.delta.rpm"/>
+          <checksum type="sha">b11c9e1ef96dabb4d379d6a659e1d81e9456eb84</checksum>
+          <time file="1153411229" build="1153376927"/>
+          <size package="276260" archive="0"/>
+          <base-version epoch="0" ver="1.6.497" rel="6" md5sum="fb2261ccf5a80d63f8ddda83910add33" buildtime="1146627864" sequence_info="CASA-gui-1.6.497-6-94cad3c6ccfd22e09d5cd285d12b879bc6"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>CASA-gui</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="1.6.659" rel="1.4"/>
+      <checksum type="sha" pkgid="YES">8764047ecc6929f1773fc3dbf71effaf08daa4ae</checksum>
+      <time file="1153407320" build="1153376201"/>
+      <size package="417572" installed="1105796" archive="1115692"/>
+      <location href="rpm/x86_64/CASA-gui-1.6.659-1.4.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="CASA-gui" epoch="0" ver="1.6.659" rel="1.4" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="CASA-gui"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/CASA-gui-1.6.659-1.4.x86_64.patch.rpm"/>
+          <checksum type="sha">d5c447fd0a4a5e00450fd9fecc33adc83bd3fcf4</checksum>
+          <time file="1153411232" build="1153376201"/>
+          <size package="361188" archive="980724"/>
+          <base-version epoch="0" ver="1.6.497" rel="6"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/CASA-gui-1.6.497_1.6.659-6_1.4.x86_64.delta.rpm"/>
+          <checksum type="sha">60e5522283c19e4437378156ae7fe317f92d8457</checksum>
+          <time file="1153411233" build="1153376201"/>
+          <size package="274698" archive="0"/>
+          <base-version epoch="0" ver="1.6.497" rel="6" md5sum="a87efe461f8a4d541f40d800dd441b87" buildtime="1146622385" sequence_info="CASA-gui-1.6.497-6-9d857bb6993c77db1179c3265da0dfa6c6"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+  </atoms>
+</patch>

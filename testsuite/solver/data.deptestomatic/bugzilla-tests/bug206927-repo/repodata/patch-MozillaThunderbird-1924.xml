@@ -1,0 +1,561 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--PATCHINFO id="523e188942b5274f63216f0369a73b61"!-->
+<patch
+    xmlns="http://novell.com/package/metadata/suse/patch"
+    xmlns:yum="http://linux.duke.edu/metadata/common"
+    xmlns:rpm="http://linux.duke.edu/metadata/rpm"
+    xmlns:suse="http://novell.com/package/metadata/suse/common"
+    patchid="MozillaThunderbird-1924"
+    timestamp="1154453628"
+    engine="1.0">
+  <yum:name>MozillaThunderbird</yum:name>
+  <summary lang="en">MozillaThunderbird: Security update to version 1.5.0.6</summary>
+  <summary lang="de">MozillaThunderbird: Security Update auf Version 1.5.0.6</summary>
+  <description lang="en">This security update brings Mozilla Thunderbird to version
+1.5.0.6.
+
+Note that on SUSE Linux 9.2, 9.3 and 10.0 this is a major
+version upgrade.
+
+More Details can be found on this page:
+http://www.mozilla.org/projects/security/known-vulnerabiliti
+es.html
+
+It includes fixes to the following security problems:
+- CVE-2006-3801/MFSA 2006-44: Code execution through
+  deleted frame reference
+
+  Thilo Girmann discovered that in certain circumstances a
+JavaScript reference to a frame or window was not properly
+cleared when the referenced content went away, and he
+demonstrated that this pointer to a deleted object could be
+used to execute native code supplied by the attacker.
+
+- CVE-2006-3113/MFSA 2006-46: Memory corruption with
+  simultaneous events
+
+  Secunia Research has discovered a vulnerability in
+Mozilla Firefox 1.5 branch, which can be exploited by
+malicious people to compromise a user's system.
+
+  The vulnerability is caused due to an memory corruption
+error within the handling of simultaneously happening XPCOM
+events, which leads to use of a deleted timer object. This
+generally results in a crash but potentially could be
+exploited to execute arbitrary code on a user's system when
+a malicious website is visited.
+
+- CVE-2006-3802/MFSA 2006-47: Native DOM methods can be
+  hijacked across domains
+
+  A malicious page can hijack native DOM methods on a
+document object in another domain, which will run the
+attacker's script when called by the victim page.  This
+could be used to steal login cookies, password, or other
+sensitive data on the target page, or to perform actions on
+behalf of a logged-in user.
+
+  Access checks on all other properties and document nodes
+are performed correctly. This cross-site scripting (XSS)
+attack is limited to pages which use standard DOM methods
+of the top-level document object, such as
+document.getElementById(). This includes many popular
+sites, especially the newer ones that offer rich
+interaction to the user.
+
+- CVE-2006-3803/MFSA 2006-48: JavaScript new Function race
+  condition
+
+  H. D. Moore reported a testcase that was able to trigger
+a race condition where JavaScript garbage collection
+deleted a temporary variable still being used in the
+creation of a new Function object. The resulting use of a
+deleted object may be potentially exploitable to run native
+code provided by the attacker.
+
+- CVE-2006-3804/MFSA 2006-49: Heap buffer overwrite on
+  malformed VCard
+
+  A VCard attachment with a malformed base64 field (such as
+a photo) can trigger a heap buffer overwrite. These have
+proven exploitable in the past, though in this case the
+overwrite is accompanied by an integer underflow that would
+attempt to copy more data than the typical machine has,
+leading to a crash.
+
+- CVE-2006-3805/CVE-2006-3806/MFSA 2006-50: JavaScript
+  engine vulnerabilities
+
+  Continuing our security audit of the JavaScript engine,
+Mozilla developers found and fixed several potential
+vulnerabilities.
+
+  Igor Bukanov and shutdown found additional places where
+an untimely garbage collection could delete a temporary
+object that was in active use (similar to MFSA 2006-01 and
+MFSA 2006-10). Some of these may allow an attacker to run
+arbitrary code given the right conditions.
+
+  Georgi Guninski found potential integer overflow issues
+with long strings in the toSource() methods of the Object,
+Array and String objects as well as string function
+arguments.
+
+- CVE-2006-3807/MFSA 2006-51: Privilege escalation using
+  named-functions and redefined &quot;new Object()&quot;
+
+  moz_bug_r_a4 discovered that named JavaScript functions
+have a parent object created using the standard Object()
+constructor (ECMA-specified behavior) and that this
+constructor can be redefined by script (also ECMA-specified
+behavior). If the Object() constructor is changed to return
+a reference to a privileged object with useful properties
+it is possible to have attacker-supplied script excuted
+with elevated privileges by calling the function. This
+could be used to install malware or take other malicious
+actions.
+
+  Our fix involves calling the internal Object constructor
+which appears to be what other ECMA-compatible interpreters
+do.
+
+- CVE-2006-3808/MFSA 2006-52: PAC privilege escalation
+  using Function.prototype.call
+
+  moz_bug_r_a4 reports that a malicious Proxy AutoConfig
+(PAC) server could serve a PAC script that can execute code
+with elevated privileges by setting the required
+FindProxyForURL function to the eval method on a privileged
+object that leaked into the PAC sandbox. By redirecting the
+victim to a specially-crafted URL -- easily done since the
+PAC script controls which proxy to use -- the URL
+&quot;hostname&quot; can be executed as privileged script.
+
+  A malicious proxy server can perform spoofing attacks on
+the user so it was already important to use a trustworthy
+PAC server.
+
+- CVE-2006-3809/MFSA 2006-53: UniversalBrowserRead
+  privilege escalation
+
+  shutdown reports that scripts granted the
+UniversalBrowserRead privilege can leverage that into the
+equivalent of the far more powerful UniversalXPConnect
+since they are allowed to &quot;read&quot; into a privileged context.
+This allows the attacker the ability to run scripts with
+the full privelege of the user running the browser,
+possibly installing malware or snooping on private data.
+This has been fixed so that UniversalBrowserRead and
+UniversalBrowserWrite are limited to reading from and
+writing into only normally-privileged browser windows and
+frames.
+
+- CVE-2006-3810/MFSA 2006-54: XSS with
+  XPCNativeWrapper(window).Function(...)
+
+  shutdown reports that cross-site scripting (XSS) attacks
+could be performed using the construct
+XPCNativeWrapper(window).Function(...), which created a
+function that appeared to belong to the window in question
+even after it had been navigated to the target site.
+
+- CVE-2006-3811/MFSA 2006-55: Crashes with evidence of
+  memory corruption
+
+  As part of the Firefox 1.5.0.5 stability and security
+release, developers in the Mozilla community looked for and
+fixed several crash bugs to improve the stability of
+Mozilla clients. Some of these crashes showed evidence of
+memory corruption that we presume could be exploited to run
+arbitrary code with enough effort.
+</description>
+  <description lang="de">Dieses Sicherheitsupdate bringt Mozilla Thunderbird auf
+Version 1.5.0.6.
+
+Mehr Details sind auf:
+http://www.mozilla.org/projects/security/known-vulnerabiliti
+es.html
+
+Das Update beinhaltet folgende Sicherheitsfixes (Details in
+englisch):
+- CVE-2006-3801/MFSA 2006-44: Code execution through
+  deleted frame reference
+
+  Thilo Girmann discovered that in certain circumstances a
+JavaScript reference to a frame or window was not properly
+cleared when the referenced content went away, and he
+demonstrated that this pointer to a deleted object could be
+used to execute native code supplied by the attacker.
+
+- CVE-2006-3113/MFSA 2006-46: Memory corruption with
+  simultaneous events
+
+  Secunia Research has discovered a vulnerability in
+Mozilla Firefox 1.5 branch, which can be exploited by
+malicious people to compromise a user's system.
+
+  The vulnerability is caused due to an memory corruption
+error within the handling of simultaneously happening XPCOM
+events, which leads to use of a deleted timer object. This
+generally results in a crash but potentially could be
+exploited to execute arbitrary code on a user's system when
+a malicious website is visited.
+
+- CVE-2006-3802/MFSA 2006-47: Native DOM methods can be
+  hijacked across domains
+
+  A malicious page can hijack native DOM methods on a
+document object in another domain, which will run the
+attacker's script when called by the victim page.  This
+could be used to steal login cookies, password, or other
+sensitive data on the target page, or to perform actions on
+behalf of a logged-in user.
+
+  Access checks on all other properties and document nodes
+are performed correctly. This cross-site scripting (XSS)
+attack is limited to pages which use standard DOM methods
+of the top-level document object, such as
+document.getElementById(). This includes many popular
+sites, especially the newer ones that offer rich
+interaction to the user.
+
+- CVE-2006-3803/MFSA 2006-48: JavaScript new Function race
+  condition
+
+  H. D. Moore reported a testcase that was able to trigger
+a race condition where JavaScript garbage collection
+deleted a temporary variable still being used in the
+creation of a new Function object. The resulting use of a
+deleted object may be potentially exploitable to run native
+code provided by the attacker.
+
+- CVE-2006-3804/MFSA 2006-49: Heap buffer overwrite on
+  malformed VCard
+
+  A VCard attachment with a malformed base64 field (such as
+a photo) can trigger a heap buffer overwrite. These have
+proven exploitable in the past, though in this case the
+overwrite is accompanied by an integer underflow that would
+attempt to copy more data than the typical machine has,
+leading to a crash.
+
+- CVE-2006-3806/MFSA 2006-50: JavaScript engine
+  vulnerabilities
+
+  Continuing our security audit of the JavaScript engine,
+Mozilla developers found and fixed several potential
+vulnerabilities.
+
+  Igor Bukanov and shutdown found additional places where
+an untimely garbage collection could delete a temporary
+object that was in active use (similar to MFSA 2006-01 and
+MFSA 2006-10). Some of these may allow an attacker to run
+arbitrary code given the right conditions.
+
+  Georgi Guninski found potential integer overflow issues
+with long strings in the toSource() methods of the Object,
+Array and String objects as well as string function
+arguments.
+
+- CVE-2006-3807/MFSA 2006-51: Privilege escalation using
+  named-functions and redefined &quot;new Object()&quot;
+
+  moz_bug_r_a4 discovered that named JavaScript functions
+have a parent object created using the standard Object()
+constructor (ECMA-specified behavior) and that this
+constructor can be redefined by script (also ECMA-specified
+behavior). If the Object() constructor is changed to return
+a reference to a privileged object with useful properties
+it is possible to have attacker-supplied script excuted
+with elevated privileges by calling the function. This
+could be used to install malware or take other malicious
+actions.
+
+  Our fix involves calling the internal Object constructor
+which appears to be what other ECMA-compatible interpreters
+do.
+
+- CVE-2006-3808/MFSA 2006-52: PAC privilege escalation
+  using Function.prototype.call
+
+  moz_bug_r_a4 reports that a malicious Proxy AutoConfig
+(PAC) server could serve a PAC script that can execute code
+with elevated privileges by setting the required
+FindProxyForURL function to the eval method on a privileged
+object that leaked into the PAC sandbox. By redirecting the
+victim to a specially-crafted URL -- easily done since the
+PAC script controls which proxy to use -- the URL
+&quot;hostname&quot; can be executed as privileged script.
+
+  A malicious proxy server can perform spoofing attacks on
+the user so it was already important to use a trustworthy
+PAC server.
+
+- CVE-2006-3809/MFSA 2006-53: UniversalBrowserRead
+  privilege escalation
+
+  shutdown reports that scripts granted the
+UniversalBrowserRead privilege can leverage that into the
+equivalent of the far more powerful UniversalXPConnect
+since they are allowed to &quot;read&quot; into a privileged context.
+This allows the attacker the ability to run scripts with
+the full privelege of the user running the browser,
+possibly installing malware or snooping on private data.
+This has been fixed so that UniversalBrowserRead and
+UniversalBrowserWrite are limited to reading from and
+writing into only normally-privileged browser windows and
+frames.
+
+- CVE-2006-3810/MFSA 2006-54: XSS with
+  XPCNativeWrapper(window).Function(...)
+
+  shutdown reports that cross-site scripting (XSS) attacks
+could be performed using the construct
+XPCNativeWrapper(window).Function(...), which created a
+function that appeared to belong to the window in question
+even after it had been navigated to the target site.
+
+- CVE-2006-3811/MFSA 2006-55: Crashes with evidence of
+  memory corruption
+
+  As part of the Firefox 1.5.0.5 stability and security
+release, developers in the Mozilla community looked for and
+fixed several crash bugs to improve the stability of
+Mozilla clients. Some of these crashes showed evidence of
+memory corruption that we presume could be exploited to run
+arbitrary code with enough effort.
+</description>
+  <yum:version ver="1924" rel="0"/>
+  <rpm:requires>
+    <rpm:entry kind="atom" name="MozillaThunderbird" epoch="0" ver="1.5.0.5" rel="0.1" flags="EQ"/>
+    <rpm:entry kind="atom" name="MozillaThunderbird-translations" epoch="0" ver="1.5.0.5" rel="0.1" flags="EQ"/>
+  </rpm:requires>
+  <category>security</category>
+  <atoms>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>MozillaThunderbird</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="1.5.0.5" rel="0.1"/>
+      <checksum type="sha" pkgid="YES">84fb16acdd49b3198c4e30a08d983b57a4e387ce</checksum>
+      <time file="1154467341" build="1154453628"/>
+      <size package="7846945" installed="23461797" archive="23517140"/>
+      <location href="rpm/i586/MozillaThunderbird-1.5.0.5-0.1.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="MozillaThunderbird" epoch="0" ver="1.5.0.5" rel="0.1" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="MozillaThunderbird"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/MozillaThunderbird-1.5.0.5-0.1.i586.patch.rpm"/>
+          <checksum type="sha">a46f8ae1fa7af56ed66eb0b75a28e8b3db9a6461</checksum>
+          <time file="1154469343" build="1154453628"/>
+          <size package="6250581" archive="17349156"/>
+          <base-version epoch="0" ver="1.5" rel="27"/>
+          <base-version epoch="0" ver="1.5.0.4" rel="2.1"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/MozillaThunderbird-1.5_1.5.0.5-27_0.1.i586.delta.rpm"/>
+          <checksum type="sha">64fa695508b52f9732955c6b2c0eabfec45fc46b</checksum>
+          <time file="1154469359" build="1154453628"/>
+          <size package="918156" archive="0"/>
+          <base-version epoch="0" ver="1.5" rel="27" md5sum="7d4267190b28bf16be21b07fb02749e8" buildtime="1146621380" sequence_info="MozillaThunderbird-1.5-27-fda5f3f6eafdc0d4c3e580f5ac8fe288aa50"/>
+        </deltarpm>
+        <deltarpm>
+          <location href="rpm/i586/MozillaThunderbird-1.5.0.4_1.5.0.5-2.1_0.1.i586.delta.rpm"/>
+          <checksum type="sha">212c9065a613a597c3059e309257e502163d4bf6</checksum>
+          <time file="1154469374" build="1154453628"/>
+          <size package="1671096" archive="0"/>
+          <base-version epoch="0" ver="1.5.0.4" rel="2.1" md5sum="f674da2024899e1bae549d004464bf9c" buildtime="1150677664" sequence_info="MozillaThunderbird-1.5.0.4-2.1-1dddf340fdad6bbabec770f9588dc89f621111e111111da31db1"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>MozillaThunderbird</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="1.5.0.5" rel="0.1"/>
+      <checksum type="sha" pkgid="YES">d73eec1ba12cdfb9173b3f66b77a24544dedbd7b</checksum>
+      <time file="1154467248" build="1154453585"/>
+      <size package="7997883" installed="26940225" archive="26995568"/>
+      <location href="rpm/ppc/MozillaThunderbird-1.5.0.5-0.1.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="MozillaThunderbird" epoch="0" ver="1.5.0.5" rel="0.1" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="MozillaThunderbird"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/MozillaThunderbird-1.5.0.5-0.1.ppc.patch.rpm"/>
+          <checksum type="sha">b57aec3aa2693bd57e8090767538ec15f652a8d6</checksum>
+          <time file="1154469397" build="1154453585"/>
+          <size package="6440885" archive="20893820"/>
+          <base-version epoch="0" ver="1.5" rel="27"/>
+          <base-version epoch="0" ver="1.5.0.4" rel="2.1"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/MozillaThunderbird-1.5_1.5.0.5-27_0.1.ppc.delta.rpm"/>
+          <checksum type="sha">f3e378a27a6953d66eff3834c0043e196d2035c7</checksum>
+          <time file="1154469410" build="1154453585"/>
+          <size package="840496" archive="0"/>
+          <base-version epoch="0" ver="1.5" rel="27" md5sum="66ae830d7308b4bbbccc73e7870650ea" buildtime="1146634039" sequence_info="MozillaThunderbird-1.5-27-d875a14b007a8e41fece7abf1bdbfee0aa50"/>
+        </deltarpm>
+        <deltarpm>
+          <location href="rpm/ppc/MozillaThunderbird-1.5.0.4_1.5.0.5-2.1_0.1.ppc.delta.rpm"/>
+          <checksum type="sha">41e3660f187fdaddd6baa07d3081cd7df99d5a43</checksum>
+          <time file="1154469424" build="1154453585"/>
+          <size package="1574042" archive="0"/>
+          <base-version epoch="0" ver="1.5.0.4" rel="2.1" md5sum="8a9de83297edb634db0c3c05adf7a1b6" buildtime="1150594743" sequence_info="MozillaThunderbird-1.5.0.4-2.1-f4ab670b607de1044b0d339f465cb71f621111e111111da31db1"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>MozillaThunderbird</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="1.5.0.5" rel="0.1"/>
+      <checksum type="sha" pkgid="YES">0d1a234eba79dbcdd42386cf2d3da6eac23688fd</checksum>
+      <time file="1154467515" build="1154453840"/>
+      <size package="8979167" installed="28027886" archive="28083916"/>
+      <location href="rpm/x86_64/MozillaThunderbird-1.5.0.5-0.1.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="MozillaThunderbird" epoch="0" ver="1.5.0.5" rel="0.1" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="MozillaThunderbird"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/MozillaThunderbird-1.5.0.5-0.1.x86_64.patch.rpm"/>
+          <checksum type="sha">9b725bad366b485027dd9124b397c0232a45867a</checksum>
+          <time file="1154469442" build="1154453840"/>
+          <size package="7339272" archive="21889808"/>
+          <base-version epoch="0" ver="1.5" rel="27"/>
+          <base-version epoch="0" ver="1.5.0.4" rel="2.1"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/MozillaThunderbird-1.5_1.5.0.5-27_0.1.x86_64.delta.rpm"/>
+          <checksum type="sha">56eb8e31f6e1bae344c9479e9a6173b709638656</checksum>
+          <time file="1154469462" build="1154453840"/>
+          <size package="1508084" archive="0"/>
+          <base-version epoch="0" ver="1.5" rel="27" md5sum="de910909327cfe765d63ed2902e697a9" buildtime="1146621425" sequence_info="MozillaThunderbird-1.5-27-78d4c9bc516bcafa6e222d94e7e0e933aa50"/>
+        </deltarpm>
+        <deltarpm>
+          <location href="rpm/x86_64/MozillaThunderbird-1.5.0.4_1.5.0.5-2.1_0.1.x86_64.delta.rpm"/>
+          <checksum type="sha">c8cb2d2852d58bebba3d29a5525e2b4e77e111c8</checksum>
+          <time file="1154469485" build="1154453840"/>
+          <size package="2011071" archive="0"/>
+          <base-version epoch="0" ver="1.5.0.4" rel="2.1" md5sum="026f3d553c68332cd58bc27167f18bc5" buildtime="1150569779" sequence_info="MozillaThunderbird-1.5.0.4-2.1-9d97b2d52a3097414bb77541e6ccd2f2621111e111111da31db1"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>MozillaThunderbird-translations</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="1.5.0.5" rel="0.1"/>
+      <checksum type="sha" pkgid="YES">6feda9185bda060ab48403ed5c1e853215444fe1</checksum>
+      <time file="1154467353" build="1154453628"/>
+      <size package="4516625" installed="29043870" archive="29054412"/>
+      <location href="rpm/i586/MozillaThunderbird-translations-1.5.0.5-0.1.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="MozillaThunderbird-translations" epoch="0" ver="1.5.0.5" rel="0.1" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="MozillaThunderbird-translations"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/MozillaThunderbird-translations-1.5.0.5-0.1.i586.patch.rpm"/>
+          <checksum type="sha">94897b996b5bb02b40d4c5eb11c4f7e07638fc07</checksum>
+          <time file="1154469497" build="1154453628"/>
+          <size package="798342" archive="4990404"/>
+          <base-version epoch="0" ver="1.5" rel="27"/>
+          <base-version epoch="0" ver="1.5.0.4" rel="2.1"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/MozillaThunderbird-translations-1.5_1.5.0.5-27_0.1.i586.delta.rpm"/>
+          <checksum type="sha">1c1e45e6b655565f7913d377459ced27ae3a2224</checksum>
+          <time file="1154469506" build="1154453628"/>
+          <size package="20664" archive="0"/>
+          <base-version epoch="0" ver="1.5" rel="27" md5sum="d34eda50366333b60eade37fbcc81867" buildtime="1146621380" sequence_info="MozillaThunderbird-translations-1.5-27-4132beae9075ef7986a0b42c955c79c0c810"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>MozillaThunderbird-translations</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="1.5.0.5" rel="0.1"/>
+      <checksum type="sha" pkgid="YES">7c4c286e4440c89d269427576cef73c3a3135863</checksum>
+      <time file="1154467259" build="1154453585"/>
+      <size package="4514607" installed="29043870" archive="29054412"/>
+      <location href="rpm/ppc/MozillaThunderbird-translations-1.5.0.5-0.1.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="MozillaThunderbird-translations" epoch="0" ver="1.5.0.5" rel="0.1" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="MozillaThunderbird-translations"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/MozillaThunderbird-translations-1.5.0.5-0.1.ppc.patch.rpm"/>
+          <checksum type="sha">9080d987d547d963db741e0cba6dc2e89a03fd83</checksum>
+          <time file="1154469537" build="1154453585"/>
+          <size package="798810" archive="4990404"/>
+          <base-version epoch="0" ver="1.5" rel="27"/>
+          <base-version epoch="0" ver="1.5.0.4" rel="2.1"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/MozillaThunderbird-translations-1.5_1.5.0.5-27_0.1.ppc.delta.rpm"/>
+          <checksum type="sha">8e0ac8f2528706ebddc597031c28aeb33b5a889d</checksum>
+          <time file="1154469548" build="1154453585"/>
+          <size package="20689" archive="0"/>
+          <base-version epoch="0" ver="1.5" rel="27" md5sum="b5d1a0b2d5a220e64e4a30faff8b62e2" buildtime="1146634039" sequence_info="MozillaThunderbird-translations-1.5-27-4132beae9075ef7986a0b42c955c79c0c810"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>MozillaThunderbird-translations</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="1.5.0.5" rel="0.1"/>
+      <checksum type="sha" pkgid="YES">18619084b58f512a350e657d88bd089a8bc016b9</checksum>
+      <time file="1154467521" build="1154453840"/>
+      <size package="4515853" installed="29043870" archive="29054500"/>
+      <location href="rpm/x86_64/MozillaThunderbird-translations-1.5.0.5-0.1.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="MozillaThunderbird-translations" epoch="0" ver="1.5.0.5" rel="0.1" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="MozillaThunderbird-translations"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/MozillaThunderbird-translations-1.5.0.5-0.1.x86_64.patch.rpm"/>
+          <checksum type="sha">1b604d36fa3c36b86d2082181e475d91e8800bf1</checksum>
+          <time file="1154469581" build="1154453840"/>
+          <size package="799042" archive="4990404"/>
+          <base-version epoch="0" ver="1.5" rel="27"/>
+          <base-version epoch="0" ver="1.5.0.4" rel="2.1"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/MozillaThunderbird-translations-1.5_1.5.0.5-27_0.1.x86_64.delta.rpm"/>
+          <checksum type="sha">4bc8122cbd76ea8a6c098ea61ee3eaeaf6c18baa</checksum>
+          <time file="1154469589" build="1154453840"/>
+          <size package="20739" archive="0"/>
+          <base-version epoch="0" ver="1.5" rel="27" md5sum="10fad56eadf47cbd1fb08ff582fd4659" buildtime="1146621425" sequence_info="MozillaThunderbird-translations-1.5-27-a98d8cacf859680115dfbaacbe084ecac810"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+  </atoms>
+</patch>

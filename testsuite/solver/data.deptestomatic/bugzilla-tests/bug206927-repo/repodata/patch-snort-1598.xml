@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--PATCHINFO id="14083e0176e46984e74c1445cd848e19"!-->
+<patch
+    xmlns="http://novell.com/package/metadata/suse/patch"
+    xmlns:yum="http://linux.duke.edu/metadata/common"
+    xmlns:rpm="http://linux.duke.edu/metadata/rpm"
+    xmlns:suse="http://novell.com/package/metadata/suse/common"
+    patchid="snort-1598"
+    timestamp="1149905671"
+    engine="1.0">
+  <yum:name>snort</yum:name>
+  <summary lang="en">Evasion attack in http_inspect preprocessor.</summary>
+  <summary lang="de">Evasion-Attacke in http_inspect Preprozessor.</summary>
+  <description lang="en">This update fixes an evasion attack on URL parsing. The 
+faulty code is in the http_inspect preprocessor. 
+(CVE-2006-2769)
+</description>
+  <description lang="de">Mit diesem Update wird eine sog. Evasion-Attacke im 
+http_inspect Preprozessor behoben. (CVE-2006-2769)
+</description>
+  <yum:version ver="1598" rel="0"/>
+  <rpm:requires>
+  <rpm:entry kind="atom" name="snort" epoch="0" ver="2.4.4" rel="10.4" flags="EQ"/>
+  </rpm:requires>
+  <category>security</category>
+  <atoms>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>snort</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="2.4.4" rel="10.4"/>
+      <checksum type="sha" pkgid="YES">7546120c063ee9d63bc7f566f720f50ce1c52499</checksum>
+      <time file="1150215322" build="1149905671"/>
+      <size package="3967298" installed="7258843" archive="7901772"/>
+      <location href="rpm/i586/snort-2.4.4-10.4.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="snort" epoch="0" ver="2.4.4" rel="10.4" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="snort"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/snort-2.4.4-10.4.i586.patch.rpm"/>
+          <checksum type="sha">2a654910ef49ac59cefaa320862f0f7b12eb37cd</checksum>
+          <time file="1150243633" build="1149905671"/>
+          <size package="564119" archive="503672"/>
+          <base-version epoch="0" ver="2.4.4" rel="10"/>
+        </patchrpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>snort</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="2.4.4" rel="10.4"/>
+      <checksum type="sha" pkgid="YES">cd8e741d65c5511a7f824e50c75aca9071bb60ae</checksum>
+      <time file="1150215166" build="1149977366"/>
+      <size package="3984536" installed="7353226" archive="7996156"/>
+      <location href="rpm/ppc/snort-2.4.4-10.4.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="snort" epoch="0" ver="2.4.4" rel="10.4" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="snort"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/snort-2.4.4-10.4.ppc.patch.rpm"/>
+          <checksum type="sha">b79fad5459b0a5c19c227b3a1168db983e2753bf</checksum>
+          <time file="1150243653" build="1149977366"/>
+          <size package="584489" archive="598056"/>
+          <base-version epoch="0" ver="2.4.4" rel="10"/>
+        </patchrpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>snort</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="2.4.4" rel="10.4"/>
+      <checksum type="sha" pkgid="YES">f8ff44c7e87ce85f65ebf3563207f67e1827c949</checksum>
+      <time file="1150215193" build="1149910095"/>
+      <size package="3998890" installed="7301667" archive="7944596"/>
+      <location href="rpm/x86_64/snort-2.4.4-10.4.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="snort" epoch="0" ver="2.4.4" rel="10.4" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="snort"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/snort-2.4.4-10.4.x86_64.patch.rpm"/>
+          <checksum type="sha">5f4716e3cbc70710822ab2d1d31fb343808e06dc</checksum>
+          <time file="1150243671" build="1149910095"/>
+          <size package="602658" archive="546492"/>
+          <base-version epoch="0" ver="2.4.4" rel="10"/>
+        </patchrpm>
+      </pkgfiles>
+    </package>
+  </atoms>
+</patch>

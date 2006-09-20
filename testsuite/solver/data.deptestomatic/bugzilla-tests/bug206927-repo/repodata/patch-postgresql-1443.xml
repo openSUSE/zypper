@@ -1,0 +1,729 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--PATCHINFO id="925f752001ec8f675ef0b27b72641df9"!-->
+<patch
+    xmlns="http://novell.com/package/metadata/suse/patch"
+    xmlns:yum="http://linux.duke.edu/metadata/common"
+    xmlns:rpm="http://linux.duke.edu/metadata/rpm"
+    xmlns:suse="http://novell.com/package/metadata/suse/common"
+    patchid="postgresql-1443"
+    timestamp="1148921917"
+    engine="1.0">
+  <yum:name>postgresql</yum:name>
+  <summary lang="en">postgresql security update</summary>
+  <summary lang="de">postgresql Sicherheitsupdate</summary>
+  <description lang="en">This update fixes a security problem that allowed attackers 
+to inject SQL commands into queries (CVE-2006-2313, 
+CVE-2006-2314).
+</description>
+  <description lang="de">Dieses Update behebt ein Sicherheitsproblem, das es 
+Angreifern unter bestimmten Umständen erlaubte, SQL Befehle 
+in Abfragen einzuschleusen (CVE-2006-2313, CVE-2006-2314).
+</description>
+  <yum:version ver="1443" rel="0"/>
+  <rpm:requires>
+  <rpm:entry kind="atom" name="postgresql" epoch="0" ver="8.1.4" rel="1.2" flags="EQ"/>
+  <rpm:entry kind="atom" name="postgresql-contrib" epoch="0" ver="8.1.4" rel="1.2" flags="EQ"/>
+  <rpm:entry kind="atom" name="postgresql-devel" epoch="0" ver="8.1.4" rel="1.2" flags="EQ"/>
+  <rpm:entry kind="atom" name="postgresql-docs" epoch="0" ver="8.1.4" rel="1.2" flags="EQ"/>
+  <rpm:entry kind="atom" name="postgresql-libs" epoch="0" ver="8.1.4" rel="1.2" flags="EQ"/>
+  <rpm:entry kind="atom" name="postgresql-libs-32bit" epoch="0" ver="8.1.4" rel="1.2" flags="EQ"/>
+  <rpm:entry kind="atom" name="postgresql-libs-64bit" epoch="0" ver="8.1.4" rel="1.2" flags="EQ"/>
+  <rpm:entry kind="atom" name="postgresql-pl" epoch="0" ver="8.1.4" rel="1.2" flags="EQ"/>
+  </rpm:requires>
+  <category>security</category>
+  <atoms>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>postgresql</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="8.1.4" rel="1.2"/>
+      <checksum type="sha" pkgid="YES">8544fb587d7f23767cef398b080af97d84705987</checksum>
+      <time file="1148987136" build="1148921917"/>
+      <size package="1058810" installed="3618247" archive="3648268"/>
+      <location href="rpm/i586/postgresql-8.1.4-1.2.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="postgresql" epoch="0" ver="8.1.4" rel="1.2" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="postgresql"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/postgresql-8.1.4-1.2.i586.patch.rpm"/>
+          <checksum type="sha">5e1479f1f0f549742c03c78085178a0fb7ceda46</checksum>
+          <time file="1148990462" build="1148921917"/>
+          <size package="393738" archive="1274992"/>
+          <base-version epoch="0" ver="8.1.3" rel="12"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/postgresql-8.1.3_8.1.4-12_1.2.i586.delta.rpm"/>
+          <checksum type="sha">6e060cb9a91fecf6c59ec2fdd8b93a4aad946a74</checksum>
+          <time file="1148990464" build="1148921917"/>
+          <size package="71992" archive="0"/>
+          <base-version epoch="0" ver="8.1.3" rel="12" md5sum="bbadc974c71f0119e1e822d369c6503e" buildtime="1146554096" sequence_info="postgresql-8.1.3-12-43d496335fb1efe6180b388b0794cc2bc830"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>postgresql</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="8.1.4" rel="1.2"/>
+      <checksum type="sha" pkgid="YES">29db6cff128d79f2e3035c99644cdb1493f0f370</checksum>
+      <time file="1148987264" build="1148927317"/>
+      <size package="1079997" installed="3764015" archive="3794036"/>
+      <location href="rpm/ppc/postgresql-8.1.4-1.2.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="postgresql" epoch="0" ver="8.1.4" rel="1.2" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="postgresql"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/postgresql-8.1.4-1.2.ppc.patch.rpm"/>
+          <checksum type="sha">79d06d597bbce148fed00386287d8aec8106b82a</checksum>
+          <time file="1148990467" build="1148927317"/>
+          <size package="419035" archive="1420760"/>
+          <base-version epoch="0" ver="8.1.3" rel="12"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/postgresql-8.1.3_8.1.4-12_1.2.ppc.delta.rpm"/>
+          <checksum type="sha">71ff6bcb39d66c7d2064eb7eb9a22b1d0965401e</checksum>
+          <time file="1148990469" build="1148927317"/>
+          <size package="65699" archive="0"/>
+          <base-version epoch="0" ver="8.1.3" rel="12" md5sum="71f624009f6680cb7befa244a28baa66" buildtime="1146551335" sequence_info="postgresql-8.1.3-12-8e09cb313d9f38bc8958f20daa340d93c830"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>postgresql</name>
+      <arch>ppc64</arch>
+      <version epoch="0" ver="8.1.4" rel="1.2"/>
+      <checksum type="sha" pkgid="YES">56c9b0c1da1603f80580a8fef1e9554148128c86</checksum>
+      <time file="1148987399" build="1148929775"/>
+      <size package="1071689" installed="3914139" archive="3944160"/>
+      <location href="rpm/ppc64/postgresql-8.1.4-1.2.ppc64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="postgresql" epoch="0" ver="8.1.4" rel="1.2" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="postgresql"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc64/postgresql-8.1.4-1.2.ppc64.patch.rpm"/>
+          <checksum type="sha">2ad2fb959aeb36c12dfd43fe8ac9c682230c6601</checksum>
+          <time file="1148990472" build="1148929775"/>
+          <size package="418142" archive="1570884"/>
+          <base-version epoch="0" ver="8.1.3" rel="12"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc64/postgresql-8.1.3_8.1.4-12_1.2.ppc64.delta.rpm"/>
+          <checksum type="sha">6bc968f07783f6069a5da1f81faa630c8bec7a34</checksum>
+          <time file="1148990474" build="1148929775"/>
+          <size package="67006" archive="0"/>
+          <base-version epoch="0" ver="8.1.3" rel="12" md5sum="5dad3588ef102a4c5ba6ec34c333ae37" buildtime="1147057214" sequence_info="postgresql-8.1.3-12-3995695970355be62af5cf78278fc386c830"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>postgresql</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="8.1.4" rel="1.2"/>
+      <checksum type="sha" pkgid="YES">5c94301047a547c65049b4cd26de26e9ecccfb2d</checksum>
+      <time file="1148987220" build="1148922709"/>
+      <size package="1078257" installed="3729355" archive="3759376"/>
+      <location href="rpm/x86_64/postgresql-8.1.4-1.2.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="postgresql" epoch="0" ver="8.1.4" rel="1.2" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="postgresql"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/postgresql-8.1.4-1.2.x86_64.patch.rpm"/>
+          <checksum type="sha">79389b044b6446db0dbb61be71627738452546d3</checksum>
+          <time file="1148990477" build="1148922709"/>
+          <size package="412660" archive="1386100"/>
+          <base-version epoch="0" ver="8.1.3" rel="12"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/postgresql-8.1.3_8.1.4-12_1.2.x86_64.delta.rpm"/>
+          <checksum type="sha">9f69e1efe4247fc769f739ad89e79edd19311a81</checksum>
+          <time file="1148990479" build="1148922709"/>
+          <size package="66207" archive="0"/>
+          <base-version epoch="0" ver="8.1.3" rel="12" md5sum="e8d385617b2334c3c7f02c7694c4b1dc" buildtime="1146554216" sequence_info="postgresql-8.1.3-12-f461cb40a4fbce85df4f139abc29983fc830"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>postgresql-contrib</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="8.1.4" rel="1.2"/>
+      <checksum type="sha" pkgid="YES">c80ced47d835ea220ecd94d64a19d5fdfa4cea9f</checksum>
+      <time file="1148987137" build="1148921917"/>
+      <size package="381849" installed="1060757" archive="1077564"/>
+      <location href="rpm/i586/postgresql-contrib-8.1.4-1.2.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="postgresql-contrib" epoch="0" ver="8.1.4" rel="1.2" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="postgresql-contrib"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/postgresql-contrib-8.1.4-1.2.i586.patch.rpm"/>
+          <checksum type="sha">e8ba3ecf977dbbca5b60e4cab9a14727f9240fed</checksum>
+          <time file="1148990481" build="1148921917"/>
+          <size package="301090" archive="725836"/>
+          <base-version epoch="0" ver="8.1.3" rel="12"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/postgresql-contrib-8.1.3_8.1.4-12_1.2.i586.delta.rpm"/>
+          <checksum type="sha">295cb2a2ee83fcdea75f868258abba05181588ab</checksum>
+          <time file="1148990482" build="1148921917"/>
+          <size package="43847" archive="0"/>
+          <base-version epoch="0" ver="8.1.3" rel="12" md5sum="e783dacba67394471edd455b1fb66659" buildtime="1146554096" sequence_info="postgresql-contrib-8.1.3-12-a6c317da87e007d6584fe27b14c64baead10"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>postgresql-contrib</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="8.1.4" rel="1.2"/>
+      <checksum type="sha" pkgid="YES">88e2dc5875ff4a8cf33eb27c90ded3624717eb75</checksum>
+      <time file="1148987265" build="1148927317"/>
+      <size package="431750" installed="1350897" archive="1367704"/>
+      <location href="rpm/ppc/postgresql-contrib-8.1.4-1.2.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="postgresql-contrib" epoch="0" ver="8.1.4" rel="1.2" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="postgresql-contrib"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/postgresql-contrib-8.1.4-1.2.ppc.patch.rpm"/>
+          <checksum type="sha">72f5f573530da61462f32805988f3ff530db78e3</checksum>
+          <time file="1148990486" build="1148927317"/>
+          <size package="352068" archive="1015976"/>
+          <base-version epoch="0" ver="8.1.3" rel="12"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/postgresql-contrib-8.1.3_8.1.4-12_1.2.ppc.delta.rpm"/>
+          <checksum type="sha">d790f24eded2d5d96c7f82a85d413d69a2dea96d</checksum>
+          <time file="1148990487" build="1148927317"/>
+          <size package="43669" archive="0"/>
+          <base-version epoch="0" ver="8.1.3" rel="12" md5sum="7488bf2e72b302c2b76eca8fc4ac4cd1" buildtime="1146551335" sequence_info="postgresql-contrib-8.1.3-12-474dcae180894e5377de0abc56eb48dfad10"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>postgresql-contrib</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="8.1.4" rel="1.2"/>
+      <checksum type="sha" pkgid="YES">4b5c792bf0bd01b4648bcb7e2a739619fa753033</checksum>
+      <time file="1148987221" build="1148922709"/>
+      <size package="409513" installed="1182157" archive="1199008"/>
+      <location href="rpm/x86_64/postgresql-contrib-8.1.4-1.2.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="postgresql-contrib" epoch="0" ver="8.1.4" rel="1.2" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="postgresql-contrib"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/postgresql-contrib-8.1.4-1.2.x86_64.patch.rpm"/>
+          <checksum type="sha">d2d9dc687fd41a4f1475346855681342f3718aab</checksum>
+          <time file="1148990489" build="1148922709"/>
+          <size package="326685" archive="847276"/>
+          <base-version epoch="0" ver="8.1.3" rel="12"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/postgresql-contrib-8.1.3_8.1.4-12_1.2.x86_64.delta.rpm"/>
+          <checksum type="sha">b9fa9df2738eb9d7152f52e9d0cfa444a5659751</checksum>
+          <time file="1148990490" build="1148922709"/>
+          <size package="43377" archive="0"/>
+          <base-version epoch="0" ver="8.1.3" rel="12" md5sum="0a863c7a449c5d52bca32c2bf4172f2d" buildtime="1146554216" sequence_info="postgresql-contrib-8.1.3-12-4502aa1e402fcf59899b100fb8af6999ad10"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>postgresql-devel</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="8.1.4" rel="1.2"/>
+      <checksum type="sha" pkgid="YES">495a00aaa92dd8333f1bf278307434bc95fd7e91</checksum>
+      <time file="1148987138" build="1148921917"/>
+      <size package="718202" installed="2852053" archive="2921296"/>
+      <location href="rpm/i586/postgresql-devel-8.1.4-1.2.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="postgresql-devel" epoch="0" ver="8.1.4" rel="1.2" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="postgresql-devel"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/postgresql-devel-8.1.4-1.2.i586.patch.rpm"/>
+          <checksum type="sha">14cf2531a40ebe7f4b2a3558f877a89db4ca750a</checksum>
+          <time file="1148990493" build="1148921917"/>
+          <size package="347712" archive="977752"/>
+          <base-version epoch="0" ver="8.1.3" rel="12"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/postgresql-devel-8.1.3_8.1.4-12_1.2.i586.delta.rpm"/>
+          <checksum type="sha">d12add2a2e35747592acb8e899dd5a1de2974c8a</checksum>
+          <time file="1148990495" build="1148921917"/>
+          <size package="79501" archive="0"/>
+          <base-version epoch="0" ver="8.1.3" rel="12" md5sum="0ab863835f16f0a8af460e4a57ca9009" buildtime="1146554096" sequence_info="postgresql-devel-8.1.3-12-36d70cf9fd2f13062f0d1d273b05c3c7af60"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>postgresql-devel</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="8.1.4" rel="1.2"/>
+      <checksum type="sha" pkgid="YES">ba7b86e9fe95fcbf139d1eb958e42628f1a04ca0</checksum>
+      <time file="1148987266" build="1148927317"/>
+      <size package="722122" installed="2887918" archive="2957156"/>
+      <location href="rpm/ppc/postgresql-devel-8.1.4-1.2.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="postgresql-devel" epoch="0" ver="8.1.4" rel="1.2" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="postgresql-devel"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/postgresql-devel-8.1.4-1.2.ppc.patch.rpm"/>
+          <checksum type="sha">d7ad43c49fa6ed85f4487598815e5b6c97ee0618</checksum>
+          <time file="1148990497" build="1148927317"/>
+          <size package="350545" archive="1008776"/>
+          <base-version epoch="0" ver="8.1.3" rel="12"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/postgresql-devel-8.1.3_8.1.4-12_1.2.ppc.delta.rpm"/>
+          <checksum type="sha">f3af13c054c2fe3819eeb0ce30daefc6baf78bbc</checksum>
+          <time file="1148990499" build="1148927317"/>
+          <size package="80266" archive="0"/>
+          <base-version epoch="0" ver="8.1.3" rel="12" md5sum="09f387b8afde064f64418035ada7afe3" buildtime="1146551335" sequence_info="postgresql-devel-8.1.3-12-b3dcd17decbe9f4eaf19b133376576e5af60"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>postgresql-devel</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="8.1.4" rel="1.2"/>
+      <checksum type="sha" pkgid="YES">92f4cd7b53db124c11cfaf4f0f660b7602c42e89</checksum>
+      <time file="1148987221" build="1148922709"/>
+      <size package="728458" installed="2996066" archive="3065336"/>
+      <location href="rpm/x86_64/postgresql-devel-8.1.4-1.2.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="postgresql-devel" epoch="0" ver="8.1.4" rel="1.2" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="postgresql-devel"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/postgresql-devel-8.1.4-1.2.x86_64.patch.rpm"/>
+          <checksum type="sha">3823adc7c1032543970e4125b84de1fc21b29278</checksum>
+          <time file="1148990501" build="1148922709"/>
+          <size package="356945" archive="1107988"/>
+          <base-version epoch="0" ver="8.1.3" rel="12"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/postgresql-devel-8.1.3_8.1.4-12_1.2.x86_64.delta.rpm"/>
+          <checksum type="sha">cace15c18c423cf6f5da74ca2ab56ebd58404930</checksum>
+          <time file="1148990504" build="1148922709"/>
+          <size package="80677" archive="0"/>
+          <base-version epoch="0" ver="8.1.3" rel="12" md5sum="335fd8b5bed6eae20f27e46b78773ec1" buildtime="1146554216" sequence_info="postgresql-devel-8.1.3-12-9b586dddf45da3588097a92dc21f7458af60"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>postgresql-docs</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="8.1.4" rel="1.2"/>
+      <checksum type="sha" pkgid="YES">623433ceaeb3bae921d4c88d58d8b6fc8b18d069</checksum>
+      <time file="1148987138" build="1148921917"/>
+      <size package="976029" installed="6586178" archive="6704260"/>
+      <location href="rpm/i586/postgresql-docs-8.1.4-1.2.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="postgresql-docs" epoch="0" ver="8.1.4" rel="1.2" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="postgresql-docs"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/postgresql-docs-8.1.4-1.2.i586.patch.rpm"/>
+          <checksum type="sha">1ec017236c57fd1b6cff45e4c473f1360b6fe911</checksum>
+          <time file="1148990510" build="1148921917"/>
+          <size package="975796" archive="6702508"/>
+          <base-version epoch="0" ver="8.1.3" rel="12"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/postgresql-docs-8.1.3_8.1.4-12_1.2.i586.delta.rpm"/>
+          <checksum type="sha">52e952ce2606228f1e13caa4eaa8e35524cf70a8</checksum>
+          <time file="1148990513" build="1148921917"/>
+          <size package="110401" archive="0"/>
+          <base-version epoch="0" ver="8.1.3" rel="12" md5sum="0596d854420f0ad54c63eabf71f56546" buildtime="1146554096" sequence_info="postgresql-docs-8.1.3-12-4410e3273d786a623da80ffb673323c6eba1"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>postgresql-docs</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="8.1.4" rel="1.2"/>
+      <checksum type="sha" pkgid="YES">eee59c14ecf15eede152b0c2aa59d695b6a0d365</checksum>
+      <time file="1148987266" build="1148927317"/>
+      <size package="977213" installed="6586178" archive="6704260"/>
+      <location href="rpm/ppc/postgresql-docs-8.1.4-1.2.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="postgresql-docs" epoch="0" ver="8.1.4" rel="1.2" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="postgresql-docs"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/postgresql-docs-8.1.4-1.2.ppc.patch.rpm"/>
+          <checksum type="sha">3ceb1cb08dca50b22af3ad46886a297cdb2ecd94</checksum>
+          <time file="1148990520" build="1148927317"/>
+          <size package="975573" archive="6702508"/>
+          <base-version epoch="0" ver="8.1.3" rel="12"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/postgresql-docs-8.1.3_8.1.4-12_1.2.ppc.delta.rpm"/>
+          <checksum type="sha">6b6f032da578074bda9192f0df4f9175c949cec8</checksum>
+          <time file="1148990523" build="1148927317"/>
+          <size package="110378" archive="0"/>
+          <base-version epoch="0" ver="8.1.3" rel="12" md5sum="c769956b97640db74cacccf268a77908" buildtime="1146551335" sequence_info="postgresql-docs-8.1.3-12-4410e3273d786a623da80ffb673323c6eba1"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>postgresql-docs</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="8.1.4" rel="1.2"/>
+      <checksum type="sha" pkgid="YES">502710c6f89f8277f59071b97281008e172b2564</checksum>
+      <time file="1148987222" build="1148922709"/>
+      <size package="976496" installed="6586178" archive="6704260"/>
+      <location href="rpm/x86_64/postgresql-docs-8.1.4-1.2.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="postgresql-docs" epoch="0" ver="8.1.4" rel="1.2" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="postgresql-docs"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/postgresql-docs-8.1.4-1.2.x86_64.patch.rpm"/>
+          <checksum type="sha">e90d37ac43cf7a3a4c2464830f81b6b68515399d</checksum>
+          <time file="1148990530" build="1148922709"/>
+          <size package="975827" archive="6702508"/>
+          <base-version epoch="0" ver="8.1.3" rel="12"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/postgresql-docs-8.1.3_8.1.4-12_1.2.x86_64.delta.rpm"/>
+          <checksum type="sha">ae98af491dc2468d209a74601ac7bb005b3f4ac5</checksum>
+          <time file="1148990534" build="1148922709"/>
+          <size package="110490" archive="0"/>
+          <base-version epoch="0" ver="8.1.3" rel="12" md5sum="3b0c9a03d02526fb3e8fff292099142e" buildtime="1146554216" sequence_info="postgresql-docs-8.1.3-12-4410e3273d786a623da80ffb673323c6eba1"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>postgresql-libs</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="8.1.4" rel="1.2"/>
+      <checksum type="sha" pkgid="YES">4a6a2de4bbdbe8a39ea74be0c8d64a488e7af36c</checksum>
+      <time file="1148987138" build="1148921917"/>
+      <size package="188851" installed="488142" archive="492276"/>
+      <location href="rpm/i586/postgresql-libs-8.1.4-1.2.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="postgresql-libs" epoch="0" ver="8.1.4" rel="1.2" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="postgresql-libs"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/postgresql-libs-8.1.4-1.2.i586.patch.rpm"/>
+          <checksum type="sha">8c85090eaacb644cb54d9264b5bc04525969a299</checksum>
+          <time file="1148990536" build="1148921917"/>
+          <size package="135284" archive="249428"/>
+          <base-version epoch="0" ver="8.1.3" rel="12"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/postgresql-libs-8.1.3_8.1.4-12_1.2.i586.delta.rpm"/>
+          <checksum type="sha">19ae9f6d121bb923feca993455070b78256826dc</checksum>
+          <time file="1148990538" build="1148921917"/>
+          <size package="48019" archive="0"/>
+          <base-version epoch="0" ver="8.1.3" rel="12" md5sum="cb763dd2f51a51eebfcb0f307d3bed04" buildtime="1146554096" sequence_info="postgresql-libs-8.1.3-12-f21287877e8b2553797cc76096a71de9a3"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>postgresql-libs</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="8.1.4" rel="1.2"/>
+      <checksum type="sha" pkgid="YES">e1b9516759a3f641bd1e05f588d91d9abe0f3f5e</checksum>
+      <time file="1148987266" build="1148927317"/>
+      <size package="201299" installed="557198" archive="561332"/>
+      <location href="rpm/ppc/postgresql-libs-8.1.4-1.2.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="postgresql-libs" epoch="0" ver="8.1.4" rel="1.2" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="postgresql-libs"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/postgresql-libs-8.1.4-1.2.ppc.patch.rpm"/>
+          <checksum type="sha">43ef672d6c6837fa3cdadc0c890198d2f19e7fd1</checksum>
+          <time file="1148990539" build="1148927317"/>
+          <size package="147835" archive="318484"/>
+          <base-version epoch="0" ver="8.1.3" rel="12"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/postgresql-libs-8.1.3_8.1.4-12_1.2.ppc.delta.rpm"/>
+          <checksum type="sha">f8e0fe48529ad1816b3121f66af550b620c4d6d6</checksum>
+          <time file="1148990540" build="1148927317"/>
+          <size package="46712" archive="0"/>
+          <base-version epoch="0" ver="8.1.3" rel="12" md5sum="fd366e67b964894059eb3d68f8f32eb6" buildtime="1146551335" sequence_info="postgresql-libs-8.1.3-12-21b1ad43205f3286b60ed9708883b8dda3"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>postgresql-libs</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="8.1.4" rel="1.2"/>
+      <checksum type="sha" pkgid="YES">6b98932e1185852064e5de9fb4d33961d51666be</checksum>
+      <time file="1148987222" build="1148922709"/>
+      <size package="196660" installed="521618" archive="525768"/>
+      <location href="rpm/x86_64/postgresql-libs-8.1.4-1.2.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="postgresql-libs" epoch="0" ver="8.1.4" rel="1.2" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="postgresql-libs"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/postgresql-libs-8.1.4-1.2.x86_64.patch.rpm"/>
+          <checksum type="sha">7798caaed93542b6f3d76fdd486cc11fc3ed9c17</checksum>
+          <time file="1148990542" build="1148922709"/>
+          <size package="142918" archive="282908"/>
+          <base-version epoch="0" ver="8.1.3" rel="12"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/postgresql-libs-8.1.3_8.1.4-12_1.2.x86_64.delta.rpm"/>
+          <checksum type="sha">b2979f3c6237aa6169d8e0409fb966f6eda3842e</checksum>
+          <time file="1148990543" build="1148922709"/>
+          <size package="53016" archive="0"/>
+          <base-version epoch="0" ver="8.1.3" rel="12" md5sum="1a9a267f3c4987565958663a05fd56de" buildtime="1146554216" sequence_info="postgresql-libs-8.1.3-12-12df6e5c4ad55d8f77e24b95bd874ba8a3"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>postgresql-libs-32bit</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="8.1.4" rel="1.2"/>
+      <checksum type="sha" pkgid="YES">b31293c5e9fa42a34c4886819489cb4711d59dfd</checksum>
+      <time file="1148987138" build="1148921991"/>
+      <size package="132605" installed="248748" archive="250044"/>
+      <location href="rpm/x86_64/postgresql-libs-32bit-8.1.4-1.2.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="postgresql-libs-32bit" epoch="0" ver="8.1.4" rel="1.2" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="postgresql-libs-32bit"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/postgresql-libs-32bit-8.1.4-1.2.x86_64.patch.rpm"/>
+          <checksum type="sha">8a5fbe1b1f09629cf21ccc4f68707da00740933b</checksum>
+          <time file="1148990544" build="1148921991"/>
+          <size package="132680" archive="249428"/>
+          <base-version epoch="0" ver="8.1.3" rel="12"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/postgresql-libs-32bit-8.1.3_8.1.4-12_1.2.x86_64.delta.rpm"/>
+          <checksum type="sha">3d4ff067e5f67e6b7d26c7cce9814e6f31a037d4</checksum>
+          <time file="1148990545" build="1148921991"/>
+          <size package="45224" archive="0"/>
+          <base-version epoch="0" ver="8.1.3" rel="12" md5sum="4ca10f89c284765eec223d85ec57a426" buildtime="1146554154" sequence_info="postgresql-libs-32bit-8.1.3-12-f3af0523c05691ce67fca5b8f697419981"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>postgresql-libs-64bit</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="8.1.4" rel="1.2"/>
+      <checksum type="sha" pkgid="YES">28f156e0bc6288f53b7c9f30e07b66f07f556d07</checksum>
+      <time file="1148987402" build="1148929863"/>
+      <size package="145056" installed="378448" archive="379760"/>
+      <location href="rpm/ppc/postgresql-libs-64bit-8.1.4-1.2.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="postgresql-libs-64bit" epoch="0" ver="8.1.4" rel="1.2" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="postgresql-libs-64bit"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/postgresql-libs-64bit-8.1.4-1.2.ppc.patch.rpm"/>
+          <checksum type="sha">93fca7b4b5adf0857ecec8b67b7109c6bfd4f07b</checksum>
+          <time file="1148990547" build="1148929863"/>
+          <size package="145065" archive="379132"/>
+          <base-version epoch="0" ver="8.1.3" rel="12"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/postgresql-libs-64bit-8.1.3_8.1.4-12_1.2.ppc.delta.rpm"/>
+          <checksum type="sha">4ee0c247985f808791f191e01b25294c8f63fd02</checksum>
+          <time file="1148990547" build="1148929863"/>
+          <size package="56849" archive="0"/>
+          <base-version epoch="0" ver="8.1.3" rel="12" md5sum="5ff6f2904617eb593e0bcf9b891066ae" buildtime="1146551790" sequence_info="postgresql-libs-64bit-8.1.3-12-11f1f4c97537c370894bc8a3d5ce3ddf81"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>postgresql-pl</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="8.1.4" rel="1.2"/>
+      <checksum type="sha" pkgid="YES">328fc96a736b322b699e657e3063ab9035217a87</checksum>
+      <time file="1148987171" build="1148957137"/>
+      <size package="59536" installed="161086" archive="162472"/>
+      <location href="rpm/i586/postgresql-pl-8.1.4-1.2.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="postgresql-pl" epoch="0" ver="8.1.4" rel="1.2" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="postgresql-pl"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/postgresql-pl-8.1.4-1.2.i586.patch.rpm"/>
+          <checksum type="sha">d597b44812c2cc6be1747f83b48578e3da32d242</checksum>
+          <time file="1148990549" build="1148957137"/>
+          <size package="55798" archive="143280"/>
+          <base-version epoch="0" ver="8.1.3" rel="12"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/postgresql-pl-8.1.3_8.1.4-12_1.2.i586.delta.rpm"/>
+          <checksum type="sha">4c3e61d075d74c91cbaf2a3ba2a57d057b15933c</checksum>
+          <time file="1148990550" build="1148957137"/>
+          <size package="7361" archive="0"/>
+          <base-version epoch="0" ver="8.1.3" rel="12" md5sum="5b6a5eb989d54ffc524c8070a8b0acbd" buildtime="1146559130" sequence_info="postgresql-pl-8.1.3-12-31d17e92e9ac2711bb2db67e49aa630991"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>postgresql-pl</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="8.1.4" rel="1.2"/>
+      <checksum type="sha" pkgid="YES">9b4adc9f43eb04b1e9bbac514dd400087521d9fc</checksum>
+      <time file="1148987313" build="1148962238"/>
+      <size package="68999" installed="197093" archive="198484"/>
+      <location href="rpm/ppc/postgresql-pl-8.1.4-1.2.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="postgresql-pl" epoch="0" ver="8.1.4" rel="1.2" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="postgresql-pl"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/postgresql-pl-8.1.4-1.2.ppc.patch.rpm"/>
+          <checksum type="sha">fcefa6612a9112247fdf163c114632ce9103119c</checksum>
+          <time file="1148990551" build="1148962238"/>
+          <size package="65176" archive="179292"/>
+          <base-version epoch="0" ver="8.1.3" rel="12"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/postgresql-pl-8.1.3_8.1.4-12_1.2.ppc.delta.rpm"/>
+          <checksum type="sha">81de1176a7dfff84d4745930f7447a535696b241</checksum>
+          <time file="1148990552" build="1148962238"/>
+          <size package="7194" archive="0"/>
+          <base-version epoch="0" ver="8.1.3" rel="12" md5sum="b5443e22398790a0c6b1e8a7511410c4" buildtime="1146615242" sequence_info="postgresql-pl-8.1.3-12-872755841f0fdf6c53aa752987cd0ae791"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>postgresql-pl</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="8.1.4" rel="1.2"/>
+      <checksum type="sha" pkgid="YES">1e0c9cd135df2f210586cfcc0b3ec9d848890408</checksum>
+      <time file="1148987306" build="1148959467"/>
+      <size package="63604" installed="182612" archive="184012"/>
+      <location href="rpm/x86_64/postgresql-pl-8.1.4-1.2.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="postgresql-pl" epoch="0" ver="8.1.4" rel="1.2" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="postgresql-pl"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/postgresql-pl-8.1.4-1.2.x86_64.patch.rpm"/>
+          <checksum type="sha">27eadca075fd932186947836c4f3273f6bc5fe44</checksum>
+          <time file="1148990553" build="1148959467"/>
+          <size package="59888" archive="164816"/>
+          <base-version epoch="0" ver="8.1.3" rel="12"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/postgresql-pl-8.1.3_8.1.4-12_1.2.x86_64.delta.rpm"/>
+          <checksum type="sha">5a00f72aa80348f6ec096346d700c8a4a06d5364</checksum>
+          <time file="1148990553" build="1148959467"/>
+          <size package="7808" archive="0"/>
+          <base-version epoch="0" ver="8.1.3" rel="12" md5sum="d7380b8b5c173ea319d99f76cf86621f" buildtime="1146560061" sequence_info="postgresql-pl-8.1.3-12-945cb01d64caa8acdf5852a332d2803491"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+  </atoms>
+</patch>

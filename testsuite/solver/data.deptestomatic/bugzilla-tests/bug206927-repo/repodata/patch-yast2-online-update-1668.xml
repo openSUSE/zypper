@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--PATCHINFO id="35023610fb550c3d90fb1579bbd0dd9f"!-->
+<patch
+    xmlns="http://novell.com/package/metadata/suse/patch"
+    xmlns:yum="http://linux.duke.edu/metadata/common"
+    xmlns:rpm="http://linux.duke.edu/metadata/rpm"
+    xmlns:suse="http://novell.com/package/metadata/suse/common"
+    patchid="yast2-online-update-1668"
+    timestamp="1150893419"
+    engine="1.0">
+  <yum:name>yast2-online-update</yum:name>
+  <summary lang="en">yast2-online-update: Restart YOU in installation workflow.</summary>
+  <summary lang="de">yast2-online-update: Startet YOU waehrend der Installation nach Zypp Update.</summary>
+  <description lang="en">After applying libzypp patch during installation, 
+online-update did not restarted, so they was not a chance 
+to install any other patch. This update fixes the problem.
+</description>
+  <description lang="de">Wenn der libzypp Patch während der Installation installiert 
+wurde, wurde das Online Update nicht neugestartet. Dadurch 
+wird Installation von z.B. Sicherheitsupdates während der 
+Installation verhindert. Dieses Update behebt das Problem.
+</description>
+  <yum:version ver="1668" rel="0"/>
+  <rpm:requires>
+  <rpm:entry kind="atom" name="yast2-online-update" epoch="0" ver="2.13.42" rel="1.2" flags="EQ"/>
+  </rpm:requires>
+  <package-manager/>
+  <category>recommended</category>
+  <atoms>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>yast2-online-update</name>
+      <arch>noarch</arch>
+      <version epoch="0" ver="2.13.42" rel="1.2"/>
+      <checksum type="sha" pkgid="YES">e1b7842a3c103ca4b9028c879b3d0001b0370315</checksum>
+      <time file="1150902600" build="1150893419"/>
+      <size package="67895" installed="240791" archive="248392"/>
+      <location href="rpm/noarch/yast2-online-update-2.13.42-1.2.noarch.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="yast2-online-update" epoch="0" ver="2.13.42" rel="1.2" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="yast2-online-update"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/noarch/yast2-online-update-2.13.42-1.2.noarch.patch.rpm"/>
+          <checksum type="sha">ac00b35ecf87cff1037baef7ef032c9810dd0281</checksum>
+          <time file="1150903804" build="1150893419"/>
+          <size package="41625" archive="79336"/>
+          <base-version epoch="0" ver="2.13.35" rel="4"/>
+          <base-version epoch="0" ver="2.13.40" rel="0.2"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/noarch/yast2-online-update-2.13.35_2.13.42-4_1.2.noarch.delta.rpm"/>
+          <checksum type="sha">00e9623759997db8c158c52f74e867a66d56b9a1</checksum>
+          <time file="1150903805" build="1150893419"/>
+          <size package="28226" archive="0"/>
+          <base-version epoch="0" ver="2.13.35" rel="4" md5sum="9e65c9cb10c68030a666ab6e260fbe2c" buildtime="1146679041" sequence_info="yast2-online-update-2.13.35-4-76a4db6de0734b79067284f925df72fab5"/>
+        </deltarpm>
+        <deltarpm>
+          <location href="rpm/noarch/yast2-online-update-2.13.40_2.13.42-0.2_1.2.noarch.delta.rpm"/>
+          <checksum type="sha">5105baa0cf9197967bfeb4e2981b14a1ab91c577</checksum>
+          <time file="1150903805" build="1150893419"/>
+          <size package="27820" archive="0"/>
+          <base-version epoch="0" ver="2.13.40" rel="0.2" md5sum="661a31654bb6c159b1425283807a45d3" buildtime="1149559016" sequence_info="yast2-online-update-2.13.40-0.2-8b2a490420d4d6abd84320697660188db5"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+  </atoms>
+</patch>

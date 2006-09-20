@@ -1,0 +1,1338 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--PATCHINFO id="4c57612efb562ea9feb79d833621304c"!-->
+<patch
+    xmlns="http://novell.com/package/metadata/suse/patch"
+    xmlns:yum="http://linux.duke.edu/metadata/common"
+    xmlns:rpm="http://linux.duke.edu/metadata/rpm"
+    xmlns:suse="http://novell.com/package/metadata/suse/common"
+    patchid="gtk-sharp2-1427"
+    timestamp="1148339039"
+    engine="1.0">
+  <yum:name>gtk-sharp2</yum:name>
+  <summary lang="en">Fix hang in Banshee</summary>
+  <summary lang="de">aufhängen in Banshee behoben</summary>
+  <description lang="en">Fixes a hang in Banshee when playing music on 
+multiprocessor systems.
+</description>
+  <description lang="de">Behebt einen Aufhänger in Banshee beim Abspielen von Musik 
+auf Mehrprozessorsystemen 
+</description>
+  <yum:version ver="1427" rel="0"/>
+  <rpm:requires>
+  <rpm:entry kind="atom" name="art-sharp2" epoch="0" ver="2.8.2" rel="15.1" flags="EQ"/>
+  <rpm:entry kind="atom" name="gconf-sharp2" epoch="0" ver="2.8.2" rel="15.1" flags="EQ"/>
+  <rpm:entry kind="atom" name="glade-sharp2" epoch="0" ver="2.8.2" rel="15.1" flags="EQ"/>
+  <rpm:entry kind="atom" name="glib-sharp2" epoch="0" ver="2.8.2" rel="15.1" flags="EQ"/>
+  <rpm:entry kind="atom" name="gnome-sharp2" epoch="0" ver="2.8.2" rel="15.1" flags="EQ"/>
+  <rpm:entry kind="atom" name="gnome-vfs-sharp2" epoch="0" ver="2.8.2" rel="15.1" flags="EQ"/>
+  <rpm:entry kind="atom" name="gtk-sharp2" epoch="0" ver="2.8.2" rel="15.1" flags="EQ"/>
+  <rpm:entry kind="atom" name="gtk-sharp2-32bit" epoch="0" ver="2.8.2" rel="15.1" flags="EQ"/>
+  <rpm:entry kind="atom" name="gtk-sharp2-64bit" epoch="0" ver="2.8.2" rel="15.1" flags="EQ"/>
+  <rpm:entry kind="atom" name="gtk-sharp2-complete" epoch="0" ver="2.8.2" rel="15.1" flags="EQ"/>
+  <rpm:entry kind="atom" name="gtk-sharp2-doc" epoch="0" ver="2.8.2" rel="15.1" flags="EQ"/>
+  <rpm:entry kind="atom" name="gtk-sharp2-gapi" epoch="0" ver="2.8.2" rel="15.1" flags="EQ"/>
+  <rpm:entry kind="atom" name="gtkhtml-sharp2" epoch="0" ver="2.8.2" rel="15.1" flags="EQ"/>
+  <rpm:entry kind="atom" name="rsvg-sharp2" epoch="0" ver="2.8.2" rel="15.1" flags="EQ"/>
+  <rpm:entry kind="atom" name="vte-sharp2" epoch="0" ver="2.8.2" rel="15.1" flags="EQ"/>
+  </rpm:requires>
+  <category>recommended</category>
+  <atoms>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>art-sharp2</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="2.8.2" rel="15.1"/>
+      <checksum type="sha" pkgid="YES">d9d80a74264bbf6fd3e14eea812e700b7edf3356</checksum>
+      <time file="1148381456" build="1148339039"/>
+      <size package="21160" installed="34853" archive="37960"/>
+      <location href="rpm/i586/art-sharp2-2.8.2-15.1.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="art-sharp2" epoch="0" ver="2.8.2" rel="15.1" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="art-sharp2"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/art-sharp2-2.8.2-15.1.i586.patch.rpm"/>
+          <checksum type="sha">666758d39e8f240be2d816f832fb29cc1c1f4acd</checksum>
+          <time file="1148382004" build="1148339039"/>
+          <size package="20544" archive="34504"/>
+          <base-version epoch="0" ver="2.8.2" rel="12"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/art-sharp2-2.8.2-12_15.1.i586.delta.rpm"/>
+          <checksum type="sha">be9895b36c37647f1468b1b2ac953da0ccdfbb83</checksum>
+          <time file="1148382006" build="1148339039"/>
+          <size package="8426" archive="0"/>
+          <base-version epoch="0" ver="2.8.2" rel="12" md5sum="4979bdff0c587f887d4353e27c5394c9" buildtime="1146622008" sequence_info="art-sharp2-2.8.2-12-dfb7332483dc84bc7bad6a001db9fb7b82"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>art-sharp2</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="2.8.2" rel="15.1"/>
+      <checksum type="sha" pkgid="YES">e2f41a9b5526bc889bd9b03a198e890272032c87</checksum>
+      <time file="1148381246" build="1148349638"/>
+      <size package="21225" installed="34853" archive="37960"/>
+      <location href="rpm/ppc/art-sharp2-2.8.2-15.1.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="art-sharp2" epoch="0" ver="2.8.2" rel="15.1" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="art-sharp2"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/art-sharp2-2.8.2-15.1.ppc.patch.rpm"/>
+          <checksum type="sha">54c3e4dba3f6dbe63cdfab16e3bd3ba9616e0751</checksum>
+          <time file="1148382007" build="1148349638"/>
+          <size package="20634" archive="34504"/>
+          <base-version epoch="0" ver="2.8.2" rel="12"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/art-sharp2-2.8.2-12_15.1.ppc.delta.rpm"/>
+          <checksum type="sha">bd125fd5dc3d0cf62ef1ea1fa4de7add0bb3da03</checksum>
+          <time file="1148382008" build="1148349638"/>
+          <size package="8448" archive="0"/>
+          <base-version epoch="0" ver="2.8.2" rel="12" md5sum="ae9222d0fcdaadf28f1147c8cc1f185d" buildtime="1146626127" sequence_info="art-sharp2-2.8.2-12-06576bb1bd0406e2190eea4a2ea5001982"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>art-sharp2</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="2.8.2" rel="15.1"/>
+      <checksum type="sha" pkgid="YES">c22f87c9138b3d71c74d6bc38f492522304aafee</checksum>
+      <time file="1148381421" build="1148333702"/>
+      <size package="21221" installed="34853" archive="37964"/>
+      <location href="rpm/x86_64/art-sharp2-2.8.2-15.1.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="art-sharp2" epoch="0" ver="2.8.2" rel="15.1" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="art-sharp2"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/art-sharp2-2.8.2-15.1.x86_64.patch.rpm"/>
+          <checksum type="sha">bd88315bd9e1798cdfa1acd8b7bddbd0284e35b3</checksum>
+          <time file="1148382009" build="1148333702"/>
+          <size package="20539" archive="34504"/>
+          <base-version epoch="0" ver="2.8.2" rel="12"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/art-sharp2-2.8.2-12_15.1.x86_64.delta.rpm"/>
+          <checksum type="sha">0c9fe6249e4fd011d9dccb5b4cf420d842b1fb17</checksum>
+          <time file="1148382010" build="1148333702"/>
+          <size package="8380" archive="0"/>
+          <base-version epoch="0" ver="2.8.2" rel="12" md5sum="80386c1602e0519c3f3ee0858e4d03a3" buildtime="1146621725" sequence_info="art-sharp2-2.8.2-12-f54b34f328017fc0f81bdf3f32dbeec482"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>gconf-sharp2</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="2.8.2" rel="15.1"/>
+      <checksum type="sha" pkgid="YES">e1aa507aee8f922c730399facc50fff0bf5f86ee</checksum>
+      <time file="1148381457" build="1148339039"/>
+      <size package="25754" installed="48511" archive="54876"/>
+      <location href="rpm/i586/gconf-sharp2-2.8.2-15.1.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="gconf-sharp2" epoch="0" ver="2.8.2" rel="15.1" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="gconf-sharp2"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/gconf-sharp2-2.8.2-15.1.i586.patch.rpm"/>
+          <checksum type="sha">21d16e032e48e51dca20e0f3bb2a812f171941c5</checksum>
+          <time file="1148382011" build="1148339039"/>
+          <size package="24923" archive="48128"/>
+          <base-version epoch="0" ver="2.8.2" rel="12"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/gconf-sharp2-2.8.2-12_15.1.i586.delta.rpm"/>
+          <checksum type="sha">01071424cfc620a9ff665a4c6d0c7ceff91d59bd</checksum>
+          <time file="1148382011" build="1148339039"/>
+          <size package="11568" archive="0"/>
+          <base-version epoch="0" ver="2.8.2" rel="12" md5sum="7dc9067605a18c9709c3cedbae32410a" buildtime="1146622008" sequence_info="gconf-sharp2-2.8.2-12-0cd604ad48d28b24f8707ccd08f8b45d84"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>gconf-sharp2</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="2.8.2" rel="15.1"/>
+      <checksum type="sha" pkgid="YES">7cf99b4600ceebd5556da01e07a59358bf53fd07</checksum>
+      <time file="1148381246" build="1148349638"/>
+      <size package="25732" installed="48511" archive="54876"/>
+      <location href="rpm/ppc/gconf-sharp2-2.8.2-15.1.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="gconf-sharp2" epoch="0" ver="2.8.2" rel="15.1" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="gconf-sharp2"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/gconf-sharp2-2.8.2-15.1.ppc.patch.rpm"/>
+          <checksum type="sha">eb7102878445e903bdf34583a6af27b5c98c8df2</checksum>
+          <time file="1148382012" build="1148349638"/>
+          <size package="24865" archive="48128"/>
+          <base-version epoch="0" ver="2.8.2" rel="12"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/gconf-sharp2-2.8.2-12_15.1.ppc.delta.rpm"/>
+          <checksum type="sha">f59d2f642e5feb1c848597c697052af258428b8d</checksum>
+          <time file="1148382013" build="1148349638"/>
+          <size package="11530" archive="0"/>
+          <base-version epoch="0" ver="2.8.2" rel="12" md5sum="00958f7338ae926c889016973c7942ed" buildtime="1146626127" sequence_info="gconf-sharp2-2.8.2-12-7d07601ada9dc247269b575c4d1c34ed84"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>gconf-sharp2</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="2.8.2" rel="15.1"/>
+      <checksum type="sha" pkgid="YES">22f3d800997a20d4a9e87e63f4c8296dddfc9192</checksum>
+      <time file="1148381421" build="1148333702"/>
+      <size package="25754" installed="48511" archive="54876"/>
+      <location href="rpm/x86_64/gconf-sharp2-2.8.2-15.1.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="gconf-sharp2" epoch="0" ver="2.8.2" rel="15.1" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="gconf-sharp2"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/gconf-sharp2-2.8.2-15.1.x86_64.patch.rpm"/>
+          <checksum type="sha">3dc7e8966f6c16fef70689e28e6481c768045c99</checksum>
+          <time file="1148382013" build="1148333702"/>
+          <size package="24922" archive="48128"/>
+          <base-version epoch="0" ver="2.8.2" rel="12"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/gconf-sharp2-2.8.2-12_15.1.x86_64.delta.rpm"/>
+          <checksum type="sha">68573d223a1a1a2015f155eecdf8e52db133b155</checksum>
+          <time file="1148382014" build="1148333702"/>
+          <size package="11528" archive="0"/>
+          <base-version epoch="0" ver="2.8.2" rel="12" md5sum="1c6d36744d5313a37cc258b6b0b0c564" buildtime="1146621725" sequence_info="gconf-sharp2-2.8.2-12-d6edc91d891b3d6e62f6f42aa5e7597d84"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>glade-sharp2</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="2.8.2" rel="15.1"/>
+      <checksum type="sha" pkgid="YES">78370e0bf74470f998db34e1994feb44234eab37</checksum>
+      <time file="1148381457" build="1148339039"/>
+      <size package="23130" installed="36497" archive="39804"/>
+      <location href="rpm/i586/glade-sharp2-2.8.2-15.1.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="glade-sharp2" epoch="0" ver="2.8.2" rel="15.1" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="glade-sharp2"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/glade-sharp2-2.8.2-15.1.i586.patch.rpm"/>
+          <checksum type="sha">fba78a43dc6c838cee8be222b53828c33f631d68</checksum>
+          <time file="1148382015" build="1148339039"/>
+          <size package="20945" archive="32468"/>
+          <base-version epoch="0" ver="2.8.2" rel="12"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/glade-sharp2-2.8.2-12_15.1.i586.delta.rpm"/>
+          <checksum type="sha">9cf4e85e6347b7a08bb46df34851f928bd2cc5b3</checksum>
+          <time file="1148382015" build="1148339039"/>
+          <size package="9230" archive="0"/>
+          <base-version epoch="0" ver="2.8.2" rel="12" md5sum="c4a7d0d00eac0be7f536255cb789481a" buildtime="1146622008" sequence_info="glade-sharp2-2.8.2-12-e83394bf903b8dddb148833ff08e2d4d92"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>glade-sharp2</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="2.8.2" rel="15.1"/>
+      <checksum type="sha" pkgid="YES">d07e8eaf496f0de8347f1f85b7e7b75e20b06a6e</checksum>
+      <time file="1148381246" build="1148349638"/>
+      <size package="24934" installed="41717" archive="45024"/>
+      <location href="rpm/ppc/glade-sharp2-2.8.2-15.1.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="glade-sharp2" epoch="0" ver="2.8.2" rel="15.1" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="glade-sharp2"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/glade-sharp2-2.8.2-15.1.ppc.patch.rpm"/>
+          <checksum type="sha">85ba9040b374850673b08af153187c0e19348e92</checksum>
+          <time file="1148382016" build="1148349638"/>
+          <size package="20901" archive="32468"/>
+          <base-version epoch="0" ver="2.8.2" rel="12"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/glade-sharp2-2.8.2-12_15.1.ppc.delta.rpm"/>
+          <checksum type="sha">aa2796cb281a67123c34403f2fe451ef01f917cf</checksum>
+          <time file="1148382016" build="1148349638"/>
+          <size package="9196" archive="0"/>
+          <base-version epoch="0" ver="2.8.2" rel="12" md5sum="ecc2011ae8d6191c0da4c15340f9d857" buildtime="1146626127" sequence_info="glade-sharp2-2.8.2-12-8a1a3f1259a0b92b4a7b76884e7a650892"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>glade-sharp2</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="2.8.2" rel="15.1"/>
+      <checksum type="sha" pkgid="YES">a150c8b52a6391be341e1be3d33ca3ccc6e98e97</checksum>
+      <time file="1148381421" build="1148333702"/>
+      <size package="23495" installed="38137" archive="41448"/>
+      <location href="rpm/x86_64/glade-sharp2-2.8.2-15.1.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="glade-sharp2" epoch="0" ver="2.8.2" rel="15.1" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="glade-sharp2"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/glade-sharp2-2.8.2-15.1.x86_64.patch.rpm"/>
+          <checksum type="sha">6476e91d669ad4f11a144e0cc4531a852e1aaa02</checksum>
+          <time file="1148382017" build="1148333702"/>
+          <size package="21175" archive="32468"/>
+          <base-version epoch="0" ver="2.8.2" rel="12"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/glade-sharp2-2.8.2-12_15.1.x86_64.delta.rpm"/>
+          <checksum type="sha">e5e6c48c60120e0f9cf6674c5f7064d1d4658b3a</checksum>
+          <time file="1148382018" build="1148333702"/>
+          <size package="9339" archive="0"/>
+          <base-version epoch="0" ver="2.8.2" rel="12" md5sum="3c2d6eeb93f339dd5be82efd303deb78" buildtime="1146621725" sequence_info="glade-sharp2-2.8.2-12-fcefd48e803a5c079fec4e433e41e51492"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>glib-sharp2</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="2.8.2" rel="15.1"/>
+      <checksum type="sha" pkgid="YES">be3dc32c99f98ee4f5ab48752b72efee281bc3b9</checksum>
+      <time file="1148381458" build="1148339039"/>
+      <size package="36849" installed="66662" archive="69944"/>
+      <location href="rpm/i586/glib-sharp2-2.8.2-15.1.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="glib-sharp2" epoch="0" ver="2.8.2" rel="15.1" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="glib-sharp2"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/glib-sharp2-2.8.2-15.1.i586.patch.rpm"/>
+          <checksum type="sha">f938f11a58ac522057d547c17cad485613434a9d</checksum>
+          <time file="1148382018" build="1148339039"/>
+          <size package="33197" archive="59084"/>
+          <base-version epoch="0" ver="2.8.2" rel="12"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/glib-sharp2-2.8.2-12_15.1.i586.delta.rpm"/>
+          <checksum type="sha">0a6505fe8673aabe121500cdda52561e193e8efa</checksum>
+          <time file="1148382019" build="1148339039"/>
+          <size package="10085" archive="0"/>
+          <base-version epoch="0" ver="2.8.2" rel="12" md5sum="71bd8e85a5ab07e0e2e04e39dd20263e" buildtime="1146622008" sequence_info="glib-sharp2-2.8.2-12-160e54aeee18beb045f416027158d51392"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>glib-sharp2</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="2.8.2" rel="15.1"/>
+      <checksum type="sha" pkgid="YES">1e3e7a12e3929de3b45028c741c57354434b80d7</checksum>
+      <time file="1148381246" build="1148349638"/>
+      <size package="38993" installed="73358" archive="76640"/>
+      <location href="rpm/ppc/glib-sharp2-2.8.2-15.1.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="glib-sharp2" epoch="0" ver="2.8.2" rel="15.1" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="glib-sharp2"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/glib-sharp2-2.8.2-15.1.ppc.patch.rpm"/>
+          <checksum type="sha">c102b741e131bc05eeedc3d20ccd42e02553669d</checksum>
+          <time file="1148382020" build="1148349638"/>
+          <size package="33259" archive="59084"/>
+          <base-version epoch="0" ver="2.8.2" rel="12"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/glib-sharp2-2.8.2-12_15.1.ppc.delta.rpm"/>
+          <checksum type="sha">d6b1e7ce30fe7082c1ea09241a8d597d0f41eee7</checksum>
+          <time file="1148382020" build="1148349638"/>
+          <size package="10051" archive="0"/>
+          <base-version epoch="0" ver="2.8.2" rel="12" md5sum="4a4a8d46435eb6d18f4b215c1709eabe" buildtime="1146626127" sequence_info="glib-sharp2-2.8.2-12-081325a36797f9eb5896a91d93eceb9b92"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>glib-sharp2</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="2.8.2" rel="15.1"/>
+      <checksum type="sha" pkgid="YES">b6bd7707148cf8c81f51bc0338a78e3ce6f59a7f</checksum>
+      <time file="1148381421" build="1148333702"/>
+      <size package="37276" installed="69686" archive="72972"/>
+      <location href="rpm/x86_64/glib-sharp2-2.8.2-15.1.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="glib-sharp2" epoch="0" ver="2.8.2" rel="15.1" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="glib-sharp2"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/glib-sharp2-2.8.2-15.1.x86_64.patch.rpm"/>
+          <checksum type="sha">bf4b1fb50b8b4a75f7dc4a50c06d8d36eb66faf3</checksum>
+          <time file="1148382021" build="1148333702"/>
+          <size package="33240" archive="59084"/>
+          <base-version epoch="0" ver="2.8.2" rel="12"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/glib-sharp2-2.8.2-12_15.1.x86_64.delta.rpm"/>
+          <checksum type="sha">e9b41c6bf04fc52d4d9bf0b5f994538cebe098b1</checksum>
+          <time file="1148382022" build="1148333702"/>
+          <size package="10078" archive="0"/>
+          <base-version epoch="0" ver="2.8.2" rel="12" md5sum="3d1eb5a80429fb3a9c6a61248e1f0665" buildtime="1146621725" sequence_info="glib-sharp2-2.8.2-12-34dac74904932f83206a453bfbbcf82992"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>gnome-sharp2</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="2.8.2" rel="15.1"/>
+      <checksum type="sha" pkgid="YES">7d812f372c612676368898252aa10b641d54ea4e</checksum>
+      <time file="1148381458" build="1148339039"/>
+      <size package="120505" installed="319414" archive="322720"/>
+      <location href="rpm/i586/gnome-sharp2-2.8.2-15.1.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="gnome-sharp2" epoch="0" ver="2.8.2" rel="15.1" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="gnome-sharp2"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/gnome-sharp2-2.8.2-15.1.i586.patch.rpm"/>
+          <checksum type="sha">40991fce839ebe5d1e8fe7ca14e6ec33f9fac86c</checksum>
+          <time file="1148382023" build="1148339039"/>
+          <size package="114695" archive="305876"/>
+          <base-version epoch="0" ver="2.8.2" rel="12"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/gnome-sharp2-2.8.2-12_15.1.i586.delta.rpm"/>
+          <checksum type="sha">44184305076cf0a28172b61939c140ea2ab4bef8</checksum>
+          <time file="1148382023" build="1148339039"/>
+          <size package="9695" archive="0"/>
+          <base-version epoch="0" ver="2.8.2" rel="12" md5sum="adc98389a97e0c4d4f1301816c468bdf" buildtime="1146622008" sequence_info="gnome-sharp2-2.8.2-12-9a02fa1f0f473ce09baf4e427e57652092"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>gnome-sharp2</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="2.8.2" rel="15.1"/>
+      <checksum type="sha" pkgid="YES">87b081ec08eccf3193fc8cc9f53cd2e537b9762b</checksum>
+      <time file="1148381246" build="1148349638"/>
+      <size package="123224" installed="329162" archive="332468"/>
+      <location href="rpm/ppc/gnome-sharp2-2.8.2-15.1.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="gnome-sharp2" epoch="0" ver="2.8.2" rel="15.1" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="gnome-sharp2"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/gnome-sharp2-2.8.2-15.1.ppc.patch.rpm"/>
+          <checksum type="sha">c96a1735f3b8c0ba72aa85e29b19b7ddc59978c5</checksum>
+          <time file="1148382024" build="1148349638"/>
+          <size package="115295" archive="307412"/>
+          <base-version epoch="0" ver="2.8.2" rel="12"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/gnome-sharp2-2.8.2-12_15.1.ppc.delta.rpm"/>
+          <checksum type="sha">44b21400f846460450eb5d5da1bab78920e653f6</checksum>
+          <time file="1148382025" build="1148349638"/>
+          <size package="9685" archive="0"/>
+          <base-version epoch="0" ver="2.8.2" rel="12" md5sum="708ffd895fe3861507c3c55dfce7c910" buildtime="1146626127" sequence_info="gnome-sharp2-2.8.2-12-1d5fd4d53060e5515ca06e8b77eb6e6f92"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>gnome-sharp2</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="2.8.2" rel="15.1"/>
+      <checksum type="sha" pkgid="YES">55da0551e027ac013079af78ab889f843cc4164f</checksum>
+      <time file="1148381421" build="1148333702"/>
+      <size package="122040" installed="324726" archive="328036"/>
+      <location href="rpm/x86_64/gnome-sharp2-2.8.2-15.1.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="gnome-sharp2" epoch="0" ver="2.8.2" rel="15.1" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="gnome-sharp2"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/gnome-sharp2-2.8.2-15.1.x86_64.patch.rpm"/>
+          <checksum type="sha">b06bbbebe56cb8a32d661a2942671a790c562f17</checksum>
+          <time file="1148382026" build="1148333702"/>
+          <size package="115096" archive="305876"/>
+          <base-version epoch="0" ver="2.8.2" rel="12"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/gnome-sharp2-2.8.2-12_15.1.x86_64.delta.rpm"/>
+          <checksum type="sha">3b3abb368f568f581a4adc0d2b135371630653bd</checksum>
+          <time file="1148382026" build="1148333702"/>
+          <size package="10170" archive="0"/>
+          <base-version epoch="0" ver="2.8.2" rel="12" md5sum="d799397fd841cdfe31c76c827537db24" buildtime="1146621725" sequence_info="gnome-sharp2-2.8.2-12-f3bd197c3022e76949ee5dab4162625d92"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>gnome-vfs-sharp2</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="2.8.2" rel="15.1"/>
+      <checksum type="sha" pkgid="YES">478b4efd7061aff6acad8a3b144e520bffd566fb</checksum>
+      <time file="1148381458" build="1148339039"/>
+      <size package="52828" installed="126540" archive="129808"/>
+      <location href="rpm/i586/gnome-vfs-sharp2-2.8.2-15.1.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="gnome-vfs-sharp2" epoch="0" ver="2.8.2" rel="15.1" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="gnome-vfs-sharp2"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/gnome-vfs-sharp2-2.8.2-15.1.i586.patch.rpm"/>
+          <checksum type="sha">688ae2b706751d402294069468a206187e55664a</checksum>
+          <time file="1148382027" build="1148339039"/>
+          <size package="52160" archive="126188"/>
+          <base-version epoch="0" ver="2.8.2" rel="12"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/gnome-vfs-sharp2-2.8.2-12_15.1.i586.delta.rpm"/>
+          <checksum type="sha">5a082e0e654bc60bbfb4286ef1fc989d5dbafea0</checksum>
+          <time file="1148382028" build="1148339039"/>
+          <size package="8600" archive="0"/>
+          <base-version epoch="0" ver="2.8.2" rel="12" md5sum="ea85a4799ccd88ff92b942d5cabc1955" buildtime="1146622008" sequence_info="gnome-vfs-sharp2-2.8.2-12-c582a8b7be7a764fc7b526771414290b82"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>gnome-vfs-sharp2</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="2.8.2" rel="15.1"/>
+      <checksum type="sha" pkgid="YES">a6f069615d390ed9e31ba16c6fe0d0821d2a3724</checksum>
+      <time file="1148381246" build="1148349638"/>
+      <size package="53358" installed="128588" archive="131856"/>
+      <location href="rpm/ppc/gnome-vfs-sharp2-2.8.2-15.1.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="gnome-vfs-sharp2" epoch="0" ver="2.8.2" rel="15.1" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="gnome-vfs-sharp2"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/gnome-vfs-sharp2-2.8.2-15.1.ppc.patch.rpm"/>
+          <checksum type="sha">e121c8b3d95e7883964a72eb9971a601981bc680</checksum>
+          <time file="1148382029" build="1148349638"/>
+          <size package="52694" archive="128236"/>
+          <base-version epoch="0" ver="2.8.2" rel="12"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/gnome-vfs-sharp2-2.8.2-12_15.1.ppc.delta.rpm"/>
+          <checksum type="sha">7079523022278d41def7cb80ac57f5ac8b7341f2</checksum>
+          <time file="1148382029" build="1148349638"/>
+          <size package="8554" archive="0"/>
+          <base-version epoch="0" ver="2.8.2" rel="12" md5sum="2d886e4bdb12d60bc3abcb41905c49d2" buildtime="1146626127" sequence_info="gnome-vfs-sharp2-2.8.2-12-9a1d3d51e5740371c623d050d912120882"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>gnome-vfs-sharp2</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="2.8.2" rel="15.1"/>
+      <checksum type="sha" pkgid="YES">3615250cc12b62c83d5e1eb544c56af521fbd6db</checksum>
+      <time file="1148381421" build="1148333702"/>
+      <size package="52813" installed="126540" archive="129808"/>
+      <location href="rpm/x86_64/gnome-vfs-sharp2-2.8.2-15.1.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="gnome-vfs-sharp2" epoch="0" ver="2.8.2" rel="15.1" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="gnome-vfs-sharp2"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/gnome-vfs-sharp2-2.8.2-15.1.x86_64.patch.rpm"/>
+          <checksum type="sha">745cbd4c56397bc06eaac94a5a92fda7b63b1268</checksum>
+          <time file="1148382030" build="1148333702"/>
+          <size package="52149" archive="126188"/>
+          <base-version epoch="0" ver="2.8.2" rel="12"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/gnome-vfs-sharp2-2.8.2-12_15.1.x86_64.delta.rpm"/>
+          <checksum type="sha">a1aa9e26fd2f350832319c3852600d83e0ba4eb4</checksum>
+          <time file="1148382031" build="1148333702"/>
+          <size package="8615" archive="0"/>
+          <base-version epoch="0" ver="2.8.2" rel="12" md5sum="5476a46e7b80c5c5a9421d3cd0b2a449" buildtime="1146621725" sequence_info="gnome-vfs-sharp2-2.8.2-12-79f87ab6712c182ccb25521a16ea740e82"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>gtk-sharp2</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="2.8.2" rel="15.1"/>
+      <checksum type="sha" pkgid="YES">33aaf6c8721af1e20397dc6e3551a44ce37ae38d</checksum>
+      <time file="1148381459" build="1148339039"/>
+      <size package="501458" installed="1596139" archive="1611248"/>
+      <location href="rpm/i586/gtk-sharp2-2.8.2-15.1.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="gtk-sharp2" epoch="0" ver="2.8.2" rel="15.1" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="gtk-sharp2"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/gtk-sharp2-2.8.2-15.1.i586.patch.rpm"/>
+          <checksum type="sha">199491a5267fc03587bb909a161d487384c8e810</checksum>
+          <time file="1148382033" build="1148339039"/>
+          <size package="483353" archive="1546760"/>
+          <base-version epoch="0" ver="2.8.2" rel="12"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/gtk-sharp2-2.8.2-12_15.1.i586.delta.rpm"/>
+          <checksum type="sha">6dbc52681c08809221ea17b84dcd97dc2710c80b</checksum>
+          <time file="1148382034" build="1148339039"/>
+          <size package="19157" archive="0"/>
+          <base-version epoch="0" ver="2.8.2" rel="12" md5sum="8c62fc1af646d16638e871b21064e781" buildtime="1146622008" sequence_info="gtk-sharp2-2.8.2-12-d0500470cad2c68fb7a5fc60af8637678a10"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>gtk-sharp2</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="2.8.2" rel="15.1"/>
+      <checksum type="sha" pkgid="YES">915747654dd41280d3337176abc17a452df3af6a</checksum>
+      <time file="1148381246" build="1148349638"/>
+      <size package="510632" installed="1642039" archive="1657148"/>
+      <location href="rpm/ppc/gtk-sharp2-2.8.2-15.1.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="gtk-sharp2" epoch="0" ver="2.8.2" rel="15.1" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="gtk-sharp2"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/gtk-sharp2-2.8.2-15.1.ppc.patch.rpm"/>
+          <checksum type="sha">58ec175421269054085a107f741754db5441dcc7</checksum>
+          <time file="1148382036" build="1148349638"/>
+          <size package="487298" archive="1563144"/>
+          <base-version epoch="0" ver="2.8.2" rel="12"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/gtk-sharp2-2.8.2-12_15.1.ppc.delta.rpm"/>
+          <checksum type="sha">7e465e22cd160fba7f6565860e751af57898676b</checksum>
+          <time file="1148382037" build="1148349638"/>
+          <size package="19198" archive="0"/>
+          <base-version epoch="0" ver="2.8.2" rel="12" md5sum="9c5700d284c87a04d0e1542ec90be3be" buildtime="1146626127" sequence_info="gtk-sharp2-2.8.2-12-9184530562a315c4309d07c56e1e5f168a10"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>gtk-sharp2</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="2.8.2" rel="15.1"/>
+      <checksum type="sha" pkgid="YES">da1294cf5b83a6d53de417c485a3a7435ca649e1</checksum>
+      <time file="1148381422" build="1148333702"/>
+      <size package="504864" installed="1620887" archive="1636008"/>
+      <location href="rpm/x86_64/gtk-sharp2-2.8.2-15.1.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="gtk-sharp2" epoch="0" ver="2.8.2" rel="15.1" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="gtk-sharp2"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/gtk-sharp2-2.8.2-15.1.x86_64.patch.rpm"/>
+          <checksum type="sha">c37f6eb1f95d474985a91fd25214ce59ad651509</checksum>
+          <time file="1148382039" build="1148333702"/>
+          <size package="484087" archive="1546760"/>
+          <base-version epoch="0" ver="2.8.2" rel="12"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/gtk-sharp2-2.8.2-12_15.1.x86_64.delta.rpm"/>
+          <checksum type="sha">b8af966181ebad8cdd24559059a3b3ff9beeef53</checksum>
+          <time file="1148382040" build="1148333702"/>
+          <size package="19409" archive="0"/>
+          <base-version epoch="0" ver="2.8.2" rel="12" md5sum="f0ff9b10938abd9258838990a20ff40a" buildtime="1146621725" sequence_info="gtk-sharp2-2.8.2-12-aee7b1f627993c7dab976aaae7deb4868a10"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>gtk-sharp2-32bit</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="2.8.2" rel="15.1"/>
+      <checksum type="sha" pkgid="YES">51e3452e4fee16985359ce143f0666a359edbc67</checksum>
+      <time file="1148381459" build="1148339103"/>
+      <size package="19514" installed="47076" archive="47632"/>
+      <location href="rpm/x86_64/gtk-sharp2-32bit-2.8.2-15.1.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="gtk-sharp2-32bit" epoch="0" ver="2.8.2" rel="15.1" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="gtk-sharp2-32bit"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/gtk-sharp2-32bit-2.8.2-15.1.x86_64.patch.rpm"/>
+          <checksum type="sha">c887c6d192be53c8baa4c6bc3e2ef95d09d3f9ed</checksum>
+          <time file="1148382041" build="1148339103"/>
+          <size package="6020" archive="124"/>
+          <base-version epoch="0" ver="2.8.2" rel="12"/>
+        </patchrpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>gtk-sharp2-64bit</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="2.8.2" rel="15.1"/>
+      <checksum type="sha" pkgid="YES">38a03c1629c5bbb683b671b38000fbeebc1ad673</checksum>
+      <time file="1148381227" build="1148349724"/>
+      <size package="24061" installed="101936" archive="102496"/>
+      <location href="rpm/ppc/gtk-sharp2-64bit-2.8.2-15.1.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="gtk-sharp2-64bit" epoch="0" ver="2.8.2" rel="15.1" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="gtk-sharp2-64bit"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/gtk-sharp2-64bit-2.8.2-15.1.ppc.patch.rpm"/>
+          <checksum type="sha">055a84dcb4b81753767b58243b50dca7f7c3ac94</checksum>
+          <time file="1148382042" build="1148349724"/>
+          <size package="6188" archive="124"/>
+          <base-version epoch="0" ver="2.8.2" rel="12"/>
+        </patchrpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>gtk-sharp2-complete</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="2.8.2" rel="15.1"/>
+      <checksum type="sha" pkgid="YES">1b183062ea7fdc91a5a5cb54bd9c2cbad454cf22</checksum>
+      <time file="1148381460" build="1148339039"/>
+      <size package="5986" installed="0" archive="400"/>
+      <location href="rpm/i586/gtk-sharp2-complete-2.8.2-15.1.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="gtk-sharp2-complete" epoch="0" ver="2.8.2" rel="15.1" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="gtk-sharp2-complete"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/gtk-sharp2-complete-2.8.2-15.1.i586.patch.rpm"/>
+          <checksum type="sha">b74414d26fb018fb16650c0760a22688000ccee6</checksum>
+          <time file="1148382043" build="1148339039"/>
+          <size package="5976" archive="124"/>
+          <base-version epoch="0" ver="2.8.2" rel="12"/>
+        </patchrpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>gtk-sharp2-complete</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="2.8.2" rel="15.1"/>
+      <checksum type="sha" pkgid="YES">37a4ceaebdc8fafe87651b06c1ef8370c7b8d745</checksum>
+      <time file="1148381247" build="1148349638"/>
+      <size package="5954" installed="0" archive="400"/>
+      <location href="rpm/ppc/gtk-sharp2-complete-2.8.2-15.1.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="gtk-sharp2-complete" epoch="0" ver="2.8.2" rel="15.1" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="gtk-sharp2-complete"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/gtk-sharp2-complete-2.8.2-15.1.ppc.patch.rpm"/>
+          <checksum type="sha">734cf7940304fd2498a298956af6137022eb4ea2</checksum>
+          <time file="1148382044" build="1148349638"/>
+          <size package="5944" archive="124"/>
+          <base-version epoch="0" ver="2.8.2" rel="12"/>
+        </patchrpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>gtk-sharp2-complete</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="2.8.2" rel="15.1"/>
+      <checksum type="sha" pkgid="YES">ee5e5ecd09b72591f54086616485e7fe6052293d</checksum>
+      <time file="1148381422" build="1148333702"/>
+      <size package="5977" installed="0" archive="400"/>
+      <location href="rpm/x86_64/gtk-sharp2-complete-2.8.2-15.1.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="gtk-sharp2-complete" epoch="0" ver="2.8.2" rel="15.1" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="gtk-sharp2-complete"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/gtk-sharp2-complete-2.8.2-15.1.x86_64.patch.rpm"/>
+          <checksum type="sha">05c69ae8ca9915600e07de6ef18f03c81015728b</checksum>
+          <time file="1148382046" build="1148333702"/>
+          <size package="5964" archive="124"/>
+          <base-version epoch="0" ver="2.8.2" rel="12"/>
+        </patchrpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>gtk-sharp2-doc</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="2.8.2" rel="15.1"/>
+      <checksum type="sha" pkgid="YES">5f378e13c7984bd663d7545aa3a27158a093de04</checksum>
+      <time file="1148381461" build="1148339039"/>
+      <size package="2085842" installed="2751474" archive="2752972"/>
+      <location href="rpm/i586/gtk-sharp2-doc-2.8.2-15.1.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="gtk-sharp2-doc" epoch="0" ver="2.8.2" rel="15.1" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="gtk-sharp2-doc"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/gtk-sharp2-doc-2.8.2-15.1.i586.patch.rpm"/>
+          <checksum type="sha">79094e095378cb5dbfa9fbf9c7d1527e896fe272</checksum>
+          <time file="1148382048" build="1148339039"/>
+          <size package="6048" archive="124"/>
+          <base-version epoch="0" ver="2.8.2" rel="12"/>
+        </patchrpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>gtk-sharp2-doc</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="2.8.2" rel="15.1"/>
+      <checksum type="sha" pkgid="YES">d9c6ae2a804492c257dd3fd7389684ac2650b202</checksum>
+      <time file="1148381247" build="1148349638"/>
+      <size package="2087112" installed="2751474" archive="2752972"/>
+      <location href="rpm/ppc/gtk-sharp2-doc-2.8.2-15.1.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="gtk-sharp2-doc" epoch="0" ver="2.8.2" rel="15.1" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="gtk-sharp2-doc"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/gtk-sharp2-doc-2.8.2-15.1.ppc.patch.rpm"/>
+          <checksum type="sha">baabe3efc0cf178ea00cb4a65e1d14ce6b224fd0</checksum>
+          <time file="1148382053" build="1148349638"/>
+          <size package="6020" archive="124"/>
+          <base-version epoch="0" ver="2.8.2" rel="12"/>
+        </patchrpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>gtk-sharp2-doc</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="2.8.2" rel="15.1"/>
+      <checksum type="sha" pkgid="YES">43b70fd0533dca750db3d22f5704618fef02a2e8</checksum>
+      <time file="1148381423" build="1148333702"/>
+      <size package="2085803" installed="2751474" archive="2752972"/>
+      <location href="rpm/x86_64/gtk-sharp2-doc-2.8.2-15.1.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="gtk-sharp2-doc" epoch="0" ver="2.8.2" rel="15.1" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="gtk-sharp2-doc"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/gtk-sharp2-doc-2.8.2-15.1.x86_64.patch.rpm"/>
+          <checksum type="sha">0478fe13068985a327631a5ce202e0ffbdbdc9bc</checksum>
+          <time file="1148382058" build="1148333702"/>
+          <size package="6036" archive="124"/>
+          <base-version epoch="0" ver="2.8.2" rel="12"/>
+        </patchrpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>gtk-sharp2-gapi</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="2.8.2" rel="15.1"/>
+      <checksum type="sha" pkgid="YES">75783c3d356de34c866516a1538b94fd4a61a7ba</checksum>
+      <time file="1148381461" build="1148339039"/>
+      <size package="199278" installed="2138385" archive="2141572"/>
+      <location href="rpm/i586/gtk-sharp2-gapi-2.8.2-15.1.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="gtk-sharp2-gapi" epoch="0" ver="2.8.2" rel="15.1" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="gtk-sharp2-gapi"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/gtk-sharp2-gapi-2.8.2-15.1.i586.patch.rpm"/>
+          <checksum type="sha">a41e289b864211c68dc93f06dac0cee7c5f3563f</checksum>
+          <time file="1148382062" build="1148339039"/>
+          <size package="49433" archive="125508"/>
+          <base-version epoch="0" ver="2.8.2" rel="12"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/gtk-sharp2-gapi-2.8.2-12_15.1.i586.delta.rpm"/>
+          <checksum type="sha">9d2fae9a989ed06355f7e03c047f5d33799a2f97</checksum>
+          <time file="1148382063" build="1148339039"/>
+          <size package="8268" archive="0"/>
+          <base-version epoch="0" ver="2.8.2" rel="12" md5sum="3795dfd67a76e1ecf5096fdc293c6c61" buildtime="1146622008" sequence_info="gtk-sharp2-gapi-2.8.2-12-ff304853bb4a951cceae0f99afbb0840d2"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>gtk-sharp2-gapi</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="2.8.2" rel="15.1"/>
+      <checksum type="sha" pkgid="YES">1fd7aa79deacdbaefe86e287240bed5490175b4c</checksum>
+      <time file="1148381247" build="1148349638"/>
+      <size package="199294" installed="2138385" archive="2141572"/>
+      <location href="rpm/ppc/gtk-sharp2-gapi-2.8.2-15.1.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="gtk-sharp2-gapi" epoch="0" ver="2.8.2" rel="15.1" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="gtk-sharp2-gapi"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/gtk-sharp2-gapi-2.8.2-15.1.ppc.patch.rpm"/>
+          <checksum type="sha">f53dc8da3e85cc744a1986de4cd5a301635d6f5a</checksum>
+          <time file="1148382064" build="1148349638"/>
+          <size package="49379" archive="125508"/>
+          <base-version epoch="0" ver="2.8.2" rel="12"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/gtk-sharp2-gapi-2.8.2-12_15.1.ppc.delta.rpm"/>
+          <checksum type="sha">f76b6b37d303f10bb31bd2362023253c220a62a5</checksum>
+          <time file="1148382065" build="1148349638"/>
+          <size package="8233" archive="0"/>
+          <base-version epoch="0" ver="2.8.2" rel="12" md5sum="4a4a7a58de616ae1cb373de42b0f57a6" buildtime="1146626127" sequence_info="gtk-sharp2-gapi-2.8.2-12-bd43d9d11ebc7db203634d9f9bbfd584d2"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>gtk-sharp2-gapi</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="2.8.2" rel="15.1"/>
+      <checksum type="sha" pkgid="YES">68ff1bcba5ac3cb0c2a061ae26769e0e516e236e</checksum>
+      <time file="1148381423" build="1148333702"/>
+      <size package="199316" installed="2138385" archive="2141572"/>
+      <location href="rpm/x86_64/gtk-sharp2-gapi-2.8.2-15.1.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="gtk-sharp2-gapi" epoch="0" ver="2.8.2" rel="15.1" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="gtk-sharp2-gapi"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/gtk-sharp2-gapi-2.8.2-15.1.x86_64.patch.rpm"/>
+          <checksum type="sha">3dde46417a42b97b1eeeb7719e1db4e2fdf97db8</checksum>
+          <time file="1148382066" build="1148333702"/>
+          <size package="49421" archive="125508"/>
+          <base-version epoch="0" ver="2.8.2" rel="12"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/gtk-sharp2-gapi-2.8.2-12_15.1.x86_64.delta.rpm"/>
+          <checksum type="sha">99c613dd45563a2e9c65a3a1b3ef0b2883c0f102</checksum>
+          <time file="1148382067" build="1148333702"/>
+          <size package="8275" archive="0"/>
+          <base-version epoch="0" ver="2.8.2" rel="12" md5sum="cdb245b10e5f7897af5b454c076e4c8b" buildtime="1146621725" sequence_info="gtk-sharp2-gapi-2.8.2-12-589bed997d84eb6e0568e3d08d11a0acd2"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>gtkhtml-sharp2</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="2.8.2" rel="15.1"/>
+      <checksum type="sha" pkgid="YES">8f9dae803db23635b90858e9a91ae1085b0088fb</checksum>
+      <time file="1148381461" build="1148339039"/>
+      <size package="32511" installed="73377" archive="76588"/>
+      <location href="rpm/i586/gtkhtml-sharp2-2.8.2-15.1.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="gtkhtml-sharp2" epoch="0" ver="2.8.2" rel="15.1" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="gtkhtml-sharp2"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/gtkhtml-sharp2-2.8.2-15.1.i586.patch.rpm"/>
+          <checksum type="sha">7846c59035dec0262f38cc7b59db1243b4f5e6ee</checksum>
+          <time file="1148382068" build="1148339039"/>
+          <size package="31836" archive="72928"/>
+          <base-version epoch="0" ver="2.8.2" rel="12"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/gtkhtml-sharp2-2.8.2-12_15.1.i586.delta.rpm"/>
+          <checksum type="sha">43572c4acd71a8f3edd0c7778f7ec56b4a62493a</checksum>
+          <time file="1148382068" build="1148339039"/>
+          <size package="8675" archive="0"/>
+          <base-version epoch="0" ver="2.8.2" rel="12" md5sum="9c8767a44f3f6416a9c0dfde221cd262" buildtime="1146622008" sequence_info="gtkhtml-sharp2-2.8.2-12-4b5f694abb47555130420065d12365c482"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>gtkhtml-sharp2</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="2.8.2" rel="15.1"/>
+      <checksum type="sha" pkgid="YES">bd2e62c7506d167f932ed31e16bf263e82a57580</checksum>
+      <time file="1148381247" build="1148349638"/>
+      <size package="32748" installed="74401" archive="77612"/>
+      <location href="rpm/ppc/gtkhtml-sharp2-2.8.2-15.1.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="gtkhtml-sharp2" epoch="0" ver="2.8.2" rel="15.1" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="gtkhtml-sharp2"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/gtkhtml-sharp2-2.8.2-15.1.ppc.patch.rpm"/>
+          <checksum type="sha">17c2350c80b529fc9cdc8ba64bcdd5f791a9679e</checksum>
+          <time file="1148382069" build="1148349638"/>
+          <size package="32127" archive="73952"/>
+          <base-version epoch="0" ver="2.8.2" rel="12"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/gtkhtml-sharp2-2.8.2-12_15.1.ppc.delta.rpm"/>
+          <checksum type="sha">0a89050e25ca8e85e9635c97b3a685208060a533</checksum>
+          <time file="1148382070" build="1148349638"/>
+          <size package="8562" archive="0"/>
+          <base-version epoch="0" ver="2.8.2" rel="12" md5sum="9429aa108d27d28eb9fa869a5f305f4f" buildtime="1146626127" sequence_info="gtkhtml-sharp2-2.8.2-12-4d442f3ff614490b3a45ca84d06a58c582"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>gtkhtml-sharp2</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="2.8.2" rel="15.1"/>
+      <checksum type="sha" pkgid="YES">9aecc6314f48714215da8c44dfc304a99f34b9db</checksum>
+      <time file="1148381424" build="1148333702"/>
+      <size package="32486" installed="73377" archive="76592"/>
+      <location href="rpm/x86_64/gtkhtml-sharp2-2.8.2-15.1.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="gtkhtml-sharp2" epoch="0" ver="2.8.2" rel="15.1" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="gtkhtml-sharp2"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/gtkhtml-sharp2-2.8.2-15.1.x86_64.patch.rpm"/>
+          <checksum type="sha">5c65ea89b08e16f6412bafefb21da8254e87c7fa</checksum>
+          <time file="1148382071" build="1148333702"/>
+          <size package="31858" archive="72928"/>
+          <base-version epoch="0" ver="2.8.2" rel="12"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/gtkhtml-sharp2-2.8.2-12_15.1.x86_64.delta.rpm"/>
+          <checksum type="sha">5ff3392c6e14bafc4e3be106b17ad256f2294ec1</checksum>
+          <time file="1148382071" build="1148333702"/>
+          <size package="8676" archive="0"/>
+          <base-version epoch="0" ver="2.8.2" rel="12" md5sum="3089e736677f00c1b4891410f7753d2c" buildtime="1146621725" sequence_info="gtkhtml-sharp2-2.8.2-12-34d2e9d72d9bd68b5b1ccdbc38b1d10682"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>rsvg-sharp2</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="2.8.2" rel="15.1"/>
+      <checksum type="sha" pkgid="YES">2b6ce3dacea79be5936a44d8f20a9152a83d493e</checksum>
+      <time file="1148381462" build="1148339039"/>
+      <size package="20237" installed="32806" archive="35944"/>
+      <location href="rpm/i586/rsvg-sharp2-2.8.2-15.1.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="rsvg-sharp2" epoch="0" ver="2.8.2" rel="15.1" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="rsvg-sharp2"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/rsvg-sharp2-2.8.2-15.1.i586.patch.rpm"/>
+          <checksum type="sha">f52aed49e67b7e2a272acef86bd64d253b580efa</checksum>
+          <time file="1148382072" build="1148339039"/>
+          <size package="19630" archive="32460"/>
+          <base-version epoch="0" ver="2.8.2" rel="12"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/rsvg-sharp2-2.8.2-12_15.1.i586.delta.rpm"/>
+          <checksum type="sha">5c31bf1561a93e5f2fe5cdcebe94bec82118769f</checksum>
+          <time file="1148382072" build="1148339039"/>
+          <size package="8538" archive="0"/>
+          <base-version epoch="0" ver="2.8.2" rel="12" md5sum="39da11949905107d3bcc4878929e6d4c" buildtime="1146622008" sequence_info="rsvg-sharp2-2.8.2-12-eec2657a7b52556306843237b4cb1b1882"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>rsvg-sharp2</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="2.8.2" rel="15.1"/>
+      <checksum type="sha" pkgid="YES">9bc055446c748eb8e4fe087ed6cd8d53520b4545</checksum>
+      <time file="1148381247" build="1148349638"/>
+      <size package="20220" installed="32806" archive="35944"/>
+      <location href="rpm/ppc/rsvg-sharp2-2.8.2-15.1.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="rsvg-sharp2" epoch="0" ver="2.8.2" rel="15.1" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="rsvg-sharp2"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/rsvg-sharp2-2.8.2-15.1.ppc.patch.rpm"/>
+          <checksum type="sha">34bee600a6bda42b373fd4509084dcc05813e156</checksum>
+          <time file="1148382073" build="1148349638"/>
+          <size package="19596" archive="32460"/>
+          <base-version epoch="0" ver="2.8.2" rel="12"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/rsvg-sharp2-2.8.2-12_15.1.ppc.delta.rpm"/>
+          <checksum type="sha">f87406ae8863770cbbabe35338b02d337b62e5d7</checksum>
+          <time file="1148382073" build="1148349638"/>
+          <size package="8548" archive="0"/>
+          <base-version epoch="0" ver="2.8.2" rel="12" md5sum="671ab36db714f598adf9e72b6d5109ba" buildtime="1146626127" sequence_info="rsvg-sharp2-2.8.2-12-187c3d3654730361896bdf456728181a82"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>rsvg-sharp2</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="2.8.2" rel="15.1"/>
+      <checksum type="sha" pkgid="YES">a869260ad8239d663b5cb7615e28794320629298</checksum>
+      <time file="1148381424" build="1148333702"/>
+      <size package="20265" installed="32806" archive="35948"/>
+      <location href="rpm/x86_64/rsvg-sharp2-2.8.2-15.1.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="rsvg-sharp2" epoch="0" ver="2.8.2" rel="15.1" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="rsvg-sharp2"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/rsvg-sharp2-2.8.2-15.1.x86_64.patch.rpm"/>
+          <checksum type="sha">b916f8b8e273a85ba142eb8901265707a5486154</checksum>
+          <time file="1148382074" build="1148333702"/>
+          <size package="19640" archive="32460"/>
+          <base-version epoch="0" ver="2.8.2" rel="12"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/rsvg-sharp2-2.8.2-12_15.1.x86_64.delta.rpm"/>
+          <checksum type="sha">886a4722ccd7762aaba0d7f9cef3a7a56af5b03e</checksum>
+          <time file="1148382074" build="1148333702"/>
+          <size package="8487" archive="0"/>
+          <base-version epoch="0" ver="2.8.2" rel="12" md5sum="e04418a4302bd999385b902567a4fa57" buildtime="1146621725" sequence_info="rsvg-sharp2-2.8.2-12-1afb9a3a047bb5cb96c07e8b8774865982"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>vte-sharp2</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="2.8.2" rel="15.1"/>
+      <checksum type="sha" pkgid="YES">ab3a6685312625b0043dd576dd6384ca41c3f5f7</checksum>
+      <time file="1148381462" build="1148339039"/>
+      <size package="32272" installed="73585" archive="76836"/>
+      <location href="rpm/i586/vte-sharp2-2.8.2-15.1.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="vte-sharp2" epoch="0" ver="2.8.2" rel="15.1" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="vte-sharp2"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/vte-sharp2-2.8.2-15.1.i586.patch.rpm"/>
+          <checksum type="sha">1a184ae9ce3353205bc67a84e379bc6c0da90d81</checksum>
+          <time file="1148382075" build="1148339039"/>
+          <size package="30139" archive="69832"/>
+          <base-version epoch="0" ver="2.8.2" rel="12"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/vte-sharp2-2.8.2-12_15.1.i586.delta.rpm"/>
+          <checksum type="sha">a6874c1f241647a8894ca6d4ec1bfc73816c55b1</checksum>
+          <time file="1148382076" build="1148339039"/>
+          <size package="8684" archive="0"/>
+          <base-version epoch="0" ver="2.8.2" rel="12" md5sum="71343bbaca5387206f2c01f5e359abe4" buildtime="1146622008" sequence_info="vte-sharp2-2.8.2-12-fec2b2b2c733008d809bfec643a34e0192"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>vte-sharp2</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="2.8.2" rel="15.1"/>
+      <checksum type="sha" pkgid="YES">520173416148de0dd5129ac69f30505fd55828af</checksum>
+      <time file="1148381247" build="1148349638"/>
+      <size package="34244" installed="78977" archive="82228"/>
+      <location href="rpm/ppc/vte-sharp2-2.8.2-15.1.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="vte-sharp2" epoch="0" ver="2.8.2" rel="15.1" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="vte-sharp2"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/vte-sharp2-2.8.2-15.1.ppc.patch.rpm"/>
+          <checksum type="sha">64b89fa07bb54423a3101c3503b9ad96c177bf3b</checksum>
+          <time file="1148382076" build="1148349638"/>
+          <size package="30124" archive="69832"/>
+          <base-version epoch="0" ver="2.8.2" rel="12"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/vte-sharp2-2.8.2-12_15.1.ppc.delta.rpm"/>
+          <checksum type="sha">45259697cc002418486ec6ae9fa442dfe31c5d18</checksum>
+          <time file="1148382077" build="1148349638"/>
+          <size package="8670" archive="0"/>
+          <base-version epoch="0" ver="2.8.2" rel="12" md5sum="e12b374bd03c96c7d34890b193875d3c" buildtime="1146626127" sequence_info="vte-sharp2-2.8.2-12-e365ded43c19fc8b46f18bf4148451ec92"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>vte-sharp2</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="2.8.2" rel="15.1"/>
+      <checksum type="sha" pkgid="YES">5eb078cb2446c0ab0e5bfa6785d49be0e166d411</checksum>
+      <time file="1148381424" build="1148333702"/>
+      <size package="32469" installed="75105" archive="78360"/>
+      <location href="rpm/x86_64/vte-sharp2-2.8.2-15.1.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="vte-sharp2" epoch="0" ver="2.8.2" rel="15.1" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="vte-sharp2"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/vte-sharp2-2.8.2-15.1.x86_64.patch.rpm"/>
+          <checksum type="sha">1ab66769fa628f64db64997584970886d1dcfe47</checksum>
+          <time file="1148382077" build="1148333702"/>
+          <size package="30102" archive="69832"/>
+          <base-version epoch="0" ver="2.8.2" rel="12"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/vte-sharp2-2.8.2-12_15.1.x86_64.delta.rpm"/>
+          <checksum type="sha">9dc283fd2b9b980c13a5b277d0e7b3e5399414cc</checksum>
+          <time file="1148382078" build="1148333702"/>
+          <size package="8737" archive="0"/>
+          <base-version epoch="0" ver="2.8.2" rel="12" md5sum="4eb935ace26570ea3b5803d673bce94e" buildtime="1146621725" sequence_info="vte-sharp2-2.8.2-12-cdcfb434dac7a6e7594568e9a5f9962592"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+  </atoms>
+</patch>

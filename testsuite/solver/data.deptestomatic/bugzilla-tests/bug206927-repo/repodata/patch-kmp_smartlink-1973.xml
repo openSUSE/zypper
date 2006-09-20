@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--PATCHINFO id="6e1d2ff8f48c65a0bf6ff2587a09fb2b"!-->
+<patch
+    xmlns="http://novell.com/package/metadata/suse/patch"
+    xmlns:yum="http://linux.duke.edu/metadata/common"
+    xmlns:rpm="http://linux.duke.edu/metadata/rpm"
+    xmlns:suse="http://novell.com/package/metadata/suse/common"
+    patchid="kmp_smartlink-1973"
+    timestamp="1155502393"
+    engine="1.0">
+  <yum:name>kmp_smartlink</yum:name>
+  <summary lang="en">Kernelpackages  Update for 10.1</summary>
+  <summary lang="de">Kernelpackages Update für 10.1</summary>
+  <description lang="en">These packages are dependend on the kernel and need to be
+updated with it.
+</description>
+  <description lang="de">Diese Pakete sind abhängig vom Linux Kernel und müssen
+zeitgleich geupdated werden.
+</description>
+  <yum:version ver="1973" rel="0"/>
+  <rpm:requires>
+    <rpm:entry kind="atom" name="smartlink-softmodem-kmp-bigsmp" epoch="0" ver="2.9.10_2.6.16.21_0.15" rel="44.1" flags="EQ"/>
+    <rpm:entry kind="atom" name="smartlink-softmodem-kmp-default" epoch="0" ver="2.9.10_2.6.16.21_0.15" rel="44.1" flags="EQ"/>
+    <rpm:entry kind="atom" name="smartlink-softmodem-kmp-smp" epoch="0" ver="2.9.10_2.6.16.21_0.15" rel="44.1" flags="EQ"/>
+  </rpm:requires>
+  <category>recommended</category>
+  <atoms>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>smartlink-softmodem-kmp-bigsmp</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="2.9.10_2.6.16.21_0.15" rel="44.1"/>
+      <checksum type="sha" pkgid="YES">20df26289d2be17764244c43ec2b02a40d0179bb</checksum>
+      <time file="1155656773" build="1155502393"/>
+      <size package="17195" installed="35867" archive="36460"/>
+      <location href="rpm/i586/smartlink-softmodem-kmp-bigsmp-2.9.10_2.6.16.21_0.15-44.1.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="smartlink-softmodem-kmp-bigsmp" epoch="0" ver="2.9.10_2.6.16.21_0.15" rel="44.1" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="smartlink-softmodem-kmp-bigsmp"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/smartlink-softmodem-kmp-bigsmp-2.9.10_2.6.16.21_0.15-44.1.i586.patch.rpm"/>
+          <checksum type="sha">4b7d80464dcca9585064f9cb3ffb2f6f76e2c4bf</checksum>
+          <time file="1155657633" build="1155502393"/>
+          <size package="17331" archive="36460"/>
+          <base-version epoch="0" ver="2.9.10_2.6.16.13_4" rel="44"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/smartlink-softmodem-kmp-bigsmp-2.9.10_2.6.16.13_4_2.9.10_2.6.16.21_0.15-44_44.1.i586.delta.rpm"/>
+          <checksum type="sha">3817afc91ee45026f19d68f7bcd8b9ad4011b8b4</checksum>
+          <time file="1155657634" build="1155502393"/>
+          <size package="11018" archive="0"/>
+          <base-version epoch="0" ver="2.9.10_2.6.16.13_4" rel="44" md5sum="21da7e0641dbe65bc50287185a75142d" buildtime="1146662001" sequence_info="smartlink-softmodem-kmp-bigsmp-2.9.10_2.6.16.13_4-44-43b0971b0cddefc0df2c3c045f43088e30"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>smartlink-softmodem-kmp-default</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="2.9.10_2.6.16.21_0.15" rel="44.1"/>
+      <checksum type="sha" pkgid="YES">0f481a9f63faddc3662a1628b890d0f362d00a1f</checksum>
+      <time file="1155656773" build="1155502393"/>
+      <size package="16892" installed="18784" archive="19376"/>
+      <location href="rpm/i586/smartlink-softmodem-kmp-default-2.9.10_2.6.16.21_0.15-44.1.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="smartlink-softmodem-kmp-default" epoch="0" ver="2.9.10_2.6.16.21_0.15" rel="44.1" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="smartlink-softmodem-kmp-default"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/smartlink-softmodem-kmp-default-2.9.10_2.6.16.21_0.15-44.1.i586.patch.rpm"/>
+          <checksum type="sha">270fcaf155deeac13116e5d3bb7130e17c6d7c97</checksum>
+          <time file="1155657635" build="1155502393"/>
+          <size package="17032" archive="19376"/>
+          <base-version epoch="0" ver="2.9.10_2.6.16.13_4" rel="44"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/smartlink-softmodem-kmp-default-2.9.10_2.6.16.13_4_2.9.10_2.6.16.21_0.15-44_44.1.i586.delta.rpm"/>
+          <checksum type="sha">a739743a274cad33a2c84aff84e0267e82f208bf</checksum>
+          <time file="1155657636" build="1155502393"/>
+          <size package="10828" archive="0"/>
+          <base-version epoch="0" ver="2.9.10_2.6.16.13_4" rel="44" md5sum="77a7d8702bf5d2d4c3b9f098c2ed3149" buildtime="1146662001" sequence_info="smartlink-softmodem-kmp-default-2.9.10_2.6.16.13_4-44-ee1517dd36ad1f461c02495c23f20ee330"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>smartlink-softmodem-kmp-smp</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="2.9.10_2.6.16.21_0.15" rel="44.1"/>
+      <checksum type="sha" pkgid="YES">cb2ebbd486c8aea9285c88df6bb5786faa3becda</checksum>
+      <time file="1155656773" build="1155502393"/>
+      <size package="17070" installed="23579" archive="24160"/>
+      <location href="rpm/i586/smartlink-softmodem-kmp-smp-2.9.10_2.6.16.21_0.15-44.1.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="smartlink-softmodem-kmp-smp" epoch="0" ver="2.9.10_2.6.16.21_0.15" rel="44.1" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="smartlink-softmodem-kmp-smp"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/smartlink-softmodem-kmp-smp-2.9.10_2.6.16.21_0.15-44.1.i586.patch.rpm"/>
+          <checksum type="sha">c322c7c397b6df8e2a42fc4f6bf356a3909e03da</checksum>
+          <time file="1155657637" build="1155502393"/>
+          <size package="17206" archive="24160"/>
+          <base-version epoch="0" ver="2.9.10_2.6.16.13_4" rel="44"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/smartlink-softmodem-kmp-smp-2.9.10_2.6.16.13_4_2.9.10_2.6.16.21_0.15-44_44.1.i586.delta.rpm"/>
+          <checksum type="sha">d025c773f8a73ae9685b5688192a0aaf5c43b6d2</checksum>
+          <time file="1155657638" build="1155502393"/>
+          <size package="10939" archive="0"/>
+          <base-version epoch="0" ver="2.9.10_2.6.16.13_4" rel="44" md5sum="d81bf3ff780fc5c008b788639be7819c" buildtime="1146662001" sequence_info="smartlink-softmodem-kmp-smp-2.9.10_2.6.16.13_4-44-d1b441c22997a7c829196c8e8a35657b30"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+  </atoms>
+</patch>

@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--PATCHINFO id="9778104da71399646f95e2478e42ee04"!-->
+<patch
+    xmlns="http://novell.com/package/metadata/suse/patch"
+    xmlns:yum="http://linux.duke.edu/metadata/common"
+    xmlns:rpm="http://linux.duke.edu/metadata/rpm"
+    xmlns:suse="http://novell.com/package/metadata/suse/common"
+    patchid="spamassassin-1904"
+    timestamp="1154003977"
+    engine="1.0">
+  <yum:name>spamassassin</yum:name>
+  <summary lang="en">spamassassin: Securityfix for potential remote root exploit.</summary>
+  <summary lang="de">spamassassin: Sicherheitsupdate gegen potentielles remote Root Exploit.</summary>
+  <description lang="en">This update fixes the following security problem in
+SpamAssassin:
+- CVE-2006-2447: SpamAssassin when running with vpopmail
+  and the paranoid (-P) switch, allows remote attackers to
+  execute arbitrary commands via a crafted message that is
+  not properly handled when invoking spamd with the virtual
+  pop username.
+
+At the same time we upgraded SpamAssassin to version 3.1.3,
+bringing lots of bug fixes and new rules.
+
+Please make sure you verify that it still works with your
+configuration.
+
+Also included is now &quot;sa-update&quot;, a rule update script. For
+this script to work make sure that the perl-IO-ZLib and
+perl-libwww-perl packages are installed.
+</description>
+  <description lang="de">Dieses Update beinhaltet einen Fix für folgendes
+Sicherheitsproblem in SpamAssassin:
+
+- CVE-2006-2447: Wenn SpamAssassin mit vpopmail und der
+  paranoid (-P) Option aufgerufen wurde, erlaubte er
+  entfernten Angreifern, beliebige Kommandos durch eine
+  speziell formatierte Nachricht auszuführen, die nicht
+  korrekt gehandhabt wurde, wenn spamd mit dem virtual pop
+  Benutzernamen aufgerufen wurde.
+
+Dieser Patch enthält ein Upgrade von SpamAssassin auf
+Version 3.1.3,  was weitere Bugfixes und neue Regeln mit
+sich bringt.
+
+Bitte stellen Sie sicher, dass SpamAssassin nach diesem
+Update noch funktioniert.
+
+Weiterhin ist das &quot;sa-update&quot; Script neu, das neue Regeln
+herunterladen kann. Dazu wird die Installation der
+&quot;perl-IO-ZLib&quot; und &quot;perl-libwww-perl&quot; Pakete benötigt.
+</description>
+  <yum:version ver="1904" rel="0"/>
+  <rpm:requires>
+    <rpm:entry kind="atom" name="perl-spamassassin" epoch="0" ver="3.1.3" rel="3.2" flags="EQ"/>
+    <rpm:entry kind="atom" name="spamassassin" epoch="0" ver="3.1.3" rel="3.2" flags="EQ"/>
+  </rpm:requires>
+  <category>security</category>
+  <atoms>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>perl-spamassassin</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="3.1.3" rel="3.2"/>
+      <checksum type="sha" pkgid="YES">2b3eff5cbc08223643c06c5fbb6b22b6371c6385</checksum>
+      <time file="1154012889" build="1154003977"/>
+      <size package="738463" installed="2230906" archive="2271088"/>
+      <location href="rpm/i586/perl-spamassassin-3.1.3-3.2.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="perl-spamassassin" epoch="0" ver="3.1.3" rel="3.2" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="perl-spamassassin"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/perl-spamassassin-3.1.3-3.2.i586.patch.rpm"/>
+          <checksum type="sha">ac8b23465cfc516c01ca0d992235ed3823ce1041</checksum>
+          <time file="1154014249" build="1154003977"/>
+          <size package="326255" archive="1052680"/>
+          <base-version epoch="0" ver="3.1.1" rel="7"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/perl-spamassassin-3.1.1_3.1.3-7_3.2.i586.delta.rpm"/>
+          <checksum type="sha">14691ad8c34039fe6c679ac5843c0d53c66d4781</checksum>
+          <time file="1154014252" build="1154003977"/>
+          <size package="155722" archive="0"/>
+          <base-version epoch="0" ver="3.1.1" rel="7" md5sum="572698fdf70db620b795a808e816c87a" buildtime="1145759798" sequence_info="perl-spamassassin-3.1.1-7-c43dad83118d6afac51546fb532443cc23ea1e1151911c19c1"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>perl-spamassassin</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="3.1.3" rel="3.2"/>
+      <checksum type="sha" pkgid="YES">bd6c5c24b8879587bffd6f34c9881807917df062</checksum>
+      <time file="1154006645" build="1154004757"/>
+      <size package="738736" installed="2230906" archive="2271100"/>
+      <location href="rpm/ppc/perl-spamassassin-3.1.3-3.2.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="perl-spamassassin" epoch="0" ver="3.1.3" rel="3.2" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="perl-spamassassin"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/perl-spamassassin-3.1.3-3.2.ppc.patch.rpm"/>
+          <checksum type="sha">e6582c86febd9a4aebe4d1ca5322c63bfc7bd9e6</checksum>
+          <time file="1154014262" build="1154004757"/>
+          <size package="326395" archive="1052684"/>
+          <base-version epoch="0" ver="3.1.1" rel="7"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/perl-spamassassin-3.1.1_3.1.3-7_3.2.ppc.delta.rpm"/>
+          <checksum type="sha">28663e233bbd5518b14e8c17cf4296d0c04b5314</checksum>
+          <time file="1154014263" build="1154004757"/>
+          <size package="156083" archive="0"/>
+          <base-version epoch="0" ver="3.1.1" rel="7" md5sum="186ee71554af2588313d829f39e9edb4" buildtime="1145780555" sequence_info="perl-spamassassin-3.1.1-7-664b5b9a620370127964b5ff5882154b23ea1e1151911c19c1"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>perl-spamassassin</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="3.1.3" rel="3.2"/>
+      <checksum type="sha" pkgid="YES">b37f445032bc8a7f36075117e5a7089637fb3ae3</checksum>
+      <time file="1154006337" build="1154004349"/>
+      <size package="738601" installed="2230906" archive="2271092"/>
+      <location href="rpm/x86_64/perl-spamassassin-3.1.3-3.2.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="perl-spamassassin" epoch="0" ver="3.1.3" rel="3.2" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="perl-spamassassin"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/perl-spamassassin-3.1.3-3.2.x86_64.patch.rpm"/>
+          <checksum type="sha">8ec6796e88498296e409994cf76407344ec4f4f1</checksum>
+          <time file="1154014266" build="1154004349"/>
+          <size package="326398" archive="1052680"/>
+          <base-version epoch="0" ver="3.1.1" rel="7"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/perl-spamassassin-3.1.1_3.1.3-7_3.2.x86_64.delta.rpm"/>
+          <checksum type="sha">3146e612e20dca1a41da282b37e7e33f2e802fdd</checksum>
+          <time file="1154014268" build="1154004349"/>
+          <size package="155945" archive="0"/>
+          <base-version epoch="0" ver="3.1.1" rel="7" md5sum="94b2d4681c7117a957d39a09919b9be5" buildtime="1145756640" sequence_info="perl-spamassassin-3.1.1-7-c74e53fa1c5bb775b7dbd7dde97a330723ea1e1151911c19c1"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>spamassassin</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="3.1.3" rel="3.2"/>
+      <checksum type="sha" pkgid="YES">edecdf3ec79c55d40addeccb35e20c0daa0f772b</checksum>
+      <time file="1154012889" build="1154003977"/>
+      <size package="134425" installed="281579" archive="284504"/>
+      <location href="rpm/i586/spamassassin-3.1.3-3.2.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="spamassassin" epoch="0" ver="3.1.3" rel="3.2" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="spamassassin"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/spamassassin-3.1.3-3.2.i586.patch.rpm"/>
+          <checksum type="sha">51314ef836c7375fba56cf8934e092421cf40e17</checksum>
+          <time file="1154014269" build="1154003977"/>
+          <size package="126038" archive="258248"/>
+          <base-version epoch="0" ver="3.1.1" rel="7"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/spamassassin-3.1.1_3.1.3-7_3.2.i586.delta.rpm"/>
+          <checksum type="sha">b56f1461ad2739a303f3df176926946539f62fa8</checksum>
+          <time file="1154014270" build="1154003977"/>
+          <size package="73383" archive="0"/>
+          <base-version epoch="0" ver="3.1.1" rel="7" md5sum="85932d012f6549dd06f43ff9b9529090" buildtime="1145759798" sequence_info="spamassassin-3.1.1-7-255a5508429a19ba6a304653bf56a543017470"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>spamassassin</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="3.1.3" rel="3.2"/>
+      <checksum type="sha" pkgid="YES">e18698085d8b195ce5617031aeeba2a0ea62a0cf</checksum>
+      <time file="1154006645" build="1154004757"/>
+      <size package="136671" installed="286591" archive="289516"/>
+      <location href="rpm/ppc/spamassassin-3.1.3-3.2.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="spamassassin" epoch="0" ver="3.1.3" rel="3.2" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="spamassassin"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/spamassassin-3.1.3-3.2.ppc.patch.rpm"/>
+          <checksum type="sha">deb5347fd442e31f5fe17ff80918bf1d531ad867</checksum>
+          <time file="1154014272" build="1154004757"/>
+          <size package="128293" archive="263260"/>
+          <base-version epoch="0" ver="3.1.1" rel="7"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/spamassassin-3.1.1_3.1.3-7_3.2.ppc.delta.rpm"/>
+          <checksum type="sha">2400c06c47984b17c86cee277d765c5ee3f9ecfc</checksum>
+          <time file="1154014272" build="1154004757"/>
+          <size package="72920" archive="0"/>
+          <base-version epoch="0" ver="3.1.1" rel="7" md5sum="412b7e4514ed512a868ec2f2cd2e42cd" buildtime="1145780555" sequence_info="spamassassin-3.1.1-7-6e60852000ee77d3fc43146b867d952d017470"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>spamassassin</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="3.1.3" rel="3.2"/>
+      <checksum type="sha" pkgid="YES">f75381aeedea46897307ca4e3c97c425e336e16a</checksum>
+      <time file="1154006337" build="1154004349"/>
+      <size package="136376" installed="287676" archive="290604"/>
+      <location href="rpm/x86_64/spamassassin-3.1.3-3.2.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="spamassassin" epoch="0" ver="3.1.3" rel="3.2" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="spamassassin"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/spamassassin-3.1.3-3.2.x86_64.patch.rpm"/>
+          <checksum type="sha">ac5dce23fc2fda4ec8a037142b5c3eae1bd025fb</checksum>
+          <time file="1154014275" build="1154004349"/>
+          <size package="128056" archive="264348"/>
+          <base-version epoch="0" ver="3.1.1" rel="7"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/spamassassin-3.1.1_3.1.3-7_3.2.x86_64.delta.rpm"/>
+          <checksum type="sha">e6597d1ba8c47c64a9f0c3ac79bd5899ff5f0e85</checksum>
+          <time file="1154014275" build="1154004349"/>
+          <size package="73041" archive="0"/>
+          <base-version epoch="0" ver="3.1.1" rel="7" md5sum="979058c5442f23b01cc6a41f1c491865" buildtime="1145756640" sequence_info="spamassassin-3.1.1-7-a33b36dc5228ae9a6feb5b54b45722ce017470"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+  </atoms>
+</patch>

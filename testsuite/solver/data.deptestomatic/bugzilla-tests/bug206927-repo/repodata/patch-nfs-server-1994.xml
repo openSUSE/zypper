@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--PATCHINFO id="cf8ae9b9974e5f47be722b58359ef681"!-->
+<patch
+    xmlns="http://novell.com/package/metadata/suse/patch"
+    xmlns:yum="http://linux.duke.edu/metadata/common"
+    xmlns:rpm="http://linux.duke.edu/metadata/rpm"
+    xmlns:suse="http://novell.com/package/metadata/suse/common"
+    patchid="nfs-server-1994"
+    timestamp="1156275392"
+    engine="1.0">
+  <yum:name>nfs-server</yum:name>
+  <summary lang="en">nfs-server: Fixes truncating files on userspace NFS</summary>
+  <summary lang="de">nfs-server: Behebt das Verstümmeln von Dateien mit Userspace NFS</summary>
+  <description lang="en">This update fixes a bug in the userspace NFS server that
+caused file open calls to return an error, truncating the
+files nevertheless.
+</description>
+  <description lang="de">Dieses Update behebt einen Fehler im Userspace NFS Server,
+der dazu führte, dass manche open() Operationen einen
+Fehler zurückliefern, dabei allerdings das File
+verstümmelten.
+</description>
+  <yum:version ver="1994" rel="0"/>
+  <rpm:requires>
+    <rpm:entry kind="atom" name="nfs-server" epoch="0" ver="2.2beta51" rel="225.2" flags="EQ"/>
+  </rpm:requires>
+  <category>recommended</category>
+  <atoms>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>nfs-server</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="2.2beta51" rel="225.2"/>
+      <checksum type="sha" pkgid="YES">1b256aac721412e6b20c29a80ecb0640c7cf999d</checksum>
+      <time file="1156366267" build="1156275392"/>
+      <size package="132046" installed="291341" archive="295624"/>
+      <location href="rpm/i586/nfs-server-2.2beta51-225.2.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="nfs-server" epoch="0" ver="2.2beta51" rel="225.2" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="nfs-server"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/nfs-server-2.2beta51-225.2.i586.patch.rpm"/>
+          <checksum type="sha">8058bc1dd93712b4c55e819329d8dcad8b67b2c1</checksum>
+          <time file="1156366804" build="1156275392"/>
+          <size package="83233" archive="187828"/>
+          <base-version epoch="0" ver="2.2beta51" rel="225"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/nfs-server-2.2beta51-225_225.2.i586.delta.rpm"/>
+          <checksum type="sha">e008960c15c95b466f9585b5b33b60f12d5ffb06</checksum>
+          <time file="1156366805" build="1156275392"/>
+          <size package="52267" archive="0"/>
+          <base-version epoch="0" ver="2.2beta51" rel="225" md5sum="cdebdee2982df84feca85d637b86471b" buildtime="1145762524" sequence_info="nfs-server-2.2beta51-225-ce5cd9cc2fad23df41ab739ac00a9aa402781b10"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>nfs-server</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="2.2beta51" rel="225.2"/>
+      <checksum type="sha" pkgid="YES">0cca5e022c2cab034618df29ba587fdbc6b5edaf</checksum>
+      <time file="1156366236" build="1156275442"/>
+      <size package="139927" installed="348465" archive="352748"/>
+      <location href="rpm/ppc/nfs-server-2.2beta51-225.2.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="nfs-server" epoch="0" ver="2.2beta51" rel="225.2" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="nfs-server"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/nfs-server-2.2beta51-225.2.ppc.patch.rpm"/>
+          <checksum type="sha">1928ddc570bf64ba8c324b92e80a8f3ed76994bb</checksum>
+          <time file="1156366806" build="1156275442"/>
+          <size package="90477" archive="244952"/>
+          <base-version epoch="0" ver="2.2beta51" rel="225"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/nfs-server-2.2beta51-225_225.2.ppc.delta.rpm"/>
+          <checksum type="sha">feb127a9057ff10f9e302cb4ad1e9ee0dedb7d9c</checksum>
+          <time file="1156366807" build="1156275442"/>
+          <size package="51250" archive="0"/>
+          <base-version epoch="0" ver="2.2beta51" rel="225" md5sum="569ee3a54724a9944c063358579b127f" buildtime="1145882117" sequence_info="nfs-server-2.2beta51-225-9b012836ed9280fbd1f524fd74ce09bd02781b10"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>nfs-server</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="2.2beta51" rel="225.2"/>
+      <checksum type="sha" pkgid="YES">bd08cbb79d651fb14538e7f13e50505c8739053b</checksum>
+      <time file="1156366122" build="1156275286"/>
+      <size package="138868" installed="322237" archive="326520"/>
+      <location href="rpm/x86_64/nfs-server-2.2beta51-225.2.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="nfs-server" epoch="0" ver="2.2beta51" rel="225.2" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="nfs-server"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/nfs-server-2.2beta51-225.2.x86_64.patch.rpm"/>
+          <checksum type="sha">a66a350a11ad4e99830655729cd1ef911871cf89</checksum>
+          <time file="1156366808" build="1156275286"/>
+          <size package="90097" archive="218724"/>
+          <base-version epoch="0" ver="2.2beta51" rel="225"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/nfs-server-2.2beta51-225_225.2.x86_64.delta.rpm"/>
+          <checksum type="sha">048b34a1ecf150432e9df08da41fd95dab26fa17</checksum>
+          <time file="1156366809" build="1156275286"/>
+          <size package="55406" archive="0"/>
+          <base-version epoch="0" ver="2.2beta51" rel="225" md5sum="98a00bc91bf4954adff82716afe82edd" buildtime="1145763878" sequence_info="nfs-server-2.2beta51-225-e808fc2506ee0ca6f86450c3b95e03ad02781b10"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+  </atoms>
+</patch>

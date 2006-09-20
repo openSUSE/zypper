@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--PATCHINFO id="2e9ea6de9afd8e0ccc897e963ba93dd0"!-->
+<patch
+    xmlns="http://novell.com/package/metadata/suse/patch"
+    xmlns:yum="http://linux.duke.edu/metadata/common"
+    xmlns:rpm="http://linux.duke.edu/metadata/rpm"
+    xmlns:suse="http://novell.com/package/metadata/suse/common"
+    patchid="sax2-ident-1957"
+    timestamp="1155156606"
+    engine="1.0">
+  <yum:name>sax2-ident</yum:name>
+  <summary lang="en">sax2-ident: Fixed fglrx driver option.</summary>
+  <summary lang="de">sax2-ident: fglrx Treiberoption korrigiert.</summary>
+  <description lang="en">Starting from the driver version 8.25.18 ATI has replaced
+&quot;agplock&quot; option with &quot;locked-userpages&quot;. This update to
+sax2 will fix issues where updating to newer ATI drivers
+will cause X server to no longer load.
+</description>
+  <description lang="de">Seit der Treiberversion 8.25.18 hat ATI die &quot;agplock&quot;
+Option durch &quot;locked-userpages&quot; ersetzt. Dieses Update für
+SaX2 behebt das Problem, bei dem ein Treiberupdate aufgrund
+der nicht mehr gültigen &quot;agplock&quot; Option dazu führt, dass
+der Xserver nicht mehr gestartet werden kann.
+</description>
+  <yum:version ver="1957" rel="0"/>
+  <rpm:requires>
+    <rpm:entry kind="atom" name="sax2-ident" epoch="0" ver="1.7" rel="125.22" flags="EQ"/>
+  </rpm:requires>
+  <category>recommended</category>
+  <atoms>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>sax2-ident</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="1.7" rel="125.22"/>
+      <checksum type="sha" pkgid="YES">a2475cde14a1ef120a49e38d9477c81ba0ddd00a</checksum>
+      <time file="1155207899" build="1155156606"/>
+      <size package="231723" installed="1149764" archive="1159956"/>
+      <location href="rpm/i586/sax2-ident-1.7-125.22.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="sax2-ident" epoch="0" ver="1.7" rel="125.22" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="sax2-ident"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/sax2-ident-1.7-125.22.i586.patch.rpm"/>
+          <checksum type="sha">b8ee64a397cdd138c275e0ebb20e955f8c064450</checksum>
+          <time file="1155210155" build="1155156606"/>
+          <size package="163053" archive="224292"/>
+          <base-version epoch="0" ver="1.7" rel="125"/>
+          <base-version epoch="0" ver="1.7" rel="125.19"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/sax2-ident-1.7-125_125.22.i586.delta.rpm"/>
+          <checksum type="sha">551ee117d7f1bc573708d5d29ba842a925bcadb3</checksum>
+          <time file="1155210156" build="1155156606"/>
+          <size package="151981" archive="0"/>
+          <base-version epoch="0" ver="1.7" rel="125" md5sum="4085d519668d230923e44f77a85262ee" buildtime="1146569021" sequence_info="sax2-ident-1.7-125-a335f994eb04205901065cb82fa0b8b1b810"/>
+        </deltarpm>
+        <deltarpm>
+          <location href="rpm/i586/sax2-ident-1.7-125.19_125.22.i586.delta.rpm"/>
+          <checksum type="sha">4a334ba7b950e04ed70ab192511189c0d63c8961</checksum>
+          <time file="1155210156" build="1155156606"/>
+          <size package="148670" archive="0"/>
+          <base-version epoch="0" ver="1.7" rel="125.19" md5sum="75e1ad4d7b087a4d5ff7864f76cfc2d3" buildtime="1153365222" sequence_info="sax2-ident-1.7-125.19-0e16db8c300556539fa716182ae5cd2eb810"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>sax2-ident</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="1.7" rel="125.22"/>
+      <checksum type="sha" pkgid="YES">c8d16a6454b10bcbfbbeab58b55e075cb5daef0a</checksum>
+      <time file="1155208321" build="1155161504"/>
+      <size package="229344" installed="1080655" archive="1090848"/>
+      <location href="rpm/ppc/sax2-ident-1.7-125.22.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="sax2-ident" epoch="0" ver="1.7" rel="125.22" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="sax2-ident"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/sax2-ident-1.7-125.22.ppc.patch.rpm"/>
+          <checksum type="sha">0a17eb96c32ae17ba1714d90d92dabaa7852e3b7</checksum>
+          <time file="1155210158" build="1155161504"/>
+          <size package="157752" archive="108600"/>
+          <base-version epoch="0" ver="1.7" rel="125"/>
+          <base-version epoch="0" ver="1.7" rel="125.19"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/sax2-ident-1.7-125.19_125.22.ppc.delta.rpm"/>
+          <checksum type="sha">020caa28b79a028dbc16eca3797c4c12946b0643</checksum>
+          <time file="1155210160" build="1155161504"/>
+          <size package="148734" archive="0"/>
+          <base-version epoch="0" ver="1.7" rel="125.19" md5sum="5709057ec2038be9dea0a199c1c2db2c" buildtime="1153369725" sequence_info="sax2-ident-1.7-125.19-3ae9360044f5577145c5459742da6787b810"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>sax2-ident</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="1.7" rel="125.22"/>
+      <checksum type="sha" pkgid="YES">32eddf27f64b582e40e361378914e1c57004fff1</checksum>
+      <time file="1155208226" build="1155158526"/>
+      <size package="231821" installed="1149764" archive="1159956"/>
+      <location href="rpm/x86_64/sax2-ident-1.7-125.22.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="sax2-ident" epoch="0" ver="1.7" rel="125.22" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="sax2-ident"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/sax2-ident-1.7-125.22.x86_64.patch.rpm"/>
+          <checksum type="sha">e200691910933b0d8e79f5e2503e318a2465d0ef</checksum>
+          <time file="1155210162" build="1155158526"/>
+          <size package="163057" archive="224292"/>
+          <base-version epoch="0" ver="1.7" rel="125"/>
+          <base-version epoch="0" ver="1.7" rel="125.19"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/sax2-ident-1.7-125_125.22.x86_64.delta.rpm"/>
+          <checksum type="sha">a59129e7c246a5858b2d1d91f167fc1aba60586e</checksum>
+          <time file="1155210163" build="1155158526"/>
+          <size package="151990" archive="0"/>
+          <base-version epoch="0" ver="1.7" rel="125" md5sum="8a5034e58b24770dab9386a72327d10e" buildtime="1146568517" sequence_info="sax2-ident-1.7-125-91886cc91ed0d0e1a36739b9cdbe8dffb810"/>
+        </deltarpm>
+        <deltarpm>
+          <location href="rpm/x86_64/sax2-ident-1.7-125.19_125.22.x86_64.delta.rpm"/>
+          <checksum type="sha">d63c263d5e3fe4ec853f2745d10aa330bb8608ff</checksum>
+          <time file="1155210163" build="1155158526"/>
+          <size package="148730" archive="0"/>
+          <base-version epoch="0" ver="1.7" rel="125.19" md5sum="fa9bc9976c785b99339167de543c9823" buildtime="1153371578" sequence_info="sax2-ident-1.7-125.19-2f19dc76da8236c8991d24d0eb9c4b42b810"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+  </atoms>
+</patch>

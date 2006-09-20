@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--PATCHINFO id="386565780cb04099a8c88097fe28254e"!-->
+<patch
+    xmlns="http://novell.com/package/metadata/suse/patch"
+    xmlns:yum="http://linux.duke.edu/metadata/common"
+    xmlns:rpm="http://linux.duke.edu/metadata/rpm"
+    xmlns:suse="http://novell.com/package/metadata/suse/common"
+    patchid="ethereal-1932"
+    timestamp="1154907835"
+    engine="1.0">
+  <yum:name>ethereal</yum:name>
+  <summary lang="en">ethereal security update</summary>
+  <summary lang="de">ethereal Sicherheitsupdate</summary>
+  <description lang="en">This update fixes several security related bugs ranging
+from crashes to arbitrary code execution. (CVE-2006-3627,
+CVE-2006-3628, CVE-2006-3629, CVE-2006-3630, CVE-2006-3631,
+CVE-2006-3632)
+</description>
+  <description lang="de">Dieses Update behebt mehrere Sicherheitprobleme, welche von
+Abstürzen bis zum Ausführen von beliebigem Code reichen.
+(CVE-2006-3627, CVE-2006-3628, CVE-2006-3629,
+CVE-2006-3630, CVE-2006-3631, CVE-2006-3632)
+</description>
+  <yum:version ver="1932" rel="0"/>
+  <rpm:requires>
+    <rpm:entry kind="atom" name="ethereal" epoch="0" ver="0.10.14" rel="16.5" flags="EQ"/>
+    <rpm:entry kind="atom" name="ethereal-devel" epoch="0" ver="0.10.14" rel="16.5" flags="EQ"/>
+  </rpm:requires>
+  <category>security</category>
+  <atoms>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>ethereal</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="0.10.14" rel="16.5"/>
+      <checksum type="sha" pkgid="YES">666be5ae131083ed22ed63b3098674624bd39064</checksum>
+      <time file="1154949693" build="1154907835"/>
+      <size package="6839017" installed="22351450" archive="22376816"/>
+      <location href="rpm/i586/ethereal-0.10.14-16.5.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="ethereal" epoch="0" ver="0.10.14" rel="16.5" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="ethereal"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/ethereal-0.10.14-16.5.i586.patch.rpm"/>
+          <checksum type="sha">1db74427e68711902aaf558b21f4ff105bfc0a4b</checksum>
+          <time file="1154951665" build="1154907835"/>
+          <size package="5395586" archive="17467492"/>
+          <base-version epoch="0" ver="0.10.14" rel="16"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/ethereal-0.10.14-16_16.5.i586.delta.rpm"/>
+          <checksum type="sha">81d974192968cd83d497b4c12157c0fbe2fb3c23</checksum>
+          <time file="1154951682" build="1154907835"/>
+          <size package="1127323" archive="0"/>
+          <base-version epoch="0" ver="0.10.14" rel="16" md5sum="d359152a507ba0c933dea8ddfd620b3f" buildtime="1146647308" sequence_info="ethereal-0.10.14-16-f5b6d23f46479cd2e09e1b4fc40a70bec5d1bd10"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>ethereal</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="0.10.14" rel="16.5"/>
+      <checksum type="sha" pkgid="YES">a3c08805803d811ccc296e03452ee7a3c4f35886</checksum>
+      <time file="1154950113" build="1154907671"/>
+      <size package="7450781" installed="28534306" archive="28559672"/>
+      <location href="rpm/ppc/ethereal-0.10.14-16.5.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="ethereal" epoch="0" ver="0.10.14" rel="16.5" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="ethereal"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/ethereal-0.10.14-16.5.ppc.patch.rpm"/>
+          <checksum type="sha">fcc062968a9d570b43571e41f1cff38b39945939</checksum>
+          <time file="1154951695" build="1154907671"/>
+          <size package="5447397" archive="19701664"/>
+          <base-version epoch="0" ver="0.10.14" rel="16"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/ethereal-0.10.14-16_16.5.ppc.delta.rpm"/>
+          <checksum type="sha">733bdcb7bf2aef554cd959bf522d26ec811fc988</checksum>
+          <time file="1154951710" build="1154907671"/>
+          <size package="1468131" archive="0"/>
+          <base-version epoch="0" ver="0.10.14" rel="16" md5sum="e147eb6ff8baa3bb71f7dd4803e77c01" buildtime="1146648323" sequence_info="ethereal-0.10.14-16-30be81d46327af4bfb4673773ac0946bc5d1bd10"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>ethereal</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="0.10.14" rel="16.5"/>
+      <checksum type="sha" pkgid="YES">127dcf8d90270b25070549573c8fdc2d39f52ad9</checksum>
+      <time file="1154949980" build="1154906479"/>
+      <size package="8313706" installed="32444490" archive="32469912"/>
+      <location href="rpm/x86_64/ethereal-0.10.14-16.5.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="ethereal" epoch="0" ver="0.10.14" rel="16.5" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="ethereal"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/ethereal-0.10.14-16.5.x86_64.patch.rpm"/>
+          <checksum type="sha">3a151af6e143974bc6b9ea0b2866d363df3105d3</checksum>
+          <time file="1154951726" build="1154906479"/>
+          <size package="7226372" archive="28565200"/>
+          <base-version epoch="0" ver="0.10.14" rel="16"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/ethereal-0.10.14-16_16.5.x86_64.delta.rpm"/>
+          <checksum type="sha">b946f0c697a7827d2f295c7bc29e9878db7a17bd</checksum>
+          <time file="1154951752" build="1154906479"/>
+          <size package="1786515" archive="0"/>
+          <base-version epoch="0" ver="0.10.14" rel="16" md5sum="39f6a77dd34e2bacdab35b4134c4371b" buildtime="1146647580" sequence_info="ethereal-0.10.14-16-c64d22aa6676c1f26e7098358c093341c5d1bd10"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>ethereal-devel</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="0.10.14" rel="16.5"/>
+      <checksum type="sha" pkgid="YES">40ec8af2b62c6c4f03266954a9dde9d731ee9b64</checksum>
+      <time file="1154949698" build="1154907835"/>
+      <size package="122888" installed="467013" archive="475232"/>
+      <location href="rpm/i586/ethereal-devel-0.10.14-16.5.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="ethereal-devel" epoch="0" ver="0.10.14" rel="16.5" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="ethereal-devel"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/ethereal-devel-0.10.14-16.5.i586.patch.rpm"/>
+          <checksum type="sha">73fb2880814d6a3214d3fe5ea2bbe2f3c35fda1f</checksum>
+          <time file="1154951755" build="1154907835"/>
+          <size package="14662" archive="124"/>
+          <base-version epoch="0" ver="0.10.14" rel="16"/>
+        </patchrpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>ethereal-devel</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="0.10.14" rel="16.5"/>
+      <checksum type="sha" pkgid="YES">7b183b42f63ccad6bc2053c7ef1f8218ef6a159c</checksum>
+      <time file="1154950117" build="1154907671"/>
+      <size package="122813" installed="467010" archive="475228"/>
+      <location href="rpm/ppc/ethereal-devel-0.10.14-16.5.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="ethereal-devel" epoch="0" ver="0.10.14" rel="16.5" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="ethereal-devel"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/ethereal-devel-0.10.14-16.5.ppc.patch.rpm"/>
+          <checksum type="sha">bf38ed4c9f1f5794a29f4985555ce94413c991f3</checksum>
+          <time file="1154951757" build="1154907671"/>
+          <size package="14634" archive="124"/>
+          <base-version epoch="0" ver="0.10.14" rel="16"/>
+        </patchrpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>ethereal-devel</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="0.10.14" rel="16.5"/>
+      <checksum type="sha" pkgid="YES">900162cb0fee6637e5f4964d48328b0f924d6513</checksum>
+      <time file="1154949984" build="1154906479"/>
+      <size package="122738" installed="467015" archive="475236"/>
+      <location href="rpm/x86_64/ethereal-devel-0.10.14-16.5.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="ethereal-devel" epoch="0" ver="0.10.14" rel="16.5" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="ethereal-devel"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/ethereal-devel-0.10.14-16.5.x86_64.patch.rpm"/>
+          <checksum type="sha">c78d6efe4e04a24c1352ee91da22b75ab8f840d5</checksum>
+          <time file="1154951760" build="1154906479"/>
+          <size package="14646" archive="124"/>
+          <base-version epoch="0" ver="0.10.14" rel="16"/>
+        </patchrpm>
+      </pkgfiles>
+    </package>
+  </atoms>
+</patch>

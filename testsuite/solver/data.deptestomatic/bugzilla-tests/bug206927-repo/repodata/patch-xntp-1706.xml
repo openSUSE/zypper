@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--PATCHINFO id="d5f6a48d68774cbcae66d3cd54e94edd"!-->
+<patch
+    xmlns="http://novell.com/package/metadata/suse/patch"
+    xmlns:yum="http://linux.duke.edu/metadata/common"
+    xmlns:rpm="http://linux.duke.edu/metadata/rpm"
+    xmlns:suse="http://novell.com/package/metadata/suse/common"
+    patchid="xntp-1706"
+    timestamp="1151604072"
+    engine="1.0">
+  <yum:name>xntp</yum:name>
+  <summary lang="en">Bugfix in NTP's NetworkManager script</summary>
+  <summary lang="de">Fehlerbehebung im NTP NetworkManager Skript</summary>
+  <description lang="en">This update fixes a bug with NetworkManager that wasn't
+starting the NTP service properly.
+</description>
+  <description lang="de">Dieses Update behebt ein Problem mit dem NetworkManager,
+welcher dazu führte, dass der NTP Dienst nicht
+ordnungsgemäss gestartet wurde.
+</description>
+  <yum:version ver="1706" rel="0"/>
+  <rpm:requires>
+    <rpm:entry kind="atom" name="xntp" epoch="0" ver="4.2.0a" rel="70.4" flags="EQ"/>
+  </rpm:requires>
+  <category>recommended</category>
+  <atoms>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>xntp</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="4.2.0a" rel="70.4"/>
+      <checksum type="sha" pkgid="YES">5a9d2be8594f5863bf1444d9fe2b5c9cfbc64cad</checksum>
+      <time file="1152024320" build="1151604072"/>
+      <size package="409131" installed="944939" archive="951920"/>
+      <location href="rpm/i586/xntp-4.2.0a-70.4.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="xntp" epoch="0" ver="4.2.0a" rel="70.4" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="xntp"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/xntp-4.2.0a-70.4.i586.patch.rpm"/>
+          <checksum type="sha">b82cc69ff4b886206c6ac37354cca7e8615b7316</checksum>
+          <time file="1152025205" build="1151604072"/>
+          <size package="320633" archive="706288"/>
+          <base-version epoch="0" ver="4.2.0a" rel="68"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/xntp-4.2.0a-68_70.4.i586.delta.rpm"/>
+          <checksum type="sha">75fc949c0aad412e0a1f707cbcac73a8120ce159</checksum>
+          <time file="1152025206" build="1151604072"/>
+          <size package="62619" archive="0"/>
+          <base-version epoch="0" ver="4.2.0a" rel="68" md5sum="ecafa50f32db28addc4f477e0625feb0" buildtime="1145762926" sequence_info="xntp-4.2.0a-68-b2c6915ddfde0bc63f5693a0bcddd3a35111e1c117d116"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>xntp</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="4.2.0a" rel="70.4"/>
+      <checksum type="sha" pkgid="YES">9de454072c3808d0976befb138135abbe9c84fe7</checksum>
+      <time file="1152024178" build="1151603799"/>
+      <size package="438988" installed="1101011" archive="1107992"/>
+      <location href="rpm/ppc/xntp-4.2.0a-70.4.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="xntp" epoch="0" ver="4.2.0a" rel="70.4" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="xntp"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/xntp-4.2.0a-70.4.ppc.patch.rpm"/>
+          <checksum type="sha">8256256c6842fb132fd87d236f03c07fc4015cf9</checksum>
+          <time file="1152025209" build="1151603799"/>
+          <size package="333670" archive="810584"/>
+          <base-version epoch="0" ver="4.2.0a" rel="68"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/xntp-4.2.0a-68_70.4.ppc.delta.rpm"/>
+          <checksum type="sha">ee707363f20df90ee12aa99a90d26dddefbb1868</checksum>
+          <time file="1152025210" build="1151603799"/>
+          <size package="62525" archive="0"/>
+          <base-version epoch="0" ver="4.2.0a" rel="68" md5sum="9b3e2363ede85bc1f189a8c25b4a63d1" buildtime="1145804761" sequence_info="xntp-4.2.0a-68-a55e26f47a3c03d3529d02adb667e86f5111e1c117d116"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>xntp</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="4.2.0a" rel="70.4"/>
+      <checksum type="sha" pkgid="YES">564dfbdee09ee1550658d77dd3446840eba2ad86</checksum>
+      <time file="1152024247" build="1151603792"/>
+      <size package="446209" installed="1049583" archive="1056564"/>
+      <location href="rpm/x86_64/xntp-4.2.0a-70.4.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="xntp" epoch="0" ver="4.2.0a" rel="70.4" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="xntp"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/xntp-4.2.0a-70.4.x86_64.patch.rpm"/>
+          <checksum type="sha">a25549fd2be6b11f8a102631587cb50ce8be62b8</checksum>
+          <time file="1152025212" build="1151603792"/>
+          <size package="372135" archive="852500"/>
+          <base-version epoch="0" ver="4.2.0a" rel="68"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/xntp-4.2.0a-68_70.4.x86_64.delta.rpm"/>
+          <checksum type="sha">fc711bce78d4aec007922d688b289aba2dd6dbe5</checksum>
+          <time file="1152025213" build="1151603792"/>
+          <size package="62670" archive="0"/>
+          <base-version epoch="0" ver="4.2.0a" rel="68" md5sum="0c6dd33e8cda09980eb0ea309e92a7b7" buildtime="1145759428" sequence_info="xntp-4.2.0a-68-7e288784ea734b93e0f490048614ed3f5111e1c117d116"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+  </atoms>
+</patch>

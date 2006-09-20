@@ -1,0 +1,582 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--PATCHINFO id="4adc4320d1c3d36ce713a67a469a9df2"!-->
+<patch
+    xmlns="http://novell.com/package/metadata/suse/patch"
+    xmlns:yum="http://linux.duke.edu/metadata/common"
+    xmlns:rpm="http://linux.duke.edu/metadata/rpm"
+    xmlns:suse="http://novell.com/package/metadata/suse/common"
+    patchid="xorg-x11-1864"
+    timestamp="1153351067"
+    engine="1.0">
+  <yum:name>xorg-x11</yum:name>
+  <summary lang="en">xorg-x11: Fixes Xserver crashes with ATI proprietary driver</summary>
+  <summary lang="de">xorg-x11: Behebt Xserver Crashes mit dem proprietären ATI Treiber</summary>
+  <description lang="en">This update fixes Xserver crashes with ATI proprietary
+driver. Additionally it permits the coexistance of Mesa and
+NVIDIA driver.
+</description>
+  <description lang="de">Dieses Update behebt Xserver Crashes mit dem proprietären
+ATI Treiber. Ausserdem ermöglicht es die
+Parallelinstallation von Mesa und NVIDIA Treiber.
+</description>
+  <yum:version ver="1864" rel="0"/>
+  <rpm:requires>
+    <rpm:entry kind="atom" name="xorg-x11" epoch="0" ver="6.9.0" rel="50.17" flags="EQ"/>
+    <rpm:entry kind="atom" name="xorg-x11-Xnest" epoch="0" ver="6.9.0" rel="50.17" flags="EQ"/>
+    <rpm:entry kind="atom" name="xorg-x11-libs" epoch="0" ver="6.9.0" rel="50.17" flags="EQ"/>
+    <rpm:entry kind="atom" name="xorg-x11-libs-32bit" epoch="0" ver="6.9.0" rel="50.17" flags="EQ"/>
+    <rpm:entry kind="atom" name="xorg-x11-libs-64bit" epoch="0" ver="6.9.0" rel="50.17" flags="EQ"/>
+    <rpm:entry kind="atom" name="xorg-x11-server" epoch="0" ver="6.9.0" rel="50.17" flags="EQ"/>
+    <rpm:entry kind="atom" name="xorg-x11-server-glx" epoch="0" ver="6.9.0" rel="50.17" flags="EQ"/>
+  </rpm:requires>
+  <category>recommended</category>
+  <atoms>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>xorg-x11</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="6.9.0" rel="50.17"/>
+      <checksum type="sha" pkgid="YES">2ab9d5470884223386ca450e7ae44ecd74eac301</checksum>
+      <time file="1153414667" build="1153351067"/>
+      <size package="10801932" installed="21043302" archive="21365092"/>
+      <location href="rpm/i586/xorg-x11-6.9.0-50.17.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="xorg-x11" epoch="0" ver="6.9.0" rel="50.17" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="xorg-x11"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/xorg-x11-6.9.0-50.17.i586.patch.rpm"/>
+          <checksum type="sha">1e21c835fc0e116eeba157e266d7361ab78ddc8d</checksum>
+          <time file="1153414921" build="1153351067"/>
+          <size package="2400886" archive="5264412"/>
+          <base-version epoch="0" ver="6.9.0" rel="48"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/xorg-x11-6.9.0-48_50.17.i586.delta.rpm"/>
+          <checksum type="sha">07a9d346b26a7613a5eaf22f4ddfbe07318e37ff</checksum>
+          <time file="1153414932" build="1153351067"/>
+          <size package="541037" archive="0"/>
+          <base-version epoch="0" ver="6.9.0" rel="48" md5sum="88a69951d14689afef851151e946418c" buildtime="1146555020" sequence_info="xorg-x11-6.9.0-48-90a8ff5cca5fe7a32d5199edcbff103d0311111123341221111e1241212e9f1113ff39451811e51119964e94"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>xorg-x11</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="6.9.0" rel="50.17"/>
+      <checksum type="sha" pkgid="YES">529d2a7d040e6e13f4c650fc27eefbc5da3fb3a8</checksum>
+      <time file="1153410866" build="1153354022"/>
+      <size package="11133528" installed="22399835" archive="22720656"/>
+      <location href="rpm/ppc/xorg-x11-6.9.0-50.17.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="xorg-x11" epoch="0" ver="6.9.0" rel="50.17" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="xorg-x11"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/xorg-x11-6.9.0-50.17.ppc.patch.rpm"/>
+          <checksum type="sha">a3aa3eef9713b43bb941ef6b823c3f19237b042a</checksum>
+          <time file="1153414948" build="1153354022"/>
+          <size package="2524910" archive="5918272"/>
+          <base-version epoch="0" ver="6.9.0" rel="48"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/xorg-x11-6.9.0-48_50.17.ppc.delta.rpm"/>
+          <checksum type="sha">bbfc57c585d3c1d9fdb40639e962d4f6e2716fbe</checksum>
+          <time file="1153414960" build="1153354022"/>
+          <size package="502729" archive="0"/>
+          <base-version epoch="0" ver="6.9.0" rel="48" md5sum="56b090eba57b9bcb24e11a943b0b125f" buildtime="1146553998" sequence_info="xorg-x11-6.9.0-48-d06819b15cfd083030abbdf976780dad0311111123341221111e1241212e9f11138f39451811e51119964e94"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>xorg-x11</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="6.9.0" rel="50.17"/>
+      <checksum type="sha" pkgid="YES">8f380858ee0a412abf7cc6da7310c839247d0679</checksum>
+      <time file="1153410836" build="1153351324"/>
+      <size package="11204290" installed="22622524" archive="22944328"/>
+      <location href="rpm/x86_64/xorg-x11-6.9.0-50.17.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="xorg-x11" epoch="0" ver="6.9.0" rel="50.17" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="xorg-x11"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/xorg-x11-6.9.0-50.17.x86_64.patch.rpm"/>
+          <checksum type="sha">ddcc2294e52a07d9af3496188b15739db0080a39</checksum>
+          <time file="1153414975" build="1153351324"/>
+          <size package="2996474" archive="7177664"/>
+          <base-version epoch="0" ver="6.9.0" rel="48"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/xorg-x11-6.9.0-48_50.17.x86_64.delta.rpm"/>
+          <checksum type="sha">bf6dd9585e50e4c6d41a34bfd2634ca33ecbabb1</checksum>
+          <time file="1153414986" build="1153351324"/>
+          <size package="536460" archive="0"/>
+          <base-version epoch="0" ver="6.9.0" rel="48" md5sum="9c8c873a1deabd01c325279057e4668c" buildtime="1146555647" sequence_info="xorg-x11-6.9.0-48-ee3657dc59f296365089c3f395b711f80311111123341221111e1241212e9f1113ff39451811e51119964e94"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>xorg-x11-Xnest</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="6.9.0" rel="50.17"/>
+      <checksum type="sha" pkgid="YES">f61c0892c7c8bbc06ad4a050c3869498019ae28f</checksum>
+      <time file="1153414673" build="1153351067"/>
+      <size package="1578667" installed="3854884" archive="3855140"/>
+      <location href="rpm/i586/xorg-x11-Xnest-6.9.0-50.17.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="xorg-x11-Xnest" epoch="0" ver="6.9.0" rel="50.17" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="xorg-x11-Xnest"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/xorg-x11-Xnest-6.9.0-50.17.i586.patch.rpm"/>
+          <checksum type="sha">b2dd8398976a51b557c7a59f47468e1f5b47ff09</checksum>
+          <time file="1153414993" build="1153351067"/>
+          <size package="1578775" archive="3855140"/>
+          <base-version epoch="0" ver="6.9.0" rel="48"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/xorg-x11-Xnest-6.9.0-48_50.17.i586.delta.rpm"/>
+          <checksum type="sha">a1a5cc8f45a5688870d4740aec759cfa896bb1eb</checksum>
+          <time file="1153414995" build="1153351067"/>
+          <size package="267765" archive="0"/>
+          <base-version epoch="0" ver="6.9.0" rel="48" md5sum="7b5ccb3ee966ac77b5f7fc31272d2eb0" buildtime="1146555020" sequence_info="xorg-x11-Xnest-6.9.0-48-7a01eef12a68216b68cc24e381b805b710"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>xorg-x11-Xnest</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="6.9.0" rel="50.17"/>
+      <checksum type="sha" pkgid="YES">850d7e32c13c72c05e927432ad4233d9d4087502</checksum>
+      <time file="1153410872" build="1153354022"/>
+      <size package="1660306" installed="4464660" archive="4464916"/>
+      <location href="rpm/ppc/xorg-x11-Xnest-6.9.0-50.17.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="xorg-x11-Xnest" epoch="0" ver="6.9.0" rel="50.17" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="xorg-x11-Xnest"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/xorg-x11-Xnest-6.9.0-50.17.ppc.patch.rpm"/>
+          <checksum type="sha">5d435630cb0ba106082bb0b4d33b7cef914f9716</checksum>
+          <time file="1153415001" build="1153354022"/>
+          <size package="1660412" archive="4464916"/>
+          <base-version epoch="0" ver="6.9.0" rel="48"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/xorg-x11-Xnest-6.9.0-48_50.17.ppc.delta.rpm"/>
+          <checksum type="sha">015ae649e29d0743f6f9185ae5ea213beb422e05</checksum>
+          <time file="1153415004" build="1153354022"/>
+          <size package="275802" archive="0"/>
+          <base-version epoch="0" ver="6.9.0" rel="48" md5sum="e5f2e24c9e9694724423f5ebfead55c1" buildtime="1146553998" sequence_info="xorg-x11-Xnest-6.9.0-48-81d47a2c8d9921b31a22bce36349554f10"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>xorg-x11-Xnest</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="6.9.0" rel="50.17"/>
+      <checksum type="sha" pkgid="YES">baca9ea54f46a859b4da2a130fb233a5f7c35835</checksum>
+      <time file="1153410836" build="1153351324"/>
+      <size package="1754274" installed="4213032" archive="4213288"/>
+      <location href="rpm/x86_64/xorg-x11-Xnest-6.9.0-50.17.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="xorg-x11-Xnest" epoch="0" ver="6.9.0" rel="50.17" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="xorg-x11-Xnest"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/xorg-x11-Xnest-6.9.0-50.17.x86_64.patch.rpm"/>
+          <checksum type="sha">1aa7261df6bf11c656646c7b017ffd3ad5540a39</checksum>
+          <time file="1153415010" build="1153351324"/>
+          <size package="1754378" archive="4213288"/>
+          <base-version epoch="0" ver="6.9.0" rel="48"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/xorg-x11-Xnest-6.9.0-48_50.17.x86_64.delta.rpm"/>
+          <checksum type="sha">d3bb7a5ed5188f5edb2aaf8ed1e99d503b69409e</checksum>
+          <time file="1153415012" build="1153351324"/>
+          <size package="284540" archive="0"/>
+          <base-version epoch="0" ver="6.9.0" rel="48" md5sum="dc668ed07ae5a9dfb82393e0c3bb69ec" buildtime="1146555647" sequence_info="xorg-x11-Xnest-6.9.0-48-f6834cd495f5039f06387ee518d80ea510"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>xorg-x11-libs</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="6.9.0" rel="50.17"/>
+      <checksum type="sha" pkgid="YES">b1284a09b3e074d6e30a289db5108415a18005d3</checksum>
+      <time file="1153414688" build="1153351067"/>
+      <size package="2295775" installed="8983665" archive="9032680"/>
+      <location href="rpm/i586/xorg-x11-libs-6.9.0-50.17.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="xorg-x11-libs" epoch="0" ver="6.9.0" rel="50.17" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="xorg-x11-libs"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/xorg-x11-libs-6.9.0-50.17.i586.patch.rpm"/>
+          <checksum type="sha">a66ec7370c1c9efca91a225b9c25b38c71c742e4</checksum>
+          <time file="1153415018" build="1153351067"/>
+          <size package="1462665" archive="2381288"/>
+          <base-version epoch="0" ver="6.9.0" rel="48"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/xorg-x11-libs-6.9.0-48_50.17.i586.delta.rpm"/>
+          <checksum type="sha">28f1a4baeb65e1b375b4f624e304fca663505cbf</checksum>
+          <time file="1153415021" build="1153351067"/>
+          <size package="269265" archive="0"/>
+          <base-version epoch="0" ver="6.9.0" rel="48" md5sum="00dc7332fdd2dcac438dff17e6a7f6f0" buildtime="1146555020" sequence_info="xorg-x11-libs-6.9.0-48-fca740174d14030cb0bb67d1482382f7bf40"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>xorg-x11-libs</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="6.9.0" rel="50.17"/>
+      <checksum type="sha" pkgid="YES">c41508beef26a204e6aa62632d309450001f615b</checksum>
+      <time file="1153410886" build="1153354022"/>
+      <size package="2504350" installed="9930641" archive="9978720"/>
+      <location href="rpm/ppc/xorg-x11-libs-6.9.0-50.17.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="xorg-x11-libs" epoch="0" ver="6.9.0" rel="50.17" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="xorg-x11-libs"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/xorg-x11-libs-6.9.0-50.17.ppc.patch.rpm"/>
+          <checksum type="sha">ef375a31794f97c308d8e54801c7bfb154852766</checksum>
+          <time file="1153415027" build="1153354022"/>
+          <size package="1429698" archive="2761672"/>
+          <base-version epoch="0" ver="6.9.0" rel="48"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/xorg-x11-libs-6.9.0-48_50.17.ppc.delta.rpm"/>
+          <checksum type="sha">85236984e3b807f70b03aeec3c8ee97b6d87650e</checksum>
+          <time file="1153415032" build="1153354022"/>
+          <size package="264900" archive="0"/>
+          <base-version epoch="0" ver="6.9.0" rel="48" md5sum="c6e929623569d9fbde8305cbb2f34943" buildtime="1146553998" sequence_info="xorg-x11-libs-6.9.0-48-bf977f63d5c0dda0a242cea1fc72e0c4de40"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>xorg-x11-libs</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="6.9.0" rel="50.17"/>
+      <checksum type="sha" pkgid="YES">9f3b6e0ab86247122594f12e4679ec10ef51ddae</checksum>
+      <time file="1153410853" build="1153351324"/>
+      <size package="2553487" installed="9757481" archive="9806684"/>
+      <location href="rpm/x86_64/xorg-x11-libs-6.9.0-50.17.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="xorg-x11-libs" epoch="0" ver="6.9.0" rel="50.17" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="xorg-x11-libs"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/xorg-x11-libs-6.9.0-50.17.x86_64.patch.rpm"/>
+          <checksum type="sha">aef2a6dddddfcfca9f9fc6bfd79fa493278eb188</checksum>
+          <time file="1153415037" build="1153351324"/>
+          <size package="1473995" archive="2554640"/>
+          <base-version epoch="0" ver="6.9.0" rel="48"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/xorg-x11-libs-6.9.0-48_50.17.x86_64.delta.rpm"/>
+          <checksum type="sha">55f29a91f69e1486a8e9e584b647ece1d3257e15</checksum>
+          <time file="1153415041" build="1153351324"/>
+          <size package="281084" archive="0"/>
+          <base-version epoch="0" ver="6.9.0" rel="48" md5sum="740564f06efdab251819cedf024b989d" buildtime="1146555647" sequence_info="xorg-x11-libs-6.9.0-48-6e63f3174d7ff37e8dfc44e355ee3b66bf40"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>xorg-x11-libs-32bit</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="6.9.0" rel="50.17"/>
+      <checksum type="sha" pkgid="YES">b6b85f5f8ac73fa097a6cbaaaef4e267cf30f2ee</checksum>
+      <time file="1153414688" build="1153351291"/>
+      <size package="2033402" installed="4194632" archive="4210356"/>
+      <location href="rpm/x86_64/xorg-x11-libs-32bit-6.9.0-50.17.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="xorg-x11-libs-32bit" epoch="0" ver="6.9.0" rel="50.17" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="xorg-x11-libs-32bit"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/xorg-x11-libs-32bit-6.9.0-50.17.x86_64.patch.rpm"/>
+          <checksum type="sha">7e3becf736b303bb045ffb6ec6a6bb7d7ffab5b8</checksum>
+          <time file="1153415046" build="1153351291"/>
+          <size package="1431806" archive="2349812"/>
+          <base-version epoch="0" ver="6.9.0" rel="48"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/xorg-x11-libs-32bit-6.9.0-48_50.17.x86_64.delta.rpm"/>
+          <checksum type="sha">a5b1b988390e3b232bdaa213571cb0ac085aa457</checksum>
+          <time file="1153415048" build="1153351291"/>
+          <size package="249015" archive="0"/>
+          <base-version epoch="0" ver="6.9.0" rel="48" md5sum="c37154c221e9abd1915e3f00a13629a1" buildtime="1146555330" sequence_info="xorg-x11-libs-32bit-6.9.0-48-a6baf8bda811b3e1b7e50483a75e8370fc10"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>xorg-x11-libs-64bit</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="6.9.0" rel="50.17"/>
+      <checksum type="sha" pkgid="YES">836b38224ee18bc30d12a338c17e67f8592a1cfe</checksum>
+      <time file="1153411041" build="1153353586"/>
+      <size package="2199261" installed="6262832" archive="6277492"/>
+      <location href="rpm/ppc/xorg-x11-libs-64bit-6.9.0-50.17.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="xorg-x11-libs-64bit" epoch="0" ver="6.9.0" rel="50.17" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="xorg-x11-libs-64bit"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/xorg-x11-libs-64bit-6.9.0-50.17.ppc.patch.rpm"/>
+          <checksum type="sha">64c0bc2eacad4a7564919f557f638cf05f4ebb28</checksum>
+          <time file="1153415054" build="1153353586"/>
+          <size package="1415071" archive="3273292"/>
+          <base-version epoch="0" ver="6.9.0" rel="48"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/xorg-x11-libs-64bit-6.9.0-48_50.17.ppc.delta.rpm"/>
+          <checksum type="sha">9856f81f0cbd2cbb772557165435de4a623b17fe</checksum>
+          <time file="1153415057" build="1153353586"/>
+          <size package="274964" archive="0"/>
+          <base-version epoch="0" ver="6.9.0" rel="48" md5sum="6e22e1c86c5bb844fd5930c62070897d" buildtime="1146551789" sequence_info="xorg-x11-libs-64bit-6.9.0-48-96c0fdc711f654cd946ae12aaa2779dcfb10"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>xorg-x11-server</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="6.9.0" rel="50.17"/>
+      <checksum type="sha" pkgid="YES">24d1214364ee1e96587e1c73150dc4a6feb7a978</checksum>
+      <time file="1153414690" build="1153351067"/>
+      <size package="3228885" installed="8056112" archive="8074676"/>
+      <location href="rpm/i586/xorg-x11-server-6.9.0-50.17.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="xorg-x11-server" epoch="0" ver="6.9.0" rel="50.17" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="xorg-x11-server"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/xorg-x11-server-6.9.0-50.17.i586.patch.rpm"/>
+          <checksum type="sha">58c5666447fe62bc2115a70ba0f6f7d81ae18d12</checksum>
+          <time file="1153415064" build="1153351067"/>
+          <size package="1142416" archive="2191720"/>
+          <base-version epoch="0" ver="6.9.0" rel="48"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/xorg-x11-server-6.9.0-48_50.17.i586.delta.rpm"/>
+          <checksum type="sha">8fd6a7bab630c01ac74b274510de1d7a7fafded2</checksum>
+          <time file="1153415068" build="1153351067"/>
+          <size package="282795" archive="0"/>
+          <base-version epoch="0" ver="6.9.0" rel="48" md5sum="a08ab301ea0954cbea355625378583b1" buildtime="1146555020" sequence_info="xorg-x11-server-6.9.0-48-d8a7801c7c5e9ceb4225a6880b025c009f10"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>xorg-x11-server</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="6.9.0" rel="50.17"/>
+      <checksum type="sha" pkgid="YES">5b1c10c1737b68123a87e6f381373162f87c3f65</checksum>
+      <time file="1153410887" build="1153354022"/>
+      <size package="2954659" installed="8088760" archive="8104196"/>
+      <location href="rpm/ppc/xorg-x11-server-6.9.0-50.17.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="xorg-x11-server" epoch="0" ver="6.9.0" rel="50.17" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="xorg-x11-server"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/xorg-x11-server-6.9.0-50.17.ppc.patch.rpm"/>
+          <checksum type="sha">befe5d658c340ce7296016bfc0b9633c88814e91</checksum>
+          <time file="1153415073" build="1153354022"/>
+          <size package="1170426" archive="2472480"/>
+          <base-version epoch="0" ver="6.9.0" rel="48"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/xorg-x11-server-6.9.0-48_50.17.ppc.delta.rpm"/>
+          <checksum type="sha">d2caa6dce9fb33fddf78a6973bec6b6bc2b5bdd4</checksum>
+          <time file="1153415077" build="1153354022"/>
+          <size package="271634" archive="0"/>
+          <base-version epoch="0" ver="6.9.0" rel="48" md5sum="092fb83509c2df7559f9bccd30a3f5ce" buildtime="1146553998" sequence_info="xorg-x11-server-6.9.0-48-5cde9a1b5374dd86aa9df71a33b4bd04dc10"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>xorg-x11-server</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="6.9.0" rel="50.17"/>
+      <checksum type="sha" pkgid="YES">227754d318213a693dc5adc1d080c20acdb7df46</checksum>
+      <time file="1153410854" build="1153351324"/>
+      <size package="3521570" installed="9803184" archive="9821700"/>
+      <location href="rpm/x86_64/xorg-x11-server-6.9.0-50.17.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="xorg-x11-server" epoch="0" ver="6.9.0" rel="50.17" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="xorg-x11-server"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/xorg-x11-server-6.9.0-50.17.x86_64.patch.rpm"/>
+          <checksum type="sha">2f33d8ecd7fefb14730a5e87f761bff5aa6fc1d5</checksum>
+          <time file="1153415083" build="1153351324"/>
+          <size package="1401688" archive="2800512"/>
+          <base-version epoch="0" ver="6.9.0" rel="48"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/xorg-x11-server-6.9.0-48_50.17.x86_64.delta.rpm"/>
+          <checksum type="sha">9fcf1a0367345c7840a312bc077d9c208c9a0e81</checksum>
+          <time file="1153415087" build="1153351324"/>
+          <size package="290155" archive="0"/>
+          <base-version epoch="0" ver="6.9.0" rel="48" md5sum="c8933f5a64baa92957a783cf4a188ba1" buildtime="1146555647" sequence_info="xorg-x11-server-6.9.0-48-d2e8def8b785018e2e488045d171bbd0fe10"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>xorg-x11-server-glx</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="6.9.0" rel="50.17"/>
+      <checksum type="sha" pkgid="YES">3e60b1ce37418f7daecc7168e27d45bca5ad287c</checksum>
+      <time file="1153414690" build="1153351067"/>
+      <size package="1068718" installed="2696608" archive="2697048"/>
+      <location href="rpm/i586/xorg-x11-server-glx-6.9.0-50.17.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="xorg-x11-server-glx" epoch="0" ver="6.9.0" rel="50.17" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="xorg-x11-server-glx"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/xorg-x11-server-glx-6.9.0-50.17.i586.patch.rpm"/>
+          <checksum type="sha">b2a62d0e485c27e9b2b2f187cebd110517d812ed</checksum>
+          <time file="1153415091" build="1153351067"/>
+          <size package="218876" archive="124"/>
+          <base-version epoch="0" ver="6.9.0" rel="48"/>
+        </patchrpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>xorg-x11-server-glx</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="6.9.0" rel="50.17"/>
+      <checksum type="sha" pkgid="YES">3c3349b5074d3755ae4e107f291c1d041d0a6435</checksum>
+      <time file="1153410887" build="1153354022"/>
+      <size package="1136472" installed="3198552" archive="3198992"/>
+      <location href="rpm/ppc/xorg-x11-server-glx-6.9.0-50.17.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="xorg-x11-server-glx" epoch="0" ver="6.9.0" rel="50.17" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="xorg-x11-server-glx"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/xorg-x11-server-glx-6.9.0-50.17.ppc.patch.rpm"/>
+          <checksum type="sha">5a16277be7c89199026dc997e60b6a32bebf920f</checksum>
+          <time file="1153415096" build="1153354022"/>
+          <size package="218844" archive="124"/>
+          <base-version epoch="0" ver="6.9.0" rel="48"/>
+        </patchrpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>xorg-x11-server-glx</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="6.9.0" rel="50.17"/>
+      <checksum type="sha" pkgid="YES">dd83e22a2f0c1834879f8c4281024b4a71ce0854</checksum>
+      <time file="1153410854" build="1153351324"/>
+      <size package="1161931" installed="3034648" archive="3035092"/>
+      <location href="rpm/x86_64/xorg-x11-server-glx-6.9.0-50.17.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="xorg-x11-server-glx" epoch="0" ver="6.9.0" rel="50.17" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="xorg-x11-server-glx"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/xorg-x11-server-glx-6.9.0-50.17.x86_64.patch.rpm"/>
+          <checksum type="sha">df9f33323a08b71101d23d57b54b9f05907c44a4</checksum>
+          <time file="1153415102" build="1153351324"/>
+          <size package="1048622" archive="2460380"/>
+          <base-version epoch="0" ver="6.9.0" rel="48"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/xorg-x11-server-glx-6.9.0-48_50.17.x86_64.delta.rpm"/>
+          <checksum type="sha">815d61b77ea31769e78e6999a5caf2448ed4c081</checksum>
+          <time file="1153415104" build="1153351324"/>
+          <size package="233978" archive="0"/>
+          <base-version epoch="0" ver="6.9.0" rel="48" md5sum="41172792a35d60dadf8576dc3383fd89" buildtime="1146555647" sequence_info="xorg-x11-server-glx-6.9.0-48-7894f4eb37970b0b6183dc4796ea365120"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+  </atoms>
+</patch>

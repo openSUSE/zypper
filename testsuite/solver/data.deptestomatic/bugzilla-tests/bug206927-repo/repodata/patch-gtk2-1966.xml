@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--PATCHINFO id="9ce1628b525cced0d908f4eb5cca5d21"!-->
+<patch
+    xmlns="http://novell.com/package/metadata/suse/patch"
+    xmlns:yum="http://linux.duke.edu/metadata/common"
+    xmlns:rpm="http://linux.duke.edu/metadata/rpm"
+    xmlns:suse="http://novell.com/package/metadata/suse/common"
+    patchid="gtk2-1966"
+    timestamp="1155500211"
+    engine="1.0">
+  <yum:name>gtk2</yum:name>
+  <summary lang="en">gtk2: fix File/Save dialog, which was incorrectly discarding the file name</summary>
+  <summary lang="de">gtk2: behebt den File/Save dialog, der irrtümlich den Dateinamen verwarf.</summary>
+  <description lang="en">The File/Save dialog (GtkFileChoser in SAVE mode) was
+discarding the suggested file name provided by the calling
+program.  This was especially noticeable in Firefox when
+saving links.
+</description>
+  <description lang="de">Der File/Save dialog (GtkFileChoser im SAVE modus) verwarf
+den vom aufrufenden Programm vorgeschlagenen Dateinamen.
+Dies war insbesondere beim Speichern von Links in Firefox
+auffällig.
+</description>
+  <yum:version ver="1966" rel="0"/>
+  <rpm:requires>
+    <rpm:entry kind="atom" name="gtk2" epoch="0" ver="2.8.10" rel="39.13" flags="EQ"/>
+    <rpm:entry kind="atom" name="gtk2-32bit" epoch="0" ver="2.8.10" rel="39.13" flags="EQ"/>
+    <rpm:entry kind="atom" name="gtk2-64bit" epoch="0" ver="2.8.10" rel="39.13" flags="EQ"/>
+    <rpm:entry kind="atom" name="gtk2-devel" epoch="0" ver="2.8.10" rel="39.13" flags="EQ"/>
+    <rpm:entry kind="atom" name="gtk2-devel-64bit" epoch="0" ver="2.8.10" rel="39.13" flags="EQ"/>
+  </rpm:requires>
+  <category>recommended</category>
+  <atoms>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>gtk2</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="2.8.10" rel="39.13"/>
+      <checksum type="sha" pkgid="YES">ca0b5df2b4d2a9c7f24188897d4996cee80337ae</checksum>
+      <time file="1155569742" build="1155500211"/>
+      <size package="3729510" installed="14502622" archive="14540256"/>
+      <location href="rpm/i586/gtk2-2.8.10-39.13.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="gtk2" epoch="0" ver="2.8.10" rel="39.13" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="gtk2"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/gtk2-2.8.10-39.13.i586.patch.rpm"/>
+          <checksum type="sha">a6bb1941f1a5cc9eca0ea72e8cd5801c80b2ffa0</checksum>
+          <time file="1155573394" build="1155500211"/>
+          <size package="2118573" archive="6950116"/>
+          <base-version epoch="0" ver="2.8.10" rel="36"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/gtk2-2.8.10-36_39.13.i586.delta.rpm"/>
+          <checksum type="sha">b2ee45d6bfba7d98b587fa72090492ea3b6b4da9</checksum>
+          <time file="1155573400" build="1155500211"/>
+          <size package="290152" archive="0"/>
+          <base-version epoch="0" ver="2.8.10" rel="36" md5sum="ca8c9b7603ac9a0a97a53f09adcc44ce" buildtime="1146561852" sequence_info="gtk2-2.8.10-36-dc730dbcd9e4d176815617287beb2a4612bb3510"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>gtk2</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="2.8.10" rel="39.13"/>
+      <checksum type="sha" pkgid="YES">cd748fcf701e8d89de2917baacb23cf502162a59</checksum>
+      <time file="1155569743" build="1155513138"/>
+      <size package="3890049" installed="15627030" archive="15664664"/>
+      <location href="rpm/ppc/gtk2-2.8.10-39.13.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="gtk2" epoch="0" ver="2.8.10" rel="39.13" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="gtk2"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/gtk2-2.8.10-39.13.ppc.patch.rpm"/>
+          <checksum type="sha">246cdd6310bd599037bcfedbc0ef68aa370ceb01</checksum>
+          <time file="1155573408" build="1155513138"/>
+          <size package="2250526" archive="8034124"/>
+          <base-version epoch="0" ver="2.8.10" rel="36"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/gtk2-2.8.10-36_39.13.ppc.delta.rpm"/>
+          <checksum type="sha">9be05e4ded7391668614a0345562911f65651a8a</checksum>
+          <time file="1155573416" build="1155513138"/>
+          <size package="305227" archive="0"/>
+          <base-version epoch="0" ver="2.8.10" rel="36" md5sum="f86076f8e5acd1d5c0f055c7bae02e98" buildtime="1146568053" sequence_info="gtk2-2.8.10-36-290752c41d7340b41f89460015c7c87412bb3510"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>gtk2</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="2.8.10" rel="39.13"/>
+      <checksum type="sha" pkgid="YES">59313db3bb2577e5e4c7e06d1aba7ecefecf6363</checksum>
+      <time file="1155569705" build="1155493726"/>
+      <size package="3907333" installed="14955544" archive="14993432"/>
+      <location href="rpm/x86_64/gtk2-2.8.10-39.13.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="gtk2" epoch="0" ver="2.8.10" rel="39.13" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="gtk2"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/gtk2-2.8.10-39.13.x86_64.patch.rpm"/>
+          <checksum type="sha">074ba522f72fa12913ffa0df10963d74932e1f1c</checksum>
+          <time file="1155573427" build="1155493726"/>
+          <size package="2303664" archive="7387268"/>
+          <base-version epoch="0" ver="2.8.10" rel="36"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/gtk2-2.8.10-36_39.13.x86_64.delta.rpm"/>
+          <checksum type="sha">cb724c8434a5d04ac5d7b2863ce0569bd0d606df</checksum>
+          <time file="1155573436" build="1155493726"/>
+          <size package="371131" archive="0"/>
+          <base-version epoch="0" ver="2.8.10" rel="36" md5sum="2e5911bb3ad848a19c6b3ca90beab7e3" buildtime="1146562200" sequence_info="gtk2-2.8.10-36-ea5127ac3ab1a63469b16bb077475fb312bb3610"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>gtk2-32bit</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="2.8.10" rel="39.13"/>
+      <checksum type="sha" pkgid="YES">daa00d36df372b88e6a6a28385c647a51c953fbc</checksum>
+      <time file="1155569745" build="1155500328"/>
+      <size package="1494581" installed="4116768" archive="4123884"/>
+      <location href="rpm/x86_64/gtk2-32bit-2.8.10-39.13.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="gtk2-32bit" epoch="0" ver="2.8.10" rel="39.13" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="gtk2-32bit"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/gtk2-32bit-2.8.10-39.13.x86_64.patch.rpm"/>
+          <checksum type="sha">0ca859d999c8ce1074b4380b62897132f7e0f43c</checksum>
+          <time file="1155573444" build="1155500328"/>
+          <size package="1464883" archive="4021604"/>
+          <base-version epoch="0" ver="2.8.10" rel="36"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/gtk2-32bit-2.8.10-36_39.13.x86_64.delta.rpm"/>
+          <checksum type="sha">110522fa9e8479638fdbdcf93a7277a47757664f</checksum>
+          <time file="1155573448" build="1155500328"/>
+          <size package="123107" archive="0"/>
+          <base-version epoch="0" ver="2.8.10" rel="36" md5sum="84c6c8dc8893fbc609d0611e782810b5" buildtime="1146561962" sequence_info="gtk2-32bit-2.8.10-36-346cfc5a6e4618cbab9dc827846aa0deb5"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>gtk2-64bit</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="2.8.10" rel="39.13"/>
+      <checksum type="sha" pkgid="YES">7f4bb47d1ff7012cc593e1f0b7aaa46dd83f0fa3</checksum>
+      <time file="1155571591" build="1155512946"/>
+      <size package="1737876" installed="6443208" archive="6450420"/>
+      <location href="rpm/ppc/gtk2-64bit-2.8.10-39.13.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="gtk2-64bit" epoch="0" ver="2.8.10" rel="39.13" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="gtk2-64bit"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/gtk2-64bit-2.8.10-39.13.ppc.patch.rpm"/>
+          <checksum type="sha">c7629b50f43579bc8e3065c5e6ad8050b4f2d101</checksum>
+          <time file="1155573456" build="1155512946"/>
+          <size package="1715529" archive="6323280"/>
+          <base-version epoch="0" ver="2.8.10" rel="36"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/gtk2-64bit-2.8.10-36_39.13.ppc.delta.rpm"/>
+          <checksum type="sha">8daa79f5f82672b6e3f3b4794c3987e3610e8ccb</checksum>
+          <time file="1155573461" build="1155512946"/>
+          <size package="179038" archive="0"/>
+          <base-version epoch="0" ver="2.8.10" rel="36" md5sum="5de3c88373e67908daccc46b51f9bf14" buildtime="1146562734" sequence_info="gtk2-64bit-2.8.10-36-1a213d83c8fb03e021ac0f9677d41d87b5"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>gtk2-devel</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="2.8.10" rel="39.13"/>
+      <checksum type="sha" pkgid="YES">2d37f49abc52cc9193b7496f97a391cf412bbebb</checksum>
+      <time file="1155569746" build="1155500211"/>
+      <size package="395476" installed="1821530" archive="1868184"/>
+      <location href="rpm/i586/gtk2-devel-2.8.10-39.13.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="gtk2-devel" epoch="0" ver="2.8.10" rel="39.13" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="gtk2-devel"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/gtk2-devel-2.8.10-39.13.i586.patch.rpm"/>
+          <checksum type="sha">b855c8ef6cfa147ccfd9668d01d0a01f10ecb6c0</checksum>
+          <time file="1155573465" build="1155500211"/>
+          <size package="96124" archive="126852"/>
+          <base-version epoch="0" ver="2.8.10" rel="36"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/gtk2-devel-2.8.10-36_39.13.i586.delta.rpm"/>
+          <checksum type="sha">6a036a19d695502b0ad9acc6d7040d8c51176a16</checksum>
+          <time file="1155573466" build="1155500211"/>
+          <size package="50839" archive="0"/>
+          <base-version epoch="0" ver="2.8.10" rel="36" md5sum="041a21f9cf0a77d4c3a4cdc330ee9c89" buildtime="1146561852" sequence_info="gtk2-devel-2.8.10-36-6ae5394cde5bc36e6e21c8a07712228acc40"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>gtk2-devel</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="2.8.10" rel="39.13"/>
+      <checksum type="sha" pkgid="YES">62b31e2bcc65122da83eaeaf3a971094a8c6383f</checksum>
+      <time file="1155569747" build="1155513138"/>
+      <size package="403998" installed="1836976" archive="1883624"/>
+      <location href="rpm/ppc/gtk2-devel-2.8.10-39.13.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="gtk2-devel" epoch="0" ver="2.8.10" rel="39.13" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="gtk2-devel"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/gtk2-devel-2.8.10-39.13.ppc.patch.rpm"/>
+          <checksum type="sha">9f1f3279b1dee87c1e40a8edbcf703bb26365c65</checksum>
+          <time file="1155573469" build="1155513138"/>
+          <size package="104265" archive="142292"/>
+          <base-version epoch="0" ver="2.8.10" rel="36"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/gtk2-devel-2.8.10-36_39.13.ppc.delta.rpm"/>
+          <checksum type="sha">22ddeafc1475f46541464e23d5d6634653142d12</checksum>
+          <time file="1155573470" build="1155513138"/>
+          <size package="50584" archive="0"/>
+          <base-version epoch="0" ver="2.8.10" rel="36" md5sum="8deb440bec95e4ff4a8c8384b2a14767" buildtime="1146568053" sequence_info="gtk2-devel-2.8.10-36-2acf8de290ba5274ad0c0419dc3d0861cc40"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>gtk2-devel</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="2.8.10" rel="39.13"/>
+      <checksum type="sha" pkgid="YES">875da55669ff14cc1763a431e18fa5454a1ccf16</checksum>
+      <time file="1155569706" build="1155493726"/>
+      <size package="400332" installed="1836922" archive="1883620"/>
+      <location href="rpm/x86_64/gtk2-devel-2.8.10-39.13.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="gtk2-devel" epoch="0" ver="2.8.10" rel="39.13" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="gtk2-devel"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/gtk2-devel-2.8.10-39.13.x86_64.patch.rpm"/>
+          <checksum type="sha">a1a37ad87c5371fbb4e8e5333316ab0ad0101fd7</checksum>
+          <time file="1155573472" build="1155493726"/>
+          <size package="100403" archive="142200"/>
+          <base-version epoch="0" ver="2.8.10" rel="36"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/gtk2-devel-2.8.10-36_39.13.x86_64.delta.rpm"/>
+          <checksum type="sha">fa4704e5bbf076d4dc80e918fafab61915bc1c2f</checksum>
+          <time file="1155573473" build="1155493726"/>
+          <size package="50933" archive="0"/>
+          <base-version epoch="0" ver="2.8.10" rel="36" md5sum="fe55bc016b54278e2fce8014905c2dca" buildtime="1146562200" sequence_info="gtk2-devel-2.8.10-36-3255773931205d6a80f606de708fe890cc40"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>gtk2-devel-64bit</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="2.8.10" rel="39.13"/>
+      <checksum type="sha" pkgid="YES">2b6a72f40060f932da9f96c166f8d819b0208f0e</checksum>
+      <time file="1155571593" build="1155512951"/>
+      <size package="22456" installed="3729" archive="5440"/>
+      <location href="rpm/ppc/gtk2-devel-64bit-2.8.10-39.13.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="gtk2-devel-64bit" epoch="0" ver="2.8.10" rel="39.13" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="gtk2-devel-64bit"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/gtk2-devel-64bit-2.8.10-39.13.ppc.patch.rpm"/>
+          <checksum type="sha">037f527faf4c2a7d2d92fb7783e62fa96fca61a8</checksum>
+          <time file="1155573475" build="1155512951"/>
+          <size package="21545" archive="124"/>
+          <base-version epoch="0" ver="2.8.10" rel="36"/>
+        </patchrpm>
+      </pkgfiles>
+    </package>
+  </atoms>
+</patch>

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--PATCHINFO id="32b6e6ddf9c9d636ee78e904b7bd0914"!-->
+<patch
+    xmlns="http://novell.com/package/metadata/suse/patch"
+    xmlns:yum="http://linux.duke.edu/metadata/common"
+    xmlns:rpm="http://linux.duke.edu/metadata/rpm"
+    xmlns:suse="http://novell.com/package/metadata/suse/common"
+    patchid="fbi-1915"
+    timestamp="1154105125"
+    engine="1.0">
+  <yum:name>fbi</yum:name>
+  <summary lang="en">fbi security update</summary>
+  <summary lang="de">fbi Sicherheitsupdate</summary>
+  <description lang="en">The fbgs program did not activate security options in the
+postscript interpreter due to a typo (CVE-2006-3119). fbgs
+also used a temporary directory with predictable name
+(CVE-2006-1695).
+</description>
+  <description lang="de">Das fbgs Programm enthielt einen Tippfehler wodurch
+Sicherheitseinstellungen im PostScript-Interpreter nicht
+aktiviert wurden (CVE-2006-3119). Ausserdem verwendete fbgs
+ein temporäres Verzeichnis mit vorhersagbarem Namen
+(CVE-2006-1695).
+</description>
+  <yum:version ver="1915" rel="0"/>
+  <rpm:requires>
+    <rpm:entry kind="atom" name="fbi" epoch="0" ver="2.03" rel="17.2" flags="EQ"/>
+  </rpm:requires>
+  <category>security</category>
+  <atoms>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>fbi</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="2.03" rel="17.2"/>
+      <checksum type="sha" pkgid="YES">7202c391c12b1e42b49229fe138f61f0d971fb75</checksum>
+      <time file="1154210613" build="1154105125"/>
+      <size package="58209" installed="111782" archive="112736"/>
+      <location href="rpm/i586/fbi-2.03-17.2.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="fbi" epoch="0" ver="2.03" rel="17.2" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="fbi"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/fbi-2.03-17.2.i586.patch.rpm"/>
+          <checksum type="sha">0a9cbcdc5096f7b34554887f0c35aee74fbbd826</checksum>
+          <time file="1154215412" build="1154105125"/>
+          <size package="47498" archive="91064"/>
+          <base-version epoch="0" ver="2.03" rel="17"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/fbi-2.03-17_17.2.i586.delta.rpm"/>
+          <checksum type="sha">14d9efc179d8388dbb80726076251c4bff10a4d6</checksum>
+          <time file="1154215412" build="1154105125"/>
+          <size package="18901" archive="0"/>
+          <base-version epoch="0" ver="2.03" rel="17" md5sum="cc77c895ff44fe14bc2eab058fa3afe5" buildtime="1146558727" sequence_info="fbi-2.03-17-44e5e11b1ecc0d39567b7ebf6a125d6d3120"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>fbi</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="2.03" rel="17.2"/>
+      <checksum type="sha" pkgid="YES">cda2c11b4a9090f522b46f8378785401bc0fa9f9</checksum>
+      <time file="1154211009" build="1154105809"/>
+      <size package="65286" installed="129566" archive="130520"/>
+      <location href="rpm/ppc/fbi-2.03-17.2.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="fbi" epoch="0" ver="2.03" rel="17.2" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="fbi"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/fbi-2.03-17.2.ppc.patch.rpm"/>
+          <checksum type="sha">08694ad2b0a7860bcd67d5a59663f4e2ec1160b9</checksum>
+          <time file="1154215414" build="1154105809"/>
+          <size package="54508" archive="108848"/>
+          <base-version epoch="0" ver="2.03" rel="17"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/fbi-2.03-17_17.2.ppc.delta.rpm"/>
+          <checksum type="sha">34fe6b192a0d0094773611442bbb292a5ea94ed0</checksum>
+          <time file="1154215414" build="1154105809"/>
+          <size package="16214" archive="0"/>
+          <base-version epoch="0" ver="2.03" rel="17" md5sum="00daaa41f40650c34736ca417e13e9d3" buildtime="1146600470" sequence_info="fbi-2.03-17-9b5db45c2ec5bc7d20cbaab67ef946833120"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>fbi</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="2.03" rel="17.2"/>
+      <checksum type="sha" pkgid="YES">fcd350dff080c5aebcdaaa33db25d1ffac5fbc37</checksum>
+      <time file="1154212871" build="1154105556"/>
+      <size package="63871" installed="125806" archive="126760"/>
+      <location href="rpm/x86_64/fbi-2.03-17.2.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="fbi" epoch="0" ver="2.03" rel="17.2" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="fbi"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/fbi-2.03-17.2.x86_64.patch.rpm"/>
+          <checksum type="sha">4d017d0effc4a5ab9006ce14c992c44597f74060</checksum>
+          <time file="1154215415" build="1154105556"/>
+          <size package="53164" archive="105088"/>
+          <base-version epoch="0" ver="2.03" rel="17"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/fbi-2.03-17_17.2.x86_64.delta.rpm"/>
+          <checksum type="sha">039a5354cf3d116911bf1708218aecb64c22b1e2</checksum>
+          <time file="1154215416" build="1154105556"/>
+          <size package="15704" archive="0"/>
+          <base-version epoch="0" ver="2.03" rel="17" md5sum="16e45e21874817c5ab0136521a7bc002" buildtime="1146559363" sequence_info="fbi-2.03-17-e213bdeae874af10bb76f8b4f0cf2e9f3120"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+  </atoms>
+</patch>

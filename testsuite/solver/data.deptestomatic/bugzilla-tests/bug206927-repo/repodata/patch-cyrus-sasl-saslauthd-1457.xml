@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--PATCHINFO id="5df28d5b4702e9dc19bef394d36892a0"!-->
+<patch
+    xmlns="http://novell.com/package/metadata/suse/patch"
+    xmlns:yum="http://linux.duke.edu/metadata/common"
+    xmlns:rpm="http://linux.duke.edu/metadata/rpm"
+    xmlns:suse="http://novell.com/package/metadata/suse/common"
+    patchid="cyrus-sasl-saslauthd-1457"
+    timestamp="1149278866"
+    engine="1.0">
+  <yum:name>cyrus-sasl-saslauthd</yum:name>
+  <summary lang="en">Bugfix for the cyrus-sasl-saslauthd package</summary>
+  <summary lang="de">Bugfix für das cyrus-sasl-saslauthd Paket</summary>
+  <description lang="en">Fixes a bug in the &quot;shadow&quot; authmethod that could cause the 
+saslauthd daemon of cyrus-sasl to crash.
+</description>
+  <description lang="de">Behebt einen Fehler im &quot;shadow&quot; Authentisierunsmodul der 
+zum Absturz des saslauthd Prozesse führen konnte. 
+</description>
+  <yum:version ver="1457" rel="0"/>
+  <rpm:requires>
+  <rpm:entry kind="atom" name="cyrus-sasl-saslauthd" epoch="0" ver="2.1.21" rel="18.3" flags="EQ"/>
+  </rpm:requires>
+  <category>recommended</category>
+  <atoms>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>cyrus-sasl-saslauthd</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="2.1.21" rel="18.3"/>
+      <checksum type="sha" pkgid="YES">de96a08b524a1cac7bff1a7fc0e16b621a727303</checksum>
+      <time file="1149329103" build="1149278866"/>
+      <size package="55872" installed="87200" archive="88196"/>
+      <location href="rpm/i586/cyrus-sasl-saslauthd-2.1.21-18.3.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="cyrus-sasl-saslauthd" epoch="0" ver="2.1.21" rel="18.3" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="cyrus-sasl-saslauthd"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/cyrus-sasl-saslauthd-2.1.21-18.3.i586.patch.rpm"/>
+          <checksum type="sha">9f61a96383865c484d82f19597ab2ea379ba12a1</checksum>
+          <time file="1149332447" build="1149278866"/>
+          <size package="15277" archive="124"/>
+          <base-version epoch="0" ver="2.1.21" rel="18"/>
+        </patchrpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>cyrus-sasl-saslauthd</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="2.1.21" rel="18.3"/>
+      <checksum type="sha" pkgid="YES">20048ef71a5645774bec00b64257478c06b51b56</checksum>
+      <time file="1149330726" build="1149293443"/>
+      <size package="61710" installed="102480" archive="103476"/>
+      <location href="rpm/ppc/cyrus-sasl-saslauthd-2.1.21-18.3.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="cyrus-sasl-saslauthd" epoch="0" ver="2.1.21" rel="18.3" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="cyrus-sasl-saslauthd"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/cyrus-sasl-saslauthd-2.1.21-18.3.ppc.patch.rpm"/>
+          <checksum type="sha">7d1fecda3453e981afc000ba54c0fc99fa0df952</checksum>
+          <time file="1149332450" build="1149293443"/>
+          <size package="15253" archive="124"/>
+          <base-version epoch="0" ver="2.1.21" rel="18"/>
+        </patchrpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>cyrus-sasl-saslauthd</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="2.1.21" rel="18.3"/>
+      <checksum type="sha" pkgid="YES">0b9e0ffa164ab89998708acf6bcefc841e6a9c4f</checksum>
+      <time file="1149328967" build="1149274748"/>
+      <size package="60553" installed="99644" archive="100640"/>
+      <location href="rpm/x86_64/cyrus-sasl-saslauthd-2.1.21-18.3.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="cyrus-sasl-saslauthd" epoch="0" ver="2.1.21" rel="18.3" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="cyrus-sasl-saslauthd"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/cyrus-sasl-saslauthd-2.1.21-18.3.x86_64.patch.rpm"/>
+          <checksum type="sha">9ac239ca4bdf3f7d1226d2d86957616c796e3cef</checksum>
+          <time file="1149332453" build="1149274748"/>
+          <size package="15357" archive="124"/>
+          <base-version epoch="0" ver="2.1.21" rel="18"/>
+        </patchrpm>
+      </pkgfiles>
+    </package>
+  </atoms>
+</patch>

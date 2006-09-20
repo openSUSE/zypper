@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--PATCHINFO id="67d2ffc202da083c316ad5c6fcbf6990"!-->
+<patch
+    xmlns="http://novell.com/package/metadata/suse/patch"
+    xmlns:yum="http://linux.duke.edu/metadata/common"
+    xmlns:rpm="http://linux.duke.edu/metadata/rpm"
+    xmlns:suse="http://novell.com/package/metadata/suse/common"
+    patchid="yast2-storage-1591"
+    timestamp="1150206124"
+    engine="1.0">
+  <yum:name>yast2-storage</yum:name>
+  <summary lang="en">yast2-storage fix for crypt file creation</summary>
+  <summary lang="de">Fehlerbehebung in yast2-storage beim Anlegen von verschlüsselten Dateien</summary>
+  <description lang="en">This fixes the bug that creation of an encrypted file fails 
+silently in yast2 expert partitioner.
+</description>
+  <description lang="de">Dieses Update behebt den Fehler in YaST2-Partitionierer 
+beim Anlegen einer  verschlüsselten Datei.
+</description>
+  <yum:version ver="1591" rel="0"/>
+  <rpm:requires>
+  <rpm:entry kind="atom" name="yast2-storage" epoch="0" ver="2.13.68" rel="0.2" flags="EQ"/>
+  <rpm:entry kind="atom" name="yast2-storage-evms" epoch="0" ver="2.13.68" rel="0.2" flags="EQ"/>
+  </rpm:requires>
+  <category>recommended</category>
+  <atoms>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>yast2-storage</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="2.13.68" rel="0.2"/>
+      <checksum type="sha" pkgid="YES">5e533e4bc27bf055b97926f657cc6d5fa7174348</checksum>
+      <time file="1150215286" build="1150206124"/>
+      <size package="545872" installed="2676519" archive="2702268"/>
+      <location href="rpm/i586/yast2-storage-2.13.68-0.2.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="yast2-storage" epoch="0" ver="2.13.68" rel="0.2" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="yast2-storage"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/yast2-storage-2.13.68-0.2.i586.patch.rpm"/>
+          <checksum type="sha">a798ec1d7efc655440a3a8d34b5be066b050db87</checksum>
+          <time file="1150216352" build="1150206124"/>
+          <size package="448161" archive="1981948"/>
+          <base-version epoch="0" ver="2.13.58" rel="3"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/yast2-storage-2.13.58_2.13.68-3_0.2.i586.delta.rpm"/>
+          <checksum type="sha">581affa7c5c21921281f01d1017e40f88343d381</checksum>
+          <time file="1150216354" build="1150206124"/>
+          <size package="101680" archive="0"/>
+          <base-version epoch="0" ver="2.13.58" rel="3" md5sum="275dc170935ebab5382b50e5d59e40b4" buildtime="1146678327" sequence_info="yast2-storage-2.13.58-3-2fd33573777a2b9398d6edd670269d858b20"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>yast2-storage</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="2.13.68" rel="0.2"/>
+      <checksum type="sha" pkgid="YES">8c5cf70ab20f48d87158f4c1e8348d9183decea8</checksum>
+      <time file="1150215124" build="1150213052"/>
+      <size package="549283" installed="2665537" archive="2691292"/>
+      <location href="rpm/ppc/yast2-storage-2.13.68-0.2.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="yast2-storage" epoch="0" ver="2.13.68" rel="0.2" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="yast2-storage"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/yast2-storage-2.13.68-0.2.ppc.patch.rpm"/>
+          <checksum type="sha">61fd83d4186813485ab5afe33041d3cc1987a6a4</checksum>
+          <time file="1150216356" build="1150213052"/>
+          <size package="443191" archive="1913940"/>
+          <base-version epoch="0" ver="2.13.58" rel="3"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/yast2-storage-2.13.58_2.13.68-3_0.2.ppc.delta.rpm"/>
+          <checksum type="sha">d14e8e86c014d35523d31c691bcbb6a218815d05</checksum>
+          <time file="1150216358" build="1150213052"/>
+          <size package="101195" archive="0"/>
+          <base-version epoch="0" ver="2.13.58" rel="3" md5sum="862e1e38df18f3ad5881e07125b76773" buildtime="1146679328" sequence_info="yast2-storage-2.13.58-3-90eb4110180d7797061c552be960913b8b20"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>yast2-storage</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="2.13.68" rel="0.2"/>
+      <checksum type="sha" pkgid="YES">7bba07b74a1a7fa05bbbf0aa253bbb113f8814b3</checksum>
+      <time file="1150215147" build="1150210892"/>
+      <size package="552307" installed="2665751" archive="2691508"/>
+      <location href="rpm/x86_64/yast2-storage-2.13.68-0.2.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="yast2-storage" epoch="0" ver="2.13.68" rel="0.2" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="yast2-storage"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/yast2-storage-2.13.68-0.2.x86_64.patch.rpm"/>
+          <checksum type="sha">07a44ff38b5d5e7389ee9a4bfbfcec4231244258</checksum>
+          <time file="1150216360" build="1150210892"/>
+          <size package="445719" archive="1914140"/>
+          <base-version epoch="0" ver="2.13.58" rel="3"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/yast2-storage-2.13.58_2.13.68-3_0.2.x86_64.delta.rpm"/>
+          <checksum type="sha">53aafa3de07cf6645d8a3c4ec6ca689f70f4dd1c</checksum>
+          <time file="1150216362" build="1150210892"/>
+          <size package="101443" archive="0"/>
+          <base-version epoch="0" ver="2.13.58" rel="3" md5sum="298404e8204633904967ba5e82732de8" buildtime="1146676909" sequence_info="yast2-storage-2.13.58-3-99ff03ebc9e5a39aa2cf8d4f33e015828b20"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>yast2-storage-evms</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="2.13.68" rel="0.2"/>
+      <checksum type="sha" pkgid="YES">b8d82cbb75c0ee9d02d17491ebc05fb918f5b633</checksum>
+      <time file="1150215287" build="1150206124"/>
+      <size package="115628" installed="117440" archive="117860"/>
+      <location href="rpm/i586/yast2-storage-evms-2.13.68-0.2.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="yast2-storage-evms" epoch="0" ver="2.13.68" rel="0.2" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="yast2-storage-evms"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/yast2-storage-evms-2.13.68-0.2.i586.patch.rpm"/>
+          <checksum type="sha">be943f882d4bda60796eb58ce92c0d9bdd89396b</checksum>
+          <time file="1150216363" build="1150206124"/>
+          <size package="113283" archive="109396"/>
+          <base-version epoch="0" ver="2.13.58" rel="3"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/yast2-storage-evms-2.13.58_2.13.68-3_0.2.i586.delta.rpm"/>
+          <checksum type="sha">76a11c3a3844acda3cbfa17c0ee3f928db7d5e7b</checksum>
+          <time file="1150216363" build="1150206124"/>
+          <size package="94180" archive="0"/>
+          <base-version epoch="0" ver="2.13.58" rel="3" md5sum="7de08bace4349380f0dfc6650ccbae93" buildtime="1146678327" sequence_info="yast2-storage-evms-2.13.58-3-91bff9aba1791bff3ef462562aeca0e520"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>yast2-storage-evms</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="2.13.68" rel="0.2"/>
+      <checksum type="sha" pkgid="YES">2bdff7bc6a72e09862bbb2e10446ae9ecfcfce4d</checksum>
+      <time file="1150215125" build="1150213052"/>
+      <size package="119711" installed="121644" archive="122064"/>
+      <location href="rpm/ppc/yast2-storage-evms-2.13.68-0.2.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="yast2-storage-evms" epoch="0" ver="2.13.68" rel="0.2" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="yast2-storage-evms"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/yast2-storage-evms-2.13.68-0.2.ppc.patch.rpm"/>
+          <checksum type="sha">12f22f3bf8200a0052d6be15d07a480ce1a581bf</checksum>
+          <time file="1150216364" build="1150213052"/>
+          <size package="117414" archive="113600"/>
+          <base-version epoch="0" ver="2.13.58" rel="3"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/yast2-storage-evms-2.13.58_2.13.68-3_0.2.ppc.delta.rpm"/>
+          <checksum type="sha">65877ef7fcbd8cbc7eb3feb7bac5f197f443357c</checksum>
+          <time file="1150216365" build="1150213052"/>
+          <size package="91298" archive="0"/>
+          <base-version epoch="0" ver="2.13.58" rel="3" md5sum="383ec1188dd81654efd23dde3b303ee5" buildtime="1146679328" sequence_info="yast2-storage-evms-2.13.58-3-e1beaff1bc7e96181584411316362c0a20"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>yast2-storage-evms</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="2.13.68" rel="0.2"/>
+      <checksum type="sha" pkgid="YES">6a1833e9d2f16c62a64dba64370c7ec5451454dd</checksum>
+      <time file="1150215148" build="1150210892"/>
+      <size package="116856" installed="118992" archive="119412"/>
+      <location href="rpm/x86_64/yast2-storage-evms-2.13.68-0.2.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="yast2-storage-evms" epoch="0" ver="2.13.68" rel="0.2" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="yast2-storage-evms"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/yast2-storage-evms-2.13.68-0.2.x86_64.patch.rpm"/>
+          <checksum type="sha">f26996a51055f4fee8ec209d09115859826c3fab</checksum>
+          <time file="1150216366" build="1150210892"/>
+          <size package="114537" archive="110948"/>
+          <base-version epoch="0" ver="2.13.58" rel="3"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/yast2-storage-evms-2.13.58_2.13.68-3_0.2.x86_64.delta.rpm"/>
+          <checksum type="sha">d205765bc5e1a5a092bbf7a71fe9b620582fcce0</checksum>
+          <time file="1150216366" build="1150210892"/>
+          <size package="93008" archive="0"/>
+          <base-version epoch="0" ver="2.13.58" rel="3" md5sum="681f9c268daec98120e745b491ae2b09" buildtime="1146676909" sequence_info="yast2-storage-evms-2.13.58-3-05f01372f9a8f28680b22f14fb903c8920"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+  </atoms>
+</patch>

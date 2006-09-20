@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--PATCHINFO id="bf5643e3dfe0d16947376503a74fe414"!-->
+<patch
+    xmlns="http://novell.com/package/metadata/suse/patch"
+    xmlns:yum="http://linux.duke.edu/metadata/common"
+    xmlns:rpm="http://linux.duke.edu/metadata/rpm"
+    xmlns:suse="http://novell.com/package/metadata/suse/common"
+    patchid="kdemultimedia3-CD-1669"
+    timestamp="1150940157"
+    engine="1.0">
+  <yum:name>kdemultimedia3-CD</yum:name>
+  <summary lang="en">Ogg Vorbis support for audiocd:/</summary>
+  <summary lang="de">Ogg Vorbis support in audiocd:/</summary>
+  <description lang="en">This update re-adds ogg vorbis encoding support in the 
+audiocd:/ kioslave.
+</description>
+  <description lang="de">Dieses Update fügt Ogg Vorbis support in audiocd:/ wieder 
+hinzu.
+</description>
+  <yum:version ver="1669" rel="0"/>
+  <rpm:requires>
+  <rpm:entry kind="atom" name="kdemultimedia3-CD" epoch="0" ver="3.5.1" rel="20.4" flags="EQ"/>
+  </rpm:requires>
+  <category>recommended</category>
+  <atoms>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>kdemultimedia3-CD</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="3.5.1" rel="20.4"/>
+      <checksum type="sha" pkgid="YES">741d6d2caa531eecd6a67b625d8b200b648f7f0f</checksum>
+      <time file="1150941096" build="1150940157"/>
+      <size package="767057" installed="1761538" archive="1775208"/>
+      <location href="rpm/i586/kdemultimedia3-CD-3.5.1-20.4.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="kdemultimedia3-CD" epoch="0" ver="3.5.1" rel="20.4" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="kdemultimedia3-CD"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/kdemultimedia3-CD-3.5.1-20.4.i586.patch.rpm"/>
+          <checksum type="sha">e03db40b7fc0f408e9b6d60cbcc8050bd58e00e8</checksum>
+          <time file="1150945204" build="1150940157"/>
+          <size package="273040" archive="793208"/>
+          <base-version epoch="0" ver="3.5.1" rel="20"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/kdemultimedia3-CD-3.5.1-20_20.4.i586.delta.rpm"/>
+          <checksum type="sha">8f454d15811ce212a77cb6af09216570629d36a4</checksum>
+          <time file="1150945207" build="1150940157"/>
+          <size package="35794" archive="0"/>
+          <base-version epoch="0" ver="3.5.1" rel="20" md5sum="18143b9c0c2ee4670db7c2319a295fc8" buildtime="1146575503" sequence_info="kdemultimedia3-CD-3.5.1-20-bc85dae25f48ed11f61de833ca556effda10"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>kdemultimedia3-CD</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="3.5.1" rel="20.4"/>
+      <checksum type="sha" pkgid="YES">843b4f09a006ffd9e0172a4077362d9dda0cc8b4</checksum>
+      <time file="1150943752" build="1150943198"/>
+      <size package="797922" installed="1959468" archive="1973148"/>
+      <location href="rpm/ppc/kdemultimedia3-CD-3.5.1-20.4.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="kdemultimedia3-CD" epoch="0" ver="3.5.1" rel="20.4" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="kdemultimedia3-CD"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/kdemultimedia3-CD-3.5.1-20.4.ppc.patch.rpm"/>
+          <checksum type="sha">103cb403f4d7ccb1eff63eb5e2410f6231f9cbca</checksum>
+          <time file="1150945210" build="1150943198"/>
+          <size package="283476" archive="902896"/>
+          <base-version epoch="0" ver="3.5.1" rel="19"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/kdemultimedia3-CD-3.5.1-19_20.4.ppc.delta.rpm"/>
+          <checksum type="sha">d315812fe72d4928b1dda49ca631a81e6b39263d</checksum>
+          <time file="1150945211" build="1150943198"/>
+          <size package="35260" archive="0"/>
+          <base-version epoch="0" ver="3.5.1" rel="19" md5sum="b18579be2d20cdee343f51beb41c88be" buildtime="1146308356" sequence_info="kdemultimedia3-CD-3.5.1-19-1a2bb852caf548497d5e5b03c2dd4cf4da10"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>kdemultimedia3-CD</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="3.5.1" rel="20.4"/>
+      <checksum type="sha" pkgid="YES">1f7640ccde35070c90d975d2a09e271621d90d61</checksum>
+      <time file="1150939850" build="1150939119"/>
+      <size package="813367" installed="1968272" archive="1981976"/>
+      <location href="rpm/x86_64/kdemultimedia3-CD-3.5.1-20.4.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="kdemultimedia3-CD" epoch="0" ver="3.5.1" rel="20.4" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="kdemultimedia3-CD"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/kdemultimedia3-CD-3.5.1-20.4.x86_64.patch.rpm"/>
+          <checksum type="sha">2098424fbb1b5303d2376d2c2cbd75b471a471b0</checksum>
+          <time file="1150945213" build="1150939119"/>
+          <size package="303124" archive="912228"/>
+          <base-version epoch="0" ver="3.5.1" rel="20"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/kdemultimedia3-CD-3.5.1-20_20.4.x86_64.delta.rpm"/>
+          <checksum type="sha">27bacf4d2b062feefe1709d8730c448dded7d779</checksum>
+          <time file="1150945215" build="1150939119"/>
+          <size package="34981" archive="0"/>
+          <base-version epoch="0" ver="3.5.1" rel="20" md5sum="1601af100d9642c5b2225cad18f2830a" buildtime="1146577733" sequence_info="kdemultimedia3-CD-3.5.1-20-a52650ed487b17ad739d776f223b0f35da10"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+  </atoms>
+</patch>

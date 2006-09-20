@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--PATCHINFO id="1aebb9e96eb2af3e40f199a97a04184e"!-->
+<patch
+    xmlns="http://novell.com/package/metadata/suse/patch"
+    xmlns:yum="http://linux.duke.edu/metadata/common"
+    xmlns:rpm="http://linux.duke.edu/metadata/rpm"
+    xmlns:suse="http://novell.com/package/metadata/suse/common"
+    patchid="kdeadmin3-1439"
+    timestamp="1148945515"
+    engine="1.0">
+  <yum:name>kdeadmin3</yum:name>
+  <summary lang="en">Fix ksysv can't be quit</summary>
+  <summary lang="de">Behebt dass KSysV nicht beendet werden kann</summary>
+  <description lang="en">This update fixes the problem that ksysv cannot be quit via 
+usual user actions.
+</description>
+  <description lang="de">Dieses Update behebt den Fehler, daß ksysv nicht durch 
+regulaere Benutzereingaben beendet werden kann.
+</description>
+  <yum:version ver="1439" rel="0"/>
+  <rpm:requires>
+  <rpm:entry kind="atom" name="kdeadmin3" epoch="0" ver="3.5.1" rel="16.2" flags="EQ"/>
+  </rpm:requires>
+  <category>recommended</category>
+  <atoms>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>kdeadmin3</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="3.5.1" rel="16.2"/>
+      <checksum type="sha" pkgid="YES">a8beaeba3d0a18dadb3248c2307dbabcac5e6555</checksum>
+      <time file="1148945845" build="1148945515"/>
+      <size package="1730878" installed="3254057" archive="3290320"/>
+      <location href="rpm/i586/kdeadmin3-3.5.1-16.2.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="kdeadmin3" epoch="0" ver="3.5.1" rel="16.2" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="kdeadmin3"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/kdeadmin3-3.5.1-16.2.i586.patch.rpm"/>
+          <checksum type="sha">c66216e1ff67131f77665210f7c9dad458e477f0</checksum>
+          <time file="1148956208" build="1148945515"/>
+          <size package="137895" archive="338276"/>
+          <base-version epoch="0" ver="3.5.1" rel="16"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/kdeadmin3-3.5.1-16_16.2.i586.delta.rpm"/>
+          <checksum type="sha">9b9487f88a69e8c97a30bcd8d203c1905cbdb7fc</checksum>
+          <time file="1148956211" build="1148945515"/>
+          <size package="61798" archive="0"/>
+          <base-version epoch="0" ver="3.5.1" rel="16" md5sum="573199774390ce16dbd353b0554ff8f0" buildtime="1146582606" sequence_info="kdeadmin3-3.5.1-16-85cdce2df0924bed038616997403aafebb30"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>kdeadmin3</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="3.5.1" rel="16.2"/>
+      <checksum type="sha" pkgid="YES">1833bc1ed6f606587a8b80135f94961b41b1a276</checksum>
+      <time file="1148952560" build="1148952160"/>
+      <size package="1774089" installed="3491589" archive="3527852"/>
+      <location href="rpm/ppc/kdeadmin3-3.5.1-16.2.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="kdeadmin3" epoch="0" ver="3.5.1" rel="16.2" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="kdeadmin3"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/kdeadmin3-3.5.1-16.2.ppc.patch.rpm"/>
+          <checksum type="sha">2d505d749e3fb3bf6e5876cba55df70cabf67ad4</checksum>
+          <time file="1148956215" build="1148952160"/>
+          <size package="145595" archive="384648"/>
+          <base-version epoch="0" ver="3.5.1" rel="16"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/kdeadmin3-3.5.1-16_16.2.ppc.delta.rpm"/>
+          <checksum type="sha">43c91dc1c6ac9d0400f3f0818c687527b2f01dde</checksum>
+          <time file="1148956218" build="1148952160"/>
+          <size package="59696" archive="0"/>
+          <base-version epoch="0" ver="3.5.1" rel="16" md5sum="16ffc5b4d95652c6aa5f6232bbb282be" buildtime="1146603345" sequence_info="kdeadmin3-3.5.1-16-39cd11f6ff366ede56f64e476143c687bb30"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>kdeadmin3</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="3.5.1" rel="16.2"/>
+      <checksum type="sha" pkgid="YES">5d54fd010df8600ab8b6a1137e826621e6d8f365</checksum>
+      <time file="1148955220" build="1148954878"/>
+      <size package="1837630" installed="3557301" archive="3593580"/>
+      <location href="rpm/x86_64/kdeadmin3-3.5.1-16.2.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="kdeadmin3" epoch="0" ver="3.5.1" rel="16.2" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="kdeadmin3"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/kdeadmin3-3.5.1-16.2.x86_64.patch.rpm"/>
+          <checksum type="sha">95c2f99489090aaa28a95c09f132c18c27ee1c62</checksum>
+          <time file="1148956221" build="1148954878"/>
+          <size package="283592" archive="835844"/>
+          <base-version epoch="0" ver="3.5.1" rel="16"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/kdeadmin3-3.5.1-16_16.2.x86_64.delta.rpm"/>
+          <checksum type="sha">8e1d2b7b8f68febacc81f0aacee84e622440cecd</checksum>
+          <time file="1148956224" build="1148954878"/>
+          <size package="77623" archive="0"/>
+          <base-version epoch="0" ver="3.5.1" rel="16" md5sum="1caba135055ed4f02bf34521f1ae356a" buildtime="1146583018" sequence_info="kdeadmin3-3.5.1-16-b11dfee55e8d894fe30ed930b81a3e91bb30"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+  </atoms>
+</patch>

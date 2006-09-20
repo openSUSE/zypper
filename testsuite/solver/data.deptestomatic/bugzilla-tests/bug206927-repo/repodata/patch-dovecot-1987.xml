@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--PATCHINFO id="834faa3a94b0fdd4b4cda41ee10fa0ba"!-->
+<patch
+    xmlns="http://novell.com/package/metadata/suse/patch"
+    xmlns:yum="http://linux.duke.edu/metadata/common"
+    xmlns:rpm="http://linux.duke.edu/metadata/rpm"
+    xmlns:suse="http://novell.com/package/metadata/suse/common"
+    patchid="dovecot-1987"
+    timestamp="1155739213"
+    engine="1.0">
+  <yum:name>dovecot</yum:name>
+  <summary lang="en">dovecot: Security Fix against potential SQL injection problems</summary>
+  <summary lang="de">dovecot: Sicherheitsupdate gegen potentielle SQL Injection Probleme</summary>
+  <description lang="en">Dovecot might have been affected by the multibyte character
+set SQL injection issues for instance described in
+CVE-2006-2314.
+
+This patch fixes the MySQL and PostgreSQL backend to use
+the correct quoting methods when passing user supplied
+strings.
+</description>
+  <description lang="de">Dovecot kann von den Multibyte Characterset SQL
+Injektionsproblemen betroffen sein, die z.B. in
+CVE-2006-2314 beschrieben sind.
+
+Dieser Patch stellt dovecot auf generelles Benutzen der
+korrekten Quoting Mechanismen des MySQL und PostgreSQL
+Datenbanktreibers um.
+</description>
+  <yum:version ver="1987" rel="0"/>
+  <rpm:requires>
+    <rpm:entry kind="atom" name="dovecot" epoch="0" ver="1.0.beta3" rel="13.4" flags="EQ"/>
+  </rpm:requires>
+  <category>security</category>
+  <atoms>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>dovecot</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="1.0.beta3" rel="13.4"/>
+      <checksum type="sha" pkgid="YES">523d813e51fea09fbec118dc119e54cd7b0c4b2a</checksum>
+      <time file="1155742185" build="1155739213"/>
+      <size package="1263242" installed="3055030" archive="3065604"/>
+      <location href="rpm/i586/dovecot-1.0.beta3-13.4.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="dovecot" epoch="0" ver="1.0.beta3" rel="13.4" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="dovecot"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/dovecot-1.0.beta3-13.4.i586.patch.rpm"/>
+          <checksum type="sha">d735074d5ac471d7eda35678610b40c35d54c81b</checksum>
+          <time file="1155742823" build="1155739213"/>
+          <size package="1008578" archive="2637688"/>
+          <base-version epoch="0" ver="1.0.beta3" rel="13"/>
+          <base-version epoch="0" ver="1.0.beta3" rel="13.2"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/dovecot-1.0.beta3-13_13.4.i586.delta.rpm"/>
+          <checksum type="sha">05c041c14dd4239b505c7f41d2d462b137ed274a</checksum>
+          <time file="1155742826" build="1155739213"/>
+          <size package="77415" archive="0"/>
+          <base-version epoch="0" ver="1.0.beta3" rel="13" md5sum="7098e473b5972dba9ee8d8be78baa8ea" buildtime="1146558869" sequence_info="dovecot-1.0.beta3-13-38e2cb4c628276832a84fcc95fa1e4831311e7"/>
+        </deltarpm>
+        <deltarpm>
+          <location href="rpm/i586/dovecot-1.0.beta3-13.2_13.4.i586.delta.rpm"/>
+          <checksum type="sha">e410e488f2476e9e77283477c9c1af18088d23e8</checksum>
+          <time file="1155742828" build="1155739213"/>
+          <size package="239231" archive="0"/>
+          <base-version epoch="0" ver="1.0.beta3" rel="13.2" md5sum="2abeac9ea0870b46b07a896a3c218041" buildtime="1147881431" sequence_info="dovecot-1.0.beta3-13.2-bc16bf689444380eea6fe21ce62764c81311f41e20"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>dovecot</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="1.0.beta3" rel="13.4"/>
+      <checksum type="sha" pkgid="YES">f0cac4febb8d44137678d789a79ab682ffca450a</checksum>
+      <time file="1155742318" build="1155739460"/>
+      <size package="1380212" installed="3830526" archive="3841100"/>
+      <location href="rpm/ppc/dovecot-1.0.beta3-13.4.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="dovecot" epoch="0" ver="1.0.beta3" rel="13.4" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="dovecot"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/dovecot-1.0.beta3-13.4.ppc.patch.rpm"/>
+          <checksum type="sha">49ff8656cbca94b8fa75bdb30b826da32da76dd1</checksum>
+          <time file="1155742832" build="1155739460"/>
+          <size package="1118350" archive="3413184"/>
+          <base-version epoch="0" ver="1.0.beta3" rel="13"/>
+          <base-version epoch="0" ver="1.0.beta3" rel="13.2"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/dovecot-1.0.beta3-13_13.4.ppc.delta.rpm"/>
+          <checksum type="sha">fc77ddc59866e44b924e812b099a7965a035d128</checksum>
+          <time file="1155742834" build="1155739460"/>
+          <size package="74516" archive="0"/>
+          <base-version epoch="0" ver="1.0.beta3" rel="13" md5sum="c3936d96381218e2df8cc0f2c159bbb6" buildtime="1146600500" sequence_info="dovecot-1.0.beta3-13-f3b156704e3b9df152f3e2aed79999bc1311e7"/>
+        </deltarpm>
+        <deltarpm>
+          <location href="rpm/ppc/dovecot-1.0.beta3-13.2_13.4.ppc.delta.rpm"/>
+          <checksum type="sha">90432d80d8e1ca670783595621f07251c9878c6c</checksum>
+          <time file="1155742836" build="1155739460"/>
+          <size package="239406" archive="0"/>
+          <base-version epoch="0" ver="1.0.beta3" rel="13.2" md5sum="78d6931d7850a2a79614dd3d0399847f" buildtime="1147881837" sequence_info="dovecot-1.0.beta3-13.2-68b8d8d208f57acb06247b5137f9f1291311f41e20"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>dovecot</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="1.0.beta3" rel="13.4"/>
+      <checksum type="sha" pkgid="YES">69af454914d6c67b17fc903675b838c283b94296</checksum>
+      <time file="1155742168" build="1155739126"/>
+      <size package="1410333" installed="3365496" archive="3376128"/>
+      <location href="rpm/x86_64/dovecot-1.0.beta3-13.4.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="dovecot" epoch="0" ver="1.0.beta3" rel="13.4" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="dovecot"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/dovecot-1.0.beta3-13.4.x86_64.patch.rpm"/>
+          <checksum type="sha">de52232dfee7c4522bf86a4483727ea6422d0caa</checksum>
+          <time file="1155742839" build="1155739126"/>
+          <size package="1149671" archive="2948168"/>
+          <base-version epoch="0" ver="1.0.beta3" rel="13"/>
+          <base-version epoch="0" ver="1.0.beta3" rel="13.2"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/dovecot-1.0.beta3-13_13.4.x86_64.delta.rpm"/>
+          <checksum type="sha">ec1ab25a2ec72cb600b8116b85c8007e4de05cc5</checksum>
+          <time file="1155742841" build="1155739126"/>
+          <size package="105748" archive="0"/>
+          <base-version epoch="0" ver="1.0.beta3" rel="13" md5sum="814446f03e97e26f548c77ac5167b868" buildtime="1146559228" sequence_info="dovecot-1.0.beta3-13-652e7cf8fbb2c2518ea07bacc9b2df611311e7"/>
+        </deltarpm>
+        <deltarpm>
+          <location href="rpm/x86_64/dovecot-1.0.beta3-13.2_13.4.x86_64.delta.rpm"/>
+          <checksum type="sha">f49976ed2b4a9948673823bf7e247d28de439b20</checksum>
+          <time file="1155742843" build="1155739126"/>
+          <size package="255748" archive="0"/>
+          <base-version epoch="0" ver="1.0.beta3" rel="13.2" md5sum="1c89d41764ae9810da2f84c34f6a04c3" buildtime="1147881014" sequence_info="dovecot-1.0.beta3-13.2-98e44ea70b3fd8f6ca1f4a05799874a81311f41e20"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+  </atoms>
+</patch>

@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--PATCHINFO id="cebe8d34e6f8a2d6eff8918a69afca2c"!-->
+<patch
+    xmlns="http://novell.com/package/metadata/suse/patch"
+    xmlns:yum="http://linux.duke.edu/metadata/common"
+    xmlns:rpm="http://linux.duke.edu/metadata/rpm"
+    xmlns:suse="http://novell.com/package/metadata/suse/common"
+    patchid="libtiff-1907"
+    timestamp="1153951761"
+    engine="1.0">
+  <yum:name>libtiff</yum:name>
+  <summary lang="en">libtiff: Various remotely exploitable bugs fixed</summary>
+  <summary lang="de">libtiff: Diverse entfernt ausnutzbare Fehler wurden behoben</summary>
+  <description lang="en">This update of libtiff is the result of a source-code audit
+done by Tavis Ormandy. It fixes various bugs that can lead
+to denial-of-service conditions as well as to remote code
+execution while parsing a tiff image. (CVE-2006-3459,
+CVE-2006-3460, CVE-2006-3461, CVE-2006-3462, CVE-2006-3463,
+CVE-2006-3464, CVE-2006-3465)
+
+Please restart your applications.
+</description>
+  <description lang="de">Dieses Update ist das Resultat einer Quellcodeprüfung von
+Tavis Ormandy. Es wurden diverse Fehler behoben, die von
+einem Angreifer dazu benutzt werden konnten, Applikationen
+abstürzen zu lassen oder beliebigen Code auszuführen.
+(CVE-2006-3459, CVE-2006-3460, CVE-2006-3461,
+CVE-2006-3462, CVE-2006-3463, CVE-2006-3464, CVE-2006-3465)
+
+Alle betroffenen Applikationen müssen beendet und neu
+gestartet werden.
+</description>
+  <yum:version ver="1907" rel="0"/>
+  <rpm:requires>
+    <rpm:entry kind="atom" name="libtiff" epoch="0" ver="3.8.2" rel="5.9" flags="EQ"/>
+    <rpm:entry kind="atom" name="libtiff-32bit" epoch="0" ver="3.8.2" rel="5.9" flags="EQ"/>
+    <rpm:entry kind="atom" name="libtiff-64bit" epoch="0" ver="3.8.2" rel="5.9" flags="EQ"/>
+    <rpm:entry kind="atom" name="libtiff-devel" epoch="0" ver="3.8.2" rel="5.9" flags="EQ"/>
+    <rpm:entry kind="atom" name="libtiff-devel-32bit" epoch="0" ver="3.8.2" rel="5.9" flags="EQ"/>
+    <rpm:entry kind="atom" name="libtiff-devel-64bit" epoch="0" ver="3.8.2" rel="5.9" flags="EQ"/>
+  </rpm:requires>
+  <category>security</category>
+  <atoms>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>libtiff</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="3.8.2" rel="5.9"/>
+      <checksum type="sha" pkgid="YES">bbad009e34f4274a1974cb112f38c0aafcc3309c</checksum>
+      <time file="1154012876" build="1153951761"/>
+      <size package="121174" installed="352490" archive="353816"/>
+      <location href="rpm/i586/libtiff-3.8.2-5.9.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="libtiff" epoch="0" ver="3.8.2" rel="5.9" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="libtiff"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/libtiff-3.8.2-5.9.i586.patch.rpm"/>
+          <checksum type="sha">6d154f02cbfbf5cca427bfbbaa12903443277509</checksum>
+          <time file="1154017880" build="1153951761"/>
+          <size package="116533" archive="341664"/>
+          <base-version epoch="0" ver="3.8.2" rel="3"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/libtiff-3.8.2-3_5.9.i586.delta.rpm"/>
+          <checksum type="sha">9239a0844543cff6c9c90afdd92b5651da2d46a5</checksum>
+          <time file="1154017882" build="1153951761"/>
+          <size package="30030" archive="0"/>
+          <base-version epoch="0" ver="3.8.2" rel="3" md5sum="d33e322f6d8283ac3b5a2783bfffdfab" buildtime="1145757182" sequence_info="libtiff-3.8.2-3-b472096acb7f765d7363a3959e424d8f50"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>libtiff</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="3.8.2" rel="5.9"/>
+      <checksum type="sha" pkgid="YES">3378fd4a77d3fd91dda9d289ab03020469d92657</checksum>
+      <time file="1154006643" build="1153951547"/>
+      <size package="133090" installed="419978" archive="421304"/>
+      <location href="rpm/ppc/libtiff-3.8.2-5.9.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="libtiff" epoch="0" ver="3.8.2" rel="5.9" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="libtiff"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/libtiff-3.8.2-5.9.ppc.patch.rpm"/>
+          <checksum type="sha">945fba93d70e06bea675d2d6573a011608c4fe9f</checksum>
+          <time file="1154017893" build="1153951547"/>
+          <size package="126876" archive="402980"/>
+          <base-version epoch="0" ver="3.8.2" rel="3"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/libtiff-3.8.2-3_5.9.ppc.delta.rpm"/>
+          <checksum type="sha">d5206c4ed7e8f4e10bfe385431c844b128a36ed7</checksum>
+          <time file="1154017894" build="1153951547"/>
+          <size package="29409" archive="0"/>
+          <base-version epoch="0" ver="3.8.2" rel="3" md5sum="aad371f6f3553912d965bd403d51006d" buildtime="1145773799" sequence_info="libtiff-3.8.2-3-cae85c55b2c8ac7877c9c2297ef7121050"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>libtiff</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="3.8.2" rel="5.9"/>
+      <checksum type="sha" pkgid="YES">3203485fca861a292ae0a22dd2294872543bbd63</checksum>
+      <time file="1154013927" build="1153951587"/>
+      <size package="130758" installed="378242" archive="379576"/>
+      <location href="rpm/x86_64/libtiff-3.8.2-5.9.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="libtiff" epoch="0" ver="3.8.2" rel="5.9" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="libtiff"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/libtiff-3.8.2-5.9.x86_64.patch.rpm"/>
+          <checksum type="sha">20e5c8d8aa4b8f5a581d364a3d47edfd7eb49200</checksum>
+          <time file="1154017901" build="1153951587"/>
+          <size package="126153" archive="365792"/>
+          <base-version epoch="0" ver="3.8.2" rel="3"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/libtiff-3.8.2-3_5.9.x86_64.delta.rpm"/>
+          <checksum type="sha">24f54c83b8d41195dd835ba8083d5db65193b864</checksum>
+          <time file="1154017901" build="1153951587"/>
+          <size package="32239" archive="0"/>
+          <base-version epoch="0" ver="3.8.2" rel="3" md5sum="cef9becc62ec2ac509a5a708236d0ace" buildtime="1145754389" sequence_info="libtiff-3.8.2-3-43e722e9073ca17c66e59caf63adfa7650"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>libtiff-32bit</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="3.8.2" rel="5.9"/>
+      <checksum type="sha" pkgid="YES">37932b426110213292ca38073e890923643faf6b</checksum>
+      <time file="1154012877" build="1153951787"/>
+      <size package="118922" installed="348872" archive="349584"/>
+      <location href="rpm/x86_64/libtiff-32bit-3.8.2-5.9.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="libtiff-32bit" epoch="0" ver="3.8.2" rel="5.9" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="libtiff-32bit"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/libtiff-32bit-3.8.2-5.9.x86_64.patch.rpm"/>
+          <checksum type="sha">e2f6b849907d732bce162a636c5de72ba01623f5</checksum>
+          <time file="1154017908" build="1153951787"/>
+          <size package="116061" archive="341664"/>
+          <base-version epoch="0" ver="3.8.2" rel="3"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/libtiff-32bit-3.8.2-3_5.9.x86_64.delta.rpm"/>
+          <checksum type="sha">848d4b4db05649d1f87c764e00326d9088156e49</checksum>
+          <time file="1154017909" build="1153951787"/>
+          <size package="27428" archive="0"/>
+          <base-version epoch="0" ver="3.8.2" rel="3" md5sum="1176a07d4f3580bdb85e5d9c2c6d4dd5" buildtime="1145757216" sequence_info="libtiff-32bit-3.8.2-3-0c847dd5be180de0239fa8d55bbd898940"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>libtiff-64bit</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="3.8.2" rel="5.9"/>
+      <checksum type="sha" pkgid="YES">506e3978fcfcd264903e3c2ef59a5944bfe305b1</checksum>
+      <time file="1154006918" build="1153951388"/>
+      <size package="133677" installed="465416" archive="466136"/>
+      <location href="rpm/ppc/libtiff-64bit-3.8.2-5.9.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="libtiff-64bit" epoch="0" ver="3.8.2" rel="5.9" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="libtiff-64bit"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/libtiff-64bit-3.8.2-5.9.ppc.patch.rpm"/>
+          <checksum type="sha">b9e21a4836c4338ff20c385f103434f4b7e58fdd</checksum>
+          <time file="1154017914" build="1153951388"/>
+          <size package="130239" archive="452776"/>
+          <base-version epoch="0" ver="3.8.2" rel="3"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/libtiff-64bit-3.8.2-3_5.9.ppc.delta.rpm"/>
+          <checksum type="sha">0b9913bb2a09d1fa4506d582ddf24a8e9a8c93d3</checksum>
+          <time file="1154017915" build="1153951388"/>
+          <size package="28506" archive="0"/>
+          <base-version epoch="0" ver="3.8.2" rel="3" md5sum="a62f1fc540a6c925908cb9db31f3aad2" buildtime="1145771505" sequence_info="libtiff-64bit-3.8.2-3-a80f7a3bcf8408feec15c0951d0a86ea40"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>libtiff-devel</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="3.8.2" rel="5.9"/>
+      <checksum type="sha" pkgid="YES">ccd45c3fb5155d53283971ad04987df2256ac1bd</checksum>
+      <time file="1154012877" build="1153951761"/>
+      <size package="237731" installed="554495" archive="562144"/>
+      <location href="rpm/i586/libtiff-devel-3.8.2-5.9.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="libtiff-devel" epoch="0" ver="3.8.2" rel="5.9" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="libtiff-devel"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/libtiff-devel-3.8.2-5.9.i586.patch.rpm"/>
+          <checksum type="sha">ce5abcdcca304257c735236f08a8077b92da222a</checksum>
+          <time file="1154017919" build="1153951761"/>
+          <size package="127487" archive="410744"/>
+          <base-version epoch="0" ver="3.8.2" rel="3"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/libtiff-devel-3.8.2-3_5.9.i586.delta.rpm"/>
+          <checksum type="sha">431d319d1be478cfb9bdf4b4dc5691c4e2677367</checksum>
+          <time file="1154017920" build="1153951761"/>
+          <size package="29669" archive="0"/>
+          <base-version epoch="0" ver="3.8.2" rel="3" md5sum="f1a18b2508b2f8c451047213ea4917ad" buildtime="1145757182" sequence_info="libtiff-devel-3.8.2-3-bf4f0d318ca39a1358222bc1a4ce59fa96"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>libtiff-devel</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="3.8.2" rel="5.9"/>
+      <checksum type="sha" pkgid="YES">f0feab7f74c2bedb187d95fa73de77e74d2d4fb5</checksum>
+      <time file="1154006644" build="1153951547"/>
+      <size package="257936" installed="628818" archive="636468"/>
+      <location href="rpm/ppc/libtiff-devel-3.8.2-5.9.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="libtiff-devel" epoch="0" ver="3.8.2" rel="5.9" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="libtiff-devel"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/libtiff-devel-3.8.2-5.9.ppc.patch.rpm"/>
+          <checksum type="sha">80a694ca410bbbe2d95569908a80aecfb9188437</checksum>
+          <time file="1154017925" build="1153951547"/>
+          <size package="145624" archive="483860"/>
+          <base-version epoch="0" ver="3.8.2" rel="3"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/libtiff-devel-3.8.2-3_5.9.ppc.delta.rpm"/>
+          <checksum type="sha">4680ab64a100dde27cd226355b6407be2086b1e8</checksum>
+          <time file="1154017926" build="1153951547"/>
+          <size package="30418" archive="0"/>
+          <base-version epoch="0" ver="3.8.2" rel="3" md5sum="2b5674da3ba8a80e3420ae841652f977" buildtime="1145773799" sequence_info="libtiff-devel-3.8.2-3-84c91a39028d5138e7d224fad1615cc396"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>libtiff-devel</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="3.8.2" rel="5.9"/>
+      <checksum type="sha" pkgid="YES">eaf435c6f7534b5338d060381ca1e3cdb0e1d4c8</checksum>
+      <time file="1154013927" build="1153951587"/>
+      <size package="247511" installed="688335" archive="695996"/>
+      <location href="rpm/x86_64/libtiff-devel-3.8.2-5.9.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="libtiff-devel" epoch="0" ver="3.8.2" rel="5.9" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="libtiff-devel"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/libtiff-devel-3.8.2-5.9.x86_64.patch.rpm"/>
+          <checksum type="sha">2aebdf2597809ab9df56901805ae3135e823a3f6</checksum>
+          <time file="1154017930" build="1153951587"/>
+          <size package="137212" archive="542096"/>
+          <base-version epoch="0" ver="3.8.2" rel="3"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/libtiff-devel-3.8.2-3_5.9.x86_64.delta.rpm"/>
+          <checksum type="sha">52a49f20885b1936a85d2448567a0e186562b9b4</checksum>
+          <time file="1154017931" build="1153951587"/>
+          <size package="31063" archive="0"/>
+          <base-version epoch="0" ver="3.8.2" rel="3" md5sum="5ce0b308e05e569b144548eedf5f6815" buildtime="1145754389" sequence_info="libtiff-devel-3.8.2-3-fa922843a53c17599b2cb6aaa0c59efb96"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>libtiff-devel-32bit</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="3.8.2" rel="5.9"/>
+      <checksum type="sha" pkgid="YES">ccccee8d328f5ae4979c188268e9740f5c1b929b</checksum>
+      <time file="1154012877" build="1153951788"/>
+      <size package="125624" installed="418162" archive="419128"/>
+      <location href="rpm/x86_64/libtiff-devel-32bit-3.8.2-5.9.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="libtiff-devel-32bit" epoch="0" ver="3.8.2" rel="5.9" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="libtiff-devel-32bit"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/libtiff-devel-32bit-3.8.2-5.9.x86_64.patch.rpm"/>
+          <checksum type="sha">bcae0bba158618210846e24578d2b3d863fc8ad9</checksum>
+          <time file="1154017935" build="1153951788"/>
+          <size package="123087" archive="410744"/>
+          <base-version epoch="0" ver="3.8.2" rel="3"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/libtiff-devel-32bit-3.8.2-3_5.9.x86_64.delta.rpm"/>
+          <checksum type="sha">05719949af40bef70acfd8f1be4b3cb9371cd6e1</checksum>
+          <time file="1154017936" build="1153951788"/>
+          <size package="25040" archive="0"/>
+          <base-version epoch="0" ver="3.8.2" rel="3" md5sum="87f0ce80919cffbacd46d7c723e427d3" buildtime="1145757217" sequence_info="libtiff-devel-32bit-3.8.2-3-55ec3b757e12854cdf6b40f6de96bc5060"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>libtiff-devel-64bit</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="3.8.2" rel="5.9"/>
+      <checksum type="sha" pkgid="YES">1ff807fb8223626c47eaa5b8960381f5cc658e20</checksum>
+      <time file="1154006918" build="1153951389"/>
+      <size package="140558" installed="617586" archive="618564"/>
+      <location href="rpm/ppc/libtiff-devel-64bit-3.8.2-5.9.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="libtiff-devel-64bit" epoch="0" ver="3.8.2" rel="5.9" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="libtiff-devel-64bit"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/libtiff-devel-64bit-3.8.2-5.9.ppc.patch.rpm"/>
+          <checksum type="sha">fff670b9d2ab66dd2ff10e61da70733c01238bc4</checksum>
+          <time file="1154017940" build="1153951389"/>
+          <size package="137541" archive="604520"/>
+          <base-version epoch="0" ver="3.8.2" rel="3"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/libtiff-devel-64bit-3.8.2-3_5.9.ppc.delta.rpm"/>
+          <checksum type="sha">8ac76e23ec4ed6601d30af1b62ef00717eaf60c3</checksum>
+          <time file="1154017942" build="1153951389"/>
+          <size package="25614" archive="0"/>
+          <base-version epoch="0" ver="3.8.2" rel="3" md5sum="4196280eb2a903711cfc6ac5675dba3d" buildtime="1145771505" sequence_info="libtiff-devel-64bit-3.8.2-3-3cd09425cefa4582b5171127fe3d152c60"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+  </atoms>
+</patch>

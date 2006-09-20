@@ -1,0 +1,427 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--PATCHINFO id="cd50face2e6119d862a819b3b5679664"!-->
+<patch
+    xmlns="http://novell.com/package/metadata/suse/patch"
+    xmlns:yum="http://linux.duke.edu/metadata/common"
+    xmlns:rpm="http://linux.duke.edu/metadata/rpm"
+    xmlns:suse="http://novell.com/package/metadata/suse/common"
+    patchid="hal-1846"
+    timestamp="1153358632"
+    engine="1.0">
+  <yum:name>hal</yum:name>
+  <summary lang="en">Several fixes regarding storage methodes, memory leaks in libraries, smbios and formfactor detection and performance</summary>
+  <summary lang="de">Verschiedene Fehlerkorrekturen bezüglich Storage-Methoden, Speicherlecks in den Bibliotheken, SMBIOS Informationen und Formfaktor-Erkennung sowie der Performance von HAL</summary>
+  <description lang="en">This update fixes the detection of system.formfactor, fixes
+a unaligned access warning, adds storage methodes to
+unprobed devices (as e.g. internal Floppy drives), fixes
+read smbios information, fixes libhal-storage library to
+return correct volume size, fixes several memory leaks in
+libhal and libhal-storage, fixes umount handling of PCMCIA
+storage devices and fixes the haldaemon start script.
+
+This version now also supports debug to syslog for prober
+and addons, allows to mount partitions from fstab which
+contain option user, allows to umount floppy devices if
+they are in fstab.
+
+It also includes some performance patches to preserve
+memory usage and enhance the speed of HAL.
+</description>
+  <description lang="de">Dieses Update behebt Probleme mit der Erkennung des
+system.formfactor, behebt eine unaligned access
+Fehlermeldung, fügt Storage Methoden (mount/umount) zu
+nicht geprobten Geräten (wie beispielsweise internen
+Floppys) hinzu, korrigiert das Auslesen von SMBIOS
+Informationen, korrigiert die libhal-storage Bibliothek um
+die richtige Größe eines Mediums zurückzugeben, beseitigt
+verschiedene Speicherlecks in libhal und libhal-storage,
+korrigiert das Aushängen von PCMCIA Speichergeräten wenn
+diese entfernt werden und überarbeitet das haldaemon
+Startskript.
+
+Diese Version von HAL unterstützt nun die Ausgabe von
+Debug-Meldungen von Addons und Probern nach syslog, erlaubt
+das mounten/unmounten von Partitionen, die sich in der
+fstab befinden und die Option user haben, ermöglicht das
+Aushängen von Floppys auch dann, wenn diese in der fstab
+gelistet sind.
+
+Ebenso wurden einige Patches zur Verbesserung der
+Geschwindigkeit und der Speicherverwendung von HAL
+eingefügt.
+</description>
+  <yum:version ver="1846" rel="0"/>
+  <rpm:requires>
+    <rpm:entry kind="atom" name="hal" epoch="0" ver="0.5.6" rel="33.11" flags="EQ"/>
+    <rpm:entry kind="atom" name="hal-32bit" epoch="0" ver="0.5.6" rel="33.11" flags="EQ"/>
+    <rpm:entry kind="atom" name="hal-64bit" epoch="0" ver="0.5.6" rel="33.11" flags="EQ"/>
+    <rpm:entry kind="atom" name="hal-devel" epoch="0" ver="0.5.6" rel="33.11" flags="EQ"/>
+    <rpm:entry kind="atom" name="hal-gnome" epoch="0" ver="0.5.6" rel="33.11" flags="EQ"/>
+  </rpm:requires>
+  <category>recommended</category>
+  <atoms>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>hal</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="0.5.6" rel="33.11"/>
+      <checksum type="sha" pkgid="YES">24fc6197bca15619ceefeaab746459b70040f8ad</checksum>
+      <time file="1153407633" build="1153358632"/>
+      <size package="857002" installed="1556817" archive="1549468"/>
+      <location href="rpm/i586/hal-0.5.6-33.11.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="hal" epoch="0" ver="0.5.6" rel="33.11" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="hal"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/hal-0.5.6-33.11.i586.patch.rpm"/>
+          <checksum type="sha">2f437aeaecc7fa7fca42857b70b067d3b34f7d4a</checksum>
+          <time file="1153409404" build="1153358632"/>
+          <size package="228523" archive="649256"/>
+          <base-version epoch="0" ver="0.5.6" rel="31"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/hal-0.5.6-31_33.11.i586.delta.rpm"/>
+          <checksum type="sha">01be7fade8f537657a412503ffaee0a417bcf671</checksum>
+          <time file="1153409407" build="1153358632"/>
+          <size package="94350" archive="0"/>
+          <base-version epoch="0" ver="0.5.6" rel="31" md5sum="49abe01a9051d2dd1f136ba535b97353" buildtime="1146559264" sequence_info="hal-0.5.6-31-4b137040aa9fe6f8a65f95c87adcf0ac11fe10"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>hal</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="0.5.6" rel="33.11"/>
+      <checksum type="sha" pkgid="YES">27a451d32eea7ab5a83c235cb72e6d7d4d4b06ee</checksum>
+      <time file="1153408204" build="1153360613"/>
+      <size package="885307" installed="1706705" archive="1699356"/>
+      <location href="rpm/ppc/hal-0.5.6-33.11.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="hal" epoch="0" ver="0.5.6" rel="33.11" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="hal"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/hal-0.5.6-33.11.ppc.patch.rpm"/>
+          <checksum type="sha">6fd5a0032c98f72db93cd0aca8bf631241d34691</checksum>
+          <time file="1153409412" build="1153360613"/>
+          <size package="250042" archive="746692"/>
+          <base-version epoch="0" ver="0.5.6" rel="31"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/hal-0.5.6-31_33.11.ppc.delta.rpm"/>
+          <checksum type="sha">75b429875b3d7b434c56de8eff02725856fa1d48</checksum>
+          <time file="1153409414" build="1153360613"/>
+          <size package="95332" archive="0"/>
+          <base-version epoch="0" ver="0.5.6" rel="31" md5sum="e322a68c4182d95deda5c742912c0f07" buildtime="1146560082" sequence_info="hal-0.5.6-31-85c7063f36d735b90cb3b9866373f00011fe10"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>hal</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="0.5.6" rel="33.11"/>
+      <checksum type="sha" pkgid="YES">c86be0fa2d71a5845f51eb75ed0e4c98e43feec5</checksum>
+      <time file="1153408430" build="1153360129"/>
+      <size package="868477" installed="1621445" archive="1614184"/>
+      <location href="rpm/x86_64/hal-0.5.6-33.11.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="hal" epoch="0" ver="0.5.6" rel="33.11" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="hal"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/hal-0.5.6-33.11.x86_64.patch.rpm"/>
+          <checksum type="sha">523935ed10887ec660a75c153c2361d5c0c29217</checksum>
+          <time file="1153409416" build="1153360129"/>
+          <size package="237946" archive="689724"/>
+          <base-version epoch="0" ver="0.5.6" rel="31"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/hal-0.5.6-31_33.11.x86_64.delta.rpm"/>
+          <checksum type="sha">6972bf6415f644f6cbe0f3aa07b7466af9683a71</checksum>
+          <time file="1153409418" build="1153360129"/>
+          <size package="94923" archive="0"/>
+          <base-version epoch="0" ver="0.5.6" rel="31" md5sum="97161ba97df0553b7c63a3cfcc1ace57" buildtime="1146559963" sequence_info="hal-0.5.6-31-9df20f926e3590d82f8baa867be6d42a11fe10"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>hal-32bit</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="0.5.6" rel="33.11"/>
+      <checksum type="sha" pkgid="YES">9ea0744557e180fe6eddbac8ba52519f948623c9</checksum>
+      <time file="1153407633" build="1153358669"/>
+      <size package="53985" installed="61256" archive="61972"/>
+      <location href="rpm/x86_64/hal-32bit-0.5.6-33.11.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="hal-32bit" epoch="0" ver="0.5.6" rel="33.11" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="hal-32bit"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/hal-32bit-0.5.6-33.11.x86_64.patch.rpm"/>
+          <checksum type="sha">dc99a77507f336c06d60e5719203d21c7fb1d744</checksum>
+          <time file="1153409419" build="1153358669"/>
+          <size package="44171" archive="29352"/>
+          <base-version epoch="0" ver="0.5.6" rel="31"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/hal-32bit-0.5.6-31_33.11.x86_64.delta.rpm"/>
+          <checksum type="sha">3deaeaed12d649f2c810ccfc6a1556a7088f76d1</checksum>
+          <time file="1153409420" build="1153358669"/>
+          <size package="35976" archive="0"/>
+          <base-version epoch="0" ver="0.5.6" rel="31" md5sum="72263b7c3f8e81e54b1f959432c68bcb" buildtime="1146559322" sequence_info="hal-32bit-0.5.6-31-ac19ea95516759bd89b592f47a95099b40"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>hal-64bit</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="0.5.6" rel="33.11"/>
+      <checksum type="sha" pkgid="YES">f402ac7f9be20c36cee16af34dbccfdf53ad1781</checksum>
+      <time file="1153407950" build="1153360788"/>
+      <size package="57169" installed="97168" archive="97900"/>
+      <location href="rpm/ppc/hal-64bit-0.5.6-33.11.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="hal-64bit" epoch="0" ver="0.5.6" rel="33.11" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="hal-64bit"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/hal-64bit-0.5.6-33.11.ppc.patch.rpm"/>
+          <checksum type="sha">407e1cf97db57fdcd27f1954956b5bb75495a7a1</checksum>
+          <time file="1153409421" build="1153360788"/>
+          <size package="46012" archive="48064"/>
+          <base-version epoch="0" ver="0.5.6" rel="31"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/hal-64bit-0.5.6-31_33.11.ppc.delta.rpm"/>
+          <checksum type="sha">78933a634aa76babad0f701c5158c2cc14cf93c5</checksum>
+          <time file="1153409421" build="1153360788"/>
+          <size package="34835" archive="0"/>
+          <base-version epoch="0" ver="0.5.6" rel="31" md5sum="cb7fc37484116ad4b4658f731f4554a0" buildtime="1146559680" sequence_info="hal-64bit-0.5.6-31-48982835c0bc759c231f6c8f925efe4440"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>hal-devel</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="0.5.6" rel="33.11"/>
+      <checksum type="sha" pkgid="YES">5a3c29452aaafc0782374e9a83dd4faea8a5e146</checksum>
+      <time file="1153407633" build="1153358632"/>
+      <size package="149908" installed="1051065" archive="1058216"/>
+      <location href="rpm/i586/hal-devel-0.5.6-33.11.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="hal-devel" epoch="0" ver="0.5.6" rel="33.11" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="hal-devel"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/hal-devel-0.5.6-33.11.i586.patch.rpm"/>
+          <checksum type="sha">14820f2874fcd1179793b90cee8a93e2e97638f0</checksum>
+          <time file="1153409423" build="1153358632"/>
+          <size package="122800" archive="969872"/>
+          <base-version epoch="0" ver="0.5.6" rel="31"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/hal-devel-0.5.6-31_33.11.i586.delta.rpm"/>
+          <checksum type="sha">c56fee4e68fbde3ae129476b4141c5cb28e6d678</checksum>
+          <time file="1153409424" build="1153358632"/>
+          <size package="42318" archive="0"/>
+          <base-version epoch="0" ver="0.5.6" rel="31" md5sum="0b47da37a94901814d0d0c3cd129c2a5" buildtime="1146559264" sequence_info="hal-devel-0.5.6-31-67167e8a0801e49541e56c71596fa61cc5"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>hal-devel</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="0.5.6" rel="33.11"/>
+      <checksum type="sha" pkgid="YES">3c0c01cdd8d7f6f872e3d9cbe60cc1198a55b300</checksum>
+      <time file="1153408204" build="1153360613"/>
+      <size package="155865" installed="1075213" archive="1082364"/>
+      <location href="rpm/ppc/hal-devel-0.5.6-33.11.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="hal-devel" epoch="0" ver="0.5.6" rel="33.11" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="hal-devel"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/hal-devel-0.5.6-33.11.ppc.patch.rpm"/>
+          <checksum type="sha">97abea9446d534235f6699fc6767890b2630d9a4</checksum>
+          <time file="1153409426" build="1153360613"/>
+          <size package="125411" archive="978876"/>
+          <base-version epoch="0" ver="0.5.6" rel="31"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/hal-devel-0.5.6-31_33.11.ppc.delta.rpm"/>
+          <checksum type="sha">3d0e6f657fe0bd8eb0d48054cd452350b3e16b61</checksum>
+          <time file="1153409427" build="1153360613"/>
+          <size package="42415" archive="0"/>
+          <base-version epoch="0" ver="0.5.6" rel="31" md5sum="d111227f69e053a44783a2ac59780671" buildtime="1146560082" sequence_info="hal-devel-0.5.6-31-31099760e727264a95a8defeb298237bc5"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>hal-devel</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="0.5.6" rel="33.11"/>
+      <checksum type="sha" pkgid="YES">44eb404405164a49e953aec3d3cda9dcb9ecb166</checksum>
+      <time file="1153408430" build="1153360129"/>
+      <size package="152947" installed="1084743" archive="1091896"/>
+      <location href="rpm/x86_64/hal-devel-0.5.6-33.11.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="hal-devel" epoch="0" ver="0.5.6" rel="33.11" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="hal-devel"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/hal-devel-0.5.6-33.11.x86_64.patch.rpm"/>
+          <checksum type="sha">828997bfc54c35ba17e256491b4462194159fbd4</checksum>
+          <time file="1153409429" build="1153360129"/>
+          <size package="124360" archive="983800"/>
+          <base-version epoch="0" ver="0.5.6" rel="31"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/hal-devel-0.5.6-31_33.11.x86_64.delta.rpm"/>
+          <checksum type="sha">cfa60d5080f28321773588cb6f1254cb1490401b</checksum>
+          <time file="1153409430" build="1153360129"/>
+          <size package="42356" archive="0"/>
+          <base-version epoch="0" ver="0.5.6" rel="31" md5sum="7cdbe3f70391b409d962768142095b7c" buildtime="1146559963" sequence_info="hal-devel-0.5.6-31-7e3a5349b5ac8db8a60de341232c85fac5"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>hal-gnome</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="0.5.6" rel="33.11"/>
+      <checksum type="sha" pkgid="YES">1f36bbb3ff867c89ce01488186479b6f9039325d</checksum>
+      <time file="1153407634" build="1153358632"/>
+      <size package="101535" installed="182917" archive="189276"/>
+      <location href="rpm/i586/hal-gnome-0.5.6-33.11.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="hal-gnome" epoch="0" ver="0.5.6" rel="33.11" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="hal-gnome"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/hal-gnome-0.5.6-33.11.i586.patch.rpm"/>
+          <checksum type="sha">7618775972c831828741fd259c09e6197360b2fe</checksum>
+          <time file="1153409431" build="1153358632"/>
+          <size package="46967" archive="58660"/>
+          <base-version epoch="0" ver="0.5.6" rel="31"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/hal-gnome-0.5.6-31_33.11.i586.delta.rpm"/>
+          <checksum type="sha">52af3c9f747808605c344ccb35309cebb0d0fd52</checksum>
+          <time file="1153409432" build="1153358632"/>
+          <size package="35119" archive="0"/>
+          <base-version epoch="0" ver="0.5.6" rel="31" md5sum="374eb6d0d7cd4b1e529c2a47ab42fdc7" buildtime="1146559264" sequence_info="hal-gnome-0.5.6-31-35e4f8080ddabf0a791bf6127535da07f4"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>hal-gnome</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="0.5.6" rel="33.11"/>
+      <checksum type="sha" pkgid="YES">b824d5da0af1dcb33b26603c598bb7ee92d11e96</checksum>
+      <time file="1153408204" build="1153360613"/>
+      <size package="101568" installed="182917" archive="189276"/>
+      <location href="rpm/ppc/hal-gnome-0.5.6-33.11.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="hal-gnome" epoch="0" ver="0.5.6" rel="33.11" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="hal-gnome"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/hal-gnome-0.5.6-33.11.ppc.patch.rpm"/>
+          <checksum type="sha">4793f82bc427e504ef4359197f803ed30094d2ef</checksum>
+          <time file="1153409433" build="1153360613"/>
+          <size package="46947" archive="58660"/>
+          <base-version epoch="0" ver="0.5.6" rel="31"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/hal-gnome-0.5.6-31_33.11.ppc.delta.rpm"/>
+          <checksum type="sha">d5bd99347ff1340ce981ab2cadacd4b52d04247b</checksum>
+          <time file="1153409433" build="1153360613"/>
+          <size package="35077" archive="0"/>
+          <base-version epoch="0" ver="0.5.6" rel="31" md5sum="a3c4d5f68a10483f2242288b70b51960" buildtime="1146560082" sequence_info="hal-gnome-0.5.6-31-29adecc1e348492357331674c2140b87f4"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>hal-gnome</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="0.5.6" rel="33.11"/>
+      <checksum type="sha" pkgid="YES">3888caa6f424e20680a8a759509f99daed222def</checksum>
+      <time file="1153408430" build="1153360129"/>
+      <size package="101519" installed="182917" archive="189276"/>
+      <location href="rpm/x86_64/hal-gnome-0.5.6-33.11.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="hal-gnome" epoch="0" ver="0.5.6" rel="33.11" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="hal-gnome"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/hal-gnome-0.5.6-33.11.x86_64.patch.rpm"/>
+          <checksum type="sha">bad78fd69570c16496588b56cf52fdc5af15bc48</checksum>
+          <time file="1153409434" build="1153360129"/>
+          <size package="46948" archive="58660"/>
+          <base-version epoch="0" ver="0.5.6" rel="31"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/hal-gnome-0.5.6-31_33.11.x86_64.delta.rpm"/>
+          <checksum type="sha">fee508de7a5ebbb1d9e9d36b286e48e1c54d5989</checksum>
+          <time file="1153409435" build="1153360129"/>
+          <size package="35074" archive="0"/>
+          <base-version epoch="0" ver="0.5.6" rel="31" md5sum="cf013e4a5a1b2f211329897a324cda72" buildtime="1146559963" sequence_info="hal-gnome-0.5.6-31-26f445ff8316f1d8cef3efda2fc0402cf4"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+  </atoms>
+</patch>

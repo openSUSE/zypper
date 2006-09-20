@@ -1,0 +1,1170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--PATCHINFO id="97a5366f4962bc087ee8a21c4695375c"!-->
+<patch
+    xmlns="http://novell.com/package/metadata/suse/patch"
+    xmlns:yum="http://linux.duke.edu/metadata/common"
+    xmlns:rpm="http://linux.duke.edu/metadata/rpm"
+    xmlns:suse="http://novell.com/package/metadata/suse/common"
+    patchid="kernel-1836"
+    timestamp="1153166541"
+    engine="1.0">
+  <yum:name>kernel</yum:name>
+  <summary lang="en">Kernel Update for SUSE Linux 10.1</summary>
+  <summary lang="de">Kernel Update für SUSE Linux 10.1</summary>
+  <description lang="en">This update to Kernel 2.6.16.21 fixes following security
+problems:
+- CVE-2006-3626: Fixed a local root exploit due to a /proc
+  race condition and file mode setting.
+- CVE-2006-2451: Due to an argument validation error in
+  prctl(PR_SET_DUMPABLE) a local attacker can easily gain
+  administrator (root) privileges.
+- CVE-2006-2445: run_posix_cpu_timers: remove a bogus
+  BUG_ON()
+- CVE-2006-3085: xt_sctp: fix endless loop caused by 0
+  chunk length
+- CVE-2006-2448: powerpc: Fix machine check problem on
+  32-bit kernels
+- CVE-2006-2935: A stack overflow in CDROM handling could
+  be used by physical local attackers to execute code
+  within the kernel.
+
+Additionaly this kernel catches up to the SLE 10 state of
+the kernel, with massive additional fixes.
+</description>
+  <description lang="de">Dieses Update auf Kernel 2.6.16.21 behebt folgende
+Sicherheitsprobleme:
+- CVE-2006-3626: Fixed a local root exploit due to a /proc
+  race condition and file mode setting.
+- CVE-2006-2451: Due to an argument validation error in
+  prctl(PR_SET_DUMPABLE) a local attacker can easily gain
+  administrator (root) privileges.
+- CVE-2006-2445: run_posix_cpu_timers: remove a bogus
+  BUG_ON()
+- CVE-2006-3085: xt_sctp: fix endless loop caused by 0
+  chunk length
+- CVE-2006-2448: powerpc: Fix machine check problem on
+  32-bit kernels
+- CVE-2006-2935: A stack overflow in CDROM handling could
+  be used by physical local attackers to execute code
+  within the kernel.
+
+Weiterhin enthält dieses Update alle Änderungen des SLE 10
+Kernel.
+</description>
+  <yum:version ver="1836" rel="0"/>
+  <rpm:requires>
+    <rpm:entry kind="atom" name="kernel-bigsmp" epoch="0" ver="2.6.16.21" rel="0.13" flags="EQ"/>
+    <rpm:entry kind="atom" name="kernel-debug" epoch="0" ver="2.6.16.21" rel="0.13" flags="EQ"/>
+    <rpm:entry kind="atom" name="kernel-default" epoch="0" ver="2.6.16.21" rel="0.13" flags="EQ"/>
+    <rpm:entry kind="atom" name="kernel-iseries64" epoch="0" ver="2.6.16.21" rel="0.13" flags="EQ"/>
+    <rpm:entry kind="atom" name="kernel-kdump" epoch="0" ver="2.6.16.21" rel="0.13" flags="EQ"/>
+    <rpm:entry kind="atom" name="kernel-ppc64" epoch="0" ver="2.6.16.21" rel="0.13" flags="EQ"/>
+    <rpm:entry kind="atom" name="kernel-smp" epoch="0" ver="2.6.16.21" rel="0.13" flags="EQ"/>
+    <rpm:entry kind="atom" name="kernel-source" epoch="0" ver="2.6.16.21" rel="0.13" flags="EQ"/>
+    <rpm:entry kind="atom" name="kernel-syms" epoch="0" ver="2.6.16.21" rel="0.13" flags="EQ"/>
+    <rpm:entry kind="atom" name="kernel-um" epoch="0" ver="2.6.16.21" rel="0.13" flags="EQ"/>
+    <rpm:entry kind="atom" name="kernel-xen" epoch="0" ver="2.6.16.21" rel="0.13" flags="EQ"/>
+    <rpm:entry kind="atom" name="kernel-xenpae" epoch="0" ver="2.6.16.21" rel="0.13" flags="EQ"/>
+    <rpm:entry kind="atom" name="kexec-tools" epoch="0" ver="1.101" rel="32.17" flags="EQ"/>
+    <rpm:entry kind="atom" name="mkinitrd" epoch="0" ver="1.2" rel="106.15" flags="EQ"/>
+    <rpm:entry kind="atom" name="multipath-tools" epoch="0" ver="0.4.6" rel="25.9" flags="EQ"/>
+    <rpm:entry kind="atom" name="open-iscsi" epoch="0" ver="0.5.545" rel="9.13" flags="EQ"/>
+    <rpm:entry kind="atom" name="udev" epoch="0" ver="085" rel="30.11" flags="EQ"/>
+    <rpm:entry kind="message" name="kernel-patch-message-2" epoch="0" ver="1836" rel="1" flags="EQ"/>
+  </rpm:requires>
+  <reboot-needed/>
+  <category>security</category>
+    <license-to-confirm>
+This update can be used to install a new kernel.
+ 
+If you decide to use the kernel update, we recommend that you reboot
+your system upon completion of the online update, as additional
+kernel modules may be needed which can only be loaded after the system
+is rebooted.
+
+If you are in the course of performing a new installation, you should
+deselect this kernel update in order to avoid problems with the hardware
+detection during the installation.
+    </license-to-confirm>
+  <atoms>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>kernel-bigsmp</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="2.6.16.21" rel="0.13"/>
+      <checksum type="sha" pkgid="YES">71b4e2b217a36834a665c5e1f8ef86d3946ccf8c</checksum>
+      <time file="1153239913" build="1153166541"/>
+      <size package="18082715" installed="75916825" archive="72821108"/>
+      <location href="rpm/i586/kernel-bigsmp-2.6.16.21-0.13.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="kernel-bigsmp" epoch="0" ver="2.6.16.21" rel="0.13" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="kernel-bigsmp"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <deltarpm>
+          <location href="rpm/i586/kernel-bigsmp-2.6.16.13_2.6.16.21-4_0.13.i586.delta.rpm"/>
+          <checksum type="sha">868d4972489b7c5abd4d7d11854b4a20dcd82cb8</checksum>
+          <time file="1153240554" build="1153166541"/>
+          <size package="5589958" archive="0"/>
+          <base-version epoch="0" ver="2.6.16.13" rel="4" md5sum="8451e9f2e98e149e72adab752df0b3e7" buildtime="1146652851" sequence_info="kernel-bigsmp-2.6.16.13-4-3ca8ea8a7ef8affcd0bc84c9aa628e67234111d8f3c160"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>kernel-debug</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="2.6.16.21" rel="0.13"/>
+      <checksum type="sha" pkgid="YES">c0c674833abc95cc668b968bc18577de0dad669b</checksum>
+      <time file="1153239929" build="1153166483"/>
+      <size package="18904421" installed="77520570" archive="74423488"/>
+      <location href="rpm/i586/kernel-debug-2.6.16.21-0.13.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="kernel-debug" epoch="0" ver="2.6.16.21" rel="0.13" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="kernel-debug"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <deltarpm>
+          <location href="rpm/i586/kernel-debug-2.6.16.13_2.6.16.21-4_0.13.i586.delta.rpm"/>
+          <checksum type="sha">eab79a7f645374ff00f54c652ca347dd89363ed8</checksum>
+          <time file="1153240585" build="1153166483"/>
+          <size package="5640414" archive="0"/>
+          <base-version epoch="0" ver="2.6.16.13" rel="4" md5sum="660ad8636cf13c1b982c245119b3d1c4" buildtime="1146650841" sequence_info="kernel-debug-2.6.16.13-4-93a016a168416f4196f231ca50d71938234111a9f3c160"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>kernel-debug</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="2.6.16.21" rel="0.13"/>
+      <checksum type="sha" pkgid="YES">fe6e9cb774fdeba0d89fdce6c62fc329eea2501e</checksum>
+      <time file="1153239985" build="1153165903"/>
+      <size package="17143556" installed="80215631" archive="77205364"/>
+      <location href="rpm/x86_64/kernel-debug-2.6.16.21-0.13.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="kernel-debug" epoch="0" ver="2.6.16.21" rel="0.13" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="kernel-debug"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <deltarpm>
+          <location href="rpm/x86_64/kernel-debug-2.6.16.13_2.6.16.21-4_0.13.x86_64.delta.rpm"/>
+          <checksum type="sha">e34dce7c4aeb529f60cc0e1cb9a980a67dcb23a0</checksum>
+          <time file="1153240615" build="1153165903"/>
+          <size package="5464702" archive="0"/>
+          <base-version epoch="0" ver="2.6.16.13" rel="4" md5sum="0fd8cafe0b0d5d2e6c15b84ecd775833" buildtime="1146651351" sequence_info="kernel-debug-2.6.16.13-4-47fc6cb6dfe1405050966fd5b78e5d6e234111cda3c150"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>kernel-default</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="2.6.16.21" rel="0.13"/>
+      <checksum type="sha" pkgid="YES">9e6b7a32f9d1f8daaaf45e5edb438593eda5171e</checksum>
+      <time file="1153239891" build="1153165089"/>
+      <size package="17684989" installed="47429403" archive="44331244"/>
+      <location href="rpm/i586/kernel-default-2.6.16.21-0.13.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="kernel-default" epoch="0" ver="2.6.16.21" rel="0.13" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="kernel-default"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <deltarpm>
+          <location href="rpm/i586/kernel-default-2.6.16.13_2.6.16.21-4_0.13.i586.delta.rpm"/>
+          <checksum type="sha">839b58079022a043800ee69ba6f249d8c927c98f</checksum>
+          <time file="1153240643" build="1153165089"/>
+          <size package="5332997" archive="0"/>
+          <base-version epoch="0" ver="2.6.16.13" rel="4" md5sum="5eb3b005c71172f1c70fc130c7cdecc5" buildtime="1146653364" sequence_info="kernel-default-2.6.16.13-4-0cfab46b467d9c7de960426731f5d791234111abf3c160"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>kernel-default</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="2.6.16.21" rel="0.13"/>
+      <checksum type="sha" pkgid="YES">551742bc59cccd90c4dffaa9ddad0be20fbb41ba</checksum>
+      <time file="1153239867" build="1153164648"/>
+      <size package="11347998" installed="34122475" archive="31427500"/>
+      <location href="rpm/ppc/kernel-default-2.6.16.21-0.13.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="kernel-default" epoch="0" ver="2.6.16.21" rel="0.13" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="kernel-default"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <deltarpm>
+          <location href="rpm/ppc/kernel-default-2.6.16.13_2.6.16.21-4_0.13.ppc.delta.rpm"/>
+          <checksum type="sha">d4da38748f5267b3dc9f28680c4af0e02c4cd37b</checksum>
+          <time file="1153240662" build="1153164648"/>
+          <size package="2931370" archive="0"/>
+          <base-version epoch="0" ver="2.6.16.13" rel="4" md5sum="8cece1e6d4039dcdbe4c0964a0cc67d7" buildtime="1146651540" sequence_info="kernel-default-2.6.16.13-4-61d1cb33984113d4a3aef332766843ea2331119be1c160"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>kernel-default</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="2.6.16.21" rel="0.13"/>
+      <checksum type="sha" pkgid="YES">0986385b10025468b424383085c964eb66a47e89</checksum>
+      <time file="1153239941" build="1153166754"/>
+      <size package="16287805" installed="54117591" archive="51102264"/>
+      <location href="rpm/x86_64/kernel-default-2.6.16.21-0.13.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="kernel-default" epoch="0" ver="2.6.16.21" rel="0.13" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="kernel-default"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <deltarpm>
+          <location href="rpm/x86_64/kernel-default-2.6.16.13_2.6.16.21-4_0.13.x86_64.delta.rpm"/>
+          <checksum type="sha">ac89dab3716669b580298627670ec783b7a530d9</checksum>
+          <time file="1153240692" build="1153166754"/>
+          <size package="5487418" archive="0"/>
+          <base-version epoch="0" ver="2.6.16.13" rel="4" md5sum="f24d4da40d1d111358735eed331133d2" buildtime="1146651562" sequence_info="kernel-default-2.6.16.13-4-3a78cd33c1227cb270d3ac69eadcf3ee234111bea3c150"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>kernel-iseries64</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="2.6.16.21" rel="0.13"/>
+      <checksum type="sha" pkgid="YES">a902bf24f3e177e4b7c9d39deee4c96557097050</checksum>
+      <time file="1153239873" build="1153165244"/>
+      <size package="6519265" installed="25586186" archive="23458440"/>
+      <location href="rpm/ppc/kernel-iseries64-2.6.16.21-0.13.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="kernel-iseries64" epoch="0" ver="2.6.16.21" rel="0.13" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="kernel-iseries64"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <deltarpm>
+          <location href="rpm/ppc/kernel-iseries64-2.6.16.13_2.6.16.21-4_0.13.ppc.delta.rpm"/>
+          <checksum type="sha">0bd68233bf26dd661e9769ae9cc5124901454794</checksum>
+          <time file="1153240731" build="1153165244"/>
+          <size package="2181125" archive="0"/>
+          <base-version epoch="0" ver="2.6.16.13" rel="4" md5sum="733686b81e0b793ac5fdbb6f11dc1306" buildtime="1146650943" sequence_info="kernel-iseries64-2.6.16.13-4-01ae06ac6a038e4a484d2b34b9b207ab2331119e6c16"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>kernel-kdump</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="2.6.16.21" rel="0.13"/>
+      <checksum type="sha" pkgid="YES">6ebcab9505d6bf6117a5aae7e5708ed3af29371b</checksum>
+      <time file="1153239943" build="1153166567"/>
+      <size package="16393464" installed="47907341" archive="44815132"/>
+      <location href="rpm/i586/kernel-kdump-2.6.16.21-0.13.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="kernel-kdump" epoch="0" ver="2.6.16.21" rel="0.13" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="kernel-kdump"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <deltarpm>
+          <location href="rpm/i586/kernel-kdump-2.6.16.13_2.6.16.21-4_0.13.i586.delta.rpm"/>
+          <checksum type="sha">006d5cbe4f8f0049a878e9429633b260a5b8473a</checksum>
+          <time file="1153240755" build="1153166567"/>
+          <size package="3095465" archive="0"/>
+          <base-version epoch="0" ver="2.6.16.13" rel="4" md5sum="c2a9368d7a7c230ca1bff4c50291d6dd" buildtime="1146650370" sequence_info="kernel-kdump-2.6.16.13-4-31c1abe5abbc15324fe5dd3ff54a9ee12342abf3c160"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>kernel-kdump</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="2.6.16.21" rel="0.13"/>
+      <checksum type="sha" pkgid="YES">0528ce778c99c6df661ea590ae172e7cad28e4ee</checksum>
+      <time file="1153239885" build="1153168108"/>
+      <size package="8934242" installed="42680101" archive="40202128"/>
+      <location href="rpm/ppc/kernel-kdump-2.6.16.21-0.13.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="kernel-kdump" epoch="0" ver="2.6.16.21" rel="0.13" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="kernel-kdump"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <deltarpm>
+          <location href="rpm/ppc/kernel-kdump-2.6.16.13_2.6.16.21-4_0.13.ppc.delta.rpm"/>
+          <checksum type="sha">6029b19312ddf35c72ce054074d30073e0f7c6b6</checksum>
+          <time file="1153241060" build="1153168108"/>
+          <size package="4387141" archive="0"/>
+          <base-version epoch="0" ver="2.6.16.13" rel="4" md5sum="7a34155dc46c4af687dbeb8a80c42f4b" buildtime="1146651700" sequence_info="kernel-kdump-2.6.16.13-4-decb908bb68687967237145ef2409ad42342ff6c16"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>kernel-kdump</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="2.6.16.21" rel="0.13"/>
+      <checksum type="sha" pkgid="YES">aac727d07ee710a67e228841824997c263f146d6</checksum>
+      <time file="1153239955" build="1153165805"/>
+      <size package="14906647" installed="56660666" archive="53650008"/>
+      <location href="rpm/x86_64/kernel-kdump-2.6.16.21-0.13.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="kernel-kdump" epoch="0" ver="2.6.16.21" rel="0.13" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="kernel-kdump"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <deltarpm>
+          <location href="rpm/x86_64/kernel-kdump-2.6.16.13_2.6.16.21-4_0.13.x86_64.delta.rpm"/>
+          <checksum type="sha">f4843e66d0725d85d0b368f01c51fa6ebbae383d</checksum>
+          <time file="1153241093" build="1153165805"/>
+          <size package="3064696" archive="0"/>
+          <base-version epoch="0" ver="2.6.16.13" rel="4" md5sum="1d40215d1c4bbbe5542d0aa5361dd8c1" buildtime="1146651688" sequence_info="kernel-kdump-2.6.16.13-4-d7891274efa35b66f87d3459bc3ddaa42342bea3c150"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>kernel-ppc64</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="2.6.16.21" rel="0.13"/>
+      <checksum type="sha" pkgid="YES">06a88d2f674747ca72a19ecad629fda2d230c4c8</checksum>
+      <time file="1153239877" build="1153166106"/>
+      <size package="10323230" installed="50210868" archive="47647908"/>
+      <location href="rpm/ppc/kernel-ppc64-2.6.16.21-0.13.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="kernel-ppc64" epoch="0" ver="2.6.16.21" rel="0.13" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="kernel-ppc64"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <deltarpm>
+          <location href="rpm/ppc/kernel-ppc64-2.6.16.13_2.6.16.21-4_0.13.ppc.delta.rpm"/>
+          <checksum type="sha">8204a12ec09464624ee125482687917f5d06ee1d</checksum>
+          <time file="1153241518" build="1153166106"/>
+          <size package="2864653" archive="0"/>
+          <base-version epoch="0" ver="2.6.16.13" rel="4" md5sum="67229655c455b4e98f238b043858e4eb" buildtime="1146652607" sequence_info="kernel-ppc64-2.6.16.13-4-04eafa21d720530c3230b9a276908747233111c9c1c160"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>kernel-smp</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="2.6.16.21" rel="0.13"/>
+      <checksum type="sha" pkgid="YES">1a92947e507177f174ee1f11328f7b7b4105f747</checksum>
+      <time file="1153239958" build="1153165997"/>
+      <size package="17988756" installed="54952896" archive="51869600"/>
+      <location href="rpm/i586/kernel-smp-2.6.16.21-0.13.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="kernel-smp" epoch="0" ver="2.6.16.21" rel="0.13" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="kernel-smp"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <deltarpm>
+          <location href="rpm/i586/kernel-smp-2.6.16.13_2.6.16.21-4_0.13.i586.delta.rpm"/>
+          <checksum type="sha">beb04876fd1c1708080d1837dd8bf1580e73895f</checksum>
+          <time file="1153241552" build="1153165997"/>
+          <size package="5558001" archive="0"/>
+          <base-version epoch="0" ver="2.6.16.13" rel="4" md5sum="e5577626d5a6effb0eb8bc95c77a3369" buildtime="1146654488" sequence_info="kernel-smp-2.6.16.13-4-23d5db34aa2348d17e0b3278580b662e234111c9f3c160"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>kernel-smp</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="2.6.16.21" rel="0.13"/>
+      <checksum type="sha" pkgid="YES">17e5933005352bcad48dea7669646216244a86da</checksum>
+      <time file="1153239965" build="1153166032"/>
+      <size package="16628350" installed="78689517" archive="75683192"/>
+      <location href="rpm/x86_64/kernel-smp-2.6.16.21-0.13.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="kernel-smp" epoch="0" ver="2.6.16.21" rel="0.13" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="kernel-smp"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <deltarpm>
+          <location href="rpm/x86_64/kernel-smp-2.6.16.13_2.6.16.21-4_0.13.x86_64.delta.rpm"/>
+          <checksum type="sha">a6c173804583de897f00933b9f6af63f5d695996</checksum>
+          <time file="1153241587" build="1153166032"/>
+          <size package="5820636" archive="0"/>
+          <base-version epoch="0" ver="2.6.16.13" rel="4" md5sum="c0564f08bdf357306e6a394b1ce7d097" buildtime="1146651575" sequence_info="kernel-smp-2.6.16.13-4-23cd183bdf792b4bf86a1bfca5e9e27e234111dca3c150"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>kernel-source</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="2.6.16.21" rel="0.13"/>
+      <checksum type="sha" pkgid="YES">8f1cc1a35a927189005270d809c74ab2d37bf118</checksum>
+      <time file="1153239884" build="1153162698"/>
+      <size package="45034574" installed="229370668" archive="233071924"/>
+      <location href="rpm/i586/kernel-source-2.6.16.21-0.13.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="kernel-source" epoch="0" ver="2.6.16.21" rel="0.13" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="kernel-source"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <deltarpm>
+          <location href="rpm/i586/kernel-source-2.6.16.13_2.6.16.21-4_0.13.i586.delta.rpm"/>
+          <checksum type="sha">a01e89b94ba2fd56f4a025855dbf2f5212bcef09</checksum>
+          <time file="1153241687" build="1153162698"/>
+          <size package="3236869" archive="0"/>
+          <base-version epoch="0" ver="2.6.16.13" rel="4" md5sum="06421e067b8a339a68772a0e6ba4c34b" buildtime="1146648892" sequence_info="kernel-source-2.6.16.13-4-6df79c62e27f15d0a1f28374ddfb17aa811d1175161413a1175161413a1175161413a1175161413a1175161413f361413a25161413a25161413f8a950a95109951089510e8510d8510c8510b85109851088510ff410ef410df410cf410af4109f4108f410fe410ee410ae210"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>kernel-source</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="2.6.16.21" rel="0.13"/>
+      <checksum type="sha" pkgid="YES">0347ba9ed0b8ce489bee452954ed18ad414a983e</checksum>
+      <time file="1153239863" build="1153162691"/>
+      <size package="44997456" installed="228713550" archive="232385640"/>
+      <location href="rpm/ppc/kernel-source-2.6.16.21-0.13.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="kernel-source" epoch="0" ver="2.6.16.21" rel="0.13" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="kernel-source"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <deltarpm>
+          <location href="rpm/ppc/kernel-source-2.6.16.13_2.6.16.21-4_0.13.ppc.delta.rpm"/>
+          <checksum type="sha">5eff95258336b1956d45518f8a5db0eaf6b581be</checksum>
+          <time file="1153241797" build="1153162691"/>
+          <size package="3218573" archive="0"/>
+          <base-version epoch="0" ver="2.6.16.13" rel="4" md5sum="b6e16d583d5141879193302d1e3d9f12" buildtime="1146648703" sequence_info="kernel-source-2.6.16.13-4-a99cfa169ea47a456847c35a870228a9811f2516142111a24161421b2516142111a2516142111f8a950bd2109d210ec210dc210cc210bc2109c2108c210fb210eb210db210cb210ab2109b2108b210fa210ea210"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>kernel-source</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="2.6.16.21" rel="0.13"/>
+      <checksum type="sha" pkgid="YES">0bddda1626c45a61d6810c80e36bae37c36f16e0</checksum>
+      <time file="1153239939" build="1153163367"/>
+      <size package="45033536" installed="228934540" archive="232612244"/>
+      <location href="rpm/x86_64/kernel-source-2.6.16.21-0.13.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="kernel-source" epoch="0" ver="2.6.16.21" rel="0.13" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="kernel-source"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <deltarpm>
+          <location href="rpm/x86_64/kernel-source-2.6.16.13_2.6.16.21-4_0.13.x86_64.delta.rpm"/>
+          <checksum type="sha">d65e61760767dadfda0048f8eb4bb7656ddd0f56</checksum>
+          <time file="1153241889" build="1153163367"/>
+          <size package="3220105" archive="0"/>
+          <base-version epoch="0" ver="2.6.16.13" rel="4" md5sum="1e31654514c973e8269039d66e8edc56" buildtime="1146648792" sequence_info="kernel-source-2.6.16.13-4-11315792d37eb524a5d1718f56c8d2dd811d1175161413a25161413a25161413a1175161413a25161413e8a950e9310d9310c9310a93109931089310f8310d8310c8310b8310a83109831088310ef210df210cf210bf210af210b921"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>kernel-syms</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="2.6.16.21" rel="0.13"/>
+      <checksum type="sha" pkgid="YES">b7ef62c3adc6fc312214c30c45e02ce68030aa38</checksum>
+      <time file="1153240043" build="1153178746"/>
+      <size package="1771937" installed="2792861" archive="2797176"/>
+      <location href="rpm/i586/kernel-syms-2.6.16.21-0.13.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="kernel-syms" epoch="0" ver="2.6.16.21" rel="0.13" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="kernel-syms"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <deltarpm>
+          <location href="rpm/i586/kernel-syms-2.6.16.13_2.6.16.21-4_0.13.i586.delta.rpm"/>
+          <checksum type="sha">2479f391886e99c053fe338473f7b8916a120122</checksum>
+          <time file="1153241901" build="1153178746"/>
+          <size package="1539823" archive="0"/>
+          <base-version epoch="0" ver="2.6.16.13" rel="4" md5sum="05aee8e9ce91b5f1df238ae708464295" buildtime="1146661618" sequence_info="kernel-syms-2.6.16.13-4-d3ba57db20800819de328bd1ce0508e2a3"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>kernel-syms</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="2.6.16.21" rel="0.13"/>
+      <checksum type="sha" pkgid="YES">a6614a233f4d9ca4dc7df303727129ad6cd24abf</checksum>
+      <time file="1153239902" build="1153171491"/>
+      <size package="1045367" installed="978831" archive="981260"/>
+      <location href="rpm/ppc/kernel-syms-2.6.16.21-0.13.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="kernel-syms" epoch="0" ver="2.6.16.21" rel="0.13" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="kernel-syms"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <deltarpm>
+          <location href="rpm/ppc/kernel-syms-2.6.16.13_2.6.16.21-4_0.13.ppc.delta.rpm"/>
+          <checksum type="sha">986d7b5c2cb3e7c31fb258571a05a120048dfbf6</checksum>
+          <time file="1153241904" build="1153171491"/>
+          <size package="956519" archive="0"/>
+          <base-version epoch="0" ver="2.6.16.13" rel="4" md5sum="d069b4cdba6e7083e26350a1289eddd4" buildtime="1146655133" sequence_info="kernel-syms-2.6.16.13-4-388d26c409a5c484743e435e5d34913be1"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>kernel-syms</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="2.6.16.21" rel="0.13"/>
+      <checksum type="sha" pkgid="YES">79781d8443796a243a723e4514d9a5146eec6e2a</checksum>
+      <time file="1153240036" build="1153178697"/>
+      <size package="1373395" installed="1822829" archive="1825708"/>
+      <location href="rpm/x86_64/kernel-syms-2.6.16.21-0.13.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="kernel-syms" epoch="0" ver="2.6.16.21" rel="0.13" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="kernel-syms"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <deltarpm>
+          <location href="rpm/x86_64/kernel-syms-2.6.16.13_2.6.16.21-4_0.13.x86_64.delta.rpm"/>
+          <checksum type="sha">c635ac0b6dfde90f926b76d28207954ba31aad2a</checksum>
+          <time file="1153241909" build="1153178697"/>
+          <size package="1197175" archive="0"/>
+          <base-version epoch="0" ver="2.6.16.13" rel="4" md5sum="1e1fc2841c9756ac9b77544fda21aacf" buildtime="1146660620" sequence_info="kernel-syms-2.6.16.13-4-091410ab78f4de2bd4217c34233bc83b92"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>kernel-um</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="2.6.16.21" rel="0.13"/>
+      <checksum type="sha" pkgid="YES">6cf07f77346cd1847ee338921bf47fec3413e0f6</checksum>
+      <time file="1153240033" build="1153163921"/>
+      <size package="5662111" installed="15134179" archive="13041264"/>
+      <location href="rpm/i586/kernel-um-2.6.16.21-0.13.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="kernel-um" epoch="0" ver="2.6.16.21" rel="0.13" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="kernel-um"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <deltarpm>
+          <location href="rpm/i586/kernel-um-2.6.16.13_2.6.16.21-4_0.13.i586.delta.rpm"/>
+          <checksum type="sha">b3da7470025ff4fc15b9786bb969afeffbf0a3fc</checksum>
+          <time file="1153241924" build="1153163921"/>
+          <size package="2091298" archive="0"/>
+          <base-version epoch="0" ver="2.6.16.13" rel="4" md5sum="82f930390bbe52db442e049b41cc4fc3" buildtime="1146649719" sequence_info="kernel-um-2.6.16.13-4-2136f4eee63359f9ab7d24e7468f4be3258f7c16"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>kernel-xen</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="2.6.16.21" rel="0.13"/>
+      <checksum type="sha" pkgid="YES">8668ca34225d45b06a4f9f43c776a922e69aaba9</checksum>
+      <time file="1153239970" build="1153166134"/>
+      <size package="18342400" installed="54713998" archive="51688912"/>
+      <location href="rpm/i586/kernel-xen-2.6.16.21-0.13.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="kernel-xen" epoch="0" ver="2.6.16.21" rel="0.13" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="kernel-xen"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <deltarpm>
+          <location href="rpm/i586/kernel-xen-2.6.16.13_2.6.16.21-4_0.13.i586.delta.rpm"/>
+          <checksum type="sha">61da66bd17e2df5cdeb91970ebb761e5faffe0f1</checksum>
+          <time file="1153241961" build="1153166134"/>
+          <size package="5907832" archive="0"/>
+          <base-version epoch="0" ver="2.6.16.13" rel="4" md5sum="419182b12a3f83b86f305c1b9c53ccc8" buildtime="1146652018" sequence_info="kernel-xen-2.6.16.13-4-e5088ef9aa9321fed16606b5d223c0a8235289c3c160"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>kernel-xen</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="2.6.16.21" rel="0.13"/>
+      <checksum type="sha" pkgid="YES">542cbd6b71aa45f80f179a8dd194e005f3e74ade</checksum>
+      <time file="1153239973" build="1153166133"/>
+      <size package="16482654" installed="60706337" archive="57718584"/>
+      <location href="rpm/x86_64/kernel-xen-2.6.16.21-0.13.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="kernel-xen" epoch="0" ver="2.6.16.21" rel="0.13" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="kernel-xen"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <deltarpm>
+          <location href="rpm/x86_64/kernel-xen-2.6.16.13_2.6.16.21-4_0.13.x86_64.delta.rpm"/>
+          <checksum type="sha">82c11157ef360cfd9d52616dc039219ed2610f85</checksum>
+          <time file="1153241994" build="1153166133"/>
+          <size package="5705960" archive="0"/>
+          <base-version epoch="0" ver="2.6.16.13" rel="4" md5sum="ce76ae67aa40f65821117d179198b071" buildtime="1146652039" sequence_info="kernel-xen-2.6.16.13-4-7ca3216c7cd2782da5446a02ca487e2a2352dba3c150"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>kernel-xenpae</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="2.6.16.21" rel="0.13"/>
+      <checksum type="sha" pkgid="YES">869ebb15c37fcc77969199631c5e61a5ed3c39ae</checksum>
+      <time file="1153239983" build="1153166602"/>
+      <size package="18365795" installed="54801642" archive="51769048"/>
+      <location href="rpm/i586/kernel-xenpae-2.6.16.21-0.13.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="kernel-xenpae" epoch="0" ver="2.6.16.21" rel="0.13" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="kernel-xenpae"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <deltarpm>
+          <location href="rpm/i586/kernel-xenpae-2.6.16.13_2.6.16.21-4_0.13.i586.delta.rpm"/>
+          <checksum type="sha">9744879afda8b72a444dcbf63a4b5679370105ef</checksum>
+          <time file="1153242036" build="1153166602"/>
+          <size package="5929339" archive="0"/>
+          <base-version epoch="0" ver="2.6.16.13" rel="4" md5sum="3e9f03223add44c412f99bdaf1d4e14a" buildtime="1146654373" sequence_info="kernel-xenpae-2.6.16.13-4-10ec2057cb0b3944c7432d43fcf9d186235289c3c160"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>kexec-tools</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="1.101" rel="32.17"/>
+      <checksum type="sha" pkgid="YES">a71ca8c5fa8627b161e6d6a1dee24e7a157bf1e5</checksum>
+      <time file="1153240193" build="1153216908"/>
+      <size package="107953" installed="271679" archive="274944"/>
+      <location href="rpm/i586/kexec-tools-1.101-32.17.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="kexec-tools" epoch="0" ver="1.101" rel="32.17" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="kexec-tools"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/kexec-tools-1.101-32.17.i586.patch.rpm"/>
+          <checksum type="sha">855310bb61d6e99aec1937f125254c034e9e0d99</checksum>
+          <time file="1153242040" build="1153216908"/>
+          <size package="22225" archive="20808"/>
+          <base-version epoch="0" ver="1.101" rel="30"/>
+        </patchrpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>kexec-tools</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="1.101" rel="32.17"/>
+      <checksum type="sha" pkgid="YES">1a0137e43a7265b593e1df74817c9e9159e30a31</checksum>
+      <time file="1153240178" build="1153216833"/>
+      <size package="107446" installed="293487" archive="296760"/>
+      <location href="rpm/x86_64/kexec-tools-1.101-32.17.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="kexec-tools" epoch="0" ver="1.101" rel="32.17" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="kexec-tools"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/kexec-tools-1.101-32.17.x86_64.patch.rpm"/>
+          <checksum type="sha">ef33ea9947a293aec7f58c0947dc10596612af5f</checksum>
+          <time file="1153242042" build="1153216833"/>
+          <size package="70629" archive="174892"/>
+          <base-version epoch="0" ver="1.101" rel="30"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/kexec-tools-1.101-30_32.17.x86_64.delta.rpm"/>
+          <checksum type="sha">78aa96a1f5f42f3f3c50b144cc1121cd5b0daec5</checksum>
+          <time file="1153242042" build="1153216833"/>
+          <size package="50049" archive="0"/>
+          <base-version epoch="0" ver="1.101" rel="30" md5sum="9b1a68fd7ad50f5ae14b6cd79fa8091a" buildtime="1146487148" sequence_info="kexec-tools-1.101-30-b2c55b9b7fd672d0b590292b938833c1815142"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>mkinitrd</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="1.2" rel="106.15"/>
+      <checksum type="sha" pkgid="YES">1dbeadfe78f8c543c9c038ca5125ba1154dc0ecf</checksum>
+      <time file="1153240009" build="1153137735"/>
+      <size package="69447" installed="98115" archive="99876"/>
+      <location href="rpm/i586/mkinitrd-1.2-106.15.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="mkinitrd" epoch="0" ver="1.2" rel="106.15" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="mkinitrd"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/mkinitrd-1.2-106.15.i586.patch.rpm"/>
+          <checksum type="sha">61cc8f6f984cc091dd874813a59b83c5422196c8</checksum>
+          <time file="1153242044" build="1153137735"/>
+          <size package="64422" archive="87256"/>
+          <base-version epoch="0" ver="1.2" rel="103"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/mkinitrd-1.2-103_106.15.i586.delta.rpm"/>
+          <checksum type="sha">05f277abfa456e6e068618fa4565c7bcccb71f4d</checksum>
+          <time file="1153242044" build="1153137735"/>
+          <size package="44026" archive="0"/>
+          <base-version epoch="0" ver="1.2" rel="103" md5sum="ee81004165db96d689a8947c000a5495" buildtime="1145996022" sequence_info="mkinitrd-1.2-103-3a653965a70ff6651ad1ed3c7dc7fa11c1"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>mkinitrd</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="1.2" rel="106.15"/>
+      <checksum type="sha" pkgid="YES">9873cdcfcda6778d2e6ce6eaadfd99f0eb6a3539</checksum>
+      <time file="1153239899" build="1153144013"/>
+      <size package="70308" installed="100019" archive="101780"/>
+      <location href="rpm/ppc/mkinitrd-1.2-106.15.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="mkinitrd" epoch="0" ver="1.2" rel="106.15" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="mkinitrd"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/mkinitrd-1.2-106.15.ppc.patch.rpm"/>
+          <checksum type="sha">bea1377c8ec488b33f7ff2213345608d76135c96</checksum>
+          <time file="1153242046" build="1153144013"/>
+          <size package="64414" archive="87256"/>
+          <base-version epoch="0" ver="1.2" rel="103"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/mkinitrd-1.2-103_106.15.ppc.delta.rpm"/>
+          <checksum type="sha">8a59f2bcbe17869352ab5e8fbd23532eb414e17a</checksum>
+          <time file="1153242046" build="1153144013"/>
+          <size package="44013" archive="0"/>
+          <base-version epoch="0" ver="1.2" rel="103" md5sum="c44bc79587479dd0aa42913f93f94dba" buildtime="1145997564" sequence_info="mkinitrd-1.2-103-00427b84cb9d56714aea32bb09132e2ac1"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>mkinitrd</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="1.2" rel="106.15"/>
+      <checksum type="sha" pkgid="YES">32db7bef08910bb087ab02a7270f89471dbd5c4d</checksum>
+      <time file="1153240007" build="1153137203"/>
+      <size package="69906" installed="100547" archive="102308"/>
+      <location href="rpm/x86_64/mkinitrd-1.2-106.15.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="mkinitrd" epoch="0" ver="1.2" rel="106.15" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="mkinitrd"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/mkinitrd-1.2-106.15.x86_64.patch.rpm"/>
+          <checksum type="sha">a7788cb3f310ad9faa08d1374e4c165341e99fc2</checksum>
+          <time file="1153242048" build="1153137203"/>
+          <size package="64388" archive="87256"/>
+          <base-version epoch="0" ver="1.2" rel="103"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/mkinitrd-1.2-103_106.15.x86_64.delta.rpm"/>
+          <checksum type="sha">2f95e617ec81c3c1864ca599d8a25669b79c4f6c</checksum>
+          <time file="1153242048" build="1153137203"/>
+          <size package="44033" archive="0"/>
+          <base-version epoch="0" ver="1.2" rel="103" md5sum="52f271b48afd9d175fc76d8d42453dfa" buildtime="1145996245" sequence_info="mkinitrd-1.2-103-f8fcd74a29c0b20b394cd09eb244f5b9c1"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>multipath-tools</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="0.4.6" rel="25.9"/>
+      <checksum type="sha" pkgid="YES">2c4c1bf2de6bf656944ce6564689e9a051537e9d</checksum>
+      <time file="1153240082" build="1153139152"/>
+      <size package="148726" installed="385863" archive="390588"/>
+      <location href="rpm/i586/multipath-tools-0.4.6-25.9.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="multipath-tools" epoch="0" ver="0.4.6" rel="25.9" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="multipath-tools"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/multipath-tools-0.4.6-25.9.i586.patch.rpm"/>
+          <checksum type="sha">17a002eabbceacd39aa34b4446925decc48046fc</checksum>
+          <time file="1153242050" build="1153139152"/>
+          <size package="109783" archive="280804"/>
+          <base-version epoch="0" ver="0.4.6" rel="25"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/multipath-tools-0.4.6-25_25.9.i586.delta.rpm"/>
+          <checksum type="sha">4f667a381d9567aa5df325185694cc7483001b59</checksum>
+          <time file="1153242050" build="1153139152"/>
+          <size package="43936" archive="0"/>
+          <base-version epoch="0" ver="0.4.6" rel="25" md5sum="af344553ac613f157007d535447ac1cd" buildtime="1146657488" sequence_info="multipath-tools-0.4.6-25-b1c396f1ed44fa5831ffe5d817b6970b0221e166"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>multipath-tools</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="0.4.6" rel="25.9"/>
+      <checksum type="sha" pkgid="YES">ed4c438a01da6f5ecd490e23f2640add7598fa56</checksum>
+      <time file="1153239946" build="1153151024"/>
+      <size package="161715" installed="457979" archive="462704"/>
+      <location href="rpm/ppc/multipath-tools-0.4.6-25.9.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="multipath-tools" epoch="0" ver="0.4.6" rel="25.9" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="multipath-tools"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/multipath-tools-0.4.6-25.9.ppc.patch.rpm"/>
+          <checksum type="sha">6844c8ff5f02ac48836d6930ebfb6e66d9002d7a</checksum>
+          <time file="1153242052" build="1153151024"/>
+          <size package="119550" archive="333980"/>
+          <base-version epoch="0" ver="0.4.6" rel="25"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/multipath-tools-0.4.6-25_25.9.ppc.delta.rpm"/>
+          <checksum type="sha">cc9d66caa4aeec53250090dcf40103f6ae035d0a</checksum>
+          <time file="1153242053" build="1153151024"/>
+          <size package="44483" archive="0"/>
+          <base-version epoch="0" ver="0.4.6" rel="25" md5sum="2f753982087bfabff5f96bc7bdeab10d" buildtime="1146657533" sequence_info="multipath-tools-0.4.6-25-cdd1606583bc42ae3e67d825c60abe6f0221e166"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>multipath-tools</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="0.4.6" rel="25.9"/>
+      <checksum type="sha" pkgid="YES">ce48742a78d867895fbe266ccaff903125ce7255</checksum>
+      <time file="1153240068" build="1153138807"/>
+      <size package="169672" installed="453043" archive="457768"/>
+      <location href="rpm/x86_64/multipath-tools-0.4.6-25.9.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="multipath-tools" epoch="0" ver="0.4.6" rel="25.9" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="multipath-tools"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/multipath-tools-0.4.6-25.9.x86_64.patch.rpm"/>
+          <checksum type="sha">bd88fe149143bc81ac583a7b14928443ad954672</checksum>
+          <time file="1153242054" build="1153138807"/>
+          <size package="129053" archive="328380"/>
+          <base-version epoch="0" ver="0.4.6" rel="25"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/multipath-tools-0.4.6-25_25.9.x86_64.delta.rpm"/>
+          <checksum type="sha">efc8111cd83d0eaa91cb7f6784815efd1ab32468</checksum>
+          <time file="1153242055" build="1153138807"/>
+          <size package="45865" archive="0"/>
+          <base-version epoch="0" ver="0.4.6" rel="25" md5sum="c7d8daff7898428c9602f839b78f83cd" buildtime="1146657464" sequence_info="multipath-tools-0.4.6-25-3b0ff1fe27a19ba4c1cdcb80519589370221e166"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>open-iscsi</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="0.5.545" rel="9.13"/>
+      <checksum type="sha" pkgid="YES">48ffdd6d89f9f19f6a118d980284b13c78026148</checksum>
+      <time file="1153240082" build="1153139063"/>
+      <size package="782458" installed="1907107" archive="1909364"/>
+      <location href="rpm/i586/open-iscsi-0.5.545-9.13.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="open-iscsi" epoch="0" ver="0.5.545" rel="9.13" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="open-iscsi"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/open-iscsi-0.5.545-9.13.i586.patch.rpm"/>
+          <checksum type="sha">0c4df9a4f2d415b84dcdfca331bb5365ce3b9e50</checksum>
+          <time file="1153242057" build="1153139063"/>
+          <size package="770926" archive="1880852"/>
+          <base-version epoch="0" ver="0.5.545" rel="9"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/open-iscsi-0.5.545-9_9.13.i586.delta.rpm"/>
+          <checksum type="sha">e12740284aaf3176103400d4e0123767200cd4e6</checksum>
+          <time file="1153242059" build="1153139063"/>
+          <size package="75661" archive="0"/>
+          <base-version epoch="0" ver="0.5.545" rel="9" md5sum="f5c010743a5c5d13f07836e7bf59802d" buildtime="1146657583" sequence_info="open-iscsi-0.5.545-9-db7b75f9900e1e201eafb444cb7ddbca026240"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>open-iscsi</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="0.5.545" rel="9.13"/>
+      <checksum type="sha" pkgid="YES">b35b55a56e051d5060416a7fac6fca9729652973</checksum>
+      <time file="1153239947" build="1153160467"/>
+      <size package="821243" installed="2146783" archive="2149040"/>
+      <location href="rpm/ppc/open-iscsi-0.5.545-9.13.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="open-iscsi" epoch="0" ver="0.5.545" rel="9.13" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="open-iscsi"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/open-iscsi-0.5.545-9.13.ppc.patch.rpm"/>
+          <checksum type="sha">512853122bbb50cc404854bfb5e245fcdb847908</checksum>
+          <time file="1153242062" build="1153160467"/>
+          <size package="809979" archive="2118300"/>
+          <base-version epoch="0" ver="0.5.545" rel="9"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/open-iscsi-0.5.545-9_9.13.ppc.delta.rpm"/>
+          <checksum type="sha">f884b9cd89f2a5c3ec9a3e30b33ea109946ab928</checksum>
+          <time file="1153242065" build="1153160467"/>
+          <size package="71426" archive="0"/>
+          <base-version epoch="0" ver="0.5.545" rel="9" md5sum="09237f12f77b2586d7699c8888aecc5d" buildtime="1146657527" sequence_info="open-iscsi-0.5.545-9-a573fd7910076ab56641d858b978fd50026240"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>open-iscsi</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="0.5.545" rel="9.13"/>
+      <checksum type="sha" pkgid="YES">559bd7acee4f59c25f0281272b191023609d61e1</checksum>
+      <time file="1153240068" build="1153139113"/>
+      <size package="874833" installed="2072823" archive="2075080"/>
+      <location href="rpm/x86_64/open-iscsi-0.5.545-9.13.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="open-iscsi" epoch="0" ver="0.5.545" rel="9.13" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="open-iscsi"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/open-iscsi-0.5.545-9.13.x86_64.patch.rpm"/>
+          <checksum type="sha">289e87995a82faf7313a259516609aa708531002</checksum>
+          <time file="1153242068" build="1153139113"/>
+          <size package="864714" archive="2044612"/>
+          <base-version epoch="0" ver="0.5.545" rel="9"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/open-iscsi-0.5.545-9_9.13.x86_64.delta.rpm"/>
+          <checksum type="sha">8ef4aadca86a6b437fb1c2a16ced92cabe04b054</checksum>
+          <time file="1153242070" build="1153139113"/>
+          <size package="82595" archive="0"/>
+          <base-version epoch="0" ver="0.5.545" rel="9" md5sum="b12095c5933f63a9dde0bbbf1af7ea80" buildtime="1146657463" sequence_info="open-iscsi-0.5.545-9-127f08d27a4029f5c4c28ad50d798bbe026240"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>udev</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="085" rel="30.11"/>
+      <checksum type="sha" pkgid="YES">32a1c472ff478d828ee342eee6cca9630f3629ea</checksum>
+      <time file="1153240007" build="1153137917"/>
+      <size package="172522" installed="429062" archive="440792"/>
+      <location href="rpm/i586/udev-085-30.11.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="udev" epoch="0" ver="085" rel="30.11" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="udev"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/udev-085-30.11.i586.patch.rpm"/>
+          <checksum type="sha">38a07a0bf9eb2304964301b518417360db0c6b89</checksum>
+          <time file="1153242072" build="1153137917"/>
+          <size package="124653" archive="296668"/>
+          <base-version epoch="0" ver="085" rel="29"/>
+        </patchrpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>udev</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="085" rel="30.11"/>
+      <checksum type="sha" pkgid="YES">433729f4bd15113c7c99f0d56abf95227e737d25</checksum>
+      <time file="1153239897" build="1153144049"/>
+      <size package="183292" installed="486558" archive="498696"/>
+      <location href="rpm/ppc/udev-085-30.11.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="udev" epoch="0" ver="085" rel="30.11" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="udev"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/udev-085-30.11.ppc.patch.rpm"/>
+          <checksum type="sha">b598e5b20e0bf5fa3d1fdc0a50f83621c15ed0b2</checksum>
+          <time file="1153242074" build="1153144049"/>
+          <size package="133325" archive="330800"/>
+          <base-version epoch="0" ver="085" rel="29"/>
+        </patchrpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>udev</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="085" rel="30.11"/>
+      <checksum type="sha" pkgid="YES">25b429d15b73b966c1f63a14afc287a489ddcc0d</checksum>
+      <time file="1153240006" build="1153137242"/>
+      <size package="179136" installed="503862" archive="515596"/>
+      <location href="rpm/x86_64/udev-085-30.11.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="udev" epoch="0" ver="085" rel="30.11" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="udev"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/udev-085-30.11.x86_64.patch.rpm"/>
+          <checksum type="sha">a69d894e7d45fd720176bf546429946259d94225</checksum>
+          <time file="1153242076" build="1153137242"/>
+          <size package="129954" archive="347136"/>
+          <base-version epoch="0" ver="085" rel="29"/>
+        </patchrpm>
+      </pkgfiles>
+    </package>
+    <message>
+      <yum:name>kernel-patch-message-2</yum:name>
+      <yum:version ver="1836" rel="1"/>
+      <text lang="en">If you are using the LILO bootloader, please execute
+/sbin/lilo after installing the update kernel and prior to
+rebooting
+</text>
+      <suse:freshens>
+        <suse:entry kind="package" name="kernel-bigsmp"/>
+        <suse:entry kind="package" name="kernel-debug"/>
+        <suse:entry kind="package" name="kernel-debug"/>
+        <suse:entry kind="package" name="kernel-default"/>
+        <suse:entry kind="package" name="kernel-default"/>
+        <suse:entry kind="package" name="kernel-default"/>
+        <suse:entry kind="package" name="kernel-iseries64"/>
+        <suse:entry kind="package" name="kernel-kdump"/>
+        <suse:entry kind="package" name="kernel-kdump"/>
+        <suse:entry kind="package" name="kernel-kdump"/>
+        <suse:entry kind="package" name="kernel-ppc64"/>
+        <suse:entry kind="package" name="kernel-smp"/>
+        <suse:entry kind="package" name="kernel-smp"/>
+        <suse:entry kind="package" name="kernel-source"/>
+        <suse:entry kind="package" name="kernel-source"/>
+        <suse:entry kind="package" name="kernel-source"/>
+        <suse:entry kind="package" name="kernel-syms"/>
+        <suse:entry kind="package" name="kernel-syms"/>
+        <suse:entry kind="package" name="kernel-syms"/>
+        <suse:entry kind="package" name="kernel-um"/>
+        <suse:entry kind="package" name="kernel-xen"/>
+        <suse:entry kind="package" name="kernel-xen"/>
+        <suse:entry kind="package" name="kernel-xenpae"/>
+        <suse:entry kind="package" name="kexec-tools"/>
+        <suse:entry kind="package" name="kexec-tools"/>
+        <suse:entry kind="package" name="mkinitrd"/>
+        <suse:entry kind="package" name="mkinitrd"/>
+        <suse:entry kind="package" name="mkinitrd"/>
+        <suse:entry kind="package" name="multipath-tools"/>
+        <suse:entry kind="package" name="multipath-tools"/>
+        <suse:entry kind="package" name="multipath-tools"/>
+        <suse:entry kind="package" name="open-iscsi"/>
+        <suse:entry kind="package" name="open-iscsi"/>
+        <suse:entry kind="package" name="open-iscsi"/>
+        <suse:entry kind="package" name="udev"/>
+        <suse:entry kind="package" name="udev"/>
+        <suse:entry kind="package" name="udev"/>
+      </suse:freshens>
+    </message>
+  </atoms>
+</patch>

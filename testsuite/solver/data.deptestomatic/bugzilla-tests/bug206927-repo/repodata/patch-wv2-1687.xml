@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--PATCHINFO id="9db5f44aecbb733ba8ca41619689bc97"!-->
+<patch
+    xmlns="http://novell.com/package/metadata/suse/patch"
+    xmlns:yum="http://linux.duke.edu/metadata/common"
+    xmlns:rpm="http://linux.duke.edu/metadata/rpm"
+    xmlns:suse="http://novell.com/package/metadata/suse/common"
+    patchid="wv2-1687"
+    timestamp="1151520059"
+    engine="1.0">
+  <yum:name>wv2</yum:name>
+  <summary lang="en">wv2: Securityfix for missing boundary checks</summary>
+  <summary lang="de">wv2: Sicherheitsupdate für fehlende Bereichstests</summary>
+  <description lang="en">The wv2 library was updated to fix some boundary checks 
+which could be exploited by maliciously crafted files to 
+access memory outside bounds and possibly execute arbitrary 
+code. (CVE-2006-2197)
+</description>
+  <description lang="de">Fehlende Bereichstests wurden in der wv2 Bibliothek 
+hinzugefügt. Die fehlenden Tests ermöglichten es 
+Angreifern, durch adaptierte Dateien auf Speicher 
+ausserhalb der Puffergrenzen zuzugreifen und dadurch 
+potentiell Code auszuführen. (CVE-2006-2197)
+</description>
+  <yum:version ver="1687" rel="0"/>
+  <rpm:requires>
+  <rpm:entry kind="atom" name="wv2" epoch="0" ver="0.2.2" rel="21.2" flags="EQ"/>
+  <rpm:entry kind="atom" name="wv2-devel" epoch="0" ver="0.2.2" rel="21.2" flags="EQ"/>
+  </rpm:requires>
+  <category>security</category>
+  <atoms>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>wv2</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="0.2.2" rel="21.2"/>
+      <checksum type="sha" pkgid="YES">3e41657a8d31bbe27e7fa54aa6bf20bee58d1869</checksum>
+      <time file="1151521942" build="1151520059"/>
+      <size package="212179" installed="636955" archive="637804"/>
+      <location href="rpm/i586/wv2-0.2.2-21.2.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="wv2" epoch="0" ver="0.2.2" rel="21.2" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="wv2"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/wv2-0.2.2-21.2.i586.patch.rpm"/>
+          <checksum type="sha">46b0f92019070e1c7a8840d9be305e87796d306e</checksum>
+          <time file="1151524894" build="1151520059"/>
+          <size package="203141" archive="611832"/>
+          <base-version epoch="0" ver="0.2.2" rel="21"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/wv2-0.2.2-21_21.2.i586.delta.rpm"/>
+          <checksum type="sha">064fa08586accbe0f899c1607684f51a063dfdc2</checksum>
+          <time file="1151524895" build="1151520059"/>
+          <size package="20304" archive="0"/>
+          <base-version epoch="0" ver="0.2.2" rel="21" md5sum="580dc7b65808b62f37003753b222e3e1" buildtime="1146575488" sequence_info="wv2-0.2.2-21-f5781f0e4f237208f939aa182c2ac05850"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>wv2</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="0.2.2" rel="21.2"/>
+      <checksum type="sha" pkgid="YES">deee8f915edd7d4f4b5d0953a04197cc7f0cdb9d</checksum>
+      <time file="1151522471" build="1151520092"/>
+      <size package="219633" installed="697423" archive="698272"/>
+      <location href="rpm/ppc/wv2-0.2.2-21.2.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="wv2" epoch="0" ver="0.2.2" rel="21.2" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="wv2"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/wv2-0.2.2-21.2.ppc.patch.rpm"/>
+          <checksum type="sha">ac08ce80169b6d63cd20a205ac3f26b3c0098d4a</checksum>
+          <time file="1151524897" build="1151520092"/>
+          <size package="210512" archive="672300"/>
+          <base-version epoch="0" ver="0.2.2" rel="21"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/wv2-0.2.2-21_21.2.ppc.delta.rpm"/>
+          <checksum type="sha">19e9ad6ce21051b538bb4a6c53c59af955188dc1</checksum>
+          <time file="1151524897" build="1151520092"/>
+          <size package="17539" archive="0"/>
+          <base-version epoch="0" ver="0.2.2" rel="21" md5sum="9bd63ba48b004e1c162ea84d87c0f6b3" buildtime="1146586506" sequence_info="wv2-0.2.2-21-2a3b5e8ff3a5048979bf10542c40833a50"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>wv2</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="0.2.2" rel="21.2"/>
+      <checksum type="sha" pkgid="YES">c87dd7e1106445198964d2f75aac1ae109e3843d</checksum>
+      <time file="1151522043" build="1151518489"/>
+      <size package="233456" installed="693823" archive="694680"/>
+      <location href="rpm/x86_64/wv2-0.2.2-21.2.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="wv2" epoch="0" ver="0.2.2" rel="21.2" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="wv2"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/wv2-0.2.2-21.2.x86_64.patch.rpm"/>
+          <checksum type="sha">8d73fd208d7955f132cd93409d92ecd06f32b7b9</checksum>
+          <time file="1151524899" build="1151518489"/>
+          <size package="224347" archive="668704"/>
+          <base-version epoch="0" ver="0.2.2" rel="21"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/wv2-0.2.2-21_21.2.x86_64.delta.rpm"/>
+          <checksum type="sha">61b29473b4c8c4e72f47e1122e6549ce280b0420</checksum>
+          <time file="1151524900" build="1151518489"/>
+          <size package="16767" archive="0"/>
+          <base-version epoch="0" ver="0.2.2" rel="21" md5sum="1dfc8cd4ac0746757e53d773221cbbec" buildtime="1146575994" sequence_info="wv2-0.2.2-21-61a786397241e4544df75eb337a9b9bc50"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>wv2-devel</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="0.2.2" rel="21.2"/>
+      <checksum type="sha" pkgid="YES">c72bb5e51f9cb83d7bec35dcf26af95dffef54f8</checksum>
+      <time file="1151521942" build="1151520059"/>
+      <size package="148370" installed="811851" archive="818428"/>
+      <location href="rpm/i586/wv2-devel-0.2.2-21.2.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="wv2-devel" epoch="0" ver="0.2.2" rel="21.2" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="wv2-devel"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/wv2-devel-0.2.2-21.2.i586.patch.rpm"/>
+          <checksum type="sha">698519b0f5f216d8687a930890ca146533356335</checksum>
+          <time file="1151524900" build="1151520059"/>
+          <size package="12495" archive="23900"/>
+          <base-version epoch="0" ver="0.2.2" rel="21"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/wv2-devel-0.2.2-21_21.2.i586.delta.rpm"/>
+          <checksum type="sha">5992ea7fac98025145b7be45b228cad973bcbaf1</checksum>
+          <time file="1151524901" build="1151520059"/>
+          <size package="8236" archive="0"/>
+          <base-version epoch="0" ver="0.2.2" rel="21" md5sum="f4bf5c03066ea2d5be1fc384ba3f3368" buildtime="1146575488" sequence_info="wv2-devel-0.2.2-21-085b560057a9b8c1d17e60f7e1d97016c5"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>wv2-devel</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="0.2.2" rel="21.2"/>
+      <checksum type="sha" pkgid="YES">624801518f943b90b80d961fb39827a4c490c252</checksum>
+      <time file="1151522471" build="1151520092"/>
+      <size package="148462" installed="811858" archive="818436"/>
+      <location href="rpm/ppc/wv2-devel-0.2.2-21.2.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="wv2-devel" epoch="0" ver="0.2.2" rel="21.2" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="wv2-devel"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/wv2-devel-0.2.2-21.2.ppc.patch.rpm"/>
+          <checksum type="sha">6ca19f4e853546dba603a0bd2ab968cc0a7278dc</checksum>
+          <time file="1151524902" build="1151520092"/>
+          <size package="12457" archive="23900"/>
+          <base-version epoch="0" ver="0.2.2" rel="21"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/wv2-devel-0.2.2-21_21.2.ppc.delta.rpm"/>
+          <checksum type="sha">984474c90f3f500abac59b246d5a3a53fc29207d</checksum>
+          <time file="1151524903" build="1151520092"/>
+          <size package="8237" archive="0"/>
+          <base-version epoch="0" ver="0.2.2" rel="21" md5sum="c0e5621cb5a39638729a45f8aefd7845" buildtime="1146586506" sequence_info="wv2-devel-0.2.2-21-c35ac075330ee124d25f314abb52d0fcc5"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>wv2-devel</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="0.2.2" rel="21.2"/>
+      <checksum type="sha" pkgid="YES">be4d0de422f8c24e8ddf3e4accb8f950e162d16a</checksum>
+      <time file="1151522044" build="1151518489"/>
+      <size package="148402" installed="811877" archive="818456"/>
+      <location href="rpm/x86_64/wv2-devel-0.2.2-21.2.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="wv2-devel" epoch="0" ver="0.2.2" rel="21.2" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="wv2-devel"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/wv2-devel-0.2.2-21.2.x86_64.patch.rpm"/>
+          <checksum type="sha">160a315b413ef9e0f3eab9ef4244cb09a457a9e6</checksum>
+          <time file="1151524903" build="1151518489"/>
+          <size package="12476" archive="23900"/>
+          <base-version epoch="0" ver="0.2.2" rel="21"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/wv2-devel-0.2.2-21_21.2.x86_64.delta.rpm"/>
+          <checksum type="sha">95b5605643d5b0f04af7f64e6addfb795f1416ee</checksum>
+          <time file="1151524904" build="1151518489"/>
+          <size package="8264" archive="0"/>
+          <base-version epoch="0" ver="0.2.2" rel="21" md5sum="09c69a4aae5a8f1d884b949cec99aa98" buildtime="1146575994" sequence_info="wv2-devel-0.2.2-21-6b1f5997012a98a048a0c174db373071c5"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+  </atoms>
+</patch>

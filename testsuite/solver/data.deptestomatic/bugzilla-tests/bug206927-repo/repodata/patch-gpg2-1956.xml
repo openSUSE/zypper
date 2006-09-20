@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--PATCHINFO id="96845a06e6e6e83a5c13bd4be701fde3"!-->
+<patch
+    xmlns="http://novell.com/package/metadata/suse/patch"
+    xmlns:yum="http://linux.duke.edu/metadata/common"
+    xmlns:rpm="http://linux.duke.edu/metadata/rpm"
+    xmlns:suse="http://novell.com/package/metadata/suse/common"
+    patchid="gpg2-1956"
+    timestamp="1155166466"
+    engine="1.0">
+  <yum:name>gpg2</yum:name>
+  <summary lang="en">gpg2: This update fixes a segmentaion fault</summary>
+  <summary lang="de">gpg2: Mit diesem Update wird ein Speicherzugriffsfehler behoben.</summary>
+  <description lang="en">This update of gpg2 fixes an segmentation fault when using
+the--no-armor option. This failure leads to a
+denial-of-service attack and may be used execute arbitrary
+code. (CVE-2006-3746)
+</description>
+  <description lang="de">Dieses Update behebt ein Speicherzugriffsfehler in gpg2 bei
+der Verwendung der '--no-armor' Option. Dieser Fehler
+ermöglicht einen Denial-of-Service Angriff und evtl. auch
+das Ausführen von beliebigem Code. (CVE-2006-3746)
+</description>
+  <yum:version ver="1956" rel="0"/>
+  <rpm:requires>
+    <rpm:entry kind="atom" name="gpg2" epoch="0" ver="1.9.18" rel="17.8" flags="EQ"/>
+  </rpm:requires>
+  <category>security</category>
+  <atoms>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>gpg2</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="1.9.18" rel="17.8"/>
+      <checksum type="sha" pkgid="YES">18b0fdc4937681321b852f98ba21ab03d973c018</checksum>
+      <time file="1155207886" build="1155166466"/>
+      <size package="771342" installed="1913885" archive="1918368"/>
+      <location href="rpm/i586/gpg2-1.9.18-17.8.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="gpg2" epoch="0" ver="1.9.18" rel="17.8" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="gpg2"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/gpg2-1.9.18-17.8.i586.patch.rpm"/>
+          <checksum type="sha">87db484c0a4cd01c29e9cd37db001c30a94c0030</checksum>
+          <time file="1155209813" build="1155166466"/>
+          <size package="298055" archive="768048"/>
+          <base-version epoch="0" ver="1.9.18" rel="17"/>
+          <base-version epoch="0" ver="1.9.18" rel="17.5"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/gpg2-1.9.18-17_17.8.i586.delta.rpm"/>
+          <checksum type="sha">79bf996c128633c964fc3917a7b20f8331121f06</checksum>
+          <time file="1155209815" build="1155166466"/>
+          <size package="62541" archive="0"/>
+          <base-version epoch="0" ver="1.9.18" rel="17" md5sum="5f64db6907e0028c57b0116d35359dcf" buildtime="1146558338" sequence_info="gpg2-1.9.18-17-e4546cba24c14d47337010cf6417f01e92a140"/>
+        </deltarpm>
+        <deltarpm>
+          <location href="rpm/i586/gpg2-1.9.18-17.5_17.8.i586.delta.rpm"/>
+          <checksum type="sha">7ceae4f3adba5796d0c30024be75c6e8668b05bd</checksum>
+          <time file="1155209816" build="1155166466"/>
+          <size package="111956" archive="0"/>
+          <base-version epoch="0" ver="1.9.18" rel="17.5" md5sum="e3e8c2f4d25a5499786d06ad8abc79fb" buildtime="1153159130" sequence_info="gpg2-1.9.18-17.5-175249dbc4285b38190bf017de8feaa792a12110"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>gpg2</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="1.9.18" rel="17.8"/>
+      <checksum type="sha" pkgid="YES">7ec01aff19b5a17ba844b70932bf499244d6e560</checksum>
+      <time file="1155208302" build="1155165587"/>
+      <size package="848759" installed="2233929" archive="2238412"/>
+      <location href="rpm/ppc/gpg2-1.9.18-17.8.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="gpg2" epoch="0" ver="1.9.18" rel="17.8" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="gpg2"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/gpg2-1.9.18-17.8.ppc.patch.rpm"/>
+          <checksum type="sha">98aa44a0f6347b3f2d1699dc1c3a86994b4834fe</checksum>
+          <time file="1155209818" build="1155165587"/>
+          <size package="308891" archive="859836"/>
+          <base-version epoch="0" ver="1.9.18" rel="17"/>
+          <base-version epoch="0" ver="1.9.18" rel="17.5"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/gpg2-1.9.18-17_17.8.ppc.delta.rpm"/>
+          <checksum type="sha">6a5f2287b2866b562c67a6828a836dbfce389076</checksum>
+          <time file="1155209819" build="1155165587"/>
+          <size package="56477" archive="0"/>
+          <base-version epoch="0" ver="1.9.18" rel="17" md5sum="9b263d850a3411a3eee3b0b79f4f10db" buildtime="1146557668" sequence_info="gpg2-1.9.18-17-55ed5228efae204671ba88dd1260b29e92a140"/>
+        </deltarpm>
+        <deltarpm>
+          <location href="rpm/ppc/gpg2-1.9.18-17.5_17.8.ppc.delta.rpm"/>
+          <checksum type="sha">c0277a8912f28dee761c013aa105d1615208f720</checksum>
+          <time file="1155209820" build="1155165587"/>
+          <size package="106007" archive="0"/>
+          <base-version epoch="0" ver="1.9.18" rel="17.5" md5sum="f5ceb0964f83518a577c527ddbb4c884" buildtime="1153167954" sequence_info="gpg2-1.9.18-17.5-a73086f4766ea0ebbe133a2c7356e89292a12110"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>gpg2</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="1.9.18" rel="17.8"/>
+      <checksum type="sha" pkgid="YES">9e8f74650ba28764a315a1284168b857889b24fa</checksum>
+      <time file="1155208216" build="1155165826"/>
+      <size package="878505" installed="2130273" archive="2134760"/>
+      <location href="rpm/x86_64/gpg2-1.9.18-17.8.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="gpg2" epoch="0" ver="1.9.18" rel="17.8" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="gpg2"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/gpg2-1.9.18-17.8.x86_64.patch.rpm"/>
+          <checksum type="sha">609fd6f05d0e23bd595c9fbae8ca094f370a490b</checksum>
+          <time file="1155209823" build="1155165826"/>
+          <size package="332651" archive="815268"/>
+          <base-version epoch="0" ver="1.9.18" rel="17"/>
+          <base-version epoch="0" ver="1.9.18" rel="17.5"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/gpg2-1.9.18-17_17.8.x86_64.delta.rpm"/>
+          <checksum type="sha">d666647ad42c0aae86cb7b91806b35d9bc488022</checksum>
+          <time file="1155209824" build="1155165826"/>
+          <size package="65643" archive="0"/>
+          <base-version epoch="0" ver="1.9.18" rel="17" md5sum="23fd6bffc57aa7ce932fec92a042ae8e" buildtime="1146559391" sequence_info="gpg2-1.9.18-17-3733f3d8bb302c20132fca483fd0e70892a140"/>
+        </deltarpm>
+        <deltarpm>
+          <location href="rpm/x86_64/gpg2-1.9.18-17.5_17.8.x86_64.delta.rpm"/>
+          <checksum type="sha">c8818720d51d768145275e4639e6952e69470354</checksum>
+          <time file="1155209826" build="1155165826"/>
+          <size package="115180" archive="0"/>
+          <base-version epoch="0" ver="1.9.18" rel="17.5" md5sum="57c74c6761e82c856958677e9acb80a1" buildtime="1153165036" sequence_info="gpg2-1.9.18-17.5-c8bebcb4c5389ad6ec44547c02d43f6e92a12110"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+  </atoms>
+</patch>

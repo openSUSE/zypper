@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--PATCHINFO id="34da51f0b37aa3938e11fcc2f024e471"!-->
+<patch
+    xmlns="http://novell.com/package/metadata/suse/patch"
+    xmlns:yum="http://linux.duke.edu/metadata/common"
+    xmlns:rpm="http://linux.duke.edu/metadata/rpm"
+    xmlns:suse="http://novell.com/package/metadata/suse/common"
+    patchid="flash-player-2072"
+    timestamp="1158191734"
+    engine="1.0">
+  <yum:name>flash-player</yum:name>
+  <summary lang="en">flash-player: Security update to fix various problems</summary>
+  <summary lang="de">flash-player: Sicherheitsupdate das verschiedene Probleme behebt</summary>
+  <description lang="en">Multiple input validation errors have been identified in
+Flash Player that could lead to the potential execution of
+arbitrary code. These vulnerabilities could be accessed
+through content delivered from a remote location via the
+user's web browser, email client, or other applications
+that include or reference the Flash Player. (CVE-2006-3311,
+CVE-2006-3587, CVE-2006-3588)
+
+These updates include changes to prevent circumvention of
+the &quot;allowScriptAccess&quot; option. (CVE-2006-4640)
+</description>
+  <description lang="de">Verschiedene Inputvalidierungsprobleme wurden im Flash
+Player identifiziert, die zu potentiellem Ausführen von
+Code führen können. Diese Probleme können zB. auch durch
+Inhalte ausgelöst werden, die aus dem Netz via Web, Mail
+oder anderen Inhalten kommen können. (CVE-2006-3311,
+CVE-2006-3587, CVE-2006-3588)
+
+Dieses Update enthält auch Fixes, die das Umgehen der
+&quot;allowScriptAccess&quot; Option beheben. (CVE-2006-4640)
+</description>
+  <yum:version ver="2072" rel="0"/>
+  <rpm:requires>
+    <rpm:entry kind="atom" name="flash-player" epoch="0" ver="7.0.68.0" rel="1.2" flags="EQ"/>
+  </rpm:requires>
+  <category>security</category>
+  <atoms>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>flash-player</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="7.0.68.0" rel="1.2"/>
+      <checksum type="sha" pkgid="YES">2b874b6f9ab99989f241e2d5578c468bf9610977</checksum>
+      <time file="1158245777" build="1158191734"/>
+      <size package="993162" installed="2173673" archive="2174576"/>
+      <location href="rpm/i586/flash-player-7.0.68.0-1.2.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="flash-player" epoch="0" ver="7.0.68.0" rel="1.2" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="flash-player"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/flash-player-7.0.68.0-1.2.i586.patch.rpm"/>
+          <checksum type="sha">ae2832ac31ea2ada66d8f847c6759df9e7aefa0f</checksum>
+          <time file="1158251489" build="1158191734"/>
+          <size package="992492" archive="2173420"/>
+          <base-version epoch="0" ver="7.0.63.0" rel="6"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/flash-player-7.0.63.0_7.0.68.0-6_1.2.i586.delta.rpm"/>
+          <checksum type="sha">6a40d60daf3daf2e73636e5c1cacc9e08a27933f</checksum>
+          <time file="1158251491" build="1158191734"/>
+          <size package="70840" archive="0"/>
+          <base-version epoch="0" ver="7.0.63.0" rel="6" md5sum="d091db987cad2159182c7630932d2595" buildtime="1145758014" sequence_info="flash-player-7.0.63.0-6-962658b295b922de36fb5dc84e86f51a30"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+  </atoms>
+</patch>

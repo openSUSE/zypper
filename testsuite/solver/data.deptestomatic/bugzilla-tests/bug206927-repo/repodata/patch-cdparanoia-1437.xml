@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--PATCHINFO id="bb02235db45c1a314d79b1602cba596f"!-->
+<patch
+    xmlns="http://novell.com/package/metadata/suse/patch"
+    xmlns:yum="http://linux.duke.edu/metadata/common"
+    xmlns:rpm="http://linux.duke.edu/metadata/rpm"
+    xmlns:suse="http://novell.com/package/metadata/suse/common"
+    patchid="cdparanoia-1437"
+    timestamp="1148911342"
+    engine="1.0">
+  <yum:name>cdparanoia</yum:name>
+  <summary lang="en">Add support for all IDE major numbers</summary>
+  <summary lang="de">Fügt Unterstützung für alle IDE Majors hinzu</summary>
+  <description lang="en">cdparanoia checked only for the first 4 IDE major numbers. 
+It refused to work for instance with devices on /dev/hdk. 
+This update adds support for all IDE major numbers.
+</description>
+  <description lang="de">cdparanoia hatte zuvor nur die ersten 4 IDE Major Nummern 
+überprüft und weigertes sich Beispielsweise mit Geräten auf 
+/dev/hdk zu funktionieren. Dieses Update fügt die 
+Unterstützung für alle IDE Major Nummern hinzu.  
+</description>
+  <yum:version ver="1437" rel="0"/>
+  <rpm:requires>
+  <rpm:entry kind="atom" name="cdparanoia" epoch="0" ver="IIIalpha9.8" rel="562.3" flags="EQ"/>
+  <rpm:entry kind="atom" name="cdparanoia-32bit" epoch="0" ver="IIIalpha9.8" rel="562.3" flags="EQ"/>
+  <rpm:entry kind="atom" name="cdparanoia-64bit" epoch="0" ver="IIIalpha9.8" rel="562.3" flags="EQ"/>
+  </rpm:requires>
+  <category>recommended</category>
+  <atoms>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>cdparanoia</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="IIIalpha9.8" rel="562.3"/>
+      <checksum type="sha" pkgid="YES">d27b0d229f09f1e8dfe170ddcffc3b3dca8b7251</checksum>
+      <time file="1148922953" build="1148911342"/>
+      <size package="81904" installed="165589" archive="168008"/>
+      <location href="rpm/i586/cdparanoia-IIIalpha9.8-562.3.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="cdparanoia" epoch="0" ver="IIIalpha9.8" rel="562.3" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="cdparanoia"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/cdparanoia-IIIalpha9.8-562.3.i586.patch.rpm"/>
+          <checksum type="sha">e0cd807b609fabda936577513aef109b5e870acb</checksum>
+          <time file="1148925604" build="1148911342"/>
+          <size package="30544" archive="53116"/>
+          <base-version epoch="0" ver="IIIalpha9.8" rel="562"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/cdparanoia-IIIalpha9.8-562_562.3.i586.delta.rpm"/>
+          <checksum type="sha">ebffc3d0ffb77b52e7b0f7012cf32476cd4e32ba</checksum>
+          <time file="1148925605" build="1148911342"/>
+          <size package="20026" archive="0"/>
+          <base-version epoch="0" ver="IIIalpha9.8" rel="562" md5sum="981cd5a6b95e0c4f12afbbe9522a3f83" buildtime="1146552928" sequence_info="cdparanoia-IIIalpha9.8-562-489be7525e9d028a865aec583ddb0b76b122"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>cdparanoia</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="IIIalpha9.8" rel="562.3"/>
+      <checksum type="sha" pkgid="YES">78b98745f046341d5d4d4978988c3ebd707cc9a7</checksum>
+      <time file="1148922415" build="1148918826"/>
+      <size package="89468" installed="192609" archive="195028"/>
+      <location href="rpm/ppc/cdparanoia-IIIalpha9.8-562.3.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="cdparanoia" epoch="0" ver="IIIalpha9.8" rel="562.3" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="cdparanoia"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/cdparanoia-IIIalpha9.8-562.3.ppc.patch.rpm"/>
+          <checksum type="sha">68d20841f975abc9dd8fed6a6edea44cc7effad0</checksum>
+          <time file="1148925605" build="1148918826"/>
+          <size package="34685" archive="66808"/>
+          <base-version epoch="0" ver="IIIalpha9.8" rel="562"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/cdparanoia-IIIalpha9.8-562_562.3.ppc.delta.rpm"/>
+          <checksum type="sha">1bb6ebaa5bcfe5ea1a3a5a2881cfe27680c287c9</checksum>
+          <time file="1148925606" build="1148918826"/>
+          <size package="19738" archive="0"/>
+          <base-version epoch="0" ver="IIIalpha9.8" rel="562" md5sum="f276fcea79459b74cbce01309dd28cee" buildtime="1146547390" sequence_info="cdparanoia-IIIalpha9.8-562-68df2fcc5a6a7f02cce9d9749265faccb122"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>cdparanoia</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="IIIalpha9.8" rel="562.3"/>
+      <checksum type="sha" pkgid="YES">7fffce2fb484c4c9ca044c8f1eb70d6e239cabf2</checksum>
+      <time file="1148924032" build="1148912594"/>
+      <size package="85386" installed="182989" archive="185420"/>
+      <location href="rpm/x86_64/cdparanoia-IIIalpha9.8-562.3.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="cdparanoia" epoch="0" ver="IIIalpha9.8" rel="562.3" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="cdparanoia"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/cdparanoia-IIIalpha9.8-562.3.x86_64.patch.rpm"/>
+          <checksum type="sha">7a8522bd2307f1b49241351b559a5684b20f1a7a</checksum>
+          <time file="1148925607" build="1148912594"/>
+          <size package="32724" archive="62884"/>
+          <base-version epoch="0" ver="IIIalpha9.8" rel="562"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/cdparanoia-IIIalpha9.8-562_562.3.x86_64.delta.rpm"/>
+          <checksum type="sha">637216debb44d578b12cd34f98ab0ba8fddbdafc</checksum>
+          <time file="1148925607" build="1148912594"/>
+          <size package="19854" archive="0"/>
+          <base-version epoch="0" ver="IIIalpha9.8" rel="562" md5sum="ef024efdffb218d08bba31d705a5837f" buildtime="1146552750" sequence_info="cdparanoia-IIIalpha9.8-562-da2f0999a234b1c4dfe211b72a4b5d2ab122"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>cdparanoia-32bit</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="IIIalpha9.8" rel="562.3"/>
+      <checksum type="sha" pkgid="YES">69c9ab33ad4ef76d75025f237d1672d171f0c8bf</checksum>
+      <time file="1148922953" build="1148911359"/>
+      <size package="42587" installed="81060" archive="82164"/>
+      <location href="rpm/x86_64/cdparanoia-32bit-IIIalpha9.8-562.3.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="cdparanoia-32bit" epoch="0" ver="IIIalpha9.8" rel="562.3" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="cdparanoia-32bit"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/cdparanoia-32bit-IIIalpha9.8-562.3.x86_64.patch.rpm"/>
+          <checksum type="sha">8bdae3eba4808eb9f05661e6dd8ba80820755967</checksum>
+          <time file="1148925608" build="1148911359"/>
+          <size package="29342" archive="53116"/>
+          <base-version epoch="0" ver="IIIalpha9.8" rel="562"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/cdparanoia-32bit-IIIalpha9.8-562_562.3.x86_64.delta.rpm"/>
+          <checksum type="sha">1d9a4446341379a4a4cba9b867da296c76419172</checksum>
+          <time file="1148925608" build="1148911359"/>
+          <size package="6380" archive="0"/>
+          <base-version epoch="0" ver="IIIalpha9.8" rel="562" md5sum="538bba8751bd8b01c32fac29fef39f54" buildtime="1146552952" sequence_info="cdparanoia-32bit-IIIalpha9.8-562-951eea1b1e9cdb77e35bfb33c69cf5cd60"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>cdparanoia-64bit</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="IIIalpha9.8" rel="562.3"/>
+      <checksum type="sha" pkgid="YES">5e5fabcabf124417ccbb727f60390adaebaed530</checksum>
+      <time file="1148923254" build="1148916460"/>
+      <size package="48606" installed="123680" archive="124796"/>
+      <location href="rpm/ppc/cdparanoia-64bit-IIIalpha9.8-562.3.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="cdparanoia-64bit" epoch="0" ver="IIIalpha9.8" rel="562.3" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="cdparanoia-64bit"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/cdparanoia-64bit-IIIalpha9.8-562.3.ppc.patch.rpm"/>
+          <checksum type="sha">28c4c978859b9a360ac2abc8d906aacb39609d9c</checksum>
+          <time file="1148925609" build="1148916460"/>
+          <size package="34149" archive="82684"/>
+          <base-version epoch="0" ver="IIIalpha9.8" rel="562"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/cdparanoia-64bit-IIIalpha9.8-562_562.3.ppc.delta.rpm"/>
+          <checksum type="sha">ac37990f91bbfe4b303928110b25200b292769ec</checksum>
+          <time file="1148925609" build="1148916460"/>
+          <size package="6333" archive="0"/>
+          <base-version epoch="0" ver="IIIalpha9.8" rel="562" md5sum="0b417aeecfd42d804f885990b5d401d5" buildtime="1146548154" sequence_info="cdparanoia-64bit-IIIalpha9.8-562-1b9ee556e9c41edf8f093aad95d49a4a60"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+  </atoms>
+</patch>

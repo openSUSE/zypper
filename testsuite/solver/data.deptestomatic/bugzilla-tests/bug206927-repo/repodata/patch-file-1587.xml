@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--PATCHINFO id="f8885dad93deb7a5524fed32f42e100f"!-->
+<patch
+    xmlns="http://novell.com/package/metadata/suse/patch"
+    xmlns:yum="http://linux.duke.edu/metadata/common"
+    xmlns:rpm="http://linux.duke.edu/metadata/rpm"
+    xmlns:suse="http://novell.com/package/metadata/suse/common"
+    patchid="file-1587"
+    timestamp="1150203484"
+    engine="1.0">
+  <yum:name>file</yum:name>
+  <summary lang="en">The file utility does not display the name within a core dump</summary>
+  <summary lang="de">Das Programm file zeigt den Namen innerhalb eines Core-Dump nicht an.</summary>
+  <description lang="en">The file utility has not display the name of the program 
+caused a core dump.
+</description>
+  <description lang="de">Das Programm file zeigte den Namen des Programms, welches 
+einen Core-Dump verursachte, nicht mehr an.
+</description>
+  <yum:version ver="1587" rel="0"/>
+  <rpm:requires>
+  <rpm:entry kind="atom" name="file" epoch="0" ver="4.16" rel="15.4" flags="EQ"/>
+  <rpm:entry kind="atom" name="file-32bit" epoch="0" ver="4.16" rel="15.4" flags="EQ"/>
+  <rpm:entry kind="atom" name="file-64bit" epoch="0" ver="4.16" rel="15.4" flags="EQ"/>
+  <rpm:entry kind="atom" name="file-devel" epoch="0" ver="4.16" rel="15.4" flags="EQ"/>
+  </rpm:requires>
+  <category>optional</category>
+  <atoms>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>file</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="4.16" rel="15.4"/>
+      <checksum type="sha" pkgid="YES">f1b3baf61720a1b5d07e214d1f91c4f148ff50b4</checksum>
+      <time file="1150213761" build="1150203484"/>
+      <size package="227083" installed="1520598" archive="1522124"/>
+      <location href="rpm/i586/file-4.16-15.4.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="file" epoch="0" ver="4.16" rel="15.4" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="file"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/file-4.16-15.4.i586.patch.rpm"/>
+          <checksum type="sha">721ea8fbbef56240bc4c61a534c80e28d1bd94d7</checksum>
+          <time file="1150214540" build="1150203484"/>
+          <size package="37459" archive="57044"/>
+          <base-version epoch="0" ver="4.16" rel="13"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/file-4.16-13_15.4.i586.delta.rpm"/>
+          <checksum type="sha">c248974fcddf92f695ca95fa2e6b709221b6dcc7</checksum>
+          <time file="1150214541" build="1150203484"/>
+          <size package="12838" archive="0"/>
+          <base-version epoch="0" ver="4.16" rel="13" md5sum="fa0adcb987fa87a7dff9cf4dc17a20aa" buildtime="1145756849" sequence_info="file-4.16-13-c37fea14122b06f18018a469dfad38ac0191"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>file</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="4.16" rel="15.4"/>
+      <checksum type="sha" pkgid="YES">c5c0240b3182ec4ad21d93641b3a123dbe4ae525</checksum>
+      <time file="1150213614" build="1150203651"/>
+      <size package="233518" installed="1543790" archive="1545316"/>
+      <location href="rpm/ppc/file-4.16-15.4.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="file" epoch="0" ver="4.16" rel="15.4" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="file"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/file-4.16-15.4.ppc.patch.rpm"/>
+          <checksum type="sha">9f19eee5552e264aaba702447d6a946231873596</checksum>
+          <time file="1150214542" build="1150203651"/>
+          <size package="41453" archive="74404"/>
+          <base-version epoch="0" ver="4.16" rel="13"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/file-4.16-13_15.4.ppc.delta.rpm"/>
+          <checksum type="sha">6b7f4b71b5a57c02c670e66c98a6cb0cc6785656</checksum>
+          <time file="1150214544" build="1150203651"/>
+          <size package="12724" archive="0"/>
+          <base-version epoch="0" ver="4.16" rel="13" md5sum="42f138a6ca6b0e4decb2d892689aea8b" buildtime="1145814576" sequence_info="file-4.16-13-c9581673a7e2346d0de36c758b0b300f0191"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>file</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="4.16" rel="15.4"/>
+      <checksum type="sha" pkgid="YES">1052141b11a4e1d49cba370d29f1a222f5e9771d</checksum>
+      <time file="1150213565" build="1150203469"/>
+      <size package="228616" installed="1529698" archive="1531224"/>
+      <location href="rpm/x86_64/file-4.16-15.4.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="file" epoch="0" ver="4.16" rel="15.4" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="file"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/file-4.16-15.4.x86_64.patch.rpm"/>
+          <checksum type="sha">b0ed236c70c7ddb5c8b103dea535a5f4f3808c3c</checksum>
+          <time file="1150214545" build="1150203469"/>
+          <size package="42935" archive="77056"/>
+          <base-version epoch="0" ver="4.16" rel="13"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/file-4.16-13_15.4.x86_64.delta.rpm"/>
+          <checksum type="sha">b05c20c940c6fb1c8e81c5261602a666ef01308d</checksum>
+          <time file="1150214546" build="1150203469"/>
+          <size package="13208" archive="0"/>
+          <base-version epoch="0" ver="4.16" rel="13" md5sum="8c026f995bc85ec04f74931a15bca94f" buildtime="1145758980" sequence_info="file-4.16-13-6e511763216845470f95f153aab2339d0191"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>file-32bit</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="4.16" rel="15.4"/>
+      <checksum type="sha" pkgid="YES">8b020c8fdf6e9b0958c80557d53817724e50926f</checksum>
+      <time file="1150213761" build="1150203496"/>
+      <size package="36616" installed="56780" archive="57200"/>
+      <location href="rpm/x86_64/file-32bit-4.16-15.4.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="file-32bit" epoch="0" ver="4.16" rel="15.4" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="file-32bit"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/file-32bit-4.16-15.4.x86_64.patch.rpm"/>
+          <checksum type="sha">a51f099b3908a68f6834e92ff844992e235b3f0f</checksum>
+          <time file="1150214547" build="1150203496"/>
+          <size package="36632" archive="57044"/>
+          <base-version epoch="0" ver="4.16" rel="13"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/file-32bit-4.16-13_15.4.x86_64.delta.rpm"/>
+          <checksum type="sha">ac49b271d13f6076629547a1ac870d13bac8d19e</checksum>
+          <time file="1150214547" build="1150203496"/>
+          <size package="11717" archive="0"/>
+          <base-version epoch="0" ver="4.16" rel="13" md5sum="ed7ecf1825cf33d0b86ce93b4f8d6b58" buildtime="1145756864" sequence_info="file-32bit-4.16-13-a65ed57333addc19457017579ab93f2620"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>file-64bit</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="4.16" rel="15.4"/>
+      <checksum type="sha" pkgid="YES">59e29b1617e1219579ad7bcc09586186bf4345ee</checksum>
+      <time file="1150213845" build="1150203428"/>
+      <size package="39834" installed="82552" archive="82972"/>
+      <location href="rpm/ppc/file-64bit-4.16-15.4.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="file-64bit" epoch="0" ver="4.16" rel="15.4" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="file-64bit"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/file-64bit-4.16-15.4.ppc.patch.rpm"/>
+          <checksum type="sha">aba4a35f46f18c62974bfb886925b47701ff90e3</checksum>
+          <time file="1150214548" build="1150203428"/>
+          <size package="39891" archive="82816"/>
+          <base-version epoch="0" ver="4.16" rel="13"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/file-64bit-4.16-13_15.4.ppc.delta.rpm"/>
+          <checksum type="sha">93e4b38728df649be0dc6b0628d518100399577f</checksum>
+          <time file="1150214549" build="1150203428"/>
+          <size package="11754" archive="0"/>
+          <base-version epoch="0" ver="4.16" rel="13" md5sum="d52c54a8de2f2de5a057e614e7eb4d77" buildtime="1145821546" sequence_info="file-64bit-4.16-13-9e6d2b5d981d67fb625d3eefa2ed0d5b20"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>file-devel</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="4.16" rel="15.4"/>
+      <checksum type="sha" pkgid="YES">541afcb61c341d1bbacd078c8e91cc1ef5ab1b16</checksum>
+      <time file="1150213762" build="1150203484"/>
+      <size package="45925" installed="89020" archive="89848"/>
+      <location href="rpm/i586/file-devel-4.16-15.4.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="file-devel" epoch="0" ver="4.16" rel="15.4" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="file-devel"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/file-devel-4.16-15.4.i586.patch.rpm"/>
+          <checksum type="sha">6cd7c722217d72b350b8f01023f5cf43cd60b552</checksum>
+          <time file="1150214550" build="1150203484"/>
+          <size package="40698" archive="83348"/>
+          <base-version epoch="0" ver="4.16" rel="13"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/file-devel-4.16-13_15.4.i586.delta.rpm"/>
+          <checksum type="sha">9723d88a37a21f201978fd19e31d8559cfbf6668</checksum>
+          <time file="1150214550" build="1150203484"/>
+          <size package="11632" archive="0"/>
+          <base-version epoch="0" ver="4.16" rel="13" md5sum="28502b1697acb121bca709e95374d6c4" buildtime="1145756849" sequence_info="file-devel-4.16-13-17b90ec70c0e053268a1ef2c36ddd2c050"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>file-devel</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="4.16" rel="15.4"/>
+      <checksum type="sha" pkgid="YES">30990bd90625a258aafc395379c287bbb5dcb6a9</checksum>
+      <time file="1150213614" build="1150203651"/>
+      <size package="45820" installed="89238" archive="90064"/>
+      <location href="rpm/ppc/file-devel-4.16-15.4.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="file-devel" epoch="0" ver="4.16" rel="15.4" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="file-devel"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/file-devel-4.16-15.4.ppc.patch.rpm"/>
+          <checksum type="sha">b2b4a22ee7c7745beac430b745531a92fd4adc26</checksum>
+          <time file="1150214551" build="1150203651"/>
+          <size package="40634" archive="83564"/>
+          <base-version epoch="0" ver="4.16" rel="13"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/file-devel-4.16-13_15.4.ppc.delta.rpm"/>
+          <checksum type="sha">dc400d5d3604bb3cddf9e96afd4d7155ad75f66b</checksum>
+          <time file="1150214552" build="1150203651"/>
+          <size package="11184" archive="0"/>
+          <base-version epoch="0" ver="4.16" rel="13" md5sum="35ed1b1442b5d655205668c153081662" buildtime="1145814576" sequence_info="file-devel-4.16-13-7166ed698fd3c11623db921a294a641a50"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>file-devel</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="4.16" rel="15.4"/>
+      <checksum type="sha" pkgid="YES">749d400b62649714b63b18d4de662bf97c7a4e87</checksum>
+      <time file="1150213565" build="1150203469"/>
+      <size package="45249" installed="113328" archive="114164"/>
+      <location href="rpm/x86_64/file-devel-4.16-15.4.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="file-devel" epoch="0" ver="4.16" rel="15.4" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="file-devel"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/file-devel-4.16-15.4.x86_64.patch.rpm"/>
+          <checksum type="sha">edc6a12c72d3a71dc2c1d3699bd95a1261c3fa7c</checksum>
+          <time file="1150214552" build="1150203469"/>
+          <size package="40042" archive="107656"/>
+          <base-version epoch="0" ver="4.16" rel="13"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/file-devel-4.16-13_15.4.x86_64.delta.rpm"/>
+          <checksum type="sha">8900a6e04e7be8d6b1d30cb39b5422d92cc93f63</checksum>
+          <time file="1150214553" build="1150203469"/>
+          <size package="11822" archive="0"/>
+          <base-version epoch="0" ver="4.16" rel="13" md5sum="b14567f608ce8fd24a74a359ee27c3e7" buildtime="1145758980" sequence_info="file-devel-4.16-13-48765626a8512d6d6b98f45480a9098650"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+  </atoms>
+</patch>

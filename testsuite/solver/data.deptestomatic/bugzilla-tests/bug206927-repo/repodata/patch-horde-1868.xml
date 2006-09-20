@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--PATCHINFO id="9d8d9a18147ded0ecf48c14b95f62727"!-->
+<patch
+    xmlns="http://novell.com/package/metadata/suse/patch"
+    xmlns:yum="http://linux.duke.edu/metadata/common"
+    xmlns:rpm="http://linux.duke.edu/metadata/rpm"
+    xmlns:suse="http://novell.com/package/metadata/suse/common"
+    patchid="horde-1868"
+    timestamp="1153407146"
+    engine="1.0">
+  <yum:name>horde</yum:name>
+  <summary lang="en">horde: Securityfixes for cross site scripting problems.</summary>
+  <summary lang="de">horde: Securityupdate zum Beheben von Cross Site Scripting Problemen.</summary>
+  <description lang="en">This update fixes the following two security issues in the
+Horde Application Framework:
+- CVE-2006-3548: Multiple cross-site scripting (XSS)
+  vulnerabilities allow remote attackers to inject
+  arbitrary web script or HTML via a (1) javascript URI or
+  an external (2) http, (3) https, or (4) ftp URI in the
+  url parameter in services/go.php (aka the dereferrer),
+  (5) a javascript URI in the module parameter in
+  services/help (aka the help viewer), and (6) the name
+  parameter in services/problem.php (aka the problem
+  reporting screen).
+
+- CVE-2006-3549: services/go.php does not properly restrict
+  its image proxy capability, which allows remote attackers
+  to perform &quot;Web tunneling&quot; attacks and use the server as
+  a proxy via (1) http, (2) https, and (3) ftp URL in the
+  url parameter, which is requested from the server.
+</description>
+  <description lang="de">Dieses Update behebt folgende zwei Sicherheitsprobleme im
+Horde Applikations Framework:
+
+- CVE-2006-3548: Mehrere Cross Site Scripting (XSS)
+  Probleme erlauben entfernten Angreifern, beliebige
+  Scripte oder HTML Code durch eine (1) javascriopt URI
+  oder eine externe (2) http, (3) https, oder (4) ftp URI
+  im url Parameter in services/go.php (für den Aufrufer),
+  (5) eine Javascript URI im module Parameter in
+  services/help (der  Hilfeviewer), und (6) dem name
+  Parameter in services/problem.php (der Problemreporting
+  Schirm) zu injizieren.
+
+- CVE-2006-3549: services/go.php schränkt nicht seine Bild
+  Proxy Fähigkeiten ein, was entfernten Angreifern
+  erlaubtm, &quot;Web tunneling&quot; Attacken auszuführen und den
+  Server als Proxy mit http, https oder ftp URLs im url
+  Parameter zu benutzen, der vom Server angefordert wird.
+</description>
+  <yum:version ver="1868" rel="0"/>
+  <rpm:requires>
+    <rpm:entry kind="atom" name="horde" epoch="0" ver="3.0.9" rel="19.4" flags="EQ"/>
+  </rpm:requires>
+  <category>security</category>
+  <atoms>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>horde</name>
+      <arch>noarch</arch>
+      <version epoch="0" ver="3.0.9" rel="19.4"/>
+      <checksum type="sha" pkgid="YES">dcc83cac6ef087a96ff771f1f74eb48650155732</checksum>
+      <time file="1153763362" build="1153407146"/>
+      <size package="2145248" installed="8520097" archive="8776440"/>
+      <location href="rpm/noarch/horde-3.0.9-19.4.noarch.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="horde" epoch="0" ver="3.0.9" rel="19.4" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="horde"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/noarch/horde-3.0.9-19.4.noarch.patch.rpm"/>
+          <checksum type="sha">7c245bbe29940d2e502a0c263e0ae43137dcb0d8</checksum>
+          <time file="1153764045" build="1153407146"/>
+          <size package="150336" archive="23288"/>
+          <base-version epoch="0" ver="3.0.9" rel="19"/>
+          <base-version epoch="0" ver="3.0.9" rel="19.2"/>
+        </patchrpm>
+      </pkgfiles>
+    </package>
+  </atoms>
+</patch>

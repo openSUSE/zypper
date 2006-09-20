@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--PATCHINFO id="a924ebf0830d0860f8be2829c26bed97"!-->
+<patch
+    xmlns="http://novell.com/package/metadata/suse/patch"
+    xmlns:yum="http://linux.duke.edu/metadata/common"
+    xmlns:rpm="http://linux.duke.edu/metadata/rpm"
+    xmlns:suse="http://novell.com/package/metadata/suse/common"
+    patchid="libwmf-1840"
+    timestamp="1153177196"
+    engine="1.0">
+  <yum:name>libwmf</yum:name>
+  <summary lang="en">libwmf: Security fix for heap overflow in WMF reader.</summary>
+  <summary lang="de">libwmf: Sicherheits update gegen einen Heapüberlauf im WMF Leser.</summary>
+  <description lang="en">A heap overflow could be triggered by specially crafted WMF
+(Windows Meta Files) in the libwmf library. This problem
+could be exploited to execute code, by a remote attacker
+providing a file with embedded WMF data to an application
+understanding this (like OpenOffice_org, abiword, gimp).
+
+This issue is tracked by the Mitre CVE ID CVE-2006-3376.
+</description>
+  <description lang="de">Ein Heapüberlauf konnte durch eine spezielle WMF (Windows
+Meta File) Datei  getriggert werden. Dieser konnte zum
+Ausführen von Code verwendet werden, durch einen Angreifer,
+der z.B. Dokumente mit eingebetteten WMFs an Benutzer von
+OpenOffice_org, abiword oder GIMP schickt.
+
+Dieses Problem hat die Mitre CVE ID CVE-2006-3376.
+</description>
+  <yum:version ver="1840" rel="0"/>
+  <rpm:requires>
+    <rpm:entry kind="atom" name="libwmf" epoch="0" ver="0.2.8.2" rel="110.5" flags="EQ"/>
+    <rpm:entry kind="atom" name="libwmf-devel" epoch="0" ver="0.2.8.2" rel="110.5" flags="EQ"/>
+  </rpm:requires>
+  <category>security</category>
+  <atoms>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>libwmf</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="0.2.8.2" rel="110.5"/>
+      <checksum type="sha" pkgid="YES">b3a131824f71bd5e9d80c53b1dbddb2a085c8f0d</checksum>
+      <time file="1153240054" build="1153177196"/>
+      <size package="811855" installed="1498880" archive="1505908"/>
+      <location href="rpm/i586/libwmf-0.2.8.2-110.5.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="libwmf" epoch="0" ver="0.2.8.2" rel="110.5" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="libwmf"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/libwmf-0.2.8.2-110.5.i586.patch.rpm"/>
+          <checksum type="sha">935745df499d182000d57be487cc120b0e2d21de</checksum>
+          <time file="1153243615" build="1153177196"/>
+          <size package="165133" archive="474676"/>
+          <base-version epoch="0" ver="0.2.8.2" rel="110"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/libwmf-0.2.8.2-110_110.5.i586.delta.rpm"/>
+          <checksum type="sha">1f27cf556ea60d1a8c0e12d8100a8abd413762e8</checksum>
+          <time file="1153243616" build="1153177196"/>
+          <size package="11221" archive="0"/>
+          <base-version epoch="0" ver="0.2.8.2" rel="110" md5sum="b9ae39727e709ceffcf9b41119ad4d1c" buildtime="1146563361" sequence_info="libwmf-0.2.8.2-110-d4f3ee6e77f67e72d83c02e9de4e5bf6f5"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>libwmf</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="0.2.8.2" rel="110.5"/>
+      <checksum type="sha" pkgid="YES">e83c0fda3178f9fb0457458a9a377733beb73963</checksum>
+      <time file="1153239928" build="1153184709"/>
+      <size package="833666" installed="1595072" archive="1602100"/>
+      <location href="rpm/ppc/libwmf-0.2.8.2-110.5.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="libwmf" epoch="0" ver="0.2.8.2" rel="110.5" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="libwmf"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/libwmf-0.2.8.2-110.5.ppc.patch.rpm"/>
+          <checksum type="sha">3e7f0cfdef399abaf09dcd5bd0acb528f876e501</checksum>
+          <time file="1153243618" build="1153184709"/>
+          <size package="187684" archive="570868"/>
+          <base-version epoch="0" ver="0.2.8.2" rel="110"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/libwmf-0.2.8.2-110_110.5.ppc.delta.rpm"/>
+          <checksum type="sha">ae8233c501272385d7d1568b6531be78f4cc12e2</checksum>
+          <time file="1153243619" build="1153184709"/>
+          <size package="11921" archive="0"/>
+          <base-version epoch="0" ver="0.2.8.2" rel="110" md5sum="84edfd1ea76cf95fa57812ff27bd180b" buildtime="1146570605" sequence_info="libwmf-0.2.8.2-110-4c3b8567431f4d181062469f35c42adef5"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>libwmf</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="0.2.8.2" rel="110.5"/>
+      <checksum type="sha" pkgid="YES">1db852a11100c36b7d1cbbb601d4612c9d275741</checksum>
+      <time file="1153240047" build="1153177251"/>
+      <size package="821411" installed="1543740" archive="1550784"/>
+      <location href="rpm/x86_64/libwmf-0.2.8.2-110.5.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="libwmf" epoch="0" ver="0.2.8.2" rel="110.5" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="libwmf"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/libwmf-0.2.8.2-110.5.x86_64.patch.rpm"/>
+          <checksum type="sha">5c0e0db2cfeebdf3937e81d194496e8cda72e1a4</checksum>
+          <time file="1153243621" build="1153177251"/>
+          <size package="175057" archive="519544"/>
+          <base-version epoch="0" ver="0.2.8.2" rel="110"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/libwmf-0.2.8.2-110_110.5.x86_64.delta.rpm"/>
+          <checksum type="sha">dd4cf3b4ac9e6a3a8f6525a0a9b5c40759ec8a8b</checksum>
+          <time file="1153243622" build="1153177251"/>
+          <size package="12124" archive="0"/>
+          <base-version epoch="0" ver="0.2.8.2" rel="110" md5sum="44e5e04e8d5e2a7b10a8b96df5dcdb0c" buildtime="1146563664" sequence_info="libwmf-0.2.8.2-110-8ecea410be94a26d83e3345dc4841729f5"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>libwmf-devel</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="0.2.8.2" rel="110.5"/>
+      <checksum type="sha" pkgid="YES">59d0a6362386d46d234db29c5498f0e254151303</checksum>
+      <time file="1153240055" build="1153177196"/>
+      <size package="423283" installed="2792658" archive="2839168"/>
+      <location href="rpm/i586/libwmf-devel-0.2.8.2-110.5.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="libwmf-devel" epoch="0" ver="0.2.8.2" rel="110.5" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="libwmf-devel"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/libwmf-devel-0.2.8.2-110.5.i586.patch.rpm"/>
+          <checksum type="sha">09445e8844c30e960204d8263406040d37e764cf</checksum>
+          <time file="1153243624" build="1153177196"/>
+          <size package="181384" archive="517596"/>
+          <base-version epoch="0" ver="0.2.8.2" rel="110"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/libwmf-devel-0.2.8.2-110_110.5.i586.delta.rpm"/>
+          <checksum type="sha">861387be1a61d92cfa358b664c51acb22aaf4ff3</checksum>
+          <time file="1153243625" build="1153177196"/>
+          <size package="33253" archive="0"/>
+          <base-version epoch="0" ver="0.2.8.2" rel="110" md5sum="52fdb8a8d31f4685c0a8475ed3836ba6" buildtime="1146563361" sequence_info="libwmf-devel-0.2.8.2-110-d6480928dc60d4679bc74f3fe5416bbefa40"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>libwmf-devel</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="0.2.8.2" rel="110.5"/>
+      <checksum type="sha" pkgid="YES">7bf22058c23d2bb655b8cb1b62a2ec48903c9b56</checksum>
+      <time file="1153239928" build="1153184709"/>
+      <size package="440220" installed="2835770" archive="2882280"/>
+      <location href="rpm/ppc/libwmf-devel-0.2.8.2-110.5.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="libwmf-devel" epoch="0" ver="0.2.8.2" rel="110.5" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="libwmf-devel"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/libwmf-devel-0.2.8.2-110.5.ppc.patch.rpm"/>
+          <checksum type="sha">d381e7bc3a94b4742cdfa51b7dcaf910f4297cc8</checksum>
+          <time file="1153243627" build="1153184709"/>
+          <size package="194634" archive="560708"/>
+          <base-version epoch="0" ver="0.2.8.2" rel="110"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/libwmf-devel-0.2.8.2-110_110.5.ppc.delta.rpm"/>
+          <checksum type="sha">c0c905fb45cd4e92cfd2e80751de0591f5132ce5</checksum>
+          <time file="1153243628" build="1153184709"/>
+          <size package="33523" archive="0"/>
+          <base-version epoch="0" ver="0.2.8.2" rel="110" md5sum="98683cba35659be32f39e22c17bdfdc4" buildtime="1146570605" sequence_info="libwmf-devel-0.2.8.2-110-bee95bb4cac3979bb9768d8dc437bd22fa40"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>libwmf-devel</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="0.2.8.2" rel="110.5"/>
+      <checksum type="sha" pkgid="YES">2d39716c5bb8bdf350bb725fa01b0d58772a1aac</checksum>
+      <time file="1153240048" build="1153177251"/>
+      <size package="430185" installed="2920756" archive="2967268"/>
+      <location href="rpm/x86_64/libwmf-devel-0.2.8.2-110.5.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="libwmf-devel" epoch="0" ver="0.2.8.2" rel="110.5" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="libwmf-devel"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/libwmf-devel-0.2.8.2-110.5.x86_64.patch.rpm"/>
+          <checksum type="sha">7e50733edc181109046dbba764e4340026c5c863</checksum>
+          <time file="1153243630" build="1153177251"/>
+          <size package="184576" archive="645648"/>
+          <base-version epoch="0" ver="0.2.8.2" rel="110"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/libwmf-devel-0.2.8.2-110_110.5.x86_64.delta.rpm"/>
+          <checksum type="sha">527b9e3d185b7833521f2758d5034024f4fa66c5</checksum>
+          <time file="1153243630" build="1153177251"/>
+          <size package="33502" archive="0"/>
+          <base-version epoch="0" ver="0.2.8.2" rel="110" md5sum="6a02cd6c4e35d3a37ccc8750715b25e6" buildtime="1146563664" sequence_info="libwmf-devel-0.2.8.2-110-c48299727e554d344e0e4438b1ab0396fa40"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+  </atoms>
+</patch>

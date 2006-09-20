@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--PATCHINFO id="35cdfa1bd08241e0451d801785553dc7"!-->
+<patch
+    xmlns="http://novell.com/package/metadata/suse/patch"
+    xmlns:yum="http://linux.duke.edu/metadata/common"
+    xmlns:rpm="http://linux.duke.edu/metadata/rpm"
+    xmlns:suse="http://novell.com/package/metadata/suse/common"
+    patchid="xorg-x11-driver-video-1863"
+    timestamp="1153372219"
+    engine="1.0">
+  <yum:name>xorg-x11-driver-video</yum:name>
+  <summary lang="en">xorg-x11-driver-video: Permits the coexistance of Mesa and NVIDIA driver.</summary>
+  <summary lang="de">xorg-x11-driver-video: Ermöglicht die Parallelinstallation von Mesa und NVIDIA Treiber.</summary>
+  <description lang="en">This update permits the coexistance of Mesa and NVIDIA
+driver. Added support for new NVidia graphics cards. Added
+alternative Intel video  driver. Fixed driver issues with
+Matrox G200 SE GPUs.
+</description>
+  <description lang="de">Dieses Update ermöglicht die Parallelinstallation von Mesa
+und NVIDIA Treiber. Support für neue NVidia Grafikkarten.
+Alternativer Intel  Grafiktreiber hinzugefügt.
+Treiberprobleme mit Matrox G200 SE GPUs behoben.
+</description>
+  <yum:version ver="1863" rel="0"/>
+  <rpm:requires>
+    <rpm:entry kind="atom" name="xorg-x11-driver-video" epoch="0" ver="6.9.0" rel="46.15" flags="EQ"/>
+    <rpm:entry kind="atom" name="xorg-x11-driver-video-nvidia" epoch="0" ver="6.9.0" rel="46.15" flags="EQ"/>
+  </rpm:requires>
+  <category>recommended</category>
+  <atoms>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>xorg-x11-driver-video</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="6.9.0" rel="46.15"/>
+      <checksum type="sha" pkgid="YES">320557c71cf0213c424998f18cce2e4d8fd59894</checksum>
+      <time file="1153414725" build="1153372219"/>
+      <size package="1310698" installed="3875223" archive="3881276"/>
+      <location href="rpm/i586/xorg-x11-driver-video-6.9.0-46.15.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="xorg-x11-driver-video" epoch="0" ver="6.9.0" rel="46.15" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="xorg-x11-driver-video"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/xorg-x11-driver-video-6.9.0-46.15.i586.patch.rpm"/>
+          <checksum type="sha">d16874a599d699fc8373d21b50ac6545d14ec507</checksum>
+          <time file="1153414804" build="1153372219"/>
+          <size package="583393" archive="1677728"/>
+          <base-version epoch="0" ver="6.9.0" rel="46"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/xorg-x11-driver-video-6.9.0-46_46.15.i586.delta.rpm"/>
+          <checksum type="sha">8a4de34e13a2dd4fbe8e5882c83968799724e419</checksum>
+          <time file="1153414807" build="1153372219"/>
+          <size package="115361" archive="0"/>
+          <base-version epoch="0" ver="6.9.0" rel="46" md5sum="d6603fc8ad1250ab70cfda4a07442772" buildtime="1146559669" sequence_info="xorg-x11-driver-video-6.9.0-46-eb4303262aad8c6625f638d0b7cd10dfc4"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>xorg-x11-driver-video</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="6.9.0" rel="46.15"/>
+      <checksum type="sha" pkgid="YES">84e2934e4f3b84b4ad87b8c8823bbcde194bf2de</checksum>
+      <time file="1153410945" build="1153402420"/>
+      <size package="1197972" installed="3729895" archive="3735788"/>
+      <location href="rpm/ppc/xorg-x11-driver-video-6.9.0-46.15.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="xorg-x11-driver-video" epoch="0" ver="6.9.0" rel="46.15" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="xorg-x11-driver-video"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/xorg-x11-driver-video-6.9.0-46.15.ppc.patch.rpm"/>
+          <checksum type="sha">ecd6859558cd3f4e2dd07238d2c4077b8179334a</checksum>
+          <time file="1153414811" build="1153402420"/>
+          <size package="471499" archive="1210472"/>
+          <base-version epoch="0" ver="6.9.0" rel="46"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/xorg-x11-driver-video-6.9.0-46_46.15.ppc.delta.rpm"/>
+          <checksum type="sha">e126f08d68e577a2a9ccd66da3e7f408d97338e4</checksum>
+          <time file="1153414813" build="1153402420"/>
+          <size package="103187" archive="0"/>
+          <base-version epoch="0" ver="6.9.0" rel="46" md5sum="4227c44fd2c4e00e18cd52c93e41e058" buildtime="1146586521" sequence_info="xorg-x11-driver-video-6.9.0-46-5d9e1ef14feccc74a6960b6d3792e112b4"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>xorg-x11-driver-video</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="6.9.0" rel="46.15"/>
+      <checksum type="sha" pkgid="YES">5a6b82d93abc3bd0eac2730b3e5cca4c4453e034</checksum>
+      <time file="1153410936" build="1153374896"/>
+      <size package="1240770" installed="3756563" archive="3762508"/>
+      <location href="rpm/x86_64/xorg-x11-driver-video-6.9.0-46.15.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="xorg-x11-driver-video" epoch="0" ver="6.9.0" rel="46.15" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="xorg-x11-driver-video"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/xorg-x11-driver-video-6.9.0-46.15.x86_64.patch.rpm"/>
+          <checksum type="sha">1f0b8e9b09f28a7090d0d2f6de1aac9e9ba57b68</checksum>
+          <time file="1153414816" build="1153374896"/>
+          <size package="458986" archive="1153396"/>
+          <base-version epoch="0" ver="6.9.0" rel="46"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/xorg-x11-driver-video-6.9.0-46_46.15.x86_64.delta.rpm"/>
+          <checksum type="sha">843c436a60f1bed7a2eb912ad564ee39f42d09ab</checksum>
+          <time file="1153414818" build="1153374896"/>
+          <size package="123300" archive="0"/>
+          <base-version epoch="0" ver="6.9.0" rel="46" md5sum="0163052bf2122098b58aa371dc5df56f" buildtime="1146560629" sequence_info="xorg-x11-driver-video-6.9.0-46-6856905ce6d1bef26d80af80249f98acb4"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>xorg-x11-driver-video-nvidia</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="6.9.0" rel="46.15"/>
+      <checksum type="sha" pkgid="YES">975b83c8b05800ec646728c240f9bf137663d6d5</checksum>
+      <time file="1153414727" build="1153372219"/>
+      <size package="9916" installed="0" archive="292"/>
+      <location href="rpm/i586/xorg-x11-driver-video-nvidia-6.9.0-46.15.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="xorg-x11-driver-video-nvidia" epoch="0" ver="6.9.0" rel="46.15" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="xorg-x11-driver-video-nvidia"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/xorg-x11-driver-video-nvidia-6.9.0-46.15.i586.patch.rpm"/>
+          <checksum type="sha">c82a38fe3d3f29550ee346f17b3cbdd571d065c3</checksum>
+          <time file="1153414819" build="1153372219"/>
+          <size package="9948" archive="124"/>
+          <base-version epoch="0" ver="6.9.0" rel="46"/>
+        </patchrpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>xorg-x11-driver-video-nvidia</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="6.9.0" rel="46.15"/>
+      <checksum type="sha" pkgid="YES">8cc06af4dbd071e7387c1579a4744e6ae4d0906c</checksum>
+      <time file="1153410946" build="1153402420"/>
+      <size package="9899" installed="0" archive="292"/>
+      <location href="rpm/ppc/xorg-x11-driver-video-nvidia-6.9.0-46.15.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="xorg-x11-driver-video-nvidia" epoch="0" ver="6.9.0" rel="46.15" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="xorg-x11-driver-video-nvidia"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/xorg-x11-driver-video-nvidia-6.9.0-46.15.ppc.patch.rpm"/>
+          <checksum type="sha">0be3ad31457d5b4750c8e22afa1baedebc3fc4f1</checksum>
+          <time file="1153414821" build="1153402420"/>
+          <size package="9932" archive="124"/>
+          <base-version epoch="0" ver="6.9.0" rel="46"/>
+        </patchrpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>xorg-x11-driver-video-nvidia</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="6.9.0" rel="46.15"/>
+      <checksum type="sha" pkgid="YES">51de506feb9b079879593f5219cdec4f46905944</checksum>
+      <time file="1153410937" build="1153374896"/>
+      <size package="9915" installed="0" archive="296"/>
+      <location href="rpm/x86_64/xorg-x11-driver-video-nvidia-6.9.0-46.15.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="xorg-x11-driver-video-nvidia" epoch="0" ver="6.9.0" rel="46.15" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="xorg-x11-driver-video-nvidia"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/xorg-x11-driver-video-nvidia-6.9.0-46.15.x86_64.patch.rpm"/>
+          <checksum type="sha">8ed4be40e50ab6b961e6367540fe256807397e5c</checksum>
+          <time file="1153414822" build="1153374896"/>
+          <size package="9948" archive="124"/>
+          <base-version epoch="0" ver="6.9.0" rel="46"/>
+        </patchrpm>
+      </pkgfiles>
+    </package>
+  </atoms>
+</patch>

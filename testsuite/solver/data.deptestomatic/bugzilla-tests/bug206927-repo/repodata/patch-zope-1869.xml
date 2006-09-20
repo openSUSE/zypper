@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--PATCHINFO id="e73b06cbd7fe23c8b5873a008e655c7a"!-->
+<patch
+    xmlns="http://novell.com/package/metadata/suse/patch"
+    xmlns:yum="http://linux.duke.edu/metadata/common"
+    xmlns:rpm="http://linux.duke.edu/metadata/rpm"
+    xmlns:suse="http://novell.com/package/metadata/suse/common"
+    patchid="zope-1869"
+    timestamp="1153762906"
+    engine="1.0">
+  <yum:name>zope</yum:name>
+  <summary lang="en">zope security update</summary>
+  <summary lang="de">zope Sicherheitsupdate</summary>
+  <description lang="en">A bug in the way the docutils module parses and renders
+&quot;restructured text&quot; could lead to information disclosure.
+</description>
+  <description lang="de">Ein Fehler in der Verarbeitung von &quot;restructured text&quot; im
+docutils-Modul konnte zur Preisgabe von nicht dafür
+vorgesehenen Informationen führen.
+</description>
+  <yum:version ver="1869" rel="0"/>
+  <rpm:requires>
+    <rpm:entry kind="atom" name="zope" epoch="0" ver="2.7.8" rel="15.5" flags="EQ"/>
+  </rpm:requires>
+  <category>security</category>
+  <atoms>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>zope</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="2.7.8" rel="15.5"/>
+      <checksum type="sha" pkgid="YES">0d95ffea1b86111eaa881b7d788213231316bdd2</checksum>
+      <time file="1153820186" build="1153762906"/>
+      <size package="4144392" installed="16937251" archive="17461028"/>
+      <location href="rpm/i586/zope-2.7.8-15.5.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="zope" epoch="0" ver="2.7.8" rel="15.5" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="zope"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/zope-2.7.8-15.5.i586.patch.rpm"/>
+          <checksum type="sha">77e6b23d47af4a0dd02c8f4e868b88992cb76131</checksum>
+          <time file="1153821886" build="1153762906"/>
+          <size package="317002" archive="18324"/>
+          <base-version epoch="0" ver="2.7.8" rel="15"/>
+        </patchrpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>zope</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="2.7.8" rel="15.5"/>
+      <checksum type="sha" pkgid="YES">424997718d59f8889bf9e09d56ccc4e12e78aa93</checksum>
+      <time file="1153820170" build="1153764190"/>
+      <size package="4191193" installed="17302431" archive="17826208"/>
+      <location href="rpm/ppc/zope-2.7.8-15.5.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="zope" epoch="0" ver="2.7.8" rel="15.5" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="zope"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/zope-2.7.8-15.5.ppc.patch.rpm"/>
+          <checksum type="sha">fb21a12f6977962ea9aaef056e7b63ed3c23bc39</checksum>
+          <time file="1153821899" build="1153764190"/>
+          <size package="312292" archive="6296"/>
+          <base-version epoch="0" ver="2.7.8" rel="15"/>
+        </patchrpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>zope</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="2.7.8" rel="15.5"/>
+      <checksum type="sha" pkgid="YES">4cc72cc6f9d8312770e088b46c3f0b665dce1763</checksum>
+      <time file="1153820182" build="1153764257"/>
+      <size package="4179719" installed="17111047" archive="17634824"/>
+      <location href="rpm/x86_64/zope-2.7.8-15.5.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="zope" epoch="0" ver="2.7.8" rel="15.5" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="zope"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/zope-2.7.8-15.5.x86_64.patch.rpm"/>
+          <checksum type="sha">c128c9999c6360467bab041a91200cb3d8e74fd0</checksum>
+          <time file="1153821909" build="1153764257"/>
+          <size package="312598" archive="6296"/>
+          <base-version epoch="0" ver="2.7.8" rel="15"/>
+        </patchrpm>
+      </pkgfiles>
+    </package>
+  </atoms>
+</patch>

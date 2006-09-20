@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--PATCHINFO id="c2ceb5405539df76f5986a232a094cb9"!-->
+<patch
+    xmlns="http://novell.com/package/metadata/suse/patch"
+    xmlns:yum="http://linux.duke.edu/metadata/common"
+    xmlns:rpm="http://linux.duke.edu/metadata/rpm"
+    xmlns:suse="http://novell.com/package/metadata/suse/common"
+    patchid="vrfy-1995"
+    timestamp="1156510357"
+    engine="1.0">
+  <yum:name>vrfy</yum:name>
+  <summary lang="en">vrfy: Fix for immediate segfaults</summary>
+  <summary lang="de">vrfy: Behebt sofortigen Absturz</summary>
+  <description lang="en">Fixes a bug causing a segfault immediately upon execution
+of vrfy.
+</description>
+  <description lang="de">Repariert einen Fehler, der einen Absturz sofort nach dem
+Aufruf von vrfy bewirkte.
+</description>
+  <yum:version ver="1995" rel="0"/>
+  <rpm:requires>
+    <rpm:entry kind="atom" name="vrfy" epoch="0" ver="990522" rel="452.2" flags="EQ"/>
+  </rpm:requires>
+  <category>recommended</category>
+  <atoms>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>vrfy</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="990522" rel="452.2"/>
+      <checksum type="sha" pkgid="YES">c96ce99f7a232898dc816bd2447f9f03555bad51</checksum>
+      <time file="1156525052" build="1156510357"/>
+      <size package="25456" installed="39754" archive="40452"/>
+      <location href="rpm/i586/vrfy-990522-452.2.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="vrfy" epoch="0" ver="990522" rel="452.2" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="vrfy"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/vrfy-990522-452.2.i586.patch.rpm"/>
+          <checksum type="sha">69a2fb8037719ded2f77a7b5f4c3050796dbee40</checksum>
+          <time file="1156525202" build="1156510357"/>
+          <size package="16108" archive="25676"/>
+          <base-version epoch="0" ver="990522" rel="452"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/vrfy-990522-452_452.2.i586.delta.rpm"/>
+          <checksum type="sha">ec95f328d2415bbce935ff76dba4e591db452e81</checksum>
+          <time file="1156525203" build="1156510357"/>
+          <size package="12063" archive="0"/>
+          <base-version epoch="0" ver="990522" rel="452" md5sum="f3f6750bde2d4c1c1a4fc027f18e4227" buildtime="1145760908" sequence_info="vrfy-990522-452-eba0dde8eb1176bfdbf25826ca4d40062110"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>vrfy</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="990522" rel="452.2"/>
+      <checksum type="sha" pkgid="YES">a919d6dd1495dd31267f87b06708f0090784749b</checksum>
+      <time file="1156524982" build="1156510350"/>
+      <size package="27803" installed="47390" archive="48088"/>
+      <location href="rpm/ppc/vrfy-990522-452.2.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="vrfy" epoch="0" ver="990522" rel="452.2" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="vrfy"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/vrfy-990522-452.2.ppc.patch.rpm"/>
+          <checksum type="sha">fe781fc1b64212dde3e6b450aba9dfcd4c65d78b</checksum>
+          <time file="1156525205" build="1156510350"/>
+          <size package="18377" archive="33312"/>
+          <base-version epoch="0" ver="990522" rel="452"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/vrfy-990522-452_452.2.ppc.delta.rpm"/>
+          <checksum type="sha">6024d853c858df4e33cf902d8b095f2c0568fdea</checksum>
+          <time file="1156525206" build="1156510350"/>
+          <size package="16984" archive="0"/>
+          <base-version epoch="0" ver="990522" rel="452" md5sum="b3ff59217cd9cde4c3353a388a8eb644" buildtime="1145892514" sequence_info="vrfy-990522-452-c323c86ab294d58b9001fa181c0677752110"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>vrfy</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="990522" rel="452.2"/>
+      <checksum type="sha" pkgid="YES">98676e20b9710e7f0273792ac8446dd2e32fb287</checksum>
+      <time file="1156524768" build="1156510129"/>
+      <size package="27898" installed="46890" archive="47588"/>
+      <location href="rpm/x86_64/vrfy-990522-452.2.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="vrfy" epoch="0" ver="990522" rel="452.2" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="vrfy"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/vrfy-990522-452.2.x86_64.patch.rpm"/>
+          <checksum type="sha">52a968a5adc15132c84e44594ce557c8b9e34e95</checksum>
+          <time file="1156525207" build="1156510129"/>
+          <size package="18526" archive="32812"/>
+          <base-version epoch="0" ver="990522" rel="452"/>
+        </patchrpm>
+      </pkgfiles>
+    </package>
+  </atoms>
+</patch>

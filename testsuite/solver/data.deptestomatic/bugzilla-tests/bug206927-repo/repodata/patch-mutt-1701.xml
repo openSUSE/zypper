@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--PATCHINFO id="f7fc9cfdbbb160326353b1c70bfee2b7"!-->
+<patch
+    xmlns="http://novell.com/package/metadata/suse/patch"
+    xmlns:yum="http://linux.duke.edu/metadata/common"
+    xmlns:rpm="http://linux.duke.edu/metadata/rpm"
+    xmlns:suse="http://novell.com/package/metadata/suse/common"
+    patchid="mutt-1701"
+    timestamp="1151683163"
+    engine="1.0">
+  <yum:name>mutt</yum:name>
+  <summary lang="en">mutt: Security fix for imap buffer overflow</summary>
+  <summary lang="de">mutt: Sicherheitsupdate für einen Pufferüberlauf im Imap Code</summary>
+  <description lang="en">Mutt had a buffer overflow in IMAP namespace parsing code
+which may open a possible remote vulnerability
+(CVE-2006-3242).
+</description>
+  <description lang="de">Mutt hatte einen Pufferüberlauf im IMAP-Code des
+Namensbereichsparsers, der eventuell von aussen ausgenutzt
+werden konnte (CVE-2006-3242).
+</description>
+  <yum:version ver="1701" rel="0"/>
+  <rpm:requires>
+    <rpm:entry kind="atom" name="mutt" epoch="0" ver="1.5.9i" rel="27.4" flags="EQ"/>
+  </rpm:requires>
+  <category>security</category>
+  <atoms>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>mutt</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="1.5.9i" rel="27.4"/>
+      <checksum type="sha" pkgid="YES">cc7f1d7d3bb9c2e1064d3299633400a056d21894</checksum>
+      <time file="1151931480" build="1151683163"/>
+      <size package="1202675" installed="3714194" archive="3730760"/>
+      <location href="rpm/i586/mutt-1.5.9i-27.4.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="mutt" epoch="0" ver="1.5.9i" rel="27.4" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="mutt"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/mutt-1.5.9i-27.4.i586.patch.rpm"/>
+          <checksum type="sha">6744018bb252f1eb3576a14e724615d3d142c4ae</checksum>
+          <time file="1151932047" build="1151683163"/>
+          <size package="310902" archive="669012"/>
+          <base-version epoch="0" ver="1.5.9i" rel="27"/>
+        </patchrpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>mutt</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="1.5.9i" rel="27.4"/>
+      <checksum type="sha" pkgid="YES">5d5e501264605671be9b5d8f27acbda312f8caa2</checksum>
+      <time file="1151931407" build="1151682599"/>
+      <size package="1224519" installed="3779778" archive="3796344"/>
+      <location href="rpm/ppc/mutt-1.5.9i-27.4.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="mutt" epoch="0" ver="1.5.9i" rel="27.4" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="mutt"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/mutt-1.5.9i-27.4.ppc.patch.rpm"/>
+          <checksum type="sha">61e77363e13ed9835a29e9bc711aaa0383555842</checksum>
+          <time file="1151932051" build="1151682599"/>
+          <size package="332951" archive="725768"/>
+          <base-version epoch="0" ver="1.5.9i" rel="27"/>
+        </patchrpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>mutt</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="1.5.9i" rel="27.4"/>
+      <checksum type="sha" pkgid="YES">3b94da51e258c1f4834e4f816f205fac22936645</checksum>
+      <time file="1151931467" build="1151682647"/>
+      <size package="1239555" installed="3759910" archive="3776476"/>
+      <location href="rpm/x86_64/mutt-1.5.9i-27.4.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="mutt" epoch="0" ver="1.5.9i" rel="27.4" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="mutt"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/mutt-1.5.9i-27.4.x86_64.patch.rpm"/>
+          <checksum type="sha">e9be8d092f3fcaa9d509e7873dc304a8fb33e240</checksum>
+          <time file="1151932056" build="1151682647"/>
+          <size package="344556" archive="707716"/>
+          <base-version epoch="0" ver="1.5.9i" rel="27"/>
+        </patchrpm>
+      </pkgfiles>
+    </package>
+  </atoms>
+</patch>

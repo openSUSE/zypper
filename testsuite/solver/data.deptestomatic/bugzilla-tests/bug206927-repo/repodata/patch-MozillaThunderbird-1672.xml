@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--PATCHINFO id="bd71e3b93a6a68dec7e25739c6d037f6"!-->
+<patch
+    xmlns="http://novell.com/package/metadata/suse/patch"
+    xmlns:yum="http://linux.duke.edu/metadata/common"
+    xmlns:rpm="http://linux.duke.edu/metadata/rpm"
+    xmlns:suse="http://novell.com/package/metadata/suse/common"
+    patchid="MozillaThunderbird-1672"
+    timestamp="1150677664"
+    engine="1.0">
+  <yum:name>MozillaThunderbird</yum:name>
+  <summary lang="en">Thunderbird: Security Update 1.5.0.4</summary>
+  <summary lang="de">Thunderbird: Sicherheits Update 1.5.0.4</summary>
+  <description lang="en">This update of Mozilla Thunderbird fixes the security 
+problems fixed in version 1.5.0.4:  MFSA 
+2006-31/CVE-2006-2787: EvalInSandbox in Mozilla Firefox and 
+Thunderbird before 1.5.0.4 allows remote attackers to gain 
+privileges via javascript that calls the valueOf method on 
+objects that were created outside of the sandbox.  MFSA 
+2006-32/CVE-2006-2780: Integer overflow in Mozilla Firefox 
+and Thunderbird before 1.5.0.4 allows remote attackers to 
+cause a denial of service (crash) and possibly execute 
+arbitrary code via &quot;jsstr tagify,&quot; which leads to memory 
+corruption.  MFSA 2006-32/CVE-2006-2779: Mozilla Firefox 
+and Thunderbird before 1.5.0.4 allow remote attackers to 
+cause a denial of service (crash) and possibly execute 
+arbitrary code via (1) nested &lt;option&gt; tags in a select 
+tag, (2) a DOMNodeRemoved mutation event, (3) 
+&quot;Content-implemented tree views,&quot; (4) BoxObjects, (5) the 
+XBL implementation, (6) an iframe that attempts to remove 
+itself, which leads to memory corruption.  MFSA 
+2006-33/CVE-2006-2786: HTTP response smuggling 
+vulnerability in Mozilla Firefox and Thunderbird before 
+1.5.0.4, when used with certain proxy servers, allows 
+remote attackers to cause Firefox to interpret certain 
+responses as if they were responses from two different 
+sites via (1) invalid HTTP response headers with spaces 
+between the header name and the colon, which might not be 
+ignored in some cases, or (2) HTTP 1.1 headers through an 
+HTTP 1.0 proxy, which are ignored by the proxy but 
+processed by the client.  MFSA 2006-35/CVE-2006-2775: 
+Mozilla Firefox and Thunderbird before 1.5.0.4 associates 
+XUL attributes with the wrong URL under certain unspecified 
+circumstances, which might allow remote attackers to bypass 
+restrictions by causing a persisted string to be associated 
+with the wrong URL.  MFSA 2006-37/CVE-2006-2776: Certain 
+privileged UI code in Mozilla Firefox and Thunderbird 
+before 1.5.0.4 calls content-defined setters on an object 
+prototype, which allows remote attackers to execute code at 
+a higher privilege than intended.  MFSA 
+2006-38/CVE-2006-2778: The crypto.signText function in 
+Mozilla Firefox and Thunderbird before 1.5.0.4 allows 
+remote attackers to execute arbitrary code via certain 
+optional Certificate Authority name arguments, which causes 
+an invalid array index and triggers a buffer overflow.  
+MFSA 2006-40/CVE-2006-2781: Double-free vulnerability in 
+Mozilla Thunderbird before 1.5.0.4 and SeaMonkey before 
+1.0.2 allows remote attackers to cause a denial of service 
+(hang) and possibly execute arbitrary code via a VCard that 
+contains invalid base64 characters.  MFSA 
+2006-42/CVE-2006-2783: Mozilla Firefox and Thunderbird 
+before 1.5.0.4 strips the Unicode Byte-order-Mark (BOM) 
+from a UTF-8 page before the page is passed to the parser, 
+which allows remote attackers to conduct cross-site 
+scripting (XSS) attacks via a BOM sequence in the middle of 
+a dangerous tag such as SCRIPT.
+</description>
+  <description lang="de">Dieses Update von Mozilla Thunderbird behebt folgende 
+Sicherheitsprobleme, die in 1.5.0.4 behoben sind (in 
+englischer Sprache):  MFSA 2006-31/CVE-2006-2787: 
+EvalInSandbox in Mozilla Firefox and Thunderbird before 
+1.5.0.4 allows remote attackers to gain privileges via 
+javascript that calls the valueOf method on objects that 
+were created outside of the sandbox.  MFSA 
+2006-32/CVE-2006-2780: Integer overflow in Mozilla Firefox 
+and Thunderbird before 1.5.0.4 allows remote attackers to 
+cause a denial of service (crash) and possibly execute 
+arbitrary code via &quot;jsstr tagify,&quot; which leads to memory 
+corruption.  MFSA 2006-32/CVE-2006-2779: Mozilla Firefox 
+and Thunderbird before 1.5.0.4 allow remote attackers to 
+cause a denial of service (crash) and possibly execute 
+arbitrary code via (1) nested &lt;option&gt; tags in a select 
+tag, (2) a DOMNodeRemoved mutation event, (3) 
+&quot;Content-implemented tree views,&quot; (4) BoxObjects, (5) the 
+XBL implementation, (6) an iframe that attempts to remove 
+itself, which leads to memory corruption.   MFSA 
+2006-33/CVE-2006-2786: HTTP response smuggling 
+vulnerability in Mozilla Firefox and Thunderbird before 
+1.5.0.4, when used with certain proxy servers, allows 
+remote attackers to cause Firefox to interpret certain 
+responses as if they were responses from two different 
+sites via (1) invalid HTTP response headers with spaces 
+between the header name and the colon, which might not be 
+ignored in some cases, or (2) HTTP 1.1 headers through an 
+HTTP 1.0 proxy, which are ignored by the proxy but 
+processed by the client.  MFSA 2006-35/CVE-2006-2775: 
+Mozilla Firefox and Thunderbird before 1.5.0.4 associates 
+XUL attributes with the wrong URL under certain unspecified 
+circumstances, which might allow remote attackers to bypass 
+restrictions by causing a persisted string to be associated 
+with the wrong URL.  MFSA 2006-37/CVE-2006-2776: Certain 
+privileged UI code in Mozilla Firefox and Thunderbird 
+before 1.5.0.4 calls content-defined setters on an object 
+prototype, which allows remote attackers to execute code at 
+a higher privilege than intended.  MFSA 
+2006-38/CVE-2006-2778: The crypto.signText function in 
+Mozilla Firefox and Thunderbird before 1.5.0.4 allows 
+remote attackers to execute arbitrary code via certain 
+optional Certificate Authority name arguments, which causes 
+an invalid array index and triggers a buffer overflow.  
+MFSA 2006-40/CVE-2006-2781: Double-free vulnerability in 
+Mozilla Thunderbird before 1.5.0.4 and SeaMonkey before 
+1.0.2 allows remote attackers to cause a denial of service 
+(hang) and possibly execute arbitrary code via a VCard that 
+contains invalid base64 characters.  MFSA 
+2006-42/CVE-2006-2783: Mozilla Firefox and Thunderbird 
+before 1.5.0.4 strips the Unicode Byte-order-Mark (BOM) 
+from a UTF-8 page before the page is passed to the parser, 
+which allows remote attackers to conduct cross-site 
+scripting (XSS) attacks via a BOM sequence in the middle of 
+a dangerous tag such as SCRIPT.
+</description>
+  <yum:version ver="1672" rel="0"/>
+  <rpm:requires>
+  <rpm:entry kind="atom" name="MozillaThunderbird" epoch="0" ver="1.5.0.4" rel="2.1" flags="EQ"/>
+  <rpm:entry kind="atom" name="MozillaThunderbird-translations" epoch="0" ver="1.5.0.4" rel="2.1" flags="EQ"/>
+  </rpm:requires>
+  <category>security</category>
+  <atoms>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>MozillaThunderbird</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="1.5.0.4" rel="2.1"/>
+      <checksum type="sha" pkgid="YES">984c4b3ff23dfa5265dd0a1ddb752b99a9b51ae2</checksum>
+      <time file="1150977401" build="1150677664"/>
+      <size package="7840820" installed="23451964" archive="23507304"/>
+      <location href="rpm/i586/MozillaThunderbird-1.5.0.4-2.1.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="MozillaThunderbird" epoch="0" ver="1.5.0.4" rel="2.1" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="MozillaThunderbird"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/MozillaThunderbird-1.5.0.4-2.1.i586.patch.rpm"/>
+          <checksum type="sha">8d0e94550397a1af2eb9e39a7de010c7ff8343fc</checksum>
+          <time file="1150977865" build="1150677664"/>
+          <size package="6110306" archive="17083264"/>
+          <base-version epoch="0" ver="1.5" rel="27"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/MozillaThunderbird-1.5_1.5.0.4-27_2.1.i586.delta.rpm"/>
+          <checksum type="sha">073d8ecb3c5d124150c5a21d10b988717cbd0fde</checksum>
+          <time file="1150977878" build="1150677664"/>
+          <size package="741679" archive="0"/>
+          <base-version epoch="0" ver="1.5" rel="27" md5sum="7d4267190b28bf16be21b07fb02749e8" buildtime="1146621380" sequence_info="MozillaThunderbird-1.5-27-fda5f3f6eafdc0d4c3e580f5ac8fe288aa50"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>MozillaThunderbird</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="1.5.0.4" rel="2.1"/>
+      <checksum type="sha" pkgid="YES">99177d5e7c0eff5e756b49230e852cec3851afa8</checksum>
+      <time file="1150977470" build="1150594743"/>
+      <size package="7997911" installed="26929920" archive="26985260"/>
+      <location href="rpm/ppc/MozillaThunderbird-1.5.0.4-2.1.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="MozillaThunderbird" epoch="0" ver="1.5.0.4" rel="2.1" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="MozillaThunderbird"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/MozillaThunderbird-1.5.0.4-2.1.ppc.patch.rpm"/>
+          <checksum type="sha">e3d354448e96eeb859ce2dba0a31d4c27557a61b</checksum>
+          <time file="1150977895" build="1150594743"/>
+          <size package="6260254" archive="20325476"/>
+          <base-version epoch="0" ver="1.5" rel="27"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/MozillaThunderbird-1.5_1.5.0.4-27_2.1.ppc.delta.rpm"/>
+          <checksum type="sha">3b698f1644f46a67bb11d8cfc78c6f38a0b65666</checksum>
+          <time file="1150977908" build="1150594743"/>
+          <size package="613940" archive="0"/>
+          <base-version epoch="0" ver="1.5" rel="27" md5sum="66ae830d7308b4bbbccc73e7870650ea" buildtime="1146634039" sequence_info="MozillaThunderbird-1.5-27-d875a14b007a8e41fece7abf1bdbfee0aa50"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>MozillaThunderbird</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="1.5.0.4" rel="2.1"/>
+      <checksum type="sha" pkgid="YES">deaa64e8fde6142ad6f95e9d7a5c49e8e01856ce</checksum>
+      <time file="1150977371" build="1150569779"/>
+      <size package="8972465" installed="28013997" archive="28070024"/>
+      <location href="rpm/x86_64/MozillaThunderbird-1.5.0.4-2.1.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="MozillaThunderbird" epoch="0" ver="1.5.0.4" rel="2.1" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="MozillaThunderbird"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/MozillaThunderbird-1.5.0.4-2.1.x86_64.patch.rpm"/>
+          <checksum type="sha">8a7143327ac90abc986cb48baab7e4465e370716</checksum>
+          <time file="1150977927" build="1150569779"/>
+          <size package="7230559" archive="21496880"/>
+          <base-version epoch="0" ver="1.5" rel="27"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/MozillaThunderbird-1.5_1.5.0.4-27_2.1.x86_64.delta.rpm"/>
+          <checksum type="sha">5f029937ab9672636e979f8254f680b2d858c100</checksum>
+          <time file="1150977948" build="1150569779"/>
+          <size package="1321096" archive="0"/>
+          <base-version epoch="0" ver="1.5" rel="27" md5sum="de910909327cfe765d63ed2902e697a9" buildtime="1146621425" sequence_info="MozillaThunderbird-1.5-27-78d4c9bc516bcafa6e222d94e7e0e933aa50"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>MozillaThunderbird-translations</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="1.5.0.4" rel="2.1"/>
+      <checksum type="sha" pkgid="YES">6970401c4a43b2aeba395623dd7ba07b6f031755</checksum>
+      <time file="1150977408" build="1150677664"/>
+      <size package="4517249" installed="29043858" archive="29054400"/>
+      <location href="rpm/i586/MozillaThunderbird-translations-1.5.0.4-2.1.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="MozillaThunderbird-translations" epoch="0" ver="1.5.0.4" rel="2.1" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="MozillaThunderbird-translations"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/MozillaThunderbird-translations-1.5.0.4-2.1.i586.patch.rpm"/>
+          <checksum type="sha">766989b3c549f9e3c625fc545d5aee6168e96e19</checksum>
+          <time file="1150977962" build="1150677664"/>
+          <size package="655575" archive="4124316"/>
+          <base-version epoch="0" ver="1.5" rel="27"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/MozillaThunderbird-translations-1.5_1.5.0.4-27_2.1.i586.delta.rpm"/>
+          <checksum type="sha">32847d320862536d513c2908fd08882d712ba06b</checksum>
+          <time file="1150977972" build="1150677664"/>
+          <size package="20294" archive="0"/>
+          <base-version epoch="0" ver="1.5" rel="27" md5sum="d34eda50366333b60eade37fbcc81867" buildtime="1146621380" sequence_info="MozillaThunderbird-translations-1.5-27-4132beae9075ef7986a0b42c955c79c0c810"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>MozillaThunderbird-translations</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="1.5.0.4" rel="2.1"/>
+      <checksum type="sha" pkgid="YES">687337bf61787e1300fa7ea59772e5755399eadd</checksum>
+      <time file="1150977478" build="1150594743"/>
+      <size package="4515008" installed="29043858" archive="29054400"/>
+      <location href="rpm/ppc/MozillaThunderbird-translations-1.5.0.4-2.1.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="MozillaThunderbird-translations" epoch="0" ver="1.5.0.4" rel="2.1" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="MozillaThunderbird-translations"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/MozillaThunderbird-translations-1.5.0.4-2.1.ppc.patch.rpm"/>
+          <checksum type="sha">1d8636f898522d52b196c1f9a29b8af13f7e0d1a</checksum>
+          <time file="1150977983" build="1150594743"/>
+          <size package="654515" archive="4124316"/>
+          <base-version epoch="0" ver="1.5" rel="27"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/MozillaThunderbird-translations-1.5_1.5.0.4-27_2.1.ppc.delta.rpm"/>
+          <checksum type="sha">fc8825f952ee9a7158a6ee910d087302f0c02648</checksum>
+          <time file="1150977991" build="1150594743"/>
+          <size package="20224" archive="0"/>
+          <base-version epoch="0" ver="1.5" rel="27" md5sum="b5d1a0b2d5a220e64e4a30faff8b62e2" buildtime="1146634039" sequence_info="MozillaThunderbird-translations-1.5-27-4132beae9075ef7986a0b42c955c79c0c810"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>MozillaThunderbird-translations</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="1.5.0.4" rel="2.1"/>
+      <checksum type="sha" pkgid="YES">499938219a1b37ea43699d845781070abb6965de</checksum>
+      <time file="1150977374" build="1150569779"/>
+      <size package="4515059" installed="29043858" archive="29054488"/>
+      <location href="rpm/x86_64/MozillaThunderbird-translations-1.5.0.4-2.1.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="MozillaThunderbird-translations" epoch="0" ver="1.5.0.4" rel="2.1" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="MozillaThunderbird-translations"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/MozillaThunderbird-translations-1.5.0.4-2.1.x86_64.patch.rpm"/>
+          <checksum type="sha">aabb3845b98df83da6e89da498b656accbf28a7c</checksum>
+          <time file="1150978000" build="1150569779"/>
+          <size package="654819" archive="4124316"/>
+          <base-version epoch="0" ver="1.5" rel="27"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/MozillaThunderbird-translations-1.5_1.5.0.4-27_2.1.x86_64.delta.rpm"/>
+          <checksum type="sha">fcb1b026738dc6bacbd9bc5c44881b0d38c0de42</checksum>
+          <time file="1150978009" build="1150569779"/>
+          <size package="20370" archive="0"/>
+          <base-version epoch="0" ver="1.5" rel="27" md5sum="10fad56eadf47cbd1fb08ff582fd4659" buildtime="1146621425" sequence_info="MozillaThunderbird-translations-1.5-27-a98d8cacf859680115dfbaacbe084ecac810"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+  </atoms>
+</patch>

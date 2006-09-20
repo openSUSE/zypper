@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--PATCHINFO id="7d96c986f07b04427ef9d2ab183e37fd"!-->
+<patch
+    xmlns="http://novell.com/package/metadata/suse/patch"
+    xmlns:yum="http://linux.duke.edu/metadata/common"
+    xmlns:rpm="http://linux.duke.edu/metadata/rpm"
+    xmlns:suse="http://novell.com/package/metadata/suse/common"
+    patchid="krb5-apps-clients-1937"
+    timestamp="1153152063"
+    engine="1.0">
+  <yum:name>krb5-apps-clients</yum:name>
+  <summary lang="en">krb5: Security update to fix missing setuid() return checks</summary>
+  <summary lang="de">krb5: Sicherheitsupdate für fehlende Tests auf setuid() Rückgabewerte</summary>
+  <description lang="en">Various return checks of setuid() and seteuid() calls have
+been fixed in kerberos client and server applications.
+
+If these applications are setuid, it might have been
+possible for local attackers to gain root access
+(CVE-2006-3083).
+
+We are not affected by the seteuid() problems, tracked by
+CVE-2006-3084.
+</description>
+  <description lang="de">Dieses Sicherheitsupdate behebt Probleme mit dem Testen der
+Rückgabewerte von setuid() bzw seteuid() Aufrufen in
+Kerberos Client und Server Applikationen.
+
+Falls diese Applikationen setuid root installiert werden,
+kann es für lokale Angreifer möglich sein, root Zugriff zu
+erlangen (CVE-2006-3083).
+
+SUSE ist von dem ähnlichem Problem mit seteuid()
+(CVE-2006-3084) nicht betroffen.
+</description>
+  <yum:version ver="1937" rel="0"/>
+  <rpm:requires>
+    <rpm:entry kind="atom" name="krb5-apps-clients" epoch="0" ver="1.4.3" rel="19.5" flags="EQ"/>
+    <rpm:entry kind="atom" name="krb5-apps-servers" epoch="0" ver="1.4.3" rel="19.5" flags="EQ"/>
+  </rpm:requires>
+  <category>security</category>
+  <atoms>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>krb5-apps-clients</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="1.4.3" rel="19.5"/>
+      <checksum type="sha" pkgid="YES">9456a6eed25e20e923571eaa7aabcf86aa41c1ce</checksum>
+      <time file="1154985089" build="1153152063"/>
+      <size package="252029" installed="550858" archive="553324"/>
+      <location href="rpm/i586/krb5-apps-clients-1.4.3-19.5.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="krb5-apps-clients" epoch="0" ver="1.4.3" rel="19.5" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="krb5-apps-clients"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/krb5-apps-clients-1.4.3-19.5.i586.patch.rpm"/>
+          <checksum type="sha">3e93138a23c07cda779553cac05978e51499de2d</checksum>
+          <time file="1154997021" build="1153152063"/>
+          <size package="152425" archive="353292"/>
+          <base-version epoch="0" ver="1.4.3" rel="19"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/krb5-apps-clients-1.4.3-19_19.5.i586.delta.rpm"/>
+          <checksum type="sha">306bc5fe3448fdb54d22bc1852c9c211b2f0c59a</checksum>
+          <time file="1154997022" build="1153152063"/>
+          <size package="15465" archive="0"/>
+          <base-version epoch="0" ver="1.4.3" rel="19" md5sum="d32f8a5ca146c55ce8721633ad732fe2" buildtime="1146553399" sequence_info="krb5-apps-clients-1.4.3-19-773aee42d7738acac9f3668a6309c4be92"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>krb5-apps-clients</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="1.4.3" rel="19.5"/>
+      <checksum type="sha" pkgid="YES">308bccb7ddded18211d01aede582165f85e658bf</checksum>
+      <time file="1154996837" build="1153152621"/>
+      <size package="276108" installed="674311" archive="676776"/>
+      <location href="rpm/ppc/krb5-apps-clients-1.4.3-19.5.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="krb5-apps-clients" epoch="0" ver="1.4.3" rel="19.5" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="krb5-apps-clients"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/krb5-apps-clients-1.4.3-19.5.ppc.patch.rpm"/>
+          <checksum type="sha">143482da3d99407d982f571acc36319ac26733ec</checksum>
+          <time file="1154997025" build="1153152621"/>
+          <size package="167784" archive="430256"/>
+          <base-version epoch="0" ver="1.4.3" rel="19"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/krb5-apps-clients-1.4.3-19_19.5.ppc.delta.rpm"/>
+          <checksum type="sha">d49b70aecec8c4dc199b363b8327ec957b06326a</checksum>
+          <time file="1154997025" build="1153152621"/>
+          <size package="17007" archive="0"/>
+          <base-version epoch="0" ver="1.4.3" rel="19" md5sum="89cdf3f000bb188c0fc980f84aea22af" buildtime="1146549688" sequence_info="krb5-apps-clients-1.4.3-19-81501c41397490922f14bc957c46ea6992"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>krb5-apps-clients</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="1.4.3" rel="19.5"/>
+      <checksum type="sha" pkgid="YES">18cb79ef35095ced5dbca4088784acfa4677a778</checksum>
+      <time file="1154981441" build="1153152479"/>
+      <size package="278088" installed="646563" archive="649028"/>
+      <location href="rpm/x86_64/krb5-apps-clients-1.4.3-19.5.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="krb5-apps-clients" epoch="0" ver="1.4.3" rel="19.5" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="krb5-apps-clients"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/krb5-apps-clients-1.4.3-19.5.x86_64.patch.rpm"/>
+          <checksum type="sha">64feb1648983adede95e7be4420dd42f9bd7cc06</checksum>
+          <time file="1154997028" build="1153152479"/>
+          <size package="221979" archive="562732"/>
+          <base-version epoch="0" ver="1.4.3" rel="19"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/krb5-apps-clients-1.4.3-19_19.5.x86_64.delta.rpm"/>
+          <checksum type="sha">7dc4e0929b9d8355f810f1bad37ef6f719ed3460</checksum>
+          <time file="1154997029" build="1153152479"/>
+          <size package="17125" archive="0"/>
+          <base-version epoch="0" ver="1.4.3" rel="19" md5sum="990cabaa6385fadafc9c08ef2c6b79b5" buildtime="1146553458" sequence_info="krb5-apps-clients-1.4.3-19-3e740241d41354fe13b1e621e9562cd692"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>krb5-apps-servers</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="1.4.3" rel="19.5"/>
+      <checksum type="sha" pkgid="YES">b591e0081d888c931d8659e1d540095703dc114b</checksum>
+      <time file="1154985089" build="1153152063"/>
+      <size package="140259" installed="310443" archive="312508"/>
+      <location href="rpm/i586/krb5-apps-servers-1.4.3-19.5.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="krb5-apps-servers" epoch="0" ver="1.4.3" rel="19.5" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="krb5-apps-servers"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/krb5-apps-servers-1.4.3-19.5.i586.patch.rpm"/>
+          <checksum type="sha">67878fdbdd8f013c6fa9ad586b46d684f44532d0</checksum>
+          <time file="1154997030" build="1153152063"/>
+          <size package="116348" archive="286340"/>
+          <base-version epoch="0" ver="1.4.3" rel="19"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/krb5-apps-servers-1.4.3-19_19.5.i586.delta.rpm"/>
+          <checksum type="sha">965b7a5b1e62cbce9f3c92c04707d0979133eaa3</checksum>
+          <time file="1154997031" build="1153152063"/>
+          <size package="15242" archive="0"/>
+          <base-version epoch="0" ver="1.4.3" rel="19" md5sum="afc8860a76feb520c631c957e75c4e4c" buildtime="1146553399" sequence_info="krb5-apps-servers-1.4.3-19-6a6b316a9a317840bdf23e88e62292bc03b1"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>krb5-apps-servers</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="1.4.3" rel="19.5"/>
+      <checksum type="sha" pkgid="YES">a0611884c0180de2a6bf295a05d3f9df25f2d38f</checksum>
+      <time file="1154996838" build="1153152621"/>
+      <size package="154576" installed="378811" archive="380876"/>
+      <location href="rpm/ppc/krb5-apps-servers-1.4.3-19.5.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="krb5-apps-servers" epoch="0" ver="1.4.3" rel="19.5" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="krb5-apps-servers"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/krb5-apps-servers-1.4.3-19.5.ppc.patch.rpm"/>
+          <checksum type="sha">1fee55549a974271860a4b14c768921c6eeaafee</checksum>
+          <time file="1154997033" build="1153152621"/>
+          <size package="128970" archive="348804"/>
+          <base-version epoch="0" ver="1.4.3" rel="19"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/krb5-apps-servers-1.4.3-19_19.5.ppc.delta.rpm"/>
+          <checksum type="sha">37365580423d7f57ab2dd33783bfe14284bbcf5c</checksum>
+          <time file="1154997034" build="1153152621"/>
+          <size package="17233" archive="0"/>
+          <base-version epoch="0" ver="1.4.3" rel="19" md5sum="168a825567f60f2aa4e0bc93d9229018" buildtime="1146549688" sequence_info="krb5-apps-servers-1.4.3-19-00f9753c2bd85bc119342b2f115d5cd603b1"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>krb5-apps-servers</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="1.4.3" rel="19.5"/>
+      <checksum type="sha" pkgid="YES">179c6751d182e9163d7f947ebd974d8f50a536b6</checksum>
+      <time file="1154981441" build="1153152479"/>
+      <size package="154205" installed="349691" archive="351756"/>
+      <location href="rpm/x86_64/krb5-apps-servers-1.4.3-19.5.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="krb5-apps-servers" epoch="0" ver="1.4.3" rel="19.5" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="krb5-apps-servers"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/krb5-apps-servers-1.4.3-19.5.x86_64.patch.rpm"/>
+          <checksum type="sha">9668515e48ef1e0c3c12227fbe5e2625936721a3</checksum>
+          <time file="1154997035" build="1153152479"/>
+          <size package="130342" archive="322988"/>
+          <base-version epoch="0" ver="1.4.3" rel="19"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/krb5-apps-servers-1.4.3-19_19.5.x86_64.delta.rpm"/>
+          <checksum type="sha">51a14e44f29b9fd222b00ec27cc2c3798cd0c015</checksum>
+          <time file="1154997036" build="1153152479"/>
+          <size package="16288" archive="0"/>
+          <base-version epoch="0" ver="1.4.3" rel="19" md5sum="b17313443b3cb3c0b2be00bca3f78146" buildtime="1146553458" sequence_info="krb5-apps-servers-1.4.3-19-43a08908698fa4ca3504628d771297b103b1"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+  </atoms>
+</patch>

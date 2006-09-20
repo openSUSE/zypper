@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--PATCHINFO id="b8f36dbf4ae1f29a5bd4bc38a6433954"!-->
+<patch
+    xmlns="http://novell.com/package/metadata/suse/patch"
+    xmlns:yum="http://linux.duke.edu/metadata/common"
+    xmlns:rpm="http://linux.duke.edu/metadata/rpm"
+    xmlns:suse="http://novell.com/package/metadata/suse/common"
+    patchid="awstats-1612"
+    timestamp="1150467359"
+    engine="1.0">
+  <yum:name>awstats</yum:name>
+  <summary lang="en">awstats: security update for remote command injection</summary>
+  <summary lang="de">awstats: Sicherheits update</summary>
+  <description lang="en">This update fixes remote code execution vulnerabilities in 
+awstats.  Since backporting awstats fixes is error prone we 
+have upgraded it to upstream version 6.6, which also 
+includes new features.  Security issues fixed:  - 
+CVE-2006-2237: missing sanitizing of the &quot;migrate&quot; 
+parameter. #173041 - CVE-2006-2644: missing sanitizing of 
+the &quot;configdir&quot; parameter. #173041 - Make sure open() only 
+opens files for read/write by adding explicit &lt; and &gt;.
+</description>
+  <description lang="de">Dieses awstats Update behebt mehrere Probleme, die zum 
+Ausführen von Code durch entfernte Angreifer führen 
+konnten.  Weil das Zurückportieren von Fixes für awstats 
+zeitaufwändig und fehleranfällig ist, liefern wir hiermit 
+die neue Version 6.6 aus.  Folgende Sicherheitsprobleme 
+wurden behoben: - CVE-2006-2237: Fehlende Bereinigung des 
+&quot;migrate&quot; Parameters. #173041 - CVE-2006-2644: Fehlende 
+Bereinigung des &quot;configdir&quot; Parameters. #173041 - 
+Sicherstellen das die perl open() nur Dateien zum 
+Lesen/Schreiben öffnet durch explizites &lt; und &gt;.
+</description>
+  <yum:version ver="1612" rel="0"/>
+  <rpm:requires>
+  <rpm:entry kind="atom" name="awstats" epoch="0" ver="6.6" rel="0.1" flags="EQ"/>
+  </rpm:requires>
+  <category>security</category>
+  <atoms>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>awstats</name>
+      <arch>noarch</arch>
+      <version epoch="0" ver="6.6" rel="0.1"/>
+      <checksum type="sha" pkgid="YES">9032f9379c21aae522ff46e4d691ea9193f73603</checksum>
+      <time file="1150467753" build="1150467359"/>
+      <size package="1141182" installed="3194969" archive="3387360"/>
+      <location href="rpm/noarch/awstats-6.6-0.1.noarch.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="awstats" epoch="0" ver="6.6" rel="0.1" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="awstats"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/noarch/awstats-6.6-0.1.noarch.patch.rpm"/>
+          <checksum type="sha">2e6f0b6e745cb509b40b2b755d469b774cf4f200</checksum>
+          <time file="1150713614" build="1150467359"/>
+          <size package="1099750" archive="3187932"/>
+          <base-version epoch="0" ver="6.5" rel="10"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/noarch/awstats-6.5_6.6-10_0.1.noarch.delta.rpm"/>
+          <checksum type="sha">59fcba4b212981ec19ae75a2d6baa27bd846c5a0</checksum>
+          <time file="1150713618" build="1150467359"/>
+          <size package="696908" archive="0"/>
+          <base-version epoch="0" ver="6.5" rel="10" md5sum="5627e42270287d5c37980ac979b3ec9e" buildtime="1145759249" sequence_info="awstats-6.5-10-f47ff124ba62f8b1559ce5f58f4df3802113bef1b2121b3141811114ab10"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+  </atoms>
+</patch>

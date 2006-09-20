@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--PATCHINFO id="bd0b271a14a27034ac891425b2916940"!-->
+<patch
+    xmlns="http://novell.com/package/metadata/suse/patch"
+    xmlns:yum="http://linux.duke.edu/metadata/common"
+    xmlns:rpm="http://linux.duke.edu/metadata/rpm"
+    xmlns:suse="http://novell.com/package/metadata/suse/common"
+    patchid="john-1592"
+    timestamp="1149954368"
+    engine="1.0">
+  <yum:name>john</yum:name>
+  <summary lang="en">Wrong path to johns config file fixed</summary>
+  <summary lang="de">Falscher Pfad zur Konfigurationsdatei von john behoben</summary>
+  <description lang="en">The path to the default config file john.conf was 
+misleadingly pointing to a wrong place. This update fixes 
+the problem. 
+</description>
+  <description lang="de">Der Pfad zur Standard-Konfigurationsdatei von john zeigte 
+fälschlicherweise an eine  falsche Stelle. Dieses Update 
+behebt das Problem. 
+</description>
+  <yum:version ver="1592" rel="0"/>
+  <rpm:requires>
+  <rpm:entry kind="atom" name="john" epoch="0" ver="1.7.0.2" rel="8.4" flags="EQ"/>
+  </rpm:requires>
+  <category>optional</category>
+  <atoms>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>john</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="1.7.0.2" rel="8.4"/>
+      <checksum type="sha" pkgid="YES">f7fff7b5b557e9b564d6e247d1d46fd35866d4b3</checksum>
+      <time file="1150213769" build="1149954368"/>
+      <size package="878248" installed="1830082" archive="1834624"/>
+      <location href="rpm/i586/john-1.7.0.2-8.4.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="john" epoch="0" ver="1.7.0.2" rel="8.4" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="john"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/john-1.7.0.2-8.4.i586.patch.rpm"/>
+          <checksum type="sha">a1af18e7a2dee72aced833cac6320849277c5092</checksum>
+          <time file="1150216384" build="1149954368"/>
+          <size package="239278" archive="742244"/>
+          <base-version epoch="0" ver="1.7.0.2" rel="6"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/john-1.7.0.2-6_8.4.i586.delta.rpm"/>
+          <checksum type="sha">3fac896f94e1aa08bf528ca5e46d3b08eddf6919</checksum>
+          <time file="1150216386" build="1149954368"/>
+          <size package="192730" archive="0"/>
+          <base-version epoch="0" ver="1.7.0.2" rel="6" md5sum="7ce8ba50c29d8660c11414c8b7a7c5aa" buildtime="1145759907" sequence_info="john-1.7.0.2-6-be39b87f22ddda918a09aee8ea0a5ce65d172211"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>john</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="1.7.0.2" rel="8.4"/>
+      <checksum type="sha" pkgid="YES">a44b460ebb31f1d1f4433c1705e87f5c2d066fec</checksum>
+      <time file="1150213658" build="1149963003"/>
+      <size package="983045" installed="1918514" archive="1923056"/>
+      <location href="rpm/ppc/john-1.7.0.2-8.4.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="john" epoch="0" ver="1.7.0.2" rel="8.4" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="john"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/john-1.7.0.2-8.4.ppc.patch.rpm"/>
+          <checksum type="sha">1415b45c44f936b2530bed58221f76a83837c628</checksum>
+          <time file="1150216388" build="1149963003"/>
+          <size package="315156" archive="830676"/>
+          <base-version epoch="0" ver="1.7.0.2" rel="6"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/john-1.7.0.2-6_8.4.ppc.delta.rpm"/>
+          <checksum type="sha">8c8c5b176c4089186ae1b3a7de80b5c55d6f6d9e</checksum>
+          <time file="1150216390" build="1149963003"/>
+          <size package="242174" archive="0"/>
+          <base-version epoch="0" ver="1.7.0.2" rel="6" md5sum="3d495ae796b10e324c227882c210a711" buildtime="1145873227" sequence_info="john-1.7.0.2-6-6a3310bee7d6d68e3325a50f888619eb5d172211"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>john</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="1.7.0.2" rel="8.4"/>
+      <checksum type="sha" pkgid="YES">5d828574acd0a40e4b32477d776dea9d2bd297b5</checksum>
+      <time file="1150215192" build="1149954574"/>
+      <size package="978622" installed="2037957" archive="2042496"/>
+      <location href="rpm/x86_64/john-1.7.0.2-8.4.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="john" epoch="0" ver="1.7.0.2" rel="8.4" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="john"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/john-1.7.0.2-8.4.x86_64.patch.rpm"/>
+          <checksum type="sha">c7b8203c84a24cc5be1caa0307e320902aae46d3</checksum>
+          <time file="1150216392" build="1149954574"/>
+          <size package="317060" archive="950116"/>
+          <base-version epoch="0" ver="1.7.0.2" rel="6"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/john-1.7.0.2-6_8.4.x86_64.delta.rpm"/>
+          <checksum type="sha">659cdeda0ccb25d5a9797ee940a1e69782ebc12c</checksum>
+          <time file="1150216394" build="1149954574"/>
+          <size package="256381" archive="0"/>
+          <base-version epoch="0" ver="1.7.0.2" rel="6" md5sum="151e1fe008d8d1561db277a2424644e6" buildtime="1145761781" sequence_info="john-1.7.0.2-6-627e9e419486727c212190444c33aff65d172211"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+  </atoms>
+</patch>

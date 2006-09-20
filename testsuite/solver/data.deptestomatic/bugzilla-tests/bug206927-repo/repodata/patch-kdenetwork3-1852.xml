@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--PATCHINFO id="328b982b063d00cde8a016809f5af386"!-->
+<patch
+    xmlns="http://novell.com/package/metadata/suse/patch"
+    xmlns:yum="http://linux.duke.edu/metadata/common"
+    xmlns:rpm="http://linux.duke.edu/metadata/rpm"
+    xmlns:suse="http://novell.com/package/metadata/suse/common"
+    patchid="kdenetwork3-1852"
+    timestamp="1153372794"
+    engine="1.0">
+  <yum:name>kdenetwork3</yum:name>
+  <summary lang="en">kdenetwork3: Fix for Kopete required by changes to the ICQ server</summary>
+  <summary lang="de">kdenetwork3: Fix für Kopete aufgrund von Änderungen im ICQ-Server</summary>
+  <description lang="en">Recent (July 2006) changes to the ICQ server prevent login
+with older versions of Kopete. This update allows Kopete to
+login again.
+</description>
+  <description lang="de">Neueste (Juli 2006) Änderungen im ICQ-Server haben das
+Anmelden mit Kopete verhindert. Diese Aktualisierung
+ermöglicht das Anmelden wieder.
+</description>
+  <yum:version ver="1852" rel="0"/>
+  <rpm:requires>
+    <rpm:entry kind="atom" name="kdenetwork3" epoch="0" ver="3.5.1" rel="32.7" flags="EQ"/>
+  </rpm:requires>
+  <category>recommended</category>
+  <atoms>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>kdenetwork3</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="3.5.1" rel="32.7"/>
+      <checksum type="sha" pkgid="YES">e85f066e6bd2abb5ab73ae5a898d9353a203404f</checksum>
+      <time file="1153409750" build="1153372794"/>
+      <size package="1395097" installed="3582169" archive="3610948"/>
+      <location href="rpm/i586/kdenetwork3-3.5.1-32.7.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="kdenetwork3" epoch="0" ver="3.5.1" rel="32.7" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="kdenetwork3"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/kdenetwork3-3.5.1-32.7.i586.patch.rpm"/>
+          <checksum type="sha">40763eb4da8f3c45ff30357a806f9bd341e68bfb</checksum>
+          <time file="1153411682" build="1153372794"/>
+          <size package="49474" archive="40568"/>
+          <base-version epoch="0" ver="3.5.1" rel="32"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/kdenetwork3-3.5.1-32_32.7.i586.delta.rpm"/>
+          <checksum type="sha">7c0cebdfcf37eac5ac541794adceb949cd3a99b3</checksum>
+          <time file="1153411684" build="1153372794"/>
+          <size package="39602" archive="0"/>
+          <base-version epoch="0" ver="3.5.1" rel="32" md5sum="0f55b177c29a1839dc478bd34cd27286" buildtime="1146570651" sequence_info="kdenetwork3-3.5.1-32-957ef5486a8dbbc5f9846787254ff759fd20"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>kdenetwork3</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="3.5.1" rel="32.7"/>
+      <checksum type="sha" pkgid="YES">8c9cdf37151c4dd01fecf4502df11478ef7f9f2b</checksum>
+      <time file="1153409879" build="1153396333"/>
+      <size package="1446546" installed="3795604" archive="3824388"/>
+      <location href="rpm/ppc/kdenetwork3-3.5.1-32.7.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="kdenetwork3" epoch="0" ver="3.5.1" rel="32.7" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="kdenetwork3"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/kdenetwork3-3.5.1-32.7.ppc.patch.rpm"/>
+          <checksum type="sha">61af2d0471bfe42026853262f5fd17ad3380409a</checksum>
+          <time file="1153411687" build="1153396333"/>
+          <size package="49507" archive="40568"/>
+          <base-version epoch="0" ver="3.5.1" rel="31"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/kdenetwork3-3.5.1-31_32.7.ppc.delta.rpm"/>
+          <checksum type="sha">6001e6e377abdab4a193c4d5dc01e6d1e7843830</checksum>
+          <time file="1153411688" build="1153396333"/>
+          <size package="39470" archive="0"/>
+          <base-version epoch="0" ver="3.5.1" rel="31" md5sum="255f946870eb332c80adf7c242d0f8e3" buildtime="1146343050" sequence_info="kdenetwork3-3.5.1-31-cbdb42274089ebaca2afc4db54067786fd20"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>kdenetwork3</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="3.5.1" rel="32.7"/>
+      <checksum type="sha" pkgid="YES">ecb685ae00bf8e986c2d912b57282c50321b9472</checksum>
+      <time file="1153408468" build="1153378863"/>
+      <size package="1499593" installed="4027501" archive="4056312"/>
+      <location href="rpm/x86_64/kdenetwork3-3.5.1-32.7.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="kdenetwork3" epoch="0" ver="3.5.1" rel="32.7" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="kdenetwork3"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/kdenetwork3-3.5.1-32.7.x86_64.patch.rpm"/>
+          <checksum type="sha">1e81f68fc4444906cea1139dc7559c0c331419fe</checksum>
+          <time file="1153411691" build="1153378863"/>
+          <size package="166282" archive="411908"/>
+          <base-version epoch="0" ver="3.5.1" rel="32"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/kdenetwork3-3.5.1-32_32.7.x86_64.delta.rpm"/>
+          <checksum type="sha">7ae8fd99806e0375caf120cf2dbabeca70353a37</checksum>
+          <time file="1153411693" build="1153378863"/>
+          <size package="39658" archive="0"/>
+          <base-version epoch="0" ver="3.5.1" rel="32" md5sum="6cda38ba21689c84b41909720783ed19" buildtime="1146572557" sequence_info="kdenetwork3-3.5.1-32-8ee98a563f86044fc3cc103b576e9cd8fd20"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+  </atoms>
+</patch>

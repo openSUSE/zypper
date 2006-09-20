@@ -1,0 +1,437 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--PATCHINFO id="039e6a81190762dba78727610d29606e"!-->
+<patch
+    xmlns="http://novell.com/package/metadata/suse/patch"
+    xmlns:yum="http://linux.duke.edu/metadata/common"
+    xmlns:rpm="http://linux.duke.edu/metadata/rpm"
+    xmlns:suse="http://novell.com/package/metadata/suse/common"
+    patchid="powersave-1854"
+    timestamp="1153359913"
+    engine="1.0">
+  <yum:name>powersave</yum:name>
+  <summary lang="en">Several fixes regarding documentation, CPU frequency scaling and suspend</summary>
+  <summary lang="de">Behebung mehrerer Fehler in Bezug auf Dokumentation, CPU Frequenzanpassung und die Ruhezustände</summary>
+  <description lang="en">Documentation updates, keep CPU frequency settings over
+suspend cycle, pay attention to performance depending on
+the operational area (server/notebook), fix intermittend
+freezes with suspend to ram, print consistent error
+messages if a client is not allowed to talk to the
+powersave daemon, fix system freeze under certain
+circumstances when shutting down the system within KDE
+through the power button, fix recognition of the
+SUSPEND2DISK_IMAGE_SIZE setting
+</description>
+  <description lang="de">Überarbeitung der Dokumentation, CPU Frequenzeinstellungen
+werden nun über einen Suspend-Zyklus beibehalten, CPU
+Frequenzeinstellungen sind nun abhängig vom Einsatzgebiet
+(Server/Laptop), Probleme bei häufigem Suspend to RAM und
+daraus resultierendem Einfrieren des Systems wurde behoben,
+Ausgabe sinnvoller Meldungen falls ein Client nicht die
+nötigen Rechte besitzt um mit dem Powersave Daemon zu
+kommunizieren, ein mögliches Einfrieren unter bestimmten
+Umständen des Systems beim Herunterfahren mit dem
+Power-Button und KDE wurde behoben, ein Problem mit der
+SUSPEND2DISK_IMAGE_SIZE Einstellung wurde behoben
+</description>
+  <yum:version ver="1854" rel="0"/>
+  <rpm:requires>
+    <rpm:entry kind="atom" name="powersave" epoch="0" ver="0.12.20" rel="0.3" flags="EQ"/>
+    <rpm:entry kind="atom" name="powersave-devel" epoch="0" ver="0.12.20" rel="0.3" flags="EQ"/>
+    <rpm:entry kind="atom" name="powersave-libs" epoch="0" ver="0.12.20" rel="0.3" flags="EQ"/>
+    <rpm:entry kind="atom" name="powersave-libs-32bit" epoch="0" ver="0.12.20" rel="0.3" flags="EQ"/>
+    <rpm:entry kind="atom" name="powersave-libs-64bit" epoch="0" ver="0.12.20" rel="0.3" flags="EQ"/>
+  </rpm:requires>
+  <category>recommended</category>
+  <atoms>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>powersave</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="0.12.20" rel="0.3"/>
+      <checksum type="sha" pkgid="YES">621af09764c2f5f1517f108ca136ea8d8a06086a</checksum>
+      <time file="1153410747" build="1153359913"/>
+      <size package="389444" installed="1291111" archive="1308024"/>
+      <location href="rpm/i586/powersave-0.12.20-0.3.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="powersave" epoch="0" ver="0.12.20" rel="0.3" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="powersave"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/powersave-0.12.20-0.3.i586.patch.rpm"/>
+          <checksum type="sha">4fb8252c229fdf1302be2f66ecbb738936f32aa7</checksum>
+          <time file="1153412034" build="1153359913"/>
+          <size package="186397" archive="334048"/>
+          <base-version epoch="0" ver="0.12.15" rel="4"/>
+          <base-version epoch="0" ver="0.12.18" rel="0.2"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/powersave-0.12.15_0.12.20-4_0.3.i586.delta.rpm"/>
+          <checksum type="sha">853aafc5d6e0967fbd93c8f84b8f5a67229faddd</checksum>
+          <time file="1153412035" build="1153359913"/>
+          <size package="98301" archive="0"/>
+          <base-version epoch="0" ver="0.12.15" rel="4" md5sum="d94a1af8779c41dded23eda53b05ca2b" buildtime="1146560061" sequence_info="powersave-0.12.15-4-31a743dfa4f4f498ceb18b98c5abe78032bc10"/>
+        </deltarpm>
+        <deltarpm>
+          <location href="rpm/i586/powersave-0.12.18_0.12.20-0.2_0.3.i586.delta.rpm"/>
+          <checksum type="sha">c74cc020a8143296ed11213f931b72ab99146b24</checksum>
+          <time file="1153412036" build="1153359913"/>
+          <size package="103450" archive="0"/>
+          <base-version epoch="0" ver="0.12.18" rel="0.2" md5sum="8794164b933de6a9ec82dda77c19f305" buildtime="1148382838" sequence_info="powersave-0.12.18-0.2-11b950b8133c9f56984b601c9ee3f4a532ea12b1"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>powersave</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="0.12.20" rel="0.3"/>
+      <checksum type="sha" pkgid="YES">4e8d5eab5cf6f98197621ec413b94f0212fbd6ed</checksum>
+      <time file="1153410896" build="1153362746"/>
+      <size package="398457" installed="1316151" archive="1333064"/>
+      <location href="rpm/ppc/powersave-0.12.20-0.3.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="powersave" epoch="0" ver="0.12.20" rel="0.3" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="powersave"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/powersave-0.12.20-0.3.ppc.patch.rpm"/>
+          <checksum type="sha">a484ba9b51e4bbf5c35fefe9502a06bdb05b6562</checksum>
+          <time file="1153412038" build="1153362746"/>
+          <size package="196204" archive="359088"/>
+          <base-version epoch="0" ver="0.12.15" rel="4"/>
+          <base-version epoch="0" ver="0.12.18" rel="0.2"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/powersave-0.12.15_0.12.20-4_0.3.ppc.delta.rpm"/>
+          <checksum type="sha">f6500a12370fb51768e45d83a9b44b8b42e2326a</checksum>
+          <time file="1153412040" build="1153362746"/>
+          <size package="98626" archive="0"/>
+          <base-version epoch="0" ver="0.12.15" rel="4" md5sum="9ed354ad5b323ff2339f68d4481f8b17" buildtime="1146562162" sequence_info="powersave-0.12.15-4-c42696375636d10f0c2d0c426f926f7b32bc10"/>
+        </deltarpm>
+        <deltarpm>
+          <location href="rpm/ppc/powersave-0.12.18_0.12.20-0.2_0.3.ppc.delta.rpm"/>
+          <checksum type="sha">01d19fd0fc794eaa92a0902dceef0f13e4003c3c</checksum>
+          <time file="1153412040" build="1153362746"/>
+          <size package="103320" archive="0"/>
+          <base-version epoch="0" ver="0.12.18" rel="0.2" md5sum="1c5d96b901e26bba9596904b481eb420" buildtime="1148382700" sequence_info="powersave-0.12.18-0.2-4b85a1dece059a06c7b050ba4321acfc32ea12b1"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>powersave</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="0.12.20" rel="0.3"/>
+      <checksum type="sha" pkgid="YES">2f89089c26b406aec15b218d9f9b5bc578f775d8</checksum>
+      <time file="1153410867" build="1153361502"/>
+      <size package="405306" installed="1312187" archive="1329100"/>
+      <location href="rpm/x86_64/powersave-0.12.20-0.3.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="powersave" epoch="0" ver="0.12.20" rel="0.3" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="powersave"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/powersave-0.12.20-0.3.x86_64.patch.rpm"/>
+          <checksum type="sha">14de015951d2fcec350294dea66f53dc51862fb1</checksum>
+          <time file="1153412043" build="1153361502"/>
+          <size package="201746" archive="355124"/>
+          <base-version epoch="0" ver="0.12.15" rel="4"/>
+          <base-version epoch="0" ver="0.12.18" rel="0.2"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/powersave-0.12.15_0.12.20-4_0.3.x86_64.delta.rpm"/>
+          <checksum type="sha">52845e102d597cf1bddd88e00fa3e6f7e873e5f9</checksum>
+          <time file="1153412044" build="1153361502"/>
+          <size package="100469" archive="0"/>
+          <base-version epoch="0" ver="0.12.15" rel="4" md5sum="366533d4754016690b4e2e34363f0cde" buildtime="1146560609" sequence_info="powersave-0.12.15-4-25f9072c699b35fea1263fcd323f1f8432bc10"/>
+        </deltarpm>
+        <deltarpm>
+          <location href="rpm/x86_64/powersave-0.12.18_0.12.20-0.2_0.3.x86_64.delta.rpm"/>
+          <checksum type="sha">6b8e9954c5c5bfa2083adff8ebfbb5e2024f69ea</checksum>
+          <time file="1153412044" build="1153361502"/>
+          <size package="104624" archive="0"/>
+          <base-version epoch="0" ver="0.12.18" rel="0.2" md5sum="8776018568950eac4a532c0e609ac267" buildtime="1148382932" sequence_info="powersave-0.12.18-0.2-03c086c53c23cc97b1411dfadc71c9b432ea12b1"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>powersave-devel</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="0.12.20" rel="0.3"/>
+      <checksum type="sha" pkgid="YES">ccdde46a56355f8792dded9c1c347bd4cc2bc083</checksum>
+      <time file="1153410747" build="1153359913"/>
+      <size package="70905" installed="117403" archive="119244"/>
+      <location href="rpm/i586/powersave-devel-0.12.20-0.3.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="powersave-devel" epoch="0" ver="0.12.20" rel="0.3" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="powersave-devel"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/powersave-devel-0.12.20-0.3.i586.patch.rpm"/>
+          <checksum type="sha">b1f406fc730eb28e22ef78cee6b7d7c7b0b9b287</checksum>
+          <time file="1153412046" build="1153359913"/>
+          <size package="44401" archive="11448"/>
+          <base-version epoch="0" ver="0.12.15" rel="4"/>
+          <base-version epoch="0" ver="0.12.18" rel="0.2"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/powersave-devel-0.12.15_0.12.20-4_0.3.i586.delta.rpm"/>
+          <checksum type="sha">da6515b0e1a77013cc50326510b420d3eb5592f1</checksum>
+          <time file="1153412047" build="1153359913"/>
+          <size package="41224" archive="0"/>
+          <base-version epoch="0" ver="0.12.15" rel="4" md5sum="1860ee26112ca992dd635189eba7c5aa" buildtime="1146560061" sequence_info="powersave-devel-0.12.15-4-f9a960d1dcb68064b2ff5270be9c3460c1"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>powersave-devel</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="0.12.20" rel="0.3"/>
+      <checksum type="sha" pkgid="YES">fc3352fbf5057f5b1ecb3e27af4e99e6d906bd36</checksum>
+      <time file="1153410896" build="1153362746"/>
+      <size package="69827" installed="109407" archive="111248"/>
+      <location href="rpm/ppc/powersave-devel-0.12.20-0.3.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="powersave-devel" epoch="0" ver="0.12.20" rel="0.3" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="powersave-devel"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/powersave-devel-0.12.20-0.3.ppc.patch.rpm"/>
+          <checksum type="sha">b473703d55d830b74c9760162ed4c230edbe7b34</checksum>
+          <time file="1153412049" build="1153362746"/>
+          <size package="44390" archive="11440"/>
+          <base-version epoch="0" ver="0.12.15" rel="4"/>
+          <base-version epoch="0" ver="0.12.18" rel="0.2"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/powersave-devel-0.12.15_0.12.20-4_0.3.ppc.delta.rpm"/>
+          <checksum type="sha">88b69febe4cbdce0ccfb5a093ca79b620d2c8bf7</checksum>
+          <time file="1153412049" build="1153362746"/>
+          <size package="41150" archive="0"/>
+          <base-version epoch="0" ver="0.12.15" rel="4" md5sum="c6eb8f0a6a10604ec5722a0177145b59" buildtime="1146562162" sequence_info="powersave-devel-0.12.15-4-c66bc0c094267b39371896400e6c71ffc1"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>powersave-devel</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="0.12.20" rel="0.3"/>
+      <checksum type="sha" pkgid="YES">91902fa774e75c63dc4b675a9fe005d15afc22d2</checksum>
+      <time file="1153410868" build="1153361502"/>
+      <size package="72510" installed="148807" archive="150680"/>
+      <location href="rpm/x86_64/powersave-devel-0.12.20-0.3.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="powersave-devel" epoch="0" ver="0.12.20" rel="0.3" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="powersave-devel"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/powersave-devel-0.12.20-0.3.x86_64.patch.rpm"/>
+          <checksum type="sha">c073ce328e2c50f9fe9da6723f30a78f7d61292a</checksum>
+          <time file="1153412051" build="1153361502"/>
+          <size package="44828" archive="15508"/>
+          <base-version epoch="0" ver="0.12.15" rel="4"/>
+          <base-version epoch="0" ver="0.12.18" rel="0.2"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/powersave-devel-0.12.15_0.12.20-4_0.3.x86_64.delta.rpm"/>
+          <checksum type="sha">310c74951c5ce2961c8125bc0b714b22ab0ca73a</checksum>
+          <time file="1153412051" build="1153361502"/>
+          <size package="41269" archive="0"/>
+          <base-version epoch="0" ver="0.12.15" rel="4" md5sum="a85c2535744c0501e72749d4acec6660" buildtime="1146560609" sequence_info="powersave-devel-0.12.15-4-b4fbe33899a89fb60241e07eb4cd2427c1"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>powersave-libs</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="0.12.20" rel="0.3"/>
+      <checksum type="sha" pkgid="YES">9cee38c276242289576ae92c8ece1476f0a7b373</checksum>
+      <time file="1153410747" build="1153359913"/>
+      <size package="61079" installed="60600" archive="62172"/>
+      <location href="rpm/i586/powersave-libs-0.12.20-0.3.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="powersave-libs" epoch="0" ver="0.12.20" rel="0.3" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="powersave-libs"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/powersave-libs-0.12.20-0.3.i586.patch.rpm"/>
+          <checksum type="sha">3df84e14f3d53226e3a7b105776c434982eb92c3</checksum>
+          <time file="1153412053" build="1153359913"/>
+          <size package="61030" archive="61164"/>
+          <base-version epoch="0" ver="0.12.15" rel="4"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/powersave-libs-0.12.15_0.12.20-4_0.3.i586.delta.rpm"/>
+          <checksum type="sha">03165c965cb9a3dd7b2fedcc23656cc442baf2e7</checksum>
+          <time file="1153412053" build="1153359913"/>
+          <size package="41373" archive="0"/>
+          <base-version epoch="0" ver="0.12.15" rel="4" md5sum="59453c329b4ac124d265173609332807" buildtime="1146560061" sequence_info="powersave-libs-0.12.15-4-e0b62d2261449a75e075cfa2b07573da91"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>powersave-libs</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="0.12.20" rel="0.3"/>
+      <checksum type="sha" pkgid="YES">8792c84462fcad92da5eebd795b3ce87dc73a422</checksum>
+      <time file="1153410896" build="1153362746"/>
+      <size package="66891" installed="79704" archive="81276"/>
+      <location href="rpm/ppc/powersave-libs-0.12.20-0.3.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="powersave-libs" epoch="0" ver="0.12.20" rel="0.3" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="powersave-libs"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/powersave-libs-0.12.20-0.3.ppc.patch.rpm"/>
+          <checksum type="sha">dcf2916688566eea1408a937d1fc7dfaac9b1a66</checksum>
+          <time file="1153412054" build="1153362746"/>
+          <size package="66851" archive="80268"/>
+          <base-version epoch="0" ver="0.12.15" rel="4"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/powersave-libs-0.12.15_0.12.20-4_0.3.ppc.delta.rpm"/>
+          <checksum type="sha">e1aab294a8d4a20a0f19551f66e41a866ad9bfb5</checksum>
+          <time file="1153412055" build="1153362746"/>
+          <size package="42298" archive="0"/>
+          <base-version epoch="0" ver="0.12.15" rel="4" md5sum="35f62d1e84066ee0fbc7698c161db657" buildtime="1146562162" sequence_info="powersave-libs-0.12.15-4-fe8deecc71f6cdc083bfc213a15649b991"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>powersave-libs</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="0.12.20" rel="0.3"/>
+      <checksum type="sha" pkgid="YES">38553f844c377218d78ab2e3c2ca13198592f06a</checksum>
+      <time file="1153410868" build="1153361502"/>
+      <size package="64652" installed="67200" archive="68796"/>
+      <location href="rpm/x86_64/powersave-libs-0.12.20-0.3.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="powersave-libs" epoch="0" ver="0.12.20" rel="0.3" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="powersave-libs"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/powersave-libs-0.12.20-0.3.x86_64.patch.rpm"/>
+          <checksum type="sha">c2b03a96e53da8a8dce8f70e857f7443b4400cae</checksum>
+          <time file="1153412056" build="1153361502"/>
+          <size package="64660" archive="67772"/>
+          <base-version epoch="0" ver="0.12.15" rel="4"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/powersave-libs-0.12.15_0.12.20-4_0.3.x86_64.delta.rpm"/>
+          <checksum type="sha">125f15e21435a0ae89397e21d29a2693b8c9c87a</checksum>
+          <time file="1153412056" build="1153361502"/>
+          <size package="41768" archive="0"/>
+          <base-version epoch="0" ver="0.12.15" rel="4" md5sum="04b849eee19ce6c42e44a08e3aa7d629" buildtime="1146560609" sequence_info="powersave-libs-0.12.15-4-a2df67a346959a7eda2d28514b5788a691"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>powersave-libs-32bit</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="0.12.20" rel="0.3"/>
+      <checksum type="sha" pkgid="YES">25819e1c3b6d8a060549ad36261b3ab3f4b7a945</checksum>
+      <time file="1153410747" build="1153359980"/>
+      <size package="60951" installed="60600" archive="62172"/>
+      <location href="rpm/x86_64/powersave-libs-32bit-0.12.20-0.3.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="powersave-libs-32bit" epoch="0" ver="0.12.20" rel="0.3" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="powersave-libs-32bit"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/powersave-libs-32bit-0.12.20-0.3.x86_64.patch.rpm"/>
+          <checksum type="sha">0ad03292ac070d47c0ad76a455db80f2b4092d4c</checksum>
+          <time file="1153412057" build="1153359980"/>
+          <size package="60989" archive="61164"/>
+          <base-version epoch="0" ver="0.12.15" rel="4"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/powersave-libs-32bit-0.12.15_0.12.20-4_0.3.x86_64.delta.rpm"/>
+          <checksum type="sha">75cf633133a579be08e8521b03101628fdc30841</checksum>
+          <time file="1153412058" build="1153359980"/>
+          <size package="41342" archive="0"/>
+          <base-version epoch="0" ver="0.12.15" rel="4" md5sum="872cac84a342b08c6e401eebde922550" buildtime="1146560133" sequence_info="powersave-libs-32bit-0.12.15-4-e0b62d2261449a75e075cfa2b07573da91"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>powersave-libs-64bit</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="0.12.20" rel="0.3"/>
+      <checksum type="sha" pkgid="YES">6cd04b0fcf76d0b052532ae0289365711e191f55</checksum>
+      <time file="1153411057" build="1153365454"/>
+      <size package="64150" installed="84112" archive="85708"/>
+      <location href="rpm/ppc/powersave-libs-64bit-0.12.20-0.3.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="powersave-libs-64bit" epoch="0" ver="0.12.20" rel="0.3" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="powersave-libs-64bit"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/powersave-libs-64bit-0.12.20-0.3.ppc.patch.rpm"/>
+          <checksum type="sha">91fcd57a9660c32525de778fdf976dbce9539666</checksum>
+          <time file="1153412059" build="1153365454"/>
+          <size package="64152" archive="84684"/>
+          <base-version epoch="0" ver="0.12.15" rel="4"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/powersave-libs-64bit-0.12.15_0.12.20-4_0.3.ppc.delta.rpm"/>
+          <checksum type="sha">e491c1154fe318f2c15d045c10fbe0edcc9438bf</checksum>
+          <time file="1153412059" build="1153365454"/>
+          <size package="42299" archive="0"/>
+          <base-version epoch="0" ver="0.12.15" rel="4" md5sum="737c9baef9cf80a0a68a3fbe5c5681c9" buildtime="1146575112" sequence_info="powersave-libs-64bit-0.12.15-4-70f7f6ca69217ec13e2f1d056ae15ce291"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+  </atoms>
+</patch>

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--PATCHINFO id="17aabab57502ff8533399d14d0e32d3e"!-->
+<patch
+    xmlns="http://novell.com/package/metadata/suse/patch"
+    xmlns:yum="http://linux.duke.edu/metadata/common"
+    xmlns:rpm="http://linux.duke.edu/metadata/rpm"
+    xmlns:suse="http://novell.com/package/metadata/suse/common"
+    patchid="clamav-1941"
+    timestamp="1155042750"
+    engine="1.0">
+  <yum:name>clamav</yum:name>
+  <summary lang="en">clamav security update</summary>
+  <summary lang="de">clamav Sicherheitsupdate</summary>
+  <description lang="en">This Versionupdate to 0.88.4 fixes among other things a
+security relevant buffer overflow in the UPX-Decoder.
+</description>
+  <description lang="de">Dieses Versionsupdate auf 0.88.4 behebt unter Anderem einen
+sicherheitsrelevanten Pufferüberlauf im UPX-Decoder.
+</description>
+  <yum:version ver="1941" rel="0"/>
+  <rpm:requires>
+    <rpm:entry kind="atom" name="clamav" epoch="0" ver="0.88.4" rel="0.2" flags="EQ"/>
+  </rpm:requires>
+  <category>security</category>
+  <atoms>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>clamav</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="0.88.4" rel="0.2"/>
+      <checksum type="sha" pkgid="YES">19bd61cd21b11ad97fbf778403ff15725c31bf17</checksum>
+      <time file="1155053286" build="1155042750"/>
+      <size package="1032157" installed="2149248" archive="2184212"/>
+      <location href="rpm/i586/clamav-0.88.4-0.2.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="clamav" epoch="0" ver="0.88.4" rel="0.2" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="clamav"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/clamav-0.88.4-0.2.i586.patch.rpm"/>
+          <checksum type="sha">ae251c1eaa4c53a1abe347a585782da906b39dd8</checksum>
+          <time file="1155054632" build="1155042750"/>
+          <size package="724863" archive="1776236"/>
+          <base-version epoch="0" ver="0.88.2" rel="3"/>
+          <base-version epoch="0" ver="0.88.3" rel="1.2"/>
+        </patchrpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>clamav</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="0.88.4" rel="0.2"/>
+      <checksum type="sha" pkgid="YES">569c70358deb5332da147da61fd0574020c9a4a4</checksum>
+      <time file="1155052749" build="1155042764"/>
+      <size package="1046610" installed="2240512" archive="2275476"/>
+      <location href="rpm/ppc/clamav-0.88.4-0.2.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="clamav" epoch="0" ver="0.88.4" rel="0.2" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="clamav"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/clamav-0.88.4-0.2.ppc.patch.rpm"/>
+          <checksum type="sha">c762748bf313c372d67e48131b35097eaf110b6a</checksum>
+          <time file="1155054641" build="1155042764"/>
+          <size package="736977" archive="1867524"/>
+          <base-version epoch="0" ver="0.88.2" rel="3"/>
+          <base-version epoch="0" ver="0.88.3" rel="1.2"/>
+        </patchrpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>clamav</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="0.88.4" rel="0.2"/>
+      <checksum type="sha" pkgid="YES">7d6ee869d47d14243beba73416c9b9498ca43fbe</checksum>
+      <time file="1155053040" build="1155042285"/>
+      <size package="1034247" installed="2203118" archive="2238096"/>
+      <location href="rpm/x86_64/clamav-0.88.4-0.2.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="clamav" epoch="0" ver="0.88.4" rel="0.2" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="clamav"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/clamav-0.88.4-0.2.x86_64.patch.rpm"/>
+          <checksum type="sha">abe4ed8729816b8c8d155a145f7bfb314d86026e</checksum>
+          <time file="1155054648" build="1155042285"/>
+          <size package="731612" archive="1830120"/>
+          <base-version epoch="0" ver="0.88.2" rel="3"/>
+          <base-version epoch="0" ver="0.88.3" rel="1.2"/>
+        </patchrpm>
+      </pkgfiles>
+    </package>
+  </atoms>
+</patch>

@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--PATCHINFO id="3584710bed915adaf402e7e5dfdf1812"!-->
+<patch
+    xmlns="http://novell.com/package/metadata/suse/patch"
+    xmlns:yum="http://linux.duke.edu/metadata/common"
+    xmlns:rpm="http://linux.duke.edu/metadata/rpm"
+    xmlns:suse="http://novell.com/package/metadata/suse/common"
+    patchid="ksh-1965"
+    timestamp="1155482161"
+    engine="1.0">
+  <yum:name>ksh</yum:name>
+  <summary lang="en">KSH builtin uname -p segfaults</summary>
+  <summary lang="de">KSH eingebautes uname -p zeigt Speicherschutzverletzung</summary>
+  <description lang="en">The KSH builtin uname can have a segmentation fault with
+option -p. Do not trim backslash part of a multibyte
+character away. No segmentation fault if ksh uses shared
+command libray. Fix segmentation fault in vi command line
+mode. Make -i and -p option of uname builtin work.
+</description>
+  <description lang="de">Das eingebaute uname der KSH kann eine
+Speicherschutzverletzung verursachen. Kein Entfernen eines
+Backslahes wenn dieser Teil eines Multibytebuchstabens ist.
+Keine Speicherschutzverletzung falls die ksh die
+Shared-Command Bibliothek benutzt. Keine
+Speicherschutzverletzung im VI Kommandomodus. Einbau der -i
+und -p Option des uname Kommandos.
+</description>
+  <yum:version ver="1965" rel="0"/>
+  <rpm:requires>
+    <rpm:entry kind="atom" name="ksh" epoch="0" ver="93r" rel="12.14" flags="EQ"/>
+  </rpm:requires>
+  <category>recommended</category>
+  <atoms>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>ksh</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="93r" rel="12.14"/>
+      <checksum type="sha" pkgid="YES">fb960922a4fe8c56db32b237bcb259e10f2a1df1</checksum>
+      <time file="1155571635" build="1155482161"/>
+      <size package="834155" installed="1853535" archive="1856832"/>
+      <location href="rpm/i586/ksh-93r-12.14.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="ksh" epoch="0" ver="93r" rel="12.14" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="ksh"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/ksh-93r-12.14.i586.patch.rpm"/>
+          <checksum type="sha">76495069672bd5780bb187c7e6bfd1623f9a03cf</checksum>
+          <time file="1155573289" build="1155482161"/>
+          <size package="713136" archive="1535784"/>
+          <base-version epoch="0" ver="93r" rel="12.5"/>
+          <base-version epoch="0" ver="93r" rel="8"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/ksh-93r-8_12.14.i586.delta.rpm"/>
+          <checksum type="sha">24a329f4c3166fc6c061e40cee3d43894e4aa2ac</checksum>
+          <time file="1155573291" build="1155482161"/>
+          <size package="98451" archive="0"/>
+          <base-version epoch="0" ver="93r" rel="8" md5sum="a4156c76c147bea67ab4781fb2b3ba41" buildtime="1145763055" sequence_info="ksh-93r-8-ae7014e83d04308396c54fa5624ce07601a1129110"/>
+        </deltarpm>
+        <deltarpm>
+          <location href="rpm/i586/ksh-93r-12.5_12.14.i586.delta.rpm"/>
+          <checksum type="sha">54eaa5b949be8502cfd8c79bbe4e6fa1d56f538a</checksum>
+          <time file="1155573292" build="1155482161"/>
+          <size package="138545" archive="0"/>
+          <base-version epoch="0" ver="93r" rel="12.5" md5sum="02de0c9276ed0728e3ef8094427c560f" buildtime="1149118973" sequence_info="ksh-93r-12.5-25c263bb8e020f345d0fa31499b442a101a112"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>ksh</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="93r" rel="12.14"/>
+      <checksum type="sha" pkgid="YES">6fbde6c59a32f47ed42e73e90b495f1bf203d2c2</checksum>
+      <time file="1155571450" build="1155505720"/>
+      <size package="813076" installed="2063039" archive="2066336"/>
+      <location href="rpm/ppc/ksh-93r-12.14.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="ksh" epoch="0" ver="93r" rel="12.14" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="ksh"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/ksh-93r-12.14.ppc.patch.rpm"/>
+          <checksum type="sha">6dcad9c0e57ad6d6d2611111c80c77f08985743b</checksum>
+          <time file="1155573296" build="1155505720"/>
+          <size package="694681" archive="1745288"/>
+          <base-version epoch="0" ver="93r" rel="12.5"/>
+          <base-version epoch="0" ver="93r" rel="8"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/ksh-93r-8_12.14.ppc.delta.rpm"/>
+          <checksum type="sha">7fece93408a2c1ce80489afe1b684163d211326e</checksum>
+          <time file="1155573298" build="1155505720"/>
+          <size package="103697" archive="0"/>
+          <base-version epoch="0" ver="93r" rel="8" md5sum="8929ad181361759276d44198b9dbfc54" buildtime="1145902702" sequence_info="ksh-93r-8-748cbde136d965d34281a63b19669b1f01a1129110"/>
+        </deltarpm>
+        <deltarpm>
+          <location href="rpm/ppc/ksh-93r-12.5_12.14.ppc.delta.rpm"/>
+          <checksum type="sha">5a2ec534b648bd40baf67aad588f148fa6eaafba</checksum>
+          <time file="1155573299" build="1155505720"/>
+          <size package="143449" archive="0"/>
+          <base-version epoch="0" ver="93r" rel="12.5" md5sum="960ab1324ae96338a0199230a0fa62b1" buildtime="1149118440" sequence_info="ksh-93r-12.5-1deb0c0c036c33aed782827f067d9ab501a112"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>ksh</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="93r" rel="12.14"/>
+      <checksum type="sha" pkgid="YES">b19de43ec6f4a3ad68254861281f3ccb6dea18bf</checksum>
+      <time file="1155571310" build="1155475497"/>
+      <size package="865128" installed="1983575" archive="1986900"/>
+      <location href="rpm/x86_64/ksh-93r-12.14.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="ksh" epoch="0" ver="93r" rel="12.14" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="ksh"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/ksh-93r-12.14.x86_64.patch.rpm"/>
+          <checksum type="sha">facdfeb2a7c45e2e1fbede251c12a0195f661d48</checksum>
+          <time file="1155573302" build="1155475497"/>
+          <size package="746642" archive="1665832"/>
+          <base-version epoch="0" ver="93r" rel="12.5"/>
+          <base-version epoch="0" ver="93r" rel="8"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/ksh-93r-8_12.14.x86_64.delta.rpm"/>
+          <checksum type="sha">ca9d63a5565dc0f0adcfe5e85783f9ae3e531c74</checksum>
+          <time file="1155573303" build="1155475497"/>
+          <size package="104685" archive="0"/>
+          <base-version epoch="0" ver="93r" rel="8" md5sum="1787213c0b41583d5b43121d2a714b38" buildtime="1145763493" sequence_info="ksh-93r-8-c1fb18b3315e307b647cdf5bf51f7aeb01a1129110"/>
+        </deltarpm>
+        <deltarpm>
+          <location href="rpm/x86_64/ksh-93r-12.5_12.14.x86_64.delta.rpm"/>
+          <checksum type="sha">f6cd8d9aa6f46cfd8e4f1f28217d8cd7923e85de</checksum>
+          <time file="1155573305" build="1155475497"/>
+          <size package="174526" archive="0"/>
+          <base-version epoch="0" ver="93r" rel="12.5" md5sum="e6870391716e70d318ddb970d9512394" buildtime="1149117563" sequence_info="ksh-93r-12.5-ca7cd94c98d09002b700daa7f8fd44d201a112"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+  </atoms>
+</patch>

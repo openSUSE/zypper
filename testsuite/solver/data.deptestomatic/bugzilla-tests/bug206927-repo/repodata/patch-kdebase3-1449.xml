@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--PATCHINFO id="e9568a6d41735383a28d88eb22a6b67f"!-->
+<patch
+    xmlns="http://novell.com/package/metadata/suse/patch"
+    xmlns:yum="http://linux.duke.edu/metadata/common"
+    xmlns:rpm="http://linux.duke.edu/metadata/rpm"
+    xmlns:suse="http://novell.com/package/metadata/suse/common"
+    patchid="kdebase3-1449"
+    timestamp="1149024965"
+    engine="1.0">
+  <yum:name>kdebase3</yum:name>
+  <summary lang="en">Fixes a kicker/ksysguard applet crash</summary>
+  <summary lang="de">Behebt einen kicker/ksysguard-Miniprogramm Absturz</summary>
+  <description lang="en">This update fixes a condition that could cause kicker to 
+crash during login when the ksysguard applet was used.
+</description>
+  <description lang="de">Dieses Update behebt einen Absturz von Kicker waehrend des 
+Einloggens, wenn das ksysguard Miniprogramm benutzt wird.
+</description>
+  <yum:version ver="1449" rel="0"/>
+  <rpm:requires>
+  <rpm:entry kind="atom" name="kdebase3" epoch="0" ver="3.5.1" rel="69.15" flags="EQ"/>
+  <rpm:entry kind="atom" name="kdebase3-32bit" epoch="0" ver="3.5.1" rel="69.15" flags="EQ"/>
+  <rpm:entry kind="atom" name="kdebase3-64bit" epoch="0" ver="3.5.1" rel="69.15" flags="EQ"/>
+  <rpm:entry kind="atom" name="kdebase3-ksysguardd" epoch="0" ver="3.5.1" rel="69.15" flags="EQ"/>
+  </rpm:requires>
+  <category>recommended</category>
+  <atoms>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>kdebase3</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="3.5.1" rel="69.15"/>
+      <checksum type="sha" pkgid="YES">8504221149ebf6494870ba859017edae8f6cff93</checksum>
+      <time file="1149034460" build="1149024965"/>
+      <size package="25731291" installed="51729042" archive="52440636"/>
+      <location href="rpm/i586/kdebase3-3.5.1-69.15.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="kdebase3" epoch="0" ver="3.5.1" rel="69.15" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="kdebase3"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/kdebase3-3.5.1-69.15.i586.patch.rpm"/>
+          <checksum type="sha">1d5dc2e11b8718aeeef3ef885969abc1030d9a36</checksum>
+          <time file="1149049827" build="1149024965"/>
+          <size package="2674685" archive="6905904"/>
+          <base-version epoch="0" ver="3.5.1" rel="69"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/kdebase3-3.5.1-69_69.15.i586.delta.rpm"/>
+          <checksum type="sha">dd65431a12733f5ff23d3e6676406afbadf43857</checksum>
+          <time file="1149049854" build="1149024965"/>
+          <size package="640021" archive="0"/>
+          <base-version epoch="0" ver="3.5.1" rel="69" md5sum="96905cb2e03e903c0c00f10ba4f6c384" buildtime="1146580784" sequence_info="kdebase3-3.5.1-69-37f11234e14ae7895eef16d34022b4c2fa9369ab11a21971f51fe11ff11de11d71ad11941c811bca26b709d8610a8f5109bc510bc8510bfd41"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>kdebase3</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="3.5.1" rel="69.15"/>
+      <checksum type="sha" pkgid="YES">7f7d1e431e6090dc169e168cbb52c296443728ab</checksum>
+      <time file="1149036682" build="1149033874"/>
+      <size package="26217584" installed="56282123" archive="56993736"/>
+      <location href="rpm/ppc/kdebase3-3.5.1-69.15.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="kdebase3" epoch="0" ver="3.5.1" rel="69.15" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="kdebase3"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/kdebase3-3.5.1-69.15.ppc.patch.rpm"/>
+          <checksum type="sha">6289bfb8d89ba1dfd43007d5bdb711daa7c52e95</checksum>
+          <time file="1149049877" build="1149033874"/>
+          <size package="2537580" archive="7094908"/>
+          <base-version epoch="0" ver="3.5.1" rel="69"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/kdebase3-3.5.1-69_69.15.ppc.delta.rpm"/>
+          <checksum type="sha">ed21604064651b14d45e458e90c87c935e57dc03</checksum>
+          <time file="1149049900" build="1149033874"/>
+          <size package="624329" archive="0"/>
+          <base-version epoch="0" ver="3.5.1" rel="69" md5sum="b6f1b900651a8fa79cc5cd3a62727314" buildtime="1146587054" sequence_info="kdebase3-3.5.1-69-f6a4a1e78d6f5c7299390dac38be4162fa9369ab11a21971f51fe11ff11de11d71ad11941c811bca26b709d8610a8f5109bc510bc8510bfd41"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>kdebase3</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="3.5.1" rel="69.15"/>
+      <checksum type="sha" pkgid="YES">560daa08aa473cdaa85094533a3d3b09d6f0183c</checksum>
+      <time file="1149034159" build="1149024409"/>
+      <size package="26618740" installed="58248047" archive="58960532"/>
+      <location href="rpm/x86_64/kdebase3-3.5.1-69.15.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="kdebase3" epoch="0" ver="3.5.1" rel="69.15" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="kdebase3"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/kdebase3-3.5.1-69.15.x86_64.patch.rpm"/>
+          <checksum type="sha">b055e2baea63b7dea306daad2fa4f73e6fd5f36a</checksum>
+          <time file="1149049921" build="1149024409"/>
+          <size package="2954745" archive="8564360"/>
+          <base-version epoch="0" ver="3.5.1" rel="69"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/kdebase3-3.5.1-69_69.15.x86_64.delta.rpm"/>
+          <checksum type="sha">c707709d53ac488b98e715d30764332a43ec480c</checksum>
+          <time file="1149049943" build="1149024409"/>
+          <size package="664759" archive="0"/>
+          <base-version epoch="0" ver="3.5.1" rel="69" md5sum="73f137fdefc355d1673f48e1c7e56c22" buildtime="1146580981" sequence_info="kdebase3-3.5.1-69-2b3806b2ba1f3535730540cc5f0fda30fa9369ab11a21971f51fe11ff11de11d71ad11941c811bca26b709d8610a8f5109bc510bc8510bfd41"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>kdebase3-32bit</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="3.5.1" rel="69.15"/>
+      <checksum type="sha" pkgid="YES">f74488578e39d35f98a1807da0df7e45dae3c98e</checksum>
+      <time file="1149034464" build="1149025330"/>
+      <size package="7845225" installed="26281897" archive="26352312"/>
+      <location href="rpm/x86_64/kdebase3-32bit-3.5.1-69.15.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="kdebase3-32bit" epoch="0" ver="3.5.1" rel="69.15" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="kdebase3-32bit"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/kdebase3-32bit-3.5.1-69.15.x86_64.patch.rpm"/>
+          <checksum type="sha">5565911b8345f316dd831bb8674fde369325ce29</checksum>
+          <time file="1149049957" build="1149025330"/>
+          <size package="2053969" archive="6119544"/>
+          <base-version epoch="0" ver="3.5.1" rel="69"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/kdebase3-32bit-3.5.1-69_69.15.x86_64.delta.rpm"/>
+          <checksum type="sha">bba5121603ed7bf60929776b039886af12873889</checksum>
+          <time file="1149049969" build="1149025330"/>
+          <size package="211832" archive="0"/>
+          <base-version epoch="0" ver="3.5.1" rel="69" md5sum="06139cc970e1af20ee7c64ebe3d4ba4e" buildtime="1146581116" sequence_info="kdebase3-32bit-3.5.1-69-e6ffd0b090cabc9ff0feed2667093846ca70"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>kdebase3-64bit</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="3.5.1" rel="69.15"/>
+      <checksum type="sha" pkgid="YES">c5781e9463baed95fabf4444e1b9b416f0f810f3</checksum>
+      <time file="1149048388" build="1149048208"/>
+      <size package="8673644" installed="40205329" archive="40276628"/>
+      <location href="rpm/ppc/kdebase3-64bit-3.5.1-69.15.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="kdebase3-64bit" epoch="0" ver="3.5.1" rel="69.15" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="kdebase3-64bit"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/kdebase3-64bit-3.5.1-69.15.ppc.patch.rpm"/>
+          <checksum type="sha">592406156d35f84e3fe36b47714d711bafedd5fd</checksum>
+          <time file="1149049983" build="1149048208"/>
+          <size package="2023518" archive="8360184"/>
+          <base-version epoch="0" ver="3.5.1" rel="69"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/kdebase3-64bit-3.5.1-69_69.15.ppc.delta.rpm"/>
+          <checksum type="sha">4646bfc22cb52b1ae760f3479106f436a8b19315</checksum>
+          <time file="1149050001" build="1149048208"/>
+          <size package="261019" archive="0"/>
+          <base-version epoch="0" ver="3.5.1" rel="69" md5sum="7c82bd589ad0d1ccff4df27ccb6fb852" buildtime="1146636643" sequence_info="kdebase3-64bit-3.5.1-69-e307f468fa20ed7a6c17255a45a02bdaca70"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>kdebase3-ksysguardd</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="3.5.1" rel="69.15"/>
+      <checksum type="sha" pkgid="YES">cfb5ba509c5eaf6bf851ced0feac14576d06abee</checksum>
+      <time file="1149034468" build="1149024965"/>
+      <size package="103811" installed="76777" archive="77736"/>
+      <location href="rpm/i586/kdebase3-ksysguardd-3.5.1-69.15.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="kdebase3-ksysguardd" epoch="0" ver="3.5.1" rel="69.15" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="kdebase3-ksysguardd"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/kdebase3-ksysguardd-3.5.1-69.15.i586.patch.rpm"/>
+          <checksum type="sha">c20c1618090cfdf32512f5a409c28338fc6c1f09</checksum>
+          <time file="1149050003" build="1149024965"/>
+          <size package="73324" archive="124"/>
+          <base-version epoch="0" ver="3.5.1" rel="69"/>
+        </patchrpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>kdebase3-ksysguardd</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="3.5.1" rel="69.15"/>
+      <checksum type="sha" pkgid="YES">60c2452b68c6541d24cc9b976ee8f82554cab7bc</checksum>
+      <time file="1149036684" build="1149033874"/>
+      <size package="111534" installed="97821" archive="98780"/>
+      <location href="rpm/ppc/kdebase3-ksysguardd-3.5.1-69.15.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="kdebase3-ksysguardd" epoch="0" ver="3.5.1" rel="69.15" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="kdebase3-ksysguardd"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/kdebase3-ksysguardd-3.5.1-69.15.ppc.patch.rpm"/>
+          <checksum type="sha">a31b816f7e3022a2e0216311e564a834c8895e7d</checksum>
+          <time file="1149050005" build="1149033874"/>
+          <size package="73320" archive="124"/>
+          <base-version epoch="0" ver="3.5.1" rel="69"/>
+        </patchrpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>kdebase3-ksysguardd</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="3.5.1" rel="69.15"/>
+      <checksum type="sha" pkgid="YES">1b9de6f12961262c59945034ded721af4426aaa4</checksum>
+      <time file="1149034162" build="1149024409"/>
+      <size package="110727" installed="88745" archive="89704"/>
+      <location href="rpm/x86_64/kdebase3-ksysguardd-3.5.1-69.15.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="kdebase3-ksysguardd" epoch="0" ver="3.5.1" rel="69.15" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="kdebase3-ksysguardd"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/kdebase3-ksysguardd-3.5.1-69.15.x86_64.patch.rpm"/>
+          <checksum type="sha">694eab6c3066453c396eafd6084214c9b57a53be</checksum>
+          <time file="1149050007" build="1149024409"/>
+          <size package="73332" archive="124"/>
+          <base-version epoch="0" ver="3.5.1" rel="69"/>
+        </patchrpm>
+      </pkgfiles>
+    </package>
+  </atoms>
+</patch>

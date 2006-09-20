@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--PATCHINFO id="19d0f75012c4a2b4f3e9d372d1596b08"!-->
+<patch
+    xmlns="http://novell.com/package/metadata/suse/patch"
+    xmlns:yum="http://linux.duke.edu/metadata/common"
+    xmlns:rpm="http://linux.duke.edu/metadata/rpm"
+    xmlns:suse="http://novell.com/package/metadata/suse/common"
+    patchid="mysql-administrator-1589"
+    timestamp="1150141158"
+    engine="1.0">
+  <yum:name>mysql-administrator</yum:name>
+  <summary lang="en">Fix "User Administration" in mysql-administrator not working</summary>
+  <summary lang="de">Dieses Update behebt das Problem, dass die &quot;Benutzerverwaltung&quot; in mysql-administrator nicht funktioniert</summary>
+  <description lang="en">This update fixes a freeze in the mysql-administrator 
+program that would occur after clicking User Administration 
+</description>
+  <description lang="de">Dieses Update behebt einen Programmfehler in 
+mysql-administrator nach dem Aufruf der 
+User-Administration. 
+</description>
+  <yum:version ver="1589" rel="0"/>
+  <rpm:requires>
+  <rpm:entry kind="atom" name="mysql-administrator" epoch="0" ver="1.1.10" rel="0.1" flags="EQ"/>
+  </rpm:requires>
+  <category>recommended</category>
+  <atoms>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>mysql-administrator</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="1.1.10" rel="0.1"/>
+      <checksum type="sha" pkgid="YES">8af98a0ebd14c74d39e026a143cd8b94190475f1</checksum>
+      <time file="1150215313" build="1150141158"/>
+      <size package="1778853" installed="4739421" archive="4783988"/>
+      <location href="rpm/i586/mysql-administrator-1.1.10-0.1.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="mysql-administrator" epoch="0" ver="1.1.10" rel="0.1" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="mysql-administrator"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/mysql-administrator-1.1.10-0.1.i586.patch.rpm"/>
+          <checksum type="sha">2b4668c8bdfd62d8d689c1d0d7b15099c7de83de</checksum>
+          <time file="1150216238" build="1150141158"/>
+          <size package="872014" archive="3067308"/>
+          <base-version epoch="0" ver="1.1.6" rel="14"/>
+          <base-version epoch="0" ver="1.1.6" rel="14.2"/>
+        </patchrpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>mysql-administrator</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="1.1.10" rel="0.1"/>
+      <checksum type="sha" pkgid="YES">dfcf752583cba5be9365c462a3c4475444ecc117</checksum>
+      <time file="1150215156" build="1150157280"/>
+      <size package="1737634" installed="4727501" archive="4772068"/>
+      <location href="rpm/ppc/mysql-administrator-1.1.10-0.1.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="mysql-administrator" epoch="0" ver="1.1.10" rel="0.1" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="mysql-administrator"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/mysql-administrator-1.1.10-0.1.ppc.patch.rpm"/>
+          <checksum type="sha">d6349c61eace9fba647c9bf7f34ea97ffd45b10f</checksum>
+          <time file="1150216252" build="1150157280"/>
+          <size package="832751" archive="3055388"/>
+          <base-version epoch="0" ver="1.1.6" rel="14"/>
+          <base-version epoch="0" ver="1.1.6" rel="14.2"/>
+        </patchrpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>mysql-administrator</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="1.1.10" rel="0.1"/>
+      <checksum type="sha" pkgid="YES">a670f6be3d1e3b72d13f64575f9051764c661214</checksum>
+      <time file="1150215187" build="1150141664"/>
+      <size package="1777399" installed="4780581" archive="4825148"/>
+      <location href="rpm/x86_64/mysql-administrator-1.1.10-0.1.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="mysql-administrator" epoch="0" ver="1.1.10" rel="0.1" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="mysql-administrator"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/mysql-administrator-1.1.10-0.1.x86_64.patch.rpm"/>
+          <checksum type="sha">4b33536acae64ff413f6c6f58ee3d32fd8ab7245</checksum>
+          <time file="1150216265" build="1150141664"/>
+          <size package="872610" archive="3108468"/>
+          <base-version epoch="0" ver="1.1.6" rel="14"/>
+          <base-version epoch="0" ver="1.1.6" rel="14.2"/>
+        </patchrpm>
+      </pkgfiles>
+    </package>
+  </atoms>
+</patch>

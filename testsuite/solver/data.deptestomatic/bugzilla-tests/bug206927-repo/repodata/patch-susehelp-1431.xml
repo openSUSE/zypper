@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--PATCHINFO id="f4035cfe7cb72b4ece87c21469600a0c"!-->
+<patch
+    xmlns="http://novell.com/package/metadata/suse/patch"
+    xmlns:yum="http://linux.duke.edu/metadata/common"
+    xmlns:rpm="http://linux.duke.edu/metadata/rpm"
+    xmlns:suse="http://novell.com/package/metadata/suse/common"
+    patchid="susehelp-1431"
+    timestamp="1147715107"
+    engine="1.0">
+  <yum:name>susehelp</yum:name>
+  <summary lang="en">Fix susehelp for KDE and GNOME</summary>
+  <summary lang="de">Fehlerhaftes susehelp für KDE und GNOME ersetzen</summary>
+  <description lang="en">Launching the help system from the Help menu in KDE and 
+GNOME applications is broken out of the box.  This patch 
+solves the problem for both desktops.  Alternatively the 
+help system can be launched manually with 'khelpcenter' for 
+KDE and 'yelp' for GNOME.
+</description>
+  <description lang="de">Das Online-Hilfesystem für KDE und GNOME-Anwendungen im 
+Hilfemenü ist defekt.  Der Defekt wird von diesem Patch 
+behoben.  Als Alternative können Sie das System per Hand 
+starten mit den Kommandos 'khelpcenter' und 'yelp', unter 
+KDE und GNOME.
+</description>
+  <yum:version ver="1431" rel="0"/>
+  <rpm:requires>
+  <rpm:entry kind="atom" name="susehelp" epoch="0" ver="2006.05.03" rel="1.2" flags="EQ"/>
+  </rpm:requires>
+  <category>recommended</category>
+  <atoms>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>susehelp</name>
+      <arch>noarch</arch>
+      <version epoch="0" ver="2006.05.03" rel="1.2"/>
+      <checksum type="sha" pkgid="YES">ebdb30255016877d9ef5217dc1c0a433cc204bcb</checksum>
+      <time file="1148391856" build="1147715107"/>
+      <size package="188629" installed="293227" archive="407004"/>
+      <location href="rpm/noarch/susehelp-2006.05.03-1.2.noarch.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="susehelp" epoch="0" ver="2006.05.03" rel="1.2" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="susehelp"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/noarch/susehelp-2006.05.03-1.2.noarch.patch.rpm"/>
+          <checksum type="sha">923158c84e6803e8c1d6cd3e3fc864b515e0095e</checksum>
+          <time file="1148464806" build="1147715107"/>
+          <size package="86898" archive="7848"/>
+          <base-version epoch="0" ver="2006.04.25" rel="5"/>
+        </patchrpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>susehelp</name>
+      <arch>noarch</arch>
+      <version epoch="0" ver="2006.05.03" rel="1.2"/>
+      <checksum type="sha" pkgid="YES">ebdb30255016877d9ef5217dc1c0a433cc204bcb</checksum>
+      <time file="1148391856" build="1147715107"/>
+      <size package="188629" installed="293227" archive="407004"/>
+      <location href="rpm/noarch/susehelp-2006.05.03-1.2.noarch.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="susehelp" epoch="0" ver="2006.05.03" rel="1.2" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="susehelp"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/noarch/susehelp-2006.05.03-1.2.noarch.patch.rpm"/>
+          <checksum type="sha">923158c84e6803e8c1d6cd3e3fc864b515e0095e</checksum>
+          <time file="1148464809" build="1147715107"/>
+          <size package="86875" archive="7848"/>
+          <base-version epoch="0" ver="2006.04.25" rel="5"/>
+        </patchrpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>susehelp</name>
+      <arch>noarch</arch>
+      <version epoch="0" ver="2006.05.03" rel="1.2"/>
+      <checksum type="sha" pkgid="YES">ebdb30255016877d9ef5217dc1c0a433cc204bcb</checksum>
+      <time file="1148391856" build="1147715107"/>
+      <size package="188629" installed="293227" archive="407004"/>
+      <location href="rpm/noarch/susehelp-2006.05.03-1.2.noarch.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="susehelp" epoch="0" ver="2006.05.03" rel="1.2" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="susehelp"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/noarch/susehelp-2006.05.03-1.2.noarch.patch.rpm"/>
+          <checksum type="sha">923158c84e6803e8c1d6cd3e3fc864b515e0095e</checksum>
+          <time file="1148464811" build="1147715107"/>
+          <size package="86875" archive="7848"/>
+          <base-version epoch="0" ver="2006.04.25" rel="5"/>
+        </patchrpm>
+      </pkgfiles>
+    </package>
+  </atoms>
+</patch>

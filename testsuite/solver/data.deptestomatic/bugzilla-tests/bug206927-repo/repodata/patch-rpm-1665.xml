@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--PATCHINFO id="9c6a73883bd2b67c538d8e6e21192686"!-->
+<patch
+    xmlns="http://novell.com/package/metadata/suse/patch"
+    xmlns:yum="http://linux.duke.edu/metadata/common"
+    xmlns:rpm="http://linux.duke.edu/metadata/rpm"
+    xmlns:suse="http://novell.com/package/metadata/suse/common"
+    patchid="rpm-1665"
+    timestamp="1150459925"
+    engine="1.0">
+  <yum:name>rpm</yum:name>
+  <summary lang="en">make rpm provide rpmlib(PatchRPM) again</summary>
+  <summary lang="de">Stellt rpmlib(PatchRPM) wieder zur Verfügung</summary>
+  <description lang="en">The internal rpmlib(PatchRPM) provides got dropped by
+accident when the port of the patchrpm code to rpm-4.4.2
+was done. Because of this, patchrpms could only be
+installed with '--nodeps'. This update adds the missing
+provides.
+</description>
+  <description lang="de">Bei der Portierung des Patchrpmcodes auf rpm-4.4.2 ging das
+interne rpmlib(PatchRPM) Provides verloren. Dadurch waren
+patchrpms nur mit '--nodeps' installierbar. Dises Update
+stellt das fehlende Provides wieder zur Verfügung.
+</description>
+  <yum:version ver="1665" rel="0"/>
+  <rpm:requires>
+    <rpm:entry kind="atom" name="rpm" epoch="0" ver="4.4.2" rel="43.4" flags="EQ"/>
+    <rpm:entry kind="atom" name="rpm-devel" epoch="0" ver="4.4.2" rel="43.4" flags="EQ"/>
+  </rpm:requires>
+  <category>recommended</category>
+  <atoms>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>rpm</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="4.4.2" rel="43.4"/>
+      <checksum type="sha" pkgid="YES">098d9b7a7b46a9c0a723b1ce5805f2522f91fca5</checksum>
+      <time file="1150899046" build="1150459925"/>
+      <size package="2753541" installed="7910107" archive="7946004"/>
+      <location href="rpm/i586/rpm-4.4.2-43.4.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="rpm" epoch="0" ver="4.4.2" rel="43.4" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="rpm"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/rpm-4.4.2-43.4.i586.patch.rpm"/>
+          <checksum type="sha">43a2eb36e15216651f394d552d3cfc3a18681e05</checksum>
+          <time file="1150900208" build="1150459925"/>
+          <size package="1949783" archive="4480364"/>
+          <base-version epoch="0" ver="4.4.2" rel="40"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/rpm-4.4.2-40_43.4.i586.delta.rpm"/>
+          <checksum type="sha">a8900e358b44af281d7af000ed965b6a02af9665</checksum>
+          <time file="1150900213" build="1150459925"/>
+          <size package="233648" archive="0"/>
+          <base-version epoch="0" ver="4.4.2" rel="40" md5sum="29064cf95345bb1300839be8f5851a40" buildtime="1145752125" sequence_info="rpm-4.4.2-40-0fd6b5c99149958a6ab6c9e26f01fdf5c8231911811e11c11a2850"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>rpm</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="4.4.2" rel="43.4"/>
+      <checksum type="sha" pkgid="YES">b76a7a0ffde161fe1982ea7af9e12f199f4a7556</checksum>
+      <time file="1150899150" build="1150470068"/>
+      <size package="2897440" installed="8843117" archive="8878932"/>
+      <location href="rpm/ppc/rpm-4.4.2-43.4.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="rpm" epoch="0" ver="4.4.2" rel="43.4" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="rpm"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/rpm-4.4.2-43.4.ppc.patch.rpm"/>
+          <checksum type="sha">2f6ad596043835d51fbf8b65b5b634856d68afed</checksum>
+          <time file="1150900220" build="1150470068"/>
+          <size package="1810023" archive="4571260"/>
+          <base-version epoch="0" ver="4.4.2" rel="40"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/rpm-4.4.2-40_43.4.ppc.delta.rpm"/>
+          <checksum type="sha">ed1063996703ea94e1460a5cd4b18c2979e344e8</checksum>
+          <time file="1150900227" build="1150470068"/>
+          <size package="246007" archive="0"/>
+          <base-version epoch="0" ver="4.4.2" rel="40" md5sum="02cc2963443e6a23a9d972de5567c12a" buildtime="1145756922" sequence_info="rpm-4.4.2-40-5c005fa549cf055fefe22108b7fd0fd9a8231911811e11c11a2950"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>rpm</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="4.4.2" rel="43.4"/>
+      <checksum type="sha" pkgid="YES">46322c811f34a84540e55962a3b208316aefc4f3</checksum>
+      <time file="1150899049" build="1150459852"/>
+      <size package="2867728" installed="8156873" archive="8190520"/>
+      <location href="rpm/x86_64/rpm-4.4.2-43.4.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="rpm" epoch="0" ver="4.4.2" rel="43.4" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="rpm"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/rpm-4.4.2-43.4.x86_64.patch.rpm"/>
+          <checksum type="sha">f9a7dd10635e018d992920677eaee6cb1dfd07fa</checksum>
+          <time file="1150900233" build="1150459852"/>
+          <size package="1860359" archive="4279348"/>
+          <base-version epoch="0" ver="4.4.2" rel="40"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/rpm-4.4.2-40_43.4.x86_64.delta.rpm"/>
+          <checksum type="sha">42d1afde5a25bceb7de126a750886b08aa52a336</checksum>
+          <time file="1150900236" build="1150459852"/>
+          <size package="230519" archive="0"/>
+          <base-version epoch="0" ver="4.4.2" rel="40" md5sum="d021a2441a733fa5ebf0135deacf34c0" buildtime="1145749041" sequence_info="rpm-4.4.2-40-0b106bd0606a9f7b25bdce21a38a904f8f131911811e11c11a2c40"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>rpm-devel</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="4.4.2" rel="43.4"/>
+      <checksum type="sha" pkgid="YES">f03a1d22f9eb400cedd5c3d1df5eefcf610ad9c2</checksum>
+      <time file="1150899047" build="1150459925"/>
+      <size package="2119036" installed="8302442" archive="8309116"/>
+      <location href="rpm/i586/rpm-devel-4.4.2-43.4.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="rpm-devel" epoch="0" ver="4.4.2" rel="43.4" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="rpm-devel"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/rpm-devel-4.4.2-43.4.i586.patch.rpm"/>
+          <checksum type="sha">0e3efe230d59f3479417e01dc8aa803a7c55d27c</checksum>
+          <time file="1150900242" build="1150459925"/>
+          <size package="1767573" archive="7094084"/>
+          <base-version epoch="0" ver="4.4.2" rel="40"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/rpm-devel-4.4.2-40_43.4.i586.delta.rpm"/>
+          <checksum type="sha">b769a262a3ad672a16702402af1d0efec0db3d5d</checksum>
+          <time file="1150900244" build="1150459925"/>
+          <size package="41919" archive="0"/>
+          <base-version epoch="0" ver="4.4.2" rel="40" md5sum="f869cc974adeda2b0dfc457af19744ab" buildtime="1145752125" sequence_info="rpm-devel-4.4.2-40-4ba5ad8ce79ccaa50772e3b077a01232f5"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>rpm-devel</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="4.4.2" rel="43.4"/>
+      <checksum type="sha" pkgid="YES">862538b42b8fe8f7aa9c6f53ba810fb746d16c95</checksum>
+      <time file="1150899152" build="1150470068"/>
+      <size package="2402973" installed="9001270" archive="9007940"/>
+      <location href="rpm/ppc/rpm-devel-4.4.2-43.4.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="rpm-devel" epoch="0" ver="4.4.2" rel="43.4" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="rpm-devel"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/rpm-devel-4.4.2-43.4.ppc.patch.rpm"/>
+          <checksum type="sha">6f558cf7957205c22410a0521a2cff7d4ae89d0b</checksum>
+          <time file="1150900252" build="1150470068"/>
+          <size package="2342757" archive="8599228"/>
+          <base-version epoch="0" ver="4.4.2" rel="40"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/rpm-devel-4.4.2-40_43.4.ppc.delta.rpm"/>
+          <checksum type="sha">fe4b284e664057a888bb9f478af6fee898103f50</checksum>
+          <time file="1150900256" build="1150470068"/>
+          <size package="47697" archive="0"/>
+          <base-version epoch="0" ver="4.4.2" rel="40" md5sum="90b893ec850fb31a604c6e69337b1fe0" buildtime="1145756922" sequence_info="rpm-devel-4.4.2-40-173a0911943a4562c85c59a1eb17ee57f5"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>rpm-devel</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="4.4.2" rel="43.4"/>
+      <checksum type="sha" pkgid="YES">4beefc52f3db53cefcdb2bfd07413a3dd9e23b7f</checksum>
+      <time file="1150899050" build="1150459852"/>
+      <size package="2103359" installed="11399570" archive="11406272"/>
+      <location href="rpm/x86_64/rpm-devel-4.4.2-43.4.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="rpm-devel" epoch="0" ver="4.4.2" rel="43.4" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="rpm-devel"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/rpm-devel-4.4.2-43.4.x86_64.patch.rpm"/>
+          <checksum type="sha">3f836aa54e9be55dd06dd5d5ca3ab9af30101618</checksum>
+          <time file="1150900263" build="1150459852"/>
+          <size package="1739626" archive="9977300"/>
+          <base-version epoch="0" ver="4.4.2" rel="40"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/rpm-devel-4.4.2-40_43.4.x86_64.delta.rpm"/>
+          <checksum type="sha">f8638ebab0edf960545fc8f33808b26aeea20281</checksum>
+          <time file="1150900268" build="1150459852"/>
+          <size package="42448" archive="0"/>
+          <base-version epoch="0" ver="4.4.2" rel="40" md5sum="0a5d930eacd85a714ba9516d6c437ba2" buildtime="1145749041" sequence_info="rpm-devel-4.4.2-40-9510eb6185b4a89bc27584db9bc559d9f5"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+  </atoms>
+</patch>

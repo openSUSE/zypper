@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--PATCHINFO id="2b1f8fd97dabb69cb92632e3bce51f60"!-->
+<patch
+    xmlns="http://novell.com/package/metadata/suse/patch"
+    xmlns:yum="http://linux.duke.edu/metadata/common"
+    xmlns:rpm="http://linux.duke.edu/metadata/rpm"
+    xmlns:suse="http://novell.com/package/metadata/suse/common"
+    patchid="kpowersave-1855"
+    timestamp="1153371831"
+    engine="1.0">
+  <yum:name>kpowersave</yum:name>
+  <summary lang="en">kpowersave: Several fixes regarding autosuspend, DPMS, errorhandling, brightness and translation and documentation updates</summary>
+  <summary lang="de">kpowersave: Zahlreiche Fehlerkorrekturen bezüglich Autosuspend, DPMS, Fehlerbehandlung, Helligkeitseinstellungen sowie Aktualisierungen von Übersetzungen und der Dokumentation</summary>
+  <description lang="en">This update fixes autosuspend and inactivity detection
+(workarounds for broken X libraries), fixes the DCOP
+function for autosuspend, fixes detection/handling if
+DBUS/HAL/powersaved are not running, fixes the config
+dialog to respect DPMS timeout rules, checks the applet
+menu before trigger autosuspend, fixes distribution
+detection in configure, and changes the default bug
+reporting links for dists.
+
+It adds missing DCOP functions, allows changing brightness
+with the mouse wheel over the applet icon, and updates the
+autosuspend blacklist and translations. KPowersave depends
+now on powersave &gt;= v0.12.18.
+</description>
+  <description lang="de">Dieses Update behebt Probleme mit Autosuspend und der
+Erkennung der Benutzerinaktivität (verursacht durch defekte
+X Bibliotheken), korrigiert die DCOP Funktion für
+Autosuspend, ändert die Fehlerbehandlung und Erkennung
+wenn/ob HAL/ DBUS/powersaved nicht aktiviert sind,
+korrigiert den Konfigurationsdialog um die Regeln für DPMS
+Timeoutso zu respektieren, überprüft ob vor dem Auslösen
+eines Autosuspends ob Autosuspend über das Appletmenü
+deaktiviert wurde, überarbeitet die Erkennung von
+Distributionen und die Verwendung der richtigen Bugzilla
+Webseite.
+
+Mit diesem Update kann die Helligkeit des Displays (wenn
+von der Hardware unterstützt und aktiviert) mit dem Mausrad
+über das Appleticon geändert werden. Die Autosuspend
+Blacklist, die Übersetzungen sowie die Dokumentation wurden
+überarbeitet. KPowersave benötigt nun powersave &gt;= v0.12.18.
+</description>
+  <yum:version ver="1855" rel="0"/>
+  <rpm:requires>
+    <rpm:entry kind="atom" name="kpowersave" epoch="0" ver="0.6.2" rel="3.3" flags="EQ"/>
+  </rpm:requires>
+  <category>recommended</category>
+  <atoms>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>kpowersave</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="0.6.2" rel="3.3"/>
+      <checksum type="sha" pkgid="YES">8bda43df794626080c39b713ddb09671b36004ab</checksum>
+      <time file="1153410789" build="1153371831"/>
+      <size package="3285506" installed="7357056" archive="4318716"/>
+      <location href="rpm/i586/kpowersave-0.6.2-3.3.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="kpowersave" epoch="0" ver="0.6.2" rel="3.3" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="kpowersave"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/kpowersave-0.6.2-3.3.i586.patch.rpm"/>
+          <checksum type="sha">af4a2053ce50b44bc644dbf0db4774e6cb7ce2a6</checksum>
+          <time file="1153412142" build="1153371831"/>
+          <size package="350902" archive="935124"/>
+          <base-version epoch="0" ver="0.6.1" rel="7"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/kpowersave-0.6.1_0.6.2-7_3.3.i586.delta.rpm"/>
+          <checksum type="sha">6833ce89a48a3bd5fb4d7ecbfcf04c6dc1a4b01b</checksum>
+          <time file="1153412145" build="1153371831"/>
+          <size package="212261" archive="0"/>
+          <base-version epoch="0" ver="0.6.1" rel="7" md5sum="a45a7213753a0c7c241b073384423306" buildtime="1146578039" sequence_info="kpowersave-0.6.1-7-620fa0d62868ef3e9458a9d45902f8409c30"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>kpowersave</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="0.6.2" rel="3.3"/>
+      <checksum type="sha" pkgid="YES">c6770b0ebe91f139809e272b5650c28c74ffcf9a</checksum>
+      <time file="1153411932" build="1153411107"/>
+      <size package="3295115" installed="7420942" archive="4382668"/>
+      <location href="rpm/ppc/kpowersave-0.6.2-3.3.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="kpowersave" epoch="0" ver="0.6.2" rel="3.3" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="kpowersave"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/kpowersave-0.6.2-3.3.ppc.patch.rpm"/>
+          <checksum type="sha">2d8bffda71311f29755cc3fd8897ac1c847800b3</checksum>
+          <time file="1153412149" build="1153411107"/>
+          <size package="294107" archive="947492"/>
+          <base-version epoch="0" ver="0.6.1" rel="7"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/kpowersave-0.6.1_0.6.2-7_3.3.ppc.delta.rpm"/>
+          <checksum type="sha">d4f1a80f2c05e383373fb3dd3115fb1978fa9e11</checksum>
+          <time file="1153412152" build="1153411107"/>
+          <size package="168976" archive="0"/>
+          <base-version epoch="0" ver="0.6.1" rel="7" md5sum="2fc50064d9949388c6fcd8fd413a464d" buildtime="1146611197" sequence_info="kpowersave-0.6.1-7-c272cc2ba2e130cb9551ba12e1c6ff8a9c30"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>kpowersave</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="0.6.2" rel="3.3"/>
+      <checksum type="sha" pkgid="YES">135744ccfb37ea620aac56ee881a6a02978acf32</checksum>
+      <time file="1153410927" build="1153376437"/>
+      <size package="3300130" installed="7439260" archive="4401008"/>
+      <location href="rpm/x86_64/kpowersave-0.6.2-3.3.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="kpowersave" epoch="0" ver="0.6.2" rel="3.3" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="kpowersave"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/kpowersave-0.6.2-3.3.x86_64.patch.rpm"/>
+          <checksum type="sha">99066e64c1d4e575e236f178092671d56433f445</checksum>
+          <time file="1153412157" build="1153376437"/>
+          <size package="354743" archive="1010224"/>
+          <base-version epoch="0" ver="0.6.1" rel="7"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/kpowersave-0.6.1_0.6.2-7_3.3.x86_64.delta.rpm"/>
+          <checksum type="sha">4b8427faaefaea399d9bf17c94b1fba55d91913c</checksum>
+          <time file="1153412160" build="1153376437"/>
+          <size package="222139" archive="0"/>
+          <base-version epoch="0" ver="0.6.1" rel="7" md5sum="ba109acb61ead93373eb5fb18c9ade37" buildtime="1146578016" sequence_info="kpowersave-0.6.1-7-ad379b2264e44343dbbb855fe1354eed9c30"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+  </atoms>
+</patch>

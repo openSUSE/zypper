@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--PATCHINFO id="3074d571767e5876519907c7bbef2950"!-->
+<patch
+    xmlns="http://novell.com/package/metadata/suse/patch"
+    xmlns:yum="http://linux.duke.edu/metadata/common"
+    xmlns:rpm="http://linux.duke.edu/metadata/rpm"
+    xmlns:suse="http://novell.com/package/metadata/suse/common"
+    patchid="wget-1689"
+    timestamp="1151075673"
+    engine="1.0">
+  <yum:name>wget</yum:name>
+  <summary lang="en">wget: Security update solving terminal escape codes problems</summary>
+  <summary lang="de">wget Sicherheitsupdate zum Beheben von Problemen mit Terminal Escapes</summary>
+  <description lang="en">This update fixes a security in wget, where evil servers
+could send terminal escape codes to the user calling wget.
+This would only affect interactive sessions. (CVE-2004-1488)
+
+Additionaly a previous &quot;.file&quot; fix was found to be buggy
+and replaced. This bug could lead to &quot;.directories&quot; not
+being retrievable and &quot;_files&quot;  being overwritten.
+</description>
+  <description lang="de">Dieses Update behebt ein Sicherheitsproblem in wget,
+welches dazu führen konnte, dass Terminal Escape Sequenzen
+von bösen entfernten Servern dem lokalen Benutzer angezeigt
+werden konnen (CVE-2004-1488).
+
+Weiterhin war ein vorheriges &quot;.Datei&quot; Update inkorrekt und
+führte dazu, dass &quot;.Verzeichnisse&quot; nicht heruntergeladen
+werden konnten und das Dateien mit &quot;_&quot; überschrieben worden.
+</description>
+  <yum:version ver="1689" rel="0"/>
+  <rpm:requires>
+    <rpm:entry kind="atom" name="wget" epoch="0" ver="1.10.2" rel="15.4" flags="EQ"/>
+  </rpm:requires>
+  <category>security</category>
+  <atoms>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>wget</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="1.10.2" rel="15.4"/>
+      <checksum type="sha" pkgid="YES">5ca77b43f35747e80f4edaf126e57c9b6661dd20</checksum>
+      <time file="1151533160" build="1151075673"/>
+      <size package="491023" installed="1532428" archive="1539972"/>
+      <location href="rpm/i586/wget-1.10.2-15.4.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="wget" epoch="0" ver="1.10.2" rel="15.4" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="wget"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/wget-1.10.2-15.4.i586.patch.rpm"/>
+          <checksum type="sha">f0d2bc18d91b684f387e85f70c4ad59ec933d9e4</checksum>
+          <time file="1151534070" build="1151075673"/>
+          <size package="150651" archive="247136"/>
+          <base-version epoch="0" ver="1.10.2" rel="13"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/wget-1.10.2-13_15.4.i586.delta.rpm"/>
+          <checksum type="sha">941e56573def9ada75ace180977d1473275acbfc</checksum>
+          <time file="1151534071" build="1151075673"/>
+          <size package="76515" archive="0"/>
+          <base-version epoch="0" ver="1.10.2" rel="13" md5sum="b69f77454d0246a7b19b6669a7238c75" buildtime="1145762917" sequence_info="wget-1.10.2-13-69a77b264c582d114bed6af69f063be001291d40"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>wget</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="1.10.2" rel="15.4"/>
+      <checksum type="sha" pkgid="YES">1c0e6b1717f3ea2ee4ec98fa7a2857ef2f79eb5a</checksum>
+      <time file="1151522433" build="1151075515"/>
+      <size package="501909" installed="1569196" archive="1576740"/>
+      <location href="rpm/ppc/wget-1.10.2-15.4.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="wget" epoch="0" ver="1.10.2" rel="15.4" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="wget"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/wget-1.10.2-15.4.ppc.patch.rpm"/>
+          <checksum type="sha">bc8f04fee3a90ad635899e30404ded2bd4bc34da</checksum>
+          <time file="1151534073" build="1151075515"/>
+          <size package="161612" archive="283904"/>
+          <base-version epoch="0" ver="1.10.2" rel="13"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/wget-1.10.2-13_15.4.ppc.delta.rpm"/>
+          <checksum type="sha">04487efd9fd239074a0e9252c964aadddd6302bf</checksum>
+          <time file="1151534074" build="1151075515"/>
+          <size package="76036" archive="0"/>
+          <base-version epoch="0" ver="1.10.2" rel="13" md5sum="8c1ee1e6ed2ae247470372a728592d52" buildtime="1145780136" sequence_info="wget-1.10.2-13-03e829114042cf8e7cc90b2f5dacfc9201291d40"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>wget</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="1.10.2" rel="15.4"/>
+      <checksum type="sha" pkgid="YES">139a465f114f507c8a66fe4042a5f58c2183b2f1</checksum>
+      <time file="1151529550" build="1151075523"/>
+      <size package="499612" installed="1547760" archive="1555304"/>
+      <location href="rpm/x86_64/wget-1.10.2-15.4.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="wget" epoch="0" ver="1.10.2" rel="15.4" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="wget"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/wget-1.10.2-15.4.x86_64.patch.rpm"/>
+          <checksum type="sha">a51dffec29a0eee32fdc9e9ad62ee5c6f6a5a3c7</checksum>
+          <time file="1151534076" build="1151075523"/>
+          <size package="159493" archive="262468"/>
+          <base-version epoch="0" ver="1.10.2" rel="13"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/wget-1.10.2-13_15.4.x86_64.delta.rpm"/>
+          <checksum type="sha">3137d6782404a84c35fa26d7bdf0c66c42e45cfc</checksum>
+          <time file="1151534077" build="1151075523"/>
+          <size package="81443" archive="0"/>
+          <base-version epoch="0" ver="1.10.2" rel="13" md5sum="02de38c023eb2d71fe117685628c3e8a" buildtime="1145759045" sequence_info="wget-1.10.2-13-aadeccfb1b4cab2c10c9e0e1bdb44b1d01291d40"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+  </atoms>
+</patch>

@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--PATCHINFO id="2433d54b84215b87ed143d1e285e3ff7"!-->
+<patch
+    xmlns="http://novell.com/package/metadata/suse/patch"
+    xmlns:yum="http://linux.duke.edu/metadata/common"
+    xmlns:rpm="http://linux.duke.edu/metadata/rpm"
+    xmlns:suse="http://novell.com/package/metadata/suse/common"
+    patchid="libkexif-2026"
+    timestamp="1156582083"
+    engine="1.0">
+  <yum:name>libkexif</yum:name>
+  <summary lang="en">Fixes empty EXIF information in properties dialog</summary>
+  <summary lang="de">Behebt leere EXIF Informationen im Informationsdialog</summary>
+  <description lang="en">This update fixes empty EXIF information in various KDE
+properties dialogs (e.g. digikam).
+</description>
+  <description lang="de">Dieses Update behebt leere EXIF informationen in
+verschiedenen KDE Dialogen (z.B. digikam).
+</description>
+  <yum:version ver="2026" rel="0"/>
+  <rpm:requires>
+    <rpm:entry kind="atom" name="libkexif" epoch="0" ver="0.2.2" rel="15.5" flags="EQ"/>
+  </rpm:requires>
+  <category>recommended</category>
+  <atoms>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>libkexif</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="0.2.2" rel="15.5"/>
+      <checksum type="sha" pkgid="YES">b58785bc9a3f259f5d030adec8cee0a019f5a662</checksum>
+      <time file="1156833233" build="1156582083"/>
+      <size package="59173" installed="158542" archive="166532"/>
+      <location href="rpm/i586/libkexif-0.2.2-15.5.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="libkexif" epoch="0" ver="0.2.2" rel="15.5" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="libkexif"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/libkexif-0.2.2-15.5.i586.patch.rpm"/>
+          <checksum type="sha">63d870218a49e175516f45cabba4f7e050f760cc</checksum>
+          <time file="1156835155" build="1156582083"/>
+          <size package="38633" archive="87632"/>
+          <base-version epoch="0" ver="0.2.2" rel="15"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/libkexif-0.2.2-15_15.5.i586.delta.rpm"/>
+          <checksum type="sha">18ac81168a96d439acc6393bae63121617ff0c42</checksum>
+          <time file="1156835156" build="1156582083"/>
+          <size package="20483" archive="0"/>
+          <base-version epoch="0" ver="0.2.2" rel="15" md5sum="ee07866bdc2bd0818e39971fcf8ec949" buildtime="1146568352" sequence_info="libkexif-0.2.2-15-58b09a8e4b1fb544e64a9f90ca1885c0d5"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>libkexif</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="0.2.2" rel="15.5"/>
+      <checksum type="sha" pkgid="YES">14b5bfe8dc28e11a593842f84901be32ba6f852e</checksum>
+      <time file="1156804462" build="1156588415"/>
+      <size package="61765" installed="171058" archive="179048"/>
+      <location href="rpm/ppc/libkexif-0.2.2-15.5.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="libkexif" epoch="0" ver="0.2.2" rel="15.5" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="libkexif"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/libkexif-0.2.2-15.5.ppc.patch.rpm"/>
+          <checksum type="sha">59ee12002cb948cb9408329a87105d4f889b38b3</checksum>
+          <time file="1156835157" build="1156588415"/>
+          <size package="41251" archive="100112"/>
+          <base-version epoch="0" ver="0.2.2" rel="14"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/libkexif-0.2.2-14_15.5.ppc.delta.rpm"/>
+          <checksum type="sha">5412ee3bf2f541729c9df4d8f72d81691960fc9d</checksum>
+          <time file="1156835157" build="1156588415"/>
+          <size package="20915" archive="0"/>
+          <base-version epoch="0" ver="0.2.2" rel="14" md5sum="95c6dcf8ff23b67d89e64029d0f76963" buildtime="1146300009" sequence_info="libkexif-0.2.2-14-90d0ea39044a186566c0c3ae4cd7fb66d5"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>libkexif</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="0.2.2" rel="15.5"/>
+      <checksum type="sha" pkgid="YES">e6b7849851ebe8503641f2c72f008cff21ca2d19</checksum>
+      <time file="1156804442" build="1156617818"/>
+      <size package="61320" installed="183570" archive="191576"/>
+      <location href="rpm/x86_64/libkexif-0.2.2-15.5.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="libkexif" epoch="0" ver="0.2.2" rel="15.5" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="libkexif"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/libkexif-0.2.2-15.5.x86_64.patch.rpm"/>
+          <checksum type="sha">03d7a074b8b6a84fc3a4ed619af3e48d9c8a6d72</checksum>
+          <time file="1156835159" build="1156617818"/>
+          <size package="40781" archive="112624"/>
+          <base-version epoch="0" ver="0.2.2" rel="15"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/libkexif-0.2.2-15_15.5.x86_64.delta.rpm"/>
+          <checksum type="sha">28a13f211992fe4cf1b20c136951a7282131833a</checksum>
+          <time file="1156835159" build="1156617818"/>
+          <size package="21359" archive="0"/>
+          <base-version epoch="0" ver="0.2.2" rel="15" md5sum="b5e7441c8240eaabc8261d2e6cb84318" buildtime="1146570748" sequence_info="libkexif-0.2.2-15-8f6dfec1a7e40258756276179c0c9fd5d5"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+  </atoms>
+</patch>

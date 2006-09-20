@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--PATCHINFO id="356900829507d98074292e09d33b3443"!-->
+<patch
+    xmlns="http://novell.com/package/metadata/suse/patch"
+    xmlns:yum="http://linux.duke.edu/metadata/common"
+    xmlns:rpm="http://linux.duke.edu/metadata/rpm"
+    xmlns:suse="http://novell.com/package/metadata/suse/common"
+    patchid="libksba-1866"
+    timestamp="1153743552"
+    engine="1.0">
+  <yum:name>libksba</yum:name>
+  <summary lang="en">libksba: Bugfix for crash on parsing of certificates.</summary>
+  <summary lang="de">libksba: Bugfix für einen Absturz beim Parsen von Zertifikaten.</summary>
+  <description lang="en">The gpgsm program (which uses the libksba library) crashed
+when verifying a signature with certain malformed x.509
+certificates.
+</description>
+  <description lang="de">Das gpgsm Programm (das die libksba Bibliothek benutzt)
+konnte durch falschformatierte X.509 Zertifikate beim
+Verifizieren von Signaturen zum Absturz gebracht werden.
+</description>
+  <yum:version ver="1866" rel="0"/>
+  <rpm:requires>
+    <rpm:entry kind="atom" name="libksba" epoch="0" ver="0.9.12" rel="14.5" flags="EQ"/>
+    <rpm:entry kind="atom" name="libksba-devel" epoch="0" ver="0.9.12" rel="14.5" flags="EQ"/>
+  </rpm:requires>
+  <category>security</category>
+  <atoms>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>libksba</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="0.9.12" rel="14.5"/>
+      <checksum type="sha" pkgid="YES">1f219cb9214407cd08438982edeefaa0274792e7</checksum>
+      <time file="1153761621" build="1153743552"/>
+      <size package="92449" installed="213049" archive="214836"/>
+      <location href="rpm/i586/libksba-0.9.12-14.5.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="libksba" epoch="0" ver="0.9.12" rel="14.5" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="libksba"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/libksba-0.9.12-14.5.i586.patch.rpm"/>
+          <checksum type="sha">ad92c4e82f23d71d3bfa6c0f7c0cf33f9a6728e1</checksum>
+          <time file="1153762203" build="1153743552"/>
+          <size package="81093" archive="177052"/>
+          <base-version epoch="0" ver="0.9.12" rel="12"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/libksba-0.9.12-12_14.5.i586.delta.rpm"/>
+          <checksum type="sha">8087b9dca2a26fa3c2112688d8618aada164c44a</checksum>
+          <time file="1153762204" build="1153743552"/>
+          <size package="23828" archive="0"/>
+          <base-version epoch="0" ver="0.9.12" rel="12" md5sum="e3b5b30821f174f7707238218c497263" buildtime="1145759536" sequence_info="libksba-0.9.12-12-4ad23470846767fe255f6bd2dfe3a8fa30"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>libksba</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="0.9.12" rel="14.5"/>
+      <checksum type="sha" pkgid="YES">f07e5b284d84d3ff127220af49a16fd209a92492</checksum>
+      <time file="1153761637" build="1153743408"/>
+      <size package="95445" installed="246673" archive="248460"/>
+      <location href="rpm/ppc/libksba-0.9.12-14.5.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="libksba" epoch="0" ver="0.9.12" rel="14.5" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="libksba"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/libksba-0.9.12-14.5.ppc.patch.rpm"/>
+          <checksum type="sha">5889563aaefa1b474e3ffe35351eefe808dbac05</checksum>
+          <time file="1153762205" build="1153743408"/>
+          <size package="84052" archive="210676"/>
+          <base-version epoch="0" ver="0.9.12" rel="12"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/libksba-0.9.12-12_14.5.ppc.delta.rpm"/>
+          <checksum type="sha">e10eaedfcc227a06c6659854e373de85d59b6560</checksum>
+          <time file="1153762206" build="1153743408"/>
+          <size package="23411" archive="0"/>
+          <base-version epoch="0" ver="0.9.12" rel="12" md5sum="daed8101acaa40dc9880c6d9c86a6b78" buildtime="1145778026" sequence_info="libksba-0.9.12-12-3ade0d71be2406876b3284daa8bb617a30"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>libksba</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="0.9.12" rel="14.5"/>
+      <checksum type="sha" pkgid="YES">92000514bbc5928e08261103b65aa60ba1f72ad2</checksum>
+      <time file="1153761583" build="1153743314"/>
+      <size package="100734" installed="258861" archive="260648"/>
+      <location href="rpm/x86_64/libksba-0.9.12-14.5.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="libksba" epoch="0" ver="0.9.12" rel="14.5" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="libksba"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/libksba-0.9.12-14.5.x86_64.patch.rpm"/>
+          <checksum type="sha">5079cd763f6f0fe917cf6a37a62d450ba8b5eb41</checksum>
+          <time file="1153762207" build="1153743314"/>
+          <size package="89158" archive="222864"/>
+          <base-version epoch="0" ver="0.9.12" rel="12"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/libksba-0.9.12-12_14.5.x86_64.delta.rpm"/>
+          <checksum type="sha">2a71965d93b3153b34566569efc55574d381b16f</checksum>
+          <time file="1153762208" build="1153743314"/>
+          <size package="23944" archive="0"/>
+          <base-version epoch="0" ver="0.9.12" rel="12" md5sum="31631e3e9fcdf33456f358686ef93e6e" buildtime="1145755484" sequence_info="libksba-0.9.12-12-bbba8a97e921d6cd3ee0c2879abace7230"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>libksba-devel</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="0.9.12" rel="14.5"/>
+      <checksum type="sha" pkgid="YES">3604378c0144888f57d15521776fca3e78b15342</checksum>
+      <time file="1153761621" build="1153743552"/>
+      <size package="113698" installed="271904" archive="272992"/>
+      <location href="rpm/i586/libksba-devel-0.9.12-14.5.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="libksba-devel" epoch="0" ver="0.9.12" rel="14.5" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="libksba-devel"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/libksba-devel-0.9.12-14.5.i586.patch.rpm"/>
+          <checksum type="sha">2dc76fa896c5e39b4be42349047085471277bc44</checksum>
+          <time file="1153762210" build="1153743552"/>
+          <size package="83458" archive="225840"/>
+          <base-version epoch="0" ver="0.9.12" rel="12"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/libksba-devel-0.9.12-12_14.5.i586.delta.rpm"/>
+          <checksum type="sha">f1f2897721e7fb90dd341953aec8a268ba68c6fa</checksum>
+          <time file="1153762210" build="1153743552"/>
+          <size package="8178" archive="0"/>
+          <base-version epoch="0" ver="0.9.12" rel="12" md5sum="601d06976aaeb72440bc57b2fd27094e" buildtime="1145759536" sequence_info="libksba-devel-0.9.12-12-7132e4cefe4de280aa8c26a4af64a55470"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>libksba-devel</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="0.9.12" rel="14.5"/>
+      <checksum type="sha" pkgid="YES">bab50e568a7570a690d4cb316cd99ce975669c59</checksum>
+      <time file="1153761637" build="1153743408"/>
+      <size package="124739" installed="313992" archive="315080"/>
+      <location href="rpm/ppc/libksba-devel-0.9.12-14.5.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="libksba-devel" epoch="0" ver="0.9.12" rel="14.5" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="libksba-devel"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/libksba-devel-0.9.12-14.5.ppc.patch.rpm"/>
+          <checksum type="sha">cf88c60dd17b4866d302507a8bd81743e78bcb72</checksum>
+          <time file="1153762211" build="1153743408"/>
+          <size package="93480" archive="267928"/>
+          <base-version epoch="0" ver="0.9.12" rel="12"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/libksba-devel-0.9.12-12_14.5.ppc.delta.rpm"/>
+          <checksum type="sha">cc031d60754a55e9eac7b91a9cfec0cc35efe718</checksum>
+          <time file="1153762212" build="1153743408"/>
+          <size package="8331" archive="0"/>
+          <base-version epoch="0" ver="0.9.12" rel="12" md5sum="dbd8262438a8f3f109def3bc0e759e2e" buildtime="1145778026" sequence_info="libksba-devel-0.9.12-12-6d3b4799960b15a133ae69b3a56972f770"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>libksba-devel</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="0.9.12" rel="14.5"/>
+      <checksum type="sha" pkgid="YES">93d22eb1484bb1cd49ebee23aab2a8700e3a1157</checksum>
+      <time file="1153761584" build="1153743314"/>
+      <size package="120980" installed="384495" archive="385592"/>
+      <location href="rpm/x86_64/libksba-devel-0.9.12-14.5.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="libksba-devel" epoch="0" ver="0.9.12" rel="14.5" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="libksba-devel"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/libksba-devel-0.9.12-14.5.x86_64.patch.rpm"/>
+          <checksum type="sha">2e327bf8f9614a171d13599ce6d60bf148e1b0d3</checksum>
+          <time file="1153762213" build="1153743314"/>
+          <size package="90315" archive="338412"/>
+          <base-version epoch="0" ver="0.9.12" rel="12"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/libksba-devel-0.9.12-12_14.5.x86_64.delta.rpm"/>
+          <checksum type="sha">9ef33b259026d54c675244241338b2508213da1b</checksum>
+          <time file="1153762214" build="1153743314"/>
+          <size package="8313" archive="0"/>
+          <base-version epoch="0" ver="0.9.12" rel="12" md5sum="d5de190063d4e3893a4b3459842a1fd4" buildtime="1145755484" sequence_info="libksba-devel-0.9.12-12-e81d4bf214be8df3fff90ed3499dc08670"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+  </atoms>
+</patch>

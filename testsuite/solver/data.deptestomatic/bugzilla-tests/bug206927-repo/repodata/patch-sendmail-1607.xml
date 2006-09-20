@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--PATCHINFO id="6a4cbfcffc64520be6fc24c131a96722"!-->
+<patch
+    xmlns="http://novell.com/package/metadata/suse/patch"
+    xmlns:yum="http://linux.duke.edu/metadata/common"
+    xmlns:rpm="http://linux.duke.edu/metadata/rpm"
+    xmlns:suse="http://novell.com/package/metadata/suse/common"
+    patchid="sendmail-1607"
+    timestamp="1150280902"
+    engine="1.0">
+  <yum:name>sendmail</yum:name>
+  <summary lang="en">sendmail security update</summary>
+  <summary lang="de">sendmail Sicherheitsupdate</summary>
+  <description lang="en">Specially crafted MIME messages can crash sendmail and 
+block queue processing.
+</description>
+  <description lang="de">Speziell beschaffene MIME-Nachrichten können sendmail zum 
+Absturz bringen und so das Verarbeiten der Warteschlange 
+blockieren.
+</description>
+  <yum:version ver="1607" rel="0"/>
+  <rpm:requires>
+  <rpm:entry kind="atom" name="sendmail" epoch="0" ver="8.13.6" rel="9.3" flags="EQ"/>
+  </rpm:requires>
+  <category>security</category>
+  <atoms>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>sendmail</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="8.13.6" rel="9.3"/>
+      <checksum type="sha" pkgid="YES">06788020f5c2938fe4a88f4b303fe90ca5e0720b</checksum>
+      <time file="1150283963" build="1150280902"/>
+      <size package="1192979" installed="2437102" archive="2479092"/>
+      <location href="rpm/i586/sendmail-8.13.6-9.3.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="sendmail" epoch="0" ver="8.13.6" rel="9.3" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="sendmail"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/sendmail-8.13.6-9.3.i586.patch.rpm"/>
+          <checksum type="sha">8fbd3efaecfe38896c31d67f7a2e6f2d37d6bad2</checksum>
+          <time file="1150284696" build="1150280902"/>
+          <size package="485584" archive="1132344"/>
+          <base-version epoch="0" ver="8.13.6" rel="9"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/sendmail-8.13.6-9_9.3.i586.delta.rpm"/>
+          <checksum type="sha">490f83288a7c7eb0963bb68d78982bbaf584bd1d</checksum>
+          <time file="1150284698" build="1150280902"/>
+          <size package="114927" archive="0"/>
+          <base-version epoch="0" ver="8.13.6" rel="9" md5sum="55561644e08c2adf1d962cf6112d3e21" buildtime="1146558504" sequence_info="sendmail-8.13.6-9-726a1a36efdf427559d065f94841889d011111211a11819f30"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>sendmail</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="8.13.6" rel="9.3"/>
+      <checksum type="sha" pkgid="YES">e5024481e392ca9ca3898977b89a0e2612568104</checksum>
+      <time file="1150283455" build="1150280830"/>
+      <size package="1222236" installed="2659180" archive="2701168"/>
+      <location href="rpm/ppc/sendmail-8.13.6-9.3.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="sendmail" epoch="0" ver="8.13.6" rel="9.3" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="sendmail"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/sendmail-8.13.6-9.3.ppc.patch.rpm"/>
+          <checksum type="sha">ac72684f297f7661579668488889caccab1b76c4</checksum>
+          <time file="1150284702" build="1150280830"/>
+          <size package="519449" archive="1309756"/>
+          <base-version epoch="0" ver="8.13.6" rel="9"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/sendmail-8.13.6-9_9.3.ppc.delta.rpm"/>
+          <checksum type="sha">df6067b6dc724a0783f9d4fce667adcc49f6e624</checksum>
+          <time file="1150284704" build="1150280830"/>
+          <size package="109362" archive="0"/>
+          <base-version epoch="0" ver="8.13.6" rel="9" md5sum="23eef89b87896a82761ef78129617bee" buildtime="1146566142" sequence_info="sendmail-8.13.6-9-3c03facd069eef0a1a75831f7a323ed8011111211a11819f30"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>sendmail</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="8.13.6" rel="9.3"/>
+      <checksum type="sha" pkgid="YES">16ce399d3a79bc900c01da5ea6646d9cf2b8e4b7</checksum>
+      <time file="1150283764" build="1150280704"/>
+      <size package="1240437" installed="2528974" archive="2570964"/>
+      <location href="rpm/x86_64/sendmail-8.13.6-9.3.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="sendmail" epoch="0" ver="8.13.6" rel="9.3" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="sendmail"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/sendmail-8.13.6-9.3.x86_64.patch.rpm"/>
+          <checksum type="sha">c26af4b1574234548d1512f0976ea5ca3a7d6c45</checksum>
+          <time file="1150284707" build="1150280704"/>
+          <size package="527946" archive="1201928"/>
+          <base-version epoch="0" ver="8.13.6" rel="9"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/sendmail-8.13.6-9_9.3.x86_64.delta.rpm"/>
+          <checksum type="sha">599537e89eb115f11338818ecd3fef934119c7ff</checksum>
+          <time file="1150284709" build="1150280704"/>
+          <size package="117590" archive="0"/>
+          <base-version epoch="0" ver="8.13.6" rel="9" md5sum="731cdca761f212083aa5d6f945c35d3d" buildtime="1146559174" sequence_info="sendmail-8.13.6-9-86dcfd877fa29236ef2aaaa653ee1b09011111211a11819f30"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+  </atoms>
+</patch>

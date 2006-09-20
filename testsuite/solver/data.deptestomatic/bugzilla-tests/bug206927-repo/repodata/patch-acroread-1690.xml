@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--PATCHINFO id="4a06d3c7894cd9403d3b4a4000e47566"!-->
+<patch
+    xmlns="http://novell.com/package/metadata/suse/patch"
+    xmlns:yum="http://linux.duke.edu/metadata/common"
+    xmlns:rpm="http://linux.duke.edu/metadata/rpm"
+    xmlns:suse="http://novell.com/package/metadata/suse/common"
+    patchid="acroread-1690"
+    timestamp="1151514693"
+    engine="1.0">
+  <yum:name>acroread</yum:name>
+  <summary lang="en">acroread: Security Update to version 7.0.8</summary>
+  <summary lang="de">acroread: Sicherheitsupdate auf Version 7.0.8</summary>
+  <description lang="en">Various unspecified security problems have been fixed in 
+Acrobat Reader version 7.0.8 (CVE-2006-3093), contained in 
+this update.
+</description>
+  <description lang="de">Verschiedene vom Hersteller nicht weiter spezifizierte 
+Sicherheitsprobleme wurden in Adobe Reader behoben 
+(CVE-2006-3093). Dieser Patch enthält Version 7.0.8 des 
+Programs.
+</description>
+  <yum:version ver="1690" rel="0"/>
+  <rpm:requires>
+  <rpm:entry kind="atom" name="acroread" epoch="0" ver="7.0.8" rel="0.4" flags="EQ"/>
+  </rpm:requires>
+  <category>security</category>
+  <atoms>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>acroread</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="7.0.8" rel="0.4"/>
+      <checksum type="sha" pkgid="YES">708a52eb6ef7ae192d37f5d9c3e4239344692b19</checksum>
+      <time file="1151519162" build="1151514693"/>
+      <size package="41688500" installed="115208263" archive="115267944"/>
+      <location href="rpm/i586/acroread-7.0.8-0.4.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="acroread" epoch="0" ver="7.0.8" rel="0.4" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="acroread"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/acroread-7.0.8-0.4.i586.patch.rpm"/>
+          <checksum type="sha">21f9663dd8bdf9c842b97064f8ef5787436e92e2</checksum>
+          <time file="1151519815" build="1151514693"/>
+          <size package="33129096" archive="95568540"/>
+          <base-version epoch="0" ver="7.0.5" rel="15"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/acroread-7.0.5_7.0.8-15_0.4.i586.delta.rpm"/>
+          <checksum type="sha">3ed7674b8ea67a44a802f37f5e4a7b016967087f</checksum>
+          <time file="1151519922" build="1151514693"/>
+          <size package="11024815" archive="0"/>
+          <base-version epoch="0" ver="7.0.5" rel="15" md5sum="2444f55fa7d2786713c78e83d2ccab76" buildtime="1146555851" sequence_info="acroread-7.0.5-15-50866c108fc85f89f950185557c8d4f8d95210"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+  </atoms>
+</patch>

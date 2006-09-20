@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--PATCHINFO id="c59dbe27519f85644263f4741d46b1ed"!-->
+<patch
+    xmlns="http://novell.com/package/metadata/suse/patch"
+    xmlns:yum="http://linux.duke.edu/metadata/common"
+    xmlns:rpm="http://linux.duke.edu/metadata/rpm"
+    xmlns:suse="http://novell.com/package/metadata/suse/common"
+    patchid="ifolder3-1584"
+    timestamp="1149936987"
+    engine="1.0">
+  <yum:name>ifolder3</yum:name>
+  <summary lang="en">This update fixes a problem with iFolder3 during an online update</summary>
+  <summary lang="de">Dieses Update behebt ein iFolder3 Problem während eines Online-Updates</summary>
+  <description lang="en"> This Fix solves a problem with iFolder (ifolder3 patch 
+(online update) not installable) during an online update 
+</description>
+  <description lang="de"> Dieser Fix behebt ein Problem von iFolder beim 
+Online-Update (ifolder3 patch (online update) not 
+installable) 
+</description>
+  <yum:version ver="1584" rel="0"/>
+  <rpm:requires>
+  <rpm:entry kind="atom" name="ifolder3" epoch="0" ver="3.4.6146.1" rel="0.5" flags="EQ"/>
+  <rpm:entry kind="atom" name="nautilus-ifolder3" epoch="0" ver="3.4.6146.1" rel="0.5" flags="EQ"/>
+  <rpm:entry kind="atom" name="simias" epoch="0" ver="1.4.6146.1" rel="0.5" flags="EQ"/>
+  <rpm:entry kind="atom" name="simias-bonjour" epoch="0" ver="1.4.6146.1" rel="0.3" flags="EQ"/>
+  </rpm:requires>
+  <category>recommended</category>
+  <atoms>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>ifolder3</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="3.4.6146.1" rel="0.5"/>
+      <checksum type="sha" pkgid="YES">7f547dba7f77e8edb5d893c213563cb32dd1af21</checksum>
+      <time file="1149945729" build="1149936987"/>
+      <size package="3925242" installed="12194936" archive="12579776"/>
+      <location href="rpm/i586/ifolder3-3.4.6146.1-0.5.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="ifolder3" epoch="0" ver="3.4.6146.1" rel="0.5" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="ifolder3"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/ifolder3-3.4.6146.1-0.5.i586.patch.rpm"/>
+          <checksum type="sha">d36d26d3f9498942be3bf3696f31df154cc8f5c3</checksum>
+          <time file="1149945962" build="1149936987"/>
+          <size package="1227421" archive="7042820"/>
+          <base-version epoch="0" ver="3.4.6110.1" rel="5"/>
+          <base-version epoch="0" ver="3.4.6146.1" rel="0.4"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/ifolder3-3.4.6110.1_3.4.6146.1-5_0.5.i586.delta.rpm"/>
+          <checksum type="sha">6e4346ec9e5c8e008f662676a54a4746149a7685</checksum>
+          <time file="1149945972" build="1149936987"/>
+          <size package="434972" archive="0"/>
+          <base-version epoch="0" ver="3.4.6110.1" rel="5" md5sum="4e988b0773d7d97a5ae6be69d4fabe78" buildtime="1146623375" sequence_info="ifolder3-3.4.6110.1-5-e1ca5c0495cd9355782019670df1cfbee884"/>
+        </deltarpm>
+        <deltarpm>
+          <location href="rpm/i586/ifolder3-3.4.6146.1-0.4_0.5.i586.delta.rpm"/>
+          <checksum type="sha">bf8001a5674323142a57dbd9c045ee3324535ae3</checksum>
+          <time file="1149945978" build="1149936987"/>
+          <size package="218655" archive="0"/>
+          <base-version epoch="0" ver="3.4.6146.1" rel="0.4" md5sum="ccd421ccd75aefc9869ded34781ee10a" buildtime="1149570198" sequence_info="ifolder3-3.4.6146.1-0.4-f60a83e969d5e8e150598bd3284cf053f21da840"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>ifolder3</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="3.4.6146.1" rel="0.5"/>
+      <checksum type="sha" pkgid="YES">2baa6f7a80bca19097c4939927cfb6a67c268a3e</checksum>
+      <time file="1149945924" build="1149939190"/>
+      <size package="3961551" installed="12272288" archive="12657128"/>
+      <location href="rpm/x86_64/ifolder3-3.4.6146.1-0.5.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="ifolder3" epoch="0" ver="3.4.6146.1" rel="0.5" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="ifolder3"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/ifolder3-3.4.6146.1-0.5.x86_64.patch.rpm"/>
+          <checksum type="sha">6e979b9ec5e2c6baf9717988e237fdb409deb4dd</checksum>
+          <time file="1149945989" build="1149939190"/>
+          <size package="1226428" archive="7045976"/>
+          <base-version epoch="0" ver="3.4.6110.1" rel="5"/>
+          <base-version epoch="0" ver="3.4.6146.1" rel="0.4"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/ifolder3-3.4.6110.1_3.4.6146.1-5_0.5.x86_64.delta.rpm"/>
+          <checksum type="sha">9d68d2f37dd2e70388e790c630d691a0bdeedc78</checksum>
+          <time file="1149945998" build="1149939190"/>
+          <size package="434401" archive="0"/>
+          <base-version epoch="0" ver="3.4.6110.1" rel="5" md5sum="b16e737bd6d90e3ff4d991bf3b46dcb0" buildtime="1146624700" sequence_info="ifolder3-3.4.6110.1-5-a4e9408276ce928c27b44ff901fb0dfce884"/>
+        </deltarpm>
+        <deltarpm>
+          <location href="rpm/x86_64/ifolder3-3.4.6146.1-0.4_0.5.x86_64.delta.rpm"/>
+          <checksum type="sha">f603f06e89efa8cf49ab8634abd99ca90cb2ceaf</checksum>
+          <time file="1149946004" build="1149939190"/>
+          <size package="220024" archive="0"/>
+          <base-version epoch="0" ver="3.4.6146.1" rel="0.4" md5sum="4c7700e9de716c1d196b66903b04cfcb" buildtime="1149563881" sequence_info="ifolder3-3.4.6146.1-0.4-4a1e55a97e25172080c04faaeb1d1187f21da840"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>nautilus-ifolder3</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="3.4.6146.1" rel="0.5"/>
+      <checksum type="sha" pkgid="YES">28283a65019fb1778008864dc423196a67ddede3</checksum>
+      <time file="1149945757" build="1149941631"/>
+      <size package="45468" installed="113497" archive="123948"/>
+      <location href="rpm/i586/nautilus-ifolder3-3.4.6146.1-0.5.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="nautilus-ifolder3" epoch="0" ver="3.4.6146.1" rel="0.5" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="nautilus-ifolder3"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/nautilus-ifolder3-3.4.6146.1-0.5.i586.patch.rpm"/>
+          <checksum type="sha">03b64763695a38fc911fb5aaecfed07cd8cadb91</checksum>
+          <time file="1149946010" build="1149941631"/>
+          <size package="41064" archive="101400"/>
+          <base-version epoch="0" ver="3.4.6110.1" rel="5"/>
+          <base-version epoch="0" ver="3.4.6146.1" rel="0.4"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/nautilus-ifolder3-3.4.6110.1_3.4.6146.1-5_0.5.i586.delta.rpm"/>
+          <checksum type="sha">3e5cd32d72b588229558e4f696117c7335e06162</checksum>
+          <time file="1149946011" build="1149941631"/>
+          <size package="14344" archive="0"/>
+          <base-version epoch="0" ver="3.4.6110.1" rel="5" md5sum="f783dda10cbecaae1a56d9a0c399656e" buildtime="1146626929" sequence_info="nautilus-ifolder3-3.4.6110.1-5-e24e35c4709a13995e92e92194d5b6b2f7"/>
+        </deltarpm>
+        <deltarpm>
+          <location href="rpm/i586/nautilus-ifolder3-3.4.6146.1-0.4_0.5.i586.delta.rpm"/>
+          <checksum type="sha">3cd0b222d6f7f9782caa07b0e6afdf5db6c3f402</checksum>
+          <time file="1149946011" build="1149941631"/>
+          <size package="14035" archive="0"/>
+          <base-version epoch="0" ver="3.4.6146.1" rel="0.4" md5sum="2ab2361cb39e4e2cd4624db03f846349" buildtime="1149571741" sequence_info="nautilus-ifolder3-3.4.6146.1-0.4-fc91a0858cea451b998990fd1104c740f7"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>nautilus-ifolder3</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="3.4.6146.1" rel="0.5"/>
+      <checksum type="sha" pkgid="YES">9a3ab1f5072c18c094d5f49d097255d1de744ef3</checksum>
+      <time file="1149945937" build="1149944152"/>
+      <size package="48449" installed="157081" archive="167536"/>
+      <location href="rpm/x86_64/nautilus-ifolder3-3.4.6146.1-0.5.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="nautilus-ifolder3" epoch="0" ver="3.4.6146.1" rel="0.5" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="nautilus-ifolder3"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/nautilus-ifolder3-3.4.6146.1-0.5.x86_64.patch.rpm"/>
+          <checksum type="sha">9af53f06b475909f86ae2ae63df8b82df7c8a286</checksum>
+          <time file="1149946012" build="1149944152"/>
+          <size package="44053" archive="144876"/>
+          <base-version epoch="0" ver="3.4.6110.1" rel="5"/>
+          <base-version epoch="0" ver="3.4.6146.1" rel="0.4"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/nautilus-ifolder3-3.4.6110.1_3.4.6146.1-5_0.5.x86_64.delta.rpm"/>
+          <checksum type="sha">5526ecb80f03d57cff230010db3db5b68bff3dae</checksum>
+          <time file="1149946013" build="1149944152"/>
+          <size package="14731" archive="0"/>
+          <base-version epoch="0" ver="3.4.6110.1" rel="5" md5sum="dbbdc6f49b41619b6b33c4381ad5e1e0" buildtime="1146626456" sequence_info="nautilus-ifolder3-3.4.6110.1-5-de15afd05c924b4dd8a178b255aaba91f7"/>
+        </deltarpm>
+        <deltarpm>
+          <location href="rpm/x86_64/nautilus-ifolder3-3.4.6146.1-0.4_0.5.x86_64.delta.rpm"/>
+          <checksum type="sha">c7ca019ea2237b3623c3a80a830f1ea01e722197</checksum>
+          <time file="1149946013" build="1149944152"/>
+          <size package="14360" archive="0"/>
+          <base-version epoch="0" ver="3.4.6146.1" rel="0.4" md5sum="c4e4657114da51635ed7d7a090d35c0f" buildtime="1149565534" sequence_info="nautilus-ifolder3-3.4.6146.1-0.4-fb852591c3500af890fbd4860c6e8e3bf7"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>simias</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="1.4.6146.1" rel="0.5"/>
+      <checksum type="sha" pkgid="YES">e5af4567110dac47f551626ce9b589352dbdea4e</checksum>
+      <time file="1149945674" build="1149913251"/>
+      <size package="964344" installed="2866530" archive="2875272"/>
+      <location href="rpm/i586/simias-1.4.6146.1-0.5.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="simias" epoch="0" ver="1.4.6146.1" rel="0.5" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="simias"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/simias-1.4.6146.1-0.5.i586.patch.rpm"/>
+          <checksum type="sha">600ceaf82b0ad13a7d8ed21933d33fb8f2126243</checksum>
+          <time file="1149946015" build="1149913251"/>
+          <size package="812634" archive="2029604"/>
+          <base-version epoch="0" ver="1.4.6110.1" rel="5"/>
+          <base-version epoch="0" ver="1.4.6146.1" rel="0.4"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/simias-1.4.6110.1_1.4.6146.1-5_0.5.i586.delta.rpm"/>
+          <checksum type="sha">9c773745f3c460076136bb54f4dd352bb463e763</checksum>
+          <time file="1149946017" build="1149913251"/>
+          <size package="34293" archive="0"/>
+          <base-version epoch="0" ver="1.4.6110.1" rel="5" md5sum="9d1eb25e5a5a8667a4728e2e0bda5e56" buildtime="1146557568" sequence_info="simias-1.4.6110.1-5-983fbbc3b046f2465be64ee0f7e5a9faf6"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>simias</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="1.4.6146.1" rel="0.5"/>
+      <checksum type="sha" pkgid="YES">2058a3d8df53940d69c1858a05b1bd322cd7e6d6</checksum>
+      <time file="1149945889" build="1149918370"/>
+      <size package="1004394" installed="3012154" archive="3020896"/>
+      <location href="rpm/x86_64/simias-1.4.6146.1-0.5.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="simias" epoch="0" ver="1.4.6146.1" rel="0.5" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="simias"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/simias-1.4.6146.1-0.5.x86_64.patch.rpm"/>
+          <checksum type="sha">3aaac84969acccb66150866d8727b8adfa9505b0</checksum>
+          <time file="1149946022" build="1149918370"/>
+          <size package="833127" archive="2107320"/>
+          <base-version epoch="0" ver="1.4.6110.1" rel="5"/>
+          <base-version epoch="0" ver="1.4.6146.1" rel="0.4"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/simias-1.4.6110.1_1.4.6146.1-5_0.5.x86_64.delta.rpm"/>
+          <checksum type="sha">7ad1a4008d55aec9db4f98b461eee76f49f3e178</checksum>
+          <time file="1149946024" build="1149918370"/>
+          <size package="34094" archive="0"/>
+          <base-version epoch="0" ver="1.4.6110.1" rel="5" md5sum="27f5563f2fc0d69298e46e88f3c1ac7f" buildtime="1146558875" sequence_info="simias-1.4.6110.1-5-eb153a5598e0021193a12b9a69c3e1bcf6"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>simias-bonjour</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="1.4.6146.1" rel="0.3"/>
+      <checksum type="sha" pkgid="YES">187434dca96eb6bf308d2417fd36aba66ad65b2d</checksum>
+      <time file="1149945759" build="1149915811"/>
+      <size package="24346" installed="44798" archive="45796"/>
+      <location href="rpm/i586/simias-bonjour-1.4.6146.1-0.3.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="simias-bonjour" epoch="0" ver="1.4.6146.1" rel="0.3" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="simias-bonjour"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/simias-bonjour-1.4.6146.1-0.3.i586.patch.rpm"/>
+          <checksum type="sha">743d5116fd46a1364d1f0e3540cabe59ac60e997</checksum>
+          <time file="1149946028" build="1149915811"/>
+          <size package="19703" archive="34076"/>
+          <base-version epoch="0" ver="1.4.6110.1" rel="5"/>
+          <base-version epoch="0" ver="1.4.6146.1" rel="0.2"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/simias-bonjour-1.4.6110.1_1.4.6146.1-5_0.3.i586.delta.rpm"/>
+          <checksum type="sha">3204253c9575a5bd15cdd06334a63d8ab5ec96bc</checksum>
+          <time file="1149946028" build="1149915811"/>
+          <size package="5374" archive="0"/>
+          <base-version epoch="0" ver="1.4.6110.1" rel="5" md5sum="11635afeea9997542d6bb7f0672e495f" buildtime="1146563450" sequence_info="simias-bonjour-1.4.6110.1-5-7429b740bd5f815ba0037f4a5f5e8e2e50"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>simias-bonjour</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="1.4.6146.1" rel="0.3"/>
+      <checksum type="sha" pkgid="YES">3b086e496bb85a37fe77ca795d8b6077c3caf362</checksum>
+      <time file="1149945939" build="1149927979"/>
+      <size package="24960" installed="48006" archive="49004"/>
+      <location href="rpm/x86_64/simias-bonjour-1.4.6146.1-0.3.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="simias-bonjour" epoch="0" ver="1.4.6146.1" rel="0.3" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="simias-bonjour"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/simias-bonjour-1.4.6146.1-0.3.x86_64.patch.rpm"/>
+          <checksum type="sha">2d4842ece977f82dc08ea90b3372791a3ddfded5</checksum>
+          <time file="1149946029" build="1149927979"/>
+          <size package="19677" archive="34076"/>
+          <base-version epoch="0" ver="1.4.6110.1" rel="5"/>
+          <base-version epoch="0" ver="1.4.6146.1" rel="0.2"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/simias-bonjour-1.4.6110.1_1.4.6146.1-5_0.3.x86_64.delta.rpm"/>
+          <checksum type="sha">84e51552b71d17fb99ef5916f9a3615f5d6b6e40</checksum>
+          <time file="1149946030" build="1149927979"/>
+          <size package="5371" archive="0"/>
+          <base-version epoch="0" ver="1.4.6110.1" rel="5" md5sum="c501236a855d671968891f70a8553951" buildtime="1146559374" sequence_info="simias-bonjour-1.4.6110.1-5-1b4ec3d8143e2ff352a9d00664c868b450"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+  </atoms>
+</patch>

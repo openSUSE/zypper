@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--PATCHINFO id="2a89e2c3c7fc198c39bc8145a27c4f18"!-->
+<patch
+    xmlns="http://novell.com/package/metadata/suse/patch"
+    xmlns:yum="http://linux.duke.edu/metadata/common"
+    xmlns:rpm="http://linux.duke.edu/metadata/rpm"
+    xmlns:suse="http://novell.com/package/metadata/suse/common"
+    patchid="squirrelmail-1837"
+    timestamp="1153173151"
+    engine="1.0">
+  <yum:name>squirrelmail</yum:name>
+  <summary lang="en">squirrelmail: Security fix to protect against local file inclusion</summary>
+  <summary lang="de">squirrelmail: Sicherheitsupdate das eine &quot;local file inclusion&quot; behebt</summary>
+  <description lang="en">This update fixes a local file inclusion problem in the
+squirrelmail webmail frontend. The issue is tracked by the
+Mitre CVE ID CVE-2006-2842.
+</description>
+  <description lang="de">Dieses Update behebt ein Problem beim inkludieren von
+lokalen Dateien in PHP im Squirrelmail Webmail Frontend.
+Dieses Problem hat die CVE ID CVE-2006-2842.
+</description>
+  <yum:version ver="1837" rel="0"/>
+  <rpm:requires>
+    <rpm:entry kind="atom" name="squirrelmail" epoch="0" ver="1.4.5" rel="18.2" flags="EQ"/>
+  </rpm:requires>
+  <category>security</category>
+  <atoms>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>squirrelmail</name>
+      <arch>noarch</arch>
+      <version epoch="0" ver="1.4.5" rel="18.2"/>
+      <checksum type="sha" pkgid="YES">325349a1285ad1cff7f459b234131bdb5e91740d</checksum>
+      <time file="1153240178" build="1153173151"/>
+      <size package="587951" installed="2686347" archive="2768068"/>
+      <location href="rpm/noarch/squirrelmail-1.4.5-18.2.noarch.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="squirrelmail" epoch="0" ver="1.4.5" rel="18.2" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="squirrelmail"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/noarch/squirrelmail-1.4.5-18.2.noarch.patch.rpm"/>
+          <checksum type="sha">b973d96c811383e79953e397581ff36911cf663e</checksum>
+          <time file="1153242188" build="1153173151"/>
+          <size package="55669" archive="11112"/>
+          <base-version epoch="0" ver="1.4.5" rel="18"/>
+        </patchrpm>
+      </pkgfiles>
+    </package>
+  </atoms>
+</patch>

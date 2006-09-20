@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--PATCHINFO id="df77e59cae1471182f3ad298833300d0"!-->
+<patch
+    xmlns="http://novell.com/package/metadata/suse/patch"
+    xmlns:yum="http://linux.duke.edu/metadata/common"
+    xmlns:rpm="http://linux.duke.edu/metadata/rpm"
+    xmlns:suse="http://novell.com/package/metadata/suse/common"
+    patchid="tiff-1594"
+    timestamp="1150128311"
+    engine="1.0">
+  <yum:name>tiff</yum:name>
+  <summary lang="en">Tiff security update</summary>
+  <summary lang="de">Tiff Sicherheits Update</summary>
+  <description lang="en">This update fixes a stack-based buffer overflow in 
+tiffsplit that can be triggered with long filemanes 
+(CVE-2006-2656) and a buffer overflow in tiff2pdf. Both 
+tools are not setuid but may be exploited in conjunction 
+with other applications. Exploitation very unlikely.
+</description>
+  <description lang="de">Mit diesem Update wird ein Speicherüberlauf in tiffsplit 
+(CVE-2006-2656) und in tiff2pdf behoben. Die Gefahr, die 
+durch diese Fehler ausgehen ist sehr gering.
+</description>
+  <yum:version ver="1594" rel="0"/>
+  <rpm:requires>
+  <rpm:entry kind="atom" name="tiff" epoch="0" ver="3.8.2" rel="5.6" flags="EQ"/>
+  </rpm:requires>
+  <category>security</category>
+  <atoms>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>tiff</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="3.8.2" rel="5.6"/>
+      <checksum type="sha" pkgid="YES">35ecd5d5c595612944b83fbb7b16010f5b27adc2</checksum>
+      <time file="1150241032" build="1150128311"/>
+      <size package="508519" installed="1475479" archive="1505616"/>
+      <location href="rpm/i586/tiff-3.8.2-5.6.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="tiff" epoch="0" ver="3.8.2" rel="5.6" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="tiff"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/tiff-3.8.2-5.6.i586.patch.rpm"/>
+          <checksum type="sha">eda7899fb807264973d0d532780b24f10674540e</checksum>
+          <time file="1150241445" build="1150128311"/>
+          <size package="58693" archive="110852"/>
+          <base-version epoch="0" ver="3.8.2" rel="3"/>
+        </patchrpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>tiff</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="3.8.2" rel="5.6"/>
+      <checksum type="sha" pkgid="YES">6af90d300c3b2eed888f26de5dace475d7d6f222</checksum>
+      <time file="1150240531" build="1150128325"/>
+      <size package="537253" installed="1607048" archive="1637188"/>
+      <location href="rpm/ppc/tiff-3.8.2-5.6.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="tiff" epoch="0" ver="3.8.2" rel="5.6" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="tiff"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/tiff-3.8.2-5.6.ppc.patch.rpm"/>
+          <checksum type="sha">0927a6126bd1c218b2d56332f29fa9b1ca707e97</checksum>
+          <time file="1150241451" build="1150128325"/>
+          <size package="38212" archive="60408"/>
+          <base-version epoch="0" ver="3.8.2" rel="3"/>
+        </patchrpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>tiff</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="3.8.2" rel="5.6"/>
+      <checksum type="sha" pkgid="YES">3fa02d7322a9da43cc040f23d6681dcc0f02db35</checksum>
+      <time file="1150239225" build="1150128143"/>
+      <size package="515812" installed="1531559" archive="1561696"/>
+      <location href="rpm/x86_64/tiff-3.8.2-5.6.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="tiff" epoch="0" ver="3.8.2" rel="5.6" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="tiff"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/tiff-3.8.2-5.6.x86_64.patch.rpm"/>
+          <checksum type="sha">1ccc752d371cadaacecdd24bc54d184d61660f01</checksum>
+          <time file="1150241455" build="1150128143"/>
+          <size package="61356" archive="115728"/>
+          <base-version epoch="0" ver="3.8.2" rel="3"/>
+        </patchrpm>
+      </pkgfiles>
+    </package>
+  </atoms>
+</patch>

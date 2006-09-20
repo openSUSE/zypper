@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--PATCHINFO id="220d03ce45c315af5b480631ed39b8d9"!-->
+<patch
+    xmlns="http://novell.com/package/metadata/suse/patch"
+    xmlns:yum="http://linux.duke.edu/metadata/common"
+    xmlns:rpm="http://linux.duke.edu/metadata/rpm"
+    xmlns:suse="http://novell.com/package/metadata/suse/common"
+    patchid="mc-1610"
+    timestamp="1150296883"
+    engine="1.0">
+  <yum:name>mc</yum:name>
+  <summary lang="en">fixed displaying non-ASCII characters in "mc"in non-UTF-8 locales</summary>
+  <summary lang="de">Behebt ein Problem in mc mit nicht-ASCII Zeichen in Umgebung ohne UTF8</summary>
+  <description lang="en">Due to an incompatibility between Slang2 and patched Slang1 
+libraries, the displaying of non-ASCII characters was 
+broken in non-UTF-8 locales. It had the biggest impact on 
+locales like ru_RU@KOI8R. The bug did not appear in UTF-8 
+locales, which are the default. 
+</description>
+  <description lang="de">Aufgrund einer Inkompatibilität zwischen den Slang2 und den 
+gepatchten Slang1 Bibliotheken war die Darstellung von 
+nicht-ASCII Zeichen in einer Umgebung ohne UTF8 kaputt. 
+Auswirkungen gab es u.a. auf Variablen wie ru_RU@KOI8R. 
+Unter Verwendung von UTF8 tritt dies Fehlverhalten nicht 
+auf.
+</description>
+  <yum:version ver="1610" rel="0"/>
+  <rpm:requires>
+  <rpm:entry kind="atom" name="mc" epoch="0" ver="4.6.1" rel="34.3" flags="EQ"/>
+  </rpm:requires>
+  <category>recommended</category>
+  <atoms>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>mc</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="4.6.1" rel="34.3"/>
+      <checksum type="sha" pkgid="YES">9853b06e301b064276938ca0589d8824e1c7c532</checksum>
+      <time file="1150455848" build="1150296883"/>
+      <size package="1592961" installed="4824275" archive="4849536"/>
+      <location href="rpm/i586/mc-4.6.1-34.3.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="mc" epoch="0" ver="4.6.1" rel="34.3" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="mc"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/mc-4.6.1-34.3.i586.patch.rpm"/>
+          <checksum type="sha">a17638ccfb71a1e2943858e3a242f798eba1ffe3</checksum>
+          <time file="1150459370" build="1150296883"/>
+          <size package="283571" archive="551964"/>
+          <base-version epoch="0" ver="4.6.1" rel="34"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/mc-4.6.1-34_34.3.i586.delta.rpm"/>
+          <checksum type="sha">35a017ac12ff22b76a0af2a2c0b81e1fe0dd3332</checksum>
+          <time file="1150459373" build="1150296883"/>
+          <size package="70701" archive="0"/>
+          <base-version epoch="0" ver="4.6.1" rel="34" md5sum="9ab7cff612ecbaee3ec797604572b159" buildtime="1146558880" sequence_info="mc-4.6.1-34-82805cd7b3d74826fc473903540a7b460274ac20"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>mc</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="4.6.1" rel="34.3"/>
+      <checksum type="sha" pkgid="YES">97718d998e0537e625665e95c0e4ee90e08b6e71</checksum>
+      <time file="1150455220" build="1150301672"/>
+      <size package="1613509" installed="4909435" archive="4934696"/>
+      <location href="rpm/ppc/mc-4.6.1-34.3.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="mc" epoch="0" ver="4.6.1" rel="34.3" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="mc"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/mc-4.6.1-34.3.ppc.patch.rpm"/>
+          <checksum type="sha">d75abdf050ede66a93d9856f515e50abff1bc7e3</checksum>
+          <time file="1150459377" build="1150301672"/>
+          <size package="304214" archive="634948"/>
+          <base-version epoch="0" ver="4.6.1" rel="34"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/mc-4.6.1-34_34.3.ppc.delta.rpm"/>
+          <checksum type="sha">fa31dab56540fbbef10007821bc44598f8405ca6</checksum>
+          <time file="1150459380" build="1150301672"/>
+          <size package="73550" archive="0"/>
+          <base-version epoch="0" ver="4.6.1" rel="34" md5sum="25769cd6ad2ff27893005068e39361a1" buildtime="1146614290" sequence_info="mc-4.6.1-34-e371f2b23e571dbc510ae763e6e106e20274ac20"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>mc</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="4.6.1" rel="34.3"/>
+      <checksum type="sha" pkgid="YES">8c99239101a8a8386f9904875b232dcd14391bd7</checksum>
+      <time file="1150455280" build="1150297231"/>
+      <size package="1629473" installed="4901383" archive="4926648"/>
+      <location href="rpm/x86_64/mc-4.6.1-34.3.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="mc" epoch="0" ver="4.6.1" rel="34.3" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="mc"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/mc-4.6.1-34.3.x86_64.patch.rpm"/>
+          <checksum type="sha">f9872d5612c12c751b500e67291b7241884e05a8</checksum>
+          <time file="1150459383" build="1150297231"/>
+          <size package="323496" archive="631480"/>
+          <base-version epoch="0" ver="4.6.1" rel="34"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/mc-4.6.1-34_34.3.x86_64.delta.rpm"/>
+          <checksum type="sha">b779415fe4a3c97a6d113d6257036790cdf423a1</checksum>
+          <time file="1150459385" build="1150297231"/>
+          <size package="77450" archive="0"/>
+          <base-version epoch="0" ver="4.6.1" rel="34" md5sum="948980973f9e0e9c3f96f366aca7db28" buildtime="1146559587" sequence_info="mc-4.6.1-34-1da3e5f16a7dc8f5b126fd672830f69d0274ac20"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+  </atoms>
+</patch>

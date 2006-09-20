@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--PATCHINFO id="8919444cb35fe484a359dd5f54b67e12"!-->
+<patch
+    xmlns="http://novell.com/package/metadata/suse/patch"
+    xmlns:yum="http://linux.duke.edu/metadata/common"
+    xmlns:rpm="http://linux.duke.edu/metadata/rpm"
+    xmlns:suse="http://novell.com/package/metadata/suse/common"
+    patchid="syslog-ng-1446"
+    timestamp="1149001254"
+    engine="1.0">
+  <yum:name>syslog-ng</yum:name>
+  <summary lang="en">fix syslog startup failure</summary>
+  <summary lang="de">behebt startprobleme beim syslog</summary>
+  <description lang="en">This update fixes a problem, that syslog-ng refused to 
+start, if the initial connect attempt to a configured unix 
+socket log destination failed, instead to continue and try 
+to reconnect later.
+</description>
+  <description lang="de">Dieses Update behebt ein Problem, dass der Start von 
+syslog-ng fehl schlug, falls keine Verbindung zu einem in 
+der Konfiguration angegebenem Unix-Socket Log-Ziel möglich 
+war, anstatt später einen erneuten Verbindungsversuch zu 
+versuchen.
+</description>
+  <yum:version ver="1446" rel="0"/>
+  <rpm:requires>
+  <rpm:entry kind="atom" name="syslog-ng" epoch="0" ver="1.6.8" rel="20.3" flags="EQ"/>
+  </rpm:requires>
+  <category>recommended</category>
+  <atoms>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>syslog-ng</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="1.6.8" rel="20.3"/>
+      <checksum type="sha" pkgid="YES">b4d8f0c35afd361863bf23dd86afa9d690a7e2af</checksum>
+      <time file="1149034525" build="1149001254"/>
+      <size package="248395" installed="548934" archive="555220"/>
+      <location href="rpm/i586/syslog-ng-1.6.8-20.3.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="syslog-ng" epoch="0" ver="1.6.8" rel="20.3" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="syslog-ng"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/syslog-ng-1.6.8-20.3.i586.patch.rpm"/>
+          <checksum type="sha">914a54d81db2223dc15eb3c73c9a7fe0f27562a0</checksum>
+          <time file="1149035406" build="1149001254"/>
+          <size package="84453" archive="134272"/>
+          <base-version epoch="0" ver="1.6.8" rel="18"/>
+        </patchrpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>syslog-ng</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="1.6.8" rel="20.3"/>
+      <checksum type="sha" pkgid="YES">74a749bf0b3647a044bda3a23c1426039f39d906</checksum>
+      <time file="1149008711" build="1149001026"/>
+      <size package="252767" installed="583846" archive="590132"/>
+      <location href="rpm/ppc/syslog-ng-1.6.8-20.3.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="syslog-ng" epoch="0" ver="1.6.8" rel="20.3" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="syslog-ng"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/syslog-ng-1.6.8-20.3.ppc.patch.rpm"/>
+          <checksum type="sha">83006f93f5a5f37d31ea0a1af2780da5fcf51c10</checksum>
+          <time file="1149035408" build="1149001026"/>
+          <size package="88151" archive="169184"/>
+          <base-version epoch="0" ver="1.6.8" rel="18"/>
+        </patchrpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>syslog-ng</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="1.6.8" rel="20.3"/>
+      <checksum type="sha" pkgid="YES">5f9d876f8523a6fc08d97beacc9978392e25b7b1</checksum>
+      <time file="1149008218" build="1149001312"/>
+      <size package="259550" installed="579858" archive="586144"/>
+      <location href="rpm/x86_64/syslog-ng-1.6.8-20.3.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="syslog-ng" epoch="0" ver="1.6.8" rel="20.3" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="syslog-ng"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/syslog-ng-1.6.8-20.3.x86_64.patch.rpm"/>
+          <checksum type="sha">9f6083bc17f22882fe93ecb1831bf236211c3910</checksum>
+          <time file="1149035410" build="1149001312"/>
+          <size package="94436" archive="165196"/>
+          <base-version epoch="0" ver="1.6.8" rel="18"/>
+        </patchrpm>
+      </pkgfiles>
+    </package>
+  </atoms>
+</patch>

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--PATCHINFO id="9f6a0b86a959a3ee63fa5516edbaa7dd"!-->
+<patch
+    xmlns="http://novell.com/package/metadata/suse/patch"
+    xmlns:yum="http://linux.duke.edu/metadata/common"
+    xmlns:rpm="http://linux.duke.edu/metadata/rpm"
+    xmlns:suse="http://novell.com/package/metadata/suse/common"
+    patchid="aaa_skel-1444"
+    timestamp="1148662895"
+    engine="1.0">
+  <yum:name>aaa_skel</yum:name>
+  <summary lang="en">Fix Examples In inputrc</summary>
+  <summary lang="de">Beispiele in inputrc berichtigt</summary>
+  <description lang="en">In the file /etc/skel/.inputrc there were some mistyped 
+examples about configuring the terminal bell. 
+</description>
+  <description lang="de">In der Datei /etc/skel/.inputrc gab es einige fehlerhafte 
+Beispiele zur Konfiguration der Terminal-Glocke. 
+</description>
+  <yum:version ver="1444" rel="0"/>
+  <rpm:requires>
+  <rpm:entry kind="atom" name="aaa_skel" epoch="0" ver="2006.5.19" rel="0.2" flags="EQ"/>
+  </rpm:requires>
+  <category>recommended</category>
+  <atoms>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>aaa_skel</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="2006.5.19" rel="0.2"/>
+      <checksum type="sha" pkgid="YES">2d1e575fc446b3db371e7f312f4d3807194a53d2</checksum>
+      <time file="1148995315" build="1148662895"/>
+      <size package="18644" installed="22890" archive="25832"/>
+      <location href="rpm/i586/aaa_skel-2006.5.19-0.2.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="aaa_skel" epoch="0" ver="2006.5.19" rel="0.2" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="aaa_skel"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/aaa_skel-2006.5.19-0.2.i586.patch.rpm"/>
+          <checksum type="sha">6e4c7b4776047b92fdfbce3124459e46bd1bae31</checksum>
+          <time file="1148997606" build="1148662895"/>
+          <size package="11018" archive="1120"/>
+          <base-version epoch="0" ver="2006.3.29" rel="5"/>
+        </patchrpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>aaa_skel</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="2006.5.19" rel="0.2"/>
+      <checksum type="sha" pkgid="YES">8ac86947ac8d1339cbe015f050003995acd69940</checksum>
+      <time file="1148997570" build="1148703635"/>
+      <size package="18602" installed="22890" archive="25832"/>
+      <location href="rpm/ppc/aaa_skel-2006.5.19-0.2.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="aaa_skel" epoch="0" ver="2006.5.19" rel="0.2" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="aaa_skel"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/aaa_skel-2006.5.19-0.2.ppc.patch.rpm"/>
+          <checksum type="sha">5df7b5ac6de330f22538a5cf49545f274a52b674</checksum>
+          <time file="1148997608" build="1148703635"/>
+          <size package="11005" archive="1120"/>
+          <base-version epoch="0" ver="2006.3.29" rel="5"/>
+        </patchrpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>aaa_skel</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="2006.5.19" rel="0.2"/>
+      <checksum type="sha" pkgid="YES">1d7a73c85cebeeb806067070c05f9ff030786f90</checksum>
+      <time file="1148996565" build="1148657134"/>
+      <size package="18619" installed="22890" archive="25832"/>
+      <location href="rpm/x86_64/aaa_skel-2006.5.19-0.2.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="aaa_skel" epoch="0" ver="2006.5.19" rel="0.2" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="aaa_skel"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/aaa_skel-2006.5.19-0.2.x86_64.patch.rpm"/>
+          <checksum type="sha">82aac4c973948eb5a472b4d24530a3d3fb80f50b</checksum>
+          <time file="1148997609" build="1148657134"/>
+          <size package="11007" archive="1120"/>
+          <base-version epoch="0" ver="2006.3.29" rel="5"/>
+        </patchrpm>
+      </pkgfiles>
+    </package>
+  </atoms>
+</patch>

@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--PATCHINFO id="02697c680763306db5f7aa4460c427fc"!-->
+<patch
+    xmlns="http://novell.com/package/metadata/suse/patch"
+    xmlns:yum="http://linux.duke.edu/metadata/common"
+    xmlns:rpm="http://linux.duke.edu/metadata/rpm"
+    xmlns:suse="http://novell.com/package/metadata/suse/common"
+    patchid="compiz-1944"
+    timestamp="1154952127"
+    engine="1.0">
+  <yum:name>compiz</yum:name>
+  <summary lang="en">compiz: fix some bugs triggered by lotus client</summary>
+  <summary lang="de">compiz: behebt einige Probleme die mit Lotus Client auftraten</summary>
+  <description lang="en">Fix a set of issues found when testing lotus client. Issues
+may also occur in other applications.
+</description>
+  <description lang="de">Behebt eine Reihe von Problemen, die beim Testen mit Lotus
+Client aufgetreten sind. Möglicherweise sind auch andere
+Applikationen betroffen.
+</description>
+  <yum:version ver="1944" rel="0"/>
+  <rpm:requires>
+    <rpm:entry kind="atom" name="compiz" epoch="0" ver="cvs_060616" rel="1.16" flags="EQ"/>
+  </rpm:requires>
+  <category>recommended</category>
+  <atoms>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>compiz</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="cvs_060616" rel="1.16"/>
+      <checksum type="sha" pkgid="YES">5b9058eb62a1e52e535c680919b203e0b890c314</checksum>
+      <time file="1155124858" build="1154952127"/>
+      <size package="433030" installed="1827744" archive="1840684"/>
+      <location href="rpm/i586/compiz-cvs_060616-1.16.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="compiz" epoch="0" ver="cvs_060616" rel="1.16" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="compiz"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/compiz-cvs_060616-1.16.i586.patch.rpm"/>
+          <checksum type="sha">f0ebd0bd4287a14c2734f2a384494621d40c198d</checksum>
+          <time file="1155126628" build="1154952127"/>
+          <size package="419823" archive="1804492"/>
+          <base-version epoch="0" ver="cvs_060503" rel="3"/>
+          <base-version epoch="0" ver="cvs_060616" rel="1.13"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/compiz-cvs_060503_cvs_060616-3_1.16.i586.delta.rpm"/>
+          <checksum type="sha">c0c2a712fbee2b413da7ec393d31213ff33764b7</checksum>
+          <time file="1155126630" build="1154952127"/>
+          <size package="257229" archive="0"/>
+          <base-version epoch="0" ver="cvs_060503" rel="3" md5sum="a9140e99b41536305813ea1005acc621" buildtime="1146646453" sequence_info="compiz-cvs_060503-3-3ff0b3fffaacc4f42bc5dfbebafff47684"/>
+        </deltarpm>
+        <deltarpm>
+          <location href="rpm/i586/compiz-cvs_060616-1.13_1.16.i586.delta.rpm"/>
+          <checksum type="sha">ef28c72428f92a6884dbac762b7973a3464ce68c</checksum>
+          <time file="1155126632" build="1154952127"/>
+          <size package="45872" archive="0"/>
+          <base-version epoch="0" ver="cvs_060616" rel="1.13" md5sum="3309f5fd91c536cf436bec73eb0f91ea" buildtime="1153384155" sequence_info="compiz-cvs_060616-1.13-6da34d331ad68dfb3840bae4dac1036e8a10"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>compiz</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="cvs_060616" rel="1.16"/>
+      <checksum type="sha" pkgid="YES">80202a75833e754029012dfa313f8533b6923335</checksum>
+      <time file="1155124855" build="1155120850"/>
+      <size package="525978" installed="2138072" archive="2151012"/>
+      <location href="rpm/ppc/compiz-cvs_060616-1.16.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="compiz" epoch="0" ver="cvs_060616" rel="1.16" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="compiz"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/compiz-cvs_060616-1.16.ppc.patch.rpm"/>
+          <checksum type="sha">6a8e854aee3eb5d584f86b893224019664c5270e</checksum>
+          <time file="1155126636" build="1155120850"/>
+          <size package="512134" archive="2114820"/>
+          <base-version epoch="0" ver="cvs_060503" rel="3"/>
+          <base-version epoch="0" ver="cvs_060616" rel="1.13"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/compiz-cvs_060503_cvs_060616-3_1.16.ppc.delta.rpm"/>
+          <checksum type="sha">f3544eda8ff6170aaffc37988301946700092387</checksum>
+          <time file="1155126638" build="1155120850"/>
+          <size package="274925" archive="0"/>
+          <base-version epoch="0" ver="cvs_060503" rel="3" md5sum="c935188f9b7fa28c0a3b366061cb3912" buildtime="1146646593" sequence_info="compiz-cvs_060503-3-6362f7ae962e16ca6a943bcf433d027884"/>
+        </deltarpm>
+        <deltarpm>
+          <location href="rpm/ppc/compiz-cvs_060616-1.13_1.16.ppc.delta.rpm"/>
+          <checksum type="sha">f027fcb90c869bc8935d97a54bc2d5ad2b687782</checksum>
+          <time file="1155126639" build="1155120850"/>
+          <size package="47284" archive="0"/>
+          <base-version epoch="0" ver="cvs_060616" rel="1.13" md5sum="2fe801c839f3272a0fc9f14e12726f6b" buildtime="1153401526" sequence_info="compiz-cvs_060616-1.13-3040120af21abe11a1950737ab59c6c08a10"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>compiz</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="cvs_060616" rel="1.16"/>
+      <checksum type="sha" pkgid="YES">5302a046de125f7ea1ca21c64bf08f5ecb00a4c1</checksum>
+      <time file="1155124835" build="1155048662"/>
+      <size package="493099" installed="2023952" archive="2036932"/>
+      <location href="rpm/x86_64/compiz-cvs_060616-1.16.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="compiz" epoch="0" ver="cvs_060616" rel="1.16" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="compiz"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/compiz-cvs_060616-1.16.x86_64.patch.rpm"/>
+          <checksum type="sha">3067858b042bec1f0031ffeeb462bab778e01064</checksum>
+          <time file="1155126642" build="1155048662"/>
+          <size package="479116" archive="2000736"/>
+          <base-version epoch="0" ver="cvs_060503" rel="3"/>
+          <base-version epoch="0" ver="cvs_060616" rel="1.13"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/compiz-cvs_060503_cvs_060616-3_1.16.x86_64.delta.rpm"/>
+          <checksum type="sha">109e0e0c48fc00848a3acc98cf3ca6b92cfba336</checksum>
+          <time file="1155126644" build="1155048662"/>
+          <size package="293680" archive="0"/>
+          <base-version epoch="0" ver="cvs_060503" rel="3" md5sum="408a3b6cc585e3776a4ed4255224b7a7" buildtime="1146646271" sequence_info="compiz-cvs_060503-3-9fb39ebbdcf1218d18cff50c434b51d384"/>
+        </deltarpm>
+        <deltarpm>
+          <location href="rpm/x86_64/compiz-cvs_060616-1.13_1.16.x86_64.delta.rpm"/>
+          <checksum type="sha">f0860ee02be9a844c08e658dffb0274a6fbb7ae6</checksum>
+          <time file="1155126645" build="1155048662"/>
+          <size package="49160" archive="0"/>
+          <base-version epoch="0" ver="cvs_060616" rel="1.13" md5sum="1b73214f2ad003ba118dfffbd258d145" buildtime="1153390434" sequence_info="compiz-cvs_060616-1.13-c01146128cb06efbdcbc574bf70716c28a10"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+  </atoms>
+</patch>

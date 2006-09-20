@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--PATCHINFO id="75c1888a2da7d89e3e1c7ae94ab6374a"!-->
+<patch
+    xmlns="http://novell.com/package/metadata/suse/patch"
+    xmlns:yum="http://linux.duke.edu/metadata/common"
+    xmlns:rpm="http://linux.duke.edu/metadata/rpm"
+    xmlns:suse="http://novell.com/package/metadata/suse/common"
+    patchid="gpg-1664"
+    timestamp="1150721356"
+    engine="1.0">
+  <yum:name>gpg</yum:name>
+  <summary lang="en">gpg: Security update to fix crash on special crafted messages</summary>
+  <summary lang="de">gpg: Sicherheitsupdate zum Beheben eines Absturz dzurch spezielle Nachrichten</summary>
+  <description lang="en">It is possible to crash (denial of service) the GNU Privacy 
+Guard (gpg) by supplying a specifically crafted message 
+specifying a very large UID, which leads to an out of 
+memory situation or an integer overflow.  It is unclear if 
+this problem can be exploited to execute code.  This issue 
+is tracked by the Mitre CVE ID CVE-2006-3082.
+</description>
+  <description lang="de">Durch eine spezielle Nachricht ist es möglich gpg (GNU 
+Privacy Guard) zum Absturz zu bringen, indem eine grosse 
+UID angegeben wird, die dann zu einem Integer Überlauf 
+führt.  Es ist nicht bekannt ob dieser Fehler zum Ausführen 
+von Code benutzt werden kann.  Dieses Problem hat die Mitre 
+CVE ID CVE-2006-3082.
+</description>
+  <yum:version ver="1664" rel="0"/>
+  <rpm:requires>
+  <rpm:entry kind="atom" name="gpg" epoch="0" ver="1.4.2" rel="23.4" flags="EQ"/>
+  </rpm:requires>
+  <category>security</category>
+  <atoms>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>gpg</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="1.4.2" rel="23.4"/>
+      <checksum type="sha" pkgid="YES">13e2a06340102e21b8494e580b5c51acb5664364</checksum>
+      <time file="1150805328" build="1150721356"/>
+      <size package="1566519" installed="4769655" archive="4779640"/>
+      <location href="rpm/i586/gpg-1.4.2-23.4.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="gpg" epoch="0" ver="1.4.2" rel="23.4" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="gpg"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/gpg-1.4.2-23.4.i586.patch.rpm"/>
+          <checksum type="sha">a5035fc4f85c887c3a79f568499fdd56f286967a</checksum>
+          <time file="1150893038" build="1150721356"/>
+          <size package="666203" archive="1500972"/>
+          <base-version epoch="0" ver="1.4.2" rel="23"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/gpg-1.4.2-23_23.4.i586.delta.rpm"/>
+          <checksum type="sha">95e71b0ad24e0dc7cefdaabf76032a8a40bee19f</checksum>
+          <time file="1150893041" build="1150721356"/>
+          <size package="67510" archive="0"/>
+          <base-version epoch="0" ver="1.4.2" rel="23" md5sum="a95e9cd9c7bacc1ef6c6616191101704" buildtime="1146558534" sequence_info="gpg-1.4.2-23-c43b6ec39082e68724f32c9f80b0f63da810"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>gpg</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="1.4.2" rel="23.4"/>
+      <checksum type="sha" pkgid="YES">2fb67c86ee31cd31f40ba7b8fd34af0d059a1c1d</checksum>
+      <time file="1150805265" build="1150721260"/>
+      <size package="1599522" installed="4975593" archive="4985580"/>
+      <location href="rpm/ppc/gpg-1.4.2-23.4.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="gpg" epoch="0" ver="1.4.2" rel="23.4" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="gpg"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/gpg-1.4.2-23.4.ppc.patch.rpm"/>
+          <checksum type="sha">bbc6e4f8819367e9c978dacfd39495599da683b5</checksum>
+          <time file="1150893044" build="1150721260"/>
+          <size package="695824" archive="1706912"/>
+          <base-version epoch="0" ver="1.4.2" rel="23"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/gpg-1.4.2-23_23.4.ppc.delta.rpm"/>
+          <checksum type="sha">4bfbfffdda42b36f35705cd96b08f1ff33e9098f</checksum>
+          <time file="1150893047" build="1150721260"/>
+          <size package="62801" archive="0"/>
+          <base-version epoch="0" ver="1.4.2" rel="23" md5sum="61b4a976e398ad620c660dd02fd3c387" buildtime="1146557792" sequence_info="gpg-1.4.2-23-abc456749c3dde7a58bc11f75ef04b2ba810"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>gpg</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="1.4.2" rel="23.4"/>
+      <checksum type="sha" pkgid="YES">c0a86b001ccba0890d1567bd98542d550f714554</checksum>
+      <time file="1150805291" build="1150721403"/>
+      <size package="1607177" installed="4828072" archive="4838068"/>
+      <location href="rpm/x86_64/gpg-1.4.2-23.4.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="gpg" epoch="0" ver="1.4.2" rel="23.4" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="gpg"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/gpg-1.4.2-23.4.x86_64.patch.rpm"/>
+          <checksum type="sha">043d2d5b2a91b63f389ce9208e49107771e110d2</checksum>
+          <time file="1150893050" build="1150721403"/>
+          <size package="706730" archive="1559400"/>
+          <base-version epoch="0" ver="1.4.2" rel="23"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/gpg-1.4.2-23_23.4.x86_64.delta.rpm"/>
+          <checksum type="sha">d8a889584567c73201fad6125d7585217105404a</checksum>
+          <time file="1150893052" build="1150721403"/>
+          <size package="72533" archive="0"/>
+          <base-version epoch="0" ver="1.4.2" rel="23" md5sum="04e4e1757cc48f1412722a748ae84f92" buildtime="1146559302" sequence_info="gpg-1.4.2-23-15adb6b058d2df8a6eeac257f316f23ca810"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+  </atoms>
+</patch>

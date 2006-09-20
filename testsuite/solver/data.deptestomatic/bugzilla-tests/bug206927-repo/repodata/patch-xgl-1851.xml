@@ -1,0 +1,822 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--PATCHINFO id="2683a396f503b8c1478321539a2e8a2e"!-->
+<patch
+    xmlns="http://novell.com/package/metadata/suse/patch"
+    xmlns:yum="http://linux.duke.edu/metadata/common"
+    xmlns:rpm="http://linux.duke.edu/metadata/rpm"
+    xmlns:suse="http://novell.com/package/metadata/suse/common"
+    patchid="xgl-1851"
+    timestamp="1153384155"
+    engine="1.0">
+  <yum:name>xgl</yum:name>
+  <summary lang="en">Improved Xgl and compiz packages</summary>
+  <summary lang="de">Verbesserte Xgl und compiz Pakete</summary>
+  <description lang="en">This update includes the following improvements to Xgl and
+compiz:
+- Improved handling in Gnome environments
+- Better configuration utility
+- More information about known hardware
+- Bugfixes
+- Better YUY2 + YUV XVideo handling
+- Workaround for Java applications
+- Better icon support
+- Improved keyboard navigation
+- Updated Mesa version
+- Translations
+- Performance improvements
+</description>
+  <description lang="de">Dieses Update beinhaltet die folgenden Änderungen an Xgl
+und compiz:
+- Verbesserte Einbindung in Gnome
+- Besseres Konfigurationsprogramm
+- Mehr Information über bekannte Hardware
+- Bugfixes
+- Bessere Unterstützung von YUY2 + YUV XVideo
+- Workaround für Java Applikationen
+- Besssere Icon-Unterstützung
+- Verbesserte Tastatur-Navigation
+- Neue Mesa Version
+- Übersetzungen
+- Allgemeine Performance-Verbesserungen
+</description>
+  <yum:version ver="1851" rel="0"/>
+  <rpm:requires>
+    <rpm:entry kind="atom" name="compiz" epoch="0" ver="cvs_060616" rel="1.13" flags="EQ"/>
+    <rpm:entry kind="atom" name="control-center2" epoch="0" ver="2.12.2" rel="62.15" flags="EQ"/>
+    <rpm:entry kind="atom" name="control-center2-devel" epoch="0" ver="2.12.2" rel="62.15" flags="EQ"/>
+    <rpm:entry kind="atom" name="gnome-session" epoch="0" ver="2.12.0" rel="106.17" flags="EQ"/>
+    <rpm:entry kind="atom" name="libwnck" epoch="0" ver="2.12.2" rel="28.7" flags="EQ"/>
+    <rpm:entry kind="atom" name="libwnck-32bit" epoch="0" ver="2.12.2" rel="28.7" flags="EQ"/>
+    <rpm:entry kind="atom" name="libwnck-64bit" epoch="0" ver="2.12.2" rel="28.7" flags="EQ"/>
+    <rpm:entry kind="atom" name="libwnck-devel" epoch="0" ver="2.12.2" rel="28.7" flags="EQ"/>
+    <rpm:entry kind="atom" name="xgl" epoch="0" ver="cvs_060522" rel="0.10" flags="EQ"/>
+    <rpm:entry kind="atom" name="xgl-hardware-list" epoch="0" ver="060526" rel="1.10" flags="EQ"/>
+  </rpm:requires>
+  <category>recommended</category>
+  <atoms>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>compiz</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="cvs_060616" rel="1.13"/>
+      <checksum type="sha" pkgid="YES">d4d406babf1ca8997599be74becce6998a65b49a</checksum>
+      <time file="1153410791" build="1153384155"/>
+      <size package="433549" installed="1827680" archive="1840620"/>
+      <location href="rpm/i586/compiz-cvs_060616-1.13.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="compiz" epoch="0" ver="cvs_060616" rel="1.13" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="compiz"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/compiz-cvs_060616-1.13.i586.patch.rpm"/>
+          <checksum type="sha">47e48d63e5df17b111bc3b1adade04ec19f885c7</checksum>
+          <time file="1153411457" build="1153384155"/>
+          <size package="419734" archive="1804428"/>
+          <base-version epoch="0" ver="cvs_060503" rel="3"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/compiz-cvs_060503_cvs_060616-3_1.13.i586.delta.rpm"/>
+          <checksum type="sha">fd16cda2832f75d190eca694002d2a152670b5c8</checksum>
+          <time file="1153411459" build="1153384155"/>
+          <size package="257264" archive="0"/>
+          <base-version epoch="0" ver="cvs_060503" rel="3" md5sum="a9140e99b41536305813ea1005acc621" buildtime="1146646453" sequence_info="compiz-cvs_060503-3-3ff0b3fffaacc4f42bc5dfbebafff47684"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>compiz</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="cvs_060616" rel="1.13"/>
+      <checksum type="sha" pkgid="YES">372bc10634392fa4836e2bacf8ecb965d1ac1383</checksum>
+      <time file="1153410939" build="1153401526"/>
+      <size package="525309" installed="2137948" archive="2150888"/>
+      <location href="rpm/ppc/compiz-cvs_060616-1.13.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="compiz" epoch="0" ver="cvs_060616" rel="1.13" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="compiz"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/compiz-cvs_060616-1.13.ppc.patch.rpm"/>
+          <checksum type="sha">5185be262f30d74d3da2ddf9a9f76920f1072a6c</checksum>
+          <time file="1153411462" build="1153401526"/>
+          <size package="512029" archive="2114696"/>
+          <base-version epoch="0" ver="cvs_060503" rel="3"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/compiz-cvs_060503_cvs_060616-3_1.13.ppc.delta.rpm"/>
+          <checksum type="sha">44024a6442112147d02cfd307937b0437d2726cb</checksum>
+          <time file="1153411464" build="1153401526"/>
+          <size package="269494" archive="0"/>
+          <base-version epoch="0" ver="cvs_060503" rel="3" md5sum="c935188f9b7fa28c0a3b366061cb3912" buildtime="1146646593" sequence_info="compiz-cvs_060503-3-6362f7ae962e16ca6a943bcf433d027884"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>compiz</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="cvs_060616" rel="1.13"/>
+      <checksum type="sha" pkgid="YES">909829d91bb7ff10a3f32cedf82bbf70826713fc</checksum>
+      <time file="1153410929" build="1153390434"/>
+      <size package="492905" installed="2023888" archive="2036868"/>
+      <location href="rpm/x86_64/compiz-cvs_060616-1.13.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="compiz" epoch="0" ver="cvs_060616" rel="1.13" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="compiz"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/compiz-cvs_060616-1.13.x86_64.patch.rpm"/>
+          <checksum type="sha">3dbfc7d38a1500c79d1addb8459fc2ae6f0ed3ce</checksum>
+          <time file="1153411467" build="1153390434"/>
+          <size package="478338" archive="2000672"/>
+          <base-version epoch="0" ver="cvs_060503" rel="3"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/compiz-cvs_060503_cvs_060616-3_1.13.x86_64.delta.rpm"/>
+          <checksum type="sha">be68983ec453017d1148218527b82e1260171962</checksum>
+          <time file="1153411468" build="1153390434"/>
+          <size package="292189" archive="0"/>
+          <base-version epoch="0" ver="cvs_060503" rel="3" md5sum="408a3b6cc585e3776a4ed4255224b7a7" buildtime="1146646271" sequence_info="compiz-cvs_060503-3-9fb39ebbdcf1218d18cff50c434b51d384"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>control-center2</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="2.12.2" rel="62.15"/>
+      <checksum type="sha" pkgid="YES">322ce699db278e6523928200524a4a83ac9b0054</checksum>
+      <time file="1153410784" build="1153383680"/>
+      <size package="1748066" installed="7237841" archive="7283404"/>
+      <location href="rpm/i586/control-center2-2.12.2-62.15.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="control-center2" epoch="0" ver="2.12.2" rel="62.15" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="control-center2"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/control-center2-2.12.2-62.15.i586.patch.rpm"/>
+          <checksum type="sha">5f35cefc063982480d0403bb9abb4366f9976d49</checksum>
+          <time file="1153411473" build="1153383680"/>
+          <size package="1204098" archive="4953560"/>
+          <base-version epoch="0" ver="2.12.2" rel="56"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/control-center2-2.12.2-56_62.15.i586.delta.rpm"/>
+          <checksum type="sha">a4963bf267ceef6023f4edd40acfca21d67d6f1d</checksum>
+          <time file="1153411483" build="1153383680"/>
+          <size package="306102" archive="0"/>
+          <base-version epoch="0" ver="2.12.2" rel="56" md5sum="554396097cf56983417be6c3332302a9" buildtime="1146626986" sequence_info="control-center2-2.12.2-56-f1d4a0673893b54aa931ca72aa9ca1ac884610"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>control-center2</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="2.12.2" rel="62.15"/>
+      <checksum type="sha" pkgid="YES">d5801f789134a69b0232ecdfbf41690342547e82</checksum>
+      <time file="1153410931" build="1153397963"/>
+      <size package="1796476" installed="7551697" archive="7597260"/>
+      <location href="rpm/ppc/control-center2-2.12.2-62.15.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="control-center2" epoch="0" ver="2.12.2" rel="62.15" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="control-center2"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/control-center2-2.12.2-62.15.ppc.patch.rpm"/>
+          <checksum type="sha">379c6f742fd1d163fca141ae79e2ef1bfb272b88</checksum>
+          <time file="1153411487" build="1153397963"/>
+          <size package="1214213" archive="5111356"/>
+          <base-version epoch="0" ver="2.12.2" rel="56"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/control-center2-2.12.2-56_62.15.ppc.delta.rpm"/>
+          <checksum type="sha">878e30336cebd128cc00d7f5ad9aadbadf4feb61</checksum>
+          <time file="1153411492" build="1153397963"/>
+          <size package="301294" archive="0"/>
+          <base-version epoch="0" ver="2.12.2" rel="56" md5sum="f334716304bf1d02ad4bc535e5b85853" buildtime="1146639431" sequence_info="control-center2-2.12.2-56-4ae7bc3758bc655a20ab5798ce4d7a13884610"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>control-center2</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="2.12.2" rel="62.15"/>
+      <checksum type="sha" pkgid="YES">e28bdced6ae2ccb801eab211055412a320abc9be</checksum>
+      <time file="1153410920" build="1153389915"/>
+      <size package="1791470" installed="7544613" archive="7590192"/>
+      <location href="rpm/x86_64/control-center2-2.12.2-62.15.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="control-center2" epoch="0" ver="2.12.2" rel="62.15" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="control-center2"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/control-center2-2.12.2-62.15.x86_64.patch.rpm"/>
+          <checksum type="sha">fd4490067efc53675f3897c6bf483cc84610bc90</checksum>
+          <time file="1153411497" build="1153389915"/>
+          <size package="1223529" archive="5103232"/>
+          <base-version epoch="0" ver="2.12.2" rel="56"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/control-center2-2.12.2-56_62.15.x86_64.delta.rpm"/>
+          <checksum type="sha">f414750165147e9bae238e17b7ab18cffcf9f920</checksum>
+          <time file="1153411508" build="1153389915"/>
+          <size package="308972" archive="0"/>
+          <base-version epoch="0" ver="2.12.2" rel="56" md5sum="ca083ef0c0e44ed92325dbf70d51c68e" buildtime="1146626514" sequence_info="control-center2-2.12.2-56-2f62941e67e0aecc1dadeeaf460f8476884610"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>control-center2-devel</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="2.12.2" rel="62.15"/>
+      <checksum type="sha" pkgid="YES">5a88f245d683b7474a7cf2cdc70f45e4bfe81613</checksum>
+      <time file="1153410785" build="1153383680"/>
+      <size package="22772" installed="25306" archive="26936"/>
+      <location href="rpm/i586/control-center2-devel-2.12.2-62.15.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="control-center2-devel" epoch="0" ver="2.12.2" rel="62.15" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="control-center2-devel"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/control-center2-devel-2.12.2-62.15.i586.patch.rpm"/>
+          <checksum type="sha">7245b8e4d03d7b9e6802abdf5f81784e2fdbc1db</checksum>
+          <time file="1153411510" build="1153383680"/>
+          <size package="14573" archive="124"/>
+          <base-version epoch="0" ver="2.12.2" rel="56"/>
+        </patchrpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>control-center2-devel</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="2.12.2" rel="62.15"/>
+      <checksum type="sha" pkgid="YES">cb40f23dedec940215ed424dbce8acdfa4198192</checksum>
+      <time file="1153410932" build="1153397963"/>
+      <size package="23261" installed="27610" archive="29240"/>
+      <location href="rpm/ppc/control-center2-devel-2.12.2-62.15.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="control-center2-devel" epoch="0" ver="2.12.2" rel="62.15" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="control-center2-devel"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/control-center2-devel-2.12.2-62.15.ppc.patch.rpm"/>
+          <checksum type="sha">5c98d3af1debd1fa4acacca2c58e6743237de6b3</checksum>
+          <time file="1153411512" build="1153397963"/>
+          <size package="14553" archive="124"/>
+          <base-version epoch="0" ver="2.12.2" rel="56"/>
+        </patchrpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>control-center2-devel</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="2.12.2" rel="62.15"/>
+      <checksum type="sha" pkgid="YES">80d407ce5a4ba080257105baaf25bbba6e33a523</checksum>
+      <time file="1153410920" build="1153389915"/>
+      <size package="23348" installed="30778" archive="32408"/>
+      <location href="rpm/x86_64/control-center2-devel-2.12.2-62.15.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="control-center2-devel" epoch="0" ver="2.12.2" rel="62.15" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="control-center2-devel"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/control-center2-devel-2.12.2-62.15.x86_64.patch.rpm"/>
+          <checksum type="sha">9d1a234c19593ea760bf2daade09eb6b29aea0b3</checksum>
+          <time file="1153411514" build="1153389915"/>
+          <size package="14561" archive="124"/>
+          <base-version epoch="0" ver="2.12.2" rel="56"/>
+        </patchrpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>gnome-session</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="2.12.0" rel="106.17"/>
+      <checksum type="sha" pkgid="YES">46830d06dfc2255936d221914ed013583c66ca4b</checksum>
+      <time file="1153410793" build="1153376842"/>
+      <size package="535600" installed="1396668" archive="1413484"/>
+      <location href="rpm/i586/gnome-session-2.12.0-106.17.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="gnome-session" epoch="0" ver="2.12.0" rel="106.17" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="gnome-session"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/gnome-session-2.12.0-106.17.i586.patch.rpm"/>
+          <checksum type="sha">a22b972d07b0e41290dc3408eddd3e34890fd5fc</checksum>
+          <time file="1153411516" build="1153376842"/>
+          <size package="233116" archive="857824"/>
+          <base-version epoch="0" ver="2.12.0" rel="102"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/gnome-session-2.12.0-102_106.17.i586.delta.rpm"/>
+          <checksum type="sha">d33d8928e582ca0a2594d57b0e3640ec97d7dd59</checksum>
+          <time file="1153411518" build="1153376842"/>
+          <size package="88758" archive="0"/>
+          <base-version epoch="0" ver="2.12.0" rel="102" md5sum="5a70780a7fd6e6bba2a9aaa08eed7161" buildtime="1146622805" sequence_info="gnome-session-2.12.0-102-017cfec0a805958fd62b5fdd01aafd29cb1520"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>gnome-session</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="2.12.0" rel="106.17"/>
+      <checksum type="sha" pkgid="YES">4e2c224b63c01d9b571d42f6dfa0d740aaf66b9a</checksum>
+      <time file="1153410941" build="1153405440"/>
+      <size package="554281" installed="1444740" archive="1461556"/>
+      <location href="rpm/ppc/gnome-session-2.12.0-106.17.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="gnome-session" epoch="0" ver="2.12.0" rel="106.17" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="gnome-session"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/gnome-session-2.12.0-106.17.ppc.patch.rpm"/>
+          <checksum type="sha">7a293cb45e5351e47f81e695035d19c222a97a5e</checksum>
+          <time file="1153411520" build="1153405440"/>
+          <size package="240587" archive="878388"/>
+          <base-version epoch="0" ver="2.12.0" rel="102"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/gnome-session-2.12.0-102_106.17.ppc.delta.rpm"/>
+          <checksum type="sha">77c90ecb69fa6eb19fb26aa7ea8bc0f20f92b10e</checksum>
+          <time file="1153411521" build="1153405440"/>
+          <size package="94682" archive="0"/>
+          <base-version epoch="0" ver="2.12.0" rel="102" md5sum="3dbafcb66e536f5c0dd0c32c7b7a2b67" buildtime="1146629138" sequence_info="gnome-session-2.12.0-102-e8b2ab486bb9c2fbc5cf9f3356bdb07acb1520"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>gnome-session</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="2.12.0" rel="106.17"/>
+      <checksum type="sha" pkgid="YES">a2545b0fd2f0e218efe8abb0596eb35fbae2d261</checksum>
+      <time file="1153410931" build="1153383425"/>
+      <size package="549046" installed="1438340" archive="1455156"/>
+      <location href="rpm/x86_64/gnome-session-2.12.0-106.17.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="gnome-session" epoch="0" ver="2.12.0" rel="106.17" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="gnome-session"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/gnome-session-2.12.0-106.17.x86_64.patch.rpm"/>
+          <checksum type="sha">180f5e43cf8dfe35704f16d7034d1e36975b2108</checksum>
+          <time file="1153411523" build="1153383425"/>
+          <size package="241273" archive="877404"/>
+          <base-version epoch="0" ver="2.12.0" rel="102"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/gnome-session-2.12.0-102_106.17.x86_64.delta.rpm"/>
+          <checksum type="sha">d2b1d07246801c5551af4049d876e3bacf6b84a0</checksum>
+          <time file="1153411524" build="1153383425"/>
+          <size package="96075" archive="0"/>
+          <base-version epoch="0" ver="2.12.0" rel="102" md5sum="4cd9aeafb7f6a0461deb03fe6f4df896" buildtime="1146622873" sequence_info="gnome-session-2.12.0-102-1965a4d3cb972f95ee98d35d2985f7d7cb1520"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>libwnck</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="2.12.2" rel="28.7"/>
+      <checksum type="sha" pkgid="YES">9588ae6bd600ed375a1658fd6ed6fd926bfe42da</checksum>
+      <time file="1153410743" build="1153364529"/>
+      <size package="147349" installed="447277" archive="460700"/>
+      <location href="rpm/i586/libwnck-2.12.2-28.7.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="libwnck" epoch="0" ver="2.12.2" rel="28.7" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="libwnck"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/libwnck-2.12.2-28.7.i586.patch.rpm"/>
+          <checksum type="sha">ab1637d9ddb83920b7a4f86ee98012b3ad530c4c</checksum>
+          <time file="1153411525" build="1153364529"/>
+          <size package="81669" archive="173844"/>
+          <base-version epoch="0" ver="2.12.2" rel="26"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/libwnck-2.12.2-26_28.7.i586.delta.rpm"/>
+          <checksum type="sha">9cda677d8520c97537f71bbd7ffe579b2016cc59</checksum>
+          <time file="1153411528" build="1153364529"/>
+          <size package="69910" archive="0"/>
+          <base-version epoch="0" ver="2.12.2" rel="26" md5sum="1f328f949ce74fadf3e7b7e34eea60f6" buildtime="1146563266" sequence_info="libwnck-2.12.2-26-d1183e9b9ba4dfcea2f25d483beedcbcc910"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>libwnck</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="2.12.2" rel="28.7"/>
+      <checksum type="sha" pkgid="YES">196f6a306339294066ccdebcb85e212f0a814dc0</checksum>
+      <time file="1153410897" build="1153364627"/>
+      <size package="155044" installed="495157" archive="508580"/>
+      <location href="rpm/ppc/libwnck-2.12.2-28.7.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="libwnck" epoch="0" ver="2.12.2" rel="28.7" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="libwnck"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/libwnck-2.12.2-28.7.ppc.patch.rpm"/>
+          <checksum type="sha">992c5006620ce69e1cea369678378dc80ea9511b</checksum>
+          <time file="1153411529" build="1153364627"/>
+          <size package="88225" archive="221724"/>
+          <base-version epoch="0" ver="2.12.2" rel="26"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/libwnck-2.12.2-26_28.7.ppc.delta.rpm"/>
+          <checksum type="sha">980bdfd28027503a0559bb6a6d95688c73f069ad</checksum>
+          <time file="1153411530" build="1153364627"/>
+          <size package="73341" archive="0"/>
+          <base-version epoch="0" ver="2.12.2" rel="26" md5sum="e492c5f05c5628434e85f3790b070d02" buildtime="1146570357" sequence_info="libwnck-2.12.2-26-1b634ae62f49fd7e8b7bce4ecf44db44c910"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>libwnck</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="2.12.2" rel="28.7"/>
+      <checksum type="sha" pkgid="YES">7072bf6ecb5d21aa1ea704ea4dadb46dbaa5cccd</checksum>
+      <time file="1153410863" build="1153365449"/>
+      <size package="156021" installed="467513" archive="480936"/>
+      <location href="rpm/x86_64/libwnck-2.12.2-28.7.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="libwnck" epoch="0" ver="2.12.2" rel="28.7" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="libwnck"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/libwnck-2.12.2-28.7.x86_64.patch.rpm"/>
+          <checksum type="sha">bd9dfe5b2f2d7b2064031406f61ccbaf7a87b8e5</checksum>
+          <time file="1153411531" build="1153365449"/>
+          <size package="89926" archive="194080"/>
+          <base-version epoch="0" ver="2.12.2" rel="26"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/libwnck-2.12.2-26_28.7.x86_64.delta.rpm"/>
+          <checksum type="sha">39e84a1187d014d93b5d3d3869a4d4201031c276</checksum>
+          <time file="1153411532" build="1153365449"/>
+          <size package="72061" archive="0"/>
+          <base-version epoch="0" ver="2.12.2" rel="26" md5sum="725d941aff91d01c091757c8e58857ee" buildtime="1146563598" sequence_info="libwnck-2.12.2-26-27eaa371e3048b284282f594832db9fbc910"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>libwnck-32bit</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="2.12.2" rel="28.7"/>
+      <checksum type="sha" pkgid="YES">90319ba85bfc1da1ca0c324c60da4070b65535c2</checksum>
+      <time file="1153410743" build="1153364617"/>
+      <size package="71593" installed="173572" archive="174260"/>
+      <location href="rpm/x86_64/libwnck-32bit-2.12.2-28.7.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="libwnck-32bit" epoch="0" ver="2.12.2" rel="28.7" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="libwnck-32bit"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/libwnck-32bit-2.12.2-28.7.x86_64.patch.rpm"/>
+          <checksum type="sha">7748ddb6ccffb9548978c876bc22db957a4e099a</checksum>
+          <time file="1153411533" build="1153364617"/>
+          <size package="71550" archive="173844"/>
+          <base-version epoch="0" ver="2.12.2" rel="26"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/libwnck-32bit-2.12.2-26_28.7.x86_64.delta.rpm"/>
+          <checksum type="sha">451c9f6c4f7297165ef20609b22b2ba3c50602fc</checksum>
+          <time file="1153411535" build="1153364617"/>
+          <size package="25547" archive="0"/>
+          <base-version epoch="0" ver="2.12.2" rel="26" md5sum="48013c3b712d67975500ab6e04e8a08d" buildtime="1146563319" sequence_info="libwnck-32bit-2.12.2-26-cf8e1058d74d7d467f26aed807ef8fc040"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>libwnck-64bit</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="2.12.2" rel="28.7"/>
+      <checksum type="sha" pkgid="YES">3e8294d2a3258ac09165dc2bfd501686235b25af</checksum>
+      <time file="1153411051" build="1153366288"/>
+      <size package="84478" installed="282768" archive="283456"/>
+      <location href="rpm/ppc/libwnck-64bit-2.12.2-28.7.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="libwnck-64bit" epoch="0" ver="2.12.2" rel="28.7" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="libwnck-64bit"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/libwnck-64bit-2.12.2-28.7.ppc.patch.rpm"/>
+          <checksum type="sha">6b7da40e45fe83b6ae3d6fe632e9aab736564be0</checksum>
+          <time file="1153411536" build="1153366288"/>
+          <size package="84473" archive="283040"/>
+          <base-version epoch="0" ver="2.12.2" rel="26"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/libwnck-64bit-2.12.2-26_28.7.ppc.delta.rpm"/>
+          <checksum type="sha">91c38a5606a0787ab9d95946e42b34628d3b0901</checksum>
+          <time file="1153411536" build="1153366288"/>
+          <size package="46469" archive="0"/>
+          <base-version epoch="0" ver="2.12.2" rel="26" md5sum="93760859340c6490099474c94919285f" buildtime="1146564766" sequence_info="libwnck-64bit-2.12.2-26-4db843f8c16df79856e331cdc390919940"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>libwnck-devel</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="2.12.2" rel="28.7"/>
+      <checksum type="sha" pkgid="YES">d0b971c9f5cc534957a937d385e418277a0ded9b</checksum>
+      <time file="1153410743" build="1153364529"/>
+      <size package="83068" installed="290794" archive="293788"/>
+      <location href="rpm/i586/libwnck-devel-2.12.2-28.7.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="libwnck-devel" epoch="0" ver="2.12.2" rel="28.7" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="libwnck-devel"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/libwnck-devel-2.12.2-28.7.i586.patch.rpm"/>
+          <checksum type="sha">46f7a84a2756e9cbbb3be66798d5fe8b2a9f5e22</checksum>
+          <time file="1153411537" build="1153364529"/>
+          <size package="78757" archive="261064"/>
+          <base-version epoch="0" ver="2.12.2" rel="26"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/libwnck-devel-2.12.2-26_28.7.i586.delta.rpm"/>
+          <checksum type="sha">19c18c75b402c7c356a914181c26e2218e0ee4cb</checksum>
+          <time file="1153411538" build="1153364529"/>
+          <size package="21506" archive="0"/>
+          <base-version epoch="0" ver="2.12.2" rel="26" md5sum="1dd804d5e931ce3f9ac855f3144a01be" buildtime="1146563266" sequence_info="libwnck-devel-2.12.2-26-6a1f7168b7d676fb21e125a5c20f8bdfa2"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>libwnck-devel</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="2.12.2" rel="28.7"/>
+      <checksum type="sha" pkgid="YES">b551c8d08e723f9cfc33d6d88a8d33234d207e58</checksum>
+      <time file="1153410898" build="1153364627"/>
+      <size package="95116" installed="352954" archive="355948"/>
+      <location href="rpm/ppc/libwnck-devel-2.12.2-28.7.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="libwnck-devel" epoch="0" ver="2.12.2" rel="28.7" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="libwnck-devel"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/libwnck-devel-2.12.2-28.7.ppc.patch.rpm"/>
+          <checksum type="sha">b8862b8c02e7032cd7befb403b5dd867810d7640</checksum>
+          <time file="1153411539" build="1153364627"/>
+          <size package="91046" archive="323224"/>
+          <base-version epoch="0" ver="2.12.2" rel="26"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/libwnck-devel-2.12.2-26_28.7.ppc.delta.rpm"/>
+          <checksum type="sha">864ffa158b84f20be1e83a74704eb8d9a10d7396</checksum>
+          <time file="1153411539" build="1153364627"/>
+          <size package="25616" archive="0"/>
+          <base-version epoch="0" ver="2.12.2" rel="26" md5sum="d3c9709f8f6fb3b8701ff7ff2d7fa287" buildtime="1146570357" sequence_info="libwnck-devel-2.12.2-26-f999c6a350348c9f58df317c58f28504a2"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>libwnck-devel</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="2.12.2" rel="28.7"/>
+      <checksum type="sha" pkgid="YES">97bafc1e1b29a6a2531aa9e20083f97c5559d1e1</checksum>
+      <time file="1153410863" build="1153365449"/>
+      <size package="90126" installed="415028" archive="418036"/>
+      <location href="rpm/x86_64/libwnck-devel-2.12.2-28.7.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="libwnck-devel" epoch="0" ver="2.12.2" rel="28.7" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="libwnck-devel"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/libwnck-devel-2.12.2-28.7.x86_64.patch.rpm"/>
+          <checksum type="sha">61aee769595ffd843bce64a3c19c5fef4ce5da8c</checksum>
+          <time file="1153411541" build="1153365449"/>
+          <size package="85895" archive="385252"/>
+          <base-version epoch="0" ver="2.12.2" rel="26"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/libwnck-devel-2.12.2-26_28.7.x86_64.delta.rpm"/>
+          <checksum type="sha">47034ba2341f832305ef7f1062c87b4403f60cdc</checksum>
+          <time file="1153411541" build="1153365449"/>
+          <size package="25043" archive="0"/>
+          <base-version epoch="0" ver="2.12.2" rel="26" md5sum="ddc9e36e15077858e5888fe281468571" buildtime="1146563598" sequence_info="libwnck-devel-2.12.2-26-8b73cb603ce6c35285cb991f5ba82e47a2"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>xgl</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="cvs_060522" rel="0.10"/>
+      <checksum type="sha" pkgid="YES">879af0836407b2dbc9cd1d129d1a3a6c234e65fd</checksum>
+      <time file="1153410794" build="1153375616"/>
+      <size package="1626094" installed="4351232" archive="4352680"/>
+      <location href="rpm/i586/xgl-cvs_060522-0.10.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="xgl" epoch="0" ver="cvs_060522" rel="0.10" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="xgl"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/xgl-cvs_060522-0.10.i586.patch.rpm"/>
+          <checksum type="sha">a84805ee3ed6c5b3777a5090a18c4ee8ee772073</checksum>
+          <time file="1153411545" build="1153375616"/>
+          <size package="1623843" archive="4346668"/>
+          <base-version epoch="0" ver="cvs_060503" rel="3"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/xgl-cvs_060503_cvs_060522-3_0.10.i586.delta.rpm"/>
+          <checksum type="sha">da383ddb2e78f4e709b5988a54fcaa7cc30e7b4b</checksum>
+          <time file="1153411548" build="1153375616"/>
+          <size package="184073" archive="0"/>
+          <base-version epoch="0" ver="cvs_060503" rel="3" md5sum="32cc39064d185b5125f5ecaa81fffaaa" buildtime="1146647824" sequence_info="xgl-cvs_060503-3-604fb9b2dec3dd154091bbda23cc539b7110"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>xgl</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="cvs_060522" rel="0.10"/>
+      <checksum type="sha" pkgid="YES">8208297bb11c604fe36d9b8798cb2e9bc25a3438</checksum>
+      <time file="1153410942" build="1153402028"/>
+      <size package="1721484" installed="5082788" archive="5084236"/>
+      <location href="rpm/ppc/xgl-cvs_060522-0.10.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="xgl" epoch="0" ver="cvs_060522" rel="0.10" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="xgl"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/xgl-cvs_060522-0.10.ppc.patch.rpm"/>
+          <checksum type="sha">c8d2c285070acd27f19a442fcb478ca1685f65a6</checksum>
+          <time file="1153411552" build="1153402028"/>
+          <size package="1720092" archive="5078224"/>
+          <base-version epoch="0" ver="cvs_060503" rel="3"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/ppc/xgl-cvs_060503_cvs_060522-3_0.10.ppc.delta.rpm"/>
+          <checksum type="sha">b7b603ac8c28e4a4bdcfd0fdf3aa82e20ddc1c84</checksum>
+          <time file="1153411555" build="1153402028"/>
+          <size package="152729" archive="0"/>
+          <base-version epoch="0" ver="cvs_060503" rel="3" md5sum="6b3d34d835ff7b0bcfb6d44e402ae7ee" buildtime="1146648824" sequence_info="xgl-cvs_060503-3-1839d9f466e2967d730ea924002e82097110"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>xgl</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="cvs_060522" rel="0.10"/>
+      <checksum type="sha" pkgid="YES">a9e7986f96424edfa9e78f282451f79717ab9ce0</checksum>
+      <time file="1153410933" build="1153377770"/>
+      <size package="1802904" installed="4871260" archive="4872724"/>
+      <location href="rpm/x86_64/xgl-cvs_060522-0.10.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="xgl" epoch="0" ver="cvs_060522" rel="0.10" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="xgl"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/xgl-cvs_060522-0.10.x86_64.patch.rpm"/>
+          <checksum type="sha">c7466abf6dcea81957d73ea73d3b7718bbe6b8fe</checksum>
+          <time file="1153411560" build="1153377770"/>
+          <size package="1800380" archive="4866700"/>
+          <base-version epoch="0" ver="cvs_060503" rel="3"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/xgl-cvs_060503_cvs_060522-3_0.10.x86_64.delta.rpm"/>
+          <checksum type="sha">e02110024674b8ba44553790aee4bfa8f5892739</checksum>
+          <time file="1153411563" build="1153377770"/>
+          <size package="276996" archive="0"/>
+          <base-version epoch="0" ver="cvs_060503" rel="3" md5sum="5d0db5de9882284a64e6f4ffbc716a16" buildtime="1146647734" sequence_info="xgl-cvs_060503-3-9146b39b206b5188410e0ffac21ce04e7110"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>xgl-hardware-list</name>
+      <arch>noarch</arch>
+      <version epoch="0" ver="060526" rel="1.10"/>
+      <checksum type="sha" pkgid="YES">cb7fdf3f6bf68a0a41284754724eccbe69a625dc</checksum>
+      <time file="1153410793" build="1153138440"/>
+      <size package="8784" installed="17764" archive="18312"/>
+      <location href="rpm/noarch/xgl-hardware-list-060526-1.10.noarch.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="xgl-hardware-list" epoch="0" ver="060526" rel="1.10" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="xgl-hardware-list"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/noarch/xgl-hardware-list-060526-1.10.noarch.patch.rpm"/>
+          <checksum type="sha">4d4e7e76d4ed8539095fbc93dc9fadbb14d31f9f</checksum>
+          <time file="1153411565" build="1153138440"/>
+          <size package="8891" archive="18312"/>
+          <base-version epoch="0" ver="060501" rel="3"/>
+        </patchrpm>
+      </pkgfiles>
+    </package>
+  </atoms>
+</patch>
