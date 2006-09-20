@@ -513,11 +513,20 @@ struct FindPackage : public resfilter::ResObjectFilterFunctor
     PoolItem_Ref poolItem;
     Source_Ref source;
     Resolvable::Kind kind;
+    bool edition_set;
+    Edition edition;
+    bool arch_set;
+    Arch arch;
 
-    FindPackage (Source_Ref s, Resolvable::Kind k)
+    FindPackage (Source_Ref s, Resolvable::Kind k, const string & v, const string & r, const string & a)
 	: source (s)
 	, kind (k)
-    { }
+	, edition_set( !v.empty() )
+	, edition( v, r )
+	, arch_set( !a.empty() )
+	, arch( a )
+    {
+    }
 
     bool operator()( PoolItem_Ref p)
     {
@@ -527,7 +536,18 @@ struct FindPackage : public resfilter::ResObjectFilterFunctor
 	if (s.alias() != source.alias()) {
 	    return true;
 	}
+	if (arch_set && arch != p->arch()) {				// if arch requested, force this arch
+	    return true;
+	}
 	if (!p->arch().compatibleWith( God->architecture() )) {
+	    return true;
+	}
+
+	if (edition_set) {
+	    if (p->edition().compare( edition ) == 0) {			// if edition requested, force this edition
+		poolItem = p;
+		return false;
+	    }
 	    return true;
 	}
 
@@ -544,7 +564,7 @@ struct FindPackage : public resfilter::ResObjectFilterFunctor
 
 
 static PoolItem_Ref
-get_poolItem (const string & source_alias, const string & package_name, const string & kind_name = "")
+get_poolItem (const string & source_alias, const string & package_name, const string & kind_name = "", const string & ver = "", const string & rel = "", const string & arch = "")
 {
     PoolItem_Ref poolItem;
     Resolvable::Kind kind = string2kind (kind_name);
@@ -560,7 +580,7 @@ get_poolItem (const string & source_alias, const string & package_name, const st
     }
 
     try {
-	FindPackage info (source, kind);
+	FindPackage info (source, kind, ver, rel, arch);
 
 	invokeOnEach( God->pool().byNameBegin( package_name ),
 		      God->pool().byNameEnd( package_name ),
@@ -1274,12 +1294,21 @@ parse_xml_trial (XmlNode_Ptr node, const ResPool & pool)
 		name = node->getProp ("package");
 	    string kind_name = node->getProp ("kind");
 	    string soft = node->getProp ("soft");
+	    string version = node->getProp ("ver");
+	    string release = node->getProp ("rel");
+	    string architecture = node->getProp ("arch");
 
 	    PoolItem_Ref poolItem;
 
-	    poolItem = get_poolItem (source_alias, name, kind_name);
+	    poolItem = get_poolItem( source_alias, name, kind_name, version, release, architecture );
 	    if (poolItem) {
-		RESULT << "Installing " << ((poolItem->kind() != ResTraits<zypp::Package>::kind) ? (poolItem->kind().asString() + ":") : "") << name << " from channel " << source_alias << endl;;
+		RESULT << "Installing "
+		    << ((poolItem->kind() != ResTraits<zypp::Package>::kind) ? (poolItem->kind().asString() + ":") : "")
+		    << name
+		    << (version.empty()?"":(string("-")+poolItem->edition().version()))
+		    << (release.empty()?"":(string("-")+poolItem->edition().release()))
+		    << (architecture.empty()?"":(string(".")+poolItem->arch().asString()))
+		    << " from channel " << source_alias << endl;;
 		poolItem.status().setToBeInstalled(ResStatus::USER);
 		if (!soft.empty())
 		    poolItem.status().setSoftInstall(true);
@@ -1296,12 +1325,19 @@ parse_xml_trial (XmlNode_Ptr node, const ResPool & pool)
 		name = node->getProp ("package");
 	    string kind_name = node->getProp ("kind");
 	    string soft = node->getProp ("soft");
+	    string version = node->getProp ("ver");
+	    string release = node->getProp ("rel");
+	    string architecture = node->getProp ("arch");
 
 	    PoolItem_Ref poolItem;
 
-	    poolItem = get_poolItem ("@system", name, kind_name);
+	    poolItem = get_poolItem ("@system", name, kind_name, version, release, architecture );
 	    if (poolItem) {
-		RESULT << "Uninstalling " << name << endl;
+		RESULT << "Uninstalling " << name
+		    << (version.empty()?"":(string("-")+poolItem->edition().version()))
+		    << (release.empty()?"":(string("-")+poolItem->edition().release()))
+		    << (architecture.empty()?"":(string(".")+poolItem->arch().asString()))
+		    << endl;
 		poolItem.status().setToBeUninstalled(ResStatus::USER);
 		if (!soft.empty())
 		    poolItem.status().setSoftUninstall(true);
@@ -1665,6 +1701,459 @@ parse_xml_trial (XmlNode_Ptr node, const ResPool & pool)
     report_solutions (resolver, instorder, mediaorder);
 }
 
+static void
+parse_xml_transact (XmlNode_Ptr node, const ResPool & pool)
+{
+    static bool first_transact = true;
+
+    bool verify = false;
+    bool instorder = false;
+    bool mediaorder = false;
+    bool distupgrade = false;
+
+    if (!node->equals ("transact")) {
+	ZYPP_THROW (Exception ("Node not 'transact' in parse_xml_transact()"));
+    }
+
+    DBG << "parse_xml_transact()" << endl;
+
+    // reset pool on subsequent transacts.
+
+    if (first_transact) {
+	first_transact = false;
+    }
+    else {
+	for (ResPool::const_iterator it = pool.begin(); it != pool.end(); ++it) {
+	    if (it->status().transacts()) it->status().setTransact( false, ResStatus::USER );
+	}
+    }
+
+    if (! done_setup) {
+	cerr << "Any transacts must be preceeded by the setup!" << endl;
+	exit (0);
+    }
+
+    print_sep ();
+
+    solver::detail::Resolver_Ptr resolver = new solver::detail::Resolver( pool );
+    resolver->setArchitecture( God->architecture() );
+    resolver->setTesting ( true );			// continue despite missing target
+    resolver->setForceResolve( forceResolve );
+
+    if (!locales.empty()) {
+	God->setRequestedLocales( locales );
+    }
+
+    node = node->children();
+    while (node) {
+	if (!node->isElement()) {
+	    node = node->next();
+	    continue;
+	}
+
+	if (node->equals("note")) {
+
+	    string note = node->getContent ();
+	    cout << "NOTE: " << note << endl;
+
+	} else if (node->equals ("verify")) {
+
+	    verify = true;
+
+	} else if (node->equals ("current")) {
+
+	    string source_alias = node->getProp ("channel");
+	    Source_Ref source = manager->findSource (source_alias);
+
+	    if (source) {
+//FIXME		resolver->setCurrentChannel (source);
+	    } else {
+		cerr << "Unknown source '" << source_alias << "' (current)" << endl;
+	    }
+
+	} else if (node->equals ("subscribe")) {
+
+	    string source_alias = node->getProp ("channel");
+	    Source_Ref source = manager->findSource (source_alias);
+
+	    if (source) {
+//FIXME		source->setSubscription (true);
+	    } else {
+		cerr << "Unknown source '" << source_alias << "' (subscribe)" << endl;
+	    }
+
+	} else if (node->equals ("install")) {
+
+	    string source_alias = node->getProp ("channel");
+	    string name = node->getProp ("name");
+	    if (name.empty())
+		name = node->getProp ("package");
+	    string kind_name = node->getProp ("kind");
+	    string soft = node->getProp ("soft");
+
+	    PoolItem_Ref poolItem;
+
+	    poolItem = get_poolItem (source_alias, name, kind_name);
+	    if (poolItem) {
+		RESULT << "Installing " << ((poolItem->kind() != ResTraits<zypp::Package>::kind) ? (poolItem->kind().asString() + ":") : "") << name << " from channel " << source_alias << endl;;
+		poolItem.status().setToBeInstalled(ResStatus::USER);
+		if (!soft.empty())
+		    poolItem.status().setSoftInstall(true);
+//		resolver->addPoolItemToInstall (poolItem);
+	    } else {
+		cerr << "Unknown item " << source_alias << "::" << name << endl;
+		exit( 1 );
+	    }
+
+	} else if (node->equals ("uninstall")) {
+
+	    string name = node->getProp ("name");
+	    if (name.empty())
+		name = node->getProp ("package");
+	    string kind_name = node->getProp ("kind");
+	    string soft = node->getProp ("soft");
+
+	    PoolItem_Ref poolItem;
+
+	    poolItem = get_poolItem ("@system", name, kind_name);
+	    if (poolItem) {
+		RESULT << "Uninstalling " << name << endl;
+		poolItem.status().setToBeUninstalled(ResStatus::USER);
+		if (!soft.empty())
+		    poolItem.status().setSoftUninstall(true);
+#if 0 // replaced by 'transact'
+		if ( kind_name== "selection"
+		     || kind_name == "pattern" ) {
+		       // -> do a 'single step' resolving either installing or removing
+		       //    required and recommended PoolItems; this will be used by the YaST UI
+		    resolver->transactResObject ( poolItem, false);
+		}
+#endif
+//		resolver->addPoolItemToRemove (poolItem);
+	    } else {
+		cerr << "Unknown system item " << name << endl;
+		exit( 1 );
+	    }
+
+	} else if (node->equals ("upgrade")) {
+
+	    RESULT << "Checking for upgrades..." << endl;
+
+	    int count = foreach_system_upgrade (resolver);
+
+	    if (count == 0)
+		RESULT << "System is up-to-date, no upgrades required" << endl;
+	    else
+		RESULT << "Upgrading " << count << " package" << (count > 1 ? "s" : "") << endl;
+
+	} else if (node->equals ("distupgrade")) {
+
+	    distupgrade = true;
+
+	    RESULT << "Doing distribution upgrade ..." << endl;
+	    UpgradeStatistics stats;
+
+	    string delete_unmaintained = node->getProp ("delete_unmaintained");
+	    if (delete_unmaintained == "false") {
+		stats.delete_unmaintained = false;
+	    }
+
+	    resolver->doUpgrade(stats);
+
+	    print_pool( MARKER );
+
+	} else if (node->equals ("establish")) {
+
+	    string freshen = node->getProp ("freshen");
+
+	    RESULT << "Establishing state ..." << endl;
+
+	    if (!resolver->establishPool()) {
+		RESULT << "Established NO context !" << endl;
+	    }
+	    else {
+		RESULT << "Established context" << endl;
+                StringList items;
+                
+		resolver->context()->foreachMarked (print_marked_cb, &items);
+                print_items (items);
+//		print_pool( MARKER, false );
+		if (!freshen.empty()) {
+		    RESULT << "Freshening ..." << endl;
+		    resolver->context()->foreachMarked (freshen_marked_cb, &resolver);
+		}
+	    }
+
+	} else if (node->equals ("freshen")) {
+
+	    RESULT << "Freshening pool ..." << endl;
+
+	    if (!resolver->freshenPool()) {
+		RESULT << "Freshened NO context !" << endl;
+	    }
+	    else {
+		RESULT << "Freshened context" << endl;
+                StringList items;                    
+                
+		resolver->context()->foreachMarked (print_marked_cb, &items);
+                print_items (items);
+	    }
+
+	} else if (node->equals ("instorder")) {
+
+	    RESULT << "Calculating installation order ..." << endl;
+
+	    instorder = true;
+
+	} else if (node->equals ("mediaorder")) {
+
+	    RESULT << "Calculating media installation order ..." << endl;
+
+	    mediaorder = true;
+
+	} else if (node->equals ("solvedeps")) {
+#if 0
+	    XmlNode_Ptr iter = node->children();
+
+	    while (iter != NULL) {
+		Dependency_Ptr dep = new Dependency (iter);
+
+		/* We just skip over anything that doesn't look like a dependency. */
+
+		if (dep) {
+		    string conflict_str = iter->getProp ("conflict");
+
+		    RESULT << "Solvedeps " << (conflict_str.empty() ? "" : "conflict ") << dep->asString().c_str() << endl;
+
+		    resolver->addExtraDependency (dep);
+
+		}
+		iter = iter->next();
+	    }
+#else
+#warning solvedeps disabled
+#endif
+
+	} else if (node->equals ("whatprovides")) {
+
+	    string kind_name = node->getProp ("kind");
+	    string prov_name = node->getProp ("provides");
+
+	    PoolItemSet poolItems;
+
+	    cout << "poolItems providing '" << prov_name << "'" << endl;
+
+	    poolItems = get_providing_poolItems (prov_name, kind_name);
+
+	    if (poolItems.empty()) {
+		cerr << "None found" << endl;
+	    } else {
+		for (PoolItemSet::const_iterator iter = poolItems.begin(); iter != poolItems.end(); ++iter) {
+		    cout << (*iter) << endl;
+		}
+	    }
+
+	} else if (node->equals ("whatdependson")) {
+
+	    string source_alias = node->getProp ("channel");
+	    string package_name = node->getProp ("package");
+	    string kind_name = node->getProp ("kind");
+	    string prov_name = node->getProp ("provides");
+
+	    PoolItemSet poolItems;
+
+	    assert (!source_alias.empty());
+	    assert (!package_name.empty());
+
+	    if (!prov_name.empty()) {
+		if (!package_name.empty()) {
+		    cerr << "<whatdependson ...> can't have both package and provides." << endl;
+		    exit (1);
+		}
+		poolItems = get_providing_poolItems (prov_name, kind_name);
+	    }
+	    else {
+		PoolItem_Ref poolItem = get_poolItem (source_alias, package_name, kind_name);
+		if (poolItem) poolItems.insert (poolItem);
+	    }
+	    if (poolItems.empty()) {
+		cerr << "Can't find matching package" << endl;
+	    } else {
+		for (PoolItemSet::const_iterator iter = poolItems.begin(); iter != poolItems.end(); ++iter) {
+		    PoolItemSet dependants = whatdependson (*iter);
+		    for (PoolItemSet::const_iterator dep_iter = dependants.begin(); dep_iter != dependants.end(); ++dep_iter) {
+			cout << (*dep_iter) << endl;
+		    }
+		}
+	    }
+
+	} else if (node->equals ("reportproblems")) {
+	    if (resolver->resolvePool() == true) {
+		RESULT << "No problems so far" << endl;
+	    }
+	    else {
+		ResolverProblemList problems = resolver->problems ();
+		problems.sort(compare_problems());
+		RESULT << problems.size() << " problems found:" << endl;
+		for (ResolverProblemList::iterator iter = problems.begin(); iter != problems.end(); ++iter) {
+		    ResolverProblem problem = **iter;
+		    RESULT << "Problem:" << endl;
+		    RESULT << problem.description() << endl;
+		    RESULT << problem.details() << endl;
+
+		    ProblemSolutionList solutions = problem.solutions();
+		    for (ProblemSolutionList::const_iterator iter = solutions.begin();
+			 iter != solutions.end(); ++iter) {
+			ProblemSolution solution = **iter;
+			RESULT << "   Solution:" << endl;
+			RESULT << "      " << solution.description() << endl;
+			RESULT << "      " << solution.details() << endl;
+		    }
+		}
+	    }
+	} else if (node->equals ("takesolution")) {
+	    string problemNrStr = node->getProp ("problem");
+	    string solutionNrStr = node->getProp ("solution");
+	    assert (!problemNrStr.empty());
+	    assert (!solutionNrStr.empty());
+	    int problemNr = atoi (problemNrStr.c_str());
+	    int solutionNr = atoi (solutionNrStr.c_str());
+	    RESULT << "Taking solution: " << solutionNr << endl;
+	    RESULT << "For problem:     " << problemNr << endl;
+	    ResolverProblemList problems = resolver->problems ();
+
+	    int problemCounter = -1;
+	    int solutionCounter = -1;
+	    // find problem
+	    for (ResolverProblemList::iterator probIter = problems.begin();
+		 probIter != problems.end(); ++probIter) {
+		problemCounter++;
+		if (problemCounter == problemNr) {
+		    ResolverProblem problem = **probIter;
+		    ProblemSolutionList solutionList = problem.solutions();
+		    //find solution
+		    for (ProblemSolutionList::iterator solIter = solutionList.begin();
+			 solIter != solutionList.end(); ++solIter) {
+			solutionCounter++;
+			if (solutionCounter == solutionNr) {
+			    ProblemSolution_Ptr solution = *solIter;
+			    cout << "Taking solution: " << endl << *solution << endl;
+			    cout << "For problem: " << endl << problem << endl;
+			    ProblemSolutionList doList;
+			    doList.push_back (solution);
+			    resolver->applySolutions (doList);
+			    break;
+			}
+		    }
+		    break;
+		}
+	    }
+
+	    if (problemCounter != problemNr) {
+		RESULT << "Wrong problem number (0-" << problemCounter << ")" << endl;
+	    } else if (solutionCounter != solutionNr) {
+		RESULT << "Wrong solution number (0-" << solutionCounter << ")" <<endl;
+	    } else {
+		// resolve and check it again
+		if (resolver->resolvePool() == true) {
+		    RESULT << "No problems so far" << endl;
+		}
+		else {
+		    ResolverProblemList problems = resolver->problems ();
+		    RESULT << problems.size() << " problems found:" << endl;
+		    for (ResolverProblemList::iterator iter = problems.begin(); iter != problems.end(); ++iter) {
+			cout << **iter << endl;
+		    }
+		}
+	    }
+	} else if (node->equals ("showpool")) {
+	    string prefix = node->getProp ("prefix");
+	    string all = node->getProp ("all");
+	    print_pool( prefix, !all.empty() );
+	} else if (node->equals ("lock")) {
+	    string source_alias = node->getProp ("channel");
+	    string package_name = node->getProp ("package");
+	    string kind_name = node->getProp ("kind");
+
+	    PoolItem_Ref poolItem;
+
+	    poolItem = get_poolItem (source_alias, package_name, kind_name);
+	    if (poolItem) {
+		RESULT << "Locking " << package_name << " from channel " << source_alias << endl;
+		poolItem.status().setLock (true, ResStatus::USER);
+	    } else {
+		cerr << "Unknown package " << source_alias << "::" << package_name << endl;
+	    }
+	} else if (node->equals ("availablelocales")) {
+	    RESULT << "Available locales: ";
+	    ZYpp::LocaleSet locales = God->getAvailableLocales();
+	    for (ZYpp::LocaleSet::const_iterator it = locales.begin(); it != locales.end(); ++it) {
+		if (it != locales.begin()) std::cout << ", ";
+		std::cout << it->code();
+	    }
+	    std::cout << endl;
+
+	} else if (node->equals ("transact")) {
+
+	    string name = node->getProp ("name");
+	    if (name.empty())
+		name = node->getProp ("package");
+	    string kind_name = node->getProp ("kind");
+
+	    string source_alias = node->getProp ("channel");
+	    if (source_alias.empty())
+		source_alias = "@system";
+
+	    if (!name.empty()
+		&& !kind_name.empty())
+	    {
+		cerr << "transact either takes 'name' or 'kind', but not both" << endl;
+		return;
+	    }
+
+	    if (name.empty()
+		&& kind_name.empty())
+	    {
+		cerr << "transact need either 'name' or 'kind' parameter" << endl;
+		return;
+	    }
+
+	    if (name.empty()) {		// assume kind
+		resolver->transactResKind( string2kind( kind_name ) );
+	    }
+	    else {
+		PoolItem_Ref poolItem;
+
+		poolItem = get_poolItem( source_alias, name, kind_name );
+
+		if (poolItem) {
+		    if (source_alias == "@system") {
+			RESULT << "Removing " << name << " from channel " << source_alias << endl;;
+			poolItem.status().setToBeUninstalled( ResStatus::USER );
+		    }
+		    else {
+			RESULT << "Installing " << name << " from channel " << source_alias << endl;;
+			poolItem.status().setToBeInstalled( ResStatus::USER );
+		    }
+		    resolver->transactResObject( poolItem, false );
+		}
+		else {
+		    cerr << "Unknown item " << source_alias << "::" << name << endl;
+		}
+
+	     }
+
+	} else {
+	    cerr << "Unknown tag '" << node->name() << "' in transact" << endl;
+	}
+
+	node = node->next();
+    }
+
+print_pool( MARKER );
+    report_solutions (resolver, instorder, mediaorder);
+}
+
 //---------------------------------------------------------------------------------------------------------------------
 
 static void
@@ -1682,6 +2171,8 @@ parse_xml_test (XmlNode_Ptr node, const ResPool & pool)
 		parse_xml_setup( node );
 	    } else if (node->equals( "trial" )) {
 		parse_xml_trial( node, pool );
+	    } else if (node->equals( "transact" )) {
+		parse_xml_transact( node, pool );
 	    } else {
 		cerr << "Unknown tag '" << node->name() << "' in test" << endl;
 	    }
