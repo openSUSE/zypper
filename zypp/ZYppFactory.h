@@ -45,7 +45,7 @@ namespace zypp
 
   public:
     /** \return Pointer to the ZYpp instance.
-     * \throw EXCEPTION In case we can't aquire a lock.
+     * \throw EXCEPTION In case we can't acquire a lock.
     */
     ZYpp::Ptr getZYpp() const;
 

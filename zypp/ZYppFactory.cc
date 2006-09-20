@@ -276,7 +276,7 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
 
   ZYppFactoryException::ZYppFactoryException( const std::string & msg_r )
-  : Exception(N_("Cannot aquire zypp lock."))
+  : Exception(N_("Cannot acquire zypp lock."))
   {}
 
   ///////////////////////////////////////////////////////////////////
@@ -331,7 +331,7 @@ namespace zypp
       /*--------------------------------------------------*/
       if ( globalLock.zyppLocked() )
       {
-        ZYPP_THROW( ZYppFactoryException(N_("Cannot aquire zypp lock.")) );
+        ZYPP_THROW( ZYppFactoryException(N_("Cannot acquire zypp lock.")) );
       }
       else
       {
