@@ -1062,7 +1062,7 @@ Resolver::resolvePool ()
 	     iter != _invalid_queues.end(); iter++) {
 	    counter++;
 	    MIL << "-----------------------------------------------------------------" << endl;
-	    MIL << counter++ << "'st faild queue:" << endl;
+	    MIL << counter++ << ". failed queue:" << endl;
 	    ResolverQueue_Ptr invalid =	*iter;    
 	    invalid->context()->spewInfo ();
 	    MIL << *invalid->context() << endl;
