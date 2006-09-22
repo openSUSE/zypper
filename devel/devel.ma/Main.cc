@@ -2,6 +2,7 @@
 
 #include <zypp/base/LogControl.h>
 #include <zypp/base/LogTools.h>
+#include <zypp/base/IOStream.h>
 //#include <zypp/base/Algorithm.h>
 #include <zypp/SourceFactory.h>
 #include <zypp/Source.h>
@@ -19,6 +20,12 @@ static const Pathname sysRoot( "/Local/ROOT" );
 
 ///////////////////////////////////////////////////////////////////
 
+inline void prompt( const string & text_r = string() )
+{ cout << '[' << text_r << "] > " << flush; }
+
+inline string getcmd( const string & text_r = string() )
+{ prompt( text_r ); return iostr::getline( cin ); }
+
 /******************************************************************
 **
 **      FUNCTION NAME : main
@@ -31,7 +38,9 @@ int main( int argc, char * argv[] )
   --argc;
   ++argv;
 
-  cout << "x" << endl;
+  MIL << getcmd() << endl;
+  MIL << getcmd("a") << endl;
+
 
 
   INT << "===[END]============================================" << endl << endl;
