@@ -39,6 +39,8 @@ ZYpp::Ptr God;
 RuntimeData gData;
 Settings gSettings;
 
+ostream no_stream(NULL);
+
 //using namespace DbXml;
 
 void render_xml( const zypp::ResPool &pool )
