@@ -141,7 +141,9 @@ std::string timestamp ()
 
 void add_source_by_url( const zypp::Url &url, std::string alias  )
 {
+  cerr_vv << "Constructing SourceManager" << endl;
   SourceManager_Ptr manager = SourceManager::sourceManager();
+  cerr_vv << "Restoring SourceManager" << endl;
   manager->restore ("/", true /*use_cache*/);
 
   list<SourceManager::SourceId> sourceIds;
@@ -154,7 +156,9 @@ void add_source_by_url( const zypp::Url &url, std::string alias  )
    
   // more products?
   // try
+  cerr_vv << "Creating source" << endl;
   Source_Ref source = SourceFactory().createFrom( url, path, alias, cache, is_base );
+  cerr_vv << "Adding source" << endl;
   SourceManager::SourceId sourceId = manager->addSource( source );
 
   //if (enableSource)
@@ -175,5 +179,82 @@ void add_source_by_url( const zypp::Url &url, std::string alias  )
       cout << source.alias() << " (" << source.url() << ")" << endl;
     }
 
+    cerr_vv << "Storing source data" << endl;
     manager->store( "/", true /*metadata_cache*/ );
+}
+
+template<typename T>
+ostream& operator << (ostream& s, const vector<T>& v) {
+  std::copy (v.begin(), v.end(), ostream_iterator<T> (s, ", "));
+  return s;
+}
+
+//! remove a source, identified in any way: alias, url, id
+// may throw:
+void remove_source( const std::string anystring )
+{
+  cerr_vv << "Constructing SourceManager" << endl;
+  SourceManager_Ptr manager = SourceManager::sourceManager();
+  cerr_vv << "Restoring SourceManager" << endl;
+  manager->restore ("/", true /*use_cache*/);
+
+  SourceManager::SourceId sid;
+  zypp::str::strtonum (anystring, sid);
+  if (sid > 0) {
+    cerr_v << "removing source " << sid << endl;
+    try {
+      manager->findSource (sid);
+    }
+    catch (const Exception & ex) {
+      ZYPP_CAUGHT (ex);
+      cerr << str::form ("Source %lu not found", sid) << endl;
+    }
+    manager->removeSource (sid);
+  }
+  else {
+    bool is_url = false;
+    // could it be a URL?
+    cerr_vv << "Registered schemes: " << Url::getRegisteredSchemes () << endl;
+    string::size_type pos = anystring.find (':');
+    if (pos != string::npos) {
+      string scheme (anystring, 0, pos);
+      if (Url::isRegisteredScheme (scheme)) {
+	is_url = true;
+	cerr_vv << "Looks like a URL" << endl;
+
+	Url url;
+	try {
+	  url = Url (anystring);
+	}
+	catch ( const Exception & excpt_r ) {
+	  ZYPP_CAUGHT( excpt_r );
+	  cerr << "URL is invalid: " << excpt_r.asUserString() << endl;
+	}
+	if (url.isValid ()) {
+	  try {
+	    manager->findSourceByUrl (url);
+	  }
+	  catch (const Exception & ex) {
+	    ZYPP_CAUGHT (ex);
+	    cerr << str::form ("Source %s not found", url.asString().c_str()) << endl;
+	  }
+	  manager->removeSourceByUrl (url);
+	}
+      }
+    }
+
+    if (!is_url) {
+      try {
+	manager->findSource (anystring);
+      }
+      catch (const Exception & ex) {
+	ZYPP_CAUGHT (ex);
+	cerr << str::form ("Source %s not found", anystring.c_str()) << endl;
+      }
+      manager->removeSource (anystring); 	// by alias
+    }
+  }
+
+  cerr_vv << "Storing source data" << endl;
+  manager->store( "/", true /*metadata_cache*/ );
 }

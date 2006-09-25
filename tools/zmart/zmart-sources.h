@@ -15,6 +15,7 @@
 void init_system_sources();
 void include_source_by_url( const zypp::Url &url );
 void add_source_by_url( const zypp::Url &url, std::string alias );
+void remove_source( const std::string anystring );
 void list_system_sources();
 
 #endif

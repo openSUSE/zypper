@@ -27,6 +27,8 @@ ZYpp::Ptr God;
 RuntimeData gData;
 Settings gSettings;
 
+ostream no_stream(NULL);
+
 RpmCallbacks rpm_callbacks;
 SourceCallbacks source_callbacks;
 MediaCallbacks media_callbacks;

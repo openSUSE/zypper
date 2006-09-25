@@ -29,16 +29,16 @@ using namespace boost;
 using namespace zypp;
 using namespace zypp::detail;
 
-ZYpp::Ptr God;
+ZYpp::Ptr God = NULL;
 RuntimeData gData;
 Settings gSettings;
-int verbose = 0;
 
-/*
+ostream no_stream(NULL);
+
 RpmCallbacks rpm_callbacks;
 SourceCallbacks source_callbacks;
 MediaCallbacks media_callbacks;
-*/
+
 typedef map<string, list<string> > parsed_opts;
 
 string longopts2optstring (const struct option *longopts) {
@@ -99,6 +99,8 @@ parsed_opts parse_options (int argc, char **argv,
       list<string>& value = result[mapidx];
       if (optarg)
 	value.push_back (optarg);
+      else
+	value.push_back ("");
       break;
     }
   }
@@ -106,11 +108,12 @@ parsed_opts parse_options (int argc, char **argv,
 }
 
 static struct option global_options[] = {
-  {"help", no_argument, 0, 'h'},
-  {"verbose", no_argument, 0, 'v'},
-  {"version", no_argument, 0, 'V'},
-  {"req", required_argument, 0, 'r'},
-  {"opt", optional_argument, 0, 'o'},
+  {"help",	no_argument, 0, 'h'},
+  {"verbose",	no_argument, 0, 'v'},
+  {"version",	no_argument, 0, 'V'},
+  {"terse",	no_argument, 0, 't'},
+  {"req",	required_argument, 0, 'r'},
+  {"opt",	optional_argument, 0, 'o'},
   {0, 0, 0, 0}
 };
 
@@ -132,25 +135,38 @@ Url make_url (const string & url_s) {
 
 int main(int argc, char **argv)
 {
+  const char *logfile = getenv("ZYPP_LOGFILE");
+  if (logfile == NULL)
+    logfile = ZYPP_CHECKPATCHES_LOG;
+  zypp::base::LogControl::instance().logfile( logfile );
+  
+  bool help = false;
   parsed_opts gopts = parse_options (argc, argv, global_options);
 
-  if (gopts.count("help")) {
-    cerr << "  Options:\n"
-	"\t--help, -h\t\tHelp\n"
-	"\t--version, -V\t\tOutput the version number\n"
-	"\t--verbose, -v\t\tIncrease verbosity\n"
-	"\t--terse, -t\t\tTerse output for machine consumption\n"
-	;
-    
-  }
+  // Help is parsed by setting the help flag for a command, which may be empty
+  // $0 -h,--help
+  // $0 command -h,--help
+  // The help command is eaten and transformed to the help option
+  // $0 help
+  // $0 help command
+  if (gopts.count("help"))
+    help = true;
+
+  string help_global_options = "  Options:\n"
+    "\t--help, -h\t\tHelp\n"
+    "\t--version, -V\t\tOutput the version number\n"
+    "\t--verbose, -v\t\tIncrease verbosity\n"
+    "\t--terse, -t\t\tTerse output for machine consumption\n"
+    ;
 
   if (gopts.count("version")) {
     cerr << "zypper 0.1" << endl;
+    return 0;
   }
 
   if (gopts.count("verbose")) {
-    verbose += gopts.count("verbose");
-    cerr << "verbosity " << verbose << endl;
+    gSettings.verbose += gopts["verbose"].size();
+    cerr << "verbosity " << gSettings.verbose << endl;
   }
 
   // testing option
@@ -170,20 +186,34 @@ int main(int argc, char **argv)
   }
 
   string command;
+
   if (optind < argc) {
     command = argv[optind++];
   }
-  if (command.empty())
-    command = "help";
-  cout << "COMMAND: " << command << endl;
+  if (command == "help") {
+    help = true;
+    if (optind < argc) {
+      command = argv[optind++];
+    }
+  }
+
+  if (command.empty()) {
+    cerr_vv << "No command" <<endl;
+    //command = "help";
+  }
+  cerr_v << "COMMAND: " << command << endl;
+
+  // === command-specific options ===
 
   struct option no_options = {0, 0, 0, 0};
   struct option *specific_options = &no_options;
+  string specific_help;
 
   string help_commands = "  Commands:\n"
       "\tinstall, in\t\tInstall packages or resolvables\n"
-      "\tservice-list, sl\t\tList services aka installation sources\n"
+      "\tservice-list, sl\tList services aka installation sources\n"
       "\tservice-add, sa\t\tAdd a new service\n"
+      "\tservice-delete, sd\t\tDelete a service\n"
       ;
 
   string help_global_source_options = "  Source options:\n"
@@ -203,16 +233,19 @@ int main(int argc, char **argv)
       {"no-refresh", no_argument, 0, 'n'},
       {0, 0, 0, 0}
     };
-
     specific_options = service_add_options;
+    specific_help = "  Command options:\n"
+      "\t--disabled\t\tAdd the service as disabled\n"
+      ;
   }
   else if (command == "service-list" || command == "sl") {
     static struct option service_list_options[] = {
-      {"terse", no_argument, 0, 't'},
       {0, 0, 0, 0}
     };
-
     specific_options = service_list_options;
+    specific_help = "  Command options:\n"
+      "\n"
+      ;
   }
   else {
     // no options. or make this an exhaustive thing?
@@ -224,43 +257,19 @@ int main(int argc, char **argv)
 
   list<string> arguments;
   if (optind < argc) {
-    cerr << "non-option ARGV-elements: ";
+    cerr_v << "non-option ARGV-elements: ";
     while (optind < argc) {
       string argument = argv[optind++];
-      cerr << argument << ' ';
+      cerr_v << argument << ' ';
       arguments.push_back (argument);
     }
-    cerr << endl;
+    cerr_v << endl;
   }
 
-  if (copts.count("disabled")) {
-      cout << "FAKE Disabled" << endl;
-  }
+  // === process options ===
 
-  if (copts.count("no-refresh")) {
-      cout << "FAKE No Refresh" << endl;
-  }
-
-  if (copts.count("terse")) {
-      cout << "FAKE Terse" << endl;
-  }
-
-
-  if (command == "service-list" || command == "sl")
-  {
-    if ( geteuid() != 0 )
-    {
-      cout << "Sorry, you need root privileges to view system sources." << endl;
-      return 1;
-    }
-    
-    list_system_sources();
-    return 0;
-  }
-  
-  if (command == "help") {
-    cout << "Help command" << endl;
-    return 0;
+  if (gopts.count("terse")) {
+      cerr_v << "FAKE Terse" << endl;
   }
 
   if (gopts.count("disable-system-sources"))
@@ -270,45 +279,14 @@ int main(int argc, char **argv)
   }
   else
   {
-    if ( geteuid() != 0 )
-    {
-      cout << "Sorry, you need root privileges to use system sources, disabling them..." << endl;
-      gSettings.disable_system_sources = true;
-      MIL << "system sources disabled" << endl;
-    }
-    else
-    {
-      MIL << "system sources enabled" << endl;
-    }
+    MIL << "system sources enabled" << endl;
   }
 
-  if (command == "service-add" || command == "sa")
-  {
-    Url url = make_url (arguments.front());
-    if (!url.isValid())
-      return 1;
-    
-    try {
-      add_source_by_url(url, "aliasfixme");
-    }
-    catch ( const Exception & excpt_r )
-    {
-      cerr << excpt_r.asUserString() << endl;
-      return 1;
-    }
-    return 0;
-  }
-  
   if (gopts.count("disable-system-resolvables"))
   {
     MIL << "system resolvables disabled" << endl;
-    cout << "Ignoring installed resolvables..." << endl;
+    cerr << "Ignoring installed resolvables..." << endl;
     gSettings.disable_system_resolvables = true;
-  }
-  
-  if (command == "install" || command == "in")
-  {
-    gData.packages_to_install = vector<string>(arguments.begin(), arguments.end());
   }
   
   if (gopts.count("source")) {
@@ -322,20 +300,28 @@ int main(int argc, char **argv)
     }
   }
   
-  const char *logfile = getenv("ZYPP_LOGFILE");
-  if (logfile == NULL)
-    logfile = ZYPP_CHECKPATCHES_LOG;
-  zypp::base::LogControl::instance().logfile( logfile );
-  
-  std::string previous_token;
-  
-  God = NULL;
-  try
-  {
+  // === execute command ===
+
+  if (command.empty()) {
+    if (help) {
+      cerr << help_global_options << help_commands;
+    }
+    else {
+      cerr << "Try -h for help" << endl;
+    }
+    return 0;
+  }
+
+  if (command == "moo") {
+    cout << "   \\\\\\\\\\\n  \\\\\\\\\\\\\\__o\n__\\\\\\\\\\\\\\'/_" << endl;
+    return 0;
+  }
+
+  // here come commands that need the lock
+  try {
     God = zypp::getZYpp();
   }
-  catch (Exception & excpt_r)
-  {
+  catch (Exception & excpt_r) {
     ZYPP_CAUGHT (excpt_r);
     ERR  << "a ZYpp transaction is already in progress." << endl;
     cerr << "a ZYpp transaction is already in progress." << endl;
@@ -343,60 +329,151 @@ int main(int argc, char **argv)
     return 1;
   }
   
-  SourceManager_Ptr manager;
-  manager = SourceManager::sourceManager();
-  
-  KeyRingCallbacks keyring_callbacks;
-  DigestCallbacks digest_callbacks;
-  
-  if ( ! gSettings.disable_system_sources )
-    init_system_sources();
-  
-  for ( std::list<Url>::const_iterator it = gSettings.additional_sources.begin(); it != gSettings.additional_sources.end(); ++it )
+  if (command == "service-list" || command == "sl")
   {
-    include_source_by_url( *it );
-  }
-  
-  cout << endl;
-  
-  if ( gData.sources.empty() )
-  {
-    cout << "Warning! No sources. Operating only over the installed resolvables. You will not be able to install stuff" << endl;
-  } 
-  
-  // dont add rpms
-  God->initializeTarget("/");
-  
-  std::string token = calculate_token();
-  
-  if ( token != gSettings.previous_token )
-  {
-    // something changed
-    load_sources();
-    
-    if ( ! gSettings.disable_system_resolvables )
-      load_target();
-    
-    for ( vector<string>::const_iterator it = gData.packages_to_install.begin(); it != gData.packages_to_install.end(); ++it )
+    if ( geteuid() != 0 )
     {
-      mark_package_for_install(*it);
+      cerr << "Sorry, you need root privileges to view system sources." << endl;
+      return 1;
     }
     
-    resolve();
-    
-    show_summary();
-      
-    std::cout << "Continue? [y/n] ";
-    if (readBoolAnswer())
-    {
-      ZYppCommitResult result = God->commit( ZYppCommitPolicy() );
-      std::cout << result << std::endl; 
-    }
+    list_system_sources();
+    return 0;
   }
   
-  
+  if (command == "service-add" || command == "sa")
+  {
+    if (copts.count("disabled")) {
+      cerr_v << "FAKE Disabled" << endl;
+    }
+    if (copts.count("no-refresh")) {
+      cerr_v << "FAKE No Refresh" << endl;
+    }
 
+    if (help || arguments.size() < 1) {
+      cerr << "service-add [options] URI [alias]\n"
+	""
+	   << specific_help
+	;
+      return !help;
+    }
+      
+    Url url = make_url (arguments.front());
+    arguments.pop_front();
+    if (!url.isValid())
+      return 1;
+    string alias = url.asString();
+    if (!arguments.empty())
+      alias = arguments.front();
+
+    // load gpg keys
+    // FIXME only once
+    cerr_v << "initializing target" << endl;
+    God->initializeTarget("/");
+
+    try {
+      // also stores it
+      add_source_by_url(url, alias);
+    }
+    catch ( const Exception & excpt_r )
+    {
+      cerr << excpt_r.asUserString() << endl;
+      return 1;
+    }
+
+    return 0;
+  }
+
+  if (command == "service-delete" || command == "sd")
+  {
+    if (help || arguments.size() < 1) {
+      cerr << "service-delete [options] <URI|alias>\n"
+	   << specific_help
+	;
+      return !help;
+    }
+
+    try {
+      // also stores it
+      remove_source(arguments.front());
+    }
+    catch ( const Exception & excpt_r )
+    {
+      cerr << excpt_r.asUserString() << endl;
+      return 1;
+    }
+
+    return 0;
+  }
+  
+  if (command == "install" || command == "in") {
+    gData.packages_to_install = vector<string>(arguments.begin(), arguments.end());
+    std::string previous_token;
+  
+    SourceManager_Ptr manager;
+    manager = SourceManager::sourceManager();
+  
+    KeyRingCallbacks keyring_callbacks;
+    DigestCallbacks digest_callbacks;
+  
+    if ( geteuid() != 0 )
+    {
+      cerr << "Sorry, you need root privileges to use system sources, disabling them..." << endl;
+      gSettings.disable_system_sources = true;
+      MIL << "system sources disabled" << endl;
+    }
+
+    if ( ! gSettings.disable_system_sources ) {
+      cerr_v << "initializing sources" << endl;
+      init_system_sources();
+    }
+  
+    for ( std::list<Url>::const_iterator it = gSettings.additional_sources.begin(); it != gSettings.additional_sources.end(); ++it )
+      {
+	include_source_by_url( *it );
+      }
+  
+    if ( gData.sources.empty() )
+      {
+	cerr << "Warning! No sources. Operating only over the installed resolvables. You will not be able to install stuff" << endl;
+      } 
+  
+    // dont add rpms
+    cerr_v << "initializing target" << endl;
+    God->initializeTarget("/");
+  
+    cerr_v << "calculating token" << endl;
+    std::string token = calculate_token();
+  
+    if ( token != gSettings.previous_token )
+      {
+	// something changed
+	cerr_v << "loading sources" << endl;
+	load_sources();
+    
+	if ( ! gSettings.disable_system_resolvables ) {
+	  cerr_v << "loading target" << endl;
+	  load_target();
+	}
+    
+	for ( vector<string>::const_iterator it = gData.packages_to_install.begin(); it != gData.packages_to_install.end(); ++it )
+	  {
+	    mark_package_for_install(*it);
+	  }
+    
+	cerr_v << "resolving" << endl;
+	resolve();
+    
+	show_summary();
+      
+	cerr << "Continue? [y/n] ";
+	if (readBoolAnswer())
+	  {
+	    cerr_v << "committing" << endl;
+	    ZYppCommitResult result = God->commit( ZYppCommitPolicy() );
+	    cerr << result << std::endl; 
+	  }
+      }
+  }
   return 0;
 }
-
-

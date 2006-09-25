@@ -1,4 +1,4 @@
-/*---------------------------------------------------------------------\
+/*-----------------------------------------------------------*- c++ -*-\
 |                          ____ _   __ __ ___                          |
 |                         |__  / \ / / . \ . \                         |
 |                           / / \ V /|  _/  _/                         |
@@ -33,6 +33,7 @@ struct Settings
 {
   Settings()
   : previous_token(RANDOM_TOKEN),
+  verbose(0),  
   previous_code(-1),
   disable_system_sources(false),
   disable_system_resolvables(false)
@@ -40,6 +41,7 @@ struct Settings
 
   std::list<zypp::Url> additional_sources;
   std::string previous_token;
+  int verbose;
   int previous_code;
   std::string command;
   bool disable_system_sources;
@@ -58,6 +60,16 @@ struct RuntimeData
   int security_patches_count;
   std::vector<std::string> packages_to_install; 
 };
+
+extern RuntimeData gData;
+extern Settings gSettings;
+extern std::ostream no_stream;
+
+#define COND_STREAM(STREAM,LEVEL) ((gSettings.verbose >= LEVEL)? STREAM: no_stream)
+#define cerr_v COND_STREAM(cerr,1)
+#define cout_v COND_STREAM(cout,1)
+#define cerr_vv COND_STREAM(cerr,2)
+#define cout_vv COND_STREAM(cout,2)
 
 #endif
 
