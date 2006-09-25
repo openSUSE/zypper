@@ -247,7 +247,7 @@ namespace zypp
         UrlSchemes                     schemes;
 
         schemes.reserve(urlByScheme.size());
-        for( ; i != urlByScheme.begin(); ++i)
+        for( ; i != urlByScheme.end(); ++i)
         {
           schemes.push_back(i->first);
         }

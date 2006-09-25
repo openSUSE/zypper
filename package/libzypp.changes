@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Mon Sep 25 13:52:55 CEST 2006 - mvidner@suse.cz
+
+- fix: Url::getRegisteredSchemes() would always return nothing
+
+-------------------------------------------------------------------
 Tue Sep 19 10:59:24 CEST 2006 - jsrain@suse.cz
 
 - adapted multi-media YUM sources according to official YUM
