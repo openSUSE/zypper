@@ -52,25 +52,42 @@ namespace zypp
     class MediaMountException : public MediaException
     {
     public:
+      MediaMountException()
+      : MediaException( "Media Mount Exception" )
+      {}
+
       /** Ctor taking message.
        * Use \ref ZYPP_THROW to throw exceptions.
       */
       MediaMountException( const std::string & error_r,
 			   const std::string & source_r,
-			   const std::string & target_r )
+			   const std::string & target_r,
+			   const std::string & cmdout_r="")
       : MediaException()
       , _error(error_r)
       , _source(source_r)
       , _target(target_r)
+      , _cmdout(cmdout_r)
       {}
       /** Dtor. */
       virtual ~MediaMountException() throw() {};
+
+      const std::string & mountError() const
+      { return _error;  }
+      const std::string & mountSource() const
+      { return _source; }
+      const std::string & mountTarget() const
+      { return _target; }
+      const std::string & mountOutput() const
+      { return _cmdout; }
+
     protected:
       virtual std::ostream & dumpOn( std::ostream & str ) const;
     private:
       std::string _error;
       std::string _source;
       std::string _target;
+      std::string _cmdout;
     };
 
     class MediaUnmountException : public MediaException

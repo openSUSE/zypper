@@ -25,8 +25,12 @@ namespace zypp
 
     std::ostream & MediaMountException::dumpOn( std::ostream & str ) const
     {
-      return str << "Failed to mount " << _source << " on " << _target
-	<< " : " << _error << endl;
+      str << "Failed to mount " << _source << " on " << _target;
+      if( !_cmdout.empty())
+	str << ": " << _error << " (" << _cmdout << ")" << endl;
+      else
+	str << ": " << _error << endl;
+      return str;
     }
 
     std::ostream & MediaUnmountException::dumpOn( std::ostream & str ) const

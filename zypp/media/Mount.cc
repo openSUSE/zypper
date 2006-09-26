@@ -73,7 +73,7 @@ void Mount::mount ( const string& source,
 
     if ( process == NULL )
     {
-      ZYPP_THROW(MediaMountException(source, target, "Mounting media failed"));
+      ZYPP_THROW(MediaMountException("Mounting media failed", source, target));
     }
 
     string value;
@@ -119,6 +119,10 @@ void Mount::mount ( const string& source,
 	    {
 		err = "Nfs path is not a directory";
 	    }
+	    else
+	    {
+	       err = "Unable to find directory on the media";
+	    }
 	}
 
 	output = process->receiveLine();
@@ -138,7 +142,7 @@ void Mount::mount ( const string& source,
 
     if ( err != "" ) {
       WAR << "mount " << source << " " << target << ": " << err << endl;
-      ZYPP_THROW(MediaMountException(source, target, err));
+      ZYPP_THROW(MediaMountException(err, source, target, value));
     } else {
       MIL << "mounted " << source << " " << target << endl;
     }

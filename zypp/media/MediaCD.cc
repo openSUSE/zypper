@@ -464,6 +464,7 @@ namespace zypp {
       string mountpoint = attachPoint().asString();
       bool mountsucceeded = false;
       int count = 0;
+      MediaMountException merr;
 
       string options = _url.getQueryParam("mountoptions");
       if (options.empty())
@@ -594,6 +595,12 @@ namespace zypp {
 	      ));
 	    }
 	  }
+	  catch (const MediaMountException &e)
+	  {
+	    merr = e;
+	    removeAttachPoint();
+	    ZYPP_CAUGHT(e);
+	  }
 	  catch (const MediaException & excpt_r)
 	  {
 	    removeAttachPoint();
@@ -605,7 +612,19 @@ namespace zypp {
       if (!mountsucceeded)
       {
     	_lastdev = -1;
-        ZYPP_THROW(MediaMountException(_url.asString(), mountpoint, "Mounting media failed"));
+
+	if( !merr.mountOutput().empty())
+	{
+	  ZYPP_THROW(MediaMountException(merr.mountError(),
+	                                 _url.asString(),
+					 mountpoint,
+	                                 merr.mountOutput()));
+	}
+	else
+	{
+	  ZYPP_THROW(MediaMountException("Mounting media failed",
+	                                 _url.asString(), mountpoint));
+	}
       }
       DBG << _lastdev << " " << count << endl;
     }
