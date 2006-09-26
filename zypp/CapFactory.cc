@@ -14,6 +14,9 @@
 #include <set>
 #include <map>
 
+#include <ext/hash_set>
+#include <ext/hash_fun.h>
+
 #include "zypp/base/Logger.h"
 #include "zypp/base/Exception.h"
 #include "zypp/base/String.h"
@@ -31,8 +34,28 @@ namespace
   using ::zypp::capability::CapabilityImpl;
   using ::zypp::capability::CapImplOrder;
 
+  struct CapImplHashFun
+  {
+    size_t operator() ( const CapabilityImpl::Ptr & p ) const
+    {
+      return __gnu_cxx::hash<const char*>()( p->encode().c_str() );
+    }
+  };
+
+  struct CapImplHashEqual
+  {
+    bool operator() ( const CapabilityImpl::Ptr & lhs, const CapabilityImpl::Ptr & rhs ) const
+    {
+      return (    lhs->encode() == rhs->encode()
+               && lhs->kind()   == rhs->kind()
+               && lhs->refers() == rhs->refers() );
+    }
+  };
+
   /** Set of unique CapabilityImpl. */
-  typedef std::set<CapabilityImpl::Ptr,CapImplOrder> USet;
+  //typedef std::set<CapabilityImpl::Ptr,CapImplOrder> USet;
+  typedef __gnu_cxx::hash_set<CapabilityImpl::Ptr, CapImplHashFun, CapImplHashEqual> USet;
+
 
   /** Set to unify created capabilities.
    *
