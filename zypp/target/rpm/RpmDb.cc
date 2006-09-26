@@ -35,6 +35,7 @@
 #include "zypp/target/rpm/RpmDb.h"
 #include "zypp/target/rpm/RpmCallbacks.h"
 
+#include "zypp/target/CommitLog.h"
 #include "zypp/target/rpm/librpmDb.h"
 #include "zypp/target/rpm/RpmPackageImpl.h"
 #include "zypp/target/rpm/RpmException.h"
@@ -158,94 +159,6 @@ ostream & operator<<( ostream & str, const RpmDb::DbStateInfoBits & obj )
 
 #define WARNINGMAILPATH "/var/log/YaST2/"
 #define FILEFORBACKUPFILES "YaSTBackupModifiedFiles"
-
-///////////////////////////////////////////////////////////////////
-//
-//	CLASS NAME : RpmDb::Logfile
-/**
- * Simple wrapper for progress log. Refcnt, filename and corresponding
- * ofstream are static members. Logfile constructor raises, destructor
- * lowers refcounter. On refcounter changing from 0->1, file is opened.
- * Changing from 1->0 the file is closed. Thus Logfile objects should be
- * local to those functions, writing the log, and must not be stored
- * permanently;
- *
- * Usage:
- *  some methothd ()
- *  {
- *    Logfile progresslog;
- *    ...
- *    progresslog() << "some message" << endl;
- *    ...
- *  }
- **/
-class RpmDb::Logfile {
-  Logfile( const Logfile & );
-  Logfile & operator=( const Logfile & );
-  private:
-    static ofstream _log;
-    static unsigned _refcnt;
-    static Pathname _fname;
-    static void openLog() {
-      if ( !_fname.empty() ) {
-	_log.clear();
-	_log.open( _fname.asString().c_str(), std::ios::out|std::ios::app );
-	if( !_log )
-	  ERR << "Could not open logfile '" << _fname << "'" << endl;
-      }
-    }
-    static void closeLog() {
-      _log.clear();
-      _log.close();
-    }
-    static void refUp() {
-      if ( !_refcnt )
-	openLog();
-      ++_refcnt;
-    }
-    static void refDown() {
-      --_refcnt;
-      if ( !_refcnt )
-	closeLog();
-    }
-  public:
-    Logfile() { refUp(); }
-    ~Logfile() { refDown(); }
-    ostream & operator()( bool timestamp = false ) {
-      if ( timestamp ) {
-	_log << Date(Date::now()).form( "%Y-%m-%d %H:%M:%S ");
-      }
-      return _log;
-    }
-    static void setFname( const Pathname & fname_r ) {
-      MIL << "installation log file " << fname_r << endl;
-      if ( _refcnt )
-	closeLog();
-      _fname = fname_r;
-      if ( _refcnt )
-	openLog();
-    }
-};
-
-///////////////////////////////////////////////////////////////////
-
-Pathname RpmDb::Logfile::_fname;
-ofstream RpmDb::Logfile::_log;
-unsigned RpmDb::Logfile::_refcnt = 0;
-
-///////////////////////////////////////////////////////////////////
-
-///////////////////////////////////////////////////////////////////
-//
-//
-//	METHOD NAME : RpmDb::setInstallationLogfile
-//	METHOD TYPE : bool
-//
-bool RpmDb::setInstallationLogfile( const Pathname & filename )
-{
-  Logfile::setFname( filename );
-  return true;
-}
 
 ///////////////////////////////////////////////////////////////////
 //
@@ -1832,7 +1745,7 @@ void RpmDb::installPackage( const Pathname & filename, unsigned flags )
 void RpmDb::doInstallPackage( const Pathname & filename, unsigned flags, callback::SendReport<RpmInstallReport> & report )
 {
     FAILIFNOTINITIALIZED;
-    Logfile progresslog;
+    CommitLog progresslog;
 
     MIL << "RpmDb::installPackage(" << filename << "," << flags << ")" << endl;
 
@@ -1975,7 +1888,7 @@ void RpmDb::removePackage( const string & name_r, unsigned flags )
 void RpmDb::doRemovePackage( const string & name_r, unsigned flags, callback::SendReport<RpmRemoveReport> & report )
 {
     FAILIFNOTINITIALIZED;
-    Logfile progresslog;
+    CommitLog progresslog;
 
     MIL << "RpmDb::doRemovePackage(" << name_r << "," << flags << ")" << endl;
 
@@ -2126,7 +2039,7 @@ bool RpmDb::backupPackage( const Pathname & filename )
 //
 bool RpmDb::backupPackage(const string& packageName)
 {
-    Logfile progresslog;
+    CommitLog progresslog;
     bool ret = true;
     Pathname backupFilename;
     Pathname filestobackupfile = _root+_backuppath+FILEFORBACKUPFILES;

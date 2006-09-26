@@ -237,14 +237,6 @@ namespace zypp {
 	   **/
 	  const std::list<Package::Ptr> & getPackages();
 
-     #warning uncomment
-#if 0
-	  /**
-	   * Hack to lookup required and conflicting file relations.
-	   **/
-	  void traceFileRel( const PkgRelation & rel_r );
-#endif
-
 	  ///////////////////////////////////////////////////////////////////
 	  //
 	  // Direct RPM database retrieval via librpm.
@@ -553,25 +545,6 @@ namespace zypp {
 	   * Dump debug info.
 	   **/
 	  virtual std::ostream & dumpOn( std::ostream & str ) const;
-
-	  ///////////////////////////////////////////////////////////////////
-	  //
-	  // Installation log
-	  //
-	///////////////////////////////////////////////////////////////////
-	private:
-
-	  /**
-	   * Progress of installation may be logged to file
-	   **/
-	  class Logfile;
-
-	public:
-
-	  /**
-	   * Set logfile for progress log. Empty filename to disable logging.
-	   **/
-	  static bool setInstallationLogfile( const Pathname & filename );
 
 	protected:
 	  void doRemovePackage( const std::string & name_r, unsigned flags, callback::SendReport<RpmRemoveReport> & report );

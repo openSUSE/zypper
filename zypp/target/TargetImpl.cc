@@ -34,6 +34,7 @@
 #include "zypp/Url.h"
 
 #include "zypp/ResFilters.h"
+#include "zypp/target/CommitLog.h"
 #include "zypp/target/TargetImpl.h"
 #include "zypp/target/TargetCallbackReceiver.h"
 
@@ -166,15 +167,15 @@ namespace zypp
     {
       TargetImpl *ptr = const_cast<TargetImpl *>(this);
       ptr->loadKindResolvables(kind_r);
-      resfilter::ResFilter filter = ByKind(kind_r); 
+      resfilter::ResFilter filter = ByKind(kind_r);
       return boost::make_filter_iterator( filter, _store.begin(), _store.end() );
     }
-    
+
     ResStore::resfilter_const_iterator TargetImpl::byKindEnd( const ResObject::Kind & kind_r  ) const
     {
       TargetImpl *ptr = const_cast<TargetImpl *>(this);
       ptr->loadKindResolvables(kind_r);
-      resfilter::ResFilter filter = ByKind(kind_r); 
+      resfilter::ResFilter filter = ByKind(kind_r);
       return boost::make_filter_iterator( filter, _store.end(), _store.end() );
     }
 
@@ -586,7 +587,8 @@ namespace zypp
     /** Set the log file for target */
     bool TargetImpl::setInstallationLogfile(const Pathname & path_r)
     {
-      return rpm::RpmDb::setInstallationLogfile(path_r);
+      CommitLog::setFname(path_r);
+      return true;
     }
 
     void
@@ -606,14 +608,14 @@ namespace zypp
     {
       Date ts_rpm;
       Date ts_store;
-      
-      PathInfo rpmdb_info(root() + "/var/lib/rpm/Packages"); 
+
+      PathInfo rpmdb_info(root() + "/var/lib/rpm/Packages");
       if ( rpmdb_info.isExist() )
         ts_rpm = rpmdb_info.mtime();
-          
+
       if ( isStorageEnabled() )
-        ts_store = _storage.timestamp();      
-      
+        ts_store = _storage.timestamp();
+
       if ( ts_rpm > ts_store )
       {
         return ts_rpm;
@@ -631,7 +633,7 @@ namespace zypp
           return Date::now();
       }
     }
-    
+
     /////////////////////////////////////////////////////////////////
   } // namespace target
   ///////////////////////////////////////////////////////////////////
