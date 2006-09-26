@@ -16,7 +16,6 @@
 #include <zypp/Locale.h>
 #include <zypp/ZYpp.h>
 #include <zypp/ZYppFactory.h>
-#include <zypp/zypp_detail/ZYppReadOnlyHack.h>
 #include <zypp/SourceManager.h>
 #include <zypp/SourceFactory.h>
 #include <zypp/ResStore.h>
@@ -59,6 +58,7 @@ struct RuntimeData
   int patches_count;
   int security_patches_count;
   std::vector<std::string> packages_to_install; 
+  std::vector<std::string> packages_to_uninstall; 
 };
 
 extern RuntimeData gData;

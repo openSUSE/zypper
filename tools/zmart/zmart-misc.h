@@ -1,4 +1,4 @@
-/*---------------------------------------------------------------------\
+/*-----------------------------------------------------------*- c++ -*-\
 |                          ____ _   __ __ ___                          |
 |                         |__  / \ / / . \ . \                         |
 |                           / / \ V /|  _/  _/                         |
@@ -15,6 +15,7 @@
 
 bool readBoolAnswer();
 void mark_package_for_install( const std::string &name );
+void mark_package_for_uninstall( const std::string &name );
 void show_summary();
 std::string calculate_token();
 void load_target();

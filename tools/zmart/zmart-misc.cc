@@ -34,13 +34,25 @@ bool readBoolAnswer()
 
 void mark_package_for_install( const std::string &name )
 {
+  // as documented in ResPool::setAdditionalFoo
   CapSet capset;
   capset.insert (CapFactory().parse( ResTraits<Package>::kind, name));
-  //capset.insert (CapFactory().parse( ResTraits<Package>::kind, "foo1 > 1.0"));
+
   // The user is setting this capablility
   ResPool::AdditionalCapSet aCapSet;
   aCapSet[ResStatus::USER] = capset;
   God->pool().setAdditionalRequire( aCapSet );
+}
+
+void mark_package_for_uninstall( const std::string &name )
+{
+  CapSet capset;
+  capset.insert (CapFactory().parse( ResTraits<Package>::kind, name));
+
+  // The user is setting this capablility
+  ResPool::AdditionalCapSet aCapSet;
+  aCapSet[ResStatus::USER] = capset;
+  God->pool().setAdditionalConflict( aCapSet );
 }
 
 void show_summary()
@@ -55,7 +67,7 @@ void show_summary()
         cout << "<install>   ";
       if ( it->status().isToBeUninstalled() )
         cout << "<uninstall> ";
-      cout << res->name() << " " << res->edition() << "]" << std::endl;
+      cout << *res << std::endl;
     }
   } 
 }

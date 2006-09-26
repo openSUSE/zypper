@@ -2,6 +2,8 @@
 #include "zmart.h"
 #include "zmart-sources.h"
 
+#include <boost/format.hpp>
+
 #include <zypp/target/store/PersistentStorage.h>
 
 using namespace zypp::detail;
@@ -207,7 +209,8 @@ void remove_source( const std::string anystring )
     }
     catch (const Exception & ex) {
       ZYPP_CAUGHT (ex);
-      cerr << str::form ("Source %lu not found", sid) << endl;
+      // boost::format: %s is fine regardless of the actual type :-)
+      cerr << format ("Source %s not found.") % sid << endl;
     }
     manager->removeSource (sid);
   }
@@ -236,7 +239,7 @@ void remove_source( const std::string anystring )
 	  }
 	  catch (const Exception & ex) {
 	    ZYPP_CAUGHT (ex);
-	    cerr << str::form ("Source %s not found", url.asString().c_str()) << endl;
+	    cerr << format ("Source %s not found.") % url.asString() << endl;
 	  }
 	  manager->removeSourceByUrl (url);
 	}
@@ -249,7 +252,7 @@ void remove_source( const std::string anystring )
       }
       catch (const Exception & ex) {
 	ZYPP_CAUGHT (ex);
-	cerr << str::form ("Source %s not found", anystring.c_str()) << endl;
+	cerr << format ("Source %s not found.") % anystring << endl;
       }
       manager->removeSource (anystring); 	// by alias
     }

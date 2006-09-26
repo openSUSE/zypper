@@ -135,6 +135,12 @@ Url make_url (const string & url_s) {
 
 int main(int argc, char **argv)
 {
+  struct Bye {
+    ~Bye() {
+      cerr_v << "Exiting main()" << endl;
+    }
+  } say_goodbye __attribute__ ((__unused__));
+
   const char *logfile = getenv("ZYPP_LOGFILE");
   if (logfile == NULL)
     logfile = ZYPP_CHECKPATCHES_LOG;
@@ -211,6 +217,7 @@ int main(int argc, char **argv)
 
   string help_commands = "  Commands:\n"
       "\tinstall, in\t\tInstall packages or resolvables\n"
+      "\tremove, rm\t\tRemove packages or resolvables\n"
       "\tservice-list, sl\tList services aka installation sources\n"
       "\tservice-add, sa\t\tAdd a new service\n"
       "\tservice-delete, sd\t\tDelete a service\n"
@@ -408,6 +415,12 @@ int main(int argc, char **argv)
   
   if (command == "install" || command == "in") {
     gData.packages_to_install = vector<string>(arguments.begin(), arguments.end());
+  }
+  if (command == "remove" || command == "rm") {
+    gData.packages_to_uninstall = vector<string>(arguments.begin(), arguments.end());
+  }
+
+  if (!gData.packages_to_install.empty() || !gData.packages_to_uninstall.empty()) {
     std::string previous_token;
   
     SourceManager_Ptr manager;
@@ -456,14 +469,43 @@ int main(int argc, char **argv)
 	  load_target();
 	}
     
-	for ( vector<string>::const_iterator it = gData.packages_to_install.begin(); it != gData.packages_to_install.end(); ++it )
-	  {
-	    mark_package_for_install(*it);
-	  }
+	for ( vector<string>::const_iterator it = gData.packages_to_install.begin(); it != gData.packages_to_install.end(); ++it ) {
+	  mark_package_for_install(*it);
+	}
+    
+	for ( vector<string>::const_iterator it = gData.packages_to_uninstall.begin(); it != gData.packages_to_uninstall.end(); ++it ) {
+	  mark_package_for_uninstall(*it);
+	}
     
 	cerr_v << "resolving" << endl;
 	resolve();
     
+	cerr_v << "Problems:" << endl;
+	Resolver_Ptr resolver = zypp::getZYpp()->resolver();
+	ResolverProblemList rproblems = resolver->problems ();
+	ResolverProblemList::iterator
+	  b = rproblems.begin (),
+	  e = rproblems.end (),
+	  i;
+	if (b == e) {
+	  cerr_v << "(none)" << endl;
+	}
+	for (i = b; i != e; ++i) {
+	    cerr_v << "PROB " << (*i)->description () << endl;
+	    cerr_v << ":    " << (*i)->details () << endl;
+
+	    ProblemSolutionList solutions = (*i)->solutions ();
+	    ProblemSolutionList::iterator
+	      bb = solutions.begin (),
+	      ee = solutions.end (),
+	      ii;
+	    for (ii = bb; ii != ee; ++ii) {
+	      cerr_v << " SOL  " << (*ii)->description () << endl;
+	      cerr_v << " :    " << (*ii)->details () << endl;
+	    }
+	}
+
+	cerr_v << "Summary:" << endl;
 	show_summary();
       
 	cerr << "Continue? [y/n] ";
