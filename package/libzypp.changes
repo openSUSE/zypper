@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Wed Sep 27 14:14:33 CEST 2006 - ma@suse.de
+
+- Added ScriptResolvableReport. Callbacks triggered on script
+  execution during commit. (F100233)
+- revision 4187
+- version 2.2.0
+
+-------------------------------------------------------------------
 Mon Sep 25 13:52:55 CEST 2006 - mvidner@suse.cz
 
 - fix: Url::getRegisteredSchemes() would always return nothing
@@ -29,7 +37,7 @@ Mon Sep 18 15:19:53 CEST 2006 - lslezak@suse.cz
 -------------------------------------------------------------------
 Thu Sep 14 15:59:47 CEST 2006 - schubi@suse.de
 
-- Replaced requirementIsMet by requirementIsInstalledOrUnneeded 
+- Replaced requirementIsMet by requirementIsInstalledOrUnneeded
   in QueueItemInstall and QueueItemRequire
   Bug 192535/204913
   removed fix:Thu Sep  7 18:31:46 CEST 2006 - schubi@suse.de
@@ -52,7 +60,7 @@ Thu Sep  7 18:31:46 CEST 2006 - schubi@suse.de
 
 - Do not regarding SATISFIED (regarding UNNEEDED) in isPresent if it is
   a package/script/message
-  Bug: 192535 
+  Bug: 192535
 
 -------------------------------------------------------------------
 Thu Sep  7 16:19:36 CEST 2006 - dmacvicar@suse.de
@@ -71,7 +79,7 @@ Thu Sep  7 14:32:38 CEST 2006 - mvidner@suse.cz
 Wed Sep  6 18:31:20 CEST 2006 - dmacvicar@suse.de
 
 - better error propagation
-- r4096 
+- r4096
 
 -------------------------------------------------------------------
 Tue Sep  5 19:22:56 CEST 2006 - mt@suse.de
