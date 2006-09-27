@@ -97,7 +97,7 @@ namespace zypp
 
 
       // return false if the download should be aborted right now
-      virtual bool progress(int /*value*/, Resolvable::constPtr /*resolvable_ptr*/) 
+      virtual bool progress(int /*value*/, Resolvable::constPtr /*resolvable_ptr*/)
       { return true; }
 
       virtual Action problem(
@@ -125,7 +125,7 @@ namespace zypp
         NOT_FOUND, 	// the requested Url was not found
         IO,		// IO error
         INVALID,		// th source is invalid
-        UNKNOWN    
+        UNKNOWN
       };
 
       virtual void start(const Url &/*url*/) {}
@@ -138,7 +138,7 @@ namespace zypp
 
       virtual Action problem( const Url &/*url*/, Error /*error*/, const std::string &/*description*/ ) { return ABORT; }
     };
-    
+
     struct SourceCreateReport : public callback::ReportBase
     {
       enum Action {
@@ -155,7 +155,7 @@ namespace zypp
         INVALID, // th source is invali
         UNKNOWN
       };
-      
+
       virtual void start( const zypp::Url &/*url*/ ) {}
       virtual bool progress( int /*value*/ )
       { return true; }
@@ -170,9 +170,9 @@ namespace zypp
           const zypp::Url &/*url*/
           , Error /*error*/
           , const std::string &/*reason*/ )
-      {}                 
+      {}
     };
-    
+
     struct SourceReport : public callback::ReportBase
     {
       enum Action {
@@ -187,7 +187,7 @@ namespace zypp
         IO,		// IO error
         INVALID		// th source is invalid
       };
-      
+
       virtual void start( Source_Ref /*source*/, const std::string &/*task*/ ) {}
       virtual bool progress( int /*value*/ )
       { return true; }
@@ -205,8 +205,8 @@ namespace zypp
           , const std::string &/*reason*/ )
       {}
     };
-    
-    
+
+
     /////////////////////////////////////////////////////////////////
   } // namespace source
   ///////////////////////////////////////////////////////////////////
@@ -289,6 +289,29 @@ namespace zypp
         virtual void show(
 	  Message::constPtr /*message*/
         ) {}
+    };
+
+    // resolvable Script
+    struct ScriptResolvableReport : public callback::ReportBase
+    {
+      enum Task   { DO, UNDO };
+      enum Notify { OUTPUT, PING };
+
+      /** Whether executing do_script on install or undo_script on delete. */
+      virtual void start( const Resolvable::constPtr & script_r, Task )
+      {}
+      /** Progress provides the script output. If the script is quiet,
+       * from time to time still-alive pings are sent to the ui. Returning \c FALSE
+       * aborts script execution.
+      */
+      virtual bool progress( Notify , const std::string & = std::string() )
+      { return true; }
+      /** Report error. */
+      virtual void problem( const std::string & /*description*/ )
+      {}
+      /** Report success. */
+      virtual void finish()
+      {}
     };
 
     ///////////////////////////////////////////////////////////////////
@@ -439,7 +462,7 @@ namespace zypp
 	  Pathname /*path*/
           , Error /*error*/
           , const std::string &/*reason*/
-        ) {}           
+        ) {}
       };
 
        // progress for scanning the database
