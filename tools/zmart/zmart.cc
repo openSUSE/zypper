@@ -239,7 +239,7 @@ int main(int argc, char **argv)
     
     for ( vector<string>::const_iterator it = gData.packages_to_install.begin(); it != gData.packages_to_install.end(); ++it )
     {
-      mark_package_for_install(*it);
+      mark_for_install(zypp::ResTraits<zypp::Package>::kind, *it);
     }
     
     resolve();

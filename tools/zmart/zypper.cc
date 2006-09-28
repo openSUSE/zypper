@@ -54,6 +54,7 @@ string longopts2optstring (const struct option *longopts) {
 	optstring += "::";
     }
   }
+  //cerr << optstring << endl;
   return optstring;
 }
 
@@ -75,18 +76,19 @@ parsed_opts parse_options (int argc, char **argv,
   parsed_opts result;
   opterr = 0; 			// we report errors on our own
   int optc;
-  const char *optstring = longopts2optstring (longopts).c_str ();
+  string optstring = longopts2optstring (longopts);
   short2long_t short2long = make_short2long (longopts);
 
   while (1) {
     int option_index = 0;
-    optc = getopt_long (argc, argv, optstring,
+    optc = getopt_long (argc, argv, optstring.c_str (),
 			longopts, &option_index);
     if (optc == -1)
       break;			// options done
 
     switch (optc) {
     case '?':
+      result["_unknown"].push_back("");
       cerr << "Unknown option " << argv[optind - 1] << endl;
       break;
     case ':':
@@ -148,6 +150,8 @@ int main(int argc, char **argv)
   
   bool help = false;
   parsed_opts gopts = parse_options (argc, argv, global_options);
+  if (gopts.count("_unknown"))
+    return 1;
 
   // Help is parsed by setting the help flag for a command, which may be empty
   // $0 -h,--help
@@ -233,6 +237,26 @@ int main(int argc, char **argv)
       ;
 
   if (command == "install" || command == "in") {
+    static struct option install_options[] = {
+      {"catalog",	required_argument, 0, 'c'},
+      {"type",		required_argument, 0, 't'},
+      {0, 0, 0, 0}
+    };
+    specific_options = install_options;
+    specific_help = "  Command options:\n"
+      "\t--catalog,-c\t\tOnly from this catalog (FIXME)\n"
+      "\t--type,-t\t\tType of resolvable (default: package)\n"
+      ;
+  }
+  else if (command == "remove" || command == "rm") {
+    static struct option remove_options[] = {
+      {"type",		required_argument, 0, 't'},
+      {0, 0, 0, 0}
+    };
+    specific_options = remove_options;
+    specific_help = "  Command options:\n"
+      "\t--type,-t\t\tType of resolvable (default: package)\n"
+      ;
   }
   else if (command == "service-add" || command == "sa") {
     static struct option service_add_options[] = {
@@ -255,12 +279,15 @@ int main(int argc, char **argv)
       ;
   }
   else {
+    cerr_vv << "No options declared for command " << command << endl;
     // no options. or make this an exhaustive thing?
     //    cerr << "Unknown command" << endl;
     //    return 1;
   }
 
   parsed_opts copts = parse_options (argc, argv, specific_options);
+  if (copts.count("_unknown"))
+    return 1;
 
   list<string> arguments;
   if (optind < argc) {
@@ -413,14 +440,36 @@ int main(int argc, char **argv)
     return 0;
   }
   
+  ResObject::Kind kind;
   if (command == "install" || command == "in") {
+    if (help || arguments.size() < 1) {
+      cerr << "install [options] name...\n"
+	   << specific_help
+	;
+      return !help;
+    }
+      
     gData.packages_to_install = vector<string>(arguments.begin(), arguments.end());
   }
   if (command == "remove" || command == "rm") {
+    if (help || arguments.size() < 1) {
+      cerr << "remove [options] name...\n"
+	   << specific_help
+	;
+      return !help;
+    }
+
     gData.packages_to_uninstall = vector<string>(arguments.begin(), arguments.end());
   }
 
   if (!gData.packages_to_install.empty() || !gData.packages_to_uninstall.empty()) {
+    string skind = copts.count("type")?  copts["type"].front() : "package";
+    kind = string_to_kind (skind);
+    if (kind == ResObject::Kind ()) {
+	cerr << "Unknown resolvable type " << skind << endl;
+	return 1;
+    }
+
     std::string previous_token;
   
     SourceManager_Ptr manager;
@@ -468,13 +517,13 @@ int main(int argc, char **argv)
 	  cerr_v << "loading target" << endl;
 	  load_target();
 	}
-    
+
 	for ( vector<string>::const_iterator it = gData.packages_to_install.begin(); it != gData.packages_to_install.end(); ++it ) {
-	  mark_package_for_install(*it);
+	  mark_for_install(kind, *it);
 	}
     
 	for ( vector<string>::const_iterator it = gData.packages_to_uninstall.begin(); it != gData.packages_to_uninstall.end(); ++it ) {
-	  mark_package_for_uninstall(*it);
+	  mark_for_uninstall(kind, *it);
 	}
     
 	cerr_v << "resolving" << endl;

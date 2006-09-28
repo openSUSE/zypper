@@ -12,10 +12,14 @@
 
 #include <string>
 #include "zypp/Url.h"
+#include "zypp/ResObject.h"
 
 bool readBoolAnswer();
-void mark_package_for_install( const std::string &name );
-void mark_package_for_uninstall( const std::string &name );
+zypp::ResObject::Kind string_to_kind (const std::string &skind);
+void mark_for_install( const zypp::ResObject::Kind &kind,
+		       const std::string &name );
+void mark_for_uninstall( const zypp::ResObject::Kind &kind,
+			 const std::string &name );
 void show_summary();
 std::string calculate_token();
 void load_target();
