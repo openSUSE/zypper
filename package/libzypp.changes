@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Fri Sep 29 00:31:33 CEST 2006 - ma@suse.de
+
+- Enabled sending of ScriptResolvableReport.
+- Changed ScriptResolvableReport::start to send local path
+  of script to be executed.
+- revision 4190
+
+-------------------------------------------------------------------
 Wed Sep 27 14:14:33 CEST 2006 - ma@suse.de
 
 - Added ScriptResolvableReport. Callbacks triggered on script
