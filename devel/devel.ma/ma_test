@@ -31,7 +31,7 @@ fi
 if ps axl | grep -q '[/]usr/sbin/iceccd'; then
 	MAKE="make -j 15"
 else
-	MAKE=make
+	MAKE="make -j 2"
 fi
 
 $MAKE $PRG || exit 1

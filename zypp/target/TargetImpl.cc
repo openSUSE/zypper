@@ -9,10 +9,11 @@
 /** \file	zypp/target/TargetImpl.cc
  *
 */
-#include <sys/types.h>
-#include <sys/stat.h>
+//#include <sys/types.h>
+//#include <sys/stat.h>
 
 #include <iostream>
+#include <sstream>
 #include <string>
 #include <list>
 #include <set>
@@ -55,6 +56,85 @@ namespace zypp
   namespace target
   { /////////////////////////////////////////////////////////////////
 
+    ///////////////////////////////////////////////////////////////////
+    namespace
+    { /////////////////////////////////////////////////////////////////
+      void ExecuteScriptHelper( Script::constPtr script_r, bool do_r )
+      {
+        MIL << "Execute script " << script_r << endl;
+        if ( ! script_r )
+          {
+            INT << "NULL Script passed." << endl;
+            return;
+          }
+
+        Pathname path;
+        if ( do_r )
+          {
+            path = script_r->do_script();
+          }
+        else
+          {
+            if ( script_r->undo_available() )
+              {
+                path = script_r->undo_script();
+              }
+            else
+              {
+                DBG << "No undo script for " << script_r << endl;
+                return; // success
+              }
+          }
+
+        // Go...
+        callback::SendReport<ScriptResolvableReport> report;
+        report->start( script_r, path,
+                       (do_r ? ScriptResolvableReport::DO
+                             : ScriptResolvableReport::UNDO ) );
+
+        PathInfo pi( path );
+        if ( ! pi.isFile() )
+          {
+            std::ostringstream err;
+            err << "Script is not a file: " << pi.fileType() << " " << path;
+            report->problem( err.str() );
+            ZYPP_THROW(Exception(err.str()));
+          }
+
+        filesystem::chmod( path, S_IRUSR|S_IXUSR );	// "r-x------"
+        ExternalProgram prog( path.asString(), ExternalProgram::Stderr_To_Stdout, false, -1, true );
+        for ( std::string output = prog.receiveLine(); output.length(); output = prog.receiveLine() )
+          {
+            report->progress( ScriptResolvableReport::OUTPUT, output );
+          }
+
+        int exitCode = prog.close();
+        if ( exitCode != 0 )
+          {
+            std::ostringstream err;
+            err << "Script failed with exit code " << exitCode;
+            report->problem( err.str() );
+            ZYPP_THROW(Exception(err.str()));
+          }
+
+        report->finish();
+        return;
+      }
+
+      inline void ExecuteDoScript( const Script::constPtr & script_r )
+      {
+        ExecuteScriptHelper( script_r, true );
+      }
+
+      inline void ExecuteUndoScript( const Script::constPtr & script_r )
+      {
+        ExecuteScriptHelper( script_r, false );
+      }
+      /////////////////////////////////////////////////////////////////
+    } // namespace
+    ///////////////////////////////////////////////////////////////////
+
+
     /** Helper for PackageProvider queries during commit. */
     struct QueryInstalledEditionHelper
     {
@@ -71,7 +151,6 @@ namespace zypp
     private:
       rpm::RpmDb & _rpmdb;
     };
-
 
     IMPL_PTR_TYPE(TargetImpl);
 
@@ -443,23 +522,7 @@ namespace zypp
 		}
 		else if (isKind<Script>(it->resolvable()))
 		{
-		  Script::constPtr s = dynamic_pointer_cast<const Script>(it->resolvable());
-		  Pathname p = s->do_script();
-		  if (p != "" && p != "/")
-		  {
-		    chmod( p.asString().c_str(), S_IRUSR|S_IXUSR );	// "r-x------"
-		    ExternalProgram* prog = new ExternalProgram(p.asString(), ExternalProgram::Discard_Stderr, false, -1, true);
-		    if (! prog)
-		      ZYPP_THROW(Exception("Cannot run the script"));
-		    int retval = prog->close();
-		    delete prog;
-		    if (retval != 0)
-		      ZYPP_THROW(Exception("Exit code of script is non-zero"));
-		  }
-		  else
-		  {
-		    ERR << "Do script not defined" << endl;
-		  }
+                  ExecuteDoScript( asKind<Script>(it->resolvable()) );
 		}
                 else if (!isKind<Atom>(it->resolvable()))	// atoms are re-created from the patch data, no need to save them
                 {
@@ -501,26 +564,7 @@ namespace zypp
 		}
 		else if (isKind<Script>(it->resolvable()))
 		{
-		  Script::constPtr s = dynamic_pointer_cast<const Script>(it->resolvable());
-		  Pathname p = s->undo_script();
-		  if (! s->undo_available())
-		  {
-		    DBG << "Undo script not available" << endl;
-		  }
-		  if (p != "" && p != "/")
-		  {
-		    ExternalProgram* prog = new ExternalProgram(p.asString(), ExternalProgram::Discard_Stderr, false, -1, true);
-		    if (! prog)
-		      ZYPP_THROW(Exception("Cannot run the script"));
-		    int retval = prog->close();
-		    delete prog;
-		    if (retval != 0)
-		      ZYPP_THROW(Exception("Exit code of script is non-zero"));
-		  }
-		  else
-		  {
-		    ERR << "Undo script not defined" << endl;
-		  }
+                  ExecuteUndoScript( asKind<Script>(it->resolvable()) );
 		}
                 else
                 {

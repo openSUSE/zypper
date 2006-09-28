@@ -11,6 +11,7 @@
 #include <zypp/SourceManager.h>
 #include <zypp/SourceFactory.h>
 
+#include "zypp/ZYppCallbacks.h"
 #include "zypp/NVRAD.h"
 #include "zypp/ResPool.h"
 #include "zypp/ResFilters.h"
@@ -29,6 +30,41 @@ using namespace zypp::functor;
 ///////////////////////////////////////////////////////////////////
 
 static const Pathname sysRoot( "/Local/ROOT" );
+
+///////////////////////////////////////////////////////////////////
+
+struct ConvertDbReceive : public callback::ReceiveReport<target::ScriptResolvableReport>
+{
+  virtual void start( const Resolvable::constPtr & script_r,
+                      const Pathname & path_r,
+                      Task task_r )
+  {
+    SEC << __FUNCTION__ << endl
+    << "  " << script_r << endl
+    << "  " << path_r   << endl
+    << "  " << task_r   << endl;
+  }
+
+  virtual bool progress( Notify notify_r, const std::string & text_r )
+  {
+    SEC << __FUNCTION__ << endl
+    << "  " << notify_r << endl
+    << "  " << text_r   << endl;
+    return true;
+  }
+
+  virtual void problem( const std::string & description_r )
+  {
+    SEC << __FUNCTION__ << endl
+    << "  " << description_r << endl;
+  }
+
+  virtual void finish()
+  {
+    SEC << __FUNCTION__ << endl;
+  }
+
+};
 
 ///////////////////////////////////////////////////////////////////
 
@@ -175,6 +211,10 @@ int main( int argc, char * argv[] )
 {
   //zypp::base::LogControl::instance().logfile( "log.restrict" );
   INT << "===[START]==========================================" << endl;
+
+  ConvertDbReceive r;
+  r.connect();
+
   ResPool pool( getZYpp()->pool() );
 
   if ( 1 )
@@ -185,12 +225,11 @@ int main( int argc, char * argv[] )
     }
 
   if ( 1 ) {
-    zypp::base::LogControl::TmpLineWriter shutUp;
+    //zypp::base::LogControl::TmpLineWriter shutUp;
     //SourceManager::sourceManager()->restore( sysRoot );
     if ( 1 || SourceManager::sourceManager()->allSources().empty() )
       {
-        //Source_Ref src1( createSource( "dir:////schnell/CD-ARCHIVE/10.1/SUSE-Linux-10.1-RC5-FTP/CD1" ) );
-        Source_Ref src1( createSource( "ftp://schnell/CD-ARCHIVE/10.1/SUSE-Linux-10.1-RC5-FTP/CD1" ) );
+        Source_Ref src1( createSource( "dir:/Local/script" ) );
         SourceManager::sourceManager()->addSource( src1 );
         //SourceManager::sourceManager()->store( sysRoot, true );
       }
@@ -203,12 +242,12 @@ int main( int argc, char * argv[] )
 
   MIL << *SourceManager::sourceManager() << endl;
   MIL << pool << endl;
-
+  //vdumpPoolStats( SEC, pool.begin(), pool.end() ) << endl;
 
   if ( 1 )
     {
 #define selt(K,N) selectForTransact( nameKindProxy<K>( pool, #N ) )
-      selt( Package,  bash );
+      selt( Script, fetchmsttfonts.sh-patch-fetchmsttfonts.sh-2 );
 #undef selt
     }
 
