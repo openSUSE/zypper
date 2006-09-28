@@ -5,6 +5,7 @@ Fri Sep 29 00:31:33 CEST 2006 - ma@suse.de
 - Changed ScriptResolvableReport::start to send local path
   of script to be executed.
 - revision 4190
+- version 2.2.1
 
 -------------------------------------------------------------------
 Wed Sep 27 14:14:33 CEST 2006 - ma@suse.de
