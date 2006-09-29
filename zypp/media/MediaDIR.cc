@@ -67,11 +67,40 @@ namespace zypp {
       if(next)
 	ZYPP_THROW(MediaNotSupportedException(url()));
 
+      // fetch attach point from url again if needed ...
+      // it may happen that attachPointHint (and attachPoint())
+      // does not contain any path, because the directory has
+      // not existed while the handler was constructed.
+      if( attachPoint().empty() && !url().getPathName().empty())
+      {
+	Pathname real( getRealPath(url().getPathName()));
+
+	PathInfo adir( real);
+	if( adir.isDir())
+	{
+	  // set attachpoint only if the dir exists
+	  setAttachPoint( real, false);
+	}
+	else
+	{
+          ZYPP_THROW(MediaBadUrlException(url(),
+            "Specified path '" + url().getPathName() + "' is and not allowed as media source"
+	  ));
+	}
+      }
+
       // attach point is same as source path... we do not mount here
-      if(attachPoint().empty() || !PathInfo(attachPoint()).isDir())
+      if(attachPoint().empty())
       {
         ZYPP_THROW(MediaBadUrlException(url(),
-          "Specified path '" + attachPoint().asString() + "' is not allowed as media source"
+          "The media URL does not provide any useable directory path"
+	));
+      }
+      else
+      if(!PathInfo(attachPoint()).isDir())
+      {
+        ZYPP_THROW(MediaBadUrlException(url(),
+	  "Specified path '" + attachPoint().asString() + "' is not a directory"
 	));
       }
 
