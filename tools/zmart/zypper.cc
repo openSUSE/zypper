@@ -205,6 +205,9 @@ int main(int argc, char **argv)
     if (optind < argc) {
       command = argv[optind++];
     }
+    else {
+      command = "";
+    }
   }
 
   if (command.empty()) {
@@ -220,11 +223,13 @@ int main(int argc, char **argv)
   string specific_help;
 
   string help_commands = "  Commands:\n"
+      "\thelp\t\t\tHelp\n"
       "\tinstall, in\t\tInstall packages or resolvables\n"
       "\tremove, rm\t\tRemove packages or resolvables\n"
       "\tservice-list, sl\tList services aka installation sources\n"
       "\tservice-add, sa\t\tAdd a new service\n"
-      "\tservice-delete, sd\t\tDelete a service\n"
+      "\tservice-delete, sd\tDelete a service\n"
+      "\tservice-rename, sr\tRename a service\n"
       ;
 
   string help_global_source_options = "  Source options:\n"
@@ -289,7 +294,7 @@ int main(int argc, char **argv)
   if (copts.count("_unknown"))
     return 1;
 
-  list<string> arguments;
+  vector<string> arguments;
   if (optind < argc) {
     cerr_v << "non-option ARGV-elements: ";
     while (optind < argc) {
@@ -392,13 +397,12 @@ int main(int argc, char **argv)
       return !help;
     }
       
-    Url url = make_url (arguments.front());
-    arguments.pop_front();
+    Url url = make_url (arguments[0]);
     if (!url.isValid())
       return 1;
     string alias = url.asString();
-    if (!arguments.empty())
-      alias = arguments.front();
+    if (arguments.size() > 1)
+      alias = arguments[1];
 
     // load gpg keys
     // FIXME only once
@@ -429,7 +433,29 @@ int main(int argc, char **argv)
 
     try {
       // also stores it
-      remove_source(arguments.front());
+      remove_source(arguments[0]);
+    }
+    catch ( const Exception & excpt_r )
+    {
+      cerr << excpt_r.asUserString() << endl;
+      return 1;
+    }
+
+    return 0;
+  }
+
+  if (command == "service-rename" || command == "sr")
+  {
+    if (help || arguments.size() < 2) {
+      cerr << "service-rename [options] <URI|alias> <new-alias>\n"
+	   << specific_help
+	;
+      return !help;
+    }
+    
+    try {
+      // also stores it
+      rename_source (arguments[0], arguments[1]);
     }
     catch ( const Exception & excpt_r )
     {
@@ -449,7 +475,7 @@ int main(int argc, char **argv)
       return !help;
     }
       
-    gData.packages_to_install = vector<string>(arguments.begin(), arguments.end());
+    gData.packages_to_install = arguments;
   }
   if (command == "remove" || command == "rm") {
     if (help || arguments.size() < 1) {
@@ -459,7 +485,7 @@ int main(int argc, char **argv)
       return !help;
     }
 
-    gData.packages_to_uninstall = vector<string>(arguments.begin(), arguments.end());
+    gData.packages_to_uninstall = arguments;
   }
 
   if (!gData.packages_to_install.empty() || !gData.packages_to_uninstall.empty()) {

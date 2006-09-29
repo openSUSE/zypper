@@ -3,6 +3,7 @@
 #include "zmart-sources.h"
 
 #include <boost/format.hpp>
+#include <boost/lexical_cast.hpp>
 
 #include <zypp/target/store/PersistentStorage.h>
 
@@ -191,17 +192,26 @@ ostream& operator << (ostream& s, const vector<T>& v) {
   return s;
 }
 
+template <typename Target, typename Source>
+void safe_lexical_cast (Source s, Target &tr) {
+  try {
+    tr = boost::lexical_cast<Target> (s);
+  }
+  catch (boost::bad_lexical_cast &) {
+  }
+}
+
 //! remove a source, identified in any way: alias, url, id
 // may throw:
-void remove_source( const std::string anystring )
+void remove_source( const std::string& anystring )
 {
   cerr_vv << "Constructing SourceManager" << endl;
   SourceManager_Ptr manager = SourceManager::sourceManager();
   cerr_vv << "Restoring SourceManager" << endl;
   manager->restore ("/", true /*use_cache*/);
 
-  SourceManager::SourceId sid;
-  zypp::str::strtonum (anystring, sid);
+  SourceManager::SourceId sid = 0;
+  safe_lexical_cast (anystring, sid);
   if (sid > 0) {
     cerr_v << "removing source " << sid << endl;
     try {
@@ -256,6 +266,78 @@ void remove_source( const std::string anystring )
       }
       manager->removeSource (anystring); 	// by alias
     }
+  }
+
+  cerr_vv << "Storing source data" << endl;
+  manager->store( "/", true /*metadata_cache*/ );
+}
+
+//! rename a source, identified in any way: alias, url, id
+void rename_source( const std::string& anystring, const std::string& newalias )
+{
+  cerr_vv << "Constructing SourceManager" << endl;
+  SourceManager_Ptr manager = SourceManager::sourceManager();
+  cerr_vv << "Restoring SourceManager" << endl;
+  manager->restore ("/", true /*use_cache*/);
+
+  Source_Ref src;
+
+  SourceManager::SourceId sid = 0;
+  safe_lexical_cast (anystring, sid);
+  if (sid > 0) {
+    try {
+      src = manager->findSource (sid);
+    }
+    catch (const Exception & ex) {
+      ZYPP_CAUGHT (ex);
+      // boost::format: %s is fine regardless of the actual type :-)
+      cerr << format ("Source %s not found.") % sid << endl;
+    }
+  }
+  else {
+    bool is_url = false;
+    // could it be a URL?
+    cerr_vv << "Registered schemes: " << Url::getRegisteredSchemes () << endl;
+    string::size_type pos = anystring.find (':');
+    if (pos != string::npos) {
+      string scheme (anystring, 0, pos);
+      if (Url::isRegisteredScheme (scheme)) {
+	is_url = true;
+	cerr_vv << "Looks like a URL" << endl;
+
+	Url url;
+	try {
+	  url = Url (anystring);
+	}
+	catch ( const Exception & excpt_r ) {
+	  ZYPP_CAUGHT( excpt_r );
+	  cerr << "URL is invalid: " << excpt_r.asUserString() << endl;
+	}
+	if (url.isValid ()) {
+	  try {
+	    src = manager->findSourceByUrl (url);
+	  }
+	  catch (const Exception & ex) {
+	    ZYPP_CAUGHT (ex);
+	    cerr << format ("Source %s not found.") % url.asString() << endl;
+	  }
+	}
+      }
+    }
+
+    if (!is_url) {
+      try {
+	src = manager->findSource (anystring);
+      }
+      catch (const Exception & ex) {
+	ZYPP_CAUGHT (ex);
+	cerr << format ("Source %s not found.") % anystring << endl;
+      }
+    }
+  }
+
+  if (src) {
+    src.setAlias (newalias);
   }
 
   cerr_vv << "Storing source data" << endl;
