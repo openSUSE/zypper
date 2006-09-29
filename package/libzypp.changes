@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Fri Sep 29 16:10:46 CEST 2006 - ma@suse.de
+
+- Extended pattern parser to support includes/extends tags as hint
+  for the IO. (F301229)
+- revision 4199
+- version 2.2.2
+
+-------------------------------------------------------------------
 Fri Sep 29 00:31:33 CEST 2006 - ma@suse.de
 
 - Enabled sending of ScriptResolvableReport.
