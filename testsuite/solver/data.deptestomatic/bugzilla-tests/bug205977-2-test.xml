@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!--
+Bug 205977 - duplicate patch names: precautions and work arounds
+Zenario 3:
+Shout at the admin with two patches with the same name and version are
+available that have different content.
+Does not work.
+-->
+<test>
+<setup>
+  <arch name="i586"/>
+  <system file="bug205977-installed.xml"/>
+  <channel file="patchA-unequal-name.xml" name="both"/>
+</setup>
+<trial>
+  <showpool all="yes"/>
+  <establish/>
+  <showpool all="true" prefix="ESTABLISHED:"/>
+  <install channel="both" kind="patch" package="patch-A"/>
+  <install channel="both" kind="patch" package="patch-SDK10-A"/>
+</trial>
+</test>

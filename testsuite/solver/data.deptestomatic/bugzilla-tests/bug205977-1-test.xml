@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!--
+Bug 205977 - duplicate patch names: precautions and work arounds
+Zenario 1,2:
+Shout at the admin with two patches with the same name and version are
+available that have different content.
+In situations like decribed above and if one patch references a superset of -->
+<!--packages from the other patch, choose the patch with the superset.
+Does not work.
+-->
+<test>
+<setup>
+  <arch name="i586"/>
+  <system file="bug205977-installed.xml"/>
+  <channel file="patchA-equal-name.xml" name="both"/>
+</setup>
+<trial>
+  <showpool all="yes"/>
+  <establish/>
+  <showpool all="true" prefix="ESTABLISHED:"/>
+  <install channel="both" kind="patch" package="patch-A"/>
+</trial>
+</test>
