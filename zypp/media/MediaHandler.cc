@@ -30,29 +30,6 @@ using namespace std;
 namespace zypp {
   namespace media {
 
-  namespace {
-    std::string getRealPath(const std::string &path)
-    {
-      std::string real;
-#if __GNUC__ > 2
-      char *ptr = ::realpath(path.c_str(), NULL);
-      if( ptr != NULL)
-      {
-        real = ptr;
-        free( ptr);
-      }
-#else
-      char buff[PATH_MAX + 2];
-      memset(buff, '\0', sizeof(buff));
-      if( ::realpath(path.c_str(), buff) != NULL)
-      {
-	real = buff;
-      }
-#endif
-      return real;
-    }
-  };
-
   Pathname MediaHandler::_attachPrefix("");
 
 ///////////////////////////////////////////////////////////////////
@@ -134,6 +111,38 @@ MediaHandler::resetParentId()
 {
   _parentId = 0;
 }
+
+std::string
+MediaHandler::getRealPath(const std::string &path)
+{
+  std::string real;
+  if( !path.empty())
+  {
+#if __GNUC__ > 2
+    char *ptr = ::realpath(path.c_str(), NULL);
+    if( ptr != NULL)
+    {
+      real = ptr;
+      free( ptr);
+    }
+#else
+    char buff[PATH_MAX + 2];
+    memset(buff, '\0', sizeof(buff));
+    if( ::realpath(path.c_str(), buff) != NULL)
+    {
+      real = buff;
+    }
+#endif
+  }
+  return real;
+}
+
+zypp::Pathname
+MediaHandler::getRealPath(const zypp::Pathname &path)
+{
+  return zypp::Pathname(getRealPath(path.asString()));
+}
+
 
 ///////////////////////////////////////////////////////////////////
 //

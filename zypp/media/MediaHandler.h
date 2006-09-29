@@ -49,6 +49,9 @@ class MediaHandler {
 
 	static bool setAttachPrefix(const Pathname &attach_prefix);
 
+	static std::string getRealPath(const std::string &path);
+	static Pathname    getRealPath(const Pathname    &path);
+
     private:
         /**
 	 * User defined default attach point prefix.
