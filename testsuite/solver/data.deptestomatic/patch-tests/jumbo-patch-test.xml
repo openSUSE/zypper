@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!--
+This testcase described the behaviour of patch which requires other patches
+e.G. this is used for service packs (Fate 120233)
+-->
+<test>
+<setup>
+  <arch name="i586"/>
+  <system file="jumbo-patch-test-installed.xml"/>
+  <channel file="jumbo-patch.xml" name="jumbo"/>
+</setup>
+<trial>
+  <showpool all="yes"/>
+  <establish/>
+  <showpool all="true" prefix=">!> ESTABLISHED:"/>
+  <install channel="jumbo" kind="patch" package="patch-jumbo"/>
+</trial>
+</test>

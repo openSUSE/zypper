@@ -1,0 +1,30 @@
+>!> Establishing state ...
+>!> Established context
+>!> atom:A-1.0-1.i586 II_s_
+>!> atom:A-2.0-1.i586[jumbo] UI_s_
+>!> atom:B-2.0-1.i586[jumbo] UI_s_
+>!> patch:patch-A-2-0.noarch[jumbo] UI_s_
+>!> patch:patch-A1-1-0.noarch II_s_
+>!> patch:patch-B-2-0.noarch[jumbo] UI_s_
+>!> patch:patch-jumbo-2-0.noarch[jumbo] UI_s_
+>!> ESTABLISHED:1: I__s_[S1:0][package]A-1.0-1.i586
+>!> ESTABLISHED:2: U__s_[S2:0][package]A-2.0-1.i586
+>!> ESTABLISHED:3: I__s_[S1:0][package]B-1.0-1.i586
+>!> ESTABLISHED:4: U__s_[S2:0][package]B-2.0-1.i586
+>!> ESTABLISHED:5: II_s_[S1:0][atom]A-1.0-1.i586
+>!> ESTABLISHED:6: UI_s_[S2:0][atom]A-2.0-1.i586
+>!> ESTABLISHED:7: UI_s_[S2:0][atom]B-2.0-1.i586
+>!> ESTABLISHED:8: UI_s_[S2:0][patch]patch-A-2-0.noarch
+>!> ESTABLISHED:9: II_s_[S1:0][patch]patch-A1-1-0.noarch
+>!> ESTABLISHED:10: UI_s_[S2:0][patch]patch-B-2-0.noarch
+>!> ESTABLISHED:11: UI_s_[S2:0][patch]patch-jumbo-2-0.noarch
+>!> ESTABLISHED:12: I_Lu_[S0:0][system]system-.noarch
+>!> Installing patch:patch-jumbo from channel jumbo
+>!> Solution #1:
+>!> install atom:B-2.0-1.i586[jumbo]
+>!> install patch:patch-A-2-0.noarch[jumbo]
+>!> install patch:patch-B-2-0.noarch[jumbo]
+>!> install patch:patch-jumbo-2-0.noarch[jumbo]
+>!> upgrade A-1.0-1.i586 => A-2.0-1.i586[jumbo]
+>!> upgrade B-1.0-1.i586 => B-2.0-1.i586[jumbo]
+>!> installs=4, upgrades=2, uninstalls=0
