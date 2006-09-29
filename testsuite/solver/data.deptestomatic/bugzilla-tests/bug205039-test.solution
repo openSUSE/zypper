@@ -1,0 +1,16 @@
+>!> Installing selection:file_server from channel addon
+>!> Calling transactResKind( selection )
+>!>1: U_Tl_[S2:1][package]pure-ftpd-1.0.20-24.2.i586
+>!>2: U_Tl_[S3:0][package]samba-3.0.22-14.i586
+>!>3: U_Tl_[S2:1][package]samba-pdb-3.0.22-13.16.i586
+>!>4: U_Tl_[S2:1][package]samba-winbind-3.0.22-13.16.i586
+>!>5: U_Tu_[S3:0][selection]file_server-10-41.noarch
+>!> Solution #1:
+>!> install libiniparser-2.14-6.2.i586[sles10]
+>!> install mysql-shared-5.0.18-20.5.i586[sles10]
+>!> install postgresql-libs-8.1.4-1.3.i586[sles10]
+>!> install pure-ftpd-1.0.20-24.2.i586[sles10]
+>!> install samba-pdb-3.0.22-13.16.i586[sles10]
+>!> install samba-winbind-3.0.22-13.16.i586[sles10]
+>!> install selection:file_server-10-41.noarch[addon]
+>!> installs=7, upgrades=0, uninstalls=0
