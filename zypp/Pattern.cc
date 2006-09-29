@@ -20,7 +20,7 @@ namespace zypp
 { /////////////////////////////////////////////////////////////////
 
   IMPL_PTR_TYPE(Pattern);
-  
+
   ///////////////////////////////////////////////////////////////////
   //
   //	METHOD NAME : Pattern::Pattern
@@ -61,11 +61,16 @@ namespace zypp
 
   Label Pattern::order() const
   { return pimpl().order(); }
-  
+
   std::set<std::string> Pattern::install_packages( const Locale & lang ) const
-  {
-     return pimpl().install_packages();
-  }
+  { return pimpl().install_packages(); }
+
+  const CapSet & Pattern::includes() const
+  { return pimpl().includes(); }
+
+  const CapSet & Pattern::extends() const
+  { return pimpl().extends(); }
+
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

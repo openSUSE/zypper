@@ -51,6 +51,10 @@ namespace zypp
         void consume( const SingleTag &tag );
         void consume( const MultiTag &tag );
         void endParse();
+
+      private:
+        struct Scrap;
+        shared_ptr<Scrap> _scrap;
       };
       ///////////////////////////////////////////////////////////////////
       /**

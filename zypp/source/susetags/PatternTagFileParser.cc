@@ -40,6 +40,28 @@ namespace zypp
     namespace susetags
     { /////////////////////////////////////////////////////////////////
 
+      struct PatternTagFileParser::Scrap
+      {
+        std::string _parser_version;
+        std::string _name;
+        std::string _version;
+        std::string _release;
+        std::string _arch;
+        std::list<std::string> _suggests;
+        std::list<std::string> _recommends;
+        std::list<std::string> _requires;
+        std::list<std::string> _conflicts;
+        std::list<std::string> _provides;
+        std::list<std::string> _obsoletes;
+        std::list<std::string> _freshens;
+        std::list<std::string> _supplements;
+        std::list<std::string> _pkgsuggests;
+        std::list<std::string> _pkgrecommends;
+        std::list<std::string> _pkgrequires;
+        std::list<std::string> _includes;
+        std::list<std::string> _extends;
+      };
+
       Pattern::Ptr parsePattern( parser::ParserProgress::Ptr progress, Source_Ref source_r, const Pathname & file_r )
       {
         MIL << "Starting to parse pattern " << file_r << std::endl;
@@ -63,6 +85,7 @@ namespace zypp
         : parser::tagfile::TagFileParser(progress)
       {
         patImpl = new SuseTagsPatternImpl;
+        _scrap.reset( new Scrap );
       }
 
       void PatternTagFileParser::consume( const SingleTag &tag )
@@ -73,7 +96,7 @@ namespace zypp
         }
         else if ( tag.name == "Ver" )
         {
-          patImpl->_parser_version = tag.value;
+          _scrap->_parser_version = tag.value;
         }
         else if ( tag.name == "Pat" )
         {
@@ -83,10 +106,10 @@ namespace zypp
           if (str::split( line, std::back_inserter(words), " " ) != 4 )
             ZYPP_THROW( parser::tagfile::ParseException( "Expected [name version release arch] ], got [" + tag.value +"]") );
 
-          patImpl->_name    = words[0];
-          patImpl->_version = words[1];
-          patImpl->_release = words[2];
-          patImpl->_arch    = words[3];
+          _scrap->_name    = words[0];
+          _scrap->_version = words[1];
+          _scrap->_release = words[2];
+          _scrap->_arch    = words[3];
         }
         else if ( tag.name == "Vis" )
         {
@@ -119,57 +142,65 @@ namespace zypp
         }
         if ( tag.name == "Req" )
         {
-          patImpl->_requires = tag.values;
+          _scrap->_requires = tag.values;
         }
         else if ( tag.name == "Rec" )
         {
-          patImpl->_recommends = tag.values;
+          _scrap->_recommends = tag.values;
         }
         else if ( tag.name == "Prv" )
         {
-          patImpl->_provides = tag.values;
+          _scrap->_provides = tag.values;
         }
         else if ( tag.name == "Obs" )
         {
-          patImpl->_obsoletes = tag.values;
+          _scrap->_obsoletes = tag.values;
         }
         else if ( tag.name == "Con" )
         {
-          patImpl->_conflicts = tag.values;
+          _scrap->_conflicts = tag.values;
         }
         else if ( tag.name == "Sup" )
         {
-          patImpl->_supplements = tag.values;
+          _scrap->_supplements = tag.values;
         }
         else if ( tag.name == "Sug" )
         {
-          patImpl->_suggests = tag.values;
+          _scrap->_suggests = tag.values;
         }
         else if ( tag.name == "Fre" )
         {
-          patImpl->_freshens = tag.values;
+          _scrap->_freshens = tag.values;
         }
         else if ( tag.name == "Prq" )		// package requires
         {
-          patImpl->_pkgrequires = tag.values;
+          _scrap->_pkgrequires = tag.values;
         }
         else if ( tag.name == "Prc" )		// package recommends
         {
-          patImpl->_pkgrecommends = tag.values;
+          _scrap->_pkgrecommends = tag.values;
         }
         else if ( tag.name == "Psg" )		// package suggests
         {
-          patImpl->_pkgsuggests = tag.values;
+          _scrap->_pkgsuggests = tag.values;
+        }
+        else if ( tag.name == "Inc" )		// UI hint: includes
+        {
+          _scrap->_includes = tag.values;
+        }
+        else if ( tag.name == "Ext" )		// UI hint: extends
+        {
+          _scrap->_extends = tag.values;
         }
       }
 
-      static void parseDeps( const std::list<std::string> & strdeps, Dependencies & deps, Dep deptag, const Resolvable::Kind & kind = ResTraits<Pattern>::kind )
+      static void parseDeps( const std::list<std::string> & strdeps, CapSet & capset, const Resolvable::Kind & kind = ResTraits<Pattern>::kind )
       {
         CapFactory f;
         for (std::list<std::string>::const_iterator it = strdeps.begin(); it != strdeps.end(); it++)
         {
           Capability cap = f.parse( kind, *it );
-	  deps[deptag].insert( cap );
+	  capset.insert( cap );
         }
 	return;
       }
@@ -179,23 +210,25 @@ namespace zypp
         #warning FIXME how to insert the specific language packages
 	Dependencies _deps;
 
-	parseDeps( patImpl->_recommends, _deps, Dep::RECOMMENDS );
-	parseDeps( patImpl->_requires, _deps, Dep::REQUIRES );
-	parseDeps( patImpl->_conflicts, _deps, Dep::CONFLICTS );
-	parseDeps( patImpl->_provides, _deps, Dep::PROVIDES );
-	parseDeps( patImpl->_obsoletes, _deps, Dep::OBSOLETES );
-	parseDeps( patImpl->_suggests, _deps, Dep::SUGGESTS );
-	parseDeps( patImpl->_supplements, _deps, Dep::SUPPLEMENTS );
-	parseDeps( patImpl->_freshens, _deps, Dep::FRESHENS );
-	parseDeps( patImpl->_pkgrecommends, _deps, Dep::RECOMMENDS, ResTraits<Package>::kind );
-	parseDeps( patImpl->_pkgrequires, _deps, Dep::REQUIRES, ResTraits<Package>::kind );
-	parseDeps( patImpl->_pkgsuggests, _deps, Dep::SUGGESTS, ResTraits<Package>::kind );
+	parseDeps( _scrap->_recommends,    _deps[Dep::RECOMMENDS] );
+	parseDeps( _scrap->_requires,      _deps[Dep::REQUIRES] );
+	parseDeps( _scrap->_conflicts,     _deps[Dep::CONFLICTS] );
+	parseDeps( _scrap->_provides,      _deps[Dep::PROVIDES] );
+	parseDeps( _scrap->_obsoletes,     _deps[Dep::OBSOLETES] );
+	parseDeps( _scrap->_suggests,      _deps[Dep::SUGGESTS] );
+	parseDeps( _scrap->_supplements,   _deps[Dep::SUPPLEMENTS] );
+	parseDeps( _scrap->_freshens,      _deps[Dep::FRESHENS] );
+	parseDeps( _scrap->_pkgrecommends, _deps[Dep::RECOMMENDS], ResTraits<Package>::kind );
+	parseDeps( _scrap->_pkgrequires,   _deps[Dep::REQUIRES],   ResTraits<Package>::kind );
+	parseDeps( _scrap->_pkgsuggests,   _deps[Dep::SUGGESTS],   ResTraits<Package>::kind );
+	parseDeps( _scrap->_includes,      patImpl->_includes );
+	parseDeps( _scrap->_extends,       patImpl->_extends );
 
         Arch arch;
-        if (!patImpl->_arch.empty())
-          arch = Arch(patImpl->_arch);
+        if (!_scrap->_arch.empty())
+          arch = Arch(_scrap->_arch);
 
-        NVRAD nvrad = NVRAD( patImpl->_name, Edition( patImpl->_version, patImpl->_release, std::string() ), arch, _deps );
+        NVRAD nvrad = NVRAD( _scrap->_name, Edition( _scrap->_version, _scrap->_release, std::string() ), arch, _deps );
         result = detail::makeResolvableFromImpl( nvrad, patImpl );
       }
        /////////////////////////////////////////////////////////////////

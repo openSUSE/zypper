@@ -168,7 +168,7 @@ int main( int argc, char * argv[] )
   ResPool pool( getZYpp()->pool() );
 
   list<string> srcurls;
-  srcurls.push_back( "dir:///Local/mounts/machcd2/CDs/SUSE-Linux-10.2-Alpha2-x86_64/CD1" );
+  srcurls.push_back( "dir:/mounts/machcd2/CDs/SUSE-Linux-10.1-Remastered-x86_64/CD1" );
 
   if ( 0 )
     {
@@ -197,10 +197,15 @@ int main( int argc, char * argv[] )
 
 #define selt(K,N) selectForTransact( nameKindProxy<K>( pool, #N ) )
 
-  selt( Product, SUSE-Linux-10.1.1-CD-download-x86 );
+
+
+
+  selt( Product, SUSE LINUX );
   selt( Language, en_GB );
   selt( Selection, default  );
-  selt( Package, kernel-bigsmp );
+  selt( Selection, Kde-Desktop  );
+  selt( Selection, Laptop   );
+  selt( Package, kernel );
   selt( Package, yast2-trans-en_GB );
 
   vdumpPoolStats( USR << "Transacting:"<< endl,

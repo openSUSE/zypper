@@ -43,31 +43,18 @@ namespace zypp
       virtual Label order() const;
       virtual Pathname icon() const;
       virtual Source_Ref source() const;
+      virtual const CapSet & includes() const;
+      virtual const CapSet & extends() const;
 
       TranslatedText _summary;
       TranslatedText _description;
-      Pathname _icon;
-      std::string _parser_version;
-      std::string _name;
-      std::string _version;
-      std::string _release;
-      std::string _arch;
-      std::string _order;
       TranslatedText _category;
+      bool           _visible;
+      std::string    _order;
+      Pathname       _icon;
 
-      bool _visible;
-
-      std::list<std::string> _suggests;
-      std::list<std::string> _recommends;
-      std::list<std::string> _requires;
-      std::list<std::string> _conflicts;
-      std::list<std::string> _provides;
-      std::list<std::string> _obsoletes;
-      std::list<std::string> _freshens;
-      std::list<std::string> _supplements;
-      std::list<std::string> _pkgsuggests;
-      std::list<std::string> _pkgrecommends;
-      std::list<std::string> _pkgrequires;
+      CapSet         _includes;
+      CapSet         _extends;
 
       Source_Ref _source;
     };

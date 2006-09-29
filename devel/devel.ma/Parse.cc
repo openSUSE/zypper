@@ -17,6 +17,7 @@
 #include "zypp/ResFilters.h"
 #include "zypp/CapFilters.h"
 #include "zypp/Package.h"
+#include "zypp/Pattern.h"
 #include "zypp/Language.h"
 #include "zypp/NameKindProxy.h"
 #include "zypp/pool/GetResolvablesToInsDel.h"
@@ -201,6 +202,19 @@ inline bool selectForTransact( const NameKindProxy & nkp, Arch arch = Arch() )
   return nkp.availableBegin()->status().setTransact( true, ResStatus::USER );
 }
 
+void seltest( const NameKindProxy & nks )
+{
+  SEC << nks << endl;
+  PoolItem av( *nks.availableBegin() );
+  SEC << av << endl;
+  Pattern::constPtr pat( asKind<Pattern>(av.resolvable()) );
+  SEC << pat << endl;
+  WAR << pat->install_packages() << endl;
+  MIL << pat->deps() << endl;
+  MIL << pat->includes() << endl;
+  MIL << pat->extends() << endl;
+}
+
 ///////////////////////////////////////////////////////////////////
 /******************************************************************
 **
@@ -217,7 +231,7 @@ int main( int argc, char * argv[] )
 
   ResPool pool( getZYpp()->pool() );
 
-  if ( 1 )
+  if ( 0 )
     {
       zypp::base::LogControl::TmpLineWriter shutUp;
       getZYpp()->initTarget( sysRoot );
@@ -229,7 +243,7 @@ int main( int argc, char * argv[] )
     //SourceManager::sourceManager()->restore( sysRoot );
     if ( 1 || SourceManager::sourceManager()->allSources().empty() )
       {
-        Source_Ref src1( createSource( "dir:/Local/script" ) );
+        Source_Ref src1( createSource( "dir:/Local/SLES10" ) );
         SourceManager::sourceManager()->addSource( src1 );
         //SourceManager::sourceManager()->store( sysRoot, true );
       }
@@ -243,6 +257,16 @@ int main( int argc, char * argv[] )
   MIL << *SourceManager::sourceManager() << endl;
   MIL << pool << endl;
   //vdumpPoolStats( SEC, pool.begin(), pool.end() ) << endl;
+
+
+
+  seltest( nameKindProxy<Pattern>( pool, "default" ) );
+  seltest( nameKindProxy<Pattern>( pool, "gnome" ) );
+
+  zypp::base::LogControl::instance().logNothing();
+  return 0;
+
+
 
   if ( 1 )
     {

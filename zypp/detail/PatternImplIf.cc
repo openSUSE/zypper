@@ -37,7 +37,7 @@ namespace zypp
 
     Label PatternImplIf::order() const
     { return Label(); }
-    
+
     static void copycaps( std::set<std::string> & out, const CapSet & in)
     {
 	for (CapSet::const_iterator it = in.begin(); it != in.end(); ++it) {
@@ -56,9 +56,15 @@ namespace zypp
 	copycaps( result, self()->dep( Dep::REQUIRES ) );
 	copycaps( result, self()->dep( Dep::RECOMMENDS) );
 	copycaps( result, self()->dep( Dep::SUGGESTS) );
-	
+
 	return result;
     }
+
+    const CapSet & PatternImplIf::includes() const
+    { static CapSet _v; return _v; }
+
+    const CapSet & PatternImplIf::extends() const
+    { static CapSet _v; return _v; }
 
     /////////////////////////////////////////////////////////////////
   } // namespace detail

@@ -47,11 +47,15 @@ namespace zypp
       virtual Pathname icon() const PURE_VIRTUAL;
 
       virtual Pathname script() const PURE_VIRTUAL;
-      
+
       virtual Label order() const PURE_VIRTUAL;
 
       /** ui helper */
       virtual std::set<std::string> install_packages( const Locale & lang = Locale("") ) const;
+
+      virtual const CapSet & includes() const;
+
+      virtual const CapSet & extends() const;
     };
     ///////////////////////////////////////////////////////////////////
 

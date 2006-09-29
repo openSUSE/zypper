@@ -50,8 +50,13 @@ namespace zypp
     Pathname script() const;
     /** */
     Label order() const;
-    
+
     std::set<std::string> install_packages( const Locale & lang = Locale("") ) const;
+
+    /** */
+    const CapSet & includes() const;
+    /** */
+    const CapSet & extends() const;
 
   protected:
     /** Ctor */
