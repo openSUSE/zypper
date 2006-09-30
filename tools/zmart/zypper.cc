@@ -114,7 +114,6 @@ static struct option global_options[] = {
   {"verbose",	no_argument, 0, 'v'},
   {"version",	no_argument, 0, 'V'},
   {"terse",	no_argument, 0, 't'},
-  {"req",	required_argument, 0, 'r'},
   {"opt",	optional_argument, 0, 'o'},
   {0, 0, 0, 0}
 };
@@ -187,14 +186,6 @@ int main(int argc, char **argv)
     cerr << endl;
   }
 
-  // testing option
-  if (gopts.count("req")) {
-    cerr << "Req arg: ";
-    std::copy (gopts["req"].begin(), gopts["req"].end(),
-	       ostream_iterator<string> (cerr, ", "));
-    cerr << endl;
-  }
-
   string command;
 
   if (optind < argc) {
@@ -230,6 +221,7 @@ int main(int argc, char **argv)
       "\tservice-add, sa\t\tAdd a new service\n"
       "\tservice-delete, sd\tDelete a service\n"
       "\tservice-rename, sr\tRename a service\n"
+      "\tpatch-check,pchk\tCheck for patches\n"
       ;
 
   string help_global_source_options = "  Source options:\n"
@@ -364,7 +356,6 @@ int main(int argc, char **argv)
     ZYPP_CAUGHT (excpt_r);
     ERR  << "a ZYpp transaction is already in progress." << endl;
     cerr << "a ZYpp transaction is already in progress." << endl;
-    cout << RANDOM_TOKEN;
     return 1;
   }
   
@@ -496,26 +487,11 @@ int main(int argc, char **argv)
 	return 1;
     }
 
-    std::string previous_token;
-  
-    SourceManager_Ptr manager;
-    manager = SourceManager::sourceManager();
-  
     KeyRingCallbacks keyring_callbacks;
     DigestCallbacks digest_callbacks;
-  
-    if ( geteuid() != 0 )
-    {
-      cerr << "Sorry, you need root privileges to use system sources, disabling them..." << endl;
-      gSettings.disable_system_sources = true;
-      MIL << "system sources disabled" << endl;
-    }
 
-    if ( ! gSettings.disable_system_sources ) {
-      cerr_v << "initializing sources" << endl;
-      init_system_sources();
-    }
-  
+    cond_init_system_sources ();
+
     for ( std::list<Url>::const_iterator it = gSettings.additional_sources.begin(); it != gSettings.additional_sources.end(); ++it )
       {
 	include_source_by_url( *it );
@@ -532,17 +508,11 @@ int main(int argc, char **argv)
   
     cerr_v << "calculating token" << endl;
     std::string token = calculate_token();
+    cerr_v << "token:" << token << endl;
   
     if ( token != gSettings.previous_token )
       {
-	// something changed
-	cerr_v << "loading sources" << endl;
-	load_sources();
-    
-	if ( ! gSettings.disable_system_resolvables ) {
-	  cerr_v << "loading target" << endl;
-	  load_target();
-	}
+	cond_load_resolvables ();
 
 	for ( vector<string>::const_iterator it = gData.packages_to_install.begin(); it != gData.packages_to_install.end(); ++it ) {
 	  mark_for_install(kind, *it);
@@ -591,6 +561,32 @@ int main(int argc, char **argv)
 	    cerr << result << std::endl; 
 	  }
       }
+    else {
+      cerr_v << "Token unchanged" << endl;
+    }
+    return 0;
   }
+
+  if (command == "patch-check" || command == "pchk") {
+    KeyRingCallbacks keyring_callbacks;
+    DigestCallbacks digest_callbacks;
+
+    cond_init_system_sources ();
+    // TODO additional_sources
+    // TODO warn_no_sources
+
+    // dont add rpms
+    cerr_v << "initializing target" << endl;
+    God->initializeTarget("/"); 
+    // TODO calc token?
+
+    // now load resolvables:
+
+    cond_load_resolvables ();
+
+    establish ();
+    show_pool ();
+  }
+
   return 0;
 }

@@ -1,6 +1,7 @@
 
 #include "zmart.h"
 #include "zmart-sources.h"
+#include "zypper-tabulator.h"
 
 #include <boost/format.hpp>
 #include <boost/lexical_cast.hpp>
@@ -16,6 +17,20 @@ using namespace boost;
 extern ZYpp::Ptr God;
 extern RuntimeData gData;
 extern Settings gSettings;
+
+void cond_init_system_sources ()
+{
+  if ( geteuid() != 0 ) {
+    cerr << "Sorry, you need root privileges to use system sources, disabling them..." << endl;
+    gSettings.disable_system_sources = true;
+    MIL << "system sources disabled" << endl;
+  }
+
+  if ( ! gSettings.disable_system_sources ) {
+    cerr_v << "initializing sources" << endl;
+    init_system_sources();
+  }
+} 
 
 void init_system_sources()
 {
@@ -80,17 +95,19 @@ static void print_source_list_rug_style( const std::list<zypp::source::SourceInf
   cout << " Sub'd? | Name                                                   | Service" << endl;
   cout << "-------+--------------------------------------------------------+-------------------------------------------------------" << endl;
   
+  Table tbl;
   for( std::list<zypp::source::SourceInfo>::const_iterator it = sources.begin() ;
        it != sources.end() ; ++it )
   {
     SourceInfo source = *it;
-    cout << ( source.enabled() ? "[x]" : "[ ]" );
-    cout << ( source.autorefresh() ? "* " : "  " );
-    if ( source.alias() != source.url().asString() )
-      cout << source.alias() << " (" << source.url() << ")" << endl;
-    else
-      cout << source.url() << endl;
+    TableRow tr;
+    tr << ( source.enabled() ? "[x]" : "[ ]" );
+    tr << ( source.autorefresh() ? "* " : "  " );
+    tr << source.alias();
+    tr << source.url().asString();
+    tbl << tr;
   }
+  cout << tbl;
   
   /*   
   Sub'd? | Name                                                   | Service
@@ -122,7 +139,7 @@ void list_system_sources()
     exit(-1); 
   }
   
-  print_source_list(sources);
+  print_source_list_rug_style(sources);
 }
 
 static

@@ -2,6 +2,7 @@
 #include <boost/format.hpp>
 #include "zmart.h"
 #include "zmart-misc.h"
+#include "zypper-tabulator.h"
 
 #include <zypp/Patch.h>
 #include <zypp/base/Algorithm.h>
@@ -246,6 +247,18 @@ std::string calculate_token()
   return token;
 }
 
+void cond_load_resolvables ()
+{	
+  // something changed
+  cerr_v << "loading sources" << endl;
+  load_sources();
+    
+  if ( ! gSettings.disable_system_resolvables ) {
+    cerr_v << "loading target" << endl;
+    load_target();
+  }
+}
+
 void load_target()
 {
   cout << "Adding system resolvables to pool..." << endl;
@@ -268,30 +281,45 @@ void load_sources()
   }
 }
 
+void establish ()
+{
+  cerr_v << "Establishing status of aggregates" << endl;
+  God->resolver()->establishPool();
+}
+
 void resolve()
 {
-  cout << "Resolving dependencies ..." << endl;
-  God->resolver()->establishPool();
+  establish ();
+  cerr_v << "Resolving dependencies ..." << endl;
   God->resolver()->resolvePool();
 }
 
 void show_pool()
 {
   MIL << "Pool contains " << God->pool().size() << " items. Checking whether available patches are needed." << std::endl;
-  for ( ResPool::byKind_iterator it = God->pool().byKindBegin<Patch>(); it != God->pool().byKindEnd<Patch>(); ++it )
+
+  Table tbl;
+  ResPool::byKind_iterator
+    it = God->pool().byKindBegin<Patch>(),
+    e = God->pool().byKindEnd<Patch>();
+  for (; it != e; ++it )
   {
     Resolvable::constPtr res = it->resolvable();
     Patch::constPtr patch = asKind<Patch>(res);
-    //cout << patch->name() << " " << patch->edition() << " " << "[" << patch->category() << "]" << ( it->status().isNeeded() ? " [needed]" : " [unneeded]" )<< std::endl;
+
     if ( it->status().isNeeded() )
     {
       gData.patches_count++;
       if (patch->category() == "security")
         gData.security_patches_count++;
-        
-      cerr << patch->name() << " " << patch->edition() << " " << "[" << patch->category() << "]" << std::endl;
+
+      TableRow tr;
+      tr << patch->name() << patch->edition().asString() << patch->category();
+      tbl << tr;
     }
-  } 
+  }
+  cout << tbl;
+
   cout << gData.patches_count << " patches needed. ( " << gData.security_patches_count << " security patches )"  << std::endl;
 }
 
