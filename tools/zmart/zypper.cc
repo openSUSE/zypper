@@ -233,7 +233,8 @@ int main(int argc, char **argv)
       "\tservice-add, sa\t\tAdd a new service\n"
       "\tservice-delete, sd\tDelete a service\n"
       "\tservice-rename, sr\tRename a service\n"
-      "\tpatch-check,pchk\tCheck for patches\n"
+      "\tpatch-check, pchk\tCheck for patches\n"
+      "\tpatches, pch\t\tList patches\n"
       ;
 
   string help_global_source_options = "  Source options:\n"
@@ -576,6 +577,13 @@ int main(int argc, char **argv)
   }
 
   if (command == "patch-check" || command == "pchk") {
+    if (help) {
+      cerr << "patch-check\n"
+	   << specific_help
+	;
+      return !help;
+    }
+
     cond_init_target ();
     cond_init_system_sources ();
     // TODO additional_sources
@@ -592,6 +600,22 @@ int main(int argc, char **argv)
       return 2;
     if (gData.patches_count > 0)
       return 1;
+    return 0;
+  }
+
+  if (command == "patches" || command == "pch") {
+    if (help) {
+      cerr << "patches\n"
+	   << specific_help
+	;
+      return !help;
+    }
+
+    cond_init_target ();
+    cond_init_system_sources ();
+    cond_load_resolvables ();
+    establish ();
+    show_pool ();
     return 0;
   }
 

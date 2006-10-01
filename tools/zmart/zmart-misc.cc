@@ -331,33 +331,53 @@ void patch_check ()
   cout << gData.patches_count << " patches needed. ( " << gData.security_patches_count << " security patches )"  << std::endl;
 }
 
+string string_status (const ResStatus& rs)
+{
+  bool i = rs.isInstalled ();
+  if (rs.isUndetermined ())
+    return i? "Installed": "Uninstalled";
+  else if (rs.isEstablishedUneeded ())
+    return i? "No Longer Applicable": "Not Applicable";
+  else if (rs.isEstablishedSatisfied ())
+    return i? "Applied": "Not Needed";
+  else if (rs.isEstablishedIncomplete ())
+    return i? "Broken": "Needed";
+  // if ResStatus interface changes
+  return "error";
+}
+
+// patches
 void show_pool()
 {
   MIL << "Pool contains " << God->pool().size() << " items. Checking whether available patches are needed." << std::endl;
 
   Table tbl;
+  TableRow th;
+  th << "Catalog" << "Name" << "Version" << "Category" << "Status";
+  tbl << th;
+  tbl.hasHeader (true);
+
   ResPool::byKind_iterator
     it = God->pool().byKindBegin<Patch>(),
     e = God->pool().byKindEnd<Patch>();
   for (; it != e; ++it )
   {
     Resolvable::constPtr res = it->resolvable();
+    if ( it->status().isUndetermined() ) {
+#warning is this a library bug?
+      // these are duplicates of those that are determined
+      continue;
+    }
     Patch::constPtr patch = asKind<Patch>(res);
 
-    if ( it->status().isNeeded() )
-    {
-      gData.patches_count++;
-      if (patch->category() == "security")
-        gData.security_patches_count++;
-
-      TableRow tr;
-      tr << patch->name() << patch->edition().asString() << patch->category();
-      tbl << tr;
-    }
+    TableRow tr;
+    tr << patch->source ().alias ();
+    tr << res->name () << res->edition ().asString();
+    tr << patch->category();
+    tr << string_status (it->status ());
+    tbl << tr;
   }
   cout << tbl;
-
-  cout << gData.patches_count << " patches needed. ( " << gData.security_patches_count << " security patches )"  << std::endl;
 }
 
 void usage(int argc, char **argv)
