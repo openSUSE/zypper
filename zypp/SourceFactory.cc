@@ -43,12 +43,12 @@ namespace zypp
       static Source_Ref::Impl_Ptr createSourceImpl( const media::MediaId & media_r,
                                                     const SourceInfo &context )
       {
-        std::cout << "pre pass type: " << _SourceImpl::typeString() << endl;
+        MIL << "pre pass type: " << _SourceImpl::typeString() << endl;
         Source_Ref::Impl_Ptr impl( new _SourceImpl );
-        std::cout << "pass type: " << _SourceImpl::typeString() << endl;
+        MIL << "pass type: " << _SourceImpl::typeString() << endl;
         // note, base_source is a tribool, if indeterminate we fallback to false
         impl->factoryCtor( media_r, context.path(), context.alias(), context.cacheDir(), context.baseSource(), context.autorefresh() );
-        std::cout << "pass 2 type: " << _SourceImpl::typeString() << endl;
+        MIL << "pass 2 type: " << _SourceImpl::typeString() << endl;
         return impl;
       }
   };
