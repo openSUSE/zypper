@@ -38,14 +38,14 @@ void init_system_sources()
   manager = SourceManager::sourceManager();
   try
   {
-    cout << "Restoring system sources..." << endl;
+    cerr_v << "Restoring system sources..." << endl;
     manager->restore("/");
   }
   catch (Exception & excpt_r)
   {
     ZYPP_CAUGHT (excpt_r);
     ERR << "Couldn't restore sources" << endl;
-    cout << "Fail to restore sources" << endl;
+    cerr << "Failed to restore sources" << endl;
     exit(-1);
   }
     

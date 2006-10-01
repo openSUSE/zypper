@@ -17,6 +17,16 @@ extern ZYpp::Ptr God;
 extern RuntimeData gData;
 extern Settings gSettings;
 
+
+void cond_init_target () {
+  static bool done = false;
+  if (!done) {
+    cerr_v << "Initializing Target" << endl;
+    God->initializeTarget("/");
+    done = true;
+  }
+}
+
 // read callback answer
 //   can either be '0\n' -> false
 //   or '1\n' -> true
@@ -261,8 +271,10 @@ void cond_load_resolvables ()
 
 void load_target()
 {
-  cout << "Adding system resolvables to pool..." << endl;
-  God->addResolvables( God->target()->resolvables(), true);
+  cerr_v << "Adding system resolvables to the pool..." << endl;
+  ResStore tgt_resolvables(God->target()->resolvables());
+  cerr_v << "   " <<  tgt_resolvables.size() << " resolvables." << endl;
+  God->addResolvables(tgt_resolvables, true /*installed*/);
 }
 
 void load_sources()
@@ -273,9 +285,9 @@ void load_sources()
     // skip non YUM sources for now
     //if ( it->type() == "YUM" )
     //{
-    cout << "Adding " << it->alias() << " resolvables to the pool..." << endl;
+    cerr_v << "Adding " << it->alias() << " resolvables to the pool..." << endl;
     ResStore src_resolvables(it->resolvables());
-    cout << "   " <<  src_resolvables.size() << " resolvables." << endl;
+    cerr_v << "   " <<  src_resolvables.size() << " resolvables." << endl;
     God->addResolvables(src_resolvables);
     //}
   }
@@ -292,6 +304,31 @@ void resolve()
   establish ();
   cerr_v << "Resolving dependencies ..." << endl;
   God->resolver()->resolvePool();
+}
+
+//! are there applicable patches?
+void patch_check ()
+{
+  cerr_vv << "patch check" << endl;
+  gData.patches_count = gData.security_patches_count = 0;
+
+  ResPool::byKind_iterator
+    it = God->pool().byKindBegin<Patch>(),
+    e = God->pool().byKindEnd<Patch>();
+  for (; it != e; ++it )
+  {
+    Resolvable::constPtr res = it->resolvable();
+    Patch::constPtr patch = asKind<Patch>(res);
+
+    if ( it->status().isNeeded() )
+    {
+      gData.patches_count++;
+      if (patch->category() == "security")
+        gData.security_patches_count++;
+    }
+  }
+
+  cout << gData.patches_count << " patches needed. ( " << gData.security_patches_count << " security patches )"  << std::endl;
 }
 
 void show_pool()

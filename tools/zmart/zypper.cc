@@ -38,6 +38,8 @@ ostream no_stream(NULL);
 RpmCallbacks rpm_callbacks;
 SourceCallbacks source_callbacks;
 MediaCallbacks media_callbacks;
+KeyRingCallbacks keyring_callbacks;
+DigestCallbacks digest_callbacks;
 
 typedef map<string, list<string> > parsed_opts;
 
@@ -406,9 +408,7 @@ int main(int argc, char **argv)
       alias = arguments[1];
 
     // load gpg keys
-    // FIXME only once
-    cerr_v << "initializing target" << endl;
-    God->initializeTarget("/");
+    cond_init_target ();
 
     try {
       // also stores it
@@ -454,6 +454,7 @@ int main(int argc, char **argv)
       return !help;
     }
     
+    cond_init_target ();
     try {
       // also stores it
       rename_source (arguments[0], arguments[1]);
@@ -496,9 +497,6 @@ int main(int argc, char **argv)
 	cerr << "Unknown resolvable type " << skind << endl;
 	return 1;
     }
-
-    KeyRingCallbacks keyring_callbacks;
-    DigestCallbacks digest_callbacks;
 
     cond_init_system_sources ();
 
@@ -578,24 +576,23 @@ int main(int argc, char **argv)
   }
 
   if (command == "patch-check" || command == "pchk") {
-    KeyRingCallbacks keyring_callbacks;
-    DigestCallbacks digest_callbacks;
-
+    cond_init_target ();
     cond_init_system_sources ();
     // TODO additional_sources
     // TODO warn_no_sources
-
-    // dont add rpms
-    cerr_v << "initializing target" << endl;
-    God->initializeTarget("/"); 
     // TODO calc token?
 
     // now load resolvables:
-
     cond_load_resolvables ();
 
     establish ();
-    show_pool ();
+    patch_check ();
+
+    if (gData.security_patches_count > 0)
+      return 2;
+    if (gData.patches_count > 0)
+      return 1;
+    return 0;
   }
 
   return 0;

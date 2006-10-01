@@ -14,6 +14,7 @@
 #include "zypp/Url.h"
 #include "zypp/ResObject.h"
 
+void cond_init_target ();
 bool readBoolAnswer();
 zypp::ResObject::Kind string_to_kind (const std::string &skind);
 void mark_for_install( const zypp::ResObject::Kind &kind,
@@ -29,6 +30,7 @@ void load_sources();
 void establish ();
 void resolve();
 void show_pool();
+void patch_check();
 void usage(int argc, char **argv);
 
 #endif
