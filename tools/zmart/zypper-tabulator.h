@@ -22,9 +22,15 @@ using std::vector;
 //! table drawing style
 enum TableStyle {
   Ascii,			///< | - +
-  Fancy,			///< unspecified unicode fancy style
-  Heavy,
   Light,
+  Heavy,
+  Double,
+  Light3,
+  Heavy3,
+  LightHeavy,
+  LightDouble,
+  HeavyLight,
+  DoubleLight,
   _End,				///< sentinel
 };
 
