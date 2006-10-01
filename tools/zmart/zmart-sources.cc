@@ -92,34 +92,28 @@ static void print_source_list( const std::list<zypp::source::SourceInfo> &source
 
 static void print_source_list_rug_style( const std::list<zypp::source::SourceInfo> &sources )
 {
-  cout << " Sub'd? | Name                                                   | Service" << endl;
-  cout << "-------+--------------------------------------------------------+-------------------------------------------------------" << endl;
-  
   Table tbl;
+  TableRow th;
+  th << "#" << "Status" << "Type" << "Name" << "URI";
+  tbl << th;
+  tbl.hasHeader (true);
+
+  int i = 1;
   for( std::list<zypp::source::SourceInfo>::const_iterator it = sources.begin() ;
-       it != sources.end() ; ++it )
+       it != sources.end() ; ++it, ++i )
   {
     SourceInfo source = *it;
     TableRow tr;
-    tr << ( source.enabled() ? "[x]" : "[ ]" );
-    tr << ( source.autorefresh() ? "* " : "  " );
+    tr << str::numstring (i);
+    string status = source.enabled() ? "[x]" : "[ ]";
+    status += source.autorefresh() ? "*" : " ";
+    tr << status;
+    tr << source.type();
     tr << source.alias();
     tr << source.url().asString();
     tbl << tr;
   }
   cout << tbl;
-  
-  /*   
-  Sub'd? | Name                                                   | Service
-  -------+--------------------------------------------------------+-------------------------------------------------------
-  Yes    | non-oss                                                | non-oss
-  Yes    | 20060629-170551                                        | 20060629-170551
-  Yes    | 20060824-092918                                        | 20060824-092918
-  Yes    | mozilla                                                | mozilla
-  Yes    | 20060612-143432                                        | 20060612-143432
-  | SUSE-Linux-10.1-Updates                                | SUSE-Linux-10.1-Updates
-  Yes    | SUSE-Linux-10.1-DVD9-x86-x86_64-10.1-0-20060505-104407 | SUSE-Linux-10.1-DVD9-x86-x86_64-10.1-0-20060505-104407
-  */
 }
 
 void list_system_sources()

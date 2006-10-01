@@ -22,7 +22,7 @@
 #include "zmart-keyring-callbacks.h"
 #include "zmart-source-callbacks.h"
 #include "zmart-media-callbacks.h"
-
+#include "zypper-tabulator.h"
 
 using namespace std;
 using namespace boost;
@@ -114,6 +114,7 @@ static struct option global_options[] = {
   {"verbose",	no_argument, 0, 'v'},
   {"version",	no_argument, 0, 'V'},
   {"terse",	no_argument, 0, 't'},
+  {"table-style", required_argument, 0, 's'},
   {"opt",	optional_argument, 0, 'o'},
   {0, 0, 0, 0}
 };
@@ -166,6 +167,7 @@ int main(int argc, char **argv)
     "\t--version, -V\t\tOutput the version number\n"
     "\t--verbose, -v\t\tIncrease verbosity\n"
     "\t--terse, -t\t\tTerse output for machine consumption\n"
+    "\t--table-style, -s\tTable style (integer)\n"
     ;
 
   if (gopts.count("version")) {
@@ -178,6 +180,14 @@ int main(int argc, char **argv)
     cerr << "verbosity " << gSettings.verbose << endl;
   }
 
+  if (gopts.count("table-style")) {
+    unsigned s;
+    str::strtonum (gopts["table-style"].front(), s);
+    if (s < _End)
+      Table::defaultStyle = (TableStyle) s;
+    else
+      cerr << "Invalid table style " << s << endl;
+  }
   // testing option
   if (gopts.count("opt")) {
     cerr << "Opt arg: ";
