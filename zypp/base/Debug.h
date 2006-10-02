@@ -83,7 +83,8 @@ namespace zypp
       return str;
     }
 
-    /** A simple tracer. To trace class Foo, derive public from
+    /** A simple tracer for (copy) Construction, Assignment, and
+     * Destruction. To trace class Foo, derive public from
      * TraceCAD<Foo>. This tracer simply calls traceCAD in each
      * traced method, and traceCAD simply drops a line in the log.
      *

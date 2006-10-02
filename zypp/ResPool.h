@@ -122,6 +122,7 @@ namespace zypp
     *  Handling additional requirement. E.G. need package "foo" and package 
     *  "foo1" which has a greater version than 1.0:
     *
+    *  \code
     *  CapSet capset;
     *  capset.insert (CapFactory().parse( ResTraits<Package>::kind, "foo"));    
     *  capset.insert (CapFactory().parse( ResTraits<Package>::kind, "foo1 > 1.0"));
@@ -131,6 +132,7 @@ namespace zypp
     *  aCapSet[ResStatus::USER] = capset;
     *
     *  setAdditionalRequire( aCapSet );
+    *  \endcode
     */
    void setAdditionalRequire( const AdditionalCapSet & capset ) const;
    AdditionalCapSet & additionalRequire() const;
@@ -138,6 +140,7 @@ namespace zypp
    /**
     *  Handling additional conflicts. E.G. do not install anything which provides "foo":
     *
+    *  \code
     *  CapSet capset;    
     *  capset.insert (CapFactory().parse( ResTraits<Package>::kind, "foo"));
     *
@@ -146,6 +149,7 @@ namespace zypp
     *  aCapSet[ResStatus::USER] = capset;
     *
     *  setAdditionalConflict( aCapSet );    
+    *  \endcode
     */      
    void setAdditionalConflict( const AdditionalCapSet & capset ) const;
    AdditionalCapSet & additionaConflict() const;
@@ -154,6 +158,7 @@ namespace zypp
     *  Handling additional provides. This is used for ignoring a requirement.
     *  e.G. Do ignore the requirement "foo":
     *
+    *  \code
     *  CapSet capset;    
     *  capset.insert (CapFactory().parse( ResTraits<Package>::kind, "foo"));
     *
@@ -162,6 +167,7 @@ namespace zypp
     *  aCapSet[ResStatus::USER] = capset;
     *
     *  setAdditionalProvide( aCapSet );    
+    *  \endcode
     */      
    void setAdditionalProvide( const AdditionalCapSet & capset ) const;
    AdditionalCapSet & additionaProvide() const;                  
