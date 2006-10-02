@@ -28,212 +28,228 @@ using namespace zypp::parser::yum;
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
-  ///////////////////////////////////////////////////////////////////
-  namespace source
-  { /////////////////////////////////////////////////////////////////
-    namespace yum
-    {
-      ///////////////////////////////////////////////////////////////////
-      //
-      //        CLASS NAME : YUMPatchImpl
-      //
-      ///////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////
+namespace source
+{ /////////////////////////////////////////////////////////////////
+namespace yum
+{
+///////////////////////////////////////////////////////////////////
+//
+//        CLASS NAME : YUMPatchImpl
+//
+///////////////////////////////////////////////////////////////////
 
-      /** Default ctor
-       * \bug CANT BE CONSTUCTED THAT WAY ANYMORE
-      */
-      YUMPatchImpl::YUMPatchImpl(
-	Source_Ref source_r,
-	const zypp::parser::yum::YUMPatchData & parsed,
-	YUMSourceImpl & srcimpl_r
-      )
-      : _source(source_r)
-      {
-	_patch_id = parsed.patchId;
-	_timestamp = str::strtonum<time_t>(parsed.timestamp);
-	_category = parsed.category;
-	_reboot_needed = parsed.rebootNeeded;
-	_affects_pkg_manager = parsed.packageManager;
-	std::string updateScript;
-        _summary = parsed.summary;
-        _description = parsed.description;
-        _license_to_confirm = parsed.license_to_confirm;
+/** Default ctor
+ * \bug CANT BE CONSTUCTED THAT WAY ANYMORE
+*/
+YUMPatchImpl::YUMPatchImpl(
+  Source_Ref source_r,
+  const zypp::parser::yum::YUMPatchData & parsed,
+  YUMSourceImpl & srcimpl_r
+)
+    : _source(source_r)
+{
+  _patch_id = parsed.patchId;
+  _timestamp = str::strtonum<time_t>(parsed.timestamp);
+  _category = parsed.category;
+  _reboot_needed = parsed.rebootNeeded;
+  _affects_pkg_manager = parsed.packageManager;
+  std::string updateScript;
+  _summary = parsed.summary;
+  _description = parsed.description;
+  _license_to_confirm = parsed.license_to_confirm;
 #if 0						// not active any more, see YUMSourceImpl::createPatch()
-	// now process the atoms
-	CapFactory _f;
-	Capability cap( _f.parse(
-	  ResType::TraitsType::kind,
-	  parsed.name,
-	  Rel::EQ,
-	  Edition(parsed.ver, parsed.rel, parsed.epoch)
-	  ));
-	for (std::list<shared_ptr<YUMPatchAtom> >::const_iterator it
-					= parsed.atoms.begin();
-	     it != parsed.atoms.end();
-	     it++)
-	{
-	  switch ((*it)->atomType())
-	  {
-	    case YUMPatchAtom::Package: {
-	      shared_ptr<YUMPatchPackage> package_data
-		= dynamic_pointer_cast<YUMPatchPackage>(*it);
-              Atom::Ptr atom = srcimpl_r.augmentPackage( _source, *package_data );
-              _atoms.push_back(atom);
-	      break;
-	    }
-	    case YUMPatchAtom::Message: {
-	      shared_ptr<YUMPatchMessage> message_data
-		= dynamic_pointer_cast<YUMPatchMessage>(*it);
-	      Message::Ptr message = srcimpl_r.createMessage(_source, *message_data);
-	      _atoms.push_back(message);
-	      break;
-	    }
-	    case YUMPatchAtom::Script: {
-	      shared_ptr<YUMPatchScript> script_data
-		= dynamic_pointer_cast<YUMPatchScript>(*it);
-	      Script::Ptr script = srcimpl_r.createScript(_source, *script_data);
-	      _atoms.push_back(script);
-	      break;
-	    }
-	    default:
-	      ERR << "Unknown type of atom" << endl;
-	  }
-	  for (AtomList::iterator it = _atoms.begin();
-	       it != _atoms.end();
-	       it++)
-	  {
-	    (*it)->injectRequires(cap);
-	  }
+  // now process the atoms
+  CapFactory _f;
+  Capability cap( _f.parse(
+                    ResType::TraitsType::kind,
+                    parsed.name,
+                    Rel::EQ,
+                    Edition(parsed.ver, parsed.rel, parsed.epoch)
+                  ));
+  for (std::list<shared_ptr<YUMPatchAtom> >::const_iterator it
+       = parsed.atoms.begin();
+       it != parsed.atoms.end();
+       it++)
+  {
+    switch ((*it)->atomType())
+    {
+    case YUMPatchAtom::Package:
+      {
+        shared_ptr<YUMPatchPackage> package_data
+        = dynamic_pointer_cast<YUMPatchPackage>(*it);
+        Atom::Ptr atom = srcimpl_r.augmentPackage( _source, *package_data );
+        _atoms.push_back(atom);
+        break;
+      }
+    case YUMPatchAtom::Message:
+      {
+        shared_ptr<YUMPatchMessage> message_data
+        = dynamic_pointer_cast<YUMPatchMessage>(*it);
+        Message::Ptr message = srcimpl_r.createMessage(_source, *message_data);
+        _atoms.push_back(message);
+        break;
+      }
+    case YUMPatchAtom::Script:
+      {
+        shared_ptr<YUMPatchScript> script_data
+        = dynamic_pointer_cast<YUMPatchScript>(*it);
+        Script::Ptr script = srcimpl_r.createScript(_source, *script_data);
+        _atoms.push_back(script);
+        break;
+      }
+    default:
+      ERR << "Unknown type of atom" << endl;
+    }
+    for (AtomList::iterator it = _atoms.begin();
+         it != _atoms.end();
+         it++)
+    {
+      (*it)->injectRequires(cap);
+    }
 
-	}
+  }
 #endif
-      }
+}
 
-      std::string YUMPatchImpl::id() const
+std::string YUMPatchImpl::id() const
+{
+  return _patch_id;
+}
+Date YUMPatchImpl::timestamp() const
+{
+  return _timestamp;
+}
+
+TranslatedText YUMPatchImpl::summary() const
+{
+  return _summary;
+}
+
+TranslatedText YUMPatchImpl::description() const
+{
+  return _description;
+}
+
+TranslatedText YUMPatchImpl::licenseToConfirm() const
+{
+  return _license_to_confirm;
+}
+
+std::string YUMPatchImpl::category() const
+{
+  return _category;
+}
+
+bool YUMPatchImpl::reboot_needed() const
+{
+  return _reboot_needed;
+}
+
+bool YUMPatchImpl::affects_pkg_manager() const
+{
+  return _affects_pkg_manager;
+}
+
+bool YUMPatchImpl::interactive() const
+{
+  if (_reboot_needed)
+  {
+    DBG << "Patch needs reboot" << endl;
+    return true;
+  }
+  AtomList not_installed = not_installed_atoms();
+  for (AtomList::iterator it = not_installed.begin();
+       it != not_installed.end();
+       it++)
+  {
+    if ((*it)->kind() == "Message")
+    {
+      //          DBG << "Patch contains a message" << endl;
+      return true;
+    }
+    if ((*it)->kind() == "Package")
+    {
+      // Resolvable*
+      // Resolvable
+      // ResolvablePtr
+
+
+      // <ma> never do somthing like this!!!
+      //          Package* p = (Package*)&**it;
+      //
+      // (*it) is a ResolvablePtr
+
+
+
+
+      // FIXME use the condition
+      //          if (p->licenseToConfirm() != "")
+      if (false)
       {
-	return _patch_id;
+        //            DBG << "Package has a license to be shown to user" << endl;
+        return true;
       }
-      Date YUMPatchImpl::timestamp() const
-      {
-	return _timestamp;
-      }
+    }
+  }
+  return false;
+}
 
-      TranslatedText YUMPatchImpl::summary() const
-      { return _summary; }
+YUMPatchImpl::AtomList YUMPatchImpl::all_atoms() const
+{
+  return _atoms;
+}
 
-      TranslatedText YUMPatchImpl::description() const
-      { return _description; }
+YUMPatchImpl::AtomList YUMPatchImpl::not_installed_atoms() const
+{
+  AtomList ret;
+  for (AtomList::const_iterator it = _atoms.begin();
+       it != _atoms.end();
+       it++)
+  {
+    if (true) // FIXME check if atom/resolvable is not installed
+    {
+      ret.push_back(*it);
+    }
+  }
+  return ret;
+}
 
-      TranslatedText YUMPatchImpl::licenseToConfirm() const
-      { return _license_to_confirm; }
+// TODO check necessarity of functions below
 
-      std::string YUMPatchImpl::category() const
-      {
-	return _category;
-      }
+bool YUMPatchImpl::any_atom_selected() const
+{
+  for (AtomList::const_iterator it = _atoms.begin();
+       it != _atoms.end();
+       it++)
+  {
+    if (false) // FIXME check if atom/resolvable is selected
+    {
+      return true;
+    }
+  }
+  return false;
+}
 
-      bool YUMPatchImpl::reboot_needed() const
-      {
-	return _reboot_needed;
-      }
+void YUMPatchImpl::mark_atoms_to_freshen( bool freshen )
+{
+  for (AtomList::iterator it = _atoms.begin();
+       it != _atoms.end();
+       it++)
+  {
+    // TODO mark the resolvable to be or not to be freshed
+  }
+}
 
-      bool YUMPatchImpl::affects_pkg_manager() const
-      {
-	return _affects_pkg_manager;
-      }
+Source_Ref YUMPatchImpl::source() const
+{
+  return _source;
+}
 
-      bool YUMPatchImpl::interactive() const {
-	if (_reboot_needed)
-	{
-	  DBG << "Patch needs reboot" << endl;
-	  return true;
-	}
-	AtomList not_installed = not_installed_atoms();
-	for (AtomList::iterator it = not_installed.begin();
-	  it != not_installed.end();
-	  it++)
-	{
-	  if ((*it)->kind() == "Message")
-	  {
-  //          DBG << "Patch contains a message" << endl;
-	    return true;
-	  }
-	  if ((*it)->kind() == "Package")
-	  {
-				   // Resolvable*
-				    // Resolvable
-				     // ResolvablePtr
-
-
-	    // <ma> never do somthing like this!!!
-  //          Package* p = (Package*)&**it;
-	    //
-	    // (*it) is a ResolvablePtr
-
-
-
-
-	    // FIXME use the condition
-  //          if (p->licenseToConfirm() != "")
-	    if (false)
-	    {
-  //            DBG << "Package has a license to be shown to user" << endl;
-	      return true;
-	    }
-	  }
-	}
-	return false;
-      }
-
-      YUMPatchImpl::AtomList YUMPatchImpl::all_atoms() const {
-	return _atoms;
-      }
-
-      YUMPatchImpl::AtomList YUMPatchImpl::not_installed_atoms() const {
-	AtomList ret;
-	for (AtomList::const_iterator it = _atoms.begin();
-	  it != _atoms.end();
-	  it++)
-	{
-	  if (true) // FIXME check if atom/resolvable is not installed
-	  {
-	    ret.push_back(*it);
-	  }
-	}
-	return ret;
-      }
-
-  // TODO check necessarity of functions below
-
-      bool YUMPatchImpl::any_atom_selected() const {
-	for (AtomList::const_iterator it = _atoms.begin();
-	  it != _atoms.end();
-	  it++)
-	{
-	  if (false) // FIXME check if atom/resolvable is selected
-	  {
-	    return true;
-	  }
-	}
-	return false;
-      }
-
-      void YUMPatchImpl::mark_atoms_to_freshen( bool freshen ) {
-	for (AtomList::iterator it = _atoms.begin();
-	  it != _atoms.end();
-	  it++)
-	{
-	  // TODO mark the resolvable to be or not to be freshed
-	}
-      }
-
-      Source_Ref YUMPatchImpl::source() const
-      { return _source; }
-
-    } // namespace yum
-    /////////////////////////////////////////////////////////////////
-  } // namespace source
-  ///////////////////////////////////////////////////////////////////
-  /////////////////////////////////////////////////////////////////
+} // namespace yum
+/////////////////////////////////////////////////////////////////
+} // namespace source
+///////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////

@@ -28,58 +28,72 @@ using namespace zypp::parser::yum;
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
-  ///////////////////////////////////////////////////////////////////
-  namespace source
-  { /////////////////////////////////////////////////////////////////
-    namespace yum
-    {
-      ///////////////////////////////////////////////////////////////////
-      //
-      //        CLASS NAME : YUMProductImpl
-      //
-      ///////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////
+namespace source
+{ /////////////////////////////////////////////////////////////////
+namespace yum
+{
+///////////////////////////////////////////////////////////////////
+//
+//        CLASS NAME : YUMProductImpl
+//
+///////////////////////////////////////////////////////////////////
 
-      /** Default ctor
-       * \bug CANT BE CONSTUCTED THAT WAY ANYMORE
-      */
-      YUMProductImpl::YUMProductImpl(
-	Source_Ref source_r,
-	const zypp::parser::yum::YUMProductData & parsed
-      )
-      :	_category(parsed.type),
-	_vendor(parsed.vendor),
-	_short_name(parsed.short_name),
-	_source(source_r)
-      {
-	_category = source_r.baseSource() ? "base" : "add-on";
-      }
+/** Default ctor
+ * \bug CANT BE CONSTUCTED THAT WAY ANYMORE
+*/
+YUMProductImpl::YUMProductImpl(
+  Source_Ref source_r,
+  const zypp::parser::yum::YUMProductData & parsed
+)
+    :	_category(parsed.type),
+    _vendor(parsed.vendor),
+    _short_name(parsed.short_name),
+    _source(source_r)
+{
+  _category = source_r.baseSource() ? "base" : "add-on";
+}
 
-      std::string YUMProductImpl::category() const
-      { return _category; }
+std::string YUMProductImpl::category() const
+{
+  return _category;
+}
 
-      Label YUMProductImpl::vendor() const
-      { return _vendor; }
+Label YUMProductImpl::vendor() const
+{
+  return _vendor;
+}
 
-      TranslatedText YUMProductImpl::summary() const
-      { return _summary; }
+TranslatedText YUMProductImpl::summary() const
+{
+  return _summary;
+}
 
-      TranslatedText YUMProductImpl::description() const
-      { return _description; }
+TranslatedText YUMProductImpl::description() const
+{
+  return _description;
+}
 
-      Source_Ref YUMProductImpl::source() const
-      { return _source; }
+Source_Ref YUMProductImpl::source() const
+{
+  return _source;
+}
 
 #warning the metadata specification does not support product flags
-      std::list<std::string> YUMProductImpl::flags() const
-      { return ProductImplIf::flags(); }
+std::list<std::string> YUMProductImpl::flags() const
+{
+  return ProductImplIf::flags();
+}
 
-      TranslatedText YUMProductImpl::shortName() const
-      { return _short_name; }
+TranslatedText YUMProductImpl::shortName() const
+{
+  return _short_name;
+}
 
-    } // namespace yum
-    /////////////////////////////////////////////////////////////////
-  } // namespace source
-  ///////////////////////////////////////////////////////////////////
-  /////////////////////////////////////////////////////////////////
+} // namespace yum
+/////////////////////////////////////////////////////////////////
+} // namespace source
+///////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
