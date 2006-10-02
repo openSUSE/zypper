@@ -217,7 +217,7 @@ int main(int argc, char **argv)
     cerr_vv << "No command" <<endl;
     //command = "help";
   }
-  cerr_v << "COMMAND: " << command << endl;
+  cerr_vv << "COMMAND: " << command << endl;
 
   // === command-specific options ===
 
@@ -235,6 +235,7 @@ int main(int argc, char **argv)
       "\tservice-rename, sr\tRename a service\n"
       "\tpatch-check, pchk\tCheck for patches\n"
       "\tpatches, pch\t\tList patches\n"
+      "\tlist-updates, lu\t\tList updates\n"
       ;
 
   string help_global_source_options = "  Source options:\n"
@@ -286,6 +287,16 @@ int main(int argc, char **argv)
     specific_options = service_list_options;
     specific_help = "  Command options:\n"
       "\n"
+      ;
+  }
+  else if (command == "list-updates" || command == "lu") {
+    static struct option remove_options[] = {
+      {"type",		required_argument, 0, 't'},
+      {0, 0, 0, 0}
+    };
+    specific_options = remove_options;
+    specific_help = "  Command options:\n"
+      "\t--type,-t\t\tType of resolvable (default: package)\n"
       ;
   }
   else {
@@ -576,6 +587,7 @@ int main(int argc, char **argv)
     return 0;
   }
 
+  // TODO: rug status
   if (command == "patch-check" || command == "pchk") {
     if (help) {
       cerr << "patch-check\n"
@@ -619,5 +631,34 @@ int main(int argc, char **argv)
     return 0;
   }
 
+  if (command == "list-updates" || command == "lu") {
+    if (help) {
+      // FIXME catalog...
+      cerr << "list-updates [options]\n"
+	   << specific_help
+	;
+      return !help;
+    }
+
+    string skind = copts.count("type")?  copts["type"].front() : "package";
+    kind = string_to_kind (skind);
+    if (kind == ResObject::Kind ()) {
+	cerr << "Unknown resolvable type " << skind << endl;
+	return 1;
+    }
+
+    cond_init_target ();
+    cond_init_system_sources ();
+    cond_load_resolvables ();
+    establish ();
+
+    list_updates (kind);
+
+    return 0;
+  }
+
   return 0;
 }
+// Local Variables:
+// c-basic-offset: 2
+// End:

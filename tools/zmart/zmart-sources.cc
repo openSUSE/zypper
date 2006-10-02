@@ -93,17 +93,16 @@ static void print_source_list( const std::list<zypp::source::SourceInfo> &source
 static void print_source_list_rug_style( const std::list<zypp::source::SourceInfo> &sources )
 {
   Table tbl;
-  TableRow th;
+  TableHeader th;
   th << "#" << "Status" << "Type" << "Name" << "URI";
   tbl << th;
-  tbl.hasHeader (true);
 
   int i = 1;
   for( std::list<zypp::source::SourceInfo>::const_iterator it = sources.begin() ;
        it != sources.end() ; ++it, ++i )
   {
     SourceInfo source = *it;
-    TableRow tr;
+    TableRow tr (5);
     tr << str::numstring (i);
     string status = source.enabled() ? "[x]" : "[ ]";
     status += source.autorefresh() ? "*" : " ";

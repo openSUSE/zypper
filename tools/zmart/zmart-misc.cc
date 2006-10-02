@@ -210,7 +210,7 @@ void show_summary()
   MIL << "Pool contains " << God->pool().size() << " items." << std::endl;
   for ( ResPool::const_iterator it = God->pool().begin(); it != God->pool().end(); ++it )
   {
-    Resolvable::constPtr res = it->resolvable();
+    ResObject::constPtr res = it->resolvable();
     if ( it->status().isToBeInstalled() || it->status().isToBeUninstalled() )
     {
       if ( it->status().isToBeInstalled() )
@@ -317,7 +317,7 @@ void patch_check ()
     e = God->pool().byKindEnd<Patch>();
   for (; it != e; ++it )
   {
-    Resolvable::constPtr res = it->resolvable();
+    ResObject::constPtr res = it->resolvable();
     Patch::constPtr patch = asKind<Patch>(res);
 
     if ( it->status().isNeeded() )
@@ -352,17 +352,16 @@ void show_pool()
   MIL << "Pool contains " << God->pool().size() << " items. Checking whether available patches are needed." << std::endl;
 
   Table tbl;
-  TableRow th;
+  TableHeader th;
   th << "Catalog" << "Name" << "Version" << "Category" << "Status";
   tbl << th;
-  tbl.hasHeader (true);
 
   ResPool::byKind_iterator
     it = God->pool().byKindBegin<Patch>(),
-    e = God->pool().byKindEnd<Patch>();
+    e  = God->pool().byKindEnd<Patch>();
   for (; it != e; ++it )
   {
-    Resolvable::constPtr res = it->resolvable();
+    ResObject::constPtr res = it->resolvable();
     if ( it->status().isUndetermined() ) {
 #warning is this a library bug?
       // these are duplicates of those that are determined
@@ -377,6 +376,58 @@ void show_pool()
     tr << string_status (it->status ());
     tbl << tr;
   }
+  tbl.sort (1);			// Name
+  cout << tbl;
+}
+
+void list_updates( const ResObject::Kind &kind )
+{
+  bool k_is_patch = kind == ResTraits<Patch>::kind;
+
+  Table tbl;
+  TableHeader th;
+  unsigned cols;
+  if (k_is_patch) {
+    th << "Catalog" << "Name" << "Version" << "Category" << "Status";
+    cols = 5;
+  }
+  else {
+    th << "S" << "Catalog" << "" /*Bundle*/ << "Name" << "Version" << "Arch";
+    cols = 6;
+  }
+  tbl << th;
+
+  ResPool::byKind_iterator
+    it = God->pool().byKindBegin (kind),
+    e  = God->pool().byKindEnd (kind);
+  for (; it != e; ++it )
+  {
+    ResObject::constPtr res = it->resolvable();
+
+    // TODO: isNeeded only applies to patches (aggregates?)
+    if ( it->status().isNeeded() ) {
+      if (k_is_patch) {
+	Patch::constPtr patch = asKind<Patch>(res);
+
+	// FIXME: affects_packagemanager first
+	TableRow tr (cols);
+	tr << patch->source ().alias ();
+	tr << res->name () << res->edition ().asString();
+	tr << patch->category();
+	tr << string_status (it->status ());
+	tbl << tr;
+      }
+      else {
+	TableRow tr (cols);
+	tr << "?" << res->source ().alias () << "";
+	tr << res->name ()
+	   << res->edition ().asString ()
+	   << res->arch ().asString ();
+	tbl << tr;
+      }
+    }
+  }
+  tbl.sort (1); 		// Name
   cout << tbl;
 }
 
@@ -385,6 +436,6 @@ void usage(int argc, char **argv)
   cerr << "usage: " << argv[0] << " [<previous token>] [previous result]" << endl;
   exit(-1);
 }
-
-
-
+// Local Variables:
+// c-basic-offset: 2
+// End:

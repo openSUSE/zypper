@@ -31,6 +31,7 @@ void establish ();
 void resolve();
 void show_pool();
 void patch_check();
+void list_updates( const zypp::ResObject::Kind &kind );
 void usage(int argc, char **argv);
 
 #endif

@@ -62,8 +62,16 @@ void TableRow::dumpTo (ostream &stream, const vector<unsigned>& widths,
 
 void Table::add (const TableRow& tr) {
   _rows.push_back (tr);
+  updateColWidths (tr);
+}
 
-  // update column widths
+void Table::setHeader (const TableHeader& tr) {
+  _has_header = true;
+  _header = tr;
+  updateColWidths (tr);
+}
+
+void Table::updateColWidths (const TableRow& tr) {
   TableRow::container::const_iterator
     i = tr._columns.begin (),
     e = tr._columns.end ();
@@ -102,17 +110,17 @@ void Table::dumpRule (ostream &stream) const {
 }
 
 void Table::dumpTo (ostream &stream) const {
-  bool done_header = false;
+  if (_has_header) {
+    _header.dumpTo (stream, _max_width, _style);
+    dumpRule (stream);
+  }
+
   container::const_iterator
     b = _rows.begin (),
     e = _rows.end (),
     i;
   for (i = b; i != e; ++i) {
     i->dumpTo (stream, _max_width, _style);
-    if (!done_header && _has_header) {
-      done_header = true;
-      dumpRule (stream);
-    }
   }
 }
 
@@ -120,3 +128,12 @@ void Table::style (TableStyle st) {
   if (st < _End)
     _style = st;
 }
+
+void Table::sort (unsigned by_column) {
+  TableRow::Less comp (by_column);
+  _rows.sort (comp);
+}
+
+// Local Variables:
+// c-basic-offset: 2
+// End:
