@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Mon Oct  2 15:11:26 CEST 2006 - dmacvicar@suse.de
+
+- FATE #100165: 
+  Make Content File Aware of Different Architectures
+  expand %a in release notes with architecture
+
+-------------------------------------------------------------------
 Fri Sep 29 16:10:46 CEST 2006 - ma@suse.de
 
 - Extended pattern parser to support includes/extends tags as hint
