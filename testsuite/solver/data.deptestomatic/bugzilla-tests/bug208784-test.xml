@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<test>
+<setup arch="i686">
+  <system file="bug208784-system.xml"/>
+  <channel name="sles10" file="../repos/sles10/sles-10-i386-1407-packages.xml"/>
+  <channel name="oes" file="oes-packages.xml"/>
+</setup>
+<trial>
+  <install channel="oes" package="novell-cluster-services"/>
+</trial>
+</test>
