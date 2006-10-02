@@ -13,7 +13,8 @@ noinst_PROGRAMS = \
 	producttagparsertest	\
 	mediatagparsertest	\
 	suseparser \
-	source_read_test
+	source_read_test \
+	content_file_test
 
 # does not compile
 # packagetagparsertest_SOURCES = PackageTagParserTest.cc
@@ -24,3 +25,5 @@ producttagparsertest_SOURCES = ProductMetadataParserTest.cc
 mediatagparsertest_SOURCES = MediaMetadataParserTest.cc
 suseparser_SOURCES = suseparser.cc KeyRingCallbacks.h
 source_read_test_SOURCES = source-read-test.cc
+content_file_test_SOURCES = content_file_test.cc
+content_file_test_LDADD = $(LDADD) -lboost_unit_test_framework

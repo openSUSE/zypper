@@ -44,7 +44,18 @@ namespace source
 { /////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////
 namespace susetags
-{ /////////////////////////////////////////////////////////////////
+{/////////////////////////////////////////////////////////////////
+
+static void replace_variables( std::string &text )
+{
+  unsigned int pos = text.find("%a");
+  if(pos != string::npos)
+  {
+    Arch sysarch( getZYpp()->architecture() );
+    text.replace( pos, 2, sysarch.asString() );
+  }
+}
+  
 ProductMetadataParser::ProductMetadataParser()
 {
   prodImpl = new SuseTagsProductImpl;
@@ -104,6 +115,9 @@ void ProductMetadataParser::parse( const Pathname & file_r, Source_Ref source_r 
         // Url class throws in case of invalid URL
         try
         {
+          // replace variables like %a
+          replace_variables(value);
+          
           Url url (value) ;
           prodImpl->_release_notes_url = url;
         }
