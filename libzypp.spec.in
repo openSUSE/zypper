@@ -90,6 +90,7 @@ make install DESTDIR=$RPM_BUILD_ROOT
 
 %files -f zypp.lang
 %defattr(-,root,root)
+%{bindir}/zypper
 %dir %{_libdir}/libzypp*so.*
 %dir %{prefix}/share/zypp
 %{prefix}/share/zypp/*

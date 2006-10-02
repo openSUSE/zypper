@@ -1,7 +1,8 @@
 ## Process this file with automake to produce Makefile.in
 ## ##################################################
 
-noinst_PROGRAMS = zmart zypper zypp-checkpatches
+bin_PROGRAMS = zypper
+noinst_PROGRAMS = zmart zypp-checkpatches
 
 ## ##################################################
 
