@@ -19,6 +19,12 @@
 
 /-*/
 
+#include <cerrno>
+#include <iostream>
+#include <zypp/base/LogControl.h>
+#include <zypp/base/LogTools.h>
+using std::endl;
+
 #include "zypp/base/GzStream.h"
 
 #include <sys/types.h>
@@ -120,10 +126,13 @@ namespace zypp
           if ( sync() != 0 )
             failed = true;
 	  // it also closes _fd, fine
-          if ( gzclose( _file ) != Z_OK )
+          int r = gzclose( _file );
+          if ( r != Z_OK )
             {
               failed = true;
-              setZError();
+              // DONT call setZError() here, as _file is no longer valid
+              _error._zError = r;
+              _error._errno = errno;
             }
 
           // Reset everything
