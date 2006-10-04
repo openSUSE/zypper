@@ -90,6 +90,29 @@ namespace zypp
 
   ///////////////////////////////////////////////////////////////////
   //
+  //	METHOD NAME : InputStream::InputStream
+  //	METHOD TYPE : Constructor
+  //
+  InputStream::InputStream( const char * file_r )
+  : _path( file_r )
+  , _stream( new ifgzstream( _path.asString().c_str() ) )
+  , _name( _path.asString() )
+  {}
+
+  ///////////////////////////////////////////////////////////////////
+  //
+  //	METHOD NAME : InputStream::InputStream
+  //	METHOD TYPE : Constructor
+  //
+  InputStream::InputStream( const char * file_r,
+                            const std::string & name_r )
+  : _path( file_r )
+  , _stream( new ifgzstream( _path.asString().c_str() ) )
+  , _name( name_r )
+  {}
+
+  ///////////////////////////////////////////////////////////////////
+  //
   //	METHOD NAME : InputStream::~InputStream
   //	METHOD TYPE : Destructor
   //
