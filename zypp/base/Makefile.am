@@ -29,6 +29,7 @@ baseinclude_HEADERS =	\
 	Gettext.h	\
 	GzStream.h	\
 	IOStream.h	\
+	InputStream.h	\
 	NonCopyable.h	\
 	ProvideNumericId.h	\
 	ReferenceCounted.h	\
@@ -52,6 +53,7 @@ lib@PACKAGE@_base_la_SOURCES =	\
 	Gettext.cc		\
 	GzStream.cc		\
 	IOStream.cc		\
+	InputStream.cc		\
 	ReferenceCounted.cc	\
 	String.cc		\
 	Unit.cc			\
