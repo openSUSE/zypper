@@ -41,6 +41,43 @@ namespace zypp
     */
     /*@{*/
 
+    /** shared_ptr custom deleter doing nothing.
+     * A custom deleter is a function being called when the
+     * last shared_ptr goes out of score. Per default the
+     * object gets deleted, but you can insall custom deleters
+     * as well. This one does nothing.
+     *
+     * \code
+     *  // Some class providing a std::istream
+     *  struct InpuStream
+     * {
+     *   // Per deafult use std::cin.
+     *   InputStream()
+     *   : _stream( &std::cin, NullDeleter() )
+     *   {}
+     *   // Or read from a file.
+     *   InputStream( const Pathname & file_r )
+     *   : _stream( new ifgzstream( _path.asString().c_str() ) )
+     *   {}
+     *   // Or use a stream priovided by the application.
+     *   InputStream( std::istream & stream_r )
+     *   : _stream( &stream_r, NullDeleter() )
+     *   {}
+     *
+     *   std::istream & stream()
+     *   { return *_stream; }
+     *
+     * private:
+     *   shared_ptr<std::istream> _stream;
+     * };
+     * \endcode
+    */
+    struct NullDeleter
+    {
+      void operator()( const void *const ) const
+      {}
+    };
+
     /** \class scoped_ptr scoped_ptr */
     using boost::scoped_ptr;
 
