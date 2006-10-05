@@ -50,6 +50,7 @@ namespace zypp
   static bool printLine( const std::string &line )
   {
     MIL <<  line << std::endl;
+    return true;
   }
 
   static void dumpFile(const Pathname &file)
