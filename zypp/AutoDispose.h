@@ -102,9 +102,6 @@ namespace zypp
       /** Dispose function signatue. */
       typedef function<void ( param_type )> Dispose;
 
-      /** Noop dispose function. */
-      static void nodispose( param_type ) {}
-
     public:
       /** Default Ctor using default constructed value and no dispose function. */
       AutoDispose()
