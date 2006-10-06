@@ -3,8 +3,6 @@
 #include <sstream>
 #include <streambuf>
 
-#include <boost/program_options.hpp>
-
 #include <zypp/base/LogControl.h>
 #include <zypp/base/Logger.h>
 #include <zypp/base/String.h>
@@ -32,8 +30,10 @@ using namespace std;
 using namespace zypp;
 using namespace boost;
 
-namespace po = boost::program_options;
 #define ZYPP_CHECKPATCHES_LOG "/var/log/zypp-checkpatches.log"
+
+#define TOKEN_FILE "/var/lib/zypp/cache/updates_token"
+#define RESULT_FILE "/var/lib/zypp/cache/updates_result.xml"
 
 ZYpp::Ptr God;
 RuntimeData gData;
@@ -41,23 +41,63 @@ Settings gSettings;
 
 ostream no_stream(NULL);
 
-//using namespace DbXml;
+static string read_old_token()
+{
+  string buffer;
+  string token;
+  std::ifstream is(TOKEN_FILE);
+  if ( is.good() )
+  {
+    while(is && !is.eof())
+    {
+      getline(is, buffer);
+      token += buffer;
+    }
+    is.close();
+  }
+  return token;
+}
 
-static void render_xml( const zypp::ResPool &pool, const string &token )
+
+static void save_token( const std::string &token )
+{
+  std::ofstream os(TOKEN_FILE);
+  if ( os.good() )
+  {
+    os << token << endl;;
+  }
+  os.close();
+}
+
+static void render_error(  std::ostream &out, const std::string &reason )
+{
+  out << "<update-status op=\"error\">" << std::endl;
+    out << "<error>" << reason << "</error>" << std::endl;
+  out << "</update-status>" << std::endl;
+}
+
+static void render_unchanged(  std::ostream &out, const std::string &token )
+{
+  out << "<update-status op=\"unchanged\">" << std::endl;
+  //  out << " <metadata token=\"" << token << "\"/>" << std::endl;
+  out << "</update-status>" << std::endl;
+}
+
+static void render_result( std::ostream &out, const zypp::ResPool &pool)
 {
   int count = 0;
   int security_count = 0;
   
-  cout << "<?xml>" << std::endl;
-  cout << "<update-status>" << std::endl;
-  cout << " <metadata token=\"" << token << "\"/>" << std::endl;
-  cout << " <update-sources>" << std::endl;
+  out << "<?xml>" << std::endl;
+  out << "<update-status op=\"success\">" << std::endl;
+  //out << " <metadata token=\"" << token << "\"/>" << std::endl;
+  out << " <update-sources>" << std::endl;
   for ( std::list<Source_Ref>::const_iterator it = gData.sources.begin(); it != gData.sources.end(); ++it )
   {
-    cout << "  <source url=\"" << it->url() << "\" alias=\"" << it->alias() << "\">" << std::endl;
+    out << "  <source url=\"" << it->url() << "\" alias=\"" << it->alias() << "\">" << std::endl;
   }
-  cout << " </update-sources>" << std::endl;
-  cout << " <update-list>" << std::endl;
+  out << " </update-sources>" << std::endl;
+  out << " <update-list>" << std::endl;
   for ( ResPool::byKind_iterator it = pool.byKindBegin<Patch>(); it != pool.byKindEnd<Patch>(); ++it )
   {
     Resolvable::constPtr res = it->resolvable();
@@ -65,9 +105,9 @@ static void render_xml( const zypp::ResPool &pool, const string &token )
     MIL << patch->name() << " " << patch->edition() << " " << "[" << patch->category() << "]" << ( it->status().isNeeded() ? " [needed]" : " [unneeded]" )<< std::endl;
     if ( it->status().isNeeded() )
     {
-      cout << " <update category=\"" << patch ->category() << "\">" << std::endl;
-      cout << "  <name>" << patch->name() << "</name>" <<endl;
-      cout << "  <edition>" << patch->edition() << "</edition>" <<endl;
+      out << " <update category=\"" << patch ->category() << "\">" << std::endl;
+      out << "  <name>" << patch->name() << "</name>" <<endl;
+      out << "  <edition>" << patch->edition() << "</edition>" <<endl;
       
       
       count++;
@@ -75,9 +115,9 @@ static void render_xml( const zypp::ResPool &pool, const string &token )
         security_count++;
     }
   }
-  cout << " </update-list>" << std::endl;
-  cout << " <update-summary total=\"" << count << "\" security=\"" << security_count << "\"/>" << std::endl;
-  cout << "</update-status>" << std::endl;
+  out << " </update-list>" << std::endl;
+  out << " <update-summary total=\"" << count << "\" security=\"" << security_count << "\"/>" << std::endl;
+  out << "</update-status>" << std::endl;
 }
 
 int main(int argc, char **argv)
@@ -88,60 +128,6 @@ int main(int argc, char **argv)
   else
     zypp::base::LogControl::instance().logfile( ZYPP_CHECKPATCHES_LOG );
   
-  po::positional_options_description pos_options;
-  pos_options.add("command", -1);
-  
-  po::options_description general_options("General options");
-  general_options.add_options()
-      ("help,h", "produce a help message")
-      ("version,v", "output the version number")
-      ;
-
-  po::options_description check_options("Check options");
-  check_options.add_options()
-      ("previous-token,t", po::value< string >(), "The token got from last run.")
-      ("previous-result,r", po::value< int >(), "Previous result. If repositories are the same as last run, this will be shown.")
-      ;
-  
-  //po::options_description source_options("Source options");
-  //source_options.add_options()
-  //    ("disable-system-sources,D", "Don't read the system sources.")
-  //    ("sources,S", po::value< vector<string> >(), "Read from additional sources")
-  //    ;
-  
-  // Declare an options description instance which will include
-  // all the options
-  po::options_description all_options("Allowed options");
-  all_options.add(general_options).add(check_options);
-
-  // Declare an options description instance which will be shown
-  // to the user
-  po::options_description visible_options("Allowed options");
-  visible_options.add(general_options).add(check_options);
-
-  po::variables_map vm;
-  //po::store(po::parse_command_line(argc, argv, visible_options), vm);
-  po::store(po::command_line_parser(argc, argv).options(visible_options).positional(pos_options).run(), vm);
-  po::notify(vm);
- 
-  if (vm.count("help")) {
-    cout << visible_options << "\n";
-    return 1;
-  }
-  
-  std::string previous_token;
-  if (vm.count("previous-token"))
-  {
-    previous_token = vm["previous-token"].as< string >();
-  }
-  
-  int previous_code = -1;
-  if (vm.count("previous-result"))
-  {
-    previous_code = vm["previous-result"].as< int >();
-  }
-  
-  MIL << argv[0] << " started with arguments " << previous_token << " " << previous_code << std::endl;
    
   ZYpp::Ptr God = NULL;
   try
@@ -151,9 +137,14 @@ int main(int argc, char **argv)
   catch (Exception & excpt_r)
   {
     ZYPP_CAUGHT (excpt_r);
-    ERR  << "a ZYpp transaction is already in progress." << endl;
-    cerr << "a ZYpp transaction is already in progress." << endl;
-    //cout << RANDOM_TOKEN;
+    
+    std::ofstream os(TOKEN_FILE);
+    if ( os.good() )
+    {
+      render_error( os, "a ZYpp transaction is already in progress.");
+      render_error( cout, "a ZYpp transaction is already in progress.");
+      os.close();
+    }
     return -1;
   }
   
@@ -170,8 +161,16 @@ int main(int argc, char **argv)
   catch (Exception & excpt_r)
   {
     ZYPP_CAUGHT (excpt_r);
-    ERR << "Couldn't restore sources" << endl;
-    //return -1;
+    
+    std::ofstream os(TOKEN_FILE);
+    if ( os.good() )
+    {
+      render_error( os, "Couldn't restore sources");
+      render_error( cout, "Couldn't restore sources");
+      os.close();
+    }
+    
+    return -1;
   }
   
   // dont add rpms
@@ -202,14 +201,35 @@ int main(int argc, char **argv)
   
   token_stream << "[" << "target" << "| " << God->target()->timestamp() << "]";
   
+  string previous_token;
+  if ( PathInfo(TOKEN_FILE).isExist() )
+    previous_token = read_old_token();
+  else
+    previous_token = RANDOM_TOKEN;
+  
   //static std::string digest(const std::string& name, std::istream& is
   token = Digest::digest("sha1", token_stream);
   //cout << token;
   
-  MIL << "new token [" << token << "]" << " previous: [" << previous_token << "] previous code: " << previous_code << std::endl;
+  MIL << "new token [" << token << "]" << " previous: [" << previous_token << "]" << std::endl;
+  
+  // use the old result
   if ( token == previous_token )
   {
-    return previous_code;
+    std::ifstream is(RESULT_FILE);
+    
+    string buffer;
+    while(is && !is.eof())
+    {
+      getline(is, buffer);
+      cout << buffer << endl;
+    }
+    //return previous_code;
+    return -1;
+  }
+  else
+  {
+    MIL << "System has changed, recalculation of updates needed" << endl;
   }
   
   for ( std::list<Source_Ref>::const_iterator it = gData.sources.begin(); it != gData.sources.end(); ++it )
@@ -225,9 +245,15 @@ int main(int argc, char **argv)
   int security_count = 0;
   MIL << "Pool contains " << God->pool().size() << " items. Checking whether available patches are needed." << std::endl;
   
-  
-  render_xml(God->pool(), token );
-  
+  std::ofstream os(RESULT_FILE);
+  if ( os.good() )
+  {
+    render_result( os, God->pool());
+    render_result( cout, God->pool());
+    os.close();
+  }
+   // save token
+  save_token(token);
   //MIL << "Patches " << security_count << " " << count << std::endl;
   
   if ( security_count > 0 )
