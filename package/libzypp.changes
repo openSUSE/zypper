@@ -1,4 +1,15 @@
 -------------------------------------------------------------------
+Fri Oct  6 11:55:11 CEST 2006 - dmacvicar@suse.de
+
+- Introduce a method to see if a source supports a 
+  kind of resolvable at that time, so we can
+  init a YUM source like factory but avoid parsing
+  it if it contains no patches. 
+- add TODO
+- zypp-checkpatches xml output
+- r4235
+
+-------------------------------------------------------------------
 Mon Oct  2 16:34:03 CEST 2006 - mvidner@suse.cz
 
 - added a CLI preview: zypper

@@ -16,52 +16,28 @@
 #include "zypp/SourceFactory.h"
 #include "testsuite/src/utils/TestUtils.h"
 #include "zypp/base/GzStream.h"
+#include "zypp/source/OnMediaLocation.h"
 
 using namespace std;
 using namespace zypp;
 using namespace zypp::detail;
 using namespace zypp::source;
 using namespace zypp::packagedelta;
-//using namespace DbXml;
 
-struct YUMSourceEventHandler
-{
-  YUMSourceEventHandler()
-  {}
-        
-  void operator()( int p )
-  {
-    std::cout << "\rProgress " << p << "               " << std::endl;
-  }
-};
 
 int main(int argc, char **argv)
 {
   try
   {
     ZYpp::Ptr z = getZYpp();
+   
+    source::OnMediaLocation oml;
+    oml.medianr( str::strtonum<unsigned>( "" ) )
+                            .filename( "rpm/blah.rpm" )
+                            .checksum( CheckSum( "sha1", "a7235c3ae45b353ceca8358160fe305d26b4d3dd" ) )
+                            .downloadsize( str::strtonum<ByteCount::SizeType>( "2506999" ) );
     
-    //PublicKey key("repomd.xml.key");
-    //cout << key << endl;
-    //z->initializeTarget("/");
-    
-    Pathname filename = "primary.xml";
-    //ifgzstream st ( argv[1] );
-    std::ifstream st ( argv[1] );
-    
-    if ( st.bad() )
-      ZYPP_THROW(Exception("archivo malo"));
-    
-    parser::ParserProgress::Ptr progress;
-    YUMSourceEventHandler npp;
-    progress.reset( new parser::ParserProgress( npp, PathInfo(filename).size()  ) );
-    
-    parser::yum::YUMPrimaryParser prim(st, "", progress);
-    for (; !prim.atEnd(); ++prim)
-    {
-      std::cout << "iteracion" << std::endl;
-      if (*prim == NULL) continue;      // incompatible arch detected during parsi
-    }    
+    MIL << oml << endl;
   }
   catch ( const Exception &e )
   {
