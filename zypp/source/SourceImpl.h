@@ -282,6 +282,8 @@ namespace zypp
        */
       virtual media::MediaVerifierRef verifier(unsigned media_nr);
 
+      virtual std::set<zypp::Resolvable::Kind> resolvableKinds() const;
+      
       /** Provide Source_Ref back to \c this. */
       Source_Ref selfSourceRef()
       { return Source_Ref( this ); }

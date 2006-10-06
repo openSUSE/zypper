@@ -136,6 +136,25 @@ namespace zypp
         return _media_descr_dir;
       }
 
+      std::set<zypp::Resolvable::Kind>
+      SuseTagsImpl::resolvableKinds() const
+      {
+        std::set<zypp::Resolvable::Kind> kinds;
+        
+        kinds.insert( ResTraits<zypp::Product>::kind );
+        
+        if ( PathInfo(descrDir() + "patterns").isExist() )
+          kinds.insert( ResTraits<zypp::Pattern>::kind );
+        
+        if ( PathInfo(descrDir() + "selections").isExist() )
+          kinds.insert( ResTraits<zypp::Selection>::kind );
+        
+        if ( PathInfo(descrDir() + "packages").isExist() )
+          kinds.insert( ResTraits<zypp::Package>::kind );
+        
+        return kinds;
+      }
+      
       bool SuseTagsImpl::downloadNeeded(const Pathname & localdir)
       {
         Pathname new_media_file;

@@ -80,6 +80,8 @@ public:
   virtual Date timestamp() const;
   virtual void storeMetadata(const Pathname & cache_dir_r);
 
+  virtual std::set<zypp::Resolvable::Kind> resolvableKinds() const;
+  
   virtual std::string type(void) const
   {
     return typeString();

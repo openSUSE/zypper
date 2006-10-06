@@ -260,6 +260,8 @@ void YUMSourceImpl::factoryInit()
     DBG << "Cached metadata found in [" << _cache_dir << "]." << endl;
     if ( autorefresh() )
       storeMetadata(_cache_dir);
+    else
+      readRepomd();
   }
   else
   {
@@ -275,6 +277,7 @@ void YUMSourceImpl::factoryInit()
       DBG << "Cached metadata not found in [" << _cache_dir << "]. Will download." << std::endl;
       saveMetadataTo(_cache_dir);
     }
+    readRepomd();
   }
 
   MIL << "YUM source initialized." << std::endl;
@@ -282,49 +285,6 @@ void YUMSourceImpl::factoryInit()
   MIL << "   Path     : " << path() << std::endl;
   MIL << "   Metadata : " << metadataRoot() << (_cache_dir.empty() ? " [TMP]" : " [CACHE]") << std::endl;
 }
-
-/*
-void YUMSourceImpl::checkMetadataChecksums() const
-{
-  DBG << "Reading file " << repomdFile() << " to check integrity of metadata." << endl;
-  ifstream repo_st(repomdFile().asString().c_str());
-  YUMRepomdParser repomd(repo_st, "");
-
-  for(; ! repomd.atEnd(); ++repomd)
-  {
-    if ((*repomd)->type == "other")
-    {             // dont parse other.xml (#159316)
-      continue;
-    }
-    else
-    {
-      Pathname file_to_check = metadataRoot() + _path + (*repomd)->location;
-      if (! filesystem::is_checksum( file_to_check, CheckSum((*repomd)->checksumType, (*repomd)->checksum)))
-      {
-        ZYPP_THROW(Exception( (*repomd)->location + " " + N_("fails checksum verification.") ));
-      }
-
-      // now parse patches mentioned if we are in patches.xml
-
-      if ((*repomd)->type == "patches")
-      {
-        Pathname patch_index = file_to_check;
-        DBG << "reading patches from file " << patch_index << endl;
-        ifgzstream st ( patch_index.asString().c_str() );
-        YUMPatchesParser patch(st, "");
-        for (; !patch.atEnd(); ++patch)
-        {
-          Pathname patch_filename = metadataRoot() + _path + (*patch)->location;
-          if (! filesystem::is_checksum(patch_filename, CheckSum((*patch)->checksumType, (*patch)->checksum)))
-          {
-            ZYPP_THROW(Exception( (*patch)->location + " " + N_("fails checksum verification.") ));
-          }
-        }
-      }
-    }
-  }
-}
-*/
 
 bool YUMSourceImpl::downloadNeeded(const Pathname & localdir)
 {
@@ -365,6 +325,8 @@ void YUMSourceImpl::storeMetadata(const Pathname & cache_dir_r)
 
   MIL << "Metadata saved in " << cache_dir_r << ". Setting as cache." << std::endl;
   _cache_dir = cache_dir_r;
+ 
+  readRepomd();
 }
 
 void YUMSourceImpl::saveMetadataTo(const Pathname & dir_r)
@@ -408,6 +370,13 @@ void YUMSourceImpl::saveMetadataTo(const Pathname & dir_r)
 
 void YUMSourceImpl::readRepomd()
 {
+  _repo_primary.clear();
+  _repo_files.clear();
+  _repo_group.clear();
+  _repo_pattern.clear();
+  _repo_product.clear();
+  _repo_patches.clear();
+  
   parser::ParserProgress::Ptr progress;
   callback::SendReport<SourceReport> report;
   YUMSourceEventHandler npp(report);
@@ -446,6 +415,29 @@ void YUMSourceImpl::readRepomd()
     ZYPP_THROW( SourceMetadataException("Error parsing repomd.xml file") );
 
   }
+}
+
+std::set<zypp::Resolvable::Kind>
+YUMSourceImpl::resolvableKinds() const
+{
+  std::set<zypp::Resolvable::Kind> kinds;
+  
+  if (_repo_product.size() > 0 )
+    kinds.insert( ResTraits<zypp::Product>::kind ); 
+  
+  if (_repo_pattern.size() > 0 )
+    kinds.insert( ResTraits<zypp::Pattern>::kind );
+  
+  if (_repo_group.size() > 0 )
+    kinds.insert( ResTraits<zypp::Selection>::kind );
+  
+  if (_repo_primary.size() > 0 )
+  kinds.insert( ResTraits<zypp::Package>::kind );
+  
+  if (_repo_patches.size() > 0 )
+    kinds.insert( ResTraits<zypp::Patch>::kind );
+  
+  return kinds;
 }
 
 void YUMSourceImpl::provideProducts(Source_Ref source_r, ResStore& store)
@@ -810,7 +802,7 @@ ResStore YUMSourceImpl::provideResolvablesByKind(Source_Ref source_r, zypp::Reso
 {
   ResStore store;
 
-  readRepomd();
+  //readRepomd();
 
   if ( kind == ResTraits<Product>::kind )
     provideProducts ( selfSourceRef(), store );
@@ -829,7 +821,7 @@ ResStore YUMSourceImpl::provideResolvablesByKind(Source_Ref source_r, zypp::Reso
 void YUMSourceImpl::createResolvables(Source_Ref source_r)
 {
 
-  readRepomd();
+  //readRepomd();
   provideProducts(selfSourceRef(), _store);
   providePackages(selfSourceRef(), _store);
   provideSelections(selfSourceRef(), _store);

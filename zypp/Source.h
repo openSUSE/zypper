@@ -157,6 +157,17 @@ namespace zypp
      */
     Date timestamp() const;
     
+    /**
+     * wether this source provides or supports resolvables
+     * of certain kind.
+     */
+    bool hasResolvablesOfKind( const zypp::Resolvable::Kind &kind ) const;
+    
+    /**
+     * set of resolvable types the source can offer at this moment
+     */
+    std::set<zypp::Resolvable::Kind> resolvableKinds() const;
+    
     /** Whether the ResStore is initialized.
      * If we know that noone has seen the resolvables yet, we can skip
      * them too, eg. when deleting a source. (#174840)

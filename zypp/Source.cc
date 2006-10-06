@@ -200,6 +200,12 @@ namespace zypp
   std::string Source_Ref::unique_id (void) const
   { return _pimpl->unique_id(); }
 
+  bool Source_Ref::hasResolvablesOfKind( const zypp::Resolvable::Kind &kind ) const
+  { return _pimpl->resolvableKinds().count(kind) != 0; }
+  
+  std::set<zypp::Resolvable::Kind> Source_Ref::resolvableKinds() const
+  { return _pimpl->resolvableKinds(); }
+  
   /******************************************************************
    **
    **	FUNCTION NAME : operator<<

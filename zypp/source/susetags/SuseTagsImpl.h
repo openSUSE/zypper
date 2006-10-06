@@ -103,7 +103,7 @@ namespace zypp
 
         Pathname sourceDir( const std::string & dir );
         virtual void storeMetadata(const Pathname & cache_dir_r);
-
+        virtual std::set<zypp::Resolvable::Kind> resolvableKinds() const;
         /**
          * Get media verifier for the specified media
          */

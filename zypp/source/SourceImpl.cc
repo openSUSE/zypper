@@ -214,6 +214,11 @@ namespace zypp
       return _store;
      }
 
+     std::set<zypp::Resolvable::Kind> SourceImpl::resolvableKinds() const
+     {
+       return std::set<zypp::Resolvable::Kind>();
+     }
+     
     const ResStore SourceImpl::resolvables(zypp::Resolvable::Kind kind) const
     {
       Source_Ref self( const_cast<SourceImpl*>(this)->selfSourceRef() );
