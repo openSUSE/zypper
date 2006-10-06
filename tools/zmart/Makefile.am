@@ -23,6 +23,8 @@ zmart_SOURCES = 	zmart.cc zmart-sources.cc zmart-misc.cc \
 	zmart-media-callbacks.h  \
 	zmart-source-callbacks.h \
 	zmart-sources.h \
+  zmart-updates.cc \
+	zmart-updates.h \
 	zmart-misc.h \
 	zypper-tabulator.h \
 	zypper-tabulator.cc \
@@ -43,6 +45,8 @@ zypper_SOURCES = 	zypper.cc zmart-sources.cc zmart-misc.cc \
 zypp_checkpatches_SOURCES = 	zypp-checkpatches.cc zmart-sources.cc \
 	zypper-tabulator.h \
 	zypper-tabulator.cc \
+	zmart-updates.cc \
+	zmart-updates.h \
 	checkpatches-keyring-callbacks.h
 #zmart_LDFLAGS =	-static
 
