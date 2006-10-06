@@ -106,14 +106,14 @@ namespace zypp
       static void nodispose( param_type ) {}
 
     public:
-      /** Default Ctor using default constructed value and \ref nodispose function. */
+      /** Default Ctor using default constructed value and no dispose function. */
       AutoDispose()
-      : _pimpl( new Impl( value_type(), nodispose ) )
+      : _pimpl( new Impl( value_type() ) )
       {}
 
-      /** Ctor taking value and using \ref nodispose function. */
+      /** Ctor taking value and no dispose function. */
       AutoDispose( param_type value_r )
-      : _pimpl( new Impl( value_r, nodispose ) )
+      : _pimpl( new Impl( value_r ) )
       {}
 
       /** Ctor taking value and dispose function. */
@@ -156,9 +156,9 @@ namespace zypp
       void setDispose( const Dispose & dispose_r )
       { _pimpl->_dispose = dispose_r; }
 
-      /** Set \ref nodispose function. */
+      /** Set no dispose function. */
       void resetDispose()
-      { setDispose( nodispose ); }
+      { setDispose( Dispose() ); }
 
       /** Exchange the dispose function. +*/
       void swapDispose( Dispose & dispose_r )
@@ -167,13 +167,16 @@ namespace zypp
     private:
       struct Impl : private base::NonCopyable
       {
+        Impl( param_type value_r )
+        : _value( value_r )
+        {}
         Impl( param_type value_r, const Dispose & dispose_r )
         : _value( value_r )
         , _dispose( dispose_r )
         {}
         ~Impl()
         {
-          if ( _dispose != nodispose )
+          if ( _dispose )
             try { _dispose( _value ); } catch(...) {}
         }
         value_type _value;
