@@ -58,14 +58,9 @@ namespace zypp
     { return  CheckSum( sha256Type(), input_r ); }
 
   public:
-    std::string type() const
-    { return _type; }
-
-    std::string checksum() const
-    { return _checksum; }
-
-    bool empty() const
-    { return (checksum().empty() || type().empty()); }
+    std::string type() const;
+    std::string checksum() const;
+    bool empty() const;
 
   private:
     std::string _type;

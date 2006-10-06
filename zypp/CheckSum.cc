@@ -108,6 +108,15 @@ namespace zypp
       }
   }
 
+  std::string CheckSum::type() const
+  { return _type; }
+
+  std::string CheckSum::checksum() const
+  { return _checksum; }
+
+  bool CheckSum::empty() const
+  { return (checksum().empty() || type().empty()); }
+  
   std::ostream & operator<<( std::ostream & str, const CheckSum & obj )
   {
     if ( obj.checksum().empty() )
