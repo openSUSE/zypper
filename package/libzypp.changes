@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Oct  6 13:23:32 CEST 2006 - schubi@suse.de
+
+- select the best solution: prefering the total amount of install/update
+  packages BEFORE source preferences. Bug 208784 
+
+-------------------------------------------------------------------
 Fri Oct  6 11:55:11 CEST 2006 - dmacvicar@suse.de
 
 - Introduce a method to see if a source supports a 
