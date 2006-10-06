@@ -43,13 +43,20 @@ ostream no_stream(NULL);
 
 //using namespace DbXml;
 
-void render_xml( const zypp::ResPool &pool )
+static void render_xml( const zypp::ResPool &pool, const string &token )
 {
   int count = 0;
   int security_count = 0;
   
   cout << "<?xml>" << std::endl;
   cout << "<update-status>" << std::endl;
+  cout << " <metadata token=\"" << token << "\"/>" << std::endl;
+  cout << " <update-sources>" << std::endl;
+  for ( std::list<Source_Ref>::const_iterator it = gData.sources.begin(); it != gData.sources.end(); ++it )
+  {
+    cout << "  <source url=\"" << it->url() << "\" alias=\"" << it->alias() << "\">" << std::endl;
+  }
+  cout << " </update-sources>" << std::endl;
   cout << " <update-list>" << std::endl;
   for ( ResPool::byKind_iterator it = pool.byKindBegin<Patch>(); it != pool.byKindEnd<Patch>(); ++it )
   {
@@ -146,7 +153,7 @@ int main(int argc, char **argv)
     ZYPP_CAUGHT (excpt_r);
     ERR  << "a ZYpp transaction is already in progress." << endl;
     cerr << "a ZYpp transaction is already in progress." << endl;
-    cout << RANDOM_TOKEN;
+    //cout << RANDOM_TOKEN;
     return -1;
   }
   
@@ -164,7 +171,7 @@ int main(int argc, char **argv)
   {
     ZYPP_CAUGHT (excpt_r);
     ERR << "Couldn't restore sources" << endl;
-    return -1;
+    //return -1;
   }
   
   // dont add rpms
@@ -179,14 +186,25 @@ int main(int argc, char **argv)
     
     token_stream << "[" << src.alias() << "| " << src.url() << src.timestamp() << "]";
     
-    MIL << "Source: " << src.alias() << " from " << src.timestamp() << std::endl;  
+    MIL << "Source: " << src.alias() << " from " << src.timestamp() << std::endl;
+    
+    // skip sources without patches sources for now
+    if ( src.hasResolvablesOfKind( ResTraits<zypp::Patch>::kind ) )
+    {
+      MIL << "Including source " << src.url() << std::endl;
+      gData.sources.push_back(src);
+    }
+    else
+    {
+      MIL << "Excluding source " << src.url() << " ( no patches ) "<< std::endl;
+    }
   }
   
   token_stream << "[" << "target" << "| " << God->target()->timestamp() << "]";
   
   //static std::string digest(const std::string& name, std::istream& is
   token = Digest::digest("sha1", token_stream);
-  cout << token;
+  //cout << token;
   
   MIL << "new token [" << token << "]" << " previous: [" << previous_token << "] previous code: " << previous_code << std::endl;
   if ( token == previous_token )
@@ -194,12 +212,9 @@ int main(int argc, char **argv)
     return previous_code;
   }
   
-  // something changed
-  for ( SourceManager::Source_const_iterator it = manager->Source_begin(); it !=  manager->Source_end(); ++it )
+  for ( std::list<Source_Ref>::const_iterator it = gData.sources.begin(); it != gData.sources.end(); ++it )
   {
-    // skip non YUM sources for now
-    if ( it->type() == "YUM" )
-      God->addResolvables(it->resolvables());
+    God->addResolvables(it->resolvables());
   }
   
   God->addResolvables( God->target()->resolvables(), true);
@@ -211,7 +226,7 @@ int main(int argc, char **argv)
   MIL << "Pool contains " << God->pool().size() << " items. Checking whether available patches are needed." << std::endl;
   
   
-  render_xml(God->pool());
+  render_xml(God->pool(), token );
   
   //MIL << "Patches " << security_count << " " << count << std::endl;
   
