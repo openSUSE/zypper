@@ -1867,17 +1867,14 @@ ResolverContext::partialCompare (ResolverContext_Ptr context)
 	    cmp = num_cmp (_min_priority, context->_min_priority);
 	    DBG << "Comparing priority returned :" << cmp << endl;
 	    if (cmp == 0) {
-
-		// Comparing sources regarding the items which has to be installed
-		cmp = cmpSource;
-		DBG << "Comparing sources returned :" << cmp << endl;
+		// High numbers are bad.  Less churn is better.
+		cmp = rev_num_cmp (churn_factor (this), churn_factor (context));
+		DBG << "Comparing churn_factor returned :" << cmp << endl;
 		if (cmp == 0) {		
-		
-		    // High numbers are bad.  Less churn is better.
-		    cmp = rev_num_cmp (churn_factor (this), churn_factor (context));
-		    DBG << "Comparing churn_factor returned :" << cmp << endl;
+		    // Comparing sources regarding the items which has to be installed
+		    cmp = cmpSource;
+		    DBG << "Comparing sources returned :" << cmp << endl;		
 		    if (cmp == 0) {
-
 			// High numbers are bad.  Bigger #s means more penalties.
 			cmp = rev_num_cmp (_other_penalties, context->_other_penalties);
 			DBG << "Comparing other penalties returned :" << cmp << endl;			
