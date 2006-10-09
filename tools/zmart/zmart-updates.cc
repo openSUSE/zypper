@@ -72,13 +72,13 @@ void render_result( std::ostream &out, const zypp::ResPool &pool)
   int count = 0;
   int security_count = 0;
   
-  out << "<?xml>" << std::endl;
+  out << "<?xml version='1.0'?>" << std::endl;
   out << "<update-status op=\"success\">" << std::endl;
   //out << " <metadata token=\"" << token << "\"/>" << std::endl;
   out << " <update-sources>" << std::endl;
   for ( std::list<Source_Ref>::const_iterator it = gData.sources.begin(); it != gData.sources.end(); ++it )
   {
-    out << "  <source url=\"" << it->url() << "\" alias=\"" << it->alias() << "\">" << std::endl;
+    out << "  <source url=\"" << it->url() << "\" alias=\"" << it->alias() << "\"/>" << std::endl;
   }
   out << " </update-sources>" << std::endl;
   out << " <update-list>" << std::endl;
@@ -92,7 +92,7 @@ void render_result( std::ostream &out, const zypp::ResPool &pool)
       out << " <update category=\"" << patch ->category() << "\">" << std::endl;
       out << "  <name>" << patch->name() << "</name>" <<endl;
       out << "  <edition>" << patch->edition() << "</edition>" <<endl;
-      
+      out << " </update>" <<endl;
       
       count++;
       if (patch->category() == "security")
