@@ -70,7 +70,7 @@ namespace zypp
                                     const std::string & /*message_r*/ );
         virtual ~LineFormater() {}
       };
-
+            
     public:
       /** Assign a LineFormater.
        * If you want to format loglines by yourself. NULL installs the
@@ -120,6 +120,7 @@ namespace zypp
       /** Default ctor: Singleton */
       LogControl()
       {}
+      bool _log_microseconds;
     };
     ///////////////////////////////////////////////////////////////////
 

@@ -23,6 +23,7 @@ baseinclude_HEADERS =	\
 	Logger.h	\
 	LogTools.h	\
 	LogControl.h	\
+	ProfilingFormater.h	\
 	\
 	Fd.h		\
 	KindOf.h	\
@@ -61,7 +62,8 @@ lib@PACKAGE@_base_la_SOURCES =	\
 	\
 	Exception.cc		\
 	Sysconfig.cc		\
-	LogControl.cc
+	LogControl.cc \
+	ProfilingFormater.cc
 # NO entries below LogControl.cc
 # The static LogControlImpl singleton musr be initialized first!
 
