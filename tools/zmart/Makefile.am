@@ -2,7 +2,8 @@
 ## ##################################################
 
 bin_PROGRAMS = zypper
-noinst_PROGRAMS = zmart zypp-checkpatches
+sbin_PROGRAMS = zypp-checkpatches zypp-checkpatches-wrapper
+noinst_PROGRAMS = zmart
 
 ## ##################################################
 
@@ -48,6 +49,11 @@ zypp_checkpatches_SOURCES = 	zypp-checkpatches.cc zmart-sources.cc \
 	zmart-updates.cc \
 	zmart-updates.h \
 	checkpatches-keyring-callbacks.h
+
+zypp_checkpatches_wrapper_SOURCES = zypp-checkpatches-wrapper.c
+# empty:
+zypp_checkpatches_wrapper_LDADD =
+
 #zmart_LDFLAGS =	-static
 
 .PHONY:        always

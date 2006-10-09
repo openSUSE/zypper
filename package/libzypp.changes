@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Mon Oct  9 15:11:16 CEST 2006 - mvidner@suse.cz
+
+- Added zypp-checkpatches and a suid-root zypp-checkpatches-wrapper.
+
+-------------------------------------------------------------------
 Fri Oct  6 13:23:32 CEST 2006 - schubi@suse.de
 
 - select the best solution: prefering the total amount of install/update

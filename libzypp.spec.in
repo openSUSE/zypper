@@ -16,6 +16,7 @@ License:        GPL
 Group:          System/Packages
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 Autoreqprov:    on
+PreReq:         permissions
 Summary:        Package, Patch, Pattern, and Product Management
 Version:        @VERSION@
 Release:        0
@@ -82,6 +83,10 @@ make install DESTDIR=$RPM_BUILD_ROOT
 
 %post
 %run_ldconfig
+%run_permissions
+
+%verifyscript
+%verify_permissions -e %{_sbindir}/zypp-checkpatches-wrapper
 
 %postun
 %run_ldconfig
@@ -91,6 +96,8 @@ make install DESTDIR=$RPM_BUILD_ROOT
 %files -f zypp.lang
 %defattr(-,root,root)
 %{_bindir}/zypper
+%{_sbindir}/zypp-checkpatches
+%verify(not mode) %attr (4750,root,root) %{_sbindir}/zypp-checkpatches-wrapper
 %dir %{_libdir}/libzypp*so.*
 %dir %{prefix}/share/zypp
 %{prefix}/share/zypp/*
