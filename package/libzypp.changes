@@ -1,4 +1,15 @@
 -------------------------------------------------------------------
+Mon Oct  9 18:15:19 CEST 2006 - dmacvicar@suse.de
+
+- YaST sources:
+  Factory cannot be set with 'refresh' enabled
+  (#204957)
+- get rid of some const bool signatures in Source classes
+  (binincompat but not changing the maj version as we changed 
+   it and we havent released yet) 
+- r4247
+
+-------------------------------------------------------------------
 Mon Oct  9 15:11:16 CEST 2006 - mvidner@suse.cz
 
 - Added zypp-checkpatches and a suid-root zypp-checkpatches-wrapper.
