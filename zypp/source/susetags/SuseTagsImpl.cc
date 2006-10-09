@@ -580,7 +580,6 @@ namespace zypp
           MIL << "Read product: " << _product->summary() << endl;
 
           _prodImpl = p.prodImpl;
-          _autorefresh = p.volatile_content && media::MediaAccess::canBeVolatile( _url );
         }
         catch ( const Exception & e ) {
           ZYPP_THROW (SourceMetadataException("Cannot parse content file: " + e.msg()));

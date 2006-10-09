@@ -43,12 +43,11 @@ namespace zypp
       static Source_Ref::Impl_Ptr createSourceImpl( const media::MediaId & media_r,
                                                     const SourceInfo &context )
       {
-        MIL << "pre pass type: " << _SourceImpl::typeString() << endl;
         Source_Ref::Impl_Ptr impl( new _SourceImpl );
-        MIL << "pass type: " << _SourceImpl::typeString() << endl;
         // note, base_source is a tribool, if indeterminate we fallback to false
+        //MIL << "Going to call factory ctor:" << endl;
+        //MIL << context << endl;
         impl->factoryCtor( media_r, context.path(), context.alias(), context.cacheDir(), context.baseSource(), context.autorefresh() );
-        MIL << "pass 2 type: " << _SourceImpl::typeString() << endl;
         return impl;
       }
   };
@@ -159,7 +158,7 @@ namespace zypp
   template<class _SourceImpl>
   Source_Ref SourceFactory::createSourceImplWorkflow( media::MediaId id, const SourceInfo &context )
   {
-    MIL << "Trying (pre) to create source of type " << _SourceImpl::typeString() << endl;
+      //MIL << "Trying (pre) to create source of type " << _SourceImpl::typeString() << endl;
       callback::SendReport<SourceCreateReport> report;
       bool retry = true;
       while (retry)
@@ -320,11 +319,13 @@ namespace zypp
       MIL << "Initializing from cache" << endl;
     }
 
+    bool calculated_autorefresh = auto_refresh;
     // Sane default for unknown autorefresh
     if ( auto_refresh == indeterminate )
-      auto_refresh = media::MediaAccess::canBeVolatile( url_r );
+      calculated_autorefresh = media::MediaAccess::canBeVolatile( url_r );
 
-    SourceInfo context( url_r, path_r, alias_r, cache_dir_r, auto_refresh );
+    //SourceInfo( url, path, alias, cache_dir, autorefresh );
+    SourceInfo context( url_r, path_r, alias_r, cache_dir_r, calculated_autorefresh );
     context.setBaseSource( base_source );
     context.setType( type );
     

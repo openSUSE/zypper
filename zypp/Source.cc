@@ -80,10 +80,10 @@ namespace zypp
 
   const void Source_Ref::releaseDir(const Pathname & dir_r,
                                     const unsigned media_nr,
-                                    const bool recursive)
+                                    bool recursive)
   { _pimpl->releaseDir(dir_r, media_nr, recursive); }
 
-  const bool Source_Ref::enabled() const
+  bool Source_Ref::enabled() const
   { return _pimpl->enabled(); }
 
   void Source_Ref::enable()
@@ -98,10 +98,10 @@ namespace zypp
   std::string Source_Ref::checksum() const
   { return _pimpl->checksum(); }
   
-  const bool Source_Ref::autorefresh() const
+  bool Source_Ref::autorefresh() const
   { return _pimpl->autorefresh(); }
 
-  void Source_Ref::setAutorefresh( const bool enable_r )
+  void Source_Ref::setAutorefresh( bool enable_r )
   { _pimpl->setAutorefresh( enable_r ); }
 
   void Source_Ref::refresh()
@@ -167,7 +167,7 @@ namespace zypp
   const Pathname & Source_Ref::path (void) const
   { return _pimpl->path (); }
 
-  const bool Source_Ref::baseSource() const
+  bool Source_Ref::baseSource() const
   { return _pimpl->baseSource(); }
 
   const Pathname & Source_Ref::cacheDir (void) const

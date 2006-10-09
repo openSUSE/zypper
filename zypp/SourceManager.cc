@@ -335,37 +335,36 @@ namespace zypp
   */
   bool SourceManager::restore( Pathname root_r, bool use_caches, const std::string &alias_filter, const std::string &url_filter )
   {
-    MIL << "SourceManager restore ('" << root_r << ( use_caches ? "' (use_caches)" : "'" )
-	<< ", alias_filter '" << alias_filter
-	<< ", url_filter '" << url_filter << "')" << endl;
+    MIL << "SourceManager restore ('" << root_r << ( use_caches ? "' (use_caches)" : "'" ) << ", alias_filter '" << alias_filter << ", url_filter '" << url_filter << "')" << endl;
 
-    if (! _sources.empty() ) {
+    if (! _sources.empty() )
+    {
 
-	// if we've already restored sources and this is an unfiltered call, reject it.
+      // if we've already restored sources and this is an unfiltered call, reject it.
 
-	if (alias_filter.empty()
-	    && url_filter.empty())
-	{
-	    ZYPP_THROW(SourcesAlreadyRestoredException());
-	    //Exception ( N_("At least one source already registered, cannot restore sources from persistent store.") ) );
-	}
+      if (alias_filter.empty()
+      && url_filter.empty())
+      {
+        ZYPP_THROW(SourcesAlreadyRestoredException());
+        //Exception ( N_("At least one source already registered, cannot restore sources from persistent store.") ) );
+      }
 
-	// check filters against already restore sources and check for duplicates.
-	//
-	for (SourceMap::const_iterator it = _sources.begin(); it != _sources.end(); ++it) {
-	    if (!alias_filter.empty()
-		&& (alias_filter == it->second.alias()) )
-	    {
-		MIL << "Source with alias '" << alias_filter << "' already restored.";
-		return true;
-	    }
-	    if (!url_filter.empty()
-		&& (url_filter == it->second.url().asString()) )
-	    {
-		MIL << "Source with url '" << url_filter << "' already restored.";
-		return true;
-	    }
-	}
+      // check filters against already restore sources and check for duplicates.
+      //
+      for (SourceMap::const_iterator it = _sources.begin(); it != _sources.end(); ++it)
+      {
+        if (!alias_filter.empty() && (alias_filter == it->second.alias()) )
+        {
+          MIL << "Source with alias '" << alias_filter << "' already restored.";
+          return true;
+        }
+        
+        if (!url_filter.empty() && (url_filter == it->second.url().asString()) )
+        {
+          MIL << "Source with url '" << url_filter << "' already restored.";
+          return true;
+        }
+      }
     }
 
     FailedSourcesRestoreException report;
@@ -379,85 +378,86 @@ namespace zypp
 
     for( std::list<source::SourceInfo>::iterator it = new_sources.begin(); it != new_sources.end(); ++it)
     {
-	if ( !alias_filter.empty()			// check alias filter, if set
-             && (alias_filter != it->alias()) )
-	{
-	    continue;
-	}
+      if ( !alias_filter.empty()			// check alias filter, if set
+           && (alias_filter != it->alias()) )
+      {
+        continue;
+      }
 
-	if ( !url_filter.empty()			// check url filter, if set
+      if ( !url_filter.empty()			// check url filter, if set
                      && (url_filter != it->url().asString()) )
-	{
-	    continue;
-	}
+      {
+        continue;
+      }
 
-	// Note: Url(it->url).asString() to hide password in logs
-        MIL << "Restoring source: url:[" << it->url().asString() << "] product_dir:[" << it->path() << "] alias:[" << it->alias() << "] cache_dir:[" << it->cacheDir() << "] auto_refresh:[ " << it->autorefresh() << "]" << endl;
-  
-	  SourceId id = 0;
-  
-	  try {
-            id = addSource( SourceFactory().createFrom(it->type(), it->url(), it->path(), it->alias(), it->cacheDir(), false, it->autorefresh()) );
-	  }
-	  catch (const Exception &expt )
-	  {
-	      // Note: Url(it->url).asString() to hide password in logs
-            ERR << "Unable to restore source from " << it->url().asString()
-	          << endl;
-  
-	      id = 0;
-	      Url url2;
-	      try {
-                url2 = it->url();
-	          std::string scheme( url2.getScheme());
-  
-	          if( (scheme == "cd" || scheme == "dvd") &&
-	              !url2.getQueryParam("devices").empty())
-	          {
-	              url2.setQueryParam("devices", "");
-  
-	              DBG << "CD/DVD devices changed - try again without a devices list"
-	                  << std::endl;
-  
-                      id = addSource( SourceFactory().createFrom(url2, it->path(), it->alias(), it->cacheDir(), false ) );
-  
-	              // This worked ... update it->url ?
-	              //it->url = url2.asCompleteString();
-	          }
-	      }
-	      catch (const Exception &e2)
-	      {
-	          // Note: Url(it->url).asString() to hide password in logs
-	          ERR << "Unable to restore source from " << url2.asString()
-	              << endl;
-	          id = 0;
-	          ZYPP_CAUGHT(e2);
-	      }
-  
-	      if( id == 0)
-	      {
-                report.append( it->url().asString() + it->path().asString(), it->alias(), expt );
-	          continue;
-	      }
-	  }
-  
-	  DBG << "Added source as id " << id << endl;
-	  // should not throw, we've just created the source
-	  Source_Ref src = findSource( id );
-  
-          if ( it->enabled() ) {
-	      DBG << "enable source" << endl;
-	      src.enable();
-	  }
-	  else {
-	      DBG << "disable source" << endl;
-	      src.disable();
-	  }
+      // Note: Url(it->url).asString() to hide password in logs
+      MIL << "Restoring source: url:[" << it->url().asString() << "] product_dir:[" << it->path() << "] alias:[" << it->alias() << "] cache_dir:[" << it->cacheDir() << "] auto_refresh:[ " << it->autorefresh() << "]" << endl;
+
+      SourceId id = 0;
+
+      try
+      {
+          Source_Ref src = SourceFactory().createFrom(it->type(), it->url(), it->path(), it->alias(), it->cacheDir(), false, it->autorefresh());
+          id = addSource(src); 
+      }
+      catch (const Exception &expt )
+      {
+        // Note: Url(it->url).asString() to hide password in logs
+        ERR << "Unable to restore source from " << it->url().asString() << endl;
+
+        id = 0;
+        Url url2;
+        try
+        {
+          url2 = it->url();
+          std::string scheme( url2.getScheme());
+
+          if( (scheme == "cd" || scheme == "dvd") && !url2.getQueryParam("devices").empty())
+          {
+            url2.setQueryParam("devices", "");
+            DBG << "CD/DVD devices changed - try again without a devices list" << std::endl;
+
+            id = addSource( SourceFactory().createFrom(url2, it->path(), it->alias(), it->cacheDir(), false ) );
+
+            // This worked ... update it->url ?
+            //it->url = url2.asCompleteString();
+          }
+        }
+        catch (const Exception &e2)
+        {
+          // Note: Url(it->url).asString() to hide password in logs
+          ERR << "Unable to restore source from " << url2.asString()
+              << endl;
+          id = 0;
+          ZYPP_CAUGHT(e2);
+        }
+
+        if( id == 0)
+        {
+          report.append( it->url().asString() + it->path().asString(), it->alias(), expt );
+          continue;
+        }
+      }
+
+      DBG << "Added source as id " << id << endl;
+      // should not throw, we've just created the source
+      Source_Ref src = findSource( id );
+
+      if ( it->enabled() )
+      {
+        DBG << "enable source" << endl;
+        src.enable();
+      }
+      else
+      {
+        DBG << "disable source" << endl;
+        src.disable();
+      }
     }
 
     if( !report.empty() )
     {
-	ZYPP_THROW(report);
+      ZYPP_THROW(report);
     }
 
     MIL << "SourceManager restore done." << endl;

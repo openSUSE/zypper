@@ -155,7 +155,7 @@ namespace zypp
                                   const Pathname & path_r,
                                   const std::string & alias_r,
                                   const Pathname cache_dir_r,
-				  bool base_source,
+                                  bool base_source,
                                   bool auto_refresh )
     {
       _media_set = new MediaSet( selfSourceRef() );
@@ -166,6 +166,8 @@ namespace zypp
       _cache_dir = cache_dir_r;
       _subscribed = true;
       _base_source = base_source;
+      
+      MIL << "Setting autorefresh: " << auto_refresh << endl;
       _autorefresh = auto_refresh;
 
       try
@@ -202,6 +204,27 @@ namespace zypp
       }
     }
 
+      bool SourceImpl::enabled() const
+      {
+        return _enabled;
+      }
+
+      void SourceImpl::disable()
+      {
+        _enabled = false;
+      }
+
+      bool SourceImpl::autorefresh() const
+      {
+        return _autorefresh;
+      }
+
+      void SourceImpl::setAutorefresh( bool enable )
+      {
+        MIL << "Changing source [" << alias() << "] [" << url() << "] to autorefresh: " << enable << endl;
+        _autorefresh = enable;
+      }
+    
     const ResStore & SourceImpl::resolvables() const
     {
       if ( !_res_store_initialized )
@@ -858,6 +881,9 @@ namespace zypp
           << _url << "(" << _path << ")";
       if ( ! _cache_dir.empty() )
         str << "; cache " << _cache_dir;
+      
+      str << "; autorefresh: " << _autorefresh;
+      str << "; enabled: " << _enabled;
       str << "}";
 
       return str;

@@ -112,7 +112,7 @@ namespace source
   { return _enabled; }
 
   tribool SourceInfo::autorefresh() const
-  { return _enabled; }
+  { return _autorefresh; }
 
   boost::tribool SourceInfo::baseSource() const
   { return _base_source; }

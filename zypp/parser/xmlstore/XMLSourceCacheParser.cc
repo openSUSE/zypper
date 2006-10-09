@@ -73,7 +73,7 @@ namespace xmlstore {
             {
               if ( (_helper.content(child) == "true") || (_helper.content(child) == "1") )
                 dataPtr->setAutorefresh(true);
-              if ( (_helper.content(child) == "false") || (_helper.content(child) == "0") )
+              else if ( (_helper.content(child) == "false") || (_helper.content(child) == "0") )
                 dataPtr->setAutorefresh(false);
               else
                 dataPtr->setAutorefresh(boost::indeterminate);

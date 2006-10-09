@@ -189,20 +189,11 @@ namespace zypp
 
       void changeMedia(const media::MediaId & media_r, const Pathname & path_r);
 
-      const bool enabled() const
-      { return _enabled; }
-
+      bool enabled() const;
       void enable();
-
-      void disable()
-      { _enabled = false; }
-
-      const bool autorefresh() const
-      { return _autorefresh; }
-
-      void setAutorefresh( const bool enable_r )
-      { _autorefresh = enable_r; }
-
+      void disable();
+      bool autorefresh() const;
+      void setAutorefresh( bool enable_r );
       void refresh();
 
       virtual void storeMetadata(const Pathname & cache_dir_r);

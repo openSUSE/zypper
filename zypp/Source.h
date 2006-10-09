@@ -183,25 +183,20 @@ namespace zypp
     const Pathname providePackage( Package::constPtr package );
     
     /** Provide a file to local filesystem */
-    const Pathname provideFile(const Pathname & file_r,
-			       const unsigned media_nr = 1);
-    const Pathname provideDirTree(const Pathname & dir_r,
-                                  const unsigned media_nr = 1);
+    const Pathname provideFile(const Pathname & file_r, const unsigned media_nr = 1);
+    const Pathname provideDirTree(const Pathname & dir_r, const unsigned media_nr = 1);
 			      
-    const void releaseFile(const Pathname & file_r,
-			   const unsigned media_nr = 1);
-    const void releaseDir(const Pathname & dir_r,
-		          const unsigned media_nr = 1,
-			  const bool recursive = false);
+    const void releaseFile(const Pathname & file_r, const unsigned media_nr = 1);
+    const void releaseDir(const Pathname & dir_r, const unsigned media_nr = 1, bool recursive = false);
 
-    const bool enabled() const;
+    bool enabled() const;
 
     void enable();
 
     void disable();
 
-    const bool autorefresh() const;
-    void setAutorefresh( const bool enable_r );
+    bool autorefresh() const;
+    void setAutorefresh( bool enable_r );
     void refresh();
 
     void storeMetadata(const Pathname & cache_dir_r);
@@ -253,7 +248,7 @@ namespace zypp
     void setUrl( const Url & url );
     bool remote() const;
     const Pathname & path (void) const;
-    const bool baseSource() const;
+    bool baseSource() const;
     //@}
 
   public:
