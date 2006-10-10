@@ -85,6 +85,7 @@ public:
   void add (const TableRow& tr);
   void setHeader (const TableHeader& tr);
   void dumpTo (ostream& stream) const;
+  bool empty () const { return _rows.empty(); }
   typedef list<TableRow> container;
 
   void style (TableStyle st);
