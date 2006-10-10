@@ -41,6 +41,8 @@ zypper_SOURCES = 	zypper.cc zmart-sources.cc zmart-misc.cc \
 	zmart-misc.h \
 	zypper-tabulator.h \
 	zypper-tabulator.cc \
+	zypper-search.h \
+	zypper-search.cc \
   zmart.h
 
 zypp_checkpatches_SOURCES = 	zypp-checkpatches.cc zmart-sources.cc \
