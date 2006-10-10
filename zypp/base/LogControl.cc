@@ -15,6 +15,7 @@
 
 #include "zypp/base/Logger.h"
 #include "zypp/base/LogControl.h"
+#include "zypp/base/ProfilingFormater.h"
 #include "zypp/base/String.h"
 #include "zypp/Date.h"
 #include "zypp/PathInfo.h"
@@ -301,6 +302,12 @@ namespace zypp
         {
           if ( getenv("ZYPP_LOGFILE") )
             logfile( getenv("ZYPP_LOGFILE") );
+          
+          if ( getenv("ZYPP_PROFILING") )
+          {
+            shared_ptr<LogControl::LineFormater> formater(new ProfilingFormater);
+            setLineFormater(formater);
+          }
         }
 
       public:

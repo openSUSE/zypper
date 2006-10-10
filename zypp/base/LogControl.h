@@ -120,7 +120,6 @@ namespace zypp
       /** Default ctor: Singleton */
       LogControl()
       {}
-      bool _log_microseconds;
     };
     ///////////////////////////////////////////////////////////////////
 

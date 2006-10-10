@@ -9,6 +9,9 @@
 /** \file	zypp/base/LogControl.cc
  *
 */
+
+#include <sys/time.h>
+
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -42,14 +45,16 @@ namespace zypp
                                                   int                 line_r,
                                                   const std::string & message_r )
     {
-      static char hostname[1024];
-      static char nohostname[] = "unknown";
-      std::string now( Date::now().form( "%Y-%m-%d %H:%M:%S" ) );
-      return str::form( "%s <%d> %s(%d) [%s] %s(%s):%d %s",
-                        now.c_str(), level_r,
-                        ( gethostname( hostname, 1024 ) ? nohostname : hostname ),
+       struct timeval tp;
+       int rtn;
+       rtn = gettimeofday( &tp, NULL);
+       
+        return str::form( "%i.%i [%d] <%d> %s(%s):%d %s",
+                        tp.tv_sec,
+                        tp.tv_usec,
+                        level_r,
                         getpid(),
-                        group_r.c_str(),
+                        /*group_r.c_str(),*/
                         file_r, func_r, line_r,
                         message_r.c_str() );
     }
