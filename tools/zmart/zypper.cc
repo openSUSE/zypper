@@ -23,6 +23,7 @@
 #include "zmart-source-callbacks.h"
 #include "zmart-media-callbacks.h"
 #include "zypper-tabulator.h"
+#include "zypper-search.h"
 
 using namespace std;
 using namespace boost;
@@ -229,6 +230,7 @@ int main(int argc, char **argv)
       "\thelp\t\t\tHelp\n"
       "\tinstall, in\t\tInstall packages or resolvables\n"
       "\tremove, rm\t\tRemove packages or resolvables\n"
+      "\tsearch, se\t\tSearch for packages matching a pattern\n"
       "\tservice-list, sl\tList services aka installation sources\n"
       "\tservice-add, sa\t\tAdd a new service\n"
       "\tservice-delete, sd\tDelete a service\n"
@@ -299,6 +301,27 @@ int main(int argc, char **argv)
       "\t--type,-t\t\tType of resolvable (default: package)\n"
       ;
   }
+	else if (command == "search" || command == "se") {
+		static struct option search_options[] = {
+      {"installed-only", no_argument, 0, 'i'},
+      {"uninstalled-only", no_argument, 0, 'u'},
+      {"match-all", no_argument, 0, 0},
+      {"match-any", no_argument, 0, 0},
+      {"help", no_argument, 0, 0}
+		};
+		specific_options = search_options;
+		specific_help =
+    "search [options] [querystring...]\n"
+    "\n"
+    "'search' - Search for packages matching given search strings\n"
+    "\n"
+    "  Command options:\n"
+    "    --match-all         Search for a match to all search strings (default)\n"
+    "    --match-any         Search for a match to any of the search strings\n"
+		"-i, --installed-only    Show only packages that are already installed.\n"
+    "-u, --uninstalled-only  Show only packages that are not curenly installed.\n"
+		;
+	}
   else {
     cerr_vv << "No options declared for command " << command << endl;
     // no options. or make this an exhaustive thing?
@@ -586,6 +609,34 @@ int main(int argc, char **argv)
     }
     return 0;
   }
+
+	if (command == "search" || command == "se") {
+    ZyppSearchOptions options;
+    
+    if (help || copts.count("help")) {
+      cerr << specific_help;
+      return !help;
+    }
+
+    if (copts.count("installed-only")) {
+      options.setInstalledOnly();
+    }
+    
+    if (gSettings.disable_system_resolvables || copts.count("uninstalled-only")) {
+      options.setUnInstalledOnly();
+    }
+
+    if (copts.count("match-any")) {
+      options.setMatchAny();
+    }
+
+    ZyppSearch search(options,arguments);
+    Table const &t = search.doSearch();
+    if (t.empty())
+      cout << "No packages found." << endl;
+    else
+      cout << t;
+	}
 
   // TODO: rug status
   if (command == "patch-check" || command == "pchk") {
