@@ -61,7 +61,13 @@ namespace zypp
     ResObject::constPtr Selectable::installedObj() const
     { return _pimpl->installedObj(); }
 
+    PoolItem Selectable::installedPoolItem() const
+    { return _pimpl->installedObj(); }
+
     ResObject::constPtr Selectable::candidateObj() const
+    { return _pimpl->candidateObj(); }
+
+    PoolItem Selectable::candidatePoolItem() const
     { return _pimpl->candidateObj(); }
 
     ResObject::constPtr Selectable::setCandidate( ResObject::constPtr byUser_r )
@@ -80,6 +86,12 @@ namespace zypp
     Selectable::available_iterator Selectable::availableEnd() const
     { return make_transform_iterator( _pimpl->availableEnd(),
                                       SelectableTraits::TransformToResObjectPtr() ); }
+
+    Selectable::availablePoolItem_iterator Selectable::availablePoolItemBegin() const
+    { return _pimpl->availableBegin(); }
+
+    Selectable::availablePoolItem_iterator Selectable::availablePoolItemEnd() const
+    { return _pimpl->availableEnd(); }
 
     ResStatus::TransactByValue Selectable::modifiedBy() const
     { return _pimpl->modifiedBy(); }

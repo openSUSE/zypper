@@ -55,6 +55,7 @@ namespace zypp
 
       /** Iterates over ResObject::constPtr */
       typedef SelectableTraits::available_iterator      available_iterator;
+      typedef SelectableTraits::availableItem_iterator  availablePoolItem_iterator;
       typedef SelectableTraits::availableItem_size_type size_type;
 
     public:
@@ -67,10 +68,16 @@ namespace zypp
       /** Installed object. */
       ResObject::constPtr installedObj() const;
 
+      /** PoolItem corresponding to the installed object. */
+      PoolItem installedPoolItem() const;
+
       /** Best among available objects.
        + The user selected candiate, or a default.
       */
       ResObject::constPtr candidateObj() const;
+
+      /** PoolItem corresponding to the candidate object. */
+      PoolItem candidatePoolItem() const;
 
       /** Set a candidate (out of available objects).
        * \return The new candidate, or NULL if choice was invalid
@@ -90,6 +97,12 @@ namespace zypp
 
       /** */
       available_iterator availableEnd() const;
+
+      /** */
+      availablePoolItem_iterator availablePoolItemBegin() const;
+
+      /** */
+      availablePoolItem_iterator availablePoolItemEnd() const;
 
     public:
       /** \name Query for objects within this Selectable.
