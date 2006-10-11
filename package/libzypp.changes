@@ -7,6 +7,12 @@ Wed Oct 11 08:35:48 CEST 2006 - mvidner@suse.cz
 - r4253
 
 -------------------------------------------------------------------
+Tue Oct 10 16:03:40 CEST 2006 - dmacvicar@suse.de
+
+- Log microseconds if ZYPP_PROFILING env var is enabled. 
+- r4252
+
+-------------------------------------------------------------------
 Mon Oct  9 18:15:19 CEST 2006 - dmacvicar@suse.de
 
 - YaST sources:
