@@ -2,6 +2,8 @@
 Wed Oct 11 08:35:48 CEST 2006 - mvidner@suse.cz
 
 - zypper: added search (jkupec)
+- removed the suid bit from zypp-checkpatches-wrapper so that the
+  build passes until permissions.rpm is updated (~#211286).
 - r4253
 
 -------------------------------------------------------------------
