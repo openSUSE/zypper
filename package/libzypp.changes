@@ -1,12 +1,16 @@
 -------------------------------------------------------------------
+Wed Oct 11 08:35:48 CEST 2006 - mvidner@suse.cz
+
+- zypper: added search (jkupec)
+- r4253
+
+-------------------------------------------------------------------
 Mon Oct  9 18:15:19 CEST 2006 - dmacvicar@suse.de
 
 - YaST sources:
   Factory cannot be set with 'refresh' enabled
   (#204957)
 - get rid of some const bool signatures in Source classes
-  (binincompat but not changing the maj version as we changed 
-   it and we havent released yet) 
 - r4247
 
 -------------------------------------------------------------------
