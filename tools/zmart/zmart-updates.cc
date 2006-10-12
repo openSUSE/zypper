@@ -92,6 +92,8 @@ void render_result( std::ostream &out, const zypp::ResPool &pool)
       out << " <update category=\"" << patch ->category() << "\">" << std::endl;
       out << "  <name>" << patch->name() << "</name>" <<endl;
       out << "  <edition>" << patch->edition() << "</edition>" <<endl;
+      if ( patch->source() != Source_Ref::noSource )
+        out << "  <source url=\"" << patch->source().url() << "\" alias=\"" << patch->source().alias() << "\"/>" << std::endl;
       out << " </update>" <<endl;
       
       count++;
