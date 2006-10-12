@@ -79,18 +79,24 @@ namespace zypp
       { return _installedItem; }
 
       /** Best among available objects.
-       * The _candiate if set, or the first available.
-       * \note Transacted Objects prefered, Status calculation relies on it.
+       * The transacting candidate or the one scheduled to receive
+       * the transact bit.
       */
       PoolItem candidateObj() const
       {
-        return _candidate;
+        PoolItem ret( transactingCandidate() );
+        if ( ret )
+          return ret;
+
+        if ( _candidate )
+          return _candidate;
+        return defaultCandidate();
       }
 
       /** Set a userCandidate (out of available objects).
        * \return The new userCandidate or NULL if choice was invalid
        * (not among availableObjs).
-       */
+      */
       PoolItem setCandidate( ResObject::constPtr byUser_r );
 
       /** Best among all objects. */
@@ -123,7 +129,51 @@ namespace zypp
       void setLicenceConfirmed( bool val_r )
       { if ( candidateObj() ) candidateObj().status().setLicenceConfirmed( val_r ); }
 
-     private:
+    private:
+      PoolItem transactingCandidate() const
+      {
+        for ( availableItem_const_iterator it = availableBegin();
+              it != availableEnd(); ++it )
+          {
+            if ( (*it).status().transacts() )
+              return (*it);
+          }
+        return PoolItem();
+      }
+
+      PoolItem defaultCandidate() const
+      {
+        if ( installedObj() )
+          {
+            // prefer the installed objects arch.
+            for ( availableItem_const_iterator it = availableBegin();
+                  it != availableEnd(); ++it )
+              {
+                if ( installedObj()->arch() == (*it)->arch() )
+                  {
+                    return (*it);
+                  }
+              }
+          }
+        if ( _availableItems.empty() )
+          {
+            return PoolItem();
+          }
+        return *_availableItems.begin();
+      }
+
+      bool allCandidatesLocked() const
+      {
+        for ( availableItem_const_iterator it = availableBegin();
+              it != availableEnd(); ++it )
+          {
+            if ( ! (*it).status().isLocked() )
+              return false;
+          }
+        return( ! _availableItems.empty() );
+      }
+
+    private:
       ResObject::Kind  _kind;
       std::string      _name;
       PoolItem         _installedItem;

@@ -28,7 +28,6 @@ namespace zypp
     //	CLASS NAME : StatusHelper
     //
     /**
-     * \todo Support non USER level mipulation.
     */
     struct StatusHelper
     {
@@ -37,6 +36,8 @@ namespace zypp
       , inst( impl.installedObj() )
       , cand( impl.candidateObj() )
       {}
+
+      typedef Selectable::Impl::availableItem_const_iterator availableItem_const_iterator;
 
       //
       // Queries
@@ -59,60 +60,83 @@ namespace zypp
       //
       // ResStatus manip
       //
-      /** \todo fix it, handle avaialable list */
-      bool setInstall( ResStatus::TransactByValue by_r ) const
+      void resetTransactingCandidates() const
+      {
+        for ( availableItem_const_iterator it = _impl.availableBegin();
+              it != _impl.availableEnd(); ++it )
+          {
+            if ( (*it).status().transacts() )
+              (*it).status().setTransact( false, ResStatus::USER );
+          }
+      }
+      void unlockCandidates() const
+      {
+        for ( availableItem_const_iterator it = _impl.availableBegin();
+              it != _impl.availableEnd(); ++it )
+          {
+            (*it).status().setTransact( false, ResStatus::USER );
+            (*it).status().setLock( false, ResStatus::USER );
+          }
+      }
+      void lockCandidates() const
+      {
+        for ( availableItem_const_iterator it = _impl.availableBegin();
+              it != _impl.availableEnd(); ++it )
+          {
+            (*it).status().setTransact( false, ResStatus::USER );
+            (*it).status().setLock( true, ResStatus::USER );
+          }
+      }
+
+      bool setInstall() const
       {
         if ( cand )
           {
 	      if ( inst ) {
-		  inst.status().setTransact( false, by_r );
-		  inst.status().setLock( false, by_r );
+		  inst.status().setTransact( false, ResStatus::USER );
+		  inst.status().setLock( false, ResStatus::USER );
 	      }
-	      cand.status().setLock( false, by_r );
-	      return cand.status().setTransact( true, by_r );
+              unlockCandidates();
+	      return cand.status().setTransact( true, ResStatus::USER );
           }
         return false;
       }
 
-      bool setDelete( ResStatus::TransactByValue by_r ) const
+      bool setDelete() const
       {
         if ( inst )
           {
-            if ( cand )
-              cand.status().setTransact( false, by_r );
-	    inst.status().setLock( false, by_r );
-            return inst.status().setTransact( true, by_r );
+            resetTransactingCandidates();
+	    inst.status().setLock( false, ResStatus::USER );
+            return inst.status().setTransact( true, ResStatus::USER );
           }
         return false;
       }
 
-      bool unset( ResStatus::TransactByValue by_r ) const
+      bool unset() const
       {
 	  if ( inst ) {
-	      inst.status().setTransact( false, by_r );
-	      inst.status().setLock( false, by_r );
+	      inst.status().setTransact( false, ResStatus::USER );
+	      inst.status().setLock( false, ResStatus::USER );
 	  }
-	  if ( cand ) {
-	      cand.status().setTransact( false, by_r );
-	      cand.status().setLock( false, by_r );
-	  }
+          unlockCandidates();
 	  return true;
       }
 
-      bool setProtected( ResStatus::TransactByValue by_r ) const
+      bool setProtected() const
       {
 	  if ( inst ) {
-	      inst.status().setTransact( false, by_r );
-	      return inst.status().setLock( true, by_r );
+	      inst.status().setTransact( false, ResStatus::USER );
+	      return inst.status().setLock( true, ResStatus::USER );
 	  } else
 	      return false;
       }
 
-      bool setTaboo( ResStatus::TransactByValue by_r ) const
+      bool setTaboo() const
       {
 	  if ( cand ) {
-	      cand.status().setTransact( false, by_r );
-	      return cand.status().setLock( true, by_r );
+              lockCandidates();
+	      return true;
 	  } else
 	      return false;
       }
@@ -134,7 +158,6 @@ namespace zypp
     Status Selectable::Impl::status() const
     {
       PoolItem cand( candidateObj() );
-
       if ( cand && cand.status().transacts() )
         {
           if ( cand.status().isByUser() )
@@ -151,7 +174,7 @@ namespace zypp
       if ( installedObj() && installedObj().status().isLocked() )
 	  return S_Protected;
 
-      if ( !installedObj() && cand && cand.status().isLocked() )
+      if ( !installedObj() && allCandidatesLocked() )
 	  return S_Taboo;
 
       return( installedObj() ? S_KeepInstalled : S_NoInst );
@@ -164,9 +187,9 @@ namespace zypp
       switch ( state_r )
         {
         case S_Protected:
-	    return self.setProtected( ResStatus::USER );
+	    return self.setProtected();
         case S_Taboo:
-	    return self.setTaboo( ResStatus::USER );
+	    return self.setTaboo();
         case S_AutoDel:
         case S_AutoInstall:
         case S_AutoUpdate:
@@ -175,23 +198,23 @@ namespace zypp
           break;
 
         case S_Del:
-          return self.setDelete( ResStatus::USER );
+          return self.setDelete();
           break;
 
         case S_Install:
-          return self.hasCandidateOnly() && self.setInstall( ResStatus::USER );
+          return self.hasCandidateOnly() && self.setInstall();
           break;
 
         case S_Update:
-          return self.hasBoth() && self.setInstall( ResStatus::USER );
+          return self.hasBoth() && self.setInstall();
           break;
 
         case S_KeepInstalled:
-          return self.hasInstalled() && self.unset( ResStatus::USER );
+          return self.hasInstalled() && self.unset();
           break;
 
         case S_NoInst:
-          return !self.hasInstalled() && self.unset( ResStatus::USER );
+          return !self.hasInstalled() && self.unset();
           break;
         }
 
@@ -200,7 +223,6 @@ namespace zypp
 
     PoolItem Selectable::Impl::setCandidate( ResObject::constPtr byUser_r )
     {
-      PoolItem oldCand = _candidate;
       _candidate = PoolItem();
 
       if ( byUser_r ) // must be in available list
@@ -216,34 +238,14 @@ namespace zypp
             }
         }
 
-      if ( ! ( _candidate || _availableItems.empty() ) )
+      if ( _candidate )
         {
-          if ( installedObj() )
+          PoolItem trans( transactingCandidate() );
+          if ( trans && trans != _candidate )
             {
-              for ( availableItem_const_iterator it = availableBegin();
-                    it != availableEnd(); ++it )
-                {
-                  if ( installedObj()->arch().compatibleWith( (*it)->arch() ))
-                    _candidate = *it;
-                  break;
-                }
-            }
-          else
-            _candidate = *_availableItems.begin();
-        }
-
-      if ( _candidate != oldCand )
-        {
-          if ( oldCand )
-            {
-              ResStatus::TransactValue tv( oldCand.status().getTransactValue() );
-              ResStatus::TransactByValue tb( oldCand.status().getTransactByValue() );
-              oldCand.status().resetTransact( ResStatus::USER );
-              if ( _candidate )
-                {
-                  _candidate.status().resetTransact( ResStatus::USER );
-                  _candidate.status().setTransactValue( tv, tb );
-                }
+              // adjust transact to the new cancidate
+              trans.status().setTransact( false, ResStatus::USER );
+              _candidate.status().setTransact( true, ResStatus::USER );
             }
         }
 
@@ -253,7 +255,6 @@ namespace zypp
     ResStatus::TransactByValue Selectable::Impl::modifiedBy() const
     {
       PoolItem cand( candidateObj() );
-
       if ( cand && cand.status().transacts() )
         return cand.status().getTransactByValue();
 
