@@ -49,5 +49,5 @@ dnl ==================================================
 m4_define([LIBZYPP_MINOR],	 [4])
 m4_define([LIBZYPP_COMPATMINOR], [0])
 dnl ==================================================
-m4_define([LIBZYPP_PATCH],	 [1])
+m4_define([LIBZYPP_PATCH],	 [0])
 dnl ==================================================
