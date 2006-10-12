@@ -6,22 +6,18 @@
 
 using namespace zypp;
 using namespace std;
+using namespace boost;
 
 // TODO get rid of these globals
-extern ZYpp::Ptr God;
 extern RuntimeData gData;
 extern Settings gSettings;
 
-ZyppSearch::ZyppSearch (ZyppSearchOptions const &options) :
-    _options(options), _qstrings(empty_vector) {
-  init();
-}
-
-ZyppSearch::ZyppSearch (ZyppSearchOptions const &options, vector<string> const &qstrings) :
+ZyppSearch::ZyppSearch (const ZyppSearchOptions & options, const vector<string> & qstrings) :
     _options(options), _qstrings(qstrings) {
   init();
 }
 
+// TODO clean this up
 bool ZyppSearch::init () const {
   cond_init_system_sources();
   cond_init_target();
@@ -51,10 +47,11 @@ bool ZyppSearch::init () const {
   return true;
 }
 
+// TODO comment
 Table ZyppSearch::doSearch() {
   ResPool pool = getZYpp()->pool();
 
-  this->setupRegexp();
+  setupRegexp();
 
   Table otable;
   otable.style(Ascii);
@@ -63,18 +60,15 @@ Table ZyppSearch::doSearch() {
   header << "S" << "Catalog" << "Bundle" << "Name" << "Version" << "Arch";
   otable << header; 
 
-  bool match;
-  for (zypp::ResPool::const_iterator it = pool.begin(); it != pool.end(); ++it) {
-    match = regex_match(it->resolvable()->name(),this->_reg); // TODO search in descriptions and summaries
-    if (match) {
-      TableRow row;
-      row << (it->status().isInstalled() ? "i" : "u")
-          << it->resolvable()->source().alias()
-          << "" // TODO what about Bundle?
-          << it->resolvable()->name()
-          << it->resolvable()->edition().asString()
-          << it->resolvable()->arch().asString();
-      otable << row;
+  if (_options.kind() != Resolvable::Kind()) {
+    for (ResPool::byKind_iterator it = pool.byKindBegin(_options.kind());
+        it != pool.byKindEnd(_options.kind()); ++it) {
+      if (match(*it)) otable << createRow(*it);
+    }
+  }
+  else {
+    for (ResPool::const_iterator it = pool.begin(); it != pool.end(); ++it) {
+      if (match(*it)) otable << createRow(*it);
     }
   }
 
@@ -109,16 +103,33 @@ void ZyppSearch::setupRegexp() {
       regstr += ").*";
   }
 
-  // tmp debugging output
-  cout << "using regex: " << regstr << endl;
+  cerr_vv << "using regex: " << regstr << endl;
 
   try {
      _reg.assign(regstr, boost::regex::perl|boost::regex_constants::icase);
   }
-  catch (regex_error& e)
+  catch (regex_error & e)
   {
-    cerr << regstr << " is not a valid regular expression: \""
+    cerr << "ZyppSearch::setupRegexp(): " << regstr
+      << " is not a valid regular expression: \""
       << e.what() << "\"" << endl;
+    cerr << "This is a bug, please file a bug report against zypper." << endl;
     exit(1);
   }
+}
+
+bool ZyppSearch::match(const PoolItem & pool_item) {
+  // TODO search in descriptions and summaries
+  return regex_match(pool_item.resolvable()->name(), _reg); 
+}
+
+TableRow ZyppSearch::createRow(const PoolItem & pool_item) {
+  TableRow row;
+  row << (pool_item.status().isInstalled() ? "i" : "")
+      << pool_item.resolvable()->source().alias()
+      << "" // TODO what about Bundle?
+      << pool_item.resolvable()->name()
+      << pool_item.resolvable()->edition().asString()
+      << pool_item.resolvable()->arch().asString();
+  return row;
 }
