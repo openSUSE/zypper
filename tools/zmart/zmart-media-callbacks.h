@@ -32,7 +32,7 @@ namespace ZmartRecipients
 
   struct MediaChangeReportReceiver : public zypp::callback::ReceiveReport<MediaChangeReport>
   {
-    virtual MediaChangeReport::Action requestMedia( const zypp::Source_Ref source, unsigned mediumNr, MediaChangeReport::Error error, const std::string &description )
+    virtual MediaChangeReport::Action requestMedia( zypp::Source_Ref source, unsigned mediumNr, MediaChangeReport::Error error, const std::string &description )
     { 
       cout << "Please insert media [" << description << "] # " << mediumNr << ". Continue [y/n]: " << endl;
       if (readBoolAnswer())
