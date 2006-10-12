@@ -1,7 +1,7 @@
 ## Process this file with automake to produce Makefile.in
 ## ##################################################
 
-noinst_PROGRAMS =	Main Parse Test Prof Iorder ScanSource
+noinst_PROGRAMS =	Main Parse Test Prof Iorder
 
 ## ##################################################
 
@@ -25,18 +25,15 @@ Parse_LDFLAGS =	-static
 
 ## ##################################################
 
-Test_SOURCES = Test.cc
+Test_SOURCES = 	Test.cc \
+		xml/libxmlfwd.h	xml/libxmlfwd.cc	\
+		xml/Reader.h xml/Reader.cc
 Test_LDFLAGS =	-static
 
 ## ##################################################
 
 Iorder_SOURCES = Iorder.cc
-Iorder_LDFLAGS = -static
-
-## ##################################################
-
-ScanSource_SOURCES = ScanSource.cc
-ScanSource_LDFLAGS = -static
+Iorder_LDFLAGS =	-static
 
 ## ##################################################
 

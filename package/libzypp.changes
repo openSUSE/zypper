@@ -1,4 +1,14 @@
 -------------------------------------------------------------------
+Thu Oct 12 16:30:55 CEST 2006 - ma@suse.de
+
+- Provide additional solver status information to the UI.
+  (#162164,F301272)
+- Fixed UI satus computation in presence of multiple available
+  candidates.
+- revision 4264
+- version 2.3.1
+
+-------------------------------------------------------------------
 Thu Oct 12 15:45:12 CEST 2006 - dmacvicar@suse.de
 
 - remove const in MediaChangeReport requestMedia that
@@ -16,7 +26,7 @@ Wed Oct 11 08:35:48 CEST 2006 - mvidner@suse.cz
 -------------------------------------------------------------------
 Tue Oct 10 16:03:40 CEST 2006 - dmacvicar@suse.de
 
-- Log microseconds if ZYPP_PROFILING env var is enabled. 
+- Log microseconds if ZYPP_PROFILING env var is enabled.
 - r4252
 
 -------------------------------------------------------------------
@@ -37,15 +47,15 @@ Mon Oct  9 15:11:16 CEST 2006 - mvidner@suse.cz
 Fri Oct  6 13:23:32 CEST 2006 - schubi@suse.de
 
 - select the best solution: prefering the total amount of install/update
-  packages BEFORE source preferences. Bug 208784 
+  packages BEFORE source preferences. Bug 208784
 
 -------------------------------------------------------------------
 Fri Oct  6 11:55:11 CEST 2006 - dmacvicar@suse.de
 
-- Introduce a method to see if a source supports a 
+- Introduce a method to see if a source supports a
   kind of resolvable at that time, so we can
   init a YUM source like factory but avoid parsing
-  it if it contains no patches. 
+  it if it contains no patches.
 - add TODO
 - zypp-checkpatches xml output
 - r4235
@@ -60,7 +70,7 @@ Mon Oct  2 16:34:03 CEST 2006 - mvidner@suse.cz
 -------------------------------------------------------------------
 Mon Oct  2 15:11:26 CEST 2006 - dmacvicar@suse.de
 
-- FATE #100165: 
+- FATE #100165:
   Make Content File Aware of Different Architectures
   expand %a in release notes with architecture
 
