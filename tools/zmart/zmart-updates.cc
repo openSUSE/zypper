@@ -96,14 +96,12 @@ void render_result( std::ostream &out, const zypp::ResPool &pool)
     MIL << patch->name() << " " << patch->edition() << " " << "[" << patch->category() << "]" << ( it->status().isNeeded() ? " [needed]" : " [unneeded]" )<< std::endl;
     if ( it->status().isNeeded() )
     {
-      out << " <update category=\"" << patch ->category() << "\" name=\"" << patch->name() << "\" edition=\"" << patch->edition() << "\"";
-      if ( patch->source() != Source_Ref::noSource )
-          out << " source=\"" << patch->source().alias() << "\"";
-      out << ">" << std::endl;
+      out << " <update category=\"" << patch ->category() << "\" name=\"" << patch->name() << "\" edition=\"" << patch->edition() << "\"" << ">" << std::endl;
       out << " <summary>" << xml_escape(patch->summary()) << "</summary>" << endl;
       out << " <description>" << xml_escape(patch->description()) << "</description>" << endl;
-      out << "<source url=\"" << patch->source().url() << "\" alias=\"" << patch->source().alias() << "\"/>" << std::endl;
-      out << "<update>" << endl;
+      if ( patch->source() != Source_Ref::noSource )
+        out << "<source url=\"" << patch->source().url() << "\" alias=\"" << patch->source().alias() << "\"/>" << std::endl;
+      out << "</update>" << endl;
       
       count++;
       if (patch->category() == "security")
