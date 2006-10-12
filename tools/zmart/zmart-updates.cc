@@ -15,6 +15,7 @@
 #include <zypp/SourceManager.h>
 #include <zypp/base/Logger.h>
 #include <zypp/Digest.h>
+#include <zypp/target/store/xml_escape_parser.hpp>
 
 #include "zmart.h"
 #include "zmart-updates.h"
@@ -51,6 +52,12 @@ void save_token( const std::string &token )
     os << token << endl;;
   }
   os.close();
+}
+
+static std::string xml_escape( const std::string &text )
+{
+  iobind::parser::xml_escape_parser parser;
+  return parser.escape(text);
 }
 
 void render_error(  std::ostream &out, const std::string &reason )
@@ -92,7 +99,11 @@ void render_result( std::ostream &out, const zypp::ResPool &pool)
       out << " <update category=\"" << patch ->category() << "\" name=\"" << patch->name() << "\" edition=\"" << patch->edition() << "\"";
       if ( patch->source() != Source_Ref::noSource )
           out << " source=\"" << patch->source().alias() << "\"";
-      out << "/>" << std::endl;
+      out << ">" << std::endl;
+      out << " <summary>" << xml_escape(patch->summary()) << "</summary>" << endl;
+      out << " <description>" << xml_escape(patch->description()) << "</description>" << endl;
+      out << "<source url=\"" << patch->source().url() << "\" alias=\"" << patch->source().alias() << "\"/>" << std::endl;
+      out << "<update>" << endl;
       
       count++;
       if (patch->category() == "security")

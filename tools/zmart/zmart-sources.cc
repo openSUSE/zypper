@@ -8,6 +8,7 @@
 
 #include <zypp/target/store/PersistentStorage.h>
 
+
 using namespace zypp::detail;
 
 using namespace std;
