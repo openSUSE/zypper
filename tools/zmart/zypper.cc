@@ -307,7 +307,8 @@ int main(int argc, char **argv)
       {"uninstalled-only", no_argument, 0, 'u'},
       {"match-all", no_argument, 0, 0},
       {"match-any", no_argument, 0, 0},
-      {"help", no_argument, 0, 0}
+      {"type",    required_argument, 0, 't'},
+      {"help", no_argument, 0, 0},
     };
     specific_options = search_options;
     specific_help =
@@ -316,10 +317,11 @@ int main(int argc, char **argv)
       "'search' - Search for packages matching given search strings\n"
       "\n"
       "  Command options:\n"
-      "    --match-all         Search for a match to all search strings (default)\n"
-      "    --match-any         Search for a match to any of the search strings\n"
-      "-i, --installed-only    Show only packages that are already installed.\n"
-      "-u, --uninstalled-only  Show only packages that are not curenly installed.\n"
+      "    --match-all          Search for a match to all search strings (default)\n"
+      "    --match-any          Search for a match to any of the search strings\n"
+      "-i, --installed-only     Show only packages that are already installed.\n"
+      "-u, --uninstalled-only   Show only packages that are not curenly installed.\n"
+      "-t, --type               Search only for resolvables of specified type.\n"
       ;
   }
   else {
@@ -628,6 +630,16 @@ int main(int argc, char **argv)
 
     if (copts.count("match-any")) {
       options.setMatchAny();
+    }
+
+    if (copts.count("type")) {
+      string skind = copts["type"].front();
+      kind = string_to_kind (skind);
+      if (kind == ResObject::Kind ()) {
+        cerr << "Unknown resolvable type " << skind << endl;
+        return 1;
+      }
+      options.setKind(kind);
     }
 
     ZyppSearch search(options,arguments);
