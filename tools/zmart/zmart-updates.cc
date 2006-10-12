@@ -89,12 +89,10 @@ void render_result( std::ostream &out, const zypp::ResPool &pool)
     MIL << patch->name() << " " << patch->edition() << " " << "[" << patch->category() << "]" << ( it->status().isNeeded() ? " [needed]" : " [unneeded]" )<< std::endl;
     if ( it->status().isNeeded() )
     {
-      out << " <update category=\"" << patch ->category() << "\">" << std::endl;
-      out << "  <name>" << patch->name() << "</name>" <<endl;
-      out << "  <edition>" << patch->edition() << "</edition>" <<endl;
+      out << " <update category=\"" << patch ->category() << "\" name=\"" << patch->name() << "\" edition=\"" << patch->edition() << "\"";
       if ( patch->source() != Source_Ref::noSource )
-        out << "  <source url=\"" << patch->source().url() << "\" alias=\"" << patch->source().alias() << "\"/>" << std::endl;
-      out << " </update>" <<endl;
+          out << " source=\"" << patch->source().alias() << "\"";
+      out << "/>" << std::endl;
       
       count++;
       if (patch->category() == "security")
