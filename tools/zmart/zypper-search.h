@@ -23,12 +23,15 @@
 class ZyppSearchOptions {
 public:
   ZyppSearchOptions () :
-    _installed_only(false), _uninstalled_only(false), _match_all(true), _kind(zypp::Resolvable::Kind()) {}
-  
+    _installed_only(false), _uninstalled_only(false), _match_all(true),
+    _match_words(false), _kind(zypp::Resolvable::Kind())
+    {}
+
   bool installedOnly() const { return _installed_only; }
   bool uninstalledOnly() const { return _uninstalled_only; }
   bool matchAll() const { return _match_all; }
   bool matchAny() const { return !_match_all; }
+  bool matchWords() const { return _match_words; }
   zypp::Resolvable::Kind kind() const { return _kind; }
 
   void setInstalledOnly(const bool installed_only = true) {
@@ -39,12 +42,14 @@ public:
   }
   void setMatchAll(const bool match_all = true) { _match_all = match_all; }
   void setMatchAny(const bool match_any = true) { _match_all = !match_any; }
+  void setMatchWords(const bool match_words = true) { _match_words = match_words; }
   void setKind(const zypp::Resolvable::Kind & kind) { _kind = kind; }
 
 private:
   bool _installed_only;
   bool _uninstalled_only;
   bool _match_all;
+  bool _match_words;
   zypp::Resolvable::Kind _kind;
 };
 

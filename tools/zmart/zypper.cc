@@ -307,6 +307,8 @@ int main(int argc, char **argv)
       {"uninstalled-only", no_argument, 0, 'u'},
       {"match-all", no_argument, 0, 0},
       {"match-any", no_argument, 0, 0},
+      {"match-substrings", no_argument, 0, 0},
+      {"match-words", no_argument, 0, 0},
       {"type",    required_argument, 0, 't'},
       {"help", no_argument, 0, 0},
     };
@@ -319,6 +321,8 @@ int main(int argc, char **argv)
       "  Command options:\n"
       "    --match-all          Search for a match to all search strings (default)\n"
       "    --match-any          Search for a match to any of the search strings\n"
+      "    --match-substrings   Matches for search strings may be partial words (default)\n"
+      "    --match-words        Matches for search strings may only be whole words\n"
       "-i, --installed-only     Show only packages that are already installed.\n"
       "-u, --uninstalled-only   Show only packages that are not curenly installed.\n"
       "-t, --type               Search only for resolvables of specified type.\n"
@@ -630,6 +634,10 @@ int main(int argc, char **argv)
 
     if (copts.count("match-any")) {
       options.setMatchAny();
+    }
+
+    if (copts.count("match-words")) {
+      options.setMatchWords();
     }
 
     if (copts.count("type")) {

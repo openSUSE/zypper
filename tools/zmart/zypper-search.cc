@@ -75,24 +75,27 @@ Table ZyppSearch::doSearch() {
   return otable;
 }
 
+// macro for word boundary tags for regexes
+#define WB (_options.matchWords() ? string("\\b") : string())
+
 void ZyppSearch::setupRegexp() {
   string regstr;
 
   if (_qstrings.size() == 0) regstr = ".*";
-  else if (_qstrings.size() == 1) regstr = ".*" + _qstrings[0] + ".*";
+  else if (_qstrings.size() == 1) regstr = ".*" + WB + _qstrings[0] + WB + ".*";
   else {
     vector<string>::const_iterator it = _qstrings.begin();
     
     if (_options.matchAll())
-      regstr = "(?=.*" + *it + ")";
+      regstr = "(?=.*" + WB + *it + WB + ")";
     else
-      regstr = ".*(" + *it;
+      regstr = ".*" + WB + "(" + *it;
 
     ++it;
 
     for (; it != _qstrings.end(); ++it) {
       if (_options.matchAll())
-        regstr += "(?=.*" + *it + ")";
+        regstr += "(?=.*" + WB + *it + WB + ")";
       else
         regstr += "|" + *it;
     }
@@ -100,7 +103,7 @@ void ZyppSearch::setupRegexp() {
     if (_options.matchAll())
       regstr += ".*";
     else
-      regstr += ").*";
+      regstr += ")" + WB + ".*";
   }
 
   cerr_vv << "using regex: " << regstr << endl;
