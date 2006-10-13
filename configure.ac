@@ -37,7 +37,7 @@ AC_SUBST(ZYPP_CFLAGS)
 
 dnl ==================================================
 
-CXXFLAGS="${CXXFLAGS} -g -O3 -Wall -Wformat"
+CXXFLAGS="${CXXFLAGS} -g -O3 -Wall -Wformat -Woverloaded-virtual"
 AC_SYS_LARGEFILE
 if test "$enable_largefile" != no ; then
 	enable_largefile=yes
