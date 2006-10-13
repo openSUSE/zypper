@@ -14,7 +14,7 @@ baseinclude_HEADERS =	\
 	Debug.h		\
 	Deprecated.h	\
 	DefaultFalseBool.h	\
-	DefaultIntegal.h	\
+	DefaultIntegral.h	\
 	\
 	Algorithm.h	\
 	Exception.h	\
