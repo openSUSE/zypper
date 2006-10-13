@@ -6,7 +6,7 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file	zypp/SourceManager.cc
+/** \file zypp/SourceManager.cc
  *
 */
 #include <iostream>
@@ -59,10 +59,10 @@ namespace zypp
     {
       void operator()( const SourceMap::value_type & el ) const
       {
-	_str << endl << "    - " << el.second;
+        _str << endl << "    - " << el.second;
       }
       PrintSourceMapEntry( std::ostream & str )
-      : _str( str )
+          : _str( str )
       {}
       std::ostream & _str;
     };
@@ -70,23 +70,23 @@ namespace zypp
     inline std::ostream & dumpSourceTableOn( std::ostream & str, bool trailingENDL = true )
     {
       str << "SourceManager: =========================" << endl
-	  << "  known Sources " << _sources.size();
+      << "  known Sources " << _sources.size();
       std::for_each( _sources.begin(), _sources.end(), PrintSourceMapEntry(str) );
 
       str << endl
-	  << "  deleted Sources " << _deleted_sources.size();
+      << "  deleted Sources " << _deleted_sources.size();
       std::for_each( _deleted_sources.begin(), _deleted_sources.end(), PrintSourceMapEntry(str) );
       str << endl
-	  << "========================================";
+      << "========================================";
       if ( trailingENDL )
-	str << endl;
+        str << endl;
       return str;
     }
 
     inline bool sourceTableRemove( SourceMap::iterator it )
     {
       if ( it == _sources.end() )
-	return false;
+        return false;
 
       MIL << "SourceManager remove " << it->second << endl;
       _deleted_sources[it->second.numericId()] = it->second;
@@ -102,18 +102,18 @@ namespace zypp
     inline SourceManager::SourceId sourceTableAdd( Source_Ref source_r )
     {
       if ( source_r.numericId() )
-	{
-	  MIL << "SourceManager add " << source_r << endl;
-	  _sources[source_r.numericId()] = source_r;
+      {
+        MIL << "SourceManager add " << source_r << endl;
+        _sources[source_r.numericId()] = source_r;
 
-	  dumpSourceTableOn( DBG );
-	}
+        dumpSourceTableOn( DBG );
+      }
       else
-	{
-	  // Not worth an Exception. Request to add noSource, adds no Source,
-	  // and returns the noSource Id.
-	  WAR << "SourceManager does not add Source::noSource" << endl;
-	}
+      {
+        // Not worth an Exception. Request to add noSource, adds no Source,
+        // and returns the noSource Id.
+        WAR << "SourceManager does not add Source::noSource" << endl;
+      }
       return source_r.numericId();
     }
 
@@ -121,8 +121,8 @@ namespace zypp
 
   ///////////////////////////////////////////////////////////////////
   //
-  //	METHOD NAME : SourceManager::SourceManager
-  //	METHOD TYPE : Ctor
+  // METHOD NAME : SourceManager::SourceManager
+  // METHOD TYPE : Ctor
   //
   SourceManager::SourceManager()
   {
@@ -131,8 +131,8 @@ namespace zypp
 
   ///////////////////////////////////////////////////////////////////
   //
-  //	METHOD NAME : SourceManager::~SourceManager
-  //	METHOD TYPE : Dtor
+  // METHOD NAME : SourceManager::~SourceManager
+  // METHOD TYPE : Dtor
   //
   SourceManager::~SourceManager()
   {
@@ -140,22 +140,34 @@ namespace zypp
   }
 
   SourceManager::const_iterator SourceManager::begin() const
-  { return _sources.begin(); }
+  {
+    return _sources.begin();
+  }
 
   SourceManager::const_iterator SourceManager::end() const
-  { return _sources.end();  }
+  {
+    return _sources.end();
+  }
 
   SourceManager::SourceId_const_iterator SourceManager::SourceId_begin() const
-  { return make_map_key_begin( _sources ); }
+  {
+    return make_map_key_begin( _sources );
+  }
 
   SourceManager::SourceId_const_iterator SourceManager::SourceId_end() const
-  { return make_map_key_end( _sources ); }
+  {
+    return make_map_key_end( _sources );
+  }
 
   SourceManager::Source_const_iterator SourceManager::Source_begin() const
-  { return make_map_value_begin( _sources ); }
+  {
+    return make_map_value_begin( _sources );
+  }
 
   SourceManager::Source_const_iterator SourceManager::Source_end() const
-  { return make_map_value_end( _sources ); }
+  {
+    return make_map_value_end( _sources );
+  }
 
   void SourceManager::reset()
   {
@@ -172,9 +184,9 @@ namespace zypp
   void SourceManager::removeSource(SourceManager::SourceId id)
   {
     if ( ! sourceTableRemove( _sources.find(id) ) )
-      {
-	WAR << "SourceManager remove: no source with SourceId " << id << endl;
-      }
+    {
+      WAR << "SourceManager remove: no source with SourceId " << id << endl;
+    }
   }
 
   void SourceManager::removeSource( const std::string & alias_r )
@@ -184,9 +196,9 @@ namespace zypp
       ; // empty body
 
     if ( ! sourceTableRemove( it ) )
-      {
-	WAR << "SourceManager remove: no source with alias " << alias_r << endl;
-      }
+    {
+      WAR << "SourceManager remove: no source with alias " << alias_r << endl;
+    }
   }
 
   void SourceManager::removeSourceByUrl( const Url & url_r )
@@ -196,16 +208,16 @@ namespace zypp
       ; // empty body
 
     if ( ! sourceTableRemove( it ) )
-      {
-	WAR << "SourceManager remove: no source with Url " << url_r << endl;
-      }
+    {
+      WAR << "SourceManager remove: no source with Url " << url_r << endl;
+    }
   }
 
   void SourceManager::releaseAllSources()
   {
     MIL << "SourceManager releasing all sources ..." << endl;
     for (SourceMap::iterator it = _sources.begin();
-	 it != _sources.end(); it++)
+         it != _sources.end(); it++)
     {
       it->second.release();
     }
@@ -216,7 +228,7 @@ namespace zypp
   {
     MIL << "SourceManager reattach all sources to '" << attach_point << " ..." << endl;
     for (SourceMap::iterator it = _sources.begin();
-	 it != _sources.end(); it++)
+         it != _sources.end(); it++)
     {
       it->second.reattach(attach_point);
     }
@@ -227,9 +239,9 @@ namespace zypp
   void SourceManager::disableAllSources()
   {
     MIL << "SourceManager disable all sources ..." << endl;
-    for( SourceMap::iterator it = _sources.begin(); it != _sources.end(); it++)
+    for ( SourceMap::iterator it = _sources.begin(); it != _sources.end(); it++)
     {
-	it->second.disable();
+      it->second.disable();
     }
     MIL << "SourceManager disable all sources done." << endl;
   }
@@ -238,10 +250,10 @@ namespace zypp
   {
     std::list<SourceManager::SourceId> res;
 
-    for( SourceMap::const_iterator it = _sources.begin(); it != _sources.end(); it++)
+    for ( SourceMap::const_iterator it = _sources.begin(); it != _sources.end(); it++)
     {
-	if( it->second.enabled() )
-	    res.push_back(it->first);
+      if ( it->second.enabled() )
+        res.push_back(it->first);
     }
 
     return res;
@@ -251,9 +263,9 @@ namespace zypp
   {
     std::list<SourceManager::SourceId> res;
 
-    for( SourceMap::const_iterator it = _sources.begin(); it != _sources.end(); it++)
+    for ( SourceMap::const_iterator it = _sources.begin(); it != _sources.end(); it++)
     {
-	res.push_back(it->first);
+      res.push_back(it->first);
     }
 
     return res;
@@ -262,69 +274,71 @@ namespace zypp
   void SourceManager::store(Pathname root_r, bool metadata_cache )
   {
     MIL << "SourceManager store '" << root_r << ( metadata_cache ? "' (metadata_cache)" : "'" )
-	<< " ..." << endl;
+    << " ..." << endl;
 
     storage::PersistentStorage store;
     store.init( root_r );
 
 
     // make sure to create the source metadata cache
-    if( metadata_cache )
+    if ( metadata_cache )
     {
-	// make sure our root exists
+      // make sure our root exists
 
-	filesystem::assert_dir( root_r / getZYpp()->homePath() );
-	Pathname topdir( root_r / ZYPP_METADATA_PREFIX );
-	filesystem::assert_dir( topdir );
-    	MIL << "Created..." << topdir << std::endl;
+      filesystem::assert_dir( root_r / getZYpp()->homePath() );
+      Pathname topdir( root_r / ZYPP_METADATA_PREFIX );
+      filesystem::assert_dir( topdir );
+      MIL << "Created..." << topdir << std::endl;
     }
 
     // delete before modifying and creating
     // so that we can recreate a deleted one (#174295)
-    for( SourceMap::iterator it = _deleted_sources.begin(); it != _deleted_sources.end(); it++)
+    for ( SourceMap::iterator it = _deleted_sources.begin(); it != _deleted_sources.end(); it++)
     {
-	MIL << "Deleting source " << it->second << " from persistent store" << endl;
-	store.deleteSource( it->second.alias() );
-	filesystem::recursive_rmdir( it->second.cacheDir() );
+      MIL << "Deleting source " << it->second << " from persistent store" << endl;
+      store.deleteSource( it->second.alias() );
+      filesystem::recursive_rmdir( it->second.cacheDir() );
     }
 
     _deleted_sources.clear();
 
-    for( SourceMap::iterator it = _sources.begin(); it != _sources.end(); it++)
+    for ( SourceMap::iterator it = _sources.begin(); it != _sources.end(); it++)
     {
-        source::SourceInfo descr;
-        
-        descr.setUrl(it->second.url());
-        descr.setEnabled( it->second.enabled() );
-        descr.setAlias( it->second.alias() );
-        descr.setAutorefresh( it->second.autorefresh() );
-        descr.setType( it->second.type() );
-        descr.setPath( it->second.path() );
+      source::SourceInfo descr;
 
-        descr.setCacheDir( it->second.cacheDir() );
+      descr.setUrl(it->second.url());
+      descr.setEnabled( it->second.enabled() );
+      descr.setAlias( it->second.alias() );
+      descr.setAutorefresh( it->second.autorefresh() );
+      descr.setType( it->second.type() );
+      descr.setPath( it->second.path() );
 
-        if( metadata_cache && descr.cacheDir().empty() )
-	{
-          if( descr.cacheDir().empty() )
-	    {
-	      filesystem::TmpDir newCache( root_r /  ZYPP_METADATA_PREFIX, "Source." );
-              descr.setCacheDir( ZYPP_METADATA_PREFIX + newCache.path().basename() ); 
-	    }
+      descr.setCacheDir( it->second.cacheDir() );
 
-            filesystem::assert_dir ( root_r.asString() + descr.cacheDir() );
+      if ( metadata_cache && descr.cacheDir().empty() )
+      {
+        if ( descr.cacheDir().empty() )
+        {
+          filesystem::TmpDir newCache( root_r /  ZYPP_METADATA_PREFIX, "Source." );
+          descr.setCacheDir( ZYPP_METADATA_PREFIX + newCache.path().basename() );
+        }
 
-            MIL << "Storing metadata to (" << root_r.asString() << ")/" << descr.cacheDir() << endl;
+        filesystem::assert_dir ( root_r.asString() + descr.cacheDir() );
 
-	    try {
-              it->second.storeMetadata( root_r.asString() + descr.cacheDir() );
-	    }
-	    catch(const Exception &excp) {
-		WAR << "Creating local metadata cache failed, not using cache" << endl;
-                descr.setCacheDir("");
-	    }
-	}
+        MIL << "Storing metadata to (" << root_r.asString() << ")/" << descr.cacheDir() << endl;
 
-	store.storeSource( descr );
+        try
+        {
+          it->second.storeMetadata( root_r.asString() + descr.cacheDir() );
+        }
+        catch (const Exception &excp)
+        {
+          WAR << "Creating local metadata cache failed, not using cache" << endl;
+          descr.setCacheDir("");
+        }
+      }
+
+      store.storeSource( descr );
     }
 
     MIL << "SourceManager store done." << endl;
@@ -343,7 +357,7 @@ namespace zypp
       // if we've already restored sources and this is an unfiltered call, reject it.
 
       if (alias_filter.empty()
-      && url_filter.empty())
+          && url_filter.empty())
       {
         ZYPP_THROW(SourcesAlreadyRestoredException());
         //Exception ( N_("At least one source already registered, cannot restore sources from persistent store.") ) );
@@ -358,7 +372,7 @@ namespace zypp
           MIL << "Source with alias '" << alias_filter << "' already restored.";
           return true;
         }
-        
+
         if (!url_filter.empty() && (url_filter == it->second.url().asString()) )
         {
           MIL << "Source with url '" << url_filter << "' already restored.";
@@ -376,16 +390,16 @@ namespace zypp
 
     MIL << "Found sources: " << new_sources.size() << endl;
 
-    for( std::list<source::SourceInfo>::iterator it = new_sources.begin(); it != new_sources.end(); ++it)
+    for ( std::list<source::SourceInfo>::iterator it = new_sources.begin(); it != new_sources.end(); ++it)
     {
-      if ( !alias_filter.empty()			// check alias filter, if set
+      if ( !alias_filter.empty()   // check alias filter, if set
            && (alias_filter != it->alias()) )
       {
         continue;
       }
 
-      if ( !url_filter.empty()			// check url filter, if set
-                     && (url_filter != it->url().asString()) )
+      if ( !url_filter.empty()   // check url filter, if set
+           && (url_filter != it->url().asString()) )
       {
         continue;
       }
@@ -397,8 +411,8 @@ namespace zypp
 
       try
       {
-          Source_Ref src = SourceFactory().createFrom(it->type(), it->url(), it->path(), it->alias(), it->cacheDir(), false, it->autorefresh());
-          id = addSource(src); 
+        Source_Ref src = SourceFactory().createFrom(it->type(), it->url(), it->path(), it->alias(), it->cacheDir(), false, it->autorefresh());
+        id = addSource(src);
       }
       catch (const Exception &expt )
       {
@@ -412,7 +426,7 @@ namespace zypp
           url2 = it->url();
           std::string scheme( url2.getScheme());
 
-          if( (scheme == "cd" || scheme == "dvd") && !url2.getQueryParam("devices").empty())
+          if ( (scheme == "cd" || scheme == "dvd") && !url2.getQueryParam("devices").empty())
           {
             url2.setQueryParam("devices", "");
             DBG << "CD/DVD devices changed - try again without a devices list" << std::endl;
@@ -427,12 +441,12 @@ namespace zypp
         {
           // Note: Url(it->url).asString() to hide password in logs
           ERR << "Unable to restore source from " << url2.asString()
-              << endl;
+          << endl;
           id = 0;
           ZYPP_CAUGHT(e2);
         }
 
-        if( id == 0)
+        if ( id == 0)
         {
           report.append( it->url().asString() + it->path().asString(), it->alias(), expt );
           continue;
@@ -455,7 +469,7 @@ namespace zypp
       }
     }
 
-    if( !report.empty() )
+    if ( !report.empty() )
     {
       ZYPP_THROW(report);
     }
@@ -474,12 +488,12 @@ namespace zypp
 
     MIL << "Disabling all sources in store at " << root_r << endl;
 
-    for( std::list<source::SourceInfo>::iterator it = new_sources.begin();
-	it != new_sources.end(); ++it)
+    for ( std::list<source::SourceInfo>::iterator it = new_sources.begin();
+          it != new_sources.end(); ++it)
     {
-        MIL << "Disabling source " << it->alias() << endl;
-        it->setEnabled(false);
-	store.storeSource( *it );
+      MIL << "Disabling source " << it->alias() << endl;
+      it->setEnabled(false);
+      store.storeSource( *it );
     }
   }
 
@@ -493,11 +507,11 @@ namespace zypp
     MIL << "Found sources: " << sources.size() << endl;
     return sources;
   }
-    
+
   /******************************************************************
   **
-  **	FUNCTION NAME : operator<<
-  **	FUNCTION TYPE : std::ostream &
+  ** FUNCTION NAME : operator<<
+  ** FUNCTION TYPE : std::ostream &
   */
   std::ostream & operator<<( std::ostream & str, const SourceManager & obj )
   {
@@ -519,9 +533,10 @@ namespace zypp
     SourceMap::iterator it;
     for (it = _sources.begin(); it != _sources.end(); ++it)
     {
-	if (it->second.alias() == alias_r) {
-	    return it->second;
-	}
+      if (it->second.alias() == alias_r)
+      {
+        return it->second;
+      }
     }
     ZYPP_THROW(Exception("Unknown source name '"+alias_r+"'"));
     /*NOTREACHED*/
@@ -533,9 +548,10 @@ namespace zypp
     SourceMap::iterator it;
     for (it = _sources.begin(); it != _sources.end(); ++it)
     {
-	if (it->second.url().asCompleteString() == url_r.asCompleteString()) {
-	    return it->second;
-	}
+      if (it->second.url().asCompleteString() == url_r.asCompleteString())
+      {
+        return it->second;
+      }
     }
     ZYPP_THROW(Exception("Unknown source URL '"+url_r.asString()+"'"));
     /*NOTREACHED*/
@@ -548,29 +564,29 @@ namespace zypp
 
   std::ostream & FailedSourcesRestoreException::dumpOn( std::ostream & str ) const
   {
-	return str << _summary;
+    return str << _summary;
   }
 
   std::ostream & FailedSourcesRestoreException::dumpOnTranslated( std::ostream & str ) const
   {
-	return str << Exception::asUserString() << endl << _translatedSummary;
+    return str << Exception::asUserString() << endl << _translatedSummary;
   }
 
   bool FailedSourcesRestoreException::empty () const
   {
-	return _summary.empty();
+    return _summary.empty();
   }
 
   std::set<std::string> FailedSourcesRestoreException::aliases () const
-  {
-	return _aliases;
-  }
+    {
+      return _aliases;
+    }
 
   void FailedSourcesRestoreException::append( std::string source, std::string alias, const Exception& expt)
   {
-	_summary = _summary + "\n" + source + ": " + expt.asString();
-	_translatedSummary = _translatedSummary + "\n" + source + ": " + expt.asUserString();
-	_aliases.insert( alias );
+    _summary = _summary + "\n" + source + ": " + expt.asString();
+    _translatedSummary = _translatedSummary + "\n" + source + ": " + expt.asUserString();
+    _aliases.insert( alias );
   }
 
   /////////////////////////////////////////////////////////////////
