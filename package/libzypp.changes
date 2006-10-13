@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Oct 13 16:51:43 CEST 2006 - dmacvicar@suse.de
+
+- implement rename source in sourcemanager
+- r4286 
+
+-------------------------------------------------------------------
 Fri Oct 13 14:32:44 CEST 2006 - dmacvicar@suse.de
 
 - YaST sources: set alias to product summary if empty
