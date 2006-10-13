@@ -10,7 +10,7 @@
  *
 */
 #include <iostream>
-//#include "zypp/base/Logger.h"
+#include "zypp/base/LogTools.h"
 
 #include "zypp/base/InputStream.h"
 #include "zypp/base/GzStream.h"
@@ -126,12 +126,7 @@ namespace zypp
   */
   std::ostream & operator<<( std::ostream & str, const InputStream & obj )
   {
-    return str << obj.name() << '['
-         << (obj.stream().good() ? 'g' : '_' )
-         << (obj.stream().eof()  ? 'e' : '_' )
-         << (obj.stream().fail() ? 'F' : '_' )
-         << (obj.stream().bad()  ? 'B' : '_' )
-         << ']';
+    return str << obj.name() << obj.stream();
   }
 
   /////////////////////////////////////////////////////////////////
