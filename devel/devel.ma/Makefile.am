@@ -46,9 +46,9 @@ Prof_LDFLAGS = $(PROF_OBJ)
 
 ## ##################################################
 
-.PHONY:        always
+.PHONY:		always
 
-$(noinst_PROGRAMS):    $(top_srcdir)/zypp/lib@PACKAGE@.la
+Tools.h:	$(top_srcdir)/zypp/lib@PACKAGE@.la
 
 $(top_srcdir)/zypp/lib@PACKAGE@.la:     always
 	$(MAKE) -C $(top_srcdir)/zypp
