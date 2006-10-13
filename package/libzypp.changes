@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri Oct 13 14:32:44 CEST 2006 - dmacvicar@suse.de
+
+- YaST sources: set alias to product summary if empty
+- show alias on logs.
+- r4281 
+
+-------------------------------------------------------------------
 Thu Oct 12 16:40:29 CEST 2006 - dmacvicar@suse.de
 
 - version 2.4.0 (bin incompat due to callback fixes)
