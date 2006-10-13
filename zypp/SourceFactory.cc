@@ -154,7 +154,7 @@ namespace zypp
     }
     return false;
   }
-  
+
   template<class _SourceImpl>
   Source_Ref SourceFactory::createSourceImplWorkflow( media::MediaId id, const SourceInfo &context )
   {
@@ -168,7 +168,7 @@ namespace zypp
           {
             MIL << "Trying to create source of type " << _SourceImpl::typeString() << endl;
             Source_Ref::Impl_Ptr impl( Impl::createSourceImpl<_SourceImpl>( id, context ) );
-            std::cout << "created source " << impl->type() << endl;
+            MIL << "Created source " << impl->type() << endl;
             report->finish( context.url(), SourceCreateReport::NO_ERROR, std::string() );
             return Source_Ref(impl);
           }
@@ -185,7 +185,7 @@ namespace zypp
             report->problem( context.url(), SourceCreateReport::REJECTED, "Source metadata is invalid: " + excpt_r.asUserString() );
             report->finish( context.url(), SourceCreateReport::REJECTED, ""  );
             ZYPP_THROW(Exception( "Invalid Source: " + excpt_r.asUserString() ));
-          } 
+          }
           catch (const Exception & excpt_r)
           {
             ZYPP_CAUGHT(excpt_r);
@@ -198,8 +198,8 @@ namespace zypp
       }
       // never reached
       return Source_Ref();
-  }    
-      
+  }
+
   Source_Ref SourceFactory::createFrom( const Url & url_r, const Pathname & path_r, const std::string & alias_r, const Pathname & cache_dir_r, bool base_source )
   {
     if (! url_r.isValid())
@@ -225,10 +225,10 @@ namespace zypp
 
     SourceInfo context( url_r, path_r, alias_r, cache_dir_r, auto_refresh );
     context.setBaseSource( base_source );
-    
+
     callback::SendReport<ProbeSourceReport> report;
     bool probeYUM, probeYaST;
-    
+
     report->start(url_r);
     if ( probeYUM = probeSource<yum::YUMSourceImpl>( url_r, path_r, id, "YUM", report ) )
     {
@@ -239,7 +239,7 @@ namespace zypp
       // nohing
     }
     report->finish(url_r, ProbeSourceReport::NO_ERROR, "");
-    
+
     if ( probeYUM )
     {
       Source_Ref source(createSourceImplWorkflow<source::yum::YUMSourceImpl>( id, context ));
@@ -259,8 +259,8 @@ namespace zypp
     // TRY PLAINDIR
     //////////////////////////////////////////////////////////////////
     //FIXME disabled
-    
-    
+
+
 
 
     return Source_Ref(); // not reached!!
@@ -328,7 +328,7 @@ namespace zypp
     SourceInfo context( url_r, path_r, alias_r, cache_dir_r, calculated_autorefresh );
     context.setBaseSource( base_source );
     context.setType( type );
-    
+
     try
     {
       Source_Ref::Impl_Ptr impl;
@@ -355,7 +355,7 @@ namespace zypp
       {
         ZYPP_THROW( Exception ("Cannot create source of unknown type '" + type + "'"));
       }
-      
+
       return Source_Ref(impl);
     }
     catch (const Exception & excpt_r)
