@@ -75,29 +75,46 @@ Table ZyppSearch::doSearch() {
   return otable;
 }
 
-// macro for word boundary tags for regexes
+//! macro for word boundary tags for regexes
 #define WB (_options.matchWords() ? string("\\b") : string())
 
+/**
+ * Creates a regex for searching in resolvable names.
+ * 
+ * The regex is created according to given search strings and search options.
+ * 
+ * Examples:
+ *   - no search string: .*
+ *   - one search string: .*searchstring.*
+ *     with --match-words: .*\bsearchstring\b.*
+ *   - more search strings:
+ *     --match-all (default):
+ *       (?=.*searchstring1)(?=.*searchstring2).*
+ *       with --match-words: (?=.*\bsearchstring1\b)(?=.*\bsearchstring2\b).*
+ *     --match-any:
+ *       .*(searchstring1|searchstring2).*
+ *       with --match-words: .*\b(searchstring1|searchstring2)\b.*
+ */
 void ZyppSearch::setupRegexp() {
   string regstr;
 
   if (_qstrings.size() == 0) regstr = ".*";
-  else if (_qstrings.size() == 1) regstr = ".*" + WB + _qstrings[0] + WB + ".*";
+  else if (_qstrings.size() == 1) regstr = ".*" + WB + wildcards2regex(_qstrings[0]) + WB + ".*";
   else {
     vector<string>::const_iterator it = _qstrings.begin();
-    
+
     if (_options.matchAll())
-      regstr = "(?=.*" + WB + *it + WB + ")";
+      regstr = "(?=.*" + WB + wildcards2regex(*it) + WB + ")";
     else
-      regstr = ".*" + WB + "(" + *it;
+      regstr = ".*" + WB + "(" + wildcards2regex(*it);
 
     ++it;
 
     for (; it != _qstrings.end(); ++it) {
       if (_options.matchAll())
-        regstr += "(?=.*" + WB + *it + WB + ")";
+        regstr += "(?=.*" + WB + wildcards2regex(*it) + WB + ")";
       else
-        regstr += "|" + *it;
+        regstr += "|" + wildcards2regex(*it);
     }
 
     if (_options.matchAll())
@@ -119,6 +136,28 @@ void ZyppSearch::setupRegexp() {
     cerr << "This is a bug, please file a bug report against zypper." << endl;
     exit(1);
   }
+}
+
+/**
+ * Converts '*' and '?' wildcards within str into their regex equivalents.
+ */
+string ZyppSearch::wildcards2regex(const string & str) const {
+  string regexed;
+
+  regex all("\\*"); // regex to search for '*'
+  regex one("\\?"); // regex to search for '?'
+  string r_all(".*"); // regex equivalent of '*'
+  string r_one(".");  // regex equivalent of '?'
+
+  // replace all "*" in input with ".*"
+  regexed = regex_replace(str, all, r_all);
+  cerr_vv << "wildcards2regex: " << str << " -> " << regexed;
+
+  // replace all "?" in input with "."
+  regexed = regex_replace(regexed, one, r_one);
+  cerr_vv << " -> " << regexed << endl;
+
+  return regexed;
 }
 
 bool ZyppSearch::match(const PoolItem & pool_item) {

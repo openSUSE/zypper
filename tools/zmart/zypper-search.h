@@ -68,9 +68,9 @@ private:
 
   bool init() const;
   void setupRegexp();
+  string wildcards2regex(const string & str) const;
   bool match(const zypp::PoolItem & pool_item);
   TableRow createRow(const zypp::PoolItem & pool_item);
 };
-
 
 #endif /*ZYPPERSEARCH_H_*/
