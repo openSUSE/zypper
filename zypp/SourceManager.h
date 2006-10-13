@@ -220,6 +220,9 @@ namespace zypp
      */
     SourceId addSource(Source_Ref source_r);
 
+    /** Rename an existing source by Alias. */
+    void renameSource( SourceId id, const std::string & new_alias_r );
+    
     /** Remove an existing source by ID. */
     void removeSource(SourceId id);
 

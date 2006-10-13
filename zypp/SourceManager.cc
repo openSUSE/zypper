@@ -54,6 +54,7 @@ namespace zypp
 
     static SourceMap _sources;
     static SourceMap _deleted_sources;
+    static std::set<std::string> _renamed_sources;
 
     struct PrintSourceMapEntry
     {
@@ -181,6 +182,22 @@ namespace zypp
     return sourceTableAdd( source_r );
   }
 
+  void SourceManager::renameSource( SourceId id, const std::string & new_alias_r )
+  {
+    Source_Ref src = findSource(id);
+    
+    if ( src )
+    {
+      // delete the old entry in the storage
+      // the new entry will appear when doing
+      // store
+      _renamed_sources.insert(src.alias());
+      // set the new alias
+      src.setAlias( new_alias_r );
+    }
+    
+  }
+  
   void SourceManager::removeSource(SourceManager::SourceId id)
   {
     if ( ! sourceTableRemove( _sources.find(id) ) )
@@ -291,6 +308,15 @@ namespace zypp
       MIL << "Created..." << topdir << std::endl;
     }
 
+    // delete renamed sources entries
+    for ( std::set<std::string>::const_iterator it = _renamed_sources.begin(); it != _renamed_sources.end(); it++)
+    {
+      MIL << "removing source entry " << *it << " (renamed) from persistent store" << endl;
+      store.deleteSource( *it );
+    }
+
+    _renamed_sources.clear();
+    
     // delete before modifying and creating
     // so that we can recreate a deleted one (#174295)
     for ( SourceMap::iterator it = _deleted_sources.begin(); it != _deleted_sources.end(); it++)
