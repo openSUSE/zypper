@@ -483,8 +483,13 @@ namespace zypp
             saveMetadataTo(_cache_dir);
           }
         }
+        
+        if ( alias().empty() )
+          setAlias(_product->summary());
+        
         MIL << "SUSETags source initialized." << std::endl;
         MIL << "   Url      : " << url() << std::endl;
+        MIL << "   alias    : " << alias() << std::endl;
         MIL << "   Path     : " << path() << std::endl;
         MIL << "   Data     : " << dataDir() << std::endl;
         MIL << "   Metadata : " << metadataRoot() << (_cache_dir.empty() ? " [TMP]" : " [CACHE]") << std::endl;
