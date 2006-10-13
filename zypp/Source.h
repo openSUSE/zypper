@@ -201,11 +201,18 @@ namespace zypp
 
     void storeMetadata(const Pathname & cache_dir_r);
 
-    //! also for ZMD
+    /**
+     * User chosen identificaton, must be unique
+     */
     std::string alias (void) const;
+    /**
+     * User chosen identificaton, must be unique
+     */
     void setAlias (const std::string & alias_r);
 
-    //! string description of the source type, e.g. "YUM" or "YaST"
+    /**
+     * Source type, like YaST or YUM
+     */
     std::string type (void) const;
 
     unsigned numberOfMedia(void) const;
