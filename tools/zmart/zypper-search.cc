@@ -48,31 +48,22 @@ bool ZyppSearch::init () const {
 }
 
 // TODO comment
-Table ZyppSearch::doSearch() {
+void ZyppSearch::doSearch(Table & table) {
   ResPool pool = getZYpp()->pool();
 
   setupRegexp();
 
-  Table otable;
-  otable.style(Ascii);
-
-  TableHeader header;
-  header << "S" << "Catalog" << "Bundle" << "Name" << "Version" << "Arch";
-  otable << header; 
-
   if (_options.kind() != Resolvable::Kind()) {
     for (ResPool::byKind_iterator it = pool.byKindBegin(_options.kind());
         it != pool.byKindEnd(_options.kind()); ++it) {
-      if (match(*it)) otable << createRow(*it);
+      if (match(*it)) table << createRow(*it);
     }
   }
   else {
     for (ResPool::const_iterator it = pool.begin(); it != pool.end(); ++it) {
-      if (match(*it)) otable << createRow(*it);
+      if (match(*it)) table << createRow(*it);
     }
   }
-
-  return otable;
 }
 
 //! macro for word boundary tags for regexes

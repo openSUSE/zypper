@@ -59,7 +59,7 @@ private:
 class ZyppSearch {
 public:
   ZyppSearch (const ZyppSearchOptions & options, const vector<std::string> & qstrings = vector<string>());
-  Table doSearch();
+  void doSearch(Table & table);
 
 private:
   const ZyppSearchOptions & _options;
