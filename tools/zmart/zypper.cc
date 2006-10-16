@@ -309,6 +309,8 @@ int main(int argc, char **argv)
       {"match-any", no_argument, 0, 0},
       {"match-substrings", no_argument, 0, 0},
       {"match-words", no_argument, 0, 0},
+      {"search-descriptions", no_argument, 0, 'd'},
+      {"case-sensitive", no_argument, 0, 'c'},
       {"type",    required_argument, 0, 't'},
       {"sort-by-name", no_argument, 0, 0},
       {"sort-by-catalog", no_argument, 0, 0},
@@ -321,15 +323,17 @@ int main(int argc, char **argv)
       "'search' - Search for packages matching given search strings\n"
       "\n"
       "  Command options:\n"
-      "    --match-all          Search for a match to all search strings (default)\n"
-      "    --match-any          Search for a match to any of the search strings\n"
-      "    --match-substrings   Matches for search strings may be partial words (default)\n"
-      "    --match-words        Matches for search strings may only be whole words\n"
-      "-i, --installed-only     Show only packages that are already installed.\n"
-      "-u, --uninstalled-only   Show only packages that are not curenly installed.\n"
-      "-t, --type               Search only for packages of specified type.\n"
-      "    --sort-by-name       Sort packages by name (default).\n"
-      "    --sort-by-catalog    Sort packages by catalog.\n" // ??? catalog/source?
+      "    --match-all            Search for a match to all search strings (default)\n"
+      "    --match-any            Search for a match to any of the search strings\n"
+      "    --match-substrings     Matches for search strings may be partial words (default)\n"
+      "    --match-words          Matches for search strings may only be whole words\n"
+      "-d, --search-descriptions  Search also in package summaries and descriptions.\n"
+      "-c, --case-sensitive       Perform case-sensitive search.\n"
+      "-i, --installed-only       Show only packages that are already installed.\n"
+      "-u, --uninstalled-only     Show only packages that are not curenly installed.\n"
+      "-t, --type                 Search only for packages of specified type.\n"
+      "    --sort-by-name         Sort packages by name (default).\n"
+      "    --sort-by-catalog      Sort packages by catalog.\n" // ??? catalog/source?
       ;
   }
   else {
@@ -415,6 +419,8 @@ int main(int argc, char **argv)
     cerr << "a ZYpp transaction is already in progress." << endl;
     return 1;
   }
+
+  // --------------------------( service list )-------------------------------
   
   if (command == "service-list" || command == "sl")
   {
@@ -427,6 +433,8 @@ int main(int argc, char **argv)
     list_system_sources();
     return 0;
   }
+
+  // --------------------------( service add )--------------------------------
   
   if (command == "service-add" || command == "sa")
   {
@@ -468,6 +476,8 @@ int main(int argc, char **argv)
     return 0;
   }
 
+  // --------------------------( service delete )-----------------------------
+
   if (command == "service-delete" || command == "sd")
   {
     if (help || arguments.size() < 1) {
@@ -489,6 +499,8 @@ int main(int argc, char **argv)
 
     return 0;
   }
+
+  // --------------------------( service rename )-----------------------------
 
   if (command == "service-rename" || command == "sr")
   {
@@ -514,6 +526,9 @@ int main(int argc, char **argv)
   }
   
   ResObject::Kind kind;
+
+  // --------------------------( remove/install )-----------------------------
+  
   if (command == "install" || command == "in") {
     if (help || arguments.size() < 1) {
       cerr << "install [options] name...\n"
@@ -620,6 +635,8 @@ int main(int argc, char **argv)
     return 0;
   }
 
+  // --------------------------( search )-------------------------------------
+
   if (command == "search" || command == "se") {
     ZyppSearchOptions options;
 
@@ -628,22 +645,14 @@ int main(int argc, char **argv)
       return !help;
     }
 
-    if (copts.count("installed-only")) {
-      options.setInstalledOnly();
-    }
-
-    if (gSettings.disable_system_resolvables || copts.count("uninstalled-only")) {
+    if (gSettings.disable_system_resolvables || copts.count("uninstalled-only"))
       options.setUnInstalledOnly();
-    }
 
-    if (copts.count("match-any")) {
-      options.setMatchAny();
-    }
-
-    if (copts.count("match-words")) {
-      options.setMatchWords();
-    }
-    
+    if (copts.count("installed-only")) options.setInstalledOnly();
+    if (copts.count("match-any")) options.setMatchAny();
+    if (copts.count("match-words")) options.setMatchWords();
+    if (copts.count("search-descriptions")) options.setSearchDescriptions();
+    if (copts.count("case-sensitive")) options.setCaseSensitive();
 
     if (copts.count("type")) {
       string skind = copts["type"].front();
@@ -659,6 +668,8 @@ int main(int argc, char **argv)
     t.style(Ascii);
 
     TableHeader header;
+    // do not change the header as the structure of the table is at the time
+    // hardcoded in ZyppSearch::createRow(const PoolItem & pool_item)
     header << "S" << "Catalog" << "Bundle" << "Name" << "Version" << "Arch";
     t << header; 
 
@@ -673,6 +684,8 @@ int main(int argc, char **argv)
       cout << t;
     }
   }
+
+  // --------------------------( patch check )--------------------------------
 
   // TODO: rug status
   if (command == "patch-check" || command == "pchk") {
@@ -717,6 +730,8 @@ int main(int argc, char **argv)
     show_pool ();
     return 0;
   }
+
+  // --------------------------( list updates )-------------------------------
 
   if (command == "list-updates" || command == "lu") {
     if (help) {
