@@ -6,7 +6,7 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file	zypp/parser/tagfile/MediaPatchesMetadataParser.cc
+/** \file	zypp/source/susetags/MediaPatchesMetadataParser.cc
  *
 */
 #include <iostream>

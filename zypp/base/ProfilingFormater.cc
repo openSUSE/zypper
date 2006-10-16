@@ -6,7 +6,7 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file	zypp/base/LogControl.cc
+/** \file	zypp/base/ProfilingFormater.cc
  *
 */
 

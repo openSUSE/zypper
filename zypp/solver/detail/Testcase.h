@@ -6,7 +6,7 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file       zypp/solver/detail/TestCase.h
+/** \file       zypp/solver/detail/Testcase.h
  *
 */
 

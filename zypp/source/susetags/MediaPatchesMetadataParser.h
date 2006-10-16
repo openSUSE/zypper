@@ -6,7 +6,7 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file	zypp/parser/tagfile/Parser.h
+/** \file	zypp/source/susetags/MediaPatchesMetadataParser.h
  *
 */
 #ifndef ZYPP_PARSER_TAGFILE_MediaPatchesMetadataPARSER_H

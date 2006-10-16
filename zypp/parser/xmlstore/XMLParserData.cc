@@ -6,7 +6,7 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file zypp/parser/xml/XMLParserData.cc
+/** \file zypp/parser/xmlstore/XMLParserData.cc
  *
 */
 

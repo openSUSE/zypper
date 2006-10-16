@@ -6,7 +6,7 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file zypp/SourceInfo.h
+/** \file zypp/source/SourceInfo.h
  *
 */
 #ifndef ZYPP_SourceInfo_H

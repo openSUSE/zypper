@@ -6,7 +6,7 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file zypp/media/proxyinfoProxyInfos.h
+/** \file zypp/media/proxyinfo/ProxyInfos.h
  *
 */
 #ifndef ZYPP_MEDIA_PROXYINFO_PROXYINFOS_H

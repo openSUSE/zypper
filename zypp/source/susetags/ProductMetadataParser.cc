@@ -6,7 +6,7 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file	zypp/parser/tagfile/ProductMetadataParser.cc
+/** \file	zypp/source/susetags/ProductMetadataParser.cc
  *
 */
 #include <iostream>

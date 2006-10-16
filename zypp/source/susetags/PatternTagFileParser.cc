@@ -6,7 +6,7 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file	zypp/parser/tagfile/PatternTagFileParser.cc
+/** \file	zypp/parser/source/susetags/PatternTagFileParser.cc
  *
 */
 #include <iostream>

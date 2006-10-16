@@ -6,7 +6,7 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file zypp/parser/xml/XMLPatternParser.h
+/** \file zypp/parser/xmlstore/XMLPatternParser.h
  *
 */
 

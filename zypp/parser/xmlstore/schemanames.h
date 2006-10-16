@@ -6,7 +6,7 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file zypp/parser/xmltore/schemanames.h
+/** \file zypp/parser/xmlstore/schemanames.h
  *
 */
 
