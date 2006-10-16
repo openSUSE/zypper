@@ -6,7 +6,7 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file	zypp/detail/SuseTagsProductImpl.cc
+/** \file	zypp/source/susetags/SuseTagsProductImpl.cc
  *
 */
 #include "zypp/source/susetags/SuseTagsProductImpl.h"

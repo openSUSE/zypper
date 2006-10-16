@@ -6,7 +6,7 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file	devel/devel.dmacvicar/SQLiteBackend.cc
+/** \file	zypp/target/store/serialize.cc
 *
 */
 #include <iostream>

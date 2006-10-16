@@ -6,7 +6,7 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file	zypp/detail/SelectionImpl.cc
+/** \file	zypp/source/susetags/SuseTagsSelectionImpl.cc
  *
 */
 #include "zypp/source/susetags/SuseTagsSelectionImpl.h"

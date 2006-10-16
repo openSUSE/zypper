@@ -6,7 +6,7 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file	zypp/detail/XMLSelectionImpl.cc
+/** \file	zypp/target/store/xml/XMLSelectionImpl.cc
  *
 */
 #include "zypp/target/store/xml/XMLSelectionImpl.h"

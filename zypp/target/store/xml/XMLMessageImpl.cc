@@ -6,7 +6,7 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file zypp/detail/XMLMessageImpl.cc
+/** \file zypp/target/store/xml/XMLMessageImpl.cc
  *
 */
 

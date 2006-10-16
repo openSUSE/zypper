@@ -6,7 +6,7 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file	zypp/detail/XMLPatternImpl.cc
+/** \file	zypp/target/store/xml/XMLPatternImpl.cc
  *
 */
 #include "zypp/target/store/xml/XMLPatternImpl.h"

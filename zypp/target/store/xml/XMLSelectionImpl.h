@@ -6,7 +6,7 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file	zypp/detail/XMLSelectionImpl.h
+/** \file	zypp/target/store/xml/XMLSelectionImpl.h
  *
 */
 #ifndef ZYPP_TARGET_XMLSELECTIONIMPL_H

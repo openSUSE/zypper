@@ -6,7 +6,7 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file zypp/target/store/xmlstore/XMLSourceCacheParser.cc
+/** \file zypp/parser/xmlstore/XMLSourceCacheParser.cc
  *
 */
 

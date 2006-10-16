@@ -6,7 +6,7 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file zypp/detail/XMLPatchImpl.h
+/** \file zypp/target/store/xml/XMLPatchImpl.h
  *
 */
 #ifndef ZYPP_STORE_XMLPATCHIMPL_H

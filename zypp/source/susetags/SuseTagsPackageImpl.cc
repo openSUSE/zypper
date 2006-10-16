@@ -6,7 +6,7 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file	zypp/detail/PackageImpl.cc
+/** \file	zypp/source/susetags/SuseTagsPackageImpl.cc
  *
 */
 

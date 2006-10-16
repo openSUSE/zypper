@@ -6,7 +6,7 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file zypp/source/yum/YUMAtomImpl.h
+/** \file zypp/target/store/xml/XMLAtomImpl.h
  *
 */
 #ifndef ZYPP_TARGET_XMLSTORE_ATOMIMPL_H

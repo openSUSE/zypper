@@ -6,7 +6,7 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file zypp/media/Hal.cc
+/** \file zypp/target/hal/HalContext.cc
  *
  *  \brief Hardware abstaction layer library wrapper implementation.
  */

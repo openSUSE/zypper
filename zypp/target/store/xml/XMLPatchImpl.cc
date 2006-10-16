@@ -6,7 +6,7 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file zypp/detail/XMLPatchImpl.cc
+/** \file zypp/target/store/xml/XMLPatchImpl.cc
  *
 */
 #include <iostream>

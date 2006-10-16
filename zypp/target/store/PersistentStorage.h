@@ -6,7 +6,7 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file	devel/devel.dmacvicar/PersistentStorage.h
+/** \file	zypp/target/store/PersistentStorage.h
 *
 */
 #ifndef ZYPP_TARGET_PERSISTENTSTORAGE_H

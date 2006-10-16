@@ -6,7 +6,7 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file zypp/tagret/rpm/RpmCallbacks.h
+/** \file zypp/target/rpm/RpmCallbacks.h
  *
 */
 

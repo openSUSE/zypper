@@ -6,7 +6,7 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file zypp/target/rpm/RPMPackageImpl.cc
+/** \file zypp/target/rpm/RpmPackageImpl.cc
  *
 */
 

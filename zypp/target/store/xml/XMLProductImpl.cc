@@ -6,7 +6,7 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file zypp/detail/XMLProductImpl.cc
+/** \file zypp/target/store/xml/XMLProductImpl.cc
  *
 */
 

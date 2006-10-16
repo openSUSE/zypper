@@ -6,7 +6,7 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file	devel/devel.dmacvicar/Backend.cc
+/** \file	zypp/target/store/Backend.cc
 *
 */
 #include <iostream>

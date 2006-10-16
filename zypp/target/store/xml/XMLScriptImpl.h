@@ -6,7 +6,7 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file zypp/detail/XMLScriptImpl.h
+/** \file zypp/target/store/xml/XMLScriptImpl.h
  *
 */
 #ifndef ZYPP_STORE_XMLSCRIPTIMPL_H

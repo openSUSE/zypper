@@ -6,7 +6,7 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file zypp/detail/XMLScriptImpl.cc
+/** \file zypp/target/store/xml/XMLScriptImpl.cc
  *
 */
 

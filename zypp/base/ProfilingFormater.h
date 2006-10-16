@@ -6,7 +6,7 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file	zypp/base/ProfilingFormatter.h
+/** \file	zypp/base/ProfilingFormater.h
  *
 */
 #ifndef ZYPP_BASE_PROFILINGFORMATER_H

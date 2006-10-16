@@ -6,7 +6,7 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file	devel/devel.dmacvicar/XMLFilesBackend.h
+/** \file	zypp/target/store/XMLFilesBackend.h
 *
 */
 #ifndef DEVEL_DEVEL_DMACVICAR_XMLFILESBACKEND_H

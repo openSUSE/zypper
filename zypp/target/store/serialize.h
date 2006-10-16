@@ -6,7 +6,7 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file	devel/devel.dmacvicar/SQLiteBackend.h
+/** \file	zypp/target/store/serialize.h
 *
 */
 #ifndef DEVEL_DEVEL_DMACVICAR_SERIALIZE_H

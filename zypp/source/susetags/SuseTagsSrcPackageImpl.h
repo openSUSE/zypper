@@ -6,7 +6,7 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file	zypp/source/susetags/SrcPackageImpl.h
+/** \file	zypp/source/susetags/SuseTagsSrcPackageImpl.h
  *
 */
 #ifndef ZYPP_SOURCE_SUSETAGSSRCPackageIMPL_H

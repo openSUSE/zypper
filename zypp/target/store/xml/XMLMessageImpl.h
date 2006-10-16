@@ -6,7 +6,7 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file zypp/detail/XMLMessageImpl.h
+/** \file zypp/target/store/xml/XMLMessageImpl.h
  *
 */
 #ifndef ZYPP_STORE_XMLMESSAGEIMPL_H
