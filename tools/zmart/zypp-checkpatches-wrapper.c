@@ -2,7 +2,7 @@
 
 /* clearenv */
 #include <stdlib.h>
-/* chdir, execl */
+/* chdir, execl, setuid */
 #include <unistd.h>
 /* perror */
 #include <stdio.h>
@@ -24,6 +24,13 @@ int main (void) {
 	return WRAPPER_ERROR;
     }
     /* set minimal environment... done */
+    /* prevent the user from sending signals */
+    if (setuid (0)) {
+	perror ("setuid");
+	fprintf (stderr, "Forgot to chmod this program?\n");
+	return WRAPPER_ERROR;
+    }
+ 
     /* execute the real application */
     execl (app, app, (char *) NULL);
 

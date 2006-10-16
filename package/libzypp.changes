@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Oct 16 13:27:50 CEST 2006 - mvidner@suse.cz
+
+- Prevent the user from sending signals to zypp-checkpatches-wrapper
+  (#211286).
+
+-------------------------------------------------------------------
 Fri Oct 13 16:51:43 CEST 2006 - dmacvicar@suse.de
 
 - implement rename source in sourcemanager
