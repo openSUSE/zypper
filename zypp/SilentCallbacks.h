@@ -26,7 +26,7 @@ namespace zypp
         const Source_Ref /*source*/
 	, unsigned 
 	, Error 
-	, std::string
+	, const std::string&
       ) { return MediaChangeReport::ABORT; }
     };
 

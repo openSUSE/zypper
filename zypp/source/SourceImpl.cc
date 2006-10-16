@@ -91,7 +91,7 @@ namespace zypp
          * Inform about progress
          * Return true on abort
          */
-      virtual bool progress( int percent, Url )
+      virtual bool progress( int percent, const Url& )
       {
         return _report->progress( percent, _resolvable );
       }
@@ -116,7 +116,7 @@ namespace zypp
        * Inform about progress
        * Return true on abort
        */
-      virtual bool progress( int percent, Url url )
+      virtual bool progress( int percent, const Url& url )
       {
         return _report->progress( percent);
       }
