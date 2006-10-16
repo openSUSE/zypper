@@ -53,12 +53,14 @@ void ZyppSearch::doSearch(Table & table) {
 
   setupRegexp();
 
+  // search for specific resolvable type only
   if (_options.kind() != Resolvable::Kind()) {
     for (ResPool::byKind_iterator it = pool.byKindBegin(_options.kind());
         it != pool.byKindEnd(_options.kind()); ++it) {
       if (match(*it)) table << createRow(*it);
     }
   }
+  // search for all resolvables
   else {
     for (ResPool::const_iterator it = pool.begin(); it != pool.end(); ++it) {
       if (match(*it)) table << createRow(*it);
@@ -90,7 +92,8 @@ void ZyppSearch::setupRegexp() {
   string regstr;
 
   if (_qstrings.size() == 0) regstr = ".*";
-  else if (_qstrings.size() == 1) regstr = ".*" + WB + wildcards2regex(_qstrings[0]) + WB + ".*";
+  else if (_qstrings.size() == 1)
+    regstr = ".*" + WB + wildcards2regex(_qstrings[0]) + WB + ".*";
   else {
     vector<string>::const_iterator it = _qstrings.begin();
 
@@ -116,11 +119,16 @@ void ZyppSearch::setupRegexp() {
 
   cerr_vv << "using regex: " << regstr << endl;
 
+  // regex flags
+  unsigned int flags = boost::regex::normal;
+  if (!_options.caseSensitive())
+    flags |= boost::regex_constants::icase;
+
+  // create regex object
   try {
-     _reg.assign(regstr, boost::regex::perl|boost::regex_constants::icase);
+     _reg.assign(regstr, flags);
   }
-  catch (regex_error & e)
-  {
+  catch (regex_error & e) {
     cerr << "ZyppSearch::setupRegexp(): " << regstr
       << " is not a valid regular expression: \""
       << e.what() << "\"" << endl;
@@ -151,9 +159,21 @@ string ZyppSearch::wildcards2regex(const string & str) const {
   return regexed;
 }
 
+/**
+ * Decides whether the pool_item (resolvable) matches the search criteria
+ * encoded in regular expression.
+ */
 bool ZyppSearch::match(const PoolItem & pool_item) {
-  // TODO search in descriptions and summaries
-  return regex_match(pool_item.resolvable()->name(), _reg); 
+  return
+    // match resolvable name
+    regex_match(pool_item.resolvable()->name(), _reg)
+      ||
+    // if required, match also summary and description of the resolvable
+    (_options.searchDescriptions() ?
+      regex_match(pool_item.resolvable()->summary(), _reg) ||
+        regex_match(pool_item.resolvable()->description(), _reg)
+          :
+      false);
 }
 
 TableRow ZyppSearch::createRow(const PoolItem & pool_item) {
