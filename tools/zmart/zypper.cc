@@ -310,6 +310,8 @@ int main(int argc, char **argv)
       {"match-substrings", no_argument, 0, 0},
       {"match-words", no_argument, 0, 0},
       {"type",    required_argument, 0, 't'},
+      {"sort-by-name", no_argument, 0, 0},
+      {"sort-by-catalog", no_argument, 0, 0},
       {"help", no_argument, 0, 0},
     };
     specific_options = search_options;
@@ -325,7 +327,9 @@ int main(int argc, char **argv)
       "    --match-words        Matches for search strings may only be whole words\n"
       "-i, --installed-only     Show only packages that are already installed.\n"
       "-u, --uninstalled-only   Show only packages that are not curenly installed.\n"
-      "-t, --type               Search only for resolvables of specified type.\n"
+      "-t, --type               Search only for packages of specified type.\n"
+      "    --sort-by-name       Sort packages by name (default).\n"
+      "    --sort-by-catalog    Sort packages by catalog.\n" // ??? catalog/source?
       ;
   }
   else {
@@ -639,6 +643,7 @@ int main(int argc, char **argv)
     if (copts.count("match-words")) {
       options.setMatchWords();
     }
+    
 
     if (copts.count("type")) {
       string skind = copts["type"].front();
@@ -650,12 +655,23 @@ int main(int argc, char **argv)
       options.setKind(kind);
     }
 
+    Table t;
+    t.style(Ascii);
+
+    TableHeader header;
+    header << "S" << "Catalog" << "Bundle" << "Name" << "Version" << "Arch";
+    t << header; 
+
     ZyppSearch search(options,arguments);
-    Table const &t = search.doSearch();
+    search.doSearch(t);
+
     if (t.empty())
       cout << "No packages found." << endl;
-    else
+    else {
+      if (copts.count("sort-by-catalog")) t.sort(1);
+      else t.sort(3); // sort by name
       cout << t;
+    }
   }
 
   // TODO: rug status
