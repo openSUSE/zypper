@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Mon Oct 16 15:02:00 CEST 2006 - jkupec@suse.cz
+
+- zypper: added case-sensitive search, search in descriptions and
+  summaries, search by resolvable type, substring and word
+  matching, support for wildcards
+
+-------------------------------------------------------------------
 Mon Oct 16 13:27:50 CEST 2006 - mvidner@suse.cz
 
 - Prevent the user from sending signals to zypp-checkpatches-wrapper
