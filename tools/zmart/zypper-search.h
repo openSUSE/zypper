@@ -27,11 +27,14 @@ public:
     _match_words(false), _kind(zypp::Resolvable::Kind())
     {}
 
+  void resolveConflicts();
+
   bool installedOnly() const { return _installed_only; }
   bool uninstalledOnly() const { return _uninstalled_only; }
   bool matchAll() const { return _match_all; }
   bool matchAny() const { return !_match_all; }
   bool matchWords() const { return _match_words; }
+  bool matchExact() const { return _match_exact; }
   bool searchDescriptions() const { return _search_descriptions; }
   bool caseSensitive() const { return _case_sensitive; }
   zypp::Resolvable::Kind kind() const { return _kind; }
@@ -45,6 +48,7 @@ public:
   void setMatchAll(const bool match_all = true) { _match_all = match_all; }
   void setMatchAny(const bool match_any = true) { _match_all = !match_any; }
   void setMatchWords(const bool match_words = true) { _match_words = match_words; }
+  void setMatchExact(const bool match_exact = true) { _match_exact = match_exact; }
   void setSearchDescriptions(const bool search_descriptions = true) { _search_descriptions = search_descriptions; }
   void setCaseSensitive(const bool case_sensitive = true) { _case_sensitive = case_sensitive; }
   void setKind(const zypp::Resolvable::Kind & kind) { _kind = kind; }
@@ -54,6 +58,7 @@ private:
   bool _uninstalled_only;
   bool _match_all;
   bool _match_words;
+  bool _match_exact;
   bool _search_descriptions;
   bool _case_sensitive;
   zypp::Resolvable::Kind _kind;

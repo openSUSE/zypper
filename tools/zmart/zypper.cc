@@ -309,6 +309,7 @@ int main(int argc, char **argv)
       {"match-any", no_argument, 0, 0},
       {"match-substrings", no_argument, 0, 0},
       {"match-words", no_argument, 0, 0},
+      {"match-exact", no_argument, 0, 0},
       {"search-descriptions", no_argument, 0, 'd'},
       {"case-sensitive", no_argument, 0, 'c'},
       {"type",    required_argument, 0, 't'},
@@ -327,6 +328,7 @@ int main(int argc, char **argv)
       "    --match-any            Search for a match to any of the search strings\n"
       "    --match-substrings     Matches for search strings may be partial words (default)\n"
       "    --match-words          Matches for search strings may only be whole words\n"
+      "    --match-exact          Searches for an exact package name\n"
       "-d, --search-descriptions  Search also in package summaries and descriptions.\n"
       "-c, --case-sensitive       Perform case-sensitive search.\n"
       "-i, --installed-only       Show only packages that are already installed.\n"
@@ -334,6 +336,8 @@ int main(int argc, char **argv)
       "-t, --type                 Search only for packages of specified type.\n"
       "    --sort-by-name         Sort packages by name (default).\n"
       "    --sort-by-catalog      Sort packages by catalog.\n" // ??? catalog/source?
+      "\n"
+      "* and ? wildcards can also be used within search strings.\n"
       ;
   }
   else {
@@ -651,6 +655,7 @@ int main(int argc, char **argv)
     if (copts.count("installed-only")) options.setInstalledOnly();
     if (copts.count("match-any")) options.setMatchAny();
     if (copts.count("match-words")) options.setMatchWords();
+    if (copts.count("match-exact")) options.setMatchExact();
     if (copts.count("search-descriptions")) options.setSearchDescriptions();
     if (copts.count("case-sensitive")) options.setCaseSensitive();
 
@@ -663,6 +668,8 @@ int main(int argc, char **argv)
       }
       options.setKind(kind);
     }
+    
+    options.resolveConflicts();
 
     Table t;
     t.style(Ascii);

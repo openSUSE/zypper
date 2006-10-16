@@ -12,6 +12,17 @@ using namespace boost;
 extern RuntimeData gData;
 extern Settings gSettings;
 
+void ZyppSearchOptions::resolveConflicts() {
+  if (matchExact()) {
+    // --match-all does not make sense here
+    setMatchAny();
+    // the same goes for search in descriptions
+    setSearchDescriptions(false);
+  }
+
+  // ??? should we notify user about conflict resolutions?
+}
+
 ZyppSearch::ZyppSearch (const ZyppSearchOptions & options, const vector<string> & qstrings) :
     _options(options), _qstrings(qstrings) {
   init();
@@ -51,17 +62,28 @@ bool ZyppSearch::init () const {
 void ZyppSearch::doSearch(Table & table) {
   ResPool pool = getZYpp()->pool();
 
-  setupRegexp();
-
   // search for specific resolvable type only
   if (_options.kind() != Resolvable::Kind()) {
+    setupRegexp();
     for (ResPool::byKind_iterator it = pool.byKindBegin(_options.kind());
         it != pool.byKindEnd(_options.kind()); ++it) {
       if (match(*it)) table << createRow(*it);
     }
   }
-  // search for all resolvables
+  // search for exact package using byName_iterator
+  // usable only if there is only one query string and if this string
+  // doesn't contain wildcards
+  if (_options.matchExact() && _qstrings.size() == 1 &&
+      _qstrings[0].find('*') == string::npos &&
+      _qstrings[0].find('?') == string::npos) {
+    for (ResPool::byName_iterator it = pool.byNameBegin(_qstrings[0]);
+        it != pool.byNameEnd(_qstrings[0]); ++it) {
+      table << createRow(*it);
+    }
+  }
+  // search among all resolvables
   else {
+    setupRegexp();
     for (ResPool::const_iterator it = pool.begin(); it != pool.end(); ++it) {
       if (match(*it)) table << createRow(*it);
     }
@@ -92,15 +114,21 @@ void ZyppSearch::setupRegexp() {
   string regstr;
 
   if (_qstrings.size() == 0) regstr = ".*";
-  else if (_qstrings.size() == 1)
-    regstr = ".*" + WB + wildcards2regex(_qstrings[0]) + WB + ".*";
+  else if (_qstrings.size() == 1) {
+    if (_options.matchExact())
+      regstr = wildcards2regex(_qstrings[0]);
+    else
+      regstr = ".*" + WB + wildcards2regex(_qstrings[0]) + WB + ".*";
+  }
   else {
     vector<string>::const_iterator it = _qstrings.begin();
 
     if (_options.matchAll())
       regstr = "(?=.*" + WB + wildcards2regex(*it) + WB + ")";
-    else
-      regstr = ".*" + WB + "(" + wildcards2regex(*it);
+    else {
+      if (!_options.matchExact()) regstr = ".*";
+      regstr += WB + "(" + wildcards2regex(*it);
+    }
 
     ++it;
 
@@ -113,8 +141,10 @@ void ZyppSearch::setupRegexp() {
 
     if (_options.matchAll())
       regstr += ".*";
-    else
-      regstr += ")" + WB + ".*";
+    else {
+      regstr += ")" + WB;
+      if (!_options.matchExact()) regstr += ".*";
+    }
   }
 
   cerr_vv << "using regex: " << regstr << endl;
