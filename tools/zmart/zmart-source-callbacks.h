@@ -206,7 +206,7 @@ struct SourceReportReceiver  : public zypp::callback::ReceiveReport<zypp::source
   virtual Action problem( zypp::Source_Ref source, Error error, const std::string &description )
   { return ABORT; }
 
-  virtual void finish( zypp::Source_Ref source, Error error, const std::string &reason )
+  virtual void finish( zypp::Source_Ref source, const std::string &task, Error error, const std::string &reason )
   {
     if ( error == SourceReportReceiver::NO_ERROR )
       display_step(100);
