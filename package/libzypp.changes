@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Mon Oct 16 18:05:56 CEST 2006 - mvidner@suse.cz
+
+- zypper service-add -r ./foo.repo (F#300641).
+
+-------------------------------------------------------------------
 Mon Oct 16 15:02:00 CEST 2006 - jkupec@suse.cz
 
 - zypper: added case-sensitive search, search in descriptions and

@@ -3,10 +3,12 @@
 #include "zmart-sources.h"
 #include "zypper-tabulator.h"
 
+#include <fstream>
 #include <boost/format.hpp>
 #include <boost/lexical_cast.hpp>
 
 #include <zypp/target/store/PersistentStorage.h>
+#include <zypp/base/IOStream.h>
 
 
 using namespace zypp::detail;
@@ -134,6 +136,49 @@ void list_system_sources()
   }
   
   print_source_list_rug_style(sources);
+}
+
+bool parse_repo_file (const string& file, string& url, string& alias)
+{
+  static const boost::regex
+    r_alias ("^\\[(.*)\\]$"),
+    r_type ("^type=(.*)"),
+    r_url ("^baseurl=(.*)");
+  boost::smatch match;
+
+  std::ifstream repo(file.c_str());
+  bool have_alias = false, have_url = false;
+  while (repo.good ()) {
+    string line = zypp::iostr::getline (repo);
+
+    if (regex_search (line, match, r_alias)) {
+      alias = match[1];
+      have_alias = true;
+    }
+    else if (regex_search (line, match, r_type)) {
+      string type = match[1];
+      if (type != "rpm-md" && type != "yast2") {
+	cerr << "Unknown repository type " << type << endl;
+	return false;
+      }
+    }
+    else if (regex_search (line, match, r_url)) {
+      url = match[1];
+      have_url = true;
+    }
+  }
+  repo.close ();
+
+  if (!have_alias) {
+    cerr << "Name not found" << endl;
+  }  
+  if (!have_url) {
+    cerr << "baseurl not found" << endl;
+  }  
+  cerr_vv << "Name: " << alias << endl;
+  cerr_vv << "URL: " << url << endl;
+
+  return have_alias && have_url;
 }
 
 static
@@ -354,3 +399,6 @@ void rename_source( const std::string& anystring, const std::string& newalias )
   cerr_vv << "Storing source data" << endl;
   manager->store( "/", true /*metadata_cache*/ );
 }
+// Local Variables:
+// c-basic-offset: 2
+// End:

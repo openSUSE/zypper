@@ -237,7 +237,7 @@ int main(int argc, char **argv)
       "\tservice-rename, sr\tRename a service\n"
       "\tpatch-check, pchk\tCheck for patches\n"
       "\tpatches, pch\t\tList patches\n"
-      "\tlist-updates, lu\t\tList updates\n"
+      "\tlist-updates, lu\tList updates\n"
       ;
 
   string help_global_source_options = "  Source options:\n"
@@ -275,11 +275,12 @@ int main(int argc, char **argv)
     static struct option service_add_options[] = {
       {"disabled", no_argument, 0, 'd'},
       {"no-refresh", no_argument, 0, 'n'},
+      {"repo", required_argument, 0, 'r'},
       {0, 0, 0, 0}
     };
     specific_options = service_add_options;
     specific_help = "  Command options:\n"
-      "\t--disabled\t\tAdd the service as disabled\n"
+      "\t--repo,-r <FILE.repo>\tRead the URL and alias from a file\n"
       ;
   }
   else if (command == "service-list" || command == "sl") {
@@ -449,18 +450,28 @@ int main(int argc, char **argv)
       cerr_v << "FAKE No Refresh" << endl;
     }
 
-    if (help || arguments.size() < 1) {
+    string repoalias, repourl;
+    if (copts.count("repo")) {
+      parse_repo_file (copts["repo"].front(), repourl, repoalias);
+    }
+
+    if (help || (arguments.size() < 1 && repoalias.empty ())) {
       cerr << "service-add [options] URI [alias]\n"
 	""
 	   << specific_help
 	;
       return !help;
     }
-      
-    Url url = make_url (arguments[0]);
+
+    if (repourl.empty())
+      repourl = arguments[0];
+
+    Url url = make_url (repourl);
     if (!url.isValid())
       return 1;
-    string alias = url.asString();
+    string alias = repoalias;
+    if (alias.empty ())
+      alias = url.asString();
     if (arguments.size() > 1)
       alias = arguments[1];
 
