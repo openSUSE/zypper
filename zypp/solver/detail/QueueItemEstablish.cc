@@ -235,8 +235,7 @@ QueueItemEstablish::process (ResolverContext_Ptr context, QueueItemList & qil)
 	    // If the item stays installed, blame the user
 	    if ((_item->kind() == ResTraits<Patch>::kind	// bug 198379, set incomplete for all patches, installed or uninstalled
 		 || _item->kind() == ResTraits<Atom>::kind)	// Bug 190272,  - same for atoms
-		|| status.staysInstalled()
-		|| context->establishing())
+		|| status.staysInstalled())
 	    {
 		_XDEBUG("Atom/Patch/Installed/Establishing " << _item << " has unfulfilled requirement " << *iter << " -> incomplete");
 		context->incomplete( _item, _other_penalty );
