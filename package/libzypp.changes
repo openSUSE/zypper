@@ -4,8 +4,7 @@ Mon Oct 16 15:02:00 CEST 2006 - jkupec@suse.cz
 - zypper: added case-sensitive search, search in descriptions and
   summaries, search by resolvable type, substring and word
   matching, support for wildcards
-
-Revision 4303
+- Revision 4303
 
 -------------------------------------------------------------------
 Mon Oct 16 12:57:56 CEST 2006 - schubi@suse.de
@@ -26,7 +25,6 @@ Mon Oct 16 13:27:50 CEST 2006 - mvidner@suse.cz
   (#211286).
 
 -------------------------------------------------------------------
->>>>>>> .r4303
 Fri Oct 13 16:51:43 CEST 2006 - dmacvicar@suse.de
 
 - implement rename source in sourcemanager
