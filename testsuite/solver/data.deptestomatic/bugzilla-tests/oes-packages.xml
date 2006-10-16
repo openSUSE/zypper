@@ -1395,6 +1395,9 @@
       <arch>i586</arch>
     </update>
   </history>
+  <enhances>
+    <dep name='kernel-bigsmp' />
+  </enhances>
   <requires>
     <dep name='/bin/sh' pre='1' />
     <dep name='/bin/sh' pre='1' />
@@ -1666,6 +1669,9 @@
       <arch>i586</arch>
     </update>
   </history>
+  <enhances>
+    <dep name='kernel-debug' />
+  </enhances>
   <requires>
     <dep name='/bin/sh' pre='1' />
     <dep name='/bin/sh' pre='1' />
@@ -1937,6 +1943,9 @@
       <arch>i586</arch>
     </update>
   </history>
+  <enhances>
+    <dep name='kernel-default' />
+  </enhances>
   <requires>
     <dep name='/bin/sh' pre='1' />
     <dep name='/bin/sh' pre='1' />
@@ -2208,6 +2217,9 @@
       <arch>i586</arch>
     </update>
   </history>
+  <enhances>
+    <dep name='kernel-smp' />
+  </enhances>
   <requires>
     <dep name='/bin/sh' pre='1' />
     <dep name='/bin/sh' pre='1' />
