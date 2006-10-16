@@ -130,6 +130,11 @@ Mon Sep 25 13:52:55 CEST 2006 - mvidner@suse.cz
 - fix: Url::getRegisteredSchemes() would always return nothing
 
 -------------------------------------------------------------------
+Fri Sep 22 15:34:11 CEST 2006 - jkupec@suse.cz
+
+- Made the build dependency on gettext-devel explicit
+
+-------------------------------------------------------------------
 Tue Sep 19 10:59:24 CEST 2006 - jsrain@suse.cz
 
 - adapted multi-media YUM sources according to official YUM
