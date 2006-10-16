@@ -471,12 +471,15 @@ QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_item
 	//   prefer providers which enhance an installed or to-be-installed resolvables
 
 	if (num_providers > 1) {					// prefer to-be-installed providers
-#if 0 // see also line 599
+#if 1 // see also line 618
 	    // if there are exactly two providers which differ in architecture
 	    // prefer the better arch
 	    // this will reduce the number of branches for X-32bit.x86_64 vs. X.i586 dramatically
 	    //
-	    // left commented out as advised by mls@suse.de, might be problematic on non-x86 archs
+	    // - left commented out as advised by mls@suse.de, might be problematic on non-x86 archs
+	    // - Due the new behaviour of the solver this code will be executed.
+	    //   New: If there is no solution for the "best-architecture" way the solver tries
+	    //        the other branches too.
 
 	    if (num_providers == 2) {
 		PoolItemList::iterator it = info.providers.begin();
@@ -612,7 +615,7 @@ QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_item
 	    num_providers = info.providers.size();
 
 	} // num_providers > 1
-#if 0 // see also line 458
+#if 1 // see also line 474
 provider_done:;
 #endif
     } // !_remove_only
