@@ -2,6 +2,8 @@
 <!--
    New 10.1 install, all updates,
    last update has kernel-message conflict
+
+   XXXXXXXX this testcase does only run with ZYPP_KEYRING_DEFAULT_ACCEPT_ALL=1 XXXXX
 -->
 <test>
 <setup arch="x86_64">

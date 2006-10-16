@@ -1,2 +1,4 @@
 #have fix repo on machcd2
 bug186196-test.xml
+#does only run with ZYPP_KEYRING_DEFAULT_ACCEPT_ALL=1
+bug206927-test.xml
