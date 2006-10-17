@@ -281,6 +281,7 @@ int main(int argc, char **argv)
     specific_options = service_add_options;
     specific_help = "  Command options:\n"
       "\t--repo,-r <FILE.repo>\tRead the URL and alias from a file\n"
+      "\t\t\t\t(even remote)\n"
       ;
   }
   else if (command == "service-list" || command == "sl") {
@@ -452,7 +453,12 @@ int main(int argc, char **argv)
 
     string repoalias, repourl;
     if (copts.count("repo")) {
-      parse_repo_file (copts["repo"].front(), repourl, repoalias);
+      string filename = copts["repo"].front();
+      // it may be an URL; cache the file while MediaWrapper exists
+      MediaWrapper download (filename);
+      filename = download.localPath ();
+      cerr_vv << "Got: " << filename << endl;
+      parse_repo_file (filename, repourl, repoalias);
     }
 
     if (help || (arguments.size() < 1 && repoalias.empty ())) {

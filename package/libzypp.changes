@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Tue Oct 17 19:17:39 CEST 2006 - mvidner@suse.cz
+
+- zypper service-add -r http://example.org/foo.repo (F#300641).
+
+-------------------------------------------------------------------
 Tue Oct 17 18:29:34 CEST 2006 - dmacvicar@suse.de
 
 - zypp-checkpatches:

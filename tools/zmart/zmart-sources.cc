@@ -257,6 +257,24 @@ void safe_lexical_cast (Source s, Target &tr) {
   }
 }
 
+static
+bool looks_like_url (const string& s) {
+  static bool schemes_shown = false;
+  if (!schemes_shown) {
+    cerr_vv << "Registered schemes: " << Url::getRegisteredSchemes () << endl;
+    schemes_shown = true;
+  }
+
+  string::size_type pos = s.find (':');
+  if (pos != string::npos) {
+    string scheme (s, 0, pos);
+    if (Url::isRegisteredScheme (scheme)) {
+      return true;
+    }
+  }
+  return false;
+}
+
 //! remove a source, identified in any way: alias, url, id
 // may throw:
 void remove_source( const std::string& anystring )
@@ -282,12 +300,7 @@ void remove_source( const std::string& anystring )
   }
   else {
     bool is_url = false;
-    // could it be a URL?
-    cerr_vv << "Registered schemes: " << Url::getRegisteredSchemes () << endl;
-    string::size_type pos = anystring.find (':');
-    if (pos != string::npos) {
-      string scheme (anystring, 0, pos);
-      if (Url::isRegisteredScheme (scheme)) {
+    if (looks_like_url (anystring)) {
 	is_url = true;
 	cerr_vv << "Looks like a URL" << endl;
 
@@ -309,7 +322,6 @@ void remove_source( const std::string& anystring )
 	  }
 	  manager->removeSourceByUrl (url);
 	}
-      }
     }
 
     if (!is_url) {
@@ -352,12 +364,7 @@ void rename_source( const std::string& anystring, const std::string& newalias )
   }
   else {
     bool is_url = false;
-    // could it be a URL?
-    cerr_vv << "Registered schemes: " << Url::getRegisteredSchemes () << endl;
-    string::size_type pos = anystring.find (':');
-    if (pos != string::npos) {
-      string scheme (anystring, 0, pos);
-      if (Url::isRegisteredScheme (scheme)) {
+    if (looks_like_url (anystring)) {
 	is_url = true;
 	cerr_vv << "Looks like a URL" << endl;
 
@@ -378,7 +385,6 @@ void rename_source( const std::string& anystring, const std::string& newalias )
 	    cerr << format ("Source %s not found.") % url.asString() << endl;
 	  }
 	}
-      }
     }
 
     if (!is_url) {
@@ -399,6 +405,37 @@ void rename_source( const std::string& anystring, const std::string& newalias )
   cerr_vv << "Storing source data" << endl;
   manager->store( "/", true /*metadata_cache*/ );
 }
+
+MediaWrapper::MediaWrapper (const string& filename_or_url) {
+  try {
+    // the interface cannot provide a "complete path" :-(
+    Url url (filename_or_url);
+    Pathname path (url.getPathName ());
+    url.setPathName ("/");
+
+    _id = _mm.open (url);
+    _mm.attach (_id);
+
+    _mm.provideFile (_id, path);
+    Pathname local = _mm.localPath (_id, path);
+    _local_path = local.asString ();
+  }
+  catch (const Exception & ex) {
+    ZYPP_CAUGHT (ex);
+    if (looks_like_url (filename_or_url)) {
+    cerr << "Error while fetching " << filename_or_url << " : "
+	 << ex << endl;
+//      ex.dumpOn (cerr);		// this suxxz
+    }
+    _local_path = filename_or_url;
+  }
+}
+
+MediaWrapper::~MediaWrapper () {
+  if (_mm.isOpen (_id))
+    _mm.close (_id);
+}
+
 // Local Variables:
 // c-basic-offset: 2
 // End:
