@@ -27,64 +27,64 @@
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////
-namespace source
-{ /////////////////////////////////////////////////////////////////
+  namespace source
+  { /////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////
-namespace susetags
-{ /////////////////////////////////////////////////////////////////
+    namespace susetags
+    { /////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////////////
 //
 //	CLASS NAME : ProductMetadataParser
 //
-/** Tagfile parser. */
-struct ProductMetadataParser
-{
-  Product::Ptr result;
-  detail::ResImplTraits<SuseTagsProductImpl>::Ptr prodImpl;
-  ProductMetadataParser();
-  virtual ~ProductMetadataParser()
-  {}
+      /** Tagfile parser. */
+      struct ProductMetadataParser
+      {
+        Product::Ptr result;
+        detail::ResImplTraits<SuseTagsProductImpl>::Ptr prodImpl;
+        ProductMetadataParser();
+        virtual ~ProductMetadataParser()
+        {}
 
-  /* Parse file and invoke consume on each tag found.
-   * \throw ParseException
-   * \todo more doc on Ecaptions.
-  */
-  void parse( const Pathname & file_r, Source_Ref source_r);
-  /* Parse a key.modifier (std::list of std::strings)
-   * That means, translatable tag with multiple values
-   * the default modifier will get the modifier of default (LABEL.de, LABEL as LANGUAGE.default)
-  */
-  void parseLine( const std::string &key, const std::string &modif, const std::string &value, std::map< std::string, std::list<std::string> > &container);
+        /* Parse file and invoke consume on each tag found.
+         * \throw ParseException
+         * \todo more doc on Ecaptions.
+        */
+        void parse( const Pathname & file_r, Source_Ref source_r);
+        /* Parse a key.modifier (std::list of std::strings)
+         * That means, translatable tag with multiple values
+         * the default modifier will get the modifier of default (LABEL.de, LABEL as LANGUAGE.default)
+        */
+        void parseLine( const std::string &key, const std::string &modif, const std::string &value, std::map< std::string, std::list<std::string> > &container);
 
-  void parseLine( const std::string &key, const std::string &lang, const std::string &value, TranslatedText &container);
-  /*
-   * same as above, but the value is a single std::string, this means, translatable tags, with only 1 value
-  */
-  void parseLine( const std::string &key,const std::string &modif, const std::string &value, std::map< std::string, std::string > &container);
-  /*
-   * Non translatable tag with multiple values
-   */
-  void parseLine( const std::string &key, const std::string &value, std::list<std::string> &container);
-  /*
-   * Dependency (REQUIRES, PROVIDES, CONFLICTS, ...) capabilites  line
-   */
-  void parseDependencies( const std::string &key, const std::string &value, zypp::Dependencies & deps, zypp::Dep deptag );
-  /*
-   */
-  void parseFileCheckSum( const std::string &key, const std::string &value, std::map<std::string, CheckSum> &container);
+        void parseLine( const std::string &key, const std::string &lang, const std::string &value, TranslatedText &container);
+        /*
+         * same as above, but the value is a single std::string, this means, translatable tags, with only 1 value
+        */
+        void parseLine( const std::string &key,const std::string &modif, const std::string &value, std::map< std::string, std::string > &container);
+        /*
+         * Non translatable tag with multiple values
+         */
+        void parseLine( const std::string &key, const std::string &value, std::list<std::string> &container);
+        /*
+         * Dependency (REQUIRES, PROVIDES, CONFLICTS, ...) capabilites  line
+         */
+        void parseDependencies( const std::string &key, const std::string &value, zypp::Dependencies & deps, zypp::Dep deptag );
+        /*
+         */
+        void parseFileCheckSum( const std::string &key, const std::string &value, std::map<std::string, CheckSum> &container);
 
 
-  bool volatile_content;
+        bool volatile_content;
 
-};
+      };
 ///////////////////////////////////////////////////////////////////
 
 /////////////////////////////////////////////////////////////////
-} // namespace tagfile
+    } // namespace tagfile
 ///////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////
-} // namespace parser
+  } // namespace parser
 ///////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////
 } // namespace zypp

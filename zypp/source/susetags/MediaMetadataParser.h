@@ -38,7 +38,8 @@ namespace zypp
       /** Tagfile parser. */
       struct MediaMetadataParser
       {
-        struct MediaEntry {
+        struct MediaEntry
+        {
           std::string vendor;
           std::string timestamp;
           unsigned int count;
@@ -49,7 +50,7 @@ namespace zypp
         };
 
         virtual ~MediaMetadataParser()
-        {}
+      {}
 
         /* Parse file and invoke consume on each tag found.
          * \throw ParseException
@@ -59,7 +60,7 @@ namespace zypp
         /* Parse a key.modifier (std::list of std::strings)
          * That means, translatable tag with multiple values
          * the default modifier will get the modifier of default (LABEL.de, LABEL as LANGUAGE.default)
-         */ 
+         */
       };
       ///////////////////////////////////////////////////////////////////
 

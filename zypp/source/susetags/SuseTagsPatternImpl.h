@@ -21,48 +21,48 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
   namespace source
   { /////////////////////////////////////////////////////////////////
-  namespace susetags
-  {
-
-    ///////////////////////////////////////////////////////////////////
-    //
-    //	CLASS NAME : PatternImpl
-    //
-    /**
-    */
-    struct SuseTagsPatternImpl : public zypp::detail::PatternImplIf
+    namespace susetags
     {
-    public:
-      SuseTagsPatternImpl();
-      virtual ~SuseTagsPatternImpl();
 
-      virtual TranslatedText summary() const;
-      virtual TranslatedText description() const;
-      virtual TranslatedText category() const;
-      virtual bool userVisible() const;
-      virtual Label order() const;
-      virtual Pathname icon() const;
-      virtual Source_Ref source() const;
-      virtual const CapSet & includes() const;
-      virtual const CapSet & extends() const;
+      ///////////////////////////////////////////////////////////////////
+      //
+      //	CLASS NAME : PatternImpl
+      //
+      /**
+      */
+      struct SuseTagsPatternImpl : public zypp::detail::PatternImplIf
+      {
+public:
+        SuseTagsPatternImpl();
+        virtual ~SuseTagsPatternImpl();
 
-      TranslatedText _summary;
-      TranslatedText _description;
-      TranslatedText _category;
-      bool           _visible;
-      std::string    _order;
-      Pathname       _icon;
+        virtual TranslatedText summary() const;
+        virtual TranslatedText description() const;
+        virtual TranslatedText category() const;
+        virtual bool userVisible() const;
+        virtual Label order() const;
+        virtual Pathname icon() const;
+        virtual Source_Ref source() const;
+        virtual const CapSet & includes() const;
+        virtual const CapSet & extends() const;
 
-      CapSet         _includes;
-      CapSet         _extends;
+        TranslatedText _summary;
+        TranslatedText _description;
+        TranslatedText _category;
+        bool           _visible;
+        std::string    _order;
+        Pathname       _icon;
 
-      Source_Ref _source;
-    };
+        CapSet         _includes;
+        CapSet         _extends;
+
+        Source_Ref _source;
+      };
+      ///////////////////////////////////////////////////////////////////
+
+      /////////////////////////////////////////////////////////////////
+    } // namespace susetags
     ///////////////////////////////////////////////////////////////////
-
-    /////////////////////////////////////////////////////////////////
-  } // namespace susetags
-  ///////////////////////////////////////////////////////////////////
   } // namespace source
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

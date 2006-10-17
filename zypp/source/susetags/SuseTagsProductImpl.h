@@ -26,65 +26,65 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
   namespace source
   { /////////////////////////////////////////////////////////////////
-  namespace susetags
-  {
-
-    ///////////////////////////////////////////////////////////////////
-    //
-    //	CLASS NAME : ProductImpl
-    //
-    /**
-    */
-    struct SuseTagsProductImpl : public zypp::detail::ProductImplIf
+    namespace susetags
     {
-    public:
-      SuseTagsProductImpl();
-      virtual ~SuseTagsProductImpl();
 
-      virtual std::string category() const;
-      virtual Label vendor() const;
-      virtual TranslatedText summary() const;
-      virtual Source_Ref source() const;
-      virtual Url releaseNotesUrl() const;
-      virtual std::list<Url> updateUrls() const;
-      virtual std::list<std::string> flags() const;
-      virtual TranslatedText shortName() const;
+      ///////////////////////////////////////////////////////////////////
+      //
+      //	CLASS NAME : ProductImpl
+      //
+      /**
+      */
+      struct SuseTagsProductImpl : public zypp::detail::ProductImplIf
+      {
+public:
+        SuseTagsProductImpl();
+        virtual ~SuseTagsProductImpl();
 
-      std::string _category;
+        virtual std::string category() const;
+        virtual Label vendor() const;
+        virtual TranslatedText summary() const;
+        virtual Source_Ref source() const;
+        virtual Url releaseNotesUrl() const;
+        virtual std::list<Url> updateUrls() const;
+        virtual std::list<std::string> flags() const;
+        virtual TranslatedText shortName() const;
 
-      std::string _name;
-      std::string _version;
-      std::string _dist;
-      std::string _dist_version;
-      std::string _base_product;
-      std::string _base_version;
-      std::string _you_type;
-      std::string _shortlabel;
-      std::string _vendor;
-      Url _release_notes_url;
-      std::list<Url> _update_urls;
-      std::map< std::string, std::list<std::string> > _arch;	// map of 'arch : "arch1 arch2 arch3"', arch1 being 'best', arch3 being 'noarch' (ususally)
-      std::string _default_base;
-      Dependencies _deps;
-      std::list<std::string> _languages;
-      TranslatedText _summary;
-      std::string _description_dir;
-      std::string _data_dir;
-      std::list<std::string> _flags;
-      std::string _language;
-      std::string _timezone;
-      
-      std::map<std::string, CheckSum> _descr_files_checksums;
-      std::map<std::string, CheckSum> _signing_keys;
-      
-      Source_Ref _source;
-     
-    };
+        std::string _category;
+
+        std::string _name;
+        std::string _version;
+        std::string _dist;
+        std::string _dist_version;
+        std::string _base_product;
+        std::string _base_version;
+        std::string _you_type;
+        std::string _shortlabel;
+        std::string _vendor;
+        Url _release_notes_url;
+        std::list<Url> _update_urls;
+        std::map< std::string, std::list<std::string> > _arch;	// map of 'arch : "arch1 arch2 arch3"', arch1 being 'best', arch3 being 'noarch' (ususally)
+        std::string _default_base;
+        Dependencies _deps;
+        std::list<std::string> _languages;
+        TranslatedText _summary;
+        std::string _description_dir;
+        std::string _data_dir;
+        std::list<std::string> _flags;
+        std::string _language;
+        std::string _timezone;
+
+        std::map<std::string, CheckSum> _descr_files_checksums;
+        std::map<std::string, CheckSum> _signing_keys;
+
+        Source_Ref _source;
+
+      };
+      ///////////////////////////////////////////////////////////////////
+
+      /////////////////////////////////////////////////////////////////
+    } // namespace susetags
     ///////////////////////////////////////////////////////////////////
-
-    /////////////////////////////////////////////////////////////////
-  } // namespace susetags
-  ///////////////////////////////////////////////////////////////////
   } // namespace source
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

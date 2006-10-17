@@ -49,7 +49,7 @@ namespace susetags
 static void replace_variables( std::string &text )
 {
   string::size_type pos = text.find("%a");
-  if(pos != string::npos)
+  if (pos != string::npos)
   {
     Arch sysarch( getZYpp()->architecture() );
     text.replace( pos, 2, sysarch.asString() );

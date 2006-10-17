@@ -37,7 +37,7 @@ namespace zypp
         <directory> <whitespace> <optional comment>
         zero or more lines specifying exclusive products: <productname>-<productversion>
       */
-      
+
       ///////////////////////////////////////////////////////////////////
       //
       //	CLASS NAME : MediaPatchesMetadataParser
@@ -45,7 +45,8 @@ namespace zypp
       /** Tagfile parser. */
       struct MediaPatchesMetadataParser
       {
-        struct MediaPatchesEntry {
+        struct MediaPatchesEntry
+        {
           Pathname dir;
           std::string comment;
           // set of pairs (productname, version)
@@ -53,7 +54,7 @@ namespace zypp
         };
 
         virtual ~MediaPatchesMetadataParser()
-        {}
+      {}
 
         /* Parse file and invoke consume on each tag found.
          * \throw ParseException
@@ -61,7 +62,7 @@ namespace zypp
         */
         void parse( const Pathname & file_r, MediaPatchesEntry &entry_r );
       };
-        ///////////////////////////////////////////////////////////////////
+      ///////////////////////////////////////////////////////////////////
 
       /////////////////////////////////////////////////////////////////
     } // namespace tagfile

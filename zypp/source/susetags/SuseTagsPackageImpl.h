@@ -41,13 +41,13 @@ namespace zypp
 
         /** \name ResObject attributes. */
         //@{
-	virtual TranslatedText summary() const;
-	virtual TranslatedText description() const;
+        virtual TranslatedText summary() const;
+        virtual TranslatedText description() const;
         virtual TranslatedText insnotify() const;
         virtual TranslatedText delnotify() const;
         virtual TranslatedText licenseToConfirm() const;
         virtual Source_Ref source() const;
-	virtual unsigned sourceMediaNr() const;
+        virtual unsigned sourceMediaNr() const;
         //@}
 
         virtual CheckSum checksum() const;
@@ -108,10 +108,10 @@ namespace zypp
         NVRA _data_index;
         NVRA _nvra;
 
-	PackageGroup _group;
+        PackageGroup _group;
         std::list<std::string> _authors;
         std::list<std::string> _keywords;
-	ByteCount _size;
+        ByteCount _size;
         ByteCount _archivesize;
         Label _license;
         Date _buildtime;
@@ -122,13 +122,13 @@ namespace zypp
 
         SuseTagsImpl_Ptr _sourceImpl;
 
-      private:
+private:
         Source_Ref _source;
       };
       ///////////////////////////////////////////////////////////////////
       /////////////////////////////////////////////////////////////////
     } // namespace susetags
-      /////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////
   } // namespace source
   ///////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////

@@ -16,56 +16,72 @@ using namespace std;
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
-  ///////////////////////////////////////////////////////////////////
-  namespace source
-  { /////////////////////////////////////////////////////////////////
-  namespace susetags
-  {
-    ///////////////////////////////////////////////////////////////////
-    //
-    //	METHOD NAME : SuseTagsProductImpl::SuseTagsProductImpl
-    //	METHOD TYPE : Ctor
-    //
-    SuseTagsProductImpl::SuseTagsProductImpl()
-    {}
+///////////////////////////////////////////////////////////////////
+namespace source
+{ /////////////////////////////////////////////////////////////////
+namespace susetags
+{
+///////////////////////////////////////////////////////////////////
+//
+//	METHOD NAME : SuseTagsProductImpl::SuseTagsProductImpl
+//	METHOD TYPE : Ctor
+//
+SuseTagsProductImpl::SuseTagsProductImpl()
+{}
 
-    ///////////////////////////////////////////////////////////////////
-    //
-    //	METHOD NAME : SuseTagsProductImpl::~SuseTagsProductImpl
-    //	METHOD TYPE : Dtor
-    //
-    SuseTagsProductImpl::~SuseTagsProductImpl()
-    {}
+///////////////////////////////////////////////////////////////////
+//
+//	METHOD NAME : SuseTagsProductImpl::~SuseTagsProductImpl
+//	METHOD TYPE : Dtor
+//
+SuseTagsProductImpl::~SuseTagsProductImpl()
+{}
 
 
-    std::string SuseTagsProductImpl::category() const
-    { return _category; }
+std::string SuseTagsProductImpl::category() const
+{
+  return _category;
+}
 
-    Label SuseTagsProductImpl::vendor() const
-    { return _vendor; }
+Label SuseTagsProductImpl::vendor() const
+{
+  return _vendor;
+}
 
-    TranslatedText SuseTagsProductImpl::summary() const
-    { return _summary; }
+TranslatedText SuseTagsProductImpl::summary() const
+{
+  return _summary;
+}
 
-    Source_Ref SuseTagsProductImpl::source() const
-    { return _source; }
-    
-    Url SuseTagsProductImpl::releaseNotesUrl() const
-    { return _release_notes_url; }
+Source_Ref SuseTagsProductImpl::source() const
+{
+  return _source;
+}
 
-    std::list<Url> SuseTagsProductImpl::updateUrls() const
-    { return _update_urls; }
+Url SuseTagsProductImpl::releaseNotesUrl() const
+{
+  return _release_notes_url;
+}
 
-    std::list<std::string> SuseTagsProductImpl::flags() const
-    { return _flags; }
+std::list<Url> SuseTagsProductImpl::updateUrls() const
+{
+  return _update_urls;
+}
 
-    TranslatedText SuseTagsProductImpl::shortName() const
-    { return TranslatedText(_shortlabel); }
+std::list<std::string> SuseTagsProductImpl::flags() const
+{
+  return _flags;
+}
 
-    /////////////////////////////////////////////////////////////////
-  } // namespace detail
-  ///////////////////////////////////////////////////////////////////
-  }
-  /////////////////////////////////////////////////////////////////
+TranslatedText SuseTagsProductImpl::shortName() const
+{
+  return TranslatedText(_shortlabel);
+}
+
+/////////////////////////////////////////////////////////////////
+} // namespace detail
+///////////////////////////////////////////////////////////////////
+}
+/////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////

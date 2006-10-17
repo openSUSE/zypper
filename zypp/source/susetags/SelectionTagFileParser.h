@@ -45,7 +45,7 @@ namespace zypp
       {
         Selection::Ptr result;
         detail::ResImplTraits<SuseTagsSelectionImpl>::Ptr selImpl;
-            
+
         SelectionTagFileParser( parser::ParserProgress::Ptr progress );
         virtual ~SelectionTagFileParser()
         {}
@@ -54,8 +54,8 @@ namespace zypp
         void consume( const MultiTag &tag );
         void endParse();
 
-	private:
-	    ZYpp::LocaleSet _locales;
+private:
+        ZYpp::LocaleSet _locales;
       };
       ///////////////////////////////////////////////////////////////////
       Selection::Ptr parseSelection(  parser::ParserProgress::Ptr progress, Source_Ref source_r, const Pathname & file_r );

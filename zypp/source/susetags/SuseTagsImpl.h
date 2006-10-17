@@ -40,21 +40,20 @@ namespace zypp
        */
       class SuseTagsProber : public SourceProber
       {
-        public:
-          SuseTagsProber( media::MediaAccessId media_id, const Pathname &path ) : SourceProber( media_id, path )
-          {}
+      public:
+        SuseTagsProber( media::MediaAccessId media_id, const Pathname &path ) : SourceProber( media_id, path )
+        {}
 
-          virtual ~SuseTagsProber()
-          {}
+        virtual ~SuseTagsProber()
+        {}
 
-          virtual bool operator()();
+        virtual bool operator()();
       };
 
       struct SuseTagsPackageImplData
       {
         SuseTagsPackageImplData()
-        {
-        }
+        {}
 
         TranslatedText _summary;
         TranslatedText _description;
@@ -87,14 +86,18 @@ namespace zypp
 
       public:
         virtual std::string type(void) const
-        { return typeString(); }
+        {
+          return typeString();
+        }
 
         /** Text used for identifying the type of the source.
          * Used by the \ref SourceFactory when creating a
          * source of a given type only.
          */
-	static std::string typeString(void)
-	{ return "YaST"; }
+        static std::string typeString(void)
+        {
+          return "YaST";
+        }
         virtual Date timestamp() const;
         virtual unsigned numberOfMedia(void) const;
         virtual std::string vendor (void) const;
@@ -122,7 +125,7 @@ namespace zypp
         virtual void factoryInit();
         virtual void createResolvables(Source_Ref source_r);
 
-	/** Provide only resolvables of a certain kind. */
+        /** Provide only resolvables of a certain kind. */
         virtual ResStore createResolvablesByKind(Source_Ref source_r, zypp::Resolvable::Kind kind);
 
 
@@ -149,12 +152,12 @@ namespace zypp
          */
         const Pathname dataDir() const;
 
-         /**
-         * reads content file, initializes the
-         * data and media descr dir
-         * and saves the product object
-         * but it does not add it to the store yet
-          */
+        /**
+        * reads content file, initializes the
+        * data and media descr dir
+        * and saves the product object
+        * but it does not add it to the store yet
+         */
         void readContentFile(const Pathname &p);
 
         /**
@@ -166,11 +169,11 @@ namespace zypp
         TmpDir downloadMetadata();
         bool downloadNeeded(const Pathname &localdir);
 
-	void provideProducts(Source_Ref source_r, ResStore& store);
-	void providePackages(Source_Ref source_r, ResStore& store);
-	void provideSelections(Source_Ref source_r, ResStore& store);
+        void provideProducts(Source_Ref source_r, ResStore& store);
+        void providePackages(Source_Ref source_r, ResStore& store);
+        void provideSelections(Source_Ref source_r, ResStore& store);
         void provideSelection(Source_Ref source_r, ResStore& store);
-	void providePatterns(Source_Ref source_r, ResStore& store);
+        void providePatterns(Source_Ref source_r, ResStore& store);
 
         unsigned _media_count;
 
@@ -192,7 +195,7 @@ namespace zypp
          */
         detail::ResImplTraits<SuseTagsProductImpl>::Ptr _prodImpl;
         Product::Ptr _product;
-        public:
+      public:
 
         // shared data between packages with same NVRA
         std::map<NVRA, SuseTagsPackageImplData> _package_data;

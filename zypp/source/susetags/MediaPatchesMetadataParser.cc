@@ -31,86 +31,87 @@ using namespace boost;
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
-  ///////////////////////////////////////////////////////////////////
-  namespace source
-  { /////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////
-    namespace susetags
-    { /////////////////////////////////////////////////////////////////
-      
-      /*
-        File:  media
-        Location  /media.N/ directory on media
-        Content  two or more lines of ASCII as follows
-        <vendor>
-        <YYYYMMDDHHMMSS>
-        [<media count>]
-        [<media flags>]
-        [<media names>]
+///////////////////////////////////////////////////////////////////
+namespace source
+{ /////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////
+namespace susetags
+{ /////////////////////////////////////////////////////////////////
 
-        Currently defined flags:
-         
-        doublesided 
-        media is double sided, YaST will ask for 'front side' for odd-numbered media and 'back side' for even-numbered media.
-        The default is single-sided media.
+/*
+  File:  media
+  Location  /media.N/ directory on media
+  Content  two or more lines of ASCII as follows
+  <vendor>
+  <YYYYMMDDHHMMSS>
+  [<media count>]
+  [<media flags>]
+  [<media names>]
 
-        <media names> may define alternate strings to use when asking to insert a certain media.
-         They are defined as <key><whitespace><value> pairs, separated by \n.
-         
-      */
-      
-      ///////////////////////////////////////////////////////////////////
-      //
-      //	METHOD NAME : Parser::parse
-      //	METHOD TYPE : void
-      //
-      void MediaPatchesMetadataParser::parse( const Pathname & file_r, MediaPatchesEntry &entry_r )
-      {
-        std::ifstream file(file_r.asString().c_str());
-	if (!file) {
-	    ZYPP_THROW(Exception("Can't read patches file "+file_r.asString()));
-	}
-        std::string buffer;
-        // read vendor
-        getline(file, buffer);
+  Currently defined flags:
+   
+  doublesided 
+  media is double sided, YaST will ask for 'front side' for odd-numbered media and 'back side' for even-numbered media.
+  The default is single-sided media.
 
-        regex rx("^([\\S]+)( (.*))?$");
-        boost::smatch what;
+  <media names> may define alternate strings to use when asking to insert a certain media.
+   They are defined as <key><whitespace><value> pairs, separated by \n.
+   
+*/
 
-        if(boost::regex_match(buffer, what, rx))
-        {
-          //dumpRegexpResults(what);
-          entry_r.dir = Pathname(what[1]);
-          entry_r.comment = what[3];
-        }
-        else
-        {
-          // throw exception? 
-        }
+///////////////////////////////////////////////////////////////////
+//
+//	METHOD NAME : Parser::parse
+//	METHOD TYPE : void
+//
+void MediaPatchesMetadataParser::parse( const Pathname & file_r, MediaPatchesEntry &entry_r )
+{
+  std::ifstream file(file_r.asString().c_str());
+  if (!file)
+  {
+    ZYPP_THROW(Exception("Can't read patches file "+file_r.asString()));
+  }
+  std::string buffer;
+  // read vendor
+  getline(file, buffer);
 
-        while(file && !file.eof())
-        {
-          getline(file, buffer);
-          rx = boost::regex("^(.+)-(.+)$");
-          if(boost::regex_match(buffer, what, rx, boost::match_extra))
-          {
-            zypp::parser::tagfile::dumpRegexpResults(what);
-            entry_r.products.insert(std::pair<std::string, std::string>(what[1],what[2])); 
-          }
-          else
-          {
-            // throw exception?
-          }
-          
-        }
-      }
+  regex rx("^([\\S]+)( (.*))?$");
+  boost::smatch what;
 
-      /////////////////////////////////////////////////////////////////
-    } // namespace tagfile
-    ///////////////////////////////////////////////////////////////////
-    /////////////////////////////////////////////////////////////////
-  } // namespace parser
-  ///////////////////////////////////////////////////////////////////
-  /////////////////////////////////////////////////////////////////
+  if (boost::regex_match(buffer, what, rx))
+  {
+    //dumpRegexpResults(what);
+    entry_r.dir = Pathname(what[1]);
+    entry_r.comment = what[3];
+  }
+  else
+  {
+    // throw exception?
+  }
+
+  while (file && !file.eof())
+  {
+    getline(file, buffer);
+    rx = boost::regex("^(.+)-(.+)$");
+    if (boost::regex_match(buffer, what, rx, boost::match_extra))
+    {
+      zypp::parser::tagfile::dumpRegexpResults(what);
+      entry_r.products.insert(std::pair<std::string, std::string>(what[1],what[2]));
+    }
+    else
+    {
+      // throw exception?
+    }
+
+  }
+}
+
+/////////////////////////////////////////////////////////////////
+} // namespace tagfile
+///////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////
+} // namespace parser
+///////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
