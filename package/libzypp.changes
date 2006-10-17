@@ -1,4 +1,14 @@
 -------------------------------------------------------------------
+Tue Oct 17 12:36:57 CEST 2006 - dmacvicar@suse.de
+
+- registration fails because of wrong product data
+  (#205392)
+  use DISTPRODUCT,DISTVERSION to create the product
+  resolvable. have this resolvable provide
+  PRODUCT = VERSION
+- r4312 
+
+-------------------------------------------------------------------
 Mon Oct 16 18:05:56 CEST 2006 - mvidner@suse.cz
 
 - zypper service-add -r ./foo.repo (F#300641).
