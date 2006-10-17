@@ -68,8 +68,8 @@ namespace zypp
 		{
 		    Arch system_arch = getZYpp()->architecture();
 
-		    if (! (*atom_it)->arch().compatibleWith( system_arch) ) {
-
+		    if (! (*atom_it)->arch().compatibleWith( system_arch) )
+		    {
 			// It's perfectly legitimate for that corresponding resolvable not to be in the pool:
 			// The pool only contains resolvables in matching architectures, yet a
 			// multi-arch patch might as well contain atoms for different architectures.
