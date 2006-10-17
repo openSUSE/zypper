@@ -1,4 +1,14 @@
 -------------------------------------------------------------------
+Tue Oct 17 18:29:34 CEST 2006 - dmacvicar@suse.de
+
+- zypp-checkpatches:
+  save version of the generated xml to
+  regenerate it if it changes.
+  save a random token in case of error to
+  force recreating xml file 
+- r4321
+
+-------------------------------------------------------------------
 Tue Oct 17 13:49:53 CEST 2006 - dmacvicar@suse.de
 
 - remove permissions for zypp checkpatches from spec
