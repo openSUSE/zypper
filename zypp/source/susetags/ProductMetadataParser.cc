@@ -253,7 +253,17 @@ void ProductMetadataParser::parse( const Pathname & file_r, Source_Ref source_r 
 
     MIL << "Product arch is " << prodarch << endl;
 
-    NVRAD dataCollect( prodImpl->_name, Edition( prodImpl->_version ), prodarch, prodImpl->_deps );
+    
+    // before we used to create the product with name and version instead of distname and distversion
+    // but now we use distname and distversion and we insert a "Provides" with name and version
+    // (#205392)
+    CapFactory capfactory;
+    prodImpl->_deps[Dep::PROVIDES].insert( capfactory.parse( ResTraits<Product>::kind,
+                      prodImpl->_name,
+                      Rel::EQ,
+                      Edition( prodImpl->_version ) ) );
+    
+    NVRAD dataCollect( prodImpl->_dist, Edition( prodImpl->_dist_version ), prodarch, prodImpl->_deps );
     result = detail::makeResolvableFromImpl( dataCollect, prodImpl );
   }
   catch (const Exception & excpt_r)
