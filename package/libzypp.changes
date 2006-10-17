@@ -2,7 +2,7 @@
 Tue Oct 17 13:49:53 CEST 2006 - dmacvicar@suse.de
 
 - remove permissions for zypp checkpatches from spec
-- r4314
+- r4316
 
 -------------------------------------------------------------------
 Tue Oct 17 12:36:57 CEST 2006 - dmacvicar@suse.de
