@@ -19,6 +19,7 @@
 
 #include "zmart.h"
 #include "zmart-updates.h"
+#include "zmart-utils.h"
 
 using namespace std;
 using namespace zypp;
@@ -27,31 +28,26 @@ extern ZYpp::Ptr God;
 extern RuntimeData gData;
 extern Settings gSettings;
 
+Edition read_old_version()
+{
+  string line = read_line_from_file(XML_FILE_VERSION);
+  return Edition(line);
+}
+
+void save_version( const Edition &edition )
+{
+  write_line_to_file( XML_FILE_VERSION, edition.asString() );
+}
+
+
 string read_old_token()
 {
-  string buffer;
-  string token;
-  std::ifstream is(TOKEN_FILE);
-  if ( is.good() )
-  {
-    while(is && !is.eof())
-    {
-      getline(is, buffer);
-      token += buffer;
-    }
-    is.close();
-  }
-  return token;
+  return read_line_from_file(TOKEN_FILE);
 }
 
 void save_token( const std::string &token )
 {
-  std::ofstream os(TOKEN_FILE);
-  if ( os.good() )
-  {
-    os << token << endl;;
-  }
-  os.close();
+  write_line_to_file( TOKEN_FILE, token );
 }
 
 static std::string xml_escape( const std::string &text )
@@ -60,21 +56,14 @@ static std::string xml_escape( const std::string &text )
   return parser.escape(text);
 }
 
-void render_error(  std::ostream &out, const std::string &reason )
+void render_error( const Edition &version, std::ostream &out, const std::string &reason )
 {
   out << "<update-status op=\"error\">" << std::endl;
     out << "<error>" << reason << "</error>" << std::endl;
   out << "</update-status>" << std::endl;
 }
 
-void render_unchanged(  std::ostream &out, const std::string &token )
-{
-  out << "<update-status op=\"unchanged\">" << std::endl;
-  //  out << " <metadata token=\"" << token << "\"/>" << std::endl;
-  out << "</update-status>" << std::endl;
-}
-
-void render_result( std::ostream &out, const zypp::ResPool &pool)
+void render_result( const Edition &version, std::ostream &out, const zypp::ResPool &pool)
 {
   int count = 0;
   int security_count = 0;

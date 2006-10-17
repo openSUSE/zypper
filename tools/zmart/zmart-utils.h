@@ -7,24 +7,15 @@
 |                                                                      |
 \---------------------------------------------------------------------*/
 
-#ifndef ZMART_UPDATES_H
-#define ZMART_UPDATES_H
+#ifndef ZMART_UTILS_H
+#define ZMART_UTILS_H
 
 #include <string>
 #include "zypp/Url.h"
 #include "zypp/ResObject.h"
-#include "zypp/Edition.h"
 
-#define TOKEN_FILE "/var/lib/zypp/cache/updates_token"
-#define XML_FILE_VERSION "/var/lib/zypp/cache/updates_xml_version"
-#define RESULT_FILE "/var/lib/zypp/cache/updates_result.xml"
-
-std::string read_old_token();
-void save_token( const std::string &token );
-zypp::Edition read_old_version();
-void save_version( const zypp::Edition &edition );
-void render_error(   const zypp::Edition &version, std::ostream &out, const std::string &reason );
-void render_result(  const zypp::Edition &version, std::ostream &out, const zypp::ResPool &pool);
+std::string read_line_from_file( const zypp::Pathname &file );
+void write_line_to_file( const zypp::Pathname &file, const std::string &line );
 
 #endif
 

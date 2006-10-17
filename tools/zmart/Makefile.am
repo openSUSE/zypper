@@ -26,6 +26,8 @@ zmart_SOURCES = 	zmart.cc zmart-sources.cc zmart-misc.cc \
 	zmart-sources.h \
   zmart-updates.cc \
 	zmart-updates.h \
+	zmart-utils.h \
+	zmart-utils.cc \
 	zmart-misc.h \
 	zypper-tabulator.h \
 	zypper-tabulator.cc \
@@ -50,6 +52,8 @@ zypp_checkpatches_SOURCES = 	zypp-checkpatches.cc zmart-sources.cc \
 	zypper-tabulator.cc \
 	zmart-updates.cc \
 	zmart-updates.h \
+	zmart-utils.cc \
+	zmart-utils.h \
 	checkpatches-keyring-callbacks.h
 
 zypp_checkpatches_wrapper_SOURCES = zypp-checkpatches-wrapper.c

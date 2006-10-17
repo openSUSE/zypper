@@ -1,3 +1,14 @@
+/*---------------------------------------------------------------------\
+|                          ____ _   __ __ ___                          |
+|                         |__  / \ / / . \ . \                         |
+|                           / / \ V /|  _/  _/                         |
+|                          / /__ | | | | | |                           |
+|                         /_____||_| |_| |_|                           |
+|                                                                      |
+\---------------------------------------------------------------------*/
+
+/* (c) Novell Inc. */
+
 
 #include <iostream>
 #include <fstream>
@@ -10,7 +21,7 @@
 #undef  ZYPP_BASE_LOGGER_LOGGROUP
 #define ZYPP_BASE_LOGGER_LOGGROUP "zypp::CheckPatches"
 
-#define RANDOM_TOKEN "sad987432JJDJD948394DDDxxx22"
+#define XML_FORMAT_VERSION "0.3"
 
 using namespace zypp::detail;
 
@@ -24,6 +35,51 @@ Settings gSettings;
 
 ostream no_stream(NULL);
 
+namespace utils
+{
+  /*
+    random funcions taken from kdelibs
+    Copyright (C) 1998, 1999, 2000 KDE Team
+  */
+  int random()
+  {
+    static bool init = false;
+    if (!init)
+    {
+        unsigned int seed;
+        init = true;
+        int fd = open("/dev/urandom", O_RDONLY);
+        if (fd < 0 || ::read(fd, &seed, sizeof(seed)) != sizeof(seed))
+        {
+              // No /dev/urandom... try something else.
+              srand(getpid());
+              seed = rand()+time(0);
+        }
+        if (fd >= 0) close(fd);
+        srand(seed);
+    }
+    return rand();
+  }
+  
+  std::string randomString(int length)
+  {
+    if (length <=0 ) return std::string();
+  
+    std::string str; str.resize( length );
+    int i = 0;
+    while (length--)
+    {
+        int r=random() % 62;
+        r+=48;
+        if (r>57) r+=7;
+        if (r>90) r+=6;
+        str[i++] =  char(r);
+        // so what if I work backwards?
+    }
+    return str;
+  }
+
+}
 
 int main(int argc, char **argv)
 {
@@ -46,8 +102,8 @@ int main(int argc, char **argv)
     std::ofstream os(TOKEN_FILE);
     if ( os.good() )
     {
-      render_error( os, "a ZYpp transaction is already in progress.");
-      render_error( cout, "a ZYpp transaction is already in progress.");
+      render_error( Edition(XML_FORMAT_VERSION), os, "a ZYpp transaction is already in progress.");
+      render_error( Edition(XML_FORMAT_VERSION), cout, "a ZYpp transaction is already in progress.");
       os.close();
     }
     return -1;
@@ -70,11 +126,16 @@ int main(int argc, char **argv)
     std::ofstream os(TOKEN_FILE);
     if ( os.good() )
     {
-      render_error( os, "Couldn't restore sources");
-      render_error( cout, "Couldn't restore sources");
+      string error = "Couldn't restore sources" + ( excpt_r.msg().empty() ? "\n" : (":\n" + excpt_r.msg()));
+      render_error( Edition(XML_FORMAT_VERSION), os, error);
+      render_error( Edition(XML_FORMAT_VERSION), cout, error);
       os.close();
     }
     
+    // save a random token so we try again next time
+     save_token(utils::randomString(48));
+     save_version(Edition(XML_FORMAT_VERSION));
+     
     return -1;
   }
   
@@ -111,7 +172,7 @@ int main(int argc, char **argv)
   if ( PathInfo(TOKEN_FILE).isExist() )
     previous_token = read_old_token();
   else
-    previous_token = RANDOM_TOKEN;
+    previous_token = utils::randomString(40);;
   
   //static std::string digest(const std::string& name, std::istream& is
   token = Digest::digest("sha1", token_stream);
@@ -122,16 +183,23 @@ int main(int argc, char **argv)
   // use the old result
   if ( token == previous_token )
   {
-    std::ifstream is(RESULT_FILE);
+    // check if the xml version is the same, otherwise regenerate
+    Edition xml_version = read_old_version();
     
-    string buffer;
-    while(is && !is.eof())
+    if ( Edition(XML_FORMAT_VERSION) == xml_version )
     {
-      getline(is, buffer);
-      cout << buffer << endl;
+      // use the same old data
+      std::ifstream is(RESULT_FILE);
+    
+      string buffer;
+      while(is && !is.eof())
+      {
+        getline(is, buffer);
+        cout << buffer << endl;
+      }
+      //return previous_code;
+      return -1;
     }
-    //return previous_code;
-    return -1;
   }
   else
   {
@@ -154,12 +222,13 @@ int main(int argc, char **argv)
   std::ofstream os(RESULT_FILE);
   if ( os.good() )
   {
-    render_result( os, God->pool());
-    render_result( cout, God->pool());
+    render_result( Edition(XML_FORMAT_VERSION), os, God->pool());
+    render_result( Edition(XML_FORMAT_VERSION), cout, God->pool());
     os.close();
   }
    // save token
   save_token(token);
+  save_version(Edition(XML_FORMAT_VERSION));
   //MIL << "Patches " << security_count << " " << count << std::endl;
   
   if ( security_count > 0 )

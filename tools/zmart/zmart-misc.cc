@@ -1,3 +1,4 @@
+#include <fstream>
 #include <sstream>
 #include <boost/format.hpp>
 #include "zmart.h"
@@ -431,11 +432,6 @@ void list_updates( const ResObject::Kind &kind )
   cout << tbl;
 }
 
-void usage(int argc, char **argv)
-{
-  cerr << "usage: " << argv[0] << " [<previous token>] [previous result]" << endl;
-  exit(-1);
-}
 // Local Variables:
 // c-basic-offset: 2
 // End:
