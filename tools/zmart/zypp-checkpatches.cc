@@ -99,13 +99,16 @@ int main(int argc, char **argv)
   {
     ZYPP_CAUGHT (excpt_r);
     
-    std::ofstream os(TOKEN_FILE);
+    std::ofstream os(RESULT_FILE);
     if ( os.good() )
     {
       render_error( Edition(XML_FORMAT_VERSION), os, "a ZYpp transaction is already in progress.");
       render_error( Edition(XML_FORMAT_VERSION), cout, "a ZYpp transaction is already in progress.");
       os.close();
     }
+     // save a random token so we try again next time
+     save_token(utils::randomString(48));
+     save_version(Edition(XML_FORMAT_VERSION));
     return -1;
   }
   
@@ -123,7 +126,7 @@ int main(int argc, char **argv)
   {
     ZYPP_CAUGHT (excpt_r);
     
-    std::ofstream os(TOKEN_FILE);
+    std::ofstream os(RESULT_FILE);
     if ( os.good() )
     {
       string error = "Couldn't restore sources" + ( excpt_r.msg().empty() ? "\n" : (":\n" + excpt_r.msg()));
