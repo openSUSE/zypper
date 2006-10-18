@@ -227,7 +227,9 @@ ResolverContext::install (PoolItem_Ref item, bool is_soft, int other_penalty)
 	return false;
     }
 
-    if (status.isUnneeded()) {
+    if (status.isUnneeded()
+	&& ( item->kind() == ResTraits<Patch>::kind	
+	     || item->kind() == ResTraits<Atom>::kind)) {
 	ResolverInfo_Ptr misc_info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_INSTALL_UNNEEDED, item, RESOLVER_INFO_PRIORITY_VERBOSE);
 	addInfo (misc_info);
 	return false;
