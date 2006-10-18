@@ -5,6 +5,8 @@ Wed Oct 18 12:45:49 CEST 2006 - schubi@suse.de
   if they have NOT the kind patch/atoms 
   Bug 210538 - freshens/supplements does not work with patterns
 
+Revision 4326
+
 -------------------------------------------------------------------
 Tue Oct 17 19:17:39 CEST 2006 - mvidner@suse.cz
 
