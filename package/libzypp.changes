@@ -1,11 +1,16 @@
 -------------------------------------------------------------------
+Wed Oct 18 13:13:16 CEST 2006 - dmacvicar@suse.de
+
+- zypp-checkpatches, write in the right file
+- r4328 
+
+-------------------------------------------------------------------
 Wed Oct 18 12:45:49 CEST 2006 - schubi@suse.de
 
 - Install resolvables although they are unneeded 
   if they have NOT the kind patch/atoms 
   Bug 210538 - freshens/supplements does not work with patterns
-
-Revision 4326
+- r4326
 
 -------------------------------------------------------------------
 Tue Oct 17 19:17:39 CEST 2006 - mvidner@suse.cz
