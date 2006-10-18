@@ -23,8 +23,10 @@
 class ZyppSearchOptions {
 public:
   ZyppSearchOptions () :
-    _installed_only(false), _uninstalled_only(false), _match_all(true),
-    _match_words(false), _kind(zypp::Resolvable::Kind())
+    _installed_only(false), _uninstalled_only(false),
+    _match_all(true), _match_words(false), _match_exact(false),
+    _search_descriptions(false), _case_sensitive(false),
+    _kind(zypp::Resolvable::Kind())
     {}
 
   void resolveConflicts();

@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Oct 18 21:40:25 CEST 2006 - mvidner@suse.cz
+
+- zypper search: fixed uninitialized members that made all searches
+  exact and case sensitve
+
+-------------------------------------------------------------------
 Wed Oct 18 13:13:16 CEST 2006 - dmacvicar@suse.de
 
 - zypp-checkpatches, write in the right file

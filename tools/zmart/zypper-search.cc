@@ -76,6 +76,7 @@ void ZyppSearch::doSearch(Table & table) {
   if (_options.matchExact() && _qstrings.size() == 1 &&
       _qstrings[0].find('*') == string::npos &&
       _qstrings[0].find('?') == string::npos) {
+    cerr_vv << "Exact name match" << endl;
     for (ResPool::byName_iterator it = pool.byNameBegin(_qstrings[0]);
         it != pool.byNameEnd(_qstrings[0]); ++it) {
       table << createRow(*it);
@@ -216,3 +217,6 @@ TableRow ZyppSearch::createRow(const PoolItem & pool_item) {
       << pool_item.resolvable()->arch().asString();
   return row;
 }
+// Local Variables:
+// c-basic-offset: 2
+// End:
