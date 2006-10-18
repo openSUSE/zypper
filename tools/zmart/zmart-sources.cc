@@ -282,7 +282,16 @@ void remove_source( const std::string& anystring )
   cerr_vv << "Constructing SourceManager" << endl;
   SourceManager_Ptr manager = SourceManager::sourceManager();
   cerr_vv << "Restoring SourceManager" << endl;
-  manager->restore ("/", true /*use_cache*/);
+  try {
+    manager->restore ("/", true /*use_cache*/);
+    }
+  catch (const Exception & ex) {
+    // so what if sources cannot be restored
+    // we want to delete anyway
+    ZYPP_CAUGHT (ex);
+    cerr << ex.asUserString () << endl
+	 << "Continuing anyway" << endl;
+  }
 
   SourceManager::SourceId sid = 0;
   safe_lexical_cast (anystring, sid);

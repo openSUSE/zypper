@@ -514,6 +514,7 @@ int main(int argc, char **argv)
     }
     catch ( const Exception & excpt_r )
     {
+      ZYPP_CAUGHT (excpt_r);
       cerr << excpt_r.asUserString() << endl;
       return 1;
     }
