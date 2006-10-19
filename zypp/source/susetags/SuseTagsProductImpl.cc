@@ -16,72 +16,86 @@ using namespace std;
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////
-namespace source
-{ /////////////////////////////////////////////////////////////////
-namespace susetags
-{
-///////////////////////////////////////////////////////////////////
-//
-//	METHOD NAME : SuseTagsProductImpl::SuseTagsProductImpl
-//	METHOD TYPE : Ctor
-//
-SuseTagsProductImpl::SuseTagsProductImpl()
-{}
+  ///////////////////////////////////////////////////////////////////
+  namespace source
+  { /////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////
+    namespace susetags
+    { /////////////////////////////////////////////////////////////////
 
-///////////////////////////////////////////////////////////////////
-//
-//	METHOD NAME : SuseTagsProductImpl::~SuseTagsProductImpl
-//	METHOD TYPE : Dtor
-//
-SuseTagsProductImpl::~SuseTagsProductImpl()
-{}
+      ///////////////////////////////////////////////////////////////////
+      //
+      //	METHOD NAME : SuseTagsProductImpl::SuseTagsProductImpl
+      //	METHOD TYPE : Ctor
+      //
+      SuseTagsProductImpl::SuseTagsProductImpl()
+      {}
+
+      ///////////////////////////////////////////////////////////////////
+      //
+      //	METHOD NAME : SuseTagsProductImpl::~SuseTagsProductImpl
+      //	METHOD TYPE : Dtor
+      //
+      SuseTagsProductImpl::~SuseTagsProductImpl()
+      {}
 
 
-std::string SuseTagsProductImpl::category() const
-{
-  return _category;
-}
+      std::string SuseTagsProductImpl::category() const
+      {
+        return _category;
+      }
 
-Label SuseTagsProductImpl::vendor() const
-{
-  return _vendor;
-}
+      Label SuseTagsProductImpl::vendor() const
+      {
+        return _vendor;
+      }
 
-TranslatedText SuseTagsProductImpl::summary() const
-{
-  return _summary;
-}
+      TranslatedText SuseTagsProductImpl::summary() const
+      {
+        return _summary;
+      }
 
-Source_Ref SuseTagsProductImpl::source() const
-{
-  return _source;
-}
+      Source_Ref SuseTagsProductImpl::source() const
+      {
+        return _source;
+      }
 
-Url SuseTagsProductImpl::releaseNotesUrl() const
-{
-  return _release_notes_url;
-}
+      Url SuseTagsProductImpl::releaseNotesUrl() const
+      {
+        return _release_notes_url;
+      }
 
-std::list<Url> SuseTagsProductImpl::updateUrls() const
-{
-  return _update_urls;
-}
+      std::list<Url> SuseTagsProductImpl::updateUrls() const
+      {
+        return _update_urls;
+      }
 
-std::list<std::string> SuseTagsProductImpl::flags() const
-{
-  return _flags;
-}
+      std::list<std::string> SuseTagsProductImpl::flags() const
+      {
+        return _flags;
+      }
 
-TranslatedText SuseTagsProductImpl::shortName() const
-{
-  return TranslatedText(_shortlabel);
-}
+      TranslatedText SuseTagsProductImpl::shortName() const
+      {
+        return TranslatedText(_shortlabel);
+      }
 
-/////////////////////////////////////////////////////////////////
-} // namespace detail
-///////////////////////////////////////////////////////////////////
-}
-/////////////////////////////////////////////////////////////////
+      std::string SuseTagsProductImpl::distributionName() const
+      {
+        return _dist_name;
+      }
+
+      Edition SuseTagsProductImpl::distributionEdition() const
+      {
+        return _dist_version;
+      }
+
+      /////////////////////////////////////////////////////////////////
+    } // namespace susetags
+    ///////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////
+  } // namespace source
+  ///////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////

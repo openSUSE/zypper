@@ -67,6 +67,13 @@ namespace zypp
   Label Product::longName() const
   { return summary(); }
 
+  std::string Product::distributionName() const
+  { return pimpl().distributionName(); }
+
+  Edition Product::distributionEdition() const
+  { return pimpl().distributionEdition(); }
+
+
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////

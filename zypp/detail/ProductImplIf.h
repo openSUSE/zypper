@@ -55,6 +55,12 @@ namespace zypp
       virtual std::list<std::string> flags() const PURE_VIRTUAL;
 
       virtual TranslatedText shortName() const PURE_VIRTUAL;
+
+      /** Vendor specific distribution id. */
+      virtual std::string distributionName() const PURE_VIRTUAL;
+
+      /** Vendor specific distribution version. */
+      virtual Edition distributionEdition() const PURE_VIRTUAL;
     };
     ///////////////////////////////////////////////////////////////////
 

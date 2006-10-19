@@ -28,7 +28,7 @@ namespace zypp {
 
       XMLResObjectData::XMLResObjectData() : install_only(false)
       { }
-      
+
       XMLPatternData::XMLPatternData() : userVisible(true)
       { }
 
@@ -36,7 +36,7 @@ namespace zypp {
       XMLPatchData::XMLPatchData()
       { }
       */
-      
+
       /* output operators */
 
       namespace {
@@ -126,6 +126,8 @@ namespace zypp {
           << "  epoch: " << data.epoch << endl
           << "  version: " << data.ver << endl
           << "  release: " << data.rel << endl
+          << "  dist_name: " << data.dist_name << endl
+          << "  dist_version: " << data.dist_version << endl
           << "  provides: " << data.provides << endl
           << "  conflicts: " << data.conflicts << endl
           << "  obsoletes: " << data.obsoletes << endl
@@ -146,7 +148,7 @@ namespace zypp {
       IMPL_PTR_TYPE(XMLPatchAtomData);
       IMPL_PTR_TYPE(XMLPatchMessageData);
       IMPL_PTR_TYPE(XMLPatchScriptData);
-      
+
     } // namespace xml
   } // namespace parser
 } // namespace zypp

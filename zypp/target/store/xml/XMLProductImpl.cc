@@ -35,12 +35,12 @@ namespace zypp
     XMLProductImpl::~XMLProductImpl()
     {}
 
-    std::string XMLProductImpl::category() const 
-    { return _category; } 
+    std::string XMLProductImpl::category() const
+    { return _category; }
 
     TranslatedText XMLProductImpl::shortName() const
     { return _short_name; }
-    
+
     Url XMLProductImpl::releaseNotesUrl() const
     { return _release_notes_url; }
 
@@ -49,7 +49,13 @@ namespace zypp
 
     std::list<std::string> XMLProductImpl::flags() const
     { return _flags; }
-    
+
+    std::string XMLProductImpl::distributionName() const
+    { return _dist_name; }
+
+    Edition XMLProductImpl::distributionEdition() const
+    { return _dist_version; }
+
     /////////////////////////////////////////////////////////////////
   } // namespace detail
   ///////////////////////////////////////////////////////////////////

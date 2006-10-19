@@ -40,12 +40,14 @@ public:
     Source_Ref source_r,
     const zypp::parser::yum::YUMProductData & parsed
   );
-  std::string category() const;
-  Label vendor() const;
-  TranslatedText summary() const;
-  TranslatedText description() const;
-  std::list<std::string> flags() const;
-  TranslatedText shortName() const;
+  virtual std::string category() const;
+  virtual Label vendor() const;
+  virtual TranslatedText summary() const;
+  virtual TranslatedText description() const;
+  virtual std::list<std::string> flags() const;
+  virtual TranslatedText shortName() const;
+  virtual std::string distributionName() const;
+  virtual Edition distributionEdition() const;
 protected:
   std::string _category;
   Label _vendor;

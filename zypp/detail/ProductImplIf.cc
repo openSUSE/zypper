@@ -40,6 +40,12 @@ namespace zypp
       TranslatedText ProductImplIf::shortName() const
       { return TranslatedText(); }
 
+      std::string ProductImplIf::distributionName() const
+      { return std::string(); }
+
+      Edition ProductImplIf::distributionEdition() const
+      { return Edition(); }
+
     ///////////////////////////////////////////////////////////////////
 
     /////////////////////////////////////////////////////////////////

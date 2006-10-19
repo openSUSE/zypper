@@ -204,7 +204,7 @@ XMLFilesBackend::isBackendInitialized() const
   ok = ok && PathInfo(dbdir).isExist();
 
   bool fixperms = false;
-  
+
   // The db dir was created with 700 permissions
   // see bug #169094
   if ( ok && PathInfo(dbdir).perm() == 0700 )
@@ -213,7 +213,7 @@ XMLFilesBackend::isBackendInitialized() const
     {
       fixperms = true;
       WAR << "Wrong permissions for /var/lib/zypp, will fix" << std::endl;
-      
+
       const char* argv[] =
       {
         "chmod",
@@ -222,17 +222,17 @@ XMLFilesBackend::isBackendInitialized() const
         "/var/lib/zypp",
         NULL
       };
-      
+
       ExternalProgram prog(argv,ExternalProgram::Discard_Stderr, false, -1, true);
-      prog.close();    
+      prog.close();
     }
     else
     {
       WAR << "Wrong permissions for /var/lib/zypp, but can't fix unless you run as root." << std::endl;
     }
-    
+
   }
-    
+
   // folders for resolvables
   std::set<Resolvable::Kind>::const_iterator it_kinds;
   for ( it_kinds = d->kinds.begin() ; it_kinds != d->kinds.end(); ++it_kinds )
@@ -253,17 +253,17 @@ XMLFilesBackend::isBackendInitialized() const
   // named flags
   bool nmthere = exists(dirForNamedFlags());
   ok = ok && nmthere;
-    
+
   Pathname sourcesdir = d->root + ZYPP_DB_DIR + "/sources";
   bool srcthere = PathInfo(sourcesdir).isExist();
   ok = ok && srcthere;
-  
+
   if (srcthere && fixperms)
   {
     MIL << "Making " << sourcesdir << " not readable by others (0700)" << std::endl;
     filesystem::chmod( sourcesdir, 0700);
   }
-  
+
   return ok;
 }
 
@@ -272,7 +272,7 @@ XMLFilesBackend::initBackend()
 {
   // all directories are 755 except the sources directory which can contain passwords
   // in urls.
-  
+
   Pathname topdir = d->root + Pathname(ZYPP_DB_DIR);
   DBG << "Creating directory structure " << topdir << std::endl;
 
@@ -591,7 +591,7 @@ XMLFilesBackend::deleteObject( ResObject::constPtr resolvable )
     ERR << "This backend was not designed to store resolvable of kind " << resolvableKindToString(resolvable->kind()) << ", ignoring..." << std::endl;
     return;
   }
-  
+
   // only remove the file
   std::string filename = fullPathForResolvable(resolvable);
   try
@@ -770,11 +770,11 @@ XMLFilesBackend::createPatch( const zypp::parser::xmlstore::XMLPatchData & parse
     impl->_install_only = parsed.install_only;
     impl->_build_time = parsed.build_time;
     impl->_install_time = parsed.install_time;
-    
+
     Arch arch;
     if (!parsed.arch.empty())
       arch = Arch(parsed.arch);
-    
+
     // Collect basic Resolvable data
     NVRAD dataCollect( parsed.name,
                        Edition( parsed.ver, parsed.rel, parsed.epoch ), arch,
@@ -845,10 +845,10 @@ XMLFilesBackend::createAtom( const zypp::parser::xmlstore::XMLPatchAtomData & pa
     Arch arch;
     if (!parsed.arch.empty())
       arch = Arch(parsed.arch);
-    
+
     // Collect basic Resolvable data
     NVRAD dataCollect( parsed.name, Edition( parsed.ver, parsed.rel, parsed.epoch ), arch, createDependencies(parsed, ResTraits<Atom>::kind) );
-    
+
     impl->_summary = parsed.summary;
     impl->_description = parsed.summary;
 
@@ -860,7 +860,7 @@ XMLFilesBackend::createAtom( const zypp::parser::xmlstore::XMLPatchAtomData & pa
     impl->_install_only = parsed.install_only;
     impl->_build_time = parsed.build_time;
     impl->_install_time = parsed.install_time;
-    
+
     Atom::Ptr atom = detail::makeResolvableFromImpl( dataCollect, impl);
     return atom;
   }
@@ -883,7 +883,7 @@ XMLFilesBackend::createMessage( const zypp::parser::xmlstore::XMLPatchMessageDat
     Arch arch;
     if (!parsed.arch.empty())
       arch = Arch(parsed.arch);
-    
+
     impl->_summary = parsed.summary;
     impl->_description = parsed.summary;
 
@@ -895,7 +895,7 @@ XMLFilesBackend::createMessage( const zypp::parser::xmlstore::XMLPatchMessageDat
     impl->_install_only = parsed.install_only;
     impl->_build_time = parsed.build_time;
     impl->_install_time = parsed.install_time;
-    
+
     // Collect basic Resolvable data
     NVRAD dataCollect( parsed.name, Edition( parsed.ver, parsed.rel, parsed.epoch ), arch, createDependencies(parsed, ResTraits<Message>::kind) );
     Message::Ptr message = detail::makeResolvableFromImpl( dataCollect, impl);
@@ -935,7 +935,7 @@ XMLFilesBackend::createScript(const zypp::parser::xmlstore::XMLPatchScriptData &
     Arch arch;
     if (!parsed.arch.empty())
       arch = Arch(parsed.arch);
-    
+
     impl->_summary = parsed.summary;
     impl->_description = parsed.summary;
 
@@ -947,7 +947,7 @@ XMLFilesBackend::createScript(const zypp::parser::xmlstore::XMLPatchScriptData &
     impl->_install_only = parsed.install_only;
     impl->_build_time = parsed.build_time;
     impl->_install_time = parsed.install_time;
-    
+
     // Collect basic Resolvable data
     NVRAD dataCollect( parsed.name, Edition( parsed.ver, parsed.rel, parsed.epoch ), arch, createDependencies(parsed, ResTraits<Script>::kind));
     Script::Ptr script = detail::makeResolvableFromImpl( dataCollect, impl );
@@ -1000,9 +1000,11 @@ XMLFilesBackend::createProduct( const zypp::parser::xmlstore::XMLProductData & p
     impl->_install_only = parsed.install_only;
     impl->_build_time = parsed.build_time;
     impl->_install_time = parsed.install_time;
-    
+
     impl->_category = parsed.type;
     impl->_short_name = parsed.short_name;
+    impl->_dist_name = parsed.dist_name;
+    impl->_dist_version = parsed.dist_version;
 
     if ( parsed.releasenotesurl.size() > 0 )
       impl->_release_notes_url = parsed.releasenotesurl;
@@ -1061,7 +1063,7 @@ XMLFilesBackend::createPattern( const zypp::parser::xmlstore::XMLPatternData & p
     impl->_install_only = parsed.install_only;
     impl->_build_time = parsed.build_time;
     impl->_install_time = parsed.install_time;
-    
+
     impl->_user_visible = parsed.userVisible;
     impl->_default = ((parsed.default_ == "false" ) ? false : true );
     impl->_category = parsed.category;
@@ -1103,7 +1105,7 @@ XMLFilesBackend::createSelection( const zypp::parser::xmlstore::XMLPatternData &
     impl->_install_only = parsed.install_only;
     impl->_build_time = parsed.build_time;
     impl->_install_time = parsed.install_time;
-    
+
     impl->_visible = parsed.userVisible;
     impl->_name = parsed.name;
     //impl->_default = ((parsed.default_ == "false" ) ? false : true );
@@ -1112,7 +1114,7 @@ XMLFilesBackend::createSelection( const zypp::parser::xmlstore::XMLPatternData &
     Arch arch;
     if (!parsed.arch.empty())
       arch = Arch(parsed.arch);
-    
+
     // Collect basic Resolvable data
     NVRAD dataCollect( parsed.name, Edition( parsed.ver, parsed.rel, parsed.epoch ), arch, createDependencies( parsed, ResTraits<Pattern>::kind));
     Selection::Ptr selection = detail::makeResolvableFromImpl( dataCollect, impl );

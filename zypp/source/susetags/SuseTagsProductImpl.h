@@ -26,8 +26,9 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
   namespace source
   { /////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////
     namespace susetags
-    {
+    { /////////////////////////////////////////////////////////////////
 
       ///////////////////////////////////////////////////////////////////
       //
@@ -37,7 +38,7 @@ namespace zypp
       */
       struct SuseTagsProductImpl : public zypp::detail::ProductImplIf
       {
-public:
+      public:
         SuseTagsProductImpl();
         virtual ~SuseTagsProductImpl();
 
@@ -49,13 +50,16 @@ public:
         virtual std::list<Url> updateUrls() const;
         virtual std::list<std::string> flags() const;
         virtual TranslatedText shortName() const;
+        virtual std::string distributionName() const;
+        virtual Edition distributionEdition() const;
 
         std::string _category;
 
         std::string _name;
         std::string _version;
-        std::string _dist;
-        std::string _dist_version;
+        std::string _dist_name;
+        Edition     _dist_version;
+
         std::string _base_product;
         std::string _base_version;
         std::string _you_type;

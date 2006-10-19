@@ -62,6 +62,12 @@ namespace zypp
     /** */
     Label longName() const;
 
+    /** Vendor specific distribution id. */
+    std::string distributionName() const;
+
+    /** Vendor specific distribution version. */
+    Edition distributionEdition() const;
+
   protected:
     /** Ctor */
     Product( const NVRAD & nvrad_r );

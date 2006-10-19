@@ -27,7 +27,7 @@ using namespace zypp::base;
 namespace zypp {
   namespace parser {
     namespace xmlstore {
-      
+
       DEFINE_PTR_TYPE(XMLResObjectData);
       DEFINE_PTR_TYPE(XMLProductData);
       DEFINE_PTR_TYPE(XMLPatternData);
@@ -36,7 +36,7 @@ namespace zypp {
       DEFINE_PTR_TYPE(XMLPatchAtomData);
       DEFINE_PTR_TYPE(XMLPatchMessageData);
       DEFINE_PTR_TYPE(XMLPatchScriptData);
-      
+
       /**
       * @short Holds dependency data
       */
@@ -67,11 +67,11 @@ namespace zypp {
         std::list<XMLDependency> suggests;
         std::list<XMLDependency> supplements;
         std::list<XMLDependency> enhances;
-        
+
         // in the future move above to XMLResolvableData
         TranslatedText summary;
         TranslatedText description;
-        
+
         TranslatedText install_notify;
         TranslatedText delete_notify;
         TranslatedText license_to_confirm;
@@ -81,7 +81,7 @@ namespace zypp {
         bool install_only;
         Date build_time;
         Date install_time;
-        
+
       };
 
       /**
@@ -91,7 +91,7 @@ namespace zypp {
       {
       public:
         XMLPatternData();
-        
+
         std::string default_;
         bool userVisible;
         TranslatedText category;
@@ -105,7 +105,7 @@ namespace zypp {
           XMLLanguageData() {};
           ~XMLLanguageData() {};
       };
-      
+
       class XMLProductData : public XMLResObjectData
       {
       public:
@@ -118,15 +118,17 @@ namespace zypp {
         std::string releasenotesurl;
         std::list<std::string> update_urls;
         std::list<std::string> flags;
+        std::string dist_name;
+        std::string dist_version;
       };
-      
+
       class XMLPatchAtomData : public XMLResObjectData
       {
         public:
           enum AtomType { Atom, Script, Message };
           virtual AtomType atomType() { return Atom; };
       };
- 
+
       class XMLPatchScriptData : public XMLPatchAtomData
       {
         public:
@@ -142,8 +144,8 @@ namespace zypp {
           XMLPatchMessageData() {};
           virtual AtomType atomType() { return Message; };
           TranslatedText text;
-      };     
-      
+      };
+
       class XMLPatchData : public XMLResObjectData
       {
         public:
@@ -163,13 +165,13 @@ namespace zypp {
           std::list<XMLPatchAtomData_Ptr > atoms;
       };
 
-            
+
       /* Easy output */
       std::ostream& operator<<(std::ostream &out, const XMLDependency& data);
       std::ostream& operator<<(std::ostream &out, const XMLPatternData& data);
       std::ostream& operator<<(std::ostream& out, const XMLProductData& data);
-      
-      
+
+
     } // namespace xmlstore
   } // namespace parser
 } // namespace zypp
