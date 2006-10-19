@@ -238,6 +238,7 @@ int main(int argc, char **argv)
       "\tpatch-check, pchk\tCheck for patches\n"
       "\tpatches, pch\t\tList patches\n"
       "\tlist-updates, lu\tList updates\n"
+      "\tupdate, up\tUpdate packages\n"
       ;
 
   string help_global_source_options = "  Source options:\n"
@@ -300,7 +301,17 @@ int main(int argc, char **argv)
     };
     specific_options = remove_options;
     specific_help = "  Command options:\n"
-      "\t--type,-t\t\tType of resolvable (default: package)\n"
+      "\t--type,-t\t\tType of resolvable (default: patch)\n"
+      ;
+  }
+  else if (command == "update" || command == "up") {
+    static struct option remove_options[] = {
+      {"type",		required_argument, 0, 't'},
+      {0, 0, 0, 0}
+    };
+    specific_options = remove_options;
+    specific_help = "  Command options:\n"
+      "\t--type,-t\t\tType of resolvable (default: patch)\n"
       ;
   }
   else if (command == "search" || command == "se") {
@@ -611,45 +622,8 @@ int main(int argc, char **argv)
 	for ( vector<string>::const_iterator it = gData.packages_to_uninstall.begin(); it != gData.packages_to_uninstall.end(); ++it ) {
 	  mark_for_uninstall(kind, *it);
 	}
-    
-	cerr_v << "resolving" << endl;
-	resolve();
-    
-	cerr_v << "Problems:" << endl;
-	Resolver_Ptr resolver = zypp::getZYpp()->resolver();
-	ResolverProblemList rproblems = resolver->problems ();
-	ResolverProblemList::iterator
-	  b = rproblems.begin (),
-	  e = rproblems.end (),
-	  i;
-	if (b == e) {
-	  cerr_v << "(none)" << endl;
-	}
-	for (i = b; i != e; ++i) {
-	    cerr_v << "PROB " << (*i)->description () << endl;
-	    cerr_v << ":    " << (*i)->details () << endl;
 
-	    ProblemSolutionList solutions = (*i)->solutions ();
-	    ProblemSolutionList::iterator
-	      bb = solutions.begin (),
-	      ee = solutions.end (),
-	      ii;
-	    for (ii = bb; ii != ee; ++ii) {
-	      cerr_v << " SOL  " << (*ii)->description () << endl;
-	      cerr_v << " :    " << (*ii)->details () << endl;
-	    }
-	}
-
-	cerr_v << "Summary:" << endl;
-	show_summary();
-      
-	cerr << "Continue? [y/n] ";
-	if (readBoolAnswer())
-	  {
-	    cerr_v << "committing" << endl;
-	    ZYppCommitResult result = God->commit( ZYppCommitPolicy() );
-	    cerr << result << std::endl; 
-	  }
+	solve_and_commit ();
       }
     else {
       cerr_v << "Token unchanged" << endl;
@@ -712,7 +686,7 @@ int main(int argc, char **argv)
 
   // --------------------------( patch check )--------------------------------
 
-  // TODO: rug status
+  // TODO: rug summary
   if (command == "patch-check" || command == "pchk") {
     if (help) {
       cerr << "patch-check\n"
@@ -767,7 +741,7 @@ int main(int argc, char **argv)
       return !help;
     }
 
-    string skind = copts.count("type")?  copts["type"].front() : "package";
+    string skind = copts.count("type")?  copts["type"].front() : "patch";
     kind = string_to_kind (skind);
     if (kind == ResObject::Kind ()) {
 	cerr << "Unknown resolvable type " << skind << endl;
@@ -781,6 +755,33 @@ int main(int argc, char **argv)
 
     list_updates (kind);
 
+    return 0;
+  }
+
+  // -----------------------------( update )----------------------------------
+
+  if (command == "update" || command == "up") {
+    if (help) {
+      cerr << "update [options]\n"
+	   << specific_help
+	;
+      return !help;
+    }
+
+    string skind = copts.count("type")?  copts["type"].front() : "patch";
+    kind = string_to_kind (skind);
+    if (kind == ResObject::Kind ()) {
+	cerr << "Unknown resolvable type " << skind << endl;
+	return 1;
+    }
+
+    cond_init_target ();
+    cond_init_system_sources ();
+    cond_load_resolvables ();
+    establish ();
+
+    mark_updates (kind);
+    solve_and_commit ();
     return 0;
   }
 

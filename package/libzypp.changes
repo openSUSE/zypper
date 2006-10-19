@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Oct 19 18:27:02 CEST 2006 - mvidner@suse.cz
+
+- zypper update: implemented minimal version (patches only)
+- zypper list-updates: changed default type from package to patch,
+  consider patches affecting the package manager separately
+
+-------------------------------------------------------------------
 Thu Oct 19 14:09:33 CEST 2006 - dmacvicar@suse.de
 
 - version 2.4.1

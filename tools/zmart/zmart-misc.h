@@ -21,6 +21,7 @@ void mark_for_install( const zypp::ResObject::Kind &kind,
 		       const std::string &name );
 void mark_for_uninstall( const zypp::ResObject::Kind &kind,
 			 const std::string &name );
+void show_problems();
 void show_summary();
 std::string calculate_token();
 //! load all resolvables that the user wants
@@ -32,7 +33,8 @@ void resolve();
 void show_pool();
 void patch_check();
 void list_updates( const zypp::ResObject::Kind &kind );
+void mark_updates( const zypp::ResObject::Kind &kind );
 void usage(int argc, char **argv);
-
+void solve_and_commit ();
 #endif
 

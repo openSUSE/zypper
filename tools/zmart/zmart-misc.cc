@@ -206,6 +206,32 @@ void mark_for_uninstall( const ResObject::Kind &kind,
   }
 }
 
+void show_problems () {
+  Resolver_Ptr resolver = zypp::getZYpp()->resolver();
+  ResolverProblemList rproblems = resolver->problems ();
+  ResolverProblemList::iterator
+    b = rproblems.begin (),
+    e = rproblems.end (),
+    i;
+  if (b == e) {
+    cerr_v << "(none)" << endl;
+  }
+  for (i = b; i != e; ++i) {
+    cerr_v << "PROB " << (*i)->description () << endl;
+    cerr_v << ":    " << (*i)->details () << endl;
+
+    ProblemSolutionList solutions = (*i)->solutions ();
+    ProblemSolutionList::iterator
+      bb = solutions.begin (),
+      ee = solutions.end (),
+      ii;
+    for (ii = bb; ii != ee; ++ii) {
+      cerr_v << " SOL  " << (*ii)->description () << endl;
+      cerr_v << " :    " << (*ii)->details () << endl;
+    }
+  }
+}
+
 void show_summary()
 {
   MIL << "Pool contains " << God->pool().size() << " items." << std::endl;
@@ -386,6 +412,7 @@ void list_updates( const ResObject::Kind &kind )
   bool k_is_patch = kind == ResTraits<Patch>::kind;
 
   Table tbl;
+  Table pm_tbl;	// only those that affect packagemanager: they have priority
   TableHeader th;
   unsigned cols;
   if (k_is_patch) {
@@ -397,6 +424,7 @@ void list_updates( const ResObject::Kind &kind )
     cols = 6;
   }
   tbl << th;
+  pm_tbl << th;
 
   ResPool::byKind_iterator
     it = God->pool().byKindBegin (kind),
@@ -405,20 +433,25 @@ void list_updates( const ResObject::Kind &kind )
   {
     ResObject::constPtr res = it->resolvable();
 
-    // TODO: isNeeded only applies to patches (aggregates?)
-    if ( it->status().isNeeded() ) {
-      if (k_is_patch) {
+    if (k_is_patch) {
+      if ( it->status().isNeeded() ) {
 	Patch::constPtr patch = asKind<Patch>(res);
 
-	// FIXME: affects_packagemanager first
 	TableRow tr (cols);
 	tr << patch->source ().alias ();
 	tr << res->name () << res->edition ().asString();
 	tr << patch->category();
 	tr << string_status (it->status ());
+
 	tbl << tr;
+	if (patch->affects_pkg_manager ())
+	  pm_tbl << tr;
       }
-      else {
+    }
+    else {
+      // TODO: isNeeded only applies to patches (aggregates?)
+      // determine what packages (or non-patches, non-aggregates?) to update
+      if (false) {
 	TableRow tr (cols);
 	tr << "?" << res->source ().alias () << "";
 	tr << res->name ()
@@ -428,8 +461,78 @@ void list_updates( const ResObject::Kind &kind )
       }
     }
   }
+
+  // those that affect the package manager go first
+  // (TODO: user option for this?)
+  if (!pm_tbl.empty ())
+    tbl = pm_tbl;
+
   tbl.sort (1); 		// Name
   cout << tbl;
+}
+
+// may be useful as a functor
+bool mark_item_install (const PoolItem& pi) {
+  bool result = pi.status().setToBeInstalled( zypp::ResStatus::USER );
+  if (!result) {
+    cerr_vv << "Marking " << pi << "for installation failed" << endl;
+  }
+  return result;
+}
+
+void mark_updates( const ResObject::Kind &kind )
+{
+  bool k_is_patch = kind == ResTraits<Patch>::kind;
+
+
+  if (k_is_patch) {
+    // search twice: if there are none with affects_pkg_manager, retry on all
+    bool nothing_found = true;
+    for (int attempt = 0;
+	 nothing_found && attempt < 2; ++attempt) {
+      ResPool::byKind_iterator
+	it = God->pool().byKindBegin (kind),
+	e  = God->pool().byKindEnd (kind);
+      for (; it != e; ++it )
+      {
+	ResObject::constPtr res = it->resolvable();
+
+	if ( it->status().isNeeded() ) {
+	  Patch::constPtr patch = asKind<Patch>(res);
+	  if (attempt == 1 || patch->affects_pkg_manager ()) {
+	    nothing_found = false;
+	    mark_item_install (*it);
+	  }
+	}
+      }
+    }
+  }
+  else {
+    // TODO: isNeeded only applies to patches (aggregates?)
+    // determine what packages (or non-patches, non-aggregates?) to update
+    // something like ProvideProcess
+    if (false) {
+    }
+  }
+}
+
+void solve_and_commit () {
+  cerr_v << "resolving" << endl;
+  resolve();
+    
+  cerr_v << "Problems:" << endl;
+  show_problems ();
+
+  cerr_v << "Summary:" << endl;
+  show_summary();
+      
+  cerr << "Continue? [y/n] ";
+  if (readBoolAnswer())
+  {
+    cerr_v << "committing" << endl;
+    ZYppCommitResult result = God->commit( ZYppCommitPolicy() );
+    cerr << result << std::endl; 
+  }
 }
 
 // Local Variables:
