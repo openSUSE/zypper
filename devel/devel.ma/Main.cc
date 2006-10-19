@@ -4,6 +4,7 @@
 #include <zypp/base/LogControl.h>
 #include <zypp/base/LogTools.h>
 #include <zypp/base/IOStream.h>
+#include <zypp/base/Function.h>
 #include <zypp/base/Algorithm.h>
 #include <zypp/base/PtrTypes.h>
 #include <zypp/base/Exception.h>
@@ -31,6 +32,8 @@
 #include <zypp/pool/PoolStats.h>
 #include <zypp/KeyRing.h>
 #include <zypp/ResPoolProxy.h>
+#include <zypp/base/InputStream.h>
+#include <zypp/base/DefaultIntegral.h>
 
 using namespace std;
 using namespace zypp;
@@ -91,7 +94,7 @@ struct Dump
   template<class _Tp>
     bool operator()( const _Tp & o )
     {
-      DBG << o << endl;
+      DBG << __PRETTY_FUNCTION__ << o << endl;
       return true;
     }
 };
@@ -101,45 +104,92 @@ struct Select
   template<class _Tp>
     bool operator()( const _Tp & o )
     {
-      if ( o->hasInstalledObj() && o->availableObjs() == 3 )
-        SEC << o << endl;
-      if ( o->name() == "db" )
-        _res = o;
+      Pattern::constPtr p( asKind<Pattern>(o) );
+      if ( ! ( p->includes().empty() && p->extends().empty() ) )
+        {
+          MIL << p << endl;
+          dumpRange( DBG << "Includes: ", p->includes().begin(), p->includes().end() ) << endl;
+          dumpRange( DBG << "Extends: ", p->extends().begin(), p->extends().end() ) << endl;
+        }
       return true;
     }
-
-  Selectable::Ptr _res;
 };
 
-struct Test
+struct CapAndItemMatches
 {
-  Test( Selectable::Ptr sel_r )
-  : _sel( sel_r )
-  , _i( _sel->installedPoolItem() )
-  , _a( _sel->availablePoolItemBegin(), _sel->availablePoolItemEnd() )
+  CapAndItemMatches( const Capability & lhs_r )
+  : _lhs( lhs_r )
   {}
 
-
-  void dump()
+  bool operator()( const CapAndItem & capitem_r ) const
   {
-    DBG << str::form( "[%s]%s: ",
-                      _sel->kind().asString().c_str(),
-                      _sel->name().c_str() ) << _sel->status() << endl;
+    return( _lhs.matches( capitem_r.cap ) == CapMatch::yes );
+  }
 
-    WAR << "  i  " << _i << endl;
+  const Capability & _lhs;
+};
 
-    for ( unsigned n = 0; n < _a.size(); ++n )
+inline int forEachMatchIn( const ResPool & pool_r, const Dep & dep_r, const Capability & lhs_r,
+                           function<bool(const CapAndItem &)> action_r )
+{
+  std::string index( lhs_r.index() );
+  return invokeOnEach( pool_r.byCapabilityIndexBegin( index, dep_r ),
+                       pool_r.byCapabilityIndexEnd( index, dep_r ),
+                       CapAndItemMatches( lhs_r ), // filter
+                       action_r );
+}
+
+
+struct PatternExtendedInstallPackages
+{
+  PatternExtendedInstallPackages( ResPool pool_r )
+  : _pool( pool_r )
+  {}
+
+  bool operator()( ResObject::constPtr obj_r ) const
+  { return operator()( asKind<Pattern>(obj_r) ); }
+
+  bool operator()( Pattern::constPtr pat_r ) const
+  {
+    if ( ! pat_r )
+      return true;
+
+    MIL << pat_r << endl;
+    expandIncludes( pat_r );
+    //selectIncludes( pat_r );
+    return true;
+  }
+
+  void expandIncludes( const Pattern::constPtr & pat_r ) const
+  {
+    if ( ! pat_r->includes().empty() )
       {
-        char c = ( _a[n] == _sel->candidatePoolItem() ? 'c' : ' ');
-        INT << "  a" << c << " " << _a[n] << endl;
+        for_each( pat_r->includes().begin(),
+                  pat_r->includes().end(),
+                  bind( &PatternExtendedInstallPackages::expandInclude, this, _1 ) );
       }
   }
 
-  Selectable::Ptr  _sel;
-  PoolItem         _i;
-  vector<PoolItem> _a;
+  void expandInclude( const Capability & include_r ) const
+  {
+    DBG << include_r << endl;
+    forEachMatchIn( _pool, Dep::PROVIDES, include_r,
+                    bind( &PatternExtendedInstallPackages::storeIncludeMatch, this, _1 ) );
+  }
+
+  bool storeIncludeMatch( const CapAndItem & capitem_r ) const
+  {
+    Dump()( capitem_r.item );
+    return true;
+  }
+
+
+  private:
+    ResPool _pool;
 };
 
+#define Default DefaultIntegral
+typedef Default<unsigned,0> xCounter;
 
 /******************************************************************
 **
@@ -151,9 +201,23 @@ int main( int argc, char * argv[] )
   //zypp::base::LogControl::instance().logfile( "" );
   INT << "===[START]==========================================" << endl;
 
+  xCounter x;
+  DBG  << x << endl;
+  Default<bool,true> a;
+  Default<int,13> i;
+  DBG  << i << endl;
+  i = 15;
+  DBG  << i << endl;
+  i -= 3;
+  DBG  << i << endl;
+  Default<int,6> j;
+  DBG  << (i*j) << endl;
+  DBG  << Default<bool,true>() << endl;
+
+  return 0;
   ResPool pool( getZYpp()->pool() );
 
-  if ( 1 )
+  if ( 0 )
     {
       zypp::base::LogControl::TmpLineWriter shutUp;
 
@@ -166,57 +230,24 @@ int main( int argc, char * argv[] )
     {
       zypp::base::LogControl::TmpLineWriter shutUp;
 
-      src1 = createSource( "dir:/Local/SLES10" );
+      src1 = createSource( "dir:/Local/openSUSE-10.2-Alpha5test-x86_64/CD1" );
       getZYpp()->addResolvables( src1.resolvables() );
 
-      src1 = createSource( "dir:/Local/SUSE-Linux-10.1-Build_830-Addon-BiArch/CD1" );
-      getZYpp()->addResolvables( src1.resolvables() );
-
-      src1 = createSource( "dir:/Local/SUSE-Linux-10.1-Build_830-i386/CD1" );
-      getZYpp()->addResolvables( src1.resolvables() );
     }
 
-  //vdumpPoolStats( SEC, pool.begin(), pool.end() ) << endl;
+  for_each( pool.byKindBegin<Pattern>(),
+            pool.byKindEnd<Pattern>(),
+            PatternExtendedInstallPackages( pool ) );
 
+
+
+
+#if 0
   ResPoolProxy ui( getZYpp()->poolProxy() );
-  Select sel = for_each( ui.byKindBegin<Package>(),
-                         ui.byKindEnd<Package>(),
+  Select sel = for_each( ui.byKindBegin<Pattern>(),
+                         ui.byKindEnd<Pattern>(),
                          Select() );
-
-#define T(N,V,C) \
-  MIL << #N" "#V" "#C" " << t._a[N].status().setTransactValue( V, C ) << endl; \
-  t.dump();
-
-  Test t( sel._res );
-  t.dump();
-
-  T( 1, ResStatus::TRANSACT, ResStatus::SOLVER );
-  T( 0, ResStatus::LOCKED, ResStatus::USER );
-  T( 1, ResStatus::LOCKED, ResStatus::USER );
-  T( 2, ResStatus::LOCKED, ResStatus::USER );
-  DBG << t._sel->set_status( ui::S_Install ) << endl;
-  DBG << t._sel->set_status( ui::S_Update ) << endl;
-  t.dump();
-  DBG << t._sel->set_status( ui::S_KeepInstalled ) << endl;
-  t.dump();
-  DBG << t._sel->set_status( ui::S_Taboo ) << endl;
-  t.dump();
-  DBG << t._sel->setCandidate( t._a[2] ) << endl;
-  t.dump();
-  DBG << t._sel->set_status( ui::S_Update ) << endl;
-  t.dump();
-  DBG << t._sel->setCandidate( t._a[1] ) << endl;
-  t.dump();
-  DBG << t._sel->set_status( ui::S_KeepInstalled ) << endl;
-  t.dump();
-  DBG << t._sel->setCandidate( t._a[2] ) << endl;
-  t.dump();
-  DBG << t._sel->set_status( ui::S_Update ) << endl;
-  t.dump();
-  DBG << t._sel->set_status( ui::S_KeepInstalled ) << endl;
-  t.dump();
-  DBG << t._sel->setCandidate( 0 ) << endl;
-  t.dump();
+#endif
 
 
 

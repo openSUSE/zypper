@@ -215,6 +215,16 @@ void seltest( const NameKindProxy & nks )
   MIL << pat->extends() << endl;
 }
 
+void showProd( const PoolItem & prod )
+{
+  Product::constPtr p( asKind<Product>(prod) );
+  DBG << prod << endl;
+  MIL << p << endl;
+  MIL << p->distributionName() << endl;
+  MIL << p->distributionEdition() << endl;
+  MIL << p->installtime() << endl;
+}
+
 ///////////////////////////////////////////////////////////////////
 /******************************************************************
 **
@@ -231,37 +241,36 @@ int main( int argc, char * argv[] )
 
   ResPool pool( getZYpp()->pool() );
 
-  if ( 0 )
+  if ( 1 )
+    {
+      zypp::base::LogControl::TmpLineWriter shutUp;
+      Source_Ref src( createSource( "dir:/Local/SLES10" ) );
+      getZYpp()->addResolvables( src.resolvables() );
+    }
+  MIL << pool << endl;
+  PoolItem prod( *pool.byKindBegin<Product>() );
+  showProd( prod );
+
+  if ( 1 )
     {
       zypp::base::LogControl::TmpLineWriter shutUp;
       getZYpp()->initTarget( sysRoot );
       USR << "Added target: " << pool << endl;
     }
 
-  if ( 1 ) {
-    //zypp::base::LogControl::TmpLineWriter shutUp;
-    //SourceManager::sourceManager()->restore( sysRoot );
-    if ( 1 || SourceManager::sourceManager()->allSources().empty() )
-      {
-        Source_Ref src1( createSource( "dir:/Local/SLES10" ) );
-        SourceManager::sourceManager()->addSource( src1 );
-        //SourceManager::sourceManager()->store( sysRoot, true );
-      }
-    for_each( SourceManager::sourceManager()->Source_begin(), SourceManager::sourceManager()->Source_end(),
-              AddResolvables() );
-    dumpRange( USR << "Sources: ",
-               SourceManager::sourceManager()->Source_begin(), SourceManager::sourceManager()->Source_end()
-               ) << endl;
-  }
+  prod.status().setTransact( true, ResStatus::USER );
+  ZYppCommitPolicy policy;
+  policy.rpmNoSignature();
+  ZYppCommitResult res( getZYpp()->commit( policy ) );
 
-  MIL << *SourceManager::sourceManager() << endl;
-  MIL << pool << endl;
-  //vdumpPoolStats( SEC, pool.begin(), pool.end() ) << endl;
+  for_each( pool.byKindBegin<Product>(),
+            pool.byKindEnd<Product>(),
+            showProd );
 
+  dumpPoolStats( USR << "Products:"<< endl,
+                 pool.byKindBegin<Product>(),
+                 pool.byKindEnd<Product>() ) << endl;
 
-
-  seltest( nameKindProxy<Pattern>( pool, "default" ) );
-  seltest( nameKindProxy<Pattern>( pool, "gnome" ) );
 
   zypp::base::LogControl::instance().logNothing();
   return 0;
