@@ -17,7 +17,8 @@ TESTS = Arch Url \
 	PublicKey \
 	PathInfo \
 	Digest \
-	Signature
+	Signature \
+	KeyRing
 
 check_PROGRAMS = Arch Url \
 	RWPtr \
@@ -29,7 +30,8 @@ check_PROGRAMS = Arch Url \
 	PublicKey \
 	PathInfo \
 	Digest \
-	Signature
+	Signature \
+	KeyRing
 
 ## ##################################################
 
@@ -70,6 +72,8 @@ Signature_LDADD  = $(LDADD) -lboost_unit_test_framework
 Url_SOURCES = Url.cc
 Url_LDADD  = $(LDADD) -lboost_unit_test_framework
 
+KeyRing_SOURCES = KeyRing.cc
+KeyRing_LDADD  = $(LDADD) -lboost_unit_test_framework
 
 ## ##################################################
 
