@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Oct 19 14:09:33 CEST 2006 - dmacvicar@suse.de
+
+- version 2.4.1
+- r4338 
+
+-------------------------------------------------------------------
 Thu Oct 19 14:05:18 CEST 2006 - dmacvicar@suse.de
 
 - add zypp-query-pool, so registration doesn't depend on
