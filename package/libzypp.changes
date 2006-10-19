@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Thu Oct 19 18:40:36 CEST 2006 - dmacvicar@suse.de
+
+- added test case for KeyRing
+- fire trustedKeyAdded in all calls to import trusted key
+  not only in signature check workflow.
+- r4342 
+
+-------------------------------------------------------------------
 Thu Oct 19 18:27:02 CEST 2006 - mvidner@suse.cz
 
 - zypper update: implemented minimal version (patches only)
