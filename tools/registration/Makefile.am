@@ -17,7 +17,7 @@ LDADD =		-L$(top_srcdir)/zypp/.libs -lzypp
 
 ## ##################################################
 
-zypp_query_pool_SOURCES = 	zypp-query-pool.cc
+zypp_query_pool_SOURCES = 	zypp-query-pool.cc keyring-callbacks.h
 
 #zmart_LDFLAGS =	-static
 
