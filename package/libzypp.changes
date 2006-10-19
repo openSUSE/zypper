@@ -1,4 +1,16 @@
 -------------------------------------------------------------------
+Thu Oct 19 14:05:18 CEST 2006 - dmacvicar@suse.de
+
+- add zypp-query-pool, so registration doesn't depend on
+  libzypp-zmd-backend being installed. Will remove from
+  backend when suseregister gets updated. 
+
+-------------------------------------------------------------------
+Thu Oct 19 12:31:08 CEST 2006 - schwab@suse.de
+
+- Make sure config.rpath is present.
+
+-------------------------------------------------------------------
 Wed Oct 18 21:40:25 CEST 2006 - mvidner@suse.cz
 
 - zypper search: fixed uninitialized members that made all searches

@@ -1,1 +1,1 @@
-SUBDIRS = zmart
+SUBDIRS = zmart registration

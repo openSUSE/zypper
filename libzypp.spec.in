@@ -68,6 +68,7 @@ Authors:
 %build
 mv configure.ac x
 grep -v devel/ x > configure.ac
+cp /usr/share/gettext/config.rpath .
 gettextize -f
 autoreconf --force --install --symlink --verbose
 %{?suse_update_config:%{suse_update_config -f}}
@@ -97,6 +98,7 @@ make install DESTDIR=$RPM_BUILD_ROOT
 %defattr(-,root,root)
 %{_bindir}/zypper
 %{_sbindir}/zypp-checkpatches
+%{_libdir}/zypp/zypp-query-pool
 %verify(not mode) %attr (755,root,root) %{_sbindir}/zypp-checkpatches-wrapper
 %dir %{_libdir}/libzypp*so.*
 %dir %{prefix}/share/zypp
