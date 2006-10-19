@@ -98,7 +98,8 @@ make install DESTDIR=$RPM_BUILD_ROOT
 %defattr(-,root,root)
 %{_bindir}/zypper
 %{_sbindir}/zypp-checkpatches
-%{_libdir}/zypp/zypp-query-pool
+%{_libdir}/zypp
+%{_libdir}/zypp/*
 %verify(not mode) %attr (755,root,root) %{_sbindir}/zypp-checkpatches-wrapper
 %dir %{_libdir}/libzypp*so.*
 %dir %{prefix}/share/zypp
