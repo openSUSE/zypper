@@ -49,7 +49,7 @@ namespace zypp
        int rtn;
        rtn = gettimeofday( &tp, NULL);
        
-        return str::form( "%i.%i [%d] <%d> %s(%s):%d %s",
+        return str::form( "%ld.%ld [%d] <%d> %s(%s):%d %s",
                         tp.tv_sec,
                         tp.tv_usec,
                         level_r,
