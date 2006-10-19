@@ -1,10 +1,17 @@
 -------------------------------------------------------------------
+Fri Oct 20 00:13:49 CEST 2006 - ma@suse.de
+
+- Add accessor for Product distributionName and distributionEdition.
+  (required by #205392)
+- revision 4347
+
+-------------------------------------------------------------------
 Thu Oct 19 18:40:36 CEST 2006 - dmacvicar@suse.de
 
 - added test case for KeyRing
 - fire trustedKeyAdded in all calls to import trusted key
   not only in signature check workflow.
-- r4342 
+- r4342
 
 -------------------------------------------------------------------
 Thu Oct 19 18:27:02 CEST 2006 - mvidner@suse.cz
@@ -17,14 +24,14 @@ Thu Oct 19 18:27:02 CEST 2006 - mvidner@suse.cz
 Thu Oct 19 14:09:33 CEST 2006 - dmacvicar@suse.de
 
 - version 2.4.1
-- r4338 
+- r4338
 
 -------------------------------------------------------------------
 Thu Oct 19 14:05:18 CEST 2006 - dmacvicar@suse.de
 
 - add zypp-query-pool, so registration doesn't depend on
   libzypp-zmd-backend being installed. Will remove from
-  backend when suseregister gets updated. 
+  backend when suseregister gets updated.
 
 -------------------------------------------------------------------
 Thu Oct 19 12:31:08 CEST 2006 - schwab@suse.de
@@ -41,13 +48,13 @@ Wed Oct 18 21:40:25 CEST 2006 - mvidner@suse.cz
 Wed Oct 18 13:13:16 CEST 2006 - dmacvicar@suse.de
 
 - zypp-checkpatches, write in the right file
-- r4328 
+- r4328
 
 -------------------------------------------------------------------
 Wed Oct 18 12:45:49 CEST 2006 - schubi@suse.de
 
-- Install resolvables although they are unneeded 
-  if they have NOT the kind patch/atoms 
+- Install resolvables although they are unneeded
+  if they have NOT the kind patch/atoms
   Bug 210538 - freshens/supplements does not work with patterns
 - r4326
 
@@ -63,7 +70,7 @@ Tue Oct 17 18:29:34 CEST 2006 - dmacvicar@suse.de
   save version of the generated xml to
   regenerate it if it changes.
   save a random token in case of error to
-  force recreating xml file 
+  force recreating xml file
 - r4321
 
 -------------------------------------------------------------------
@@ -80,7 +87,7 @@ Tue Oct 17 12:36:57 CEST 2006 - dmacvicar@suse.de
   use DISTPRODUCT,DISTVERSION to create the product
   resolvable. have this resolvable provide
   PRODUCT = VERSION
-- r4312 
+- r4312
 
 -------------------------------------------------------------------
 Mon Oct 16 18:05:56 CEST 2006 - mvidner@suse.cz
@@ -98,7 +105,7 @@ Mon Oct 16 15:02:00 CEST 2006 - jkupec@suse.cz
 -------------------------------------------------------------------
 Mon Oct 16 12:57:56 CEST 2006 - schubi@suse.de
 
-- Dont incomplete an uninstalled resolvable, even not when establishing. 
+- Dont incomplete an uninstalled resolvable, even not when establishing.
   Incomplete only makes sense for installed resolvables (when they have broken
   deps), for patches (because they are needed) and for atoms (because they are
   used during patch calculation)
@@ -117,20 +124,20 @@ Mon Oct 16 13:27:50 CEST 2006 - mvidner@suse.cz
 Fri Oct 13 16:51:43 CEST 2006 - dmacvicar@suse.de
 
 - implement rename source in sourcemanager
-- r4286 
+- r4286
 
 -------------------------------------------------------------------
 Fri Oct 13 14:32:44 CEST 2006 - dmacvicar@suse.de
 
 - YaST sources: set alias to product summary if empty
 - show alias on logs.
-- r4281 
+- r4281
 
 -------------------------------------------------------------------
 Thu Oct 12 16:40:29 CEST 2006 - dmacvicar@suse.de
 
 - version 2.4.0 (bin incompat due to callback fixes)
-- r4272 
+- r4272
 
 -------------------------------------------------------------------
 Thu Oct 12 16:30:55 CEST 2006 - ma@suse.de
