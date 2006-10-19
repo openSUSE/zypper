@@ -165,7 +165,11 @@ namespace zypp
 
   void KeyRing::Impl::importKey( const PublicKey &key, bool trusted)
   {
+    callback::SendReport<KeyRingSignals> emitSignal;
+    
     importKey( key.path(), trusted ? trustedKeyRing() : generalKeyRing() );
+    if ( trusted )
+      emitSignal->trustedKeyAdded( (const KeyRing &)(*this), key );
   }
 
   void KeyRing::Impl::deleteKey( const std::string &id, bool trusted)
@@ -267,7 +271,6 @@ namespace zypp
   bool KeyRing::Impl::verifyFileSignatureWorkflow( const Pathname &file, const std::string filedesc, const Pathname &signature)
   {
     callback::SendReport<KeyRingReport> report;
-    callback::SendReport<KeyRingSignals> emitSignal;
     MIL << "Going to verify signature for " << file << " with " << signature << std::endl;
 
     // if signature does not exists, ask user if he wants to accept unsigned file.
@@ -312,7 +315,6 @@ namespace zypp
           {
             MIL << "User wants to import key " << id << " " << key.name() << std::endl;
             importKey( key.path(), trustedKeyRing() );
-            emitSignal->trustedKeyAdded( (const KeyRing &)(*this), key );
             which_keyring = trustedKeyRing();
           }
           else
