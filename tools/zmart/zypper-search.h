@@ -69,19 +69,18 @@ private:
  */
 class ZyppSearch {
 public:
-  ZyppSearch (const ZyppSearchOptions & options, const vector<std::string> & qstrings = vector<string>());
+  ZyppSearch (const ZyppSearchOptions & options, const std::vector<std::string> & qstrings = std::vector<std::string>());
   void doSearch(const boost::function<void(const zypp::PoolItem &)> & f);
 
 private:
   const ZyppSearchOptions & _options;
-  const vector<std::string> & _qstrings;
+  const std::vector<std::string> & _qstrings;
   boost::regex _reg;
 
   bool init() const;
   void setupRegexp();
-  string wildcards2regex(const string & str) const;
+  std::string wildcards2regex(const std::string & str) const;
   bool match(const zypp::PoolItem & pool_item);
-  TableRow createRow(const zypp::PoolItem & pool_item);
 };
 
 #endif /*ZYPPERSEARCH_H_*/
