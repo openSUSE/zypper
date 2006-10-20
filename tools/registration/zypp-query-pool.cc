@@ -9,6 +9,7 @@
 #include <zypp/base/Logger.h>
 #include <zypp/base/Exception.h>
 #include <zypp/base/Algorithm.h>
+#include <zypp/Product.h>
 
 #undef ZYPP_BASE_LOGGER_LOGGROUP
 #define ZYPP_BASE_LOGGER_LOGGROUP "zypp-query-pool"
@@ -23,7 +24,7 @@ using namespace zypp;
 class PrintItem : public resfilter::PoolItemFilterFunctor
 {
 public:
-  const string & _catalog;
+  const string _catalog;
 
   PrintItem( const string & catalog )
       : _catalog( catalog )
@@ -34,14 +35,21 @@ public:
     if (_catalog.empty()
         || _catalog == item->source().alias())
     {
-      cout << (item.status().isInstalled() ? "i" : " ") << "|";
-      cout << item->kind() << "|";
-      cout << item->name() << "|";
-      cout << item->edition().version();
+      cout << (item.status().isInstalled() ? "i" : " ");
+      cout << "|" << item->kind();
+      cout << "|" << item->name();
+      cout << "|" << item->edition().version();
       if (!item->edition().release().empty())
         cout << "-" << item->edition().release();
-      cout << "|";
-      cout << item->arch() << endl;
+      cout << "|" << item->arch();
+
+      if ( isKind<Product>( item.resolvable() ) )
+        {
+          Product::constPtr p( asKind<Product>( item ) );
+          cout << "|" << p->distributionName();
+          cout << "|" << p->distributionEdition();
+        }
+      cout << endl;
     }
     return true;
   }
@@ -87,7 +95,7 @@ query_pool( ZYpp::Ptr Z, const string & filter, const string & catalog)
       exit( 1 );
     }
   }
-    
+
   // add resolvables from the system
   if ( filter != FILTER_ALL )
   {
@@ -162,7 +170,7 @@ main (int argc, char **argv)
 
   zypp::zypp_readonly_hack::IWantIt();
   ZYpp::Ptr Z = zypp::getZYpp();
-  
+
   KeyRingCallbacks keyring_callbacks;
   DigestCallbacks digest_callbacks;
 
