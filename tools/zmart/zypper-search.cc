@@ -45,12 +45,12 @@ bool ZyppSearch::init () const {
       " You will not be able to install stuff" << endl;
   }
 
-  if (!_options.uninstalledOnly()) {
+  if (_options.installedFilter() != ZyppSearchOptions::UNINSTALLED_ONLY) {
     cerr_v << "loading target" << endl;
     load_target();
   }
 
-  if (!_options.installedOnly()) {
+  if (_options.installedFilter() != ZyppSearchOptions::INSTALLED_ONLY) {
     cerr_v << "loading sources" << endl;
     load_sources();
   }
@@ -58,35 +58,36 @@ bool ZyppSearch::init () const {
   return true;
 }
 
-// TODO comment
-void ZyppSearch::doSearch(Table & table) {
+void ZyppSearch::doSearch(const boost::function<void(const PoolItem &)> & f) {
   ResPool pool = getZYpp()->pool();
 
   // search for specific resolvable type only
   if (_options.kind() != Resolvable::Kind()) {
+    cerr_vv << "Search by type" << endl;
     setupRegexp();
     for (ResPool::byKind_iterator it = pool.byKindBegin(_options.kind());
         it != pool.byKindEnd(_options.kind()); ++it) {
-      if (match(*it)) table << createRow(*it);
+      if (match(*it)) f(*it);
     }
   }
   // search for exact package using byName_iterator
   // usable only if there is only one query string and if this string
   // doesn't contain wildcards
-  if (_options.matchExact() && _qstrings.size() == 1 &&
+  else if (_options.matchExact() && _qstrings.size() == 1 &&
       _qstrings[0].find('*') == string::npos &&
       _qstrings[0].find('?') == string::npos) {
     cerr_vv << "Exact name match" << endl;
     for (ResPool::byName_iterator it = pool.byNameBegin(_qstrings[0]);
         it != pool.byNameEnd(_qstrings[0]); ++it) {
-      table << createRow(*it);
+      f(*it); //table << createRow(*it);
     }
   }
   // search among all resolvables
   else {
+    cerr_vv << "Search among all resolvables" << endl;
     setupRegexp();
     for (ResPool::const_iterator it = pool.begin(); it != pool.end(); ++it) {
-      if (match(*it)) table << createRow(*it);
+      if (match(*it)) f(*it); //table << createRow(*it);
     }
   }
 }
@@ -207,16 +208,6 @@ bool ZyppSearch::match(const PoolItem & pool_item) {
       false);
 }
 
-TableRow ZyppSearch::createRow(const PoolItem & pool_item) {
-  TableRow row;
-  row << (pool_item.status().isInstalled() ? "i" : "")
-      << pool_item.resolvable()->source().alias()
-      << "" // TODO what about Bundle?
-      << pool_item.resolvable()->name()
-      << pool_item.resolvable()->edition().asString()
-      << pool_item.resolvable()->arch().asString();
-  return row;
-}
 // Local Variables:
 // c-basic-offset: 2
 // End:

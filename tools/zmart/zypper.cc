@@ -622,6 +622,11 @@ int main(int argc, char **argv)
 
   // --------------------------( search )-------------------------------------
 
+  // FIXME --uninstalled-only does not really exclude installed resolvables
+  // FIXME search for all resolvables displays installed packages twice
+  // FIXME source (catalog) information missing for installed packages
+  // TODO print rug's v status  
+
   if (command == "search" || command == "se") {
     ZyppSearchOptions options;
 
@@ -631,9 +636,9 @@ int main(int argc, char **argv)
     }
 
     if (gSettings.disable_system_resolvables || copts.count("uninstalled-only"))
-      options.setUnInstalledOnly();
+      options.setInstalledFilter(ZyppSearchOptions::UNINSTALLED_ONLY);
 
-    if (copts.count("installed-only")) options.setInstalledOnly();
+    if (copts.count("installed-only")) options.setInstalledFilter(ZyppSearchOptions::INSTALLED_ONLY);
     if (copts.count("match-any")) options.setMatchAny();
     if (copts.count("match-words")) options.setMatchWords();
     if (copts.count("match-exact")) options.setMatchExact();
@@ -649,20 +654,14 @@ int main(int argc, char **argv)
       }
       options.setKind(kind);
     }
-    
+
     options.resolveConflicts();
 
     Table t;
     t.style(Ascii);
 
-    TableHeader header;
-    // do not change the header as the structure of the table is at the time
-    // hardcoded in ZyppSearch::createRow(const PoolItem & pool_item)
-    header << "S" << "Catalog" << "Bundle" << "Name" << "Version" << "Arch";
-    t << header; 
-
     ZyppSearch search(options,arguments);
-    search.doSearch(t);
+    search.doSearch(FillTable(t));
 
     if (t.empty())
       cout << "No packages found." << endl;
