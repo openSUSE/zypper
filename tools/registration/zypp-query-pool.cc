@@ -24,7 +24,7 @@ using namespace zypp;
 class PrintItem : public resfilter::PoolItemFilterFunctor
 {
 public:
-  const string _catalog;
+  string _catalog;
 
   PrintItem( const string & catalog )
       : _catalog( catalog )
