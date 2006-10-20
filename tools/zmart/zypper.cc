@@ -142,7 +142,7 @@ int main(int argc, char **argv)
 {
   struct Bye {
     ~Bye() {
-      cerr_v << "Exiting main()" << endl;
+      cerr_vv << "Exiting main()" << endl;
     }
   } say_goodbye __attribute__ ((__unused__));
 
@@ -602,17 +602,9 @@ int main(int argc, char **argv)
       {
 	cerr << "Warning! No sources. Operating only over the installed resolvables. You will not be able to install stuff" << endl;
       } 
-  
-    // dont add rpms
-    cerr_v << "initializing target" << endl;
-    God->initializeTarget("/");
-  
-    cerr_v << "calculating token" << endl;
-    std::string token = calculate_token();
-    cerr_v << "token:" << token << endl;
-  
-    if ( token != gSettings.previous_token )
-      {
+
+    cond_init_target ();
+    if (true) {
 	cond_load_resolvables ();
 
 	for ( vector<string>::const_iterator it = gData.packages_to_install.begin(); it != gData.packages_to_install.end(); ++it ) {
@@ -624,9 +616,6 @@ int main(int argc, char **argv)
 	}
 
 	solve_and_commit ();
-      }
-    else {
-      cerr_v << "Token unchanged" << endl;
     }
     return 0;
   }

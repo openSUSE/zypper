@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Fri Oct 20 16:55:44 CEST 2006 - mvidner@suse.cz
+
+- zypper: nicer progress reports, with or without --verbose.
+
+-------------------------------------------------------------------
 Fri Oct 20 16:25:50 CEST 2006 - ma@suse.de
 
 - Fixed reloading of target data after commit. Broken since

@@ -30,7 +30,6 @@ void cond_init_system_sources ()
   }
 
   if ( ! gSettings.disable_system_sources ) {
-    cerr_v << "initializing sources" << endl;
     init_system_sources();
   }
 } 
@@ -41,7 +40,7 @@ void init_system_sources()
   manager = SourceManager::sourceManager();
   try
   {
-    cerr_v << "Restoring system sources..." << endl;
+    cerr << "Restoring system sources..." << endl;
     manager->restore("/");
   }
   catch (Exception & excpt_r)

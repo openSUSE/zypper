@@ -18,7 +18,7 @@
 #include <zypp/Package.h>
 //#include <zypp/target/rpm/RpmCallbacks.h>
 
-#include "AliveCursor.h"
+#include "zypper-callbacks.h"
 
 using namespace std;
 
@@ -31,7 +31,7 @@ struct MessageResolvableReportReceiver : public zypp::callback::ReceiveReport<zy
 {
   virtual void show( zypp::Message::constPtr message )
   {
-   
+      std::cerr << message;
   }
 };
 
@@ -42,37 +42,21 @@ struct ScanRpmDbReceive : public zypp::callback::ReceiveReport<zypp::target::rpm
 {
   int & _step;				// step counter for install & receive steps
   int last_reported;
-  AliveCursor _cursor;
   
   ScanRpmDbReceive( int & step )
   : _step( step )
   {
   }
 
-  ~ScanRpmDbReceive( )
-  {
-  }
-  
-  virtual void reportbegin()
-  {
-    cout << _cursor << " 0 %"; 
-  }
-
-  virtual void reportend()
-  {
-    cout << "\r done..." << endl; 
-  }
-
   virtual void start()
   {
     last_reported = 0;
-
+    progress (0);
   }
 
   virtual bool progress(int value)
   {
-    cout << "\r" << _cursor << " " << value << "%";
-    ++_cursor;
+    display_progress ("RPM database", value);
     return true;
   }
 
@@ -83,16 +67,8 @@ struct ScanRpmDbReceive : public zypp::callback::ReceiveReport<zypp::target::rpm
 
   virtual void finish( Error error, const std::string& reason )
   {
-    string errmsg;
-    switch (error) {
-      case NO_ERROR:
-        return;
-        break;
-      case FAILED:
-        errmsg = "FAILED";
-        break;
-    }
-    return;
+    display_done ();
+    display_error (error, reason);
   }
 };
 
@@ -100,13 +76,21 @@ struct ScanRpmDbReceive : public zypp::callback::ReceiveReport<zypp::target::rpm
 struct RemoveResolvableReportReceiver : public zypp::callback::ReceiveReport<zypp::target::rpm::RemoveResolvableReport>
 {
   virtual void start( zypp::Resolvable::constPtr resolvable )
-  {}
+  {
+    std::cerr << "Removing: " << *resolvable << std::endl;
+  }
 
   virtual bool progress(int value, zypp::Resolvable::constPtr resolvable)
-  { return true; }
+  {
+    display_progress ("Removing " + to_string (resolvable), value);
+    return true;
+  }
 
   virtual Action problem( zypp::Resolvable::constPtr resolvable, Error error, const std::string& description )
-  { return ABORT; }
+  {
+    cerr << resolvable << error << description << endl;
+    return (Action) read_action_ari ();
+  }
 
   virtual void finish( zypp::Resolvable::constPtr resolvable, Error error, const std::string& reason )
   {}
@@ -115,18 +99,17 @@ struct RemoveResolvableReportReceiver : public zypp::callback::ReceiveReport<zyp
 // progress for installing a resolvable
 struct InstallResolvableReportReceiver : public zypp::callback::ReceiveReport<zypp::target::rpm::InstallResolvableReport>
 {
-  AliveCursor _cursor;
   zypp::Resolvable::constPtr _resolvable;
   
   void display_step( zypp::Resolvable::constPtr resolvable, int value )
   {
-    cout << CLEARLN << _cursor << " Installing " <<  resolvable << " [" << value << " %]  " << flush;
-    ++_cursor;
+    display_progress ("Installing " /* + to_string (resolvable) */,  value);
   }
   
   virtual void start( zypp::Resolvable::constPtr resolvable )
   {
     _resolvable = resolvable;
+    cerr << "Installing: " + to_string (resolvable) << endl;
   }
 
   virtual bool progress(int value, zypp::Resolvable::constPtr resolvable)
@@ -137,12 +120,22 @@ struct InstallResolvableReportReceiver : public zypp::callback::ReceiveReport<zy
 
   virtual Action problem( zypp::Resolvable::constPtr resolvable, Error error, const std::string& description, RpmLevel level )
   {
-    std::cout << resolvable << " " << description << std::endl;
-    return ABORT;
+    cerr << resolvable << " " << description << std::endl;
+    cerr << error << ", " << level << endl;
+    return (Action) read_action_ari ();
   }
 
   virtual void finish( zypp::Resolvable::constPtr resolvable, Error error, const std::string& reason, RpmLevel level )
-  {}
+  {
+    display_done ();
+    if (error != NO_ERROR) {
+      const char * level_s[] = {
+	"", "(with nodeps)", "(with nodeps+force)"
+      };
+      cerr << level_s[level];
+    }
+    display_error (error, reason);
+  }
 };
 
 
@@ -181,3 +174,7 @@ class RpmCallbacks {
 };
 
 #endif // ZMD_BACKEND_RPMCALLBACKS_H
+// Local Variables:
+// mode: c++
+// c-basic-offset: 2
+// End:

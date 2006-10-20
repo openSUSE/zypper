@@ -207,6 +207,7 @@ void mark_for_uninstall( const ResObject::Kind &kind,
 }
 
 void show_problems () {
+  ostream& stm = cerr;
   Resolver_Ptr resolver = zypp::getZYpp()->resolver();
   ResolverProblemList rproblems = resolver->problems ();
   ResolverProblemList::iterator
@@ -214,11 +215,11 @@ void show_problems () {
     e = rproblems.end (),
     i;
   if (b == e) {
-    cerr_v << "(none)" << endl;
+    stm << "(none)" << endl;
   }
   for (i = b; i != e; ++i) {
-    cerr_v << "PROB " << (*i)->description () << endl;
-    cerr_v << ":    " << (*i)->details () << endl;
+    stm << "PROB " << (*i)->description () << endl;
+    stm << ":    " << (*i)->details () << endl;
 
     ProblemSolutionList solutions = (*i)->solutions ();
     ProblemSolutionList::iterator
@@ -226,8 +227,8 @@ void show_problems () {
       ee = solutions.end (),
       ii;
     for (ii = bb; ii != ee; ++ii) {
-      cerr_v << " SOL  " << (*ii)->description () << endl;
-      cerr_v << " :    " << (*ii)->details () << endl;
+      stm << " SOL  " << (*ii)->description () << endl;
+      stm << " :    " << (*ii)->details () << endl;
     }
   }
 }
@@ -241,10 +242,10 @@ void show_summary()
     if ( it->status().isToBeInstalled() || it->status().isToBeUninstalled() )
     {
       if ( it->status().isToBeInstalled() )
-        cout << "<install>   ";
+        cerr << "<install>   ";
       if ( it->status().isToBeUninstalled() )
-        cout << "<uninstall> ";
-      cout << *res << std::endl;
+        cerr << "<uninstall> ";
+      cerr << *res << endl;
     }
   } 
 }
@@ -287,18 +288,16 @@ std::string calculate_token()
 void cond_load_resolvables ()
 {	
   // something changed
-  cerr_v << "loading sources" << endl;
   load_sources();
     
   if ( ! gSettings.disable_system_resolvables ) {
-    cerr_v << "loading target" << endl;
     load_target();
   }
 }
 
 void load_target()
 {
-  cerr_v << "Adding system resolvables to the pool..." << endl;
+  cerr << "Adding system resolvables to the pool..." << endl;
   ResStore tgt_resolvables(God->target()->resolvables());
   cerr_v << "   " <<  tgt_resolvables.size() << " resolvables." << endl;
   God->addResolvables(tgt_resolvables, true /*installed*/);
@@ -312,7 +311,7 @@ void load_sources()
     // skip non YUM sources for now
     //if ( it->type() == "YUM" )
     //{
-    cerr_v << "Adding " << it->alias() << " resolvables to the pool..." << endl;
+    cerr << "Adding " << it->alias() << " resolvables to the pool..." << endl;
     ResStore src_resolvables(it->resolvables());
     cerr_v << "   " <<  src_resolvables.size() << " resolvables." << endl;
     God->addResolvables(src_resolvables);
@@ -520,10 +519,10 @@ void solve_and_commit () {
   cerr_v << "resolving" << endl;
   resolve();
     
-  cerr_v << "Problems:" << endl;
+  cerr << "Problems:" << endl;
   show_problems ();
 
-  cerr_v << "Summary:" << endl;
+  cerr << "Summary:" << endl;
   show_summary();
       
   cerr << "Continue? [y/n] ";
@@ -531,7 +530,7 @@ void solve_and_commit () {
   {
     cerr_v << "committing" << endl;
     ZYppCommitResult result = God->commit( ZYppCommitPolicy() );
-    cerr << result << std::endl; 
+    cerr_v << result << std::endl; 
   }
 }
 

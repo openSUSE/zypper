@@ -23,6 +23,8 @@ zmart_SOURCES = 	zmart.cc zmart-sources.cc zmart-misc.cc \
 	zmart-rpm-callbacks.h  \
 	zmart-media-callbacks.h  \
 	zmart-source-callbacks.h \
+	zypper-callbacks.h \
+	zypper-callbacks.cc \
 	zmart-sources.h \
   zmart-updates.cc \
 	zmart-updates.h \
@@ -31,7 +33,8 @@ zmart_SOURCES = 	zmart.cc zmart-sources.cc zmart-misc.cc \
 	zmart-misc.h \
 	zypper-tabulator.h \
 	zypper-tabulator.cc \
-  zmart.h
+	zmart.h
+
 
 zypper_SOURCES = 	zypper.cc zmart-sources.cc zmart-misc.cc \
 	AliveCursor.h \
@@ -39,13 +42,16 @@ zypper_SOURCES = 	zypper.cc zmart-sources.cc zmart-misc.cc \
 	zmart-rpm-callbacks.h  \
 	zmart-media-callbacks.h  \
 	zmart-source-callbacks.h \
+	zypper-callbacks.h \
+	zypper-callbacks.cc \
 	zmart-sources.h \
 	zmart-misc.h \
 	zypper-tabulator.h \
 	zypper-tabulator.cc \
 	zypper-search.h \
 	zypper-search.cc \
-  zmart.h
+	zmart.h
+zypper_LDADD = $(top_srcdir)/zypp/libzypp.la -lboost_regex
 
 zypp_checkpatches_SOURCES = 	zypp-checkpatches.cc zmart-sources.cc \
 	zypper-tabulator.h \
@@ -61,12 +67,5 @@ zypp_checkpatches_wrapper_SOURCES = zypp-checkpatches-wrapper.c
 zypp_checkpatches_wrapper_LDADD =
 
 #zmart_LDFLAGS =	-static
-
-.PHONY:        always
-
-#$(noinst_PROGRAMS):    $(top_srcdir)/zypp/lib@PACKAGE@.la
-
-$(top_srcdir)/zypp/lib@PACKAGE@.la:     always
-	$(MAKE) -C $(top_srcdir)/zypp
 
 ## ##################################################
