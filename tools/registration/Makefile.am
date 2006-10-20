@@ -1,8 +1,11 @@
 ## Process this file with automake to produce Makefile.in
 ## ##################################################
 
-bindir = $(libdir)/zypp
+libexecdir=$(exec_prefix)/lib
+#pkglibexecdir=$(libexecdir)/@PACKAGE@
+#pkglibexec_PROGRAMS = zypp-query-pool
 
+bindir = $(libexecdir)/zypp
 bin_PROGRAMS = zypp-query-pool
 
 ## ##################################################
