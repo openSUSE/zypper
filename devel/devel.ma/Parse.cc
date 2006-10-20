@@ -248,6 +248,7 @@ int main( int argc, char * argv[] )
       getZYpp()->addResolvables( src.resolvables() );
     }
   MIL << pool << endl;
+
   PoolItem prod( *pool.byKindBegin<Product>() );
   showProd( prod );
 
