@@ -298,8 +298,8 @@ namespace zypp
       enum Notify { OUTPUT, PING };
 
       /** Whether executing do_script on install or undo_script on delete. */
-      virtual void start( const Resolvable::constPtr & script_r,
-                          const Pathname & path_r,
+      virtual void start( const Resolvable::constPtr & /*script_r*/,
+			  const Pathname & /*path_r*/,
                           Task )
       {}
       /** Progress provides the script output. If the script is quiet,
