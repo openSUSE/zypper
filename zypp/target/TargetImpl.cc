@@ -52,70 +52,70 @@ using zypp::solver::detail::Helper;
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
-  ///////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////
   namespace target
   { /////////////////////////////////////////////////////////////////
 
-    ///////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////
     namespace
     { /////////////////////////////////////////////////////////////////
       void ExecuteScriptHelper( Script::constPtr script_r, bool do_r )
       {
         MIL << "Execute script " << script_r << endl;
         if ( ! script_r )
-          {
-            INT << "NULL Script passed." << endl;
-            return;
-          }
+        {
+          INT << "NULL Script passed." << endl;
+          return;
+        }
 
         Pathname path;
         if ( do_r )
-          {
-            path = script_r->do_script();
-          }
+        {
+          path = script_r->do_script();
+        }
         else
+        {
+          if ( script_r->undo_available() )
           {
-            if ( script_r->undo_available() )
-              {
-                path = script_r->undo_script();
-              }
-            else
-              {
-                DBG << "No undo script for " << script_r << endl;
-                return; // success
-              }
+            path = script_r->undo_script();
           }
+          else
+          {
+            DBG << "No undo script for " << script_r << endl;
+            return; // success
+          }
+        }
 
         // Go...
         callback::SendReport<ScriptResolvableReport> report;
         report->start( script_r, path,
                        (do_r ? ScriptResolvableReport::DO
-                             : ScriptResolvableReport::UNDO ) );
+                        : ScriptResolvableReport::UNDO ) );
 
         PathInfo pi( path );
         if ( ! pi.isFile() )
-          {
-            std::ostringstream err;
-            err << "Script is not a file: " << pi.fileType() << " " << path;
-            report->problem( err.str() );
-            ZYPP_THROW(Exception(err.str()));
-          }
+        {
+          std::ostringstream err;
+          err << "Script is not a file: " << pi.fileType() << " " << path;
+          report->problem( err.str() );
+          ZYPP_THROW(Exception(err.str()));
+        }
 
         filesystem::chmod( path, S_IRUSR|S_IXUSR );	// "r-x------"
         ExternalProgram prog( path.asString(), ExternalProgram::Stderr_To_Stdout, false, -1, true );
         for ( std::string output = prog.receiveLine(); output.length(); output = prog.receiveLine() )
-          {
-            report->progress( ScriptResolvableReport::OUTPUT, output );
-          }
+        {
+          report->progress( ScriptResolvableReport::OUTPUT, output );
+        }
 
         int exitCode = prog.close();
         if ( exitCode != 0 )
-          {
-            std::ostringstream err;
-            err << "Script failed with exit code " << exitCode;
-            report->problem( err.str() );
-            ZYPP_THROW(Exception(err.str()));
-          }
+        {
+          std::ostringstream err;
+          err << "Script failed with exit code " << exitCode;
+          report->problem( err.str() );
+          ZYPP_THROW(Exception(err.str()));
+        }
 
         report->finish();
         return;
@@ -130,16 +130,16 @@ namespace zypp
       {
         ExecuteScriptHelper( script_r, false );
       }
-      /////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////
     } // namespace
-    ///////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////
 
 
     /** Helper for PackageProvider queries during commit. */
     struct QueryInstalledEditionHelper
     {
       QueryInstalledEditionHelper( rpm::RpmDb & rpmdb_r )
-      : _rpmdb( rpmdb_r )
+          : _rpmdb( rpmdb_r )
       {}
 
       bool operator()( const std::string & name_r, const Edition & ed_r ) const
@@ -148,7 +148,7 @@ namespace zypp
           return _rpmdb.hasPackage( name_r );
         return _rpmdb.hasPackage( name_r, ed_r );
       }
-    private:
+private:
       rpm::RpmDb & _rpmdb;
     };
 
@@ -160,28 +160,28 @@ namespace zypp
     TargetImpl_Ptr TargetImpl::nullimpl()
     {
       if (_nullimpl == 0)
-	_nullimpl = new TargetImpl;
+        _nullimpl = new TargetImpl;
       return _nullimpl;
     }
 
 
-    ///////////////////////////////////////////////////////////////////
-    //
-    //	METHOD NAME : TargetImpl::TargetImpl
-    //	METHOD TYPE : Ctor
-    //
+///////////////////////////////////////////////////////////////////
+//
+//	METHOD NAME : TargetImpl::TargetImpl
+//	METHOD TYPE : Ctor
+//
     TargetImpl::TargetImpl(const Pathname & root_r)
-    : _root(root_r), _storage_enabled(false)
+        : _root(root_r), _storage_enabled(false)
     {
       _rpm.initDatabase(root_r);
       MIL << "Initialized target on " << _root << endl;
     }
 
-    ///////////////////////////////////////////////////////////////////
-    //
-    //	METHOD NAME : TargetImpl::~TargetImpl
-    //	METHOD TYPE : Dtor
-    //
+///////////////////////////////////////////////////////////////////
+//
+//	METHOD NAME : TargetImpl::~TargetImpl
+//	METHOD TYPE : Dtor
+//
     TargetImpl::~TargetImpl()
     {
       _rpm.closeDatabase();
@@ -212,33 +212,33 @@ namespace zypp
 
       if ( kind == ResTraits<zypp::Package>::kind )
       {
-           std::list<Package::Ptr> packages = _rpm.getPackages();
-          for (std::list<Package::Ptr>::const_iterator it = packages.begin();
-            it != packages.end();
-            it++)
-          {
-            _store.insert(*it);
-          }
-          _resstore_loaded[kind] = true;
+        std::list<Package::Ptr> packages = _rpm.getPackages();
+        for (std::list<Package::Ptr>::const_iterator it = packages.begin();
+             it != packages.end();
+             it++)
+        {
+          _store.insert(*it);
+        }
+        _resstore_loaded[kind] = true;
       }
       else
       {
-          if ( isStorageEnabled() )
+        if ( isStorageEnabled() )
+        {
+          // resolvables stored in the zypp storage database
+          std::list<ResObject::Ptr> resolvables = _storage.storedObjects(kind);
+          for (std::list<ResObject::Ptr>::iterator it = resolvables.begin();
+               it != resolvables.end();
+               it++)
           {
-            // resolvables stored in the zypp storage database
-            std::list<ResObject::Ptr> resolvables = _storage.storedObjects(kind);
-            for (std::list<ResObject::Ptr>::iterator it = resolvables.begin();
-                it != resolvables.end();
-                it++)
-            {
-              _store.insert(*it);
-            }
+            _store.insert(*it);
           }
-          else
-          {
-            WAR << "storage target not enabled" << std::endl;
-          }
-          _resstore_loaded[kind] = true;
+        }
+        else
+        {
+          WAR << "storage target not enabled" << std::endl;
+        }
+        _resstore_loaded[kind] = true;
       } // end switch
     }
 
@@ -289,21 +289,23 @@ namespace zypp
       {
 
         pool::GetResolvablesToInsDel
-          collect( pool_r, policy_r.restrictToMedia() ? pool::GetResolvablesToInsDel::ORDER_BY_MEDIANR
-                                                      : pool::GetResolvablesToInsDel::ORDER_BY_SOURCE );
+        collect( pool_r, policy_r.restrictToMedia() ? pool::GetResolvablesToInsDel::ORDER_BY_MEDIANR
+                 : pool::GetResolvablesToInsDel::ORDER_BY_SOURCE );
         MIL << "GetResolvablesToInsDel: " << endl << collect << endl;
         to_uninstall.swap( collect._toDelete );
         to_install.swap( collect._toInstall );
         to_srcinstall.swap( collect._toSrcinstall );
       }
 
-      if ( policy_r.restrictToMedia() ) {
+      if ( policy_r.restrictToMedia() )
+      {
         MIL << "Restrict to media number " << policy_r.restrictToMedia() << endl;
       }
 
       commit (to_uninstall, policy_r, pool_r );
 
-      if (policy_r.restrictToMedia() == 0) {			// commit all
+      if (policy_r.restrictToMedia() == 0)
+      {			// commit all
         result._remaining = commit( to_install, policy_r, pool_r );
         result._srcremaining = commit( to_srcinstall, policy_r, pool_r );
       }
@@ -321,14 +323,14 @@ namespace zypp
 
           if ( hitUnwantedMedia
                || ( res->sourceMediaNr() && res->sourceMediaNr() != policy_r.restrictToMedia() ) )
-            {
-              hitUnwantedMedia = true;
-              result._remaining.push_back( *it );
-            }
+          {
+            hitUnwantedMedia = true;
+            result._remaining.push_back( *it );
+          }
           else
-            {
-              current_install.push_back( *it );
-            }
+          {
+            current_install.push_back( *it );
+          }
         }
 
         TargetImpl::PoolItemList bad = commit( current_install, policy_r, pool_r );
@@ -343,7 +345,8 @@ namespace zypp
             XXX << "Package " << *pkg << ", wrong media " << pkg->sourceMediaNr() << endl;
             result._srcremaining.push_back( *it );
           }
-          else {
+          else
+          {
             current_srcinstall.push_back( *it );
           }
         }
@@ -360,7 +363,7 @@ namespace zypp
     TargetImpl::PoolItemList
     TargetImpl::commit( const TargetImpl::PoolItemList & items_r,
                         const ZYppCommitPolicy & policy_r,
-			const ResPool & pool_r )
+                        const ResPool & pool_r )
     {
       TargetImpl::PoolItemList remaining;
 
@@ -384,119 +387,128 @@ namespace zypp
           Package::constPtr p = dynamic_pointer_cast<const Package>(it->resolvable());
           if (it->status().isToBeInstalled())
           {
-	    source::ManagedFile localfile;
-	    try {
-                source::PackageProvider pkgProvider( p, packageProviderPolicy );
-            	localfile = pkgProvider.providePackage();
-	    }
-	    catch( const source::SkipRequestedException & e )
-	    {
-		ZYPP_CAUGHT( e );
-		WAR << "Skipping package " << p << " in commit" << endl;
-		continue;
-	    }
+            source::ManagedFile localfile;
+            try
+            {
+              source::PackageProvider pkgProvider( p, packageProviderPolicy );
+              localfile = pkgProvider.providePackage();
+            }
+            catch ( const source::SkipRequestedException & e )
+            {
+              ZYPP_CAUGHT( e );
+              WAR << "Skipping package " << p << " in commit" << endl;
+              continue;
+            }
 
-	    lastUsedSource = p->source();			// remember the package source
+            lastUsedSource = p->source();			// remember the package source
 
 #warning Exception handling
-	    // create a installation progress report proxy
+            // create a installation progress report proxy
             RpmInstallPackageReceiver progress( it->resolvable() );
             progress.connect();
             bool success = true;
-	    unsigned flags = 0;
+            unsigned flags = 0;
             if (p->installOnly()) flags |= rpm::RpmDb::RPMINST_NOUPGRADE;
             if (policy_r.dryRun()) flags |= rpm::RpmDb::RPMINST_TEST;
             if (policy_r.rpmNoSignature()) flags |= rpm::RpmDb::RPMINST_NOSIGNATURE;
 
-            try {
+            try
+            {
               progress.tryLevel( target::rpm::InstallResolvableReport::RPM );
               rpm().installPackage( localfile, flags );
 
-	      if( progress.aborted() )
-	      {
-	        WAR << "commit aborted by the user" << endl;
-		progress.disconnect();
-		abort = true;
-		break;
-	      }
+              if ( progress.aborted() )
+              {
+                WAR << "commit aborted by the user" << endl;
+                progress.disconnect();
+                abort = true;
+                break;
+              }
 
             }
-            catch (Exception & excpt_r) {
+            catch (Exception & excpt_r)
+            {
               ZYPP_CAUGHT(excpt_r);
               WAR << "Install failed, retrying with --nodeps" << endl;
-	      if (policy_r.dryRun()) {
-	          WAR << "dry run failed" << endl;
-		  progress.disconnect();
-		  break;
-	      }
+              if (policy_r.dryRun())
+              {
+                WAR << "dry run failed" << endl;
+                progress.disconnect();
+                break;
+              }
 
-              try {
+              try
+              {
                 progress.tryLevel( target::rpm::InstallResolvableReport::RPM_NODEPS );
-		flags |= rpm::RpmDb::RPMINST_NODEPS;
+                flags |= rpm::RpmDb::RPMINST_NODEPS;
                 rpm().installPackage( localfile, flags );
 
-	        if( progress.aborted() )
-	        {
-	          WAR << "commit aborted by the user" << endl;
-		  abort = true;
-		  progress.disconnect();
-		  break;
-	        }
+                if ( progress.aborted() )
+                {
+                  WAR << "commit aborted by the user" << endl;
+                  abort = true;
+                  progress.disconnect();
+                  break;
+                }
               }
               catch (Exception & excpt_r)
               {
                 ZYPP_CAUGHT(excpt_r);
                 WAR << "Install failed again, retrying with --force --nodeps" << endl;
 
-                try {
+                try
+                {
                   progress.tryLevel( target::rpm::InstallResolvableReport::RPM_NODEPS_FORCE );
-		  flags |= rpm::RpmDb::RPMINST_FORCE;
+                  flags |= rpm::RpmDb::RPMINST_FORCE;
                   rpm().installPackage( localfile, flags );
                 }
-                catch (Exception & excpt_r) {
+                catch (Exception & excpt_r)
+                {
                   remaining.push_back( *it );
                   success = false;
                   ZYPP_CAUGHT(excpt_r);
                 }
 
-		if( progress.aborted() )
-		{
-		    WAR << "commit aborted by the user" << endl;
-		    abort = true;
-		    progress.disconnect();
-		    break;
-		}
+                if ( progress.aborted() )
+                {
+                  WAR << "commit aborted by the user" << endl;
+                  abort = true;
+                  progress.disconnect();
+                  break;
+                }
               }
             }
             if (success
-		&& !policy_r.dryRun())
-	    {
-	      it->status().resetTransact( ResStatus::USER );
+                && !policy_r.dryRun())
+            {
+              it->status().resetTransact( ResStatus::USER );
             }
             progress.disconnect();
-	    p->source().releaseFile( p->location(), p->sourceMediaNr() );
+            p->source().releaseFile( p->location(), p->sourceMediaNr() );
           }
           else
           {
-	    bool success = true;
+            bool success = true;
 
             RpmRemovePackageReceiver progress( it->resolvable() );
             progress.connect();
-	    unsigned flags = rpm::RpmDb::RPMINST_NODEPS;
-	    if (policy_r.dryRun()) flags |= rpm::RpmDb::RPMINST_TEST;
-            try {
+            unsigned flags = rpm::RpmDb::RPMINST_NODEPS;
+            if (policy_r.dryRun()) flags |= rpm::RpmDb::RPMINST_TEST;
+            try
+            {
               rpm().removePackage( p, flags );
             }
-            catch (Exception & excpt_r) {
-	      WAR << "removal of " << p << " failed";
-	      success = false;
+            catch (Exception & excpt_r)
+            {
+              WAR << "removal of " << p << " failed";
+              success = false;
               ZYPP_CAUGHT( excpt_r );
             }
-	    if (success
-		&& !policy_r.dryRun())
-	    {
-	      it->status().resetTransact( ResStatus::USER );
-	    }
+            if (success
+                && !policy_r.dryRun())
+            {
+              it->status().resetTransact( ResStatus::USER );
+            }
             progress.disconnect();
           }
         }
@@ -509,34 +521,34 @@ namespace zypp
               bool success = false;
               try
               {
-		if (isKind<Message>(it->resolvable()))
-		{
-		  Message::constPtr m = dynamic_pointer_cast<const Message>(it->resolvable());
-		  std::string text = m->text().asString();
+                if (isKind<Message>(it->resolvable()))
+                {
+                  Message::constPtr m = dynamic_pointer_cast<const Message>(it->resolvable());
+                  std::string text = m->text().asString();
 
-		  callback::SendReport<target::MessageResolvableReport> report;
+                  callback::SendReport<target::MessageResolvableReport> report;
 
-		  report->show( m );
+                  report->show( m );
 
-		  MIL << "Displaying the text '" << text << "'" << endl;
-		}
-		else if (isKind<Script>(it->resolvable()))
-		{
+                  MIL << "Displaying the text '" << text << "'" << endl;
+                }
+                else if (isKind<Script>(it->resolvable()))
+                {
                   ExecuteDoScript( asKind<Script>(it->resolvable()) );
-		}
+                }
                 else if (!isKind<Atom>(it->resolvable()))	// atoms are re-created from the patch data, no need to save them
                 {
-		  // #160792 do not just add, also remove older versions
-		  if (true) // !installOnly - only on Package?!
-		  {
-		    // this would delete the same item over and over
-		    //for (PoolItem_Ref old = Helper::findInstalledItem (pool_r, *it); old; )
-		    PoolItem_Ref old = Helper::findInstalledItem (pool_r, *it);
-		    if (old)
-		    {
-		      _storage.deleteObject(old.resolvable());
-		    }
-		  }
+                  // #160792 do not just add, also remove older versions
+                  if (true) // !installOnly - only on Package?!
+                  {
+                    // this would delete the same item over and over
+                    //for (PoolItem_Ref old = Helper::findInstalledItem (pool_r, *it); old; )
+                    PoolItem_Ref old = Helper::findInstalledItem (pool_r, *it);
+                    if (old)
+                    {
+                      _storage.deleteObject(old.resolvable());
+                    }
+                  }
                   _storage.storeObject(it->resolvable());
                 }
                 success = true;
@@ -545,9 +557,9 @@ namespace zypp
               {
                 ZYPP_CAUGHT(excpt_r);
                 WAR << "Install of Resolvable from storage failed" << endl;
-	      }
+              }
               if (success)
-		it->status().resetTransact( ResStatus::USER );
+                it->status().resetTransact( ResStatus::USER );
             }
             else
             {					// isToBeUninstalled
@@ -558,14 +570,14 @@ namespace zypp
                 {
                   DBG << "Uninstalling atom - no-op" << endl;
                 }
-		else if (isKind<Message>(it->resolvable()))
-		{
-		  DBG << "Uninstalling message - no-op" << endl;
-		}
-		else if (isKind<Script>(it->resolvable()))
-		{
+                else if (isKind<Message>(it->resolvable()))
+                {
+                  DBG << "Uninstalling message - no-op" << endl;
+                }
+                else if (isKind<Script>(it->resolvable()))
+                {
                   ExecuteUndoScript( asKind<Script>(it->resolvable()) );
-		}
+                }
                 else
                 {
                   _storage.deleteObject(it->resolvable());
@@ -577,8 +589,8 @@ namespace zypp
                 ZYPP_CAUGHT(excpt_r);
                 WAR << "Uninstall of Resolvable from storage failed" << endl;
               }
-	      if (success)
-		it->status().resetTransact( ResStatus::USER );
+              if (success)
+                it->status().resetTransact( ResStatus::USER );
             }
           }
           else
@@ -596,36 +608,43 @@ namespace zypp
       //   In the case of 'commit any media', end of commit means we're completely
       //   done and don't need the source's media anyways.
 
-      if (lastUsedSource) {		// if a source was used
-	lastUsedSource.release();	//  release their medias
+      if (lastUsedSource)
+      {		// if a source was used
+        lastUsedSource.release();	//  release their medias
       }
 
-      if( abort )
+      if ( abort )
         ZYPP_THROW( TargetAbortedException( N_("Target commit aborted by user.") ) );
 
       return remaining;
     }
 
     rpm::RpmDb & TargetImpl::rpm()
-    { return _rpm; }
+    {
+      return _rpm;
+    }
 
     bool TargetImpl::providesFile (const std::string & path_str, const std::string & name_str) const
-    { return _rpm.hasFile(path_str, name_str); }
+    {
+      return _rpm.hasFile(path_str, name_str);
+    }
 
-      /** Return the resolvable which provides path_str (rpm -qf)
-	  return NULL if no resolvable provides this file  */
+    /** Return the resolvable which provides path_str (rpm -qf)
+    return NULL if no resolvable provides this file  */
     ResObject::constPtr TargetImpl::whoOwnsFile (const std::string & path_str) const
     {
-	string name = _rpm.whoOwnsFile (path_str);
-	if (name.empty())
-	    return NULL;
+      string name = _rpm.whoOwnsFile (path_str);
+      if (name.empty())
+        return NULL;
 
-	for (ResStore::const_iterator it = _store.begin(); it != _store.end(); ++it) {
-	    if ((*it)->name() == name) {
-		return *it;
-	    }
-	}
-	return NULL;
+      for (ResStore::const_iterator it = _store.begin(); it != _store.end(); ++it)
+      {
+        if ((*it)->name() == name)
+        {
+          return *it;
+        }
+      }
+      return NULL;
     }
 
     /** Set the log file for target */
@@ -678,9 +697,9 @@ namespace zypp
       }
     }
 
-    /////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////
   } // namespace target
-  ///////////////////////////////////////////////////////////////////
-  /////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////

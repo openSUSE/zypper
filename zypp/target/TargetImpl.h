@@ -64,9 +64,9 @@ namespace zypp
       /** JUST FOR TESTSUITE */
       /** Sort according to prereqs and media numbers */
       void getResolvablesToInsDel ( const ResPool pool_r,
-				    PoolItemList & dellist_r,
-				    PoolItemList & instlist_r,
-				    PoolItemList & srclist_r ) const;
+                                    PoolItemList & dellist_r,
+                                    PoolItemList & instlist_r,
+                                    PoolItemList & srclist_r ) const;
 
 
     public:
@@ -90,7 +90,7 @@ namespace zypp
        */
       ResStore::resfilter_const_iterator byKindBegin( const ResObject::Kind & kind_r  ) const;
       ResStore::resfilter_const_iterator byKindEnd( const ResObject::Kind & kind_r ) const;
-      
+
       /** The root set for this target */
       Pathname root() const;
 
@@ -124,17 +124,19 @@ namespace zypp
 
       /** Overload to realize stream output. */
       virtual std::ostream & dumpOn( std::ostream & str ) const
-      { return str << "TargetImpl"; }
+      {
+        return str << "TargetImpl";
+      }
 
       /** The RPM database */
       rpm::RpmDb & rpm();
 
       /** If the package is installed and provides the file
-	  Needed to evaluate split provides during Resolver::Upgrade() */
+      Needed to evaluate split provides during Resolver::Upgrade() */
       bool providesFile (const std::string & path_str, const std::string & name_str) const;
 
       /** Return the resolvable which provides path_str (rpm -qf)
-	  return NULL if no resolvable provides this file  */
+      return NULL if no resolvable provides this file  */
       ResObject::constPtr whoOwnsFile (const std::string & path_str) const;
 
       /** Set the log file for target */
@@ -142,7 +144,7 @@ namespace zypp
 
       /** return the last modification date of the target */
       Date timestamp() const;
-      
+
     protected:
       void loadKindResolvables( const Resolvable::Kind kind );
       /** All resolvables provided by the target. */
@@ -164,7 +166,9 @@ namespace zypp
 
     /** \relates TargetImpl Stream output */
     inline std::ostream & operator<<( std::ostream & str, const TargetImpl & obj )
-    { return obj.dumpOn( str ); }
+    {
+      return obj.dumpOn( str );
+    }
 
     /////////////////////////////////////////////////////////////////
   } // namespace target
