@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri Oct 20 11:04:26 CEST 2006 - ma@suse.de
+
+- zypp-query-pool: For products show additionally distributionName
+  and distributionEdition. (required by #205392)
+- revision 4349
+
+-------------------------------------------------------------------
 Fri Oct 20 00:13:49 CEST 2006 - ma@suse.de
 
 - Add accessor for Product distributionName and distributionEdition.
