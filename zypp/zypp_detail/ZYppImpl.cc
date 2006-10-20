@@ -206,7 +206,7 @@ namespace zypp
       _target = new Target( root );
       _target->enableStorage( root );
     }
-    
+
     void ZYppImpl::initTarget(const Pathname & root, bool commit_only)
     {
       MIL << "initTarget( " << root << ", " << commit_only << ")" << endl;
@@ -254,6 +254,7 @@ namespace zypp
       if (! policy_r.dryRun() ) {
 	// reload new status from target
 	removeInstalledResolvables();
+        _target->reset();
 	addResolvables( _target->resolvables(), true );
       }
 
