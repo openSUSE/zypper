@@ -74,12 +74,19 @@ namespace zypp {
             else if (name == "release-notes-url") {
               productPtr->releasenotesurl = _helper.content(child);
             }
+            else if (name == "distribution-name") {
+              productPtr->dist_name = _helper.content(child);
+            }
+            else if (name == "distribution-edition") {
+              productPtr->dist_version = _helper.content(child);
+            }
             else if (name == "shortname") {
               productPtr->short_name.setText(_helper.content(child), Locale(_helper.attribute(child,"lang")));
             }
             else if (name == "product-flags") {
               parseProductFlags( productPtr, child);
             }
+            
 	    else if (name == "update-urls") {
               parseUpdateUrls( productPtr, child);
 	    }

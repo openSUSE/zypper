@@ -253,8 +253,6 @@ void ProductMetadataParser::parse( const Pathname & file_r, Source_Ref source_r 
 
     MIL << "Product arch is " << prodarch << endl;
 
-#warning EXCHANGE CODE AS SOON AS TARGET STORE SERIALIZES AND RESTORES DISTPRODUCT AND VERSION
-#if 0
     // Insert a "Provides" _dist_name" == _dist_version"
     CapFactory capfactory;
     prodImpl->_deps[Dep::PROVIDES].insert( capfactory.parse( ResTraits<Product>::kind,
@@ -263,18 +261,7 @@ void ProductMetadataParser::parse( const Pathname & file_r, Source_Ref source_r 
                       Edition( prodImpl->_dist_version ) ) );
 
     NVRAD dataCollect( prodImpl->_name, Edition( prodImpl->_version ), prodarch, prodImpl->_deps );
-#else
-    // before we used to create the product with name and version instead of distname and distversion
-    // but now we use distname and distversion and we insert a "Provides" with name and version
-    // (#205392)
-    CapFactory capfactory;
-    prodImpl->_deps[Dep::PROVIDES].insert( capfactory.parse( ResTraits<Product>::kind,
-                      prodImpl->_name,
-                      Rel::EQ,
-                      Edition( prodImpl->_version ) ) );
-
-    NVRAD dataCollect( prodImpl->_dist_name, Edition( prodImpl->_dist_version ), prodarch, prodImpl->_deps );
-#endif
+    
     result = detail::makeResolvableFromImpl( dataCollect, prodImpl );
   }
   catch (const Exception & excpt_r)

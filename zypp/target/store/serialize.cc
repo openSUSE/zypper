@@ -28,6 +28,8 @@
 #include "serialize.h"
 #include "xml_escape_parser.hpp"
 
+#define SERIALIZER_VERSION "2.0"
+
 using namespace std;
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -95,7 +97,7 @@ std::string toXML( const Edition &edition )
 {
   stringstream out;
   // sad the yum guys did not acll it edition
-  out << "<version ver=\"" << xml_escape(edition.version()) << "\" rel=\"" << xml_escape(edition.release()) << "\"/>";
+  out << "<version ver=\"" << xml_escape(edition.version()) << "\" rel=\"" << xml_escape(edition.release()) << "\" epoch=\"" << edition.epoch() << "\" />";
   return out.str();
 }
 
@@ -277,7 +279,7 @@ std::string toXML( const Language::constPtr &obj )
 {
   stringstream out;
   out << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" << std::endl;
-  out << "<language xmlns=\"http://www.novell.com/metadata/zypp/xml-store\">" << std::endl;
+  out << "<language version=\"" << SERIALIZER_VERSION << "\" xmlns=\"http://www.novell.com/metadata/zypp/xml-store\">" << std::endl;
   out << toXML(static_cast<Resolvable::constPtr>(obj)) << std::endl;
   out << toXML(static_cast<ResObject::constPtr>(obj));
   out << "</language>" << std::endl;
@@ -290,7 +292,7 @@ std::string toXML( const Selection::constPtr &obj )
 {
   stringstream out;
   out << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" << std::endl;
-  out << "<pattern xmlns=\"http://www.novell.com/metadata/zypp/xml-store\">" << std::endl;
+  out << "<pattern version=\"" << SERIALIZER_VERSION << "\" xmlns=\"http://www.novell.com/metadata/zypp/xml-store\">" << std::endl;
   
   out << toXML(static_cast<Resolvable::constPtr>(obj)) << std::endl;
   out << toXML(static_cast<ResObject::constPtr>(obj));
@@ -319,7 +321,7 @@ std::string toXML( const Pattern::constPtr &obj )
 {
   stringstream out;
   out << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" << std::endl;
-  out << "<pattern xmlns=\"http://www.novell.com/metadata/zypp/xml-store\">" << std::endl;
+  out << "<pattern version=\"" << SERIALIZER_VERSION << "\" xmlns=\"http://www.novell.com/metadata/zypp/xml-store\">" << std::endl;
 
   out << toXML(static_cast<Resolvable::constPtr>(obj)) << std::endl;
   out << toXML(static_cast<ResObject::constPtr>(obj));
@@ -338,7 +340,7 @@ std::string toXML( const Product::constPtr &obj )
 {
   stringstream out;
   out << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" << std::endl;
-  out << "<product xmlns=\"http://www.novell.com/metadata/zypp/xml-store\" type=\"" << xml_escape(obj->category()) << "\">" << std::endl;
+  out << "<product version=\"" << SERIALIZER_VERSION << "\" xmlns=\"http://www.novell.com/metadata/zypp/xml-store\" type=\"" << xml_escape(obj->category()) << "\">" << std::endl;
   out << toXML(static_cast<Resolvable::constPtr>(obj)) << std::endl;
   #warning "FIXME description and displayname of products"
   
@@ -348,6 +350,8 @@ std::string toXML( const Product::constPtr &obj )
   detail::ResImplTraits<Product::Impl>::constPtr pipp( detail::ImplConnect::resimpl( obj ) );
   out << translatedTextToXML(pipp->shortName(), "shortname");
   
+  out << "  <distribution-name>" << xml_escape(obj->distributionName()) << "</distribution-name>" << std::endl;
+  out << "  <distribution-edition>" << xml_escape(obj->distributionEdition().asString()) << "</distribution-edition>" << std::endl;
   out << "  <source>" << xml_escape(obj->source().alias()) << "</source>" << std::endl;  
   out << "  <release-notes-url>" << xml_escape(obj->releaseNotesUrl().asString()) << "</release-notes-url>" << std::endl;
   out << "  <update-urls>" << std::endl;
@@ -414,7 +418,7 @@ std::string toXML( const Patch::constPtr &obj )
 {
   stringstream out;
   out << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" << std::endl;
-  out << "<patch xmlns=\"http://www.novell.com/metadata/zypp/xml-store\">" << std::endl; 
+  out << "<patch version=\"" << SERIALIZER_VERSION << "\" xmlns=\"http://www.novell.com/metadata/zypp/xml-store\">" << std::endl; 
   
   // reuse Resolvable information serialize function
   out << toXML(static_cast<Resolvable::constPtr>(obj));
@@ -445,7 +449,7 @@ std::string toXML( const source::SourceInfo &obj )
 {
   stringstream out;
   out << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" << std::endl;
-  out << "<source  xmlns=\"http://www.novell.com/metadata/zypp/xml-store\">" << std::endl;
+  out << "<source version=\"" << SERIALIZER_VERSION << "\" xmlns=\"http://www.novell.com/metadata/zypp/xml-store\">" << std::endl;
   out << "  <enabled>" << obj.enabled() << "</enabled>" << std::endl;
   out << "  <auto-refresh>" << obj.autorefresh() << "</auto-refresh>" << std::endl;
   out << "  <product-dir>" << obj.path() << "</product-dir>" << std::endl;
