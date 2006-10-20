@@ -144,6 +144,15 @@ namespace zypp
 
       /** return the last modification date of the target */
       Date timestamp() const;
+      
+     /** 
+      * reload the target in future calls if
+      * needed.
+      * note the loading can actually be delayed, but
+      * the next call to resolvables must reflect the 
+      * status of the system.
+     */
+     void reset();
 
     protected:
       void loadKindResolvables( const Resolvable::Kind kind );

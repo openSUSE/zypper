@@ -58,6 +58,15 @@ namespace zypp
     /** All resolvables provided by the target. */
     const ResStore & resolvables();
     
+    /** 
+     * reload the target in future calls if
+     * needed.
+     * note the loading can actually be delayed, but
+     * the next call to resolvables must reflect the 
+     * status of the system.
+    */
+    void reset();
+    
     /**
      * load resolvables of certain kind in the internal store
      * and return a iterator

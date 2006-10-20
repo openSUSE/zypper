@@ -207,6 +207,7 @@ private:
 
     void TargetImpl::loadKindResolvables( const Resolvable::Kind kind )
     {
+      // if this kind is already loaded, return
       if ( _resstore_loaded[kind] )
         return;
 
@@ -269,6 +270,18 @@ private:
       return _store;
     }
 
+    void TargetImpl::reset()
+    {
+      // make this smarter later
+      _store.clear();
+      _resstore_loaded[ResTraits<zypp::Patch>::kind] = false;
+      _resstore_loaded[ResTraits<zypp::Selection>::kind] = false;
+      _resstore_loaded[ResTraits<zypp::Pattern>::kind] = false;
+      _resstore_loaded[ResTraits<zypp::Product>::kind] = false;
+      _resstore_loaded[ResTraits<zypp::Language>::kind] = false;
+      _resstore_loaded[ResTraits<zypp::Package>::kind] = false;
+    }
+    
     ZYppCommitResult TargetImpl::commit( ResPool pool_r, const ZYppCommitPolicy & policy_rX )
     {
       // ----------------------------------------------------------------- //
@@ -666,7 +679,7 @@ private:
       instlist_r.swap( collect._toInstall );
       srclist_r.swap( collect._toSrcinstall );
     }
-
+    
     Date TargetImpl::timestamp() const
     {
       Date ts_rpm;
