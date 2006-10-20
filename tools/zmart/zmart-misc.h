@@ -13,6 +13,8 @@
 #include <string>
 #include "zypp/Url.h"
 #include "zypp/ResObject.h"
+#include "zypp/PoolItem.h"
+#include "zypper-tabulator.h"
 
 void cond_init_target ();
 bool readBoolAnswer();
@@ -36,5 +38,31 @@ void list_updates( const zypp::ResObject::Kind &kind );
 void mark_updates( const zypp::ResObject::Kind &kind );
 void usage(int argc, char **argv);
 void solve_and_commit ();
-#endif
 
+/**
+ * Functor for filling search output table. 
+ */
+struct FillTable
+{
+  FillTable( Table & table ) : _table( &table ) {
+    TableHeader header;
+    header << "S" << "Catalog" << "Bundle" << "Name" << "Version" << "Arch";
+    *_table << header; 
+  }
+
+  void operator()(const zypp::PoolItem & pool_item) {
+    TableRow row;
+    row << (pool_item.status().isInstalled() ? "i" : "")
+        << pool_item.resolvable()->source().alias()
+        << "" // TODO what about rug's Bundle?
+        << pool_item.resolvable()->name()
+        << pool_item.resolvable()->edition().asString()
+        << pool_item.resolvable()->arch().asString();
+  
+    *_table << row;
+  }
+
+  Table * _table; // != NULL asserted by ctor
+};
+
+#endif
