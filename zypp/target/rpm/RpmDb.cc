@@ -285,6 +285,16 @@ namespace zypp
         sKeyRingReceiver.reset();
       }
 
+      Date RpmDb::timestamp() const
+      {
+        Date ts_rpm;
+        PathInfo rpmdb_info(root() + "/var/lib/rpm/Packages");
+        
+        if ( rpmdb_info.isExist() )
+          ts_rpm = rpmdb_info.mtime();
+        else
+          return Date::now();
+      }
 ///////////////////////////////////////////////////////////////////
 //
 //

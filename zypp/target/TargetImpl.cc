@@ -672,9 +672,7 @@ private:
       Date ts_rpm;
       Date ts_store;
 
-      PathInfo rpmdb_info(root() + "/var/lib/rpm/Packages");
-      if ( rpmdb_info.isExist() )
-        ts_rpm = rpmdb_info.mtime();
+      ts_rpm = _rpm.timestamp();
 
       if ( isStorageEnabled() )
         ts_store = _storage.timestamp();
