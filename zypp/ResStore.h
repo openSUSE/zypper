@@ -89,8 +89,28 @@ namespace zypp
     size_type erase( const ResT::Ptr & ptr_r )
     { return store().erase( ptr_r ); }
     /**  */
+    void erase( iterator pos_r )
+    { store().erase( pos_r ); }
+    /**  */
     void erase( iterator first_r, iterator last_r )
     { store().erase( first_r, last_r ); }
+    /** Erase by Kind */
+    void erase( const Resolvable::Kind & kind_r )
+    {
+      for ( iterator it = begin(); it != end();  )
+        {
+          if ( (*it)->kind() == kind_r )
+            {
+              store().erase( it++ ); // postfix! Incrementing before erase
+            }
+          else
+            ++it;
+        }
+    }
+    /** Erase by Kind. */
+    template<class _Res>
+      void erase()
+      { erase( ResTraits<_Res>::kind ); }
     /**  */
     void clear()
     { store().clear(); }
