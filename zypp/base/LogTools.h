@@ -17,7 +17,9 @@
 #include <vector>
 #include <list>
 #include <set>
+#include <map>
 #include "zypp/base/Logger.h"
+#include "zypp/base/Iterator.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -77,6 +79,175 @@ namespace zypp
   template<class _Tp>
     std::ostream & operator<<( std::ostream & str, const std::list<_Tp> & obj )
     { return dumpRange( str, obj.begin(), obj.end() ); }
+
+  ///////////////////////////////////////////////////////////////////
+  namespace _logtoolsdetail
+  { /////////////////////////////////////////////////////////////////
+
+    ///////////////////////////////////////////////////////////////////
+    // dumpMap
+    ///////////////////////////////////////////////////////////////////
+
+    /** std::pair wrapper for std::map output.
+     * Just because we want a special output format for std::pair
+     * used in a std::map.
+    */
+    template<class _Pair>
+      class MapEntry
+      {
+      public:
+        MapEntry( const _Pair & pair_r )
+        : _pair( &pair_r )
+        {}
+
+        const _Pair & pair() const
+        { return *_pair; }
+
+      private:
+        const _Pair *const _pair;
+      };
+
+    /** \relates MapEntry Stream output. */
+    template<class _Pair>
+      std::ostream & operator<<( std::ostream & str, const MapEntry<_Pair> & obj )
+      {
+        return str << '[' << obj.pair().first << "] = " << obj.pair().second;
+      }
+
+    /** Functor transforming std::pair into MapEntry. */
+    template<class _Pair>
+      struct GetMapEntry : public std::unary_function<_Pair, typename zypp::_logtoolsdetail::MapEntry<_Pair> >
+      {
+        typename zypp::_logtoolsdetail::MapEntry<_Pair> operator()( const _Pair & pair_r ) const
+        { return MapEntry<_Pair>( pair_r ); }
+      };
+
+    /** std::map wrapper for stream output.
+     * Provides the transform_iterator used to write std::pair formated as
+     * MapEntry.
+     */
+    template<class _Map>
+      class DumpMap
+      {
+      public:
+        typedef _Map                      MapType;
+        typedef typename _Map::value_type PairType;
+
+        typedef transform_iterator<GetMapEntry<PairType>, typename MapType::const_iterator>
+                MapEntry_const_iterator;
+
+        DumpMap( const _Map & map_r )
+        : _map( &map_r )
+        {}
+
+        const _Map & map() const
+        { return *_map; }
+
+        MapEntry_const_iterator map_begin() const
+        { return make_transform_iterator( map().begin(), GetMapEntry<PairType>() ); }
+
+        MapEntry_const_iterator map_end() const
+        { return make_transform_iterator( map().end(), GetMapEntry<PairType>() );}
+
+      private:
+        const _Map *const _map;
+      };
+
+    /** \relates DumpMap Stream output. */
+    template<class _Map>
+      std::ostream & operator<<( std::ostream & str, const DumpMap<_Map> & obj )
+      {
+        return dumpRange( str, obj.map_begin(), obj.map_end() );
+      }
+
+    /** \relates DumpMap Convenience function to create DumpMap from std::map. */
+    template<class _Map>
+      DumpMap<_Map> dumpMap( const _Map & map_r )
+      { return DumpMap<_Map>( map_r ); }
+
+    ///////////////////////////////////////////////////////////////////
+    // dumpKeys
+    ///////////////////////////////////////////////////////////////////
+
+    /** std::map wrapper for stream output of keys.
+     * Uses MapKVIterator iterate and write the key values.
+     * \code
+     * std::map<...> mymap;
+     * std::cout << dumpKeys(mymap) << std::endl;
+     * \endcode
+     */
+    template<class _Map>
+      class DumpKeys
+      {
+      public:
+        DumpKeys( const _Map & map_r )
+        : _map( &map_r )
+        {}
+
+        const _Map & map() const
+        { return *_map; }
+
+      private:
+        const _Map *const _map;
+      };
+
+    /** \relates DumpKeys Stream output. */
+    template<class _Map>
+      std::ostream & operator<<( std::ostream & str, const DumpKeys<_Map> & obj )
+      { return dumpRange( str, make_map_key_begin(obj.map()), make_map_key_end(obj.map()) ); }
+
+    /** \relates DumpKeys Convenience function to create DumpKeys from std::map. */
+    template<class _Map>
+      DumpKeys<_Map> dumpKeys( const _Map & map_r )
+      { return DumpKeys<_Map>( map_r ); }
+
+    ///////////////////////////////////////////////////////////////////
+    // dumpValues
+    ///////////////////////////////////////////////////////////////////
+
+    /** std::map wrapper for stream output of values.
+     * Uses MapKVIterator iterate and write the values.
+     * \code
+     * std::map<...> mymap;
+     * std::cout << dumpValues(mymap) << std::endl;
+     * \endcode
+     */
+    template<class _Map>
+      class DumpValues
+      {
+      public:
+        DumpValues( const _Map & map_r )
+        : _map( &map_r )
+        {}
+
+        const _Map & map() const
+        { return *_map; }
+
+      private:
+        const _Map *const _map;
+      };
+
+    /** \relates DumpValues Stream output. */
+    template<class _Map>
+      std::ostream & operator<<( std::ostream & str, const DumpValues<_Map> & obj )
+      { return dumpRange( str, make_map_value_begin(obj.map()), make_map_value_end(obj.map()) ); }
+
+    /** \relates DumpValues Convenience function to create DumpValues from std::map. */
+    template<class _Map>
+      DumpValues<_Map> dumpValues( const _Map & map_r )
+      { return DumpValues<_Map>( map_r ); }
+
+    /////////////////////////////////////////////////////////////////
+  } // namespace _logtoolsdetail
+  ///////////////////////////////////////////////////////////////////
+
+  using _logtoolsdetail::dumpMap;    // dumpRange '[key] = value'
+  using _logtoolsdetail::dumpKeys;   // dumpRange keys
+  using _logtoolsdetail::dumpValues; // dumpRange values
+
+  template<class _Key, class _Tp>
+    std::ostream & operator<<( std::ostream & str, const std::map<_Key, _Tp> & obj )
+    { return str << dumpMap( obj ); }
 
   /** Print stream status bits.
    * Prints the values of a streams \c good, \c eof, \c failed and \c bad bit.
