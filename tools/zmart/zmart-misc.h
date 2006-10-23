@@ -39,6 +39,24 @@ void mark_updates( const zypp::ResObject::Kind &kind );
 void usage(int argc, char **argv);
 void solve_and_commit ();
 
+// copied from yast2-pkg-bindings:PkgModuleFunctions::DoProvideNameKind
+struct ProvideProcess
+{
+  zypp::PoolItem_Ref item;
+  zypp::ResStatus::TransactByValue whoWantsIt;
+  std::string version;
+  zypp::Arch _architecture;
+
+  ProvideProcess(zypp::Arch arch, const std::string &vers)
+    : whoWantsIt(zypp::ResStatus::USER)
+    , version(vers)
+    , _architecture( arch )
+    { }
+
+  bool operator()( const zypp::PoolItem& provider );
+};
+
+
 /**
  * Functor for filling search output table. 
  */
@@ -50,7 +68,7 @@ struct FillTable
     *_table << header; 
   }
 
-  void operator()(const zypp::PoolItem & pool_item) {
+  void operator()(const zypp::PoolItem & pool_item) const {
     TableRow row;
     row << (pool_item.status().isInstalled() ? "i" : "")
         << pool_item.resolvable()->source().alias()

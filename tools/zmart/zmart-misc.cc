@@ -78,63 +78,49 @@ ResObject::Kind string_to_kind (const string &skind)
 }
 
 // copied from yast2-pkg-bindings:PkgModuleFunctions::DoProvideNameKind
-struct ProvideProcess
+bool ProvideProcess::operator()( const PoolItem& provider )
 {
-  PoolItem_Ref item;
-  ResStatus::TransactByValue whoWantsIt;
-  string version;
-  Arch _architecture;
+  cerr_vv << "Considering " << provider << endl;
+  // 1. compatible arch
+  // 2. best arch
+  // 3. best edition
 
-  ProvideProcess( Arch arch, const string &vers)
-    : whoWantsIt(zypp::ResStatus::USER)
-    , version(vers)
-    , _architecture( arch )
-    { }
-
-  bool operator()( const PoolItem& provider )
-  {
-    cerr_vv << "Considering " << provider << endl;
-    // 1. compatible arch
-    // 2. best arch
-    // 3. best edition
-	
-    // check the version if it's specified
-    if (!version.empty() && version != provider->edition().asString()) {
-      cerr_vv << format ("Skipping version %s (requested: %s)")
-	% provider->edition().asString() % version << endl;
-      return true;
-    }
-
-    if (!provider.status().isInstalled()) {
-      // deselect the item if it's already selected,
-      // only one item should be selected
-      if (provider.status().isToBeInstalled()) {
-	cerr_vv << "  Deselecting" << endl;
-	provider.status().resetTransact(whoWantsIt);
-      }
-
-      // regarding items which are installable only
-      if (!provider->arch().compatibleWith( _architecture )) {
-	cerr_vv << format ("provider %s has incompatible arch '%s'")
-	  % provider->name() % provider->arch().asString() << endl;
-      }
-      else if (!item) {
-	cerr_vv << "  First match" << endl;
-	item = provider;
-      }
-      else if (item->arch().compare( provider->arch() ) < 0) {
-	cerr_vv << "  Better arch" << endl;
-	item = provider;
-      }
-      else if (item->edition().compare( provider->edition() ) < 0) {
-	cerr_vv << "  Better edition" << endl;
-	item = provider;
-      }
-    }
-
+  // check the version if it's specified
+  if (!version.empty() && version != provider->edition().asString()) {
+    cerr_vv << format ("Skipping version %s (requested: %s)")
+      % provider->edition().asString() % version << endl;
     return true;
   }
-};
+
+  if (!provider.status().isInstalled()) {
+    // deselect the item if it's already selected,
+    // only one item should be selected
+    if (provider.status().isToBeInstalled()) {
+      cerr_vv << "  Deselecting" << endl;
+      provider.status().resetTransact(whoWantsIt);
+    }
+
+    // regarding items which are installable only
+    if (!provider->arch().compatibleWith( _architecture )) {
+      cerr_vv << format ("provider %s has incompatible arch '%s'")
+        % provider->name() % provider->arch().asString() << endl;
+    }
+    else if (!item) {
+      cerr_vv << "  First match" << endl;
+      item = provider;
+    }
+    else if (item->arch().compare( provider->arch() ) < 0) {
+      cerr_vv << "  Better arch" << endl;
+      item = provider;
+    }
+    else if (item->edition().compare( provider->edition() ) < 0) {
+      cerr_vv << "  Better edition" << endl;
+      item = provider;
+    }
+  }
+
+  return true;
+}
 
 
 // this does only resolvables with this _name_.
