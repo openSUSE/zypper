@@ -50,6 +50,8 @@ zypper_SOURCES = 	zypper.cc zmart-sources.cc zmart-misc.cc \
 	zypper-tabulator.cc \
 	zypper-search.h \
 	zypper-search.cc \
+	zypper-info.h \
+	zypper-info.cc \
 	zmart.h
 zypper_LDADD = $(top_srcdir)/zypp/libzypp.la -lboost_regex
 
