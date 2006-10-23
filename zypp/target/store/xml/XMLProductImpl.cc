@@ -46,6 +46,12 @@ namespace zypp
 
     std::list<Url> XMLProductImpl::updateUrls() const
     { return _update_urls; }
+    
+    std::list<Url> XMLProductImpl::extraUrls() const
+    { return _extra_urls; }
+    
+    std::list<Url> XMLProductImpl::optionalUrls() const
+    { return _optional_urls; }
 
     std::list<std::string> XMLProductImpl::flags() const
     { return _flags; }

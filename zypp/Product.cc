@@ -55,6 +55,12 @@ namespace zypp
 
   std::list<Url> Product::updateUrls() const
   { return pimpl().updateUrls(); }
+  
+  std::list<Url> Product::extraUrls() const
+  { return pimpl().extraUrls(); }
+  
+  std::list<Url> Product::optionalUrls() const
+  { return pimpl().optionalUrls(); }
 
   std::list<std::string> Product::flags() const
   { return pimpl().flags(); }

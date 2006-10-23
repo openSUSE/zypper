@@ -354,6 +354,7 @@ std::string toXML( const Product::constPtr &obj )
   out << "  <distribution-edition>" << xml_escape(obj->distributionEdition().asString()) << "</distribution-edition>" << std::endl;
   out << "  <source>" << xml_escape(obj->source().alias()) << "</source>" << std::endl;  
   out << "  <release-notes-url>" << xml_escape(obj->releaseNotesUrl().asString()) << "</release-notes-url>" << std::endl;
+  
   out << "  <update-urls>" << std::endl;
   std::list<Url> updateUrls = obj->updateUrls();
   for ( std::list<Url>::const_iterator it = updateUrls.begin(); it != updateUrls.end(); ++it)
@@ -361,6 +362,23 @@ std::string toXML( const Product::constPtr &obj )
     out << "    <update-url>" << xml_escape(it->asString()) << "</update-url>" << std::endl; 
   }
   out << "  </update-urls>" << std::endl;
+  
+  out << "  <extra-urls>" << std::endl;
+  std::list<Url> extraUrls = obj->extraUrls();
+  for ( std::list<Url>::const_iterator it = extraUrls.begin(); it != extraUrls.end(); ++it)
+  {
+    out << "    <extra-url>" << xml_escape(it->asString()) << "</extra-url>" << std::endl; 
+  }
+  out << "  </extra-urls>" << std::endl;
+  
+  out << "  <optional-urls>" << std::endl;
+  std::list<Url> optionalUrls = obj->optionalUrls();
+  for ( std::list<Url>::const_iterator it = optionalUrls.begin(); it != optionalUrls.end(); ++it)
+  {
+    out << "    <optional-url>" << xml_escape(it->asString()) << "</optional-url>" << std::endl; 
+  }
+  out << "  </optional-urls>" << std::endl;
+  
   out << "  <product-flags>" << std::endl;
   std::list<std::string> flags = obj->flags();
   for ( std::list<std::string>::const_iterator it = flags.begin(); it != flags.end(); ++it)

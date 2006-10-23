@@ -68,8 +68,9 @@ namespace zypp {
           if (_helper.isElement(child))
           {
             string name = _helper.name(child);
-            if (name == "vendor") {
-	      productPtr->vendor = _helper.content(child);
+            if (name == "vendor")
+            {
+              productPtr->vendor = _helper.content(child);
             }
             else if (name == "release-notes-url") {
               productPtr->releasenotesurl = _helper.content(child);
@@ -85,11 +86,20 @@ namespace zypp {
             }
             else if (name == "product-flags") {
               parseProductFlags( productPtr, child);
+            }      
+            else if (name == "update-urls")
+            {
+              parseList<string>( "update-url", productPtr->update_urls, child);
+            }
+            else if (name == "extra-urls")
+            {
+              parseList<string>( "extra-url", productPtr->extra_urls, child);
+            }
+            else if (name == "optional-urls")
+            {
+              parseList<string>( "optional-url", productPtr->optional_urls, child);
             }
             
-	    else if (name == "update-urls") {
-              parseUpdateUrls( productPtr, child);
-	    }
           }
         }
         return productPtr;
@@ -111,21 +121,22 @@ namespace zypp {
         }
       }
       
-      void
-      XMLProductParser::parseUpdateUrls( XMLProductData_Ptr productPtr, xmlNodePtr node)
+      template <class T>
+      void XMLProductParser::parseList( const std::string &tagname, std::list<T> &list, xmlNodePtr node)
       {
         for (xmlNodePtr child = node->children; child && child != node; child = child->next)
         {
           if (_helper.isElement(child))
           {
             string name = _helper.name(child);
-            if (name == "update-url")
+            if (name == tagname)
             {
-              productPtr->update_urls.push_back(_helper.content(child));
+              list.push_back(_helper.content(child));
             }
           }
         }
       }
+      
     } // namespace yum
   } // namespace parser
 } // namespace zypp

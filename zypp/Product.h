@@ -49,10 +49,25 @@ namespace zypp
     /** The URL to download the release notes for this product */
     Url releaseNotesUrl() const;
 
-    /** Online updates for the product.
-	They are complementary, not alternatives. #163192 */
+    /** 
+     * Online updates for the product.
+     * They are complementary, not alternatives. #163192 
+     */
     std::list<Url> updateUrls() const;
 
+    /** 
+     * Additional software for the product
+     * They are complementary, not alternatives.
+     */
+    std::list<Url> extraUrls() const;
+    
+    /** 
+     * Optional software for the product
+     * (for example. Non OSS repositories)
+     * They are complementary, not alternatives.
+     */
+    std::list<Url> optionalUrls() const;
+    
     /** The product flags */
     std::list<std::string> flags() const;
 

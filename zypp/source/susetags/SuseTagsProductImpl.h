@@ -47,7 +47,11 @@ namespace zypp
         virtual TranslatedText summary() const;
         virtual Source_Ref source() const;
         virtual Url releaseNotesUrl() const;
+        
         virtual std::list<Url> updateUrls() const;
+        virtual std::list<Url> extraUrls() const;
+        virtual std::list<Url> optionalUrls() const;
+        
         virtual std::list<std::string> flags() const;
         virtual TranslatedText shortName() const;
         virtual std::string distributionName() const;
@@ -66,7 +70,11 @@ namespace zypp
         std::string _shortlabel;
         std::string _vendor;
         Url _release_notes_url;
+        
         std::list<Url> _update_urls;
+        std::list<Url> _extra_urls;
+        std::list<Url> _optional_urls;
+        
         std::map< std::string, std::list<std::string> > _arch;	// map of 'arch : "arch1 arch2 arch3"', arch1 being 'best', arch3 being 'noarch' (ususally)
         std::string _default_base;
         Dependencies _deps;

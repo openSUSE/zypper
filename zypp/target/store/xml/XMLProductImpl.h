@@ -61,14 +61,22 @@ namespace zypp
       virtual std::string category() const;
       virtual TranslatedText shortName() const;
       virtual Url releaseNotesUrl() const;
+      
       virtual std::list<Url> updateUrls() const;
+      virtual std::list<Url> extraUrls() const;
+      virtual std::list<Url> optionalUrls() const;
+      
       virtual std::list<std::string> flags() const;
       virtual std::string distributionName() const;
       virtual Edition distributionEdition() const;
 
       std::string _category;
       Url _release_notes_url;
+      
       std::list<Url> _update_urls;
+      std::list<Url> _extra_urls;
+      std::list<Url> _optional_urls;
+      
       std::list<std::string> _flags;
 
       TranslatedText _summary;

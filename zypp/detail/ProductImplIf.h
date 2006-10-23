@@ -51,6 +51,20 @@ namespace zypp
       virtual Url releaseNotesUrl() const PURE_VIRTUAL;
 
       virtual std::list<Url> updateUrls() const PURE_VIRTUAL;
+      
+      /** 
+       * Additional software for the product
+       * They are complementary, not alternatives.
+       */
+      virtual std::list<Url> extraUrls() const  PURE_VIRTUAL;
+    
+      /** 
+       * Optional software for the product
+       * (for example. Non OSS repositories)
+       * They are complementary, not alternatives.
+       */
+      virtual std::list<Url> optionalUrls() const  PURE_VIRTUAL;
+      
       /** The product flags */
       virtual std::list<std::string> flags() const PURE_VIRTUAL;
 

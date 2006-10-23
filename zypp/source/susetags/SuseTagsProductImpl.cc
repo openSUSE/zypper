@@ -70,6 +70,16 @@ namespace zypp
         return _update_urls;
       }
 
+      std::list<Url> SuseTagsProductImpl::extraUrls() const
+      {
+        return _extra_urls;
+      }
+      
+      std::list<Url> SuseTagsProductImpl::optionalUrls() const
+      {
+        return _optional_urls;
+      }
+      
       std::list<std::string> SuseTagsProductImpl::flags() const
       {
         return _flags;

@@ -33,6 +33,12 @@ namespace zypp
 
       std::list<Url> ProductImplIf::updateUrls() const
       { return std::list<Url>(); }
+      
+      std::list<Url>  ProductImplIf::extraUrls() const
+      { return std::list<Url>(); }
+      
+      std::list<Url>  ProductImplIf::optionalUrls() const
+      { return std::list<Url>(); }
 
       std::list<std::string> ProductImplIf::flags() const
       { return std::list<std::string>(); }

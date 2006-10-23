@@ -61,6 +61,8 @@
 #define ZYPP_DB_DIR ( getZYpp()->homePath().asString()+"/db/" )
 
 using std::endl;
+using std::string;
+using std::list;
 using namespace boost::filesystem;
 using namespace zypp;
 using namespace zypp::filesystem;
@@ -1012,20 +1014,50 @@ XMLFilesBackend::createProduct( const zypp::parser::xmlstore::XMLProductData & p
       impl->_release_notes_url = Url();
 
     // update_urls
-    std::list<std::string>::const_iterator
-	b = parsed.update_urls.begin(),
-	e = parsed.update_urls.end(),
-	i;
-    for (i = b; i != e; ++i) {
-	Url u;
-	try {
-	    u = *i;
-	}
-	catch (...) {
-	}
-	impl->_update_urls.push_back (u);
+    list<string> update_urls = parsed.update_urls;
+    for ( list<string>::const_iterator it = update_urls.begin(); it != update_urls.end(); ++it )
+    {
+      try
+      {
+        Url u(*it);
+        impl->_update_urls.push_back (u);
+      }
+      catch ( const Exception &e )
+      {
+        ZYPP_THROW(Exception("Error parsing update url: " + e.msg()));
+      }      
     }
 
+    // extra_urls
+    list<string> extra_urls = parsed.extra_urls;
+    for ( list<string>::const_iterator it = extra_urls.begin(); it != extra_urls.end(); ++it )
+    {
+      try
+      {
+        Url u(*it);
+        impl->_extra_urls.push_back (u);
+      }
+      catch ( const Exception &e )
+      {
+        ZYPP_THROW(Exception("Error parsing extra url: " + e.msg()));
+      }      
+    }
+    
+    // extra_urls
+    list<string> optional_urls = parsed.optional_urls;
+    for ( list<string>::const_iterator it = optional_urls.begin(); it != optional_urls.end(); ++it )
+    {
+      try
+      {
+        Url u(*it);
+        impl->_optional_urls.push_back (u);
+      }
+      catch ( const Exception &e )
+      {
+        ZYPP_THROW(Exception("Error parsing optional url: " + e.msg()));
+      }      
+    }
+    
     impl->_flags = parsed.flags;
 
     Arch arch;

@@ -113,10 +113,12 @@ namespace zypp {
         ~XMLProductData() {};
 
         std::string type;
-	TranslatedText short_name;
+        TranslatedText short_name;
         // those are suse specific tags
         std::string releasenotesurl;
         std::list<std::string> update_urls;
+        std::list<std::string> extra_urls;
+        std::list<std::string> optional_urls;
         std::list<std::string> flags;
         std::string dist_name;
         std::string dist_version;
