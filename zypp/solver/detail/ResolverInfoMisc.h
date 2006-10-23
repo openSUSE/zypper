@@ -89,7 +89,7 @@ class ResolverInfoMisc : public ResolverInfoContainer {
 
 	  // ---------------------------------- methods
 
-	  virtual bool merge (ResolverInfo_Ptr to_be_merged);
+          virtual bool merge ( ResolverInfoContainer_Ptr to_be_merged);
 	  virtual ResolverInfo_Ptr copy (void) const;
 
 	  void addAction (const std::string & action_msg);

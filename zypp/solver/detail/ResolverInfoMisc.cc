@@ -567,7 +567,7 @@ ResolverInfoMisc::message (void) const
 //---------------------------------------------------------------------------
 
 bool
-ResolverInfoMisc::merge (ResolverInfo_Ptr info)
+ResolverInfoMisc::merge (ResolverInfoContainer_Ptr info)
 {
     bool res;
     ResolverInfoMisc_Ptr to_be_merged = dynamic_pointer_cast<ResolverInfoMisc>(info);
