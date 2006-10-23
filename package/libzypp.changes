@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Oct 23 11:28:01 CEST 2006 - dmacvicar@suse.de
+
+- fix rpm db timestamp
+- r4375
+
+-------------------------------------------------------------------
 Fri Oct 20 16:55:44 CEST 2006 - mvidner@suse.cz
 
 - zypper: nicer progress reports, with or without --verbose.
