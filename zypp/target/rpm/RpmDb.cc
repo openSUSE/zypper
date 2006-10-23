@@ -288,10 +288,17 @@ namespace zypp
       Date RpmDb::timestamp() const
       {
         Date ts_rpm;
-        PathInfo rpmdb_info(root() + "/var/lib/rpm/Packages");
+        
+        Pathname db_path;
+        if ( dbPath().empty() )
+          db_path = "/var/lib/rpm";
+        else
+          db_path = dbPath();
+        
+        PathInfo rpmdb_info(root() + db_path + "/Packages");
         
         if ( rpmdb_info.isExist() )
-          ts_rpm = rpmdb_info.mtime();
+          return rpmdb_info.mtime();
         else
           return Date::now();
       }
