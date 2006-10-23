@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Oct 23 17:44:42 CEST 2006 - mvidner@suse.cz
+
+- added "zypper info" (jkupec)
+- version 2.5.2
+
+-------------------------------------------------------------------
 Mon Oct 23 11:28:01 CEST 2006 - dmacvicar@suse.de
 
 - fix rpm db timestamp
