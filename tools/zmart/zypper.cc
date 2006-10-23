@@ -24,6 +24,7 @@
 #include "zmart-media-callbacks.h"
 #include "zypper-tabulator.h"
 #include "zypper-search.h"
+#include "zypper-info.h"
 
 using namespace std;
 using namespace boost;
@@ -239,6 +240,7 @@ int main(int argc, char **argv)
       "\tpatches, pch\t\tList patches\n"
       "\tlist-updates, lu\tList updates\n"
       "\tupdate, up\tUpdate packages\n"
+      "\tinfo, if\t\tShow full info for packages\n"
       ;
 
   string help_global_source_options = "  Source options:\n"
@@ -328,11 +330,11 @@ int main(int argc, char **argv)
       {"type",    required_argument, 0, 't'},
       {"sort-by-name", no_argument, 0, 0},
       {"sort-by-catalog", no_argument, 0, 0},
-      {"help", no_argument, 0, 0},
+      {"help", no_argument, 0, 0}
     };
     specific_options = search_options;
     specific_help =
-      "search [options] [querystring...]\n"
+      "zypper [global-options] search [options] [querystring...]\n"
       "\n"
       "'search' - Search for packages matching given search strings\n"
       "\n"
@@ -351,6 +353,15 @@ int main(int argc, char **argv)
       "    --sort-by-catalog      Sort packages by catalog.\n" // ??? catalog/source?
       "\n"
       "* and ? wildcards can also be used within search strings.\n"
+      ;
+  }
+  else if (command == "info" || command == "if") {
+    static struct option info_options[] = {};
+    specific_options = info_options;
+    specific_help =
+      "zypper [global-options] info [package...]\n"
+      "\n"
+      "'info' - Show full information for packages\n"
       ;
   }
   else {
@@ -670,6 +681,8 @@ int main(int argc, char **argv)
       else t.sort(3); // sort by name
       cout << t;
     }
+    
+    return 0;
   }
 
   // --------------------------( patch check )--------------------------------
@@ -770,6 +783,24 @@ int main(int argc, char **argv)
 
     mark_updates (kind);
     solve_and_commit ();
+    return 0;
+  }
+
+  // -----------------------------( info )------------------------------------
+
+  if (command == "info" || command == "if" ||
+      command == "patch-info") {
+    if (help || copts.count("help")) {
+      cerr << specific_help;
+      return !help;
+    }
+
+    cond_init_target ();
+    cond_init_system_sources ();
+    cond_load_resolvables ();
+
+    printInfo(command,arguments);
+
     return 0;
   }
 
