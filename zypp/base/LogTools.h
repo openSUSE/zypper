@@ -85,7 +85,7 @@ namespace zypp
   { /////////////////////////////////////////////////////////////////
 
     ///////////////////////////////////////////////////////////////////
-    // dumpMap
+    // mapEntry
     ///////////////////////////////////////////////////////////////////
 
     /** std::pair wrapper for std::map output.
@@ -114,13 +114,14 @@ namespace zypp
         return str << '[' << obj.pair().first << "] = " << obj.pair().second;
       }
 
-    /** Functor transforming std::pair into MapEntry. */
+    /** \relates MapEntry Convenience function to create MapEntry from std::pair. */
     template<class _Pair>
-      struct GetMapEntry : public std::unary_function<_Pair, typename zypp::_logtoolsdetail::MapEntry<_Pair> >
-      {
-        typename zypp::_logtoolsdetail::MapEntry<_Pair> operator()( const _Pair & pair_r ) const
-        { return MapEntry<_Pair>( pair_r ); }
-      };
+      MapEntry<_Pair> mapEntry( const _Pair & pair_r )
+      { return MapEntry<_Pair>( pair_r ); }
+
+    ///////////////////////////////////////////////////////////////////
+    // dumpMap
+    ///////////////////////////////////////////////////////////////////
 
     /** std::map wrapper for stream output.
      * Provides the transform_iterator used to write std::pair formated as
@@ -129,13 +130,21 @@ namespace zypp
     template<class _Map>
       class DumpMap
       {
-      public:
-        typedef _Map                      MapType;
-        typedef typename _Map::value_type PairType;
+      private:
+        typedef _Map                        MapType;
+        typedef typename _Map::value_type   PairType;
+        typedef MapEntry<PairType>          MapEntryType;
 
-        typedef transform_iterator<GetMapEntry<PairType>, typename MapType::const_iterator>
+        struct Transformer : public std::unary_function<PairType, MapEntryType>
+        {
+          MapEntryType operator()( const PairType & pair_r ) const
+          { return mapEntry( pair_r ); }
+        };
+
+        typedef transform_iterator<Transformer, typename MapType::const_iterator>
                 MapEntry_const_iterator;
 
+      public:
         DumpMap( const _Map & map_r )
         : _map( &map_r )
         {}
@@ -144,10 +153,10 @@ namespace zypp
         { return *_map; }
 
         MapEntry_const_iterator map_begin() const
-        { return make_transform_iterator( map().begin(), GetMapEntry<PairType>() ); }
+        { return make_transform_iterator( map().begin(), Transformer() ); }
 
         MapEntry_const_iterator map_end() const
-        { return make_transform_iterator( map().end(), GetMapEntry<PairType>() );}
+        { return make_transform_iterator( map().end(), Transformer() );}
 
       private:
         const _Map *const _map;
@@ -156,9 +165,7 @@ namespace zypp
     /** \relates DumpMap Stream output. */
     template<class _Map>
       std::ostream & operator<<( std::ostream & str, const DumpMap<_Map> & obj )
-      {
-        return dumpRange( str, obj.map_begin(), obj.map_end() );
-      }
+      { return dumpRange( str, obj.map_begin(), obj.map_end() ); }
 
     /** \relates DumpMap Convenience function to create DumpMap from std::map. */
     template<class _Map>
@@ -241,6 +248,8 @@ namespace zypp
   } // namespace _logtoolsdetail
   ///////////////////////////////////////////////////////////////////
 
+  // iomanipulator
+  using _logtoolsdetail::mapEntry;   // std::pair as '[key] = value'
   using _logtoolsdetail::dumpMap;    // dumpRange '[key] = value'
   using _logtoolsdetail::dumpKeys;   // dumpRange keys
   using _logtoolsdetail::dumpValues; // dumpRange values
