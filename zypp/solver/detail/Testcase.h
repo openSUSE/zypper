@@ -15,7 +15,11 @@
 
 #include <iosfwd>
 #include <string>
+#include "zypp/base/ReferenceCounted.h"
+#include "zypp/base/NonCopyable.h"
+#include "zypp/base/PtrTypes.h"
 #include "zypp/solver/detail/Resolver.h"
+
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp
@@ -27,6 +31,81 @@ namespace zypp
     namespace detail
     { ///////////////////////////////////////////////////////////////////
 
+
+template<class T>
+std::string helixXML( const T &obj ); //undefined
+
+template<> 
+std::string helixXML( const Edition &edition );
+
+template<> 
+std::string helixXML( const Arch &arch );
+
+template<> 
+std::string helixXML( const Capability &cap );
+
+template<> 
+std::string helixXML( const CapSet &caps );
+
+template<> 
+std::string helixXML( const Dependencies &dep );
+	
+template<> 
+std::string helixXML( const Resolvable::constPtr &resolvable );
+
+
+///////////////////////////////////////////////////////////////////
+//
+//	CLASS NAME : HelixResolvable
+/**
+ * Creates a file in helix format which includes all available
+ * or installed packages,patches,selections.....
+ **/
+class  HelixResolvable : public base::ReferenceCounted, private base::NonCopyable{
+
+  private:
+    std::string dumpFile; // Path of the generated testcase
+    std::ofstream *file;    
+
+  public:
+    HelixResolvable (const std::string & path);
+    ~HelixResolvable ();
+
+    void addResolvable (const Resolvable::constPtr &resolvable);
+    std::string filename () { return dumpFile; }
+};
+
+DEFINE_PTR_TYPE(HelixResolvable);
+typedef std::map<Source_Ref, HelixResolvable_Ptr> SourceTable;
+
+///////////////////////////////////////////////////////////////////
+//
+//	CLASS NAME : HelixControl
+/**
+ * Creates a file in helix format which contains all controll
+ * action of a testcase ( file is known as *-test.xml)
+ **/
+class  HelixControl {
+
+  private:
+    std::string dumpFile; // Path of the generated testcase
+    std::ofstream *file;
+
+  public:
+    HelixControl (const std::string & controlPath,
+		  const SourceTable & sourceTable,
+		  const std::string & systemPath = "solver-system.xml");
+    HelixControl ();    
+    ~HelixControl ();
+
+    void installResolvable (const ResObject::constPtr &resObject);
+    void deleteResolvable (const ResObject::constPtr &resObject);
+    std::string filename () { return dumpFile; }
+};
+	
+
+
+	
 ///////////////////////////////////////////////////////////////////
 //
 //	CLASS NAME : Testcase
@@ -37,16 +116,16 @@ class Testcase {
 
   private:
     std::string dumpPath; // Path of the generated testcase
-    
 
   public:
-    Testcase(const std::string & path);
-    Testcase();    
-    ~Testcase();
+    Testcase (const std::string & path);
+    Testcase ();    
+    ~Testcase ();
 
-    bool createTestcase(Resolver & resolver);
+    bool createTestcase (Resolver & resolver);
 
 };
+
 
 ///////////////////////////////////////////////////////////////////
     };// namespace detail
