@@ -10,6 +10,7 @@ uiincludedir = $(pkgincludedir)/ui
 
 uiinclude_HEADERS = 		\
 	PatchContents.h		\
+	PatternContents.h	\
 	Status.h		\
 	Selectable.h		\
 	SelFilters.h		\
@@ -17,6 +18,7 @@ uiinclude_HEADERS = 		\
 	UserWantedPackages.h	\
 				\
 	PatchContentsImpl.h	\
+	PatternContentsImpl.h	\
 	SelectableImpl.h
 
 noinst_LTLIBRARIES =	lib@PACKAGE@_ui.la
@@ -25,11 +27,13 @@ noinst_LTLIBRARIES =	lib@PACKAGE@_ui.la
 
 lib@PACKAGE@_ui_la_SOURCES = 	\
 	PatchContents.cc	\
+	PatternContents.cc	\
 	Status.cc		\
 	Selectable.cc		\
 	UserWantedPackages.cc	\
 				\
 	PatchContentsImpl.cc	\
+	PatternContentsImpl.cc	\
 	SelectableImpl.cc
 
 ## ##################################################
