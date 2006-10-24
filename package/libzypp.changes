@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue Oct 24 14:33:16 CEST 2006 - ma@suse.de
+
+- Added ui::PatternContents: Helper class that will compute a patterns
+  expanded install_packages set. (UI interface for F301229)
+- revision 4387
+
+-------------------------------------------------------------------
 Tue Oct 24 09:06:24 CEST 2006 - mvidner@suse.cz
 
 - removed the last reference to /usr/lib64 to fix the build
