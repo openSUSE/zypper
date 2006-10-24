@@ -36,7 +36,7 @@ namespace zypp
    *   item1
    *   item2
    * }
-   * {} // on empty rande
+   * {} // on empty range
    * \endcode
    * A comma separated list enclosed in \c () would be
    * \code
