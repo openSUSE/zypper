@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Tue Oct 24 09:06:24 CEST 2006 - mvidner@suse.cz
+
+- removed the last reference to /usr/lib64 to fix the build
+
+-------------------------------------------------------------------
 Mon Oct 23 17:44:42 CEST 2006 - mvidner@suse.cz
 
 - added "zypper info" (jkupec)
