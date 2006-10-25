@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Wed Oct 25 15:40:44 CEST 2006 - ma@suse.de
+
+- Finalized ui::PatternContents. (F301229)
+- version 2.7.0
+- revision 4413
+
+-------------------------------------------------------------------
 Wed Oct 25 08:21:52 CEST 2006 - mvidner@suse.cz
 
 - Moved zypper and zypp-checkpatches(-wrapper) to zypper.rpm
