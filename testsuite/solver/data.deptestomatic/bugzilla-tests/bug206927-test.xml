@@ -15,6 +15,5 @@
   <establish/>
   <install channel="update" kind="patch" name="kernel" ver="1836" rel="0" />
   <install channel="update" kind="patch" name="kernel" ver="2036" rel="0" />
-<createTestcase path="tmp"/>
 </trial>
 </test>
