@@ -1,5 +1,6 @@
 #include <iostream>
 #include "Tools.h"
+#include <boost/bind/protect.hpp>
 
 #include <zypp/base/LogControl.h>
 #include <zypp/base/LogTools.h>
@@ -34,6 +35,11 @@
 #include <zypp/ResPoolProxy.h>
 #include <zypp/base/InputStream.h>
 #include <zypp/base/DefaultIntegral.h>
+
+
+#include <zypp/ui/PatternExpander.h>
+#include <zypp/ui/PatternContents.h>
+
 
 using namespace std;
 using namespace zypp;
@@ -115,81 +121,33 @@ struct Select
     }
 };
 
-struct CapAndItemMatches
+
+
+struct ExpandPattern
 {
-  CapAndItemMatches( const Capability & lhs_r )
-  : _lhs( lhs_r )
-  {}
-
-  bool operator()( const CapAndItem & capitem_r ) const
-  {
-    return( _lhs.matches( capitem_r.cap ) == CapMatch::yes );
-  }
-
-  const Capability & _lhs;
-};
-
-inline int forEachMatchIn( const ResPool & pool_r, const Dep & dep_r, const Capability & lhs_r,
-                           function<bool(const CapAndItem &)> action_r )
-{
-  std::string index( lhs_r.index() );
-  return invokeOnEach( pool_r.byCapabilityIndexBegin( index, dep_r ),
-                       pool_r.byCapabilityIndexEnd( index, dep_r ),
-                       CapAndItemMatches( lhs_r ), // filter
-                       action_r );
-}
-
-
-struct PatternExtendedInstallPackages
-{
-  PatternExtendedInstallPackages( ResPool pool_r )
+  ExpandPattern( ResPool pool_r )
   : _pool( pool_r )
   {}
 
   bool operator()( ResObject::constPtr obj_r ) const
-  { return operator()( asKind<Pattern>(obj_r) ); }
-
-  bool operator()( Pattern::constPtr pat_r ) const
   {
-    if ( ! pat_r )
-      return true;
-
-    MIL << pat_r << endl;
-    expandIncludes( pat_r );
-    //selectIncludes( pat_r );
+    PatternContents a( asKind<Pattern>(obj_r) );
+    a.install_packages();
     return true;
   }
 
-  void expandIncludes( const Pattern::constPtr & pat_r ) const
+  bool operatorx( ResObject::constPtr obj_r ) const
   {
-    if ( ! pat_r->includes().empty() )
-      {
-        for_each( pat_r->includes().begin(),
-                  pat_r->includes().end(),
-                  bind( &PatternExtendedInstallPackages::expandInclude, this, _1 ) );
-      }
-  }
-
-  void expandInclude( const Capability & include_r ) const
-  {
-    DBG << include_r << endl;
-    forEachMatchIn( _pool, Dep::PROVIDES, include_r,
-                    bind( &PatternExtendedInstallPackages::storeIncludeMatch, this, _1 ) );
-  }
-
-  bool storeIncludeMatch( const CapAndItem & capitem_r ) const
-  {
-    Dump()( capitem_r.item );
+    PatternExpander a( _pool );
+    MIL << a.expand( obj_r ) << " for " << obj_r << endl;
+    for_each( a.begin(), a.end(), Dump() );
     return true;
   }
 
 
-  private:
-    ResPool _pool;
+  ResPool _pool;
 };
 
-#define Default DefaultIntegral
-typedef Default<unsigned,0> xCounter;
 
 /******************************************************************
 **
@@ -201,20 +159,6 @@ int main( int argc, char * argv[] )
   //zypp::base::LogControl::instance().logfile( "" );
   INT << "===[START]==========================================" << endl;
 
-  xCounter x;
-  DBG  << x << endl;
-  Default<bool,true> a;
-  Default<int,13> i;
-  DBG  << i << endl;
-  i = 15;
-  DBG  << i << endl;
-  i -= 3;
-  DBG  << i << endl;
-  Default<int,6> j;
-  DBG  << (i*j) << endl;
-  DBG  << Default<bool,true>() << endl;
-
-  return 0;
   ResPool pool( getZYpp()->pool() );
 
   if ( 0 )
@@ -230,6 +174,7 @@ int main( int argc, char * argv[] )
     {
       zypp::base::LogControl::TmpLineWriter shutUp;
 
+      //src1 = createSource( "dir:/Local/SLES10" );
       src1 = createSource( "dir:/Local/openSUSE-10.2-Alpha5test-x86_64/CD1" );
       getZYpp()->addResolvables( src1.resolvables() );
 
@@ -237,10 +182,7 @@ int main( int argc, char * argv[] )
 
   for_each( pool.byKindBegin<Pattern>(),
             pool.byKindEnd<Pattern>(),
-            PatternExtendedInstallPackages( pool ) );
-
-
-
+            ExpandPattern(pool) );
 
 #if 0
   ResPoolProxy ui( getZYpp()->poolProxy() );
