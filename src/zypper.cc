@@ -227,7 +227,7 @@ int main(int argc, char **argv)
   struct option *specific_options = &no_options;
   string specific_help;
 
-  string help_commands = "  Commands:\n"
+  string help_commands = _("  Commands:\n"
       "\thelp\t\t\tHelp\n"
       "\tinstall, in\t\tInstall packages or resolvables\n"
       "\tremove, rm\t\tRemove packages or resolvables\n"
@@ -239,9 +239,9 @@ int main(int argc, char **argv)
       "\tpatch-check, pchk\tCheck for patches\n"
       "\tpatches, pch\t\tList patches\n"
       "\tlist-updates, lu\tList updates\n"
-      "\tupdate, up\tUpdate packages\n"
+      "\tupdate, up\t\tUpdate packages\n"
       "\tinfo, if\t\tShow full info for packages\n"
-      ;
+      "");
 
   string help_global_source_options = "  Source options:\n"
       "\t--disable-system-sources, -D\t\tDon't read the system sources\n"
