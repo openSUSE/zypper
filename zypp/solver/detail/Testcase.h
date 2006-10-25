@@ -94,6 +94,7 @@ class  HelixControl {
   public:
     HelixControl (const std::string & controlPath,
 		  const SourceTable & sourceTable,
+		  const Arch & systemArchitecture,
 		  const std::string & systemPath = "solver-system.xml");
     HelixControl ();    
     ~HelixControl ();
