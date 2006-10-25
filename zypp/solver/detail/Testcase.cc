@@ -204,8 +204,9 @@ bool Testcase::createTestcase(Resolver & resolver)
 	    return false;
 	}
     }
+    
     zypp::base::LogControl::instance().logfile( dumpPath +"/y2log" );
-    zypp::base::LogControl::TmpExcessive excessive; // ZYPP_FULLLOG=1
+    zypp::base::LogControl::TmpExcessive *excessive = new  zypp::base::LogControl::TmpExcessive();// ZYPP_FULLLOG=1
     
     resolver.resolveDependencies();
 
@@ -213,7 +214,6 @@ bool Testcase::createTestcase(Resolver & resolver)
     SourceTable		sourceTable;
     PoolItemList	items_to_install;
     PoolItemList 	items_to_remove;    
-
     HelixResolvable 	system (dumpPath + "/solver-system.xml");    
 
     for ( ResPool::const_iterator it = pool.begin(); it != pool.end(); ++it )
