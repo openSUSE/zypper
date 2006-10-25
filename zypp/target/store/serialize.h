@@ -31,9 +31,9 @@
 #include <zypp/Edition.h>
 #include <zypp/CapSet.h>
 
-
 #include <zypp/Capability.h>
-//#include <zypp/capability/CapabilityImpl.h>
+
+#define SERIALIZER_VERSION "2.0"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

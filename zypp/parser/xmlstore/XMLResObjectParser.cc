@@ -80,19 +80,19 @@ XMLResObjectParser::parseResObjectCommonData( XMLResObjectData_Ptr dataPtr, xmlN
         dataPtr->vendor = _helper.content(child);
       }
       else if (name == "size") {
-        dataPtr->size = str::strtonum<int>(_helper.content(child));
+        dataPtr->size = str::strtonum<ByteCount::SizeType>(_helper.content(child));
       }
       else if (name == "archive-size") {
-        dataPtr->archive_size = str::strtonum<int>(_helper.content(child));
+        dataPtr->archive_size = str::strtonum<ByteCount::SizeType>(_helper.content(child));
       }
       else if (name == "install-only") {
         dataPtr->install_only = (_helper.content(child) == "true") ? true : false;
       }
       else if (name == "build-time") {
-        dataPtr->build_time = str::strtonum<int>(_helper.content(child));
+        dataPtr->build_time = str::strtonum<Date::ValueType>(_helper.content(child));
       }
       else if (name == "install-time") {
-        dataPtr->install_time = str::strtonum<int>(_helper.content(child));
+        dataPtr->install_time = str::strtonum<Date::ValueType>(_helper.content(child));
       }      
     }
   }
