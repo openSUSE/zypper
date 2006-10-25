@@ -37,9 +37,11 @@ namespace zypp
       class Impl;
 
     public:
+      /** Ctor taking the Pattern to expand. */
       PatternContents( const Pattern::constPtr & pattern );
 
-      std::set<std::string> install_packages( const Locale & lang = Locale("") ) const;
+      /** Return the expanded Patterns install_packages. */
+      std::set<std::string> install_packages() const;
 
     private:
       RW_pointer<Impl> _pimpl;

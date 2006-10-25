@@ -19,6 +19,7 @@ uiinclude_HEADERS = 		\
 				\
 	PatchContentsImpl.h	\
 	PatternContentsImpl.h	\
+	PatternExpander.h	\
 	SelectableImpl.h
 
 noinst_LTLIBRARIES =	lib@PACKAGE@_ui.la
@@ -34,6 +35,7 @@ lib@PACKAGE@_ui_la_SOURCES = 	\
 				\
 	PatchContentsImpl.cc	\
 	PatternContentsImpl.cc	\
+	PatternExpander.cc	\
 	SelectableImpl.cc
 
 ## ##################################################

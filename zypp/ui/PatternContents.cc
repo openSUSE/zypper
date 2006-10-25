@@ -23,9 +23,9 @@ namespace zypp
     : _pimpl( new PatternContents::Impl( pattern ) )
     {}
 
-    std::set<std::string> PatternContents::install_packages( const Locale & lang ) const
+    std::set<std::string> PatternContents::install_packages() const
     {
-      return _pimpl->install_packages( lang );
+      return _pimpl->install_packages();
     }
 
     /////////////////////////////////////////////////////////////////

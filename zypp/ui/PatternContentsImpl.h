@@ -32,7 +32,7 @@ namespace zypp
     public:
       Impl( const Pattern::constPtr & pattern );
 
-      std::set<std::string> install_packages( const Locale & lang = Locale("") ) const;
+      std::set<std::string> install_packages() const;
 
     private:
       Pattern::constPtr _pattern;
