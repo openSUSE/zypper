@@ -1,0 +1,343 @@
+<channel><subchannel>                                                  
+
+<patch>
+	<name>qt3</name>
+	<arch>noarch</arch>
+	<version>2189</version>
+	<release>0</release>
+	<requires>
+		<dep kind="atom" name="qt3" epoch="0" version="3.3.5" release="58.12" op="EQ"/>
+		<dep kind="atom" name="qt3-32bit" epoch="0" version="3.3.5" release="58.12" op="EQ"/>
+		<dep kind="atom" name="qt3-64bit" epoch="0" version="3.3.5" release="58.12" op="EQ"/>
+		<dep kind="atom" name="qt3-static" epoch="0" version="3.3.5" release="58.11" op="EQ"/>
+	</requires>
+</patch>
+<atom>
+	<name>qt3</name>
+	<arch>i586</arch>
+	<version>3.3.5</version>
+	<release>58.12</release>
+	<freshens>
+		<dep kind="package" name="qt3"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="qt3" epoch="0" version="3.3.5" release="58.12" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>qt3</name>
+	<arch>ppc</arch>
+	<version>3.3.5</version>
+	<release>58.12</release>
+	<freshens>
+		<dep kind="package" name="qt3"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="qt3" epoch="0" version="3.3.5" release="58.12" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>qt3</name>
+	<arch>x86_64</arch>
+	<version>3.3.5</version>
+	<release>58.12</release>
+	<freshens>
+		<dep kind="package" name="qt3"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="qt3" epoch="0" version="3.3.5" release="58.12" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>qt3-32bit</name>
+	<arch>x86_64</arch>
+	<version>3.3.5</version>
+	<release>58.12</release>
+	<freshens>
+		<dep kind="package" name="qt3-32bit"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="qt3-32bit" epoch="0" version="3.3.5" release="58.12" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>qt3-64bit</name>
+	<arch>ppc</arch>
+	<version>3.3.5</version>
+	<release>58.12</release>
+	<freshens>
+		<dep kind="package" name="qt3-64bit"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="qt3-64bit" epoch="0" version="3.3.5" release="58.12" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>qt3-static</name>
+	<arch>i586</arch>
+	<version>3.3.5</version>
+	<release>58.11</release>
+	<freshens>
+		<dep kind="package" name="qt3-static"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="qt3-static" epoch="0" version="3.3.5" release="58.11" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>qt3-static</name>
+	<arch>ppc</arch>
+	<version>3.3.5</version>
+	<release>58.11</release>
+	<freshens>
+		<dep kind="package" name="qt3-static"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="qt3-static" epoch="0" version="3.3.5" release="58.11" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>qt3-static</name>
+	<arch>x86_64</arch>
+	<version>3.3.5</version>
+	<release>58.11</release>
+	<freshens>
+		<dep kind="package" name="qt3-static"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="qt3-static" epoch="0" version="3.3.5" release="58.11" op="GE"/>
+	</requires>
+</atom>
+<package>
+	<name>qt3</name>
+	<summary>qt3: Securityfix for integer overflow in Pixmap handling</summary>
+	<description>Multiple integer overflows have been found in image
+processing functions within the QT library. These could
+potentially lead to heap overflows and code execution.
+(CVE-2006-4811)
+</description>
+	<arch>i586</arch>
+	<version>3.3.5</version>
+	<release>58.12</release>
+	<filesize>3279316</filesize>
+	<installedsize>8687999</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>3.3.5</version>
+			<release>58.12</release>
+			<filename>qt3-3.3.5-58.12.i586.rpm</filename>
+			<filesize>3279316</filesize>
+			<installedsize>8687999</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+	</deps>
+</package>
+<package>
+	<name>qt3</name>
+	<summary>qt3: Securityfix for integer overflow in Pixmap handling</summary>
+	<description>Multiple integer overflows have been found in image
+processing functions within the QT library. These could
+potentially lead to heap overflows and code execution.
+(CVE-2006-4811)
+</description>
+	<arch>ppc</arch>
+	<version>3.3.5</version>
+	<release>58.12</release>
+	<filesize>3304022</filesize>
+	<installedsize>10222755</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>3.3.5</version>
+			<release>58.12</release>
+			<filename>qt3-3.3.5-58.12.ppc.rpm</filename>
+			<filesize>3304022</filesize>
+			<installedsize>10222755</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+	</deps>
+</package>
+<package>
+	<name>qt3</name>
+	<summary>qt3: Securityfix for integer overflow in Pixmap handling</summary>
+	<description>Multiple integer overflows have been found in image
+processing functions within the QT library. These could
+potentially lead to heap overflows and code execution.
+(CVE-2006-4811)
+</description>
+	<arch>x86_64</arch>
+	<version>3.3.5</version>
+	<release>58.12</release>
+	<filesize>3494111</filesize>
+	<installedsize>10241631</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>3.3.5</version>
+			<release>58.12</release>
+			<filename>qt3-3.3.5-58.12.x86_64.rpm</filename>
+			<filesize>3494111</filesize>
+			<installedsize>10241631</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+	</deps>
+</package>
+<package>
+	<name>qt3-32bit</name>
+	<summary>qt3: Securityfix for integer overflow in Pixmap handling</summary>
+	<description>Multiple integer overflows have been found in image
+processing functions within the QT library. These could
+potentially lead to heap overflows and code execution.
+(CVE-2006-4811)
+</description>
+	<arch>x86_64</arch>
+	<version>3.3.5</version>
+	<release>58.12</release>
+	<filesize>2873166</filesize>
+	<installedsize>7708624</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>3.3.5</version>
+			<release>58.12</release>
+			<filename>qt3-32bit-3.3.5-58.12.x86_64.rpm</filename>
+			<filesize>2873166</filesize>
+			<installedsize>7708624</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+	</deps>
+</package>
+<package>
+	<name>qt3-64bit</name>
+	<summary>qt3: Securityfix for integer overflow in Pixmap handling</summary>
+	<description>Multiple integer overflows have been found in image
+processing functions within the QT library. These could
+potentially lead to heap overflows and code execution.
+(CVE-2006-4811)
+</description>
+	<arch>ppc</arch>
+	<version>3.3.5</version>
+	<release>58.12</release>
+	<filesize>3095488</filesize>
+	<installedsize>11994752</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>3.3.5</version>
+			<release>58.12</release>
+			<filename>qt3-64bit-3.3.5-58.12.ppc.rpm</filename>
+			<filesize>3095488</filesize>
+			<installedsize>11994752</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+	</deps>
+</package>
+<package>
+	<name>qt3-static</name>
+	<summary>qt3: Securityfix for integer overflow in Pixmap handling</summary>
+	<description>Multiple integer overflows have been found in image
+processing functions within the QT library. These could
+potentially lead to heap overflows and code execution.
+(CVE-2006-4811)
+</description>
+	<arch>i586</arch>
+	<version>3.3.5</version>
+	<release>58.11</release>
+	<filesize>6538429</filesize>
+	<installedsize>25640296</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>3.3.5</version>
+			<release>58.11</release>
+			<filename>qt3-static-3.3.5-58.11.i586.rpm</filename>
+			<filesize>6538429</filesize>
+			<installedsize>25640296</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+	</deps>
+</package>
+<package>
+	<name>qt3-static</name>
+	<summary>qt3: Securityfix for integer overflow in Pixmap handling</summary>
+	<description>Multiple integer overflows have been found in image
+processing functions within the QT library. These could
+potentially lead to heap overflows and code execution.
+(CVE-2006-4811)
+</description>
+	<arch>ppc</arch>
+	<version>3.3.5</version>
+	<release>58.11</release>
+	<filesize>7163392</filesize>
+	<installedsize>29705680</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>3.3.5</version>
+			<release>58.11</release>
+			<filename>qt3-static-3.3.5-58.11.ppc.rpm</filename>
+			<filesize>7163392</filesize>
+			<installedsize>29705680</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+	</deps>
+</package>
+<package>
+	<name>qt3-static</name>
+	<summary>qt3: Securityfix for integer overflow in Pixmap handling</summary>
+	<description>Multiple integer overflows have been found in image
+processing functions within the QT library. These could
+potentially lead to heap overflows and code execution.
+(CVE-2006-4811)
+</description>
+	<arch>x86_64</arch>
+	<version>3.3.5</version>
+	<release>58.11</release>
+	<filesize>7061826</filesize>
+	<installedsize>37130100</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>3.3.5</version>
+			<release>58.11</release>
+			<filename>qt3-static-3.3.5-58.11.x86_64.rpm</filename>
+			<filesize>7061826</filesize>
+			<installedsize>37130100</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+	</deps>
+</package>
+</subchannel></channel>

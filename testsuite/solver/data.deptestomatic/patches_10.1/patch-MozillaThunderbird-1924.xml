@@ -1,0 +1,1607 @@
+<channel><subchannel>                                                  
+
+<patch>
+	<name>MozillaThunderbird</name>
+	<arch>noarch</arch>
+	<version>1924</version>
+	<release>0</release>
+	<requires>
+		<dep kind="atom" name="MozillaThunderbird" epoch="0" version="1.5.0.5" release="0.1" op="EQ"/>
+		<dep kind="atom" name="MozillaThunderbird-translations" epoch="0" version="1.5.0.5" release="0.1" op="EQ"/>
+	</requires>
+</patch>
+<atom>
+	<name>MozillaThunderbird</name>
+	<arch>i586</arch>
+	<version>1.5.0.5</version>
+	<release>0.1</release>
+	<freshens>
+		<dep kind="package" name="MozillaThunderbird"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="MozillaThunderbird" epoch="0" version="1.5.0.5" release="0.1" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>MozillaThunderbird</name>
+	<arch>ppc</arch>
+	<version>1.5.0.5</version>
+	<release>0.1</release>
+	<freshens>
+		<dep kind="package" name="MozillaThunderbird"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="MozillaThunderbird" epoch="0" version="1.5.0.5" release="0.1" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>MozillaThunderbird</name>
+	<arch>x86_64</arch>
+	<version>1.5.0.5</version>
+	<release>0.1</release>
+	<freshens>
+		<dep kind="package" name="MozillaThunderbird"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="MozillaThunderbird" epoch="0" version="1.5.0.5" release="0.1" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>MozillaThunderbird-translations</name>
+	<arch>i586</arch>
+	<version>1.5.0.5</version>
+	<release>0.1</release>
+	<freshens>
+		<dep kind="package" name="MozillaThunderbird-translations"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="MozillaThunderbird-translations" epoch="0" version="1.5.0.5" release="0.1" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>MozillaThunderbird-translations</name>
+	<arch>ppc</arch>
+	<version>1.5.0.5</version>
+	<release>0.1</release>
+	<freshens>
+		<dep kind="package" name="MozillaThunderbird-translations"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="MozillaThunderbird-translations" epoch="0" version="1.5.0.5" release="0.1" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>MozillaThunderbird-translations</name>
+	<arch>x86_64</arch>
+	<version>1.5.0.5</version>
+	<release>0.1</release>
+	<freshens>
+		<dep kind="package" name="MozillaThunderbird-translations"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="MozillaThunderbird-translations" epoch="0" version="1.5.0.5" release="0.1" op="GE"/>
+	</requires>
+</atom>
+<package>
+	<name>MozillaThunderbird</name>
+	<summary>MozillaThunderbird: Security update to version 1.5.0.6</summary>
+	<description>This security update brings Mozilla Thunderbird to version
+1.5.0.6.
+
+Note that on SUSE Linux 9.2, 9.3 and 10.0 this is a major
+version upgrade.
+
+More Details can be found on this page:
+http://www.mozilla.org/projects/security/known-vulnerabiliti
+es.html
+
+It includes fixes to the following security problems:
+- CVE-2006-3801/MFSA 2006-44: Code execution through
+  deleted frame reference
+
+  Thilo Girmann discovered that in certain circumstances a
+JavaScript reference to a frame or window was not properly
+cleared when the referenced content went away, and he
+demonstrated that this pointer to a deleted object could be
+used to execute native code supplied by the attacker.
+
+- CVE-2006-3113/MFSA 2006-46: Memory corruption with
+  simultaneous events
+
+  Secunia Research has discovered a vulnerability in
+Mozilla Firefox 1.5 branch, which can be exploited by
+malicious people to compromise a user's system.
+
+  The vulnerability is caused due to an memory corruption
+error within the handling of simultaneously happening XPCOM
+events, which leads to use of a deleted timer object. This
+generally results in a crash but potentially could be
+exploited to execute arbitrary code on a user's system when
+a malicious website is visited.
+
+- CVE-2006-3802/MFSA 2006-47: Native DOM methods can be
+  hijacked across domains
+
+  A malicious page can hijack native DOM methods on a
+document object in another domain, which will run the
+attacker's script when called by the victim page.  This
+could be used to steal login cookies, password, or other
+sensitive data on the target page, or to perform actions on
+behalf of a logged-in user.
+
+  Access checks on all other properties and document nodes
+are performed correctly. This cross-site scripting (XSS)
+attack is limited to pages which use standard DOM methods
+of the top-level document object, such as
+document.getElementById(). This includes many popular
+sites, especially the newer ones that offer rich
+interaction to the user.
+
+- CVE-2006-3803/MFSA 2006-48: JavaScript new Function race
+  condition
+
+  H. D. Moore reported a testcase that was able to trigger
+a race condition where JavaScript garbage collection
+deleted a temporary variable still being used in the
+creation of a new Function object. The resulting use of a
+deleted object may be potentially exploitable to run native
+code provided by the attacker.
+
+- CVE-2006-3804/MFSA 2006-49: Heap buffer overwrite on
+  malformed VCard
+
+  A VCard attachment with a malformed base64 field (such as
+a photo) can trigger a heap buffer overwrite. These have
+proven exploitable in the past, though in this case the
+overwrite is accompanied by an integer underflow that would
+attempt to copy more data than the typical machine has,
+leading to a crash.
+
+- CVE-2006-3805/CVE-2006-3806/MFSA 2006-50: JavaScript
+  engine vulnerabilities
+
+  Continuing our security audit of the JavaScript engine,
+Mozilla developers found and fixed several potential
+vulnerabilities.
+
+  Igor Bukanov and shutdown found additional places where
+an untimely garbage collection could delete a temporary
+object that was in active use (similar to MFSA 2006-01 and
+MFSA 2006-10). Some of these may allow an attacker to run
+arbitrary code given the right conditions.
+
+  Georgi Guninski found potential integer overflow issues
+with long strings in the toSource() methods of the Object,
+Array and String objects as well as string function
+arguments.
+
+- CVE-2006-3807/MFSA 2006-51: Privilege escalation using
+  named-functions and redefined "new Object()"
+
+  moz_bug_r_a4 discovered that named JavaScript functions
+have a parent object created using the standard Object()
+constructor (ECMA-specified behavior) and that this
+constructor can be redefined by script (also ECMA-specified
+behavior). If the Object() constructor is changed to return
+a reference to a privileged object with useful properties
+it is possible to have attacker-supplied script excuted
+with elevated privileges by calling the function. This
+could be used to install malware or take other malicious
+actions.
+
+  Our fix involves calling the internal Object constructor
+which appears to be what other ECMA-compatible interpreters
+do.
+
+- CVE-2006-3808/MFSA 2006-52: PAC privilege escalation
+  using Function.prototype.call
+
+  moz_bug_r_a4 reports that a malicious Proxy AutoConfig
+(PAC) server could serve a PAC script that can execute code
+with elevated privileges by setting the required
+FindProxyForURL function to the eval method on a privileged
+object that leaked into the PAC sandbox. By redirecting the
+victim to a specially-crafted URL -- easily done since the
+PAC script controls which proxy to use -- the URL
+"hostname" can be executed as privileged script.
+
+  A malicious proxy server can perform spoofing attacks on
+the user so it was already important to use a trustworthy
+PAC server.
+
+- CVE-2006-3809/MFSA 2006-53: UniversalBrowserRead
+  privilege escalation
+
+  shutdown reports that scripts granted the
+UniversalBrowserRead privilege can leverage that into the
+equivalent of the far more powerful UniversalXPConnect
+since they are allowed to "read" into a privileged context.
+This allows the attacker the ability to run scripts with
+the full privelege of the user running the browser,
+possibly installing malware or snooping on private data.
+This has been fixed so that UniversalBrowserRead and
+UniversalBrowserWrite are limited to reading from and
+writing into only normally-privileged browser windows and
+frames.
+
+- CVE-2006-3810/MFSA 2006-54: XSS with
+  XPCNativeWrapper(window).Function(...)
+
+  shutdown reports that cross-site scripting (XSS) attacks
+could be performed using the construct
+XPCNativeWrapper(window).Function(...), which created a
+function that appeared to belong to the window in question
+even after it had been navigated to the target site.
+
+- CVE-2006-3811/MFSA 2006-55: Crashes with evidence of
+  memory corruption
+
+  As part of the Firefox 1.5.0.5 stability and security
+release, developers in the Mozilla community looked for and
+fixed several crash bugs to improve the stability of
+Mozilla clients. Some of these crashes showed evidence of
+memory corruption that we presume could be exploited to run
+arbitrary code with enough effort.
+</description>
+	<arch>i586</arch>
+	<version>1.5.0.5</version>
+	<release>0.1</release>
+	<filesize>7846945</filesize>
+	<installedsize>23461797</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>1.5.0.5</version>
+			<release>0.1</release>
+			<filename>MozillaThunderbird-1.5.0.5-0.1.i586.rpm</filename>
+			<filesize>7846945</filesize>
+			<installedsize>23461797</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="libenigmime.so"/>
+			<dep name="libenigmime.so(EXPORTED)"/>
+			<dep name="libenigmime.so(libenigmime.so)"/>
+			<dep name="libimgicon.so"/>
+			<dep name="libimgicon.so(EXPORTED)"/>
+			<dep name="libimgicon.so(libimgicon.so)"/>
+			<dep name="libjsd.so"/>
+			<dep name="libjsd.so(EXPORTED)"/>
+			<dep name="libjsd.so(libjsd.so)"/>
+			<dep name="libldap50.so"/>
+			<dep name="libmozgnome.so"/>
+			<dep name="libmozgnome.so(EXPORTED)"/>
+			<dep name="libmozgnome.so(libmozgnome.so)"/>
+			<dep name="libmozjs.so"/>
+			<dep name="libmyspell.so"/>
+			<dep name="libmyspell.so(EXPORTED)"/>
+			<dep name="libmyspell.so(libmyspell.so)"/>
+			<dep name="libprldap50.so"/>
+			<dep name="libspellchecker.so"/>
+			<dep name="libspellchecker.so(EXPORTED)"/>
+			<dep name="libspellchecker.so(libspellchecker.so)"/>
+			<dep name="libxpcom.so"/>
+			<dep name="libxpcom_compat.so"/>
+			<dep name="libxpcom_core.so"/>
+			<dep name="libxpinstall.so"/>
+			<dep name="libxpinstall.so(EXPORTED)"/>
+			<dep name="libxpinstall.so(libxpinstall.so)"/>
+			<dep name="libxpistub.so"/>
+			<dep name="MozillaThunderbird" op="EQ" version="1.5.0.5" release="0.1"/>
+		</provides>
+		<requires>
+			<dep name="libstdc++" pre="1"/>
+			<dep name="fileutils" pre="1"/>
+			<dep name="textutils" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="mozilla-nspr" op="GE" version="4.6.1"/>
+			<dep name="mozilla-nss" op="GE" version="3.11"/>
+			<dep name="/bin/sh"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/bin/sh"/>
+			<dep name="libICE.so.6"/>
+			<dep name="libORBit-2.so.0"/>
+			<dep name="libSM.so.6"/>
+			<dep name="libX11.so.6"/>
+			<dep name="libXext.so.6"/>
+			<dep name="libXft.so.2"/>
+			<dep name="libXrender.so.1"/>
+			<dep name="libXt.so.6"/>
+			<dep name="libart_lgpl_2.so.2"/>
+			<dep name="libatk-1.0.so.0"/>
+			<dep name="libbonobo-2.so.0"/>
+			<dep name="libbonobo-activation.so.4"/>
+			<dep name="libbonoboui-2.so.0"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libc.so.6(GLIBC_2.2)"/>
+			<dep name="libc.so.6(GLIBC_2.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)"/>
+			<dep name="libc.so.6(GLIBC_2.4)"/>
+			<dep name="libcairo.so.2"/>
+			<dep name="libdl.so.2"/>
+			<dep name="libdl.so.2(GLIBC_2.0)"/>
+			<dep name="libfontconfig.so.1"/>
+			<dep name="libfreetype.so.6"/>
+			<dep name="libgcc_s.so.1"/>
+			<dep name="libgcc_s.so.1(GCC_3.0)"/>
+			<dep name="libgcc_s.so.1(GLIBC_2.0)"/>
+			<dep name="libgconf-2.so.4"/>
+			<dep name="libgdk-x11-2.0.so.0"/>
+			<dep name="libgdk_pixbuf-2.0.so.0"/>
+			<dep name="libglib-2.0.so.0"/>
+			<dep name="libglitz.so.1"/>
+			<dep name="libgmodule-2.0.so.0"/>
+			<dep name="libgnome-2.so.0"/>
+			<dep name="libgnome-keyring.so.0"/>
+			<dep name="libgnomecanvas-2.so.0"/>
+			<dep name="libgnomeui-2.so.0"/>
+			<dep name="libgnomevfs-2.so.0"/>
+			<dep name="libgobject-2.0.so.0"/>
+			<dep name="libgthread-2.0.so.0"/>
+			<dep name="libgtk-x11-2.0.so.0"/>
+			<dep name="libjpeg.so.62"/>
+			<dep name="libldap50.so"/>
+			<dep name="libm.so.6"/>
+			<dep name="libm.so.6(GLIBC_2.0)"/>
+			<dep name="libm.so.6(GLIBC_2.1)"/>
+			<dep name="libmozjs.so"/>
+			<dep name="libnspr4.so"/>
+			<dep name="libnss3.so"/>
+			<dep name="libnss3.so(NSS_3.2)"/>
+			<dep name="libnss3.so(NSS_3.3)"/>
+			<dep name="libnss3.so(NSS_3.4)"/>
+			<dep name="libnss3.so(NSS_3.5)"/>
+			<dep name="libnss3.so(NSS_3.6)"/>
+			<dep name="libnss3.so(NSS_3.7)"/>
+			<dep name="libnss3.so(NSS_3.9)"/>
+			<dep name="libnss3.so(NSS_3.9.3)"/>
+			<dep name="libpango-1.0.so.0"/>
+			<dep name="libpangocairo-1.0.so.0"/>
+			<dep name="libpangoft2-1.0.so.0"/>
+			<dep name="libpangoxft-1.0.so.0"/>
+			<dep name="libplc4.so"/>
+			<dep name="libplds4.so"/>
+			<dep name="libpng.so.3"/>
+			<dep name="libpng12.so.0"/>
+			<dep name="libpopt.so.0"/>
+			<dep name="libprldap50.so"/>
+			<dep name="libpthread.so.0"/>
+			<dep name="libpthread.so.0(GLIBC_2.0)"/>
+			<dep name="libpthread.so.0(GLIBC_2.1)"/>
+			<dep name="libpthread.so.0(GLIBC_2.2)"/>
+			<dep name="libsmime3.so"/>
+			<dep name="libsmime3.so(NSS_3.2)"/>
+			<dep name="libsmime3.so(NSS_3.3)"/>
+			<dep name="libsmime3.so(NSS_3.4)"/>
+			<dep name="libsmime3.so(NSS_3.4.1)"/>
+			<dep name="libsmime3.so(NSS_3.6)"/>
+			<dep name="libssl3.so"/>
+			<dep name="libssl3.so(NSS_3.2)"/>
+			<dep name="libssl3.so(NSS_3.4)"/>
+			<dep name="libstdc++.so.6"/>
+			<dep name="libstdc++.so.6(CXXABI_1.3)"/>
+			<dep name="libstdc++.so.6(GLIBCXX_3.4)"/>
+			<dep name="libxml2.so.2"/>
+			<dep name="libxpcom.so"/>
+			<dep name="libxpcom_compat.so"/>
+			<dep name="libxpcom_core.so"/>
+			<dep name="libz.so.1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>MozillaThunderbird</name>
+	<summary>MozillaThunderbird: Security update to version 1.5.0.6</summary>
+	<description>This security update brings Mozilla Thunderbird to version
+1.5.0.6.
+
+Note that on SUSE Linux 9.2, 9.3 and 10.0 this is a major
+version upgrade.
+
+More Details can be found on this page:
+http://www.mozilla.org/projects/security/known-vulnerabiliti
+es.html
+
+It includes fixes to the following security problems:
+- CVE-2006-3801/MFSA 2006-44: Code execution through
+  deleted frame reference
+
+  Thilo Girmann discovered that in certain circumstances a
+JavaScript reference to a frame or window was not properly
+cleared when the referenced content went away, and he
+demonstrated that this pointer to a deleted object could be
+used to execute native code supplied by the attacker.
+
+- CVE-2006-3113/MFSA 2006-46: Memory corruption with
+  simultaneous events
+
+  Secunia Research has discovered a vulnerability in
+Mozilla Firefox 1.5 branch, which can be exploited by
+malicious people to compromise a user's system.
+
+  The vulnerability is caused due to an memory corruption
+error within the handling of simultaneously happening XPCOM
+events, which leads to use of a deleted timer object. This
+generally results in a crash but potentially could be
+exploited to execute arbitrary code on a user's system when
+a malicious website is visited.
+
+- CVE-2006-3802/MFSA 2006-47: Native DOM methods can be
+  hijacked across domains
+
+  A malicious page can hijack native DOM methods on a
+document object in another domain, which will run the
+attacker's script when called by the victim page.  This
+could be used to steal login cookies, password, or other
+sensitive data on the target page, or to perform actions on
+behalf of a logged-in user.
+
+  Access checks on all other properties and document nodes
+are performed correctly. This cross-site scripting (XSS)
+attack is limited to pages which use standard DOM methods
+of the top-level document object, such as
+document.getElementById(). This includes many popular
+sites, especially the newer ones that offer rich
+interaction to the user.
+
+- CVE-2006-3803/MFSA 2006-48: JavaScript new Function race
+  condition
+
+  H. D. Moore reported a testcase that was able to trigger
+a race condition where JavaScript garbage collection
+deleted a temporary variable still being used in the
+creation of a new Function object. The resulting use of a
+deleted object may be potentially exploitable to run native
+code provided by the attacker.
+
+- CVE-2006-3804/MFSA 2006-49: Heap buffer overwrite on
+  malformed VCard
+
+  A VCard attachment with a malformed base64 field (such as
+a photo) can trigger a heap buffer overwrite. These have
+proven exploitable in the past, though in this case the
+overwrite is accompanied by an integer underflow that would
+attempt to copy more data than the typical machine has,
+leading to a crash.
+
+- CVE-2006-3805/CVE-2006-3806/MFSA 2006-50: JavaScript
+  engine vulnerabilities
+
+  Continuing our security audit of the JavaScript engine,
+Mozilla developers found and fixed several potential
+vulnerabilities.
+
+  Igor Bukanov and shutdown found additional places where
+an untimely garbage collection could delete a temporary
+object that was in active use (similar to MFSA 2006-01 and
+MFSA 2006-10). Some of these may allow an attacker to run
+arbitrary code given the right conditions.
+
+  Georgi Guninski found potential integer overflow issues
+with long strings in the toSource() methods of the Object,
+Array and String objects as well as string function
+arguments.
+
+- CVE-2006-3807/MFSA 2006-51: Privilege escalation using
+  named-functions and redefined "new Object()"
+
+  moz_bug_r_a4 discovered that named JavaScript functions
+have a parent object created using the standard Object()
+constructor (ECMA-specified behavior) and that this
+constructor can be redefined by script (also ECMA-specified
+behavior). If the Object() constructor is changed to return
+a reference to a privileged object with useful properties
+it is possible to have attacker-supplied script excuted
+with elevated privileges by calling the function. This
+could be used to install malware or take other malicious
+actions.
+
+  Our fix involves calling the internal Object constructor
+which appears to be what other ECMA-compatible interpreters
+do.
+
+- CVE-2006-3808/MFSA 2006-52: PAC privilege escalation
+  using Function.prototype.call
+
+  moz_bug_r_a4 reports that a malicious Proxy AutoConfig
+(PAC) server could serve a PAC script that can execute code
+with elevated privileges by setting the required
+FindProxyForURL function to the eval method on a privileged
+object that leaked into the PAC sandbox. By redirecting the
+victim to a specially-crafted URL -- easily done since the
+PAC script controls which proxy to use -- the URL
+"hostname" can be executed as privileged script.
+
+  A malicious proxy server can perform spoofing attacks on
+the user so it was already important to use a trustworthy
+PAC server.
+
+- CVE-2006-3809/MFSA 2006-53: UniversalBrowserRead
+  privilege escalation
+
+  shutdown reports that scripts granted the
+UniversalBrowserRead privilege can leverage that into the
+equivalent of the far more powerful UniversalXPConnect
+since they are allowed to "read" into a privileged context.
+This allows the attacker the ability to run scripts with
+the full privelege of the user running the browser,
+possibly installing malware or snooping on private data.
+This has been fixed so that UniversalBrowserRead and
+UniversalBrowserWrite are limited to reading from and
+writing into only normally-privileged browser windows and
+frames.
+
+- CVE-2006-3810/MFSA 2006-54: XSS with
+  XPCNativeWrapper(window).Function(...)
+
+  shutdown reports that cross-site scripting (XSS) attacks
+could be performed using the construct
+XPCNativeWrapper(window).Function(...), which created a
+function that appeared to belong to the window in question
+even after it had been navigated to the target site.
+
+- CVE-2006-3811/MFSA 2006-55: Crashes with evidence of
+  memory corruption
+
+  As part of the Firefox 1.5.0.5 stability and security
+release, developers in the Mozilla community looked for and
+fixed several crash bugs to improve the stability of
+Mozilla clients. Some of these crashes showed evidence of
+memory corruption that we presume could be exploited to run
+arbitrary code with enough effort.
+</description>
+	<arch>ppc</arch>
+	<version>1.5.0.5</version>
+	<release>0.1</release>
+	<filesize>7997883</filesize>
+	<installedsize>26940225</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>1.5.0.5</version>
+			<release>0.1</release>
+			<filename>MozillaThunderbird-1.5.0.5-0.1.ppc.rpm</filename>
+			<filesize>7997883</filesize>
+			<installedsize>26940225</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="libenigmime.so"/>
+			<dep name="libenigmime.so(EXPORTED)"/>
+			<dep name="libenigmime.so(libenigmime.so)"/>
+			<dep name="libimgicon.so"/>
+			<dep name="libimgicon.so(EXPORTED)"/>
+			<dep name="libimgicon.so(libimgicon.so)"/>
+			<dep name="libjsd.so"/>
+			<dep name="libjsd.so(EXPORTED)"/>
+			<dep name="libjsd.so(libjsd.so)"/>
+			<dep name="libldap50.so"/>
+			<dep name="libmozgnome.so"/>
+			<dep name="libmozgnome.so(EXPORTED)"/>
+			<dep name="libmozgnome.so(libmozgnome.so)"/>
+			<dep name="libmozjs.so"/>
+			<dep name="libmyspell.so"/>
+			<dep name="libmyspell.so(EXPORTED)"/>
+			<dep name="libmyspell.so(libmyspell.so)"/>
+			<dep name="libprldap50.so"/>
+			<dep name="libspellchecker.so"/>
+			<dep name="libspellchecker.so(EXPORTED)"/>
+			<dep name="libspellchecker.so(libspellchecker.so)"/>
+			<dep name="libxpcom.so"/>
+			<dep name="libxpcom_compat.so"/>
+			<dep name="libxpcom_core.so"/>
+			<dep name="libxpinstall.so"/>
+			<dep name="libxpinstall.so(EXPORTED)"/>
+			<dep name="libxpinstall.so(libxpinstall.so)"/>
+			<dep name="libxpistub.so"/>
+			<dep name="MozillaThunderbird" op="EQ" version="1.5.0.5" release="0.1"/>
+		</provides>
+		<requires>
+			<dep name="libstdc++" pre="1"/>
+			<dep name="fileutils" pre="1"/>
+			<dep name="textutils" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="mozilla-nspr" op="GE" version="4.6.1"/>
+			<dep name="mozilla-nss" op="GE" version="3.11"/>
+			<dep name="/bin/sh"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/bin/sh"/>
+			<dep name="libICE.so.6"/>
+			<dep name="libORBit-2.so.0"/>
+			<dep name="libSM.so.6"/>
+			<dep name="libX11.so.6"/>
+			<dep name="libXext.so.6"/>
+			<dep name="libXft.so.2"/>
+			<dep name="libXrender.so.1"/>
+			<dep name="libXt.so.6"/>
+			<dep name="libart_lgpl_2.so.2"/>
+			<dep name="libatk-1.0.so.0"/>
+			<dep name="libbonobo-2.so.0"/>
+			<dep name="libbonobo-activation.so.4"/>
+			<dep name="libbonoboui-2.so.0"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libc.so.6(GLIBC_2.2)"/>
+			<dep name="libc.so.6(GLIBC_2.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)"/>
+			<dep name="libc.so.6(GLIBC_2.4)"/>
+			<dep name="libcairo.so.2"/>
+			<dep name="libdl.so.2"/>
+			<dep name="libdl.so.2(GLIBC_2.0)"/>
+			<dep name="libfontconfig.so.1"/>
+			<dep name="libfreetype.so.6"/>
+			<dep name="libgcc_s.so.1"/>
+			<dep name="libgcc_s.so.1(GCC_3.0)"/>
+			<dep name="libgcc_s.so.1(GLIBC_2.0)"/>
+			<dep name="libgconf-2.so.4"/>
+			<dep name="libgdk-x11-2.0.so.0"/>
+			<dep name="libgdk_pixbuf-2.0.so.0"/>
+			<dep name="libglib-2.0.so.0"/>
+			<dep name="libglitz.so.1"/>
+			<dep name="libgmodule-2.0.so.0"/>
+			<dep name="libgnome-2.so.0"/>
+			<dep name="libgnome-keyring.so.0"/>
+			<dep name="libgnomecanvas-2.so.0"/>
+			<dep name="libgnomeui-2.so.0"/>
+			<dep name="libgnomevfs-2.so.0"/>
+			<dep name="libgobject-2.0.so.0"/>
+			<dep name="libgthread-2.0.so.0"/>
+			<dep name="libgtk-x11-2.0.so.0"/>
+			<dep name="libjpeg.so.62"/>
+			<dep name="libldap50.so"/>
+			<dep name="libm.so.6"/>
+			<dep name="libm.so.6(GLIBC_2.0)"/>
+			<dep name="libm.so.6(GLIBC_2.1)"/>
+			<dep name="libmozjs.so"/>
+			<dep name="libnspr4.so"/>
+			<dep name="libnss3.so"/>
+			<dep name="libnss3.so(NSS_3.2)"/>
+			<dep name="libnss3.so(NSS_3.3)"/>
+			<dep name="libnss3.so(NSS_3.4)"/>
+			<dep name="libnss3.so(NSS_3.5)"/>
+			<dep name="libnss3.so(NSS_3.6)"/>
+			<dep name="libnss3.so(NSS_3.7)"/>
+			<dep name="libnss3.so(NSS_3.9)"/>
+			<dep name="libnss3.so(NSS_3.9.3)"/>
+			<dep name="libpango-1.0.so.0"/>
+			<dep name="libpangocairo-1.0.so.0"/>
+			<dep name="libpangoft2-1.0.so.0"/>
+			<dep name="libpangoxft-1.0.so.0"/>
+			<dep name="libplc4.so"/>
+			<dep name="libplds4.so"/>
+			<dep name="libpng.so.3"/>
+			<dep name="libpng12.so.0"/>
+			<dep name="libpopt.so.0"/>
+			<dep name="libprldap50.so"/>
+			<dep name="libpthread.so.0"/>
+			<dep name="libpthread.so.0(GLIBC_2.0)"/>
+			<dep name="libpthread.so.0(GLIBC_2.1)"/>
+			<dep name="libpthread.so.0(GLIBC_2.2)"/>
+			<dep name="libpthread.so.0(GLIBC_2.3.4)"/>
+			<dep name="libsmime3.so"/>
+			<dep name="libsmime3.so(NSS_3.2)"/>
+			<dep name="libsmime3.so(NSS_3.3)"/>
+			<dep name="libsmime3.so(NSS_3.4)"/>
+			<dep name="libsmime3.so(NSS_3.4.1)"/>
+			<dep name="libsmime3.so(NSS_3.6)"/>
+			<dep name="libssl3.so"/>
+			<dep name="libssl3.so(NSS_3.2)"/>
+			<dep name="libssl3.so(NSS_3.4)"/>
+			<dep name="libstdc++.so.6"/>
+			<dep name="libstdc++.so.6(CXXABI_1.3)"/>
+			<dep name="libstdc++.so.6(GLIBCXX_3.4)"/>
+			<dep name="libxml2.so.2"/>
+			<dep name="libxpcom.so"/>
+			<dep name="libxpcom_compat.so"/>
+			<dep name="libxpcom_core.so"/>
+			<dep name="libz.so.1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>MozillaThunderbird</name>
+	<summary>MozillaThunderbird: Security update to version 1.5.0.6</summary>
+	<description>This security update brings Mozilla Thunderbird to version
+1.5.0.6.
+
+Note that on SUSE Linux 9.2, 9.3 and 10.0 this is a major
+version upgrade.
+
+More Details can be found on this page:
+http://www.mozilla.org/projects/security/known-vulnerabiliti
+es.html
+
+It includes fixes to the following security problems:
+- CVE-2006-3801/MFSA 2006-44: Code execution through
+  deleted frame reference
+
+  Thilo Girmann discovered that in certain circumstances a
+JavaScript reference to a frame or window was not properly
+cleared when the referenced content went away, and he
+demonstrated that this pointer to a deleted object could be
+used to execute native code supplied by the attacker.
+
+- CVE-2006-3113/MFSA 2006-46: Memory corruption with
+  simultaneous events
+
+  Secunia Research has discovered a vulnerability in
+Mozilla Firefox 1.5 branch, which can be exploited by
+malicious people to compromise a user's system.
+
+  The vulnerability is caused due to an memory corruption
+error within the handling of simultaneously happening XPCOM
+events, which leads to use of a deleted timer object. This
+generally results in a crash but potentially could be
+exploited to execute arbitrary code on a user's system when
+a malicious website is visited.
+
+- CVE-2006-3802/MFSA 2006-47: Native DOM methods can be
+  hijacked across domains
+
+  A malicious page can hijack native DOM methods on a
+document object in another domain, which will run the
+attacker's script when called by the victim page.  This
+could be used to steal login cookies, password, or other
+sensitive data on the target page, or to perform actions on
+behalf of a logged-in user.
+
+  Access checks on all other properties and document nodes
+are performed correctly. This cross-site scripting (XSS)
+attack is limited to pages which use standard DOM methods
+of the top-level document object, such as
+document.getElementById(). This includes many popular
+sites, especially the newer ones that offer rich
+interaction to the user.
+
+- CVE-2006-3803/MFSA 2006-48: JavaScript new Function race
+  condition
+
+  H. D. Moore reported a testcase that was able to trigger
+a race condition where JavaScript garbage collection
+deleted a temporary variable still being used in the
+creation of a new Function object. The resulting use of a
+deleted object may be potentially exploitable to run native
+code provided by the attacker.
+
+- CVE-2006-3804/MFSA 2006-49: Heap buffer overwrite on
+  malformed VCard
+
+  A VCard attachment with a malformed base64 field (such as
+a photo) can trigger a heap buffer overwrite. These have
+proven exploitable in the past, though in this case the
+overwrite is accompanied by an integer underflow that would
+attempt to copy more data than the typical machine has,
+leading to a crash.
+
+- CVE-2006-3805/CVE-2006-3806/MFSA 2006-50: JavaScript
+  engine vulnerabilities
+
+  Continuing our security audit of the JavaScript engine,
+Mozilla developers found and fixed several potential
+vulnerabilities.
+
+  Igor Bukanov and shutdown found additional places where
+an untimely garbage collection could delete a temporary
+object that was in active use (similar to MFSA 2006-01 and
+MFSA 2006-10). Some of these may allow an attacker to run
+arbitrary code given the right conditions.
+
+  Georgi Guninski found potential integer overflow issues
+with long strings in the toSource() methods of the Object,
+Array and String objects as well as string function
+arguments.
+
+- CVE-2006-3807/MFSA 2006-51: Privilege escalation using
+  named-functions and redefined "new Object()"
+
+  moz_bug_r_a4 discovered that named JavaScript functions
+have a parent object created using the standard Object()
+constructor (ECMA-specified behavior) and that this
+constructor can be redefined by script (also ECMA-specified
+behavior). If the Object() constructor is changed to return
+a reference to a privileged object with useful properties
+it is possible to have attacker-supplied script excuted
+with elevated privileges by calling the function. This
+could be used to install malware or take other malicious
+actions.
+
+  Our fix involves calling the internal Object constructor
+which appears to be what other ECMA-compatible interpreters
+do.
+
+- CVE-2006-3808/MFSA 2006-52: PAC privilege escalation
+  using Function.prototype.call
+
+  moz_bug_r_a4 reports that a malicious Proxy AutoConfig
+(PAC) server could serve a PAC script that can execute code
+with elevated privileges by setting the required
+FindProxyForURL function to the eval method on a privileged
+object that leaked into the PAC sandbox. By redirecting the
+victim to a specially-crafted URL -- easily done since the
+PAC script controls which proxy to use -- the URL
+"hostname" can be executed as privileged script.
+
+  A malicious proxy server can perform spoofing attacks on
+the user so it was already important to use a trustworthy
+PAC server.
+
+- CVE-2006-3809/MFSA 2006-53: UniversalBrowserRead
+  privilege escalation
+
+  shutdown reports that scripts granted the
+UniversalBrowserRead privilege can leverage that into the
+equivalent of the far more powerful UniversalXPConnect
+since they are allowed to "read" into a privileged context.
+This allows the attacker the ability to run scripts with
+the full privelege of the user running the browser,
+possibly installing malware or snooping on private data.
+This has been fixed so that UniversalBrowserRead and
+UniversalBrowserWrite are limited to reading from and
+writing into only normally-privileged browser windows and
+frames.
+
+- CVE-2006-3810/MFSA 2006-54: XSS with
+  XPCNativeWrapper(window).Function(...)
+
+  shutdown reports that cross-site scripting (XSS) attacks
+could be performed using the construct
+XPCNativeWrapper(window).Function(...), which created a
+function that appeared to belong to the window in question
+even after it had been navigated to the target site.
+
+- CVE-2006-3811/MFSA 2006-55: Crashes with evidence of
+  memory corruption
+
+  As part of the Firefox 1.5.0.5 stability and security
+release, developers in the Mozilla community looked for and
+fixed several crash bugs to improve the stability of
+Mozilla clients. Some of these crashes showed evidence of
+memory corruption that we presume could be exploited to run
+arbitrary code with enough effort.
+</description>
+	<arch>x86_64</arch>
+	<version>1.5.0.5</version>
+	<release>0.1</release>
+	<filesize>8979167</filesize>
+	<installedsize>28027886</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>1.5.0.5</version>
+			<release>0.1</release>
+			<filename>MozillaThunderbird-1.5.0.5-0.1.x86_64.rpm</filename>
+			<filesize>8979167</filesize>
+			<installedsize>28027886</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="libenigmime.so()(64bit)"/>
+			<dep name="libenigmime.so(EXPORTED)(64bit)"/>
+			<dep name="libenigmime.so(libenigmime.so)(64bit)"/>
+			<dep name="libimgicon.so()(64bit)"/>
+			<dep name="libimgicon.so(EXPORTED)(64bit)"/>
+			<dep name="libimgicon.so(libimgicon.so)(64bit)"/>
+			<dep name="libjsd.so()(64bit)"/>
+			<dep name="libjsd.so(EXPORTED)(64bit)"/>
+			<dep name="libjsd.so(libjsd.so)(64bit)"/>
+			<dep name="libldap50.so()(64bit)"/>
+			<dep name="libmozgnome.so()(64bit)"/>
+			<dep name="libmozgnome.so(EXPORTED)(64bit)"/>
+			<dep name="libmozgnome.so(libmozgnome.so)(64bit)"/>
+			<dep name="libmozjs.so()(64bit)"/>
+			<dep name="libmyspell.so()(64bit)"/>
+			<dep name="libmyspell.so(EXPORTED)(64bit)"/>
+			<dep name="libmyspell.so(libmyspell.so)(64bit)"/>
+			<dep name="libprldap50.so()(64bit)"/>
+			<dep name="libspellchecker.so()(64bit)"/>
+			<dep name="libspellchecker.so(EXPORTED)(64bit)"/>
+			<dep name="libspellchecker.so(libspellchecker.so)(64bit)"/>
+			<dep name="libxpcom.so()(64bit)"/>
+			<dep name="libxpcom_compat.so()(64bit)"/>
+			<dep name="libxpcom_core.so()(64bit)"/>
+			<dep name="libxpinstall.so()(64bit)"/>
+			<dep name="libxpinstall.so(EXPORTED)(64bit)"/>
+			<dep name="libxpinstall.so(libxpinstall.so)(64bit)"/>
+			<dep name="libxpistub.so()(64bit)"/>
+			<dep name="MozillaThunderbird" op="EQ" version="1.5.0.5" release="0.1"/>
+		</provides>
+		<requires>
+			<dep name="libstdc++" pre="1"/>
+			<dep name="fileutils" pre="1"/>
+			<dep name="textutils" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="mozilla-nspr" op="GE" version="4.6.1"/>
+			<dep name="mozilla-nss" op="GE" version="3.11"/>
+			<dep name="/bin/sh"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/bin/sh"/>
+			<dep name="libICE.so.6()(64bit)"/>
+			<dep name="libORBit-2.so.0()(64bit)"/>
+			<dep name="libSM.so.6()(64bit)"/>
+			<dep name="libX11.so.6()(64bit)"/>
+			<dep name="libXext.so.6()(64bit)"/>
+			<dep name="libXft.so.2()(64bit)"/>
+			<dep name="libXrender.so.1()(64bit)"/>
+			<dep name="libXt.so.6()(64bit)"/>
+			<dep name="libart_lgpl_2.so.2()(64bit)"/>
+			<dep name="libatk-1.0.so.0()(64bit)"/>
+			<dep name="libbonobo-2.so.0()(64bit)"/>
+			<dep name="libbonobo-activation.so.4()(64bit)"/>
+			<dep name="libbonoboui-2.so.0()(64bit)"/>
+			<dep name="libc.so.6()(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.3)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.4)(64bit)"/>
+			<dep name="libcairo.so.2()(64bit)"/>
+			<dep name="libdl.so.2()(64bit)"/>
+			<dep name="libfontconfig.so.1()(64bit)"/>
+			<dep name="libfreetype.so.6()(64bit)"/>
+			<dep name="libgcc_s.so.1()(64bit)"/>
+			<dep name="libgconf-2.so.4()(64bit)"/>
+			<dep name="libgdk-x11-2.0.so.0()(64bit)"/>
+			<dep name="libgdk_pixbuf-2.0.so.0()(64bit)"/>
+			<dep name="libglib-2.0.so.0()(64bit)"/>
+			<dep name="libglitz.so.1()(64bit)"/>
+			<dep name="libgmodule-2.0.so.0()(64bit)"/>
+			<dep name="libgnome-2.so.0()(64bit)"/>
+			<dep name="libgnome-keyring.so.0()(64bit)"/>
+			<dep name="libgnomecanvas-2.so.0()(64bit)"/>
+			<dep name="libgnomeui-2.so.0()(64bit)"/>
+			<dep name="libgnomevfs-2.so.0()(64bit)"/>
+			<dep name="libgobject-2.0.so.0()(64bit)"/>
+			<dep name="libgthread-2.0.so.0()(64bit)"/>
+			<dep name="libgtk-x11-2.0.so.0()(64bit)"/>
+			<dep name="libjpeg.so.62()(64bit)"/>
+			<dep name="libldap50.so()(64bit)"/>
+			<dep name="libm.so.6()(64bit)"/>
+			<dep name="libm.so.6(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libmozjs.so()(64bit)"/>
+			<dep name="libnspr4.so()(64bit)"/>
+			<dep name="libnss3.so()(64bit)"/>
+			<dep name="libnss3.so(NSS_3.2)(64bit)"/>
+			<dep name="libnss3.so(NSS_3.3)(64bit)"/>
+			<dep name="libnss3.so(NSS_3.4)(64bit)"/>
+			<dep name="libnss3.so(NSS_3.5)(64bit)"/>
+			<dep name="libnss3.so(NSS_3.6)(64bit)"/>
+			<dep name="libnss3.so(NSS_3.7)(64bit)"/>
+			<dep name="libnss3.so(NSS_3.9)(64bit)"/>
+			<dep name="libnss3.so(NSS_3.9.3)(64bit)"/>
+			<dep name="libpango-1.0.so.0()(64bit)"/>
+			<dep name="libpangocairo-1.0.so.0()(64bit)"/>
+			<dep name="libpangoft2-1.0.so.0()(64bit)"/>
+			<dep name="libpangoxft-1.0.so.0()(64bit)"/>
+			<dep name="libplc4.so()(64bit)"/>
+			<dep name="libplds4.so()(64bit)"/>
+			<dep name="libpng.so.3()(64bit)"/>
+			<dep name="libpng12.so.0()(64bit)"/>
+			<dep name="libpopt.so.0()(64bit)"/>
+			<dep name="libprldap50.so()(64bit)"/>
+			<dep name="libpthread.so.0()(64bit)"/>
+			<dep name="libpthread.so.0(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libsmime3.so()(64bit)"/>
+			<dep name="libsmime3.so(NSS_3.2)(64bit)"/>
+			<dep name="libsmime3.so(NSS_3.3)(64bit)"/>
+			<dep name="libsmime3.so(NSS_3.4)(64bit)"/>
+			<dep name="libsmime3.so(NSS_3.4.1)(64bit)"/>
+			<dep name="libsmime3.so(NSS_3.6)(64bit)"/>
+			<dep name="libssl3.so()(64bit)"/>
+			<dep name="libssl3.so(NSS_3.2)(64bit)"/>
+			<dep name="libssl3.so(NSS_3.4)(64bit)"/>
+			<dep name="libstdc++.so.6()(64bit)"/>
+			<dep name="libstdc++.so.6(CXXABI_1.3)(64bit)"/>
+			<dep name="libstdc++.so.6(GLIBCXX_3.4)(64bit)"/>
+			<dep name="libxml2.so.2()(64bit)"/>
+			<dep name="libxpcom.so()(64bit)"/>
+			<dep name="libxpcom_compat.so()(64bit)"/>
+			<dep name="libxpcom_core.so()(64bit)"/>
+			<dep name="libz.so.1()(64bit)"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>MozillaThunderbird-translations</name>
+	<summary>MozillaThunderbird: Security update to version 1.5.0.6</summary>
+	<description>This security update brings Mozilla Thunderbird to version
+1.5.0.6.
+
+Note that on SUSE Linux 9.2, 9.3 and 10.0 this is a major
+version upgrade.
+
+More Details can be found on this page:
+http://www.mozilla.org/projects/security/known-vulnerabiliti
+es.html
+
+It includes fixes to the following security problems:
+- CVE-2006-3801/MFSA 2006-44: Code execution through
+  deleted frame reference
+
+  Thilo Girmann discovered that in certain circumstances a
+JavaScript reference to a frame or window was not properly
+cleared when the referenced content went away, and he
+demonstrated that this pointer to a deleted object could be
+used to execute native code supplied by the attacker.
+
+- CVE-2006-3113/MFSA 2006-46: Memory corruption with
+  simultaneous events
+
+  Secunia Research has discovered a vulnerability in
+Mozilla Firefox 1.5 branch, which can be exploited by
+malicious people to compromise a user's system.
+
+  The vulnerability is caused due to an memory corruption
+error within the handling of simultaneously happening XPCOM
+events, which leads to use of a deleted timer object. This
+generally results in a crash but potentially could be
+exploited to execute arbitrary code on a user's system when
+a malicious website is visited.
+
+- CVE-2006-3802/MFSA 2006-47: Native DOM methods can be
+  hijacked across domains
+
+  A malicious page can hijack native DOM methods on a
+document object in another domain, which will run the
+attacker's script when called by the victim page.  This
+could be used to steal login cookies, password, or other
+sensitive data on the target page, or to perform actions on
+behalf of a logged-in user.
+
+  Access checks on all other properties and document nodes
+are performed correctly. This cross-site scripting (XSS)
+attack is limited to pages which use standard DOM methods
+of the top-level document object, such as
+document.getElementById(). This includes many popular
+sites, especially the newer ones that offer rich
+interaction to the user.
+
+- CVE-2006-3803/MFSA 2006-48: JavaScript new Function race
+  condition
+
+  H. D. Moore reported a testcase that was able to trigger
+a race condition where JavaScript garbage collection
+deleted a temporary variable still being used in the
+creation of a new Function object. The resulting use of a
+deleted object may be potentially exploitable to run native
+code provided by the attacker.
+
+- CVE-2006-3804/MFSA 2006-49: Heap buffer overwrite on
+  malformed VCard
+
+  A VCard attachment with a malformed base64 field (such as
+a photo) can trigger a heap buffer overwrite. These have
+proven exploitable in the past, though in this case the
+overwrite is accompanied by an integer underflow that would
+attempt to copy more data than the typical machine has,
+leading to a crash.
+
+- CVE-2006-3805/CVE-2006-3806/MFSA 2006-50: JavaScript
+  engine vulnerabilities
+
+  Continuing our security audit of the JavaScript engine,
+Mozilla developers found and fixed several potential
+vulnerabilities.
+
+  Igor Bukanov and shutdown found additional places where
+an untimely garbage collection could delete a temporary
+object that was in active use (similar to MFSA 2006-01 and
+MFSA 2006-10). Some of these may allow an attacker to run
+arbitrary code given the right conditions.
+
+  Georgi Guninski found potential integer overflow issues
+with long strings in the toSource() methods of the Object,
+Array and String objects as well as string function
+arguments.
+
+- CVE-2006-3807/MFSA 2006-51: Privilege escalation using
+  named-functions and redefined "new Object()"
+
+  moz_bug_r_a4 discovered that named JavaScript functions
+have a parent object created using the standard Object()
+constructor (ECMA-specified behavior) and that this
+constructor can be redefined by script (also ECMA-specified
+behavior). If the Object() constructor is changed to return
+a reference to a privileged object with useful properties
+it is possible to have attacker-supplied script excuted
+with elevated privileges by calling the function. This
+could be used to install malware or take other malicious
+actions.
+
+  Our fix involves calling the internal Object constructor
+which appears to be what other ECMA-compatible interpreters
+do.
+
+- CVE-2006-3808/MFSA 2006-52: PAC privilege escalation
+  using Function.prototype.call
+
+  moz_bug_r_a4 reports that a malicious Proxy AutoConfig
+(PAC) server could serve a PAC script that can execute code
+with elevated privileges by setting the required
+FindProxyForURL function to the eval method on a privileged
+object that leaked into the PAC sandbox. By redirecting the
+victim to a specially-crafted URL -- easily done since the
+PAC script controls which proxy to use -- the URL
+"hostname" can be executed as privileged script.
+
+  A malicious proxy server can perform spoofing attacks on
+the user so it was already important to use a trustworthy
+PAC server.
+
+- CVE-2006-3809/MFSA 2006-53: UniversalBrowserRead
+  privilege escalation
+
+  shutdown reports that scripts granted the
+UniversalBrowserRead privilege can leverage that into the
+equivalent of the far more powerful UniversalXPConnect
+since they are allowed to "read" into a privileged context.
+This allows the attacker the ability to run scripts with
+the full privelege of the user running the browser,
+possibly installing malware or snooping on private data.
+This has been fixed so that UniversalBrowserRead and
+UniversalBrowserWrite are limited to reading from and
+writing into only normally-privileged browser windows and
+frames.
+
+- CVE-2006-3810/MFSA 2006-54: XSS with
+  XPCNativeWrapper(window).Function(...)
+
+  shutdown reports that cross-site scripting (XSS) attacks
+could be performed using the construct
+XPCNativeWrapper(window).Function(...), which created a
+function that appeared to belong to the window in question
+even after it had been navigated to the target site.
+
+- CVE-2006-3811/MFSA 2006-55: Crashes with evidence of
+  memory corruption
+
+  As part of the Firefox 1.5.0.5 stability and security
+release, developers in the Mozilla community looked for and
+fixed several crash bugs to improve the stability of
+Mozilla clients. Some of these crashes showed evidence of
+memory corruption that we presume could be exploited to run
+arbitrary code with enough effort.
+</description>
+	<arch>i586</arch>
+	<version>1.5.0.5</version>
+	<release>0.1</release>
+	<filesize>4516625</filesize>
+	<installedsize>29043870</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>1.5.0.5</version>
+			<release>0.1</release>
+			<filename>MozillaThunderbird-translations-1.5.0.5-0.1.i586.rpm</filename>
+			<filesize>4516625</filesize>
+			<installedsize>29043870</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="MozillaThunderbird-translations" op="EQ" version="1.5.0.5" release="0.1"/>
+		</provides>
+		<requires>
+			<dep name="rpmlib(VersionedDependencies)" op="LE" version="3.0.3" release="1" pre="1"/>
+			<dep name="MozillaThunderbird" op="EQ" version="1.5.0.5" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>MozillaThunderbird-translations</name>
+	<summary>MozillaThunderbird: Security update to version 1.5.0.6</summary>
+	<description>This security update brings Mozilla Thunderbird to version
+1.5.0.6.
+
+Note that on SUSE Linux 9.2, 9.3 and 10.0 this is a major
+version upgrade.
+
+More Details can be found on this page:
+http://www.mozilla.org/projects/security/known-vulnerabiliti
+es.html
+
+It includes fixes to the following security problems:
+- CVE-2006-3801/MFSA 2006-44: Code execution through
+  deleted frame reference
+
+  Thilo Girmann discovered that in certain circumstances a
+JavaScript reference to a frame or window was not properly
+cleared when the referenced content went away, and he
+demonstrated that this pointer to a deleted object could be
+used to execute native code supplied by the attacker.
+
+- CVE-2006-3113/MFSA 2006-46: Memory corruption with
+  simultaneous events
+
+  Secunia Research has discovered a vulnerability in
+Mozilla Firefox 1.5 branch, which can be exploited by
+malicious people to compromise a user's system.
+
+  The vulnerability is caused due to an memory corruption
+error within the handling of simultaneously happening XPCOM
+events, which leads to use of a deleted timer object. This
+generally results in a crash but potentially could be
+exploited to execute arbitrary code on a user's system when
+a malicious website is visited.
+
+- CVE-2006-3802/MFSA 2006-47: Native DOM methods can be
+  hijacked across domains
+
+  A malicious page can hijack native DOM methods on a
+document object in another domain, which will run the
+attacker's script when called by the victim page.  This
+could be used to steal login cookies, password, or other
+sensitive data on the target page, or to perform actions on
+behalf of a logged-in user.
+
+  Access checks on all other properties and document nodes
+are performed correctly. This cross-site scripting (XSS)
+attack is limited to pages which use standard DOM methods
+of the top-level document object, such as
+document.getElementById(). This includes many popular
+sites, especially the newer ones that offer rich
+interaction to the user.
+
+- CVE-2006-3803/MFSA 2006-48: JavaScript new Function race
+  condition
+
+  H. D. Moore reported a testcase that was able to trigger
+a race condition where JavaScript garbage collection
+deleted a temporary variable still being used in the
+creation of a new Function object. The resulting use of a
+deleted object may be potentially exploitable to run native
+code provided by the attacker.
+
+- CVE-2006-3804/MFSA 2006-49: Heap buffer overwrite on
+  malformed VCard
+
+  A VCard attachment with a malformed base64 field (such as
+a photo) can trigger a heap buffer overwrite. These have
+proven exploitable in the past, though in this case the
+overwrite is accompanied by an integer underflow that would
+attempt to copy more data than the typical machine has,
+leading to a crash.
+
+- CVE-2006-3805/CVE-2006-3806/MFSA 2006-50: JavaScript
+  engine vulnerabilities
+
+  Continuing our security audit of the JavaScript engine,
+Mozilla developers found and fixed several potential
+vulnerabilities.
+
+  Igor Bukanov and shutdown found additional places where
+an untimely garbage collection could delete a temporary
+object that was in active use (similar to MFSA 2006-01 and
+MFSA 2006-10). Some of these may allow an attacker to run
+arbitrary code given the right conditions.
+
+  Georgi Guninski found potential integer overflow issues
+with long strings in the toSource() methods of the Object,
+Array and String objects as well as string function
+arguments.
+
+- CVE-2006-3807/MFSA 2006-51: Privilege escalation using
+  named-functions and redefined "new Object()"
+
+  moz_bug_r_a4 discovered that named JavaScript functions
+have a parent object created using the standard Object()
+constructor (ECMA-specified behavior) and that this
+constructor can be redefined by script (also ECMA-specified
+behavior). If the Object() constructor is changed to return
+a reference to a privileged object with useful properties
+it is possible to have attacker-supplied script excuted
+with elevated privileges by calling the function. This
+could be used to install malware or take other malicious
+actions.
+
+  Our fix involves calling the internal Object constructor
+which appears to be what other ECMA-compatible interpreters
+do.
+
+- CVE-2006-3808/MFSA 2006-52: PAC privilege escalation
+  using Function.prototype.call
+
+  moz_bug_r_a4 reports that a malicious Proxy AutoConfig
+(PAC) server could serve a PAC script that can execute code
+with elevated privileges by setting the required
+FindProxyForURL function to the eval method on a privileged
+object that leaked into the PAC sandbox. By redirecting the
+victim to a specially-crafted URL -- easily done since the
+PAC script controls which proxy to use -- the URL
+"hostname" can be executed as privileged script.
+
+  A malicious proxy server can perform spoofing attacks on
+the user so it was already important to use a trustworthy
+PAC server.
+
+- CVE-2006-3809/MFSA 2006-53: UniversalBrowserRead
+  privilege escalation
+
+  shutdown reports that scripts granted the
+UniversalBrowserRead privilege can leverage that into the
+equivalent of the far more powerful UniversalXPConnect
+since they are allowed to "read" into a privileged context.
+This allows the attacker the ability to run scripts with
+the full privelege of the user running the browser,
+possibly installing malware or snooping on private data.
+This has been fixed so that UniversalBrowserRead and
+UniversalBrowserWrite are limited to reading from and
+writing into only normally-privileged browser windows and
+frames.
+
+- CVE-2006-3810/MFSA 2006-54: XSS with
+  XPCNativeWrapper(window).Function(...)
+
+  shutdown reports that cross-site scripting (XSS) attacks
+could be performed using the construct
+XPCNativeWrapper(window).Function(...), which created a
+function that appeared to belong to the window in question
+even after it had been navigated to the target site.
+
+- CVE-2006-3811/MFSA 2006-55: Crashes with evidence of
+  memory corruption
+
+  As part of the Firefox 1.5.0.5 stability and security
+release, developers in the Mozilla community looked for and
+fixed several crash bugs to improve the stability of
+Mozilla clients. Some of these crashes showed evidence of
+memory corruption that we presume could be exploited to run
+arbitrary code with enough effort.
+</description>
+	<arch>ppc</arch>
+	<version>1.5.0.5</version>
+	<release>0.1</release>
+	<filesize>4514607</filesize>
+	<installedsize>29043870</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>1.5.0.5</version>
+			<release>0.1</release>
+			<filename>MozillaThunderbird-translations-1.5.0.5-0.1.ppc.rpm</filename>
+			<filesize>4514607</filesize>
+			<installedsize>29043870</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="MozillaThunderbird-translations" op="EQ" version="1.5.0.5" release="0.1"/>
+		</provides>
+		<requires>
+			<dep name="rpmlib(VersionedDependencies)" op="LE" version="3.0.3" release="1" pre="1"/>
+			<dep name="MozillaThunderbird" op="EQ" version="1.5.0.5" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>MozillaThunderbird-translations</name>
+	<summary>MozillaThunderbird: Security update to version 1.5.0.6</summary>
+	<description>This security update brings Mozilla Thunderbird to version
+1.5.0.6.
+
+Note that on SUSE Linux 9.2, 9.3 and 10.0 this is a major
+version upgrade.
+
+More Details can be found on this page:
+http://www.mozilla.org/projects/security/known-vulnerabiliti
+es.html
+
+It includes fixes to the following security problems:
+- CVE-2006-3801/MFSA 2006-44: Code execution through
+  deleted frame reference
+
+  Thilo Girmann discovered that in certain circumstances a
+JavaScript reference to a frame or window was not properly
+cleared when the referenced content went away, and he
+demonstrated that this pointer to a deleted object could be
+used to execute native code supplied by the attacker.
+
+- CVE-2006-3113/MFSA 2006-46: Memory corruption with
+  simultaneous events
+
+  Secunia Research has discovered a vulnerability in
+Mozilla Firefox 1.5 branch, which can be exploited by
+malicious people to compromise a user's system.
+
+  The vulnerability is caused due to an memory corruption
+error within the handling of simultaneously happening XPCOM
+events, which leads to use of a deleted timer object. This
+generally results in a crash but potentially could be
+exploited to execute arbitrary code on a user's system when
+a malicious website is visited.
+
+- CVE-2006-3802/MFSA 2006-47: Native DOM methods can be
+  hijacked across domains
+
+  A malicious page can hijack native DOM methods on a
+document object in another domain, which will run the
+attacker's script when called by the victim page.  This
+could be used to steal login cookies, password, or other
+sensitive data on the target page, or to perform actions on
+behalf of a logged-in user.
+
+  Access checks on all other properties and document nodes
+are performed correctly. This cross-site scripting (XSS)
+attack is limited to pages which use standard DOM methods
+of the top-level document object, such as
+document.getElementById(). This includes many popular
+sites, especially the newer ones that offer rich
+interaction to the user.
+
+- CVE-2006-3803/MFSA 2006-48: JavaScript new Function race
+  condition
+
+  H. D. Moore reported a testcase that was able to trigger
+a race condition where JavaScript garbage collection
+deleted a temporary variable still being used in the
+creation of a new Function object. The resulting use of a
+deleted object may be potentially exploitable to run native
+code provided by the attacker.
+
+- CVE-2006-3804/MFSA 2006-49: Heap buffer overwrite on
+  malformed VCard
+
+  A VCard attachment with a malformed base64 field (such as
+a photo) can trigger a heap buffer overwrite. These have
+proven exploitable in the past, though in this case the
+overwrite is accompanied by an integer underflow that would
+attempt to copy more data than the typical machine has,
+leading to a crash.
+
+- CVE-2006-3805/CVE-2006-3806/MFSA 2006-50: JavaScript
+  engine vulnerabilities
+
+  Continuing our security audit of the JavaScript engine,
+Mozilla developers found and fixed several potential
+vulnerabilities.
+
+  Igor Bukanov and shutdown found additional places where
+an untimely garbage collection could delete a temporary
+object that was in active use (similar to MFSA 2006-01 and
+MFSA 2006-10). Some of these may allow an attacker to run
+arbitrary code given the right conditions.
+
+  Georgi Guninski found potential integer overflow issues
+with long strings in the toSource() methods of the Object,
+Array and String objects as well as string function
+arguments.
+
+- CVE-2006-3807/MFSA 2006-51: Privilege escalation using
+  named-functions and redefined "new Object()"
+
+  moz_bug_r_a4 discovered that named JavaScript functions
+have a parent object created using the standard Object()
+constructor (ECMA-specified behavior) and that this
+constructor can be redefined by script (also ECMA-specified
+behavior). If the Object() constructor is changed to return
+a reference to a privileged object with useful properties
+it is possible to have attacker-supplied script excuted
+with elevated privileges by calling the function. This
+could be used to install malware or take other malicious
+actions.
+
+  Our fix involves calling the internal Object constructor
+which appears to be what other ECMA-compatible interpreters
+do.
+
+- CVE-2006-3808/MFSA 2006-52: PAC privilege escalation
+  using Function.prototype.call
+
+  moz_bug_r_a4 reports that a malicious Proxy AutoConfig
+(PAC) server could serve a PAC script that can execute code
+with elevated privileges by setting the required
+FindProxyForURL function to the eval method on a privileged
+object that leaked into the PAC sandbox. By redirecting the
+victim to a specially-crafted URL -- easily done since the
+PAC script controls which proxy to use -- the URL
+"hostname" can be executed as privileged script.
+
+  A malicious proxy server can perform spoofing attacks on
+the user so it was already important to use a trustworthy
+PAC server.
+
+- CVE-2006-3809/MFSA 2006-53: UniversalBrowserRead
+  privilege escalation
+
+  shutdown reports that scripts granted the
+UniversalBrowserRead privilege can leverage that into the
+equivalent of the far more powerful UniversalXPConnect
+since they are allowed to "read" into a privileged context.
+This allows the attacker the ability to run scripts with
+the full privelege of the user running the browser,
+possibly installing malware or snooping on private data.
+This has been fixed so that UniversalBrowserRead and
+UniversalBrowserWrite are limited to reading from and
+writing into only normally-privileged browser windows and
+frames.
+
+- CVE-2006-3810/MFSA 2006-54: XSS with
+  XPCNativeWrapper(window).Function(...)
+
+  shutdown reports that cross-site scripting (XSS) attacks
+could be performed using the construct
+XPCNativeWrapper(window).Function(...), which created a
+function that appeared to belong to the window in question
+even after it had been navigated to the target site.
+
+- CVE-2006-3811/MFSA 2006-55: Crashes with evidence of
+  memory corruption
+
+  As part of the Firefox 1.5.0.5 stability and security
+release, developers in the Mozilla community looked for and
+fixed several crash bugs to improve the stability of
+Mozilla clients. Some of these crashes showed evidence of
+memory corruption that we presume could be exploited to run
+arbitrary code with enough effort.
+</description>
+	<arch>x86_64</arch>
+	<version>1.5.0.5</version>
+	<release>0.1</release>
+	<filesize>4515853</filesize>
+	<installedsize>29043870</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>1.5.0.5</version>
+			<release>0.1</release>
+			<filename>MozillaThunderbird-translations-1.5.0.5-0.1.x86_64.rpm</filename>
+			<filesize>4515853</filesize>
+			<installedsize>29043870</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="MozillaThunderbird-translations" op="EQ" version="1.5.0.5" release="0.1"/>
+		</provides>
+		<requires>
+			<dep name="rpmlib(VersionedDependencies)" op="LE" version="3.0.3" release="1" pre="1"/>
+			<dep name="MozillaThunderbird" op="EQ" version="1.5.0.5" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+</subchannel></channel>

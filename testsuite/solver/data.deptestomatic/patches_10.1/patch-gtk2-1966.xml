@@ -1,0 +1,945 @@
+<channel><subchannel>                                                  
+
+<patch>
+	<name>gtk2</name>
+	<arch>noarch</arch>
+	<version>1966</version>
+	<release>0</release>
+	<requires>
+		<dep kind="atom" name="gtk2" epoch="0" version="2.8.10" release="39.13" op="EQ"/>
+		<dep kind="atom" name="gtk2-32bit" epoch="0" version="2.8.10" release="39.13" op="EQ"/>
+		<dep kind="atom" name="gtk2-64bit" epoch="0" version="2.8.10" release="39.13" op="EQ"/>
+		<dep kind="atom" name="gtk2-devel" epoch="0" version="2.8.10" release="39.13" op="EQ"/>
+		<dep kind="atom" name="gtk2-devel-64bit" epoch="0" version="2.8.10" release="39.13" op="EQ"/>
+	</requires>
+</patch>
+<atom>
+	<name>gtk2</name>
+	<arch>i586</arch>
+	<version>2.8.10</version>
+	<release>39.13</release>
+	<freshens>
+		<dep kind="package" name="gtk2"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="gtk2" epoch="0" version="2.8.10" release="39.13" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>gtk2</name>
+	<arch>ppc</arch>
+	<version>2.8.10</version>
+	<release>39.13</release>
+	<freshens>
+		<dep kind="package" name="gtk2"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="gtk2" epoch="0" version="2.8.10" release="39.13" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>gtk2</name>
+	<arch>x86_64</arch>
+	<version>2.8.10</version>
+	<release>39.13</release>
+	<freshens>
+		<dep kind="package" name="gtk2"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="gtk2" epoch="0" version="2.8.10" release="39.13" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>gtk2-32bit</name>
+	<arch>x86_64</arch>
+	<version>2.8.10</version>
+	<release>39.13</release>
+	<freshens>
+		<dep kind="package" name="gtk2-32bit"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="gtk2-32bit" epoch="0" version="2.8.10" release="39.13" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>gtk2-64bit</name>
+	<arch>ppc</arch>
+	<version>2.8.10</version>
+	<release>39.13</release>
+	<freshens>
+		<dep kind="package" name="gtk2-64bit"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="gtk2-64bit" epoch="0" version="2.8.10" release="39.13" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>gtk2-devel</name>
+	<arch>i586</arch>
+	<version>2.8.10</version>
+	<release>39.13</release>
+	<freshens>
+		<dep kind="package" name="gtk2-devel"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="gtk2-devel" epoch="0" version="2.8.10" release="39.13" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>gtk2-devel</name>
+	<arch>ppc</arch>
+	<version>2.8.10</version>
+	<release>39.13</release>
+	<freshens>
+		<dep kind="package" name="gtk2-devel"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="gtk2-devel" epoch="0" version="2.8.10" release="39.13" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>gtk2-devel</name>
+	<arch>x86_64</arch>
+	<version>2.8.10</version>
+	<release>39.13</release>
+	<freshens>
+		<dep kind="package" name="gtk2-devel"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="gtk2-devel" epoch="0" version="2.8.10" release="39.13" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>gtk2-devel-64bit</name>
+	<arch>ppc</arch>
+	<version>2.8.10</version>
+	<release>39.13</release>
+	<freshens>
+		<dep kind="package" name="gtk2-devel-64bit"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="gtk2-devel-64bit" epoch="0" version="2.8.10" release="39.13" op="GE"/>
+	</requires>
+</atom>
+<package>
+	<name>gtk2</name>
+	<summary>gtk2: fix File/Save dialog, which was incorrectly discarding the file name</summary>
+	<description>The File/Save dialog (GtkFileChoser in SAVE mode) was
+discarding the suggested file name provided by the calling
+program.  This was especially noticeable in Firefox when
+saving links.
+</description>
+	<arch>i586</arch>
+	<version>2.8.10</version>
+	<release>39.13</release>
+	<filesize>3729510</filesize>
+	<installedsize>14502622</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>2.8.10</version>
+			<release>39.13</release>
+			<filename>gtk2-2.8.10-39.13.i586.rpm</filename>
+			<filesize>3729510</filesize>
+			<installedsize>14502622</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="gtk2+"/>
+			<dep name="im-am-et.so"/>
+			<dep name="im-cedilla.so"/>
+			<dep name="im-cyrillic-translit.so"/>
+			<dep name="im-inuktitut.so"/>
+			<dep name="im-ipa.so"/>
+			<dep name="im-thai-broken.so"/>
+			<dep name="im-ti-er.so"/>
+			<dep name="im-ti-et.so"/>
+			<dep name="im-viqr.so"/>
+			<dep name="im-xim.so"/>
+			<dep name="libgdk-x11-2.0.so.0"/>
+			<dep name="libgdk_pixbuf-2.0.so.0"/>
+			<dep name="libgdk_pixbuf_xlib-2.0.so.0"/>
+			<dep name="libgtk-x11-2.0.so.0"/>
+			<dep name="libpixbufloader-ani.so"/>
+			<dep name="libpixbufloader-bmp.so"/>
+			<dep name="libpixbufloader-gif.so"/>
+			<dep name="libpixbufloader-ico.so"/>
+			<dep name="libpixbufloader-jpeg.so"/>
+			<dep name="libpixbufloader-pcx.so"/>
+			<dep name="libpixbufloader-png.so"/>
+			<dep name="libpixbufloader-pnm.so"/>
+			<dep name="libpixbufloader-ras.so"/>
+			<dep name="libpixbufloader-tga.so"/>
+			<dep name="libpixbufloader-tiff.so"/>
+			<dep name="libpixbufloader-wbmp.so"/>
+			<dep name="libpixbufloader-xbm.so"/>
+			<dep name="libpixbufloader-xpm.so"/>
+			<dep name="libpixmap.so"/>
+			<dep name="gtk2" op="EQ" version="2.8.10" release="39.13"/>
+		</provides>
+		<requires>
+			<dep name="gnome-filesystem"/>
+			<dep name="/usr/bin/touch" pre="1"/>
+			<dep name="/bin/rm" pre="1"/>
+			<dep name="/bin/rmdir" pre="1"/>
+			<dep name="cairo" op="GE" version="0.9.2"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/bin/sh"/>
+			<dep name="libX11.so.6"/>
+			<dep name="libXcursor.so.1"/>
+			<dep name="libXext.so.6"/>
+			<dep name="libXfixes.so.3"/>
+			<dep name="libXi.so.6"/>
+			<dep name="libXinerama.so.1"/>
+			<dep name="libXrandr.so.2"/>
+			<dep name="libXrender.so.1"/>
+			<dep name="libatk-1.0.so.0"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libc.so.6(GLIBC_2.2)"/>
+			<dep name="libc.so.6(GLIBC_2.2.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)"/>
+			<dep name="libc.so.6(GLIBC_2.4)"/>
+			<dep name="libcairo.so.2"/>
+			<dep name="libdl.so.2"/>
+			<dep name="libexpat.so.1"/>
+			<dep name="libfontconfig.so.1"/>
+			<dep name="libfreetype.so.6"/>
+			<dep name="libgdk-x11-2.0.so.0"/>
+			<dep name="libgdk_pixbuf-2.0.so.0"/>
+			<dep name="libglib-2.0.so.0"/>
+			<dep name="libglitz.so.1"/>
+			<dep name="libgmodule-2.0.so.0"/>
+			<dep name="libgobject-2.0.so.0"/>
+			<dep name="libgtk-x11-2.0.so.0"/>
+			<dep name="libjpeg.so.62"/>
+			<dep name="libm.so.6"/>
+			<dep name="libm.so.6(GLIBC_2.0)"/>
+			<dep name="libpango-1.0.so.0"/>
+			<dep name="libpangocairo-1.0.so.0"/>
+			<dep name="libpangoft2-1.0.so.0"/>
+			<dep name="libpng12.so.0"/>
+			<dep name="libtiff.so.3"/>
+			<dep name="libz.so.1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>gtk2</name>
+	<summary>gtk2: fix File/Save dialog, which was incorrectly discarding the file name</summary>
+	<description>The File/Save dialog (GtkFileChoser in SAVE mode) was
+discarding the suggested file name provided by the calling
+program.  This was especially noticeable in Firefox when
+saving links.
+</description>
+	<arch>ppc</arch>
+	<version>2.8.10</version>
+	<release>39.13</release>
+	<filesize>3890049</filesize>
+	<installedsize>15627030</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>2.8.10</version>
+			<release>39.13</release>
+			<filename>gtk2-2.8.10-39.13.ppc.rpm</filename>
+			<filesize>3890049</filesize>
+			<installedsize>15627030</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="gtk2+"/>
+			<dep name="im-am-et.so"/>
+			<dep name="im-cedilla.so"/>
+			<dep name="im-cyrillic-translit.so"/>
+			<dep name="im-inuktitut.so"/>
+			<dep name="im-ipa.so"/>
+			<dep name="im-thai-broken.so"/>
+			<dep name="im-ti-er.so"/>
+			<dep name="im-ti-et.so"/>
+			<dep name="im-viqr.so"/>
+			<dep name="im-xim.so"/>
+			<dep name="libgdk-x11-2.0.so.0"/>
+			<dep name="libgdk_pixbuf-2.0.so.0"/>
+			<dep name="libgdk_pixbuf_xlib-2.0.so.0"/>
+			<dep name="libgtk-x11-2.0.so.0"/>
+			<dep name="libpixbufloader-ani.so"/>
+			<dep name="libpixbufloader-bmp.so"/>
+			<dep name="libpixbufloader-gif.so"/>
+			<dep name="libpixbufloader-ico.so"/>
+			<dep name="libpixbufloader-jpeg.so"/>
+			<dep name="libpixbufloader-pcx.so"/>
+			<dep name="libpixbufloader-png.so"/>
+			<dep name="libpixbufloader-pnm.so"/>
+			<dep name="libpixbufloader-ras.so"/>
+			<dep name="libpixbufloader-tga.so"/>
+			<dep name="libpixbufloader-tiff.so"/>
+			<dep name="libpixbufloader-wbmp.so"/>
+			<dep name="libpixbufloader-xbm.so"/>
+			<dep name="libpixbufloader-xpm.so"/>
+			<dep name="libpixmap.so"/>
+			<dep name="gtk2" op="EQ" version="2.8.10" release="39.13"/>
+		</provides>
+		<requires>
+			<dep name="gnome-filesystem"/>
+			<dep name="/usr/bin/touch" pre="1"/>
+			<dep name="/bin/rm" pre="1"/>
+			<dep name="/bin/rmdir" pre="1"/>
+			<dep name="cairo" op="GE" version="0.9.2"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/bin/sh"/>
+			<dep name="libX11.so.6"/>
+			<dep name="libXcursor.so.1"/>
+			<dep name="libXext.so.6"/>
+			<dep name="libXfixes.so.3"/>
+			<dep name="libXi.so.6"/>
+			<dep name="libXinerama.so.1"/>
+			<dep name="libXrandr.so.2"/>
+			<dep name="libXrender.so.1"/>
+			<dep name="libatk-1.0.so.0"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libc.so.6(GLIBC_2.2)"/>
+			<dep name="libc.so.6(GLIBC_2.2.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)"/>
+			<dep name="libc.so.6(GLIBC_2.4)"/>
+			<dep name="libcairo.so.2"/>
+			<dep name="libdl.so.2"/>
+			<dep name="libexpat.so.1"/>
+			<dep name="libfontconfig.so.1"/>
+			<dep name="libfreetype.so.6"/>
+			<dep name="libgdk-x11-2.0.so.0"/>
+			<dep name="libgdk_pixbuf-2.0.so.0"/>
+			<dep name="libglib-2.0.so.0"/>
+			<dep name="libglitz.so.1"/>
+			<dep name="libgmodule-2.0.so.0"/>
+			<dep name="libgobject-2.0.so.0"/>
+			<dep name="libgtk-x11-2.0.so.0"/>
+			<dep name="libjpeg.so.62"/>
+			<dep name="libm.so.6"/>
+			<dep name="libm.so.6(GLIBC_2.0)"/>
+			<dep name="libpango-1.0.so.0"/>
+			<dep name="libpangocairo-1.0.so.0"/>
+			<dep name="libpangoft2-1.0.so.0"/>
+			<dep name="libpng12.so.0"/>
+			<dep name="libtiff.so.3"/>
+			<dep name="libz.so.1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>gtk2</name>
+	<summary>gtk2: fix File/Save dialog, which was incorrectly discarding the file name</summary>
+	<description>The File/Save dialog (GtkFileChoser in SAVE mode) was
+discarding the suggested file name provided by the calling
+program.  This was especially noticeable in Firefox when
+saving links.
+</description>
+	<arch>x86_64</arch>
+	<version>2.8.10</version>
+	<release>39.13</release>
+	<filesize>3907333</filesize>
+	<installedsize>14955544</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>2.8.10</version>
+			<release>39.13</release>
+			<filename>gtk2-2.8.10-39.13.x86_64.rpm</filename>
+			<filesize>3907333</filesize>
+			<installedsize>14955544</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="gtk2+"/>
+			<dep name="im-am-et.so()(64bit)"/>
+			<dep name="im-cedilla.so()(64bit)"/>
+			<dep name="im-cyrillic-translit.so()(64bit)"/>
+			<dep name="im-inuktitut.so()(64bit)"/>
+			<dep name="im-ipa.so()(64bit)"/>
+			<dep name="im-thai-broken.so()(64bit)"/>
+			<dep name="im-ti-er.so()(64bit)"/>
+			<dep name="im-ti-et.so()(64bit)"/>
+			<dep name="im-viqr.so()(64bit)"/>
+			<dep name="im-xim.so()(64bit)"/>
+			<dep name="libgdk-x11-2.0.so.0()(64bit)"/>
+			<dep name="libgdk_pixbuf-2.0.so.0()(64bit)"/>
+			<dep name="libgdk_pixbuf_xlib-2.0.so.0()(64bit)"/>
+			<dep name="libgtk-x11-2.0.so.0()(64bit)"/>
+			<dep name="libpixbufloader-ani.so()(64bit)"/>
+			<dep name="libpixbufloader-bmp.so()(64bit)"/>
+			<dep name="libpixbufloader-gif.so()(64bit)"/>
+			<dep name="libpixbufloader-ico.so()(64bit)"/>
+			<dep name="libpixbufloader-jpeg.so()(64bit)"/>
+			<dep name="libpixbufloader-pcx.so()(64bit)"/>
+			<dep name="libpixbufloader-png.so()(64bit)"/>
+			<dep name="libpixbufloader-pnm.so()(64bit)"/>
+			<dep name="libpixbufloader-ras.so()(64bit)"/>
+			<dep name="libpixbufloader-tga.so()(64bit)"/>
+			<dep name="libpixbufloader-tiff.so()(64bit)"/>
+			<dep name="libpixbufloader-wbmp.so()(64bit)"/>
+			<dep name="libpixbufloader-xbm.so()(64bit)"/>
+			<dep name="libpixbufloader-xpm.so()(64bit)"/>
+			<dep name="libpixmap.so()(64bit)"/>
+			<dep name="gtk2" op="EQ" version="2.8.10" release="39.13"/>
+		</provides>
+		<requires>
+			<dep name="gnome-filesystem"/>
+			<dep name="/usr/bin/touch" pre="1"/>
+			<dep name="/bin/rm" pre="1"/>
+			<dep name="/bin/rmdir" pre="1"/>
+			<dep name="cairo" op="GE" version="0.9.2"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/bin/sh"/>
+			<dep name="libX11.so.6()(64bit)"/>
+			<dep name="libXcursor.so.1()(64bit)"/>
+			<dep name="libXext.so.6()(64bit)"/>
+			<dep name="libXfixes.so.3()(64bit)"/>
+			<dep name="libXi.so.6()(64bit)"/>
+			<dep name="libXinerama.so.1()(64bit)"/>
+			<dep name="libXrandr.so.2()(64bit)"/>
+			<dep name="libXrender.so.1()(64bit)"/>
+			<dep name="libatk-1.0.so.0()(64bit)"/>
+			<dep name="libc.so.6()(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.3)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.4)(64bit)"/>
+			<dep name="libcairo.so.2()(64bit)"/>
+			<dep name="libdl.so.2()(64bit)"/>
+			<dep name="libexpat.so.1()(64bit)"/>
+			<dep name="libfontconfig.so.1()(64bit)"/>
+			<dep name="libfreetype.so.6()(64bit)"/>
+			<dep name="libgdk-x11-2.0.so.0()(64bit)"/>
+			<dep name="libgdk_pixbuf-2.0.so.0()(64bit)"/>
+			<dep name="libglib-2.0.so.0()(64bit)"/>
+			<dep name="libglitz.so.1()(64bit)"/>
+			<dep name="libgmodule-2.0.so.0()(64bit)"/>
+			<dep name="libgobject-2.0.so.0()(64bit)"/>
+			<dep name="libgtk-x11-2.0.so.0()(64bit)"/>
+			<dep name="libjpeg.so.62()(64bit)"/>
+			<dep name="libm.so.6()(64bit)"/>
+			<dep name="libm.so.6(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libpango-1.0.so.0()(64bit)"/>
+			<dep name="libpangocairo-1.0.so.0()(64bit)"/>
+			<dep name="libpangoft2-1.0.so.0()(64bit)"/>
+			<dep name="libpng12.so.0()(64bit)"/>
+			<dep name="libtiff.so.3()(64bit)"/>
+			<dep name="libz.so.1()(64bit)"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>gtk2-32bit</name>
+	<summary>gtk2: fix File/Save dialog, which was incorrectly discarding the file name</summary>
+	<description>The File/Save dialog (GtkFileChoser in SAVE mode) was
+discarding the suggested file name provided by the calling
+program.  This was especially noticeable in Firefox when
+saving links.
+</description>
+	<arch>x86_64</arch>
+	<version>2.8.10</version>
+	<release>39.13</release>
+	<filesize>1494581</filesize>
+	<installedsize>4116768</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>2.8.10</version>
+			<release>39.13</release>
+			<filename>gtk2-32bit-2.8.10-39.13.x86_64.rpm</filename>
+			<filesize>1494581</filesize>
+			<installedsize>4116768</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="im-am-et.so"/>
+			<dep name="im-cedilla.so"/>
+			<dep name="im-cyrillic-translit.so"/>
+			<dep name="im-inuktitut.so"/>
+			<dep name="im-ipa.so"/>
+			<dep name="im-thai-broken.so"/>
+			<dep name="im-ti-er.so"/>
+			<dep name="im-ti-et.so"/>
+			<dep name="im-viqr.so"/>
+			<dep name="im-xim.so"/>
+			<dep name="libgdk-x11-2.0.so.0"/>
+			<dep name="libgdk_pixbuf-2.0.so.0"/>
+			<dep name="libgdk_pixbuf_xlib-2.0.so.0"/>
+			<dep name="libgtk-x11-2.0.so.0"/>
+			<dep name="libpixbufloader-ani.so"/>
+			<dep name="libpixbufloader-bmp.so"/>
+			<dep name="libpixbufloader-gif.so"/>
+			<dep name="libpixbufloader-ico.so"/>
+			<dep name="libpixbufloader-jpeg.so"/>
+			<dep name="libpixbufloader-pcx.so"/>
+			<dep name="libpixbufloader-png.so"/>
+			<dep name="libpixbufloader-pnm.so"/>
+			<dep name="libpixbufloader-ras.so"/>
+			<dep name="libpixbufloader-tga.so"/>
+			<dep name="libpixbufloader-tiff.so"/>
+			<dep name="libpixbufloader-wbmp.so"/>
+			<dep name="libpixbufloader-xbm.so"/>
+			<dep name="libpixbufloader-xpm.so"/>
+			<dep name="libpixmap.so"/>
+			<dep name="gtk2-32bit" op="EQ" version="2.8.10" release="39.13"/>
+		</provides>
+		<requires>
+			<dep name="/usr/bin/touch" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="libX11.so.6"/>
+			<dep name="libXcursor.so.1"/>
+			<dep name="libXext.so.6"/>
+			<dep name="libXfixes.so.3"/>
+			<dep name="libXi.so.6"/>
+			<dep name="libXinerama.so.1"/>
+			<dep name="libXrandr.so.2"/>
+			<dep name="libXrender.so.1"/>
+			<dep name="libatk-1.0.so.0"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libc.so.6(GLIBC_2.2)"/>
+			<dep name="libc.so.6(GLIBC_2.2.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)"/>
+			<dep name="libc.so.6(GLIBC_2.4)"/>
+			<dep name="libcairo.so.2"/>
+			<dep name="libdl.so.2"/>
+			<dep name="libexpat.so.1"/>
+			<dep name="libfontconfig.so.1"/>
+			<dep name="libfreetype.so.6"/>
+			<dep name="libgdk-x11-2.0.so.0"/>
+			<dep name="libgdk_pixbuf-2.0.so.0"/>
+			<dep name="libglib-2.0.so.0"/>
+			<dep name="libglitz.so.1"/>
+			<dep name="libgmodule-2.0.so.0"/>
+			<dep name="libgobject-2.0.so.0"/>
+			<dep name="libgtk-x11-2.0.so.0"/>
+			<dep name="libjpeg.so.62"/>
+			<dep name="libm.so.6"/>
+			<dep name="libm.so.6(GLIBC_2.0)"/>
+			<dep name="libpango-1.0.so.0"/>
+			<dep name="libpangocairo-1.0.so.0"/>
+			<dep name="libpangoft2-1.0.so.0"/>
+			<dep name="libpng12.so.0"/>
+			<dep name="libtiff.so.3"/>
+			<dep name="libz.so.1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>gtk2-64bit</name>
+	<summary>gtk2: fix File/Save dialog, which was incorrectly discarding the file name</summary>
+	<description>The File/Save dialog (GtkFileChoser in SAVE mode) was
+discarding the suggested file name provided by the calling
+program.  This was especially noticeable in Firefox when
+saving links.
+</description>
+	<arch>ppc</arch>
+	<version>2.8.10</version>
+	<release>39.13</release>
+	<filesize>1737876</filesize>
+	<installedsize>6443208</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>2.8.10</version>
+			<release>39.13</release>
+			<filename>gtk2-64bit-2.8.10-39.13.ppc.rpm</filename>
+			<filesize>1737876</filesize>
+			<installedsize>6443208</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="im-am-et.so()(64bit)"/>
+			<dep name="im-cedilla.so()(64bit)"/>
+			<dep name="im-cyrillic-translit.so()(64bit)"/>
+			<dep name="im-inuktitut.so()(64bit)"/>
+			<dep name="im-ipa.so()(64bit)"/>
+			<dep name="im-thai-broken.so()(64bit)"/>
+			<dep name="im-ti-er.so()(64bit)"/>
+			<dep name="im-ti-et.so()(64bit)"/>
+			<dep name="im-viqr.so()(64bit)"/>
+			<dep name="im-xim.so()(64bit)"/>
+			<dep name="libgdk-x11-2.0.so.0()(64bit)"/>
+			<dep name="libgdk_pixbuf-2.0.so.0()(64bit)"/>
+			<dep name="libgdk_pixbuf_xlib-2.0.so.0()(64bit)"/>
+			<dep name="libgtk-x11-2.0.so.0()(64bit)"/>
+			<dep name="libpixbufloader-ani.so()(64bit)"/>
+			<dep name="libpixbufloader-bmp.so()(64bit)"/>
+			<dep name="libpixbufloader-gif.so()(64bit)"/>
+			<dep name="libpixbufloader-ico.so()(64bit)"/>
+			<dep name="libpixbufloader-jpeg.so()(64bit)"/>
+			<dep name="libpixbufloader-pcx.so()(64bit)"/>
+			<dep name="libpixbufloader-png.so()(64bit)"/>
+			<dep name="libpixbufloader-pnm.so()(64bit)"/>
+			<dep name="libpixbufloader-ras.so()(64bit)"/>
+			<dep name="libpixbufloader-tga.so()(64bit)"/>
+			<dep name="libpixbufloader-tiff.so()(64bit)"/>
+			<dep name="libpixbufloader-wbmp.so()(64bit)"/>
+			<dep name="libpixbufloader-xbm.so()(64bit)"/>
+			<dep name="libpixbufloader-xpm.so()(64bit)"/>
+			<dep name="libpixmap.so()(64bit)"/>
+			<dep name="gtk2-64bit" op="EQ" version="2.8.10" release="39.13"/>
+		</provides>
+		<requires>
+			<dep name="/usr/bin/touch" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="libX11.so.6()(64bit)"/>
+			<dep name="libXcursor.so.1()(64bit)"/>
+			<dep name="libXext.so.6()(64bit)"/>
+			<dep name="libXfixes.so.3()(64bit)"/>
+			<dep name="libXi.so.6()(64bit)"/>
+			<dep name="libXinerama.so.1()(64bit)"/>
+			<dep name="libXrandr.so.2()(64bit)"/>
+			<dep name="libXrender.so.1()(64bit)"/>
+			<dep name="libatk-1.0.so.0()(64bit)"/>
+			<dep name="libc.so.6()(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.3)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.4)(64bit)"/>
+			<dep name="libcairo.so.2()(64bit)"/>
+			<dep name="libdl.so.2()(64bit)"/>
+			<dep name="libexpat.so.1()(64bit)"/>
+			<dep name="libfontconfig.so.1()(64bit)"/>
+			<dep name="libfreetype.so.6()(64bit)"/>
+			<dep name="libgdk-x11-2.0.so.0()(64bit)"/>
+			<dep name="libgdk_pixbuf-2.0.so.0()(64bit)"/>
+			<dep name="libglib-2.0.so.0()(64bit)"/>
+			<dep name="libglitz.so.1()(64bit)"/>
+			<dep name="libgmodule-2.0.so.0()(64bit)"/>
+			<dep name="libgobject-2.0.so.0()(64bit)"/>
+			<dep name="libgtk-x11-2.0.so.0()(64bit)"/>
+			<dep name="libjpeg.so.62()(64bit)"/>
+			<dep name="libm.so.6()(64bit)"/>
+			<dep name="libm.so.6(GLIBC_2.3)(64bit)"/>
+			<dep name="libpango-1.0.so.0()(64bit)"/>
+			<dep name="libpangocairo-1.0.so.0()(64bit)"/>
+			<dep name="libpangoft2-1.0.so.0()(64bit)"/>
+			<dep name="libpng12.so.0()(64bit)"/>
+			<dep name="libtiff.so.3()(64bit)"/>
+			<dep name="libz.so.1()(64bit)"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>gtk2-devel</name>
+	<summary>gtk2: fix File/Save dialog, which was incorrectly discarding the file name</summary>
+	<description>The File/Save dialog (GtkFileChoser in SAVE mode) was
+discarding the suggested file name provided by the calling
+program.  This was especially noticeable in Firefox when
+saving links.
+</description>
+	<arch>i586</arch>
+	<version>2.8.10</version>
+	<release>39.13</release>
+	<filesize>395476</filesize>
+	<installedsize>1821530</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>2.8.10</version>
+			<release>39.13</release>
+			<filename>gtk2-devel-2.8.10-39.13.i586.rpm</filename>
+			<filesize>395476</filesize>
+			<installedsize>1821530</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="gtk2-devel" op="EQ" version="2.8.10" release="39.13"/>
+		</provides>
+		<requires>
+			<dep name="gtk2" op="EQ" version="2.8.10"/>
+			<dep name="glibc-devel"/>
+			<dep name="glib2-devel"/>
+			<dep name="pango-devel"/>
+			<dep name="atk-devel"/>
+			<dep name="xorg-x11-devel"/>
+			<dep name="cairo-devel"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="libX11.so.6"/>
+			<dep name="libXcursor.so.1"/>
+			<dep name="libXext.so.6"/>
+			<dep name="libXfixes.so.3"/>
+			<dep name="libXi.so.6"/>
+			<dep name="libXinerama.so.1"/>
+			<dep name="libXrandr.so.2"/>
+			<dep name="libXrender.so.1"/>
+			<dep name="libatk-1.0.so.0"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)"/>
+			<dep name="libc.so.6(GLIBC_2.4)"/>
+			<dep name="libcairo.so.2"/>
+			<dep name="libdl.so.2"/>
+			<dep name="libexpat.so.1"/>
+			<dep name="libfontconfig.so.1"/>
+			<dep name="libfreetype.so.6"/>
+			<dep name="libgdk-x11-2.0.so.0"/>
+			<dep name="libgdk_pixbuf-2.0.so.0"/>
+			<dep name="libglib-2.0.so.0"/>
+			<dep name="libglitz.so.1"/>
+			<dep name="libgmodule-2.0.so.0"/>
+			<dep name="libgobject-2.0.so.0"/>
+			<dep name="libgtk-x11-2.0.so.0"/>
+			<dep name="libm.so.6"/>
+			<dep name="libm.so.6(GLIBC_2.0)"/>
+			<dep name="libpango-1.0.so.0"/>
+			<dep name="libpangocairo-1.0.so.0"/>
+			<dep name="libpangoft2-1.0.so.0"/>
+			<dep name="libpng12.so.0"/>
+			<dep name="libz.so.1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>gtk2-devel</name>
+	<summary>gtk2: fix File/Save dialog, which was incorrectly discarding the file name</summary>
+	<description>The File/Save dialog (GtkFileChoser in SAVE mode) was
+discarding the suggested file name provided by the calling
+program.  This was especially noticeable in Firefox when
+saving links.
+</description>
+	<arch>ppc</arch>
+	<version>2.8.10</version>
+	<release>39.13</release>
+	<filesize>403998</filesize>
+	<installedsize>1836976</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>2.8.10</version>
+			<release>39.13</release>
+			<filename>gtk2-devel-2.8.10-39.13.ppc.rpm</filename>
+			<filesize>403998</filesize>
+			<installedsize>1836976</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="gtk2-devel" op="EQ" version="2.8.10" release="39.13"/>
+		</provides>
+		<requires>
+			<dep name="gtk2" op="EQ" version="2.8.10"/>
+			<dep name="glibc-devel"/>
+			<dep name="glib2-devel"/>
+			<dep name="pango-devel"/>
+			<dep name="atk-devel"/>
+			<dep name="xorg-x11-devel"/>
+			<dep name="cairo-devel"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="libX11.so.6"/>
+			<dep name="libXcursor.so.1"/>
+			<dep name="libXext.so.6"/>
+			<dep name="libXfixes.so.3"/>
+			<dep name="libXi.so.6"/>
+			<dep name="libXinerama.so.1"/>
+			<dep name="libXrandr.so.2"/>
+			<dep name="libXrender.so.1"/>
+			<dep name="libatk-1.0.so.0"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1)"/>
+			<dep name="libc.so.6(GLIBC_2.4)"/>
+			<dep name="libcairo.so.2"/>
+			<dep name="libdl.so.2"/>
+			<dep name="libexpat.so.1"/>
+			<dep name="libfontconfig.so.1"/>
+			<dep name="libfreetype.so.6"/>
+			<dep name="libgdk-x11-2.0.so.0"/>
+			<dep name="libgdk_pixbuf-2.0.so.0"/>
+			<dep name="libglib-2.0.so.0"/>
+			<dep name="libglitz.so.1"/>
+			<dep name="libgmodule-2.0.so.0"/>
+			<dep name="libgobject-2.0.so.0"/>
+			<dep name="libgtk-x11-2.0.so.0"/>
+			<dep name="libm.so.6"/>
+			<dep name="libm.so.6(GLIBC_2.0)"/>
+			<dep name="libpango-1.0.so.0"/>
+			<dep name="libpangocairo-1.0.so.0"/>
+			<dep name="libpangoft2-1.0.so.0"/>
+			<dep name="libpng12.so.0"/>
+			<dep name="libz.so.1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>gtk2-devel</name>
+	<summary>gtk2: fix File/Save dialog, which was incorrectly discarding the file name</summary>
+	<description>The File/Save dialog (GtkFileChoser in SAVE mode) was
+discarding the suggested file name provided by the calling
+program.  This was especially noticeable in Firefox when
+saving links.
+</description>
+	<arch>x86_64</arch>
+	<version>2.8.10</version>
+	<release>39.13</release>
+	<filesize>400332</filesize>
+	<installedsize>1836922</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>2.8.10</version>
+			<release>39.13</release>
+			<filename>gtk2-devel-2.8.10-39.13.x86_64.rpm</filename>
+			<filesize>400332</filesize>
+			<installedsize>1836922</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="gtk2-devel" op="EQ" version="2.8.10" release="39.13"/>
+		</provides>
+		<requires>
+			<dep name="gtk2" op="EQ" version="2.8.10"/>
+			<dep name="glibc-devel"/>
+			<dep name="glib2-devel"/>
+			<dep name="pango-devel"/>
+			<dep name="atk-devel"/>
+			<dep name="xorg-x11-devel"/>
+			<dep name="cairo-devel"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="libX11.so.6()(64bit)"/>
+			<dep name="libXcursor.so.1()(64bit)"/>
+			<dep name="libXext.so.6()(64bit)"/>
+			<dep name="libXfixes.so.3()(64bit)"/>
+			<dep name="libXi.so.6()(64bit)"/>
+			<dep name="libXinerama.so.1()(64bit)"/>
+			<dep name="libXrandr.so.2()(64bit)"/>
+			<dep name="libXrender.so.1()(64bit)"/>
+			<dep name="libatk-1.0.so.0()(64bit)"/>
+			<dep name="libc.so.6()(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.4)(64bit)"/>
+			<dep name="libcairo.so.2()(64bit)"/>
+			<dep name="libdl.so.2()(64bit)"/>
+			<dep name="libexpat.so.1()(64bit)"/>
+			<dep name="libfontconfig.so.1()(64bit)"/>
+			<dep name="libfreetype.so.6()(64bit)"/>
+			<dep name="libgdk-x11-2.0.so.0()(64bit)"/>
+			<dep name="libgdk_pixbuf-2.0.so.0()(64bit)"/>
+			<dep name="libglib-2.0.so.0()(64bit)"/>
+			<dep name="libglitz.so.1()(64bit)"/>
+			<dep name="libgmodule-2.0.so.0()(64bit)"/>
+			<dep name="libgobject-2.0.so.0()(64bit)"/>
+			<dep name="libgtk-x11-2.0.so.0()(64bit)"/>
+			<dep name="libm.so.6()(64bit)"/>
+			<dep name="libm.so.6(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libpango-1.0.so.0()(64bit)"/>
+			<dep name="libpangocairo-1.0.so.0()(64bit)"/>
+			<dep name="libpangoft2-1.0.so.0()(64bit)"/>
+			<dep name="libpng12.so.0()(64bit)"/>
+			<dep name="libz.so.1()(64bit)"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>gtk2-devel-64bit</name>
+	<summary>gtk2: fix File/Save dialog, which was incorrectly discarding the file name</summary>
+	<description>The File/Save dialog (GtkFileChoser in SAVE mode) was
+discarding the suggested file name provided by the calling
+program.  This was especially noticeable in Firefox when
+saving links.
+</description>
+	<arch>ppc</arch>
+	<version>2.8.10</version>
+	<release>39.13</release>
+	<filesize>22456</filesize>
+	<installedsize>3729</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>2.8.10</version>
+			<release>39.13</release>
+			<filename>gtk2-devel-64bit-2.8.10-39.13.ppc.rpm</filename>
+			<filesize>22456</filesize>
+			<installedsize>3729</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="gtk2-devel-64bit" op="EQ" version="2.8.10" release="39.13"/>
+		</provides>
+		<requires>
+			<dep name="gtk2-devel" op="EQ" version="2.8.10"/>
+			<dep name="gtk2-64bit" op="EQ" version="2.8.10"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+</subchannel></channel>

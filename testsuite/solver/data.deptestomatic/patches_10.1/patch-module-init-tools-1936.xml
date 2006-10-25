@@ -1,0 +1,191 @@
+<channel><subchannel>                                                  
+
+<patch>
+	<name>module-init-tools</name>
+	<arch>noarch</arch>
+	<version>1936</version>
+	<release>0</release>
+	<requires>
+		<dep kind="atom" name="module-init-tools" epoch="0" version="3.2.2" release="32.13" op="EQ"/>
+	</requires>
+</patch>
+<atom>
+	<name>module-init-tools</name>
+	<arch>i586</arch>
+	<version>3.2.2</version>
+	<release>32.13</release>
+	<freshens>
+		<dep kind="package" name="module-init-tools"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="module-init-tools" epoch="0" version="3.2.2" release="32.13" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>module-init-tools</name>
+	<arch>ppc</arch>
+	<version>3.2.2</version>
+	<release>32.13</release>
+	<freshens>
+		<dep kind="package" name="module-init-tools"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="module-init-tools" epoch="0" version="3.2.2" release="32.13" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>module-init-tools</name>
+	<arch>x86_64</arch>
+	<version>3.2.2</version>
+	<release>32.13</release>
+	<freshens>
+		<dep kind="package" name="module-init-tools"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="module-init-tools" epoch="0" version="3.2.2" release="32.13" op="GE"/>
+	</requires>
+</atom>
+<package>
+	<name>module-init-tools</name>
+	<summary>module-init-tools: Kernel updates may leave broken symlinks in /lib/modules/*/weak-updates</summary>
+	<description>In the presence of Kernel Module Packages (KMPs), kernel
+upgrades may leave dead symlinks in the
+/lib/modules/*/weak-updates directory.  This upgrade fixes
+this problem.
+</description>
+	<arch>i586</arch>
+	<version>3.2.2</version>
+	<release>32.13</release>
+	<filesize>227857</filesize>
+	<installedsize>689263</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>3.2.2</version>
+			<release>32.13</release>
+			<filename>module-init-tools-3.2.2-32.13.i586.rpm</filename>
+			<filesize>227857</filesize>
+			<installedsize>689263</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="modules"/>
+			<dep name="modutils"/>
+			<dep name="module-init-tools" op="EQ" version="3.2.2" release="32.13"/>
+		</provides>
+		<requires>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/bin/bash"/>
+			<dep name="/bin/sh"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1)"/>
+			<dep name="libc.so.6(GLIBC_2.1.1)"/>
+			<dep name="libc.so.6(GLIBC_2.2.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)"/>
+			<dep name="libc.so.6(GLIBC_2.4)"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>module-init-tools</name>
+	<summary>module-init-tools: Kernel updates may leave broken symlinks in /lib/modules/*/weak-updates</summary>
+	<description>In the presence of Kernel Module Packages (KMPs), kernel
+upgrades may leave dead symlinks in the
+/lib/modules/*/weak-updates directory.  This upgrade fixes
+this problem.
+</description>
+	<arch>ppc</arch>
+	<version>3.2.2</version>
+	<release>32.13</release>
+	<filesize>228837</filesize>
+	<installedsize>788288</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>3.2.2</version>
+			<release>32.13</release>
+			<filename>module-init-tools-3.2.2-32.13.ppc.rpm</filename>
+			<filesize>228837</filesize>
+			<installedsize>788288</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="modules"/>
+			<dep name="modutils"/>
+			<dep name="module-init-tools" op="EQ" version="3.2.2" release="32.13"/>
+		</provides>
+		<requires>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/bin/bash"/>
+			<dep name="/bin/sh"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1)"/>
+			<dep name="libc.so.6(GLIBC_2.1.1)"/>
+			<dep name="libc.so.6(GLIBC_2.2.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3)"/>
+			<dep name="libc.so.6(GLIBC_2.4)"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>module-init-tools</name>
+	<summary>module-init-tools: Kernel updates may leave broken symlinks in /lib/modules/*/weak-updates</summary>
+	<description>In the presence of Kernel Module Packages (KMPs), kernel
+upgrades may leave dead symlinks in the
+/lib/modules/*/weak-updates directory.  This upgrade fixes
+this problem.
+</description>
+	<arch>x86_64</arch>
+	<version>3.2.2</version>
+	<release>32.13</release>
+	<filesize>232183</filesize>
+	<installedsize>809229</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>3.2.2</version>
+			<release>32.13</release>
+			<filename>module-init-tools-3.2.2-32.13.x86_64.rpm</filename>
+			<filesize>232183</filesize>
+			<installedsize>809229</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="modules"/>
+			<dep name="modutils"/>
+			<dep name="module-init-tools" op="EQ" version="3.2.2" release="32.13"/>
+		</provides>
+		<requires>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/bin/bash"/>
+			<dep name="/bin/sh"/>
+			<dep name="libc.so.6()(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.3)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.4)(64bit)"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+</subchannel></channel>

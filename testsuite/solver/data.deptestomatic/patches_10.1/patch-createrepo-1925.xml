@@ -1,0 +1,70 @@
+<channel><subchannel>                                                  
+
+<patch>
+	<name>createrepo</name>
+	<arch>noarch</arch>
+	<version>1925</version>
+	<release>0</release>
+	<requires>
+		<dep kind="atom" name="createrepo" epoch="0" version="0.4.4" release="9.3" op="EQ"/>
+	</requires>
+</patch>
+<atom>
+	<name>createrepo</name>
+	<arch>noarch</arch>
+	<version>0.4.4</version>
+	<release>9.3</release>
+	<freshens>
+		<dep kind="package" name="createrepo"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="createrepo" epoch="0" version="0.4.4" release="9.3" op="GE"/>
+	</requires>
+</atom>
+<package>
+	<name>createrepo</name>
+	<summary>createrepo: enable creation of repos with suse:license_to_confirm tags</summary>
+	<description>This update enables createrepo to create repos with
+suse:license_to_confirm tags. For every rpm,
+filename.eula.<lang> will be picked up as license
+information and inserted into primary.xml.gz.
+</description>
+	<arch>noarch</arch>
+	<version>0.4.4</version>
+	<release>9.3</release>
+	<filesize>20895</filesize>
+	<installedsize>64737</installedsize>
+	<history>
+		<update>
+			<arch>noarch</arch>
+			<epoch>0</epoch>
+			<version>0.4.4</version>
+			<release>9.3</release>
+			<filename>createrepo-0.4.4-9.3.noarch.rpm</filename>
+			<filesize>20895</filesize>
+			<installedsize>64737</installedsize>
+			<importance>optional</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="createrepo" op="EQ" version="0.4.4" release="9.3"/>
+		</provides>
+		<requires>
+			<dep name="rpm" op="GE" version="4.1.1"/>
+			<dep name="rpm-python"/>
+			<dep name="libxml2-python"/>
+			<dep name="python-urlgrabber"/>
+			<dep name="rpmlib(VersionedDependencies)" op="LE" version="3.0.3" release="1" pre="1"/>
+			<dep name="python" op="GE" version="2.4" pre="1"/>
+			<dep name="python" op="LT" version="2.5" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/bin/sh"/>
+			<dep name="/usr/bin/python"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+</subchannel></channel>

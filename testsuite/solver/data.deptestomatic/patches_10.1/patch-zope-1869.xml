@@ -1,0 +1,312 @@
+<channel><subchannel>                                                  
+
+<patch>
+	<name>zope</name>
+	<arch>noarch</arch>
+	<version>1869</version>
+	<release>0</release>
+	<requires>
+		<dep kind="atom" name="zope" epoch="0" version="2.7.8" release="15.5" op="EQ"/>
+	</requires>
+</patch>
+<atom>
+	<name>zope</name>
+	<arch>i586</arch>
+	<version>2.7.8</version>
+	<release>15.5</release>
+	<freshens>
+		<dep kind="package" name="zope"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="zope" epoch="0" version="2.7.8" release="15.5" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>zope</name>
+	<arch>ppc</arch>
+	<version>2.7.8</version>
+	<release>15.5</release>
+	<freshens>
+		<dep kind="package" name="zope"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="zope" epoch="0" version="2.7.8" release="15.5" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>zope</name>
+	<arch>x86_64</arch>
+	<version>2.7.8</version>
+	<release>15.5</release>
+	<freshens>
+		<dep kind="package" name="zope"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="zope" epoch="0" version="2.7.8" release="15.5" op="GE"/>
+	</requires>
+</atom>
+<package>
+	<name>zope</name>
+	<summary>zope security update</summary>
+	<description>A bug in the way the docutils module parses and renders
+"restructured text" could lead to information disclosure.
+</description>
+	<arch>i586</arch>
+	<version>2.7.8</version>
+	<release>15.5</release>
+	<filesize>4144392</filesize>
+	<installedsize>16937251</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>2.7.8</version>
+			<release>15.5</release>
+			<filename>zope-2.7.8-15.5.i586.rpm</filename>
+			<filesize>4144392</filesize>
+			<installedsize>16937251</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="Acquisition.so"/>
+			<dep name="BTree.so"/>
+			<dep name="ComputedAttribute.so"/>
+			<dep name="ExtensionClass.so"/>
+			<dep name="IIBTree.so"/>
+			<dep name="IOBTree.so"/>
+			<dep name="ISO_8859_1_Splitter.so"/>
+			<dep name="MethodObject.so"/>
+			<dep name="Missing.so"/>
+			<dep name="MultiMapping.so"/>
+			<dep name="OIBTree.so"/>
+			<dep name="Record.so"/>
+			<dep name="Splitter.so"/>
+			<dep name="ThreadLock.so"/>
+			<dep name="TimeStamp.so"/>
+			<dep name="UnicodeSplitter.so"/>
+			<dep name="ZopeSplitter.so"/>
+			<dep name="_IIBTree.so"/>
+			<dep name="_IOBTree.so"/>
+			<dep name="_OIBTree.so"/>
+			<dep name="_OOBTree.so"/>
+			<dep name="_fsBTree.so"/>
+			<dep name="_helper.so"/>
+			<dep name="cAccessControl.so"/>
+			<dep name="cDocumentTemplate.so"/>
+			<dep name="cPersistence.so"/>
+			<dep name="cPickleCache.so"/>
+			<dep name="coptimizations.so"/>
+			<dep name="dcpyexpat.so"/>
+			<dep name="initgroups.so"/>
+			<dep name="intSet.so"/>
+			<dep name="okascore.so"/>
+			<dep name="stopper.so"/>
+			<dep name="winlock.so"/>
+			<dep name="zope" op="EQ" version="2.7.8" release="15.5"/>
+		</provides>
+		<requires>
+			<dep name="/usr/sbin/useradd" pre="1"/>
+			<dep name="/usr/sbin/usermod" pre="1"/>
+			<dep name="/usr/sbin/groupadd" pre="1"/>
+			<dep name="python"/>
+			<dep name="python-xml"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/bin/sh"/>
+			<dep name="/usr/bin/env"/>
+			<dep name="/usr/bin/python"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)"/>
+			<dep name="libpthread.so.0"/>
+			<dep name="libpthread.so.0(GLIBC_2.0)"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>zope</name>
+	<summary>zope security update</summary>
+	<description>A bug in the way the docutils module parses and renders
+"restructured text" could lead to information disclosure.
+</description>
+	<arch>ppc</arch>
+	<version>2.7.8</version>
+	<release>15.5</release>
+	<filesize>4191193</filesize>
+	<installedsize>17302431</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>2.7.8</version>
+			<release>15.5</release>
+			<filename>zope-2.7.8-15.5.ppc.rpm</filename>
+			<filesize>4191193</filesize>
+			<installedsize>17302431</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="Acquisition.so"/>
+			<dep name="BTree.so"/>
+			<dep name="ComputedAttribute.so"/>
+			<dep name="ExtensionClass.so"/>
+			<dep name="IIBTree.so"/>
+			<dep name="IOBTree.so"/>
+			<dep name="ISO_8859_1_Splitter.so"/>
+			<dep name="MethodObject.so"/>
+			<dep name="Missing.so"/>
+			<dep name="MultiMapping.so"/>
+			<dep name="OIBTree.so"/>
+			<dep name="Record.so"/>
+			<dep name="Splitter.so"/>
+			<dep name="ThreadLock.so"/>
+			<dep name="TimeStamp.so"/>
+			<dep name="UnicodeSplitter.so"/>
+			<dep name="ZopeSplitter.so"/>
+			<dep name="_IIBTree.so"/>
+			<dep name="_IOBTree.so"/>
+			<dep name="_OIBTree.so"/>
+			<dep name="_OOBTree.so"/>
+			<dep name="_fsBTree.so"/>
+			<dep name="_helper.so"/>
+			<dep name="cAccessControl.so"/>
+			<dep name="cDocumentTemplate.so"/>
+			<dep name="cPersistence.so"/>
+			<dep name="cPickleCache.so"/>
+			<dep name="coptimizations.so"/>
+			<dep name="dcpyexpat.so"/>
+			<dep name="initgroups.so"/>
+			<dep name="intSet.so"/>
+			<dep name="okascore.so"/>
+			<dep name="stopper.so"/>
+			<dep name="winlock.so"/>
+			<dep name="zope" op="EQ" version="2.7.8" release="15.5"/>
+		</provides>
+		<requires>
+			<dep name="/usr/sbin/useradd" pre="1"/>
+			<dep name="/usr/sbin/usermod" pre="1"/>
+			<dep name="/usr/sbin/groupadd" pre="1"/>
+			<dep name="python"/>
+			<dep name="python-xml"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/bin/sh"/>
+			<dep name="/usr/bin/env"/>
+			<dep name="/usr/bin/python"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)"/>
+			<dep name="libc.so.6(GLIBC_2.4)"/>
+			<dep name="libpthread.so.0"/>
+			<dep name="libpthread.so.0(GLIBC_2.3.4)"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>zope</name>
+	<summary>zope security update</summary>
+	<description>A bug in the way the docutils module parses and renders
+"restructured text" could lead to information disclosure.
+</description>
+	<arch>x86_64</arch>
+	<version>2.7.8</version>
+	<release>15.5</release>
+	<filesize>4179719</filesize>
+	<installedsize>17111047</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>2.7.8</version>
+			<release>15.5</release>
+			<filename>zope-2.7.8-15.5.x86_64.rpm</filename>
+			<filesize>4179719</filesize>
+			<installedsize>17111047</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="Acquisition.so()(64bit)"/>
+			<dep name="BTree.so()(64bit)"/>
+			<dep name="ComputedAttribute.so()(64bit)"/>
+			<dep name="ExtensionClass.so()(64bit)"/>
+			<dep name="IIBTree.so()(64bit)"/>
+			<dep name="IOBTree.so()(64bit)"/>
+			<dep name="ISO_8859_1_Splitter.so()(64bit)"/>
+			<dep name="MethodObject.so()(64bit)"/>
+			<dep name="Missing.so()(64bit)"/>
+			<dep name="MultiMapping.so()(64bit)"/>
+			<dep name="OIBTree.so()(64bit)"/>
+			<dep name="Record.so()(64bit)"/>
+			<dep name="Splitter.so()(64bit)"/>
+			<dep name="ThreadLock.so()(64bit)"/>
+			<dep name="TimeStamp.so()(64bit)"/>
+			<dep name="UnicodeSplitter.so()(64bit)"/>
+			<dep name="ZopeSplitter.so()(64bit)"/>
+			<dep name="_IIBTree.so()(64bit)"/>
+			<dep name="_IOBTree.so()(64bit)"/>
+			<dep name="_OIBTree.so()(64bit)"/>
+			<dep name="_OOBTree.so()(64bit)"/>
+			<dep name="_fsBTree.so()(64bit)"/>
+			<dep name="_helper.so()(64bit)"/>
+			<dep name="cAccessControl.so()(64bit)"/>
+			<dep name="cDocumentTemplate.so()(64bit)"/>
+			<dep name="cPersistence.so()(64bit)"/>
+			<dep name="cPickleCache.so()(64bit)"/>
+			<dep name="coptimizations.so()(64bit)"/>
+			<dep name="dcpyexpat.so()(64bit)"/>
+			<dep name="initgroups.so()(64bit)"/>
+			<dep name="intSet.so()(64bit)"/>
+			<dep name="okascore.so()(64bit)"/>
+			<dep name="stopper.so()(64bit)"/>
+			<dep name="winlock.so()(64bit)"/>
+			<dep name="zope" op="EQ" version="2.7.8" release="15.5"/>
+		</provides>
+		<requires>
+			<dep name="/usr/sbin/useradd" pre="1"/>
+			<dep name="/usr/sbin/usermod" pre="1"/>
+			<dep name="/usr/sbin/groupadd" pre="1"/>
+			<dep name="python"/>
+			<dep name="python-xml"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/bin/sh"/>
+			<dep name="/usr/bin/env"/>
+			<dep name="/usr/bin/python"/>
+			<dep name="libc.so.6()(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.3)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)(64bit)"/>
+			<dep name="libpthread.so.0()(64bit)"/>
+			<dep name="libpthread.so.0(GLIBC_2.2.5)(64bit)"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+</subchannel></channel>

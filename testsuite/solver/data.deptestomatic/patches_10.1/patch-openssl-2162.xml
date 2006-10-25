@@ -1,0 +1,437 @@
+<channel><subchannel>                                                  
+
+<patch>
+	<name>openssl</name>
+	<arch>noarch</arch>
+	<version>2162</version>
+	<release>0</release>
+	<requires>
+		<dep kind="atom" name="openssl" epoch="0" version="0.9.8a" release="18.13" op="EQ"/>
+		<dep kind="atom" name="openssl-32bit" epoch="0" version="0.9.8a" release="18.13" op="EQ"/>
+		<dep kind="atom" name="openssl-64bit" epoch="0" version="0.9.8a" release="18.13" op="EQ"/>
+		<dep kind="atom" name="openssl-devel" epoch="0" version="0.9.8a" release="18.13" op="EQ"/>
+		<dep kind="atom" name="openssl-devel-32bit" epoch="0" version="0.9.8a" release="18.13" op="EQ"/>
+		<dep kind="atom" name="openssl-devel-64bit" epoch="0" version="0.9.8a" release="18.13" op="EQ"/>
+	</requires>
+</patch>
+<atom>
+	<name>openssl</name>
+	<arch>i586</arch>
+	<version>0.9.8a</version>
+	<release>18.13</release>
+	<freshens>
+		<dep kind="package" name="openssl"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="openssl" epoch="0" version="0.9.8a" release="18.13" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>openssl</name>
+	<arch>ppc</arch>
+	<version>0.9.8a</version>
+	<release>18.13</release>
+	<freshens>
+		<dep kind="package" name="openssl"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="openssl" epoch="0" version="0.9.8a" release="18.13" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>openssl</name>
+	<arch>x86_64</arch>
+	<version>0.9.8a</version>
+	<release>18.13</release>
+	<freshens>
+		<dep kind="package" name="openssl"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="openssl" epoch="0" version="0.9.8a" release="18.13" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>openssl-32bit</name>
+	<arch>x86_64</arch>
+	<version>0.9.8a</version>
+	<release>18.13</release>
+	<freshens>
+		<dep kind="package" name="openssl-32bit"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="openssl-32bit" epoch="0" version="0.9.8a" release="18.13" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>openssl-64bit</name>
+	<arch>ppc</arch>
+	<version>0.9.8a</version>
+	<release>18.13</release>
+	<freshens>
+		<dep kind="package" name="openssl-64bit"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="openssl-64bit" epoch="0" version="0.9.8a" release="18.13" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>openssl-devel</name>
+	<arch>i586</arch>
+	<version>0.9.8a</version>
+	<release>18.13</release>
+	<freshens>
+		<dep kind="package" name="openssl-devel"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="openssl-devel" epoch="0" version="0.9.8a" release="18.13" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>openssl-devel</name>
+	<arch>ppc</arch>
+	<version>0.9.8a</version>
+	<release>18.13</release>
+	<freshens>
+		<dep kind="package" name="openssl-devel"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="openssl-devel" epoch="0" version="0.9.8a" release="18.13" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>openssl-devel</name>
+	<arch>x86_64</arch>
+	<version>0.9.8a</version>
+	<release>18.13</release>
+	<freshens>
+		<dep kind="package" name="openssl-devel"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="openssl-devel" epoch="0" version="0.9.8a" release="18.13" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>openssl-devel-32bit</name>
+	<arch>x86_64</arch>
+	<version>0.9.8a</version>
+	<release>18.13</release>
+	<freshens>
+		<dep kind="package" name="openssl-devel-32bit"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="openssl-devel-32bit" epoch="0" version="0.9.8a" release="18.13" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>openssl-devel-64bit</name>
+	<arch>ppc</arch>
+	<version>0.9.8a</version>
+	<release>18.13</release>
+	<freshens>
+		<dep kind="package" name="openssl-devel-64bit"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="openssl-devel-64bit" epoch="0" version="0.9.8a" release="18.13" op="GE"/>
+	</requires>
+</atom>
+<package>
+	<name>openssl</name>
+	<summary>Security update for OpenSSL</summary>
+	<description>A previous openssl update (CVE-2006-2940) introduced
+another bug that can lead to a crash by providing a large
+prime number. An uninitialized pointer is freed during
+error handling. This bug allows remote attackers to crash
+services that use openssl.
+</description>
+	<arch>i586</arch>
+	<version>0.9.8a</version>
+	<release>18.13</release>
+	<filesize>1164162</filesize>
+	<installedsize>2662160</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>0.9.8a</version>
+			<release>18.13</release>
+			<filename>openssl-0.9.8a-18.13.i586.rpm</filename>
+			<filesize>1164162</filesize>
+			<installedsize>2662160</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+	</deps>
+</package>
+<package>
+	<name>openssl</name>
+	<summary>Security update for OpenSSL</summary>
+	<description>A previous openssl update (CVE-2006-2940) introduced
+another bug that can lead to a crash by providing a large
+prime number. An uninitialized pointer is freed during
+error handling. This bug allows remote attackers to crash
+services that use openssl.
+</description>
+	<arch>ppc</arch>
+	<version>0.9.8a</version>
+	<release>18.13</release>
+	<filesize>1213084</filesize>
+	<installedsize>2933552</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>0.9.8a</version>
+			<release>18.13</release>
+			<filename>openssl-0.9.8a-18.13.ppc.rpm</filename>
+			<filesize>1213084</filesize>
+			<installedsize>2933552</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+	</deps>
+</package>
+<package>
+	<name>openssl</name>
+	<summary>Security update for OpenSSL</summary>
+	<description>A previous openssl update (CVE-2006-2940) introduced
+another bug that can lead to a crash by providing a large
+prime number. An uninitialized pointer is freed during
+error handling. This bug allows remote attackers to crash
+services that use openssl.
+</description>
+	<arch>x86_64</arch>
+	<version>0.9.8a</version>
+	<release>18.13</release>
+	<filesize>1247939</filesize>
+	<installedsize>2992412</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>0.9.8a</version>
+			<release>18.13</release>
+			<filename>openssl-0.9.8a-18.13.x86_64.rpm</filename>
+			<filesize>1247939</filesize>
+			<installedsize>2992412</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+	</deps>
+</package>
+<package>
+	<name>openssl-32bit</name>
+	<summary>Security update for OpenSSL</summary>
+	<description>A previous openssl update (CVE-2006-2940) introduced
+another bug that can lead to a crash by providing a large
+prime number. An uninitialized pointer is freed during
+error handling. This bug allows remote attackers to crash
+services that use openssl.
+</description>
+	<arch>x86_64</arch>
+	<version>0.9.8a</version>
+	<release>18.13</release>
+	<filesize>664846</filesize>
+	<installedsize>1575432</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>0.9.8a</version>
+			<release>18.13</release>
+			<filename>openssl-32bit-0.9.8a-18.13.x86_64.rpm</filename>
+			<filesize>664846</filesize>
+			<installedsize>1575432</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+	</deps>
+</package>
+<package>
+	<name>openssl-64bit</name>
+	<summary>Security update for OpenSSL</summary>
+	<description>A previous openssl update (CVE-2006-2940) introduced
+another bug that can lead to a crash by providing a large
+prime number. An uninitialized pointer is freed during
+error handling. This bug allows remote attackers to crash
+services that use openssl.
+</description>
+	<arch>ppc</arch>
+	<version>0.9.8a</version>
+	<release>18.13</release>
+	<filesize>768037</filesize>
+	<installedsize>2493656</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>0.9.8a</version>
+			<release>18.13</release>
+			<filename>openssl-64bit-0.9.8a-18.13.ppc.rpm</filename>
+			<filesize>768037</filesize>
+			<installedsize>2493656</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+	</deps>
+</package>
+<package>
+	<name>openssl-devel</name>
+	<summary>Security update for OpenSSL</summary>
+	<description>A previous openssl update (CVE-2006-2940) introduced
+another bug that can lead to a crash by providing a large
+prime number. An uninitialized pointer is freed during
+error handling. This bug allows remote attackers to crash
+services that use openssl.
+</description>
+	<arch>i586</arch>
+	<version>0.9.8a</version>
+	<release>18.13</release>
+	<filesize>902492</filesize>
+	<installedsize>3848301</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>0.9.8a</version>
+			<release>18.13</release>
+			<filename>openssl-devel-0.9.8a-18.13.i586.rpm</filename>
+			<filesize>902492</filesize>
+			<installedsize>3848301</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+	</deps>
+</package>
+<package>
+	<name>openssl-devel</name>
+	<summary>Security update for OpenSSL</summary>
+	<description>A previous openssl update (CVE-2006-2940) introduced
+another bug that can lead to a crash by providing a large
+prime number. An uninitialized pointer is freed during
+error handling. This bug allows remote attackers to crash
+services that use openssl.
+</description>
+	<arch>ppc</arch>
+	<version>0.9.8a</version>
+	<release>18.13</release>
+	<filesize>956056</filesize>
+	<installedsize>3948274</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>0.9.8a</version>
+			<release>18.13</release>
+			<filename>openssl-devel-0.9.8a-18.13.ppc.rpm</filename>
+			<filesize>956056</filesize>
+			<installedsize>3948274</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+	</deps>
+</package>
+<package>
+	<name>openssl-devel</name>
+	<summary>Security update for OpenSSL</summary>
+	<description>A previous openssl update (CVE-2006-2940) introduced
+another bug that can lead to a crash by providing a large
+prime number. An uninitialized pointer is freed during
+error handling. This bug allows remote attackers to crash
+services that use openssl.
+</description>
+	<arch>x86_64</arch>
+	<version>0.9.8a</version>
+	<release>18.13</release>
+	<filesize>919775</filesize>
+	<installedsize>4755283</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>0.9.8a</version>
+			<release>18.13</release>
+			<filename>openssl-devel-0.9.8a-18.13.x86_64.rpm</filename>
+			<filesize>919775</filesize>
+			<installedsize>4755283</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+	</deps>
+</package>
+<package>
+	<name>openssl-devel-32bit</name>
+	<summary>Security update for OpenSSL</summary>
+	<description>A previous openssl update (CVE-2006-2940) introduced
+another bug that can lead to a crash by providing a large
+prime number. An uninitialized pointer is freed during
+error handling. This bug allows remote attackers to crash
+services that use openssl.
+</description>
+	<arch>x86_64</arch>
+	<version>0.9.8a</version>
+	<release>18.13</release>
+	<filesize>716523</filesize>
+	<installedsize>2676136</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>0.9.8a</version>
+			<release>18.13</release>
+			<filename>openssl-devel-32bit-0.9.8a-18.13.x86_64.rpm</filename>
+			<filesize>716523</filesize>
+			<installedsize>2676136</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+	</deps>
+</package>
+<package>
+	<name>openssl-devel-64bit</name>
+	<summary>Security update for OpenSSL</summary>
+	<description>A previous openssl update (CVE-2006-2940) introduced
+another bug that can lead to a crash by providing a large
+prime number. An uninitialized pointer is freed during
+error handling. This bug allows remote attackers to crash
+services that use openssl.
+</description>
+	<arch>ppc</arch>
+	<version>0.9.8a</version>
+	<release>18.13</release>
+	<filesize>774958</filesize>
+	<installedsize>3971296</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>0.9.8a</version>
+			<release>18.13</release>
+			<filename>openssl-devel-64bit-0.9.8a-18.13.ppc.rpm</filename>
+			<filesize>774958</filesize>
+			<installedsize>3971296</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+	</deps>
+</package>
+</subchannel></channel>

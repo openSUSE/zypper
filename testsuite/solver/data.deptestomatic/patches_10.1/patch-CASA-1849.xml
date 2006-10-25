@@ -1,0 +1,867 @@
+<channel><subchannel>                                                  
+
+<patch>
+	<name>CASA</name>
+	<arch>noarch</arch>
+	<version>1849</version>
+	<release>0</release>
+	<requires>
+		<dep kind="atom" name="CASA" epoch="0" version="1.6.659" release="1.4" op="EQ"/>
+		<dep kind="atom" name="CASA-32bit" epoch="0" version="1.6.659" release="1.4" op="EQ"/>
+		<dep kind="atom" name="CASA-64bit" epoch="0" version="1.6.659" release="1.4" op="EQ"/>
+		<dep kind="atom" name="CASA-devel" epoch="0" version="1.6.659" release="1.4" op="EQ"/>
+		<dep kind="atom" name="CASA-gui" epoch="0" version="1.6.659" release="1.4" op="EQ"/>
+	</requires>
+</patch>
+<atom>
+	<name>CASA</name>
+	<arch>i586</arch>
+	<version>1.6.659</version>
+	<release>1.4</release>
+	<freshens>
+		<dep kind="package" name="CASA"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="CASA" epoch="0" version="1.6.659" release="1.4" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>CASA</name>
+	<arch>ppc</arch>
+	<version>1.6.659</version>
+	<release>1.4</release>
+	<freshens>
+		<dep kind="package" name="CASA"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="CASA" epoch="0" version="1.6.659" release="1.4" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>CASA</name>
+	<arch>x86_64</arch>
+	<version>1.6.659</version>
+	<release>1.4</release>
+	<freshens>
+		<dep kind="package" name="CASA"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="CASA" epoch="0" version="1.6.659" release="1.4" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>CASA-32bit</name>
+	<arch>x86_64</arch>
+	<version>1.6.659</version>
+	<release>1.4</release>
+	<freshens>
+		<dep kind="package" name="CASA-32bit"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="CASA-32bit" epoch="0" version="1.6.659" release="1.4" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>CASA-64bit</name>
+	<arch>ppc</arch>
+	<version>1.6.659</version>
+	<release>1.4</release>
+	<freshens>
+		<dep kind="package" name="CASA-64bit"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="CASA-64bit" epoch="0" version="1.6.659" release="1.4" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>CASA-devel</name>
+	<arch>i586</arch>
+	<version>1.6.659</version>
+	<release>1.4</release>
+	<freshens>
+		<dep kind="package" name="CASA-devel"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="CASA-devel" epoch="0" version="1.6.659" release="1.4" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>CASA-devel</name>
+	<arch>ppc</arch>
+	<version>1.6.659</version>
+	<release>1.4</release>
+	<freshens>
+		<dep kind="package" name="CASA-devel"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="CASA-devel" epoch="0" version="1.6.659" release="1.4" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>CASA-devel</name>
+	<arch>x86_64</arch>
+	<version>1.6.659</version>
+	<release>1.4</release>
+	<freshens>
+		<dep kind="package" name="CASA-devel"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="CASA-devel" epoch="0" version="1.6.659" release="1.4" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>CASA-gui</name>
+	<arch>i586</arch>
+	<version>1.6.659</version>
+	<release>1.4</release>
+	<freshens>
+		<dep kind="package" name="CASA-gui"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="CASA-gui" epoch="0" version="1.6.659" release="1.4" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>CASA-gui</name>
+	<arch>ppc</arch>
+	<version>1.6.659</version>
+	<release>1.4</release>
+	<freshens>
+		<dep kind="package" name="CASA-gui"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="CASA-gui" epoch="0" version="1.6.659" release="1.4" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>CASA-gui</name>
+	<arch>x86_64</arch>
+	<version>1.6.659</version>
+	<release>1.4</release>
+	<freshens>
+		<dep kind="package" name="CASA-gui"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="CASA-gui" epoch="0" version="1.6.659" release="1.4" op="GE"/>
+	</requires>
+</atom>
+<package>
+	<name>CASA</name>
+	<summary>CASA: Securityfixes for problems found in audit.</summary>
+	<description>Various bugs and problems were fixed in the CASA
+authentication framework, some of them security relevant:
+- Secrets with special characters inside were handled
+  incorrectly.
+- Enhanced Salt generation.
+</description>
+	<arch>i586</arch>
+	<version>1.6.659</version>
+	<release>1.4</release>
+	<filesize>812104</filesize>
+	<installedsize>1086437</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>1.6.659</version>
+			<release>1.4</release>
+			<filename>CASA-1.6.659-1.4.i586.rpm</filename>
+			<filesize>812104</filesize>
+			<installedsize>1086437</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="libjmicasa.so.1"/>
+			<dep name="libjmicasa.so.1(jmicasa_1.0.0)"/>
+			<dep name="libjmicasa.so.1(libjmicasa.so.1)"/>
+			<dep name="libmicasa.so.1"/>
+			<dep name="libmicasa.so.1(VER_1.0)"/>
+			<dep name="libmicasa.so.1(libmicasa.so.1)"/>
+			<dep name="pam_micasa.so"/>
+			<dep name="pam_micasa.so(VER_1.0)"/>
+			<dep name="pam_micasa.so(pam_micasa.so)"/>
+			<dep name="mono(micasad)" op="EQ" version="1.6.2392.11248"/>
+			<dep name="mono(Novell.CASA.Common)" op="EQ" version="1.6.2392.11238"/>
+			<dep name="mono(Novell.CASA.miCASAWrapper)" op="EQ" version="1.6.2392.11239"/>
+			<dep name="CASA" op="EQ" version="1.6.659" release="1.4"/>
+		</provides>
+		<requires>
+			<dep name="mono" op="GE" version="1.1.13"/>
+			<dep name="mono-core" op="GE" version="1.1.13"/>
+			<dep name="fillup" pre="1"/>
+			<dep name="coreutils" pre="1"/>
+			<dep name="insserv" pre="1"/>
+			<dep name="sed" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(VersionedDependencies)" op="LE" version="3.0.3" release="1" pre="1"/>
+			<dep name="/bin/bash"/>
+			<dep name="/bin/sh"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)"/>
+			<dep name="libc.so.6(GLIBC_2.4)"/>
+			<dep name="libdl.so.2"/>
+			<dep name="libdl.so.2(GLIBC_2.0)"/>
+			<dep name="libdl.so.2(GLIBC_2.1)"/>
+			<dep name="libmicasa.so.1"/>
+			<dep name="libmicasa.so.1(VER_1.0)"/>
+			<dep name="libpam.so.0"/>
+			<dep name="libpam.so.0(LIBPAM_1.0)"/>
+			<dep name="libpthread.so.0"/>
+			<dep name="libpthread.so.0(GLIBC_2.0)"/>
+			<dep name="mono(Mono.Posix)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(System)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(System.Xml)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(mscorlib)" op="EQ" version="1.0.5000.0"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>CASA</name>
+	<summary>CASA: Securityfixes for problems found in audit.</summary>
+	<description>Various bugs and problems were fixed in the CASA
+authentication framework, some of them security relevant:
+- Secrets with special characters inside were handled
+  incorrectly.
+- Enhanced Salt generation.
+</description>
+	<arch>ppc</arch>
+	<version>1.6.659</version>
+	<release>1.4</release>
+	<filesize>815179</filesize>
+	<installedsize>1088865</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>1.6.659</version>
+			<release>1.4</release>
+			<filename>CASA-1.6.659-1.4.ppc.rpm</filename>
+			<filesize>815179</filesize>
+			<installedsize>1088865</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="libjmicasa.so.1"/>
+			<dep name="libjmicasa.so.1(jmicasa_1.0.0)"/>
+			<dep name="libjmicasa.so.1(libjmicasa.so.1)"/>
+			<dep name="libmicasa.so.1"/>
+			<dep name="libmicasa.so.1(VER_1.0)"/>
+			<dep name="libmicasa.so.1(libmicasa.so.1)"/>
+			<dep name="pam_micasa.so"/>
+			<dep name="pam_micasa.so(VER_1.0)"/>
+			<dep name="pam_micasa.so(pam_micasa.so)"/>
+			<dep name="mono(micasad)" op="EQ" version="1.6.2392.11646"/>
+			<dep name="mono(Novell.CASA.Common)" op="EQ" version="1.6.2392.11638"/>
+			<dep name="mono(Novell.CASA.miCASAWrapper)" op="EQ" version="1.6.2392.11638"/>
+			<dep name="CASA" op="EQ" version="1.6.659" release="1.4"/>
+		</provides>
+		<requires>
+			<dep name="mono" op="GE" version="1.1.13"/>
+			<dep name="mono-core" op="GE" version="1.1.13"/>
+			<dep name="fillup" pre="1"/>
+			<dep name="coreutils" pre="1"/>
+			<dep name="insserv" pre="1"/>
+			<dep name="sed" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(VersionedDependencies)" op="LE" version="3.0.3" release="1" pre="1"/>
+			<dep name="/bin/bash"/>
+			<dep name="/bin/sh"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)"/>
+			<dep name="libc.so.6(GLIBC_2.4)"/>
+			<dep name="libdl.so.2"/>
+			<dep name="libdl.so.2(GLIBC_2.0)"/>
+			<dep name="libdl.so.2(GLIBC_2.1)"/>
+			<dep name="libmicasa.so.1"/>
+			<dep name="libmicasa.so.1(VER_1.0)"/>
+			<dep name="libpam.so.0"/>
+			<dep name="libpam.so.0(LIBPAM_1.0)"/>
+			<dep name="libpthread.so.0"/>
+			<dep name="libpthread.so.0(GLIBC_2.0)"/>
+			<dep name="mono(Mono.Posix)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(System)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(System.Xml)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(mscorlib)" op="EQ" version="1.0.5000.0"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>CASA</name>
+	<summary>CASA: Securityfixes for problems found in audit.</summary>
+	<description>Various bugs and problems were fixed in the CASA
+authentication framework, some of them security relevant:
+- Secrets with special characters inside were handled
+  incorrectly.
+- Enhanced Salt generation.
+</description>
+	<arch>x86_64</arch>
+	<version>1.6.659</version>
+	<release>1.4</release>
+	<filesize>814939</filesize>
+	<installedsize>1089583</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>1.6.659</version>
+			<release>1.4</release>
+			<filename>CASA-1.6.659-1.4.x86_64.rpm</filename>
+			<filesize>814939</filesize>
+			<installedsize>1089583</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="libjmicasa.so.1()(64bit)"/>
+			<dep name="libjmicasa.so.1(jmicasa_1.0.0)(64bit)"/>
+			<dep name="libjmicasa.so.1(libjmicasa.so.1)(64bit)"/>
+			<dep name="libmicasa.so.1()(64bit)"/>
+			<dep name="libmicasa.so.1(VER_1.0)(64bit)"/>
+			<dep name="libmicasa.so.1(libmicasa.so.1)(64bit)"/>
+			<dep name="pam_micasa.so()(64bit)"/>
+			<dep name="pam_micasa.so(VER_1.0)(64bit)"/>
+			<dep name="pam_micasa.so(pam_micasa.so)(64bit)"/>
+			<dep name="mono(micasad)" op="EQ" version="1.6.2392.11295"/>
+			<dep name="mono(Novell.CASA.Common)" op="EQ" version="1.6.2392.11291"/>
+			<dep name="mono(Novell.CASA.miCASAWrapper)" op="EQ" version="1.6.2392.11291"/>
+			<dep name="CASA" op="EQ" version="1.6.659" release="1.4"/>
+		</provides>
+		<requires>
+			<dep name="mono" op="GE" version="1.1.13"/>
+			<dep name="mono-core" op="GE" version="1.1.13"/>
+			<dep name="fillup" pre="1"/>
+			<dep name="coreutils" pre="1"/>
+			<dep name="insserv" pre="1"/>
+			<dep name="sed" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(VersionedDependencies)" op="LE" version="3.0.3" release="1" pre="1"/>
+			<dep name="/bin/bash"/>
+			<dep name="/bin/sh"/>
+			<dep name="libc.so.6()(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.4)(64bit)"/>
+			<dep name="libdl.so.2()(64bit)"/>
+			<dep name="libdl.so.2(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libmicasa.so.1()(64bit)"/>
+			<dep name="libmicasa.so.1(VER_1.0)(64bit)"/>
+			<dep name="libpam.so.0()(64bit)"/>
+			<dep name="libpam.so.0(LIBPAM_1.0)(64bit)"/>
+			<dep name="libpthread.so.0()(64bit)"/>
+			<dep name="libpthread.so.0(GLIBC_2.2.5)(64bit)"/>
+			<dep name="mono(Mono.Posix)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(System)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(System.Xml)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(mscorlib)" op="EQ" version="1.0.5000.0"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>CASA-32bit</name>
+	<summary>CASA: Securityfixes for problems found in audit.</summary>
+	<description>Various bugs and problems were fixed in the CASA
+authentication framework, some of them security relevant:
+- Secrets with special characters inside were handled
+  incorrectly.
+- Enhanced Salt generation.
+</description>
+	<arch>x86_64</arch>
+	<version>1.6.659</version>
+	<release>1.4</release>
+	<filesize>49543</filesize>
+	<installedsize>57656</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>1.6.659</version>
+			<release>1.4</release>
+			<filename>CASA-32bit-1.6.659-1.4.x86_64.rpm</filename>
+			<filesize>49543</filesize>
+			<installedsize>57656</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="libjmicasa.so.1"/>
+			<dep name="libjmicasa.so.1(jmicasa_1.0.0)"/>
+			<dep name="libjmicasa.so.1(libjmicasa.so.1)"/>
+			<dep name="libmicasa.so.1"/>
+			<dep name="libmicasa.so.1(VER_1.0)"/>
+			<dep name="libmicasa.so.1(libmicasa.so.1)"/>
+			<dep name="pam_micasa.so"/>
+			<dep name="pam_micasa.so(VER_1.0)"/>
+			<dep name="pam_micasa.so(pam_micasa.so)"/>
+			<dep name="CASA-32bit" op="EQ" version="1.6.659" release="1.4"/>
+		</provides>
+		<requires>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)"/>
+			<dep name="libc.so.6(GLIBC_2.4)"/>
+			<dep name="libdl.so.2"/>
+			<dep name="libdl.so.2(GLIBC_2.0)"/>
+			<dep name="libdl.so.2(GLIBC_2.1)"/>
+			<dep name="libmicasa.so.1"/>
+			<dep name="libmicasa.so.1(VER_1.0)"/>
+			<dep name="libpam.so.0"/>
+			<dep name="libpam.so.0(LIBPAM_1.0)"/>
+			<dep name="libpthread.so.0"/>
+			<dep name="libpthread.so.0(GLIBC_2.0)"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>CASA-64bit</name>
+	<summary>CASA: Securityfixes for problems found in audit.</summary>
+	<description>Various bugs and problems were fixed in the CASA
+authentication framework, some of them security relevant:
+- Secrets with special characters inside were handled
+  incorrectly.
+- Enhanced Salt generation.
+</description>
+	<arch>ppc</arch>
+	<version>1.6.659</version>
+	<release>1.4</release>
+	<filesize>51139</filesize>
+	<installedsize>73568</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>1.6.659</version>
+			<release>1.4</release>
+			<filename>CASA-64bit-1.6.659-1.4.ppc.rpm</filename>
+			<filesize>51139</filesize>
+			<installedsize>73568</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="libjmicasa.so.1()(64bit)"/>
+			<dep name="libjmicasa.so.1(jmicasa_1.0.0)(64bit)"/>
+			<dep name="libjmicasa.so.1(libjmicasa.so.1)(64bit)"/>
+			<dep name="libmicasa.so.1()(64bit)"/>
+			<dep name="libmicasa.so.1(VER_1.0)(64bit)"/>
+			<dep name="libmicasa.so.1(libmicasa.so.1)(64bit)"/>
+			<dep name="pam_micasa.so()(64bit)"/>
+			<dep name="pam_micasa.so(VER_1.0)(64bit)"/>
+			<dep name="pam_micasa.so(pam_micasa.so)(64bit)"/>
+			<dep name="CASA-64bit" op="EQ" version="1.6.659" release="1.4"/>
+		</provides>
+		<requires>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="libc.so.6()(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.3)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.4)(64bit)"/>
+			<dep name="libdl.so.2()(64bit)"/>
+			<dep name="libdl.so.2(GLIBC_2.3)(64bit)"/>
+			<dep name="libmicasa.so.1()(64bit)"/>
+			<dep name="libmicasa.so.1(VER_1.0)(64bit)"/>
+			<dep name="libpam.so.0()(64bit)"/>
+			<dep name="libpam.so.0(LIBPAM_1.0)(64bit)"/>
+			<dep name="libpthread.so.0()(64bit)"/>
+			<dep name="libpthread.so.0(GLIBC_2.3)(64bit)"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>CASA-devel</name>
+	<summary>CASA: Securityfixes for problems found in audit.</summary>
+	<description>Various bugs and problems were fixed in the CASA
+authentication framework, some of them security relevant:
+- Secrets with special characters inside were handled
+  incorrectly.
+- Enhanced Salt generation.
+</description>
+	<arch>i586</arch>
+	<version>1.6.659</version>
+	<release>1.4</release>
+	<filesize>38783</filesize>
+	<installedsize>23282</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>1.6.659</version>
+			<release>1.4</release>
+			<filename>CASA-devel-1.6.659-1.4.i586.rpm</filename>
+			<filesize>38783</filesize>
+			<installedsize>23282</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="CASA-devel"/>
+			<dep name="CASA-devel" op="EQ" version="1.6.659" release="1.4"/>
+		</provides>
+		<requires>
+			<dep name="CASA" op="GE" version="1.0.0"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>CASA-devel</name>
+	<summary>CASA: Securityfixes for problems found in audit.</summary>
+	<description>Various bugs and problems were fixed in the CASA
+authentication framework, some of them security relevant:
+- Secrets with special characters inside were handled
+  incorrectly.
+- Enhanced Salt generation.
+</description>
+	<arch>ppc</arch>
+	<version>1.6.659</version>
+	<release>1.4</release>
+	<filesize>38736</filesize>
+	<installedsize>23272</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>1.6.659</version>
+			<release>1.4</release>
+			<filename>CASA-devel-1.6.659-1.4.ppc.rpm</filename>
+			<filesize>38736</filesize>
+			<installedsize>23272</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="CASA-devel"/>
+			<dep name="CASA-devel" op="EQ" version="1.6.659" release="1.4"/>
+		</provides>
+		<requires>
+			<dep name="CASA" op="GE" version="1.0.0"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>CASA-devel</name>
+	<summary>CASA: Securityfixes for problems found in audit.</summary>
+	<description>Various bugs and problems were fixed in the CASA
+authentication framework, some of them security relevant:
+- Secrets with special characters inside were handled
+  incorrectly.
+- Enhanced Salt generation.
+</description>
+	<arch>x86_64</arch>
+	<version>1.6.659</version>
+	<release>1.4</release>
+	<filesize>38783</filesize>
+	<installedsize>23282</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>1.6.659</version>
+			<release>1.4</release>
+			<filename>CASA-devel-1.6.659-1.4.x86_64.rpm</filename>
+			<filesize>38783</filesize>
+			<installedsize>23282</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="CASA-devel"/>
+			<dep name="CASA-devel" op="EQ" version="1.6.659" release="1.4"/>
+		</provides>
+		<requires>
+			<dep name="CASA" op="GE" version="1.0.0"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>CASA-gui</name>
+	<summary>CASA: Securityfixes for problems found in audit.</summary>
+	<description>Various bugs and problems were fixed in the CASA
+authentication framework, some of them security relevant:
+- Secrets with special characters inside were handled
+  incorrectly.
+- Enhanced Salt generation.
+</description>
+	<arch>i586</arch>
+	<version>1.6.659</version>
+	<release>1.4</release>
+	<filesize>415781</filesize>
+	<installedsize>1103984</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>1.6.659</version>
+			<release>1.4</release>
+			<filename>CASA-gui-1.6.659-1.4.i586.rpm</filename>
+			<filesize>415781</filesize>
+			<installedsize>1103984</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="CASA-gui"/>
+			<dep name="libad_gk.so.1"/>
+			<dep name="libkwallets_rw.so.1"/>
+			<dep name="mono(CASAManager)" op="EQ" version="1.6.2392.11250"/>
+			<dep name="mono(Novell.CASA.A-D)" op="EQ" version="1.6.2392.11246"/>
+			<dep name="mono(Novell.CASA.CASAPolicy)" op="EQ" version="1.6.2392.11240"/>
+			<dep name="mono(Novell.CASA.DataEngines.FireFox)" op="EQ" version="1.6.2392.11245"/>
+			<dep name="mono(Novell.CASA.DataEngines.GnomeKeyring)" op="EQ" version="0.0.0.0"/>
+			<dep name="mono(Novell.CASA.DataEngines.KWallet)" op="EQ" version="1.6.2392.11241"/>
+			<dep name="CASA-gui" op="EQ" version="1.6.659" release="1.4"/>
+		</provides>
+		<requires>
+			<dep name="CASA" op="EQ" version="1.6.659"/>
+			<dep name="gtk-sharp" op="GE" version="1.0.9"/>
+			<dep name="gtk2" op="GE" version="2.4.14"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(VersionedDependencies)" op="LE" version="3.0.3" release="1" pre="1"/>
+			<dep name="/bin/sh"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)"/>
+			<dep name="libdl.so.2"/>
+			<dep name="libdl.so.2(GLIBC_2.0)"/>
+			<dep name="libdl.so.2(GLIBC_2.1)"/>
+			<dep name="libgcc_s.so.1"/>
+			<dep name="libgcc_s.so.1(GCC_3.0)"/>
+			<dep name="libglib-2.0.so.0"/>
+			<dep name="libm.so.6"/>
+			<dep name="libpthread.so.0"/>
+			<dep name="libpthread.so.0(GLIBC_2.0)"/>
+			<dep name="libqt-mt.so.3"/>
+			<dep name="libstdc++.so.6"/>
+			<dep name="libstdc++.so.6(CXXABI_1.3)"/>
+			<dep name="libstdc++.so.6(GLIBCXX_3.4)"/>
+			<dep name="mono(Novell.CASA.Common)" op="EQ" version="1.6.2392.11238"/>
+			<dep name="mono(Novell.CASA.miCASAWrapper)" op="EQ" version="1.6.2392.11239"/>
+			<dep name="mono(System)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(System.Xml)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(gdk-sharp)" op="EQ" version="1.0.0.0"/>
+			<dep name="mono(glade-sharp)" op="EQ" version="1.0.0.0"/>
+			<dep name="mono(glib-sharp)" op="EQ" version="1.0.0.0"/>
+			<dep name="mono(gtk-sharp)" op="EQ" version="1.0.0.0"/>
+			<dep name="mono(mscorlib)" op="EQ" version="1.0.5000.0"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>CASA-gui</name>
+	<summary>CASA: Securityfixes for problems found in audit.</summary>
+	<description>Various bugs and problems were fixed in the CASA
+authentication framework, some of them security relevant:
+- Secrets with special characters inside were handled
+  incorrectly.
+- Enhanced Salt generation.
+</description>
+	<arch>ppc</arch>
+	<version>1.6.659</version>
+	<release>1.4</release>
+	<filesize>423334</filesize>
+	<installedsize>1125700</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>1.6.659</version>
+			<release>1.4</release>
+			<filename>CASA-gui-1.6.659-1.4.ppc.rpm</filename>
+			<filesize>423334</filesize>
+			<installedsize>1125700</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="CASA-gui"/>
+			<dep name="libad_gk.so.1"/>
+			<dep name="libkwallets_rw.so.1"/>
+			<dep name="mono(CASAManager)" op="EQ" version="1.6.2392.11648"/>
+			<dep name="mono(Novell.CASA.A-D)" op="EQ" version="1.6.2392.11645"/>
+			<dep name="mono(Novell.CASA.CASAPolicy)" op="EQ" version="1.6.2392.11639"/>
+			<dep name="mono(Novell.CASA.DataEngines.FireFox)" op="EQ" version="1.6.2392.11644"/>
+			<dep name="mono(Novell.CASA.DataEngines.GnomeKeyring)" op="EQ" version="0.0.0.0"/>
+			<dep name="mono(Novell.CASA.DataEngines.KWallet)" op="EQ" version="1.6.2392.11640"/>
+			<dep name="CASA-gui" op="EQ" version="1.6.659" release="1.4"/>
+		</provides>
+		<requires>
+			<dep name="CASA" op="EQ" version="1.6.659"/>
+			<dep name="gtk-sharp" op="GE" version="1.0.9"/>
+			<dep name="gtk2" op="GE" version="2.4.14"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(VersionedDependencies)" op="LE" version="3.0.3" release="1" pre="1"/>
+			<dep name="/bin/sh"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)"/>
+			<dep name="libc.so.6(GLIBC_2.4)"/>
+			<dep name="libdl.so.2"/>
+			<dep name="libdl.so.2(GLIBC_2.0)"/>
+			<dep name="libdl.so.2(GLIBC_2.1)"/>
+			<dep name="libgcc_s.so.1"/>
+			<dep name="libgcc_s.so.1(GCC_3.0)"/>
+			<dep name="libglib-2.0.so.0"/>
+			<dep name="libm.so.6"/>
+			<dep name="libpthread.so.0"/>
+			<dep name="libpthread.so.0(GLIBC_2.0)"/>
+			<dep name="libqt-mt.so.3"/>
+			<dep name="libstdc++.so.6"/>
+			<dep name="libstdc++.so.6(CXXABI_1.3)"/>
+			<dep name="libstdc++.so.6(GLIBCXX_3.4)"/>
+			<dep name="mono(Novell.CASA.Common)" op="EQ" version="1.6.2392.11638"/>
+			<dep name="mono(Novell.CASA.miCASAWrapper)" op="EQ" version="1.6.2392.11638"/>
+			<dep name="mono(System)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(System.Xml)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(gdk-sharp)" op="EQ" version="1.0.0.0"/>
+			<dep name="mono(glade-sharp)" op="EQ" version="1.0.0.0"/>
+			<dep name="mono(glib-sharp)" op="EQ" version="1.0.0.0"/>
+			<dep name="mono(gtk-sharp)" op="EQ" version="1.0.0.0"/>
+			<dep name="mono(mscorlib)" op="EQ" version="1.0.5000.0"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>CASA-gui</name>
+	<summary>CASA: Securityfixes for problems found in audit.</summary>
+	<description>Various bugs and problems were fixed in the CASA
+authentication framework, some of them security relevant:
+- Secrets with special characters inside were handled
+  incorrectly.
+- Enhanced Salt generation.
+</description>
+	<arch>x86_64</arch>
+	<version>1.6.659</version>
+	<release>1.4</release>
+	<filesize>417572</filesize>
+	<installedsize>1105796</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>1.6.659</version>
+			<release>1.4</release>
+			<filename>CASA-gui-1.6.659-1.4.x86_64.rpm</filename>
+			<filesize>417572</filesize>
+			<installedsize>1105796</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="CASA-gui"/>
+			<dep name="libad_gk.so.1()(64bit)"/>
+			<dep name="libkwallets_rw.so.1()(64bit)"/>
+			<dep name="mono(CASAManager)" op="EQ" version="1.6.2392.11296"/>
+			<dep name="mono(Novell.CASA.A-D)" op="EQ" version="1.6.2392.11294"/>
+			<dep name="mono(Novell.CASA.CASAPolicy)" op="EQ" version="1.6.2392.11292"/>
+			<dep name="mono(Novell.CASA.DataEngines.FireFox)" op="EQ" version="1.6.2392.11294"/>
+			<dep name="mono(Novell.CASA.DataEngines.GnomeKeyring)" op="EQ" version="0.0.0.0"/>
+			<dep name="mono(Novell.CASA.DataEngines.KWallet)" op="EQ" version="1.6.2392.11292"/>
+			<dep name="CASA-gui" op="EQ" version="1.6.659" release="1.4"/>
+		</provides>
+		<requires>
+			<dep name="CASA" op="EQ" version="1.6.659"/>
+			<dep name="gtk-sharp" op="GE" version="1.0.9"/>
+			<dep name="gtk2" op="GE" version="2.4.14"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(VersionedDependencies)" op="LE" version="3.0.3" release="1" pre="1"/>
+			<dep name="/bin/sh"/>
+			<dep name="libc.so.6()(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)(64bit)"/>
+			<dep name="libdl.so.2()(64bit)"/>
+			<dep name="libdl.so.2(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libgcc_s.so.1()(64bit)"/>
+			<dep name="libgcc_s.so.1(GCC_3.0)(64bit)"/>
+			<dep name="libglib-2.0.so.0()(64bit)"/>
+			<dep name="libm.so.6()(64bit)"/>
+			<dep name="libpthread.so.0()(64bit)"/>
+			<dep name="libpthread.so.0(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libqt-mt.so.3()(64bit)"/>
+			<dep name="libstdc++.so.6()(64bit)"/>
+			<dep name="libstdc++.so.6(CXXABI_1.3)(64bit)"/>
+			<dep name="libstdc++.so.6(GLIBCXX_3.4)(64bit)"/>
+			<dep name="mono(Novell.CASA.Common)" op="EQ" version="1.6.2392.11291"/>
+			<dep name="mono(Novell.CASA.miCASAWrapper)" op="EQ" version="1.6.2392.11291"/>
+			<dep name="mono(System)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(System.Xml)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(gdk-sharp)" op="EQ" version="1.0.0.0"/>
+			<dep name="mono(glade-sharp)" op="EQ" version="1.0.0.0"/>
+			<dep name="mono(glib-sharp)" op="EQ" version="1.0.0.0"/>
+			<dep name="mono(gtk-sharp)" op="EQ" version="1.0.0.0"/>
+			<dep name="mono(mscorlib)" op="EQ" version="1.0.5000.0"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+</subchannel></channel>

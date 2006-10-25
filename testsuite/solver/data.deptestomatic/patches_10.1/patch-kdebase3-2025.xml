@@ -1,0 +1,2087 @@
+<channel><subchannel>                                                  
+
+<patch>
+	<name>kdebase3</name>
+	<arch>noarch</arch>
+	<version>2025</version>
+	<release>0</release>
+	<requires>
+		<dep kind="atom" name="kdebase3" epoch="0" version="3.5.1" release="69.32" op="EQ"/>
+		<dep kind="atom" name="kdebase3-32bit" epoch="0" version="3.5.1" release="69.32" op="EQ"/>
+		<dep kind="atom" name="kdebase3-64bit" epoch="0" version="3.5.1" release="69.32" op="EQ"/>
+	</requires>
+</patch>
+<atom>
+	<name>kdebase3</name>
+	<arch>i586</arch>
+	<version>3.5.1</version>
+	<release>69.32</release>
+	<freshens>
+		<dep kind="package" name="kdebase3"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="kdebase3" epoch="0" version="3.5.1" release="69.32" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>kdebase3</name>
+	<arch>ppc</arch>
+	<version>3.5.1</version>
+	<release>69.32</release>
+	<freshens>
+		<dep kind="package" name="kdebase3"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="kdebase3" epoch="0" version="3.5.1" release="69.32" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>kdebase3</name>
+	<arch>x86_64</arch>
+	<version>3.5.1</version>
+	<release>69.32</release>
+	<freshens>
+		<dep kind="package" name="kdebase3"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="kdebase3" epoch="0" version="3.5.1" release="69.32" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>kdebase3-32bit</name>
+	<arch>x86_64</arch>
+	<version>3.5.1</version>
+	<release>69.32</release>
+	<freshens>
+		<dep kind="package" name="kdebase3-32bit"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="kdebase3-32bit" epoch="0" version="3.5.1" release="69.32" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>kdebase3-64bit</name>
+	<arch>ppc</arch>
+	<version>3.5.1</version>
+	<release>69.32</release>
+	<freshens>
+		<dep kind="package" name="kdebase3-64bit"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="kdebase3-64bit" epoch="0" version="3.5.1" release="69.32" op="GE"/>
+	</requires>
+</atom>
+<package>
+	<name>kdebase3</name>
+	<summary>Collective Update for several minor glitches.</summary>
+	<description>This update is a collective update for 10.1 that fixes the
+following issues:
+- 160259: sorting of menu entries is no longer enforced
+- 176828: ignored partitions are no longer listed in
+  sysinfo:/
+- 156621: reverts parts of kicker-resizing patch due to
+  regressions
+- 180686: fix admin button in kdm theme
+- 181122: fix screensaver no longer starting
+- 183672: use sax.mo for translating kxkb GUI
+- 155250: Update to the focus-stealing-prevention blacklist
+- 163184: Allow new items in media:/ subdirs
+- 167919: KControl / Energy redirects to KPowersave if
+  KPowersave manages DPMS
+- 179690: sysfs parsing support for KInfoCenter / USB
+- 200553: ksystraycmd arguments are de-quoted
+</description>
+	<arch>i586</arch>
+	<version>3.5.1</version>
+	<release>69.32</release>
+	<filesize>25737442</filesize>
+	<installedsize>51733022</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>3.5.1</version>
+			<release>69.32</release>
+			<filename>kdebase3-3.5.1-69.32.i586.rpm</filename>
+			<filesize>25737442</filesize>
+			<installedsize>51733022</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="windowmanager"/>
+			<dep name="kfontinst"/>
+			<dep name="kio_fish"/>
+			<dep name="kdebase3-konqueror"/>
+			<dep name="kdialog"/>
+			<dep name="kdebase3-khotkeys"/>
+			<dep name="kdebase"/>
+			<dep name="appletproxy.so"/>
+			<dep name="clock_panelapplet.so"/>
+			<dep name="cursorthumbnail.so"/>
+			<dep name="djvuthumbnail.so"/>
+			<dep name="dockbar_panelextension.so"/>
+			<dep name="exrthumbnail.so"/>
+			<dep name="extensionproxy.so"/>
+			<dep name="fontthumbnail.so"/>
+			<dep name="htmlthumbnail.so"/>
+			<dep name="imagethumbnail.so"/>
+			<dep name="kaccess.so"/>
+			<dep name="kasbar_panelextension.so"/>
+			<dep name="kate.so"/>
+			<dep name="kcm_access.so"/>
+			<dep name="kcm_arts.so"/>
+			<dep name="kcm_background.so"/>
+			<dep name="kcm_bell.so"/>
+			<dep name="kcm_cgi.so"/>
+			<dep name="kcm_colors.so"/>
+			<dep name="kcm_componentchooser.so"/>
+			<dep name="kcm_crypto.so"/>
+			<dep name="kcm_css.so"/>
+			<dep name="kcm_display.so"/>
+			<dep name="kcm_energy.so"/>
+			<dep name="kcm_filetypes.so"/>
+			<dep name="kcm_fontinst.so"/>
+			<dep name="kcm_fonts.so"/>
+			<dep name="kcm_history.so"/>
+			<dep name="kcm_icons.so"/>
+			<dep name="kcm_info.so"/>
+			<dep name="kcm_input.so"/>
+			<dep name="kcm_ioslaveinfo.so"/>
+			<dep name="kcm_joystick.so"/>
+			<dep name="kcm_kded.so"/>
+			<dep name="kcm_kdm.so"/>
+			<dep name="kcm_kdnssd.so"/>
+			<dep name="kcm_keyboard.so"/>
+			<dep name="kcm_keys.so"/>
+			<dep name="kcm_khotkeys.so"/>
+			<dep name="kcm_khotkeys_init.so"/>
+			<dep name="kcm_kicker.so"/>
+			<dep name="kcm_kio.so"/>
+			<dep name="kcm_knotify.so"/>
+			<dep name="kcm_konq.so"/>
+			<dep name="kcm_konqhtml.so"/>
+			<dep name="kcm_konsole.so"/>
+			<dep name="kcm_ksplashthemes.so"/>
+			<dep name="kcm_kthememanager.so"/>
+			<dep name="kcm_kurifilt.so"/>
+			<dep name="kcm_kwindecoration.so"/>
+			<dep name="kcm_kwinoptions.so"/>
+			<dep name="kcm_kwinrules.so"/>
+			<dep name="kcm_launch.so"/>
+			<dep name="kcm_locale.so"/>
+			<dep name="kcm_media.so"/>
+			<dep name="kcm_nic.so"/>
+			<dep name="kcm_nsplugins.so"/>
+			<dep name="kcm_performance.so"/>
+			<dep name="kcm_printmgr.so"/>
+			<dep name="kcm_privacy.so"/>
+			<dep name="kcm_randr.so"/>
+			<dep name="kcm_screensaver.so"/>
+			<dep name="kcm_smserver.so"/>
+			<dep name="kcm_spellchecking.so"/>
+			<dep name="kcm_style.so"/>
+			<dep name="kcm_taskbar.so"/>
+			<dep name="kcm_usb.so"/>
+			<dep name="kcm_useraccount.so"/>
+			<dep name="kcm_xinerama.so"/>
+			<dep name="kcminit.so"/>
+			<dep name="kcminit_startup.so"/>
+			<dep name="kcontrol.so"/>
+			<dep name="kcontroledit.so"/>
+			<dep name="kded_favicons.so"/>
+			<dep name="kded_homedirnotify.so"/>
+			<dep name="kded_khotkeys.so"/>
+			<dep name="kded_konqy_preloader.so"/>
+			<dep name="kded_kwrited.so"/>
+			<dep name="kded_mediamanager.so"/>
+			<dep name="kded_medianotifier.so"/>
+			<dep name="kded_remotedirnotify.so"/>
+			<dep name="kded_systemdirnotify.so"/>
+			<dep name="kdesktop.so"/>
+			<dep name="keditbookmarks.so"/>
+			<dep name="kfile_font.so"/>
+			<dep name="kfile_media.so"/>
+			<dep name="kfile_trash.so"/>
+			<dep name="kfmclient.so"/>
+			<dep name="kgreet_winbind.so"/>
+			<dep name="khelpcenter.so"/>
+			<dep name="khotkeys.so"/>
+			<dep name="kicker.so"/>
+			<dep name="kickermenu_find.so"/>
+			<dep name="kickermenu_kdeprint.so"/>
+			<dep name="kickermenu_konqueror.so"/>
+			<dep name="kickermenu_konsole.so"/>
+			<dep name="kickermenu_prefmenu.so"/>
+			<dep name="kickermenu_recentdocs.so"/>
+			<dep name="kickermenu_remotemenu.so"/>
+			<dep name="kickermenu_systemmenu.so"/>
+			<dep name="kio_about.so"/>
+			<dep name="kio_cgi.so"/>
+			<dep name="kio_filter.so"/>
+			<dep name="kio_finger.so"/>
+			<dep name="kio_fish.so"/>
+			<dep name="kio_floppy.so"/>
+			<dep name="kio_fonts.so"/>
+			<dep name="kio_home.so"/>
+			<dep name="kio_info.so"/>
+			<dep name="kio_ldap.so"/>
+			<dep name="kio_mac.so"/>
+			<dep name="kio_man.so"/>
+			<dep name="kio_media.so"/>
+			<dep name="kio_nfs.so"/>
+			<dep name="kio_nntp.so"/>
+			<dep name="kio_pop3.so"/>
+			<dep name="kio_print.so"/>
+			<dep name="kio_remote.so"/>
+			<dep name="kio_settings.so"/>
+			<dep name="kio_sftp.so"/>
+			<dep name="kio_smtp.so"/>
+			<dep name="kio_system.so"/>
+			<dep name="kio_tar.so"/>
+			<dep name="kio_thumbnail.so"/>
+			<dep name="kio_trash.so"/>
+			<dep name="kjobviewer.so"/>
+			<dep name="klipper.so"/>
+			<dep name="klipper_panelapplet.so"/>
+			<dep name="kmenuedit.so"/>
+			<dep name="konq_aboutpage.so"/>
+			<dep name="konq_iconview.so"/>
+			<dep name="konq_listview.so"/>
+			<dep name="konq_remoteencoding.so"/>
+			<dep name="konq_shellcmdplugin.so"/>
+			<dep name="konq_sidebar.so"/>
+			<dep name="konq_sidebartree_bookmarks.so"/>
+			<dep name="konq_sidebartree_dirtree.so"/>
+			<dep name="konq_sidebartree_history.so"/>
+			<dep name="konq_sound.so"/>
+			<dep name="konqsidebar_tree.so"/>
+			<dep name="konqsidebar_web.so"/>
+			<dep name="konqueror.so"/>
+			<dep name="konsole.so"/>
+			<dep name="kprinter.so"/>
+			<dep name="ksmserver.so"/>
+			<dep name="ksplashdefault.so"/>
+			<dep name="ksplashredmond.so"/>
+			<dep name="ksplashstandard.so"/>
+			<dep name="kstyle_keramik_config.so"/>
+			<dep name="kwin.so"/>
+			<dep name="kwin3_b2.so"/>
+			<dep name="kwin3_default.so"/>
+			<dep name="kwin3_keramik.so"/>
+			<dep name="kwin3_laptop.so"/>
+			<dep name="kwin3_modernsys.so"/>
+			<dep name="kwin3_plastik.so"/>
+			<dep name="kwin3_quartz.so"/>
+			<dep name="kwin3_redmond.so"/>
+			<dep name="kwin3_web.so"/>
+			<dep name="kwin_b2_config.so"/>
+			<dep name="kwin_default_config.so"/>
+			<dep name="kwin_keramik_config.so"/>
+			<dep name="kwin_modernsys_config.so"/>
+			<dep name="kwin_plastik_config.so"/>
+			<dep name="kwin_quartz_config.so"/>
+			<dep name="kwin_rules_dialog.so"/>
+			<dep name="kwrite.so"/>
+			<dep name="kxkb.so"/>
+			<dep name="launcher_panelapplet.so"/>
+			<dep name="libkasbar.so.1"/>
+			<dep name="libkateinterfaces.so.0"/>
+			<dep name="libkateutils.so.0"/>
+			<dep name="libkdecorations.so.1"/>
+			<dep name="libkdeinit_appletproxy.so"/>
+			<dep name="libkdeinit_extensionproxy.so"/>
+			<dep name="libkdeinit_kaccess.so"/>
+			<dep name="libkdeinit_kate.so"/>
+			<dep name="libkdeinit_kcminit.so"/>
+			<dep name="libkdeinit_kcminit_startup.so"/>
+			<dep name="libkdeinit_kcontrol.so"/>
+			<dep name="libkdeinit_kcontroledit.so"/>
+			<dep name="libkdeinit_kdesktop.so"/>
+			<dep name="libkdeinit_keditbookmarks.so"/>
+			<dep name="libkdeinit_kfmclient.so"/>
+			<dep name="libkdeinit_khelpcenter.so"/>
+			<dep name="libkdeinit_khotkeys.so"/>
+			<dep name="libkdeinit_kicker.so"/>
+			<dep name="libkdeinit_kjobviewer.so"/>
+			<dep name="libkdeinit_klipper.so"/>
+			<dep name="libkdeinit_kmenuedit.so"/>
+			<dep name="libkdeinit_konqueror.so"/>
+			<dep name="libkdeinit_konsole.so"/>
+			<dep name="libkdeinit_kprinter.so"/>
+			<dep name="libkdeinit_ksmserver.so"/>
+			<dep name="libkdeinit_kwin.so"/>
+			<dep name="libkdeinit_kwin_rules_dialog.so"/>
+			<dep name="libkdeinit_kwrite.so"/>
+			<dep name="libkdeinit_kxkb.so"/>
+			<dep name="libkdeprint_part.so"/>
+			<dep name="libkfindpart.so"/>
+			<dep name="libkfontinst.so.0"/>
+			<dep name="libkfontviewpart.so"/>
+			<dep name="libkhotkeys_shared.so.1"/>
+			<dep name="libkhtmlkttsdplugin.so"/>
+			<dep name="libkickermain.so.1"/>
+			<dep name="libkmanpart.so"/>
+			<dep name="libkonq.so.4"/>
+			<dep name="libkonqsidebarplugin.so.1"/>
+			<dep name="libkonsolepart.so"/>
+			<dep name="libksgrd.so.1"/>
+			<dep name="libkshorturifilter.so"/>
+			<dep name="libksplashthemes.so.0"/>
+			<dep name="libkuriikwsfilter.so"/>
+			<dep name="libkurisearchfilter.so"/>
+			<dep name="liblocaldomainurifilter.so"/>
+			<dep name="libnsplugin.so"/>
+			<dep name="libtaskbar.so.1"/>
+			<dep name="libtaskmanager.so.1"/>
+			<dep name="lockout_panelapplet.so"/>
+			<dep name="media_panelapplet.so"/>
+			<dep name="media_propsdlgplugin.so"/>
+			<dep name="menu_panelapplet.so"/>
+			<dep name="minipager_panelapplet.so"/>
+			<dep name="naughty_panelapplet.so"/>
+			<dep name="run_panelapplet.so"/>
+			<dep name="sidebar_panelextension.so"/>
+			<dep name="sysguard_panelapplet.so"/>
+			<dep name="systemtray_panelapplet.so"/>
+			<dep name="taskbar_panelapplet.so"/>
+			<dep name="taskbar_panelextension.so"/>
+			<dep name="textthumbnail.so"/>
+			<dep name="trash_panelapplet.so"/>
+			<dep name="kdebase3" op="EQ" version="3.5.1" release="69.32"/>
+		</provides>
+		<requires>
+			<dep name="kdebase3-ksysguardd"/>
+			<dep name="kdelibs3" op="GE" version="3.5.1"/>
+			<dep name="xorg-x11"/>
+			<dep name="fileshareset" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="fileutils" pre="1"/>
+			<dep name="permissions" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh"/>
+			<dep name="rpmlib(PartialHardlinkSets)" op="LE" version="4.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/bin/sh"/>
+			<dep name="/usr/bin/perl"/>
+			<dep name="libDCOP.so.4"/>
+			<dep name="libGL.so.1"/>
+			<dep name="libGLU.so.1"/>
+			<dep name="libICE.so.6"/>
+			<dep name="libIlmImf.so.2"/>
+			<dep name="libSM.so.6"/>
+			<dep name="libX11.so.6"/>
+			<dep name="libXau.so.6"/>
+			<dep name="libXcomposite.so.1"/>
+			<dep name="libXcursor.so.1"/>
+			<dep name="libXdamage.so.1"/>
+			<dep name="libXext.so.6"/>
+			<dep name="libXfixes.so.3"/>
+			<dep name="libXft.so.2"/>
+			<dep name="libXinerama.so.1"/>
+			<dep name="libXrandr.so.2"/>
+			<dep name="libXrender.so.1"/>
+			<dep name="libXss.so.1"/>
+			<dep name="libXtst.so.6"/>
+			<dep name="libXxf86misc.so.1"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libc.so.6(GLIBC_2.2)"/>
+			<dep name="libc.so.6(GLIBC_2.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)"/>
+			<dep name="libc.so.6(GLIBC_2.4)"/>
+			<dep name="libdbus-1.so.2"/>
+			<dep name="libdbus-qt-1.so.1"/>
+			<dep name="libfontconfig.so.1"/>
+			<dep name="libfontenc.so.1"/>
+			<dep name="libfreetype.so.6"/>
+			<dep name="libgcc_s.so.1"/>
+			<dep name="libgcc_s.so.1(GLIBC_2.0)"/>
+			<dep name="libhal-storage.so.1"/>
+			<dep name="libhal.so.1"/>
+			<dep name="libkabc.so.1"/>
+			<dep name="libkasbar.so.1"/>
+			<dep name="libkateinterfaces.so.0"/>
+			<dep name="libkatepartinterfaces.so.0"/>
+			<dep name="libkdecorations.so.1"/>
+			<dep name="libkdecore.so.4"/>
+			<dep name="libkdefx.so.4"/>
+			<dep name="libkdeinit_appletproxy.so"/>
+			<dep name="libkdeinit_extensionproxy.so"/>
+			<dep name="libkdeinit_kaccess.so"/>
+			<dep name="libkdeinit_kate.so"/>
+			<dep name="libkdeinit_kcminit.so"/>
+			<dep name="libkdeinit_kcminit_startup.so"/>
+			<dep name="libkdeinit_kcontrol.so"/>
+			<dep name="libkdeinit_kcontroledit.so"/>
+			<dep name="libkdeinit_kdesktop.so"/>
+			<dep name="libkdeinit_keditbookmarks.so"/>
+			<dep name="libkdeinit_kfmclient.so"/>
+			<dep name="libkdeinit_khelpcenter.so"/>
+			<dep name="libkdeinit_khotkeys.so"/>
+			<dep name="libkdeinit_kicker.so"/>
+			<dep name="libkdeinit_kjobviewer.so"/>
+			<dep name="libkdeinit_klipper.so"/>
+			<dep name="libkdeinit_kmenuedit.so"/>
+			<dep name="libkdeinit_konqueror.so"/>
+			<dep name="libkdeinit_konsole.so"/>
+			<dep name="libkdeinit_kprinter.so"/>
+			<dep name="libkdeinit_ksmserver.so"/>
+			<dep name="libkdeinit_kwin.so"/>
+			<dep name="libkdeinit_kwin_rules_dialog.so"/>
+			<dep name="libkdeinit_kwrite.so"/>
+			<dep name="libkdeinit_kxkb.so"/>
+			<dep name="libkdemm.so.0"/>
+			<dep name="libkdeprint.so.4"/>
+			<dep name="libkdeprint_management.so.4"/>
+			<dep name="libkdesu.so.4"/>
+			<dep name="libkdeui.so.4"/>
+			<dep name="libkdnssd.so.1"/>
+			<dep name="libkfontinst.so.0"/>
+			<dep name="libkhotkeys_shared.so.1"/>
+			<dep name="libkhtml.so.4"/>
+			<dep name="libkickermain.so.1"/>
+			<dep name="libkio.so.4"/>
+			<dep name="libkmid.so.0"/>
+			<dep name="libknewstuff.so.1"/>
+			<dep name="libkonq.so.4"/>
+			<dep name="libkonqsidebarplugin.so.1"/>
+			<dep name="libkparts.so.2"/>
+			<dep name="libkscreensaver.so.4"/>
+			<dep name="libksgrd.so.1"/>
+			<dep name="libksplashthemes.so.0"/>
+			<dep name="libktexteditor.so.0"/>
+			<dep name="libkutils.so.1"/>
+			<dep name="libldap-2.3.so.0"/>
+			<dep name="libm.so.6"/>
+			<dep name="libm.so.6(GLIBC_2.0)"/>
+			<dep name="libpam.so.0"/>
+			<dep name="libpam.so.0(LIBPAM_1.0)"/>
+			<dep name="libpowersave.so.10"/>
+			<dep name="libpowersave_dbus.so.10"/>
+			<dep name="libpthread.so.0"/>
+			<dep name="libpthread.so.0(GLIBC_2.0)"/>
+			<dep name="libpthread.so.0(GLIBC_2.2)"/>
+			<dep name="libqt-mt.so.3"/>
+			<dep name="libsasl2.so.2"/>
+			<dep name="libslp.so.1"/>
+			<dep name="libssl.so.0.9.8"/>
+			<dep name="libstdc++.so.6"/>
+			<dep name="libstdc++.so.6(CXXABI_1.3)"/>
+			<dep name="libstdc++.so.6(GLIBCXX_3.4)"/>
+			<dep name="libtaskbar.so.1"/>
+			<dep name="libtaskmanager.so.1"/>
+			<dep name="libusb-0.1.so.4"/>
+			<dep name="libutil.so.1"/>
+			<dep name="libutil.so.1(GLIBC_2.0)"/>
+			<dep name="libxkbfile.so.1"/>
+			<dep name="libz.so.1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+		<conflicts>
+			<dep name="kdebase3-SuSE" op="LE" version="9.0"/>
+		</conflicts>
+	</deps>
+</package>
+<package>
+	<name>kdebase3</name>
+	<summary>Collective Update for several minor glitches.</summary>
+	<description>This update is a collective update for 10.1 that fixes the
+following issues:
+- 160259: sorting of menu entries is no longer enforced
+- 176828: ignored partitions are no longer listed in
+  sysinfo:/
+- 156621: reverts parts of kicker-resizing patch due to
+  regressions
+- 180686: fix admin button in kdm theme
+- 181122: fix screensaver no longer starting
+- 183672: use sax.mo for translating kxkb GUI
+- 155250: Update to the focus-stealing-prevention blacklist
+- 163184: Allow new items in media:/ subdirs
+- 167919: KControl / Energy redirects to KPowersave if
+  KPowersave manages DPMS
+- 179690: sysfs parsing support for KInfoCenter / USB
+- 200553: ksystraycmd arguments are de-quoted
+</description>
+	<arch>ppc</arch>
+	<version>3.5.1</version>
+	<release>69.32</release>
+	<filesize>26216578</filesize>
+	<installedsize>56291631</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>3.5.1</version>
+			<release>69.32</release>
+			<filename>kdebase3-3.5.1-69.32.ppc.rpm</filename>
+			<filesize>26216578</filesize>
+			<installedsize>56291631</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="windowmanager"/>
+			<dep name="kfontinst"/>
+			<dep name="kio_fish"/>
+			<dep name="kdebase3-konqueror"/>
+			<dep name="kdialog"/>
+			<dep name="kdebase3-khotkeys"/>
+			<dep name="kdebase"/>
+			<dep name="appletproxy.so"/>
+			<dep name="clock_panelapplet.so"/>
+			<dep name="cursorthumbnail.so"/>
+			<dep name="djvuthumbnail.so"/>
+			<dep name="dockbar_panelextension.so"/>
+			<dep name="exrthumbnail.so"/>
+			<dep name="extensionproxy.so"/>
+			<dep name="fontthumbnail.so"/>
+			<dep name="htmlthumbnail.so"/>
+			<dep name="imagethumbnail.so"/>
+			<dep name="kaccess.so"/>
+			<dep name="kasbar_panelextension.so"/>
+			<dep name="kate.so"/>
+			<dep name="kcm_access.so"/>
+			<dep name="kcm_arts.so"/>
+			<dep name="kcm_background.so"/>
+			<dep name="kcm_bell.so"/>
+			<dep name="kcm_cgi.so"/>
+			<dep name="kcm_colors.so"/>
+			<dep name="kcm_componentchooser.so"/>
+			<dep name="kcm_crypto.so"/>
+			<dep name="kcm_css.so"/>
+			<dep name="kcm_display.so"/>
+			<dep name="kcm_energy.so"/>
+			<dep name="kcm_filetypes.so"/>
+			<dep name="kcm_fontinst.so"/>
+			<dep name="kcm_fonts.so"/>
+			<dep name="kcm_history.so"/>
+			<dep name="kcm_icons.so"/>
+			<dep name="kcm_info.so"/>
+			<dep name="kcm_input.so"/>
+			<dep name="kcm_ioslaveinfo.so"/>
+			<dep name="kcm_joystick.so"/>
+			<dep name="kcm_kded.so"/>
+			<dep name="kcm_kdm.so"/>
+			<dep name="kcm_kdnssd.so"/>
+			<dep name="kcm_keyboard.so"/>
+			<dep name="kcm_keys.so"/>
+			<dep name="kcm_khotkeys.so"/>
+			<dep name="kcm_khotkeys_init.so"/>
+			<dep name="kcm_kicker.so"/>
+			<dep name="kcm_kio.so"/>
+			<dep name="kcm_knotify.so"/>
+			<dep name="kcm_konq.so"/>
+			<dep name="kcm_konqhtml.so"/>
+			<dep name="kcm_konsole.so"/>
+			<dep name="kcm_ksplashthemes.so"/>
+			<dep name="kcm_kthememanager.so"/>
+			<dep name="kcm_kurifilt.so"/>
+			<dep name="kcm_kwindecoration.so"/>
+			<dep name="kcm_kwinoptions.so"/>
+			<dep name="kcm_kwinrules.so"/>
+			<dep name="kcm_launch.so"/>
+			<dep name="kcm_locale.so"/>
+			<dep name="kcm_media.so"/>
+			<dep name="kcm_nic.so"/>
+			<dep name="kcm_nsplugins.so"/>
+			<dep name="kcm_performance.so"/>
+			<dep name="kcm_printmgr.so"/>
+			<dep name="kcm_privacy.so"/>
+			<dep name="kcm_randr.so"/>
+			<dep name="kcm_screensaver.so"/>
+			<dep name="kcm_smserver.so"/>
+			<dep name="kcm_spellchecking.so"/>
+			<dep name="kcm_style.so"/>
+			<dep name="kcm_taskbar.so"/>
+			<dep name="kcm_usb.so"/>
+			<dep name="kcm_useraccount.so"/>
+			<dep name="kcm_xinerama.so"/>
+			<dep name="kcminit.so"/>
+			<dep name="kcminit_startup.so"/>
+			<dep name="kcontrol.so"/>
+			<dep name="kcontroledit.so"/>
+			<dep name="kded_favicons.so"/>
+			<dep name="kded_homedirnotify.so"/>
+			<dep name="kded_khotkeys.so"/>
+			<dep name="kded_konqy_preloader.so"/>
+			<dep name="kded_kwrited.so"/>
+			<dep name="kded_mediamanager.so"/>
+			<dep name="kded_medianotifier.so"/>
+			<dep name="kded_remotedirnotify.so"/>
+			<dep name="kded_systemdirnotify.so"/>
+			<dep name="kdesktop.so"/>
+			<dep name="keditbookmarks.so"/>
+			<dep name="kfile_font.so"/>
+			<dep name="kfile_media.so"/>
+			<dep name="kfile_trash.so"/>
+			<dep name="kfmclient.so"/>
+			<dep name="kgreet_winbind.so"/>
+			<dep name="khelpcenter.so"/>
+			<dep name="khotkeys.so"/>
+			<dep name="kicker.so"/>
+			<dep name="kickermenu_find.so"/>
+			<dep name="kickermenu_kdeprint.so"/>
+			<dep name="kickermenu_konqueror.so"/>
+			<dep name="kickermenu_konsole.so"/>
+			<dep name="kickermenu_prefmenu.so"/>
+			<dep name="kickermenu_recentdocs.so"/>
+			<dep name="kickermenu_remotemenu.so"/>
+			<dep name="kickermenu_systemmenu.so"/>
+			<dep name="kio_about.so"/>
+			<dep name="kio_cgi.so"/>
+			<dep name="kio_filter.so"/>
+			<dep name="kio_finger.so"/>
+			<dep name="kio_fish.so"/>
+			<dep name="kio_floppy.so"/>
+			<dep name="kio_fonts.so"/>
+			<dep name="kio_home.so"/>
+			<dep name="kio_info.so"/>
+			<dep name="kio_ldap.so"/>
+			<dep name="kio_mac.so"/>
+			<dep name="kio_man.so"/>
+			<dep name="kio_media.so"/>
+			<dep name="kio_nfs.so"/>
+			<dep name="kio_nntp.so"/>
+			<dep name="kio_pop3.so"/>
+			<dep name="kio_print.so"/>
+			<dep name="kio_remote.so"/>
+			<dep name="kio_settings.so"/>
+			<dep name="kio_sftp.so"/>
+			<dep name="kio_smtp.so"/>
+			<dep name="kio_system.so"/>
+			<dep name="kio_tar.so"/>
+			<dep name="kio_thumbnail.so"/>
+			<dep name="kio_trash.so"/>
+			<dep name="kjobviewer.so"/>
+			<dep name="klipper.so"/>
+			<dep name="klipper_panelapplet.so"/>
+			<dep name="kmenuedit.so"/>
+			<dep name="konq_aboutpage.so"/>
+			<dep name="konq_iconview.so"/>
+			<dep name="konq_listview.so"/>
+			<dep name="konq_remoteencoding.so"/>
+			<dep name="konq_shellcmdplugin.so"/>
+			<dep name="konq_sidebar.so"/>
+			<dep name="konq_sidebartree_bookmarks.so"/>
+			<dep name="konq_sidebartree_dirtree.so"/>
+			<dep name="konq_sidebartree_history.so"/>
+			<dep name="konq_sound.so"/>
+			<dep name="konqsidebar_tree.so"/>
+			<dep name="konqsidebar_web.so"/>
+			<dep name="konqueror.so"/>
+			<dep name="konsole.so"/>
+			<dep name="kprinter.so"/>
+			<dep name="ksmserver.so"/>
+			<dep name="ksplashdefault.so"/>
+			<dep name="ksplashredmond.so"/>
+			<dep name="ksplashstandard.so"/>
+			<dep name="kstyle_keramik_config.so"/>
+			<dep name="kwin.so"/>
+			<dep name="kwin3_b2.so"/>
+			<dep name="kwin3_default.so"/>
+			<dep name="kwin3_keramik.so"/>
+			<dep name="kwin3_laptop.so"/>
+			<dep name="kwin3_modernsys.so"/>
+			<dep name="kwin3_plastik.so"/>
+			<dep name="kwin3_quartz.so"/>
+			<dep name="kwin3_redmond.so"/>
+			<dep name="kwin3_web.so"/>
+			<dep name="kwin_b2_config.so"/>
+			<dep name="kwin_default_config.so"/>
+			<dep name="kwin_keramik_config.so"/>
+			<dep name="kwin_modernsys_config.so"/>
+			<dep name="kwin_plastik_config.so"/>
+			<dep name="kwin_quartz_config.so"/>
+			<dep name="kwin_rules_dialog.so"/>
+			<dep name="kwrite.so"/>
+			<dep name="kxkb.so"/>
+			<dep name="launcher_panelapplet.so"/>
+			<dep name="libkasbar.so.1"/>
+			<dep name="libkateinterfaces.so.0"/>
+			<dep name="libkateutils.so.0"/>
+			<dep name="libkdecorations.so.1"/>
+			<dep name="libkdeinit_appletproxy.so"/>
+			<dep name="libkdeinit_extensionproxy.so"/>
+			<dep name="libkdeinit_kaccess.so"/>
+			<dep name="libkdeinit_kate.so"/>
+			<dep name="libkdeinit_kcminit.so"/>
+			<dep name="libkdeinit_kcminit_startup.so"/>
+			<dep name="libkdeinit_kcontrol.so"/>
+			<dep name="libkdeinit_kcontroledit.so"/>
+			<dep name="libkdeinit_kdesktop.so"/>
+			<dep name="libkdeinit_keditbookmarks.so"/>
+			<dep name="libkdeinit_kfmclient.so"/>
+			<dep name="libkdeinit_khelpcenter.so"/>
+			<dep name="libkdeinit_khotkeys.so"/>
+			<dep name="libkdeinit_kicker.so"/>
+			<dep name="libkdeinit_kjobviewer.so"/>
+			<dep name="libkdeinit_klipper.so"/>
+			<dep name="libkdeinit_kmenuedit.so"/>
+			<dep name="libkdeinit_konqueror.so"/>
+			<dep name="libkdeinit_konsole.so"/>
+			<dep name="libkdeinit_kprinter.so"/>
+			<dep name="libkdeinit_ksmserver.so"/>
+			<dep name="libkdeinit_kwin.so"/>
+			<dep name="libkdeinit_kwin_rules_dialog.so"/>
+			<dep name="libkdeinit_kwrite.so"/>
+			<dep name="libkdeinit_kxkb.so"/>
+			<dep name="libkdeprint_part.so"/>
+			<dep name="libkfindpart.so"/>
+			<dep name="libkfontinst.so.0"/>
+			<dep name="libkfontviewpart.so"/>
+			<dep name="libkhotkeys_shared.so.1"/>
+			<dep name="libkhtmlkttsdplugin.so"/>
+			<dep name="libkickermain.so.1"/>
+			<dep name="libkmanpart.so"/>
+			<dep name="libkonq.so.4"/>
+			<dep name="libkonqsidebarplugin.so.1"/>
+			<dep name="libkonsolepart.so"/>
+			<dep name="libksgrd.so.1"/>
+			<dep name="libkshorturifilter.so"/>
+			<dep name="libksplashthemes.so.0"/>
+			<dep name="libkuriikwsfilter.so"/>
+			<dep name="libkurisearchfilter.so"/>
+			<dep name="liblocaldomainurifilter.so"/>
+			<dep name="libnsplugin.so"/>
+			<dep name="libtaskbar.so.1"/>
+			<dep name="libtaskmanager.so.1"/>
+			<dep name="lockout_panelapplet.so"/>
+			<dep name="media_panelapplet.so"/>
+			<dep name="media_propsdlgplugin.so"/>
+			<dep name="menu_panelapplet.so"/>
+			<dep name="minipager_panelapplet.so"/>
+			<dep name="naughty_panelapplet.so"/>
+			<dep name="run_panelapplet.so"/>
+			<dep name="sidebar_panelextension.so"/>
+			<dep name="sysguard_panelapplet.so"/>
+			<dep name="systemtray_panelapplet.so"/>
+			<dep name="taskbar_panelapplet.so"/>
+			<dep name="taskbar_panelextension.so"/>
+			<dep name="textthumbnail.so"/>
+			<dep name="trash_panelapplet.so"/>
+			<dep name="kdebase3" op="EQ" version="3.5.1" release="69.32"/>
+		</provides>
+		<requires>
+			<dep name="kdebase3-ksysguardd"/>
+			<dep name="kdelibs3" op="GE" version="3.5.1"/>
+			<dep name="xorg-x11"/>
+			<dep name="fileshareset" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="fileutils" pre="1"/>
+			<dep name="permissions" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh"/>
+			<dep name="rpmlib(PartialHardlinkSets)" op="LE" version="4.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/bin/sh"/>
+			<dep name="/usr/bin/perl"/>
+			<dep name="libDCOP.so.4"/>
+			<dep name="libGL.so.1"/>
+			<dep name="libGLU.so.1"/>
+			<dep name="libICE.so.6"/>
+			<dep name="libIlmImf.so.2"/>
+			<dep name="libSM.so.6"/>
+			<dep name="libX11.so.6"/>
+			<dep name="libXau.so.6"/>
+			<dep name="libXcomposite.so.1"/>
+			<dep name="libXcursor.so.1"/>
+			<dep name="libXdamage.so.1"/>
+			<dep name="libXext.so.6"/>
+			<dep name="libXfixes.so.3"/>
+			<dep name="libXft.so.2"/>
+			<dep name="libXinerama.so.1"/>
+			<dep name="libXrandr.so.2"/>
+			<dep name="libXrender.so.1"/>
+			<dep name="libXss.so.1"/>
+			<dep name="libXtst.so.6"/>
+			<dep name="libXxf86misc.so.1"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libc.so.6(GLIBC_2.2)"/>
+			<dep name="libc.so.6(GLIBC_2.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)"/>
+			<dep name="libc.so.6(GLIBC_2.4)"/>
+			<dep name="libdbus-1.so.2"/>
+			<dep name="libdbus-qt-1.so.1"/>
+			<dep name="libfontconfig.so.1"/>
+			<dep name="libfontenc.so.1"/>
+			<dep name="libfreetype.so.6"/>
+			<dep name="libgcc_s.so.1"/>
+			<dep name="libgcc_s.so.1(GCC_3.0)"/>
+			<dep name="libgcc_s.so.1(GCC_4.1.0)"/>
+			<dep name="libgcc_s.so.1(GLIBC_2.0)"/>
+			<dep name="libhal-storage.so.1"/>
+			<dep name="libhal.so.1"/>
+			<dep name="libkabc.so.1"/>
+			<dep name="libkasbar.so.1"/>
+			<dep name="libkateinterfaces.so.0"/>
+			<dep name="libkatepartinterfaces.so.0"/>
+			<dep name="libkdecorations.so.1"/>
+			<dep name="libkdecore.so.4"/>
+			<dep name="libkdefx.so.4"/>
+			<dep name="libkdeinit_appletproxy.so"/>
+			<dep name="libkdeinit_extensionproxy.so"/>
+			<dep name="libkdeinit_kaccess.so"/>
+			<dep name="libkdeinit_kate.so"/>
+			<dep name="libkdeinit_kcminit.so"/>
+			<dep name="libkdeinit_kcminit_startup.so"/>
+			<dep name="libkdeinit_kcontrol.so"/>
+			<dep name="libkdeinit_kcontroledit.so"/>
+			<dep name="libkdeinit_kdesktop.so"/>
+			<dep name="libkdeinit_keditbookmarks.so"/>
+			<dep name="libkdeinit_kfmclient.so"/>
+			<dep name="libkdeinit_khelpcenter.so"/>
+			<dep name="libkdeinit_khotkeys.so"/>
+			<dep name="libkdeinit_kicker.so"/>
+			<dep name="libkdeinit_kjobviewer.so"/>
+			<dep name="libkdeinit_klipper.so"/>
+			<dep name="libkdeinit_kmenuedit.so"/>
+			<dep name="libkdeinit_konqueror.so"/>
+			<dep name="libkdeinit_konsole.so"/>
+			<dep name="libkdeinit_kprinter.so"/>
+			<dep name="libkdeinit_ksmserver.so"/>
+			<dep name="libkdeinit_kwin.so"/>
+			<dep name="libkdeinit_kwin_rules_dialog.so"/>
+			<dep name="libkdeinit_kwrite.so"/>
+			<dep name="libkdeinit_kxkb.so"/>
+			<dep name="libkdemm.so.0"/>
+			<dep name="libkdeprint.so.4"/>
+			<dep name="libkdeprint_management.so.4"/>
+			<dep name="libkdesu.so.4"/>
+			<dep name="libkdeui.so.4"/>
+			<dep name="libkdnssd.so.1"/>
+			<dep name="libkfontinst.so.0"/>
+			<dep name="libkhotkeys_shared.so.1"/>
+			<dep name="libkhtml.so.4"/>
+			<dep name="libkickermain.so.1"/>
+			<dep name="libkio.so.4"/>
+			<dep name="libkmid.so.0"/>
+			<dep name="libknewstuff.so.1"/>
+			<dep name="libkonq.so.4"/>
+			<dep name="libkonqsidebarplugin.so.1"/>
+			<dep name="libkparts.so.2"/>
+			<dep name="libkscreensaver.so.4"/>
+			<dep name="libksgrd.so.1"/>
+			<dep name="libksplashthemes.so.0"/>
+			<dep name="libktexteditor.so.0"/>
+			<dep name="libkutils.so.1"/>
+			<dep name="libldap-2.3.so.0"/>
+			<dep name="libm.so.6"/>
+			<dep name="libm.so.6(GLIBC_2.0)"/>
+			<dep name="libpam.so.0"/>
+			<dep name="libpam.so.0(LIBPAM_1.0)"/>
+			<dep name="libpthread.so.0"/>
+			<dep name="libpthread.so.0(GLIBC_2.0)"/>
+			<dep name="libpthread.so.0(GLIBC_2.2)"/>
+			<dep name="libqt-mt.so.3"/>
+			<dep name="libsasl2.so.2"/>
+			<dep name="libslp.so.1"/>
+			<dep name="libssl.so.0.9.8"/>
+			<dep name="libstdc++.so.6"/>
+			<dep name="libstdc++.so.6(CXXABI_1.3)"/>
+			<dep name="libstdc++.so.6(GLIBCXX_3.4)"/>
+			<dep name="libtaskbar.so.1"/>
+			<dep name="libtaskmanager.so.1"/>
+			<dep name="libusb-0.1.so.4"/>
+			<dep name="libutil.so.1"/>
+			<dep name="libutil.so.1(GLIBC_2.0)"/>
+			<dep name="libxkbfile.so.1"/>
+			<dep name="libz.so.1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+		<conflicts>
+			<dep name="kdebase3-SuSE" op="LE" version="9.0"/>
+		</conflicts>
+	</deps>
+</package>
+<package>
+	<name>kdebase3</name>
+	<summary>Collective Update for several minor glitches.</summary>
+	<description>This update is a collective update for 10.1 that fixes the
+following issues:
+- 160259: sorting of menu entries is no longer enforced
+- 176828: ignored partitions are no longer listed in
+  sysinfo:/
+- 156621: reverts parts of kicker-resizing patch due to
+  regressions
+- 180686: fix admin button in kdm theme
+- 181122: fix screensaver no longer starting
+- 183672: use sax.mo for translating kxkb GUI
+- 155250: Update to the focus-stealing-prevention blacklist
+- 163184: Allow new items in media:/ subdirs
+- 167919: KControl / Energy redirects to KPowersave if
+  KPowersave manages DPMS
+- 179690: sysfs parsing support for KInfoCenter / USB
+- 200553: ksystraycmd arguments are de-quoted
+</description>
+	<arch>x86_64</arch>
+	<version>3.5.1</version>
+	<release>69.32</release>
+	<filesize>26614173</filesize>
+	<installedsize>58256811</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>3.5.1</version>
+			<release>69.32</release>
+			<filename>kdebase3-3.5.1-69.32.x86_64.rpm</filename>
+			<filesize>26614173</filesize>
+			<installedsize>58256811</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="windowmanager"/>
+			<dep name="kfontinst"/>
+			<dep name="kio_fish"/>
+			<dep name="kdebase3-konqueror"/>
+			<dep name="kdialog"/>
+			<dep name="kdebase3-khotkeys"/>
+			<dep name="kdebase"/>
+			<dep name="appletproxy.so()(64bit)"/>
+			<dep name="clock_panelapplet.so()(64bit)"/>
+			<dep name="cursorthumbnail.so()(64bit)"/>
+			<dep name="djvuthumbnail.so()(64bit)"/>
+			<dep name="dockbar_panelextension.so()(64bit)"/>
+			<dep name="exrthumbnail.so()(64bit)"/>
+			<dep name="extensionproxy.so()(64bit)"/>
+			<dep name="fontthumbnail.so()(64bit)"/>
+			<dep name="htmlthumbnail.so()(64bit)"/>
+			<dep name="imagethumbnail.so()(64bit)"/>
+			<dep name="kaccess.so()(64bit)"/>
+			<dep name="kasbar_panelextension.so()(64bit)"/>
+			<dep name="kate.so()(64bit)"/>
+			<dep name="kcm_access.so()(64bit)"/>
+			<dep name="kcm_arts.so()(64bit)"/>
+			<dep name="kcm_background.so()(64bit)"/>
+			<dep name="kcm_bell.so()(64bit)"/>
+			<dep name="kcm_cgi.so()(64bit)"/>
+			<dep name="kcm_colors.so()(64bit)"/>
+			<dep name="kcm_componentchooser.so()(64bit)"/>
+			<dep name="kcm_crypto.so()(64bit)"/>
+			<dep name="kcm_css.so()(64bit)"/>
+			<dep name="kcm_display.so()(64bit)"/>
+			<dep name="kcm_energy.so()(64bit)"/>
+			<dep name="kcm_filetypes.so()(64bit)"/>
+			<dep name="kcm_fontinst.so()(64bit)"/>
+			<dep name="kcm_fonts.so()(64bit)"/>
+			<dep name="kcm_history.so()(64bit)"/>
+			<dep name="kcm_icons.so()(64bit)"/>
+			<dep name="kcm_info.so()(64bit)"/>
+			<dep name="kcm_input.so()(64bit)"/>
+			<dep name="kcm_ioslaveinfo.so()(64bit)"/>
+			<dep name="kcm_joystick.so()(64bit)"/>
+			<dep name="kcm_kded.so()(64bit)"/>
+			<dep name="kcm_kdm.so()(64bit)"/>
+			<dep name="kcm_kdnssd.so()(64bit)"/>
+			<dep name="kcm_keyboard.so()(64bit)"/>
+			<dep name="kcm_keys.so()(64bit)"/>
+			<dep name="kcm_khotkeys.so()(64bit)"/>
+			<dep name="kcm_khotkeys_init.so()(64bit)"/>
+			<dep name="kcm_kicker.so()(64bit)"/>
+			<dep name="kcm_kio.so()(64bit)"/>
+			<dep name="kcm_knotify.so()(64bit)"/>
+			<dep name="kcm_konq.so()(64bit)"/>
+			<dep name="kcm_konqhtml.so()(64bit)"/>
+			<dep name="kcm_konsole.so()(64bit)"/>
+			<dep name="kcm_ksplashthemes.so()(64bit)"/>
+			<dep name="kcm_kthememanager.so()(64bit)"/>
+			<dep name="kcm_kurifilt.so()(64bit)"/>
+			<dep name="kcm_kwindecoration.so()(64bit)"/>
+			<dep name="kcm_kwinoptions.so()(64bit)"/>
+			<dep name="kcm_kwinrules.so()(64bit)"/>
+			<dep name="kcm_launch.so()(64bit)"/>
+			<dep name="kcm_locale.so()(64bit)"/>
+			<dep name="kcm_media.so()(64bit)"/>
+			<dep name="kcm_nic.so()(64bit)"/>
+			<dep name="kcm_nsplugins.so()(64bit)"/>
+			<dep name="kcm_performance.so()(64bit)"/>
+			<dep name="kcm_printmgr.so()(64bit)"/>
+			<dep name="kcm_privacy.so()(64bit)"/>
+			<dep name="kcm_randr.so()(64bit)"/>
+			<dep name="kcm_screensaver.so()(64bit)"/>
+			<dep name="kcm_smserver.so()(64bit)"/>
+			<dep name="kcm_spellchecking.so()(64bit)"/>
+			<dep name="kcm_style.so()(64bit)"/>
+			<dep name="kcm_taskbar.so()(64bit)"/>
+			<dep name="kcm_usb.so()(64bit)"/>
+			<dep name="kcm_useraccount.so()(64bit)"/>
+			<dep name="kcm_xinerama.so()(64bit)"/>
+			<dep name="kcminit.so()(64bit)"/>
+			<dep name="kcminit_startup.so()(64bit)"/>
+			<dep name="kcontrol.so()(64bit)"/>
+			<dep name="kcontroledit.so()(64bit)"/>
+			<dep name="kded_favicons.so()(64bit)"/>
+			<dep name="kded_homedirnotify.so()(64bit)"/>
+			<dep name="kded_khotkeys.so()(64bit)"/>
+			<dep name="kded_konqy_preloader.so()(64bit)"/>
+			<dep name="kded_kwrited.so()(64bit)"/>
+			<dep name="kded_mediamanager.so()(64bit)"/>
+			<dep name="kded_medianotifier.so()(64bit)"/>
+			<dep name="kded_remotedirnotify.so()(64bit)"/>
+			<dep name="kded_systemdirnotify.so()(64bit)"/>
+			<dep name="kdesktop.so()(64bit)"/>
+			<dep name="keditbookmarks.so()(64bit)"/>
+			<dep name="kfile_font.so()(64bit)"/>
+			<dep name="kfile_media.so()(64bit)"/>
+			<dep name="kfile_trash.so()(64bit)"/>
+			<dep name="kfmclient.so()(64bit)"/>
+			<dep name="kgreet_winbind.so()(64bit)"/>
+			<dep name="khelpcenter.so()(64bit)"/>
+			<dep name="khotkeys.so()(64bit)"/>
+			<dep name="kicker.so()(64bit)"/>
+			<dep name="kickermenu_find.so()(64bit)"/>
+			<dep name="kickermenu_kdeprint.so()(64bit)"/>
+			<dep name="kickermenu_konqueror.so()(64bit)"/>
+			<dep name="kickermenu_konsole.so()(64bit)"/>
+			<dep name="kickermenu_prefmenu.so()(64bit)"/>
+			<dep name="kickermenu_recentdocs.so()(64bit)"/>
+			<dep name="kickermenu_remotemenu.so()(64bit)"/>
+			<dep name="kickermenu_systemmenu.so()(64bit)"/>
+			<dep name="kio_about.so()(64bit)"/>
+			<dep name="kio_cgi.so()(64bit)"/>
+			<dep name="kio_filter.so()(64bit)"/>
+			<dep name="kio_finger.so()(64bit)"/>
+			<dep name="kio_fish.so()(64bit)"/>
+			<dep name="kio_floppy.so()(64bit)"/>
+			<dep name="kio_fonts.so()(64bit)"/>
+			<dep name="kio_home.so()(64bit)"/>
+			<dep name="kio_info.so()(64bit)"/>
+			<dep name="kio_ldap.so()(64bit)"/>
+			<dep name="kio_mac.so()(64bit)"/>
+			<dep name="kio_man.so()(64bit)"/>
+			<dep name="kio_media.so()(64bit)"/>
+			<dep name="kio_nfs.so()(64bit)"/>
+			<dep name="kio_nntp.so()(64bit)"/>
+			<dep name="kio_pop3.so()(64bit)"/>
+			<dep name="kio_print.so()(64bit)"/>
+			<dep name="kio_remote.so()(64bit)"/>
+			<dep name="kio_settings.so()(64bit)"/>
+			<dep name="kio_sftp.so()(64bit)"/>
+			<dep name="kio_smtp.so()(64bit)"/>
+			<dep name="kio_system.so()(64bit)"/>
+			<dep name="kio_tar.so()(64bit)"/>
+			<dep name="kio_thumbnail.so()(64bit)"/>
+			<dep name="kio_trash.so()(64bit)"/>
+			<dep name="kjobviewer.so()(64bit)"/>
+			<dep name="klipper.so()(64bit)"/>
+			<dep name="klipper_panelapplet.so()(64bit)"/>
+			<dep name="kmenuedit.so()(64bit)"/>
+			<dep name="konq_aboutpage.so()(64bit)"/>
+			<dep name="konq_iconview.so()(64bit)"/>
+			<dep name="konq_listview.so()(64bit)"/>
+			<dep name="konq_remoteencoding.so()(64bit)"/>
+			<dep name="konq_shellcmdplugin.so()(64bit)"/>
+			<dep name="konq_sidebar.so()(64bit)"/>
+			<dep name="konq_sidebartree_bookmarks.so()(64bit)"/>
+			<dep name="konq_sidebartree_dirtree.so()(64bit)"/>
+			<dep name="konq_sidebartree_history.so()(64bit)"/>
+			<dep name="konq_sound.so()(64bit)"/>
+			<dep name="konqsidebar_tree.so()(64bit)"/>
+			<dep name="konqsidebar_web.so()(64bit)"/>
+			<dep name="konqueror.so()(64bit)"/>
+			<dep name="konsole.so()(64bit)"/>
+			<dep name="kprinter.so()(64bit)"/>
+			<dep name="ksmserver.so()(64bit)"/>
+			<dep name="ksplashdefault.so()(64bit)"/>
+			<dep name="ksplashredmond.so()(64bit)"/>
+			<dep name="ksplashstandard.so()(64bit)"/>
+			<dep name="kstyle_keramik_config.so()(64bit)"/>
+			<dep name="kwin.so()(64bit)"/>
+			<dep name="kwin3_b2.so()(64bit)"/>
+			<dep name="kwin3_default.so()(64bit)"/>
+			<dep name="kwin3_keramik.so()(64bit)"/>
+			<dep name="kwin3_laptop.so()(64bit)"/>
+			<dep name="kwin3_modernsys.so()(64bit)"/>
+			<dep name="kwin3_plastik.so()(64bit)"/>
+			<dep name="kwin3_quartz.so()(64bit)"/>
+			<dep name="kwin3_redmond.so()(64bit)"/>
+			<dep name="kwin3_web.so()(64bit)"/>
+			<dep name="kwin_b2_config.so()(64bit)"/>
+			<dep name="kwin_default_config.so()(64bit)"/>
+			<dep name="kwin_keramik_config.so()(64bit)"/>
+			<dep name="kwin_modernsys_config.so()(64bit)"/>
+			<dep name="kwin_plastik_config.so()(64bit)"/>
+			<dep name="kwin_quartz_config.so()(64bit)"/>
+			<dep name="kwin_rules_dialog.so()(64bit)"/>
+			<dep name="kwrite.so()(64bit)"/>
+			<dep name="kxkb.so()(64bit)"/>
+			<dep name="launcher_panelapplet.so()(64bit)"/>
+			<dep name="libkasbar.so.1()(64bit)"/>
+			<dep name="libkateinterfaces.so.0()(64bit)"/>
+			<dep name="libkateutils.so.0()(64bit)"/>
+			<dep name="libkdecorations.so.1()(64bit)"/>
+			<dep name="libkdeinit_appletproxy.so()(64bit)"/>
+			<dep name="libkdeinit_extensionproxy.so()(64bit)"/>
+			<dep name="libkdeinit_kaccess.so()(64bit)"/>
+			<dep name="libkdeinit_kate.so()(64bit)"/>
+			<dep name="libkdeinit_kcminit.so()(64bit)"/>
+			<dep name="libkdeinit_kcminit_startup.so()(64bit)"/>
+			<dep name="libkdeinit_kcontrol.so()(64bit)"/>
+			<dep name="libkdeinit_kcontroledit.so()(64bit)"/>
+			<dep name="libkdeinit_kdesktop.so()(64bit)"/>
+			<dep name="libkdeinit_keditbookmarks.so()(64bit)"/>
+			<dep name="libkdeinit_kfmclient.so()(64bit)"/>
+			<dep name="libkdeinit_khelpcenter.so()(64bit)"/>
+			<dep name="libkdeinit_khotkeys.so()(64bit)"/>
+			<dep name="libkdeinit_kicker.so()(64bit)"/>
+			<dep name="libkdeinit_kjobviewer.so()(64bit)"/>
+			<dep name="libkdeinit_klipper.so()(64bit)"/>
+			<dep name="libkdeinit_kmenuedit.so()(64bit)"/>
+			<dep name="libkdeinit_konqueror.so()(64bit)"/>
+			<dep name="libkdeinit_konsole.so()(64bit)"/>
+			<dep name="libkdeinit_kprinter.so()(64bit)"/>
+			<dep name="libkdeinit_ksmserver.so()(64bit)"/>
+			<dep name="libkdeinit_kwin.so()(64bit)"/>
+			<dep name="libkdeinit_kwin_rules_dialog.so()(64bit)"/>
+			<dep name="libkdeinit_kwrite.so()(64bit)"/>
+			<dep name="libkdeinit_kxkb.so()(64bit)"/>
+			<dep name="libkdeprint_part.so()(64bit)"/>
+			<dep name="libkfindpart.so()(64bit)"/>
+			<dep name="libkfontinst.so.0()(64bit)"/>
+			<dep name="libkfontviewpart.so()(64bit)"/>
+			<dep name="libkhotkeys_shared.so.1()(64bit)"/>
+			<dep name="libkhtmlkttsdplugin.so()(64bit)"/>
+			<dep name="libkickermain.so.1()(64bit)"/>
+			<dep name="libkmanpart.so()(64bit)"/>
+			<dep name="libkonq.so.4()(64bit)"/>
+			<dep name="libkonqsidebarplugin.so.1()(64bit)"/>
+			<dep name="libkonsolepart.so()(64bit)"/>
+			<dep name="libksgrd.so.1()(64bit)"/>
+			<dep name="libkshorturifilter.so()(64bit)"/>
+			<dep name="libksplashthemes.so.0()(64bit)"/>
+			<dep name="libkuriikwsfilter.so()(64bit)"/>
+			<dep name="libkurisearchfilter.so()(64bit)"/>
+			<dep name="liblocaldomainurifilter.so()(64bit)"/>
+			<dep name="libnsplugin.so()(64bit)"/>
+			<dep name="libtaskbar.so.1()(64bit)"/>
+			<dep name="libtaskmanager.so.1()(64bit)"/>
+			<dep name="lockout_panelapplet.so()(64bit)"/>
+			<dep name="media_panelapplet.so()(64bit)"/>
+			<dep name="media_propsdlgplugin.so()(64bit)"/>
+			<dep name="menu_panelapplet.so()(64bit)"/>
+			<dep name="minipager_panelapplet.so()(64bit)"/>
+			<dep name="naughty_panelapplet.so()(64bit)"/>
+			<dep name="run_panelapplet.so()(64bit)"/>
+			<dep name="sidebar_panelextension.so()(64bit)"/>
+			<dep name="sysguard_panelapplet.so()(64bit)"/>
+			<dep name="systemtray_panelapplet.so()(64bit)"/>
+			<dep name="taskbar_panelapplet.so()(64bit)"/>
+			<dep name="taskbar_panelextension.so()(64bit)"/>
+			<dep name="textthumbnail.so()(64bit)"/>
+			<dep name="trash_panelapplet.so()(64bit)"/>
+			<dep name="kdebase3" op="EQ" version="3.5.1" release="69.32"/>
+		</provides>
+		<requires>
+			<dep name="kdebase3-ksysguardd"/>
+			<dep name="kdelibs3" op="GE" version="3.5.1"/>
+			<dep name="xorg-x11"/>
+			<dep name="fileshareset" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="fileutils" pre="1"/>
+			<dep name="permissions" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh"/>
+			<dep name="rpmlib(PartialHardlinkSets)" op="LE" version="4.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/bin/sh"/>
+			<dep name="/usr/bin/perl"/>
+			<dep name="libDCOP.so.4()(64bit)"/>
+			<dep name="libGL.so.1()(64bit)"/>
+			<dep name="libGLU.so.1()(64bit)"/>
+			<dep name="libICE.so.6()(64bit)"/>
+			<dep name="libIlmImf.so.2()(64bit)"/>
+			<dep name="libSM.so.6()(64bit)"/>
+			<dep name="libX11.so.6()(64bit)"/>
+			<dep name="libXau.so.6()(64bit)"/>
+			<dep name="libXcomposite.so.1()(64bit)"/>
+			<dep name="libXcursor.so.1()(64bit)"/>
+			<dep name="libXdamage.so.1()(64bit)"/>
+			<dep name="libXext.so.6()(64bit)"/>
+			<dep name="libXfixes.so.3()(64bit)"/>
+			<dep name="libXft.so.2()(64bit)"/>
+			<dep name="libXinerama.so.1()(64bit)"/>
+			<dep name="libXrandr.so.2()(64bit)"/>
+			<dep name="libXrender.so.1()(64bit)"/>
+			<dep name="libXss.so.1()(64bit)"/>
+			<dep name="libXtst.so.6()(64bit)"/>
+			<dep name="libXxf86misc.so.1()(64bit)"/>
+			<dep name="libc.so.6()(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.3)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.4)(64bit)"/>
+			<dep name="libdbus-1.so.2()(64bit)"/>
+			<dep name="libdbus-qt-1.so.1()(64bit)"/>
+			<dep name="libfontconfig.so.1()(64bit)"/>
+			<dep name="libfontenc.so.1()(64bit)"/>
+			<dep name="libfreetype.so.6()(64bit)"/>
+			<dep name="libhal-storage.so.1()(64bit)"/>
+			<dep name="libhal.so.1()(64bit)"/>
+			<dep name="libkabc.so.1()(64bit)"/>
+			<dep name="libkasbar.so.1()(64bit)"/>
+			<dep name="libkateinterfaces.so.0()(64bit)"/>
+			<dep name="libkatepartinterfaces.so.0()(64bit)"/>
+			<dep name="libkdecorations.so.1()(64bit)"/>
+			<dep name="libkdecore.so.4()(64bit)"/>
+			<dep name="libkdefx.so.4()(64bit)"/>
+			<dep name="libkdeinit_appletproxy.so()(64bit)"/>
+			<dep name="libkdeinit_extensionproxy.so()(64bit)"/>
+			<dep name="libkdeinit_kaccess.so()(64bit)"/>
+			<dep name="libkdeinit_kate.so()(64bit)"/>
+			<dep name="libkdeinit_kcminit.so()(64bit)"/>
+			<dep name="libkdeinit_kcminit_startup.so()(64bit)"/>
+			<dep name="libkdeinit_kcontrol.so()(64bit)"/>
+			<dep name="libkdeinit_kcontroledit.so()(64bit)"/>
+			<dep name="libkdeinit_kdesktop.so()(64bit)"/>
+			<dep name="libkdeinit_keditbookmarks.so()(64bit)"/>
+			<dep name="libkdeinit_kfmclient.so()(64bit)"/>
+			<dep name="libkdeinit_khelpcenter.so()(64bit)"/>
+			<dep name="libkdeinit_khotkeys.so()(64bit)"/>
+			<dep name="libkdeinit_kicker.so()(64bit)"/>
+			<dep name="libkdeinit_kjobviewer.so()(64bit)"/>
+			<dep name="libkdeinit_klipper.so()(64bit)"/>
+			<dep name="libkdeinit_kmenuedit.so()(64bit)"/>
+			<dep name="libkdeinit_konqueror.so()(64bit)"/>
+			<dep name="libkdeinit_konsole.so()(64bit)"/>
+			<dep name="libkdeinit_kprinter.so()(64bit)"/>
+			<dep name="libkdeinit_ksmserver.so()(64bit)"/>
+			<dep name="libkdeinit_kwin.so()(64bit)"/>
+			<dep name="libkdeinit_kwin_rules_dialog.so()(64bit)"/>
+			<dep name="libkdeinit_kwrite.so()(64bit)"/>
+			<dep name="libkdeinit_kxkb.so()(64bit)"/>
+			<dep name="libkdemm.so.0()(64bit)"/>
+			<dep name="libkdeprint.so.4()(64bit)"/>
+			<dep name="libkdeprint_management.so.4()(64bit)"/>
+			<dep name="libkdesu.so.4()(64bit)"/>
+			<dep name="libkdeui.so.4()(64bit)"/>
+			<dep name="libkdnssd.so.1()(64bit)"/>
+			<dep name="libkfontinst.so.0()(64bit)"/>
+			<dep name="libkhotkeys_shared.so.1()(64bit)"/>
+			<dep name="libkhtml.so.4()(64bit)"/>
+			<dep name="libkickermain.so.1()(64bit)"/>
+			<dep name="libkio.so.4()(64bit)"/>
+			<dep name="libkmid.so.0()(64bit)"/>
+			<dep name="libknewstuff.so.1()(64bit)"/>
+			<dep name="libkonq.so.4()(64bit)"/>
+			<dep name="libkonqsidebarplugin.so.1()(64bit)"/>
+			<dep name="libkparts.so.2()(64bit)"/>
+			<dep name="libkscreensaver.so.4()(64bit)"/>
+			<dep name="libksgrd.so.1()(64bit)"/>
+			<dep name="libksplashthemes.so.0()(64bit)"/>
+			<dep name="libktexteditor.so.0()(64bit)"/>
+			<dep name="libkutils.so.1()(64bit)"/>
+			<dep name="libldap-2.3.so.0()(64bit)"/>
+			<dep name="libm.so.6()(64bit)"/>
+			<dep name="libm.so.6(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libpam.so.0()(64bit)"/>
+			<dep name="libpam.so.0(LIBPAM_1.0)(64bit)"/>
+			<dep name="libpowersave.so.10()(64bit)"/>
+			<dep name="libpowersave_dbus.so.10()(64bit)"/>
+			<dep name="libpthread.so.0()(64bit)"/>
+			<dep name="libpthread.so.0(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libqt-mt.so.3()(64bit)"/>
+			<dep name="libsasl2.so.2()(64bit)"/>
+			<dep name="libslp.so.1()(64bit)"/>
+			<dep name="libssl.so.0.9.8()(64bit)"/>
+			<dep name="libstdc++.so.6()(64bit)"/>
+			<dep name="libstdc++.so.6(CXXABI_1.3)(64bit)"/>
+			<dep name="libstdc++.so.6(GLIBCXX_3.4)(64bit)"/>
+			<dep name="libtaskbar.so.1()(64bit)"/>
+			<dep name="libtaskmanager.so.1()(64bit)"/>
+			<dep name="libusb-0.1.so.4()(64bit)"/>
+			<dep name="libutil.so.1()(64bit)"/>
+			<dep name="libutil.so.1(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libxkbfile.so.1()(64bit)"/>
+			<dep name="libz.so.1()(64bit)"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+		<conflicts>
+			<dep name="kdebase3-SuSE" op="LE" version="9.0"/>
+		</conflicts>
+	</deps>
+</package>
+<package>
+	<name>kdebase3-32bit</name>
+	<summary>Collective Update for several minor glitches.</summary>
+	<description>This update is a collective update for 10.1 that fixes the
+following issues:
+- 160259: sorting of menu entries is no longer enforced
+- 176828: ignored partitions are no longer listed in
+  sysinfo:/
+- 156621: reverts parts of kicker-resizing patch due to
+  regressions
+- 180686: fix admin button in kdm theme
+- 181122: fix screensaver no longer starting
+- 183672: use sax.mo for translating kxkb GUI
+- 155250: Update to the focus-stealing-prevention blacklist
+- 163184: Allow new items in media:/ subdirs
+- 167919: KControl / Energy redirects to KPowersave if
+  KPowersave manages DPMS
+- 179690: sysfs parsing support for KInfoCenter / USB
+- 200553: ksystraycmd arguments are de-quoted
+</description>
+	<arch>x86_64</arch>
+	<version>3.5.1</version>
+	<release>69.32</release>
+	<filesize>7849803</filesize>
+	<installedsize>26291585</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>3.5.1</version>
+			<release>69.32</release>
+			<filename>kdebase3-32bit-3.5.1-69.32.x86_64.rpm</filename>
+			<filesize>7849803</filesize>
+			<installedsize>26291585</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="appletproxy.so"/>
+			<dep name="clock_panelapplet.so"/>
+			<dep name="cursorthumbnail.so"/>
+			<dep name="djvuthumbnail.so"/>
+			<dep name="dockbar_panelextension.so"/>
+			<dep name="exrthumbnail.so"/>
+			<dep name="extensionproxy.so"/>
+			<dep name="fontthumbnail.so"/>
+			<dep name="htmlthumbnail.so"/>
+			<dep name="imagethumbnail.so"/>
+			<dep name="kaccess.so"/>
+			<dep name="kasbar_panelextension.so"/>
+			<dep name="kate.so"/>
+			<dep name="kcm_access.so"/>
+			<dep name="kcm_arts.so"/>
+			<dep name="kcm_background.so"/>
+			<dep name="kcm_bell.so"/>
+			<dep name="kcm_cgi.so"/>
+			<dep name="kcm_colors.so"/>
+			<dep name="kcm_componentchooser.so"/>
+			<dep name="kcm_crypto.so"/>
+			<dep name="kcm_css.so"/>
+			<dep name="kcm_display.so"/>
+			<dep name="kcm_energy.so"/>
+			<dep name="kcm_filetypes.so"/>
+			<dep name="kcm_fontinst.so"/>
+			<dep name="kcm_fonts.so"/>
+			<dep name="kcm_history.so"/>
+			<dep name="kcm_icons.so"/>
+			<dep name="kcm_info.so"/>
+			<dep name="kcm_input.so"/>
+			<dep name="kcm_ioslaveinfo.so"/>
+			<dep name="kcm_joystick.so"/>
+			<dep name="kcm_kded.so"/>
+			<dep name="kcm_kdm.so"/>
+			<dep name="kcm_kdnssd.so"/>
+			<dep name="kcm_keyboard.so"/>
+			<dep name="kcm_keys.so"/>
+			<dep name="kcm_khotkeys.so"/>
+			<dep name="kcm_khotkeys_init.so"/>
+			<dep name="kcm_kicker.so"/>
+			<dep name="kcm_kio.so"/>
+			<dep name="kcm_knotify.so"/>
+			<dep name="kcm_konq.so"/>
+			<dep name="kcm_konqhtml.so"/>
+			<dep name="kcm_konsole.so"/>
+			<dep name="kcm_ksplashthemes.so"/>
+			<dep name="kcm_kthememanager.so"/>
+			<dep name="kcm_kurifilt.so"/>
+			<dep name="kcm_kwindecoration.so"/>
+			<dep name="kcm_kwinoptions.so"/>
+			<dep name="kcm_kwinrules.so"/>
+			<dep name="kcm_launch.so"/>
+			<dep name="kcm_locale.so"/>
+			<dep name="kcm_media.so"/>
+			<dep name="kcm_nic.so"/>
+			<dep name="kcm_nsplugins.so"/>
+			<dep name="kcm_performance.so"/>
+			<dep name="kcm_printmgr.so"/>
+			<dep name="kcm_privacy.so"/>
+			<dep name="kcm_randr.so"/>
+			<dep name="kcm_screensaver.so"/>
+			<dep name="kcm_smserver.so"/>
+			<dep name="kcm_spellchecking.so"/>
+			<dep name="kcm_style.so"/>
+			<dep name="kcm_taskbar.so"/>
+			<dep name="kcm_usb.so"/>
+			<dep name="kcm_useraccount.so"/>
+			<dep name="kcm_xinerama.so"/>
+			<dep name="kcminit.so"/>
+			<dep name="kcminit_startup.so"/>
+			<dep name="kcontrol.so"/>
+			<dep name="kcontroledit.so"/>
+			<dep name="kded_favicons.so"/>
+			<dep name="kded_homedirnotify.so"/>
+			<dep name="kded_khotkeys.so"/>
+			<dep name="kded_konqy_preloader.so"/>
+			<dep name="kded_kwrited.so"/>
+			<dep name="kded_mediamanager.so"/>
+			<dep name="kded_medianotifier.so"/>
+			<dep name="kded_remotedirnotify.so"/>
+			<dep name="kded_systemdirnotify.so"/>
+			<dep name="kdesktop.so"/>
+			<dep name="keditbookmarks.so"/>
+			<dep name="kfile_font.so"/>
+			<dep name="kfile_media.so"/>
+			<dep name="kfile_trash.so"/>
+			<dep name="kfmclient.so"/>
+			<dep name="kgreet_winbind.so"/>
+			<dep name="khelpcenter.so"/>
+			<dep name="khotkeys.so"/>
+			<dep name="kicker.so"/>
+			<dep name="kickermenu_find.so"/>
+			<dep name="kickermenu_kdeprint.so"/>
+			<dep name="kickermenu_konqueror.so"/>
+			<dep name="kickermenu_konsole.so"/>
+			<dep name="kickermenu_prefmenu.so"/>
+			<dep name="kickermenu_recentdocs.so"/>
+			<dep name="kickermenu_remotemenu.so"/>
+			<dep name="kickermenu_systemmenu.so"/>
+			<dep name="kio_about.so"/>
+			<dep name="kio_cgi.so"/>
+			<dep name="kio_filter.so"/>
+			<dep name="kio_finger.so"/>
+			<dep name="kio_fish.so"/>
+			<dep name="kio_floppy.so"/>
+			<dep name="kio_fonts.so"/>
+			<dep name="kio_home.so"/>
+			<dep name="kio_info.so"/>
+			<dep name="kio_ldap.so"/>
+			<dep name="kio_mac.so"/>
+			<dep name="kio_man.so"/>
+			<dep name="kio_media.so"/>
+			<dep name="kio_nfs.so"/>
+			<dep name="kio_nntp.so"/>
+			<dep name="kio_pop3.so"/>
+			<dep name="kio_print.so"/>
+			<dep name="kio_remote.so"/>
+			<dep name="kio_settings.so"/>
+			<dep name="kio_sftp.so"/>
+			<dep name="kio_smtp.so"/>
+			<dep name="kio_system.so"/>
+			<dep name="kio_tar.so"/>
+			<dep name="kio_thumbnail.so"/>
+			<dep name="kio_trash.so"/>
+			<dep name="kjobviewer.so"/>
+			<dep name="klipper.so"/>
+			<dep name="klipper_panelapplet.so"/>
+			<dep name="kmenuedit.so"/>
+			<dep name="konq_aboutpage.so"/>
+			<dep name="konq_iconview.so"/>
+			<dep name="konq_listview.so"/>
+			<dep name="konq_remoteencoding.so"/>
+			<dep name="konq_shellcmdplugin.so"/>
+			<dep name="konq_sidebar.so"/>
+			<dep name="konq_sidebartree_bookmarks.so"/>
+			<dep name="konq_sidebartree_dirtree.so"/>
+			<dep name="konq_sidebartree_history.so"/>
+			<dep name="konq_sound.so"/>
+			<dep name="konqsidebar_tree.so"/>
+			<dep name="konqsidebar_web.so"/>
+			<dep name="konqueror.so"/>
+			<dep name="konsole.so"/>
+			<dep name="kprinter.so"/>
+			<dep name="ksmserver.so"/>
+			<dep name="ksplashdefault.so"/>
+			<dep name="ksplashredmond.so"/>
+			<dep name="ksplashstandard.so"/>
+			<dep name="kstyle_keramik_config.so"/>
+			<dep name="kwin.so"/>
+			<dep name="kwin3_b2.so"/>
+			<dep name="kwin3_default.so"/>
+			<dep name="kwin3_keramik.so"/>
+			<dep name="kwin3_laptop.so"/>
+			<dep name="kwin3_modernsys.so"/>
+			<dep name="kwin3_plastik.so"/>
+			<dep name="kwin3_quartz.so"/>
+			<dep name="kwin3_redmond.so"/>
+			<dep name="kwin3_web.so"/>
+			<dep name="kwin_b2_config.so"/>
+			<dep name="kwin_default_config.so"/>
+			<dep name="kwin_keramik_config.so"/>
+			<dep name="kwin_modernsys_config.so"/>
+			<dep name="kwin_plastik_config.so"/>
+			<dep name="kwin_quartz_config.so"/>
+			<dep name="kwin_rules_dialog.so"/>
+			<dep name="kwrite.so"/>
+			<dep name="kxkb.so"/>
+			<dep name="launcher_panelapplet.so"/>
+			<dep name="libkasbar.so.1"/>
+			<dep name="libkateinterfaces.so.0"/>
+			<dep name="libkateutils.so.0"/>
+			<dep name="libkdecorations.so.1"/>
+			<dep name="libkdeinit_appletproxy.so"/>
+			<dep name="libkdeinit_extensionproxy.so"/>
+			<dep name="libkdeinit_kaccess.so"/>
+			<dep name="libkdeinit_kate.so"/>
+			<dep name="libkdeinit_kcminit.so"/>
+			<dep name="libkdeinit_kcminit_startup.so"/>
+			<dep name="libkdeinit_kcontrol.so"/>
+			<dep name="libkdeinit_kcontroledit.so"/>
+			<dep name="libkdeinit_kdesktop.so"/>
+			<dep name="libkdeinit_keditbookmarks.so"/>
+			<dep name="libkdeinit_kfmclient.so"/>
+			<dep name="libkdeinit_khelpcenter.so"/>
+			<dep name="libkdeinit_khotkeys.so"/>
+			<dep name="libkdeinit_kicker.so"/>
+			<dep name="libkdeinit_kjobviewer.so"/>
+			<dep name="libkdeinit_klipper.so"/>
+			<dep name="libkdeinit_kmenuedit.so"/>
+			<dep name="libkdeinit_konqueror.so"/>
+			<dep name="libkdeinit_konsole.so"/>
+			<dep name="libkdeinit_kprinter.so"/>
+			<dep name="libkdeinit_ksmserver.so"/>
+			<dep name="libkdeinit_kwin.so"/>
+			<dep name="libkdeinit_kwin_rules_dialog.so"/>
+			<dep name="libkdeinit_kwrite.so"/>
+			<dep name="libkdeinit_kxkb.so"/>
+			<dep name="libkdeprint_part.so"/>
+			<dep name="libkfindpart.so"/>
+			<dep name="libkfontinst.so.0"/>
+			<dep name="libkfontviewpart.so"/>
+			<dep name="libkhotkeys_shared.so.1"/>
+			<dep name="libkhtmlkttsdplugin.so"/>
+			<dep name="libkickermain.so.1"/>
+			<dep name="libkmanpart.so"/>
+			<dep name="libkonq.so.4"/>
+			<dep name="libkonqsidebarplugin.so.1"/>
+			<dep name="libkonsolepart.so"/>
+			<dep name="libksgrd.so.1"/>
+			<dep name="libkshorturifilter.so"/>
+			<dep name="libksplashthemes.so.0"/>
+			<dep name="libkuriikwsfilter.so"/>
+			<dep name="libkurisearchfilter.so"/>
+			<dep name="liblocaldomainurifilter.so"/>
+			<dep name="libnsplugin.so"/>
+			<dep name="libtaskbar.so.1"/>
+			<dep name="libtaskmanager.so.1"/>
+			<dep name="lockout_panelapplet.so"/>
+			<dep name="media_panelapplet.so"/>
+			<dep name="media_propsdlgplugin.so"/>
+			<dep name="menu_panelapplet.so"/>
+			<dep name="minipager_panelapplet.so"/>
+			<dep name="naughty_panelapplet.so"/>
+			<dep name="run_panelapplet.so"/>
+			<dep name="sidebar_panelextension.so"/>
+			<dep name="sysguard_panelapplet.so"/>
+			<dep name="systemtray_panelapplet.so"/>
+			<dep name="taskbar_panelapplet.so"/>
+			<dep name="taskbar_panelextension.so"/>
+			<dep name="textthumbnail.so"/>
+			<dep name="trash_panelapplet.so"/>
+			<dep name="kdebase3-32bit" op="EQ" version="3.5.1" release="69.32"/>
+		</provides>
+		<requires>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="libDCOP.so.4"/>
+			<dep name="libGL.so.1"/>
+			<dep name="libGLU.so.1"/>
+			<dep name="libICE.so.6"/>
+			<dep name="libIlmImf.so.2"/>
+			<dep name="libSM.so.6"/>
+			<dep name="libX11.so.6"/>
+			<dep name="libXau.so.6"/>
+			<dep name="libXcomposite.so.1"/>
+			<dep name="libXcursor.so.1"/>
+			<dep name="libXext.so.6"/>
+			<dep name="libXfixes.so.3"/>
+			<dep name="libXft.so.2"/>
+			<dep name="libXrandr.so.2"/>
+			<dep name="libXrender.so.1"/>
+			<dep name="libXss.so.1"/>
+			<dep name="libXtst.so.6"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libc.so.6(GLIBC_2.2)"/>
+			<dep name="libc.so.6(GLIBC_2.3)"/>
+			<dep name="libdbus-1.so.2"/>
+			<dep name="libdbus-qt-1.so.1"/>
+			<dep name="libfontconfig.so.1"/>
+			<dep name="libgcc_s.so.1"/>
+			<dep name="libgcc_s.so.1(GLIBC_2.0)"/>
+			<dep name="libhal-storage.so.1"/>
+			<dep name="libhal.so.1"/>
+			<dep name="libkabc.so.1"/>
+			<dep name="libkasbar.so.1"/>
+			<dep name="libkateinterfaces.so.0"/>
+			<dep name="libkatepartinterfaces.so.0"/>
+			<dep name="libkdecorations.so.1"/>
+			<dep name="libkdecore.so.4"/>
+			<dep name="libkdefx.so.4"/>
+			<dep name="libkdeinit_appletproxy.so"/>
+			<dep name="libkdeinit_extensionproxy.so"/>
+			<dep name="libkdeinit_kaccess.so"/>
+			<dep name="libkdeinit_kate.so"/>
+			<dep name="libkdeinit_kcminit.so"/>
+			<dep name="libkdeinit_kcminit_startup.so"/>
+			<dep name="libkdeinit_kcontrol.so"/>
+			<dep name="libkdeinit_kcontroledit.so"/>
+			<dep name="libkdeinit_kdesktop.so"/>
+			<dep name="libkdeinit_keditbookmarks.so"/>
+			<dep name="libkdeinit_kfmclient.so"/>
+			<dep name="libkdeinit_khelpcenter.so"/>
+			<dep name="libkdeinit_khotkeys.so"/>
+			<dep name="libkdeinit_kicker.so"/>
+			<dep name="libkdeinit_kjobviewer.so"/>
+			<dep name="libkdeinit_klipper.so"/>
+			<dep name="libkdeinit_kmenuedit.so"/>
+			<dep name="libkdeinit_konqueror.so"/>
+			<dep name="libkdeinit_konsole.so"/>
+			<dep name="libkdeinit_kprinter.so"/>
+			<dep name="libkdeinit_ksmserver.so"/>
+			<dep name="libkdeinit_kwin.so"/>
+			<dep name="libkdeinit_kwin_rules_dialog.so"/>
+			<dep name="libkdeinit_kwrite.so"/>
+			<dep name="libkdeinit_kxkb.so"/>
+			<dep name="libkdemm.so.0"/>
+			<dep name="libkdeprint.so.4"/>
+			<dep name="libkdeprint_management.so.4"/>
+			<dep name="libkdesu.so.4"/>
+			<dep name="libkdeui.so.4"/>
+			<dep name="libkdnssd.so.1"/>
+			<dep name="libkfontinst.so.0"/>
+			<dep name="libkhotkeys_shared.so.1"/>
+			<dep name="libkhtml.so.4"/>
+			<dep name="libkickermain.so.1"/>
+			<dep name="libkio.so.4"/>
+			<dep name="libkmid.so.0"/>
+			<dep name="libknewstuff.so.1"/>
+			<dep name="libkonq.so.4"/>
+			<dep name="libkonqsidebarplugin.so.1"/>
+			<dep name="libkparts.so.2"/>
+			<dep name="libksgrd.so.1"/>
+			<dep name="libksplashthemes.so.0"/>
+			<dep name="libktexteditor.so.0"/>
+			<dep name="libkutils.so.1"/>
+			<dep name="libldap-2.3.so.0"/>
+			<dep name="libm.so.6"/>
+			<dep name="libm.so.6(GLIBC_2.0)"/>
+			<dep name="libpowersave.so.10"/>
+			<dep name="libpowersave_dbus.so.10"/>
+			<dep name="libpthread.so.0"/>
+			<dep name="libpthread.so.0(GLIBC_2.0)"/>
+			<dep name="libpthread.so.0(GLIBC_2.2)"/>
+			<dep name="libqt-mt.so.3"/>
+			<dep name="libsasl2.so.2"/>
+			<dep name="libssl.so.0.9.8"/>
+			<dep name="libstdc++.so.6"/>
+			<dep name="libstdc++.so.6(CXXABI_1.3)"/>
+			<dep name="libstdc++.so.6(GLIBCXX_3.4)"/>
+			<dep name="libtaskbar.so.1"/>
+			<dep name="libtaskmanager.so.1"/>
+			<dep name="libusb-0.1.so.4"/>
+			<dep name="libutil.so.1"/>
+			<dep name="libutil.so.1(GLIBC_2.0)"/>
+			<dep name="libxkbfile.so.1"/>
+			<dep name="libz.so.1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>kdebase3-64bit</name>
+	<summary>Collective Update for several minor glitches.</summary>
+	<description>This update is a collective update for 10.1 that fixes the
+following issues:
+- 160259: sorting of menu entries is no longer enforced
+- 176828: ignored partitions are no longer listed in
+  sysinfo:/
+- 156621: reverts parts of kicker-resizing patch due to
+  regressions
+- 180686: fix admin button in kdm theme
+- 181122: fix screensaver no longer starting
+- 183672: use sax.mo for translating kxkb GUI
+- 155250: Update to the focus-stealing-prevention blacklist
+- 163184: Allow new items in media:/ subdirs
+- 167919: KControl / Energy redirects to KPowersave if
+  KPowersave manages DPMS
+- 179690: sysfs parsing support for KInfoCenter / USB
+- 200553: ksystraycmd arguments are de-quoted
+</description>
+	<arch>ppc</arch>
+	<version>3.5.1</version>
+	<release>69.32</release>
+	<filesize>8677596</filesize>
+	<installedsize>40222457</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>3.5.1</version>
+			<release>69.32</release>
+			<filename>kdebase3-64bit-3.5.1-69.32.ppc.rpm</filename>
+			<filesize>8677596</filesize>
+			<installedsize>40222457</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="appletproxy.so()(64bit)"/>
+			<dep name="clock_panelapplet.so()(64bit)"/>
+			<dep name="cursorthumbnail.so()(64bit)"/>
+			<dep name="djvuthumbnail.so()(64bit)"/>
+			<dep name="dockbar_panelextension.so()(64bit)"/>
+			<dep name="exrthumbnail.so()(64bit)"/>
+			<dep name="extensionproxy.so()(64bit)"/>
+			<dep name="fontthumbnail.so()(64bit)"/>
+			<dep name="htmlthumbnail.so()(64bit)"/>
+			<dep name="imagethumbnail.so()(64bit)"/>
+			<dep name="kaccess.so()(64bit)"/>
+			<dep name="kasbar_panelextension.so()(64bit)"/>
+			<dep name="kate.so()(64bit)"/>
+			<dep name="kcm_access.so()(64bit)"/>
+			<dep name="kcm_arts.so()(64bit)"/>
+			<dep name="kcm_background.so()(64bit)"/>
+			<dep name="kcm_bell.so()(64bit)"/>
+			<dep name="kcm_cgi.so()(64bit)"/>
+			<dep name="kcm_colors.so()(64bit)"/>
+			<dep name="kcm_componentchooser.so()(64bit)"/>
+			<dep name="kcm_crypto.so()(64bit)"/>
+			<dep name="kcm_css.so()(64bit)"/>
+			<dep name="kcm_display.so()(64bit)"/>
+			<dep name="kcm_energy.so()(64bit)"/>
+			<dep name="kcm_filetypes.so()(64bit)"/>
+			<dep name="kcm_fontinst.so()(64bit)"/>
+			<dep name="kcm_fonts.so()(64bit)"/>
+			<dep name="kcm_history.so()(64bit)"/>
+			<dep name="kcm_icons.so()(64bit)"/>
+			<dep name="kcm_info.so()(64bit)"/>
+			<dep name="kcm_input.so()(64bit)"/>
+			<dep name="kcm_ioslaveinfo.so()(64bit)"/>
+			<dep name="kcm_joystick.so()(64bit)"/>
+			<dep name="kcm_kded.so()(64bit)"/>
+			<dep name="kcm_kdm.so()(64bit)"/>
+			<dep name="kcm_kdnssd.so()(64bit)"/>
+			<dep name="kcm_keyboard.so()(64bit)"/>
+			<dep name="kcm_keys.so()(64bit)"/>
+			<dep name="kcm_khotkeys.so()(64bit)"/>
+			<dep name="kcm_khotkeys_init.so()(64bit)"/>
+			<dep name="kcm_kicker.so()(64bit)"/>
+			<dep name="kcm_kio.so()(64bit)"/>
+			<dep name="kcm_knotify.so()(64bit)"/>
+			<dep name="kcm_konq.so()(64bit)"/>
+			<dep name="kcm_konqhtml.so()(64bit)"/>
+			<dep name="kcm_konsole.so()(64bit)"/>
+			<dep name="kcm_ksplashthemes.so()(64bit)"/>
+			<dep name="kcm_kthememanager.so()(64bit)"/>
+			<dep name="kcm_kurifilt.so()(64bit)"/>
+			<dep name="kcm_kwindecoration.so()(64bit)"/>
+			<dep name="kcm_kwinoptions.so()(64bit)"/>
+			<dep name="kcm_kwinrules.so()(64bit)"/>
+			<dep name="kcm_launch.so()(64bit)"/>
+			<dep name="kcm_locale.so()(64bit)"/>
+			<dep name="kcm_media.so()(64bit)"/>
+			<dep name="kcm_nic.so()(64bit)"/>
+			<dep name="kcm_nsplugins.so()(64bit)"/>
+			<dep name="kcm_performance.so()(64bit)"/>
+			<dep name="kcm_printmgr.so()(64bit)"/>
+			<dep name="kcm_privacy.so()(64bit)"/>
+			<dep name="kcm_randr.so()(64bit)"/>
+			<dep name="kcm_screensaver.so()(64bit)"/>
+			<dep name="kcm_smserver.so()(64bit)"/>
+			<dep name="kcm_spellchecking.so()(64bit)"/>
+			<dep name="kcm_style.so()(64bit)"/>
+			<dep name="kcm_taskbar.so()(64bit)"/>
+			<dep name="kcm_usb.so()(64bit)"/>
+			<dep name="kcm_useraccount.so()(64bit)"/>
+			<dep name="kcm_xinerama.so()(64bit)"/>
+			<dep name="kcminit.so()(64bit)"/>
+			<dep name="kcminit_startup.so()(64bit)"/>
+			<dep name="kcontrol.so()(64bit)"/>
+			<dep name="kcontroledit.so()(64bit)"/>
+			<dep name="kded_favicons.so()(64bit)"/>
+			<dep name="kded_homedirnotify.so()(64bit)"/>
+			<dep name="kded_khotkeys.so()(64bit)"/>
+			<dep name="kded_konqy_preloader.so()(64bit)"/>
+			<dep name="kded_kwrited.so()(64bit)"/>
+			<dep name="kded_mediamanager.so()(64bit)"/>
+			<dep name="kded_medianotifier.so()(64bit)"/>
+			<dep name="kded_remotedirnotify.so()(64bit)"/>
+			<dep name="kded_systemdirnotify.so()(64bit)"/>
+			<dep name="kdesktop.so()(64bit)"/>
+			<dep name="keditbookmarks.so()(64bit)"/>
+			<dep name="kfile_font.so()(64bit)"/>
+			<dep name="kfile_media.so()(64bit)"/>
+			<dep name="kfile_trash.so()(64bit)"/>
+			<dep name="kfmclient.so()(64bit)"/>
+			<dep name="kgreet_winbind.so()(64bit)"/>
+			<dep name="khelpcenter.so()(64bit)"/>
+			<dep name="khotkeys.so()(64bit)"/>
+			<dep name="kicker.so()(64bit)"/>
+			<dep name="kickermenu_find.so()(64bit)"/>
+			<dep name="kickermenu_kdeprint.so()(64bit)"/>
+			<dep name="kickermenu_konqueror.so()(64bit)"/>
+			<dep name="kickermenu_konsole.so()(64bit)"/>
+			<dep name="kickermenu_prefmenu.so()(64bit)"/>
+			<dep name="kickermenu_recentdocs.so()(64bit)"/>
+			<dep name="kickermenu_remotemenu.so()(64bit)"/>
+			<dep name="kickermenu_systemmenu.so()(64bit)"/>
+			<dep name="kio_about.so()(64bit)"/>
+			<dep name="kio_cgi.so()(64bit)"/>
+			<dep name="kio_filter.so()(64bit)"/>
+			<dep name="kio_finger.so()(64bit)"/>
+			<dep name="kio_fish.so()(64bit)"/>
+			<dep name="kio_floppy.so()(64bit)"/>
+			<dep name="kio_fonts.so()(64bit)"/>
+			<dep name="kio_home.so()(64bit)"/>
+			<dep name="kio_info.so()(64bit)"/>
+			<dep name="kio_ldap.so()(64bit)"/>
+			<dep name="kio_mac.so()(64bit)"/>
+			<dep name="kio_man.so()(64bit)"/>
+			<dep name="kio_media.so()(64bit)"/>
+			<dep name="kio_nfs.so()(64bit)"/>
+			<dep name="kio_nntp.so()(64bit)"/>
+			<dep name="kio_pop3.so()(64bit)"/>
+			<dep name="kio_print.so()(64bit)"/>
+			<dep name="kio_remote.so()(64bit)"/>
+			<dep name="kio_settings.so()(64bit)"/>
+			<dep name="kio_sftp.so()(64bit)"/>
+			<dep name="kio_smtp.so()(64bit)"/>
+			<dep name="kio_system.so()(64bit)"/>
+			<dep name="kio_tar.so()(64bit)"/>
+			<dep name="kio_thumbnail.so()(64bit)"/>
+			<dep name="kio_trash.so()(64bit)"/>
+			<dep name="kjobviewer.so()(64bit)"/>
+			<dep name="klipper.so()(64bit)"/>
+			<dep name="klipper_panelapplet.so()(64bit)"/>
+			<dep name="kmenuedit.so()(64bit)"/>
+			<dep name="konq_aboutpage.so()(64bit)"/>
+			<dep name="konq_iconview.so()(64bit)"/>
+			<dep name="konq_listview.so()(64bit)"/>
+			<dep name="konq_remoteencoding.so()(64bit)"/>
+			<dep name="konq_shellcmdplugin.so()(64bit)"/>
+			<dep name="konq_sidebar.so()(64bit)"/>
+			<dep name="konq_sidebartree_bookmarks.so()(64bit)"/>
+			<dep name="konq_sidebartree_dirtree.so()(64bit)"/>
+			<dep name="konq_sidebartree_history.so()(64bit)"/>
+			<dep name="konq_sound.so()(64bit)"/>
+			<dep name="konqsidebar_tree.so()(64bit)"/>
+			<dep name="konqsidebar_web.so()(64bit)"/>
+			<dep name="konqueror.so()(64bit)"/>
+			<dep name="konsole.so()(64bit)"/>
+			<dep name="kprinter.so()(64bit)"/>
+			<dep name="ksmserver.so()(64bit)"/>
+			<dep name="ksplashdefault.so()(64bit)"/>
+			<dep name="ksplashredmond.so()(64bit)"/>
+			<dep name="ksplashstandard.so()(64bit)"/>
+			<dep name="kstyle_keramik_config.so()(64bit)"/>
+			<dep name="kwin.so()(64bit)"/>
+			<dep name="kwin3_b2.so()(64bit)"/>
+			<dep name="kwin3_default.so()(64bit)"/>
+			<dep name="kwin3_keramik.so()(64bit)"/>
+			<dep name="kwin3_laptop.so()(64bit)"/>
+			<dep name="kwin3_modernsys.so()(64bit)"/>
+			<dep name="kwin3_plastik.so()(64bit)"/>
+			<dep name="kwin3_quartz.so()(64bit)"/>
+			<dep name="kwin3_redmond.so()(64bit)"/>
+			<dep name="kwin3_web.so()(64bit)"/>
+			<dep name="kwin_b2_config.so()(64bit)"/>
+			<dep name="kwin_default_config.so()(64bit)"/>
+			<dep name="kwin_keramik_config.so()(64bit)"/>
+			<dep name="kwin_modernsys_config.so()(64bit)"/>
+			<dep name="kwin_plastik_config.so()(64bit)"/>
+			<dep name="kwin_quartz_config.so()(64bit)"/>
+			<dep name="kwin_rules_dialog.so()(64bit)"/>
+			<dep name="kwrite.so()(64bit)"/>
+			<dep name="kxkb.so()(64bit)"/>
+			<dep name="launcher_panelapplet.so()(64bit)"/>
+			<dep name="libkasbar.so.1()(64bit)"/>
+			<dep name="libkateinterfaces.so.0()(64bit)"/>
+			<dep name="libkateutils.so.0()(64bit)"/>
+			<dep name="libkdecorations.so.1()(64bit)"/>
+			<dep name="libkdeinit_appletproxy.so()(64bit)"/>
+			<dep name="libkdeinit_extensionproxy.so()(64bit)"/>
+			<dep name="libkdeinit_kaccess.so()(64bit)"/>
+			<dep name="libkdeinit_kate.so()(64bit)"/>
+			<dep name="libkdeinit_kcminit.so()(64bit)"/>
+			<dep name="libkdeinit_kcminit_startup.so()(64bit)"/>
+			<dep name="libkdeinit_kcontrol.so()(64bit)"/>
+			<dep name="libkdeinit_kcontroledit.so()(64bit)"/>
+			<dep name="libkdeinit_kdesktop.so()(64bit)"/>
+			<dep name="libkdeinit_keditbookmarks.so()(64bit)"/>
+			<dep name="libkdeinit_kfmclient.so()(64bit)"/>
+			<dep name="libkdeinit_khelpcenter.so()(64bit)"/>
+			<dep name="libkdeinit_khotkeys.so()(64bit)"/>
+			<dep name="libkdeinit_kicker.so()(64bit)"/>
+			<dep name="libkdeinit_kjobviewer.so()(64bit)"/>
+			<dep name="libkdeinit_klipper.so()(64bit)"/>
+			<dep name="libkdeinit_kmenuedit.so()(64bit)"/>
+			<dep name="libkdeinit_konqueror.so()(64bit)"/>
+			<dep name="libkdeinit_konsole.so()(64bit)"/>
+			<dep name="libkdeinit_kprinter.so()(64bit)"/>
+			<dep name="libkdeinit_ksmserver.so()(64bit)"/>
+			<dep name="libkdeinit_kwin.so()(64bit)"/>
+			<dep name="libkdeinit_kwin_rules_dialog.so()(64bit)"/>
+			<dep name="libkdeinit_kwrite.so()(64bit)"/>
+			<dep name="libkdeinit_kxkb.so()(64bit)"/>
+			<dep name="libkdeprint_part.so()(64bit)"/>
+			<dep name="libkfindpart.so()(64bit)"/>
+			<dep name="libkfontinst.so.0()(64bit)"/>
+			<dep name="libkfontviewpart.so()(64bit)"/>
+			<dep name="libkhotkeys_shared.so.1()(64bit)"/>
+			<dep name="libkhtmlkttsdplugin.so()(64bit)"/>
+			<dep name="libkickermain.so.1()(64bit)"/>
+			<dep name="libkmanpart.so()(64bit)"/>
+			<dep name="libkonq.so.4()(64bit)"/>
+			<dep name="libkonqsidebarplugin.so.1()(64bit)"/>
+			<dep name="libkonsolepart.so()(64bit)"/>
+			<dep name="libksgrd.so.1()(64bit)"/>
+			<dep name="libkshorturifilter.so()(64bit)"/>
+			<dep name="libksplashthemes.so.0()(64bit)"/>
+			<dep name="libkuriikwsfilter.so()(64bit)"/>
+			<dep name="libkurisearchfilter.so()(64bit)"/>
+			<dep name="liblocaldomainurifilter.so()(64bit)"/>
+			<dep name="libnsplugin.so()(64bit)"/>
+			<dep name="libtaskbar.so.1()(64bit)"/>
+			<dep name="libtaskmanager.so.1()(64bit)"/>
+			<dep name="lockout_panelapplet.so()(64bit)"/>
+			<dep name="media_panelapplet.so()(64bit)"/>
+			<dep name="media_propsdlgplugin.so()(64bit)"/>
+			<dep name="menu_panelapplet.so()(64bit)"/>
+			<dep name="minipager_panelapplet.so()(64bit)"/>
+			<dep name="naughty_panelapplet.so()(64bit)"/>
+			<dep name="run_panelapplet.so()(64bit)"/>
+			<dep name="sidebar_panelextension.so()(64bit)"/>
+			<dep name="sysguard_panelapplet.so()(64bit)"/>
+			<dep name="systemtray_panelapplet.so()(64bit)"/>
+			<dep name="taskbar_panelapplet.so()(64bit)"/>
+			<dep name="taskbar_panelextension.so()(64bit)"/>
+			<dep name="textthumbnail.so()(64bit)"/>
+			<dep name="trash_panelapplet.so()(64bit)"/>
+			<dep name="kdebase3-64bit" op="EQ" version="3.5.1" release="69.32"/>
+		</provides>
+		<requires>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="libDCOP.so.4()(64bit)"/>
+			<dep name="libGL.so.1()(64bit)"/>
+			<dep name="libGLU.so.1()(64bit)"/>
+			<dep name="libICE.so.6()(64bit)"/>
+			<dep name="libIlmImf.so.2()(64bit)"/>
+			<dep name="libSM.so.6()(64bit)"/>
+			<dep name="libX11.so.6()(64bit)"/>
+			<dep name="libXau.so.6()(64bit)"/>
+			<dep name="libXcomposite.so.1()(64bit)"/>
+			<dep name="libXcursor.so.1()(64bit)"/>
+			<dep name="libXext.so.6()(64bit)"/>
+			<dep name="libXfixes.so.3()(64bit)"/>
+			<dep name="libXft.so.2()(64bit)"/>
+			<dep name="libXrandr.so.2()(64bit)"/>
+			<dep name="libXrender.so.1()(64bit)"/>
+			<dep name="libXss.so.1()(64bit)"/>
+			<dep name="libXtst.so.6()(64bit)"/>
+			<dep name="libc.so.6()(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.3)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.4)(64bit)"/>
+			<dep name="libdbus-1.so.2()(64bit)"/>
+			<dep name="libdbus-qt-1.so.1()(64bit)"/>
+			<dep name="libfontconfig.so.1()(64bit)"/>
+			<dep name="libgcc_s.so.1()(64bit)"/>
+			<dep name="libgcc_s.so.1(GCC_3.4.4)(64bit)"/>
+			<dep name="libhal-storage.so.1()(64bit)"/>
+			<dep name="libhal.so.1()(64bit)"/>
+			<dep name="libkabc.so.1()(64bit)"/>
+			<dep name="libkasbar.so.1()(64bit)"/>
+			<dep name="libkateinterfaces.so.0()(64bit)"/>
+			<dep name="libkatepartinterfaces.so.0()(64bit)"/>
+			<dep name="libkdecorations.so.1()(64bit)"/>
+			<dep name="libkdecore.so.4()(64bit)"/>
+			<dep name="libkdefx.so.4()(64bit)"/>
+			<dep name="libkdeinit_appletproxy.so()(64bit)"/>
+			<dep name="libkdeinit_extensionproxy.so()(64bit)"/>
+			<dep name="libkdeinit_kaccess.so()(64bit)"/>
+			<dep name="libkdeinit_kate.so()(64bit)"/>
+			<dep name="libkdeinit_kcminit.so()(64bit)"/>
+			<dep name="libkdeinit_kcminit_startup.so()(64bit)"/>
+			<dep name="libkdeinit_kcontrol.so()(64bit)"/>
+			<dep name="libkdeinit_kcontroledit.so()(64bit)"/>
+			<dep name="libkdeinit_kdesktop.so()(64bit)"/>
+			<dep name="libkdeinit_keditbookmarks.so()(64bit)"/>
+			<dep name="libkdeinit_kfmclient.so()(64bit)"/>
+			<dep name="libkdeinit_khelpcenter.so()(64bit)"/>
+			<dep name="libkdeinit_khotkeys.so()(64bit)"/>
+			<dep name="libkdeinit_kicker.so()(64bit)"/>
+			<dep name="libkdeinit_kjobviewer.so()(64bit)"/>
+			<dep name="libkdeinit_klipper.so()(64bit)"/>
+			<dep name="libkdeinit_kmenuedit.so()(64bit)"/>
+			<dep name="libkdeinit_konqueror.so()(64bit)"/>
+			<dep name="libkdeinit_konsole.so()(64bit)"/>
+			<dep name="libkdeinit_kprinter.so()(64bit)"/>
+			<dep name="libkdeinit_ksmserver.so()(64bit)"/>
+			<dep name="libkdeinit_kwin.so()(64bit)"/>
+			<dep name="libkdeinit_kwin_rules_dialog.so()(64bit)"/>
+			<dep name="libkdeinit_kwrite.so()(64bit)"/>
+			<dep name="libkdeinit_kxkb.so()(64bit)"/>
+			<dep name="libkdemm.so.0()(64bit)"/>
+			<dep name="libkdeprint.so.4()(64bit)"/>
+			<dep name="libkdeprint_management.so.4()(64bit)"/>
+			<dep name="libkdesu.so.4()(64bit)"/>
+			<dep name="libkdeui.so.4()(64bit)"/>
+			<dep name="libkdnssd.so.1()(64bit)"/>
+			<dep name="libkfontinst.so.0()(64bit)"/>
+			<dep name="libkhotkeys_shared.so.1()(64bit)"/>
+			<dep name="libkhtml.so.4()(64bit)"/>
+			<dep name="libkickermain.so.1()(64bit)"/>
+			<dep name="libkio.so.4()(64bit)"/>
+			<dep name="libkmid.so.0()(64bit)"/>
+			<dep name="libknewstuff.so.1()(64bit)"/>
+			<dep name="libkonq.so.4()(64bit)"/>
+			<dep name="libkonqsidebarplugin.so.1()(64bit)"/>
+			<dep name="libkparts.so.2()(64bit)"/>
+			<dep name="libksgrd.so.1()(64bit)"/>
+			<dep name="libksplashthemes.so.0()(64bit)"/>
+			<dep name="libktexteditor.so.0()(64bit)"/>
+			<dep name="libkutils.so.1()(64bit)"/>
+			<dep name="libldap-2.3.so.0()(64bit)"/>
+			<dep name="libm.so.6()(64bit)"/>
+			<dep name="libm.so.6(GLIBC_2.3)(64bit)"/>
+			<dep name="libpthread.so.0()(64bit)"/>
+			<dep name="libpthread.so.0(GLIBC_2.3)(64bit)"/>
+			<dep name="libqt-mt.so.3()(64bit)"/>
+			<dep name="libsasl2.so.2()(64bit)"/>
+			<dep name="libssl.so.0.9.8()(64bit)"/>
+			<dep name="libstdc++.so.6()(64bit)"/>
+			<dep name="libstdc++.so.6(CXXABI_1.3)(64bit)"/>
+			<dep name="libstdc++.so.6(GLIBCXX_3.4)(64bit)"/>
+			<dep name="libtaskbar.so.1()(64bit)"/>
+			<dep name="libtaskmanager.so.1()(64bit)"/>
+			<dep name="libusb-0.1.so.4()(64bit)"/>
+			<dep name="libutil.so.1()(64bit)"/>
+			<dep name="libutil.so.1(GLIBC_2.3)(64bit)"/>
+			<dep name="libxkbfile.so.1()(64bit)"/>
+			<dep name="libz.so.1()(64bit)"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+</subchannel></channel>

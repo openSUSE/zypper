@@ -1,0 +1,64 @@
+<channel><subchannel>                                                  
+
+<patch>
+	<name>xgl-hardware-list</name>
+	<arch>noarch</arch>
+	<version>1990</version>
+	<release>0</release>
+	<requires>
+		<dep kind="atom" name="xgl-hardware-list" epoch="0" version="060526" release="1.13" op="EQ"/>
+	</requires>
+</patch>
+<atom>
+	<name>xgl-hardware-list</name>
+	<arch>noarch</arch>
+	<version>060526</version>
+	<release>1.13</release>
+	<freshens>
+		<dep kind="package" name="xgl-hardware-list"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="xgl-hardware-list" epoch="0" version="060526" release="1.13" op="GE"/>
+	</requires>
+</atom>
+<package>
+	<name>xgl-hardware-list</name>
+	<summary>Fixes xgl setup on machines with Intel graphics chipsets</summary>
+	<description>Fixes the XGL setup process (via the "Desktop Effects"
+tool) on machines with Intel graphics chipsets.
+
+</description>
+	<arch>noarch</arch>
+	<version>060526</version>
+	<release>1.13</release>
+	<filesize>8869</filesize>
+	<installedsize>17764</installedsize>
+	<history>
+		<update>
+			<arch>noarch</arch>
+			<epoch>0</epoch>
+			<version>060526</version>
+			<release>1.13</release>
+			<filename>xgl-hardware-list-060526-1.13.noarch.rpm</filename>
+			<filesize>8869</filesize>
+			<installedsize>17764</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="xgl-hardware-list" op="EQ" version="060526" release="1.13"/>
+		</provides>
+		<requires>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/bin/sh"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+		<conflicts>
+			<dep name="compiz" op="LT" version="cvs_060519"/>
+		</conflicts>
+	</deps>
+</package>
+</subchannel></channel>

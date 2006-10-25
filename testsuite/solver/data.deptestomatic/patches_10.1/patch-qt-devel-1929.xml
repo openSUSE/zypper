@@ -1,0 +1,401 @@
+<channel><subchannel>                                                  
+
+<patch>
+	<name>qt-devel</name>
+	<arch>noarch</arch>
+	<version>1929</version>
+	<release>0</release>
+	<requires>
+		<dep kind="atom" name="qt-devel" epoch="0" version="4.1.0" release="29.5" op="EQ"/>
+		<dep kind="atom" name="qt-devel-64bit" epoch="0" version="4.1.0" release="29.5" op="EQ"/>
+	</requires>
+</patch>
+<atom>
+	<name>qt-devel</name>
+	<arch>i586</arch>
+	<version>4.1.0</version>
+	<release>29.5</release>
+	<freshens>
+		<dep kind="package" name="qt-devel"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="qt-devel" epoch="0" version="4.1.0" release="29.5" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>qt-devel</name>
+	<arch>ppc</arch>
+	<version>4.1.0</version>
+	<release>29.5</release>
+	<freshens>
+		<dep kind="package" name="qt-devel"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="qt-devel" epoch="0" version="4.1.0" release="29.5" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>qt-devel</name>
+	<arch>x86_64</arch>
+	<version>4.1.0</version>
+	<release>29.5</release>
+	<freshens>
+		<dep kind="package" name="qt-devel"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="qt-devel" epoch="0" version="4.1.0" release="29.5" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>qt-devel-64bit</name>
+	<arch>ppc</arch>
+	<version>4.1.0</version>
+	<release>29.5</release>
+	<freshens>
+		<dep kind="package" name="qt-devel-64bit"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="qt-devel-64bit" epoch="0" version="4.1.0" release="29.5" op="GE"/>
+	</requires>
+</atom>
+<package>
+	<name>qt-devel</name>
+	<summary>qt-devel: Adds libQtUiTools to the package</summary>
+	<description>This patch adds libQtUiTools to the Package, which was left
+out by accident.
+</description>
+	<arch>i586</arch>
+	<version>4.1.0</version>
+	<release>29.5</release>
+	<filesize>6116334</filesize>
+	<installedsize>17487196</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>4.1.0</version>
+			<release>29.5</release>
+			<filename>qt-devel-4.1.0-29.5.i586.rpm</filename>
+			<filesize>6116334</filesize>
+			<installedsize>17487196</installedsize>
+			<importance>optional</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="libQtDesigner.so.4"/>
+			<dep name="libQtDesignerComponents.so.4"/>
+			<dep name="libarthurplugin.so"/>
+			<dep name="libcontainerextension.so"/>
+			<dep name="libcustomwidgetplugin.so"/>
+			<dep name="libqt3supportwidgets.so"/>
+			<dep name="libtaskmenuextension.so"/>
+			<dep name="libworldtimeclockplugin.so"/>
+			<dep name="qt-devel" op="EQ" version="4.1.0" release="29.5"/>
+		</provides>
+		<requires>
+			<dep name="xorg-x11-devel"/>
+			<dep name="zlib-devel"/>
+			<dep name="libstdc++-devel"/>
+			<dep name="qt" op="EQ" version="4.1.0"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="libICE.so.6"/>
+			<dep name="libQt3Support.so.4"/>
+			<dep name="libQtCore.so.4"/>
+			<dep name="libQtDesigner.so.4"/>
+			<dep name="libQtDesignerComponents.so.4"/>
+			<dep name="libQtGui.so.4"/>
+			<dep name="libQtNetwork.so.4"/>
+			<dep name="libQtSql.so.4"/>
+			<dep name="libQtXml.so.4"/>
+			<dep name="libSM.so.6"/>
+			<dep name="libX11.so.6"/>
+			<dep name="libXcursor.so.1"/>
+			<dep name="libXext.so.6"/>
+			<dep name="libXi.so.6"/>
+			<dep name="libXinerama.so.1"/>
+			<dep name="libXrandr.so.2"/>
+			<dep name="libXrender.so.1"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libc.so.6(GLIBC_2.2)"/>
+			<dep name="libc.so.6(GLIBC_2.3)"/>
+			<dep name="libdl.so.2"/>
+			<dep name="libfontconfig.so.1"/>
+			<dep name="libfreetype.so.6"/>
+			<dep name="libgcc_s.so.1"/>
+			<dep name="libgcc_s.so.1(GCC_3.0)"/>
+			<dep name="libgcc_s.so.1(GLIBC_2.0)"/>
+			<dep name="libm.so.6"/>
+			<dep name="libm.so.6(GLIBC_2.0)"/>
+			<dep name="libm.so.6(GLIBC_2.1)"/>
+			<dep name="libm.so.6(GLIBC_2.2)"/>
+			<dep name="libpng.so.3"/>
+			<dep name="libpthread.so.0"/>
+			<dep name="libpthread.so.0(GLIBC_2.0)"/>
+			<dep name="libpthread.so.0(GLIBC_2.2)"/>
+			<dep name="libstdc++.so.6"/>
+			<dep name="libstdc++.so.6(CXXABI_1.3)"/>
+			<dep name="libstdc++.so.6(GLIBCXX_3.4)"/>
+			<dep name="libz.so.1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>qt-devel</name>
+	<summary>qt-devel: Adds libQtUiTools to the package</summary>
+	<description>This patch adds libQtUiTools to the Package, which was left
+out by accident.
+</description>
+	<arch>ppc</arch>
+	<version>4.1.0</version>
+	<release>29.5</release>
+	<filesize>6159166</filesize>
+	<installedsize>19775468</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>4.1.0</version>
+			<release>29.5</release>
+			<filename>qt-devel-4.1.0-29.5.ppc.rpm</filename>
+			<filesize>6159166</filesize>
+			<installedsize>19775468</installedsize>
+			<importance>optional</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="libQtDesigner.so.4"/>
+			<dep name="libQtDesignerComponents.so.4"/>
+			<dep name="libarthurplugin.so"/>
+			<dep name="libcontainerextension.so"/>
+			<dep name="libcustomwidgetplugin.so"/>
+			<dep name="libqt3supportwidgets.so"/>
+			<dep name="libtaskmenuextension.so"/>
+			<dep name="libworldtimeclockplugin.so"/>
+			<dep name="qt-devel" op="EQ" version="4.1.0" release="29.5"/>
+		</provides>
+		<requires>
+			<dep name="xorg-x11-devel"/>
+			<dep name="zlib-devel"/>
+			<dep name="libstdc++-devel"/>
+			<dep name="qt" op="EQ" version="4.1.0"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="libICE.so.6"/>
+			<dep name="libQt3Support.so.4"/>
+			<dep name="libQtCore.so.4"/>
+			<dep name="libQtDesigner.so.4"/>
+			<dep name="libQtDesignerComponents.so.4"/>
+			<dep name="libQtGui.so.4"/>
+			<dep name="libQtNetwork.so.4"/>
+			<dep name="libQtSql.so.4"/>
+			<dep name="libQtXml.so.4"/>
+			<dep name="libSM.so.6"/>
+			<dep name="libX11.so.6"/>
+			<dep name="libXcursor.so.1"/>
+			<dep name="libXext.so.6"/>
+			<dep name="libXi.so.6"/>
+			<dep name="libXinerama.so.1"/>
+			<dep name="libXrandr.so.2"/>
+			<dep name="libXrender.so.1"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libc.so.6(GLIBC_2.2)"/>
+			<dep name="libc.so.6(GLIBC_2.3)"/>
+			<dep name="libc.so.6(GLIBC_2.4)"/>
+			<dep name="libdl.so.2"/>
+			<dep name="libfontconfig.so.1"/>
+			<dep name="libfreetype.so.6"/>
+			<dep name="libgcc_s.so.1"/>
+			<dep name="libgcc_s.so.1(GCC_3.0)"/>
+			<dep name="libgcc_s.so.1(GLIBC_2.0)"/>
+			<dep name="libm.so.6"/>
+			<dep name="libm.so.6(GLIBC_2.0)"/>
+			<dep name="libm.so.6(GLIBC_2.1)"/>
+			<dep name="libm.so.6(GLIBC_2.2)"/>
+			<dep name="libpng.so.3"/>
+			<dep name="libpthread.so.0"/>
+			<dep name="libpthread.so.0(GLIBC_2.0)"/>
+			<dep name="libpthread.so.0(GLIBC_2.2)"/>
+			<dep name="libstdc++.so.6"/>
+			<dep name="libstdc++.so.6(CXXABI_1.3)"/>
+			<dep name="libstdc++.so.6(GLIBCXX_3.4)"/>
+			<dep name="libz.so.1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>qt-devel</name>
+	<summary>qt-devel: Adds libQtUiTools to the package</summary>
+	<description>This patch adds libQtUiTools to the Package, which was left
+out by accident.
+</description>
+	<arch>x86_64</arch>
+	<version>4.1.0</version>
+	<release>29.5</release>
+	<filesize>6228534</filesize>
+	<installedsize>18371043</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>4.1.0</version>
+			<release>29.5</release>
+			<filename>qt-devel-4.1.0-29.5.x86_64.rpm</filename>
+			<filesize>6228534</filesize>
+			<installedsize>18371043</installedsize>
+			<importance>optional</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="libQtDesigner.so.4()(64bit)"/>
+			<dep name="libQtDesignerComponents.so.4()(64bit)"/>
+			<dep name="libarthurplugin.so()(64bit)"/>
+			<dep name="libcontainerextension.so()(64bit)"/>
+			<dep name="libcustomwidgetplugin.so()(64bit)"/>
+			<dep name="libqt3supportwidgets.so()(64bit)"/>
+			<dep name="libtaskmenuextension.so()(64bit)"/>
+			<dep name="libworldtimeclockplugin.so()(64bit)"/>
+			<dep name="qt-devel" op="EQ" version="4.1.0" release="29.5"/>
+		</provides>
+		<requires>
+			<dep name="xorg-x11-devel"/>
+			<dep name="zlib-devel"/>
+			<dep name="libstdc++-devel"/>
+			<dep name="qt" op="EQ" version="4.1.0"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="libICE.so.6()(64bit)"/>
+			<dep name="libQt3Support.so.4()(64bit)"/>
+			<dep name="libQtCore.so.4()(64bit)"/>
+			<dep name="libQtDesigner.so.4()(64bit)"/>
+			<dep name="libQtDesignerComponents.so.4()(64bit)"/>
+			<dep name="libQtGui.so.4()(64bit)"/>
+			<dep name="libQtNetwork.so.4()(64bit)"/>
+			<dep name="libQtSql.so.4()(64bit)"/>
+			<dep name="libQtXml.so.4()(64bit)"/>
+			<dep name="libSM.so.6()(64bit)"/>
+			<dep name="libX11.so.6()(64bit)"/>
+			<dep name="libXcursor.so.1()(64bit)"/>
+			<dep name="libXext.so.6()(64bit)"/>
+			<dep name="libXi.so.6()(64bit)"/>
+			<dep name="libXinerama.so.1()(64bit)"/>
+			<dep name="libXrandr.so.2()(64bit)"/>
+			<dep name="libXrender.so.1()(64bit)"/>
+			<dep name="libc.so.6()(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.3)(64bit)"/>
+			<dep name="libdl.so.2()(64bit)"/>
+			<dep name="libfontconfig.so.1()(64bit)"/>
+			<dep name="libfreetype.so.6()(64bit)"/>
+			<dep name="libgcc_s.so.1()(64bit)"/>
+			<dep name="libgcc_s.so.1(GCC_3.0)(64bit)"/>
+			<dep name="libm.so.6()(64bit)"/>
+			<dep name="libm.so.6(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libpng.so.3()(64bit)"/>
+			<dep name="libpthread.so.0()(64bit)"/>
+			<dep name="libpthread.so.0(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libstdc++.so.6()(64bit)"/>
+			<dep name="libstdc++.so.6(CXXABI_1.3)(64bit)"/>
+			<dep name="libstdc++.so.6(GLIBCXX_3.4)(64bit)"/>
+			<dep name="libz.so.1()(64bit)"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>qt-devel-64bit</name>
+	<summary>qt-devel: Adds libQtUiTools to the package</summary>
+	<description>This patch adds libQtUiTools to the Package, which was left
+out by accident.
+</description>
+	<arch>ppc</arch>
+	<version>4.1.0</version>
+	<release>29.5</release>
+	<filesize>2015080</filesize>
+	<installedsize>6912663</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>4.1.0</version>
+			<release>29.5</release>
+			<filename>qt-devel-64bit-4.1.0-29.5.ppc.rpm</filename>
+			<filesize>2015080</filesize>
+			<installedsize>6912663</installedsize>
+			<importance>optional</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="libQtDesigner.so.4()(64bit)"/>
+			<dep name="libQtDesignerComponents.so.4()(64bit)"/>
+			<dep name="libarthurplugin.so()(64bit)"/>
+			<dep name="libcontainerextension.so()(64bit)"/>
+			<dep name="libcustomwidgetplugin.so()(64bit)"/>
+			<dep name="libqt3supportwidgets.so()(64bit)"/>
+			<dep name="libtaskmenuextension.so()(64bit)"/>
+			<dep name="libworldtimeclockplugin.so()(64bit)"/>
+			<dep name="qt-devel-64bit" op="EQ" version="4.1.0" release="29.5"/>
+		</provides>
+		<requires>
+			<dep name="qt-devel" op="EQ" version="4.1.0"/>
+			<dep name="qt-64bit" op="EQ" version="4.1.0"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="libICE.so.6()(64bit)"/>
+			<dep name="libQt3Support.so.4()(64bit)"/>
+			<dep name="libQtCore.so.4()(64bit)"/>
+			<dep name="libQtDesigner.so.4()(64bit)"/>
+			<dep name="libQtGui.so.4()(64bit)"/>
+			<dep name="libQtNetwork.so.4()(64bit)"/>
+			<dep name="libQtSql.so.4()(64bit)"/>
+			<dep name="libQtXml.so.4()(64bit)"/>
+			<dep name="libSM.so.6()(64bit)"/>
+			<dep name="libX11.so.6()(64bit)"/>
+			<dep name="libXcursor.so.1()(64bit)"/>
+			<dep name="libXext.so.6()(64bit)"/>
+			<dep name="libXi.so.6()(64bit)"/>
+			<dep name="libXinerama.so.1()(64bit)"/>
+			<dep name="libXrandr.so.2()(64bit)"/>
+			<dep name="libXrender.so.1()(64bit)"/>
+			<dep name="libc.so.6()(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.3)(64bit)"/>
+			<dep name="libdl.so.2()(64bit)"/>
+			<dep name="libfontconfig.so.1()(64bit)"/>
+			<dep name="libfreetype.so.6()(64bit)"/>
+			<dep name="libgcc_s.so.1()(64bit)"/>
+			<dep name="libgcc_s.so.1(GCC_3.0)(64bit)"/>
+			<dep name="libm.so.6()(64bit)"/>
+			<dep name="libm.so.6(GLIBC_2.3)(64bit)"/>
+			<dep name="libpng.so.3()(64bit)"/>
+			<dep name="libpthread.so.0()(64bit)"/>
+			<dep name="libstdc++.so.6()(64bit)"/>
+			<dep name="libstdc++.so.6(CXXABI_1.3)(64bit)"/>
+			<dep name="libstdc++.so.6(GLIBCXX_3.4)(64bit)"/>
+			<dep name="libz.so.1()(64bit)"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+</subchannel></channel>

@@ -1,0 +1,236 @@
+<channel><subchannel>                                                  
+
+<patch>
+	<name>gpg2</name>
+	<arch>noarch</arch>
+	<version>1956</version>
+	<release>0</release>
+	<requires>
+		<dep kind="atom" name="gpg2" epoch="0" version="1.9.18" release="17.8" op="EQ"/>
+	</requires>
+</patch>
+<atom>
+	<name>gpg2</name>
+	<arch>i586</arch>
+	<version>1.9.18</version>
+	<release>17.8</release>
+	<freshens>
+		<dep kind="package" name="gpg2"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="gpg2" epoch="0" version="1.9.18" release="17.8" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>gpg2</name>
+	<arch>ppc</arch>
+	<version>1.9.18</version>
+	<release>17.8</release>
+	<freshens>
+		<dep kind="package" name="gpg2"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="gpg2" epoch="0" version="1.9.18" release="17.8" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>gpg2</name>
+	<arch>x86_64</arch>
+	<version>1.9.18</version>
+	<release>17.8</release>
+	<freshens>
+		<dep kind="package" name="gpg2"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="gpg2" epoch="0" version="1.9.18" release="17.8" op="GE"/>
+	</requires>
+</atom>
+<package>
+	<name>gpg2</name>
+	<summary>gpg2: This update fixes a segmentaion fault</summary>
+	<description>This update of gpg2 fixes an segmentation fault when using
+the--no-armor option. This failure leads to a
+denial-of-service attack and may be used execute arbitrary
+code. (CVE-2006-3746)
+</description>
+	<arch>i586</arch>
+	<version>1.9.18</version>
+	<release>17.8</release>
+	<filesize>771342</filesize>
+	<installedsize>1913885</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>1.9.18</version>
+			<release>17.8</release>
+			<filename>gpg2-1.9.18-17.8.i586.rpm</filename>
+			<filesize>771342</filesize>
+			<installedsize>1913885</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="newpg"/>
+			<dep name="gpg2" op="EQ" version="1.9.18" release="17.8"/>
+		</provides>
+		<requires>
+			<dep name="info" pre="1"/>
+			<dep name="pinentry"/>
+			<dep name="dirmngr"/>
+			<dep name="gpg"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/bin/sh"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1)"/>
+			<dep name="libc.so.6(GLIBC_2.1.1)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libc.so.6(GLIBC_2.2)"/>
+			<dep name="libc.so.6(GLIBC_2.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)"/>
+			<dep name="libdl.so.2"/>
+			<dep name="libdl.so.2(GLIBC_2.0)"/>
+			<dep name="libdl.so.2(GLIBC_2.1)"/>
+			<dep name="libgcrypt.so.11"/>
+			<dep name="libgcrypt.so.11(GCRYPT_1.2)"/>
+			<dep name="libgpg-error.so.0"/>
+			<dep name="libksba.so.8"/>
+			<dep name="libksba.so.8(KSBA_0.9)"/>
+			<dep name="libusb-0.1.so.4"/>
+			<dep name="libz.so.1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>gpg2</name>
+	<summary>gpg2: This update fixes a segmentaion fault</summary>
+	<description>This update of gpg2 fixes an segmentation fault when using
+the--no-armor option. This failure leads to a
+denial-of-service attack and may be used execute arbitrary
+code. (CVE-2006-3746)
+</description>
+	<arch>ppc</arch>
+	<version>1.9.18</version>
+	<release>17.8</release>
+	<filesize>848759</filesize>
+	<installedsize>2233929</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>1.9.18</version>
+			<release>17.8</release>
+			<filename>gpg2-1.9.18-17.8.ppc.rpm</filename>
+			<filesize>848759</filesize>
+			<installedsize>2233929</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="newpg"/>
+			<dep name="gpg2" op="EQ" version="1.9.18" release="17.8"/>
+		</provides>
+		<requires>
+			<dep name="info" pre="1"/>
+			<dep name="pinentry"/>
+			<dep name="dirmngr"/>
+			<dep name="gpg"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/bin/sh"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1)"/>
+			<dep name="libc.so.6(GLIBC_2.1.1)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libc.so.6(GLIBC_2.2)"/>
+			<dep name="libc.so.6(GLIBC_2.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)"/>
+			<dep name="libc.so.6(GLIBC_2.4)"/>
+			<dep name="libdl.so.2"/>
+			<dep name="libdl.so.2(GLIBC_2.0)"/>
+			<dep name="libdl.so.2(GLIBC_2.1)"/>
+			<dep name="libgcrypt.so.11"/>
+			<dep name="libgcrypt.so.11(GCRYPT_1.2)"/>
+			<dep name="libgpg-error.so.0"/>
+			<dep name="libksba.so.8"/>
+			<dep name="libksba.so.8(KSBA_0.9)"/>
+			<dep name="libusb-0.1.so.4"/>
+			<dep name="libz.so.1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>gpg2</name>
+	<summary>gpg2: This update fixes a segmentaion fault</summary>
+	<description>This update of gpg2 fixes an segmentation fault when using
+the--no-armor option. This failure leads to a
+denial-of-service attack and may be used execute arbitrary
+code. (CVE-2006-3746)
+</description>
+	<arch>x86_64</arch>
+	<version>1.9.18</version>
+	<release>17.8</release>
+	<filesize>878505</filesize>
+	<installedsize>2130273</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>1.9.18</version>
+			<release>17.8</release>
+			<filename>gpg2-1.9.18-17.8.x86_64.rpm</filename>
+			<filesize>878505</filesize>
+			<installedsize>2130273</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="newpg"/>
+			<dep name="gpg2" op="EQ" version="1.9.18" release="17.8"/>
+		</provides>
+		<requires>
+			<dep name="info" pre="1"/>
+			<dep name="pinentry"/>
+			<dep name="dirmngr"/>
+			<dep name="gpg"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/bin/sh"/>
+			<dep name="libc.so.6()(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.3)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.3.3)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)(64bit)"/>
+			<dep name="libdl.so.2()(64bit)"/>
+			<dep name="libdl.so.2(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libgcrypt.so.11()(64bit)"/>
+			<dep name="libgcrypt.so.11(GCRYPT_1.2)(64bit)"/>
+			<dep name="libgpg-error.so.0()(64bit)"/>
+			<dep name="libksba.so.8()(64bit)"/>
+			<dep name="libksba.so.8(KSBA_0.9)(64bit)"/>
+			<dep name="libusb-0.1.so.4()(64bit)"/>
+			<dep name="libz.so.1()(64bit)"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+</subchannel></channel>

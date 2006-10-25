@@ -1,0 +1,65 @@
+<channel><subchannel>                                                  
+
+<patch>
+	<name>yast2-repair</name>
+	<arch>noarch</arch>
+	<version>1909</version>
+	<release>0</release>
+	<requires>
+		<dep kind="atom" name="yast2-repair" epoch="0" version="2.13.7" release="0.3" op="EQ"/>
+	</requires>
+</patch>
+<atom>
+	<name>yast2-repair</name>
+	<arch>noarch</arch>
+	<version>2.13.7</version>
+	<release>0.3</release>
+	<freshens>
+		<dep kind="package" name="yast2-repair"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="yast2-repair" epoch="0" version="2.13.7" release="0.3" op="GE"/>
+	</requires>
+</atom>
+<package>
+	<name>yast2-repair</name>
+	<summary>yast2-repair: Fixed adding obsolete /etc/fstab entries</summary>
+	<description>yast2-repair proposed adding entry for CD-ROM to
+/etc/fstab, but they are not used any more.
+</description>
+	<arch>noarch</arch>
+	<version>2.13.7</version>
+	<release>0.3</release>
+	<filesize>246778</filesize>
+	<installedsize>1936499</installedsize>
+	<history>
+		<update>
+			<arch>noarch</arch>
+			<epoch>0</epoch>
+			<version>2.13.7</version>
+			<release>0.3</release>
+			<filename>yast2-repair-2.13.7-0.3.noarch.rpm</filename>
+			<filesize>246778</filesize>
+			<installedsize>1936499</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="yast2-repair" op="EQ" version="2.13.7" release="0.3"/>
+		</provides>
+		<requires>
+			<dep name="yast2"/>
+			<dep name="gpart"/>
+			<dep name="reiserfs"/>
+			<dep name="e2fsprogs"/>
+			<dep name="yast2-bootloader"/>
+			<dep name="yast2-storage"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+</subchannel></channel>

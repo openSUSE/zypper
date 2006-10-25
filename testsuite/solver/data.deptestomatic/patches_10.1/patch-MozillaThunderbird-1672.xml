@@ -1,0 +1,983 @@
+<channel><subchannel>                                                  
+
+<patch>
+	<name>MozillaThunderbird</name>
+	<arch>noarch</arch>
+	<version>1672</version>
+	<release>0</release>
+	<requires>
+		<dep kind="atom" name="MozillaThunderbird" epoch="0" version="1.5.0.4" release="2.1" op="EQ"/>
+		<dep kind="atom" name="MozillaThunderbird-translations" epoch="0" version="1.5.0.4" release="2.1" op="EQ"/>
+	</requires>
+</patch>
+<atom>
+	<name>MozillaThunderbird</name>
+	<arch>i586</arch>
+	<version>1.5.0.4</version>
+	<release>2.1</release>
+	<freshens>
+		<dep kind="package" name="MozillaThunderbird"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="MozillaThunderbird" epoch="0" version="1.5.0.4" release="2.1" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>MozillaThunderbird</name>
+	<arch>ppc</arch>
+	<version>1.5.0.4</version>
+	<release>2.1</release>
+	<freshens>
+		<dep kind="package" name="MozillaThunderbird"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="MozillaThunderbird" epoch="0" version="1.5.0.4" release="2.1" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>MozillaThunderbird</name>
+	<arch>x86_64</arch>
+	<version>1.5.0.4</version>
+	<release>2.1</release>
+	<freshens>
+		<dep kind="package" name="MozillaThunderbird"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="MozillaThunderbird" epoch="0" version="1.5.0.4" release="2.1" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>MozillaThunderbird-translations</name>
+	<arch>i586</arch>
+	<version>1.5.0.4</version>
+	<release>2.1</release>
+	<freshens>
+		<dep kind="package" name="MozillaThunderbird-translations"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="MozillaThunderbird-translations" epoch="0" version="1.5.0.4" release="2.1" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>MozillaThunderbird-translations</name>
+	<arch>ppc</arch>
+	<version>1.5.0.4</version>
+	<release>2.1</release>
+	<freshens>
+		<dep kind="package" name="MozillaThunderbird-translations"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="MozillaThunderbird-translations" epoch="0" version="1.5.0.4" release="2.1" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>MozillaThunderbird-translations</name>
+	<arch>x86_64</arch>
+	<version>1.5.0.4</version>
+	<release>2.1</release>
+	<freshens>
+		<dep kind="package" name="MozillaThunderbird-translations"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="MozillaThunderbird-translations" epoch="0" version="1.5.0.4" release="2.1" op="GE"/>
+	</requires>
+</atom>
+<package>
+	<name>MozillaThunderbird</name>
+	<summary>Thunderbird: Security Update 1.5.0.4</summary>
+	<description>This update of Mozilla Thunderbird fixes the security 
+problems fixed in version 1.5.0.4:  MFSA 
+2006-31/CVE-2006-2787: EvalInSandbox in Mozilla Firefox and 
+Thunderbird before 1.5.0.4 allows remote attackers to gain 
+privileges via javascript that calls the valueOf method on 
+objects that were created outside of the sandbox.  MFSA 
+2006-32/CVE-2006-2780: Integer overflow in Mozilla Firefox 
+and Thunderbird before 1.5.0.4 allows remote attackers to 
+cause a denial of service (crash) and possibly execute 
+arbitrary code via "jsstr tagify," which leads to memory 
+corruption.  MFSA 2006-32/CVE-2006-2779: Mozilla Firefox 
+and Thunderbird before 1.5.0.4 allow remote attackers to 
+cause a denial of service (crash) and possibly execute 
+arbitrary code via (1) nested <option> tags in a select 
+tag, (2) a DOMNodeRemoved mutation event, (3) 
+"Content-implemented tree views," (4) BoxObjects, (5) the 
+XBL implementation, (6) an iframe that attempts to remove 
+itself, which leads to memory corruption.  MFSA 
+2006-33/CVE-2006-2786: HTTP response smuggling 
+vulnerability in Mozilla Firefox and Thunderbird before 
+1.5.0.4, when used with certain proxy servers, allows 
+remote attackers to cause Firefox to interpret certain 
+responses as if they were responses from two different 
+sites via (1) invalid HTTP response headers with spaces 
+between the header name and the colon, which might not be 
+ignored in some cases, or (2) HTTP 1.1 headers through an 
+HTTP 1.0 proxy, which are ignored by the proxy but 
+processed by the client.  MFSA 2006-35/CVE-2006-2775: 
+Mozilla Firefox and Thunderbird before 1.5.0.4 associates 
+XUL attributes with the wrong URL under certain unspecified 
+circumstances, which might allow remote attackers to bypass 
+restrictions by causing a persisted string to be associated 
+with the wrong URL.  MFSA 2006-37/CVE-2006-2776: Certain 
+privileged UI code in Mozilla Firefox and Thunderbird 
+before 1.5.0.4 calls content-defined setters on an object 
+prototype, which allows remote attackers to execute code at 
+a higher privilege than intended.  MFSA 
+2006-38/CVE-2006-2778: The crypto.signText function in 
+Mozilla Firefox and Thunderbird before 1.5.0.4 allows 
+remote attackers to execute arbitrary code via certain 
+optional Certificate Authority name arguments, which causes 
+an invalid array index and triggers a buffer overflow.  
+MFSA 2006-40/CVE-2006-2781: Double-free vulnerability in 
+Mozilla Thunderbird before 1.5.0.4 and SeaMonkey before 
+1.0.2 allows remote attackers to cause a denial of service 
+(hang) and possibly execute arbitrary code via a VCard that 
+contains invalid base64 characters.  MFSA 
+2006-42/CVE-2006-2783: Mozilla Firefox and Thunderbird 
+before 1.5.0.4 strips the Unicode Byte-order-Mark (BOM) 
+from a UTF-8 page before the page is passed to the parser, 
+which allows remote attackers to conduct cross-site 
+scripting (XSS) attacks via a BOM sequence in the middle of 
+a dangerous tag such as SCRIPT.
+</description>
+	<arch>i586</arch>
+	<version>1.5.0.4</version>
+	<release>2.1</release>
+	<filesize>7840820</filesize>
+	<installedsize>23451964</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>1.5.0.4</version>
+			<release>2.1</release>
+			<filename>MozillaThunderbird-1.5.0.4-2.1.i586.rpm</filename>
+			<filesize>7840820</filesize>
+			<installedsize>23451964</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="libenigmime.so"/>
+			<dep name="libenigmime.so(EXPORTED)"/>
+			<dep name="libenigmime.so(libenigmime.so)"/>
+			<dep name="libimgicon.so"/>
+			<dep name="libimgicon.so(EXPORTED)"/>
+			<dep name="libimgicon.so(libimgicon.so)"/>
+			<dep name="libjsd.so"/>
+			<dep name="libjsd.so(EXPORTED)"/>
+			<dep name="libjsd.so(libjsd.so)"/>
+			<dep name="libldap50.so"/>
+			<dep name="libmozgnome.so"/>
+			<dep name="libmozgnome.so(EXPORTED)"/>
+			<dep name="libmozgnome.so(libmozgnome.so)"/>
+			<dep name="libmozjs.so"/>
+			<dep name="libmyspell.so"/>
+			<dep name="libmyspell.so(EXPORTED)"/>
+			<dep name="libmyspell.so(libmyspell.so)"/>
+			<dep name="libprldap50.so"/>
+			<dep name="libspellchecker.so"/>
+			<dep name="libspellchecker.so(EXPORTED)"/>
+			<dep name="libspellchecker.so(libspellchecker.so)"/>
+			<dep name="libxpcom.so"/>
+			<dep name="libxpcom_compat.so"/>
+			<dep name="libxpcom_core.so"/>
+			<dep name="libxpinstall.so"/>
+			<dep name="libxpinstall.so(EXPORTED)"/>
+			<dep name="libxpinstall.so(libxpinstall.so)"/>
+			<dep name="libxpistub.so"/>
+			<dep name="MozillaThunderbird" op="EQ" version="1.5.0.4" release="2.1"/>
+		</provides>
+		<requires>
+			<dep name="libstdc++" pre="1"/>
+			<dep name="fileutils" pre="1"/>
+			<dep name="textutils" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="mozilla-nspr" op="GE" version="4.6.1"/>
+			<dep name="mozilla-nss" op="GE" version="3.11"/>
+			<dep name="/bin/sh"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/bin/sh"/>
+			<dep name="libICE.so.6"/>
+			<dep name="libORBit-2.so.0"/>
+			<dep name="libSM.so.6"/>
+			<dep name="libX11.so.6"/>
+			<dep name="libXext.so.6"/>
+			<dep name="libXft.so.2"/>
+			<dep name="libXrender.so.1"/>
+			<dep name="libXt.so.6"/>
+			<dep name="libart_lgpl_2.so.2"/>
+			<dep name="libatk-1.0.so.0"/>
+			<dep name="libbonobo-2.so.0"/>
+			<dep name="libbonobo-activation.so.4"/>
+			<dep name="libbonoboui-2.so.0"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libc.so.6(GLIBC_2.2)"/>
+			<dep name="libc.so.6(GLIBC_2.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)"/>
+			<dep name="libc.so.6(GLIBC_2.4)"/>
+			<dep name="libcairo.so.2"/>
+			<dep name="libdl.so.2"/>
+			<dep name="libdl.so.2(GLIBC_2.0)"/>
+			<dep name="libfontconfig.so.1"/>
+			<dep name="libfreetype.so.6"/>
+			<dep name="libgcc_s.so.1"/>
+			<dep name="libgcc_s.so.1(GCC_3.0)"/>
+			<dep name="libgcc_s.so.1(GLIBC_2.0)"/>
+			<dep name="libgconf-2.so.4"/>
+			<dep name="libgdk-x11-2.0.so.0"/>
+			<dep name="libgdk_pixbuf-2.0.so.0"/>
+			<dep name="libglib-2.0.so.0"/>
+			<dep name="libglitz.so.1"/>
+			<dep name="libgmodule-2.0.so.0"/>
+			<dep name="libgnome-2.so.0"/>
+			<dep name="libgnome-keyring.so.0"/>
+			<dep name="libgnomecanvas-2.so.0"/>
+			<dep name="libgnomeui-2.so.0"/>
+			<dep name="libgnomevfs-2.so.0"/>
+			<dep name="libgobject-2.0.so.0"/>
+			<dep name="libgthread-2.0.so.0"/>
+			<dep name="libgtk-x11-2.0.so.0"/>
+			<dep name="libjpeg.so.62"/>
+			<dep name="libldap50.so"/>
+			<dep name="libm.so.6"/>
+			<dep name="libm.so.6(GLIBC_2.0)"/>
+			<dep name="libm.so.6(GLIBC_2.1)"/>
+			<dep name="libmozjs.so"/>
+			<dep name="libnspr4.so"/>
+			<dep name="libnss3.so"/>
+			<dep name="libnss3.so(NSS_3.2)"/>
+			<dep name="libnss3.so(NSS_3.3)"/>
+			<dep name="libnss3.so(NSS_3.4)"/>
+			<dep name="libnss3.so(NSS_3.5)"/>
+			<dep name="libnss3.so(NSS_3.6)"/>
+			<dep name="libnss3.so(NSS_3.7)"/>
+			<dep name="libnss3.so(NSS_3.9)"/>
+			<dep name="libnss3.so(NSS_3.9.3)"/>
+			<dep name="libpango-1.0.so.0"/>
+			<dep name="libpangocairo-1.0.so.0"/>
+			<dep name="libpangoft2-1.0.so.0"/>
+			<dep name="libpangoxft-1.0.so.0"/>
+			<dep name="libplc4.so"/>
+			<dep name="libplds4.so"/>
+			<dep name="libpng.so.3"/>
+			<dep name="libpng12.so.0"/>
+			<dep name="libpopt.so.0"/>
+			<dep name="libprldap50.so"/>
+			<dep name="libpthread.so.0"/>
+			<dep name="libpthread.so.0(GLIBC_2.0)"/>
+			<dep name="libpthread.so.0(GLIBC_2.1)"/>
+			<dep name="libpthread.so.0(GLIBC_2.2)"/>
+			<dep name="libsmime3.so"/>
+			<dep name="libsmime3.so(NSS_3.2)"/>
+			<dep name="libsmime3.so(NSS_3.3)"/>
+			<dep name="libsmime3.so(NSS_3.4)"/>
+			<dep name="libsmime3.so(NSS_3.4.1)"/>
+			<dep name="libsmime3.so(NSS_3.6)"/>
+			<dep name="libssl3.so"/>
+			<dep name="libssl3.so(NSS_3.2)"/>
+			<dep name="libssl3.so(NSS_3.4)"/>
+			<dep name="libstdc++.so.6"/>
+			<dep name="libstdc++.so.6(CXXABI_1.3)"/>
+			<dep name="libstdc++.so.6(GLIBCXX_3.4)"/>
+			<dep name="libxml2.so.2"/>
+			<dep name="libxpcom.so"/>
+			<dep name="libxpcom_compat.so"/>
+			<dep name="libxpcom_core.so"/>
+			<dep name="libz.so.1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>MozillaThunderbird</name>
+	<summary>Thunderbird: Security Update 1.5.0.4</summary>
+	<description>This update of Mozilla Thunderbird fixes the security 
+problems fixed in version 1.5.0.4:  MFSA 
+2006-31/CVE-2006-2787: EvalInSandbox in Mozilla Firefox and 
+Thunderbird before 1.5.0.4 allows remote attackers to gain 
+privileges via javascript that calls the valueOf method on 
+objects that were created outside of the sandbox.  MFSA 
+2006-32/CVE-2006-2780: Integer overflow in Mozilla Firefox 
+and Thunderbird before 1.5.0.4 allows remote attackers to 
+cause a denial of service (crash) and possibly execute 
+arbitrary code via "jsstr tagify," which leads to memory 
+corruption.  MFSA 2006-32/CVE-2006-2779: Mozilla Firefox 
+and Thunderbird before 1.5.0.4 allow remote attackers to 
+cause a denial of service (crash) and possibly execute 
+arbitrary code via (1) nested <option> tags in a select 
+tag, (2) a DOMNodeRemoved mutation event, (3) 
+"Content-implemented tree views," (4) BoxObjects, (5) the 
+XBL implementation, (6) an iframe that attempts to remove 
+itself, which leads to memory corruption.  MFSA 
+2006-33/CVE-2006-2786: HTTP response smuggling 
+vulnerability in Mozilla Firefox and Thunderbird before 
+1.5.0.4, when used with certain proxy servers, allows 
+remote attackers to cause Firefox to interpret certain 
+responses as if they were responses from two different 
+sites via (1) invalid HTTP response headers with spaces 
+between the header name and the colon, which might not be 
+ignored in some cases, or (2) HTTP 1.1 headers through an 
+HTTP 1.0 proxy, which are ignored by the proxy but 
+processed by the client.  MFSA 2006-35/CVE-2006-2775: 
+Mozilla Firefox and Thunderbird before 1.5.0.4 associates 
+XUL attributes with the wrong URL under certain unspecified 
+circumstances, which might allow remote attackers to bypass 
+restrictions by causing a persisted string to be associated 
+with the wrong URL.  MFSA 2006-37/CVE-2006-2776: Certain 
+privileged UI code in Mozilla Firefox and Thunderbird 
+before 1.5.0.4 calls content-defined setters on an object 
+prototype, which allows remote attackers to execute code at 
+a higher privilege than intended.  MFSA 
+2006-38/CVE-2006-2778: The crypto.signText function in 
+Mozilla Firefox and Thunderbird before 1.5.0.4 allows 
+remote attackers to execute arbitrary code via certain 
+optional Certificate Authority name arguments, which causes 
+an invalid array index and triggers a buffer overflow.  
+MFSA 2006-40/CVE-2006-2781: Double-free vulnerability in 
+Mozilla Thunderbird before 1.5.0.4 and SeaMonkey before 
+1.0.2 allows remote attackers to cause a denial of service 
+(hang) and possibly execute arbitrary code via a VCard that 
+contains invalid base64 characters.  MFSA 
+2006-42/CVE-2006-2783: Mozilla Firefox and Thunderbird 
+before 1.5.0.4 strips the Unicode Byte-order-Mark (BOM) 
+from a UTF-8 page before the page is passed to the parser, 
+which allows remote attackers to conduct cross-site 
+scripting (XSS) attacks via a BOM sequence in the middle of 
+a dangerous tag such as SCRIPT.
+</description>
+	<arch>ppc</arch>
+	<version>1.5.0.4</version>
+	<release>2.1</release>
+	<filesize>7997911</filesize>
+	<installedsize>26929920</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>1.5.0.4</version>
+			<release>2.1</release>
+			<filename>MozillaThunderbird-1.5.0.4-2.1.ppc.rpm</filename>
+			<filesize>7997911</filesize>
+			<installedsize>26929920</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="libenigmime.so"/>
+			<dep name="libenigmime.so(EXPORTED)"/>
+			<dep name="libenigmime.so(libenigmime.so)"/>
+			<dep name="libimgicon.so"/>
+			<dep name="libimgicon.so(EXPORTED)"/>
+			<dep name="libimgicon.so(libimgicon.so)"/>
+			<dep name="libjsd.so"/>
+			<dep name="libjsd.so(EXPORTED)"/>
+			<dep name="libjsd.so(libjsd.so)"/>
+			<dep name="libldap50.so"/>
+			<dep name="libmozgnome.so"/>
+			<dep name="libmozgnome.so(EXPORTED)"/>
+			<dep name="libmozgnome.so(libmozgnome.so)"/>
+			<dep name="libmozjs.so"/>
+			<dep name="libmyspell.so"/>
+			<dep name="libmyspell.so(EXPORTED)"/>
+			<dep name="libmyspell.so(libmyspell.so)"/>
+			<dep name="libprldap50.so"/>
+			<dep name="libspellchecker.so"/>
+			<dep name="libspellchecker.so(EXPORTED)"/>
+			<dep name="libspellchecker.so(libspellchecker.so)"/>
+			<dep name="libxpcom.so"/>
+			<dep name="libxpcom_compat.so"/>
+			<dep name="libxpcom_core.so"/>
+			<dep name="libxpinstall.so"/>
+			<dep name="libxpinstall.so(EXPORTED)"/>
+			<dep name="libxpinstall.so(libxpinstall.so)"/>
+			<dep name="libxpistub.so"/>
+			<dep name="MozillaThunderbird" op="EQ" version="1.5.0.4" release="2.1"/>
+		</provides>
+		<requires>
+			<dep name="libstdc++" pre="1"/>
+			<dep name="fileutils" pre="1"/>
+			<dep name="textutils" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="mozilla-nspr" op="GE" version="4.6.1"/>
+			<dep name="mozilla-nss" op="GE" version="3.11"/>
+			<dep name="/bin/sh"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/bin/sh"/>
+			<dep name="libICE.so.6"/>
+			<dep name="libORBit-2.so.0"/>
+			<dep name="libSM.so.6"/>
+			<dep name="libX11.so.6"/>
+			<dep name="libXext.so.6"/>
+			<dep name="libXft.so.2"/>
+			<dep name="libXrender.so.1"/>
+			<dep name="libXt.so.6"/>
+			<dep name="libart_lgpl_2.so.2"/>
+			<dep name="libatk-1.0.so.0"/>
+			<dep name="libbonobo-2.so.0"/>
+			<dep name="libbonobo-activation.so.4"/>
+			<dep name="libbonoboui-2.so.0"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libc.so.6(GLIBC_2.2)"/>
+			<dep name="libc.so.6(GLIBC_2.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)"/>
+			<dep name="libc.so.6(GLIBC_2.4)"/>
+			<dep name="libcairo.so.2"/>
+			<dep name="libdl.so.2"/>
+			<dep name="libdl.so.2(GLIBC_2.0)"/>
+			<dep name="libfontconfig.so.1"/>
+			<dep name="libfreetype.so.6"/>
+			<dep name="libgcc_s.so.1"/>
+			<dep name="libgcc_s.so.1(GCC_3.0)"/>
+			<dep name="libgcc_s.so.1(GLIBC_2.0)"/>
+			<dep name="libgconf-2.so.4"/>
+			<dep name="libgdk-x11-2.0.so.0"/>
+			<dep name="libgdk_pixbuf-2.0.so.0"/>
+			<dep name="libglib-2.0.so.0"/>
+			<dep name="libglitz.so.1"/>
+			<dep name="libgmodule-2.0.so.0"/>
+			<dep name="libgnome-2.so.0"/>
+			<dep name="libgnome-keyring.so.0"/>
+			<dep name="libgnomecanvas-2.so.0"/>
+			<dep name="libgnomeui-2.so.0"/>
+			<dep name="libgnomevfs-2.so.0"/>
+			<dep name="libgobject-2.0.so.0"/>
+			<dep name="libgthread-2.0.so.0"/>
+			<dep name="libgtk-x11-2.0.so.0"/>
+			<dep name="libjpeg.so.62"/>
+			<dep name="libldap50.so"/>
+			<dep name="libm.so.6"/>
+			<dep name="libm.so.6(GLIBC_2.0)"/>
+			<dep name="libm.so.6(GLIBC_2.1)"/>
+			<dep name="libmozjs.so"/>
+			<dep name="libnspr4.so"/>
+			<dep name="libnss3.so"/>
+			<dep name="libnss3.so(NSS_3.2)"/>
+			<dep name="libnss3.so(NSS_3.3)"/>
+			<dep name="libnss3.so(NSS_3.4)"/>
+			<dep name="libnss3.so(NSS_3.5)"/>
+			<dep name="libnss3.so(NSS_3.6)"/>
+			<dep name="libnss3.so(NSS_3.7)"/>
+			<dep name="libnss3.so(NSS_3.9)"/>
+			<dep name="libnss3.so(NSS_3.9.3)"/>
+			<dep name="libpango-1.0.so.0"/>
+			<dep name="libpangocairo-1.0.so.0"/>
+			<dep name="libpangoft2-1.0.so.0"/>
+			<dep name="libpangoxft-1.0.so.0"/>
+			<dep name="libplc4.so"/>
+			<dep name="libplds4.so"/>
+			<dep name="libpng.so.3"/>
+			<dep name="libpng12.so.0"/>
+			<dep name="libpopt.so.0"/>
+			<dep name="libprldap50.so"/>
+			<dep name="libpthread.so.0"/>
+			<dep name="libpthread.so.0(GLIBC_2.0)"/>
+			<dep name="libpthread.so.0(GLIBC_2.1)"/>
+			<dep name="libpthread.so.0(GLIBC_2.2)"/>
+			<dep name="libpthread.so.0(GLIBC_2.3.4)"/>
+			<dep name="libsmime3.so"/>
+			<dep name="libsmime3.so(NSS_3.2)"/>
+			<dep name="libsmime3.so(NSS_3.3)"/>
+			<dep name="libsmime3.so(NSS_3.4)"/>
+			<dep name="libsmime3.so(NSS_3.4.1)"/>
+			<dep name="libsmime3.so(NSS_3.6)"/>
+			<dep name="libssl3.so"/>
+			<dep name="libssl3.so(NSS_3.2)"/>
+			<dep name="libssl3.so(NSS_3.4)"/>
+			<dep name="libstdc++.so.6"/>
+			<dep name="libstdc++.so.6(CXXABI_1.3)"/>
+			<dep name="libstdc++.so.6(GLIBCXX_3.4)"/>
+			<dep name="libxml2.so.2"/>
+			<dep name="libxpcom.so"/>
+			<dep name="libxpcom_compat.so"/>
+			<dep name="libxpcom_core.so"/>
+			<dep name="libz.so.1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>MozillaThunderbird</name>
+	<summary>Thunderbird: Security Update 1.5.0.4</summary>
+	<description>This update of Mozilla Thunderbird fixes the security 
+problems fixed in version 1.5.0.4:  MFSA 
+2006-31/CVE-2006-2787: EvalInSandbox in Mozilla Firefox and 
+Thunderbird before 1.5.0.4 allows remote attackers to gain 
+privileges via javascript that calls the valueOf method on 
+objects that were created outside of the sandbox.  MFSA 
+2006-32/CVE-2006-2780: Integer overflow in Mozilla Firefox 
+and Thunderbird before 1.5.0.4 allows remote attackers to 
+cause a denial of service (crash) and possibly execute 
+arbitrary code via "jsstr tagify," which leads to memory 
+corruption.  MFSA 2006-32/CVE-2006-2779: Mozilla Firefox 
+and Thunderbird before 1.5.0.4 allow remote attackers to 
+cause a denial of service (crash) and possibly execute 
+arbitrary code via (1) nested <option> tags in a select 
+tag, (2) a DOMNodeRemoved mutation event, (3) 
+"Content-implemented tree views," (4) BoxObjects, (5) the 
+XBL implementation, (6) an iframe that attempts to remove 
+itself, which leads to memory corruption.  MFSA 
+2006-33/CVE-2006-2786: HTTP response smuggling 
+vulnerability in Mozilla Firefox and Thunderbird before 
+1.5.0.4, when used with certain proxy servers, allows 
+remote attackers to cause Firefox to interpret certain 
+responses as if they were responses from two different 
+sites via (1) invalid HTTP response headers with spaces 
+between the header name and the colon, which might not be 
+ignored in some cases, or (2) HTTP 1.1 headers through an 
+HTTP 1.0 proxy, which are ignored by the proxy but 
+processed by the client.  MFSA 2006-35/CVE-2006-2775: 
+Mozilla Firefox and Thunderbird before 1.5.0.4 associates 
+XUL attributes with the wrong URL under certain unspecified 
+circumstances, which might allow remote attackers to bypass 
+restrictions by causing a persisted string to be associated 
+with the wrong URL.  MFSA 2006-37/CVE-2006-2776: Certain 
+privileged UI code in Mozilla Firefox and Thunderbird 
+before 1.5.0.4 calls content-defined setters on an object 
+prototype, which allows remote attackers to execute code at 
+a higher privilege than intended.  MFSA 
+2006-38/CVE-2006-2778: The crypto.signText function in 
+Mozilla Firefox and Thunderbird before 1.5.0.4 allows 
+remote attackers to execute arbitrary code via certain 
+optional Certificate Authority name arguments, which causes 
+an invalid array index and triggers a buffer overflow.  
+MFSA 2006-40/CVE-2006-2781: Double-free vulnerability in 
+Mozilla Thunderbird before 1.5.0.4 and SeaMonkey before 
+1.0.2 allows remote attackers to cause a denial of service 
+(hang) and possibly execute arbitrary code via a VCard that 
+contains invalid base64 characters.  MFSA 
+2006-42/CVE-2006-2783: Mozilla Firefox and Thunderbird 
+before 1.5.0.4 strips the Unicode Byte-order-Mark (BOM) 
+from a UTF-8 page before the page is passed to the parser, 
+which allows remote attackers to conduct cross-site 
+scripting (XSS) attacks via a BOM sequence in the middle of 
+a dangerous tag such as SCRIPT.
+</description>
+	<arch>x86_64</arch>
+	<version>1.5.0.4</version>
+	<release>2.1</release>
+	<filesize>8972465</filesize>
+	<installedsize>28013997</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>1.5.0.4</version>
+			<release>2.1</release>
+			<filename>MozillaThunderbird-1.5.0.4-2.1.x86_64.rpm</filename>
+			<filesize>8972465</filesize>
+			<installedsize>28013997</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="libenigmime.so()(64bit)"/>
+			<dep name="libenigmime.so(EXPORTED)(64bit)"/>
+			<dep name="libenigmime.so(libenigmime.so)(64bit)"/>
+			<dep name="libimgicon.so()(64bit)"/>
+			<dep name="libimgicon.so(EXPORTED)(64bit)"/>
+			<dep name="libimgicon.so(libimgicon.so)(64bit)"/>
+			<dep name="libjsd.so()(64bit)"/>
+			<dep name="libjsd.so(EXPORTED)(64bit)"/>
+			<dep name="libjsd.so(libjsd.so)(64bit)"/>
+			<dep name="libldap50.so()(64bit)"/>
+			<dep name="libmozgnome.so()(64bit)"/>
+			<dep name="libmozgnome.so(EXPORTED)(64bit)"/>
+			<dep name="libmozgnome.so(libmozgnome.so)(64bit)"/>
+			<dep name="libmozjs.so()(64bit)"/>
+			<dep name="libmyspell.so()(64bit)"/>
+			<dep name="libmyspell.so(EXPORTED)(64bit)"/>
+			<dep name="libmyspell.so(libmyspell.so)(64bit)"/>
+			<dep name="libprldap50.so()(64bit)"/>
+			<dep name="libspellchecker.so()(64bit)"/>
+			<dep name="libspellchecker.so(EXPORTED)(64bit)"/>
+			<dep name="libspellchecker.so(libspellchecker.so)(64bit)"/>
+			<dep name="libxpcom.so()(64bit)"/>
+			<dep name="libxpcom_compat.so()(64bit)"/>
+			<dep name="libxpcom_core.so()(64bit)"/>
+			<dep name="libxpinstall.so()(64bit)"/>
+			<dep name="libxpinstall.so(EXPORTED)(64bit)"/>
+			<dep name="libxpinstall.so(libxpinstall.so)(64bit)"/>
+			<dep name="libxpistub.so()(64bit)"/>
+			<dep name="MozillaThunderbird" op="EQ" version="1.5.0.4" release="2.1"/>
+		</provides>
+		<requires>
+			<dep name="libstdc++" pre="1"/>
+			<dep name="fileutils" pre="1"/>
+			<dep name="textutils" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="mozilla-nspr" op="GE" version="4.6.1"/>
+			<dep name="mozilla-nss" op="GE" version="3.11"/>
+			<dep name="/bin/sh"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/bin/sh"/>
+			<dep name="libICE.so.6()(64bit)"/>
+			<dep name="libORBit-2.so.0()(64bit)"/>
+			<dep name="libSM.so.6()(64bit)"/>
+			<dep name="libX11.so.6()(64bit)"/>
+			<dep name="libXext.so.6()(64bit)"/>
+			<dep name="libXft.so.2()(64bit)"/>
+			<dep name="libXrender.so.1()(64bit)"/>
+			<dep name="libXt.so.6()(64bit)"/>
+			<dep name="libart_lgpl_2.so.2()(64bit)"/>
+			<dep name="libatk-1.0.so.0()(64bit)"/>
+			<dep name="libbonobo-2.so.0()(64bit)"/>
+			<dep name="libbonobo-activation.so.4()(64bit)"/>
+			<dep name="libbonoboui-2.so.0()(64bit)"/>
+			<dep name="libc.so.6()(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.3)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.4)(64bit)"/>
+			<dep name="libcairo.so.2()(64bit)"/>
+			<dep name="libdl.so.2()(64bit)"/>
+			<dep name="libfontconfig.so.1()(64bit)"/>
+			<dep name="libfreetype.so.6()(64bit)"/>
+			<dep name="libgcc_s.so.1()(64bit)"/>
+			<dep name="libgconf-2.so.4()(64bit)"/>
+			<dep name="libgdk-x11-2.0.so.0()(64bit)"/>
+			<dep name="libgdk_pixbuf-2.0.so.0()(64bit)"/>
+			<dep name="libglib-2.0.so.0()(64bit)"/>
+			<dep name="libglitz.so.1()(64bit)"/>
+			<dep name="libgmodule-2.0.so.0()(64bit)"/>
+			<dep name="libgnome-2.so.0()(64bit)"/>
+			<dep name="libgnome-keyring.so.0()(64bit)"/>
+			<dep name="libgnomecanvas-2.so.0()(64bit)"/>
+			<dep name="libgnomeui-2.so.0()(64bit)"/>
+			<dep name="libgnomevfs-2.so.0()(64bit)"/>
+			<dep name="libgobject-2.0.so.0()(64bit)"/>
+			<dep name="libgthread-2.0.so.0()(64bit)"/>
+			<dep name="libgtk-x11-2.0.so.0()(64bit)"/>
+			<dep name="libjpeg.so.62()(64bit)"/>
+			<dep name="libldap50.so()(64bit)"/>
+			<dep name="libm.so.6()(64bit)"/>
+			<dep name="libm.so.6(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libmozjs.so()(64bit)"/>
+			<dep name="libnspr4.so()(64bit)"/>
+			<dep name="libnss3.so()(64bit)"/>
+			<dep name="libnss3.so(NSS_3.2)(64bit)"/>
+			<dep name="libnss3.so(NSS_3.3)(64bit)"/>
+			<dep name="libnss3.so(NSS_3.4)(64bit)"/>
+			<dep name="libnss3.so(NSS_3.5)(64bit)"/>
+			<dep name="libnss3.so(NSS_3.6)(64bit)"/>
+			<dep name="libnss3.so(NSS_3.7)(64bit)"/>
+			<dep name="libnss3.so(NSS_3.9)(64bit)"/>
+			<dep name="libnss3.so(NSS_3.9.3)(64bit)"/>
+			<dep name="libpango-1.0.so.0()(64bit)"/>
+			<dep name="libpangocairo-1.0.so.0()(64bit)"/>
+			<dep name="libpangoft2-1.0.so.0()(64bit)"/>
+			<dep name="libpangoxft-1.0.so.0()(64bit)"/>
+			<dep name="libplc4.so()(64bit)"/>
+			<dep name="libplds4.so()(64bit)"/>
+			<dep name="libpng.so.3()(64bit)"/>
+			<dep name="libpng12.so.0()(64bit)"/>
+			<dep name="libpopt.so.0()(64bit)"/>
+			<dep name="libprldap50.so()(64bit)"/>
+			<dep name="libpthread.so.0()(64bit)"/>
+			<dep name="libpthread.so.0(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libsmime3.so()(64bit)"/>
+			<dep name="libsmime3.so(NSS_3.2)(64bit)"/>
+			<dep name="libsmime3.so(NSS_3.3)(64bit)"/>
+			<dep name="libsmime3.so(NSS_3.4)(64bit)"/>
+			<dep name="libsmime3.so(NSS_3.4.1)(64bit)"/>
+			<dep name="libsmime3.so(NSS_3.6)(64bit)"/>
+			<dep name="libssl3.so()(64bit)"/>
+			<dep name="libssl3.so(NSS_3.2)(64bit)"/>
+			<dep name="libssl3.so(NSS_3.4)(64bit)"/>
+			<dep name="libstdc++.so.6()(64bit)"/>
+			<dep name="libstdc++.so.6(CXXABI_1.3)(64bit)"/>
+			<dep name="libstdc++.so.6(GLIBCXX_3.4)(64bit)"/>
+			<dep name="libxml2.so.2()(64bit)"/>
+			<dep name="libxpcom.so()(64bit)"/>
+			<dep name="libxpcom_compat.so()(64bit)"/>
+			<dep name="libxpcom_core.so()(64bit)"/>
+			<dep name="libz.so.1()(64bit)"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>MozillaThunderbird-translations</name>
+	<summary>Thunderbird: Security Update 1.5.0.4</summary>
+	<description>This update of Mozilla Thunderbird fixes the security 
+problems fixed in version 1.5.0.4:  MFSA 
+2006-31/CVE-2006-2787: EvalInSandbox in Mozilla Firefox and 
+Thunderbird before 1.5.0.4 allows remote attackers to gain 
+privileges via javascript that calls the valueOf method on 
+objects that were created outside of the sandbox.  MFSA 
+2006-32/CVE-2006-2780: Integer overflow in Mozilla Firefox 
+and Thunderbird before 1.5.0.4 allows remote attackers to 
+cause a denial of service (crash) and possibly execute 
+arbitrary code via "jsstr tagify," which leads to memory 
+corruption.  MFSA 2006-32/CVE-2006-2779: Mozilla Firefox 
+and Thunderbird before 1.5.0.4 allow remote attackers to 
+cause a denial of service (crash) and possibly execute 
+arbitrary code via (1) nested <option> tags in a select 
+tag, (2) a DOMNodeRemoved mutation event, (3) 
+"Content-implemented tree views," (4) BoxObjects, (5) the 
+XBL implementation, (6) an iframe that attempts to remove 
+itself, which leads to memory corruption.  MFSA 
+2006-33/CVE-2006-2786: HTTP response smuggling 
+vulnerability in Mozilla Firefox and Thunderbird before 
+1.5.0.4, when used with certain proxy servers, allows 
+remote attackers to cause Firefox to interpret certain 
+responses as if they were responses from two different 
+sites via (1) invalid HTTP response headers with spaces 
+between the header name and the colon, which might not be 
+ignored in some cases, or (2) HTTP 1.1 headers through an 
+HTTP 1.0 proxy, which are ignored by the proxy but 
+processed by the client.  MFSA 2006-35/CVE-2006-2775: 
+Mozilla Firefox and Thunderbird before 1.5.0.4 associates 
+XUL attributes with the wrong URL under certain unspecified 
+circumstances, which might allow remote attackers to bypass 
+restrictions by causing a persisted string to be associated 
+with the wrong URL.  MFSA 2006-37/CVE-2006-2776: Certain 
+privileged UI code in Mozilla Firefox and Thunderbird 
+before 1.5.0.4 calls content-defined setters on an object 
+prototype, which allows remote attackers to execute code at 
+a higher privilege than intended.  MFSA 
+2006-38/CVE-2006-2778: The crypto.signText function in 
+Mozilla Firefox and Thunderbird before 1.5.0.4 allows 
+remote attackers to execute arbitrary code via certain 
+optional Certificate Authority name arguments, which causes 
+an invalid array index and triggers a buffer overflow.  
+MFSA 2006-40/CVE-2006-2781: Double-free vulnerability in 
+Mozilla Thunderbird before 1.5.0.4 and SeaMonkey before 
+1.0.2 allows remote attackers to cause a denial of service 
+(hang) and possibly execute arbitrary code via a VCard that 
+contains invalid base64 characters.  MFSA 
+2006-42/CVE-2006-2783: Mozilla Firefox and Thunderbird 
+before 1.5.0.4 strips the Unicode Byte-order-Mark (BOM) 
+from a UTF-8 page before the page is passed to the parser, 
+which allows remote attackers to conduct cross-site 
+scripting (XSS) attacks via a BOM sequence in the middle of 
+a dangerous tag such as SCRIPT.
+</description>
+	<arch>i586</arch>
+	<version>1.5.0.4</version>
+	<release>2.1</release>
+	<filesize>4517249</filesize>
+	<installedsize>29043858</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>1.5.0.4</version>
+			<release>2.1</release>
+			<filename>MozillaThunderbird-translations-1.5.0.4-2.1.i586.rpm</filename>
+			<filesize>4517249</filesize>
+			<installedsize>29043858</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="MozillaThunderbird-translations" op="EQ" version="1.5.0.4" release="2.1"/>
+		</provides>
+		<requires>
+			<dep name="rpmlib(VersionedDependencies)" op="LE" version="3.0.3" release="1" pre="1"/>
+			<dep name="MozillaThunderbird" op="EQ" version="1.5.0.4" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>MozillaThunderbird-translations</name>
+	<summary>Thunderbird: Security Update 1.5.0.4</summary>
+	<description>This update of Mozilla Thunderbird fixes the security 
+problems fixed in version 1.5.0.4:  MFSA 
+2006-31/CVE-2006-2787: EvalInSandbox in Mozilla Firefox and 
+Thunderbird before 1.5.0.4 allows remote attackers to gain 
+privileges via javascript that calls the valueOf method on 
+objects that were created outside of the sandbox.  MFSA 
+2006-32/CVE-2006-2780: Integer overflow in Mozilla Firefox 
+and Thunderbird before 1.5.0.4 allows remote attackers to 
+cause a denial of service (crash) and possibly execute 
+arbitrary code via "jsstr tagify," which leads to memory 
+corruption.  MFSA 2006-32/CVE-2006-2779: Mozilla Firefox 
+and Thunderbird before 1.5.0.4 allow remote attackers to 
+cause a denial of service (crash) and possibly execute 
+arbitrary code via (1) nested <option> tags in a select 
+tag, (2) a DOMNodeRemoved mutation event, (3) 
+"Content-implemented tree views," (4) BoxObjects, (5) the 
+XBL implementation, (6) an iframe that attempts to remove 
+itself, which leads to memory corruption.  MFSA 
+2006-33/CVE-2006-2786: HTTP response smuggling 
+vulnerability in Mozilla Firefox and Thunderbird before 
+1.5.0.4, when used with certain proxy servers, allows 
+remote attackers to cause Firefox to interpret certain 
+responses as if they were responses from two different 
+sites via (1) invalid HTTP response headers with spaces 
+between the header name and the colon, which might not be 
+ignored in some cases, or (2) HTTP 1.1 headers through an 
+HTTP 1.0 proxy, which are ignored by the proxy but 
+processed by the client.  MFSA 2006-35/CVE-2006-2775: 
+Mozilla Firefox and Thunderbird before 1.5.0.4 associates 
+XUL attributes with the wrong URL under certain unspecified 
+circumstances, which might allow remote attackers to bypass 
+restrictions by causing a persisted string to be associated 
+with the wrong URL.  MFSA 2006-37/CVE-2006-2776: Certain 
+privileged UI code in Mozilla Firefox and Thunderbird 
+before 1.5.0.4 calls content-defined setters on an object 
+prototype, which allows remote attackers to execute code at 
+a higher privilege than intended.  MFSA 
+2006-38/CVE-2006-2778: The crypto.signText function in 
+Mozilla Firefox and Thunderbird before 1.5.0.4 allows 
+remote attackers to execute arbitrary code via certain 
+optional Certificate Authority name arguments, which causes 
+an invalid array index and triggers a buffer overflow.  
+MFSA 2006-40/CVE-2006-2781: Double-free vulnerability in 
+Mozilla Thunderbird before 1.5.0.4 and SeaMonkey before 
+1.0.2 allows remote attackers to cause a denial of service 
+(hang) and possibly execute arbitrary code via a VCard that 
+contains invalid base64 characters.  MFSA 
+2006-42/CVE-2006-2783: Mozilla Firefox and Thunderbird 
+before 1.5.0.4 strips the Unicode Byte-order-Mark (BOM) 
+from a UTF-8 page before the page is passed to the parser, 
+which allows remote attackers to conduct cross-site 
+scripting (XSS) attacks via a BOM sequence in the middle of 
+a dangerous tag such as SCRIPT.
+</description>
+	<arch>ppc</arch>
+	<version>1.5.0.4</version>
+	<release>2.1</release>
+	<filesize>4515008</filesize>
+	<installedsize>29043858</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>1.5.0.4</version>
+			<release>2.1</release>
+			<filename>MozillaThunderbird-translations-1.5.0.4-2.1.ppc.rpm</filename>
+			<filesize>4515008</filesize>
+			<installedsize>29043858</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="MozillaThunderbird-translations" op="EQ" version="1.5.0.4" release="2.1"/>
+		</provides>
+		<requires>
+			<dep name="rpmlib(VersionedDependencies)" op="LE" version="3.0.3" release="1" pre="1"/>
+			<dep name="MozillaThunderbird" op="EQ" version="1.5.0.4" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>MozillaThunderbird-translations</name>
+	<summary>Thunderbird: Security Update 1.5.0.4</summary>
+	<description>This update of Mozilla Thunderbird fixes the security 
+problems fixed in version 1.5.0.4:  MFSA 
+2006-31/CVE-2006-2787: EvalInSandbox in Mozilla Firefox and 
+Thunderbird before 1.5.0.4 allows remote attackers to gain 
+privileges via javascript that calls the valueOf method on 
+objects that were created outside of the sandbox.  MFSA 
+2006-32/CVE-2006-2780: Integer overflow in Mozilla Firefox 
+and Thunderbird before 1.5.0.4 allows remote attackers to 
+cause a denial of service (crash) and possibly execute 
+arbitrary code via "jsstr tagify," which leads to memory 
+corruption.  MFSA 2006-32/CVE-2006-2779: Mozilla Firefox 
+and Thunderbird before 1.5.0.4 allow remote attackers to 
+cause a denial of service (crash) and possibly execute 
+arbitrary code via (1) nested <option> tags in a select 
+tag, (2) a DOMNodeRemoved mutation event, (3) 
+"Content-implemented tree views," (4) BoxObjects, (5) the 
+XBL implementation, (6) an iframe that attempts to remove 
+itself, which leads to memory corruption.  MFSA 
+2006-33/CVE-2006-2786: HTTP response smuggling 
+vulnerability in Mozilla Firefox and Thunderbird before 
+1.5.0.4, when used with certain proxy servers, allows 
+remote attackers to cause Firefox to interpret certain 
+responses as if they were responses from two different 
+sites via (1) invalid HTTP response headers with spaces 
+between the header name and the colon, which might not be 
+ignored in some cases, or (2) HTTP 1.1 headers through an 
+HTTP 1.0 proxy, which are ignored by the proxy but 
+processed by the client.  MFSA 2006-35/CVE-2006-2775: 
+Mozilla Firefox and Thunderbird before 1.5.0.4 associates 
+XUL attributes with the wrong URL under certain unspecified 
+circumstances, which might allow remote attackers to bypass 
+restrictions by causing a persisted string to be associated 
+with the wrong URL.  MFSA 2006-37/CVE-2006-2776: Certain 
+privileged UI code in Mozilla Firefox and Thunderbird 
+before 1.5.0.4 calls content-defined setters on an object 
+prototype, which allows remote attackers to execute code at 
+a higher privilege than intended.  MFSA 
+2006-38/CVE-2006-2778: The crypto.signText function in 
+Mozilla Firefox and Thunderbird before 1.5.0.4 allows 
+remote attackers to execute arbitrary code via certain 
+optional Certificate Authority name arguments, which causes 
+an invalid array index and triggers a buffer overflow.  
+MFSA 2006-40/CVE-2006-2781: Double-free vulnerability in 
+Mozilla Thunderbird before 1.5.0.4 and SeaMonkey before 
+1.0.2 allows remote attackers to cause a denial of service 
+(hang) and possibly execute arbitrary code via a VCard that 
+contains invalid base64 characters.  MFSA 
+2006-42/CVE-2006-2783: Mozilla Firefox and Thunderbird 
+before 1.5.0.4 strips the Unicode Byte-order-Mark (BOM) 
+from a UTF-8 page before the page is passed to the parser, 
+which allows remote attackers to conduct cross-site 
+scripting (XSS) attacks via a BOM sequence in the middle of 
+a dangerous tag such as SCRIPT.
+</description>
+	<arch>x86_64</arch>
+	<version>1.5.0.4</version>
+	<release>2.1</release>
+	<filesize>4515059</filesize>
+	<installedsize>29043858</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>1.5.0.4</version>
+			<release>2.1</release>
+			<filename>MozillaThunderbird-translations-1.5.0.4-2.1.x86_64.rpm</filename>
+			<filesize>4515059</filesize>
+			<installedsize>29043858</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="MozillaThunderbird-translations" op="EQ" version="1.5.0.4" release="2.1"/>
+		</provides>
+		<requires>
+			<dep name="rpmlib(VersionedDependencies)" op="LE" version="3.0.3" release="1" pre="1"/>
+			<dep name="MozillaThunderbird" op="EQ" version="1.5.0.4" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+</subchannel></channel>

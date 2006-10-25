@@ -1,0 +1,62 @@
+<channel><subchannel>                                                  
+
+<patch>
+	<name>xsp</name>
+	<arch>noarch</arch>
+	<version>1320</version>
+	<release>0</release>
+	<requires>
+		<dep kind="atom" name="xsp" epoch="0" version="1.1.13.7" release="4" op="EQ"/>
+	</requires>
+</patch>
+<atom>
+	<name>xsp</name>
+	<arch>noarch</arch>
+	<version>1.1.13.7</version>
+	<release>4</release>
+	<freshens>
+		<dep kind="package" name="xsp"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="xsp" epoch="0" version="1.1.13.7" release="4" op="GE"/>
+	</requires>
+</atom>
+<package>
+	<name>xsp</name>
+	<summary>xsp security update</summary>
+	<description>Insufficient path checks allowed to access arbitrary files
+via relative path names in the HTTP request. The affected
+code is used by mod_mono.
+</description>
+	<arch>noarch</arch>
+	<version>1.1.13.7</version>
+	<release>4</release>
+	<filesize>140054</filesize>
+	<installedsize>434310</installedsize>
+	<history>
+		<update>
+			<arch>noarch</arch>
+			<epoch>0</epoch>
+			<version>1.1.13.7</version>
+			<release>4</release>
+			<filename>xsp-1.1.13.7-4.noarch.rpm</filename>
+			<filesize>140054</filesize>
+			<installedsize>434310</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="xsp" op="EQ" version="1.1.13.7" release="4"/>
+		</provides>
+		<requires>
+			<dep name="gnome-filesystem"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/bin/sh"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+</subchannel></channel>

@@ -1,0 +1,804 @@
+<channel><subchannel>                                                  
+
+<patch>
+	<name>xine-lib</name>
+	<arch>noarch</arch>
+	<version>1599</version>
+	<release>0</release>
+	<requires>
+		<dep kind="atom" name="xine-lib" epoch="0" version="1.1.1" release="24.6" op="EQ"/>
+		<dep kind="atom" name="xine-lib-32bit" epoch="0" version="1.1.1" release="24.6" op="EQ"/>
+		<dep kind="atom" name="xine-lib-64bit" epoch="0" version="1.1.1" release="24.6" op="EQ"/>
+	</requires>
+</patch>
+<atom>
+	<name>xine-lib</name>
+	<arch>i586</arch>
+	<version>1.1.1</version>
+	<release>24.6</release>
+	<freshens>
+		<dep kind="package" name="xine-lib"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="xine-lib" epoch="0" version="1.1.1" release="24.6" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>xine-lib</name>
+	<arch>ppc</arch>
+	<version>1.1.1</version>
+	<release>24.6</release>
+	<freshens>
+		<dep kind="package" name="xine-lib"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="xine-lib" epoch="0" version="1.1.1" release="24.6" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>xine-lib</name>
+	<arch>x86_64</arch>
+	<version>1.1.1</version>
+	<release>24.6</release>
+	<freshens>
+		<dep kind="package" name="xine-lib"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="xine-lib" epoch="0" version="1.1.1" release="24.6" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>xine-lib-32bit</name>
+	<arch>x86_64</arch>
+	<version>1.1.1</version>
+	<release>24.6</release>
+	<freshens>
+		<dep kind="package" name="xine-lib-32bit"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="xine-lib-32bit" epoch="0" version="1.1.1" release="24.6" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>xine-lib-64bit</name>
+	<arch>ppc</arch>
+	<version>1.1.1</version>
+	<release>24.6</release>
+	<freshens>
+		<dep kind="package" name="xine-lib-64bit"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="xine-lib-64bit" epoch="0" version="1.1.1" release="24.6" op="GE"/>
+	</requires>
+</atom>
+<package>
+	<name>xine-lib</name>
+	<summary>xine-lib security update</summary>
+	<description>Missing length checks in the HTTP plugin could lead to a 
+buffer overflow on the heap (CVE-2006-2802).
+</description>
+	<arch>i586</arch>
+	<version>1.1.1</version>
+	<release>24.6</release>
+	<filesize>2698254</filesize>
+	<installedsize>5627393</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>1.1.1</version>
+			<release>24.6</release>
+			<filename>xine-lib-1.1.1-24.6.i586.rpm</filename>
+			<filesize>2698254</filesize>
+			<installedsize>5627393</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="xine"/>
+			<dep name="cyberblade_vid.so"/>
+			<dep name="libxine.so.1"/>
+			<dep name="mach64_vid.so"/>
+			<dep name="mga_crtc2_vid.so"/>
+			<dep name="mga_vid.so"/>
+			<dep name="nvidia_vid.so"/>
+			<dep name="pm2_vid.so"/>
+			<dep name="pm3_vid.so"/>
+			<dep name="radeon_vid.so"/>
+			<dep name="rage128_vid.so"/>
+			<dep name="savage_vid.so"/>
+			<dep name="sis_vid.so"/>
+			<dep name="unichrome_vid.so"/>
+			<dep name="xineplug_ao_out_alsa.so"/>
+			<dep name="xineplug_ao_out_file.so"/>
+			<dep name="xineplug_ao_out_none.so"/>
+			<dep name="xineplug_ao_out_oss.so"/>
+			<dep name="xineplug_decode_bitplane.so"/>
+			<dep name="xineplug_decode_dts.so"/>
+			<dep name="xineplug_decode_lpcm.so"/>
+			<dep name="xineplug_decode_mpc.so"/>
+			<dep name="xineplug_decode_qt.so"/>
+			<dep name="xineplug_decode_real.so"/>
+			<dep name="xineplug_decode_real_audio.so"/>
+			<dep name="xineplug_decode_rgb.so"/>
+			<dep name="xineplug_decode_speex.so"/>
+			<dep name="xineplug_decode_spudvb.so"/>
+			<dep name="xineplug_decode_theora.so"/>
+			<dep name="xineplug_decode_vorbis.so"/>
+			<dep name="xineplug_decode_w32dll.so"/>
+			<dep name="xineplug_decode_yuv.so"/>
+			<dep name="xineplug_dmx_audio.so"/>
+			<dep name="xineplug_dmx_avi.so"/>
+			<dep name="xineplug_dmx_fli.so"/>
+			<dep name="xineplug_dmx_flv.so"/>
+			<dep name="xineplug_dmx_games.so"/>
+			<dep name="xineplug_dmx_iff.so"/>
+			<dep name="xineplug_dmx_image.so"/>
+			<dep name="xineplug_dmx_matroska.so"/>
+			<dep name="xineplug_dmx_mng.so"/>
+			<dep name="xineplug_dmx_nsv.so"/>
+			<dep name="xineplug_dmx_ogg.so"/>
+			<dep name="xineplug_dmx_pva.so"/>
+			<dep name="xineplug_dmx_qt.so"/>
+			<dep name="xineplug_dmx_rawdv.so"/>
+			<dep name="xineplug_dmx_real.so"/>
+			<dep name="xineplug_dmx_slave.so"/>
+			<dep name="xineplug_dmx_sputext.so"/>
+			<dep name="xineplug_dmx_yuv_frames.so"/>
+			<dep name="xineplug_flac.so"/>
+			<dep name="xineplug_inp_cdda.so"/>
+			<dep name="xineplug_inp_dvb.so"/>
+			<dep name="xineplug_inp_dvd.so"/>
+			<dep name="xineplug_inp_file.so"/>
+			<dep name="xineplug_inp_http.so"/>
+			<dep name="xineplug_inp_net.so"/>
+			<dep name="xineplug_inp_pnm.so"/>
+			<dep name="xineplug_inp_pvr.so"/>
+			<dep name="xineplug_inp_rtp.so"/>
+			<dep name="xineplug_inp_rtsp.so"/>
+			<dep name="xineplug_inp_smb.so"/>
+			<dep name="xineplug_inp_stdin_fifo.so"/>
+			<dep name="xineplug_inp_v4l.so"/>
+			<dep name="xineplug_inp_vdr.so"/>
+			<dep name="xineplug_post_audio_filters.so"/>
+			<dep name="xineplug_post_goom.so"/>
+			<dep name="xineplug_post_mosaico.so"/>
+			<dep name="xineplug_post_planar.so"/>
+			<dep name="xineplug_post_switch.so"/>
+			<dep name="xineplug_post_tvtime.so"/>
+			<dep name="xineplug_post_vdr.so"/>
+			<dep name="xineplug_post_visualizations.so"/>
+			<dep name="xineplug_vo_out_fb.so"/>
+			<dep name="xineplug_vo_out_none.so"/>
+			<dep name="xineplug_vo_out_opengl.so"/>
+			<dep name="xineplug_vo_out_xshm.so"/>
+			<dep name="xineplug_vo_out_xv.so"/>
+			<dep name="xineplug_vo_out_xvmc.so"/>
+			<dep name="xineplug_vo_out_xxmc.so"/>
+			<dep name="xine-lib" op="EQ" version="1.1.1" release="24.6"/>
+		</provides>
+		<requires>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="libFLAC.so.7"/>
+			<dep name="libGL.so.1"/>
+			<dep name="libGLU.so.1"/>
+			<dep name="libXext.so.6"/>
+			<dep name="libXinerama.so.1"/>
+			<dep name="libXv.so.1"/>
+			<dep name="libXvMCW.so.1"/>
+			<dep name="libasound.so.2"/>
+			<dep name="libasound.so.2(ALSA_0.9)"/>
+			<dep name="libasound.so.2(ALSA_0.9.0rc4)"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1)"/>
+			<dep name="libc.so.6(GLIBC_2.1.1)"/>
+			<dep name="libc.so.6(GLIBC_2.1.2)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libc.so.6(GLIBC_2.2)"/>
+			<dep name="libc.so.6(GLIBC_2.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3.2)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)"/>
+			<dep name="libdl.so.2"/>
+			<dep name="libdl.so.2(GLIBC_2.0)"/>
+			<dep name="libdl.so.2(GLIBC_2.1)"/>
+			<dep name="libfreetype.so.6"/>
+			<dep name="libm.so.6"/>
+			<dep name="libm.so.6(GLIBC_2.0)"/>
+			<dep name="libmng.so.1"/>
+			<dep name="libogg.so.0"/>
+			<dep name="libpthread.so.0"/>
+			<dep name="libpthread.so.0(GLIBC_2.0)"/>
+			<dep name="libpthread.so.0(GLIBC_2.1)"/>
+			<dep name="libpthread.so.0(GLIBC_2.2)"/>
+			<dep name="libpthread.so.0(GLIBC_2.3.2)"/>
+			<dep name="librt.so.1"/>
+			<dep name="librt.so.1(GLIBC_2.2)"/>
+			<dep name="libsmbclient.so.0"/>
+			<dep name="libspeex.so.1"/>
+			<dep name="libtheora.so.0"/>
+			<dep name="libtheora.so.0(libtheora.so.1.0)"/>
+			<dep name="libvorbis.so.0"/>
+			<dep name="libxine.so.1"/>
+			<dep name="libz.so.1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>xine-lib</name>
+	<summary>xine-lib security update</summary>
+	<description>Missing length checks in the HTTP plugin could lead to a 
+buffer overflow on the heap (CVE-2006-2802).
+</description>
+	<arch>ppc</arch>
+	<version>1.1.1</version>
+	<release>24.6</release>
+	<filesize>2620970</filesize>
+	<installedsize>5733185</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>1.1.1</version>
+			<release>24.6</release>
+			<filename>xine-lib-1.1.1-24.6.ppc.rpm</filename>
+			<filesize>2620970</filesize>
+			<installedsize>5733185</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="xine"/>
+			<dep name="libxine.so.1"/>
+			<dep name="xineplug_ao_out_alsa.so"/>
+			<dep name="xineplug_ao_out_file.so"/>
+			<dep name="xineplug_ao_out_none.so"/>
+			<dep name="xineplug_ao_out_oss.so"/>
+			<dep name="xineplug_decode_bitplane.so"/>
+			<dep name="xineplug_decode_dts.so"/>
+			<dep name="xineplug_decode_lpcm.so"/>
+			<dep name="xineplug_decode_mpc.so"/>
+			<dep name="xineplug_decode_real.so"/>
+			<dep name="xineplug_decode_real_audio.so"/>
+			<dep name="xineplug_decode_rgb.so"/>
+			<dep name="xineplug_decode_speex.so"/>
+			<dep name="xineplug_decode_spudvb.so"/>
+			<dep name="xineplug_decode_theora.so"/>
+			<dep name="xineplug_decode_vorbis.so"/>
+			<dep name="xineplug_decode_yuv.so"/>
+			<dep name="xineplug_dmx_audio.so"/>
+			<dep name="xineplug_dmx_avi.so"/>
+			<dep name="xineplug_dmx_fli.so"/>
+			<dep name="xineplug_dmx_flv.so"/>
+			<dep name="xineplug_dmx_games.so"/>
+			<dep name="xineplug_dmx_iff.so"/>
+			<dep name="xineplug_dmx_image.so"/>
+			<dep name="xineplug_dmx_matroska.so"/>
+			<dep name="xineplug_dmx_mng.so"/>
+			<dep name="xineplug_dmx_nsv.so"/>
+			<dep name="xineplug_dmx_ogg.so"/>
+			<dep name="xineplug_dmx_pva.so"/>
+			<dep name="xineplug_dmx_qt.so"/>
+			<dep name="xineplug_dmx_rawdv.so"/>
+			<dep name="xineplug_dmx_real.so"/>
+			<dep name="xineplug_dmx_slave.so"/>
+			<dep name="xineplug_dmx_sputext.so"/>
+			<dep name="xineplug_dmx_yuv_frames.so"/>
+			<dep name="xineplug_flac.so"/>
+			<dep name="xineplug_inp_cdda.so"/>
+			<dep name="xineplug_inp_dvb.so"/>
+			<dep name="xineplug_inp_dvd.so"/>
+			<dep name="xineplug_inp_file.so"/>
+			<dep name="xineplug_inp_http.so"/>
+			<dep name="xineplug_inp_net.so"/>
+			<dep name="xineplug_inp_pnm.so"/>
+			<dep name="xineplug_inp_pvr.so"/>
+			<dep name="xineplug_inp_rtp.so"/>
+			<dep name="xineplug_inp_rtsp.so"/>
+			<dep name="xineplug_inp_smb.so"/>
+			<dep name="xineplug_inp_stdin_fifo.so"/>
+			<dep name="xineplug_inp_v4l.so"/>
+			<dep name="xineplug_inp_vdr.so"/>
+			<dep name="xineplug_post_audio_filters.so"/>
+			<dep name="xineplug_post_goom.so"/>
+			<dep name="xineplug_post_mosaico.so"/>
+			<dep name="xineplug_post_planar.so"/>
+			<dep name="xineplug_post_switch.so"/>
+			<dep name="xineplug_post_tvtime.so"/>
+			<dep name="xineplug_post_vdr.so"/>
+			<dep name="xineplug_post_visualizations.so"/>
+			<dep name="xineplug_vo_out_fb.so"/>
+			<dep name="xineplug_vo_out_none.so"/>
+			<dep name="xineplug_vo_out_opengl.so"/>
+			<dep name="xineplug_vo_out_xshm.so"/>
+			<dep name="xineplug_vo_out_xv.so"/>
+			<dep name="xineplug_vo_out_xvmc.so"/>
+			<dep name="xineplug_vo_out_xxmc.so"/>
+			<dep name="xine-lib" op="EQ" version="1.1.1" release="24.6"/>
+		</provides>
+		<requires>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="libFLAC.so.7"/>
+			<dep name="libGL.so.1"/>
+			<dep name="libGLU.so.1"/>
+			<dep name="libXext.so.6"/>
+			<dep name="libXinerama.so.1"/>
+			<dep name="libXv.so.1"/>
+			<dep name="libXvMCW.so.1"/>
+			<dep name="libasound.so.2"/>
+			<dep name="libasound.so.2(ALSA_0.9)"/>
+			<dep name="libasound.so.2(ALSA_0.9.0rc4)"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1)"/>
+			<dep name="libc.so.6(GLIBC_2.1.1)"/>
+			<dep name="libc.so.6(GLIBC_2.1.2)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libc.so.6(GLIBC_2.2)"/>
+			<dep name="libc.so.6(GLIBC_2.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3.2)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)"/>
+			<dep name="libc.so.6(GLIBC_2.4)"/>
+			<dep name="libdl.so.2"/>
+			<dep name="libdl.so.2(GLIBC_2.0)"/>
+			<dep name="libdl.so.2(GLIBC_2.1)"/>
+			<dep name="libfreetype.so.6"/>
+			<dep name="libm.so.6"/>
+			<dep name="libm.so.6(GLIBC_2.0)"/>
+			<dep name="libmng.so.1"/>
+			<dep name="libogg.so.0"/>
+			<dep name="libpthread.so.0"/>
+			<dep name="libpthread.so.0(GLIBC_2.0)"/>
+			<dep name="libpthread.so.0(GLIBC_2.1)"/>
+			<dep name="libpthread.so.0(GLIBC_2.2)"/>
+			<dep name="libpthread.so.0(GLIBC_2.3.2)"/>
+			<dep name="libpthread.so.0(GLIBC_2.3.4)"/>
+			<dep name="librt.so.1"/>
+			<dep name="librt.so.1(GLIBC_2.2)"/>
+			<dep name="libsmbclient.so.0"/>
+			<dep name="libspeex.so.1"/>
+			<dep name="libtheora.so.0"/>
+			<dep name="libtheora.so.0(libtheora.so.1.0)"/>
+			<dep name="libvorbis.so.0"/>
+			<dep name="libxine.so.1"/>
+			<dep name="libz.so.1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>xine-lib</name>
+	<summary>xine-lib security update</summary>
+	<description>Missing length checks in the HTTP plugin could lead to a 
+buffer overflow on the heap (CVE-2006-2802).
+</description>
+	<arch>x86_64</arch>
+	<version>1.1.1</version>
+	<release>24.6</release>
+	<filesize>2581466</filesize>
+	<installedsize>5309465</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>1.1.1</version>
+			<release>24.6</release>
+			<filename>xine-lib-1.1.1-24.6.x86_64.rpm</filename>
+			<filesize>2581466</filesize>
+			<installedsize>5309465</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="xine"/>
+			<dep name="libxine.so.1()(64bit)"/>
+			<dep name="xineplug_ao_out_alsa.so()(64bit)"/>
+			<dep name="xineplug_ao_out_file.so()(64bit)"/>
+			<dep name="xineplug_ao_out_none.so()(64bit)"/>
+			<dep name="xineplug_ao_out_oss.so()(64bit)"/>
+			<dep name="xineplug_decode_bitplane.so()(64bit)"/>
+			<dep name="xineplug_decode_dts.so()(64bit)"/>
+			<dep name="xineplug_decode_lpcm.so()(64bit)"/>
+			<dep name="xineplug_decode_mpc.so()(64bit)"/>
+			<dep name="xineplug_decode_real.so()(64bit)"/>
+			<dep name="xineplug_decode_real_audio.so()(64bit)"/>
+			<dep name="xineplug_decode_rgb.so()(64bit)"/>
+			<dep name="xineplug_decode_speex.so()(64bit)"/>
+			<dep name="xineplug_decode_spudvb.so()(64bit)"/>
+			<dep name="xineplug_decode_theora.so()(64bit)"/>
+			<dep name="xineplug_decode_vorbis.so()(64bit)"/>
+			<dep name="xineplug_decode_yuv.so()(64bit)"/>
+			<dep name="xineplug_dmx_audio.so()(64bit)"/>
+			<dep name="xineplug_dmx_avi.so()(64bit)"/>
+			<dep name="xineplug_dmx_fli.so()(64bit)"/>
+			<dep name="xineplug_dmx_flv.so()(64bit)"/>
+			<dep name="xineplug_dmx_games.so()(64bit)"/>
+			<dep name="xineplug_dmx_iff.so()(64bit)"/>
+			<dep name="xineplug_dmx_image.so()(64bit)"/>
+			<dep name="xineplug_dmx_matroska.so()(64bit)"/>
+			<dep name="xineplug_dmx_mng.so()(64bit)"/>
+			<dep name="xineplug_dmx_nsv.so()(64bit)"/>
+			<dep name="xineplug_dmx_ogg.so()(64bit)"/>
+			<dep name="xineplug_dmx_pva.so()(64bit)"/>
+			<dep name="xineplug_dmx_qt.so()(64bit)"/>
+			<dep name="xineplug_dmx_rawdv.so()(64bit)"/>
+			<dep name="xineplug_dmx_real.so()(64bit)"/>
+			<dep name="xineplug_dmx_slave.so()(64bit)"/>
+			<dep name="xineplug_dmx_sputext.so()(64bit)"/>
+			<dep name="xineplug_dmx_yuv_frames.so()(64bit)"/>
+			<dep name="xineplug_flac.so()(64bit)"/>
+			<dep name="xineplug_inp_cdda.so()(64bit)"/>
+			<dep name="xineplug_inp_dvb.so()(64bit)"/>
+			<dep name="xineplug_inp_dvd.so()(64bit)"/>
+			<dep name="xineplug_inp_file.so()(64bit)"/>
+			<dep name="xineplug_inp_http.so()(64bit)"/>
+			<dep name="xineplug_inp_net.so()(64bit)"/>
+			<dep name="xineplug_inp_pnm.so()(64bit)"/>
+			<dep name="xineplug_inp_pvr.so()(64bit)"/>
+			<dep name="xineplug_inp_rtp.so()(64bit)"/>
+			<dep name="xineplug_inp_rtsp.so()(64bit)"/>
+			<dep name="xineplug_inp_smb.so()(64bit)"/>
+			<dep name="xineplug_inp_stdin_fifo.so()(64bit)"/>
+			<dep name="xineplug_inp_v4l.so()(64bit)"/>
+			<dep name="xineplug_inp_vdr.so()(64bit)"/>
+			<dep name="xineplug_post_audio_filters.so()(64bit)"/>
+			<dep name="xineplug_post_goom.so()(64bit)"/>
+			<dep name="xineplug_post_mosaico.so()(64bit)"/>
+			<dep name="xineplug_post_planar.so()(64bit)"/>
+			<dep name="xineplug_post_switch.so()(64bit)"/>
+			<dep name="xineplug_post_tvtime.so()(64bit)"/>
+			<dep name="xineplug_post_vdr.so()(64bit)"/>
+			<dep name="xineplug_post_visualizations.so()(64bit)"/>
+			<dep name="xineplug_vo_out_fb.so()(64bit)"/>
+			<dep name="xineplug_vo_out_none.so()(64bit)"/>
+			<dep name="xineplug_vo_out_opengl.so()(64bit)"/>
+			<dep name="xineplug_vo_out_xshm.so()(64bit)"/>
+			<dep name="xineplug_vo_out_xv.so()(64bit)"/>
+			<dep name="xineplug_vo_out_xvmc.so()(64bit)"/>
+			<dep name="xineplug_vo_out_xxmc.so()(64bit)"/>
+			<dep name="xine-lib" op="EQ" version="1.1.1" release="24.6"/>
+		</provides>
+		<requires>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="libFLAC.so.7()(64bit)"/>
+			<dep name="libGL.so.1()(64bit)"/>
+			<dep name="libGLU.so.1()(64bit)"/>
+			<dep name="libXext.so.6()(64bit)"/>
+			<dep name="libXinerama.so.1()(64bit)"/>
+			<dep name="libXv.so.1()(64bit)"/>
+			<dep name="libXvMCW.so.1()(64bit)"/>
+			<dep name="libasound.so.2()(64bit)"/>
+			<dep name="libasound.so.2(ALSA_0.9)(64bit)"/>
+			<dep name="libasound.so.2(ALSA_0.9.0rc4)(64bit)"/>
+			<dep name="libc.so.6()(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.3)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.3.2)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)(64bit)"/>
+			<dep name="libdl.so.2()(64bit)"/>
+			<dep name="libdl.so.2(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libfreetype.so.6()(64bit)"/>
+			<dep name="libm.so.6()(64bit)"/>
+			<dep name="libm.so.6(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libmng.so.1()(64bit)"/>
+			<dep name="libogg.so.0()(64bit)"/>
+			<dep name="libpthread.so.0()(64bit)"/>
+			<dep name="libpthread.so.0(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libpthread.so.0(GLIBC_2.3.2)(64bit)"/>
+			<dep name="librt.so.1()(64bit)"/>
+			<dep name="librt.so.1(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libsmbclient.so.0()(64bit)"/>
+			<dep name="libspeex.so.1()(64bit)"/>
+			<dep name="libtheora.so.0()(64bit)"/>
+			<dep name="libtheora.so.0(libtheora.so.1.0)(64bit)"/>
+			<dep name="libvorbis.so.0()(64bit)"/>
+			<dep name="libxine.so.1()(64bit)"/>
+			<dep name="libz.so.1()(64bit)"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>xine-lib-32bit</name>
+	<summary>xine-lib security update</summary>
+	<description>Missing length checks in the HTTP plugin could lead to a 
+buffer overflow on the heap (CVE-2006-2802).
+</description>
+	<arch>x86_64</arch>
+	<version>1.1.1</version>
+	<release>24.6</release>
+	<filesize>1106802</filesize>
+	<installedsize>2889312</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>1.1.1</version>
+			<release>24.6</release>
+			<filename>xine-lib-32bit-1.1.1-24.6.x86_64.rpm</filename>
+			<filesize>1106802</filesize>
+			<installedsize>2889312</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="cyberblade_vid.so"/>
+			<dep name="libxine.so.1"/>
+			<dep name="mach64_vid.so"/>
+			<dep name="mga_crtc2_vid.so"/>
+			<dep name="mga_vid.so"/>
+			<dep name="nvidia_vid.so"/>
+			<dep name="pm2_vid.so"/>
+			<dep name="pm3_vid.so"/>
+			<dep name="radeon_vid.so"/>
+			<dep name="rage128_vid.so"/>
+			<dep name="savage_vid.so"/>
+			<dep name="sis_vid.so"/>
+			<dep name="unichrome_vid.so"/>
+			<dep name="xineplug_ao_out_alsa.so"/>
+			<dep name="xineplug_ao_out_file.so"/>
+			<dep name="xineplug_ao_out_none.so"/>
+			<dep name="xineplug_ao_out_oss.so"/>
+			<dep name="xineplug_decode_bitplane.so"/>
+			<dep name="xineplug_decode_dts.so"/>
+			<dep name="xineplug_decode_lpcm.so"/>
+			<dep name="xineplug_decode_mpc.so"/>
+			<dep name="xineplug_decode_qt.so"/>
+			<dep name="xineplug_decode_real.so"/>
+			<dep name="xineplug_decode_real_audio.so"/>
+			<dep name="xineplug_decode_rgb.so"/>
+			<dep name="xineplug_decode_speex.so"/>
+			<dep name="xineplug_decode_spudvb.so"/>
+			<dep name="xineplug_decode_theora.so"/>
+			<dep name="xineplug_decode_vorbis.so"/>
+			<dep name="xineplug_decode_w32dll.so"/>
+			<dep name="xineplug_decode_yuv.so"/>
+			<dep name="xineplug_dmx_audio.so"/>
+			<dep name="xineplug_dmx_avi.so"/>
+			<dep name="xineplug_dmx_fli.so"/>
+			<dep name="xineplug_dmx_flv.so"/>
+			<dep name="xineplug_dmx_games.so"/>
+			<dep name="xineplug_dmx_iff.so"/>
+			<dep name="xineplug_dmx_image.so"/>
+			<dep name="xineplug_dmx_matroska.so"/>
+			<dep name="xineplug_dmx_mng.so"/>
+			<dep name="xineplug_dmx_nsv.so"/>
+			<dep name="xineplug_dmx_ogg.so"/>
+			<dep name="xineplug_dmx_pva.so"/>
+			<dep name="xineplug_dmx_qt.so"/>
+			<dep name="xineplug_dmx_rawdv.so"/>
+			<dep name="xineplug_dmx_real.so"/>
+			<dep name="xineplug_dmx_slave.so"/>
+			<dep name="xineplug_dmx_sputext.so"/>
+			<dep name="xineplug_dmx_yuv_frames.so"/>
+			<dep name="xineplug_flac.so"/>
+			<dep name="xineplug_inp_cdda.so"/>
+			<dep name="xineplug_inp_dvb.so"/>
+			<dep name="xineplug_inp_dvd.so"/>
+			<dep name="xineplug_inp_file.so"/>
+			<dep name="xineplug_inp_http.so"/>
+			<dep name="xineplug_inp_net.so"/>
+			<dep name="xineplug_inp_pnm.so"/>
+			<dep name="xineplug_inp_pvr.so"/>
+			<dep name="xineplug_inp_rtp.so"/>
+			<dep name="xineplug_inp_rtsp.so"/>
+			<dep name="xineplug_inp_smb.so"/>
+			<dep name="xineplug_inp_stdin_fifo.so"/>
+			<dep name="xineplug_inp_v4l.so"/>
+			<dep name="xineplug_inp_vdr.so"/>
+			<dep name="xineplug_post_audio_filters.so"/>
+			<dep name="xineplug_post_goom.so"/>
+			<dep name="xineplug_post_mosaico.so"/>
+			<dep name="xineplug_post_planar.so"/>
+			<dep name="xineplug_post_switch.so"/>
+			<dep name="xineplug_post_tvtime.so"/>
+			<dep name="xineplug_post_vdr.so"/>
+			<dep name="xineplug_post_visualizations.so"/>
+			<dep name="xineplug_vo_out_fb.so"/>
+			<dep name="xineplug_vo_out_none.so"/>
+			<dep name="xineplug_vo_out_opengl.so"/>
+			<dep name="xineplug_vo_out_xshm.so"/>
+			<dep name="xineplug_vo_out_xv.so"/>
+			<dep name="xineplug_vo_out_xvmc.so"/>
+			<dep name="xineplug_vo_out_xxmc.so"/>
+			<dep name="xine-lib-32bit" op="EQ" version="1.1.1" release="24.6"/>
+		</provides>
+		<requires>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="libFLAC.so.7"/>
+			<dep name="libGL.so.1"/>
+			<dep name="libGLU.so.1"/>
+			<dep name="libXext.so.6"/>
+			<dep name="libXinerama.so.1"/>
+			<dep name="libXv.so.1"/>
+			<dep name="libXvMCW.so.1"/>
+			<dep name="libasound.so.2"/>
+			<dep name="libasound.so.2(ALSA_0.9)"/>
+			<dep name="libasound.so.2(ALSA_0.9.0rc4)"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1)"/>
+			<dep name="libc.so.6(GLIBC_2.1.1)"/>
+			<dep name="libc.so.6(GLIBC_2.1.2)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libc.so.6(GLIBC_2.2)"/>
+			<dep name="libc.so.6(GLIBC_2.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3.2)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)"/>
+			<dep name="libdl.so.2"/>
+			<dep name="libdl.so.2(GLIBC_2.0)"/>
+			<dep name="libdl.so.2(GLIBC_2.1)"/>
+			<dep name="libfreetype.so.6"/>
+			<dep name="libm.so.6"/>
+			<dep name="libm.so.6(GLIBC_2.0)"/>
+			<dep name="libmng.so.1"/>
+			<dep name="libogg.so.0"/>
+			<dep name="libpthread.so.0"/>
+			<dep name="libpthread.so.0(GLIBC_2.0)"/>
+			<dep name="libpthread.so.0(GLIBC_2.1)"/>
+			<dep name="libpthread.so.0(GLIBC_2.2)"/>
+			<dep name="libpthread.so.0(GLIBC_2.3.2)"/>
+			<dep name="librt.so.1"/>
+			<dep name="librt.so.1(GLIBC_2.2)"/>
+			<dep name="libsmbclient.so.0"/>
+			<dep name="libspeex.so.1"/>
+			<dep name="libtheora.so.0"/>
+			<dep name="libtheora.so.0(libtheora.so.1.0)"/>
+			<dep name="libvorbis.so.0"/>
+			<dep name="libxine.so.1"/>
+			<dep name="libz.so.1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>xine-lib-64bit</name>
+	<summary>xine-lib security update</summary>
+	<description>Missing length checks in the HTTP plugin could lead to a 
+buffer overflow on the heap (CVE-2006-2802).
+</description>
+	<arch>ppc</arch>
+	<version>1.1.1</version>
+	<release>24.6</release>
+	<filesize>964356</filesize>
+	<installedsize>3110696</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>1.1.1</version>
+			<release>24.6</release>
+			<filename>xine-lib-64bit-1.1.1-24.6.ppc.rpm</filename>
+			<filesize>964356</filesize>
+			<installedsize>3110696</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="libxine.so.1()(64bit)"/>
+			<dep name="xineplug_ao_out_alsa.so()(64bit)"/>
+			<dep name="xineplug_ao_out_file.so()(64bit)"/>
+			<dep name="xineplug_ao_out_none.so()(64bit)"/>
+			<dep name="xineplug_ao_out_oss.so()(64bit)"/>
+			<dep name="xineplug_decode_bitplane.so()(64bit)"/>
+			<dep name="xineplug_decode_dts.so()(64bit)"/>
+			<dep name="xineplug_decode_lpcm.so()(64bit)"/>
+			<dep name="xineplug_decode_mpc.so()(64bit)"/>
+			<dep name="xineplug_decode_real.so()(64bit)"/>
+			<dep name="xineplug_decode_real_audio.so()(64bit)"/>
+			<dep name="xineplug_decode_rgb.so()(64bit)"/>
+			<dep name="xineplug_decode_speex.so()(64bit)"/>
+			<dep name="xineplug_decode_spudvb.so()(64bit)"/>
+			<dep name="xineplug_decode_theora.so()(64bit)"/>
+			<dep name="xineplug_decode_vorbis.so()(64bit)"/>
+			<dep name="xineplug_decode_yuv.so()(64bit)"/>
+			<dep name="xineplug_dmx_audio.so()(64bit)"/>
+			<dep name="xineplug_dmx_avi.so()(64bit)"/>
+			<dep name="xineplug_dmx_fli.so()(64bit)"/>
+			<dep name="xineplug_dmx_flv.so()(64bit)"/>
+			<dep name="xineplug_dmx_games.so()(64bit)"/>
+			<dep name="xineplug_dmx_iff.so()(64bit)"/>
+			<dep name="xineplug_dmx_image.so()(64bit)"/>
+			<dep name="xineplug_dmx_matroska.so()(64bit)"/>
+			<dep name="xineplug_dmx_mng.so()(64bit)"/>
+			<dep name="xineplug_dmx_nsv.so()(64bit)"/>
+			<dep name="xineplug_dmx_ogg.so()(64bit)"/>
+			<dep name="xineplug_dmx_pva.so()(64bit)"/>
+			<dep name="xineplug_dmx_qt.so()(64bit)"/>
+			<dep name="xineplug_dmx_rawdv.so()(64bit)"/>
+			<dep name="xineplug_dmx_real.so()(64bit)"/>
+			<dep name="xineplug_dmx_slave.so()(64bit)"/>
+			<dep name="xineplug_dmx_sputext.so()(64bit)"/>
+			<dep name="xineplug_dmx_yuv_frames.so()(64bit)"/>
+			<dep name="xineplug_flac.so()(64bit)"/>
+			<dep name="xineplug_inp_cdda.so()(64bit)"/>
+			<dep name="xineplug_inp_dvb.so()(64bit)"/>
+			<dep name="xineplug_inp_dvd.so()(64bit)"/>
+			<dep name="xineplug_inp_file.so()(64bit)"/>
+			<dep name="xineplug_inp_http.so()(64bit)"/>
+			<dep name="xineplug_inp_net.so()(64bit)"/>
+			<dep name="xineplug_inp_pnm.so()(64bit)"/>
+			<dep name="xineplug_inp_pvr.so()(64bit)"/>
+			<dep name="xineplug_inp_rtp.so()(64bit)"/>
+			<dep name="xineplug_inp_rtsp.so()(64bit)"/>
+			<dep name="xineplug_inp_smb.so()(64bit)"/>
+			<dep name="xineplug_inp_stdin_fifo.so()(64bit)"/>
+			<dep name="xineplug_inp_v4l.so()(64bit)"/>
+			<dep name="xineplug_inp_vdr.so()(64bit)"/>
+			<dep name="xineplug_post_audio_filters.so()(64bit)"/>
+			<dep name="xineplug_post_goom.so()(64bit)"/>
+			<dep name="xineplug_post_mosaico.so()(64bit)"/>
+			<dep name="xineplug_post_planar.so()(64bit)"/>
+			<dep name="xineplug_post_switch.so()(64bit)"/>
+			<dep name="xineplug_post_tvtime.so()(64bit)"/>
+			<dep name="xineplug_post_vdr.so()(64bit)"/>
+			<dep name="xineplug_post_visualizations.so()(64bit)"/>
+			<dep name="xineplug_vo_out_fb.so()(64bit)"/>
+			<dep name="xineplug_vo_out_none.so()(64bit)"/>
+			<dep name="xineplug_vo_out_opengl.so()(64bit)"/>
+			<dep name="xineplug_vo_out_xshm.so()(64bit)"/>
+			<dep name="xineplug_vo_out_xv.so()(64bit)"/>
+			<dep name="xine-lib-64bit" op="EQ" version="1.1.1" release="24.6"/>
+		</provides>
+		<requires>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="libFLAC.so.7()(64bit)"/>
+			<dep name="libGL.so.1()(64bit)"/>
+			<dep name="libGLU.so.1()(64bit)"/>
+			<dep name="libXext.so.6()(64bit)"/>
+			<dep name="libXinerama.so.1()(64bit)"/>
+			<dep name="libXv.so.1()(64bit)"/>
+			<dep name="libasound.so.2()(64bit)"/>
+			<dep name="libasound.so.2(ALSA_0.9)(64bit)"/>
+			<dep name="libasound.so.2(ALSA_0.9.0rc4)(64bit)"/>
+			<dep name="libc.so.6()(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.3)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.3.2)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.4)(64bit)"/>
+			<dep name="libdl.so.2()(64bit)"/>
+			<dep name="libdl.so.2(GLIBC_2.3)(64bit)"/>
+			<dep name="libfreetype.so.6()(64bit)"/>
+			<dep name="libm.so.6()(64bit)"/>
+			<dep name="libm.so.6(GLIBC_2.3)(64bit)"/>
+			<dep name="libmng.so.1()(64bit)"/>
+			<dep name="libogg.so.0()(64bit)"/>
+			<dep name="libpthread.so.0()(64bit)"/>
+			<dep name="libpthread.so.0(GLIBC_2.3)(64bit)"/>
+			<dep name="libpthread.so.0(GLIBC_2.3.2)(64bit)"/>
+			<dep name="librt.so.1()(64bit)"/>
+			<dep name="librt.so.1(GLIBC_2.3)(64bit)"/>
+			<dep name="libsmbclient.so.0()(64bit)"/>
+			<dep name="libspeex.so.1()(64bit)"/>
+			<dep name="libtheora.so.0()(64bit)"/>
+			<dep name="libtheora.so.0(libtheora.so.1.0)(64bit)"/>
+			<dep name="libvorbis.so.0()(64bit)"/>
+			<dep name="libxine.so.1()(64bit)"/>
+			<dep name="libz.so.1()(64bit)"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+</subchannel></channel>

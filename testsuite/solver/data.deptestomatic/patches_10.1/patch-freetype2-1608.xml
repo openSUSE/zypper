@@ -1,0 +1,559 @@
+<channel><subchannel>                                                  
+
+<patch>
+	<name>freetype2</name>
+	<arch>noarch</arch>
+	<version>1608</version>
+	<release>0</release>
+	<requires>
+		<dep kind="atom" name="freetype2" epoch="0" version="2.1.10" release="18.3" op="EQ"/>
+		<dep kind="atom" name="freetype2-32bit" epoch="0" version="2.1.10" release="18.3" op="EQ"/>
+		<dep kind="atom" name="freetype2-64bit" epoch="0" version="2.1.10" release="18.3" op="EQ"/>
+		<dep kind="atom" name="freetype2-devel" epoch="0" version="2.1.10" release="18.3" op="EQ"/>
+		<dep kind="atom" name="freetype2-devel-32bit" epoch="0" version="2.1.10" release="18.3" op="EQ"/>
+		<dep kind="atom" name="freetype2-devel-64bit" epoch="0" version="2.1.10" release="18.3" op="EQ"/>
+	</requires>
+</patch>
+<atom>
+	<name>freetype2</name>
+	<arch>i586</arch>
+	<version>2.1.10</version>
+	<release>18.3</release>
+	<freshens>
+		<dep kind="package" name="freetype2"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="freetype2" epoch="0" version="2.1.10" release="18.3" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>freetype2</name>
+	<arch>ppc</arch>
+	<version>2.1.10</version>
+	<release>18.3</release>
+	<freshens>
+		<dep kind="package" name="freetype2"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="freetype2" epoch="0" version="2.1.10" release="18.3" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>freetype2</name>
+	<arch>x86_64</arch>
+	<version>2.1.10</version>
+	<release>18.3</release>
+	<freshens>
+		<dep kind="package" name="freetype2"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="freetype2" epoch="0" version="2.1.10" release="18.3" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>freetype2-32bit</name>
+	<arch>x86_64</arch>
+	<version>2.1.10</version>
+	<release>18.3</release>
+	<freshens>
+		<dep kind="package" name="freetype2-32bit"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="freetype2-32bit" epoch="0" version="2.1.10" release="18.3" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>freetype2-64bit</name>
+	<arch>ppc</arch>
+	<version>2.1.10</version>
+	<release>18.3</release>
+	<freshens>
+		<dep kind="package" name="freetype2-64bit"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="freetype2-64bit" epoch="0" version="2.1.10" release="18.3" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>freetype2-devel</name>
+	<arch>i586</arch>
+	<version>2.1.10</version>
+	<release>18.3</release>
+	<freshens>
+		<dep kind="package" name="freetype2-devel"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="freetype2-devel" epoch="0" version="2.1.10" release="18.3" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>freetype2-devel</name>
+	<arch>ppc</arch>
+	<version>2.1.10</version>
+	<release>18.3</release>
+	<freshens>
+		<dep kind="package" name="freetype2-devel"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="freetype2-devel" epoch="0" version="2.1.10" release="18.3" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>freetype2-devel</name>
+	<arch>x86_64</arch>
+	<version>2.1.10</version>
+	<release>18.3</release>
+	<freshens>
+		<dep kind="package" name="freetype2-devel"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="freetype2-devel" epoch="0" version="2.1.10" release="18.3" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>freetype2-devel-32bit</name>
+	<arch>x86_64</arch>
+	<version>2.1.10</version>
+	<release>18.3</release>
+	<freshens>
+		<dep kind="package" name="freetype2-devel-32bit"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="freetype2-devel-32bit" epoch="0" version="2.1.10" release="18.3" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>freetype2-devel-64bit</name>
+	<arch>ppc</arch>
+	<version>2.1.10</version>
+	<release>18.3</release>
+	<freshens>
+		<dep kind="package" name="freetype2-devel-64bit"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="freetype2-devel-64bit" epoch="0" version="2.1.10" release="18.3" op="GE"/>
+	</requires>
+</atom>
+<package>
+	<name>freetype2</name>
+	<summary>fix integer overflows in freetype 2</summary>
+	<description>Fixes for: CVE-2006-0747, CVE-2006-1054, CVE-2006-1861, 
+CVE-2006-2493, CVE-2006-2661.  This patch fixes a few 
+integer overflows in freetype 2. Without this patch it is 
+possible to create font files which make freetype 2 crash.
+</description>
+	<arch>i586</arch>
+	<version>2.1.10</version>
+	<release>18.3</release>
+	<filesize>564091</filesize>
+	<installedsize>2095182</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>2.1.10</version>
+			<release>18.3</release>
+			<filename>freetype2-2.1.10-18.3.i586.rpm</filename>
+			<filesize>564091</filesize>
+			<installedsize>2095182</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="libfreetype.so.6"/>
+			<dep name="freetype2" op="EQ" version="2.1.10" release="18.3"/>
+		</provides>
+		<requires>
+			<dep name="/sbin/ldconfig" pre="1"/>
+			<dep name="/sbin/ldconfig" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)"/>
+			<dep name="libz.so.1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>freetype2</name>
+	<summary>fix integer overflows in freetype 2</summary>
+	<description>Fixes for: CVE-2006-0747, CVE-2006-1054, CVE-2006-1861, 
+CVE-2006-2493, CVE-2006-2661.  This patch fixes a few 
+integer overflows in freetype 2. Without this patch it is 
+possible to create font files which make freetype 2 crash.
+</description>
+	<arch>ppc</arch>
+	<version>2.1.10</version>
+	<release>18.3</release>
+	<filesize>570989</filesize>
+	<installedsize>2170838</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>2.1.10</version>
+			<release>18.3</release>
+			<filename>freetype2-2.1.10-18.3.ppc.rpm</filename>
+			<filesize>570989</filesize>
+			<installedsize>2170838</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="libfreetype.so.6"/>
+			<dep name="freetype2" op="EQ" version="2.1.10" release="18.3"/>
+		</provides>
+		<requires>
+			<dep name="/sbin/ldconfig" pre="1"/>
+			<dep name="/sbin/ldconfig" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)"/>
+			<dep name="libc.so.6(GLIBC_2.4)"/>
+			<dep name="libz.so.1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>freetype2</name>
+	<summary>fix integer overflows in freetype 2</summary>
+	<description>Fixes for: CVE-2006-0747, CVE-2006-1054, CVE-2006-1861, 
+CVE-2006-2493, CVE-2006-2661.  This patch fixes a few 
+integer overflows in freetype 2. Without this patch it is 
+possible to create font files which make freetype 2 crash.
+</description>
+	<arch>x86_64</arch>
+	<version>2.1.10</version>
+	<release>18.3</release>
+	<filesize>582880</filesize>
+	<installedsize>2153654</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>2.1.10</version>
+			<release>18.3</release>
+			<filename>freetype2-2.1.10-18.3.x86_64.rpm</filename>
+			<filesize>582880</filesize>
+			<installedsize>2153654</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="libfreetype.so.6()(64bit)"/>
+			<dep name="freetype2" op="EQ" version="2.1.10" release="18.3"/>
+		</provides>
+		<requires>
+			<dep name="/sbin/ldconfig" pre="1"/>
+			<dep name="/sbin/ldconfig" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="libc.so.6()(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.3)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)(64bit)"/>
+			<dep name="libz.so.1()(64bit)"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>freetype2-32bit</name>
+	<summary>fix integer overflows in freetype 2</summary>
+	<description>Fixes for: CVE-2006-0747, CVE-2006-1054, CVE-2006-1861, 
+CVE-2006-2493, CVE-2006-2661.  This patch fixes a few 
+integer overflows in freetype 2. Without this patch it is 
+possible to create font files which make freetype 2 crash.
+</description>
+	<arch>x86_64</arch>
+	<version>2.1.10</version>
+	<release>18.3</release>
+	<filesize>238035</filesize>
+	<installedsize>448104</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>2.1.10</version>
+			<release>18.3</release>
+			<filename>freetype2-32bit-2.1.10-18.3.x86_64.rpm</filename>
+			<filesize>238035</filesize>
+			<installedsize>448104</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="libfreetype.so.6"/>
+			<dep name="freetype2-32bit" op="EQ" version="2.1.10" release="18.3"/>
+		</provides>
+		<requires>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)"/>
+			<dep name="libz.so.1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>freetype2-64bit</name>
+	<summary>fix integer overflows in freetype 2</summary>
+	<description>Fixes for: CVE-2006-0747, CVE-2006-1054, CVE-2006-1861, 
+CVE-2006-2493, CVE-2006-2661.  This patch fixes a few 
+integer overflows in freetype 2. Without this patch it is 
+possible to create font files which make freetype 2 crash.
+</description>
+	<arch>ppc</arch>
+	<version>2.1.10</version>
+	<release>18.3</release>
+	<filesize>257319</filesize>
+	<installedsize>644960</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>2.1.10</version>
+			<release>18.3</release>
+			<filename>freetype2-64bit-2.1.10-18.3.ppc.rpm</filename>
+			<filesize>257319</filesize>
+			<installedsize>644960</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="libfreetype.so.6()(64bit)"/>
+			<dep name="freetype2-64bit" op="EQ" version="2.1.10" release="18.3"/>
+		</provides>
+		<requires>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="libc.so.6()(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.3)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.4)(64bit)"/>
+			<dep name="libz.so.1()(64bit)"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>freetype2-devel</name>
+	<summary>fix integer overflows in freetype 2</summary>
+	<description>Fixes for: CVE-2006-0747, CVE-2006-1054, CVE-2006-1861, 
+CVE-2006-2493, CVE-2006-2661.  This patch fixes a few 
+integer overflows in freetype 2. Without this patch it is 
+possible to create font files which make freetype 2 crash.
+</description>
+	<arch>i586</arch>
+	<version>2.1.10</version>
+	<release>18.3</release>
+	<filesize>390809</filesize>
+	<installedsize>1903687</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>2.1.10</version>
+			<release>18.3</release>
+			<filename>freetype2-devel-2.1.10-18.3.i586.rpm</filename>
+			<filesize>390809</filesize>
+			<installedsize>1903687</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="freetype2-devel" op="EQ" version="2.1.10" release="18.3"/>
+		</provides>
+		<requires>
+			<dep name="freetype2" op="EQ" version="2.1.10"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/bin/sh"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>freetype2-devel</name>
+	<summary>fix integer overflows in freetype 2</summary>
+	<description>Fixes for: CVE-2006-0747, CVE-2006-1054, CVE-2006-1861, 
+CVE-2006-2493, CVE-2006-2661.  This patch fixes a few 
+integer overflows in freetype 2. Without this patch it is 
+possible to create font files which make freetype 2 crash.
+</description>
+	<arch>ppc</arch>
+	<version>2.1.10</version>
+	<release>18.3</release>
+	<filesize>403942</filesize>
+	<installedsize>1988567</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>2.1.10</version>
+			<release>18.3</release>
+			<filename>freetype2-devel-2.1.10-18.3.ppc.rpm</filename>
+			<filesize>403942</filesize>
+			<installedsize>1988567</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="freetype2-devel" op="EQ" version="2.1.10" release="18.3"/>
+		</provides>
+		<requires>
+			<dep name="freetype2" op="EQ" version="2.1.10"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/bin/sh"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>freetype2-devel</name>
+	<summary>fix integer overflows in freetype 2</summary>
+	<description>Fixes for: CVE-2006-0747, CVE-2006-1054, CVE-2006-1861, 
+CVE-2006-2493, CVE-2006-2661.  This patch fixes a few 
+integer overflows in freetype 2. Without this patch it is 
+possible to create font files which make freetype 2 crash.
+</description>
+	<arch>x86_64</arch>
+	<version>2.1.10</version>
+	<release>18.3</release>
+	<filesize>407691</filesize>
+	<installedsize>2081585</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>2.1.10</version>
+			<release>18.3</release>
+			<filename>freetype2-devel-2.1.10-18.3.x86_64.rpm</filename>
+			<filesize>407691</filesize>
+			<installedsize>2081585</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="freetype2-devel" op="EQ" version="2.1.10" release="18.3"/>
+		</provides>
+		<requires>
+			<dep name="freetype2" op="EQ" version="2.1.10"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/bin/sh"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>freetype2-devel-32bit</name>
+	<summary>fix integer overflows in freetype 2</summary>
+	<description>Fixes for: CVE-2006-0747, CVE-2006-1054, CVE-2006-1861, 
+CVE-2006-2493, CVE-2006-2661.  This patch fixes a few 
+integer overflows in freetype 2. Without this patch it is 
+possible to create font files which make freetype 2 crash.
+</description>
+	<arch>x86_64</arch>
+	<version>2.1.10</version>
+	<release>18.3</release>
+	<filesize>246550</filesize>
+	<installedsize>528718</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>2.1.10</version>
+			<release>18.3</release>
+			<filename>freetype2-devel-32bit-2.1.10-18.3.x86_64.rpm</filename>
+			<filesize>246550</filesize>
+			<installedsize>528718</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="freetype2-devel-32bit" op="EQ" version="2.1.10" release="18.3"/>
+		</provides>
+		<requires>
+			<dep name="freetype2-devel" op="EQ" version="2.1.10"/>
+			<dep name="freetype2-32bit" op="EQ" version="2.1.10"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/bin/sh"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>freetype2-devel-64bit</name>
+	<summary>fix integer overflows in freetype 2</summary>
+	<description>Fixes for: CVE-2006-0747, CVE-2006-1054, CVE-2006-1861, 
+CVE-2006-2493, CVE-2006-2661.  This patch fixes a few 
+integer overflows in freetype 2. Without this patch it is 
+possible to create font files which make freetype 2 crash.
+</description>
+	<arch>ppc</arch>
+	<version>2.1.10</version>
+	<release>18.3</release>
+	<filesize>270543</filesize>
+	<installedsize>841534</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>2.1.10</version>
+			<release>18.3</release>
+			<filename>freetype2-devel-64bit-2.1.10-18.3.ppc.rpm</filename>
+			<filesize>270543</filesize>
+			<installedsize>841534</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="freetype2-devel-64bit" op="EQ" version="2.1.10" release="18.3"/>
+		</provides>
+		<requires>
+			<dep name="freetype2-devel" op="EQ" version="2.1.10"/>
+			<dep name="freetype2-64bit" op="EQ" version="2.1.10"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/bin/sh"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+</subchannel></channel>

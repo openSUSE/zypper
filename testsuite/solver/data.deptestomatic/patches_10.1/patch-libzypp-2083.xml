@@ -1,0 +1,4379 @@
+<channel><subchannel>                                                  
+
+<patch>
+	<name>libzypp</name>
+	<arch>noarch</arch>
+	<version>2083</version>
+	<release>0</release>
+	<requires>
+		<dep kind="atom" name="libzypp" epoch="0" version="1.3.2" release="0.6" op="EQ"/>
+		<dep kind="atom" name="libzypp-devel" epoch="0" version="1.3.2" release="0.6" op="EQ"/>
+		<dep kind="atom" name="libzypp-zmd-backend" epoch="0" version="7.1.1.0" release="42.53" op="EQ"/>
+		<dep kind="atom" name="ruby-zypp" epoch="0" version="0.0" release="8.3" op="EQ"/>
+		<dep kind="atom" name="rug" epoch="0" version="7.1.1.0" release="18.27" op="EQ"/>
+		<dep kind="atom" name="yast2" epoch="0" version="2.13.64.3" release="0.2" op="EQ"/>
+		<dep kind="atom" name="yast2-devel" epoch="0" version="2.13.64.3" release="0.2" op="EQ"/>
+		<dep kind="atom" name="yast2-installation" epoch="0" version="2.13.132.9" release="0.2" op="EQ"/>
+		<dep kind="atom" name="yast2-ncurses" epoch="0" version="2.13.40" release="1.4" op="EQ"/>
+		<dep kind="atom" name="yast2-online-update" epoch="0" version="2.13.43.2" release="0.2" op="EQ"/>
+		<dep kind="atom" name="yast2-online-update-frontend" epoch="0" version="2.13.43.2" release="0.2" op="EQ"/>
+		<dep kind="atom" name="yast2-packager" epoch="0" version="2.13.139.3" release="0.2" op="EQ"/>
+		<dep kind="atom" name="yast2-perl-bindings" epoch="0" version="2.13.5" release="1.4" op="EQ"/>
+		<dep kind="atom" name="yast2-pkg-bindings" epoch="0" version="2.13.88.2" release="0.2" op="EQ"/>
+		<dep kind="atom" name="yast2-qt" epoch="0" version="2.13.60" release="0.5" op="EQ"/>
+		<dep kind="atom" name="zen-updater" epoch="0" version="7.1.0" release="51.30" op="EQ"/>
+		<dep kind="atom" name="zmd" epoch="0" version="7.1.1.0" release="39.53" op="EQ"/>
+		<dep kind="atom" name="zmd-devel" epoch="0" version="7.1.1.0" release="39.53" op="EQ"/>
+	</requires>
+</patch>
+<atom>
+	<name>libzypp</name>
+	<arch>i586</arch>
+	<version>1.3.2</version>
+	<release>0.6</release>
+	<freshens>
+		<dep kind="package" name="libzypp"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="libzypp" epoch="0" version="1.3.2" release="0.6" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>libzypp</name>
+	<arch>ppc</arch>
+	<version>1.3.2</version>
+	<release>0.6</release>
+	<freshens>
+		<dep kind="package" name="libzypp"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="libzypp" epoch="0" version="1.3.2" release="0.6" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>libzypp</name>
+	<arch>x86_64</arch>
+	<version>1.3.2</version>
+	<release>0.6</release>
+	<freshens>
+		<dep kind="package" name="libzypp"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="libzypp" epoch="0" version="1.3.2" release="0.6" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>libzypp-devel</name>
+	<arch>i586</arch>
+	<version>1.3.2</version>
+	<release>0.6</release>
+	<freshens>
+		<dep kind="package" name="libzypp-devel"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="libzypp-devel" epoch="0" version="1.3.2" release="0.6" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>libzypp-devel</name>
+	<arch>ppc</arch>
+	<version>1.3.2</version>
+	<release>0.6</release>
+	<freshens>
+		<dep kind="package" name="libzypp-devel"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="libzypp-devel" epoch="0" version="1.3.2" release="0.6" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>libzypp-devel</name>
+	<arch>x86_64</arch>
+	<version>1.3.2</version>
+	<release>0.6</release>
+	<freshens>
+		<dep kind="package" name="libzypp-devel"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="libzypp-devel" epoch="0" version="1.3.2" release="0.6" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>libzypp-zmd-backend</name>
+	<arch>i586</arch>
+	<version>7.1.1.0</version>
+	<release>42.53</release>
+	<freshens>
+		<dep kind="package" name="libzypp-zmd-backend"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="libzypp-zmd-backend" epoch="0" version="7.1.1.0" release="42.53" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>libzypp-zmd-backend</name>
+	<arch>ppc</arch>
+	<version>7.1.1.0</version>
+	<release>42.53</release>
+	<freshens>
+		<dep kind="package" name="libzypp-zmd-backend"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="libzypp-zmd-backend" epoch="0" version="7.1.1.0" release="42.53" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>libzypp-zmd-backend</name>
+	<arch>x86_64</arch>
+	<version>7.1.1.0</version>
+	<release>42.53</release>
+	<freshens>
+		<dep kind="package" name="libzypp-zmd-backend"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="libzypp-zmd-backend" epoch="0" version="7.1.1.0" release="42.53" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>ruby-zypp</name>
+	<arch>i586</arch>
+	<version>0.0</version>
+	<release>8.3</release>
+	<freshens>
+		<dep kind="package" name="ruby-zypp"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="ruby-zypp" epoch="0" version="0.0" release="8.3" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>ruby-zypp</name>
+	<arch>ppc</arch>
+	<version>0.0</version>
+	<release>8.3</release>
+	<freshens>
+		<dep kind="package" name="ruby-zypp"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="ruby-zypp" epoch="0" version="0.0" release="8.3" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>ruby-zypp</name>
+	<arch>x86_64</arch>
+	<version>0.0</version>
+	<release>8.3</release>
+	<freshens>
+		<dep kind="package" name="ruby-zypp"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="ruby-zypp" epoch="0" version="0.0" release="8.3" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>rug</name>
+	<arch>i586</arch>
+	<version>7.1.1.0</version>
+	<release>18.27</release>
+	<freshens>
+		<dep kind="package" name="rug"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="rug" epoch="0" version="7.1.1.0" release="18.27" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>rug</name>
+	<arch>ppc</arch>
+	<version>7.1.1.0</version>
+	<release>18.27</release>
+	<freshens>
+		<dep kind="package" name="rug"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="rug" epoch="0" version="7.1.1.0" release="18.27" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>rug</name>
+	<arch>x86_64</arch>
+	<version>7.1.1.0</version>
+	<release>18.27</release>
+	<freshens>
+		<dep kind="package" name="rug"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="rug" epoch="0" version="7.1.1.0" release="18.27" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>yast2</name>
+	<arch>i586</arch>
+	<version>2.13.64.3</version>
+	<release>0.2</release>
+	<freshens>
+		<dep kind="package" name="yast2"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="yast2" epoch="0" version="2.13.64.3" release="0.2" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>yast2</name>
+	<arch>ppc</arch>
+	<version>2.13.64.3</version>
+	<release>0.2</release>
+	<freshens>
+		<dep kind="package" name="yast2"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="yast2" epoch="0" version="2.13.64.3" release="0.2" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>yast2</name>
+	<arch>x86_64</arch>
+	<version>2.13.64.3</version>
+	<release>0.2</release>
+	<freshens>
+		<dep kind="package" name="yast2"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="yast2" epoch="0" version="2.13.64.3" release="0.2" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>yast2-devel</name>
+	<arch>i586</arch>
+	<version>2.13.64.3</version>
+	<release>0.2</release>
+	<freshens>
+		<dep kind="package" name="yast2-devel"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="yast2-devel" epoch="0" version="2.13.64.3" release="0.2" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>yast2-devel</name>
+	<arch>ppc</arch>
+	<version>2.13.64.3</version>
+	<release>0.2</release>
+	<freshens>
+		<dep kind="package" name="yast2-devel"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="yast2-devel" epoch="0" version="2.13.64.3" release="0.2" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>yast2-devel</name>
+	<arch>x86_64</arch>
+	<version>2.13.64.3</version>
+	<release>0.2</release>
+	<freshens>
+		<dep kind="package" name="yast2-devel"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="yast2-devel" epoch="0" version="2.13.64.3" release="0.2" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>yast2-installation</name>
+	<arch>noarch</arch>
+	<version>2.13.132.9</version>
+	<release>0.2</release>
+	<freshens>
+		<dep kind="package" name="yast2-installation"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="yast2-installation" epoch="0" version="2.13.132.9" release="0.2" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>yast2-ncurses</name>
+	<arch>i586</arch>
+	<version>2.13.40</version>
+	<release>1.4</release>
+	<freshens>
+		<dep kind="package" name="yast2-ncurses"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="yast2-ncurses" epoch="0" version="2.13.40" release="1.4" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>yast2-ncurses</name>
+	<arch>ppc</arch>
+	<version>2.13.40</version>
+	<release>1.4</release>
+	<freshens>
+		<dep kind="package" name="yast2-ncurses"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="yast2-ncurses" epoch="0" version="2.13.40" release="1.4" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>yast2-ncurses</name>
+	<arch>x86_64</arch>
+	<version>2.13.40</version>
+	<release>1.4</release>
+	<freshens>
+		<dep kind="package" name="yast2-ncurses"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="yast2-ncurses" epoch="0" version="2.13.40" release="1.4" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>yast2-online-update</name>
+	<arch>noarch</arch>
+	<version>2.13.43.2</version>
+	<release>0.2</release>
+	<freshens>
+		<dep kind="package" name="yast2-online-update"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="yast2-online-update" epoch="0" version="2.13.43.2" release="0.2" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>yast2-online-update-frontend</name>
+	<arch>noarch</arch>
+	<version>2.13.43.2</version>
+	<release>0.2</release>
+	<freshens>
+		<dep kind="package" name="yast2-online-update-frontend"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="yast2-online-update-frontend" epoch="0" version="2.13.43.2" release="0.2" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>yast2-packager</name>
+	<arch>i586</arch>
+	<version>2.13.139.3</version>
+	<release>0.2</release>
+	<freshens>
+		<dep kind="package" name="yast2-packager"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="yast2-packager" epoch="0" version="2.13.139.3" release="0.2" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>yast2-packager</name>
+	<arch>ppc</arch>
+	<version>2.13.139.3</version>
+	<release>0.2</release>
+	<freshens>
+		<dep kind="package" name="yast2-packager"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="yast2-packager" epoch="0" version="2.13.139.3" release="0.2" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>yast2-packager</name>
+	<arch>x86_64</arch>
+	<version>2.13.139.3</version>
+	<release>0.2</release>
+	<freshens>
+		<dep kind="package" name="yast2-packager"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="yast2-packager" epoch="0" version="2.13.139.3" release="0.2" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>yast2-perl-bindings</name>
+	<arch>i586</arch>
+	<version>2.13.5</version>
+	<release>1.4</release>
+	<freshens>
+		<dep kind="package" name="yast2-perl-bindings"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="yast2-perl-bindings" epoch="0" version="2.13.5" release="1.4" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>yast2-perl-bindings</name>
+	<arch>ppc</arch>
+	<version>2.13.5</version>
+	<release>1.4</release>
+	<freshens>
+		<dep kind="package" name="yast2-perl-bindings"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="yast2-perl-bindings" epoch="0" version="2.13.5" release="1.4" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>yast2-perl-bindings</name>
+	<arch>x86_64</arch>
+	<version>2.13.5</version>
+	<release>1.4</release>
+	<freshens>
+		<dep kind="package" name="yast2-perl-bindings"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="yast2-perl-bindings" epoch="0" version="2.13.5" release="1.4" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>yast2-pkg-bindings</name>
+	<arch>i586</arch>
+	<version>2.13.88.2</version>
+	<release>0.2</release>
+	<freshens>
+		<dep kind="package" name="yast2-pkg-bindings"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="yast2-pkg-bindings" epoch="0" version="2.13.88.2" release="0.2" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>yast2-pkg-bindings</name>
+	<arch>ppc</arch>
+	<version>2.13.88.2</version>
+	<release>0.2</release>
+	<freshens>
+		<dep kind="package" name="yast2-pkg-bindings"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="yast2-pkg-bindings" epoch="0" version="2.13.88.2" release="0.2" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>yast2-pkg-bindings</name>
+	<arch>x86_64</arch>
+	<version>2.13.88.2</version>
+	<release>0.2</release>
+	<freshens>
+		<dep kind="package" name="yast2-pkg-bindings"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="yast2-pkg-bindings" epoch="0" version="2.13.88.2" release="0.2" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>yast2-qt</name>
+	<arch>i586</arch>
+	<version>2.13.60</version>
+	<release>0.5</release>
+	<freshens>
+		<dep kind="package" name="yast2-qt"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="yast2-qt" epoch="0" version="2.13.60" release="0.5" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>yast2-qt</name>
+	<arch>ppc</arch>
+	<version>2.13.60</version>
+	<release>0.5</release>
+	<freshens>
+		<dep kind="package" name="yast2-qt"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="yast2-qt" epoch="0" version="2.13.60" release="0.5" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>yast2-qt</name>
+	<arch>x86_64</arch>
+	<version>2.13.60</version>
+	<release>0.5</release>
+	<freshens>
+		<dep kind="package" name="yast2-qt"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="yast2-qt" epoch="0" version="2.13.60" release="0.5" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>zen-updater</name>
+	<arch>i586</arch>
+	<version>7.1.0</version>
+	<release>51.30</release>
+	<freshens>
+		<dep kind="package" name="zen-updater"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="zen-updater" epoch="0" version="7.1.0" release="51.30" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>zen-updater</name>
+	<arch>ppc</arch>
+	<version>7.1.0</version>
+	<release>51.30</release>
+	<freshens>
+		<dep kind="package" name="zen-updater"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="zen-updater" epoch="0" version="7.1.0" release="51.30" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>zen-updater</name>
+	<arch>x86_64</arch>
+	<version>7.1.0</version>
+	<release>51.30</release>
+	<freshens>
+		<dep kind="package" name="zen-updater"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="zen-updater" epoch="0" version="7.1.0" release="51.30" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>zmd</name>
+	<arch>i586</arch>
+	<version>7.1.1.0</version>
+	<release>39.53</release>
+	<freshens>
+		<dep kind="package" name="zmd"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="zmd" epoch="0" version="7.1.1.0" release="39.53" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>zmd</name>
+	<arch>ppc</arch>
+	<version>7.1.1.0</version>
+	<release>39.53</release>
+	<freshens>
+		<dep kind="package" name="zmd"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="zmd" epoch="0" version="7.1.1.0" release="39.53" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>zmd</name>
+	<arch>x86_64</arch>
+	<version>7.1.1.0</version>
+	<release>39.53</release>
+	<freshens>
+		<dep kind="package" name="zmd"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="zmd" epoch="0" version="7.1.1.0" release="39.53" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>zmd-devel</name>
+	<arch>i586</arch>
+	<version>7.1.1.0</version>
+	<release>39.53</release>
+	<freshens>
+		<dep kind="package" name="zmd-devel"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="zmd-devel" epoch="0" version="7.1.1.0" release="39.53" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>zmd-devel</name>
+	<arch>ppc</arch>
+	<version>7.1.1.0</version>
+	<release>39.53</release>
+	<freshens>
+		<dep kind="package" name="zmd-devel"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="zmd-devel" epoch="0" version="7.1.1.0" release="39.53" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>zmd-devel</name>
+	<arch>x86_64</arch>
+	<version>7.1.1.0</version>
+	<release>39.53</release>
+	<freshens>
+		<dep kind="package" name="zmd-devel"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="zmd-devel" epoch="0" version="7.1.1.0" release="39.53" op="GE"/>
+	</requires>
+</atom>
+<package>
+	<name>libzypp</name>
+	<summary>libzypp update</summary>
+	<description>This update contains the following new features:
+* support for patch/delta RPMs in YUM sources (#168844)
+
+This update includes fixes for the following bugs:
+* various performance enhancements
+* 190163 - *-kmp-* dependencies match multiple kernel
+  packages
+* 176568 - Evaluate possible xml parser optimizations
+* 195567 - 100 /var/tmp/TmpFile.xxxxx in 3 Days
+* 193584 - cut-off package description in zen-updater
+* 194424 - Online update setup creates unusable cron job
+* 191676 - zen installer/updater cannot add an FTP YUM
+  repository
+* 190295 - zen-updater/zmd/rug does not install update
+  stack patches first
+* 193212 - zmd does not unblock transactions after
+  transaction preparation failure
+* 191506 - zen-updated showing updates from non-subscribed
+  catalog
+* 183656 - mono needed for YaST package management since
+  last update
+* 195911 - Missing dependency of package management on
+  'unzip'
+* 192535 - test fetchmsttfonts script does not get run
+</description>
+	<arch>i586</arch>
+	<version>1.3.2</version>
+	<release>0.6</release>
+	<filesize>2082446</filesize>
+	<installedsize>6314394</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>1.3.2</version>
+			<release>0.6</release>
+			<filename>libzypp-1.3.2-0.6.i586.rpm</filename>
+			<filesize>2082446</filesize>
+			<installedsize>6314394</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="yast2-packagemanager"/>
+			<dep name="libzypp.so.1"/>
+			<dep name="libzypp" op="EQ" version="1.3.2" release="0.6"/>
+		</provides>
+		<requires>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="libblkid.so.1"/>
+			<dep name="libboost_filesystem.so.1.33.1"/>
+			<dep name="libboost_regex.so.1.33.1"/>
+			<dep name="libbz2.so.1"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libc.so.6(GLIBC_2.2)"/>
+			<dep name="libc.so.6(GLIBC_2.2.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)"/>
+			<dep name="libcrypto.so.0.9.8"/>
+			<dep name="libcurl.so.3"/>
+			<dep name="libdbus-1.so.2"/>
+			<dep name="libdbus-glib-1.so.2"/>
+			<dep name="libdl.so.2"/>
+			<dep name="libgcc_s.so.1"/>
+			<dep name="libgcc_s.so.1(GCC_3.0)"/>
+			<dep name="libgcc_s.so.1(GLIBC_2.0)"/>
+			<dep name="libglib-2.0.so.0"/>
+			<dep name="libgobject-2.0.so.0"/>
+			<dep name="libhal-storage.so.1"/>
+			<dep name="libhal.so.1"/>
+			<dep name="libidn.so.11"/>
+			<dep name="libm.so.6"/>
+			<dep name="libnsl.so.1"/>
+			<dep name="libpopt.so.0"/>
+			<dep name="libpthread.so.0"/>
+			<dep name="libpthread.so.0(GLIBC_2.0)"/>
+			<dep name="libpthread.so.0(GLIBC_2.1)"/>
+			<dep name="libpthread.so.0(GLIBC_2.2)"/>
+			<dep name="librpm-4.4.so"/>
+			<dep name="librpmdb-4.4.so"/>
+			<dep name="librpmio-4.4.so"/>
+			<dep name="librt.so.1"/>
+			<dep name="libssl.so.0.9.8"/>
+			<dep name="libstdc++.so.6"/>
+			<dep name="libstdc++.so.6(CXXABI_1.3)"/>
+			<dep name="libstdc++.so.6(GLIBCXX_3.4)"/>
+			<dep name="libutil.so.1"/>
+			<dep name="libutil.so.1(GLIBC_2.0)"/>
+			<dep name="libuuid.so.1"/>
+			<dep name="libxml2.so.2"/>
+			<dep name="libz.so.1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>libzypp</name>
+	<summary>libzypp update</summary>
+	<description>This update contains the following new features:
+* support for patch/delta RPMs in YUM sources (#168844)
+
+This update includes fixes for the following bugs:
+* various performance enhancements
+* 190163 - *-kmp-* dependencies match multiple kernel
+  packages
+* 176568 - Evaluate possible xml parser optimizations
+* 195567 - 100 /var/tmp/TmpFile.xxxxx in 3 Days
+* 193584 - cut-off package description in zen-updater
+* 194424 - Online update setup creates unusable cron job
+* 191676 - zen installer/updater cannot add an FTP YUM
+  repository
+* 190295 - zen-updater/zmd/rug does not install update
+  stack patches first
+* 193212 - zmd does not unblock transactions after
+  transaction preparation failure
+* 191506 - zen-updated showing updates from non-subscribed
+  catalog
+* 183656 - mono needed for YaST package management since
+  last update
+* 195911 - Missing dependency of package management on
+  'unzip'
+* 192535 - test fetchmsttfonts script does not get run
+</description>
+	<arch>ppc</arch>
+	<version>1.3.2</version>
+	<release>0.6</release>
+	<filesize>2001048</filesize>
+	<installedsize>6538066</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>1.3.2</version>
+			<release>0.6</release>
+			<filename>libzypp-1.3.2-0.6.ppc.rpm</filename>
+			<filesize>2001048</filesize>
+			<installedsize>6538066</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="yast2-packagemanager"/>
+			<dep name="libzypp.so.1"/>
+			<dep name="libzypp" op="EQ" version="1.3.2" release="0.6"/>
+		</provides>
+		<requires>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="libblkid.so.1"/>
+			<dep name="libboost_filesystem.so.1.33.1"/>
+			<dep name="libboost_regex.so.1.33.1"/>
+			<dep name="libbz2.so.1"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libc.so.6(GLIBC_2.2)"/>
+			<dep name="libc.so.6(GLIBC_2.2.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)"/>
+			<dep name="libc.so.6(GLIBC_2.4)"/>
+			<dep name="libcrypto.so.0.9.8"/>
+			<dep name="libcurl.so.3"/>
+			<dep name="libdbus-1.so.2"/>
+			<dep name="libdbus-glib-1.so.2"/>
+			<dep name="libdl.so.2"/>
+			<dep name="libgcc_s.so.1"/>
+			<dep name="libgcc_s.so.1(GCC_3.0)"/>
+			<dep name="libgcc_s.so.1(GLIBC_2.0)"/>
+			<dep name="libglib-2.0.so.0"/>
+			<dep name="libgobject-2.0.so.0"/>
+			<dep name="libhal-storage.so.1"/>
+			<dep name="libhal.so.1"/>
+			<dep name="libidn.so.11"/>
+			<dep name="libm.so.6"/>
+			<dep name="libnsl.so.1"/>
+			<dep name="libpopt.so.0"/>
+			<dep name="libpthread.so.0"/>
+			<dep name="libpthread.so.0(GLIBC_2.0)"/>
+			<dep name="libpthread.so.0(GLIBC_2.1)"/>
+			<dep name="libpthread.so.0(GLIBC_2.2)"/>
+			<dep name="librpm-4.4.so"/>
+			<dep name="librpmdb-4.4.so"/>
+			<dep name="librpmio-4.4.so"/>
+			<dep name="librt.so.1"/>
+			<dep name="libssl.so.0.9.8"/>
+			<dep name="libstdc++.so.6"/>
+			<dep name="libstdc++.so.6(CXXABI_1.3)"/>
+			<dep name="libstdc++.so.6(GLIBCXX_3.4)"/>
+			<dep name="libutil.so.1"/>
+			<dep name="libutil.so.1(GLIBC_2.0)"/>
+			<dep name="libuuid.so.1"/>
+			<dep name="libxml2.so.2"/>
+			<dep name="libz.so.1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>libzypp</name>
+	<summary>libzypp update</summary>
+	<description>This update contains the following new features:
+* support for patch/delta RPMs in YUM sources (#168844)
+
+This update includes fixes for the following bugs:
+* various performance enhancements
+* 190163 - *-kmp-* dependencies match multiple kernel
+  packages
+* 176568 - Evaluate possible xml parser optimizations
+* 195567 - 100 /var/tmp/TmpFile.xxxxx in 3 Days
+* 193584 - cut-off package description in zen-updater
+* 194424 - Online update setup creates unusable cron job
+* 191676 - zen installer/updater cannot add an FTP YUM
+  repository
+* 190295 - zen-updater/zmd/rug does not install update
+  stack patches first
+* 193212 - zmd does not unblock transactions after
+  transaction preparation failure
+* 191506 - zen-updated showing updates from non-subscribed
+  catalog
+* 183656 - mono needed for YaST package management since
+  last update
+* 195911 - Missing dependency of package management on
+  'unzip'
+* 192535 - test fetchmsttfonts script does not get run
+</description>
+	<arch>x86_64</arch>
+	<version>1.3.2</version>
+	<release>0.6</release>
+	<filesize>2082612</filesize>
+	<installedsize>6288958</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>1.3.2</version>
+			<release>0.6</release>
+			<filename>libzypp-1.3.2-0.6.x86_64.rpm</filename>
+			<filesize>2082612</filesize>
+			<installedsize>6288958</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="yast2-packagemanager"/>
+			<dep name="libzypp.so.1()(64bit)"/>
+			<dep name="libzypp" op="EQ" version="1.3.2" release="0.6"/>
+		</provides>
+		<requires>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="libblkid.so.1()(64bit)"/>
+			<dep name="libboost_filesystem.so.1.33.1()(64bit)"/>
+			<dep name="libboost_regex.so.1.33.1()(64bit)"/>
+			<dep name="libbz2.so.1()(64bit)"/>
+			<dep name="libc.so.6()(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.3)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)(64bit)"/>
+			<dep name="libcrypto.so.0.9.8()(64bit)"/>
+			<dep name="libcurl.so.3()(64bit)"/>
+			<dep name="libdbus-1.so.2()(64bit)"/>
+			<dep name="libdbus-glib-1.so.2()(64bit)"/>
+			<dep name="libdl.so.2()(64bit)"/>
+			<dep name="libgcc_s.so.1()(64bit)"/>
+			<dep name="libgcc_s.so.1(GCC_3.0)(64bit)"/>
+			<dep name="libglib-2.0.so.0()(64bit)"/>
+			<dep name="libgobject-2.0.so.0()(64bit)"/>
+			<dep name="libhal-storage.so.1()(64bit)"/>
+			<dep name="libhal.so.1()(64bit)"/>
+			<dep name="libidn.so.11()(64bit)"/>
+			<dep name="libm.so.6()(64bit)"/>
+			<dep name="libnsl.so.1()(64bit)"/>
+			<dep name="libpopt.so.0()(64bit)"/>
+			<dep name="libpthread.so.0()(64bit)"/>
+			<dep name="libpthread.so.0(GLIBC_2.2.5)(64bit)"/>
+			<dep name="librpm-4.4.so()(64bit)"/>
+			<dep name="librpmdb-4.4.so()(64bit)"/>
+			<dep name="librpmio-4.4.so()(64bit)"/>
+			<dep name="librt.so.1()(64bit)"/>
+			<dep name="libssl.so.0.9.8()(64bit)"/>
+			<dep name="libstdc++.so.6()(64bit)"/>
+			<dep name="libstdc++.so.6(CXXABI_1.3)(64bit)"/>
+			<dep name="libstdc++.so.6(GLIBCXX_3.4)(64bit)"/>
+			<dep name="libutil.so.1()(64bit)"/>
+			<dep name="libutil.so.1(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libuuid.so.1()(64bit)"/>
+			<dep name="libxml2.so.2()(64bit)"/>
+			<dep name="libz.so.1()(64bit)"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>libzypp-devel</name>
+	<summary>libzypp update</summary>
+	<description>This update contains the following new features:
+* support for patch/delta RPMs in YUM sources (#168844)
+
+This update includes fixes for the following bugs:
+* various performance enhancements
+* 190163 - *-kmp-* dependencies match multiple kernel
+  packages
+* 176568 - Evaluate possible xml parser optimizations
+* 195567 - 100 /var/tmp/TmpFile.xxxxx in 3 Days
+* 193584 - cut-off package description in zen-updater
+* 194424 - Online update setup creates unusable cron job
+* 191676 - zen installer/updater cannot add an FTP YUM
+  repository
+* 190295 - zen-updater/zmd/rug does not install update
+  stack patches first
+* 193212 - zmd does not unblock transactions after
+  transaction preparation failure
+* 191506 - zen-updated showing updates from non-subscribed
+  catalog
+* 183656 - mono needed for YaST package management since
+  last update
+* 195911 - Missing dependency of package management on
+  'unzip'
+* 192535 - test fetchmsttfonts script does not get run
+</description>
+	<arch>i586</arch>
+	<version>1.3.2</version>
+	<release>0.6</release>
+	<filesize>3875332</filesize>
+	<installedsize>42258585</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>1.3.2</version>
+			<release>0.6</release>
+			<filename>libzypp-devel-1.3.2-0.6.i586.rpm</filename>
+			<filesize>3875332</filesize>
+			<installedsize>42258585</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="yast2-packagemanager-devel"/>
+			<dep name="libzypp-devel" op="EQ" version="1.3.2" release="0.6"/>
+		</provides>
+		<requires>
+			<dep name="libzypp"/>
+			<dep name="libxml2-devel"/>
+			<dep name="curl-devel"/>
+			<dep name="openssl-devel"/>
+			<dep name="rpm-devel"/>
+			<dep name="glibc-devel"/>
+			<dep name="zlib-devel"/>
+			<dep name="e2fsprogs-devel"/>
+			<dep name="bzip2"/>
+			<dep name="popt-devel"/>
+			<dep name="dbus-1-devel"/>
+			<dep name="glib2-devel"/>
+			<dep name="hal-devel"/>
+			<dep name="boost-devel"/>
+			<dep name="libstdc++-devel"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>libzypp-devel</name>
+	<summary>libzypp update</summary>
+	<description>This update contains the following new features:
+* support for patch/delta RPMs in YUM sources (#168844)
+
+This update includes fixes for the following bugs:
+* various performance enhancements
+* 190163 - *-kmp-* dependencies match multiple kernel
+  packages
+* 176568 - Evaluate possible xml parser optimizations
+* 195567 - 100 /var/tmp/TmpFile.xxxxx in 3 Days
+* 193584 - cut-off package description in zen-updater
+* 194424 - Online update setup creates unusable cron job
+* 191676 - zen installer/updater cannot add an FTP YUM
+  repository
+* 190295 - zen-updater/zmd/rug does not install update
+  stack patches first
+* 193212 - zmd does not unblock transactions after
+  transaction preparation failure
+* 191506 - zen-updated showing updates from non-subscribed
+  catalog
+* 183656 - mono needed for YaST package management since
+  last update
+* 195911 - Missing dependency of package management on
+  'unzip'
+* 192535 - test fetchmsttfonts script does not get run
+</description>
+	<arch>ppc</arch>
+	<version>1.3.2</version>
+	<release>0.6</release>
+	<filesize>3871319</filesize>
+	<installedsize>42258609</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>1.3.2</version>
+			<release>0.6</release>
+			<filename>libzypp-devel-1.3.2-0.6.ppc.rpm</filename>
+			<filesize>3871319</filesize>
+			<installedsize>42258609</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="yast2-packagemanager-devel"/>
+			<dep name="libzypp-devel" op="EQ" version="1.3.2" release="0.6"/>
+		</provides>
+		<requires>
+			<dep name="libzypp"/>
+			<dep name="libxml2-devel"/>
+			<dep name="curl-devel"/>
+			<dep name="openssl-devel"/>
+			<dep name="rpm-devel"/>
+			<dep name="glibc-devel"/>
+			<dep name="zlib-devel"/>
+			<dep name="e2fsprogs-devel"/>
+			<dep name="bzip2"/>
+			<dep name="popt-devel"/>
+			<dep name="dbus-1-devel"/>
+			<dep name="glib2-devel"/>
+			<dep name="hal-devel"/>
+			<dep name="boost-devel"/>
+			<dep name="libstdc++-devel"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>libzypp-devel</name>
+	<summary>libzypp update</summary>
+	<description>This update contains the following new features:
+* support for patch/delta RPMs in YUM sources (#168844)
+
+This update includes fixes for the following bugs:
+* various performance enhancements
+* 190163 - *-kmp-* dependencies match multiple kernel
+  packages
+* 176568 - Evaluate possible xml parser optimizations
+* 195567 - 100 /var/tmp/TmpFile.xxxxx in 3 Days
+* 193584 - cut-off package description in zen-updater
+* 194424 - Online update setup creates unusable cron job
+* 191676 - zen installer/updater cannot add an FTP YUM
+  repository
+* 190295 - zen-updater/zmd/rug does not install update
+  stack patches first
+* 193212 - zmd does not unblock transactions after
+  transaction preparation failure
+* 191506 - zen-updated showing updates from non-subscribed
+  catalog
+* 183656 - mono needed for YaST package management since
+  last update
+* 195911 - Missing dependency of package management on
+  'unzip'
+* 192535 - test fetchmsttfonts script does not get run
+</description>
+	<arch>x86_64</arch>
+	<version>1.3.2</version>
+	<release>0.6</release>
+	<filesize>3874486</filesize>
+	<installedsize>42258622</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>1.3.2</version>
+			<release>0.6</release>
+			<filename>libzypp-devel-1.3.2-0.6.x86_64.rpm</filename>
+			<filesize>3874486</filesize>
+			<installedsize>42258622</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="yast2-packagemanager-devel"/>
+			<dep name="libzypp-devel" op="EQ" version="1.3.2" release="0.6"/>
+		</provides>
+		<requires>
+			<dep name="libzypp"/>
+			<dep name="libxml2-devel"/>
+			<dep name="curl-devel"/>
+			<dep name="openssl-devel"/>
+			<dep name="rpm-devel"/>
+			<dep name="glibc-devel"/>
+			<dep name="zlib-devel"/>
+			<dep name="e2fsprogs-devel"/>
+			<dep name="bzip2"/>
+			<dep name="popt-devel"/>
+			<dep name="dbus-1-devel"/>
+			<dep name="glib2-devel"/>
+			<dep name="hal-devel"/>
+			<dep name="boost-devel"/>
+			<dep name="libstdc++-devel"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>libzypp-zmd-backend</name>
+	<summary>libzypp update</summary>
+	<description>This update contains the following new features:
+* support for patch/delta RPMs in YUM sources (#168844)
+
+This update includes fixes for the following bugs:
+* various performance enhancements
+* 190163 - *-kmp-* dependencies match multiple kernel
+  packages
+* 176568 - Evaluate possible xml parser optimizations
+* 195567 - 100 /var/tmp/TmpFile.xxxxx in 3 Days
+* 193584 - cut-off package description in zen-updater
+* 194424 - Online update setup creates unusable cron job
+* 191676 - zen installer/updater cannot add an FTP YUM
+  repository
+* 190295 - zen-updater/zmd/rug does not install update
+  stack patches first
+* 193212 - zmd does not unblock transactions after
+  transaction preparation failure
+* 191506 - zen-updated showing updates from non-subscribed
+  catalog
+* 183656 - mono needed for YaST package management since
+  last update
+* 195911 - Missing dependency of package management on
+  'unzip'
+* 192535 - test fetchmsttfonts script does not get run
+</description>
+	<arch>i586</arch>
+	<version>7.1.1.0</version>
+	<release>42.53</release>
+	<filesize>207253</filesize>
+	<installedsize>612471</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>7.1.1.0</version>
+			<release>42.53</release>
+			<filename>libzypp-zmd-backend-7.1.1.0-42.53.i586.rpm</filename>
+			<filesize>207253</filesize>
+			<installedsize>612471</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="zmd-backend"/>
+			<dep name="zmd-librc-backend"/>
+			<dep name="libzmd-backend.so.0"/>
+			<dep name="libzypp-zmd-backend" op="EQ" version="7.1.1.0" release="42.53"/>
+		</provides>
+		<requires>
+			<dep name="libzypp" op="GE" version="1.3.1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="libblkid.so.1"/>
+			<dep name="libboost_filesystem.so.1.33.1"/>
+			<dep name="libboost_regex.so.1.33.1"/>
+			<dep name="libbz2.so.1"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libc.so.6(GLIBC_2.2)"/>
+			<dep name="libcrypto.so.0.9.8"/>
+			<dep name="libcurl.so.3"/>
+			<dep name="libdbus-1.so.2"/>
+			<dep name="libdbus-glib-1.so.2"/>
+			<dep name="libdl.so.2"/>
+			<dep name="libgcc_s.so.1"/>
+			<dep name="libgcc_s.so.1(GCC_3.0)"/>
+			<dep name="libglib-2.0.so.0"/>
+			<dep name="libgobject-2.0.so.0"/>
+			<dep name="libhal-storage.so.1"/>
+			<dep name="libhal.so.1"/>
+			<dep name="libidn.so.11"/>
+			<dep name="libm.so.6"/>
+			<dep name="libnsl.so.1"/>
+			<dep name="libpopt.so.0"/>
+			<dep name="libpthread.so.0"/>
+			<dep name="librpm-4.4.so"/>
+			<dep name="librpmdb-4.4.so"/>
+			<dep name="librpmio-4.4.so"/>
+			<dep name="librt.so.1"/>
+			<dep name="libsqlite3.so.0"/>
+			<dep name="libssl.so.0.9.8"/>
+			<dep name="libstdc++.so.6"/>
+			<dep name="libstdc++.so.6(CXXABI_1.3)"/>
+			<dep name="libstdc++.so.6(GLIBCXX_3.4)"/>
+			<dep name="libutil.so.1"/>
+			<dep name="libuuid.so.1"/>
+			<dep name="libxml2.so.2"/>
+			<dep name="libz.so.1"/>
+			<dep name="libzmd-backend.so.0"/>
+			<dep name="libzypp.so.1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>libzypp-zmd-backend</name>
+	<summary>libzypp update</summary>
+	<description>This update contains the following new features:
+* support for patch/delta RPMs in YUM sources (#168844)
+
+This update includes fixes for the following bugs:
+* various performance enhancements
+* 190163 - *-kmp-* dependencies match multiple kernel
+  packages
+* 176568 - Evaluate possible xml parser optimizations
+* 195567 - 100 /var/tmp/TmpFile.xxxxx in 3 Days
+* 193584 - cut-off package description in zen-updater
+* 194424 - Online update setup creates unusable cron job
+* 191676 - zen installer/updater cannot add an FTP YUM
+  repository
+* 190295 - zen-updater/zmd/rug does not install update
+  stack patches first
+* 193212 - zmd does not unblock transactions after
+  transaction preparation failure
+* 191506 - zen-updated showing updates from non-subscribed
+  catalog
+* 183656 - mono needed for YaST package management since
+  last update
+* 195911 - Missing dependency of package management on
+  'unzip'
+* 192535 - test fetchmsttfonts script does not get run
+</description>
+	<arch>ppc</arch>
+	<version>7.1.1.0</version>
+	<release>42.53</release>
+	<filesize>222271</filesize>
+	<installedsize>710794</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>7.1.1.0</version>
+			<release>42.53</release>
+			<filename>libzypp-zmd-backend-7.1.1.0-42.53.ppc.rpm</filename>
+			<filesize>222271</filesize>
+			<installedsize>710794</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="zmd-backend"/>
+			<dep name="zmd-librc-backend"/>
+			<dep name="libzmd-backend.so.0"/>
+			<dep name="libzypp-zmd-backend" op="EQ" version="7.1.1.0" release="42.53"/>
+		</provides>
+		<requires>
+			<dep name="libzypp" op="GE" version="1.3.1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="libblkid.so.1"/>
+			<dep name="libboost_filesystem.so.1.33.1"/>
+			<dep name="libboost_regex.so.1.33.1"/>
+			<dep name="libbz2.so.1"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libc.so.6(GLIBC_2.2)"/>
+			<dep name="libcrypto.so.0.9.8"/>
+			<dep name="libcurl.so.3"/>
+			<dep name="libdbus-1.so.2"/>
+			<dep name="libdbus-glib-1.so.2"/>
+			<dep name="libdl.so.2"/>
+			<dep name="libgcc_s.so.1"/>
+			<dep name="libgcc_s.so.1(GCC_3.0)"/>
+			<dep name="libglib-2.0.so.0"/>
+			<dep name="libgobject-2.0.so.0"/>
+			<dep name="libhal-storage.so.1"/>
+			<dep name="libhal.so.1"/>
+			<dep name="libidn.so.11"/>
+			<dep name="libm.so.6"/>
+			<dep name="libnsl.so.1"/>
+			<dep name="libpopt.so.0"/>
+			<dep name="libpthread.so.0"/>
+			<dep name="librpm-4.4.so"/>
+			<dep name="librpmdb-4.4.so"/>
+			<dep name="librpmio-4.4.so"/>
+			<dep name="librt.so.1"/>
+			<dep name="libsqlite3.so.0"/>
+			<dep name="libssl.so.0.9.8"/>
+			<dep name="libstdc++.so.6"/>
+			<dep name="libstdc++.so.6(CXXABI_1.3)"/>
+			<dep name="libstdc++.so.6(GLIBCXX_3.4)"/>
+			<dep name="libutil.so.1"/>
+			<dep name="libuuid.so.1"/>
+			<dep name="libxml2.so.2"/>
+			<dep name="libz.so.1"/>
+			<dep name="libzmd-backend.so.0"/>
+			<dep name="libzypp.so.1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>libzypp-zmd-backend</name>
+	<summary>libzypp update</summary>
+	<description>This update contains the following new features:
+* support for patch/delta RPMs in YUM sources (#168844)
+
+This update includes fixes for the following bugs:
+* various performance enhancements
+* 190163 - *-kmp-* dependencies match multiple kernel
+  packages
+* 176568 - Evaluate possible xml parser optimizations
+* 195567 - 100 /var/tmp/TmpFile.xxxxx in 3 Days
+* 193584 - cut-off package description in zen-updater
+* 194424 - Online update setup creates unusable cron job
+* 191676 - zen installer/updater cannot add an FTP YUM
+  repository
+* 190295 - zen-updater/zmd/rug does not install update
+  stack patches first
+* 193212 - zmd does not unblock transactions after
+  transaction preparation failure
+* 191506 - zen-updated showing updates from non-subscribed
+  catalog
+* 183656 - mono needed for YaST package management since
+  last update
+* 195911 - Missing dependency of package management on
+  'unzip'
+* 192535 - test fetchmsttfonts script does not get run
+</description>
+	<arch>x86_64</arch>
+	<version>7.1.1.0</version>
+	<release>42.53</release>
+	<filesize>211508</filesize>
+	<installedsize>678415</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>7.1.1.0</version>
+			<release>42.53</release>
+			<filename>libzypp-zmd-backend-7.1.1.0-42.53.x86_64.rpm</filename>
+			<filesize>211508</filesize>
+			<installedsize>678415</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="zmd-backend"/>
+			<dep name="zmd-librc-backend"/>
+			<dep name="libzmd-backend.so.0()(64bit)"/>
+			<dep name="libzypp-zmd-backend" op="EQ" version="7.1.1.0" release="42.53"/>
+		</provides>
+		<requires>
+			<dep name="libzypp" op="GE" version="1.3.1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="libblkid.so.1()(64bit)"/>
+			<dep name="libboost_filesystem.so.1.33.1()(64bit)"/>
+			<dep name="libboost_regex.so.1.33.1()(64bit)"/>
+			<dep name="libbz2.so.1()(64bit)"/>
+			<dep name="libc.so.6()(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libcrypto.so.0.9.8()(64bit)"/>
+			<dep name="libcurl.so.3()(64bit)"/>
+			<dep name="libdbus-1.so.2()(64bit)"/>
+			<dep name="libdbus-glib-1.so.2()(64bit)"/>
+			<dep name="libdl.so.2()(64bit)"/>
+			<dep name="libgcc_s.so.1()(64bit)"/>
+			<dep name="libgcc_s.so.1(GCC_3.0)(64bit)"/>
+			<dep name="libglib-2.0.so.0()(64bit)"/>
+			<dep name="libgobject-2.0.so.0()(64bit)"/>
+			<dep name="libhal-storage.so.1()(64bit)"/>
+			<dep name="libhal.so.1()(64bit)"/>
+			<dep name="libidn.so.11()(64bit)"/>
+			<dep name="libm.so.6()(64bit)"/>
+			<dep name="libnsl.so.1()(64bit)"/>
+			<dep name="libpopt.so.0()(64bit)"/>
+			<dep name="libpthread.so.0()(64bit)"/>
+			<dep name="librpm-4.4.so()(64bit)"/>
+			<dep name="librpmdb-4.4.so()(64bit)"/>
+			<dep name="librpmio-4.4.so()(64bit)"/>
+			<dep name="librt.so.1()(64bit)"/>
+			<dep name="libsqlite3.so.0()(64bit)"/>
+			<dep name="libssl.so.0.9.8()(64bit)"/>
+			<dep name="libstdc++.so.6()(64bit)"/>
+			<dep name="libstdc++.so.6(CXXABI_1.3)(64bit)"/>
+			<dep name="libstdc++.so.6(GLIBCXX_3.4)(64bit)"/>
+			<dep name="libutil.so.1()(64bit)"/>
+			<dep name="libuuid.so.1()(64bit)"/>
+			<dep name="libxml2.so.2()(64bit)"/>
+			<dep name="libz.so.1()(64bit)"/>
+			<dep name="libzmd-backend.so.0()(64bit)"/>
+			<dep name="libzypp.so.1()(64bit)"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>ruby-zypp</name>
+	<summary>libzypp update</summary>
+	<description>This update contains the following new features:
+* support for patch/delta RPMs in YUM sources (#168844)
+
+This update includes fixes for the following bugs:
+* various performance enhancements
+* 190163 - *-kmp-* dependencies match multiple kernel
+  packages
+* 176568 - Evaluate possible xml parser optimizations
+* 195567 - 100 /var/tmp/TmpFile.xxxxx in 3 Days
+* 193584 - cut-off package description in zen-updater
+* 194424 - Online update setup creates unusable cron job
+* 191676 - zen installer/updater cannot add an FTP YUM
+  repository
+* 190295 - zen-updater/zmd/rug does not install update
+  stack patches first
+* 193212 - zmd does not unblock transactions after
+  transaction preparation failure
+* 191506 - zen-updated showing updates from non-subscribed
+  catalog
+* 183656 - mono needed for YaST package management since
+  last update
+* 195911 - Missing dependency of package management on
+  'unzip'
+* 192535 - test fetchmsttfonts script does not get run
+</description>
+	<arch>i586</arch>
+	<version>0.0</version>
+	<release>8.3</release>
+	<filesize>38940</filesize>
+	<installedsize>95096</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>0.0</version>
+			<release>8.3</release>
+			<filename>ruby-zypp-0.0-8.3.i586.rpm</filename>
+			<filesize>38940</filesize>
+			<installedsize>95096</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="rzypp.so"/>
+			<dep name="ruby-zypp" op="EQ" version="0.0" release="8.3"/>
+		</provides>
+		<requires>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libcrypt.so.1"/>
+			<dep name="libdl.so.2"/>
+			<dep name="libgcc_s.so.1"/>
+			<dep name="libgcc_s.so.1(GCC_3.0)"/>
+			<dep name="libm.so.6"/>
+			<dep name="libruby.so.1.8"/>
+			<dep name="libstdc++.so.6"/>
+			<dep name="libstdc++.so.6(CXXABI_1.3)"/>
+			<dep name="libstdc++.so.6(GLIBCXX_3.4)"/>
+			<dep name="libzypp.so.1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>ruby-zypp</name>
+	<summary>libzypp update</summary>
+	<description>This update contains the following new features:
+* support for patch/delta RPMs in YUM sources (#168844)
+
+This update includes fixes for the following bugs:
+* various performance enhancements
+* 190163 - *-kmp-* dependencies match multiple kernel
+  packages
+* 176568 - Evaluate possible xml parser optimizations
+* 195567 - 100 /var/tmp/TmpFile.xxxxx in 3 Days
+* 193584 - cut-off package description in zen-updater
+* 194424 - Online update setup creates unusable cron job
+* 191676 - zen installer/updater cannot add an FTP YUM
+  repository
+* 190295 - zen-updater/zmd/rug does not install update
+  stack patches first
+* 193212 - zmd does not unblock transactions after
+  transaction preparation failure
+* 191506 - zen-updated showing updates from non-subscribed
+  catalog
+* 183656 - mono needed for YaST package management since
+  last update
+* 195911 - Missing dependency of package management on
+  'unzip'
+* 192535 - test fetchmsttfonts script does not get run
+</description>
+	<arch>ppc</arch>
+	<version>0.0</version>
+	<release>8.3</release>
+	<filesize>43921</filesize>
+	<installedsize>117728</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>0.0</version>
+			<release>8.3</release>
+			<filename>ruby-zypp-0.0-8.3.ppc.rpm</filename>
+			<filesize>43921</filesize>
+			<installedsize>117728</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="rzypp.so"/>
+			<dep name="ruby-zypp" op="EQ" version="0.0" release="8.3"/>
+		</provides>
+		<requires>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libcrypt.so.1"/>
+			<dep name="libdl.so.2"/>
+			<dep name="libgcc_s.so.1"/>
+			<dep name="libgcc_s.so.1(GCC_3.0)"/>
+			<dep name="libm.so.6"/>
+			<dep name="libruby.so.1.8"/>
+			<dep name="libstdc++.so.6"/>
+			<dep name="libstdc++.so.6(CXXABI_1.3)"/>
+			<dep name="libstdc++.so.6(GLIBCXX_3.4)"/>
+			<dep name="libzypp.so.1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>ruby-zypp</name>
+	<summary>libzypp update</summary>
+	<description>This update contains the following new features:
+* support for patch/delta RPMs in YUM sources (#168844)
+
+This update includes fixes for the following bugs:
+* various performance enhancements
+* 190163 - *-kmp-* dependencies match multiple kernel
+  packages
+* 176568 - Evaluate possible xml parser optimizations
+* 195567 - 100 /var/tmp/TmpFile.xxxxx in 3 Days
+* 193584 - cut-off package description in zen-updater
+* 194424 - Online update setup creates unusable cron job
+* 191676 - zen installer/updater cannot add an FTP YUM
+  repository
+* 190295 - zen-updater/zmd/rug does not install update
+  stack patches first
+* 193212 - zmd does not unblock transactions after
+  transaction preparation failure
+* 191506 - zen-updated showing updates from non-subscribed
+  catalog
+* 183656 - mono needed for YaST package management since
+  last update
+* 195911 - Missing dependency of package management on
+  'unzip'
+* 192535 - test fetchmsttfonts script does not get run
+</description>
+	<arch>x86_64</arch>
+	<version>0.0</version>
+	<release>8.3</release>
+	<filesize>40345</filesize>
+	<installedsize>101160</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>0.0</version>
+			<release>8.3</release>
+			<filename>ruby-zypp-0.0-8.3.x86_64.rpm</filename>
+			<filesize>40345</filesize>
+			<installedsize>101160</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="rzypp.so()(64bit)"/>
+			<dep name="ruby-zypp" op="EQ" version="0.0" release="8.3"/>
+		</provides>
+		<requires>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="libc.so.6()(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libcrypt.so.1()(64bit)"/>
+			<dep name="libdl.so.2()(64bit)"/>
+			<dep name="libgcc_s.so.1()(64bit)"/>
+			<dep name="libgcc_s.so.1(GCC_3.0)(64bit)"/>
+			<dep name="libm.so.6()(64bit)"/>
+			<dep name="libruby.so.1.8()(64bit)"/>
+			<dep name="libstdc++.so.6()(64bit)"/>
+			<dep name="libstdc++.so.6(CXXABI_1.3)(64bit)"/>
+			<dep name="libstdc++.so.6(GLIBCXX_3.4)(64bit)"/>
+			<dep name="libzypp.so.1()(64bit)"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>rug</name>
+	<summary>libzypp update</summary>
+	<description>This update contains the following new features:
+* support for patch/delta RPMs in YUM sources (#168844)
+
+This update includes fixes for the following bugs:
+* various performance enhancements
+* 190163 - *-kmp-* dependencies match multiple kernel
+  packages
+* 176568 - Evaluate possible xml parser optimizations
+* 195567 - 100 /var/tmp/TmpFile.xxxxx in 3 Days
+* 193584 - cut-off package description in zen-updater
+* 194424 - Online update setup creates unusable cron job
+* 191676 - zen installer/updater cannot add an FTP YUM
+  repository
+* 190295 - zen-updater/zmd/rug does not install update
+  stack patches first
+* 193212 - zmd does not unblock transactions after
+  transaction preparation failure
+* 191506 - zen-updated showing updates from non-subscribed
+  catalog
+* 183656 - mono needed for YaST package management since
+  last update
+* 195911 - Missing dependency of package management on
+  'unzip'
+* 192535 - test fetchmsttfonts script does not get run
+</description>
+	<arch>i586</arch>
+	<version>7.1.1.0</version>
+	<release>18.27</release>
+	<filesize>203004</filesize>
+	<installedsize>606597</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>7.1.1.0</version>
+			<release>18.27</release>
+			<filename>rug-7.1.1.0-18.27.i586.rpm</filename>
+			<filesize>203004</filesize>
+			<installedsize>606597</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="mono(Novell.Zenworks.Rug)" op="EQ" version="1.0.2448.29731"/>
+			<dep name="mono(rug)" op="EQ" version="0.0.0.0"/>
+			<dep name="rug" op="EQ" version="7.1.1.0" release="18.27"/>
+		</provides>
+		<requires>
+			<dep name="zmd"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(VersionedDependencies)" op="LE" version="3.0.3" release="1" pre="1"/>
+			<dep name="/bin/sh"/>
+			<dep name="mono(Mono.Posix)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(Novell.Zenworks.Zmd.Packaging.Public)" op="EQ" version="1.0.0.0"/>
+			<dep name="mono(Novell.Zenworks.Zmd.Public)" op="EQ" version="1.0.0.0"/>
+			<dep name="mono(System)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(mscorlib)" op="EQ" version="1.0.5000.0"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>rug</name>
+	<summary>libzypp update</summary>
+	<description>This update contains the following new features:
+* support for patch/delta RPMs in YUM sources (#168844)
+
+This update includes fixes for the following bugs:
+* various performance enhancements
+* 190163 - *-kmp-* dependencies match multiple kernel
+  packages
+* 176568 - Evaluate possible xml parser optimizations
+* 195567 - 100 /var/tmp/TmpFile.xxxxx in 3 Days
+* 193584 - cut-off package description in zen-updater
+* 194424 - Online update setup creates unusable cron job
+* 191676 - zen installer/updater cannot add an FTP YUM
+  repository
+* 190295 - zen-updater/zmd/rug does not install update
+  stack patches first
+* 193212 - zmd does not unblock transactions after
+  transaction preparation failure
+* 191506 - zen-updated showing updates from non-subscribed
+  catalog
+* 183656 - mono needed for YaST package management since
+  last update
+* 195911 - Missing dependency of package management on
+  'unzip'
+* 192535 - test fetchmsttfonts script does not get run
+</description>
+	<arch>ppc</arch>
+	<version>7.1.1.0</version>
+	<release>18.27</release>
+	<filesize>202512</filesize>
+	<installedsize>606597</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>7.1.1.0</version>
+			<release>18.27</release>
+			<filename>rug-7.1.1.0-18.27.ppc.rpm</filename>
+			<filesize>202512</filesize>
+			<installedsize>606597</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="mono(Novell.Zenworks.Rug)" op="EQ" version="1.0.2448.30682"/>
+			<dep name="mono(rug)" op="EQ" version="0.0.0.0"/>
+			<dep name="rug" op="EQ" version="7.1.1.0" release="18.27"/>
+		</provides>
+		<requires>
+			<dep name="zmd"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(VersionedDependencies)" op="LE" version="3.0.3" release="1" pre="1"/>
+			<dep name="/bin/sh"/>
+			<dep name="mono(Mono.Posix)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(Novell.Zenworks.Zmd.Packaging.Public)" op="EQ" version="1.0.0.0"/>
+			<dep name="mono(Novell.Zenworks.Zmd.Public)" op="EQ" version="1.0.0.0"/>
+			<dep name="mono(System)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(mscorlib)" op="EQ" version="1.0.5000.0"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>rug</name>
+	<summary>libzypp update</summary>
+	<description>This update contains the following new features:
+* support for patch/delta RPMs in YUM sources (#168844)
+
+This update includes fixes for the following bugs:
+* various performance enhancements
+* 190163 - *-kmp-* dependencies match multiple kernel
+  packages
+* 176568 - Evaluate possible xml parser optimizations
+* 195567 - 100 /var/tmp/TmpFile.xxxxx in 3 Days
+* 193584 - cut-off package description in zen-updater
+* 194424 - Online update setup creates unusable cron job
+* 191676 - zen installer/updater cannot add an FTP YUM
+  repository
+* 190295 - zen-updater/zmd/rug does not install update
+  stack patches first
+* 193212 - zmd does not unblock transactions after
+  transaction preparation failure
+* 191506 - zen-updated showing updates from non-subscribed
+  catalog
+* 183656 - mono needed for YaST package management since
+  last update
+* 195911 - Missing dependency of package management on
+  'unzip'
+* 192535 - test fetchmsttfonts script does not get run
+</description>
+	<arch>x86_64</arch>
+	<version>7.1.1.0</version>
+	<release>18.27</release>
+	<filesize>202866</filesize>
+	<installedsize>606607</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>7.1.1.0</version>
+			<release>18.27</release>
+			<filename>rug-7.1.1.0-18.27.x86_64.rpm</filename>
+			<filesize>202866</filesize>
+			<installedsize>606607</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="mono(Novell.Zenworks.Rug)" op="EQ" version="1.0.2448.32046"/>
+			<dep name="mono(rug)" op="EQ" version="0.0.0.0"/>
+			<dep name="rug" op="EQ" version="7.1.1.0" release="18.27"/>
+		</provides>
+		<requires>
+			<dep name="zmd"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(VersionedDependencies)" op="LE" version="3.0.3" release="1" pre="1"/>
+			<dep name="/bin/sh"/>
+			<dep name="mono(Mono.Posix)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(Novell.Zenworks.Zmd.Packaging.Public)" op="EQ" version="1.0.0.0"/>
+			<dep name="mono(Novell.Zenworks.Zmd.Public)" op="EQ" version="1.0.0.0"/>
+			<dep name="mono(System)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(mscorlib)" op="EQ" version="1.0.5000.0"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>yast2</name>
+	<summary>libzypp update</summary>
+	<description>This update contains the following new features:
+* support for patch/delta RPMs in YUM sources (#168844)
+
+This update includes fixes for the following bugs:
+* various performance enhancements
+* 190163 - *-kmp-* dependencies match multiple kernel
+  packages
+* 176568 - Evaluate possible xml parser optimizations
+* 195567 - 100 /var/tmp/TmpFile.xxxxx in 3 Days
+* 193584 - cut-off package description in zen-updater
+* 194424 - Online update setup creates unusable cron job
+* 191676 - zen installer/updater cannot add an FTP YUM
+  repository
+* 190295 - zen-updater/zmd/rug does not install update
+  stack patches first
+* 193212 - zmd does not unblock transactions after
+  transaction preparation failure
+* 191506 - zen-updated showing updates from non-subscribed
+  catalog
+* 183656 - mono needed for YaST package management since
+  last update
+* 195911 - Missing dependency of package management on
+  'unzip'
+* 192535 - test fetchmsttfonts script does not get run
+</description>
+	<arch>i586</arch>
+	<version>2.13.64.3</version>
+	<release>0.2</release>
+	<filesize>499107</filesize>
+	<installedsize>2209776</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>2.13.64.3</version>
+			<release>0.2</release>
+			<filename>yast2-2.13.64.3-0.2.i586.rpm</filename>
+			<filesize>499107</filesize>
+			<installedsize>2209776</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="yast2-lib-sequencer"/>
+			<dep name="yast2-lib-wizard"/>
+			<dep name="yast2-lib-wizard-devel"/>
+			<dep name="yast2-trans-wizard"/>
+			<dep name="yast2-trans-menu"/>
+			<dep name="y2t_menu"/>
+			<dep name="yast2" op="EQ" version="2.13.64.3" release="0.2"/>
+		</provides>
+		<requires>
+			<dep name="rpmlib(VersionedDependencies)" op="LE" version="3.0.3" release="1" pre="1"/>
+			<dep name="yast2-security" op="GE" version="2.13.4" release="0.2" pre="1"/>
+			<dep name="yast2-core" op="GE" version="2.7.1"/>
+			<dep name="yast2-pkg-bindings" op="GE" version="2.13.88.1"/>
+			<dep name="yast2_ui"/>
+			<dep name="yast2_theme"/>
+			<dep name="perl-Config-Crontab"/>
+			<dep name="coreutils"/>
+			<dep name="yast2-xml"/>
+			<dep name="yast2-hardware-detection"/>
+			<dep name="SuSEfirewall2"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/bin/bash"/>
+			<dep name="/usr/bin/perl"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+		<conflicts>
+			<dep name="yast2-security" op="LE" version="2.13.2"/>
+		</conflicts>
+	</deps>
+</package>
+<package>
+	<name>yast2</name>
+	<summary>libzypp update</summary>
+	<description>This update contains the following new features:
+* support for patch/delta RPMs in YUM sources (#168844)
+
+This update includes fixes for the following bugs:
+* various performance enhancements
+* 190163 - *-kmp-* dependencies match multiple kernel
+  packages
+* 176568 - Evaluate possible xml parser optimizations
+* 195567 - 100 /var/tmp/TmpFile.xxxxx in 3 Days
+* 193584 - cut-off package description in zen-updater
+* 194424 - Online update setup creates unusable cron job
+* 191676 - zen installer/updater cannot add an FTP YUM
+  repository
+* 190295 - zen-updater/zmd/rug does not install update
+  stack patches first
+* 193212 - zmd does not unblock transactions after
+  transaction preparation failure
+* 191506 - zen-updated showing updates from non-subscribed
+  catalog
+* 183656 - mono needed for YaST package management since
+  last update
+* 195911 - Missing dependency of package management on
+  'unzip'
+* 192535 - test fetchmsttfonts script does not get run
+</description>
+	<arch>ppc</arch>
+	<version>2.13.64.3</version>
+	<release>0.2</release>
+	<filesize>499011</filesize>
+	<installedsize>2209776</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>2.13.64.3</version>
+			<release>0.2</release>
+			<filename>yast2-2.13.64.3-0.2.ppc.rpm</filename>
+			<filesize>499011</filesize>
+			<installedsize>2209776</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="yast2-lib-sequencer"/>
+			<dep name="yast2-lib-wizard"/>
+			<dep name="yast2-lib-wizard-devel"/>
+			<dep name="yast2-trans-wizard"/>
+			<dep name="yast2-trans-menu"/>
+			<dep name="y2t_menu"/>
+			<dep name="yast2" op="EQ" version="2.13.64.3" release="0.2"/>
+		</provides>
+		<requires>
+			<dep name="rpmlib(VersionedDependencies)" op="LE" version="3.0.3" release="1" pre="1"/>
+			<dep name="yast2-security" op="GE" version="2.13.4" release="0.2" pre="1"/>
+			<dep name="yast2-core" op="GE" version="2.7.1"/>
+			<dep name="yast2-pkg-bindings" op="GE" version="2.13.88.1"/>
+			<dep name="yast2_ui"/>
+			<dep name="yast2_theme"/>
+			<dep name="perl-Config-Crontab"/>
+			<dep name="coreutils"/>
+			<dep name="yast2-xml"/>
+			<dep name="yast2-hardware-detection"/>
+			<dep name="SuSEfirewall2"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/bin/bash"/>
+			<dep name="/usr/bin/perl"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+		<conflicts>
+			<dep name="yast2-security" op="LE" version="2.13.2"/>
+		</conflicts>
+	</deps>
+</package>
+<package>
+	<name>yast2</name>
+	<summary>libzypp update</summary>
+	<description>This update contains the following new features:
+* support for patch/delta RPMs in YUM sources (#168844)
+
+This update includes fixes for the following bugs:
+* various performance enhancements
+* 190163 - *-kmp-* dependencies match multiple kernel
+  packages
+* 176568 - Evaluate possible xml parser optimizations
+* 195567 - 100 /var/tmp/TmpFile.xxxxx in 3 Days
+* 193584 - cut-off package description in zen-updater
+* 194424 - Online update setup creates unusable cron job
+* 191676 - zen installer/updater cannot add an FTP YUM
+  repository
+* 190295 - zen-updater/zmd/rug does not install update
+  stack patches first
+* 193212 - zmd does not unblock transactions after
+  transaction preparation failure
+* 191506 - zen-updated showing updates from non-subscribed
+  catalog
+* 183656 - mono needed for YaST package management since
+  last update
+* 195911 - Missing dependency of package management on
+  'unzip'
+* 192535 - test fetchmsttfonts script does not get run
+</description>
+	<arch>x86_64</arch>
+	<version>2.13.64.3</version>
+	<release>0.2</release>
+	<filesize>499035</filesize>
+	<installedsize>2209776</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>2.13.64.3</version>
+			<release>0.2</release>
+			<filename>yast2-2.13.64.3-0.2.x86_64.rpm</filename>
+			<filesize>499035</filesize>
+			<installedsize>2209776</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="yast2-lib-sequencer"/>
+			<dep name="yast2-lib-wizard"/>
+			<dep name="yast2-lib-wizard-devel"/>
+			<dep name="yast2-trans-wizard"/>
+			<dep name="yast2-trans-menu"/>
+			<dep name="y2t_menu"/>
+			<dep name="yast2" op="EQ" version="2.13.64.3" release="0.2"/>
+		</provides>
+		<requires>
+			<dep name="rpmlib(VersionedDependencies)" op="LE" version="3.0.3" release="1" pre="1"/>
+			<dep name="yast2-security" op="GE" version="2.13.4" release="0.2" pre="1"/>
+			<dep name="yast2-core" op="GE" version="2.7.1"/>
+			<dep name="yast2-pkg-bindings" op="GE" version="2.13.88.1"/>
+			<dep name="yast2_ui"/>
+			<dep name="yast2_theme"/>
+			<dep name="perl-Config-Crontab"/>
+			<dep name="coreutils"/>
+			<dep name="yast2-xml"/>
+			<dep name="yast2-hardware-detection"/>
+			<dep name="SuSEfirewall2"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/bin/bash"/>
+			<dep name="/usr/bin/perl"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+		<conflicts>
+			<dep name="yast2-security" op="LE" version="2.13.2"/>
+		</conflicts>
+	</deps>
+</package>
+<package>
+	<name>yast2-devel</name>
+	<summary>libzypp update</summary>
+	<description>This update contains the following new features:
+* support for patch/delta RPMs in YUM sources (#168844)
+
+This update includes fixes for the following bugs:
+* various performance enhancements
+* 190163 - *-kmp-* dependencies match multiple kernel
+  packages
+* 176568 - Evaluate possible xml parser optimizations
+* 195567 - 100 /var/tmp/TmpFile.xxxxx in 3 Days
+* 193584 - cut-off package description in zen-updater
+* 194424 - Online update setup creates unusable cron job
+* 191676 - zen installer/updater cannot add an FTP YUM
+  repository
+* 190295 - zen-updater/zmd/rug does not install update
+  stack patches first
+* 193212 - zmd does not unblock transactions after
+  transaction preparation failure
+* 191506 - zen-updated showing updates from non-subscribed
+  catalog
+* 183656 - mono needed for YaST package management since
+  last update
+* 195911 - Missing dependency of package management on
+  'unzip'
+* 192535 - test fetchmsttfonts script does not get run
+</description>
+	<arch>i586</arch>
+	<version>2.13.64.3</version>
+	<release>0.2</release>
+	<filesize>497874</filesize>
+	<installedsize>1590824</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>2.13.64.3</version>
+			<release>0.2</release>
+			<filename>yast2-devel-2.13.64.3-0.2.i586.rpm</filename>
+			<filesize>497874</filesize>
+			<installedsize>1590824</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="yast2-lib-sequencer-devel"/>
+			<dep name="yast2-devel" op="EQ" version="2.13.64.3" release="0.2"/>
+		</provides>
+		<requires>
+			<dep name="yast2" op="EQ" version="2.13.64.3"/>
+			<dep name="yast2-core-devel"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>yast2-devel</name>
+	<summary>libzypp update</summary>
+	<description>This update contains the following new features:
+* support for patch/delta RPMs in YUM sources (#168844)
+
+This update includes fixes for the following bugs:
+* various performance enhancements
+* 190163 - *-kmp-* dependencies match multiple kernel
+  packages
+* 176568 - Evaluate possible xml parser optimizations
+* 195567 - 100 /var/tmp/TmpFile.xxxxx in 3 Days
+* 193584 - cut-off package description in zen-updater
+* 194424 - Online update setup creates unusable cron job
+* 191676 - zen installer/updater cannot add an FTP YUM
+  repository
+* 190295 - zen-updater/zmd/rug does not install update
+  stack patches first
+* 193212 - zmd does not unblock transactions after
+  transaction preparation failure
+* 191506 - zen-updated showing updates from non-subscribed
+  catalog
+* 183656 - mono needed for YaST package management since
+  last update
+* 195911 - Missing dependency of package management on
+  'unzip'
+* 192535 - test fetchmsttfonts script does not get run
+</description>
+	<arch>ppc</arch>
+	<version>2.13.64.3</version>
+	<release>0.2</release>
+	<filesize>497576</filesize>
+	<installedsize>1590824</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>2.13.64.3</version>
+			<release>0.2</release>
+			<filename>yast2-devel-2.13.64.3-0.2.ppc.rpm</filename>
+			<filesize>497576</filesize>
+			<installedsize>1590824</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="yast2-lib-sequencer-devel"/>
+			<dep name="yast2-devel" op="EQ" version="2.13.64.3" release="0.2"/>
+		</provides>
+		<requires>
+			<dep name="yast2" op="EQ" version="2.13.64.3"/>
+			<dep name="yast2-core-devel"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>yast2-devel</name>
+	<summary>libzypp update</summary>
+	<description>This update contains the following new features:
+* support for patch/delta RPMs in YUM sources (#168844)
+
+This update includes fixes for the following bugs:
+* various performance enhancements
+* 190163 - *-kmp-* dependencies match multiple kernel
+  packages
+* 176568 - Evaluate possible xml parser optimizations
+* 195567 - 100 /var/tmp/TmpFile.xxxxx in 3 Days
+* 193584 - cut-off package description in zen-updater
+* 194424 - Online update setup creates unusable cron job
+* 191676 - zen installer/updater cannot add an FTP YUM
+  repository
+* 190295 - zen-updater/zmd/rug does not install update
+  stack patches first
+* 193212 - zmd does not unblock transactions after
+  transaction preparation failure
+* 191506 - zen-updated showing updates from non-subscribed
+  catalog
+* 183656 - mono needed for YaST package management since
+  last update
+* 195911 - Missing dependency of package management on
+  'unzip'
+* 192535 - test fetchmsttfonts script does not get run
+</description>
+	<arch>x86_64</arch>
+	<version>2.13.64.3</version>
+	<release>0.2</release>
+	<filesize>497518</filesize>
+	<installedsize>1590824</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>2.13.64.3</version>
+			<release>0.2</release>
+			<filename>yast2-devel-2.13.64.3-0.2.x86_64.rpm</filename>
+			<filesize>497518</filesize>
+			<installedsize>1590824</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="yast2-lib-sequencer-devel"/>
+			<dep name="yast2-devel" op="EQ" version="2.13.64.3" release="0.2"/>
+		</provides>
+		<requires>
+			<dep name="yast2" op="EQ" version="2.13.64.3"/>
+			<dep name="yast2-core-devel"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>yast2-installation</name>
+	<summary>libzypp update</summary>
+	<description>This update contains the following new features:
+* support for patch/delta RPMs in YUM sources (#168844)
+
+This update includes fixes for the following bugs:
+* various performance enhancements
+* 190163 - *-kmp-* dependencies match multiple kernel
+  packages
+* 176568 - Evaluate possible xml parser optimizations
+* 195567 - 100 /var/tmp/TmpFile.xxxxx in 3 Days
+* 193584 - cut-off package description in zen-updater
+* 194424 - Online update setup creates unusable cron job
+* 191676 - zen installer/updater cannot add an FTP YUM
+  repository
+* 190295 - zen-updater/zmd/rug does not install update
+  stack patches first
+* 193212 - zmd does not unblock transactions after
+  transaction preparation failure
+* 191506 - zen-updated showing updates from non-subscribed
+  catalog
+* 183656 - mono needed for YaST package management since
+  last update
+* 195911 - Missing dependency of package management on
+  'unzip'
+* 192535 - test fetchmsttfonts script does not get run
+</description>
+	<arch>noarch</arch>
+	<version>2.13.132.9</version>
+	<release>0.2</release>
+	<filesize>413015</filesize>
+	<installedsize>1269813</installedsize>
+	<history>
+		<update>
+			<arch>noarch</arch>
+			<epoch>0</epoch>
+			<version>2.13.132.9</version>
+			<release>0.2</release>
+			<filename>yast2-installation-2.13.132.9-0.2.noarch.rpm</filename>
+			<filesize>413015</filesize>
+			<installedsize>1269813</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="yast"/>
+			<dep name="yast2-trans-inst-proposal"/>
+			<dep name="y2t_inst"/>
+			<dep name="yast2-trans-inst-general"/>
+			<dep name="y2t_inst-general"/>
+			<dep name="yast2-instsys"/>
+			<dep name="yast2-installation" op="EQ" version="2.13.132.9" release="0.2"/>
+		</provides>
+		<requires>
+			<dep name="yast2"/>
+			<dep name="yast2-update"/>
+			<dep name="yast2-storage"/>
+			<dep name="yast2-mouse"/>
+			<dep name="yast2-country"/>
+			<dep name="yast2-bootloader"/>
+			<dep name="yast2-packager" op="GE" version="2.13.135"/>
+			<dep name="yast2-pkg-bindings" op="GE" version="2.13.86"/>
+			<dep name="yast2-network"/>
+			<dep name="yast2-users"/>
+			<dep name="curl"/>
+			<dep name="release-notes"/>
+			<dep name="autoyast2-installation"/>
+			<dep name="yast2-online-update"/>
+			<dep name="unzip"/>
+			<dep name="fillup" pre="1"/>
+			<dep name="coreutils" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/bin/sh"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>yast2-ncurses</name>
+	<summary>libzypp update</summary>
+	<description>This update contains the following new features:
+* support for patch/delta RPMs in YUM sources (#168844)
+
+This update includes fixes for the following bugs:
+* various performance enhancements
+* 190163 - *-kmp-* dependencies match multiple kernel
+  packages
+* 176568 - Evaluate possible xml parser optimizations
+* 195567 - 100 /var/tmp/TmpFile.xxxxx in 3 Days
+* 193584 - cut-off package description in zen-updater
+* 194424 - Online update setup creates unusable cron job
+* 191676 - zen installer/updater cannot add an FTP YUM
+  repository
+* 190295 - zen-updater/zmd/rug does not install update
+  stack patches first
+* 193212 - zmd does not unblock transactions after
+  transaction preparation failure
+* 191506 - zen-updated showing updates from non-subscribed
+  catalog
+* 183656 - mono needed for YaST package management since
+  last update
+* 195911 - Missing dependency of package management on
+  'unzip'
+* 192535 - test fetchmsttfonts script does not get run
+</description>
+	<arch>i586</arch>
+	<version>2.13.40</version>
+	<release>1.4</release>
+	<filesize>575185</filesize>
+	<installedsize>1540558</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>2.13.40</version>
+			<release>1.4</release>
+			<filename>yast2-ncurses-2.13.40-1.4.i586.rpm</filename>
+			<filesize>575185</filesize>
+			<installedsize>1540558</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="yast2_ui"/>
+			<dep name="y2base:/var/lib/YaST2/servers/ncurses"/>
+			<dep name="y2base:/usr/lib/YaST2/servers/ncurses"/>
+			<dep name="y2base:/usr/lib/YaST2/plugin/libpy2ncurses.so.2"/>
+			<dep name="yast2-ui-ncurses"/>
+			<dep name="yast2-ui-ncurses-devel"/>
+			<dep name="y2curses"/>
+			<dep name="libpy2ncurses.so.2"/>
+			<dep name="yast2-ncurses" op="EQ" version="2.13.40" release="1.4"/>
+		</provides>
+		<requires>
+			<dep name="glibc-locale"/>
+			<dep name="libzypp" op="GE" version="1.0.0"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libc.so.6(GLIBC_2.2)"/>
+			<dep name="libc.so.6(GLIBC_2.2.3)"/>
+			<dep name="libgcc_s.so.1"/>
+			<dep name="libgcc_s.so.1(GCC_3.0)"/>
+			<dep name="libgcc_s.so.1(GLIBC_2.0)"/>
+			<dep name="libm.so.6"/>
+			<dep name="libncursesw.so.5"/>
+			<dep name="libpanelw.so.5"/>
+			<dep name="libstdc++.so.6"/>
+			<dep name="libstdc++.so.6(CXXABI_1.3)"/>
+			<dep name="libstdc++.so.6(CXXABI_1.3.1)"/>
+			<dep name="libstdc++.so.6(GLIBCXX_3.4)"/>
+			<dep name="libyui.so.2"/>
+			<dep name="libzypp.so.1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>yast2-ncurses</name>
+	<summary>libzypp update</summary>
+	<description>This update contains the following new features:
+* support for patch/delta RPMs in YUM sources (#168844)
+
+This update includes fixes for the following bugs:
+* various performance enhancements
+* 190163 - *-kmp-* dependencies match multiple kernel
+  packages
+* 176568 - Evaluate possible xml parser optimizations
+* 195567 - 100 /var/tmp/TmpFile.xxxxx in 3 Days
+* 193584 - cut-off package description in zen-updater
+* 194424 - Online update setup creates unusable cron job
+* 191676 - zen installer/updater cannot add an FTP YUM
+  repository
+* 190295 - zen-updater/zmd/rug does not install update
+  stack patches first
+* 193212 - zmd does not unblock transactions after
+  transaction preparation failure
+* 191506 - zen-updated showing updates from non-subscribed
+  catalog
+* 183656 - mono needed for YaST package management since
+  last update
+* 195911 - Missing dependency of package management on
+  'unzip'
+* 192535 - test fetchmsttfonts script does not get run
+</description>
+	<arch>ppc</arch>
+	<version>2.13.40</version>
+	<release>1.4</release>
+	<filesize>593982</filesize>
+	<installedsize>1692690</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>2.13.40</version>
+			<release>1.4</release>
+			<filename>yast2-ncurses-2.13.40-1.4.ppc.rpm</filename>
+			<filesize>593982</filesize>
+			<installedsize>1692690</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="yast2_ui"/>
+			<dep name="y2base:/var/lib/YaST2/servers/ncurses"/>
+			<dep name="y2base:/usr/lib/YaST2/servers/ncurses"/>
+			<dep name="y2base:/usr/lib/YaST2/plugin/libpy2ncurses.so.2"/>
+			<dep name="yast2-ui-ncurses"/>
+			<dep name="yast2-ui-ncurses-devel"/>
+			<dep name="y2curses"/>
+			<dep name="libpy2ncurses.so.2"/>
+			<dep name="yast2-ncurses" op="EQ" version="2.13.40" release="1.4"/>
+		</provides>
+		<requires>
+			<dep name="glibc-locale"/>
+			<dep name="libzypp" op="GE" version="1.0.0"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libc.so.6(GLIBC_2.2)"/>
+			<dep name="libc.so.6(GLIBC_2.2.3)"/>
+			<dep name="libc.so.6(GLIBC_2.4)"/>
+			<dep name="libgcc_s.so.1"/>
+			<dep name="libgcc_s.so.1(GCC_3.0)"/>
+			<dep name="libgcc_s.so.1(GLIBC_2.0)"/>
+			<dep name="libm.so.6"/>
+			<dep name="libncursesw.so.5"/>
+			<dep name="libpanelw.so.5"/>
+			<dep name="libstdc++.so.6"/>
+			<dep name="libstdc++.so.6(CXXABI_1.3)"/>
+			<dep name="libstdc++.so.6(CXXABI_1.3.1)"/>
+			<dep name="libstdc++.so.6(GLIBCXX_3.4)"/>
+			<dep name="libyui.so.2"/>
+			<dep name="libzypp.so.1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>yast2-ncurses</name>
+	<summary>libzypp update</summary>
+	<description>This update contains the following new features:
+* support for patch/delta RPMs in YUM sources (#168844)
+
+This update includes fixes for the following bugs:
+* various performance enhancements
+* 190163 - *-kmp-* dependencies match multiple kernel
+  packages
+* 176568 - Evaluate possible xml parser optimizations
+* 195567 - 100 /var/tmp/TmpFile.xxxxx in 3 Days
+* 193584 - cut-off package description in zen-updater
+* 194424 - Online update setup creates unusable cron job
+* 191676 - zen installer/updater cannot add an FTP YUM
+  repository
+* 190295 - zen-updater/zmd/rug does not install update
+  stack patches first
+* 193212 - zmd does not unblock transactions after
+  transaction preparation failure
+* 191506 - zen-updated showing updates from non-subscribed
+  catalog
+* 183656 - mono needed for YaST package management since
+  last update
+* 195911 - Missing dependency of package management on
+  'unzip'
+* 192535 - test fetchmsttfonts script does not get run
+</description>
+	<arch>x86_64</arch>
+	<version>2.13.40</version>
+	<release>1.4</release>
+	<filesize>599349</filesize>
+	<installedsize>1648314</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>2.13.40</version>
+			<release>1.4</release>
+			<filename>yast2-ncurses-2.13.40-1.4.x86_64.rpm</filename>
+			<filesize>599349</filesize>
+			<installedsize>1648314</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="yast2_ui"/>
+			<dep name="y2base:/var/lib/YaST2/servers/ncurses"/>
+			<dep name="y2base:/usr/lib/YaST2/servers/ncurses"/>
+			<dep name="y2base:/usr/lib/YaST2/plugin/libpy2ncurses.so.2"/>
+			<dep name="yast2-ui-ncurses"/>
+			<dep name="yast2-ui-ncurses-devel"/>
+			<dep name="y2curses"/>
+			<dep name="libpy2ncurses.so.2()(64bit)"/>
+			<dep name="yast2-ncurses" op="EQ" version="2.13.40" release="1.4"/>
+		</provides>
+		<requires>
+			<dep name="glibc-locale"/>
+			<dep name="libzypp" op="GE" version="1.0.0"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="libc.so.6()(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libgcc_s.so.1()(64bit)"/>
+			<dep name="libgcc_s.so.1(GCC_3.0)(64bit)"/>
+			<dep name="libm.so.6()(64bit)"/>
+			<dep name="libncursesw.so.5()(64bit)"/>
+			<dep name="libpanelw.so.5()(64bit)"/>
+			<dep name="libstdc++.so.6()(64bit)"/>
+			<dep name="libstdc++.so.6(CXXABI_1.3)(64bit)"/>
+			<dep name="libstdc++.so.6(CXXABI_1.3.1)(64bit)"/>
+			<dep name="libstdc++.so.6(GLIBCXX_3.4)(64bit)"/>
+			<dep name="libyui.so.2()(64bit)"/>
+			<dep name="libzypp.so.1()(64bit)"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>yast2-online-update</name>
+	<summary>libzypp update</summary>
+	<description>This update contains the following new features:
+* support for patch/delta RPMs in YUM sources (#168844)
+
+This update includes fixes for the following bugs:
+* various performance enhancements
+* 190163 - *-kmp-* dependencies match multiple kernel
+  packages
+* 176568 - Evaluate possible xml parser optimizations
+* 195567 - 100 /var/tmp/TmpFile.xxxxx in 3 Days
+* 193584 - cut-off package description in zen-updater
+* 194424 - Online update setup creates unusable cron job
+* 191676 - zen installer/updater cannot add an FTP YUM
+  repository
+* 190295 - zen-updater/zmd/rug does not install update
+  stack patches first
+* 193212 - zmd does not unblock transactions after
+  transaction preparation failure
+* 191506 - zen-updated showing updates from non-subscribed
+  catalog
+* 183656 - mono needed for YaST package management since
+  last update
+* 195911 - Missing dependency of package management on
+  'unzip'
+* 192535 - test fetchmsttfonts script does not get run
+</description>
+	<arch>noarch</arch>
+	<version>2.13.43.2</version>
+	<release>0.2</release>
+	<filesize>70313</filesize>
+	<installedsize>266502</installedsize>
+	<history>
+		<update>
+			<arch>noarch</arch>
+			<epoch>0</epoch>
+			<version>2.13.43.2</version>
+			<release>0.2</release>
+			<filename>yast2-online-update-2.13.43.2-0.2.noarch.rpm</filename>
+			<filesize>70313</filesize>
+			<installedsize>266502</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="y2c_online_update"/>
+			<dep name="yast2-config-online-update"/>
+			<dep name="yast2-trans-online-update"/>
+			<dep name="y2t_online_update"/>
+			<dep name="yast2-online-update" op="EQ" version="2.13.43.2" release="0.2"/>
+		</provides>
+		<requires>
+			<dep name="grep" pre="1"/>
+			<dep name="sed" pre="1"/>
+			<dep name="yast2"/>
+			<dep name="yast2-pkg-bindings" op="GE" version="2.13.88.1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>yast2-online-update-frontend</name>
+	<summary>libzypp update</summary>
+	<description>This update contains the following new features:
+* support for patch/delta RPMs in YUM sources (#168844)
+
+This update includes fixes for the following bugs:
+* various performance enhancements
+* 190163 - *-kmp-* dependencies match multiple kernel
+  packages
+* 176568 - Evaluate possible xml parser optimizations
+* 195567 - 100 /var/tmp/TmpFile.xxxxx in 3 Days
+* 193584 - cut-off package description in zen-updater
+* 194424 - Online update setup creates unusable cron job
+* 191676 - zen installer/updater cannot add an FTP YUM
+  repository
+* 190295 - zen-updater/zmd/rug does not install update
+  stack patches first
+* 193212 - zmd does not unblock transactions after
+  transaction preparation failure
+* 191506 - zen-updated showing updates from non-subscribed
+  catalog
+* 183656 - mono needed for YaST package management since
+  last update
+* 195911 - Missing dependency of package management on
+  'unzip'
+* 192535 - test fetchmsttfonts script does not get run
+</description>
+	<arch>noarch</arch>
+	<version>2.13.43.2</version>
+	<release>0.2</release>
+	<filesize>25030</filesize>
+	<installedsize>11191</installedsize>
+	<history>
+		<update>
+			<arch>noarch</arch>
+			<epoch>0</epoch>
+			<version>2.13.43.2</version>
+			<release>0.2</release>
+			<filename>yast2-online-update-frontend-2.13.43.2-0.2.noarch.rpm</filename>
+			<filesize>25030</filesize>
+			<installedsize>11191</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="yast2-online-update-frontend" op="EQ" version="2.13.43.2" release="0.2"/>
+		</provides>
+		<requires>
+			<dep name="yast2-online-update"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>yast2-packager</name>
+	<summary>libzypp update</summary>
+	<description>This update contains the following new features:
+* support for patch/delta RPMs in YUM sources (#168844)
+
+This update includes fixes for the following bugs:
+* various performance enhancements
+* 190163 - *-kmp-* dependencies match multiple kernel
+  packages
+* 176568 - Evaluate possible xml parser optimizations
+* 195567 - 100 /var/tmp/TmpFile.xxxxx in 3 Days
+* 193584 - cut-off package description in zen-updater
+* 194424 - Online update setup creates unusable cron job
+* 191676 - zen installer/updater cannot add an FTP YUM
+  repository
+* 190295 - zen-updater/zmd/rug does not install update
+  stack patches first
+* 193212 - zmd does not unblock transactions after
+  transaction preparation failure
+* 191506 - zen-updated showing updates from non-subscribed
+  catalog
+* 183656 - mono needed for YaST package management since
+  last update
+* 195911 - Missing dependency of package management on
+  'unzip'
+* 192535 - test fetchmsttfonts script does not get run
+</description>
+	<arch>i586</arch>
+	<version>2.13.139.3</version>
+	<release>0.2</release>
+	<filesize>189393</filesize>
+	<installedsize>774036</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>2.13.139.3</version>
+			<release>0.2</release>
+			<filename>yast2-packager-2.13.139.3-0.2.i586.rpm</filename>
+			<filesize>189393</filesize>
+			<installedsize>774036</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="yast2-config-package-manager"/>
+			<dep name="y2t_spkg"/>
+			<dep name="y2t_inst-packages"/>
+			<dep name="y2pkginf"/>
+			<dep name="y2c_spkg"/>
+			<dep name="yast2-trans-package-manager"/>
+			<dep name="yast2-trans-inst-packages"/>
+			<dep name="yast2-packager" op="EQ" version="2.13.139.3" release="0.2"/>
+		</provides>
+		<requires>
+			<dep name="yast2"/>
+			<dep name="checkmedia"/>
+			<dep name="yast2-country"/>
+			<dep name="yast2-installation" op="GE" version="2.13.122"/>
+			<dep name="yast2-pkg-bindings" op="GE" version="2.13.88.1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>yast2-packager</name>
+	<summary>libzypp update</summary>
+	<description>This update contains the following new features:
+* support for patch/delta RPMs in YUM sources (#168844)
+
+This update includes fixes for the following bugs:
+* various performance enhancements
+* 190163 - *-kmp-* dependencies match multiple kernel
+  packages
+* 176568 - Evaluate possible xml parser optimizations
+* 195567 - 100 /var/tmp/TmpFile.xxxxx in 3 Days
+* 193584 - cut-off package description in zen-updater
+* 194424 - Online update setup creates unusable cron job
+* 191676 - zen installer/updater cannot add an FTP YUM
+  repository
+* 190295 - zen-updater/zmd/rug does not install update
+  stack patches first
+* 193212 - zmd does not unblock transactions after
+  transaction preparation failure
+* 191506 - zen-updated showing updates from non-subscribed
+  catalog
+* 183656 - mono needed for YaST package management since
+  last update
+* 195911 - Missing dependency of package management on
+  'unzip'
+* 192535 - test fetchmsttfonts script does not get run
+</description>
+	<arch>ppc</arch>
+	<version>2.13.139.3</version>
+	<release>0.2</release>
+	<filesize>189571</filesize>
+	<installedsize>774036</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>2.13.139.3</version>
+			<release>0.2</release>
+			<filename>yast2-packager-2.13.139.3-0.2.ppc.rpm</filename>
+			<filesize>189571</filesize>
+			<installedsize>774036</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="yast2-config-package-manager"/>
+			<dep name="y2t_spkg"/>
+			<dep name="y2t_inst-packages"/>
+			<dep name="y2pkginf"/>
+			<dep name="y2c_spkg"/>
+			<dep name="yast2-trans-package-manager"/>
+			<dep name="yast2-trans-inst-packages"/>
+			<dep name="yast2-packager" op="EQ" version="2.13.139.3" release="0.2"/>
+		</provides>
+		<requires>
+			<dep name="yast2"/>
+			<dep name="checkmedia"/>
+			<dep name="yast2-country"/>
+			<dep name="yast2-installation" op="GE" version="2.13.122"/>
+			<dep name="yast2-pkg-bindings" op="GE" version="2.13.88.1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>yast2-packager</name>
+	<summary>libzypp update</summary>
+	<description>This update contains the following new features:
+* support for patch/delta RPMs in YUM sources (#168844)
+
+This update includes fixes for the following bugs:
+* various performance enhancements
+* 190163 - *-kmp-* dependencies match multiple kernel
+  packages
+* 176568 - Evaluate possible xml parser optimizations
+* 195567 - 100 /var/tmp/TmpFile.xxxxx in 3 Days
+* 193584 - cut-off package description in zen-updater
+* 194424 - Online update setup creates unusable cron job
+* 191676 - zen installer/updater cannot add an FTP YUM
+  repository
+* 190295 - zen-updater/zmd/rug does not install update
+  stack patches first
+* 193212 - zmd does not unblock transactions after
+  transaction preparation failure
+* 191506 - zen-updated showing updates from non-subscribed
+  catalog
+* 183656 - mono needed for YaST package management since
+  last update
+* 195911 - Missing dependency of package management on
+  'unzip'
+* 192535 - test fetchmsttfonts script does not get run
+</description>
+	<arch>x86_64</arch>
+	<version>2.13.139.3</version>
+	<release>0.2</release>
+	<filesize>189368</filesize>
+	<installedsize>774036</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>2.13.139.3</version>
+			<release>0.2</release>
+			<filename>yast2-packager-2.13.139.3-0.2.x86_64.rpm</filename>
+			<filesize>189368</filesize>
+			<installedsize>774036</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="yast2-config-package-manager"/>
+			<dep name="y2t_spkg"/>
+			<dep name="y2t_inst-packages"/>
+			<dep name="y2pkginf"/>
+			<dep name="y2c_spkg"/>
+			<dep name="yast2-trans-package-manager"/>
+			<dep name="yast2-trans-inst-packages"/>
+			<dep name="yast2-packager" op="EQ" version="2.13.139.3" release="0.2"/>
+		</provides>
+		<requires>
+			<dep name="yast2"/>
+			<dep name="checkmedia"/>
+			<dep name="yast2-country"/>
+			<dep name="yast2-installation" op="GE" version="2.13.122"/>
+			<dep name="yast2-pkg-bindings" op="GE" version="2.13.88.1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>yast2-perl-bindings</name>
+	<summary>libzypp update</summary>
+	<description>This update contains the following new features:
+* support for patch/delta RPMs in YUM sources (#168844)
+
+This update includes fixes for the following bugs:
+* various performance enhancements
+* 190163 - *-kmp-* dependencies match multiple kernel
+  packages
+* 176568 - Evaluate possible xml parser optimizations
+* 195567 - 100 /var/tmp/TmpFile.xxxxx in 3 Days
+* 193584 - cut-off package description in zen-updater
+* 194424 - Online update setup creates unusable cron job
+* 191676 - zen installer/updater cannot add an FTP YUM
+  repository
+* 190295 - zen-updater/zmd/rug does not install update
+  stack patches first
+* 193212 - zmd does not unblock transactions after
+  transaction preparation failure
+* 191506 - zen-updated showing updates from non-subscribed
+  catalog
+* 183656 - mono needed for YaST package management since
+  last update
+* 195911 - Missing dependency of package management on
+  'unzip'
+* 192535 - test fetchmsttfonts script does not get run
+</description>
+	<arch>i586</arch>
+	<version>2.13.5</version>
+	<release>1.4</release>
+	<filesize>128377</filesize>
+	<installedsize>380093</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>2.13.5</version>
+			<release>1.4</release>
+			<filename>yast2-perl-bindings-2.13.5-1.4.i586.rpm</filename>
+			<filesize>128377</filesize>
+			<installedsize>380093</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="libYCP.so.2"/>
+			<dep name="libpy2lang_perl.so.2"/>
+			<dep name="perl(YaPI)"/>
+			<dep name="perl(YaST::YCP)"/>
+			<dep name="perl(YaST::YCP::Autoload)"/>
+			<dep name="perl(YaST::YCP::Boolean)"/>
+			<dep name="perl(YaST::YCP::Byteblock)"/>
+			<dep name="perl(YaST::YCP::Float)"/>
+			<dep name="perl(YaST::YCP::Integer)"/>
+			<dep name="perl(YaST::YCP::String)"/>
+			<dep name="perl(YaST::YCP::Symbol)"/>
+			<dep name="perl(YaST::YCP::Term)"/>
+			<dep name="yast2-perl-bindings" op="EQ" version="2.13.5" release="1.4"/>
+		</provides>
+		<requires>
+			<dep name="perl"/>
+			<dep name="perl(Locale::gettext)"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libcrypt.so.1"/>
+			<dep name="libdl.so.2"/>
+			<dep name="libdl.so.2(GLIBC_2.0)"/>
+			<dep name="libdl.so.2(GLIBC_2.1)"/>
+			<dep name="libgcc_s.so.1"/>
+			<dep name="libgcc_s.so.1(GCC_3.0)"/>
+			<dep name="libm.so.6"/>
+			<dep name="libnsl.so.1"/>
+			<dep name="libperl.so"/>
+			<dep name="libpthread.so.0"/>
+			<dep name="libpthread.so.0(GLIBC_2.0)"/>
+			<dep name="libpy2scr.so.2"/>
+			<dep name="libpy2wfm.so.2"/>
+			<dep name="libscr.so.2"/>
+			<dep name="libstdc++.so.6"/>
+			<dep name="libstdc++.so.6(CXXABI_1.3)"/>
+			<dep name="libstdc++.so.6(GLIBCXX_3.4)"/>
+			<dep name="libutil.so.1"/>
+			<dep name="liby2.so.2"/>
+			<dep name="liby2util.so.3"/>
+			<dep name="libycp.so.2"/>
+			<dep name="libyui.so.2"/>
+			<dep name="libzypp.so.1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>yast2-perl-bindings</name>
+	<summary>libzypp update</summary>
+	<description>This update contains the following new features:
+* support for patch/delta RPMs in YUM sources (#168844)
+
+This update includes fixes for the following bugs:
+* various performance enhancements
+* 190163 - *-kmp-* dependencies match multiple kernel
+  packages
+* 176568 - Evaluate possible xml parser optimizations
+* 195567 - 100 /var/tmp/TmpFile.xxxxx in 3 Days
+* 193584 - cut-off package description in zen-updater
+* 194424 - Online update setup creates unusable cron job
+* 191676 - zen installer/updater cannot add an FTP YUM
+  repository
+* 190295 - zen-updater/zmd/rug does not install update
+  stack patches first
+* 193212 - zmd does not unblock transactions after
+  transaction preparation failure
+* 191506 - zen-updated showing updates from non-subscribed
+  catalog
+* 183656 - mono needed for YaST package management since
+  last update
+* 195911 - Missing dependency of package management on
+  'unzip'
+* 192535 - test fetchmsttfonts script does not get run
+</description>
+	<arch>ppc</arch>
+	<version>2.13.5</version>
+	<release>1.4</release>
+	<filesize>131473</filesize>
+	<installedsize>392015</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>2.13.5</version>
+			<release>1.4</release>
+			<filename>yast2-perl-bindings-2.13.5-1.4.ppc.rpm</filename>
+			<filesize>131473</filesize>
+			<installedsize>392015</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="libYCP.so.2"/>
+			<dep name="libpy2lang_perl.so.2"/>
+			<dep name="perl(YaPI)"/>
+			<dep name="perl(YaST::YCP)"/>
+			<dep name="perl(YaST::YCP::Autoload)"/>
+			<dep name="perl(YaST::YCP::Boolean)"/>
+			<dep name="perl(YaST::YCP::Byteblock)"/>
+			<dep name="perl(YaST::YCP::Float)"/>
+			<dep name="perl(YaST::YCP::Integer)"/>
+			<dep name="perl(YaST::YCP::String)"/>
+			<dep name="perl(YaST::YCP::Symbol)"/>
+			<dep name="perl(YaST::YCP::Term)"/>
+			<dep name="yast2-perl-bindings" op="EQ" version="2.13.5" release="1.4"/>
+		</provides>
+		<requires>
+			<dep name="perl"/>
+			<dep name="perl(Locale::gettext)"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libcrypt.so.1"/>
+			<dep name="libdl.so.2"/>
+			<dep name="libdl.so.2(GLIBC_2.0)"/>
+			<dep name="libdl.so.2(GLIBC_2.1)"/>
+			<dep name="libgcc_s.so.1"/>
+			<dep name="libgcc_s.so.1(GCC_3.0)"/>
+			<dep name="libm.so.6"/>
+			<dep name="libnsl.so.1"/>
+			<dep name="libperl.so"/>
+			<dep name="libpthread.so.0"/>
+			<dep name="libpthread.so.0(GLIBC_2.0)"/>
+			<dep name="libpy2scr.so.2"/>
+			<dep name="libpy2wfm.so.2"/>
+			<dep name="libscr.so.2"/>
+			<dep name="libstdc++.so.6"/>
+			<dep name="libstdc++.so.6(CXXABI_1.3)"/>
+			<dep name="libstdc++.so.6(GLIBCXX_3.4)"/>
+			<dep name="libutil.so.1"/>
+			<dep name="liby2.so.2"/>
+			<dep name="liby2util.so.3"/>
+			<dep name="libycp.so.2"/>
+			<dep name="libyui.so.2"/>
+			<dep name="libzypp.so.1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>yast2-perl-bindings</name>
+	<summary>libzypp update</summary>
+	<description>This update contains the following new features:
+* support for patch/delta RPMs in YUM sources (#168844)
+
+This update includes fixes for the following bugs:
+* various performance enhancements
+* 190163 - *-kmp-* dependencies match multiple kernel
+  packages
+* 176568 - Evaluate possible xml parser optimizations
+* 195567 - 100 /var/tmp/TmpFile.xxxxx in 3 Days
+* 193584 - cut-off package description in zen-updater
+* 194424 - Online update setup creates unusable cron job
+* 191676 - zen installer/updater cannot add an FTP YUM
+  repository
+* 190295 - zen-updater/zmd/rug does not install update
+  stack patches first
+* 193212 - zmd does not unblock transactions after
+  transaction preparation failure
+* 191506 - zen-updated showing updates from non-subscribed
+  catalog
+* 183656 - mono needed for YaST package management since
+  last update
+* 195911 - Missing dependency of package management on
+  'unzip'
+* 192535 - test fetchmsttfonts script does not get run
+</description>
+	<arch>x86_64</arch>
+	<version>2.13.5</version>
+	<release>1.4</release>
+	<filesize>134961</filesize>
+	<installedsize>402134</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>2.13.5</version>
+			<release>1.4</release>
+			<filename>yast2-perl-bindings-2.13.5-1.4.x86_64.rpm</filename>
+			<filesize>134961</filesize>
+			<installedsize>402134</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="libYCP.so.2()(64bit)"/>
+			<dep name="libpy2lang_perl.so.2()(64bit)"/>
+			<dep name="perl(YaPI)"/>
+			<dep name="perl(YaST::YCP)"/>
+			<dep name="perl(YaST::YCP::Autoload)"/>
+			<dep name="perl(YaST::YCP::Boolean)"/>
+			<dep name="perl(YaST::YCP::Byteblock)"/>
+			<dep name="perl(YaST::YCP::Float)"/>
+			<dep name="perl(YaST::YCP::Integer)"/>
+			<dep name="perl(YaST::YCP::String)"/>
+			<dep name="perl(YaST::YCP::Symbol)"/>
+			<dep name="perl(YaST::YCP::Term)"/>
+			<dep name="yast2-perl-bindings" op="EQ" version="2.13.5" release="1.4"/>
+		</provides>
+		<requires>
+			<dep name="perl"/>
+			<dep name="perl(Locale::gettext)"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="libc.so.6()(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libcrypt.so.1()(64bit)"/>
+			<dep name="libdl.so.2()(64bit)"/>
+			<dep name="libdl.so.2(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libgcc_s.so.1()(64bit)"/>
+			<dep name="libgcc_s.so.1(GCC_3.0)(64bit)"/>
+			<dep name="libm.so.6()(64bit)"/>
+			<dep name="libperl.so()(64bit)"/>
+			<dep name="libpthread.so.0()(64bit)"/>
+			<dep name="libpthread.so.0(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libpy2scr.so.2()(64bit)"/>
+			<dep name="libpy2wfm.so.2()(64bit)"/>
+			<dep name="libscr.so.2()(64bit)"/>
+			<dep name="libstdc++.so.6()(64bit)"/>
+			<dep name="libstdc++.so.6(CXXABI_1.3)(64bit)"/>
+			<dep name="libstdc++.so.6(GLIBCXX_3.4)(64bit)"/>
+			<dep name="liby2.so.2()(64bit)"/>
+			<dep name="liby2util.so.3()(64bit)"/>
+			<dep name="libycp.so.2()(64bit)"/>
+			<dep name="libyui.so.2()(64bit)"/>
+			<dep name="libzypp.so.1()(64bit)"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>yast2-pkg-bindings</name>
+	<summary>libzypp update</summary>
+	<description>This update contains the following new features:
+* support for patch/delta RPMs in YUM sources (#168844)
+
+This update includes fixes for the following bugs:
+* various performance enhancements
+* 190163 - *-kmp-* dependencies match multiple kernel
+  packages
+* 176568 - Evaluate possible xml parser optimizations
+* 195567 - 100 /var/tmp/TmpFile.xxxxx in 3 Days
+* 193584 - cut-off package description in zen-updater
+* 194424 - Online update setup creates unusable cron job
+* 191676 - zen installer/updater cannot add an FTP YUM
+  repository
+* 190295 - zen-updater/zmd/rug does not install update
+  stack patches first
+* 193212 - zmd does not unblock transactions after
+  transaction preparation failure
+* 191506 - zen-updated showing updates from non-subscribed
+  catalog
+* 183656 - mono needed for YaST package management since
+  last update
+* 195911 - Missing dependency of package management on
+  'unzip'
+* 192535 - test fetchmsttfonts script does not get run
+</description>
+	<arch>i586</arch>
+	<version>2.13.88.2</version>
+	<release>0.2</release>
+	<filesize>395963</filesize>
+	<installedsize>1541537</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>2.13.88.2</version>
+			<release>0.2</release>
+			<filename>yast2-pkg-bindings-2.13.88.2-0.2.i586.rpm</filename>
+			<filesize>395963</filesize>
+			<installedsize>1541537</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="libpy2Pkg.so.2"/>
+			<dep name="yast2-pkg-bindings" op="EQ" version="2.13.88.2" release="0.2"/>
+		</provides>
+		<requires>
+			<dep name="libzypp" op="GE" version="1.3.1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libgcc_s.so.1"/>
+			<dep name="libgcc_s.so.1(GCC_3.0)"/>
+			<dep name="libm.so.6"/>
+			<dep name="libstdc++.so.6"/>
+			<dep name="libstdc++.so.6(CXXABI_1.3)"/>
+			<dep name="libstdc++.so.6(GLIBCXX_3.4)"/>
+			<dep name="liby2.so.2"/>
+			<dep name="liby2util.so.3"/>
+			<dep name="libycp.so.2"/>
+			<dep name="libzypp.so.1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>yast2-pkg-bindings</name>
+	<summary>libzypp update</summary>
+	<description>This update contains the following new features:
+* support for patch/delta RPMs in YUM sources (#168844)
+
+This update includes fixes for the following bugs:
+* various performance enhancements
+* 190163 - *-kmp-* dependencies match multiple kernel
+  packages
+* 176568 - Evaluate possible xml parser optimizations
+* 195567 - 100 /var/tmp/TmpFile.xxxxx in 3 Days
+* 193584 - cut-off package description in zen-updater
+* 194424 - Online update setup creates unusable cron job
+* 191676 - zen installer/updater cannot add an FTP YUM
+  repository
+* 190295 - zen-updater/zmd/rug does not install update
+  stack patches first
+* 193212 - zmd does not unblock transactions after
+  transaction preparation failure
+* 191506 - zen-updated showing updates from non-subscribed
+  catalog
+* 183656 - mono needed for YaST package management since
+  last update
+* 195911 - Missing dependency of package management on
+  'unzip'
+* 192535 - test fetchmsttfonts script does not get run
+</description>
+	<arch>ppc</arch>
+	<version>2.13.88.2</version>
+	<release>0.2</release>
+	<filesize>388492</filesize>
+	<installedsize>1594221</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>2.13.88.2</version>
+			<release>0.2</release>
+			<filename>yast2-pkg-bindings-2.13.88.2-0.2.ppc.rpm</filename>
+			<filesize>388492</filesize>
+			<installedsize>1594221</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="libpy2Pkg.so.2"/>
+			<dep name="yast2-pkg-bindings" op="EQ" version="2.13.88.2" release="0.2"/>
+		</provides>
+		<requires>
+			<dep name="libzypp" op="GE" version="1.3.1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libc.so.6(GLIBC_2.4)"/>
+			<dep name="libgcc_s.so.1"/>
+			<dep name="libgcc_s.so.1(GCC_3.0)"/>
+			<dep name="libm.so.6"/>
+			<dep name="libstdc++.so.6"/>
+			<dep name="libstdc++.so.6(CXXABI_1.3)"/>
+			<dep name="libstdc++.so.6(GLIBCXX_3.4)"/>
+			<dep name="liby2.so.2"/>
+			<dep name="liby2util.so.3"/>
+			<dep name="libycp.so.2"/>
+			<dep name="libzypp.so.1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>yast2-pkg-bindings</name>
+	<summary>libzypp update</summary>
+	<description>This update contains the following new features:
+* support for patch/delta RPMs in YUM sources (#168844)
+
+This update includes fixes for the following bugs:
+* various performance enhancements
+* 190163 - *-kmp-* dependencies match multiple kernel
+  packages
+* 176568 - Evaluate possible xml parser optimizations
+* 195567 - 100 /var/tmp/TmpFile.xxxxx in 3 Days
+* 193584 - cut-off package description in zen-updater
+* 194424 - Online update setup creates unusable cron job
+* 191676 - zen installer/updater cannot add an FTP YUM
+  repository
+* 190295 - zen-updater/zmd/rug does not install update
+  stack patches first
+* 193212 - zmd does not unblock transactions after
+  transaction preparation failure
+* 191506 - zen-updated showing updates from non-subscribed
+  catalog
+* 183656 - mono needed for YaST package management since
+  last update
+* 195911 - Missing dependency of package management on
+  'unzip'
+* 192535 - test fetchmsttfonts script does not get run
+</description>
+	<arch>x86_64</arch>
+	<version>2.13.88.2</version>
+	<release>0.2</release>
+	<filesize>395281</filesize>
+	<installedsize>1583265</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>2.13.88.2</version>
+			<release>0.2</release>
+			<filename>yast2-pkg-bindings-2.13.88.2-0.2.x86_64.rpm</filename>
+			<filesize>395281</filesize>
+			<installedsize>1583265</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="libpy2Pkg.so.2()(64bit)"/>
+			<dep name="yast2-pkg-bindings" op="EQ" version="2.13.88.2" release="0.2"/>
+		</provides>
+		<requires>
+			<dep name="libzypp" op="GE" version="1.3.1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="libc.so.6()(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libgcc_s.so.1()(64bit)"/>
+			<dep name="libgcc_s.so.1(GCC_3.0)(64bit)"/>
+			<dep name="libm.so.6()(64bit)"/>
+			<dep name="libstdc++.so.6()(64bit)"/>
+			<dep name="libstdc++.so.6(CXXABI_1.3)(64bit)"/>
+			<dep name="libstdc++.so.6(GLIBCXX_3.4)(64bit)"/>
+			<dep name="liby2.so.2()(64bit)"/>
+			<dep name="liby2util.so.3()(64bit)"/>
+			<dep name="libycp.so.2()(64bit)"/>
+			<dep name="libzypp.so.1()(64bit)"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>yast2-qt</name>
+	<summary>libzypp update</summary>
+	<description>This update contains the following new features:
+* support for patch/delta RPMs in YUM sources (#168844)
+
+This update includes fixes for the following bugs:
+* various performance enhancements
+* 190163 - *-kmp-* dependencies match multiple kernel
+  packages
+* 176568 - Evaluate possible xml parser optimizations
+* 195567 - 100 /var/tmp/TmpFile.xxxxx in 3 Days
+* 193584 - cut-off package description in zen-updater
+* 194424 - Online update setup creates unusable cron job
+* 191676 - zen installer/updater cannot add an FTP YUM
+  repository
+* 190295 - zen-updater/zmd/rug does not install update
+  stack patches first
+* 193212 - zmd does not unblock transactions after
+  transaction preparation failure
+* 191506 - zen-updated showing updates from non-subscribed
+  catalog
+* 183656 - mono needed for YaST package management since
+  last update
+* 195911 - Missing dependency of package management on
+  'unzip'
+* 192535 - test fetchmsttfonts script does not get run
+</description>
+	<arch>i586</arch>
+	<version>2.13.60</version>
+	<release>0.5</release>
+	<filesize>2318442</filesize>
+	<installedsize>3729292</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>2.13.60</version>
+			<release>0.5</release>
+			<filename>yast2-qt-2.13.60-0.5.i586.rpm</filename>
+			<filesize>2318442</filesize>
+			<installedsize>3729292</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="yast2_ui"/>
+			<dep name="y2base:/var/lib/YaST2/servers/qt"/>
+			<dep name="y2base:/usr/lib/YaST2/servers/qt"/>
+			<dep name="y2base:/usr/lib/YaST2/plugin/libpy2qt.so.2"/>
+			<dep name="yast2-ui-qt"/>
+			<dep name="yast2-ui-qt-devel"/>
+			<dep name="y2qt"/>
+			<dep name="libpy2qt.so.2"/>
+			<dep name="yast2-qt" op="EQ" version="2.13.60" release="0.5"/>
+		</provides>
+		<requires>
+			<dep name="libzypp" op="GE" version="1.0.0"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="libICE.so.6"/>
+			<dep name="libSM.so.6"/>
+			<dep name="libX11.so.6"/>
+			<dep name="libXext.so.6"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libc.so.6(GLIBC_2.2)"/>
+			<dep name="libgcc_s.so.1"/>
+			<dep name="libgcc_s.so.1(GCC_3.0)"/>
+			<dep name="libgcc_s.so.1(GLIBC_2.0)"/>
+			<dep name="libm.so.6"/>
+			<dep name="libqt-mt.so.3"/>
+			<dep name="libstdc++.so.6"/>
+			<dep name="libstdc++.so.6(CXXABI_1.3)"/>
+			<dep name="libstdc++.so.6(GLIBCXX_3.4)"/>
+			<dep name="libyui.so.2"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>yast2-qt</name>
+	<summary>libzypp update</summary>
+	<description>This update contains the following new features:
+* support for patch/delta RPMs in YUM sources (#168844)
+
+This update includes fixes for the following bugs:
+* various performance enhancements
+* 190163 - *-kmp-* dependencies match multiple kernel
+  packages
+* 176568 - Evaluate possible xml parser optimizations
+* 195567 - 100 /var/tmp/TmpFile.xxxxx in 3 Days
+* 193584 - cut-off package description in zen-updater
+* 194424 - Online update setup creates unusable cron job
+* 191676 - zen installer/updater cannot add an FTP YUM
+  repository
+* 190295 - zen-updater/zmd/rug does not install update
+  stack patches first
+* 193212 - zmd does not unblock transactions after
+  transaction preparation failure
+* 191506 - zen-updated showing updates from non-subscribed
+  catalog
+* 183656 - mono needed for YaST package management since
+  last update
+* 195911 - Missing dependency of package management on
+  'unzip'
+* 192535 - test fetchmsttfonts script does not get run
+</description>
+	<arch>ppc</arch>
+	<version>2.13.60</version>
+	<release>0.5</release>
+	<filesize>2321072</filesize>
+	<installedsize>4073668</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>2.13.60</version>
+			<release>0.5</release>
+			<filename>yast2-qt-2.13.60-0.5.ppc.rpm</filename>
+			<filesize>2321072</filesize>
+			<installedsize>4073668</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="yast2_ui"/>
+			<dep name="y2base:/var/lib/YaST2/servers/qt"/>
+			<dep name="y2base:/usr/lib/YaST2/servers/qt"/>
+			<dep name="y2base:/usr/lib/YaST2/plugin/libpy2qt.so.2"/>
+			<dep name="yast2-ui-qt"/>
+			<dep name="yast2-ui-qt-devel"/>
+			<dep name="y2qt"/>
+			<dep name="libpy2qt.so.2"/>
+			<dep name="yast2-qt" op="EQ" version="2.13.60" release="0.5"/>
+		</provides>
+		<requires>
+			<dep name="libzypp" op="GE" version="1.0.0"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="libICE.so.6"/>
+			<dep name="libSM.so.6"/>
+			<dep name="libX11.so.6"/>
+			<dep name="libXext.so.6"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libc.so.6(GLIBC_2.2)"/>
+			<dep name="libc.so.6(GLIBC_2.4)"/>
+			<dep name="libgcc_s.so.1"/>
+			<dep name="libgcc_s.so.1(GCC_3.0)"/>
+			<dep name="libgcc_s.so.1(GLIBC_2.0)"/>
+			<dep name="libm.so.6"/>
+			<dep name="libqt-mt.so.3"/>
+			<dep name="libstdc++.so.6"/>
+			<dep name="libstdc++.so.6(CXXABI_1.3)"/>
+			<dep name="libstdc++.so.6(GLIBCXX_3.4)"/>
+			<dep name="libyui.so.2"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>yast2-qt</name>
+	<summary>libzypp update</summary>
+	<description>This update contains the following new features:
+* support for patch/delta RPMs in YUM sources (#168844)
+
+This update includes fixes for the following bugs:
+* various performance enhancements
+* 190163 - *-kmp-* dependencies match multiple kernel
+  packages
+* 176568 - Evaluate possible xml parser optimizations
+* 195567 - 100 /var/tmp/TmpFile.xxxxx in 3 Days
+* 193584 - cut-off package description in zen-updater
+* 194424 - Online update setup creates unusable cron job
+* 191676 - zen installer/updater cannot add an FTP YUM
+  repository
+* 190295 - zen-updater/zmd/rug does not install update
+  stack patches first
+* 193212 - zmd does not unblock transactions after
+  transaction preparation failure
+* 191506 - zen-updated showing updates from non-subscribed
+  catalog
+* 183656 - mono needed for YaST package management since
+  last update
+* 195911 - Missing dependency of package management on
+  'unzip'
+* 192535 - test fetchmsttfonts script does not get run
+</description>
+	<arch>x86_64</arch>
+	<version>2.13.60</version>
+	<release>0.5</release>
+	<filesize>2328671</filesize>
+	<installedsize>4103176</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>2.13.60</version>
+			<release>0.5</release>
+			<filename>yast2-qt-2.13.60-0.5.x86_64.rpm</filename>
+			<filesize>2328671</filesize>
+			<installedsize>4103176</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="yast2_ui"/>
+			<dep name="y2base:/var/lib/YaST2/servers/qt"/>
+			<dep name="y2base:/usr/lib/YaST2/servers/qt"/>
+			<dep name="y2base:/usr/lib/YaST2/plugin/libpy2qt.so.2"/>
+			<dep name="yast2-ui-qt"/>
+			<dep name="yast2-ui-qt-devel"/>
+			<dep name="y2qt"/>
+			<dep name="libpy2qt.so.2()(64bit)"/>
+			<dep name="yast2-qt" op="EQ" version="2.13.60" release="0.5"/>
+		</provides>
+		<requires>
+			<dep name="libzypp" op="GE" version="1.0.0"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="libICE.so.6()(64bit)"/>
+			<dep name="libSM.so.6()(64bit)"/>
+			<dep name="libX11.so.6()(64bit)"/>
+			<dep name="libXext.so.6()(64bit)"/>
+			<dep name="libc.so.6()(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libgcc_s.so.1()(64bit)"/>
+			<dep name="libgcc_s.so.1(GCC_3.0)(64bit)"/>
+			<dep name="libm.so.6()(64bit)"/>
+			<dep name="libqt-mt.so.3()(64bit)"/>
+			<dep name="libstdc++.so.6()(64bit)"/>
+			<dep name="libstdc++.so.6(CXXABI_1.3)(64bit)"/>
+			<dep name="libstdc++.so.6(GLIBCXX_3.4)(64bit)"/>
+			<dep name="libyui.so.2()(64bit)"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>zen-updater</name>
+	<summary>libzypp update</summary>
+	<description>This update contains the following new features:
+* support for patch/delta RPMs in YUM sources (#168844)
+
+This update includes fixes for the following bugs:
+* various performance enhancements
+* 190163 - *-kmp-* dependencies match multiple kernel
+  packages
+* 176568 - Evaluate possible xml parser optimizations
+* 195567 - 100 /var/tmp/TmpFile.xxxxx in 3 Days
+* 193584 - cut-off package description in zen-updater
+* 194424 - Online update setup creates unusable cron job
+* 191676 - zen installer/updater cannot add an FTP YUM
+  repository
+* 190295 - zen-updater/zmd/rug does not install update
+  stack patches first
+* 193212 - zmd does not unblock transactions after
+  transaction preparation failure
+* 191506 - zen-updated showing updates from non-subscribed
+  catalog
+* 183656 - mono needed for YaST package management since
+  last update
+* 195911 - Missing dependency of package management on
+  'unzip'
+* 192535 - test fetchmsttfonts script does not get run
+</description>
+	<arch>i586</arch>
+	<version>7.1.0</version>
+	<release>51.30</release>
+	<filesize>202687</filesize>
+	<installedsize>947700</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>7.1.0</version>
+			<release>51.30</release>
+			<filename>zen-updater-7.1.0-51.30.i586.rpm</filename>
+			<filesize>202687</filesize>
+			<installedsize>947700</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="libzen-updater.so.0"/>
+			<dep name="mono(ServiceUtility)" op="EQ" version="0.0.0.0"/>
+			<dep name="mono(ZenInstaller)" op="EQ" version="0.0.0.0"/>
+			<dep name="mono(ZenRemover)" op="EQ" version="0.0.0.0"/>
+			<dep name="mono(ZenUpdater)" op="EQ" version="0.0.0.0"/>
+			<dep name="zen-updater" op="EQ" version="7.1.0" release="51.30"/>
+		</provides>
+		<requires>
+			<dep name="zen-updater"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(VersionedDependencies)" op="LE" version="3.0.3" release="1" pre="1"/>
+			<dep name="/bin/sh"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)"/>
+			<dep name="mono(Mono.Posix)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(Novell.Zenworks.Zmd.Packaging.Public)" op="EQ" version="1.0.0.0"/>
+			<dep name="mono(Novell.Zenworks.Zmd.Public)" op="EQ" version="1.0.0.0"/>
+			<dep name="mono(System)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(gdk-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(glib-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(gtk-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(mscorlib)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(pango-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>zen-updater</name>
+	<summary>libzypp update</summary>
+	<description>This update contains the following new features:
+* support for patch/delta RPMs in YUM sources (#168844)
+
+This update includes fixes for the following bugs:
+* various performance enhancements
+* 190163 - *-kmp-* dependencies match multiple kernel
+  packages
+* 176568 - Evaluate possible xml parser optimizations
+* 195567 - 100 /var/tmp/TmpFile.xxxxx in 3 Days
+* 193584 - cut-off package description in zen-updater
+* 194424 - Online update setup creates unusable cron job
+* 191676 - zen installer/updater cannot add an FTP YUM
+  repository
+* 190295 - zen-updater/zmd/rug does not install update
+  stack patches first
+* 193212 - zmd does not unblock transactions after
+  transaction preparation failure
+* 191506 - zen-updated showing updates from non-subscribed
+  catalog
+* 183656 - mono needed for YaST package management since
+  last update
+* 195911 - Missing dependency of package management on
+  'unzip'
+* 192535 - test fetchmsttfonts script does not get run
+</description>
+	<arch>ppc</arch>
+	<version>7.1.0</version>
+	<release>51.30</release>
+	<filesize>206218</filesize>
+	<installedsize>967692</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>7.1.0</version>
+			<release>51.30</release>
+			<filename>zen-updater-7.1.0-51.30.ppc.rpm</filename>
+			<filesize>206218</filesize>
+			<installedsize>967692</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="libzen-updater.so.0"/>
+			<dep name="mono(ServiceUtility)" op="EQ" version="0.0.0.0"/>
+			<dep name="mono(ZenInstaller)" op="EQ" version="0.0.0.0"/>
+			<dep name="mono(ZenRemover)" op="EQ" version="0.0.0.0"/>
+			<dep name="mono(ZenUpdater)" op="EQ" version="0.0.0.0"/>
+			<dep name="zen-updater" op="EQ" version="7.1.0" release="51.30"/>
+		</provides>
+		<requires>
+			<dep name="zen-updater"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(VersionedDependencies)" op="LE" version="3.0.3" release="1" pre="1"/>
+			<dep name="/bin/sh"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)"/>
+			<dep name="mono(Mono.Posix)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(Novell.Zenworks.Zmd.Packaging.Public)" op="EQ" version="1.0.0.0"/>
+			<dep name="mono(Novell.Zenworks.Zmd.Public)" op="EQ" version="1.0.0.0"/>
+			<dep name="mono(System)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(gdk-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(glib-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(gtk-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(mscorlib)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(pango-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>zen-updater</name>
+	<summary>libzypp update</summary>
+	<description>This update contains the following new features:
+* support for patch/delta RPMs in YUM sources (#168844)
+
+This update includes fixes for the following bugs:
+* various performance enhancements
+* 190163 - *-kmp-* dependencies match multiple kernel
+  packages
+* 176568 - Evaluate possible xml parser optimizations
+* 195567 - 100 /var/tmp/TmpFile.xxxxx in 3 Days
+* 193584 - cut-off package description in zen-updater
+* 194424 - Online update setup creates unusable cron job
+* 191676 - zen installer/updater cannot add an FTP YUM
+  repository
+* 190295 - zen-updater/zmd/rug does not install update
+  stack patches first
+* 193212 - zmd does not unblock transactions after
+  transaction preparation failure
+* 191506 - zen-updated showing updates from non-subscribed
+  catalog
+* 183656 - mono needed for YaST package management since
+  last update
+* 195911 - Missing dependency of package management on
+  'unzip'
+* 192535 - test fetchmsttfonts script does not get run
+</description>
+	<arch>x86_64</arch>
+	<version>7.1.0</version>
+	<release>51.30</release>
+	<filesize>203663</filesize>
+	<installedsize>572789</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>7.1.0</version>
+			<release>51.30</release>
+			<filename>zen-updater-7.1.0-51.30.x86_64.rpm</filename>
+			<filesize>203663</filesize>
+			<installedsize>572789</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="libzen-updater.so.0()(64bit)"/>
+			<dep name="mono(ServiceUtility)" op="EQ" version="0.0.0.0"/>
+			<dep name="mono(ZenInstaller)" op="EQ" version="0.0.0.0"/>
+			<dep name="mono(ZenRemover)" op="EQ" version="0.0.0.0"/>
+			<dep name="mono(ZenUpdater)" op="EQ" version="0.0.0.0"/>
+			<dep name="zen-updater" op="EQ" version="7.1.0" release="51.30"/>
+		</provides>
+		<requires>
+			<dep name="zen-updater"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(VersionedDependencies)" op="LE" version="3.0.3" release="1" pre="1"/>
+			<dep name="/bin/sh"/>
+			<dep name="libc.so.6()(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)(64bit)"/>
+			<dep name="mono(Mono.Posix)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(Novell.Zenworks.Zmd.Packaging.Public)" op="EQ" version="1.0.0.0"/>
+			<dep name="mono(Novell.Zenworks.Zmd.Public)" op="EQ" version="1.0.0.0"/>
+			<dep name="mono(System)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(gdk-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(glib-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(gtk-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(mscorlib)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(pango-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>zmd</name>
+	<summary>libzypp update</summary>
+	<description>This update contains the following new features:
+* support for patch/delta RPMs in YUM sources (#168844)
+
+This update includes fixes for the following bugs:
+* various performance enhancements
+* 190163 - *-kmp-* dependencies match multiple kernel
+  packages
+* 176568 - Evaluate possible xml parser optimizations
+* 195567 - 100 /var/tmp/TmpFile.xxxxx in 3 Days
+* 193584 - cut-off package description in zen-updater
+* 194424 - Online update setup creates unusable cron job
+* 191676 - zen installer/updater cannot add an FTP YUM
+  repository
+* 190295 - zen-updater/zmd/rug does not install update
+  stack patches first
+* 193212 - zmd does not unblock transactions after
+  transaction preparation failure
+* 191506 - zen-updated showing updates from non-subscribed
+  catalog
+* 183656 - mono needed for YaST package management since
+  last update
+* 195911 - Missing dependency of package management on
+  'unzip'
+* 192535 - test fetchmsttfonts script does not get run
+</description>
+	<arch>i586</arch>
+	<version>7.1.1.0</version>
+	<release>39.53</release>
+	<filesize>482733</filesize>
+	<installedsize>1210827</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>7.1.1.0</version>
+			<release>39.53</release>
+			<filename>zmd-7.1.1.0-39.53.i586.rpm</filename>
+			<filesize>482733</filesize>
+			<installedsize>1210827</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="libzmdutil.so"/>
+			<dep name="mono(Novell.Zenworks.Zmd.Packaging.Public)" op="EQ" version="1.0.0.0"/>
+			<dep name="mono(Novell.Zenworks.Zmd.Public)" op="EQ" version="1.0.0.0"/>
+			<dep name="mono(Novell.Zenworks.Zmd.AuthExtension)" op="EQ" version="0.0.0.0"/>
+			<dep name="mono(Novell.Zenworks.Zmd.AuthModule)" op="EQ" version="0.0.0.0"/>
+			<dep name="mono(Novell.Zenworks.Zmd.Packaging)" op="EQ" version="0.0.0.0"/>
+			<dep name="mono(Novell.Zenworks.Zmd.SqliteClient)" op="EQ" version="0.0.0.0"/>
+			<dep name="mono(Novell.Zenworks.Zmd)" op="EQ" version="0.0.0.0"/>
+			<dep name="mono(log4net)" op="EQ" version="1.2.9.0"/>
+			<dep name="mono(CookComputing.XmlRpc)" op="EQ" version="0.8.1.0"/>
+			<dep name="mono(Novell.Zenworks.Zmd.NetworkManager)" op="EQ" version="0.0.0.0"/>
+			<dep name="mono(Novell.Zenworks.Zmd.PackageManagementModule)" op="EQ" version="0.0.0.0"/>
+			<dep name="mono(Novell.Zenworks.Zmd.Remote)" op="EQ" version="0.0.0.0"/>
+			<dep name="mono(Novell.Zenworks.Zmd.XmlRpc)" op="EQ" version="0.0.0.0"/>
+			<dep name="mono(zmd)" op="EQ" version="0.0.0.0"/>
+			<dep name="zmd" op="EQ" version="7.1.1.0" release="39.53"/>
+		</provides>
+		<requires>
+			<dep name="insserv" pre="1"/>
+			<dep name="sed" pre="1"/>
+			<dep name="libzypp-zmd-backend" op="GE" version="7.1.1.0" release="42.53"/>
+			<dep name="dbus-1-mono"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(VersionedDependencies)" op="LE" version="3.0.3" release="1" pre="1"/>
+			<dep name="/bin/sh"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)"/>
+			<dep name="mono(ICSharpCode.SharpZipLib)" op="EQ" version="0.84.0.0"/>
+			<dep name="mono(Mono.Http)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(Mono.Posix)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(Mono.Security)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(System)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(System.Data)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(System.Runtime.Remoting)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(System.Web)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(System.Web.Services)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(System.Xml)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(dbus-sharp)" op="EQ" version="0.60.0.0"/>
+			<dep name="mono(mscorlib)" op="EQ" version="1.0.5000.0"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>zmd</name>
+	<summary>libzypp update</summary>
+	<description>This update contains the following new features:
+* support for patch/delta RPMs in YUM sources (#168844)
+
+This update includes fixes for the following bugs:
+* various performance enhancements
+* 190163 - *-kmp-* dependencies match multiple kernel
+  packages
+* 176568 - Evaluate possible xml parser optimizations
+* 195567 - 100 /var/tmp/TmpFile.xxxxx in 3 Days
+* 193584 - cut-off package description in zen-updater
+* 194424 - Online update setup creates unusable cron job
+* 191676 - zen installer/updater cannot add an FTP YUM
+  repository
+* 190295 - zen-updater/zmd/rug does not install update
+  stack patches first
+* 193212 - zmd does not unblock transactions after
+  transaction preparation failure
+* 191506 - zen-updated showing updates from non-subscribed
+  catalog
+* 183656 - mono needed for YaST package management since
+  last update
+* 195911 - Missing dependency of package management on
+  'unzip'
+* 192535 - test fetchmsttfonts script does not get run
+</description>
+	<arch>ppc</arch>
+	<version>7.1.1.0</version>
+	<release>39.53</release>
+	<filesize>487686</filesize>
+	<installedsize>1219739</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>7.1.1.0</version>
+			<release>39.53</release>
+			<filename>zmd-7.1.1.0-39.53.ppc.rpm</filename>
+			<filesize>487686</filesize>
+			<installedsize>1219739</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="libzmdutil.so"/>
+			<dep name="mono(Novell.Zenworks.Zmd.Packaging.Public)" op="EQ" version="1.0.0.0"/>
+			<dep name="mono(Novell.Zenworks.Zmd.Public)" op="EQ" version="1.0.0.0"/>
+			<dep name="mono(Novell.Zenworks.Zmd.AuthExtension)" op="EQ" version="0.0.0.0"/>
+			<dep name="mono(Novell.Zenworks.Zmd.AuthModule)" op="EQ" version="0.0.0.0"/>
+			<dep name="mono(Novell.Zenworks.Zmd.Packaging)" op="EQ" version="0.0.0.0"/>
+			<dep name="mono(Novell.Zenworks.Zmd.SqliteClient)" op="EQ" version="0.0.0.0"/>
+			<dep name="mono(Novell.Zenworks.Zmd)" op="EQ" version="0.0.0.0"/>
+			<dep name="mono(log4net)" op="EQ" version="1.2.9.0"/>
+			<dep name="mono(CookComputing.XmlRpc)" op="EQ" version="0.8.1.0"/>
+			<dep name="mono(Novell.Zenworks.Zmd.NetworkManager)" op="EQ" version="0.0.0.0"/>
+			<dep name="mono(Novell.Zenworks.Zmd.PackageManagementModule)" op="EQ" version="0.0.0.0"/>
+			<dep name="mono(Novell.Zenworks.Zmd.Remote)" op="EQ" version="0.0.0.0"/>
+			<dep name="mono(Novell.Zenworks.Zmd.XmlRpc)" op="EQ" version="0.0.0.0"/>
+			<dep name="mono(zmd)" op="EQ" version="0.0.0.0"/>
+			<dep name="zmd" op="EQ" version="7.1.1.0" release="39.53"/>
+		</provides>
+		<requires>
+			<dep name="insserv" pre="1"/>
+			<dep name="sed" pre="1"/>
+			<dep name="libzypp-zmd-backend" op="GE" version="7.1.1.0" release="42.53"/>
+			<dep name="dbus-1-mono"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(VersionedDependencies)" op="LE" version="3.0.3" release="1" pre="1"/>
+			<dep name="/bin/sh"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libc.so.6(GLIBC_2.4)"/>
+			<dep name="mono(ICSharpCode.SharpZipLib)" op="EQ" version="0.84.0.0"/>
+			<dep name="mono(Mono.Http)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(Mono.Posix)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(Mono.Security)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(System)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(System.Data)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(System.Runtime.Remoting)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(System.Web)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(System.Web.Services)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(System.Xml)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(dbus-sharp)" op="EQ" version="0.60.0.0"/>
+			<dep name="mono(mscorlib)" op="EQ" version="1.0.5000.0"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>zmd</name>
+	<summary>libzypp update</summary>
+	<description>This update contains the following new features:
+* support for patch/delta RPMs in YUM sources (#168844)
+
+This update includes fixes for the following bugs:
+* various performance enhancements
+* 190163 - *-kmp-* dependencies match multiple kernel
+  packages
+* 176568 - Evaluate possible xml parser optimizations
+* 195567 - 100 /var/tmp/TmpFile.xxxxx in 3 Days
+* 193584 - cut-off package description in zen-updater
+* 194424 - Online update setup creates unusable cron job
+* 191676 - zen installer/updater cannot add an FTP YUM
+  repository
+* 190295 - zen-updater/zmd/rug does not install update
+  stack patches first
+* 193212 - zmd does not unblock transactions after
+  transaction preparation failure
+* 191506 - zen-updated showing updates from non-subscribed
+  catalog
+* 183656 - mono needed for YaST package management since
+  last update
+* 195911 - Missing dependency of package management on
+  'unzip'
+* 192535 - test fetchmsttfonts script does not get run
+</description>
+	<arch>x86_64</arch>
+	<version>7.1.1.0</version>
+	<release>39.53</release>
+	<filesize>481682</filesize>
+	<installedsize>1217003</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>7.1.1.0</version>
+			<release>39.53</release>
+			<filename>zmd-7.1.1.0-39.53.x86_64.rpm</filename>
+			<filesize>481682</filesize>
+			<installedsize>1217003</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="libzmdutil.so()(64bit)"/>
+			<dep name="mono(Novell.Zenworks.Zmd.Packaging.Public)" op="EQ" version="1.0.0.0"/>
+			<dep name="mono(Novell.Zenworks.Zmd.Public)" op="EQ" version="1.0.0.0"/>
+			<dep name="mono(Novell.Zenworks.Zmd.AuthExtension)" op="EQ" version="0.0.0.0"/>
+			<dep name="mono(Novell.Zenworks.Zmd.AuthModule)" op="EQ" version="0.0.0.0"/>
+			<dep name="mono(Novell.Zenworks.Zmd.Packaging)" op="EQ" version="0.0.0.0"/>
+			<dep name="mono(Novell.Zenworks.Zmd.SqliteClient)" op="EQ" version="0.0.0.0"/>
+			<dep name="mono(Novell.Zenworks.Zmd)" op="EQ" version="0.0.0.0"/>
+			<dep name="mono(log4net)" op="EQ" version="1.2.9.0"/>
+			<dep name="mono(CookComputing.XmlRpc)" op="EQ" version="0.8.1.0"/>
+			<dep name="mono(Novell.Zenworks.Zmd.NetworkManager)" op="EQ" version="0.0.0.0"/>
+			<dep name="mono(Novell.Zenworks.Zmd.PackageManagementModule)" op="EQ" version="0.0.0.0"/>
+			<dep name="mono(Novell.Zenworks.Zmd.Remote)" op="EQ" version="0.0.0.0"/>
+			<dep name="mono(Novell.Zenworks.Zmd.XmlRpc)" op="EQ" version="0.0.0.0"/>
+			<dep name="mono(zmd)" op="EQ" version="0.0.0.0"/>
+			<dep name="zmd" op="EQ" version="7.1.1.0" release="39.53"/>
+		</provides>
+		<requires>
+			<dep name="insserv" pre="1"/>
+			<dep name="sed" pre="1"/>
+			<dep name="libzypp-zmd-backend" op="GE" version="7.1.1.0" release="42.53"/>
+			<dep name="dbus-1-mono"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(VersionedDependencies)" op="LE" version="3.0.3" release="1" pre="1"/>
+			<dep name="/bin/sh"/>
+			<dep name="libc.so.6()(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)(64bit)"/>
+			<dep name="mono(ICSharpCode.SharpZipLib)" op="EQ" version="0.84.0.0"/>
+			<dep name="mono(Mono.Http)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(Mono.Posix)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(Mono.Security)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(System)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(System.Data)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(System.Runtime.Remoting)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(System.Web)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(System.Web.Services)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(System.Xml)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(dbus-sharp)" op="EQ" version="0.60.0.0"/>
+			<dep name="mono(mscorlib)" op="EQ" version="1.0.5000.0"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>zmd-devel</name>
+	<summary>libzypp update</summary>
+	<description>This update contains the following new features:
+* support for patch/delta RPMs in YUM sources (#168844)
+
+This update includes fixes for the following bugs:
+* various performance enhancements
+* 190163 - *-kmp-* dependencies match multiple kernel
+  packages
+* 176568 - Evaluate possible xml parser optimizations
+* 195567 - 100 /var/tmp/TmpFile.xxxxx in 3 Days
+* 193584 - cut-off package description in zen-updater
+* 194424 - Online update setup creates unusable cron job
+* 191676 - zen installer/updater cannot add an FTP YUM
+  repository
+* 190295 - zen-updater/zmd/rug does not install update
+  stack patches first
+* 193212 - zmd does not unblock transactions after
+  transaction preparation failure
+* 191506 - zen-updated showing updates from non-subscribed
+  catalog
+* 183656 - mono needed for YaST package management since
+  last update
+* 195911 - Missing dependency of package management on
+  'unzip'
+* 192535 - test fetchmsttfonts script does not get run
+</description>
+	<arch>i586</arch>
+	<version>7.1.1.0</version>
+	<release>39.53</release>
+	<filesize>27903</filesize>
+	<installedsize>325</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>7.1.1.0</version>
+			<release>39.53</release>
+			<filename>zmd-devel-7.1.1.0-39.53.i586.rpm</filename>
+			<filesize>27903</filesize>
+			<installedsize>325</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="zmd-devel" op="EQ" version="7.1.1.0" release="39.53"/>
+		</provides>
+		<requires>
+			<dep name="zmd" op="EQ" version="7.1.1.0"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>zmd-devel</name>
+	<summary>libzypp update</summary>
+	<description>This update contains the following new features:
+* support for patch/delta RPMs in YUM sources (#168844)
+
+This update includes fixes for the following bugs:
+* various performance enhancements
+* 190163 - *-kmp-* dependencies match multiple kernel
+  packages
+* 176568 - Evaluate possible xml parser optimizations
+* 195567 - 100 /var/tmp/TmpFile.xxxxx in 3 Days
+* 193584 - cut-off package description in zen-updater
+* 194424 - Online update setup creates unusable cron job
+* 191676 - zen installer/updater cannot add an FTP YUM
+  repository
+* 190295 - zen-updater/zmd/rug does not install update
+  stack patches first
+* 193212 - zmd does not unblock transactions after
+  transaction preparation failure
+* 191506 - zen-updated showing updates from non-subscribed
+  catalog
+* 183656 - mono needed for YaST package management since
+  last update
+* 195911 - Missing dependency of package management on
+  'unzip'
+* 192535 - test fetchmsttfonts script does not get run
+</description>
+	<arch>ppc</arch>
+	<version>7.1.1.0</version>
+	<release>39.53</release>
+	<filesize>27883</filesize>
+	<installedsize>325</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>7.1.1.0</version>
+			<release>39.53</release>
+			<filename>zmd-devel-7.1.1.0-39.53.ppc.rpm</filename>
+			<filesize>27883</filesize>
+			<installedsize>325</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="zmd-devel" op="EQ" version="7.1.1.0" release="39.53"/>
+		</provides>
+		<requires>
+			<dep name="zmd" op="EQ" version="7.1.1.0"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>zmd-devel</name>
+	<summary>libzypp update</summary>
+	<description>This update contains the following new features:
+* support for patch/delta RPMs in YUM sources (#168844)
+
+This update includes fixes for the following bugs:
+* various performance enhancements
+* 190163 - *-kmp-* dependencies match multiple kernel
+  packages
+* 176568 - Evaluate possible xml parser optimizations
+* 195567 - 100 /var/tmp/TmpFile.xxxxx in 3 Days
+* 193584 - cut-off package description in zen-updater
+* 194424 - Online update setup creates unusable cron job
+* 191676 - zen installer/updater cannot add an FTP YUM
+  repository
+* 190295 - zen-updater/zmd/rug does not install update
+  stack patches first
+* 193212 - zmd does not unblock transactions after
+  transaction preparation failure
+* 191506 - zen-updated showing updates from non-subscribed
+  catalog
+* 183656 - mono needed for YaST package management since
+  last update
+* 195911 - Missing dependency of package management on
+  'unzip'
+* 192535 - test fetchmsttfonts script does not get run
+</description>
+	<arch>x86_64</arch>
+	<version>7.1.1.0</version>
+	<release>39.53</release>
+	<filesize>27902</filesize>
+	<installedsize>329</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>7.1.1.0</version>
+			<release>39.53</release>
+			<filename>zmd-devel-7.1.1.0-39.53.x86_64.rpm</filename>
+			<filesize>27902</filesize>
+			<installedsize>329</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="zmd-devel" op="EQ" version="7.1.1.0" release="39.53"/>
+		</provides>
+		<requires>
+			<dep name="zmd" op="EQ" version="7.1.1.0"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+</subchannel></channel>

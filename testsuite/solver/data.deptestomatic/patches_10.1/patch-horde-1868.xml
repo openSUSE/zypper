@@ -1,0 +1,91 @@
+<channel><subchannel>                                                  
+
+<patch>
+	<name>horde</name>
+	<arch>noarch</arch>
+	<version>1868</version>
+	<release>0</release>
+	<requires>
+		<dep kind="atom" name="horde" epoch="0" version="3.0.9" release="19.4" op="EQ"/>
+	</requires>
+</patch>
+<atom>
+	<name>horde</name>
+	<arch>noarch</arch>
+	<version>3.0.9</version>
+	<release>19.4</release>
+	<freshens>
+		<dep kind="package" name="horde"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="horde" epoch="0" version="3.0.9" release="19.4" op="GE"/>
+	</requires>
+</atom>
+<package>
+	<name>horde</name>
+	<summary>horde: Securityfixes for cross site scripting problems.</summary>
+	<description>This update fixes the following two security issues in the
+Horde Application Framework:
+- CVE-2006-3548: Multiple cross-site scripting (XSS)
+  vulnerabilities allow remote attackers to inject
+  arbitrary web script or HTML via a (1) javascript URI or
+  an external (2) http, (3) https, or (4) ftp URI in the
+  url parameter in services/go.php (aka the dereferrer),
+  (5) a javascript URI in the module parameter in
+  services/help (aka the help viewer), and (6) the name
+  parameter in services/problem.php (aka the problem
+  reporting screen).
+
+- CVE-2006-3549: services/go.php does not properly restrict
+  its image proxy capability, which allows remote attackers
+  to perform "Web tunneling" attacks and use the server as
+  a proxy via (1) http, (2) https, and (3) ftp URL in the
+  url parameter, which is requested from the server.
+</description>
+	<arch>noarch</arch>
+	<version>3.0.9</version>
+	<release>19.4</release>
+	<filesize>2145248</filesize>
+	<installedsize>8520097</installedsize>
+	<history>
+		<update>
+			<arch>noarch</arch>
+			<epoch>0</epoch>
+			<version>3.0.9</version>
+			<release>19.4</release>
+			<filename>horde-3.0.9-19.4.noarch.rpm</filename>
+			<filesize>2145248</filesize>
+			<installedsize>8520097</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="horde" op="EQ" version="3.0.9" release="19.4"/>
+		</provides>
+		<requires>
+			<dep name="mod_php_any"/>
+			<dep name="php-gettext"/>
+			<dep name="php-mcrypt"/>
+			<dep name="php-imap"/>
+			<dep name="php-pear"/>
+			<dep name="php-pear-log"/>
+			<dep name="php-session"/>
+			<dep name="php-dom"/>
+			<dep name="php"/>
+			<dep name="php5-pear-auth_sasl"/>
+			<dep name="php5-pear-date"/>
+			<dep name="php5-pear-db"/>
+			<dep name="php5-pear-file"/>
+			<dep name="php5-pear-mail"/>
+			<dep name="php5-pear-mail_mime"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/bin/sh"/>
+			<dep name="/usr/bin/php5"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+</subchannel></channel>

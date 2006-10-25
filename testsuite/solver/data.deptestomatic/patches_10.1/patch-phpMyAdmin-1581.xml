@@ -1,0 +1,70 @@
+<channel><subchannel>                                                  
+
+<patch>
+	<name>phpMyAdmin</name>
+	<arch>noarch</arch>
+	<version>1581</version>
+	<release>0</release>
+	<requires>
+		<dep kind="atom" name="phpMyAdmin" epoch="0" version="2.8.0.3" release="10.1" op="EQ"/>
+	</requires>
+</patch>
+<atom>
+	<name>phpMyAdmin</name>
+	<arch>noarch</arch>
+	<version>2.8.0.3</version>
+	<release>10.1</release>
+	<freshens>
+		<dep kind="package" name="phpMyAdmin"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="phpMyAdmin" epoch="0" version="2.8.0.3" release="10.1" op="GE"/>
+	</requires>
+</atom>
+<package>
+	<name>phpMyAdmin</name>
+	<summary>phpMyAdmin security update</summary>
+	<description>Missing checks of the 'db' and 'theme' parameters could be 
+exploited for cross site scripting attacks (CVE-2006-2417, 
+CVE-2006-2418).
+</description>
+	<arch>noarch</arch>
+	<version>2.8.0.3</version>
+	<release>10.1</release>
+	<filesize>2108632</filesize>
+	<installedsize>11602550</installedsize>
+	<history>
+		<update>
+			<arch>noarch</arch>
+			<epoch>0</epoch>
+			<version>2.8.0.3</version>
+			<release>10.1</release>
+			<filename>phpMyAdmin-2.8.0.3-10.1.noarch.rpm</filename>
+			<filesize>2108632</filesize>
+			<installedsize>11602550</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="phpMyAdmin" op="EQ" version="2.8.0.3" release="10.1"/>
+		</provides>
+		<requires>
+			<dep name="mod_php_any"/>
+			<dep name="php-mysql"/>
+			<dep name="php-bz2"/>
+			<dep name="php-gd"/>
+			<dep name="php-zlib"/>
+			<dep name="php-iconv"/>
+			<dep name="php-mcrypt"/>
+			<dep name="php-session"/>
+			<dep name="pwgen" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+</subchannel></channel>

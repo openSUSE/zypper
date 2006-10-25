@@ -1,0 +1,552 @@
+<channel><subchannel>                                                  
+
+<patch>
+	<name>gimp-unstable</name>
+	<arch>noarch</arch>
+	<version>1919</version>
+	<release>0</release>
+	<requires>
+		<dep kind="atom" name="gimp-unstable" epoch="0" version="2.3.7" release="17.2" op="EQ"/>
+	</requires>
+</patch>
+<atom>
+	<name>gimp-unstable</name>
+	<arch>i586</arch>
+	<version>2.3.7</version>
+	<release>17.2</release>
+	<freshens>
+		<dep kind="package" name="gimp-unstable"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="gimp-unstable" epoch="0" version="2.3.7" release="17.2" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>gimp-unstable</name>
+	<arch>ppc</arch>
+	<version>2.3.7</version>
+	<release>17.2</release>
+	<freshens>
+		<dep kind="package" name="gimp-unstable"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="gimp-unstable" epoch="0" version="2.3.7" release="17.2" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>gimp-unstable</name>
+	<arch>x86_64</arch>
+	<version>2.3.7</version>
+	<release>17.2</release>
+	<freshens>
+		<dep kind="package" name="gimp-unstable"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="gimp-unstable" epoch="0" version="2.3.7" release="17.2" op="GE"/>
+	</requires>
+</atom>
+<package>
+	<name>gimp-unstable</name>
+	<summary>gimp-unstable: Securityfix for XCF overflow problem</summary>
+	<description>A buffer overflow was fixed in the xcf loader in GIMP that
+allows user-complicit attackers to cause a denial of
+service (crash) and possibly execute arbitrary code via an
+XCF file with a large num_axes value in the VECTORS
+property. (CVE-2006-3404)
+</description>
+	<arch>i586</arch>
+	<version>2.3.7</version>
+	<release>17.2</release>
+	<filesize>10885824</filesize>
+	<installedsize>35375788</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>2.3.7</version>
+			<release>17.2</release>
+			<filename>gimp-unstable-2.3.7-17.2.i586.rpm</filename>
+			<filesize>10885824</filesize>
+			<installedsize>35375788</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="gimp-2.0"/>
+			<dep name="_gimpenums.so"/>
+			<dep name="gimp.so"/>
+			<dep name="gimpcolor.so"/>
+			<dep name="gimpprocbrowser.so"/>
+			<dep name="libcdisplay_colorblind.so"/>
+			<dep name="libcdisplay_gamma.so"/>
+			<dep name="libcdisplay_highcontrast.so"/>
+			<dep name="libcdisplay_lcms.so"/>
+			<dep name="libcdisplay_proof.so"/>
+			<dep name="libcolorsel_cmyk.so"/>
+			<dep name="libcolorsel_triangle.so"/>
+			<dep name="libcolorsel_water.so"/>
+			<dep name="libcontroller_linux_input.so"/>
+			<dep name="libcontroller_midi.so"/>
+			<dep name="libgimp-2.0.so.0"/>
+			<dep name="libgimpbase-2.0.so.0"/>
+			<dep name="libgimpcolor-2.0.so.0"/>
+			<dep name="libgimpconfig-2.0.so.0"/>
+			<dep name="libgimpmath-2.0.so.0"/>
+			<dep name="libgimpmodule-2.0.so.0"/>
+			<dep name="libgimpthumb-2.0.so.0"/>
+			<dep name="libgimpui-2.0.so.0"/>
+			<dep name="libgimpwidgets-2.0.so.0"/>
+			<dep name="gimp-unstable" op="EQ" version="2.3.7" release="17.2"/>
+		</provides>
+		<requires>
+			<dep name="gnome-icon-theme"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/usr/bin/env"/>
+			<dep name="libICE.so.6"/>
+			<dep name="libORBit-2.so.0"/>
+			<dep name="libORBitCosNaming-2.so.0"/>
+			<dep name="libSM.so.6"/>
+			<dep name="libX11.so.6"/>
+			<dep name="libXext.so.6"/>
+			<dep name="libXmu.so.6"/>
+			<dep name="libXpm.so.4"/>
+			<dep name="libXrender.so.1"/>
+			<dep name="libXt.so.6"/>
+			<dep name="libaa.so.1"/>
+			<dep name="libart_lgpl_2.so.2"/>
+			<dep name="libasound.so.2"/>
+			<dep name="libasound.so.2(ALSA_0.9)"/>
+			<dep name="libatk-1.0.so.0"/>
+			<dep name="libaudiofile.so.0"/>
+			<dep name="libbonobo-2.so.0"/>
+			<dep name="libbonobo-activation.so.4"/>
+			<dep name="libbonoboui-2.so.0"/>
+			<dep name="libbz2.so.1"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libc.so.6(GLIBC_2.2)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)"/>
+			<dep name="libc.so.6(GLIBC_2.4)"/>
+			<dep name="libcairo.so.2"/>
+			<dep name="libcroco-0.6.so.3"/>
+			<dep name="libcrypto.so.0.9.8"/>
+			<dep name="libdbus-1.so.2"/>
+			<dep name="libdbus-glib-1.so.2"/>
+			<dep name="libdl.so.2"/>
+			<dep name="libdns_sd.so"/>
+			<dep name="libesd.so.0"/>
+			<dep name="libexif.so.12"/>
+			<dep name="libexpat.so.1"/>
+			<dep name="libfontconfig.so.1"/>
+			<dep name="libfreetype.so.6"/>
+			<dep name="libgailutil.so.17"/>
+			<dep name="libgconf-2.so.4"/>
+			<dep name="libgdk-x11-2.0.so.0"/>
+			<dep name="libgdk_pixbuf-2.0.so.0"/>
+			<dep name="libgimp-2.0.so.0"/>
+			<dep name="libgimpbase-2.0.so.0"/>
+			<dep name="libgimpcolor-2.0.so.0"/>
+			<dep name="libgimpconfig-2.0.so.0"/>
+			<dep name="libgimpmath-2.0.so.0"/>
+			<dep name="libgimpmodule-2.0.so.0"/>
+			<dep name="libgimpprint.so.1"/>
+			<dep name="libgimpthumb-2.0.so.0"/>
+			<dep name="libgimpui-2.0.so.0"/>
+			<dep name="libgimpwidgets-2.0.so.0"/>
+			<dep name="libglib-2.0.so.0"/>
+			<dep name="libglitz.so.1"/>
+			<dep name="libgmodule-2.0.so.0"/>
+			<dep name="libgnome-2.so.0"/>
+			<dep name="libgnome-keyring.so.0"/>
+			<dep name="libgnomecanvas-2.so.0"/>
+			<dep name="libgnomeprint-2-2.so.0"/>
+			<dep name="libgnomeprintui-2-2.so.0"/>
+			<dep name="libgnomeui-2.so.0"/>
+			<dep name="libgnomevfs-2.so.0"/>
+			<dep name="libgobject-2.0.so.0"/>
+			<dep name="libgpm.so.1"/>
+			<dep name="libgsf-1.so.113"/>
+			<dep name="libgthread-2.0.so.0"/>
+			<dep name="libgtk-x11-2.0.so.0"/>
+			<dep name="libgtkhtml-2.so.0"/>
+			<dep name="libhal-storage.so.1"/>
+			<dep name="libhal.so.1"/>
+			<dep name="libjpeg.so.62"/>
+			<dep name="liblcms.so.1"/>
+			<dep name="libm.so.6"/>
+			<dep name="libm.so.6(GLIBC_2.0)"/>
+			<dep name="libmng.so.1"/>
+			<dep name="libnsl.so.1"/>
+			<dep name="libpango-1.0.so.0"/>
+			<dep name="libpangocairo-1.0.so.0"/>
+			<dep name="libpangoft2-1.0.so.0"/>
+			<dep name="libpng.so.3"/>
+			<dep name="libpng12.so.0"/>
+			<dep name="libpoppler-glib.so.0"/>
+			<dep name="libpoppler.so.0"/>
+			<dep name="libpopt.so.0"/>
+			<dep name="libpthread.so.0"/>
+			<dep name="libpthread.so.0(GLIBC_2.0)"/>
+			<dep name="libpthread.so.0(GLIBC_2.2)"/>
+			<dep name="libresmgr.so.1"/>
+			<dep name="libresolv.so.2"/>
+			<dep name="librsvg-2.so.2"/>
+			<dep name="librt.so.1"/>
+			<dep name="libslang.so.2"/>
+			<dep name="libssl.so.0.9.8"/>
+			<dep name="libstdc++.so.6"/>
+			<dep name="libtiff.so.3"/>
+			<dep name="libwmf-0.2.so.7"/>
+			<dep name="libwmflite-0.2.so.7"/>
+			<dep name="libxml2.so.2"/>
+			<dep name="libz.so.1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+		<conflicts>
+			<dep name="gimp"/>
+		</conflicts>
+	</deps>
+</package>
+<package>
+	<name>gimp-unstable</name>
+	<summary>gimp-unstable: Securityfix for XCF overflow problem</summary>
+	<description>A buffer overflow was fixed in the xcf loader in GIMP that
+allows user-complicit attackers to cause a denial of
+service (crash) and possibly execute arbitrary code via an
+XCF file with a large num_axes value in the VECTORS
+property. (CVE-2006-3404)
+</description>
+	<arch>ppc</arch>
+	<version>2.3.7</version>
+	<release>17.2</release>
+	<filesize>11527199</filesize>
+	<installedsize>37322048</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>2.3.7</version>
+			<release>17.2</release>
+			<filename>gimp-unstable-2.3.7-17.2.ppc.rpm</filename>
+			<filesize>11527199</filesize>
+			<installedsize>37322048</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="gimp-2.0"/>
+			<dep name="_gimpenums.so"/>
+			<dep name="gimp.so"/>
+			<dep name="gimpcolor.so"/>
+			<dep name="gimpprocbrowser.so"/>
+			<dep name="libcdisplay_colorblind.so"/>
+			<dep name="libcdisplay_gamma.so"/>
+			<dep name="libcdisplay_highcontrast.so"/>
+			<dep name="libcdisplay_lcms.so"/>
+			<dep name="libcdisplay_proof.so"/>
+			<dep name="libcolorsel_cmyk.so"/>
+			<dep name="libcolorsel_triangle.so"/>
+			<dep name="libcolorsel_water.so"/>
+			<dep name="libcontroller_linux_input.so"/>
+			<dep name="libcontroller_midi.so"/>
+			<dep name="libgimp-2.0.so.0"/>
+			<dep name="libgimpbase-2.0.so.0"/>
+			<dep name="libgimpcolor-2.0.so.0"/>
+			<dep name="libgimpconfig-2.0.so.0"/>
+			<dep name="libgimpmath-2.0.so.0"/>
+			<dep name="libgimpmodule-2.0.so.0"/>
+			<dep name="libgimpthumb-2.0.so.0"/>
+			<dep name="libgimpui-2.0.so.0"/>
+			<dep name="libgimpwidgets-2.0.so.0"/>
+			<dep name="gimp-unstable" op="EQ" version="2.3.7" release="17.2"/>
+		</provides>
+		<requires>
+			<dep name="gnome-icon-theme"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/usr/bin/env"/>
+			<dep name="libICE.so.6"/>
+			<dep name="libORBit-2.so.0"/>
+			<dep name="libORBitCosNaming-2.so.0"/>
+			<dep name="libSM.so.6"/>
+			<dep name="libX11.so.6"/>
+			<dep name="libXext.so.6"/>
+			<dep name="libXmu.so.6"/>
+			<dep name="libXpm.so.4"/>
+			<dep name="libXrender.so.1"/>
+			<dep name="libXt.so.6"/>
+			<dep name="libaa.so.1"/>
+			<dep name="libart_lgpl_2.so.2"/>
+			<dep name="libasound.so.2"/>
+			<dep name="libasound.so.2(ALSA_0.9)"/>
+			<dep name="libatk-1.0.so.0"/>
+			<dep name="libaudiofile.so.0"/>
+			<dep name="libbonobo-2.so.0"/>
+			<dep name="libbonobo-activation.so.4"/>
+			<dep name="libbonoboui-2.so.0"/>
+			<dep name="libbz2.so.1"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libc.so.6(GLIBC_2.2)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)"/>
+			<dep name="libc.so.6(GLIBC_2.4)"/>
+			<dep name="libcairo.so.2"/>
+			<dep name="libcroco-0.6.so.3"/>
+			<dep name="libcrypto.so.0.9.8"/>
+			<dep name="libdbus-1.so.2"/>
+			<dep name="libdbus-glib-1.so.2"/>
+			<dep name="libdl.so.2"/>
+			<dep name="libdns_sd.so"/>
+			<dep name="libesd.so.0"/>
+			<dep name="libexif.so.12"/>
+			<dep name="libexpat.so.1"/>
+			<dep name="libfontconfig.so.1"/>
+			<dep name="libfreetype.so.6"/>
+			<dep name="libgailutil.so.17"/>
+			<dep name="libgconf-2.so.4"/>
+			<dep name="libgdk-x11-2.0.so.0"/>
+			<dep name="libgdk_pixbuf-2.0.so.0"/>
+			<dep name="libgimp-2.0.so.0"/>
+			<dep name="libgimpbase-2.0.so.0"/>
+			<dep name="libgimpcolor-2.0.so.0"/>
+			<dep name="libgimpconfig-2.0.so.0"/>
+			<dep name="libgimpmath-2.0.so.0"/>
+			<dep name="libgimpmodule-2.0.so.0"/>
+			<dep name="libgimpprint.so.1"/>
+			<dep name="libgimpthumb-2.0.so.0"/>
+			<dep name="libgimpui-2.0.so.0"/>
+			<dep name="libgimpwidgets-2.0.so.0"/>
+			<dep name="libglib-2.0.so.0"/>
+			<dep name="libglitz.so.1"/>
+			<dep name="libgmodule-2.0.so.0"/>
+			<dep name="libgnome-2.so.0"/>
+			<dep name="libgnome-keyring.so.0"/>
+			<dep name="libgnomecanvas-2.so.0"/>
+			<dep name="libgnomeprint-2-2.so.0"/>
+			<dep name="libgnomeprintui-2-2.so.0"/>
+			<dep name="libgnomeui-2.so.0"/>
+			<dep name="libgnomevfs-2.so.0"/>
+			<dep name="libgobject-2.0.so.0"/>
+			<dep name="libgpm.so.1"/>
+			<dep name="libgsf-1.so.113"/>
+			<dep name="libgthread-2.0.so.0"/>
+			<dep name="libgtk-x11-2.0.so.0"/>
+			<dep name="libgtkhtml-2.so.0"/>
+			<dep name="libhal-storage.so.1"/>
+			<dep name="libhal.so.1"/>
+			<dep name="libjpeg.so.62"/>
+			<dep name="liblcms.so.1"/>
+			<dep name="libm.so.6"/>
+			<dep name="libm.so.6(GLIBC_2.0)"/>
+			<dep name="libmng.so.1"/>
+			<dep name="libnsl.so.1"/>
+			<dep name="libpango-1.0.so.0"/>
+			<dep name="libpangocairo-1.0.so.0"/>
+			<dep name="libpangoft2-1.0.so.0"/>
+			<dep name="libpng.so.3"/>
+			<dep name="libpng12.so.0"/>
+			<dep name="libpoppler-glib.so.0"/>
+			<dep name="libpoppler.so.0"/>
+			<dep name="libpopt.so.0"/>
+			<dep name="libpthread.so.0"/>
+			<dep name="libpthread.so.0(GLIBC_2.0)"/>
+			<dep name="libpthread.so.0(GLIBC_2.2)"/>
+			<dep name="libpthread.so.0(GLIBC_2.3.4)"/>
+			<dep name="libresmgr.so.1"/>
+			<dep name="libresolv.so.2"/>
+			<dep name="librsvg-2.so.2"/>
+			<dep name="librt.so.1"/>
+			<dep name="libslang.so.2"/>
+			<dep name="libssl.so.0.9.8"/>
+			<dep name="libstdc++.so.6"/>
+			<dep name="libtiff.so.3"/>
+			<dep name="libwmf-0.2.so.7"/>
+			<dep name="libwmflite-0.2.so.7"/>
+			<dep name="libxml2.so.2"/>
+			<dep name="libz.so.1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+		<conflicts>
+			<dep name="gimp"/>
+		</conflicts>
+	</deps>
+</package>
+<package>
+	<name>gimp-unstable</name>
+	<summary>gimp-unstable: Securityfix for XCF overflow problem</summary>
+	<description>A buffer overflow was fixed in the xcf loader in GIMP that
+allows user-complicit attackers to cause a denial of
+service (crash) and possibly execute arbitrary code via an
+XCF file with a large num_axes value in the VECTORS
+property. (CVE-2006-3404)
+</description>
+	<arch>x86_64</arch>
+	<version>2.3.7</version>
+	<release>17.2</release>
+	<filesize>11260323</filesize>
+	<installedsize>36865894</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>2.3.7</version>
+			<release>17.2</release>
+			<filename>gimp-unstable-2.3.7-17.2.x86_64.rpm</filename>
+			<filesize>11260323</filesize>
+			<installedsize>36865894</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="gimp-2.0"/>
+			<dep name="_gimpenums.so()(64bit)"/>
+			<dep name="gimp.so()(64bit)"/>
+			<dep name="gimpcolor.so()(64bit)"/>
+			<dep name="gimpprocbrowser.so()(64bit)"/>
+			<dep name="libcdisplay_colorblind.so()(64bit)"/>
+			<dep name="libcdisplay_gamma.so()(64bit)"/>
+			<dep name="libcdisplay_highcontrast.so()(64bit)"/>
+			<dep name="libcdisplay_lcms.so()(64bit)"/>
+			<dep name="libcdisplay_proof.so()(64bit)"/>
+			<dep name="libcolorsel_cmyk.so()(64bit)"/>
+			<dep name="libcolorsel_triangle.so()(64bit)"/>
+			<dep name="libcolorsel_water.so()(64bit)"/>
+			<dep name="libcontroller_linux_input.so()(64bit)"/>
+			<dep name="libcontroller_midi.so()(64bit)"/>
+			<dep name="libgimp-2.0.so.0()(64bit)"/>
+			<dep name="libgimpbase-2.0.so.0()(64bit)"/>
+			<dep name="libgimpcolor-2.0.so.0()(64bit)"/>
+			<dep name="libgimpconfig-2.0.so.0()(64bit)"/>
+			<dep name="libgimpmath-2.0.so.0()(64bit)"/>
+			<dep name="libgimpmodule-2.0.so.0()(64bit)"/>
+			<dep name="libgimpthumb-2.0.so.0()(64bit)"/>
+			<dep name="libgimpui-2.0.so.0()(64bit)"/>
+			<dep name="libgimpwidgets-2.0.so.0()(64bit)"/>
+			<dep name="gimp-unstable" op="EQ" version="2.3.7" release="17.2"/>
+		</provides>
+		<requires>
+			<dep name="gnome-icon-theme"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/usr/bin/env"/>
+			<dep name="libICE.so.6()(64bit)"/>
+			<dep name="libORBit-2.so.0()(64bit)"/>
+			<dep name="libORBitCosNaming-2.so.0()(64bit)"/>
+			<dep name="libSM.so.6()(64bit)"/>
+			<dep name="libX11.so.6()(64bit)"/>
+			<dep name="libXext.so.6()(64bit)"/>
+			<dep name="libXmu.so.6()(64bit)"/>
+			<dep name="libXpm.so.4()(64bit)"/>
+			<dep name="libXrender.so.1()(64bit)"/>
+			<dep name="libXt.so.6()(64bit)"/>
+			<dep name="libaa.so.1()(64bit)"/>
+			<dep name="libart_lgpl_2.so.2()(64bit)"/>
+			<dep name="libasound.so.2()(64bit)"/>
+			<dep name="libasound.so.2(ALSA_0.9)(64bit)"/>
+			<dep name="libatk-1.0.so.0()(64bit)"/>
+			<dep name="libaudiofile.so.0()(64bit)"/>
+			<dep name="libbonobo-2.so.0()(64bit)"/>
+			<dep name="libbonobo-activation.so.4()(64bit)"/>
+			<dep name="libbonoboui-2.so.0()(64bit)"/>
+			<dep name="libbz2.so.1()(64bit)"/>
+			<dep name="libc.so.6()(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.4)(64bit)"/>
+			<dep name="libcairo.so.2()(64bit)"/>
+			<dep name="libcroco-0.6.so.3()(64bit)"/>
+			<dep name="libcrypto.so.0.9.8()(64bit)"/>
+			<dep name="libdbus-1.so.2()(64bit)"/>
+			<dep name="libdbus-glib-1.so.2()(64bit)"/>
+			<dep name="libdl.so.2()(64bit)"/>
+			<dep name="libdns_sd.so()(64bit)"/>
+			<dep name="libesd.so.0()(64bit)"/>
+			<dep name="libexif.so.12()(64bit)"/>
+			<dep name="libexpat.so.1()(64bit)"/>
+			<dep name="libfontconfig.so.1()(64bit)"/>
+			<dep name="libfreetype.so.6()(64bit)"/>
+			<dep name="libgailutil.so.17()(64bit)"/>
+			<dep name="libgconf-2.so.4()(64bit)"/>
+			<dep name="libgdk-x11-2.0.so.0()(64bit)"/>
+			<dep name="libgdk_pixbuf-2.0.so.0()(64bit)"/>
+			<dep name="libgimp-2.0.so.0()(64bit)"/>
+			<dep name="libgimpbase-2.0.so.0()(64bit)"/>
+			<dep name="libgimpcolor-2.0.so.0()(64bit)"/>
+			<dep name="libgimpconfig-2.0.so.0()(64bit)"/>
+			<dep name="libgimpmath-2.0.so.0()(64bit)"/>
+			<dep name="libgimpmodule-2.0.so.0()(64bit)"/>
+			<dep name="libgimpprint.so.1()(64bit)"/>
+			<dep name="libgimpthumb-2.0.so.0()(64bit)"/>
+			<dep name="libgimpui-2.0.so.0()(64bit)"/>
+			<dep name="libgimpwidgets-2.0.so.0()(64bit)"/>
+			<dep name="libglib-2.0.so.0()(64bit)"/>
+			<dep name="libglitz.so.1()(64bit)"/>
+			<dep name="libgmodule-2.0.so.0()(64bit)"/>
+			<dep name="libgnome-2.so.0()(64bit)"/>
+			<dep name="libgnome-keyring.so.0()(64bit)"/>
+			<dep name="libgnomecanvas-2.so.0()(64bit)"/>
+			<dep name="libgnomeprint-2-2.so.0()(64bit)"/>
+			<dep name="libgnomeprintui-2-2.so.0()(64bit)"/>
+			<dep name="libgnomeui-2.so.0()(64bit)"/>
+			<dep name="libgnomevfs-2.so.0()(64bit)"/>
+			<dep name="libgobject-2.0.so.0()(64bit)"/>
+			<dep name="libgpm.so.1()(64bit)"/>
+			<dep name="libgsf-1.so.113()(64bit)"/>
+			<dep name="libgthread-2.0.so.0()(64bit)"/>
+			<dep name="libgtk-x11-2.0.so.0()(64bit)"/>
+			<dep name="libgtkhtml-2.so.0()(64bit)"/>
+			<dep name="libhal-storage.so.1()(64bit)"/>
+			<dep name="libhal.so.1()(64bit)"/>
+			<dep name="libjpeg.so.62()(64bit)"/>
+			<dep name="liblcms.so.1()(64bit)"/>
+			<dep name="libm.so.6()(64bit)"/>
+			<dep name="libm.so.6(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libmng.so.1()(64bit)"/>
+			<dep name="libnsl.so.1()(64bit)"/>
+			<dep name="libpango-1.0.so.0()(64bit)"/>
+			<dep name="libpangocairo-1.0.so.0()(64bit)"/>
+			<dep name="libpangoft2-1.0.so.0()(64bit)"/>
+			<dep name="libpng.so.3()(64bit)"/>
+			<dep name="libpng12.so.0()(64bit)"/>
+			<dep name="libpoppler-glib.so.0()(64bit)"/>
+			<dep name="libpoppler.so.0()(64bit)"/>
+			<dep name="libpopt.so.0()(64bit)"/>
+			<dep name="libpthread.so.0()(64bit)"/>
+			<dep name="libpthread.so.0(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libresmgr.so.1()(64bit)"/>
+			<dep name="libresolv.so.2()(64bit)"/>
+			<dep name="librsvg-2.so.2()(64bit)"/>
+			<dep name="librt.so.1()(64bit)"/>
+			<dep name="libslang.so.2()(64bit)"/>
+			<dep name="libssl.so.0.9.8()(64bit)"/>
+			<dep name="libstdc++.so.6()(64bit)"/>
+			<dep name="libtiff.so.3()(64bit)"/>
+			<dep name="libwmf-0.2.so.7()(64bit)"/>
+			<dep name="libwmflite-0.2.so.7()(64bit)"/>
+			<dep name="libxml2.so.2()(64bit)"/>
+			<dep name="libz.so.1()(64bit)"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+		<conflicts>
+			<dep name="gimp"/>
+		</conflicts>
+	</deps>
+</package>
+</subchannel></channel>

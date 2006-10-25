@@ -1,0 +1,259 @@
+<channel><subchannel>                                                  
+
+<patch>
+	<name>xgl_package</name>
+	<arch>noarch</arch>
+	<version>1991</version>
+	<release>0</release>
+	<requires>
+		<dep kind="atom" name="xgl" epoch="0" version="cvs_060522" release="0.13" op="EQ"/>
+	</requires>
+</patch>
+<atom>
+	<name>xgl</name>
+	<arch>i586</arch>
+	<version>cvs_060522</version>
+	<release>0.13</release>
+	<freshens>
+		<dep kind="package" name="xgl"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="xgl" epoch="0" version="cvs_060522" release="0.13" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>xgl</name>
+	<arch>ppc</arch>
+	<version>cvs_060522</version>
+	<release>0.13</release>
+	<freshens>
+		<dep kind="package" name="xgl"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="xgl" epoch="0" version="cvs_060522" release="0.13" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>xgl</name>
+	<arch>x86_64</arch>
+	<version>cvs_060522</version>
+	<release>0.13</release>
+	<freshens>
+		<dep kind="package" name="xgl"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="xgl" epoch="0" version="cvs_060522" release="0.13" op="GE"/>
+	</requires>
+</atom>
+<package>
+	<name>xgl</name>
+	<summary>Fixes keyboard layout viewer</summary>
+	<description>This update fixes the keyboard layout viewer in the
+keyboard control panel, which makes it easier for users to
+pick the correct layout for their keyboard.
+
+</description>
+	<arch>i586</arch>
+	<version>cvs_060522</version>
+	<release>0.13</release>
+	<filesize>1640032</filesize>
+	<installedsize>4384412</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>cvs_060522</version>
+			<release>0.13</release>
+			<filename>xgl-cvs_060522-0.13.i586.rpm</filename>
+			<filesize>1640032</filesize>
+			<installedsize>4384412</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="Xgl"/>
+			<dep name="libglxext.so"/>
+			<dep name="libxglx.so"/>
+			<dep name="xgl" op="EQ" version="cvs_060522" release="0.13"/>
+		</provides>
+		<requires>
+			<dep name="fillup" pre="1"/>
+			<dep name="coreutils" pre="1"/>
+			<dep name="xgl-hardware-list"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="libGL.so.1"/>
+			<dep name="libX11.so.6"/>
+			<dep name="libXau.so.6"/>
+			<dep name="libXdmcp.so.6"/>
+			<dep name="libXext.so.6"/>
+			<dep name="libXfont.so.1"/>
+			<dep name="libXrandr.so.2"/>
+			<dep name="libXrender.so.1"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libc.so.6(GLIBC_2.2)"/>
+			<dep name="libc.so.6(GLIBC_2.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)"/>
+			<dep name="libdl.so.2"/>
+			<dep name="libdl.so.2(GLIBC_2.0)"/>
+			<dep name="libdl.so.2(GLIBC_2.1)"/>
+			<dep name="libfontenc.so.1"/>
+			<dep name="libfreetype.so.6"/>
+			<dep name="libm.so.6"/>
+			<dep name="libm.so.6(GLIBC_2.0)"/>
+			<dep name="libpthread.so.0"/>
+			<dep name="libpthread.so.0(GLIBC_2.0)"/>
+			<dep name="libxkbfile.so.1"/>
+			<dep name="libz.so.1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>xgl</name>
+	<summary>Fixes keyboard layout viewer</summary>
+	<description>This update fixes the keyboard layout viewer in the
+keyboard control panel, which makes it easier for users to
+pick the correct layout for their keyboard.
+
+</description>
+	<arch>ppc</arch>
+	<version>cvs_060522</version>
+	<release>0.13</release>
+	<filesize>1738158</filesize>
+	<installedsize>5121292</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>cvs_060522</version>
+			<release>0.13</release>
+			<filename>xgl-cvs_060522-0.13.ppc.rpm</filename>
+			<filesize>1738158</filesize>
+			<installedsize>5121292</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="Xgl"/>
+			<dep name="libglxext.so"/>
+			<dep name="libxglx.so"/>
+			<dep name="xgl" op="EQ" version="cvs_060522" release="0.13"/>
+		</provides>
+		<requires>
+			<dep name="fillup" pre="1"/>
+			<dep name="coreutils" pre="1"/>
+			<dep name="xgl-hardware-list"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="libGL.so.1"/>
+			<dep name="libX11.so.6"/>
+			<dep name="libXau.so.6"/>
+			<dep name="libXdmcp.so.6"/>
+			<dep name="libXext.so.6"/>
+			<dep name="libXfont.so.1"/>
+			<dep name="libXrandr.so.2"/>
+			<dep name="libXrender.so.1"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libc.so.6(GLIBC_2.2)"/>
+			<dep name="libc.so.6(GLIBC_2.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)"/>
+			<dep name="libc.so.6(GLIBC_2.4)"/>
+			<dep name="libdl.so.2"/>
+			<dep name="libdl.so.2(GLIBC_2.0)"/>
+			<dep name="libdl.so.2(GLIBC_2.1)"/>
+			<dep name="libfontenc.so.1"/>
+			<dep name="libfreetype.so.6"/>
+			<dep name="libm.so.6"/>
+			<dep name="libm.so.6(GLIBC_2.0)"/>
+			<dep name="libpthread.so.0"/>
+			<dep name="libpthread.so.0(GLIBC_2.0)"/>
+			<dep name="libpthread.so.0(GLIBC_2.3.4)"/>
+			<dep name="libxkbfile.so.1"/>
+			<dep name="libz.so.1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>xgl</name>
+	<summary>Fixes keyboard layout viewer</summary>
+	<description>This update fixes the keyboard layout viewer in the
+keyboard control panel, which makes it easier for users to
+pick the correct layout for their keyboard.
+
+</description>
+	<arch>x86_64</arch>
+	<version>cvs_060522</version>
+	<release>0.13</release>
+	<filesize>1820355</filesize>
+	<installedsize>4904852</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>cvs_060522</version>
+			<release>0.13</release>
+			<filename>xgl-cvs_060522-0.13.x86_64.rpm</filename>
+			<filesize>1820355</filesize>
+			<installedsize>4904852</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="Xgl"/>
+			<dep name="libglxext.so()(64bit)"/>
+			<dep name="libxglx.so()(64bit)"/>
+			<dep name="xgl" op="EQ" version="cvs_060522" release="0.13"/>
+		</provides>
+		<requires>
+			<dep name="fillup" pre="1"/>
+			<dep name="coreutils" pre="1"/>
+			<dep name="xgl-hardware-list"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="libGL.so.1()(64bit)"/>
+			<dep name="libX11.so.6()(64bit)"/>
+			<dep name="libXau.so.6()(64bit)"/>
+			<dep name="libXdmcp.so.6()(64bit)"/>
+			<dep name="libXext.so.6()(64bit)"/>
+			<dep name="libXfont.so.1()(64bit)"/>
+			<dep name="libXrandr.so.2()(64bit)"/>
+			<dep name="libXrender.so.1()(64bit)"/>
+			<dep name="libc.so.6()(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.3)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)(64bit)"/>
+			<dep name="libdl.so.2()(64bit)"/>
+			<dep name="libdl.so.2(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libfontenc.so.1()(64bit)"/>
+			<dep name="libfreetype.so.6()(64bit)"/>
+			<dep name="libm.so.6()(64bit)"/>
+			<dep name="libm.so.6(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libpthread.so.0()(64bit)"/>
+			<dep name="libpthread.so.0(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libxkbfile.so.1()(64bit)"/>
+			<dep name="libz.so.1()(64bit)"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+</subchannel></channel>

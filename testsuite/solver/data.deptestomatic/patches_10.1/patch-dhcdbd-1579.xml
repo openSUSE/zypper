@@ -1,0 +1,197 @@
+<channel><subchannel>                                                  
+
+<patch>
+	<name>dhcdbd</name>
+	<arch>noarch</arch>
+	<version>1579</version>
+	<release>0</release>
+	<requires>
+		<dep kind="atom" name="dhcdbd" epoch="0" version="1.12" release="19.3" op="EQ"/>
+	</requires>
+</patch>
+<atom>
+	<name>dhcdbd</name>
+	<arch>i586</arch>
+	<version>1.12</version>
+	<release>19.3</release>
+	<freshens>
+		<dep kind="package" name="dhcdbd"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="dhcdbd" epoch="0" version="1.12" release="19.3" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>dhcdbd</name>
+	<arch>ppc</arch>
+	<version>1.12</version>
+	<release>19.3</release>
+	<freshens>
+		<dep kind="package" name="dhcdbd"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="dhcdbd" epoch="0" version="1.12" release="19.3" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>dhcdbd</name>
+	<arch>x86_64</arch>
+	<version>1.12</version>
+	<release>19.3</release>
+	<freshens>
+		<dep kind="package" name="dhcdbd"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="dhcdbd" epoch="0" version="1.12" release="19.3" op="GE"/>
+	</requires>
+</atom>
+<package>
+	<name>dhcdbd</name>
+	<summary>Everybody should update</summary>
+	<description> These update fixes the following issues/bugs:  - Send only 
+the most significant hostname, not the entire FQDN,   from 
+/etc/HOSTNAME when DHCLIENT_HOSTNAME_OPTION is enabled   
+(bug #179903)  - Fix 64-bit build (use pkg-config like we 
+should)  - Ask dhclient to set the hostname as required by 
+the sysconfig   option DHCLIENT_HOSTNAME_OPTION (bug 
+#139532) - Fix possible memory corruption 
+</description>
+	<arch>i586</arch>
+	<version>1.12</version>
+	<release>19.3</release>
+	<filesize>60304</filesize>
+	<installedsize>175265</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>1.12</version>
+			<release>19.3</release>
+			<filename>dhcdbd-1.12-19.3.i586.rpm</filename>
+			<filesize>60304</filesize>
+			<installedsize>175265</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="dhcdbd" op="EQ" version="1.12" release="19.3"/>
+		</provides>
+		<requires>
+			<dep name="dhcp-client" op="GE" version="3.0.3"/>
+			<dep name="dbus-1" op="GE" version="0.60"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1)"/>
+			<dep name="libc.so.6(GLIBC_2.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)"/>
+			<dep name="libc.so.6(GLIBC_2.4)"/>
+			<dep name="libdbus-1.so.2"/>
+			<dep name="libglib-2.0.so.0"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>dhcdbd</name>
+	<summary>Everybody should update</summary>
+	<description> These update fixes the following issues/bugs:  - Send only 
+the most significant hostname, not the entire FQDN,   from 
+/etc/HOSTNAME when DHCLIENT_HOSTNAME_OPTION is enabled   
+(bug #179903)  - Fix 64-bit build (use pkg-config like we 
+should)  - Ask dhclient to set the hostname as required by 
+the sysconfig   option DHCLIENT_HOSTNAME_OPTION (bug 
+#139532) - Fix possible memory corruption 
+</description>
+	<arch>ppc</arch>
+	<version>1.12</version>
+	<release>19.3</release>
+	<filesize>64889</filesize>
+	<installedsize>184945</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>1.12</version>
+			<release>19.3</release>
+			<filename>dhcdbd-1.12-19.3.ppc.rpm</filename>
+			<filesize>64889</filesize>
+			<installedsize>184945</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="dhcdbd" op="EQ" version="1.12" release="19.3"/>
+		</provides>
+		<requires>
+			<dep name="dhcp-client" op="GE" version="3.0.3"/>
+			<dep name="dbus-1" op="GE" version="0.60"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1)"/>
+			<dep name="libc.so.6(GLIBC_2.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)"/>
+			<dep name="libc.so.6(GLIBC_2.4)"/>
+			<dep name="libdbus-1.so.2"/>
+			<dep name="libglib-2.0.so.0"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>dhcdbd</name>
+	<summary>Everybody should update</summary>
+	<description> These update fixes the following issues/bugs:  - Send only 
+the most significant hostname, not the entire FQDN,   from 
+/etc/HOSTNAME when DHCLIENT_HOSTNAME_OPTION is enabled   
+(bug #179903)  - Fix 64-bit build (use pkg-config like we 
+should)  - Ask dhclient to set the hostname as required by 
+the sysconfig   option DHCLIENT_HOSTNAME_OPTION (bug 
+#139532) - Fix possible memory corruption 
+</description>
+	<arch>x86_64</arch>
+	<version>1.12</version>
+	<release>19.3</release>
+	<filesize>65957</filesize>
+	<installedsize>198761</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>1.12</version>
+			<release>19.3</release>
+			<filename>dhcdbd-1.12-19.3.x86_64.rpm</filename>
+			<filesize>65957</filesize>
+			<installedsize>198761</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="dhcdbd" op="EQ" version="1.12" release="19.3"/>
+		</provides>
+		<requires>
+			<dep name="dhcp-client" op="GE" version="3.0.3"/>
+			<dep name="dbus-1" op="GE" version="0.60"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="libc.so.6()(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.3)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.4)(64bit)"/>
+			<dep name="libdbus-1.so.2()(64bit)"/>
+			<dep name="libglib-2.0.so.0()(64bit)"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+</subchannel></channel>

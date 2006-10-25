@@ -1,0 +1,171 @@
+<channel><subchannel>                                                  
+
+<patch>
+	<name>foomatic-filters</name>
+	<arch>noarch</arch>
+	<version>1436</version>
+	<release>0</release>
+	<requires>
+		<dep kind="atom" name="foomatic-filters" epoch="0" version="3.0.2" release="20.3" op="EQ"/>
+	</requires>
+</patch>
+<atom>
+	<name>foomatic-filters</name>
+	<arch>i586</arch>
+	<version>3.0.2</version>
+	<release>20.3</release>
+	<freshens>
+		<dep kind="package" name="foomatic-filters"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="foomatic-filters" epoch="0" version="3.0.2" release="20.3" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>foomatic-filters</name>
+	<arch>ppc</arch>
+	<version>3.0.2</version>
+	<release>20.3</release>
+	<freshens>
+		<dep kind="package" name="foomatic-filters"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="foomatic-filters" epoch="0" version="3.0.2" release="20.3" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>foomatic-filters</name>
+	<arch>x86_64</arch>
+	<version>3.0.2</version>
+	<release>20.3</release>
+	<freshens>
+		<dep kind="package" name="foomatic-filters"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="foomatic-filters" epoch="0" version="3.0.2" release="20.3" op="GE"/>
+	</requires>
+</atom>
+<package>
+	<name>foomatic-filters</name>
+	<summary>Command injection into foomatic-filters.</summary>
+	<description>A Bug in cupsomatic/foomatic-filters that allowed remote 
+printer users to execute arbitrary commands as the uid of 
+the printer daemon has been fixed (CAN-2004-0801). While 
+the same problem was fixed in earlier products, the fix got 
+lost during package upgrade of foomatic-filters.
+</description>
+	<arch>i586</arch>
+	<version>3.0.2</version>
+	<release>20.3</release>
+	<filesize>97331</filesize>
+	<installedsize>383347</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>3.0.2</version>
+			<release>20.3</release>
+			<filename>foomatic-filters-3.0.2-20.3.i586.rpm</filename>
+			<filesize>97331</filesize>
+			<installedsize>383347</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="foomatic-filters" op="EQ" version="3.0.2" release="20.3"/>
+		</provides>
+		<requires>
+			<dep name="perl"/>
+			<dep name="a2ps"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/usr/bin/perl"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>foomatic-filters</name>
+	<summary>Command injection into foomatic-filters.</summary>
+	<description>A Bug in cupsomatic/foomatic-filters that allowed remote 
+printer users to execute arbitrary commands as the uid of 
+the printer daemon has been fixed (CAN-2004-0801). While 
+the same problem was fixed in earlier products, the fix got 
+lost during package upgrade of foomatic-filters.
+</description>
+	<arch>ppc</arch>
+	<version>3.0.2</version>
+	<release>20.3</release>
+	<filesize>97148</filesize>
+	<installedsize>383347</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>3.0.2</version>
+			<release>20.3</release>
+			<filename>foomatic-filters-3.0.2-20.3.ppc.rpm</filename>
+			<filesize>97148</filesize>
+			<installedsize>383347</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="foomatic-filters" op="EQ" version="3.0.2" release="20.3"/>
+		</provides>
+		<requires>
+			<dep name="perl"/>
+			<dep name="a2ps"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/usr/bin/perl"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>foomatic-filters</name>
+	<summary>Command injection into foomatic-filters.</summary>
+	<description>A Bug in cupsomatic/foomatic-filters that allowed remote 
+printer users to execute arbitrary commands as the uid of 
+the printer daemon has been fixed (CAN-2004-0801). While 
+the same problem was fixed in earlier products, the fix got 
+lost during package upgrade of foomatic-filters.
+</description>
+	<arch>x86_64</arch>
+	<version>3.0.2</version>
+	<release>20.3</release>
+	<filesize>97153</filesize>
+	<installedsize>383347</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>3.0.2</version>
+			<release>20.3</release>
+			<filename>foomatic-filters-3.0.2-20.3.x86_64.rpm</filename>
+			<filesize>97153</filesize>
+			<installedsize>383347</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="foomatic-filters" op="EQ" version="3.0.2" release="20.3"/>
+		</provides>
+		<requires>
+			<dep name="perl"/>
+			<dep name="a2ps"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/usr/bin/perl"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+</subchannel></channel>

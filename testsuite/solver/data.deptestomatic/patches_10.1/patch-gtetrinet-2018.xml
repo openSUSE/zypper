@@ -1,0 +1,300 @@
+<channel><subchannel>                                                  
+
+<patch>
+	<name>gtetrinet</name>
+	<arch>noarch</arch>
+	<version>2018</version>
+	<release>0</release>
+	<requires>
+		<dep kind="atom" name="gtetrinet" epoch="0" version="0.7.9" release="16.2" op="EQ"/>
+	</requires>
+</patch>
+<atom>
+	<name>gtetrinet</name>
+	<arch>i586</arch>
+	<version>0.7.9</version>
+	<release>16.2</release>
+	<freshens>
+		<dep kind="package" name="gtetrinet"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="gtetrinet" epoch="0" version="0.7.9" release="16.2" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>gtetrinet</name>
+	<arch>ppc</arch>
+	<version>0.7.9</version>
+	<release>16.2</release>
+	<freshens>
+		<dep kind="package" name="gtetrinet"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="gtetrinet" epoch="0" version="0.7.9" release="16.2" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>gtetrinet</name>
+	<arch>x86_64</arch>
+	<version>0.7.9</version>
+	<release>16.2</release>
+	<freshens>
+		<dep kind="package" name="gtetrinet"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="gtetrinet" epoch="0" version="0.7.9" release="16.2" op="GE"/>
+	</requires>
+</atom>
+<package>
+	<name>gtetrinet</name>
+	<summary>gtetrinet: Fixed buffer overflow potential by to malicious remote servers</summary>
+	<description>Malicious tetrinet servers could overflow a buffer within
+the gtetrinet client, making it possible to execute code.
+CVE-2006-3125
+</description>
+	<arch>i586</arch>
+	<version>0.7.9</version>
+	<release>16.2</release>
+	<filesize>307288</filesize>
+	<installedsize>970254</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>0.7.9</version>
+			<release>16.2</release>
+			<filename>gtetrinet-0.7.9-16.2.i586.rpm</filename>
+			<filesize>307288</filesize>
+			<installedsize>970254</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="gtetrinet" op="EQ" version="0.7.9" release="16.2"/>
+		</provides>
+		<requires>
+			<dep name="filesystem" pre="1"/>
+			<dep name="gconf2" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="libICE.so.6"/>
+			<dep name="libORBit-2.so.0"/>
+			<dep name="libSM.so.6"/>
+			<dep name="libX11.so.6"/>
+			<dep name="libXext.so.6"/>
+			<dep name="libXrender.so.1"/>
+			<dep name="libart_lgpl_2.so.2"/>
+			<dep name="libatk-1.0.so.0"/>
+			<dep name="libbonobo-2.so.0"/>
+			<dep name="libbonobo-activation.so.4"/>
+			<dep name="libbonoboui-2.so.0"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.2)"/>
+			<dep name="libc.so.6(GLIBC_2.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)"/>
+			<dep name="libcairo.so.2"/>
+			<dep name="libdl.so.2"/>
+			<dep name="libesd.so.0"/>
+			<dep name="libfontconfig.so.1"/>
+			<dep name="libfreetype.so.6"/>
+			<dep name="libgconf-2.so.4"/>
+			<dep name="libgdk-x11-2.0.so.0"/>
+			<dep name="libgdk_pixbuf-2.0.so.0"/>
+			<dep name="libglib-2.0.so.0"/>
+			<dep name="libglitz.so.1"/>
+			<dep name="libgmodule-2.0.so.0"/>
+			<dep name="libgnome-2.so.0"/>
+			<dep name="libgnome-keyring.so.0"/>
+			<dep name="libgnomecanvas-2.so.0"/>
+			<dep name="libgnomeui-2.so.0"/>
+			<dep name="libgnomevfs-2.so.0"/>
+			<dep name="libgobject-2.0.so.0"/>
+			<dep name="libgthread-2.0.so.0"/>
+			<dep name="libgtk-x11-2.0.so.0"/>
+			<dep name="libm.so.6"/>
+			<dep name="libpango-1.0.so.0"/>
+			<dep name="libpangocairo-1.0.so.0"/>
+			<dep name="libpangoft2-1.0.so.0"/>
+			<dep name="libpng12.so.0"/>
+			<dep name="libpopt.so.0"/>
+			<dep name="libpthread.so.0"/>
+			<dep name="libpthread.so.0(GLIBC_2.0)"/>
+			<dep name="libxml2.so.2"/>
+			<dep name="libz.so.1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>gtetrinet</name>
+	<summary>gtetrinet: Fixed buffer overflow potential by to malicious remote servers</summary>
+	<description>Malicious tetrinet servers could overflow a buffer within
+the gtetrinet client, making it possible to execute code.
+CVE-2006-3125
+</description>
+	<arch>ppc</arch>
+	<version>0.7.9</version>
+	<release>16.2</release>
+	<filesize>315145</filesize>
+	<installedsize>978270</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>0.7.9</version>
+			<release>16.2</release>
+			<filename>gtetrinet-0.7.9-16.2.ppc.rpm</filename>
+			<filesize>315145</filesize>
+			<installedsize>978270</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="gtetrinet" op="EQ" version="0.7.9" release="16.2"/>
+		</provides>
+		<requires>
+			<dep name="filesystem" pre="1"/>
+			<dep name="gconf2" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="libICE.so.6"/>
+			<dep name="libORBit-2.so.0"/>
+			<dep name="libSM.so.6"/>
+			<dep name="libX11.so.6"/>
+			<dep name="libXext.so.6"/>
+			<dep name="libXrender.so.1"/>
+			<dep name="libart_lgpl_2.so.2"/>
+			<dep name="libatk-1.0.so.0"/>
+			<dep name="libbonobo-2.so.0"/>
+			<dep name="libbonobo-activation.so.4"/>
+			<dep name="libbonoboui-2.so.0"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.2)"/>
+			<dep name="libc.so.6(GLIBC_2.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)"/>
+			<dep name="libc.so.6(GLIBC_2.4)"/>
+			<dep name="libcairo.so.2"/>
+			<dep name="libdl.so.2"/>
+			<dep name="libesd.so.0"/>
+			<dep name="libfontconfig.so.1"/>
+			<dep name="libfreetype.so.6"/>
+			<dep name="libgconf-2.so.4"/>
+			<dep name="libgdk-x11-2.0.so.0"/>
+			<dep name="libgdk_pixbuf-2.0.so.0"/>
+			<dep name="libglib-2.0.so.0"/>
+			<dep name="libglitz.so.1"/>
+			<dep name="libgmodule-2.0.so.0"/>
+			<dep name="libgnome-2.so.0"/>
+			<dep name="libgnome-keyring.so.0"/>
+			<dep name="libgnomecanvas-2.so.0"/>
+			<dep name="libgnomeui-2.so.0"/>
+			<dep name="libgnomevfs-2.so.0"/>
+			<dep name="libgobject-2.0.so.0"/>
+			<dep name="libgthread-2.0.so.0"/>
+			<dep name="libgtk-x11-2.0.so.0"/>
+			<dep name="libm.so.6"/>
+			<dep name="libpango-1.0.so.0"/>
+			<dep name="libpangocairo-1.0.so.0"/>
+			<dep name="libpangoft2-1.0.so.0"/>
+			<dep name="libpng12.so.0"/>
+			<dep name="libpopt.so.0"/>
+			<dep name="libpthread.so.0"/>
+			<dep name="libpthread.so.0(GLIBC_2.0)"/>
+			<dep name="libxml2.so.2"/>
+			<dep name="libz.so.1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>gtetrinet</name>
+	<summary>gtetrinet: Fixed buffer overflow potential by to malicious remote servers</summary>
+	<description>Malicious tetrinet servers could overflow a buffer within
+the gtetrinet client, making it possible to execute code.
+CVE-2006-3125
+</description>
+	<arch>x86_64</arch>
+	<version>0.7.9</version>
+	<release>16.2</release>
+	<filesize>314986</filesize>
+	<installedsize>987934</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>0.7.9</version>
+			<release>16.2</release>
+			<filename>gtetrinet-0.7.9-16.2.x86_64.rpm</filename>
+			<filesize>314986</filesize>
+			<installedsize>987934</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="gtetrinet" op="EQ" version="0.7.9" release="16.2"/>
+		</provides>
+		<requires>
+			<dep name="filesystem" pre="1"/>
+			<dep name="gconf2" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="libICE.so.6()(64bit)"/>
+			<dep name="libORBit-2.so.0()(64bit)"/>
+			<dep name="libSM.so.6()(64bit)"/>
+			<dep name="libX11.so.6()(64bit)"/>
+			<dep name="libXext.so.6()(64bit)"/>
+			<dep name="libXrender.so.1()(64bit)"/>
+			<dep name="libart_lgpl_2.so.2()(64bit)"/>
+			<dep name="libatk-1.0.so.0()(64bit)"/>
+			<dep name="libbonobo-2.so.0()(64bit)"/>
+			<dep name="libbonobo-activation.so.4()(64bit)"/>
+			<dep name="libbonoboui-2.so.0()(64bit)"/>
+			<dep name="libc.so.6()(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.3)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)(64bit)"/>
+			<dep name="libcairo.so.2()(64bit)"/>
+			<dep name="libdl.so.2()(64bit)"/>
+			<dep name="libesd.so.0()(64bit)"/>
+			<dep name="libfontconfig.so.1()(64bit)"/>
+			<dep name="libfreetype.so.6()(64bit)"/>
+			<dep name="libgconf-2.so.4()(64bit)"/>
+			<dep name="libgdk-x11-2.0.so.0()(64bit)"/>
+			<dep name="libgdk_pixbuf-2.0.so.0()(64bit)"/>
+			<dep name="libglib-2.0.so.0()(64bit)"/>
+			<dep name="libglitz.so.1()(64bit)"/>
+			<dep name="libgmodule-2.0.so.0()(64bit)"/>
+			<dep name="libgnome-2.so.0()(64bit)"/>
+			<dep name="libgnome-keyring.so.0()(64bit)"/>
+			<dep name="libgnomecanvas-2.so.0()(64bit)"/>
+			<dep name="libgnomeui-2.so.0()(64bit)"/>
+			<dep name="libgnomevfs-2.so.0()(64bit)"/>
+			<dep name="libgobject-2.0.so.0()(64bit)"/>
+			<dep name="libgthread-2.0.so.0()(64bit)"/>
+			<dep name="libgtk-x11-2.0.so.0()(64bit)"/>
+			<dep name="libm.so.6()(64bit)"/>
+			<dep name="libpango-1.0.so.0()(64bit)"/>
+			<dep name="libpangocairo-1.0.so.0()(64bit)"/>
+			<dep name="libpangoft2-1.0.so.0()(64bit)"/>
+			<dep name="libpng12.so.0()(64bit)"/>
+			<dep name="libpopt.so.0()(64bit)"/>
+			<dep name="libpthread.so.0()(64bit)"/>
+			<dep name="libpthread.so.0(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libxml2.so.2()(64bit)"/>
+			<dep name="libz.so.1()(64bit)"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+</subchannel></channel>

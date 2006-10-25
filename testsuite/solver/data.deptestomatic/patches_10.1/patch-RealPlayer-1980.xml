@@ -1,0 +1,599 @@
+<channel><subchannel>                                                  
+
+<patch>
+	<name>RealPlayer</name>
+	<arch>noarch</arch>
+	<version>1980</version>
+	<release>0</release>
+	<requires>
+		<dep kind="atom" name="RealPlayer" epoch="0" version="10.0.8" release="0.2" op="EQ"/>
+	</requires>
+</patch>
+<atom>
+	<name>RealPlayer</name>
+	<arch>i586</arch>
+	<version>10.0.8</version>
+	<release>0.2</release>
+	<freshens>
+		<dep kind="package" name="RealPlayer"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="RealPlayer" epoch="0" version="10.0.8" release="0.2" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>RealPlayer</name>
+	<arch>ppc</arch>
+	<version>10.0.5</version>
+	<release>13.3</release>
+	<freshens>
+		<dep kind="package" name="RealPlayer"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="RealPlayer" epoch="0" version="10.0.5" release="13.3" op="GE"/>
+	</requires>
+</atom>
+<package>
+	<name>RealPlayer</name>
+	<summary>This update fixes some embedded player crashes and some other crashes</summary>
+	<description>This update fixes embedded player with latest Firefox /
+Gecko 1.8, auto-update triggered from the embedded player
+playing URLS with RPURL parameter inside the embedded
+player and AIFF playback crash.
+</description>
+	<arch>i586</arch>
+	<version>10.0.8</version>
+	<release>0.2</release>
+	<filesize>5397838</filesize>
+	<installedsize>14783321</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>10.0.8</version>
+			<release>0.2</release>
+			<filename>RealPlayer-10.0.8-0.2.i586.rpm</filename>
+			<filesize>5397838</filesize>
+			<installedsize>14783321</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="rvplayer"/>
+			<dep name="aacff.so"/>
+			<dep name="aacff.so(G2)"/>
+			<dep name="aacff.so(aacff.so)"/>
+			<dep name="amrff.so"/>
+			<dep name="amrff.so(G2)"/>
+			<dep name="amrff.so(amrff.so)"/>
+			<dep name="amrn.so"/>
+			<dep name="amrn.so(G2)"/>
+			<dep name="amrn.so(amrn.so)"/>
+			<dep name="amrw.so"/>
+			<dep name="amrw.so(G2)"/>
+			<dep name="amrw.so(amrw.so)"/>
+			<dep name="atrc.so"/>
+			<dep name="atrc.so(G2)"/>
+			<dep name="atrc.so(atrc.so)"/>
+			<dep name="audplin.so"/>
+			<dep name="audplin.so(G2)"/>
+			<dep name="audplin.so(audplin.so)"/>
+			<dep name="aufformat.so"/>
+			<dep name="aufformat.so(G2)"/>
+			<dep name="aufformat.so(aufformat.so)"/>
+			<dep name="authmgr.so"/>
+			<dep name="authmgr.so(G2)"/>
+			<dep name="authmgr.so(authmgr.so)"/>
+			<dep name="clbascauth.so"/>
+			<dep name="clbascauth.so(G2)"/>
+			<dep name="clbascauth.so(clbascauth.so)"/>
+			<dep name="clntcore.so"/>
+			<dep name="clntcore.so(G2)"/>
+			<dep name="clntcore.so(clntcore.so)"/>
+			<dep name="clntxres.so"/>
+			<dep name="clntxres.so(G2)"/>
+			<dep name="clntxres.so(clntxres.so)"/>
+			<dep name="colorcvt.so"/>
+			<dep name="colorcvt.so(G2)"/>
+			<dep name="colorcvt.so(colorcvt.so)"/>
+			<dep name="cook.so"/>
+			<dep name="cook.so(G2)"/>
+			<dep name="cook.so(cook.so)"/>
+			<dep name="cvt1.so"/>
+			<dep name="cvt1.so(G2)"/>
+			<dep name="cvt1.so(cvt1.so)"/>
+			<dep name="drv1.so"/>
+			<dep name="drv1.so(G2)"/>
+			<dep name="drv1.so(drv1.so)"/>
+			<dep name="drv2.so"/>
+			<dep name="drv2.so(G2)"/>
+			<dep name="drv2.so(drv2.so)"/>
+			<dep name="drvc.so"/>
+			<dep name="drvc.so(G2)"/>
+			<dep name="drvc.so(drvc.so)"/>
+			<dep name="giffformat.so"/>
+			<dep name="giffformat.so(G2)"/>
+			<dep name="giffformat.so(giffformat.so)"/>
+			<dep name="gifrender.so"/>
+			<dep name="gifrender.so(G2)"/>
+			<dep name="gifrender.so(gifrender.so)"/>
+			<dep name="h263render.so"/>
+			<dep name="h263render.so(G2)"/>
+			<dep name="h263render.so(h263render.so)"/>
+			<dep name="httpfsys.so"/>
+			<dep name="httpfsys.so(G2)"/>
+			<dep name="httpfsys.so(httpfsys.so)"/>
+			<dep name="hxsdp.so"/>
+			<dep name="hxsdp.so(G2)"/>
+			<dep name="hxsdp.so(hxsdp.so)"/>
+			<dep name="hxxml.so"/>
+			<dep name="hxxml.so(G2)"/>
+			<dep name="hxxml.so(hxxml.so)"/>
+			<dep name="jpgfformat.so"/>
+			<dep name="jpgfformat.so(G2)"/>
+			<dep name="jpgfformat.so(jpgfformat.so)"/>
+			<dep name="jpgrender.so"/>
+			<dep name="jpgrender.so(G2)"/>
+			<dep name="jpgrender.so(jpgrender.so)"/>
+			<dep name="memfsys.so"/>
+			<dep name="memfsys.so(G2)"/>
+			<dep name="memfsys.so(memfsys.so)"/>
+			<dep name="mp3fformat.so"/>
+			<dep name="mp3fformat.so(G2)"/>
+			<dep name="mp3fformat.so(mp3fformat.so)"/>
+			<dep name="mp3metaff.so"/>
+			<dep name="mp3metaff.so(G2)"/>
+			<dep name="mp3metaff.so(mp3metaff.so)"/>
+			<dep name="mp3render.so"/>
+			<dep name="mp3render.so(G2)"/>
+			<dep name="mp3render.so(mp3render.so)"/>
+			<dep name="mp4arender.so"/>
+			<dep name="mp4arender.so(G2)"/>
+			<dep name="mp4arender.so(mp4arender.so)"/>
+			<dep name="mp4fformat.so"/>
+			<dep name="mp4fformat.so(G2)"/>
+			<dep name="mp4fformat.so(mp4fformat.so)"/>
+			<dep name="nphelix.so"/>
+			<dep name="nphelix.so(G2)"/>
+			<dep name="nphelix.so(nphelix.so)"/>
+			<dep name="oggfformat.so"/>
+			<dep name="oggfformat.so(G2)"/>
+			<dep name="oggfformat.so(oggfformat.so)"/>
+			<dep name="pcmrend.so"/>
+			<dep name="pcmrend.so(G2)"/>
+			<dep name="pcmrend.so(pcmrend.so)"/>
+			<dep name="pngfformat.so"/>
+			<dep name="pngfformat.so(G2)"/>
+			<dep name="pngfformat.so(pngfformat.so)"/>
+			<dep name="pngrender.so"/>
+			<dep name="pngrender.so(G2)"/>
+			<dep name="pngrender.so(pngrender.so)"/>
+			<dep name="raac.so"/>
+			<dep name="raac.so(G2)"/>
+			<dep name="raac.so(raac.so)"/>
+			<dep name="ramfformat.so"/>
+			<dep name="ramfformat.so(G2)"/>
+			<dep name="ramfformat.so(ramfformat.so)"/>
+			<dep name="ramrender.so"/>
+			<dep name="ramrender.so(G2)"/>
+			<dep name="ramrender.so(ramrender.so)"/>
+			<dep name="rarender.so"/>
+			<dep name="rarender.so(G2)"/>
+			<dep name="rarender.so(rarender.so)"/>
+			<dep name="rmfformat.so"/>
+			<dep name="rmfformat.so(G2)"/>
+			<dep name="rmfformat.so(rmfformat.so)"/>
+			<dep name="rn5auth.so"/>
+			<dep name="rn5auth.so(G2)"/>
+			<dep name="rn5auth.so(rn5auth.so)"/>
+			<dep name="rpfformat.so"/>
+			<dep name="rpfformat.so(G2)"/>
+			<dep name="rpfformat.so(rpfformat.so)"/>
+			<dep name="rpgifplin.so"/>
+			<dep name="rpgifplin.so(G2)"/>
+			<dep name="rpgifplin.so(rpgifplin.so)"/>
+			<dep name="rpjpgplin.so"/>
+			<dep name="rpjpgplin.so(G2)"/>
+			<dep name="rpjpgplin.so(rpjpgplin.so)"/>
+			<dep name="rppngplin.so"/>
+			<dep name="rppngplin.so(G2)"/>
+			<dep name="rppngplin.so(rppngplin.so)"/>
+			<dep name="rprender.so"/>
+			<dep name="rprender.so(G2)"/>
+			<dep name="rprender.so(rprender.so)"/>
+			<dep name="rtfformat.so"/>
+			<dep name="rtfformat.so(G2)"/>
+			<dep name="rtfformat.so(rtfformat.so)"/>
+			<dep name="rtrender.so"/>
+			<dep name="rtrender.so(G2)"/>
+			<dep name="rtrender.so(rtrender.so)"/>
+			<dep name="rv10.so"/>
+			<dep name="rv10.so(G2)"/>
+			<dep name="rv10.so(rv10.so)"/>
+			<dep name="rv20.so"/>
+			<dep name="rv20.so(G2)"/>
+			<dep name="rv20.so(rv20.so)"/>
+			<dep name="rv30.so"/>
+			<dep name="rv30.so(G2)"/>
+			<dep name="rv30.so(rv30.so)"/>
+			<dep name="rv40.so"/>
+			<dep name="rv40.so(G2)"/>
+			<dep name="rv40.so(rv40.so)"/>
+			<dep name="rvxrender.so"/>
+			<dep name="rvxrender.so(G2)"/>
+			<dep name="rvxrender.so(rvxrender.so)"/>
+			<dep name="sdpplin.so"/>
+			<dep name="sdpplin.so(G2)"/>
+			<dep name="sdpplin.so(sdpplin.so)"/>
+			<dep name="sipr.so"/>
+			<dep name="sipr.so(G2)"/>
+			<dep name="sipr.so(sipr.so)"/>
+			<dep name="smlfformat.so"/>
+			<dep name="smlfformat.so(G2)"/>
+			<dep name="smlfformat.so(smlfformat.so)"/>
+			<dep name="smlrender.so"/>
+			<dep name="smlrender.so(G2)"/>
+			<dep name="smlrender.so(smlrender.so)"/>
+			<dep name="smmrender.so"/>
+			<dep name="smmrender.so(G2)"/>
+			<dep name="smmrender.so(smmrender.so)"/>
+			<dep name="smplfsys.so"/>
+			<dep name="smplfsys.so(G2)"/>
+			<dep name="smplfsys.so(smplfsys.so)"/>
+			<dep name="swfformat.so"/>
+			<dep name="swfformat.so(G2)"/>
+			<dep name="swfformat.so(swfformat.so)"/>
+			<dep name="swfrender.so"/>
+			<dep name="swfrender.so(G2)"/>
+			<dep name="swfrender.so(swfrender.so)"/>
+			<dep name="theorarend.so"/>
+			<dep name="theorarend.so(G2)"/>
+			<dep name="theorarend.so(theorarend.so)"/>
+			<dep name="vidsite.so"/>
+			<dep name="vidsite.so(G2)"/>
+			<dep name="vidsite.so(vidsite.so)"/>
+			<dep name="vorbisrend.so"/>
+			<dep name="vorbisrend.so(G2)"/>
+			<dep name="vorbisrend.so(vorbisrend.so)"/>
+			<dep name="vsrcplin.so"/>
+			<dep name="vsrcplin.so(G2)"/>
+			<dep name="vsrcplin.so(vsrcplin.so)"/>
+			<dep name="vsrlocal.so"/>
+			<dep name="vsrlocal.so(G2)"/>
+			<dep name="vsrlocal.so(vsrlocal.so)"/>
+			<dep name="wbmpfformat.so"/>
+			<dep name="wbmpfformat.so(G2)"/>
+			<dep name="wbmpfformat.so(wbmpfformat.so)"/>
+			<dep name="wbmprend.so"/>
+			<dep name="wbmprend.so(G2)"/>
+			<dep name="wbmprend.so(wbmprend.so)"/>
+			<dep name="RealPlayer" op="EQ" version="10.0.8" release="0.2"/>
+		</provides>
+		<requires>
+			<dep name="filesystem" pre="1"/>
+			<dep name="/bin/rm" pre="1"/>
+			<dep name="/bin/rmdir" pre="1"/>
+			<dep name="gnome-icon-theme"/>
+			<dep name="gtk2"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/bin/bash"/>
+			<dep name="/bin/sh"/>
+			<dep name="libX11.so.6"/>
+			<dep name="libXext.so.6"/>
+			<dep name="libatk-1.0.so.0"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libc.so.6(GLIBC_2.2)"/>
+			<dep name="libc.so.6(GLIBC_2.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3.2)"/>
+			<dep name="libdl.so.2"/>
+			<dep name="libdl.so.2(GLIBC_2.0)"/>
+			<dep name="libdl.so.2(GLIBC_2.1)"/>
+			<dep name="libgcc_s.so.1"/>
+			<dep name="libgcc_s.so.1(GCC_3.0)"/>
+			<dep name="libgcc_s.so.1(GLIBC_2.0)"/>
+			<dep name="libgdk-x11-2.0.so.0"/>
+			<dep name="libgdk_pixbuf-2.0.so.0"/>
+			<dep name="libglib-2.0.so.0"/>
+			<dep name="libgmodule-2.0.so.0"/>
+			<dep name="libgobject-2.0.so.0"/>
+			<dep name="libgtk-x11-2.0.so.0"/>
+			<dep name="libm.so.6"/>
+			<dep name="libm.so.6(GLIBC_2.0)"/>
+			<dep name="libpango-1.0.so.0"/>
+			<dep name="libpangox-1.0.so.0"/>
+			<dep name="libpangoxft-1.0.so.0"/>
+			<dep name="libpthread.so.0"/>
+			<dep name="libpthread.so.0(GLIBC_2.0)"/>
+			<dep name="libpthread.so.0(GLIBC_2.1)"/>
+			<dep name="libpthread.so.0(GLIBC_2.3.2)"/>
+			<dep name="libstdc++.so.5"/>
+			<dep name="libstdc++.so.5(CXXABI_1.2)"/>
+			<dep name="libstdc++.so.5(GLIBCPP_3.2)"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>RealPlayer</name>
+	<summary>This update fixes some embedded player crashes and some other crashes</summary>
+	<description>This update fixes embedded player with latest Firefox /
+Gecko 1.8, auto-update triggered from the embedded player
+playing URLS with RPURL parameter inside the embedded
+player and AIFF playback crash.
+</description>
+	<arch>ppc</arch>
+	<version>10.0.5</version>
+	<release>13.3</release>
+	<filesize>4677749</filesize>
+	<installedsize>15060293</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>10.0.5</version>
+			<release>13.3</release>
+			<filename>RealPlayer-10.0.5-13.3.ppc.rpm</filename>
+			<filesize>4677749</filesize>
+			<installedsize>15060293</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="rvplayer"/>
+			<dep name="amrff.so"/>
+			<dep name="amrff.so(G2)"/>
+			<dep name="amrff.so(amrff.so)"/>
+			<dep name="amrn.so"/>
+			<dep name="amrn.so(G2)"/>
+			<dep name="amrn.so(amrn.so)"/>
+			<dep name="amrw.so"/>
+			<dep name="amrw.so(G2)"/>
+			<dep name="amrw.so(amrw.so)"/>
+			<dep name="atrc.so"/>
+			<dep name="atrc.so(G2)"/>
+			<dep name="atrc.so(atrc.so)"/>
+			<dep name="audplin.so"/>
+			<dep name="audplin.so(G2)"/>
+			<dep name="audplin.so(audplin.so)"/>
+			<dep name="aufformat.so"/>
+			<dep name="aufformat.so(G2)"/>
+			<dep name="aufformat.so(aufformat.so)"/>
+			<dep name="authmgr.so"/>
+			<dep name="authmgr.so(G2)"/>
+			<dep name="authmgr.so(authmgr.so)"/>
+			<dep name="clbascauth.so"/>
+			<dep name="clbascauth.so(G2)"/>
+			<dep name="clbascauth.so(clbascauth.so)"/>
+			<dep name="clntcore.so"/>
+			<dep name="clntcore.so(G2)"/>
+			<dep name="clntcore.so(clntcore.so)"/>
+			<dep name="clntxres.so"/>
+			<dep name="clntxres.so(G2)"/>
+			<dep name="clntxres.so(clntxres.so)"/>
+			<dep name="colorcvt.so"/>
+			<dep name="colorcvt.so(G2)"/>
+			<dep name="colorcvt.so(colorcvt.so)"/>
+			<dep name="cook.so"/>
+			<dep name="cook.so(G2)"/>
+			<dep name="cook.so(cook.so)"/>
+			<dep name="cvt1.so"/>
+			<dep name="cvt1.so(G2)"/>
+			<dep name="cvt1.so(cvt1.so)"/>
+			<dep name="drv1.so"/>
+			<dep name="drv1.so(G2)"/>
+			<dep name="drv1.so(drv1.so)"/>
+			<dep name="drv2.so"/>
+			<dep name="drv2.so(G2)"/>
+			<dep name="drv2.so(drv2.so)"/>
+			<dep name="drvc.so"/>
+			<dep name="drvc.so(G2)"/>
+			<dep name="drvc.so(drvc.so)"/>
+			<dep name="giffformat.so"/>
+			<dep name="giffformat.so(G2)"/>
+			<dep name="giffformat.so(giffformat.so)"/>
+			<dep name="gifrender.so"/>
+			<dep name="gifrender.so(G2)"/>
+			<dep name="gifrender.so(gifrender.so)"/>
+			<dep name="h263render.so"/>
+			<dep name="h263render.so(G2)"/>
+			<dep name="h263render.so(h263render.so)"/>
+			<dep name="httpfsys.so"/>
+			<dep name="httpfsys.so(G2)"/>
+			<dep name="httpfsys.so(httpfsys.so)"/>
+			<dep name="hxsdp.so"/>
+			<dep name="hxsdp.so(G2)"/>
+			<dep name="hxsdp.so(hxsdp.so)"/>
+			<dep name="hxxml.so"/>
+			<dep name="hxxml.so(G2)"/>
+			<dep name="hxxml.so(hxxml.so)"/>
+			<dep name="jpgfformat.so"/>
+			<dep name="jpgfformat.so(G2)"/>
+			<dep name="jpgfformat.so(jpgfformat.so)"/>
+			<dep name="jpgrender.so"/>
+			<dep name="jpgrender.so(G2)"/>
+			<dep name="jpgrender.so(jpgrender.so)"/>
+			<dep name="memfsys.so"/>
+			<dep name="memfsys.so(G2)"/>
+			<dep name="memfsys.so(memfsys.so)"/>
+			<dep name="mp3fformat.so"/>
+			<dep name="mp3fformat.so(G2)"/>
+			<dep name="mp3fformat.so(mp3fformat.so)"/>
+			<dep name="mp3metaff.so"/>
+			<dep name="mp3metaff.so(G2)"/>
+			<dep name="mp3metaff.so(mp3metaff.so)"/>
+			<dep name="mp3render.so"/>
+			<dep name="mp3render.so(G2)"/>
+			<dep name="mp3render.so(mp3render.so)"/>
+			<dep name="mp4arender.so"/>
+			<dep name="mp4arender.so(G2)"/>
+			<dep name="mp4arender.so(mp4arender.so)"/>
+			<dep name="mp4fformat.so"/>
+			<dep name="mp4fformat.so(G2)"/>
+			<dep name="mp4fformat.so(mp4fformat.so)"/>
+			<dep name="nphelix.so"/>
+			<dep name="nphelix.so(G2)"/>
+			<dep name="nphelix.so(nphelix.so)"/>
+			<dep name="oggfformat.so"/>
+			<dep name="oggfformat.so(G2)"/>
+			<dep name="oggfformat.so(oggfformat.so)"/>
+			<dep name="pcmrend.so"/>
+			<dep name="pcmrend.so(G2)"/>
+			<dep name="pcmrend.so(pcmrend.so)"/>
+			<dep name="pngfformat.so"/>
+			<dep name="pngfformat.so(G2)"/>
+			<dep name="pngfformat.so(pngfformat.so)"/>
+			<dep name="pngrender.so"/>
+			<dep name="pngrender.so(G2)"/>
+			<dep name="pngrender.so(pngrender.so)"/>
+			<dep name="ramfformat.so"/>
+			<dep name="ramfformat.so(G2)"/>
+			<dep name="ramfformat.so(ramfformat.so)"/>
+			<dep name="ramrender.so"/>
+			<dep name="ramrender.so(G2)"/>
+			<dep name="ramrender.so(ramrender.so)"/>
+			<dep name="rarender.so"/>
+			<dep name="rarender.so(G2)"/>
+			<dep name="rarender.so(rarender.so)"/>
+			<dep name="rmfformat.so"/>
+			<dep name="rmfformat.so(G2)"/>
+			<dep name="rmfformat.so(rmfformat.so)"/>
+			<dep name="rn5auth.so"/>
+			<dep name="rn5auth.so(G2)"/>
+			<dep name="rn5auth.so(rn5auth.so)"/>
+			<dep name="rpfformat.so"/>
+			<dep name="rpfformat.so(G2)"/>
+			<dep name="rpfformat.so(rpfformat.so)"/>
+			<dep name="rpgifplin.so"/>
+			<dep name="rpgifplin.so(G2)"/>
+			<dep name="rpgifplin.so(rpgifplin.so)"/>
+			<dep name="rpjpgplin.so"/>
+			<dep name="rpjpgplin.so(G2)"/>
+			<dep name="rpjpgplin.so(rpjpgplin.so)"/>
+			<dep name="rppngplin.so"/>
+			<dep name="rppngplin.so(G2)"/>
+			<dep name="rppngplin.so(rppngplin.so)"/>
+			<dep name="rprender.so"/>
+			<dep name="rprender.so(G2)"/>
+			<dep name="rprender.so(rprender.so)"/>
+			<dep name="rtfformat.so"/>
+			<dep name="rtfformat.so(G2)"/>
+			<dep name="rtfformat.so(rtfformat.so)"/>
+			<dep name="rtrender.so"/>
+			<dep name="rtrender.so(G2)"/>
+			<dep name="rtrender.so(rtrender.so)"/>
+			<dep name="rv10.so"/>
+			<dep name="rv10.so(G2)"/>
+			<dep name="rv10.so(rv10.so)"/>
+			<dep name="rv20.so"/>
+			<dep name="rv20.so(G2)"/>
+			<dep name="rv20.so(rv20.so)"/>
+			<dep name="rv30.so"/>
+			<dep name="rv30.so(G2)"/>
+			<dep name="rv30.so(rv30.so)"/>
+			<dep name="rv40.so"/>
+			<dep name="rv40.so(G2)"/>
+			<dep name="rv40.so(rv40.so)"/>
+			<dep name="rvxrender.so"/>
+			<dep name="rvxrender.so(G2)"/>
+			<dep name="rvxrender.so(rvxrender.so)"/>
+			<dep name="sdpplin.so"/>
+			<dep name="sdpplin.so(G2)"/>
+			<dep name="sdpplin.so(sdpplin.so)"/>
+			<dep name="sipr.so"/>
+			<dep name="sipr.so(G2)"/>
+			<dep name="sipr.so(sipr.so)"/>
+			<dep name="smlfformat.so"/>
+			<dep name="smlfformat.so(G2)"/>
+			<dep name="smlfformat.so(smlfformat.so)"/>
+			<dep name="smlrender.so"/>
+			<dep name="smlrender.so(G2)"/>
+			<dep name="smlrender.so(smlrender.so)"/>
+			<dep name="smmrender.so"/>
+			<dep name="smmrender.so(G2)"/>
+			<dep name="smmrender.so(smmrender.so)"/>
+			<dep name="smplfsys.so"/>
+			<dep name="smplfsys.so(G2)"/>
+			<dep name="smplfsys.so(smplfsys.so)"/>
+			<dep name="theorarend.so"/>
+			<dep name="theorarend.so(G2)"/>
+			<dep name="theorarend.so(theorarend.so)"/>
+			<dep name="vidsite.so"/>
+			<dep name="vidsite.so(G2)"/>
+			<dep name="vidsite.so(vidsite.so)"/>
+			<dep name="vorbisrend.so"/>
+			<dep name="vorbisrend.so(G2)"/>
+			<dep name="vorbisrend.so(vorbisrend.so)"/>
+			<dep name="vsrcplin.so"/>
+			<dep name="vsrcplin.so(G2)"/>
+			<dep name="vsrcplin.so(vsrcplin.so)"/>
+			<dep name="vsrlocal.so"/>
+			<dep name="vsrlocal.so(G2)"/>
+			<dep name="vsrlocal.so(vsrlocal.so)"/>
+			<dep name="wbmpfformat.so"/>
+			<dep name="wbmpfformat.so(G2)"/>
+			<dep name="wbmpfformat.so(wbmpfformat.so)"/>
+			<dep name="wbmprend.so"/>
+			<dep name="wbmprend.so(G2)"/>
+			<dep name="wbmprend.so(wbmprend.so)"/>
+			<dep name="RealPlayer" op="EQ" version="10.0.5" release="13.3"/>
+		</provides>
+		<requires>
+			<dep name="/bin/rm" pre="1"/>
+			<dep name="shared-mime-info" pre="1"/>
+			<dep name="gnome-icon-theme"/>
+			<dep name="gtk2"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/bin/bash"/>
+			<dep name="/bin/sh"/>
+			<dep name="libX11.so.6"/>
+			<dep name="libXext.so.6"/>
+			<dep name="libXv.so.1"/>
+			<dep name="libatk-1.0.so.0"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libc.so.6(GLIBC_2.2)"/>
+			<dep name="libc.so.6(GLIBC_2.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3.2)"/>
+			<dep name="libdl.so.2"/>
+			<dep name="libdl.so.2(GLIBC_2.0)"/>
+			<dep name="libdl.so.2(GLIBC_2.1)"/>
+			<dep name="libgdk-x11-2.0.so.0"/>
+			<dep name="libgdk_pixbuf-2.0.so.0"/>
+			<dep name="libglib-2.0.so.0"/>
+			<dep name="libgmodule-2.0.so.0"/>
+			<dep name="libgobject-2.0.so.0"/>
+			<dep name="libgtk-x11-2.0.so.0"/>
+			<dep name="libm.so.6"/>
+			<dep name="libm.so.6(GLIBC_2.0)"/>
+			<dep name="libpango-1.0.so.0"/>
+			<dep name="libpangox-1.0.so.0"/>
+			<dep name="libpangoxft-1.0.so.0"/>
+			<dep name="libpthread.so.0"/>
+			<dep name="libpthread.so.0(GLIBC_2.0)"/>
+			<dep name="libpthread.so.0(GLIBC_2.1)"/>
+			<dep name="libpthread.so.0(GLIBC_2.3.2)"/>
+			<dep name="libstdc++.so.5"/>
+			<dep name="libstdc++.so.5(CXXABI_1.2)"/>
+			<dep name="libstdc++.so.5(GLIBCPP_3.2)"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+</subchannel></channel>

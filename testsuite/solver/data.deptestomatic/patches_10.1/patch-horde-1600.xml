@@ -1,0 +1,76 @@
+<channel><subchannel>                                                  
+
+<patch>
+	<name>horde</name>
+	<arch>noarch</arch>
+	<version>1600</version>
+	<release>0</release>
+	<requires>
+		<dep kind="atom" name="horde" epoch="0" version="3.0.9" release="19.2" op="EQ"/>
+	</requires>
+</patch>
+<atom>
+	<name>horde</name>
+	<arch>noarch</arch>
+	<version>3.0.9</version>
+	<release>19.2</release>
+	<freshens>
+		<dep kind="package" name="horde"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="horde" epoch="0" version="3.0.9" release="19.2" op="GE"/>
+	</requires>
+</atom>
+<package>
+	<name>horde</name>
+	<summary>Cross-Site-Scripting  vulnerability fixed.</summary>
+	<description>This update of horde fixes some cross-site-scripting
+vulnerabilities. (CVE-2005-4190,CVE-2006-2195)
+</description>
+	<arch>noarch</arch>
+	<version>3.0.9</version>
+	<release>19.2</release>
+	<filesize>2146165</filesize>
+	<installedsize>8519834</installedsize>
+	<history>
+		<update>
+			<arch>noarch</arch>
+			<epoch>0</epoch>
+			<version>3.0.9</version>
+			<release>19.2</release>
+			<filename>horde-3.0.9-19.2.noarch.rpm</filename>
+			<filesize>2146165</filesize>
+			<installedsize>8519834</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="horde" op="EQ" version="3.0.9" release="19.2"/>
+		</provides>
+		<requires>
+			<dep name="mod_php_any"/>
+			<dep name="php-gettext"/>
+			<dep name="php-mcrypt"/>
+			<dep name="php-imap"/>
+			<dep name="php-pear"/>
+			<dep name="php-pear-log"/>
+			<dep name="php-session"/>
+			<dep name="php-dom"/>
+			<dep name="php"/>
+			<dep name="php5-pear-auth_sasl"/>
+			<dep name="php5-pear-date"/>
+			<dep name="php5-pear-db"/>
+			<dep name="php5-pear-file"/>
+			<dep name="php5-pear-mail"/>
+			<dep name="php5-pear-mail_mime"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/bin/sh"/>
+			<dep name="/usr/bin/php5"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+</subchannel></channel>

@@ -1,0 +1,241 @@
+<channel><subchannel>                                                  
+
+<patch>
+	<name>cyrus-sasl-saslauthd</name>
+	<arch>noarch</arch>
+	<version>1457</version>
+	<release>0</release>
+	<requires>
+		<dep kind="atom" name="cyrus-sasl-saslauthd" epoch="0" version="2.1.21" release="18.3" op="EQ"/>
+	</requires>
+</patch>
+<atom>
+	<name>cyrus-sasl-saslauthd</name>
+	<arch>i586</arch>
+	<version>2.1.21</version>
+	<release>18.3</release>
+	<freshens>
+		<dep kind="package" name="cyrus-sasl-saslauthd"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="cyrus-sasl-saslauthd" epoch="0" version="2.1.21" release="18.3" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>cyrus-sasl-saslauthd</name>
+	<arch>ppc</arch>
+	<version>2.1.21</version>
+	<release>18.3</release>
+	<freshens>
+		<dep kind="package" name="cyrus-sasl-saslauthd"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="cyrus-sasl-saslauthd" epoch="0" version="2.1.21" release="18.3" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>cyrus-sasl-saslauthd</name>
+	<arch>x86_64</arch>
+	<version>2.1.21</version>
+	<release>18.3</release>
+	<freshens>
+		<dep kind="package" name="cyrus-sasl-saslauthd"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="cyrus-sasl-saslauthd" epoch="0" version="2.1.21" release="18.3" op="GE"/>
+	</requires>
+</atom>
+<package>
+	<name>cyrus-sasl-saslauthd</name>
+	<summary>Bugfix for the cyrus-sasl-saslauthd package</summary>
+	<description>Fixes a bug in the "shadow" authmethod that could cause the 
+saslauthd daemon of cyrus-sasl to crash.
+</description>
+	<arch>i586</arch>
+	<version>2.1.21</version>
+	<release>18.3</release>
+	<filesize>55872</filesize>
+	<installedsize>87200</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>2.1.21</version>
+			<release>18.3</release>
+			<filename>cyrus-sasl-saslauthd-2.1.21-18.3.i586.rpm</filename>
+			<filesize>55872</filesize>
+			<installedsize>87200</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="cyrus-sasl:/usr/sbin/saslauthd"/>
+			<dep name="cyrus-sasl2:/usr/sbin/saslauthd"/>
+			<dep name="cyrus-sasl-saslauthd" op="EQ" version="2.1.21" release="18.3"/>
+		</provides>
+		<requires>
+			<dep name="insserv" pre="1"/>
+			<dep name="sed" pre="1"/>
+			<dep name="fillup" pre="1"/>
+			<dep name="coreutils" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/bin/sh"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)"/>
+			<dep name="libc.so.6(GLIBC_2.4)"/>
+			<dep name="libcom_err.so.2"/>
+			<dep name="libcrypt.so.1"/>
+			<dep name="libcrypt.so.1(GLIBC_2.0)"/>
+			<dep name="libcrypto.so.0.9.8"/>
+			<dep name="libgssapi_krb5.so.2"/>
+			<dep name="libk5crypto.so.3"/>
+			<dep name="libkrb5.so.3"/>
+			<dep name="libkrb5.so.3(krb5_3_MIT)"/>
+			<dep name="liblber-2.3.so.0"/>
+			<dep name="libldap-2.3.so.0"/>
+			<dep name="libpam.so.0"/>
+			<dep name="libpam.so.0(LIBPAM_1.0)"/>
+			<dep name="libresolv.so.2"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>cyrus-sasl-saslauthd</name>
+	<summary>Bugfix for the cyrus-sasl-saslauthd package</summary>
+	<description>Fixes a bug in the "shadow" authmethod that could cause the 
+saslauthd daemon of cyrus-sasl to crash.
+</description>
+	<arch>ppc</arch>
+	<version>2.1.21</version>
+	<release>18.3</release>
+	<filesize>61710</filesize>
+	<installedsize>102480</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>2.1.21</version>
+			<release>18.3</release>
+			<filename>cyrus-sasl-saslauthd-2.1.21-18.3.ppc.rpm</filename>
+			<filesize>61710</filesize>
+			<installedsize>102480</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="cyrus-sasl:/usr/sbin/saslauthd"/>
+			<dep name="cyrus-sasl2:/usr/sbin/saslauthd"/>
+			<dep name="cyrus-sasl-saslauthd" op="EQ" version="2.1.21" release="18.3"/>
+		</provides>
+		<requires>
+			<dep name="insserv" pre="1"/>
+			<dep name="sed" pre="1"/>
+			<dep name="fillup" pre="1"/>
+			<dep name="coreutils" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/bin/sh"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)"/>
+			<dep name="libc.so.6(GLIBC_2.4)"/>
+			<dep name="libcom_err.so.2"/>
+			<dep name="libcrypt.so.1"/>
+			<dep name="libcrypt.so.1(GLIBC_2.0)"/>
+			<dep name="libcrypto.so.0.9.8"/>
+			<dep name="libgssapi_krb5.so.2"/>
+			<dep name="libk5crypto.so.3"/>
+			<dep name="libkrb5.so.3"/>
+			<dep name="libkrb5.so.3(krb5_3_MIT)"/>
+			<dep name="liblber-2.3.so.0"/>
+			<dep name="libldap-2.3.so.0"/>
+			<dep name="libpam.so.0"/>
+			<dep name="libpam.so.0(LIBPAM_1.0)"/>
+			<dep name="libresolv.so.2"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>cyrus-sasl-saslauthd</name>
+	<summary>Bugfix for the cyrus-sasl-saslauthd package</summary>
+	<description>Fixes a bug in the "shadow" authmethod that could cause the 
+saslauthd daemon of cyrus-sasl to crash.
+</description>
+	<arch>x86_64</arch>
+	<version>2.1.21</version>
+	<release>18.3</release>
+	<filesize>60553</filesize>
+	<installedsize>99644</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>2.1.21</version>
+			<release>18.3</release>
+			<filename>cyrus-sasl-saslauthd-2.1.21-18.3.x86_64.rpm</filename>
+			<filesize>60553</filesize>
+			<installedsize>99644</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="cyrus-sasl:/usr/sbin/saslauthd"/>
+			<dep name="cyrus-sasl2:/usr/sbin/saslauthd"/>
+			<dep name="cyrus-sasl-saslauthd" op="EQ" version="2.1.21" release="18.3"/>
+		</provides>
+		<requires>
+			<dep name="insserv" pre="1"/>
+			<dep name="sed" pre="1"/>
+			<dep name="fillup" pre="1"/>
+			<dep name="coreutils" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/bin/sh"/>
+			<dep name="libc.so.6()(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.3)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.4)(64bit)"/>
+			<dep name="libcom_err.so.2()(64bit)"/>
+			<dep name="libcrypt.so.1()(64bit)"/>
+			<dep name="libcrypt.so.1(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libcrypto.so.0.9.8()(64bit)"/>
+			<dep name="libgssapi_krb5.so.2()(64bit)"/>
+			<dep name="libk5crypto.so.3()(64bit)"/>
+			<dep name="libkrb5.so.3()(64bit)"/>
+			<dep name="libkrb5.so.3(krb5_3_MIT)(64bit)"/>
+			<dep name="liblber-2.3.so.0()(64bit)"/>
+			<dep name="libldap-2.3.so.0()(64bit)"/>
+			<dep name="libpam.so.0()(64bit)"/>
+			<dep name="libpam.so.0(LIBPAM_1.0)(64bit)"/>
+			<dep name="libresolv.so.2()(64bit)"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+</subchannel></channel>

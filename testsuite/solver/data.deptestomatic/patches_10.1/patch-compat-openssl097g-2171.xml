@@ -1,0 +1,239 @@
+<channel><subchannel>                                                  
+
+<patch>
+	<name>compat-openssl097g</name>
+	<arch>noarch</arch>
+	<version>2171</version>
+	<release>0</release>
+	<requires>
+		<dep kind="atom" name="compat-openssl097g" epoch="0" version="0.9.7g" release="13.5" op="EQ"/>
+		<dep kind="atom" name="compat-openssl097g-32bit" epoch="0" version="0.9.7g" release="13.5" op="EQ"/>
+		<dep kind="atom" name="compat-openssl097g-64bit" epoch="0" version="0.9.7g" release="13.5" op="EQ"/>
+	</requires>
+</patch>
+<atom>
+	<name>compat-openssl097g</name>
+	<arch>i586</arch>
+	<version>0.9.7g</version>
+	<release>13.5</release>
+	<freshens>
+		<dep kind="package" name="compat-openssl097g"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="compat-openssl097g" epoch="0" version="0.9.7g" release="13.5" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>compat-openssl097g</name>
+	<arch>ppc</arch>
+	<version>0.9.7g</version>
+	<release>13.5</release>
+	<freshens>
+		<dep kind="package" name="compat-openssl097g"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="compat-openssl097g" epoch="0" version="0.9.7g" release="13.5" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>compat-openssl097g</name>
+	<arch>x86_64</arch>
+	<version>0.9.7g</version>
+	<release>13.5</release>
+	<freshens>
+		<dep kind="package" name="compat-openssl097g"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="compat-openssl097g" epoch="0" version="0.9.7g" release="13.5" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>compat-openssl097g-32bit</name>
+	<arch>x86_64</arch>
+	<version>0.9.7g</version>
+	<release>13.5</release>
+	<freshens>
+		<dep kind="package" name="compat-openssl097g-32bit"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="compat-openssl097g-32bit" epoch="0" version="0.9.7g" release="13.5" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>compat-openssl097g-64bit</name>
+	<arch>ppc</arch>
+	<version>0.9.7g</version>
+	<release>13.5</release>
+	<freshens>
+		<dep kind="package" name="compat-openssl097g-64bit"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="compat-openssl097g-64bit" epoch="0" version="0.9.7g" release="13.5" op="GE"/>
+	</requires>
+</atom>
+<package>
+	<name>compat-openssl097g</name>
+	<summary>compat-openssl097g: Fix for a buffer overflow and a DoS-condition.</summary>
+	<description>A buffer overflow condition within the
+SSL_get_shared_ciphers() function and a DoS condition known
+as "parasitic public keys" have been fixed. The later
+problem allowed attackers to trick the OpenSSL engine to
+spend an extraordinary amount of time to process public
+keys. The following CAN numbers have been assigned:
+CVE-2006-2937, CVE-2006-2940, CVE-2006-3738, CVE-2006-4339
+and CVE-2006-4343.
+</description>
+	<arch>i586</arch>
+	<version>0.9.7g</version>
+	<release>13.5</release>
+	<filesize>644777</filesize>
+	<installedsize>1621565</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>0.9.7g</version>
+			<release>13.5</release>
+			<filename>compat-openssl097g-0.9.7g-13.5.i586.rpm</filename>
+			<filesize>644777</filesize>
+			<installedsize>1621565</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+	</deps>
+</package>
+<package>
+	<name>compat-openssl097g</name>
+	<summary>compat-openssl097g: Fix for a buffer overflow and a DoS-condition.</summary>
+	<description>A buffer overflow condition within the
+SSL_get_shared_ciphers() function and a DoS condition known
+as "parasitic public keys" have been fixed. The later
+problem allowed attackers to trick the OpenSSL engine to
+spend an extraordinary amount of time to process public
+keys. The following CAN numbers have been assigned:
+CVE-2006-2937, CVE-2006-2940, CVE-2006-3738, CVE-2006-4339
+and CVE-2006-4343.
+</description>
+	<arch>ppc</arch>
+	<version>0.9.7g</version>
+	<release>13.5</release>
+	<filesize>679895</filesize>
+	<installedsize>1830349</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>0.9.7g</version>
+			<release>13.5</release>
+			<filename>compat-openssl097g-0.9.7g-13.5.ppc.rpm</filename>
+			<filesize>679895</filesize>
+			<installedsize>1830349</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+	</deps>
+</package>
+<package>
+	<name>compat-openssl097g</name>
+	<summary>compat-openssl097g: Fix for a buffer overflow and a DoS-condition.</summary>
+	<description>A buffer overflow condition within the
+SSL_get_shared_ciphers() function and a DoS condition known
+as "parasitic public keys" have been fixed. The later
+problem allowed attackers to trick the OpenSSL engine to
+spend an extraordinary amount of time to process public
+keys. The following CAN numbers have been assigned:
+CVE-2006-2937, CVE-2006-2940, CVE-2006-3738, CVE-2006-4339
+and CVE-2006-4343.
+</description>
+	<arch>x86_64</arch>
+	<version>0.9.7g</version>
+	<release>13.5</release>
+	<filesize>724291</filesize>
+	<installedsize>1898841</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>0.9.7g</version>
+			<release>13.5</release>
+			<filename>compat-openssl097g-0.9.7g-13.5.x86_64.rpm</filename>
+			<filesize>724291</filesize>
+			<installedsize>1898841</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+	</deps>
+</package>
+<package>
+	<name>compat-openssl097g-32bit</name>
+	<summary>compat-openssl097g: Fix for a buffer overflow and a DoS-condition.</summary>
+	<description>A buffer overflow condition within the
+SSL_get_shared_ciphers() function and a DoS condition known
+as "parasitic public keys" have been fixed. The later
+problem allowed attackers to trick the OpenSSL engine to
+spend an extraordinary amount of time to process public
+keys. The following CAN numbers have been assigned:
+CVE-2006-2937, CVE-2006-2940, CVE-2006-3738, CVE-2006-4339
+and CVE-2006-4343.
+</description>
+	<arch>x86_64</arch>
+	<version>0.9.7g</version>
+	<release>13.5</release>
+	<filesize>529781</filesize>
+	<installedsize>1215772</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>0.9.7g</version>
+			<release>13.5</release>
+			<filename>compat-openssl097g-32bit-0.9.7g-13.5.x86_64.rpm</filename>
+			<filesize>529781</filesize>
+			<installedsize>1215772</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+	</deps>
+</package>
+<package>
+	<name>compat-openssl097g-64bit</name>
+	<summary>compat-openssl097g: Fix for a buffer overflow and a DoS-condition.</summary>
+	<description>A buffer overflow condition within the
+SSL_get_shared_ciphers() function and a DoS condition known
+as "parasitic public keys" have been fixed. The later
+problem allowed attackers to trick the OpenSSL engine to
+spend an extraordinary amount of time to process public
+keys. The following CAN numbers have been assigned:
+CVE-2006-2937, CVE-2006-2940, CVE-2006-3738, CVE-2006-4339
+and CVE-2006-4343.
+</description>
+	<arch>ppc</arch>
+	<version>0.9.7g</version>
+	<release>13.5</release>
+	<filesize>630203</filesize>
+	<installedsize>1980944</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>0.9.7g</version>
+			<release>13.5</release>
+			<filename>compat-openssl097g-64bit-0.9.7g-13.5.ppc.rpm</filename>
+			<filesize>630203</filesize>
+			<installedsize>1980944</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+	</deps>
+</package>
+</subchannel></channel>

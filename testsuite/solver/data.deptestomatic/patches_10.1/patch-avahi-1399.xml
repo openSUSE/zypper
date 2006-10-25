@@ -1,0 +1,256 @@
+<channel><subchannel>                                                  
+
+<patch>
+	<name>avahi</name>
+	<arch>noarch</arch>
+	<version>1399</version>
+	<release>0</release>
+	<requires>
+		<dep kind="atom" name="avahi" epoch="0" version="0.6.5" release="29.3" op="EQ"/>
+	</requires>
+</patch>
+<atom>
+	<name>avahi</name>
+	<arch>i586</arch>
+	<version>0.6.5</version>
+	<release>29.3</release>
+	<freshens>
+		<dep kind="package" name="avahi"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="avahi" epoch="0" version="0.6.5" release="29.3" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>avahi</name>
+	<arch>ppc</arch>
+	<version>0.6.5</version>
+	<release>29.3</release>
+	<freshens>
+		<dep kind="package" name="avahi"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="avahi" epoch="0" version="0.6.5" release="29.3" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>avahi</name>
+	<arch>x86_64</arch>
+	<version>0.6.5</version>
+	<release>29.3</release>
+	<freshens>
+		<dep kind="package" name="avahi"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="avahi" epoch="0" version="0.6.5" release="29.3" op="GE"/>
+	</requires>
+</atom>
+<package>
+	<name>avahi</name>
+	<summary>buffer overflow in avahi</summary>
+	<description>A local exploitable buffer overflow has been found in 
+avahi. The impact is low since avahi is running in a chroot 
+environment.
+</description>
+	<arch>i586</arch>
+	<version>0.6.5</version>
+	<release>29.3</release>
+	<filesize>228836</filesize>
+	<installedsize>734250</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>0.6.5</version>
+			<release>29.3</release>
+			<filename>avahi-0.6.5-29.3.i586.rpm</filename>
+			<filesize>228836</filesize>
+			<installedsize>734250</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="libavahi-client.so.3"/>
+			<dep name="libavahi-common.so.3"/>
+			<dep name="libavahi-core.so.3"/>
+			<dep name="avahi" op="EQ" version="0.6.5" release="29.3"/>
+		</provides>
+		<requires>
+			<dep name="dbus-1"/>
+			<dep name="python"/>
+			<dep name="python-gdbm"/>
+			<dep name="python-gtk"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/bin/sh"/>
+			<dep name="/usr/bin/python"/>
+			<dep name="libavahi-client.so.3"/>
+			<dep name="libavahi-common.so.3"/>
+			<dep name="libavahi-core.so.3"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libc.so.6(GLIBC_2.2)"/>
+			<dep name="libc.so.6(GLIBC_2.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)"/>
+			<dep name="libc.so.6(GLIBC_2.4)"/>
+			<dep name="libdaemon.so.0"/>
+			<dep name="libdbus-1.so.2"/>
+			<dep name="libdl.so.2"/>
+			<dep name="libdl.so.2(GLIBC_2.0)"/>
+			<dep name="libdl.so.2(GLIBC_2.1)"/>
+			<dep name="libexpat.so.1"/>
+			<dep name="libgdbm.so.3"/>
+			<dep name="libnsl.so.1"/>
+			<dep name="libpthread.so.0"/>
+			<dep name="libpthread.so.0(GLIBC_2.0)"/>
+			<dep name="libpthread.so.0(GLIBC_2.1)"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>avahi</name>
+	<summary>buffer overflow in avahi</summary>
+	<description>A local exploitable buffer overflow has been found in 
+avahi. The impact is low since avahi is running in a chroot 
+environment.
+</description>
+	<arch>ppc</arch>
+	<version>0.6.5</version>
+	<release>29.3</release>
+	<filesize>253253</filesize>
+	<installedsize>842286</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>0.6.5</version>
+			<release>29.3</release>
+			<filename>avahi-0.6.5-29.3.ppc.rpm</filename>
+			<filesize>253253</filesize>
+			<installedsize>842286</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="libavahi-client.so.3"/>
+			<dep name="libavahi-common.so.3"/>
+			<dep name="libavahi-core.so.3"/>
+			<dep name="avahi" op="EQ" version="0.6.5" release="29.3"/>
+		</provides>
+		<requires>
+			<dep name="dbus-1"/>
+			<dep name="python"/>
+			<dep name="python-gdbm"/>
+			<dep name="python-gtk"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/bin/sh"/>
+			<dep name="/usr/bin/python"/>
+			<dep name="libavahi-client.so.3"/>
+			<dep name="libavahi-common.so.3"/>
+			<dep name="libavahi-core.so.3"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libc.so.6(GLIBC_2.2)"/>
+			<dep name="libc.so.6(GLIBC_2.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)"/>
+			<dep name="libc.so.6(GLIBC_2.4)"/>
+			<dep name="libdaemon.so.0"/>
+			<dep name="libdbus-1.so.2"/>
+			<dep name="libdl.so.2"/>
+			<dep name="libdl.so.2(GLIBC_2.0)"/>
+			<dep name="libdl.so.2(GLIBC_2.1)"/>
+			<dep name="libexpat.so.1"/>
+			<dep name="libgdbm.so.3"/>
+			<dep name="libnsl.so.1"/>
+			<dep name="libpthread.so.0"/>
+			<dep name="libpthread.so.0(GLIBC_2.0)"/>
+			<dep name="libpthread.so.0(GLIBC_2.1)"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>avahi</name>
+	<summary>buffer overflow in avahi</summary>
+	<description>A local exploitable buffer overflow has been found in 
+avahi. The impact is low since avahi is running in a chroot 
+environment.
+</description>
+	<arch>x86_64</arch>
+	<version>0.6.5</version>
+	<release>29.3</release>
+	<filesize>249764</filesize>
+	<installedsize>783150</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>0.6.5</version>
+			<release>29.3</release>
+			<filename>avahi-0.6.5-29.3.x86_64.rpm</filename>
+			<filesize>249764</filesize>
+			<installedsize>783150</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="libavahi-client.so.3()(64bit)"/>
+			<dep name="libavahi-common.so.3()(64bit)"/>
+			<dep name="libavahi-core.so.3()(64bit)"/>
+			<dep name="avahi" op="EQ" version="0.6.5" release="29.3"/>
+		</provides>
+		<requires>
+			<dep name="dbus-1"/>
+			<dep name="python"/>
+			<dep name="python-gdbm"/>
+			<dep name="python-gtk"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/bin/sh"/>
+			<dep name="/usr/bin/python"/>
+			<dep name="libavahi-client.so.3()(64bit)"/>
+			<dep name="libavahi-common.so.3()(64bit)"/>
+			<dep name="libavahi-core.so.3()(64bit)"/>
+			<dep name="libc.so.6()(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.3)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.4)(64bit)"/>
+			<dep name="libdaemon.so.0()(64bit)"/>
+			<dep name="libdbus-1.so.2()(64bit)"/>
+			<dep name="libdl.so.2()(64bit)"/>
+			<dep name="libdl.so.2(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libexpat.so.1()(64bit)"/>
+			<dep name="libgdbm.so.3()(64bit)"/>
+			<dep name="libnsl.so.1()(64bit)"/>
+			<dep name="libpthread.so.0()(64bit)"/>
+			<dep name="libpthread.so.0(GLIBC_2.2.5)(64bit)"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+</subchannel></channel>

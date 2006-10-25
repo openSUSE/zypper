@@ -1,0 +1,217 @@
+<channel><subchannel>                                                  
+
+<patch>
+	<name>LibVNCServer</name>
+	<arch>noarch</arch>
+	<version>1667</version>
+	<release>0</release>
+	<requires>
+		<dep kind="atom" name="LibVNCServer" epoch="0" version="0.7.99" release="15.3" op="EQ"/>
+	</requires>
+</patch>
+<atom>
+	<name>LibVNCServer</name>
+	<arch>i586</arch>
+	<version>0.7.99</version>
+	<release>15.3</release>
+	<freshens>
+		<dep kind="package" name="LibVNCServer"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="LibVNCServer" epoch="0" version="0.7.99" release="15.3" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>LibVNCServer</name>
+	<arch>ppc</arch>
+	<version>0.7.99</version>
+	<release>15.3</release>
+	<freshens>
+		<dep kind="package" name="LibVNCServer"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="LibVNCServer" epoch="0" version="0.7.99" release="15.3" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>LibVNCServer</name>
+	<arch>x86_64</arch>
+	<version>0.7.99</version>
+	<release>15.3</release>
+	<freshens>
+		<dep kind="package" name="LibVNCServer"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="LibVNCServer" epoch="0" version="0.7.99" release="15.3" op="GE"/>
+	</requires>
+</atom>
+<package>
+	<name>LibVNCServer</name>
+	<summary>LibVNCServer security update</summary>
+	<description>Modified clients could bypass authentication of password 
+protected VNC servers (CVE-2006-2450).
+</description>
+	<arch>i586</arch>
+	<version>0.7.99</version>
+	<release>15.3</release>
+	<filesize>666575</filesize>
+	<installedsize>2053061</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>0.7.99</version>
+			<release>15.3</release>
+			<filename>LibVNCServer-0.7.99-15.3.i586.rpm</filename>
+			<filesize>666575</filesize>
+			<installedsize>2053061</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="LibVNCServer" op="EQ" version="0.7.99" release="15.3"/>
+		</provides>
+		<requires>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/bin/bash"/>
+			<dep name="/bin/sh"/>
+			<dep name="libX11.so.6"/>
+			<dep name="libXdamage.so.1"/>
+			<dep name="libXext.so.6"/>
+			<dep name="libXfixes.so.3"/>
+			<dep name="libXinerama.so.1"/>
+			<dep name="libXrandr.so.2"/>
+			<dep name="libXtst.so.6"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1)"/>
+			<dep name="libc.so.6(GLIBC_2.2)"/>
+			<dep name="libc.so.6(GLIBC_2.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)"/>
+			<dep name="libjpeg.so.62"/>
+			<dep name="libnsl.so.1"/>
+			<dep name="libpthread.so.0"/>
+			<dep name="libpthread.so.0(GLIBC_2.0)"/>
+			<dep name="libpthread.so.0(GLIBC_2.1)"/>
+			<dep name="libpthread.so.0(GLIBC_2.3.2)"/>
+			<dep name="libz.so.1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>LibVNCServer</name>
+	<summary>LibVNCServer security update</summary>
+	<description>Modified clients could bypass authentication of password 
+protected VNC servers (CVE-2006-2450).
+</description>
+	<arch>ppc</arch>
+	<version>0.7.99</version>
+	<release>15.3</release>
+	<filesize>705734</filesize>
+	<installedsize>2166950</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>0.7.99</version>
+			<release>15.3</release>
+			<filename>LibVNCServer-0.7.99-15.3.ppc.rpm</filename>
+			<filesize>705734</filesize>
+			<installedsize>2166950</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="LibVNCServer" op="EQ" version="0.7.99" release="15.3"/>
+		</provides>
+		<requires>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/bin/bash"/>
+			<dep name="/bin/sh"/>
+			<dep name="libX11.so.6"/>
+			<dep name="libXdamage.so.1"/>
+			<dep name="libXext.so.6"/>
+			<dep name="libXfixes.so.3"/>
+			<dep name="libXinerama.so.1"/>
+			<dep name="libXrandr.so.2"/>
+			<dep name="libXtst.so.6"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1)"/>
+			<dep name="libc.so.6(GLIBC_2.2)"/>
+			<dep name="libc.so.6(GLIBC_2.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)"/>
+			<dep name="libc.so.6(GLIBC_2.4)"/>
+			<dep name="libjpeg.so.62"/>
+			<dep name="libnsl.so.1"/>
+			<dep name="libpthread.so.0"/>
+			<dep name="libpthread.so.0(GLIBC_2.0)"/>
+			<dep name="libpthread.so.0(GLIBC_2.1)"/>
+			<dep name="libpthread.so.0(GLIBC_2.3.2)"/>
+			<dep name="libz.so.1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>LibVNCServer</name>
+	<summary>LibVNCServer security update</summary>
+	<description>Modified clients could bypass authentication of password 
+protected VNC servers (CVE-2006-2450).
+</description>
+	<arch>x86_64</arch>
+	<version>0.7.99</version>
+	<release>15.3</release>
+	<filesize>721462</filesize>
+	<installedsize>2194627</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>0.7.99</version>
+			<release>15.3</release>
+			<filename>LibVNCServer-0.7.99-15.3.x86_64.rpm</filename>
+			<filesize>721462</filesize>
+			<installedsize>2194627</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="LibVNCServer" op="EQ" version="0.7.99" release="15.3"/>
+		</provides>
+		<requires>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/bin/bash"/>
+			<dep name="/bin/sh"/>
+			<dep name="libX11.so.6()(64bit)"/>
+			<dep name="libXdamage.so.1()(64bit)"/>
+			<dep name="libXext.so.6()(64bit)"/>
+			<dep name="libXfixes.so.3()(64bit)"/>
+			<dep name="libXinerama.so.1()(64bit)"/>
+			<dep name="libXrandr.so.2()(64bit)"/>
+			<dep name="libXtst.so.6()(64bit)"/>
+			<dep name="libc.so.6()(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.3)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)(64bit)"/>
+			<dep name="libjpeg.so.62()(64bit)"/>
+			<dep name="libnsl.so.1()(64bit)"/>
+			<dep name="libpthread.so.0()(64bit)"/>
+			<dep name="libpthread.so.0(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libpthread.so.0(GLIBC_2.3.2)(64bit)"/>
+			<dep name="libz.so.1()(64bit)"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+</subchannel></channel>

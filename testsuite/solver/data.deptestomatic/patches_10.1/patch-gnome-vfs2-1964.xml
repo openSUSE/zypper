@@ -1,0 +1,760 @@
+<channel><subchannel>                                                  
+
+<patch>
+	<name>gnome-vfs2</name>
+	<arch>noarch</arch>
+	<version>1964</version>
+	<release>0</release>
+	<requires>
+		<dep kind="atom" name="gnome-vfs2" epoch="0" version="2.12.2" release="58.11" op="EQ"/>
+		<dep kind="atom" name="gnome-vfs2-32bit" epoch="0" version="2.12.2" release="58.11" op="EQ"/>
+		<dep kind="atom" name="gnome-vfs2-64bit" epoch="0" version="2.12.2" release="58.11" op="EQ"/>
+		<dep kind="atom" name="gnome-vfs2-devel" epoch="0" version="2.12.2" release="58.11" op="EQ"/>
+	</requires>
+</patch>
+<atom>
+	<name>gnome-vfs2</name>
+	<arch>i586</arch>
+	<version>2.12.2</version>
+	<release>58.11</release>
+	<freshens>
+		<dep kind="package" name="gnome-vfs2"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="gnome-vfs2" epoch="0" version="2.12.2" release="58.11" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>gnome-vfs2</name>
+	<arch>ppc</arch>
+	<version>2.12.2</version>
+	<release>58.11</release>
+	<freshens>
+		<dep kind="package" name="gnome-vfs2"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="gnome-vfs2" epoch="0" version="2.12.2" release="58.11" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>gnome-vfs2</name>
+	<arch>x86_64</arch>
+	<version>2.12.2</version>
+	<release>58.11</release>
+	<freshens>
+		<dep kind="package" name="gnome-vfs2"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="gnome-vfs2" epoch="0" version="2.12.2" release="58.11" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>gnome-vfs2-32bit</name>
+	<arch>x86_64</arch>
+	<version>2.12.2</version>
+	<release>58.11</release>
+	<freshens>
+		<dep kind="package" name="gnome-vfs2-32bit"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="gnome-vfs2-32bit" epoch="0" version="2.12.2" release="58.11" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>gnome-vfs2-64bit</name>
+	<arch>ppc</arch>
+	<version>2.12.2</version>
+	<release>58.11</release>
+	<freshens>
+		<dep kind="package" name="gnome-vfs2-64bit"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="gnome-vfs2-64bit" epoch="0" version="2.12.2" release="58.11" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>gnome-vfs2-devel</name>
+	<arch>i586</arch>
+	<version>2.12.2</version>
+	<release>58.11</release>
+	<freshens>
+		<dep kind="package" name="gnome-vfs2-devel"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="gnome-vfs2-devel" epoch="0" version="2.12.2" release="58.11" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>gnome-vfs2-devel</name>
+	<arch>ppc</arch>
+	<version>2.12.2</version>
+	<release>58.11</release>
+	<freshens>
+		<dep kind="package" name="gnome-vfs2-devel"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="gnome-vfs2-devel" epoch="0" version="2.12.2" release="58.11" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>gnome-vfs2-devel</name>
+	<arch>x86_64</arch>
+	<version>2.12.2</version>
+	<release>58.11</release>
+	<freshens>
+		<dep kind="package" name="gnome-vfs2-devel"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="gnome-vfs2-devel" epoch="0" version="2.12.2" release="58.11" op="GE"/>
+	</requires>
+</atom>
+<package>
+	<name>gnome-vfs2</name>
+	<summary>Fixes unmounting of floppies and NFS mounts.  Requires a nautilus and hal update.</summary>
+	<description>This fixes the gnome-vfs2 part of
+https://bugzilla.novell.com/show_bug.cgi?id=172870.   With
+this, floppies can be unmounted again. This also fixes
+https://bugzilla.novell.com/show_bug.cgi?id=183723, so that
+NFS mounts work again.
+</description>
+	<arch>i586</arch>
+	<version>2.12.2</version>
+	<release>58.11</release>
+	<filesize>951387</filesize>
+	<installedsize>4614130</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>2.12.2</version>
+			<release>58.11</release>
+			<filename>gnome-vfs2-2.12.2-58.11.i586.rpm</filename>
+			<filesize>951387</filesize>
+			<installedsize>4614130</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="gnome-vfs-extras"/>
+			<dep name="libbzip2.so"/>
+			<dep name="libcomputer.so"/>
+			<dep name="libdns-sd.so"/>
+			<dep name="libfile.so"/>
+			<dep name="libftp.so"/>
+			<dep name="libgnomevfs-2.so.0"/>
+			<dep name="libgzip.so"/>
+			<dep name="libhttp.so"/>
+			<dep name="libmoniker_gnome_vfs_std.so"/>
+			<dep name="libnetwork.so"/>
+			<dep name="libnntp.so"/>
+			<dep name="libsftp.so"/>
+			<dep name="libsmb.so"/>
+			<dep name="libtar.so"/>
+			<dep name="libvfs-test.so"/>
+			<dep name="gnome-vfs2" op="EQ" version="2.12.2" release="58.11"/>
+		</provides>
+		<requires>
+			<dep name="gnome-mime-data"/>
+			<dep name="filesystem" pre="1"/>
+			<dep name="gconf2" pre="1"/>
+			<dep name="desktop-file-utils"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/bin/sh"/>
+			<dep name="/usr/bin/perl"/>
+			<dep name="libORBit-2.so.0"/>
+			<dep name="libORBitCosNaming-2.so.0"/>
+			<dep name="libbonobo-2.so.0"/>
+			<dep name="libbonobo-activation.so.4"/>
+			<dep name="libbz2.so.1"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libc.so.6(GLIBC_2.2)"/>
+			<dep name="libc.so.6(GLIBC_2.2.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)"/>
+			<dep name="libcom_err.so.2"/>
+			<dep name="libcrypto.so.0.9.8"/>
+			<dep name="libdbus-1.so.2"/>
+			<dep name="libdbus-glib-1.so.2"/>
+			<dep name="libdl.so.2"/>
+			<dep name="libdns_sd.so"/>
+			<dep name="libfam.so.0"/>
+			<dep name="libgconf-2.so.4"/>
+			<dep name="libglib-2.0.so.0"/>
+			<dep name="libgmodule-2.0.so.0"/>
+			<dep name="libgnomevfs-2.so.0"/>
+			<dep name="libgobject-2.0.so.0"/>
+			<dep name="libgssapi_krb5.so.2"/>
+			<dep name="libgssapi_krb5.so.2(gssapi_krb5_2_MIT)"/>
+			<dep name="libgthread-2.0.so.0"/>
+			<dep name="libhal-storage.so.1"/>
+			<dep name="libhal.so.1"/>
+			<dep name="libk5crypto.so.3"/>
+			<dep name="libkrb5.so.3"/>
+			<dep name="libkrb5support.so.0"/>
+			<dep name="libm.so.6"/>
+			<dep name="libnsl.so.1"/>
+			<dep name="libpopt.so.0"/>
+			<dep name="libpthread.so.0"/>
+			<dep name="libpthread.so.0(GLIBC_2.0)"/>
+			<dep name="libpthread.so.0(GLIBC_2.1)"/>
+			<dep name="libpthread.so.0(GLIBC_2.2)"/>
+			<dep name="libresolv.so.2"/>
+			<dep name="libresolv.so.2(GLIBC_2.2)"/>
+			<dep name="librt.so.1"/>
+			<dep name="libsmbclient.so.0"/>
+			<dep name="libssl.so.0.9.8"/>
+			<dep name="libxml2.so.2"/>
+			<dep name="libz.so.1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>gnome-vfs2</name>
+	<summary>Fixes unmounting of floppies and NFS mounts.  Requires a nautilus and hal update.</summary>
+	<description>This fixes the gnome-vfs2 part of
+https://bugzilla.novell.com/show_bug.cgi?id=172870.   With
+this, floppies can be unmounted again. This also fixes
+https://bugzilla.novell.com/show_bug.cgi?id=183723, so that
+NFS mounts work again.
+</description>
+	<arch>ppc</arch>
+	<version>2.12.2</version>
+	<release>58.11</release>
+	<filesize>1034465</filesize>
+	<installedsize>4957946</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>2.12.2</version>
+			<release>58.11</release>
+			<filename>gnome-vfs2-2.12.2-58.11.ppc.rpm</filename>
+			<filesize>1034465</filesize>
+			<installedsize>4957946</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="gnome-vfs-extras"/>
+			<dep name="libbzip2.so"/>
+			<dep name="libcomputer.so"/>
+			<dep name="libdns-sd.so"/>
+			<dep name="libfile.so"/>
+			<dep name="libftp.so"/>
+			<dep name="libgnomevfs-2.so.0"/>
+			<dep name="libgzip.so"/>
+			<dep name="libhttp.so"/>
+			<dep name="libmoniker_gnome_vfs_std.so"/>
+			<dep name="libnetwork.so"/>
+			<dep name="libnntp.so"/>
+			<dep name="libsftp.so"/>
+			<dep name="libsmb.so"/>
+			<dep name="libtar.so"/>
+			<dep name="libvfs-test.so"/>
+			<dep name="gnome-vfs2" op="EQ" version="2.12.2" release="58.11"/>
+		</provides>
+		<requires>
+			<dep name="gnome-mime-data"/>
+			<dep name="filesystem" pre="1"/>
+			<dep name="gconf2" pre="1"/>
+			<dep name="desktop-file-utils"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/bin/sh"/>
+			<dep name="/usr/bin/perl"/>
+			<dep name="libORBit-2.so.0"/>
+			<dep name="libORBitCosNaming-2.so.0"/>
+			<dep name="libbonobo-2.so.0"/>
+			<dep name="libbonobo-activation.so.4"/>
+			<dep name="libbz2.so.1"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libc.so.6(GLIBC_2.2)"/>
+			<dep name="libc.so.6(GLIBC_2.2.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3.3)"/>
+			<dep name="libc.so.6(GLIBC_2.4)"/>
+			<dep name="libcom_err.so.2"/>
+			<dep name="libcrypto.so.0.9.8"/>
+			<dep name="libdbus-1.so.2"/>
+			<dep name="libdbus-glib-1.so.2"/>
+			<dep name="libdl.so.2"/>
+			<dep name="libdns_sd.so"/>
+			<dep name="libfam.so.0"/>
+			<dep name="libgconf-2.so.4"/>
+			<dep name="libglib-2.0.so.0"/>
+			<dep name="libgmodule-2.0.so.0"/>
+			<dep name="libgnomevfs-2.so.0"/>
+			<dep name="libgobject-2.0.so.0"/>
+			<dep name="libgssapi_krb5.so.2"/>
+			<dep name="libgssapi_krb5.so.2(gssapi_krb5_2_MIT)"/>
+			<dep name="libgthread-2.0.so.0"/>
+			<dep name="libhal-storage.so.1"/>
+			<dep name="libhal.so.1"/>
+			<dep name="libk5crypto.so.3"/>
+			<dep name="libkrb5.so.3"/>
+			<dep name="libkrb5support.so.0"/>
+			<dep name="libm.so.6"/>
+			<dep name="libnsl.so.1"/>
+			<dep name="libpopt.so.0"/>
+			<dep name="libpthread.so.0"/>
+			<dep name="libpthread.so.0(GLIBC_2.0)"/>
+			<dep name="libpthread.so.0(GLIBC_2.1)"/>
+			<dep name="libpthread.so.0(GLIBC_2.2)"/>
+			<dep name="libresolv.so.2"/>
+			<dep name="libresolv.so.2(GLIBC_2.2)"/>
+			<dep name="librt.so.1"/>
+			<dep name="libsmbclient.so.0"/>
+			<dep name="libssl.so.0.9.8"/>
+			<dep name="libxml2.so.2"/>
+			<dep name="libz.so.1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>gnome-vfs2</name>
+	<summary>Fixes unmounting of floppies and NFS mounts.  Requires a nautilus and hal update.</summary>
+	<description>This fixes the gnome-vfs2 part of
+https://bugzilla.novell.com/show_bug.cgi?id=172870.   With
+this, floppies can be unmounted again. This also fixes
+https://bugzilla.novell.com/show_bug.cgi?id=183723, so that
+NFS mounts work again.
+</description>
+	<arch>x86_64</arch>
+	<version>2.12.2</version>
+	<release>58.11</release>
+	<filesize>1027299</filesize>
+	<installedsize>4831192</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>2.12.2</version>
+			<release>58.11</release>
+			<filename>gnome-vfs2-2.12.2-58.11.x86_64.rpm</filename>
+			<filesize>1027299</filesize>
+			<installedsize>4831192</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="gnome-vfs-extras"/>
+			<dep name="libbzip2.so()(64bit)"/>
+			<dep name="libcomputer.so()(64bit)"/>
+			<dep name="libdns-sd.so()(64bit)"/>
+			<dep name="libfile.so()(64bit)"/>
+			<dep name="libftp.so()(64bit)"/>
+			<dep name="libgnomevfs-2.so.0()(64bit)"/>
+			<dep name="libgzip.so()(64bit)"/>
+			<dep name="libhttp.so()(64bit)"/>
+			<dep name="libmoniker_gnome_vfs_std.so()(64bit)"/>
+			<dep name="libnetwork.so()(64bit)"/>
+			<dep name="libnntp.so()(64bit)"/>
+			<dep name="libsftp.so()(64bit)"/>
+			<dep name="libsmb.so()(64bit)"/>
+			<dep name="libtar.so()(64bit)"/>
+			<dep name="libvfs-test.so()(64bit)"/>
+			<dep name="gnome-vfs2" op="EQ" version="2.12.2" release="58.11"/>
+		</provides>
+		<requires>
+			<dep name="gnome-mime-data"/>
+			<dep name="filesystem" pre="1"/>
+			<dep name="gconf2" pre="1"/>
+			<dep name="desktop-file-utils"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/bin/sh"/>
+			<dep name="/usr/bin/perl"/>
+			<dep name="libORBit-2.so.0()(64bit)"/>
+			<dep name="libORBitCosNaming-2.so.0()(64bit)"/>
+			<dep name="libbonobo-2.so.0()(64bit)"/>
+			<dep name="libbonobo-activation.so.4()(64bit)"/>
+			<dep name="libbz2.so.1()(64bit)"/>
+			<dep name="libc.so.6()(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.3)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)(64bit)"/>
+			<dep name="libcom_err.so.2()(64bit)"/>
+			<dep name="libcrypto.so.0.9.8()(64bit)"/>
+			<dep name="libdbus-1.so.2()(64bit)"/>
+			<dep name="libdbus-glib-1.so.2()(64bit)"/>
+			<dep name="libdl.so.2()(64bit)"/>
+			<dep name="libdns_sd.so()(64bit)"/>
+			<dep name="libfam.so.0()(64bit)"/>
+			<dep name="libgconf-2.so.4()(64bit)"/>
+			<dep name="libglib-2.0.so.0()(64bit)"/>
+			<dep name="libgmodule-2.0.so.0()(64bit)"/>
+			<dep name="libgnomevfs-2.so.0()(64bit)"/>
+			<dep name="libgobject-2.0.so.0()(64bit)"/>
+			<dep name="libgssapi_krb5.so.2()(64bit)"/>
+			<dep name="libgssapi_krb5.so.2(gssapi_krb5_2_MIT)(64bit)"/>
+			<dep name="libgthread-2.0.so.0()(64bit)"/>
+			<dep name="libhal-storage.so.1()(64bit)"/>
+			<dep name="libhal.so.1()(64bit)"/>
+			<dep name="libk5crypto.so.3()(64bit)"/>
+			<dep name="libkrb5.so.3()(64bit)"/>
+			<dep name="libkrb5support.so.0()(64bit)"/>
+			<dep name="libm.so.6()(64bit)"/>
+			<dep name="libnsl.so.1()(64bit)"/>
+			<dep name="libpopt.so.0()(64bit)"/>
+			<dep name="libpthread.so.0()(64bit)"/>
+			<dep name="libpthread.so.0(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libresolv.so.2()(64bit)"/>
+			<dep name="libresolv.so.2(GLIBC_2.2.5)(64bit)"/>
+			<dep name="librt.so.1()(64bit)"/>
+			<dep name="libsmbclient.so.0()(64bit)"/>
+			<dep name="libssl.so.0.9.8()(64bit)"/>
+			<dep name="libxml2.so.2()(64bit)"/>
+			<dep name="libz.so.1()(64bit)"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>gnome-vfs2-32bit</name>
+	<summary>Fixes unmounting of floppies and NFS mounts.  Requires a nautilus and hal update.</summary>
+	<description>This fixes the gnome-vfs2 part of
+https://bugzilla.novell.com/show_bug.cgi?id=172870.   With
+this, floppies can be unmounted again. This also fixes
+https://bugzilla.novell.com/show_bug.cgi?id=183723, so that
+NFS mounts work again.
+</description>
+	<arch>x86_64</arch>
+	<version>2.12.2</version>
+	<release>58.11</release>
+	<filesize>312553</filesize>
+	<installedsize>793852</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>2.12.2</version>
+			<release>58.11</release>
+			<filename>gnome-vfs2-32bit-2.12.2-58.11.x86_64.rpm</filename>
+			<filesize>312553</filesize>
+			<installedsize>793852</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="libbzip2.so"/>
+			<dep name="libcomputer.so"/>
+			<dep name="libdns-sd.so"/>
+			<dep name="libfile.so"/>
+			<dep name="libftp.so"/>
+			<dep name="libgnomevfs-2.so.0"/>
+			<dep name="libgzip.so"/>
+			<dep name="libhttp.so"/>
+			<dep name="libmoniker_gnome_vfs_std.so"/>
+			<dep name="libnetwork.so"/>
+			<dep name="libnntp.so"/>
+			<dep name="libsftp.so"/>
+			<dep name="libsmb.so"/>
+			<dep name="libtar.so"/>
+			<dep name="libvfs-test.so"/>
+			<dep name="gnome-vfs2-32bit" op="EQ" version="2.12.2" release="58.11"/>
+		</provides>
+		<requires>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="libORBit-2.so.0"/>
+			<dep name="libbonobo-2.so.0"/>
+			<dep name="libbonobo-activation.so.4"/>
+			<dep name="libbz2.so.1"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libc.so.6(GLIBC_2.2)"/>
+			<dep name="libc.so.6(GLIBC_2.2.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)"/>
+			<dep name="libcom_err.so.2"/>
+			<dep name="libcrypto.so.0.9.8"/>
+			<dep name="libdbus-1.so.2"/>
+			<dep name="libdbus-glib-1.so.2"/>
+			<dep name="libdl.so.2"/>
+			<dep name="libdns_sd.so"/>
+			<dep name="libfam.so.0"/>
+			<dep name="libgconf-2.so.4"/>
+			<dep name="libglib-2.0.so.0"/>
+			<dep name="libgmodule-2.0.so.0"/>
+			<dep name="libgnomevfs-2.so.0"/>
+			<dep name="libgobject-2.0.so.0"/>
+			<dep name="libgssapi_krb5.so.2"/>
+			<dep name="libgssapi_krb5.so.2(gssapi_krb5_2_MIT)"/>
+			<dep name="libgthread-2.0.so.0"/>
+			<dep name="libhal-storage.so.1"/>
+			<dep name="libhal.so.1"/>
+			<dep name="libk5crypto.so.3"/>
+			<dep name="libkrb5.so.3"/>
+			<dep name="libkrb5support.so.0"/>
+			<dep name="libm.so.6"/>
+			<dep name="libpthread.so.0"/>
+			<dep name="libpthread.so.0(GLIBC_2.0)"/>
+			<dep name="libpthread.so.0(GLIBC_2.1)"/>
+			<dep name="libpthread.so.0(GLIBC_2.2)"/>
+			<dep name="libresolv.so.2"/>
+			<dep name="libresolv.so.2(GLIBC_2.2)"/>
+			<dep name="librt.so.1"/>
+			<dep name="libsmbclient.so.0"/>
+			<dep name="libssl.so.0.9.8"/>
+			<dep name="libxml2.so.2"/>
+			<dep name="libz.so.1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>gnome-vfs2-64bit</name>
+	<summary>Fixes unmounting of floppies and NFS mounts.  Requires a nautilus and hal update.</summary>
+	<description>This fixes the gnome-vfs2 part of
+https://bugzilla.novell.com/show_bug.cgi?id=172870.   With
+this, floppies can be unmounted again. This also fixes
+https://bugzilla.novell.com/show_bug.cgi?id=183723, so that
+NFS mounts work again.
+</description>
+	<arch>ppc</arch>
+	<version>2.12.2</version>
+	<release>58.11</release>
+	<filesize>373233</filesize>
+	<installedsize>1352648</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>2.12.2</version>
+			<release>58.11</release>
+			<filename>gnome-vfs2-64bit-2.12.2-58.11.ppc.rpm</filename>
+			<filesize>373233</filesize>
+			<installedsize>1352648</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="libbzip2.so()(64bit)"/>
+			<dep name="libcomputer.so()(64bit)"/>
+			<dep name="libdns-sd.so()(64bit)"/>
+			<dep name="libfile.so()(64bit)"/>
+			<dep name="libftp.so()(64bit)"/>
+			<dep name="libgnomevfs-2.so.0()(64bit)"/>
+			<dep name="libgzip.so()(64bit)"/>
+			<dep name="libhttp.so()(64bit)"/>
+			<dep name="libmoniker_gnome_vfs_std.so()(64bit)"/>
+			<dep name="libnetwork.so()(64bit)"/>
+			<dep name="libnntp.so()(64bit)"/>
+			<dep name="libsftp.so()(64bit)"/>
+			<dep name="libsmb.so()(64bit)"/>
+			<dep name="libtar.so()(64bit)"/>
+			<dep name="libvfs-test.so()(64bit)"/>
+			<dep name="gnome-vfs2-64bit" op="EQ" version="2.12.2" release="58.11"/>
+		</provides>
+		<requires>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="libORBit-2.so.0()(64bit)"/>
+			<dep name="libbonobo-2.so.0()(64bit)"/>
+			<dep name="libbonobo-activation.so.4()(64bit)"/>
+			<dep name="libbz2.so.1()(64bit)"/>
+			<dep name="libc.so.6()(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.3)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.4)(64bit)"/>
+			<dep name="libcom_err.so.2()(64bit)"/>
+			<dep name="libcrypto.so.0.9.8()(64bit)"/>
+			<dep name="libdbus-1.so.2()(64bit)"/>
+			<dep name="libdbus-glib-1.so.2()(64bit)"/>
+			<dep name="libdl.so.2()(64bit)"/>
+			<dep name="libdns_sd.so()(64bit)"/>
+			<dep name="libfam.so.0()(64bit)"/>
+			<dep name="libgconf-2.so.4()(64bit)"/>
+			<dep name="libglib-2.0.so.0()(64bit)"/>
+			<dep name="libgmodule-2.0.so.0()(64bit)"/>
+			<dep name="libgnomevfs-2.so.0()(64bit)"/>
+			<dep name="libgobject-2.0.so.0()(64bit)"/>
+			<dep name="libgssapi_krb5.so.2()(64bit)"/>
+			<dep name="libgssapi_krb5.so.2(gssapi_krb5_2_MIT)(64bit)"/>
+			<dep name="libgthread-2.0.so.0()(64bit)"/>
+			<dep name="libhal-storage.so.1()(64bit)"/>
+			<dep name="libhal.so.1()(64bit)"/>
+			<dep name="libk5crypto.so.3()(64bit)"/>
+			<dep name="libkrb5.so.3()(64bit)"/>
+			<dep name="libkrb5support.so.0()(64bit)"/>
+			<dep name="libm.so.6()(64bit)"/>
+			<dep name="libpthread.so.0()(64bit)"/>
+			<dep name="libpthread.so.0(GLIBC_2.3)(64bit)"/>
+			<dep name="libresolv.so.2()(64bit)"/>
+			<dep name="libresolv.so.2(GLIBC_2.3)(64bit)"/>
+			<dep name="librt.so.1()(64bit)"/>
+			<dep name="libsmbclient.so.0()(64bit)"/>
+			<dep name="libssl.so.0.9.8()(64bit)"/>
+			<dep name="libxml2.so.2()(64bit)"/>
+			<dep name="libz.so.1()(64bit)"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>gnome-vfs2-devel</name>
+	<summary>Fixes unmounting of floppies and NFS mounts.  Requires a nautilus and hal update.</summary>
+	<description>This fixes the gnome-vfs2 part of
+https://bugzilla.novell.com/show_bug.cgi?id=172870.   With
+this, floppies can be unmounted again. This also fixes
+https://bugzilla.novell.com/show_bug.cgi?id=183723, so that
+NFS mounts work again.
+</description>
+	<arch>i586</arch>
+	<version>2.12.2</version>
+	<release>58.11</release>
+	<filesize>209331</filesize>
+	<installedsize>803594</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>2.12.2</version>
+			<release>58.11</release>
+			<filename>gnome-vfs2-devel-2.12.2-58.11.i586.rpm</filename>
+			<filesize>209331</filesize>
+			<installedsize>803594</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="gnome-vfs2-devel" op="EQ" version="2.12.2" release="58.11"/>
+		</provides>
+		<requires>
+			<dep name="gnome-vfs2" op="EQ" version="2.12.2"/>
+			<dep name="libbonobo-devel"/>
+			<dep name="glib2-devel"/>
+			<dep name="gconf2-devel"/>
+			<dep name="libxml2-devel"/>
+			<dep name="zlib-devel"/>
+			<dep name="openssl-devel"/>
+			<dep name="hal-devel"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>gnome-vfs2-devel</name>
+	<summary>Fixes unmounting of floppies and NFS mounts.  Requires a nautilus and hal update.</summary>
+	<description>This fixes the gnome-vfs2 part of
+https://bugzilla.novell.com/show_bug.cgi?id=172870.   With
+this, floppies can be unmounted again. This also fixes
+https://bugzilla.novell.com/show_bug.cgi?id=183723, so that
+NFS mounts work again.
+</description>
+	<arch>ppc</arch>
+	<version>2.12.2</version>
+	<release>58.11</release>
+	<filesize>243932</filesize>
+	<installedsize>965202</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>2.12.2</version>
+			<release>58.11</release>
+			<filename>gnome-vfs2-devel-2.12.2-58.11.ppc.rpm</filename>
+			<filesize>243932</filesize>
+			<installedsize>965202</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="gnome-vfs2-devel" op="EQ" version="2.12.2" release="58.11"/>
+		</provides>
+		<requires>
+			<dep name="gnome-vfs2" op="EQ" version="2.12.2"/>
+			<dep name="libbonobo-devel"/>
+			<dep name="glib2-devel"/>
+			<dep name="gconf2-devel"/>
+			<dep name="libxml2-devel"/>
+			<dep name="zlib-devel"/>
+			<dep name="openssl-devel"/>
+			<dep name="hal-devel"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>gnome-vfs2-devel</name>
+	<summary>Fixes unmounting of floppies and NFS mounts.  Requires a nautilus and hal update.</summary>
+	<description>This fixes the gnome-vfs2 part of
+https://bugzilla.novell.com/show_bug.cgi?id=172870.   With
+this, floppies can be unmounted again. This also fixes
+https://bugzilla.novell.com/show_bug.cgi?id=183723, so that
+NFS mounts work again.
+</description>
+	<arch>x86_64</arch>
+	<version>2.12.2</version>
+	<release>58.11</release>
+	<filesize>229671</filesize>
+	<installedsize>1122740</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>2.12.2</version>
+			<release>58.11</release>
+			<filename>gnome-vfs2-devel-2.12.2-58.11.x86_64.rpm</filename>
+			<filesize>229671</filesize>
+			<installedsize>1122740</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="gnome-vfs2-devel" op="EQ" version="2.12.2" release="58.11"/>
+		</provides>
+		<requires>
+			<dep name="gnome-vfs2" op="EQ" version="2.12.2"/>
+			<dep name="libbonobo-devel"/>
+			<dep name="glib2-devel"/>
+			<dep name="gconf2-devel"/>
+			<dep name="libxml2-devel"/>
+			<dep name="zlib-devel"/>
+			<dep name="openssl-devel"/>
+			<dep name="hal-devel"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+</subchannel></channel>

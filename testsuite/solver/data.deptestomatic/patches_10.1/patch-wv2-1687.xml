@@ -1,0 +1,375 @@
+<channel><subchannel>                                                  
+
+<patch>
+	<name>wv2</name>
+	<arch>noarch</arch>
+	<version>1687</version>
+	<release>0</release>
+	<requires>
+		<dep kind="atom" name="wv2" epoch="0" version="0.2.2" release="21.2" op="EQ"/>
+		<dep kind="atom" name="wv2-devel" epoch="0" version="0.2.2" release="21.2" op="EQ"/>
+	</requires>
+</patch>
+<atom>
+	<name>wv2</name>
+	<arch>i586</arch>
+	<version>0.2.2</version>
+	<release>21.2</release>
+	<freshens>
+		<dep kind="package" name="wv2"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="wv2" epoch="0" version="0.2.2" release="21.2" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>wv2</name>
+	<arch>ppc</arch>
+	<version>0.2.2</version>
+	<release>21.2</release>
+	<freshens>
+		<dep kind="package" name="wv2"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="wv2" epoch="0" version="0.2.2" release="21.2" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>wv2</name>
+	<arch>x86_64</arch>
+	<version>0.2.2</version>
+	<release>21.2</release>
+	<freshens>
+		<dep kind="package" name="wv2"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="wv2" epoch="0" version="0.2.2" release="21.2" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>wv2-devel</name>
+	<arch>i586</arch>
+	<version>0.2.2</version>
+	<release>21.2</release>
+	<freshens>
+		<dep kind="package" name="wv2-devel"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="wv2-devel" epoch="0" version="0.2.2" release="21.2" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>wv2-devel</name>
+	<arch>ppc</arch>
+	<version>0.2.2</version>
+	<release>21.2</release>
+	<freshens>
+		<dep kind="package" name="wv2-devel"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="wv2-devel" epoch="0" version="0.2.2" release="21.2" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>wv2-devel</name>
+	<arch>x86_64</arch>
+	<version>0.2.2</version>
+	<release>21.2</release>
+	<freshens>
+		<dep kind="package" name="wv2-devel"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="wv2-devel" epoch="0" version="0.2.2" release="21.2" op="GE"/>
+	</requires>
+</atom>
+<package>
+	<name>wv2</name>
+	<summary>wv2: Securityfix for missing boundary checks</summary>
+	<description>The wv2 library was updated to fix some boundary checks 
+which could be exploited by maliciously crafted files to 
+access memory outside bounds and possibly execute arbitrary 
+code. (CVE-2006-2197)
+</description>
+	<arch>i586</arch>
+	<version>0.2.2</version>
+	<release>21.2</release>
+	<filesize>212179</filesize>
+	<installedsize>636955</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>0.2.2</version>
+			<release>21.2</release>
+			<filename>wv2-0.2.2-21.2.i586.rpm</filename>
+			<filesize>212179</filesize>
+			<installedsize>636955</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="libwv2.so.1"/>
+			<dep name="wv2" op="EQ" version="0.2.2" release="21.2"/>
+		</provides>
+		<requires>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libgcc_s.so.1"/>
+			<dep name="libglib-2.0.so.0"/>
+			<dep name="libgobject-2.0.so.0"/>
+			<dep name="libgsf-1.so.113"/>
+			<dep name="libm.so.6"/>
+			<dep name="libm.so.6(GLIBC_2.0)"/>
+			<dep name="libstdc++.so.6"/>
+			<dep name="libstdc++.so.6(CXXABI_1.3)"/>
+			<dep name="libstdc++.so.6(GLIBCXX_3.4)"/>
+			<dep name="libxml2.so.2"/>
+			<dep name="libz.so.1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>wv2</name>
+	<summary>wv2: Securityfix for missing boundary checks</summary>
+	<description>The wv2 library was updated to fix some boundary checks 
+which could be exploited by maliciously crafted files to 
+access memory outside bounds and possibly execute arbitrary 
+code. (CVE-2006-2197)
+</description>
+	<arch>ppc</arch>
+	<version>0.2.2</version>
+	<release>21.2</release>
+	<filesize>219633</filesize>
+	<installedsize>697423</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>0.2.2</version>
+			<release>21.2</release>
+			<filename>wv2-0.2.2-21.2.ppc.rpm</filename>
+			<filesize>219633</filesize>
+			<installedsize>697423</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="libwv2.so.1"/>
+			<dep name="wv2" op="EQ" version="0.2.2" release="21.2"/>
+		</provides>
+		<requires>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libc.so.6(GLIBC_2.4)"/>
+			<dep name="libgcc_s.so.1"/>
+			<dep name="libglib-2.0.so.0"/>
+			<dep name="libgobject-2.0.so.0"/>
+			<dep name="libgsf-1.so.113"/>
+			<dep name="libm.so.6"/>
+			<dep name="libm.so.6(GLIBC_2.0)"/>
+			<dep name="libstdc++.so.6"/>
+			<dep name="libstdc++.so.6(CXXABI_1.3)"/>
+			<dep name="libstdc++.so.6(GLIBCXX_3.4)"/>
+			<dep name="libxml2.so.2"/>
+			<dep name="libz.so.1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>wv2</name>
+	<summary>wv2: Securityfix for missing boundary checks</summary>
+	<description>The wv2 library was updated to fix some boundary checks 
+which could be exploited by maliciously crafted files to 
+access memory outside bounds and possibly execute arbitrary 
+code. (CVE-2006-2197)
+</description>
+	<arch>x86_64</arch>
+	<version>0.2.2</version>
+	<release>21.2</release>
+	<filesize>233456</filesize>
+	<installedsize>693823</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>0.2.2</version>
+			<release>21.2</release>
+			<filename>wv2-0.2.2-21.2.x86_64.rpm</filename>
+			<filesize>233456</filesize>
+			<installedsize>693823</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="libwv2.so.1()(64bit)"/>
+			<dep name="wv2" op="EQ" version="0.2.2" release="21.2"/>
+		</provides>
+		<requires>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="libc.so.6()(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libgcc_s.so.1()(64bit)"/>
+			<dep name="libglib-2.0.so.0()(64bit)"/>
+			<dep name="libgobject-2.0.so.0()(64bit)"/>
+			<dep name="libgsf-1.so.113()(64bit)"/>
+			<dep name="libm.so.6()(64bit)"/>
+			<dep name="libm.so.6(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libstdc++.so.6()(64bit)"/>
+			<dep name="libstdc++.so.6(CXXABI_1.3)(64bit)"/>
+			<dep name="libstdc++.so.6(GLIBCXX_3.4)(64bit)"/>
+			<dep name="libxml2.so.2()(64bit)"/>
+			<dep name="libz.so.1()(64bit)"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>wv2-devel</name>
+	<summary>wv2: Securityfix for missing boundary checks</summary>
+	<description>The wv2 library was updated to fix some boundary checks 
+which could be exploited by maliciously crafted files to 
+access memory outside bounds and possibly execute arbitrary 
+code. (CVE-2006-2197)
+</description>
+	<arch>i586</arch>
+	<version>0.2.2</version>
+	<release>21.2</release>
+	<filesize>148370</filesize>
+	<installedsize>811851</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>0.2.2</version>
+			<release>21.2</release>
+			<filename>wv2-devel-0.2.2-21.2.i586.rpm</filename>
+			<filesize>148370</filesize>
+			<installedsize>811851</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="wv2-devel" op="EQ" version="0.2.2" release="21.2"/>
+		</provides>
+		<requires>
+			<dep name="wv2" op="EQ" version="0.2.2"/>
+			<dep name="bzip2"/>
+			<dep name="libgsf-devel"/>
+			<dep name="libstdc++-devel"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/bin/sh"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>wv2-devel</name>
+	<summary>wv2: Securityfix for missing boundary checks</summary>
+	<description>The wv2 library was updated to fix some boundary checks 
+which could be exploited by maliciously crafted files to 
+access memory outside bounds and possibly execute arbitrary 
+code. (CVE-2006-2197)
+</description>
+	<arch>ppc</arch>
+	<version>0.2.2</version>
+	<release>21.2</release>
+	<filesize>148462</filesize>
+	<installedsize>811858</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>0.2.2</version>
+			<release>21.2</release>
+			<filename>wv2-devel-0.2.2-21.2.ppc.rpm</filename>
+			<filesize>148462</filesize>
+			<installedsize>811858</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="wv2-devel" op="EQ" version="0.2.2" release="21.2"/>
+		</provides>
+		<requires>
+			<dep name="wv2" op="EQ" version="0.2.2"/>
+			<dep name="bzip2"/>
+			<dep name="libgsf-devel"/>
+			<dep name="libstdc++-devel"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/bin/sh"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>wv2-devel</name>
+	<summary>wv2: Securityfix for missing boundary checks</summary>
+	<description>The wv2 library was updated to fix some boundary checks 
+which could be exploited by maliciously crafted files to 
+access memory outside bounds and possibly execute arbitrary 
+code. (CVE-2006-2197)
+</description>
+	<arch>x86_64</arch>
+	<version>0.2.2</version>
+	<release>21.2</release>
+	<filesize>148402</filesize>
+	<installedsize>811877</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>0.2.2</version>
+			<release>21.2</release>
+			<filename>wv2-devel-0.2.2-21.2.x86_64.rpm</filename>
+			<filesize>148402</filesize>
+			<installedsize>811877</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="wv2-devel" op="EQ" version="0.2.2" release="21.2"/>
+		</provides>
+		<requires>
+			<dep name="wv2" op="EQ" version="0.2.2"/>
+			<dep name="bzip2"/>
+			<dep name="libgsf-devel"/>
+			<dep name="libstdc++-devel"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/bin/sh"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+</subchannel></channel>

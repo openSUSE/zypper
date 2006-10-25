@@ -1,0 +1,225 @@
+<channel><subchannel>                                                  
+
+<patch>
+	<name>gpg</name>
+	<arch>noarch</arch>
+	<version>1955</version>
+	<release>0</release>
+	<requires>
+		<dep kind="atom" name="gpg" epoch="0" version="1.4.2" release="23.7" op="EQ"/>
+	</requires>
+</patch>
+<atom>
+	<name>gpg</name>
+	<arch>i586</arch>
+	<version>1.4.2</version>
+	<release>23.7</release>
+	<freshens>
+		<dep kind="package" name="gpg"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="gpg" epoch="0" version="1.4.2" release="23.7" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>gpg</name>
+	<arch>ppc</arch>
+	<version>1.4.2</version>
+	<release>23.7</release>
+	<freshens>
+		<dep kind="package" name="gpg"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="gpg" epoch="0" version="1.4.2" release="23.7" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>gpg</name>
+	<arch>x86_64</arch>
+	<version>1.4.2</version>
+	<release>23.7</release>
+	<freshens>
+		<dep kind="package" name="gpg"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="gpg" epoch="0" version="1.4.2" release="23.7" op="GE"/>
+	</requires>
+</atom>
+<package>
+	<name>gpg</name>
+	<summary>gpg: This update fixes a segmentaion fault</summary>
+	<description>This update of gpg fixes an segmentation fault when using
+the--no-armor option. This failure leads to a
+denial-of-service attack and may be used execute arbitrary
+code. (CVE-2006-3746)
+</description>
+	<arch>i586</arch>
+	<version>1.4.2</version>
+	<release>23.7</release>
+	<filesize>1567050</filesize>
+	<installedsize>4769755</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>1.4.2</version>
+			<release>23.7</release>
+			<filename>gpg-1.4.2-23.7.i586.rpm</filename>
+			<filesize>1567050</filesize>
+			<installedsize>4769755</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="gnupg"/>
+			<dep name="pgpgpg"/>
+			<dep name="gpg" op="EQ" version="1.4.2" release="23.7"/>
+		</provides>
+		<requires>
+			<dep name="info" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="libbz2.so.1"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1)"/>
+			<dep name="libc.so.6(GLIBC_2.1.1)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libc.so.6(GLIBC_2.2)"/>
+			<dep name="libc.so.6(GLIBC_2.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)"/>
+			<dep name="libc.so.6(GLIBC_2.4)"/>
+			<dep name="libdl.so.2"/>
+			<dep name="libdl.so.2(GLIBC_2.0)"/>
+			<dep name="libdl.so.2(GLIBC_2.1)"/>
+			<dep name="libldap-2.3.so.0"/>
+			<dep name="libresolv.so.2"/>
+			<dep name="libresolv.so.2(GLIBC_2.0)"/>
+			<dep name="libresolv.so.2(GLIBC_2.2)"/>
+			<dep name="libz.so.1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>gpg</name>
+	<summary>gpg: This update fixes a segmentaion fault</summary>
+	<description>This update of gpg fixes an segmentation fault when using
+the--no-armor option. This failure leads to a
+denial-of-service attack and may be used execute arbitrary
+code. (CVE-2006-3746)
+</description>
+	<arch>ppc</arch>
+	<version>1.4.2</version>
+	<release>23.7</release>
+	<filesize>1600517</filesize>
+	<installedsize>4975593</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>1.4.2</version>
+			<release>23.7</release>
+			<filename>gpg-1.4.2-23.7.ppc.rpm</filename>
+			<filesize>1600517</filesize>
+			<installedsize>4975593</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="gnupg"/>
+			<dep name="pgpgpg"/>
+			<dep name="gpg" op="EQ" version="1.4.2" release="23.7"/>
+		</provides>
+		<requires>
+			<dep name="info" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="libbz2.so.1"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1)"/>
+			<dep name="libc.so.6(GLIBC_2.1.1)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libc.so.6(GLIBC_2.2)"/>
+			<dep name="libc.so.6(GLIBC_2.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)"/>
+			<dep name="libc.so.6(GLIBC_2.4)"/>
+			<dep name="libdl.so.2"/>
+			<dep name="libdl.so.2(GLIBC_2.0)"/>
+			<dep name="libdl.so.2(GLIBC_2.1)"/>
+			<dep name="libldap-2.3.so.0"/>
+			<dep name="libresolv.so.2"/>
+			<dep name="libresolv.so.2(GLIBC_2.0)"/>
+			<dep name="libresolv.so.2(GLIBC_2.2)"/>
+			<dep name="libz.so.1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>gpg</name>
+	<summary>gpg: This update fixes a segmentaion fault</summary>
+	<description>This update of gpg fixes an segmentation fault when using
+the--no-armor option. This failure leads to a
+denial-of-service attack and may be used execute arbitrary
+code. (CVE-2006-3746)
+</description>
+	<arch>x86_64</arch>
+	<version>1.4.2</version>
+	<release>23.7</release>
+	<filesize>1607228</filesize>
+	<installedsize>4827992</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>1.4.2</version>
+			<release>23.7</release>
+			<filename>gpg-1.4.2-23.7.x86_64.rpm</filename>
+			<filesize>1607228</filesize>
+			<installedsize>4827992</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="gnupg"/>
+			<dep name="pgpgpg"/>
+			<dep name="gpg" op="EQ" version="1.4.2" release="23.7"/>
+		</provides>
+		<requires>
+			<dep name="info" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="libbz2.so.1()(64bit)"/>
+			<dep name="libc.so.6()(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.3)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.3.3)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.4)(64bit)"/>
+			<dep name="libdl.so.2()(64bit)"/>
+			<dep name="libdl.so.2(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libldap-2.3.so.0()(64bit)"/>
+			<dep name="libresolv.so.2()(64bit)"/>
+			<dep name="libresolv.so.2(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libz.so.1()(64bit)"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+</subchannel></channel>

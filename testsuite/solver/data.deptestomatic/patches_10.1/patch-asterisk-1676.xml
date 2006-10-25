@@ -1,0 +1,638 @@
+<channel><subchannel>                                                  
+
+<patch>
+	<name>asterisk</name>
+	<arch>noarch</arch>
+	<version>1676</version>
+	<release>0</release>
+	<requires>
+		<dep kind="atom" name="asterisk" epoch="0" version="1.2.5" release="12.4" op="EQ"/>
+	</requires>
+</patch>
+<atom>
+	<name>asterisk</name>
+	<arch>i586</arch>
+	<version>1.2.5</version>
+	<release>12.4</release>
+	<freshens>
+		<dep kind="package" name="asterisk"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="asterisk" epoch="0" version="1.2.5" release="12.4" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>asterisk</name>
+	<arch>ppc</arch>
+	<version>1.2.5</version>
+	<release>12.4</release>
+	<freshens>
+		<dep kind="package" name="asterisk"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="asterisk" epoch="0" version="1.2.5" release="12.4" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>asterisk</name>
+	<arch>x86_64</arch>
+	<version>1.2.5</version>
+	<release>12.4</release>
+	<freshens>
+		<dep kind="package" name="asterisk"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="asterisk" epoch="0" version="1.2.5" release="12.4" op="GE"/>
+	</requires>
+</atom>
+<package>
+	<name>asterisk</name>
+	<summary>asterisk: Security Update for CVE-2006-2898</summary>
+	<description>A security problem was fixed in the IAX2 channel driver of 
+Asterisk that could be used by remote users to execute code 
+or  at least crash Asterisk. This issue is tracked by the 
+Mitre CVE ID  CVE-2006-2898.
+</description>
+	<arch>i586</arch>
+	<version>1.2.5</version>
+	<release>12.4</release>
+	<filesize>3085213</filesize>
+	<installedsize>6551972</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>1.2.5</version>
+			<release>12.4</release>
+			<filename>asterisk-1.2.5-12.4.i586.rpm</filename>
+			<filesize>3085213</filesize>
+			<installedsize>6551972</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="app_adsiprog.so"/>
+			<dep name="app_alarmreceiver.so"/>
+			<dep name="app_authenticate.so"/>
+			<dep name="app_callingpres.so"/>
+			<dep name="app_cdr.so"/>
+			<dep name="app_chanisavail.so"/>
+			<dep name="app_chanspy.so"/>
+			<dep name="app_controlplayback.so"/>
+			<dep name="app_curl.so"/>
+			<dep name="app_cut.so"/>
+			<dep name="app_db.so"/>
+			<dep name="app_devstate.so"/>
+			<dep name="app_dial.so"/>
+			<dep name="app_dictate.so"/>
+			<dep name="app_directed_pickup.so"/>
+			<dep name="app_directory.so"/>
+			<dep name="app_disa.so"/>
+			<dep name="app_dumpchan.so"/>
+			<dep name="app_echo.so"/>
+			<dep name="app_enumlookup.so"/>
+			<dep name="app_eval.so"/>
+			<dep name="app_exec.so"/>
+			<dep name="app_externalivr.so"/>
+			<dep name="app_festival.so"/>
+			<dep name="app_flash.so"/>
+			<dep name="app_forkcdr.so"/>
+			<dep name="app_getcpeid.so"/>
+			<dep name="app_groupcount.so"/>
+			<dep name="app_hasnewvoicemail.so"/>
+			<dep name="app_ices.so"/>
+			<dep name="app_image.so"/>
+			<dep name="app_lookupblacklist.so"/>
+			<dep name="app_lookupcidname.so"/>
+			<dep name="app_macro.so"/>
+			<dep name="app_math.so"/>
+			<dep name="app_md5.so"/>
+			<dep name="app_meetme.so"/>
+			<dep name="app_milliwatt.so"/>
+			<dep name="app_mixmonitor.so"/>
+			<dep name="app_mp3.so"/>
+			<dep name="app_nbscat.so"/>
+			<dep name="app_page.so"/>
+			<dep name="app_parkandannounce.so"/>
+			<dep name="app_pickup.so"/>
+			<dep name="app_playback.so"/>
+			<dep name="app_privacy.so"/>
+			<dep name="app_queue.so"/>
+			<dep name="app_random.so"/>
+			<dep name="app_read.so"/>
+			<dep name="app_readfile.so"/>
+			<dep name="app_realtime.so"/>
+			<dep name="app_record.so"/>
+			<dep name="app_sayunixtime.so"/>
+			<dep name="app_segfault.so"/>
+			<dep name="app_senddtmf.so"/>
+			<dep name="app_sendtext.so"/>
+			<dep name="app_setcallerid.so"/>
+			<dep name="app_setcdruserfield.so"/>
+			<dep name="app_setcidname.so"/>
+			<dep name="app_setcidnum.so"/>
+			<dep name="app_setrdnis.so"/>
+			<dep name="app_settransfercapability.so"/>
+			<dep name="app_sms.so"/>
+			<dep name="app_softhangup.so"/>
+			<dep name="app_stack.so"/>
+			<dep name="app_system.so"/>
+			<dep name="app_talkdetect.so"/>
+			<dep name="app_test.so"/>
+			<dep name="app_transfer.so"/>
+			<dep name="app_txtcidname.so"/>
+			<dep name="app_url.so"/>
+			<dep name="app_userevent.so"/>
+			<dep name="app_verbose.so"/>
+			<dep name="app_voicemail.so"/>
+			<dep name="app_waitforring.so"/>
+			<dep name="app_waitforsilence.so"/>
+			<dep name="app_while.so"/>
+			<dep name="cdr_csv.so"/>
+			<dep name="cdr_custom.so"/>
+			<dep name="cdr_manager.so"/>
+			<dep name="chan_agent.so"/>
+			<dep name="chan_features.so"/>
+			<dep name="chan_iax2.so"/>
+			<dep name="chan_local.so"/>
+			<dep name="chan_mgcp.so"/>
+			<dep name="chan_oss.so"/>
+			<dep name="chan_phone.so"/>
+			<dep name="chan_sip.so"/>
+			<dep name="chan_skinny.so"/>
+			<dep name="codec_a_mu.so"/>
+			<dep name="codec_adpcm.so"/>
+			<dep name="codec_alaw.so"/>
+			<dep name="codec_g726.so"/>
+			<dep name="codec_gsm.so"/>
+			<dep name="codec_ilbc.so"/>
+			<dep name="codec_lpc10.so"/>
+			<dep name="codec_speex.so"/>
+			<dep name="codec_ulaw.so"/>
+			<dep name="format_au.so"/>
+			<dep name="format_g723.so"/>
+			<dep name="format_g726.so"/>
+			<dep name="format_g729.so"/>
+			<dep name="format_gsm.so"/>
+			<dep name="format_h263.so"/>
+			<dep name="format_ilbc.so"/>
+			<dep name="format_jpeg.so"/>
+			<dep name="format_pcm.so"/>
+			<dep name="format_pcm_alaw.so"/>
+			<dep name="format_sln.so"/>
+			<dep name="format_vox.so"/>
+			<dep name="format_wav.so"/>
+			<dep name="format_wav_gsm.so"/>
+			<dep name="func_callerid.so"/>
+			<dep name="func_enum.so"/>
+			<dep name="func_uri.so"/>
+			<dep name="pbx_ael.so"/>
+			<dep name="pbx_config.so"/>
+			<dep name="pbx_dundi.so"/>
+			<dep name="pbx_functions.so"/>
+			<dep name="pbx_loopback.so"/>
+			<dep name="pbx_realtime.so"/>
+			<dep name="pbx_spool.so"/>
+			<dep name="res_adsi.so"/>
+			<dep name="res_agi.so"/>
+			<dep name="res_crypto.so"/>
+			<dep name="res_features.so"/>
+			<dep name="res_indications.so"/>
+			<dep name="res_monitor.so"/>
+			<dep name="res_musiconhold.so"/>
+			<dep name="res_watchdog.so"/>
+			<dep name="asterisk" op="EQ" version="1.2.5" release="12.4"/>
+		</provides>
+		<requires>
+			<dep name="/usr/sbin/useradd" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/bin/sh"/>
+			<dep name="/usr/bin/perl"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1)"/>
+			<dep name="libc.so.6(GLIBC_2.1.1)"/>
+			<dep name="libc.so.6(GLIBC_2.1.2)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libc.so.6(GLIBC_2.2)"/>
+			<dep name="libc.so.6(GLIBC_2.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)"/>
+			<dep name="libc.so.6(GLIBC_2.4)"/>
+			<dep name="libcrypto.so.0.9.8"/>
+			<dep name="libcurl.so.3"/>
+			<dep name="libdl.so.2"/>
+			<dep name="libdl.so.2(GLIBC_2.0)"/>
+			<dep name="libdl.so.2(GLIBC_2.1)"/>
+			<dep name="libidn.so.11"/>
+			<dep name="libm.so.6"/>
+			<dep name="libm.so.6(GLIBC_2.0)"/>
+			<dep name="libncurses.so.5"/>
+			<dep name="libpthread.so.0"/>
+			<dep name="libpthread.so.0(GLIBC_2.0)"/>
+			<dep name="libpthread.so.0(GLIBC_2.1)"/>
+			<dep name="libpthread.so.0(GLIBC_2.3.2)"/>
+			<dep name="libresolv.so.2"/>
+			<dep name="libresolv.so.2(GLIBC_2.2)"/>
+			<dep name="libspeex.so.1"/>
+			<dep name="libssl.so.0.9.8"/>
+			<dep name="libz.so.1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>asterisk</name>
+	<summary>asterisk: Security Update for CVE-2006-2898</summary>
+	<description>A security problem was fixed in the IAX2 channel driver of 
+Asterisk that could be used by remote users to execute code 
+or  at least crash Asterisk. This issue is tracked by the 
+Mitre CVE ID  CVE-2006-2898.
+</description>
+	<arch>ppc</arch>
+	<version>1.2.5</version>
+	<release>12.4</release>
+	<filesize>3303669</filesize>
+	<installedsize>7597843</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>1.2.5</version>
+			<release>12.4</release>
+			<filename>asterisk-1.2.5-12.4.ppc.rpm</filename>
+			<filesize>3303669</filesize>
+			<installedsize>7597843</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="app_adsiprog.so"/>
+			<dep name="app_alarmreceiver.so"/>
+			<dep name="app_authenticate.so"/>
+			<dep name="app_callingpres.so"/>
+			<dep name="app_cdr.so"/>
+			<dep name="app_chanisavail.so"/>
+			<dep name="app_chanspy.so"/>
+			<dep name="app_controlplayback.so"/>
+			<dep name="app_curl.so"/>
+			<dep name="app_cut.so"/>
+			<dep name="app_db.so"/>
+			<dep name="app_devstate.so"/>
+			<dep name="app_dial.so"/>
+			<dep name="app_dictate.so"/>
+			<dep name="app_directed_pickup.so"/>
+			<dep name="app_directory.so"/>
+			<dep name="app_disa.so"/>
+			<dep name="app_dumpchan.so"/>
+			<dep name="app_echo.so"/>
+			<dep name="app_enumlookup.so"/>
+			<dep name="app_eval.so"/>
+			<dep name="app_exec.so"/>
+			<dep name="app_externalivr.so"/>
+			<dep name="app_festival.so"/>
+			<dep name="app_flash.so"/>
+			<dep name="app_forkcdr.so"/>
+			<dep name="app_getcpeid.so"/>
+			<dep name="app_groupcount.so"/>
+			<dep name="app_hasnewvoicemail.so"/>
+			<dep name="app_ices.so"/>
+			<dep name="app_image.so"/>
+			<dep name="app_lookupblacklist.so"/>
+			<dep name="app_lookupcidname.so"/>
+			<dep name="app_macro.so"/>
+			<dep name="app_math.so"/>
+			<dep name="app_md5.so"/>
+			<dep name="app_meetme.so"/>
+			<dep name="app_milliwatt.so"/>
+			<dep name="app_mixmonitor.so"/>
+			<dep name="app_mp3.so"/>
+			<dep name="app_nbscat.so"/>
+			<dep name="app_page.so"/>
+			<dep name="app_parkandannounce.so"/>
+			<dep name="app_pickup.so"/>
+			<dep name="app_playback.so"/>
+			<dep name="app_privacy.so"/>
+			<dep name="app_queue.so"/>
+			<dep name="app_random.so"/>
+			<dep name="app_read.so"/>
+			<dep name="app_readfile.so"/>
+			<dep name="app_realtime.so"/>
+			<dep name="app_record.so"/>
+			<dep name="app_sayunixtime.so"/>
+			<dep name="app_segfault.so"/>
+			<dep name="app_senddtmf.so"/>
+			<dep name="app_sendtext.so"/>
+			<dep name="app_setcallerid.so"/>
+			<dep name="app_setcdruserfield.so"/>
+			<dep name="app_setcidname.so"/>
+			<dep name="app_setcidnum.so"/>
+			<dep name="app_setrdnis.so"/>
+			<dep name="app_settransfercapability.so"/>
+			<dep name="app_sms.so"/>
+			<dep name="app_softhangup.so"/>
+			<dep name="app_stack.so"/>
+			<dep name="app_system.so"/>
+			<dep name="app_talkdetect.so"/>
+			<dep name="app_test.so"/>
+			<dep name="app_transfer.so"/>
+			<dep name="app_txtcidname.so"/>
+			<dep name="app_url.so"/>
+			<dep name="app_userevent.so"/>
+			<dep name="app_verbose.so"/>
+			<dep name="app_voicemail.so"/>
+			<dep name="app_waitforring.so"/>
+			<dep name="app_waitforsilence.so"/>
+			<dep name="app_while.so"/>
+			<dep name="cdr_csv.so"/>
+			<dep name="cdr_custom.so"/>
+			<dep name="cdr_manager.so"/>
+			<dep name="chan_agent.so"/>
+			<dep name="chan_features.so"/>
+			<dep name="chan_iax2.so"/>
+			<dep name="chan_local.so"/>
+			<dep name="chan_mgcp.so"/>
+			<dep name="chan_oss.so"/>
+			<dep name="chan_phone.so"/>
+			<dep name="chan_sip.so"/>
+			<dep name="chan_skinny.so"/>
+			<dep name="codec_a_mu.so"/>
+			<dep name="codec_adpcm.so"/>
+			<dep name="codec_alaw.so"/>
+			<dep name="codec_g726.so"/>
+			<dep name="codec_gsm.so"/>
+			<dep name="codec_ilbc.so"/>
+			<dep name="codec_lpc10.so"/>
+			<dep name="codec_speex.so"/>
+			<dep name="codec_ulaw.so"/>
+			<dep name="format_au.so"/>
+			<dep name="format_g723.so"/>
+			<dep name="format_g726.so"/>
+			<dep name="format_g729.so"/>
+			<dep name="format_gsm.so"/>
+			<dep name="format_h263.so"/>
+			<dep name="format_ilbc.so"/>
+			<dep name="format_jpeg.so"/>
+			<dep name="format_pcm.so"/>
+			<dep name="format_pcm_alaw.so"/>
+			<dep name="format_sln.so"/>
+			<dep name="format_vox.so"/>
+			<dep name="format_wav.so"/>
+			<dep name="format_wav_gsm.so"/>
+			<dep name="func_callerid.so"/>
+			<dep name="func_enum.so"/>
+			<dep name="func_uri.so"/>
+			<dep name="pbx_ael.so"/>
+			<dep name="pbx_config.so"/>
+			<dep name="pbx_dundi.so"/>
+			<dep name="pbx_functions.so"/>
+			<dep name="pbx_loopback.so"/>
+			<dep name="pbx_realtime.so"/>
+			<dep name="pbx_spool.so"/>
+			<dep name="res_adsi.so"/>
+			<dep name="res_agi.so"/>
+			<dep name="res_crypto.so"/>
+			<dep name="res_features.so"/>
+			<dep name="res_indications.so"/>
+			<dep name="res_monitor.so"/>
+			<dep name="res_musiconhold.so"/>
+			<dep name="res_watchdog.so"/>
+			<dep name="asterisk" op="EQ" version="1.2.5" release="12.4"/>
+		</provides>
+		<requires>
+			<dep name="/usr/sbin/useradd" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/bin/sh"/>
+			<dep name="/usr/bin/perl"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1)"/>
+			<dep name="libc.so.6(GLIBC_2.1.1)"/>
+			<dep name="libc.so.6(GLIBC_2.1.2)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libc.so.6(GLIBC_2.2)"/>
+			<dep name="libc.so.6(GLIBC_2.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)"/>
+			<dep name="libc.so.6(GLIBC_2.4)"/>
+			<dep name="libcrypto.so.0.9.8"/>
+			<dep name="libcurl.so.3"/>
+			<dep name="libdl.so.2"/>
+			<dep name="libdl.so.2(GLIBC_2.0)"/>
+			<dep name="libdl.so.2(GLIBC_2.1)"/>
+			<dep name="libidn.so.11"/>
+			<dep name="libm.so.6"/>
+			<dep name="libm.so.6(GLIBC_2.0)"/>
+			<dep name="libncurses.so.5"/>
+			<dep name="libpthread.so.0"/>
+			<dep name="libpthread.so.0(GLIBC_2.0)"/>
+			<dep name="libpthread.so.0(GLIBC_2.1)"/>
+			<dep name="libpthread.so.0(GLIBC_2.3.2)"/>
+			<dep name="libresolv.so.2"/>
+			<dep name="libresolv.so.2(GLIBC_2.2)"/>
+			<dep name="libspeex.so.1"/>
+			<dep name="libssl.so.0.9.8"/>
+			<dep name="libz.so.1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>asterisk</name>
+	<summary>asterisk: Security Update for CVE-2006-2898</summary>
+	<description>A security problem was fixed in the IAX2 channel driver of 
+Asterisk that could be used by remote users to execute code 
+or  at least crash Asterisk. This issue is tracked by the 
+Mitre CVE ID  CVE-2006-2898.
+</description>
+	<arch>x86_64</arch>
+	<version>1.2.5</version>
+	<release>12.4</release>
+	<filesize>3198506</filesize>
+	<installedsize>7017265</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>1.2.5</version>
+			<release>12.4</release>
+			<filename>asterisk-1.2.5-12.4.x86_64.rpm</filename>
+			<filesize>3198506</filesize>
+			<installedsize>7017265</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="app_adsiprog.so()(64bit)"/>
+			<dep name="app_alarmreceiver.so()(64bit)"/>
+			<dep name="app_authenticate.so()(64bit)"/>
+			<dep name="app_callingpres.so()(64bit)"/>
+			<dep name="app_cdr.so()(64bit)"/>
+			<dep name="app_chanisavail.so()(64bit)"/>
+			<dep name="app_chanspy.so()(64bit)"/>
+			<dep name="app_controlplayback.so()(64bit)"/>
+			<dep name="app_curl.so()(64bit)"/>
+			<dep name="app_cut.so()(64bit)"/>
+			<dep name="app_db.so()(64bit)"/>
+			<dep name="app_devstate.so()(64bit)"/>
+			<dep name="app_dial.so()(64bit)"/>
+			<dep name="app_dictate.so()(64bit)"/>
+			<dep name="app_directed_pickup.so()(64bit)"/>
+			<dep name="app_directory.so()(64bit)"/>
+			<dep name="app_disa.so()(64bit)"/>
+			<dep name="app_dumpchan.so()(64bit)"/>
+			<dep name="app_echo.so()(64bit)"/>
+			<dep name="app_enumlookup.so()(64bit)"/>
+			<dep name="app_eval.so()(64bit)"/>
+			<dep name="app_exec.so()(64bit)"/>
+			<dep name="app_externalivr.so()(64bit)"/>
+			<dep name="app_festival.so()(64bit)"/>
+			<dep name="app_flash.so()(64bit)"/>
+			<dep name="app_forkcdr.so()(64bit)"/>
+			<dep name="app_getcpeid.so()(64bit)"/>
+			<dep name="app_groupcount.so()(64bit)"/>
+			<dep name="app_hasnewvoicemail.so()(64bit)"/>
+			<dep name="app_ices.so()(64bit)"/>
+			<dep name="app_image.so()(64bit)"/>
+			<dep name="app_lookupblacklist.so()(64bit)"/>
+			<dep name="app_lookupcidname.so()(64bit)"/>
+			<dep name="app_macro.so()(64bit)"/>
+			<dep name="app_math.so()(64bit)"/>
+			<dep name="app_md5.so()(64bit)"/>
+			<dep name="app_meetme.so()(64bit)"/>
+			<dep name="app_milliwatt.so()(64bit)"/>
+			<dep name="app_mixmonitor.so()(64bit)"/>
+			<dep name="app_mp3.so()(64bit)"/>
+			<dep name="app_nbscat.so()(64bit)"/>
+			<dep name="app_page.so()(64bit)"/>
+			<dep name="app_parkandannounce.so()(64bit)"/>
+			<dep name="app_pickup.so()(64bit)"/>
+			<dep name="app_playback.so()(64bit)"/>
+			<dep name="app_privacy.so()(64bit)"/>
+			<dep name="app_queue.so()(64bit)"/>
+			<dep name="app_random.so()(64bit)"/>
+			<dep name="app_read.so()(64bit)"/>
+			<dep name="app_readfile.so()(64bit)"/>
+			<dep name="app_realtime.so()(64bit)"/>
+			<dep name="app_record.so()(64bit)"/>
+			<dep name="app_sayunixtime.so()(64bit)"/>
+			<dep name="app_segfault.so()(64bit)"/>
+			<dep name="app_senddtmf.so()(64bit)"/>
+			<dep name="app_sendtext.so()(64bit)"/>
+			<dep name="app_setcallerid.so()(64bit)"/>
+			<dep name="app_setcdruserfield.so()(64bit)"/>
+			<dep name="app_setcidname.so()(64bit)"/>
+			<dep name="app_setcidnum.so()(64bit)"/>
+			<dep name="app_setrdnis.so()(64bit)"/>
+			<dep name="app_settransfercapability.so()(64bit)"/>
+			<dep name="app_sms.so()(64bit)"/>
+			<dep name="app_softhangup.so()(64bit)"/>
+			<dep name="app_stack.so()(64bit)"/>
+			<dep name="app_system.so()(64bit)"/>
+			<dep name="app_talkdetect.so()(64bit)"/>
+			<dep name="app_test.so()(64bit)"/>
+			<dep name="app_transfer.so()(64bit)"/>
+			<dep name="app_txtcidname.so()(64bit)"/>
+			<dep name="app_url.so()(64bit)"/>
+			<dep name="app_userevent.so()(64bit)"/>
+			<dep name="app_verbose.so()(64bit)"/>
+			<dep name="app_voicemail.so()(64bit)"/>
+			<dep name="app_waitforring.so()(64bit)"/>
+			<dep name="app_waitforsilence.so()(64bit)"/>
+			<dep name="app_while.so()(64bit)"/>
+			<dep name="cdr_csv.so()(64bit)"/>
+			<dep name="cdr_custom.so()(64bit)"/>
+			<dep name="cdr_manager.so()(64bit)"/>
+			<dep name="chan_agent.so()(64bit)"/>
+			<dep name="chan_features.so()(64bit)"/>
+			<dep name="chan_iax2.so()(64bit)"/>
+			<dep name="chan_local.so()(64bit)"/>
+			<dep name="chan_mgcp.so()(64bit)"/>
+			<dep name="chan_oss.so()(64bit)"/>
+			<dep name="chan_phone.so()(64bit)"/>
+			<dep name="chan_sip.so()(64bit)"/>
+			<dep name="chan_skinny.so()(64bit)"/>
+			<dep name="codec_a_mu.so()(64bit)"/>
+			<dep name="codec_adpcm.so()(64bit)"/>
+			<dep name="codec_alaw.so()(64bit)"/>
+			<dep name="codec_g726.so()(64bit)"/>
+			<dep name="codec_gsm.so()(64bit)"/>
+			<dep name="codec_ilbc.so()(64bit)"/>
+			<dep name="codec_lpc10.so()(64bit)"/>
+			<dep name="codec_speex.so()(64bit)"/>
+			<dep name="codec_ulaw.so()(64bit)"/>
+			<dep name="format_au.so()(64bit)"/>
+			<dep name="format_g723.so()(64bit)"/>
+			<dep name="format_g726.so()(64bit)"/>
+			<dep name="format_g729.so()(64bit)"/>
+			<dep name="format_gsm.so()(64bit)"/>
+			<dep name="format_h263.so()(64bit)"/>
+			<dep name="format_ilbc.so()(64bit)"/>
+			<dep name="format_jpeg.so()(64bit)"/>
+			<dep name="format_pcm.so()(64bit)"/>
+			<dep name="format_pcm_alaw.so()(64bit)"/>
+			<dep name="format_sln.so()(64bit)"/>
+			<dep name="format_vox.so()(64bit)"/>
+			<dep name="format_wav.so()(64bit)"/>
+			<dep name="format_wav_gsm.so()(64bit)"/>
+			<dep name="func_callerid.so()(64bit)"/>
+			<dep name="func_enum.so()(64bit)"/>
+			<dep name="func_uri.so()(64bit)"/>
+			<dep name="pbx_ael.so()(64bit)"/>
+			<dep name="pbx_config.so()(64bit)"/>
+			<dep name="pbx_dundi.so()(64bit)"/>
+			<dep name="pbx_functions.so()(64bit)"/>
+			<dep name="pbx_loopback.so()(64bit)"/>
+			<dep name="pbx_realtime.so()(64bit)"/>
+			<dep name="pbx_spool.so()(64bit)"/>
+			<dep name="res_adsi.so()(64bit)"/>
+			<dep name="res_agi.so()(64bit)"/>
+			<dep name="res_crypto.so()(64bit)"/>
+			<dep name="res_features.so()(64bit)"/>
+			<dep name="res_indications.so()(64bit)"/>
+			<dep name="res_monitor.so()(64bit)"/>
+			<dep name="res_musiconhold.so()(64bit)"/>
+			<dep name="res_watchdog.so()(64bit)"/>
+			<dep name="asterisk" op="EQ" version="1.2.5" release="12.4"/>
+		</provides>
+		<requires>
+			<dep name="/usr/sbin/useradd" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/bin/sh"/>
+			<dep name="/usr/bin/perl"/>
+			<dep name="libc.so.6()(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.3)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.4)(64bit)"/>
+			<dep name="libcrypto.so.0.9.8()(64bit)"/>
+			<dep name="libcurl.so.3()(64bit)"/>
+			<dep name="libdl.so.2()(64bit)"/>
+			<dep name="libdl.so.2(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libidn.so.11()(64bit)"/>
+			<dep name="libm.so.6()(64bit)"/>
+			<dep name="libm.so.6(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libncurses.so.5()(64bit)"/>
+			<dep name="libpthread.so.0()(64bit)"/>
+			<dep name="libpthread.so.0(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libpthread.so.0(GLIBC_2.3.2)(64bit)"/>
+			<dep name="libresolv.so.2()(64bit)"/>
+			<dep name="libresolv.so.2(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libspeex.so.1()(64bit)"/>
+			<dep name="libssl.so.0.9.8()(64bit)"/>
+			<dep name="libz.so.1()(64bit)"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+</subchannel></channel>

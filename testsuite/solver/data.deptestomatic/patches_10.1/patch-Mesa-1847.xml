@@ -1,0 +1,727 @@
+<channel><subchannel>                                                  
+
+<patch>
+	<name>Mesa</name>
+	<arch>noarch</arch>
+	<version>1847</version>
+	<release>0</release>
+	<requires>
+		<dep kind="atom" name="Mesa" epoch="0" version="6.4.2" release="19.7" op="EQ"/>
+		<dep kind="atom" name="Mesa-32bit" epoch="0" version="6.4.2" release="19.7" op="EQ"/>
+		<dep kind="atom" name="Mesa-64bit" epoch="0" version="6.4.2" release="19.7" op="EQ"/>
+		<dep kind="atom" name="Mesa-devel" epoch="0" version="6.4.2" release="19.7" op="EQ"/>
+		<dep kind="atom" name="Mesa-devel-32bit" epoch="0" version="6.4.2" release="19.7" op="EQ"/>
+		<dep kind="atom" name="Mesa-devel-64bit" epoch="0" version="6.4.2" release="19.7" op="EQ"/>
+	</requires>
+</patch>
+<atom>
+	<name>Mesa</name>
+	<arch>i586</arch>
+	<version>6.4.2</version>
+	<release>19.7</release>
+	<freshens>
+		<dep kind="package" name="Mesa"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="Mesa" epoch="0" version="6.4.2" release="19.7" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>Mesa</name>
+	<arch>ppc</arch>
+	<version>6.4.2</version>
+	<release>19.7</release>
+	<freshens>
+		<dep kind="package" name="Mesa"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="Mesa" epoch="0" version="6.4.2" release="19.7" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>Mesa</name>
+	<arch>x86_64</arch>
+	<version>6.4.2</version>
+	<release>19.7</release>
+	<freshens>
+		<dep kind="package" name="Mesa"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="Mesa" epoch="0" version="6.4.2" release="19.7" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>Mesa-32bit</name>
+	<arch>x86_64</arch>
+	<version>6.4.2</version>
+	<release>19.7</release>
+	<freshens>
+		<dep kind="package" name="Mesa-32bit"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="Mesa-32bit" epoch="0" version="6.4.2" release="19.7" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>Mesa-64bit</name>
+	<arch>ppc</arch>
+	<version>6.4.2</version>
+	<release>19.7</release>
+	<freshens>
+		<dep kind="package" name="Mesa-64bit"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="Mesa-64bit" epoch="0" version="6.4.2" release="19.7" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>Mesa-devel</name>
+	<arch>i586</arch>
+	<version>6.4.2</version>
+	<release>19.7</release>
+	<freshens>
+		<dep kind="package" name="Mesa-devel"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="Mesa-devel" epoch="0" version="6.4.2" release="19.7" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>Mesa-devel</name>
+	<arch>ppc</arch>
+	<version>6.4.2</version>
+	<release>19.7</release>
+	<freshens>
+		<dep kind="package" name="Mesa-devel"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="Mesa-devel" epoch="0" version="6.4.2" release="19.7" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>Mesa-devel</name>
+	<arch>x86_64</arch>
+	<version>6.4.2</version>
+	<release>19.7</release>
+	<freshens>
+		<dep kind="package" name="Mesa-devel"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="Mesa-devel" epoch="0" version="6.4.2" release="19.7" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>Mesa-devel-32bit</name>
+	<arch>x86_64</arch>
+	<version>6.4.2</version>
+	<release>19.7</release>
+	<freshens>
+		<dep kind="package" name="Mesa-devel-32bit"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="Mesa-devel-32bit" epoch="0" version="6.4.2" release="19.7" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>Mesa-devel-64bit</name>
+	<arch>ppc</arch>
+	<version>6.4.2</version>
+	<release>19.7</release>
+	<freshens>
+		<dep kind="package" name="Mesa-devel-64bit"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="Mesa-devel-64bit" epoch="0" version="6.4.2" release="19.7" op="GE"/>
+	</requires>
+</atom>
+<package>
+	<name>Mesa</name>
+	<summary>Mesa: Permits the coexistance of Mesa and NVIDIA driver.</summary>
+	<description>This update permits the coexistance of Mesa and NVIDIA
+driver.
+</description>
+	<arch>i586</arch>
+	<version>6.4.2</version>
+	<release>19.7</release>
+	<filesize>13420654</filesize>
+	<installedsize>38809070</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>6.4.2</version>
+			<release>19.7</release>
+			<filename>Mesa-6.4.2-19.7.i586.rpm</filename>
+			<filesize>13420654</filesize>
+			<installedsize>38809070</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="xorg-x11-Mesa"/>
+			<dep name="XFree86-Mesa"/>
+			<dep name="ffb_dri.so"/>
+			<dep name="i810_dri.so"/>
+			<dep name="i830_dri.so"/>
+			<dep name="i915_dri.so"/>
+			<dep name="libGL.so.1"/>
+			<dep name="libGLU.so.1"/>
+			<dep name="libGLcore.so.1"/>
+			<dep name="libGLw.so.1"/>
+			<dep name="libOSMesa.so.6"/>
+			<dep name="mach64_dri.so"/>
+			<dep name="mga_dri.so"/>
+			<dep name="r128_dri.so"/>
+			<dep name="r200_dri.so"/>
+			<dep name="r300_dri.so"/>
+			<dep name="radeon_dri.so"/>
+			<dep name="s3v_dri.so"/>
+			<dep name="savage_dri.so"/>
+			<dep name="sis_dri.so"/>
+			<dep name="tdfx_dri.so"/>
+			<dep name="trident_dri.so"/>
+			<dep name="unichrome_dri.so"/>
+			<dep name="Mesa" op="EQ" version="6.4.2" release="19.7"/>
+		</provides>
+		<requires>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="libGL.so.1"/>
+			<dep name="libX11.so.6"/>
+			<dep name="libXext.so.6"/>
+			<dep name="libXm.so.3"/>
+			<dep name="libXt.so.6"/>
+			<dep name="libXxf86vm.so.1"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)"/>
+			<dep name="libdl.so.2"/>
+			<dep name="libdl.so.2(GLIBC_2.0)"/>
+			<dep name="libdl.so.2(GLIBC_2.1)"/>
+			<dep name="libdrm.so.2"/>
+			<dep name="libexpat.so.1"/>
+			<dep name="libgcc_s.so.1"/>
+			<dep name="libgcc_s.so.1(GCC_3.0)"/>
+			<dep name="libm.so.6"/>
+			<dep name="libm.so.6(GLIBC_2.0)"/>
+			<dep name="libpthread.so.0"/>
+			<dep name="libpthread.so.0(GLIBC_2.0)"/>
+			<dep name="libstdc++.so.6"/>
+			<dep name="libstdc++.so.6(CXXABI_1.3)"/>
+			<dep name="libstdc++.so.6(GLIBCXX_3.4)"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>Mesa</name>
+	<summary>Mesa: Permits the coexistance of Mesa and NVIDIA driver.</summary>
+	<description>This update permits the coexistance of Mesa and NVIDIA
+driver.
+</description>
+	<arch>ppc</arch>
+	<version>6.4.2</version>
+	<release>19.7</release>
+	<filesize>6353182</filesize>
+	<installedsize>20998182</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>6.4.2</version>
+			<release>19.7</release>
+			<filename>Mesa-6.4.2-19.7.ppc.rpm</filename>
+			<filesize>6353182</filesize>
+			<installedsize>20998182</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="xorg-x11-Mesa"/>
+			<dep name="XFree86-Mesa"/>
+			<dep name="libGL.so.1"/>
+			<dep name="libGLU.so.1"/>
+			<dep name="libGLcore.so.1"/>
+			<dep name="libGLw.so.1"/>
+			<dep name="libOSMesa.so.6"/>
+			<dep name="mach64_dri.so"/>
+			<dep name="r128_dri.so"/>
+			<dep name="r200_dri.so"/>
+			<dep name="r300_dri.so"/>
+			<dep name="radeon_dri.so"/>
+			<dep name="tdfx_dri.so"/>
+			<dep name="Mesa" op="EQ" version="6.4.2" release="19.7"/>
+		</provides>
+		<requires>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="libGL.so.1"/>
+			<dep name="libX11.so.6"/>
+			<dep name="libXext.so.6"/>
+			<dep name="libXm.so.3"/>
+			<dep name="libXt.so.6"/>
+			<dep name="libXxf86vm.so.1"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)"/>
+			<dep name="libc.so.6(GLIBC_2.4)"/>
+			<dep name="libdl.so.2"/>
+			<dep name="libdl.so.2(GLIBC_2.0)"/>
+			<dep name="libdl.so.2(GLIBC_2.1)"/>
+			<dep name="libdrm.so.2"/>
+			<dep name="libexpat.so.1"/>
+			<dep name="libgcc_s.so.1"/>
+			<dep name="libgcc_s.so.1(GCC_3.0)"/>
+			<dep name="libm.so.6"/>
+			<dep name="libm.so.6(GLIBC_2.0)"/>
+			<dep name="libpthread.so.0"/>
+			<dep name="libpthread.so.0(GLIBC_2.0)"/>
+			<dep name="libstdc++.so.6"/>
+			<dep name="libstdc++.so.6(CXXABI_1.3)"/>
+			<dep name="libstdc++.so.6(GLIBCXX_3.4)"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>Mesa</name>
+	<summary>Mesa: Permits the coexistance of Mesa and NVIDIA driver.</summary>
+	<description>This update permits the coexistance of Mesa and NVIDIA
+driver.
+</description>
+	<arch>x86_64</arch>
+	<version>6.4.2</version>
+	<release>19.7</release>
+	<filesize>9757218</filesize>
+	<installedsize>28056646</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>6.4.2</version>
+			<release>19.7</release>
+			<filename>Mesa-6.4.2-19.7.x86_64.rpm</filename>
+			<filesize>9757218</filesize>
+			<installedsize>28056646</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="xorg-x11-Mesa"/>
+			<dep name="XFree86-Mesa"/>
+			<dep name="i915_dri.so()(64bit)"/>
+			<dep name="libGL.so.1()(64bit)"/>
+			<dep name="libGLU.so.1()(64bit)"/>
+			<dep name="libGLcore.so.1()(64bit)"/>
+			<dep name="libGLw.so.1()(64bit)"/>
+			<dep name="libOSMesa.so.6()(64bit)"/>
+			<dep name="mach64_dri.so()(64bit)"/>
+			<dep name="mga_dri.so()(64bit)"/>
+			<dep name="r128_dri.so()(64bit)"/>
+			<dep name="r200_dri.so()(64bit)"/>
+			<dep name="r300_dri.so()(64bit)"/>
+			<dep name="radeon_dri.so()(64bit)"/>
+			<dep name="savage_dri.so()(64bit)"/>
+			<dep name="tdfx_dri.so()(64bit)"/>
+			<dep name="unichrome_dri.so()(64bit)"/>
+			<dep name="Mesa" op="EQ" version="6.4.2" release="19.7"/>
+		</provides>
+		<requires>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="libGL.so.1()(64bit)"/>
+			<dep name="libX11.so.6()(64bit)"/>
+			<dep name="libXext.so.6()(64bit)"/>
+			<dep name="libXm.so.3()(64bit)"/>
+			<dep name="libXt.so.6()(64bit)"/>
+			<dep name="libXxf86vm.so.1()(64bit)"/>
+			<dep name="libc.so.6()(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)(64bit)"/>
+			<dep name="libdl.so.2()(64bit)"/>
+			<dep name="libdl.so.2(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libdrm.so.2()(64bit)"/>
+			<dep name="libexpat.so.1()(64bit)"/>
+			<dep name="libgcc_s.so.1()(64bit)"/>
+			<dep name="libgcc_s.so.1(GCC_3.0)(64bit)"/>
+			<dep name="libm.so.6()(64bit)"/>
+			<dep name="libm.so.6(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libpthread.so.0()(64bit)"/>
+			<dep name="libpthread.so.0(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libstdc++.so.6()(64bit)"/>
+			<dep name="libstdc++.so.6(CXXABI_1.3)(64bit)"/>
+			<dep name="libstdc++.so.6(GLIBCXX_3.4)(64bit)"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>Mesa-32bit</name>
+	<summary>Mesa: Permits the coexistance of Mesa and NVIDIA driver.</summary>
+	<description>This update permits the coexistance of Mesa and NVIDIA
+driver.
+</description>
+	<arch>x86_64</arch>
+	<version>6.4.2</version>
+	<release>19.7</release>
+	<filesize>13190168</filesize>
+	<installedsize>37418092</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>6.4.2</version>
+			<release>19.7</release>
+			<filename>Mesa-32bit-6.4.2-19.7.x86_64.rpm</filename>
+			<filesize>13190168</filesize>
+			<installedsize>37418092</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="XFree86-Mesa-32bit"/>
+			<dep name="xorg-x11-Mesa-32bit"/>
+			<dep name="ffb_dri.so"/>
+			<dep name="i810_dri.so"/>
+			<dep name="i830_dri.so"/>
+			<dep name="i915_dri.so"/>
+			<dep name="libGL.so.1"/>
+			<dep name="libGLU.so.1"/>
+			<dep name="libGLcore.so.1"/>
+			<dep name="libGLw.so.1"/>
+			<dep name="libOSMesa.so.6"/>
+			<dep name="mach64_dri.so"/>
+			<dep name="mga_dri.so"/>
+			<dep name="r128_dri.so"/>
+			<dep name="r200_dri.so"/>
+			<dep name="r300_dri.so"/>
+			<dep name="radeon_dri.so"/>
+			<dep name="s3v_dri.so"/>
+			<dep name="savage_dri.so"/>
+			<dep name="sis_dri.so"/>
+			<dep name="tdfx_dri.so"/>
+			<dep name="trident_dri.so"/>
+			<dep name="unichrome_dri.so"/>
+			<dep name="Mesa-32bit" op="EQ" version="6.4.2" release="19.7"/>
+		</provides>
+		<requires>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="libGL.so.1"/>
+			<dep name="libX11.so.6"/>
+			<dep name="libXext.so.6"/>
+			<dep name="libXm.so.3"/>
+			<dep name="libXt.so.6"/>
+			<dep name="libXxf86vm.so.1"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)"/>
+			<dep name="libdl.so.2"/>
+			<dep name="libdl.so.2(GLIBC_2.0)"/>
+			<dep name="libdl.so.2(GLIBC_2.1)"/>
+			<dep name="libdrm.so.2"/>
+			<dep name="libexpat.so.1"/>
+			<dep name="libgcc_s.so.1"/>
+			<dep name="libgcc_s.so.1(GCC_3.0)"/>
+			<dep name="libm.so.6"/>
+			<dep name="libm.so.6(GLIBC_2.0)"/>
+			<dep name="libpthread.so.0"/>
+			<dep name="libpthread.so.0(GLIBC_2.0)"/>
+			<dep name="libstdc++.so.6"/>
+			<dep name="libstdc++.so.6(CXXABI_1.3)"/>
+			<dep name="libstdc++.so.6(GLIBCXX_3.4)"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>Mesa-64bit</name>
+	<summary>Mesa: Permits the coexistance of Mesa and NVIDIA driver.</summary>
+	<description>This update permits the coexistance of Mesa and NVIDIA
+driver.
+</description>
+	<arch>ppc</arch>
+	<version>6.4.2</version>
+	<release>19.7</release>
+	<filesize>14569587</filesize>
+	<installedsize>52509014</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>6.4.2</version>
+			<release>19.7</release>
+			<filename>Mesa-64bit-6.4.2-19.7.ppc.rpm</filename>
+			<filesize>14569587</filesize>
+			<installedsize>52509014</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="XFree86-Mesa-64bit"/>
+			<dep name="xorg-x11-Mesa-64bit"/>
+			<dep name="ffb_dri.so()(64bit)"/>
+			<dep name="i810_dri.so()(64bit)"/>
+			<dep name="i830_dri.so()(64bit)"/>
+			<dep name="i915_dri.so()(64bit)"/>
+			<dep name="libGL.so.1()(64bit)"/>
+			<dep name="libGLU.so.1()(64bit)"/>
+			<dep name="libGLcore.so.1()(64bit)"/>
+			<dep name="libGLw.so.1()(64bit)"/>
+			<dep name="libOSMesa.so.6()(64bit)"/>
+			<dep name="mach64_dri.so()(64bit)"/>
+			<dep name="mga_dri.so()(64bit)"/>
+			<dep name="r128_dri.so()(64bit)"/>
+			<dep name="r200_dri.so()(64bit)"/>
+			<dep name="r300_dri.so()(64bit)"/>
+			<dep name="radeon_dri.so()(64bit)"/>
+			<dep name="s3v_dri.so()(64bit)"/>
+			<dep name="savage_dri.so()(64bit)"/>
+			<dep name="sis_dri.so()(64bit)"/>
+			<dep name="tdfx_dri.so()(64bit)"/>
+			<dep name="trident_dri.so()(64bit)"/>
+			<dep name="unichrome_dri.so()(64bit)"/>
+			<dep name="Mesa-64bit" op="EQ" version="6.4.2" release="19.7"/>
+		</provides>
+		<requires>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="libGL.so.1()(64bit)"/>
+			<dep name="libX11.so.6()(64bit)"/>
+			<dep name="libXext.so.6()(64bit)"/>
+			<dep name="libXm.so.3()(64bit)"/>
+			<dep name="libXt.so.6()(64bit)"/>
+			<dep name="libXxf86vm.so.1()(64bit)"/>
+			<dep name="libc.so.6()(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.3)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.4)(64bit)"/>
+			<dep name="libdl.so.2()(64bit)"/>
+			<dep name="libdl.so.2(GLIBC_2.3)(64bit)"/>
+			<dep name="libdrm.so.2()(64bit)"/>
+			<dep name="libexpat.so.1()(64bit)"/>
+			<dep name="libgcc_s.so.1()(64bit)"/>
+			<dep name="libgcc_s.so.1(GCC_3.0)(64bit)"/>
+			<dep name="libm.so.6()(64bit)"/>
+			<dep name="libm.so.6(GLIBC_2.3)(64bit)"/>
+			<dep name="libpthread.so.0()(64bit)"/>
+			<dep name="libpthread.so.0(GLIBC_2.3)(64bit)"/>
+			<dep name="libstdc++.so.6()(64bit)"/>
+			<dep name="libstdc++.so.6(CXXABI_1.3)(64bit)"/>
+			<dep name="libstdc++.so.6(GLIBCXX_3.4)(64bit)"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>Mesa-devel</name>
+	<summary>Mesa: Permits the coexistance of Mesa and NVIDIA driver.</summary>
+	<description>This update permits the coexistance of Mesa and NVIDIA
+driver.
+</description>
+	<arch>i586</arch>
+	<version>6.4.2</version>
+	<release>19.7</release>
+	<filesize>398324</filesize>
+	<installedsize>344456</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>6.4.2</version>
+			<release>19.7</release>
+			<filename>Mesa-devel-6.4.2-19.7.i586.rpm</filename>
+			<filesize>398324</filesize>
+			<installedsize>344456</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="xorg-x11-Mesa-devel"/>
+			<dep name="XFree86-Mesa-devel"/>
+			<dep name="Mesa-devel" op="EQ" version="6.4.2" release="19.7"/>
+		</provides>
+		<requires>
+			<dep name="Mesa" op="EQ" version="6.4.2"/>
+			<dep name="xorg-x11-devel"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>Mesa-devel</name>
+	<summary>Mesa: Permits the coexistance of Mesa and NVIDIA driver.</summary>
+	<description>This update permits the coexistance of Mesa and NVIDIA
+driver.
+</description>
+	<arch>ppc</arch>
+	<version>6.4.2</version>
+	<release>19.7</release>
+	<filesize>398880</filesize>
+	<installedsize>344456</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>6.4.2</version>
+			<release>19.7</release>
+			<filename>Mesa-devel-6.4.2-19.7.ppc.rpm</filename>
+			<filesize>398880</filesize>
+			<installedsize>344456</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="xorg-x11-Mesa-devel"/>
+			<dep name="XFree86-Mesa-devel"/>
+			<dep name="Mesa-devel" op="EQ" version="6.4.2" release="19.7"/>
+		</provides>
+		<requires>
+			<dep name="Mesa" op="EQ" version="6.4.2"/>
+			<dep name="xorg-x11-devel"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>Mesa-devel</name>
+	<summary>Mesa: Permits the coexistance of Mesa and NVIDIA driver.</summary>
+	<description>This update permits the coexistance of Mesa and NVIDIA
+driver.
+</description>
+	<arch>x86_64</arch>
+	<version>6.4.2</version>
+	<release>19.7</release>
+	<filesize>398593</filesize>
+	<installedsize>344456</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>6.4.2</version>
+			<release>19.7</release>
+			<filename>Mesa-devel-6.4.2-19.7.x86_64.rpm</filename>
+			<filesize>398593</filesize>
+			<installedsize>344456</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="xorg-x11-Mesa-devel"/>
+			<dep name="XFree86-Mesa-devel"/>
+			<dep name="Mesa-devel" op="EQ" version="6.4.2" release="19.7"/>
+		</provides>
+		<requires>
+			<dep name="Mesa" op="EQ" version="6.4.2"/>
+			<dep name="xorg-x11-devel"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>Mesa-devel-32bit</name>
+	<summary>Mesa: Permits the coexistance of Mesa and NVIDIA driver.</summary>
+	<description>This update permits the coexistance of Mesa and NVIDIA
+driver.
+</description>
+	<arch>x86_64</arch>
+	<version>6.4.2</version>
+	<release>19.7</release>
+	<filesize>6544</filesize>
+	<installedsize>0</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>6.4.2</version>
+			<release>19.7</release>
+			<filename>Mesa-devel-32bit-6.4.2-19.7.x86_64.rpm</filename>
+			<filesize>6544</filesize>
+			<installedsize>0</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="XFree86-Mesa-devel-32bit"/>
+			<dep name="xorg-x11-Mesa-devel-32bit"/>
+			<dep name="Mesa-devel-32bit" op="EQ" version="6.4.2" release="19.7"/>
+		</provides>
+		<requires>
+			<dep name="Mesa-devel" op="EQ" version="6.4.2"/>
+			<dep name="Mesa-32bit" op="EQ" version="6.4.2"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>Mesa-devel-64bit</name>
+	<summary>Mesa: Permits the coexistance of Mesa and NVIDIA driver.</summary>
+	<description>This update permits the coexistance of Mesa and NVIDIA
+driver.
+</description>
+	<arch>ppc</arch>
+	<version>6.4.2</version>
+	<release>19.7</release>
+	<filesize>6511</filesize>
+	<installedsize>0</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>6.4.2</version>
+			<release>19.7</release>
+			<filename>Mesa-devel-64bit-6.4.2-19.7.ppc.rpm</filename>
+			<filesize>6511</filesize>
+			<installedsize>0</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="XFree86-Mesa-devel-64bit"/>
+			<dep name="xorg-x11-Mesa-devel-64bit"/>
+			<dep name="Mesa-devel-64bit" op="EQ" version="6.4.2" release="19.7"/>
+		</provides>
+		<requires>
+			<dep name="Mesa-devel" op="EQ" version="6.4.2"/>
+			<dep name="Mesa-64bit" op="EQ" version="6.4.2"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+</subchannel></channel>

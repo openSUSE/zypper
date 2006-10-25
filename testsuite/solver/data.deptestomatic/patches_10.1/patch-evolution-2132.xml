@@ -1,0 +1,899 @@
+<channel><subchannel>                                                  
+
+<patch>
+	<name>evolution</name>
+	<arch>noarch</arch>
+	<version>2132</version>
+	<release>0</release>
+	<requires>
+		<dep kind="atom" name="evolution" epoch="0" version="2.6.0" release="49.23" op="EQ"/>
+		<dep kind="atom" name="evolution-data-server" epoch="0" version="1.6.0" release="43.25" op="EQ"/>
+		<dep kind="atom" name="evolution-data-server-32bit" epoch="0" version="1.6.0" release="43.25" op="EQ"/>
+		<dep kind="atom" name="evolution-data-server-64bit" epoch="0" version="1.6.0" release="43.25" op="EQ"/>
+		<dep kind="atom" name="evolution-data-server-devel" epoch="0" version="1.6.0" release="43.25" op="EQ"/>
+		<dep kind="atom" name="evolution-devel" epoch="0" version="2.6.0" release="49.23" op="EQ"/>
+		<dep kind="atom" name="evolution-exchange" epoch="0" version="2.6.0" release="27.13" op="EQ"/>
+		<dep kind="atom" name="evolution-pilot" epoch="0" version="2.6.0" release="49.23" op="EQ"/>
+	</requires>
+</patch>
+<atom>
+	<name>evolution</name>
+	<arch>i586</arch>
+	<version>2.6.0</version>
+	<release>49.23</release>
+	<freshens>
+		<dep kind="package" name="evolution"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="evolution" epoch="0" version="2.6.0" release="49.23" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>evolution</name>
+	<arch>ppc</arch>
+	<version>2.6.0</version>
+	<release>49.23</release>
+	<freshens>
+		<dep kind="package" name="evolution"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="evolution" epoch="0" version="2.6.0" release="49.23" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>evolution</name>
+	<arch>x86_64</arch>
+	<version>2.6.0</version>
+	<release>49.23</release>
+	<freshens>
+		<dep kind="package" name="evolution"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="evolution" epoch="0" version="2.6.0" release="49.23" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>evolution-data-server</name>
+	<arch>i586</arch>
+	<version>1.6.0</version>
+	<release>43.25</release>
+	<freshens>
+		<dep kind="package" name="evolution-data-server"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="evolution-data-server" epoch="0" version="1.6.0" release="43.25" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>evolution-data-server</name>
+	<arch>ppc</arch>
+	<version>1.6.0</version>
+	<release>43.25</release>
+	<freshens>
+		<dep kind="package" name="evolution-data-server"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="evolution-data-server" epoch="0" version="1.6.0" release="43.25" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>evolution-data-server</name>
+	<arch>x86_64</arch>
+	<version>1.6.0</version>
+	<release>43.25</release>
+	<freshens>
+		<dep kind="package" name="evolution-data-server"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="evolution-data-server" epoch="0" version="1.6.0" release="43.25" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>evolution-data-server-32bit</name>
+	<arch>x86_64</arch>
+	<version>1.6.0</version>
+	<release>43.25</release>
+	<freshens>
+		<dep kind="package" name="evolution-data-server-32bit"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="evolution-data-server-32bit" epoch="0" version="1.6.0" release="43.25" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>evolution-data-server-64bit</name>
+	<arch>ppc</arch>
+	<version>1.6.0</version>
+	<release>43.25</release>
+	<freshens>
+		<dep kind="package" name="evolution-data-server-64bit"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="evolution-data-server-64bit" epoch="0" version="1.6.0" release="43.25" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>evolution-data-server-devel</name>
+	<arch>i586</arch>
+	<version>1.6.0</version>
+	<release>43.25</release>
+	<freshens>
+		<dep kind="package" name="evolution-data-server-devel"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="evolution-data-server-devel" epoch="0" version="1.6.0" release="43.25" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>evolution-data-server-devel</name>
+	<arch>ppc</arch>
+	<version>1.6.0</version>
+	<release>43.25</release>
+	<freshens>
+		<dep kind="package" name="evolution-data-server-devel"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="evolution-data-server-devel" epoch="0" version="1.6.0" release="43.25" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>evolution-data-server-devel</name>
+	<arch>x86_64</arch>
+	<version>1.6.0</version>
+	<release>43.25</release>
+	<freshens>
+		<dep kind="package" name="evolution-data-server-devel"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="evolution-data-server-devel" epoch="0" version="1.6.0" release="43.25" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>evolution-devel</name>
+	<arch>i586</arch>
+	<version>2.6.0</version>
+	<release>49.23</release>
+	<freshens>
+		<dep kind="package" name="evolution-devel"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="evolution-devel" epoch="0" version="2.6.0" release="49.23" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>evolution-devel</name>
+	<arch>ppc</arch>
+	<version>2.6.0</version>
+	<release>49.23</release>
+	<freshens>
+		<dep kind="package" name="evolution-devel"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="evolution-devel" epoch="0" version="2.6.0" release="49.23" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>evolution-devel</name>
+	<arch>x86_64</arch>
+	<version>2.6.0</version>
+	<release>49.23</release>
+	<freshens>
+		<dep kind="package" name="evolution-devel"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="evolution-devel" epoch="0" version="2.6.0" release="49.23" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>evolution-exchange</name>
+	<arch>i586</arch>
+	<version>2.6.0</version>
+	<release>27.13</release>
+	<freshens>
+		<dep kind="package" name="evolution-exchange"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="evolution-exchange" epoch="0" version="2.6.0" release="27.13" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>evolution-exchange</name>
+	<arch>ppc</arch>
+	<version>2.6.0</version>
+	<release>27.13</release>
+	<freshens>
+		<dep kind="package" name="evolution-exchange"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="evolution-exchange" epoch="0" version="2.6.0" release="27.13" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>evolution-exchange</name>
+	<arch>x86_64</arch>
+	<version>2.6.0</version>
+	<release>27.13</release>
+	<freshens>
+		<dep kind="package" name="evolution-exchange"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="evolution-exchange" epoch="0" version="2.6.0" release="27.13" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>evolution-pilot</name>
+	<arch>i586</arch>
+	<version>2.6.0</version>
+	<release>49.23</release>
+	<freshens>
+		<dep kind="package" name="evolution-pilot"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="evolution-pilot" epoch="0" version="2.6.0" release="49.23" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>evolution-pilot</name>
+	<arch>ppc</arch>
+	<version>2.6.0</version>
+	<release>49.23</release>
+	<freshens>
+		<dep kind="package" name="evolution-pilot"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="evolution-pilot" epoch="0" version="2.6.0" release="49.23" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>evolution-pilot</name>
+	<arch>x86_64</arch>
+	<version>2.6.0</version>
+	<release>49.23</release>
+	<freshens>
+		<dep kind="package" name="evolution-pilot"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="evolution-pilot" epoch="0" version="2.6.0" release="49.23" op="GE"/>
+	</requires>
+</atom>
+<package>
+	<name>evolution</name>
+	<summary>evolution: recommended update for all users</summary>
+	<description>Critical and annoying issues like Pinging IMAP server even
+when offline, attachment drag & drop crash, Hang in
+connector, appointment loses, crashes due to specific
+appointments, attachment getting corrupted, handling of
+GPG/PGP signed mails, Junk/Unjunk handling of GW, MS-live
+meeting handling, hang in exchange-connector and exchange
+connection issues are fixed.
+</description>
+	<arch>i586</arch>
+	<version>2.6.0</version>
+	<release>49.23</release>
+	<filesize>9828359</filesize>
+	<installedsize>32361078</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>2.6.0</version>
+			<release>49.23</release>
+			<filename>evolution-2.6.0-49.23.i586.rpm</filename>
+			<filesize>9828359</filesize>
+			<installedsize>32361078</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+	</deps>
+</package>
+<package>
+	<name>evolution</name>
+	<summary>evolution: recommended update for all users</summary>
+	<description>Critical and annoying issues like Pinging IMAP server even
+when offline, attachment drag & drop crash, Hang in
+connector, appointment loses, crashes due to specific
+appointments, attachment getting corrupted, handling of
+GPG/PGP signed mails, Junk/Unjunk handling of GW, MS-live
+meeting handling, hang in exchange-connector and exchange
+connection issues are fixed.
+</description>
+	<arch>ppc</arch>
+	<version>2.6.0</version>
+	<release>49.23</release>
+	<filesize>10054162</filesize>
+	<installedsize>33773166</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>2.6.0</version>
+			<release>49.23</release>
+			<filename>evolution-2.6.0-49.23.ppc.rpm</filename>
+			<filesize>10054162</filesize>
+			<installedsize>33773166</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+	</deps>
+</package>
+<package>
+	<name>evolution</name>
+	<summary>evolution: recommended update for all users</summary>
+	<description>Critical and annoying issues like Pinging IMAP server even
+when offline, attachment drag & drop crash, Hang in
+connector, appointment loses, crashes due to specific
+appointments, attachment getting corrupted, handling of
+GPG/PGP signed mails, Junk/Unjunk handling of GW, MS-live
+meeting handling, hang in exchange-connector and exchange
+connection issues are fixed.
+</description>
+	<arch>x86_64</arch>
+	<version>2.6.0</version>
+	<release>49.23</release>
+	<filesize>10061779</filesize>
+	<installedsize>33173612</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>2.6.0</version>
+			<release>49.23</release>
+			<filename>evolution-2.6.0-49.23.x86_64.rpm</filename>
+			<filesize>10061779</filesize>
+			<installedsize>33173612</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+	</deps>
+</package>
+<package>
+	<name>evolution-data-server</name>
+	<summary>evolution: recommended update for all users</summary>
+	<description>Critical and annoying issues like Pinging IMAP server even
+when offline, attachment drag & drop crash, Hang in
+connector, appointment loses, crashes due to specific
+appointments, attachment getting corrupted, handling of
+GPG/PGP signed mails, Junk/Unjunk handling of GW, MS-live
+meeting handling, hang in exchange-connector and exchange
+connection issues are fixed.
+</description>
+	<arch>i586</arch>
+	<version>1.6.0</version>
+	<release>43.25</release>
+	<filesize>3774093</filesize>
+	<installedsize>12926454</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>1.6.0</version>
+			<release>43.25</release>
+			<filename>evolution-data-server-1.6.0-43.25.i586.rpm</filename>
+			<filesize>3774093</filesize>
+			<installedsize>12926454</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+	</deps>
+</package>
+<package>
+	<name>evolution-data-server</name>
+	<summary>evolution: recommended update for all users</summary>
+	<description>Critical and annoying issues like Pinging IMAP server even
+when offline, attachment drag & drop crash, Hang in
+connector, appointment loses, crashes due to specific
+appointments, attachment getting corrupted, handling of
+GPG/PGP signed mails, Junk/Unjunk handling of GW, MS-live
+meeting handling, hang in exchange-connector and exchange
+connection issues are fixed.
+</description>
+	<arch>ppc</arch>
+	<version>1.6.0</version>
+	<release>43.25</release>
+	<filesize>4023181</filesize>
+	<installedsize>14638082</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>1.6.0</version>
+			<release>43.25</release>
+			<filename>evolution-data-server-1.6.0-43.25.ppc.rpm</filename>
+			<filesize>4023181</filesize>
+			<installedsize>14638082</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+	</deps>
+</package>
+<package>
+	<name>evolution-data-server</name>
+	<summary>evolution: recommended update for all users</summary>
+	<description>Critical and annoying issues like Pinging IMAP server even
+when offline, attachment drag & drop crash, Hang in
+connector, appointment loses, crashes due to specific
+appointments, attachment getting corrupted, handling of
+GPG/PGP signed mails, Junk/Unjunk handling of GW, MS-live
+meeting handling, hang in exchange-connector and exchange
+connection issues are fixed.
+</description>
+	<arch>x86_64</arch>
+	<version>1.6.0</version>
+	<release>43.25</release>
+	<filesize>4072178</filesize>
+	<installedsize>13910411</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>1.6.0</version>
+			<release>43.25</release>
+			<filename>evolution-data-server-1.6.0-43.25.x86_64.rpm</filename>
+			<filesize>4072178</filesize>
+			<installedsize>13910411</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+	</deps>
+</package>
+<package>
+	<name>evolution-data-server-32bit</name>
+	<summary>evolution: recommended update for all users</summary>
+	<description>Critical and annoying issues like Pinging IMAP server even
+when offline, attachment drag & drop crash, Hang in
+connector, appointment loses, crashes due to specific
+appointments, attachment getting corrupted, handling of
+GPG/PGP signed mails, Junk/Unjunk handling of GW, MS-live
+meeting handling, hang in exchange-connector and exchange
+connection issues are fixed.
+</description>
+	<arch>x86_64</arch>
+	<version>1.6.0</version>
+	<release>43.25</release>
+	<filesize>2496280</filesize>
+	<installedsize>6954465</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>1.6.0</version>
+			<release>43.25</release>
+			<filename>evolution-data-server-32bit-1.6.0-43.25.x86_64.rpm</filename>
+			<filesize>2496280</filesize>
+			<installedsize>6954465</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+	</deps>
+</package>
+<package>
+	<name>evolution-data-server-64bit</name>
+	<summary>evolution: recommended update for all users</summary>
+	<description>Critical and annoying issues like Pinging IMAP server even
+when offline, attachment drag & drop crash, Hang in
+connector, appointment loses, crashes due to specific
+appointments, attachment getting corrupted, handling of
+GPG/PGP signed mails, Junk/Unjunk handling of GW, MS-live
+meeting handling, hang in exchange-connector and exchange
+connection issues are fixed.
+</description>
+	<arch>ppc</arch>
+	<version>1.6.0</version>
+	<release>43.25</release>
+	<filesize>2931681</filesize>
+	<installedsize>10739290</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>1.6.0</version>
+			<release>43.25</release>
+			<filename>evolution-data-server-64bit-1.6.0-43.25.ppc.rpm</filename>
+			<filesize>2931681</filesize>
+			<installedsize>10739290</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+	</deps>
+</package>
+<package>
+	<name>evolution-data-server-devel</name>
+	<summary>evolution: recommended update for all users</summary>
+	<description>Critical and annoying issues like Pinging IMAP server even
+when offline, attachment drag & drop crash, Hang in
+connector, appointment loses, crashes due to specific
+appointments, attachment getting corrupted, handling of
+GPG/PGP signed mails, Junk/Unjunk handling of GW, MS-live
+meeting handling, hang in exchange-connector and exchange
+connection issues are fixed.
+</description>
+	<arch>i586</arch>
+	<version>1.6.0</version>
+	<release>43.25</release>
+	<filesize>329930</filesize>
+	<installedsize>3336135</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>1.6.0</version>
+			<release>43.25</release>
+			<filename>evolution-data-server-devel-1.6.0-43.25.i586.rpm</filename>
+			<filesize>329930</filesize>
+			<installedsize>3336135</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+	</deps>
+</package>
+<package>
+	<name>evolution-data-server-devel</name>
+	<summary>evolution: recommended update for all users</summary>
+	<description>Critical and annoying issues like Pinging IMAP server even
+when offline, attachment drag & drop crash, Hang in
+connector, appointment loses, crashes due to specific
+appointments, attachment getting corrupted, handling of
+GPG/PGP signed mails, Junk/Unjunk handling of GW, MS-live
+meeting handling, hang in exchange-connector and exchange
+connection issues are fixed.
+</description>
+	<arch>ppc</arch>
+	<version>1.6.0</version>
+	<release>43.25</release>
+	<filesize>329766</filesize>
+	<installedsize>3336135</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>1.6.0</version>
+			<release>43.25</release>
+			<filename>evolution-data-server-devel-1.6.0-43.25.ppc.rpm</filename>
+			<filesize>329766</filesize>
+			<installedsize>3336135</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+	</deps>
+</package>
+<package>
+	<name>evolution-data-server-devel</name>
+	<summary>evolution: recommended update for all users</summary>
+	<description>Critical and annoying issues like Pinging IMAP server even
+when offline, attachment drag & drop crash, Hang in
+connector, appointment loses, crashes due to specific
+appointments, attachment getting corrupted, handling of
+GPG/PGP signed mails, Junk/Unjunk handling of GW, MS-live
+meeting handling, hang in exchange-connector and exchange
+connection issues are fixed.
+</description>
+	<arch>x86_64</arch>
+	<version>1.6.0</version>
+	<release>43.25</release>
+	<filesize>329954</filesize>
+	<installedsize>3334610</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>1.6.0</version>
+			<release>43.25</release>
+			<filename>evolution-data-server-devel-1.6.0-43.25.x86_64.rpm</filename>
+			<filesize>329954</filesize>
+			<installedsize>3334610</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+	</deps>
+</package>
+<package>
+	<name>evolution-devel</name>
+	<summary>evolution: recommended update for all users</summary>
+	<description>Critical and annoying issues like Pinging IMAP server even
+when offline, attachment drag & drop crash, Hang in
+connector, appointment loses, crashes due to specific
+appointments, attachment getting corrupted, handling of
+GPG/PGP signed mails, Junk/Unjunk handling of GW, MS-live
+meeting handling, hang in exchange-connector and exchange
+connection issues are fixed.
+</description>
+	<arch>i586</arch>
+	<version>2.6.0</version>
+	<release>49.23</release>
+	<filesize>169982</filesize>
+	<installedsize>999146</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>2.6.0</version>
+			<release>49.23</release>
+			<filename>evolution-devel-2.6.0-49.23.i586.rpm</filename>
+			<filesize>169982</filesize>
+			<installedsize>999146</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+	</deps>
+</package>
+<package>
+	<name>evolution-devel</name>
+	<summary>evolution: recommended update for all users</summary>
+	<description>Critical and annoying issues like Pinging IMAP server even
+when offline, attachment drag & drop crash, Hang in
+connector, appointment loses, crashes due to specific
+appointments, attachment getting corrupted, handling of
+GPG/PGP signed mails, Junk/Unjunk handling of GW, MS-live
+meeting handling, hang in exchange-connector and exchange
+connection issues are fixed.
+</description>
+	<arch>ppc</arch>
+	<version>2.6.0</version>
+	<release>49.23</release>
+	<filesize>170074</filesize>
+	<installedsize>999146</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>2.6.0</version>
+			<release>49.23</release>
+			<filename>evolution-devel-2.6.0-49.23.ppc.rpm</filename>
+			<filesize>170074</filesize>
+			<installedsize>999146</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+	</deps>
+</package>
+<package>
+	<name>evolution-devel</name>
+	<summary>evolution: recommended update for all users</summary>
+	<description>Critical and annoying issues like Pinging IMAP server even
+when offline, attachment drag & drop crash, Hang in
+connector, appointment loses, crashes due to specific
+appointments, attachment getting corrupted, handling of
+GPG/PGP signed mails, Junk/Unjunk handling of GW, MS-live
+meeting handling, hang in exchange-connector and exchange
+connection issues are fixed.
+</description>
+	<arch>x86_64</arch>
+	<version>2.6.0</version>
+	<release>49.23</release>
+	<filesize>169896</filesize>
+	<installedsize>995478</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>2.6.0</version>
+			<release>49.23</release>
+			<filename>evolution-devel-2.6.0-49.23.x86_64.rpm</filename>
+			<filesize>169896</filesize>
+			<installedsize>995478</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+	</deps>
+</package>
+<package>
+	<name>evolution-exchange</name>
+	<summary>evolution: recommended update for all users</summary>
+	<description>Critical and annoying issues like Pinging IMAP server even
+when offline, attachment drag & drop crash, Hang in
+connector, appointment loses, crashes due to specific
+appointments, attachment getting corrupted, handling of
+GPG/PGP signed mails, Junk/Unjunk handling of GW, MS-live
+meeting handling, hang in exchange-connector and exchange
+connection issues are fixed.
+</description>
+	<arch>i586</arch>
+	<version>2.6.0</version>
+	<release>27.13</release>
+	<filesize>489841</filesize>
+	<installedsize>2107122</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>2.6.0</version>
+			<release>27.13</release>
+			<filename>evolution-exchange-2.6.0-27.13.i586.rpm</filename>
+			<filesize>489841</filesize>
+			<installedsize>2107122</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+	</deps>
+</package>
+<package>
+	<name>evolution-exchange</name>
+	<summary>evolution: recommended update for all users</summary>
+	<description>Critical and annoying issues like Pinging IMAP server even
+when offline, attachment drag & drop crash, Hang in
+connector, appointment loses, crashes due to specific
+appointments, attachment getting corrupted, handling of
+GPG/PGP signed mails, Junk/Unjunk handling of GW, MS-live
+meeting handling, hang in exchange-connector and exchange
+connection issues are fixed.
+</description>
+	<arch>ppc</arch>
+	<version>2.6.0</version>
+	<release>27.13</release>
+	<filesize>492864</filesize>
+	<installedsize>2168972</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>2.6.0</version>
+			<release>27.13</release>
+			<filename>evolution-exchange-2.6.0-27.13.ppc.rpm</filename>
+			<filesize>492864</filesize>
+			<installedsize>2168972</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+	</deps>
+</package>
+<package>
+	<name>evolution-exchange</name>
+	<summary>evolution: recommended update for all users</summary>
+	<description>Critical and annoying issues like Pinging IMAP server even
+when offline, attachment drag & drop crash, Hang in
+connector, appointment loses, crashes due to specific
+appointments, attachment getting corrupted, handling of
+GPG/PGP signed mails, Junk/Unjunk handling of GW, MS-live
+meeting handling, hang in exchange-connector and exchange
+connection issues are fixed.
+</description>
+	<arch>x86_64</arch>
+	<version>2.6.0</version>
+	<release>27.13</release>
+	<filesize>500800</filesize>
+	<installedsize>2190494</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>2.6.0</version>
+			<release>27.13</release>
+			<filename>evolution-exchange-2.6.0-27.13.x86_64.rpm</filename>
+			<filesize>500800</filesize>
+			<installedsize>2190494</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+	</deps>
+</package>
+<package>
+	<name>evolution-pilot</name>
+	<summary>evolution: recommended update for all users</summary>
+	<description>Critical and annoying issues like Pinging IMAP server even
+when offline, attachment drag & drop crash, Hang in
+connector, appointment loses, crashes due to specific
+appointments, attachment getting corrupted, handling of
+GPG/PGP signed mails, Junk/Unjunk handling of GW, MS-live
+meeting handling, hang in exchange-connector and exchange
+connection issues are fixed.
+</description>
+	<arch>i586</arch>
+	<version>2.6.0</version>
+	<release>49.23</release>
+	<filesize>81956</filesize>
+	<installedsize>152957</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>2.6.0</version>
+			<release>49.23</release>
+			<filename>evolution-pilot-2.6.0-49.23.i586.rpm</filename>
+			<filesize>81956</filesize>
+			<installedsize>152957</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+	</deps>
+</package>
+<package>
+	<name>evolution-pilot</name>
+	<summary>evolution: recommended update for all users</summary>
+	<description>Critical and annoying issues like Pinging IMAP server even
+when offline, attachment drag & drop crash, Hang in
+connector, appointment loses, crashes due to specific
+appointments, attachment getting corrupted, handling of
+GPG/PGP signed mails, Junk/Unjunk handling of GW, MS-live
+meeting handling, hang in exchange-connector and exchange
+connection issues are fixed.
+</description>
+	<arch>ppc</arch>
+	<version>2.6.0</version>
+	<release>49.23</release>
+	<filesize>88607</filesize>
+	<installedsize>183305</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>2.6.0</version>
+			<release>49.23</release>
+			<filename>evolution-pilot-2.6.0-49.23.ppc.rpm</filename>
+			<filesize>88607</filesize>
+			<installedsize>183305</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+	</deps>
+</package>
+<package>
+	<name>evolution-pilot</name>
+	<summary>evolution: recommended update for all users</summary>
+	<description>Critical and annoying issues like Pinging IMAP server even
+when offline, attachment drag & drop crash, Hang in
+connector, appointment loses, crashes due to specific
+appointments, attachment getting corrupted, handling of
+GPG/PGP signed mails, Junk/Unjunk handling of GW, MS-live
+meeting handling, hang in exchange-connector and exchange
+connection issues are fixed.
+</description>
+	<arch>x86_64</arch>
+	<version>2.6.0</version>
+	<release>49.23</release>
+	<filesize>85176</filesize>
+	<installedsize>175113</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>2.6.0</version>
+			<release>49.23</release>
+			<filename>evolution-pilot-2.6.0-49.23.x86_64.rpm</filename>
+			<filesize>85176</filesize>
+			<installedsize>175113</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+	</deps>
+</package>
+</subchannel></channel>

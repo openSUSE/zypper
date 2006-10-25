@@ -1,0 +1,153 @@
+<channel><subchannel>                                                  
+
+<patch>
+	<name>aaa_skel</name>
+	<arch>noarch</arch>
+	<version>1444</version>
+	<release>0</release>
+	<requires>
+		<dep kind="atom" name="aaa_skel" epoch="0" version="2006.5.19" release="0.2" op="EQ"/>
+	</requires>
+</patch>
+<atom>
+	<name>aaa_skel</name>
+	<arch>i586</arch>
+	<version>2006.5.19</version>
+	<release>0.2</release>
+	<freshens>
+		<dep kind="package" name="aaa_skel"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="aaa_skel" epoch="0" version="2006.5.19" release="0.2" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>aaa_skel</name>
+	<arch>ppc</arch>
+	<version>2006.5.19</version>
+	<release>0.2</release>
+	<freshens>
+		<dep kind="package" name="aaa_skel"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="aaa_skel" epoch="0" version="2006.5.19" release="0.2" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>aaa_skel</name>
+	<arch>x86_64</arch>
+	<version>2006.5.19</version>
+	<release>0.2</release>
+	<freshens>
+		<dep kind="package" name="aaa_skel"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="aaa_skel" epoch="0" version="2006.5.19" release="0.2" op="GE"/>
+	</requires>
+</atom>
+<package>
+	<name>aaa_skel</name>
+	<summary>Fix Examples In inputrc</summary>
+	<description>In the file /etc/skel/.inputrc there were some mistyped 
+examples about configuring the terminal bell. 
+</description>
+	<arch>i586</arch>
+	<version>2006.5.19</version>
+	<release>0.2</release>
+	<filesize>18644</filesize>
+	<installedsize>22890</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>2006.5.19</version>
+			<release>0.2</release>
+			<filename>aaa_skel-2006.5.19-0.2.i586.rpm</filename>
+			<filesize>18644</filesize>
+			<installedsize>22890</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="aaa_skel" op="EQ" version="2006.5.19" release="0.2"/>
+		</provides>
+		<requires>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>aaa_skel</name>
+	<summary>Fix Examples In inputrc</summary>
+	<description>In the file /etc/skel/.inputrc there were some mistyped 
+examples about configuring the terminal bell. 
+</description>
+	<arch>ppc</arch>
+	<version>2006.5.19</version>
+	<release>0.2</release>
+	<filesize>18602</filesize>
+	<installedsize>22890</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>2006.5.19</version>
+			<release>0.2</release>
+			<filename>aaa_skel-2006.5.19-0.2.ppc.rpm</filename>
+			<filesize>18602</filesize>
+			<installedsize>22890</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="aaa_skel" op="EQ" version="2006.5.19" release="0.2"/>
+		</provides>
+		<requires>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>aaa_skel</name>
+	<summary>Fix Examples In inputrc</summary>
+	<description>In the file /etc/skel/.inputrc there were some mistyped 
+examples about configuring the terminal bell. 
+</description>
+	<arch>x86_64</arch>
+	<version>2006.5.19</version>
+	<release>0.2</release>
+	<filesize>18619</filesize>
+	<installedsize>22890</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>2006.5.19</version>
+			<release>0.2</release>
+			<filename>aaa_skel-2006.5.19-0.2.x86_64.rpm</filename>
+			<filesize>18619</filesize>
+			<installedsize>22890</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="aaa_skel" op="EQ" version="2006.5.19" release="0.2"/>
+		</provides>
+		<requires>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+</subchannel></channel>

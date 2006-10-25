@@ -1,0 +1,2701 @@
+<channel><subchannel>                                                  
+
+<patch>
+	<name>gtk-sharp2</name>
+	<arch>noarch</arch>
+	<version>1427</version>
+	<release>0</release>
+	<requires>
+		<dep kind="atom" name="art-sharp2" epoch="0" version="2.8.2" release="15.1" op="EQ"/>
+		<dep kind="atom" name="gconf-sharp2" epoch="0" version="2.8.2" release="15.1" op="EQ"/>
+		<dep kind="atom" name="glade-sharp2" epoch="0" version="2.8.2" release="15.1" op="EQ"/>
+		<dep kind="atom" name="glib-sharp2" epoch="0" version="2.8.2" release="15.1" op="EQ"/>
+		<dep kind="atom" name="gnome-sharp2" epoch="0" version="2.8.2" release="15.1" op="EQ"/>
+		<dep kind="atom" name="gnome-vfs-sharp2" epoch="0" version="2.8.2" release="15.1" op="EQ"/>
+		<dep kind="atom" name="gtk-sharp2" epoch="0" version="2.8.2" release="15.1" op="EQ"/>
+		<dep kind="atom" name="gtk-sharp2-32bit" epoch="0" version="2.8.2" release="15.1" op="EQ"/>
+		<dep kind="atom" name="gtk-sharp2-64bit" epoch="0" version="2.8.2" release="15.1" op="EQ"/>
+		<dep kind="atom" name="gtk-sharp2-complete" epoch="0" version="2.8.2" release="15.1" op="EQ"/>
+		<dep kind="atom" name="gtk-sharp2-doc" epoch="0" version="2.8.2" release="15.1" op="EQ"/>
+		<dep kind="atom" name="gtk-sharp2-gapi" epoch="0" version="2.8.2" release="15.1" op="EQ"/>
+		<dep kind="atom" name="gtkhtml-sharp2" epoch="0" version="2.8.2" release="15.1" op="EQ"/>
+		<dep kind="atom" name="rsvg-sharp2" epoch="0" version="2.8.2" release="15.1" op="EQ"/>
+		<dep kind="atom" name="vte-sharp2" epoch="0" version="2.8.2" release="15.1" op="EQ"/>
+	</requires>
+</patch>
+<atom>
+	<name>art-sharp2</name>
+	<arch>i586</arch>
+	<version>2.8.2</version>
+	<release>15.1</release>
+	<freshens>
+		<dep kind="package" name="art-sharp2"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="art-sharp2" epoch="0" version="2.8.2" release="15.1" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>art-sharp2</name>
+	<arch>ppc</arch>
+	<version>2.8.2</version>
+	<release>15.1</release>
+	<freshens>
+		<dep kind="package" name="art-sharp2"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="art-sharp2" epoch="0" version="2.8.2" release="15.1" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>art-sharp2</name>
+	<arch>x86_64</arch>
+	<version>2.8.2</version>
+	<release>15.1</release>
+	<freshens>
+		<dep kind="package" name="art-sharp2"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="art-sharp2" epoch="0" version="2.8.2" release="15.1" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>gconf-sharp2</name>
+	<arch>i586</arch>
+	<version>2.8.2</version>
+	<release>15.1</release>
+	<freshens>
+		<dep kind="package" name="gconf-sharp2"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="gconf-sharp2" epoch="0" version="2.8.2" release="15.1" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>gconf-sharp2</name>
+	<arch>ppc</arch>
+	<version>2.8.2</version>
+	<release>15.1</release>
+	<freshens>
+		<dep kind="package" name="gconf-sharp2"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="gconf-sharp2" epoch="0" version="2.8.2" release="15.1" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>gconf-sharp2</name>
+	<arch>x86_64</arch>
+	<version>2.8.2</version>
+	<release>15.1</release>
+	<freshens>
+		<dep kind="package" name="gconf-sharp2"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="gconf-sharp2" epoch="0" version="2.8.2" release="15.1" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>glade-sharp2</name>
+	<arch>i586</arch>
+	<version>2.8.2</version>
+	<release>15.1</release>
+	<freshens>
+		<dep kind="package" name="glade-sharp2"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="glade-sharp2" epoch="0" version="2.8.2" release="15.1" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>glade-sharp2</name>
+	<arch>ppc</arch>
+	<version>2.8.2</version>
+	<release>15.1</release>
+	<freshens>
+		<dep kind="package" name="glade-sharp2"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="glade-sharp2" epoch="0" version="2.8.2" release="15.1" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>glade-sharp2</name>
+	<arch>x86_64</arch>
+	<version>2.8.2</version>
+	<release>15.1</release>
+	<freshens>
+		<dep kind="package" name="glade-sharp2"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="glade-sharp2" epoch="0" version="2.8.2" release="15.1" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>glib-sharp2</name>
+	<arch>i586</arch>
+	<version>2.8.2</version>
+	<release>15.1</release>
+	<freshens>
+		<dep kind="package" name="glib-sharp2"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="glib-sharp2" epoch="0" version="2.8.2" release="15.1" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>glib-sharp2</name>
+	<arch>ppc</arch>
+	<version>2.8.2</version>
+	<release>15.1</release>
+	<freshens>
+		<dep kind="package" name="glib-sharp2"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="glib-sharp2" epoch="0" version="2.8.2" release="15.1" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>glib-sharp2</name>
+	<arch>x86_64</arch>
+	<version>2.8.2</version>
+	<release>15.1</release>
+	<freshens>
+		<dep kind="package" name="glib-sharp2"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="glib-sharp2" epoch="0" version="2.8.2" release="15.1" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>gnome-sharp2</name>
+	<arch>i586</arch>
+	<version>2.8.2</version>
+	<release>15.1</release>
+	<freshens>
+		<dep kind="package" name="gnome-sharp2"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="gnome-sharp2" epoch="0" version="2.8.2" release="15.1" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>gnome-sharp2</name>
+	<arch>ppc</arch>
+	<version>2.8.2</version>
+	<release>15.1</release>
+	<freshens>
+		<dep kind="package" name="gnome-sharp2"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="gnome-sharp2" epoch="0" version="2.8.2" release="15.1" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>gnome-sharp2</name>
+	<arch>x86_64</arch>
+	<version>2.8.2</version>
+	<release>15.1</release>
+	<freshens>
+		<dep kind="package" name="gnome-sharp2"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="gnome-sharp2" epoch="0" version="2.8.2" release="15.1" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>gnome-vfs-sharp2</name>
+	<arch>i586</arch>
+	<version>2.8.2</version>
+	<release>15.1</release>
+	<freshens>
+		<dep kind="package" name="gnome-vfs-sharp2"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="gnome-vfs-sharp2" epoch="0" version="2.8.2" release="15.1" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>gnome-vfs-sharp2</name>
+	<arch>ppc</arch>
+	<version>2.8.2</version>
+	<release>15.1</release>
+	<freshens>
+		<dep kind="package" name="gnome-vfs-sharp2"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="gnome-vfs-sharp2" epoch="0" version="2.8.2" release="15.1" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>gnome-vfs-sharp2</name>
+	<arch>x86_64</arch>
+	<version>2.8.2</version>
+	<release>15.1</release>
+	<freshens>
+		<dep kind="package" name="gnome-vfs-sharp2"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="gnome-vfs-sharp2" epoch="0" version="2.8.2" release="15.1" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>gtk-sharp2</name>
+	<arch>i586</arch>
+	<version>2.8.2</version>
+	<release>15.1</release>
+	<freshens>
+		<dep kind="package" name="gtk-sharp2"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="gtk-sharp2" epoch="0" version="2.8.2" release="15.1" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>gtk-sharp2</name>
+	<arch>ppc</arch>
+	<version>2.8.2</version>
+	<release>15.1</release>
+	<freshens>
+		<dep kind="package" name="gtk-sharp2"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="gtk-sharp2" epoch="0" version="2.8.2" release="15.1" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>gtk-sharp2</name>
+	<arch>x86_64</arch>
+	<version>2.8.2</version>
+	<release>15.1</release>
+	<freshens>
+		<dep kind="package" name="gtk-sharp2"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="gtk-sharp2" epoch="0" version="2.8.2" release="15.1" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>gtk-sharp2-32bit</name>
+	<arch>x86_64</arch>
+	<version>2.8.2</version>
+	<release>15.1</release>
+	<freshens>
+		<dep kind="package" name="gtk-sharp2-32bit"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="gtk-sharp2-32bit" epoch="0" version="2.8.2" release="15.1" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>gtk-sharp2-64bit</name>
+	<arch>ppc</arch>
+	<version>2.8.2</version>
+	<release>15.1</release>
+	<freshens>
+		<dep kind="package" name="gtk-sharp2-64bit"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="gtk-sharp2-64bit" epoch="0" version="2.8.2" release="15.1" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>gtk-sharp2-complete</name>
+	<arch>i586</arch>
+	<version>2.8.2</version>
+	<release>15.1</release>
+	<freshens>
+		<dep kind="package" name="gtk-sharp2-complete"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="gtk-sharp2-complete" epoch="0" version="2.8.2" release="15.1" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>gtk-sharp2-complete</name>
+	<arch>ppc</arch>
+	<version>2.8.2</version>
+	<release>15.1</release>
+	<freshens>
+		<dep kind="package" name="gtk-sharp2-complete"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="gtk-sharp2-complete" epoch="0" version="2.8.2" release="15.1" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>gtk-sharp2-complete</name>
+	<arch>x86_64</arch>
+	<version>2.8.2</version>
+	<release>15.1</release>
+	<freshens>
+		<dep kind="package" name="gtk-sharp2-complete"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="gtk-sharp2-complete" epoch="0" version="2.8.2" release="15.1" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>gtk-sharp2-doc</name>
+	<arch>i586</arch>
+	<version>2.8.2</version>
+	<release>15.1</release>
+	<freshens>
+		<dep kind="package" name="gtk-sharp2-doc"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="gtk-sharp2-doc" epoch="0" version="2.8.2" release="15.1" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>gtk-sharp2-doc</name>
+	<arch>ppc</arch>
+	<version>2.8.2</version>
+	<release>15.1</release>
+	<freshens>
+		<dep kind="package" name="gtk-sharp2-doc"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="gtk-sharp2-doc" epoch="0" version="2.8.2" release="15.1" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>gtk-sharp2-doc</name>
+	<arch>x86_64</arch>
+	<version>2.8.2</version>
+	<release>15.1</release>
+	<freshens>
+		<dep kind="package" name="gtk-sharp2-doc"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="gtk-sharp2-doc" epoch="0" version="2.8.2" release="15.1" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>gtk-sharp2-gapi</name>
+	<arch>i586</arch>
+	<version>2.8.2</version>
+	<release>15.1</release>
+	<freshens>
+		<dep kind="package" name="gtk-sharp2-gapi"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="gtk-sharp2-gapi" epoch="0" version="2.8.2" release="15.1" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>gtk-sharp2-gapi</name>
+	<arch>ppc</arch>
+	<version>2.8.2</version>
+	<release>15.1</release>
+	<freshens>
+		<dep kind="package" name="gtk-sharp2-gapi"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="gtk-sharp2-gapi" epoch="0" version="2.8.2" release="15.1" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>gtk-sharp2-gapi</name>
+	<arch>x86_64</arch>
+	<version>2.8.2</version>
+	<release>15.1</release>
+	<freshens>
+		<dep kind="package" name="gtk-sharp2-gapi"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="gtk-sharp2-gapi" epoch="0" version="2.8.2" release="15.1" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>gtkhtml-sharp2</name>
+	<arch>i586</arch>
+	<version>2.8.2</version>
+	<release>15.1</release>
+	<freshens>
+		<dep kind="package" name="gtkhtml-sharp2"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="gtkhtml-sharp2" epoch="0" version="2.8.2" release="15.1" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>gtkhtml-sharp2</name>
+	<arch>ppc</arch>
+	<version>2.8.2</version>
+	<release>15.1</release>
+	<freshens>
+		<dep kind="package" name="gtkhtml-sharp2"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="gtkhtml-sharp2" epoch="0" version="2.8.2" release="15.1" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>gtkhtml-sharp2</name>
+	<arch>x86_64</arch>
+	<version>2.8.2</version>
+	<release>15.1</release>
+	<freshens>
+		<dep kind="package" name="gtkhtml-sharp2"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="gtkhtml-sharp2" epoch="0" version="2.8.2" release="15.1" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>rsvg-sharp2</name>
+	<arch>i586</arch>
+	<version>2.8.2</version>
+	<release>15.1</release>
+	<freshens>
+		<dep kind="package" name="rsvg-sharp2"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="rsvg-sharp2" epoch="0" version="2.8.2" release="15.1" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>rsvg-sharp2</name>
+	<arch>ppc</arch>
+	<version>2.8.2</version>
+	<release>15.1</release>
+	<freshens>
+		<dep kind="package" name="rsvg-sharp2"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="rsvg-sharp2" epoch="0" version="2.8.2" release="15.1" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>rsvg-sharp2</name>
+	<arch>x86_64</arch>
+	<version>2.8.2</version>
+	<release>15.1</release>
+	<freshens>
+		<dep kind="package" name="rsvg-sharp2"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="rsvg-sharp2" epoch="0" version="2.8.2" release="15.1" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>vte-sharp2</name>
+	<arch>i586</arch>
+	<version>2.8.2</version>
+	<release>15.1</release>
+	<freshens>
+		<dep kind="package" name="vte-sharp2"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="vte-sharp2" epoch="0" version="2.8.2" release="15.1" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>vte-sharp2</name>
+	<arch>ppc</arch>
+	<version>2.8.2</version>
+	<release>15.1</release>
+	<freshens>
+		<dep kind="package" name="vte-sharp2"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="vte-sharp2" epoch="0" version="2.8.2" release="15.1" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>vte-sharp2</name>
+	<arch>x86_64</arch>
+	<version>2.8.2</version>
+	<release>15.1</release>
+	<freshens>
+		<dep kind="package" name="vte-sharp2"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="vte-sharp2" epoch="0" version="2.8.2" release="15.1" op="GE"/>
+	</requires>
+</atom>
+<package>
+	<name>art-sharp2</name>
+	<summary>Fix hang in Banshee</summary>
+	<description>Fixes a hang in Banshee when playing music on 
+multiprocessor systems.
+</description>
+	<arch>i586</arch>
+	<version>2.8.2</version>
+	<release>15.1</release>
+	<filesize>21160</filesize>
+	<installedsize>34853</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>2.8.2</version>
+			<release>15.1</release>
+			<filename>art-sharp2-2.8.2-15.1.i586.rpm</filename>
+			<filesize>21160</filesize>
+			<installedsize>34853</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="mono(art-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(art-sharp)" op="EQ" version="2.4.0.0"/>
+			<dep name="mono(art-sharp)" op="EQ" version="2.6.0.0"/>
+			<dep name="art-sharp2" op="EQ" version="2.8.2" release="15.1"/>
+		</provides>
+		<requires>
+			<dep name="libart_lgpl"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(VersionedDependencies)" op="LE" version="3.0.3" release="1" pre="1"/>
+			<dep name="mono(glib-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(mscorlib)" op="EQ" version="1.0.5000.0"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>art-sharp2</name>
+	<summary>Fix hang in Banshee</summary>
+	<description>Fixes a hang in Banshee when playing music on 
+multiprocessor systems.
+</description>
+	<arch>ppc</arch>
+	<version>2.8.2</version>
+	<release>15.1</release>
+	<filesize>21225</filesize>
+	<installedsize>34853</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>2.8.2</version>
+			<release>15.1</release>
+			<filename>art-sharp2-2.8.2-15.1.ppc.rpm</filename>
+			<filesize>21225</filesize>
+			<installedsize>34853</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="mono(art-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(art-sharp)" op="EQ" version="2.4.0.0"/>
+			<dep name="mono(art-sharp)" op="EQ" version="2.6.0.0"/>
+			<dep name="art-sharp2" op="EQ" version="2.8.2" release="15.1"/>
+		</provides>
+		<requires>
+			<dep name="libart_lgpl"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(VersionedDependencies)" op="LE" version="3.0.3" release="1" pre="1"/>
+			<dep name="mono(glib-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(mscorlib)" op="EQ" version="1.0.5000.0"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>art-sharp2</name>
+	<summary>Fix hang in Banshee</summary>
+	<description>Fixes a hang in Banshee when playing music on 
+multiprocessor systems.
+</description>
+	<arch>x86_64</arch>
+	<version>2.8.2</version>
+	<release>15.1</release>
+	<filesize>21221</filesize>
+	<installedsize>34853</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>2.8.2</version>
+			<release>15.1</release>
+			<filename>art-sharp2-2.8.2-15.1.x86_64.rpm</filename>
+			<filesize>21221</filesize>
+			<installedsize>34853</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="mono(art-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(art-sharp)" op="EQ" version="2.4.0.0"/>
+			<dep name="mono(art-sharp)" op="EQ" version="2.6.0.0"/>
+			<dep name="art-sharp2" op="EQ" version="2.8.2" release="15.1"/>
+		</provides>
+		<requires>
+			<dep name="libart_lgpl"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(VersionedDependencies)" op="LE" version="3.0.3" release="1" pre="1"/>
+			<dep name="mono(glib-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(mscorlib)" op="EQ" version="1.0.5000.0"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>gconf-sharp2</name>
+	<summary>Fix hang in Banshee</summary>
+	<description>Fixes a hang in Banshee when playing music on 
+multiprocessor systems.
+</description>
+	<arch>i586</arch>
+	<version>2.8.2</version>
+	<release>15.1</release>
+	<filesize>25754</filesize>
+	<installedsize>48511</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>2.8.2</version>
+			<release>15.1</release>
+			<filename>gconf-sharp2-2.8.2-15.1.i586.rpm</filename>
+			<filesize>25754</filesize>
+			<installedsize>48511</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="mono(gconfsharp-schemagen)" op="EQ" version="0.0.0.0"/>
+			<dep name="mono(gconf-sharp-peditors)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(gconf-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(gconf-sharp-peditors)" op="EQ" version="2.4.0.0"/>
+			<dep name="mono(gconf-sharp)" op="EQ" version="2.4.0.0"/>
+			<dep name="mono(gconf-sharp-peditors)" op="EQ" version="2.6.0.0"/>
+			<dep name="mono(gconf-sharp)" op="EQ" version="2.6.0.0"/>
+			<dep name="gconf-sharp2" op="EQ" version="2.8.2" release="15.1"/>
+		</provides>
+		<requires>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(VersionedDependencies)" op="LE" version="3.0.3" release="1" pre="1"/>
+			<dep name="/bin/sh"/>
+			<dep name="mono(System.Xml)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(glade-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(glib-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(gnome-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(gtk-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(mscorlib)" op="EQ" version="1.0.5000.0"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>gconf-sharp2</name>
+	<summary>Fix hang in Banshee</summary>
+	<description>Fixes a hang in Banshee when playing music on 
+multiprocessor systems.
+</description>
+	<arch>ppc</arch>
+	<version>2.8.2</version>
+	<release>15.1</release>
+	<filesize>25732</filesize>
+	<installedsize>48511</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>2.8.2</version>
+			<release>15.1</release>
+			<filename>gconf-sharp2-2.8.2-15.1.ppc.rpm</filename>
+			<filesize>25732</filesize>
+			<installedsize>48511</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="mono(gconfsharp-schemagen)" op="EQ" version="0.0.0.0"/>
+			<dep name="mono(gconf-sharp-peditors)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(gconf-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(gconf-sharp-peditors)" op="EQ" version="2.4.0.0"/>
+			<dep name="mono(gconf-sharp)" op="EQ" version="2.4.0.0"/>
+			<dep name="mono(gconf-sharp-peditors)" op="EQ" version="2.6.0.0"/>
+			<dep name="mono(gconf-sharp)" op="EQ" version="2.6.0.0"/>
+			<dep name="gconf-sharp2" op="EQ" version="2.8.2" release="15.1"/>
+		</provides>
+		<requires>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(VersionedDependencies)" op="LE" version="3.0.3" release="1" pre="1"/>
+			<dep name="/bin/sh"/>
+			<dep name="mono(System.Xml)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(glade-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(glib-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(gnome-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(gtk-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(mscorlib)" op="EQ" version="1.0.5000.0"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>gconf-sharp2</name>
+	<summary>Fix hang in Banshee</summary>
+	<description>Fixes a hang in Banshee when playing music on 
+multiprocessor systems.
+</description>
+	<arch>x86_64</arch>
+	<version>2.8.2</version>
+	<release>15.1</release>
+	<filesize>25754</filesize>
+	<installedsize>48511</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>2.8.2</version>
+			<release>15.1</release>
+			<filename>gconf-sharp2-2.8.2-15.1.x86_64.rpm</filename>
+			<filesize>25754</filesize>
+			<installedsize>48511</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="mono(gconfsharp-schemagen)" op="EQ" version="0.0.0.0"/>
+			<dep name="mono(gconf-sharp-peditors)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(gconf-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(gconf-sharp-peditors)" op="EQ" version="2.4.0.0"/>
+			<dep name="mono(gconf-sharp)" op="EQ" version="2.4.0.0"/>
+			<dep name="mono(gconf-sharp-peditors)" op="EQ" version="2.6.0.0"/>
+			<dep name="mono(gconf-sharp)" op="EQ" version="2.6.0.0"/>
+			<dep name="gconf-sharp2" op="EQ" version="2.8.2" release="15.1"/>
+		</provides>
+		<requires>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(VersionedDependencies)" op="LE" version="3.0.3" release="1" pre="1"/>
+			<dep name="/bin/sh"/>
+			<dep name="mono(System.Xml)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(glade-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(glib-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(gnome-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(gtk-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(mscorlib)" op="EQ" version="1.0.5000.0"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>glade-sharp2</name>
+	<summary>Fix hang in Banshee</summary>
+	<description>Fixes a hang in Banshee when playing music on 
+multiprocessor systems.
+</description>
+	<arch>i586</arch>
+	<version>2.8.2</version>
+	<release>15.1</release>
+	<filesize>23130</filesize>
+	<installedsize>36497</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>2.8.2</version>
+			<release>15.1</release>
+			<filename>glade-sharp2-2.8.2-15.1.i586.rpm</filename>
+			<filesize>23130</filesize>
+			<installedsize>36497</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="libgladesharpglue-2.so"/>
+			<dep name="mono(glade-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(glade-sharp)" op="EQ" version="2.4.0.0"/>
+			<dep name="mono(glade-sharp)" op="EQ" version="2.6.0.0"/>
+			<dep name="glade-sharp2" op="EQ" version="2.8.2" release="15.1"/>
+		</provides>
+		<requires>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(VersionedDependencies)" op="LE" version="3.0.3" release="1" pre="1"/>
+			<dep name="libX11.so.6"/>
+			<dep name="libXext.so.6"/>
+			<dep name="libXrender.so.1"/>
+			<dep name="libatk-1.0.so.0"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libcairo.so.2"/>
+			<dep name="libdl.so.2"/>
+			<dep name="libfontconfig.so.1"/>
+			<dep name="libfreetype.so.6"/>
+			<dep name="libgdk-x11-2.0.so.0"/>
+			<dep name="libgdk_pixbuf-2.0.so.0"/>
+			<dep name="libglade-2.0.so.0"/>
+			<dep name="libglib-2.0.so.0"/>
+			<dep name="libglitz.so.1"/>
+			<dep name="libgmodule-2.0.so.0"/>
+			<dep name="libgobject-2.0.so.0"/>
+			<dep name="libgtk-x11-2.0.so.0"/>
+			<dep name="libm.so.6"/>
+			<dep name="libpango-1.0.so.0"/>
+			<dep name="libpangocairo-1.0.so.0"/>
+			<dep name="libpng12.so.0"/>
+			<dep name="libxml2.so.2"/>
+			<dep name="libz.so.1"/>
+			<dep name="mono(gdk-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(glib-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(gtk-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(mscorlib)" op="EQ" version="1.0.5000.0"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>glade-sharp2</name>
+	<summary>Fix hang in Banshee</summary>
+	<description>Fixes a hang in Banshee when playing music on 
+multiprocessor systems.
+</description>
+	<arch>ppc</arch>
+	<version>2.8.2</version>
+	<release>15.1</release>
+	<filesize>24934</filesize>
+	<installedsize>41717</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>2.8.2</version>
+			<release>15.1</release>
+			<filename>glade-sharp2-2.8.2-15.1.ppc.rpm</filename>
+			<filesize>24934</filesize>
+			<installedsize>41717</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="libgladesharpglue-2.so"/>
+			<dep name="mono(glade-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(glade-sharp)" op="EQ" version="2.4.0.0"/>
+			<dep name="mono(glade-sharp)" op="EQ" version="2.6.0.0"/>
+			<dep name="glade-sharp2" op="EQ" version="2.8.2" release="15.1"/>
+		</provides>
+		<requires>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(VersionedDependencies)" op="LE" version="3.0.3" release="1" pre="1"/>
+			<dep name="libX11.so.6"/>
+			<dep name="libXext.so.6"/>
+			<dep name="libXrender.so.1"/>
+			<dep name="libatk-1.0.so.0"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libcairo.so.2"/>
+			<dep name="libdl.so.2"/>
+			<dep name="libfontconfig.so.1"/>
+			<dep name="libfreetype.so.6"/>
+			<dep name="libgdk-x11-2.0.so.0"/>
+			<dep name="libgdk_pixbuf-2.0.so.0"/>
+			<dep name="libglade-2.0.so.0"/>
+			<dep name="libglib-2.0.so.0"/>
+			<dep name="libglitz.so.1"/>
+			<dep name="libgmodule-2.0.so.0"/>
+			<dep name="libgobject-2.0.so.0"/>
+			<dep name="libgtk-x11-2.0.so.0"/>
+			<dep name="libm.so.6"/>
+			<dep name="libpango-1.0.so.0"/>
+			<dep name="libpangocairo-1.0.so.0"/>
+			<dep name="libpng12.so.0"/>
+			<dep name="libxml2.so.2"/>
+			<dep name="libz.so.1"/>
+			<dep name="mono(gdk-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(glib-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(gtk-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(mscorlib)" op="EQ" version="1.0.5000.0"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>glade-sharp2</name>
+	<summary>Fix hang in Banshee</summary>
+	<description>Fixes a hang in Banshee when playing music on 
+multiprocessor systems.
+</description>
+	<arch>x86_64</arch>
+	<version>2.8.2</version>
+	<release>15.1</release>
+	<filesize>23495</filesize>
+	<installedsize>38137</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>2.8.2</version>
+			<release>15.1</release>
+			<filename>glade-sharp2-2.8.2-15.1.x86_64.rpm</filename>
+			<filesize>23495</filesize>
+			<installedsize>38137</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="libgladesharpglue-2.so()(64bit)"/>
+			<dep name="mono(glade-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(glade-sharp)" op="EQ" version="2.4.0.0"/>
+			<dep name="mono(glade-sharp)" op="EQ" version="2.6.0.0"/>
+			<dep name="glade-sharp2" op="EQ" version="2.8.2" release="15.1"/>
+		</provides>
+		<requires>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(VersionedDependencies)" op="LE" version="3.0.3" release="1" pre="1"/>
+			<dep name="libX11.so.6()(64bit)"/>
+			<dep name="libXext.so.6()(64bit)"/>
+			<dep name="libXrender.so.1()(64bit)"/>
+			<dep name="libatk-1.0.so.0()(64bit)"/>
+			<dep name="libc.so.6()(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libcairo.so.2()(64bit)"/>
+			<dep name="libdl.so.2()(64bit)"/>
+			<dep name="libfontconfig.so.1()(64bit)"/>
+			<dep name="libfreetype.so.6()(64bit)"/>
+			<dep name="libgdk-x11-2.0.so.0()(64bit)"/>
+			<dep name="libgdk_pixbuf-2.0.so.0()(64bit)"/>
+			<dep name="libglade-2.0.so.0()(64bit)"/>
+			<dep name="libglib-2.0.so.0()(64bit)"/>
+			<dep name="libglitz.so.1()(64bit)"/>
+			<dep name="libgmodule-2.0.so.0()(64bit)"/>
+			<dep name="libgobject-2.0.so.0()(64bit)"/>
+			<dep name="libgtk-x11-2.0.so.0()(64bit)"/>
+			<dep name="libm.so.6()(64bit)"/>
+			<dep name="libpango-1.0.so.0()(64bit)"/>
+			<dep name="libpangocairo-1.0.so.0()(64bit)"/>
+			<dep name="libpng12.so.0()(64bit)"/>
+			<dep name="libxml2.so.2()(64bit)"/>
+			<dep name="libz.so.1()(64bit)"/>
+			<dep name="mono(gdk-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(glib-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(gtk-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(mscorlib)" op="EQ" version="1.0.5000.0"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>glib-sharp2</name>
+	<summary>Fix hang in Banshee</summary>
+	<description>Fixes a hang in Banshee when playing music on 
+multiprocessor systems.
+</description>
+	<arch>i586</arch>
+	<version>2.8.2</version>
+	<release>15.1</release>
+	<filesize>36849</filesize>
+	<installedsize>66662</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>2.8.2</version>
+			<release>15.1</release>
+			<filename>glib-sharp2-2.8.2-15.1.i586.rpm</filename>
+			<filesize>36849</filesize>
+			<installedsize>66662</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="libglibsharpglue-2.so"/>
+			<dep name="mono(glib-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(glib-sharp)" op="EQ" version="2.4.0.0"/>
+			<dep name="mono(glib-sharp)" op="EQ" version="2.6.0.0"/>
+			<dep name="glib-sharp2" op="EQ" version="2.8.2" release="15.1"/>
+		</provides>
+		<requires>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(VersionedDependencies)" op="LE" version="3.0.3" release="1" pre="1"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libglib-2.0.so.0"/>
+			<dep name="libgobject-2.0.so.0"/>
+			<dep name="mono(System)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(mscorlib)" op="EQ" version="1.0.5000.0"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>glib-sharp2</name>
+	<summary>Fix hang in Banshee</summary>
+	<description>Fixes a hang in Banshee when playing music on 
+multiprocessor systems.
+</description>
+	<arch>ppc</arch>
+	<version>2.8.2</version>
+	<release>15.1</release>
+	<filesize>38993</filesize>
+	<installedsize>73358</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>2.8.2</version>
+			<release>15.1</release>
+			<filename>glib-sharp2-2.8.2-15.1.ppc.rpm</filename>
+			<filesize>38993</filesize>
+			<installedsize>73358</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="libglibsharpglue-2.so"/>
+			<dep name="mono(glib-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(glib-sharp)" op="EQ" version="2.4.0.0"/>
+			<dep name="mono(glib-sharp)" op="EQ" version="2.6.0.0"/>
+			<dep name="glib-sharp2" op="EQ" version="2.8.2" release="15.1"/>
+		</provides>
+		<requires>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(VersionedDependencies)" op="LE" version="3.0.3" release="1" pre="1"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libglib-2.0.so.0"/>
+			<dep name="libgobject-2.0.so.0"/>
+			<dep name="mono(System)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(mscorlib)" op="EQ" version="1.0.5000.0"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>glib-sharp2</name>
+	<summary>Fix hang in Banshee</summary>
+	<description>Fixes a hang in Banshee when playing music on 
+multiprocessor systems.
+</description>
+	<arch>x86_64</arch>
+	<version>2.8.2</version>
+	<release>15.1</release>
+	<filesize>37276</filesize>
+	<installedsize>69686</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>2.8.2</version>
+			<release>15.1</release>
+			<filename>glib-sharp2-2.8.2-15.1.x86_64.rpm</filename>
+			<filesize>37276</filesize>
+			<installedsize>69686</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="libglibsharpglue-2.so()(64bit)"/>
+			<dep name="mono(glib-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(glib-sharp)" op="EQ" version="2.4.0.0"/>
+			<dep name="mono(glib-sharp)" op="EQ" version="2.6.0.0"/>
+			<dep name="glib-sharp2" op="EQ" version="2.8.2" release="15.1"/>
+		</provides>
+		<requires>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(VersionedDependencies)" op="LE" version="3.0.3" release="1" pre="1"/>
+			<dep name="libc.so.6()(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libglib-2.0.so.0()(64bit)"/>
+			<dep name="libgobject-2.0.so.0()(64bit)"/>
+			<dep name="mono(System)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(mscorlib)" op="EQ" version="1.0.5000.0"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>gnome-sharp2</name>
+	<summary>Fix hang in Banshee</summary>
+	<description>Fixes a hang in Banshee when playing music on 
+multiprocessor systems.
+</description>
+	<arch>i586</arch>
+	<version>2.8.2</version>
+	<release>15.1</release>
+	<filesize>120505</filesize>
+	<installedsize>319414</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>2.8.2</version>
+			<release>15.1</release>
+			<filename>gnome-sharp2-2.8.2-15.1.i586.rpm</filename>
+			<filesize>120505</filesize>
+			<installedsize>319414</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="libgnomesharpglue-2.so"/>
+			<dep name="mono(gnome-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(gnome-sharp)" op="EQ" version="2.4.0.0"/>
+			<dep name="mono(gnome-sharp)" op="EQ" version="2.6.0.0"/>
+			<dep name="gnome-sharp2" op="EQ" version="2.8.2" release="15.1"/>
+		</provides>
+		<requires>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(VersionedDependencies)" op="LE" version="3.0.3" release="1" pre="1"/>
+			<dep name="libICE.so.6"/>
+			<dep name="libORBit-2.so.0"/>
+			<dep name="libSM.so.6"/>
+			<dep name="libX11.so.6"/>
+			<dep name="libXext.so.6"/>
+			<dep name="libXrender.so.1"/>
+			<dep name="libart_lgpl_2.so.2"/>
+			<dep name="libatk-1.0.so.0"/>
+			<dep name="libbonobo-2.so.0"/>
+			<dep name="libbonobo-activation.so.4"/>
+			<dep name="libbonoboui-2.so.0"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libcairo.so.2"/>
+			<dep name="libdl.so.2"/>
+			<dep name="libfontconfig.so.1"/>
+			<dep name="libfreetype.so.6"/>
+			<dep name="libgconf-2.so.4"/>
+			<dep name="libgdk-x11-2.0.so.0"/>
+			<dep name="libgdk_pixbuf-2.0.so.0"/>
+			<dep name="libglib-2.0.so.0"/>
+			<dep name="libglitz.so.1"/>
+			<dep name="libgmodule-2.0.so.0"/>
+			<dep name="libgnome-2.so.0"/>
+			<dep name="libgnome-keyring.so.0"/>
+			<dep name="libgnomecanvas-2.so.0"/>
+			<dep name="libgnomeprint-2-2.so.0"/>
+			<dep name="libgnomeprintui-2-2.so.0"/>
+			<dep name="libgnomeui-2.so.0"/>
+			<dep name="libgnomevfs-2.so.0"/>
+			<dep name="libgobject-2.0.so.0"/>
+			<dep name="libgthread-2.0.so.0"/>
+			<dep name="libgtk-x11-2.0.so.0"/>
+			<dep name="libm.so.6"/>
+			<dep name="libpanel-applet-2.so.0"/>
+			<dep name="libpango-1.0.so.0"/>
+			<dep name="libpangocairo-1.0.so.0"/>
+			<dep name="libpangoft2-1.0.so.0"/>
+			<dep name="libpng12.so.0"/>
+			<dep name="libpopt.so.0"/>
+			<dep name="libpthread.so.0"/>
+			<dep name="libxml2.so.2"/>
+			<dep name="libz.so.1"/>
+			<dep name="mono(art-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(gdk-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(glib-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(gnome-vfs-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(gtk-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(mscorlib)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(pango-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>gnome-sharp2</name>
+	<summary>Fix hang in Banshee</summary>
+	<description>Fixes a hang in Banshee when playing music on 
+multiprocessor systems.
+</description>
+	<arch>ppc</arch>
+	<version>2.8.2</version>
+	<release>15.1</release>
+	<filesize>123224</filesize>
+	<installedsize>329162</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>2.8.2</version>
+			<release>15.1</release>
+			<filename>gnome-sharp2-2.8.2-15.1.ppc.rpm</filename>
+			<filesize>123224</filesize>
+			<installedsize>329162</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="libgnomesharpglue-2.so"/>
+			<dep name="mono(gnome-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(gnome-sharp)" op="EQ" version="2.4.0.0"/>
+			<dep name="mono(gnome-sharp)" op="EQ" version="2.6.0.0"/>
+			<dep name="gnome-sharp2" op="EQ" version="2.8.2" release="15.1"/>
+		</provides>
+		<requires>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(VersionedDependencies)" op="LE" version="3.0.3" release="1" pre="1"/>
+			<dep name="libICE.so.6"/>
+			<dep name="libORBit-2.so.0"/>
+			<dep name="libSM.so.6"/>
+			<dep name="libX11.so.6"/>
+			<dep name="libXext.so.6"/>
+			<dep name="libXrender.so.1"/>
+			<dep name="libart_lgpl_2.so.2"/>
+			<dep name="libatk-1.0.so.0"/>
+			<dep name="libbonobo-2.so.0"/>
+			<dep name="libbonobo-activation.so.4"/>
+			<dep name="libbonoboui-2.so.0"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libcairo.so.2"/>
+			<dep name="libdl.so.2"/>
+			<dep name="libfontconfig.so.1"/>
+			<dep name="libfreetype.so.6"/>
+			<dep name="libgconf-2.so.4"/>
+			<dep name="libgdk-x11-2.0.so.0"/>
+			<dep name="libgdk_pixbuf-2.0.so.0"/>
+			<dep name="libglib-2.0.so.0"/>
+			<dep name="libglitz.so.1"/>
+			<dep name="libgmodule-2.0.so.0"/>
+			<dep name="libgnome-2.so.0"/>
+			<dep name="libgnome-keyring.so.0"/>
+			<dep name="libgnomecanvas-2.so.0"/>
+			<dep name="libgnomeprint-2-2.so.0"/>
+			<dep name="libgnomeprintui-2-2.so.0"/>
+			<dep name="libgnomeui-2.so.0"/>
+			<dep name="libgnomevfs-2.so.0"/>
+			<dep name="libgobject-2.0.so.0"/>
+			<dep name="libgthread-2.0.so.0"/>
+			<dep name="libgtk-x11-2.0.so.0"/>
+			<dep name="libm.so.6"/>
+			<dep name="libpanel-applet-2.so.0"/>
+			<dep name="libpango-1.0.so.0"/>
+			<dep name="libpangocairo-1.0.so.0"/>
+			<dep name="libpangoft2-1.0.so.0"/>
+			<dep name="libpng12.so.0"/>
+			<dep name="libpopt.so.0"/>
+			<dep name="libpthread.so.0"/>
+			<dep name="libxml2.so.2"/>
+			<dep name="libz.so.1"/>
+			<dep name="mono(art-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(gdk-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(glib-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(gnome-vfs-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(gtk-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(mscorlib)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(pango-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>gnome-sharp2</name>
+	<summary>Fix hang in Banshee</summary>
+	<description>Fixes a hang in Banshee when playing music on 
+multiprocessor systems.
+</description>
+	<arch>x86_64</arch>
+	<version>2.8.2</version>
+	<release>15.1</release>
+	<filesize>122040</filesize>
+	<installedsize>324726</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>2.8.2</version>
+			<release>15.1</release>
+			<filename>gnome-sharp2-2.8.2-15.1.x86_64.rpm</filename>
+			<filesize>122040</filesize>
+			<installedsize>324726</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="libgnomesharpglue-2.so()(64bit)"/>
+			<dep name="mono(gnome-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(gnome-sharp)" op="EQ" version="2.4.0.0"/>
+			<dep name="mono(gnome-sharp)" op="EQ" version="2.6.0.0"/>
+			<dep name="gnome-sharp2" op="EQ" version="2.8.2" release="15.1"/>
+		</provides>
+		<requires>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(VersionedDependencies)" op="LE" version="3.0.3" release="1" pre="1"/>
+			<dep name="libICE.so.6()(64bit)"/>
+			<dep name="libORBit-2.so.0()(64bit)"/>
+			<dep name="libSM.so.6()(64bit)"/>
+			<dep name="libX11.so.6()(64bit)"/>
+			<dep name="libXext.so.6()(64bit)"/>
+			<dep name="libXrender.so.1()(64bit)"/>
+			<dep name="libart_lgpl_2.so.2()(64bit)"/>
+			<dep name="libatk-1.0.so.0()(64bit)"/>
+			<dep name="libbonobo-2.so.0()(64bit)"/>
+			<dep name="libbonobo-activation.so.4()(64bit)"/>
+			<dep name="libbonoboui-2.so.0()(64bit)"/>
+			<dep name="libc.so.6()(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libcairo.so.2()(64bit)"/>
+			<dep name="libdl.so.2()(64bit)"/>
+			<dep name="libfontconfig.so.1()(64bit)"/>
+			<dep name="libfreetype.so.6()(64bit)"/>
+			<dep name="libgconf-2.so.4()(64bit)"/>
+			<dep name="libgdk-x11-2.0.so.0()(64bit)"/>
+			<dep name="libgdk_pixbuf-2.0.so.0()(64bit)"/>
+			<dep name="libglib-2.0.so.0()(64bit)"/>
+			<dep name="libglitz.so.1()(64bit)"/>
+			<dep name="libgmodule-2.0.so.0()(64bit)"/>
+			<dep name="libgnome-2.so.0()(64bit)"/>
+			<dep name="libgnome-keyring.so.0()(64bit)"/>
+			<dep name="libgnomecanvas-2.so.0()(64bit)"/>
+			<dep name="libgnomeprint-2-2.so.0()(64bit)"/>
+			<dep name="libgnomeprintui-2-2.so.0()(64bit)"/>
+			<dep name="libgnomeui-2.so.0()(64bit)"/>
+			<dep name="libgnomevfs-2.so.0()(64bit)"/>
+			<dep name="libgobject-2.0.so.0()(64bit)"/>
+			<dep name="libgthread-2.0.so.0()(64bit)"/>
+			<dep name="libgtk-x11-2.0.so.0()(64bit)"/>
+			<dep name="libm.so.6()(64bit)"/>
+			<dep name="libpanel-applet-2.so.0()(64bit)"/>
+			<dep name="libpango-1.0.so.0()(64bit)"/>
+			<dep name="libpangocairo-1.0.so.0()(64bit)"/>
+			<dep name="libpangoft2-1.0.so.0()(64bit)"/>
+			<dep name="libpng12.so.0()(64bit)"/>
+			<dep name="libpopt.so.0()(64bit)"/>
+			<dep name="libpthread.so.0()(64bit)"/>
+			<dep name="libxml2.so.2()(64bit)"/>
+			<dep name="libz.so.1()(64bit)"/>
+			<dep name="mono(art-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(gdk-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(glib-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(gnome-vfs-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(gtk-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(mscorlib)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(pango-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>gnome-vfs-sharp2</name>
+	<summary>Fix hang in Banshee</summary>
+	<description>Fixes a hang in Banshee when playing music on 
+multiprocessor systems.
+</description>
+	<arch>i586</arch>
+	<version>2.8.2</version>
+	<release>15.1</release>
+	<filesize>52828</filesize>
+	<installedsize>126540</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>2.8.2</version>
+			<release>15.1</release>
+			<filename>gnome-vfs-sharp2-2.8.2-15.1.i586.rpm</filename>
+			<filesize>52828</filesize>
+			<installedsize>126540</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="mono(gnome-vfs-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(gnome-vfs-sharp)" op="EQ" version="2.4.0.0"/>
+			<dep name="mono(gnome-vfs-sharp)" op="EQ" version="2.6.0.0"/>
+			<dep name="gnome-vfs-sharp2" op="EQ" version="2.8.2" release="15.1"/>
+		</provides>
+		<requires>
+			<dep name="gnome-vfs2"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(VersionedDependencies)" op="LE" version="3.0.3" release="1" pre="1"/>
+			<dep name="mono(glib-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(mscorlib)" op="EQ" version="1.0.5000.0"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>gnome-vfs-sharp2</name>
+	<summary>Fix hang in Banshee</summary>
+	<description>Fixes a hang in Banshee when playing music on 
+multiprocessor systems.
+</description>
+	<arch>ppc</arch>
+	<version>2.8.2</version>
+	<release>15.1</release>
+	<filesize>53358</filesize>
+	<installedsize>128588</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>2.8.2</version>
+			<release>15.1</release>
+			<filename>gnome-vfs-sharp2-2.8.2-15.1.ppc.rpm</filename>
+			<filesize>53358</filesize>
+			<installedsize>128588</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="mono(gnome-vfs-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(gnome-vfs-sharp)" op="EQ" version="2.4.0.0"/>
+			<dep name="mono(gnome-vfs-sharp)" op="EQ" version="2.6.0.0"/>
+			<dep name="gnome-vfs-sharp2" op="EQ" version="2.8.2" release="15.1"/>
+		</provides>
+		<requires>
+			<dep name="gnome-vfs2"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(VersionedDependencies)" op="LE" version="3.0.3" release="1" pre="1"/>
+			<dep name="mono(glib-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(mscorlib)" op="EQ" version="1.0.5000.0"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>gnome-vfs-sharp2</name>
+	<summary>Fix hang in Banshee</summary>
+	<description>Fixes a hang in Banshee when playing music on 
+multiprocessor systems.
+</description>
+	<arch>x86_64</arch>
+	<version>2.8.2</version>
+	<release>15.1</release>
+	<filesize>52813</filesize>
+	<installedsize>126540</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>2.8.2</version>
+			<release>15.1</release>
+			<filename>gnome-vfs-sharp2-2.8.2-15.1.x86_64.rpm</filename>
+			<filesize>52813</filesize>
+			<installedsize>126540</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="mono(gnome-vfs-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(gnome-vfs-sharp)" op="EQ" version="2.4.0.0"/>
+			<dep name="mono(gnome-vfs-sharp)" op="EQ" version="2.6.0.0"/>
+			<dep name="gnome-vfs-sharp2" op="EQ" version="2.8.2" release="15.1"/>
+		</provides>
+		<requires>
+			<dep name="gnome-vfs2"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(VersionedDependencies)" op="LE" version="3.0.3" release="1" pre="1"/>
+			<dep name="mono(glib-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(mscorlib)" op="EQ" version="1.0.5000.0"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>gtk-sharp2</name>
+	<summary>Fix hang in Banshee</summary>
+	<description>Fixes a hang in Banshee when playing music on 
+multiprocessor systems.
+</description>
+	<arch>i586</arch>
+	<version>2.8.2</version>
+	<release>15.1</release>
+	<filesize>501458</filesize>
+	<installedsize>1596139</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>2.8.2</version>
+			<release>15.1</release>
+			<filename>gtk-sharp2-2.8.2-15.1.i586.rpm</filename>
+			<filesize>501458</filesize>
+			<installedsize>1596139</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="libgdksharpglue-2.so"/>
+			<dep name="libgtksharpglue-2.so"/>
+			<dep name="libpangosharpglue-2.so"/>
+			<dep name="mono(atk-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(gdk-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(gtk-dotnet)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(gtk-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(pango-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(atk-sharp)" op="EQ" version="2.4.0.0"/>
+			<dep name="mono(gdk-sharp)" op="EQ" version="2.4.0.0"/>
+			<dep name="mono(gtk-dotnet)" op="EQ" version="2.4.0.0"/>
+			<dep name="mono(gtk-sharp)" op="EQ" version="2.4.0.0"/>
+			<dep name="mono(pango-sharp)" op="EQ" version="2.4.0.0"/>
+			<dep name="mono(atk-sharp)" op="EQ" version="2.6.0.0"/>
+			<dep name="mono(gdk-sharp)" op="EQ" version="2.6.0.0"/>
+			<dep name="mono(gtk-dotnet)" op="EQ" version="2.6.0.0"/>
+			<dep name="mono(gtk-sharp)" op="EQ" version="2.6.0.0"/>
+			<dep name="mono(pango-sharp)" op="EQ" version="2.6.0.0"/>
+			<dep name="gtk-sharp2" op="EQ" version="2.8.2" release="15.1"/>
+		</provides>
+		<requires>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(VersionedDependencies)" op="LE" version="3.0.3" release="1" pre="1"/>
+			<dep name="libX11.so.6"/>
+			<dep name="libXext.so.6"/>
+			<dep name="libXrender.so.1"/>
+			<dep name="libatk-1.0.so.0"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libcairo.so.2"/>
+			<dep name="libdl.so.2"/>
+			<dep name="libfontconfig.so.1"/>
+			<dep name="libfreetype.so.6"/>
+			<dep name="libgdk-x11-2.0.so.0"/>
+			<dep name="libgdk_pixbuf-2.0.so.0"/>
+			<dep name="libglib-2.0.so.0"/>
+			<dep name="libglitz.so.1"/>
+			<dep name="libgmodule-2.0.so.0"/>
+			<dep name="libgobject-2.0.so.0"/>
+			<dep name="libgtk-x11-2.0.so.0"/>
+			<dep name="libm.so.6"/>
+			<dep name="libpango-1.0.so.0"/>
+			<dep name="libpangocairo-1.0.so.0"/>
+			<dep name="libpng12.so.0"/>
+			<dep name="libz.so.1"/>
+			<dep name="mono(Mono.Cairo)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(System.Drawing)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(glib-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(mscorlib)" op="EQ" version="1.0.5000.0"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>gtk-sharp2</name>
+	<summary>Fix hang in Banshee</summary>
+	<description>Fixes a hang in Banshee when playing music on 
+multiprocessor systems.
+</description>
+	<arch>ppc</arch>
+	<version>2.8.2</version>
+	<release>15.1</release>
+	<filesize>510632</filesize>
+	<installedsize>1642039</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>2.8.2</version>
+			<release>15.1</release>
+			<filename>gtk-sharp2-2.8.2-15.1.ppc.rpm</filename>
+			<filesize>510632</filesize>
+			<installedsize>1642039</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="libgdksharpglue-2.so"/>
+			<dep name="libgtksharpglue-2.so"/>
+			<dep name="libpangosharpglue-2.so"/>
+			<dep name="mono(atk-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(gdk-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(gtk-dotnet)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(gtk-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(pango-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(atk-sharp)" op="EQ" version="2.4.0.0"/>
+			<dep name="mono(gdk-sharp)" op="EQ" version="2.4.0.0"/>
+			<dep name="mono(gtk-dotnet)" op="EQ" version="2.4.0.0"/>
+			<dep name="mono(gtk-sharp)" op="EQ" version="2.4.0.0"/>
+			<dep name="mono(pango-sharp)" op="EQ" version="2.4.0.0"/>
+			<dep name="mono(atk-sharp)" op="EQ" version="2.6.0.0"/>
+			<dep name="mono(gdk-sharp)" op="EQ" version="2.6.0.0"/>
+			<dep name="mono(gtk-dotnet)" op="EQ" version="2.6.0.0"/>
+			<dep name="mono(gtk-sharp)" op="EQ" version="2.6.0.0"/>
+			<dep name="mono(pango-sharp)" op="EQ" version="2.6.0.0"/>
+			<dep name="gtk-sharp2" op="EQ" version="2.8.2" release="15.1"/>
+		</provides>
+		<requires>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(VersionedDependencies)" op="LE" version="3.0.3" release="1" pre="1"/>
+			<dep name="libX11.so.6"/>
+			<dep name="libXext.so.6"/>
+			<dep name="libXrender.so.1"/>
+			<dep name="libatk-1.0.so.0"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libcairo.so.2"/>
+			<dep name="libdl.so.2"/>
+			<dep name="libfontconfig.so.1"/>
+			<dep name="libfreetype.so.6"/>
+			<dep name="libgdk-x11-2.0.so.0"/>
+			<dep name="libgdk_pixbuf-2.0.so.0"/>
+			<dep name="libglib-2.0.so.0"/>
+			<dep name="libglitz.so.1"/>
+			<dep name="libgmodule-2.0.so.0"/>
+			<dep name="libgobject-2.0.so.0"/>
+			<dep name="libgtk-x11-2.0.so.0"/>
+			<dep name="libm.so.6"/>
+			<dep name="libpango-1.0.so.0"/>
+			<dep name="libpangocairo-1.0.so.0"/>
+			<dep name="libpng12.so.0"/>
+			<dep name="libz.so.1"/>
+			<dep name="mono(Mono.Cairo)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(System.Drawing)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(glib-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(mscorlib)" op="EQ" version="1.0.5000.0"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>gtk-sharp2</name>
+	<summary>Fix hang in Banshee</summary>
+	<description>Fixes a hang in Banshee when playing music on 
+multiprocessor systems.
+</description>
+	<arch>x86_64</arch>
+	<version>2.8.2</version>
+	<release>15.1</release>
+	<filesize>504864</filesize>
+	<installedsize>1620887</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>2.8.2</version>
+			<release>15.1</release>
+			<filename>gtk-sharp2-2.8.2-15.1.x86_64.rpm</filename>
+			<filesize>504864</filesize>
+			<installedsize>1620887</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="libgdksharpglue-2.so()(64bit)"/>
+			<dep name="libgtksharpglue-2.so()(64bit)"/>
+			<dep name="libpangosharpglue-2.so()(64bit)"/>
+			<dep name="mono(atk-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(gdk-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(gtk-dotnet)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(gtk-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(pango-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(atk-sharp)" op="EQ" version="2.4.0.0"/>
+			<dep name="mono(gdk-sharp)" op="EQ" version="2.4.0.0"/>
+			<dep name="mono(gtk-dotnet)" op="EQ" version="2.4.0.0"/>
+			<dep name="mono(gtk-sharp)" op="EQ" version="2.4.0.0"/>
+			<dep name="mono(pango-sharp)" op="EQ" version="2.4.0.0"/>
+			<dep name="mono(atk-sharp)" op="EQ" version="2.6.0.0"/>
+			<dep name="mono(gdk-sharp)" op="EQ" version="2.6.0.0"/>
+			<dep name="mono(gtk-dotnet)" op="EQ" version="2.6.0.0"/>
+			<dep name="mono(gtk-sharp)" op="EQ" version="2.6.0.0"/>
+			<dep name="mono(pango-sharp)" op="EQ" version="2.6.0.0"/>
+			<dep name="gtk-sharp2" op="EQ" version="2.8.2" release="15.1"/>
+		</provides>
+		<requires>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(VersionedDependencies)" op="LE" version="3.0.3" release="1" pre="1"/>
+			<dep name="libX11.so.6()(64bit)"/>
+			<dep name="libXext.so.6()(64bit)"/>
+			<dep name="libXrender.so.1()(64bit)"/>
+			<dep name="libatk-1.0.so.0()(64bit)"/>
+			<dep name="libc.so.6()(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libcairo.so.2()(64bit)"/>
+			<dep name="libdl.so.2()(64bit)"/>
+			<dep name="libfontconfig.so.1()(64bit)"/>
+			<dep name="libfreetype.so.6()(64bit)"/>
+			<dep name="libgdk-x11-2.0.so.0()(64bit)"/>
+			<dep name="libgdk_pixbuf-2.0.so.0()(64bit)"/>
+			<dep name="libglib-2.0.so.0()(64bit)"/>
+			<dep name="libglitz.so.1()(64bit)"/>
+			<dep name="libgmodule-2.0.so.0()(64bit)"/>
+			<dep name="libgobject-2.0.so.0()(64bit)"/>
+			<dep name="libgtk-x11-2.0.so.0()(64bit)"/>
+			<dep name="libm.so.6()(64bit)"/>
+			<dep name="libpango-1.0.so.0()(64bit)"/>
+			<dep name="libpangocairo-1.0.so.0()(64bit)"/>
+			<dep name="libpng12.so.0()(64bit)"/>
+			<dep name="libz.so.1()(64bit)"/>
+			<dep name="mono(Mono.Cairo)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(System.Drawing)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(glib-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(mscorlib)" op="EQ" version="1.0.5000.0"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>gtk-sharp2-32bit</name>
+	<summary>Fix hang in Banshee</summary>
+	<description>Fixes a hang in Banshee when playing music on 
+multiprocessor systems.
+</description>
+	<arch>x86_64</arch>
+	<version>2.8.2</version>
+	<release>15.1</release>
+	<filesize>19514</filesize>
+	<installedsize>47076</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>2.8.2</version>
+			<release>15.1</release>
+			<filename>gtk-sharp2-32bit-2.8.2-15.1.x86_64.rpm</filename>
+			<filesize>19514</filesize>
+			<installedsize>47076</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="libgdksharpglue-2.so"/>
+			<dep name="libgtksharpglue-2.so"/>
+			<dep name="libpangosharpglue-2.so"/>
+			<dep name="gtk-sharp2-32bit" op="EQ" version="2.8.2" release="15.1"/>
+		</provides>
+		<requires>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="libX11.so.6"/>
+			<dep name="libXext.so.6"/>
+			<dep name="libXrender.so.1"/>
+			<dep name="libatk-1.0.so.0"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libcairo.so.2"/>
+			<dep name="libdl.so.2"/>
+			<dep name="libfontconfig.so.1"/>
+			<dep name="libfreetype.so.6"/>
+			<dep name="libgdk-x11-2.0.so.0"/>
+			<dep name="libgdk_pixbuf-2.0.so.0"/>
+			<dep name="libglib-2.0.so.0"/>
+			<dep name="libglitz.so.1"/>
+			<dep name="libgmodule-2.0.so.0"/>
+			<dep name="libgobject-2.0.so.0"/>
+			<dep name="libgtk-x11-2.0.so.0"/>
+			<dep name="libm.so.6"/>
+			<dep name="libpango-1.0.so.0"/>
+			<dep name="libpangocairo-1.0.so.0"/>
+			<dep name="libpng12.so.0"/>
+			<dep name="libz.so.1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>gtk-sharp2-64bit</name>
+	<summary>Fix hang in Banshee</summary>
+	<description>Fixes a hang in Banshee when playing music on 
+multiprocessor systems.
+</description>
+	<arch>ppc</arch>
+	<version>2.8.2</version>
+	<release>15.1</release>
+	<filesize>24061</filesize>
+	<installedsize>101936</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>2.8.2</version>
+			<release>15.1</release>
+			<filename>gtk-sharp2-64bit-2.8.2-15.1.ppc.rpm</filename>
+			<filesize>24061</filesize>
+			<installedsize>101936</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="libgdksharpglue-2.so()(64bit)"/>
+			<dep name="libgtksharpglue-2.so()(64bit)"/>
+			<dep name="libpangosharpglue-2.so()(64bit)"/>
+			<dep name="gtk-sharp2-64bit" op="EQ" version="2.8.2" release="15.1"/>
+		</provides>
+		<requires>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="libX11.so.6()(64bit)"/>
+			<dep name="libXext.so.6()(64bit)"/>
+			<dep name="libXrender.so.1()(64bit)"/>
+			<dep name="libatk-1.0.so.0()(64bit)"/>
+			<dep name="libc.so.6()(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.3)(64bit)"/>
+			<dep name="libcairo.so.2()(64bit)"/>
+			<dep name="libdl.so.2()(64bit)"/>
+			<dep name="libfontconfig.so.1()(64bit)"/>
+			<dep name="libfreetype.so.6()(64bit)"/>
+			<dep name="libgdk-x11-2.0.so.0()(64bit)"/>
+			<dep name="libgdk_pixbuf-2.0.so.0()(64bit)"/>
+			<dep name="libglib-2.0.so.0()(64bit)"/>
+			<dep name="libglitz.so.1()(64bit)"/>
+			<dep name="libgmodule-2.0.so.0()(64bit)"/>
+			<dep name="libgobject-2.0.so.0()(64bit)"/>
+			<dep name="libgtk-x11-2.0.so.0()(64bit)"/>
+			<dep name="libm.so.6()(64bit)"/>
+			<dep name="libpango-1.0.so.0()(64bit)"/>
+			<dep name="libpangocairo-1.0.so.0()(64bit)"/>
+			<dep name="libpng12.so.0()(64bit)"/>
+			<dep name="libz.so.1()(64bit)"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>gtk-sharp2-complete</name>
+	<summary>Fix hang in Banshee</summary>
+	<description>Fixes a hang in Banshee when playing music on 
+multiprocessor systems.
+</description>
+	<arch>i586</arch>
+	<version>2.8.2</version>
+	<release>15.1</release>
+	<filesize>5986</filesize>
+	<installedsize>0</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>2.8.2</version>
+			<release>15.1</release>
+			<filename>gtk-sharp2-complete-2.8.2-15.1.i586.rpm</filename>
+			<filesize>5986</filesize>
+			<installedsize>0</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="gtk-sharp2-complete" op="EQ" version="2.8.2" release="15.1"/>
+		</provides>
+		<requires>
+			<dep name="art-sharp2" op="EQ" version="2.8.2" release="15.1"/>
+			<dep name="gconf-sharp2" op="EQ" version="2.8.2" release="15.1"/>
+			<dep name="glade-sharp2" op="EQ" version="2.8.2" release="15.1"/>
+			<dep name="glib-sharp2" op="EQ" version="2.8.2" release="15.1"/>
+			<dep name="gnome-sharp2" op="EQ" version="2.8.2" release="15.1"/>
+			<dep name="gnome-vfs-sharp2" op="EQ" version="2.8.2" release="15.1"/>
+			<dep name="gtk-sharp2" op="EQ" version="2.8.2" release="15.1"/>
+			<dep name="gtk-sharp2-doc" op="EQ" version="2.8.2" release="15.1"/>
+			<dep name="gtk-sharp2-gapi" op="EQ" version="2.8.2" release="15.1"/>
+			<dep name="gtkhtml-sharp2" op="EQ" version="2.8.2" release="15.1"/>
+			<dep name="rsvg-sharp2" op="EQ" version="2.8.2" release="15.1"/>
+			<dep name="vte-sharp2" op="EQ" version="2.8.2" release="15.1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>gtk-sharp2-complete</name>
+	<summary>Fix hang in Banshee</summary>
+	<description>Fixes a hang in Banshee when playing music on 
+multiprocessor systems.
+</description>
+	<arch>ppc</arch>
+	<version>2.8.2</version>
+	<release>15.1</release>
+	<filesize>5954</filesize>
+	<installedsize>0</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>2.8.2</version>
+			<release>15.1</release>
+			<filename>gtk-sharp2-complete-2.8.2-15.1.ppc.rpm</filename>
+			<filesize>5954</filesize>
+			<installedsize>0</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="gtk-sharp2-complete" op="EQ" version="2.8.2" release="15.1"/>
+		</provides>
+		<requires>
+			<dep name="art-sharp2" op="EQ" version="2.8.2" release="15.1"/>
+			<dep name="gconf-sharp2" op="EQ" version="2.8.2" release="15.1"/>
+			<dep name="glade-sharp2" op="EQ" version="2.8.2" release="15.1"/>
+			<dep name="glib-sharp2" op="EQ" version="2.8.2" release="15.1"/>
+			<dep name="gnome-sharp2" op="EQ" version="2.8.2" release="15.1"/>
+			<dep name="gnome-vfs-sharp2" op="EQ" version="2.8.2" release="15.1"/>
+			<dep name="gtk-sharp2" op="EQ" version="2.8.2" release="15.1"/>
+			<dep name="gtk-sharp2-doc" op="EQ" version="2.8.2" release="15.1"/>
+			<dep name="gtk-sharp2-gapi" op="EQ" version="2.8.2" release="15.1"/>
+			<dep name="gtkhtml-sharp2" op="EQ" version="2.8.2" release="15.1"/>
+			<dep name="rsvg-sharp2" op="EQ" version="2.8.2" release="15.1"/>
+			<dep name="vte-sharp2" op="EQ" version="2.8.2" release="15.1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>gtk-sharp2-complete</name>
+	<summary>Fix hang in Banshee</summary>
+	<description>Fixes a hang in Banshee when playing music on 
+multiprocessor systems.
+</description>
+	<arch>x86_64</arch>
+	<version>2.8.2</version>
+	<release>15.1</release>
+	<filesize>5977</filesize>
+	<installedsize>0</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>2.8.2</version>
+			<release>15.1</release>
+			<filename>gtk-sharp2-complete-2.8.2-15.1.x86_64.rpm</filename>
+			<filesize>5977</filesize>
+			<installedsize>0</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="gtk-sharp2-complete" op="EQ" version="2.8.2" release="15.1"/>
+		</provides>
+		<requires>
+			<dep name="art-sharp2" op="EQ" version="2.8.2" release="15.1"/>
+			<dep name="gconf-sharp2" op="EQ" version="2.8.2" release="15.1"/>
+			<dep name="glade-sharp2" op="EQ" version="2.8.2" release="15.1"/>
+			<dep name="glib-sharp2" op="EQ" version="2.8.2" release="15.1"/>
+			<dep name="gnome-sharp2" op="EQ" version="2.8.2" release="15.1"/>
+			<dep name="gnome-vfs-sharp2" op="EQ" version="2.8.2" release="15.1"/>
+			<dep name="gtk-sharp2" op="EQ" version="2.8.2" release="15.1"/>
+			<dep name="gtk-sharp2-doc" op="EQ" version="2.8.2" release="15.1"/>
+			<dep name="gtk-sharp2-gapi" op="EQ" version="2.8.2" release="15.1"/>
+			<dep name="gtkhtml-sharp2" op="EQ" version="2.8.2" release="15.1"/>
+			<dep name="rsvg-sharp2" op="EQ" version="2.8.2" release="15.1"/>
+			<dep name="vte-sharp2" op="EQ" version="2.8.2" release="15.1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>gtk-sharp2-doc</name>
+	<summary>Fix hang in Banshee</summary>
+	<description>Fixes a hang in Banshee when playing music on 
+multiprocessor systems.
+</description>
+	<arch>i586</arch>
+	<version>2.8.2</version>
+	<release>15.1</release>
+	<filesize>2085842</filesize>
+	<installedsize>2751474</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>2.8.2</version>
+			<release>15.1</release>
+			<filename>gtk-sharp2-doc-2.8.2-15.1.i586.rpm</filename>
+			<filesize>2085842</filesize>
+			<installedsize>2751474</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="gtk-sharp2-doc" op="EQ" version="2.8.2" release="15.1"/>
+		</provides>
+		<requires>
+			<dep name="mono-tools"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>gtk-sharp2-doc</name>
+	<summary>Fix hang in Banshee</summary>
+	<description>Fixes a hang in Banshee when playing music on 
+multiprocessor systems.
+</description>
+	<arch>ppc</arch>
+	<version>2.8.2</version>
+	<release>15.1</release>
+	<filesize>2087112</filesize>
+	<installedsize>2751474</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>2.8.2</version>
+			<release>15.1</release>
+			<filename>gtk-sharp2-doc-2.8.2-15.1.ppc.rpm</filename>
+			<filesize>2087112</filesize>
+			<installedsize>2751474</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="gtk-sharp2-doc" op="EQ" version="2.8.2" release="15.1"/>
+		</provides>
+		<requires>
+			<dep name="mono-tools"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>gtk-sharp2-doc</name>
+	<summary>Fix hang in Banshee</summary>
+	<description>Fixes a hang in Banshee when playing music on 
+multiprocessor systems.
+</description>
+	<arch>x86_64</arch>
+	<version>2.8.2</version>
+	<release>15.1</release>
+	<filesize>2085803</filesize>
+	<installedsize>2751474</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>2.8.2</version>
+			<release>15.1</release>
+			<filename>gtk-sharp2-doc-2.8.2-15.1.x86_64.rpm</filename>
+			<filesize>2085803</filesize>
+			<installedsize>2751474</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="gtk-sharp2-doc" op="EQ" version="2.8.2" release="15.1"/>
+		</provides>
+		<requires>
+			<dep name="mono-tools"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>gtk-sharp2-gapi</name>
+	<summary>Fix hang in Banshee</summary>
+	<description>Fixes a hang in Banshee when playing music on 
+multiprocessor systems.
+</description>
+	<arch>i586</arch>
+	<version>2.8.2</version>
+	<release>15.1</release>
+	<filesize>199278</filesize>
+	<installedsize>2138385</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>2.8.2</version>
+			<release>15.1</release>
+			<filename>gtk-sharp2-gapi-2.8.2-15.1.i586.rpm</filename>
+			<filesize>199278</filesize>
+			<installedsize>2138385</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="mono(gapi-fixup)" op="EQ" version="0.0.0.0"/>
+			<dep name="mono(gapi-parser)" op="EQ" version="0.0.0.0"/>
+			<dep name="mono(gapi_codegen)" op="EQ" version="0.0.0.0"/>
+			<dep name="gtk-sharp2-gapi" op="EQ" version="2.8.2" release="15.1"/>
+		</provides>
+		<requires>
+			<dep name="perl-XML-LibXML-Common"/>
+			<dep name="perl-XML-LibXML"/>
+			<dep name="perl-XML-SAX"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(VersionedDependencies)" op="LE" version="3.0.3" release="1" pre="1"/>
+			<dep name="/bin/sh"/>
+			<dep name="/usr/bin/perl"/>
+			<dep name="mono(System.Xml)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(mscorlib)" op="EQ" version="1.0.5000.0"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>gtk-sharp2-gapi</name>
+	<summary>Fix hang in Banshee</summary>
+	<description>Fixes a hang in Banshee when playing music on 
+multiprocessor systems.
+</description>
+	<arch>ppc</arch>
+	<version>2.8.2</version>
+	<release>15.1</release>
+	<filesize>199294</filesize>
+	<installedsize>2138385</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>2.8.2</version>
+			<release>15.1</release>
+			<filename>gtk-sharp2-gapi-2.8.2-15.1.ppc.rpm</filename>
+			<filesize>199294</filesize>
+			<installedsize>2138385</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="mono(gapi-fixup)" op="EQ" version="0.0.0.0"/>
+			<dep name="mono(gapi-parser)" op="EQ" version="0.0.0.0"/>
+			<dep name="mono(gapi_codegen)" op="EQ" version="0.0.0.0"/>
+			<dep name="gtk-sharp2-gapi" op="EQ" version="2.8.2" release="15.1"/>
+		</provides>
+		<requires>
+			<dep name="perl-XML-LibXML-Common"/>
+			<dep name="perl-XML-LibXML"/>
+			<dep name="perl-XML-SAX"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(VersionedDependencies)" op="LE" version="3.0.3" release="1" pre="1"/>
+			<dep name="/bin/sh"/>
+			<dep name="/usr/bin/perl"/>
+			<dep name="mono(System.Xml)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(mscorlib)" op="EQ" version="1.0.5000.0"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>gtk-sharp2-gapi</name>
+	<summary>Fix hang in Banshee</summary>
+	<description>Fixes a hang in Banshee when playing music on 
+multiprocessor systems.
+</description>
+	<arch>x86_64</arch>
+	<version>2.8.2</version>
+	<release>15.1</release>
+	<filesize>199316</filesize>
+	<installedsize>2138385</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>2.8.2</version>
+			<release>15.1</release>
+			<filename>gtk-sharp2-gapi-2.8.2-15.1.x86_64.rpm</filename>
+			<filesize>199316</filesize>
+			<installedsize>2138385</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="mono(gapi-fixup)" op="EQ" version="0.0.0.0"/>
+			<dep name="mono(gapi-parser)" op="EQ" version="0.0.0.0"/>
+			<dep name="mono(gapi_codegen)" op="EQ" version="0.0.0.0"/>
+			<dep name="gtk-sharp2-gapi" op="EQ" version="2.8.2" release="15.1"/>
+		</provides>
+		<requires>
+			<dep name="perl-XML-LibXML-Common"/>
+			<dep name="perl-XML-LibXML"/>
+			<dep name="perl-XML-SAX"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(VersionedDependencies)" op="LE" version="3.0.3" release="1" pre="1"/>
+			<dep name="/bin/sh"/>
+			<dep name="/usr/bin/perl"/>
+			<dep name="mono(System.Xml)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(mscorlib)" op="EQ" version="1.0.5000.0"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>gtkhtml-sharp2</name>
+	<summary>Fix hang in Banshee</summary>
+	<description>Fixes a hang in Banshee when playing music on 
+multiprocessor systems.
+</description>
+	<arch>i586</arch>
+	<version>2.8.2</version>
+	<release>15.1</release>
+	<filesize>32511</filesize>
+	<installedsize>73377</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>2.8.2</version>
+			<release>15.1</release>
+			<filename>gtkhtml-sharp2-2.8.2-15.1.i586.rpm</filename>
+			<filesize>32511</filesize>
+			<installedsize>73377</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="mono(gtkhtml-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(gtkhtml-sharp)" op="EQ" version="2.4.0.0"/>
+			<dep name="mono(gtkhtml-sharp)" op="EQ" version="2.6.0.0"/>
+			<dep name="gtkhtml-sharp2" op="EQ" version="2.8.2" release="15.1"/>
+		</provides>
+		<requires>
+			<dep name="gtkhtml2"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(VersionedDependencies)" op="LE" version="3.0.3" release="1" pre="1"/>
+			<dep name="mono(gdk-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(glib-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(gnome-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(gtk-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(mscorlib)" op="EQ" version="1.0.5000.0"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>gtkhtml-sharp2</name>
+	<summary>Fix hang in Banshee</summary>
+	<description>Fixes a hang in Banshee when playing music on 
+multiprocessor systems.
+</description>
+	<arch>ppc</arch>
+	<version>2.8.2</version>
+	<release>15.1</release>
+	<filesize>32748</filesize>
+	<installedsize>74401</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>2.8.2</version>
+			<release>15.1</release>
+			<filename>gtkhtml-sharp2-2.8.2-15.1.ppc.rpm</filename>
+			<filesize>32748</filesize>
+			<installedsize>74401</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="mono(gtkhtml-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(gtkhtml-sharp)" op="EQ" version="2.4.0.0"/>
+			<dep name="mono(gtkhtml-sharp)" op="EQ" version="2.6.0.0"/>
+			<dep name="gtkhtml-sharp2" op="EQ" version="2.8.2" release="15.1"/>
+		</provides>
+		<requires>
+			<dep name="gtkhtml2"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(VersionedDependencies)" op="LE" version="3.0.3" release="1" pre="1"/>
+			<dep name="mono(gdk-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(glib-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(gnome-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(gtk-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(mscorlib)" op="EQ" version="1.0.5000.0"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>gtkhtml-sharp2</name>
+	<summary>Fix hang in Banshee</summary>
+	<description>Fixes a hang in Banshee when playing music on 
+multiprocessor systems.
+</description>
+	<arch>x86_64</arch>
+	<version>2.8.2</version>
+	<release>15.1</release>
+	<filesize>32486</filesize>
+	<installedsize>73377</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>2.8.2</version>
+			<release>15.1</release>
+			<filename>gtkhtml-sharp2-2.8.2-15.1.x86_64.rpm</filename>
+			<filesize>32486</filesize>
+			<installedsize>73377</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="mono(gtkhtml-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(gtkhtml-sharp)" op="EQ" version="2.4.0.0"/>
+			<dep name="mono(gtkhtml-sharp)" op="EQ" version="2.6.0.0"/>
+			<dep name="gtkhtml-sharp2" op="EQ" version="2.8.2" release="15.1"/>
+		</provides>
+		<requires>
+			<dep name="gtkhtml2"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(VersionedDependencies)" op="LE" version="3.0.3" release="1" pre="1"/>
+			<dep name="mono(gdk-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(glib-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(gnome-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(gtk-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(mscorlib)" op="EQ" version="1.0.5000.0"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>rsvg-sharp2</name>
+	<summary>Fix hang in Banshee</summary>
+	<description>Fixes a hang in Banshee when playing music on 
+multiprocessor systems.
+</description>
+	<arch>i586</arch>
+	<version>2.8.2</version>
+	<release>15.1</release>
+	<filesize>20237</filesize>
+	<installedsize>32806</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>2.8.2</version>
+			<release>15.1</release>
+			<filename>rsvg-sharp2-2.8.2-15.1.i586.rpm</filename>
+			<filesize>20237</filesize>
+			<installedsize>32806</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="mono(rsvg-sharp)" op="EQ" version="2.4.0.0"/>
+			<dep name="mono(rsvg-sharp)" op="EQ" version="2.6.0.0"/>
+			<dep name="mono(rsvg-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="rsvg-sharp2" op="EQ" version="2.8.2" release="15.1"/>
+		</provides>
+		<requires>
+			<dep name="librsvg"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(VersionedDependencies)" op="LE" version="3.0.3" release="1" pre="1"/>
+			<dep name="mono(art-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(gdk-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(glib-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(mscorlib)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(pango-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>rsvg-sharp2</name>
+	<summary>Fix hang in Banshee</summary>
+	<description>Fixes a hang in Banshee when playing music on 
+multiprocessor systems.
+</description>
+	<arch>ppc</arch>
+	<version>2.8.2</version>
+	<release>15.1</release>
+	<filesize>20220</filesize>
+	<installedsize>32806</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>2.8.2</version>
+			<release>15.1</release>
+			<filename>rsvg-sharp2-2.8.2-15.1.ppc.rpm</filename>
+			<filesize>20220</filesize>
+			<installedsize>32806</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="mono(rsvg-sharp)" op="EQ" version="2.4.0.0"/>
+			<dep name="mono(rsvg-sharp)" op="EQ" version="2.6.0.0"/>
+			<dep name="mono(rsvg-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="rsvg-sharp2" op="EQ" version="2.8.2" release="15.1"/>
+		</provides>
+		<requires>
+			<dep name="librsvg"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(VersionedDependencies)" op="LE" version="3.0.3" release="1" pre="1"/>
+			<dep name="mono(art-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(gdk-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(glib-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(mscorlib)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(pango-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>rsvg-sharp2</name>
+	<summary>Fix hang in Banshee</summary>
+	<description>Fixes a hang in Banshee when playing music on 
+multiprocessor systems.
+</description>
+	<arch>x86_64</arch>
+	<version>2.8.2</version>
+	<release>15.1</release>
+	<filesize>20265</filesize>
+	<installedsize>32806</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>2.8.2</version>
+			<release>15.1</release>
+			<filename>rsvg-sharp2-2.8.2-15.1.x86_64.rpm</filename>
+			<filesize>20265</filesize>
+			<installedsize>32806</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="mono(rsvg-sharp)" op="EQ" version="2.4.0.0"/>
+			<dep name="mono(rsvg-sharp)" op="EQ" version="2.6.0.0"/>
+			<dep name="mono(rsvg-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="rsvg-sharp2" op="EQ" version="2.8.2" release="15.1"/>
+		</provides>
+		<requires>
+			<dep name="librsvg"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(VersionedDependencies)" op="LE" version="3.0.3" release="1" pre="1"/>
+			<dep name="mono(art-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(gdk-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(glib-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(mscorlib)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(pango-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>vte-sharp2</name>
+	<summary>Fix hang in Banshee</summary>
+	<description>Fixes a hang in Banshee when playing music on 
+multiprocessor systems.
+</description>
+	<arch>i586</arch>
+	<version>2.8.2</version>
+	<release>15.1</release>
+	<filesize>32272</filesize>
+	<installedsize>73585</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>2.8.2</version>
+			<release>15.1</release>
+			<filename>vte-sharp2-2.8.2-15.1.i586.rpm</filename>
+			<filesize>32272</filesize>
+			<installedsize>73585</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="libvtesharpglue-2.so"/>
+			<dep name="mono(vte-sharp)" op="EQ" version="2.4.0.0"/>
+			<dep name="mono(vte-sharp)" op="EQ" version="2.6.0.0"/>
+			<dep name="mono(vte-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="vte-sharp2" op="EQ" version="2.8.2" release="15.1"/>
+		</provides>
+		<requires>
+			<dep name="vte"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(VersionedDependencies)" op="LE" version="3.0.3" release="1" pre="1"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="mono(atk-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(gdk-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(glib-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(gtk-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(mscorlib)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(pango-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>vte-sharp2</name>
+	<summary>Fix hang in Banshee</summary>
+	<description>Fixes a hang in Banshee when playing music on 
+multiprocessor systems.
+</description>
+	<arch>ppc</arch>
+	<version>2.8.2</version>
+	<release>15.1</release>
+	<filesize>34244</filesize>
+	<installedsize>78977</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>2.8.2</version>
+			<release>15.1</release>
+			<filename>vte-sharp2-2.8.2-15.1.ppc.rpm</filename>
+			<filesize>34244</filesize>
+			<installedsize>78977</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="libvtesharpglue-2.so"/>
+			<dep name="mono(vte-sharp)" op="EQ" version="2.4.0.0"/>
+			<dep name="mono(vte-sharp)" op="EQ" version="2.6.0.0"/>
+			<dep name="mono(vte-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="vte-sharp2" op="EQ" version="2.8.2" release="15.1"/>
+		</provides>
+		<requires>
+			<dep name="vte"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(VersionedDependencies)" op="LE" version="3.0.3" release="1" pre="1"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="mono(atk-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(gdk-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(glib-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(gtk-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(mscorlib)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(pango-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>vte-sharp2</name>
+	<summary>Fix hang in Banshee</summary>
+	<description>Fixes a hang in Banshee when playing music on 
+multiprocessor systems.
+</description>
+	<arch>x86_64</arch>
+	<version>2.8.2</version>
+	<release>15.1</release>
+	<filesize>32469</filesize>
+	<installedsize>75105</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>2.8.2</version>
+			<release>15.1</release>
+			<filename>vte-sharp2-2.8.2-15.1.x86_64.rpm</filename>
+			<filesize>32469</filesize>
+			<installedsize>75105</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="libvtesharpglue-2.so()(64bit)"/>
+			<dep name="mono(vte-sharp)" op="EQ" version="2.4.0.0"/>
+			<dep name="mono(vte-sharp)" op="EQ" version="2.6.0.0"/>
+			<dep name="mono(vte-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="vte-sharp2" op="EQ" version="2.8.2" release="15.1"/>
+		</provides>
+		<requires>
+			<dep name="vte"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(VersionedDependencies)" op="LE" version="3.0.3" release="1" pre="1"/>
+			<dep name="libc.so.6()(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.2.5)(64bit)"/>
+			<dep name="mono(atk-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(gdk-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(glib-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(gtk-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(mscorlib)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(pango-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+</subchannel></channel>

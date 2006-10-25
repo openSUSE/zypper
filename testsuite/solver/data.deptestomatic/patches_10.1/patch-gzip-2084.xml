@@ -1,0 +1,194 @@
+<channel><subchannel>                                                  
+
+<patch>
+	<name>gzip</name>
+	<arch>noarch</arch>
+	<version>2084</version>
+	<release>0</release>
+	<requires>
+		<dep kind="atom" name="gzip" epoch="0" version="1.3.5" release="159.5" op="EQ"/>
+	</requires>
+</patch>
+<atom>
+	<name>gzip</name>
+	<arch>i586</arch>
+	<version>1.3.5</version>
+	<release>159.5</release>
+	<freshens>
+		<dep kind="package" name="gzip"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="gzip" epoch="0" version="1.3.5" release="159.5" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>gzip</name>
+	<arch>ppc</arch>
+	<version>1.3.5</version>
+	<release>159.5</release>
+	<freshens>
+		<dep kind="package" name="gzip"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="gzip" epoch="0" version="1.3.5" release="159.5" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>gzip</name>
+	<arch>x86_64</arch>
+	<version>1.3.5</version>
+	<release>159.5</release>
+	<freshens>
+		<dep kind="package" name="gzip"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="gzip" epoch="0" version="1.3.5" release="159.5" op="GE"/>
+	</requires>
+</atom>
+<package>
+	<name>gzip</name>
+	<summary>gzip: Security update</summary>
+	<description>This update fixes several security problems that can be
+exploited to compromise the system in conjunction with
+other programs while processing malformated archive files.
+(CVE-2006-4334,CVE-2006-4335,CVE-2006-4336,CVE-2006-4337,CVE
+-2006-4338)
+</description>
+	<arch>i586</arch>
+	<version>1.3.5</version>
+	<release>159.5</release>
+	<filesize>69698</filesize>
+	<installedsize>95257</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>1.3.5</version>
+			<release>159.5</release>
+			<filename>gzip-1.3.5-159.5.i586.rpm</filename>
+			<filesize>69698</filesize>
+			<installedsize>95257</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="gzip" op="EQ" version="1.3.5" release="159.5"/>
+		</provides>
+		<requires>
+			<dep name="info" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PartialHardlinkSets)" op="LE" version="4.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/bin/sh"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1)"/>
+			<dep name="libc.so.6(GLIBC_2.2)"/>
+			<dep name="libc.so.6(GLIBC_2.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>gzip</name>
+	<summary>gzip: Security update</summary>
+	<description>This update fixes several security problems that can be
+exploited to compromise the system in conjunction with
+other programs while processing malformated archive files.
+(CVE-2006-4334,CVE-2006-4335,CVE-2006-4336,CVE-2006-4337,CVE
+-2006-4338)
+</description>
+	<arch>ppc</arch>
+	<version>1.3.5</version>
+	<release>159.5</release>
+	<filesize>76908</filesize>
+	<installedsize>108765</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>1.3.5</version>
+			<release>159.5</release>
+			<filename>gzip-1.3.5-159.5.ppc.rpm</filename>
+			<filesize>76908</filesize>
+			<installedsize>108765</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="gzip" op="EQ" version="1.3.5" release="159.5"/>
+		</provides>
+		<requires>
+			<dep name="info" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PartialHardlinkSets)" op="LE" version="4.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/bin/sh"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1)"/>
+			<dep name="libc.so.6(GLIBC_2.2)"/>
+			<dep name="libc.so.6(GLIBC_2.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)"/>
+			<dep name="libc.so.6(GLIBC_2.4)"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>gzip</name>
+	<summary>gzip: Security update</summary>
+	<description>This update fixes several security problems that can be
+exploited to compromise the system in conjunction with
+other programs while processing malformated archive files.
+(CVE-2006-4334,CVE-2006-4335,CVE-2006-4336,CVE-2006-4337,CVE
+-2006-4338)
+</description>
+	<arch>x86_64</arch>
+	<version>1.3.5</version>
+	<release>159.5</release>
+	<filesize>74692</filesize>
+	<installedsize>102141</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>1.3.5</version>
+			<release>159.5</release>
+			<filename>gzip-1.3.5-159.5.x86_64.rpm</filename>
+			<filesize>74692</filesize>
+			<installedsize>102141</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="gzip" op="EQ" version="1.3.5" release="159.5"/>
+		</provides>
+		<requires>
+			<dep name="info" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PartialHardlinkSets)" op="LE" version="4.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/bin/sh"/>
+			<dep name="libc.so.6()(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.3)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)(64bit)"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+</subchannel></channel>

@@ -1,0 +1,463 @@
+<channel><subchannel>                                                  
+
+<patch>
+	<name>yast2-storage</name>
+	<arch>noarch</arch>
+	<version>1591</version>
+	<release>0</release>
+	<requires>
+		<dep kind="atom" name="yast2-storage" epoch="0" version="2.13.68" release="0.2" op="EQ"/>
+		<dep kind="atom" name="yast2-storage-evms" epoch="0" version="2.13.68" release="0.2" op="EQ"/>
+	</requires>
+</patch>
+<atom>
+	<name>yast2-storage</name>
+	<arch>i586</arch>
+	<version>2.13.68</version>
+	<release>0.2</release>
+	<freshens>
+		<dep kind="package" name="yast2-storage"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="yast2-storage" epoch="0" version="2.13.68" release="0.2" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>yast2-storage</name>
+	<arch>ppc</arch>
+	<version>2.13.68</version>
+	<release>0.2</release>
+	<freshens>
+		<dep kind="package" name="yast2-storage"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="yast2-storage" epoch="0" version="2.13.68" release="0.2" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>yast2-storage</name>
+	<arch>x86_64</arch>
+	<version>2.13.68</version>
+	<release>0.2</release>
+	<freshens>
+		<dep kind="package" name="yast2-storage"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="yast2-storage" epoch="0" version="2.13.68" release="0.2" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>yast2-storage-evms</name>
+	<arch>i586</arch>
+	<version>2.13.68</version>
+	<release>0.2</release>
+	<freshens>
+		<dep kind="package" name="yast2-storage-evms"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="yast2-storage-evms" epoch="0" version="2.13.68" release="0.2" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>yast2-storage-evms</name>
+	<arch>ppc</arch>
+	<version>2.13.68</version>
+	<release>0.2</release>
+	<freshens>
+		<dep kind="package" name="yast2-storage-evms"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="yast2-storage-evms" epoch="0" version="2.13.68" release="0.2" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>yast2-storage-evms</name>
+	<arch>x86_64</arch>
+	<version>2.13.68</version>
+	<release>0.2</release>
+	<freshens>
+		<dep kind="package" name="yast2-storage-evms"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="yast2-storage-evms" epoch="0" version="2.13.68" release="0.2" op="GE"/>
+	</requires>
+</atom>
+<package>
+	<name>yast2-storage</name>
+	<summary>yast2-storage fix for crypt file creation</summary>
+	<description>This fixes the bug that creation of an encrypted file fails 
+silently in yast2 expert partitioner.
+</description>
+	<arch>i586</arch>
+	<version>2.13.68</version>
+	<release>0.2</release>
+	<filesize>545872</filesize>
+	<installedsize>2676519</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>2.13.68</version>
+			<release>0.2</release>
+			<filename>yast2-storage-2.13.68-0.2.i586.rpm</filename>
+			<filesize>545872</filesize>
+			<installedsize>2676519</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="y2a_fdsk"/>
+			<dep name="yast2-config-disk"/>
+			<dep name="yast2-agent-fdisk"/>
+			<dep name="yast2-agent-fdisk-devel"/>
+			<dep name="yast2-trans-inst-partitioning"/>
+			<dep name="y2t_inst-partitioning"/>
+			<dep name="LibStorage.so"/>
+			<dep name="libpy2StorageCallbacks.so.2"/>
+			<dep name="perl(LibStorage)"/>
+			<dep name="perl(LibStorage::ContainerInfo)"/>
+			<dep name="perl(LibStorage::DiskInfo)"/>
+			<dep name="perl(LibStorage::DmInfo)"/>
+			<dep name="perl(LibStorage::EvmsCoInfo)"/>
+			<dep name="perl(LibStorage::EvmsInfo)"/>
+			<dep name="perl(LibStorage::FsCapabilities)"/>
+			<dep name="perl(LibStorage::LoopInfo)"/>
+			<dep name="perl(LibStorage::LvmLvInfo)"/>
+			<dep name="perl(LibStorage::LvmVgInfo)"/>
+			<dep name="perl(LibStorage::MdInfo)"/>
+			<dep name="perl(LibStorage::PartitionInfo)"/>
+			<dep name="perl(LibStorage::StorageInterface)"/>
+			<dep name="perl(LibStorage::VolumeInfo)"/>
+			<dep name="perl(LibStoragec)"/>
+			<dep name="yast2-storage" op="EQ" version="2.13.68" release="0.2"/>
+		</provides>
+		<requires>
+			<dep name="yast2"/>
+			<dep name="parted"/>
+			<dep name="yast2-installation"/>
+			<dep name="yast2-storage-lib"/>
+			<dep name="yast2-perl-bindings"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/bin/bash"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libgcc_s.so.1"/>
+			<dep name="libgcc_s.so.1(GCC_3.0)"/>
+			<dep name="libm.so.6"/>
+			<dep name="libstdc++.so.6"/>
+			<dep name="libstdc++.so.6(CXXABI_1.3)"/>
+			<dep name="libstdc++.so.6(GLIBCXX_3.4)"/>
+			<dep name="liby2.so.2"/>
+			<dep name="liby2storage.so.2"/>
+			<dep name="libycp.so.2"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>yast2-storage</name>
+	<summary>yast2-storage fix for crypt file creation</summary>
+	<description>This fixes the bug that creation of an encrypted file fails 
+silently in yast2 expert partitioner.
+</description>
+	<arch>ppc</arch>
+	<version>2.13.68</version>
+	<release>0.2</release>
+	<filesize>549283</filesize>
+	<installedsize>2665537</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>2.13.68</version>
+			<release>0.2</release>
+			<filename>yast2-storage-2.13.68-0.2.ppc.rpm</filename>
+			<filesize>549283</filesize>
+			<installedsize>2665537</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="y2a_fdsk"/>
+			<dep name="yast2-config-disk"/>
+			<dep name="yast2-agent-fdisk"/>
+			<dep name="yast2-agent-fdisk-devel"/>
+			<dep name="yast2-trans-inst-partitioning"/>
+			<dep name="y2t_inst-partitioning"/>
+			<dep name="LibStorage.so"/>
+			<dep name="libpy2StorageCallbacks.so.2"/>
+			<dep name="perl(LibStorage)"/>
+			<dep name="perl(LibStorage::ContainerInfo)"/>
+			<dep name="perl(LibStorage::DiskInfo)"/>
+			<dep name="perl(LibStorage::DmInfo)"/>
+			<dep name="perl(LibStorage::EvmsCoInfo)"/>
+			<dep name="perl(LibStorage::EvmsInfo)"/>
+			<dep name="perl(LibStorage::FsCapabilities)"/>
+			<dep name="perl(LibStorage::LoopInfo)"/>
+			<dep name="perl(LibStorage::LvmLvInfo)"/>
+			<dep name="perl(LibStorage::LvmVgInfo)"/>
+			<dep name="perl(LibStorage::MdInfo)"/>
+			<dep name="perl(LibStorage::PartitionInfo)"/>
+			<dep name="perl(LibStorage::StorageInterface)"/>
+			<dep name="perl(LibStorage::VolumeInfo)"/>
+			<dep name="perl(LibStoragec)"/>
+			<dep name="yast2-storage" op="EQ" version="2.13.68" release="0.2"/>
+		</provides>
+		<requires>
+			<dep name="yast2"/>
+			<dep name="parted"/>
+			<dep name="yast2-installation"/>
+			<dep name="yast2-storage-lib"/>
+			<dep name="yast2-perl-bindings"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/bin/bash"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libc.so.6(GLIBC_2.4)"/>
+			<dep name="libgcc_s.so.1"/>
+			<dep name="libgcc_s.so.1(GCC_3.0)"/>
+			<dep name="libm.so.6"/>
+			<dep name="libstdc++.so.6"/>
+			<dep name="libstdc++.so.6(CXXABI_1.3)"/>
+			<dep name="libstdc++.so.6(GLIBCXX_3.4)"/>
+			<dep name="liby2.so.2"/>
+			<dep name="liby2storage.so.2"/>
+			<dep name="libycp.so.2"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>yast2-storage</name>
+	<summary>yast2-storage fix for crypt file creation</summary>
+	<description>This fixes the bug that creation of an encrypted file fails 
+silently in yast2 expert partitioner.
+</description>
+	<arch>x86_64</arch>
+	<version>2.13.68</version>
+	<release>0.2</release>
+	<filesize>552307</filesize>
+	<installedsize>2665751</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>2.13.68</version>
+			<release>0.2</release>
+			<filename>yast2-storage-2.13.68-0.2.x86_64.rpm</filename>
+			<filesize>552307</filesize>
+			<installedsize>2665751</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="y2a_fdsk"/>
+			<dep name="yast2-config-disk"/>
+			<dep name="yast2-agent-fdisk"/>
+			<dep name="yast2-agent-fdisk-devel"/>
+			<dep name="yast2-trans-inst-partitioning"/>
+			<dep name="y2t_inst-partitioning"/>
+			<dep name="LibStorage.so()(64bit)"/>
+			<dep name="libpy2StorageCallbacks.so.2()(64bit)"/>
+			<dep name="perl(LibStorage)"/>
+			<dep name="perl(LibStorage::ContainerInfo)"/>
+			<dep name="perl(LibStorage::DiskInfo)"/>
+			<dep name="perl(LibStorage::DmInfo)"/>
+			<dep name="perl(LibStorage::EvmsCoInfo)"/>
+			<dep name="perl(LibStorage::EvmsInfo)"/>
+			<dep name="perl(LibStorage::FsCapabilities)"/>
+			<dep name="perl(LibStorage::LoopInfo)"/>
+			<dep name="perl(LibStorage::LvmLvInfo)"/>
+			<dep name="perl(LibStorage::LvmVgInfo)"/>
+			<dep name="perl(LibStorage::MdInfo)"/>
+			<dep name="perl(LibStorage::PartitionInfo)"/>
+			<dep name="perl(LibStorage::StorageInterface)"/>
+			<dep name="perl(LibStorage::VolumeInfo)"/>
+			<dep name="perl(LibStoragec)"/>
+			<dep name="yast2-storage" op="EQ" version="2.13.68" release="0.2"/>
+		</provides>
+		<requires>
+			<dep name="yast2"/>
+			<dep name="parted"/>
+			<dep name="yast2-installation"/>
+			<dep name="yast2-storage-lib"/>
+			<dep name="yast2-perl-bindings"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/bin/bash"/>
+			<dep name="libc.so.6()(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libgcc_s.so.1()(64bit)"/>
+			<dep name="libgcc_s.so.1(GCC_3.0)(64bit)"/>
+			<dep name="libm.so.6()(64bit)"/>
+			<dep name="libstdc++.so.6()(64bit)"/>
+			<dep name="libstdc++.so.6(CXXABI_1.3)(64bit)"/>
+			<dep name="libstdc++.so.6(GLIBCXX_3.4)(64bit)"/>
+			<dep name="liby2.so.2()(64bit)"/>
+			<dep name="liby2storage.so.2()(64bit)"/>
+			<dep name="libycp.so.2()(64bit)"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>yast2-storage-evms</name>
+	<summary>yast2-storage fix for crypt file creation</summary>
+	<description>This fixes the bug that creation of an encrypted file fails 
+silently in yast2 expert partitioner.
+</description>
+	<arch>i586</arch>
+	<version>2.13.68</version>
+	<release>0.2</release>
+	<filesize>115628</filesize>
+	<installedsize>117440</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>2.13.68</version>
+			<release>0.2</release>
+			<filename>yast2-storage-evms-2.13.68-0.2.i586.rpm</filename>
+			<filesize>115628</filesize>
+			<installedsize>117440</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="yast2-storage-evms" op="EQ" version="2.13.68" release="0.2"/>
+		</provides>
+		<requires>
+			<dep name="yast2-storage" op="EQ" version="2.13.68"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="libblocxx.so.4"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libc.so.6(GLIBC_2.2)"/>
+			<dep name="libevms-2.5.so.0"/>
+			<dep name="libevms-2.5.so.0(EVMS)"/>
+			<dep name="libgcc_s.so.1"/>
+			<dep name="libgcc_s.so.1(GCC_3.0)"/>
+			<dep name="libgcc_s.so.1(GLIBC_2.0)"/>
+			<dep name="libm.so.6"/>
+			<dep name="libstdc++.so.6"/>
+			<dep name="libstdc++.so.6(CXXABI_1.3)"/>
+			<dep name="libstdc++.so.6(GLIBCXX_3.4)"/>
+			<dep name="liby2storage.so.2"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>yast2-storage-evms</name>
+	<summary>yast2-storage fix for crypt file creation</summary>
+	<description>This fixes the bug that creation of an encrypted file fails 
+silently in yast2 expert partitioner.
+</description>
+	<arch>ppc</arch>
+	<version>2.13.68</version>
+	<release>0.2</release>
+	<filesize>119711</filesize>
+	<installedsize>121644</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>2.13.68</version>
+			<release>0.2</release>
+			<filename>yast2-storage-evms-2.13.68-0.2.ppc.rpm</filename>
+			<filesize>119711</filesize>
+			<installedsize>121644</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="yast2-storage-evms" op="EQ" version="2.13.68" release="0.2"/>
+		</provides>
+		<requires>
+			<dep name="yast2-storage" op="EQ" version="2.13.68"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="libblocxx.so.4"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libc.so.6(GLIBC_2.2)"/>
+			<dep name="libevms-2.5.so.0"/>
+			<dep name="libevms-2.5.so.0(EVMS)"/>
+			<dep name="libgcc_s.so.1"/>
+			<dep name="libgcc_s.so.1(GCC_3.0)"/>
+			<dep name="libgcc_s.so.1(GLIBC_2.0)"/>
+			<dep name="libm.so.6"/>
+			<dep name="libstdc++.so.6"/>
+			<dep name="libstdc++.so.6(CXXABI_1.3)"/>
+			<dep name="libstdc++.so.6(GLIBCXX_3.4)"/>
+			<dep name="liby2storage.so.2"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>yast2-storage-evms</name>
+	<summary>yast2-storage fix for crypt file creation</summary>
+	<description>This fixes the bug that creation of an encrypted file fails 
+silently in yast2 expert partitioner.
+</description>
+	<arch>x86_64</arch>
+	<version>2.13.68</version>
+	<release>0.2</release>
+	<filesize>116856</filesize>
+	<installedsize>118992</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>2.13.68</version>
+			<release>0.2</release>
+			<filename>yast2-storage-evms-2.13.68-0.2.x86_64.rpm</filename>
+			<filesize>116856</filesize>
+			<installedsize>118992</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="yast2-storage-evms" op="EQ" version="2.13.68" release="0.2"/>
+		</provides>
+		<requires>
+			<dep name="yast2-storage" op="EQ" version="2.13.68"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="libblocxx.so.4()(64bit)"/>
+			<dep name="libc.so.6()(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libevms-2.5.so.0()(64bit)"/>
+			<dep name="libevms-2.5.so.0(EVMS)(64bit)"/>
+			<dep name="libgcc_s.so.1()(64bit)"/>
+			<dep name="libgcc_s.so.1(GCC_3.0)(64bit)"/>
+			<dep name="libm.so.6()(64bit)"/>
+			<dep name="libstdc++.so.6()(64bit)"/>
+			<dep name="libstdc++.so.6(CXXABI_1.3)(64bit)"/>
+			<dep name="libstdc++.so.6(GLIBCXX_3.4)(64bit)"/>
+			<dep name="liby2storage.so.2()(64bit)"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+</subchannel></channel>

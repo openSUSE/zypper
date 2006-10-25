@@ -1,0 +1,2230 @@
+<channel><subchannel>                                                  
+
+<patch>
+	<name>sax2</name>
+	<arch>noarch</arch>
+	<version>1856</version>
+	<release>0</release>
+	<requires>
+		<dep kind="atom" name="sax2" epoch="0" version="7.1" release="125.19" op="EQ"/>
+		<dep kind="atom" name="sax2-gui" epoch="0" version="1.7" release="125.19" op="EQ"/>
+		<dep kind="atom" name="sax2-ident" epoch="0" version="1.7" release="125.19" op="EQ"/>
+		<dep kind="atom" name="sax2-libsax" epoch="0" version="7.1" release="125.19" op="EQ"/>
+		<dep kind="atom" name="sax2-libsax-csharp" epoch="0" version="7.1" release="121.19" op="EQ"/>
+		<dep kind="atom" name="sax2-libsax-devel" epoch="0" version="7.1" release="125.19" op="EQ"/>
+		<dep kind="atom" name="sax2-libsax-java" epoch="0" version="7.1" release="125.19" op="EQ"/>
+		<dep kind="atom" name="sax2-libsax-perl" epoch="0" version="7.1" release="125.19" op="EQ"/>
+		<dep kind="atom" name="sax2-libsax-python" epoch="0" version="7.1" release="125.19" op="EQ"/>
+		<dep kind="atom" name="sax2-tools" epoch="0" version="2.7" release="125.19" op="EQ"/>
+	</requires>
+</patch>
+<atom>
+	<name>sax2</name>
+	<arch>i586</arch>
+	<version>7.1</version>
+	<release>125.19</release>
+	<freshens>
+		<dep kind="package" name="sax2"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="sax2" epoch="0" version="7.1" release="125.19" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>sax2</name>
+	<arch>ppc</arch>
+	<version>7.1</version>
+	<release>125.19</release>
+	<freshens>
+		<dep kind="package" name="sax2"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="sax2" epoch="0" version="7.1" release="125.19" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>sax2</name>
+	<arch>x86_64</arch>
+	<version>7.1</version>
+	<release>125.19</release>
+	<freshens>
+		<dep kind="package" name="sax2"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="sax2" epoch="0" version="7.1" release="125.19" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>sax2-gui</name>
+	<arch>i586</arch>
+	<version>1.7</version>
+	<release>125.19</release>
+	<freshens>
+		<dep kind="package" name="sax2-gui"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="sax2-gui" epoch="0" version="1.7" release="125.19" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>sax2-gui</name>
+	<arch>ppc</arch>
+	<version>1.7</version>
+	<release>125.19</release>
+	<freshens>
+		<dep kind="package" name="sax2-gui"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="sax2-gui" epoch="0" version="1.7" release="125.19" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>sax2-gui</name>
+	<arch>x86_64</arch>
+	<version>1.7</version>
+	<release>125.19</release>
+	<freshens>
+		<dep kind="package" name="sax2-gui"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="sax2-gui" epoch="0" version="1.7" release="125.19" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>sax2-ident</name>
+	<arch>i586</arch>
+	<version>1.7</version>
+	<release>125.19</release>
+	<freshens>
+		<dep kind="package" name="sax2-ident"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="sax2-ident" epoch="0" version="1.7" release="125.19" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>sax2-ident</name>
+	<arch>ppc</arch>
+	<version>1.7</version>
+	<release>125.19</release>
+	<freshens>
+		<dep kind="package" name="sax2-ident"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="sax2-ident" epoch="0" version="1.7" release="125.19" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>sax2-ident</name>
+	<arch>x86_64</arch>
+	<version>1.7</version>
+	<release>125.19</release>
+	<freshens>
+		<dep kind="package" name="sax2-ident"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="sax2-ident" epoch="0" version="1.7" release="125.19" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>sax2-libsax</name>
+	<arch>i586</arch>
+	<version>7.1</version>
+	<release>125.19</release>
+	<freshens>
+		<dep kind="package" name="sax2-libsax"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="sax2-libsax" epoch="0" version="7.1" release="125.19" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>sax2-libsax</name>
+	<arch>ppc</arch>
+	<version>7.1</version>
+	<release>125.19</release>
+	<freshens>
+		<dep kind="package" name="sax2-libsax"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="sax2-libsax" epoch="0" version="7.1" release="125.19" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>sax2-libsax</name>
+	<arch>x86_64</arch>
+	<version>7.1</version>
+	<release>125.19</release>
+	<freshens>
+		<dep kind="package" name="sax2-libsax"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="sax2-libsax" epoch="0" version="7.1" release="125.19" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>sax2-libsax-csharp</name>
+	<arch>i586</arch>
+	<version>7.1</version>
+	<release>121.19</release>
+	<freshens>
+		<dep kind="package" name="sax2-libsax-csharp"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="sax2-libsax-csharp" epoch="0" version="7.1" release="121.19" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>sax2-libsax-csharp</name>
+	<arch>ppc</arch>
+	<version>7.1</version>
+	<release>121.19</release>
+	<freshens>
+		<dep kind="package" name="sax2-libsax-csharp"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="sax2-libsax-csharp" epoch="0" version="7.1" release="121.19" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>sax2-libsax-csharp</name>
+	<arch>x86_64</arch>
+	<version>7.1</version>
+	<release>121.19</release>
+	<freshens>
+		<dep kind="package" name="sax2-libsax-csharp"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="sax2-libsax-csharp" epoch="0" version="7.1" release="121.19" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>sax2-libsax-devel</name>
+	<arch>i586</arch>
+	<version>7.1</version>
+	<release>125.19</release>
+	<freshens>
+		<dep kind="package" name="sax2-libsax-devel"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="sax2-libsax-devel" epoch="0" version="7.1" release="125.19" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>sax2-libsax-devel</name>
+	<arch>ppc</arch>
+	<version>7.1</version>
+	<release>125.19</release>
+	<freshens>
+		<dep kind="package" name="sax2-libsax-devel"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="sax2-libsax-devel" epoch="0" version="7.1" release="125.19" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>sax2-libsax-devel</name>
+	<arch>x86_64</arch>
+	<version>7.1</version>
+	<release>125.19</release>
+	<freshens>
+		<dep kind="package" name="sax2-libsax-devel"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="sax2-libsax-devel" epoch="0" version="7.1" release="125.19" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>sax2-libsax-java</name>
+	<arch>i586</arch>
+	<version>7.1</version>
+	<release>125.19</release>
+	<freshens>
+		<dep kind="package" name="sax2-libsax-java"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="sax2-libsax-java" epoch="0" version="7.1" release="125.19" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>sax2-libsax-java</name>
+	<arch>ppc</arch>
+	<version>7.1</version>
+	<release>125.19</release>
+	<freshens>
+		<dep kind="package" name="sax2-libsax-java"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="sax2-libsax-java" epoch="0" version="7.1" release="125.19" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>sax2-libsax-java</name>
+	<arch>x86_64</arch>
+	<version>7.1</version>
+	<release>125.19</release>
+	<freshens>
+		<dep kind="package" name="sax2-libsax-java"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="sax2-libsax-java" epoch="0" version="7.1" release="125.19" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>sax2-libsax-perl</name>
+	<arch>i586</arch>
+	<version>7.1</version>
+	<release>125.19</release>
+	<freshens>
+		<dep kind="package" name="sax2-libsax-perl"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="sax2-libsax-perl" epoch="0" version="7.1" release="125.19" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>sax2-libsax-perl</name>
+	<arch>ppc</arch>
+	<version>7.1</version>
+	<release>125.19</release>
+	<freshens>
+		<dep kind="package" name="sax2-libsax-perl"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="sax2-libsax-perl" epoch="0" version="7.1" release="125.19" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>sax2-libsax-perl</name>
+	<arch>x86_64</arch>
+	<version>7.1</version>
+	<release>125.19</release>
+	<freshens>
+		<dep kind="package" name="sax2-libsax-perl"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="sax2-libsax-perl" epoch="0" version="7.1" release="125.19" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>sax2-libsax-python</name>
+	<arch>i586</arch>
+	<version>7.1</version>
+	<release>125.19</release>
+	<freshens>
+		<dep kind="package" name="sax2-libsax-python"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="sax2-libsax-python" epoch="0" version="7.1" release="125.19" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>sax2-libsax-python</name>
+	<arch>ppc</arch>
+	<version>7.1</version>
+	<release>125.19</release>
+	<freshens>
+		<dep kind="package" name="sax2-libsax-python"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="sax2-libsax-python" epoch="0" version="7.1" release="125.19" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>sax2-libsax-python</name>
+	<arch>x86_64</arch>
+	<version>7.1</version>
+	<release>125.19</release>
+	<freshens>
+		<dep kind="package" name="sax2-libsax-python"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="sax2-libsax-python" epoch="0" version="7.1" release="125.19" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>sax2-tools</name>
+	<arch>i586</arch>
+	<version>2.7</version>
+	<release>125.19</release>
+	<freshens>
+		<dep kind="package" name="sax2-tools"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="sax2-tools" epoch="0" version="2.7" release="125.19" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>sax2-tools</name>
+	<arch>ppc</arch>
+	<version>2.7</version>
+	<release>125.19</release>
+	<freshens>
+		<dep kind="package" name="sax2-tools"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="sax2-tools" epoch="0" version="2.7" release="125.19" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>sax2-tools</name>
+	<arch>x86_64</arch>
+	<version>2.7</version>
+	<release>125.19</release>
+	<freshens>
+		<dep kind="package" name="sax2-tools"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="sax2-tools" epoch="0" version="2.7" release="125.19" op="GE"/>
+	</requires>
+</atom>
+<package>
+	<name>sax2</name>
+	<summary>sax2: Improved detection/configuration of graphics cards</summary>
+	<description>Enhanced SaX2 to handle graphics drivers, which have been
+installed via Novell's "Linux Driver Process". Added
+detection/configuration of  new supported NVidia graphics
+cards.
+</description>
+	<arch>i586</arch>
+	<version>7.1</version>
+	<release>125.19</release>
+	<filesize>1192183</filesize>
+	<installedsize>2721054</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>7.1</version>
+			<release>125.19</release>
+			<filename>sax2-7.1-125.19.i586.rpm</filename>
+			<filesize>1192183</filesize>
+			<installedsize>2721054</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="sax"/>
+			<dep name="xfine"/>
+			<dep name="FBSet.so"/>
+			<dep name="PLog.so"/>
+			<dep name="SPP.so"/>
+			<dep name="XFree.so"/>
+			<dep name="perl(FBSet)"/>
+			<dep name="perl(FBSet::FbData)"/>
+			<dep name="perl(FBSet::VideoMode)"/>
+			<dep name="perl(FBSet::color)"/>
+			<dep name="perl(FBSet::fb_bitfield)"/>
+			<dep name="perl(FBSet::fb_var_screeninfo)"/>
+			<dep name="perl(FBSetc)"/>
+			<dep name="perl(PLog)"/>
+			<dep name="perl(PLogc)"/>
+			<dep name="perl(SPP)"/>
+			<dep name="perl(SPP::SPPParse)"/>
+			<dep name="perl(SPPc)"/>
+			<dep name="perl(Secure)"/>
+			<dep name="perl(XFree)"/>
+			<dep name="perl(XFreec)"/>
+			<dep name="sax2" op="EQ" version="7.1" release="125.19"/>
+		</provides>
+		<requires>
+			<dep name="perl"/>
+			<dep name="readline"/>
+			<dep name="ncurses"/>
+			<dep name="hal"/>
+			<dep name="dbus-1"/>
+			<dep name="binutils"/>
+			<dep name="sax2-ident"/>
+			<dep name="sax2-tools"/>
+			<dep name="/bin/rm" pre="1"/>
+			<dep name="/bin/mkdir" pre="1"/>
+			<dep name="/usr/bin/chroot" pre="1"/>
+			<dep name="fillup" pre="1"/>
+			<dep name="coreutils" pre="1"/>
+			<dep name="insserv" pre="1"/>
+			<dep name="sed" pre="1"/>
+			<dep name="xorg-x11-server"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/bin/sh"/>
+			<dep name="/usr/bin/perl"/>
+			<dep name="libX11.so.6"/>
+			<dep name="libXext.so.6"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1)"/>
+			<dep name="libc.so.6(GLIBC_2.1.1)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libc.so.6(GLIBC_2.2)"/>
+			<dep name="libc.so.6(GLIBC_2.2.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3)"/>
+			<dep name="libdbus-1.so.2"/>
+			<dep name="libgcc_s.so.1"/>
+			<dep name="libgcc_s.so.1(GCC_3.0)"/>
+			<dep name="libgcc_s.so.1(GLIBC_2.0)"/>
+			<dep name="libhal.so.1"/>
+			<dep name="libm.so.6"/>
+			<dep name="libm.so.6(GLIBC_2.0)"/>
+			<dep name="libm.so.6(GLIBC_2.1)"/>
+			<dep name="libncurses.so.5"/>
+			<dep name="libqt-mt.so.3"/>
+			<dep name="libreadline.so.5"/>
+			<dep name="libsax.so.7"/>
+			<dep name="libstdc++.so.6"/>
+			<dep name="libstdc++.so.6(CXXABI_1.3)"/>
+			<dep name="libstdc++.so.6(GLIBCXX_3.4)"/>
+			<dep name="libsysfs.so.1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>sax2</name>
+	<summary>sax2: Improved detection/configuration of graphics cards</summary>
+	<description>Enhanced SaX2 to handle graphics drivers, which have been
+installed via Novell's "Linux Driver Process". Added
+detection/configuration of  new supported NVidia graphics
+cards.
+</description>
+	<arch>ppc</arch>
+	<version>7.1</version>
+	<release>125.19</release>
+	<filesize>1059449</filesize>
+	<installedsize>2496501</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>7.1</version>
+			<release>125.19</release>
+			<filename>sax2-7.1-125.19.ppc.rpm</filename>
+			<filesize>1059449</filesize>
+			<installedsize>2496501</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="sax"/>
+			<dep name="xfine"/>
+			<dep name="FBSet.so"/>
+			<dep name="PLog.so"/>
+			<dep name="SPP.so"/>
+			<dep name="XFree.so"/>
+			<dep name="perl(FBSet)"/>
+			<dep name="perl(FBSet::FbData)"/>
+			<dep name="perl(FBSet::VideoMode)"/>
+			<dep name="perl(FBSet::color)"/>
+			<dep name="perl(FBSet::fb_bitfield)"/>
+			<dep name="perl(FBSet::fb_var_screeninfo)"/>
+			<dep name="perl(FBSetc)"/>
+			<dep name="perl(PLog)"/>
+			<dep name="perl(PLogc)"/>
+			<dep name="perl(SPP)"/>
+			<dep name="perl(SPP::SPPParse)"/>
+			<dep name="perl(SPPc)"/>
+			<dep name="perl(Secure)"/>
+			<dep name="perl(XFree)"/>
+			<dep name="perl(XFreec)"/>
+			<dep name="sax2" op="EQ" version="7.1" release="125.19"/>
+		</provides>
+		<requires>
+			<dep name="perl"/>
+			<dep name="readline"/>
+			<dep name="ncurses"/>
+			<dep name="hal"/>
+			<dep name="dbus-1"/>
+			<dep name="binutils"/>
+			<dep name="sax2-ident"/>
+			<dep name="sax2-tools"/>
+			<dep name="/bin/rm" pre="1"/>
+			<dep name="/bin/mkdir" pre="1"/>
+			<dep name="/usr/bin/chroot" pre="1"/>
+			<dep name="fillup" pre="1"/>
+			<dep name="coreutils" pre="1"/>
+			<dep name="insserv" pre="1"/>
+			<dep name="sed" pre="1"/>
+			<dep name="xorg-x11-server"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/bin/sh"/>
+			<dep name="/usr/bin/perl"/>
+			<dep name="libX11.so.6"/>
+			<dep name="libXext.so.6"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1)"/>
+			<dep name="libc.so.6(GLIBC_2.1.1)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libc.so.6(GLIBC_2.2)"/>
+			<dep name="libc.so.6(GLIBC_2.2.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3)"/>
+			<dep name="libc.so.6(GLIBC_2.4)"/>
+			<dep name="libdbus-1.so.2"/>
+			<dep name="libgcc_s.so.1"/>
+			<dep name="libgcc_s.so.1(GCC_3.0)"/>
+			<dep name="libgcc_s.so.1(GLIBC_2.0)"/>
+			<dep name="libhal.so.1"/>
+			<dep name="libm.so.6"/>
+			<dep name="libm.so.6(GLIBC_2.0)"/>
+			<dep name="libm.so.6(GLIBC_2.1)"/>
+			<dep name="libncurses.so.5"/>
+			<dep name="libqt-mt.so.3"/>
+			<dep name="libreadline.so.5"/>
+			<dep name="libsax.so.7"/>
+			<dep name="libstdc++.so.6"/>
+			<dep name="libstdc++.so.6(CXXABI_1.3)"/>
+			<dep name="libstdc++.so.6(GLIBCXX_3.4)"/>
+			<dep name="libsysfs.so.1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>sax2</name>
+	<summary>sax2: Improved detection/configuration of graphics cards</summary>
+	<description>Enhanced SaX2 to handle graphics drivers, which have been
+installed via Novell's "Linux Driver Process". Added
+detection/configuration of  new supported NVidia graphics
+cards.
+</description>
+	<arch>x86_64</arch>
+	<version>7.1</version>
+	<release>125.19</release>
+	<filesize>1211728</filesize>
+	<installedsize>2758988</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>7.1</version>
+			<release>125.19</release>
+			<filename>sax2-7.1-125.19.x86_64.rpm</filename>
+			<filesize>1211728</filesize>
+			<installedsize>2758988</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="sax"/>
+			<dep name="xfine"/>
+			<dep name="FBSet.so()(64bit)"/>
+			<dep name="PLog.so()(64bit)"/>
+			<dep name="SPP.so()(64bit)"/>
+			<dep name="XFree.so()(64bit)"/>
+			<dep name="perl(FBSet)"/>
+			<dep name="perl(FBSet::FbData)"/>
+			<dep name="perl(FBSet::VideoMode)"/>
+			<dep name="perl(FBSet::color)"/>
+			<dep name="perl(FBSet::fb_bitfield)"/>
+			<dep name="perl(FBSet::fb_var_screeninfo)"/>
+			<dep name="perl(FBSetc)"/>
+			<dep name="perl(PLog)"/>
+			<dep name="perl(PLogc)"/>
+			<dep name="perl(SPP)"/>
+			<dep name="perl(SPP::SPPParse)"/>
+			<dep name="perl(SPPc)"/>
+			<dep name="perl(Secure)"/>
+			<dep name="perl(XFree)"/>
+			<dep name="perl(XFreec)"/>
+			<dep name="sax2" op="EQ" version="7.1" release="125.19"/>
+		</provides>
+		<requires>
+			<dep name="perl"/>
+			<dep name="readline"/>
+			<dep name="ncurses"/>
+			<dep name="hal"/>
+			<dep name="dbus-1"/>
+			<dep name="binutils"/>
+			<dep name="sax2-ident"/>
+			<dep name="sax2-tools"/>
+			<dep name="/bin/rm" pre="1"/>
+			<dep name="/bin/mkdir" pre="1"/>
+			<dep name="/usr/bin/chroot" pre="1"/>
+			<dep name="fillup" pre="1"/>
+			<dep name="coreutils" pre="1"/>
+			<dep name="insserv" pre="1"/>
+			<dep name="sed" pre="1"/>
+			<dep name="xorg-x11-server"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/bin/sh"/>
+			<dep name="/usr/bin/perl"/>
+			<dep name="libX11.so.6()(64bit)"/>
+			<dep name="libXext.so.6()(64bit)"/>
+			<dep name="libc.so.6()(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.3)(64bit)"/>
+			<dep name="libdbus-1.so.2()(64bit)"/>
+			<dep name="libgcc_s.so.1()(64bit)"/>
+			<dep name="libgcc_s.so.1(GCC_3.0)(64bit)"/>
+			<dep name="libhal.so.1()(64bit)"/>
+			<dep name="libm.so.6()(64bit)"/>
+			<dep name="libm.so.6(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libncurses.so.5()(64bit)"/>
+			<dep name="libqt-mt.so.3()(64bit)"/>
+			<dep name="libreadline.so.5()(64bit)"/>
+			<dep name="libsax.so.7()(64bit)"/>
+			<dep name="libstdc++.so.6()(64bit)"/>
+			<dep name="libstdc++.so.6(CXXABI_1.3)(64bit)"/>
+			<dep name="libstdc++.so.6(GLIBCXX_3.4)(64bit)"/>
+			<dep name="libsysfs.so.1()(64bit)"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>sax2-gui</name>
+	<summary>sax2: Improved detection/configuration of graphics cards</summary>
+	<description>Enhanced SaX2 to handle graphics drivers, which have been
+installed via Novell's "Linux Driver Process". Added
+detection/configuration of  new supported NVidia graphics
+cards.
+</description>
+	<arch>i586</arch>
+	<version>1.7</version>
+	<release>125.19</release>
+	<filesize>1250391</filesize>
+	<installedsize>2113985</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>1.7</version>
+			<release>125.19</release>
+			<filename>sax2-gui-1.7-125.19.i586.rpm</filename>
+			<filesize>1250391</filesize>
+			<installedsize>2113985</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="sax2:/usr/X11R6/lib/sax/xapi"/>
+			<dep name="sax2:/usr/sbin/xapi"/>
+			<dep name="sax2-gui" op="EQ" version="1.7" release="125.19"/>
+		</provides>
+		<requires>
+			<dep name="netpbm"/>
+			<dep name="sax2-tools"/>
+			<dep name="qt3"/>
+			<dep name="fvwm2"/>
+			<dep name="sax2"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/usr/bin/perl"/>
+			<dep name="libGL.so.1"/>
+			<dep name="libX11.so.6"/>
+			<dep name="libXext.so.6"/>
+			<dep name="libXinerama.so.1"/>
+			<dep name="libXss.so.1"/>
+			<dep name="libXxf86vm.so.1"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libcrypt.so.1"/>
+			<dep name="libgcc_s.so.1"/>
+			<dep name="libgcc_s.so.1(GCC_3.0)"/>
+			<dep name="libm.so.6"/>
+			<dep name="libm.so.6(GLIBC_2.0)"/>
+			<dep name="libm.so.6(GLIBC_2.1)"/>
+			<dep name="libpthread.so.0"/>
+			<dep name="libpthread.so.0(GLIBC_2.0)"/>
+			<dep name="libqt-mt.so.3"/>
+			<dep name="libsax.so.7"/>
+			<dep name="libstdc++.so.6"/>
+			<dep name="libstdc++.so.6(CXXABI_1.3)"/>
+			<dep name="libstdc++.so.6(GLIBCXX_3.4)"/>
+			<dep name="libxkbfile.so.1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>sax2-gui</name>
+	<summary>sax2: Improved detection/configuration of graphics cards</summary>
+	<description>Enhanced SaX2 to handle graphics drivers, which have been
+installed via Novell's "Linux Driver Process". Added
+detection/configuration of  new supported NVidia graphics
+cards.
+</description>
+	<arch>ppc</arch>
+	<version>1.7</version>
+	<release>125.19</release>
+	<filesize>1252886</filesize>
+	<installedsize>2184153</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>1.7</version>
+			<release>125.19</release>
+			<filename>sax2-gui-1.7-125.19.ppc.rpm</filename>
+			<filesize>1252886</filesize>
+			<installedsize>2184153</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="sax2:/usr/X11R6/lib/sax/xapi"/>
+			<dep name="sax2:/usr/sbin/xapi"/>
+			<dep name="sax2-gui" op="EQ" version="1.7" release="125.19"/>
+		</provides>
+		<requires>
+			<dep name="netpbm"/>
+			<dep name="sax2-tools"/>
+			<dep name="qt3"/>
+			<dep name="fvwm2"/>
+			<dep name="sax2"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/usr/bin/perl"/>
+			<dep name="libGL.so.1"/>
+			<dep name="libX11.so.6"/>
+			<dep name="libXext.so.6"/>
+			<dep name="libXinerama.so.1"/>
+			<dep name="libXss.so.1"/>
+			<dep name="libXxf86vm.so.1"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libc.so.6(GLIBC_2.4)"/>
+			<dep name="libcrypt.so.1"/>
+			<dep name="libgcc_s.so.1"/>
+			<dep name="libgcc_s.so.1(GCC_3.0)"/>
+			<dep name="libm.so.6"/>
+			<dep name="libm.so.6(GLIBC_2.0)"/>
+			<dep name="libm.so.6(GLIBC_2.1)"/>
+			<dep name="libpthread.so.0"/>
+			<dep name="libpthread.so.0(GLIBC_2.0)"/>
+			<dep name="libqt-mt.so.3"/>
+			<dep name="libsax.so.7"/>
+			<dep name="libstdc++.so.6"/>
+			<dep name="libstdc++.so.6(CXXABI_1.3)"/>
+			<dep name="libstdc++.so.6(GLIBCXX_3.4)"/>
+			<dep name="libxkbfile.so.1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>sax2-gui</name>
+	<summary>sax2: Improved detection/configuration of graphics cards</summary>
+	<description>Enhanced SaX2 to handle graphics drivers, which have been
+installed via Novell's "Linux Driver Process". Added
+detection/configuration of  new supported NVidia graphics
+cards.
+</description>
+	<arch>x86_64</arch>
+	<version>1.7</version>
+	<release>125.19</release>
+	<filesize>1276235</filesize>
+	<installedsize>2169697</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>1.7</version>
+			<release>125.19</release>
+			<filename>sax2-gui-1.7-125.19.x86_64.rpm</filename>
+			<filesize>1276235</filesize>
+			<installedsize>2169697</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="sax2:/usr/X11R6/lib/sax/xapi"/>
+			<dep name="sax2:/usr/sbin/xapi"/>
+			<dep name="sax2-gui" op="EQ" version="1.7" release="125.19"/>
+		</provides>
+		<requires>
+			<dep name="netpbm"/>
+			<dep name="sax2-tools"/>
+			<dep name="qt3"/>
+			<dep name="fvwm2"/>
+			<dep name="sax2"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/usr/bin/perl"/>
+			<dep name="libGL.so.1()(64bit)"/>
+			<dep name="libX11.so.6()(64bit)"/>
+			<dep name="libXext.so.6()(64bit)"/>
+			<dep name="libXinerama.so.1()(64bit)"/>
+			<dep name="libXss.so.1()(64bit)"/>
+			<dep name="libXxf86vm.so.1()(64bit)"/>
+			<dep name="libc.so.6()(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libcrypt.so.1()(64bit)"/>
+			<dep name="libgcc_s.so.1()(64bit)"/>
+			<dep name="libgcc_s.so.1(GCC_3.0)(64bit)"/>
+			<dep name="libm.so.6()(64bit)"/>
+			<dep name="libm.so.6(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libpthread.so.0()(64bit)"/>
+			<dep name="libpthread.so.0(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libqt-mt.so.3()(64bit)"/>
+			<dep name="libsax.so.7()(64bit)"/>
+			<dep name="libstdc++.so.6()(64bit)"/>
+			<dep name="libstdc++.so.6(CXXABI_1.3)(64bit)"/>
+			<dep name="libstdc++.so.6(GLIBCXX_3.4)(64bit)"/>
+			<dep name="libxkbfile.so.1()(64bit)"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>sax2-ident</name>
+	<summary>sax2: Improved detection/configuration of graphics cards</summary>
+	<description>Enhanced SaX2 to handle graphics drivers, which have been
+installed via Novell's "Linux Driver Process". Added
+detection/configuration of  new supported NVidia graphics
+cards.
+</description>
+	<arch>i586</arch>
+	<version>1.7</version>
+	<release>125.19</release>
+	<filesize>231671</filesize>
+	<installedsize>1149755</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>1.7</version>
+			<release>125.19</release>
+			<filename>sax2-ident-1.7-125.19.i586.rpm</filename>
+			<filesize>231671</filesize>
+			<installedsize>1149755</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="sax2:/usr/share/sax/sysp/maps/Identity.map"/>
+			<dep name="sax2-tools:/usr/share/sax/sysp/maps/Identity.map"/>
+			<dep name="saxident"/>
+			<dep name="sax2-ident" op="EQ" version="1.7" release="125.19"/>
+		</provides>
+		<requires>
+			<dep name="sax2-libsax-perl"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/usr/bin/perl"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>sax2-ident</name>
+	<summary>sax2: Improved detection/configuration of graphics cards</summary>
+	<description>Enhanced SaX2 to handle graphics drivers, which have been
+installed via Novell's "Linux Driver Process". Added
+detection/configuration of  new supported NVidia graphics
+cards.
+</description>
+	<arch>ppc</arch>
+	<version>1.7</version>
+	<release>125.19</release>
+	<filesize>229038</filesize>
+	<installedsize>1080646</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>1.7</version>
+			<release>125.19</release>
+			<filename>sax2-ident-1.7-125.19.ppc.rpm</filename>
+			<filesize>229038</filesize>
+			<installedsize>1080646</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="sax2:/usr/share/sax/sysp/maps/Identity.map"/>
+			<dep name="sax2-tools:/usr/share/sax/sysp/maps/Identity.map"/>
+			<dep name="saxident"/>
+			<dep name="sax2-ident" op="EQ" version="1.7" release="125.19"/>
+		</provides>
+		<requires>
+			<dep name="sax2-libsax-perl"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/usr/bin/perl"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>sax2-ident</name>
+	<summary>sax2: Improved detection/configuration of graphics cards</summary>
+	<description>Enhanced SaX2 to handle graphics drivers, which have been
+installed via Novell's "Linux Driver Process". Added
+detection/configuration of  new supported NVidia graphics
+cards.
+</description>
+	<arch>x86_64</arch>
+	<version>1.7</version>
+	<release>125.19</release>
+	<filesize>231692</filesize>
+	<installedsize>1149755</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>1.7</version>
+			<release>125.19</release>
+			<filename>sax2-ident-1.7-125.19.x86_64.rpm</filename>
+			<filesize>231692</filesize>
+			<installedsize>1149755</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="sax2:/usr/share/sax/sysp/maps/Identity.map"/>
+			<dep name="sax2-tools:/usr/share/sax/sysp/maps/Identity.map"/>
+			<dep name="saxident"/>
+			<dep name="sax2-ident" op="EQ" version="1.7" release="125.19"/>
+		</provides>
+		<requires>
+			<dep name="sax2-libsax-perl"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/usr/bin/perl"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>sax2-libsax</name>
+	<summary>sax2: Improved detection/configuration of graphics cards</summary>
+	<description>Enhanced SaX2 to handle graphics drivers, which have been
+installed via Novell's "Linux Driver Process". Added
+detection/configuration of  new supported NVidia graphics
+cards.
+</description>
+	<arch>i586</arch>
+	<version>7.1</version>
+	<release>125.19</release>
+	<filesize>2046713</filesize>
+	<installedsize>6021038</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>7.1</version>
+			<release>125.19</release>
+			<filename>sax2-libsax-7.1-125.19.i586.rpm</filename>
+			<filesize>2046713</filesize>
+			<installedsize>6021038</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="sax2:/usr/lib/libsax.so"/>
+			<dep name="libsax.so.7"/>
+			<dep name="sax2-libsax" op="EQ" version="7.1" release="125.19"/>
+		</provides>
+		<requires>
+			<dep name="sax2-tools"/>
+			<dep name="qt3"/>
+			<dep name="fvwm2"/>
+			<dep name="sax2"/>
+			<dep name="855resolution"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/bin/sh"/>
+			<dep name="/usr/bin/perl"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3)"/>
+			<dep name="libgcc_s.so.1"/>
+			<dep name="libgcc_s.so.1(GCC_3.0)"/>
+			<dep name="libm.so.6"/>
+			<dep name="libm.so.6(GLIBC_2.0)"/>
+			<dep name="libm.so.6(GLIBC_2.1)"/>
+			<dep name="libqt-mt.so.3"/>
+			<dep name="libstdc++.so.6"/>
+			<dep name="libstdc++.so.6(CXXABI_1.3)"/>
+			<dep name="libstdc++.so.6(GLIBCXX_3.4)"/>
+			<dep name="libxkbfile.so.1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>sax2-libsax</name>
+	<summary>sax2: Improved detection/configuration of graphics cards</summary>
+	<description>Enhanced SaX2 to handle graphics drivers, which have been
+installed via Novell's "Linux Driver Process". Added
+detection/configuration of  new supported NVidia graphics
+cards.
+</description>
+	<arch>ppc</arch>
+	<version>7.1</version>
+	<release>125.19</release>
+	<filesize>2060628</filesize>
+	<installedsize>6128630</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>7.1</version>
+			<release>125.19</release>
+			<filename>sax2-libsax-7.1-125.19.ppc.rpm</filename>
+			<filesize>2060628</filesize>
+			<installedsize>6128630</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="sax2:/usr/lib/libsax.so"/>
+			<dep name="libsax.so.7"/>
+			<dep name="sax2-libsax" op="EQ" version="7.1" release="125.19"/>
+		</provides>
+		<requires>
+			<dep name="sax2-tools"/>
+			<dep name="qt3"/>
+			<dep name="fvwm2"/>
+			<dep name="sax2"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/bin/sh"/>
+			<dep name="/usr/bin/perl"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3)"/>
+			<dep name="libc.so.6(GLIBC_2.4)"/>
+			<dep name="libgcc_s.so.1"/>
+			<dep name="libgcc_s.so.1(GCC_3.0)"/>
+			<dep name="libm.so.6"/>
+			<dep name="libm.so.6(GLIBC_2.0)"/>
+			<dep name="libm.so.6(GLIBC_2.1)"/>
+			<dep name="libqt-mt.so.3"/>
+			<dep name="libstdc++.so.6"/>
+			<dep name="libstdc++.so.6(CXXABI_1.3)"/>
+			<dep name="libstdc++.so.6(GLIBCXX_3.4)"/>
+			<dep name="libxkbfile.so.1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>sax2-libsax</name>
+	<summary>sax2: Improved detection/configuration of graphics cards</summary>
+	<description>Enhanced SaX2 to handle graphics drivers, which have been
+installed via Novell's "Linux Driver Process". Added
+detection/configuration of  new supported NVidia graphics
+cards.
+</description>
+	<arch>x86_64</arch>
+	<version>7.1</version>
+	<release>125.19</release>
+	<filesize>2068746</filesize>
+	<installedsize>6128794</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>7.1</version>
+			<release>125.19</release>
+			<filename>sax2-libsax-7.1-125.19.x86_64.rpm</filename>
+			<filesize>2068746</filesize>
+			<installedsize>6128794</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="sax2:/usr/lib64/libsax.so"/>
+			<dep name="libsax.so.7()(64bit)"/>
+			<dep name="sax2-libsax" op="EQ" version="7.1" release="125.19"/>
+		</provides>
+		<requires>
+			<dep name="sax2-tools"/>
+			<dep name="qt3"/>
+			<dep name="fvwm2"/>
+			<dep name="sax2"/>
+			<dep name="855resolution"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/bin/sh"/>
+			<dep name="/usr/bin/perl"/>
+			<dep name="libc.so.6()(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.3)(64bit)"/>
+			<dep name="libgcc_s.so.1()(64bit)"/>
+			<dep name="libgcc_s.so.1(GCC_3.0)(64bit)"/>
+			<dep name="libm.so.6()(64bit)"/>
+			<dep name="libm.so.6(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libqt-mt.so.3()(64bit)"/>
+			<dep name="libstdc++.so.6()(64bit)"/>
+			<dep name="libstdc++.so.6(CXXABI_1.3)(64bit)"/>
+			<dep name="libstdc++.so.6(GLIBCXX_3.4)(64bit)"/>
+			<dep name="libxkbfile.so.1()(64bit)"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>sax2-libsax-csharp</name>
+	<summary>sax2: Improved detection/configuration of graphics cards</summary>
+	<description>Enhanced SaX2 to handle graphics drivers, which have been
+installed via Novell's "Linux Driver Process". Added
+detection/configuration of  new supported NVidia graphics
+cards.
+</description>
+	<arch>i586</arch>
+	<version>7.1</version>
+	<release>121.19</release>
+	<filesize>220522</filesize>
+	<installedsize>343784</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>7.1</version>
+			<release>121.19</release>
+			<filename>sax2-libsax-csharp-7.1-121.19.i586.rpm</filename>
+			<filesize>220522</filesize>
+			<installedsize>343784</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="libSaX.so"/>
+			<dep name="mono(SaX)" op="EQ" version="0.0.0.0"/>
+			<dep name="sax2-libsax-csharp" op="EQ" version="7.1" release="121.19"/>
+		</provides>
+		<requires>
+			<dep name="sax2-libsax"/>
+			<dep name="mono"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(VersionedDependencies)" op="LE" version="3.0.3" release="1" pre="1"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libgcc_s.so.1"/>
+			<dep name="libgcc_s.so.1(GCC_3.0)"/>
+			<dep name="libm.so.6"/>
+			<dep name="libqt-mt.so.3"/>
+			<dep name="libsax.so.7"/>
+			<dep name="libstdc++.so.6"/>
+			<dep name="libstdc++.so.6(CXXABI_1.3)"/>
+			<dep name="libstdc++.so.6(GLIBCXX_3.4)"/>
+			<dep name="libxkbfile.so.1"/>
+			<dep name="mono(mscorlib)" op="EQ" version="1.0.5000.0"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>sax2-libsax-csharp</name>
+	<summary>sax2: Improved detection/configuration of graphics cards</summary>
+	<description>Enhanced SaX2 to handle graphics drivers, which have been
+installed via Novell's "Linux Driver Process". Added
+detection/configuration of  new supported NVidia graphics
+cards.
+</description>
+	<arch>ppc</arch>
+	<version>7.1</version>
+	<release>121.19</release>
+	<filesize>222699</filesize>
+	<installedsize>406804</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>7.1</version>
+			<release>121.19</release>
+			<filename>sax2-libsax-csharp-7.1-121.19.ppc.rpm</filename>
+			<filesize>222699</filesize>
+			<installedsize>406804</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="libSaX.so"/>
+			<dep name="mono(SaX)" op="EQ" version="0.0.0.0"/>
+			<dep name="sax2-libsax-csharp" op="EQ" version="7.1" release="121.19"/>
+		</provides>
+		<requires>
+			<dep name="sax2-libsax"/>
+			<dep name="mono"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(VersionedDependencies)" op="LE" version="3.0.3" release="1" pre="1"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libgcc_s.so.1"/>
+			<dep name="libgcc_s.so.1(GCC_3.0)"/>
+			<dep name="libm.so.6"/>
+			<dep name="libqt-mt.so.3"/>
+			<dep name="libsax.so.7"/>
+			<dep name="libstdc++.so.6"/>
+			<dep name="libstdc++.so.6(CXXABI_1.3)"/>
+			<dep name="libstdc++.so.6(GLIBCXX_3.4)"/>
+			<dep name="libxkbfile.so.1"/>
+			<dep name="mono(mscorlib)" op="EQ" version="1.0.5000.0"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>sax2-libsax-csharp</name>
+	<summary>sax2: Improved detection/configuration of graphics cards</summary>
+	<description>Enhanced SaX2 to handle graphics drivers, which have been
+installed via Novell's "Linux Driver Process". Added
+detection/configuration of  new supported NVidia graphics
+cards.
+</description>
+	<arch>x86_64</arch>
+	<version>7.1</version>
+	<release>121.19</release>
+	<filesize>221317</filesize>
+	<installedsize>370744</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>7.1</version>
+			<release>121.19</release>
+			<filename>sax2-libsax-csharp-7.1-121.19.x86_64.rpm</filename>
+			<filesize>221317</filesize>
+			<installedsize>370744</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="libSaX.so()(64bit)"/>
+			<dep name="mono(SaX)" op="EQ" version="0.0.0.0"/>
+			<dep name="sax2-libsax-csharp" op="EQ" version="7.1" release="121.19"/>
+		</provides>
+		<requires>
+			<dep name="sax2-libsax"/>
+			<dep name="mono"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(VersionedDependencies)" op="LE" version="3.0.3" release="1" pre="1"/>
+			<dep name="libc.so.6()(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libgcc_s.so.1()(64bit)"/>
+			<dep name="libgcc_s.so.1(GCC_3.0)(64bit)"/>
+			<dep name="libm.so.6()(64bit)"/>
+			<dep name="libqt-mt.so.3()(64bit)"/>
+			<dep name="libsax.so.7()(64bit)"/>
+			<dep name="libstdc++.so.6()(64bit)"/>
+			<dep name="libstdc++.so.6(CXXABI_1.3)(64bit)"/>
+			<dep name="libstdc++.so.6(GLIBCXX_3.4)(64bit)"/>
+			<dep name="libxkbfile.so.1()(64bit)"/>
+			<dep name="mono(mscorlib)" op="EQ" version="1.0.5000.0"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>sax2-libsax-devel</name>
+	<summary>sax2: Improved detection/configuration of graphics cards</summary>
+	<description>Enhanced SaX2 to handle graphics drivers, which have been
+installed via Novell's "Linux Driver Process". Added
+detection/configuration of  new supported NVidia graphics
+cards.
+</description>
+	<arch>i586</arch>
+	<version>7.1</version>
+	<release>125.19</release>
+	<filesize>160755</filesize>
+	<installedsize>125747</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>7.1</version>
+			<release>125.19</release>
+			<filename>sax2-libsax-devel-7.1-125.19.i586.rpm</filename>
+			<filesize>160755</filesize>
+			<installedsize>125747</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="sax2-libsax-devel" op="EQ" version="7.1" release="125.19"/>
+		</provides>
+		<requires>
+			<dep name="sax2-libsax"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>sax2-libsax-devel</name>
+	<summary>sax2: Improved detection/configuration of graphics cards</summary>
+	<description>Enhanced SaX2 to handle graphics drivers, which have been
+installed via Novell's "Linux Driver Process". Added
+detection/configuration of  new supported NVidia graphics
+cards.
+</description>
+	<arch>ppc</arch>
+	<version>7.1</version>
+	<release>125.19</release>
+	<filesize>160695</filesize>
+	<installedsize>125747</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>7.1</version>
+			<release>125.19</release>
+			<filename>sax2-libsax-devel-7.1-125.19.ppc.rpm</filename>
+			<filesize>160695</filesize>
+			<installedsize>125747</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="sax2-libsax-devel" op="EQ" version="7.1" release="125.19"/>
+		</provides>
+		<requires>
+			<dep name="sax2-libsax"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>sax2-libsax-devel</name>
+	<summary>sax2: Improved detection/configuration of graphics cards</summary>
+	<description>Enhanced SaX2 to handle graphics drivers, which have been
+installed via Novell's "Linux Driver Process". Added
+detection/configuration of  new supported NVidia graphics
+cards.
+</description>
+	<arch>x86_64</arch>
+	<version>7.1</version>
+	<release>125.19</release>
+	<filesize>160711</filesize>
+	<installedsize>125747</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>7.1</version>
+			<release>125.19</release>
+			<filename>sax2-libsax-devel-7.1-125.19.x86_64.rpm</filename>
+			<filesize>160711</filesize>
+			<installedsize>125747</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="sax2-libsax-devel" op="EQ" version="7.1" release="125.19"/>
+		</provides>
+		<requires>
+			<dep name="sax2-libsax"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>sax2-libsax-java</name>
+	<summary>sax2: Improved detection/configuration of graphics cards</summary>
+	<description>Enhanced SaX2 to handle graphics drivers, which have been
+installed via Novell's "Linux Driver Process". Added
+detection/configuration of  new supported NVidia graphics
+cards.
+</description>
+	<arch>i586</arch>
+	<version>7.1</version>
+	<release>125.19</release>
+	<filesize>258723</filesize>
+	<installedsize>325327</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>7.1</version>
+			<release>125.19</release>
+			<filename>sax2-libsax-java-7.1-125.19.i586.rpm</filename>
+			<filesize>258723</filesize>
+			<installedsize>325327</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="SaX.so"/>
+			<dep name="sax2-libsax-java" op="EQ" version="7.1" release="125.19"/>
+		</provides>
+		<requires>
+			<dep name="sax2-libsax"/>
+			<dep name="jre1.2.x"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libgcc_s.so.1"/>
+			<dep name="libgcc_s.so.1(GCC_3.0)"/>
+			<dep name="libm.so.6"/>
+			<dep name="libqt-mt.so.3"/>
+			<dep name="libsax.so.7"/>
+			<dep name="libstdc++.so.6"/>
+			<dep name="libstdc++.so.6(CXXABI_1.3)"/>
+			<dep name="libstdc++.so.6(GLIBCXX_3.4)"/>
+			<dep name="libxkbfile.so.1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>sax2-libsax-java</name>
+	<summary>sax2: Improved detection/configuration of graphics cards</summary>
+	<description>Enhanced SaX2 to handle graphics drivers, which have been
+installed via Novell's "Linux Driver Process". Added
+detection/configuration of  new supported NVidia graphics
+cards.
+</description>
+	<arch>ppc</arch>
+	<version>7.1</version>
+	<release>125.19</release>
+	<filesize>259775</filesize>
+	<installedsize>374725</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>7.1</version>
+			<release>125.19</release>
+			<filename>sax2-libsax-java-7.1-125.19.ppc.rpm</filename>
+			<filesize>259775</filesize>
+			<installedsize>374725</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="SaX.so"/>
+			<dep name="sax2-libsax-java" op="EQ" version="7.1" release="125.19"/>
+		</provides>
+		<requires>
+			<dep name="sax2-libsax"/>
+			<dep name="jre1.2.x"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libgcc_s.so.1"/>
+			<dep name="libgcc_s.so.1(GCC_3.0)"/>
+			<dep name="libm.so.6"/>
+			<dep name="libqt-mt.so.3"/>
+			<dep name="libsax.so.7"/>
+			<dep name="libstdc++.so.6"/>
+			<dep name="libstdc++.so.6(CXXABI_1.3)"/>
+			<dep name="libstdc++.so.6(GLIBCXX_3.4)"/>
+			<dep name="libxkbfile.so.1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>sax2-libsax-java</name>
+	<summary>sax2: Improved detection/configuration of graphics cards</summary>
+	<description>Enhanced SaX2 to handle graphics drivers, which have been
+installed via Novell's "Linux Driver Process". Added
+detection/configuration of  new supported NVidia graphics
+cards.
+</description>
+	<arch>x86_64</arch>
+	<version>7.1</version>
+	<release>125.19</release>
+	<filesize>258670</filesize>
+	<installedsize>331631</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>7.1</version>
+			<release>125.19</release>
+			<filename>sax2-libsax-java-7.1-125.19.x86_64.rpm</filename>
+			<filesize>258670</filesize>
+			<installedsize>331631</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="SaX.so()(64bit)"/>
+			<dep name="sax2-libsax-java" op="EQ" version="7.1" release="125.19"/>
+		</provides>
+		<requires>
+			<dep name="sax2-libsax"/>
+			<dep name="jre1.2.x"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="libc.so.6()(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libgcc_s.so.1()(64bit)"/>
+			<dep name="libgcc_s.so.1(GCC_3.0)(64bit)"/>
+			<dep name="libm.so.6()(64bit)"/>
+			<dep name="libqt-mt.so.3()(64bit)"/>
+			<dep name="libsax.so.7()(64bit)"/>
+			<dep name="libstdc++.so.6()(64bit)"/>
+			<dep name="libstdc++.so.6(CXXABI_1.3)(64bit)"/>
+			<dep name="libstdc++.so.6(GLIBCXX_3.4)(64bit)"/>
+			<dep name="libxkbfile.so.1()(64bit)"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>sax2-libsax-perl</name>
+	<summary>sax2: Improved detection/configuration of graphics cards</summary>
+	<description>Enhanced SaX2 to handle graphics drivers, which have been
+installed via Novell's "Linux Driver Process". Added
+detection/configuration of  new supported NVidia graphics
+cards.
+</description>
+	<arch>i586</arch>
+	<version>7.1</version>
+	<release>125.19</release>
+	<filesize>343835</filesize>
+	<installedsize>927402</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>7.1</version>
+			<release>125.19</release>
+			<filename>sax2-libsax-perl-7.1-125.19.i586.rpm</filename>
+			<filesize>343835</filesize>
+			<installedsize>927402</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="SaX.so"/>
+			<dep name="perl(SaX)"/>
+			<dep name="perl(SaX::SaXConfig)"/>
+			<dep name="perl(SaX::SaXConfigIF)"/>
+			<dep name="perl(SaX::SaXException)"/>
+			<dep name="perl(SaX::SaXExport)"/>
+			<dep name="perl(SaX::SaXExportIF)"/>
+			<dep name="perl(SaX::SaXImport)"/>
+			<dep name="perl(SaX::SaXImportCDB)"/>
+			<dep name="perl(SaX::SaXImportCDBIF)"/>
+			<dep name="perl(SaX::SaXImportIF)"/>
+			<dep name="perl(SaX::SaXImportProfile)"/>
+			<dep name="perl(SaX::SaXImportProfileIF)"/>
+			<dep name="perl(SaX::SaXImportSysp)"/>
+			<dep name="perl(SaX::SaXImportSyspIF)"/>
+			<dep name="perl(SaX::SaXInit)"/>
+			<dep name="perl(SaX::SaXInitIF)"/>
+			<dep name="perl(SaX::SaXKeyRules)"/>
+			<dep name="perl(SaX::SaXKeyRulesIF)"/>
+			<dep name="perl(SaX::SaXManipulateCard)"/>
+			<dep name="perl(SaX::SaXManipulateCardIF)"/>
+			<dep name="perl(SaX::SaXManipulateDesktop)"/>
+			<dep name="perl(SaX::SaXManipulateDesktopIF)"/>
+			<dep name="perl(SaX::SaXManipulateExtensions)"/>
+			<dep name="perl(SaX::SaXManipulateExtensionsIF)"/>
+			<dep name="perl(SaX::SaXManipulateKeyboard)"/>
+			<dep name="perl(SaX::SaXManipulateKeyboardIF)"/>
+			<dep name="perl(SaX::SaXManipulateLayout)"/>
+			<dep name="perl(SaX::SaXManipulateLayoutIF)"/>
+			<dep name="perl(SaX::SaXManipulateMice)"/>
+			<dep name="perl(SaX::SaXManipulateMiceIF)"/>
+			<dep name="perl(SaX::SaXManipulatePath)"/>
+			<dep name="perl(SaX::SaXManipulatePathIF)"/>
+			<dep name="perl(SaX::SaXManipulatePointers)"/>
+			<dep name="perl(SaX::SaXManipulatePointersIF)"/>
+			<dep name="perl(SaX::SaXManipulateTablets)"/>
+			<dep name="perl(SaX::SaXManipulateTabletsIF)"/>
+			<dep name="perl(SaX::SaXManipulateTouchscreens)"/>
+			<dep name="perl(SaX::SaXManipulateTouchscreensIF)"/>
+			<dep name="perl(SaX::SaXManipulateVNC)"/>
+			<dep name="perl(SaX::SaXManipulateVNCIF)"/>
+			<dep name="perl(SaX::SaXProcess)"/>
+			<dep name="perl(SaX::SaXProcessIF)"/>
+			<dep name="perl(SaX::SaXStorage)"/>
+			<dep name="perl(SaX::SaXStorageIF)"/>
+			<dep name="perl(SaXc)"/>
+			<dep name="sax2-libsax-perl" op="EQ" version="7.1" release="125.19"/>
+		</provides>
+		<requires>
+			<dep name="sax2-libsax"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libgcc_s.so.1"/>
+			<dep name="libgcc_s.so.1(GCC_3.0)"/>
+			<dep name="libm.so.6"/>
+			<dep name="libqt-mt.so.3"/>
+			<dep name="libsax.so.7"/>
+			<dep name="libxkbfile.so.1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>sax2-libsax-perl</name>
+	<summary>sax2: Improved detection/configuration of graphics cards</summary>
+	<description>Enhanced SaX2 to handle graphics drivers, which have been
+installed via Novell's "Linux Driver Process". Added
+detection/configuration of  new supported NVidia graphics
+cards.
+</description>
+	<arch>ppc</arch>
+	<version>7.1</version>
+	<release>125.19</release>
+	<filesize>354035</filesize>
+	<installedsize>932206</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>7.1</version>
+			<release>125.19</release>
+			<filename>sax2-libsax-perl-7.1-125.19.ppc.rpm</filename>
+			<filesize>354035</filesize>
+			<installedsize>932206</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="SaX.so"/>
+			<dep name="perl(SaX)"/>
+			<dep name="perl(SaX::SaXConfig)"/>
+			<dep name="perl(SaX::SaXConfigIF)"/>
+			<dep name="perl(SaX::SaXException)"/>
+			<dep name="perl(SaX::SaXExport)"/>
+			<dep name="perl(SaX::SaXExportIF)"/>
+			<dep name="perl(SaX::SaXImport)"/>
+			<dep name="perl(SaX::SaXImportCDB)"/>
+			<dep name="perl(SaX::SaXImportCDBIF)"/>
+			<dep name="perl(SaX::SaXImportIF)"/>
+			<dep name="perl(SaX::SaXImportProfile)"/>
+			<dep name="perl(SaX::SaXImportProfileIF)"/>
+			<dep name="perl(SaX::SaXImportSysp)"/>
+			<dep name="perl(SaX::SaXImportSyspIF)"/>
+			<dep name="perl(SaX::SaXInit)"/>
+			<dep name="perl(SaX::SaXInitIF)"/>
+			<dep name="perl(SaX::SaXKeyRules)"/>
+			<dep name="perl(SaX::SaXKeyRulesIF)"/>
+			<dep name="perl(SaX::SaXManipulateCard)"/>
+			<dep name="perl(SaX::SaXManipulateCardIF)"/>
+			<dep name="perl(SaX::SaXManipulateDesktop)"/>
+			<dep name="perl(SaX::SaXManipulateDesktopIF)"/>
+			<dep name="perl(SaX::SaXManipulateExtensions)"/>
+			<dep name="perl(SaX::SaXManipulateExtensionsIF)"/>
+			<dep name="perl(SaX::SaXManipulateKeyboard)"/>
+			<dep name="perl(SaX::SaXManipulateKeyboardIF)"/>
+			<dep name="perl(SaX::SaXManipulateLayout)"/>
+			<dep name="perl(SaX::SaXManipulateLayoutIF)"/>
+			<dep name="perl(SaX::SaXManipulateMice)"/>
+			<dep name="perl(SaX::SaXManipulateMiceIF)"/>
+			<dep name="perl(SaX::SaXManipulatePath)"/>
+			<dep name="perl(SaX::SaXManipulatePathIF)"/>
+			<dep name="perl(SaX::SaXManipulatePointers)"/>
+			<dep name="perl(SaX::SaXManipulatePointersIF)"/>
+			<dep name="perl(SaX::SaXManipulateTablets)"/>
+			<dep name="perl(SaX::SaXManipulateTabletsIF)"/>
+			<dep name="perl(SaX::SaXManipulateTouchscreens)"/>
+			<dep name="perl(SaX::SaXManipulateTouchscreensIF)"/>
+			<dep name="perl(SaX::SaXManipulateVNC)"/>
+			<dep name="perl(SaX::SaXManipulateVNCIF)"/>
+			<dep name="perl(SaX::SaXProcess)"/>
+			<dep name="perl(SaX::SaXProcessIF)"/>
+			<dep name="perl(SaX::SaXStorage)"/>
+			<dep name="perl(SaX::SaXStorageIF)"/>
+			<dep name="perl(SaXc)"/>
+			<dep name="sax2-libsax-perl" op="EQ" version="7.1" release="125.19"/>
+		</provides>
+		<requires>
+			<dep name="sax2-libsax"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libgcc_s.so.1"/>
+			<dep name="libgcc_s.so.1(GCC_3.0)"/>
+			<dep name="libm.so.6"/>
+			<dep name="libqt-mt.so.3"/>
+			<dep name="libsax.so.7"/>
+			<dep name="libxkbfile.so.1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>sax2-libsax-perl</name>
+	<summary>sax2: Improved detection/configuration of graphics cards</summary>
+	<description>Enhanced SaX2 to handle graphics drivers, which have been
+installed via Novell's "Linux Driver Process". Added
+detection/configuration of  new supported NVidia graphics
+cards.
+</description>
+	<arch>x86_64</arch>
+	<version>7.1</version>
+	<release>125.19</release>
+	<filesize>354792</filesize>
+	<installedsize>913898</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>7.1</version>
+			<release>125.19</release>
+			<filename>sax2-libsax-perl-7.1-125.19.x86_64.rpm</filename>
+			<filesize>354792</filesize>
+			<installedsize>913898</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="SaX.so()(64bit)"/>
+			<dep name="perl(SaX)"/>
+			<dep name="perl(SaX::SaXConfig)"/>
+			<dep name="perl(SaX::SaXConfigIF)"/>
+			<dep name="perl(SaX::SaXException)"/>
+			<dep name="perl(SaX::SaXExport)"/>
+			<dep name="perl(SaX::SaXExportIF)"/>
+			<dep name="perl(SaX::SaXImport)"/>
+			<dep name="perl(SaX::SaXImportCDB)"/>
+			<dep name="perl(SaX::SaXImportCDBIF)"/>
+			<dep name="perl(SaX::SaXImportIF)"/>
+			<dep name="perl(SaX::SaXImportProfile)"/>
+			<dep name="perl(SaX::SaXImportProfileIF)"/>
+			<dep name="perl(SaX::SaXImportSysp)"/>
+			<dep name="perl(SaX::SaXImportSyspIF)"/>
+			<dep name="perl(SaX::SaXInit)"/>
+			<dep name="perl(SaX::SaXInitIF)"/>
+			<dep name="perl(SaX::SaXKeyRules)"/>
+			<dep name="perl(SaX::SaXKeyRulesIF)"/>
+			<dep name="perl(SaX::SaXManipulateCard)"/>
+			<dep name="perl(SaX::SaXManipulateCardIF)"/>
+			<dep name="perl(SaX::SaXManipulateDesktop)"/>
+			<dep name="perl(SaX::SaXManipulateDesktopIF)"/>
+			<dep name="perl(SaX::SaXManipulateExtensions)"/>
+			<dep name="perl(SaX::SaXManipulateExtensionsIF)"/>
+			<dep name="perl(SaX::SaXManipulateKeyboard)"/>
+			<dep name="perl(SaX::SaXManipulateKeyboardIF)"/>
+			<dep name="perl(SaX::SaXManipulateLayout)"/>
+			<dep name="perl(SaX::SaXManipulateLayoutIF)"/>
+			<dep name="perl(SaX::SaXManipulateMice)"/>
+			<dep name="perl(SaX::SaXManipulateMiceIF)"/>
+			<dep name="perl(SaX::SaXManipulatePath)"/>
+			<dep name="perl(SaX::SaXManipulatePathIF)"/>
+			<dep name="perl(SaX::SaXManipulatePointers)"/>
+			<dep name="perl(SaX::SaXManipulatePointersIF)"/>
+			<dep name="perl(SaX::SaXManipulateTablets)"/>
+			<dep name="perl(SaX::SaXManipulateTabletsIF)"/>
+			<dep name="perl(SaX::SaXManipulateTouchscreens)"/>
+			<dep name="perl(SaX::SaXManipulateTouchscreensIF)"/>
+			<dep name="perl(SaX::SaXManipulateVNC)"/>
+			<dep name="perl(SaX::SaXManipulateVNCIF)"/>
+			<dep name="perl(SaX::SaXProcess)"/>
+			<dep name="perl(SaX::SaXProcessIF)"/>
+			<dep name="perl(SaX::SaXStorage)"/>
+			<dep name="perl(SaX::SaXStorageIF)"/>
+			<dep name="perl(SaXc)"/>
+			<dep name="sax2-libsax-perl" op="EQ" version="7.1" release="125.19"/>
+		</provides>
+		<requires>
+			<dep name="sax2-libsax"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="libc.so.6()(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libgcc_s.so.1()(64bit)"/>
+			<dep name="libgcc_s.so.1(GCC_3.0)(64bit)"/>
+			<dep name="libm.so.6()(64bit)"/>
+			<dep name="libqt-mt.so.3()(64bit)"/>
+			<dep name="libsax.so.7()(64bit)"/>
+			<dep name="libxkbfile.so.1()(64bit)"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>sax2-libsax-python</name>
+	<summary>sax2: Improved detection/configuration of graphics cards</summary>
+	<description>Enhanced SaX2 to handle graphics drivers, which have been
+installed via Novell's "Linux Driver Process". Added
+detection/configuration of  new supported NVidia graphics
+cards.
+</description>
+	<arch>i586</arch>
+	<version>7.1</version>
+	<release>125.19</release>
+	<filesize>261420</filesize>
+	<installedsize>803483</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>7.1</version>
+			<release>125.19</release>
+			<filename>sax2-libsax-python-7.1-125.19.i586.rpm</filename>
+			<filesize>261420</filesize>
+			<installedsize>803483</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="_SaX.so"/>
+			<dep name="sax2-libsax-python" op="EQ" version="7.1" release="125.19"/>
+		</provides>
+		<requires>
+			<dep name="sax2-libsax"/>
+			<dep name="rpmlib(VersionedDependencies)" op="LE" version="3.0.3" release="1" pre="1"/>
+			<dep name="python" op="GE" version="2.4" pre="1"/>
+			<dep name="python" op="LT" version="2.5" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libgcc_s.so.1"/>
+			<dep name="libgcc_s.so.1(GCC_3.0)"/>
+			<dep name="libm.so.6"/>
+			<dep name="libqt-mt.so.3"/>
+			<dep name="libsax.so.7"/>
+			<dep name="libstdc++.so.6"/>
+			<dep name="libstdc++.so.6(CXXABI_1.3)"/>
+			<dep name="libstdc++.so.6(GLIBCXX_3.4)"/>
+			<dep name="libxkbfile.so.1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>sax2-libsax-python</name>
+	<summary>sax2: Improved detection/configuration of graphics cards</summary>
+	<description>Enhanced SaX2 to handle graphics drivers, which have been
+installed via Novell's "Linux Driver Process". Added
+detection/configuration of  new supported NVidia graphics
+cards.
+</description>
+	<arch>ppc</arch>
+	<version>7.1</version>
+	<release>125.19</release>
+	<filesize>266885</filesize>
+	<installedsize>872431</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>7.1</version>
+			<release>125.19</release>
+			<filename>sax2-libsax-python-7.1-125.19.ppc.rpm</filename>
+			<filesize>266885</filesize>
+			<installedsize>872431</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="_SaX.so"/>
+			<dep name="sax2-libsax-python" op="EQ" version="7.1" release="125.19"/>
+		</provides>
+		<requires>
+			<dep name="sax2-libsax"/>
+			<dep name="rpmlib(VersionedDependencies)" op="LE" version="3.0.3" release="1" pre="1"/>
+			<dep name="python" op="GE" version="2.4" pre="1"/>
+			<dep name="python" op="LT" version="2.5" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libgcc_s.so.1"/>
+			<dep name="libgcc_s.so.1(GCC_3.0)"/>
+			<dep name="libm.so.6"/>
+			<dep name="libqt-mt.so.3"/>
+			<dep name="libsax.so.7"/>
+			<dep name="libstdc++.so.6"/>
+			<dep name="libstdc++.so.6(CXXABI_1.3)"/>
+			<dep name="libstdc++.so.6(GLIBCXX_3.4)"/>
+			<dep name="libxkbfile.so.1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>sax2-libsax-python</name>
+	<summary>sax2: Improved detection/configuration of graphics cards</summary>
+	<description>Enhanced SaX2 to handle graphics drivers, which have been
+installed via Novell's "Linux Driver Process". Added
+detection/configuration of  new supported NVidia graphics
+cards.
+</description>
+	<arch>x86_64</arch>
+	<version>7.1</version>
+	<release>125.19</release>
+	<filesize>272397</filesize>
+	<installedsize>860347</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>7.1</version>
+			<release>125.19</release>
+			<filename>sax2-libsax-python-7.1-125.19.x86_64.rpm</filename>
+			<filesize>272397</filesize>
+			<installedsize>860347</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="_SaX.so()(64bit)"/>
+			<dep name="sax2-libsax-python" op="EQ" version="7.1" release="125.19"/>
+		</provides>
+		<requires>
+			<dep name="sax2-libsax"/>
+			<dep name="rpmlib(VersionedDependencies)" op="LE" version="3.0.3" release="1" pre="1"/>
+			<dep name="python" op="GE" version="2.4" pre="1"/>
+			<dep name="python" op="LT" version="2.5" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="libc.so.6()(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libgcc_s.so.1()(64bit)"/>
+			<dep name="libgcc_s.so.1(GCC_3.0)(64bit)"/>
+			<dep name="libm.so.6()(64bit)"/>
+			<dep name="libqt-mt.so.3()(64bit)"/>
+			<dep name="libsax.so.7()(64bit)"/>
+			<dep name="libstdc++.so.6()(64bit)"/>
+			<dep name="libstdc++.so.6(CXXABI_1.3)(64bit)"/>
+			<dep name="libstdc++.so.6(GLIBCXX_3.4)(64bit)"/>
+			<dep name="libxkbfile.so.1()(64bit)"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>sax2-tools</name>
+	<summary>sax2: Improved detection/configuration of graphics cards</summary>
+	<description>Enhanced SaX2 to handle graphics drivers, which have been
+installed via Novell's "Linux Driver Process". Added
+detection/configuration of  new supported NVidia graphics
+cards.
+</description>
+	<arch>i586</arch>
+	<version>2.7</version>
+	<release>125.19</release>
+	<filesize>202646</filesize>
+	<installedsize>155969</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>2.7</version>
+			<release>125.19</release>
+			<filename>sax2-tools-2.7-125.19.i586.rpm</filename>
+			<filesize>202646</filesize>
+			<installedsize>155969</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="saxtools"/>
+			<dep name="sax2-tools" op="EQ" version="2.7" release="125.19"/>
+		</provides>
+		<requires>
+			<dep name="coreutils"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/bin/sh"/>
+			<dep name="/usr/bin/perl"/>
+			<dep name="libX11.so.6"/>
+			<dep name="libXext.so.6"/>
+			<dep name="libXft.so.2"/>
+			<dep name="libXinerama.so.1"/>
+			<dep name="libXmu.so.6"/>
+			<dep name="libXss.so.1"/>
+			<dep name="libXxf86misc.so.1"/>
+			<dep name="libXxf86vm.so.1"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1)"/>
+			<dep name="libc.so.6(GLIBC_2.2)"/>
+			<dep name="libm.so.6"/>
+			<dep name="libm.so.6(GLIBC_2.0)"/>
+			<dep name="libncurses.so.5"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>sax2-tools</name>
+	<summary>sax2: Improved detection/configuration of graphics cards</summary>
+	<description>Enhanced SaX2 to handle graphics drivers, which have been
+installed via Novell's "Linux Driver Process". Added
+detection/configuration of  new supported NVidia graphics
+cards.
+</description>
+	<arch>ppc</arch>
+	<version>2.7</version>
+	<release>125.19</release>
+	<filesize>215199</filesize>
+	<installedsize>207325</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>2.7</version>
+			<release>125.19</release>
+			<filename>sax2-tools-2.7-125.19.ppc.rpm</filename>
+			<filesize>215199</filesize>
+			<installedsize>207325</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="saxtools"/>
+			<dep name="sax2-tools" op="EQ" version="2.7" release="125.19"/>
+		</provides>
+		<requires>
+			<dep name="coreutils"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/bin/sh"/>
+			<dep name="/usr/bin/perl"/>
+			<dep name="libX11.so.6"/>
+			<dep name="libXext.so.6"/>
+			<dep name="libXft.so.2"/>
+			<dep name="libXinerama.so.1"/>
+			<dep name="libXmu.so.6"/>
+			<dep name="libXss.so.1"/>
+			<dep name="libXxf86misc.so.1"/>
+			<dep name="libXxf86vm.so.1"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1)"/>
+			<dep name="libc.so.6(GLIBC_2.2)"/>
+			<dep name="libc.so.6(GLIBC_2.4)"/>
+			<dep name="libm.so.6"/>
+			<dep name="libm.so.6(GLIBC_2.0)"/>
+			<dep name="libncurses.so.5"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>sax2-tools</name>
+	<summary>sax2: Improved detection/configuration of graphics cards</summary>
+	<description>Enhanced SaX2 to handle graphics drivers, which have been
+installed via Novell's "Linux Driver Process". Added
+detection/configuration of  new supported NVidia graphics
+cards.
+</description>
+	<arch>x86_64</arch>
+	<version>2.7</version>
+	<release>125.19</release>
+	<filesize>206996</filesize>
+	<installedsize>189521</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>2.7</version>
+			<release>125.19</release>
+			<filename>sax2-tools-2.7-125.19.x86_64.rpm</filename>
+			<filesize>206996</filesize>
+			<installedsize>189521</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="saxtools"/>
+			<dep name="sax2-tools" op="EQ" version="2.7" release="125.19"/>
+		</provides>
+		<requires>
+			<dep name="coreutils"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/bin/sh"/>
+			<dep name="/usr/bin/perl"/>
+			<dep name="libX11.so.6()(64bit)"/>
+			<dep name="libXext.so.6()(64bit)"/>
+			<dep name="libXft.so.2()(64bit)"/>
+			<dep name="libXinerama.so.1()(64bit)"/>
+			<dep name="libXmu.so.6()(64bit)"/>
+			<dep name="libXss.so.1()(64bit)"/>
+			<dep name="libXxf86misc.so.1()(64bit)"/>
+			<dep name="libXxf86vm.so.1()(64bit)"/>
+			<dep name="libc.so.6()(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libm.so.6()(64bit)"/>
+			<dep name="libm.so.6(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libncurses.so.5()(64bit)"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+</subchannel></channel>

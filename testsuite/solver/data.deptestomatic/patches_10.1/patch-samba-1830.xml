@@ -1,0 +1,2145 @@
+<channel><subchannel>                                                  
+
+<patch>
+	<name>samba</name>
+	<arch>noarch</arch>
+	<version>1830</version>
+	<release>0</release>
+	<requires>
+		<dep kind="atom" name="samba" epoch="0" version="3.0.22" release="13.18" op="EQ"/>
+		<dep kind="atom" name="samba-32bit" epoch="0" version="3.0.22" release="13.18" op="EQ"/>
+		<dep kind="atom" name="samba-64bit" epoch="0" version="3.0.22" release="13.18" op="EQ"/>
+		<dep kind="atom" name="samba-client" epoch="0" version="3.0.22" release="13.18" op="EQ"/>
+		<dep kind="atom" name="samba-client-32bit" epoch="0" version="3.0.22" release="13.18" op="EQ"/>
+		<dep kind="atom" name="samba-client-64bit" epoch="0" version="3.0.22" release="13.18" op="EQ"/>
+		<dep kind="atom" name="samba-winbind" epoch="0" version="3.0.22" release="13.18" op="EQ"/>
+		<dep kind="atom" name="samba-winbind-32bit" epoch="0" version="3.0.22" release="13.18" op="EQ"/>
+		<dep kind="atom" name="samba-winbind-64bit" epoch="0" version="3.0.22" release="13.18" op="EQ"/>
+	</requires>
+</patch>
+<atom>
+	<name>samba</name>
+	<arch>i586</arch>
+	<version>3.0.22</version>
+	<release>13.18</release>
+	<freshens>
+		<dep kind="package" name="samba"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="samba" epoch="0" version="3.0.22" release="13.18" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>samba</name>
+	<arch>ppc</arch>
+	<version>3.0.22</version>
+	<release>13.18</release>
+	<freshens>
+		<dep kind="package" name="samba"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="samba" epoch="0" version="3.0.22" release="13.18" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>samba</name>
+	<arch>x86_64</arch>
+	<version>3.0.22</version>
+	<release>13.18</release>
+	<freshens>
+		<dep kind="package" name="samba"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="samba" epoch="0" version="3.0.22" release="13.18" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>samba-32bit</name>
+	<arch>x86_64</arch>
+	<version>3.0.22</version>
+	<release>13.18</release>
+	<freshens>
+		<dep kind="package" name="samba-32bit"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="samba-32bit" epoch="0" version="3.0.22" release="13.18" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>samba-64bit</name>
+	<arch>ppc</arch>
+	<version>3.0.22</version>
+	<release>13.18</release>
+	<freshens>
+		<dep kind="package" name="samba-64bit"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="samba-64bit" epoch="0" version="3.0.22" release="13.18" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>samba-client</name>
+	<arch>i586</arch>
+	<version>3.0.22</version>
+	<release>13.18</release>
+	<freshens>
+		<dep kind="package" name="samba-client"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="samba-client" epoch="0" version="3.0.22" release="13.18" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>samba-client</name>
+	<arch>ppc</arch>
+	<version>3.0.22</version>
+	<release>13.18</release>
+	<freshens>
+		<dep kind="package" name="samba-client"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="samba-client" epoch="0" version="3.0.22" release="13.18" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>samba-client</name>
+	<arch>x86_64</arch>
+	<version>3.0.22</version>
+	<release>13.18</release>
+	<freshens>
+		<dep kind="package" name="samba-client"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="samba-client" epoch="0" version="3.0.22" release="13.18" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>samba-client-32bit</name>
+	<arch>x86_64</arch>
+	<version>3.0.22</version>
+	<release>13.18</release>
+	<freshens>
+		<dep kind="package" name="samba-client-32bit"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="samba-client-32bit" epoch="0" version="3.0.22" release="13.18" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>samba-client-64bit</name>
+	<arch>ppc</arch>
+	<version>3.0.22</version>
+	<release>13.18</release>
+	<freshens>
+		<dep kind="package" name="samba-client-64bit"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="samba-client-64bit" epoch="0" version="3.0.22" release="13.18" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>samba-winbind</name>
+	<arch>i586</arch>
+	<version>3.0.22</version>
+	<release>13.18</release>
+	<freshens>
+		<dep kind="package" name="samba-winbind"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="samba-winbind" epoch="0" version="3.0.22" release="13.18" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>samba-winbind</name>
+	<arch>ppc</arch>
+	<version>3.0.22</version>
+	<release>13.18</release>
+	<freshens>
+		<dep kind="package" name="samba-winbind"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="samba-winbind" epoch="0" version="3.0.22" release="13.18" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>samba-winbind</name>
+	<arch>x86_64</arch>
+	<version>3.0.22</version>
+	<release>13.18</release>
+	<freshens>
+		<dep kind="package" name="samba-winbind"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="samba-winbind" epoch="0" version="3.0.22" release="13.18" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>samba-winbind-32bit</name>
+	<arch>x86_64</arch>
+	<version>3.0.22</version>
+	<release>13.18</release>
+	<freshens>
+		<dep kind="package" name="samba-winbind-32bit"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="samba-winbind-32bit" epoch="0" version="3.0.22" release="13.18" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>samba-winbind-64bit</name>
+	<arch>ppc</arch>
+	<version>3.0.22</version>
+	<release>13.18</release>
+	<freshens>
+		<dep kind="package" name="samba-winbind-64bit"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="samba-winbind-64bit" epoch="0" version="3.0.22" release="13.18" op="GE"/>
+	</requires>
+</atom>
+<package>
+	<name>samba</name>
+	<summary>samba: Fix memory exhaustion DoS and many other issues.</summary>
+	<description>- Prevent potential crash in winbindd's credential cache
+  handling; [#184450].
+- Fix memory exhaustion DoS; CVE-2006-3403; [#190468].
+- Fix the munlock call, samba.org svn rev r16755 from
+  Volker.
+- Change the kerberos principal for LDAP authentication to
+  netbios-name$@realm from host/name@realm; [#184450].
+- Ensure to link all required libraries to libnss_wins;
+  [#184306].
+- Change log level of debug message to avaoid flodded nmbd
+  log; [#157623].
+- Add 'usershare allow guests = Yes' to the default config;
+  [#144787].
+- Add CHANGEPW kpasswd fallback to TCP; [#184945].
+- Honour 'sn' attribute for eDir; [#176799].
+- Adapt smbclient fix to smbtree to enable long share
+  names; [#175999].
+- Make smbclient -L use RPC to list shares, fall back to
+  RAP; [#171311].
+- Re-add in-forest domain trusts; [bso #3823].
+- Remove SO_SNDBUF and SO_RCVBUF from socket options
+  example; [#165723].
+- Add wbinfo --own-domain; [#167344].
+- Fix usability of pam_winbind on a Samba PDC; [bso #3800].
+- Remove intrusive affinity patches for winbindd.
+- Merge Volker's winbindd crash fix for half-opened
+  connections in winbindd_cm.c (sessionsetup succeeded but
+  tconX failed).
+- Optimize lookup of user's group memberships via
+  ExtendedDn LDAP control; [#168100].
+- Restart winbind if the hostname is modified by the DHCP
+  client; [#169260].
+- Prevent passwords beeing swapped to disc; [#174834].
+- Remove length limit from winbind cache cleanup function;
+  [#175737].
+- Fix NDS_ldapsam memory leak.
+- Only add password to linked list when necessary.
+- Don't try cached credentials when changing passwords.
+- Cleanup winbind linked list of credential caches.
+- Use the index objectCategory attribute in AD LDAP
+  requests.
+- Adjust AD time difference when validating tickets.
+- Add password change warning for passwords beeing too
+  young.
+- Remove experimental Heimdal KCM support.
+- Added "usershare allow guests" global parameter;
+  [#144787].
+- Return domain name in samrquerydominfo 5; [#172756].
+- Fix unauthorized access when logging in with pam_winbind;
+  [#156385].
+- Don't ever set O_SYNC on open unless "strict sync = yes";
+  [#165431].
+- Correct fix to exit from "net" with an inproper
+  configuration; [#163227], [#182749].
+</description>
+	<arch>i586</arch>
+	<version>3.0.22</version>
+	<release>13.18</release>
+	<filesize>2936315</filesize>
+	<installedsize>8093414</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>3.0.22</version>
+			<release>13.18</release>
+			<filename>samba-3.0.22-13.18.i586.rpm</filename>
+			<filesize>2936315</filesize>
+			<installedsize>8093414</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="sambaxp" op="EQ" version="3.0.22" release="13.18"/>
+			<dep name="samba3" op="EQ" version="3.0.22" release="13.18"/>
+			<dep name="audit.so"/>
+			<dep name="cap.so"/>
+			<dep name="default_quota.so"/>
+			<dep name="expand_msdfs.so"/>
+			<dep name="extd_audit.so"/>
+			<dep name="fake_perms.so"/>
+			<dep name="full_audit.so"/>
+			<dep name="netatalk.so"/>
+			<dep name="pam_smbpass.so"/>
+			<dep name="readonly.so"/>
+			<dep name="recycle.so"/>
+			<dep name="script.so"/>
+			<dep name="shadow_copy.so"/>
+			<dep name="samba" op="EQ" version="3.0.22" release="13.18"/>
+		</provides>
+		<requires>
+			<dep name="rpmlib(VersionedDependencies)" op="LE" version="3.0.3" release="1" pre="1"/>
+			<dep name="samba-client" op="GE" version="3.0.22"/>
+			<dep name="/bin/cp" pre="1"/>
+			<dep name="/bin/mkdir" pre="1"/>
+			<dep name="/bin/mv" pre="1"/>
+			<dep name="/bin/rm" pre="1"/>
+			<dep name="/bin/touch" pre="1"/>
+			<dep name="/usr/bin/dirname" pre="1"/>
+			<dep name="/usr/bin/grep" pre="1"/>
+			<dep name="/usr/sbin/groupadd" pre="1"/>
+			<dep name="/usr/bin/strings" pre="1"/>
+			<dep name="/usr/bin/tr" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/bin/sh"/>
+			<dep name="libacl.so.1"/>
+			<dep name="libacl.so.1(ACL_1.0)"/>
+			<dep name="libattr.so.1"/>
+			<dep name="libattr.so.1(ATTR_1.0)"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1)"/>
+			<dep name="libc.so.6(GLIBC_2.1.1)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libc.so.6(GLIBC_2.2)"/>
+			<dep name="libc.so.6(GLIBC_2.2.3)"/>
+			<dep name="libc.so.6(GLIBC_2.2.4)"/>
+			<dep name="libc.so.6(GLIBC_2.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)"/>
+			<dep name="libc.so.6(GLIBC_2.4)"/>
+			<dep name="libcom_err.so.2"/>
+			<dep name="libcrypt.so.1"/>
+			<dep name="libcrypto.so.0.9.8"/>
+			<dep name="libcups.so.2"/>
+			<dep name="libdl.so.2"/>
+			<dep name="libdl.so.2(GLIBC_2.0)"/>
+			<dep name="libdl.so.2(GLIBC_2.1)"/>
+			<dep name="libgssapi_krb5.so.2"/>
+			<dep name="libgssapi_krb5.so.2(gssapi_krb5_2_MIT)"/>
+			<dep name="libk5crypto.so.3"/>
+			<dep name="libk5crypto.so.3(k5crypto_3_MIT)"/>
+			<dep name="libkrb5.so.3"/>
+			<dep name="libkrb5.so.3(krb5_3_MIT)"/>
+			<dep name="libkrb5support.so.0"/>
+			<dep name="liblber-2.3.so.0"/>
+			<dep name="libldap-2.3.so.0"/>
+			<dep name="libnsl.so.1"/>
+			<dep name="libnsl.so.1(GLIBC_2.0)"/>
+			<dep name="libpam.so.0"/>
+			<dep name="libpam.so.0(LIBPAM_1.0)"/>
+			<dep name="libpopt.so.0"/>
+			<dep name="libresolv.so.2"/>
+			<dep name="libssl.so.0.9.8"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>samba</name>
+	<summary>samba: Fix memory exhaustion DoS and many other issues.</summary>
+	<description>- Prevent potential crash in winbindd's credential cache
+  handling; [#184450].
+- Fix memory exhaustion DoS; CVE-2006-3403; [#190468].
+- Fix the munlock call, samba.org svn rev r16755 from
+  Volker.
+- Change the kerberos principal for LDAP authentication to
+  netbios-name$@realm from host/name@realm; [#184450].
+- Ensure to link all required libraries to libnss_wins;
+  [#184306].
+- Change log level of debug message to avaoid flodded nmbd
+  log; [#157623].
+- Add 'usershare allow guests = Yes' to the default config;
+  [#144787].
+- Add CHANGEPW kpasswd fallback to TCP; [#184945].
+- Honour 'sn' attribute for eDir; [#176799].
+- Adapt smbclient fix to smbtree to enable long share
+  names; [#175999].
+- Make smbclient -L use RPC to list shares, fall back to
+  RAP; [#171311].
+- Re-add in-forest domain trusts; [bso #3823].
+- Remove SO_SNDBUF and SO_RCVBUF from socket options
+  example; [#165723].
+- Add wbinfo --own-domain; [#167344].
+- Fix usability of pam_winbind on a Samba PDC; [bso #3800].
+- Remove intrusive affinity patches for winbindd.
+- Merge Volker's winbindd crash fix for half-opened
+  connections in winbindd_cm.c (sessionsetup succeeded but
+  tconX failed).
+- Optimize lookup of user's group memberships via
+  ExtendedDn LDAP control; [#168100].
+- Restart winbind if the hostname is modified by the DHCP
+  client; [#169260].
+- Prevent passwords beeing swapped to disc; [#174834].
+- Remove length limit from winbind cache cleanup function;
+  [#175737].
+- Fix NDS_ldapsam memory leak.
+- Only add password to linked list when necessary.
+- Don't try cached credentials when changing passwords.
+- Cleanup winbind linked list of credential caches.
+- Use the index objectCategory attribute in AD LDAP
+  requests.
+- Adjust AD time difference when validating tickets.
+- Add password change warning for passwords beeing too
+  young.
+- Remove experimental Heimdal KCM support.
+- Added "usershare allow guests" global parameter;
+  [#144787].
+- Return domain name in samrquerydominfo 5; [#172756].
+- Fix unauthorized access when logging in with pam_winbind;
+  [#156385].
+- Don't ever set O_SYNC on open unless "strict sync = yes";
+  [#165431].
+- Correct fix to exit from "net" with an inproper
+  configuration; [#163227], [#182749].
+</description>
+	<arch>ppc</arch>
+	<version>3.0.22</version>
+	<release>13.18</release>
+	<filesize>3218312</filesize>
+	<installedsize>9552790</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>3.0.22</version>
+			<release>13.18</release>
+			<filename>samba-3.0.22-13.18.ppc.rpm</filename>
+			<filesize>3218312</filesize>
+			<installedsize>9552790</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="sambaxp" op="EQ" version="3.0.22" release="13.18"/>
+			<dep name="samba3" op="EQ" version="3.0.22" release="13.18"/>
+			<dep name="audit.so"/>
+			<dep name="cap.so"/>
+			<dep name="default_quota.so"/>
+			<dep name="expand_msdfs.so"/>
+			<dep name="extd_audit.so"/>
+			<dep name="fake_perms.so"/>
+			<dep name="full_audit.so"/>
+			<dep name="netatalk.so"/>
+			<dep name="pam_smbpass.so"/>
+			<dep name="readonly.so"/>
+			<dep name="recycle.so"/>
+			<dep name="script.so"/>
+			<dep name="shadow_copy.so"/>
+			<dep name="samba" op="EQ" version="3.0.22" release="13.18"/>
+		</provides>
+		<requires>
+			<dep name="rpmlib(VersionedDependencies)" op="LE" version="3.0.3" release="1" pre="1"/>
+			<dep name="samba-client" op="GE" version="3.0.22"/>
+			<dep name="/bin/cp" pre="1"/>
+			<dep name="/bin/mkdir" pre="1"/>
+			<dep name="/bin/mv" pre="1"/>
+			<dep name="/bin/rm" pre="1"/>
+			<dep name="/bin/touch" pre="1"/>
+			<dep name="/usr/bin/dirname" pre="1"/>
+			<dep name="/usr/bin/grep" pre="1"/>
+			<dep name="/usr/sbin/groupadd" pre="1"/>
+			<dep name="/usr/bin/strings" pre="1"/>
+			<dep name="/usr/bin/tr" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/bin/sh"/>
+			<dep name="libacl.so.1"/>
+			<dep name="libacl.so.1(ACL_1.0)"/>
+			<dep name="libattr.so.1"/>
+			<dep name="libattr.so.1(ATTR_1.0)"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1)"/>
+			<dep name="libc.so.6(GLIBC_2.1.1)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libc.so.6(GLIBC_2.2)"/>
+			<dep name="libc.so.6(GLIBC_2.2.3)"/>
+			<dep name="libc.so.6(GLIBC_2.2.4)"/>
+			<dep name="libc.so.6(GLIBC_2.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)"/>
+			<dep name="libc.so.6(GLIBC_2.4)"/>
+			<dep name="libcom_err.so.2"/>
+			<dep name="libcrypt.so.1"/>
+			<dep name="libcrypto.so.0.9.8"/>
+			<dep name="libcups.so.2"/>
+			<dep name="libdl.so.2"/>
+			<dep name="libdl.so.2(GLIBC_2.0)"/>
+			<dep name="libdl.so.2(GLIBC_2.1)"/>
+			<dep name="libgssapi_krb5.so.2"/>
+			<dep name="libgssapi_krb5.so.2(gssapi_krb5_2_MIT)"/>
+			<dep name="libk5crypto.so.3"/>
+			<dep name="libk5crypto.so.3(k5crypto_3_MIT)"/>
+			<dep name="libkrb5.so.3"/>
+			<dep name="libkrb5.so.3(krb5_3_MIT)"/>
+			<dep name="libkrb5support.so.0"/>
+			<dep name="liblber-2.3.so.0"/>
+			<dep name="libldap-2.3.so.0"/>
+			<dep name="libnsl.so.1"/>
+			<dep name="libnsl.so.1(GLIBC_2.0)"/>
+			<dep name="libpam.so.0"/>
+			<dep name="libpam.so.0(LIBPAM_1.0)"/>
+			<dep name="libpopt.so.0"/>
+			<dep name="libresolv.so.2"/>
+			<dep name="libssl.so.0.9.8"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>samba</name>
+	<summary>samba: Fix memory exhaustion DoS and many other issues.</summary>
+	<description>- Prevent potential crash in winbindd's credential cache
+  handling; [#184450].
+- Fix memory exhaustion DoS; CVE-2006-3403; [#190468].
+- Fix the munlock call, samba.org svn rev r16755 from
+  Volker.
+- Change the kerberos principal for LDAP authentication to
+  netbios-name$@realm from host/name@realm; [#184450].
+- Ensure to link all required libraries to libnss_wins;
+  [#184306].
+- Change log level of debug message to avaoid flodded nmbd
+  log; [#157623].
+- Add 'usershare allow guests = Yes' to the default config;
+  [#144787].
+- Add CHANGEPW kpasswd fallback to TCP; [#184945].
+- Honour 'sn' attribute for eDir; [#176799].
+- Adapt smbclient fix to smbtree to enable long share
+  names; [#175999].
+- Make smbclient -L use RPC to list shares, fall back to
+  RAP; [#171311].
+- Re-add in-forest domain trusts; [bso #3823].
+- Remove SO_SNDBUF and SO_RCVBUF from socket options
+  example; [#165723].
+- Add wbinfo --own-domain; [#167344].
+- Fix usability of pam_winbind on a Samba PDC; [bso #3800].
+- Remove intrusive affinity patches for winbindd.
+- Merge Volker's winbindd crash fix for half-opened
+  connections in winbindd_cm.c (sessionsetup succeeded but
+  tconX failed).
+- Optimize lookup of user's group memberships via
+  ExtendedDn LDAP control; [#168100].
+- Restart winbind if the hostname is modified by the DHCP
+  client; [#169260].
+- Prevent passwords beeing swapped to disc; [#174834].
+- Remove length limit from winbind cache cleanup function;
+  [#175737].
+- Fix NDS_ldapsam memory leak.
+- Only add password to linked list when necessary.
+- Don't try cached credentials when changing passwords.
+- Cleanup winbind linked list of credential caches.
+- Use the index objectCategory attribute in AD LDAP
+  requests.
+- Adjust AD time difference when validating tickets.
+- Add password change warning for passwords beeing too
+  young.
+- Remove experimental Heimdal KCM support.
+- Added "usershare allow guests" global parameter;
+  [#144787].
+- Return domain name in samrquerydominfo 5; [#172756].
+- Fix unauthorized access when logging in with pam_winbind;
+  [#156385].
+- Don't ever set O_SYNC on open unless "strict sync = yes";
+  [#165431].
+- Correct fix to exit from "net" with an inproper
+  configuration; [#163227], [#182749].
+</description>
+	<arch>x86_64</arch>
+	<version>3.0.22</version>
+	<release>13.18</release>
+	<filesize>3380105</filesize>
+	<installedsize>8691622</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>3.0.22</version>
+			<release>13.18</release>
+			<filename>samba-3.0.22-13.18.x86_64.rpm</filename>
+			<filesize>3380105</filesize>
+			<installedsize>8691622</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="sambaxp" op="EQ" version="3.0.22" release="13.18"/>
+			<dep name="samba3" op="EQ" version="3.0.22" release="13.18"/>
+			<dep name="audit.so()(64bit)"/>
+			<dep name="cap.so()(64bit)"/>
+			<dep name="default_quota.so()(64bit)"/>
+			<dep name="expand_msdfs.so()(64bit)"/>
+			<dep name="extd_audit.so()(64bit)"/>
+			<dep name="fake_perms.so()(64bit)"/>
+			<dep name="full_audit.so()(64bit)"/>
+			<dep name="netatalk.so()(64bit)"/>
+			<dep name="pam_smbpass.so()(64bit)"/>
+			<dep name="readonly.so()(64bit)"/>
+			<dep name="recycle.so()(64bit)"/>
+			<dep name="script.so()(64bit)"/>
+			<dep name="shadow_copy.so()(64bit)"/>
+			<dep name="samba" op="EQ" version="3.0.22" release="13.18"/>
+		</provides>
+		<requires>
+			<dep name="rpmlib(VersionedDependencies)" op="LE" version="3.0.3" release="1" pre="1"/>
+			<dep name="samba-client" op="GE" version="3.0.22"/>
+			<dep name="/bin/cp" pre="1"/>
+			<dep name="/bin/mkdir" pre="1"/>
+			<dep name="/bin/mv" pre="1"/>
+			<dep name="/bin/rm" pre="1"/>
+			<dep name="/bin/touch" pre="1"/>
+			<dep name="/usr/bin/dirname" pre="1"/>
+			<dep name="/usr/bin/grep" pre="1"/>
+			<dep name="/usr/sbin/groupadd" pre="1"/>
+			<dep name="/usr/bin/strings" pre="1"/>
+			<dep name="/usr/bin/tr" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/bin/sh"/>
+			<dep name="libacl.so.1()(64bit)"/>
+			<dep name="libacl.so.1(ACL_1.0)(64bit)"/>
+			<dep name="libattr.so.1()(64bit)"/>
+			<dep name="libattr.so.1(ATTR_1.0)(64bit)"/>
+			<dep name="libc.so.6()(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.3)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.4)(64bit)"/>
+			<dep name="libcom_err.so.2()(64bit)"/>
+			<dep name="libcrypt.so.1()(64bit)"/>
+			<dep name="libcrypto.so.0.9.8()(64bit)"/>
+			<dep name="libcups.so.2()(64bit)"/>
+			<dep name="libdl.so.2()(64bit)"/>
+			<dep name="libdl.so.2(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libgssapi_krb5.so.2()(64bit)"/>
+			<dep name="libgssapi_krb5.so.2(gssapi_krb5_2_MIT)(64bit)"/>
+			<dep name="libk5crypto.so.3()(64bit)"/>
+			<dep name="libk5crypto.so.3(k5crypto_3_MIT)(64bit)"/>
+			<dep name="libkrb5.so.3()(64bit)"/>
+			<dep name="libkrb5.so.3(krb5_3_MIT)(64bit)"/>
+			<dep name="libkrb5support.so.0()(64bit)"/>
+			<dep name="liblber-2.3.so.0()(64bit)"/>
+			<dep name="libldap-2.3.so.0()(64bit)"/>
+			<dep name="libnsl.so.1()(64bit)"/>
+			<dep name="libnsl.so.1(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libpam.so.0()(64bit)"/>
+			<dep name="libpam.so.0(LIBPAM_1.0)(64bit)"/>
+			<dep name="libpopt.so.0()(64bit)"/>
+			<dep name="libresolv.so.2()(64bit)"/>
+			<dep name="libssl.so.0.9.8()(64bit)"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>samba-32bit</name>
+	<summary>samba: Fix memory exhaustion DoS and many other issues.</summary>
+	<description>- Prevent potential crash in winbindd's credential cache
+  handling; [#184450].
+- Fix memory exhaustion DoS; CVE-2006-3403; [#190468].
+- Fix the munlock call, samba.org svn rev r16755 from
+  Volker.
+- Change the kerberos principal for LDAP authentication to
+  netbios-name$@realm from host/name@realm; [#184450].
+- Ensure to link all required libraries to libnss_wins;
+  [#184306].
+- Change log level of debug message to avaoid flodded nmbd
+  log; [#157623].
+- Add 'usershare allow guests = Yes' to the default config;
+  [#144787].
+- Add CHANGEPW kpasswd fallback to TCP; [#184945].
+- Honour 'sn' attribute for eDir; [#176799].
+- Adapt smbclient fix to smbtree to enable long share
+  names; [#175999].
+- Make smbclient -L use RPC to list shares, fall back to
+  RAP; [#171311].
+- Re-add in-forest domain trusts; [bso #3823].
+- Remove SO_SNDBUF and SO_RCVBUF from socket options
+  example; [#165723].
+- Add wbinfo --own-domain; [#167344].
+- Fix usability of pam_winbind on a Samba PDC; [bso #3800].
+- Remove intrusive affinity patches for winbindd.
+- Merge Volker's winbindd crash fix for half-opened
+  connections in winbindd_cm.c (sessionsetup succeeded but
+  tconX failed).
+- Optimize lookup of user's group memberships via
+  ExtendedDn LDAP control; [#168100].
+- Restart winbind if the hostname is modified by the DHCP
+  client; [#169260].
+- Prevent passwords beeing swapped to disc; [#174834].
+- Remove length limit from winbind cache cleanup function;
+  [#175737].
+- Fix NDS_ldapsam memory leak.
+- Only add password to linked list when necessary.
+- Don't try cached credentials when changing passwords.
+- Cleanup winbind linked list of credential caches.
+- Use the index objectCategory attribute in AD LDAP
+  requests.
+- Adjust AD time difference when validating tickets.
+- Add password change warning for passwords beeing too
+  young.
+- Remove experimental Heimdal KCM support.
+- Added "usershare allow guests" global parameter;
+  [#144787].
+- Return domain name in samrquerydominfo 5; [#172756].
+- Fix unauthorized access when logging in with pam_winbind;
+  [#156385].
+- Don't ever set O_SYNC on open unless "strict sync = yes";
+  [#165431].
+- Correct fix to exit from "net" with an inproper
+  configuration; [#163227], [#182749].
+</description>
+	<arch>x86_64</arch>
+	<version>3.0.22</version>
+	<release>13.18</release>
+	<filesize>378232</filesize>
+	<installedsize>878656</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>3.0.22</version>
+			<release>13.18</release>
+			<filename>samba-32bit-3.0.22-13.18.x86_64.rpm</filename>
+			<filesize>378232</filesize>
+			<installedsize>878656</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="pam_smbpass.so"/>
+			<dep name="samba-32bit" op="EQ" version="3.0.22" release="13.18"/>
+		</provides>
+		<requires>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libc.so.6(GLIBC_2.2)"/>
+			<dep name="libc.so.6(GLIBC_2.2.3)"/>
+			<dep name="libc.so.6(GLIBC_2.2.4)"/>
+			<dep name="libc.so.6(GLIBC_2.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)"/>
+			<dep name="libc.so.6(GLIBC_2.4)"/>
+			<dep name="libcom_err.so.2"/>
+			<dep name="libcrypt.so.1"/>
+			<dep name="libdl.so.2"/>
+			<dep name="libdl.so.2(GLIBC_2.0)"/>
+			<dep name="libdl.so.2(GLIBC_2.1)"/>
+			<dep name="libgssapi_krb5.so.2"/>
+			<dep name="libk5crypto.so.3"/>
+			<dep name="libkrb5.so.3"/>
+			<dep name="libkrb5support.so.0"/>
+			<dep name="liblber-2.3.so.0"/>
+			<dep name="libldap-2.3.so.0"/>
+			<dep name="libnsl.so.1"/>
+			<dep name="libnsl.so.1(GLIBC_2.0)"/>
+			<dep name="libpam.so.0"/>
+			<dep name="libpam.so.0(LIBPAM_1.0)"/>
+			<dep name="libresolv.so.2"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>samba-64bit</name>
+	<summary>samba: Fix memory exhaustion DoS and many other issues.</summary>
+	<description>- Prevent potential crash in winbindd's credential cache
+  handling; [#184450].
+- Fix memory exhaustion DoS; CVE-2006-3403; [#190468].
+- Fix the munlock call, samba.org svn rev r16755 from
+  Volker.
+- Change the kerberos principal for LDAP authentication to
+  netbios-name$@realm from host/name@realm; [#184450].
+- Ensure to link all required libraries to libnss_wins;
+  [#184306].
+- Change log level of debug message to avaoid flodded nmbd
+  log; [#157623].
+- Add 'usershare allow guests = Yes' to the default config;
+  [#144787].
+- Add CHANGEPW kpasswd fallback to TCP; [#184945].
+- Honour 'sn' attribute for eDir; [#176799].
+- Adapt smbclient fix to smbtree to enable long share
+  names; [#175999].
+- Make smbclient -L use RPC to list shares, fall back to
+  RAP; [#171311].
+- Re-add in-forest domain trusts; [bso #3823].
+- Remove SO_SNDBUF and SO_RCVBUF from socket options
+  example; [#165723].
+- Add wbinfo --own-domain; [#167344].
+- Fix usability of pam_winbind on a Samba PDC; [bso #3800].
+- Remove intrusive affinity patches for winbindd.
+- Merge Volker's winbindd crash fix for half-opened
+  connections in winbindd_cm.c (sessionsetup succeeded but
+  tconX failed).
+- Optimize lookup of user's group memberships via
+  ExtendedDn LDAP control; [#168100].
+- Restart winbind if the hostname is modified by the DHCP
+  client; [#169260].
+- Prevent passwords beeing swapped to disc; [#174834].
+- Remove length limit from winbind cache cleanup function;
+  [#175737].
+- Fix NDS_ldapsam memory leak.
+- Only add password to linked list when necessary.
+- Don't try cached credentials when changing passwords.
+- Cleanup winbind linked list of credential caches.
+- Use the index objectCategory attribute in AD LDAP
+  requests.
+- Adjust AD time difference when validating tickets.
+- Add password change warning for passwords beeing too
+  young.
+- Remove experimental Heimdal KCM support.
+- Added "usershare allow guests" global parameter;
+  [#144787].
+- Return domain name in samrquerydominfo 5; [#172756].
+- Fix unauthorized access when logging in with pam_winbind;
+  [#156385].
+- Don't ever set O_SYNC on open unless "strict sync = yes";
+  [#165431].
+- Correct fix to exit from "net" with an inproper
+  configuration; [#163227], [#182749].
+</description>
+	<arch>ppc</arch>
+	<version>3.0.22</version>
+	<release>13.18</release>
+	<filesize>482477</filesize>
+	<installedsize>1554816</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>3.0.22</version>
+			<release>13.18</release>
+			<filename>samba-64bit-3.0.22-13.18.ppc.rpm</filename>
+			<filesize>482477</filesize>
+			<installedsize>1554816</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="audit.so()(64bit)"/>
+			<dep name="cap.so()(64bit)"/>
+			<dep name="default_quota.so()(64bit)"/>
+			<dep name="expand_msdfs.so()(64bit)"/>
+			<dep name="extd_audit.so()(64bit)"/>
+			<dep name="fake_perms.so()(64bit)"/>
+			<dep name="full_audit.so()(64bit)"/>
+			<dep name="netatalk.so()(64bit)"/>
+			<dep name="pam_smbpass.so()(64bit)"/>
+			<dep name="readonly.so()(64bit)"/>
+			<dep name="recycle.so()(64bit)"/>
+			<dep name="script.so()(64bit)"/>
+			<dep name="shadow_copy.so()(64bit)"/>
+			<dep name="samba-64bit" op="EQ" version="3.0.22" release="13.18"/>
+		</provides>
+		<requires>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="libc.so.6()(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.3)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.4)(64bit)"/>
+			<dep name="libcom_err.so.2()(64bit)"/>
+			<dep name="libcrypt.so.1()(64bit)"/>
+			<dep name="libdl.so.2()(64bit)"/>
+			<dep name="libdl.so.2(GLIBC_2.3)(64bit)"/>
+			<dep name="libgssapi_krb5.so.2()(64bit)"/>
+			<dep name="libk5crypto.so.3()(64bit)"/>
+			<dep name="libkrb5.so.3()(64bit)"/>
+			<dep name="libkrb5support.so.0()(64bit)"/>
+			<dep name="liblber-2.3.so.0()(64bit)"/>
+			<dep name="libldap-2.3.so.0()(64bit)"/>
+			<dep name="libnsl.so.1()(64bit)"/>
+			<dep name="libnsl.so.1(GLIBC_2.3)(64bit)"/>
+			<dep name="libpam.so.0()(64bit)"/>
+			<dep name="libpam.so.0(LIBPAM_1.0)(64bit)"/>
+			<dep name="libresolv.so.2()(64bit)"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>samba-client</name>
+	<summary>samba: Fix memory exhaustion DoS and many other issues.</summary>
+	<description>- Prevent potential crash in winbindd's credential cache
+  handling; [#184450].
+- Fix memory exhaustion DoS; CVE-2006-3403; [#190468].
+- Fix the munlock call, samba.org svn rev r16755 from
+  Volker.
+- Change the kerberos principal for LDAP authentication to
+  netbios-name$@realm from host/name@realm; [#184450].
+- Ensure to link all required libraries to libnss_wins;
+  [#184306].
+- Change log level of debug message to avaoid flodded nmbd
+  log; [#157623].
+- Add 'usershare allow guests = Yes' to the default config;
+  [#144787].
+- Add CHANGEPW kpasswd fallback to TCP; [#184945].
+- Honour 'sn' attribute for eDir; [#176799].
+- Adapt smbclient fix to smbtree to enable long share
+  names; [#175999].
+- Make smbclient -L use RPC to list shares, fall back to
+  RAP; [#171311].
+- Re-add in-forest domain trusts; [bso #3823].
+- Remove SO_SNDBUF and SO_RCVBUF from socket options
+  example; [#165723].
+- Add wbinfo --own-domain; [#167344].
+- Fix usability of pam_winbind on a Samba PDC; [bso #3800].
+- Remove intrusive affinity patches for winbindd.
+- Merge Volker's winbindd crash fix for half-opened
+  connections in winbindd_cm.c (sessionsetup succeeded but
+  tconX failed).
+- Optimize lookup of user's group memberships via
+  ExtendedDn LDAP control; [#168100].
+- Restart winbind if the hostname is modified by the DHCP
+  client; [#169260].
+- Prevent passwords beeing swapped to disc; [#174834].
+- Remove length limit from winbind cache cleanup function;
+  [#175737].
+- Fix NDS_ldapsam memory leak.
+- Only add password to linked list when necessary.
+- Don't try cached credentials when changing passwords.
+- Cleanup winbind linked list of credential caches.
+- Use the index objectCategory attribute in AD LDAP
+  requests.
+- Adjust AD time difference when validating tickets.
+- Add password change warning for passwords beeing too
+  young.
+- Remove experimental Heimdal KCM support.
+- Added "usershare allow guests" global parameter;
+  [#144787].
+- Return domain name in samrquerydominfo 5; [#172756].
+- Fix unauthorized access when logging in with pam_winbind;
+  [#156385].
+- Don't ever set O_SYNC on open unless "strict sync = yes";
+  [#165431].
+- Correct fix to exit from "net" with an inproper
+  configuration; [#163227], [#182749].
+</description>
+	<arch>i586</arch>
+	<version>3.0.22</version>
+	<release>13.18</release>
+	<filesize>7626645</filesize>
+	<installedsize>20894810</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>3.0.22</version>
+			<release>13.18</release>
+			<filename>samba-client-3.0.22-13.18.i586.rpm</filename>
+			<filesize>7626645</filesize>
+			<installedsize>20894810</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="smbclnt"/>
+			<dep name="smbfs"/>
+			<dep name="sambaxp-client" op="EQ" version="3.0.22" release="13.18"/>
+			<dep name="samba3-client" op="EQ" version="3.0.22" release="13.18"/>
+			<dep name="CP437.so"/>
+			<dep name="CP850.so"/>
+			<dep name="libnss_wins.so.2"/>
+			<dep name="samba-client" op="EQ" version="3.0.22" release="13.18"/>
+		</provides>
+		<requires>
+			<dep name="rpmlib(VersionedDependencies)" op="LE" version="3.0.3" release="1" pre="1"/>
+			<dep name="insserv" pre="1"/>
+			<dep name="sed" pre="1"/>
+			<dep name="fillup" pre="1"/>
+			<dep name="coreutils" pre="1"/>
+			<dep name="/bin/ln" pre="1"/>
+			<dep name="/bin/mkdir" pre="1"/>
+			<dep name="/bin/touch" pre="1"/>
+			<dep name="/sbin/chkconfig" pre="1"/>
+			<dep name="/sbin/ldconfig" pre="1"/>
+			<dep name="/usr/bin/dirname" pre="1"/>
+			<dep name="/usr/bin/strings" pre="1"/>
+			<dep name="cifs-mount"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/bin/bash"/>
+			<dep name="/bin/sh"/>
+			<dep name="/usr/bin/perl"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libc.so.6(GLIBC_2.2)"/>
+			<dep name="libc.so.6(GLIBC_2.2.3)"/>
+			<dep name="libc.so.6(GLIBC_2.2.4)"/>
+			<dep name="libc.so.6(GLIBC_2.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)"/>
+			<dep name="libc.so.6(GLIBC_2.4)"/>
+			<dep name="libcom_err.so.2"/>
+			<dep name="libcrypt.so.1"/>
+			<dep name="libdl.so.2"/>
+			<dep name="libdl.so.2(GLIBC_2.0)"/>
+			<dep name="libdl.so.2(GLIBC_2.1)"/>
+			<dep name="libgssapi_krb5.so.2"/>
+			<dep name="libgssapi_krb5.so.2(gssapi_krb5_2_MIT)"/>
+			<dep name="libk5crypto.so.3"/>
+			<dep name="libk5crypto.so.3(k5crypto_3_MIT)"/>
+			<dep name="libkrb5.so.3"/>
+			<dep name="libkrb5.so.3(krb5_3_MIT)"/>
+			<dep name="libkrb5support.so.0"/>
+			<dep name="liblber-2.3.so.0"/>
+			<dep name="libldap-2.3.so.0"/>
+			<dep name="libncurses.so.5"/>
+			<dep name="libnsl.so.1"/>
+			<dep name="libnsl.so.1(GLIBC_2.0)"/>
+			<dep name="libpopt.so.0"/>
+			<dep name="libreadline.so.5"/>
+			<dep name="libresolv.so.2"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>samba-client</name>
+	<summary>samba: Fix memory exhaustion DoS and many other issues.</summary>
+	<description>- Prevent potential crash in winbindd's credential cache
+  handling; [#184450].
+- Fix memory exhaustion DoS; CVE-2006-3403; [#190468].
+- Fix the munlock call, samba.org svn rev r16755 from
+  Volker.
+- Change the kerberos principal for LDAP authentication to
+  netbios-name$@realm from host/name@realm; [#184450].
+- Ensure to link all required libraries to libnss_wins;
+  [#184306].
+- Change log level of debug message to avaoid flodded nmbd
+  log; [#157623].
+- Add 'usershare allow guests = Yes' to the default config;
+  [#144787].
+- Add CHANGEPW kpasswd fallback to TCP; [#184945].
+- Honour 'sn' attribute for eDir; [#176799].
+- Adapt smbclient fix to smbtree to enable long share
+  names; [#175999].
+- Make smbclient -L use RPC to list shares, fall back to
+  RAP; [#171311].
+- Re-add in-forest domain trusts; [bso #3823].
+- Remove SO_SNDBUF and SO_RCVBUF from socket options
+  example; [#165723].
+- Add wbinfo --own-domain; [#167344].
+- Fix usability of pam_winbind on a Samba PDC; [bso #3800].
+- Remove intrusive affinity patches for winbindd.
+- Merge Volker's winbindd crash fix for half-opened
+  connections in winbindd_cm.c (sessionsetup succeeded but
+  tconX failed).
+- Optimize lookup of user's group memberships via
+  ExtendedDn LDAP control; [#168100].
+- Restart winbind if the hostname is modified by the DHCP
+  client; [#169260].
+- Prevent passwords beeing swapped to disc; [#174834].
+- Remove length limit from winbind cache cleanup function;
+  [#175737].
+- Fix NDS_ldapsam memory leak.
+- Only add password to linked list when necessary.
+- Don't try cached credentials when changing passwords.
+- Cleanup winbind linked list of credential caches.
+- Use the index objectCategory attribute in AD LDAP
+  requests.
+- Adjust AD time difference when validating tickets.
+- Add password change warning for passwords beeing too
+  young.
+- Remove experimental Heimdal KCM support.
+- Added "usershare allow guests" global parameter;
+  [#144787].
+- Return domain name in samrquerydominfo 5; [#172756].
+- Fix unauthorized access when logging in with pam_winbind;
+  [#156385].
+- Don't ever set O_SYNC on open unless "strict sync = yes";
+  [#165431].
+- Correct fix to exit from "net" with an inproper
+  configuration; [#163227], [#182749].
+</description>
+	<arch>ppc</arch>
+	<version>3.0.22</version>
+	<release>13.18</release>
+	<filesize>8450610</filesize>
+	<installedsize>24902946</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>3.0.22</version>
+			<release>13.18</release>
+			<filename>samba-client-3.0.22-13.18.ppc.rpm</filename>
+			<filesize>8450610</filesize>
+			<installedsize>24902946</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="smbclnt"/>
+			<dep name="smbfs"/>
+			<dep name="sambaxp-client" op="EQ" version="3.0.22" release="13.18"/>
+			<dep name="samba3-client" op="EQ" version="3.0.22" release="13.18"/>
+			<dep name="CP437.so"/>
+			<dep name="CP850.so"/>
+			<dep name="libnss_wins.so.2"/>
+			<dep name="samba-client" op="EQ" version="3.0.22" release="13.18"/>
+		</provides>
+		<requires>
+			<dep name="rpmlib(VersionedDependencies)" op="LE" version="3.0.3" release="1" pre="1"/>
+			<dep name="insserv" pre="1"/>
+			<dep name="sed" pre="1"/>
+			<dep name="fillup" pre="1"/>
+			<dep name="coreutils" pre="1"/>
+			<dep name="/bin/ln" pre="1"/>
+			<dep name="/bin/mkdir" pre="1"/>
+			<dep name="/bin/touch" pre="1"/>
+			<dep name="/sbin/chkconfig" pre="1"/>
+			<dep name="/sbin/ldconfig" pre="1"/>
+			<dep name="/usr/bin/dirname" pre="1"/>
+			<dep name="/usr/bin/strings" pre="1"/>
+			<dep name="cifs-mount"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/bin/bash"/>
+			<dep name="/bin/sh"/>
+			<dep name="/usr/bin/perl"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libc.so.6(GLIBC_2.2)"/>
+			<dep name="libc.so.6(GLIBC_2.2.3)"/>
+			<dep name="libc.so.6(GLIBC_2.2.4)"/>
+			<dep name="libc.so.6(GLIBC_2.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)"/>
+			<dep name="libc.so.6(GLIBC_2.4)"/>
+			<dep name="libcom_err.so.2"/>
+			<dep name="libcrypt.so.1"/>
+			<dep name="libdl.so.2"/>
+			<dep name="libdl.so.2(GLIBC_2.0)"/>
+			<dep name="libdl.so.2(GLIBC_2.1)"/>
+			<dep name="libgssapi_krb5.so.2"/>
+			<dep name="libgssapi_krb5.so.2(gssapi_krb5_2_MIT)"/>
+			<dep name="libk5crypto.so.3"/>
+			<dep name="libk5crypto.so.3(k5crypto_3_MIT)"/>
+			<dep name="libkrb5.so.3"/>
+			<dep name="libkrb5.so.3(krb5_3_MIT)"/>
+			<dep name="libkrb5support.so.0"/>
+			<dep name="liblber-2.3.so.0"/>
+			<dep name="libldap-2.3.so.0"/>
+			<dep name="libncurses.so.5"/>
+			<dep name="libnsl.so.1"/>
+			<dep name="libnsl.so.1(GLIBC_2.0)"/>
+			<dep name="libpopt.so.0"/>
+			<dep name="libreadline.so.5"/>
+			<dep name="libresolv.so.2"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>samba-client</name>
+	<summary>samba: Fix memory exhaustion DoS and many other issues.</summary>
+	<description>- Prevent potential crash in winbindd's credential cache
+  handling; [#184450].
+- Fix memory exhaustion DoS; CVE-2006-3403; [#190468].
+- Fix the munlock call, samba.org svn rev r16755 from
+  Volker.
+- Change the kerberos principal for LDAP authentication to
+  netbios-name$@realm from host/name@realm; [#184450].
+- Ensure to link all required libraries to libnss_wins;
+  [#184306].
+- Change log level of debug message to avaoid flodded nmbd
+  log; [#157623].
+- Add 'usershare allow guests = Yes' to the default config;
+  [#144787].
+- Add CHANGEPW kpasswd fallback to TCP; [#184945].
+- Honour 'sn' attribute for eDir; [#176799].
+- Adapt smbclient fix to smbtree to enable long share
+  names; [#175999].
+- Make smbclient -L use RPC to list shares, fall back to
+  RAP; [#171311].
+- Re-add in-forest domain trusts; [bso #3823].
+- Remove SO_SNDBUF and SO_RCVBUF from socket options
+  example; [#165723].
+- Add wbinfo --own-domain; [#167344].
+- Fix usability of pam_winbind on a Samba PDC; [bso #3800].
+- Remove intrusive affinity patches for winbindd.
+- Merge Volker's winbindd crash fix for half-opened
+  connections in winbindd_cm.c (sessionsetup succeeded but
+  tconX failed).
+- Optimize lookup of user's group memberships via
+  ExtendedDn LDAP control; [#168100].
+- Restart winbind if the hostname is modified by the DHCP
+  client; [#169260].
+- Prevent passwords beeing swapped to disc; [#174834].
+- Remove length limit from winbind cache cleanup function;
+  [#175737].
+- Fix NDS_ldapsam memory leak.
+- Only add password to linked list when necessary.
+- Don't try cached credentials when changing passwords.
+- Cleanup winbind linked list of credential caches.
+- Use the index objectCategory attribute in AD LDAP
+  requests.
+- Adjust AD time difference when validating tickets.
+- Add password change warning for passwords beeing too
+  young.
+- Remove experimental Heimdal KCM support.
+- Added "usershare allow guests" global parameter;
+  [#144787].
+- Return domain name in samrquerydominfo 5; [#172756].
+- Fix unauthorized access when logging in with pam_winbind;
+  [#156385].
+- Don't ever set O_SYNC on open unless "strict sync = yes";
+  [#165431].
+- Correct fix to exit from "net" with an inproper
+  configuration; [#163227], [#182749].
+</description>
+	<arch>x86_64</arch>
+	<version>3.0.22</version>
+	<release>13.18</release>
+	<filesize>8908983</filesize>
+	<installedsize>22873086</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>3.0.22</version>
+			<release>13.18</release>
+			<filename>samba-client-3.0.22-13.18.x86_64.rpm</filename>
+			<filesize>8908983</filesize>
+			<installedsize>22873086</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="smbclnt"/>
+			<dep name="smbfs"/>
+			<dep name="sambaxp-client" op="EQ" version="3.0.22" release="13.18"/>
+			<dep name="samba3-client" op="EQ" version="3.0.22" release="13.18"/>
+			<dep name="CP437.so()(64bit)"/>
+			<dep name="CP850.so()(64bit)"/>
+			<dep name="libnss_wins.so.2()(64bit)"/>
+			<dep name="samba-client" op="EQ" version="3.0.22" release="13.18"/>
+		</provides>
+		<requires>
+			<dep name="rpmlib(VersionedDependencies)" op="LE" version="3.0.3" release="1" pre="1"/>
+			<dep name="insserv" pre="1"/>
+			<dep name="sed" pre="1"/>
+			<dep name="fillup" pre="1"/>
+			<dep name="coreutils" pre="1"/>
+			<dep name="/bin/ln" pre="1"/>
+			<dep name="/bin/mkdir" pre="1"/>
+			<dep name="/bin/touch" pre="1"/>
+			<dep name="/sbin/chkconfig" pre="1"/>
+			<dep name="/sbin/ldconfig" pre="1"/>
+			<dep name="/usr/bin/dirname" pre="1"/>
+			<dep name="/usr/bin/strings" pre="1"/>
+			<dep name="cifs-mount"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/bin/bash"/>
+			<dep name="/bin/sh"/>
+			<dep name="/usr/bin/perl"/>
+			<dep name="libc.so.6()(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.3)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.4)(64bit)"/>
+			<dep name="libcom_err.so.2()(64bit)"/>
+			<dep name="libcrypt.so.1()(64bit)"/>
+			<dep name="libdl.so.2()(64bit)"/>
+			<dep name="libdl.so.2(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libgssapi_krb5.so.2()(64bit)"/>
+			<dep name="libgssapi_krb5.so.2(gssapi_krb5_2_MIT)(64bit)"/>
+			<dep name="libk5crypto.so.3()(64bit)"/>
+			<dep name="libk5crypto.so.3(k5crypto_3_MIT)(64bit)"/>
+			<dep name="libkrb5.so.3()(64bit)"/>
+			<dep name="libkrb5.so.3(krb5_3_MIT)(64bit)"/>
+			<dep name="libkrb5support.so.0()(64bit)"/>
+			<dep name="liblber-2.3.so.0()(64bit)"/>
+			<dep name="libldap-2.3.so.0()(64bit)"/>
+			<dep name="libncurses.so.5()(64bit)"/>
+			<dep name="libnsl.so.1()(64bit)"/>
+			<dep name="libnsl.so.1(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libpopt.so.0()(64bit)"/>
+			<dep name="libreadline.so.5()(64bit)"/>
+			<dep name="libresolv.so.2()(64bit)"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>samba-client-32bit</name>
+	<summary>samba: Fix memory exhaustion DoS and many other issues.</summary>
+	<description>- Prevent potential crash in winbindd's credential cache
+  handling; [#184450].
+- Fix memory exhaustion DoS; CVE-2006-3403; [#190468].
+- Fix the munlock call, samba.org svn rev r16755 from
+  Volker.
+- Change the kerberos principal for LDAP authentication to
+  netbios-name$@realm from host/name@realm; [#184450].
+- Ensure to link all required libraries to libnss_wins;
+  [#184306].
+- Change log level of debug message to avaoid flodded nmbd
+  log; [#157623].
+- Add 'usershare allow guests = Yes' to the default config;
+  [#144787].
+- Add CHANGEPW kpasswd fallback to TCP; [#184945].
+- Honour 'sn' attribute for eDir; [#176799].
+- Adapt smbclient fix to smbtree to enable long share
+  names; [#175999].
+- Make smbclient -L use RPC to list shares, fall back to
+  RAP; [#171311].
+- Re-add in-forest domain trusts; [bso #3823].
+- Remove SO_SNDBUF and SO_RCVBUF from socket options
+  example; [#165723].
+- Add wbinfo --own-domain; [#167344].
+- Fix usability of pam_winbind on a Samba PDC; [bso #3800].
+- Remove intrusive affinity patches for winbindd.
+- Merge Volker's winbindd crash fix for half-opened
+  connections in winbindd_cm.c (sessionsetup succeeded but
+  tconX failed).
+- Optimize lookup of user's group memberships via
+  ExtendedDn LDAP control; [#168100].
+- Restart winbind if the hostname is modified by the DHCP
+  client; [#169260].
+- Prevent passwords beeing swapped to disc; [#174834].
+- Remove length limit from winbind cache cleanup function;
+  [#175737].
+- Fix NDS_ldapsam memory leak.
+- Only add password to linked list when necessary.
+- Don't try cached credentials when changing passwords.
+- Cleanup winbind linked list of credential caches.
+- Use the index objectCategory attribute in AD LDAP
+  requests.
+- Adjust AD time difference when validating tickets.
+- Add password change warning for passwords beeing too
+  young.
+- Remove experimental Heimdal KCM support.
+- Added "usershare allow guests" global parameter;
+  [#144787].
+- Return domain name in samrquerydominfo 5; [#172756].
+- Fix unauthorized access when logging in with pam_winbind;
+  [#156385].
+- Don't ever set O_SYNC on open unless "strict sync = yes";
+  [#165431].
+- Correct fix to exit from "net" with an inproper
+  configuration; [#163227], [#182749].
+</description>
+	<arch>x86_64</arch>
+	<version>3.0.22</version>
+	<release>13.18</release>
+	<filesize>368092</filesize>
+	<installedsize>818548</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>3.0.22</version>
+			<release>13.18</release>
+			<filename>samba-client-32bit-3.0.22-13.18.x86_64.rpm</filename>
+			<filesize>368092</filesize>
+			<installedsize>818548</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="libnss_wins.so.2"/>
+			<dep name="samba-client-32bit" op="EQ" version="3.0.22" release="13.18"/>
+		</provides>
+		<requires>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libc.so.6(GLIBC_2.2)"/>
+			<dep name="libc.so.6(GLIBC_2.2.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)"/>
+			<dep name="libc.so.6(GLIBC_2.4)"/>
+			<dep name="libcom_err.so.2"/>
+			<dep name="libcrypt.so.1"/>
+			<dep name="libdl.so.2"/>
+			<dep name="libdl.so.2(GLIBC_2.0)"/>
+			<dep name="libdl.so.2(GLIBC_2.1)"/>
+			<dep name="libgssapi_krb5.so.2"/>
+			<dep name="libgssapi_krb5.so.2(gssapi_krb5_2_MIT)"/>
+			<dep name="libk5crypto.so.3"/>
+			<dep name="libk5crypto.so.3(k5crypto_3_MIT)"/>
+			<dep name="libkrb5.so.3"/>
+			<dep name="libkrb5.so.3(krb5_3_MIT)"/>
+			<dep name="libkrb5support.so.0"/>
+			<dep name="liblber-2.3.so.0"/>
+			<dep name="libldap-2.3.so.0"/>
+			<dep name="libnsl.so.1"/>
+			<dep name="libnsl.so.1(GLIBC_2.0)"/>
+			<dep name="libresolv.so.2"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>samba-client-64bit</name>
+	<summary>samba: Fix memory exhaustion DoS and many other issues.</summary>
+	<description>- Prevent potential crash in winbindd's credential cache
+  handling; [#184450].
+- Fix memory exhaustion DoS; CVE-2006-3403; [#190468].
+- Fix the munlock call, samba.org svn rev r16755 from
+  Volker.
+- Change the kerberos principal for LDAP authentication to
+  netbios-name$@realm from host/name@realm; [#184450].
+- Ensure to link all required libraries to libnss_wins;
+  [#184306].
+- Change log level of debug message to avaoid flodded nmbd
+  log; [#157623].
+- Add 'usershare allow guests = Yes' to the default config;
+  [#144787].
+- Add CHANGEPW kpasswd fallback to TCP; [#184945].
+- Honour 'sn' attribute for eDir; [#176799].
+- Adapt smbclient fix to smbtree to enable long share
+  names; [#175999].
+- Make smbclient -L use RPC to list shares, fall back to
+  RAP; [#171311].
+- Re-add in-forest domain trusts; [bso #3823].
+- Remove SO_SNDBUF and SO_RCVBUF from socket options
+  example; [#165723].
+- Add wbinfo --own-domain; [#167344].
+- Fix usability of pam_winbind on a Samba PDC; [bso #3800].
+- Remove intrusive affinity patches for winbindd.
+- Merge Volker's winbindd crash fix for half-opened
+  connections in winbindd_cm.c (sessionsetup succeeded but
+  tconX failed).
+- Optimize lookup of user's group memberships via
+  ExtendedDn LDAP control; [#168100].
+- Restart winbind if the hostname is modified by the DHCP
+  client; [#169260].
+- Prevent passwords beeing swapped to disc; [#174834].
+- Remove length limit from winbind cache cleanup function;
+  [#175737].
+- Fix NDS_ldapsam memory leak.
+- Only add password to linked list when necessary.
+- Don't try cached credentials when changing passwords.
+- Cleanup winbind linked list of credential caches.
+- Use the index objectCategory attribute in AD LDAP
+  requests.
+- Adjust AD time difference when validating tickets.
+- Add password change warning for passwords beeing too
+  young.
+- Remove experimental Heimdal KCM support.
+- Added "usershare allow guests" global parameter;
+  [#144787].
+- Return domain name in samrquerydominfo 5; [#172756].
+- Fix unauthorized access when logging in with pam_winbind;
+  [#156385].
+- Don't ever set O_SYNC on open unless "strict sync = yes";
+  [#165431].
+- Correct fix to exit from "net" with an inproper
+  configuration; [#163227], [#182749].
+</description>
+	<arch>ppc</arch>
+	<version>3.0.22</version>
+	<release>13.18</release>
+	<filesize>432815</filesize>
+	<installedsize>1278264</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>3.0.22</version>
+			<release>13.18</release>
+			<filename>samba-client-64bit-3.0.22-13.18.ppc.rpm</filename>
+			<filesize>432815</filesize>
+			<installedsize>1278264</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="CP437.so()(64bit)"/>
+			<dep name="CP850.so()(64bit)"/>
+			<dep name="libnss_wins.so.2()(64bit)"/>
+			<dep name="samba-client-64bit" op="EQ" version="3.0.22" release="13.18"/>
+		</provides>
+		<requires>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="libc.so.6()(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.3)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.4)(64bit)"/>
+			<dep name="libcom_err.so.2()(64bit)"/>
+			<dep name="libcrypt.so.1()(64bit)"/>
+			<dep name="libdl.so.2()(64bit)"/>
+			<dep name="libdl.so.2(GLIBC_2.3)(64bit)"/>
+			<dep name="libgssapi_krb5.so.2()(64bit)"/>
+			<dep name="libgssapi_krb5.so.2(gssapi_krb5_2_MIT)(64bit)"/>
+			<dep name="libk5crypto.so.3()(64bit)"/>
+			<dep name="libk5crypto.so.3(k5crypto_3_MIT)(64bit)"/>
+			<dep name="libkrb5.so.3()(64bit)"/>
+			<dep name="libkrb5.so.3(krb5_3_MIT)(64bit)"/>
+			<dep name="libkrb5support.so.0()(64bit)"/>
+			<dep name="liblber-2.3.so.0()(64bit)"/>
+			<dep name="libldap-2.3.so.0()(64bit)"/>
+			<dep name="libnsl.so.1()(64bit)"/>
+			<dep name="libnsl.so.1(GLIBC_2.3)(64bit)"/>
+			<dep name="libresolv.so.2()(64bit)"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>samba-winbind</name>
+	<summary>samba: Fix memory exhaustion DoS and many other issues.</summary>
+	<description>- Prevent potential crash in winbindd's credential cache
+  handling; [#184450].
+- Fix memory exhaustion DoS; CVE-2006-3403; [#190468].
+- Fix the munlock call, samba.org svn rev r16755 from
+  Volker.
+- Change the kerberos principal for LDAP authentication to
+  netbios-name$@realm from host/name@realm; [#184450].
+- Ensure to link all required libraries to libnss_wins;
+  [#184306].
+- Change log level of debug message to avaoid flodded nmbd
+  log; [#157623].
+- Add 'usershare allow guests = Yes' to the default config;
+  [#144787].
+- Add CHANGEPW kpasswd fallback to TCP; [#184945].
+- Honour 'sn' attribute for eDir; [#176799].
+- Adapt smbclient fix to smbtree to enable long share
+  names; [#175999].
+- Make smbclient -L use RPC to list shares, fall back to
+  RAP; [#171311].
+- Re-add in-forest domain trusts; [bso #3823].
+- Remove SO_SNDBUF and SO_RCVBUF from socket options
+  example; [#165723].
+- Add wbinfo --own-domain; [#167344].
+- Fix usability of pam_winbind on a Samba PDC; [bso #3800].
+- Remove intrusive affinity patches for winbindd.
+- Merge Volker's winbindd crash fix for half-opened
+  connections in winbindd_cm.c (sessionsetup succeeded but
+  tconX failed).
+- Optimize lookup of user's group memberships via
+  ExtendedDn LDAP control; [#168100].
+- Restart winbind if the hostname is modified by the DHCP
+  client; [#169260].
+- Prevent passwords beeing swapped to disc; [#174834].
+- Remove length limit from winbind cache cleanup function;
+  [#175737].
+- Fix NDS_ldapsam memory leak.
+- Only add password to linked list when necessary.
+- Don't try cached credentials when changing passwords.
+- Cleanup winbind linked list of credential caches.
+- Use the index objectCategory attribute in AD LDAP
+  requests.
+- Adjust AD time difference when validating tickets.
+- Add password change warning for passwords beeing too
+  young.
+- Remove experimental Heimdal KCM support.
+- Added "usershare allow guests" global parameter;
+  [#144787].
+- Return domain name in samrquerydominfo 5; [#172756].
+- Fix unauthorized access when logging in with pam_winbind;
+  [#156385].
+- Don't ever set O_SYNC on open unless "strict sync = yes";
+  [#165431].
+- Correct fix to exit from "net" with an inproper
+  configuration; [#163227], [#182749].
+</description>
+	<arch>i586</arch>
+	<version>3.0.22</version>
+	<release>13.18</release>
+	<filesize>1420640</filesize>
+	<installedsize>3818597</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>3.0.22</version>
+			<release>13.18</release>
+			<filename>samba-winbind-3.0.22-13.18.i586.rpm</filename>
+			<filesize>1420640</filesize>
+			<installedsize>3818597</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="samba3-winbind" op="EQ" version="3.0.22" release="13.18"/>
+			<dep name="samba-client:/usr/sbin/winbindd"/>
+			<dep name="ad.so"/>
+			<dep name="libnss_winbind.so.2"/>
+			<dep name="pam_winbind.so"/>
+			<dep name="rid.so"/>
+			<dep name="samba-winbind" op="EQ" version="3.0.22" release="13.18"/>
+		</provides>
+		<requires>
+			<dep name="rpmlib(VersionedDependencies)" op="LE" version="3.0.3" release="1" pre="1"/>
+			<dep name="samba-client" op="GE" version="3.0.22"/>
+			<dep name="/bin/ln" pre="1"/>
+			<dep name="/sbin/ldconfig" pre="1"/>
+			<dep name="/sbin/insserv" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/bin/bash"/>
+			<dep name="/bin/sh"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libc.so.6(GLIBC_2.2)"/>
+			<dep name="libc.so.6(GLIBC_2.2.3)"/>
+			<dep name="libc.so.6(GLIBC_2.2.4)"/>
+			<dep name="libc.so.6(GLIBC_2.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)"/>
+			<dep name="libc.so.6(GLIBC_2.4)"/>
+			<dep name="libcom_err.so.2"/>
+			<dep name="libcrypt.so.1"/>
+			<dep name="libdl.so.2"/>
+			<dep name="libdl.so.2(GLIBC_2.0)"/>
+			<dep name="libdl.so.2(GLIBC_2.1)"/>
+			<dep name="libgssapi_krb5.so.2"/>
+			<dep name="libgssapi_krb5.so.2(gssapi_krb5_2_MIT)"/>
+			<dep name="libiniparser.so.0"/>
+			<dep name="libk5crypto.so.3"/>
+			<dep name="libk5crypto.so.3(k5crypto_3_MIT)"/>
+			<dep name="libkrb5.so.3"/>
+			<dep name="libkrb5.so.3(krb5_3_MIT)"/>
+			<dep name="libkrb5support.so.0"/>
+			<dep name="liblber-2.3.so.0"/>
+			<dep name="libldap-2.3.so.0"/>
+			<dep name="libnscd.so.1"/>
+			<dep name="libnscd.so.1(LIBNSCD_1.0)"/>
+			<dep name="libnsl.so.1"/>
+			<dep name="libnsl.so.1(GLIBC_2.0)"/>
+			<dep name="libpam.so.0"/>
+			<dep name="libpam.so.0(LIBPAM_1.0)"/>
+			<dep name="libpopt.so.0"/>
+			<dep name="libresolv.so.2"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>samba-winbind</name>
+	<summary>samba: Fix memory exhaustion DoS and many other issues.</summary>
+	<description>- Prevent potential crash in winbindd's credential cache
+  handling; [#184450].
+- Fix memory exhaustion DoS; CVE-2006-3403; [#190468].
+- Fix the munlock call, samba.org svn rev r16755 from
+  Volker.
+- Change the kerberos principal for LDAP authentication to
+  netbios-name$@realm from host/name@realm; [#184450].
+- Ensure to link all required libraries to libnss_wins;
+  [#184306].
+- Change log level of debug message to avaoid flodded nmbd
+  log; [#157623].
+- Add 'usershare allow guests = Yes' to the default config;
+  [#144787].
+- Add CHANGEPW kpasswd fallback to TCP; [#184945].
+- Honour 'sn' attribute for eDir; [#176799].
+- Adapt smbclient fix to smbtree to enable long share
+  names; [#175999].
+- Make smbclient -L use RPC to list shares, fall back to
+  RAP; [#171311].
+- Re-add in-forest domain trusts; [bso #3823].
+- Remove SO_SNDBUF and SO_RCVBUF from socket options
+  example; [#165723].
+- Add wbinfo --own-domain; [#167344].
+- Fix usability of pam_winbind on a Samba PDC; [bso #3800].
+- Remove intrusive affinity patches for winbindd.
+- Merge Volker's winbindd crash fix for half-opened
+  connections in winbindd_cm.c (sessionsetup succeeded but
+  tconX failed).
+- Optimize lookup of user's group memberships via
+  ExtendedDn LDAP control; [#168100].
+- Restart winbind if the hostname is modified by the DHCP
+  client; [#169260].
+- Prevent passwords beeing swapped to disc; [#174834].
+- Remove length limit from winbind cache cleanup function;
+  [#175737].
+- Fix NDS_ldapsam memory leak.
+- Only add password to linked list when necessary.
+- Don't try cached credentials when changing passwords.
+- Cleanup winbind linked list of credential caches.
+- Use the index objectCategory attribute in AD LDAP
+  requests.
+- Adjust AD time difference when validating tickets.
+- Add password change warning for passwords beeing too
+  young.
+- Remove experimental Heimdal KCM support.
+- Added "usershare allow guests" global parameter;
+  [#144787].
+- Return domain name in samrquerydominfo 5; [#172756].
+- Fix unauthorized access when logging in with pam_winbind;
+  [#156385].
+- Don't ever set O_SYNC on open unless "strict sync = yes";
+  [#165431].
+- Correct fix to exit from "net" with an inproper
+  configuration; [#163227], [#182749].
+</description>
+	<arch>ppc</arch>
+	<version>3.0.22</version>
+	<release>13.18</release>
+	<filesize>1548306</filesize>
+	<installedsize>4567021</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>3.0.22</version>
+			<release>13.18</release>
+			<filename>samba-winbind-3.0.22-13.18.ppc.rpm</filename>
+			<filesize>1548306</filesize>
+			<installedsize>4567021</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="samba3-winbind" op="EQ" version="3.0.22" release="13.18"/>
+			<dep name="samba-client:/usr/sbin/winbindd"/>
+			<dep name="ad.so"/>
+			<dep name="libnss_winbind.so.2"/>
+			<dep name="pam_winbind.so"/>
+			<dep name="rid.so"/>
+			<dep name="samba-winbind" op="EQ" version="3.0.22" release="13.18"/>
+		</provides>
+		<requires>
+			<dep name="rpmlib(VersionedDependencies)" op="LE" version="3.0.3" release="1" pre="1"/>
+			<dep name="samba-client" op="GE" version="3.0.22"/>
+			<dep name="/bin/ln" pre="1"/>
+			<dep name="/sbin/ldconfig" pre="1"/>
+			<dep name="/sbin/insserv" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/bin/bash"/>
+			<dep name="/bin/sh"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libc.so.6(GLIBC_2.2)"/>
+			<dep name="libc.so.6(GLIBC_2.2.3)"/>
+			<dep name="libc.so.6(GLIBC_2.2.4)"/>
+			<dep name="libc.so.6(GLIBC_2.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)"/>
+			<dep name="libc.so.6(GLIBC_2.4)"/>
+			<dep name="libcom_err.so.2"/>
+			<dep name="libcrypt.so.1"/>
+			<dep name="libdl.so.2"/>
+			<dep name="libdl.so.2(GLIBC_2.0)"/>
+			<dep name="libdl.so.2(GLIBC_2.1)"/>
+			<dep name="libgssapi_krb5.so.2"/>
+			<dep name="libgssapi_krb5.so.2(gssapi_krb5_2_MIT)"/>
+			<dep name="libiniparser.so.0"/>
+			<dep name="libk5crypto.so.3"/>
+			<dep name="libk5crypto.so.3(k5crypto_3_MIT)"/>
+			<dep name="libkrb5.so.3"/>
+			<dep name="libkrb5.so.3(krb5_3_MIT)"/>
+			<dep name="libkrb5support.so.0"/>
+			<dep name="liblber-2.3.so.0"/>
+			<dep name="libldap-2.3.so.0"/>
+			<dep name="libnscd.so.1"/>
+			<dep name="libnscd.so.1(LIBNSCD_1.0)"/>
+			<dep name="libnsl.so.1"/>
+			<dep name="libnsl.so.1(GLIBC_2.0)"/>
+			<dep name="libpam.so.0"/>
+			<dep name="libpam.so.0(LIBPAM_1.0)"/>
+			<dep name="libpopt.so.0"/>
+			<dep name="libresolv.so.2"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>samba-winbind</name>
+	<summary>samba: Fix memory exhaustion DoS and many other issues.</summary>
+	<description>- Prevent potential crash in winbindd's credential cache
+  handling; [#184450].
+- Fix memory exhaustion DoS; CVE-2006-3403; [#190468].
+- Fix the munlock call, samba.org svn rev r16755 from
+  Volker.
+- Change the kerberos principal for LDAP authentication to
+  netbios-name$@realm from host/name@realm; [#184450].
+- Ensure to link all required libraries to libnss_wins;
+  [#184306].
+- Change log level of debug message to avaoid flodded nmbd
+  log; [#157623].
+- Add 'usershare allow guests = Yes' to the default config;
+  [#144787].
+- Add CHANGEPW kpasswd fallback to TCP; [#184945].
+- Honour 'sn' attribute for eDir; [#176799].
+- Adapt smbclient fix to smbtree to enable long share
+  names; [#175999].
+- Make smbclient -L use RPC to list shares, fall back to
+  RAP; [#171311].
+- Re-add in-forest domain trusts; [bso #3823].
+- Remove SO_SNDBUF and SO_RCVBUF from socket options
+  example; [#165723].
+- Add wbinfo --own-domain; [#167344].
+- Fix usability of pam_winbind on a Samba PDC; [bso #3800].
+- Remove intrusive affinity patches for winbindd.
+- Merge Volker's winbindd crash fix for half-opened
+  connections in winbindd_cm.c (sessionsetup succeeded but
+  tconX failed).
+- Optimize lookup of user's group memberships via
+  ExtendedDn LDAP control; [#168100].
+- Restart winbind if the hostname is modified by the DHCP
+  client; [#169260].
+- Prevent passwords beeing swapped to disc; [#174834].
+- Remove length limit from winbind cache cleanup function;
+  [#175737].
+- Fix NDS_ldapsam memory leak.
+- Only add password to linked list when necessary.
+- Don't try cached credentials when changing passwords.
+- Cleanup winbind linked list of credential caches.
+- Use the index objectCategory attribute in AD LDAP
+  requests.
+- Adjust AD time difference when validating tickets.
+- Add password change warning for passwords beeing too
+  young.
+- Remove experimental Heimdal KCM support.
+- Added "usershare allow guests" global parameter;
+  [#144787].
+- Return domain name in samrquerydominfo 5; [#172756].
+- Fix unauthorized access when logging in with pam_winbind;
+  [#156385].
+- Don't ever set O_SYNC on open unless "strict sync = yes";
+  [#165431].
+- Correct fix to exit from "net" with an inproper
+  configuration; [#163227], [#182749].
+</description>
+	<arch>x86_64</arch>
+	<version>3.0.22</version>
+	<release>13.18</release>
+	<filesize>1642860</filesize>
+	<installedsize>4153401</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>3.0.22</version>
+			<release>13.18</release>
+			<filename>samba-winbind-3.0.22-13.18.x86_64.rpm</filename>
+			<filesize>1642860</filesize>
+			<installedsize>4153401</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="samba3-winbind" op="EQ" version="3.0.22" release="13.18"/>
+			<dep name="samba-client:/usr/sbin/winbindd"/>
+			<dep name="ad.so()(64bit)"/>
+			<dep name="libnss_winbind.so.2()(64bit)"/>
+			<dep name="pam_winbind.so()(64bit)"/>
+			<dep name="rid.so()(64bit)"/>
+			<dep name="samba-winbind" op="EQ" version="3.0.22" release="13.18"/>
+		</provides>
+		<requires>
+			<dep name="rpmlib(VersionedDependencies)" op="LE" version="3.0.3" release="1" pre="1"/>
+			<dep name="samba-client" op="GE" version="3.0.22"/>
+			<dep name="/bin/ln" pre="1"/>
+			<dep name="/sbin/ldconfig" pre="1"/>
+			<dep name="/sbin/insserv" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/bin/bash"/>
+			<dep name="/bin/sh"/>
+			<dep name="libc.so.6()(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.3)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.4)(64bit)"/>
+			<dep name="libcom_err.so.2()(64bit)"/>
+			<dep name="libcrypt.so.1()(64bit)"/>
+			<dep name="libdl.so.2()(64bit)"/>
+			<dep name="libdl.so.2(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libgssapi_krb5.so.2()(64bit)"/>
+			<dep name="libgssapi_krb5.so.2(gssapi_krb5_2_MIT)(64bit)"/>
+			<dep name="libiniparser.so.0()(64bit)"/>
+			<dep name="libk5crypto.so.3()(64bit)"/>
+			<dep name="libk5crypto.so.3(k5crypto_3_MIT)(64bit)"/>
+			<dep name="libkrb5.so.3()(64bit)"/>
+			<dep name="libkrb5.so.3(krb5_3_MIT)(64bit)"/>
+			<dep name="libkrb5support.so.0()(64bit)"/>
+			<dep name="liblber-2.3.so.0()(64bit)"/>
+			<dep name="libldap-2.3.so.0()(64bit)"/>
+			<dep name="libnscd.so.1()(64bit)"/>
+			<dep name="libnscd.so.1(LIBNSCD_1.0)(64bit)"/>
+			<dep name="libnsl.so.1()(64bit)"/>
+			<dep name="libnsl.so.1(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libpam.so.0()(64bit)"/>
+			<dep name="libpam.so.0(LIBPAM_1.0)(64bit)"/>
+			<dep name="libpopt.so.0()(64bit)"/>
+			<dep name="libresolv.so.2()(64bit)"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>samba-winbind-32bit</name>
+	<summary>samba: Fix memory exhaustion DoS and many other issues.</summary>
+	<description>- Prevent potential crash in winbindd's credential cache
+  handling; [#184450].
+- Fix memory exhaustion DoS; CVE-2006-3403; [#190468].
+- Fix the munlock call, samba.org svn rev r16755 from
+  Volker.
+- Change the kerberos principal for LDAP authentication to
+  netbios-name$@realm from host/name@realm; [#184450].
+- Ensure to link all required libraries to libnss_wins;
+  [#184306].
+- Change log level of debug message to avaoid flodded nmbd
+  log; [#157623].
+- Add 'usershare allow guests = Yes' to the default config;
+  [#144787].
+- Add CHANGEPW kpasswd fallback to TCP; [#184945].
+- Honour 'sn' attribute for eDir; [#176799].
+- Adapt smbclient fix to smbtree to enable long share
+  names; [#175999].
+- Make smbclient -L use RPC to list shares, fall back to
+  RAP; [#171311].
+- Re-add in-forest domain trusts; [bso #3823].
+- Remove SO_SNDBUF and SO_RCVBUF from socket options
+  example; [#165723].
+- Add wbinfo --own-domain; [#167344].
+- Fix usability of pam_winbind on a Samba PDC; [bso #3800].
+- Remove intrusive affinity patches for winbindd.
+- Merge Volker's winbindd crash fix for half-opened
+  connections in winbindd_cm.c (sessionsetup succeeded but
+  tconX failed).
+- Optimize lookup of user's group memberships via
+  ExtendedDn LDAP control; [#168100].
+- Restart winbind if the hostname is modified by the DHCP
+  client; [#169260].
+- Prevent passwords beeing swapped to disc; [#174834].
+- Remove length limit from winbind cache cleanup function;
+  [#175737].
+- Fix NDS_ldapsam memory leak.
+- Only add password to linked list when necessary.
+- Don't try cached credentials when changing passwords.
+- Cleanup winbind linked list of credential caches.
+- Use the index objectCategory attribute in AD LDAP
+  requests.
+- Adjust AD time difference when validating tickets.
+- Add password change warning for passwords beeing too
+  young.
+- Remove experimental Heimdal KCM support.
+- Added "usershare allow guests" global parameter;
+  [#144787].
+- Return domain name in samrquerydominfo 5; [#172756].
+- Fix unauthorized access when logging in with pam_winbind;
+  [#156385].
+- Don't ever set O_SYNC on open unless "strict sync = yes";
+  [#165431].
+- Correct fix to exit from "net" with an inproper
+  configuration; [#163227], [#182749].
+</description>
+	<arch>x86_64</arch>
+	<version>3.0.22</version>
+	<release>13.18</release>
+	<filesize>72037</filesize>
+	<installedsize>41140</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>3.0.22</version>
+			<release>13.18</release>
+			<filename>samba-winbind-32bit-3.0.22-13.18.x86_64.rpm</filename>
+			<filesize>72037</filesize>
+			<installedsize>41140</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="libnss_winbind.so.2"/>
+			<dep name="pam_winbind.so"/>
+			<dep name="samba-winbind-32bit" op="EQ" version="3.0.22" release="13.18"/>
+		</provides>
+		<requires>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libc.so.6(GLIBC_2.2)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)"/>
+			<dep name="libc.so.6(GLIBC_2.4)"/>
+			<dep name="libiniparser.so.0"/>
+			<dep name="libpam.so.0"/>
+			<dep name="libpam.so.0(LIBPAM_1.0)"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>samba-winbind-64bit</name>
+	<summary>samba: Fix memory exhaustion DoS and many other issues.</summary>
+	<description>- Prevent potential crash in winbindd's credential cache
+  handling; [#184450].
+- Fix memory exhaustion DoS; CVE-2006-3403; [#190468].
+- Fix the munlock call, samba.org svn rev r16755 from
+  Volker.
+- Change the kerberos principal for LDAP authentication to
+  netbios-name$@realm from host/name@realm; [#184450].
+- Ensure to link all required libraries to libnss_wins;
+  [#184306].
+- Change log level of debug message to avaoid flodded nmbd
+  log; [#157623].
+- Add 'usershare allow guests = Yes' to the default config;
+  [#144787].
+- Add CHANGEPW kpasswd fallback to TCP; [#184945].
+- Honour 'sn' attribute for eDir; [#176799].
+- Adapt smbclient fix to smbtree to enable long share
+  names; [#175999].
+- Make smbclient -L use RPC to list shares, fall back to
+  RAP; [#171311].
+- Re-add in-forest domain trusts; [bso #3823].
+- Remove SO_SNDBUF and SO_RCVBUF from socket options
+  example; [#165723].
+- Add wbinfo --own-domain; [#167344].
+- Fix usability of pam_winbind on a Samba PDC; [bso #3800].
+- Remove intrusive affinity patches for winbindd.
+- Merge Volker's winbindd crash fix for half-opened
+  connections in winbindd_cm.c (sessionsetup succeeded but
+  tconX failed).
+- Optimize lookup of user's group memberships via
+  ExtendedDn LDAP control; [#168100].
+- Restart winbind if the hostname is modified by the DHCP
+  client; [#169260].
+- Prevent passwords beeing swapped to disc; [#174834].
+- Remove length limit from winbind cache cleanup function;
+  [#175737].
+- Fix NDS_ldapsam memory leak.
+- Only add password to linked list when necessary.
+- Don't try cached credentials when changing passwords.
+- Cleanup winbind linked list of credential caches.
+- Use the index objectCategory attribute in AD LDAP
+  requests.
+- Adjust AD time difference when validating tickets.
+- Add password change warning for passwords beeing too
+  young.
+- Remove experimental Heimdal KCM support.
+- Added "usershare allow guests" global parameter;
+  [#144787].
+- Return domain name in samrquerydominfo 5; [#172756].
+- Fix unauthorized access when logging in with pam_winbind;
+  [#156385].
+- Don't ever set O_SYNC on open unless "strict sync = yes";
+  [#165431].
+- Correct fix to exit from "net" with an inproper
+  configuration; [#163227], [#182749].
+</description>
+	<arch>ppc</arch>
+	<version>3.0.22</version>
+	<release>13.18</release>
+	<filesize>86701</filesize>
+	<installedsize>109320</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>3.0.22</version>
+			<release>13.18</release>
+			<filename>samba-winbind-64bit-3.0.22-13.18.ppc.rpm</filename>
+			<filesize>86701</filesize>
+			<installedsize>109320</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="ad.so()(64bit)"/>
+			<dep name="libnss_winbind.so.2()(64bit)"/>
+			<dep name="pam_winbind.so()(64bit)"/>
+			<dep name="rid.so()(64bit)"/>
+			<dep name="samba-winbind-64bit" op="EQ" version="3.0.22" release="13.18"/>
+		</provides>
+		<requires>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="libc.so.6()(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.3)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.4)(64bit)"/>
+			<dep name="libiniparser.so.0()(64bit)"/>
+			<dep name="libpam.so.0()(64bit)"/>
+			<dep name="libpam.so.0(LIBPAM_1.0)(64bit)"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+</subchannel></channel>

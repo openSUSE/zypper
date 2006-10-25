@@ -1,0 +1,202 @@
+<channel><subchannel>                                                  
+
+<patch>
+	<name>xv</name>
+	<arch>noarch</arch>
+	<version>1448</version>
+	<release>0</release>
+	<requires>
+		<dep kind="atom" name="xv" epoch="0" version="3.10a" release="1091.2" op="EQ"/>
+	</requires>
+</patch>
+<atom>
+	<name>xv</name>
+	<arch>i586</arch>
+	<version>3.10a</version>
+	<release>1091.2</release>
+	<freshens>
+		<dep kind="package" name="xv"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="xv" epoch="0" version="3.10a" release="1091.2" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>xv</name>
+	<arch>ppc</arch>
+	<version>3.10a</version>
+	<release>1091.2</release>
+	<freshens>
+		<dep kind="package" name="xv"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="xv" epoch="0" version="3.10a" release="1091.2" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>xv</name>
+	<arch>x86_64</arch>
+	<version>3.10a</version>
+	<release>1091.2</release>
+	<freshens>
+		<dep kind="package" name="xv"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="xv" epoch="0" version="3.10a" release="1091.2" op="GE"/>
+	</requires>
+</atom>
+<package>
+	<name>xv</name>
+	<summary>XV can not grab in KDE</summary>
+	<description>XV can not grab a window in KDE if numeric keypad is active 
+which is the default.
+</description>
+	<arch>i586</arch>
+	<version>3.10a</version>
+	<release>1091.2</release>
+	<filesize>1246170</filesize>
+	<installedsize>5456752</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>3.10a</version>
+			<release>1091.2</release>
+			<filename>xv-3.10a-1091.2.i586.rpm</filename>
+			<filesize>1246170</filesize>
+			<installedsize>5456752</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="xv300"/>
+			<dep name="xv" op="EQ" version="3.10a" release="1091.2"/>
+		</provides>
+		<requires>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/bin/sh"/>
+			<dep name="libX11.so.6"/>
+			<dep name="libXext.so.6"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1)"/>
+			<dep name="libc.so.6(GLIBC_2.2)"/>
+			<dep name="libc.so.6(GLIBC_2.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)"/>
+			<dep name="libc.so.6(GLIBC_2.4)"/>
+			<dep name="libjpeg.so.62"/>
+			<dep name="libm.so.6"/>
+			<dep name="libm.so.6(GLIBC_2.0)"/>
+			<dep name="libpng.so.3"/>
+			<dep name="libtiff.so.3"/>
+			<dep name="libz.so.1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>xv</name>
+	<summary>XV can not grab in KDE</summary>
+	<description>XV can not grab a window in KDE if numeric keypad is active 
+which is the default.
+</description>
+	<arch>ppc</arch>
+	<version>3.10a</version>
+	<release>1091.2</release>
+	<filesize>1283310</filesize>
+	<installedsize>5486428</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>3.10a</version>
+			<release>1091.2</release>
+			<filename>xv-3.10a-1091.2.ppc.rpm</filename>
+			<filesize>1283310</filesize>
+			<installedsize>5486428</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="xv300"/>
+			<dep name="xv" op="EQ" version="3.10a" release="1091.2"/>
+		</provides>
+		<requires>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/bin/sh"/>
+			<dep name="libX11.so.6"/>
+			<dep name="libXext.so.6"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1)"/>
+			<dep name="libc.so.6(GLIBC_2.2)"/>
+			<dep name="libc.so.6(GLIBC_2.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)"/>
+			<dep name="libc.so.6(GLIBC_2.4)"/>
+			<dep name="libjpeg.so.62"/>
+			<dep name="libm.so.6"/>
+			<dep name="libm.so.6(GLIBC_2.0)"/>
+			<dep name="libpng.so.3"/>
+			<dep name="libtiff.so.3"/>
+			<dep name="libz.so.1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>xv</name>
+	<summary>XV can not grab in KDE</summary>
+	<description>XV can not grab a window in KDE if numeric keypad is active 
+which is the default.
+</description>
+	<arch>x86_64</arch>
+	<version>3.10a</version>
+	<release>1091.2</release>
+	<filesize>1299757</filesize>
+	<installedsize>5471108</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>3.10a</version>
+			<release>1091.2</release>
+			<filename>xv-3.10a-1091.2.x86_64.rpm</filename>
+			<filesize>1299757</filesize>
+			<installedsize>5471108</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="xv300"/>
+			<dep name="xv" op="EQ" version="3.10a" release="1091.2"/>
+		</provides>
+		<requires>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/bin/sh"/>
+			<dep name="libX11.so.6()(64bit)"/>
+			<dep name="libXext.so.6()(64bit)"/>
+			<dep name="libc.so.6()(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.3)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.4)(64bit)"/>
+			<dep name="libjpeg.so.62()(64bit)"/>
+			<dep name="libm.so.6()(64bit)"/>
+			<dep name="libm.so.6(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libpng.so.3()(64bit)"/>
+			<dep name="libtiff.so.3()(64bit)"/>
+			<dep name="libz.so.1()(64bit)"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+</subchannel></channel>

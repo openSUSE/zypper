@@ -1,0 +1,660 @@
+<channel><subchannel>                                                  
+
+<patch>
+	<name>libtiff</name>
+	<arch>noarch</arch>
+	<version>1907</version>
+	<release>0</release>
+	<requires>
+		<dep kind="atom" name="libtiff" epoch="0" version="3.8.2" release="5.9" op="EQ"/>
+		<dep kind="atom" name="libtiff-32bit" epoch="0" version="3.8.2" release="5.9" op="EQ"/>
+		<dep kind="atom" name="libtiff-64bit" epoch="0" version="3.8.2" release="5.9" op="EQ"/>
+		<dep kind="atom" name="libtiff-devel" epoch="0" version="3.8.2" release="5.9" op="EQ"/>
+		<dep kind="atom" name="libtiff-devel-32bit" epoch="0" version="3.8.2" release="5.9" op="EQ"/>
+		<dep kind="atom" name="libtiff-devel-64bit" epoch="0" version="3.8.2" release="5.9" op="EQ"/>
+	</requires>
+</patch>
+<atom>
+	<name>libtiff</name>
+	<arch>i586</arch>
+	<version>3.8.2</version>
+	<release>5.9</release>
+	<freshens>
+		<dep kind="package" name="libtiff"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="libtiff" epoch="0" version="3.8.2" release="5.9" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>libtiff</name>
+	<arch>ppc</arch>
+	<version>3.8.2</version>
+	<release>5.9</release>
+	<freshens>
+		<dep kind="package" name="libtiff"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="libtiff" epoch="0" version="3.8.2" release="5.9" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>libtiff</name>
+	<arch>x86_64</arch>
+	<version>3.8.2</version>
+	<release>5.9</release>
+	<freshens>
+		<dep kind="package" name="libtiff"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="libtiff" epoch="0" version="3.8.2" release="5.9" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>libtiff-32bit</name>
+	<arch>x86_64</arch>
+	<version>3.8.2</version>
+	<release>5.9</release>
+	<freshens>
+		<dep kind="package" name="libtiff-32bit"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="libtiff-32bit" epoch="0" version="3.8.2" release="5.9" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>libtiff-64bit</name>
+	<arch>ppc</arch>
+	<version>3.8.2</version>
+	<release>5.9</release>
+	<freshens>
+		<dep kind="package" name="libtiff-64bit"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="libtiff-64bit" epoch="0" version="3.8.2" release="5.9" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>libtiff-devel</name>
+	<arch>i586</arch>
+	<version>3.8.2</version>
+	<release>5.9</release>
+	<freshens>
+		<dep kind="package" name="libtiff-devel"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="libtiff-devel" epoch="0" version="3.8.2" release="5.9" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>libtiff-devel</name>
+	<arch>ppc</arch>
+	<version>3.8.2</version>
+	<release>5.9</release>
+	<freshens>
+		<dep kind="package" name="libtiff-devel"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="libtiff-devel" epoch="0" version="3.8.2" release="5.9" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>libtiff-devel</name>
+	<arch>x86_64</arch>
+	<version>3.8.2</version>
+	<release>5.9</release>
+	<freshens>
+		<dep kind="package" name="libtiff-devel"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="libtiff-devel" epoch="0" version="3.8.2" release="5.9" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>libtiff-devel-32bit</name>
+	<arch>x86_64</arch>
+	<version>3.8.2</version>
+	<release>5.9</release>
+	<freshens>
+		<dep kind="package" name="libtiff-devel-32bit"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="libtiff-devel-32bit" epoch="0" version="3.8.2" release="5.9" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>libtiff-devel-64bit</name>
+	<arch>ppc</arch>
+	<version>3.8.2</version>
+	<release>5.9</release>
+	<freshens>
+		<dep kind="package" name="libtiff-devel-64bit"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="libtiff-devel-64bit" epoch="0" version="3.8.2" release="5.9" op="GE"/>
+	</requires>
+</atom>
+<package>
+	<name>libtiff</name>
+	<summary>libtiff: Various remotely exploitable bugs fixed</summary>
+	<description>This update of libtiff is the result of a source-code audit
+done by Tavis Ormandy. It fixes various bugs that can lead
+to denial-of-service conditions as well as to remote code
+execution while parsing a tiff image. (CVE-2006-3459,
+CVE-2006-3460, CVE-2006-3461, CVE-2006-3462, CVE-2006-3463,
+CVE-2006-3464, CVE-2006-3465)
+
+Please restart your applications.
+</description>
+	<arch>i586</arch>
+	<version>3.8.2</version>
+	<release>5.9</release>
+	<filesize>121174</filesize>
+	<installedsize>352490</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>3.8.2</version>
+			<release>5.9</release>
+			<filename>libtiff-3.8.2-5.9.i586.rpm</filename>
+			<filesize>121174</filesize>
+			<installedsize>352490</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="libtiff.so.3"/>
+			<dep name="libtiffxx.so.3"/>
+			<dep name="libtiff" op="EQ" version="3.8.2" release="5.9"/>
+		</provides>
+		<requires>
+			<dep name="/sbin/ldconfig" pre="1"/>
+			<dep name="/sbin/ldconfig" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libc.so.6(GLIBC_2.2)"/>
+			<dep name="libc.so.6(GLIBC_2.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)"/>
+			<dep name="libc.so.6(GLIBC_2.4)"/>
+			<dep name="libgcc_s.so.1"/>
+			<dep name="libjpeg.so.62"/>
+			<dep name="libm.so.6"/>
+			<dep name="libm.so.6(GLIBC_2.0)"/>
+			<dep name="libstdc++.so.6"/>
+			<dep name="libstdc++.so.6(CXXABI_1.3)"/>
+			<dep name="libstdc++.so.6(GLIBCXX_3.4)"/>
+			<dep name="libtiff.so.3"/>
+			<dep name="libz.so.1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>libtiff</name>
+	<summary>libtiff: Various remotely exploitable bugs fixed</summary>
+	<description>This update of libtiff is the result of a source-code audit
+done by Tavis Ormandy. It fixes various bugs that can lead
+to denial-of-service conditions as well as to remote code
+execution while parsing a tiff image. (CVE-2006-3459,
+CVE-2006-3460, CVE-2006-3461, CVE-2006-3462, CVE-2006-3463,
+CVE-2006-3464, CVE-2006-3465)
+
+Please restart your applications.
+</description>
+	<arch>ppc</arch>
+	<version>3.8.2</version>
+	<release>5.9</release>
+	<filesize>133090</filesize>
+	<installedsize>419978</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>3.8.2</version>
+			<release>5.9</release>
+			<filename>libtiff-3.8.2-5.9.ppc.rpm</filename>
+			<filesize>133090</filesize>
+			<installedsize>419978</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="libtiff.so.3"/>
+			<dep name="libtiffxx.so.3"/>
+			<dep name="libtiff" op="EQ" version="3.8.2" release="5.9"/>
+		</provides>
+		<requires>
+			<dep name="/sbin/ldconfig" pre="1"/>
+			<dep name="/sbin/ldconfig" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libc.so.6(GLIBC_2.2)"/>
+			<dep name="libc.so.6(GLIBC_2.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)"/>
+			<dep name="libc.so.6(GLIBC_2.4)"/>
+			<dep name="libgcc_s.so.1"/>
+			<dep name="libjpeg.so.62"/>
+			<dep name="libm.so.6"/>
+			<dep name="libm.so.6(GLIBC_2.0)"/>
+			<dep name="libstdc++.so.6"/>
+			<dep name="libstdc++.so.6(CXXABI_1.3)"/>
+			<dep name="libstdc++.so.6(GLIBCXX_3.4)"/>
+			<dep name="libtiff.so.3"/>
+			<dep name="libz.so.1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>libtiff</name>
+	<summary>libtiff: Various remotely exploitable bugs fixed</summary>
+	<description>This update of libtiff is the result of a source-code audit
+done by Tavis Ormandy. It fixes various bugs that can lead
+to denial-of-service conditions as well as to remote code
+execution while parsing a tiff image. (CVE-2006-3459,
+CVE-2006-3460, CVE-2006-3461, CVE-2006-3462, CVE-2006-3463,
+CVE-2006-3464, CVE-2006-3465)
+
+Please restart your applications.
+</description>
+	<arch>x86_64</arch>
+	<version>3.8.2</version>
+	<release>5.9</release>
+	<filesize>130758</filesize>
+	<installedsize>378242</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>3.8.2</version>
+			<release>5.9</release>
+			<filename>libtiff-3.8.2-5.9.x86_64.rpm</filename>
+			<filesize>130758</filesize>
+			<installedsize>378242</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="libtiff.so.3()(64bit)"/>
+			<dep name="libtiffxx.so.3()(64bit)"/>
+			<dep name="libtiff" op="EQ" version="3.8.2" release="5.9"/>
+		</provides>
+		<requires>
+			<dep name="/sbin/ldconfig" pre="1"/>
+			<dep name="/sbin/ldconfig" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="libc.so.6()(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.3)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.4)(64bit)"/>
+			<dep name="libgcc_s.so.1()(64bit)"/>
+			<dep name="libjpeg.so.62()(64bit)"/>
+			<dep name="libm.so.6()(64bit)"/>
+			<dep name="libm.so.6(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libstdc++.so.6()(64bit)"/>
+			<dep name="libstdc++.so.6(CXXABI_1.3)(64bit)"/>
+			<dep name="libstdc++.so.6(GLIBCXX_3.4)(64bit)"/>
+			<dep name="libtiff.so.3()(64bit)"/>
+			<dep name="libz.so.1()(64bit)"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>libtiff-32bit</name>
+	<summary>libtiff: Various remotely exploitable bugs fixed</summary>
+	<description>This update of libtiff is the result of a source-code audit
+done by Tavis Ormandy. It fixes various bugs that can lead
+to denial-of-service conditions as well as to remote code
+execution while parsing a tiff image. (CVE-2006-3459,
+CVE-2006-3460, CVE-2006-3461, CVE-2006-3462, CVE-2006-3463,
+CVE-2006-3464, CVE-2006-3465)
+
+Please restart your applications.
+</description>
+	<arch>x86_64</arch>
+	<version>3.8.2</version>
+	<release>5.9</release>
+	<filesize>118922</filesize>
+	<installedsize>348872</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>3.8.2</version>
+			<release>5.9</release>
+			<filename>libtiff-32bit-3.8.2-5.9.x86_64.rpm</filename>
+			<filesize>118922</filesize>
+			<installedsize>348872</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="libtiff.so.3"/>
+			<dep name="libtiffxx.so.3"/>
+			<dep name="libtiff-32bit" op="EQ" version="3.8.2" release="5.9"/>
+		</provides>
+		<requires>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libc.so.6(GLIBC_2.2)"/>
+			<dep name="libc.so.6(GLIBC_2.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)"/>
+			<dep name="libc.so.6(GLIBC_2.4)"/>
+			<dep name="libgcc_s.so.1"/>
+			<dep name="libjpeg.so.62"/>
+			<dep name="libm.so.6"/>
+			<dep name="libm.so.6(GLIBC_2.0)"/>
+			<dep name="libstdc++.so.6"/>
+			<dep name="libstdc++.so.6(CXXABI_1.3)"/>
+			<dep name="libstdc++.so.6(GLIBCXX_3.4)"/>
+			<dep name="libtiff.so.3"/>
+			<dep name="libz.so.1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>libtiff-64bit</name>
+	<summary>libtiff: Various remotely exploitable bugs fixed</summary>
+	<description>This update of libtiff is the result of a source-code audit
+done by Tavis Ormandy. It fixes various bugs that can lead
+to denial-of-service conditions as well as to remote code
+execution while parsing a tiff image. (CVE-2006-3459,
+CVE-2006-3460, CVE-2006-3461, CVE-2006-3462, CVE-2006-3463,
+CVE-2006-3464, CVE-2006-3465)
+
+Please restart your applications.
+</description>
+	<arch>ppc</arch>
+	<version>3.8.2</version>
+	<release>5.9</release>
+	<filesize>133677</filesize>
+	<installedsize>465416</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>3.8.2</version>
+			<release>5.9</release>
+			<filename>libtiff-64bit-3.8.2-5.9.ppc.rpm</filename>
+			<filesize>133677</filesize>
+			<installedsize>465416</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="libtiff.so.3()(64bit)"/>
+			<dep name="libtiffxx.so.3()(64bit)"/>
+			<dep name="libtiff-64bit" op="EQ" version="3.8.2" release="5.9"/>
+		</provides>
+		<requires>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="libc.so.6()(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.3)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.4)(64bit)"/>
+			<dep name="libgcc_s.so.1()(64bit)"/>
+			<dep name="libjpeg.so.62()(64bit)"/>
+			<dep name="libm.so.6()(64bit)"/>
+			<dep name="libm.so.6(GLIBC_2.3)(64bit)"/>
+			<dep name="libstdc++.so.6()(64bit)"/>
+			<dep name="libstdc++.so.6(CXXABI_1.3)(64bit)"/>
+			<dep name="libstdc++.so.6(GLIBCXX_3.4)(64bit)"/>
+			<dep name="libtiff.so.3()(64bit)"/>
+			<dep name="libz.so.1()(64bit)"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>libtiff-devel</name>
+	<summary>libtiff: Various remotely exploitable bugs fixed</summary>
+	<description>This update of libtiff is the result of a source-code audit
+done by Tavis Ormandy. It fixes various bugs that can lead
+to denial-of-service conditions as well as to remote code
+execution while parsing a tiff image. (CVE-2006-3459,
+CVE-2006-3460, CVE-2006-3461, CVE-2006-3462, CVE-2006-3463,
+CVE-2006-3464, CVE-2006-3465)
+
+Please restart your applications.
+</description>
+	<arch>i586</arch>
+	<version>3.8.2</version>
+	<release>5.9</release>
+	<filesize>237731</filesize>
+	<installedsize>554495</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>3.8.2</version>
+			<release>5.9</release>
+			<filename>libtiff-devel-3.8.2-5.9.i586.rpm</filename>
+			<filesize>237731</filesize>
+			<installedsize>554495</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="libtiff-devel" op="EQ" version="3.8.2" release="5.9"/>
+		</provides>
+		<requires>
+			<dep name="libtiff" op="EQ" version="3.8.2"/>
+			<dep name="libjpeg-devel"/>
+			<dep name="zlib-devel"/>
+			<dep name="libstdc++-devel"/>
+			<dep name="glibc-devel"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>libtiff-devel</name>
+	<summary>libtiff: Various remotely exploitable bugs fixed</summary>
+	<description>This update of libtiff is the result of a source-code audit
+done by Tavis Ormandy. It fixes various bugs that can lead
+to denial-of-service conditions as well as to remote code
+execution while parsing a tiff image. (CVE-2006-3459,
+CVE-2006-3460, CVE-2006-3461, CVE-2006-3462, CVE-2006-3463,
+CVE-2006-3464, CVE-2006-3465)
+
+Please restart your applications.
+</description>
+	<arch>ppc</arch>
+	<version>3.8.2</version>
+	<release>5.9</release>
+	<filesize>257936</filesize>
+	<installedsize>628818</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>3.8.2</version>
+			<release>5.9</release>
+			<filename>libtiff-devel-3.8.2-5.9.ppc.rpm</filename>
+			<filesize>257936</filesize>
+			<installedsize>628818</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="libtiff-devel" op="EQ" version="3.8.2" release="5.9"/>
+		</provides>
+		<requires>
+			<dep name="libtiff" op="EQ" version="3.8.2"/>
+			<dep name="libjpeg-devel"/>
+			<dep name="zlib-devel"/>
+			<dep name="libstdc++-devel"/>
+			<dep name="glibc-devel"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>libtiff-devel</name>
+	<summary>libtiff: Various remotely exploitable bugs fixed</summary>
+	<description>This update of libtiff is the result of a source-code audit
+done by Tavis Ormandy. It fixes various bugs that can lead
+to denial-of-service conditions as well as to remote code
+execution while parsing a tiff image. (CVE-2006-3459,
+CVE-2006-3460, CVE-2006-3461, CVE-2006-3462, CVE-2006-3463,
+CVE-2006-3464, CVE-2006-3465)
+
+Please restart your applications.
+</description>
+	<arch>x86_64</arch>
+	<version>3.8.2</version>
+	<release>5.9</release>
+	<filesize>247511</filesize>
+	<installedsize>688335</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>3.8.2</version>
+			<release>5.9</release>
+			<filename>libtiff-devel-3.8.2-5.9.x86_64.rpm</filename>
+			<filesize>247511</filesize>
+			<installedsize>688335</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="libtiff-devel" op="EQ" version="3.8.2" release="5.9"/>
+		</provides>
+		<requires>
+			<dep name="libtiff" op="EQ" version="3.8.2"/>
+			<dep name="libjpeg-devel"/>
+			<dep name="zlib-devel"/>
+			<dep name="libstdc++-devel"/>
+			<dep name="glibc-devel"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>libtiff-devel-32bit</name>
+	<summary>libtiff: Various remotely exploitable bugs fixed</summary>
+	<description>This update of libtiff is the result of a source-code audit
+done by Tavis Ormandy. It fixes various bugs that can lead
+to denial-of-service conditions as well as to remote code
+execution while parsing a tiff image. (CVE-2006-3459,
+CVE-2006-3460, CVE-2006-3461, CVE-2006-3462, CVE-2006-3463,
+CVE-2006-3464, CVE-2006-3465)
+
+Please restart your applications.
+</description>
+	<arch>x86_64</arch>
+	<version>3.8.2</version>
+	<release>5.9</release>
+	<filesize>125624</filesize>
+	<installedsize>418162</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>3.8.2</version>
+			<release>5.9</release>
+			<filename>libtiff-devel-32bit-3.8.2-5.9.x86_64.rpm</filename>
+			<filesize>125624</filesize>
+			<installedsize>418162</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="libtiff-devel-32bit" op="EQ" version="3.8.2" release="5.9"/>
+		</provides>
+		<requires>
+			<dep name="libtiff-devel" op="EQ" version="3.8.2"/>
+			<dep name="libtiff-32bit" op="EQ" version="3.8.2"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>libtiff-devel-64bit</name>
+	<summary>libtiff: Various remotely exploitable bugs fixed</summary>
+	<description>This update of libtiff is the result of a source-code audit
+done by Tavis Ormandy. It fixes various bugs that can lead
+to denial-of-service conditions as well as to remote code
+execution while parsing a tiff image. (CVE-2006-3459,
+CVE-2006-3460, CVE-2006-3461, CVE-2006-3462, CVE-2006-3463,
+CVE-2006-3464, CVE-2006-3465)
+
+Please restart your applications.
+</description>
+	<arch>ppc</arch>
+	<version>3.8.2</version>
+	<release>5.9</release>
+	<filesize>140558</filesize>
+	<installedsize>617586</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>3.8.2</version>
+			<release>5.9</release>
+			<filename>libtiff-devel-64bit-3.8.2-5.9.ppc.rpm</filename>
+			<filesize>140558</filesize>
+			<installedsize>617586</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="libtiff-devel-64bit" op="EQ" version="3.8.2" release="5.9"/>
+		</provides>
+		<requires>
+			<dep name="libtiff-devel" op="EQ" version="3.8.2"/>
+			<dep name="libtiff-64bit" op="EQ" version="3.8.2"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+</subchannel></channel>

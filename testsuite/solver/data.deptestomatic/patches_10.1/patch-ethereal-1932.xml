@@ -1,0 +1,537 @@
+<channel><subchannel>                                                  
+
+<patch>
+	<name>ethereal</name>
+	<arch>noarch</arch>
+	<version>1932</version>
+	<release>0</release>
+	<requires>
+		<dep kind="atom" name="ethereal" epoch="0" version="0.10.14" release="16.5" op="EQ"/>
+		<dep kind="atom" name="ethereal-devel" epoch="0" version="0.10.14" release="16.5" op="EQ"/>
+	</requires>
+</patch>
+<atom>
+	<name>ethereal</name>
+	<arch>i586</arch>
+	<version>0.10.14</version>
+	<release>16.5</release>
+	<freshens>
+		<dep kind="package" name="ethereal"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="ethereal" epoch="0" version="0.10.14" release="16.5" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>ethereal</name>
+	<arch>ppc</arch>
+	<version>0.10.14</version>
+	<release>16.5</release>
+	<freshens>
+		<dep kind="package" name="ethereal"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="ethereal" epoch="0" version="0.10.14" release="16.5" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>ethereal</name>
+	<arch>x86_64</arch>
+	<version>0.10.14</version>
+	<release>16.5</release>
+	<freshens>
+		<dep kind="package" name="ethereal"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="ethereal" epoch="0" version="0.10.14" release="16.5" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>ethereal-devel</name>
+	<arch>i586</arch>
+	<version>0.10.14</version>
+	<release>16.5</release>
+	<freshens>
+		<dep kind="package" name="ethereal-devel"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="ethereal-devel" epoch="0" version="0.10.14" release="16.5" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>ethereal-devel</name>
+	<arch>ppc</arch>
+	<version>0.10.14</version>
+	<release>16.5</release>
+	<freshens>
+		<dep kind="package" name="ethereal-devel"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="ethereal-devel" epoch="0" version="0.10.14" release="16.5" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>ethereal-devel</name>
+	<arch>x86_64</arch>
+	<version>0.10.14</version>
+	<release>16.5</release>
+	<freshens>
+		<dep kind="package" name="ethereal-devel"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="ethereal-devel" epoch="0" version="0.10.14" release="16.5" op="GE"/>
+	</requires>
+</atom>
+<package>
+	<name>ethereal</name>
+	<summary>ethereal security update</summary>
+	<description>This update fixes several security related bugs ranging
+from crashes to arbitrary code execution. (CVE-2006-3627,
+CVE-2006-3628, CVE-2006-3629, CVE-2006-3630, CVE-2006-3631,
+CVE-2006-3632)
+</description>
+	<arch>i586</arch>
+	<version>0.10.14</version>
+	<release>16.5</release>
+	<filesize>6839017</filesize>
+	<installedsize>22351450</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>0.10.14</version>
+			<release>16.5</release>
+			<filename>ethereal-0.10.14-16.5.i586.rpm</filename>
+			<filesize>6839017</filesize>
+			<installedsize>22351450</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="acn.so"/>
+			<dep name="agentx.so"/>
+			<dep name="artnet.so"/>
+			<dep name="asn1.so"/>
+			<dep name="ciscosm.so"/>
+			<dep name="coseventcomm.so"/>
+			<dep name="cosnaming.so"/>
+			<dep name="docsis.so"/>
+			<dep name="enttec.so"/>
+			<dep name="gryphon.so"/>
+			<dep name="h223.so"/>
+			<dep name="irda.so"/>
+			<dep name="libethereal.so.0"/>
+			<dep name="libwiretap.so.0"/>
+			<dep name="lwres.so"/>
+			<dep name="mate.so"/>
+			<dep name="megaco.so"/>
+			<dep name="mgcp.so"/>
+			<dep name="opsi.so"/>
+			<dep name="parlay.so"/>
+			<dep name="pcli.so"/>
+			<dep name="profinet.so"/>
+			<dep name="rdm.so"/>
+			<dep name="rlm.so"/>
+			<dep name="rtnet.so"/>
+			<dep name="rudp.so"/>
+			<dep name="stats_tree.so"/>
+			<dep name="tango.so"/>
+			<dep name="v5ua.so"/>
+			<dep name="ethereal" op="EQ" version="0.10.14" release="16.5"/>
+		</provides>
+		<requires>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="libX11.so.6"/>
+			<dep name="libXext.so.6"/>
+			<dep name="libXrender.so.1"/>
+			<dep name="libadns.so.1"/>
+			<dep name="libatk-1.0.so.0"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)"/>
+			<dep name="libc.so.6(GLIBC_2.4)"/>
+			<dep name="libcairo.so.2"/>
+			<dep name="libcom_err.so.2"/>
+			<dep name="libcrypto.so.0.9.8"/>
+			<dep name="libdl.so.2"/>
+			<dep name="libethereal.so.0"/>
+			<dep name="libexpat.so.1"/>
+			<dep name="libfontconfig.so.1"/>
+			<dep name="libfreetype.so.6"/>
+			<dep name="libgdk-x11-2.0.so.0"/>
+			<dep name="libgdk_pixbuf-2.0.so.0"/>
+			<dep name="libglib-2.0.so.0"/>
+			<dep name="libglitz.so.1"/>
+			<dep name="libgmodule-2.0.so.0"/>
+			<dep name="libgobject-2.0.so.0"/>
+			<dep name="libgthread-2.0.so.0"/>
+			<dep name="libgtk-x11-2.0.so.0"/>
+			<dep name="libk5crypto.so.3"/>
+			<dep name="libkrb5.so.3"/>
+			<dep name="libm.so.6"/>
+			<dep name="libm.so.6(GLIBC_2.0)"/>
+			<dep name="libnetsnmp.so.10"/>
+			<dep name="libpango-1.0.so.0"/>
+			<dep name="libpangocairo-1.0.so.0"/>
+			<dep name="libpangoft2-1.0.so.0"/>
+			<dep name="libpcap.so.0"/>
+			<dep name="libpcre.so.0"/>
+			<dep name="libpng12.so.0"/>
+			<dep name="libpthread.so.0"/>
+			<dep name="libpthread.so.0(GLIBC_2.0)"/>
+			<dep name="libwiretap.so.0"/>
+			<dep name="libwrap.so.0"/>
+			<dep name="libz.so.1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>ethereal</name>
+	<summary>ethereal security update</summary>
+	<description>This update fixes several security related bugs ranging
+from crashes to arbitrary code execution. (CVE-2006-3627,
+CVE-2006-3628, CVE-2006-3629, CVE-2006-3630, CVE-2006-3631,
+CVE-2006-3632)
+</description>
+	<arch>ppc</arch>
+	<version>0.10.14</version>
+	<release>16.5</release>
+	<filesize>7450781</filesize>
+	<installedsize>28534306</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>0.10.14</version>
+			<release>16.5</release>
+			<filename>ethereal-0.10.14-16.5.ppc.rpm</filename>
+			<filesize>7450781</filesize>
+			<installedsize>28534306</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="acn.so"/>
+			<dep name="agentx.so"/>
+			<dep name="artnet.so"/>
+			<dep name="asn1.so"/>
+			<dep name="ciscosm.so"/>
+			<dep name="coseventcomm.so"/>
+			<dep name="cosnaming.so"/>
+			<dep name="docsis.so"/>
+			<dep name="enttec.so"/>
+			<dep name="gryphon.so"/>
+			<dep name="h223.so"/>
+			<dep name="irda.so"/>
+			<dep name="libethereal.so.0"/>
+			<dep name="libwiretap.so.0"/>
+			<dep name="lwres.so"/>
+			<dep name="mate.so"/>
+			<dep name="megaco.so"/>
+			<dep name="mgcp.so"/>
+			<dep name="opsi.so"/>
+			<dep name="parlay.so"/>
+			<dep name="pcli.so"/>
+			<dep name="profinet.so"/>
+			<dep name="rdm.so"/>
+			<dep name="rlm.so"/>
+			<dep name="rtnet.so"/>
+			<dep name="rudp.so"/>
+			<dep name="stats_tree.so"/>
+			<dep name="tango.so"/>
+			<dep name="v5ua.so"/>
+			<dep name="ethereal" op="EQ" version="0.10.14" release="16.5"/>
+		</provides>
+		<requires>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="libX11.so.6"/>
+			<dep name="libXext.so.6"/>
+			<dep name="libXrender.so.1"/>
+			<dep name="libadns.so.1"/>
+			<dep name="libatk-1.0.so.0"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)"/>
+			<dep name="libc.so.6(GLIBC_2.4)"/>
+			<dep name="libcairo.so.2"/>
+			<dep name="libcom_err.so.2"/>
+			<dep name="libcrypto.so.0.9.8"/>
+			<dep name="libdl.so.2"/>
+			<dep name="libethereal.so.0"/>
+			<dep name="libexpat.so.1"/>
+			<dep name="libfontconfig.so.1"/>
+			<dep name="libfreetype.so.6"/>
+			<dep name="libgdk-x11-2.0.so.0"/>
+			<dep name="libgdk_pixbuf-2.0.so.0"/>
+			<dep name="libglib-2.0.so.0"/>
+			<dep name="libglitz.so.1"/>
+			<dep name="libgmodule-2.0.so.0"/>
+			<dep name="libgobject-2.0.so.0"/>
+			<dep name="libgthread-2.0.so.0"/>
+			<dep name="libgtk-x11-2.0.so.0"/>
+			<dep name="libk5crypto.so.3"/>
+			<dep name="libkrb5.so.3"/>
+			<dep name="libm.so.6"/>
+			<dep name="libm.so.6(GLIBC_2.0)"/>
+			<dep name="libnetsnmp.so.10"/>
+			<dep name="libpango-1.0.so.0"/>
+			<dep name="libpangocairo-1.0.so.0"/>
+			<dep name="libpangoft2-1.0.so.0"/>
+			<dep name="libpcap.so.0"/>
+			<dep name="libpcre.so.0"/>
+			<dep name="libpng12.so.0"/>
+			<dep name="libpthread.so.0"/>
+			<dep name="libpthread.so.0(GLIBC_2.0)"/>
+			<dep name="libpthread.so.0(GLIBC_2.3.4)"/>
+			<dep name="libwiretap.so.0"/>
+			<dep name="libwrap.so.0"/>
+			<dep name="libz.so.1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>ethereal</name>
+	<summary>ethereal security update</summary>
+	<description>This update fixes several security related bugs ranging
+from crashes to arbitrary code execution. (CVE-2006-3627,
+CVE-2006-3628, CVE-2006-3629, CVE-2006-3630, CVE-2006-3631,
+CVE-2006-3632)
+</description>
+	<arch>x86_64</arch>
+	<version>0.10.14</version>
+	<release>16.5</release>
+	<filesize>8313706</filesize>
+	<installedsize>32444490</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>0.10.14</version>
+			<release>16.5</release>
+			<filename>ethereal-0.10.14-16.5.x86_64.rpm</filename>
+			<filesize>8313706</filesize>
+			<installedsize>32444490</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="acn.so()(64bit)"/>
+			<dep name="agentx.so()(64bit)"/>
+			<dep name="artnet.so()(64bit)"/>
+			<dep name="asn1.so()(64bit)"/>
+			<dep name="ciscosm.so()(64bit)"/>
+			<dep name="coseventcomm.so()(64bit)"/>
+			<dep name="cosnaming.so()(64bit)"/>
+			<dep name="docsis.so()(64bit)"/>
+			<dep name="enttec.so()(64bit)"/>
+			<dep name="gryphon.so()(64bit)"/>
+			<dep name="h223.so()(64bit)"/>
+			<dep name="irda.so()(64bit)"/>
+			<dep name="libethereal.so.0()(64bit)"/>
+			<dep name="libwiretap.so.0()(64bit)"/>
+			<dep name="lwres.so()(64bit)"/>
+			<dep name="mate.so()(64bit)"/>
+			<dep name="megaco.so()(64bit)"/>
+			<dep name="mgcp.so()(64bit)"/>
+			<dep name="opsi.so()(64bit)"/>
+			<dep name="parlay.so()(64bit)"/>
+			<dep name="pcli.so()(64bit)"/>
+			<dep name="profinet.so()(64bit)"/>
+			<dep name="rdm.so()(64bit)"/>
+			<dep name="rlm.so()(64bit)"/>
+			<dep name="rtnet.so()(64bit)"/>
+			<dep name="rudp.so()(64bit)"/>
+			<dep name="stats_tree.so()(64bit)"/>
+			<dep name="tango.so()(64bit)"/>
+			<dep name="v5ua.so()(64bit)"/>
+			<dep name="ethereal" op="EQ" version="0.10.14" release="16.5"/>
+		</provides>
+		<requires>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="libX11.so.6()(64bit)"/>
+			<dep name="libXext.so.6()(64bit)"/>
+			<dep name="libXrender.so.1()(64bit)"/>
+			<dep name="libadns.so.1()(64bit)"/>
+			<dep name="libatk-1.0.so.0()(64bit)"/>
+			<dep name="libc.so.6()(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.3)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.4)(64bit)"/>
+			<dep name="libcairo.so.2()(64bit)"/>
+			<dep name="libcom_err.so.2()(64bit)"/>
+			<dep name="libcrypto.so.0.9.8()(64bit)"/>
+			<dep name="libdl.so.2()(64bit)"/>
+			<dep name="libethereal.so.0()(64bit)"/>
+			<dep name="libexpat.so.1()(64bit)"/>
+			<dep name="libfontconfig.so.1()(64bit)"/>
+			<dep name="libfreetype.so.6()(64bit)"/>
+			<dep name="libgdk-x11-2.0.so.0()(64bit)"/>
+			<dep name="libgdk_pixbuf-2.0.so.0()(64bit)"/>
+			<dep name="libglib-2.0.so.0()(64bit)"/>
+			<dep name="libglitz.so.1()(64bit)"/>
+			<dep name="libgmodule-2.0.so.0()(64bit)"/>
+			<dep name="libgobject-2.0.so.0()(64bit)"/>
+			<dep name="libgthread-2.0.so.0()(64bit)"/>
+			<dep name="libgtk-x11-2.0.so.0()(64bit)"/>
+			<dep name="libk5crypto.so.3()(64bit)"/>
+			<dep name="libkrb5.so.3()(64bit)"/>
+			<dep name="libm.so.6()(64bit)"/>
+			<dep name="libm.so.6(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libnetsnmp.so.10()(64bit)"/>
+			<dep name="libpango-1.0.so.0()(64bit)"/>
+			<dep name="libpangocairo-1.0.so.0()(64bit)"/>
+			<dep name="libpangoft2-1.0.so.0()(64bit)"/>
+			<dep name="libpcap.so.0()(64bit)"/>
+			<dep name="libpcre.so.0()(64bit)"/>
+			<dep name="libpng12.so.0()(64bit)"/>
+			<dep name="libpthread.so.0()(64bit)"/>
+			<dep name="libpthread.so.0(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libwiretap.so.0()(64bit)"/>
+			<dep name="libwrap.so.0()(64bit)"/>
+			<dep name="libz.so.1()(64bit)"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>ethereal-devel</name>
+	<summary>ethereal security update</summary>
+	<description>This update fixes several security related bugs ranging
+from crashes to arbitrary code execution. (CVE-2006-3627,
+CVE-2006-3628, CVE-2006-3629, CVE-2006-3630, CVE-2006-3631,
+CVE-2006-3632)
+</description>
+	<arch>i586</arch>
+	<version>0.10.14</version>
+	<release>16.5</release>
+	<filesize>122888</filesize>
+	<installedsize>467013</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>0.10.14</version>
+			<release>16.5</release>
+			<filename>ethereal-devel-0.10.14-16.5.i586.rpm</filename>
+			<filesize>122888</filesize>
+			<installedsize>467013</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="ethereal-devel" op="EQ" version="0.10.14" release="16.5"/>
+		</provides>
+		<requires>
+			<dep name="ethereal" op="EQ" version="0.10.14"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/bin/sh"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>ethereal-devel</name>
+	<summary>ethereal security update</summary>
+	<description>This update fixes several security related bugs ranging
+from crashes to arbitrary code execution. (CVE-2006-3627,
+CVE-2006-3628, CVE-2006-3629, CVE-2006-3630, CVE-2006-3631,
+CVE-2006-3632)
+</description>
+	<arch>ppc</arch>
+	<version>0.10.14</version>
+	<release>16.5</release>
+	<filesize>122813</filesize>
+	<installedsize>467010</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>0.10.14</version>
+			<release>16.5</release>
+			<filename>ethereal-devel-0.10.14-16.5.ppc.rpm</filename>
+			<filesize>122813</filesize>
+			<installedsize>467010</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="ethereal-devel" op="EQ" version="0.10.14" release="16.5"/>
+		</provides>
+		<requires>
+			<dep name="ethereal" op="EQ" version="0.10.14"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/bin/sh"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>ethereal-devel</name>
+	<summary>ethereal security update</summary>
+	<description>This update fixes several security related bugs ranging
+from crashes to arbitrary code execution. (CVE-2006-3627,
+CVE-2006-3628, CVE-2006-3629, CVE-2006-3630, CVE-2006-3631,
+CVE-2006-3632)
+</description>
+	<arch>x86_64</arch>
+	<version>0.10.14</version>
+	<release>16.5</release>
+	<filesize>122738</filesize>
+	<installedsize>467015</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>0.10.14</version>
+			<release>16.5</release>
+			<filename>ethereal-devel-0.10.14-16.5.x86_64.rpm</filename>
+			<filesize>122738</filesize>
+			<installedsize>467015</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="ethereal-devel" op="EQ" version="0.10.14" release="16.5"/>
+		</provides>
+		<requires>
+			<dep name="ethereal" op="EQ" version="0.10.14"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/bin/sh"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+</subchannel></channel>

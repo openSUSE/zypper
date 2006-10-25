@@ -1,0 +1,838 @@
+<channel><subchannel>                                                  
+
+<patch>
+	<name>xen</name>
+	<arch>noarch</arch>
+	<version>2156</version>
+	<release>0</release>
+	<requires>
+		<dep kind="atom" name="xen" epoch="0" version="3.0.2_09763" release="0.8" op="EQ"/>
+		<dep kind="atom" name="xen-devel" epoch="0" version="3.0.2_09763" release="0.8" op="EQ"/>
+		<dep kind="atom" name="xen-doc-html" epoch="0" version="3.0.2_09763" release="0.8" op="EQ"/>
+		<dep kind="atom" name="xen-doc-pdf" epoch="0" version="3.0.2_09763" release="0.8" op="EQ"/>
+		<dep kind="atom" name="xen-doc-ps" epoch="0" version="3.0.2_09763" release="0.8" op="EQ"/>
+		<dep kind="atom" name="xen-libs" epoch="0" version="3.0.2_09763" release="0.8" op="EQ"/>
+		<dep kind="atom" name="xen-libs-32bit" epoch="0" version="3.0.2_09763" release="0.8" op="EQ"/>
+		<dep kind="atom" name="xen-tools" epoch="0" version="3.0.2_09763" release="0.8" op="EQ"/>
+		<dep kind="atom" name="xen-tools-ioemu" epoch="0" version="3.0.2_09763" release="0.8" op="EQ"/>
+		<dep kind="atom" name="yast2-vm" epoch="0" version="2.13.62" release="4.2" op="EQ"/>
+	</requires>
+</patch>
+<atom>
+	<name>xen</name>
+	<arch>i586</arch>
+	<version>3.0.2_09763</version>
+	<release>0.8</release>
+	<freshens>
+		<dep kind="package" name="xen"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="xen" epoch="0" version="3.0.2_09763" release="0.8" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>xen</name>
+	<arch>x86_64</arch>
+	<version>3.0.2_09763</version>
+	<release>0.8</release>
+	<freshens>
+		<dep kind="package" name="xen"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="xen" epoch="0" version="3.0.2_09763" release="0.8" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>xen-devel</name>
+	<arch>i586</arch>
+	<version>3.0.2_09763</version>
+	<release>0.8</release>
+	<freshens>
+		<dep kind="package" name="xen-devel"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="xen-devel" epoch="0" version="3.0.2_09763" release="0.8" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>xen-devel</name>
+	<arch>x86_64</arch>
+	<version>3.0.2_09763</version>
+	<release>0.8</release>
+	<freshens>
+		<dep kind="package" name="xen-devel"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="xen-devel" epoch="0" version="3.0.2_09763" release="0.8" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>xen-doc-html</name>
+	<arch>i586</arch>
+	<version>3.0.2_09763</version>
+	<release>0.8</release>
+	<freshens>
+		<dep kind="package" name="xen-doc-html"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="xen-doc-html" epoch="0" version="3.0.2_09763" release="0.8" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>xen-doc-html</name>
+	<arch>x86_64</arch>
+	<version>3.0.2_09763</version>
+	<release>0.8</release>
+	<freshens>
+		<dep kind="package" name="xen-doc-html"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="xen-doc-html" epoch="0" version="3.0.2_09763" release="0.8" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>xen-doc-pdf</name>
+	<arch>i586</arch>
+	<version>3.0.2_09763</version>
+	<release>0.8</release>
+	<freshens>
+		<dep kind="package" name="xen-doc-pdf"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="xen-doc-pdf" epoch="0" version="3.0.2_09763" release="0.8" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>xen-doc-pdf</name>
+	<arch>x86_64</arch>
+	<version>3.0.2_09763</version>
+	<release>0.8</release>
+	<freshens>
+		<dep kind="package" name="xen-doc-pdf"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="xen-doc-pdf" epoch="0" version="3.0.2_09763" release="0.8" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>xen-doc-ps</name>
+	<arch>i586</arch>
+	<version>3.0.2_09763</version>
+	<release>0.8</release>
+	<freshens>
+		<dep kind="package" name="xen-doc-ps"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="xen-doc-ps" epoch="0" version="3.0.2_09763" release="0.8" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>xen-doc-ps</name>
+	<arch>x86_64</arch>
+	<version>3.0.2_09763</version>
+	<release>0.8</release>
+	<freshens>
+		<dep kind="package" name="xen-doc-ps"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="xen-doc-ps" epoch="0" version="3.0.2_09763" release="0.8" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>xen-libs</name>
+	<arch>i586</arch>
+	<version>3.0.2_09763</version>
+	<release>0.8</release>
+	<freshens>
+		<dep kind="package" name="xen-libs"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="xen-libs" epoch="0" version="3.0.2_09763" release="0.8" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>xen-libs</name>
+	<arch>x86_64</arch>
+	<version>3.0.2_09763</version>
+	<release>0.8</release>
+	<freshens>
+		<dep kind="package" name="xen-libs"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="xen-libs" epoch="0" version="3.0.2_09763" release="0.8" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>xen-libs-32bit</name>
+	<arch>x86_64</arch>
+	<version>3.0.2_09763</version>
+	<release>0.8</release>
+	<freshens>
+		<dep kind="package" name="xen-libs-32bit"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="xen-libs-32bit" epoch="0" version="3.0.2_09763" release="0.8" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>xen-tools</name>
+	<arch>i586</arch>
+	<version>3.0.2_09763</version>
+	<release>0.8</release>
+	<freshens>
+		<dep kind="package" name="xen-tools"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="xen-tools" epoch="0" version="3.0.2_09763" release="0.8" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>xen-tools</name>
+	<arch>x86_64</arch>
+	<version>3.0.2_09763</version>
+	<release>0.8</release>
+	<freshens>
+		<dep kind="package" name="xen-tools"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="xen-tools" epoch="0" version="3.0.2_09763" release="0.8" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>xen-tools-ioemu</name>
+	<arch>i586</arch>
+	<version>3.0.2_09763</version>
+	<release>0.8</release>
+	<freshens>
+		<dep kind="package" name="xen-tools-ioemu"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="xen-tools-ioemu" epoch="0" version="3.0.2_09763" release="0.8" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>xen-tools-ioemu</name>
+	<arch>x86_64</arch>
+	<version>3.0.2_09763</version>
+	<release>0.8</release>
+	<freshens>
+		<dep kind="package" name="xen-tools-ioemu"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="xen-tools-ioemu" epoch="0" version="3.0.2_09763" release="0.8" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>yast2-vm</name>
+	<arch>i586</arch>
+	<version>2.13.62</version>
+	<release>4.2</release>
+	<freshens>
+		<dep kind="package" name="yast2-vm"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="yast2-vm" epoch="0" version="2.13.62" release="4.2" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>yast2-vm</name>
+	<arch>x86_64</arch>
+	<version>2.13.62</version>
+	<release>4.2</release>
+	<freshens>
+		<dep kind="package" name="yast2-vm"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="yast2-vm" epoch="0" version="2.13.62" release="4.2" op="GE"/>
+	</requires>
+</atom>
+<package>
+	<name>xen</name>
+	<summary>xen: Security fix for local denial of service problem in alignment fault handler</summary>
+	<description>This update fixes an issue on x86_64 in which a user-level
+application can crash the guest OS when running Xen.
+
+The AC (alignment check) flag in RFLAGS was not being
+cleared on entry to the guest kernel, causing unwanted
+faults because the kernel runs in ring 3 on Xen.
+</description>
+	<arch>i586</arch>
+	<version>3.0.2_09763</version>
+	<release>0.8</release>
+	<filesize>4230666</filesize>
+	<installedsize>8905657</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>3.0.2_09763</version>
+			<release>0.8</release>
+			<filename>xen-3.0.2_09763-0.8.i586.rpm</filename>
+			<filesize>4230666</filesize>
+			<installedsize>8905657</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+	</deps>
+</package>
+<package>
+	<name>xen</name>
+	<summary>xen: Security fix for local denial of service problem in alignment fault handler</summary>
+	<description>This update fixes an issue on x86_64 in which a user-level
+application can crash the guest OS when running Xen.
+
+The AC (alignment check) flag in RFLAGS was not being
+cleared on entry to the guest kernel, causing unwanted
+faults because the kernel runs in ring 3 on Xen.
+</description>
+	<arch>x86_64</arch>
+	<version>3.0.2_09763</version>
+	<release>0.8</release>
+	<filesize>3091902</filesize>
+	<installedsize>7316349</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>3.0.2_09763</version>
+			<release>0.8</release>
+			<filename>xen-3.0.2_09763-0.8.x86_64.rpm</filename>
+			<filesize>3091902</filesize>
+			<installedsize>7316349</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+	</deps>
+</package>
+<package>
+	<name>xen-devel</name>
+	<summary>xen: Security fix for local denial of service problem in alignment fault handler</summary>
+	<description>This update fixes an issue on x86_64 in which a user-level
+application can crash the guest OS when running Xen.
+
+The AC (alignment check) flag in RFLAGS was not being
+cleared on entry to the guest kernel, causing unwanted
+faults because the kernel runs in ring 3 on Xen.
+</description>
+	<arch>i586</arch>
+	<version>3.0.2_09763</version>
+	<release>0.8</release>
+	<filesize>137356</filesize>
+	<installedsize>353548</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>3.0.2_09763</version>
+			<release>0.8</release>
+			<filename>xen-devel-3.0.2_09763-0.8.i586.rpm</filename>
+			<filesize>137356</filesize>
+			<installedsize>353548</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+	</deps>
+</package>
+<package>
+	<name>xen-devel</name>
+	<summary>xen: Security fix for local denial of service problem in alignment fault handler</summary>
+	<description>This update fixes an issue on x86_64 in which a user-level
+application can crash the guest OS when running Xen.
+
+The AC (alignment check) flag in RFLAGS was not being
+cleared on entry to the guest kernel, causing unwanted
+faults because the kernel runs in ring 3 on Xen.
+</description>
+	<arch>x86_64</arch>
+	<version>3.0.2_09763</version>
+	<release>0.8</release>
+	<filesize>139788</filesize>
+	<installedsize>421660</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>3.0.2_09763</version>
+			<release>0.8</release>
+			<filename>xen-devel-3.0.2_09763-0.8.x86_64.rpm</filename>
+			<filesize>139788</filesize>
+			<installedsize>421660</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+	</deps>
+</package>
+<package>
+	<name>xen-doc-html</name>
+	<summary>xen: Security fix for local denial of service problem in alignment fault handler</summary>
+	<description>This update fixes an issue on x86_64 in which a user-level
+application can crash the guest OS when running Xen.
+
+The AC (alignment check) flag in RFLAGS was not being
+cleared on entry to the guest kernel, causing unwanted
+faults because the kernel runs in ring 3 on Xen.
+</description>
+	<arch>i586</arch>
+	<version>3.0.2_09763</version>
+	<release>0.8</release>
+	<filesize>122526</filesize>
+	<installedsize>471703</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>3.0.2_09763</version>
+			<release>0.8</release>
+			<filename>xen-doc-html-3.0.2_09763-0.8.i586.rpm</filename>
+			<filesize>122526</filesize>
+			<installedsize>471703</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+	</deps>
+</package>
+<package>
+	<name>xen-doc-html</name>
+	<summary>xen: Security fix for local denial of service problem in alignment fault handler</summary>
+	<description>This update fixes an issue on x86_64 in which a user-level
+application can crash the guest OS when running Xen.
+
+The AC (alignment check) flag in RFLAGS was not being
+cleared on entry to the guest kernel, causing unwanted
+faults because the kernel runs in ring 3 on Xen.
+</description>
+	<arch>x86_64</arch>
+	<version>3.0.2_09763</version>
+	<release>0.8</release>
+	<filesize>122510</filesize>
+	<installedsize>471703</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>3.0.2_09763</version>
+			<release>0.8</release>
+			<filename>xen-doc-html-3.0.2_09763-0.8.x86_64.rpm</filename>
+			<filesize>122510</filesize>
+			<installedsize>471703</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+	</deps>
+</package>
+<package>
+	<name>xen-doc-pdf</name>
+	<summary>xen: Security fix for local denial of service problem in alignment fault handler</summary>
+	<description>This update fixes an issue on x86_64 in which a user-level
+application can crash the guest OS when running Xen.
+
+The AC (alignment check) flag in RFLAGS was not being
+cleared on entry to the guest kernel, causing unwanted
+faults because the kernel runs in ring 3 on Xen.
+</description>
+	<arch>i586</arch>
+	<version>3.0.2_09763</version>
+	<release>0.8</release>
+	<filesize>399539</filesize>
+	<installedsize>403395</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>3.0.2_09763</version>
+			<release>0.8</release>
+			<filename>xen-doc-pdf-3.0.2_09763-0.8.i586.rpm</filename>
+			<filesize>399539</filesize>
+			<installedsize>403395</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+	</deps>
+</package>
+<package>
+	<name>xen-doc-pdf</name>
+	<summary>xen: Security fix for local denial of service problem in alignment fault handler</summary>
+	<description>This update fixes an issue on x86_64 in which a user-level
+application can crash the guest OS when running Xen.
+
+The AC (alignment check) flag in RFLAGS was not being
+cleared on entry to the guest kernel, causing unwanted
+faults because the kernel runs in ring 3 on Xen.
+</description>
+	<arch>x86_64</arch>
+	<version>3.0.2_09763</version>
+	<release>0.8</release>
+	<filesize>399551</filesize>
+	<installedsize>403399</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>3.0.2_09763</version>
+			<release>0.8</release>
+			<filename>xen-doc-pdf-3.0.2_09763-0.8.x86_64.rpm</filename>
+			<filesize>399551</filesize>
+			<installedsize>403399</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+	</deps>
+</package>
+<package>
+	<name>xen-doc-ps</name>
+	<summary>xen: Security fix for local denial of service problem in alignment fault handler</summary>
+	<description>This update fixes an issue on x86_64 in which a user-level
+application can crash the guest OS when running Xen.
+
+The AC (alignment check) flag in RFLAGS was not being
+cleared on entry to the guest kernel, causing unwanted
+faults because the kernel runs in ring 3 on Xen.
+</description>
+	<arch>i586</arch>
+	<version>3.0.2_09763</version>
+	<release>0.8</release>
+	<filesize>152716</filesize>
+	<installedsize>595265</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>3.0.2_09763</version>
+			<release>0.8</release>
+			<filename>xen-doc-ps-3.0.2_09763-0.8.i586.rpm</filename>
+			<filesize>152716</filesize>
+			<installedsize>595265</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+	</deps>
+</package>
+<package>
+	<name>xen-doc-ps</name>
+	<summary>xen: Security fix for local denial of service problem in alignment fault handler</summary>
+	<description>This update fixes an issue on x86_64 in which a user-level
+application can crash the guest OS when running Xen.
+
+The AC (alignment check) flag in RFLAGS was not being
+cleared on entry to the guest kernel, causing unwanted
+faults because the kernel runs in ring 3 on Xen.
+</description>
+	<arch>x86_64</arch>
+	<version>3.0.2_09763</version>
+	<release>0.8</release>
+	<filesize>152711</filesize>
+	<installedsize>595265</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>3.0.2_09763</version>
+			<release>0.8</release>
+			<filename>xen-doc-ps-3.0.2_09763-0.8.x86_64.rpm</filename>
+			<filesize>152711</filesize>
+			<installedsize>595265</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+	</deps>
+</package>
+<package>
+	<name>xen-libs</name>
+	<summary>xen: Security fix for local denial of service problem in alignment fault handler</summary>
+	<description>This update fixes an issue on x86_64 in which a user-level
+application can crash the guest OS when running Xen.
+
+The AC (alignment check) flag in RFLAGS was not being
+cleared on entry to the guest kernel, causing unwanted
+faults because the kernel runs in ring 3 on Xen.
+</description>
+	<arch>i586</arch>
+	<version>3.0.2_09763</version>
+	<release>0.8</release>
+	<filesize>85646</filesize>
+	<installedsize>119076</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>3.0.2_09763</version>
+			<release>0.8</release>
+			<filename>xen-libs-3.0.2_09763-0.8.i586.rpm</filename>
+			<filesize>85646</filesize>
+			<installedsize>119076</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+	</deps>
+</package>
+<package>
+	<name>xen-libs</name>
+	<summary>xen: Security fix for local denial of service problem in alignment fault handler</summary>
+	<description>This update fixes an issue on x86_64 in which a user-level
+application can crash the guest OS when running Xen.
+
+The AC (alignment check) flag in RFLAGS was not being
+cleared on entry to the guest kernel, causing unwanted
+faults because the kernel runs in ring 3 on Xen.
+</description>
+	<arch>x86_64</arch>
+	<version>3.0.2_09763</version>
+	<release>0.8</release>
+	<filesize>88351</filesize>
+	<installedsize>123488</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>3.0.2_09763</version>
+			<release>0.8</release>
+			<filename>xen-libs-3.0.2_09763-0.8.x86_64.rpm</filename>
+			<filesize>88351</filesize>
+			<installedsize>123488</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+	</deps>
+</package>
+<package>
+	<name>xen-libs-32bit</name>
+	<summary>xen: Security fix for local denial of service problem in alignment fault handler</summary>
+	<description>This update fixes an issue on x86_64 in which a user-level
+application can crash the guest OS when running Xen.
+
+The AC (alignment check) flag in RFLAGS was not being
+cleared on entry to the guest kernel, causing unwanted
+faults because the kernel runs in ring 3 on Xen.
+</description>
+	<arch>x86_64</arch>
+	<version>3.0.2_09763</version>
+	<release>0.8</release>
+	<filesize>85539</filesize>
+	<installedsize>119076</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>3.0.2_09763</version>
+			<release>0.8</release>
+			<filename>xen-libs-32bit-3.0.2_09763-0.8.x86_64.rpm</filename>
+			<filesize>85539</filesize>
+			<installedsize>119076</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+	</deps>
+</package>
+<package>
+	<name>xen-tools</name>
+	<summary>xen: Security fix for local denial of service problem in alignment fault handler</summary>
+	<description>This update fixes an issue on x86_64 in which a user-level
+application can crash the guest OS when running Xen.
+
+The AC (alignment check) flag in RFLAGS was not being
+cleared on entry to the guest kernel, causing unwanted
+faults because the kernel runs in ring 3 on Xen.
+</description>
+	<arch>i586</arch>
+	<version>3.0.2_09763</version>
+	<release>0.8</release>
+	<filesize>501914</filesize>
+	<installedsize>1599300</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>3.0.2_09763</version>
+			<release>0.8</release>
+			<filename>xen-tools-3.0.2_09763-0.8.i586.rpm</filename>
+			<filesize>501914</filesize>
+			<installedsize>1599300</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+	</deps>
+</package>
+<package>
+	<name>xen-tools</name>
+	<summary>xen: Security fix for local denial of service problem in alignment fault handler</summary>
+	<description>This update fixes an issue on x86_64 in which a user-level
+application can crash the guest OS when running Xen.
+
+The AC (alignment check) flag in RFLAGS was not being
+cleared on entry to the guest kernel, causing unwanted
+faults because the kernel runs in ring 3 on Xen.
+</description>
+	<arch>x86_64</arch>
+	<version>3.0.2_09763</version>
+	<release>0.8</release>
+	<filesize>515146</filesize>
+	<installedsize>1676502</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>3.0.2_09763</version>
+			<release>0.8</release>
+			<filename>xen-tools-3.0.2_09763-0.8.x86_64.rpm</filename>
+			<filesize>515146</filesize>
+			<installedsize>1676502</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+	</deps>
+</package>
+<package>
+	<name>xen-tools-ioemu</name>
+	<summary>xen: Security fix for local denial of service problem in alignment fault handler</summary>
+	<description>This update fixes an issue on x86_64 in which a user-level
+application can crash the guest OS when running Xen.
+
+The AC (alignment check) flag in RFLAGS was not being
+cleared on entry to the guest kernel, causing unwanted
+faults because the kernel runs in ring 3 on Xen.
+</description>
+	<arch>i586</arch>
+	<version>3.0.2_09763</version>
+	<release>0.8</release>
+	<filesize>306757</filesize>
+	<installedsize>675630</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>3.0.2_09763</version>
+			<release>0.8</release>
+			<filename>xen-tools-ioemu-3.0.2_09763-0.8.i586.rpm</filename>
+			<filesize>306757</filesize>
+			<installedsize>675630</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+	</deps>
+</package>
+<package>
+	<name>xen-tools-ioemu</name>
+	<summary>xen: Security fix for local denial of service problem in alignment fault handler</summary>
+	<description>This update fixes an issue on x86_64 in which a user-level
+application can crash the guest OS when running Xen.
+
+The AC (alignment check) flag in RFLAGS was not being
+cleared on entry to the guest kernel, causing unwanted
+faults because the kernel runs in ring 3 on Xen.
+</description>
+	<arch>x86_64</arch>
+	<version>3.0.2_09763</version>
+	<release>0.8</release>
+	<filesize>334324</filesize>
+	<installedsize>741882</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>3.0.2_09763</version>
+			<release>0.8</release>
+			<filename>xen-tools-ioemu-3.0.2_09763-0.8.x86_64.rpm</filename>
+			<filesize>334324</filesize>
+			<installedsize>741882</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+	</deps>
+</package>
+<package>
+	<name>yast2-vm</name>
+	<summary>xen: Security fix for local denial of service problem in alignment fault handler</summary>
+	<description>This update fixes an issue on x86_64 in which a user-level
+application can crash the guest OS when running Xen.
+
+The AC (alignment check) flag in RFLAGS was not being
+cleared on entry to the guest kernel, causing unwanted
+faults because the kernel runs in ring 3 on Xen.
+</description>
+	<arch>i586</arch>
+	<version>2.13.62</version>
+	<release>4.2</release>
+	<filesize>115026</filesize>
+	<installedsize>694439</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>2.13.62</version>
+			<release>4.2</release>
+			<filename>yast2-vm-2.13.62-4.2.i586.rpm</filename>
+			<filesize>115026</filesize>
+			<installedsize>694439</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+	</deps>
+</package>
+<package>
+	<name>yast2-vm</name>
+	<summary>xen: Security fix for local denial of service problem in alignment fault handler</summary>
+	<description>This update fixes an issue on x86_64 in which a user-level
+application can crash the guest OS when running Xen.
+
+The AC (alignment check) flag in RFLAGS was not being
+cleared on entry to the guest kernel, causing unwanted
+faults because the kernel runs in ring 3 on Xen.
+</description>
+	<arch>x86_64</arch>
+	<version>2.13.62</version>
+	<release>4.2</release>
+	<filesize>114976</filesize>
+	<installedsize>694439</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>2.13.62</version>
+			<release>4.2</release>
+			<filename>yast2-vm-2.13.62-4.2.x86_64.rpm</filename>
+			<filesize>114976</filesize>
+			<installedsize>694439</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+	</deps>
+</package>
+</subchannel></channel>

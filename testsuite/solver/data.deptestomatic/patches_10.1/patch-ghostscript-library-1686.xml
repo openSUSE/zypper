@@ -1,0 +1,453 @@
+<channel><subchannel>                                                  
+
+<patch>
+	<name>ghostscript-library</name>
+	<arch>noarch</arch>
+	<version>1686</version>
+	<release>0</release>
+	<requires>
+		<dep kind="atom" name="ghostscript-library" epoch="0" version="8.15.2rc1" release="20.4" op="EQ"/>
+	</requires>
+</patch>
+<atom>
+	<name>ghostscript-library</name>
+	<arch>i586</arch>
+	<version>8.15.2rc1</version>
+	<release>20.4</release>
+	<freshens>
+		<dep kind="package" name="ghostscript-library"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="ghostscript-library" epoch="0" version="8.15.2rc1" release="20.4" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>ghostscript-library</name>
+	<arch>ppc</arch>
+	<version>8.15.2rc1</version>
+	<release>20.4</release>
+	<freshens>
+		<dep kind="package" name="ghostscript-library"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="ghostscript-library" epoch="0" version="8.15.2rc1" release="20.4" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>ghostscript-library</name>
+	<arch>x86_64</arch>
+	<version>8.15.2rc1</version>
+	<release>20.4</release>
+	<freshens>
+		<dep kind="package" name="ghostscript-library"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="ghostscript-library" epoch="0" version="8.15.2rc1" release="20.4" op="GE"/>
+	</requires>
+</atom>
+<package>
+	<name>ghostscript-library</name>
+	<summary>ghostscript stops on invalid page device features</summary>
+	<description>If a PostScript document includes for a specific printer
+unknown page device features ghostscripts stops its
+execution.  With this version the unkown feature will be
+ignored by ghostscript.
+</description>
+	<arch>i586</arch>
+	<version>8.15.2rc1</version>
+	<release>20.4</release>
+	<filesize>5596533</filesize>
+	<installedsize>23244496</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>8.15.2rc1</version>
+			<release>20.4</release>
+			<filename>ghostscript-library-8.15.2rc1-20.4.i586.rpm</filename>
+			<filesize>5596533</filesize>
+			<installedsize>23244496</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="ghostscript"/>
+			<dep name="gs"/>
+			<dep name="gs_lib"/>
+			<dep name="pstoraster"/>
+			<dep name="ghostscript-serv"/>
+			<dep name="ghostscript_any"/>
+			<dep name="libBrother_ESC_Blitter.so.2"/>
+			<dep name="libBrother_ESC_Instance.so.2"/>
+			<dep name="libBrother_PCL_Blitter.so.2"/>
+			<dep name="libBrother_PCL_Instance.so.2"/>
+			<dep name="libCanon_BJC_8500_Blitter.so.2"/>
+			<dep name="libCanon_BJC_8500_Instance.so.2"/>
+			<dep name="libCanon_Blitter.so.2"/>
+			<dep name="libCanon_Instance.so.2"/>
+			<dep name="libCanon_S450_Blitter.so.2"/>
+			<dep name="libCanon_S450_Instance.so.2"/>
+			<dep name="libEpson_ESCP2_Blitter.so.2"/>
+			<dep name="libEpson_ESCP2_Instance.so.2"/>
+			<dep name="libEpson_ESC_Blitter.so.2"/>
+			<dep name="libEpson_ESC_Instance.so.2"/>
+			<dep name="libEpson_High_Res_ESCP2_Blitter.so.2"/>
+			<dep name="libEpson_High_Res_ESCP2_Instance.so.2"/>
+			<dep name="libEpson_PCL_Blitter.so.2"/>
+			<dep name="libEpson_PCL_Instance.so.2"/>
+			<dep name="libHP_LaserJet_PCL_Blitter.so.2"/>
+			<dep name="libHP_LaserJet_PCL_Instance.so.2"/>
+			<dep name="libIBM_5577_Blitter.so.2"/>
+			<dep name="libIBM_5577_Instance.so.2"/>
+			<dep name="libIBM_ESC_Blitter.so.2"/>
+			<dep name="libIBM_ESC_Instance.so.2"/>
+			<dep name="libIBM_PCL_Blitter.so.2"/>
+			<dep name="libIBM_PCL_Instance.so.2"/>
+			<dep name="libIBM_Pages_Blitter.so.2"/>
+			<dep name="libIBM_Pages_Instance.so.2"/>
+			<dep name="libIBM_RPDL_Blitter.so.2"/>
+			<dep name="libIBM_RPDL_Instance.so.2"/>
+			<dep name="libKS_ESC_Blitter.so.2"/>
+			<dep name="libKS_ESC_Instance.so.2"/>
+			<dep name="libKyocera_PCL_Blitter.so.2"/>
+			<dep name="libKyocera_PCL_Instance.so.2"/>
+			<dep name="libOkiPos_Blitter.so.2"/>
+			<dep name="libOkiPos_Instance.so.2"/>
+			<dep name="libOkidata_ESCP2_Blitter.so.2"/>
+			<dep name="libOkidata_ESCP2_Instance.so.2"/>
+			<dep name="libOkidata_ESC_Blitter.so.2"/>
+			<dep name="libOkidata_ESC_Instance.so.2"/>
+			<dep name="libOkidata_PCL_Blitter.so.2"/>
+			<dep name="libOkidata_PCL_Instance.so.2"/>
+			<dep name="libOmniXMLLibrary.so.0"/>
+			<dep name="libPanasonic_ESCP2_Blitter.so.2"/>
+			<dep name="libPanasonic_ESCP2_Instance.so.2"/>
+			<dep name="libPanasonic_ESC_Blitter.so.2"/>
+			<dep name="libPanasonic_ESC_Instance.so.2"/>
+			<dep name="libStar_ESC_Blitter.so.2"/>
+			<dep name="libStar_ESC_Instance.so.2"/>
+			<dep name="libUPDFOmniDevice.so.2"/>
+			<dep name="libXMLOmniDevice.so.2"/>
+			<dep name="libgs.so.8"/>
+			<dep name="libijs.so"/>
+			<dep name="libomni.so.2"/>
+			<dep name="ghostscript-library" op="EQ" version="8.15.2rc1" release="20.4"/>
+		</provides>
+		<requires>
+			<dep name="/usr/bin/hpijs"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/bin/sh"/>
+			<dep name="/usr/bin/perl"/>
+			<dep name="libOmniXMLLibrary.so.0"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libc.so.6(GLIBC_2.2)"/>
+			<dep name="libc.so.6(GLIBC_2.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)"/>
+			<dep name="libc.so.6(GLIBC_2.4)"/>
+			<dep name="libcups.so.2"/>
+			<dep name="libcupsimage.so.2"/>
+			<dep name="libdl.so.2"/>
+			<dep name="libdl.so.2(GLIBC_2.0)"/>
+			<dep name="libdl.so.2(GLIBC_2.1)"/>
+			<dep name="libgcc_s.so.1"/>
+			<dep name="libgcc_s.so.1(GCC_3.0)"/>
+			<dep name="libgimpprint.so.1"/>
+			<dep name="libglib-2.0.so.0"/>
+			<dep name="libgmodule-2.0.so.0"/>
+			<dep name="libgs.so.8"/>
+			<dep name="libijs.so"/>
+			<dep name="libm.so.6"/>
+			<dep name="libm.so.6(GLIBC_2.0)"/>
+			<dep name="libomni.so.2"/>
+			<dep name="libpng.so.3"/>
+			<dep name="libpthread.so.0"/>
+			<dep name="libpthread.so.0(GLIBC_2.0)"/>
+			<dep name="libstdc++.so.6"/>
+			<dep name="libstdc++.so.6(CXXABI_1.3)"/>
+			<dep name="libstdc++.so.6(GLIBCXX_3.4)"/>
+			<dep name="libxml2.so.2"/>
+			<dep name="libz.so.1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+		<conflicts>
+			<dep name="ghostscript-mini"/>
+		</conflicts>
+	</deps>
+</package>
+<package>
+	<name>ghostscript-library</name>
+	<summary>ghostscript stops on invalid page device features</summary>
+	<description>If a PostScript document includes for a specific printer
+unknown page device features ghostscripts stops its
+execution.  With this version the unkown feature will be
+ignored by ghostscript.
+</description>
+	<arch>ppc</arch>
+	<version>8.15.2rc1</version>
+	<release>20.4</release>
+	<filesize>5796717</filesize>
+	<installedsize>24545382</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>8.15.2rc1</version>
+			<release>20.4</release>
+			<filename>ghostscript-library-8.15.2rc1-20.4.ppc.rpm</filename>
+			<filesize>5796717</filesize>
+			<installedsize>24545382</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="ghostscript"/>
+			<dep name="gs"/>
+			<dep name="gs_lib"/>
+			<dep name="pstoraster"/>
+			<dep name="ghostscript-serv"/>
+			<dep name="ghostscript_any"/>
+			<dep name="libBrother_ESC_Blitter.so.2"/>
+			<dep name="libBrother_ESC_Instance.so.2"/>
+			<dep name="libBrother_PCL_Blitter.so.2"/>
+			<dep name="libBrother_PCL_Instance.so.2"/>
+			<dep name="libCanon_BJC_8500_Blitter.so.2"/>
+			<dep name="libCanon_BJC_8500_Instance.so.2"/>
+			<dep name="libCanon_Blitter.so.2"/>
+			<dep name="libCanon_Instance.so.2"/>
+			<dep name="libCanon_S450_Blitter.so.2"/>
+			<dep name="libCanon_S450_Instance.so.2"/>
+			<dep name="libEpson_ESCP2_Blitter.so.2"/>
+			<dep name="libEpson_ESCP2_Instance.so.2"/>
+			<dep name="libEpson_ESC_Blitter.so.2"/>
+			<dep name="libEpson_ESC_Instance.so.2"/>
+			<dep name="libEpson_High_Res_ESCP2_Blitter.so.2"/>
+			<dep name="libEpson_High_Res_ESCP2_Instance.so.2"/>
+			<dep name="libEpson_PCL_Blitter.so.2"/>
+			<dep name="libEpson_PCL_Instance.so.2"/>
+			<dep name="libHP_LaserJet_PCL_Blitter.so.2"/>
+			<dep name="libHP_LaserJet_PCL_Instance.so.2"/>
+			<dep name="libIBM_5577_Blitter.so.2"/>
+			<dep name="libIBM_5577_Instance.so.2"/>
+			<dep name="libIBM_ESC_Blitter.so.2"/>
+			<dep name="libIBM_ESC_Instance.so.2"/>
+			<dep name="libIBM_PCL_Blitter.so.2"/>
+			<dep name="libIBM_PCL_Instance.so.2"/>
+			<dep name="libIBM_Pages_Blitter.so.2"/>
+			<dep name="libIBM_Pages_Instance.so.2"/>
+			<dep name="libIBM_RPDL_Blitter.so.2"/>
+			<dep name="libIBM_RPDL_Instance.so.2"/>
+			<dep name="libKS_ESC_Blitter.so.2"/>
+			<dep name="libKS_ESC_Instance.so.2"/>
+			<dep name="libKyocera_PCL_Blitter.so.2"/>
+			<dep name="libKyocera_PCL_Instance.so.2"/>
+			<dep name="libOkiPos_Blitter.so.2"/>
+			<dep name="libOkiPos_Instance.so.2"/>
+			<dep name="libOkidata_ESCP2_Blitter.so.2"/>
+			<dep name="libOkidata_ESCP2_Instance.so.2"/>
+			<dep name="libOkidata_ESC_Blitter.so.2"/>
+			<dep name="libOkidata_ESC_Instance.so.2"/>
+			<dep name="libOkidata_PCL_Blitter.so.2"/>
+			<dep name="libOkidata_PCL_Instance.so.2"/>
+			<dep name="libOmniXMLLibrary.so.0"/>
+			<dep name="libPanasonic_ESCP2_Blitter.so.2"/>
+			<dep name="libPanasonic_ESCP2_Instance.so.2"/>
+			<dep name="libPanasonic_ESC_Blitter.so.2"/>
+			<dep name="libPanasonic_ESC_Instance.so.2"/>
+			<dep name="libStar_ESC_Blitter.so.2"/>
+			<dep name="libStar_ESC_Instance.so.2"/>
+			<dep name="libUPDFOmniDevice.so.2"/>
+			<dep name="libXMLOmniDevice.so.2"/>
+			<dep name="libgs.so.8"/>
+			<dep name="libijs.so"/>
+			<dep name="libomni.so.2"/>
+			<dep name="ghostscript-library" op="EQ" version="8.15.2rc1" release="20.4"/>
+		</provides>
+		<requires>
+			<dep name="/usr/bin/hpijs"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/bin/sh"/>
+			<dep name="/usr/bin/perl"/>
+			<dep name="libOmniXMLLibrary.so.0"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libc.so.6(GLIBC_2.2)"/>
+			<dep name="libc.so.6(GLIBC_2.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)"/>
+			<dep name="libc.so.6(GLIBC_2.4)"/>
+			<dep name="libcups.so.2"/>
+			<dep name="libcupsimage.so.2"/>
+			<dep name="libdl.so.2"/>
+			<dep name="libdl.so.2(GLIBC_2.0)"/>
+			<dep name="libdl.so.2(GLIBC_2.1)"/>
+			<dep name="libgcc_s.so.1"/>
+			<dep name="libgcc_s.so.1(GCC_3.0)"/>
+			<dep name="libgimpprint.so.1"/>
+			<dep name="libglib-2.0.so.0"/>
+			<dep name="libgmodule-2.0.so.0"/>
+			<dep name="libgs.so.8"/>
+			<dep name="libijs.so"/>
+			<dep name="libm.so.6"/>
+			<dep name="libm.so.6(GLIBC_2.0)"/>
+			<dep name="libomni.so.2"/>
+			<dep name="libpng.so.3"/>
+			<dep name="libpthread.so.0"/>
+			<dep name="libpthread.so.0(GLIBC_2.0)"/>
+			<dep name="libpthread.so.0(GLIBC_2.3.4)"/>
+			<dep name="libstdc++.so.6"/>
+			<dep name="libstdc++.so.6(CXXABI_1.3)"/>
+			<dep name="libstdc++.so.6(GLIBCXX_3.4)"/>
+			<dep name="libxml2.so.2"/>
+			<dep name="libz.so.1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+		<conflicts>
+			<dep name="ghostscript-mini"/>
+		</conflicts>
+	</deps>
+</package>
+<package>
+	<name>ghostscript-library</name>
+	<summary>ghostscript stops on invalid page device features</summary>
+	<description>If a PostScript document includes for a specific printer
+unknown page device features ghostscripts stops its
+execution.  With this version the unkown feature will be
+ignored by ghostscript.
+</description>
+	<arch>x86_64</arch>
+	<version>8.15.2rc1</version>
+	<release>20.4</release>
+	<filesize>5733527</filesize>
+	<installedsize>24765683</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>8.15.2rc1</version>
+			<release>20.4</release>
+			<filename>ghostscript-library-8.15.2rc1-20.4.x86_64.rpm</filename>
+			<filesize>5733527</filesize>
+			<installedsize>24765683</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="ghostscript"/>
+			<dep name="gs"/>
+			<dep name="gs_lib"/>
+			<dep name="pstoraster"/>
+			<dep name="ghostscript-serv"/>
+			<dep name="ghostscript_any"/>
+			<dep name="libBrother_ESC_Blitter.so.2()(64bit)"/>
+			<dep name="libBrother_ESC_Instance.so.2()(64bit)"/>
+			<dep name="libBrother_PCL_Blitter.so.2()(64bit)"/>
+			<dep name="libBrother_PCL_Instance.so.2()(64bit)"/>
+			<dep name="libCanon_BJC_8500_Blitter.so.2()(64bit)"/>
+			<dep name="libCanon_BJC_8500_Instance.so.2()(64bit)"/>
+			<dep name="libCanon_Blitter.so.2()(64bit)"/>
+			<dep name="libCanon_Instance.so.2()(64bit)"/>
+			<dep name="libCanon_S450_Blitter.so.2()(64bit)"/>
+			<dep name="libCanon_S450_Instance.so.2()(64bit)"/>
+			<dep name="libEpson_ESCP2_Blitter.so.2()(64bit)"/>
+			<dep name="libEpson_ESCP2_Instance.so.2()(64bit)"/>
+			<dep name="libEpson_ESC_Blitter.so.2()(64bit)"/>
+			<dep name="libEpson_ESC_Instance.so.2()(64bit)"/>
+			<dep name="libEpson_High_Res_ESCP2_Blitter.so.2()(64bit)"/>
+			<dep name="libEpson_High_Res_ESCP2_Instance.so.2()(64bit)"/>
+			<dep name="libEpson_PCL_Blitter.so.2()(64bit)"/>
+			<dep name="libEpson_PCL_Instance.so.2()(64bit)"/>
+			<dep name="libHP_LaserJet_PCL_Blitter.so.2()(64bit)"/>
+			<dep name="libHP_LaserJet_PCL_Instance.so.2()(64bit)"/>
+			<dep name="libIBM_5577_Blitter.so.2()(64bit)"/>
+			<dep name="libIBM_5577_Instance.so.2()(64bit)"/>
+			<dep name="libIBM_ESC_Blitter.so.2()(64bit)"/>
+			<dep name="libIBM_ESC_Instance.so.2()(64bit)"/>
+			<dep name="libIBM_PCL_Blitter.so.2()(64bit)"/>
+			<dep name="libIBM_PCL_Instance.so.2()(64bit)"/>
+			<dep name="libIBM_Pages_Blitter.so.2()(64bit)"/>
+			<dep name="libIBM_Pages_Instance.so.2()(64bit)"/>
+			<dep name="libIBM_RPDL_Blitter.so.2()(64bit)"/>
+			<dep name="libIBM_RPDL_Instance.so.2()(64bit)"/>
+			<dep name="libKS_ESC_Blitter.so.2()(64bit)"/>
+			<dep name="libKS_ESC_Instance.so.2()(64bit)"/>
+			<dep name="libKyocera_PCL_Blitter.so.2()(64bit)"/>
+			<dep name="libKyocera_PCL_Instance.so.2()(64bit)"/>
+			<dep name="libOkiPos_Blitter.so.2()(64bit)"/>
+			<dep name="libOkiPos_Instance.so.2()(64bit)"/>
+			<dep name="libOkidata_ESCP2_Blitter.so.2()(64bit)"/>
+			<dep name="libOkidata_ESCP2_Instance.so.2()(64bit)"/>
+			<dep name="libOkidata_ESC_Blitter.so.2()(64bit)"/>
+			<dep name="libOkidata_ESC_Instance.so.2()(64bit)"/>
+			<dep name="libOkidata_PCL_Blitter.so.2()(64bit)"/>
+			<dep name="libOkidata_PCL_Instance.so.2()(64bit)"/>
+			<dep name="libOmniXMLLibrary.so.0()(64bit)"/>
+			<dep name="libPanasonic_ESCP2_Blitter.so.2()(64bit)"/>
+			<dep name="libPanasonic_ESCP2_Instance.so.2()(64bit)"/>
+			<dep name="libPanasonic_ESC_Blitter.so.2()(64bit)"/>
+			<dep name="libPanasonic_ESC_Instance.so.2()(64bit)"/>
+			<dep name="libStar_ESC_Blitter.so.2()(64bit)"/>
+			<dep name="libStar_ESC_Instance.so.2()(64bit)"/>
+			<dep name="libUPDFOmniDevice.so.2()(64bit)"/>
+			<dep name="libXMLOmniDevice.so.2()(64bit)"/>
+			<dep name="libgs.so.8()(64bit)"/>
+			<dep name="libijs.so()(64bit)"/>
+			<dep name="libomni.so.2()(64bit)"/>
+			<dep name="ghostscript-library" op="EQ" version="8.15.2rc1" release="20.4"/>
+		</provides>
+		<requires>
+			<dep name="/usr/bin/hpijs"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/bin/sh"/>
+			<dep name="/usr/bin/perl"/>
+			<dep name="libOmniXMLLibrary.so.0()(64bit)"/>
+			<dep name="libc.so.6()(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.3)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.4)(64bit)"/>
+			<dep name="libcups.so.2()(64bit)"/>
+			<dep name="libcupsimage.so.2()(64bit)"/>
+			<dep name="libdl.so.2()(64bit)"/>
+			<dep name="libdl.so.2(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libgcc_s.so.1()(64bit)"/>
+			<dep name="libgcc_s.so.1(GCC_3.0)(64bit)"/>
+			<dep name="libgimpprint.so.1()(64bit)"/>
+			<dep name="libglib-2.0.so.0()(64bit)"/>
+			<dep name="libgmodule-2.0.so.0()(64bit)"/>
+			<dep name="libgs.so.8()(64bit)"/>
+			<dep name="libijs.so()(64bit)"/>
+			<dep name="libm.so.6()(64bit)"/>
+			<dep name="libm.so.6(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libomni.so.2()(64bit)"/>
+			<dep name="libpng.so.3()(64bit)"/>
+			<dep name="libpthread.so.0()(64bit)"/>
+			<dep name="libpthread.so.0(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libstdc++.so.6()(64bit)"/>
+			<dep name="libstdc++.so.6(CXXABI_1.3)(64bit)"/>
+			<dep name="libstdc++.so.6(GLIBCXX_3.4)(64bit)"/>
+			<dep name="libxml2.so.2()(64bit)"/>
+			<dep name="libz.so.1()(64bit)"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+		<conflicts>
+			<dep name="ghostscript-mini"/>
+		</conflicts>
+	</deps>
+</package>
+</subchannel></channel>

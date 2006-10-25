@@ -1,0 +1,214 @@
+<channel><subchannel>                                                  
+
+<patch>
+	<name>cron</name>
+	<arch>noarch</arch>
+	<version>1440</version>
+	<release>0</release>
+	<requires>
+		<dep kind="atom" name="cron" epoch="0" version="4.1" release="45.3" op="EQ"/>
+	</requires>
+</patch>
+<atom>
+	<name>cron</name>
+	<arch>i586</arch>
+	<version>4.1</version>
+	<release>45.3</release>
+	<freshens>
+		<dep kind="package" name="cron"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="cron" epoch="0" version="4.1" release="45.3" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>cron</name>
+	<arch>ppc</arch>
+	<version>4.1</version>
+	<release>45.3</release>
+	<freshens>
+		<dep kind="package" name="cron"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="cron" epoch="0" version="4.1" release="45.3" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>cron</name>
+	<arch>x86_64</arch>
+	<version>4.1</version>
+	<release>45.3</release>
+	<freshens>
+		<dep kind="package" name="cron"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="cron" epoch="0" version="4.1" release="45.3" op="GE"/>
+	</requires>
+</atom>
+<package>
+	<name>cron</name>
+	<summary>Local privilege escalation in Cron.</summary>
+	<description>A missing check on the return value of setuid() in 
+vixie-cron could be used by a local user to gain root 
+privileges by exhausting resource limits and waiting for a 
+cronjob to trigger.  This is tracked by the Mitre CVE ID 
+CVE-2006-2607.
+</description>
+	<arch>i586</arch>
+	<version>4.1</version>
+	<release>45.3</release>
+	<filesize>79709</filesize>
+	<installedsize>135136</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>4.1</version>
+			<release>45.3</release>
+			<filename>cron-4.1-45.3.i586.rpm</filename>
+			<filesize>79709</filesize>
+			<installedsize>135136</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="cron" op="EQ" version="4.1" release="45.3"/>
+		</provides>
+		<requires>
+			<dep name="smtp_daemon"/>
+			<dep name="permissions" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/bin/bash"/>
+			<dep name="/bin/sh"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)"/>
+			<dep name="libc.so.6(GLIBC_2.4)"/>
+			<dep name="libpam.so.0"/>
+			<dep name="libpam.so.0(LIBPAM_1.0)"/>
+			<dep name="libpam_misc.so.0"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>cron</name>
+	<summary>Local privilege escalation in Cron.</summary>
+	<description>A missing check on the return value of setuid() in 
+vixie-cron could be used by a local user to gain root 
+privileges by exhausting resource limits and waiting for a 
+cronjob to trigger.  This is tracked by the Mitre CVE ID 
+CVE-2006-2607.
+</description>
+	<arch>ppc</arch>
+	<version>4.1</version>
+	<release>45.3</release>
+	<filesize>83184</filesize>
+	<installedsize>151476</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>4.1</version>
+			<release>45.3</release>
+			<filename>cron-4.1-45.3.ppc.rpm</filename>
+			<filesize>83184</filesize>
+			<installedsize>151476</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="cron" op="EQ" version="4.1" release="45.3"/>
+		</provides>
+		<requires>
+			<dep name="smtp_daemon"/>
+			<dep name="permissions" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/bin/bash"/>
+			<dep name="/bin/sh"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)"/>
+			<dep name="libc.so.6(GLIBC_2.4)"/>
+			<dep name="libpam.so.0"/>
+			<dep name="libpam.so.0(LIBPAM_1.0)"/>
+			<dep name="libpam_misc.so.0"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>cron</name>
+	<summary>Local privilege escalation in Cron.</summary>
+	<description>A missing check on the return value of setuid() in 
+vixie-cron could be used by a local user to gain root 
+privileges by exhausting resource limits and waiting for a 
+cronjob to trigger.  This is tracked by the Mitre CVE ID 
+CVE-2006-2607.
+</description>
+	<arch>x86_64</arch>
+	<version>4.1</version>
+	<release>45.3</release>
+	<filesize>82710</filesize>
+	<installedsize>145464</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>4.1</version>
+			<release>45.3</release>
+			<filename>cron-4.1-45.3.x86_64.rpm</filename>
+			<filesize>82710</filesize>
+			<installedsize>145464</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="cron" op="EQ" version="4.1" release="45.3"/>
+		</provides>
+		<requires>
+			<dep name="smtp_daemon"/>
+			<dep name="permissions" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/bin/bash"/>
+			<dep name="/bin/sh"/>
+			<dep name="libc.so.6()(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.3)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.4)(64bit)"/>
+			<dep name="libpam.so.0()(64bit)"/>
+			<dep name="libpam.so.0(LIBPAM_1.0)(64bit)"/>
+			<dep name="libpam_misc.so.0()(64bit)"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+</subchannel></channel>

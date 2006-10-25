@@ -1,0 +1,528 @@
+<channel><subchannel>                                                  
+
+<patch>
+	<name>xorg-x11-server</name>
+	<arch>noarch</arch>
+	<version>2056</version>
+	<release>0</release>
+	<requires>
+		<dep kind="atom" name="xorg-x11-server" epoch="0" version="6.9.0" release="50.24" op="EQ"/>
+	</requires>
+</patch>
+<atom>
+	<name>xorg-x11-server</name>
+	<arch>i586</arch>
+	<version>6.9.0</version>
+	<release>50.24</release>
+	<freshens>
+		<dep kind="package" name="xorg-x11-server"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="xorg-x11-server" epoch="0" version="6.9.0" release="50.24" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>xorg-x11-server</name>
+	<arch>ppc</arch>
+	<version>6.9.0</version>
+	<release>50.24</release>
+	<freshens>
+		<dep kind="package" name="xorg-x11-server"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="xorg-x11-server" epoch="0" version="6.9.0" release="50.24" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>xorg-x11-server</name>
+	<arch>x86_64</arch>
+	<version>6.9.0</version>
+	<release>50.24</release>
+	<freshens>
+		<dep kind="package" name="xorg-x11-server"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="xorg-x11-server" epoch="0" version="6.9.0" release="50.24" op="GE"/>
+	</requires>
+</atom>
+<package>
+	<name>xorg-x11-server</name>
+	<summary>xorg-x11-server: Fix for integer overflow vulnerability</summary>
+	<description>This update fixes an integer overflow vulnerability when
+rendering CID-keyed fonts (CVE-2006-3739/CVE-2006-3740).
+</description>
+	<arch>i586</arch>
+	<version>6.9.0</version>
+	<release>50.24</release>
+	<filesize>3228726</filesize>
+	<installedsize>8056112</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>6.9.0</version>
+			<release>50.24</release>
+			<filename>xorg-x11-server-6.9.0-50.24.i586.rpm</filename>
+			<filesize>3228726</filesize>
+			<installedsize>8056112</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="XFree86-server"/>
+			<dep name="acecad_drv.so"/>
+			<dep name="aiptek_drv.so"/>
+			<dep name="apm_drv.so"/>
+			<dep name="ark_drv.so"/>
+			<dep name="bt829_drv.so"/>
+			<dep name="calcomp_drv.so"/>
+			<dep name="chips_drv.so"/>
+			<dep name="cirrus_alpine.so"/>
+			<dep name="cirrus_drv.so"/>
+			<dep name="cirrus_laguna.so"/>
+			<dep name="citron_drv.so"/>
+			<dep name="cyrix_drv.so"/>
+			<dep name="digitaledge_drv.so"/>
+			<dep name="dmc_drv.so"/>
+			<dep name="dummy_drv.so"/>
+			<dep name="dynapro_drv.so"/>
+			<dep name="elographics_drv.so"/>
+			<dep name="evdev_drv.so"/>
+			<dep name="fbdev_drv.so"/>
+			<dep name="fi1236_drv.so"/>
+			<dep name="fpit_drv.so"/>
+			<dep name="glint_drv.so"/>
+			<dep name="hyperpen_drv.so"/>
+			<dep name="i128_drv.so"/>
+			<dep name="i740_drv.so"/>
+			<dep name="imstt_drv.so"/>
+			<dep name="js_x_drv.so"/>
+			<dep name="kbd_drv.so"/>
+			<dep name="keyboard_drv.so"/>
+			<dep name="libafb.so"/>
+			<dep name="libbitmap.so"/>
+			<dep name="libcfb.so"/>
+			<dep name="libcfb16.so"/>
+			<dep name="libcfb32.so"/>
+			<dep name="libdbe.so"/>
+			<dep name="libddc.so"/>
+			<dep name="libdri.so"/>
+			<dep name="libdrm.so"/>
+			<dep name="libexa.so"/>
+			<dep name="libextmod.so"/>
+			<dep name="libfb.so"/>
+			<dep name="libfbdevhw.so"/>
+			<dep name="libfreetype.so"/>
+			<dep name="libi2c.so"/>
+			<dep name="libint10.so"/>
+			<dep name="liblayer.so"/>
+			<dep name="libmfb.so"/>
+			<dep name="libpcidata.so"/>
+			<dep name="librac.so"/>
+			<dep name="libramdac.so"/>
+			<dep name="librecord.so"/>
+			<dep name="libscanpci.so"/>
+			<dep name="libshadow.so"/>
+			<dep name="libshadowfb.so"/>
+			<dep name="libtype1.so"/>
+			<dep name="libvbe.so"/>
+			<dep name="libvgahw.so"/>
+			<dep name="libxaa.so"/>
+			<dep name="libxf1bpp.so"/>
+			<dep name="libxf4bpp.so"/>
+			<dep name="libxf8_16bpp.so"/>
+			<dep name="libxf8_32bpp.so"/>
+			<dep name="libxtrap.so"/>
+			<dep name="magellan_drv.so"/>
+			<dep name="microtouch_drv.so"/>
+			<dep name="mouse_drv.so"/>
+			<dep name="msp3430_drv.so"/>
+			<dep name="mutouch_drv.so"/>
+			<dep name="neomagic_drv.so"/>
+			<dep name="nsc_drv.so"/>
+			<dep name="palmax_drv.so"/>
+			<dep name="penmount_drv.so"/>
+			<dep name="rendition_drv.so"/>
+			<dep name="s3_drv.so"/>
+			<dep name="s3virge_drv.so"/>
+			<dep name="savage_drv.so"/>
+			<dep name="siliconmotion_drv.so"/>
+			<dep name="sisusb_drv.so"/>
+			<dep name="spaceorb_drv.so"/>
+			<dep name="summa_drv.so"/>
+			<dep name="tda8425_drv.so"/>
+			<dep name="tda9850_drv.so"/>
+			<dep name="tda9885_drv.so"/>
+			<dep name="tdfx_drv.so"/>
+			<dep name="tek4957_drv.so"/>
+			<dep name="tga_drv.so"/>
+			<dep name="trident_drv.so"/>
+			<dep name="tseng_drv.so"/>
+			<dep name="uda1380_drv.so"/>
+			<dep name="ur98_drv.so"/>
+			<dep name="v4l_drv.so"/>
+			<dep name="vesa_drv.so"/>
+			<dep name="vga_drv.so"/>
+			<dep name="vmware_drv.so"/>
+			<dep name="vnc.so"/>
+			<dep name="void_drv.so"/>
+			<dep name="xorg-x11-server" op="EQ" version="6.9.0" release="50.24"/>
+		</provides>
+		<requires>
+			<dep name="xorg-x11-server-glx" pre="1"/>
+			<dep name="/bin/rm" pre="1"/>
+			<dep name="/bin/ln" pre="1"/>
+			<dep name="/usr/bin/readlink" pre="1"/>
+			<dep name="/bin/mv" pre="1"/>
+			<dep name="/bin/cp" pre="1"/>
+			<dep name="/bin/cat" pre="1"/>
+			<dep name="/usr/bin/tr" pre="1"/>
+			<dep name="xorg-x11"/>
+			<dep name="/bin/sh"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="libX11.so.6"/>
+			<dep name="libXau.so.6"/>
+			<dep name="libXdmcp.so.6"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1)"/>
+			<dep name="libc.so.6(GLIBC_2.2)"/>
+			<dep name="libc.so.6(GLIBC_2.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)"/>
+			<dep name="libcrypt.so.1"/>
+			<dep name="libcrypt.so.1(GLIBC_2.0)"/>
+			<dep name="libdl.so.2"/>
+			<dep name="libdl.so.2(GLIBC_2.0)"/>
+			<dep name="libdl.so.2(GLIBC_2.1)"/>
+			<dep name="libfreetype.so.6"/>
+			<dep name="libgcc_s.so.1"/>
+			<dep name="libgcc_s.so.1(GCC_3.0)"/>
+			<dep name="libgcc_s.so.1(GLIBC_2.0)"/>
+			<dep name="libjpeg.so.62"/>
+			<dep name="libm.so.6"/>
+			<dep name="libm.so.6(GLIBC_2.0)"/>
+			<dep name="libresmgr.so.1"/>
+			<dep name="libusb-0.1.so.4"/>
+			<dep name="libxkbfile.so.1"/>
+			<dep name="libz.so.1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>xorg-x11-server</name>
+	<summary>xorg-x11-server: Fix for integer overflow vulnerability</summary>
+	<description>This update fixes an integer overflow vulnerability when
+rendering CID-keyed fonts (CVE-2006-3739/CVE-2006-3740).
+</description>
+	<arch>ppc</arch>
+	<version>6.9.0</version>
+	<release>50.24</release>
+	<filesize>2955339</filesize>
+	<installedsize>8089184</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>6.9.0</version>
+			<release>50.24</release>
+			<filename>xorg-x11-server-6.9.0-50.24.ppc.rpm</filename>
+			<filesize>2955339</filesize>
+			<installedsize>8089184</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="XFree86-server"/>
+			<dep name="acecad_drv.so"/>
+			<dep name="aiptek_drv.so"/>
+			<dep name="bt829_drv.so"/>
+			<dep name="calcomp_drv.so"/>
+			<dep name="chips_drv.so"/>
+			<dep name="citron_drv.so"/>
+			<dep name="digitaledge_drv.so"/>
+			<dep name="dmc_drv.so"/>
+			<dep name="dummy_drv.so"/>
+			<dep name="dynapro_drv.so"/>
+			<dep name="elographics_drv.so"/>
+			<dep name="evdev_drv.so"/>
+			<dep name="fbdev_drv.so"/>
+			<dep name="fi1236_drv.so"/>
+			<dep name="fpit_drv.so"/>
+			<dep name="glint_drv.so"/>
+			<dep name="hyperpen_drv.so"/>
+			<dep name="js_x_drv.so"/>
+			<dep name="kbd_drv.so"/>
+			<dep name="keyboard_drv.so"/>
+			<dep name="libafb.so"/>
+			<dep name="libbitmap.so"/>
+			<dep name="libcfb.so"/>
+			<dep name="libcfb16.so"/>
+			<dep name="libcfb32.so"/>
+			<dep name="libdbe.so"/>
+			<dep name="libddc.so"/>
+			<dep name="libdri.so"/>
+			<dep name="libdrm.so"/>
+			<dep name="libexa.so"/>
+			<dep name="libextmod.so"/>
+			<dep name="libfb.so"/>
+			<dep name="libfbdevhw.so"/>
+			<dep name="libfreetype.so"/>
+			<dep name="libi2c.so"/>
+			<dep name="libint10.so"/>
+			<dep name="liblayer.so"/>
+			<dep name="libmfb.so"/>
+			<dep name="libpcidata.so"/>
+			<dep name="librac.so"/>
+			<dep name="libramdac.so"/>
+			<dep name="librecord.so"/>
+			<dep name="libscanpci.so"/>
+			<dep name="libshadow.so"/>
+			<dep name="libshadowfb.so"/>
+			<dep name="libtype1.so"/>
+			<dep name="libvbe.so"/>
+			<dep name="libvgahw.so"/>
+			<dep name="libxaa.so"/>
+			<dep name="libxf1bpp.so"/>
+			<dep name="libxf4bpp.so"/>
+			<dep name="libxf8_16bpp.so"/>
+			<dep name="libxf8_32bpp.so"/>
+			<dep name="libxtrap.so"/>
+			<dep name="magellan_drv.so"/>
+			<dep name="microtouch_drv.so"/>
+			<dep name="mouse_drv.so"/>
+			<dep name="msp3430_drv.so"/>
+			<dep name="mutouch_drv.so"/>
+			<dep name="palmax_drv.so"/>
+			<dep name="penmount_drv.so"/>
+			<dep name="s3_drv.so"/>
+			<dep name="s3virge_drv.so"/>
+			<dep name="savage_drv.so"/>
+			<dep name="sisusb_drv.so"/>
+			<dep name="spaceorb_drv.so"/>
+			<dep name="summa_drv.so"/>
+			<dep name="tda8425_drv.so"/>
+			<dep name="tda9850_drv.so"/>
+			<dep name="tda9885_drv.so"/>
+			<dep name="tdfx_drv.so"/>
+			<dep name="tek4957_drv.so"/>
+			<dep name="trident_drv.so"/>
+			<dep name="uda1380_drv.so"/>
+			<dep name="ur98_drv.so"/>
+			<dep name="v4l_drv.so"/>
+			<dep name="vga_drv.so"/>
+			<dep name="vnc.so"/>
+			<dep name="void_drv.so"/>
+			<dep name="xorg-x11-server" op="EQ" version="6.9.0" release="50.24"/>
+		</provides>
+		<requires>
+			<dep name="xorg-x11-server-glx" pre="1"/>
+			<dep name="/bin/rm" pre="1"/>
+			<dep name="/bin/ln" pre="1"/>
+			<dep name="/usr/bin/readlink" pre="1"/>
+			<dep name="/bin/mv" pre="1"/>
+			<dep name="/bin/cp" pre="1"/>
+			<dep name="/bin/cat" pre="1"/>
+			<dep name="/usr/bin/tr" pre="1"/>
+			<dep name="xorg-x11"/>
+			<dep name="/bin/sh"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="libX11.so.6"/>
+			<dep name="libXau.so.6"/>
+			<dep name="libXdmcp.so.6"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1)"/>
+			<dep name="libc.so.6(GLIBC_2.2)"/>
+			<dep name="libc.so.6(GLIBC_2.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)"/>
+			<dep name="libc.so.6(GLIBC_2.4)"/>
+			<dep name="libcrypt.so.1"/>
+			<dep name="libcrypt.so.1(GLIBC_2.0)"/>
+			<dep name="libdl.so.2"/>
+			<dep name="libdl.so.2(GLIBC_2.0)"/>
+			<dep name="libdl.so.2(GLIBC_2.1)"/>
+			<dep name="libfreetype.so.6"/>
+			<dep name="libgcc_s.so.1"/>
+			<dep name="libgcc_s.so.1(GCC_3.0)"/>
+			<dep name="libgcc_s.so.1(GLIBC_2.0)"/>
+			<dep name="libjpeg.so.62"/>
+			<dep name="libm.so.6"/>
+			<dep name="libm.so.6(GLIBC_2.0)"/>
+			<dep name="libresmgr.so.1"/>
+			<dep name="libusb-0.1.so.4"/>
+			<dep name="libxkbfile.so.1"/>
+			<dep name="libz.so.1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>xorg-x11-server</name>
+	<summary>xorg-x11-server: Fix for integer overflow vulnerability</summary>
+	<description>This update fixes an integer overflow vulnerability when
+rendering CID-keyed fonts (CVE-2006-3739/CVE-2006-3740).
+</description>
+	<arch>x86_64</arch>
+	<version>6.9.0</version>
+	<release>50.24</release>
+	<filesize>3522057</filesize>
+	<installedsize>9803216</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>6.9.0</version>
+			<release>50.24</release>
+			<filename>xorg-x11-server-6.9.0-50.24.x86_64.rpm</filename>
+			<filesize>3522057</filesize>
+			<installedsize>9803216</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="XFree86-server"/>
+			<dep name="acecad_drv.so()(64bit)"/>
+			<dep name="aiptek_drv.so()(64bit)"/>
+			<dep name="apm_drv.so()(64bit)"/>
+			<dep name="ark_drv.so()(64bit)"/>
+			<dep name="bt829_drv.so()(64bit)"/>
+			<dep name="calcomp_drv.so()(64bit)"/>
+			<dep name="chips_drv.so()(64bit)"/>
+			<dep name="cirrus_alpine.so()(64bit)"/>
+			<dep name="cirrus_drv.so()(64bit)"/>
+			<dep name="cirrus_laguna.so()(64bit)"/>
+			<dep name="citron_drv.so()(64bit)"/>
+			<dep name="cyrix_drv.so()(64bit)"/>
+			<dep name="digitaledge_drv.so()(64bit)"/>
+			<dep name="dmc_drv.so()(64bit)"/>
+			<dep name="dummy_drv.so()(64bit)"/>
+			<dep name="dynapro_drv.so()(64bit)"/>
+			<dep name="elographics_drv.so()(64bit)"/>
+			<dep name="evdev_drv.so()(64bit)"/>
+			<dep name="fbdev_drv.so()(64bit)"/>
+			<dep name="fi1236_drv.so()(64bit)"/>
+			<dep name="fpit_drv.so()(64bit)"/>
+			<dep name="glint_drv.so()(64bit)"/>
+			<dep name="hyperpen_drv.so()(64bit)"/>
+			<dep name="i128_drv.so()(64bit)"/>
+			<dep name="imstt_drv.so()(64bit)"/>
+			<dep name="js_x_drv.so()(64bit)"/>
+			<dep name="kbd_drv.so()(64bit)"/>
+			<dep name="keyboard_drv.so()(64bit)"/>
+			<dep name="libafb.so()(64bit)"/>
+			<dep name="libbitmap.so()(64bit)"/>
+			<dep name="libcfb.so()(64bit)"/>
+			<dep name="libcfb16.so()(64bit)"/>
+			<dep name="libcfb32.so()(64bit)"/>
+			<dep name="libdbe.so()(64bit)"/>
+			<dep name="libddc.so()(64bit)"/>
+			<dep name="libdri.so()(64bit)"/>
+			<dep name="libdrm.so()(64bit)"/>
+			<dep name="libexa.so()(64bit)"/>
+			<dep name="libextmod.so()(64bit)"/>
+			<dep name="libfb.so()(64bit)"/>
+			<dep name="libfbdevhw.so()(64bit)"/>
+			<dep name="libfreetype.so()(64bit)"/>
+			<dep name="libi2c.so()(64bit)"/>
+			<dep name="libint10.so()(64bit)"/>
+			<dep name="liblayer.so()(64bit)"/>
+			<dep name="libmfb.so()(64bit)"/>
+			<dep name="libpcidata.so()(64bit)"/>
+			<dep name="librac.so()(64bit)"/>
+			<dep name="libramdac.so()(64bit)"/>
+			<dep name="librecord.so()(64bit)"/>
+			<dep name="libscanpci.so()(64bit)"/>
+			<dep name="libshadow.so()(64bit)"/>
+			<dep name="libshadowfb.so()(64bit)"/>
+			<dep name="libtype1.so()(64bit)"/>
+			<dep name="libvbe.so()(64bit)"/>
+			<dep name="libvgahw.so()(64bit)"/>
+			<dep name="libxaa.so()(64bit)"/>
+			<dep name="libxf1bpp.so()(64bit)"/>
+			<dep name="libxf4bpp.so()(64bit)"/>
+			<dep name="libxf8_16bpp.so()(64bit)"/>
+			<dep name="libxf8_32bpp.so()(64bit)"/>
+			<dep name="libxtrap.so()(64bit)"/>
+			<dep name="magellan_drv.so()(64bit)"/>
+			<dep name="microtouch_drv.so()(64bit)"/>
+			<dep name="mouse_drv.so()(64bit)"/>
+			<dep name="msp3430_drv.so()(64bit)"/>
+			<dep name="mutouch_drv.so()(64bit)"/>
+			<dep name="neomagic_drv.so()(64bit)"/>
+			<dep name="palmax_drv.so()(64bit)"/>
+			<dep name="penmount_drv.so()(64bit)"/>
+			<dep name="rendition_drv.so()(64bit)"/>
+			<dep name="s3_drv.so()(64bit)"/>
+			<dep name="s3virge_drv.so()(64bit)"/>
+			<dep name="savage_drv.so()(64bit)"/>
+			<dep name="siliconmotion_drv.so()(64bit)"/>
+			<dep name="sisusb_drv.so()(64bit)"/>
+			<dep name="spaceorb_drv.so()(64bit)"/>
+			<dep name="summa_drv.so()(64bit)"/>
+			<dep name="tda8425_drv.so()(64bit)"/>
+			<dep name="tda9850_drv.so()(64bit)"/>
+			<dep name="tda9885_drv.so()(64bit)"/>
+			<dep name="tdfx_drv.so()(64bit)"/>
+			<dep name="tek4957_drv.so()(64bit)"/>
+			<dep name="tga_drv.so()(64bit)"/>
+			<dep name="trident_drv.so()(64bit)"/>
+			<dep name="tseng_drv.so()(64bit)"/>
+			<dep name="uda1380_drv.so()(64bit)"/>
+			<dep name="ur98_drv.so()(64bit)"/>
+			<dep name="v4l_drv.so()(64bit)"/>
+			<dep name="vesa_drv.so()(64bit)"/>
+			<dep name="vga_drv.so()(64bit)"/>
+			<dep name="vmware_drv.so()(64bit)"/>
+			<dep name="vnc.so()(64bit)"/>
+			<dep name="void_drv.so()(64bit)"/>
+			<dep name="xorg-x11-server" op="EQ" version="6.9.0" release="50.24"/>
+		</provides>
+		<requires>
+			<dep name="xorg-x11-server-glx" pre="1"/>
+			<dep name="/bin/rm" pre="1"/>
+			<dep name="/bin/ln" pre="1"/>
+			<dep name="/usr/bin/readlink" pre="1"/>
+			<dep name="/bin/mv" pre="1"/>
+			<dep name="/bin/cp" pre="1"/>
+			<dep name="/bin/cat" pre="1"/>
+			<dep name="/usr/bin/tr" pre="1"/>
+			<dep name="xorg-x11"/>
+			<dep name="/bin/sh"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="libX11.so.6()(64bit)"/>
+			<dep name="libXau.so.6()(64bit)"/>
+			<dep name="libXdmcp.so.6()(64bit)"/>
+			<dep name="libc.so.6()(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.3)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)(64bit)"/>
+			<dep name="libcrypt.so.1()(64bit)"/>
+			<dep name="libcrypt.so.1(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libdl.so.2()(64bit)"/>
+			<dep name="libdl.so.2(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libfreetype.so.6()(64bit)"/>
+			<dep name="libjpeg.so.62()(64bit)"/>
+			<dep name="libm.so.6()(64bit)"/>
+			<dep name="libm.so.6(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libresmgr.so.1()(64bit)"/>
+			<dep name="libusb-0.1.so.4()(64bit)"/>
+			<dep name="libxkbfile.so.1()(64bit)"/>
+			<dep name="libz.so.1()(64bit)"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+</subchannel></channel>

@@ -1,0 +1,598 @@
+<channel><subchannel>                                                  
+
+<patch>
+	<name>mysql</name>
+	<arch>noarch</arch>
+	<version>1593</version>
+	<release>0</release>
+	<requires>
+		<dep kind="atom" name="mysql" epoch="0" version="5.0.18" release="20.4" op="EQ"/>
+		<dep kind="atom" name="mysql-Max" epoch="0" version="5.0.18" release="20.4" op="EQ"/>
+	</requires>
+</patch>
+<atom>
+	<name>mysql</name>
+	<arch>i586</arch>
+	<version>5.0.18</version>
+	<release>20.4</release>
+	<freshens>
+		<dep kind="package" name="mysql"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="mysql" epoch="0" version="5.0.18" release="20.4" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>mysql</name>
+	<arch>ppc</arch>
+	<version>5.0.18</version>
+	<release>20.4</release>
+	<freshens>
+		<dep kind="package" name="mysql"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="mysql" epoch="0" version="5.0.18" release="20.4" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>mysql</name>
+	<arch>ppc64</arch>
+	<version>5.0.18</version>
+	<release>20.4</release>
+	<freshens>
+		<dep kind="package" name="mysql"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="mysql" epoch="0" version="5.0.18" release="20.4" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>mysql</name>
+	<arch>x86_64</arch>
+	<version>5.0.18</version>
+	<release>20.4</release>
+	<freshens>
+		<dep kind="package" name="mysql"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="mysql" epoch="0" version="5.0.18" release="20.4" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>mysql-Max</name>
+	<arch>i586</arch>
+	<version>5.0.18</version>
+	<release>20.4</release>
+	<freshens>
+		<dep kind="package" name="mysql-Max"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="mysql-Max" epoch="0" version="5.0.18" release="20.4" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>mysql-Max</name>
+	<arch>ppc</arch>
+	<version>5.0.18</version>
+	<release>20.4</release>
+	<freshens>
+		<dep kind="package" name="mysql-Max"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="mysql-Max" epoch="0" version="5.0.18" release="20.4" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>mysql-Max</name>
+	<arch>x86_64</arch>
+	<version>5.0.18</version>
+	<release>20.4</release>
+	<freshens>
+		<dep kind="package" name="mysql-Max"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="mysql-Max" epoch="0" version="5.0.18" release="20.4" op="GE"/>
+	</requires>
+</atom>
+<package>
+	<name>mysql</name>
+	<summary>SQL command injection fixed.</summary>
+	<description>This update of mysql fixes a bug in the mysql_real_escape() 
+function that allowed SQL command injection (CVE-2006-2753).
+</description>
+	<arch>i586</arch>
+	<version>5.0.18</version>
+	<release>20.4</release>
+	<filesize>13337554</filesize>
+	<installedsize>26733381</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>5.0.18</version>
+			<release>20.4</release>
+			<filename>mysql-5.0.18-20.4.i586.rpm</filename>
+			<filesize>13337554</filesize>
+			<installedsize>26733381</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="mysql" op="EQ" version="5.0.18" release="20.4"/>
+		</provides>
+		<requires>
+			<dep name="mysql-client"/>
+			<dep name="perl-DBD-mysql"/>
+			<dep name="/usr/sbin/useradd" pre="1"/>
+			<dep name="/usr/sbin/groupadd" pre="1"/>
+			<dep name="fileutils" pre="1"/>
+			<dep name="info" pre="1"/>
+			<dep name="fillup" pre="1"/>
+			<dep name="coreutils" pre="1"/>
+			<dep name="insserv" pre="1"/>
+			<dep name="sed" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/bin/sh"/>
+			<dep name="/usr/bin/perl"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1)"/>
+			<dep name="libc.so.6(GLIBC_2.1.2)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libc.so.6(GLIBC_2.2)"/>
+			<dep name="libc.so.6(GLIBC_2.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)"/>
+			<dep name="libc.so.6(GLIBC_2.4)"/>
+			<dep name="libcrypt.so.1"/>
+			<dep name="libcrypt.so.1(GLIBC_2.0)"/>
+			<dep name="libdl.so.2"/>
+			<dep name="libdl.so.2(GLIBC_2.0)"/>
+			<dep name="libdl.so.2(GLIBC_2.1)"/>
+			<dep name="libgcc_s.so.1"/>
+			<dep name="libgcc_s.so.1(GCC_3.0)"/>
+			<dep name="libgcc_s.so.1(GLIBC_2.0)"/>
+			<dep name="libm.so.6"/>
+			<dep name="libm.so.6(GLIBC_2.0)"/>
+			<dep name="libnsl.so.1"/>
+			<dep name="libpthread.so.0"/>
+			<dep name="libpthread.so.0(GLIBC_2.0)"/>
+			<dep name="libpthread.so.0(GLIBC_2.1)"/>
+			<dep name="libpthread.so.0(GLIBC_2.2)"/>
+			<dep name="libpthread.so.0(GLIBC_2.3.2)"/>
+			<dep name="librt.so.1"/>
+			<dep name="libstdc++.so.6"/>
+			<dep name="libstdc++.so.6(CXXABI_1.3)"/>
+			<dep name="libstdc++.so.6(GLIBCXX_3.4)"/>
+			<dep name="libwrap.so.0"/>
+			<dep name="libz.so.1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>mysql</name>
+	<summary>SQL command injection fixed.</summary>
+	<description>This update of mysql fixes a bug in the mysql_real_escape() 
+function that allowed SQL command injection (CVE-2006-2753).
+</description>
+	<arch>ppc</arch>
+	<version>5.0.18</version>
+	<release>20.4</release>
+	<filesize>13448898</filesize>
+	<installedsize>27553894</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>5.0.18</version>
+			<release>20.4</release>
+			<filename>mysql-5.0.18-20.4.ppc.rpm</filename>
+			<filesize>13448898</filesize>
+			<installedsize>27553894</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="mysql" op="EQ" version="5.0.18" release="20.4"/>
+		</provides>
+		<requires>
+			<dep name="mysql-client"/>
+			<dep name="perl-DBD-mysql"/>
+			<dep name="/usr/sbin/useradd" pre="1"/>
+			<dep name="/usr/sbin/groupadd" pre="1"/>
+			<dep name="fileutils" pre="1"/>
+			<dep name="info" pre="1"/>
+			<dep name="fillup" pre="1"/>
+			<dep name="coreutils" pre="1"/>
+			<dep name="insserv" pre="1"/>
+			<dep name="sed" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/bin/sh"/>
+			<dep name="/usr/bin/perl"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1)"/>
+			<dep name="libc.so.6(GLIBC_2.1.2)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libc.so.6(GLIBC_2.2)"/>
+			<dep name="libc.so.6(GLIBC_2.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)"/>
+			<dep name="libc.so.6(GLIBC_2.4)"/>
+			<dep name="libcrypt.so.1"/>
+			<dep name="libcrypt.so.1(GLIBC_2.0)"/>
+			<dep name="libdl.so.2"/>
+			<dep name="libdl.so.2(GLIBC_2.0)"/>
+			<dep name="libdl.so.2(GLIBC_2.1)"/>
+			<dep name="libgcc_s.so.1"/>
+			<dep name="libgcc_s.so.1(GCC_3.0)"/>
+			<dep name="libgcc_s.so.1(GLIBC_2.0)"/>
+			<dep name="libm.so.6"/>
+			<dep name="libm.so.6(GLIBC_2.0)"/>
+			<dep name="libnsl.so.1"/>
+			<dep name="libpthread.so.0"/>
+			<dep name="libpthread.so.0(GLIBC_2.0)"/>
+			<dep name="libpthread.so.0(GLIBC_2.1)"/>
+			<dep name="libpthread.so.0(GLIBC_2.2)"/>
+			<dep name="libpthread.so.0(GLIBC_2.3.2)"/>
+			<dep name="librt.so.1"/>
+			<dep name="libstdc++.so.6"/>
+			<dep name="libstdc++.so.6(CXXABI_1.3)"/>
+			<dep name="libstdc++.so.6(GLIBCXX_3.4)"/>
+			<dep name="libwrap.so.0"/>
+			<dep name="libz.so.1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>mysql</name>
+	<summary>SQL command injection fixed.</summary>
+	<description>This update of mysql fixes a bug in the mysql_real_escape() 
+function that allowed SQL command injection (CVE-2006-2753).
+</description>
+	<arch>ppc64</arch>
+	<version>5.0.18</version>
+	<release>20.4</release>
+	<filesize>13419946</filesize>
+	<installedsize>28689449</installedsize>
+	<history>
+		<update>
+			<arch>ppc64</arch>
+			<epoch>0</epoch>
+			<version>5.0.18</version>
+			<release>20.4</release>
+			<filename>mysql-5.0.18-20.4.ppc64.rpm</filename>
+			<filesize>13419946</filesize>
+			<installedsize>28689449</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="mysql" op="EQ" version="5.0.18" release="20.4"/>
+		</provides>
+		<requires>
+			<dep name="mysql-client"/>
+			<dep name="perl-DBD-mysql"/>
+			<dep name="/usr/sbin/useradd" pre="1"/>
+			<dep name="/usr/sbin/groupadd" pre="1"/>
+			<dep name="fileutils" pre="1"/>
+			<dep name="info" pre="1"/>
+			<dep name="fillup" pre="1"/>
+			<dep name="coreutils" pre="1"/>
+			<dep name="insserv" pre="1"/>
+			<dep name="sed" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/bin/sh"/>
+			<dep name="/usr/bin/perl"/>
+			<dep name="libc.so.6()(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.3)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.4)(64bit)"/>
+			<dep name="libcrypt.so.1()(64bit)"/>
+			<dep name="libcrypt.so.1(GLIBC_2.3)(64bit)"/>
+			<dep name="libdl.so.2()(64bit)"/>
+			<dep name="libdl.so.2(GLIBC_2.3)(64bit)"/>
+			<dep name="libgcc_s.so.1()(64bit)"/>
+			<dep name="libm.so.6()(64bit)"/>
+			<dep name="libm.so.6(GLIBC_2.3)(64bit)"/>
+			<dep name="libnsl.so.1()(64bit)"/>
+			<dep name="libpthread.so.0()(64bit)"/>
+			<dep name="libpthread.so.0(GLIBC_2.3)(64bit)"/>
+			<dep name="libpthread.so.0(GLIBC_2.3.2)(64bit)"/>
+			<dep name="librt.so.1()(64bit)"/>
+			<dep name="libstdc++.so.6()(64bit)"/>
+			<dep name="libstdc++.so.6(CXXABI_1.3)(64bit)"/>
+			<dep name="libstdc++.so.6(GLIBCXX_3.4)(64bit)"/>
+			<dep name="libwrap.so.0()(64bit)"/>
+			<dep name="libz.so.1()(64bit)"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>mysql</name>
+	<summary>SQL command injection fixed.</summary>
+	<description>This update of mysql fixes a bug in the mysql_real_escape() 
+function that allowed SQL command injection (CVE-2006-2753).
+</description>
+	<arch>x86_64</arch>
+	<version>5.0.18</version>
+	<release>20.4</release>
+	<filesize>13652544</filesize>
+	<installedsize>27596489</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>5.0.18</version>
+			<release>20.4</release>
+			<filename>mysql-5.0.18-20.4.x86_64.rpm</filename>
+			<filesize>13652544</filesize>
+			<installedsize>27596489</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="mysql" op="EQ" version="5.0.18" release="20.4"/>
+		</provides>
+		<requires>
+			<dep name="mysql-client"/>
+			<dep name="perl-DBD-mysql"/>
+			<dep name="/usr/sbin/useradd" pre="1"/>
+			<dep name="/usr/sbin/groupadd" pre="1"/>
+			<dep name="fileutils" pre="1"/>
+			<dep name="info" pre="1"/>
+			<dep name="fillup" pre="1"/>
+			<dep name="coreutils" pre="1"/>
+			<dep name="insserv" pre="1"/>
+			<dep name="sed" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/bin/sh"/>
+			<dep name="/usr/bin/perl"/>
+			<dep name="libc.so.6()(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.3)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.4)(64bit)"/>
+			<dep name="libcrypt.so.1()(64bit)"/>
+			<dep name="libcrypt.so.1(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libdl.so.2()(64bit)"/>
+			<dep name="libdl.so.2(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libgcc_s.so.1()(64bit)"/>
+			<dep name="libm.so.6()(64bit)"/>
+			<dep name="libm.so.6(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libnsl.so.1()(64bit)"/>
+			<dep name="libpthread.so.0()(64bit)"/>
+			<dep name="libpthread.so.0(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libpthread.so.0(GLIBC_2.3.2)(64bit)"/>
+			<dep name="librt.so.1()(64bit)"/>
+			<dep name="libstdc++.so.6()(64bit)"/>
+			<dep name="libstdc++.so.6(CXXABI_1.3)(64bit)"/>
+			<dep name="libstdc++.so.6(GLIBCXX_3.4)(64bit)"/>
+			<dep name="libwrap.so.0()(64bit)"/>
+			<dep name="libz.so.1()(64bit)"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>mysql-Max</name>
+	<summary>SQL command injection fixed.</summary>
+	<description>This update of mysql fixes a bug in the mysql_real_escape() 
+function that allowed SQL command injection (CVE-2006-2753).
+</description>
+	<arch>i586</arch>
+	<version>5.0.18</version>
+	<release>20.4</release>
+	<filesize>2595580</filesize>
+	<installedsize>7078475</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>5.0.18</version>
+			<release>20.4</release>
+			<filename>mysql-Max-5.0.18-20.4.i586.rpm</filename>
+			<filesize>2595580</filesize>
+			<installedsize>7078475</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="mysql-Max" op="EQ" version="5.0.18" release="20.4"/>
+		</provides>
+		<requires>
+			<dep name="mysql"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1)"/>
+			<dep name="libc.so.6(GLIBC_2.1.2)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libc.so.6(GLIBC_2.2)"/>
+			<dep name="libc.so.6(GLIBC_2.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)"/>
+			<dep name="libc.so.6(GLIBC_2.4)"/>
+			<dep name="libcrypt.so.1"/>
+			<dep name="libcrypt.so.1(GLIBC_2.0)"/>
+			<dep name="libdl.so.2"/>
+			<dep name="libdl.so.2(GLIBC_2.0)"/>
+			<dep name="libdl.so.2(GLIBC_2.1)"/>
+			<dep name="libgcc_s.so.1"/>
+			<dep name="libgcc_s.so.1(GCC_3.0)"/>
+			<dep name="libgcc_s.so.1(GLIBC_2.0)"/>
+			<dep name="libm.so.6"/>
+			<dep name="libm.so.6(GLIBC_2.0)"/>
+			<dep name="libnsl.so.1"/>
+			<dep name="libpthread.so.0"/>
+			<dep name="libpthread.so.0(GLIBC_2.0)"/>
+			<dep name="libpthread.so.0(GLIBC_2.1)"/>
+			<dep name="libpthread.so.0(GLIBC_2.2)"/>
+			<dep name="libpthread.so.0(GLIBC_2.3.2)"/>
+			<dep name="librt.so.1"/>
+			<dep name="libstdc++.so.6"/>
+			<dep name="libstdc++.so.6(CXXABI_1.3)"/>
+			<dep name="libstdc++.so.6(GLIBCXX_3.4)"/>
+			<dep name="libwrap.so.0"/>
+			<dep name="libz.so.1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>mysql-Max</name>
+	<summary>SQL command injection fixed.</summary>
+	<description>This update of mysql fixes a bug in the mysql_real_escape() 
+function that allowed SQL command injection (CVE-2006-2753).
+</description>
+	<arch>ppc</arch>
+	<version>5.0.18</version>
+	<release>20.4</release>
+	<filesize>2296035</filesize>
+	<installedsize>6703675</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>5.0.18</version>
+			<release>20.4</release>
+			<filename>mysql-Max-5.0.18-20.4.ppc.rpm</filename>
+			<filesize>2296035</filesize>
+			<installedsize>6703675</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="mysql-Max" op="EQ" version="5.0.18" release="20.4"/>
+		</provides>
+		<requires>
+			<dep name="mysql"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1)"/>
+			<dep name="libc.so.6(GLIBC_2.1.2)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libc.so.6(GLIBC_2.2)"/>
+			<dep name="libc.so.6(GLIBC_2.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)"/>
+			<dep name="libc.so.6(GLIBC_2.4)"/>
+			<dep name="libcrypt.so.1"/>
+			<dep name="libcrypt.so.1(GLIBC_2.0)"/>
+			<dep name="libdl.so.2"/>
+			<dep name="libdl.so.2(GLIBC_2.0)"/>
+			<dep name="libdl.so.2(GLIBC_2.1)"/>
+			<dep name="libgcc_s.so.1"/>
+			<dep name="libgcc_s.so.1(GCC_3.0)"/>
+			<dep name="libgcc_s.so.1(GLIBC_2.0)"/>
+			<dep name="libm.so.6"/>
+			<dep name="libm.so.6(GLIBC_2.0)"/>
+			<dep name="libnsl.so.1"/>
+			<dep name="libpthread.so.0"/>
+			<dep name="libpthread.so.0(GLIBC_2.0)"/>
+			<dep name="libpthread.so.0(GLIBC_2.1)"/>
+			<dep name="libpthread.so.0(GLIBC_2.2)"/>
+			<dep name="libpthread.so.0(GLIBC_2.3.2)"/>
+			<dep name="librt.so.1"/>
+			<dep name="libstdc++.so.6"/>
+			<dep name="libstdc++.so.6(CXXABI_1.3)"/>
+			<dep name="libstdc++.so.6(GLIBCXX_3.4)"/>
+			<dep name="libwrap.so.0"/>
+			<dep name="libz.so.1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>mysql-Max</name>
+	<summary>SQL command injection fixed.</summary>
+	<description>This update of mysql fixes a bug in the mysql_real_escape() 
+function that allowed SQL command injection (CVE-2006-2753).
+</description>
+	<arch>x86_64</arch>
+	<version>5.0.18</version>
+	<release>20.4</release>
+	<filesize>2465060</filesize>
+	<installedsize>6902904</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>5.0.18</version>
+			<release>20.4</release>
+			<filename>mysql-Max-5.0.18-20.4.x86_64.rpm</filename>
+			<filesize>2465060</filesize>
+			<installedsize>6902904</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="mysql-Max" op="EQ" version="5.0.18" release="20.4"/>
+		</provides>
+		<requires>
+			<dep name="mysql"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="libc.so.6()(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.3)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.4)(64bit)"/>
+			<dep name="libcrypt.so.1()(64bit)"/>
+			<dep name="libcrypt.so.1(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libdl.so.2()(64bit)"/>
+			<dep name="libdl.so.2(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libgcc_s.so.1()(64bit)"/>
+			<dep name="libm.so.6()(64bit)"/>
+			<dep name="libm.so.6(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libnsl.so.1()(64bit)"/>
+			<dep name="libpthread.so.0()(64bit)"/>
+			<dep name="libpthread.so.0(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libpthread.so.0(GLIBC_2.3.2)(64bit)"/>
+			<dep name="librt.so.1()(64bit)"/>
+			<dep name="libstdc++.so.6()(64bit)"/>
+			<dep name="libstdc++.so.6(CXXABI_1.3)(64bit)"/>
+			<dep name="libstdc++.so.6(GLIBCXX_3.4)(64bit)"/>
+			<dep name="libwrap.so.0()(64bit)"/>
+			<dep name="libz.so.1()(64bit)"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+</subchannel></channel>

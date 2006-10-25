@@ -1,0 +1,239 @@
+<channel><subchannel>                                                  
+
+<patch>
+	<name>snort</name>
+	<arch>noarch</arch>
+	<version>1598</version>
+	<release>0</release>
+	<requires>
+		<dep kind="atom" name="snort" epoch="0" version="2.4.4" release="10.4" op="EQ"/>
+	</requires>
+</patch>
+<atom>
+	<name>snort</name>
+	<arch>i586</arch>
+	<version>2.4.4</version>
+	<release>10.4</release>
+	<freshens>
+		<dep kind="package" name="snort"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="snort" epoch="0" version="2.4.4" release="10.4" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>snort</name>
+	<arch>ppc</arch>
+	<version>2.4.4</version>
+	<release>10.4</release>
+	<freshens>
+		<dep kind="package" name="snort"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="snort" epoch="0" version="2.4.4" release="10.4" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>snort</name>
+	<arch>x86_64</arch>
+	<version>2.4.4</version>
+	<release>10.4</release>
+	<freshens>
+		<dep kind="package" name="snort"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="snort" epoch="0" version="2.4.4" release="10.4" op="GE"/>
+	</requires>
+</atom>
+<package>
+	<name>snort</name>
+	<summary>Evasion attack in http_inspect preprocessor.</summary>
+	<description>This update fixes an evasion attack on URL parsing. The 
+faulty code is in the http_inspect preprocessor. 
+(CVE-2006-2769)
+</description>
+	<arch>i586</arch>
+	<version>2.4.4</version>
+	<release>10.4</release>
+	<filesize>3967298</filesize>
+	<installedsize>7258843</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>2.4.4</version>
+			<release>10.4</release>
+			<filename>snort-2.4.4-10.4.i586.rpm</filename>
+			<filesize>3967298</filesize>
+			<installedsize>7258843</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="snort" op="EQ" version="2.4.4" release="10.4"/>
+		</provides>
+		<requires>
+			<dep name="logrotate"/>
+			<dep name="/usr/sbin/useradd" pre="1"/>
+			<dep name="/usr/sbin/groupadd" pre="1"/>
+			<dep name="insserv" pre="1"/>
+			<dep name="sed" pre="1"/>
+			<dep name="fillup" pre="1"/>
+			<dep name="coreutils" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/bin/bash"/>
+			<dep name="/bin/sh"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1)"/>
+			<dep name="libc.so.6(GLIBC_2.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)"/>
+			<dep name="libc.so.6(GLIBC_2.4)"/>
+			<dep name="libdl.so.2"/>
+			<dep name="libm.so.6"/>
+			<dep name="libmysqlclient.so.15"/>
+			<dep name="libnsl.so.1"/>
+			<dep name="libodbc.so.1"/>
+			<dep name="libpcap.so.0"/>
+			<dep name="libpcre.so.0"/>
+			<dep name="libpq.so.4"/>
+			<dep name="libz.so.1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>snort</name>
+	<summary>Evasion attack in http_inspect preprocessor.</summary>
+	<description>This update fixes an evasion attack on URL parsing. The 
+faulty code is in the http_inspect preprocessor. 
+(CVE-2006-2769)
+</description>
+	<arch>ppc</arch>
+	<version>2.4.4</version>
+	<release>10.4</release>
+	<filesize>3984536</filesize>
+	<installedsize>7353226</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>2.4.4</version>
+			<release>10.4</release>
+			<filename>snort-2.4.4-10.4.ppc.rpm</filename>
+			<filesize>3984536</filesize>
+			<installedsize>7353226</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="snort" op="EQ" version="2.4.4" release="10.4"/>
+		</provides>
+		<requires>
+			<dep name="logrotate"/>
+			<dep name="/usr/sbin/useradd" pre="1"/>
+			<dep name="/usr/sbin/groupadd" pre="1"/>
+			<dep name="insserv" pre="1"/>
+			<dep name="sed" pre="1"/>
+			<dep name="fillup" pre="1"/>
+			<dep name="coreutils" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/bin/bash"/>
+			<dep name="/bin/sh"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1)"/>
+			<dep name="libc.so.6(GLIBC_2.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)"/>
+			<dep name="libc.so.6(GLIBC_2.4)"/>
+			<dep name="libdl.so.2"/>
+			<dep name="libm.so.6"/>
+			<dep name="libmysqlclient.so.15"/>
+			<dep name="libnsl.so.1"/>
+			<dep name="libodbc.so.1"/>
+			<dep name="libpcap.so.0"/>
+			<dep name="libpcre.so.0"/>
+			<dep name="libpq.so.4"/>
+			<dep name="libz.so.1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>snort</name>
+	<summary>Evasion attack in http_inspect preprocessor.</summary>
+	<description>This update fixes an evasion attack on URL parsing. The 
+faulty code is in the http_inspect preprocessor. 
+(CVE-2006-2769)
+</description>
+	<arch>x86_64</arch>
+	<version>2.4.4</version>
+	<release>10.4</release>
+	<filesize>3998890</filesize>
+	<installedsize>7301667</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>2.4.4</version>
+			<release>10.4</release>
+			<filename>snort-2.4.4-10.4.x86_64.rpm</filename>
+			<filesize>3998890</filesize>
+			<installedsize>7301667</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="snort" op="EQ" version="2.4.4" release="10.4"/>
+		</provides>
+		<requires>
+			<dep name="logrotate"/>
+			<dep name="/usr/sbin/useradd" pre="1"/>
+			<dep name="/usr/sbin/groupadd" pre="1"/>
+			<dep name="insserv" pre="1"/>
+			<dep name="sed" pre="1"/>
+			<dep name="fillup" pre="1"/>
+			<dep name="coreutils" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/bin/bash"/>
+			<dep name="/bin/sh"/>
+			<dep name="libc.so.6()(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.3)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.4)(64bit)"/>
+			<dep name="libdl.so.2()(64bit)"/>
+			<dep name="libm.so.6()(64bit)"/>
+			<dep name="libmysqlclient.so.15()(64bit)"/>
+			<dep name="libnsl.so.1()(64bit)"/>
+			<dep name="libodbc.so.1()(64bit)"/>
+			<dep name="libpcap.so.0()(64bit)"/>
+			<dep name="libpcre.so.0()(64bit)"/>
+			<dep name="libpq.so.4()(64bit)"/>
+			<dep name="libz.so.1()(64bit)"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+</subchannel></channel>

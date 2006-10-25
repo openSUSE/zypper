@@ -1,0 +1,11 @@
+<channel><subchannel>                                                  
+
+<patch>
+	<name>postgresql-server</name>
+	<arch>noarch</arch>
+	<version>1442</version>
+	<release>0</release>
+	<requires>
+	</requires>
+</patch>
+</subchannel></channel>

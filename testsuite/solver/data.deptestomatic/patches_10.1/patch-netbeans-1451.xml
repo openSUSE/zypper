@@ -1,0 +1,65 @@
+<channel><subchannel>                                                  
+
+<patch>
+	<name>netbeans</name>
+	<arch>noarch</arch>
+	<version>1451</version>
+	<release>0</release>
+	<requires>
+		<dep kind="atom" name="netbeans" epoch="0" version="5.0" release="14.1" op="EQ"/>
+	</requires>
+</patch>
+<atom>
+	<name>netbeans</name>
+	<arch>noarch</arch>
+	<version>5.0</version>
+	<release>14.1</release>
+	<freshens>
+		<dep kind="package" name="netbeans"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="netbeans" epoch="0" version="5.0" release="14.1" op="GE"/>
+	</requires>
+</atom>
+<package>
+	<name>netbeans</name>
+	<summary>Open-source Integrated Development Environment (IDE)</summary>
+	<description>The NetBeans IDE is a world-class development environment 
+written in Java. It can be used to develop code in Java, 
+HTML, XML, JSP, C/C++, and other languages. The IDE is 
+modular and there is a huge variety of commercial and free 
+extensions for it that support various technologies.
+</description>
+	<arch>noarch</arch>
+	<version>5.0</version>
+	<release>14.1</release>
+	<filesize>50380147</filesize>
+	<installedsize>124053775</installedsize>
+	<history>
+		<update>
+			<arch>noarch</arch>
+			<epoch>0</epoch>
+			<version>5.0</version>
+			<release>14.1</release>
+			<filename>netbeans-5.0-14.1.noarch.rpm</filename>
+			<filesize>50380147</filesize>
+			<installedsize>124053775</installedsize>
+			<importance>optional</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="NetBeans"/>
+			<dep name="netbeans" op="EQ" version="5.0" release="14.1"/>
+		</provides>
+		<requires>
+			<dep name="/bin/sh"/>
+			<dep name="java"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+</subchannel></channel>

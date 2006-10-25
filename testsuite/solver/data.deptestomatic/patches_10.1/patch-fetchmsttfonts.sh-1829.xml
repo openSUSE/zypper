@@ -1,0 +1,11 @@
+<channel><subchannel>                                                  
+
+<patch>
+	<name>fetchmsttfonts.sh</name>
+	<arch>noarch</arch>
+	<version>1829</version>
+	<release>0</release>
+	<requires>
+	</requires>
+</patch>
+</subchannel></channel>

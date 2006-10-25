@@ -1,0 +1,485 @@
+<channel><subchannel>                                                  
+
+<patch>
+	<name>MozillaFirefox</name>
+	<arch>noarch</arch>
+	<version>2090</version>
+	<release>0</release>
+	<requires>
+		<dep kind="atom" name="MozillaFirefox" epoch="0" version="1.5.0.7" release="1.2" op="EQ"/>
+		<dep kind="atom" name="MozillaFirefox-translations" epoch="0" version="1.5.0.7" release="1.2" op="EQ"/>
+	</requires>
+</patch>
+<atom>
+	<name>MozillaFirefox</name>
+	<arch>i586</arch>
+	<version>1.5.0.7</version>
+	<release>1.2</release>
+	<freshens>
+		<dep kind="package" name="MozillaFirefox"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="MozillaFirefox" epoch="0" version="1.5.0.7" release="1.2" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>MozillaFirefox</name>
+	<arch>ppc</arch>
+	<version>1.5.0.7</version>
+	<release>1.2</release>
+	<freshens>
+		<dep kind="package" name="MozillaFirefox"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="MozillaFirefox" epoch="0" version="1.5.0.7" release="1.2" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>MozillaFirefox-translations</name>
+	<arch>i586</arch>
+	<version>1.5.0.7</version>
+	<release>1.2</release>
+	<freshens>
+		<dep kind="package" name="MozillaFirefox-translations"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="MozillaFirefox-translations" epoch="0" version="1.5.0.7" release="1.2" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>MozillaFirefox-translations</name>
+	<arch>ppc</arch>
+	<version>1.5.0.7</version>
+	<release>1.2</release>
+	<freshens>
+		<dep kind="package" name="MozillaFirefox-translations"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="MozillaFirefox-translations" epoch="0" version="1.5.0.7" release="1.2" op="GE"/>
+	</requires>
+</atom>
+<package>
+	<name>MozillaFirefox</name>
+	<summary>MozillaFirefox: Security update to version 1.5.0.7</summary>
+	<description>This security update brings Mozilla Firefox to version
+1.5.0.7.
+
+Please also see
+http://www.mozilla.org/projects/security/known-vulnerabiliti
+es.html for more details.
+
+It fixes the following security problems: MFSA
+2006-64/CVE-2006-4571: Crashes with evidence of memory
+corruption MFSA 2006-62/CVE-2006-4569: Popup-blocker
+cross-site scripting (XSS) MFSA 2006-61/CVE-2006-4568:
+Frame spoofing using document.open() MFSA
+2006-60/CVE-2006-4340/CERT VU#845620: RSA Signature Forgery
+MFSA 2006-59/CVE-2006-4253: Concurrency-related
+vulnerability MFSA 2006-58/CVE-2006-4567: Auto-Update
+compromise through DNS and SSL spoofing MFSA
+2006-57/CVE-2006-4565/CVE-2006-4566: JavaScript Regular
+Expression Heap Corruption
+</description>
+	<arch>i586</arch>
+	<version>1.5.0.7</version>
+	<release>1.2</release>
+	<filesize>8758184</filesize>
+	<installedsize>22593747</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>1.5.0.7</version>
+			<release>1.2</release>
+			<filename>MozillaFirefox-1.5.0.7-1.2.i586.rpm</filename>
+			<filesize>8758184</filesize>
+			<installedsize>22593747</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="web_browser"/>
+			<dep name="MozillaFirebird"/>
+			<dep name="firefox"/>
+			<dep name="libdbusservice.so"/>
+			<dep name="libinspector.so"/>
+			<dep name="libjsd.so"/>
+			<dep name="libmozgnome.so"/>
+			<dep name="libmozjs.so"/>
+			<dep name="libnkgnomevfs.so"/>
+			<dep name="libnullplugin.so"/>
+			<dep name="libsystem-pref-gconf.so"/>
+			<dep name="libunixproxy.so"/>
+			<dep name="libxpcom.so"/>
+			<dep name="libxpcom_compat.so"/>
+			<dep name="libxpcom_core.so"/>
+			<dep name="libxpinstall.so"/>
+			<dep name="libxpistub.so"/>
+			<dep name="MozillaFirefox" op="EQ" version="1.5.0.7" release="1.2"/>
+		</provides>
+		<requires>
+			<dep name="libstdc++" pre="1"/>
+			<dep name="fileutils" pre="1"/>
+			<dep name="textutils" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="mozilla-nspr" op="GE" version="4.6.1"/>
+			<dep name="mozilla-nss" op="GE" version="3.11"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/bin/sh"/>
+			<dep name="libORBit-2.so.0"/>
+			<dep name="libX11.so.6"/>
+			<dep name="libXext.so.6"/>
+			<dep name="libXft.so.2"/>
+			<dep name="libXrender.so.1"/>
+			<dep name="libXt.so.6"/>
+			<dep name="libatk-1.0.so.0"/>
+			<dep name="libbonobo-2.so.0"/>
+			<dep name="libbonobo-activation.so.4"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libc.so.6(GLIBC_2.2)"/>
+			<dep name="libc.so.6(GLIBC_2.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)"/>
+			<dep name="libc.so.6(GLIBC_2.4)"/>
+			<dep name="libcairo.so.2"/>
+			<dep name="libdbus-1.so.2"/>
+			<dep name="libdbus-glib-1.so.2"/>
+			<dep name="libdl.so.2"/>
+			<dep name="libdl.so.2(GLIBC_2.0)"/>
+			<dep name="libfontconfig.so.1"/>
+			<dep name="libfreetype.so.6"/>
+			<dep name="libgcc_s.so.1"/>
+			<dep name="libgcc_s.so.1(GLIBC_2.0)"/>
+			<dep name="libgconf-2.so.4"/>
+			<dep name="libgdk-x11-2.0.so.0"/>
+			<dep name="libgdk_pixbuf-2.0.so.0"/>
+			<dep name="libglib-2.0.so.0"/>
+			<dep name="libglitz.so.1"/>
+			<dep name="libgmodule-2.0.so.0"/>
+			<dep name="libgnome-2.so.0"/>
+			<dep name="libgnomevfs-2.so.0"/>
+			<dep name="libgobject-2.0.so.0"/>
+			<dep name="libgthread-2.0.so.0"/>
+			<dep name="libgtk-x11-2.0.so.0"/>
+			<dep name="libjpeg.so.62"/>
+			<dep name="libm.so.6"/>
+			<dep name="libm.so.6(GLIBC_2.0)"/>
+			<dep name="libm.so.6(GLIBC_2.1)"/>
+			<dep name="libmozjs.so"/>
+			<dep name="libnspr4.so"/>
+			<dep name="libnss3.so"/>
+			<dep name="libnss3.so(NSS_3.2)"/>
+			<dep name="libnss3.so(NSS_3.3)"/>
+			<dep name="libnss3.so(NSS_3.4)"/>
+			<dep name="libnss3.so(NSS_3.5)"/>
+			<dep name="libnss3.so(NSS_3.6)"/>
+			<dep name="libnss3.so(NSS_3.7)"/>
+			<dep name="libnss3.so(NSS_3.9)"/>
+			<dep name="libnss3.so(NSS_3.9.3)"/>
+			<dep name="libpango-1.0.so.0"/>
+			<dep name="libpangocairo-1.0.so.0"/>
+			<dep name="libpangoft2-1.0.so.0"/>
+			<dep name="libpangoxft-1.0.so.0"/>
+			<dep name="libplc4.so"/>
+			<dep name="libplds4.so"/>
+			<dep name="libpng.so.3"/>
+			<dep name="libpng12.so.0"/>
+			<dep name="libpopt.so.0"/>
+			<dep name="libpthread.so.0"/>
+			<dep name="libpthread.so.0(GLIBC_2.0)"/>
+			<dep name="libpthread.so.0(GLIBC_2.1)"/>
+			<dep name="libpthread.so.0(GLIBC_2.2)"/>
+			<dep name="libsmime3.so"/>
+			<dep name="libsmime3.so(NSS_3.2)"/>
+			<dep name="libsmime3.so(NSS_3.3)"/>
+			<dep name="libsmime3.so(NSS_3.4)"/>
+			<dep name="libsmime3.so(NSS_3.4.1)"/>
+			<dep name="libsmime3.so(NSS_3.6)"/>
+			<dep name="libssl3.so"/>
+			<dep name="libssl3.so(NSS_3.2)"/>
+			<dep name="libssl3.so(NSS_3.4)"/>
+			<dep name="libstartup-notification-1.so.0"/>
+			<dep name="libstdc++.so.6"/>
+			<dep name="libstdc++.so.6(CXXABI_1.3)"/>
+			<dep name="libstdc++.so.6(GLIBCXX_3.4)"/>
+			<dep name="libxpcom.so"/>
+			<dep name="libxpcom_compat.so"/>
+			<dep name="libxpcom_core.so"/>
+			<dep name="libz.so.1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>MozillaFirefox</name>
+	<summary>MozillaFirefox: Security update to version 1.5.0.7</summary>
+	<description>This security update brings Mozilla Firefox to version
+1.5.0.7.
+
+Please also see
+http://www.mozilla.org/projects/security/known-vulnerabiliti
+es.html for more details.
+
+It fixes the following security problems: MFSA
+2006-64/CVE-2006-4571: Crashes with evidence of memory
+corruption MFSA 2006-62/CVE-2006-4569: Popup-blocker
+cross-site scripting (XSS) MFSA 2006-61/CVE-2006-4568:
+Frame spoofing using document.open() MFSA
+2006-60/CVE-2006-4340/CERT VU#845620: RSA Signature Forgery
+MFSA 2006-59/CVE-2006-4253: Concurrency-related
+vulnerability MFSA 2006-58/CVE-2006-4567: Auto-Update
+compromise through DNS and SSL spoofing MFSA
+2006-57/CVE-2006-4565/CVE-2006-4566: JavaScript Regular
+Expression Heap Corruption
+</description>
+	<arch>ppc</arch>
+	<version>1.5.0.7</version>
+	<release>1.2</release>
+	<filesize>8787254</filesize>
+	<installedsize>26962107</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>1.5.0.7</version>
+			<release>1.2</release>
+			<filename>MozillaFirefox-1.5.0.7-1.2.ppc.rpm</filename>
+			<filesize>8787254</filesize>
+			<installedsize>26962107</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="web_browser"/>
+			<dep name="MozillaFirebird"/>
+			<dep name="firefox"/>
+			<dep name="libdbusservice.so"/>
+			<dep name="libinspector.so"/>
+			<dep name="libjsd.so"/>
+			<dep name="libmozgnome.so"/>
+			<dep name="libmozjs.so"/>
+			<dep name="libnkgnomevfs.so"/>
+			<dep name="libnullplugin.so"/>
+			<dep name="libsystem-pref-gconf.so"/>
+			<dep name="libunixproxy.so"/>
+			<dep name="libxpcom.so"/>
+			<dep name="libxpcom_compat.so"/>
+			<dep name="libxpcom_core.so"/>
+			<dep name="libxpinstall.so"/>
+			<dep name="libxpistub.so"/>
+			<dep name="MozillaFirefox" op="EQ" version="1.5.0.7" release="1.2"/>
+		</provides>
+		<requires>
+			<dep name="libstdc++" pre="1"/>
+			<dep name="fileutils" pre="1"/>
+			<dep name="textutils" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="mozilla-nspr" op="GE" version="4.6.1"/>
+			<dep name="mozilla-nss" op="GE" version="3.11"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/bin/sh"/>
+			<dep name="libORBit-2.so.0"/>
+			<dep name="libX11.so.6"/>
+			<dep name="libXext.so.6"/>
+			<dep name="libXft.so.2"/>
+			<dep name="libXrender.so.1"/>
+			<dep name="libXt.so.6"/>
+			<dep name="libatk-1.0.so.0"/>
+			<dep name="libbonobo-2.so.0"/>
+			<dep name="libbonobo-activation.so.4"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libc.so.6(GLIBC_2.2)"/>
+			<dep name="libc.so.6(GLIBC_2.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)"/>
+			<dep name="libc.so.6(GLIBC_2.4)"/>
+			<dep name="libcairo.so.2"/>
+			<dep name="libdbus-1.so.2"/>
+			<dep name="libdbus-glib-1.so.2"/>
+			<dep name="libdl.so.2"/>
+			<dep name="libdl.so.2(GLIBC_2.0)"/>
+			<dep name="libfontconfig.so.1"/>
+			<dep name="libfreetype.so.6"/>
+			<dep name="libgcc_s.so.1"/>
+			<dep name="libgcc_s.so.1(GCC_3.0)"/>
+			<dep name="libgcc_s.so.1(GLIBC_2.0)"/>
+			<dep name="libgconf-2.so.4"/>
+			<dep name="libgdk-x11-2.0.so.0"/>
+			<dep name="libgdk_pixbuf-2.0.so.0"/>
+			<dep name="libglib-2.0.so.0"/>
+			<dep name="libglitz.so.1"/>
+			<dep name="libgmodule-2.0.so.0"/>
+			<dep name="libgnome-2.so.0"/>
+			<dep name="libgnomevfs-2.so.0"/>
+			<dep name="libgobject-2.0.so.0"/>
+			<dep name="libgthread-2.0.so.0"/>
+			<dep name="libgtk-x11-2.0.so.0"/>
+			<dep name="libjpeg.so.62"/>
+			<dep name="libm.so.6"/>
+			<dep name="libm.so.6(GLIBC_2.0)"/>
+			<dep name="libm.so.6(GLIBC_2.1)"/>
+			<dep name="libmozjs.so"/>
+			<dep name="libnspr4.so"/>
+			<dep name="libnss3.so"/>
+			<dep name="libnss3.so(NSS_3.2)"/>
+			<dep name="libnss3.so(NSS_3.3)"/>
+			<dep name="libnss3.so(NSS_3.4)"/>
+			<dep name="libnss3.so(NSS_3.5)"/>
+			<dep name="libnss3.so(NSS_3.6)"/>
+			<dep name="libnss3.so(NSS_3.7)"/>
+			<dep name="libnss3.so(NSS_3.9)"/>
+			<dep name="libnss3.so(NSS_3.9.3)"/>
+			<dep name="libpango-1.0.so.0"/>
+			<dep name="libpangocairo-1.0.so.0"/>
+			<dep name="libpangoft2-1.0.so.0"/>
+			<dep name="libpangoxft-1.0.so.0"/>
+			<dep name="libplc4.so"/>
+			<dep name="libplds4.so"/>
+			<dep name="libpng.so.3"/>
+			<dep name="libpng12.so.0"/>
+			<dep name="libpopt.so.0"/>
+			<dep name="libpthread.so.0"/>
+			<dep name="libpthread.so.0(GLIBC_2.0)"/>
+			<dep name="libpthread.so.0(GLIBC_2.1)"/>
+			<dep name="libpthread.so.0(GLIBC_2.2)"/>
+			<dep name="libpthread.so.0(GLIBC_2.3.4)"/>
+			<dep name="libsmime3.so"/>
+			<dep name="libsmime3.so(NSS_3.2)"/>
+			<dep name="libsmime3.so(NSS_3.3)"/>
+			<dep name="libsmime3.so(NSS_3.4)"/>
+			<dep name="libsmime3.so(NSS_3.4.1)"/>
+			<dep name="libsmime3.so(NSS_3.6)"/>
+			<dep name="libssl3.so"/>
+			<dep name="libssl3.so(NSS_3.2)"/>
+			<dep name="libssl3.so(NSS_3.4)"/>
+			<dep name="libstartup-notification-1.so.0"/>
+			<dep name="libstdc++.so.6"/>
+			<dep name="libstdc++.so.6(CXXABI_1.3)"/>
+			<dep name="libstdc++.so.6(GLIBCXX_3.4)"/>
+			<dep name="libxpcom.so"/>
+			<dep name="libxpcom_compat.so"/>
+			<dep name="libxpcom_core.so"/>
+			<dep name="libz.so.1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>MozillaFirefox-translations</name>
+	<summary>MozillaFirefox: Security update to version 1.5.0.7</summary>
+	<description>This security update brings Mozilla Firefox to version
+1.5.0.7.
+
+Please also see
+http://www.mozilla.org/projects/security/known-vulnerabiliti
+es.html for more details.
+
+It fixes the following security problems: MFSA
+2006-64/CVE-2006-4571: Crashes with evidence of memory
+corruption MFSA 2006-62/CVE-2006-4569: Popup-blocker
+cross-site scripting (XSS) MFSA 2006-61/CVE-2006-4568:
+Frame spoofing using document.open() MFSA
+2006-60/CVE-2006-4340/CERT VU#845620: RSA Signature Forgery
+MFSA 2006-59/CVE-2006-4253: Concurrency-related
+vulnerability MFSA 2006-58/CVE-2006-4567: Auto-Update
+compromise through DNS and SSL spoofing MFSA
+2006-57/CVE-2006-4565/CVE-2006-4566: JavaScript Regular
+Expression Heap Corruption
+</description>
+	<arch>i586</arch>
+	<version>1.5.0.7</version>
+	<release>1.2</release>
+	<filesize>3753418</filesize>
+	<installedsize>20862964</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>1.5.0.7</version>
+			<release>1.2</release>
+			<filename>MozillaFirefox-translations-1.5.0.7-1.2.i586.rpm</filename>
+			<filesize>3753418</filesize>
+			<installedsize>20862964</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="MozillaFirefox-translations" op="EQ" version="1.5.0.7" release="1.2"/>
+		</provides>
+		<requires>
+			<dep name="rpmlib(VersionedDependencies)" op="LE" version="3.0.3" release="1" pre="1"/>
+			<dep name="MozillaFirefox" op="EQ" version="1.5.0.7" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>MozillaFirefox-translations</name>
+	<summary>MozillaFirefox: Security update to version 1.5.0.7</summary>
+	<description>This security update brings Mozilla Firefox to version
+1.5.0.7.
+
+Please also see
+http://www.mozilla.org/projects/security/known-vulnerabiliti
+es.html for more details.
+
+It fixes the following security problems: MFSA
+2006-64/CVE-2006-4571: Crashes with evidence of memory
+corruption MFSA 2006-62/CVE-2006-4569: Popup-blocker
+cross-site scripting (XSS) MFSA 2006-61/CVE-2006-4568:
+Frame spoofing using document.open() MFSA
+2006-60/CVE-2006-4340/CERT VU#845620: RSA Signature Forgery
+MFSA 2006-59/CVE-2006-4253: Concurrency-related
+vulnerability MFSA 2006-58/CVE-2006-4567: Auto-Update
+compromise through DNS and SSL spoofing MFSA
+2006-57/CVE-2006-4565/CVE-2006-4566: JavaScript Regular
+Expression Heap Corruption
+</description>
+	<arch>ppc</arch>
+	<version>1.5.0.7</version>
+	<release>1.2</release>
+	<filesize>3754911</filesize>
+	<installedsize>20862964</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>1.5.0.7</version>
+			<release>1.2</release>
+			<filename>MozillaFirefox-translations-1.5.0.7-1.2.ppc.rpm</filename>
+			<filesize>3754911</filesize>
+			<installedsize>20862964</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="MozillaFirefox-translations" op="EQ" version="1.5.0.7" release="1.2"/>
+		</provides>
+		<requires>
+			<dep name="rpmlib(VersionedDependencies)" op="LE" version="3.0.3" release="1" pre="1"/>
+			<dep name="MozillaFirefox" op="EQ" version="1.5.0.7" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+</subchannel></channel>

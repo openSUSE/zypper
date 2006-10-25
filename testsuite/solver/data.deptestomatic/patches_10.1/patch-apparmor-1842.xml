@@ -1,0 +1,1501 @@
+<channel><subchannel>                                                  
+
+<patch>
+	<name>apparmor</name>
+	<arch>noarch</arch>
+	<version>1842</version>
+	<release>0</release>
+	<requires>
+		<dep kind="atom" name="apparmor-admin_en" epoch="0" version="10" release="7.5" op="EQ"/>
+		<dep kind="atom" name="apparmor-docs" epoch="0" version="2.0" release="17.5" op="EQ"/>
+		<dep kind="atom" name="apparmor-parser" epoch="0" version="2.0" release="21.5" op="EQ"/>
+		<dep kind="atom" name="apparmor-profiles" epoch="0" version="2.0" release="34.9" op="EQ"/>
+		<dep kind="atom" name="apparmor-utils" epoch="0" version="2.0" release="23.5" op="EQ"/>
+		<dep kind="atom" name="audit" epoch="0" version="1.1.3" release="23.3" op="EQ"/>
+		<dep kind="atom" name="audit-devel" epoch="0" version="1.1.3" release="23.3" op="EQ"/>
+		<dep kind="atom" name="audit-libs" epoch="0" version="1.1.3" release="23.3" op="EQ"/>
+		<dep kind="atom" name="yast2-apparmor" epoch="0" version="2.0" release="27.5" op="EQ"/>
+	</requires>
+</patch>
+<atom>
+	<name>apparmor-admin_en</name>
+	<arch>noarch</arch>
+	<version>10</version>
+	<release>7.5</release>
+	<freshens>
+		<dep kind="package" name="apparmor-admin_en"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="apparmor-admin_en" epoch="0" version="10" release="7.5" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>apparmor-docs</name>
+	<arch>noarch</arch>
+	<version>2.0</version>
+	<release>17.5</release>
+	<freshens>
+		<dep kind="package" name="apparmor-docs"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="apparmor-docs" epoch="0" version="2.0" release="17.5" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>apparmor-parser</name>
+	<arch>i586</arch>
+	<version>2.0</version>
+	<release>21.5</release>
+	<freshens>
+		<dep kind="package" name="apparmor-parser"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="apparmor-parser" epoch="0" version="2.0" release="21.5" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>apparmor-parser</name>
+	<arch>ppc</arch>
+	<version>2.0</version>
+	<release>21.5</release>
+	<freshens>
+		<dep kind="package" name="apparmor-parser"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="apparmor-parser" epoch="0" version="2.0" release="21.5" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>apparmor-parser</name>
+	<arch>x86_64</arch>
+	<version>2.0</version>
+	<release>21.5</release>
+	<freshens>
+		<dep kind="package" name="apparmor-parser"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="apparmor-parser" epoch="0" version="2.0" release="21.5" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>apparmor-profiles</name>
+	<arch>noarch</arch>
+	<version>2.0</version>
+	<release>34.9</release>
+	<freshens>
+		<dep kind="package" name="apparmor-profiles"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="apparmor-profiles" epoch="0" version="2.0" release="34.9" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>apparmor-utils</name>
+	<arch>noarch</arch>
+	<version>2.0</version>
+	<release>23.5</release>
+	<freshens>
+		<dep kind="package" name="apparmor-utils"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="apparmor-utils" epoch="0" version="2.0" release="23.5" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>audit</name>
+	<arch>i586</arch>
+	<version>1.1.3</version>
+	<release>23.3</release>
+	<freshens>
+		<dep kind="package" name="audit"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="audit" epoch="0" version="1.1.3" release="23.3" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>audit</name>
+	<arch>ppc</arch>
+	<version>1.1.3</version>
+	<release>23.3</release>
+	<freshens>
+		<dep kind="package" name="audit"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="audit" epoch="0" version="1.1.3" release="23.3" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>audit</name>
+	<arch>x86_64</arch>
+	<version>1.1.3</version>
+	<release>23.3</release>
+	<freshens>
+		<dep kind="package" name="audit"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="audit" epoch="0" version="1.1.3" release="23.3" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>audit-devel</name>
+	<arch>i586</arch>
+	<version>1.1.3</version>
+	<release>23.3</release>
+	<freshens>
+		<dep kind="package" name="audit-devel"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="audit-devel" epoch="0" version="1.1.3" release="23.3" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>audit-devel</name>
+	<arch>ppc</arch>
+	<version>1.1.3</version>
+	<release>23.3</release>
+	<freshens>
+		<dep kind="package" name="audit-devel"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="audit-devel" epoch="0" version="1.1.3" release="23.3" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>audit-devel</name>
+	<arch>x86_64</arch>
+	<version>1.1.3</version>
+	<release>23.3</release>
+	<freshens>
+		<dep kind="package" name="audit-devel"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="audit-devel" epoch="0" version="1.1.3" release="23.3" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>audit-libs</name>
+	<arch>i586</arch>
+	<version>1.1.3</version>
+	<release>23.3</release>
+	<freshens>
+		<dep kind="package" name="audit-libs"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="audit-libs" epoch="0" version="1.1.3" release="23.3" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>audit-libs</name>
+	<arch>ppc</arch>
+	<version>1.1.3</version>
+	<release>23.3</release>
+	<freshens>
+		<dep kind="package" name="audit-libs"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="audit-libs" epoch="0" version="1.1.3" release="23.3" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>audit-libs</name>
+	<arch>x86_64</arch>
+	<version>1.1.3</version>
+	<release>23.3</release>
+	<freshens>
+		<dep kind="package" name="audit-libs"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="audit-libs" epoch="0" version="1.1.3" release="23.3" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>yast2-apparmor</name>
+	<arch>noarch</arch>
+	<version>2.0</version>
+	<release>27.5</release>
+	<freshens>
+		<dep kind="package" name="yast2-apparmor"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="yast2-apparmor" epoch="0" version="2.0" release="27.5" op="GE"/>
+	</requires>
+</atom>
+<package>
+	<name>apparmor-admin_en</name>
+	<summary>AppArmor: Security Update to fix LD_PRELOAD and mmap-exec problems.</summary>
+	<description>This update fixes security problems in the AppArmor
+confinment technology.
+
+Since it adds new flags to the profile syntax, you likely
+should review and adapt your profiles.
+
+- If a profile allowed unconfined execution ("ux") of a
+  child binary it was possible to inject code via
+  LD_PRELOAD or similar environment variables into this
+  child binary and execute code without confiment.
+
+  We have added new flag "Ux" (and "Px" for "px") which
+makes the executed child clear the most critical
+environment variables (similar to setuid programs). Special
+care needs to be taken nevertheless that this interaction
+between parent and child programs can not be exploited in
+other ways to gain the rights of the child process.
+
+- If a resource is marked as "r" in the profile it was
+  possible to use mmap with PROT_EXEC flag set to load this
+  resource as executable piece of code, making it
+  effectively "ix".
+
+  This could be used by a coordinated attack between two
+applications to potentially inject code into the reader.
+
+  To allow mmap() executable access, supply the "m" flag to
+the applications profile.
+
+Please also review the updated documentation.
+</description>
+	<arch>noarch</arch>
+	<version>10</version>
+	<release>7.5</release>
+	<filesize>2932481</filesize>
+	<installedsize>3637984</installedsize>
+	<history>
+		<update>
+			<arch>noarch</arch>
+			<epoch>0</epoch>
+			<version>10</version>
+			<release>7.5</release>
+			<filename>apparmor-admin_en-10-7.5.noarch.rpm</filename>
+			<filesize>2932481</filesize>
+			<installedsize>3637984</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="apparmor-admin_en" op="EQ" version="10" release="7.5"/>
+		</provides>
+		<requires>
+			<dep name="/bin/rm" pre="1"/>
+			<dep name="/bin/ln" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>apparmor-docs</name>
+	<summary>AppArmor: Security Update to fix LD_PRELOAD and mmap-exec problems.</summary>
+	<description>This update fixes security problems in the AppArmor
+confinment technology.
+
+Since it adds new flags to the profile syntax, you likely
+should review and adapt your profiles.
+
+- If a profile allowed unconfined execution ("ux") of a
+  child binary it was possible to inject code via
+  LD_PRELOAD or similar environment variables into this
+  child binary and execute code without confiment.
+
+  We have added new flag "Ux" (and "Px" for "px") which
+makes the executed child clear the most critical
+environment variables (similar to setuid programs). Special
+care needs to be taken nevertheless that this interaction
+between parent and child programs can not be exploited in
+other ways to gain the rights of the child process.
+
+- If a resource is marked as "r" in the profile it was
+  possible to use mmap with PROT_EXEC flag set to load this
+  resource as executable piece of code, making it
+  effectively "ix".
+
+  This could be used by a coordinated attack between two
+applications to potentially inject code into the reader.
+
+  To allow mmap() executable access, supply the "m" flag to
+the applications profile.
+
+Please also review the updated documentation.
+</description>
+	<arch>noarch</arch>
+	<version>2.0</version>
+	<release>17.5</release>
+	<filesize>75172</filesize>
+	<installedsize>132304</installedsize>
+	<history>
+		<update>
+			<arch>noarch</arch>
+			<epoch>0</epoch>
+			<version>2.0</version>
+			<release>17.5</release>
+			<filename>apparmor-docs-2.0-17.5.noarch.rpm</filename>
+			<filesize>75172</filesize>
+			<installedsize>132304</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="subdomain-docs"/>
+			<dep name="apparmor-docs" op="EQ" version="2.0" release="17.5"/>
+		</provides>
+		<requires>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>apparmor-parser</name>
+	<summary>AppArmor: Security Update to fix LD_PRELOAD and mmap-exec problems.</summary>
+	<description>This update fixes security problems in the AppArmor
+confinment technology.
+
+Since it adds new flags to the profile syntax, you likely
+should review and adapt your profiles.
+
+- If a profile allowed unconfined execution ("ux") of a
+  child binary it was possible to inject code via
+  LD_PRELOAD or similar environment variables into this
+  child binary and execute code without confiment.
+
+  We have added new flag "Ux" (and "Px" for "px") which
+makes the executed child clear the most critical
+environment variables (similar to setuid programs). Special
+care needs to be taken nevertheless that this interaction
+between parent and child programs can not be exploited in
+other ways to gain the rights of the child process.
+
+- If a resource is marked as "r" in the profile it was
+  possible to use mmap with PROT_EXEC flag set to load this
+  resource as executable piece of code, making it
+  effectively "ix".
+
+  This could be used by a coordinated attack between two
+applications to potentially inject code into the reader.
+
+  To allow mmap() executable access, supply the "m" flag to
+the applications profile.
+
+Please also review the updated documentation.
+</description>
+	<arch>i586</arch>
+	<version>2.0</version>
+	<release>21.5</release>
+	<filesize>99786</filesize>
+	<installedsize>290617</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>2.0</version>
+			<release>21.5</release>
+			<filename>apparmor-parser-2.0-21.5.i586.rpm</filename>
+			<filesize>99786</filesize>
+			<installedsize>290617</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="subdomain_parser"/>
+			<dep name="subdomain-parser"/>
+			<dep name="subdomain-parser-demo"/>
+			<dep name="subdomain-parser-common"/>
+			<dep name="subdomain-leaf-cert"/>
+			<dep name="libimnxcert"/>
+			<dep name="apparmor-parser" op="EQ" version="2.0" release="21.5"/>
+		</provides>
+		<requires>
+			<dep name="sed" pre="1"/>
+			<dep name="insserv" pre="1"/>
+			<dep name="aaa_base" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/bin/sh"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1)"/>
+			<dep name="libc.so.6(GLIBC_2.2)"/>
+			<dep name="libc.so.6(GLIBC_2.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>apparmor-parser</name>
+	<summary>AppArmor: Security Update to fix LD_PRELOAD and mmap-exec problems.</summary>
+	<description>This update fixes security problems in the AppArmor
+confinment technology.
+
+Since it adds new flags to the profile syntax, you likely
+should review and adapt your profiles.
+
+- If a profile allowed unconfined execution ("ux") of a
+  child binary it was possible to inject code via
+  LD_PRELOAD or similar environment variables into this
+  child binary and execute code without confiment.
+
+  We have added new flag "Ux" (and "Px" for "px") which
+makes the executed child clear the most critical
+environment variables (similar to setuid programs). Special
+care needs to be taken nevertheless that this interaction
+between parent and child programs can not be exploited in
+other ways to gain the rights of the child process.
+
+- If a resource is marked as "r" in the profile it was
+  possible to use mmap with PROT_EXEC flag set to load this
+  resource as executable piece of code, making it
+  effectively "ix".
+
+  This could be used by a coordinated attack between two
+applications to potentially inject code into the reader.
+
+  To allow mmap() executable access, supply the "m" flag to
+the applications profile.
+
+Please also review the updated documentation.
+</description>
+	<arch>ppc</arch>
+	<version>2.0</version>
+	<release>21.5</release>
+	<filesize>101519</filesize>
+	<installedsize>298905</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>2.0</version>
+			<release>21.5</release>
+			<filename>apparmor-parser-2.0-21.5.ppc.rpm</filename>
+			<filesize>101519</filesize>
+			<installedsize>298905</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="subdomain_parser"/>
+			<dep name="subdomain-parser"/>
+			<dep name="subdomain-parser-demo"/>
+			<dep name="subdomain-parser-common"/>
+			<dep name="subdomain-leaf-cert"/>
+			<dep name="libimnxcert"/>
+			<dep name="apparmor-parser" op="EQ" version="2.0" release="21.5"/>
+		</provides>
+		<requires>
+			<dep name="sed" pre="1"/>
+			<dep name="insserv" pre="1"/>
+			<dep name="aaa_base" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/bin/sh"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1)"/>
+			<dep name="libc.so.6(GLIBC_2.2)"/>
+			<dep name="libc.so.6(GLIBC_2.3)"/>
+			<dep name="libc.so.6(GLIBC_2.4)"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>apparmor-parser</name>
+	<summary>AppArmor: Security Update to fix LD_PRELOAD and mmap-exec problems.</summary>
+	<description>This update fixes security problems in the AppArmor
+confinment technology.
+
+Since it adds new flags to the profile syntax, you likely
+should review and adapt your profiles.
+
+- If a profile allowed unconfined execution ("ux") of a
+  child binary it was possible to inject code via
+  LD_PRELOAD or similar environment variables into this
+  child binary and execute code without confiment.
+
+  We have added new flag "Ux" (and "Px" for "px") which
+makes the executed child clear the most critical
+environment variables (similar to setuid programs). Special
+care needs to be taken nevertheless that this interaction
+between parent and child programs can not be exploited in
+other ways to gain the rights of the child process.
+
+- If a resource is marked as "r" in the profile it was
+  possible to use mmap with PROT_EXEC flag set to load this
+  resource as executable piece of code, making it
+  effectively "ix".
+
+  This could be used by a coordinated attack between two
+applications to potentially inject code into the reader.
+
+  To allow mmap() executable access, supply the "m" flag to
+the applications profile.
+
+Please also review the updated documentation.
+</description>
+	<arch>x86_64</arch>
+	<version>2.0</version>
+	<release>21.5</release>
+	<filesize>104970</filesize>
+	<installedsize>301457</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>2.0</version>
+			<release>21.5</release>
+			<filename>apparmor-parser-2.0-21.5.x86_64.rpm</filename>
+			<filesize>104970</filesize>
+			<installedsize>301457</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="subdomain_parser"/>
+			<dep name="subdomain-parser"/>
+			<dep name="subdomain-parser-demo"/>
+			<dep name="subdomain-parser-common"/>
+			<dep name="subdomain-leaf-cert"/>
+			<dep name="libimnxcert"/>
+			<dep name="apparmor-parser" op="EQ" version="2.0" release="21.5"/>
+		</provides>
+		<requires>
+			<dep name="sed" pre="1"/>
+			<dep name="insserv" pre="1"/>
+			<dep name="aaa_base" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/bin/sh"/>
+			<dep name="libc.so.6()(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.3)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)(64bit)"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>apparmor-profiles</name>
+	<summary>AppArmor: Security Update to fix LD_PRELOAD and mmap-exec problems.</summary>
+	<description>This update fixes security problems in the AppArmor
+confinment technology.
+
+Since it adds new flags to the profile syntax, you likely
+should review and adapt your profiles.
+
+- If a profile allowed unconfined execution ("ux") of a
+  child binary it was possible to inject code via
+  LD_PRELOAD or similar environment variables into this
+  child binary and execute code without confiment.
+
+  We have added new flag "Ux" (and "Px" for "px") which
+makes the executed child clear the most critical
+environment variables (similar to setuid programs). Special
+care needs to be taken nevertheless that this interaction
+between parent and child programs can not be exploited in
+other ways to gain the rights of the child process.
+
+- If a resource is marked as "r" in the profile it was
+  possible to use mmap with PROT_EXEC flag set to load this
+  resource as executable piece of code, making it
+  effectively "ix".
+
+  This could be used by a coordinated attack between two
+applications to potentially inject code into the reader.
+
+  To allow mmap() executable access, supply the "m" flag to
+the applications profile.
+
+Please also review the updated documentation.
+</description>
+	<arch>noarch</arch>
+	<version>2.0</version>
+	<release>34.9</release>
+	<filesize>41552</filesize>
+	<installedsize>172938</installedsize>
+	<history>
+		<update>
+			<arch>noarch</arch>
+			<epoch>0</epoch>
+			<version>2.0</version>
+			<release>34.9</release>
+			<filename>apparmor-profiles-2.0-34.9.noarch.rpm</filename>
+			<filesize>41552</filesize>
+			<installedsize>172938</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="subdomain-profiles"/>
+			<dep name="apparmor-profiles" op="EQ" version="2.0" release="34.9"/>
+		</provides>
+		<requires>
+			<dep name="apparmor-parser"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>apparmor-utils</name>
+	<summary>AppArmor: Security Update to fix LD_PRELOAD and mmap-exec problems.</summary>
+	<description>This update fixes security problems in the AppArmor
+confinment technology.
+
+Since it adds new flags to the profile syntax, you likely
+should review and adapt your profiles.
+
+- If a profile allowed unconfined execution ("ux") of a
+  child binary it was possible to inject code via
+  LD_PRELOAD or similar environment variables into this
+  child binary and execute code without confiment.
+
+  We have added new flag "Ux" (and "Px" for "px") which
+makes the executed child clear the most critical
+environment variables (similar to setuid programs). Special
+care needs to be taken nevertheless that this interaction
+between parent and child programs can not be exploited in
+other ways to gain the rights of the child process.
+
+- If a resource is marked as "r" in the profile it was
+  possible to use mmap with PROT_EXEC flag set to load this
+  resource as executable piece of code, making it
+  effectively "ix".
+
+  This could be used by a coordinated attack between two
+applications to potentially inject code into the reader.
+
+  To allow mmap() executable access, supply the "m" flag to
+the applications profile.
+
+Please also review the updated documentation.
+</description>
+	<arch>noarch</arch>
+	<version>2.0</version>
+	<release>23.5</release>
+	<filesize>72912</filesize>
+	<installedsize>295936</installedsize>
+	<history>
+		<update>
+			<arch>noarch</arch>
+			<epoch>0</epoch>
+			<version>2.0</version>
+			<release>23.5</release>
+			<filename>apparmor-utils-2.0-23.5.noarch.rpm</filename>
+			<filesize>72912</filesize>
+			<installedsize>295936</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="subdomain-utils"/>
+			<dep name="perl(Immunix::Reports)"/>
+			<dep name="perl(Immunix::Severity)"/>
+			<dep name="perl(Immunix::SubDomain)"/>
+			<dep name="apparmor-utils" op="EQ" version="2.0" release="23.5"/>
+		</provides>
+		<requires>
+			<dep name="perl-TimeDate"/>
+			<dep name="perl-DBI"/>
+			<dep name="perl-DBD-SQLite"/>
+			<dep name="perl-File-Tail"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/usr/bin/perl"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>audit</name>
+	<summary>AppArmor: Security Update to fix LD_PRELOAD and mmap-exec problems.</summary>
+	<description>This update fixes security problems in the AppArmor
+confinment technology.
+
+Since it adds new flags to the profile syntax, you likely
+should review and adapt your profiles.
+
+- If a profile allowed unconfined execution ("ux") of a
+  child binary it was possible to inject code via
+  LD_PRELOAD or similar environment variables into this
+  child binary and execute code without confiment.
+
+  We have added new flag "Ux" (and "Px" for "px") which
+makes the executed child clear the most critical
+environment variables (similar to setuid programs). Special
+care needs to be taken nevertheless that this interaction
+between parent and child programs can not be exploited in
+other ways to gain the rights of the child process.
+
+- If a resource is marked as "r" in the profile it was
+  possible to use mmap with PROT_EXEC flag set to load this
+  resource as executable piece of code, making it
+  effectively "ix".
+
+  This could be used by a coordinated attack between two
+applications to potentially inject code into the reader.
+
+  To allow mmap() executable access, supply the "m" flag to
+the applications profile.
+
+Please also review the updated documentation.
+</description>
+	<arch>i586</arch>
+	<version>1.1.3</version>
+	<release>23.3</release>
+	<filesize>151041</filesize>
+	<installedsize>493066</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>1.1.3</version>
+			<release>23.3</release>
+			<filename>audit-1.1.3-23.3.i586.rpm</filename>
+			<filesize>151041</filesize>
+			<installedsize>493066</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="audit" op="EQ" version="1.1.3" release="23.3"/>
+		</provides>
+		<requires>
+			<dep name="audit-libs" op="EQ" version="1.1.3" release="23.3"/>
+			<dep name="insserv" pre="1"/>
+			<dep name="sed" pre="1"/>
+			<dep name="fillup" pre="1"/>
+			<dep name="coreutils" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/bin/sh"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libc.so.6(GLIBC_2.2)"/>
+			<dep name="libc.so.6(GLIBC_2.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)"/>
+			<dep name="libc.so.6(GLIBC_2.4)"/>
+			<dep name="libdl.so.2"/>
+			<dep name="libdl.so.2(GLIBC_2.0)"/>
+			<dep name="libdl.so.2(GLIBC_2.1)"/>
+			<dep name="libgcc_s.so.1"/>
+			<dep name="libgcc_s.so.1(GCC_3.0)"/>
+			<dep name="libm.so.6"/>
+			<dep name="libpthread.so.0"/>
+			<dep name="libpthread.so.0(GLIBC_2.0)"/>
+			<dep name="libpthread.so.0(GLIBC_2.1)"/>
+			<dep name="libpthread.so.0(GLIBC_2.2)"/>
+			<dep name="libpthread.so.0(GLIBC_2.3.2)"/>
+			<dep name="libstdc++.so.6"/>
+			<dep name="libstdc++.so.6(CXXABI_1.3)"/>
+			<dep name="libstdc++.so.6(GLIBCXX_3.4)"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>audit</name>
+	<summary>AppArmor: Security Update to fix LD_PRELOAD and mmap-exec problems.</summary>
+	<description>This update fixes security problems in the AppArmor
+confinment technology.
+
+Since it adds new flags to the profile syntax, you likely
+should review and adapt your profiles.
+
+- If a profile allowed unconfined execution ("ux") of a
+  child binary it was possible to inject code via
+  LD_PRELOAD or similar environment variables into this
+  child binary and execute code without confiment.
+
+  We have added new flag "Ux" (and "Px" for "px") which
+makes the executed child clear the most critical
+environment variables (similar to setuid programs). Special
+care needs to be taken nevertheless that this interaction
+between parent and child programs can not be exploited in
+other ways to gain the rights of the child process.
+
+- If a resource is marked as "r" in the profile it was
+  possible to use mmap with PROT_EXEC flag set to load this
+  resource as executable piece of code, making it
+  effectively "ix".
+
+  This could be used by a coordinated attack between two
+applications to potentially inject code into the reader.
+
+  To allow mmap() executable access, supply the "m" flag to
+the applications profile.
+
+Please also review the updated documentation.
+</description>
+	<arch>ppc</arch>
+	<version>1.1.3</version>
+	<release>23.3</release>
+	<filesize>156684</filesize>
+	<installedsize>543038</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>1.1.3</version>
+			<release>23.3</release>
+			<filename>audit-1.1.3-23.3.ppc.rpm</filename>
+			<filesize>156684</filesize>
+			<installedsize>543038</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="audit" op="EQ" version="1.1.3" release="23.3"/>
+		</provides>
+		<requires>
+			<dep name="audit-libs" op="EQ" version="1.1.3" release="23.3"/>
+			<dep name="insserv" pre="1"/>
+			<dep name="sed" pre="1"/>
+			<dep name="fillup" pre="1"/>
+			<dep name="coreutils" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/bin/sh"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libc.so.6(GLIBC_2.2)"/>
+			<dep name="libc.so.6(GLIBC_2.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)"/>
+			<dep name="libc.so.6(GLIBC_2.4)"/>
+			<dep name="libdl.so.2"/>
+			<dep name="libdl.so.2(GLIBC_2.0)"/>
+			<dep name="libdl.so.2(GLIBC_2.1)"/>
+			<dep name="libgcc_s.so.1"/>
+			<dep name="libgcc_s.so.1(GCC_3.0)"/>
+			<dep name="libm.so.6"/>
+			<dep name="libpthread.so.0"/>
+			<dep name="libpthread.so.0(GLIBC_2.0)"/>
+			<dep name="libpthread.so.0(GLIBC_2.1)"/>
+			<dep name="libpthread.so.0(GLIBC_2.2)"/>
+			<dep name="libpthread.so.0(GLIBC_2.3.2)"/>
+			<dep name="libstdc++.so.6"/>
+			<dep name="libstdc++.so.6(CXXABI_1.3)"/>
+			<dep name="libstdc++.so.6(GLIBCXX_3.4)"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>audit</name>
+	<summary>AppArmor: Security Update to fix LD_PRELOAD and mmap-exec problems.</summary>
+	<description>This update fixes security problems in the AppArmor
+confinment technology.
+
+Since it adds new flags to the profile syntax, you likely
+should review and adapt your profiles.
+
+- If a profile allowed unconfined execution ("ux") of a
+  child binary it was possible to inject code via
+  LD_PRELOAD or similar environment variables into this
+  child binary and execute code without confiment.
+
+  We have added new flag "Ux" (and "Px" for "px") which
+makes the executed child clear the most critical
+environment variables (similar to setuid programs). Special
+care needs to be taken nevertheless that this interaction
+between parent and child programs can not be exploited in
+other ways to gain the rights of the child process.
+
+- If a resource is marked as "r" in the profile it was
+  possible to use mmap with PROT_EXEC flag set to load this
+  resource as executable piece of code, making it
+  effectively "ix".
+
+  This could be used by a coordinated attack between two
+applications to potentially inject code into the reader.
+
+  To allow mmap() executable access, supply the "m" flag to
+the applications profile.
+
+Please also review the updated documentation.
+</description>
+	<arch>x86_64</arch>
+	<version>1.1.3</version>
+	<release>23.3</release>
+	<filesize>160818</filesize>
+	<installedsize>529778</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>1.1.3</version>
+			<release>23.3</release>
+			<filename>audit-1.1.3-23.3.x86_64.rpm</filename>
+			<filesize>160818</filesize>
+			<installedsize>529778</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="audit" op="EQ" version="1.1.3" release="23.3"/>
+		</provides>
+		<requires>
+			<dep name="audit-libs" op="EQ" version="1.1.3" release="23.3"/>
+			<dep name="insserv" pre="1"/>
+			<dep name="sed" pre="1"/>
+			<dep name="fillup" pre="1"/>
+			<dep name="coreutils" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/bin/sh"/>
+			<dep name="libc.so.6()(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.3)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.4)(64bit)"/>
+			<dep name="libdl.so.2()(64bit)"/>
+			<dep name="libdl.so.2(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libgcc_s.so.1()(64bit)"/>
+			<dep name="libgcc_s.so.1(GCC_3.0)(64bit)"/>
+			<dep name="libm.so.6()(64bit)"/>
+			<dep name="libpthread.so.0()(64bit)"/>
+			<dep name="libpthread.so.0(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libpthread.so.0(GLIBC_2.3.2)(64bit)"/>
+			<dep name="libstdc++.so.6()(64bit)"/>
+			<dep name="libstdc++.so.6(CXXABI_1.3)(64bit)"/>
+			<dep name="libstdc++.so.6(GLIBCXX_3.4)(64bit)"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>audit-devel</name>
+	<summary>AppArmor: Security Update to fix LD_PRELOAD and mmap-exec problems.</summary>
+	<description>This update fixes security problems in the AppArmor
+confinment technology.
+
+Since it adds new flags to the profile syntax, you likely
+should review and adapt your profiles.
+
+- If a profile allowed unconfined execution ("ux") of a
+  child binary it was possible to inject code via
+  LD_PRELOAD or similar environment variables into this
+  child binary and execute code without confiment.
+
+  We have added new flag "Ux" (and "Px" for "px") which
+makes the executed child clear the most critical
+environment variables (similar to setuid programs). Special
+care needs to be taken nevertheless that this interaction
+between parent and child programs can not be exploited in
+other ways to gain the rights of the child process.
+
+- If a resource is marked as "r" in the profile it was
+  possible to use mmap with PROT_EXEC flag set to load this
+  resource as executable piece of code, making it
+  effectively "ix".
+
+  This could be used by a coordinated attack between two
+applications to potentially inject code into the reader.
+
+  To allow mmap() executable access, supply the "m" flag to
+the applications profile.
+
+Please also review the updated documentation.
+</description>
+	<arch>i586</arch>
+	<version>1.1.3</version>
+	<release>23.3</release>
+	<filesize>45571</filesize>
+	<installedsize>92272</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>1.1.3</version>
+			<release>23.3</release>
+			<filename>audit-devel-1.1.3-23.3.i586.rpm</filename>
+			<filesize>45571</filesize>
+			<installedsize>92272</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="audit-devel" op="EQ" version="1.1.3" release="23.3"/>
+		</provides>
+		<requires>
+			<dep name="audit-libs" op="EQ" version="1.1.3" release="23.3"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>audit-devel</name>
+	<summary>AppArmor: Security Update to fix LD_PRELOAD and mmap-exec problems.</summary>
+	<description>This update fixes security problems in the AppArmor
+confinment technology.
+
+Since it adds new flags to the profile syntax, you likely
+should review and adapt your profiles.
+
+- If a profile allowed unconfined execution ("ux") of a
+  child binary it was possible to inject code via
+  LD_PRELOAD or similar environment variables into this
+  child binary and execute code without confiment.
+
+  We have added new flag "Ux" (and "Px" for "px") which
+makes the executed child clear the most critical
+environment variables (similar to setuid programs). Special
+care needs to be taken nevertheless that this interaction
+between parent and child programs can not be exploited in
+other ways to gain the rights of the child process.
+
+- If a resource is marked as "r" in the profile it was
+  possible to use mmap with PROT_EXEC flag set to load this
+  resource as executable piece of code, making it
+  effectively "ix".
+
+  This could be used by a coordinated attack between two
+applications to potentially inject code into the reader.
+
+  To allow mmap() executable access, supply the "m" flag to
+the applications profile.
+
+Please also review the updated documentation.
+</description>
+	<arch>ppc</arch>
+	<version>1.1.3</version>
+	<release>23.3</release>
+	<filesize>46968</filesize>
+	<installedsize>94630</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>1.1.3</version>
+			<release>23.3</release>
+			<filename>audit-devel-1.1.3-23.3.ppc.rpm</filename>
+			<filesize>46968</filesize>
+			<installedsize>94630</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="audit-devel" op="EQ" version="1.1.3" release="23.3"/>
+		</provides>
+		<requires>
+			<dep name="audit-libs" op="EQ" version="1.1.3" release="23.3"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>audit-devel</name>
+	<summary>AppArmor: Security Update to fix LD_PRELOAD and mmap-exec problems.</summary>
+	<description>This update fixes security problems in the AppArmor
+confinment technology.
+
+Since it adds new flags to the profile syntax, you likely
+should review and adapt your profiles.
+
+- If a profile allowed unconfined execution ("ux") of a
+  child binary it was possible to inject code via
+  LD_PRELOAD or similar environment variables into this
+  child binary and execute code without confiment.
+
+  We have added new flag "Ux" (and "Px" for "px") which
+makes the executed child clear the most critical
+environment variables (similar to setuid programs). Special
+care needs to be taken nevertheless that this interaction
+between parent and child programs can not be exploited in
+other ways to gain the rights of the child process.
+
+- If a resource is marked as "r" in the profile it was
+  possible to use mmap with PROT_EXEC flag set to load this
+  resource as executable piece of code, making it
+  effectively "ix".
+
+  This could be used by a coordinated attack between two
+applications to potentially inject code into the reader.
+
+  To allow mmap() executable access, supply the "m" flag to
+the applications profile.
+
+Please also review the updated documentation.
+</description>
+	<arch>x86_64</arch>
+	<version>1.1.3</version>
+	<release>23.3</release>
+	<filesize>46716</filesize>
+	<installedsize>102226</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>1.1.3</version>
+			<release>23.3</release>
+			<filename>audit-devel-1.1.3-23.3.x86_64.rpm</filename>
+			<filesize>46716</filesize>
+			<installedsize>102226</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="audit-devel" op="EQ" version="1.1.3" release="23.3"/>
+		</provides>
+		<requires>
+			<dep name="audit-libs" op="EQ" version="1.1.3" release="23.3"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>audit-libs</name>
+	<summary>AppArmor: Security Update to fix LD_PRELOAD and mmap-exec problems.</summary>
+	<description>This update fixes security problems in the AppArmor
+confinment technology.
+
+Since it adds new flags to the profile syntax, you likely
+should review and adapt your profiles.
+
+- If a profile allowed unconfined execution ("ux") of a
+  child binary it was possible to inject code via
+  LD_PRELOAD or similar environment variables into this
+  child binary and execute code without confiment.
+
+  We have added new flag "Ux" (and "Px" for "px") which
+makes the executed child clear the most critical
+environment variables (similar to setuid programs). Special
+care needs to be taken nevertheless that this interaction
+between parent and child programs can not be exploited in
+other ways to gain the rights of the child process.
+
+- If a resource is marked as "r" in the profile it was
+  possible to use mmap with PROT_EXEC flag set to load this
+  resource as executable piece of code, making it
+  effectively "ix".
+
+  This could be used by a coordinated attack between two
+applications to potentially inject code into the reader.
+
+  To allow mmap() executable access, supply the "m" flag to
+the applications profile.
+
+Please also review the updated documentation.
+</description>
+	<arch>i586</arch>
+	<version>1.1.3</version>
+	<release>23.3</release>
+	<filesize>70772</filesize>
+	<installedsize>237473</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>1.1.3</version>
+			<release>23.3</release>
+			<filename>audit-libs-1.1.3-23.3.i586.rpm</filename>
+			<filesize>70772</filesize>
+			<installedsize>237473</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="_audit.so"/>
+			<dep name="libaudit.so.0"/>
+			<dep name="audit-libs" op="EQ" version="1.1.3" release="23.3"/>
+		</provides>
+		<requires>
+			<dep name="/sbin/ldconfig" pre="1"/>
+			<dep name="/sbin/ldconfig" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="libaudit.so.0"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)"/>
+			<dep name="libc.so.6(GLIBC_2.4)"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>audit-libs</name>
+	<summary>AppArmor: Security Update to fix LD_PRELOAD and mmap-exec problems.</summary>
+	<description>This update fixes security problems in the AppArmor
+confinment technology.
+
+Since it adds new flags to the profile syntax, you likely
+should review and adapt your profiles.
+
+- If a profile allowed unconfined execution ("ux") of a
+  child binary it was possible to inject code via
+  LD_PRELOAD or similar environment variables into this
+  child binary and execute code without confiment.
+
+  We have added new flag "Ux" (and "Px" for "px") which
+makes the executed child clear the most critical
+environment variables (similar to setuid programs). Special
+care needs to be taken nevertheless that this interaction
+between parent and child programs can not be exploited in
+other ways to gain the rights of the child process.
+
+- If a resource is marked as "r" in the profile it was
+  possible to use mmap with PROT_EXEC flag set to load this
+  resource as executable piece of code, making it
+  effectively "ix".
+
+  This could be used by a coordinated attack between two
+applications to potentially inject code into the reader.
+
+  To allow mmap() executable access, supply the "m" flag to
+the applications profile.
+
+Please also review the updated documentation.
+</description>
+	<arch>ppc</arch>
+	<version>1.1.3</version>
+	<release>23.3</release>
+	<filesize>75167</filesize>
+	<installedsize>275759</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>1.1.3</version>
+			<release>23.3</release>
+			<filename>audit-libs-1.1.3-23.3.ppc.rpm</filename>
+			<filesize>75167</filesize>
+			<installedsize>275759</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="_audit.so"/>
+			<dep name="libaudit.so.0"/>
+			<dep name="audit-libs" op="EQ" version="1.1.3" release="23.3"/>
+		</provides>
+		<requires>
+			<dep name="/sbin/ldconfig" pre="1"/>
+			<dep name="/sbin/ldconfig" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="libaudit.so.0"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)"/>
+			<dep name="libc.so.6(GLIBC_2.4)"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>audit-libs</name>
+	<summary>AppArmor: Security Update to fix LD_PRELOAD and mmap-exec problems.</summary>
+	<description>This update fixes security problems in the AppArmor
+confinment technology.
+
+Since it adds new flags to the profile syntax, you likely
+should review and adapt your profiles.
+
+- If a profile allowed unconfined execution ("ux") of a
+  child binary it was possible to inject code via
+  LD_PRELOAD or similar environment variables into this
+  child binary and execute code without confiment.
+
+  We have added new flag "Ux" (and "Px" for "px") which
+makes the executed child clear the most critical
+environment variables (similar to setuid programs). Special
+care needs to be taken nevertheless that this interaction
+between parent and child programs can not be exploited in
+other ways to gain the rights of the child process.
+
+- If a resource is marked as "r" in the profile it was
+  possible to use mmap with PROT_EXEC flag set to load this
+  resource as executable piece of code, making it
+  effectively "ix".
+
+  This could be used by a coordinated attack between two
+applications to potentially inject code into the reader.
+
+  To allow mmap() executable access, supply the "m" flag to
+the applications profile.
+
+Please also review the updated documentation.
+</description>
+	<arch>x86_64</arch>
+	<version>1.1.3</version>
+	<release>23.3</release>
+	<filesize>76434</filesize>
+	<installedsize>300543</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>1.1.3</version>
+			<release>23.3</release>
+			<filename>audit-libs-1.1.3-23.3.x86_64.rpm</filename>
+			<filesize>76434</filesize>
+			<installedsize>300543</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="_audit.so()(64bit)"/>
+			<dep name="libaudit.so.0()(64bit)"/>
+			<dep name="audit-libs" op="EQ" version="1.1.3" release="23.3"/>
+		</provides>
+		<requires>
+			<dep name="/sbin/ldconfig" pre="1"/>
+			<dep name="/sbin/ldconfig" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="libaudit.so.0()(64bit)"/>
+			<dep name="libc.so.6()(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.3)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.4)(64bit)"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>yast2-apparmor</name>
+	<summary>AppArmor: Security Update to fix LD_PRELOAD and mmap-exec problems.</summary>
+	<description>This update fixes security problems in the AppArmor
+confinment technology.
+
+Since it adds new flags to the profile syntax, you likely
+should review and adapt your profiles.
+
+- If a profile allowed unconfined execution ("ux") of a
+  child binary it was possible to inject code via
+  LD_PRELOAD or similar environment variables into this
+  child binary and execute code without confiment.
+
+  We have added new flag "Ux" (and "Px" for "px") which
+makes the executed child clear the most critical
+environment variables (similar to setuid programs). Special
+care needs to be taken nevertheless that this interaction
+between parent and child programs can not be exploited in
+other ways to gain the rights of the child process.
+
+- If a resource is marked as "r" in the profile it was
+  possible to use mmap with PROT_EXEC flag set to load this
+  resource as executable piece of code, making it
+  effectively "ix".
+
+  This could be used by a coordinated attack between two
+applications to potentially inject code into the reader.
+
+  To allow mmap() executable access, supply the "m" flag to
+the applications profile.
+
+Please also review the updated documentation.
+</description>
+	<arch>noarch</arch>
+	<version>2.0</version>
+	<release>27.5</release>
+	<filesize>150250</filesize>
+	<installedsize>450493</installedsize>
+	<history>
+		<update>
+			<arch>noarch</arch>
+			<epoch>0</epoch>
+			<version>2.0</version>
+			<release>27.5</release>
+			<filename>yast2-apparmor-2.0-27.5.noarch.rpm</filename>
+			<filesize>150250</filesize>
+			<installedsize>450493</installedsize>
+			<importance>security</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="yast2-subdomain"/>
+			<dep name="perl(Immunix::Ycp)"/>
+			<dep name="yast2-apparmor" op="EQ" version="2.0" release="27.5"/>
+		</provides>
+		<requires>
+			<dep name="yast2"/>
+			<dep name="perl-TimeDate"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/usr/bin/perl"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+</subchannel></channel>

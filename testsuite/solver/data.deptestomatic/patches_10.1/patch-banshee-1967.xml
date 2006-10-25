@@ -1,0 +1,1085 @@
+<channel><subchannel>                                                  
+
+<patch>
+	<name>banshee</name>
+	<arch>noarch</arch>
+	<version>1967</version>
+	<release>0</release>
+	<requires>
+		<dep kind="atom" name="banshee" epoch="0" version="0.10.9" release="26.41" op="EQ"/>
+		<dep kind="atom" name="banshee-engine-gst" epoch="0" version="0.10.9" release="26.41" op="EQ"/>
+		<dep kind="atom" name="banshee-engine-helix" epoch="0" version="0.10.9" release="26.41" op="EQ"/>
+		<dep kind="atom" name="banshee-plugins-default" epoch="0" version="0.10.9" release="26.41" op="EQ"/>
+	</requires>
+</patch>
+<atom>
+	<name>banshee</name>
+	<arch>i586</arch>
+	<version>0.10.9</version>
+	<release>26.41</release>
+	<freshens>
+		<dep kind="package" name="banshee"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="banshee" epoch="0" version="0.10.9" release="26.41" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>banshee</name>
+	<arch>ppc</arch>
+	<version>0.10.9</version>
+	<release>26.41</release>
+	<freshens>
+		<dep kind="package" name="banshee"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="banshee" epoch="0" version="0.10.9" release="26.41" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>banshee</name>
+	<arch>x86_64</arch>
+	<version>0.10.9</version>
+	<release>26.41</release>
+	<freshens>
+		<dep kind="package" name="banshee"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="banshee" epoch="0" version="0.10.9" release="26.41" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>banshee-engine-gst</name>
+	<arch>i586</arch>
+	<version>0.10.9</version>
+	<release>26.41</release>
+	<freshens>
+		<dep kind="package" name="banshee-engine-gst"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="banshee-engine-gst" epoch="0" version="0.10.9" release="26.41" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>banshee-engine-gst</name>
+	<arch>ppc</arch>
+	<version>0.10.9</version>
+	<release>26.41</release>
+	<freshens>
+		<dep kind="package" name="banshee-engine-gst"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="banshee-engine-gst" epoch="0" version="0.10.9" release="26.41" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>banshee-engine-gst</name>
+	<arch>x86_64</arch>
+	<version>0.10.9</version>
+	<release>26.41</release>
+	<freshens>
+		<dep kind="package" name="banshee-engine-gst"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="banshee-engine-gst" epoch="0" version="0.10.9" release="26.41" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>banshee-engine-helix</name>
+	<arch>i586</arch>
+	<version>0.10.9</version>
+	<release>26.41</release>
+	<freshens>
+		<dep kind="package" name="banshee-engine-helix"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="banshee-engine-helix" epoch="0" version="0.10.9" release="26.41" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>banshee-engine-helix</name>
+	<arch>ppc</arch>
+	<version>0.10.9</version>
+	<release>26.41</release>
+	<freshens>
+		<dep kind="package" name="banshee-engine-helix"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="banshee-engine-helix" epoch="0" version="0.10.9" release="26.41" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>banshee-engine-helix</name>
+	<arch>x86_64</arch>
+	<version>0.10.9</version>
+	<release>26.41</release>
+	<freshens>
+		<dep kind="package" name="banshee-engine-helix"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="banshee-engine-helix" epoch="0" version="0.10.9" release="26.41" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>banshee-plugins-default</name>
+	<arch>i586</arch>
+	<version>0.10.9</version>
+	<release>26.41</release>
+	<freshens>
+		<dep kind="package" name="banshee-plugins-default"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="banshee-plugins-default" epoch="0" version="0.10.9" release="26.41" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>banshee-plugins-default</name>
+	<arch>ppc</arch>
+	<version>0.10.9</version>
+	<release>26.41</release>
+	<freshens>
+		<dep kind="package" name="banshee-plugins-default"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="banshee-plugins-default" epoch="0" version="0.10.9" release="26.41" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>banshee-plugins-default</name>
+	<arch>x86_64</arch>
+	<version>0.10.9</version>
+	<release>26.41</release>
+	<freshens>
+		<dep kind="package" name="banshee-plugins-default"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="banshee-plugins-default" epoch="0" version="0.10.9" release="26.41" op="GE"/>
+	</requires>
+</atom>
+<package>
+	<name>banshee</name>
+	<summary>crash fixes for banshee</summary>
+	<description>Allows queueing of files if banshee is already running.
+Prevents a crash when removing queued files.  Prevents a
+crash if there is no cd burner device.
+</description>
+	<arch>i586</arch>
+	<version>0.10.9</version>
+	<release>26.41</release>
+	<filesize>878806</filesize>
+	<installedsize>2357318</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>0.10.9</version>
+			<release>26.41</release>
+			<filename>banshee-0.10.9-26.41.i586.rpm</filename>
+			<filesize>878806</filesize>
+			<installedsize>2357318</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="libbanshee.so"/>
+			<dep name="libnautilusburnglue.so"/>
+			<dep name="libnjbglue.so"/>
+			<dep name="mono(Banshee.Base)" op="EQ" version="0.0.0.0"/>
+			<dep name="mono(Banshee.Dap.Ipod)" op="EQ" version="0.0.0.0"/>
+			<dep name="mono(Banshee.Dap.Njb)" op="EQ" version="0.0.0.0"/>
+			<dep name="mono(ipod-sharp)" op="EQ" version="0.0.1.0"/>
+			<dep name="mono(njb-sharp)" op="EQ" version="0.3.0.2777"/>
+			<dep name="mono(Banshee.Widgets)" op="EQ" version="0.0.0.0"/>
+			<dep name="mono(MusicBrainz)" op="EQ" version="0.0.0.0"/>
+			<dep name="mono(banshee)" op="EQ" version="0.10.9.4227"/>
+			<dep name="mono(branding)" op="EQ" version="0.10.9.0"/>
+			<dep name="mono(burn-sharp)" op="EQ" version="0.0.0.0"/>
+			<dep name="mono(entagged-sharp)" op="EQ" version="0.2.0.0"/>
+			<dep name="mono(hal-sharp)" op="EQ" version="0.0.0.0"/>
+			<dep name="banshee" op="EQ" version="0.10.9" release="26.41"/>
+		</provides>
+		<requires>
+			<dep name="filesystem" pre="1"/>
+			<dep name="gconf2" pre="1"/>
+			<dep name="mono-core"/>
+			<dep name="libipoddevice"/>
+			<dep name="libmusicbrainz"/>
+			<dep name="libnjb"/>
+			<dep name="gstreamer010"/>
+			<dep name="gstreamer010-plugins-base"/>
+			<dep name="gstreamer010-plugins-good"/>
+			<dep name="banshee-engine" op="EQ" version="0.10.9"/>
+			<dep name="dbus-1-mono" op="GE" version="%{dbus" release="version}"/>
+			<dep name="dbus-1-x11" op="GE" version="%{dbus" release="version}"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(VersionedDependencies)" op="LE" version="3.0.3" release="1" pre="1"/>
+			<dep name="/bin/bash"/>
+			<dep name="libICE.so.6"/>
+			<dep name="libORBit-2.so.0"/>
+			<dep name="libSM.so.6"/>
+			<dep name="libX11.so.6"/>
+			<dep name="libXext.so.6"/>
+			<dep name="libXrender.so.1"/>
+			<dep name="libart_lgpl_2.so.2"/>
+			<dep name="libatk-1.0.so.0"/>
+			<dep name="libbonobo-2.so.0"/>
+			<dep name="libbonobo-activation.so.4"/>
+			<dep name="libbonoboui-2.so.0"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libc.so.6(GLIBC_2.4)"/>
+			<dep name="libcairo.so.2"/>
+			<dep name="libdbus-1.so.2"/>
+			<dep name="libdbus-glib-1.so.2"/>
+			<dep name="libdl.so.2"/>
+			<dep name="libfontconfig.so.1"/>
+			<dep name="libfreetype.so.6"/>
+			<dep name="libgconf-2.so.4"/>
+			<dep name="libgdk-x11-2.0.so.0"/>
+			<dep name="libgdk_pixbuf-2.0.so.0"/>
+			<dep name="libglib-2.0.so.0"/>
+			<dep name="libglitz.so.1"/>
+			<dep name="libgmodule-2.0.so.0"/>
+			<dep name="libgnome-2.so.0"/>
+			<dep name="libgnome-desktop-2.so.2"/>
+			<dep name="libgnome-keyring.so.0"/>
+			<dep name="libgnomecanvas-2.so.0"/>
+			<dep name="libgnomeui-2.so.0"/>
+			<dep name="libgnomevfs-2.so.0"/>
+			<dep name="libgobject-2.0.so.0"/>
+			<dep name="libgstbase-0.10.so.0"/>
+			<dep name="libgstcontroller-0.10.so.0"/>
+			<dep name="libgstdataprotocol-0.10.so.0"/>
+			<dep name="libgstreamer-0.10.so.0"/>
+			<dep name="libgthread-2.0.so.0"/>
+			<dep name="libgtk-x11-2.0.so.0"/>
+			<dep name="libhal.so.1"/>
+			<dep name="libm.so.6"/>
+			<dep name="libnautilus-burn.so.2"/>
+			<dep name="libnjb.so.5"/>
+			<dep name="libpango-1.0.so.0"/>
+			<dep name="libpangocairo-1.0.so.0"/>
+			<dep name="libpangoft2-1.0.so.0"/>
+			<dep name="libpng12.so.0"/>
+			<dep name="libpopt.so.0"/>
+			<dep name="libpthread.so.0"/>
+			<dep name="libpthread.so.0(GLIBC_2.0)"/>
+			<dep name="libstartup-notification-1.so.0"/>
+			<dep name="libusb-0.1.so.4"/>
+			<dep name="libxml2.so.2"/>
+			<dep name="libz.so.1"/>
+			<dep name="mono(Mono.Data.SqliteClient)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(Mono.Posix)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(System)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(System.Data)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(System.Web.Services)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(System.Xml)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(dbus-sharp)" op="EQ" version="0.60.0.0"/>
+			<dep name="mono(gconf-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(gdk-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(glade-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(glib-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(gnome-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(gnome-vfs-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(gtk-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(mscorlib)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(pango-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>banshee</name>
+	<summary>crash fixes for banshee</summary>
+	<description>Allows queueing of files if banshee is already running.
+Prevents a crash when removing queued files.  Prevents a
+crash if there is no cd burner device.
+</description>
+	<arch>ppc</arch>
+	<version>0.10.9</version>
+	<release>26.41</release>
+	<filesize>885714</filesize>
+	<installedsize>2383578</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>0.10.9</version>
+			<release>26.41</release>
+			<filename>banshee-0.10.9-26.41.ppc.rpm</filename>
+			<filesize>885714</filesize>
+			<installedsize>2383578</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="libbanshee.so"/>
+			<dep name="libnautilusburnglue.so"/>
+			<dep name="libnjbglue.so"/>
+			<dep name="mono(Banshee.Base)" op="EQ" version="0.0.0.0"/>
+			<dep name="mono(Banshee.Dap.Ipod)" op="EQ" version="0.0.0.0"/>
+			<dep name="mono(Banshee.Dap.Njb)" op="EQ" version="0.0.0.0"/>
+			<dep name="mono(ipod-sharp)" op="EQ" version="0.0.1.0"/>
+			<dep name="mono(njb-sharp)" op="EQ" version="0.3.0.25730"/>
+			<dep name="mono(Banshee.Widgets)" op="EQ" version="0.0.0.0"/>
+			<dep name="mono(MusicBrainz)" op="EQ" version="0.0.0.0"/>
+			<dep name="mono(banshee)" op="EQ" version="0.10.9.39048"/>
+			<dep name="mono(branding)" op="EQ" version="0.10.9.0"/>
+			<dep name="mono(burn-sharp)" op="EQ" version="0.0.0.0"/>
+			<dep name="mono(entagged-sharp)" op="EQ" version="0.2.0.0"/>
+			<dep name="mono(hal-sharp)" op="EQ" version="0.0.0.0"/>
+			<dep name="banshee" op="EQ" version="0.10.9" release="26.41"/>
+		</provides>
+		<requires>
+			<dep name="filesystem" pre="1"/>
+			<dep name="gconf2" pre="1"/>
+			<dep name="mono-core"/>
+			<dep name="libipoddevice"/>
+			<dep name="libmusicbrainz"/>
+			<dep name="libnjb"/>
+			<dep name="gstreamer010"/>
+			<dep name="gstreamer010-plugins-base"/>
+			<dep name="gstreamer010-plugins-good"/>
+			<dep name="banshee-engine" op="EQ" version="0.10.9"/>
+			<dep name="dbus-1-mono" op="GE" version="%{dbus" release="version}"/>
+			<dep name="dbus-1-x11" op="GE" version="%{dbus" release="version}"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(VersionedDependencies)" op="LE" version="3.0.3" release="1" pre="1"/>
+			<dep name="/bin/bash"/>
+			<dep name="libICE.so.6"/>
+			<dep name="libORBit-2.so.0"/>
+			<dep name="libSM.so.6"/>
+			<dep name="libX11.so.6"/>
+			<dep name="libXext.so.6"/>
+			<dep name="libXrender.so.1"/>
+			<dep name="libart_lgpl_2.so.2"/>
+			<dep name="libatk-1.0.so.0"/>
+			<dep name="libbonobo-2.so.0"/>
+			<dep name="libbonobo-activation.so.4"/>
+			<dep name="libbonoboui-2.so.0"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libc.so.6(GLIBC_2.4)"/>
+			<dep name="libcairo.so.2"/>
+			<dep name="libdbus-1.so.2"/>
+			<dep name="libdbus-glib-1.so.2"/>
+			<dep name="libdl.so.2"/>
+			<dep name="libfontconfig.so.1"/>
+			<dep name="libfreetype.so.6"/>
+			<dep name="libgconf-2.so.4"/>
+			<dep name="libgdk-x11-2.0.so.0"/>
+			<dep name="libgdk_pixbuf-2.0.so.0"/>
+			<dep name="libglib-2.0.so.0"/>
+			<dep name="libglitz.so.1"/>
+			<dep name="libgmodule-2.0.so.0"/>
+			<dep name="libgnome-2.so.0"/>
+			<dep name="libgnome-desktop-2.so.2"/>
+			<dep name="libgnome-keyring.so.0"/>
+			<dep name="libgnomecanvas-2.so.0"/>
+			<dep name="libgnomeui-2.so.0"/>
+			<dep name="libgnomevfs-2.so.0"/>
+			<dep name="libgobject-2.0.so.0"/>
+			<dep name="libgstbase-0.10.so.0"/>
+			<dep name="libgstcontroller-0.10.so.0"/>
+			<dep name="libgstdataprotocol-0.10.so.0"/>
+			<dep name="libgstreamer-0.10.so.0"/>
+			<dep name="libgthread-2.0.so.0"/>
+			<dep name="libgtk-x11-2.0.so.0"/>
+			<dep name="libhal.so.1"/>
+			<dep name="libm.so.6"/>
+			<dep name="libnautilus-burn.so.2"/>
+			<dep name="libnjb.so.5"/>
+			<dep name="libpango-1.0.so.0"/>
+			<dep name="libpangocairo-1.0.so.0"/>
+			<dep name="libpangoft2-1.0.so.0"/>
+			<dep name="libpng12.so.0"/>
+			<dep name="libpopt.so.0"/>
+			<dep name="libpthread.so.0"/>
+			<dep name="libpthread.so.0(GLIBC_2.0)"/>
+			<dep name="libstartup-notification-1.so.0"/>
+			<dep name="libusb-0.1.so.4"/>
+			<dep name="libxml2.so.2"/>
+			<dep name="libz.so.1"/>
+			<dep name="mono(Mono.Data.SqliteClient)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(Mono.Posix)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(System)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(System.Data)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(System.Web.Services)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(System.Xml)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(dbus-sharp)" op="EQ" version="0.60.0.0"/>
+			<dep name="mono(gconf-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(gdk-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(glade-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(glib-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(gnome-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(gnome-vfs-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(gtk-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(mscorlib)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(pango-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>banshee</name>
+	<summary>crash fixes for banshee</summary>
+	<description>Allows queueing of files if banshee is already running.
+Prevents a crash when removing queued files.  Prevents a
+crash if there is no cd burner device.
+</description>
+	<arch>x86_64</arch>
+	<version>0.10.9</version>
+	<release>26.41</release>
+	<filesize>880621</filesize>
+	<installedsize>2366658</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>0.10.9</version>
+			<release>26.41</release>
+			<filename>banshee-0.10.9-26.41.x86_64.rpm</filename>
+			<filesize>880621</filesize>
+			<installedsize>2366658</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="libbanshee.so()(64bit)"/>
+			<dep name="libnautilusburnglue.so()(64bit)"/>
+			<dep name="libnjbglue.so()(64bit)"/>
+			<dep name="mono(Banshee.Base)" op="EQ" version="0.0.0.0"/>
+			<dep name="mono(Banshee.Dap.Ipod)" op="EQ" version="0.0.0.0"/>
+			<dep name="mono(Banshee.Dap.Njb)" op="EQ" version="0.0.0.0"/>
+			<dep name="mono(ipod-sharp)" op="EQ" version="0.0.1.0"/>
+			<dep name="mono(njb-sharp)" op="EQ" version="0.3.0.5069"/>
+			<dep name="mono(Banshee.Widgets)" op="EQ" version="0.0.0.0"/>
+			<dep name="mono(MusicBrainz)" op="EQ" version="0.0.0.0"/>
+			<dep name="mono(banshee)" op="EQ" version="0.10.9.6499"/>
+			<dep name="mono(branding)" op="EQ" version="0.10.9.0"/>
+			<dep name="mono(burn-sharp)" op="EQ" version="0.0.0.0"/>
+			<dep name="mono(entagged-sharp)" op="EQ" version="0.2.0.0"/>
+			<dep name="mono(hal-sharp)" op="EQ" version="0.0.0.0"/>
+			<dep name="banshee" op="EQ" version="0.10.9" release="26.41"/>
+		</provides>
+		<requires>
+			<dep name="filesystem" pre="1"/>
+			<dep name="gconf2" pre="1"/>
+			<dep name="mono-core"/>
+			<dep name="libipoddevice"/>
+			<dep name="libmusicbrainz"/>
+			<dep name="libnjb"/>
+			<dep name="gstreamer010"/>
+			<dep name="gstreamer010-plugins-base"/>
+			<dep name="gstreamer010-plugins-good"/>
+			<dep name="banshee-engine" op="EQ" version="0.10.9"/>
+			<dep name="dbus-1-mono" op="GE" version="%{dbus" release="version}"/>
+			<dep name="dbus-1-x11" op="GE" version="%{dbus" release="version}"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(VersionedDependencies)" op="LE" version="3.0.3" release="1" pre="1"/>
+			<dep name="/bin/bash"/>
+			<dep name="libICE.so.6()(64bit)"/>
+			<dep name="libORBit-2.so.0()(64bit)"/>
+			<dep name="libSM.so.6()(64bit)"/>
+			<dep name="libX11.so.6()(64bit)"/>
+			<dep name="libXext.so.6()(64bit)"/>
+			<dep name="libXrender.so.1()(64bit)"/>
+			<dep name="libart_lgpl_2.so.2()(64bit)"/>
+			<dep name="libatk-1.0.so.0()(64bit)"/>
+			<dep name="libbonobo-2.so.0()(64bit)"/>
+			<dep name="libbonobo-activation.so.4()(64bit)"/>
+			<dep name="libbonoboui-2.so.0()(64bit)"/>
+			<dep name="libc.so.6()(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.4)(64bit)"/>
+			<dep name="libcairo.so.2()(64bit)"/>
+			<dep name="libdbus-1.so.2()(64bit)"/>
+			<dep name="libdbus-glib-1.so.2()(64bit)"/>
+			<dep name="libdl.so.2()(64bit)"/>
+			<dep name="libfontconfig.so.1()(64bit)"/>
+			<dep name="libfreetype.so.6()(64bit)"/>
+			<dep name="libgconf-2.so.4()(64bit)"/>
+			<dep name="libgdk-x11-2.0.so.0()(64bit)"/>
+			<dep name="libgdk_pixbuf-2.0.so.0()(64bit)"/>
+			<dep name="libglib-2.0.so.0()(64bit)"/>
+			<dep name="libglitz.so.1()(64bit)"/>
+			<dep name="libgmodule-2.0.so.0()(64bit)"/>
+			<dep name="libgnome-2.so.0()(64bit)"/>
+			<dep name="libgnome-desktop-2.so.2()(64bit)"/>
+			<dep name="libgnome-keyring.so.0()(64bit)"/>
+			<dep name="libgnomecanvas-2.so.0()(64bit)"/>
+			<dep name="libgnomeui-2.so.0()(64bit)"/>
+			<dep name="libgnomevfs-2.so.0()(64bit)"/>
+			<dep name="libgobject-2.0.so.0()(64bit)"/>
+			<dep name="libgstbase-0.10.so.0()(64bit)"/>
+			<dep name="libgstcontroller-0.10.so.0()(64bit)"/>
+			<dep name="libgstdataprotocol-0.10.so.0()(64bit)"/>
+			<dep name="libgstreamer-0.10.so.0()(64bit)"/>
+			<dep name="libgthread-2.0.so.0()(64bit)"/>
+			<dep name="libgtk-x11-2.0.so.0()(64bit)"/>
+			<dep name="libhal.so.1()(64bit)"/>
+			<dep name="libm.so.6()(64bit)"/>
+			<dep name="libnautilus-burn.so.2()(64bit)"/>
+			<dep name="libnjb.so.5()(64bit)"/>
+			<dep name="libpango-1.0.so.0()(64bit)"/>
+			<dep name="libpangocairo-1.0.so.0()(64bit)"/>
+			<dep name="libpangoft2-1.0.so.0()(64bit)"/>
+			<dep name="libpng12.so.0()(64bit)"/>
+			<dep name="libpopt.so.0()(64bit)"/>
+			<dep name="libpthread.so.0()(64bit)"/>
+			<dep name="libpthread.so.0(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libstartup-notification-1.so.0()(64bit)"/>
+			<dep name="libusb-0.1.so.4()(64bit)"/>
+			<dep name="libxml2.so.2()(64bit)"/>
+			<dep name="libz.so.1()(64bit)"/>
+			<dep name="mono(Mono.Data.SqliteClient)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(Mono.Posix)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(System)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(System.Data)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(System.Web.Services)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(System.Xml)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(dbus-sharp)" op="EQ" version="0.60.0.0"/>
+			<dep name="mono(gconf-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(gdk-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(glade-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(glib-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(gnome-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(gnome-vfs-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(gtk-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(mscorlib)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(pango-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>banshee-engine-gst</name>
+	<summary>crash fixes for banshee</summary>
+	<description>Allows queueing of files if banshee is already running.
+Prevents a crash when removing queued files.  Prevents a
+crash if there is no cd burner device.
+</description>
+	<arch>i586</arch>
+	<version>0.10.9</version>
+	<release>26.41</release>
+	<filesize>20511</filesize>
+	<installedsize>8807</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>0.10.9</version>
+			<release>26.41</release>
+			<filename>banshee-engine-gst-0.10.9-26.41.i586.rpm</filename>
+			<filesize>20511</filesize>
+			<installedsize>8807</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="banshee-engine" op="EQ" version="0.10.9"/>
+			<dep name="mono(gst-player)" op="EQ" version="0.0.0.0"/>
+			<dep name="banshee-engine-gst" op="EQ" version="0.10.9" release="26.41"/>
+		</provides>
+		<requires>
+			<dep name="banshee" op="EQ" version="0.10.9"/>
+			<dep name="rpmlib(VersionedDependencies)" op="LE" version="3.0.3" release="1" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="mono(Banshee.Base)" op="EQ" version="0.0.0.0"/>
+			<dep name="mono(Mono.Posix)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(System)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(glib-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(mscorlib)" op="EQ" version="1.0.5000.0"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>banshee-engine-gst</name>
+	<summary>crash fixes for banshee</summary>
+	<description>Allows queueing of files if banshee is already running.
+Prevents a crash when removing queued files.  Prevents a
+crash if there is no cd burner device.
+</description>
+	<arch>ppc</arch>
+	<version>0.10.9</version>
+	<release>26.41</release>
+	<filesize>20487</filesize>
+	<installedsize>8807</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>0.10.9</version>
+			<release>26.41</release>
+			<filename>banshee-engine-gst-0.10.9-26.41.ppc.rpm</filename>
+			<filesize>20487</filesize>
+			<installedsize>8807</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="banshee-engine" op="EQ" version="0.10.9"/>
+			<dep name="mono(gst-player)" op="EQ" version="0.0.0.0"/>
+			<dep name="banshee-engine-gst" op="EQ" version="0.10.9" release="26.41"/>
+		</provides>
+		<requires>
+			<dep name="banshee" op="EQ" version="0.10.9"/>
+			<dep name="rpmlib(VersionedDependencies)" op="LE" version="3.0.3" release="1" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="mono(Banshee.Base)" op="EQ" version="0.0.0.0"/>
+			<dep name="mono(Mono.Posix)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(System)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(glib-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(mscorlib)" op="EQ" version="1.0.5000.0"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>banshee-engine-gst</name>
+	<summary>crash fixes for banshee</summary>
+	<description>Allows queueing of files if banshee is already running.
+Prevents a crash when removing queued files.  Prevents a
+crash if there is no cd burner device.
+</description>
+	<arch>x86_64</arch>
+	<version>0.10.9</version>
+	<release>26.41</release>
+	<filesize>20485</filesize>
+	<installedsize>8809</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>0.10.9</version>
+			<release>26.41</release>
+			<filename>banshee-engine-gst-0.10.9-26.41.x86_64.rpm</filename>
+			<filesize>20485</filesize>
+			<installedsize>8809</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="banshee-engine" op="EQ" version="0.10.9"/>
+			<dep name="mono(gst-player)" op="EQ" version="0.0.0.0"/>
+			<dep name="banshee-engine-gst" op="EQ" version="0.10.9" release="26.41"/>
+		</provides>
+		<requires>
+			<dep name="banshee" op="EQ" version="0.10.9"/>
+			<dep name="rpmlib(VersionedDependencies)" op="LE" version="3.0.3" release="1" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="mono(Banshee.Base)" op="EQ" version="0.0.0.0"/>
+			<dep name="mono(Mono.Posix)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(System)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(glib-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(mscorlib)" op="EQ" version="1.0.5000.0"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>banshee-engine-helix</name>
+	<summary>crash fixes for banshee</summary>
+	<description>Allows queueing of files if banshee is already running.
+Prevents a crash when removing queued files.  Prevents a
+crash if there is no cd burner device.
+</description>
+	<arch>i586</arch>
+	<version>0.10.9</version>
+	<release>26.41</release>
+	<filesize>494839</filesize>
+	<installedsize>1542882</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>0.10.9</version>
+			<release>26.41</release>
+			<filename>banshee-engine-helix-0.10.9-26.41.i586.rpm</filename>
+			<filesize>494839</filesize>
+			<installedsize>1542882</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="banshee-engine="/>
+			<dep name="0.10.9"/>
+			<dep name="libgstdtdriver.so"/>
+			<dep name="libgstxingenc.so"/>
+			<dep name="proxyfsys.so"/>
+			<dep name="proxyfsys.so(G2)"/>
+			<dep name="proxyfsys.so(proxyfsys.so)"/>
+			<dep name="mono(HelixRemotePlayerEngine)" op="EQ" version="0.0.0.0"/>
+			<dep name="banshee-engine-helix" op="EQ" version="0.10.9" release="26.41"/>
+		</provides>
+		<requires>
+			<dep name="banshee" op="EQ" version="0.10.9"/>
+			<dep name="RealPlayer"/>
+			<dep name="helix-dbus-server"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(VersionedDependencies)" op="LE" version="3.0.3" release="1" pre="1"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)"/>
+			<dep name="libc.so.6(GLIBC_2.4)"/>
+			<dep name="libdl.so.2"/>
+			<dep name="libdl.so.2(GLIBC_2.0)"/>
+			<dep name="libdl.so.2(GLIBC_2.1)"/>
+			<dep name="libgcc_s.so.1"/>
+			<dep name="libgcc_s.so.1(GCC_3.0)"/>
+			<dep name="libgcc_s.so.1(GLIBC_2.0)"/>
+			<dep name="libglib-2.0.so.0"/>
+			<dep name="libgmodule-2.0.so.0"/>
+			<dep name="libgobject-2.0.so.0"/>
+			<dep name="libgstbase-0.10.so.0"/>
+			<dep name="libgstreamer-0.10.so.0"/>
+			<dep name="libgthread-2.0.so.0"/>
+			<dep name="libm.so.6"/>
+			<dep name="libm.so.6(GLIBC_2.0)"/>
+			<dep name="libpthread.so.0"/>
+			<dep name="libpthread.so.0(GLIBC_2.0)"/>
+			<dep name="libpthread.so.0(GLIBC_2.1)"/>
+			<dep name="libpthread.so.0(GLIBC_2.3.2)"/>
+			<dep name="libstdc++.so.6"/>
+			<dep name="libstdc++.so.6(CXXABI_1.3)"/>
+			<dep name="libstdc++.so.6(GLIBCXX_3.4)"/>
+			<dep name="libxml2.so.2"/>
+			<dep name="libz.so.1"/>
+			<dep name="mono(Banshee.Base)" op="EQ" version="0.0.0.0"/>
+			<dep name="mono(System)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(dbus-sharp)" op="EQ" version="0.60.0.0"/>
+			<dep name="mono(glib-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(mscorlib)" op="EQ" version="1.0.5000.0"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>banshee-engine-helix</name>
+	<summary>crash fixes for banshee</summary>
+	<description>Allows queueing of files if banshee is already running.
+Prevents a crash when removing queued files.  Prevents a
+crash if there is no cd burner device.
+</description>
+	<arch>ppc</arch>
+	<version>0.10.9</version>
+	<release>26.41</release>
+	<filesize>137866</filesize>
+	<installedsize>315202</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>0.10.9</version>
+			<release>26.41</release>
+			<filename>banshee-engine-helix-0.10.9-26.41.ppc.rpm</filename>
+			<filesize>137866</filesize>
+			<installedsize>315202</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="banshee-engine="/>
+			<dep name="0.10.9"/>
+			<dep name="libgstxingenc.so"/>
+			<dep name="mono(HelixRemotePlayerEngine)" op="EQ" version="0.0.0.0"/>
+			<dep name="banshee-engine-helix" op="EQ" version="0.10.9" release="26.41"/>
+		</provides>
+		<requires>
+			<dep name="banshee" op="EQ" version="0.10.9"/>
+			<dep name="RealPlayer"/>
+			<dep name="helix-dbus-server"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(VersionedDependencies)" op="LE" version="3.0.3" release="1" pre="1"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libc.so.6(GLIBC_2.4)"/>
+			<dep name="libgcc_s.so.1"/>
+			<dep name="libgcc_s.so.1(GCC_3.0)"/>
+			<dep name="libgcc_s.so.1(GLIBC_2.0)"/>
+			<dep name="libm.so.6"/>
+			<dep name="libm.so.6(GLIBC_2.0)"/>
+			<dep name="libstdc++.so.6"/>
+			<dep name="libstdc++.so.6(CXXABI_1.3)"/>
+			<dep name="libstdc++.so.6(GLIBCXX_3.4)"/>
+			<dep name="mono(Banshee.Base)" op="EQ" version="0.0.0.0"/>
+			<dep name="mono(System)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(dbus-sharp)" op="EQ" version="0.60.0.0"/>
+			<dep name="mono(glib-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(mscorlib)" op="EQ" version="1.0.5000.0"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>banshee-engine-helix</name>
+	<summary>crash fixes for banshee</summary>
+	<description>Allows queueing of files if banshee is already running.
+Prevents a crash when removing queued files.  Prevents a
+crash if there is no cd burner device.
+</description>
+	<arch>x86_64</arch>
+	<version>0.10.9</version>
+	<release>26.41</release>
+	<filesize>127715</filesize>
+	<installedsize>278834</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>0.10.9</version>
+			<release>26.41</release>
+			<filename>banshee-engine-helix-0.10.9-26.41.x86_64.rpm</filename>
+			<filesize>127715</filesize>
+			<installedsize>278834</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="banshee-engine="/>
+			<dep name="0.10.9"/>
+			<dep name="libgstxingenc.so()(64bit)"/>
+			<dep name="mono(HelixRemotePlayerEngine)" op="EQ" version="0.0.0.0"/>
+			<dep name="banshee-engine-helix" op="EQ" version="0.10.9" release="26.41"/>
+		</provides>
+		<requires>
+			<dep name="banshee" op="EQ" version="0.10.9"/>
+			<dep name="RealPlayer"/>
+			<dep name="helix-dbus-server"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(VersionedDependencies)" op="LE" version="3.0.3" release="1" pre="1"/>
+			<dep name="libc.so.6()(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.4)(64bit)"/>
+			<dep name="libgcc_s.so.1()(64bit)"/>
+			<dep name="libgcc_s.so.1(GCC_3.0)(64bit)"/>
+			<dep name="libm.so.6()(64bit)"/>
+			<dep name="libm.so.6(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libstdc++.so.6()(64bit)"/>
+			<dep name="libstdc++.so.6(CXXABI_1.3)(64bit)"/>
+			<dep name="libstdc++.so.6(GLIBCXX_3.4)(64bit)"/>
+			<dep name="mono(Banshee.Base)" op="EQ" version="0.0.0.0"/>
+			<dep name="mono(System)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(dbus-sharp)" op="EQ" version="0.60.0.0"/>
+			<dep name="mono(glib-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(mscorlib)" op="EQ" version="1.0.5000.0"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>banshee-plugins-default</name>
+	<summary>crash fixes for banshee</summary>
+	<description>Allows queueing of files if banshee is already running.
+Prevents a crash when removing queued files.  Prevents a
+crash if there is no cd burner device.
+</description>
+	<arch>i586</arch>
+	<version>0.10.9</version>
+	<release>26.41</release>
+	<filesize>51393</filesize>
+	<installedsize>90016</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>0.10.9</version>
+			<release>26.41</release>
+			<filename>banshee-plugins-default-0.10.9-26.41.i586.rpm</filename>
+			<filesize>51393</filesize>
+			<installedsize>90016</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="mono(Audioscrobbler)" op="EQ" version="0.0.0.0"/>
+			<dep name="mono(MMKeys)" op="EQ" version="0.0.0.0"/>
+			<dep name="mono(MetadataSearch)" op="EQ" version="0.0.0.0"/>
+			<dep name="mono(NotificationAreaIcon)" op="EQ" version="0.0.0.0"/>
+			<dep name="banshee-plugins-default" op="EQ" version="0.10.9" release="26.41"/>
+		</provides>
+		<requires>
+			<dep name="banshee" op="EQ" version="0.10.9"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(VersionedDependencies)" op="LE" version="3.0.3" release="1" pre="1"/>
+			<dep name="mono(Banshee.Base)" op="EQ" version="0.0.0.0"/>
+			<dep name="mono(Banshee.Widgets)" op="EQ" version="0.0.0.0"/>
+			<dep name="mono(Mono.Data.SqliteClient)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(Mono.Posix)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(Mono.Security)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(MusicBrainz)" op="EQ" version="0.0.0.0"/>
+			<dep name="mono(System)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(System.Data)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(System.Web)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(System.Xml)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(gconf-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(gdk-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(glib-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(gnome-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(gtk-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(mscorlib)" op="EQ" version="1.0.5000.0"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>banshee-plugins-default</name>
+	<summary>crash fixes for banshee</summary>
+	<description>Allows queueing of files if banshee is already running.
+Prevents a crash when removing queued files.  Prevents a
+crash if there is no cd burner device.
+</description>
+	<arch>ppc</arch>
+	<version>0.10.9</version>
+	<release>26.41</release>
+	<filesize>51447</filesize>
+	<installedsize>91040</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>0.10.9</version>
+			<release>26.41</release>
+			<filename>banshee-plugins-default-0.10.9-26.41.ppc.rpm</filename>
+			<filesize>51447</filesize>
+			<installedsize>91040</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="mono(Audioscrobbler)" op="EQ" version="0.0.0.0"/>
+			<dep name="mono(MMKeys)" op="EQ" version="0.0.0.0"/>
+			<dep name="mono(MetadataSearch)" op="EQ" version="0.0.0.0"/>
+			<dep name="mono(NotificationAreaIcon)" op="EQ" version="0.0.0.0"/>
+			<dep name="banshee-plugins-default" op="EQ" version="0.10.9" release="26.41"/>
+		</provides>
+		<requires>
+			<dep name="banshee" op="EQ" version="0.10.9"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(VersionedDependencies)" op="LE" version="3.0.3" release="1" pre="1"/>
+			<dep name="mono(Banshee.Base)" op="EQ" version="0.0.0.0"/>
+			<dep name="mono(Banshee.Widgets)" op="EQ" version="0.0.0.0"/>
+			<dep name="mono(Mono.Data.SqliteClient)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(Mono.Posix)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(Mono.Security)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(MusicBrainz)" op="EQ" version="0.0.0.0"/>
+			<dep name="mono(System)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(System.Data)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(System.Web)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(System.Xml)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(gconf-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(gdk-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(glib-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(gnome-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(gtk-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(mscorlib)" op="EQ" version="1.0.5000.0"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>banshee-plugins-default</name>
+	<summary>crash fixes for banshee</summary>
+	<description>Allows queueing of files if banshee is already running.
+Prevents a crash when removing queued files.  Prevents a
+crash if there is no cd burner device.
+</description>
+	<arch>x86_64</arch>
+	<version>0.10.9</version>
+	<release>26.41</release>
+	<filesize>51409</filesize>
+	<installedsize>90022</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>0.10.9</version>
+			<release>26.41</release>
+			<filename>banshee-plugins-default-0.10.9-26.41.x86_64.rpm</filename>
+			<filesize>51409</filesize>
+			<installedsize>90022</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="mono(Audioscrobbler)" op="EQ" version="0.0.0.0"/>
+			<dep name="mono(MMKeys)" op="EQ" version="0.0.0.0"/>
+			<dep name="mono(MetadataSearch)" op="EQ" version="0.0.0.0"/>
+			<dep name="mono(NotificationAreaIcon)" op="EQ" version="0.0.0.0"/>
+			<dep name="banshee-plugins-default" op="EQ" version="0.10.9" release="26.41"/>
+		</provides>
+		<requires>
+			<dep name="banshee" op="EQ" version="0.10.9"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="rpmlib(VersionedDependencies)" op="LE" version="3.0.3" release="1" pre="1"/>
+			<dep name="mono(Banshee.Base)" op="EQ" version="0.0.0.0"/>
+			<dep name="mono(Banshee.Widgets)" op="EQ" version="0.0.0.0"/>
+			<dep name="mono(Mono.Data.SqliteClient)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(Mono.Posix)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(Mono.Security)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(MusicBrainz)" op="EQ" version="0.0.0.0"/>
+			<dep name="mono(System)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(System.Data)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(System.Web)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(System.Xml)" op="EQ" version="1.0.5000.0"/>
+			<dep name="mono(gconf-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(gdk-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(glib-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(gnome-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(gtk-sharp)" op="EQ" version="2.8.0.0"/>
+			<dep name="mono(mscorlib)" op="EQ" version="1.0.5000.0"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+</subchannel></channel>

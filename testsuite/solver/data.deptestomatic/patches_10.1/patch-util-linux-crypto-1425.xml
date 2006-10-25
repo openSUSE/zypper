@@ -1,0 +1,183 @@
+<channel><subchannel>                                                  
+
+<patch>
+	<name>util-linux-crypto</name>
+	<arch>noarch</arch>
+	<version>1425</version>
+	<release>0</release>
+	<requires>
+		<dep kind="atom" name="util-linux-crypto" epoch="0" version="2.12a" release="14.2" op="EQ"/>
+	</requires>
+</patch>
+<atom>
+	<name>util-linux-crypto</name>
+	<arch>i586</arch>
+	<version>2.12a</version>
+	<release>14.2</release>
+	<freshens>
+		<dep kind="package" name="util-linux-crypto"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="util-linux-crypto" epoch="0" version="2.12a" release="14.2" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>util-linux-crypto</name>
+	<arch>ppc</arch>
+	<version>2.12a</version>
+	<release>14.2</release>
+	<freshens>
+		<dep kind="package" name="util-linux-crypto"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="util-linux-crypto" epoch="0" version="2.12a" release="14.2" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>util-linux-crypto</name>
+	<arch>x86_64</arch>
+	<version>2.12a</version>
+	<release>14.2</release>
+	<freshens>
+		<dep kind="package" name="util-linux-crypto"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="util-linux-crypto" epoch="0" version="2.12a" release="14.2" op="GE"/>
+	</requires>
+</atom>
+<package>
+	<name>util-linux-crypto</name>
+	<summary>util-linux-crypto bugfi</summary>
+	<description>Fix cryptsetup to work with no yet existing device maps.
+</description>
+	<arch>i586</arch>
+	<version>2.12a</version>
+	<release>14.2</release>
+	<filesize>207839</filesize>
+	<installedsize>402027</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>2.12a</version>
+			<release>14.2</release>
+			<filename>util-linux-crypto-2.12a-14.2.i586.rpm</filename>
+			<filesize>207839</filesize>
+			<installedsize>402027</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="util-linux-crypto" op="EQ" version="2.12a" release="14.2"/>
+		</provides>
+		<requires>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/bin/sh"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1)"/>
+			<dep name="libc.so.6(GLIBC_2.1.1)"/>
+			<dep name="libc.so.6(GLIBC_2.2)"/>
+			<dep name="libc.so.6(GLIBC_2.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)"/>
+			<dep name="libc.so.6(GLIBC_2.4)"/>
+			<dep name="libdevmapper.so.1.02"/>
+			<dep name="libdevmapper.so.1.02(Base)"/>
+			<dep name="libpopt.so.0"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>util-linux-crypto</name>
+	<summary>util-linux-crypto bugfi</summary>
+	<description>Fix cryptsetup to work with no yet existing device maps.
+</description>
+	<arch>ppc</arch>
+	<version>2.12a</version>
+	<release>14.2</release>
+	<filesize>217758</filesize>
+	<installedsize>423235</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>2.12a</version>
+			<release>14.2</release>
+			<filename>util-linux-crypto-2.12a-14.2.ppc.rpm</filename>
+			<filesize>217758</filesize>
+			<installedsize>423235</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="util-linux-crypto" op="EQ" version="2.12a" release="14.2"/>
+		</provides>
+		<requires>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/bin/sh"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1)"/>
+			<dep name="libc.so.6(GLIBC_2.1.1)"/>
+			<dep name="libc.so.6(GLIBC_2.2)"/>
+			<dep name="libc.so.6(GLIBC_2.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)"/>
+			<dep name="libc.so.6(GLIBC_2.4)"/>
+			<dep name="libdevmapper.so.1.02"/>
+			<dep name="libdevmapper.so.1.02(Base)"/>
+			<dep name="libpopt.so.0"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>util-linux-crypto</name>
+	<summary>util-linux-crypto bugfi</summary>
+	<description>Fix cryptsetup to work with no yet existing device maps.
+</description>
+	<arch>x86_64</arch>
+	<version>2.12a</version>
+	<release>14.2</release>
+	<filesize>204809</filesize>
+	<installedsize>390923</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>2.12a</version>
+			<release>14.2</release>
+			<filename>util-linux-crypto-2.12a-14.2.x86_64.rpm</filename>
+			<filesize>204809</filesize>
+			<installedsize>390923</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="util-linux-crypto" op="EQ" version="2.12a" release="14.2"/>
+		</provides>
+		<requires>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/bin/sh"/>
+			<dep name="libc.so.6()(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.3)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.4)(64bit)"/>
+			<dep name="libdevmapper.so.1.02()(64bit)"/>
+			<dep name="libdevmapper.so.1.02(Base)(64bit)"/>
+			<dep name="libpopt.so.0()(64bit)"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+</subchannel></channel>

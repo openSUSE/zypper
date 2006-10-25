@@ -1,0 +1,193 @@
+<channel><subchannel>                                                  
+
+<patch>
+	<name>libkexif</name>
+	<arch>noarch</arch>
+	<version>2026</version>
+	<release>0</release>
+	<requires>
+		<dep kind="atom" name="libkexif" epoch="0" version="0.2.2" release="15.5" op="EQ"/>
+	</requires>
+</patch>
+<atom>
+	<name>libkexif</name>
+	<arch>i586</arch>
+	<version>0.2.2</version>
+	<release>15.5</release>
+	<freshens>
+		<dep kind="package" name="libkexif"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="libkexif" epoch="0" version="0.2.2" release="15.5" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>libkexif</name>
+	<arch>ppc</arch>
+	<version>0.2.2</version>
+	<release>15.5</release>
+	<freshens>
+		<dep kind="package" name="libkexif"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="libkexif" epoch="0" version="0.2.2" release="15.5" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>libkexif</name>
+	<arch>x86_64</arch>
+	<version>0.2.2</version>
+	<release>15.5</release>
+	<freshens>
+		<dep kind="package" name="libkexif"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="libkexif" epoch="0" version="0.2.2" release="15.5" op="GE"/>
+	</requires>
+</atom>
+<package>
+	<name>libkexif</name>
+	<summary>Fixes empty EXIF information in properties dialog</summary>
+	<description>This update fixes empty EXIF information in various KDE
+properties dialogs (e.g. digikam).
+</description>
+	<arch>i586</arch>
+	<version>0.2.2</version>
+	<release>15.5</release>
+	<filesize>59173</filesize>
+	<installedsize>158542</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>0.2.2</version>
+			<release>15.5</release>
+			<filename>libkexif-0.2.2-15.5.i586.rpm</filename>
+			<filesize>59173</filesize>
+			<installedsize>158542</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="libkexif.so.1"/>
+			<dep name="libkexif" op="EQ" version="0.2.2" release="15.5"/>
+		</provides>
+		<requires>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libexif.so.12"/>
+			<dep name="libkdecore.so.4"/>
+			<dep name="libkdeui.so.4"/>
+			<dep name="libqt-mt.so.3"/>
+			<dep name="libstdc++.so.6"/>
+			<dep name="libstdc++.so.6(CXXABI_1.3)"/>
+			<dep name="libstdc++.so.6(GLIBCXX_3.4)"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>libkexif</name>
+	<summary>Fixes empty EXIF information in properties dialog</summary>
+	<description>This update fixes empty EXIF information in various KDE
+properties dialogs (e.g. digikam).
+</description>
+	<arch>ppc</arch>
+	<version>0.2.2</version>
+	<release>15.5</release>
+	<filesize>61765</filesize>
+	<installedsize>171058</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>0.2.2</version>
+			<release>15.5</release>
+			<filename>libkexif-0.2.2-15.5.ppc.rpm</filename>
+			<filesize>61765</filesize>
+			<installedsize>171058</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="libkexif.so.1"/>
+			<dep name="libkexif" op="EQ" version="0.2.2" release="15.5"/>
+		</provides>
+		<requires>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libexif.so.12"/>
+			<dep name="libkdecore.so.4"/>
+			<dep name="libkdeui.so.4"/>
+			<dep name="libqt-mt.so.3"/>
+			<dep name="libstdc++.so.6"/>
+			<dep name="libstdc++.so.6(CXXABI_1.3)"/>
+			<dep name="libstdc++.so.6(GLIBCXX_3.4)"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>libkexif</name>
+	<summary>Fixes empty EXIF information in properties dialog</summary>
+	<description>This update fixes empty EXIF information in various KDE
+properties dialogs (e.g. digikam).
+</description>
+	<arch>x86_64</arch>
+	<version>0.2.2</version>
+	<release>15.5</release>
+	<filesize>61320</filesize>
+	<installedsize>183570</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>0.2.2</version>
+			<release>15.5</release>
+			<filename>libkexif-0.2.2-15.5.x86_64.rpm</filename>
+			<filesize>61320</filesize>
+			<installedsize>183570</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="libkexif.so.1()(64bit)"/>
+			<dep name="libkexif" op="EQ" version="0.2.2" release="15.5"/>
+		</provides>
+		<requires>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="libc.so.6()(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libexif.so.12()(64bit)"/>
+			<dep name="libkdecore.so.4()(64bit)"/>
+			<dep name="libkdeui.so.4()(64bit)"/>
+			<dep name="libqt-mt.so.3()(64bit)"/>
+			<dep name="libstdc++.so.6()(64bit)"/>
+			<dep name="libstdc++.so.6(CXXABI_1.3)(64bit)"/>
+			<dep name="libstdc++.so.6(GLIBCXX_3.4)(64bit)"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+</subchannel></channel>

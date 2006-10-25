@@ -1,0 +1,209 @@
+<channel><subchannel>                                                  
+
+<patch>
+	<name>binutils</name>
+	<arch>noarch</arch>
+	<version>2185</version>
+	<release>0</release>
+	<requires>
+		<dep kind="atom" name="binutils" epoch="0" version="2.16.91.0.5" release="23.5" op="EQ"/>
+		<dep kind="atom" name="binutils-32bit" epoch="0" version="2.16.91.0.5" release="23.5" op="EQ"/>
+		<dep kind="atom" name="binutils-64bit" epoch="0" version="2.16.91.0.5" release="23.5" op="EQ"/>
+	</requires>
+</patch>
+<atom>
+	<name>binutils</name>
+	<arch>i586</arch>
+	<version>2.16.91.0.5</version>
+	<release>23.5</release>
+	<freshens>
+		<dep kind="package" name="binutils"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="binutils" epoch="0" version="2.16.91.0.5" release="23.5" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>binutils</name>
+	<arch>ppc</arch>
+	<version>2.16.91.0.5</version>
+	<release>23.5</release>
+	<freshens>
+		<dep kind="package" name="binutils"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="binutils" epoch="0" version="2.16.91.0.5" release="23.5" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>binutils</name>
+	<arch>x86_64</arch>
+	<version>2.16.91.0.5</version>
+	<release>23.5</release>
+	<freshens>
+		<dep kind="package" name="binutils"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="binutils" epoch="0" version="2.16.91.0.5" release="23.5" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>binutils-32bit</name>
+	<arch>x86_64</arch>
+	<version>2.16.91.0.5</version>
+	<release>23.5</release>
+	<freshens>
+		<dep kind="package" name="binutils-32bit"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="binutils-32bit" epoch="0" version="2.16.91.0.5" release="23.5" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>binutils-64bit</name>
+	<arch>ppc</arch>
+	<version>2.16.91.0.5</version>
+	<release>23.5</release>
+	<freshens>
+		<dep kind="package" name="binutils-64bit"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="binutils-64bit" epoch="0" version="2.16.91.0.5" release="23.5" op="GE"/>
+	</requires>
+</atom>
+<package>
+	<name>binutils</name>
+	<summary>binutils: Performance problem in the linker</summary>
+	<description>Fix a performance problem in the linker which can lead to
+increased link times.
+</description>
+	<arch>i586</arch>
+	<version>2.16.91.0.5</version>
+	<release>23.5</release>
+	<filesize>4275562</filesize>
+	<installedsize>14276393</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>2.16.91.0.5</version>
+			<release>23.5</release>
+			<filename>binutils-2.16.91.0.5-23.5.i586.rpm</filename>
+			<filesize>4275562</filesize>
+			<installedsize>14276393</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+	</deps>
+</package>
+<package>
+	<name>binutils</name>
+	<summary>binutils: Performance problem in the linker</summary>
+	<description>Fix a performance problem in the linker which can lead to
+increased link times.
+</description>
+	<arch>ppc</arch>
+	<version>2.16.91.0.5</version>
+	<release>23.5</release>
+	<filesize>4584621</filesize>
+	<installedsize>15426906</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>2.16.91.0.5</version>
+			<release>23.5</release>
+			<filename>binutils-2.16.91.0.5-23.5.ppc.rpm</filename>
+			<filesize>4584621</filesize>
+			<installedsize>15426906</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+	</deps>
+</package>
+<package>
+	<name>binutils</name>
+	<summary>binutils: Performance problem in the linker</summary>
+	<description>Fix a performance problem in the linker which can lead to
+increased link times.
+</description>
+	<arch>x86_64</arch>
+	<version>2.16.91.0.5</version>
+	<release>23.5</release>
+	<filesize>4373366</filesize>
+	<installedsize>16619951</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>2.16.91.0.5</version>
+			<release>23.5</release>
+			<filename>binutils-2.16.91.0.5-23.5.x86_64.rpm</filename>
+			<filesize>4373366</filesize>
+			<installedsize>16619951</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+	</deps>
+</package>
+<package>
+	<name>binutils-32bit</name>
+	<summary>binutils: Performance problem in the linker</summary>
+	<description>Fix a performance problem in the linker which can lead to
+increased link times.
+</description>
+	<arch>x86_64</arch>
+	<version>2.16.91.0.5</version>
+	<release>23.5</release>
+	<filesize>1873791</filesize>
+	<installedsize>5285741</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>2.16.91.0.5</version>
+			<release>23.5</release>
+			<filename>binutils-32bit-2.16.91.0.5-23.5.x86_64.rpm</filename>
+			<filesize>1873791</filesize>
+			<installedsize>5285741</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+	</deps>
+</package>
+<package>
+	<name>binutils-64bit</name>
+	<summary>binutils: Performance problem in the linker</summary>
+	<description>Fix a performance problem in the linker which can lead to
+increased link times.
+</description>
+	<arch>ppc</arch>
+	<version>2.16.91.0.5</version>
+	<release>23.5</release>
+	<filesize>1909864</filesize>
+	<installedsize>7887743</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>2.16.91.0.5</version>
+			<release>23.5</release>
+			<filename>binutils-64bit-2.16.91.0.5-23.5.ppc.rpm</filename>
+			<filesize>1909864</filesize>
+			<installedsize>7887743</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+	</deps>
+</package>
+</subchannel></channel>

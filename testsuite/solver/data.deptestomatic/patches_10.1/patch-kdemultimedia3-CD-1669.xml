@@ -1,0 +1,287 @@
+<channel><subchannel>                                                  
+
+<patch>
+	<name>kdemultimedia3-CD</name>
+	<arch>noarch</arch>
+	<version>1669</version>
+	<release>0</release>
+	<requires>
+		<dep kind="atom" name="kdemultimedia3-CD" epoch="0" version="3.5.1" release="20.4" op="EQ"/>
+	</requires>
+</patch>
+<atom>
+	<name>kdemultimedia3-CD</name>
+	<arch>i586</arch>
+	<version>3.5.1</version>
+	<release>20.4</release>
+	<freshens>
+		<dep kind="package" name="kdemultimedia3-CD"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="kdemultimedia3-CD" epoch="0" version="3.5.1" release="20.4" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>kdemultimedia3-CD</name>
+	<arch>ppc</arch>
+	<version>3.5.1</version>
+	<release>20.4</release>
+	<freshens>
+		<dep kind="package" name="kdemultimedia3-CD"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="kdemultimedia3-CD" epoch="0" version="3.5.1" release="20.4" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>kdemultimedia3-CD</name>
+	<arch>x86_64</arch>
+	<version>3.5.1</version>
+	<release>20.4</release>
+	<freshens>
+		<dep kind="package" name="kdemultimedia3-CD"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="kdemultimedia3-CD" epoch="0" version="3.5.1" release="20.4" op="GE"/>
+	</requires>
+</atom>
+<package>
+	<name>kdemultimedia3-CD</name>
+	<summary>Ogg Vorbis support for audiocd:/</summary>
+	<description>This update re-adds ogg vorbis encoding support in the 
+audiocd:/ kioslave.
+</description>
+	<arch>i586</arch>
+	<version>3.5.1</version>
+	<release>20.4</release>
+	<filesize>767057</filesize>
+	<installedsize>1761538</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>3.5.1</version>
+			<release>20.4</release>
+			<filename>kdemultimedia3-CD-3.5.1-20.4.i586.rpm</filename>
+			<filesize>767057</filesize>
+			<installedsize>1761538</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="kdemultimedia:/opt/kde2/bin/kscd"/>
+			<dep name="kdemultimedia3:/opt/kde3/bin/kscd"/>
+			<dep name="kdemultimedia3:/opt/kde3/bin/kaudiocreator"/>
+			<dep name="kcm_audiocd.so"/>
+			<dep name="kcm_cddb.so"/>
+			<dep name="kio_audiocd.so"/>
+			<dep name="libaudiocd_encoder_flac.so"/>
+			<dep name="libaudiocd_encoder_lame.so"/>
+			<dep name="libaudiocd_encoder_vorbis.so"/>
+			<dep name="libaudiocd_encoder_wav.so"/>
+			<dep name="libaudiocdplugins.so.1"/>
+			<dep name="libkcddb.so.1"/>
+			<dep name="kdemultimedia3-CD" op="EQ" version="3.5.1" release="20.4"/>
+		</provides>
+		<requires>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/usr/bin/env"/>
+			<dep name="/usr/bin/perl"/>
+			<dep name="libDCOP.so.4"/>
+			<dep name="libFLAC.so.7"/>
+			<dep name="libartsc.so.0"/>
+			<dep name="libasound.so.2"/>
+			<dep name="libasound.so.2(ALSA_0.9)"/>
+			<dep name="libasound.so.2(ALSA_0.9.0rc4)"/>
+			<dep name="libaudiocdplugins.so.1"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)"/>
+			<dep name="libcdda_interface.so.0"/>
+			<dep name="libcdda_paranoia.so.0"/>
+			<dep name="libkcddb.so.1"/>
+			<dep name="libkdecore.so.4"/>
+			<dep name="libkdeui.so.4"/>
+			<dep name="libkio.so.4"/>
+			<dep name="libkutils.so.1"/>
+			<dep name="libogg.so.0"/>
+			<dep name="libpthread.so.0"/>
+			<dep name="libpthread.so.0(GLIBC_2.0)"/>
+			<dep name="libqt-mt.so.3"/>
+			<dep name="libstdc++.so.6"/>
+			<dep name="libstdc++.so.6(CXXABI_1.3)"/>
+			<dep name="libstdc++.so.6(GLIBCXX_3.4)"/>
+			<dep name="libvorbis.so.0"/>
+			<dep name="libvorbisenc.so.2"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>kdemultimedia3-CD</name>
+	<summary>Ogg Vorbis support for audiocd:/</summary>
+	<description>This update re-adds ogg vorbis encoding support in the 
+audiocd:/ kioslave.
+</description>
+	<arch>ppc</arch>
+	<version>3.5.1</version>
+	<release>20.4</release>
+	<filesize>797922</filesize>
+	<installedsize>1959468</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>3.5.1</version>
+			<release>20.4</release>
+			<filename>kdemultimedia3-CD-3.5.1-20.4.ppc.rpm</filename>
+			<filesize>797922</filesize>
+			<installedsize>1959468</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="kdemultimedia:/opt/kde2/bin/kscd"/>
+			<dep name="kdemultimedia3:/opt/kde3/bin/kscd"/>
+			<dep name="kdemultimedia3:/opt/kde3/bin/kaudiocreator"/>
+			<dep name="kcm_audiocd.so"/>
+			<dep name="kcm_cddb.so"/>
+			<dep name="kio_audiocd.so"/>
+			<dep name="libaudiocd_encoder_flac.so"/>
+			<dep name="libaudiocd_encoder_lame.so"/>
+			<dep name="libaudiocd_encoder_vorbis.so"/>
+			<dep name="libaudiocd_encoder_wav.so"/>
+			<dep name="libaudiocdplugins.so.1"/>
+			<dep name="libkcddb.so.1"/>
+			<dep name="kdemultimedia3-CD" op="EQ" version="3.5.1" release="20.4"/>
+		</provides>
+		<requires>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/usr/bin/env"/>
+			<dep name="/usr/bin/perl"/>
+			<dep name="libDCOP.so.4"/>
+			<dep name="libFLAC.so.7"/>
+			<dep name="libartsc.so.0"/>
+			<dep name="libasound.so.2"/>
+			<dep name="libasound.so.2(ALSA_0.9)"/>
+			<dep name="libasound.so.2(ALSA_0.9.0rc4)"/>
+			<dep name="libaudiocdplugins.so.1"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)"/>
+			<dep name="libc.so.6(GLIBC_2.4)"/>
+			<dep name="libcdda_interface.so.0"/>
+			<dep name="libcdda_paranoia.so.0"/>
+			<dep name="libkcddb.so.1"/>
+			<dep name="libkdecore.so.4"/>
+			<dep name="libkdeui.so.4"/>
+			<dep name="libkio.so.4"/>
+			<dep name="libkutils.so.1"/>
+			<dep name="libogg.so.0"/>
+			<dep name="libpthread.so.0"/>
+			<dep name="libpthread.so.0(GLIBC_2.0)"/>
+			<dep name="libqt-mt.so.3"/>
+			<dep name="libstdc++.so.6"/>
+			<dep name="libstdc++.so.6(CXXABI_1.3)"/>
+			<dep name="libstdc++.so.6(GLIBCXX_3.4)"/>
+			<dep name="libvorbis.so.0"/>
+			<dep name="libvorbisenc.so.2"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>kdemultimedia3-CD</name>
+	<summary>Ogg Vorbis support for audiocd:/</summary>
+	<description>This update re-adds ogg vorbis encoding support in the 
+audiocd:/ kioslave.
+</description>
+	<arch>x86_64</arch>
+	<version>3.5.1</version>
+	<release>20.4</release>
+	<filesize>813367</filesize>
+	<installedsize>1968272</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>3.5.1</version>
+			<release>20.4</release>
+			<filename>kdemultimedia3-CD-3.5.1-20.4.x86_64.rpm</filename>
+			<filesize>813367</filesize>
+			<installedsize>1968272</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="kdemultimedia:/opt/kde2/bin/kscd"/>
+			<dep name="kdemultimedia3:/opt/kde3/bin/kscd"/>
+			<dep name="kdemultimedia3:/opt/kde3/bin/kaudiocreator"/>
+			<dep name="kcm_audiocd.so()(64bit)"/>
+			<dep name="kcm_cddb.so()(64bit)"/>
+			<dep name="kio_audiocd.so()(64bit)"/>
+			<dep name="libaudiocd_encoder_flac.so()(64bit)"/>
+			<dep name="libaudiocd_encoder_lame.so()(64bit)"/>
+			<dep name="libaudiocd_encoder_vorbis.so()(64bit)"/>
+			<dep name="libaudiocd_encoder_wav.so()(64bit)"/>
+			<dep name="libaudiocdplugins.so.1()(64bit)"/>
+			<dep name="libkcddb.so.1()(64bit)"/>
+			<dep name="kdemultimedia3-CD" op="EQ" version="3.5.1" release="20.4"/>
+		</provides>
+		<requires>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/usr/bin/env"/>
+			<dep name="/usr/bin/perl"/>
+			<dep name="libDCOP.so.4()(64bit)"/>
+			<dep name="libFLAC.so.7()(64bit)"/>
+			<dep name="libartsc.so.0()(64bit)"/>
+			<dep name="libasound.so.2()(64bit)"/>
+			<dep name="libasound.so.2(ALSA_0.9)(64bit)"/>
+			<dep name="libasound.so.2(ALSA_0.9.0rc4)(64bit)"/>
+			<dep name="libaudiocdplugins.so.1()(64bit)"/>
+			<dep name="libc.so.6()(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.3)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)(64bit)"/>
+			<dep name="libcdda_interface.so.0()(64bit)"/>
+			<dep name="libcdda_paranoia.so.0()(64bit)"/>
+			<dep name="libkcddb.so.1()(64bit)"/>
+			<dep name="libkdecore.so.4()(64bit)"/>
+			<dep name="libkdeui.so.4()(64bit)"/>
+			<dep name="libkio.so.4()(64bit)"/>
+			<dep name="libkutils.so.1()(64bit)"/>
+			<dep name="libogg.so.0()(64bit)"/>
+			<dep name="libpthread.so.0()(64bit)"/>
+			<dep name="libpthread.so.0(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libqt-mt.so.3()(64bit)"/>
+			<dep name="libstdc++.so.6()(64bit)"/>
+			<dep name="libstdc++.so.6(CXXABI_1.3)(64bit)"/>
+			<dep name="libstdc++.so.6(GLIBCXX_3.4)(64bit)"/>
+			<dep name="libvorbis.so.0()(64bit)"/>
+			<dep name="libvorbisenc.so.2()(64bit)"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+</subchannel></channel>

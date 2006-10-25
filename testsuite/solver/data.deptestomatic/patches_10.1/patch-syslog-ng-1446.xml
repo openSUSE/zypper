@@ -1,0 +1,219 @@
+<channel><subchannel>                                                  
+
+<patch>
+	<name>syslog-ng</name>
+	<arch>noarch</arch>
+	<version>1446</version>
+	<release>0</release>
+	<requires>
+		<dep kind="atom" name="syslog-ng" epoch="0" version="1.6.8" release="20.3" op="EQ"/>
+	</requires>
+</patch>
+<atom>
+	<name>syslog-ng</name>
+	<arch>i586</arch>
+	<version>1.6.8</version>
+	<release>20.3</release>
+	<freshens>
+		<dep kind="package" name="syslog-ng"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="syslog-ng" epoch="0" version="1.6.8" release="20.3" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>syslog-ng</name>
+	<arch>ppc</arch>
+	<version>1.6.8</version>
+	<release>20.3</release>
+	<freshens>
+		<dep kind="package" name="syslog-ng"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="syslog-ng" epoch="0" version="1.6.8" release="20.3" op="GE"/>
+	</requires>
+</atom>
+<atom>
+	<name>syslog-ng</name>
+	<arch>x86_64</arch>
+	<version>1.6.8</version>
+	<release>20.3</release>
+	<freshens>
+		<dep kind="package" name="syslog-ng"/>
+	</freshens>
+	<requires>
+		<dep kind="package" name="syslog-ng" epoch="0" version="1.6.8" release="20.3" op="GE"/>
+	</requires>
+</atom>
+<package>
+	<name>syslog-ng</name>
+	<summary>fix syslog startup failure</summary>
+	<description>This update fixes a problem, that syslog-ng refused to 
+start, if the initial connect attempt to a configured unix 
+socket log destination failed, instead to continue and try 
+to reconnect later.
+</description>
+	<arch>i586</arch>
+	<version>1.6.8</version>
+	<release>20.3</release>
+	<filesize>248395</filesize>
+	<installedsize>548934</installedsize>
+	<history>
+		<update>
+			<arch>i586</arch>
+			<epoch>0</epoch>
+			<version>1.6.8</version>
+			<release>20.3</release>
+			<filename>syslog-ng-1.6.8-20.3.i586.rpm</filename>
+			<filesize>248395</filesize>
+			<installedsize>548934</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="syslog"/>
+			<dep name="syslog-ng" op="EQ" version="1.6.8" release="20.3"/>
+		</provides>
+		<requires>
+			<dep name="insserv" pre="1"/>
+			<dep name="sed" pre="1"/>
+			<dep name="fillup" pre="1"/>
+			<dep name="coreutils" pre="1"/>
+			<dep name="klogd" pre="1"/>
+			<dep name="aaa_base" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/bin/sh"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libc.so.6(GLIBC_2.2)"/>
+			<dep name="libc.so.6(GLIBC_2.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)"/>
+			<dep name="libc.so.6(GLIBC_2.4)"/>
+			<dep name="libnsl.so.1"/>
+			<dep name="libresolv.so.2"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>syslog-ng</name>
+	<summary>fix syslog startup failure</summary>
+	<description>This update fixes a problem, that syslog-ng refused to 
+start, if the initial connect attempt to a configured unix 
+socket log destination failed, instead to continue and try 
+to reconnect later.
+</description>
+	<arch>ppc</arch>
+	<version>1.6.8</version>
+	<release>20.3</release>
+	<filesize>252767</filesize>
+	<installedsize>583846</installedsize>
+	<history>
+		<update>
+			<arch>ppc</arch>
+			<epoch>0</epoch>
+			<version>1.6.8</version>
+			<release>20.3</release>
+			<filename>syslog-ng-1.6.8-20.3.ppc.rpm</filename>
+			<filesize>252767</filesize>
+			<installedsize>583846</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="syslog"/>
+			<dep name="syslog-ng" op="EQ" version="1.6.8" release="20.3"/>
+		</provides>
+		<requires>
+			<dep name="insserv" pre="1"/>
+			<dep name="sed" pre="1"/>
+			<dep name="fillup" pre="1"/>
+			<dep name="coreutils" pre="1"/>
+			<dep name="klogd" pre="1"/>
+			<dep name="aaa_base" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/bin/sh"/>
+			<dep name="libc.so.6"/>
+			<dep name="libc.so.6(GLIBC_2.0)"/>
+			<dep name="libc.so.6(GLIBC_2.1)"/>
+			<dep name="libc.so.6(GLIBC_2.1.3)"/>
+			<dep name="libc.so.6(GLIBC_2.2)"/>
+			<dep name="libc.so.6(GLIBC_2.3)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)"/>
+			<dep name="libc.so.6(GLIBC_2.4)"/>
+			<dep name="libnsl.so.1"/>
+			<dep name="libresolv.so.2"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+<package>
+	<name>syslog-ng</name>
+	<summary>fix syslog startup failure</summary>
+	<description>This update fixes a problem, that syslog-ng refused to 
+start, if the initial connect attempt to a configured unix 
+socket log destination failed, instead to continue and try 
+to reconnect later.
+</description>
+	<arch>x86_64</arch>
+	<version>1.6.8</version>
+	<release>20.3</release>
+	<filesize>259550</filesize>
+	<installedsize>579858</installedsize>
+	<history>
+		<update>
+			<arch>x86_64</arch>
+			<epoch>0</epoch>
+			<version>1.6.8</version>
+			<release>20.3</release>
+			<filename>syslog-ng-1.6.8-20.3.x86_64.rpm</filename>
+			<filesize>259550</filesize>
+			<installedsize>579858</installedsize>
+			<importance>recommended</importance>
+			<description>no desc</description>
+		</update>
+	</history>
+	<deps>
+		<provides>
+			<dep name="syslog"/>
+			<dep name="syslog-ng" op="EQ" version="1.6.8" release="20.3"/>
+		</provides>
+		<requires>
+			<dep name="insserv" pre="1"/>
+			<dep name="sed" pre="1"/>
+			<dep name="fillup" pre="1"/>
+			<dep name="coreutils" pre="1"/>
+			<dep name="klogd" pre="1"/>
+			<dep name="aaa_base" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="/bin/sh" pre="1"/>
+			<dep name="rpmlib(PayloadFilesHavePrefix)" op="LE" version="4.0" release="1" pre="1"/>
+			<dep name="rpmlib(CompressedFileNames)" op="LE" version="3.0.4" release="1" pre="1"/>
+			<dep name="/bin/sh"/>
+			<dep name="libc.so.6()(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.2.5)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.3)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.3.4)(64bit)"/>
+			<dep name="libc.so.6(GLIBC_2.4)(64bit)"/>
+			<dep name="libnsl.so.1()(64bit)"/>
+			<dep name="libresolv.so.2()(64bit)"/>
+			<dep name="rpmlib(PayloadIsBzip2)" op="LE" version="3.0.5" release="1" pre="1"/>
+		</requires>
+	</deps>
+</package>
+</subchannel></channel>
