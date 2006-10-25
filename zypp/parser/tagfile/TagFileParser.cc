@@ -166,7 +166,12 @@ namespace zypp
                 }
               }
               
-              tag.values.push_back(element);
+              // skip empty lines and comments inside lists
+              if ( ! ( element.empty() || ( element[0] == '#' ) ) )
+              {
+                tag.values.push_back(element);
+              }
+              
               XXX << element << std::endl;
               getline(file, element);
               readed +=  element.size();
