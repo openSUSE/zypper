@@ -99,7 +99,7 @@ std::string helixXML( const Capability &cap )
 	&& cap.op() != Rel::ANY
 	&& !cap.edition().version().empty()) {
 	// version capability
-	str << "<dep name='" << cap.index() << "' op='" << xml_escape(cap.op().asString()) <<
+	str << "<dep name='" << xml_escape(cap.index()) << "' op='" << xml_escape(cap.op().asString()) <<
 	    "' version='" << cap.edition().version() << "'";
 	if (!cap.edition().release().empty())
 	    str << " release='" << cap.edition().release() << "'";
@@ -108,7 +108,7 @@ std::string helixXML( const Capability &cap )
 	str << " />" << endl;
     } else {
 	// anything else
-	str << "<dep name='" << cap.asString() << "' />" << endl;	
+	str << "<dep name='" << xml_escape(cap.asString()) << "' />" << endl;	
     }
     return str.str();    
 }
@@ -156,7 +156,7 @@ std::string helixXML( const Resolvable::constPtr &resolvable )
 {
   stringstream str;
   str << "<" << toLower (resolvable->kind().asString()) << ">" << endl;
-  str << TAB << xml_tag_enclose (resolvable->name(), "name") << endl;  
+  str << TAB << xml_tag_enclose (resolvable->name(), "name", true) << endl;  
   if ( isKind<Package>(resolvable) ) {
       str << TAB << "<history>" << endl << TAB << "<update>" << endl;
       str << TAB2 << helixXML (resolvable->arch()) << endl;
