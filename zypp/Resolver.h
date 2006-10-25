@@ -230,6 +230,7 @@ namespace zypp
     /**
      * Generates a solver Testcase of the current state
      *
+     * return true if it was successful     
      */
     bool createSolverTestcase (const std::string & dumpPath = "/var/log/YaST2/solverTestcase");      
 
