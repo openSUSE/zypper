@@ -77,6 +77,7 @@
 #include "zypp/solver/detail/ResolverInfo.h"
 #include "zypp/ResolverProblem.h"
 #include "zypp/solver/detail/InstallOrder.h"
+#include "zypp/solver/detail/Testcase.h"
 #include "KeyRingCallbacks.h"
 
 using namespace std;
@@ -87,6 +88,7 @@ using zypp::solver::detail::ResolverContext_Ptr;
 using zypp::solver::detail::ResolverQueueList;
 using zypp::solver::detail::ResolverQueue_Ptr;
 using zypp::solver::detail::InstallOrder;
+using zypp::solver::detail::Testcase;
 using zypp::ResolverProblemList;
 
 //-----------------------------------------------------------------------------
@@ -1671,7 +1673,13 @@ parse_xml_trial (XmlNode_Ptr node, const ResPool & pool)
 		}
 
 	     }
-
+	} else if (node->equals ("createTestcase")) {
+	    string path = node->getProp ("path");
+            if (path.empty())
+                path = ".";
+            Testcase testcase (path);
+            testcase.createTestcase (*resolver);
+            
 	} else {
 	    cerr << "Unknown tag '" << node->name() << "' in trial" << endl;
 	}
