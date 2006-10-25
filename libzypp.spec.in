@@ -16,7 +16,6 @@ License:        GPL
 Group:          System/Packages
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 Autoreqprov:    on
-PreReq:         permissions
 Summary:        Package, Patch, Pattern, and Product Management
 Version:        @VERSION@
 Release:        0
@@ -84,10 +83,6 @@ make install DESTDIR=$RPM_BUILD_ROOT
 
 %post
 %run_ldconfig
-%run_permissions
-
-%verifyscript
-%verify_permissions -e %{_sbindir}/zypp-checkpatches-wrapper
 
 %postun
 %run_ldconfig

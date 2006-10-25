@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Wed Oct 25 08:21:52 CEST 2006 - mvidner@suse.cz
+
+- Moved zypper and zypp-checkpatches(-wrapper) to zypper.rpm
+
+-------------------------------------------------------------------
 Tue Oct 24 14:33:16 CEST 2006 - ma@suse.de
 
 - Added ui::PatternContents: Helper class that will compute a patterns
