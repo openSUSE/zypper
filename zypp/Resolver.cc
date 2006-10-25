@@ -101,7 +101,7 @@ namespace zypp
   { return _pimpl->timeout(); }
   int Resolver::maxSolverPasses()
   { return _pimpl->maxSolverPasses(); }
-  bool Resolver::createSolverTestcase (std::string dumpPath)
+  bool Resolver::createSolverTestcase (const std::string & dumpPath)
   { solver::detail::Testcase testcase (dumpPath);
     return testcase.createTestcase(*_pimpl);}          
 
