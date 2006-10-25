@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Oct 25 17:09:06 CEST 2006 - schubi@suse.de
+
+- added new class for generating solver testcases:
+  Testcase
+
+-------------------------------------------------------------------
 Wed Oct 25 15:40:44 CEST 2006 - ma@suse.de
 
 - Finalized ui::PatternContents. (F301229)
