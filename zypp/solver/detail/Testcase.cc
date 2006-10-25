@@ -74,9 +74,11 @@ template<>
 std::string helixXML( const Edition &edition )
 {
     stringstream str;
-    str << xml_tag_enclose(edition.version(), "version")
-	<< xml_tag_enclose(edition.release(), "release")
-	<< xml_tag_enclose(numstring(edition.epoch()), "epoch");    
+    str << xml_tag_enclose(edition.version(), "version");
+    if (!edition.release().empty())
+	str << xml_tag_enclose(edition.release(), "release");
+    if (edition.epoch() != Edition::noepoch)
+	str << xml_tag_enclose(numstring(edition.epoch()), "epoch");    
     return str.str();
 }
 
@@ -98,7 +100,12 @@ std::string helixXML( const Capability &cap )
 	&& !cap.edition().version().empty()) {
 	// version capability
 	str << "<dep name='" << cap.index() << "' op='" << xml_escape(cap.op().asString()) <<
-	    "' version='" << cap.edition().version() << "' release='" << cap.edition().release() << "' />" << endl;
+	    "' version='" << cap.edition().version() << "'";
+	if (!cap.edition().release().empty())
+	    str << " release='" << cap.edition().release() << "'";
+	if (cap.edition().epoch() != Edition::noepoch)
+	    str << " epoch='" << numstring(cap.edition().epoch()) << "'";
+	str << " />" << endl;
     } else {
 	// anything else
 	str << "<dep name='" << cap.asString() << "' />" << endl;	
