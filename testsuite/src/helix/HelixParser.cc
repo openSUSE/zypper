@@ -694,6 +694,7 @@ HelixParser::resolvableEnd (const std::string & token)
     else if (token == "name") {			name = _text_buffer;
     } else if (token == "version") {		version = _text_buffer;	// either here or in history
     } else if (token == "release") {		release = _text_buffer;
+    } else if (token == "epoch") {		epoch = str::strtonum<int>(_text_buffer);    
     } else if (token == "pretty_name") {	// ignore
     } else if (token == "summary") {		summary = _text_buffer;
     } else if (token == "description") {	description = _text_buffer;
