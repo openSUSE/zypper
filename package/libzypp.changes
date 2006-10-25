@@ -1,4 +1,20 @@
 -------------------------------------------------------------------
+Wed Oct 25 19:04:51 CEST 2006 - dmacvicar@suse.de
+
+- (#213793) Target store fails to recreate stored install-time (other
+  Date and ByteCount values as well)
+
+- skip comments and blank lines in multilists
+  fixes (#214877) - zen-updater is not installed by default
+
+- Automatically fix broken products when reading
+  the product database.
+  still pending: honour the read-only flag
+  Changes to make this possible include
+  using read_dir instead of boost directory
+  iterator. 
+
+-------------------------------------------------------------------
 Wed Oct 25 17:09:06 CEST 2006 - schubi@suse.de
 
 - added new class for generating solver testcases:
