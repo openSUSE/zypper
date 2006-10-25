@@ -12,8 +12,8 @@
 
 Name:           @PACKAGE@
 # da library
-BuildRequires:  libzypp
-BuildRequires:  boost-devel gcc-c++ libxml2-devel gettext-devel
+BuildRequires:  libzypp-devel
+BuildRequires:  gcc-c++ pkg-config boost-devel gettext-devel
 License:        GPL
 Group:          System/Packages
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
@@ -41,7 +41,6 @@ Authors:
 %setup -q
 
 %build
-cp /usr/share/gettext/config.rpath .
 gettextize -f
 autoreconf --force --install --symlink --verbose
 %{?suse_update_config:%{suse_update_config -f}}
@@ -67,18 +66,8 @@ make install DESTDIR=$RPM_BUILD_ROOT
 
 %clean
 
-%files -f zypp.lang
+%files -f zypper.lang
 %defattr(-,root,root)
 %{_bindir}/zypper
 %{_sbindir}/zypp-checkpatches
 %verify(not mode) %attr (755,root,root) %{_sbindir}/zypp-checkpatches-wrapper
-
-%files devel
-%defattr(-,root,root)
-%dir %{_libdir}/libzypp.so
-%dir %{_libdir}/libzypp.la
-%dir %{_docdir}/zypp
-%{_docdir}/zypp/*
-%dir %{prefix}/include/zypp
-%{prefix}/include/zypp/*
-%{_libdir}/pkgconfig/libzypp.pc

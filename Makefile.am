@@ -4,12 +4,12 @@
 # Do NOT list 'devel' in subdirs. It's developers playgound
 # and must not prevent anything from building.
 
-SUBDIRS = src
+SUBDIRS = src po
 
 ## ##################################################
 
-#ACLOCAL_AMFLAGS = -I m4
-ACLOCAL_AMFLAGS =
+ACLOCAL_AMFLAGS = -I m4 
+EXTRA_DIST = config.rpath
 
 ## ##################################################
 
@@ -31,3 +31,4 @@ package-local:	dist-bzip2 @PACKAGE@.spec
 
 check-up-to-date:
 	cd $(srcdir) && ! LC_ALL=C svn status --show-updates --quiet | grep -v '^Status against revision'
+

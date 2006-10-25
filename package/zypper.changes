@@ -1,0 +1,6 @@
+-------------------------------------------------------------------
+Wed Oct 25 09:42:09 CEST 2006 - mvidner@suse.cz
+
+- Split the package from libzypp.rpm
+- 0.5.0
+

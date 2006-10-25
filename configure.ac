@@ -34,6 +34,9 @@ AC_DEFINE_UNQUOTED([TEXTDOMAIN], ["$PACKAGE"])
 dnl ==================================================
 dnl checks for programs
 
+dnl invoked by AM_GNU_GETTEXT later. must be applied consistently.
+AC_GNU_SOURCE
+
 dnl   check for c++ compiler and tools
 AC_PROG_CXX
 AC_PROG_CXX
@@ -52,39 +55,17 @@ fi
 dnl ==================================================
 dnl checks for libraries
 
-AC_CHECK_LIB([z], [gzopen],
-        [:],
-        AC_MSG_ERROR([libz not found. please install zlib-devel]))
-AC_CHECK_LIB([xml2], [xmlNewTextReader],
-        [:],
-        AC_MSG_ERROR([libxml2 not found. please install libxml2-devel]))
-
-dnl ==================================================
-PKG_CHECK_MODULES(ZYPP, [libzypp])
+AC_ARG_VAR([PKG_CONFIG_PATH], [where to search for pkg-config files])
+PKG_CHECK_MODULES(ZYPP, [libzypp >= 2.0.0])
 
 dnl ==================================================
 dnl checks for header files
 AC_CHECK_HEADERS([boost/scoped_ptr.hpp],
         [],
         AC_MSG_ERROR([boost header not found. please install boost-devel]))
-AC_CHECK_HEADERS([curl/curl.h],
-        [],
-        AC_MSG_ERROR([libcurl header not found. please install curl-devel.]))
-AC_CHECK_HEADERS([idn-free.h],
-        [],
-        AC_MSG_ERROR([libidn header not found. please install libidn-devel.]))
-AC_CHECK_HEADERS([openssl/evp.h],
-        [],
-        AC_MSG_ERROR([openssl header not found. please install openssl-devel.]))
-AC_CHECK_HEADERS([rpm/rpmlib.h],
-        [],
-        AC_MSG_ERROR([rpmlib header not found. please install rpm-devel.]))
-AC_CHECK_HEADERS([popt.h],
-        [],
-        AC_MSG_ERROR([popt header not found. please install popt-devel.]))
 
 dnl internationalization macros
-AM_GNU_GETTEXT
+AM_GNU_GETTEXT([external])
 
 dnl ==================================================
 dnl checks for typedefs
@@ -100,8 +81,7 @@ dnl ==================================================
 dnl AC_CONFIG_FILES([FILE...])
 AC_OUTPUT(
 	Makefile			\
-	libzypp.spec			\
-	libzypp.pc			\
+	zypper.spec			\
 	src/Makefile			\
 	po/Makefile.in
 )

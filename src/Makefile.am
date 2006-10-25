@@ -7,13 +7,13 @@ noinst_PROGRAMS = zmart
 
 ## ##################################################
 
-INCLUDES = -I$(top_srcdir)/tools/zmart -I$(oldincludedir)/libxml2
+AM_CPPFLAGS = $(ZYPP_CFLAGS)
 AM_LDFLAGS =
 
 AM_CXXFLAGS =
 # gperf:	-pg
 
-LDADD =		-L$(top_srcdir)/zypp/.libs -lzypp -lboost_regex -lboost_program_options -lxml2 -lz
+LDADD =	$(ZYPP_LIBS) -lboost_regex -lboost_program_options
 
 ## ##################################################
 
@@ -53,7 +53,7 @@ zypper_SOURCES = 	zypper.cc zmart-sources.cc zmart-misc.cc \
 	zypper-info.h \
 	zypper-info.cc \
 	zmart.h
-zypper_LDADD = $(top_srcdir)/zypp/libzypp.la -lboost_regex
+zypper_LDADD = $(ZYPP_LIBS) -lboost_regex
 
 zypp_checkpatches_SOURCES = 	zypp-checkpatches.cc zmart-sources.cc \
 	zypper-tabulator.h \
