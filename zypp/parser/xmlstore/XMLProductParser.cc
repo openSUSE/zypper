@@ -59,7 +59,8 @@ namespace zypp {
         xmlNodePtr dataNode = xmlTextReaderExpand(reader);
         xml_assert(dataNode);
         productPtr->type = _helper.attribute(dataNode,"type");
-              
+        productPtr->parser_version = _helper.attribute(dataNode, "version");
+        
         parseResObjectCommonData( productPtr, dataNode);
         parseDependencies( productPtr, dataNode);
         

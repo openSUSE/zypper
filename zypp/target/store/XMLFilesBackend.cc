@@ -73,6 +73,68 @@ namespace zypp
 namespace storage
 { /////////////////////////////////////////////////////////////////
 
+/**
+ * the following hardcoded table fixes a bug where Product was
+ *  serialized to the store using distproduct and distversion 
+ *  in the name/version fields.
+ *  Those products have missing distversion.
+ *  The trick is to see the version of the xml format, if it is
+ *  minor than 2.0, we check if the name matches a dist
+ *  product and fix the product on construction
+ *
+ *  see: https://bugzilla.novell.com/show_bug.cgi?id=205392
+ */
+
+typedef struct
+{
+  char * dist_name;
+  char * dist_version;
+  char * product_name;
+  char * product_version;
+} PRODUCT_TABLE_ENTRY;
+
+/**
+ * create the map on demand so we 
+ * create it once and only when 
+ * needed
+ */
+PRODUCT_TABLE_ENTRY* products_table()
+{
+  static PRODUCT_TABLE_ENTRY products[] = {
+    { "SUSE-Linux-Enterprise-Desktop-i386", "10-0", "SUSE SLED" , "10" },
+    { "SUSE-Linux-Enterprise-Desktop-x86_64", "10-0", "SUSE SLED", "10" },
+    { "SUSE-Linux-Enterprise-Server-i386", "10-0", "SUSE SLES", "10" },
+    { "SUSE-Linux-Enterprise-Server-x86_64", "10-0", "SUSE SLES", "10" },
+    { "SUSE-Linux-Enterprise-Server-ppc", "10-0", "SUSE SLES", "10" },
+    { "SUSE-Linux-Enterprise-Server-ia64", "10-0", "SUSE SLES", "10" },
+    { "SUSE-Linux-Enterprise-Server-s390x", "10-0", "SUSE SLES", "10" },
+    { "SUSE-Linux-10.1-CD-download-x86", "10.1-0", "SUSE LINUX", "10.1" },
+    { "SUSE-Linux-10.1-CD-download-ppc", "10.1-0", "SUSE LINUX", "10.1" },
+    { "SUSE-Linux-10.1-CD-download-x86_64", "10.1-0", "SUSE LINUX", "10.1" },
+    { "SUSE-Linux-10.1-CD-x86", "10.1-0", "SUSE LINUX", "10.1" },
+    { "SUSE-Linux-10.1-CD-ppc", "10.1-0", "SUSE LINUX", "10.1" },
+    { "SUSE-Linux-10.1-CD-x86_64", "10.1-0", "SUSE LINUX", "10.1" },
+    { "SUSE-Linux-10.1-DVD9-x86-x86_64", "10.1-0", "SUSE LINUX", "10.1" },
+    { "SUSE-Linux-10.1-OSS-DVD-x86", "10.1-0", "SUSE LINUX", "10.1" },
+    { "SUSE-Linux-10.1-DVD-OSS-i386", "10.1-0", "SUSE LINUX", "10.1" },
+    { "SUSE-Linux-10.1-DVD-OSS-ppc", "10.1-0", "SUSE LINUX", "10.1" },
+    { "SUSE-Linux-10.1-DVD-OSS-x86_64", "10.1-0", "SUSE LINUX", "10.1" },
+    { "SUSE-Linux-10.1-FTP", "10.1-0", "SUSE LINUX", "10.1" },
+    { "SUSE-Linux-10.1-DVD-i386", "10.1-0", "SUSE LINUX", "10.1" },
+    { "SUSE-Linux-10.1-DVD-x86_64", "10.1-0", "SUSE LINUX", "10.1" },
+    { "SuSE-Linux-10.1-PromoDVD-i386", "10.1-0", "SUSE LINUX", "10.1" },
+    { "SUSE-Linux-10.1-DVD9-CTMAGAZIN-x86-x86_64", "10.1-0", "SUSE LINUX", "10.1" },
+    { "SUSE-Linux-Enterprise-SDK-i386", "10-0", "SLE SDK", "10" },
+    { "SUSE-Linux-Enterprise-SDK-x86_64", "10-0", "SLE SDK", "10" },
+    { "SUSE-Linux-Enterprise-SDK-ia64", "10-0", "SLE SDK", "10" },
+    { "SUSE-Linux-Enterprise-SDK-s390x", "10-0", "SLE SDK", "10" },
+    { "SUSE-Linux-Enterprise-SDK-ppc", "10-0", "SLE SDK", "10" },
+    { "SUSE-Linux-Enterprise-RT", "10-0", "SLE RT", "10" },
+    { 0L, 0L, 0L, 0L }
+  };
+  
+  return products;
+}
 
 ///////////////////////////////////////////////////////////////////
 //
@@ -361,19 +423,24 @@ XMLFilesBackend::dirForResolvableFlags( ResObject::constPtr resolvable ) const
 }
 
 std::string
-XMLFilesBackend::fileNameForResolvable( ResObject::constPtr resolvable ) const
+XMLFilesBackend::fileNameForNVR( const NVR &nvr ) const
 {
   std::string filename;
-  //filename = d->randomFileName ? randomString(40) : (resolvable->name() + suffix);
-  filename = resolvable->name();
-  if (resolvable->edition() != Edition::noedition )
+  filename = nvr.name;
+  if ( nvr.edition != Edition::noedition )
   {
-     filename += "-" + resolvable->edition().asString();
+     filename += "-" + nvr.edition.asString();
   }
   // get rid of spaces and other characters
   std::stringstream filename_stream(filename);
   std::string filename_encoded = Digest::digest("MD5", filename_stream);
   return filename_encoded;
+}
+
+std::string
+XMLFilesBackend::fileNameForResolvable( ResObject::constPtr resolvable ) const
+{
+  return fileNameForNVR( NVR( resolvable->name(), resolvable->edition() ) );
 }
 
 std::string
@@ -583,6 +650,26 @@ XMLFilesBackend::storeObject( ResObject::constPtr resolvable )
 }
 
 void
+XMLFilesBackend::deleteFileObject( const Pathname &filename ) const
+{
+  try
+  {
+    int ret = filesystem::unlink(Pathname(filename));
+    if ( ret != 0 )
+    {
+      ERR << "Error removing resolvable file " << filename << std::endl;
+      ZYPP_THROW(Exception("Error deleting " + filename.asString()));
+    }
+    updateTimestamp();
+  }
+  catch(std::exception &e)
+  {
+    ERR << "Error removing resolvable file " << filename << std::endl;
+    ZYPP_THROW(Exception(e.what()));
+  }
+}
+
+void
 XMLFilesBackend::deleteObject( ResObject::constPtr resolvable )
 {
   // only ignore if it is not a supported resolvable kind
@@ -595,21 +682,14 @@ XMLFilesBackend::deleteObject( ResObject::constPtr resolvable )
   }
 
   // only remove the file
-  std::string filename = fullPathForResolvable(resolvable);
   try
   {
-    int ret = filesystem::unlink(Pathname(filename));
-    if ( ret != 0 )
-    {
-      ERR << "Error removing resolvable " << resolvable << std::endl;
-      ZYPP_THROW(Exception("Error deleting " + filename));
-    }
-    updateTimestamp();
+    deleteFileObject( fullPathForResolvable(resolvable) );
   }
-  catch(std::exception &e)
+  catch ( const Exception &e )
   {
     ERR << "Error removing resolvable " << resolvable << std::endl;
-    ZYPP_THROW(Exception(e.what()));
+    ZYPP_RETHROW(e);
   }
 }
 
@@ -709,24 +789,28 @@ std::list<ResObject::Ptr>
 XMLFilesBackend::storedObjects(const Resolvable::Kind kind) const
 {
   std::list<ResObject::Ptr> objects;
-  std::string dir_path = dirForResolvableKind(kind);
+  Pathname dir_path(dirForResolvableKind(kind));
   DBG << "Reading objects of kind " << resolvableKindToString(kind) << " in " << dir_path << std::endl;
-  directory_iterator end_iter;
   // return empty list if the dir does not exist
-  if ( !exists( dir_path ) )
+  if ( ! PathInfo( dir_path ).isExist() )
   {
     ERR << "path " << dir_path << " does not exists. Required to read objects of kind " << resolvableKindToString(kind) << std::endl;
     return std::list<ResObject::Ptr>();
   }
 
-  for ( directory_iterator dir_itr( dir_path ); dir_itr != end_iter; ++dir_itr )
+  list<string> files;
+  filesystem::readdir( files, dir_path, false /* ignore hidden .name files */ );
+  
+  for ( list<string>::const_iterator it = files.begin(); it != files.end(); ++it )
   {
-    DBG << "[" << resolvableKindToString( kind, false ) << "] - " << dir_itr->leaf() << std::endl;
+    Pathname curr_file = dir_path + (*it);
+    DBG << "[" << resolvableKindToString( kind, false ) << "] - " << curr_file << std::endl;
     std::list<ResObject::Ptr> objects_for_file;
-    objects_for_file = resolvablesFromFile( dir_path + "/" + dir_itr->leaf(), kind);
+    objects_for_file = resolvablesFromFile( curr_file.asString(), kind);
     for ( std::list<ResObject::Ptr>::iterator it = objects_for_file.begin(); it != objects_for_file.end(); ++it)
       objects.push_back(*it);
   }
+  
   MIL << "done reading " <<  objects.size() << " stored objects for file of kind " << resolvableKindToString(kind) << std::endl;
   return objects;
 }
@@ -990,7 +1074,9 @@ XMLFilesBackend::createProduct( const zypp::parser::xmlstore::XMLProductData & p
   try
   {
     detail::ResImplTraits<XMLProductImpl>::Ptr impl(new XMLProductImpl());
-
+    
+    Edition parser_edition = ( parsed.parser_version.empty() ? Edition::noedition : Edition(parsed.parser_version) );
+    
     impl->_summary = parsed.summary;
     impl->_description = parsed.summary;
 
@@ -1064,9 +1150,55 @@ XMLFilesBackend::createProduct( const zypp::parser::xmlstore::XMLProductData & p
     if (!parsed.arch.empty())
       arch = Arch(parsed.arch);
 
+    Edition prod_edition( parsed.ver, parsed.rel, parsed.epoch );
+    string prod_name(parsed.name);
+    // check for product name to see if it was written with distname
+    // as name as part of https://bugzilla.novell.com/show_bug.cgi?id=205392
+    bool save_new_product_again_workaround = false;
+    if ( parser_edition == Edition::noedition )
+    {
+      MIL << "Product " << parsed.name << " " << prod_edition << " possibly suffers from bug #205392. checking..." << endl;
+      PRODUCT_TABLE_ENTRY *all_products = products_table();
+      while ( all_products->dist_name != 0L )
+      {
+        //MIL << "Checking " << parsed.name << " " << prod_edition << " with " << all_products->dist_name << " " << all_products->dist_version << endl;
+        if ( ( parsed.name == all_products->dist_name ) && ( prod_edition.asString() == all_products->dist_version ) )
+        {
+          MIL << "[ATTENTION] Detected bug #205392. Product " << parsed.name << " " << prod_edition << " will be changed to " << all_products->product_name << " " << all_products->product_version << std::endl;
+          
+          // save pathname of the old wrong product
+          Pathname wrong_product = Pathname(dirForResolvableKind(ResTraits<zypp::Product>::kind)) + fileNameForNVR( NVR( parsed.name, prod_edition) );
+          
+          // ok, potentially this is a wrong product, well, IT IS!
+          // overwrte those here as they are used in dataCollect
+          prod_name = string(all_products->product_name);
+          prod_edition = Edition(all_products->product_version);
+          
+          // those were already set, so reset them.
+          impl->_dist_name = all_products->dist_name;
+          impl->_dist_version = Edition(all_products->dist_version);
+          
+          // ok, now mark for save this product and delete the old one
+          deleteFileObject( wrong_product );
+          MIL << "Fix for bug #205392 Old product deleted." << std::endl;
+          save_new_product_again_workaround = true;
+          break;
+        }
+        ++all_products;
+      }
+      
+    }
+    
     // Collect basic Resolvable data
-    NVRAD dataCollect( parsed.name, Edition( parsed.ver, parsed.rel, parsed.epoch ), arch, createDependencies(parsed, ResTraits<Product>::kind) );
+    NVRAD dataCollect( prod_name, prod_edition, arch, createDependencies(parsed, ResTraits<Product>::kind) );
     Product::Ptr product = detail::makeResolvableFromImpl( dataCollect, impl );
+    
+    if ( save_new_product_again_workaround )
+    {
+      const_cast<XMLFilesBackend *>(this)->storeObject(product);
+      MIL << "Fixed Product saved. Fix for bug #205392. complete" << std::endl;
+    }
+    
     return product;
   }
   catch (const Exception & excpt_r)

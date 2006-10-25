@@ -111,7 +111,8 @@ namespace zypp {
       public:
         XMLProductData() {};
         ~XMLProductData() {};
-
+        
+        std::string parser_version;
         std::string type;
         TranslatedText short_name;
         // those are suse specific tags

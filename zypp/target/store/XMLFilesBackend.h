@@ -138,6 +138,11 @@ public:
   std::string randomString(int length) const;
   int random() const;
 
+  /**
+   * delete a path in the database, only used by deleteObject
+   * and workarounds
+   */
+  void deleteFileObject( const Pathname &filename ) const;
   
   /**
     * Directory where the xml file is stored (for the given resolvable)
@@ -147,6 +152,12 @@ public:
     * Directory where the flags are stored (for the given resolvable)
     */
   std::string dirForResolvableFlags( ResObject::constPtr resolvable ) const;
+  
+  /**
+    * Encoded filename for a resolvable NVR. Does not take kind into account.
+    */
+  std::string fileNameForNVR( const zypp::NVR &nvr ) const;
+  
   /**
     * Encoded filename for a resolvable. Does not take kind into account.
     */
