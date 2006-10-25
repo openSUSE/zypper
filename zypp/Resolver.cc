@@ -14,6 +14,7 @@
 #include "zypp/Resolver.h"
 #include "zypp/UpgradeStatistics.h"
 #include "zypp/solver/detail/Resolver.h"
+#include "zypp/solver/detail/Testcase.h"
 
 using namespace std;
 
@@ -99,7 +100,10 @@ namespace zypp
   int Resolver::timeout()
   { return _pimpl->timeout(); }
   int Resolver::maxSolverPasses()
-  { return _pimpl->maxSolverPasses(); }    	    
+  { return _pimpl->maxSolverPasses(); }
+  bool Resolver::createSolverTestcase (std::string dumpPath)
+  { solver::detail::Testcase testcase (dumpPath);
+    return testcase.createTestcase(*_pimpl);}          
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

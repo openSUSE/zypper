@@ -94,7 +94,8 @@ std::string helixXML( const Capability &cap )
     stringstream str;
     if (isKind<VersionedCap>(cap)
 	&& cap.op() != Rel::NONE
-	&& cap.op() != Rel::ANY) {
+	&& cap.op() != Rel::ANY
+	&& !cap.edition().version().empty()) {
 	// version capability
 	str << "<dep name='" << cap.index() << "' op='" << xml_escape(cap.op().asString()) <<
 	    "' version='" << cap.edition().version() << "' release='" << cap.edition().release() << "' />" << endl;

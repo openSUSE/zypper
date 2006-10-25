@@ -227,6 +227,12 @@ namespace zypp
      */
     int maxSolverPasses ();
 
+    /**
+     * Generates a solver Testcase of the current state
+     *
+     */
+    bool createSolverTestcase (std::string dumpPath = "/var/log/YaST2/solverTestcase");      
+
   protected:
 
   private:
