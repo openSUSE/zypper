@@ -1,0 +1,84 @@
+#
+# spec file for package zypper
+#
+# Copyright (c) 2006 SUSE LINUX Products GmbH, Nuernberg, Germany.
+# This file and all modifications and additions to the pristine
+# package are under the same license as the package itself.
+#
+# Please submit bugfixes or comments via http://bugs.opensuse.org/
+#
+
+# norootforbuild
+
+Name:           @PACKAGE@
+# da library
+BuildRequires:  libzypp
+BuildRequires:  boost-devel gcc-c++ libxml2-devel gettext-devel
+License:        GPL
+Group:          System/Packages
+BuildRoot:      %{_tmppath}/%{name}-%{version}-build
+Autoreqprov:    on
+PreReq:         permissions
+Summary:        Command Line Package Management Using Libzypp
+Version:        @VERSION@
+Release:        0
+Source:         @PACKAGE@-@VERSION@.tar.bz2
+Prefix:         /usr
+# RIP
+Provides:       y2pmsh
+Obsoletes:      y2pmsh
+
+%description
+Command Line Package Management Using Libzypp
+
+Authors:
+--------
+    Jan Kupec <jkupec@suse.cz>
+    Duncan Mac-Vicar <dmacvicar@suse.de>
+    Martin Vidner <mvidner@suse.cz>
+
+%prep
+%setup -q
+
+%build
+cp /usr/share/gettext/config.rpath .
+gettextize -f
+autoreconf --force --install --symlink --verbose
+%{?suse_update_config:%{suse_update_config -f}}
+CXXFLAGS="$RPM_OPT_FLAGS" \
+./configure --prefix=%{prefix} --libdir=%{_libdir} --mandir=%{_mandir} --disable-static
+make %{?jobs:-j %jobs}
+#make check
+
+%install
+make install DESTDIR=$RPM_BUILD_ROOT
+# Create filelist with translatins
+%{find_lang} zypper
+
+%post
+%run_ldconfig
+%run_permissions
+
+%verifyscript
+%verify_permissions -e %{_sbindir}/zypp-checkpatches-wrapper
+
+%postun
+%run_ldconfig
+
+%clean
+
+%files -f zypp.lang
+%defattr(-,root,root)
+%{_bindir}/zypper
+%{_sbindir}/zypp-checkpatches
+%verify(not mode) %attr (755,root,root) %{_sbindir}/zypp-checkpatches-wrapper
+
+%files devel
+%defattr(-,root,root)
+%dir %{_libdir}/libzypp.so
+%dir %{_libdir}/libzypp.la
+%dir %{_docdir}/zypp
+%{_docdir}/zypp/*
+%dir %{prefix}/include/zypp
+%{prefix}/include/zypp/*
+%{_libdir}/pkgconfig/libzypp.pc
