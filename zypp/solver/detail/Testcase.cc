@@ -206,9 +206,9 @@ bool Testcase::createTestcase(Resolver & resolver)
     }
     
     zypp::base::LogControl::instance().logfile( dumpPath +"/y2log" );
-    zypp::base::LogControl::TmpExcessive *excessive = new  zypp::base::LogControl::TmpExcessive();// ZYPP_FULLLOG=1
+    zypp::base::LogControl::TmpExcessive excessive;
     
-    resolver.resolveDependencies();
+    resolver.resolvePool();
 
     ResPool pool 	= resolver.pool();
     SourceTable		sourceTable;
