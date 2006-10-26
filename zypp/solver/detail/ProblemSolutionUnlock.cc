@@ -44,6 +44,13 @@ IMPL_PTR_TYPE(ProblemSolutionUnlock);
 
 //---------------------------------------------------------------------------
 
+ProblemSolutionUnlock::ProblemSolutionUnlock( ResolverProblem_Ptr parent)
+    : ProblemSolution (parent, "", "")
+{
+    _description = _("unlock all resolvables");
+#warning implementation of unlocking ALL items
+}
+	
 ProblemSolutionUnlock::ProblemSolutionUnlock( ResolverProblem_Ptr parent,
 					      PoolItem_Ref item)
     : ProblemSolution (parent, "", "")
