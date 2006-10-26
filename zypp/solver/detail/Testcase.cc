@@ -203,12 +203,16 @@ bool Testcase::createTestcase(Resolver & resolver)
 	    ERR << dumpPath << " is not a directory." << endl;
 	    return false;
 	}
+	// remove old stuff
+	zypp::filesystem::clean_dir (dumpPath);
     }
     
     zypp::base::LogControl::instance().logfile( dumpPath +"/y2log" );
     zypp::base::LogControl::TmpExcessive excessive;
     
     resolver.resolvePool();
+
+    zypp::base::LogControl::instance().logfile( "/var/log/YaST2/y2log" );    
 
     ResPool pool 	= resolver.pool();
     SourceTable		sourceTable;
