@@ -62,7 +62,7 @@ namespace zypp
      *     return true;
      *   }
      *
-     *   unsigned & _counter;
+     *   unsigned _counter;
      * };
      *
      * ResStore store;
@@ -150,7 +150,7 @@ namespace zypp
     /** */
     typedef std::unary_function<ResObject::constPtr, bool> ResObjectFilterFunctor;
     typedef boost::function<bool ( ResObject::constPtr )> ResFilter;
-    
+
     /** Select ResObject by kind. */
     struct ByKind : public ResObjectFilterFunctor
     {
@@ -332,7 +332,7 @@ namespace zypp
 	return p.status().isLocked();
       }
     };
-      
+
 
     ///////////////////////////////////////////////////////////////////
 
@@ -360,7 +360,7 @@ namespace zypp
       ByCapMatch( const Capability & cap_r )
 	: _cap( cap_r )
       {}
-      const Capability &  _cap;
+      Capability _cap;
     };
 
 

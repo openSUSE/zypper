@@ -79,8 +79,8 @@ namespace zypp
       : _lhs( cap_r )
       , _expect( expect_r )
       {}
-      const Capability & _lhs;
-      CapMatch           _expect;
+      Capability _lhs;
+      CapMatch   _expect;
     };
 
     //@}
