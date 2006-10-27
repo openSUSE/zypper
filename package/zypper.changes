@@ -6,6 +6,7 @@ Fri Oct 27 15:19:18 CEST 2006 - jkupec@suse.cz
   twice
 - FIXED source (catalog) information missing for installed packages
 - added rug's 'v' status
+- 0.5.1
 
 -------------------------------------------------------------------
 Wed Oct 25 09:42:09 CEST 2006 - mvidner@suse.cz
