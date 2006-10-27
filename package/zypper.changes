@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Fri Oct 27 15:19:18 CEST 2006 - jkupec@suse.cz
+
+- FIXED --uninstalled-only does't exclude installed resolvables
+- FIXED search for all resolvables displays installed packages
+  twice
+- FIXED source (catalog) information missing for installed packages
+- added rug's 'v' status
+
+-------------------------------------------------------------------
 Wed Oct 25 09:42:09 CEST 2006 - mvidner@suse.cz
 
 - Split the package from libzypp.rpm
