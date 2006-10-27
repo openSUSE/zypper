@@ -4,13 +4,16 @@
 #include "zmart-sources.h"
 #include "zmart-misc.h"
 
-using namespace zypp;
+#include <zypp/base/Algorithm.h>
+
 using namespace std;
 using namespace boost;
+using namespace zypp;
+using namespace zypp::functor;
+using namespace zypp::resfilter;
 
 // TODO get rid of these globals
 extern RuntimeData gData;
-extern Settings gSettings;
 
 void ZyppSearchOptions::resolveConflicts() {
   if (matchExact()) {
@@ -23,52 +26,48 @@ void ZyppSearchOptions::resolveConflicts() {
   // ??? should we notify user about conflict resolutions?
 }
 
-ZyppSearch::ZyppSearch (const ZyppSearchOptions & options, const vector<string> & qstrings) :
-    _options(options), _qstrings(qstrings) {
-  init();
+/**
+ * Initializes installation sources, creates search regex, caches installed
+ * packages from RPM database, and populates ResPool with items from
+ * installation sources.
+ */ 
+ZyppSearch::ZyppSearch (
+    ZYpp::Ptr & zypp,
+    const ZyppSearchOptions & options,
+    const vector<string> qstrings
+    ) :
+    _zypp(zypp), _options(options), _qstrings(qstrings) {
+
+  cond_init_target();         // calls ZYpp::initializeTarget("/");
+  cond_init_system_sources(); // calls manager->restore("/");
+
+  // no sources warning
+  if (gData.sources.empty()) {
+    cerr << "No sources. Zypper currently searches within installation"
+        "sources only." << endl;
+    exit(2); // TODO #define zypper error codes?
+  }
+
+  setupRegexp();
+  cacheInstalled();
+  load_sources(); // populates ResPool with resolvables from inst. sources
 }
 
-// TODO clean this up
-bool ZyppSearch::init () const {
-  cond_init_system_sources();
-  cond_init_target();
-  
-  // load additional sources
-  for ( std::list<Url>::const_iterator it = gSettings.additional_sources.begin();
-      it != gSettings.additional_sources.end(); ++it ) {
-    include_source_by_url( *it );
-  }
-  
-  // TODO no sources warning
-  if ( gData.sources.empty() ) {
-    cerr << "Warning! No sources. Operating only over the installed resolvables."
-      " You will not be able to install stuff" << endl;
-  }
-
-  if (_options.installedFilter() != ZyppSearchOptions::UNINSTALLED_ONLY) {
-    cerr_v << "loading target" << endl;
-    load_target();
-  }
-
-  if (_options.installedFilter() != ZyppSearchOptions::INSTALLED_ONLY) {
-    cerr_v << "loading sources" << endl;
-    load_sources();
-  }
-
-  return true;
-}
-
-void ZyppSearch::doSearch(const boost::function<void(const PoolItem &)> & f) {
-  ResPool pool = getZYpp()->pool();
+/**
+ * Invokes zypp::invokeOnEach() on a subset of pool items restricted by
+ * some search criteria (--type,--match-exact).
+ */
+template <class _Filter, class _Function>
+int ZyppSearch::invokeOnEachSearched(_Filter filter_r, _Function fnc_r) {
+  ResPool pool = _zypp->pool();
 
   // search for specific resolvable type only
   if (_options.kind() != Resolvable::Kind()) {
-    cerr_vv << "Search by type" << endl;
-    setupRegexp();
-    for (ResPool::byKind_iterator it = pool.byKindBegin(_options.kind());
-        it != pool.byKindEnd(_options.kind()); ++it) {
-      if (match(*it)) f(*it);
-    }
+    cerr_vv << "invokeOnEachSearched(): search by type" << endl;
+
+    return invokeOnEach(
+        pool.byKindBegin(_options.kind()), pool.byKindEnd(_options.kind()),
+        filter_r, fnc_r);
   }
   // search for exact package using byName_iterator
   // usable only if there is only one query string and if this string
@@ -76,30 +75,78 @@ void ZyppSearch::doSearch(const boost::function<void(const PoolItem &)> & f) {
   else if (_options.matchExact() && _qstrings.size() == 1 &&
       _qstrings[0].find('*') == string::npos &&
       _qstrings[0].find('?') == string::npos) {
-    cerr_vv << "Exact name match" << endl;
-    for (ResPool::byName_iterator it = pool.byNameBegin(_qstrings[0]);
-        it != pool.byNameEnd(_qstrings[0]); ++it) {
-      f(*it); //table << createRow(*it);
-    }
+    cerr_vv << "invokeOnEachSearched(): exact name match" << endl;
+
+    return invokeOnEach(
+        pool.byNameBegin(_qstrings[0]), pool.byNameEnd(_qstrings[0]),
+        filter_r, fnc_r);
   }
+
   // search among all resolvables
   else {
-    cerr_vv << "Search among all resolvables" << endl;
-    setupRegexp();
-    for (ResPool::const_iterator it = pool.begin(); it != pool.end(); ++it) {
-      if (match(*it)) f(*it); //table << createRow(*it);
-    }
+    cerr_vv << "invokeOnEachSearched(): search among all resolvables" << endl;
+
+    return invokeOnEach(pool.begin(), pool.end(), filter_r, fnc_r);
   }
+}
+
+/**
+ * Cache installed packages matching given search criteria into a hash_map.
+ * Assumption made: names of currently installed resolvables + kind
+ * (+version???) are unique.
+ */
+void ZyppSearch::cacheInstalled() {
+  // don't include kind string in hash map key if search is to be restricted
+  // to particular kind (to improve performance a little bit)
+  if (_options.kind() != Resolvable::Kind())
+    _icache.setIncludeKindInKey(false);
+
+  cout_v << "Pre-caching installed resolvables matching given search criteria... " << endl;
+
+  ResStore tgt_resolvables(_zypp->target()->resolvables());
+
+  _zypp->addResolvables(tgt_resolvables, true /*installed*/);
+
+  invokeOnEachSearched(Match(_reg,_options.searchDescriptions()),
+    functorRef<bool,const zypp::PoolItem &>(_icache));
+
+  _zypp->removeResolvables(tgt_resolvables);
+
+  cout_v << _icache.size() << " out of (" <<  tgt_resolvables.size() << ")"  
+    "cached." << endl;
+}
+
+/**
+ * Invokes functor f on each pool item matching search criteria. 
+ */
+void ZyppSearch::doSearch(const boost::function<bool(const PoolItem &)> & f) {
+  boost::function<bool (const PoolItem &)> filter;
+
+  switch (_options.installedFilter()) {
+    case ZyppSearchOptions::INSTALLED_ONLY:
+      filter = chain(ByInstalledCache(_icache),Match(_reg,_options.searchDescriptions()));
+      break;
+    case ZyppSearchOptions::UNINSTALLED_ONLY:
+      filter = chain(not_c(ByInstalledCache(_icache)),Match(_reg,_options.searchDescriptions()));
+      break;
+    case ZyppSearchOptions::ALL:
+    default:
+      filter = Match(_reg,_options.searchDescriptions());
+  }
+
+  invokeOnEachSearched(filter, f);
 }
 
 //! macro for word boundary tags for regexes
 #define WB (_options.matchWords() ? string("\\b") : string())
 
+// TODO make a regex builder.
 /**
- * Creates a regex for searching in resolvable names.
- * 
+ * Creates a regex for searching in resolvable names and descriptions.
+ *
  * The regex is created according to given search strings and search options.
  * 
+ * <pre>
  * Examples:
  *   - no search string: .*
  *   - one search string: .*searchstring.*
@@ -111,6 +158,7 @@ void ZyppSearch::doSearch(const boost::function<void(const PoolItem &)> & f) {
  *     --match-any:
  *       .*(searchstring1|searchstring2).*
  *       with --match-words: .*\b(searchstring1|searchstring2)\b.*
+ * </pre>
  */
 void ZyppSearch::setupRegexp() {
   string regstr;
@@ -149,7 +197,7 @@ void ZyppSearch::setupRegexp() {
     }
   }
 
-  cerr_vv << "using regex: " << regstr << endl;
+  cout_vv << "using regex: " << regstr << endl;
 
   // regex flags
   unsigned int flags = boost::regex::normal;
@@ -189,23 +237,6 @@ string ZyppSearch::wildcards2regex(const string & str) const {
   cerr_vv << " -> " << regexed << endl;
 
   return regexed;
-}
-
-/**
- * Decides whether the pool_item (resolvable) matches the search criteria
- * encoded in regular expression.
- */
-bool ZyppSearch::match(const PoolItem & pool_item) {
-  return
-    // match resolvable name
-    regex_match(pool_item.resolvable()->name(), _reg)
-      ||
-    // if required, match also summary and description of the resolvable
-    (_options.searchDescriptions() ?
-      regex_match(pool_item.resolvable()->summary(), _reg) ||
-        regex_match(pool_item.resolvable()->description(), _reg)
-          :
-      false);
 }
 
 // Local Variables:

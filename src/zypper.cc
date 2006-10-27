@@ -633,10 +633,7 @@ int main(int argc, char **argv)
 
   // --------------------------( search )-------------------------------------
 
-  // FIXME --uninstalled-only does not really exclude installed resolvables
-  // FIXME search for all resolvables displays installed packages twice
-  // FIXME source (catalog) information missing for installed packages
-  // TODO print rug's v status  
+  // TODO -c, --catalog option
 
   if (command == "search" || command == "se") {
     ZyppSearchOptions options;
@@ -671,8 +668,8 @@ int main(int argc, char **argv)
     Table t;
     t.style(Ascii);
 
-    ZyppSearch search(options,arguments);
-    search.doSearch(FillTable(t));
+    ZyppSearch search(God,options,arguments);
+    search.doSearch(FillTable(t, search.installedCache()));
 
     if (t.empty())
       cout << "No packages found." << endl;
@@ -681,7 +678,7 @@ int main(int argc, char **argv)
       else t.sort(3); // sort by name
       cout << t;
     }
-    
+
     return 0;
   }
 

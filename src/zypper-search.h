@@ -12,12 +12,15 @@
 #define ZYPPERSEARCH_H_
 
 #include <string>
+#include <ext/hash_map>
 #include <boost/regex.hpp>
 #include <boost/function.hpp>
 #include <zypp/ZYpp.h>
 
+#include "zypper-tabulator.h"
+
 /**
- * @brief: search options
+ * Represents zypper search options.
  */
 class ZyppSearchOptions {
 public:
@@ -64,23 +67,194 @@ private:
   zypp::Resolvable::Kind _kind;
 };
 
+struct GenericStringHash {
+  size_t operator()(const std::string &str) const {
+    const std::string::size_type size = str.size();
+    size_t h = 0; 
+    for(std::string::size_type i = 0; i < size; i++) {
+      h = 5 * h + str[i];
+    }
+    return h;
+  }
+};
+
+typedef __gnu_cxx::hash_map<std::string, zypp::PoolItem, GenericStringHash> PoolItemHash;
+
 /**
- *
+ * Structure for caching installed PoolItems using a hash map.
+ * Name + edition + (if _incl_kind_in_key) kind is used as a key.
+ * The hash map is to be manipulated through addItem() and getItem() methods. 
+ */
+struct InstalledCache  {
+private:
+  PoolItemHash _items;
+  bool _incl_kind_in_key;
+
+public:
+  InstalledCache(bool incl_kind_in_key = true) :
+    _incl_kind_in_key(incl_kind_in_key)
+    {}
+
+  void setIncludeKindInKey(bool value = true) { _incl_kind_in_key = value; }
+  bool includeKindInKey() { return _incl_kind_in_key; }
+
+  std::string getKey(const zypp::PoolItem & pi) const {
+    return pi.resolvable()->name() + pi.resolvable()->edition().asString() +
+      (_incl_kind_in_key ? pi.resolvable()->kind().asString() : "");
+  }
+
+  void addItem(const zypp::PoolItem & pi) { _items[getKey(pi)] = pi; }
+
+  zypp::PoolItem & getItem(const zypp::PoolItem & pi) {
+    return _items[getKey(pi)];
+  }
+  
+  unsigned int size() {
+    return _items.size();
+  }
+
+  /** defined for use as a functor for filling the hashmap in a for_each */ 
+  bool operator()(const zypp::PoolItem & pi) {
+    addItem(pi);
+  }
+};
+
+/**
+ * TODO
  */
 class ZyppSearch {
+
 public:
-  ZyppSearch (const ZyppSearchOptions & options, const std::vector<std::string> & qstrings = std::vector<std::string>());
-  void doSearch(const boost::function<void(const zypp::PoolItem &)> & f);
+  ZyppSearch (zypp::ZYpp::Ptr & zypp, const ZyppSearchOptions & options,
+      const std::vector<std::string> qstrings = std::vector<std::string>());
+
+  void doSearch(const boost::function<bool(const zypp::PoolItem &)> & f);
+
+  InstalledCache & installedCache() { return _icache; }
+
+  template <class _Filter, class _Function>
+  int invokeOnEachSearched(_Filter filter_r, _Function fnc_r);
 
 private:
+  zypp::ZYpp::Ptr & _zypp;
   const ZyppSearchOptions & _options;
-  const std::vector<std::string> & _qstrings;
+  const std::vector<std::string> _qstrings;
   boost::regex _reg;
 
-  bool init() const;
+  InstalledCache _icache;
+
   void setupRegexp();
+  void cacheInstalled();
   std::string wildcards2regex(const std::string & str) const;
-  bool match(const zypp::PoolItem & pool_item);
+};
+
+/**
+ * Filter resolvables by their installed status.
+ * This filter does it by comparing resolvables with matching resolvables
+ * from the InstalledCache. A resolvable is considered to be installed if
+ * its name, kind, edition, and architecture matches the one in installed
+ * cache.
+ * <p> 
+ * Not an effective filter, surely, but can't find another way to do this.
+ */
+struct ByInstalledCache
+{
+  ByInstalledCache(InstalledCache & icache) :
+    _icache(&icache)
+    {}
+
+  bool operator()(const zypp::PoolItem & pool_item) const {
+    zypp::PoolItem inst_item = _icache->getItem(pool_item);
+    if (inst_item) {
+      // yes, this one is installed, indeed
+      if (inst_item.resolvable()->edition() == pool_item.resolvable()->edition() &&
+          inst_item.resolvable()->arch() == pool_item.resolvable()->arch()) {
+        return true;
+      }
+      // nope, this package is not there on the target (in the InstalledCache)
+      else {
+        return false;
+      }
+    }
+
+    return false;
+  }
+
+  InstalledCache * _icache;
+};
+
+/**
+ * Functor for filling search output table in rug style.
+ */
+struct FillTable
+{
+  FillTable(Table & table, InstalledCache & icache) :
+    _table(&table), _icache(&icache) {
+    TableHeader header;
+    header << "S" << "Catalog" << "Bundle" << "Name" << "Version" << "Arch";
+    *_table << header;
+  }
+
+  bool operator()(const zypp::PoolItem & pool_item) const {
+    TableRow row;
+
+    // add status to the result table
+    zypp::PoolItem inst_item = _icache->getItem(pool_item);
+    if (inst_item) {
+      // check whether the pool item is installed...
+      if (inst_item.resolvable()->edition() == pool_item.resolvable()->edition() &&
+          inst_item.resolvable()->arch() == pool_item.resolvable()->arch())
+        row << "i";
+      // ... or there's just another version of it installed
+      else
+        row << "v";
+    }
+    // or it's not installed at all
+    else {
+      row << "";
+    }
+
+    // add other fields to the result table
+    row << pool_item.resolvable()->source().alias()
+        << "" // TODO what about rug's Bundle?
+        << pool_item.resolvable()->name()
+        << pool_item.resolvable()->edition().asString()
+        << pool_item.resolvable()->arch().asString();
+  
+    *_table << row;
+
+    return true;
+  }
+
+  Table * _table;
+
+  InstalledCache * _icache;
+};
+
+/**
+ * Filter functor for Matching PoolItems' names (or also summaries and
+ * descriptions) with a regex created according to search criteria.
+ */
+struct Match {
+  const bool _search_descs;
+  const boost::regex * _regex;
+
+  Match(const boost::regex & regex, bool search_descriptions = false) :
+    _regex(&regex), _search_descs(search_descriptions)
+    {}
+
+  bool operator()(const zypp::PoolItem & pi) const {
+    return
+      // match resolvable name
+      regex_match(pi.resolvable()->name(), *_regex)
+        ||
+      // if required, match also summary and description of the resolvable
+      (_search_descs ?
+        regex_match(pi.resolvable()->summary(), *_regex) ||
+          regex_match(pi.resolvable()->description(), *_regex)
+            :
+        false);
+  }
 };
 
 #endif /*ZYPPERSEARCH_H_*/
