@@ -56,31 +56,4 @@ struct ProvideProcess
   bool operator()( const zypp::PoolItem& provider );
 };
 
-
-/**
- * Functor for filling search output table. 
- */
-struct FillTable
-{
-  FillTable( Table & table ) : _table( &table ) {
-    TableHeader header;
-    header << "S" << "Catalog" << "Bundle" << "Name" << "Version" << "Arch";
-    *_table << header; 
-  }
-
-  void operator()(const zypp::PoolItem & pool_item) const {
-    TableRow row;
-    row << (pool_item.status().isInstalled() ? "i" : "")
-        << pool_item.resolvable()->source().alias()
-        << "" // TODO what about rug's Bundle?
-        << pool_item.resolvable()->name()
-        << pool_item.resolvable()->edition().asString()
-        << pool_item.resolvable()->arch().asString();
-  
-    *_table << row;
-  }
-
-  Table * _table; // != NULL asserted by ctor
-};
-
 #endif

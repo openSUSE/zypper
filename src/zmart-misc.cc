@@ -3,7 +3,6 @@
 #include <boost/format.hpp>
 #include "zmart.h"
 #include "zmart-misc.h"
-#include "zypper-tabulator.h"
 
 #include <zypp/Patch.h>
 #include <zypp/base/Algorithm.h>
