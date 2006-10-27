@@ -1,0 +1,5 @@
+- man page
+- rug compatibility global option -r, --rug-compatible
+- zypper patch-info
+- zypper pattern-info
+- zypper patch-search (for rug compatibility)
