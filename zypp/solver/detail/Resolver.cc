@@ -34,8 +34,6 @@
 #include "zypp/ZYppFactory.h"
 #include "zypp/SystemResObject.h"
 
-#define MAX_SECOND_RUNS 3
-#define TIMOUT_SECOND_RUN 30
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp
@@ -58,6 +56,9 @@ namespace zypp
 using namespace std;
 
 IMPL_PTR_TYPE(Resolver);
+
+static const unsigned MAX_SECOND_RUNS( 3 );
+static const unsigned TIMOUT_SECOND_RUN( 30 );
 
 //---------------------------------------------------------------------------
 

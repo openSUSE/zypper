@@ -63,8 +63,8 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
   private:
     ResPool _pool;
 
-    int _timeout_seconds;
-    int _maxSolverPasses;
+    unsigned _timeout_seconds;
+    unsigned _maxSolverPasses;
     bool _verifying;
     bool _testing;
     
