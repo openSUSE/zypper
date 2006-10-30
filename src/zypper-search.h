@@ -116,6 +116,7 @@ public:
   /** defined for use as a functor for filling the hashmap in a for_each */ 
   bool operator()(const zypp::PoolItem & pi) {
     addItem(pi);
+    return true;
   }
 };
 
