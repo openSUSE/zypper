@@ -74,7 +74,8 @@ struct Hal::Impl
 	DBusError error;
 	dbus_error_init (&error);
 
-	_connection = dbus_bus_get (DBUS_BUS_SYSTEM, &error);			// get DBUS 'socket'
+	_connection = dbus_bus_get (DBUS_BUS_SYSTEM, &error);			// get shared connection to DBUS 'socket'
+	//_connection = dbus_bus_get_private (DBUS_BUS_SYSTEM, &error);		// get private connection DBUS 'socket'
 	if (_connection) {
 	    _context = libhal_ctx_new ();					// create empty HAL context
 	    if (_context) {
@@ -92,7 +93,7 @@ struct Hal::Impl
 	    } else {
 		report_error ("libhal_ctx_new: Can't create libhal context", error);
 	    }
-	    dbus_connection_close (_connection);
+	    // dbus_connection_close (_connection);				// call only if dbus_bus_get_private was used
 	    dbus_connection_unref (_connection);
 	    _connection = NULL;
 	} else {

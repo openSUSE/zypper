@@ -132,6 +132,7 @@ namespace zypp
         HalContext_Impl(bool monitorable = false);
         ~HalContext_Impl();
 
+        bool            pcon; // private connection
         DBusConnection *conn;
         LibHalContext  *hctx;
       };
@@ -186,10 +187,14 @@ namespace zypp
       HalContext_Impl::HalContext_Impl(bool monitorable)
         : conn(NULL)
         , hctx(NULL)
+        , pcon(false) // we allways use shared connections at the moment
       {
         HalError err;
 
-        conn = dbus_bus_get(DBUS_BUS_SYSTEM, &err.error);
+        if( pcon)
+          conn = dbus_bus_get_private(DBUS_BUS_SYSTEM, &err.error);
+        else
+          conn = dbus_bus_get(DBUS_BUS_SYSTEM, &err.error);
         if( !conn) {
           ZYPP_THROW(err.halException());
         }
@@ -200,7 +205,8 @@ namespace zypp
         hctx = libhal_ctx_new();
         if( !hctx)
         {
-          dbus_connection_close(conn);
+          if( pcon)
+              dbus_connection_close(conn);
           dbus_connection_unref(conn);
           conn = NULL;
 
@@ -214,7 +220,8 @@ namespace zypp
           libhal_ctx_free(hctx);
           hctx = NULL;
 
-          dbus_connection_close(conn);
+          if( pcon)
+            dbus_connection_close(conn);
           dbus_connection_unref(conn);
           conn = NULL;
 
@@ -228,7 +235,8 @@ namespace zypp
           libhal_ctx_free(hctx);
           hctx = NULL;
 
-          dbus_connection_close(conn);
+          if( pcon)
+            dbus_connection_close(conn);
           dbus_connection_unref(conn);
           conn = NULL;
 
@@ -247,7 +255,8 @@ namespace zypp
         }
         if( conn)
         {
-          dbus_connection_close(conn);
+          if( pcon)
+            dbus_connection_close(conn);
           dbus_connection_unref(conn);
         }
       }
