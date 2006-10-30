@@ -44,6 +44,7 @@ Authors:
 gettextize -f
 autoreconf --force --install --symlink --verbose
 %{?suse_update_config:%{suse_update_config -f}}
+CFLAGS="$RPM_OPT_FLAGS" \
 CXXFLAGS="$RPM_OPT_FLAGS" \
 ./configure --prefix=%{prefix} --libdir=%{_libdir} --mandir=%{_mandir} --disable-static
 make %{?jobs:-j %jobs}
