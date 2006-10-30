@@ -83,7 +83,8 @@ AC_OUTPUT(
 	Makefile			\
 	zypper.spec			\
 	src/Makefile			\
-	po/Makefile.in
+	po/Makefile.in \
+	doc/Makefile
 )
 dnl ==================================================
 
