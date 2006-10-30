@@ -1,0 +1,121 @@
+.TH "zypper" "8" "0.5.1" "zypper" "System Tools"
+.SH "SYNTAX"
+.LP
+zypper [\fI\-\-global\-options\fR] [\fBcommand\fR] [\fI\-\-command\-options\fR] [\fBcommand-arguments\fR]
+
+zypper \fI\-\-help\fR
+.SH "DESCRIPTION"
+.LP
+zypper is a command\-line interface to ZYPP system management library. It can be used to install, update, remove software, manage installation sources, perform various searches, and more.
+
+zypper is designed to be compatible with rug, which is a command\-line interface to the ZENworks Linux Management (ZLM) agent. Compared to rug, zypper does not need the ZLM daemon to run, and is intented to provide more and improved functionality.
+
+.SH "COMMANDS"
+.LP
+zypper provides a number of \fBcommands\fR. Each command accepts the option flags listed in the GLOBAL OPTIONS section. In addition, many commands have specific option flags, which are listed in this section.
+
+.LP 
+.B Package Management Commands:
+.TP
+.B info (if) [packagename] ...
+Displays the full info for the specified package.
+
+.TP
+.B install (in)
+
+.TP
+.B list-updates (lu)
+
+.TP
+.B remove (rm)
+
+.TP
+\fBsearch\fR (\fBse\fR) [\fIoptions\fR] [\fBquerystring\fR] ...
+Search for packages matching given strings. * (any substring) and ? (any character) wildcards can also be used within search strings.
+.TP
+\fI    \-\-match\-all\fR
+Search for a match to all search strings (default).
+.TP
+\fI    \-\-match\-any\fR
+Search for a match to any of the search strings.
+.TP
+\fI    \-\-match\-substrings\fR
+Matches for search strings may be partial words (default).
+.TP
+\fI    \-\-match\-words\fR
+Matches for search strings may only be whole words.
+.TP
+\fI    \-\-match-exact\fR
+Searches for an exact package name.
+.TP
+.I \-d, \-\-search\-descriptions
+Search also in package summaries and descriptions.
+.TP
+.I \-i, \-\-installed\-only
+Show only packages that are already installed.
+.TP
+.I \-u, \-\-uninstalled\-only
+Show only packages that are not currently installed.
+.TP
+.I \-t, \-\-type
+Search only for packages of specified type.
+.TP
+.I \-c, \-\-catalog
+Show only the packages from the catalog you specify. (not implemented yet)
+.TP
+\fI    \-\-sort\-by\-name\fR
+Sort packages by name (default).
+.TP
+\fI    \-\-sort\-by\-catalog\fR
+Sort packages by catalog, not by name.
+
+.LP
+.B Patch management:
+
+.TP
+.B patch-check
+
+.LP 
+.B Service management:
+
+.TP
+.B service-add (sa)
+
+.TP
+.B service-delete (sd)
+
+.TP
+.B service-list (sl)
+
+.SH "GLOBAL OPTIONS"
+.TP 
+.I \-h, \-\-help
+Help. If a \fBcommand\fR is specified together with --help option, command specific help is displayed.
+.TP
+.I \-V, \-\-version
+Print zypper version number and exit.
+.TP
+.I \-v, \-\-verbose
+Increase verbosity. For debugging output specify this option twice.
+.TP
+.I \-t, \-\-terse
+Terse output for machine consumption.
+.TP
+.I \-s, \-\-table\-style
+Specifies table style to use. Table style is identified by an integer number. TODO
+.TP
+.I \-c, \-\-rug\-compatible
+Turns on rug compatibility. See compatibility notes next to affected commands.
+
+.SH "AUTHORS"
+.LP
+Martin Vidner <mvidner@suse.cz>
+.br
+Duncan Mac-Vicar <dmacvicar@suse.de>
+.br
+Jan Kupec <jkupec@suse.cz>
+
+.SH "SEE ALSO"
+.LP
+rug(1)
+
