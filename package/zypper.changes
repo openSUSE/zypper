@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Sun Oct 29 02:27:24 CEST 2006 - ro@suse.de
+
+- add missing return value 
+- also use RPM_OPT_FLAGS for C source
+
+-------------------------------------------------------------------
 Fri Oct 27 15:19:18 CEST 2006 - jkupec@suse.cz
 
 - FIXED --uninstalled-only does't exclude installed resolvables
