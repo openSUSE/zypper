@@ -148,6 +148,50 @@ void ProductMetadataParser::parse( const Pathname & file_r, Source_Ref source_r 
           }
         }
       }
+      else if (key == "EXTRAURLS")
+      {
+        std::list<std::string> items;
+        boost::algorithm::split(items, value, is_space());
+        std::list<std::string>::const_iterator
+        b = items.begin(),
+            e = items.end(),
+                i;
+        for (i = b; i != e; ++i)
+        {
+          // Url class throws in case of invalid URL
+          try
+          {
+            Url url = *i;
+            prodImpl->_extra_urls.push_back( url );
+          }
+          catch ( ... )
+          {
+            ZYPP_THROW (Exception("Bad source ["+ source_r.alias() +"] at URL:[" + source_r.url().asString() + "]. Ilegal optional Url: [" + *i + "]"));
+          }
+        }
+      }
+      else if (key == "OPTIONALURLS")
+      {
+        std::list<std::string> items;
+        boost::algorithm::split(items, value, is_space());
+        std::list<std::string>::const_iterator
+        b = items.begin(),
+            e = items.end(),
+                i;
+        for (i = b; i != e; ++i)
+        {
+          // Url class throws in case of invalid URL
+          try
+          {
+            Url url = *i;
+            prodImpl->_optional_urls.push_back( url );
+          }
+          catch ( ... )
+          {
+            ZYPP_THROW (Exception("Bad source ["+ source_r.alias() +"] at URL:[" + source_r.url().asString() + "]. Ilegal optional Url: [" + *i + "]"));
+          }
+        }
+      }
       else if (key == "ARCH")
         parseLine( key, modifier, value, prodImpl->_arch);
       else if (key == "DEFAULTBASE")
