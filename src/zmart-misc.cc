@@ -27,21 +27,27 @@ void cond_init_target () {
   }
 }
 
-// read callback answer
-//   can either be '0\n' -> false
-//   or '1\n' -> true
-// reads characters from stdin until newline. Defaults to 'false'
+// return the default value on input failure
+bool read_bool_with_default (bool defval) {
+  istream & stm = cin;
+
+  char c = 0;
+  while (stm.good () && c != 'y' && c != 'Y' && c != 'N' && c != 'n')
+    stm >> c ;
+      
+  if (c == 'y' || c == 'Y')
+    return true;
+  else if (c == 'n' || c == 'N')
+    return false;
+  else
+    return defval;
+}
+
+// Read an answer (ynYN)
+// Defaults to 'false'
 bool readBoolAnswer()
 {
-  char c = 0;
-  //int  count = 0;
-  while ( (c != 'y') && (c != 'Y') && (c != 'N') && (c != 'n') )
-    cin >> c ;
-      
-  if ( ( c == 'y' ) || ( c == 'Y' ) ) 
-    return true;
-  else
-    return false;
+  return read_bool_with_default (false);
 }
 
 // converts a user-supplied kind to a zypp kind object
@@ -140,7 +146,7 @@ void mark_for_install( const ResObject::Kind &kind,
 		);
   cerr_vv << "... done" << endl;
   if (!installer.item) {
-    cerr << "Not found" << endl;
+    cerr << kind << " '" << name << "' not found" << endl;
     return; //error?
   }
   
@@ -199,8 +205,8 @@ void show_problems () {
     b = rproblems.begin (),
     e = rproblems.end (),
     i;
-  if (b == e) {
-    stm << "(none)" << endl;
+  if (b != e) {
+    cerr << "Problems:" << endl;
   }
   for (i = b; i != e; ++i) {
     stm << "PROB " << (*i)->description () << endl;
@@ -218,21 +224,29 @@ void show_problems () {
   }
 }
 
-void show_summary()
+bool show_summary()
 {
+  cerr << "Summary:" << endl;
+  bool nothing = true;
+
   MIL << "Pool contains " << God->pool().size() << " items." << std::endl;
   for ( ResPool::const_iterator it = God->pool().begin(); it != God->pool().end(); ++it )
   {
     ResObject::constPtr res = it->resolvable();
     if ( it->status().isToBeInstalled() || it->status().isToBeUninstalled() )
     {
+      nothing = false;
       if ( it->status().isToBeInstalled() )
         cerr << "<install>   ";
       if ( it->status().isToBeUninstalled() )
         cerr << "<uninstall> ";
       cerr << *res << endl;
     }
-  } 
+  }
+  if (nothing)
+    cerr << "Nothing to do." << endl;
+
+  return !nothing;
 }
 
 std::string calculate_token()
@@ -282,7 +296,7 @@ void cond_load_resolvables ()
 
 void load_target()
 {
-  cerr << "Adding system resolvables to the pool..." << endl;
+  cerr << "Parsing RPM database..." << endl;
   ResStore tgt_resolvables(God->target()->resolvables());
   cerr_v << "   " <<  tgt_resolvables.size() << " resolvables." << endl;
   God->addResolvables(tgt_resolvables, true /*installed*/);
@@ -296,7 +310,7 @@ void load_sources()
     // skip non YUM sources for now
     //if ( it->type() == "YUM" )
     //{
-    cerr << "Adding " << it->alias() << " resolvables to the pool..." << endl;
+    cerr << "Parsing metadata for " << it->alias() << "..." << endl;
     ResStore src_resolvables(it->resolvables());
     cerr_v << "   " <<  src_resolvables.size() << " resolvables." << endl;
     God->addResolvables(src_resolvables);
@@ -504,18 +518,16 @@ void solve_and_commit () {
   cerr_v << "resolving" << endl;
   resolve();
     
-  cerr << "Problems:" << endl;
   show_problems ();
 
-  cerr << "Summary:" << endl;
-  show_summary();
+  if (show_summary()) {
       
-  cerr << "Continue? [y/n] ";
-  if (readBoolAnswer())
-  {
-    cerr_v << "committing" << endl;
-    ZYppCommitResult result = God->commit( ZYppCommitPolicy() );
-    cerr_v << result << std::endl; 
+    cerr << "Continue? [y/n] ";
+    if (readBoolAnswer()) {
+      cerr_v << "committing" << endl;
+      ZYppCommitResult result = God->commit( ZYppCommitPolicy() );
+      cerr_v << result << std::endl; 
+    }
   }
 }
 

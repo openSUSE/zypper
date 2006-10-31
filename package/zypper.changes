@@ -1,4 +1,14 @@
 -------------------------------------------------------------------
+Tue Oct 31 21:41:56 CET 2006 - mvidner@suse.cz
+
+- Fixed endless loop if stdin not available (#216210).
+- Better messages (#216033):
+  replaced "Adding resolvables" by "Parsing metadata";
+  replaced "Not found" by "package 'foo' not found";
+  removed "Problems: (none)";
+  removed "Continue?" if there is nothing to install/remove.
+
+-------------------------------------------------------------------
 Sun Oct 29 02:27:24 CEST 2006 - ro@suse.de
 
 - add missing return value 
