@@ -237,8 +237,8 @@ struct FillTable
  * descriptions) with a regex created according to search criteria.
  */
 struct Match {
-  const bool _search_descs;
   const boost::regex * _regex;
+  const bool _search_descs;
 
   Match(const boost::regex & regex, bool search_descriptions = false) :
     _regex(&regex), _search_descs(search_descriptions)
