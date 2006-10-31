@@ -119,6 +119,7 @@ static struct option global_options[] = {
   {"version",	no_argument, 0, 'V'},
   {"terse",	no_argument, 0, 't'},
   {"table-style", required_argument, 0, 's'},
+  {"rug-compatible", no_argument, 0, 'r'},
   {"opt",	optional_argument, 0, 'o'},
   {0, 0, 0, 0}
 };
@@ -151,11 +152,14 @@ int main(int argc, char **argv)
   if (logfile == NULL)
     logfile = ZYPP_CHECKPATCHES_LOG;
   zypp::base::LogControl::instance().logfile( logfile );
-  
+
   bool help = false;
   parsed_opts gopts = parse_options (argc, argv, global_options);
   if (gopts.count("_unknown"))
     return 1;
+
+  if (gopts.count("rug-compatible"))
+    gSettings.is_rug_compatible = true;
 
   // Help is parsed by setting the help flag for a command, which may be empty
   // $0 -h,--help
@@ -172,6 +176,7 @@ int main(int argc, char **argv)
     "\t--verbose, -v\t\tIncrease verbosity\n"
     "\t--terse, -t\t\tTerse output for machine consumption\n"
     "\t--table-style, -s\tTable style (integer)\n"
+    "\t--rug-compatible, -r\tTurn on rug compatibility"
     ;
 
   if (gopts.count("version")) {
@@ -712,6 +717,8 @@ int main(int argc, char **argv)
     return 0;
   }
 
+  // --------------------------( patches )------------------------------------
+
   if (command == "patches" || command == "pch") {
     if (help) {
       cerr << "patches\n"
@@ -795,6 +802,7 @@ int main(int argc, char **argv)
     cond_init_target ();
     cond_init_system_sources ();
     cond_load_resolvables ();
+    establish ();
 
     printInfo(command,arguments);
 

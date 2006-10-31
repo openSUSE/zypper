@@ -35,7 +35,8 @@ struct Settings
   verbose(0),  
   previous_code(-1),
   disable_system_sources(false),
-  disable_system_resolvables(false)
+  disable_system_resolvables(false),
+  is_rug_compatible(false)
   {}
 
   std::list<zypp::Url> additional_sources;
@@ -45,6 +46,7 @@ struct Settings
   std::string command;
   bool disable_system_sources;
   bool disable_system_resolvables;
+  bool is_rug_compatible;
 };
 
 struct RuntimeData
