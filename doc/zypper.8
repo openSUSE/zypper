@@ -14,6 +14,14 @@ zypper is designed to be compatible with rug, which is a command\-line interface
 .LP
 zypper provides a number of \fBcommands\fR. Each command accepts the option flags listed in the GLOBAL OPTIONS section. In addition, many commands have specific option flags, which are listed in this section.
 
+.LP
+.B General Commands
+
+.TP
+.B shell (sh)
+Starts a shell for entering multiple commands in one session.
+
+
 .LP 
 .B Package Management Commands
 
@@ -79,6 +87,11 @@ Type of resolvable (default: patch)
 .TP
 .I \-y, \-\-no-confirm
 Don't require user confirmation.
+
+.B NOTE:
+Update currently only works on patches! That is, it will only update a
+package if there is a patch description for it. It will not update if
+there is simply a package with a higher version. But coming soon.
 
 .TP
 \fBsearch\fR (\fBse\fR) [\fIoptions\fR] [\fBquerystring\fR] ...

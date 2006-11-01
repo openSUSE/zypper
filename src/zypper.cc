@@ -73,6 +73,7 @@ Url make_url (const string & url_s) {
 string help_commands = _(
   "  Commands:\n"
   "\thelp\t\t\tHelp\n"
+  "\tshell, sh\t\tAccept multiple commands at once\n"
   "\tinstall, in\t\tInstall packages or resolvables\n"
   "\tremove, rm\t\tRemove packages or resolvables\n"
   "\tsearch, se\t\tSearch for packages matching a pattern\n"
@@ -118,7 +119,7 @@ string process_globals(int argc, char **argv)
     "\t--verbose, -v\t\tIncrease verbosity\n"
     "\t--terse, -t\t\tTerse output for machine consumption\n"
     "\t--table-style, -s\tTable style (integer)\n"
-    "\t--rug-compatible, -r\tTurn on rug compatibility"
+    "\t--rug-compatible, -r\tTurn on rug compatibility\n"
     ;
 
   if (gopts.count("version")) {
@@ -808,7 +809,7 @@ int main(int argc, char **argv)
   // parse global options and the command
   string command = process_globals (argc, argv);
   int ret = 0;
-  if (command == "shell")
+  if (command == "shell" || command == "sh")
     command_shell ();
   else
     ret = one_command (command, argc, argv);
