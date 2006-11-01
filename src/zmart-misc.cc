@@ -31,13 +31,13 @@ void cond_init_target () {
 bool read_bool_with_default (bool defval) {
   istream & stm = cin;
 
-  char c = 0;
-  while (stm.good () && c != 'y' && c != 'Y' && c != 'N' && c != 'n')
-    stm >> c ;
+  string c = "";
+  while (stm.good () && c != "y" && c != "Y" && c != "N" && c != "n")
+    c = zypp::str::getline (stm, zypp::str::TRIM);
       
-  if (c == 'y' || c == 'Y')
+  if (c == "y" || c == "Y")
     return true;
-  else if (c == 'n' || c == 'N')
+  else if (c == "n" || c == "N")
     return false;
   else
     return defval;
