@@ -241,6 +241,7 @@ int main(int argc, char **argv)
       "\tservice-add, sa\t\tAdd a new service\n"
       "\tservice-delete, sd\tDelete a service\n"
       "\tservice-rename, sr\tRename a service\n"
+      "\trefresh, ref\t\tRefresh all installation sources\n"
       "\tpatch-check, pchk\tCheck for patches\n"
       "\tpatches, pch\t\tList patches\n"
       "\tlist-updates, lu\tList updates\n"
@@ -301,6 +302,16 @@ int main(int argc, char **argv)
       "\n"
       ;
   }
+  else if (command == "refresh" || command == "ref") {
+    static struct option refresh_options[] = {
+      {"help", no_argument, 0, 'h'}
+    };
+    specific_options = refresh_options;
+    specific_help = _("zypper refresh\n"
+      "\n"
+      "Refresh all installation sources found in system.\n")
+      ;
+  }
   else if (command == "list-updates" || command == "lu") {
     static struct option remove_options[] = {
       {"type",		required_argument, 0, 't'},
@@ -335,7 +346,7 @@ int main(int argc, char **argv)
       {"type",    required_argument, 0, 't'},
       {"sort-by-name", no_argument, 0, 0},
       {"sort-by-catalog", no_argument, 0, 0},
-      {"help", no_argument, 0, 0}
+      {"help", no_argument, 0, 'h'}
     };
     specific_options = search_options;
     specific_help =
@@ -574,6 +585,18 @@ int main(int argc, char **argv)
     return 0;
   }
   
+  // --------------------------( refresh )------------------------------------
+
+  if (command == "refresh" || command == "ref") {
+    if (help || copts.count("help")) {
+      cerr << specific_help;
+      return !help;
+    }
+    
+    refresh_sources();
+  }
+
+
   ResObject::Kind kind;
 
   // --------------------------( remove/install )-----------------------------

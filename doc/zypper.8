@@ -151,6 +151,12 @@ rug compatibility mode: if \fI-r\fR global option is set, zypper doesn't include
 .B service-rename (sr) <URI|alias> <new-alias>
 Rename a service (installation source).
 
+.TP
+.B refresh (ref)
+Refresh all installation sources found in system.
+.IP
+This means downloading resolvables' metadata from source media and storing it in local cache, typically under /var/lib/zypp/cache.
+
 .SH "GLOBAL OPTIONS"
 .TP 
 .I \-h, \-\-help
@@ -170,6 +176,11 @@ Specifies table style to use. Table style is identified by an integer number. TO
 .TP
 .I \-r, \-\-rug\-compatible
 Turns on rug compatibility. See compatibility notes next to affected commands.
+
+.SH "FILES"
+.TP
+.B /var/lib/zypp/cache
+Directory for storing metadata contained in installation sources.
 
 .SH "NOTE"
 .LP

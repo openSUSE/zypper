@@ -429,6 +429,46 @@ void rename_source( const std::string& anystring, const std::string& newalias )
   manager->store( "/", true /*metadata_cache*/ );
 }
 
+void refresh_sources()
+{
+  zypp::storage::PersistentStorage store;
+  std::list<zypp::source::SourceInfo> sources;
+
+  try
+  {
+    store.init( "/" );
+    sources = store.storedSources();
+  }
+  catch ( const Exception &e )
+  {
+    cerr << _("Error reading system sources: ") << e.msg() << std::endl;
+    exit(-1); 
+  }
+
+  for(std::list<zypp::source::SourceInfo>::const_iterator it = sources.begin();
+       it != sources.end() ; ++it)
+  {
+    try
+    {
+      cout << _("Refreshing ") << it->alias() << endl <<
+        "URI: " << it->url() << endl; 
+      Source_Ref src = SourceFactory().createFrom(
+        it->type(), it->url(), it->path(), it->alias(), it->cacheDir(),
+        false, // base source
+        true); // autorefresh
+//      src.refresh();
+      cout << "DONE" << endl << endl;
+    }
+    catch ( const zypp::Exception & ex )
+    {
+      cerr << _("Error while refreshing the source: ") << ex.asString();
+      // continuing with next source, however
+    }
+  }
+
+  cout << _("All sytem sources have been refreshed.") << endl;
+}
+
 MediaWrapper::MediaWrapper (const string& filename_or_url) {
   try {
     // the interface cannot provide a "complete path" :-(
