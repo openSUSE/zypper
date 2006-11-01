@@ -56,15 +56,15 @@ N1    history (hi)                 Search log entries
 N1    rollback (ro)                Rollback packages to a specified date
 ++    search (se)                  Search for packages matching a pattern
 +1    summary (sum)                Show a per-catalog summary of available updates.
-+     update (up)                  Update packages
+++    update (up)                  Update packages
 ?     verify (ve)                  Verify system dependencies
 +     what-conflicts (wc)          List packages that conflict with a given token
 +     what-provides (wp)           Show which packages provide a given token
 +     what-requires (wr)           Show which packages require a given token
     
     Patch management:
-+     patches (pch)                Show the patches in a given catalog
-+     patch-info                   Show detailed information for a patch
+++    patches (pch)                Show the patches in a given catalog
+++    patch-info                   Show detailed information for a patch
     
     Pattern management:
 +     pattern-info                 Show detailed information for a pattern
@@ -85,7 +85,7 @@ N1    key-list (kl)                Display whitelisted keys for a service
     
     Service management:
 ?     mount                        Mount directory as a channel
-+     refresh (ref)                Refresh all or some services
+++    refresh (ref)                Refresh all or some services
 ?     register (reg)               Register a service
 ++    service-add (sa)             Add a service
 ++    service-delete (sd)          Delete a service
