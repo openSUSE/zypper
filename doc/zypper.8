@@ -142,6 +142,10 @@ Delete a service (installation source).
 .TP
 .B service-list (sl)
 List services (installation sources).
+.IP
+Following data are printed for each source found: Enabled (whether the source is enabled), Refresh (whether autorefresh is enabled for the source), Type (YaST, YUM, ...), Name, and URI.
+.IP
+rug compatibility mode: if \fI-r\fR global option is set, zypper doesn't include 'Enabled' and 'Refresh' columns and prints rug's 'Status' column with values "Active" or "Disabled" instead.
 
 .TP
 .B service-rename (sr) <URI|alias> <new-alias>
