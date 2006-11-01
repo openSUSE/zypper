@@ -12,7 +12,6 @@
 #include <iterator>
 
 #include <unistd.h>
-#include <getopt.h>
 
 #include "zmart.h"
 #include "zmart-sources.h"
@@ -25,6 +24,7 @@
 #include "zypper-tabulator.h"
 #include "zypper-search.h"
 #include "zypper-info.h"
+#include "zypper-getopt.h"
 
 using namespace std;
 using namespace boost;
@@ -42,76 +42,6 @@ SourceCallbacks source_callbacks;
 MediaCallbacks media_callbacks;
 KeyRingCallbacks keyring_callbacks;
 DigestCallbacks digest_callbacks;
-
-typedef map<string, list<string> > parsed_opts;
-
-string longopts2optstring (const struct option *longopts) {
-  // + - do not permute, stop at the 1st nonoption, which is the command
-  // : - return : to indicate missing arg, not ?
-  string optstring = "+:";
-  for (; longopts && longopts->name; ++longopts) {
-    if (!longopts->flag && longopts->val) {
-      optstring += (char) longopts->val;
-      if (longopts->has_arg == required_argument)
-	optstring += ':';
-      else if (longopts->has_arg == optional_argument)
-	optstring += "::";
-    }
-  }
-  //cerr << optstring << endl;
-  return optstring;
-}
-
-typedef map<int,const char *> short2long_t;
-
-short2long_t make_short2long (const struct option *longopts) {
-  short2long_t result;
-  for (; longopts && longopts->name; ++longopts) {
-    if (!longopts->flag && longopts->val) {
-      result[longopts->val] = longopts->name;
-    }
-  }
-  return result;
-}
-
-// longopts.flag must be NULL
-parsed_opts parse_options (int argc, char **argv,
-			   const struct option *longopts) {
-  parsed_opts result;
-  opterr = 0; 			// we report errors on our own
-  int optc;
-  string optstring = longopts2optstring (longopts);
-  short2long_t short2long = make_short2long (longopts);
-
-  while (1) {
-    int option_index = 0;
-    optc = getopt_long (argc, argv, optstring.c_str (),
-			longopts, &option_index);
-    if (optc == -1)
-      break;			// options done
-
-    switch (optc) {
-    case '?':
-      result["_unknown"].push_back("");
-      cerr << "Unknown option " << argv[optind - 1] << endl;
-      break;
-    case ':':
-      cerr << "Missing argument for " << argv[optind - 1] << endl;
-      break;
-    default:
-      const char *mapidx = optc? short2long[optc] : longopts[option_index].name;
-
-      // creates if not there
-      list<string>& value = result[mapidx];
-      if (optarg)
-	value.push_back (optarg);
-      else
-	value.push_back ("");
-      break;
-    }
-  }
-  return result;
-}
 
 static struct option global_options[] = {
   {"help",	no_argument, 0, 'h'},
@@ -140,23 +70,35 @@ Url make_url (const string & url_s) {
   return u;
 }
 
-int main(int argc, char **argv)
+string help_commands = _(
+  "  Commands:\n"
+  "\thelp\t\t\tHelp\n"
+  "\tinstall, in\t\tInstall packages or resolvables\n"
+  "\tremove, rm\t\tRemove packages or resolvables\n"
+  "\tsearch, se\t\tSearch for packages matching a pattern\n"
+  "\tservice-list, sl\tList services aka installation sources\n"
+  "\tservice-add, sa\t\tAdd a new service\n"
+  "\tservice-delete, sd\tDelete a service\n"
+  "\tservice-rename, sr\tRename a service\n"
+  "\trefresh, ref\t\tRefresh all installation sources\n"
+  "\tpatch-check, pchk\tCheck for patches\n"
+  "\tpatches, pch\t\tList patches\n"
+  "\tlist-updates, lu\tList updates\n"
+  "\tupdate, up\t\tUpdate packages\n"
+  "\tinfo, if\t\tShow full info for packages\n"
+  "");
+
+// global options
+parsed_opts gopts;
+bool help = false;
+
+// parses global options, returns the command
+string process_globals(int argc, char **argv)
 {
-  struct Bye {
-    ~Bye() {
-      cerr_vv << "Exiting main()" << endl;
-    }
-  } say_goodbye __attribute__ ((__unused__));
-
-  const char *logfile = getenv("ZYPP_LOGFILE");
-  if (logfile == NULL)
-    logfile = ZYPP_CHECKPATCHES_LOG;
-  zypp::base::LogControl::instance().logfile( logfile );
-
-  bool help = false;
-  parsed_opts gopts = parse_options (argc, argv, global_options);
+  // global options
+  gopts = parse_options (argc, argv, global_options);
   if (gopts.count("_unknown"))
-    return 1;
+    return "_unknown";
 
   if (gopts.count("rug-compatible"))
     gSettings.is_rug_compatible = true;
@@ -221,33 +163,26 @@ int main(int argc, char **argv)
   }
 
   if (command.empty()) {
-    cerr_vv << "No command" <<endl;
-    //command = "help";
+    if (help) {
+      cerr << help_global_options << help_commands;
+    }
+    else {
+      cerr << "Try -h for help" << endl;
+    }
   }
-  cerr_vv << "COMMAND: " << command << endl;
 
+  cerr_vv << "COMMAND: " << command << endl;
+  return command;
+}
+
+/// process one command from the OS shell or the zypper shell
+int one_command(const string& command, int argc, char **argv)
+{
   // === command-specific options ===
 
   struct option no_options = {0, 0, 0, 0};
   struct option *specific_options = &no_options;
   string specific_help;
-
-  string help_commands = _("  Commands:\n"
-      "\thelp\t\t\tHelp\n"
-      "\tinstall, in\t\tInstall packages or resolvables\n"
-      "\tremove, rm\t\tRemove packages or resolvables\n"
-      "\tsearch, se\t\tSearch for packages matching a pattern\n"
-      "\tservice-list, sl\tList services aka installation sources\n"
-      "\tservice-add, sa\t\tAdd a new service\n"
-      "\tservice-delete, sd\tDelete a service\n"
-      "\tservice-rename, sr\tRename a service\n"
-      "\trefresh, ref\t\tRefresh all installation sources\n"
-      "\tpatch-check, pchk\tCheck for patches\n"
-      "\tpatches, pch\t\tList patches\n"
-      "\tlist-updates, lu\tList updates\n"
-      "\tupdate, up\t\tUpdate packages\n"
-      "\tinfo, if\t\tShow full info for packages\n"
-      "");
 
   string help_global_source_options = "  Source options:\n"
       "\t--disable-system-sources, -D\t\tDon't read the system sources\n"
@@ -437,16 +372,6 @@ int main(int argc, char **argv)
   }
   
   // === execute command ===
-
-  if (command.empty()) {
-    if (help) {
-      cerr << help_global_options << help_commands;
-    }
-    else {
-      cerr << "Try -h for help" << endl;
-    }
-    return 0;
-  }
 
   if (command == "moo") {
     cout << "   \\\\\\\\\\\n  \\\\\\\\\\\\\\__o\n__\\\\\\\\\\\\\\'/_" << endl;
@@ -833,6 +758,56 @@ int main(int argc, char **argv)
   }
 
   return 0;
+}
+
+void command_shell ()
+{
+  bool loop = true;
+  while (loop) {
+    // read a line
+    cerr << "zypper> " << flush;
+    string line = zypp::str::getline (cin);
+    cerr_vv << "Got: " << line << endl;
+    // reset optind etc
+    optind = 0;
+    // split it up and create sh_argc, sh_argv
+    Args args(line);
+    int sh_argc = args.argc ();
+    char **sh_argv = args.argv ();
+
+    string command = sh_argv[0]? sh_argv[0]: "";
+    // TODO check empty command
+
+    if (command == "exit")
+      loop = false;
+    else
+      one_command (command, sh_argc, sh_argv);
+  }
+}
+
+int main(int argc, char **argv)
+{
+  struct Bye {
+    ~Bye() {
+      cerr_vv << "Exiting main()" << endl;
+    }
+  } say_goodbye __attribute__ ((__unused__));
+
+  // logging
+  const char *logfile = getenv("ZYPP_LOGFILE");
+  if (logfile == NULL)
+    logfile = ZYPP_CHECKPATCHES_LOG;
+  zypp::base::LogControl::instance().logfile( logfile );
+  
+  // parse global options and the command
+  string command = process_globals (argc, argv);
+  int ret = 0;
+  if (command == "shell")
+    command_shell ();
+  else
+    ret = one_command (command, argc, argv);
+
+  return ret;
 }
 // Local Variables:
 // c-basic-offset: 2

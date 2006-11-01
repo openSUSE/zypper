@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Wed Nov  1 17:14:23 CET 2006 - mvidner@suse.cz
+
+- First try of zypper "shell" command.
+
+-------------------------------------------------------------------
 Tue Oct 31 21:41:56 CET 2006 - mvidner@suse.cz
 
 - Fixed endless loop if stdin not available (#216210).
