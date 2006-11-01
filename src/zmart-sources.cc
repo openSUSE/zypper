@@ -23,6 +23,10 @@ extern Settings gSettings;
 
 void cond_init_system_sources ()
 {
+  static bool done = false;
+  if (done)
+    return;
+
   if ( geteuid() != 0 ) {
     cerr << "Sorry, you need root privileges to use system sources, disabling them..." << endl;
     gSettings.disable_system_sources = true;
@@ -32,6 +36,7 @@ void cond_init_system_sources ()
   if ( ! gSettings.disable_system_sources ) {
     init_system_sources();
   }
+  done = true;
 } 
 
 void init_system_sources()
@@ -43,6 +48,8 @@ void init_system_sources()
     cerr << "Restoring system sources..." << endl;
     manager->restore("/");
   }
+//  catch (const SourcesAlreadyRestoredException& excpt) {
+//  }
   catch (Exception & excpt_r)
   {
     ZYPP_CAUGHT (excpt_r);
