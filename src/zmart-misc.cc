@@ -514,7 +514,7 @@ void mark_updates( const ResObject::Kind &kind )
   }
 }
 
-void solve_and_commit () {
+void solve_and_commit (bool non_interactive) {
   cerr_v << "resolving" << endl;
   resolve();
     
@@ -522,8 +522,8 @@ void solve_and_commit () {
 
   if (show_summary()) {
       
-    cerr << "Continue? [y/n] ";
-    if (readBoolAnswer()) {
+    cerr << "Continue? [y/n] " << (non_interactive ? "y\n" : "");
+    if (non_interactive || readBoolAnswer()) {
       cerr_v << "committing" << endl;
       ZYppCommitResult result = God->commit( ZYppCommitPolicy() );
       cerr_v << result << std::endl; 

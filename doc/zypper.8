@@ -44,11 +44,14 @@ Displays full info for the specified packages.
 .B install (in) [name] ...
 Install resolvables.
 .TP
-\fI\-c, -\-catalog\fR
-Only from this catalog (FIXME)
+\fI\-c, \-\-catalog\fR
+Only from this catalog (FIXME not implemented yet)
 .TP
-\fI\-t, -\-type\fR [resolvable]
+\fI\-t, \-\-type\fR [resolvable]
 Type of resolvable (default: package)
+.TP
+.I \-y, \-\-no-confirm
+Don't require user confirmation.
 
 .TP
 .B list-updates (lu)
@@ -63,13 +66,19 @@ Remove resolvables.
 .TP
 \fI\-t, -\-type\fR [resolvable]
 Type of resolvable (default: package)
+.TP
+.I \-y, \-\-no-confirm
+Don't require user confirmation.
 
 .TP
 .B update (up)
 Update resolvables.
 .TP
-\fI\-t, --type\fR
+\fI\-t, -\-type\fR [resolvable]
 Type of resolvable (default: patch)
+.TP
+.I \-y, \-\-no-confirm
+Don't require user confirmation.
 
 .TP
 \fBsearch\fR (\fBse\fR) [\fIoptions\fR] [\fBquerystring\fR] ...
@@ -99,7 +108,7 @@ Show only resolvables that are already installed.
 .I \-u, \-\-uninstalled\-only
 Show only resolvables that are not currently installed.
 .TP
-.I \-t, \-\-type
+\fI\-t, -\-type\fR [resolvable]
 Search only for resolvables of specified type.
 .TP
 .I \-c, \-\-catalog

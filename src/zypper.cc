@@ -195,24 +195,28 @@ int one_command(const string& command, int argc, char **argv)
 
   if (command == "install" || command == "in") {
     static struct option install_options[] = {
-      {"catalog",	required_argument, 0, 'c'},
-      {"type",		required_argument, 0, 't'},
+      {"catalog",	   required_argument, 0, 'c'},
+      {"type",	     required_argument, 0, 't'},
+      {"no-confirm", no_argument,       0, 'y'},
       {0, 0, 0, 0}
     };
     specific_options = install_options;
     specific_help = "  Command options:\n"
       "\t--catalog,-c\t\tOnly from this catalog (FIXME)\n"
       "\t--type,-t\t\tType of resolvable (default: package)\n"
+      "\t--no-confirm,-y\tDon't require user confirmation\n"
       ;
   }
   else if (command == "remove" || command == "rm") {
     static struct option remove_options[] = {
-      {"type",		required_argument, 0, 't'},
+      {"type",       required_argument, 0, 't'},
+      {"no-confirm", no_argument,       0, 'y'},
       {0, 0, 0, 0}
     };
     specific_options = remove_options;
     specific_help = "  Command options:\n"
       "\t--type,-t\t\tType of resolvable (default: package)\n"
+      "\t--no-confirm,-y\tDon't require user confirmation\n"
       ;
   }
   else if (command == "service-add" || command == "sa") {
@@ -259,12 +263,14 @@ int one_command(const string& command, int argc, char **argv)
   }
   else if (command == "update" || command == "up") {
     static struct option remove_options[] = {
-      {"type",		required_argument, 0, 't'},
+      {"type",		   required_argument, 0, 't'},
+      {"no-confirm", no_argument,       0, 'y'},
       {0, 0, 0, 0}
     };
     specific_options = remove_options;
     specific_help = "  Command options:\n"
       "\t--type,-t\t\tType of resolvable (default: patch)\n"
+      "\t--no-confirm,-y\tDon't require user confirmation\n"
       ;
   }
   else if (command == "search" || command == "se") {
@@ -579,7 +585,7 @@ int one_command(const string& command, int argc, char **argv)
 	  mark_for_uninstall(kind, *it);
 	}
 
-	solve_and_commit ();
+	solve_and_commit (copts.count("no-confirm"));
     }
     return 0;
   }
@@ -734,7 +740,7 @@ int one_command(const string& command, int argc, char **argv)
     establish ();
 
     mark_updates (kind);
-    solve_and_commit ();
+    solve_and_commit (copts.count("no-confirm"));
     return 0;
   }
 
