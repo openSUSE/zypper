@@ -1,12 +1,19 @@
 -------------------------------------------------------------------
+Wed Nov  1 19:54:55 CET 2006 - mvidner@suse.cz
+
+- Added a manual page zypper(8) (#216028).
+- 0.5.2
+
+-------------------------------------------------------------------
 Wed Nov  1 17:30:51 CET 2006 - jkupec@suse.cz
 
 - -y, --no-confirm option implemented for install, remove,
-  and update command
-- -r, --rug-compatibility global option introduced - please use
-  it wherever you need to diverse from rug's behavior and want
-  to provide compatibility
+  and update command (#216649).
+- -r, --rug-compatibility global option introduced - for cases where
+  there may be scripts used to parsing rug output
 - patch-info implemented
+- refresh implemented
+- service-list says Enabled and Refresh instead of [x]*
 
 -------------------------------------------------------------------
 Wed Nov  1 17:14:23 CET 2006 - mvidner@suse.cz
