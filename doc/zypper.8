@@ -15,23 +15,65 @@ zypper is designed to be compatible with rug, which is a command\-line interface
 zypper provides a number of \fBcommands\fR. Each command accepts the option flags listed in the GLOBAL OPTIONS section. In addition, many commands have specific option flags, which are listed in this section.
 
 .LP 
-.B Package Management Commands:
-.TP
-.B info (if) [packagename] ...
-Displays the full info for the specified package.
+.B Package Management Commands
+
+.LP
+zypper works with several types of resource objects, called resolvables. A resolvable is a package, patch, pattern, language, or a product.
+.LP
+.B package
+\- all RPM packages including patch and delta packages
+.br
+.B patch
+\- update of the packages, it can include special scripts and messages
+.br
+.B pattern
+\- group of packages 
+.br
+.B language
+\- group of packages with language support
+.br
+.B product
+\- group of packages, which are necessary to install a product
+
 
 .TP
-.B install (in)
+.B info (if) [name] ...
+Displays full info for the specified packages.
+
+.TP
+.B install (in) [name] ...
+Install resolvables.
+.TP
+\fI\-c, -\-catalog\fR
+Only from this catalog (FIXME)
+.TP
+\fI\-t, -\-type\fR [resolvable]
+Type of resolvable (default: package)
 
 .TP
 .B list-updates (lu)
+List available updates.
+.TP
+\fI\-t, --type\fR
+Type of resolvable (default: patch)
 
 .TP
-.B remove (rm)
+.B remove (rm) [name]..
+Remove resolvables.
+.TP
+\fI\-t, -\-type\fR [resolvable]
+Type of resolvable (default: package)
+
+.TP
+.B update (up)
+Update resolvables.
+.TP
+\fI\-t, --type\fR
+Type of resolvable (default: patch)
 
 .TP
 \fBsearch\fR (\fBse\fR) [\fIoptions\fR] [\fBquerystring\fR] ...
-Search for packages matching given strings. * (any substring) and ? (any character) wildcards can also be used within search strings.
+Search for resolvables matching given strings. * (any substring) and ? (any character) wildcards can also be used within search strings.
 .TP
 \fI    \-\-match\-all\fR
 Search for a match to all search strings (default).
@@ -46,46 +88,64 @@ Matches for search strings may be partial words (default).
 Matches for search strings may only be whole words.
 .TP
 \fI    \-\-match-exact\fR
-Searches for an exact package name.
+Searches for an exact name of the resolvable.
 .TP
 .I \-d, \-\-search\-descriptions
-Search also in package summaries and descriptions.
+Search also in summaries and descriptions.
 .TP
 .I \-i, \-\-installed\-only
-Show only packages that are already installed.
+Show only resolvables that are already installed.
 .TP
 .I \-u, \-\-uninstalled\-only
-Show only packages that are not currently installed.
+Show only resolvables that are not currently installed.
 .TP
 .I \-t, \-\-type
-Search only for packages of specified type.
+Search only for resolvables of specified type.
 .TP
 .I \-c, \-\-catalog
-Show only the packages from the catalog you specify. (not implemented yet)
+Show only the resolvables from the catalog you specify. (not implemented yet)
 .TP
 \fI    \-\-sort\-by\-name\fR
-Sort packages by name (default).
+Sort resolvables by name (default).
 .TP
 \fI    \-\-sort\-by\-catalog\fR
-Sort packages by catalog, not by name.
+Sort resolvables by catalog, not by name.
 
 .LP
-.B Patch management:
+.B Patch Management
 
 .TP
 .B patch-check
+Check for patches.
+
+.TP
+.B patches (pch)
+List patches.
 
 .LP 
-.B Service management:
+.B Installation Source Management
+
+.LP
+zypper is able to work with YaST installation sources, aptrpm repositories, ZENworks 7 Linux Management, ZENworks 6.6.x Linux Management servers, as well as local files. Currently, an Installation Source in zypper is a synonym for both Service and Catalog in ZLM.
 
 .TP
-.B service-add (sa)
+.B service-add (sa) <URI> [alias]
+Add a new service (installation source).
+.TP
+\fI\-r, -\-repo\fR <FILE.repo>
+Read URI and alias from a file
 
 .TP
-.B service-delete (sd)
+.B service-delete (sd) <URI|alias>
+Delete a service (installation source).
 
 .TP
 .B service-list (sl)
+List services (installation sources).
+
+.TP
+.B service-rename (sr) <URI|alias> <new-alias>
+Rename a service (installation source).
 
 .SH "GLOBAL OPTIONS"
 .TP 
@@ -104,8 +164,12 @@ Terse output for machine consumption.
 .I \-s, \-\-table\-style
 Specifies table style to use. Table style is identified by an integer number. TODO
 .TP
-.I \-c, \-\-rug\-compatible
+.I \-r, \-\-rug\-compatible
 Turns on rug compatibility. See compatibility notes next to affected commands.
+
+.SH "NOTE"
+.LP
+Currently, zypper can be run only by user with root privileges.
 
 .SH "AUTHORS"
 .LP
@@ -117,5 +181,5 @@ Jan Kupec <jkupec@suse.cz>
 
 .SH "SEE ALSO"
 .LP
-rug(1)
+rug(1), YaST2(8)
 
