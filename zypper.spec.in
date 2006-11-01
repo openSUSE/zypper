@@ -73,6 +73,6 @@ make install DESTDIR=$RPM_BUILD_ROOT
 %{_sbindir}/zypp-checkpatches
 %verify(not mode) %attr (755,root,root) %{_sbindir}/zypp-checkpatches-wrapper
 %doc %{_mandir}/*/*
-%doc %dir @docdir@
-%doc @docdir@/TODO
-%doc @docdir@/zypper-rug
+%doc %dir %{_datadir}/doc/packages/zypper
+%doc %{_datadir}/doc/packages/zypper/TODO
+%doc %{_datadir}/doc/packages/zypper/zypper-rug

@@ -2,7 +2,7 @@
 # Makefile.am for zypper/doc
 #
 
-doc_DATA = TODO zypper-rug
+pkgdoc_DATA = TODO zypper-rug
 man_MANS = zypper.8
 
-EXTRA_DIST = $(man_MANS) $(doc_DATA)
+EXTRA_DIST = $(man_MANS) $(pkgdoc_DATA)
