@@ -20,13 +20,15 @@ zypper provides a number of \fBcommands\fR. Each command accepts the option flag
 .TP
 .B shell (sh)
 Starts a shell for entering multiple commands in one session.
-
+(NEW, beware of bugs!)
 
 .LP 
 .B Package Management Commands
 
 .LP
-zypper works with several types of resource objects, called resolvables. A resolvable is a package, patch, pattern, language, or a product.
+zypper works with several types of resource objects, called
+.BR resolvables .
+A resolvable is a package, patch, pattern, language, or a product.
 .LP
 .B package
 \- all RPM packages including patch and delta packages
@@ -137,18 +139,31 @@ Sort resolvables by catalog, not by name.
 .B Patch Management
 
 .TP
-.B patch-check
-Check for patches.
+.B patch-check (pchk)
+Check for patches. Displays a count of applicable patches and how many
+of them have the security category.
+
+Exit status: 0 - no patches, 1 - non-security patches, 2 - security patches.
 
 .TP
 .B patches (pch)
-List patches.
+List patches. Lists all patches that are available, including
+installed and not applicable ones.
 
 .LP 
 .B Installation Source Management
 
 .LP
-zypper is able to work with YaST installation sources, aptrpm repositories, ZENworks 7 Linux Management, ZENworks 6.6.x Linux Management servers, as well as local files. Currently, an Installation Source in zypper is a synonym for both Service and Catalog in ZLM.
+zypper is able to work with YaST installation sources, aptrpm
+repositories, ZENworks 7 Linux Management, ZENworks 6.6.x Linux
+Management servers, as well as local files. Currently, an Installation
+Source in zypper is a synonym for both Service and Catalog in ZLM.
+
+TERMS: ZENworks distinguishes services and catalogs. A service is
+added by URI and contains one or more catalogs. Libzypp does not have
+this distinction (yet) but for compatibility it uses the same command
+and option names (service-add, --catalog) as rug. In libzypp, an
+installation source is a repository is a service is a catalog.
 
 .TP
 .B service-add (sa) <URI> [alias]
@@ -158,7 +173,7 @@ Add a new service (installation source).
 Read URI and alias from a file
 
 .TP
-.B service-delete (sd) <URI|alias>
+.B service-delete (sd) <URI|alias|number>
 Delete a service (installation source).
 
 .TP
@@ -170,8 +185,9 @@ Following data are printed for each source found: Enabled (whether the source is
 rug compatibility mode: if \fI-r\fR global option is set, zypper doesn't include 'Enabled' and 'Refresh' columns and prints rug's 'Status' column with values "Active" or "Disabled" instead.
 
 .TP
-.B service-rename (sr) <URI|alias> <new-alias>
+.B service-rename (sr) <URI|alias|number> <new-alias>
 Rename a service (installation source).
+BUG: the old name is not removed and shares a cache - danger!
 
 .TP
 .B refresh (ref)
