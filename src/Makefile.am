@@ -13,8 +13,6 @@ AM_LDFLAGS =
 AM_CXXFLAGS =
 # gperf:	-pg
 
-LDADD =	$(ZYPP_LIBS) -lboost_regex -lboost_program_options
-
 ## ##################################################
 
 zmart_SOURCES = 	zmart.cc zmart-sources.cc zmart-misc.cc \
@@ -34,6 +32,7 @@ zmart_SOURCES = 	zmart.cc zmart-sources.cc zmart-misc.cc \
 	zypper-tabulator.h \
 	zypper-tabulator.cc \
 	zmart.h
+zmart_LDADD =	$(ZYPP_LIBS) -lboost_regex -lboost_program_options
 
 
 zypper_SOURCES = 	zypper.cc zmart-sources.cc zmart-misc.cc \
@@ -65,6 +64,7 @@ zypp_checkpatches_SOURCES = 	zypp-checkpatches.cc zmart-sources.cc \
 	zmart-utils.cc \
 	zmart-utils.h \
 	checkpatches-keyring-callbacks.h
+zypp_checkpatches_LDADD = $(ZYPP_LIBS) -lboost_regex -lboost_program_options
 
 zypp_checkpatches_wrapper_SOURCES = zypp-checkpatches-wrapper.c
 # empty:

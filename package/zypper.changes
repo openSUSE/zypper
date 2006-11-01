@@ -2,6 +2,7 @@
 Wed Nov  1 19:54:55 CET 2006 - mvidner@suse.cz
 
 - Added a manual page zypper(8) (#216028).
+- do not unnecessarily link zypper with boost_program_options.
 - 0.5.2
 
 -------------------------------------------------------------------
