@@ -77,6 +77,7 @@ void include_source_by_url( const Url &url )
   
 }
 
+/*
 static void print_source_list( const std::list<zypp::source::SourceInfo> &sources )
 {
   for( std::list<zypp::source::SourceInfo>::const_iterator it = sources.begin() ;
@@ -90,13 +91,16 @@ static void print_source_list( const std::list<zypp::source::SourceInfo> &source
     else
       cout << source.url() << endl;
   }
-}
+}*/
 
-static void print_source_list_rug_style( const std::list<zypp::source::SourceInfo> &sources )
+static void print_source_list(const std::list<zypp::source::SourceInfo> &sources )
 {
   Table tbl;
   TableHeader th;
-  th << "#" << "Status" << "Type" << "Name" << "URI";
+  th << "#";
+  if (gSettings.is_rug_compatible) th << "Status";
+  else th << "Enabled" << "Refresh";
+  th << "Type" << "Name" << "URI";
   tbl << th;
 
   int i = 1;
@@ -104,11 +108,22 @@ static void print_source_list_rug_style( const std::list<zypp::source::SourceInf
        it != sources.end() ; ++it, ++i )
   {
     SourceInfo source = *it;
-    TableRow tr (5);
+    TableRow tr (gSettings.is_rug_compatible ? 5 : 6);
     tr << str::numstring (i);
-    string status = source.enabled() ? "[x]" : "[ ]";
-    status += source.autorefresh() ? "*" : " ";
-    tr << status;
+
+    // rug's status (active, pending => active, disabled <= enabled, disabled)
+    // this is probably the closest possible compatibility arrangement
+    if (gSettings.is_rug_compatible)
+    {
+      tr << (source.enabled() ? "Active" : "Disabled");
+    }
+    // zypper status (enabled, autorefresh)
+    else
+    {
+      tr << (source.enabled() ? "Yes" : "No");
+      tr << (source.autorefresh() ? "Yes" : "No");
+    }
+
     tr << source.type();
     tr << source.alias();
     tr << source.url().asString();
@@ -134,7 +149,7 @@ void list_system_sources()
     exit(-1); 
   }
   
-  print_source_list_rug_style(sources);
+  print_source_list(sources);
 }
 
 bool parse_repo_file (const string& file, string& url, string& alias)
