@@ -1,4 +1,14 @@
 -------------------------------------------------------------------
+Wed Nov  1 17:30:51 CET 2006 - jkupec@suse.cz
+
+- -y, --no-confirm option implemented for install, remove,
+  and update command
+- -r, --rug-compatibility global option introduced - please use
+  it wherever you need to diverse from rug's behavior and want
+  to provide compatibility
+- patch-info implemented
+
+-------------------------------------------------------------------
 Wed Nov  1 17:14:23 CET 2006 - mvidner@suse.cz
 
 - First try of zypper "shell" command.
