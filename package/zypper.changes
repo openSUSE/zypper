@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Thu Nov  2 14:41:02 CET 2006 - mvidner@suse.cz
+
+- Do not parse metadata of disabled sources *blush* (#217297).
+
+-------------------------------------------------------------------
 Wed Nov  1 19:54:55 CET 2006 - mvidner@suse.cz
 
 - Added a manual page zypper(8) (#216028).

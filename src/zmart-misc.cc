@@ -306,15 +306,13 @@ void load_sources()
 {
   for ( std::list<Source_Ref>::iterator it = gData.sources.begin(); it !=  gData.sources.end(); ++it )
   {
-    Source_Ref src = *it;
-    // skip non YUM sources for now
-    //if ( it->type() == "YUM" )
-    //{
+    if (! it->enabled())
+      continue;			// #217297
+
     cerr << "Parsing metadata for " << it->alias() << "..." << endl;
     ResStore src_resolvables(it->resolvables());
     cerr_v << "   " <<  src_resolvables.size() << " resolvables." << endl;
     God->addResolvables(src_resolvables);
-    //}
   }
 }
 
