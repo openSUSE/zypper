@@ -87,6 +87,7 @@ string help_commands = _(
   "\tlist-updates, lu\tList updates\n"
   "\tupdate, up\t\tUpdate packages\n"
   "\tinfo, if\t\tShow full info for packages\n"
+  "\tpatch-info\t\tShow full info for patches\n"
   "");
 
 // global options
