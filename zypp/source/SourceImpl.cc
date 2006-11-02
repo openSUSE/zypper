@@ -441,6 +441,11 @@ const Pathname SourceImpl::provideFile(const Pathname & file_r,
       report->finish( selfSourceRef(), "Downloading " + file_url.asString(), SourceReport::NO_ERROR, file_r.asString() + " downloaded " + url().asString() );
       retry = false;
     }
+    catch ( const SkipRequestedException &e )
+    {
+      report->finish( selfSourceRef(), "Downloading " + file_url.asString(), SourceReport::IO, "Can't provide " + file_r.asString() + " from " + url().asString() );
+      ZYPP_RETHROW(e);
+    }
     catch (const Exception &e)
     {
       if ( report->problem(selfSourceRef(), SourceReport::IO, "Can't provide " + file_r.asString() + " from " + url().asString()) != SourceReport::RETRY )
