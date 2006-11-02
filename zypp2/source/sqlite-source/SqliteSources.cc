@@ -42,50 +42,51 @@ using namespace zypp;
 
 SqliteSources::SqliteSources (sqlite3 *db)
     : _db (db)
-{ 
-    MIL << "SqliteSources::SqliteSources(" << db << ")" << endl;
+{
+  MIL << "SqliteSources::SqliteSources(" << db << ")" << endl;
 }
 
 SqliteSources::~SqliteSources ()
-{
-}
+{}
 
 
 ResObject::constPtr
 SqliteSources::getById (sqlite_int64 id) const
 {
-    IdMap::const_iterator it = _idmap.find(id);
-    if (it == _idmap.end())
-	return NULL;
-    return it->second;
+  IdMap::const_iterator it = _idmap.find(id);
+  if (it == _idmap.end())
+    return NULL;
+  return it->second;
 }
 
 
 Source_Ref
 SqliteSources::createDummy( const Url & url, const string & catalog )
 {
-    media::MediaManager mmgr;
-    media::MediaId mediaid = mmgr.open( url );
-    SourceFactory factory;
+  media::MediaManager mmgr;
+  media::MediaId mediaid = mmgr.open( url );
+  SourceFactory factory;
 
-    try {
+  try
+  {
 
-	SqliteSourceImpl *impl = new SqliteSourceImpl ();
-	impl->factoryCtor( mediaid, Pathname(), catalog, "", false, false );
-	impl->setId( catalog );
-	impl->setZmdName( catalog );
-	impl->setZmdDescription ( catalog );
-	impl->setPriority( 0 );
-	impl->setSubscribed( true );
+    SqliteSourceImpl *impl = new SqliteSourceImpl( SqliteSourceImplPolicy() );
+    impl->factoryCtor( mediaid, Pathname(), catalog, "", false, false );
+    impl->setId( catalog );
+    impl->setZmdName( catalog );
+    impl->setZmdDescription ( catalog );
+    impl->setPriority( 0 );
+    impl->setSubscribed( true );
 
-	Source_Ref src( factory.createFrom( impl ) );
-	return src;
-    }
-    catch (Exception & excpt_r) {
-	ZYPP_CAUGHT(excpt_r);
-    }
+    Source_Ref src( factory.createFrom( impl ) );
+    return src;
+  }
+  catch (Exception & excpt_r)
+  {
+    ZYPP_CAUGHT(excpt_r);
+  }
 
-    return Source_Ref();
+  return Source_Ref();
 }
 
 
@@ -98,146 +99,101 @@ SqliteSources::createDummy( const Url & url, const string & catalog )
 //
 
 const SourcesList &
-SqliteSources::sources( bool zypp_restore, bool refresh )
+SqliteSources::sources( bool refresh )
 {
-    MIL << "SqliteSources::sources(" << (zypp_restore ? "zypp_restore " : "") << (refresh ? "refresh" : "") << ")" << endl;
+  MIL << "SqliteSources::sources(" << (refresh ? "refresh" : "") << ")" << endl;
 
-    if (_db == NULL)
-	return _sources;
+  _sources.clear();
 
-    if (!refresh
-	&& !_sources.empty())
-    {
-	return _sources;
-    }
+  const char *query =
+    //      0   1     2      3      4         5          6          7          8      9
+    "SELECT id, url, path, alias, type, enabled, autorefresh, timestamp, checksum, description"
+    "FROM sources";
 
-    _sources.clear();
-
-    const char *query =
-	//      0   1     2      3            4         5
-	"SELECT id, name, alias, description, priority, subscribed "
-	"FROM catalogs";
-
-    sqlite3_stmt *handle = NULL;
-    int rc = sqlite3_prepare (_db, query, -1, &handle, NULL);
-    if (rc != SQLITE_OK) {
-	ERR << "Can not read 'channels': " << sqlite3_errmsg (_db) << endl;
-	return _sources;
-    }
-
-    media::MediaManager mmgr;
-    _smgr = SourceManager::sourceManager();
-
-    try {
-	_smgr->restore("/");
-    }
-    catch (Exception & excpt_r) {
-	ZYPP_CAUGHT (excpt_r);
-	ERR << "Couldn't restore sources" << endl;
-	return _sources;
-    }
-
-    media::MediaId mediaid = mmgr.open( Url( "file:/" ) );
-    SourceFactory factory;
-
-    // read catalogs table
-
-    while ((rc = sqlite3_step (handle)) == SQLITE_ROW) {
-	const char *text = (const char *) sqlite3_column_text( handle, 0 );
-	if (text == NULL) {
-	    ERR << "Catalog id is NULL" << endl;
-	    continue;
-	}
-	string id (text);
-	string name;
-	text = (const char *) sqlite3_column_text( handle, 1 );
-	if (text != NULL) name = text;
-	string alias;
-	text = (const char *) sqlite3_column_text( handle, 2 );
-	if (text != NULL) alias = text;
-	string desc;
-	text = (const char *) sqlite3_column_text( handle, 3 );
-	if (text != NULL) desc = text;
-	unsigned priority = sqlite3_column_int( handle, 4 );
-	int subscribed = sqlite3_column_int( handle, 5 );
-
-	MIL << "id " << id
-	    << ", name " << name
-	    << ", alias " << alias
-	    << ", desc " << desc
-	    << ", prio " << priority
-	    << ", subs " << subscribed
-	    << endl;
-
-	if (alias.empty()) alias = name;
-	if (desc.empty()) desc = alias;
-
-	Source_Ref zypp_source;
-
-	if (zypp_restore
-	    && id[0] != '@')		// not for zmd '@system' and '@local'
-	{
-	    MIL << "Try to find '" << name << "' as zypp source" << endl;
-	    try {
-		zypp_source = _smgr->findSource( name );
-	    }
-	    catch( const Exception & excpt_r ) {
-		ZYPP_CAUGHT(excpt_r);
-
-		MIL << "Try to find '" << alias << "' as zypp source" << endl;
-		try {
-		    zypp_source = _smgr->findSource( alias );
-		}
-		catch( const Exception & excpt_r ) {
-		    ZYPP_CAUGHT(excpt_r);
-
-		    // #177543
-		    MIL << "Try to find URL '" << id << "' as zypp source" << endl;
-		    try {
-			Url url = id;
-			zypp_source = _smgr->findSourceByUrl( url );
-		    }
-		    catch( const Exception & excpt_r ) {
-			ZYPP_CAUGHT(excpt_r);
-		    }
-		}
-	    }
-
-	    if (zypp_source) {
-		zypp_source.setId( id );		// set id, to match resolvable catalog
-		MIL << "Found " << zypp_source << endl;
-	    }
-	}
-
-	try {
-
-	    SqliteSourceImpl *impl = new SqliteSourceImpl ();
-	    impl->factoryCtor( mediaid, Pathname(), alias, "", false, false );
-	    impl->setId( id );
-	    impl->setZmdName( name );
-	    impl->setZmdDescription ( desc );
-	    impl->setPriority( priority );
-	    impl->setSubscribed( subscribed != 0 );
-
-	    impl->attachDatabase( _db );
-	    impl->attachIdMap( &_idmap );
-	    impl->attachZyppSource( zypp_source );
-
-	    Source_Ref src( factory.createFrom( impl ) );
-	    _sources.push_back( src );
-	}
-	catch (Exception & excpt_r) {
-	    ZYPP_CAUGHT(excpt_r);
-	    ERR << "Couldn't create zmd source" << endl;
-	}
-
-    }
-
-    if (rc != SQLITE_DONE) {
-	ERR << "Error while reading 'channels': " << sqlite3_errmsg (_db) << endl;
-	_sources.clear();
-    }
-
-    MIL << "Read " << _sources.size() << " catalogs" << endl;
+  sqlite3_stmt *handle = NULL;
+  int rc = sqlite3_prepare (_db, query, -1, &handle, NULL);
+  if (rc != SQLITE_OK)
+  {
+    ERR << "Can not read 'channels': " << sqlite3_errmsg (_db) << endl;
     return _sources;
+  }
+
+  media::MediaManager mmgr;
+
+  media::MediaId mediaid = mmgr.open( Url( "file:/" ) );
+  SourceFactory factory;
+
+  // read catalogs table
+
+  while ((rc = sqlite3_step (handle)) == SQLITE_ROW)
+  {
+    const char *text = (const char *) sqlite3_column_text( handle, 0 );
+    if (text == NULL)
+    {
+      ERR << "Catalog id is NULL" << endl;
+      continue;
+    }
+    string id (text);
+    
+    string url;
+    text = (const char *) sqlite3_column_text( handle, 1 );
+    if (text != NULL) url = text;
+    
+    Pathname path;
+    text = (const char *) sqlite3_column_text( handle, 2 );
+    if (text != NULL) path = text;
+    
+    string alias;
+    text = (const char *) sqlite3_column_text( handle, 3 );
+    if (text != NULL) alias = text;
+    
+    string desc;
+    text = (const char *) sqlite3_column_text( handle, 9 );
+    if (text != NULL) desc = text;
+    
+    bool enabled = (sqlite3_column_int( handle, 5 ) > 0 );
+
+    MIL << "id " << id
+    << ", url " << url
+    << ", path " << path
+    << ", alias " << alias
+    << ", desc " << desc
+    << ", enabled " << enabled
+    << endl;
+
+    if (alias.empty()) alias = url;
+    if (desc.empty()) desc = alias;
+
+    try
+    {
+
+      SqliteSourceImpl *impl = new SqliteSourceImpl ();
+      impl->factoryCtor( mediaid, Pathname(), alias, "", false, false );
+      impl->setId( id );
+      //impl->setZmdDescription ( desc );
+      //impl->setPriority( priority );
+      //impl->setSubscribed( subscribed != 0 );
+
+      impl->attachDatabase( _db );
+      impl->attachIdMap( &_idmap );
+
+      Source_Ref src( factory.createFrom( impl ) );
+      _sources.push_back( src );
+    }
+    catch (Exception & excpt_r)
+    {
+      ZYPP_CAUGHT(excpt_r);
+      ERR << "Couldn't create zmd source" << endl;
+    }
+
+  }
+
+  if (rc != SQLITE_DONE)
+  {
+    ERR << "Error while reading 'channels': " << sqlite3_errmsg (_db) << endl;
+    _sources.clear();
+  }
+
+  MIL << "Read " << _sources.size() << " catalogs" << endl;
+  return _sources;
 }

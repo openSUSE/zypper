@@ -19,6 +19,6 @@ noinst_LTLIBRARIES =	lib@PACKAGE@2_source.la
 lib@PACKAGE@2_source_la_SOURCES = dummy.cc
 
 lib@PACKAGE@2_source_la_LIBADD = \
-		yum/lib@PACKAGE@2_source_yum.la
+		sqlite-source/lib@PACKAGE@2_source_sqlite.la
     
 ## ##################################################

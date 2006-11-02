@@ -15,6 +15,7 @@
 #include "zypp/TranslatedText.h"
 #include "zypp/base/String.h"
 #include "zypp/base/Logger.h"
+#include "schema.h"
 
 using namespace std;
 using namespace zypp::detail;
@@ -50,13 +51,12 @@ SqliteProductImpl::readHandle( sqlite_int64 id, sqlite3_stmt *handle )
     // 1-5: nvra, see SqliteSourceImpl
     // 6: status (don't care, its recomputed anyways)
     // 7: category
-    const char * text = ((const char *) sqlite3_column_text( handle, 7 ));
+    const char * text = ((const char *) sqlite3_column_text( handle, PRODUCTS_TABLE_COLUMN_CATEGORY ));
     if (text != NULL)
 	_category = text;
 
     return;
 }
-
 
 Source_Ref
 SqliteProductImpl::source() const

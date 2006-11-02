@@ -43,21 +43,21 @@ typedef std::list<zypp::Source_Ref> SourcesList;
 
 class SqliteSources
 {
-  private:
-     sqlite3 *_db; 
-     SourcesList _sources;
-     IdMap _idmap;
-     zypp::SourceManager_Ptr _smgr;
+private:
+  sqlite3 *_db;
+  SourcesList _sources;
+  IdMap _idmap;
+  zypp::SourceManager_Ptr _smgr;
 
-  public:
+public:
 
-    SqliteSources (sqlite3 *db);
-    virtual ~SqliteSources();
+  SqliteSources (sqlite3 *db);
+  virtual ~SqliteSources();
 
-    const SourcesList & sources( bool zypp_restore = false, bool refresh = false );
-    zypp::ResObject::constPtr getById (sqlite_int64 id) const;
+  const SourcesList & sources( bool refresh = false );
+  zypp::ResObject::constPtr getById (sqlite_int64 id) const;
 
-    static zypp::Source_Ref createDummy( const zypp::Url & url, const std::string & catalog );
+  static zypp::Source_Ref createDummy( const zypp::Url & url, const std::string & catalog );
 };
 
 #endif  // ZMD_BACKEND_DBSOURCES_H

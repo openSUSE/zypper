@@ -28,7 +28,7 @@ namespace cache
 { /////////////////////////////////////////////////////////////////
   
 
-static const char * SOURCES_TABLE_SCHEMA = "create table sources ( id integer primary key autoincrement, alias varchar unique, type varchar, description varchar,  url varchar, path varchar,  enabled integer, autorefresh integer, timestamp varchar, checksum varchar);";
+static const char * SOURCES_TABLE_SCHEMA = "create table sources ( id integer primary key autoincrement, alias varchar unique, type varchar, description varchar,  url varchar, path varchar,  enabled integer, autorefresh integer, timestamp integer, checksum varchar);";
 
 static const char * RESOLVABLES_TABLE_SCHEMA = "\
  CREATE TABLE resolvables (   id INTEGER PRIMARY KEY AUTOINCREMENT,   name VARCHAR,   version VARCHAR,   release VARCHAR,   epoch INTEGER,   arch INTEGER,  installed_size INTEGER,  catalog VARCHAR,  installed INTEGER,  local INTEGER,  status INTEGER,  category VARCHAR,  license VARCHAR,  kind INTEGER); \
@@ -44,8 +44,30 @@ static const char * RESOLVABLES_TABLE_SCHEMA = "\
  DELETE FROM dependencies WHERE resolvable_id = old.id; \
  DELETE FROM files WHERE resolvable_id = old.id;  END;";
 
-static const char * PACKAGES_DETAILS_TABLE_SCHEMA = "CREATE TABLE package_details (   resolvable_id INTEGER NOT NULL,   rpm_group VARCHAR,  summary VARCHAR,  description VARCHAR,  package_url VARCHAR,  package_filename VARCHAR,  signature_filename VARCHAR,  file_size INTEGER,  install_only INTEGER,  media_nr INTEGER); \
-CREATE INDEX package_details_resolvable_id ON package_details (resolvable_id);";
+static const char * PACKAGE_DETAILS_TABLE_SCHEMA = "\
+    CREATE TABLE package_details (   resolvable_id INTEGER NOT NULL,   rpm_group VARCHAR,  summary VARCHAR,  description VARCHAR,  package_url VARCHAR,  package_filename VARCHAR,  signature_filename VARCHAR,  file_size INTEGER,  install_only INTEGER,  media_nr INTEGER); \
+    CREATE INDEX package_details_resolvable_id ON package_details (resolvable_id);\
+    CREATE VIEW packages AS SELECT * FROM resolvables, package_details WHERE resolvables.id = package_details.resolvable_id;";
+
+static const char * MESSAGE_DETAILS_TABLE_SCHEMA = "\
+CREATE TABLE message_details (resolvable_id INTEGER NOT NULL, content VARCHAR);";
+
+static const char * PATTERN_DETAILS_TABLE_SCHEMA = "\
+CREATE TABLE pattern_details (resolvable_id INTEGER NOT NULL, summary VARCHAR, description VARCHAR);";
+
+static const char * PRODUCT_DETAILS_TABLE_SCHEMA = "\
+CREATE TABLE product_details (resolvable_id INTEGER NOT NULL, summary VARCHAR, description VARCHAR );";
+
+static const char * SCRIPT_DETAILS_TABLE_SCHEMA = "\
+CREATE TABLE script_details (resolvable_id INTEGER NOT NULL, do_script VARCHAR, undo_script VARCHAR);";
+    
+static const char * PATCH_DETAILS_TABLE_SCHEMA = "\
+CREATE TABLE patch_details (resolvable_id INTEGER NOT NULL, patch_id VARCHAR, creation_time INTEGER, reboot INTEGER, restart INTEGER, interactive INTEGER,     summary VARCHAR, description VARCHAR);";
+
+static const char * DEPENDENCIES_TABLE_SCHEMA = "\
+    CREATE TABLE dependencies ( resolvable_id INTEGER NOT NULL, dep_type INTEGER NOT NULL, name VARCHAR, version VARCHAR, release VARCHAR, epoch INTEGER, arch INTEGER, relation INTEGER, dep_target INTEGER);";
+
+ 
 
 // id 0, alias 1 , type 2, desc 3, url 4, path 5, enabled 6, autorefresh 7, timestamp 8, checksum 9
   
@@ -103,6 +125,13 @@ void SourceCacheInitializer::createTables()
   {
     _con->executenonquery(SOURCES_TABLE_SCHEMA);
     _con->executenonquery(RESOLVABLES_TABLE_SCHEMA);
+    _con->executenonquery(PACKAGE_DETAILS_TABLE_SCHEMA);
+    _con->executenonquery(PRODUCT_DETAILS_TABLE_SCHEMA);
+    _con->executenonquery(PATCH_DETAILS_TABLE_SCHEMA);
+    _con->executenonquery(SCRIPT_DETAILS_TABLE_SCHEMA);
+    _con->executenonquery(MESSAGE_DETAILS_TABLE_SCHEMA);
+    _con->executenonquery(PATTERN_DETAILS_TABLE_SCHEMA);
+    _con->executenonquery(DEPENDENCIES_TABLE_SCHEMA);
   }
   
   trans.commit();

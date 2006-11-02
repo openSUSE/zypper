@@ -10,11 +10,14 @@
  *
 */
 
-#include "SqlitePatchImpl.h"
+
 #include "zypp/source/SourceImpl.h"
 #include "zypp/TranslatedText.h"
 #include "zypp/base/String.h"
 #include "zypp/base/Logger.h"
+
+#include "SqlitePatchImpl.h"
+#include "schema.h"
 
 using namespace std;
 using namespace zypp::detail;
@@ -59,24 +62,24 @@ void
 SqlitePatchImpl::readHandle( sqlite_int64 id, sqlite3_stmt *handle )
 {
     _zmdid = id;
-
+    
     // 1-5: nvra, see SqliteSourceImpl
-    _size_installed = sqlite3_column_int( handle, 6 );
+    _size_installed = sqlite3_column_int( handle, PATCHES_TABLE_COLUMN_SIZE_INSTALLED );
     // 7: catalog
     // 8: installed
     // 9: local
-    const char * text = ((const char *) sqlite3_column_text( handle, 10 ));
+    const char * text = ((const char *) sqlite3_column_text( handle, PATCHES_TABLE_COLUMN_PATCH_ID ));
     if (text != NULL)
 	_id = text;
     // 11: status (will re recomputed anyways)
-    _timestamp = sqlite3_column_int64( handle, 12 );
-    text = (const char *) sqlite3_column_text( handle, 13 );
+    _timestamp = sqlite3_column_int64( handle, PATCHES_TABLE_COLUMN_TIMESTAMP );
+    text = (const char *) sqlite3_column_text( handle, PATCHES_TABLE_COLUMN_CATEGORY );
     if (text != NULL)
 	_category = text;
 
-    _reboot_needed = (sqlite3_column_int( handle, 14 ) != 0);
-    _affects_pkg_manager = (sqlite3_column_int( handle, 15 ) != 0);
-    _interactive = (sqlite3_column_int( handle, 16 ) != 0);
+    _reboot_needed = (sqlite3_column_int( handle, PATCHES_TABLE_COLUMN_REBOOT_NEEDED ) != 0);
+    _affects_pkg_manager = (sqlite3_column_int( handle, PATCHES_TABLE_COLUMN_AFFECTS_PACKAGE_MANAGER ) != 0);
+    _interactive = (sqlite3_column_int( handle, PATCHES_TABLE_COLUMN_INTERACTIVE ) != 0);
 
     return;
 }
