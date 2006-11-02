@@ -555,7 +555,8 @@ int one_command(const string& command, int argc, char **argv)
     gData.packages_to_uninstall = arguments;
   }
 
-  if (!gData.packages_to_install.empty() || !gData.packages_to_uninstall.empty()) {
+  if (command == "install" || command == "in" ||
+      command == "remove" || command == "rm") {
     string skind = copts.count("type")?  copts["type"].front() : "package";
     kind = string_to_kind (skind);
     if (kind == ResObject::Kind ()) {
@@ -576,18 +577,17 @@ int one_command(const string& command, int argc, char **argv)
       } 
 
     cond_init_target ();
-    if (true) {
-	cond_load_resolvables ();
+    cond_load_resolvables ();
 
-	for ( vector<string>::const_iterator it = gData.packages_to_install.begin(); it != gData.packages_to_install.end(); ++it ) {
-	  mark_for_install(kind, *it);
-	}
-    
-	for ( vector<string>::const_iterator it = gData.packages_to_uninstall.begin(); it != gData.packages_to_uninstall.end(); ++it ) {
-	  mark_for_uninstall(kind, *it);
-	}
+    for ( vector<string>::const_iterator it = arguments.begin(); it != arguments.end(); ++it ) {
+      if (command == "install" || command == "in") {
+	mark_for_install(kind, *it);
+      }
+      else {
+	mark_for_uninstall(kind, *it);
+      }
 
-	solve_and_commit (copts.count("no-confirm"));
+      solve_and_commit (copts.count("no-confirm"));
     }
     return 0;
   }
