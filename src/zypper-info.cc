@@ -96,7 +96,7 @@ void printPkgInfo(const PoolItem & pool_item, const PoolItem & ins_pool_item) {
       << " installed) " << endl;
   }
   else
-    cout << "not installed";
+    cout << "not installed" << endl;
 
   cout << "Installed Size: " << pool_item.resolvable()->size().asString() << endl;
   cout << "Summary: " << pool_item.resolvable()->summary() << endl;
@@ -172,3 +172,6 @@ void printPatchInfo(const PoolItem & pool_item, const PoolItem & ins_pool_item) 
     cout << it->refers().asString() << ": " << it->asString() << endl;
   }
 }
+// Local Variables:
+// c-basic-offset: 2
+// End:
