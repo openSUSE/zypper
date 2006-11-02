@@ -23,7 +23,7 @@ std::string read_old_token();
 void save_token( const std::string &token );
 zypp::Edition read_old_version();
 void save_version( const zypp::Edition &edition );
-void render_error(   const zypp::Edition &version, std::ostream &out, const std::string &reason );
+void render_error( const zypp::Edition &version, std::ostream &out );
 void render_result(  const zypp::Edition &version, std::ostream &out, const zypp::ResPool &pool);
 
 #endif

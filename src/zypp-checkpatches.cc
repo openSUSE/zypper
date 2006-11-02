@@ -14,6 +14,8 @@
 #include <fstream>
 #include <sstream>
 
+#include <zypp/target/store/PersistentStorage.h>
+
 #include "checkpatches-keyring-callbacks.h"
 #include "zmart.h"
 #include "zmart-updates.h"
@@ -21,7 +23,7 @@
 #undef  ZYPP_BASE_LOGGER_LOGGROUP
 #define ZYPP_BASE_LOGGER_LOGGROUP "zypp::CheckPatches"
 
-#define XML_FORMAT_VERSION "0.3"
+#define XML_FORMAT_VERSION "0.4"
 
 using namespace zypp::detail;
 
@@ -99,11 +101,13 @@ int main(int argc, char **argv)
   {
     ZYPP_CAUGHT (excpt_r);
     
+    gData.errors.push_back(Error(excpt_r.msg()));
+    
     std::ofstream os(RESULT_FILE);
     if ( os.good() )
     {
-      render_error( Edition(XML_FORMAT_VERSION), os, "a ZYpp transaction is already in progress.");
-      render_error( Edition(XML_FORMAT_VERSION), cout, "a ZYpp transaction is already in progress.");
+      render_error( Edition(XML_FORMAT_VERSION), os );
+      render_error( Edition(XML_FORMAT_VERSION), cout );
       os.close();
     }
      // save a random token so we try again next time
@@ -118,58 +122,61 @@ int main(int argc, char **argv)
   KeyRingCallbacks keyring_callbacks;
   DigestCallbacks digest_callbacks;
   
-  try
-  {
-    manager->restore("/");
-  }
-  catch (Exception & excpt_r)
-  {
-    ZYPP_CAUGHT (excpt_r);
-    
-    std::ofstream os(RESULT_FILE);
-    if ( os.good() )
-    {
-      string error = "Couldn't restore sources" + ( excpt_r.msg().empty() ? "\n" : (":\n" + excpt_r.msg()));
-      render_error( Edition(XML_FORMAT_VERSION), os, error);
-      render_error( Edition(XML_FORMAT_VERSION), cout, error);
-      os.close();
-    }
-    
-    // save a random token so we try again next time
-     save_token(utils::randomString(48));
-     save_version(Edition(XML_FORMAT_VERSION));
-     
-    return -1;
-  }
-  
   // dont add rpms
-  God->initTarget("/", true);
+  God->initializeTarget("/");
   
   std::string token;
   stringstream token_stream;
   
-  for ( SourceManager::Source_const_iterator it = manager->Source_begin(); it !=  manager->Source_end(); ++it )
+  token_stream << "[" << "target" << "| " << God->target()->timestamp() << "]";
+  
+  std::list<source::SourceInfo> new_sources = manager->knownSourceInfos("/");
+  MIL << "Found " << new_sources.size()  << " sources." << endl;
+
+  for ( std::list<source::SourceInfo>::iterator it = new_sources.begin(); it != new_sources.end(); ++it)
   {
-    Source_Ref src = manager->findSource(it->alias());
-    src.refresh();
-    
-    token_stream << "[" << src.alias() << "| " << src.url() << src.timestamp() << "]";
-    
-    MIL << "Source: " << src.alias() << " from " << src.timestamp() << std::endl;
-    
-    // skip sources without patches sources for now
-    if ( src.hasResolvablesOfKind( ResTraits<zypp::Patch>::kind ) )
+    Url url = it->url();
+    std::string scheme( url.getScheme());
+
+    if ( (scheme == "cd" || scheme == "dvd") )
     {
-      MIL << "Including source " << src.url() << std::endl;
-      gData.sources.push_back(src);
+      MIL << "Skipping CD/DVD source: url:[" << it->url().asString() << "] product_dir:[" << it->path() << "] alias:[" << it->alias() << "] cache_dir:[" << it->cacheDir() << "] auto_refresh:[ " << it->autorefresh() << "]" << endl;
+      continue;
     }
-    else
+    
+    if ( ! it->enabled() )
     {
-      MIL << "Excluding source " << src.url() << " ( no patches ) "<< std::endl;
+      MIL << "Skipping disabled source: url:[" << it->url().asString() << "] product_dir:[" << it->path() << "] alias:[" << it->alias() << "] cache_dir:[" << it->cacheDir() << "] auto_refresh:[ " << it->autorefresh() << "]" << endl;
+      continue;
+    }
+
+    // Note: Url(it->url).asString() to hide password in logs
+    MIL << "Creating source: url:[" << it->url().asString() << "] product_dir:[" << it->path() << "] alias:[" << it->alias() << "] cache_dir:[" << it->cacheDir() << "] auto_refresh:[ " << it->autorefresh() << "]" << endl;
+    
+    try
+    {
+      Source_Ref src = SourceFactory().createFrom(it->type(), it->url(), it->path(), it->alias(), it->cacheDir(), false, it->autorefresh());
+      src.refresh();
+      token_stream << "[" << src.alias() << "| " << src.url() << src.timestamp() << "]";
+    
+      MIL << "Source: " << src.alias() << " from " << src.timestamp() << std::endl;
+    
+      // skip sources without patches sources for now
+      if ( src.hasResolvablesOfKind( ResTraits<zypp::Patch>::kind ) )
+      {
+        MIL << "Including source " << src.url() << std::endl;
+        gData.sources.push_back(src);
+      }
+      else
+      {
+        MIL << "Excluding source " << src.url() << " ( no patches ) "<< std::endl;
+      }  
+    }
+    catch (const Exception &excpt_r )
+    {
+      gData.errors.push_back("Couldn't restore source" + ( excpt_r.msg().empty() ? "\n" : (":\n" + excpt_r.msg())));
     }
   }
-  
-  token_stream << "[" << "target" << "| " << God->target()->timestamp() << "]";
   
   string previous_token;
   if ( PathInfo(TOKEN_FILE).isExist() )

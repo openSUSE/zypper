@@ -49,6 +49,14 @@ struct Settings
   bool is_rug_compatible;
 };
 
+struct Error
+{
+  Error( const std::string &desc )
+  : description(desc)
+  {}
+  std::string description;
+};
+
 struct RuntimeData
 {
   RuntimeData()
@@ -56,6 +64,7 @@ struct RuntimeData
   security_patches_count(0)
   {}
     
+  std::list<Error> errors;
   std::list<zypp::Source_Ref> sources;
   int patches_count;
   int security_patches_count;

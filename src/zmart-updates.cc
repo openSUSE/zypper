@@ -56,10 +56,16 @@ static std::string xml_escape( const std::string &text )
   return parser.escape(text);
 }
 
-void render_error( const Edition &version, std::ostream &out, const std::string &reason )
+void render_error( const Edition &version, std::ostream &out )
 {
-  out << "<update-status op=\"error\">" << std::endl;
-    out << "<error>" << reason << "</error>" << std::endl;
+  out << "<?xml version='1.0'?>" << std::endl;
+  out << "<update-status version=\"" << version.asString() << "\">" << std::endl;
+  out << " <errors>" << std::endl;
+  for ( std::list<Error>::const_iterator it = gData.errors.begin(); it != gData.errors.end(); ++it )
+  {
+    out << "   <error>" << xml_escape(it->description) << "</error>" << endl;
+  }
+  out << " </errors>" << std::endl;
   out << "</update-status>" << std::endl;
 }
 
@@ -69,8 +75,16 @@ void render_result( const Edition &version, std::ostream &out, const zypp::ResPo
   int security_count = 0;
   
   out << "<?xml version='1.0'?>" << std::endl;
-  out << "<update-status op=\"success\">" << std::endl;
+  out << "<update-status version=\"" << version.asString() << "\">" << std::endl;
+  
   //out << " <metadata token=\"" << token << "\"/>" << std::endl;
+  out << " <errors>" << std::endl;
+  for ( std::list<Error>::const_iterator it = gData.errors.begin(); it != gData.errors.end(); ++it )
+  {
+    out << " <error>" << xml_escape(it->description) << "</error>" << endl;
+  }
+  out << " </errors>" << std::endl;
+  
   out << " <update-sources>" << std::endl;
   for ( std::list<Source_Ref>::const_iterator it = gData.sources.begin(); it != gData.sources.end(); ++it )
   {
