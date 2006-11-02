@@ -31,7 +31,11 @@ void display_error (Error error, const std::string& reason) {
     static const char * error_s[] = {
       "", "Not found", "I/O error", "Invalid object"
     };
-    std::cerr << error_s[error] << ": " << reason << std::endl;
+    ostream& stm = std::cerr;
+    stm << error_s[error];
+    if (!reason.empty())
+	stm << ": " << reason;
+    stm << std::endl;
   }
 }
 

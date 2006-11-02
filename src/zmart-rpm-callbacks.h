@@ -26,6 +26,7 @@ using namespace std;
 namespace ZmartRecipients
 {
 
+
 // resolvable Message
 struct MessageResolvableReportReceiver : public zypp::callback::ReceiveReport<zypp::target::MessageResolvableReport>
 {
@@ -88,13 +89,21 @@ struct RemoveResolvableReportReceiver : public zypp::callback::ReceiveReport<zyp
 
   virtual Action problem( zypp::Resolvable::constPtr resolvable, Error error, const std::string& description )
   {
-    cerr << resolvable << error << description << endl;
+    cerr << resolvable << endl;
+    display_error (error, description);
     return (Action) read_action_ari ();
   }
 
   virtual void finish( zypp::Resolvable::constPtr resolvable, Error error, const std::string& reason )
   {}
 };
+
+ostream& operator << (ostream& stm, zypp::target::rpm::InstallResolvableReport::RpmLevel level) {
+  static const char * level_s[] = {
+    "", "(with nodeps)", "(with nodeps+force)"
+  };
+  return stm << level_s[level];
+}
 
 // progress for installing a resolvable
 struct InstallResolvableReportReceiver : public zypp::callback::ReceiveReport<zypp::target::rpm::InstallResolvableReport>
@@ -121,7 +130,12 @@ struct InstallResolvableReportReceiver : public zypp::callback::ReceiveReport<zy
   virtual Action problem( zypp::Resolvable::constPtr resolvable, Error error, const std::string& description, RpmLevel level )
   {
     cerr << resolvable << " " << description << std::endl;
-    cerr << error << ", " << level << endl;
+    cerr << level;
+    display_error (error, "");
+    if (level < RPM_NODEPS_FORCE) {
+      cerr_v << "Will retry more aggressively" << endl;
+      return ABORT;
+    }
     return (Action) read_action_ari ();
   }
 
@@ -129,10 +143,7 @@ struct InstallResolvableReportReceiver : public zypp::callback::ReceiveReport<zy
   {
     display_done ();
     if (error != NO_ERROR) {
-      const char * level_s[] = {
-	"", "(with nodeps)", "(with nodeps+force)"
-      };
-      cerr << level_s[level];
+      cerr << level;
     }
     display_error (error, reason);
   }

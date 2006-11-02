@@ -1,6 +1,8 @@
 -------------------------------------------------------------------
-Thu Nov  2 17:26:25 CET 2006 - mvidner@suse.cz
+Thu Nov  2 17:29:13 CET 2006 - mvidner@suse.cz
 
+- Automatically retry installing with nodeps or force, nicer problem
+  display, no more "3, 0 Invalid object" (#216042).
 - Do not parse metadata of disabled sources *blush* (#217297).
 - Display all "Parsing patch..." on one line.
 
