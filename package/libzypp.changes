@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Thu Nov  2 17:15:19 CET 2006 - mt@suse.de
+
+- Fixed target/hal - removed dbus_connection_close calls, because
+  the connections are shared; unref the ref-counted handle only.
+  (#216035)
+- r4442
+
+-------------------------------------------------------------------
 Thu Nov  2 16:18:27 CET 2006 - dmacvicar@suse.de
 
 - skipping unreachable packages won't work
