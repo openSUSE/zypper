@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Nov  2 16:18:27 CET 2006 - dmacvicar@suse.de
+
+- skipping unreachable packages won't work
+  (#215445)
+- r4468 
+
+-------------------------------------------------------------------
 Wed Oct 25 19:04:51 CEST 2006 - dmacvicar@suse.de
 
 - (#213793) Target store fails to recreate stored install-time (other
