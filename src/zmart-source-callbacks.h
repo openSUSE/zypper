@@ -12,6 +12,7 @@
 
 #include <stdlib.h>
 #include <iostream>
+#include <boost/algorithm/string.hpp>
 
 #include <zypp/base/Logger.h>
 #include <zypp/ZYppCallbacks.h>
@@ -228,10 +229,14 @@ struct SourceReportReceiver  : public zypp::callback::ReceiveReport<zypp::source
     return (Action) read_action_ari ();
   }
 
-  virtual void finish( zypp::Source_Ref /*source*/, const std::string &/*task*/, Error error, const std::string &reason )
+  virtual void finish( zypp::Source_Ref /*source*/, const std::string &task, Error error, const std::string &reason )
   {
     display_step(100);
-    display_done ();
+    // many of these, avoid newline
+    if (boost::algorithm::starts_with (task, "Parsing patch"))
+      cerr_v << '\r' << flush;
+    else
+      display_done ();
     display_error (error, reason);
   }
   

@@ -1,7 +1,8 @@
 -------------------------------------------------------------------
-Thu Nov  2 14:41:02 CET 2006 - mvidner@suse.cz
+Thu Nov  2 17:26:25 CET 2006 - mvidner@suse.cz
 
 - Do not parse metadata of disabled sources *blush* (#217297).
+- Display all "Parsing patch..." on one line.
 
 -------------------------------------------------------------------
 Wed Nov  1 19:54:55 CET 2006 - mvidner@suse.cz
