@@ -1,4 +1,15 @@
 -------------------------------------------------------------------
+Thu Nov  2 18:17:58 CET 2006 - dmacvicar@suse.de
+
+- dont use sourcemanager to restore sources
+- Restore sources one by one
+- skip CD/DVD and disabled sources
+- allow success with still reporting errors
+- new xml format 0.4 , applet coming
+- 0.5.3
+- r4474
+
+-------------------------------------------------------------------
 Thu Nov  2 18:24:09 CET 2006 - mvidner@suse.cz
 
 - Automatically retry installing with nodeps or force, nicer problem
