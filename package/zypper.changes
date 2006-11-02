@@ -1,4 +1,14 @@
 -------------------------------------------------------------------
+Thu Nov  2 18:24:09 CET 2006 - mvidner@suse.cz
+
+- Automatically retry installing with nodeps or force, nicer problem
+  display, no more "3, 0 Invalid object" (#216042).
+- Do not parse metadata of disabled sources *blush* (#217297).
+- Display all "Parsing patch..." on one line.
+- Shell would try to repeat the install command over and over,
+  fixed.
+
+-------------------------------------------------------------------
 Thu Nov  2 18:17:58 CET 2006 - dmacvicar@suse.de
 
 - dont use sourcemanager to restore sources
@@ -8,16 +18,6 @@ Thu Nov  2 18:17:58 CET 2006 - dmacvicar@suse.de
 - new xml format 0.4 , applet coming
 - 0.5.3
 - r4474
-
--------------------------------------------------------------------
-Thu Nov  2 18:24:09 CET 2006 - mvidner@suse.cz
-
-- Automatically retry installing with nodeps or force, nicer problem
-  display, no more "3, 0 Invalid object" (#216042).
-- Do not parse metadata of disabled sources *blush* (#217297).
-- Display all "Parsing patch..." on one line.
-- Shell would try to repeat the install command over and over,
-  fixed.
 
 -------------------------------------------------------------------
 Wed Nov  1 19:54:55 CET 2006 - mvidner@suse.cz
