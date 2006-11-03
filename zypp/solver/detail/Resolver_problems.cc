@@ -517,6 +517,8 @@ Resolver::problems (void) const
 		    if (it->second.matches (misc_info->capability()) == CapMatch::yes) {
 			// unlock this item
 			problem->addSolution (new ProblemSolutionUnlock (problem, it->first));
+			// unlock ALL existing resolvables
+			problem->addSolution (new ProblemSolutionUnlock (problem, pool()));			
 		    }
 		}
 		// Searching for another item which provides this requires BUT has another architec
@@ -641,6 +643,8 @@ Resolver::problems (void) const
 		
 		ResolverProblem_Ptr problem = new ResolverProblem (what, details);
 		problem->addSolution (new ProblemSolutionUnlock (problem, item)); // Unlocking resItem
+		// unlock ALL existing resolvables
+		problem->addSolution (new ProblemSolutionUnlock (problem, pool()));					
 		if (misc_info->trigger() == ResolverInfoMisc::OBSOLETE) {
 		    // Ignore obsoletes
 		    problem->addSolution (new ProblemSolutionIgnoreObsoletes (problem, item, misc_info->capability(),

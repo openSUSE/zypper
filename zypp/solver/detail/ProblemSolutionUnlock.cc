@@ -26,6 +26,10 @@
 
 #include "zypp/base/String.h"
 #include "zypp/base/Gettext.h"
+#include "zypp/base/Algorithm.h"
+#include "zypp/ResPool.h"
+#include "zypp/ResFilters.h"
+#include "zypp/CapFilters.h"
 #include "zypp/solver/detail/ProblemSolutionUnlock.h"
 
 using namespace std;
@@ -44,11 +48,31 @@ IMPL_PTR_TYPE(ProblemSolutionUnlock);
 
 //---------------------------------------------------------------------------
 
-ProblemSolutionUnlock::ProblemSolutionUnlock( ResolverProblem_Ptr parent)
+struct LockReset : public resfilter::PoolItemFilterFunctor
+{
+    ProblemSolutionUnlock & _problemSolutionUnlock;
+    LockReset( ProblemSolutionUnlock & solution )
+	: _problemSolutionUnlock( solution )
+    { }
+
+    bool operator()( PoolItem_Ref item )
+    {
+	_problemSolutionUnlock.addAction ( new TransactionSolutionAction (item, UNLOCK));	
+	return true;
+    }
+};
+
+	
+ProblemSolutionUnlock::ProblemSolutionUnlock( ResolverProblem_Ptr parent,
+					      const ResPool & pool)
     : ProblemSolution (parent, "", "")
 {
     _description = _("unlock all resolvables");
-#warning implementation of unlocking ALL items
+    LockReset lockReset (*this);
+
+    invokeOnEach ( pool.begin(), pool.end(),
+		   resfilter::ByLock( ),
+		   functor::functorRef<bool,PoolItem>(lockReset));
 }
 	
 ProblemSolutionUnlock::ProblemSolutionUnlock( ResolverProblem_Ptr parent,

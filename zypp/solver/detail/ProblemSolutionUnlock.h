@@ -49,7 +49,7 @@ namespace zypp
 	     **/
 	    ProblemSolutionUnlock( ResolverProblem_Ptr parent, PoolItem_Ref item);
 	    ProblemSolutionUnlock( ResolverProblem_Ptr parent, PoolItemList & itemlist);
-	    ProblemSolutionUnlock( ResolverProblem_Ptr parent);	    
+	    ProblemSolutionUnlock( ResolverProblem_Ptr parent, const ResPool & pool);	    
 	};
 
       ///////////////////////////////////////////////////////////////////
