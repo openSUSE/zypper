@@ -8,9 +8,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
-"Report-Msgid-Bugs-To: translation@suse.de\n"
-"POT-Creation-Date: 2006-05-15 15:07+0200\n"
-"PO-Revision-Date: 2006-05-18 16:45\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2006-10-26 09:41+0200\n"
+"PO-Revision-Date: 2006-05-31 14:44\n"
 "Last-Translator: Novell Language <language@novell.com>\n"
 "Language-Team: Novell Language <language@novell.com>\n"
 "MIME-Version: 1.0\n"
@@ -18,2045 +18,500 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n>1;\n"
 
-#: zypp/LanguageCode.cc:145
-msgid "Unknown language: "
-msgstr "Idioma desconhecido:"
-
-#: zypp/LanguageCode.cc:225 zypp/CountryCode.cc:215
-msgid "noCode"
-msgstr "noCode"
-
-#: zypp/LanguageCode.cc:238
-msgid "Afar"
-msgstr "Afar"
-
-#: zypp/LanguageCode.cc:240
-msgid "Abkhazian"
-msgstr "Abkhaz"
-
-#: zypp/LanguageCode.cc:242
-msgid "Achinese"
-msgstr "Achém"
-
-#: zypp/LanguageCode.cc:244
-msgid "Acoli"
-msgstr "Acoli"
-
-#: zypp/LanguageCode.cc:246
-msgid "Adangme"
-msgstr "Circassiano"
-
-#: zypp/LanguageCode.cc:248
-msgid "Adyghe"
-msgstr "Adyghe"
-
-#: zypp/LanguageCode.cc:250
-msgid "Afro-Asiatic (Other)"
-msgstr "Afro-Asiático (Outros)"
-
-#: zypp/LanguageCode.cc:252
-msgid "Afrihili"
-msgstr "Afrihili"
-
-#: zypp/LanguageCode.cc:254
-msgid "Afrikaans"
-msgstr "Africânder"
-
-#: zypp/LanguageCode.cc:256
-msgid "Ainu"
-msgstr "Aino"
-
-#: zypp/LanguageCode.cc:258
-msgid "Akan"
-msgstr "Akan"
-
-#: zypp/LanguageCode.cc:260
-msgid "Akkadian"
-msgstr "Acadiano"
-
-#: zypp/LanguageCode.cc:262 zypp/LanguageCode.cc:264
-msgid "Albanian"
-msgstr "Albanês"
-
-#: zypp/LanguageCode.cc:266
-msgid "Aleut"
-msgstr "Aleúte"
-
-#: zypp/LanguageCode.cc:268
-msgid "Algonquian languages"
-msgstr "Línguas Algonquinas"
-
-#: zypp/LanguageCode.cc:270
-msgid "Southern Altai"
-msgstr "Altaico Meridional"
-
-#: zypp/LanguageCode.cc:272
-msgid "Amharic"
-msgstr "Amárico"
-
-#: zypp/LanguageCode.cc:274
-msgid "English, Old (ca.450-1100)"
-msgstr "Inglês Antigo (aprox. 450-1100)"
-
-#: zypp/LanguageCode.cc:276
-msgid "Apache languages"
-msgstr "Línguas Apaches"
-
-#: zypp/LanguageCode.cc:278
-msgid "Arabic"
-msgstr "Árabe"
-
-#: zypp/LanguageCode.cc:280
-msgid "Aramaic"
-msgstr "Aramaico"
-
-#: zypp/LanguageCode.cc:282
-msgid "Aragonese"
-msgstr "Aragonês"
-
-#: zypp/LanguageCode.cc:284 zypp/LanguageCode.cc:286
-msgid "Armenian"
-msgstr "Armênio"
-
-#: zypp/LanguageCode.cc:288
-msgid "Araucanian"
-msgstr "Araucano"
-
-#: zypp/LanguageCode.cc:290
-msgid "Arapaho"
-msgstr "Arapaho"
-
-#: zypp/LanguageCode.cc:292
-msgid "Artificial (Other)"
-msgstr "Artificial (Outros)"
-
-#: zypp/LanguageCode.cc:294
-msgid "Arawak"
-msgstr "Arawak"
-
-#: zypp/LanguageCode.cc:296
-msgid "Assamese"
-msgstr "Assamês"
-
-#: zypp/LanguageCode.cc:298
-msgid "Asturian"
-msgstr "Asturiano"
-
-#: zypp/LanguageCode.cc:300
-msgid "Athapascan languages"
-msgstr "Línguas Atapascas"
-
-#: zypp/LanguageCode.cc:302
-msgid "Australian languages"
-msgstr "Línguas Australianas"
-
-#: zypp/LanguageCode.cc:304
-msgid "Avaric"
-msgstr "Avárico"
-
-#: zypp/LanguageCode.cc:306
-msgid "Avestan"
-msgstr "Avéstico"
-
-#: zypp/LanguageCode.cc:308
-msgid "Awadhi"
-msgstr "Awadhi"
-
-#: zypp/LanguageCode.cc:310
-msgid "Aymara"
-msgstr "Aymara"
-
-#: zypp/LanguageCode.cc:312
-msgid "Azerbaijani"
-msgstr "Azerbaidjano"
-
-#: zypp/LanguageCode.cc:314
-msgid "Banda"
-msgstr "Banda"
-
-#: zypp/LanguageCode.cc:316
-msgid "Bamileke languages"
-msgstr "Línguas Bamileques"
-
-#: zypp/LanguageCode.cc:318
-msgid "Bashkir"
-msgstr "Bashkir"
-
-#: zypp/LanguageCode.cc:320
-msgid "Baluchi"
-msgstr "Balúchi"
-
-#: zypp/LanguageCode.cc:322
-msgid "Bambara"
-msgstr "Bambara"
-
-#: zypp/LanguageCode.cc:324
-msgid "Balinese"
-msgstr "Balinês"
-
-#: zypp/LanguageCode.cc:326 zypp/LanguageCode.cc:328
-msgid "Basque"
-msgstr "Basco"
-
-#: zypp/LanguageCode.cc:330
-msgid "Basa"
-msgstr "Basa"
-
-#: zypp/LanguageCode.cc:332
-msgid "Baltic (Other)"
-msgstr "Báltico (Outros)"
-
-#: zypp/LanguageCode.cc:334
-msgid "Beja"
-msgstr "Bejanês"
-
-#: zypp/LanguageCode.cc:336
-msgid "Belarusian"
-msgstr "Bielo-russo"
-
-#: zypp/LanguageCode.cc:338
-msgid "Bemba"
-msgstr "Bemba"
-
-#: zypp/LanguageCode.cc:340
-msgid "Bengali"
-msgstr "Bengali"
-
-#: zypp/LanguageCode.cc:342
-msgid "Berber (Other)"
-msgstr "Berbere (Outros)"
-
-#: zypp/LanguageCode.cc:344
-msgid "Bhojpuri"
-msgstr "Bhojpuri"
-
-#: zypp/LanguageCode.cc:346
-msgid "Bihari"
-msgstr "Bihari"
-
-#: zypp/LanguageCode.cc:348
-msgid "Bikol"
-msgstr "Bikol"
-
-#: zypp/LanguageCode.cc:350
-msgid "Bini"
-msgstr "Bini"
-
-#: zypp/LanguageCode.cc:352
-msgid "Bislama"
-msgstr "Bichlamar"
-
-#: zypp/LanguageCode.cc:354
-msgid "Siksika"
-msgstr "Siksika"
-
-#: zypp/LanguageCode.cc:356
-msgid "Bantu (Other)"
-msgstr "Banto (Outros)"
-
-#: zypp/LanguageCode.cc:358
-msgid "Bosnian"
-msgstr "Sérvio"
-
-#: zypp/LanguageCode.cc:360
-msgid "Braj"
-msgstr "Brajavali"
-
-#: zypp/LanguageCode.cc:362
-msgid "Breton"
-msgstr "Bretão"
-
-#: zypp/LanguageCode.cc:364
-msgid "Batak (Indonesia)"
-msgstr "Bataque (Indonésia)"
-
-#: zypp/LanguageCode.cc:366
-msgid "Buriat"
-msgstr "Buriátio"
-
-#: zypp/LanguageCode.cc:368
-msgid "Buginese"
-msgstr "Buginês"
-
-#: zypp/LanguageCode.cc:370
-msgid "Bulgarian"
-msgstr "Búlgaro"
-
-#: zypp/LanguageCode.cc:372 zypp/LanguageCode.cc:374
-msgid "Burmese"
-msgstr "Birmanês"
-
-#: zypp/LanguageCode.cc:376
-msgid "Blin"
-msgstr "Blin"
-
-#: zypp/LanguageCode.cc:378
-msgid "Caddo"
-msgstr "Cadoano"
-
-#: zypp/LanguageCode.cc:380
-msgid "Central American Indian (Other)"
-msgstr "Indígena Centro-Americano (Outros)"
-
-#: zypp/LanguageCode.cc:382
-msgid "Carib"
-msgstr "Caribe"
-
-#: zypp/LanguageCode.cc:384
-msgid "Catalan"
-msgstr "Catalão"
-
-#: zypp/LanguageCode.cc:386
-msgid "Caucasian (Other)"
-msgstr "Caucasiano (Outros)"
-
-#: zypp/LanguageCode.cc:388
-msgid "Cebuano"
-msgstr "Cebuano"
-
-#: zypp/LanguageCode.cc:390
-msgid "Celtic (Other)"
-msgstr "Celta (Outros)"
-
-#: zypp/LanguageCode.cc:392
-msgid "Chamorro"
-msgstr "Chamorro"
-
-#: zypp/LanguageCode.cc:394
-msgid "Chibcha"
-msgstr "Chibcha"
-
-#: zypp/LanguageCode.cc:396
-msgid "Chechen"
-msgstr "Tchetcheno"
-
-#: zypp/LanguageCode.cc:398
-msgid "Chagatai"
-msgstr "Chagatai"
-
-#: zypp/LanguageCode.cc:400 zypp/LanguageCode.cc:402
-msgid "Chinese"
-msgstr "Chinês"
-
-#: zypp/LanguageCode.cc:404
-msgid "Chuukese"
-msgstr "Chuukese"
-
-#: zypp/LanguageCode.cc:406
-msgid "Mari"
-msgstr "Mari"
-
-#: zypp/LanguageCode.cc:408
-msgid "Chinook jargon"
-msgstr "Jargão Chinook"
-
-#: zypp/LanguageCode.cc:410
-msgid "Choctaw"
-msgstr "Choctaw"
-
-#: zypp/LanguageCode.cc:412
-msgid "Chipewyan"
-msgstr "Chipewyan"
-
-#: zypp/LanguageCode.cc:414
-msgid "Cherokee"
-msgstr "Cherokee"
-
-#: zypp/LanguageCode.cc:416
-msgid "Church Slavic"
-msgstr "Eslavo Eclesiástico"
-
-#: zypp/LanguageCode.cc:418
-msgid "Chuvash"
-msgstr "Chuvash"
-
-#: zypp/LanguageCode.cc:420
-msgid "Cheyenne"
-msgstr "Cheyenne"
-
-#: zypp/LanguageCode.cc:422
-msgid "Chamic languages"
-msgstr "Línguas Tchadianas"
-
-#: zypp/LanguageCode.cc:424
-msgid "Coptic"
-msgstr "Copta"
-
-#: zypp/LanguageCode.cc:426
-msgid "Cornish"
-msgstr "Córnico"
-
-#: zypp/LanguageCode.cc:428
-msgid "Corsican"
-msgstr "Corso"
-
-#: zypp/LanguageCode.cc:430
-msgid "Creoles and pidgins, English based (Other)"
-msgstr "Crioulos e Pidgins de Base Inglesa (Outros)"
-
-#: zypp/LanguageCode.cc:432
-msgid "Creoles and pidgins, French-based (Other)"
-msgstr "Crioulos e Pidgins de Base Francesa (Outros)"
-
-#: zypp/LanguageCode.cc:434
-msgid "Creoles and pidgins, Portuguese-based (Other)"
-msgstr "Crioulos e Pidgins de Base Portuguesa (Outros)"
-
-#: zypp/LanguageCode.cc:436
-msgid "Cree"
-msgstr "Cree"
-
-#: zypp/LanguageCode.cc:438
-msgid "Crimean Tatar"
-msgstr "Tártaro (Criméia)"
-
-#: zypp/LanguageCode.cc:440
-msgid "Creoles and pidgins (Other)"
-msgstr "Crioulos e Pidgins (Outros)"
-
-#: zypp/LanguageCode.cc:442
-msgid "Kashubian"
-msgstr "Cassubiano"
-
-#: zypp/LanguageCode.cc:444
-msgid "Cushitic (Other)"
-msgstr "Cuchita (Outros)"
-
-#: zypp/LanguageCode.cc:446 zypp/LanguageCode.cc:448
-msgid "Czech"
-msgstr "Tcheco"
-
-#: zypp/LanguageCode.cc:450
-msgid "Dakota"
-msgstr "Dacota"
-
-#: zypp/LanguageCode.cc:452
-msgid "Danish"
-msgstr "Dinamarquês"
-
-#: zypp/LanguageCode.cc:454
-msgid "Dargwa"
-msgstr "Dargwa"
-
-#: zypp/LanguageCode.cc:456
-msgid "Dayak"
-msgstr "Daiaque"
-
-#: zypp/LanguageCode.cc:458
-msgid "Delaware"
-msgstr "Delaware"
-
-#: zypp/LanguageCode.cc:460
-msgid "Slave (Athapascan)"
-msgstr "Slave (Atapasca)"
-
-#: zypp/LanguageCode.cc:462
-msgid "Dogrib"
-msgstr "Dogrib"
-
-#: zypp/LanguageCode.cc:464
-msgid "Dinka"
-msgstr "Dinca"
-
-#: zypp/LanguageCode.cc:466
-msgid "Divehi"
-msgstr "Divehi"
-
-#: zypp/LanguageCode.cc:468
-msgid "Dogri"
-msgstr "Dogri"
-
-#: zypp/LanguageCode.cc:470
-msgid "Dravidian (Other)"
-msgstr "Dravidiano (Outros)"
-
-#: zypp/LanguageCode.cc:472
-msgid "Lower Sorbian"
-msgstr "Baixo-Sorbiano"
-
-#: zypp/LanguageCode.cc:474
-msgid "Duala"
-msgstr "Duala"
-
-#: zypp/LanguageCode.cc:476
-msgid "Dutch, Middle (ca.1050-1350)"
-msgstr "Holandês Medieval (aprox. 1050-1350)"
-
-#: zypp/LanguageCode.cc:478 zypp/LanguageCode.cc:480
-msgid "Dutch"
-msgstr "Holandês"
-
-#: zypp/LanguageCode.cc:482
-msgid "Dyula"
-msgstr "Diúla"
-
-#: zypp/LanguageCode.cc:484
-msgid "Dzongkha"
-msgstr "Dzongkha"
-
-#: zypp/LanguageCode.cc:486
-msgid "Efik"
-msgstr "Efique"
-
-#: zypp/LanguageCode.cc:488
-msgid "Egyptian (Ancient)"
-msgstr "Egípcio (Antigo)"
-
-#: zypp/LanguageCode.cc:490
-msgid "Ekajuk"
-msgstr "Ekajuk"
-
-#: zypp/LanguageCode.cc:492
-msgid "Elamite"
-msgstr "Elamita"
-
-#: zypp/LanguageCode.cc:494
-msgid "English"
-msgstr "Inglês"
-
-#: zypp/LanguageCode.cc:496
-msgid "English, Middle (1100-1500)"
-msgstr "Inglês Medieval (1100-1500)"
-
-#: zypp/LanguageCode.cc:498
-msgid "Esperanto"
-msgstr "Esperanto"
-
-#: zypp/LanguageCode.cc:500
-msgid "Estonian"
-msgstr "Estoniano"
-
-#: zypp/LanguageCode.cc:502
-msgid "Ewe"
-msgstr "Jeje"
-
-#: zypp/LanguageCode.cc:504
-msgid "Ewondo"
-msgstr "Ewondo"
-
-#: zypp/LanguageCode.cc:506
-msgid "Fang"
-msgstr "Fang"
-
-#: zypp/LanguageCode.cc:508
-msgid "Faroese"
-msgstr "Faeroês"
-
-#: zypp/LanguageCode.cc:510
-msgid "Fanti"
-msgstr "Fanti"
-
-#: zypp/LanguageCode.cc:512
-msgid "Fijian"
-msgstr "Fijiano"
-
-#: zypp/LanguageCode.cc:514
-msgid "Filipino"
-msgstr "Filipino"
-
-#: zypp/LanguageCode.cc:516
-msgid "Finnish"
-msgstr "Finlandês"
-
-#: zypp/LanguageCode.cc:518
-msgid "Finno-Ugrian (Other)"
-msgstr "Fino-Ugriano (Outros)"
-
-#: zypp/LanguageCode.cc:520
-msgid "Fon"
-msgstr "Fon"
-
-#: zypp/LanguageCode.cc:522 zypp/LanguageCode.cc:524
-msgid "French"
-msgstr "Francês"
-
-#: zypp/LanguageCode.cc:526
-msgid "French, Middle (ca.1400-1600)"
-msgstr "Francês Medieval (aprox. 1400-1600)"
-
-#: zypp/LanguageCode.cc:528
-msgid "French, Old (842-ca.1400)"
-msgstr "Francês Antigo (842-aprox. 1400)"
-
-#: zypp/LanguageCode.cc:530
-msgid "Frisian"
-msgstr "Frísio"
-
-#: zypp/LanguageCode.cc:532
-msgid "Fulah"
-msgstr "Fula"
-
-#: zypp/LanguageCode.cc:534
-msgid "Friulian"
-msgstr "Friulano"
-
-#: zypp/LanguageCode.cc:536
-msgid "Ga"
-msgstr "Cua"
-
-#: zypp/LanguageCode.cc:538
-msgid "Gayo"
-msgstr "Gayo"
-
-#: zypp/LanguageCode.cc:540
-msgid "Gbaya"
-msgstr "Gbaia"
-
-#: zypp/LanguageCode.cc:542
-msgid "Germanic (Other)"
-msgstr "Germânico (Outros)"
-
-#: zypp/LanguageCode.cc:544 zypp/LanguageCode.cc:546
-msgid "Georgian"
-msgstr "Georgiano"
-
-#: zypp/LanguageCode.cc:548 zypp/LanguageCode.cc:550
-msgid "German"
-msgstr "Alemão"
-
-#: zypp/LanguageCode.cc:552
-msgid "Geez"
-msgstr "Ge'ez"
-
-#: zypp/LanguageCode.cc:554
-msgid "Gilbertese"
-msgstr "Gilbertês"
-
-#: zypp/LanguageCode.cc:556
-msgid "Gaelic"
-msgstr "Gaélico"
-
-#: zypp/LanguageCode.cc:558
-msgid "Irish"
-msgstr "Irlandês"
-
-#: zypp/LanguageCode.cc:560
-msgid "Galician"
-msgstr "Galego"
-
-#: zypp/LanguageCode.cc:562
-msgid "Manx"
-msgstr "Manx"
-
-#: zypp/LanguageCode.cc:564
-msgid "German, Middle High (ca.1050-1500)"
-msgstr "Alto-Alemão Medieval (aprox. 1050-1500)"
-
-#: zypp/LanguageCode.cc:566
-msgid "German, Old High (ca.750-1050)"
-msgstr "Alto-Alemão Antigo (aprox. 750-1050)"
-
-#: zypp/LanguageCode.cc:568
-msgid "Gondi"
-msgstr "Gonde"
-
-#: zypp/LanguageCode.cc:570
-msgid "Gorontalo"
-msgstr "Gorontalo"
-
-#: zypp/LanguageCode.cc:572
-msgid "Gothic"
-msgstr "Gótico"
-
-#: zypp/LanguageCode.cc:574
-msgid "Grebo"
-msgstr "Grebo"
-
-#: zypp/LanguageCode.cc:576
-msgid "Greek, Ancient (to 1453)"
-msgstr "Grego Antigo (até 1453)"
-
-#: zypp/LanguageCode.cc:578 zypp/LanguageCode.cc:580
-msgid "Greek, Modern (1453-)"
-msgstr "Grego Moderno (1453-Presente)"
-
-#: zypp/LanguageCode.cc:582
-msgid "Guarani"
-msgstr "Guarani"
-
-#: zypp/LanguageCode.cc:584
-msgid "Gujarati"
-msgstr "Gujarati"
-
-#: zypp/LanguageCode.cc:586
-msgid "Gwich'in"
-msgstr "Gwich'in"
-
-#: zypp/LanguageCode.cc:588
-msgid "Haida"
-msgstr "Haida"
-
-#: zypp/LanguageCode.cc:590
-msgid "Haitian"
-msgstr "Haitiano"
-
-#: zypp/LanguageCode.cc:592
-msgid "Hausa"
-msgstr "Hauçá"
-
-#: zypp/LanguageCode.cc:594
-msgid "Hawaiian"
-msgstr "Havaiano"
-
-#: zypp/LanguageCode.cc:596
-msgid "Hebrew"
-msgstr "Hebraico"
-
-#: zypp/LanguageCode.cc:598
-msgid "Herero"
-msgstr "Hereró"
-
-#: zypp/LanguageCode.cc:600
-msgid "Hiligaynon"
-msgstr "Hiligaynon"
-
-#: zypp/LanguageCode.cc:602
-msgid "Himachali"
-msgstr "Himachali"
-
-#: zypp/LanguageCode.cc:604
-msgid "Hindi"
-msgstr "Híndi"
-
-#: zypp/LanguageCode.cc:606
-msgid "Hittite"
-msgstr "Hitita"
-
-#: zypp/LanguageCode.cc:608
-msgid "Hmong"
-msgstr "Hmong"
-
-#: zypp/LanguageCode.cc:610
-msgid "Hiri Motu"
-msgstr "Hiri Motu"
-
-#: zypp/LanguageCode.cc:612
-msgid "Upper Sorbian"
-msgstr "Alto-Sorbiano"
-
-#: zypp/LanguageCode.cc:614
-msgid "Hungarian"
-msgstr "Húngaro"
-
-#: zypp/LanguageCode.cc:616
-msgid "Hupa"
-msgstr "Hupa"
-
-#: zypp/LanguageCode.cc:618
-msgid "Iban"
-msgstr "Iban"
-
-#: zypp/LanguageCode.cc:620
-msgid "Igbo"
-msgstr "Ibo"
-
-#: zypp/LanguageCode.cc:622 zypp/LanguageCode.cc:624
-msgid "Icelandic"
-msgstr "Islandês"
-
-#: zypp/LanguageCode.cc:626
-msgid "Ido"
-msgstr "Ido"
-
-#: zypp/LanguageCode.cc:628
-msgid "Sichuan Yi"
-msgstr "Yi (Sechuan)"
-
-#: zypp/LanguageCode.cc:630
-msgid "Ijo"
-msgstr "Ijo"
-
-#: zypp/LanguageCode.cc:632
-msgid "Inuktitut"
-msgstr "Inuktitut"
-
-#: zypp/LanguageCode.cc:634
-msgid "Interlingue"
-msgstr "Interlínguas"
-
-#: zypp/LanguageCode.cc:636
-msgid "Iloko"
-msgstr "Ilocano"
-
-#: zypp/LanguageCode.cc:638
-msgid "Interlingua (International Auxiliary Language Association)"
-msgstr ""
-"Interlíngua (International Auxiliary Language Association, Associação de "
-"Línguas Internacionais Auxiliares)"
-
-#: zypp/LanguageCode.cc:640
-msgid "Indic (Other)"
-msgstr "Índico (Outros)"
-
-#: zypp/LanguageCode.cc:642
-msgid "Indonesian"
-msgstr "Indonésio"
-
-#: zypp/LanguageCode.cc:644
-msgid "Indo-European (Other)"
-msgstr "Indo-Europeu (Outros)"
-
-#: zypp/LanguageCode.cc:646
-msgid "Ingush"
-msgstr "Ingush"
-
-#: zypp/LanguageCode.cc:648
-msgid "Inupiaq"
-msgstr "Inupiaq"
-
-#: zypp/LanguageCode.cc:650
-msgid "Iranian (Other)"
-msgstr "Iraniano (Outros)"
-
-#: zypp/LanguageCode.cc:652
-msgid "Iroquoian languages"
-msgstr "Línguas Iroquesas"
-
-#: zypp/LanguageCode.cc:654
-msgid "Italian"
-msgstr "Italiano"
-
-#: zypp/LanguageCode.cc:656
-msgid "Javanese"
-msgstr "Javanês"
-
-#: zypp/LanguageCode.cc:658
-msgid "Lojban"
-msgstr "Lojban"
-
-#: zypp/LanguageCode.cc:660
-msgid "Japanese"
-msgstr "Japonês"
-
-#: zypp/LanguageCode.cc:662
-msgid "Judeo-Persian"
-msgstr "Judeo-Persa"
-
-#: zypp/LanguageCode.cc:664
-msgid "Judeo-Arabic"
-msgstr "Judeo-Arábico"
-
-#: zypp/LanguageCode.cc:666
-msgid "Kara-Kalpak"
-msgstr "Karakalpak"
-
-#: zypp/LanguageCode.cc:668
-msgid "Kabyle"
-msgstr "Kabyle"
-
-#: zypp/LanguageCode.cc:670
-msgid "Kachin"
-msgstr "Kachin"
-
-#: zypp/LanguageCode.cc:672
-msgid "Kalaallisut"
-msgstr "Kalaallisut"
-
-#: zypp/LanguageCode.cc:674
-msgid "Kamba"
-msgstr "Camba"
-
-#: zypp/LanguageCode.cc:676
-msgid "Kannada"
-msgstr "Canarês"
-
-#: zypp/LanguageCode.cc:678
-msgid "Karen"
-msgstr "Karen"
-
-#: zypp/LanguageCode.cc:680
-msgid "Kashmiri"
-msgstr "Caxemira"
-
-#: zypp/LanguageCode.cc:682
-msgid "Kanuri"
-msgstr "Canúri"
-
-#: zypp/LanguageCode.cc:684
-msgid "Kawi"
-msgstr "Kawi"
-
-#: zypp/LanguageCode.cc:686
-msgid "Kazakh"
-msgstr "Cazaque"
-
-#: zypp/LanguageCode.cc:688
-msgid "Kabardian"
-msgstr "Cabardíaco"
-
-#: zypp/LanguageCode.cc:690
-msgid "Khasi"
-msgstr "Khasi"
-
-#: zypp/LanguageCode.cc:692
-msgid "Khoisan (Other)"
-msgstr "Khoisan (Outros)"
-
-#: zypp/LanguageCode.cc:694
-msgid "Khmer"
-msgstr "Khmer"
-
-#: zypp/LanguageCode.cc:696
-msgid "Khotanese"
-msgstr "Cotanês"
-
-#: zypp/LanguageCode.cc:698
-msgid "Kikuyu"
-msgstr "Kikuyu"
-
-#: zypp/LanguageCode.cc:700
-msgid "Kinyarwanda"
-msgstr "Kinyarwanda"
-
-#: zypp/LanguageCode.cc:702
-msgid "Kirghiz"
-msgstr "Quirguiz"
-
-#: zypp/LanguageCode.cc:704
-msgid "Kimbundu"
-msgstr "Quimbundo"
-
-#: zypp/LanguageCode.cc:706
-msgid "Konkani"
-msgstr "Concani"
-
-#: zypp/LanguageCode.cc:708
-msgid "Komi"
-msgstr "Komi"
-
-#: zypp/LanguageCode.cc:710
-msgid "Kongo"
-msgstr "Congo"
-
-#: zypp/LanguageCode.cc:712
-msgid "Korean"
-msgstr "Coreano"
-
-#: zypp/LanguageCode.cc:714
-msgid "Kosraean"
-msgstr "Cosreano"
-
-#: zypp/LanguageCode.cc:716
-msgid "Kpelle"
-msgstr "Kpelle"
-
-#: zypp/LanguageCode.cc:718
-msgid "Karachay-Balkar"
-msgstr "Karachay-Balkar"
-
-#: zypp/LanguageCode.cc:720
-msgid "Kru"
-msgstr "Kru"
-
-#: zypp/LanguageCode.cc:722
-msgid "Kurukh"
-msgstr "Kurukh"
-
-#: zypp/LanguageCode.cc:724
-msgid "Kuanyama"
-msgstr "Kuanyama"
-
-#: zypp/LanguageCode.cc:726
-msgid "Kumyk"
-msgstr "Kumyk"
-
-#: zypp/LanguageCode.cc:728
-msgid "Kurdish"
-msgstr "Curdo"
-
-#: zypp/LanguageCode.cc:730
-msgid "Kutenai"
-msgstr "Kutenai"
-
-#: zypp/LanguageCode.cc:732
-msgid "Ladino"
-msgstr "Ladino"
-
-#: zypp/LanguageCode.cc:734
-msgid "Lahnda"
-msgstr "Lahnda"
-
-#: zypp/LanguageCode.cc:736
-msgid "Lamba"
-msgstr "Lamba"
-
-#: zypp/LanguageCode.cc:738
-msgid "Lao"
-msgstr "Laosiano"
-
-#: zypp/LanguageCode.cc:740
-msgid "Latin"
-msgstr "Latim"
-
-#: zypp/LanguageCode.cc:742
-msgid "Latvian"
-msgstr "Letão"
-
-#: zypp/LanguageCode.cc:744
-msgid "Lezghian"
-msgstr "Lezghian"
-
-#: zypp/LanguageCode.cc:746
-msgid "Limburgan"
-msgstr "Limburgano"
-
-#: zypp/LanguageCode.cc:748
-msgid "Lingala"
-msgstr "Lingala"
-
-#: zypp/LanguageCode.cc:750
-msgid "Lithuanian"
-msgstr "Lituano"
-
-#: zypp/LanguageCode.cc:752
-msgid "Mongo"
-msgstr "Mongo"
-
-#: zypp/LanguageCode.cc:754
-msgid "Lozi"
-msgstr "Lozi"
-
-#: zypp/LanguageCode.cc:756
-msgid "Luxembourgish"
-msgstr "Luxemburguês"
-
-#: zypp/LanguageCode.cc:758
-msgid "Luba-Lulua"
-msgstr "Luba-Lulua"
-
-#: zypp/LanguageCode.cc:760
-msgid "Luba-Katanga"
-msgstr "Luba-Katanga"
-
-#: zypp/LanguageCode.cc:762
-msgid "Ganda"
-msgstr "Nganda"
-
-#: zypp/LanguageCode.cc:764
-msgid "Luiseno"
-msgstr "Luiseno"
-
-#: zypp/LanguageCode.cc:766
-msgid "Lunda"
-msgstr "Lundês"
-
-#: zypp/LanguageCode.cc:768
-msgid "Luo (Kenya and Tanzania)"
-msgstr "Luo (Quênia e Tanzânia)"
-
-#: zypp/LanguageCode.cc:770
-msgid "lushai"
-msgstr "Lushai"
-
-#: zypp/LanguageCode.cc:772 zypp/LanguageCode.cc:774
-msgid "Macedonian"
-msgstr "Macedônio"
-
-#: zypp/LanguageCode.cc:776
-msgid "Madurese"
-msgstr "Madurês"
-
-#: zypp/LanguageCode.cc:778
-msgid "Magahi"
-msgstr "Magahi"
-
-#: zypp/LanguageCode.cc:780
-msgid "Marshallese"
-msgstr "Marshallino"
-
-#: zypp/LanguageCode.cc:782
-msgid "Maithili"
-msgstr "Maithili"
-
-#: zypp/LanguageCode.cc:784
-msgid "Makasar"
-msgstr "Makasar"
-
-#: zypp/LanguageCode.cc:786
-msgid "Malayalam"
-msgstr "Malaiala"
-
-#: zypp/LanguageCode.cc:788
-msgid "Mandingo"
-msgstr "Mandinga"
-
-#: zypp/LanguageCode.cc:790 zypp/LanguageCode.cc:792
-msgid "Maori"
-msgstr "Maori"
-
-#: zypp/LanguageCode.cc:794
-msgid "Austronesian (Other)"
-msgstr "Austronésio (Outros)"
-
-#: zypp/LanguageCode.cc:796
-msgid "Marathi"
-msgstr "Marata"
-
-#: zypp/LanguageCode.cc:798
-msgid "Masai"
-msgstr "Massai"
-
-#: zypp/LanguageCode.cc:800 zypp/LanguageCode.cc:802
-msgid "Malay"
-msgstr "Malaio"
-
-#: zypp/LanguageCode.cc:804
-msgid "Moksha"
-msgstr "Moksha"
-
-#: zypp/LanguageCode.cc:806
-msgid "Mandar"
-msgstr "Mandar"
-
-#: zypp/LanguageCode.cc:808
-msgid "Mende"
-msgstr "Mende"
-
-#: zypp/LanguageCode.cc:810
-msgid "Irish, Middle (900-1200)"
-msgstr "Irlandês Medieval (900-1200)"
-
-#: zypp/LanguageCode.cc:812
-msgid "Mi'kmaq"
-msgstr "Mi'kmaq"
-
-#: zypp/LanguageCode.cc:814
-msgid "Minangkabau"
-msgstr "Minangkabau"
-
-#: zypp/LanguageCode.cc:816
-msgid "Miscellaneous languages"
-msgstr "Idiomas Diversos"
-
-#: zypp/LanguageCode.cc:818
-msgid "Mon-Khmer (Other)"
-msgstr "Mon-Khmer (Outros)"
-
-#: zypp/LanguageCode.cc:820
-msgid "Malagasy"
-msgstr "Malgaxe"
-
-#: zypp/LanguageCode.cc:822
-msgid "Maltese"
-msgstr "Maltês"
-
-#: zypp/LanguageCode.cc:824
-msgid "Manchu"
-msgstr "Manchu"
-
-#: zypp/LanguageCode.cc:826
-msgid "Manipuri"
-msgstr "Manipuri"
-
-#: zypp/LanguageCode.cc:828
-msgid "Manobo languages"
-msgstr "Línguas Manobo"
-
-#: zypp/LanguageCode.cc:830
-msgid "Mohawk"
-msgstr "Mohawk"
-
-#: zypp/LanguageCode.cc:832
-msgid "Moldavian"
-msgstr "Moldávio"
-
-#: zypp/LanguageCode.cc:834
-msgid "Mongolian"
-msgstr "Mongol"
-
-#: zypp/LanguageCode.cc:836
-msgid "Mossi"
-msgstr "Mossi"
-
-#: zypp/LanguageCode.cc:838
-msgid "Multiple languages"
-msgstr "Vários Idiomas"
-
-#: zypp/LanguageCode.cc:840
-msgid "Munda languages"
-msgstr "Línguas Mundas"
-
-#: zypp/LanguageCode.cc:842
-msgid "Creek"
-msgstr "Creek"
-
-#: zypp/LanguageCode.cc:844
-msgid "Mirandese"
-msgstr "Mirandês"
-
-#: zypp/LanguageCode.cc:846
-msgid "Marwari"
-msgstr "Marwari"
-
-#: zypp/LanguageCode.cc:848
-msgid "Mayan languages"
-msgstr "Línguas Maias"
-
-#: zypp/LanguageCode.cc:850
-msgid "Erzya"
-msgstr "Erzya"
-
-#: zypp/LanguageCode.cc:852
-msgid "Nahuatl"
-msgstr "Nahuatl"
-
-#: zypp/LanguageCode.cc:854
-msgid "North American Indian"
-msgstr "Indígena Norte-Americano"
-
-#: zypp/LanguageCode.cc:856
-msgid "Neapolitan"
-msgstr "Napolitano"
-
-#: zypp/LanguageCode.cc:858 zypp/CountryCode.cc:380
-msgid "Nauru"
-msgstr "Nauruano"
-
-#: zypp/LanguageCode.cc:860
-msgid "Navajo"
-msgstr "Navajo"
-
-#: zypp/LanguageCode.cc:862
-msgid "Ndebele, South"
-msgstr "Ndebele (Sul)"
-
-#: zypp/LanguageCode.cc:864
-msgid "Ndebele, North"
-msgstr "Ndebele (Norte)"
-
-#: zypp/LanguageCode.cc:866
-msgid "Ndonga"
-msgstr "Ndomba"
-
-#: zypp/LanguageCode.cc:868
-msgid "Low German"
-msgstr "Baixo-Alemão"
-
-#: zypp/LanguageCode.cc:870
-msgid "Nepali"
-msgstr "Nepali"
-
-#: zypp/LanguageCode.cc:872
-msgid "Nepal Bhasa"
-msgstr "Bhasa (Nepal)"
-
-#: zypp/LanguageCode.cc:874
-msgid "Nias"
-msgstr "Nias"
-
-#: zypp/LanguageCode.cc:876
-msgid "Niger-Kordofanian (Other)"
-msgstr "Nigero-Cordofânio (Outros)"
-
-#: zypp/LanguageCode.cc:878
-msgid "Niuean"
-msgstr "Niueano"
-
-#: zypp/LanguageCode.cc:880
-msgid "Norwegian Nynorsk"
-msgstr "Neonorueguês"
-
-#: zypp/LanguageCode.cc:882
-msgid "Norwegian Bokmal"
-msgstr "Bokmal (Noruega)"
-
-#: zypp/LanguageCode.cc:884
-msgid "Nogai"
-msgstr "Nogai"
-
-#: zypp/LanguageCode.cc:886
-msgid "Norse, Old"
-msgstr "Norueguês Antigo"
-
-#: zypp/LanguageCode.cc:888
-msgid "Norwegian"
-msgstr "Norueguês"
-
-#: zypp/LanguageCode.cc:890
-msgid "Northern Sotho"
-msgstr "Sotho (Setentrional)"
-
-#: zypp/LanguageCode.cc:892
-msgid "Nubian languages"
-msgstr "Línguas Núbias"
-
-#: zypp/LanguageCode.cc:894
-msgid "Classical Newari"
-msgstr "Newari Clássico"
-
-#: zypp/LanguageCode.cc:896
-msgid "Chichewa"
-msgstr "Chichewa"
-
-#: zypp/LanguageCode.cc:898
-msgid "Nyamwezi"
-msgstr "Nyamwezi"
-
-#: zypp/LanguageCode.cc:900
-msgid "Nyankole"
-msgstr "Nyankole"
-
-#: zypp/LanguageCode.cc:902
-msgid "Nyoro"
-msgstr "Nyoro"
-
-#: zypp/LanguageCode.cc:904
-msgid "Nzima"
-msgstr "Nzima"
-
-#: zypp/LanguageCode.cc:906
-msgid "Occitan (post 1500)"
-msgstr "Occitano (após 1500)"
-
-#: zypp/LanguageCode.cc:908
-msgid "Ojibwa"
-msgstr "Ojíbua"
-
-#: zypp/LanguageCode.cc:910
-msgid "Oriya"
-msgstr "Oriá"
-
-#: zypp/LanguageCode.cc:912
-msgid "Oromo"
-msgstr "Oromo"
-
-#: zypp/LanguageCode.cc:914
-msgid "Osage"
-msgstr "Osage"
-
-#: zypp/LanguageCode.cc:916
-msgid "Ossetian"
-msgstr "Osseta"
-
-#: zypp/LanguageCode.cc:918
-msgid "Turkish, Ottoman (1500-1928)"
-msgstr "Turco Otomano (1500-1928)"
-
-#: zypp/LanguageCode.cc:920
-msgid "Otomian languages"
-msgstr "Línguas Otomianas"
-
-#: zypp/LanguageCode.cc:922
-msgid "Papuan (Other)"
-msgstr "Papua (Outros)"
-
-#: zypp/LanguageCode.cc:924
-msgid "Pangasinan"
-msgstr "Pangasinano"
-
-#: zypp/LanguageCode.cc:926
-msgid "Pahlavi"
-msgstr "Pahlavi"
-
-#: zypp/LanguageCode.cc:928
-msgid "Pampanga"
-msgstr "Pampanga"
-
-#: zypp/LanguageCode.cc:930
-msgid "Panjabi"
-msgstr "Panjabi"
-
-#: zypp/LanguageCode.cc:932
-msgid "Papiamento"
-msgstr "Papiamento"
-
-#: zypp/LanguageCode.cc:934
-msgid "Palauan"
-msgstr "Palauano"
-
-#: zypp/LanguageCode.cc:936
-msgid "Persian, Old (ca.600-400 B.C.)"
-msgstr "Persa Antigo (aprox. 600-400 A.C.)"
-
-#: zypp/LanguageCode.cc:938 zypp/LanguageCode.cc:940
-msgid "Persian"
-msgstr "Persa"
-
-#: zypp/LanguageCode.cc:942
-msgid "Philippine (Other)"
-msgstr "Filipino (Outros)"
-
-#: zypp/LanguageCode.cc:944
-msgid "Phoenician"
-msgstr "Fenício"
-
-#: zypp/LanguageCode.cc:946
-msgid "Pali"
-msgstr "Páli"
-
-#: zypp/LanguageCode.cc:948
-msgid "Polish"
-msgstr "Polonês"
-
-#: zypp/LanguageCode.cc:950
-msgid "Pohnpeian"
-msgstr "Pompeano"
-
-#: zypp/LanguageCode.cc:952
-msgid "Portuguese"
-msgstr "Português"
-
-#: zypp/LanguageCode.cc:954
-msgid "Prakrit languages"
-msgstr "Línguas Prácritas"
-
-#: zypp/LanguageCode.cc:956
-msgid "Provencal, Old (to 1500)"
-msgstr "Provençal Antigo (até 1500)"
-
-#: zypp/LanguageCode.cc:958
-msgid "Pushto"
-msgstr "Pushtu"
-
-#: zypp/LanguageCode.cc:960
-msgid "Quechua"
-msgstr "Quíchua"
-
-#: zypp/LanguageCode.cc:962
-msgid "Rajasthani"
-msgstr "Rajastanês"
-
-#: zypp/LanguageCode.cc:964
-msgid "Rapanui"
-msgstr "Rapa Nui"
-
-#: zypp/LanguageCode.cc:966
-msgid "Rarotongan"
-msgstr "Rarotonganês"
-
-#: zypp/LanguageCode.cc:968
-msgid "Romance (Other)"
-msgstr "Romance (Outros)"
-
-#: zypp/LanguageCode.cc:970
-msgid "Raeto-Romance"
-msgstr "Reto-Romano"
-
-#: zypp/LanguageCode.cc:972
-msgid "Romany"
-msgstr "Romani"
-
-#: zypp/LanguageCode.cc:974 zypp/LanguageCode.cc:976
-msgid "Romanian"
-msgstr "Romeno"
-
-#: zypp/LanguageCode.cc:978
-msgid "Rundi"
-msgstr "Rundi"
-
-#: zypp/LanguageCode.cc:980
-msgid "Russian"
-msgstr "Russo"
-
-#: zypp/LanguageCode.cc:982
-msgid "Sandawe"
-msgstr "Sandawe"
-
-#: zypp/LanguageCode.cc:984
-msgid "Sango"
-msgstr "Sango"
-
-#: zypp/LanguageCode.cc:986
-msgid "Yakut"
-msgstr "Iacuto"
-
-#: zypp/LanguageCode.cc:988
-msgid "South American Indian (Other)"
-msgstr "Indígena Sul-Americano (Outro)"
-
-#: zypp/LanguageCode.cc:990
-msgid "Salishan languages"
-msgstr "Línguas Salichanas"
-
-#: zypp/LanguageCode.cc:992
-msgid "Samaritan Aramaic"
-msgstr "Aramaico Samaritano"
-
-#: zypp/LanguageCode.cc:994
-msgid "Sanskrit"
-msgstr "Sânscrito"
-
-#: zypp/LanguageCode.cc:996
-msgid "Sasak"
-msgstr "Sasak"
-
-#: zypp/LanguageCode.cc:998
-msgid "Santali"
-msgstr "Santali"
-
-#: zypp/LanguageCode.cc:1000 zypp/LanguageCode.cc:1002
-msgid "Serbian"
-msgstr "Sérvio"
-
-#: zypp/LanguageCode.cc:1004
-msgid "Sicilian"
-msgstr "Siciliano"
-
-#: zypp/LanguageCode.cc:1006
-msgid "Scots"
-msgstr "Escocês"
-
-#: zypp/LanguageCode.cc:1008 zypp/LanguageCode.cc:1010
-msgid "Croatian"
-msgstr "Croata"
-
-#: zypp/LanguageCode.cc:1012
-msgid "Selkup"
-msgstr "Selkup"
-
-#: zypp/LanguageCode.cc:1014
-msgid "Semitic (Other)"
-msgstr "Semita (Outros)"
-
-#: zypp/LanguageCode.cc:1016
-msgid "Irish, Old (to 900)"
-msgstr "Irlandês Antigo (até 900)"
-
-#: zypp/LanguageCode.cc:1018
-msgid "Sign Languages"
-msgstr "Linguagens de Sinais"
-
-#: zypp/LanguageCode.cc:1020
-msgid "Shan"
-msgstr "Shan"
-
-#: zypp/LanguageCode.cc:1022
-msgid "Sidamo"
-msgstr "Sidamo"
-
-#: zypp/LanguageCode.cc:1024
-msgid "Sinhala"
-msgstr "Sinhala"
-
-#: zypp/LanguageCode.cc:1026
-msgid "Siouan languages"
-msgstr "Línguas Sioux"
-
-#: zypp/LanguageCode.cc:1028
-msgid "Sino-Tibetan (Other)"
-msgstr "Sino-Tibetano (Outros)"
-
-#: zypp/LanguageCode.cc:1030
-msgid "Slavic (Other)"
-msgstr "Eslavo (Outros)"
-
-#: zypp/LanguageCode.cc:1032 zypp/LanguageCode.cc:1034
-msgid "Slovak"
-msgstr "Eslovaco"
-
-#: zypp/LanguageCode.cc:1036
-msgid "Slovenian"
-msgstr "Esloveno"
-
-#: zypp/LanguageCode.cc:1038
-msgid "Southern Sami"
-msgstr "Lapão Meridional"
-
-#: zypp/LanguageCode.cc:1040
-msgid "Northern Sami"
-msgstr "Lapão Setentrional"
-
-#: zypp/LanguageCode.cc:1042
-msgid "Sami languages (Other)"
-msgstr "Línguas Lapônias (Outros)"
-
-#: zypp/LanguageCode.cc:1044
-msgid "Lule Sami"
-msgstr "Lapão (Lule)"
-
-#: zypp/LanguageCode.cc:1046
-msgid "Inari Sami"
-msgstr "Lapão (Inari)"
-
-#: zypp/LanguageCode.cc:1048
-msgid "Samoan"
-msgstr "Samoano"
-
-#: zypp/LanguageCode.cc:1050
-msgid "Skolt Sami"
-msgstr "Lapão (Skolt)"
-
-#: zypp/LanguageCode.cc:1052
-msgid "Shona"
-msgstr "Chishona"
-
-#: zypp/LanguageCode.cc:1054
-msgid "Sindhi"
-msgstr "Sindi"
-
-#: zypp/LanguageCode.cc:1056
-msgid "Soninke"
-msgstr "Soninquê"
-
-#: zypp/LanguageCode.cc:1058
-msgid "Sogdian"
-msgstr "Sogdian"
-
-#: zypp/LanguageCode.cc:1060
-msgid "Somali"
-msgstr "Somali"
-
-#: zypp/LanguageCode.cc:1062
-msgid "Songhai"
-msgstr "Songhai"
-
-#: zypp/LanguageCode.cc:1064
-msgid "Sotho, Southern"
-msgstr "Sotho (Meridional)"
-
-#: zypp/LanguageCode.cc:1066
-msgid "Spanish"
-msgstr "Espanhol"
-
-#: zypp/LanguageCode.cc:1068
-msgid "Sardinian"
-msgstr "Sardo"
-
-#: zypp/LanguageCode.cc:1070
-msgid "Serer"
-msgstr "Serer"
-
-#: zypp/LanguageCode.cc:1072
-msgid "Nilo-Saharan (Other)"
-msgstr "Nilo-Saariano (Outros)"
-
-#: zypp/LanguageCode.cc:1074
-msgid "Swati"
-msgstr "Swati"
-
-#: zypp/LanguageCode.cc:1076
-msgid "Sukuma"
-msgstr "Sukuma"
-
-#: zypp/LanguageCode.cc:1078
-msgid "Sundanese"
-msgstr "Sundanês"
-
-#: zypp/LanguageCode.cc:1080
-msgid "Susu"
-msgstr "Susu"
-
-#: zypp/LanguageCode.cc:1082
-msgid "Sumerian"
-msgstr "Sumério"
-
-#: zypp/LanguageCode.cc:1084
-msgid "Swahili"
-msgstr "Suaíli"
-
-#: zypp/LanguageCode.cc:1086
-msgid "Swedish"
-msgstr "Sueco"
-
-#: zypp/LanguageCode.cc:1088
-msgid "Syriac"
-msgstr "Siríaco"
-
-#: zypp/LanguageCode.cc:1090
-msgid "Tahitian"
-msgstr "Taitiano"
-
-#: zypp/LanguageCode.cc:1092
-msgid "Tai (Other)"
-msgstr "Tai (Outros)"
-
-#: zypp/LanguageCode.cc:1094
-msgid "Tamil"
-msgstr "Tâmil"
-
-#: zypp/LanguageCode.cc:1096
-msgid "Tatar"
-msgstr "Tártaro"
-
-#: zypp/LanguageCode.cc:1098
-msgid "Telugu"
-msgstr "Télugo"
-
-#: zypp/LanguageCode.cc:1100
-msgid "Timne"
-msgstr "Temne"
-
-#: zypp/LanguageCode.cc:1102
-msgid "Tereno"
-msgstr "Tereno"
-
-#: zypp/LanguageCode.cc:1104
-msgid "Tetum"
-msgstr "Tétum"
-
-#: zypp/LanguageCode.cc:1106
-msgid "Tajik"
-msgstr "Tadjique"
-
-#: zypp/LanguageCode.cc:1108
-msgid "Tagalog"
-msgstr "Tagalo"
-
-#: zypp/LanguageCode.cc:1110
-msgid "Thai"
-msgstr "Tai"
-
-#: zypp/LanguageCode.cc:1112 zypp/LanguageCode.cc:1114
-msgid "Tibetan"
-msgstr "Tibetano"
-
-#: zypp/LanguageCode.cc:1116
-msgid "Tigre"
-msgstr "Tigré"
-
-#: zypp/LanguageCode.cc:1118
-msgid "Tigrinya"
-msgstr "Tigrínia"
-
-#: zypp/LanguageCode.cc:1120
-msgid "Tiv"
-msgstr "Tiv"
-
-#: zypp/LanguageCode.cc:1122 zypp/CountryCode.cc:428
-msgid "Tokelau"
-msgstr "Tokelau"
-
-#: zypp/LanguageCode.cc:1124
-msgid "Klingon"
-msgstr "Klingon"
-
-#: zypp/LanguageCode.cc:1126
-msgid "Tlingit"
-msgstr "Tlingit"
-
-#: zypp/LanguageCode.cc:1128
-msgid "Tamashek"
-msgstr "Tuaregue"
-
-#: zypp/LanguageCode.cc:1130
-msgid "Tonga (Nyasa)"
-msgstr "Tonganês (Nyasa)"
-
-#: zypp/LanguageCode.cc:1132
-msgid "Tonga (Tonga Islands)"
-msgstr "Tonganês (Ilhas Tonga)"
-
-#: zypp/LanguageCode.cc:1134
-msgid "Tok Pisin"
-msgstr "Tok Pisin"
-
-#: zypp/LanguageCode.cc:1136
-msgid "Tsimshian"
-msgstr "Tsimshian"
-
-#: zypp/LanguageCode.cc:1138
-msgid "Tswana"
-msgstr "Setswana"
-
-#: zypp/LanguageCode.cc:1140
-msgid "Tsonga"
-msgstr "Tsonga"
-
-#: zypp/LanguageCode.cc:1142
-msgid "Turkmen"
-msgstr "Turcomeno"
-
-#: zypp/LanguageCode.cc:1144
-msgid "Tumbuka"
-msgstr "Tumbuka"
-
-#: zypp/LanguageCode.cc:1146
-msgid "Tupi languages"
-msgstr "Línguas Tupis"
-
-#: zypp/LanguageCode.cc:1148
-msgid "Turkish"
-msgstr "Turco"
-
-#: zypp/LanguageCode.cc:1150
-msgid "Altaic (Other)"
-msgstr "Altaico (Outros)"
-
-#: zypp/LanguageCode.cc:1152 zypp/CountryCode.cc:435
-msgid "Tuvalu"
-msgstr "Tuvaluano"
-
-#: zypp/LanguageCode.cc:1154
-msgid "Twi"
-msgstr "Twi"
-
-#: zypp/LanguageCode.cc:1156
-msgid "Tuvinian"
-msgstr "Tuviniano"
-
-#: zypp/LanguageCode.cc:1158
-msgid "Udmurt"
-msgstr "Udmurt"
-
-#: zypp/LanguageCode.cc:1160
-msgid "Ugaritic"
-msgstr "Ugarítico"
-
-#: zypp/LanguageCode.cc:1162
-msgid "Uighur"
-msgstr "Uigur"
-
-#: zypp/LanguageCode.cc:1164
-msgid "Ukrainian"
-msgstr "Ucraniano"
-
-#: zypp/LanguageCode.cc:1166
-msgid "Umbundu"
-msgstr "Umbundo"
-
-#: zypp/LanguageCode.cc:1168
-msgid "Undetermined"
-msgstr "Indeterminado"
-
-#: zypp/LanguageCode.cc:1170
-msgid "Urdu"
-msgstr "Urdu"
-
-#: zypp/LanguageCode.cc:1172
-msgid "Uzbek"
-msgstr "Uzbeque"
-
-#: zypp/LanguageCode.cc:1174
-msgid "Vai"
-msgstr "Vai"
-
-#: zypp/LanguageCode.cc:1176
-msgid "Venda"
-msgstr "Venda"
-
-#: zypp/LanguageCode.cc:1178
-msgid "Vietnamese"
-msgstr "Vietnamita"
-
-#: zypp/LanguageCode.cc:1180
-msgid "Volapuk"
-msgstr "Volapük"
-
-#: zypp/LanguageCode.cc:1182
-msgid "Votic"
-msgstr "Vótico"
-
-#: zypp/LanguageCode.cc:1184
-msgid "Wakashan languages"
-msgstr "Línguas Wakashan"
-
-#: zypp/LanguageCode.cc:1186
-msgid "Walamo"
-msgstr "Walamo"
-
-#: zypp/LanguageCode.cc:1188
-msgid "Waray"
-msgstr "Waray"
-
-#: zypp/LanguageCode.cc:1190
-msgid "Washo"
-msgstr "Washo"
-
-#: zypp/LanguageCode.cc:1192 zypp/LanguageCode.cc:1194
-msgid "Welsh"
-msgstr "Galês"
-
-#: zypp/LanguageCode.cc:1196
-msgid "Sorbian languages"
-msgstr "Línguas Sorbianas"
-
-#: zypp/LanguageCode.cc:1198
-msgid "Walloon"
-msgstr "Valão"
-
-#: zypp/LanguageCode.cc:1200
-msgid "Wolof"
-msgstr "Wolof"
-
-#: zypp/LanguageCode.cc:1202
-msgid "Kalmyk"
-msgstr "Kalmyk"
-
-#: zypp/LanguageCode.cc:1204
-msgid "Xhosa"
-msgstr "Xosa"
-
-#: zypp/LanguageCode.cc:1206
-msgid "Yao"
-msgstr "Iao"
-
-#: zypp/LanguageCode.cc:1208
-msgid "Yapese"
-msgstr "Iapês"
-
-#: zypp/LanguageCode.cc:1210
-msgid "Yiddish"
-msgstr "Iídiche"
-
-#: zypp/LanguageCode.cc:1212
-msgid "Yoruba"
-msgstr "Iorubá"
-
-#: zypp/LanguageCode.cc:1214
-msgid "Yupik languages"
-msgstr "Línguas Yupik"
-
-#: zypp/LanguageCode.cc:1216
-msgid "Zapotec"
-msgstr "Zapoteca"
-
-#: zypp/LanguageCode.cc:1218
-msgid "Zenaga"
-msgstr "Zenaga"
-
-#: zypp/LanguageCode.cc:1220
-msgid "Zhuang"
-msgstr "Zhuang"
-
-#: zypp/LanguageCode.cc:1222
-msgid "Zande"
-msgstr "Zande"
-
-#: zypp/LanguageCode.cc:1224
-msgid "Zulu"
-msgstr "Zulu"
-
-#: zypp/LanguageCode.cc:1226
-msgid "Zuni"
-msgstr "Zunhi"
-
-#: zypp/ZYppFactory.cc:271 zypp/ZYppFactory.cc:326
-msgid "Cannot aquire zypp lock."
-msgstr ""
-
-#: zypp/target/rpm/RpmDb.cc:1824
+#: solver/detail/ProblemSolutionIgnore.cc:54
+msgid "Ignore this requirement just here"
+msgstr "Ignorar este requisito apenas aqui"
+
+#: solver/detail/ProblemSolutionIgnore.cc:63
+msgid "Ignore this requirement generally"
+msgstr "Ignorar este requisito genericamente"
+
+#. TranslatorExplanation %s = name of package, patch, selection ...
+#: solver/detail/ProblemSolutionIgnore.cc:75
 #, c-format
-msgid "Changed configuration files for %s:"
-msgstr "Arquivos de configuração alterados para %s:"
+msgid "Install %s although it would change the architecture"
+msgstr "Instalar %s apesar de ele mudar a arquitetura"
 
-#: zypp/target/rpm/RpmDb.cc:1977
+#. TranslatorExplanation %s = name of package, patch, selection ...
+#: solver/detail/ProblemSolutionIgnore.cc:78
 #, c-format
-msgid "rpm saved %s as %s but it was impossible to determine the difference"
-msgstr "rpm gravou %s como %s, mas não foi possível determinar a diferença"
+msgid "%s provides this dependency but would changed the architecture of the installed item"
+msgstr "%s fornece esta dependência, porém mudaria a arquitetura do item instalado"
 
-#: zypp/target/rpm/RpmDb.cc:1979
+#. TranslatorExplanation %s = name of package, patch, selection ...
+#: solver/detail/ProblemSolutionIgnore.cc:90
+#: solver/detail/ProblemSolutionIgnore.cc:102
 #, c-format
-msgid ""
-"rpm saved %s as %s.\n"
-"Here are the first 25 lines of difference:\n"
-msgstr ""
-"rpm gravou %s como %s.\n"
-"Aqui estão as 25 primeiras linhas de diferença:\n"
+msgid "Ignore this conflict of %s"
+msgstr "Ignorar este conflito de %s"
 
-#: zypp/target/rpm/RpmDb.cc:1982
+#. TranslatorExplanation %s = name of package, patch, selection ...
+#: solver/detail/ProblemSolutionIgnore.cc:117
 #, c-format
-msgid "rpm created %s as %s but it was impossible to determine the difference"
-msgstr "rpm criou %s como %s, mas não foi possível determinar a diferença"
+msgid "Ignore the obsolete %s in %s"
+msgstr "Ignorar o(s) %s obsoleto(s) de %s"
 
-#: zypp/target/rpm/RpmDb.cc:1984
+#. TranslatorExplanation %s = name of package, patch, selection ...
+#: solver/detail/ProblemSolutionIgnore.cc:130
 #, c-format
-msgid ""
-"rpm created %s as %s.\n"
-"Here are the first 25 lines of difference:\n"
-msgstr ""
-"rpm criou %s como %s.\n"
-"Aqui estão as 25 primeiras linhas de diferença:\n"
+msgid "Ignore that %s is already set to install"
+msgstr "Ignorar que %s já está definido para instalação"
 
-#: zypp/target/rpm/RpmDb.cc:1989
+#. TranslatorExplanation %s = name of package, patch, selection ...
+#: solver/detail/ProblemSolutionInstall.cc:54
+#: solver/detail/ProblemSolutionInstall.cc:56
 #, c-format
-msgid "%s install failed"
-msgstr "Falha na instalação de %s"
+msgid "install %s"
+msgstr "instalar %s"
 
-#: zypp/target/rpm/RpmDb.cc:1990 zypp/target/rpm/RpmDb.cc:2098
-msgid "rpm output:"
-msgstr "saída de rpm:"
+#: solver/detail/ProblemSolutionInstall.cc:66
+msgid "Install missing resolvables"
+msgstr "Instalar resolvíveis ausentes"
 
-#: zypp/target/rpm/RpmDb.cc:1994
+#. TranslatorExplanation %s = name of package, patch, selection ...
+#: solver/detail/ProblemSolutionKeep.cc:53
+#: solver/detail/ProblemSolutionKeep.cc:55
 #, c-format
-msgid "%s installed ok"
-msgstr "%s instalado com êxito"
+msgid "keep %s"
+msgstr "manter %s"
 
-#: zypp/target/rpm/RpmDb.cc:1996 zypp/target/rpm/RpmDb.cc:2103
-msgid "Additional rpm output:"
-msgstr "Saída de rpm adicional:"
+#: solver/detail/ProblemSolutionKeep.cc:65
+msgid "Keep resolvables"
+msgstr "Manter resolvíveis"
 
-#: zypp/target/rpm/RpmDb.cc:2097
+#. TranslatorExplanation %s = name of package, patch, selection ...
+#: solver/detail/ProblemSolutionUninstall.cc:64
+#: solver/detail/ProblemSolutionUninstall.cc:66
+#: solver/detail/Resolver_problems.cc:408
+#: solver/detail/Resolver_problems.cc:418
 #, c-format
-msgid "%s remove failed"
-msgstr "Falha na remoção de %s"
+msgid "delete %s"
+msgstr "apagar %s"
 
-#: zypp/target/rpm/RpmDb.cc:2101
+#. TranslatorExplanation %s = name of package, patch, selection ...
+#: solver/detail/ProblemSolutionUninstall.cc:69
+#: solver/detail/ProblemSolutionUninstall.cc:71
+#: solver/detail/Resolver_problems.cc:411
+#: solver/detail/Resolver_problems.cc:421
 #, c-format
-msgid "%s remove ok"
-msgstr "%s removido com êxito"
+msgid "do not install %s"
+msgstr "não instalar %s"
 
-#: zypp/target/rpm/RpmDb.cc:2117
-msgid "Ok"
-msgstr "Ok"
+#: solver/detail/ProblemSolutionUninstall.cc:81
+msgid "Do not install or delete concerning resolvables"
+msgstr "Não instalar ou apagar resolvíveis de interesse"
 
-#: zypp/target/rpm/RpmDb.cc:2120
-msgid "The package is not OK for the following reasons:"
-msgstr "O pacote não está OK pelos seguintes motivos:"
+#: solver/detail/ProblemSolutionUnlock.cc:50
+#, fuzzy
+msgid "unlock all resolvables"
+msgstr "Desbloquear estes resolvíveis"
 
-#: zypp/target/rpm/RpmDb.cc:2126
-msgid "The package contains different version than expected"
-msgstr "O pacote contém uma versão diferente da esperada"
-
-#: zypp/target/rpm/RpmDb.cc:2132
-msgid "The package file has incorrect MD5 sum"
-msgstr "O arquivo do pacote tem soma de MD5 incorreta"
-
-#: zypp/target/rpm/RpmDb.cc:2138
-msgid "The package is not signed"
-msgstr "O pacote não está assinado"
-
-#: zypp/target/rpm/RpmDb.cc:2144
-msgid "The package has no MD5 sum"
-msgstr "O arquivo do pacote não tem soma de MD5"
-
-#: zypp/target/rpm/RpmDb.cc:2150
-msgid "The package has incorrect signature"
-msgstr "O pacote tem assinatura incorreta "
-
-#: zypp/target/rpm/RpmDb.cc:2156
-msgid "The package archive has incorrect MD5 sum"
-msgstr "O arquivo do pacote tem soma de MD5 incorreta "
-
-#: zypp/target/rpm/RpmDb.cc:2162
-msgid "rpm failed for unkown reason, see log file"
-msgstr ""
-"Houve falha do rpm por motivo desconhecido, consulte o arquivo de registro"
-
-#: zypp/target/rpm/RpmDb.cc:2306
+#. TranslatorExplanation %s = name of package, patch, selection ...
+#: solver/detail/ProblemSolutionUnlock.cc:59
 #, c-format
-msgid "created backup %s"
-msgstr "backup %s criado"
+msgid "unlock %s"
+msgstr "desbloquear %s"
 
-#: zypp/target/TargetImpl.cc:482
-msgid "Target commit aborted by user."
-msgstr "Compromisso de destino interrompido pelo usuário."
+#: solver/detail/ProblemSolutionUnlock.cc:68
+msgid "Unlock these resolvables"
+msgstr "Desbloquear estes resolvíveis"
 
-#: zypp/solver/detail/ResolverInfoObsoletes.cc:55
+#. Translator: 1.%s = dependency; 2.%s and 3.%s = name of package,patch,...
+#: solver/detail/QueueItemRequire.cc:693
 #, c-format
-msgid "%s is replaced by %s"
-msgstr "%s é substituído por %s"
+msgid "for requiring %s for %s when upgrading %s"
+msgstr "para exigir %s para %s ao fazer o upgrade de %s"
 
-#: zypp/solver/detail/ResolverInfoObsoletes.cc:69
+#: solver/detail/ResolverInfo.cc:190
+msgid " Error!"
+msgstr "Erro!"
+
+#: solver/detail/ResolverInfo.cc:191
+msgid " Important!"
+msgstr "Importante!"
+
+#. Translator all.%s = name of packages,patches,....
+#. TranslatorExplanation: 1.%s name of package, 2.%s list of names
+#. TranslatorExplanation: 1.%s is part of 'bundles', the bundles are listed in 2.%s
+#: solver/detail/ResolverInfoChildOf.cc:56
+#: solver/detail/ResolverInfoChildOf.cc:71
 #, c-format
-msgid "%s replaced by %s"
-msgstr "%s substituído por %s"
+msgid "%s part of %s"
+msgstr "%s parte de %s"
 
-#: zypp/solver/detail/Resolver_problems.cc:243
-msgid "Invalid information"
-msgstr "Informações inválidas"
-
-#: zypp/solver/detail/Resolver_problems.cc:250
+#. Translator: all.%s = name of package, patch,...
+#. TranslatorExplanation: 1.%s name of package, 2.%s list of names
+#. TranslatorExplanation: 1.%s is conflicting with multiple others
+#. TranslatorExplanation %s = name of package, patch, selection ...
+#: solver/detail/ResolverInfoConflictsWith.cc:55
+#: solver/detail/ResolverInfoConflictsWith.cc:70
+#: solver/detail/Resolver_problems.cc:264
 #, c-format
-msgid "%s is needed by other resolvables"
-msgstr "%s é necessário a outros resolvíveis"
+msgid "%s conflicts with %s"
+msgstr "%s conflitos com %s"
 
-#: zypp/solver/detail/Resolver_problems.cc:253
-#: zypp/solver/detail/ResolverInfoNeededBy.cc:56
+#. Translator: all.%s = name of package,patch,....
+#: solver/detail/ResolverInfoDependsOn.cc:55
+#, c-format
+msgid "%s depended on %s"
+msgstr "%s dependente de %s"
+
+#. TranslatorExplanation: 1.%s name of package, 2.%s list of names
+#. TranslatorExplanation: 1.%s is dependent on list of names
+#: solver/detail/ResolverInfoDependsOn.cc:69
+#, c-format
+msgid "%s dependend on %s"
+msgstr "%s dependente de %s"
+
+#: solver/detail/ResolverInfoMisc.cc:56
+msgid ", Action: "
+msgstr ", Ação:"
+
+#: solver/detail/ResolverInfoMisc.cc:58
+msgid ", Trigger: "
+msgstr ", Acionador:"
+
+#. Translator: Notation for (RPM) package
+#: solver/detail/ResolverInfoMisc.cc:90
+msgid "package"
+msgstr "pacote "
+
+#. Translator: Notation for SuSE package selection (set of packages)
+#: solver/detail/ResolverInfoMisc.cc:94
+msgid "selection"
+msgstr "seleção"
+
+#. Translator: Notation for SuSE installation pattern (set of packages, describing use of system)
+#: solver/detail/ResolverInfoMisc.cc:98
+msgid "pattern"
+msgstr "padrão"
+
+#. Translator: Notation for product
+#: solver/detail/ResolverInfoMisc.cc:102
+msgid "product"
+msgstr "produto"
+
+#. Translator: Notation for patch
+#: solver/detail/ResolverInfoMisc.cc:106
+msgid "patch"
+msgstr "patch"
+
+#. Translator: Notation for script (part of a patch)
+#: solver/detail/ResolverInfoMisc.cc:110
+msgid "script"
+msgstr "script"
+
+#. Translator: Notation for message (part of a patch)
+#: solver/detail/ResolverInfoMisc.cc:114
+msgid "message"
+msgstr "mensagem"
+
+#. Translator: Notation for atom (part of a patch)
+#: solver/detail/ResolverInfoMisc.cc:118
+msgid "atom"
+msgstr "átomo"
+
+#. Translator: Notation for computer system
+#: solver/detail/ResolverInfoMisc.cc:122
+msgid "system"
+msgstr "sistema"
+
+#. Translator: Generic term for an item with dependencies, please leave untranslated for now
+#: solver/detail/ResolverInfoMisc.cc:126
+msgid "Resolvable"
+msgstr "Resolvível"
+
+#. TranslatorExplanation: Additional information to dependency solver result, no solution could be found
+#: solver/detail/ResolverInfoMisc.cc:144
+msgid "Marking this resolution attempt as invalid."
+msgstr "Marcando essa tentativa de resolução como inválida."
+
+#. Translator: %s = name of packages,patch,...
+#. TranslatorExplanation: Additional information to dependency solver result.
+#: solver/detail/ResolverInfoMisc.cc:151
+#, c-format
+msgid "Marking resolvable %s as uninstallable"
+msgstr "Marcando o resolvível %s como impossível de ser instalado"
+
+#. Translator: %s = name of packages,patch,...
+#. TranslatorExplanation: Additional information to dependency solver result.
+#: solver/detail/ResolverInfoMisc.cc:159
+#, c-format
+msgid "%s is scheduled to be installed, but this is not possible because of dependency problems."
+msgstr "%s está programado para ser instalado, mas isso não é possível devido a problemas de dependência."
+
+#. Translator: %s = name of package,patch,...
+#. TranslatorExplanation: Additional information to dependency solver result.
+#: solver/detail/ResolverInfoMisc.cc:167
+#, c-format
+msgid "Can't install %s since it is already marked as needing to be uninstalled"
+msgstr "Impossível instalar %s porque sua desinstalação já está marcada como necessária"
+
+#. Translator: %s = name of patch
+#. TranslatorExplanation: A patch which is not needed (does not apply) cant be installed
+#. TranslatorExplanation: Patches contain updates (bug fixes) to packages. Such fixes
+#. TranslatorExplanation: do only apply if the package to-be-fixed is actually installed.
+#. TranslatorExplanation: Here a patch was selected for installation but the to-be-fixed
+#. TranslatorExplanation: package is not installed.
+#: solver/detail/ResolverInfoMisc.cc:179
+#, c-format
+msgid "Can't install %s since it is does not apply to this system."
+msgstr "Não é possível instalar %s, pois ele não se aplica a este sistema."
+
+#. affected() = item 1 which has to be installed
+#. _capability =
+#. other() = item 2 which has to be installed
+#. other_capability() =
+#. Translator: %s = name of package,patch,...
+#: solver/detail/ResolverInfoMisc.cc:190
+#, c-format
+msgid "Can't install %s, since %s is already marked as needing to be installed"
+msgstr "Não é possível instalar %s, pois sua %s instalação já está marcada como necessária."
+
+#. Translator: %s = name of patch,product
+#: solver/detail/ResolverInfoMisc.cc:198
+#, c-format
+msgid "This would invalidate %s."
+msgstr "Isso invalidaria %s."
+
+#. Translator: %s = name of patch, pattern, ...
+#. TranslatorExplanation: Establishing is the process of computing which patches are needed
+#. TranslatorExplanation: This is just a progress indicator
+#. TranslatorExplanation: It is also used for other types of resolvables in order to verify
+#. TranslatorExplanation: the completeness of their dependencies
+#: solver/detail/ResolverInfoMisc.cc:214
+#, c-format
+msgid "Establishing %s"
+msgstr "Estabelecendo %s"
+
+#. affected() = resolvable to be installed
+#. _capability =
+#. other() =
+#. other_capability() =
+#. Translator: %s = name of package,patch,...
+#. TranslatorExample: Installing foo
+#. TranslatorExplanation: Just a progress indicator that something is scheduled for installation
+#. Translator: %s = packagename
+#: solver/detail/ResolverInfoMisc.cc:235
+#, c-format
+msgid "Installing %s"
+msgstr "Instalando %s"
+
+#. affected() = updated resolvable
+#. _capability =
+#. other() = currently installed, being updated resolvable
+#. other_capability() =
+#. Translator: 1.%s and 2.%s = name of package
+#. TranslatorExample: Updating foo-1.1 to foo-1.2
+#. TranslatorExplanation: Just a progress indicator that something is scheduled for upgrade
+#: solver/detail/ResolverInfoMisc.cc:252
+#, c-format
+msgid "Updating %s to %s"
+msgstr "Atualizando o %s para %s"
+
+#. affected() =
+#. _capability =
+#. other() =
+#. other_capability() =
+#. Translator: %s = name of package,patch,...
+#. TranslatorExample: Skipping foo: already installed
+#. TranslatorExplanation: An installation request for foo is skipped since foo is already installed
+#: solver/detail/ResolverInfoMisc.cc:270
+#, c-format
+msgid "Skipping %s: already installed"
+msgstr "Ignorando %s: já instalado"
+
+#. affected() = is set
+#. _capability = is set
+#. other() =
+#. other_capability() =
+#. Translator: 1.%s = dependency
+#. TranslatorExample: There are no alternative installed providers of foo
+#. TranslatorExplanation: A resolvable is to be uninstalled. It provides 'foo' which is needed by others
+#. TranslatorExplanation: We just found out that 'foo' is not provided by anything else (an alternative)
+#. TranslatorExplanation: removal of this resolvable would therefore break dependency
+#. TranslatorExplanation: This is an error message explaining that the resolvable cannot be uninstalled
+#: solver/detail/ResolverInfoMisc.cc:292
+#, c-format
+msgid "There are no alternative installed providers of %s"
+msgstr "Não há provedores alternativos instalados de %s"
+
+#. Translator: 1.%s = name of package,patch....
+#. TranslatorExample: for bar
+#. TranslatorExplanation: extension to previous message if we know what the resolvable is
+#: solver/detail/ResolverInfoMisc.cc:298 solver/detail/ResolverInfoMisc.cc:323
+#, c-format
+msgid "for %s"
+msgstr "para %s"
+
+#. affected() =
+#. _capability =
+#. other() =
+#. other_capability() =
+#. Translator: 1.%s = dependency
+#. TranslatorExample: There are no installable providers of foo
+#. TranslatorExplanation: A resolvable is to be installed which requires foo
+#. TranslatorExplanation: But there is nothing available to fulfill this requirement
+#. TranslatorExplanation: This is an error message explaining that the resolvable cannot be installed
+#: solver/detail/ResolverInfoMisc.cc:317
+#, c-format
+msgid "There are no installable providers of %s"
+msgstr "Não há provedores de %s que possam ser instalados"
+
+#. Translator: 1.%s = name of package,patch,..., 2.%s = name of package,patch,...
+#. TranslatorExample: Upgrade to foo to avoid removing bar is not possible
+#. TranslatorExplanation: bar requires something from foo
+#: solver/detail/ResolverInfoMisc.cc:341
+#, c-format
+msgid "Upgrade to %s to avoid removing %s is not possible."
+msgstr "Não é possível fazer upgrade de %s para evitar a remoção de %s."
+
+#. Translator: 1.%s = name of package,patch,...; 2.%s = dependency;
+#: solver/detail/ResolverInfoMisc.cc:359
+#, c-format
+msgid "%s provides %s, but is scheduled to be uninstalled."
+msgstr "%s fornece %s, mas está programado para ser desinstalado."
+
+#. Translator: 1.%s = name of package,patch,...; 2.%s = dependency; 3.%s type (package, patch, ...)
+#: solver/detail/ResolverInfoMisc.cc:377
+#, c-format
+msgid "%s provides %s, but another version of that %s is already installed."
+msgstr "%s fornece %s, mas já há outra versão desse %s instalada."
+
+#. Translator: 1.%s = name of package,patch,...; 2.%s = dependency;
+#: solver/detail/ResolverInfoMisc.cc:396
+#, c-format
+msgid "%s provides %s, but it is uninstallable.  Try installing it on its own for more details."
+msgstr "%s fornece %s, mas não pode ser instalado.  Experimente instalá-lo sozinho para obter mais detalhes."
+
+#. Translator: 1.%s = name of package,patch,...; 2.%s = dependency;
+#: solver/detail/ResolverInfoMisc.cc:414
+#, c-format
+msgid "%s provides %s, but it is locked."
+msgstr "%s fornece %s, mas está bloqueado."
+
+#. Translator: 1.%s = name of package,patch,...; 2.%s = dependency;
+#: solver/detail/ResolverInfoMisc.cc:432
+#, c-format
+msgid "%s provides %s, but has another architecture."
+msgstr "%s fornece %s, mas possui outra arquitetura."
+
+#. Translator: 1.%s = dependency. 2.%s name of package, patch, ...
+#: solver/detail/ResolverInfoMisc.cc:450
+#, c-format
+msgid "Can't satisfy requirement %s for %s"
+msgstr "Não é possível atender ao requisito %s para %s"
+
+#. affected() = to-be-installed resolvable which was scheduled to be uninstalled
+#. _capability =
+#. other() =
+#. other_capability() =
+#. Translator: %s = name of package,patch,...
+#. TranslatorExample: foo is required by other to-be-installed resolvable, so it won't be unlinked.
+#. TranslatorExplanation: Cant uninstall foo since it is required by an to-be-installed resolvable
+#: solver/detail/ResolverInfoMisc.cc:471
+#, c-format
+msgid "%s is required by other to-be-installed resolvable, so it won't be unlinked."
+msgstr "%s é necessário a outro resolvível a ser instalado; por isso, não será desvinculado."
+
+#. affected() = provider of cap
+#. _capability =
+#. other() =
+#. other_capability() =
+#. Translator: %s = name of package,patch,...
+#. TranslatorExample: foo is required by other installed resolvable, so it won't be unlinked.
+#. TranslatorExplanation: Cant uninstall foo since it is required by an installed resolvable
+#: solver/detail/ResolverInfoMisc.cc:488
+#, c-format
+msgid "%s is required by other installed resolvable, so it won't be unlinked."
+msgstr "%s é exigido por outro resolvível instalado, para não ficar desvinculado."
+
+#. affected() = to-be-uninstalled resolvable which is locked
+#. _capability =
+#. other() =
+#. other_capability() =
+#. Translator: %s = name of package,patch,...
+#. TranslatorExample: foo is locked and cannot be uninstalled.
+#. TranslatorExplanation: foo is to-be-uninstalled but it is locked
+#: solver/detail/ResolverInfoMisc.cc:505
+#, c-format
+msgid "%s is locked and cannot be uninstalled."
+msgstr "%s está bloqueado e não pode ser desinstalado."
+
+#. affected() = provider of capability
+#. _capability = provided by provider
+#. other() = conflict issuer
+#. other_capability() = conflict capability
+#. Translator: 1.%s and 2.%s = Dependency; 4.%s = name of package,patch,...
+#. TranslatorExample: A conflict over foo (bar) requires the removal of to-be-installed xyz
+#: solver/detail/ResolverInfoMisc.cc:524
+#, c-format
+msgid "A conflict over %s (%s) requires the removal of to-be-installed %s"
+msgstr "Um conflito por causa de %s (%s) requer a remoção do %s a ser instalado"
+
+#. affected() = provider of capability
+#. _capability = provided by provider
+#. other() = conflict issuer
+#. other_capability() = conflict capability from issuer
+#. Translator: 1.%s = name of package,patch,...; 3.%s and 4.%s = Dependency;
+#. TranslatorExample: Marking xyz as uninstallable due to conflicts over foo (bar)
+#: solver/detail/ResolverInfoMisc.cc:542
+#, c-format
+msgid "Marking %s as uninstallable due to conflicts over %s"
+msgstr "Marcando %s como não instalável devido a conflitos por causa de %s"
+
+#. Translator: %s = name of package,patch
+#. TranslatorExample: from abc
+#: solver/detail/ResolverInfoMisc.cc:550
+#, c-format
+msgid "from %s"
+msgstr "de %s"
+
+#. Translator: 1.%s = name of package,patch,...; 2.%s = dependency
+#: solver/detail/ResolverInfoMissingReq.cc:64
+#, c-format
+msgid "%s is missing the requirement %s"
+msgstr "%s não está atendendo ao requisito %s"
+
+#. Translator: all.%s = name of package,patch,...
+#. TranslatorExplanation %s = name of package, patch, selection ...
+#: solver/detail/ResolverInfoNeededBy.cc:56
+#: solver/detail/Resolver_problems.cc:253
 #, c-format
 msgid "%s is needed by %s"
 msgstr "%s é necessário a %s"
 
-#: zypp/solver/detail/Resolver_problems.cc:254
+#. TranslatorExplanation: 1.%s name of package, 2.%s list of names
+#. TranslatorExplanation: 1.%s is needed by multiple others
+#: solver/detail/ResolverInfoNeededBy.cc:70
+#, c-format
+msgid "%s needed by %s"
+msgstr "%s exigido por %s"
+
+#. Translator: all.%s = name of package,patch,....
+#: solver/detail/ResolverInfoObsoletes.cc:55
+#, c-format
+msgid "%s is replaced by %s"
+msgstr "%s é substituído por %s"
+
+#. TranslatorExplanation: 1.%s name of package, 2.%s list of names
+#. TranslatorExplanation: 1.%s is replaced by others
+#: solver/detail/ResolverInfoObsoletes.cc:69
+#, c-format
+msgid "%s replaced by %s"
+msgstr "%s substituído por %s"
+
+#: solver/detail/Resolver_problems.cc:243
+msgid "Invalid information"
+msgstr "Informações inválidas"
+
+#. TranslatorExplanation %s = name of package, patch, selection ...
+#: solver/detail/Resolver_problems.cc:250
+#, c-format
+msgid "%s is needed by other resolvables"
+msgstr "%s é necessário a outros resolvíveis"
+
+#: solver/detail/Resolver_problems.cc:254
 #, c-format
 msgid ""
 "%s is needed by:\n"
@@ -2065,19 +520,13 @@ msgstr ""
 "%s é necessário a:\n"
 "%s"
 
-#: zypp/solver/detail/Resolver_problems.cc:261
+#. TranslatorExplanation %s = name of package, patch, selection ...
+#: solver/detail/Resolver_problems.cc:261
 #, c-format
 msgid "%s conflicts with other resolvables"
 msgstr "%s está em conflito com outros resolvíveis"
 
-#: zypp/solver/detail/Resolver_problems.cc:264
-#: zypp/solver/detail/ResolverInfoConflictsWith.cc:55
-#: zypp/solver/detail/ResolverInfoConflictsWith.cc:70
-#, c-format
-msgid "%s conflicts with %s"
-msgstr "%s conflitos com %s"
-
-#: zypp/solver/detail/Resolver_problems.cc:265
+#: solver/detail/Resolver_problems.cc:265
 #, c-format
 msgid ""
 "%s conflicts with:\n"
@@ -2086,22 +535,25 @@ msgstr ""
 "%s está em conflito com:\n"
 "%s"
 
-#: zypp/solver/detail/Resolver_problems.cc:288
+#. TranslatorExplanation %s = name of package, patch, selection ...
+#: solver/detail/Resolver_problems.cc:288
 #, c-format
 msgid "%s obsoletes other resolvables"
 msgstr "%s torna outros resolvíveis obsoletos"
 
-#: zypp/solver/detail/Resolver_problems.cc:291
+#. TranslatorExplanation %s = name of package, patch, selection ...
+#: solver/detail/Resolver_problems.cc:291
 #, c-format
 msgid "%s obsoletes %s"
 msgstr "%s torna obsoleto %s"
 
-#: zypp/solver/detail/Resolver_problems.cc:293
+#. TranslatorExplanation %s = name of package, patch, selection ...
+#: solver/detail/Resolver_problems.cc:293
 #, c-format
 msgid "%s obsoletes:%s"
 msgstr "%s torna obsoleto:%s"
 
-#: zypp/solver/detail/Resolver_problems.cc:294
+#: solver/detail/Resolver_problems.cc:294
 msgid ""
 "\n"
 "These resolvables will be deleted from the system."
@@ -2109,37 +561,44 @@ msgstr ""
 "\n"
 "Esses resolvíveis serão apagados do sistema."
 
-#: zypp/solver/detail/Resolver_problems.cc:301
+#. TranslatorExplanation %s = name of package, patch, selection ...
+#: solver/detail/Resolver_problems.cc:301
 #, c-format
 msgid "%s depends on other resolvables"
 msgstr "%s depende de outros resolvíveis"
 
-#: zypp/solver/detail/Resolver_problems.cc:305
+#. TranslatorExplanation %s = name of package, patch, selection ...
+#: solver/detail/Resolver_problems.cc:305
 #, c-format
 msgid "%s depends on %s"
 msgstr "%s depende de %s"
 
-#: zypp/solver/detail/Resolver_problems.cc:308
+#. TranslatorExplanation %s = name of package, patch, selection ...
+#: solver/detail/Resolver_problems.cc:308
 #, c-format
 msgid "%s depends on:%s"
 msgstr "%s depende de:%s"
 
-#: zypp/solver/detail/Resolver_problems.cc:314
+#. TranslatorExplanation: currently it is unused.
+#: solver/detail/Resolver_problems.cc:314
 msgid "Child of"
 msgstr "Filho de "
 
-#: zypp/solver/detail/Resolver_problems.cc:320
-#: zypp/solver/detail/Resolver_problems.cc:400
+#. TranslatorExplanation %s = dependency
+#. TranslatorExplanation %s = name of package,patch,...
+#: solver/detail/Resolver_problems.cc:320
+#: solver/detail/Resolver_problems.cc:400
 #, c-format
 msgid "Cannot install %s"
 msgstr "Não é possível instalar %s"
 
-#: zypp/solver/detail/Resolver_problems.cc:322
+#. TranslatorExplanation %s = capability
+#: solver/detail/Resolver_problems.cc:322
 #, c-format
 msgid "None provides %s"
 msgstr "Nenhum fornece %s"
 
-#: zypp/solver/detail/Resolver_problems.cc:323
+#: solver/detail/Resolver_problems.cc:323
 msgid ""
 "\n"
 "There is no resource available which support this requirement."
@@ -2147,1387 +606,3817 @@ msgstr ""
 "\n"
 "Não há nenhum recurso disponível que atenda a esse requisito."
 
-#: zypp/solver/detail/Resolver_problems.cc:331
-msgid ""
-"Due problems which are described above/below this resolution will not solve "
-"all dependencies"
-msgstr ""
-"Devido aos problemas descritos acima/abaixo, essa solução não resolverá "
-"todas as dependências"
+#: solver/detail/Resolver_problems.cc:331
+msgid "Due problems which are described above/below this resolution will not solve all dependencies"
+msgstr "Devido aos problemas descritos acima/abaixo, essa solução não resolverá todas as dependências"
 
-#: zypp/solver/detail/Resolver_problems.cc:342
-#: zypp/solver/detail/Resolver_problems.cc:661
+#: solver/detail/Resolver_problems.cc:342
+#: solver/detail/Resolver_problems.cc:662
 #, c-format
 msgid "Cannot install %s because it is conflicting with %s"
 msgstr "Não é possível instalar %s porque ele entra em conflito com %s"
 
-#: zypp/solver/detail/Resolver_problems.cc:359
+#. TranslatorExplanation %s = name of package,patch,...
+#: solver/detail/Resolver_problems.cc:359
 #, c-format
 msgid "%s is not installed and has been marked as uninstallable"
 msgstr "%s não está instalado e foi marcado como não instalável"
 
-#: zypp/solver/detail/Resolver_problems.cc:370
+#. TranslatorExplanation %s = name of package,patch,...
+#: solver/detail/Resolver_problems.cc:370
 #, c-format
 msgid "Cannot install %s due to dependency problems"
 msgstr "Não é possível instalar %s devido a problemas de dependência"
 
-#: zypp/solver/detail/Resolver_problems.cc:408
-#: zypp/solver/detail/Resolver_problems.cc:418
-#: zypp/solver/detail/ProblemSolutionUninstall.cc:64
-#: zypp/solver/detail/ProblemSolutionUninstall.cc:66
+#. TranslatorExplanation %s = name of package, patch, selection ...
+#: solver/detail/Resolver_problems.cc:434
 #, c-format
-msgid "delete %s"
-msgstr "apagar %s"
-
-#: zypp/solver/detail/Resolver_problems.cc:411
-#: zypp/solver/detail/Resolver_problems.cc:421
-#: zypp/solver/detail/ProblemSolutionUninstall.cc:69
-#: zypp/solver/detail/ProblemSolutionUninstall.cc:71
-#, c-format
-msgid "do not install %s"
-msgstr "não instalar %s"
-
-#: zypp/solver/detail/Resolver_problems.cc:434
-#, fuzzy, c-format
 msgid "%s has unfulfilled requirements"
-msgstr "%s tem requisitos que não foram atendidos"
+msgstr "%s tem requisitos não atendidos"
 
-#: zypp/solver/detail/Resolver_problems.cc:472
+#. TranslatorExplanation %s = name of package, patch, selection ...
+#: solver/detail/Resolver_problems.cc:472
 #, c-format
 msgid "%s has missing dependencies"
 msgstr "%s tem dependências ausentes"
 
-#: zypp/solver/detail/Resolver_problems.cc:510
+#. TranslatorExplanation %s = name of package, patch, selection ...
+#: solver/detail/Resolver_problems.cc:510
 #, c-format
 msgid "%s cannot be installed due to missing dependencies"
 msgstr "%s não pode ser instalado devido à ausência de dependências"
 
-#: zypp/solver/detail/Resolver_problems.cc:548
+#. TranslatorExplanation %s = name of package, patch, selection ...
+#: solver/detail/Resolver_problems.cc:548
 #, c-format
 msgid "%s fulfil dependencies of %s but will be uninstalled"
 msgstr "%s preenche as dependências de %s, mas será desinstalado"
 
-#: zypp/solver/detail/Resolver_problems.cc:558
+#. TranslatorExplanation %s = name of package, patch, selection ...
+#: solver/detail/Resolver_problems.cc:558
 #, c-format
 msgid "No need to install %s"
 msgstr "Não é necessário instalar %s"
 
-#: zypp/solver/detail/Resolver_problems.cc:566
+#. TranslatorExplanation %s = name of package, patch, selection ...
+#: solver/detail/Resolver_problems.cc:566
 #, c-format
 msgid "Cannot install %s to fulfil the dependencies of %s"
 msgstr "Não é possível instalar %s para preencher as dependências de %s"
 
-#: zypp/solver/detail/Resolver_problems.cc:581
+#. TranslatorExplanation %s = name of package, patch, selection ...
+#: solver/detail/Resolver_problems.cc:581
 #, c-format
 msgid "Cannot be install %s to fulfil the dependencies of %s"
 msgstr "Não é possível instalar %s para preencher as dependências de %s"
 
-#: zypp/solver/detail/Resolver_problems.cc:618
-#: zypp/solver/detail/Resolver_problems.cc:626
+#. TranslatorExplanation %s = name of package, patch, selection ...
+#: solver/detail/Resolver_problems.cc:618
+#: solver/detail/Resolver_problems.cc:626
 #, c-format
 msgid "%s will not be uninstalled cause it is still required"
 msgstr "%s não será desinstalado porque ainda é necessário"
 
-#: zypp/solver/detail/Resolver_problems.cc:637
+#. TranslatorExplanation %s = name of package, patch, selection ...
+#: solver/detail/Resolver_problems.cc:637
 #, c-format
 msgid "%s obsoletes %s. But %s cannot be deleted because it is locked."
-msgstr ""
-"%s torna %s obsoleto. Mas %s não pode ser apagado porque está bloqueado."
+msgstr "%s torna %s obsoleto. Mas %s não pode ser apagado porque está bloqueado."
 
-#: zypp/solver/detail/Resolver_problems.cc:681
+#: solver/detail/Resolver_problems.cc:666
+#, fuzzy, c-format
+msgid "Cannot install %s because it is conflicting"
+msgstr "Não é possível instalar %s porque ele entra em conflito com %s"
+
+#. TranslatorExplanation %s = name of package, patch, selection ...
+#: solver/detail/Resolver_problems.cc:685
 #, c-format
 msgid "%s is uninstallable due to conflicts with %s"
 msgstr "%s não pode ser desinstalado devido a conflitos com %s"
 
-#: zypp/solver/detail/ProblemSolutionIgnore.cc:54
-msgid "Ignore this requirement just here"
-msgstr "Ignorar este requisito apenas aqui"
-
-#: zypp/solver/detail/ProblemSolutionIgnore.cc:63
-msgid "Ignore this requirement generally"
-msgstr "Ignorar este requisito genericamente"
-
-#: zypp/solver/detail/ProblemSolutionIgnore.cc:75
-#, c-format
-msgid "Install %s although it would change the architecture"
-msgstr "Instalar %s apesar de ele mudar a arquitetura"
-
-#: zypp/solver/detail/ProblemSolutionIgnore.cc:78
-#, c-format
-msgid ""
-"%s provides this dependency but would changed the architecture of the "
-"installed item"
-msgstr ""
-"%s fornece esta dependência, porém mudaria a arquitetura do item instalado"
-
-#: zypp/solver/detail/ProblemSolutionIgnore.cc:90
-#: zypp/solver/detail/ProblemSolutionIgnore.cc:102
-#, c-format
-msgid "Ignore this conflict of %s"
-msgstr "Ignorar este conflito de %s"
-
-#: zypp/solver/detail/ProblemSolutionIgnore.cc:117
-#, c-format
-msgid "Ignore the obsolete %s in %s"
-msgstr "Ignorar o(s) %s obsoleto(s) de %s"
-
-#: zypp/solver/detail/ProblemSolutionIgnore.cc:130
-#, c-format
-msgid "Ignore that %s is already set to install"
-msgstr "Ignorar que %s já está definido para instalação"
-
-#: zypp/solver/detail/ProblemSolutionUninstall.cc:81
-msgid "Do not install or delete concerning resolvables"
-msgstr "Não instalar ou apagar resolvíveis de interesse"
-
-#: zypp/solver/detail/QueueItemRequire.cc:674
-#, c-format
-msgid "for requiring %s for %s when upgrading %s"
-msgstr "para exigir %s para %s ao fazer o upgrade de %s"
-
-#: zypp/solver/detail/ResolverInfoMissingReq.cc:64
-#, c-format
-msgid "%s is missing the requirement %s"
-msgstr "%s não está atendendo ao requisito %s"
-
-#: zypp/solver/detail/ResolverInfoMisc.cc:56
-msgid ", Action: "
-msgstr ", Ação:"
-
-#: zypp/solver/detail/ResolverInfoMisc.cc:58
-msgid ", Trigger: "
-msgstr ", Acionador:"
-
-#: zypp/solver/detail/ResolverInfoMisc.cc:90
-msgid "package"
-msgstr "pacote "
-
-#: zypp/solver/detail/ResolverInfoMisc.cc:94
-msgid "selection"
-msgstr "seleção"
-
-#: zypp/solver/detail/ResolverInfoMisc.cc:98
-msgid "pattern"
-msgstr "padrão"
-
-#: zypp/solver/detail/ResolverInfoMisc.cc:102
-msgid "product"
-msgstr "produto"
-
-#: zypp/solver/detail/ResolverInfoMisc.cc:106
-msgid "patch"
-msgstr "patch"
-
-#: zypp/solver/detail/ResolverInfoMisc.cc:110
-msgid "script"
-msgstr "script"
-
-#: zypp/solver/detail/ResolverInfoMisc.cc:114
-msgid "message"
-msgstr "mensagem"
-
-#: zypp/solver/detail/ResolverInfoMisc.cc:118
-msgid "atom"
-msgstr "átomo"
-
-#: zypp/solver/detail/ResolverInfoMisc.cc:122
-msgid "system"
-msgstr "sistema"
-
-#: zypp/solver/detail/ResolverInfoMisc.cc:126
-msgid "Resolvable"
-msgstr "Resolvível"
-
-#: zypp/solver/detail/ResolverInfoMisc.cc:144
-msgid "Marking this resolution attempt as invalid."
-msgstr "Marcando essa tentativa de resolução como inválida."
-
-#: zypp/solver/detail/ResolverInfoMisc.cc:151
-#, c-format
-msgid "Marking resolvable %s as uninstallable"
-msgstr "Marcando o resolvível %s como impossível de ser instalado"
-
-#: zypp/solver/detail/ResolverInfoMisc.cc:159
-#, c-format
-msgid ""
-"%s is scheduled to be installed, but this is not possible because of "
-"dependency problems."
-msgstr ""
-"%s está programado para ser instalado, mas isso não é possível devido a "
-"problemas de dependência."
-
-#: zypp/solver/detail/ResolverInfoMisc.cc:167
-#, c-format
-msgid ""
-"Can't install %s since it is already marked as needing to be uninstalled"
-msgstr ""
-"Impossível instalar %s porque sua desinstalação já está marcada como "
-"necessária"
-
-#: zypp/solver/detail/ResolverInfoMisc.cc:179
-#, c-format
-msgid "Can't install %s since it is does not apply to this system."
-msgstr "Não é possível instalar %s, pois ele não se aplica a este sistema."
-
-#: zypp/solver/detail/ResolverInfoMisc.cc:190
-#, c-format
-msgid "Can't install %s, since %s is already marked as needing to be installed"
-msgstr ""
-"Não é possível instalar %s, pois sua %s instalação já está marcada como "
-"necessária."
-
-#: zypp/solver/detail/ResolverInfoMisc.cc:198
-#, c-format
-msgid "This would invalidate %s."
-msgstr "Isso invalidaria %s."
-
-#: zypp/solver/detail/ResolverInfoMisc.cc:214
-#, c-format
-msgid "Establishing %s"
-msgstr "Estabelecendo %s"
-
-#: zypp/solver/detail/ResolverInfoMisc.cc:235
-#, c-format
-msgid "Installing %s"
-msgstr "Instalando %s"
-
-#: zypp/solver/detail/ResolverInfoMisc.cc:252
-#, c-format
-msgid "Updating %s to %s"
-msgstr "Atualizando o %s para %s"
-
-#: zypp/solver/detail/ResolverInfoMisc.cc:270
-#, c-format
-msgid "Skipping %s: already installed"
-msgstr "Ignorando %s: já instalado"
-
-#: zypp/solver/detail/ResolverInfoMisc.cc:292
-#, c-format
-msgid "There are no alternative installed providers of %s"
-msgstr "Não há provedores alternativos instalados de %s"
-
-#: zypp/solver/detail/ResolverInfoMisc.cc:298
-#: zypp/solver/detail/ResolverInfoMisc.cc:323
-#, c-format
-msgid "for %s"
-msgstr "para %s"
-
-#: zypp/solver/detail/ResolverInfoMisc.cc:317
-#, c-format
-msgid "There are no installable providers of %s"
-msgstr "Não há provedores de %s que possam ser instalados"
-
-#: zypp/solver/detail/ResolverInfoMisc.cc:341
-#, c-format
-msgid "Upgrade to %s to avoid removing %s is not possible."
-msgstr "Não é possível fazer upgrade de %s para evitar a remoção de %s."
-
-#: zypp/solver/detail/ResolverInfoMisc.cc:359
-#, c-format
-msgid "%s provides %s, but is scheduled to be uninstalled."
-msgstr "%s fornece %s, mas está programado para ser desinstalado."
-
-#: zypp/solver/detail/ResolverInfoMisc.cc:377
-#, c-format
-msgid "%s provides %s, but another version of that %s is already installed."
-msgstr "%s fornece %s, mas já há outra versão desse %s instalada."
-
-#: zypp/solver/detail/ResolverInfoMisc.cc:396
-#, c-format
-msgid ""
-"%s provides %s, but it is uninstallable.  Try installing it on its own for "
-"more details."
-msgstr ""
-"%s fornece %s, mas não pode ser instalado.  Experimente instalá-lo sozinho "
-"para obter mais detalhes."
-
-#: zypp/solver/detail/ResolverInfoMisc.cc:414
-#, c-format
-msgid "%s provides %s, but it is locked."
-msgstr "%s fornece %s, mas está bloqueado."
-
-#: zypp/solver/detail/ResolverInfoMisc.cc:432
-#, c-format
-msgid "%s provides %s, but has another architecture."
-msgstr "%s fornece %s, mas possui outra arquitetura."
-
-#: zypp/solver/detail/ResolverInfoMisc.cc:450
-#, c-format
-msgid "Can't satisfy requirement %s for %s"
-msgstr "Não é possível atender ao requisito %s para %s"
-
-#: zypp/solver/detail/ResolverInfoMisc.cc:471
-#, c-format
-msgid ""
-"%s is required by other to-be-installed resolvable, so it won't be unlinked."
-msgstr ""
-"%s é necessário a outro resolvível a ser instalado; por isso, não será "
-"desvinculado."
-
-#: zypp/solver/detail/ResolverInfoMisc.cc:488
-#, c-format
-msgid "%s is required by other installed resolvable, so it won't be unlinked."
-msgstr ""
-"%s é exigido por outro resolvível instalado, para não ficar desvinculado."
-
-#: zypp/solver/detail/ResolverInfoMisc.cc:505
-#, c-format
-msgid "%s is locked and cannot be uninstalled."
-msgstr "%s está bloqueado e não pode ser desinstalado."
-
-#: zypp/solver/detail/ResolverInfoMisc.cc:524
-#, c-format
-msgid "A conflict over %s (%s) requires the removal of to-be-installed %s"
-msgstr ""
-"Um conflito por causa de %s (%s) requer a remoção do %s a ser instalado"
-
-#: zypp/solver/detail/ResolverInfoMisc.cc:542
-#, c-format
-msgid "Marking %s as uninstallable due to conflicts over %s"
-msgstr "Marcando %s como não instalável devido a conflitos por causa de %s"
-
-#: zypp/solver/detail/ResolverInfoMisc.cc:550
-#, c-format
-msgid "from %s"
-msgstr "de %s"
-
-#: zypp/solver/detail/ResolverInfo.cc:190
-msgid " Error!"
-msgstr "Erro!"
-
-#: zypp/solver/detail/ResolverInfo.cc:191
-msgid " Important!"
-msgstr "Importante!"
-
-#: zypp/solver/detail/ProblemSolutionKeep.cc:53
-#: zypp/solver/detail/ProblemSolutionKeep.cc:55
-#, c-format
-msgid "keep %s"
-msgstr "manter %s"
-
-#: zypp/solver/detail/ProblemSolutionKeep.cc:65
-msgid "Keep resolvables"
-msgstr "Manter resolvíveis"
-
-#: zypp/solver/detail/ProblemSolutionInstall.cc:54
-#: zypp/solver/detail/ProblemSolutionInstall.cc:56
-#, c-format
-msgid "install %s"
-msgstr "instalar %s"
-
-#: zypp/solver/detail/ProblemSolutionInstall.cc:66
-msgid "Install missing resolvables"
-msgstr "Instalar resolvíveis ausentes"
-
-#: zypp/solver/detail/ResolverInfoDependsOn.cc:55
-#, c-format
-msgid "%s depended on %s"
-msgstr "%s dependente de %s"
-
-#: zypp/solver/detail/ResolverInfoDependsOn.cc:69
-#, c-format
-msgid "%s dependend on %s"
-msgstr "%s dependente de %s"
-
-#: zypp/solver/detail/ResolverInfoNeededBy.cc:70
-#, c-format
-msgid "%s needed by %s"
-msgstr "%s exigido por %s"
-
-#: zypp/solver/detail/ResolverInfoChildOf.cc:56
-#: zypp/solver/detail/ResolverInfoChildOf.cc:71
-#, c-format
-msgid "%s part of %s"
-msgstr "%s parte de %s"
-
-#: zypp/solver/detail/ProblemSolutionUnlock.cc:52
-#, c-format
-msgid "unlock %s"
-msgstr "desbloquear %s"
-
-#: zypp/solver/detail/ProblemSolutionUnlock.cc:61
-msgid "Unlock these resolvables"
-msgstr "Desbloquear estes resolvíveis"
-
-#: zypp/source/yum/YUMSourceImpl.cc:166
-msgid "Signed repomd.xml file fails signature check"
-msgstr ""
-
-#: zypp/source/yum/YUMSourceImpl.cc:183 zypp/source/yum/YUMSourceImpl.cc:199
-msgid "fails checksum verification."
-msgstr ""
-
-#: zypp/source/yum/YUMSourceImpl.cc:431 zypp/source/yum/YUMSourceImpl.cc:644
-msgid "Failed check for the metadata file check sum"
-msgstr ""
-
-#: zypp/source/yum/YUMScriptImpl.cc:78 zypp/source/yum/YUMScriptImpl.cc:102
-msgid "Failed check for the script file check sum"
-msgstr ""
-
-#: zypp/CountryCode.cc:135
+#: CountryCode.cc:135
 msgid "Unknown country: "
 msgstr "País desconhecido:"
 
-#: zypp/CountryCode.cc:217
+#. Defined CountryCode constants
+#. Defined LanguageCode constants
+#: CountryCode.cc:215 LanguageCode.cc:225
+msgid "noCode"
+msgstr "noCode"
+
+#: CountryCode.cc:217
 msgid "Andorra"
 msgstr "Andorra"
 
-#: zypp/CountryCode.cc:218
+#. :AND:020:
+#: CountryCode.cc:218
 msgid "United Arab Emirates"
 msgstr "Emirados Árabes Unidos"
 
-#: zypp/CountryCode.cc:219
+#. :ARE:784:
+#: CountryCode.cc:219
 msgid "Afghanistan"
 msgstr "Afeganistão"
 
-#: zypp/CountryCode.cc:220
+#. :AFG:004:
+#: CountryCode.cc:220
 msgid "Antigua and Barbuda"
 msgstr "Antígua e Barbuda"
 
-#: zypp/CountryCode.cc:221
+#. :ATG:028:
+#: CountryCode.cc:221
 msgid "Anguilla"
 msgstr "Anguilla"
 
-#: zypp/CountryCode.cc:222
+#. :AIA:660:
+#: CountryCode.cc:222
 msgid "Albania"
 msgstr "Albânia"
 
-#: zypp/CountryCode.cc:223
+#. :ALB:008:
+#: CountryCode.cc:223
 msgid "Armenia"
 msgstr "Armênia"
 
-#: zypp/CountryCode.cc:224
+#. :ARM:051:
+#: CountryCode.cc:224
 msgid "Netherlands Antilles"
 msgstr "Antilhas Holandesas"
 
-#: zypp/CountryCode.cc:225
+#. :ANT:530:
+#: CountryCode.cc:225
 msgid "Angola"
 msgstr "Angola"
 
-#: zypp/CountryCode.cc:226
+#. :AGO:024:
+#: CountryCode.cc:226
 msgid "Antarctica"
 msgstr "Antártida"
 
-#: zypp/CountryCode.cc:227
+#. :ATA:010:
+#: CountryCode.cc:227
 msgid "Argentina"
 msgstr "Argentina"
 
-#: zypp/CountryCode.cc:228
+#. :ARG:032:
+#: CountryCode.cc:228
 msgid "American Samoa"
 msgstr "Samoa Americana"
 
-#: zypp/CountryCode.cc:229
+#. :ASM:016:
+#: CountryCode.cc:229
 msgid "Austria"
 msgstr "Áustria"
 
-#: zypp/CountryCode.cc:230
+#. :AUT:040:
+#: CountryCode.cc:230
 msgid "Australia"
 msgstr "Austrália"
 
-#: zypp/CountryCode.cc:231
+#. :AUS:036:
+#: CountryCode.cc:231
 msgid "Aruba"
 msgstr "Aruba"
 
-#: zypp/CountryCode.cc:232
+#. :ABW:533:
+#: CountryCode.cc:232
 msgid "Aland Islands"
 msgstr "Aland Islands"
 
-#: zypp/CountryCode.cc:233
+#. :ALA:248:
+#: CountryCode.cc:233
 msgid "Azerbaijan"
 msgstr "Azerbaijão"
 
-#: zypp/CountryCode.cc:234
+#. :AZE:031:
+#: CountryCode.cc:234
 msgid "Bosnia and Herzegovina"
 msgstr "Bósnia-Herzegóvina"
 
-#: zypp/CountryCode.cc:235
+#. :BIH:070:
+#: CountryCode.cc:235
 msgid "Barbados"
 msgstr "Barbados"
 
-#: zypp/CountryCode.cc:236
+#. :BRB:052:
+#: CountryCode.cc:236
 msgid "Bangladesh"
 msgstr "Bangladesh"
 
-#: zypp/CountryCode.cc:237
+#. :BGD:050:
+#: CountryCode.cc:237
 msgid "Belgium"
 msgstr "Bélgica"
 
-#: zypp/CountryCode.cc:238
+#. :BEL:056:
+#: CountryCode.cc:238
 msgid "Burkina Faso"
 msgstr "Burkina Fasso"
 
-#: zypp/CountryCode.cc:239
+#. :BFA:854:
+#: CountryCode.cc:239
 msgid "Bulgaria"
 msgstr "Bulgária"
 
-#: zypp/CountryCode.cc:240
+#. :BGR:100:
+#: CountryCode.cc:240
 msgid "Bahrain"
 msgstr "Bahrein"
 
-#: zypp/CountryCode.cc:241
+#. :BHR:048:
+#: CountryCode.cc:241
 msgid "Burundi"
 msgstr "Burundi"
 
-#: zypp/CountryCode.cc:242
+#. :BDI:108:
+#: CountryCode.cc:242
 msgid "Benin"
 msgstr "Benin"
 
-#: zypp/CountryCode.cc:243
+#. :BEN:204:
+#: CountryCode.cc:243
 msgid "Bermuda"
 msgstr "Bermudas"
 
-#: zypp/CountryCode.cc:244
+#. :BMU:060:
+#: CountryCode.cc:244
 msgid "Brunei Darussalam"
 msgstr "Brunei"
 
-#: zypp/CountryCode.cc:245
+#. :BRN:096:
+#: CountryCode.cc:245
 msgid "Bolivia"
 msgstr "Bolívia"
 
-#: zypp/CountryCode.cc:246
+#. :BOL:068:
+#: CountryCode.cc:246
 msgid "Brazil"
 msgstr "Brasil"
 
-#: zypp/CountryCode.cc:247
+#. :BRA:076:
+#: CountryCode.cc:247
 msgid "Bahamas"
 msgstr "Bahamas"
 
-#: zypp/CountryCode.cc:248
+#. :BHS:044:
+#: CountryCode.cc:248
 msgid "Bhutan"
 msgstr "Butão"
 
-#: zypp/CountryCode.cc:249
+#. :BTN:064:
+#: CountryCode.cc:249
 msgid "Bouvet Island"
 msgstr "Ilha Bouvet"
 
-#: zypp/CountryCode.cc:250
+#. :BVT:074:
+#: CountryCode.cc:250
 msgid "Botswana"
 msgstr "Botsuana"
 
-#: zypp/CountryCode.cc:251
+#. :BWA:072:
+#: CountryCode.cc:251
 msgid "Belarus"
 msgstr "Belarus"
 
-#: zypp/CountryCode.cc:252
+#. :BLR:112:
+#: CountryCode.cc:252
 msgid "Belize"
 msgstr "Belize"
 
-#: zypp/CountryCode.cc:253
+#. :BLZ:084:
+#: CountryCode.cc:253
 msgid "Canada"
 msgstr "Canadá"
 
-#: zypp/CountryCode.cc:254
+#. :CAN:124:
+#: CountryCode.cc:254
 msgid "Cocos (Keeling) Islands"
 msgstr "Ilhas Cocos (Keeling)"
 
-#: zypp/CountryCode.cc:255 zypp/CountryCode.cc:257
+#. :CCK:166:
+#. :CAF:140:
+#: CountryCode.cc:255 CountryCode.cc:257
 msgid "Congo"
 msgstr "Congo"
 
-#: zypp/CountryCode.cc:256
+#. :COD:180:
+#: CountryCode.cc:256
 msgid "Centruual African Republic"
 msgstr "República Centro-Africana"
 
-#: zypp/CountryCode.cc:258
+#. :COG:178:
+#: CountryCode.cc:258
 msgid "Switzerland"
 msgstr "Suíça"
 
-#: zypp/CountryCode.cc:259
+#. :CHE:756:
+#: CountryCode.cc:259
 msgid "Cote D'Ivoire"
 msgstr "Costa do Marfim"
 
-#: zypp/CountryCode.cc:260
+#. :CIV:384:
+#: CountryCode.cc:260
 msgid "Cook Islands"
 msgstr "Ilhas Cook"
 
-#: zypp/CountryCode.cc:261
+#. :COK:184:
+#: CountryCode.cc:261
 msgid "Chile"
 msgstr "Chile"
 
-#: zypp/CountryCode.cc:262
+#. :CHL:152:
+#: CountryCode.cc:262
 msgid "Cameroon"
 msgstr "Camarões"
 
-#: zypp/CountryCode.cc:263
+#. :CMR:120:
+#: CountryCode.cc:263
 msgid "China"
 msgstr "China"
 
-#: zypp/CountryCode.cc:264
+#. :CHN:156:
+#: CountryCode.cc:264
 msgid "Colombia"
 msgstr "Colômbia"
 
-#: zypp/CountryCode.cc:265
+#. :COL:170:
+#: CountryCode.cc:265
 msgid "Costa Rica"
 msgstr "Costa Rica"
 
-#: zypp/CountryCode.cc:266
+#. :CRI:188:
+#: CountryCode.cc:266
 msgid "Serbia and Montenegro"
 msgstr "Sérvia e Montenegro"
 
-#: zypp/CountryCode.cc:267
+#. :SCG:891:
+#: CountryCode.cc:267
 msgid "Cuba"
 msgstr "Cuba"
 
-#: zypp/CountryCode.cc:268
+#. :CUB:192:
+#: CountryCode.cc:268
 msgid "Cape Verde"
 msgstr "Cabo Verde"
 
-#: zypp/CountryCode.cc:269
+#. :CPV:132:
+#: CountryCode.cc:269
 msgid "Christmas Island"
 msgstr "Ilha Natal"
 
-#: zypp/CountryCode.cc:270
+#. :CXR:162:
+#: CountryCode.cc:270
 msgid "Cyprus"
 msgstr "Chipre"
 
-#: zypp/CountryCode.cc:271
+#. :CYP:196:
+#: CountryCode.cc:271
 msgid "Czech Republic"
 msgstr "República Tcheca"
 
-#: zypp/CountryCode.cc:272
+#. :CZE:203:
+#: CountryCode.cc:272
 msgid "Germany"
 msgstr "Alemanha"
 
-#: zypp/CountryCode.cc:273
+#. :DEU:276:
+#: CountryCode.cc:273
 msgid "Djibouti"
 msgstr "Djibuti"
 
-#: zypp/CountryCode.cc:274
+#. :DJI:262:
+#: CountryCode.cc:274
 msgid "Denmark"
 msgstr "Dinamarca"
 
-#: zypp/CountryCode.cc:275
+#. :DNK:208:
+#: CountryCode.cc:275
 msgid "Dominica"
 msgstr "Dominica"
 
-#: zypp/CountryCode.cc:276
+#. :DMA:212:
+#: CountryCode.cc:276
 msgid "Dominican Republic"
 msgstr "República Dominicana"
 
-#: zypp/CountryCode.cc:277
+#. :DOM:214:
+#: CountryCode.cc:277
 msgid "Algeria"
 msgstr "Argélia"
 
-#: zypp/CountryCode.cc:278
+#. :DZA:012:
+#: CountryCode.cc:278
 msgid "Ecuador"
 msgstr "Equador"
 
-#: zypp/CountryCode.cc:279
+#. :ECU:218:
+#: CountryCode.cc:279
 msgid "Estonia"
 msgstr "Estônia"
 
-#: zypp/CountryCode.cc:280
+#. :EST:233:
+#: CountryCode.cc:280
 msgid "Egypt"
 msgstr "Egito"
 
-#: zypp/CountryCode.cc:281
+#. :EGY:818:
+#: CountryCode.cc:281
 msgid "Western Sahara"
 msgstr "Saara Ocidental"
 
-#: zypp/CountryCode.cc:282
+#. :ESH:732:
+#: CountryCode.cc:282
 msgid "Eritrea"
 msgstr "Eritréia"
 
-#: zypp/CountryCode.cc:283
+#. :ERI:232:
+#: CountryCode.cc:283
 msgid "Spain"
 msgstr "Espanha"
 
-#: zypp/CountryCode.cc:284
+#. :ESP:724:
+#: CountryCode.cc:284
 msgid "Ethiopia"
 msgstr "Etiópia"
 
-#: zypp/CountryCode.cc:285
+#. :ETH:231:
+#: CountryCode.cc:285
 msgid "Finland"
 msgstr "Finlândia"
 
-#: zypp/CountryCode.cc:286
+#. :FIN:246:
+#: CountryCode.cc:286
 msgid "Fiji"
 msgstr "Fiji"
 
-#: zypp/CountryCode.cc:287
+#. :FJI:242:
+#: CountryCode.cc:287
 msgid "Falkland Islands (Malvinas)"
 msgstr "Ilhas Malvinas"
 
-#: zypp/CountryCode.cc:288
+#. :FLK:238:
+#: CountryCode.cc:288
 msgid "Federated States of Micronesia"
 msgstr "Micronésia"
 
-#: zypp/CountryCode.cc:289
+#. :FSM:583:
+#: CountryCode.cc:289
 msgid "Faroe Islands"
 msgstr "Ilhas Faeroes"
 
-#: zypp/CountryCode.cc:290
+#. :FRO:234:
+#: CountryCode.cc:290
 msgid "France"
 msgstr "França"
 
-#: zypp/CountryCode.cc:291
+#. :FRA:250:
+#: CountryCode.cc:291
 msgid "Metropolitan France"
 msgstr "França Metropolitana"
 
-#: zypp/CountryCode.cc:292
+#. :FXX:249:
+#: CountryCode.cc:292
 msgid "Gabon"
 msgstr "Gabão"
 
-#: zypp/CountryCode.cc:293
+#. :GAB:266:
+#: CountryCode.cc:293
 msgid "United Kingdom"
 msgstr "Reino Unido"
 
-#: zypp/CountryCode.cc:294
+#. :GBR:826:
+#: CountryCode.cc:294
 msgid "Grenada"
 msgstr "Granada"
 
-#: zypp/CountryCode.cc:295
+#. :GRD:308:
+#: CountryCode.cc:295
 msgid "Georgia"
 msgstr "Geórgia"
 
-#: zypp/CountryCode.cc:296
+#. :GEO:268:
+#: CountryCode.cc:296
 msgid "French Guiana"
 msgstr "Guiana Francesa"
 
-#: zypp/CountryCode.cc:297
+#. :GUF:254:
+#: CountryCode.cc:297
 msgid "Ghana"
 msgstr "Gana"
 
-#: zypp/CountryCode.cc:298
+#. :GHA:288:
+#: CountryCode.cc:298
 msgid "Gibraltar"
 msgstr "Gibraltar"
 
-#: zypp/CountryCode.cc:299
+#. :GIB:292:
+#: CountryCode.cc:299
 msgid "Greenland"
 msgstr "Groenlândia"
 
-#: zypp/CountryCode.cc:300
+#. :GRL:304:
+#: CountryCode.cc:300
 msgid "Gambia"
 msgstr "Gâmbia"
 
-#: zypp/CountryCode.cc:301
+#. :GMB:270:
+#: CountryCode.cc:301
 msgid "Guinea"
 msgstr "Guiné"
 
-#: zypp/CountryCode.cc:302
+#. :GIN:324:
+#: CountryCode.cc:302
 msgid "Guadeloupe"
 msgstr "Guadalupe"
 
-#: zypp/CountryCode.cc:303
+#. :GLP:312:
+#: CountryCode.cc:303
 msgid "Equatorial Guinea"
 msgstr "Guiné Equatorial"
 
-#: zypp/CountryCode.cc:304
+#. :GNQ:226:
+#: CountryCode.cc:304
 msgid "Greece"
 msgstr "Grécia"
 
-#: zypp/CountryCode.cc:305
+#. :GRC:300:
+#: CountryCode.cc:305
 msgid "South Georgia and the South Sandwich Islands"
 msgstr "Ilhas Sandwich e Geórgia do Sul"
 
-#: zypp/CountryCode.cc:306
+#. :SGS:239:
+#: CountryCode.cc:306
 msgid "Guatemala"
 msgstr "Guatemala"
 
-#: zypp/CountryCode.cc:307
+#. :GTM:320:
+#: CountryCode.cc:307
 msgid "Guam"
 msgstr "Guam"
 
-#: zypp/CountryCode.cc:308
+#. :GUM:316:
+#: CountryCode.cc:308
 msgid "Guinea-Bissau"
 msgstr "Guiné-Bissau"
 
-#: zypp/CountryCode.cc:309
+#. :GNB:624:
+#: CountryCode.cc:309
 msgid "Guyana"
 msgstr "Guiana"
 
-#: zypp/CountryCode.cc:310
+#. :GUY:328:
+#: CountryCode.cc:310
 msgid "Hong Kong"
 msgstr "Hong Kong"
 
-#: zypp/CountryCode.cc:311
+#. :HKG:344:
+#: CountryCode.cc:311
 msgid "Heard Island and McDonald Islands"
 msgstr "Ilhas Heard e McDonald"
 
-#: zypp/CountryCode.cc:312
+#. :HMD:334:
+#: CountryCode.cc:312
 msgid "Honduras"
 msgstr "Honduras"
 
-#: zypp/CountryCode.cc:313
+#. :HND:340:
+#: CountryCode.cc:313
 msgid "Croatia"
 msgstr "Croácia"
 
-#: zypp/CountryCode.cc:314
+#. :HRV:191:
+#: CountryCode.cc:314
 msgid "Haiti"
 msgstr "Haiti"
 
-#: zypp/CountryCode.cc:315
+#. :HTI:332:
+#: CountryCode.cc:315
 msgid "Hungary"
 msgstr "Hungria"
 
-#: zypp/CountryCode.cc:316
+#. :HUN:348:
+#: CountryCode.cc:316
 msgid "Indonesia"
 msgstr "Indonésia"
 
-#: zypp/CountryCode.cc:317
+#. :IDN:360:
+#: CountryCode.cc:317
 msgid "Ireland"
 msgstr "Irlanda"
 
-#: zypp/CountryCode.cc:318
+#. :IRL:372:
+#: CountryCode.cc:318
 msgid "Israel"
 msgstr "Israel"
 
-#: zypp/CountryCode.cc:319
+#. :ISR:376:
+#: CountryCode.cc:319
 msgid "India"
 msgstr "Índia"
 
-#: zypp/CountryCode.cc:320
+#. :IND:356:
+#: CountryCode.cc:320
 msgid "British Indian Ocean Territory"
 msgstr "Território Britânico no Oceano Índico"
 
-#: zypp/CountryCode.cc:321
+#. :IOT:086:
+#: CountryCode.cc:321
 msgid "Iraq"
 msgstr "Iraque"
 
-#: zypp/CountryCode.cc:322
+#. :IRQ:368:
+#: CountryCode.cc:322
 msgid "Iran"
 msgstr "Irã"
 
-#: zypp/CountryCode.cc:323
+#. :IRN:364:
+#: CountryCode.cc:323
 msgid "Iceland"
 msgstr "Islândia"
 
-#: zypp/CountryCode.cc:324
+#. :ISL:352:
+#: CountryCode.cc:324
 msgid "Italy"
 msgstr "Itália"
 
-#: zypp/CountryCode.cc:325
+#. :ITA:380:
+#: CountryCode.cc:325
 msgid "Jamaica"
 msgstr "Jamaica"
 
-#: zypp/CountryCode.cc:326
+#. :JAM:388:
+#: CountryCode.cc:326
 msgid "Jordan"
 msgstr "Jordânia"
 
-#: zypp/CountryCode.cc:327
+#. :JOR:400:
+#: CountryCode.cc:327
 msgid "Japan"
 msgstr "Japão"
 
-#: zypp/CountryCode.cc:328
+#. :JPN:392:
+#: CountryCode.cc:328
 msgid "Kenya"
 msgstr "Quênia"
 
-#: zypp/CountryCode.cc:329
+#. :KEN:404:
+#: CountryCode.cc:329
 msgid "Kyrgyzstan"
 msgstr "Quirguistão"
 
-#: zypp/CountryCode.cc:330
+#. :KGZ:417:
+#: CountryCode.cc:330
 msgid "Cambodia"
 msgstr "Camboja"
 
-#: zypp/CountryCode.cc:331
+#. :KHM:116:
+#: CountryCode.cc:331
 msgid "Kiribati"
 msgstr "Kiribati"
 
-#: zypp/CountryCode.cc:332
+#. :KIR:296:
+#: CountryCode.cc:332
 msgid "Comoros"
 msgstr "Ilhas Comores"
 
-#: zypp/CountryCode.cc:333
+#. :COM:174:
+#: CountryCode.cc:333
 msgid "Saint Kitts and Nevis"
 msgstr "São Cristóvão e Névis"
 
-#: zypp/CountryCode.cc:334
+#. :KNA:659:
+#: CountryCode.cc:334
 msgid "North Korea"
 msgstr "Coréia do Norte"
 
-#: zypp/CountryCode.cc:335
+#. :PRK:408:
+#: CountryCode.cc:335
 msgid "South Korea"
 msgstr "Coréia do Sul"
 
-#: zypp/CountryCode.cc:336
+#. :KOR:410:
+#: CountryCode.cc:336
 msgid "Kuwait"
 msgstr "Kuwait"
 
-#: zypp/CountryCode.cc:337
+#. :KWT:414:
+#: CountryCode.cc:337
 msgid "Cayman Islands"
 msgstr "Ilhas Cayman"
 
-#: zypp/CountryCode.cc:338
+#. :CYM:136:
+#: CountryCode.cc:338
 msgid "Kazakhstan"
 msgstr "Cazaquistão"
 
-#: zypp/CountryCode.cc:339
+#. :KAZ:398:
+#: CountryCode.cc:339
 msgid "Lao People's Democratic Republic"
 msgstr "Laos"
 
-#: zypp/CountryCode.cc:340
+#. :LAO:418:
+#: CountryCode.cc:340
 msgid "Lebanon"
 msgstr "Líbano"
 
-#: zypp/CountryCode.cc:341
+#. :LBN:422:
+#: CountryCode.cc:341
 msgid "Saint Lucia"
 msgstr "Santa Lúcia"
 
-#: zypp/CountryCode.cc:342
+#. :LCA:662:
+#: CountryCode.cc:342
 msgid "Liechtenstein"
 msgstr "Liechtenstein"
 
-#: zypp/CountryCode.cc:343
+#. :LIE:438:
+#: CountryCode.cc:343
 msgid "Sri Lanka"
 msgstr "Sri Lanka"
 
-#: zypp/CountryCode.cc:344
+#. :LKA:144:
+#: CountryCode.cc:344
 msgid "Liberia"
 msgstr "Libéria"
 
-#: zypp/CountryCode.cc:345
+#. :LBR:430:
+#: CountryCode.cc:345
 msgid "Lesotho"
 msgstr "Lesoto"
 
-#: zypp/CountryCode.cc:346
+#. :LSO:426:
+#: CountryCode.cc:346
 msgid "Lithuania"
 msgstr "Lituânia"
 
-#: zypp/CountryCode.cc:347
+#. :LTU:440:
+#: CountryCode.cc:347
 msgid "Luxembourg"
 msgstr "Luxemburgo"
 
-#: zypp/CountryCode.cc:348
+#. :LUX:442:
+#: CountryCode.cc:348
 msgid "Latvia"
 msgstr "Letônia"
 
-#: zypp/CountryCode.cc:349
+#. :LVA:428:
+#: CountryCode.cc:349
 msgid "Libya"
 msgstr "Líbia"
 
-#: zypp/CountryCode.cc:350
+#. :LBY:434:
+#: CountryCode.cc:350
 msgid "Morocco"
 msgstr "Marrocos"
 
-#: zypp/CountryCode.cc:351
+#. :MAR:504:
+#: CountryCode.cc:351
 msgid "Monaco"
 msgstr "Monaco"
 
-#: zypp/CountryCode.cc:352
+#. :MCO:492:
+#: CountryCode.cc:352
 msgid "Moldova"
 msgstr "Moldova"
 
-#: zypp/CountryCode.cc:353
+#. :MDA:498:
+#: CountryCode.cc:353
 msgid "Madagascar"
 msgstr "Madagascar"
 
-#: zypp/CountryCode.cc:354
+#. :MDG:450:
+#: CountryCode.cc:354
 msgid "Marshall Islands"
 msgstr "Ilhas Marshall"
 
-#: zypp/CountryCode.cc:355
+#. :MHL:584:
+#: CountryCode.cc:355
 msgid "Macedonia"
 msgstr "Macedônia"
 
-#: zypp/CountryCode.cc:356
+#. :MKD:807:
+#: CountryCode.cc:356
 msgid "Mali"
 msgstr "Mali"
 
-#: zypp/CountryCode.cc:357
+#. :MLI:466:
+#: CountryCode.cc:357
 msgid "Myanmar"
 msgstr "Myanma"
 
-#: zypp/CountryCode.cc:358
+#. :MMR:104:
+#: CountryCode.cc:358
 msgid "Mongolia"
 msgstr "Mongólia"
 
-#: zypp/CountryCode.cc:359
+#. :MNG:496:
+#: CountryCode.cc:359
 msgid "Macao"
 msgstr "Macau"
 
-#: zypp/CountryCode.cc:360
+#. :MAC:446:
+#: CountryCode.cc:360
 msgid "Northern Mariana Islands"
 msgstr "Ilhas Marianas do Norte"
 
-#: zypp/CountryCode.cc:361
+#. :MNP:580:
+#: CountryCode.cc:361
 msgid "Martinique"
 msgstr "Martinica"
 
-#: zypp/CountryCode.cc:362
+#. :MTQ:474:
+#: CountryCode.cc:362
 msgid "Mauritania"
 msgstr "Mauritânia"
 
-#: zypp/CountryCode.cc:363
+#. :MRT:478:
+#: CountryCode.cc:363
 msgid "Montserrat"
 msgstr "Montserrat"
 
-#: zypp/CountryCode.cc:364
+#. :MSR:500:
+#: CountryCode.cc:364
 msgid "Malta"
 msgstr "Malta"
 
-#: zypp/CountryCode.cc:365
+#. :MLT:470:
+#: CountryCode.cc:365
 msgid "Mauritius"
 msgstr "Maurício"
 
-#: zypp/CountryCode.cc:366
+#. :MUS:480:
+#: CountryCode.cc:366
 msgid "Maldives"
 msgstr "Maldivas"
 
-#: zypp/CountryCode.cc:367
+#. :MDV:462:
+#: CountryCode.cc:367
 msgid "Malawi"
 msgstr "Malaui"
 
-#: zypp/CountryCode.cc:368
+#. :MWI:454:
+#: CountryCode.cc:368
 msgid "Mexico"
 msgstr "México"
 
-#: zypp/CountryCode.cc:369
+#. :MEX:484:
+#: CountryCode.cc:369
 msgid "Malaysia"
 msgstr "Malásia"
 
-#: zypp/CountryCode.cc:370
+#. :MYS:458:
+#: CountryCode.cc:370
 msgid "Mozambique"
 msgstr "Moçambique"
 
-#: zypp/CountryCode.cc:371
+#. :MOZ:508:
+#: CountryCode.cc:371
 msgid "Namibia"
 msgstr "Namíbia"
 
-#: zypp/CountryCode.cc:372
+#. :NAM:516:
+#: CountryCode.cc:372
 msgid "New Caledonia"
 msgstr "Nova Caledônia"
 
-#: zypp/CountryCode.cc:373
+#. :NCL:540:
+#: CountryCode.cc:373
 msgid "Niger"
 msgstr "Níger"
 
-#: zypp/CountryCode.cc:374
+#. :NER:562:
+#: CountryCode.cc:374
 msgid "Norfolk Island"
 msgstr "Ilha Norfolk"
 
-#: zypp/CountryCode.cc:375
+#. :NFK:574:
+#: CountryCode.cc:375
 msgid "Nigeria"
 msgstr "Nigéria"
 
-#: zypp/CountryCode.cc:376
+#. :NGA:566:
+#: CountryCode.cc:376
 msgid "Nicaragua"
 msgstr "Nicarágua"
 
-#: zypp/CountryCode.cc:377
+#. :NIC:558:
+#: CountryCode.cc:377
 msgid "Netherlands"
 msgstr "Holanda"
 
-#: zypp/CountryCode.cc:378
+#. :NLD:528:
+#: CountryCode.cc:378
 msgid "Norway"
 msgstr "Noruega"
 
-#: zypp/CountryCode.cc:379
+#. :NOR:578:
+#: CountryCode.cc:379
 msgid "Nepal"
 msgstr "Nepal"
 
-#: zypp/CountryCode.cc:381
+#. :NPL:524:
+#. language code: nau na
+#: CountryCode.cc:380 LanguageCode.cc:858
+msgid "Nauru"
+msgstr "Nauruano"
+
+#. :NRU:520:
+#: CountryCode.cc:381
 msgid "Niue"
 msgstr "Niue"
 
-#: zypp/CountryCode.cc:382
+#. :NIU:570:
+#: CountryCode.cc:382
 msgid "New Zealand"
 msgstr "Nova Zelândia"
 
-#: zypp/CountryCode.cc:383
+#. :NZL:554:
+#: CountryCode.cc:383
 msgid "Oman"
 msgstr "Omã"
 
-#: zypp/CountryCode.cc:384
+#. :OMN:512:
+#: CountryCode.cc:384
 msgid "Panama"
 msgstr "Panamá"
 
-#: zypp/CountryCode.cc:385
+#. :PAN:591:
+#: CountryCode.cc:385
 msgid "Peru"
 msgstr "Peru"
 
-#: zypp/CountryCode.cc:386
+#. :PER:604:
+#: CountryCode.cc:386
 msgid "French Polynesia"
 msgstr "Polinésia Francesa"
 
-#: zypp/CountryCode.cc:387
+#. :PYF:258:
+#: CountryCode.cc:387
 msgid "Papua New Guinea"
 msgstr "Papua-Nova Guiné"
 
-#: zypp/CountryCode.cc:388
+#. :PNG:598:
+#: CountryCode.cc:388
 msgid "Philippines"
 msgstr "Filipinas"
 
-#: zypp/CountryCode.cc:389
+#. :PHL:608:
+#: CountryCode.cc:389
 msgid "Pakistan"
 msgstr "Paquistão"
 
-#: zypp/CountryCode.cc:390
+#. :PAK:586:
+#: CountryCode.cc:390
 msgid "Poland"
 msgstr "Polônia"
 
-#: zypp/CountryCode.cc:391
+#. :POL:616:
+#: CountryCode.cc:391
 msgid "Saint Pierre and Miquelon"
 msgstr "Saint Pierre e Miquelon"
 
-#: zypp/CountryCode.cc:392
+#. :SPM:666:
+#: CountryCode.cc:392
 msgid "Pitcairn"
 msgstr "Ilha Pitcairn"
 
-#: zypp/CountryCode.cc:393
+#. :PCN:612:
+#: CountryCode.cc:393
 msgid "Puerto Rico"
 msgstr "Porto Rico"
 
-#: zypp/CountryCode.cc:394
+#. :PRI:630:
+#: CountryCode.cc:394
 msgid "Palestinian Territory"
 msgstr "Território Palestino"
 
-#: zypp/CountryCode.cc:395
+#. :PSE:275:
+#: CountryCode.cc:395
 msgid "Portugal"
 msgstr "Portugal"
 
-#: zypp/CountryCode.cc:396
+#. :PRT:620:
+#: CountryCode.cc:396
 msgid "Palau"
 msgstr "Palau"
 
-#: zypp/CountryCode.cc:397
+#. :PLW:585:
+#: CountryCode.cc:397
 msgid "Paraguay"
 msgstr "Paraguai"
 
-#: zypp/CountryCode.cc:398
+#. :PRY:600:
+#: CountryCode.cc:398
 msgid "Qatar"
 msgstr "Qatar"
 
-#: zypp/CountryCode.cc:399
+#. :QAT:634:
+#: CountryCode.cc:399
 msgid "Reunion"
 msgstr "Ilha Reunião"
 
-#: zypp/CountryCode.cc:400
+#. :REU:638:
+#: CountryCode.cc:400
 msgid "Romania"
 msgstr "Romênia"
 
-#: zypp/CountryCode.cc:401
+#. :ROU:642:
+#: CountryCode.cc:401
 msgid "Russian Federation"
 msgstr "Rússia"
 
-#: zypp/CountryCode.cc:402
+#. :RUS:643:
+#: CountryCode.cc:402
 msgid "Rwanda"
 msgstr "Ruanda"
 
-#: zypp/CountryCode.cc:403
+#. :RWA:646:
+#: CountryCode.cc:403
 msgid "Saudi Arabia"
 msgstr "Arábia Saudita"
 
-#: zypp/CountryCode.cc:404
+#. :SAU:682:
+#: CountryCode.cc:404
 msgid "Solomon Islands"
 msgstr "Ilhas Salomão"
 
-#: zypp/CountryCode.cc:405
+#. :SLB:090:
+#: CountryCode.cc:405
 msgid "Seychelles"
 msgstr "Ilhas Seychelles"
 
-#: zypp/CountryCode.cc:406
+#. :SYC:690:
+#: CountryCode.cc:406
 msgid "Sudan"
 msgstr "Sudão"
 
-#: zypp/CountryCode.cc:407
+#. :SDN:736:
+#: CountryCode.cc:407
 msgid "Sweden"
 msgstr "Suécia"
 
-#: zypp/CountryCode.cc:408
+#. :SWE:752:
+#: CountryCode.cc:408
 msgid "Singapore"
 msgstr "Cingapura"
 
-#: zypp/CountryCode.cc:409
+#. :SGP:702:
+#: CountryCode.cc:409
 msgid "Saint Helena"
 msgstr "Santa Helena"
 
-#: zypp/CountryCode.cc:410
+#. :SHN:654:
+#: CountryCode.cc:410
 msgid "Slovenia"
 msgstr "Eslovênia"
 
-#: zypp/CountryCode.cc:411
+#. :SVN:705:
+#: CountryCode.cc:411
 msgid "Svalbard and Jan Mayen"
 msgstr "Ilhas Svalbard e Jan Mayen"
 
-#: zypp/CountryCode.cc:412
+#. :SJM:744:
+#: CountryCode.cc:412
 msgid "Slovakia"
 msgstr "Eslováquia"
 
-#: zypp/CountryCode.cc:413
+#. :SVK:703:
+#: CountryCode.cc:413
 msgid "Sierra Leone"
 msgstr "Serra Leoa"
 
-#: zypp/CountryCode.cc:414
+#. :SLE:694:
+#: CountryCode.cc:414
 msgid "San Marino"
 msgstr "San Marino"
 
-#: zypp/CountryCode.cc:415
+#. :SMR:674:
+#: CountryCode.cc:415
 msgid "Senegal"
 msgstr "Senegal"
 
-#: zypp/CountryCode.cc:416
+#. :SEN:686:
+#: CountryCode.cc:416
 msgid "Somalia"
 msgstr "Somália"
 
-#: zypp/CountryCode.cc:417
+#. :SOM:706:
+#: CountryCode.cc:417
 msgid "Suriname"
 msgstr "Suriname"
 
-#: zypp/CountryCode.cc:418
+#. :SUR:740:
+#: CountryCode.cc:418
 msgid "Sao Tome and Principe"
 msgstr "São Tomé e Príncipe"
 
-#: zypp/CountryCode.cc:419
+#. :STP:678:
+#: CountryCode.cc:419
 msgid "El Salvador"
 msgstr "El Salvador"
 
-#: zypp/CountryCode.cc:420
+#. :SLV:222:
+#: CountryCode.cc:420
 msgid "Syria"
 msgstr "Síria"
 
-#: zypp/CountryCode.cc:421
+#. :SYR:760:
+#: CountryCode.cc:421
 msgid "Swaziland"
 msgstr "Suazilândia"
 
-#: zypp/CountryCode.cc:422
+#. :SWZ:748:
+#: CountryCode.cc:422
 msgid "Turks and Caicos Islands"
 msgstr "Ilhas Turks e Caicos"
 
-#: zypp/CountryCode.cc:423
+#. :TCA:796:
+#: CountryCode.cc:423
 msgid "Chad"
 msgstr "Chade"
 
-#: zypp/CountryCode.cc:424
+#. :TCD:148:
+#: CountryCode.cc:424
 msgid "French Southern Territories"
 msgstr "Territórios Franceses Meridionais"
 
-#: zypp/CountryCode.cc:425
+#. :ATF:260:
+#: CountryCode.cc:425
 msgid "Togo"
 msgstr "Togo"
 
-#: zypp/CountryCode.cc:426
+#. :TGO:768:
+#: CountryCode.cc:426
 msgid "Thailand"
 msgstr "Tailândia"
 
-#: zypp/CountryCode.cc:427
+#. :THA:764:
+#: CountryCode.cc:427
 msgid "Tajikistan"
 msgstr "Tadjiquistão"
 
-#: zypp/CountryCode.cc:429
+#. :TJK:762:
+#. language code: tkl
+#: CountryCode.cc:428 LanguageCode.cc:1122
+msgid "Tokelau"
+msgstr "Tokelau"
+
+#. :TKL:772:
+#: CountryCode.cc:429
 msgid "Turkmenistan"
 msgstr "Turcomenistão"
 
-#: zypp/CountryCode.cc:430
+#. :TKM:795:
+#: CountryCode.cc:430
 msgid "Tunisia"
 msgstr "Tunísia"
 
-#: zypp/CountryCode.cc:431
+#. :TUN:788:
+#: CountryCode.cc:431
 msgid "Tonga"
 msgstr "Tonga"
 
-#: zypp/CountryCode.cc:432
+#. :TON:776:
+#: CountryCode.cc:432
 msgid "East Timor"
 msgstr "Timor Leste"
 
-#: zypp/CountryCode.cc:433
+#. :TLS:626:
+#: CountryCode.cc:433
 msgid "Turkey"
 msgstr "Turquia"
 
-#: zypp/CountryCode.cc:434
+#. :TUR:792:
+#: CountryCode.cc:434
 msgid "Trinidad and Tobago"
 msgstr "Trinidad e Tobago"
 
-#: zypp/CountryCode.cc:436
+#. :TTO:780:
+#. language code: tvl
+#: CountryCode.cc:435 LanguageCode.cc:1152
+msgid "Tuvalu"
+msgstr "Tuvaluano"
+
+#. :TUV:798:
+#: CountryCode.cc:436
 msgid "Taiwan"
 msgstr "Taiwan"
 
-#: zypp/CountryCode.cc:437
+#. :TWN:158:
+#: CountryCode.cc:437
 msgid "Tanzania"
 msgstr "Tanzânia"
 
-#: zypp/CountryCode.cc:438
+#. :TZA:834:
+#: CountryCode.cc:438
 msgid "Ukraine"
 msgstr "Ucrânia"
 
-#: zypp/CountryCode.cc:439
+#. :UKR:804:
+#: CountryCode.cc:439
 msgid "Uganda"
 msgstr "Uganda"
 
-#: zypp/CountryCode.cc:440
+#. :UGA:800:
+#: CountryCode.cc:440
 msgid "United States Minor Outlying Islands"
 msgstr "Ilhas Menores do Território Externo Norte-Americano"
 
-#: zypp/CountryCode.cc:441
+#. :UMI:581:
+#: CountryCode.cc:441
 msgid "United States"
 msgstr "Estados Unidos"
 
-#: zypp/CountryCode.cc:442
+#. :USA:840:
+#: CountryCode.cc:442
 msgid "Uruguay"
 msgstr "Uruguai"
 
-#: zypp/CountryCode.cc:443
+#. :URY:858:
+#: CountryCode.cc:443
 msgid "Uzbekistan"
 msgstr "Uzbequistão"
 
-#: zypp/CountryCode.cc:444
+#. :UZB:860:
+#: CountryCode.cc:444
 msgid "Holy See (Vatican City State)"
 msgstr "Cidade do Vaticano"
 
-#: zypp/CountryCode.cc:445
+#. :VAT:336:
+#: CountryCode.cc:445
 msgid "Saint Vincent and the Grenadines"
 msgstr "São Vicente e Granadinas"
 
-#: zypp/CountryCode.cc:446
+#. :VCT:670:
+#: CountryCode.cc:446
 msgid "Venezuela"
 msgstr "Venezuela"
 
-#: zypp/CountryCode.cc:447
+#. :VEN:862:
+#: CountryCode.cc:447
 msgid "British Virgin Islands"
 msgstr "Ilhas Virgens Britânicas"
 
-#: zypp/CountryCode.cc:448
+#. :VGB:092:
+#: CountryCode.cc:448
 msgid "Virgin Islands, U.S."
 msgstr "Ilhas Virgens Norte-Americanas"
 
-#: zypp/CountryCode.cc:449
+#. :VIR:850:
+#: CountryCode.cc:449
 msgid "Vietnam"
 msgstr "Vietnã"
 
-#: zypp/CountryCode.cc:450
+#. :VNM:704:
+#: CountryCode.cc:450
 msgid "Vanuatu"
 msgstr "Vanuatu"
 
-#: zypp/CountryCode.cc:451
+#. :VUT:548:
+#: CountryCode.cc:451
 msgid "Wallis and Futuna"
 msgstr "Ilhas Wallis e Futuna"
 
-#: zypp/CountryCode.cc:452
+#. :WLF:876:
+#: CountryCode.cc:452
 msgid "Samoa"
 msgstr "Samoa Ocidental"
 
-#: zypp/CountryCode.cc:453
+#. :WSM:882:
+#: CountryCode.cc:453
 msgid "Yemen"
 msgstr "Iêmen"
 
-#: zypp/CountryCode.cc:454
+#. :YEM:887:
+#: CountryCode.cc:454
 msgid "Mayotte"
 msgstr "Mayotte"
 
-#: zypp/CountryCode.cc:455
+#. :MYT:175:
+#: CountryCode.cc:455
 msgid "South Africa"
 msgstr "África do Sul"
 
-#: zypp/CountryCode.cc:456
+#. :ZAF:710:
+#: CountryCode.cc:456
 msgid "Zambia"
 msgstr "Zâmbia"
 
-#: zypp/CountryCode.cc:457
+#. :ZMB:894:
+#: CountryCode.cc:457
 msgid "Zimbabwe"
 msgstr "Zimbábue"
 
-#: zypp/SourceManager.h:40
-msgid "Unable to restore all sources."
-msgstr "Não é possível restaurar todas as fontes."
+#: LanguageCode.cc:145
+msgid "Unknown language: "
+msgstr "Idioma desconhecido:"
 
-#: zypp/SourceManager.h:66
+#. language code: aar aa
+#: LanguageCode.cc:238
+msgid "Afar"
+msgstr "Afar"
+
+#. language code: abk ab
+#: LanguageCode.cc:240
+msgid "Abkhazian"
+msgstr "Abkhaz"
+
+#. language code: ace
+#: LanguageCode.cc:242
+msgid "Achinese"
+msgstr "Achém"
+
+#. language code: ach
+#: LanguageCode.cc:244
+msgid "Acoli"
+msgstr "Acoli"
+
+#. language code: ada
+#: LanguageCode.cc:246
+msgid "Adangme"
+msgstr "Circassiano"
+
+#. language code: ady
+#: LanguageCode.cc:248
+msgid "Adyghe"
+msgstr "Adyghe"
+
+#. language code: afa
+#: LanguageCode.cc:250
+msgid "Afro-Asiatic (Other)"
+msgstr "Afro-Asiático (Outros)"
+
+#. language code: afh
+#: LanguageCode.cc:252
+msgid "Afrihili"
+msgstr "Afrihili"
+
+#. language code: afr af
+#: LanguageCode.cc:254
+msgid "Afrikaans"
+msgstr "Africânder"
+
+#. language code: ain
+#: LanguageCode.cc:256
+msgid "Ainu"
+msgstr "Aino"
+
+#. language code: aka ak
+#: LanguageCode.cc:258
+msgid "Akan"
+msgstr "Akan"
+
+#. language code: akk
+#: LanguageCode.cc:260
+msgid "Akkadian"
+msgstr "Acadiano"
+
+#. language code: alb sqi sq
+#: LanguageCode.cc:262 LanguageCode.cc:264
+msgid "Albanian"
+msgstr "Albanês"
+
+#. language code: ale
+#: LanguageCode.cc:266
+msgid "Aleut"
+msgstr "Aleúte"
+
+#. language code: alg
+#: LanguageCode.cc:268
+msgid "Algonquian languages"
+msgstr "Línguas Algonquinas"
+
+#. language code: alt
+#: LanguageCode.cc:270
+msgid "Southern Altai"
+msgstr "Altaico Meridional"
+
+#. language code: amh am
+#: LanguageCode.cc:272
+msgid "Amharic"
+msgstr "Amárico"
+
+#. language code: ang
+#: LanguageCode.cc:274
+msgid "English, Old (ca.450-1100)"
+msgstr "Inglês Antigo (aprox. 450-1100)"
+
+#. language code: apa
+#: LanguageCode.cc:276
+msgid "Apache languages"
+msgstr "Línguas Apaches"
+
+#. language code: ara ar
+#: LanguageCode.cc:278
+msgid "Arabic"
+msgstr "Árabe"
+
+#. language code: arc
+#: LanguageCode.cc:280
+msgid "Aramaic"
+msgstr "Aramaico"
+
+#. language code: arg an
+#: LanguageCode.cc:282
+msgid "Aragonese"
+msgstr "Aragonês"
+
+#. language code: arm hye hy
+#: LanguageCode.cc:284 LanguageCode.cc:286
+msgid "Armenian"
+msgstr "Armênio"
+
+#. language code: arn
+#: LanguageCode.cc:288
+msgid "Araucanian"
+msgstr "Araucano"
+
+#. language code: arp
+#: LanguageCode.cc:290
+msgid "Arapaho"
+msgstr "Arapaho"
+
+#. language code: art
+#: LanguageCode.cc:292
+msgid "Artificial (Other)"
+msgstr "Artificial (Outros)"
+
+#. language code: arw
+#: LanguageCode.cc:294
+msgid "Arawak"
+msgstr "Arawak"
+
+#. language code: asm as
+#: LanguageCode.cc:296
+msgid "Assamese"
+msgstr "Assamês"
+
+#. language code: ast
+#: LanguageCode.cc:298
+msgid "Asturian"
+msgstr "Asturiano"
+
+#. language code: ath
+#: LanguageCode.cc:300
+msgid "Athapascan languages"
+msgstr "Línguas Atapascas"
+
+#. language code: aus
+#: LanguageCode.cc:302
+msgid "Australian languages"
+msgstr "Línguas Australianas"
+
+#. language code: ava av
+#: LanguageCode.cc:304
+msgid "Avaric"
+msgstr "Avárico"
+
+#. language code: ave ae
+#: LanguageCode.cc:306
+msgid "Avestan"
+msgstr "Avéstico"
+
+#. language code: awa
+#: LanguageCode.cc:308
+msgid "Awadhi"
+msgstr "Awadhi"
+
+#. language code: aym ay
+#: LanguageCode.cc:310
+msgid "Aymara"
+msgstr "Aymara"
+
+#. language code: aze az
+#: LanguageCode.cc:312
+msgid "Azerbaijani"
+msgstr "Azerbaidjano"
+
+#. language code: bad
+#: LanguageCode.cc:314
+msgid "Banda"
+msgstr "Banda"
+
+#. language code: bai
+#: LanguageCode.cc:316
+msgid "Bamileke languages"
+msgstr "Línguas Bamileques"
+
+#. language code: bak ba
+#: LanguageCode.cc:318
+msgid "Bashkir"
+msgstr "Bashkir"
+
+#. language code: bal
+#: LanguageCode.cc:320
+msgid "Baluchi"
+msgstr "Balúchi"
+
+#. language code: bam bm
+#: LanguageCode.cc:322
+msgid "Bambara"
+msgstr "Bambara"
+
+#. language code: ban
+#: LanguageCode.cc:324
+msgid "Balinese"
+msgstr "Balinês"
+
+#. language code: baq eus eu
+#: LanguageCode.cc:326 LanguageCode.cc:328
+msgid "Basque"
+msgstr "Basco"
+
+#. language code: bas
+#: LanguageCode.cc:330
+msgid "Basa"
+msgstr "Basa"
+
+#. language code: bat
+#: LanguageCode.cc:332
+msgid "Baltic (Other)"
+msgstr "Báltico (Outros)"
+
+#. language code: bej
+#: LanguageCode.cc:334
+msgid "Beja"
+msgstr "Bejanês"
+
+#. language code: bel be
+#: LanguageCode.cc:336
+msgid "Belarusian"
+msgstr "Bielo-russo"
+
+#. language code: bem
+#: LanguageCode.cc:338
+msgid "Bemba"
+msgstr "Bemba"
+
+#. language code: ben bn
+#: LanguageCode.cc:340
+msgid "Bengali"
+msgstr "Bengali"
+
+#. language code: ber
+#: LanguageCode.cc:342
+msgid "Berber (Other)"
+msgstr "Berbere (Outros)"
+
+#. language code: bho
+#: LanguageCode.cc:344
+msgid "Bhojpuri"
+msgstr "Bhojpuri"
+
+#. language code: bih bh
+#: LanguageCode.cc:346
+msgid "Bihari"
+msgstr "Bihari"
+
+#. language code: bik
+#: LanguageCode.cc:348
+msgid "Bikol"
+msgstr "Bikol"
+
+#. language code: bin
+#: LanguageCode.cc:350
+msgid "Bini"
+msgstr "Bini"
+
+#. language code: bis bi
+#: LanguageCode.cc:352
+msgid "Bislama"
+msgstr "Bichlamar"
+
+#. language code: bla
+#: LanguageCode.cc:354
+msgid "Siksika"
+msgstr "Siksika"
+
+#. language code: bnt
+#: LanguageCode.cc:356
+msgid "Bantu (Other)"
+msgstr "Banto (Outros)"
+
+#. language code: bos bs
+#: LanguageCode.cc:358
+msgid "Bosnian"
+msgstr "Sérvio"
+
+#. language code: bra
+#: LanguageCode.cc:360
+msgid "Braj"
+msgstr "Brajavali"
+
+#. language code: bre br
+#: LanguageCode.cc:362
+msgid "Breton"
+msgstr "Bretão"
+
+#. language code: btk
+#: LanguageCode.cc:364
+msgid "Batak (Indonesia)"
+msgstr "Bataque (Indonésia)"
+
+#. language code: bua
+#: LanguageCode.cc:366
+msgid "Buriat"
+msgstr "Buriátio"
+
+#. language code: bug
+#: LanguageCode.cc:368
+msgid "Buginese"
+msgstr "Buginês"
+
+#. language code: bul bg
+#: LanguageCode.cc:370
+msgid "Bulgarian"
+msgstr "Búlgaro"
+
+#. language code: bur mya my
+#: LanguageCode.cc:372 LanguageCode.cc:374
+msgid "Burmese"
+msgstr "Birmanês"
+
+#. language code: byn
+#: LanguageCode.cc:376
+msgid "Blin"
+msgstr "Blin"
+
+#. language code: cad
+#: LanguageCode.cc:378
+msgid "Caddo"
+msgstr "Cadoano"
+
+#. language code: cai
+#: LanguageCode.cc:380
+msgid "Central American Indian (Other)"
+msgstr "Indígena Centro-Americano (Outros)"
+
+#. language code: car
+#: LanguageCode.cc:382
+msgid "Carib"
+msgstr "Caribe"
+
+#. language code: cat ca
+#: LanguageCode.cc:384
+msgid "Catalan"
+msgstr "Catalão"
+
+#. language code: cau
+#: LanguageCode.cc:386
+msgid "Caucasian (Other)"
+msgstr "Caucasiano (Outros)"
+
+#. language code: ceb
+#: LanguageCode.cc:388
+msgid "Cebuano"
+msgstr "Cebuano"
+
+#. language code: cel
+#: LanguageCode.cc:390
+msgid "Celtic (Other)"
+msgstr "Celta (Outros)"
+
+#. language code: cha ch
+#: LanguageCode.cc:392
+msgid "Chamorro"
+msgstr "Chamorro"
+
+#. language code: chb
+#: LanguageCode.cc:394
+msgid "Chibcha"
+msgstr "Chibcha"
+
+#. language code: che ce
+#: LanguageCode.cc:396
+msgid "Chechen"
+msgstr "Tchetcheno"
+
+#. language code: chg
+#: LanguageCode.cc:398
+msgid "Chagatai"
+msgstr "Chagatai"
+
+#. language code: chi zho zh
+#: LanguageCode.cc:400 LanguageCode.cc:402
+msgid "Chinese"
+msgstr "Chinês"
+
+#. language code: chk
+#: LanguageCode.cc:404
+msgid "Chuukese"
+msgstr "Chuukese"
+
+#. language code: chm
+#: LanguageCode.cc:406
+msgid "Mari"
+msgstr "Mari"
+
+#. language code: chn
+#: LanguageCode.cc:408
+msgid "Chinook jargon"
+msgstr "Jargão Chinook"
+
+#. language code: cho
+#: LanguageCode.cc:410
+msgid "Choctaw"
+msgstr "Choctaw"
+
+#. language code: chp
+#: LanguageCode.cc:412
+msgid "Chipewyan"
+msgstr "Chipewyan"
+
+#. language code: chr
+#: LanguageCode.cc:414
+msgid "Cherokee"
+msgstr "Cherokee"
+
+#. language code: chu cu
+#: LanguageCode.cc:416
+msgid "Church Slavic"
+msgstr "Eslavo Eclesiástico"
+
+#. language code: chv cv
+#: LanguageCode.cc:418
+msgid "Chuvash"
+msgstr "Chuvash"
+
+#. language code: chy
+#: LanguageCode.cc:420
+msgid "Cheyenne"
+msgstr "Cheyenne"
+
+#. language code: cmc
+#: LanguageCode.cc:422
+msgid "Chamic languages"
+msgstr "Línguas Tchadianas"
+
+#. language code: cop
+#: LanguageCode.cc:424
+msgid "Coptic"
+msgstr "Copta"
+
+#. language code: cor kw
+#: LanguageCode.cc:426
+msgid "Cornish"
+msgstr "Córnico"
+
+#. language code: cos co
+#: LanguageCode.cc:428
+msgid "Corsican"
+msgstr "Corso"
+
+#. language code: cpe
+#: LanguageCode.cc:430
+msgid "Creoles and pidgins, English based (Other)"
+msgstr "Crioulos e Pidgins de Base Inglesa (Outros)"
+
+#. language code: cpf
+#: LanguageCode.cc:432
+msgid "Creoles and pidgins, French-based (Other)"
+msgstr "Crioulos e Pidgins de Base Francesa (Outros)"
+
+#. language code: cpp
+#: LanguageCode.cc:434
+msgid "Creoles and pidgins, Portuguese-based (Other)"
+msgstr "Crioulos e Pidgins de Base Portuguesa (Outros)"
+
+#. language code: cre cr
+#: LanguageCode.cc:436
+msgid "Cree"
+msgstr "Cree"
+
+#. language code: crh
+#: LanguageCode.cc:438
+msgid "Crimean Tatar"
+msgstr "Tártaro (Criméia)"
+
+#. language code: crp
+#: LanguageCode.cc:440
+msgid "Creoles and pidgins (Other)"
+msgstr "Crioulos e Pidgins (Outros)"
+
+#. language code: csb
+#: LanguageCode.cc:442
+msgid "Kashubian"
+msgstr "Cassubiano"
+
+#. language code: cus
+#: LanguageCode.cc:444
+msgid "Cushitic (Other)"
+msgstr "Cuchita (Outros)"
+
+#. language code: cze ces cs
+#: LanguageCode.cc:446 LanguageCode.cc:448
+msgid "Czech"
+msgstr "Tcheco"
+
+#. language code: dak
+#: LanguageCode.cc:450
+msgid "Dakota"
+msgstr "Dacota"
+
+#. language code: dan da
+#: LanguageCode.cc:452
+msgid "Danish"
+msgstr "Dinamarquês"
+
+#. language code: dar
+#: LanguageCode.cc:454
+msgid "Dargwa"
+msgstr "Dargwa"
+
+#. language code: day
+#: LanguageCode.cc:456
+msgid "Dayak"
+msgstr "Daiaque"
+
+#. language code: del
+#: LanguageCode.cc:458
+msgid "Delaware"
+msgstr "Delaware"
+
+#. language code: den
+#: LanguageCode.cc:460
+msgid "Slave (Athapascan)"
+msgstr "Slave (Atapasca)"
+
+#. language code: dgr
+#: LanguageCode.cc:462
+msgid "Dogrib"
+msgstr "Dogrib"
+
+#. language code: din
+#: LanguageCode.cc:464
+msgid "Dinka"
+msgstr "Dinca"
+
+#. language code: div dv
+#: LanguageCode.cc:466
+msgid "Divehi"
+msgstr "Divehi"
+
+#. language code: doi
+#: LanguageCode.cc:468
+msgid "Dogri"
+msgstr "Dogri"
+
+#. language code: dra
+#: LanguageCode.cc:470
+msgid "Dravidian (Other)"
+msgstr "Dravidiano (Outros)"
+
+#. language code: dsb
+#: LanguageCode.cc:472
+msgid "Lower Sorbian"
+msgstr "Baixo-Sorbiano"
+
+#. language code: dua
+#: LanguageCode.cc:474
+msgid "Duala"
+msgstr "Duala"
+
+#. language code: dum
+#: LanguageCode.cc:476
+msgid "Dutch, Middle (ca.1050-1350)"
+msgstr "Holandês Medieval (aprox. 1050-1350)"
+
+#. language code: dut nld nl
+#: LanguageCode.cc:478 LanguageCode.cc:480
+msgid "Dutch"
+msgstr "Holandês"
+
+#. language code: dyu
+#: LanguageCode.cc:482
+msgid "Dyula"
+msgstr "Diúla"
+
+#. language code: dzo dz
+#: LanguageCode.cc:484
+msgid "Dzongkha"
+msgstr "Dzongkha"
+
+#. language code: efi
+#: LanguageCode.cc:486
+msgid "Efik"
+msgstr "Efique"
+
+#. language code: egy
+#: LanguageCode.cc:488
+msgid "Egyptian (Ancient)"
+msgstr "Egípcio (Antigo)"
+
+#. language code: eka
+#: LanguageCode.cc:490
+msgid "Ekajuk"
+msgstr "Ekajuk"
+
+#. language code: elx
+#: LanguageCode.cc:492
+msgid "Elamite"
+msgstr "Elamita"
+
+#. language code: eng en
+#: LanguageCode.cc:494
+msgid "English"
+msgstr "Inglês"
+
+#. language code: enm
+#: LanguageCode.cc:496
+msgid "English, Middle (1100-1500)"
+msgstr "Inglês Medieval (1100-1500)"
+
+#. language code: epo eo
+#: LanguageCode.cc:498
+msgid "Esperanto"
+msgstr "Esperanto"
+
+#. language code: est et
+#: LanguageCode.cc:500
+msgid "Estonian"
+msgstr "Estoniano"
+
+#. language code: ewe ee
+#: LanguageCode.cc:502
+msgid "Ewe"
+msgstr "Jeje"
+
+#. language code: ewo
+#: LanguageCode.cc:504
+msgid "Ewondo"
+msgstr "Ewondo"
+
+#. language code: fan
+#: LanguageCode.cc:506
+msgid "Fang"
+msgstr "Fang"
+
+#. language code: fao fo
+#: LanguageCode.cc:508
+msgid "Faroese"
+msgstr "Faeroês"
+
+#. language code: fat
+#: LanguageCode.cc:510
+msgid "Fanti"
+msgstr "Fanti"
+
+#. language code: fij fj
+#: LanguageCode.cc:512
+msgid "Fijian"
+msgstr "Fijiano"
+
+#. language code: fil
+#: LanguageCode.cc:514
+msgid "Filipino"
+msgstr "Filipino"
+
+#. language code: fin fi
+#: LanguageCode.cc:516
+msgid "Finnish"
+msgstr "Finlandês"
+
+#. language code: fiu
+#: LanguageCode.cc:518
+msgid "Finno-Ugrian (Other)"
+msgstr "Fino-Ugriano (Outros)"
+
+#. language code: fon
+#: LanguageCode.cc:520
+msgid "Fon"
+msgstr "Fon"
+
+#. language code: fre fra fr
+#: LanguageCode.cc:522 LanguageCode.cc:524
+msgid "French"
+msgstr "Francês"
+
+#. language code: frm
+#: LanguageCode.cc:526
+msgid "French, Middle (ca.1400-1600)"
+msgstr "Francês Medieval (aprox. 1400-1600)"
+
+#. language code: fro
+#: LanguageCode.cc:528
+msgid "French, Old (842-ca.1400)"
+msgstr "Francês Antigo (842-aprox. 1400)"
+
+#. language code: fry fy
+#: LanguageCode.cc:530
+msgid "Frisian"
+msgstr "Frísio"
+
+#. language code: ful ff
+#: LanguageCode.cc:532
+msgid "Fulah"
+msgstr "Fula"
+
+#. language code: fur
+#: LanguageCode.cc:534
+msgid "Friulian"
+msgstr "Friulano"
+
+#. language code: gaa
+#: LanguageCode.cc:536
+msgid "Ga"
+msgstr "Cua"
+
+#. language code: gay
+#: LanguageCode.cc:538
+msgid "Gayo"
+msgstr "Gayo"
+
+#. language code: gba
+#: LanguageCode.cc:540
+msgid "Gbaya"
+msgstr "Gbaia"
+
+#. language code: gem
+#: LanguageCode.cc:542
+msgid "Germanic (Other)"
+msgstr "Germânico (Outros)"
+
+#. language code: geo kat ka
+#: LanguageCode.cc:544 LanguageCode.cc:546
+msgid "Georgian"
+msgstr "Georgiano"
+
+#. language code: ger deu de
+#: LanguageCode.cc:548 LanguageCode.cc:550
+msgid "German"
+msgstr "Alemão"
+
+#. language code: gez
+#: LanguageCode.cc:552
+msgid "Geez"
+msgstr "Ge'ez"
+
+#. language code: gil
+#: LanguageCode.cc:554
+msgid "Gilbertese"
+msgstr "Gilbertês"
+
+#. language code: gla gd
+#: LanguageCode.cc:556
+msgid "Gaelic"
+msgstr "Gaélico"
+
+#. language code: gle ga
+#: LanguageCode.cc:558
+msgid "Irish"
+msgstr "Irlandês"
+
+#. language code: glg gl
+#: LanguageCode.cc:560
+msgid "Galician"
+msgstr "Galego"
+
+#. language code: glv gv
+#: LanguageCode.cc:562
+msgid "Manx"
+msgstr "Manx"
+
+#. language code: gmh
+#: LanguageCode.cc:564
+msgid "German, Middle High (ca.1050-1500)"
+msgstr "Alto-Alemão Medieval (aprox. 1050-1500)"
+
+#. language code: goh
+#: LanguageCode.cc:566
+msgid "German, Old High (ca.750-1050)"
+msgstr "Alto-Alemão Antigo (aprox. 750-1050)"
+
+#. language code: gon
+#: LanguageCode.cc:568
+msgid "Gondi"
+msgstr "Gonde"
+
+#. language code: gor
+#: LanguageCode.cc:570
+msgid "Gorontalo"
+msgstr "Gorontalo"
+
+#. language code: got
+#: LanguageCode.cc:572
+msgid "Gothic"
+msgstr "Gótico"
+
+#. language code: grb
+#: LanguageCode.cc:574
+msgid "Grebo"
+msgstr "Grebo"
+
+#. language code: grc
+#: LanguageCode.cc:576
+msgid "Greek, Ancient (to 1453)"
+msgstr "Grego Antigo (até 1453)"
+
+#. language code: gre ell el
+#: LanguageCode.cc:578 LanguageCode.cc:580
+msgid "Greek, Modern (1453-)"
+msgstr "Grego Moderno (1453-Presente)"
+
+#. language code: grn gn
+#: LanguageCode.cc:582
+msgid "Guarani"
+msgstr "Guarani"
+
+#. language code: guj gu
+#: LanguageCode.cc:584
+msgid "Gujarati"
+msgstr "Gujarati"
+
+#. language code: gwi
+#: LanguageCode.cc:586
+msgid "Gwich'in"
+msgstr "Gwich'in"
+
+#. language code: hai
+#: LanguageCode.cc:588
+msgid "Haida"
+msgstr "Haida"
+
+#. language code: hat ht
+#: LanguageCode.cc:590
+msgid "Haitian"
+msgstr "Haitiano"
+
+#. language code: hau ha
+#: LanguageCode.cc:592
+msgid "Hausa"
+msgstr "Hauçá"
+
+#. language code: haw
+#: LanguageCode.cc:594
+msgid "Hawaiian"
+msgstr "Havaiano"
+
+#. language code: heb he
+#: LanguageCode.cc:596
+msgid "Hebrew"
+msgstr "Hebraico"
+
+#. language code: her hz
+#: LanguageCode.cc:598
+msgid "Herero"
+msgstr "Hereró"
+
+#. language code: hil
+#: LanguageCode.cc:600
+msgid "Hiligaynon"
+msgstr "Hiligaynon"
+
+#. language code: him
+#: LanguageCode.cc:602
+msgid "Himachali"
+msgstr "Himachali"
+
+#. language code: hin hi
+#: LanguageCode.cc:604
+msgid "Hindi"
+msgstr "Híndi"
+
+#. language code: hit
+#: LanguageCode.cc:606
+msgid "Hittite"
+msgstr "Hitita"
+
+#. language code: hmn
+#: LanguageCode.cc:608
+msgid "Hmong"
+msgstr "Hmong"
+
+#. language code: hmo ho
+#: LanguageCode.cc:610
+msgid "Hiri Motu"
+msgstr "Hiri Motu"
+
+#. language code: hsb
+#: LanguageCode.cc:612
+msgid "Upper Sorbian"
+msgstr "Alto-Sorbiano"
+
+#. language code: hun hu
+#: LanguageCode.cc:614
+msgid "Hungarian"
+msgstr "Húngaro"
+
+#. language code: hup
+#: LanguageCode.cc:616
+msgid "Hupa"
+msgstr "Hupa"
+
+#. language code: iba
+#: LanguageCode.cc:618
+msgid "Iban"
+msgstr "Iban"
+
+#. language code: ibo ig
+#: LanguageCode.cc:620
+msgid "Igbo"
+msgstr "Ibo"
+
+#. language code: ice isl is
+#: LanguageCode.cc:622 LanguageCode.cc:624
+msgid "Icelandic"
+msgstr "Islandês"
+
+#. language code: ido io
+#: LanguageCode.cc:626
+msgid "Ido"
+msgstr "Ido"
+
+#. language code: iii ii
+#: LanguageCode.cc:628
+msgid "Sichuan Yi"
+msgstr "Yi (Sechuan)"
+
+#. language code: ijo
+#: LanguageCode.cc:630
+msgid "Ijo"
+msgstr "Ijo"
+
+#. language code: iku iu
+#: LanguageCode.cc:632
+msgid "Inuktitut"
+msgstr "Inuktitut"
+
+#. language code: ile ie
+#: LanguageCode.cc:634
+msgid "Interlingue"
+msgstr "Interlínguas"
+
+#. language code: ilo
+#: LanguageCode.cc:636
+msgid "Iloko"
+msgstr "Ilocano"
+
+#. language code: ina ia
+#: LanguageCode.cc:638
+msgid "Interlingua (International Auxiliary Language Association)"
+msgstr "Interlíngua (International Auxiliary Language Association, Associação de Línguas Internacionais Auxiliares)"
+
+#. language code: inc
+#: LanguageCode.cc:640
+msgid "Indic (Other)"
+msgstr "Índico (Outros)"
+
+#. language code: ind id
+#: LanguageCode.cc:642
+msgid "Indonesian"
+msgstr "Indonésio"
+
+#. language code: ine
+#: LanguageCode.cc:644
+msgid "Indo-European (Other)"
+msgstr "Indo-Europeu (Outros)"
+
+#. language code: inh
+#: LanguageCode.cc:646
+msgid "Ingush"
+msgstr "Ingush"
+
+#. language code: ipk ik
+#: LanguageCode.cc:648
+msgid "Inupiaq"
+msgstr "Inupiaq"
+
+#. language code: ira
+#: LanguageCode.cc:650
+msgid "Iranian (Other)"
+msgstr "Iraniano (Outros)"
+
+#. language code: iro
+#: LanguageCode.cc:652
+msgid "Iroquoian languages"
+msgstr "Línguas Iroquesas"
+
+#. language code: ita it
+#: LanguageCode.cc:654
+msgid "Italian"
+msgstr "Italiano"
+
+#. language code: jav jv
+#: LanguageCode.cc:656
+msgid "Javanese"
+msgstr "Javanês"
+
+#. language code: jbo
+#: LanguageCode.cc:658
+msgid "Lojban"
+msgstr "Lojban"
+
+#. language code: jpn ja
+#: LanguageCode.cc:660
+msgid "Japanese"
+msgstr "Japonês"
+
+#. language code: jpr
+#: LanguageCode.cc:662
+msgid "Judeo-Persian"
+msgstr "Judeo-Persa"
+
+#. language code: jrb
+#: LanguageCode.cc:664
+msgid "Judeo-Arabic"
+msgstr "Judeo-Arábico"
+
+#. language code: kaa
+#: LanguageCode.cc:666
+msgid "Kara-Kalpak"
+msgstr "Karakalpak"
+
+#. language code: kab
+#: LanguageCode.cc:668
+msgid "Kabyle"
+msgstr "Kabyle"
+
+#. language code: kac
+#: LanguageCode.cc:670
+msgid "Kachin"
+msgstr "Kachin"
+
+#. language code: kal kl
+#: LanguageCode.cc:672
+msgid "Kalaallisut"
+msgstr "Kalaallisut"
+
+#. language code: kam
+#: LanguageCode.cc:674
+msgid "Kamba"
+msgstr "Camba"
+
+#. language code: kan kn
+#: LanguageCode.cc:676
+msgid "Kannada"
+msgstr "Canarês"
+
+#. language code: kar
+#: LanguageCode.cc:678
+msgid "Karen"
+msgstr "Karen"
+
+#. language code: kas ks
+#: LanguageCode.cc:680
+msgid "Kashmiri"
+msgstr "Caxemira"
+
+#. language code: kau kr
+#: LanguageCode.cc:682
+msgid "Kanuri"
+msgstr "Canúri"
+
+#. language code: kaw
+#: LanguageCode.cc:684
+msgid "Kawi"
+msgstr "Kawi"
+
+#. language code: kaz kk
+#: LanguageCode.cc:686
+msgid "Kazakh"
+msgstr "Cazaque"
+
+#. language code: kbd
+#: LanguageCode.cc:688
+msgid "Kabardian"
+msgstr "Cabardíaco"
+
+#. language code: kha
+#: LanguageCode.cc:690
+msgid "Khasi"
+msgstr "Khasi"
+
+#. language code: khi
+#: LanguageCode.cc:692
+msgid "Khoisan (Other)"
+msgstr "Khoisan (Outros)"
+
+#. language code: khm km
+#: LanguageCode.cc:694
+msgid "Khmer"
+msgstr "Khmer"
+
+#. language code: kho
+#: LanguageCode.cc:696
+msgid "Khotanese"
+msgstr "Cotanês"
+
+#. language code: kik ki
+#: LanguageCode.cc:698
+msgid "Kikuyu"
+msgstr "Kikuyu"
+
+#. language code: kin rw
+#: LanguageCode.cc:700
+msgid "Kinyarwanda"
+msgstr "Kinyarwanda"
+
+#. language code: kir ky
+#: LanguageCode.cc:702
+msgid "Kirghiz"
+msgstr "Quirguiz"
+
+#. language code: kmb
+#: LanguageCode.cc:704
+msgid "Kimbundu"
+msgstr "Quimbundo"
+
+#. language code: kok
+#: LanguageCode.cc:706
+msgid "Konkani"
+msgstr "Concani"
+
+#. language code: kom kv
+#: LanguageCode.cc:708
+msgid "Komi"
+msgstr "Komi"
+
+#. language code: kon kg
+#: LanguageCode.cc:710
+msgid "Kongo"
+msgstr "Congo"
+
+#. language code: kor ko
+#: LanguageCode.cc:712
+msgid "Korean"
+msgstr "Coreano"
+
+#. language code: kos
+#: LanguageCode.cc:714
+msgid "Kosraean"
+msgstr "Cosreano"
+
+#. language code: kpe
+#: LanguageCode.cc:716
+msgid "Kpelle"
+msgstr "Kpelle"
+
+#. language code: krc
+#: LanguageCode.cc:718
+msgid "Karachay-Balkar"
+msgstr "Karachay-Balkar"
+
+#. language code: kro
+#: LanguageCode.cc:720
+msgid "Kru"
+msgstr "Kru"
+
+#. language code: kru
+#: LanguageCode.cc:722
+msgid "Kurukh"
+msgstr "Kurukh"
+
+#. language code: kua kj
+#: LanguageCode.cc:724
+msgid "Kuanyama"
+msgstr "Kuanyama"
+
+#. language code: kum
+#: LanguageCode.cc:726
+msgid "Kumyk"
+msgstr "Kumyk"
+
+#. language code: kur ku
+#: LanguageCode.cc:728
+msgid "Kurdish"
+msgstr "Curdo"
+
+#. language code: kut
+#: LanguageCode.cc:730
+msgid "Kutenai"
+msgstr "Kutenai"
+
+#. language code: lad
+#: LanguageCode.cc:732
+msgid "Ladino"
+msgstr "Ladino"
+
+#. language code: lah
+#: LanguageCode.cc:734
+msgid "Lahnda"
+msgstr "Lahnda"
+
+#. language code: lam
+#: LanguageCode.cc:736
+msgid "Lamba"
+msgstr "Lamba"
+
+#. language code: lao lo
+#: LanguageCode.cc:738
+msgid "Lao"
+msgstr "Laosiano"
+
+#. language code: lat la
+#: LanguageCode.cc:740
+msgid "Latin"
+msgstr "Latim"
+
+#. language code: lav lv
+#: LanguageCode.cc:742
+msgid "Latvian"
+msgstr "Letão"
+
+#. language code: lez
+#: LanguageCode.cc:744
+msgid "Lezghian"
+msgstr "Lezghian"
+
+#. language code: lim li
+#: LanguageCode.cc:746
+msgid "Limburgan"
+msgstr "Limburgano"
+
+#. language code: lin ln
+#: LanguageCode.cc:748
+msgid "Lingala"
+msgstr "Lingala"
+
+#. language code: lit lt
+#: LanguageCode.cc:750
+msgid "Lithuanian"
+msgstr "Lituano"
+
+#. language code: lol
+#: LanguageCode.cc:752
+msgid "Mongo"
+msgstr "Mongo"
+
+#. language code: loz
+#: LanguageCode.cc:754
+msgid "Lozi"
+msgstr "Lozi"
+
+#. language code: ltz lb
+#: LanguageCode.cc:756
+msgid "Luxembourgish"
+msgstr "Luxemburguês"
+
+#. language code: lua
+#: LanguageCode.cc:758
+msgid "Luba-Lulua"
+msgstr "Luba-Lulua"
+
+#. language code: lub lu
+#: LanguageCode.cc:760
+msgid "Luba-Katanga"
+msgstr "Luba-Katanga"
+
+#. language code: lug lg
+#: LanguageCode.cc:762
+msgid "Ganda"
+msgstr "Nganda"
+
+#. language code: lui
+#: LanguageCode.cc:764
+msgid "Luiseno"
+msgstr "Luiseno"
+
+#. language code: lun
+#: LanguageCode.cc:766
+msgid "Lunda"
+msgstr "Lundês"
+
+#. language code: luo
+#: LanguageCode.cc:768
+msgid "Luo (Kenya and Tanzania)"
+msgstr "Luo (Quênia e Tanzânia)"
+
+#. language code: lus
+#: LanguageCode.cc:770
+msgid "lushai"
+msgstr "Lushai"
+
+#. language code: mac mkd mk
+#: LanguageCode.cc:772 LanguageCode.cc:774
+msgid "Macedonian"
+msgstr "Macedônio"
+
+#. language code: mad
+#: LanguageCode.cc:776
+msgid "Madurese"
+msgstr "Madurês"
+
+#. language code: mag
+#: LanguageCode.cc:778
+msgid "Magahi"
+msgstr "Magahi"
+
+#. language code: mah mh
+#: LanguageCode.cc:780
+msgid "Marshallese"
+msgstr "Marshallino"
+
+#. language code: mai
+#: LanguageCode.cc:782
+msgid "Maithili"
+msgstr "Maithili"
+
+#. language code: mak
+#: LanguageCode.cc:784
+msgid "Makasar"
+msgstr "Makasar"
+
+#. language code: mal ml
+#: LanguageCode.cc:786
+msgid "Malayalam"
+msgstr "Malaiala"
+
+#. language code: man
+#: LanguageCode.cc:788
+msgid "Mandingo"
+msgstr "Mandinga"
+
+#. language code: mao mri mi
+#: LanguageCode.cc:790 LanguageCode.cc:792
+msgid "Maori"
+msgstr "Maori"
+
+#. language code: map
+#: LanguageCode.cc:794
+msgid "Austronesian (Other)"
+msgstr "Austronésio (Outros)"
+
+#. language code: mar mr
+#: LanguageCode.cc:796
+msgid "Marathi"
+msgstr "Marata"
+
+#. language code: mas
+#: LanguageCode.cc:798
+msgid "Masai"
+msgstr "Massai"
+
+#. language code: may msa ms
+#: LanguageCode.cc:800 LanguageCode.cc:802
+msgid "Malay"
+msgstr "Malaio"
+
+#. language code: mdf
+#: LanguageCode.cc:804
+msgid "Moksha"
+msgstr "Moksha"
+
+#. language code: mdr
+#: LanguageCode.cc:806
+msgid "Mandar"
+msgstr "Mandar"
+
+#. language code: men
+#: LanguageCode.cc:808
+msgid "Mende"
+msgstr "Mende"
+
+#. language code: mga
+#: LanguageCode.cc:810
+msgid "Irish, Middle (900-1200)"
+msgstr "Irlandês Medieval (900-1200)"
+
+#. language code: mic
+#: LanguageCode.cc:812
+msgid "Mi'kmaq"
+msgstr "Mi'kmaq"
+
+#. language code: min
+#: LanguageCode.cc:814
+msgid "Minangkabau"
+msgstr "Minangkabau"
+
+#. language code: mis
+#: LanguageCode.cc:816
+msgid "Miscellaneous languages"
+msgstr "Idiomas Diversos"
+
+#. language code: mkh
+#: LanguageCode.cc:818
+msgid "Mon-Khmer (Other)"
+msgstr "Mon-Khmer (Outros)"
+
+#. language code: mlg mg
+#: LanguageCode.cc:820
+msgid "Malagasy"
+msgstr "Malgaxe"
+
+#. language code: mlt mt
+#: LanguageCode.cc:822
+msgid "Maltese"
+msgstr "Maltês"
+
+#. language code: mnc
+#: LanguageCode.cc:824
+msgid "Manchu"
+msgstr "Manchu"
+
+#. language code: mni
+#: LanguageCode.cc:826
+msgid "Manipuri"
+msgstr "Manipuri"
+
+#. language code: mno
+#: LanguageCode.cc:828
+msgid "Manobo languages"
+msgstr "Línguas Manobo"
+
+#. language code: moh
+#: LanguageCode.cc:830
+msgid "Mohawk"
+msgstr "Mohawk"
+
+#. language code: mol mo
+#: LanguageCode.cc:832
+msgid "Moldavian"
+msgstr "Moldávio"
+
+#. language code: mon mn
+#: LanguageCode.cc:834
+msgid "Mongolian"
+msgstr "Mongol"
+
+#. language code: mos
+#: LanguageCode.cc:836
+msgid "Mossi"
+msgstr "Mossi"
+
+#. language code: mul
+#: LanguageCode.cc:838
+msgid "Multiple languages"
+msgstr "Vários Idiomas"
+
+#. language code: mun
+#: LanguageCode.cc:840
+msgid "Munda languages"
+msgstr "Línguas Mundas"
+
+#. language code: mus
+#: LanguageCode.cc:842
+msgid "Creek"
+msgstr "Creek"
+
+#. language code: mwl
+#: LanguageCode.cc:844
+msgid "Mirandese"
+msgstr "Mirandês"
+
+#. language code: mwr
+#: LanguageCode.cc:846
+msgid "Marwari"
+msgstr "Marwari"
+
+#. language code: myn
+#: LanguageCode.cc:848
+msgid "Mayan languages"
+msgstr "Línguas Maias"
+
+#. language code: myv
+#: LanguageCode.cc:850
+msgid "Erzya"
+msgstr "Erzya"
+
+#. language code: nah
+#: LanguageCode.cc:852
+msgid "Nahuatl"
+msgstr "Nahuatl"
+
+#. language code: nai
+#: LanguageCode.cc:854
+msgid "North American Indian"
+msgstr "Indígena Norte-Americano"
+
+#. language code: nap
+#: LanguageCode.cc:856
+msgid "Neapolitan"
+msgstr "Napolitano"
+
+#. language code: nav nv
+#: LanguageCode.cc:860
+msgid "Navajo"
+msgstr "Navajo"
+
+#. language code: nbl nr
+#: LanguageCode.cc:862
+msgid "Ndebele, South"
+msgstr "Ndebele (Sul)"
+
+#. language code: nde nd
+#: LanguageCode.cc:864
+msgid "Ndebele, North"
+msgstr "Ndebele (Norte)"
+
+#. language code: ndo ng
+#: LanguageCode.cc:866
+msgid "Ndonga"
+msgstr "Ndomba"
+
+#. language code: nds
+#: LanguageCode.cc:868
+msgid "Low German"
+msgstr "Baixo-Alemão"
+
+#. language code: nep ne
+#: LanguageCode.cc:870
+msgid "Nepali"
+msgstr "Nepali"
+
+#. language code: new
+#: LanguageCode.cc:872
+msgid "Nepal Bhasa"
+msgstr "Bhasa (Nepal)"
+
+#. language code: nia
+#: LanguageCode.cc:874
+msgid "Nias"
+msgstr "Nias"
+
+#. language code: nic
+#: LanguageCode.cc:876
+msgid "Niger-Kordofanian (Other)"
+msgstr "Nigero-Cordofânio (Outros)"
+
+#. language code: niu
+#: LanguageCode.cc:878
+msgid "Niuean"
+msgstr "Niueano"
+
+#. language code: nno nn
+#: LanguageCode.cc:880
+msgid "Norwegian Nynorsk"
+msgstr "Neonorueguês"
+
+#. language code: nob nb
+#: LanguageCode.cc:882
+msgid "Norwegian Bokmal"
+msgstr "Bokmal (Noruega)"
+
+#. language code: nog
+#: LanguageCode.cc:884
+msgid "Nogai"
+msgstr "Nogai"
+
+#. language code: non
+#: LanguageCode.cc:886
+msgid "Norse, Old"
+msgstr "Norueguês Antigo"
+
+#. language code: nor no
+#: LanguageCode.cc:888
+msgid "Norwegian"
+msgstr "Norueguês"
+
+#. language code: nso
+#: LanguageCode.cc:890
+msgid "Northern Sotho"
+msgstr "Sotho (Setentrional)"
+
+#. language code: nub
+#: LanguageCode.cc:892
+msgid "Nubian languages"
+msgstr "Línguas Núbias"
+
+#. language code: nwc
+#: LanguageCode.cc:894
+msgid "Classical Newari"
+msgstr "Newari Clássico"
+
+#. language code: nya ny
+#: LanguageCode.cc:896
+msgid "Chichewa"
+msgstr "Chichewa"
+
+#. language code: nym
+#: LanguageCode.cc:898
+msgid "Nyamwezi"
+msgstr "Nyamwezi"
+
+#. language code: nyn
+#: LanguageCode.cc:900
+msgid "Nyankole"
+msgstr "Nyankole"
+
+#. language code: nyo
+#: LanguageCode.cc:902
+msgid "Nyoro"
+msgstr "Nyoro"
+
+#. language code: nzi
+#: LanguageCode.cc:904
+msgid "Nzima"
+msgstr "Nzima"
+
+#. language code: oci oc
+#: LanguageCode.cc:906
+msgid "Occitan (post 1500)"
+msgstr "Occitano (após 1500)"
+
+#. language code: oji oj
+#: LanguageCode.cc:908
+msgid "Ojibwa"
+msgstr "Ojíbua"
+
+#. language code: ori or
+#: LanguageCode.cc:910
+msgid "Oriya"
+msgstr "Oriá"
+
+#. language code: orm om
+#: LanguageCode.cc:912
+msgid "Oromo"
+msgstr "Oromo"
+
+#. language code: osa
+#: LanguageCode.cc:914
+msgid "Osage"
+msgstr "Osage"
+
+#. language code: oss os
+#: LanguageCode.cc:916
+msgid "Ossetian"
+msgstr "Osseta"
+
+#. language code: ota
+#: LanguageCode.cc:918
+msgid "Turkish, Ottoman (1500-1928)"
+msgstr "Turco Otomano (1500-1928)"
+
+#. language code: oto
+#: LanguageCode.cc:920
+msgid "Otomian languages"
+msgstr "Línguas Otomianas"
+
+#. language code: paa
+#: LanguageCode.cc:922
+msgid "Papuan (Other)"
+msgstr "Papua (Outros)"
+
+#. language code: pag
+#: LanguageCode.cc:924
+msgid "Pangasinan"
+msgstr "Pangasinano"
+
+#. language code: pal
+#: LanguageCode.cc:926
+msgid "Pahlavi"
+msgstr "Pahlavi"
+
+#. language code: pam
+#: LanguageCode.cc:928
+msgid "Pampanga"
+msgstr "Pampanga"
+
+#. language code: pan pa
+#: LanguageCode.cc:930
+msgid "Panjabi"
+msgstr "Panjabi"
+
+#. language code: pap
+#: LanguageCode.cc:932
+msgid "Papiamento"
+msgstr "Papiamento"
+
+#. language code: pau
+#: LanguageCode.cc:934
+msgid "Palauan"
+msgstr "Palauano"
+
+#. language code: peo
+#: LanguageCode.cc:936
+msgid "Persian, Old (ca.600-400 B.C.)"
+msgstr "Persa Antigo (aprox. 600-400 A.C.)"
+
+#. language code: per fas fa
+#: LanguageCode.cc:938 LanguageCode.cc:940
+msgid "Persian"
+msgstr "Persa"
+
+#. language code: phi
+#: LanguageCode.cc:942
+msgid "Philippine (Other)"
+msgstr "Filipino (Outros)"
+
+#. language code: phn
+#: LanguageCode.cc:944
+msgid "Phoenician"
+msgstr "Fenício"
+
+#. language code: pli pi
+#: LanguageCode.cc:946
+msgid "Pali"
+msgstr "Páli"
+
+#. language code: pol pl
+#: LanguageCode.cc:948
+msgid "Polish"
+msgstr "Polonês"
+
+#. language code: pon
+#: LanguageCode.cc:950
+msgid "Pohnpeian"
+msgstr "Pompeano"
+
+#. language code: por pt
+#: LanguageCode.cc:952
+msgid "Portuguese"
+msgstr "Português"
+
+#. language code: pra
+#: LanguageCode.cc:954
+msgid "Prakrit languages"
+msgstr "Línguas Prácritas"
+
+#. language code: pro
+#: LanguageCode.cc:956
+msgid "Provencal, Old (to 1500)"
+msgstr "Provençal Antigo (até 1500)"
+
+#. language code: pus ps
+#: LanguageCode.cc:958
+msgid "Pushto"
+msgstr "Pushtu"
+
+#. language code: que qu
+#: LanguageCode.cc:960
+msgid "Quechua"
+msgstr "Quíchua"
+
+#. language code: raj
+#: LanguageCode.cc:962
+msgid "Rajasthani"
+msgstr "Rajastanês"
+
+#. language code: rap
+#: LanguageCode.cc:964
+msgid "Rapanui"
+msgstr "Rapa Nui"
+
+#. language code: rar
+#: LanguageCode.cc:966
+msgid "Rarotongan"
+msgstr "Rarotonganês"
+
+#. language code: roa
+#: LanguageCode.cc:968
+msgid "Romance (Other)"
+msgstr "Romance (Outros)"
+
+#. language code: roh rm
+#: LanguageCode.cc:970
+msgid "Raeto-Romance"
+msgstr "Reto-Romano"
+
+#. language code: rom
+#: LanguageCode.cc:972
+msgid "Romany"
+msgstr "Romani"
+
+#. language code: rum ron ro
+#: LanguageCode.cc:974 LanguageCode.cc:976
+msgid "Romanian"
+msgstr "Romeno"
+
+#. language code: run rn
+#: LanguageCode.cc:978
+msgid "Rundi"
+msgstr "Rundi"
+
+#. language code: rus ru
+#: LanguageCode.cc:980
+msgid "Russian"
+msgstr "Russo"
+
+#. language code: sad
+#: LanguageCode.cc:982
+msgid "Sandawe"
+msgstr "Sandawe"
+
+#. language code: sag sg
+#: LanguageCode.cc:984
+msgid "Sango"
+msgstr "Sango"
+
+#. language code: sah
+#: LanguageCode.cc:986
+msgid "Yakut"
+msgstr "Iacuto"
+
+#. language code: sai
+#: LanguageCode.cc:988
+msgid "South American Indian (Other)"
+msgstr "Indígena Sul-Americano (Outro)"
+
+#. language code: sal
+#: LanguageCode.cc:990
+msgid "Salishan languages"
+msgstr "Línguas Salichanas"
+
+#. language code: sam
+#: LanguageCode.cc:992
+msgid "Samaritan Aramaic"
+msgstr "Aramaico Samaritano"
+
+#. language code: san sa
+#: LanguageCode.cc:994
+msgid "Sanskrit"
+msgstr "Sânscrito"
+
+#. language code: sas
+#: LanguageCode.cc:996
+msgid "Sasak"
+msgstr "Sasak"
+
+#. language code: sat
+#: LanguageCode.cc:998
+msgid "Santali"
+msgstr "Santali"
+
+#. language code: scc srp sr
+#: LanguageCode.cc:1000 LanguageCode.cc:1002
+msgid "Serbian"
+msgstr "Sérvio"
+
+#. language code: scn
+#: LanguageCode.cc:1004
+msgid "Sicilian"
+msgstr "Siciliano"
+
+#. language code: sco
+#: LanguageCode.cc:1006
+msgid "Scots"
+msgstr "Escocês"
+
+#. language code: scr hrv hr
+#: LanguageCode.cc:1008 LanguageCode.cc:1010
+msgid "Croatian"
+msgstr "Croata"
+
+#. language code: sel
+#: LanguageCode.cc:1012
+msgid "Selkup"
+msgstr "Selkup"
+
+#. language code: sem
+#: LanguageCode.cc:1014
+msgid "Semitic (Other)"
+msgstr "Semita (Outros)"
+
+#. language code: sga
+#: LanguageCode.cc:1016
+msgid "Irish, Old (to 900)"
+msgstr "Irlandês Antigo (até 900)"
+
+#. language code: sgn
+#: LanguageCode.cc:1018
+msgid "Sign Languages"
+msgstr "Linguagens de Sinais"
+
+#. language code: shn
+#: LanguageCode.cc:1020
+msgid "Shan"
+msgstr "Shan"
+
+#. language code: sid
+#: LanguageCode.cc:1022
+msgid "Sidamo"
+msgstr "Sidamo"
+
+#. language code: sin si
+#: LanguageCode.cc:1024
+msgid "Sinhala"
+msgstr "Sinhala"
+
+#. language code: sio
+#: LanguageCode.cc:1026
+msgid "Siouan languages"
+msgstr "Línguas Sioux"
+
+#. language code: sit
+#: LanguageCode.cc:1028
+msgid "Sino-Tibetan (Other)"
+msgstr "Sino-Tibetano (Outros)"
+
+#. language code: sla
+#: LanguageCode.cc:1030
+msgid "Slavic (Other)"
+msgstr "Eslavo (Outros)"
+
+#. language code: slo slk sk
+#: LanguageCode.cc:1032 LanguageCode.cc:1034
+msgid "Slovak"
+msgstr "Eslovaco"
+
+#. language code: slv sl
+#: LanguageCode.cc:1036
+msgid "Slovenian"
+msgstr "Esloveno"
+
+#. language code: sma
+#: LanguageCode.cc:1038
+msgid "Southern Sami"
+msgstr "Lapão Meridional"
+
+#. language code: sme se
+#: LanguageCode.cc:1040
+msgid "Northern Sami"
+msgstr "Lapão Setentrional"
+
+#. language code: smi
+#: LanguageCode.cc:1042
+msgid "Sami languages (Other)"
+msgstr "Línguas Lapônias (Outros)"
+
+#. language code: smj
+#: LanguageCode.cc:1044
+msgid "Lule Sami"
+msgstr "Lapão (Lule)"
+
+#. language code: smn
+#: LanguageCode.cc:1046
+msgid "Inari Sami"
+msgstr "Lapão (Inari)"
+
+#. language code: smo sm
+#: LanguageCode.cc:1048
+msgid "Samoan"
+msgstr "Samoano"
+
+#. language code: sms
+#: LanguageCode.cc:1050
+msgid "Skolt Sami"
+msgstr "Lapão (Skolt)"
+
+#. language code: sna sn
+#: LanguageCode.cc:1052
+msgid "Shona"
+msgstr "Chishona"
+
+#. language code: snd sd
+#: LanguageCode.cc:1054
+msgid "Sindhi"
+msgstr "Sindi"
+
+#. language code: snk
+#: LanguageCode.cc:1056
+msgid "Soninke"
+msgstr "Soninquê"
+
+#. language code: sog
+#: LanguageCode.cc:1058
+msgid "Sogdian"
+msgstr "Sogdian"
+
+#. language code: som so
+#: LanguageCode.cc:1060
+msgid "Somali"
+msgstr "Somali"
+
+#. language code: son
+#: LanguageCode.cc:1062
+msgid "Songhai"
+msgstr "Songhai"
+
+#. language code: sot st
+#: LanguageCode.cc:1064
+msgid "Sotho, Southern"
+msgstr "Sotho (Meridional)"
+
+#. language code: spa es
+#: LanguageCode.cc:1066
+msgid "Spanish"
+msgstr "Espanhol"
+
+#. language code: srd sc
+#: LanguageCode.cc:1068
+msgid "Sardinian"
+msgstr "Sardo"
+
+#. language code: srr
+#: LanguageCode.cc:1070
+msgid "Serer"
+msgstr "Serer"
+
+#. language code: ssa
+#: LanguageCode.cc:1072
+msgid "Nilo-Saharan (Other)"
+msgstr "Nilo-Saariano (Outros)"
+
+#. language code: ssw ss
+#: LanguageCode.cc:1074
+msgid "Swati"
+msgstr "Swati"
+
+#. language code: suk
+#: LanguageCode.cc:1076
+msgid "Sukuma"
+msgstr "Sukuma"
+
+#. language code: sun su
+#: LanguageCode.cc:1078
+msgid "Sundanese"
+msgstr "Sundanês"
+
+#. language code: sus
+#: LanguageCode.cc:1080
+msgid "Susu"
+msgstr "Susu"
+
+#. language code: sux
+#: LanguageCode.cc:1082
+msgid "Sumerian"
+msgstr "Sumério"
+
+#. language code: swa sw
+#: LanguageCode.cc:1084
+msgid "Swahili"
+msgstr "Suaíli"
+
+#. language code: swe sv
+#: LanguageCode.cc:1086
+msgid "Swedish"
+msgstr "Sueco"
+
+#. language code: syr
+#: LanguageCode.cc:1088
+msgid "Syriac"
+msgstr "Siríaco"
+
+#. language code: tah ty
+#: LanguageCode.cc:1090
+msgid "Tahitian"
+msgstr "Taitiano"
+
+#. language code: tai
+#: LanguageCode.cc:1092
+msgid "Tai (Other)"
+msgstr "Tai (Outros)"
+
+#. language code: tam ta
+#: LanguageCode.cc:1094
+msgid "Tamil"
+msgstr "Tâmil"
+
+#. language code: tat tt
+#: LanguageCode.cc:1096
+msgid "Tatar"
+msgstr "Tártaro"
+
+#. language code: tel te
+#: LanguageCode.cc:1098
+msgid "Telugu"
+msgstr "Télugo"
+
+#. language code: tem
+#: LanguageCode.cc:1100
+msgid "Timne"
+msgstr "Temne"
+
+#. language code: ter
+#: LanguageCode.cc:1102
+msgid "Tereno"
+msgstr "Tereno"
+
+#. language code: tet
+#: LanguageCode.cc:1104
+msgid "Tetum"
+msgstr "Tétum"
+
+#. language code: tgk tg
+#: LanguageCode.cc:1106
+msgid "Tajik"
+msgstr "Tadjique"
+
+#. language code: tgl tl
+#: LanguageCode.cc:1108
+msgid "Tagalog"
+msgstr "Tagalo"
+
+#. language code: tha th
+#: LanguageCode.cc:1110
+msgid "Thai"
+msgstr "Tai"
+
+#. language code: tib bod bo
+#: LanguageCode.cc:1112 LanguageCode.cc:1114
+msgid "Tibetan"
+msgstr "Tibetano"
+
+#. language code: tig
+#: LanguageCode.cc:1116
+msgid "Tigre"
+msgstr "Tigré"
+
+#. language code: tir ti
+#: LanguageCode.cc:1118
+msgid "Tigrinya"
+msgstr "Tigrínia"
+
+#. language code: tiv
+#: LanguageCode.cc:1120
+msgid "Tiv"
+msgstr "Tiv"
+
+#. language code: tlh
+#: LanguageCode.cc:1124
+msgid "Klingon"
+msgstr "Klingon"
+
+#. language code: tli
+#: LanguageCode.cc:1126
+msgid "Tlingit"
+msgstr "Tlingit"
+
+#. language code: tmh
+#: LanguageCode.cc:1128
+msgid "Tamashek"
+msgstr "Tuaregue"
+
+#. language code: tog
+#: LanguageCode.cc:1130
+msgid "Tonga (Nyasa)"
+msgstr "Tonganês (Nyasa)"
+
+#. language code: ton to
+#: LanguageCode.cc:1132
+msgid "Tonga (Tonga Islands)"
+msgstr "Tonganês (Ilhas Tonga)"
+
+#. language code: tpi
+#: LanguageCode.cc:1134
+msgid "Tok Pisin"
+msgstr "Tok Pisin"
+
+#. language code: tsi
+#: LanguageCode.cc:1136
+msgid "Tsimshian"
+msgstr "Tsimshian"
+
+#. language code: tsn tn
+#: LanguageCode.cc:1138
+msgid "Tswana"
+msgstr "Setswana"
+
+#. language code: tso ts
+#: LanguageCode.cc:1140
+msgid "Tsonga"
+msgstr "Tsonga"
+
+#. language code: tuk tk
+#: LanguageCode.cc:1142
+msgid "Turkmen"
+msgstr "Turcomeno"
+
+#. language code: tum
+#: LanguageCode.cc:1144
+msgid "Tumbuka"
+msgstr "Tumbuka"
+
+#. language code: tup
+#: LanguageCode.cc:1146
+msgid "Tupi languages"
+msgstr "Línguas Tupis"
+
+#. language code: tur tr
+#: LanguageCode.cc:1148
+msgid "Turkish"
+msgstr "Turco"
+
+#. language code: tut
+#: LanguageCode.cc:1150
+msgid "Altaic (Other)"
+msgstr "Altaico (Outros)"
+
+#. language code: twi tw
+#: LanguageCode.cc:1154
+msgid "Twi"
+msgstr "Twi"
+
+#. language code: tyv
+#: LanguageCode.cc:1156
+msgid "Tuvinian"
+msgstr "Tuviniano"
+
+#. language code: udm
+#: LanguageCode.cc:1158
+msgid "Udmurt"
+msgstr "Udmurt"
+
+#. language code: uga
+#: LanguageCode.cc:1160
+msgid "Ugaritic"
+msgstr "Ugarítico"
+
+#. language code: uig ug
+#: LanguageCode.cc:1162
+msgid "Uighur"
+msgstr "Uigur"
+
+#. language code: ukr uk
+#: LanguageCode.cc:1164
+msgid "Ukrainian"
+msgstr "Ucraniano"
+
+#. language code: umb
+#: LanguageCode.cc:1166
+msgid "Umbundu"
+msgstr "Umbundo"
+
+#. language code: und
+#: LanguageCode.cc:1168
+msgid "Undetermined"
+msgstr "Indeterminado"
+
+#. language code: urd ur
+#: LanguageCode.cc:1170
+msgid "Urdu"
+msgstr "Urdu"
+
+#. language code: uzb uz
+#: LanguageCode.cc:1172
+msgid "Uzbek"
+msgstr "Uzbeque"
+
+#. language code: vai
+#: LanguageCode.cc:1174
+msgid "Vai"
+msgstr "Vai"
+
+#. language code: ven ve
+#: LanguageCode.cc:1176
+msgid "Venda"
+msgstr "Venda"
+
+#. language code: vie vi
+#: LanguageCode.cc:1178
+msgid "Vietnamese"
+msgstr "Vietnamita"
+
+#. language code: vol vo
+#: LanguageCode.cc:1180
+msgid "Volapuk"
+msgstr "Volapük"
+
+#. language code: vot
+#: LanguageCode.cc:1182
+msgid "Votic"
+msgstr "Vótico"
+
+#. language code: wak
+#: LanguageCode.cc:1184
+msgid "Wakashan languages"
+msgstr "Línguas Wakashan"
+
+#. language code: wal
+#: LanguageCode.cc:1186
+msgid "Walamo"
+msgstr "Walamo"
+
+#. language code: war
+#: LanguageCode.cc:1188
+msgid "Waray"
+msgstr "Waray"
+
+#. language code: was
+#: LanguageCode.cc:1190
+msgid "Washo"
+msgstr "Washo"
+
+#. language code: wel cym cy
+#: LanguageCode.cc:1192 LanguageCode.cc:1194
+msgid "Welsh"
+msgstr "Galês"
+
+#. language code: wen
+#: LanguageCode.cc:1196
+msgid "Sorbian languages"
+msgstr "Línguas Sorbianas"
+
+#. language code: wln wa
+#: LanguageCode.cc:1198
+msgid "Walloon"
+msgstr "Valão"
+
+#. language code: wol wo
+#: LanguageCode.cc:1200
+msgid "Wolof"
+msgstr "Wolof"
+
+#. language code: xal
+#: LanguageCode.cc:1202
+msgid "Kalmyk"
+msgstr "Kalmyk"
+
+#. language code: xho xh
+#: LanguageCode.cc:1204
+msgid "Xhosa"
+msgstr "Xosa"
+
+#. language code: yao
+#: LanguageCode.cc:1206
+msgid "Yao"
+msgstr "Iao"
+
+#. language code: yap
+#: LanguageCode.cc:1208
+msgid "Yapese"
+msgstr "Iapês"
+
+#. language code: yid yi
+#: LanguageCode.cc:1210
+msgid "Yiddish"
+msgstr "Iídiche"
+
+#. language code: yor yo
+#: LanguageCode.cc:1212
+msgid "Yoruba"
+msgstr "Iorubá"
+
+#. language code: ypk
+#: LanguageCode.cc:1214
+msgid "Yupik languages"
+msgstr "Línguas Yupik"
+
+#. language code: zap
+#: LanguageCode.cc:1216
+msgid "Zapotec"
+msgstr "Zapoteca"
+
+#. language code: zen
+#: LanguageCode.cc:1218
+msgid "Zenaga"
+msgstr "Zenaga"
+
+#. language code: zha za
+#: LanguageCode.cc:1220
+msgid "Zhuang"
+msgstr "Zhuang"
+
+#. language code: znd
+#: LanguageCode.cc:1222
+msgid "Zande"
+msgstr "Zande"
+
+#. language code: zul zu
+#: LanguageCode.cc:1224
+msgid "Zulu"
+msgstr "Zulu"
+
+#. language code: zun
+#: LanguageCode.cc:1226
+msgid "Zuni"
+msgstr "Zunhi"
+
+#: ZYppFactory.cc:279 ZYppFactory.cc:334
+#, fuzzy
+msgid "Cannot acquire zypp lock."
+msgstr "Não é possível adquirir bloqueio do zypp."
+
+#. Translator: %s = name of an rpm package. A list of diffs follows
+#. this message.
+#: target/rpm/RpmDb.cc:1799
+#, c-format
+msgid "Changed configuration files for %s:"
+msgstr "Arquivos de configuração alterados para %s:"
+
+#. %s = filenames
+#: target/rpm/RpmDb.cc:1960
+#, c-format
+msgid "rpm saved %s as %s but it was impossible to determine the difference"
+msgstr "rpm gravou %s como %s, mas não foi possível determinar a diferença"
+
+#. %s = filenames
+#: target/rpm/RpmDb.cc:1962
+#, c-format
 msgid ""
-"At least one source already registered, cannot restore sources from "
-"persistent store."
+"rpm saved %s as %s.\n"
+"Here are the first 25 lines of difference:\n"
 msgstr ""
-"Pelo menos uma fonte já registrada; não é possível restaurar fontes de "
-"armazenamento persistente."
+"rpm gravou %s como %s.\n"
+"Aqui estão as 25 primeiras linhas de diferença:\n"
+
+#. %s = filenames
+#: target/rpm/RpmDb.cc:1965
+#, c-format
+msgid "rpm created %s as %s but it was impossible to determine the difference"
+msgstr "rpm criou %s como %s, mas não foi possível determinar a diferença"
+
+#. %s = filenames
+#: target/rpm/RpmDb.cc:1967
+#, c-format
+msgid ""
+"rpm created %s as %s.\n"
+"Here are the first 25 lines of difference:\n"
+msgstr ""
+"rpm criou %s como %s.\n"
+"Aqui estão as 25 primeiras linhas de diferença:\n"
+
+#. %s = filename of rpm package
+#. timestamp
+#: target/rpm/RpmDb.cc:1973
+#, c-format
+msgid "%s install failed"
+msgstr "Falha na instalação de %s"
+
+#: target/rpm/RpmDb.cc:1974 target/rpm/RpmDb.cc:2092
+msgid "rpm output:"
+msgstr "saída de rpm:"
+
+#. %s = filename of rpm package
+#. timestamp
+#: target/rpm/RpmDb.cc:1980
+#, c-format
+msgid "%s installed ok"
+msgstr "%s instalado com êxito"
+
+#: target/rpm/RpmDb.cc:1983 target/rpm/RpmDb.cc:2100
+msgid "Additional rpm output:"
+msgstr "Saída de rpm adicional:"
+
+#. %s = name of rpm package
+#. timestamp
+#: target/rpm/RpmDb.cc:2091
+#, c-format
+msgid "%s remove failed"
+msgstr "Falha na remoção de %s"
+
+#. timestamp
+#: target/rpm/RpmDb.cc:2097
+#, c-format
+msgid "%s remove ok"
+msgstr "%s removido com êxito"
+
+#: target/rpm/RpmDb.cc:2114
+msgid "Ok"
+msgstr "Ok"
+
+#. translator: these are different kinds of how an rpm package can be broken
+#: target/rpm/RpmDb.cc:2117
+msgid "The package is not OK for the following reasons:"
+msgstr "O pacote não está OK pelos seguintes motivos:"
+
+#: target/rpm/RpmDb.cc:2123
+msgid "The package contains different version than expected"
+msgstr "O pacote contém uma versão diferente da esperada"
+
+#: target/rpm/RpmDb.cc:2129
+msgid "The package file has incorrect MD5 sum"
+msgstr "O arquivo do pacote tem soma de MD5 incorreta"
+
+#: target/rpm/RpmDb.cc:2135
+msgid "The package is not signed"
+msgstr "O pacote não está assinado"
+
+#: target/rpm/RpmDb.cc:2141
+msgid "The package has no MD5 sum"
+msgstr "O arquivo do pacote não tem soma de MD5"
+
+#: target/rpm/RpmDb.cc:2147
+msgid "The package has incorrect signature"
+msgstr "O pacote tem assinatura incorreta "
+
+#: target/rpm/RpmDb.cc:2153
+msgid "The package archive has incorrect MD5 sum"
+msgstr "O arquivo do pacote tem soma de MD5 incorreta "
+
+#: target/rpm/RpmDb.cc:2159
+msgid "rpm failed for unkown reason, see log file"
+msgstr "Houve falha do rpm por motivo desconhecido, consulte o arquivo de registro"
+
+#. timestamp
+#: target/rpm/RpmDb.cc:2303
+#, c-format
+msgid "created backup %s"
+msgstr "backup %s criado"
+
+#: target/TargetImpl.cc:630
+msgid "Target commit aborted by user."
+msgstr "Compromisso de destino interrompido pelo usuário."
+
+#: target/store/XMLFilesBackend.cc:925 target/store/XMLFilesBackend.cc:932
+#: source/yum/YUMScriptImpl.cc:78 source/yum/YUMScriptImpl.cc:112
+msgid "Can't write the patch script to a temporary file."
+msgstr ""
+
+#: source/yum/YUMScriptImpl.cc:89 source/yum/YUMScriptImpl.cc:123
+msgid "Failed check for the script file check sum"
+msgstr "Reprovado na verificação do checksum do arquivo de scripts"
+
+#: source/yum/YUMSourceImpl.cc:247
+msgid "Signed repomd.xml file fails signature check"
+msgstr "Arquivo assinado repomd.xml reprovado na verificação da assinatura"
+
+#: source/SourceImpl.cc:384
+msgid " miss checksum."
+msgstr ""
+
+#: source/SourceImpl.cc:390
+#, fuzzy
+msgid " fails checksum verification."
+msgstr "reprovado na verificação do checksum."
+
+#~ msgid "Failed check for the metadata file check sum"
+#~ msgstr "Reprovado na verificação do checksum do arquivo de metadados"
+
+#~ msgid "Unable to restore all sources."
+#~ msgstr "Não é possível restaurar todas as fontes."
+
+#~ msgid "At least one source already registered, cannot restore sources from persistent store."
+#~ msgstr "Pelo menos uma fonte já registrada; não é possível restaurar fontes de armazenamento persistente."
 
 #~ msgid "Default"
 #~ msgstr "Padrão"
@@ -3545,9 +4434,7 @@ msgstr ""
 #~ msgstr "Apagando %s"
 
 #~ msgid "Marking %s as uninstallable due to conflicts over %s (%s) from %s"
-#~ msgstr ""
-#~ "Marcação de %s como impossível de instalar devido a conflitos sobre %s (%"
-#~ "s) de %s"
+#~ msgstr "Marcação de %s como impossível de instalar devido a conflitos sobre %s (%s) de %s"
 
 #~ msgid "There are no alternative installed providers of %s for %s"
 #~ msgstr "Não há provedores alternativos instalados de %s para %s"
@@ -3570,9 +4457,5 @@ msgstr ""
 #~ msgid "to be uninstalled"
 #~ msgstr "a ser desinstalado"
 
-#~ msgid ""
-#~ "Can't install %s, since a resolvable of the same name is already marked "
-#~ "as needing to be installed"
-#~ msgstr ""
-#~ "Impossível instalar %s porque a instalação de um resolvível de mesmo nome "
-#~ "já está marcada como necessária"
+#~ msgid "Can't install %s, since a resolvable of the same name is already marked as needing to be installed"
+#~ msgstr "Impossível instalar %s porque a instalação de um resolvível de mesmo nome já está marcada como necessária"

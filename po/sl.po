@@ -1,139 +1,141 @@
-# translation of zypp.po to
-# Danish message file for YaST2 (@memory@).
+# Slovenian message file for YaST2 (@memory@).
 # Copyright (C) 2005 SUSE Linux Products GmbH.
 # Copyright (C) 2002 SuSE Linux AG.
 # Copyright (C) 2001 SuSE GmbH.
+# Janez Krek <janez.krek@euroteh.si>, 2001.
 #
-# H. Merethe Eriksen <djinni@mail1.stofanet.dk>, 2001.
-# Jan Madsen <jan.madsen.pt(a)gmail.com>, 2006.
-# Ib Larsen <i.la@tele2adsl.dk>, 2006.
-# Martin Schlander <suse@linuxin.dk>, 2006.
 msgid ""
 msgstr ""
-"Project-Id-Version: zypp\n"
+"Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2006-10-26 09:41+0200\n"
-"PO-Revision-Date: 2006-10-29 17:55+0100\n"
-"Last-Translator: Martin Schlander <suse@linuxin.dk>\n"
-"Language-Team:  <opensuse-translation@opensuse.org>\n"
+"PO-Revision-Date: 2001-10-18 11:02+0200\n"
+"Last-Translator: Janez Krek <janez.krek@euroteh.si>\n"
+"Language-Team: Slovenian\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: KBabel 1.11.4\n"
 
 #: solver/detail/ProblemSolutionIgnore.cc:54
+#, fuzzy
 msgid "Ignore this requirement just here"
-msgstr "Ignorér dette krav lige nu"
+msgstr "ima nerešene zahteve..."
 
 #: solver/detail/ProblemSolutionIgnore.cc:63
+#, fuzzy
 msgid "Ignore this requirement generally"
-msgstr "Ignorér dette krav generelt"
+msgstr "ima nerešene zahteve..."
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
 #: solver/detail/ProblemSolutionIgnore.cc:75
 #, c-format
 msgid "Install %s although it would change the architecture"
-msgstr "Installér %s selvom det ændrer arkitekturen"
+msgstr ""
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
 #: solver/detail/ProblemSolutionIgnore.cc:78
 #, c-format
 msgid "%s provides this dependency but would changed the architecture of the installed item"
-msgstr "%s leverer denne afhængighed, men ændrer arkitekturen for det installerede element"
+msgstr ""
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
 #: solver/detail/ProblemSolutionIgnore.cc:90
 #: solver/detail/ProblemSolutionIgnore.cc:102
-#, c-format
+#, fuzzy, c-format
 msgid "Ignore this conflict of %s"
-msgstr "Ignorér denne konflikt med %s"
+msgstr "%1 je v sporu s/z %2"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
 #: solver/detail/ProblemSolutionIgnore.cc:117
-#, c-format
+#, fuzzy, c-format
 msgid "Ignore the obsolete %s in %s"
-msgstr "Ignorér den forældede %s i %s"
+msgstr "%1 je v sporu s/z %2"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
 #: solver/detail/ProblemSolutionIgnore.cc:130
-#, c-format
+#, fuzzy, c-format
 msgid "Ignore that %s is already set to install"
-msgstr "Ignorér at %s allerede er sat til installation"
+msgstr "Imenik %1 je že na seznamu."
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
 #: solver/detail/ProblemSolutionInstall.cc:54
 #: solver/detail/ProblemSolutionInstall.cc:56
-#, c-format
+#, fuzzy, c-format
 msgid "install %s"
-msgstr "installér %s"
+msgstr "Namesti %1"
 
-#
 #: solver/detail/ProblemSolutionInstall.cc:66
+#, fuzzy
 msgid "Install missing resolvables"
-msgstr "Installér manglende resolvables"
+msgstr "Namesti manjkajoče pakete"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
 #: solver/detail/ProblemSolutionKeep.cc:53
 #: solver/detail/ProblemSolutionKeep.cc:55
 #, c-format
 msgid "keep %s"
-msgstr "behold %s"
+msgstr ""
 
-#
 #: solver/detail/ProblemSolutionKeep.cc:65
+#, fuzzy
 msgid "Keep resolvables"
-msgstr "Behold resolvables"
+msgstr "Namesti manjkajoče pakete"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
 #: solver/detail/ProblemSolutionUninstall.cc:64
 #: solver/detail/ProblemSolutionUninstall.cc:66
 #: solver/detail/Resolver_problems.cc:408
 #: solver/detail/Resolver_problems.cc:418
-#, c-format
+#, fuzzy, c-format
 msgid "delete %s"
-msgstr "slet %s"
+msgstr "Zbriši %1"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
 #: solver/detail/ProblemSolutionUninstall.cc:69
 #: solver/detail/ProblemSolutionUninstall.cc:71
 #: solver/detail/Resolver_problems.cc:411
 #: solver/detail/Resolver_problems.cc:421
-#, c-format
+#, fuzzy, c-format
 msgid "do not install %s"
-msgstr "installér ikke %s"
+msgstr "Nameščam na:"
 
 #: solver/detail/ProblemSolutionUninstall.cc:81
+#, fuzzy
 msgid "Do not install or delete concerning resolvables"
-msgstr "Installér eller slet ikke angående resolvables"
+msgstr "%1 je v sporu s/z %2"
 
 #: solver/detail/ProblemSolutionUnlock.cc:50
+#, fuzzy
 msgid "unlock all resolvables"
-msgstr "Lås alle resolvables op"
+msgstr "%1 je v sporu s/z %2"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
 #: solver/detail/ProblemSolutionUnlock.cc:59
-#, c-format
+#, fuzzy, c-format
 msgid "unlock %s"
-msgstr "lås %s op"
+msgstr "Ure"
 
 #: solver/detail/ProblemSolutionUnlock.cc:68
+#, fuzzy
 msgid "Unlock these resolvables"
-msgstr "Lås disse resolvables op"
+msgstr "%1 je v sporu s/z %2"
 
 #. Translator: 1.%s = dependency; 2.%s and 3.%s = name of package,patch,...
 #: solver/detail/QueueItemRequire.cc:693
 #, c-format
 msgid "for requiring %s for %s when upgrading %s"
-msgstr "for at kræve %s til %s når du opgraderer %s"
+msgstr ""
 
 #: solver/detail/ResolverInfo.cc:190
+#, fuzzy
 msgid " Error!"
-msgstr " Fejl!"
+msgstr "Napaka"
 
 #: solver/detail/ResolverInfo.cc:191
+#, fuzzy
 msgid " Important!"
-msgstr " Vigtigt!"
+msgstr "Uvozi podatke"
 
 #. Translator all.%s = name of packages,patches,....
 #. TranslatorExplanation: 1.%s name of package, 2.%s list of names
@@ -142,7 +144,7 @@ msgstr " Vigtigt!"
 #: solver/detail/ResolverInfoChildOf.cc:71
 #, c-format
 msgid "%s part of %s"
-msgstr "%s del af %s"
+msgstr ""
 
 #. Translator: all.%s = name of package, patch,...
 #. TranslatorExplanation: 1.%s name of package, 2.%s list of names
@@ -151,107 +153,107 @@ msgstr "%s del af %s"
 #: solver/detail/ResolverInfoConflictsWith.cc:55
 #: solver/detail/ResolverInfoConflictsWith.cc:70
 #: solver/detail/Resolver_problems.cc:264
-#, c-format
+#, fuzzy, c-format
 msgid "%s conflicts with %s"
-msgstr "%s konflikter med %s"
+msgstr "%1 je v sporu s/z %2"
 
 #. Translator: all.%s = name of package,patch,....
 #: solver/detail/ResolverInfoDependsOn.cc:55
 #, c-format
 msgid "%s depended on %s"
-msgstr "%s afhang af %s"
+msgstr ""
 
 #. TranslatorExplanation: 1.%s name of package, 2.%s list of names
 #. TranslatorExplanation: 1.%s is dependent on list of names
 #: solver/detail/ResolverInfoDependsOn.cc:69
 #, c-format
 msgid "%s dependend on %s"
-msgstr "%s afhang af %s"
+msgstr ""
 
 #: solver/detail/ResolverInfoMisc.cc:56
+#, fuzzy
 msgid ", Action: "
-msgstr ", Handling. "
+msgstr "Akcija"
 
 #: solver/detail/ResolverInfoMisc.cc:58
 msgid ", Trigger: "
-msgstr ", Udløser. "
+msgstr ""
 
 #. Translator: Notation for (RPM) package
 #: solver/detail/ResolverInfoMisc.cc:90
 msgid "package"
-msgstr "pakke"
+msgstr ""
 
 #. Translator: Notation for SuSE package selection (set of packages)
 #: solver/detail/ResolverInfoMisc.cc:94
 msgid "selection"
-msgstr "udvalg"
+msgstr ""
 
 #. Translator: Notation for SuSE installation pattern (set of packages, describing use of system)
 #: solver/detail/ResolverInfoMisc.cc:98
 msgid "pattern"
-msgstr "mønster"
+msgstr ""
 
 #. Translator: Notation for product
 #: solver/detail/ResolverInfoMisc.cc:102
 msgid "product"
-msgstr "produkt"
+msgstr ""
 
-#
 #. Translator: Notation for patch
 #: solver/detail/ResolverInfoMisc.cc:106
 msgid "patch"
-msgstr "rettelse"
+msgstr "popravek"
 
 #. Translator: Notation for script (part of a patch)
 #: solver/detail/ResolverInfoMisc.cc:110
 msgid "script"
-msgstr "script"
+msgstr ""
 
 #. Translator: Notation for message (part of a patch)
 #: solver/detail/ResolverInfoMisc.cc:114
 msgid "message"
-msgstr "besked"
+msgstr ""
 
 #. Translator: Notation for atom (part of a patch)
 #: solver/detail/ResolverInfoMisc.cc:118
 msgid "atom"
-msgstr "atom"
+msgstr ""
 
 #. Translator: Notation for computer system
 #: solver/detail/ResolverInfoMisc.cc:122
 msgid "system"
-msgstr "system"
+msgstr ""
 
 #. Translator: Generic term for an item with dependencies, please leave untranslated for now
 #: solver/detail/ResolverInfoMisc.cc:126
 msgid "Resolvable"
-msgstr "Resolvable"
+msgstr ""
 
 #. TranslatorExplanation: Additional information to dependency solver result, no solution could be found
 #: solver/detail/ResolverInfoMisc.cc:144
 msgid "Marking this resolution attempt as invalid."
-msgstr "Markerer dette løsningsforslag som ugyldigt."
+msgstr ""
 
 #. Translator: %s = name of packages,patch,...
 #. TranslatorExplanation: Additional information to dependency solver result.
 #: solver/detail/ResolverInfoMisc.cc:151
 #, c-format
 msgid "Marking resolvable %s as uninstallable"
-msgstr "Markerer resolvable %s som ikke-installérbar"
+msgstr ""
 
 #. Translator: %s = name of packages,patch,...
 #. TranslatorExplanation: Additional information to dependency solver result.
 #: solver/detail/ResolverInfoMisc.cc:159
 #, c-format
 msgid "%s is scheduled to be installed, but this is not possible because of dependency problems."
-msgstr "%s er planlagt til installation. Grundet afhængighedsproblemer er dette imidlertid ikke muligt."
+msgstr ""
 
 #. Translator: %s = name of package,patch,...
 #. TranslatorExplanation: Additional information to dependency solver result.
 #: solver/detail/ResolverInfoMisc.cc:167
 #, c-format
 msgid "Can't install %s since it is already marked as needing to be uninstalled"
-msgstr "Kan ikke installere %s, da det allerede er markeret som nødvendigt at afinstallere"
+msgstr ""
 
 #. Translator: %s = name of patch
 #. TranslatorExplanation: A patch which is not needed (does not apply) cant be installed
@@ -262,7 +264,7 @@ msgstr "Kan ikke installere %s, da det allerede er markeret som nødvendigt at a
 #: solver/detail/ResolverInfoMisc.cc:179
 #, c-format
 msgid "Can't install %s since it is does not apply to this system."
-msgstr "Kan ikke installere %s, da det ikke kan anvendes på dette system."
+msgstr ""
 
 #. affected() = item 1 which has to be installed
 #. _capability =
@@ -272,13 +274,13 @@ msgstr "Kan ikke installere %s, da det ikke kan anvendes på dette system."
 #: solver/detail/ResolverInfoMisc.cc:190
 #, c-format
 msgid "Can't install %s, since %s is already marked as needing to be installed"
-msgstr "Kan ikke installere %s, siden %s allerede er markeret som nødvendigt at installere"
+msgstr ""
 
 #. Translator: %s = name of patch,product
 #: solver/detail/ResolverInfoMisc.cc:198
 #, c-format
 msgid "This would invalidate %s."
-msgstr "Dette ville gøre %s ugyldig."
+msgstr ""
 
 #. Translator: %s = name of patch, pattern, ...
 #. TranslatorExplanation: Establishing is the process of computing which patches are needed
@@ -286,9 +288,9 @@ msgstr "Dette ville gøre %s ugyldig."
 #. TranslatorExplanation: It is also used for other types of resolvables in order to verify
 #. TranslatorExplanation: the completeness of their dependencies
 #: solver/detail/ResolverInfoMisc.cc:214
-#, c-format
+#, fuzzy, c-format
 msgid "Establishing %s"
-msgstr "Etablerer %s"
+msgstr "Nameščam na:"
 
 #. affected() = resolvable to be installed
 #. _capability =
@@ -299,9 +301,9 @@ msgstr "Etablerer %s"
 #. TranslatorExplanation: Just a progress indicator that something is scheduled for installation
 #. Translator: %s = packagename
 #: solver/detail/ResolverInfoMisc.cc:235
-#, c-format
+#, fuzzy, c-format
 msgid "Installing %s"
-msgstr "Installerer %s"
+msgstr "Nameščam na:"
 
 #. affected() = updated resolvable
 #. _capability =
@@ -313,7 +315,7 @@ msgstr "Installerer %s"
 #: solver/detail/ResolverInfoMisc.cc:252
 #, c-format
 msgid "Updating %s to %s"
-msgstr "Opdaterer %s til %s"
+msgstr ""
 
 #. affected() =
 #. _capability =
@@ -323,9 +325,9 @@ msgstr "Opdaterer %s til %s"
 #. TranslatorExample: Skipping foo: already installed
 #. TranslatorExplanation: An installation request for foo is skipped since foo is already installed
 #: solver/detail/ResolverInfoMisc.cc:270
-#, c-format
+#, fuzzy, c-format
 msgid "Skipping %s: already installed"
-msgstr "Undlader %s: Allerede installeret"
+msgstr "Preverjam že nameščene optične bralnike"
 
 #. affected() = is set
 #. _capability = is set
@@ -340,7 +342,7 @@ msgstr "Undlader %s: Allerede installeret"
 #: solver/detail/ResolverInfoMisc.cc:292
 #, c-format
 msgid "There are no alternative installed providers of %s"
-msgstr "Der er intet alternativ installeret som leverer %s"
+msgstr ""
 
 #. Translator: 1.%s = name of package,patch....
 #. TranslatorExample: for bar
@@ -348,7 +350,7 @@ msgstr "Der er intet alternativ installeret som leverer %s"
 #: solver/detail/ResolverInfoMisc.cc:298 solver/detail/ResolverInfoMisc.cc:323
 #, c-format
 msgid "for %s"
-msgstr "for %s"
+msgstr ""
 
 #. affected() =
 #. _capability =
@@ -362,7 +364,7 @@ msgstr "for %s"
 #: solver/detail/ResolverInfoMisc.cc:317
 #, c-format
 msgid "There are no installable providers of %s"
-msgstr "Der er intet installerbart, der leverer %s"
+msgstr ""
 
 #. Translator: 1.%s = name of package,patch,..., 2.%s = name of package,patch,...
 #. TranslatorExample: Upgrade to foo to avoid removing bar is not possible
@@ -370,43 +372,43 @@ msgstr "Der er intet installerbart, der leverer %s"
 #: solver/detail/ResolverInfoMisc.cc:341
 #, c-format
 msgid "Upgrade to %s to avoid removing %s is not possible."
-msgstr "Opgradering til %s, for at undgå at fjerne %s, er ikke muligt."
+msgstr ""
 
 #. Translator: 1.%s = name of package,patch,...; 2.%s = dependency;
 #: solver/detail/ResolverInfoMisc.cc:359
 #, c-format
 msgid "%s provides %s, but is scheduled to be uninstalled."
-msgstr "%s leverer %s, men er planlagt til afinstallation."
+msgstr ""
 
 #. Translator: 1.%s = name of package,patch,...; 2.%s = dependency; 3.%s type (package, patch, ...)
 #: solver/detail/ResolverInfoMisc.cc:377
 #, c-format
 msgid "%s provides %s, but another version of that %s is already installed."
-msgstr "%s leverer %s, men en anden version af denne %s er allerede installeret."
+msgstr ""
 
 #. Translator: 1.%s = name of package,patch,...; 2.%s = dependency;
 #: solver/detail/ResolverInfoMisc.cc:396
 #, c-format
 msgid "%s provides %s, but it is uninstallable.  Try installing it on its own for more details."
-msgstr "%s leverer %s, men kan ikke installeres.  Prøv at installere den alene for at få flere detaljer."
+msgstr ""
 
 #. Translator: 1.%s = name of package,patch,...; 2.%s = dependency;
 #: solver/detail/ResolverInfoMisc.cc:414
 #, c-format
 msgid "%s provides %s, but it is locked."
-msgstr "%s leverer %s, men er låst."
+msgstr ""
 
 #. Translator: 1.%s = name of package,patch,...; 2.%s = dependency;
 #: solver/detail/ResolverInfoMisc.cc:432
 #, c-format
 msgid "%s provides %s, but has another architecture."
-msgstr "%s leverer %s, men har en anden arkitektur."
+msgstr ""
 
 #. Translator: 1.%s = dependency. 2.%s name of package, patch, ...
 #: solver/detail/ResolverInfoMisc.cc:450
 #, c-format
 msgid "Can't satisfy requirement %s for %s"
-msgstr "Kan ikke tilfredsstille kravet %s for %s"
+msgstr ""
 
 #. affected() = to-be-installed resolvable which was scheduled to be uninstalled
 #. _capability =
@@ -418,7 +420,7 @@ msgstr "Kan ikke tilfredsstille kravet %s for %s"
 #: solver/detail/ResolverInfoMisc.cc:471
 #, c-format
 msgid "%s is required by other to-be-installed resolvable, so it won't be unlinked."
-msgstr "%s er krævet af en anden resolvable, der bliver installeret, så den vil ikke blive aflinket."
+msgstr ""
 
 #. affected() = provider of cap
 #. _capability =
@@ -430,7 +432,7 @@ msgstr "%s er krævet af en anden resolvable, der bliver installeret, så den vi
 #: solver/detail/ResolverInfoMisc.cc:488
 #, c-format
 msgid "%s is required by other installed resolvable, so it won't be unlinked."
-msgstr "%s er krævet af anden installeret resolvable, så den vil ikke blive aflinket."
+msgstr ""
 
 #. affected() = to-be-uninstalled resolvable which is locked
 #. _capability =
@@ -440,9 +442,9 @@ msgstr "%s er krævet af anden installeret resolvable, så den vil ikke blive af
 #. TranslatorExample: foo is locked and cannot be uninstalled.
 #. TranslatorExplanation: foo is to-be-uninstalled but it is locked
 #: solver/detail/ResolverInfoMisc.cc:505
-#, c-format
+#, fuzzy, c-format
 msgid "%s is locked and cannot be uninstalled."
-msgstr "%s er låst og kan ikke afinstalleres."
+msgstr "Ta paket ni nameščen in ne bo nameščen."
 
 #. affected() = provider of capability
 #. _capability = provided by provider
@@ -453,7 +455,7 @@ msgstr "%s er låst og kan ikke afinstalleres."
 #: solver/detail/ResolverInfoMisc.cc:524
 #, c-format
 msgid "A conflict over %s (%s) requires the removal of to-be-installed %s"
-msgstr "En konflikt om %s (%s) kræver at %s, der er sat til installation, bliver fjernet."
+msgstr ""
 
 #. affected() = provider of capability
 #. _capability = provided by provider
@@ -464,20 +466,20 @@ msgstr "En konflikt om %s (%s) kræver at %s, der er sat til installation, blive
 #: solver/detail/ResolverInfoMisc.cc:542
 #, c-format
 msgid "Marking %s as uninstallable due to conflicts over %s"
-msgstr "Markerer %s som ikke-installérbar grundet konflikter over %s"
+msgstr ""
 
 #. Translator: %s = name of package,patch
 #. TranslatorExample: from abc
 #: solver/detail/ResolverInfoMisc.cc:550
 #, c-format
 msgid "from %s"
-msgstr "fra %s"
+msgstr ""
 
 #. Translator: 1.%s = name of package,patch,...; 2.%s = dependency
 #: solver/detail/ResolverInfoMissingReq.cc:64
 #, c-format
 msgid "%s is missing the requirement %s"
-msgstr "%s mangler kravet %s"
+msgstr ""
 
 #. Translator: all.%s = name of package,patch,...
 #. TranslatorExplanation %s = name of package, patch, selection ...
@@ -485,37 +487,37 @@ msgstr "%s mangler kravet %s"
 #: solver/detail/Resolver_problems.cc:253
 #, c-format
 msgid "%s is needed by %s"
-msgstr "%s er nødvendig for %s"
+msgstr ""
 
 #. TranslatorExplanation: 1.%s name of package, 2.%s list of names
 #. TranslatorExplanation: 1.%s is needed by multiple others
 #: solver/detail/ResolverInfoNeededBy.cc:70
 #, c-format
 msgid "%s needed by %s"
-msgstr "%s er nødvendig for %s"
+msgstr ""
 
 #. Translator: all.%s = name of package,patch,....
 #: solver/detail/ResolverInfoObsoletes.cc:55
 #, c-format
 msgid "%s is replaced by %s"
-msgstr "%s erstattes af %s"
+msgstr ""
 
 #. TranslatorExplanation: 1.%s name of package, 2.%s list of names
 #. TranslatorExplanation: 1.%s is replaced by others
 #: solver/detail/ResolverInfoObsoletes.cc:69
 #, c-format
 msgid "%s replaced by %s"
-msgstr "%s erstattet af %s"
+msgstr ""
 
 #: solver/detail/Resolver_problems.cc:243
 msgid "Invalid information"
-msgstr "Ugyldig information"
+msgstr ""
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
 #: solver/detail/Resolver_problems.cc:250
 #, c-format
 msgid "%s is needed by other resolvables"
-msgstr "%s behøves af andre resolvables"
+msgstr ""
 
 #: solver/detail/Resolver_problems.cc:254
 #, c-format
@@ -523,195 +525,185 @@ msgid ""
 "%s is needed by:\n"
 "%s"
 msgstr ""
-"%s er nødvendig for:\n"
-"%s"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
 #: solver/detail/Resolver_problems.cc:261
-#, c-format
+#, fuzzy, c-format
 msgid "%s conflicts with other resolvables"
-msgstr "%s konflikter med andre ændringer"
+msgstr "%1 je v sporu s/z %2"
 
 #: solver/detail/Resolver_problems.cc:265
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "%s conflicts with:\n"
 "%s"
-msgstr ""
-"%s konflikter med:\n"
-"%s"
+msgstr "%1 je v sporu s/z %2"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
 #: solver/detail/Resolver_problems.cc:288
 #, c-format
 msgid "%s obsoletes other resolvables"
-msgstr "%s forælder andre resolvables"
+msgstr ""
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
 #: solver/detail/Resolver_problems.cc:291
 #, c-format
 msgid "%s obsoletes %s"
-msgstr "%s forælder %s"
+msgstr ""
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
 #: solver/detail/Resolver_problems.cc:293
 #, c-format
 msgid "%s obsoletes:%s"
-msgstr "%s forælder: %s"
+msgstr ""
 
 #: solver/detail/Resolver_problems.cc:294
 msgid ""
 "\n"
 "These resolvables will be deleted from the system."
 msgstr ""
-"\n"
-"Disse resolvables vil blive slettet fra systemet."
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
 #: solver/detail/Resolver_problems.cc:301
 #, c-format
 msgid "%s depends on other resolvables"
-msgstr "%s afhænger af andre resolvables"
+msgstr ""
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
 #: solver/detail/Resolver_problems.cc:305
 #, c-format
 msgid "%s depends on %s"
-msgstr "%s afhænger af %s"
+msgstr ""
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
 #: solver/detail/Resolver_problems.cc:308
 #, c-format
 msgid "%s depends on:%s"
-msgstr "%s afhænger af:%s"
+msgstr ""
 
 #. TranslatorExplanation: currently it is unused.
 #: solver/detail/Resolver_problems.cc:314
 msgid "Child of"
-msgstr "Barn af"
+msgstr ""
 
 #. TranslatorExplanation %s = dependency
 #. TranslatorExplanation %s = name of package,patch,...
 #: solver/detail/Resolver_problems.cc:320
 #: solver/detail/Resolver_problems.cc:400
-#, c-format
+#, fuzzy, c-format
 msgid "Cannot install %s"
-msgstr "Kan ikke installere %s"
+msgstr "Nameščam na:"
 
 #. TranslatorExplanation %s = capability
 #: solver/detail/Resolver_problems.cc:322
 #, c-format
 msgid "None provides %s"
-msgstr "Ingen leverer %s"
+msgstr ""
 
 #: solver/detail/Resolver_problems.cc:323
 msgid ""
 "\n"
 "There is no resource available which support this requirement."
 msgstr ""
-"\n"
-"Der er ingen tilgængelig ressource, der understøtter dette krav."
 
 #: solver/detail/Resolver_problems.cc:331
 msgid "Due problems which are described above/below this resolution will not solve all dependencies"
-msgstr "Grundet problemerne beskrevet ovenfor/nedenunder vil denne løsning ikke løse alle afhængigheder"
+msgstr ""
 
 #: solver/detail/Resolver_problems.cc:342
 #: solver/detail/Resolver_problems.cc:662
 #, c-format
 msgid "Cannot install %s because it is conflicting with %s"
-msgstr "Kan ikke installere %s, fordi den konflikter med %s"
+msgstr ""
 
 #. TranslatorExplanation %s = name of package,patch,...
 #: solver/detail/Resolver_problems.cc:359
-#, c-format
+#, fuzzy, c-format
 msgid "%s is not installed and has been marked as uninstallable"
-msgstr "%s installeres ikke og er blevet markeret som ikke-installérbar"
+msgstr "Ta paket ni nameščen in ne bo nameščen."
 
 #. TranslatorExplanation %s = name of package,patch,...
 #: solver/detail/Resolver_problems.cc:370
 #, c-format
 msgid "Cannot install %s due to dependency problems"
-msgstr "Kan ikke installere %s grundet afhængighedsproblemer"
+msgstr ""
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
 #: solver/detail/Resolver_problems.cc:434
 #, c-format
 msgid "%s has unfulfilled requirements"
-msgstr "%s har ikke-opfyldte krav"
+msgstr ""
 
-#
 #. TranslatorExplanation %s = name of package, patch, selection ...
 #: solver/detail/Resolver_problems.cc:472
-#, c-format
+#, fuzzy, c-format
 msgid "%s has missing dependencies"
-msgstr "%s har manglende afhængigheder"
+msgstr "Nezadoščene odvisnosti:"
 
-#
 #. TranslatorExplanation %s = name of package, patch, selection ...
 #: solver/detail/Resolver_problems.cc:510
-#, c-format
+#, fuzzy, c-format
 msgid "%s cannot be installed due to missing dependencies"
-msgstr "%s kan ikke installeres grundet manglende afhængigheder"
+msgstr "Nezadoščene odvisnosti:"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
 #: solver/detail/Resolver_problems.cc:548
 #, c-format
 msgid "%s fulfil dependencies of %s but will be uninstalled"
-msgstr "%s opfylder afhængighedskravene til %s, men vil blive afinstalleret"
+msgstr ""
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
 #: solver/detail/Resolver_problems.cc:558
-#, c-format
+#, fuzzy, c-format
 msgid "No need to install %s"
-msgstr "Ingen grund til at installere %s"
+msgstr "potrebno je ponovno namestiti"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
 #: solver/detail/Resolver_problems.cc:566
 #, c-format
 msgid "Cannot install %s to fulfil the dependencies of %s"
-msgstr "Kan ikke installere %s, for at opfylde afhængighedskravene til %s"
+msgstr ""
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
 #: solver/detail/Resolver_problems.cc:581
 #, c-format
 msgid "Cannot be install %s to fulfil the dependencies of %s"
-msgstr "Kan ikke installere %s, for at opfylde afhængighedskravene til %s"
+msgstr ""
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
 #: solver/detail/Resolver_problems.cc:618
 #: solver/detail/Resolver_problems.cc:626
 #, c-format
 msgid "%s will not be uninstalled cause it is still required"
-msgstr "%s vil ikke blive afinstalleret, da den stadig kræves"
+msgstr ""
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
 #: solver/detail/Resolver_problems.cc:637
 #, c-format
 msgid "%s obsoletes %s. But %s cannot be deleted because it is locked."
-msgstr "%s forælder %s. Men %s kan ikke slettes, fordi den er låst."
+msgstr ""
 
 #: solver/detail/Resolver_problems.cc:666
 #, c-format
 msgid "Cannot install %s because it is conflicting"
-msgstr "Kan ikke installere %s, fordi den konflikter"
+msgstr ""
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
 #: solver/detail/Resolver_problems.cc:685
-#, c-format
+#, fuzzy, c-format
 msgid "%s is uninstallable due to conflicts with %s"
-msgstr "%s er ikke-installérbar pga. konflikter med %s"
+msgstr "%1 je v sporu s/z %2"
 
 #: CountryCode.cc:135
 msgid "Unknown country: "
-msgstr "Ukendt land: "
+msgstr ""
 
-#
 #. Defined CountryCode constants
 #. Defined LanguageCode constants
 #: CountryCode.cc:215 LanguageCode.cc:225
+#, fuzzy
 msgid "noCode"
-msgstr "noCode"
+msgstr "Ko&da"
 
 # AD
 #: CountryCode.cc:217
@@ -721,42 +713,42 @@ msgstr "Andorra"
 #. :AND:020:
 #: CountryCode.cc:218
 msgid "United Arab Emirates"
-msgstr "Forenede Arabiske Emirater"
+msgstr "Združeni arabski emirati"
 
 # AF
 #. :ARE:784:
 #: CountryCode.cc:219
 msgid "Afghanistan"
-msgstr "Afghanistan"
+msgstr "Afganistan"
 
 # AG
 #. :AFG:004:
 #: CountryCode.cc:220
 msgid "Antigua and Barbuda"
-msgstr "Antigua og Barbuda"
+msgstr "Antigva in Barbuda"
 
 # AI
 #. :ATG:028:
 #: CountryCode.cc:221
 msgid "Anguilla"
-msgstr "Anguilla"
+msgstr "Angvila"
 
 #. :AIA:660:
 #: CountryCode.cc:222
 msgid "Albania"
-msgstr "Albanien"
+msgstr "Albanija"
 
 # AM
 #. :ALB:008:
 #: CountryCode.cc:223
 msgid "Armenia"
-msgstr "Armenien"
+msgstr "Armenija"
 
 # AN
 #. :ARM:051:
 #: CountryCode.cc:224
 msgid "Netherlands Antilles"
-msgstr "Hollandske Antiller"
+msgstr "Nizozemski Antili"
 
 # AO
 #. :ANT:530:
@@ -768,7 +760,7 @@ msgstr "Angola"
 #. :AGO:024:
 #: CountryCode.cc:226
 msgid "Antarctica"
-msgstr "Antarktis"
+msgstr "Antarktika"
 
 #. :ATA:010:
 #: CountryCode.cc:227
@@ -779,17 +771,17 @@ msgstr "Argentina"
 #. :ARG:032:
 #: CountryCode.cc:228
 msgid "American Samoa"
-msgstr "Amerikansk Samoa"
+msgstr "Ameriška Samoa"
 
 #. :ASM:016:
 #: CountryCode.cc:229
 msgid "Austria"
-msgstr "Østrig"
+msgstr "Avstrija"
 
 #. :AUT:040:
 #: CountryCode.cc:230
 msgid "Australia"
-msgstr "Australien"
+msgstr "Avstralija"
 
 # AW
 #. :AUS:036:
@@ -807,13 +799,13 @@ msgstr "Aland Islands"
 #. :ALA:248:
 #: CountryCode.cc:233
 msgid "Azerbaijan"
-msgstr "Azerbajdjan"
+msgstr "Azerbajdžan"
 
 # BA
 #. :AZE:031:
 #: CountryCode.cc:234
 msgid "Bosnia and Herzegovina"
-msgstr "Bosnien-Herzegovina"
+msgstr "Bosna in Hercegovina"
 
 #. :BIH:070:
 #: CountryCode.cc:235
@@ -823,12 +815,12 @@ msgstr "Barbados"
 #. :BRB:052:
 #: CountryCode.cc:236
 msgid "Bangladesh"
-msgstr "Bangladesh"
+msgstr "Bangladeš"
 
 #. :BGD:050:
 #: CountryCode.cc:237
 msgid "Belgium"
-msgstr "Belgien"
+msgstr "Belgija"
 
 # BF
 #. :BEL:056:
@@ -839,12 +831,12 @@ msgstr "Burkina Faso"
 #. :BFA:854:
 #: CountryCode.cc:239
 msgid "Bulgaria"
-msgstr "Bulgarien"
+msgstr "Bolgarija"
 
 #. :BGR:100:
 #: CountryCode.cc:240
 msgid "Bahrain"
-msgstr "Bahrain"
+msgstr "Bahrein"
 
 # BI
 #. :BHR:048:
@@ -867,46 +859,46 @@ msgstr "Bermuda"
 #. :BMU:060:
 #: CountryCode.cc:244
 msgid "Brunei Darussalam"
-msgstr "Brunei Darussalam"
+msgstr "Brunej"
 
 #. :BRN:096:
 #: CountryCode.cc:245
 msgid "Bolivia"
-msgstr "Bolivia"
+msgstr "Bolivija"
 
 # BR
 #. :BOL:068:
 #: CountryCode.cc:246
 msgid "Brazil"
-msgstr "Brasilien"
+msgstr "Brazilija"
 
 # BS
 #. :BRA:076:
 #: CountryCode.cc:247
 msgid "Bahamas"
-msgstr "Bahamas"
+msgstr "Bahami"
 
 # BT
 #. :BHS:044:
 #: CountryCode.cc:248
 msgid "Bhutan"
-msgstr "Bhutan"
+msgstr "Butan"
 
 # BV
 #. :BTN:064:
 #: CountryCode.cc:249
 msgid "Bouvet Island"
-msgstr "Bouvet-øen"
+msgstr "Bouvetov otok"
 
 #. :BVT:074:
 #: CountryCode.cc:250
 msgid "Botswana"
-msgstr "Botswana"
+msgstr "Botsvana"
 
 #. :BWA:072:
 #: CountryCode.cc:251
 msgid "Belarus"
-msgstr "Hviderusland"
+msgstr "Belorusija"
 
 # BZ
 #. :BLR:112:
@@ -917,209 +909,208 @@ msgstr "Belize"
 #. :BLZ:084:
 #: CountryCode.cc:253
 msgid "Canada"
-msgstr "Canada"
+msgstr "Kanada"
 
 # CC
 #. :CAN:124:
 #: CountryCode.cc:254
 msgid "Cocos (Keeling) Islands"
-msgstr "Kokosøerne - (Keeling-øerne)"
+msgstr "Kokosovi otoki"
 
 # CG
 #. :CCK:166:
 #. :CAF:140:
 #: CountryCode.cc:255 CountryCode.cc:257
 msgid "Congo"
-msgstr "Congo"
+msgstr "Kongo"
 
 # CF
 #. :COD:180:
 #: CountryCode.cc:256
 msgid "Centruual African Republic"
-msgstr "Centralafrikanske Republik"
+msgstr "Centralnoafriška republika"
 
 #. :COG:178:
 #: CountryCode.cc:258
 msgid "Switzerland"
-msgstr "Schweiz"
+msgstr "Švica"
 
 # CI
 # fuzzy
 #. :CHE:756:
 #: CountryCode.cc:259
 msgid "Cote D'Ivoire"
-msgstr "Elfenbenskysten"
+msgstr "Slonokoščena obala"
 
 # CK
 #. :CIV:384:
 #: CountryCode.cc:260
 msgid "Cook Islands"
-msgstr "Cook-øerne"
+msgstr "Cookovi otoki"
 
 #. :COK:184:
 #: CountryCode.cc:261
 msgid "Chile"
-msgstr "Chile"
+msgstr "Čile"
 
 # CM
 #. :CHL:152:
 #: CountryCode.cc:262
 msgid "Cameroon"
-msgstr "Cameroun"
+msgstr "Kamerun"
 
 #. :CMR:120:
 #: CountryCode.cc:263
 msgid "China"
-msgstr "Kina"
+msgstr "Kitajska"
 
 #. :CHN:156:
 #: CountryCode.cc:264
 msgid "Colombia"
-msgstr "Colombia"
+msgstr "Kolumbija"
 
 #. :COL:170:
 #: CountryCode.cc:265
 msgid "Costa Rica"
-msgstr "Costa Rica"
+msgstr "Kostarika"
 
-#
 #. :CRI:188:
 #: CountryCode.cc:266
 msgid "Serbia and Montenegro"
-msgstr "Serbien og Montenegro"
+msgstr "Srbija in Črna gora"
 
 # CU
 #. :SCG:891:
 #: CountryCode.cc:267
 msgid "Cuba"
-msgstr "Cuba"
+msgstr "Kuba"
 
 # CV
 #. :CUB:192:
 #: CountryCode.cc:268
 msgid "Cape Verde"
-msgstr "Kap Verde"
+msgstr "Zelenortski otoki"
 
 # CX
 #. :CPV:132:
 #: CountryCode.cc:269
 msgid "Christmas Island"
-msgstr "Juleøen"
+msgstr "Božični otok"
 
 # CY
 #. :CXR:162:
 #: CountryCode.cc:270
 msgid "Cyprus"
-msgstr "Cypern"
+msgstr "Ciper"
 
 #. :CYP:196:
 #: CountryCode.cc:271
 msgid "Czech Republic"
-msgstr "Tjekkiet"
+msgstr "Češka republika"
 
 #. :CZE:203:
 #: CountryCode.cc:272
 msgid "Germany"
-msgstr "Tyskland"
+msgstr "Nemčija"
 
 #. :DEU:276:
 #: CountryCode.cc:273
 msgid "Djibouti"
-msgstr "Djibouti"
+msgstr "Dschibuti"
 
 #. :DJI:262:
 #: CountryCode.cc:274
 msgid "Denmark"
-msgstr "Danmark"
+msgstr "Danska"
 
 #. :DNK:208:
 #: CountryCode.cc:275
 msgid "Dominica"
-msgstr "Dominica"
+msgstr "Dominika"
 
 #. :DMA:212:
 #: CountryCode.cc:276
 msgid "Dominican Republic"
-msgstr "Dominikanske Republik"
+msgstr "Dominikanska republika"
 
 #. :DOM:214:
 #: CountryCode.cc:277
 msgid "Algeria"
-msgstr "Algeriet"
+msgstr "Alžirija"
 
 #. :DZA:012:
 #: CountryCode.cc:278
 msgid "Ecuador"
-msgstr "Ecuador"
+msgstr "Ekvador"
 
 #. :ECU:218:
 #: CountryCode.cc:279
 msgid "Estonia"
-msgstr "Estland"
+msgstr "Estonija"
 
 #. :EST:233:
 #: CountryCode.cc:280
 msgid "Egypt"
-msgstr "Egypten"
+msgstr "Egipt"
 
 # EH
 #. :EGY:818:
 #: CountryCode.cc:281
 msgid "Western Sahara"
-msgstr "Vest-Sahara"
+msgstr "Zahodna Sahara"
 
 # ER
 #. :ESH:732:
 #: CountryCode.cc:282
 msgid "Eritrea"
-msgstr "Eritrea"
+msgstr "Eritreja"
 
 #. :ERI:232:
 #: CountryCode.cc:283
 msgid "Spain"
-msgstr "Spanien"
+msgstr "Španija"
 
 # ET
 #. :ESP:724:
 #: CountryCode.cc:284
 msgid "Ethiopia"
-msgstr "Etiopien"
+msgstr "Etiopija"
 
 #. :ETH:231:
 #: CountryCode.cc:285
 msgid "Finland"
-msgstr "Finland"
+msgstr "Finska"
 
 #. :FIN:246:
 #: CountryCode.cc:286
 msgid "Fiji"
-msgstr "Fiji"
+msgstr "Fidji"
 
 # FK
 #. :FJI:242:
 #: CountryCode.cc:287
 msgid "Falkland Islands (Malvinas)"
-msgstr "Falklandsøerne (Malvinas)"
+msgstr "Falklandski otoki"
 
 #. :FLK:238:
 #: CountryCode.cc:288
 msgid "Federated States of Micronesia"
-msgstr "De forenede Micronesiske stater"
+msgstr "Federalne države Mikronezija"
 
 #. :FSM:583:
 #: CountryCode.cc:289
 msgid "Faroe Islands"
-msgstr "Færøerne"
+msgstr "Farerski otoki"
 
 #. :FRO:234:
 #: CountryCode.cc:290
 msgid "France"
-msgstr "Frankrig"
+msgstr "Francija"
 
 #. :FRA:250:
 #: CountryCode.cc:291
 msgid "Metropolitan France"
-msgstr "Metropolitansk Frankrig"
+msgstr "Metropolitan France"
 
 # GA
 #. :FXX:249:
@@ -1130,7 +1121,7 @@ msgstr "Gabon"
 #. :GAB:266:
 #: CountryCode.cc:293
 msgid "United Kingdom"
-msgstr "Storbritannien"
+msgstr "Velika Britanija"
 
 #. :GBR:826:
 #: CountryCode.cc:294
@@ -1140,20 +1131,21 @@ msgstr "Grenada"
 #. :GRD:308:
 #: CountryCode.cc:295
 msgid "Georgia"
-msgstr "Georgien"
+msgstr "Gruzija"
 
+# Shouldn't this be French Guyane?
 # GF
 # fuzzy
 #. :GEO:268:
 #: CountryCode.cc:296
 msgid "French Guiana"
-msgstr "Fransk Guinea"
+msgstr "Francoska Gvineja"
 
 # GH
 #. :GUF:254:
 #: CountryCode.cc:297
 msgid "Ghana"
-msgstr "Ghana"
+msgstr "Gana"
 
 #. :GHA:288:
 #: CountryCode.cc:298
@@ -1163,19 +1155,19 @@ msgstr "Gibraltar"
 #. :GIB:292:
 #: CountryCode.cc:299
 msgid "Greenland"
-msgstr "Grønland"
+msgstr "Grenlandija"
 
 # GM
 #. :GRL:304:
 #: CountryCode.cc:300
 msgid "Gambia"
-msgstr "Gambia"
+msgstr "Gambija"
 
 # GN
 #. :GMB:270:
 #: CountryCode.cc:301
 msgid "Guinea"
-msgstr "Guinea"
+msgstr "Gvineja"
 
 #. :GIN:324:
 #: CountryCode.cc:302
@@ -1186,24 +1178,23 @@ msgstr "Guadeloupe"
 #. :GLP:312:
 #: CountryCode.cc:303
 msgid "Equatorial Guinea"
-msgstr "Ækvatorialguinea"
+msgstr "Ekvatorialna Gvineja"
 
 #. :GNQ:226:
 #: CountryCode.cc:304
 msgid "Greece"
-msgstr "Grækenland"
+msgstr "Grčija"
 
 # GS
-# fuzzy
 #. :GRC:300:
 #: CountryCode.cc:305
 msgid "South Georgia and the South Sandwich Islands"
-msgstr "Syd-Georgien og sydlige Sandwich-øer"
+msgstr "Južna Georgia in Južni Sandwichevi otoki"
 
 #. :SGS:239:
 #: CountryCode.cc:306
 msgid "Guatemala"
-msgstr "Guatemala"
+msgstr "Gvatemala"
 
 #. :GTM:320:
 #: CountryCode.cc:307
@@ -1214,13 +1205,13 @@ msgstr "Guam"
 #. :GUM:316:
 #: CountryCode.cc:308
 msgid "Guinea-Bissau"
-msgstr "Guinea-Bissau"
+msgstr "Gvineja Bissau"
 
 # GY
 #. :GNB:624:
 #: CountryCode.cc:309
 msgid "Guyana"
-msgstr "Guyana"
+msgstr "Gvajana"
 
 #. :GUY:328:
 #: CountryCode.cc:310
@@ -1232,7 +1223,7 @@ msgstr "Hong Kong"
 #. :HKG:344:
 #: CountryCode.cc:311
 msgid "Heard Island and McDonald Islands"
-msgstr "Heard Øen og McDonald Øerne"
+msgstr "Heardov otok in McDonaldov otok"
 
 #. :HMD:334:
 #: CountryCode.cc:312
@@ -1242,7 +1233,7 @@ msgstr "Honduras"
 #. :HND:340:
 #: CountryCode.cc:313
 msgid "Croatia"
-msgstr "Kroatien"
+msgstr "Hrvaška"
 
 # HT
 #. :HRV:191:
@@ -1253,33 +1244,33 @@ msgstr "Haiti"
 #. :HTI:332:
 #: CountryCode.cc:315
 msgid "Hungary"
-msgstr "Ungarn"
+msgstr "Madžarska"
 
 #. :HUN:348:
 #: CountryCode.cc:316
 msgid "Indonesia"
-msgstr "Indonesien"
+msgstr "Indonezija"
 
 #. :IDN:360:
 #: CountryCode.cc:317
 msgid "Ireland"
-msgstr "Irland"
+msgstr "Irska"
 
 #. :IRL:372:
 #: CountryCode.cc:318
 msgid "Israel"
-msgstr "Israel"
+msgstr "Izrael"
 
 #. :ISR:376:
 #: CountryCode.cc:319
 msgid "India"
-msgstr "Indien"
+msgstr "Indija"
 
 # IO
 #. :IND:356:
 #: CountryCode.cc:320
 msgid "British Indian Ocean Territory"
-msgstr "British Indian Ocean Territory"
+msgstr "Britansko ozemlje v Indijskem oceanu"
 
 #. :IOT:086:
 #: CountryCode.cc:321
@@ -1287,7 +1278,6 @@ msgid "Iraq"
 msgstr "Irak"
 
 # IR
-# fuzzy
 #. :IRQ:368:
 #: CountryCode.cc:322
 msgid "Iran"
@@ -1296,46 +1286,46 @@ msgstr "Iran"
 #. :IRN:364:
 #: CountryCode.cc:323
 msgid "Iceland"
-msgstr "Island"
+msgstr "Islandija"
 
 #. :ISL:352:
 #: CountryCode.cc:324
 msgid "Italy"
-msgstr "Italien"
+msgstr "Italija"
 
 #. :ITA:380:
 #: CountryCode.cc:325
 msgid "Jamaica"
-msgstr "Jamaica"
+msgstr "Jamajka"
 
 #. :JAM:388:
 #: CountryCode.cc:326
 msgid "Jordan"
-msgstr "Jordan"
+msgstr "Jordanija"
 
 #. :JOR:400:
 #: CountryCode.cc:327
 msgid "Japan"
-msgstr "Japan"
+msgstr "Japonska"
 
 # KE
 #. :JPN:392:
 #: CountryCode.cc:328
 msgid "Kenya"
-msgstr "Kenya"
+msgstr "Kenija"
 
 # KG
 # fuzzy
 #. :KEN:404:
 #: CountryCode.cc:329
 msgid "Kyrgyzstan"
-msgstr "Kirgisistan"
+msgstr "Kirgizstan"
 
 # KH
 #. :KGZ:417:
 #: CountryCode.cc:330
 msgid "Cambodia"
-msgstr "Cambodia"
+msgstr "Kambodža"
 
 # KI
 #. :KHM:116:
@@ -1347,49 +1337,50 @@ msgstr "Kiribati"
 #. :KIR:296:
 #: CountryCode.cc:332
 msgid "Comoros"
-msgstr "Comorerne"
+msgstr "Komori"
 
 # KN
 # fuzzy
 #. :COM:174:
 #: CountryCode.cc:333
 msgid "Saint Kitts and Nevis"
-msgstr "Sankt Kitts og Nevis"
+msgstr "Saint Kitts in Nevis"
 
 #. :KNA:659:
 #: CountryCode.cc:334
 msgid "North Korea"
-msgstr "Nordkorea"
+msgstr "Severna Korea"
 
 #. :PRK:408:
 #: CountryCode.cc:335
 msgid "South Korea"
-msgstr "Sydkorea"
+msgstr "Južna Koreja"
 
 #. :KOR:410:
 #: CountryCode.cc:336
 msgid "Kuwait"
-msgstr "Kuwait"
+msgstr "Kuvajt"
 
 # KY
 #. :KWT:414:
 #: CountryCode.cc:337
 msgid "Cayman Islands"
-msgstr "Caymanøerne"
+msgstr "Kajmanski otoki"
 
+# Shouldn't this be "Kazakhstan"?
 # KZ
 # fuzzy
 #. :CYM:136:
 #: CountryCode.cc:338
 msgid "Kazakhstan"
-msgstr "Kasakhstan"
+msgstr "Kazahstan"
 
 # CD
 # fuzzy
 #. :KAZ:398:
 #: CountryCode.cc:339
 msgid "Lao People's Democratic Republic"
-msgstr "Laos"
+msgstr "Lao, ljudska demokratična republika"
 
 #. :LAO:418:
 #: CountryCode.cc:340
@@ -1401,7 +1392,7 @@ msgstr "Libanon"
 #. :LBN:422:
 #: CountryCode.cc:341
 msgid "Saint Lucia"
-msgstr "Sankt Lucia"
+msgstr "Sv. Lucija"
 
 #. :LCA:662:
 #: CountryCode.cc:342
@@ -1418,50 +1409,49 @@ msgstr "Sri Lanka"
 #. :LKA:144:
 #: CountryCode.cc:344
 msgid "Liberia"
-msgstr "Liberia"
+msgstr "Liberija"
 
 # LS
 #. :LBR:430:
 #: CountryCode.cc:345
 msgid "Lesotho"
-msgstr "Lesotho"
+msgstr "Lesoto"
 
 #. :LSO:426:
 #: CountryCode.cc:346
 msgid "Lithuania"
-msgstr "Litauen"
+msgstr "Litva"
 
 #. :LTU:440:
 #: CountryCode.cc:347
 msgid "Luxembourg"
-msgstr "Luxemborg"
+msgstr "Luksemburg"
 
 #. :LUX:442:
 #: CountryCode.cc:348
 msgid "Latvia"
-msgstr "Letland"
+msgstr "Latvija"
 
 # LY
-# fuzzy
 #. :LVA:428:
 #: CountryCode.cc:349
 msgid "Libya"
-msgstr "Libyen"
+msgstr "Libija"
 
 #. :LBY:434:
 #: CountryCode.cc:350
 msgid "Morocco"
-msgstr "Marokko"
+msgstr "Maroko"
 
 #. :MAR:504:
 #: CountryCode.cc:351
 msgid "Monaco"
-msgstr "Monaco"
+msgstr "Monako"
 
 #. :MCO:492:
 #: CountryCode.cc:352
 msgid "Moldova"
-msgstr "Moldavien"
+msgstr "Moldavija"
 
 # MG
 #. :MDA:498:
@@ -1473,12 +1463,12 @@ msgstr "Madagaskar"
 #. :MDG:450:
 #: CountryCode.cc:354
 msgid "Marshall Islands"
-msgstr "Marshalløerne"
+msgstr "Marshallovi otoki"
 
 #. :MHL:584:
 #: CountryCode.cc:355
 msgid "Macedonia"
-msgstr "Makedonien"
+msgstr "Makedonija"
 
 # ML
 #. :MKD:807:
@@ -1490,24 +1480,24 @@ msgstr "Mali"
 #. :MLI:466:
 #: CountryCode.cc:357
 msgid "Myanmar"
-msgstr "Myanmar"
+msgstr "Mjanmar"
 
 # MN
 #. :MMR:104:
 #: CountryCode.cc:358
 msgid "Mongolia"
-msgstr "Mongoliet"
+msgstr "Mongolija"
 
 #. :MNG:496:
 #: CountryCode.cc:359
 msgid "Macao"
-msgstr "Macau"
+msgstr "Macao"
 
 # MP
 #. :MAC:446:
 #: CountryCode.cc:360
 msgid "Northern Mariana Islands"
-msgstr "Nordlige Marianere"
+msgstr "Severni Marianski otoki"
 
 #. :MNP:580:
 #: CountryCode.cc:361
@@ -1518,7 +1508,7 @@ msgstr "Martinique"
 #. :MTQ:474:
 #: CountryCode.cc:362
 msgid "Mauritania"
-msgstr "Mauretanien"
+msgstr "Mavretanija"
 
 # MS
 #. :MRT:478:
@@ -1531,53 +1521,54 @@ msgstr "Montserrat"
 msgid "Malta"
 msgstr "Malta"
 
+# Shouldn't this be "Mauritius"?
 # MU
 # fuzzy
 #. :MLT:470:
 #: CountryCode.cc:365
 msgid "Mauritius"
-msgstr "Mauritius"
+msgstr "Mavricij"
 
 # MV
 # fuzzy
 #. :MUS:480:
 #: CountryCode.cc:366
 msgid "Maldives"
-msgstr "Maldiverne"
+msgstr "Malta"
 
 # MW
 #. :MDV:462:
 #: CountryCode.cc:367
 msgid "Malawi"
-msgstr "Malawi"
+msgstr "Malavi"
 
 #. :MWI:454:
 #: CountryCode.cc:368
 msgid "Mexico"
-msgstr "Mexico"
+msgstr "Mehika"
 
 #. :MEX:484:
 #: CountryCode.cc:369
 msgid "Malaysia"
-msgstr "Malaysia"
+msgstr "Malezija"
 
 # MZ
 #. :MYS:458:
 #: CountryCode.cc:370
 msgid "Mozambique"
-msgstr "Mozambique"
+msgstr "Mozambik"
 
 # NA
 #. :MOZ:508:
 #: CountryCode.cc:371
 msgid "Namibia"
-msgstr "Namibia"
+msgstr "Namibija"
 
 # NC
 #. :NAM:516:
 #: CountryCode.cc:372
 msgid "New Caledonia"
-msgstr "Ny Caledonien"
+msgstr "Nova Kaledonija"
 
 # NE
 #. :NCL:540:
@@ -1589,28 +1580,28 @@ msgstr "Niger"
 #. :NER:562:
 #: CountryCode.cc:374
 msgid "Norfolk Island"
-msgstr "Norfolk Øen"
+msgstr "Norfolški otok"
 
 # NG
 #. :NFK:574:
 #: CountryCode.cc:375
 msgid "Nigeria"
-msgstr "Nigeria"
+msgstr "Nigerija"
 
 #. :NGA:566:
 #: CountryCode.cc:376
 msgid "Nicaragua"
-msgstr "Nicaragua"
+msgstr "Nikaragva"
 
 #. :NIC:558:
 #: CountryCode.cc:377
 msgid "Netherlands"
-msgstr "Holland"
+msgstr "Nizozemska"
 
 #. :NLD:528:
 #: CountryCode.cc:378
 msgid "Norway"
-msgstr "Norge"
+msgstr "Norveška"
 
 # NP
 #. :NOR:578:
@@ -1633,7 +1624,7 @@ msgstr "Niue"
 #. :NIU:570:
 #: CountryCode.cc:382
 msgid "New Zealand"
-msgstr "New Zealand"
+msgstr "Nova Zelandija"
 
 #. :NZL:554:
 #: CountryCode.cc:383
@@ -1654,18 +1645,18 @@ msgstr "Peru"
 #. :PER:604:
 #: CountryCode.cc:386
 msgid "French Polynesia"
-msgstr "Fransk Polynesien"
+msgstr "Francoska Polinezija"
 
 # PG
 #. :PYF:258:
 #: CountryCode.cc:387
 msgid "Papua New Guinea"
-msgstr "Papua Ny Guinea"
+msgstr "Papua Nova Gvineja"
 
 #. :PNG:598:
 #: CountryCode.cc:388
 msgid "Philippines"
-msgstr "Filippinerne"
+msgstr "Filipini"
 
 #. :PHL:608:
 #: CountryCode.cc:389
@@ -1675,14 +1666,14 @@ msgstr "Pakistan"
 #. :PAK:586:
 #: CountryCode.cc:390
 msgid "Poland"
-msgstr "Polen"
+msgstr "Poljska"
 
 # PM
 # fuzzy
 #. :POL:616:
 #: CountryCode.cc:391
 msgid "Saint Pierre and Miquelon"
-msgstr "Sankt Pierre og Miquelon"
+msgstr "Sveti Pierre in Miquelon"
 
 #. :SPM:666:
 #: CountryCode.cc:392
@@ -1692,73 +1683,73 @@ msgstr "Pitcairn"
 #. :PCN:612:
 #: CountryCode.cc:393
 msgid "Puerto Rico"
-msgstr "Puerto Rico"
+msgstr "Portoriko"
 
 # IO
 #. :PRI:630:
 #: CountryCode.cc:394
 msgid "Palestinian Territory"
-msgstr "Palæstinensisk territorie"
+msgstr "Palestinskoo ozemlje "
 
 #. :PSE:275:
 #: CountryCode.cc:395
 msgid "Portugal"
-msgstr "Portugal"
+msgstr "Portugalska"
 
 #. :PRT:620:
 #: CountryCode.cc:396
 msgid "Palau"
-msgstr "Palau-øerne"
+msgstr "Palau"
 
 #. :PLW:585:
 #: CountryCode.cc:397
 msgid "Paraguay"
-msgstr "Paraguay"
+msgstr "Paragvaj"
 
 #. :PRY:600:
 #: CountryCode.cc:398
 msgid "Qatar"
-msgstr "Qatar"
+msgstr "Katar"
 
 # RE
 #. :QAT:634:
 #: CountryCode.cc:399
 msgid "Reunion"
-msgstr "Réunion"
+msgstr "Reunion"
 
 #. :REU:638:
 #: CountryCode.cc:400
 msgid "Romania"
-msgstr "Rumænien"
+msgstr "Romunija"
 
 # RU
 #. :ROU:642:
 #: CountryCode.cc:401
 msgid "Russian Federation"
-msgstr "Russiske Føderation"
+msgstr "Ruska federacija"
 
 # RW
 #. :RUS:643:
 #: CountryCode.cc:402
 msgid "Rwanda"
-msgstr "Rwanda"
+msgstr "Ruanda"
 
 #. :RWA:646:
 #: CountryCode.cc:403
 msgid "Saudi Arabia"
-msgstr "Saudiarabien"
+msgstr "Saudova Arabija"
 
 # SB
 #. :SAU:682:
 #: CountryCode.cc:404
 msgid "Solomon Islands"
-msgstr "Salomonøerne"
+msgstr "Solomonovi otoki"
 
 # SC
 #. :SLB:090:
 #: CountryCode.cc:405
 msgid "Seychelles"
-msgstr "Seychellerne"
+msgstr "Sejšeli"
 
 #. :SYC:690:
 #: CountryCode.cc:406
@@ -1768,35 +1759,34 @@ msgstr "Sudan"
 #. :SDN:736:
 #: CountryCode.cc:407
 msgid "Sweden"
-msgstr "Sverige"
+msgstr "Švedska"
 
 #. :SWE:752:
 #: CountryCode.cc:408
 msgid "Singapore"
-msgstr "Singapore"
+msgstr "Singapur"
 
 # SH
 #. :SGP:702:
 #: CountryCode.cc:409
 msgid "Saint Helena"
-msgstr "Sankt Helena"
+msgstr "Sveta Helena"
 
 #. :SHN:654:
 #: CountryCode.cc:410
 msgid "Slovenia"
-msgstr "Slovenien"
+msgstr "Slovenija"
 
 # SJ
-# fuzzy
 #. :SVN:705:
 #: CountryCode.cc:411
 msgid "Svalbard and Jan Mayen"
-msgstr "Svalbard og Jan Mayen øerne"
+msgstr "Svalbard in Jan Mayen"
 
 #. :SJM:744:
 #: CountryCode.cc:412
 msgid "Slovakia"
-msgstr "Slovakiet"
+msgstr "Slovaška"
 
 # SL
 #. :SVK:703:
@@ -1820,7 +1810,7 @@ msgstr "Senegal"
 #. :SEN:686:
 #: CountryCode.cc:416
 msgid "Somalia"
-msgstr "Somalia"
+msgstr "Somalija"
 
 # SR
 #. :SOM:706:
@@ -1832,45 +1822,45 @@ msgstr "Surinam"
 #. :SUR:740:
 #: CountryCode.cc:418
 msgid "Sao Tome and Principe"
-msgstr "São Tomé og Príncipe"
+msgstr "Sao Tome in Principe"
 
 #. :STP:678:
 #: CountryCode.cc:419
 msgid "El Salvador"
-msgstr "El Salvador"
+msgstr "Salvador"
 
 # SY
-# fuzzy
 #. :SLV:222:
 #: CountryCode.cc:420
 msgid "Syria"
-msgstr "Syrien"
+msgstr "Sirija"
 
 # SZ
 #. :SYR:760:
 #: CountryCode.cc:421
 msgid "Swaziland"
-msgstr "Swaziland"
+msgstr "Svazi"
 
+# Perhaps "Turks and Caicos Islands"?
 # TC
 # fuzzy
 #. :SWZ:748:
 #: CountryCode.cc:422
 msgid "Turks and Caicos Islands"
-msgstr "Turks- og Caicos-øerne"
+msgstr "otočji Turks in Caicos"
 
 # TD
 #. :TCA:796:
 #: CountryCode.cc:423
 msgid "Chad"
-msgstr "Chad"
+msgstr "Čad"
 
 # TF
 # fuzzy
 #. :TCD:148:
 #: CountryCode.cc:424
 msgid "French Southern Territories"
-msgstr "Franske Sydlige Territorier"
+msgstr "Francoska južna ozemlja"
 
 # TG
 #. :ATF:260:
@@ -1881,12 +1871,12 @@ msgstr "Togo"
 #. :TGO:768:
 #: CountryCode.cc:426
 msgid "Thailand"
-msgstr "Thailand"
+msgstr "Tajska"
 
 #. :THA:764:
 #: CountryCode.cc:427
 msgid "Tajikistan"
-msgstr "Tadsjikistan"
+msgstr "Tadžikistan"
 
 # TK
 #. :TJK:762:
@@ -1904,7 +1894,7 @@ msgstr "Turkmenistan"
 #. :TKM:795:
 #: CountryCode.cc:430
 msgid "Tunisia"
-msgstr "Tunesien"
+msgstr "Tunizija"
 
 # TO
 #. :TUN:788:
@@ -1912,22 +1902,21 @@ msgstr "Tunesien"
 msgid "Tonga"
 msgstr "Tonga"
 
-#
 #. :TON:776:
 #: CountryCode.cc:432
 msgid "East Timor"
-msgstr "Øst-Timor"
+msgstr "Vzhodni Timor"
 
 #. :TLS:626:
 #: CountryCode.cc:433
 msgid "Turkey"
-msgstr "Tyrkiet"
+msgstr "Turčija"
 
 # TT
 #. :TUR:792:
 #: CountryCode.cc:434
 msgid "Trinidad and Tobago"
-msgstr "Trinidad og Tobago"
+msgstr "Trinidad in Tabago"
 
 # TV
 #. :TTO:780:
@@ -1939,17 +1928,18 @@ msgstr "Tuvalu"
 #. :TUV:798:
 #: CountryCode.cc:436
 msgid "Taiwan"
-msgstr "Taiwan"
+msgstr "Tajska"
 
+# TZ
 #. :TWN:158:
 #: CountryCode.cc:437
 msgid "Tanzania"
-msgstr "Tanzania"
+msgstr "Tanzanija"
 
 #. :TZA:834:
 #: CountryCode.cc:438
 msgid "Ukraine"
-msgstr "Ukraine"
+msgstr "Ukrajina"
 
 # UG
 #. :UKR:804:
@@ -1961,18 +1951,18 @@ msgstr "Uganda"
 #. :UGA:800:
 #: CountryCode.cc:440
 msgid "United States Minor Outlying Islands"
-msgstr "Forenede Staters Mindre Perifere Øer"
+msgstr "manjši otoki Združenih držav Amerike"
 
 # US
 #. :UMI:581:
 #: CountryCode.cc:441
 msgid "United States"
-msgstr "USA"
+msgstr "Združene države"
 
 #. :USA:840:
 #: CountryCode.cc:442
 msgid "Uruguay"
-msgstr "Uruguay"
+msgstr "Urugvaj"
 
 #. :URY:858:
 #: CountryCode.cc:443
@@ -1984,14 +1974,14 @@ msgstr "Uzbekistan"
 #. :UZB:860:
 #: CountryCode.cc:444
 msgid "Holy See (Vatican City State)"
-msgstr "Vatikanstaten"
+msgstr "Vatikanska država (Sveti sedež)"
 
 # VC
 # fuzzy
 #. :VAT:336:
 #: CountryCode.cc:445
 msgid "Saint Vincent and the Grenadines"
-msgstr "Sankt Vincent og Grenadinerne"
+msgstr "Sv. Vincent in Grenadini"
 
 #. :VCT:670:
 #: CountryCode.cc:446
@@ -2003,14 +1993,14 @@ msgstr "Venezuela"
 #. :VEN:862:
 #: CountryCode.cc:447
 msgid "British Virgin Islands"
-msgstr "Jomfruøerne, Engelsk"
+msgstr "Britanski Deviški otoki"
 
 # VI
 # fuzzy
 #. :VGB:092:
 #: CountryCode.cc:448
 msgid "Virgin Islands, U.S."
-msgstr "Jomfruøerne, USA"
+msgstr "Ameriški Deviški otoki"
 
 # VN
 # fuzzy
@@ -2025,12 +2015,13 @@ msgstr "Vietnam"
 msgid "Vanuatu"
 msgstr "Vanuatu"
 
+# This should be Wallis, not Wallace
 # WF
 # fuzzy
 #. :VUT:548:
 #: CountryCode.cc:451
 msgid "Wallis and Futuna"
-msgstr "Wallis og Futuna øerne"
+msgstr "otočji Wallis in Futuna"
 
 #. :WLF:876:
 #: CountryCode.cc:452
@@ -2040,7 +2031,7 @@ msgstr "Samoa"
 #. :WSM:882:
 #: CountryCode.cc:453
 msgid "Yemen"
-msgstr "Yemen"
+msgstr "Jemen"
 
 # YT
 #. :YEM:887:
@@ -2051,22 +2042,22 @@ msgstr "Mayotte"
 #. :MYT:175:
 #: CountryCode.cc:455
 msgid "South Africa"
-msgstr "Sydafrika"
+msgstr "Južna Afrika"
 
 # ZM
 #. :ZAF:710:
 #: CountryCode.cc:456
 msgid "Zambia"
-msgstr "Zambia"
+msgstr "Zambija"
 
 #. :ZMB:894:
 #: CountryCode.cc:457
 msgid "Zimbabwe"
-msgstr "Zimbabwe"
+msgstr "Zimbabve"
 
 #: LanguageCode.cc:145
 msgid "Unknown language: "
-msgstr "Ukendt sprog: "
+msgstr ""
 
 #. language code: aar aa
 #: LanguageCode.cc:238
@@ -2076,169 +2067,187 @@ msgstr "Afar"
 #. language code: abk ab
 #: LanguageCode.cc:240
 msgid "Abkhazian"
-msgstr "Abkhaziansk"
+msgstr "Abkhazijski"
 
 #. language code: ace
 #: LanguageCode.cc:242
+#, fuzzy
 msgid "Achinese"
-msgstr "Akinesisk"
+msgstr "Kitajščina"
 
 #. language code: ach
 #: LanguageCode.cc:244
+#, fuzzy
 msgid "Acoli"
-msgstr "Acoli"
+msgstr "Tihi način"
 
 #. language code: ada
 #: LanguageCode.cc:246
+#, fuzzy
 msgid "Adangme"
-msgstr "Adangme"
+msgstr "Območje"
 
 #. language code: ady
 #: LanguageCode.cc:248
 msgid "Adyghe"
-msgstr "Adygejiensk"
+msgstr ""
 
 #. language code: afa
 #: LanguageCode.cc:250
 msgid "Afro-Asiatic (Other)"
-msgstr "Afro-Asiatisk (Andre)"
+msgstr ""
 
 #. language code: afh
 #: LanguageCode.cc:252
 msgid "Afrihili"
-msgstr "Afrihili (Kunstsprog)"
+msgstr ""
 
 #. language code: afr af
 #: LanguageCode.cc:254
 msgid "Afrikaans"
-msgstr "Afrikaans"
+msgstr "Afrikanščina"
 
 #. language code: ain
 #: LanguageCode.cc:256
+#, fuzzy
 msgid "Ainu"
-msgstr "Ainu-sprog"
+msgstr "Linux"
 
 #. language code: aka ak
 #: LanguageCode.cc:258
+#, fuzzy
 msgid "Akan"
-msgstr "Akan"
+msgstr "Abkhazijski"
 
 #. language code: akk
 #: LanguageCode.cc:260
+#, fuzzy
 msgid "Akkadian"
-msgstr "Akkadiansk"
+msgstr "Abkhazijski"
 
 #. language code: alb sqi sq
 #: LanguageCode.cc:262 LanguageCode.cc:264
 msgid "Albanian"
-msgstr "Albansk"
+msgstr "Albanščina"
 
 #. language code: ale
 #: LanguageCode.cc:266
+#, fuzzy
 msgid "Aleut"
-msgstr "Aleutisk"
+msgstr "Aleutian"
 
 #. language code: alg
 #: LanguageCode.cc:268
+#, fuzzy
 msgid "Algonquian languages"
-msgstr "Algonquianske sprog"
+msgstr "Prilagoditev jezika..."
 
 #. language code: alt
 #: LanguageCode.cc:270
+#, fuzzy
 msgid "Southern Altai"
-msgstr "Syd altaisk"
+msgstr "Južna Afrika"
 
 #. language code: amh am
 #: LanguageCode.cc:272
 msgid "Amharic"
-msgstr "Amharisk"
+msgstr "Amharic"
 
 #. language code: ang
 #: LanguageCode.cc:274
 msgid "English, Old (ca.450-1100)"
-msgstr "Engelsk, Gammel (ca. 450-1100)"
+msgstr ""
 
 #. language code: apa
 #: LanguageCode.cc:276
+#, fuzzy
 msgid "Apache languages"
-msgstr "Apache-sprog"
+msgstr "Nastavi jezik"
 
 #. language code: ara ar
 #: LanguageCode.cc:278
 msgid "Arabic"
-msgstr "Arabisk"
+msgstr "Arabski"
 
 #. language code: arc
 #: LanguageCode.cc:280
+#, fuzzy
 msgid "Aramaic"
-msgstr "Aramæisk"
+msgstr "Arabski"
 
 #. language code: arg an
 #: LanguageCode.cc:282
+#, fuzzy
 msgid "Aragonese"
-msgstr "Aragonisk"
+msgstr "Faerščina"
 
 # AM
 #. language code: arm hye hy
 #: LanguageCode.cc:284 LanguageCode.cc:286
 msgid "Armenian"
-msgstr "Armensk"
+msgstr "Armenski"
 
 #. language code: arn
 #: LanguageCode.cc:288
+#, fuzzy
 msgid "Araucanian"
-msgstr "Araucaniansk"
+msgstr "Albanščina"
 
 #. language code: arp
 #: LanguageCode.cc:290
+#, fuzzy
 msgid "Arapaho"
-msgstr "Arapaho"
+msgstr "Grafi"
 
 #. language code: art
 #: LanguageCode.cc:292
+#, fuzzy
 msgid "Artificial (Other)"
-msgstr "Kunstsprog (andre)"
+msgstr "CA certifikat"
 
 #. language code: arw
 #: LanguageCode.cc:294
 msgid "Arawak"
-msgstr "Arawak"
+msgstr ""
 
 #. language code: asm as
 #: LanguageCode.cc:296
 msgid "Assamese"
-msgstr "Assamesisk"
+msgstr "Assamski"
 
 #. language code: ast
 #: LanguageCode.cc:298
+#, fuzzy
 msgid "Asturian"
-msgstr "Asturiansk"
+msgstr "Avstrija"
 
 #. language code: ath
 #: LanguageCode.cc:300
+#, fuzzy
 msgid "Athapascan languages"
-msgstr "Athapascanske sprog"
+msgstr "Nastavi jezik"
 
 #. language code: aus
 #: LanguageCode.cc:302
+#, fuzzy
 msgid "Australian languages"
-msgstr "Australianske sprog"
+msgstr "Prikaži vse razpoložljive jezike."
 
 #. language code: ava av
 #: LanguageCode.cc:304
+#, fuzzy
 msgid "Avaric"
-msgstr "Avarisk"
+msgstr "Amharic"
 
 #. language code: ave ae
 #: LanguageCode.cc:306
 msgid "Avestan"
-msgstr "Avestansk"
+msgstr "Avestan"
 
-# SZ
 #. language code: awa
 #: LanguageCode.cc:308
 msgid "Awadhi"
-msgstr "Awandhi"
+msgstr ""
 
 # MM
 #. language code: aym ay
@@ -2249,17 +2258,19 @@ msgstr "Aymara"
 #. language code: aze az
 #: LanguageCode.cc:312
 msgid "Azerbaijani"
-msgstr "Aserbaijansk"
+msgstr "Azerbaižanščina"
 
 #. language code: bad
 #: LanguageCode.cc:314
+#, fuzzy
 msgid "Banda"
-msgstr "Banda"
+msgstr "Kanada"
 
 #. language code: bai
 #: LanguageCode.cc:316
+#, fuzzy
 msgid "Bamileke languages"
-msgstr "Bamileke sprog"
+msgstr "Nastavi jezik"
 
 #. language code: bak ba
 #: LanguageCode.cc:318
@@ -2269,63 +2280,67 @@ msgstr "Bashkir"
 #. language code: bal
 #: LanguageCode.cc:320
 msgid "Baluchi"
-msgstr "Baluchi"
+msgstr ""
 
 #. language code: bam bm
 #: LanguageCode.cc:322
+#, fuzzy
 msgid "Bambara"
-msgstr "Bambara"
+msgstr "Samba"
 
 #. language code: ban
 #: LanguageCode.cc:324
+#, fuzzy
 msgid "Balinese"
-msgstr "Balinesisk"
+msgstr "Osnova"
 
 #. language code: baq eus eu
 #: LanguageCode.cc:326 LanguageCode.cc:328
 msgid "Basque"
-msgstr "Baskisk"
+msgstr "Baskovščina"
 
 #. language code: bas
 #: LanguageCode.cc:330
+#, fuzzy
 msgid "Basa"
-msgstr "Basa"
+msgstr "Osnova"
 
 #. language code: bat
 #: LanguageCode.cc:332
 msgid "Baltic (Other)"
-msgstr "Baltisk (andre)"
+msgstr ""
 
 #. language code: bej
 #: LanguageCode.cc:334
 msgid "Beja"
-msgstr "Beja"
+msgstr ""
 
 #. language code: bel be
 #: LanguageCode.cc:336
 msgid "Belarusian"
-msgstr "Hviderussisk"
+msgstr "Belorusščina"
 
 #. language code: bem
 #: LanguageCode.cc:338
+#, fuzzy
 msgid "Bemba"
-msgstr "Bemba"
+msgstr "Bermuda"
 
 # SN
 #. language code: ben bn
 #: LanguageCode.cc:340
 msgid "Bengali"
-msgstr "Bengali (Bangla)"
+msgstr "Bengali"
 
 #. language code: ber
 #: LanguageCode.cc:342
 msgid "Berber (Other)"
-msgstr "Berber-sprog"
+msgstr ""
 
 #. language code: bho
 #: LanguageCode.cc:344
 msgid "Bhojpuri"
-msgstr "Bhojpuri"
+msgstr ""
 
 #. language code: bih bh
 #: LanguageCode.cc:346
@@ -2335,12 +2350,13 @@ msgstr "Bihari"
 #. language code: bik
 #: LanguageCode.cc:348
 msgid "Bikol"
-msgstr "Bikol"
+msgstr ""
 
 #. language code: bin
 #: LanguageCode.cc:350
+#, fuzzy
 msgid "Bini"
-msgstr "Bini"
+msgstr "Hindi"
 
 #. language code: bis bi
 #: LanguageCode.cc:352
@@ -2350,155 +2366,170 @@ msgstr "Bislama"
 #. language code: bla
 #: LanguageCode.cc:354
 msgid "Siksika"
-msgstr "Siksika (Blackfoot)"
+msgstr ""
 
 #. language code: bnt
 #: LanguageCode.cc:356
 msgid "Bantu (Other)"
-msgstr "Bantu (andre)"
+msgstr ""
 
 # BJ
 #. language code: bos bs
 #: LanguageCode.cc:358
 msgid "Bosnian"
-msgstr "Serbo-Kroatisk (Bosnien)"
+msgstr "Bosanski"
 
 # BR
 #. language code: bra
 #: LanguageCode.cc:360
+#, fuzzy
 msgid "Braj"
-msgstr "Braj"
+msgstr "Brazilija"
 
 #. language code: bre br
 #: LanguageCode.cc:362
 msgid "Breton"
-msgstr "Bretonsk"
+msgstr "Bretonščina"
 
 #. language code: btk
 #: LanguageCode.cc:364
+#, fuzzy
 msgid "Batak (Indonesia)"
-msgstr "Batak (Indonesien)"
+msgstr "Indonezija"
 
 #. language code: bua
 #: LanguageCode.cc:366
+#, fuzzy
 msgid "Buriat"
-msgstr "Buriatisk"
+msgstr "Bolgarija"
 
 #. language code: bug
 #: LanguageCode.cc:368
+#, fuzzy
 msgid "Buginese"
-msgstr "Buginesisk"
+msgstr "Kitajščina"
 
 #. language code: bul bg
 #: LanguageCode.cc:370
 msgid "Bulgarian"
-msgstr "Bulgarsk"
+msgstr "Bulgarščina"
 
 #. language code: bur mya my
 #: LanguageCode.cc:372 LanguageCode.cc:374
+#, fuzzy
 msgid "Burmese"
-msgstr "Burmesisk"
+msgstr "Vodilo"
 
 #. language code: byn
 #: LanguageCode.cc:376
+#, fuzzy
 msgid "Blin"
-msgstr "Blin (Eritrea)"
+msgstr "Belgijska"
 
 #. language code: cad
 #: LanguageCode.cc:378
+#, fuzzy
 msgid "Caddo"
-msgstr "Caddo"
+msgstr "Karte"
 
 #. language code: cai
 #: LanguageCode.cc:380
 msgid "Central American Indian (Other)"
-msgstr "Centralamerikansk Indianersprog (andre)"
+msgstr ""
 
 #. language code: car
 #: LanguageCode.cc:382
+#, fuzzy
 msgid "Carib"
-msgstr "Caribisk"
+msgstr "Karte"
 
 #. language code: cat ca
 #: LanguageCode.cc:384
 msgid "Catalan"
-msgstr "Katalansk"
+msgstr "Katalanščina"
 
 #. language code: cau
 #: LanguageCode.cc:386
 msgid "Caucasian (Other)"
-msgstr "Kaukasisk (andre)"
+msgstr ""
 
 #. language code: ceb
 #: LanguageCode.cc:388
+#, fuzzy
 msgid "Cebuano"
-msgstr "Cebuano"
+msgstr "Libanon"
 
 #. language code: cel
 #: LanguageCode.cc:390
 msgid "Celtic (Other)"
-msgstr "Keltisk (andre)"
+msgstr ""
 
 # KM
 #. language code: cha ch
 #: LanguageCode.cc:392
 msgid "Chamorro"
-msgstr "Chamorro"
+msgstr "Komorski"
 
 #. language code: chb
 #: LanguageCode.cc:394
+#, fuzzy
 msgid "Chibcha"
-msgstr "Chibcha"
+msgstr "Kitajska"
 
 #. language code: che ce
 #: LanguageCode.cc:396
 msgid "Chechen"
-msgstr "Chechen"
+msgstr "Češki"
 
 #. language code: chg
 #: LanguageCode.cc:398
+#, fuzzy
 msgid "Chagatai"
-msgstr "Chagatai"
+msgstr "Shanghai"
 
 #. language code: chi zho zh
 #: LanguageCode.cc:400 LanguageCode.cc:402
 msgid "Chinese"
-msgstr "Kinesisk"
+msgstr "Kitajščina"
 
 #. language code: chk
 #: LanguageCode.cc:404
+#, fuzzy
 msgid "Chuukese"
-msgstr "Chuukese (Mikronesien)"
+msgstr "Kitajščina"
 
+# ML
 #. language code: chm
 #: LanguageCode.cc:406
+#, fuzzy
 msgid "Mari"
-msgstr "Marisk"
+msgstr "Mali"
 
 #. language code: chn
 #: LanguageCode.cc:408
 msgid "Chinook jargon"
-msgstr "Chinook Jargon"
+msgstr ""
 
 #. language code: cho
 #: LanguageCode.cc:410
+#, fuzzy
 msgid "Choctaw"
-msgstr "Choctaw"
+msgstr "Chroot"
 
 #. language code: chp
 #: LanguageCode.cc:412
 msgid "Chipewyan"
-msgstr "Chipewyan"
+msgstr ""
 
 #. language code: chr
 #: LanguageCode.cc:414
 msgid "Cherokee"
-msgstr "Cherokee"
+msgstr ""
 
 #. language code: chu cu
 #: LanguageCode.cc:416
 msgid "Church Slavic"
-msgstr "Kirkeligt slavisk"
+msgstr "Cerkveno Slovanski"
 
 #. language code: chv cv
 #: LanguageCode.cc:418
@@ -2507,155 +2538,169 @@ msgstr "Chuvash"
 
 #. language code: chy
 #: LanguageCode.cc:420
+#, fuzzy
 msgid "Cheyenne"
-msgstr "Cheyenne"
+msgstr "Kanal"
 
 #. language code: cmc
 #: LanguageCode.cc:422
+#, fuzzy
 msgid "Chamic languages"
-msgstr "Chamiske sprog"
+msgstr "Jeziki"
 
 #. language code: cop
 #: LanguageCode.cc:424
+#, fuzzy
 msgid "Coptic"
-msgstr "Koptisk"
+msgstr "Računanje"
 
 #. language code: cor kw
 #: LanguageCode.cc:426
 msgid "Cornish"
-msgstr "Cornish"
+msgstr "Kornščina"
 
 #. language code: cos co
 #: LanguageCode.cc:428
 msgid "Corsican"
-msgstr "Korsikansk"
+msgstr "Korziški"
 
 #. language code: cpe
 #: LanguageCode.cc:430
 msgid "Creoles and pidgins, English based (Other)"
-msgstr "Creolsk og Pidgin - engelsk-baseret (andre)"
+msgstr ""
 
 #. language code: cpf
 #: LanguageCode.cc:432
 msgid "Creoles and pidgins, French-based (Other)"
-msgstr "Creolsk og Pidgin - fransk-baseret (andre)"
+msgstr ""
 
 #. language code: cpp
 #: LanguageCode.cc:434
 msgid "Creoles and pidgins, Portuguese-based (Other)"
-msgstr "Creolsk og Pidgin - portugisisk-baseret (andre)"
+msgstr ""
 
-#
+# &A is taken
 #. language code: cre cr
 #: LanguageCode.cc:436
+#, fuzzy
 msgid "Cree"
-msgstr "Cree"
+msgstr "Kreiraj"
 
-#
 #. language code: crh
 #: LanguageCode.cc:438
+#, fuzzy
 msgid "Crimean Tatar"
-msgstr "Krim Tatar"
+msgstr "Čas in datum"
 
 #. language code: crp
 #: LanguageCode.cc:440
 msgid "Creoles and pidgins (Other)"
-msgstr "Creolsk og Pidgin (andre)"
+msgstr ""
 
 #. language code: csb
 #: LanguageCode.cc:442
 msgid "Kashubian"
-msgstr "Kasjubisk"
+msgstr ""
 
 #. language code: cus
 #: LanguageCode.cc:444
 msgid "Cushitic (Other)"
-msgstr "Cushitisk (andre)"
+msgstr ""
 
 #. language code: cze ces cs
 #: LanguageCode.cc:446 LanguageCode.cc:448
 msgid "Czech"
-msgstr "Tjekkisk"
+msgstr "Češka"
 
 #. language code: dak
 #: LanguageCode.cc:450
+#, fuzzy
 msgid "Dakota"
-msgstr "Dakota"
+msgstr "Dhaka"
 
 #. language code: dan da
 #: LanguageCode.cc:452
 msgid "Danish"
-msgstr "Dansk"
+msgstr "Danska"
 
 #. language code: dar
 #: LanguageCode.cc:454
+#, fuzzy
 msgid "Dargwa"
-msgstr "Dargwa"
+msgstr "Darwin"
 
 #. language code: day
 #: LanguageCode.cc:456
+#, fuzzy
 msgid "Dayak"
-msgstr "Dayak"
+msgstr "Dan:"
 
 #. language code: del
 #: LanguageCode.cc:458
+#, fuzzy
 msgid "Delaware"
-msgstr "Delaware"
+msgstr "Strojna oprema"
 
 #. language code: den
 #: LanguageCode.cc:460
 msgid "Slave (Athapascan)"
-msgstr "Athapan-slavisk"
+msgstr ""
 
 #. language code: dgr
 #: LanguageCode.cc:462
 msgid "Dogrib"
-msgstr "Dogrib"
+msgstr ""
 
 #. language code: din
 #: LanguageCode.cc:464
+#, fuzzy
 msgid "Dinka"
-msgstr "Dinka"
+msgstr "Trdi disk"
 
 #. language code: div dv
 #: LanguageCode.cc:466
+#, fuzzy
 msgid "Divehi"
-msgstr "Divehi"
+msgstr "Gonilnik"
 
 #. language code: doi
 #: LanguageCode.cc:468
+#, fuzzy
 msgid "Dogri"
-msgstr "Dogri"
+msgstr "Prijava"
 
 #. language code: dra
 #: LanguageCode.cc:470
 msgid "Dravidian (Other)"
-msgstr "Dravidiansk (andre)"
+msgstr ""
 
 #. language code: dsb
 #: LanguageCode.cc:472
+#, fuzzy
 msgid "Lower Sorbian"
-msgstr "Lav-sorbisk"
+msgstr "Varčevanje z energijo"
 
 #. language code: dua
 #: LanguageCode.cc:474
+#, fuzzy
 msgid "Duala"
-msgstr "Duala"
+msgstr "Dakar"
 
 #. language code: dum
 #: LanguageCode.cc:476
 msgid "Dutch, Middle (ca.1050-1350)"
-msgstr "Hollandsk, middelalder (ca. 1050-1350)"
+msgstr ""
 
 #. language code: dut nld nl
 #: LanguageCode.cc:478 LanguageCode.cc:480
 msgid "Dutch"
-msgstr "Hollandsk"
+msgstr "Nizozemska"
 
 #. language code: dyu
 #: LanguageCode.cc:482
+#, fuzzy
 msgid "Dyula"
-msgstr "Dyula"
+msgstr "Dubai"
 
 # TO
 #. language code: dzo dz
@@ -2666,32 +2711,32 @@ msgstr "Dzongkha"
 #. language code: efi
 #: LanguageCode.cc:486
 msgid "Efik"
-msgstr "Efik"
+msgstr ""
 
 #. language code: egy
 #: LanguageCode.cc:488
 msgid "Egyptian (Ancient)"
-msgstr "Egyptisk (oldtids-)"
+msgstr ""
 
 #. language code: eka
 #: LanguageCode.cc:490
 msgid "Ekajuk"
-msgstr "Ekajuk"
+msgstr ""
 
 #. language code: elx
 #: LanguageCode.cc:492
 msgid "Elamite"
-msgstr "Elamitisk"
+msgstr ""
 
 #. language code: eng en
 #: LanguageCode.cc:494
 msgid "English"
-msgstr "Engelsk"
+msgstr "Angleščina"
 
 #. language code: enm
 #: LanguageCode.cc:496
 msgid "English, Middle (1100-1500)"
-msgstr "Engelsk, middelalder (1100-1500)"
+msgstr ""
 
 #. language code: epo eo
 #: LanguageCode.cc:498
@@ -2701,189 +2746,206 @@ msgstr "Esperanto"
 #. language code: est et
 #: LanguageCode.cc:500
 msgid "Estonian"
-msgstr "Estisk"
+msgstr "Estonska"
 
 #. language code: ewe ee
 #: LanguageCode.cc:502
 msgid "Ewe"
-msgstr "Ewe"
+msgstr ""
 
-#
 #. language code: ewo
 #: LanguageCode.cc:504
+#, fuzzy
 msgid "Ewondo"
-msgstr "Ewondo"
+msgstr "Konec"
 
 #. language code: fan
 #: LanguageCode.cc:506
+#, fuzzy
 msgid "Fang"
-msgstr "Fang"
+msgstr "Območje"
 
 #. language code: fao fo
 #: LanguageCode.cc:508
 msgid "Faroese"
-msgstr "Færøsk"
+msgstr "Faerščina"
 
 #. language code: fat
 #: LanguageCode.cc:510
+#, fuzzy
 msgid "Fanti"
-msgstr "Fanti"
+msgstr "Atlantik"
 
 #. language code: fij fj
 #: LanguageCode.cc:512
 msgid "Fijian"
-msgstr "Fiji"
+msgstr "Fijian"
 
 #. language code: fil
 #: LanguageCode.cc:514
+#, fuzzy
 msgid "Filipino"
-msgstr "Filipino"
+msgstr "Filipini"
 
 #. language code: fin fi
 #: LanguageCode.cc:516
 msgid "Finnish"
-msgstr "Finsk"
+msgstr "Finska"
 
 #. language code: fiu
 #: LanguageCode.cc:518
 msgid "Finno-Ugrian (Other)"
-msgstr "Finno-Ugrisk (andre)"
+msgstr ""
 
 #. language code: fon
 #: LanguageCode.cc:520
+#, fuzzy
 msgid "Fon"
-msgstr "Fon"
+msgstr "Pisave"
 
 #. language code: fre fra fr
 #: LanguageCode.cc:522 LanguageCode.cc:524
 msgid "French"
-msgstr "Fransk"
+msgstr "Francoska"
 
 #. language code: frm
 #: LanguageCode.cc:526
 msgid "French, Middle (ca.1400-1600)"
-msgstr "Fransk, middelalder (ca. 1400-1600)"
+msgstr ""
 
 #. language code: fro
 #: LanguageCode.cc:528
 msgid "French, Old (842-ca.1400)"
-msgstr "Fransk, gammel (ca. 842-1400)"
+msgstr ""
 
 #. language code: fry fy
 #: LanguageCode.cc:530
 msgid "Frisian"
-msgstr "Frisisk"
+msgstr "Frizijski"
 
 #. language code: ful ff
 #: LanguageCode.cc:532
+#, fuzzy
 msgid "Fulah"
-msgstr "Fulah"
+msgstr "Zastavice"
 
 #. language code: fur
 #: LanguageCode.cc:534
+#, fuzzy
 msgid "Friulian"
-msgstr "Friulisk"
+msgstr "Frizijski"
 
 #. language code: gaa
 #: LanguageCode.cc:536
+#, fuzzy
 msgid "Ga"
-msgstr "Ga"
+msgstr "Gaza"
 
 # GA
 #. language code: gay
 #: LanguageCode.cc:538
+#, fuzzy
 msgid "Gayo"
-msgstr "Gayo"
+msgstr "Gabon"
 
 #. language code: gba
 #: LanguageCode.cc:540
+#, fuzzy
 msgid "Gbaya"
-msgstr "Gbaya"
+msgstr "Gaza"
 
 #. language code: gem
 #: LanguageCode.cc:542
+#, fuzzy
 msgid "Germanic (Other)"
-msgstr "Germansk (andre)"
+msgstr "Nemška (mrtva tipka)"
 
 #. language code: geo kat ka
 #: LanguageCode.cc:544 LanguageCode.cc:546
 msgid "Georgian"
-msgstr "Georgisk"
+msgstr "Gruzijski"
 
 #. language code: ger deu de
 #: LanguageCode.cc:548 LanguageCode.cc:550
 msgid "German"
-msgstr "Tysk"
+msgstr "Nemška"
 
 #. language code: gez
 #: LanguageCode.cc:552
+#, fuzzy
 msgid "Geez"
-msgstr "Geez"
+msgstr "Grška"
 
 #. language code: gil
 #: LanguageCode.cc:554
+#, fuzzy
 msgid "Gilbertese"
-msgstr "Gilbertesisk"
+msgstr "Vietnamski"
 
+# ML
 #. language code: gla gd
 #: LanguageCode.cc:556
+#, fuzzy
 msgid "Gaelic"
-msgstr "Gælisk (Skotland)"
+msgstr "Mali"
 
 #. language code: gle ga
 #: LanguageCode.cc:558
 msgid "Irish"
-msgstr "Gælisk (Irland)"
+msgstr "Irščina"
 
 #. language code: glg gl
 #: LanguageCode.cc:560
+#, fuzzy
 msgid "Galician"
-msgstr "Galisisk/Gallegan"
+msgstr "Vatikan"
 
 #. language code: glv gv
 #: LanguageCode.cc:562
 msgid "Manx"
-msgstr "Gælisk (Isle of Man)"
+msgstr "Manx"
 
 #. language code: gmh
 #: LanguageCode.cc:564
 msgid "German, Middle High (ca.1050-1500)"
-msgstr "Højtysk, middelalder (ca. 1050-1500)"
+msgstr ""
 
 #. language code: goh
 #: LanguageCode.cc:566
 msgid "German, Old High (ca.750-1050)"
-msgstr "Højtysk, gammel (ca. 750-1050)"
+msgstr ""
 
 #. language code: gon
 #: LanguageCode.cc:568
+#, fuzzy
 msgid "Gondi"
-msgstr "Gondi"
+msgstr "Zvok"
 
 #. language code: gor
 #: LanguageCode.cc:570
 msgid "Gorontalo"
-msgstr "Gorontalo"
+msgstr ""
 
 #. language code: got
 #: LanguageCode.cc:572
 msgid "Gothic"
-msgstr "Gothisk"
+msgstr ""
 
 #. language code: grb
 #: LanguageCode.cc:574
+#, fuzzy
 msgid "Grebo"
-msgstr "Grebo"
+msgstr "Skupina"
 
 #. language code: grc
 #: LanguageCode.cc:576
 msgid "Greek, Ancient (to 1453)"
-msgstr "Græsk, oldtid (til 1453)"
+msgstr ""
 
 #. language code: gre ell el
 #: LanguageCode.cc:578 LanguageCode.cc:580
 msgid "Greek, Modern (1453-)"
-msgstr "Græsk, moderne (fra 1453)"
+msgstr ""
 
 #. language code: grn gn
 #: LanguageCode.cc:582
@@ -2897,19 +2959,22 @@ msgstr "Gujarati"
 
 #. language code: gwi
 #: LanguageCode.cc:586
+#, fuzzy
 msgid "Gwich'in"
-msgstr "Gwich'in"
+msgstr "Michigan"
 
 #. language code: hai
 #: LanguageCode.cc:588
+#, fuzzy
 msgid "Haida"
-msgstr "Haida"
+msgstr "Strojna oprema"
 
 # HT
 #. language code: hat ht
 #: LanguageCode.cc:590
+#, fuzzy
 msgid "Haitian"
-msgstr "Haitiansk Kreol"
+msgstr "Haiti"
 
 #. language code: hau ha
 #: LanguageCode.cc:592
@@ -2918,13 +2983,14 @@ msgstr "Hausa"
 
 #. language code: haw
 #: LanguageCode.cc:594
+#, fuzzy
 msgid "Hawaiian"
-msgstr "Hawaiiansk"
+msgstr "Havaji"
 
 #. language code: heb he
 #: LanguageCode.cc:596
 msgid "Hebrew"
-msgstr "Hebraisk"
+msgstr "Hebrejski"
 
 #. language code: her hz
 #: LanguageCode.cc:598
@@ -2934,121 +3000,131 @@ msgstr "Herero"
 #. language code: hil
 #: LanguageCode.cc:600
 msgid "Hiligaynon"
-msgstr "Hiligaynon"
+msgstr ""
 
 #. language code: him
 #: LanguageCode.cc:602
 msgid "Himachali"
-msgstr "Himachali"
+msgstr ""
 
 #. language code: hin hi
 #: LanguageCode.cc:604
 msgid "Hindi"
-msgstr "Hindu"
+msgstr "Hindi"
 
 # HT
 #. language code: hit
 #: LanguageCode.cc:606
+#, fuzzy
 msgid "Hittite"
-msgstr "Hittite"
+msgstr "Haiti"
 
 #. language code: hmn
 #: LanguageCode.cc:608
+#, fuzzy
 msgid "Hmong"
-msgstr "Hmong"
+msgstr "HongKong"
 
 # HT
 #. language code: hmo ho
 #: LanguageCode.cc:610
+#, fuzzy
 msgid "Hiri Motu"
-msgstr "Hiri Motu"
+msgstr "Hiri"
 
 #. language code: hsb
 #: LanguageCode.cc:612
+#, fuzzy
 msgid "Upper Sorbian"
-msgstr "Øvre-Sorbisk"
+msgstr "Srbščina"
 
 #. language code: hun hu
 #: LanguageCode.cc:614
 msgid "Hungarian"
-msgstr "Ungarsk"
+msgstr "Madžarska"
 
 #. language code: hup
 #: LanguageCode.cc:616
+#, fuzzy
 msgid "Hupa"
-msgstr "Hupa"
+msgstr "Hausa"
 
 # IR
-# fuzzy
 #. language code: iba
 #: LanguageCode.cc:618
+#, fuzzy
 msgid "Iban"
-msgstr "Iban"
+msgstr "Iran"
 
 #. language code: ibo ig
 #: LanguageCode.cc:620
+#, fuzzy
 msgid "Igbo"
-msgstr "Igbo"
+msgstr "Ne upoštevaj"
 
 #. language code: ice isl is
 #: LanguageCode.cc:622 LanguageCode.cc:624
 msgid "Icelandic"
-msgstr "Islandsk"
+msgstr "Islandska"
 
 #. language code: ido io
 #: LanguageCode.cc:626
+#, fuzzy
 msgid "Ido"
-msgstr "Ido"
+msgstr "ld"
 
 #. language code: iii ii
 #: LanguageCode.cc:628
+#, fuzzy
 msgid "Sichuan Yi"
-msgstr "Sichuan Yi"
+msgstr "Litva"
 
 #. language code: ijo
 #: LanguageCode.cc:630
 msgid "Ijo"
-msgstr "Ijo"
+msgstr ""
 
 #. language code: iku iu
 #: LanguageCode.cc:632
 msgid "Inuktitut"
-msgstr "Inuktitut (eskimoisk)"
+msgstr "Inuktitut"
 
 #. language code: ile ie
 #: LanguageCode.cc:634
 msgid "Interlingue"
-msgstr "Interlingue"
+msgstr "Medzejični"
 
 #. language code: ilo
 #: LanguageCode.cc:636
+#, fuzzy
 msgid "Iloko"
-msgstr "Iloko"
+msgstr "Tokijo"
 
 #. language code: ina ia
 #: LanguageCode.cc:638
 msgid "Interlingua (International Auxiliary Language Association)"
-msgstr "Interlingua (International Auxiliary Language Association)"
+msgstr ""
 
 #. language code: inc
 #: LanguageCode.cc:640
 msgid "Indic (Other)"
-msgstr "Indisk (andre)"
+msgstr ""
 
 #. language code: ind id
 #: LanguageCode.cc:642
 msgid "Indonesian"
-msgstr "Indonesisk"
+msgstr "Indonezijščina"
 
 #. language code: ine
 #: LanguageCode.cc:644
 msgid "Indo-European (Other)"
-msgstr "Indo-Europæisk (andre)"
+msgstr ""
 
 #. language code: inh
 #: LanguageCode.cc:646
+#, fuzzy
 msgid "Ingush"
-msgstr "Ingush"
+msgstr "Angleščina"
 
 #. language code: ipk ik
 #: LanguageCode.cc:648
@@ -3058,115 +3134,127 @@ msgstr "Inupiaq"
 #. language code: ira
 #: LanguageCode.cc:650
 msgid "Iranian (Other)"
-msgstr "Iransk (andre)"
+msgstr ""
 
 #. language code: iro
 #: LanguageCode.cc:652
+#, fuzzy
 msgid "Iroquoian languages"
-msgstr "Irokesiske sprog"
+msgstr "Prilagoditev jezika..."
 
 #. language code: ita it
 #: LanguageCode.cc:654
 msgid "Italian"
-msgstr "Italiensk"
+msgstr "Italijanska"
 
 #. language code: jav jv
 #: LanguageCode.cc:656
 msgid "Javanese"
-msgstr "Javanesisk"
+msgstr "Javanski"
 
 #. language code: jbo
 #: LanguageCode.cc:658
+#, fuzzy
 msgid "Lojban"
-msgstr "Lojban"
+msgstr "Libanon"
 
 #. language code: jpn ja
 #: LanguageCode.cc:660
 msgid "Japanese"
-msgstr "Japansk"
+msgstr "Japonska"
 
 #. language code: jpr
 #: LanguageCode.cc:662
+#, fuzzy
 msgid "Judeo-Persian"
-msgstr "Judeo-Persisk"
+msgstr "Perzijski"
 
 #. language code: jrb
 #: LanguageCode.cc:664
+#, fuzzy
 msgid "Judeo-Arabic"
-msgstr "Judeo-Arabisk"
+msgstr "Arabski"
 
 #. language code: kaa
 #: LanguageCode.cc:666
 msgid "Kara-Kalpak"
-msgstr "Kara-Kalpak"
+msgstr ""
 
 #. language code: kab
 #: LanguageCode.cc:668
+#, fuzzy
 msgid "Kabyle"
-msgstr "Kabyle"
+msgstr "Omogočeno"
 
 #. language code: kac
 #: LanguageCode.cc:670
+#, fuzzy
 msgid "Kachin"
-msgstr "Kachin"
+msgstr "Išči v"
 
 #. language code: kal kl
 #: LanguageCode.cc:672
 msgid "Kalaallisut"
-msgstr "Grøndlandsk"
+msgstr "Kalaallisut"
 
 #. language code: kam
 #: LanguageCode.cc:674
+#, fuzzy
 msgid "Kamba"
-msgstr "Kamba"
+msgstr "Samba"
 
 #. language code: kan kn
 #: LanguageCode.cc:676
 msgid "Kannada"
-msgstr "Kannada"
+msgstr "Kanada"
 
 #. language code: kar
 #: LanguageCode.cc:678
+#, fuzzy
 msgid "Karen"
-msgstr "Karen"
+msgstr "Korejščina"
 
 #. language code: kas ks
 #: LanguageCode.cc:680
 msgid "Kashmiri"
-msgstr "Kashmirsk"
+msgstr "Kašmir"
 
 #. language code: kau kr
 #: LanguageCode.cc:682
+#, fuzzy
 msgid "Kanuri"
-msgstr "Kanuri"
+msgstr "Kurdsko"
 
 #. language code: kaw
 #: LanguageCode.cc:684
+#, fuzzy
 msgid "Kawi"
-msgstr "Kawi"
+msgstr "Darwin"
 
+# Shouldn't this be "Kazakhstan"?
 # KZ
 # fuzzy
 #. language code: kaz kk
 #: LanguageCode.cc:686
 msgid "Kazakh"
-msgstr "Kasakh"
+msgstr "Kazaški"
 
-# MR
 #. language code: kbd
 #: LanguageCode.cc:688
+#, fuzzy
 msgid "Kabardian"
-msgstr "Kabardiansk"
+msgstr "Kanada"
 
 #. language code: kha
 #: LanguageCode.cc:690
+#, fuzzy
 msgid "Khasi"
-msgstr "Khasi"
+msgstr "Tajski"
 
 #. language code: khi
 #: LanguageCode.cc:692
 msgid "Khoisan (Other)"
-msgstr "Khoisan (andre)"
+msgstr ""
 
 #. language code: khm km
 #: LanguageCode.cc:694
@@ -3175,8 +3263,9 @@ msgstr "Khmer"
 
 #. language code: kho
 #: LanguageCode.cc:696
+#, fuzzy
 msgid "Khotanese"
-msgstr "Khotanesisk"
+msgstr "Kitajščina"
 
 #. language code: kik ki
 #: LanguageCode.cc:698
@@ -3186,22 +3275,24 @@ msgstr "Kikuyu"
 #. language code: kin rw
 #: LanguageCode.cc:700
 msgid "Kinyarwanda"
-msgstr "Kinyarwanda"
+msgstr ""
 
 #. language code: kir ky
 #: LanguageCode.cc:702
 msgid "Kirghiz"
-msgstr "Kirghisisk"
+msgstr "Kirghiz"
 
 #. language code: kmb
 #: LanguageCode.cc:704
+#, fuzzy
 msgid "Kimbundu"
-msgstr "Kimbundu"
+msgstr "Vrsta"
 
 #. language code: kok
 #: LanguageCode.cc:706
+#, fuzzy
 msgid "Konkani"
-msgstr "Konkani"
+msgstr "Korejščina"
 
 #. language code: kom kv
 #: LanguageCode.cc:708
@@ -3211,38 +3302,42 @@ msgstr "Komi"
 # CG
 #. language code: kon kg
 #: LanguageCode.cc:710
+#, fuzzy
 msgid "Kongo"
 msgstr "Kongo"
 
 #. language code: kor ko
 #: LanguageCode.cc:712
 msgid "Korean"
-msgstr "Koreansk"
+msgstr "Korejščina"
 
 #. language code: kos
 #: LanguageCode.cc:714
+#, fuzzy
 msgid "Kosraean"
-msgstr "Kosraean"
+msgstr "Korejščina"
 
 #. language code: kpe
 #: LanguageCode.cc:716
+#, fuzzy
 msgid "Kpelle"
-msgstr "Kpelle"
+msgstr "Črkovalniki"
 
 #. language code: krc
 #: LanguageCode.cc:718
 msgid "Karachay-Balkar"
-msgstr "Karachay-Balkarisk"
+msgstr ""
 
 #. language code: kro
 #: LanguageCode.cc:720
 msgid "Kru"
-msgstr "Kru"
+msgstr ""
 
 #. language code: kru
 #: LanguageCode.cc:722
+#, fuzzy
 msgid "Kurukh"
-msgstr "Kurukh"
+msgstr "Turška"
 
 #. language code: kua kj
 #: LanguageCode.cc:724
@@ -3251,336 +3346,379 @@ msgstr "Kuanyama"
 
 #. language code: kum
 #: LanguageCode.cc:726
+#, fuzzy
 msgid "Kumyk"
-msgstr "Kumyk"
+msgstr "Testni modul"
 
 #. language code: kur ku
 #: LanguageCode.cc:728
 msgid "Kurdish"
-msgstr "Kurdisk"
+msgstr "Kurdsko"
 
 # KE
 #. language code: kut
 #: LanguageCode.cc:730
+#, fuzzy
 msgid "Kutenai"
-msgstr "Kutenai"
+msgstr "Kenija"
 
 #. language code: lad
 #: LanguageCode.cc:732
+#, fuzzy
 msgid "Ladino"
-msgstr "Ladino"
+msgstr "Radioamaterstvo"
 
 #. language code: lah
 #: LanguageCode.cc:734
+#, fuzzy
 msgid "Lahnda"
-msgstr "Lahnda"
+msgstr "Pokrajina"
 
 #. language code: lam
 #: LanguageCode.cc:736
+#, fuzzy
 msgid "Lamba"
-msgstr "Lamba (fra Star Trek)"
+msgstr "Samba"
 
+# LA
 #. language code: lao lo
 #: LanguageCode.cc:738
+#, fuzzy
 msgid "Lao"
-msgstr "Laothisk"
+msgstr "Laos"
 
 #. language code: lat la
 #: LanguageCode.cc:740
+#, fuzzy
 msgid "Latin"
-msgstr "Latin"
+msgstr "Latvijščina"
 
 #. language code: lav lv
 #: LanguageCode.cc:742
 msgid "Latvian"
-msgstr "Lettisk"
+msgstr "Latvijščina"
 
 #. language code: lez
 #: LanguageCode.cc:744
+#, fuzzy
 msgid "Lezghian"
-msgstr "Lezghiske sprog"
+msgstr "Belgijska"
 
 #. language code: lim li
 #: LanguageCode.cc:746
+#, fuzzy
 msgid "Limburgan"
-msgstr "Limburgisk"
+msgstr "Luksemburg"
 
 # AO
 #. language code: lin ln
 #: LanguageCode.cc:748
+#, fuzzy
 msgid "Lingala"
-msgstr "Lingala"
+msgstr "Angola"
 
 #. language code: lit lt
 #: LanguageCode.cc:750
 msgid "Lithuanian"
-msgstr "Litauisk"
+msgstr "Litvanska"
 
 # CG
 #. language code: lol
 #: LanguageCode.cc:752
+#, fuzzy
 msgid "Mongo"
-msgstr "Mongo (Lolo, Bantu)"
+msgstr "Kongo"
 
 #. language code: loz
 #: LanguageCode.cc:754
+#, fuzzy
 msgid "Lozi"
-msgstr "Lozi"
+msgstr "Prijava"
 
 #. language code: ltz lb
 #: LanguageCode.cc:756
+#, fuzzy
 msgid "Luxembourgish"
-msgstr "Luxembourgsk"
+msgstr "Luksemburg"
 
 #. language code: lua
 #: LanguageCode.cc:758
 msgid "Luba-Lulua"
-msgstr "Luba-Lulua"
+msgstr ""
 
 #. language code: lub lu
 #: LanguageCode.cc:760
 msgid "Luba-Katanga"
-msgstr "Luba-Katanga"
+msgstr ""
 
 # GH
 #. language code: lug lg
 #: LanguageCode.cc:762
+#, fuzzy
 msgid "Ganda"
-msgstr "Ganda (Luganda)"
+msgstr "Gana"
 
 #. language code: lui
 #: LanguageCode.cc:764
+#, fuzzy
 msgid "Luiseno"
-msgstr "Luiseno"
+msgstr "Poslušaj na"
 
 #. language code: lun
 #: LanguageCode.cc:766
+#, fuzzy
 msgid "Lunda"
-msgstr "Lunda"
+msgstr "Nedelja"
 
 #. language code: luo
 #: LanguageCode.cc:768
 msgid "Luo (Kenya and Tanzania)"
-msgstr "Luo (Kenya og Tanzania)"
+msgstr ""
 
 #. language code: lus
 #: LanguageCode.cc:770
+#, fuzzy
 msgid "lushai"
-msgstr "Lushai"
+msgstr "Tajski"
 
 #. language code: mac mkd mk
 #: LanguageCode.cc:772 LanguageCode.cc:774
 msgid "Macedonian"
-msgstr "Makedonisk"
+msgstr "Makedonščina"
 
 #. language code: mad
 #: LanguageCode.cc:776
+#, fuzzy
 msgid "Madurese"
-msgstr "Maduresisk"
+msgstr "Faerščina"
 
+# MW
 #. language code: mag
 #: LanguageCode.cc:778
+#, fuzzy
 msgid "Magahi"
-msgstr "Magahi"
+msgstr "Malavi"
 
 # MH
 #. language code: mah mh
 #: LanguageCode.cc:780
+#, fuzzy
 msgid "Marshallese"
-msgstr "Marshall"
+msgstr "Marshallovi otoki"
 
 #. language code: mai
 #: LanguageCode.cc:782
+#, fuzzy
 msgid "Maithili"
-msgstr "Maithili"
+msgstr "Matematika"
 
 # MG
 #. language code: mak
 #: LanguageCode.cc:784
+#, fuzzy
 msgid "Makasar"
-msgstr "Makasar"
+msgstr "Madagaskar"
 
 #. language code: mal ml
 #: LanguageCode.cc:786
+#, fuzzy
 msgid "Malayalam"
-msgstr "Malayalam"
+msgstr "Malezija"
 
 #. language code: man
 #: LanguageCode.cc:788
+#, fuzzy
 msgid "Mandingo"
-msgstr "Mandingo"
+msgstr "Opozorilo"
 
 #. language code: mao mri mi
 #: LanguageCode.cc:790 LanguageCode.cc:792
+#, fuzzy
 msgid "Maori"
-msgstr "Maori"
+msgstr "Glavni"
 
 #. language code: map
 #: LanguageCode.cc:794
 msgid "Austronesian (Other)"
-msgstr "Austronesisk (malayo-polynesisk)"
+msgstr ""
 
 #. language code: mar mr
 #: LanguageCode.cc:796
+#, fuzzy
 msgid "Marathi"
-msgstr "Marathi"
+msgstr "Matematika"
 
 # MW
 #. language code: mas
 #: LanguageCode.cc:798
+#, fuzzy
 msgid "Masai"
-msgstr "Masai"
+msgstr "Malavi"
 
 #. language code: may msa ms
 #: LanguageCode.cc:800 LanguageCode.cc:802
+#, fuzzy
 msgid "Malay"
-msgstr "Malayisk"
+msgstr "Malta"
 
 #. language code: mdf
 #: LanguageCode.cc:804
 msgid "Moksha"
-msgstr "Moksha"
+msgstr ""
 
 # MM
 #. language code: mdr
 #: LanguageCode.cc:806
+#, fuzzy
 msgid "Mandar"
-msgstr "Mandar"
+msgstr "Mjanmar"
 
 #. language code: men
 #: LanguageCode.cc:808
+#, fuzzy
 msgid "Mende"
-msgstr "Mende"
+msgstr "Način"
 
 #. language code: mga
 #: LanguageCode.cc:810
 msgid "Irish, Middle (900-1200)"
-msgstr "Irsk, middelalder (ca. 900-1200)"
+msgstr ""
 
 #. language code: mic
 #: LanguageCode.cc:812
 msgid "Mi'kmaq"
-msgstr "Mi'kmaq"
+msgstr ""
 
 #. language code: min
 #: LanguageCode.cc:814
 msgid "Minangkabau"
-msgstr "Minangkabau"
+msgstr ""
 
-#  Misc dialog caption
 #. language code: mis
 #: LanguageCode.cc:816
+#, fuzzy
 msgid "Miscellaneous languages"
-msgstr "Diverse sprog"
+msgstr "Razne nastavitve"
 
 #. language code: mkh
 #: LanguageCode.cc:818
 msgid "Mon-Khmer (Other)"
-msgstr "Mon-Khmer (andre)"
+msgstr ""
 
-# MG
 #. language code: mlg mg
 #: LanguageCode.cc:820
+#, fuzzy
 msgid "Malagasy"
-msgstr "Malagasy"
+msgstr "Managua"
 
 # MV
 # fuzzy
 #. language code: mlt mt
 #: LanguageCode.cc:822
+#, fuzzy
 msgid "Maltese"
-msgstr "Maltesisk"
+msgstr "Malta"
 
 #. language code: mnc
 #: LanguageCode.cc:824
+#, fuzzy
 msgid "Manchu"
-msgstr "Manchu (Kina)"
+msgstr "Ročno"
 
 #. language code: mni
 #: LanguageCode.cc:826
 msgid "Manipuri"
-msgstr "Manipuri"
+msgstr ""
 
 #. language code: mno
 #: LanguageCode.cc:828
+#, fuzzy
 msgid "Manobo languages"
-msgstr "Manobo sprog"
+msgstr "Jeziki"
 
 #. language code: moh
 #: LanguageCode.cc:830
 msgid "Mohawk"
-msgstr "Mohawk"
+msgstr ""
 
 #. language code: mol mo
 #: LanguageCode.cc:832
+#, fuzzy
 msgid "Moldavian"
-msgstr "Moldavisk"
+msgstr "Moldavija"
 
 # MN
 #. language code: mon mn
 #: LanguageCode.cc:834
+#, fuzzy
 msgid "Mongolian"
-msgstr "Mongolsk"
+msgstr "Mongolija"
 
 #. language code: mos
 #: LanguageCode.cc:836
+#, fuzzy
 msgid "Mossi"
-msgstr "Mossi"
+msgstr "Morse"
 
 #. language code: mul
 #: LanguageCode.cc:838
+#, fuzzy
 msgid "Multiple languages"
-msgstr "Flere sprog"
+msgstr "&Več ključev"
 
 #. language code: mun
 #: LanguageCode.cc:840
+#, fuzzy
 msgid "Munda languages"
-msgstr "Munda-sprog"
+msgstr "Se&kundarni jeziki"
 
 #. language code: mus
 #: LanguageCode.cc:842
+#, fuzzy
 msgid "Creek"
-msgstr "Creek (Muskogee)"
+msgstr "Grška"
 
 # FM
 # fuzzy
 #. language code: mwl
 #: LanguageCode.cc:844
+#, fuzzy
 msgid "Mirandese"
-msgstr "Mirandese"
+msgstr "Wisconsin"
 
 #. language code: mwr
 #: LanguageCode.cc:846
+#, fuzzy
 msgid "Marwari"
-msgstr "Marwari"
+msgstr "Strojna oprema"
 
 #. language code: myn
 #: LanguageCode.cc:848
+#, fuzzy
 msgid "Mayan languages"
-msgstr "Maya-sprog"
+msgstr "Jeziki"
 
-# SY
-# fuzzy
 #. language code: myv
 #: LanguageCode.cc:850
 msgid "Erzya"
-msgstr "Erzya"
+msgstr ""
 
 #. language code: nah
 #: LanguageCode.cc:852
+#, fuzzy
 msgid "Nahuatl"
-msgstr "Aztekisk (Nahuatlan)"
+msgstr "Ročno"
 
 #. language code: nai
 #: LanguageCode.cc:854
+#, fuzzy
 msgid "North American Indian"
-msgstr "Nordamerikansk indianersprog (andre)"
+msgstr "Severna Amerika"
 
-# NP
 #. language code: nap
 #: LanguageCode.cc:856
 msgid "Neapolitan"
-msgstr "Napolitansk"
+msgstr ""
 
 #. language code: nav nv
 #: LanguageCode.cc:860
@@ -3590,895 +3728,993 @@ msgstr "Navajo"
 #. language code: nbl nr
 #: LanguageCode.cc:862
 msgid "Ndebele, South"
-msgstr "Ndebele, syd"
+msgstr ""
 
 #. language code: nde nd
 #: LanguageCode.cc:864
 msgid "Ndebele, North"
-msgstr "Ndebele, (Zimbabwe)"
+msgstr ""
 
 # TO
 #. language code: ndo ng
 #: LanguageCode.cc:866
+#, fuzzy
 msgid "Ndonga"
-msgstr "Ndonga"
+msgstr "Tonga"
 
 #. language code: nds
 #: LanguageCode.cc:868
+#, fuzzy
 msgid "Low German"
-msgstr "Plattysk (nedersaksisk)"
+msgstr "Nemška"
 
 # NP
 #. language code: nep ne
 #: LanguageCode.cc:870
+#, fuzzy
 msgid "Nepali"
-msgstr "Nepalesisk"
+msgstr "Nepal"
 
 # NP
 #. language code: new
 #: LanguageCode.cc:872
+#, fuzzy
 msgid "Nepal Bhasa"
-msgstr "Newari"
+msgstr "Nepal"
 
 #. language code: nia
 #: LanguageCode.cc:874
+#, fuzzy
 msgid "Nias"
-msgstr "Nias"
+msgstr "Vzdevek"
 
 #. language code: nic
 #: LanguageCode.cc:876
 msgid "Niger-Kordofanian (Other)"
-msgstr "Niger-Kordofaniansk (Niger-Congo)"
+msgstr ""
 
 # NU
 #. language code: niu
 #: LanguageCode.cc:878
+#, fuzzy
 msgid "Niuean"
-msgstr "Niuean"
+msgstr "Niue"
 
 #. language code: nno nn
 #: LanguageCode.cc:880
+#, fuzzy
 msgid "Norwegian Nynorsk"
-msgstr "Nynorsk"
+msgstr "Norveška"
 
 #. language code: nob nb
 #: LanguageCode.cc:882
+#, fuzzy
 msgid "Norwegian Bokmal"
-msgstr "Bokmål (norsk)"
+msgstr "Norveška"
 
-# TO
 #. language code: nog
 #: LanguageCode.cc:884
+#, fuzzy
 msgid "Nogai"
-msgstr "Nogai"
+msgstr "Prijava"
 
 #. language code: non
 #: LanguageCode.cc:886
 msgid "Norse, Old"
-msgstr "Norse, gammel"
+msgstr ""
 
 #. language code: nor no
 #: LanguageCode.cc:888
 msgid "Norwegian"
-msgstr "Norsk"
+msgstr "Norveška"
 
 #. language code: nso
 #: LanguageCode.cc:890
+#, fuzzy
 msgid "Northern Sotho"
-msgstr "Nordlig Sotho"
+msgstr "Severna Irska"
 
 #. language code: nub
 #: LanguageCode.cc:892
+#, fuzzy
 msgid "Nubian languages"
-msgstr "Nubiske sprog"
+msgstr "Nastavi jezik"
 
 #. language code: nwc
 #: LanguageCode.cc:894
+#, fuzzy
 msgid "Classical Newari"
-msgstr "Klassisk Newari"
+msgstr "Ime razreda"
 
 #. language code: nya ny
 #: LanguageCode.cc:896
+#, fuzzy
 msgid "Chichewa"
-msgstr "Chichewa"
+msgstr "Češki"
 
 #. language code: nym
 #: LanguageCode.cc:898
+#, fuzzy
 msgid "Nyamwezi"
-msgstr "Nyamwezi"
+msgstr "Ime"
 
 #. language code: nyn
 #: LanguageCode.cc:900
 msgid "Nyankole"
-msgstr "Nyankole"
+msgstr ""
 
 #. language code: nyo
 #: LanguageCode.cc:902
+#, fuzzy
 msgid "Nyoro"
-msgstr "Nyoro"
+msgstr "Sever"
 
 #. language code: nzi
 #: LanguageCode.cc:904
+#, fuzzy
 msgid "Nzima"
-msgstr "Nzima"
+msgstr "Lima"
 
 #. language code: oci oc
 #: LanguageCode.cc:906
 msgid "Occitan (post 1500)"
-msgstr "Occitan (efter år 1500)"
+msgstr ""
 
 #. language code: oji oj
 #: LanguageCode.cc:908
 msgid "Ojibwa"
-msgstr "Ojibwa"
+msgstr ""
 
 # SY
-# fuzzy
 #. language code: ori or
 #: LanguageCode.cc:910
+#, fuzzy
 msgid "Oriya"
-msgstr "Oriya"
+msgstr "Sirija"
 
 #. language code: orm om
 #: LanguageCode.cc:912
+#, fuzzy
 msgid "Oromo"
-msgstr "Oromo (Afan, Galla)"
+msgstr "Korenski uporabnik"
 
-#
 #. language code: osa
 #: LanguageCode.cc:914
+#, fuzzy
 msgid "Osage"
-msgstr "Osage"
+msgstr "shrani"
 
 #. language code: oss os
 #: LanguageCode.cc:916
+#, fuzzy
 msgid "Ossetian"
-msgstr "Ossetisk"
+msgstr "Ruska"
 
 #. language code: ota
 #: LanguageCode.cc:918
 msgid "Turkish, Ottoman (1500-1928)"
-msgstr "Tyrkisk, osmannisk (1500-1928)"
+msgstr ""
 
 #. language code: oto
 #: LanguageCode.cc:920
+#, fuzzy
 msgid "Otomian languages"
-msgstr "Otomianske sprog"
+msgstr "Nastavi jezik"
 
 #. language code: paa
 #: LanguageCode.cc:922
 msgid "Papuan (Other)"
-msgstr "Papuan-Australsk (andre)"
+msgstr ""
 
 #. language code: pag
 #: LanguageCode.cc:924
+#, fuzzy
 msgid "Pangasinan"
-msgstr "Pangasinsk"
+msgstr "Madžarska"
 
 #. language code: pal
 #: LanguageCode.cc:926
+#, fuzzy
 msgid "Pahlavi"
-msgstr "Pahlavi"
+msgstr "Palau"
 
 #. language code: pam
 #: LanguageCode.cc:928
+#, fuzzy
 msgid "Pampanga"
-msgstr "Pampanga"
+msgstr "Paragvaj"
 
 #. language code: pan pa
 #: LanguageCode.cc:930
+#, fuzzy
 msgid "Panjabi"
-msgstr "Panjabi (Punjabi)"
+msgstr "Punjabi"
 
-#
 #. language code: pap
 #: LanguageCode.cc:932
+#, fuzzy
 msgid "Papiamento"
-msgstr "Papiamento"
+msgstr "Parameter"
 
 #. language code: pau
 #: LanguageCode.cc:934
+#, fuzzy
 msgid "Palauan"
-msgstr "Palauansk"
+msgstr "Palau"
 
 #. language code: peo
 #: LanguageCode.cc:936
 msgid "Persian, Old (ca.600-400 B.C.)"
-msgstr "Persisk, gammel (ca. 600-400 f.k.)"
+msgstr ""
 
 #. language code: per fas fa
 #: LanguageCode.cc:938 LanguageCode.cc:940
 msgid "Persian"
-msgstr "Persisk Farsi"
+msgstr "Perzijski"
 
 #. language code: phi
 #: LanguageCode.cc:942
+#, fuzzy
 msgid "Philippine (Other)"
-msgstr "Philippinsk (andre)"
+msgstr "Filipini"
 
 #. language code: phn
 #: LanguageCode.cc:944
+#, fuzzy
 msgid "Phoenician"
-msgstr "Punisk"
+msgstr "Slovenščina"
 
+# ML
 #. language code: pli pi
 #: LanguageCode.cc:946
+#, fuzzy
 msgid "Pali"
-msgstr "Pali"
+msgstr "Mali"
 
 #. language code: pol pl
 #: LanguageCode.cc:948
 msgid "Polish"
-msgstr "Polsk"
+msgstr "Poljska"
 
 #. language code: pon
 #: LanguageCode.cc:950
+#, fuzzy
 msgid "Pohnpeian"
-msgstr "Ponape"
+msgstr "Indonezijščina"
 
 #. language code: por pt
 #: LanguageCode.cc:952
 msgid "Portuguese"
-msgstr "Portugisisk"
+msgstr "Portugalska"
 
 #. language code: pra
 #: LanguageCode.cc:954
+#, fuzzy
 msgid "Prakrit languages"
-msgstr "Prakrit sprog"
+msgstr "Primarni &Jezik"
 
 #. language code: pro
 #: LanguageCode.cc:956
 msgid "Provencal, Old (to 1500)"
-msgstr "Provencalsk, gammel (til 1500)"
+msgstr ""
 
-#
 #. language code: pus ps
 #: LanguageCode.cc:958
+#, fuzzy
 msgid "Pushto"
-msgstr "Pushto (Pashto)"
+msgstr "Po meri"
 
 #. language code: que qu
 #: LanguageCode.cc:960
 msgid "Quechua"
-msgstr "Quechua"
+msgstr ""
 
+# Shouldn't this be "Kazakhstan"?
 # KZ
 # fuzzy
 #. language code: raj
 #: LanguageCode.cc:962
+#, fuzzy
 msgid "Rajasthani"
-msgstr "Rajasthansk"
+msgstr "Kazahstan"
 
 #. language code: rap
 #: LanguageCode.cc:964
+#, fuzzy
 msgid "Rapanui"
-msgstr "Rapanui"
+msgstr "Japonska"
 
-#
 #. language code: rar
 #: LanguageCode.cc:966
+#, fuzzy
 msgid "Rarotongan"
-msgstr "Rarotongan"
+msgstr "Preberi usmerjanje"
 
 #. language code: roa
 #: LanguageCode.cc:968
 msgid "Romance (Other)"
-msgstr "Romansk (andre)"
+msgstr ""
 
 #. language code: roh rm
 #: LanguageCode.cc:970
 msgid "Raeto-Romance"
-msgstr "Rhaeto-Romansk"
+msgstr ""
 
 #. language code: rom
 #: LanguageCode.cc:972
+#, fuzzy
 msgid "Romany"
-msgstr "Romani"
+msgstr "Romunija"
 
 #. language code: rum ron ro
 #: LanguageCode.cc:974 LanguageCode.cc:976
 msgid "Romanian"
-msgstr "Rumænsk"
+msgstr "Romunščina"
 
-# RE
 #. language code: run rn
 #: LanguageCode.cc:978
+#, fuzzy
 msgid "Rundi"
-msgstr "Kirundi (Rundi)"
+msgstr "Deluje"
 
 #. language code: rus ru
 #: LanguageCode.cc:980
 msgid "Russian"
-msgstr "Russisk"
+msgstr "Ruska"
 
 #. language code: sad
 #: LanguageCode.cc:982
+#, fuzzy
 msgid "Sandawe"
-msgstr "Sandawe"
+msgstr "Pokrajina"
 
 #. language code: sag sg
 #: LanguageCode.cc:984
+#, fuzzy
 msgid "Sango"
-msgstr "Sango"
+msgstr "Saigon"
 
 #. language code: sah
 #: LanguageCode.cc:986
+#, fuzzy
 msgid "Yakut"
-msgstr "Yakut"
+msgstr "Breakout"
 
 #. language code: sai
 #: LanguageCode.cc:988
 msgid "South American Indian (Other)"
-msgstr "Sydamerikansk Indiansk (andre)"
+msgstr ""
 
 #. language code: sal
 #: LanguageCode.cc:990
+#, fuzzy
 msgid "Salishan languages"
-msgstr "Salishanske sprog"
+msgstr "Nastavi jezik"
 
 #. language code: sam
 #: LanguageCode.cc:992
 msgid "Samaritan Aramaic"
-msgstr "Samaritansk aramæisk"
+msgstr ""
 
 #. language code: san sa
 #: LanguageCode.cc:994
+#, fuzzy
 msgid "Sanskrit"
-msgstr "Sanskrit"
+msgstr "Začetek"
 
 #. language code: sas
 #: LanguageCode.cc:996
+#, fuzzy
 msgid "Sasak"
-msgstr "Sasak"
+msgstr "Samba"
 
 #. language code: sat
 #: LanguageCode.cc:998
+#, fuzzy
 msgid "Santali"
-msgstr "Santali"
+msgstr "Scan postaja"
 
 #. language code: scc srp sr
 #: LanguageCode.cc:1000 LanguageCode.cc:1002
 msgid "Serbian"
-msgstr "Serbo-Kroatisk (cyrillisk)"
+msgstr "Srbščina"
 
 #. language code: scn
 #: LanguageCode.cc:1004
+#, fuzzy
 msgid "Sicilian"
-msgstr "Siciliansk"
+msgstr "Michigan"
 
 #. language code: sco
 #: LanguageCode.cc:1006
+#, fuzzy
 msgid "Scots"
-msgstr "Skotsk"
+msgstr "Sekunde"
 
 #. language code: scr hrv hr
 #: LanguageCode.cc:1008 LanguageCode.cc:1010
 msgid "Croatian"
-msgstr "Serbo-Kroatisk (romansk)"
+msgstr "Hrvaška"
 
 #. language code: sel
 #: LanguageCode.cc:1012
+#, fuzzy
 msgid "Selkup"
-msgstr "Selkup"
+msgstr "Preskoči"
 
 #. language code: sem
 #: LanguageCode.cc:1014
 msgid "Semitic (Other)"
-msgstr "Semitisk (andre)"
+msgstr ""
 
 #. language code: sga
 #: LanguageCode.cc:1016
 msgid "Irish, Old (to 900)"
-msgstr "Irsk, gammel (indtil ca. 900)"
+msgstr ""
 
 #. language code: sgn
 #: LanguageCode.cc:1018
+#, fuzzy
 msgid "Sign Languages"
-msgstr "Tegnsprog"
+msgstr "Jeziki"
 
 #. language code: shn
 #: LanguageCode.cc:1020
+#, fuzzy
 msgid "Shan"
-msgstr "Shan"
+msgstr "Shanghai"
 
 #. language code: sid
 #: LanguageCode.cc:1022
+#, fuzzy
 msgid "Sidamo"
-msgstr "Sidamo"
+msgstr "Samoa"
 
-# AO
 #. language code: sin si
 #: LanguageCode.cc:1024
+#, fuzzy
 msgid "Sinhala"
-msgstr "Singhalesisk"
+msgstr "Zaporedno (serial)"
 
 #. language code: sio
 #: LanguageCode.cc:1026
+#, fuzzy
 msgid "Siouan languages"
-msgstr "Sioux sprog"
+msgstr "Nastavi jezik"
 
 #. language code: sit
 #: LanguageCode.cc:1028
 msgid "Sino-Tibetan (Other)"
-msgstr "Sino-Tibetansk (andre)"
+msgstr ""
 
 #. language code: sla
 #: LanguageCode.cc:1030
 msgid "Slavic (Other)"
-msgstr "Slavisk (andre)"
+msgstr ""
 
 #. language code: slo slk sk
 #: LanguageCode.cc:1032 LanguageCode.cc:1034
 msgid "Slovak"
-msgstr "Slovakisk"
+msgstr "Slovaška"
 
 #. language code: slv sl
 #: LanguageCode.cc:1036
 msgid "Slovenian"
-msgstr "Slovensk"
+msgstr "Slovenščina"
 
 #. language code: sma
 #: LanguageCode.cc:1038
 msgid "Southern Sami"
-msgstr "Sydsamisk (Lapland)"
+msgstr ""
 
 #. language code: sme se
 #: LanguageCode.cc:1040
+#, fuzzy
 msgid "Northern Sami"
-msgstr "Nordsamisk (Lapland)"
+msgstr "Severna Irska"
 
 #. language code: smi
 #: LanguageCode.cc:1042
 msgid "Sami languages (Other)"
-msgstr "Samisk (andre)"
+msgstr ""
 
 #. language code: smj
 #: LanguageCode.cc:1044
+#, fuzzy
 msgid "Lule Sami"
-msgstr "Lulesamisk"
+msgstr "Ime modula"
 
 #. language code: smn
 #: LanguageCode.cc:1046
 msgid "Inari Sami"
-msgstr "Inari Samisk"
+msgstr ""
 
 #. language code: smo sm
 #: LanguageCode.cc:1048
+#, fuzzy
 msgid "Samoan"
-msgstr "Samoansk"
+msgstr "Samoa"
 
 #. language code: sms
 #: LanguageCode.cc:1050
 msgid "Skolt Sami"
-msgstr "Skolt Samisk"
+msgstr ""
 
 #. language code: sna sn
 #: LanguageCode.cc:1052
+#, fuzzy
 msgid "Shona"
-msgstr "Shona"
+msgstr "Slovenija"
 
 #. language code: snd sd
 #: LanguageCode.cc:1054
+#, fuzzy
 msgid "Sindhi"
-msgstr "Sindhi"
+msgstr "Hindi"
 
 #. language code: snk
 #: LanguageCode.cc:1056
+#, fuzzy
 msgid "Soninke"
-msgstr "Soninke"
+msgstr "Nadaljuj"
 
 #. language code: sog
 #: LanguageCode.cc:1058
+#, fuzzy
 msgid "Sogdian"
-msgstr "Sogdiansk"
+msgstr "Prijava"
 
 # SO
 #. language code: som so
 #: LanguageCode.cc:1060
+#, fuzzy
 msgid "Somali"
-msgstr "Somalisk"
+msgstr "Somalija"
 
 #. language code: son
 #: LanguageCode.cc:1062
+#, fuzzy
 msgid "Songhai"
-msgstr "Songhai"
+msgstr "Shanghai"
 
 #. language code: sot st
 #: LanguageCode.cc:1064
 msgid "Sotho, Southern"
-msgstr "Sotho"
+msgstr ""
 
 #. language code: spa es
 #: LanguageCode.cc:1066
 msgid "Spanish"
-msgstr "Spansk (castiliansk)"
+msgstr "Španska"
 
-# MR
 #. language code: srd sc
 #: LanguageCode.cc:1068
+#, fuzzy
 msgid "Sardinian"
-msgstr "Sardu"
+msgstr "Ukrajinska"
 
 #. language code: srr
 #: LanguageCode.cc:1070
+#, fuzzy
 msgid "Serer"
-msgstr "Serer"
+msgstr "Strežnik"
 
 #. language code: ssa
 #: LanguageCode.cc:1072
 msgid "Nilo-Saharan (Other)"
-msgstr "Nilo-Saharansk (sub-sahara afrikansk)"
+msgstr ""
 
-# HT
 #. language code: ssw ss
 #: LanguageCode.cc:1074
+#, fuzzy
 msgid "Swati"
-msgstr "Swazi"
+msgstr "Začetek"
 
 #. language code: suk
 #: LanguageCode.cc:1076
+#, fuzzy
 msgid "Sukuma"
-msgstr "Sukuma"
+msgstr "Povzetek"
 
 #. language code: sun su
 #: LanguageCode.cc:1078
+#, fuzzy
 msgid "Sundanese"
-msgstr "Sundanesisk"
+msgstr "Sudan"
 
 #. language code: sus
 #: LanguageCode.cc:1080
+#, fuzzy
 msgid "Susu"
-msgstr "Susu"
+msgstr "SMVodilo(SMBus)"
 
 #. language code: sux
 #: LanguageCode.cc:1082
+#, fuzzy
 msgid "Sumerian"
-msgstr "Sumerisk"
+msgstr "Srbščina"
 
 # SZ
 #. language code: swa sw
 #: LanguageCode.cc:1084
+#, fuzzy
 msgid "Swahili"
-msgstr "Swahili"
+msgstr "Svazi"
 
 #. language code: swe sv
 #: LanguageCode.cc:1086
 msgid "Swedish"
-msgstr "Svensk"
+msgstr "Švedska"
 
 # SY
-# fuzzy
 #. language code: syr
 #: LanguageCode.cc:1088
+#, fuzzy
 msgid "Syriac"
-msgstr "Syrisk"
+msgstr "Sirija"
 
 #. language code: tah ty
 #: LanguageCode.cc:1090
+#, fuzzy
 msgid "Tahitian"
-msgstr "Tahitiansk"
+msgstr "Tahiti"
 
 #. language code: tai
 #: LanguageCode.cc:1092
+#, fuzzy
 msgid "Tai (Other)"
-msgstr "Tai (andre)"
+msgstr "Ostalo"
 
 #. language code: tam ta
 #: LanguageCode.cc:1094
+#, fuzzy
 msgid "Tamil"
-msgstr "Tamilsk"
+msgstr "Družina"
 
 #. language code: tat tt
 #: LanguageCode.cc:1096
+#, fuzzy
 msgid "Tatar"
-msgstr "Tatar"
+msgstr "Katar"
 
 #. language code: tel te
 #: LanguageCode.cc:1098
+#, fuzzy
 msgid "Telugu"
-msgstr "Telugu"
+msgstr "Belgija"
 
 #. language code: tem
 #: LanguageCode.cc:1100
+#, fuzzy
 msgid "Timne"
-msgstr "Timne (Temme)"
+msgstr "Čas"
 
 #. language code: ter
 #: LanguageCode.cc:1102
+#, fuzzy
 msgid "Tereno"
-msgstr "Tereno"
+msgstr "Herero"
 
 #. language code: tet
 #: LanguageCode.cc:1104
+#, fuzzy
 msgid "Tetum"
-msgstr "Tetum"
+msgstr "Pentium"
 
 #. language code: tgk tg
 #: LanguageCode.cc:1106
+#, fuzzy
 msgid "Tajik"
-msgstr "Tajik"
+msgstr "Pogovori"
 
 #. language code: tgl tl
 #: LanguageCode.cc:1108
 msgid "Tagalog"
-msgstr "Tagalog"
+msgstr ""
 
 #. language code: tha th
 #: LanguageCode.cc:1110
 msgid "Thai"
-msgstr "Thai"
+msgstr "Tajski"
 
 # TW
-# fuzzy
 #. language code: tib bod bo
 #: LanguageCode.cc:1112 LanguageCode.cc:1114
 msgid "Tibetan"
-msgstr "Tibetansk"
+msgstr "Tibetanski"
 
-#
 #. language code: tig
 #: LanguageCode.cc:1116
+#, fuzzy
 msgid "Tigre"
-msgstr "Tigre"
+msgstr "prezri"
 
 # NG
 #. language code: tir ti
 #: LanguageCode.cc:1118
+#, fuzzy
 msgid "Tigrinya"
-msgstr "Tigrinya"
+msgstr "Nigerija"
 
 #. language code: tiv
 #: LanguageCode.cc:1120
 msgid "Tiv"
-msgstr "Tivi"
+msgstr ""
 
 #. language code: tlh
 #: LanguageCode.cc:1124
+#, fuzzy
 msgid "Klingon"
-msgstr "Klingon (fra Star Trek)"
+msgstr "Saigon"
 
 #. language code: tli
 #: LanguageCode.cc:1126
+#, fuzzy
 msgid "Tlingit"
-msgstr "Tlingit"
+msgstr "Dopisni seznami"
 
 #. language code: tmh
 #: LanguageCode.cc:1128
+#, fuzzy
 msgid "Tamashek"
-msgstr "Tamashek"
+msgstr "Tashkent"
 
 #. language code: tog
 #: LanguageCode.cc:1130
 msgid "Tonga (Nyasa)"
-msgstr "Tonga (Nyasa)"
+msgstr ""
 
 # SB
 #. language code: ton to
 #: LanguageCode.cc:1132
+#, fuzzy
 msgid "Tonga (Tonga Islands)"
-msgstr "Tonga (Tonga Islands)"
+msgstr "Solomonovi otoki"
 
-#
 #. language code: tpi
 #: LanguageCode.cc:1134
+#, fuzzy
 msgid "Tok Pisin"
-msgstr "Tok Pisin"
+msgstr "Token Ring"
 
 #. language code: tsi
 #: LanguageCode.cc:1136
+#, fuzzy
 msgid "Tsimshian"
-msgstr "Tsimshiansk"
+msgstr "Ruska"
 
 #. language code: tsn tn
 #: LanguageCode.cc:1138
+#, fuzzy
 msgid "Tswana"
-msgstr "Tswana"
+msgstr "Botsvana"
 
 # TO
 #. language code: tso ts
 #: LanguageCode.cc:1140
+#, fuzzy
 msgid "Tsonga"
-msgstr "Tsonga"
+msgstr "Tonga"
 
 #. language code: tuk tk
 #: LanguageCode.cc:1142
+#, fuzzy
 msgid "Turkmen"
-msgstr "Turkmenisk"
+msgstr "Turčija"
 
 #. language code: tum
 #: LanguageCode.cc:1144
+#, fuzzy
 msgid "Tumbuka"
-msgstr "Tumbuka"
+msgstr "Timbuktu"
 
 #. language code: tup
 #: LanguageCode.cc:1146
+#, fuzzy
 msgid "Tupi languages"
-msgstr "Tupi sprog"
+msgstr "Nastavi jezik"
 
 #. language code: tur tr
 #: LanguageCode.cc:1148
 msgid "Turkish"
-msgstr "Tyrkisk"
+msgstr "Turška"
 
 #. language code: tut
 #: LanguageCode.cc:1150
 msgid "Altaic (Other)"
-msgstr "Altaisk (Turko-Tatarisk)"
+msgstr ""
 
 #. language code: twi tw
 #: LanguageCode.cc:1154
 msgid "Twi"
-msgstr "Twi"
+msgstr ""
 
 #. language code: tyv
 #: LanguageCode.cc:1156
+#, fuzzy
 msgid "Tuvinian"
-msgstr "Tuvinisk"
+msgstr "Tunizija"
 
 #. language code: udm
 #: LanguageCode.cc:1158
 msgid "Udmurt"
-msgstr "Udmurtisk"
+msgstr ""
 
 # HT
 #. language code: uga
 #: LanguageCode.cc:1160
+#, fuzzy
 msgid "Ugaritic"
-msgstr "Ugaritisk"
+msgstr "Haiti"
 
 #. language code: uig ug
 #: LanguageCode.cc:1162
 msgid "Uighur"
-msgstr "Uigur"
+msgstr ""
 
 #. language code: ukr uk
 #: LanguageCode.cc:1164
 msgid "Ukrainian"
-msgstr "Ukrainisk"
+msgstr "Ukrajinska"
 
 #. language code: umb
 #: LanguageCode.cc:1166
 msgid "Umbundu"
-msgstr "Umbundu"
+msgstr ""
 
 #. language code: und
 #: LanguageCode.cc:1168
+#, fuzzy
 msgid "Undetermined"
-msgstr "Ubestemt"
+msgstr "Medzejični"
 
 #. language code: urd ur
 #: LanguageCode.cc:1170
 msgid "Urdu"
-msgstr "Urdu"
+msgstr ""
 
 #. language code: uzb uz
 #: LanguageCode.cc:1172
+#, fuzzy
 msgid "Uzbek"
-msgstr "Uzbekisk"
+msgstr "Uzbekistan"
 
 #. language code: vai
 #: LanguageCode.cc:1174
+#, fuzzy
 msgid "Vai"
-msgstr "Vai"
+msgstr "Vi"
 
 #. language code: ven ve
 #: LanguageCode.cc:1176
+#, fuzzy
 msgid "Venda"
-msgstr "Venda"
+msgstr "Proizvajalec"
 
 #. language code: vie vi
 #: LanguageCode.cc:1178
 msgid "Vietnamese"
-msgstr "Vietnamesisk"
+msgstr "Vietnamski"
 
 #. language code: vol vo
 #: LanguageCode.cc:1180
 msgid "Volapuk"
-msgstr "Volapük"
+msgstr ""
 
 #. language code: vot
 #: LanguageCode.cc:1182
+#, fuzzy
 msgid "Votic"
-msgstr "Votisk"
+msgstr "Vatikan"
 
 #. language code: wak
 #: LanguageCode.cc:1184
 msgid "Wakashan languages"
-msgstr "Wakashan sprog"
+msgstr ""
 
 #. language code: wal
 #: LanguageCode.cc:1186
+#, fuzzy
 msgid "Walamo"
-msgstr "Walamo"
+msgstr "Palm"
 
 #. language code: war
 #: LanguageCode.cc:1188
+#, fuzzy
 msgid "Waray"
-msgstr "Waray"
+msgstr "Sobota"
 
 #. language code: was
 #: LanguageCode.cc:1190
+#, fuzzy
 msgid "Washo"
-msgstr "Washo"
+msgstr "Welški"
 
 #. language code: wel cym cy
 #: LanguageCode.cc:1192 LanguageCode.cc:1194
 msgid "Welsh"
-msgstr "Walisisk"
+msgstr "Welški"
 
 #. language code: wen
 #: LanguageCode.cc:1196
+#, fuzzy
 msgid "Sorbian languages"
-msgstr "Sorbianske sprog (wendisk)"
+msgstr "Prilagoditev jezika..."
 
-#
 #. language code: wln wa
 #: LanguageCode.cc:1198
+#, fuzzy
 msgid "Walloon"
-msgstr "Wallonsk"
+msgstr "vsi"
 
 #. language code: wol wo
 #: LanguageCode.cc:1200
 msgid "Wolof"
-msgstr "Wolof"
+msgstr ""
 
 #. language code: xal
 #: LanguageCode.cc:1202
+#, fuzzy
 msgid "Kalmyk"
-msgstr "Kalmukkisk"
+msgstr "Pogovori"
 
 #. language code: xho xh
 #: LanguageCode.cc:1204
 msgid "Xhosa"
-msgstr "Xhosa"
+msgstr ""
 
 #. language code: yao
 #: LanguageCode.cc:1206
 msgid "Yao"
-msgstr "Yao (Bantu)"
+msgstr ""
 
 #. language code: yap
 #: LanguageCode.cc:1208
+#, fuzzy
 msgid "Yapese"
-msgstr "Yap"
+msgstr "Japonska"
 
 #. language code: yid yi
 #: LanguageCode.cc:1210
+#, fuzzy
 msgid "Yiddish"
-msgstr "Jiddisch"
+msgstr "Končaj"
 
 # AW
 #. language code: yor yo
 #: LanguageCode.cc:1212
+#, fuzzy
 msgid "Yoruba"
-msgstr "Yoruba"
+msgstr "Aruba"
 
 #. language code: ypk
 #: LanguageCode.cc:1214
+#, fuzzy
 msgid "Yupik languages"
-msgstr "Yupik sprog"
+msgstr "Nastavi jezik"
 
 #. language code: zap
 #: LanguageCode.cc:1216
 msgid "Zapotec"
-msgstr "Zapotec"
+msgstr ""
 
 #. language code: zen
 #: LanguageCode.cc:1218
+#, fuzzy
 msgid "Zenaga"
-msgstr "Zenaga"
+msgstr "Grenada"
 
-# BT
 #. language code: zha za
 #: LanguageCode.cc:1220
+#, fuzzy
 msgid "Zhuang"
-msgstr "Zhuang"
+msgstr "Spremeni"
 
-#
 #. language code: znd
 #: LanguageCode.cc:1222
+#, fuzzy
 msgid "Zande"
-msgstr "Zande"
+msgstr "Območje"
 
 #. language code: zul zu
 #: LanguageCode.cc:1224
@@ -4487,26 +4723,26 @@ msgstr "Zulu"
 
 #. language code: zun
 #: LanguageCode.cc:1226
+#, fuzzy
 msgid "Zuni"
-msgstr "Zuni"
+msgstr "Tunizija"
 
 #: ZYppFactory.cc:279 ZYppFactory.cc:334
 msgid "Cannot acquire zypp lock."
-msgstr "Kan ikke erhverve zypp-lås."
+msgstr ""
 
-#
 #. Translator: %s = name of an rpm package. A list of diffs follows
 #. this message.
 #: target/rpm/RpmDb.cc:1799
-#, c-format
+#, fuzzy, c-format
 msgid "Changed configuration files for %s:"
-msgstr "Ændrede konfigurationsfiler for %s:"
+msgstr "Shrani nastavivene datoteke"
 
 #. %s = filenames
 #: target/rpm/RpmDb.cc:1960
 #, c-format
 msgid "rpm saved %s as %s but it was impossible to determine the difference"
-msgstr "rpm gemte %s som %s, men det var umuligt at bestemme forskellen"
+msgstr ""
 
 #. %s = filenames
 #: target/rpm/RpmDb.cc:1962
@@ -4515,14 +4751,12 @@ msgid ""
 "rpm saved %s as %s.\n"
 "Here are the first 25 lines of difference:\n"
 msgstr ""
-"rpm gemte %s som %s.\n"
-"Her er de første 25 forskellige linjer:\n"
 
 #. %s = filenames
 #: target/rpm/RpmDb.cc:1965
 #, c-format
 msgid "rpm created %s as %s but it was impossible to determine the difference"
-msgstr "rpm oprettede %s som %s, men det var umuligt at bestemme forskellen"
+msgstr ""
 
 #. %s = filenames
 #: target/rpm/RpmDb.cc:1967
@@ -4531,43 +4765,45 @@ msgid ""
 "rpm created %s as %s.\n"
 "Here are the first 25 lines of difference:\n"
 msgstr ""
-"rpm oprettede %s som %s.\n"
-"Her er de første 25 forskellige linjer:\n"
 
 #. %s = filename of rpm package
 #. timestamp
 #: target/rpm/RpmDb.cc:1973
-#, c-format
+#, fuzzy, c-format
 msgid "%s install failed"
-msgstr "%s installation fejlede"
+msgstr "Namestitev ni uspela."
 
 #: target/rpm/RpmDb.cc:1974 target/rpm/RpmDb.cc:2092
+#, fuzzy
 msgid "rpm output:"
-msgstr "rpm uddata:"
+msgstr ""
+"\n"
+"Izhod ukaza:"
 
 #. %s = filename of rpm package
 #. timestamp
 #: target/rpm/RpmDb.cc:1980
-#, c-format
+#, fuzzy, c-format
 msgid "%s installed ok"
-msgstr "%s installeret OK"
+msgstr "Nameščena verzija"
 
 #: target/rpm/RpmDb.cc:1983 target/rpm/RpmDb.cc:2100
+#, fuzzy
 msgid "Additional rpm output:"
-msgstr "Yderligere rpm-uddata:"
+msgstr "Dodatne nastavitve skupine"
 
 #. %s = name of rpm package
 #. timestamp
 #: target/rpm/RpmDb.cc:2091
-#, c-format
+#, fuzzy, c-format
 msgid "%s remove failed"
-msgstr "%s fjernelse fejlede"
+msgstr "rpm neuspešen."
 
 #. timestamp
 #: target/rpm/RpmDb.cc:2097
 #, c-format
 msgid "%s remove ok"
-msgstr "%s fjernelse OK"
+msgstr ""
 
 #: target/rpm/RpmDb.cc:2114
 msgid "Ok"
@@ -4576,66 +4812,94 @@ msgstr "OK"
 #. translator: these are different kinds of how an rpm package can be broken
 #: target/rpm/RpmDb.cc:2117
 msgid "The package is not OK for the following reasons:"
-msgstr "Pakken er ikke i orden af følgende årsager:"
+msgstr ""
 
 #: target/rpm/RpmDb.cc:2123
 msgid "The package contains different version than expected"
-msgstr "Pakken indeholder en anden version end forventet"
+msgstr ""
 
 #: target/rpm/RpmDb.cc:2129
+#, fuzzy
 msgid "The package file has incorrect MD5 sum"
-msgstr "Pakkefilen har ukorrekt MD5-sum"
+msgstr "Paketi za odstranitev"
 
-#
 #: target/rpm/RpmDb.cc:2135
+#, fuzzy
 msgid "The package is not signed"
-msgstr "Pakken er ikke signeret"
+msgstr "Paketi za obnovitev"
 
 #: target/rpm/RpmDb.cc:2141
+#, fuzzy
 msgid "The package has no MD5 sum"
-msgstr "Pakken har ingen MD5-sum"
+msgstr "Paketi za odstranitev"
 
-#
 #: target/rpm/RpmDb.cc:2147
+#, fuzzy
 msgid "The package has incorrect signature"
-msgstr "Pakken har ukorrekt signatur"
+msgstr "Paketi za obnovitev"
 
 #: target/rpm/RpmDb.cc:2153
+#, fuzzy
 msgid "The package archive has incorrect MD5 sum"
-msgstr "Pakkearkivet har ukorrekt MD5-sum"
+msgstr "Paketi za odstranitev"
 
 #: target/rpm/RpmDb.cc:2159
 msgid "rpm failed for unkown reason, see log file"
-msgstr "rpm fejlede af ukendt årsag. Se logfil"
+msgstr ""
 
 #. timestamp
 #: target/rpm/RpmDb.cc:2303
-#, c-format
+#, fuzzy, c-format
 msgid "created backup %s"
-msgstr "Oprettede backup %s"
+msgstr "Ne Kreiraj Varnostnih Kopij"
 
 #: target/TargetImpl.cc:630
 msgid "Target commit aborted by user."
-msgstr "Skrivning til mål afbrudt af bruger."
+msgstr ""
 
 #: target/store/XMLFilesBackend.cc:925 target/store/XMLFilesBackend.cc:932
 #: source/yum/YUMScriptImpl.cc:78 source/yum/YUMScriptImpl.cc:112
 msgid "Can't write the patch script to a temporary file."
-msgstr "kan ikke skrive rettelsesscript til en midlertidig fil."
+msgstr ""
 
 #: source/yum/YUMScriptImpl.cc:89 source/yum/YUMScriptImpl.cc:123
 msgid "Failed check for the script file check sum"
-msgstr "Kontrol af scriptfilens checksum fejlede"
+msgstr ""
 
 #: source/yum/YUMSourceImpl.cc:247
 msgid "Signed repomd.xml file fails signature check"
-msgstr "Signaturkontrol af signeret repomd.xml-fil fejler"
+msgstr ""
 
 #: source/SourceImpl.cc:384
 msgid " miss checksum."
-msgstr " mangler checksum."
+msgstr ""
 
 #: source/SourceImpl.cc:390
 msgid " fails checksum verification."
-msgstr " fejler checksumbekræftelse."
+msgstr ""
 
+#~ msgid "Default"
+#~ msgstr "Privzeto"
+
+#, fuzzy
+#~ msgid "ignore architecture"
+#~ msgstr "Zagonska arhitektura"
+
+#~ msgid "unknown"
+#~ msgstr "neznano"
+
+#, fuzzy
+#~ msgid "installed"
+#~ msgstr "Namesti"
+
+#, fuzzy
+#~ msgid "uninstalled"
+#~ msgstr "Samodejna namestitev"
+
+#, fuzzy
+#~ msgid "to be installed (soft)"
+#~ msgstr "bo nameščen kot:"
+
+#, fuzzy
+#~ msgid "to be uninstalled"
+#~ msgstr "potrebno je ponovno namestiti"
