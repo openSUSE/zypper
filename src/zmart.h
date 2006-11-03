@@ -23,9 +23,9 @@
 #include <zypp/Digest.h>
 #include <zypp/CapFactory.h>
 
-#define ZYPP_CHECKPATCHES_LOG "/var/log/zypp-zmart.log"
+#define ZYPP_CHECKPATCHES_LOG "/var/log/YaST2/zypper.log"
 #undef  ZYPP_BASE_LOGGER_LOGGROUP
-#define ZYPP_BASE_LOGGER_LOGGROUP "zypp::zmart"
+#define ZYPP_BASE_LOGGER_LOGGROUP "zypper"
 #define RANDOM_TOKEN "sad987432JJDJD948394DDDxxx22"
 
 struct Settings

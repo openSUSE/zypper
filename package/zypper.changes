@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Fri Nov  3 16:33:12 CET 2006 - mvidner@suse.cz
+
+- log to /var/log/YaST2/zypper.log (for save_y2logs too).
+
+-------------------------------------------------------------------
 Thu Nov  2 18:24:09 CET 2006 - mvidner@suse.cz
 
 - Automatically retry installing with nodeps or force, nicer problem
