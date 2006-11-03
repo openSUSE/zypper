@@ -33,7 +33,7 @@ void load_target();
 void load_sources();
 void establish ();
 void resolve();
-void show_pool();
+void show_patches();
 void patch_check();
 void list_updates( const zypp::ResObject::Kind &kind );
 void mark_updates( const zypp::ResObject::Kind &kind );

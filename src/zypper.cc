@@ -687,7 +687,7 @@ int one_command(const string& command, int argc, char **argv)
     cond_init_system_sources ();
     cond_load_resolvables ();
     establish ();
-    show_pool ();
+    show_patches ();
     return 0;
   }
 

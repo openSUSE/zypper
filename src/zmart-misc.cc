@@ -369,10 +369,30 @@ string string_status (const ResStatus& rs)
   return "error";
 }
 
+static void dump_pool ()
+{
+  int count = 1;
+  static bool full_pool_shown = false;
+
+  _XDEBUG( "---------------------------------------" );
+  for (ResPool::const_iterator it =   God->pool().begin(); it != God->pool().end(); ++it, ++count) {
+    
+    if (!full_pool_shown                                    // show item if not shown all before
+	|| it->status().transacts()                         // or transacts
+	|| !it->status().isUndetermined())                  // or established status
+    {
+      _DEBUG( count << ": " << *it );
+    }
+  }
+  _XDEBUG( "---------------------------------------" );
+  full_pool_shown = true;
+}
+
 // patches
-void show_pool()
+void show_patches()
 {
   MIL << "Pool contains " << God->pool().size() << " items. Checking whether available patches are needed." << std::endl;
+  dump_pool ();
 
   Table tbl;
   TableHeader th;
