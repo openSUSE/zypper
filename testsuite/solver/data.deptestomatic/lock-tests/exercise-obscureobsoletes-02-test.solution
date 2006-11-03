@@ -8,9 +8,12 @@
 >!>       unlock foo
 >!>       
 >!>    Solution:
+>!>       unlock all resolvables
+>!>       
+>!>    Solution:
 >!>       Ignore the obsolete foo in foo2
 >!>       
->!> Taking solution: 1
+>!> Taking solution: 2
 >!> For problem:     0
 >!> No problems so far
 >!> No problems so far

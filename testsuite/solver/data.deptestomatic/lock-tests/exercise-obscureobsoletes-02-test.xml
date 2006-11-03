@@ -13,7 +13,7 @@ foo2 @foo @foo-devel
   <lock package="foo" channel="@system"/>
   <install channel="test" package="foo2"/>
   <reportproblems/>
-  <takesolution problem="0" solution="1"/>
+  <takesolution problem="0" solution="2"/>
   <reportproblems/>
 </trial>
 

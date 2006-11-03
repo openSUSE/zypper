@@ -8,6 +8,9 @@
 >!>       unlock B
 >!>       
 >!>    Solution:
+>!>       unlock all resolvables
+>!>       
+>!>    Solution:
 >!>       do not install A
 >!>       do not install A-1.0-1.noarch[test]
 >!>    Solution:

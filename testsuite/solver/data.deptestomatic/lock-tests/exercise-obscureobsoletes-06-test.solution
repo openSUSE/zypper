@@ -9,9 +9,12 @@
 >!>       unlock bar2
 >!>       
 >!>    Solution:
+>!>       unlock all resolvables
+>!>       
+>!>    Solution:
 >!>       Ignore the obsolete bar2 in barold2
 >!>       
->!> Taking solution: 1
+>!> Taking solution: 2
 >!> For problem:     0
 >!> No problems so far
 >!> No problems so far

@@ -46,12 +46,15 @@
 >!>       unlock suse-release
 >!>       
 >!>    Solution:
+>!>       unlock all resolvables
+>!>       
+>!>    Solution:
 >!>       do not install SUSE LINUX
 >!>       do not install product:SUSE LINUX-1.noarch[sl10_packages]
 >!>    Solution:
 >!>       Ignore this requirement just here
 >!>       
->!> Taking solution: 2
+>!> Taking solution: 3
 >!> For problem:     0
 >!> No problems so far
 >!> No problems so far

@@ -14,7 +14,7 @@ barold2 @bar2 @bar2-devel
   <lock package="bar2-devel" channel="@system"/>
   <install channel="test" package="barold2"/>
   <reportproblems/>
-  <takesolution problem="0" solution="1"/>
+  <takesolution problem="0" solution="2"/>
   <reportproblems/>
 </trial>
 

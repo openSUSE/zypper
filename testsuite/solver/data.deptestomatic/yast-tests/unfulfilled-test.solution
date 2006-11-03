@@ -10,6 +10,9 @@
 >!>       unlock lsb
 >!>       
 >!>    Solution:
+>!>       unlock all resolvables
+>!>       
+>!>    Solution:
 >!>       do not install suseRegister
 >!>       do not install suseRegister-1.0-22.noarch[sles_packages]
 >!>    Solution:
