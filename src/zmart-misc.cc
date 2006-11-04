@@ -21,8 +21,13 @@ extern Settings gSettings;
 void cond_init_target () {
   static bool done = false;
   if (!done) {
+#ifdef LIBZYPP_1xx
+    cerr_v << "Initializing Target (old way)" << endl;
+    God->initTarget("/", true);
+#else
     cerr_v << "Initializing Target" << endl;
     God->initializeTarget("/");
+#endif
     done = true;
   }
 }
@@ -270,8 +275,12 @@ std::string calculate_token()
     token_stream << "[" << src.alias() << "| " << src.url() << src.timestamp() << "]";
     MIL << "Source: " << src.alias() << " from " << src.timestamp() << std::endl;  
   }
-  
+
+#ifdef LIBZYPP_1xx
+  token_stream << "[" << "target" << "| " << Date::now() << "]"; // too bad
+#else
   token_stream << "[" << "target" << "| " << God->target()->timestamp() << "]";
+#endif
   
   //static std::string digest(const std::string& name, std::istream& is
   token = Digest::digest("sha1", token_stream);

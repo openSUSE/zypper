@@ -84,23 +84,13 @@ void include_source_by_url( const Url &url )
   
 }
 
-/*
-static void print_source_list( const std::list<zypp::source::SourceInfo> &sources )
-{
-  for( std::list<zypp::source::SourceInfo>::const_iterator it = sources.begin() ;
-       it != sources.end() ; ++it )
-  {
-    SourceInfo source = *it;
-    cout << ( source.enabled() ? "[x]" : "[ ]" );
-    cout << ( source.autorefresh() ? "* " : "  " );
-    if ( source.alias() != source.url().asString() )
-      cout << source.alias() << " (" << source.url() << ")" << endl;
-    else
-      cout << source.url() << endl;
-  }
-}*/
+#ifdef LIBZYPP_1xx
+typedef zypp::SourceManager::SourceInfo SourceInfo;
+#else
+using zypp::source::SourceInfo;
+#endif
 
-static void print_source_list(const std::list<zypp::source::SourceInfo> &sources )
+static void print_source_list(const std::list<SourceInfo> &sources )
 {
   Table tbl;
   TableHeader th;
@@ -111,7 +101,7 @@ static void print_source_list(const std::list<zypp::source::SourceInfo> &sources
   tbl << th;
 
   int i = 1;
-  for( std::list<zypp::source::SourceInfo>::const_iterator it = sources.begin() ;
+  for( std::list<SourceInfo>::const_iterator it = sources.begin() ;
        it != sources.end() ; ++it, ++i )
   {
     SourceInfo source = *it;
@@ -122,18 +112,33 @@ static void print_source_list(const std::list<zypp::source::SourceInfo> &sources
     // this is probably the closest possible compatibility arrangement
     if (gSettings.is_rug_compatible)
     {
+#ifdef LIBZYPP_1xx
+      tr << "Active";
+#else
       tr << (source.enabled() ? "Active" : "Disabled");
+#endif
     }
     // zypper status (enabled, autorefresh)
     else
     {
+#ifdef LIBZYPP_1xx
+      tr << "Yes";
+      tr << (source.autorefresh ? "Yes" : "No");
+#else
       tr << (source.enabled() ? "Yes" : "No");
       tr << (source.autorefresh() ? "Yes" : "No");
+#endif
     }
 
+#ifdef LIBZYPP_1xx
+    tr << source.type;
+    tr << source.alias;
+    tr << source.url.asString();
+#else
     tr << source.type();
     tr << source.alias();
     tr << source.url().asString();
+#endif
     tbl << tr;
   }
   cout << tbl;
@@ -141,14 +146,17 @@ static void print_source_list(const std::list<zypp::source::SourceInfo> &sources
 
 void list_system_sources()
 {
-  zypp::storage::PersistentStorage store;
-  
-  std::list<zypp::source::SourceInfo> sources;
+  std::list<SourceInfo> sources;
   
   try
   {
+#ifdef LIBZYPP_1xx
+    sources = SourceManager::sourceManager()->knownSourceInfos ("/");
+#else
+    zypp::storage::PersistentStorage store;
     store.init( "/" );
     sources = store.storedSources();
+#endif
   }
   catch ( const Exception &e )
   {
@@ -438,8 +446,11 @@ void rename_source( const std::string& anystring, const std::string& newalias )
 
 void refresh_sources()
 {
+#ifdef LIBZYPP_1xx
+  cerr << "Sorry, not implemented yet for libzypp-1.x.x" << endl;
+#else
   zypp::storage::PersistentStorage store;
-  std::list<zypp::source::SourceInfo> sources;
+  std::list<SourceInfo> sources;
 
   try
   {
@@ -452,7 +463,7 @@ void refresh_sources()
     exit(-1); 
   }
 
-  for(std::list<zypp::source::SourceInfo>::const_iterator it = sources.begin();
+  for(std::list<SourceInfo>::const_iterator it = sources.begin();
        it != sources.end() ; ++it)
   {
     try
@@ -474,6 +485,7 @@ void refresh_sources()
   }
 
   cout << _("All sytem sources have been refreshed.") << endl;
+#endif
 }
 
 MediaWrapper::MediaWrapper (const string& filename_or_url) {

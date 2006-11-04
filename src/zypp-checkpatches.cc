@@ -83,6 +83,12 @@ namespace utils
 
 }
 
+#ifdef LIBZYPP_1xx
+typedef zypp::SourceManager::SourceInfo SourceInfo;
+#else
+using zypp::source::SourceInfo;
+#endif
+
 int main(int argc, char **argv)
 {
   const char *logfile = getenv("ZYPP_LOGFILE");
@@ -122,20 +128,33 @@ int main(int argc, char **argv)
   KeyRingCallbacks keyring_callbacks;
   DigestCallbacks digest_callbacks;
   
+#ifdef LIBZYPP_1xx
   // dont add rpms
+  God->initTarget("/", true);
+#else
   God->initializeTarget("/");
+#endif
   
   std::string token;
   stringstream token_stream;
   
+#ifdef LIBZYPP_1xx
+  token_stream << "[" << "target" << "| " << Date::now() << "]"; // too bad
+#else
   token_stream << "[" << "target" << "| " << God->target()->timestamp() << "]";
-  
-  std::list<source::SourceInfo> new_sources = manager->knownSourceInfos("/");
+#endif
+
+  std::list<SourceInfo> new_sources = manager->knownSourceInfos("/");
   MIL << "Found " << new_sources.size()  << " sources." << endl;
 
-  for ( std::list<source::SourceInfo>::iterator it = new_sources.begin(); it != new_sources.end(); ++it)
+  for ( std::list<SourceInfo>::iterator it = new_sources.begin(); it != new_sources.end(); ++it)
   {
+#ifdef LIBZYPP_1xx
+    Url url = it->url;
+#else
     Url url = it->url();
+#endif
+
     std::string scheme( url.getScheme());
 
     if ( (scheme == "cd" || scheme == "dvd") )
@@ -146,23 +165,27 @@ int main(int argc, char **argv)
     
     if ( ! it->enabled() )
     {
-      MIL << "Skipping disabled source: url:[" << it->url().asString() << "] product_dir:[" << it->path() << "] alias:[" << it->alias() << "] cache_dir:[" << it->cacheDir() << "] auto_refresh:[ " << it->autorefresh() << "]" << endl;
+      MIL << "Skipping disabled source: url:[" << url.asString() << "] product_dir:[" << it->path() << "] alias:[" << it->alias() << "] cache_dir:[" << it->cacheDir() << "] auto_refresh:[ " << it->autorefresh() << "]" << endl;
       continue;
     }
 
     // Note: Url(it->url).asString() to hide password in logs
-    MIL << "Creating source: url:[" << it->url().asString() << "] product_dir:[" << it->path() << "] alias:[" << it->alias() << "] cache_dir:[" << it->cacheDir() << "] auto_refresh:[ " << it->autorefresh() << "]" << endl;
+    MIL << "Creating source: url:[" << url.asString() << "] product_dir:[" << it->path() << "] alias:[" << it->alias() << "] cache_dir:[" << it->cacheDir() << "] auto_refresh:[ " << it->autorefresh() << "]" << endl;
     
     try
     {
-      Source_Ref src = SourceFactory().createFrom(it->type(), it->url(), it->path(), it->alias(), it->cacheDir(), false, it->autorefresh());
+      Source_Ref src = SourceFactory().createFrom(it->type(), url, it->path(), it->alias(), it->cacheDir(), false, it->autorefresh());
       src.refresh();
       token_stream << "[" << src.alias() << "| " << src.url() << src.timestamp() << "]";
     
       MIL << "Source: " << src.alias() << " from " << src.timestamp() << std::endl;
     
       // skip sources without patches sources for now
-      if ( src.hasResolvablesOfKind( ResTraits<zypp::Patch>::kind ) )
+      bool has_patches = true;
+#ifndef LIBZYPP_1xx
+      has_patches = src.hasResolvablesOfKind( ResTraits<zypp::Patch>::kind );
+#endif
+      if ( has_patches )
       {
         MIL << "Including source " << src.url() << std::endl;
         gData.sources.push_back(src);
