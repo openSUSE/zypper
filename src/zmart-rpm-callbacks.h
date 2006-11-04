@@ -67,12 +67,12 @@ struct ScanRpmDbReceive : public zypp::callback::ReceiveReport<zypp::target::rpm
     return true;
   }
 
-  virtual Action problem( zypp::target::rpm::ScanDBReport::Error error, const std::string& description )
+  virtual Action problem( zypp::target::rpm::ScanDBReport::Error error, cbstring description )
   {
     return zypp::target::rpm::ScanDBReport::problem( error, description );
   }
 
-  virtual void finish( Error error, const std::string& reason )
+  virtual void finish( Error error, cbstring reason )
   {
     display_done ();
     display_error (error, reason);
@@ -93,15 +93,18 @@ struct RemoveResolvableReportReceiver : public zypp::callback::ReceiveReport<zyp
     return true;
   }
 
-  virtual Action problem( zypp::Resolvable::constPtr resolvable, Error error, const std::string& description )
+  virtual Action problem( zypp::Resolvable::constPtr resolvable, Error error, cbstring description )
   {
     cerr << resolvable << endl;
     display_error (error, description);
     return (Action) read_action_ari ();
   }
 
-  virtual void finish( zypp::Resolvable::constPtr resolvable, Error error, const std::string& reason )
-  {}
+  virtual void finish( zypp::Resolvable::constPtr /*resolvable*/, Error error, cbstring reason )
+  {
+    display_done ();
+    display_error (error, reason);
+  }
 };
 
 ostream& operator << (ostream& stm, zypp::target::rpm::InstallResolvableReport::RpmLevel level) {
@@ -116,7 +119,7 @@ struct InstallResolvableReportReceiver : public zypp::callback::ReceiveReport<zy
 {
   zypp::Resolvable::constPtr _resolvable;
   
-  void display_step( zypp::Resolvable::constPtr resolvable, int value )
+  void display_step( zypp::Resolvable::constPtr /*resolvable*/, int value )
   {
     display_progress ("Installing " /* + to_string (resolvable) */,  value);
   }
@@ -133,7 +136,7 @@ struct InstallResolvableReportReceiver : public zypp::callback::ReceiveReport<zy
     return true;
   }
 
-  virtual Action problem( zypp::Resolvable::constPtr resolvable, Error error, const std::string& description, RpmLevel level )
+  virtual Action problem( zypp::Resolvable::constPtr resolvable, Error error, cbstring description, RpmLevel level )
   {
     cerr << resolvable << " " << description << std::endl;
     cerr << level;
@@ -145,7 +148,7 @@ struct InstallResolvableReportReceiver : public zypp::callback::ReceiveReport<zy
     return (Action) read_action_ari ();
   }
 
-  virtual void finish( zypp::Resolvable::constPtr resolvable, Error error, const std::string& reason, RpmLevel level )
+  virtual void finish( zypp::Resolvable::constPtr /*resolvable*/, Error error, cbstring reason, RpmLevel level )
   {
     display_done ();
     if (error != NO_ERROR) {

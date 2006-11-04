@@ -46,19 +46,33 @@ namespace zypp {
       {
         return readCallbackAnswer();
       }
-      virtual bool askUserToAcceptUnknownKey( const std::string &file, const std::string &keyid )
+#ifdef LIBZYPP_1xx
+      virtual bool askUserToAcceptUnknownKey( const std::string &/*file*/, const std::string &/*id*/, const std::string &/*keyname*/, const std::string &/*fingerprint*/ )
+#else
+      virtual bool askUserToAcceptUnknownKey( const std::string &/*file*/, const std::string &/*id*/ )
+#endif
       {
         return readCallbackAnswer();
       }
+#ifdef LIBZYPP_1xx
+      virtual bool askUserToTrustKey( const std::string &keyid, const std::string &keyname, const std::string &fingerprint)
+#else
       virtual bool askUserToTrustKey( const PublicKey &key )
+#endif
       {
         return readCallbackAnswer();
       }
+#ifndef LIBZYPP_1xx
       virtual bool askUserToImportKey( const PublicKey &key )
       {
         return readCallbackAnswer();
       }
+#endif
+#ifdef LIBZYPP_1xx
+      virtual bool askUserToAcceptVerificationFailed( const std::string &file, const std::string &keyid, const std::string &keyname, const std::string &fingerprint )
+#else
       virtual bool askUserToAcceptVerificationFailed( const std::string &file, const PublicKey &key )
+#endif
       {
         return readCallbackAnswer();
       }

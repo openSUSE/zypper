@@ -32,9 +32,9 @@ namespace ZmartRecipients
 
   struct MediaChangeReportReceiver : public zypp::callback::ReceiveReport<MediaChangeReport>
   {
-    virtual MediaChangeReport::Action requestMedia( zypp::Source_Ref source, unsigned mediumNr, MediaChangeReport::Error error, const std::string &description )
+    virtual MediaChangeReport::Action requestMedia( zypp::Source_Ref source, unsigned mediumNr, MediaChangeReport::Error error, cbstring description )
     { 
-      cout << "Please insert media [" << description << "] # " << mediumNr << ". Continue [y/n]: " << endl;
+      cout << "Please insert media [" << description << "] # " << mediumNr << ". Retry [y/n]: " << endl;
       if (readBoolAnswer())
         return MediaChangeReport::RETRY; 
       else
@@ -46,17 +46,30 @@ namespace ZmartRecipients
     // progress for downloading a file
   struct DownloadProgressReportReceiver : public zypp::callback::ReceiveReport<zypp::media::DownloadProgressReport>
   {
-    virtual void start( const zypp::Url &file, zypp::Pathname localfile )
-    {}
+    virtual void start( cbUrl file, zypp::Pathname localfile )
+    {
+      cerr_v << "Downloading: "
+	     << file << " to " << localfile << std::endl;
+    }
 
-    virtual bool progress(int value, const zypp::Url &file)
-    { return true; }
+    virtual bool progress(int value, cbUrl /*file*/)
+    {
+      display_progress ("Downloading", value);
+      return true;
+    }
 
-    virtual DownloadProgressReport::Action problem( const zypp::Url &file, DownloadProgressReport::Error error, const std::string &description )
-    { return DownloadProgressReport::ABORT; }
+    virtual DownloadProgressReport::Action problem( cbUrl /*file*/, DownloadProgressReport::Error error, cbstring description )
+    {
+      display_done ();
+      display_error (error, description);
+      return DownloadProgressReport::ABORT;
+    }
 
-    virtual void finish( const zypp::Url &file, Error error, const std::string &konreason )
-    {}
+    virtual void finish( cbUrl /*file*/, Error error, cbstring konreason )
+    {
+      display_done ();
+      display_error (error, konreason);
+    }
   };
   
     ///////////////////////////////////////////////////////////////////
@@ -83,3 +96,7 @@ class MediaCallbacks {
 };
 
 #endif 
+// Local Variables:
+// mode: c++
+// c-basic-offset: 2
+// End:

@@ -37,6 +37,7 @@ namespace zypp {
         return readBoolAnswer();
       }
       
+#ifndef LIBZYPP_1xx
       virtual bool askUserToImportKey( const PublicKey &key )
       {
         if ( geteuid() != 0 )
@@ -45,20 +46,38 @@ namespace zypp {
         cout << CLEARLN << "Import key " << key.id() << " in trusted keyring? [y/n]: " << flush;
         return readBoolAnswer();
       } 
-      
+#endif
+
+#ifdef LIBZYPP_1xx
+      virtual bool askUserToAcceptUnknownKey( const std::string &file, const std::string &id, const std::string &/*keyname*/, const std::string &/*fingerprint*/ )
+#else
       virtual bool askUserToAcceptUnknownKey( const std::string &file, const std::string &id )
+#endif
       {
         cout << CLEARLN << file << " is signed with an unknown key id: " << id << ", continue? [y/n]: " << flush;
         return readBoolAnswer();
       }
-      virtual bool askUserToTrustKey( const PublicKey &key )
-      {
-        cout  << CLEARLN << "Do you want to trust key id " << key.id() << " " << key.name() << " fingerprint:" << key.fingerprint() << " ? [y/n]: "  << flush;
+
+#ifdef LIBZYPP_1xx
+      virtual bool askUserToTrustKey( const std::string &keyid, const std::string &keyname, const std::string &fingerprint) {
+#else
+      virtual bool askUserToTrustKey( const PublicKey &key ) {
+	const std::string& keyid = key.id(), keyname = key.name(),
+	  fingerprint = key.fingerprint();
+#endif
+        cout  << CLEARLN << "Do you want to trust key id " << keyid << " " << keyname << " fingerprint:" << fingerprint << " ? [y/n]: "  << flush;
         return readBoolAnswer();
       }
-      virtual bool askUserToAcceptVerificationFailed( const std::string &file,const PublicKey &key )
-      {
-        cout << file << "Signature verification for " << file << " with public key id " << key.id() << " " << key.name() << " fingerprint:" << key.fingerprint() << " failed, THIS IS RISKY!. continue? [y/n]: " << endl;
+
+#ifdef LIBZYPP_1xx
+      virtual bool askUserToAcceptVerificationFailed( const std::string &file, const std::string &keyid, const std::string &keyname, const std::string &fingerprint ) {
+#else
+      virtual bool askUserToAcceptVerificationFailed( const std::string &file,const PublicKey &key ) {
+	const std::string& keyid = key.id(), keyname = key.name(),
+	  fingerprint = key.fingerprint();
+#endif
+        cout << file << "Signature verification for " << file
+	     << " with public key id " << keyid << " " << keyname << " fingerprint:" << fingerprint << " failed, THIS IS RISKY!. continue? [y/n]: " << endl;
         return readBoolAnswer();
       }
     };
@@ -68,14 +87,21 @@ namespace zypp {
     {
       virtual bool askUserToAcceptNoDigest( const zypp::Pathname &file )
       {
+	cout << CLEARLN << "No digest for " << file
+	     << ", continue [y/n]" << flush;
         return readBoolAnswer();
       }
       virtual bool askUserToAccepUnknownDigest( const Pathname &file, const std::string &name )
       {
+	cout << CLEARLN << "Unknown digest " << name << " for " << file
+	     << ", continue [y/n]" << flush;
         return readBoolAnswer();
       }
       virtual bool askUserToAcceptWrongDigest( const Pathname &file, const std::string &requested, const std::string &found )
       {
+	cout << CLEARLN << "Digest verification failed for " << file
+	     << ", expected " << requested << " found " << found
+	     << ", continue [y/n]" << flush;
         return readBoolAnswer();
       }
     };

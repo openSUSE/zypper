@@ -1,7 +1,9 @@
 -------------------------------------------------------------------
-Sat Nov  4 10:28:39 CET 2006 - mvidner@suse.cz
+Sat Nov  4 13:07:50 CET 2006 - mvidner@suse.cz
 
 - Show patch messages.
+- Callbacks: added compatibility defines for libzypp 1.x.x,
+  fixed more warnings about unused variables.
 
 -------------------------------------------------------------------
 Fri Nov  3 17:48:09 CET 2006 - mvidner@suse.cz
