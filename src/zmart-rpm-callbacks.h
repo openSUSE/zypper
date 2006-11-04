@@ -32,7 +32,9 @@ struct MessageResolvableReportReceiver : public zypp::callback::ReceiveReport<zy
 {
   virtual void show( zypp::Message::constPtr message )
   {
-      std::cerr << message;
+    cerr_v << message << endl; // [message]important-msg-1.0-1
+    std::cerr << message->text() << endl;
+    // TODO in interactive mode, wait for ENTER?
   }
 };
 
@@ -57,7 +59,11 @@ struct ScanRpmDbReceive : public zypp::callback::ReceiveReport<zypp::target::rpm
 
   virtual bool progress(int value)
   {
-    display_progress ("RPM database", value);
+    // this is called too often. relax a bit.
+    static int last = -1;
+    if (last != value)
+      display_progress ("RPM database", value);
+    last = value;
     return true;
   }
 

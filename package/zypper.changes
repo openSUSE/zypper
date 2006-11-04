@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Sat Nov  4 10:28:39 CET 2006 - mvidner@suse.cz
+
+- Show patch messages.
+
+-------------------------------------------------------------------
 Fri Nov  3 17:48:09 CET 2006 - mvidner@suse.cz
 
 - log to /var/log/YaST2/zypper.log (for save_y2logs too).
