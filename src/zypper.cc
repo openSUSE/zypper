@@ -3,6 +3,9 @@
 
 // (initially based on dmacvicar's zmart)
 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -123,11 +126,6 @@ string process_globals(int argc, char **argv)
     "\t--rug-compatible, -r\tTurn on rug compatibility\n"
     ;
 
-  if (gopts.count("version")) {
-    cerr << "zypper 0.1" << endl;
-    return 0;
-  }
-
   if (gopts.count("verbose")) {
     gSettings.verbose += gopts["verbose"].size();
     cerr << "verbosity " << gSettings.verbose << endl;
@@ -167,6 +165,13 @@ string process_globals(int argc, char **argv)
   if (command.empty()) {
     if (help) {
       cerr << help_global_options << help_commands;
+    }
+    else if (gopts.count("version")) {
+      cerr << PACKAGE_STRING;
+#ifdef LIBZYPP_1xx
+      cerr << " (libzypp-1.x.x)";
+#endif
+      cerr << endl;
     }
     else {
       cerr << "Try -h for help" << endl;

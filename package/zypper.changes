@@ -1,9 +1,10 @@
 -------------------------------------------------------------------
-Sat Nov  4 15:15:07 CET 2006 - mvidner@suse.cz
+Sat Nov  4 15:33:46 CET 2006 - mvidner@suse.cz
 
 - Ported zypper (except zypp-checkpatches) to libzypp-1.x.x.
 - Show patch messages.
 - Callbacks: fixed more warnings about unused variables.
+- Fixed zypper --version.
 
 -------------------------------------------------------------------
 Fri Nov  3 17:48:09 CET 2006 - mvidner@suse.cz
