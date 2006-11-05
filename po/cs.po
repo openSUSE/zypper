@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper 0.5.0\n"
 "Report-Msgid-Bugs-To: translation@suse.de\n"
-"POT-Creation-Date: 2006-11-05 14:19+0100\n"
+"POT-Creation-Date: 2006-11-05 23:06+0100\n"
 "PO-Revision-Date: 2006-10-25 09:22+0200\n"
 "Last-Translator: Martin Vidner <mvidner@suse.cz>\n"
 "Language-Team: Czech <translation-team-cs@lists.sourceforge.net>\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
-#: src/zypper.cc:74
+#: src/zypper.cc:77
 msgid ""
 "  Commands:\n"
 "\thelp\t\t\tHelp\n"
@@ -37,7 +37,7 @@ msgid ""
 "\tpatch-info\t\tShow full info for patches\n"
 msgstr ""
 
-#: src/zypper.cc:251
+#: src/zypper.cc:256
 msgid ""
 "zypper refresh\n"
 "\n"

@@ -22,6 +22,7 @@ package-local:	dist-bzip2 @PACKAGE@.spec
 		echo "Error: $(distdir).tar.bz2 is empty" ; \
 		exit 1 ; \
 	fi
+	mkdir -p package
 	rm -f package/*.tar.bz2
 	rm -f package/*~
 	rm -f package/*.bak

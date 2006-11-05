@@ -22,7 +22,7 @@ void remove_source( const std::string& anystring );
 void rename_source( const std::string& anystring, const std::string& newalias );
 void list_system_sources();
 void refresh_sources();
-
+void warn_if_zmd ();
 
 //! download a copy of a remote file or just return the argument
 // The file is deleted when this class is destroyed

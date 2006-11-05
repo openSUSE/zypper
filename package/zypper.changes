@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Sun Nov  5 23:57:45 CET 2006 - mvidner@suse.cz
+
+- Warn that we do not sync with ZMD (#217028).
+
+-------------------------------------------------------------------
 Sun Nov  5 22:37:08 CET 2006 - mvidner@suse.cz
 
 - Implemented single package mode for update and list-updates,

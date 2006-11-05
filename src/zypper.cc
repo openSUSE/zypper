@@ -457,6 +457,8 @@ int one_command(const string& command, int argc, char **argv)
     if (arguments.size() > 1)
       alias = arguments[1];
 
+    warn_if_zmd ();
+
     // load gpg keys
     cond_init_target ();
 
@@ -484,6 +486,7 @@ int one_command(const string& command, int argc, char **argv)
       return !help;
     }
 
+    warn_if_zmd ();
     try {
       // also stores it
       remove_source(arguments[0]);
@@ -510,6 +513,7 @@ int one_command(const string& command, int argc, char **argv)
     }
     
     cond_init_target ();
+    warn_if_zmd ();
     try {
       // also stores it
       rename_source (arguments[0], arguments[1]);

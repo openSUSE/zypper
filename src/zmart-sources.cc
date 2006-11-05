@@ -518,6 +518,15 @@ MediaWrapper::~MediaWrapper () {
     _mm.close (_id);
 }
 
+// #217028
+void warn_if_zmd () {
+  if (system ("pgrep -lx zmd") == 0) { // list name, exact match
+    cerr << "ZENworks Management Daemon is running." << endl
+	 << "WARNING: this command will not synchronize changes." << endl
+	 << "Use rug or yast2 for that." << endl;
+  }
+}
+
 // Local Variables:
 // c-basic-offset: 2
 // End:
