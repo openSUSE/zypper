@@ -5,6 +5,9 @@ bin_PROGRAMS = zypper
 sbin_PROGRAMS = zypp-checkpatches zypp-checkpatches-wrapper
 noinst_PROGRAMS = zmart
 
+logrotatedir = $(sysconfdir)/logrotate.d
+logrotate_DATA = zypper.lr
+
 ## ##################################################
 
 AM_CPPFLAGS = $(ZYPP_CFLAGS)

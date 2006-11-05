@@ -1,8 +1,8 @@
 -------------------------------------------------------------------
-Sun Nov  5 19:18:16 CET 2006 - mvidner@suse.cz
+Sun Nov  5 19:35:42 CET 2006 - mvidner@suse.cz
 
+- Added logrotate support (#216911).
 - Added callbacks for script execution.
-
 
 -------------------------------------------------------------------
 Sat Nov  4 15:33:46 CET 2006 - mvidner@suse.cz

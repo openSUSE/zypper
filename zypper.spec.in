@@ -46,7 +46,7 @@ autoreconf --force --install --symlink --verbose
 %{?suse_update_config:%{suse_update_config -f}}
 CFLAGS="$RPM_OPT_FLAGS" \
 CXXFLAGS="$RPM_OPT_FLAGS" \
-./configure --prefix=%{prefix} --libdir=%{_libdir} --mandir=%{_mandir} --disable-static
+./configure --prefix=%{prefix} --libdir=%{_libdir} --mandir=%{_mandir} --sysconfdir=%{_sysconfdir} --disable-static
 make %{?jobs:-j %jobs}
 #make check
 
@@ -69,6 +69,7 @@ make install DESTDIR=$RPM_BUILD_ROOT
 
 %files -f zypper.lang
 %defattr(-,root,root)
+%{_sysconfdir}/logrotate.d/zypper.lr
 %{_bindir}/zypper
 %{_sbindir}/zypp-checkpatches
 %verify(not mode) %attr (755,root,root) %{_sbindir}/zypp-checkpatches-wrapper
