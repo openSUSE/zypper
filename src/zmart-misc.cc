@@ -536,7 +536,7 @@ void list_updates( const ResObject::Kind &kind )
 	 << res->arch ().asString ();
       tbl << tr;
     }
-    tbl.sort (1); 		// Name
+    tbl.sort (gSettings.is_rug_compatible? 3: 2); // Name
     cout << tbl;
   }
 }
