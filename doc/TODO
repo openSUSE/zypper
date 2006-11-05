@@ -1,2 +1,25 @@
-- zypper pattern-info
+TODO
+
+script progress
+? does the output contain newline??
+
+Patches
+
+- respect license-to-confirm (test on kernel patch)
+ (svn up ncurses)
+- reboot-needed: ?
+- cron updater:
+-- wrapper script for restart-packager
 - zypper patch-search (for rug compatibility)
+
+Packages
+
+- update: 
+  update -t package --mode=simple
+  = for all packages, zypp::solver::detail::Helper::findUpdateItem
+- upgrade
+  = Resolver::doUpgrade
+
+Patterns
+
+- zypper pattern-info
