@@ -38,8 +38,50 @@ struct MessageResolvableReportReceiver : public zypp::callback::ReceiveReport<zy
   }
 };
 
-///////////////////////////////////////////////////////////////////
-// 
+#ifndef LIBZYPP_1xx
+struct ScriptResolvableReportReceiver : public zypp::callback::ReceiveReport<zypp:target::ScriptResolvableReport>
+{
+  static ostream& operator<< (ostream& stm, Task t) {
+    return stm << (task==DO? "DO": "UNDO");
+  }
+
+  /** task: Whether executing do_script on install or undo_script on delete. */
+  virtual void start( const Resolvable::constPtr & script_r,
+		      const Pathname & path_r,
+		      Task task) {
+    cerr << "Running: " << script_r
+	 << " (" << task << ", " << path_r << ")" << endl;
+  }
+  /** Progress provides the script output. If the script is quiet ,
+   * from time to time still-alive pings are sent to the ui. (Notify=PING)
+   * Returning \c FALSE
+   * aborts script execution.
+   */
+  virtual bool progress( Notify kind, const std::string &output ) {
+    if (kind == PING) {
+      static AliveCursor cursor;
+      cerr_v << '\r' << cursor++ << flush;
+    }
+    else {
+      cerr << output << flush;
+    }
+    // hmm, how to signal abort in zypper? catch sigint? (document it)
+    return true;
+  }
+  /** Report error. */
+  virtual void problem( const std::string & description ) {
+    display_done ();
+    cerr << description << endl;
+  }
+
+  /** Report success. */
+  virtual void finish() {
+    display_done ();
+  }
+
+};
+#endif
+
 ///////////////////////////////////////////////////////////////////
 struct ScanRpmDbReceive : public zypp::callback::ReceiveReport<zypp::target::rpm::ScanDBReport>
 {
@@ -79,6 +121,7 @@ struct ScanRpmDbReceive : public zypp::callback::ReceiveReport<zypp::target::rpm
   }
 };
 
+///////////////////////////////////////////////////////////////////
  // progress for removing a resolvable
 struct RemoveResolvableReportReceiver : public zypp::callback::ReceiveReport<zypp::target::rpm::RemoveResolvableReport>
 {
@@ -114,6 +157,7 @@ ostream& operator << (ostream& stm, zypp::target::rpm::InstallResolvableReport::
   return stm << level_s[level];
 }
 
+///////////////////////////////////////////////////////////////////
 // progress for installing a resolvable
 struct InstallResolvableReportReceiver : public zypp::callback::ReceiveReport<zypp::target::rpm::InstallResolvableReport>
 {
@@ -167,6 +211,9 @@ class RpmCallbacks {
 
   private:
     ZmartRecipients::MessageResolvableReportReceiver _messageReceiver;
+#ifndef LIBZYPP_1xx
+    ZmartRecipients::ScriptResolvableReportReceiver _scriptReceiver;
+#endif
     ZmartRecipients::ScanRpmDbReceive _readReceiver;
     ZmartRecipients::RemoveResolvableReportReceiver _installReceiver;
     ZmartRecipients::InstallResolvableReportReceiver _removeReceiver;
@@ -179,6 +226,9 @@ class RpmCallbacks {
 	, _step_counter( 0 )
     {
       _messageReceiver.connect();
+#ifndef LIBZYPP_1xx
+      _scriptReceiver.connect();
+#endif
       _installReceiver.connect();
       _removeReceiver.connect();
       _readReceiver.connect();
@@ -187,6 +237,9 @@ class RpmCallbacks {
     ~RpmCallbacks()
     {
       _messageReceiver.disconnect();
+#ifndef LIBZYPP_1xx
+      _scriptReceiver.disconnect();
+#endif
       _installReceiver.disconnect();
       _removeReceiver.disconnect();
       _readReceiver.connect();

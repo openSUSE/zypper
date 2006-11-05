@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Sun Nov  5 19:18:16 CET 2006 - mvidner@suse.cz
+
+- Added callbacks for script execution.
+
+
+-------------------------------------------------------------------
 Sat Nov  4 15:33:46 CET 2006 - mvidner@suse.cz
 
 - Ported zypper (except zypp-checkpatches) to libzypp-1.x.x.
