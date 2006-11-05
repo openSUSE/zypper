@@ -1,8 +1,11 @@
 -------------------------------------------------------------------
-Sun Nov  5 19:35:42 CET 2006 - mvidner@suse.cz
+Sun Nov  5 22:37:08 CET 2006 - mvidner@suse.cz
 
+- Implemented single package mode for update and list-updates,
+  made it the default in rug-compatible mode.
 - Added logrotate support (#216911).
 - Added callbacks for script execution.
+- 0.6.0
 
 -------------------------------------------------------------------
 Sat Nov  4 15:33:46 CET 2006 - mvidner@suse.cz

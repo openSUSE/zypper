@@ -6,6 +6,7 @@
 
 #include <zypp/Patch.h>
 #include <zypp/base/Algorithm.h>
+#include <zypp/solver/detail/Helper.h>
 
 using namespace zypp::detail;
 
@@ -432,36 +433,29 @@ void show_patches()
   cout << tbl;
 }
 
-void list_updates( const ResObject::Kind &kind )
+void list_patch_updates ()
 {
-  bool k_is_patch = kind == ResTraits<Patch>::kind;
-
   Table tbl;
   Table pm_tbl;	// only those that affect packagemanager: they have priority
   TableHeader th;
   unsigned cols;
-  if (k_is_patch) {
-    th << "Catalog" << "Name" << "Version" << "Category" << "Status";
-    cols = 5;
-  }
-  else {
-    th << "S" << "Catalog" << "" /*Bundle*/ << "Name" << "Version" << "Arch";
-    cols = 6;
-  }
+
+  th << "Catalog" << "Name" << "Version" << "Category" << "Status";
+  cols = 5;
   tbl << th;
   pm_tbl << th;
 
+  const zypp::ResPool& pool = God->pool();
   ResPool::byKind_iterator
-    it = God->pool().byKindBegin (kind),
-    e  = God->pool().byKindEnd (kind);
+    it = pool.byKindBegin<Patch> (),
+    e  = pool.byKindEnd<Patch> ();
   for (; it != e; ++it )
   {
     ResObject::constPtr res = it->resolvable();
+    if ( it->status().isNeeded() ) {
+      Patch::constPtr patch = asKind<Patch>(res);
 
-    if (k_is_patch) {
-      if ( it->status().isNeeded() ) {
-	Patch::constPtr patch = asKind<Patch>(res);
-
+      if (true) {
 	TableRow tr (cols);
 	tr << patch->source ().alias ();
 	tr << res->name () << res->edition ().asString();
@@ -471,18 +465,6 @@ void list_updates( const ResObject::Kind &kind )
 	tbl << tr;
 	if (patch->affects_pkg_manager ())
 	  pm_tbl << tr;
-      }
-    }
-    else {
-      // TODO: isNeeded only applies to patches (aggregates?)
-      // determine what packages (or non-patches, non-aggregates?) to update
-      if (false) {
-	TableRow tr (cols);
-	tr << "?" << res->source ().alias () << "";
-	tr << res->name ()
-	   << res->edition ().asString ()
-	   << res->arch ().asString ();
-	tbl << tr;
       }
     }
   }
@@ -496,6 +478,69 @@ void list_updates( const ResObject::Kind &kind )
   cout << tbl;
 }
 
+typedef set<PoolItem_Ref> Candidates;
+
+void find_updates( const ResObject::Kind &kind, Candidates &candidates )
+{
+  const zypp::ResPool& pool = God->pool();
+  ResPool::byKind_iterator
+    it = pool.byKindBegin (kind),
+    e  = pool.byKindEnd (kind);
+  cerr_vv << "Finding update candidates" << endl;
+  for (; it != e; ++it)
+  {
+    if (it->status().isUninstalled())
+      continue;
+    // (actually similar to ProvideProcess?)
+    PoolItem_Ref candidate = solver::detail::Helper::findUpdateItem (pool, *it);
+    if (!candidate.resolvable())
+      continue;
+
+    cerr_vv << "item " << *it << endl;
+    cerr_vv << "cand " << candidate << endl;
+    candidates.insert (candidate);
+  }
+}
+
+void list_updates( const ResObject::Kind &kind )
+{
+  bool k_is_patch = kind == ResTraits<Patch>::kind;
+  if (k_is_patch)
+    list_patch_updates ();
+  else {
+    Table tbl;
+    TableHeader th;
+    unsigned cols = 5;
+    th << "S" << "Catalog";
+    if (gSettings.is_rug_compatible) {
+      th << "Bundle";
+      ++cols;
+    }
+    th << "Name" << "Version" << "Arch";
+    tbl << th;
+
+    Candidates candidates;
+    find_updates (kind, candidates);
+
+    Candidates::iterator cb = candidates.begin (), ce = candidates.end (), ci;
+    for (ci = cb; ci != ce; ++ci) {
+//      ResStatus& candstat = ci->status();
+//      candstat.setToBeInstalled (ResStatus::USER);
+      ResObject::constPtr res = ci->resolvable();
+      TableRow tr (cols);
+      tr << "v" << res->source ().alias ();
+      if (gSettings.is_rug_compatible)
+	tr << "";		// Bundle
+      tr << res->name ()
+	 << res->edition ().asString ()
+	 << res->arch ().asString ();
+      tbl << tr;
+    }
+    tbl.sort (1); 		// Name
+    cout << tbl;
+  }
+}
+
 // may be useful as a functor
 bool mark_item_install (const PoolItem& pi) {
   bool result = pi.status().setToBeInstalled( zypp::ResStatus::USER );
@@ -505,19 +550,16 @@ bool mark_item_install (const PoolItem& pi) {
   return result;
 }
 
-void mark_updates( const ResObject::Kind &kind )
+void mark_patch_updates ()
 {
-  bool k_is_patch = kind == ResTraits<Patch>::kind;
-
-
-  if (k_is_patch) {
+  if (true) {
     // search twice: if there are none with affects_pkg_manager, retry on all
     bool nothing_found = true;
     for (int attempt = 0;
 	 nothing_found && attempt < 2; ++attempt) {
       ResPool::byKind_iterator
-	it = God->pool().byKindBegin (kind),
-	e  = God->pool().byKindEnd (kind);
+	it = God->pool().byKindBegin<Patch> (),
+	e  = God->pool().byKindEnd<Patch> ();
       for (; it != e; ++it )
       {
 	ResObject::constPtr res = it->resolvable();
@@ -532,12 +574,19 @@ void mark_updates( const ResObject::Kind &kind )
       }
     }
   }
+}
+
+void mark_updates( const ResObject::Kind &kind )
+{
+  bool k_is_patch = kind == ResTraits<Patch>::kind;
+
+  if (k_is_patch) {
+    mark_patch_updates ();
+  }
   else {
-    // TODO: isNeeded only applies to patches (aggregates?)
-    // determine what packages (or non-patches, non-aggregates?) to update
-    // something like ProvideProcess
-    if (false) {
-    }
+    Candidates candidates;
+    find_updates (kind, candidates);
+    invokeOnEach (candidates.begin(), candidates.end(), mark_item_install);
   }
 }
 

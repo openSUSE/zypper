@@ -70,6 +70,9 @@ List available updates.
 \fI\-t, --type\fR
 Type of resolvable (default: patch)
 
+See also the NOTE at
+.BR update .
+
 .TP
 .B remove (rm) [name]..
 Remove resolvables.
@@ -91,9 +94,10 @@ Type of resolvable (default: patch)
 Don't require user confirmation.
 
 .B NOTE:
-Update currently only works on patches! That is, it will only update a
-package if there is a patch description for it. It will not update if
-there is simply a package with a higher version. But coming soon.
+Zypper prefers to update only those packages for which a patch
+description exists, like on the SUSE update servers. To operate on all
+packages for which there is a better version instead, select \fI--type
+package\fR which is also the default in rug compatibility mode.
 
 .TP
 \fBsearch\fR (\fBse\fR) [\fIoptions\fR] [\fBquerystring\fR] ...

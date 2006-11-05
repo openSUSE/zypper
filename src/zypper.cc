@@ -265,7 +265,7 @@ int one_command(const string& command, int argc, char **argv)
     };
     specific_options = remove_options;
     specific_help = "  Command options:\n"
-      "\t--type,-t\t\tType of resolvable (default: patch)\n"
+      "\t--type,-t\t\tType of resolvable (default: patch!)\n"
       ;
   }
   else if (command == "update" || command == "up") {
@@ -276,7 +276,7 @@ int one_command(const string& command, int argc, char **argv)
     };
     specific_options = remove_options;
     specific_help = "  Command options:\n"
-      "\t--type,-t\t\tType of resolvable (default: patch)\n"
+      "\t--type,-t\t\tType of resolvable (default: patch!)\n"
       "\t--no-confirm,-y\tDon't require user confirmation\n"
       ;
   }
@@ -707,7 +707,8 @@ int one_command(const string& command, int argc, char **argv)
       return !help;
     }
 
-    string skind = copts.count("type")?  copts["type"].front() : "patch";
+    string skind = copts.count("type")?  copts["type"].front() :
+      gSettings.is_rug_compatible? "package" : "patch";
     kind = string_to_kind (skind);
     if (kind == ResObject::Kind ()) {
 	cerr << "Unknown resolvable type " << skind << endl;
@@ -734,7 +735,8 @@ int one_command(const string& command, int argc, char **argv)
       return !help;
     }
 
-    string skind = copts.count("type")?  copts["type"].front() : "patch";
+    string skind = copts.count("type")?  copts["type"].front() :
+      gSettings.is_rug_compatible? "package" : "patch";
     kind = string_to_kind (skind);
     if (kind == ResObject::Kind ()) {
 	cerr << "Unknown resolvable type " << skind << endl;

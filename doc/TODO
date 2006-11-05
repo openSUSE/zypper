@@ -1,7 +1,10 @@
 TODO
 
-script progress
-? does the output contain newline??
+General
+
+- script progress: does the output contain newline??
+- installation and deletion notifications
+- --dry-run (use ZYppCommitPolicy.h)
 
 Patches
 
@@ -14,9 +17,6 @@ Patches
 
 Packages
 
-- update: 
-  update -t package --mode=simple
-  = for all packages, zypp::solver::detail::Helper::findUpdateItem
 - upgrade
   = Resolver::doUpgrade
 
