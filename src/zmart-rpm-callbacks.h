@@ -19,6 +19,7 @@
 //#include <zypp/target/rpm/RpmCallbacks.h>
 
 #include "zypper-callbacks.h"
+#include "AliveCursor.h"
 
 using namespace std;
 
@@ -39,15 +40,16 @@ struct MessageResolvableReportReceiver : public zypp::callback::ReceiveReport<zy
 };
 
 #ifndef LIBZYPP_1xx
-struct ScriptResolvableReportReceiver : public zypp::callback::ReceiveReport<zypp:target::ScriptResolvableReport>
+ostream& operator<< (ostream& stm, zypp::target::ScriptResolvableReport::Task task) {
+  return stm << (task==zypp::target::ScriptResolvableReport::DO? "DO": "UNDO");
+}
+
+struct ScriptResolvableReportReceiver : public zypp::callback::ReceiveReport<zypp::target::ScriptResolvableReport>
 {
-  static ostream& operator<< (ostream& stm, Task t) {
-    return stm << (task==DO? "DO": "UNDO");
-  }
 
   /** task: Whether executing do_script on install or undo_script on delete. */
-  virtual void start( const Resolvable::constPtr & script_r,
-		      const Pathname & path_r,
+  virtual void start( const zypp::Resolvable::constPtr & script_r,
+		      const zypp::Pathname & path_r,
 		      Task task) {
     cerr << "Running: " << script_r
 	 << " (" << task << ", " << path_r << ")" << endl;
