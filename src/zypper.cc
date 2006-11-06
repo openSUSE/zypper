@@ -402,6 +402,9 @@ int one_command(const string& command, int argc, char **argv)
     return 1;
   }
 
+  ResObject::Kind kind;
+
+
   // --------------------------( service list )-------------------------------
   
   if (command == "service-list" || command == "sl")
@@ -418,7 +421,7 @@ int one_command(const string& command, int argc, char **argv)
 
   // --------------------------( service add )--------------------------------
   
-  if (command == "service-add" || command == "sa")
+  else if (command == "service-add" || command == "sa")
   {
     if (copts.count("disabled")) {
       cerr_v << "FAKE Disabled" << endl;
@@ -477,7 +480,7 @@ int one_command(const string& command, int argc, char **argv)
 
   // --------------------------( service delete )-----------------------------
 
-  if (command == "service-delete" || command == "sd")
+  else if (command == "service-delete" || command == "sd")
   {
     if (help || arguments.size() < 1) {
       cerr << "service-delete [options] <URI|alias>\n"
@@ -503,7 +506,7 @@ int one_command(const string& command, int argc, char **argv)
 
   // --------------------------( service rename )-----------------------------
 
-  if (command == "service-rename" || command == "sr")
+  else if (command == "service-rename" || command == "sr")
   {
     if (help || arguments.size() < 2) {
       cerr << "service-rename [options] <URI|alias> <new-alias>\n"
@@ -529,7 +532,7 @@ int one_command(const string& command, int argc, char **argv)
   
   // --------------------------( refresh )------------------------------------
 
-  if (command == "refresh" || command == "ref") {
+  else if (command == "refresh" || command == "ref") {
     if (help || copts.count("help")) {
       cerr << specific_help;
       return !help;
@@ -538,39 +541,38 @@ int one_command(const string& command, int argc, char **argv)
     refresh_sources();
   }
 
-
-  ResObject::Kind kind;
-
   // --------------------------( remove/install )-----------------------------
-  
-  if (command == "install" || command == "in") {
-    if (help || arguments.size() < 1) {
-      cerr << "install [options] name...\n"
-	   << specific_help
-	;
-      return !help;
-    }
-      
-    gData.packages_to_install = arguments;
-  }
-  if (command == "remove" || command == "rm") {
-    if (help || arguments.size() < 1) {
-      cerr << "remove [options] name...\n"
-	   << specific_help
-	;
-      return !help;
-    }
 
-    gData.packages_to_uninstall = arguments;
-  }
-
-  if (command == "install" || command == "in" ||
+  else if (command == "install" || command == "in" ||
       command == "remove" || command == "rm") {
+
+    if (command == "install" || command == "in") {
+      if (help || arguments.size() < 1) {
+        cerr << "install [options] name...\n"
+        << specific_help
+        ;
+        return !help;
+      }
+
+      gData.packages_to_install = arguments;
+    }
+
+    if (command == "remove" || command == "rm") {
+      if (help || arguments.size() < 1) {
+        cerr << "remove [options] name...\n"
+        << specific_help
+        ;
+        return !help;
+      }
+
+      gData.packages_to_uninstall = arguments;
+    }
+
     string skind = copts.count("type")?  copts["type"].front() : "package";
     kind = string_to_kind (skind);
     if (kind == ResObject::Kind ()) {
-	cerr << "Unknown resolvable type " << skind << endl;
-	return 1;
+      cerr << "Unknown resolvable type " << skind << endl;
+      return 1;
     }
 
     cond_init_system_sources ();
@@ -605,7 +607,7 @@ int one_command(const string& command, int argc, char **argv)
 
   // TODO -c, --catalog option
 
-  if (command == "search" || command == "se") {
+  else if (command == "search" || command == "se") {
     ZyppSearchOptions options;
 
     if (help || copts.count("help")) {
@@ -655,7 +657,7 @@ int one_command(const string& command, int argc, char **argv)
   // --------------------------( patch check )--------------------------------
 
   // TODO: rug summary
-  if (command == "patch-check" || command == "pchk") {
+  else if (command == "patch-check" || command == "pchk") {
     if (help) {
       cerr << "patch-check\n"
 	   << specific_help
@@ -684,7 +686,7 @@ int one_command(const string& command, int argc, char **argv)
 
   // --------------------------( patches )------------------------------------
 
-  if (command == "patches" || command == "pch") {
+  else if (command == "patches" || command == "pch") {
     if (help) {
       cerr << "patches\n"
 	   << specific_help
@@ -702,7 +704,7 @@ int one_command(const string& command, int argc, char **argv)
 
   // --------------------------( list updates )-------------------------------
 
-  if (command == "list-updates" || command == "lu") {
+  else if (command == "list-updates" || command == "lu") {
     if (help) {
       // FIXME catalog...
       cerr << "list-updates [options]\n"
@@ -731,7 +733,7 @@ int one_command(const string& command, int argc, char **argv)
 
   // -----------------------------( update )----------------------------------
 
-  if (command == "update" || command == "up") {
+  else if (command == "update" || command == "up") {
     if (help) {
       cerr << "update [options]\n"
 	   << specific_help
@@ -759,8 +761,7 @@ int one_command(const string& command, int argc, char **argv)
 
   // -----------------------------( info )------------------------------------
 
-  if (command == "info" || command == "if" ||
-      command == "patch-info") {
+  else if (command == "info" || command == "if" || command == "patch-info") {
     if (help || copts.count("help")) {
       cerr << specific_help;
       return !help;
@@ -774,6 +775,11 @@ int one_command(const string& command, int argc, char **argv)
     printInfo(command,arguments);
 
     return 0;
+  }
+  
+  else {
+    cerr << "Unknown command '" << command << "'." << endl << endl;
+    cerr << help_commands;
   }
 
   return 0;
