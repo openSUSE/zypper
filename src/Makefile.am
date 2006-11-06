@@ -76,3 +76,5 @@ zypp_checkpatches_wrapper_LDADD =
 #zmart_LDFLAGS =	-static
 
 ## ##################################################
+
+EXTRA_DIST=$(logrotate_DATA)
