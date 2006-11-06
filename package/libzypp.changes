@@ -1,4 +1,14 @@
 -------------------------------------------------------------------
+Mon Nov  6 12:32:22 CET 2006 - dmacvicar@suse.de
+
+- Make the parser more strict, rejecting broken sources
+  but showing the error line.
+  Last fix making the parser relax would break multitag
+  descriptions with empty lines, now we check dependencies
+  at a higher level. (reference #160607)
+- r4501 
+
+-------------------------------------------------------------------
 Fri Nov  3 11:04:19 CET 2006 - schubi@suse.de
 
 - New problem solution added: Unlock ALL resovables in order to speed up
