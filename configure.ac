@@ -56,7 +56,13 @@ dnl ==================================================
 dnl checks for libraries
 
 AC_ARG_VAR([PKG_CONFIG_PATH], [where to search for pkg-config files])
-PKG_CHECK_MODULES(ZYPP, [libzypp >= 2.0.0])
+PKG_CHECK_MODULES(ZYPP, [libzypp >= 1.0.0])
+
+case "$ZYPP_CFLAGS" in
+  *LIBZYPP_1xx*) checkpatches=false ;;
+  *) checkpatches=true ;;
+esac
+AM_CONDITIONAL([BUILD_CHECKPATCHES], [$checkpatches])
 
 dnl ==================================================
 dnl checks for header files

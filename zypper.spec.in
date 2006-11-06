@@ -44,6 +44,9 @@ Authors:
 gettextize -f
 autoreconf --force --install --symlink --verbose
 %{?suse_update_config:%{suse_update_config -f}}
+%if %suse_version <= 1010
+ZYPP_LIBS=-lzypp ZYPP_CFLAGS="-D_FILE_OFFSET_BITS=64 -DLIBZYPP_1xx" \
+%endif
 CFLAGS="$RPM_OPT_FLAGS" \
 CXXFLAGS="$RPM_OPT_FLAGS" \
 ./configure --prefix=%{prefix} --libdir=%{_libdir} --mandir=%{_mandir} --sysconfdir=%{_sysconfdir} --disable-static
@@ -57,10 +60,14 @@ make install DESTDIR=$RPM_BUILD_ROOT
 
 %post
 %run_ldconfig
+%if %suse_version > 1010
 %run_permissions
+%endif
 
+%if %suse_version > 1010
 %verifyscript
 %verify_permissions -e %{_sbindir}/zypp-checkpatches-wrapper
+%endif
 
 %postun
 %run_ldconfig
@@ -71,8 +78,10 @@ make install DESTDIR=$RPM_BUILD_ROOT
 %defattr(-,root,root)
 %{_sysconfdir}/logrotate.d/zypper.lr
 %{_bindir}/zypper
+%if %suse_version > 1010
 %{_sbindir}/zypp-checkpatches
 %verify(not mode) %attr (755,root,root) %{_sbindir}/zypp-checkpatches-wrapper
+%endif
 %doc %{_mandir}/*/*
 %doc %dir %{_datadir}/doc/packages/zypper
 %doc %{_datadir}/doc/packages/zypper/TODO

@@ -2,7 +2,9 @@
 ## ##################################################
 
 bin_PROGRAMS = zypper
+if BUILD_CHECKPATCHES
 sbin_PROGRAMS = zypp-checkpatches zypp-checkpatches-wrapper
+endif
 noinst_PROGRAMS = zmart
 
 logrotatedir = $(sysconfdir)/logrotate.d
@@ -59,6 +61,7 @@ zypper_SOURCES = 	zypper.cc zmart-sources.cc zmart-misc.cc \
 	zmart.h
 zypper_LDADD = $(ZYPP_LIBS) -lboost_regex
 
+if BUILD_CHECKPATCHES
 zypp_checkpatches_SOURCES = 	zypp-checkpatches.cc zmart-sources.cc \
 	zypper-tabulator.h \
 	zypper-tabulator.cc \
@@ -72,6 +75,7 @@ zypp_checkpatches_LDADD = $(ZYPP_LIBS) -lboost_regex -lboost_program_options
 zypp_checkpatches_wrapper_SOURCES = zypp-checkpatches-wrapper.c
 # empty:
 zypp_checkpatches_wrapper_LDADD =
+endif
 
 #zmart_LDFLAGS =	-static
 
