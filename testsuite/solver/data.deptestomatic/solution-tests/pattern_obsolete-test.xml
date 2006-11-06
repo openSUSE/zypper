@@ -1,0 +1,12 @@
+<test>
+<setup>
+		<system file="pattern_obsolete-system.xml"/>
+		<channel file="pattern_obsolete-packages.xml"/>
+</setup>
+<trial>
+	<install name='foo4' kind='pattern'/>
+	<install name='foo5' kind='pattern'/>
+	<verify/>
+	<reportproblems/>
+</trial>
+</test>
