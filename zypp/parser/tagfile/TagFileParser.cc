@@ -89,7 +89,7 @@ namespace zypp
         int new_progress = 0;
         _file_r = file_r;
         _file_size = 0;
-        _no_lines = 0;
+        _line_number = 0;
         _file_size = PathInfo(file_r).size();
         std::ifstream file(file_r.asString().c_str());
         int readed = 0;
@@ -111,6 +111,7 @@ namespace zypp
         while(file && !file.eof())
         {
           getline(file, buffer);
+          _line_number++;
           readed +=  buffer.size();
           
           boost::smatch what;
@@ -135,6 +136,7 @@ namespace zypp
             std::string element;
             boost::smatch element_what;
             getline(file, element);
+            _line_number++;
             readed +=  element.size();
             // while we dont find the list terminator
             while(!file.eof())
@@ -166,14 +168,11 @@ namespace zypp
                 }
               }
               
-              // skip empty lines and comments inside lists
-              if ( ! ( element.empty() || ( element[0] == '#' ) ) )
-              {
-                tag.values.push_back(element);
-              }
+              tag.values.push_back(element);
               
               XXX << element << std::endl;
               getline(file, element);
+              _line_number++;
               readed +=  element.size();
               //dumpRegexpResults(element_what);
             }
@@ -203,9 +202,9 @@ namespace zypp
             // before we used to throw a parse error exception if we dont find
             // a key value line. But package descriptions usually are broken
             // and contain multiple lines for single line tags, etc.
-            // so now we just skip those lines.
-            //ZYPP_THROW(ParseException("parse error: " + buffer));
-            ERR << "Parse error, unrecognized format [" << buffer << "]. Be sure " << _file_r << "does not contains a single tag with new lines." << std::endl;
+            stringstream ss;
+            ss << "Parse error, unrecognized line [" << buffer << "]. Be sure " << _file_r << " line " << _line_number << " misses a tag or comment.";
+            ZYPP_THROW( ParseException( ss.str() ) );
           }
           
           new_progress = (int)((((float)readed)/((float)_file_size))*100);

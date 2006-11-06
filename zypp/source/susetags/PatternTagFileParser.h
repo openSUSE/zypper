@@ -48,6 +48,8 @@ namespace zypp
         virtual ~PatternTagFileParser()
         {}
 
+        void parseDeps( const std::list<std::string> & strdeps, CapSet & capset, const Resolvable::Kind & kind = ResTraits<Pattern>::kind );
+        
         void consume( const SingleTag &tag );
         void consume( const MultiTag &tag );
         void endParse();

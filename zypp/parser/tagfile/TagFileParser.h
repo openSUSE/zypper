@@ -87,7 +87,7 @@ namespace zypp
           ParserProgress::Ptr _progress;
           Pathname _file_r;
           int _file_size;
-          int _no_lines;
+          int _line_number;
       };
       /////////////////////////////////////////////////////////////////
     } // namespace parser

@@ -22,6 +22,7 @@
 #include "zypp/CapFactory.h"
 
 #include "zypp/source/susetags/PatternTagFileParser.h"
+#include "zypp/parser/tagfile/ParseException.h"
 #include <boost/regex.hpp>
 
 #undef ZYPP_BASE_LOGGER_LOGGROUP
@@ -29,6 +30,7 @@
 
 using namespace std;
 using namespace boost;
+using namespace zypp::parser::tagfile;
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -194,13 +196,29 @@ void PatternTagFileParser::consume( const MultiTag &tag )
   }
 }
 
-static void parseDeps( const std::list<std::string> & strdeps, CapSet & capset, const Resolvable::Kind & kind = ResTraits<Pattern>::kind )
+void PatternTagFileParser::parseDeps( const std::list<std::string> & strdeps, CapSet & capset, const Resolvable::Kind & kind )
 {
   CapFactory f;
   for (std::list<std::string>::const_iterator it = strdeps.begin(); it != strdeps.end(); it++)
-  {
-    Capability cap = f.parse( kind, *it );
-    capset.insert( cap );
+  {  
+    if ( (*it).empty() )
+    {
+      stringstream ss;
+      ss << "Emtpy capability on " << _file_r << " line " << _line_number;
+      ZYPP_THROW( ParseException( ss.str() ) );
+    }
+    
+    try
+    {
+      Capability cap = f.parse( kind, *it );
+      capset.insert( cap );
+    }
+    catch ( const Exception &e )
+    {
+      stringstream ss;
+      ss << "Broken capability [" << *it << "]" << _file_r << " line " << _line_number;
+      ZYPP_THROW( ParseException( ss.str() ) );
+    }
   }
   return;
 }

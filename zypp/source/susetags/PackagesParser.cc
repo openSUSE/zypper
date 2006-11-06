@@ -9,6 +9,7 @@
 /** \file	zypp/source/susetags/PackagesParser.cc
  *
 */
+#include <sstream>
 #include <iostream>
 
 #include <boost/regex.hpp>
@@ -25,6 +26,7 @@
 #include "zypp/ZYppFactory.h"
 
 using std::endl;
+using namespace std;
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -177,13 +179,22 @@ struct PackagesParser : public parser::tagfile::TagFileParser
     for ( std::list<std::string>::const_iterator it = depstr_r.begin();
           it != depstr_r.end(); ++it )
     {
+      if ( (*it).empty() )
+      {
+        stringstream ss;
+        ss << "Bad source [" << _source.alias() << "] at URL:[" << _source.url().asString() << "]. Emtpy capability on " << _file_r << " line " << _line_number;
+        ZYPP_THROW( ParseException( ss.str() ) );
+      }
+      
       try
       {
         capset.insert( CapFactory().parse( ResTraits<Package>::kind, *it ) );
       }
       catch (Exception & excpt_r)
       {
-        ZYPP_THROW( ParseException("Bad source ["+ _source.alias() +"] at URL:[" + _source.url().asString() + "]. Can't parse capability: [" + *it + "]" ) );
+        stringstream ss;
+        ss << "Bad source [" << _source.alias() << "] at URL:[" << _source.url().asString() << "]. Can't parse capability: [" << *it << "] on " << _file_r << " line " << _line_number;
+        ZYPP_THROW( ParseException( ss.str() ) );
       }
     }
   }
