@@ -39,9 +39,9 @@
 		</update>
 	  </history>
 	  <deps>
-		<obsolete>
-		  <dep name='foo3' kind='pattern'/>
-  		</obsolete>
+		<obsoletes>
+		  <dep name='foo2old' kind='pattern'/>
+  		</obsoletes>
 	  </deps>
 	</pattern>												  
  </subchannel>

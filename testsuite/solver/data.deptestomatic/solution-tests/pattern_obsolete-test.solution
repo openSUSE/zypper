@@ -1,0 +1,7 @@
+>!> Installing pattern:foo4 from channel 
+>!> Installing pattern:foo5 from channel 
+>!> Solution #1:
+>!> install pattern:foo4-2.0-1.noarch
+>!> install pattern:foo5-2.0-1.noarch
+>!> remove  pattern:foo3-1.0-1.noarch
+>!> installs=2, upgrades=0, uninstalls=1

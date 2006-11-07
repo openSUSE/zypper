@@ -1,3 +1,8 @@
+<!--
+   foo4 obsoletes foo3 ... delete foo3
+   foo5 obsoletes foo2old, foo2 provides foo2old... do
+      not delete foo2 cause it is a virtual provides only
+-->
 <test>
 <setup>
 		<system file="pattern_obsolete-system.xml"/>
@@ -6,7 +11,5 @@
 <trial>
 	<install name='foo4' kind='pattern'/>
 	<install name='foo5' kind='pattern'/>
-	<verify/>
-	<reportproblems/>
 </trial>
 </test>
