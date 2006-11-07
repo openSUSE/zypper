@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Nov  7 11:38:10 CET 2006 - schubi@suse.de
+
+- Translations added
+  Revision 4514
+
+-------------------------------------------------------------------
 Mon Nov  6 12:32:22 CET 2006 - dmacvicar@suse.de
 
 - Make the parser more strict, rejecting broken sources
