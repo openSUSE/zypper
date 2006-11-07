@@ -1,22 +1,17 @@
-# Italian message file for YaST2 (@memory@).
-# Copyright (C) 2005 SUSE Linux Products GmbH.
-# Copyright (C) 2002 SuSE Linux AG.
-# Copyright (C) 1999, 2000, 2001 SuSE GmbH.
-# Franca Delcarlo <francad@attglobal.net>, 1999, 2000, 2001.
-# Karl Eichwalder <ke@suse.de>, 2000.
+# Copyright (C) 2006 SuSE Linux Products GmbH, Nuernberg
+# This file is distributed under the same license as the package.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: YaST (@memory@)\n"
+"Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2006-10-26 09:41+0200\n"
-"PO-Revision-Date: 2006-05-31 14:42\n"
+"PO-Revision-Date: 2006-11-03 15:41\n"
 "Last-Translator: Novell Language <language@novell.com>\n"
 "Language-Team: Novell Language <language@novell.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: solver/detail/ProblemSolutionIgnore.cc:54
 msgid "Ignore this requirement just here"
@@ -57,7 +52,6 @@ msgstr "Ignora %s obsoleto in %s"
 msgid "Ignore that %s is already set to install"
 msgstr "Ignora che %s è già impostato per l'installazione"
 
-# TLABEL modules/inst_target_part.ycp:680
 #. TranslatorExplanation %s = name of package, patch, selection ...
 #: solver/detail/ProblemSolutionInstall.cc:54
 #: solver/detail/ProblemSolutionInstall.cc:56
@@ -89,7 +83,6 @@ msgstr "Mantieni risolvibili"
 msgid "delete %s"
 msgstr "cancella %s"
 
-# TLABEL modules/inst_target_part.ycp:680
 #. TranslatorExplanation %s = name of package, patch, selection ...
 #: solver/detail/ProblemSolutionUninstall.cc:69
 #: solver/detail/ProblemSolutionUninstall.cc:71
@@ -104,9 +97,8 @@ msgid "Do not install or delete concerning resolvables"
 msgstr "Non installare o eliminare i risolvibili di pertinenza"
 
 #: solver/detail/ProblemSolutionUnlock.cc:50
-#, fuzzy
 msgid "unlock all resolvables"
-msgstr "Sblocca questi risolvibili"
+msgstr "sblocca tutti i risolvibili"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
 #: solver/detail/ProblemSolutionUnlock.cc:59
@@ -186,7 +178,7 @@ msgstr "selezione"
 #. Translator: Notation for SuSE installation pattern (set of packages, describing use of system)
 #: solver/detail/ResolverInfoMisc.cc:98
 msgid "pattern"
-msgstr "modello"
+msgstr "Modello"
 
 #. Translator: Notation for product
 #: solver/detail/ResolverInfoMisc.cc:102
@@ -216,7 +208,7 @@ msgstr "parte più piccola"
 #. Translator: Notation for computer system
 #: solver/detail/ResolverInfoMisc.cc:122
 msgid "system"
-msgstr "sistema"
+msgstr "Sistema"
 
 #. Translator: Generic term for an item with dependencies, please leave untranslated for now
 #: solver/detail/ResolverInfoMisc.cc:126
@@ -276,7 +268,6 @@ msgstr "Impossibile installare %s perché %s è già contrassegnato come da disi
 msgid "This would invalidate %s."
 msgstr "Ciò annullerebbe %s."
 
-# TLABEL modules/inst_target_part.ycp:680
 #. Translator: %s = name of patch, pattern, ...
 #. TranslatorExplanation: Establishing is the process of computing which patches are needed
 #. TranslatorExplanation: This is just a progress indicator
@@ -287,7 +278,6 @@ msgstr "Ciò annullerebbe %s."
 msgid "Establishing %s"
 msgstr "Connessione a %s"
 
-# TLABEL modules/inst_target_part.ycp:680
 #. affected() = resolvable to be installed
 #. _capability =
 #. other() =
@@ -588,7 +578,6 @@ msgstr "%s dipende da:%s"
 msgid "Child of"
 msgstr "Figlio di"
 
-# TLABEL modules/inst_target_part.ycp:680
 #. TranslatorExplanation %s = dependency
 #. TranslatorExplanation %s = name of package,patch,...
 #: solver/detail/Resolver_problems.cc:320
@@ -689,9 +678,9 @@ msgid "%s obsoletes %s. But %s cannot be deleted because it is locked."
 msgstr "%s obsoleti %s. Tuttavia, non è possibile eliminare %s perché bloccato."
 
 #: solver/detail/Resolver_problems.cc:666
-#, fuzzy, c-format
+#, c-format
 msgid "Cannot install %s because it is conflicting"
-msgstr "Impossibile installare %s perché in conflitto con %s"
+msgstr "Impossibile installare %s perché in conflitto"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
 #: solver/detail/Resolver_problems.cc:685
@@ -716,7 +705,7 @@ msgstr "Andorra"
 #. :AND:020:
 #: CountryCode.cc:218
 msgid "United Arab Emirates"
-msgstr "Emirati arabi uniti"
+msgstr "Emirati Arabi Uniti"
 
 #. :ARE:784:
 #: CountryCode.cc:219
@@ -746,7 +735,7 @@ msgstr "Armenia"
 #. :ARM:051:
 #: CountryCode.cc:224
 msgid "Netherlands Antilles"
-msgstr "Antille olandesi"
+msgstr "Antille Olandesi"
 
 #. :ANT:530:
 #: CountryCode.cc:225
@@ -766,7 +755,7 @@ msgstr "Argentina"
 #. :ARG:032:
 #: CountryCode.cc:228
 msgid "American Samoa"
-msgstr "Samoa Americane"
+msgstr "American Samoa"
 
 #. :ASM:016:
 #: CountryCode.cc:229
@@ -806,7 +795,7 @@ msgstr "Barbados"
 #. :BRB:052:
 #: CountryCode.cc:236
 msgid "Bangladesh"
-msgstr "Bangladesh"
+msgstr "Banglades"
 
 #. :BGD:050:
 #: CountryCode.cc:237
@@ -881,7 +870,7 @@ msgstr "Botswana"
 #. :BWA:072:
 #: CountryCode.cc:251
 msgid "Belarus"
-msgstr "Bielorussia"
+msgstr "Belarus"
 
 #. :BLR:112:
 #: CountryCode.cc:252
@@ -896,7 +885,7 @@ msgstr "Canada"
 #. :CAN:124:
 #: CountryCode.cc:254
 msgid "Cocos (Keeling) Islands"
-msgstr "Isole Cocos (Keeling)"
+msgstr "Isole Coco (Keeling)"
 
 #. :CCK:166:
 #. :CAF:140:
@@ -932,7 +921,7 @@ msgstr "Cile"
 #. :CHL:152:
 #: CountryCode.cc:262
 msgid "Cameroon"
-msgstr "Camerun"
+msgstr "Cameroon"
 
 #. :CMR:120:
 #: CountryCode.cc:263
@@ -967,7 +956,7 @@ msgstr "Capo Verde"
 #. :CPV:132:
 #: CountryCode.cc:269
 msgid "Christmas Island"
-msgstr "Isola Christmas"
+msgstr "Isole di Natale"
 
 #. :CXR:162:
 #: CountryCode.cc:270
@@ -987,7 +976,7 @@ msgstr "Germania"
 #. :DEU:276:
 #: CountryCode.cc:273
 msgid "Djibouti"
-msgstr "Gibuti"
+msgstr "Djibouti"
 
 #. :DJI:262:
 #: CountryCode.cc:274
@@ -1002,7 +991,7 @@ msgstr "Dominica"
 #. :DMA:212:
 #: CountryCode.cc:276
 msgid "Dominican Republic"
-msgstr "Repubblica dominicana"
+msgstr "Repubblica Dominicana"
 
 #. :DOM:214:
 #: CountryCode.cc:277
@@ -1087,7 +1076,7 @@ msgstr "Gabon"
 #. :GAB:266:
 #: CountryCode.cc:293
 msgid "United Kingdom"
-msgstr "Regno Unito"
+msgstr "Gran Bretagna"
 
 #. :GBR:826:
 #: CountryCode.cc:294
@@ -1137,7 +1126,7 @@ msgstr "Guadalupe"
 #. :GLP:312:
 #: CountryCode.cc:303
 msgid "Equatorial Guinea"
-msgstr "Guinea equatoriale"
+msgstr "Guinea Equatoriale"
 
 #. :GNQ:226:
 #: CountryCode.cc:304
@@ -1147,7 +1136,7 @@ msgstr "Grecia"
 #. :GRC:300:
 #: CountryCode.cc:305
 msgid "South Georgia and the South Sandwich Islands"
-msgstr "Georgia meridionale e Isole Sandwich meridionali"
+msgstr "Georgia del Sud e Isole Sandwich meridionali"
 
 #. :SGS:239:
 #: CountryCode.cc:306
@@ -1162,7 +1151,7 @@ msgstr "Guam"
 #. :GUM:316:
 #: CountryCode.cc:308
 msgid "Guinea-Bissau"
-msgstr "Guinea-Bissau"
+msgstr "Guinea-bissau"
 
 #. :GNB:624:
 #: CountryCode.cc:309
@@ -1222,7 +1211,7 @@ msgstr "India"
 #. :IND:356:
 #: CountryCode.cc:320
 msgid "British Indian Ocean Territory"
-msgstr "Territorio dell'Oceano indiano britannico"
+msgstr "Territori Britannici dell'Oceano Indiano"
 
 #. :IOT:086:
 #: CountryCode.cc:321
@@ -1247,7 +1236,7 @@ msgstr "Italia"
 #. :ITA:380:
 #: CountryCode.cc:325
 msgid "Jamaica"
-msgstr "Giamaica"
+msgstr "Jamaica"
 
 #. :JAM:388:
 #: CountryCode.cc:326
@@ -1267,7 +1256,7 @@ msgstr "Kenya"
 #. :KEN:404:
 #: CountryCode.cc:329
 msgid "Kyrgyzstan"
-msgstr "Kyrgyztan"
+msgstr "Kyrgyzstan"
 
 #. :KGZ:417:
 #: CountryCode.cc:330
@@ -1282,7 +1271,7 @@ msgstr "Kiribati"
 #. :KIR:296:
 #: CountryCode.cc:332
 msgid "Comoros"
-msgstr "Isole Comorre"
+msgstr "Comorre"
 
 #. :COM:174:
 #: CountryCode.cc:333
@@ -1307,12 +1296,12 @@ msgstr "Kuwait"
 #. :KWT:414:
 #: CountryCode.cc:337
 msgid "Cayman Islands"
-msgstr "Isole Cayman"
+msgstr "Isole Caimane"
 
 #. :CYM:136:
 #: CountryCode.cc:338
 msgid "Kazakhstan"
-msgstr "Kazakhstan"
+msgstr "Kazakistan"
 
 #. :KAZ:398:
 #: CountryCode.cc:339
@@ -1327,7 +1316,7 @@ msgstr "Libano"
 #. :LBN:422:
 #: CountryCode.cc:341
 msgid "Saint Lucia"
-msgstr "Saint Lucia"
+msgstr "Santa Lucia"
 
 #. :LCA:662:
 #: CountryCode.cc:342
@@ -1362,7 +1351,7 @@ msgstr "Lussemburgo"
 #. :LUX:442:
 #: CountryCode.cc:348
 msgid "Latvia"
-msgstr "Lettonia"
+msgstr "Latvia"
 
 #. :LVA:428:
 #: CountryCode.cc:349
@@ -1407,7 +1396,7 @@ msgstr "Mali"
 #. :MLI:466:
 #: CountryCode.cc:357
 msgid "Myanmar"
-msgstr "Birmania"
+msgstr "Myanmar"
 
 #. :MMR:104:
 #: CountryCode.cc:358
@@ -1422,7 +1411,7 @@ msgstr "Macao"
 #. :MAC:446:
 #: CountryCode.cc:360
 msgid "Northern Mariana Islands"
-msgstr "Isole Marianne settentrionali"
+msgstr "Isole Mariana Settentrionali"
 
 #. :MNP:580:
 #: CountryCode.cc:361
@@ -1467,7 +1456,7 @@ msgstr "Messico"
 #. :MEX:484:
 #: CountryCode.cc:369
 msgid "Malaysia"
-msgstr "Malaysia"
+msgstr "Malesia"
 
 #. :MYS:458:
 #: CountryCode.cc:370
@@ -1492,7 +1481,7 @@ msgstr "Niger"
 #. :NER:562:
 #: CountryCode.cc:374
 msgid "Norfolk Island"
-msgstr "Isola di Norfolk"
+msgstr "Isole Norfolk"
 
 #. :NFK:574:
 #: CountryCode.cc:375
@@ -1588,12 +1577,12 @@ msgstr "Pitcairn"
 #. :PCN:612:
 #: CountryCode.cc:393
 msgid "Puerto Rico"
-msgstr "Portorico"
+msgstr "Porto Rico"
 
 #. :PRI:630:
 #: CountryCode.cc:394
 msgid "Palestinian Territory"
-msgstr "Territorio palestinese"
+msgstr "Territorio Palestinese"
 
 #. :PSE:275:
 #: CountryCode.cc:395
@@ -1628,7 +1617,7 @@ msgstr "Romania"
 #. :ROU:642:
 #: CountryCode.cc:401
 msgid "Russian Federation"
-msgstr "Federazione russa"
+msgstr "Federazione Russa"
 
 #. :RUS:643:
 #: CountryCode.cc:402
@@ -1638,7 +1627,7 @@ msgstr "Ruanda"
 #. :RWA:646:
 #: CountryCode.cc:403
 msgid "Saudi Arabia"
-msgstr "Arabia saudita"
+msgstr "Arabia Saudita"
 
 #. :SAU:682:
 #: CountryCode.cc:404
@@ -1743,7 +1732,7 @@ msgstr "Chad"
 #. :TCD:148:
 #: CountryCode.cc:424
 msgid "French Southern Territories"
-msgstr "Territori della Francia meridionale"
+msgstr "Territori Francesi Meridionali"
 
 #. :ATF:260:
 #: CountryCode.cc:425
@@ -1850,7 +1839,7 @@ msgstr "Santa Sede (Città del Vaticano)"
 #. :VAT:336:
 #: CountryCode.cc:445
 msgid "Saint Vincent and the Grenadines"
-msgstr "Saint Vincent e le Granadine"
+msgstr "Saint Vincent e Grenadine"
 
 #. :VCT:670:
 #: CountryCode.cc:446
@@ -1865,7 +1854,7 @@ msgstr "Isole Vergini Britanniche"
 #. :VGB:092:
 #: CountryCode.cc:448
 msgid "Virgin Islands, U.S."
-msgstr "Isole Vergini Statunitensi"
+msgstr "Isole Vergini U.S.A"
 
 #. :VIR:850:
 #: CountryCode.cc:449
@@ -2896,7 +2885,6 @@ msgstr "Iraniano (Altre)"
 msgid "Iroquoian languages"
 msgstr "Lingue irochi"
 
-# TLABEL modules/inst_target_part.ycp:680
 #. language code: ita it
 #: LanguageCode.cc:654
 msgid "Italian"
@@ -4268,9 +4256,8 @@ msgid "Zuni"
 msgstr "Zuni"
 
 #: ZYppFactory.cc:279 ZYppFactory.cc:334
-#, fuzzy
 msgid "Cannot acquire zypp lock."
-msgstr "Impossibile ottenere il blocco zypp."
+msgstr "Impossibile acquisire il blocco zypp."
 
 #. Translator: %s = name of an rpm package. A list of diffs follows
 #. this message.
@@ -4322,7 +4309,6 @@ msgstr "Impossibile installare %s "
 msgid "rpm output:"
 msgstr "Output rpm:"
 
-# TLABEL modules/inst_target_part.ycp:680
 #. %s = filename of rpm package
 #. timestamp
 #: target/rpm/RpmDb.cc:1980
@@ -4347,7 +4333,6 @@ msgstr "Impossibile rimuovere %s"
 msgid "%s remove ok"
 msgstr "Rimozione di %s completata"
 
-# TLABEL modules/logcontrol.ycp:20
 #: target/rpm/RpmDb.cc:2114
 msgid "Ok"
 msgstr "OK"
@@ -4365,17 +4350,14 @@ msgstr "Il pacchetto contiene una versione diversa da quella prevista"
 msgid "The package file has incorrect MD5 sum"
 msgstr "Il file del pacchetto contiene un MD5 sum non corretto"
 
-# TLABEL modules/inst_rpmcopy.ycp:57
 #: target/rpm/RpmDb.cc:2135
 msgid "The package is not signed"
 msgstr "Il pacchetto non è firmato"
 
-# TLABEL modules/inst_rpmcopy.ycp:57
 #: target/rpm/RpmDb.cc:2141
 msgid "The package has no MD5 sum"
 msgstr "Il pacchetto non contiene alcuna sum MD5"
 
-# TLABEL modules/inst_rpmcopy.ycp:57
 #: target/rpm/RpmDb.cc:2147
 msgid "The package has incorrect signature"
 msgstr "Il pacchetto presenta una firma non corretta"
@@ -4401,7 +4383,7 @@ msgstr "Commit della destinazione interrotta dall'utente."
 #: target/store/XMLFilesBackend.cc:925 target/store/XMLFilesBackend.cc:932
 #: source/yum/YUMScriptImpl.cc:78 source/yum/YUMScriptImpl.cc:112
 msgid "Can't write the patch script to a temporary file."
-msgstr ""
+msgstr "Impossibile scrivere lo script della patch in un file temporaneo."
 
 #: source/yum/YUMScriptImpl.cc:89 source/yum/YUMScriptImpl.cc:123
 msgid "Failed check for the script file check sum"
@@ -4413,62 +4395,8 @@ msgstr "Verifica della firma non riuscita per il file firmato repomd.xml"
 
 #: source/SourceImpl.cc:384
 msgid " miss checksum."
-msgstr ""
+msgstr " checksum mancante."
 
 #: source/SourceImpl.cc:390
-#, fuzzy
 msgid " fails checksum verification."
-msgstr "verifica checksum non riuscita"
-
-#~ msgid "Failed check for the metadata file check sum"
-#~ msgstr "Impossibile verificare la checksum del file di metadati"
-
-#~ msgid "Unable to restore all sources."
-#~ msgstr "Impossibile ripristinare tutte le origini."
-
-#~ msgid "At least one source already registered, cannot restore sources from persistent store."
-#~ msgstr "È già stata registrata almeno un'origine. Impossibile ripristinare le origini da un archivio persistente."
-
-#~ msgid "Default"
-#~ msgstr "Predefinita"
-
-#~ msgid "ignore architecture"
-#~ msgstr "ignora architettura"
-
-#~ msgid "Ignore this requirement for all other resolvables."
-#~ msgstr "%s è richiesto da altri risolvibili"
-
-#~ msgid "%s cannot be uninstalled due missing dependencies"
-#~ msgstr "Impossibile disinstallare %s. Alcune dipendenze sono mancanti"
-
-#~ msgid "Deleting %s"
-#~ msgstr "Eliminazione di %s"
-
-#~ msgid "Marking %s as uninstallable due to conflicts over %s (%s) from %s"
-#~ msgstr "Contrassegno in corso di %s come disinstallabile a causa di conflitti su %s (%s) da %s"
-
-#~ msgid "There are no alternative installed providers of %s for %s"
-#~ msgstr "Non sono installati provider alternativi di %s per %s"
-
-#~ msgid "There are no installable providers of %s for %s"
-#~ msgstr "Non esistono provider installabili di %s per %s"
-
-#~ msgid "unknown"
-#~ msgstr "sconosciuto"
-
-# TLABEL modules/inst_target_part.ycp:680
-#~ msgid "installed"
-#~ msgstr "installato"
-
-#~ msgid "uninstalled"
-#~ msgstr "disinstallato"
-
-# TLABEL modules/inst_target_part.ycp:680
-#~ msgid "to be installed (soft)"
-#~ msgstr "da installare (soft)"
-
-#~ msgid "to be uninstalled"
-#~ msgstr "da disinstallare"
-
-#~ msgid "Can't install %s, since a resolvable of the same name is already marked as needing to be installed"
-#~ msgstr "Impossibile installare %s, perché un risolvibile con lo stesso nome è già contrassegnato come da disinstallare"
+msgstr "verifica checksum non riuscita."

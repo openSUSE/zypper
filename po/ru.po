@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: zypp.ru\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2006-10-26 09:41+0200\n"
-"PO-Revision-Date: 2006-10-29 13:58+0200\n"
+"PO-Revision-Date: 2006-11-03 23:39+0200\n"
 "Last-Translator: Aleksey Osipov <aliks-os@yandex.ru>\n"
 "Language-Team: Russian <i18n@suse.de>\n"
 "MIME-Version: 1.0\n"
@@ -879,9 +879,8 @@ msgstr "Багамы"
 
 #. :BHS:044:
 #: CountryCode.cc:248
-#, fuzzy
 msgid "Bhutan"
-msgstr "Бахрейн"
+msgstr "Бутан"
 
 #. :BTN:064:
 #: CountryCode.cc:249
@@ -1365,9 +1364,8 @@ msgstr "Лебанон"
 # fuzzy
 #. :LBN:422:
 #: CountryCode.cc:341
-#, fuzzy
 msgid "Saint Lucia"
-msgstr "о. Св. Люсии"
+msgstr "Сант Люсия"
 
 #. :LCA:662:
 #: CountryCode.cc:342
@@ -1677,9 +1675,8 @@ msgstr "Кватар"
 
 #. :QAT:634:
 #: CountryCode.cc:399
-#, fuzzy
 msgid "Reunion"
-msgstr "&Регион:"
+msgstr ""
 
 #. :REU:638:
 #: CountryCode.cc:400
@@ -3113,7 +3110,7 @@ msgstr "Лебанон"
 #. language code: jpn ja
 #: LanguageCode.cc:660
 msgid "Japanese"
-msgstr "Япония"
+msgstr "Японский"
 
 #. language code: jpr
 #: LanguageCode.cc:662
@@ -4780,7 +4777,7 @@ msgstr "Архив пакета имеет неверную контрольну
 
 #: target/rpm/RpmDb.cc:2159
 msgid "rpm failed for unkown reason, see log file"
-msgstr ""
+msgstr "ошибочный rpm по неизвестной причине, см.файл журнала"
 
 #  Proposal for backup during update
 #. timestamp

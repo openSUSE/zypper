@@ -8,19 +8,19 @@
 # Michael Hintsala <mhintsa@fi.ibm.com>, 2003. 2001.
 # Ilkka Pirskanen <ilkka.pirskanen@kolumbus.fi>, 2006.
 # Jyri Palokangas <jmp@netti.fi>, 2006.
+# Joonas Niilola <juippis@roskakori.org>, 2006.
 msgid ""
 msgstr ""
 "Project-Id-Version: zypp.fi\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2006-10-26 09:41+0200\n"
-"PO-Revision-Date: 2006-10-26 15:33+0300\n"
-"Last-Translator: Jyri Palokangas <jmp@netti.fi>\n"
+"PO-Revision-Date: 2006-11-02 18:35+0300\n"
+"Last-Translator: Joonas Niilola <juippis@roskakori.org>\n"
 "Language-Team: Suomi <yast-trans-fi@kotoistaminen.novell.fi>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: KBabel 1.11.4\n"
 
 #: solver/detail/ProblemSolutionIgnore.cc:54
 msgid "Ignore this requirement just here"
@@ -34,20 +34,20 @@ msgstr "Jätä tämä vaatimus huomiotta yleisesti"
 #: solver/detail/ProblemSolutionIgnore.cc:75
 #, c-format
 msgid "Install %s although it would change the architecture"
-msgstr "Asenna %s vaikka se muuttaisi arkkitehtuurin"
+msgstr "Asenna %s, vaikka se muuttaisi arkkitehtuurin"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
 #: solver/detail/ProblemSolutionIgnore.cc:78
 #, c-format
 msgid "%s provides this dependency but would changed the architecture of the installed item"
-msgstr "%s tarjoaa tämän riippuvuuden mutta vaihtaa asennetun kohteen arkkitehtuurin"
+msgstr "%s tarjoaa tämän riippuvuuden, mutta vaihtaa asennetun kohteen arkkitehtuurin"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
 #: solver/detail/ProblemSolutionIgnore.cc:90
 #: solver/detail/ProblemSolutionIgnore.cc:102
 #, c-format
 msgid "Ignore this conflict of %s"
-msgstr "Jätä osan %s ristiriitaa huomiotta"
+msgstr "Jätä osan %s ristiriita huomiotta"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
 #: solver/detail/ProblemSolutionIgnore.cc:117
@@ -99,7 +99,7 @@ msgstr "poista %s"
 #: solver/detail/Resolver_problems.cc:421
 #, c-format
 msgid "do not install %s"
-msgstr "älä asenna %s"
+msgstr "älä asenna ohjelmistoa %s"
 
 #: solver/detail/ProblemSolutionUninstall.cc:81
 msgid "Do not install or delete concerning resolvables"
@@ -113,7 +113,7 @@ msgstr "poista kaikkien ratkaisimien lukitus"
 #: solver/detail/ProblemSolutionUnlock.cc:59
 #, c-format
 msgid "unlock %s"
-msgstr "Poista osan %s lukitus"
+msgstr "Poista ohjelmiston %s lukitus"
 
 #: solver/detail/ProblemSolutionUnlock.cc:68
 msgid "Unlock these resolvables"
@@ -269,7 +269,7 @@ msgstr "Ei voida asentaa osaa %s, koska sitä ei käytetä tässä järjestelmä
 #: solver/detail/ResolverInfoMisc.cc:190
 #, c-format
 msgid "Can't install %s, since %s is already marked as needing to be installed"
-msgstr "Ei voida asentaa osaa %s, koska %s on jo merkitty tarvitaan asennettavaksi"
+msgstr "Ei voida asentaa osaa %s, koska %s on jo merkitty tilaan tarvitaan asennettavaksi"
 
 #. Translator: %s = name of patch,product
 #: solver/detail/ResolverInfoMisc.cc:198
@@ -535,7 +535,7 @@ msgid ""
 "%s conflicts with:\n"
 "%s"
 msgstr ""
-"%s on ristiriidassa:\n"
+"%s on ristiriidassa seuraavan osan kanssa:\n"
 "%s"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
@@ -580,7 +580,7 @@ msgstr "%s on riippuvainen osasta %s"
 #: solver/detail/Resolver_problems.cc:308
 #, c-format
 msgid "%s depends on:%s"
-msgstr "%s on riippuvainen:%s"
+msgstr "%s on riippuvainen: %s"
 
 #. TranslatorExplanation: currently it is unused.
 #: solver/detail/Resolver_problems.cc:314
@@ -684,7 +684,7 @@ msgstr "%s ei poisteta, koska sitä tarvitaan edelleen"
 #: solver/detail/Resolver_problems.cc:637
 #, c-format
 msgid "%s obsoletes %s. But %s cannot be deleted because it is locked."
-msgstr "%s vanhentaa %s. Mutta %s ei voida poistaa koska se on lukittu."
+msgstr "%s vanhentaa %s. Mutta %s ei voida poistaa, koska se on lukittu."
 
 #: solver/detail/Resolver_problems.cc:666
 #, c-format
@@ -738,7 +738,6 @@ msgid "Albania"
 msgstr "Albania"
 
 # AM
-# fuzzy
 #. :ALB:008:
 #: CountryCode.cc:223
 msgid "Armenia"
@@ -784,14 +783,12 @@ msgid "Australia"
 msgstr "Australia"
 
 # CU
-# fuzzy
 #. :AUS:036:
 #: CountryCode.cc:231
 msgid "Aruba"
 msgstr "Aruba"
 
 # FO
-# fuzzy
 #. :ABW:533:
 #: CountryCode.cc:232
 msgid "Aland Islands"
@@ -815,7 +812,6 @@ msgid "Barbados"
 msgstr "Barbados"
 
 # BD
-# fuzzy
 #. :BRB:052:
 #: CountryCode.cc:236
 msgid "Bangladesh"
@@ -837,7 +833,6 @@ msgid "Bulgaria"
 msgstr "Bulgaria"
 
 # BH
-# fuzzy
 #. :BGR:100:
 #: CountryCode.cc:240
 msgid "Bahrain"
@@ -901,14 +896,12 @@ msgid "Botswana"
 msgstr "Botswana"
 
 # BY
-# fuzzy
 #. :BWA:072:
 #: CountryCode.cc:251
 msgid "Belarus"
 msgstr "Valko-Venäjä"
 
 # BZ
-# fuzzy
 #. :BLR:112:
 #: CountryCode.cc:252
 msgid "Belize"
@@ -973,7 +966,6 @@ msgid "China"
 msgstr "Kiina"
 
 # CO
-# fuzzy
 #. :CHN:156:
 #: CountryCode.cc:264
 msgid "Colombia"
@@ -990,7 +982,6 @@ msgid "Serbia and Montenegro"
 msgstr "Serbia ja Montenegro"
 
 # CU
-# fuzzy
 #. :SCG:891:
 #: CountryCode.cc:267
 msgid "Cuba"
@@ -1012,7 +1003,6 @@ msgid "Cyprus"
 msgstr "Kypros"
 
 # CZ
-# fuzzy
 #. :CYP:196:
 #: CountryCode.cc:271
 msgid "Czech Republic"
@@ -1052,7 +1042,6 @@ msgid "Algeria"
 msgstr "Algeria"
 
 # EC
-# fuzzy
 #. :DZA:012:
 #: CountryCode.cc:278
 msgid "Ecuador"
@@ -1085,7 +1074,6 @@ msgid "Spain"
 msgstr "Espanja"
 
 # ET
-# fuzzy
 #. :ESP:724:
 #: CountryCode.cc:284
 msgid "Ethiopia"
@@ -1159,7 +1147,6 @@ msgid "French Guiana"
 msgstr "Ranskan Guayana"
 
 # GH
-# fuzzy
 #. :GUF:254:
 #: CountryCode.cc:297
 msgid "Ghana"
@@ -1171,21 +1158,18 @@ msgid "Gibraltar"
 msgstr "Gibraltar"
 
 # GL
-# fuzzy
 #. :GIB:292:
 #: CountryCode.cc:299
 msgid "Greenland"
 msgstr "Grönlanti"
 
 # GM
-# fuzzy
 #. :GRL:304:
 #: CountryCode.cc:300
 msgid "Gambia"
 msgstr "Gambia"
 
 # GU
-# fuzzy
 #. :GMB:270:
 #: CountryCode.cc:301
 msgid "Guinea"
@@ -1270,7 +1254,6 @@ msgid "Hungary"
 msgstr "Unkari"
 
 # ID
-# fuzzy
 #. :HUN:348:
 #: CountryCode.cc:316
 msgid "Indonesia"
@@ -1289,7 +1272,6 @@ msgid "Israel"
 msgstr "Israel"
 
 # IN
-# fuzzy
 #. :ISR:376:
 #: CountryCode.cc:319
 msgid "India"
@@ -1301,14 +1283,12 @@ msgid "British Indian Ocean Territory"
 msgstr "Brittiläinen Intian valtameren alue"
 
 # IQ
-# fuzzy
 #. :IOT:086:
 #: CountryCode.cc:321
 msgid "Iraq"
 msgstr "Irak"
 
 # IR
-# fuzzy
 #. :IRQ:368:
 #: CountryCode.cc:322
 msgid "Iran"
@@ -1326,18 +1306,16 @@ msgid "Italy"
 msgstr "Italia"
 
 # JM
-# fuzzy
 #. :ITA:380:
 #: CountryCode.cc:325
 msgid "Jamaica"
 msgstr "Jamaika"
 
 # JO
-# fuzzy
 #. :JAM:388:
 #: CountryCode.cc:326
 msgid "Jordan"
-msgstr "Korea"
+msgstr "Jordania"
 
 # JP
 #. :JOR:400:
@@ -1358,7 +1336,6 @@ msgid "Kyrgyzstan"
 msgstr "Kirgisia"
 
 # KH
-# fuzzy
 #. :KGZ:417:
 #: CountryCode.cc:330
 msgid "Cambodia"
@@ -1398,14 +1375,12 @@ msgid "Kuwait"
 msgstr "Kuwait"
 
 # FO
-# fuzzy
 #. :KWT:414:
 #: CountryCode.cc:337
 msgid "Cayman Islands"
-msgstr "Caymansaaret"
+msgstr "Cayman-saaret"
 
 # KZ
-# fuzzy
 #. :CYM:136:
 #: CountryCode.cc:338
 msgid "Kazakhstan"
@@ -1439,7 +1414,6 @@ msgid "Sri Lanka"
 msgstr "Sri Lanka"
 
 # LR
-# fuzzy
 #. :LKA:144:
 #: CountryCode.cc:344
 msgid "Liberia"
@@ -1469,7 +1443,6 @@ msgid "Latvia"
 msgstr "Latvia"
 
 # LR
-# fuzzy
 #. :LVA:428:
 #: CountryCode.cc:349
 msgid "Libya"
@@ -1516,7 +1489,6 @@ msgid "Mali"
 msgstr "Mali"
 
 # MM
-# fuzzy
 #. :MLI:466:
 #: CountryCode.cc:357
 msgid "Myanmar"
@@ -1528,11 +1500,10 @@ msgid "Mongolia"
 msgstr "Mongolia"
 
 # MO
-# fuzzy
 #. :MNG:496:
 #: CountryCode.cc:359
 msgid "Macao"
-msgstr "Macao, Kiinan e.h.a."
+msgstr "Macao"
 
 #. :MAC:446:
 #: CountryCode.cc:360
@@ -1570,14 +1541,12 @@ msgid "Mauritius"
 msgstr "Mauritius"
 
 # MV
-# fuzzy
 #. :MUS:480:
 #: CountryCode.cc:366
 msgid "Maldives"
 msgstr "Malediivit"
 
 # MW
-# fuzzy
 #. :MDV:462:
 #: CountryCode.cc:367
 msgid "Malawi"
@@ -1590,7 +1559,6 @@ msgid "Mexico"
 msgstr "Meksiko"
 
 # MY
-# fuzzy
 #. :MEX:484:
 #: CountryCode.cc:369
 msgid "Malaysia"
@@ -1602,21 +1570,18 @@ msgid "Mozambique"
 msgstr "Mosambik"
 
 # GM
-# fuzzy
 #. :MOZ:508:
 #: CountryCode.cc:371
 msgid "Namibia"
 msgstr "Namibia"
 
 # NC
-# fuzzy
 #. :NAM:516:
 #: CountryCode.cc:372
 msgid "New Caledonia"
 msgstr "Uusi-Kaledonia"
 
 # NG
-# fuzzy
 #. :NCL:540:
 #: CountryCode.cc:373
 msgid "Niger"
@@ -1630,7 +1595,6 @@ msgid "Norfolk Island"
 msgstr "Norfolkinsaari"
 
 # NG
-# fuzzy
 #. :NFK:574:
 #: CountryCode.cc:375
 msgid "Nigeria"
@@ -1794,11 +1758,10 @@ msgid "Saudi Arabia"
 msgstr "Saudi-Arabia"
 
 # FO
-# fuzzy
 #. :SAU:682:
 #: CountryCode.cc:404
 msgid "Solomon Islands"
-msgstr "Salomonsaaret"
+msgstr "Salomoninsaaret"
 
 #. :SLB:090:
 #: CountryCode.cc:405
@@ -1806,7 +1769,6 @@ msgid "Seychelles"
 msgstr "Seychellit"
 
 # SD
-# fuzzy
 #. :SYC:690:
 #: CountryCode.cc:406
 msgid "Sudan"
@@ -1839,7 +1801,6 @@ msgid "Svalbard and Jan Mayen"
 msgstr "Huippuvuoret ja Jan Mayen"
 
 # SK
-# fuzzy
 #. :SJM:744:
 #: CountryCode.cc:412
 msgid "Slovakia"
@@ -1861,18 +1822,16 @@ msgid "Senegal"
 msgstr "Senegal"
 
 # SO
-# fuzzy
 #. :SEN:686:
 #: CountryCode.cc:416
 msgid "Somalia"
 msgstr "Somalia"
 
 # SY
-# fuzzy
 #. :SOM:706:
 #: CountryCode.cc:417
 msgid "Suriname"
-msgstr "Suriname"
+msgstr "Surinam"
 
 #. :SUR:740:
 #: CountryCode.cc:418
@@ -1886,14 +1845,12 @@ msgid "El Salvador"
 msgstr "El Salvador"
 
 # SY
-# fuzzy
 #. :SLV:222:
 #: CountryCode.cc:420
 msgid "Syria"
 msgstr "Syyria"
 
 # SZ
-# fuzzy
 #. :SYR:760:
 #: CountryCode.cc:421
 msgid "Swaziland"
@@ -1905,7 +1862,6 @@ msgid "Turks and Caicos Islands"
 msgstr "Turks- ja Caicossaaret"
 
 # TD
-# fuzzy
 #. :TCA:796:
 #: CountryCode.cc:423
 msgid "Chad"
@@ -1928,7 +1884,6 @@ msgid "Thailand"
 msgstr "Thaimaa"
 
 # TJ
-# fuzzy
 #. :THA:764:
 #: CountryCode.cc:427
 msgid "Tajikistan"
@@ -1941,14 +1896,11 @@ msgid "Tokelau"
 msgstr "Tokelau"
 
 # TJ
-# fuzzy
 #. :TKL:772:
 #: CountryCode.cc:429
 msgid "Turkmenistan"
 msgstr "Turkmenistan"
 
-# TN
-# fuzzy
 #. :TKM:795:
 #: CountryCode.cc:430
 msgid "Tunisia"
@@ -2000,21 +1952,18 @@ msgid "Ukraine"
 msgstr "Ukraina"
 
 # UG
-# fuzzy
 #. :UKR:804:
 #: CountryCode.cc:439
 msgid "Uganda"
 msgstr "Uganda"
 
 # UM
-# fuzzy
 #. :UGA:800:
 #: CountryCode.cc:440
 msgid "United States Minor Outlying Islands"
 msgstr "Yhdysvaltain pienet erillissaaret"
 
 # US
-# fuzzy
 #. :UMI:581:
 #: CountryCode.cc:441
 msgid "United States"
@@ -2037,7 +1986,6 @@ msgid "Holy See (Vatican City State)"
 msgstr "Vatikaani"
 
 # VC
-# fuzzy
 #. :VAT:336:
 #: CountryCode.cc:445
 msgid "Saint Vincent and the Grenadines"
@@ -2050,21 +1998,18 @@ msgid "Venezuela"
 msgstr "Venezuela"
 
 # VI
-# fuzzy
 #. :VEN:862:
 #: CountryCode.cc:447
 msgid "British Virgin Islands"
 msgstr "Brittiläiset Neitsytsaaret"
 
 # VI
-# fuzzy
 #. :VGB:092:
 #: CountryCode.cc:448
 msgid "Virgin Islands, U.S."
 msgstr "Yhdysvaltain Neitsytsaaret"
 
 # VN
-# fuzzy
 #. :VIR:850:
 #: CountryCode.cc:449
 msgid "Vietnam"
@@ -2102,7 +2047,6 @@ msgid "South Africa"
 msgstr "Etelä-Afrikka"
 
 # ZM
-# fuzzy
 #. :ZAF:710:
 #: CountryCode.cc:456
 msgid "Zambia"
@@ -2229,7 +2173,6 @@ msgid "Aragonese"
 msgstr "aragonia"
 
 # AM
-# fuzzy
 #. language code: arm hye hy
 #: LanguageCode.cc:284 LanguageCode.cc:286
 msgid "Armenian"
@@ -2286,14 +2229,12 @@ msgid "Avestan"
 msgstr "avesta"
 
 # SZ
-# fuzzy
 #. language code: awa
 #: LanguageCode.cc:308
 msgid "Awadhi"
 msgstr "awadhi"
 
 # MM
-# fuzzy
 #. language code: aym ay
 #: LanguageCode.cc:310
 msgid "Aymara"
@@ -2357,7 +2298,7 @@ msgstr "beja"
 #. language code: bel be
 #: LanguageCode.cc:336
 msgid "Belarusian"
-msgstr "valkovenäjä"
+msgstr "valko-venäjä"
 
 #. language code: bem
 #: LanguageCode.cc:338
@@ -2365,7 +2306,6 @@ msgid "Bemba"
 msgstr "bemba"
 
 # BZ
-# fuzzy
 #. language code: ben bn
 #: LanguageCode.cc:340
 msgid "Bengali"
@@ -2382,7 +2322,6 @@ msgid "Bhojpuri"
 msgstr "bhojpuri"
 
 # BH
-# fuzzy
 #. language code: bih bh
 #: LanguageCode.cc:346
 msgid "Bihari"
@@ -2394,7 +2333,6 @@ msgid "Bikol"
 msgstr "bikol"
 
 # IN
-# fuzzy
 #. language code: bin
 #: LanguageCode.cc:350
 msgid "Bini"
@@ -2432,11 +2370,10 @@ msgid "Breton"
 msgstr "bretoni"
 
 # ID
-# fuzzy
 #. language code: btk
 #: LanguageCode.cc:364
 msgid "Batak (Indonesia)"
-msgstr "batak"
+msgstr "batak (indonesialainen)"
 
 #. language code: bua
 #: LanguageCode.cc:366
@@ -2530,7 +2467,6 @@ msgid "Chuukese"
 msgstr "chuuk"
 
 # ML
-# fuzzy
 #. language code: chm
 #: LanguageCode.cc:406
 msgid "Mari"
@@ -2849,7 +2785,6 @@ msgid "Ga"
 msgstr "gã"
 
 # GH
-# fuzzy
 #. language code: gay
 #: LanguageCode.cc:538
 msgid "Gayo"
@@ -2866,7 +2801,6 @@ msgid "Germanic (Other)"
 msgstr "muut germaaniset kielet"
 
 # GE
-# fuzzy
 #. language code: geo kat ka
 #: LanguageCode.cc:544 LanguageCode.cc:546
 msgid "Georgian"
@@ -3005,7 +2939,6 @@ msgid "Himachali"
 msgstr "himachali"
 
 # IN
-# fuzzy
 #. language code: hin hi
 #: LanguageCode.cc:604
 msgid "Hindi"
@@ -3042,7 +2975,6 @@ msgid "Hupa"
 msgstr "hupa"
 
 # IR
-# fuzzy
 #. language code: iba
 #: LanguageCode.cc:618
 msgid "Iban"
@@ -3446,7 +3378,6 @@ msgid "Madurese"
 msgstr "madura"
 
 # MU
-# fuzzy
 #. language code: mag
 #: LanguageCode.cc:778
 msgid "Magahi"
@@ -3468,7 +3399,6 @@ msgid "Makasar"
 msgstr "makassar"
 
 # MY
-# fuzzy
 #. language code: mal ml
 #: LanguageCode.cc:786
 msgid "Malayalam"
@@ -3480,7 +3410,6 @@ msgid "Mandingo"
 msgstr "mandingo"
 
 # ML
-# fuzzy
 #. language code: mao mri mi
 #: LanguageCode.cc:790 LanguageCode.cc:792
 msgid "Maori"
@@ -3492,7 +3421,6 @@ msgid "Austronesian (Other)"
 msgstr "muut austronesialaiset kielet"
 
 # MU
-# fuzzy
 #. language code: mar mr
 #: LanguageCode.cc:796
 msgid "Marathi"
@@ -3517,7 +3445,6 @@ msgid "Moksha"
 msgstr "mokša"
 
 # MM
-# fuzzy
 #. language code: mdr
 #: LanguageCode.cc:806
 msgid "Mandar"
@@ -3573,7 +3500,6 @@ msgid "Manchu"
 msgstr "mantšu"
 
 # ML
-# fuzzy
 #. language code: mni
 #: LanguageCode.cc:826
 msgid "Manipuri"
@@ -3689,7 +3615,6 @@ msgid "Low German"
 msgstr "alasaksa"
 
 # ML
-# fuzzy
 #. language code: nep ne
 #: LanguageCode.cc:870
 msgid "Nepali"
@@ -3791,7 +3716,6 @@ msgid "Ojibwa"
 msgstr "ojibwa"
 
 # SY
-# fuzzy
 #. language code: ori or
 #: LanguageCode.cc:910
 msgid "Oriya"
@@ -3833,7 +3757,6 @@ msgid "Pangasinan"
 msgstr "pangasinan"
 
 # ML
-# fuzzy
 #. language code: pal
 #: LanguageCode.cc:926
 msgid "Pahlavi"
@@ -3977,14 +3900,12 @@ msgid "Russian"
 msgstr "venäjä"
 
 # SD
-# fuzzy
 #. language code: sad
 #: LanguageCode.cc:982
 msgid "Sandawe"
 msgstr "sandawe"
 
 # SD
-# fuzzy
 #. language code: sag sg
 #: LanguageCode.cc:984
 msgid "Sango"
@@ -4163,7 +4084,6 @@ msgid "Sogdian"
 msgstr "sogdi"
 
 # SO
-# fuzzy
 #. language code: som so
 #: LanguageCode.cc:1060
 msgid "Somali"
@@ -4185,7 +4105,6 @@ msgid "Spanish"
 msgstr "espanja"
 
 # MR
-# fuzzy
 #. language code: srd sc
 #: LanguageCode.cc:1068
 msgid "Sardinian"
@@ -4230,7 +4149,6 @@ msgid "Sumerian"
 msgstr "sumeri"
 
 # SZ
-# fuzzy
 #. language code: swa sw
 #: LanguageCode.cc:1084
 msgid "Swahili"
@@ -4242,7 +4160,6 @@ msgid "Swedish"
 msgstr "ruotsi"
 
 # SY
-# fuzzy
 #. language code: syr
 #: LanguageCode.cc:1088
 msgid "Syriac"
@@ -4264,7 +4181,6 @@ msgid "Tamil"
 msgstr "tamil"
 
 # QA
-# fuzzy
 #. language code: tat tt
 #: LanguageCode.cc:1096
 msgid "Tatar"
@@ -4320,7 +4236,6 @@ msgid "Tigre"
 msgstr "tigre"
 
 # NG
-# fuzzy
 #. language code: tir ti
 #: LanguageCode.cc:1118
 msgid "Tigrinya"
@@ -4596,7 +4511,7 @@ msgstr "zuni"
 
 #: ZYppFactory.cc:279 ZYppFactory.cc:334
 msgid "Cannot acquire zypp lock."
-msgstr "zypp lukon hankkiminen ei onnistu."
+msgstr "zypp-lukon hankkiminen ei onnistu."
 
 #. Translator: %s = name of an rpm package. A list of diffs follows
 #. this message.
@@ -4691,7 +4606,7 @@ msgstr "Pakettitiedoston MD5-summa on väärä"
 
 #: target/rpm/RpmDb.cc:2135
 msgid "The package is not signed"
-msgstr "Paketti ei ole allekirjoitettu"
+msgstr "Pakettia ei olla allekirjoitettu"
 
 #: target/rpm/RpmDb.cc:2141
 msgid "The package has no MD5 sum"
@@ -4722,7 +4637,7 @@ msgstr "Käyttäjä keskeytti kohteen kirjoituksen."
 #: target/store/XMLFilesBackend.cc:925 target/store/XMLFilesBackend.cc:932
 #: source/yum/YUMScriptImpl.cc:78 source/yum/YUMScriptImpl.cc:112
 msgid "Can't write the patch script to a temporary file."
-msgstr "Ei voi kirjoittaa korjauskomentojonoa väliaikaiseen tiedostoon."
+msgstr "Ei voida kirjoittaa korjauskomentojonoa väliaikaiseen tiedostoon."
 
 #: source/yum/YUMScriptImpl.cc:89 source/yum/YUMScriptImpl.cc:123
 msgid "Failed check for the script file check sum"
@@ -4730,7 +4645,7 @@ msgstr "Komentojonon tarkistussumman tarkistus epäonnistui"
 
 #: source/yum/YUMSourceImpl.cc:247
 msgid "Signed repomd.xml file fails signature check"
-msgstr "Allekirjoitetun repomd.xml tiedoston allekirjoituksen tarkistus epäonnistui"
+msgstr "Allekirjoitetun repomd.xml -tiedoston allekirjoituksen tarkistus epäonnistui"
 
 #: source/SourceImpl.cc:384
 msgid " miss checksum."
@@ -4738,5 +4653,5 @@ msgstr " tarkistussumma puuttuu."
 
 #: source/SourceImpl.cc:390
 msgid " fails checksum verification."
-msgstr "tarkistussumman varmistaminen epäonnistui."
+msgstr " tarkistussumman varmistaminen epäonnistui."
 

@@ -1,20 +1,17 @@
-# Chinese message file for YaST2 (@memory@). -*- coding: utf-8 -*-
-# Copyright (C) 2005 SUSE Linux Products GmbH.
-# Copyright (C) 2002 SuSE Linux AG.
-# Copyright (C) 2001 SuSE GmbH.
+# Copyright (C) 2006 SuSE Linux Products GmbH, Nuernberg
+# This file is distributed under the same license as the package.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: YaST (@memory@)\n"
+"Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2006-10-26 09:41+0200\n"
-"PO-Revision-Date: 2006-05-31 13:41\n"
+"PO-Revision-Date: 2006-11-02 14:23\n"
 "Last-Translator: Novell Language <language@novell.com>\n"
 "Language-Team: Novell Language <language@novell.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
 
 #: solver/detail/ProblemSolutionIgnore.cc:54
 msgid "Ignore this requirement just here"
@@ -100,9 +97,8 @@ msgid "Do not install or delete concerning resolvables"
 msgstr "請勿安裝或刪除相關可解析檔"
 
 #: solver/detail/ProblemSolutionUnlock.cc:50
-#, fuzzy
 msgid "unlock all resolvables"
-msgstr "取消鎖住這些可解析檔"
+msgstr "解除鎖定所有可解析檔"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
 #: solver/detail/ProblemSolutionUnlock.cc:59
@@ -182,7 +178,7 @@ msgstr "選項"
 #. Translator: Notation for SuSE installation pattern (set of packages, describing use of system)
 #: solver/detail/ResolverInfoMisc.cc:98
 msgid "pattern"
-msgstr "模式"
+msgstr "樣式"
 
 #. Translator: Notation for product
 #: solver/detail/ResolverInfoMisc.cc:102
@@ -202,7 +198,7 @@ msgstr "程序檔"
 #. Translator: Notation for message (part of a patch)
 #: solver/detail/ResolverInfoMisc.cc:114
 msgid "message"
-msgstr "訊息"
+msgstr "郵件"
 
 #. Translator: Notation for atom (part of a patch)
 #: solver/detail/ResolverInfoMisc.cc:118
@@ -682,9 +678,9 @@ msgid "%s obsoletes %s. But %s cannot be deleted because it is locked."
 msgstr "%s 汰換 %s，但無法刪除 %s，因為已經鎖定。"
 
 #: solver/detail/Resolver_problems.cc:666
-#, fuzzy, c-format
+#, c-format
 msgid "Cannot install %s because it is conflicting"
-msgstr "無法安裝 %s，因為它與 %s 衝突"
+msgstr "無法安裝 %s，因為有衝突"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
 #: solver/detail/Resolver_problems.cc:685
@@ -704,7 +700,7 @@ msgstr "無代碼"
 
 #: CountryCode.cc:217
 msgid "Andorra"
-msgstr "安道爾共和國"
+msgstr "安道爾"
 
 #. :AND:020:
 #: CountryCode.cc:218
@@ -739,7 +735,7 @@ msgstr "亞美尼亞"
 #. :ARM:051:
 #: CountryCode.cc:224
 msgid "Netherlands Antilles"
-msgstr "荷蘭大小安第列斯群島"
+msgstr "荷屬安地列斯"
 
 #. :ANT:530:
 #: CountryCode.cc:225
@@ -774,7 +770,7 @@ msgstr "澳大利亞"
 #. :AUS:036:
 #: CountryCode.cc:231
 msgid "Aruba"
-msgstr "阿魯巴"
+msgstr "阿盧巴島"
 
 #. :ABW:533:
 #: CountryCode.cc:232
@@ -784,7 +780,7 @@ msgstr "愛蘭群島"
 #. :ALA:248:
 #: CountryCode.cc:233
 msgid "Azerbaijan"
-msgstr "亞塞拜然"
+msgstr "亞賽拜然"
 
 #. :AZE:031:
 #: CountryCode.cc:234
@@ -799,7 +795,7 @@ msgstr "巴貝多"
 #. :BRB:052:
 #: CountryCode.cc:236
 msgid "Bangladesh"
-msgstr "孟加拉共和國"
+msgstr "孟加拉"
 
 #. :BGD:050:
 #: CountryCode.cc:237
@@ -809,7 +805,7 @@ msgstr "比利時"
 #. :BEL:056:
 #: CountryCode.cc:238
 msgid "Burkina Faso"
-msgstr "布基那法索國"
+msgstr "布吉納法索"
 
 #. :BFA:854:
 #: CountryCode.cc:239
@@ -824,7 +820,7 @@ msgstr "巴林"
 #. :BHR:048:
 #: CountryCode.cc:241
 msgid "Burundi"
-msgstr "蒲隆地"
+msgstr "浦隆地"
 
 #. :BDI:108:
 #: CountryCode.cc:242
@@ -864,12 +860,12 @@ msgstr "不丹"
 #. :BTN:064:
 #: CountryCode.cc:249
 msgid "Bouvet Island"
-msgstr "布維特島"
+msgstr "波維特島"
 
 #. :BVT:074:
 #: CountryCode.cc:250
 msgid "Botswana"
-msgstr "波紮那"
+msgstr "波札那"
 
 #. :BWA:072:
 #: CountryCode.cc:251
@@ -889,13 +885,13 @@ msgstr "加拿大"
 #. :CAN:124:
 #: CountryCode.cc:254
 msgid "Cocos (Keeling) Islands"
-msgstr "科科斯群島"
+msgstr "可可斯群島"
 
 #. :CCK:166:
 #. :CAF:140:
 #: CountryCode.cc:255 CountryCode.cc:257
 msgid "Congo"
-msgstr "剛果"
+msgstr "剛果共和國"
 
 #. :COD:180:
 #: CountryCode.cc:256
@@ -915,7 +911,7 @@ msgstr "象牙海岸"
 #. :CIV:384:
 #: CountryCode.cc:260
 msgid "Cook Islands"
-msgstr "庫克群島"
+msgstr "科克群島"
 
 #. :COK:184:
 #: CountryCode.cc:261
@@ -945,7 +941,7 @@ msgstr "哥斯大黎加"
 #. :CRI:188:
 #: CountryCode.cc:266
 msgid "Serbia and Montenegro"
-msgstr "塞爾維亞和芒特尼格羅共和國"
+msgstr "塞爾維亞和黑山"
 
 #. :SCG:891:
 #: CountryCode.cc:267
@@ -955,7 +951,7 @@ msgstr "古巴"
 #. :CUB:192:
 #: CountryCode.cc:268
 msgid "Cape Verde"
-msgstr "維德角"
+msgstr "維德角島"
 
 #. :CPV:132:
 #: CountryCode.cc:269
@@ -965,7 +961,7 @@ msgstr "聖誕島"
 #. :CXR:162:
 #: CountryCode.cc:270
 msgid "Cyprus"
-msgstr "塞普勒斯"
+msgstr "賽普勒斯"
 
 #. :CYP:196:
 #: CountryCode.cc:271
@@ -990,7 +986,7 @@ msgstr "丹麥"
 #. :DNK:208:
 #: CountryCode.cc:275
 msgid "Dominica"
-msgstr "多米尼克"
+msgstr "多明尼克"
 
 #. :DMA:212:
 #: CountryCode.cc:276
@@ -1005,7 +1001,7 @@ msgstr "阿爾及利亞"
 #. :DZA:012:
 #: CountryCode.cc:278
 msgid "Ecuador"
-msgstr "厄瓜多爾"
+msgstr "厄瓜多"
 
 #. :ECU:218:
 #: CountryCode.cc:279
@@ -1025,7 +1021,7 @@ msgstr "西撒哈拉"
 #. :ESH:732:
 #: CountryCode.cc:282
 msgid "Eritrea"
-msgstr "厄立特里亞"
+msgstr "厄利垂亞"
 
 #. :ERI:232:
 #: CountryCode.cc:283
@@ -1035,7 +1031,7 @@ msgstr "西班牙"
 #. :ESP:724:
 #: CountryCode.cc:284
 msgid "Ethiopia"
-msgstr "衣索比亞"
+msgstr "依索比亞"
 
 #. :ETH:231:
 #: CountryCode.cc:285
@@ -1045,7 +1041,7 @@ msgstr "芬蘭"
 #. :FIN:246:
 #: CountryCode.cc:286
 msgid "Fiji"
-msgstr "斐濟"
+msgstr "斐濟群島"
 
 #. :FJI:242:
 #: CountryCode.cc:287
@@ -1085,7 +1081,7 @@ msgstr "英國"
 #. :GBR:826:
 #: CountryCode.cc:294
 msgid "Grenada"
-msgstr "格瑞納達"
+msgstr "格瑞那達"
 
 #. :GRD:308:
 #: CountryCode.cc:295
@@ -1095,7 +1091,7 @@ msgstr "喬治亞"
 #. :GEO:268:
 #: CountryCode.cc:296
 msgid "French Guiana"
-msgstr "法屬圭亞納"
+msgstr "法屬圭亞那"
 
 #. :GUF:254:
 #: CountryCode.cc:297
@@ -1110,7 +1106,7 @@ msgstr "直布羅陀"
 #. :GIB:292:
 #: CountryCode.cc:299
 msgid "Greenland"
-msgstr "格林蘭島"
+msgstr "格陵蘭"
 
 #. :GRL:304:
 #: CountryCode.cc:300
@@ -1125,7 +1121,7 @@ msgstr "幾內亞"
 #. :GIN:324:
 #: CountryCode.cc:302
 msgid "Guadeloupe"
-msgstr "哥德洛普島 (法屬)"
+msgstr "瓜德魯普島"
 
 #. :GLP:312:
 #: CountryCode.cc:303
@@ -1140,7 +1136,7 @@ msgstr "希臘"
 #. :GRC:300:
 #: CountryCode.cc:305
 msgid "South Georgia and the South Sandwich Islands"
-msgstr "南喬治亞語南三明治群島"
+msgstr "南喬治亞及南桑威奇群島"
 
 #. :SGS:239:
 #: CountryCode.cc:306
@@ -1155,12 +1151,12 @@ msgstr "關島"
 #. :GUM:316:
 #: CountryCode.cc:308
 msgid "Guinea-Bissau"
-msgstr "幾內亞比紹"
+msgstr "幾內亞比索"
 
 #. :GNB:624:
 #: CountryCode.cc:309
 msgid "Guyana"
-msgstr "蓋亞那"
+msgstr "蓋亞納"
 
 #. :GUY:328:
 #: CountryCode.cc:310
@@ -1180,7 +1176,7 @@ msgstr "宏都拉斯"
 #. :HND:340:
 #: CountryCode.cc:313
 msgid "Croatia"
-msgstr "克羅埃西亞共和國"
+msgstr "克羅埃西亞"
 
 #. :HRV:191:
 #: CountryCode.cc:314
@@ -1215,12 +1211,12 @@ msgstr "印度"
 #. :IND:356:
 #: CountryCode.cc:320
 msgid "British Indian Ocean Territory"
-msgstr "英屬印度洋領土"
+msgstr "英屬印度洋地區"
 
 #. :IOT:086:
 #: CountryCode.cc:321
 msgid "Iraq"
-msgstr "伊拉客"
+msgstr "伊拉克"
 
 #. :IRQ:368:
 #: CountryCode.cc:322
@@ -1265,12 +1261,12 @@ msgstr "吉爾吉斯"
 #. :KGZ:417:
 #: CountryCode.cc:330
 msgid "Cambodia"
-msgstr "柬埔寨"
+msgstr "柬埔寨王國"
 
 #. :KHM:116:
 #: CountryCode.cc:331
 msgid "Kiribati"
-msgstr "吉里巴斯共和國"
+msgstr "吉里巴斯"
 
 #. :KIR:296:
 #: CountryCode.cc:332
@@ -1280,7 +1276,7 @@ msgstr "葛摩"
 #. :COM:174:
 #: CountryCode.cc:333
 msgid "Saint Kitts and Nevis"
-msgstr "聖克里斯多福及尼維斯"
+msgstr "聖克里斯多福"
 
 #. :KNA:659:
 #: CountryCode.cc:334
@@ -1400,7 +1396,7 @@ msgstr "馬利"
 #. :MLI:466:
 #: CountryCode.cc:357
 msgid "Myanmar"
-msgstr "緬甸文"
+msgstr "緬甸"
 
 #. :MMR:104:
 #: CountryCode.cc:358
@@ -1415,12 +1411,12 @@ msgstr "澳門"
 #. :MAC:446:
 #: CountryCode.cc:360
 msgid "Northern Mariana Islands"
-msgstr "北馬里安納群島"
+msgstr "北馬里亞納群島"
 
 #. :MNP:580:
 #: CountryCode.cc:361
 msgid "Martinique"
-msgstr "馬丁尼克"
+msgstr "法屬馬丁尼克"
 
 #. :MTQ:474:
 #: CountryCode.cc:362
@@ -1430,7 +1426,7 @@ msgstr "茅利塔尼亞"
 #. :MRT:478:
 #: CountryCode.cc:363
 msgid "Montserrat"
-msgstr "蒙特色拉特島"
+msgstr "蒙瑟拉特島"
 
 #. :MSR:500:
 #: CountryCode.cc:364
@@ -1470,12 +1466,12 @@ msgstr "莫三比克"
 #. :MOZ:508:
 #: CountryCode.cc:371
 msgid "Namibia"
-msgstr "那米比亞"
+msgstr "納米比亞"
 
 #. :NAM:516:
 #: CountryCode.cc:372
 msgid "New Caledonia"
-msgstr "新喀里多尼亞群島"
+msgstr "新喀里多尼亞島"
 
 #. :NCL:540:
 #: CountryCode.cc:373
@@ -1485,7 +1481,7 @@ msgstr "尼日"
 #. :NER:562:
 #: CountryCode.cc:374
 msgid "Norfolk Island"
-msgstr "諾福克島"
+msgstr "諾福克群島"
 
 #. :NFK:574:
 #: CountryCode.cc:375
@@ -1516,7 +1512,7 @@ msgstr "尼泊爾"
 #. language code: nau na
 #: CountryCode.cc:380 LanguageCode.cc:858
 msgid "Nauru"
-msgstr "諾魯語"
+msgstr "諾魯"
 
 #. :NRU:520:
 #: CountryCode.cc:381
@@ -1541,17 +1537,17 @@ msgstr "巴拿馬"
 #. :PAN:591:
 #: CountryCode.cc:385
 msgid "Peru"
-msgstr "祕魯"
+msgstr "秘魯"
 
 #. :PER:604:
 #: CountryCode.cc:386
 msgid "French Polynesia"
-msgstr "法屬波里尼西亞"
+msgstr "法屬玻里尼西亞"
 
 #. :PYF:258:
 #: CountryCode.cc:387
 msgid "Papua New Guinea"
-msgstr "巴布亞新幾內亞"
+msgstr "巴布亞紐幾內亞"
 
 #. :PNG:598:
 #: CountryCode.cc:388
@@ -1586,7 +1582,7 @@ msgstr "波多黎各"
 #. :PRI:630:
 #: CountryCode.cc:394
 msgid "Palestinian Territory"
-msgstr "巴勒斯坦領土"
+msgstr "巴勒斯坦地區"
 
 #. :PSE:275:
 #: CountryCode.cc:395
@@ -1596,7 +1592,7 @@ msgstr "葡萄牙"
 #. :PRT:620:
 #: CountryCode.cc:396
 msgid "Palau"
-msgstr "帛琉"
+msgstr "帛琉群島"
 
 #. :PLW:585:
 #: CountryCode.cc:397
@@ -1611,7 +1607,7 @@ msgstr "卡達"
 #. :QAT:634:
 #: CountryCode.cc:399
 msgid "Reunion"
-msgstr "留尼旺島"
+msgstr "留尼旺"
 
 #. :REU:638:
 #: CountryCode.cc:400
@@ -1621,7 +1617,7 @@ msgstr "羅馬尼亞"
 #. :ROU:642:
 #: CountryCode.cc:401
 msgid "Russian Federation"
-msgstr "俄羅斯聯邦"
+msgstr "俄羅斯"
 
 #. :RUS:643:
 #: CountryCode.cc:402
@@ -1631,17 +1627,17 @@ msgstr "盧安達"
 #. :RWA:646:
 #: CountryCode.cc:403
 msgid "Saudi Arabia"
-msgstr "阿烏地阿拉伯"
+msgstr "沙烏地阿拉伯"
 
 #. :SAU:682:
 #: CountryCode.cc:404
 msgid "Solomon Islands"
-msgstr "所羅門群島"
+msgstr "索羅門群島"
 
 #. :SLB:090:
 #: CountryCode.cc:405
 msgid "Seychelles"
-msgstr "塞席爾群島"
+msgstr "塞席爾"
 
 #. :SYC:690:
 #: CountryCode.cc:406
@@ -1666,7 +1662,7 @@ msgstr "聖赫勒拿島"
 #. :SHN:654:
 #: CountryCode.cc:410
 msgid "Slovenia"
-msgstr "斯洛維尼亞共和國"
+msgstr "斯洛凡尼亞"
 
 #. :SVN:705:
 #: CountryCode.cc:411
@@ -1686,7 +1682,7 @@ msgstr "獅子山"
 #. :SLE:694:
 #: CountryCode.cc:414
 msgid "San Marino"
-msgstr "聖馬力諾"
+msgstr "聖馬利諾"
 
 #. :SMR:674:
 #: CountryCode.cc:415
@@ -1706,7 +1702,7 @@ msgstr "蘇利南"
 #. :SUR:740:
 #: CountryCode.cc:418
 msgid "Sao Tome and Principe"
-msgstr "聖多美普林西比"
+msgstr "聖多美及普林西比"
 
 #. :STP:678:
 #: CountryCode.cc:419
@@ -1736,7 +1732,7 @@ msgstr "查德"
 #. :TCD:148:
 #: CountryCode.cc:424
 msgid "French Southern Territories"
-msgstr "法國南方領土"
+msgstr "法屬南部屬地"
 
 #. :ATF:260:
 #: CountryCode.cc:425
@@ -1757,7 +1753,7 @@ msgstr "塔吉克"
 #. language code: tkl
 #: CountryCode.cc:428 LanguageCode.cc:1122
 msgid "Tokelau"
-msgstr "托克勞語"
+msgstr "托克勞群島"
 
 #. :TKL:772:
 #: CountryCode.cc:429
@@ -1787,18 +1783,18 @@ msgstr "土耳其"
 #. :TUR:792:
 #: CountryCode.cc:434
 msgid "Trinidad and Tobago"
-msgstr "千里達托貝哥"
+msgstr "千里達"
 
 #. :TTO:780:
 #. language code: tvl
 #: CountryCode.cc:435 LanguageCode.cc:1152
 msgid "Tuvalu"
-msgstr "吐瓦魯語"
+msgstr "吐瓦魯"
 
 #. :TUV:798:
 #: CountryCode.cc:436
 msgid "Taiwan"
-msgstr "台灣"
+msgstr "臺灣"
 
 #. :TWN:158:
 #: CountryCode.cc:437
@@ -1818,7 +1814,7 @@ msgstr "烏干達"
 #. :UGA:800:
 #: CountryCode.cc:440
 msgid "United States Minor Outlying Islands"
-msgstr "美國外島"
+msgstr "美屬邊疆群島"
 
 #. :UMI:581:
 #: CountryCode.cc:441
@@ -1843,7 +1839,7 @@ msgstr "羅馬教庭 (梵蒂岡)"
 #. :VAT:336:
 #: CountryCode.cc:445
 msgid "Saint Vincent and the Grenadines"
-msgstr "聖文森及格瑞那丁"
+msgstr "聖文森"
 
 #. :VCT:670:
 #: CountryCode.cc:446
@@ -1878,7 +1874,7 @@ msgstr "瓦利斯及福杜納群島"
 #. :WLF:876:
 #: CountryCode.cc:452
 msgid "Samoa"
-msgstr "薩摩亞"
+msgstr "薩摩亞群島"
 
 #. :WSM:882:
 #: CountryCode.cc:453
@@ -1888,7 +1884,7 @@ msgstr "葉門"
 #. :YEM:887:
 #: CountryCode.cc:454
 msgid "Mayotte"
-msgstr "馬約特島"
+msgstr "美亞特"
 
 #. :MYT:175:
 #: CountryCode.cc:455
@@ -2752,7 +2748,7 @@ msgstr "夏威夷語"
 #. language code: heb he
 #: LanguageCode.cc:596
 msgid "Hebrew"
-msgstr "希伯來文"
+msgstr "希伯來語"
 
 #. language code: her hz
 #: LanguageCode.cc:598
@@ -2907,7 +2903,7 @@ msgstr "邏輯語"
 #. language code: jpn ja
 #: LanguageCode.cc:660
 msgid "Japanese"
-msgstr "日語"
+msgstr "日文"
 
 #. language code: jpr
 #: LanguageCode.cc:662
@@ -3037,7 +3033,7 @@ msgstr "剛果語"
 #. language code: kor ko
 #: LanguageCode.cc:712
 msgid "Korean"
-msgstr "韓語"
+msgstr "韓文"
 
 #. language code: kos
 #: LanguageCode.cc:714
@@ -4260,9 +4256,8 @@ msgid "Zuni"
 msgstr "祖尼語"
 
 #: ZYppFactory.cc:279 ZYppFactory.cc:334
-#, fuzzy
 msgid "Cannot acquire zypp lock."
-msgstr "無法取得 zypp 鎖定。"
+msgstr "無法取得 zypp 鎖。"
 
 #. Translator: %s = name of an rpm package. A list of diffs follows
 #. this message.
@@ -4340,7 +4335,7 @@ msgstr "%s 移除成功"
 
 #: target/rpm/RpmDb.cc:2114
 msgid "Ok"
-msgstr "確定"
+msgstr "確認"
 
 #. translator: these are different kinds of how an rpm package can be broken
 #: target/rpm/RpmDb.cc:2117
@@ -4388,7 +4383,7 @@ msgstr "使用者已中止目標委託。"
 #: target/store/XMLFilesBackend.cc:925 target/store/XMLFilesBackend.cc:932
 #: source/yum/YUMScriptImpl.cc:78 source/yum/YUMScriptImpl.cc:112
 msgid "Can't write the patch script to a temporary file."
-msgstr ""
+msgstr "無法將修補程式碼寫入暫存檔。"
 
 #: source/yum/YUMScriptImpl.cc:89 source/yum/YUMScriptImpl.cc:123
 msgid "Failed check for the script file check sum"
@@ -4400,60 +4395,8 @@ msgstr "已簽署的 repomd.xml 檔案簽章檢查失敗"
 
 #: source/SourceImpl.cc:384
 msgid " miss checksum."
-msgstr ""
+msgstr "遺失總和檢查碼。"
 
 #: source/SourceImpl.cc:390
-#, fuzzy
 msgid " fails checksum verification."
 msgstr "檢查總數驗證失敗。"
-
-#~ msgid "Failed check for the metadata file check sum"
-#~ msgstr "無法檢查中繼資料檢查總數"
-
-#~ msgid "Unable to restore all sources."
-#~ msgstr "無法還原所有的來源。"
-
-#~ msgid "At least one source already registered, cannot restore sources from persistent store."
-#~ msgstr "至少已有一個來源完成註冊，無法還原持續儲存的來源。"
-
-#~ msgid "Default"
-#~ msgstr "預設值"
-
-#~ msgid "ignore architecture"
-#~ msgstr "忽略結構"
-
-#~ msgid "Ignore this requirement for all other resolvables."
-#~ msgstr "%s 是其他可解析檔的必要項目"
-
-#~ msgid "%s cannot be uninstalled due missing dependencies"
-#~ msgstr "因為缺少相依性，導致無法解除安裝 %s"
-
-#~ msgid "Deleting %s"
-#~ msgstr "正在刪除 %s"
-
-#~ msgid "Marking %s as uninstallable due to conflicts over %s (%s) from %s"
-#~ msgstr "將 %s 標示為不可安裝，因為 %s (%s) (來自 %s) 發生衝突"
-
-#~ msgid "There are no alternative installed providers of %s for %s"
-#~ msgstr "沒有適用 %s的 %s 其他安裝提供者"
-
-#~ msgid "There are no installable providers of %s for %s"
-#~ msgstr "沒有適用於 %s 的 %s 可安裝提供者"
-
-#~ msgid "unknown"
-#~ msgstr "不明的"
-
-#~ msgid "installed"
-#~ msgstr "已安裝"
-
-#~ msgid "uninstalled"
-#~ msgstr "已解除安裝"
-
-#~ msgid "to be installed (soft)"
-#~ msgstr "待安裝 (軟體)"
-
-#~ msgid "to be uninstalled"
-#~ msgstr "待解除安裝"
-
-#~ msgid "Can't install %s, since a resolvable of the same name is already marked as needing to be installed"
-#~ msgstr "無法安裝 %s，可解析同名已經標示為待安裝"

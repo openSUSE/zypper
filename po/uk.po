@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: zypp.uk\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2006-10-26 09:41+0200\n"
-"PO-Revision-Date: 2006-10-18 21:33-0700\n"
+"PO-Revision-Date: 2006-11-06 17:51-0800\n"
 "Last-Translator: Ivan Petrouchtchak <ivanpetrouchtchak@yahoo.com>\n"
 "Language-Team: Ukrainian <translation@linux.org.ua>\n"
 "MIME-Version: 1.0\n"
@@ -103,9 +103,8 @@ msgid "Do not install or delete concerning resolvables"
 msgstr "Не встановлювати і не видаляти дані пакунки"
 
 #: solver/detail/ProblemSolutionUnlock.cc:50
-#, fuzzy
 msgid "unlock all resolvables"
-msgstr "Розблокувати ці потрібні пакунки"
+msgstr "розблокувати ці потрібні пакунки"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
 #: solver/detail/ProblemSolutionUnlock.cc:59
@@ -802,7 +801,7 @@ msgstr "Азербайджан"
 #. :AZE:031:
 #: CountryCode.cc:234
 msgid "Bosnia and Herzegovina"
-msgstr "Боснія і Герцеґовина"
+msgstr "Боснія і Герцеговина"
 
 # BB
 #. :BIH:070:
@@ -850,7 +849,7 @@ msgstr "Бенін"
 #. :BEN:204:
 #: CountryCode.cc:243
 msgid "Bermuda"
-msgstr "Бермуда"
+msgstr "Бермуди"
 
 #. :BMU:060:
 #: CountryCode.cc:244
@@ -1008,7 +1007,7 @@ msgstr "Німеччина"
 #. :DEU:276:
 #: CountryCode.cc:273
 msgid "Djibouti"
-msgstr "Джибуті"
+msgstr "Джібуті"
 
 #. :DJI:262:
 #: CountryCode.cc:274
@@ -1092,7 +1091,7 @@ msgstr "Мікронезія (Федеральні Штати)"
 #. :FSM:583:
 #: CountryCode.cc:289
 msgid "Faroe Islands"
-msgstr "Фароські острови"
+msgstr "Фарерські острови"
 
 #. :FRO:234:
 #: CountryCode.cc:290
@@ -1109,7 +1108,7 @@ msgstr "Метропольна Франція"
 #. :FXX:249:
 #: CountryCode.cc:292
 msgid "Gabon"
-msgstr "Ґабон"
+msgstr "Габон"
 
 #. :GAB:266:
 #: CountryCode.cc:293
@@ -1130,7 +1129,7 @@ msgstr "Грузія"
 #. :GEO:268:
 #: CountryCode.cc:296
 msgid "French Guiana"
-msgstr "Французька Ґвіана"
+msgstr "Французька Гвіана"
 
 # GH
 # fuzzy
@@ -1142,7 +1141,7 @@ msgstr "Китай"
 #. :GHA:288:
 #: CountryCode.cc:298
 msgid "Gibraltar"
-msgstr "Ґібралтар"
+msgstr "Гібралтар"
 
 #. :GIB:292:
 #: CountryCode.cc:299
@@ -1161,17 +1160,17 @@ msgstr "Ямайка"
 #. :GMB:270:
 #: CountryCode.cc:301
 msgid "Guinea"
-msgstr "Ґвінея"
+msgstr "Гвінея"
 
 #. :GIN:324:
 #: CountryCode.cc:302
 msgid "Guadeloupe"
-msgstr "Ґваделупа"
+msgstr "Гваделупа"
 
 #. :GLP:312:
 #: CountryCode.cc:303
 msgid "Equatorial Guinea"
-msgstr "Екваторіальна Ґвінея"
+msgstr "Екваторіальна Гвінея"
 
 #. :GNQ:226:
 #: CountryCode.cc:304
@@ -1205,7 +1204,7 @@ msgstr "Гвінея-бісау"
 #. :GNB:624:
 #: CountryCode.cc:309
 msgid "Guyana"
-msgstr "Ґвіана"
+msgstr "Гвіана"
 
 #. :GUY:328:
 #: CountryCode.cc:310
@@ -1641,7 +1640,7 @@ msgstr "Французька Полінезія"
 #. :PYF:258:
 #: CountryCode.cc:387
 msgid "Papua New Guinea"
-msgstr "Папуа Нова Ґвінея"
+msgstr "Папуа Нова Гвінея"
 
 #. :PNG:598:
 #: CountryCode.cc:388
@@ -1770,12 +1769,12 @@ msgstr "Свальбард і Ян Маєн"
 #. :SJM:744:
 #: CountryCode.cc:412
 msgid "Slovakia"
-msgstr "Словакія"
+msgstr "Словацька"
 
 #. :SVK:703:
 #: CountryCode.cc:413
 msgid "Sierra Leone"
-msgstr "Сьєрра Леоне"
+msgstr "Сьєра Леоне"
 
 #. :SLE:694:
 #: CountryCode.cc:414
@@ -1947,14 +1946,14 @@ msgstr "Узбекистан"
 #. :UZB:860:
 #: CountryCode.cc:444
 msgid "Holy See (Vatican City State)"
-msgstr "Святий Престіл (Ватикан, Місто-Держава)"
+msgstr "Святий Престіл (Ватикан, місто-держава)"
 
 # VC
 # fuzzy
 #. :VAT:336:
 #: CountryCode.cc:445
 msgid "Saint Vincent and the Grenadines"
-msgstr "Сент Вінсент і Ґренадіни"
+msgstr "Сент Вікент і Гренадіни"
 
 #. :VCT:670:
 #: CountryCode.cc:446
@@ -2043,24 +2042,22 @@ msgstr "Абхазька"
 #. language code: ace
 #: LanguageCode.cc:242
 msgid "Achinese"
-msgstr ""
+msgstr "Ахінська"
 
 #. language code: ach
 #: LanguageCode.cc:244
-#, fuzzy
 msgid "Acoli"
-msgstr "Псевдонім"
+msgstr "Аколі"
 
 #. language code: ada
 #: LanguageCode.cc:246
-#, fuzzy
 msgid "Adangme"
-msgstr "Діапазон"
+msgstr "Адангме"
 
 #. language code: ady
 #: LanguageCode.cc:248
 msgid "Adyghe"
-msgstr ""
+msgstr "Адиґхе"
 
 #. language code: afa
 #: LanguageCode.cc:250
@@ -2079,9 +2076,8 @@ msgstr "Африкаанська"
 
 #. language code: ain
 #: LanguageCode.cc:256
-#, fuzzy
 msgid "Ainu"
-msgstr "Linux"
+msgstr "Аіну"
 
 #. language code: aka ak
 #: LanguageCode.cc:258
@@ -2090,9 +2086,8 @@ msgstr "Акан"
 
 #. language code: akk
 #: LanguageCode.cc:260
-#, fuzzy
 msgid "Akkadian"
-msgstr "Абхазька"
+msgstr "Акадійська"
 
 #. language code: alb sqi sq
 #: LanguageCode.cc:262 LanguageCode.cc:264
@@ -2106,9 +2101,8 @@ msgstr "Алеутська"
 
 #. language code: alg
 #: LanguageCode.cc:268
-#, fuzzy
 msgid "Algonquian languages"
-msgstr "Австралійські мови"
+msgstr "Алгонкійські мови"
 
 #. language code: alt
 #: LanguageCode.cc:270
@@ -2142,9 +2136,8 @@ msgstr "Арамейська"
 
 #. language code: arg an
 #: LanguageCode.cc:282
-#, fuzzy
 msgid "Aragonese"
-msgstr "Фарерська"
+msgstr "Аргонійська"
 
 # AM
 # fuzzy
@@ -2157,15 +2150,13 @@ msgstr "Вірменська"
 # fuzzy
 #. language code: arn
 #: LanguageCode.cc:288
-#, fuzzy
 msgid "Araucanian"
-msgstr "Вірменська"
+msgstr "Арауканська"
 
 #. language code: arp
 #: LanguageCode.cc:290
-#, fuzzy
 msgid "Arapaho"
-msgstr "Графік"
+msgstr "Арапаго"
 
 #. language code: art
 #: LanguageCode.cc:292
@@ -2184,15 +2175,13 @@ msgstr "Асамійська"
 
 #. language code: ast
 #: LanguageCode.cc:298
-#, fuzzy
 msgid "Asturian"
-msgstr "Австрія"
+msgstr "Астурійська"
 
 #. language code: ath
 #: LanguageCode.cc:300
-#, fuzzy
 msgid "Athapascan languages"
-msgstr "Мови апачі"
+msgstr "Атапаські мови"
 
 #. language code: aus
 #: LanguageCode.cc:302
@@ -2201,9 +2190,8 @@ msgstr "Австралійські мови"
 
 #. language code: ava av
 #: LanguageCode.cc:304
-#, fuzzy
 msgid "Avaric"
-msgstr "Амхарська"
+msgstr "Аварікська"
 
 #. language code: ave ae
 #: LanguageCode.cc:306
@@ -2214,9 +2202,8 @@ msgstr "Авестан"
 # fuzzy
 #. language code: awa
 #: LanguageCode.cc:308
-#, fuzzy
 msgid "Awadhi"
-msgstr "Свагільська"
+msgstr "Авадхі"
 
 # MM
 # fuzzy
@@ -2238,7 +2225,7 @@ msgstr "Банда"
 #. language code: bai
 #: LanguageCode.cc:316
 msgid "Bamileke languages"
-msgstr ""
+msgstr "Бамілекські мови"
 
 #. language code: bak ba
 #: LanguageCode.cc:318
@@ -2248,19 +2235,17 @@ msgstr "Башкирська"
 #. language code: bal
 #: LanguageCode.cc:320
 msgid "Baluchi"
-msgstr ""
+msgstr "Балучі"
 
 #. language code: bam bm
 #: LanguageCode.cc:322
-#, fuzzy
 msgid "Bambara"
-msgstr "SuperKaramba"
+msgstr "Бамбара"
 
 #. language code: ban
 #: LanguageCode.cc:324
-#, fuzzy
 msgid "Balinese"
-msgstr "Основа"
+msgstr "Балійська"
 
 #. language code: baq eus eu
 #: LanguageCode.cc:326 LanguageCode.cc:328
@@ -2269,9 +2254,8 @@ msgstr "Баскська"
 
 #. language code: bas
 #: LanguageCode.cc:330
-#, fuzzy
 msgid "Basa"
-msgstr "Основа"
+msgstr "Баса"
 
 #. language code: bat
 #: LanguageCode.cc:332
@@ -2281,7 +2265,7 @@ msgstr "Балтійські (інші)"
 #. language code: bej
 #: LanguageCode.cc:334
 msgid "Beja"
-msgstr ""
+msgstr "Бежа"
 
 #. language code: bel be
 #: LanguageCode.cc:336
@@ -2290,9 +2274,8 @@ msgstr "Білоруська"
 
 #. language code: bem
 #: LanguageCode.cc:338
-#, fuzzy
 msgid "Bemba"
-msgstr "Бермуда"
+msgstr "Бемба"
 
 #. language code: ben bn
 #: LanguageCode.cc:340
@@ -2306,7 +2289,6 @@ msgstr "Берберські (інші)"
 
 #. language code: bho
 #: LanguageCode.cc:344
-#, fuzzy
 msgid "Bhojpuri"
 msgstr "Бходжпурі"
 
@@ -2318,13 +2300,12 @@ msgstr "Біхарі"
 #. language code: bik
 #: LanguageCode.cc:348
 msgid "Bikol"
-msgstr ""
+msgstr "Бікол"
 
 #. language code: bin
 #: LanguageCode.cc:350
-#, fuzzy
 msgid "Bini"
-msgstr "Хінді"
+msgstr "Біні"
 
 #. language code: bis bi
 #: LanguageCode.cc:352
@@ -2334,7 +2315,7 @@ msgstr "Біслама"
 #. language code: bla
 #: LanguageCode.cc:354
 msgid "Siksika"
-msgstr ""
+msgstr "Сіксіка"
 
 #. language code: bnt
 #: LanguageCode.cc:356
@@ -2349,14 +2330,13 @@ msgstr "Боснійська"
 # BR
 #. language code: bra
 #: LanguageCode.cc:360
-#, fuzzy
 msgid "Braj"
-msgstr "Бразилія"
+msgstr "Браж"
 
 #. language code: bre br
 #: LanguageCode.cc:362
 msgid "Breton"
-msgstr "Французька"
+msgstr "Бретонська"
 
 #. language code: btk
 #: LanguageCode.cc:364
@@ -2365,15 +2345,13 @@ msgstr "Батак (Індонезія)"
 
 #. language code: bua
 #: LanguageCode.cc:366
-#, fuzzy
 msgid "Buriat"
-msgstr "Болгарія"
+msgstr "Буріатська"
 
 #. language code: bug
 #: LanguageCode.cc:368
-#, fuzzy
 msgid "Buginese"
-msgstr "Китайський"
+msgstr "Бугійська"
 
 #. language code: bul bg
 #: LanguageCode.cc:370
@@ -2387,15 +2365,13 @@ msgstr "Бірманська"
 
 #. language code: byn
 #: LanguageCode.cc:376
-#, fuzzy
 msgid "Blin"
-msgstr "Жалюзі"
+msgstr "Блін"
 
 #. language code: cad
 #: LanguageCode.cc:378
-#, fuzzy
 msgid "Caddo"
-msgstr "Карти"
+msgstr "Каддо"
 
 #. language code: cai
 #: LanguageCode.cc:380
@@ -2404,9 +2380,8 @@ msgstr "Індіанські центрально-американські (ін
 
 #. language code: car
 #: LanguageCode.cc:382
-#, fuzzy
 msgid "Carib"
-msgstr "Карибські острови"
+msgstr "Карибські мови"
 
 #. language code: cat ca
 #: LanguageCode.cc:384
@@ -2420,9 +2395,8 @@ msgstr "Кавказькі (інші)"
 
 #. language code: ceb
 #: LanguageCode.cc:388
-#, fuzzy
 msgid "Cebuano"
-msgstr "Ліван"
+msgstr "Кебуанська"
 
 #. language code: cel
 #: LanguageCode.cc:390
@@ -2431,16 +2405,14 @@ msgstr "Кельтські (інші)"
 
 #. language code: cha ch
 #: LanguageCode.cc:392
-#, fuzzy
 msgid "Chamorro"
-msgstr "Name=Чаморо"
+msgstr "Чаморо"
 
 # CN
 #. language code: chb
 #: LanguageCode.cc:394
-#, fuzzy
 msgid "Chibcha"
-msgstr "Китай"
+msgstr "Чібча"
 
 #. language code: che ce
 #: LanguageCode.cc:396
@@ -2449,9 +2421,8 @@ msgstr "Чеченська"
 
 #. language code: chg
 #: LanguageCode.cc:398
-#, fuzzy
 msgid "Chagatai"
-msgstr "Шанхай"
+msgstr "Чагатай"
 
 #. language code: chi zho zh
 #: LanguageCode.cc:400 LanguageCode.cc:402
@@ -2460,39 +2431,35 @@ msgstr "Китайський"
 
 #. language code: chk
 #: LanguageCode.cc:404
-#, fuzzy
 msgid "Chuukese"
-msgstr "Китайський"
+msgstr "Чуукійська"
 
 # ML
 # fuzzy
 #. language code: chm
 #: LanguageCode.cc:406
-#, fuzzy
 msgid "Mari"
-msgstr "Марімба"
+msgstr "Марі"
 
 #. language code: chn
 #: LanguageCode.cc:408
 msgid "Chinook jargon"
-msgstr ""
+msgstr "Шінукський жаргон"
 
 #. language code: cho
 #: LanguageCode.cc:410
-#, fuzzy
 msgid "Choctaw"
-msgstr "Chroot"
+msgstr "Чоставська"
 
 #. language code: chp
 #: LanguageCode.cc:412
 msgid "Chipewyan"
-msgstr ""
+msgstr "Чіпевська"
 
 #. language code: chr
 #: LanguageCode.cc:414
-#, fuzzy
 msgid "Cherokee"
-msgstr "Крі"
+msgstr "Черокі"
 
 #. language code: chu cu
 #: LanguageCode.cc:416
@@ -2506,15 +2473,13 @@ msgstr "Чуваська"
 
 #. language code: chy
 #: LanguageCode.cc:420
-#, fuzzy
 msgid "Cheyenne"
-msgstr "Чеченська"
+msgstr "Чеєнська"
 
 #. language code: cmc
 #: LanguageCode.cc:422
-#, fuzzy
 msgid "Chamic languages"
-msgstr "Сприймати мови:"
+msgstr "Чамські мови"
 
 #. language code: cop
 #: LanguageCode.cc:424
@@ -2523,9 +2488,8 @@ msgstr "Коптська"
 
 #. language code: cor kw
 #: LanguageCode.cc:426
-#, fuzzy
 msgid "Cornish"
-msgstr "Name=Корнійська"
+msgstr "Корнійська"
 
 #. language code: cos co
 #: LanguageCode.cc:428
@@ -2535,17 +2499,17 @@ msgstr "Корсіканська"
 #. language code: cpe
 #: LanguageCode.cc:430
 msgid "Creoles and pidgins, English based (Other)"
-msgstr ""
+msgstr "Креольські і піджінські, англійські (інші)"
 
 #. language code: cpf
 #: LanguageCode.cc:432
 msgid "Creoles and pidgins, French-based (Other)"
-msgstr ""
+msgstr "Креольські і піджінські, французькі (інші)"
 
 #. language code: cpp
 #: LanguageCode.cc:434
 msgid "Creoles and pidgins, Portuguese-based (Other)"
-msgstr ""
+msgstr "Креольські і піджінські, португальські (інші)"
 
 #. language code: cre cr
 #: LanguageCode.cc:436
@@ -2560,12 +2524,12 @@ msgstr "Кримська татарська"
 #. language code: crp
 #: LanguageCode.cc:440
 msgid "Creoles and pidgins (Other)"
-msgstr ""
+msgstr "Креольські і піджінські (інші)"
 
 #. language code: csb
 #: LanguageCode.cc:442
 msgid "Kashubian"
-msgstr ""
+msgstr "Кашубська"
 
 #. language code: cus
 #: LanguageCode.cc:444
@@ -2590,47 +2554,42 @@ msgstr "Датська"
 #. language code: dar
 #: LanguageCode.cc:454
 msgid "Dargwa"
-msgstr ""
+msgstr "Даргва"
 
 #. language code: day
 #: LanguageCode.cc:456
-#, fuzzy
 msgid "Dayak"
-msgstr "Ваякель"
+msgstr "Даяк"
 
 #. language code: del
 #: LanguageCode.cc:458
-#, fuzzy
 msgid "Delaware"
-msgstr "Обладнання"
+msgstr "Делаваре"
 
 #. language code: den
 #: LanguageCode.cc:460
 msgid "Slave (Athapascan)"
-msgstr ""
+msgstr "Атапаська"
 
 #. language code: dgr
 #: LanguageCode.cc:462
 msgid "Dogrib"
-msgstr ""
+msgstr "Догрібська"
 
 #. language code: din
 #: LanguageCode.cc:464
-#, fuzzy
 msgid "Dinka"
-msgstr "Посилання"
+msgstr "Дінка"
 
 #. language code: div dv
 #: LanguageCode.cc:466
-#, fuzzy
 msgid "Divehi"
-msgstr "Драйвер"
+msgstr "Давегі"
 
 #. language code: doi
 #: LanguageCode.cc:468
-#, fuzzy
 msgid "Dogri"
-msgstr "Вхід в систему"
+msgstr "Догрі"
 
 #. language code: dra
 #: LanguageCode.cc:470
@@ -2639,20 +2598,18 @@ msgstr "Дравідські (інші)"
 
 #. language code: dsb
 #: LanguageCode.cc:472
-#, fuzzy
 msgid "Lower Sorbian"
-msgstr "Сербська"
+msgstr "Нижня сорбійська"
 
 #. language code: dua
 #: LanguageCode.cc:474
-#, fuzzy
 msgid "Duala"
-msgstr "Дакар"
+msgstr "Дуала"
 
 #. language code: dum
 #: LanguageCode.cc:476
 msgid "Dutch, Middle (ca.1050-1350)"
-msgstr ""
+msgstr "Голландська, середня (1050-1350)"
 
 #. language code: dut nld nl
 #: LanguageCode.cc:478 LanguageCode.cc:480
@@ -2661,9 +2618,8 @@ msgstr "Голландська"
 
 #. language code: dyu
 #: LanguageCode.cc:482
-#, fuzzy
 msgid "Dyula"
-msgstr "Дубай"
+msgstr "Діула"
 
 #. language code: dzo dz
 #: LanguageCode.cc:484
@@ -2673,7 +2629,7 @@ msgstr "Дзонгка"
 #. language code: efi
 #: LanguageCode.cc:486
 msgid "Efik"
-msgstr ""
+msgstr "Ефік"
 
 #. language code: egy
 #: LanguageCode.cc:488
@@ -2683,12 +2639,12 @@ msgstr "Єгипетська (древня)"
 #. language code: eka
 #: LanguageCode.cc:490
 msgid "Ekajuk"
-msgstr ""
+msgstr "Екажук"
 
 #. language code: elx
 #: LanguageCode.cc:492
 msgid "Elamite"
-msgstr ""
+msgstr "Еламіте"
 
 #. language code: eng en
 #: LanguageCode.cc:494
@@ -2713,18 +2669,17 @@ msgstr "Естонська"
 #. language code: ewe ee
 #: LanguageCode.cc:502
 msgid "Ewe"
-msgstr ""
+msgstr "Еве"
 
 #. language code: ewo
 #: LanguageCode.cc:504
 msgid "Ewondo"
-msgstr ""
+msgstr "Евондо"
 
 #. language code: fan
 #: LanguageCode.cc:506
-#, fuzzy
 msgid "Fang"
-msgstr "Прапорці"
+msgstr "Фанг"
 
 #. language code: fao fo
 #: LanguageCode.cc:508
@@ -2733,9 +2688,8 @@ msgstr "Фарерська"
 
 #. language code: fat
 #: LanguageCode.cc:510
-#, fuzzy
 msgid "Fanti"
-msgstr "Atlantik"
+msgstr "Фанті"
 
 #. language code: fij fj
 #: LanguageCode.cc:512
@@ -2759,9 +2713,8 @@ msgstr "Фінсько-угорські (інші)"
 
 #. language code: fon
 #: LanguageCode.cc:520
-#, fuzzy
 msgid "Fon"
-msgstr "&Шрифти"
+msgstr "Фон"
 
 #. language code: fre fra fr
 #: LanguageCode.cc:522 LanguageCode.cc:524
@@ -2785,35 +2738,30 @@ msgstr "Фризька"
 
 #. language code: ful ff
 #: LanguageCode.cc:532
-#, fuzzy
 msgid "Fulah"
-msgstr "Прапорці"
+msgstr "Фула"
 
 #. language code: fur
 #: LanguageCode.cc:534
-#, fuzzy
 msgid "Friulian"
-msgstr "Фризька"
+msgstr "Фріулійська"
 
 #. language code: gaa
 #: LanguageCode.cc:536
-#, fuzzy
 msgid "Ga"
-msgstr "Газа"
+msgstr "Га"
 
 # GH
 # fuzzy
 #. language code: gay
 #: LanguageCode.cc:538
-#, fuzzy
 msgid "Gayo"
-msgstr "Ґабон"
+msgstr "Гайо"
 
 #. language code: gba
 #: LanguageCode.cc:540
-#, fuzzy
 msgid "Gbaya"
-msgstr "Газа"
+msgstr "Ґбая"
 
 #. language code: gem
 #: LanguageCode.cc:542
@@ -2832,15 +2780,13 @@ msgstr "Німецька"
 
 #. language code: gez
 #: LanguageCode.cc:552
-#, fuzzy
 msgid "Geez"
-msgstr "Грецька"
+msgstr "Ґіз"
 
 #. language code: gil
 #: LanguageCode.cc:554
-#, fuzzy
 msgid "Gilbertese"
-msgstr "В'єтнамський"
+msgstr "Ґілбертійська"
 
 # ML
 # fuzzy
@@ -2856,37 +2802,33 @@ msgstr "Ірландська"
 
 #. language code: glg gl
 #: LanguageCode.cc:560
-#, fuzzy
 msgid "Galician"
-msgstr "Ватикан"
+msgstr "Галісійська"
 
 #. language code: glv gv
 #: LanguageCode.cc:562
-#, fuzzy
 msgid "Manx"
-msgstr "Посібники"
+msgstr "Манкс"
 
 #. language code: gmh
 #: LanguageCode.cc:564
 msgid "German, Middle High (ca.1050-1500)"
-msgstr ""
+msgstr "Німецька, середньо-висока (1050-1500)"
 
 #. language code: goh
 #: LanguageCode.cc:566
-#, fuzzy
 msgid "German, Old High (ca.750-1050)"
-msgstr "Англійська, стара (450-1100)"
+msgstr "Німецька, стара висока (750-1050)"
 
 #. language code: gon
 #: LanguageCode.cc:568
-#, fuzzy
 msgid "Gondi"
-msgstr "&Klondike"
+msgstr "Ґонді"
 
 #. language code: gor
 #: LanguageCode.cc:570
 msgid "Gorontalo"
-msgstr ""
+msgstr "Ґоронтало"
 
 #. language code: got
 #: LanguageCode.cc:572
@@ -2895,9 +2837,8 @@ msgstr "Готична"
 
 #. language code: grb
 #: LanguageCode.cc:574
-#, fuzzy
 msgid "Grebo"
-msgstr "Група"
+msgstr "Гребо"
 
 #. language code: grc
 #: LanguageCode.cc:576
@@ -2921,15 +2862,13 @@ msgstr "Гуяраті"
 
 #. language code: gwi
 #: LanguageCode.cc:586
-#, fuzzy
 msgid "Gwich'in"
-msgstr "Мічіґан"
+msgstr "Ґвічїн"
 
 #. language code: hai
 #: LanguageCode.cc:588
-#, fuzzy
 msgid "Haida"
-msgstr "Обладнання"
+msgstr "Хаіда"
 
 #. language code: hat ht
 #: LanguageCode.cc:590
@@ -2959,12 +2898,12 @@ msgstr "Гереро"
 #. language code: hil
 #: LanguageCode.cc:600
 msgid "Hiligaynon"
-msgstr ""
+msgstr "Хілігайнонська"
 
 #. language code: him
 #: LanguageCode.cc:602
 msgid "Himachali"
-msgstr ""
+msgstr "Гімачалі"
 
 #. language code: hin hi
 #: LanguageCode.cc:604
@@ -2973,27 +2912,23 @@ msgstr "Хінді"
 
 #. language code: hit
 #: LanguageCode.cc:606
-#, fuzzy
 msgid "Hittite"
-msgstr "Гаїті"
+msgstr "Гітітська"
 
 #. language code: hmn
 #: LanguageCode.cc:608
-#, fuzzy
 msgid "Hmong"
-msgstr "Гонконг"
+msgstr "Хмонг"
 
 #. language code: hmo ho
 #: LanguageCode.cc:610
-#, fuzzy
 msgid "Hiri Motu"
-msgstr "Name=Хірі Моту"
+msgstr "Хірі Моту"
 
 #. language code: hsb
 #: LanguageCode.cc:612
-#, fuzzy
 msgid "Upper Sorbian"
-msgstr "Сербська"
+msgstr "Верхня сорбійська"
 
 #. language code: hun hu
 #: LanguageCode.cc:614
@@ -3003,21 +2938,19 @@ msgstr "Угорська"
 #. language code: hup
 #: LanguageCode.cc:616
 msgid "Hupa"
-msgstr ""
+msgstr "Гупа"
 
 # IR
 # fuzzy
 #. language code: iba
 #: LanguageCode.cc:618
-#, fuzzy
 msgid "Iban"
-msgstr "Ізраїль"
+msgstr "Ібан"
 
 #. language code: ibo ig
 #: LanguageCode.cc:620
-#, fuzzy
 msgid "Igbo"
-msgstr "Ігнорувати"
+msgstr "Іґбо"
 
 #. language code: ice isl is
 #: LanguageCode.cc:622 LanguageCode.cc:624
@@ -3026,20 +2959,18 @@ msgstr "Ісландська"
 
 #. language code: ido io
 #: LanguageCode.cc:626
-#, fuzzy
 msgid "Ido"
-msgstr "ІД"
+msgstr "Ідо"
 
 #. language code: iii ii
 #: LanguageCode.cc:628
-#, fuzzy
 msgid "Sichuan Yi"
-msgstr "Литва"
+msgstr "Січуан ї"
 
 #. language code: ijo
 #: LanguageCode.cc:630
 msgid "Ijo"
-msgstr ""
+msgstr "Іжо"
 
 #. language code: iku iu
 #: LanguageCode.cc:632
@@ -3048,20 +2979,18 @@ msgstr "Інуктітут"
 
 #. language code: ile ie
 #: LanguageCode.cc:634
-#, fuzzy
 msgid "Interlingue"
-msgstr "Name=Інтерлінгва"
+msgstr "Інтерлінгва"
 
 #. language code: ilo
 #: LanguageCode.cc:636
-#, fuzzy
 msgid "Iloko"
-msgstr "Токіо"
+msgstr "Ілоко"
 
 #. language code: ina ia
 #: LanguageCode.cc:638
 msgid "Interlingua (International Auxiliary Language Association)"
-msgstr ""
+msgstr "Інтерлінгва (Інтернаціональна допоміжна асоціація мови)"
 
 #. language code: inc
 #: LanguageCode.cc:640
@@ -3080,15 +3009,13 @@ msgstr "Індо-європейські (інші)"
 
 #. language code: inh
 #: LanguageCode.cc:646
-#, fuzzy
 msgid "Ingush"
-msgstr "Англійська"
+msgstr "Інгуш"
 
 #. language code: ipk ik
 #: LanguageCode.cc:648
-#, fuzzy
 msgid "Inupiaq"
-msgstr "Name=Інупіак"
+msgstr "Інупіак"
 
 #. language code: ira
 #: LanguageCode.cc:650
@@ -3097,9 +3024,8 @@ msgstr "Іранські (інші)"
 
 #. language code: iro
 #: LanguageCode.cc:652
-#, fuzzy
 msgid "Iroquoian languages"
-msgstr "Австралійські мови"
+msgstr "Ірокоські мови"
 
 #. language code: ita it
 #: LanguageCode.cc:654
@@ -3113,9 +3039,8 @@ msgstr "Японська"
 
 #. language code: jbo
 #: LanguageCode.cc:658
-#, fuzzy
 msgid "Lojban"
-msgstr "Ліван"
+msgstr "Ложбан"
 
 #. language code: jpn ja
 #: LanguageCode.cc:660
@@ -3124,9 +3049,8 @@ msgstr "Японська"
 
 #. language code: jpr
 #: LanguageCode.cc:662
-#, fuzzy
 msgid "Judeo-Persian"
-msgstr "Перська"
+msgstr "Юдео-перська"
 
 #. language code: jrb
 #: LanguageCode.cc:664
@@ -3136,31 +3060,27 @@ msgstr "Юдео-арабська"
 #. language code: kaa
 #: LanguageCode.cc:666
 msgid "Kara-Kalpak"
-msgstr ""
+msgstr "Кара-калпацька"
 
 #. language code: kab
 #: LanguageCode.cc:668
-#, fuzzy
 msgid "Kabyle"
-msgstr "Увімкнено"
+msgstr "Кабильська"
 
 #. language code: kac
 #: LanguageCode.cc:670
-#, fuzzy
 msgid "Kachin"
-msgstr "Машина"
+msgstr "Качін"
 
 #. language code: kal kl
 #: LanguageCode.cc:672
-#, fuzzy
 msgid "Kalaallisut"
-msgstr "Name=Калаалісут"
+msgstr "Калаалісут"
 
 #. language code: kam
 #: LanguageCode.cc:674
-#, fuzzy
 msgid "Kamba"
-msgstr "Name=Samba"
+msgstr "Камба"
 
 #. language code: kan kn
 #: LanguageCode.cc:676
@@ -3169,9 +3089,8 @@ msgstr "Каннадська"
 
 #. language code: kar
 #: LanguageCode.cc:678
-#, fuzzy
 msgid "Karen"
-msgstr "ІД батьківського повідомлення"
+msgstr "Карен"
 
 #. language code: kas ks
 #: LanguageCode.cc:680
@@ -3180,15 +3099,13 @@ msgstr "Кашмірі"
 
 #. language code: kau kr
 #: LanguageCode.cc:682
-#, fuzzy
 msgid "Kanuri"
-msgstr "Курдська"
+msgstr "Канурі"
 
 #. language code: kaw
 #: LanguageCode.cc:684
-#, fuzzy
 msgid "Kawi"
-msgstr "Гаваї"
+msgstr "Каві"
 
 # KZ
 # fuzzy
@@ -3204,32 +3121,28 @@ msgstr "Кабардинська"
 
 #. language code: kha
 #: LanguageCode.cc:690
-#, fuzzy
 msgid "Khasi"
-msgstr "Тайландський"
+msgstr "Хасі"
 
 #. language code: khi
 #: LanguageCode.cc:692
-#, fuzzy
 msgid "Khoisan (Other)"
-msgstr "Афро-азіатська (інша)"
+msgstr "Хоіські (інші)"
 
 #. language code: khm km
 #: LanguageCode.cc:694
 msgid "Khmer"
-msgstr "Кхмерська"
+msgstr "Хмерська"
 
 #. language code: kho
 #: LanguageCode.cc:696
-#, fuzzy
 msgid "Khotanese"
-msgstr "Китайський"
+msgstr "Хотанська"
 
 #. language code: kik ki
 #: LanguageCode.cc:698
-#, fuzzy
 msgid "Kikuyu"
-msgstr "Name=Кікую"
+msgstr "Кікую"
 
 #. language code: kin rw
 #: LanguageCode.cc:700
@@ -3243,15 +3156,13 @@ msgstr "Киргизька"
 
 #. language code: kmb
 #: LanguageCode.cc:704
-#, fuzzy
 msgid "Kimbundu"
-msgstr "Тип"
+msgstr "Кімбунду"
 
 #. language code: kok
 #: LanguageCode.cc:706
-#, fuzzy
 msgid "Konkani"
-msgstr "Корейська"
+msgstr "Конкані"
 
 #. language code: kom kv
 #: LanguageCode.cc:708
@@ -3270,43 +3181,38 @@ msgstr "Корейська"
 
 #. language code: kos
 #: LanguageCode.cc:714
-#, fuzzy
 msgid "Kosraean"
-msgstr "Тихий океан/Косрае"
+msgstr "Косрае"
 
 #. language code: kpe
 #: LanguageCode.cc:716
-#, fuzzy
 msgid "Kpelle"
-msgstr "<b>помилка правопису</b>"
+msgstr "Кпеле"
 
 #. language code: krc
 #: LanguageCode.cc:718
 msgid "Karachay-Balkar"
-msgstr ""
+msgstr "Карачау-балкарська"
 
 #. language code: kro
 #: LanguageCode.cc:720
 msgid "Kru"
-msgstr ""
+msgstr "Кру"
 
 #. language code: kru
 #: LanguageCode.cc:722
-#, fuzzy
 msgid "Kurukh"
-msgstr "Турецька"
+msgstr "Курух"
 
 #. language code: kua kj
 #: LanguageCode.cc:724
-#, fuzzy
 msgid "Kuanyama"
-msgstr "Панама"
+msgstr "Куаньяма"
 
 #. language code: kum
 #: LanguageCode.cc:726
-#, fuzzy
 msgid "Kumyk"
-msgstr "Макет"
+msgstr "Кумик"
 
 #. language code: kur ku
 #: LanguageCode.cc:728
@@ -3315,27 +3221,23 @@ msgstr "Курдська"
 
 #. language code: kut
 #: LanguageCode.cc:730
-#, fuzzy
 msgid "Kutenai"
-msgstr "Кенія"
+msgstr "Кутенай"
 
 #. language code: lad
 #: LanguageCode.cc:732
-#, fuzzy
 msgid "Ladino"
-msgstr "Латинська"
+msgstr "Ладіно"
 
 #. language code: lah
 #: LanguageCode.cc:734
-#, fuzzy
 msgid "Lahnda"
-msgstr "Банда"
+msgstr "Лахнда"
 
 #. language code: lam
 #: LanguageCode.cc:736
-#, fuzzy
 msgid "Lamba"
-msgstr "Лямбда:"
+msgstr "Ламба"
 
 #. language code: lao lo
 #: LanguageCode.cc:738
@@ -3354,15 +3256,13 @@ msgstr "Хорватська"
 
 #. language code: lez
 #: LanguageCode.cc:744
-#, fuzzy
 msgid "Lezghian"
-msgstr "Бельгійська"
+msgstr "Лезгійська"
 
 #. language code: lim li
 #: LanguageCode.cc:746
-#, fuzzy
 msgid "Limburgan"
-msgstr "Name=Лімбурганська"
+msgstr "Лімбурганська"
 
 #. language code: lin ln
 #: LanguageCode.cc:748
@@ -3376,15 +3276,13 @@ msgstr "Литовська"
 
 #. language code: lol
 #: LanguageCode.cc:752
-#, fuzzy
 msgid "Mongo"
-msgstr "Name=Конго"
+msgstr "Монго"
 
 #. language code: loz
 #: LanguageCode.cc:754
-#, fuzzy
 msgid "Lozi"
-msgstr "Вхід в систему"
+msgstr "Лозі"
 
 # LU
 #. language code: ltz lb
@@ -3395,43 +3293,39 @@ msgstr "Люксембургська"
 #. language code: lua
 #: LanguageCode.cc:758
 msgid "Luba-Lulua"
-msgstr ""
+msgstr "Луба-лулуа"
 
 #. language code: lub lu
 #: LanguageCode.cc:760
 msgid "Luba-Katanga"
-msgstr ""
+msgstr "Луба-катанга"
 
 # GH
 # fuzzy
 #. language code: lug lg
 #: LanguageCode.cc:762
-#, fuzzy
 msgid "Ganda"
-msgstr "Луганда"
+msgstr "Ґанда"
 
 #. language code: lui
 #: LanguageCode.cc:764
-#, fuzzy
 msgid "Luiseno"
-msgstr "Слухати на"
+msgstr "Луісено"
 
 #. language code: lun
 #: LanguageCode.cc:766
-#, fuzzy
 msgid "Lunda"
-msgstr "Сунданська"
+msgstr "Лунда"
 
 #. language code: luo
 #: LanguageCode.cc:768
 msgid "Luo (Kenya and Tanzania)"
-msgstr ""
+msgstr "Луо (Кенія і Танзанія)"
 
 #. language code: lus
 #: LanguageCode.cc:770
-#, fuzzy
 msgid "lushai"
-msgstr "Тайландський"
+msgstr "Лушай"
 
 #. language code: mac mkd mk
 #: LanguageCode.cc:772 LanguageCode.cc:774
@@ -3442,17 +3336,15 @@ msgstr "Македонська"
 # fuzzy
 #. language code: mad
 #: LanguageCode.cc:776
-#, fuzzy
 msgid "Madurese"
-msgstr "Мальтійська"
+msgstr "Мадурі"
 
 # MU
 # fuzzy
 #. language code: mag
 #: LanguageCode.cc:778
-#, fuzzy
 msgid "Magahi"
-msgstr "Маратхі"
+msgstr "Маґахі"
 
 #. language code: mah mh
 #: LanguageCode.cc:780
@@ -3461,9 +3353,8 @@ msgstr "Маршальська"
 
 #. language code: mai
 #: LanguageCode.cc:782
-#, fuzzy
 msgid "Maithili"
-msgstr "Математика"
+msgstr "Маїтхілі"
 
 #. language code: mak
 #: LanguageCode.cc:784
@@ -3477,21 +3368,18 @@ msgstr "Малаям"
 
 #. language code: man
 #: LanguageCode.cc:788
-#, fuzzy
 msgid "Mandingo"
-msgstr "&Показати результати"
+msgstr "Мандінго"
 
 #. language code: mao mri mi
 #: LanguageCode.cc:790 LanguageCode.cc:792
-#, fuzzy
 msgid "Maori"
-msgstr "Важлива"
+msgstr "Маорі"
 
 #. language code: map
 #: LanguageCode.cc:794
-#, fuzzy
 msgid "Austronesian (Other)"
-msgstr "Афро-азіатська (інша)"
+msgstr "Австронезькі (інші)"
 
 # MU
 # fuzzy
@@ -3504,9 +3392,8 @@ msgstr "Маратхі"
 # fuzzy
 #. language code: mas
 #: LanguageCode.cc:798
-#, fuzzy
 msgid "Masai"
-msgstr "Мальта"
+msgstr "Масаі"
 
 #. language code: may msa ms
 #: LanguageCode.cc:800 LanguageCode.cc:802
@@ -3516,21 +3403,19 @@ msgstr "Малайська"
 #. language code: mdf
 #: LanguageCode.cc:804
 msgid "Moksha"
-msgstr ""
+msgstr "Мокша"
 
 # MM
 # fuzzy
 #. language code: mdr
 #: LanguageCode.cc:806
-#, fuzzy
 msgid "Mandar"
-msgstr "Євростандарт"
+msgstr "Мандар"
 
 #. language code: men
 #: LanguageCode.cc:808
-#, fuzzy
 msgid "Mende"
-msgstr "За в&ідправником"
+msgstr "Менде"
 
 #. language code: mga
 #: LanguageCode.cc:810
@@ -3540,12 +3425,12 @@ msgstr "Ірландська, середніх (900-1200)"
 #. language code: mic
 #: LanguageCode.cc:812
 msgid "Mi'kmaq"
-msgstr ""
+msgstr "Мікмак"
 
 #. language code: min
 #: LanguageCode.cc:814
 msgid "Minangkabau"
-msgstr ""
+msgstr "Мінангкабау"
 
 #. language code: mis
 #: LanguageCode.cc:816
@@ -3559,9 +3444,8 @@ msgstr "Мон-хмерські (інші)"
 
 #. language code: mlg mg
 #: LanguageCode.cc:820
-#, fuzzy
 msgid "Malagasy"
-msgstr "Малагасійський франк"
+msgstr "Малагасійська"
 
 # MV
 # fuzzy
@@ -3572,25 +3456,23 @@ msgstr "Мальтійська"
 
 #. language code: mnc
 #: LanguageCode.cc:824
-#, fuzzy
 msgid "Manchu"
-msgstr "Посібники"
+msgstr "Манчу"
 
 #. language code: mni
 #: LanguageCode.cc:826
 msgid "Manipuri"
-msgstr ""
+msgstr "Маніпурі"
 
 #. language code: mno
 #: LanguageCode.cc:828
-#, fuzzy
 msgid "Manobo languages"
-msgstr "Сприймати мови:"
+msgstr "Мови манобо"
 
 #. language code: moh
 #: LanguageCode.cc:830
 msgid "Mohawk"
-msgstr ""
+msgstr "Могавк"
 
 #. language code: mol mo
 #: LanguageCode.cc:832
@@ -3604,9 +3486,8 @@ msgstr "Монгольська"
 
 #. language code: mos
 #: LanguageCode.cc:836
-#, fuzzy
 msgid "Mossi"
-msgstr "Музика"
+msgstr "Моссі"
 
 #. language code: mul
 #: LanguageCode.cc:838
@@ -3615,60 +3496,54 @@ msgstr "Декілька мов"
 
 #. language code: mun
 #: LanguageCode.cc:840
-#, fuzzy
 msgid "Munda languages"
-msgstr "Сприймати мови:"
+msgstr "Мови мунда"
 
 #. language code: mus
 #: LanguageCode.cc:842
 msgid "Creek"
-msgstr ""
+msgstr "Крік"
 
 # FM
 # fuzzy
 #. language code: mwl
 #: LanguageCode.cc:844
-#, fuzzy
 msgid "Mirandese"
-msgstr "Македонія"
+msgstr "Мірандська"
 
 # MU
 # fuzzy
 #. language code: mwr
 #: LanguageCode.cc:846
-#, fuzzy
 msgid "Marwari"
-msgstr "Маратхі"
+msgstr "Марварі"
 
 #. language code: myn
 #: LanguageCode.cc:848
-#, fuzzy
 msgid "Mayan languages"
-msgstr "Сприймати мови:"
+msgstr "Мови майя"
 
 # SY
 # fuzzy
 #. language code: myv
 #: LanguageCode.cc:850
-#, fuzzy
 msgid "Erzya"
-msgstr "Орійська"
+msgstr "Ерзіа"
 
 #. language code: nah
 #: LanguageCode.cc:852
 msgid "Nahuatl"
-msgstr ""
+msgstr "Нагуатл"
 
 #. language code: nai
 #: LanguageCode.cc:854
 msgid "North American Indian"
-msgstr "Індіанська північно-американська"
+msgstr "Індіанська північноамериканська"
 
 #. language code: nap
 #: LanguageCode.cc:856
-#, fuzzy
 msgid "Neapolitan"
-msgstr "Непальська"
+msgstr "Неаполітанська"
 
 #. language code: nav nv
 #: LanguageCode.cc:860
@@ -3702,31 +3577,28 @@ msgstr "Непальська"
 
 #. language code: new
 #: LanguageCode.cc:872
-#, fuzzy
 msgid "Nepal Bhasa"
-msgstr "Непал"
+msgstr "Непал Вхаза"
 
 #. language code: nia
 #: LanguageCode.cc:874
-#, fuzzy
 msgid "Nias"
-msgstr "Псевдонім"
+msgstr "Ніас"
 
 #. language code: nic
 #: LanguageCode.cc:876
 msgid "Niger-Kordofanian (Other)"
-msgstr ""
+msgstr "Нігеро-кордофанські (інші)"
 
 #. language code: niu
 #: LanguageCode.cc:878
-#, fuzzy
 msgid "Niuean"
 msgstr "Ніу"
 
 #. language code: nno nn
 #: LanguageCode.cc:880
 msgid "Norwegian Nynorsk"
-msgstr "Норвезька (Nynorsk)"
+msgstr "Норвезька (Нінорськ)"
 
 #. language code: nob nb
 #: LanguageCode.cc:882
@@ -3735,14 +3607,13 @@ msgstr "Норвезька бокмаль"
 
 #. language code: nog
 #: LanguageCode.cc:884
-#, fuzzy
 msgid "Nogai"
-msgstr "Ндонга"
+msgstr "Ногайська"
 
 #. language code: non
 #: LanguageCode.cc:886
 msgid "Norse, Old"
-msgstr ""
+msgstr "Норська, стара"
 
 #. language code: nor no
 #: LanguageCode.cc:888
@@ -3751,9 +3622,8 @@ msgstr "Норвезька"
 
 #. language code: nso
 #: LanguageCode.cc:890
-#, fuzzy
 msgid "Northern Sotho"
-msgstr "Північне Саамі"
+msgstr "Північне Сото"
 
 #. language code: nub
 #: LanguageCode.cc:892
@@ -3762,47 +3632,43 @@ msgstr "Нубійські мови"
 
 #. language code: nwc
 #: LanguageCode.cc:894
-#, fuzzy
 msgid "Classical Newari"
-msgstr "Назва класу"
+msgstr "Класичне неварі"
 
 #. language code: nya ny
 #: LanguageCode.cc:896
-#, fuzzy
 msgid "Chichewa"
 msgstr "Чічева"
 
 #. language code: nym
 #: LanguageCode.cc:898
-#, fuzzy
 msgid "Nyamwezi"
-msgstr "Назва"
+msgstr "Нямвезі"
 
 #. language code: nyn
 #: LanguageCode.cc:900
 msgid "Nyankole"
-msgstr ""
+msgstr "Нянколе"
 
 #. language code: nyo
 #: LanguageCode.cc:902
 msgid "Nyoro"
-msgstr ""
+msgstr "Ніоро"
 
 #. language code: nzi
 #: LanguageCode.cc:904
-#, fuzzy
 msgid "Nzima"
-msgstr "Ліма"
+msgstr "Нзіма"
 
 #. language code: oci oc
 #: LanguageCode.cc:906
 msgid "Occitan (post 1500)"
-msgstr ""
+msgstr "Оксітанська ()після 1500)"
 
 #. language code: oji oj
 #: LanguageCode.cc:908
 msgid "Ojibwa"
-msgstr ""
+msgstr "Ожібва"
 
 # SY
 # fuzzy
@@ -3818,9 +3684,8 @@ msgstr "Оромо"
 
 #. language code: osa
 #: LanguageCode.cc:914
-#, fuzzy
 msgid "Osage"
-msgstr "&Повідомлення"
+msgstr "Осаге"
 
 #. language code: oss os
 #: LanguageCode.cc:916
@@ -4003,7 +3868,7 @@ msgstr "Якутська"
 #. language code: sai
 #: LanguageCode.cc:988
 msgid "South American Indian (Other)"
-msgstr "Індіанські південно-американські (інші)"
+msgstr "Індіанські південноамериканські (інші)"
 
 #. language code: sal
 #: LanguageCode.cc:990
@@ -4363,12 +4228,12 @@ msgstr "Цімшіан"
 #. language code: tsn tn
 #: LanguageCode.cc:1138
 msgid "Tswana"
-msgstr "Тсвана"
+msgstr "Цвана"
 
 #. language code: tso ts
 #: LanguageCode.cc:1140
 msgid "Tsonga"
-msgstr "Тсонга"
+msgstr "Цонга"
 
 #. language code: tuk tk
 #: LanguageCode.cc:1142
@@ -4556,7 +4421,7 @@ msgstr "Запотецькі мови"
 #. language code: zen
 #: LanguageCode.cc:1218
 msgid "Zenaga"
-msgstr "Зенада"
+msgstr "Зенага"
 
 #. language code: zha za
 #: LanguageCode.cc:1220
@@ -4723,3 +4588,4 @@ msgstr " немає контрольної суми."
 #: source/SourceImpl.cc:390
 msgid " fails checksum verification."
 msgstr " неправильна контрольна сума."
+

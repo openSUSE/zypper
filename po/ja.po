@@ -1,21 +1,17 @@
-# Japanese message file for YaST2 (@memory@).
-# Copyright (C) 2005 SUSE Linux Products GmbH.
-# Copyright (C) 2002 SuSE Linux AG.
-# Copyright (C) 2000, 2001 SuSE GmbH.
-# Mike Fabian <mfabian@suse.de>, 2000, 2001.
+# Copyright (C) 2006 SuSE Linux Products GmbH, Nuernberg
+# This file is distributed under the same license as the package.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: YaST (@memory@)\n"
+"Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2006-10-26 09:41+0200\n"
-"PO-Revision-Date: 2006-06-16 14:06\n"
+"PO-Revision-Date: 2006-11-03 13:52\n"
 "Last-Translator: Novell Language <language@novell.com>\n"
 "Language-Team: Novell Language <language@novell.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
 
 #: solver/detail/ProblemSolutionIgnore.cc:54
 msgid "Ignore this requirement just here"
@@ -101,9 +97,8 @@ msgid "Do not install or delete concerning resolvables"
 msgstr "関連するresolavlesをインストール、または削除しない"
 
 #: solver/detail/ProblemSolutionUnlock.cc:50
-#, fuzzy
 msgid "unlock all resolvables"
-msgstr "これらのresolvableをアンロックします"
+msgstr "すべての解決対象をアンロックする"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
 #: solver/detail/ProblemSolutionUnlock.cc:59
@@ -218,7 +213,7 @@ msgstr "システム"
 #. Translator: Generic term for an item with dependencies, please leave untranslated for now
 #: solver/detail/ResolverInfoMisc.cc:126
 msgid "Resolvable"
-msgstr "Resolvable"
+msgstr "解決対象T"
 
 #. TranslatorExplanation: Additional information to dependency solver result, no solution could be found
 #: solver/detail/ResolverInfoMisc.cc:144
@@ -683,9 +678,9 @@ msgid "%s obsoletes %s. But %s cannot be deleted because it is locked."
 msgstr "%s 廃止 %s. ロックされているため %s を削除できません。"
 
 #: solver/detail/Resolver_problems.cc:666
-#, fuzzy, c-format
+#, c-format
 msgid "Cannot install %s because it is conflicting"
-msgstr "%s は %s と競合しているので、インストールできません"
+msgstr "%s は競合しているので、インストールできません"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
 #: solver/detail/Resolver_problems.cc:685
@@ -720,12 +715,12 @@ msgstr "アフガニスタン"
 #. :AFG:004:
 #: CountryCode.cc:220
 msgid "Antigua and Barbuda"
-msgstr "アンティグアおよびバルブダ"
+msgstr "アンティグアとバルブダ"
 
 #. :ATG:028:
 #: CountryCode.cc:221
 msgid "Anguilla"
-msgstr "アングイラ"
+msgstr "アングィラ"
 
 #. :AIA:660:
 #: CountryCode.cc:222
@@ -740,7 +735,7 @@ msgstr "アルメニア"
 #. :ARM:051:
 #: CountryCode.cc:224
 msgid "Netherlands Antilles"
-msgstr "オランダ領アンティル"
+msgstr "オランダ領アンチル諸島"
 
 #. :ANT:530:
 #: CountryCode.cc:225
@@ -760,7 +755,7 @@ msgstr "アルゼンチン"
 #. :ARG:032:
 #: CountryCode.cc:228
 msgid "American Samoa"
-msgstr "アメリカ領サモア"
+msgstr "アメリカンサモア"
 
 #. :ASM:016:
 #: CountryCode.cc:229
@@ -775,7 +770,7 @@ msgstr "オーストラリア"
 #. :AUS:036:
 #: CountryCode.cc:231
 msgid "Aruba"
-msgstr "アルーバ"
+msgstr "アルバ"
 
 #. :ABW:533:
 #: CountryCode.cc:232
@@ -800,7 +795,7 @@ msgstr "バルバドス"
 #. :BRB:052:
 #: CountryCode.cc:236
 msgid "Bangladesh"
-msgstr "バングラデシュ"
+msgstr "バングラデッシュ"
 
 #. :BGD:050:
 #: CountryCode.cc:237
@@ -810,7 +805,7 @@ msgstr "ベルギー"
 #. :BEL:056:
 #: CountryCode.cc:238
 msgid "Burkina Faso"
-msgstr "ブルキナファソ"
+msgstr "ブルキナ・ファソ"
 
 #. :BFA:854:
 #: CountryCode.cc:239
@@ -820,12 +815,12 @@ msgstr "ブルガリア"
 #. :BGR:100:
 #: CountryCode.cc:240
 msgid "Bahrain"
-msgstr "バーレーン"
+msgstr "バーレン"
 
 #. :BHR:048:
 #: CountryCode.cc:241
 msgid "Burundi"
-msgstr "ブルンディ"
+msgstr "ブルンジ"
 
 #. :BDI:108:
 #: CountryCode.cc:242
@@ -840,7 +835,7 @@ msgstr "バーミューダ"
 #. :BMU:060:
 #: CountryCode.cc:244
 msgid "Brunei Darussalam"
-msgstr "ブルネイダルサラーム国"
+msgstr "ブルネイ Darussalam"
 
 #. :BRN:096:
 #: CountryCode.cc:245
@@ -860,12 +855,12 @@ msgstr "バハマ"
 #. :BHS:044:
 #: CountryCode.cc:248
 msgid "Bhutan"
-msgstr "ブータン"
+msgstr "ブタン"
 
 #. :BTN:064:
 #: CountryCode.cc:249
 msgid "Bouvet Island"
-msgstr "ブーヴェ島"
+msgstr "ブーベー島"
 
 #. :BVT:074:
 #: CountryCode.cc:250
@@ -890,7 +885,7 @@ msgstr "カナダ"
 #. :CAN:124:
 #: CountryCode.cc:254
 msgid "Cocos (Keeling) Islands"
-msgstr "ココス(キーリング)諸島"
+msgstr "ココス (キーリング) 島"
 
 #. :CCK:166:
 #. :CAF:140:
@@ -911,7 +906,7 @@ msgstr "スイス"
 #. :CHE:756:
 #: CountryCode.cc:259
 msgid "Cote D'Ivoire"
-msgstr "コートディヴォワール"
+msgstr "コートジボアール"
 
 #. :CIV:384:
 #: CountryCode.cc:260
@@ -946,7 +941,7 @@ msgstr "コスタリカ"
 #. :CRI:188:
 #: CountryCode.cc:266
 msgid "Serbia and Montenegro"
-msgstr "セルビアモンテネグロ"
+msgstr "セルビア・モンテネグロ"
 
 #. :SCG:891:
 #: CountryCode.cc:267
@@ -956,7 +951,7 @@ msgstr "キューバ"
 #. :CUB:192:
 #: CountryCode.cc:268
 msgid "Cape Verde"
-msgstr "カボベルデ"
+msgstr "ケープバーデ"
 
 #. :CPV:132:
 #: CountryCode.cc:269
@@ -981,7 +976,7 @@ msgstr "ドイツ"
 #. :DEU:276:
 #: CountryCode.cc:273
 msgid "Djibouti"
-msgstr "ジブティ"
+msgstr "ジブチ"
 
 #. :DJI:262:
 #: CountryCode.cc:274
@@ -1026,7 +1021,7 @@ msgstr "西サハラ"
 #. :ESH:732:
 #: CountryCode.cc:282
 msgid "Eritrea"
-msgstr "エリトリア"
+msgstr "エルトリア"
 
 #. :ERI:232:
 #: CountryCode.cc:283
@@ -1066,7 +1061,7 @@ msgstr "フェロー諸島"
 #. :FRO:234:
 #: CountryCode.cc:290
 msgid "France"
-msgstr "フランス"
+msgstr "仏国"
 
 #. :FRA:250:
 #: CountryCode.cc:291
@@ -1096,7 +1091,7 @@ msgstr "ジョージア"
 #. :GEO:268:
 #: CountryCode.cc:296
 msgid "French Guiana"
-msgstr "フランス領ギアナ"
+msgstr "仏領ギニア"
 
 #. :GUF:254:
 #: CountryCode.cc:297
@@ -1141,7 +1136,7 @@ msgstr "ギリシア"
 #. :GRC:300:
 #: CountryCode.cc:305
 msgid "South Georgia and the South Sandwich Islands"
-msgstr "サウスジョージアおよびサウスサンドイッチ諸島"
+msgstr "南ジョージアと南サンドウィッチ諸島"
 
 #. :SGS:239:
 #: CountryCode.cc:306
@@ -1161,7 +1156,7 @@ msgstr "ギニア-ビサウ"
 #. :GNB:624:
 #: CountryCode.cc:309
 msgid "Guyana"
-msgstr "ギニア"
+msgstr "ガイアナ"
 
 #. :GUY:328:
 #: CountryCode.cc:310
@@ -1176,17 +1171,17 @@ msgstr "ハード島およびマクドナルド諸島"
 #. :HMD:334:
 #: CountryCode.cc:312
 msgid "Honduras"
-msgstr "ホンデュラス"
+msgstr "ホンジュラス"
 
 #. :HND:340:
 #: CountryCode.cc:313
 msgid "Croatia"
-msgstr "クロアティア"
+msgstr "クロアチア"
 
 #. :HRV:191:
 #: CountryCode.cc:314
 msgid "Haiti"
-msgstr "ハイティ"
+msgstr "ハイチ"
 
 #. :HTI:332:
 #: CountryCode.cc:315
@@ -1216,7 +1211,7 @@ msgstr "インド"
 #. :IND:356:
 #: CountryCode.cc:320
 msgid "British Indian Ocean Territory"
-msgstr "英領インド洋植民地"
+msgstr "インド洋の英国領"
 
 #. :IOT:086:
 #: CountryCode.cc:321
@@ -1261,7 +1256,7 @@ msgstr "ケニア"
 #. :KEN:404:
 #: CountryCode.cc:329
 msgid "Kyrgyzstan"
-msgstr "キルギスタン"
+msgstr "キリジスタン"
 
 #. :KGZ:417:
 #: CountryCode.cc:330
@@ -1276,12 +1271,12 @@ msgstr "キリバス"
 #. :KIR:296:
 #: CountryCode.cc:332
 msgid "Comoros"
-msgstr "コモロ"
+msgstr "コモロス"
 
 #. :COM:174:
 #: CountryCode.cc:333
 msgid "Saint Kitts and Nevis"
-msgstr "セントキッツネヴィス"
+msgstr "セントキッツ･ネビス"
 
 #. :KNA:659:
 #: CountryCode.cc:334
@@ -1296,17 +1291,17 @@ msgstr "韓国"
 #. :KOR:410:
 #: CountryCode.cc:336
 msgid "Kuwait"
-msgstr "クウェート"
+msgstr "クェート"
 
 #. :KWT:414:
 #: CountryCode.cc:337
 msgid "Cayman Islands"
-msgstr "ケイマン諸島"
+msgstr "ケーマン諸島"
 
 #. :CYM:136:
 #: CountryCode.cc:338
 msgid "Kazakhstan"
-msgstr "カザフスタン"
+msgstr "カザフタン"
 
 #. :KAZ:398:
 #: CountryCode.cc:339
@@ -1346,12 +1341,12 @@ msgstr "レソト"
 #. :LSO:426:
 #: CountryCode.cc:346
 msgid "Lithuania"
-msgstr "リトアニア"
+msgstr "リスアニア"
 
 #. :LTU:440:
 #: CountryCode.cc:347
 msgid "Luxembourg"
-msgstr "ルクセンブルク"
+msgstr "ルクセンブルグ"
 
 #. :LUX:442:
 #: CountryCode.cc:348
@@ -1361,7 +1356,7 @@ msgstr "ラトビア"
 #. :LVA:428:
 #: CountryCode.cc:349
 msgid "Libya"
-msgstr "リビア"
+msgstr "Libya"
 
 #. :LBY:434:
 #: CountryCode.cc:350
@@ -1381,7 +1376,7 @@ msgstr "モルドヴァ"
 #. :MDA:498:
 #: CountryCode.cc:353
 msgid "Madagascar"
-msgstr "マダガスカル"
+msgstr "マダカスカル"
 
 #. :MDG:450:
 #: CountryCode.cc:354
@@ -1391,7 +1386,7 @@ msgstr "マーシャル諸島"
 #. :MHL:584:
 #: CountryCode.cc:355
 msgid "Macedonia"
-msgstr "マケドニア"
+msgstr "マセドニア"
 
 #. :MKD:807:
 #: CountryCode.cc:356
@@ -1401,7 +1396,7 @@ msgstr "マリ"
 #. :MLI:466:
 #: CountryCode.cc:357
 msgid "Myanmar"
-msgstr "ミャンマー語"
+msgstr "ミヤンマー"
 
 #. :MMR:104:
 #: CountryCode.cc:358
@@ -1421,7 +1416,7 @@ msgstr "北マリアナ諸島"
 #. :MNP:580:
 #: CountryCode.cc:361
 msgid "Martinique"
-msgstr "マルティニク"
+msgstr "マルチニーク島"
 
 #. :MTQ:474:
 #: CountryCode.cc:362
@@ -1441,12 +1436,12 @@ msgstr "マルタ"
 #. :MLT:470:
 #: CountryCode.cc:365
 msgid "Mauritius"
-msgstr "モーリシャス"
+msgstr "マリシャス"
 
 #. :MUS:480:
 #: CountryCode.cc:366
 msgid "Maldives"
-msgstr "モルディヴ"
+msgstr "モルジブ"
 
 #. :MDV:462:
 #: CountryCode.cc:367
@@ -1517,7 +1512,7 @@ msgstr "ネパール"
 #. language code: nau na
 #: CountryCode.cc:380 LanguageCode.cc:858
 msgid "Nauru"
-msgstr "ナウル語"
+msgstr "ナウル"
 
 #. :NRU:520:
 #: CountryCode.cc:381
@@ -1547,7 +1542,7 @@ msgstr "ペルー"
 #. :PER:604:
 #: CountryCode.cc:386
 msgid "French Polynesia"
-msgstr "フランス領ポリネシア"
+msgstr "仏領ポリネシア"
 
 #. :PYF:258:
 #: CountryCode.cc:387
@@ -1577,7 +1572,7 @@ msgstr "サンピエールエミクロン"
 #. :SPM:666:
 #: CountryCode.cc:392
 msgid "Pitcairn"
-msgstr "ピトケルン"
+msgstr "ピトルケルン"
 
 #. :PCN:612:
 #: CountryCode.cc:393
@@ -1587,7 +1582,7 @@ msgstr "プエルトリコ"
 #. :PRI:630:
 #: CountryCode.cc:394
 msgid "Palestinian Territory"
-msgstr "パレスチナ地域"
+msgstr "パレスチナ暫定自治区"
 
 #. :PSE:275:
 #: CountryCode.cc:395
@@ -1597,7 +1592,7 @@ msgstr "ポルトガル"
 #. :PRT:620:
 #: CountryCode.cc:396
 msgid "Palau"
-msgstr "パラウ"
+msgstr "パラオ"
 
 #. :PLW:585:
 #: CountryCode.cc:397
@@ -1632,7 +1627,7 @@ msgstr "ルワンダ"
 #. :RWA:646:
 #: CountryCode.cc:403
 msgid "Saudi Arabia"
-msgstr "サウディアラビア"
+msgstr "サウジアラビア"
 
 #. :SAU:682:
 #: CountryCode.cc:404
@@ -1667,7 +1662,7 @@ msgstr "セントヘレナ"
 #. :SHN:654:
 #: CountryCode.cc:410
 msgid "Slovenia"
-msgstr "スロヴェニア"
+msgstr "スロベニア"
 
 #. :SVN:705:
 #: CountryCode.cc:411
@@ -1677,12 +1672,12 @@ msgstr "スヴァールバルおよびヤンマイエン"
 #. :SJM:744:
 #: CountryCode.cc:412
 msgid "Slovakia"
-msgstr "スロヴァキア"
+msgstr "スロバキア"
 
 #. :SVK:703:
 #: CountryCode.cc:413
 msgid "Sierra Leone"
-msgstr "シエラレオーネ"
+msgstr "シエラレオネ"
 
 #. :SLE:694:
 #: CountryCode.cc:414
@@ -1707,7 +1702,7 @@ msgstr "スリナム"
 #. :SUR:740:
 #: CountryCode.cc:418
 msgid "Sao Tome and Principe"
-msgstr "サントーメ-プリンシペ"
+msgstr "サントメ・プリンシペ"
 
 #. :STP:678:
 #: CountryCode.cc:419
@@ -1722,12 +1717,12 @@ msgstr "シリア"
 #. :SYR:760:
 #: CountryCode.cc:421
 msgid "Swaziland"
-msgstr "スイス"
+msgstr "スワジランド"
 
 #. :SWZ:748:
 #: CountryCode.cc:422
 msgid "Turks and Caicos Islands"
-msgstr "タークスアンドケーコス諸島"
+msgstr "タークス・カイコス諸島"
 
 #. :TCA:796:
 #: CountryCode.cc:423
@@ -1737,7 +1732,7 @@ msgstr "チャド"
 #. :TCD:148:
 #: CountryCode.cc:424
 msgid "French Southern Territories"
-msgstr "フランス南方領"
+msgstr "仏領南域"
 
 #. :ATF:260:
 #: CountryCode.cc:425
@@ -1758,7 +1753,7 @@ msgstr "タジキスタン"
 #. language code: tkl
 #: CountryCode.cc:428 LanguageCode.cc:1122
 msgid "Tokelau"
-msgstr "トケラウ語"
+msgstr "トケラウ"
 
 #. :TKL:772:
 #: CountryCode.cc:429
@@ -1788,13 +1783,13 @@ msgstr "トルコ"
 #. :TUR:792:
 #: CountryCode.cc:434
 msgid "Trinidad and Tobago"
-msgstr "トリニダードトバゴ"
+msgstr "トリニダード・トバゴ"
 
 #. :TTO:780:
 #. language code: tvl
 #: CountryCode.cc:435 LanguageCode.cc:1152
 msgid "Tuvalu"
-msgstr "トゥヴァル語"
+msgstr "ツバル"
 
 #. :TUV:798:
 #: CountryCode.cc:436
@@ -1819,12 +1814,12 @@ msgstr "ウガンダ"
 #. :UGA:800:
 #: CountryCode.cc:440
 msgid "United States Minor Outlying Islands"
-msgstr "合衆国小離島"
+msgstr "米国周辺離島"
 
 #. :UMI:581:
 #: CountryCode.cc:441
 msgid "United States"
-msgstr "アメリカ合衆国"
+msgstr "米国"
 
 #. :USA:840:
 #: CountryCode.cc:442
@@ -1844,7 +1839,7 @@ msgstr "教皇庁(ヴァティカン市国)"
 #. :VAT:336:
 #: CountryCode.cc:445
 msgid "Saint Vincent and the Grenadines"
-msgstr "セントヴィンセント-グレナディン"
+msgstr "セント・ビンセント・グレナディーン諸島"
 
 #. :VCT:670:
 #: CountryCode.cc:446
@@ -1859,7 +1854,7 @@ msgstr "英領ヴァージン諸島"
 #. :VGB:092:
 #: CountryCode.cc:448
 msgid "Virgin Islands, U.S."
-msgstr "米国領ヴァージン諸島"
+msgstr "バージン諸島 (米国領)"
 
 #. :VIR:850:
 #: CountryCode.cc:449
@@ -1869,7 +1864,7 @@ msgstr "ベトナム"
 #. :VNM:704:
 #: CountryCode.cc:450
 msgid "Vanuatu"
-msgstr "ヴァヌアトゥ"
+msgstr "バヌアツ"
 
 #. :VUT:548:
 #: CountryCode.cc:451
@@ -1889,7 +1884,7 @@ msgstr "イエメン"
 #. :YEM:887:
 #: CountryCode.cc:454
 msgid "Mayotte"
-msgstr "マヨット"
+msgstr "マイヨット島"
 
 #. :MYT:175:
 #: CountryCode.cc:455
@@ -4108,7 +4103,7 @@ msgstr "ウイグル語"
 #. language code: ukr uk
 #: LanguageCode.cc:1164
 msgid "Ukrainian"
-msgstr "ウクライナ語"
+msgstr "ウクライナ"
 
 #. language code: umb
 #: LanguageCode.cc:1166
@@ -4261,7 +4256,6 @@ msgid "Zuni"
 msgstr "ズーニー語"
 
 #: ZYppFactory.cc:279 ZYppFactory.cc:334
-#, fuzzy
 msgid "Cannot acquire zypp lock."
 msgstr "zyppロックを取得できません。"
 
@@ -4341,7 +4335,7 @@ msgstr "%s は問題なく削除されました"
 
 #: target/rpm/RpmDb.cc:2114
 msgid "Ok"
-msgstr "??‰?"
+msgstr "OK"
 
 #. translator: these are different kinds of how an rpm package can be broken
 #: target/rpm/RpmDb.cc:2117
@@ -4389,7 +4383,7 @@ msgstr "ユーザにより中止されたターゲットコミット"
 #: target/store/XMLFilesBackend.cc:925 target/store/XMLFilesBackend.cc:932
 #: source/yum/YUMScriptImpl.cc:78 source/yum/YUMScriptImpl.cc:112
 msgid "Can't write the patch script to a temporary file."
-msgstr ""
+msgstr "一時ファイルにパッチスクリプトを書き込むことができません。"
 
 #: source/yum/YUMScriptImpl.cc:89 source/yum/YUMScriptImpl.cc:123
 msgid "Failed check for the script file check sum"
@@ -4401,60 +4395,8 @@ msgstr "署名されたrepomd.xmlファイルが署名の確認に失敗しま�
 
 #: source/SourceImpl.cc:384
 msgid " miss checksum."
-msgstr ""
+msgstr " checksumが見当たりません。"
 
 #: source/SourceImpl.cc:390
-#, fuzzy
 msgid " fails checksum verification."
-msgstr "チェックサムの確認に失敗します。"
-
-#~ msgid "Failed check for the metadata file check sum"
-#~ msgstr "メタデータファイルチェックサムの確認に失敗しました"
-
-#~ msgid "Unable to restore all sources."
-#~ msgstr "すべてのソースを復元できません。"
-
-#~ msgid "At least one source already registered, cannot restore sources from persistent store."
-#~ msgstr "少なくとも1つのソースがすでに登録されており、保存場所からソースを復元できません。"
-
-#~ msgid "Default"
-#~ msgstr "デフォルト"
-
-#~ msgid "ignore architecture"
-#~ msgstr "アーキテクチャを無視する"
-
-#~ msgid "Ignore this requirement for all other resolvables."
-#~ msgstr "%s は他のresolvableが必要としています"
-
-#~ msgid "%s cannot be uninstalled due missing dependencies"
-#~ msgstr "依存関係が不足しているため、%s をアンインストールできません"
-
-#~ msgid "Deleting %s"
-#~ msgstr "%s を削除しています"
-
-#~ msgid "Marking %s as uninstallable due to conflicts over %s (%s) from %s"
-#~ msgstr "%s をインストール不可にします(%s (%s)(%s から)に関する競合のため)"
-
-#~ msgid "There are no alternative installed providers of %s for %s"
-#~ msgstr "%s の %s 向けには、別のインストールされたプロバイダがありません。"
-
-#~ msgid "There are no installable providers of %s for %s"
-#~ msgstr "%s の %s 向けには、インストール可能なプロバイダがありません。"
-
-#~ msgid "unknown"
-#~ msgstr "?s??"
-
-#~ msgid "installed"
-#~ msgstr "インストール済み"
-
-#~ msgid "uninstalled"
-#~ msgstr "アンインストール済み"
-
-#~ msgid "to be installed (soft)"
-#~ msgstr "インストール予定(soft)"
-
-#~ msgid "to be uninstalled"
-#~ msgstr "アンインストール予定"
-
-#~ msgid "Can't install %s, since a resolvable of the same name is already marked as needing to be installed"
-#~ msgstr "同名のresolvableがすでにアンインストールが必要であるとマークされているので、%s をインストールできません。"
+msgstr " チェックサムの確認に失敗しました。"

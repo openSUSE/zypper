@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2006-10-26 09:41+0200\n"
-"PO-Revision-Date: 2006-10-14 16:16+0200\n"
+"PO-Revision-Date: 2006-11-04 00:08+0100\n"
 "Last-Translator: Olav Pettershagen <olav.pet@online.no>\n"
 "Language-Team:  <nb@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -102,9 +102,8 @@ msgid "Do not install or delete concerning resolvables"
 msgstr "Ikke installer eller fjern nødvendige pakker for å løse konflikt"
 
 #: solver/detail/ProblemSolutionUnlock.cc:50
-#, fuzzy
 msgid "unlock all resolvables"
-msgstr "Fjern beskyttelse for disse nødvendige pakkene"
+msgstr "fjern beskyttelse for alle nødvendige pakker"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
 #: solver/detail/ProblemSolutionUnlock.cc:59
