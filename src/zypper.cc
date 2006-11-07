@@ -710,6 +710,10 @@ int one_command(const string& command, int argc, char **argv)
       }
       options.setKind(kind);
     }
+    else if (gSettings.is_rug_compatible) {
+      kind = ResTraits<Package>::kind;
+      options.setKind(kind);
+    }
 
     options.resolveConflicts();
 

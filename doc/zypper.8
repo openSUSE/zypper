@@ -102,6 +102,13 @@ package\fR which is also the default in rug compatibility mode.
 .TP
 \fBsearch\fR (\fBse\fR) [\fIoptions\fR] [\fBquerystring\fR] ...
 Search for resolvables matching given strings. * (any substring) and ? (any character) wildcards can also be used within search strings.
+.IP
+Results of search are printed in a table with following columns: S (status), Catalog, Type (type of resolvable), Name, Version, Arch (architecture). Status column can contain following values: i - installed, v - another version installed, or an empty space for neither of the former cases.
+.IP
+In \fBrug compatibility mode\fR the --type option defaults to \fBpackage\fR. Furthermore, Instead of the Type column, rug's Bundle column is printed, however, with no contents.
+.IP
+This command accepts the following options:
+
 .TP
 \fI    \-\-match\-all\fR
 Search for a match to all search strings (default).

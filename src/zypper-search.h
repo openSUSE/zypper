@@ -17,7 +17,10 @@
 #include <boost/function.hpp>
 #include <zypp/ZYpp.h>
 
+#include "zmart.h"
 #include "zypper-tabulator.h"
+
+extern Settings gSettings;
 
 /**
  * Represents zypper search options.
@@ -192,7 +195,16 @@ struct FillTable
   FillTable(Table & table, InstalledCache & icache) :
     _table(&table), _icache(&icache) {
     TableHeader header;
-    header << "S" << "Catalog" << "Bundle" << "Name" << "Version" << "Arch";
+
+    header << "S" << "Catalog";
+
+    if (gSettings.is_rug_compatible)
+      header << "Bundle";
+    else
+      header << "Type";
+
+    header << "Name" << "Version" << "Arch";
+
     *_table << header;
   }
 
@@ -217,7 +229,8 @@ struct FillTable
 
     // add other fields to the result table
     row << pool_item.resolvable()->source().alias()
-        << "" // TODO what about rug's Bundle?
+        // TODO what about rug's Bundle?
+        << (gSettings.is_rug_compatible ? "" : pool_item.resolvable()->kind().asString()) 
         << pool_item.resolvable()->name()
         << pool_item.resolvable()->edition().asString()
         << pool_item.resolvable()->arch().asString();
