@@ -26,8 +26,11 @@ Parse_LDFLAGS =	-static
 ## ##################################################
 
 Test_SOURCES = 	Test.cc \
-		xml/libxmlfwd.h	xml/libxmlfwd.cc	\
-		xml/Reader.h xml/Reader.cc
+		xml/Node.cc		xml/Node.h	\
+		xml/Reader.cc		xml/Reader.h	\
+		xml/XmlString.cc	xml/XmlString.h	\
+		xml/libxmlfwd.cc	xml/libxmlfwd.h
+
 Test_LDFLAGS =	-static
 
 ## ##################################################
