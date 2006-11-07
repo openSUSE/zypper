@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Nov  7 13:12:49 CET 2006 - schubi@suse.de
+
+- Makefile in zypp2 fixed
+  Revision 4520 
+
+-------------------------------------------------------------------
 Tue Nov  7 11:38:10 CET 2006 - schubi@suse.de
 
 - Translations added
