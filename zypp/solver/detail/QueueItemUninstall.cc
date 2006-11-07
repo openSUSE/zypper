@@ -265,10 +265,15 @@ struct ProvidesItem
     {
 	_XDEBUG("remove soft item (" << cai.item << ", " << cai.cap << ")");
 	PoolItem_Ref item( cai.item );
-	if (!item.status().transacts()) {	// not scheduled for transaction yet
+	if (!item.status().transacts() // not scheduled for transaction yet
+	    && !(item.status().staysInstalled() // not keeping by user (Bug 217574)
+		 && item.status().isByUser())
+	    ) {	
 	    QueueItemUninstall_Ptr uninstall_item = new QueueItemUninstall (pool, item, QueueItemUninstall::EXPLICIT, soft);
 	    uninstall_item->setUnlink ();
 	    qil.push_back (uninstall_item);
+	} else {
+	    _XDEBUG(" ---> do not remove cause it has been set for transaction or the user has set to KEEP");	    
 	}
 	return true;
     }

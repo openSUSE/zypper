@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Tue Nov  7 16:40:28 CET 2006 - schubi@suse.de
+
+-  While deleting a selection all concerning recommended
+   packages will be deleted too. 
+   BUT those packages should not be deleted which have been
+   set to KEEP by the user. bug 217574
+
+-------------------------------------------------------------------
 Tue Nov  7 13:12:49 CET 2006 - schubi@suse.de
 
 - Makefile in zypp2 fixed

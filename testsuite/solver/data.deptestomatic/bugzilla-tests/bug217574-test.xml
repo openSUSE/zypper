@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!--
+   while deleting a selection all concerning recommended
+   packages will be deleted too. 
+   BUT those packages should not be deleted which have been
+   set to KEEP by the user.
+-->
+
+<test>
+<setup arch="i686">
+  <system file="bug217574-system.xml"/>
+</setup>
+<trial>
+  <keep package="ulimit"/>
+  <uninstall name="default" kind="selection"/>
+</trial>
+</test>
