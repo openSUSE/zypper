@@ -95,7 +95,7 @@ string help_commands = _(
 
 // global options
 parsed_opts gopts;
-bool help = false;
+bool ghelp = false;
 
 // parses global options, returns the command
 string process_globals(int argc, char **argv)
@@ -115,7 +115,7 @@ string process_globals(int argc, char **argv)
   // $0 help
   // $0 help command
   if (gopts.count("help"))
-    help = true;
+    ghelp = true;
 
   string help_global_options = "  Options:\n"
     "\t--help, -h\t\tHelp\n"
@@ -153,7 +153,7 @@ string process_globals(int argc, char **argv)
     command = argv[optind++];
   }
   if (command == "help") {
-    help = true;
+    ghelp = true;
     if (optind < argc) {
       command = argv[optind++];
     }
@@ -163,7 +163,7 @@ string process_globals(int argc, char **argv)
   }
 
   if (command.empty()) {
-    if (help) {
+    if (ghelp) {
       cerr << help_global_options << help_commands;
     }
     else if (gopts.count("version")) {
@@ -205,7 +205,7 @@ int one_command(const string& command, int argc, char **argv)
       {"catalog",	   required_argument, 0, 'c'},
       {"type",	     required_argument, 0, 't'},
       {"no-confirm", no_argument,       0, 'y'},
-      {0, 0, 0, 0}
+      {"help",       no_argument,       0, 'h'}
     };
     specific_options = install_options;
     specific_help = "  Command options:\n"
@@ -218,7 +218,7 @@ int one_command(const string& command, int argc, char **argv)
     static struct option remove_options[] = {
       {"type",       required_argument, 0, 't'},
       {"no-confirm", no_argument,       0, 'y'},
-      {0, 0, 0, 0}
+      {"help",       no_argument,       0, 'h'}
     };
     specific_options = remove_options;
     specific_help = "  Command options:\n"
@@ -231,21 +231,52 @@ int one_command(const string& command, int argc, char **argv)
       {"disabled", no_argument, 0, 'd'},
       {"no-refresh", no_argument, 0, 'n'},
       {"repo", required_argument, 0, 'r'},
-      {0, 0, 0, 0}
+      {"help", no_argument, 0, 'h'}
     };
     specific_options = service_add_options;
-    specific_help = "  Command options:\n"
+    specific_help = "service-add [options] URI [alias]\n"
+      "\n"
+      "Add a service (installation source) to the system."
+      "\n"
+      "  Command options:\n"
       "\t--repo,-r <FILE.repo>\tRead the URL and alias from a file\n"
       "\t\t\t\t(even remote)\n"
       ;
   }
   else if (command == "service-list" || command == "sl") {
     static struct option service_list_options[] = {
-      {0, 0, 0, 0}
+      {"help", no_argument, 0, 'h'}
     };
     specific_options = service_list_options;
-    specific_help = "  Command options:\n"
+    specific_help = "service-list\n"
       "\n"
+      "List all defined system services (installation sources)."
+      "\n"
+      "This command has no options.\n"
+      ;
+  }
+  else if (command == "service-delete" || command == "sd") {
+    static struct option service_delete_options[] = {
+      {"help", no_argument, 0, 'h'}
+    };
+    specific_options = service_delete_options;
+    specific_help = "service-delete [options] <URI|alias>\n"
+      "\n"
+      "Remove service (installation source) from the system."
+      "\n"
+      "This command has no options.\n"
+      ;
+  }
+  else if (command == "service-rename" || command == "sr") {
+    static struct option service_rename_options[] = {
+      {"help", no_argument, 0, 'h'}
+    };
+    specific_options = service_rename_options;
+    specific_help = "service-rename [options] <URI|alias> <new-alias>\n"
+      "\n"
+      "Assign new alias to the service specified by URI or current alias."
+      "\n"
+      "This command has no options.\n"
       ;
   }
   else if (command == "refresh" || command == "ref") {
@@ -259,25 +290,29 @@ int one_command(const string& command, int argc, char **argv)
       ;
   }
   else if (command == "list-updates" || command == "lu") {
-    static struct option remove_options[] = {
+    static struct option list_updates_options[] = {
       {"type",		required_argument, 0, 't'},
-      {0, 0, 0, 0}
+      {"help", no_argument, 0, 'h'}
     };
-    specific_options = remove_options;
-    specific_help = "  Command options:\n"
+    specific_options = list_updates_options;
+    specific_help = "list-updates [options]\n"
+      "\n"
+      "List all available updates\n"
+      "\n"
+      "  Command options:\n"
       "\t--type,-t\t\tType of resolvable (default: patch!)\n"
       ;
   }
   else if (command == "update" || command == "up") {
-    static struct option remove_options[] = {
+    static struct option update_options[] = {
       {"type",		   required_argument, 0, 't'},
       {"no-confirm", no_argument,       0, 'y'},
-      {0, 0, 0, 0}
+      {"help", no_argument, 0, 'h'}
     };
-    specific_options = remove_options;
+    specific_options = update_options;
     specific_help = "  Command options:\n"
       "\t--type,-t\t\tType of resolvable (default: patch!)\n"
-      "\t--no-confirm,-y\tDon't require user confirmation\n"
+      "\t--no-confirm,-y\t\tDon't require user confirmation\n"
       ;
   }
   else if (command == "search" || command == "se") {
@@ -319,25 +354,65 @@ int one_command(const string& command, int argc, char **argv)
       "* and ? wildcards can also be used within search strings.\n"
       ;
   }
+  else if (command == "patch-check" || command == "pchk") {
+    static struct option patch_check_options[] = {
+      {"help", no_argument, 0, 'h'}
+    };
+    specific_options = patch_check_options;
+    specific_help = "patch-check\n"
+      "\n"
+      "Check for available patches\n"
+      "\n"
+      "This command has no options.\n"
+      ;
+  }
+  else if (command == "patches" || command == "pch") {
+    static struct option patches_options[] = {
+      {"help", no_argument, 0, 'h'}
+    };
+    specific_options = patches_options;
+    specific_help = "patches\n"
+      "\n"
+      "List all available patches\n"
+      "\n"
+      "This command has no options.\n"
+      ;
+  }
   else if (command == "info" || command == "if") {
-    static struct option info_options[] = {};
+    static struct option info_options[] = {
+      {"help", no_argument, 0, 'h'}
+    };
     specific_options = info_options;
     specific_help =
-      "zypper [global-options] info [package...]\n"
+      "zypper [global-options] info [name...]\n"
       "\n"
       "'info' - Show full information for packages\n"
       ;
   }
-  else {
-    cerr_vv << "No options declared for command " << command << endl;
-    // no options. or make this an exhaustive thing?
-    //    cerr << "Unknown command" << endl;
-    //    return 1;
+  else if (command == "patch-info") {
+    static struct option patch_info_options[] = {
+      {"help", no_argument, 0, 'h'}
+    };
+    specific_options = patch_info_options;
+    specific_help =
+      "zypper [global-options] patch-info [patchname...]\n"
+      "\n"
+      "'patch-info' - Show detailed information for patches\n"
+      ;
+  }
+  else if (!command.empty()) { // empty command is treated earlier
+    cerr << "Unknown command '" << command << "'." << endl << endl;
+    cerr << help_commands;
+    return 1;
   }
 
   parsed_opts copts = parse_options (argc, argv, specific_options);
   if (copts.count("_unknown"))
     return 1;
+
+  // treat --help command option like global --help option from now on
+  // i.e. when used together with command to print command specific help
+  ghelp = ghelp || copts.count("help");
 
   vector<string> arguments;
   if (optind < argc) {
@@ -384,12 +459,6 @@ int one_command(const string& command, int argc, char **argv)
     }
   }
   
-  // === execute command ===
-
-  if (command == "moo") {
-    cout << "   \\\\\\\\\\\n  \\\\\\\\\\\\\\__o\n__\\\\\\\\\\\\\\'/_" << endl;
-    return 0;
-  }
 
   // here come commands that need the lock
   try {
@@ -405,10 +474,24 @@ int one_command(const string& command, int argc, char **argv)
   ResObject::Kind kind;
 
 
+  // === execute command ===
+
+  // --------------------------( moo )----------------------------------------
+
+  if (command == "moo") {
+    cout << "   \\\\\\\\\\\n  \\\\\\\\\\\\\\__o\n__\\\\\\\\\\\\\\'/_" << endl;
+    return 0;
+  }
+
   // --------------------------( service list )-------------------------------
   
-  if (command == "service-list" || command == "sl")
+  else if (command == "service-list" || command == "sl")
   {
+    if (ghelp) {
+      cerr << specific_help << endl;
+      return !ghelp;
+    }
+
     if ( geteuid() != 0 )
     {
       cerr << "Sorry, you need root privileges to view system sources." << endl;
@@ -440,12 +523,9 @@ int one_command(const string& command, int argc, char **argv)
       parse_repo_file (filename, repourl, repoalias);
     }
 
-    if (help || (arguments.size() < 1 && repoalias.empty ())) {
-      cerr << "service-add [options] URI [alias]\n"
-	""
-	   << specific_help
-	;
-      return !help;
+    if (ghelp || (arguments.size() < 1 && repoalias.empty ())) {
+      cerr << specific_help;
+      return !ghelp;
     }
 
     if (repourl.empty())
@@ -482,11 +562,9 @@ int one_command(const string& command, int argc, char **argv)
 
   else if (command == "service-delete" || command == "sd")
   {
-    if (help || arguments.size() < 1) {
-      cerr << "service-delete [options] <URI|alias>\n"
-	   << specific_help
-	;
-      return !help;
+    if (ghelp || arguments.size() < 1) {
+      cerr << specific_help;
+      return !ghelp;
     }
 
     warn_if_zmd ();
@@ -508,13 +586,11 @@ int one_command(const string& command, int argc, char **argv)
 
   else if (command == "service-rename" || command == "sr")
   {
-    if (help || arguments.size() < 2) {
-      cerr << "service-rename [options] <URI|alias> <new-alias>\n"
-	   << specific_help
-	;
-      return !help;
+    if (ghelp || arguments.size() < 2) {
+      cerr << specific_help;
+      return !ghelp;
     }
-    
+
     cond_init_target ();
     warn_if_zmd ();
     try {
@@ -533,9 +609,9 @@ int one_command(const string& command, int argc, char **argv)
   // --------------------------( refresh )------------------------------------
 
   else if (command == "refresh" || command == "ref") {
-    if (help || copts.count("help")) {
+    if (ghelp) {
       cerr << specific_help;
-      return !help;
+      return !ghelp;
     }
     
     refresh_sources();
@@ -547,22 +623,22 @@ int one_command(const string& command, int argc, char **argv)
       command == "remove" || command == "rm") {
 
     if (command == "install" || command == "in") {
-      if (help || arguments.size() < 1) {
+      if (ghelp || arguments.size() < 1) {
         cerr << "install [options] name...\n"
         << specific_help
         ;
-        return !help;
+        return !ghelp;
       }
 
       gData.packages_to_install = arguments;
     }
 
     if (command == "remove" || command == "rm") {
-      if (help || arguments.size() < 1) {
+      if (ghelp || arguments.size() < 1) {
         cerr << "remove [options] name...\n"
         << specific_help
         ;
-        return !help;
+        return !ghelp;
       }
 
       gData.packages_to_uninstall = arguments;
@@ -610,9 +686,9 @@ int one_command(const string& command, int argc, char **argv)
   else if (command == "search" || command == "se") {
     ZyppSearchOptions options;
 
-    if (help || copts.count("help")) {
+    if (ghelp) {
       cerr << specific_help;
-      return !help;
+      return !ghelp;
     }
 
     if (gSettings.disable_system_resolvables || copts.count("uninstalled-only"))
@@ -658,11 +734,9 @@ int one_command(const string& command, int argc, char **argv)
 
   // TODO: rug summary
   else if (command == "patch-check" || command == "pchk") {
-    if (help) {
-      cerr << "patch-check\n"
-	   << specific_help
-	;
-      return !help;
+    if (ghelp) {
+      cerr << specific_help;
+      return !ghelp;
     }
 
     cond_init_target ();
@@ -687,11 +761,9 @@ int one_command(const string& command, int argc, char **argv)
   // --------------------------( patches )------------------------------------
 
   else if (command == "patches" || command == "pch") {
-    if (help) {
-      cerr << "patches\n"
-	   << specific_help
-	;
-      return !help;
+    if (ghelp) {
+      cerr << specific_help;
+      return !ghelp;
     }
 
     cond_init_target ();
@@ -705,12 +777,10 @@ int one_command(const string& command, int argc, char **argv)
   // --------------------------( list updates )-------------------------------
 
   else if (command == "list-updates" || command == "lu") {
-    if (help) {
+    if (ghelp) {
       // FIXME catalog...
-      cerr << "list-updates [options]\n"
-	   << specific_help
-	;
-      return !help;
+      cerr << specific_help;
+      return !ghelp;
     }
 
     string skind = copts.count("type")?  copts["type"].front() :
@@ -734,11 +804,11 @@ int one_command(const string& command, int argc, char **argv)
   // -----------------------------( update )----------------------------------
 
   else if (command == "update" || command == "up") {
-    if (help) {
+    if (ghelp) {
       cerr << "update [options]\n"
 	   << specific_help
 	;
-      return !help;
+      return !ghelp;
     }
 
     string skind = copts.count("type")?  copts["type"].front() :
@@ -762,9 +832,9 @@ int one_command(const string& command, int argc, char **argv)
   // -----------------------------( info )------------------------------------
 
   else if (command == "info" || command == "if" || command == "patch-info") {
-    if (help || copts.count("help")) {
+    if (ghelp || arguments.size() == 0) {
       cerr << specific_help;
-      return !help;
+      return !ghelp;
     }
 
     cond_init_target ();
@@ -776,13 +846,8 @@ int one_command(const string& command, int argc, char **argv)
 
     return 0;
   }
-  
-  else {
-    cerr << "Unknown command '" << command << "'." << endl << endl;
-    cerr << help_commands;
-  }
 
-  return 0;
+  return 1; // if the program reaches this line, something went wrong
 }
 
 void command_shell ()
