@@ -37,6 +37,7 @@ lib@PACKAGE@2_source_sqlite_la_SOURCES =			\
 	SqlitePatternImpl.cc			\
 	SqliteProductImpl.cc			\
 	SqliteSources.cc				\
-	SqliteAccess.cc 
+	SqliteAccess.cc \
+	schema.h
 
 lib@PACKAGE@2_source_sqlite_la_LBADD = -lsqlite3
