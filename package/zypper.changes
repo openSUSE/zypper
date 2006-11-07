@@ -1,9 +1,12 @@
 -------------------------------------------------------------------
-Tue Nov  7 11:20:28 CET 2006 - jkupec@suse.cz
+Tue Nov  7 13:16:28 CET 2006 - jkupec@suse.cz
 
 - --help option added for each command
 - help texts added
 - unkown command on 'zypper --help' fixed
+- defaulting to package in rug compatibility for search command
+- Bundle column replaced by Type in non-compatible mode
+- 0.6.4
 
 -------------------------------------------------------------------
 Mon Nov  6 15:44:23 CET 2006 - jkupec@suse.cz

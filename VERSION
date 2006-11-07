@@ -6,5 +6,5 @@ dnl
 dnl ==================================================
 m4_define([ZYPPER_MAJOR], 	 [0])
 m4_define([ZYPPER_MINOR],	 [6])
-m4_define([ZYPPER_PATCH],	 [3])
+m4_define([ZYPPER_PATCH],	 [4])
 dnl ==================================================
