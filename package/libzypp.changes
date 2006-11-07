@@ -5,6 +5,8 @@ Tue Nov  7 16:40:28 CET 2006 - schubi@suse.de
    packages will be deleted too. 
    BUT those packages should not be deleted which have been
    set to KEEP by the user. bug 217574
+   rev 4526
+   VERSION: 2.7.2
 
 -------------------------------------------------------------------
 Tue Nov  7 13:12:49 CET 2006 - schubi@suse.de
