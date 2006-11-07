@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue Nov  7 11:20:28 CET 2006 - jkupec@suse.cz
+
+- --help option added for each command
+- help texts added
+- unkown command on 'zypper --help' fixed
+
+-------------------------------------------------------------------
 Mon Nov  6 15:44:23 CET 2006 - jkupec@suse.cz
 
 - Unknown command message added (#216211)
