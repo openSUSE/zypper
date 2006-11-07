@@ -1673,42 +1673,6 @@ parse_xml_trial (XmlNode_Ptr node, const ResPool & pool)
 		}
 
 	     }
-            
-	} else if (node->equals ("keep")) {
-
-	    string name = node->getProp ("name");
-	    if (name.empty())
-		name = node->getProp ("package");
-
-	    string source_alias = node->getProp ("channel");
-	    if (source_alias.empty())
-		source_alias = "@system";
-
-	    if (name.empty())
-	    {
-		cerr << "transact need 'name' parameter" << endl;
-		return;
-	    }
-
-            PoolItem_Ref poolItem;
-
-            poolItem = get_poolItem( source_alias, name, "" );
-
-            if (poolItem) {
-                // first: set anything
-                if (source_alias == "@system") {
-                    poolItem.status().setToBeUninstalled( ResStatus::USER );
-                }
-                else {
-                    poolItem.status().setToBeInstalled( ResStatus::USER );
-                }
-                // second: keep old state
-                poolItem.status().setTransact( false, ResStatus::USER );
-                resolver->transactResObject( poolItem, false );
-            }
-            else {
-                cerr << "Unknown item " << source_alias << "::" << name << endl;
-            }
 	} else if (node->equals ("createTestcase")) {
 	    string path = node->getProp ("path");
             if (path.empty())
@@ -2184,42 +2148,8 @@ parse_xml_transact (XmlNode_Ptr node, const ResPool & pool)
 		else {
 		    cerr << "Unknown item " << source_alias << "::" << name << endl;
 		}
-            }
-	} else if (node->equals ("keep")) {
 
-	    string name = node->getProp ("name");
-	    if (name.empty())
-		name = node->getProp ("package");
-
-	    string source_alias = node->getProp ("channel");
-	    if (source_alias.empty())
-		source_alias = "@system";
-
-	    if (name.empty())
-	    {
-		cerr << "transact need 'name' parameter" << endl;
-		return;
-	    }
-
-            PoolItem_Ref poolItem;
-
-            poolItem = get_poolItem( source_alias, name, "" );
-
-            if (poolItem) {
-                // first: set anything
-                if (source_alias == "@system") {
-                    poolItem.status().setToBeUninstalled( ResStatus::USER );
-                }
-                else {
-                    poolItem.status().setToBeInstalled( ResStatus::USER );
-                }
-                // second: keep old state
-                poolItem.status().setTransact( false, ResStatus::USER );
-                resolver->transactResObject( poolItem, false );
-            }
-            else {
-                cerr << "Unknown item " << source_alias << "::" << name << endl;
-            }
+	     }
 
 	} else {
 	    cerr << "Unknown tag '" << node->name() << "' in transact" << endl;
