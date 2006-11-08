@@ -235,6 +235,41 @@ Turns on rug compatibility. See compatibility notes next to affected commands.
 .B /var/lib/zypp/cache
 Directory for storing metadata contained in installation sources.
 
+.SH "EXIT CODES"
+.LP
+There are several exit codes defined for zypper for use e.g. within scripts. These codes are defined in header file src/zmart.h found in zypper source package. Codes from interval (1-5) denote an error, numbers (100-103) provide a specific information, 0 represents a normal successfull run. Following is a list of these codes with descriptions.
+.TP
+0 - ZYPPER_EXIT_OK
+Successfull run of zypper with no special info.
+.TP
+1 - ZYPPER_EXIT_ERR_BUG
+Unexpected situation occured, probably caused by a bug.
+.TP
+2 - ZYPPER_EXIT_ERR_SYNTAX
+zypper was invoked with an invalid command or option, or a bad syntax.
+.TP
+3 - ZYPPER_EXIT_ERR_INVALID_ARGS
+Some of provided arguments were invalid. E.g. an invalid URI was provided to the service-add command.
+.TP
+4 - ZYPPER_EXIT_ERR_ZYPP
+A problem reported by ZYPP library. E.g. another instance of ZYPP is running.
+.TP
+5 - ZYPPER_EXIT_ERR_PRIVILEGES
+User invoking zypper has insufficient privileges for specified operation.
+.TP
+100 - ZYPPER_EXIT_INF_UPDATE_NEEDED
+Returned by the patch-check command if there are patches available for installation.
+.TP
+101 - ZYPPER_EXIT_INF_SEC_UPDATE_NEEDED
+Returned by the patch-check command if there are security patches available for installation.
+.TP
+102 - ZYPPER_EXIT_INF_REBOOT_NEEDED
+Returned after a successfull installation of a patch which requires reboot of computer.
+.TP
+103 - ZYPPER_EXIT_INF_RESTART_NEEDED
+Returned after a successfull installation of a patch which requires restart of the package manager itself. This means that one of patches to be installed affects the package manager itself and the command used (e.g. zypper update) needs to be executed once again to install any remaining patches.
+
+
 .SH "NOTE"
 .LP
 Currently, zypper can be run only by user with root privileges.
