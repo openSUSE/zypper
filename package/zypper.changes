@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Wed Nov  8 20:08:30 CET 2006 - jkupec@suse.cz
+
+- Several exit codes defined for use in scripts.
+
+-------------------------------------------------------------------
 Wed Nov  8 09:55:56 CET 2006 - mvidner@suse.cz
 
 - Call dump_pool more often for better debugging.
