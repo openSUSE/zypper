@@ -28,6 +28,21 @@
 #define ZYPP_BASE_LOGGER_LOGGROUP "zypper"
 #define RANDOM_TOKEN "sad987432JJDJD948394DDDxxx22"
 
+// ===== exit codes ======
+
+#define ZYPPER_EXIT_OK                     0
+// errors
+#define ZYPPER_EXIT_ERR_SYNTAX             1 // syntax error, e.g. zypper instal, zypper in --unknown option
+#define ZYPPER_EXIT_ERR_INVALID_ARGS       2 // invalid arguments given, e.g. zypper source-add httttps://asdf.net 
+#define ZYPPER_EXIT_ERR_ZYPP               3 // error indicated from within libzypp, e.g. God = zypp::getZYpp() threw an exception
+#define ZYPPER_EXIT_ERR_PRIVILEGES         4 // unsufficient privileges for the operation
+#define ZYPPER_EXIT_ERR_BUG                5 // undetermined error
+// info
+#define ZYPPER_EXIT_INF_UPDATE_NEEDED     -1 // update needed
+#define ZYPPER_EXIT_INF_SEC_UPDATE_NEEDED -2 // security update needed
+#define ZYPPER_EXIT_INF_REBOOT_NEEDED     -3 
+#define ZYPPER_EXIT_INF_RESTART_NEEDED    -4
+
 struct Settings
 {
   Settings()

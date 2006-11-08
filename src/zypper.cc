@@ -414,12 +414,12 @@ int one_command(const string& command, int argc, char **argv)
   else if (!command.empty()) { // empty command is treated earlier
     cerr << "Unknown command '" << command << "'." << endl << endl;
     cerr << help_commands;
-    return 1;
+    return ZYPPER_EXIT_ERR_SYNTAX;
   }
 
   parsed_opts copts = parse_options (argc, argv, specific_options);
   if (copts.count("_unknown"))
-    return 1;
+    return ZYPPER_EXIT_ERR_SYNTAX;
 
   // treat --help command option like global --help option from now on
   // i.e. when used together with command to print command specific help
@@ -465,7 +465,7 @@ int one_command(const string& command, int argc, char **argv)
     {
       Url url = make_url (*it);
       if (!url.isValid())
-	return 1;
+	return ZYPPER_EXIT_ERR_INVALID_ARGS;
       gSettings.additional_sources.push_back(url); 
     }
   }
@@ -479,7 +479,7 @@ int one_command(const string& command, int argc, char **argv)
     ZYPP_CAUGHT (excpt_r);
     ERR  << "a ZYpp transaction is already in progress." << endl;
     cerr << "a ZYpp transaction is already in progress." << endl;
-    return 1;
+    return ZYPPER_EXIT_ERR_ZYPP;
   }
 
   ResObject::Kind kind;
@@ -491,7 +491,7 @@ int one_command(const string& command, int argc, char **argv)
 
   if (command == "moo") {
     cout << "   \\\\\\\\\\\n  \\\\\\\\\\\\\\__o\n__\\\\\\\\\\\\\\'/_" << endl;
-    return 0;
+    return ZYPPER_EXIT_OK;
   }
 
   // --------------------------( service list )-------------------------------
@@ -506,11 +506,11 @@ int one_command(const string& command, int argc, char **argv)
     if ( geteuid() != 0 )
     {
       cerr << "Sorry, you need root privileges to view system sources." << endl;
-      return 1;
+      return ZYPPER_EXIT_ERR_PRIVILEGES;
     }
     
     list_system_sources();
-    return 0;
+    return ZYPPER_EXIT_OK;
   }
 
   // --------------------------( service add )--------------------------------
@@ -544,7 +544,7 @@ int one_command(const string& command, int argc, char **argv)
 
     Url url = make_url (repourl);
     if (!url.isValid())
-      return 1;
+      return ZYPPER_EXIT_ERR_INVALID_ARGS;
     string alias = repoalias;
     if (alias.empty ())
       alias = url.asString();
@@ -563,10 +563,10 @@ int one_command(const string& command, int argc, char **argv)
     catch ( const Exception & excpt_r )
     {
       cerr << excpt_r.asUserString() << endl;
-      return 1;
+      return ZYPPER_EXIT_ERR_ZYPP;
     }
 
-    return 0;
+    return ZYPPER_EXIT_OK;
   }
 
   // --------------------------( service delete )-----------------------------
@@ -587,10 +587,10 @@ int one_command(const string& command, int argc, char **argv)
     {
       ZYPP_CAUGHT (excpt_r);
       cerr << excpt_r.asUserString() << endl;
-      return 1;
+      return ZYPPER_EXIT_ERR_ZYPP;
     }
 
-    return 0;
+    return ZYPPER_EXIT_OK;
   }
 
   // --------------------------( service rename )-----------------------------
@@ -611,10 +611,10 @@ int one_command(const string& command, int argc, char **argv)
     catch ( const Exception & excpt_r )
     {
       cerr << excpt_r.asUserString() << endl;
-      return 1;
+      return ZYPPER_EXIT_ERR_ZYPP;
     }
 
-    return 0;
+    return ZYPPER_EXIT_OK;
   }
   
   // --------------------------( refresh )------------------------------------
@@ -659,7 +659,7 @@ int one_command(const string& command, int argc, char **argv)
     kind = string_to_kind (skind);
     if (kind == ResObject::Kind ()) {
       cerr << "Unknown resolvable type " << skind << endl;
-      return 1;
+      return ZYPPER_EXIT_ERR_INVALID_ARGS;
     }
 
     cond_init_system_sources ();
@@ -687,7 +687,7 @@ int one_command(const string& command, int argc, char **argv)
 
       solve_and_commit (copts.count("no-confirm"));
     }
-    return 0;
+    return ZYPPER_EXIT_OK;
   }
 
   // --------------------------( search )-------------------------------------
@@ -717,7 +717,7 @@ int one_command(const string& command, int argc, char **argv)
       kind = string_to_kind (skind);
       if (kind == ResObject::Kind ()) {
         cerr << "Unknown resolvable type " << skind << endl;
-        return 1;
+        return ZYPPER_EXIT_ERR_INVALID_ARGS;
       }
       options.setKind(kind);
     }
@@ -742,7 +742,7 @@ int one_command(const string& command, int argc, char **argv)
       cout << t;
     }
 
-    return 0;
+    return ZYPPER_EXIT_OK;
   }
 
   // --------------------------( patch check )--------------------------------
@@ -767,10 +767,10 @@ int one_command(const string& command, int argc, char **argv)
     patch_check ();
 
     if (gData.security_patches_count > 0)
-      return 2;
+      return ZYPPER_EXIT_INF_SEC_UPDATE_NEEDED;
     if (gData.patches_count > 0)
-      return 1;
-    return 0;
+      return ZYPPER_EXIT_INF_UPDATE_NEEDED;
+    return ZYPPER_EXIT_OK;
   }
 
   // --------------------------( patches )------------------------------------
@@ -786,7 +786,7 @@ int one_command(const string& command, int argc, char **argv)
     cond_load_resolvables ();
     establish ();
     show_patches ();
-    return 0;
+    return ZYPPER_EXIT_OK;
   }
 
   // --------------------------( list updates )-------------------------------
@@ -803,7 +803,7 @@ int one_command(const string& command, int argc, char **argv)
     kind = string_to_kind (skind);
     if (kind == ResObject::Kind ()) {
 	cerr << "Unknown resolvable type " << skind << endl;
-	return 1;
+	return ZYPPER_EXIT_ERR_INVALID_ARGS;
     }
 
     cond_init_target ();
@@ -813,7 +813,7 @@ int one_command(const string& command, int argc, char **argv)
 
     list_updates (kind);
 
-    return 0;
+    return ZYPPER_EXIT_OK;
   }
 
   // -----------------------------( update )----------------------------------
@@ -831,7 +831,7 @@ int one_command(const string& command, int argc, char **argv)
     kind = string_to_kind (skind);
     if (kind == ResObject::Kind ()) {
 	cerr << "Unknown resolvable type " << skind << endl;
-	return 1;
+	return ZYPPER_EXIT_ERR_INVALID_ARGS;
     }
 
     cond_init_target ();
@@ -841,7 +841,7 @@ int one_command(const string& command, int argc, char **argv)
 
     mark_updates (kind);
     solve_and_commit (copts.count("no-confirm"));
-    return 0;
+    return ZYPPER_EXIT_OK;
   }
 
   // -----------------------------( info )------------------------------------
@@ -859,10 +859,11 @@ int one_command(const string& command, int argc, char **argv)
 
     printInfo(command,arguments);
 
-    return 0;
+    return ZYPPER_EXIT_OK;
   }
 
-  return 1; // if the program reaches this line, something went wrong
+  // if the program reaches this line, something went wrong
+  return ZYPPER_EXIT_ERR_BUG;
 }
 
 void command_shell ()
