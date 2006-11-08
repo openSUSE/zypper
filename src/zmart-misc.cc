@@ -330,6 +330,7 @@ void establish ()
 {
   cerr_v << "Establishing status of aggregates" << endl;
   God->resolver()->establishPool();
+  dump_pool ();
 }
 
 void resolve()
@@ -379,7 +380,7 @@ string string_status (const ResStatus& rs)
   return "error";
 }
 
-static void dump_pool ()
+void dump_pool ()
 {
   int count = 1;
   static bool full_pool_shown = false;
@@ -402,7 +403,6 @@ static void dump_pool ()
 void show_patches()
 {
   MIL << "Pool contains " << God->pool().size() << " items. Checking whether available patches are needed." << std::endl;
-  dump_pool ();
 
   Table tbl;
   TableHeader th;
@@ -591,7 +591,6 @@ void mark_updates( const ResObject::Kind &kind )
 }
 
 void solve_and_commit (bool non_interactive) {
-  cerr_v << "resolving" << endl;
   resolve();
     
   show_problems ();

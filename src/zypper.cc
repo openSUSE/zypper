@@ -400,6 +400,17 @@ int one_command(const string& command, int argc, char **argv)
       "'patch-info' - Show detailed information for patches\n"
       ;
   }
+  else if (command == "moo") {
+    static struct option moo_options[] = {
+      {"help", no_argument, 0, 'h'}
+    };
+    specific_options = moo_options;
+    specific_help =
+      "zypper [global-options] moo\n"
+      "\n"
+      "'moo' - Show an animal\n"
+      ;
+  }
   else if (!command.empty()) { // empty command is treated earlier
     cerr << "Unknown command '" << command << "'." << endl << endl;
     cerr << help_commands;

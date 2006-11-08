@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Nov  8 09:55:56 CET 2006 - mvidner@suse.cz
+
+- Call dump_pool more often for better debugging.
+- 0.6.5
+
+-------------------------------------------------------------------
 Tue Nov  7 13:16:28 CET 2006 - jkupec@suse.cz
 
 - --help option added for each command
