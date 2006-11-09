@@ -132,9 +132,9 @@ namespace zypp
         HalContext_Impl(bool monitorable = false);
         ~HalContext_Impl();
 
-        bool            pcon; // private connection
         DBusConnection *conn;
         LibHalContext  *hctx;
+        bool            pcon; // private connection
       };
 
 
