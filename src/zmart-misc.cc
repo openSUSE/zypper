@@ -144,7 +144,7 @@ void mark_for_install( const ResObject::Kind &kind,
   // name and kind match:
 
   ProvideProcess installer (God->architecture(), "" /*version*/);
-  cerr_vv << "Iterating over " << name << endl;
+  cerr_vv << "Iterating over [" << kind << "]" << name << endl;
   invokeOnEach( pool.byNameBegin( name ),
 		pool.byNameEnd( name ),
 		resfilter::ByKind( kind ),
