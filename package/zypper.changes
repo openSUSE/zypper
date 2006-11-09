@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Nov  9 16:21:33 CET 2006 - mvidner@suse.cz
+
+- Fixed option parsing broken by unterminated option lists (install -t
+  was thinking -t stood for --terse).
+- If "install"ing more resolvables at a time, don't commit one by one.
+- 0.6.6
+-------------------------------------------------------------------
 Wed Nov  8 20:08:30 CET 2006 - jkupec@suse.cz
 
 - Several exit codes defined for use in scripts.

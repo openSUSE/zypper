@@ -205,7 +205,8 @@ int one_command(const string& command, int argc, char **argv)
       {"catalog",	   required_argument, 0, 'c'},
       {"type",	     required_argument, 0, 't'},
       {"no-confirm", no_argument,       0, 'y'},
-      {"help",       no_argument,       0, 'h'}
+      {"help",       no_argument,       0, 'h'},
+      {0, 0, 0, 0}
     };
     specific_options = install_options;
     specific_help = "  Command options:\n"
@@ -218,7 +219,8 @@ int one_command(const string& command, int argc, char **argv)
     static struct option remove_options[] = {
       {"type",       required_argument, 0, 't'},
       {"no-confirm", no_argument,       0, 'y'},
-      {"help",       no_argument,       0, 'h'}
+      {"help",       no_argument,       0, 'h'},
+      {0, 0, 0, 0}
     };
     specific_options = remove_options;
     specific_help = "  Command options:\n"
@@ -231,7 +233,8 @@ int one_command(const string& command, int argc, char **argv)
       {"disabled", no_argument, 0, 'd'},
       {"no-refresh", no_argument, 0, 'n'},
       {"repo", required_argument, 0, 'r'},
-      {"help", no_argument, 0, 'h'}
+      {"help", no_argument, 0, 'h'},
+      {0, 0, 0, 0}
     };
     specific_options = service_add_options;
     specific_help = "service-add [options] URI [alias]\n"
@@ -245,7 +248,8 @@ int one_command(const string& command, int argc, char **argv)
   }
   else if (command == "service-list" || command == "sl") {
     static struct option service_list_options[] = {
-      {"help", no_argument, 0, 'h'}
+      {"help", no_argument, 0, 'h'},
+      {0, 0, 0, 0}
     };
     specific_options = service_list_options;
     specific_help = "service-list\n"
@@ -257,7 +261,8 @@ int one_command(const string& command, int argc, char **argv)
   }
   else if (command == "service-delete" || command == "sd") {
     static struct option service_delete_options[] = {
-      {"help", no_argument, 0, 'h'}
+      {"help", no_argument, 0, 'h'},
+      {0, 0, 0, 0}
     };
     specific_options = service_delete_options;
     specific_help = "service-delete [options] <URI|alias>\n"
@@ -269,7 +274,8 @@ int one_command(const string& command, int argc, char **argv)
   }
   else if (command == "service-rename" || command == "sr") {
     static struct option service_rename_options[] = {
-      {"help", no_argument, 0, 'h'}
+      {"help", no_argument, 0, 'h'},
+      {0, 0, 0, 0}
     };
     specific_options = service_rename_options;
     specific_help = "service-rename [options] <URI|alias> <new-alias>\n"
@@ -281,7 +287,8 @@ int one_command(const string& command, int argc, char **argv)
   }
   else if (command == "refresh" || command == "ref") {
     static struct option refresh_options[] = {
-      {"help", no_argument, 0, 'h'}
+      {"help", no_argument, 0, 'h'},
+      {0, 0, 0, 0}
     };
     specific_options = refresh_options;
     specific_help = _("zypper refresh\n"
@@ -292,7 +299,8 @@ int one_command(const string& command, int argc, char **argv)
   else if (command == "list-updates" || command == "lu") {
     static struct option list_updates_options[] = {
       {"type",		required_argument, 0, 't'},
-      {"help", no_argument, 0, 'h'}
+      {"help", no_argument, 0, 'h'},
+      {0, 0, 0, 0}
     };
     specific_options = list_updates_options;
     specific_help = "list-updates [options]\n"
@@ -307,7 +315,8 @@ int one_command(const string& command, int argc, char **argv)
     static struct option update_options[] = {
       {"type",		   required_argument, 0, 't'},
       {"no-confirm", no_argument,       0, 'y'},
-      {"help", no_argument, 0, 'h'}
+      {"help", no_argument, 0, 'h'},
+      {0, 0, 0, 0}
     };
     specific_options = update_options;
     specific_help = "  Command options:\n"
@@ -329,7 +338,8 @@ int one_command(const string& command, int argc, char **argv)
       {"type",    required_argument, 0, 't'},
       {"sort-by-name", no_argument, 0, 0},
       {"sort-by-catalog", no_argument, 0, 0},
-      {"help", no_argument, 0, 'h'}
+      {"help", no_argument, 0, 'h'},
+      {0, 0, 0, 0}
     };
     specific_options = search_options;
     specific_help =
@@ -356,7 +366,8 @@ int one_command(const string& command, int argc, char **argv)
   }
   else if (command == "patch-check" || command == "pchk") {
     static struct option patch_check_options[] = {
-      {"help", no_argument, 0, 'h'}
+      {"help", no_argument, 0, 'h'},
+      {0, 0, 0, 0}
     };
     specific_options = patch_check_options;
     specific_help = "patch-check\n"
@@ -368,7 +379,8 @@ int one_command(const string& command, int argc, char **argv)
   }
   else if (command == "patches" || command == "pch") {
     static struct option patches_options[] = {
-      {"help", no_argument, 0, 'h'}
+      {"help", no_argument, 0, 'h'},
+      {0, 0, 0, 0}
     };
     specific_options = patches_options;
     specific_help = "patches\n"
@@ -380,7 +392,8 @@ int one_command(const string& command, int argc, char **argv)
   }
   else if (command == "info" || command == "if") {
     static struct option info_options[] = {
-      {"help", no_argument, 0, 'h'}
+      {"help", no_argument, 0, 'h'},
+      {0, 0, 0, 0}
     };
     specific_options = info_options;
     specific_help =
@@ -391,7 +404,8 @@ int one_command(const string& command, int argc, char **argv)
   }
   else if (command == "patch-info") {
     static struct option patch_info_options[] = {
-      {"help", no_argument, 0, 'h'}
+      {"help", no_argument, 0, 'h'},
+      {0, 0, 0, 0}
     };
     specific_options = patch_info_options;
     specific_help =
@@ -402,7 +416,8 @@ int one_command(const string& command, int argc, char **argv)
   }
   else if (command == "moo") {
     static struct option moo_options[] = {
-      {"help", no_argument, 0, 'h'}
+      {"help", no_argument, 0, 'h'},
+      {0, 0, 0, 0}
     };
     specific_options = moo_options;
     specific_help =
@@ -684,9 +699,9 @@ int one_command(const string& command, int argc, char **argv)
       else {
 	mark_for_uninstall(kind, *it);
       }
-
-      solve_and_commit (copts.count("no-confirm"));
     }
+
+    solve_and_commit (copts.count("no-confirm"));
     return ZYPPER_EXIT_OK;
   }
 
