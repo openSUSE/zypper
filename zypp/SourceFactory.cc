@@ -252,7 +252,7 @@ namespace zypp
     }
     else
     {
-      ZYPP_THROW( Exception("Unknown source type for " + url_r.asString() ) );
+      ZYPP_THROW( SourceUnknownTypeException("Unknown source type for " + url_r.asString() ) );
     }
 
     //////////////////////////////////////////////////////////////////
@@ -356,18 +356,16 @@ namespace zypp
         ZYPP_THROW( Exception ("Cannot create source of unknown type '" + type + "'"));
       }
 
+      // never reached
       return Source_Ref(impl);
     }
     catch (const Exception & excpt_r)
     {
       ZYPP_CAUGHT(excpt_r);
       MIL << "Creating a source of type " << type << " failed " << endl;
+      ZYPP_RETHROW(excpt_r);
     }
-
-    //report->endProbe (url_r);
-
-    ERR << "No next type of source" << endl;
-    ZYPP_THROW(Exception("Cannot create the installation source"));
+    
     return Source_Ref(); // not reached!!
   }
 

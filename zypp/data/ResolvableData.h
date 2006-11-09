@@ -15,6 +15,7 @@
 #include "zypp/base/NonCopyable.h"
 #include "zypp/Pathname.h"
 #include "zypp/Edition.h"
+#include "zypp/ByteCount.h"
 #include "zypp/Arch.h"
 #include "zypp/CheckSum.h"
 #include "zypp/Url.h"
@@ -138,6 +139,8 @@ namespace data
       std::string type;
       std::string vendor;
       std::string name; 
+      std::string distribution_name; 
+      Edition distribution_edition;
       TranslatedText short_name;
         // those are suse specific tags
       std::string releasenotesurl;
@@ -153,8 +156,8 @@ namespace data
       CheckSum checksum;
       std::string packager;
       Url url;
-      unsigned int archive_size;
-      unsigned int installed_size;
+      ByteCount archive_size;
+      ByteCount installed_size;
       Date build_time;
       Pathname location;
       std::string license;
