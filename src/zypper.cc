@@ -855,8 +855,11 @@ int one_command(const string& command, int argc, char **argv)
     establish ();
 
     mark_updates (kind);
-    solve_and_commit (copts.count("no-confirm"));
-    return ZYPPER_EXIT_OK;
+
+    // commit
+    // returns ZYPPER_EXIT_OK, ZYPPER_EXIT_ERR_ZYPP,
+    // ZYPPER_EXIT_INF_REBOOT_NEEDED, or ZYPPER_EXIT_INF_RESTART_NEEDED
+    return solve_and_commit (copts.count("no-confirm"));
   }
 
   // -----------------------------( info )------------------------------------

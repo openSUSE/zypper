@@ -230,10 +230,17 @@ void show_problems () {
   }
 }
 
-bool show_summary()
+/**
+ * @return (-1) - nothing to do,
+ *  0 - there is at least 1 resolvable to be installed/uninstalled,
+ *  ZYPPER_EXIT_INF_REBOOT_NEEDED - if one of patches to be installed needs machine reboot,
+ *  ZYPPER_EXIT_INF_RESTART_NEEDED - if one of patches to be installed needs package manager restart
+ */
+int show_summary()
 {
+  int retv = -1; // nothing to do;
+
   cerr << "Summary:" << endl;
-  bool nothing = true;
 
   MIL << "Pool contains " << God->pool().size() << " items." << std::endl;
   for ( ResPool::const_iterator it = God->pool().begin(); it != God->pool().end(); ++it )
@@ -241,7 +248,20 @@ bool show_summary()
     ResObject::constPtr res = it->resolvable();
     if ( it->status().isToBeInstalled() || it->status().isToBeUninstalled() )
     {
-      nothing = false;
+      if (retv == -1) retv = 0;
+
+      if (it->resolvable()->kind() == ResTraits<Patch>::kind) {
+        Patch::constPtr patch = asKind<Patch>(it->resolvable());
+        
+        // set return value to 'reboot needed'
+        if (patch->reboot_needed())
+          retv = ZYPPER_EXIT_INF_REBOOT_NEEDED;
+        // set return value to 'restart needed' (restart of package manager)
+        // however, 'reboot needed' takes precedence
+        else if (retv != ZYPPER_EXIT_INF_REBOOT_NEEDED && patch->affects_pkg_manager())
+          retv = ZYPPER_EXIT_INF_RESTART_NEEDED;
+      }
+
       if ( it->status().isToBeInstalled() )
         cerr << "<install>   ";
       if ( it->status().isToBeUninstalled() )
@@ -249,10 +269,10 @@ bool show_summary()
       cerr << *res << endl;
     }
   }
-  if (nothing)
+  if (retv == -1)
     cerr << "Nothing to do." << endl;
 
-  return !nothing;
+  return retv;
 }
 
 std::string calculate_token()
@@ -590,20 +610,43 @@ void mark_updates( const ResObject::Kind &kind )
   }
 }
 
-void solve_and_commit (bool non_interactive) {
+
+/**
+ * @return ZYPPER_EXIT_OK - successful commit,
+ *  ZYPPER_EXIT_ERR_ZYPP - if ZYppCommitResult contains resolvables with errors,
+ *  ZYPPER_EXIT_INF_REBOOT_NEEDED - if one of patches to be installed needs machine reboot,
+ *  ZYPPER_EXIT_INF_RESTART_NEEDED - if one of patches to be installed needs package manager restart
+ */
+int solve_and_commit (bool non_interactive) {
   resolve();
-    
+
   show_problems ();
 
-  if (show_summary()) {
-      
+  // returns -1, 0, ZYPPER_EXIT_INF_REBOOT_NEEDED, or ZYPPER_EXIT_INF_RESTART_NEEDED
+  int retv = show_summary();
+
+  if (retv >= 0) { // there are resolvables to install/uninstall
     cerr << "Continue? [y/n] " << (non_interactive ? "y\n" : "");
     if (non_interactive || readBoolAnswer()) {
       cerr_v << "committing" << endl;
       ZYppCommitResult result = God->commit( ZYppCommitPolicy() );
-      cerr_v << result << std::endl; 
+      if (!result._errors.empty())
+        retv = ZYPPER_EXIT_ERR_ZYPP;
+      cerr_v << result << std::endl;
     }
   }
+
+  if (retv < 0)
+    retv = ZYPPER_EXIT_OK;
+  else if (retv == ZYPPER_EXIT_INF_REBOOT_NEEDED)
+    cout << "WARNING: One of installed patches requires reboot of"
+      " your machine. Please, do it as soon as possible." << endl;
+  else if (retv == ZYPPER_EXIT_INF_RESTART_NEEDED)
+    cout << "WARNING: One of installed patches affects the package"
+      " manager itself, thus it requires restart before executing"
+      " next operations." << endl;
+
+  return retv;
 }
 
 // Local Variables:

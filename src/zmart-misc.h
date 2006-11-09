@@ -24,8 +24,7 @@ void mark_for_install( const zypp::ResObject::Kind &kind,
 void mark_for_uninstall( const zypp::ResObject::Kind &kind,
 			 const std::string &name );
 void show_problems();
-//! return whether there is anything to commit
-bool show_summary();
+int show_summary();
 std::string calculate_token();
 //! load all resolvables that the user wants
 void cond_load_resolvables ();
@@ -39,7 +38,7 @@ void patch_check();
 void list_updates( const zypp::ResObject::Kind &kind );
 void mark_updates( const zypp::ResObject::Kind &kind );
 void usage(int argc, char **argv);
-void solve_and_commit (bool non_interactive = false);
+int solve_and_commit (bool non_interactive = false);
 
 // copied from yast2-pkg-bindings:PkgModuleFunctions::DoProvideNameKind
 struct ProvideProcess
