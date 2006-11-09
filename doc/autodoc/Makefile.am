@@ -12,9 +12,12 @@ install-data-hook:
 
 ## ##################################################
 
-# touch Doxyfile (or just make clean) to remake the html docs
 @PACKAGE@.doxytag: Doxyfile
 	@DOCGEN@
+
+# force remaking the html docs
+doc:
+	$(MAKE) -W Doxyfile
 
 ## ##################################################
 
