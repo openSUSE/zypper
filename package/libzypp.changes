@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Nov 10 17:52:10 CET 2006 - dmacvicar@suse.de
+
+- make progress strings translatable (#219783)
+- r4556 
+
+-------------------------------------------------------------------
 Tue Nov  7 16:40:28 CET 2006 - schubi@suse.de
 
 -  While deleting a selection all concerning recommended
