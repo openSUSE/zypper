@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Fri Nov 10 12:05:36 CET 2006 - jkupec@suse.cz
+
+- solve_and_commit() changed to return informative exit codes if
+  a reboot or package manager restart is needed after
+  installation/removal of patches requiring such actions.
+- 0.6.7
+
+-------------------------------------------------------------------
 Fri Nov 10 10:50:52 CET 2006 - mvidner@suse.cz
 
 - Do not obsolete y2pmsh.rpm yet.
