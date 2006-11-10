@@ -26,13 +26,13 @@ void verifier_test()
   media::MediaId   id;
 
   //id = mm.open(zypp::Url("cd:/"), "");
-  id = mm.open(zypp::Url("http://ftp.opensuse.org/pub/opensuse/distribution/SL-OSS-factory/inst-source/"), "");
+  id = mm.open(zypp::Url("ftp://machcd2/CDs/suse102-cd-oss-i386/CD1"), "");
   mm.addVerifier( id, verifier);
   mm.attach(id);
-  mm.provideFile(id, Pathname("/directory.yast"));
+  mm.provideFile(id, Pathname("/suse/setup/descr/EXTRA_PROV"));
   mm.release(id);
   mm.attach(id);
-  mm.provideFile(id, Pathname("/directory.yast"));  
+  mm.provideFile(id, Pathname("/suse/setup/descr/EXTRA_PROV"));  
 }
 
 test_suite*

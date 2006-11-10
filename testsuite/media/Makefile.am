@@ -10,9 +10,9 @@ SUBDIRS =
 
 TESTS = media1 fileexists
 
-noinst_PROGRAMS = media2 media3 media4 fileexists
+noinst_PROGRAMS = media2 media3 media4 fileexists throw_if_not_exists
 
-check_PROGRAMS = media1 fileexists
+check_PROGRAMS = media1 fileexists throw_if_not_exists
 
 
 ## ##################################################
@@ -35,6 +35,9 @@ media3_LDADD = $(LDADD)
 
 media4_SOURCES = media4.cc mymediaverifier.h
 media4_LDADD = $(LDADD)
+
+throw_if_not_exists_SOURCES = throw_if_not_exists.cc mymediaverifier.h
+throw_if_not_exists_LDADD = $(LDADD) -lboost_unit_test_framework
 
 ## ##################################################
 
