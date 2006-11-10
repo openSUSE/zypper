@@ -24,9 +24,9 @@ Version:        @VERSION@
 Release:        0
 Source:         @PACKAGE@-@VERSION@.tar.bz2
 Prefix:         /usr
-# RIP
-Provides:       y2pmsh
-Obsoletes:      y2pmsh
+# zypper is not a fully featured replacement yet
+#Provides:       y2pmsh
+#Obsoletes:      y2pmsh
 
 %description
 Command Line Package Management Using Libzypp

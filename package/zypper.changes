@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Fri Nov 10 10:50:52 CET 2006 - mvidner@suse.cz
+
+- Do not obsolete y2pmsh.rpm yet.
+
+-------------------------------------------------------------------
 Thu Nov  9 16:21:33 CET 2006 - mvidner@suse.cz
 
 - Fixed option parsing broken by unterminated option lists in 0.6.4
