@@ -16,6 +16,7 @@
 
 #include "zypp/base/Logger.h"
 #include "zypp/base/Exception.h"
+#include "zypp/base/Gettext.h"
 
 #include "zypp/PathInfo.h"
 #include "zypp/Digest.h"
@@ -637,7 +638,7 @@ void SuseTagsImpl::providePackages(Source_Ref source_r, ResStore &store)
   SourceEventHandler npp(report);
 
   progress.reset( new parser::ParserProgress( npp ) );
-  report->start( selfSourceRef(), "Parsing packages file" );
+  report->start( selfSourceRef(), _("Reading packages file") );
 
   PkgContent content;
 
@@ -647,10 +648,10 @@ void SuseTagsImpl::providePackages(Source_Ref source_r, ResStore &store)
   }
   catch ( const Exception &e )
   {
-    report->finish( selfSourceRef(), "Parsing packages file", source::SourceReport::INVALID, e.msg() );
+    report->finish( selfSourceRef(), _("Reading packages file"), source::SourceReport::INVALID, e.msg() );
     ZYPP_THROW(SourceMetadataException("Can't parse packages file: " + e.msg()));
   }
-  report->finish( selfSourceRef(), "Parsing packages file", source::SourceReport::NO_ERROR, "" );
+  report->finish( selfSourceRef(), _("Reading packages file"), source::SourceReport::NO_ERROR, "" );
 
 #warning Should use correct locale and locale fallback list
   // note, this locale detection has nothing to do with translated text.
@@ -698,10 +699,13 @@ void SuseTagsImpl::providePackages(Source_Ref source_r, ResStore &store)
 
           SourceEventHandler lang_progress_handler(report);
           progress.reset( new parser::ParserProgress( lang_progress_handler ) );
-          report->start( selfSourceRef(), "Parsing translation: " + packages_lang_name );
+          
+          // TranslatorExplanation %s = language name
+          report->start( selfSourceRef(), str::form(_("Reading translation: %s"), packages_lang_name.c_str()) );
           parsePackagesLang( progress, this, p, lang, content );
           trymore = false;
-          report->finish( selfSourceRef(), "Parsing translation: " + packages_lang_name, source::SourceReport::NO_ERROR, "" );
+          // TranslatorExplanation %s = language name
+          report->finish( selfSourceRef(), str::form(_("Reading translation: %s"), packages_lang_name.c_str()), source::SourceReport::NO_ERROR, "" );
         }
         else
         {
@@ -715,7 +719,7 @@ void SuseTagsImpl::providePackages(Source_Ref source_r, ResStore &store)
     }
     catch ( const Exception &e )
     {
-      report->finish( selfSourceRef(), "Parsing translation: " + packages_lang_name, source::SourceReport::INVALID, e.msg() );
+      report->finish( selfSourceRef(), str::form(_("Reading translation: %s"), packages_lang_name.c_str()), source::SourceReport::INVALID, e.msg() );
       ZYPP_CAUGHT(e);
     }
     lang = lang.fallback();

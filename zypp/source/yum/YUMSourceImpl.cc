@@ -213,7 +213,7 @@ const TmpDir YUMSourceImpl::downloadMetadata()
   ifstream repo_st(remote_repomd.asString().c_str());
 
   callback::SendReport<SourceReport> report;
-  report->start( selfSourceRef(), "Parsing index files" );
+  report->start( selfSourceRef(), _("Reading index files") );
   YUMRepomdParser repomd(repo_st, "");
 
 
@@ -238,7 +238,7 @@ const TmpDir YUMSourceImpl::downloadMetadata()
       } // end of single patch parsing
     }// end of patches file parsing
   } // end of copying
-  report->finish( selfSourceRef(), "Parsing index files", source::SourceReport::NO_ERROR, "" );
+  report->finish( selfSourceRef(), _("Reading index files"), source::SourceReport::NO_ERROR, "" );
 
 
   // check signature
@@ -460,6 +460,9 @@ void YUMSourceImpl::provideProducts(Source_Ref source_r, ResStore& store)
       YUMSourceEventHandler npp(report);
       progress.reset( new parser::ParserProgress( npp ) );
 
+       // TranslatorExplanation %s = product file
+      report->start( selfSourceRef(), str::form(_("Reading product from %s"), filename.asString().c_str()) );
+      
       YUMProductParser product(st, "", progress);
       for (; !product.atEnd(); ++product)
       {
@@ -469,19 +472,22 @@ void YUMSourceImpl::provideProducts(Source_Ref source_r, ResStore& store)
 
       if (product.errorStatus())
       {
-        report->finish( selfSourceRef(), "Parsing product from " + filename.asString(), source::SourceReport::INVALID, product.errorStatus()->msg() );
-        ZYPP_THROW(SourceMetadataException( "Error parsing product from " + filename.asString()+ " : " + product.errorStatus()->msg()));
+        // TranslatorExplanation %s = product file
+        report->finish( selfSourceRef(), str::form(_("Reading product from %s"), filename.asString().c_str()), source::SourceReport::INVALID, product.errorStatus()->msg() );
+        ZYPP_THROW(SourceMetadataException( "Error reading product from " + filename.asString()+ " : " + product.errorStatus()->msg()));
       }
       else
       {
-        report->finish( selfSourceRef(), "Parsing product from " + filename.asString(), source::SourceReport::NO_ERROR, "" );
+        // TranslatorExplanation %s = product file
+        report->finish( selfSourceRef(), str::form(_("Reading product from %s"), filename.asString().c_str()), source::SourceReport::NO_ERROR, "" );
       }
     }
   }
   catch ( const Exception &e )
   {
     ZYPP_CAUGHT(e);
-    report->finish( selfSourceRef(), "Parsing product from " + filename.asString(), source::SourceReport::INVALID, e.msg() );
+    // TranslatorExplanation %s = product file
+    report->finish( selfSourceRef(), str::form(_("Reading product from %s"), filename.asString().c_str()), source::SourceReport::INVALID, e.msg() );
     ZYPP_THROW(SourceMetadataException(e.msg()));
   }
 
@@ -510,7 +516,8 @@ void YUMSourceImpl::providePackages(Source_Ref source_r, ResStore& store)
       parser::ParserProgress::Ptr progress;
       YUMSourceEventHandler npp(report);
       progress.reset( new parser::ParserProgress( npp, get_stream_size(filename) ) );
-      report->start( selfSourceRef(), "Parsing filelist from " + filename.asString() );
+      // TranslatorExplanation %s = package file list
+      report->start( selfSourceRef(), str::form(_("Reading filelist from %s"), filename.asString().c_str()) );
 
       YUMFileListParser filelist ( st, "", progress );
       for (; ! filelist.atEnd(); ++filelist)
@@ -524,19 +531,22 @@ void YUMSourceImpl::providePackages(Source_Ref source_r, ResStore& store)
 
       if (filelist.errorStatus())
       {
-        report->finish( selfSourceRef(), "Parsing filelist from " + filename.asString(), source::SourceReport::INVALID, filelist.errorStatus()->msg() );
-        ZYPP_THROW(SourceMetadataException( "Error filelists from " + filename.asString()+ " : " + filelist.errorStatus()->msg()));
+        // TranslatorExplanation %s = package file list
+        report->finish( selfSourceRef(), str::form(_("Reading filelist from %s"), filename.asString().c_str()), source::SourceReport::INVALID, filelist.errorStatus()->msg() );
+        ZYPP_THROW(SourceMetadataException( "Error reading filelists from " + filename.asString()+ " : " + filelist.errorStatus()->msg()));
       }
       else
       {
-        report->finish( selfSourceRef(), "Parsing packages from " + filename.asString(), source::SourceReport::NO_ERROR, "" );
+        // TranslatorExplanation %s = package file list
+        report->finish( selfSourceRef(), str::form(_("Reading filelist from %s"), filename.asString().c_str()), source::SourceReport::NO_ERROR, "" );
       }
     }
   }
   catch ( const Exception &e )
   {
     ZYPP_CAUGHT(e);
-    report->finish( selfSourceRef(), "Parsing filelist from " + filename.asString(), source::SourceReport::INVALID, e.msg() );
+    // TranslatorExplanation %s = package file list
+    report->finish( selfSourceRef(),str::form(_("Reading filelist from %s"), filename.asString().c_str()), source::SourceReport::INVALID, e.msg() );
     ZYPP_THROW(SourceMetadataException(e.msg()));
   }
 
@@ -551,7 +561,8 @@ void YUMSourceImpl::providePackages(Source_Ref source_r, ResStore& store)
       parser::ParserProgress::Ptr progress;
       YUMSourceEventHandler npp(report);
       progress.reset( new parser::ParserProgress( npp ) );
-      report->start( selfSourceRef(), "Parsing packages from " + filename.asString() );
+      // TranslatorExplanation %s = packages file
+      report->start( selfSourceRef(), str::form(_("Reading packages from %s"), filename.asString().c_str()) );
 
       ifgzstream st ( filename.asString().c_str() );
 
@@ -590,19 +601,22 @@ void YUMSourceImpl::providePackages(Source_Ref source_r, ResStore& store)
 
       if (prim.errorStatus())
       {
-        report->finish( selfSourceRef(), "Parsing packages from " + filename.asString(), source::SourceReport::INVALID, prim.errorStatus()->msg() );
+        // TranslatorExplanation %s = packages file
+        report->finish( selfSourceRef(), str::form(_("Reading packages from %s"), filename.asString().c_str()), source::SourceReport::INVALID, prim.errorStatus()->msg() );
         ZYPP_THROW(SourceMetadataException( "Error packages from " + filename.asString()+ " : " + prim.errorStatus()->msg()));
       }
       else
       {
-        report->finish( selfSourceRef(), "Parsing packages from " + filename.asString(), source::SourceReport::NO_ERROR, "" );
+        // TranslatorExplanation %s = packages file
+        report->finish( selfSourceRef(), str::form(_("Reading packages from %s"), filename.asString().c_str()), source::SourceReport::NO_ERROR, "" );
       }
     }
   }
   catch ( const Exception &e )
   {
     ZYPP_CAUGHT(e);
-    report->finish( selfSourceRef(), "Parsing packages from " + filename.asString(), source::SourceReport::INVALID, e.msg() );
+    // TranslatorExplanation %s = packages file
+    report->finish( selfSourceRef(), str::form(_("Reading packages from %s"), filename.asString().c_str()), source::SourceReport::INVALID, e.msg() );
     ZYPP_THROW(SourceMetadataException(e.msg()));
   }
 
@@ -625,7 +639,8 @@ void YUMSourceImpl::provideSelections(Source_Ref source_r, ResStore& store)
       parser::ParserProgress::Ptr progress;
       YUMSourceEventHandler npp(report);
       progress.reset( new parser::ParserProgress( npp ) );
-      report->start( selfSourceRef(), "Parsing selection " + filename.asString() );
+      // TranslatorExplanation %s = selection metadata file
+      report->start( selfSourceRef(), str::form(_("Reading selection from %s"), filename.asString().c_str()) );
 
       YUMGroupParser group(st, "", progress);
       for (; !group.atEnd(); ++group)
@@ -636,19 +651,22 @@ void YUMSourceImpl::provideSelections(Source_Ref source_r, ResStore& store)
 
       if (group.errorStatus())
       {
-        report->finish( selfSourceRef(), "Parsing selection " + filename.asString(), source::SourceReport::INVALID, group.errorStatus()->msg() );
+        // TranslatorExplanation %s = selection metadata file
+        report->finish( selfSourceRef(), str::form(_("Reading selection from %s"), filename.asString().c_str()), source::SourceReport::INVALID, group.errorStatus()->msg() );
         ZYPP_THROW(SourceMetadataException( "Error Parsing selection " + filename.asString()+ " : " + group.errorStatus()->msg()));
       }
       else
       {
-        report->finish( selfSourceRef(), "Parsing selection " + filename.asString(), source::SourceReport::NO_ERROR, "" );
+        // TranslatorExplanation %s = selection metadata file
+        report->finish( selfSourceRef(), str::form(_("Reading selection from %s"), filename.asString().c_str()), source::SourceReport::NO_ERROR, "" );
       }
     }
   }
   catch ( const Exception &e )
   {
     ZYPP_CAUGHT(e);
-    report->finish( selfSourceRef(), "Parsing selecton " + filename.asString(), source::SourceReport::INVALID, e.msg() );
+    // TranslatorExplanation %s = selection metadata file
+    report->finish( selfSourceRef(), str::form(_("Reading selection from %s"), filename.asString().c_str()), source::SourceReport::INVALID, e.msg() );
     ZYPP_THROW(SourceMetadataException(e.msg()));
   }
 
@@ -671,7 +689,8 @@ void YUMSourceImpl::providePatterns(Source_Ref source_r, ResStore& store)
       parser::ParserProgress::Ptr progress;
       YUMSourceEventHandler npp(report);
       progress.reset( new parser::ParserProgress( npp )  );
-      report->start( selfSourceRef(), "Parsing pattern " + filename.asString() );
+      // TranslatorExplanation %s = pattern metadata file
+      report->start( selfSourceRef(), str::form(_("Reading pattern from %s"), filename.asString().c_str()) );
 
       YUMPatternParser pattern(st, "", progress);
       for (; !pattern.atEnd(); ++pattern)
@@ -682,19 +701,22 @@ void YUMSourceImpl::providePatterns(Source_Ref source_r, ResStore& store)
 
       if (pattern.errorStatus())
       {
-        report->finish( selfSourceRef(), "Parsing pattern " + filename.asString(), source::SourceReport::INVALID, pattern.errorStatus()->msg() );
+        // TranslatorExplanation %s = pattern metadata file
+        report->finish( selfSourceRef(), str::form(_("Reading pattern from %s"), filename.asString().c_str()), source::SourceReport::INVALID, pattern.errorStatus()->msg() );
         ZYPP_THROW(SourceMetadataException( "Error parsing pattern" + filename.asString()+ " : " + pattern.errorStatus()->msg()));
       }
       else
       {
-        report->finish( selfSourceRef(), "Parsing pattern " + filename.asString(), source::SourceReport::NO_ERROR, "" );
+        // TranslatorExplanation %s = pattern metadata file
+        report->finish( selfSourceRef(), str::form(_("Reading pattern from %s"), filename.asString().c_str()), source::SourceReport::NO_ERROR, "" );
       }
     }
   }
   catch ( const Exception &e )
   {
     ZYPP_CAUGHT(e);
-    report->finish( selfSourceRef(), "Parsing pattern " + filename.asString(), source::SourceReport::INVALID, e.msg() );
+    // TranslatorExplanation %s = pattern metadata file
+    report->finish( selfSourceRef(), str::form(_("Reading pattern from %s"), filename.asString().c_str()), source::SourceReport::INVALID, e.msg() );
     ZYPP_THROW(SourceMetadataException(e.msg()));
   }
 
@@ -720,7 +742,8 @@ void YUMSourceImpl::providePatches(Source_Ref source_r, ResStore& store)
       parser::ParserProgress::Ptr progress;
       YUMSourceEventHandler npp(report);
       progress.reset( new parser::ParserProgress( npp ) );
-      report->start( selfSourceRef(), "Parsing patches index " + filename.asString() );
+      // TranslatorExplanation %s = patches index file
+      report->start( selfSourceRef(), str::form(_("Reading patches index %s"), filename.asString().c_str()) );
       YUMPatchesParser patch(st, "", progress);
 
       for (; !patch.atEnd(); ++patch)
@@ -731,19 +754,22 @@ void YUMSourceImpl::providePatches(Source_Ref source_r, ResStore& store)
 
       if (patch.errorStatus())
       {
-        report->finish( selfSourceRef(), "Parsing patch " + filename.asString(), source::SourceReport::INVALID, patch.errorStatus()->msg() );
+        // TranslatorExplanation %s = patches index file
+        report->finish( selfSourceRef(), str::form(_("Reading patches index %s"), filename.asString().c_str()), source::SourceReport::INVALID, patch.errorStatus()->msg() );
         ZYPP_THROW(SourceMetadataException( "Error Parsing patch " + filename.asString()+ " : " + patch.errorStatus()->msg()));
       }
       else
       {
-        report->finish( selfSourceRef(), "Parsing patch " + filename.asString(), source::SourceReport::NO_ERROR, "" );
+        // TranslatorExplanation %s = patches index file
+        report->finish( selfSourceRef(), str::form(_("Reading patches index %s"), filename.asString().c_str()), source::SourceReport::NO_ERROR, "" );
       }
     }
   }
   catch ( const Exception &e )
   {
     ZYPP_CAUGHT(e);
-    report->finish( selfSourceRef(), "Parsing patch index" + filename.asString(), source::SourceReport::INVALID, e.msg() );
+    // TranslatorExplanation %s = patches index file
+    report->finish( selfSourceRef(), str::form(_("Reading patches index %s"), filename.asString().c_str()), source::SourceReport::INVALID, e.msg() );
     ZYPP_THROW(SourceMetadataException(e.msg()));
   }
 
@@ -765,7 +791,8 @@ void YUMSourceImpl::providePatches(Source_Ref source_r, ResStore& store)
       YUMSourceEventHandler npp(report);
       progress.reset( new parser::ParserProgress( npp ) );
 
-      report->start( selfSourceRef(), "Parsing patch " + filename.asString() );
+      // TranslatorExplanation %s = patch metadata file
+      report->start( selfSourceRef(), str::form(_("Reading patch %s"), filename.asString().c_str()) );
 
       YUMPatchParser ptch(st, "", progress);
       for (; !ptch.atEnd(); ++ptch)
@@ -781,12 +808,14 @@ void YUMSourceImpl::providePatches(Source_Ref source_r, ResStore& store)
 
       if (ptch.errorStatus())
       {
-        report->finish( selfSourceRef(), "Parsing patch " + filename.asString(), source::SourceReport::INVALID, ptch.errorStatus()->msg() );
+        // TranslatorExplanation %s = patch metadata file
+        report->finish( selfSourceRef(), str::form(_("Reading patch %s"), filename.asString().c_str()), source::SourceReport::INVALID, ptch.errorStatus()->msg() );
         ZYPP_THROW(SourceMetadataException( "Error Parsing patch " + filename.asString()+ " : " + ptch.errorStatus()->msg()));
       }
       else
       {
-        report->finish( selfSourceRef(), "Parsing patch " + filename.asString(), source::SourceReport::NO_ERROR, "" );
+        // TranslatorExplanation %s = patch metadata file
+        report->finish( selfSourceRef(), str::form(_("Reading patch %s"), filename.asString().c_str()), source::SourceReport::NO_ERROR, "" );
       }
     }
   }
@@ -794,7 +823,8 @@ void YUMSourceImpl::providePatches(Source_Ref source_r, ResStore& store)
   {
     ERR << "Cannot read patch metadata" << endl;
     ZYPP_CAUGHT(e);
-    report->finish( selfSourceRef(), "Parsing patch " + filename.asString(), source::SourceReport::INVALID, e.msg() );
+    // TranslatorExplanation %s = patch metadata file
+    report->finish( selfSourceRef(), str::form(_("Reading patch %s"), filename.asString().c_str()), source::SourceReport::INVALID, e.msg() );
     ZYPP_THROW(SourceMetadataException(e.msg()));
   }
 }
