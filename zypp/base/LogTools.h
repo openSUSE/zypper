@@ -20,15 +20,17 @@
 #include <map>
 #include "zypp/base/Logger.h"
 #include "zypp/base/Iterator.h"
+#include "zypp/base/Deprecated.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
-  /** Print range defined by iterators.
+  /** Print range defined by iterators (multiline style).
    * \code
    * intro [ pfx ITEM [ { sep ITEM }+ ] sfx ] extro
    * \endcode
+   *
    * The defaults print the range enclosed in \c {}, one item per
    * line indented by 2 spaces.
    * \code
@@ -38,9 +40,47 @@ namespace zypp
    * }
    * {} // on empty range
    * \endcode
-   * A comma separated list enclosed in \c () would be
+   *
+   * A comma separated list enclosed in \c () would be:
    * \code
    * dumpRange( stream, begin, end, "(", "", ", ", "", ")" );
+   * // or shorter:
+   * dumpRangeLine( stream, begin, end );
+   * \endcode
+   *
+   * \note Some special handling is required for printing std::maps.
+   * Therefore iomaipulators \ref dumpMap, \ref dumpKeys and \ref dumpValues
+   * are provided.
+   * \code
+   * std::map<string,int> m;
+   * m["a"]=1;
+   * m["b"]=2;
+   * m["c"]=3;
+   *
+   * dumpRange( DBG, dumpMap(m).begin(), dumpMap(m).end() ) << endl;
+   * // {
+   * //   [a] = 1
+   * //   [b] = 2
+   * //   [c] = 3
+   * // }
+   * dumpRange( DBG, dumpKeys(m).begin(), dumpKeys(m).end() ) << endl;
+   * // {
+   * //   a
+   * //   b
+   * //   c
+   * // }
+   * dumpRange( DBG, dumpValues(m).begin(), dumpValues(m).end() ) << endl;
+   * // {
+   * //   1
+   * //   2
+   * //   3
+   * // }
+   * dumpRangeLine( DBG, dumpMap(m).begin(), dumpMap(m).end() ) << endl;
+   * // ([a] = 1, [b] = 2, [c] = 3)
+   * dumpRangeLine( DBG, dumpKeys(m).begin(), dumpKeys(m).end() ) << endl;
+   * // (a, b, c)
+   * dumpRangeLine( DBG, dumpValues(m).begin(), dumpValues(m).end() ) << endl;
+   * // (1, 2, 3)
    * \endcode
   */
   template<class _Iterator>
@@ -63,10 +103,14 @@ namespace zypp
       return str << extro;
     }
 
+  /** Print range defined by iterators (single line style).
+   * \see dumpRange
+   */
   template<class _Iterator>
     std::ostream & dumpRangeLine( std::ostream & str,
                                   _Iterator begin, _Iterator end )
     { return dumpRange( str, begin, end, "(", "", ", ", "", ")" ); }
+
 
   template<class _Tp>
     std::ostream & operator<<( std::ostream & str, const std::vector<_Tp> & obj )
@@ -90,7 +134,8 @@ namespace zypp
 
     /** std::pair wrapper for std::map output.
      * Just because we want a special output format for std::pair
-     * used in a std::map.
+     * used in a std::map. The mapped std::pair is printed as
+     * <tt>[key] = value</tt>.
     */
     template<class _Pair>
       class MapEntry
@@ -124,13 +169,13 @@ namespace zypp
     ///////////////////////////////////////////////////////////////////
 
     /** std::map wrapper for stream output.
-     * Provides the transform_iterator used to write std::pair formated as
-     * MapEntry.
+     * Uses a transform_iterator to wrap the std::pair into MapEntry.
+     *
      */
     template<class _Map>
       class DumpMap
       {
-      private:
+      public:
         typedef _Map                        MapType;
         typedef typename _Map::value_type   PairType;
         typedef MapEntry<PairType>          MapEntryType;
@@ -152,10 +197,18 @@ namespace zypp
         const _Map & map() const
         { return *_map; }
 
-        MapEntry_const_iterator map_begin() const
+        MapEntry_const_iterator begin() const
         { return make_transform_iterator( map().begin(), Transformer() ); }
 
-        MapEntry_const_iterator map_end() const
+        MapEntry_const_iterator end() const
+        { return make_transform_iterator( map().end(), Transformer() );}
+
+        /** \deprecated Use begin. */
+        ZYPP_DEPRECATED MapEntry_const_iterator map_begin() const
+        { return make_transform_iterator( map().begin(), Transformer() ); }
+
+        /** \deprecated Use end. */
+        ZYPP_DEPRECATED MapEntry_const_iterator map_end() const
         { return make_transform_iterator( map().end(), Transformer() );}
 
       private:
@@ -165,7 +218,7 @@ namespace zypp
     /** \relates DumpMap Stream output. */
     template<class _Map>
       std::ostream & operator<<( std::ostream & str, const DumpMap<_Map> & obj )
-      { return dumpRange( str, obj.map_begin(), obj.map_end() ); }
+      { return dumpRange( str, obj.begin(), obj.end() ); }
 
     /** \relates DumpMap Convenience function to create DumpMap from std::map. */
     template<class _Map>
@@ -187,12 +240,21 @@ namespace zypp
       class DumpKeys
       {
       public:
+        typedef typename MapKVIteratorTraits<_Map>::Key_const_iterator MapKey_const_iterator;
+
+      public:
         DumpKeys( const _Map & map_r )
         : _map( &map_r )
         {}
 
         const _Map & map() const
         { return *_map; }
+
+        MapKey_const_iterator begin() const
+        { return make_map_key_begin( map() ); }
+
+        MapKey_const_iterator end() const
+        { return make_map_key_end( map() ); }
 
       private:
         const _Map *const _map;
@@ -201,7 +263,7 @@ namespace zypp
     /** \relates DumpKeys Stream output. */
     template<class _Map>
       std::ostream & operator<<( std::ostream & str, const DumpKeys<_Map> & obj )
-      { return dumpRange( str, make_map_key_begin(obj.map()), make_map_key_end(obj.map()) ); }
+      { return dumpRange( str, obj.begin(), obj.end() ); }
 
     /** \relates DumpKeys Convenience function to create DumpKeys from std::map. */
     template<class _Map>
@@ -223,12 +285,21 @@ namespace zypp
       class DumpValues
       {
       public:
+        typedef typename MapKVIteratorTraits<_Map>::Value_const_iterator MapValue_const_iterator;
+
+      public:
         DumpValues( const _Map & map_r )
         : _map( &map_r )
         {}
 
         const _Map & map() const
         { return *_map; }
+
+        MapValue_const_iterator begin() const
+        { return make_map_value_begin( map() ); }
+
+        MapValue_const_iterator end() const
+        { return make_map_value_end( map() ); }
 
       private:
         const _Map *const _map;
@@ -237,7 +308,7 @@ namespace zypp
     /** \relates DumpValues Stream output. */
     template<class _Map>
       std::ostream & operator<<( std::ostream & str, const DumpValues<_Map> & obj )
-      { return dumpRange( str, make_map_value_begin(obj.map()), make_map_value_end(obj.map()) ); }
+      { return dumpRange( str, obj.begin(), obj.end() ); }
 
     /** \relates DumpValues Convenience function to create DumpValues from std::map. */
     template<class _Map>
