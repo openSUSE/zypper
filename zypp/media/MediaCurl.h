@@ -31,7 +31,16 @@ class MediaCurl : public MediaHandler {
 
   protected:
 
-    MEDIA_HANDLER_API;
+    virtual void attachTo (bool next = false);
+    virtual void releaseFrom( bool eject );
+    virtual void getFile( const Pathname & filename ) const;
+    virtual void getDir( const Pathname & dirname, bool recurse_r ) const;
+    virtual void getDirInfo( std::list<std::string> & retlist,
+                             const Pathname & dirname, bool dots = true ) const;
+    virtual void getDirInfo( filesystem::DirContent & retlist,
+                             const Pathname & dirname, bool dots = true ) const;
+    virtual bool getDoesFileExist( const Pathname & filename ) const;
+
     /**
      *
      * \throws MediaException

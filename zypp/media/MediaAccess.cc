@@ -347,7 +347,7 @@ MediaAccess::releasePath( const Pathname & pathname ) const
 
 // Return content of directory on media
 void
-MediaAccess::dirInfo( list<string> & retlist, const Pathname & dirname, bool dots ) const
+MediaAccess::dirInfo( std::list<std::string> & retlist, const Pathname & dirname, bool dots ) const
 {
   retlist.clear();
 
@@ -372,7 +372,7 @@ MediaAccess::dirInfo( filesystem::DirContent & retlist, const Pathname & dirname
 }
 
 // return if a file exists
-bool 
+bool
 MediaAccess::doesFileExist( const Pathname & filename ) const
 {
   if ( !_handler ) {
@@ -380,7 +380,7 @@ MediaAccess::doesFileExist( const Pathname & filename ) const
   }
 
   return _handler->doesFileExist( filename );
-}  
+}
 
 std::ostream &
 MediaAccess::dumpOn( std::ostream & str ) const

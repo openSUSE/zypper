@@ -117,7 +117,7 @@ namespace zypp
 ///////////////////////////////////////////////////////////////////
 namespace std
 { /////////////////////////////////////////////////////////////////
-  /** \relates LanguageCode Default order for std::container based on code string value.*/
+  /** \relates zypp::LanguageCode Default order for std::container based on code string value.*/
   template<>
     inline bool less<zypp::LanguageCode>::operator()( const zypp::LanguageCode & lhs, const zypp::LanguageCode & rhs ) const
     { return lhs.code() < rhs.code(); }

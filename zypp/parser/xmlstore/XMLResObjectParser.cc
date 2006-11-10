@@ -29,7 +29,7 @@ namespace parser
 {
 namespace xmlstore
 {
-      
+
 
 XMLResObjectParser::XMLResObjectParser()
 { }
@@ -93,10 +93,10 @@ XMLResObjectParser::parseResObjectCommonData( XMLResObjectData_Ptr dataPtr, xmlN
       }
       else if (name == "install-time") {
         dataPtr->install_time = str::strtonum<Date::ValueType>(_helper.content(child));
-      }      
+      }
     }
   }
-} 
+}
 
 void
     XMLResObjectParser::parseDependencies( XMLResObjectData_Ptr dataPtr, xmlNodePtr node)
@@ -139,13 +139,13 @@ void
         parseDependencyEntries(& dataPtr->freshens, child);
       }
     }
-  } 
-  
+  }
+
 }
 
 void
-XMLResObjectParser::parseDependencyEntries(list<XMLDependency> *depList,
-                                              xmlNodePtr depNode)
+XMLResObjectParser::parseDependencyEntries( std::list<XMLDependency> *depList,
+                                            xmlNodePtr depNode)
 {
   xml_assert(depNode);
 
@@ -169,7 +169,7 @@ XMLResObjectParser::parseDependencyEntries(list<XMLDependency> *depList,
     }
   }
 }
-      
+
 } // namespace xmlstore
 } // namespace parser
 } // namespace zypp

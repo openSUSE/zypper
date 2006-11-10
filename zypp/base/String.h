@@ -246,7 +246,7 @@ namespace zypp
     ///////////////////////////////////////////////////////////////////
     /** \name Join. */
     //@{
-    /** Join strings using separator \sep_r (defaults to BLANK). */
+    /** Join strings using separator \a sep_r (defaults to BLANK). */
     template <class _Iterator>
       std::string join( _Iterator begin, _Iterator end,
                         const std::string & sep_r = " " )
@@ -261,7 +261,7 @@ namespace zypp
         return res;
       }
 
-    /** Join strings using separator \sep_r (defaults to BLANK). */
+    /** Join strings using separator \a sep_r (defaults to BLANK). */
     template <class _Container>
       std::string join( const _Container & cont_r,
                         const std::string & sep_r = " " )

@@ -164,7 +164,7 @@ void YUMGroupParser::parsePackageList(YUMGroupData_Ptr dataPtr,
 
 
 
-YUMGroupParser::YUMGroupParser(istream &is, const string &baseUrl, parser::ParserProgress::Ptr progress )
+YUMGroupParser::YUMGroupParser(std::istream &is, const std::string &baseUrl, parser::ParserProgress::Ptr progress )
     : XMLNodeIterator<YUMGroupData_Ptr>(is, baseUrl,GROUPSCHEMA, progress)
 {
   fetchNext();

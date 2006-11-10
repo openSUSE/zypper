@@ -1,4 +1,4 @@
-/**
+/*
  *
  * Easy-to use interface to the ZYPP dependency resolver
  *
@@ -36,7 +36,7 @@ namespace zypp
 	 **/
 	class SolutionAction : public base::ReferenceCounted
 	{
-	protected:    
+	protected:
 	    SolutionAction ();
 	public:
 	    virtual ~SolutionAction();
@@ -69,8 +69,8 @@ namespace zypp
 	    REMOVE,
 	    UNLOCK
 	} TransactionKind;
-	
-	
+
+
 	class TransactionSolutionAction: public SolutionAction
 	{
 	public:
@@ -102,7 +102,7 @@ namespace zypp
 	/**
 	 * Type of ignoring dependencies and architectures
 	 **/
-	
+
 	typedef enum
 	{
 	    REQUIRES,
@@ -111,7 +111,7 @@ namespace zypp
 	    INSTALLED,
 	    ARCHITECTURE
 	} InjectSolutionKind;
-	
+
 
 	/**
 	 * A problem solution action that injects an artificial "provides" to
@@ -130,13 +130,13 @@ namespace zypp
 		: SolutionAction(),
 		  _item( item ), _capability( capability ),
 		  _kind( kind ), _otherItem() {}
-	    
+
 	    InjectSolutionAction( PoolItem_Ref item,
 				  const InjectSolutionKind & kind)
 		: SolutionAction(),
 		  _item( item ), _capability(),
 		  _kind( kind ), _otherItem() {}
-	    
+
 	    InjectSolutionAction( PoolItem_Ref item,
 				  const Capability & capability,
 				  const InjectSolutionKind & kind,
@@ -148,11 +148,11 @@ namespace zypp
 	  // ---------------------------------- I/O
 	  virtual std::ostream & dumpOn( std::ostream & str ) const;
 	  friend std::ostream& operator<<(std::ostream& str, const InjectSolutionAction & action)
-		{ return action.dumpOn (str); }	      
+		{ return action.dumpOn (str); }
 
 	  // ---------------------------------- accessors
 	    const Capability & capability() const { return _capability; };
-	    const PoolItem_Ref item() const { return _item; }	    
+	    const PoolItem_Ref item() const { return _item; }
 
 	  // ---------------------------------- methods
 	    virtual bool execute(Resolver & resolver) const;
@@ -161,7 +161,7 @@ namespace zypp
 	    PoolItem_Ref _item;
 	    const Capability _capability;
 	    const InjectSolutionKind _kind;
-	    PoolItem_Ref _otherItem;	    
+	    PoolItem_Ref _otherItem;
 	};
 
 

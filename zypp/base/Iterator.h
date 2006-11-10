@@ -146,7 +146,7 @@ namespace zypp
   using boost::transform_iterator;
   using boost::make_transform_iterator;
 
-  /** Functor taking a \c std::pair returning \cstd::pair.first.
+  /** Functor taking a \c std::pair returning \c std::pair.first.
    * \see MapKVIteratorTraits
   */
   template<class _Pair>
@@ -156,7 +156,7 @@ namespace zypp
       { return pair_r.first; }
     };
 
-  /** Functor taking a \c std::pair returning \cstd::pair.second .
+  /** Functor taking a \c std::pair returning \c std::pair.second .
    * \see MapKVIteratorTraits
   */
   template<class _Pair>

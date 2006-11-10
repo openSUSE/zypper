@@ -7,9 +7,6 @@
 |                                                                      |
 \---------------------------------------------------------------------*/
 /** \file zypp/ExternalProgram.h
- *
- * \todo replace by Blocxx
- *
 */
 
 
@@ -33,7 +30,7 @@ namespace zypp {
      */
     class ExternalProgram : public zypp::externalprogram::ExternalDataSource
     {
-    
+
     public:
       /**
        * Define symbols for different policies on the handling
@@ -45,12 +42,12 @@ namespace zypp {
     	Stderr_To_Stdout,
     	Stderr_To_FileDesc
       };
-    
+
       /**
        * For passing additional environment variables to set
        */
       typedef std::map<std::string,std::string> Environment;
-    
+
       /**
        * Start the external program by using the shell <tt>/bin/sh<tt>
        * with the option <tt>-c</tt>. You can use io direction symbols < and >.
@@ -63,78 +60,78 @@ namespace zypp {
     		     Stderr_Disposition stderr_disp = Normal_Stderr,
     		     bool use_pty = false, int stderr_fd = -1, bool default_locale = false,
     		     const Pathname& root = "");
-    
+
       /**
        * Start an external program by giving the arguments as an arry of char *pointers.
        * If environment is provided, varaiables will be added to the childs environment,
        * overwriting existing ones.
        */
-      
+
       ExternalProgram();
-      
+
       ExternalProgram (const char *const *argv,
     		     Stderr_Disposition stderr_disp = Normal_Stderr,
     		     bool use_pty = false, int stderr_fd = -1, bool default_locale = false,
     		     const Pathname& root = "");
-    
+
       ExternalProgram (const char *const *argv, const Environment & environment,
     		     Stderr_Disposition stderr_disp = Normal_Stderr,
     		     bool use_pty = false, int stderr_fd = -1, bool default_locale = false,
     		     const Pathname& root = "");
-    
+
       ExternalProgram (const char *binpath, const char *const *argv_1,
     		     bool use_pty = false);
-    
-    
+
+
       ExternalProgram (const char *binpath, const char *const *argv_1, const Environment & environment,
     		     bool use_pty = false);
-    
-    
+
+
       ~ExternalProgram();
-    
+
       int close();
-    
+
       /**
        * Kill the program
        */
       bool kill();
-    
+
       /**
        * Return whether program is running
        */
       bool running();
-    
+
       /**
        * return pid
        * */
       pid_t getpid() { return pid; }
-    
+
       /**
        * origfd will be accessible as newfd and closed (unless they were equal)
        */
       static void renumber_fd (int origfd, int newfd);
-    
+
     protected:
       int checkStatus( int );
-    
+
     private:
-    
+
       /**
        * Set to true, if a pair of ttys is used for communication
        * instead of a pair of pipes.
        */
       bool use_pty;
-    
+
       pid_t pid;
       int _exitStatus;
-    
+
       void start_program (const char *const *argv, const Environment & environment,
     			Stderr_Disposition stderr_disp = Normal_Stderr,
     			int stderr_fd = -1, bool default_locale = false,
     			const char* root = NULL);
-    
+
     };
-    
+
 } // namespace zypp
 
 #endif // ZYPP_EXTERNALPROGRAM_H

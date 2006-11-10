@@ -39,7 +39,7 @@ namespace zypp
     /** Recursively expand a Pattern.
      *
      * This means recursively expanding Patterns included by this or
-     * extending this. The result is a \c set of <tt>Pattern::constPtr<\tt>
+     * extending this. The result is a \c set of <tt>Pattern::constPtr</tt>
      * accessible via iterator.
     */
     class PatternExpander : private base::NonCopyable

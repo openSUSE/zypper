@@ -29,28 +29,28 @@ namespace zypp {
 
       XMLPatchParser::~XMLPatchParser()
       { }
-      
-      XMLPatchParser::XMLPatchParser(istream &is, const string& baseUrl)
+
+      XMLPatchParser::XMLPatchParser(std::istream &is, const std::string& baseUrl)
         : XMLNodeIterator<XMLPatchData_Ptr>(is, baseUrl ,PATCHSCHEMA)
       {
         fetchNext();
       }
-      
+
       XMLPatchParser::XMLPatchParser()
       { }
-      
+
       XMLPatchParser::XMLPatchParser(XMLPatchData_Ptr& entry)
       : XMLNodeIterator<XMLPatchData_Ptr>(entry)
       { }
-      
-      
+
+
       // select for which elements process() will be called
-      bool 
+      bool
       XMLPatchParser::isInterested(const xmlNodePtr nodePtr)
       {
         return _helper.isElement(nodePtr) && _helper.name(nodePtr) == "patch";
       }
-      
+
       // do the actual processing
       XMLPatchData_Ptr
       XMLPatchParser::process(const xmlTextReaderPtr reader)
@@ -59,20 +59,20 @@ namespace zypp {
         XMLPatchData_Ptr patchPtr = new XMLPatchData();
         xmlNodePtr dataNode = xmlTextReaderExpand(reader);
         xml_assert(dataNode);
-        
+
         // default values for optional entries
         patchPtr->rebootNeeded = false;
         patchPtr->packageManager = false;
-      
+
         parseResObjectCommonData( patchPtr, dataNode);
         parseDependencies( patchPtr, dataNode);
-        
+
         for (xmlNodePtr child = dataNode->children; child && child != dataNode; child = child->next)
         {
           if (_helper.isElement(child))
           {
             string name = _helper.name(child);
-            
+
             if (name == "id") {
               patchPtr->patchId = _helper.content(child);
             }
@@ -98,9 +98,9 @@ namespace zypp {
         }
         return patchPtr;
       } /* end process */
-      
-      
-      void 
+
+
+      void
       XMLPatchParser::parseAtomsNode(XMLPatchData_Ptr dataPtr, xmlNodePtr formatNode)
       {
         xml_assert(formatNode);
@@ -124,8 +124,8 @@ namespace zypp {
             }
           }
         }
-      } 
-    
+      }
+
       void
       XMLPatchParser::parseAtomNode(XMLPatchData_Ptr dataPtr, xmlNodePtr formatNode)
       {
@@ -133,20 +133,20 @@ namespace zypp {
         // inject dependencies and other stuff
         parseResObjectCommonData( atom, formatNode);
         parseDependencies( atom, formatNode);
-              
+
         dataPtr->atoms.push_back(atom);
       }
-      
+
       void
       XMLPatchParser::parseScriptNode(XMLPatchData_Ptr dataPtr, xmlNodePtr formatNode)
       {
         XMLPatchScriptData_Ptr script(new XMLPatchScriptData);
-        
+
         parseResObjectCommonData( script, formatNode);
         parseDependencies( script, formatNode);
-        
+
         for (xmlNodePtr child = formatNode->children;  child != 0; child = child ->next)
-        { 
+        {
           if (_helper.isElement(child))
           {
             string name = _helper.name(child);
@@ -161,15 +161,15 @@ namespace zypp {
         }
         dataPtr->atoms.push_back(script);
       }
-      
+
       void
       XMLPatchParser::parseMessageNode(XMLPatchData_Ptr dataPtr, xmlNodePtr formatNode)
       {
         XMLPatchMessageData_Ptr message(new XMLPatchMessageData);
-        
+
         parseResObjectCommonData( message, formatNode);
         parseDependencies( message, formatNode);
-        
+
         for (xmlNodePtr child = formatNode->children;  child != 0; child = child ->next)
         {
           if (_helper.isElement(child))
@@ -179,7 +179,7 @@ namespace zypp {
               message->text.setText(_helper.content(child), Locale(_helper.attribute(child,"lang")));
             }
           }
-        }        
+        }
         dataPtr->atoms.push_back(message);
       }
 

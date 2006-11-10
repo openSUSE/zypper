@@ -418,7 +418,7 @@ class MediaHandler {
 	 **/
         virtual void getDirInfo( filesystem::DirContent & retlist,
                                  const Pathname & dirname, bool dots = true ) const = 0;
-        
+
         /**
          * check if a file exists
          *
@@ -669,7 +669,7 @@ class MediaHandler {
 	 **/
 	void dirInfo( filesystem::DirContent & retlist,
                       const Pathname & dirname, bool dots = true ) const;
-                
+
         /**
          * check if a file exists
          *
@@ -683,18 +683,6 @@ class MediaHandler {
 };
 
 ///////////////////////////////////////////////////////////////////
-
-#define	MEDIA_HANDLER_API						\
-    protected:								\
-	virtual void attachTo (bool next = false);			\
-	virtual void releaseFrom( bool eject );			\
-	virtual void getFile( const Pathname & filename ) const;	\
-	virtual void getDir( const Pathname & dirname, bool recurse_r ) const;	\
-        virtual void getDirInfo( std::list<std::string> & retlist,	\
-			            const Pathname & dirname, bool dots = true ) const;	\
-        virtual void getDirInfo( filesystem::DirContent & retlist,	\
-			            const Pathname & dirname, bool dots = true ) const; \
-        virtual bool getDoesFileExist( const Pathname & filename ) const;                     
 
   } // namespace media
 } // namespace zypp

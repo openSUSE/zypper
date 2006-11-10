@@ -302,7 +302,7 @@ namespace zypp
         {
           if ( getenv("ZYPP_LOGFILE") )
             logfile( getenv("ZYPP_LOGFILE") );
-          
+
           if ( getenv("ZYPP_PROFILING") )
           {
             shared_ptr<LogControl::LineFormater> formater(new ProfilingFormater);
@@ -326,7 +326,7 @@ namespace zypp
 
       ///////////////////////////////////////////////////////////////////
 
-      /** \relates LogControl::Impl Stream output */
+      /** \relates LogControlImpl Stream output */
       inline std::ostream & operator<<( std::ostream & str, const LogControlImpl & obj )
       {
         return str << "LogControlImpl";
@@ -338,7 +338,6 @@ namespace zypp
       //
       ///////////////////////////////////////////////////////////////////
 
-      /** That's what logger:: calls.  */
       std::ostream & getStream( const char * group_r,
                                 LogLevel     level_r,
                                 const char * file_r,

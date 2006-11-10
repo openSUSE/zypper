@@ -19,7 +19,7 @@ namespace zypp
 { /////////////////////////////////////////////////////////////////
 
   /** Iterate through <tt>[begin_r,end_r)</tt> and invoke \a fnc_r
-   *  on each item that passes \filter_r.
+   *  on each item that passes \a filter_r.
    *
    * Iteration aborts if \a fnc_r returns \c false.
    *

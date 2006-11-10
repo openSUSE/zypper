@@ -28,28 +28,28 @@ namespace zypp {
 
       XMLProductParser::~XMLProductParser()
       { }
-      
-      XMLProductParser::XMLProductParser(istream &is, const string& baseUrl)
+
+      XMLProductParser::XMLProductParser(std::istream &is, const std::string& baseUrl)
         : XMLNodeIterator<XMLProductData_Ptr>(is, baseUrl ,PRODUCTSCHEMA)
       {
         fetchNext();
       }
-      
+
       XMLProductParser::XMLProductParser()
       { }
-      
+
       XMLProductParser::XMLProductParser(XMLProductData_Ptr& entry)
       : XMLNodeIterator<XMLProductData_Ptr>(entry)
       { }
-      
-      
+
+
       // select for which elements process() will be called
-      bool 
+      bool
       XMLProductParser::isInterested(const xmlNodePtr nodePtr)
       {
         return _helper.isElement(nodePtr) && _helper.name(nodePtr) == "product";
       }
-      
+
       // do the actual processing
       XMLProductData_Ptr
       XMLProductParser::process(const xmlTextReaderPtr reader)
@@ -60,10 +60,10 @@ namespace zypp {
         xml_assert(dataNode);
         productPtr->type = _helper.attribute(dataNode,"type");
         productPtr->parser_version = _helper.attribute(dataNode, "version");
-        
+
         parseResObjectCommonData( productPtr, dataNode);
         parseDependencies( productPtr, dataNode);
-        
+
         for (xmlNodePtr child = dataNode->children; child && child != dataNode; child = child->next)
         {
           if (_helper.isElement(child))
@@ -87,7 +87,7 @@ namespace zypp {
             }
             else if (name == "product-flags") {
               parseProductFlags( productPtr, child);
-            }      
+            }
             else if (name == "update-urls")
             {
               parseList<string>( "update-url", productPtr->update_urls, child);
@@ -100,12 +100,12 @@ namespace zypp {
             {
               parseList<string>( "optional-url", productPtr->optional_urls, child);
             }
-            
+
           }
         }
         return productPtr;
       } /* end process */
-      
+
       void
       XMLProductParser::parseProductFlags( XMLProductData_Ptr productPtr, xmlNodePtr node)
       {
@@ -121,7 +121,7 @@ namespace zypp {
           }
         }
       }
-      
+
       template <class T>
       void XMLProductParser::parseList( const std::string &tagname, std::list<T> &list, xmlNodePtr node)
       {
@@ -137,7 +137,7 @@ namespace zypp {
           }
         }
       }
-      
+
     } // namespace yum
   } // namespace parser
 } // namespace zypp

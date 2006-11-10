@@ -70,6 +70,8 @@ namespace zypp
      *
      * \note The order is <result_type, arg1_type, ...> (this
      * differs from std::, where the result comes last).
+     *
+     * \todo drop it an use boost::ref
     */
 
     /////////////////////////////////////////////////////////////////
@@ -170,12 +172,10 @@ namespace zypp
       FunctorRef<_Functor, res_type, arg1_type, arg2_type>
       functorRef( _Functor & f_r )
       { return FunctorRef<_Functor, res_type, arg1_type, arg2_type>( f_r ); }
-    /** Convenience function creating a unary \ref FunctorRef. */
     template <class res_type, class arg1_type, class _Functor>
       FunctorRef<_Functor, res_type, arg1_type>
       functorRef( _Functor & f_r )
       { return FunctorRef<_Functor, res_type, arg1_type>( f_r ); }
-    /** Convenience function creating a nullary \ref FunctorRef. */
     template <class res_type, class _Functor>
       FunctorRef<_Functor, res_type>
       functorRef( _Functor & f_r )

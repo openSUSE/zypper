@@ -117,7 +117,7 @@ namespace zypp
 
     /** Query inerface.
      * Both, \a filter_r and \a fnc_r are expected to be
-     * functions or functors taking a <tt>ResT::Ptr<\tt>
+     * functions or functors taking a <tt>ResT::Ptr</tt>
      * as argument and return a \c bool.
      *
      * forEach iterates over all ResTs and invokes \a fnc_r,

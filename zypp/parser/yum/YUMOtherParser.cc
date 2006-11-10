@@ -33,7 +33,7 @@ namespace yum
 {
 
 
-YUMOtherParser::YUMOtherParser(istream &is, const string& baseUrl, parser::ParserProgress::Ptr progress )
+YUMOtherParser::YUMOtherParser(std::istream &is, const std::string& baseUrl, parser::ParserProgress::Ptr progress )
     : XMLNodeIterator<YUMOtherData_Ptr>(is, baseUrl,OTHERSCHEMA, progress)
     , _zypp_architecture( getZYpp()->architecture() )
 {

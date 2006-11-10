@@ -29,23 +29,23 @@ namespace zypp {
 
       XMLPatternParser::XMLPatternParser()
       { }
-      
+
       XMLPatternParser::XMLPatternParser(XMLPatternData_Ptr& entry)
       : XMLNodeIterator<XMLPatternData_Ptr>(entry)
       { }
-      
-      
+
+
       XMLPatternParser::~XMLPatternParser()
       { }
-      
-      
+
+
       // select for which elements process() will be called
-      bool 
+      bool
       XMLPatternParser::isInterested(const xmlNodePtr nodePtr)
       {
         return _helper.isElement(nodePtr) && _helper.name(nodePtr) == "pattern";
       }
-      
+
       // do the actual processing
       XMLPatternData_Ptr
       XMLPatternParser::process(const xmlTextReaderPtr reader)
@@ -54,16 +54,16 @@ namespace zypp {
         XMLPatternData_Ptr dataPtr = new XMLPatternData;
         xmlNodePtr dataNode = xmlTextReaderExpand(reader);
         xml_assert(dataNode);
-        
+
         parseResObjectCommonData( dataPtr, dataNode);
         parseDependencies( dataPtr, dataNode);
-        
+
         for (xmlNodePtr child = dataNode->children; child && child != dataNode; child = child->next)
         {
           if (_helper.isElement(child))
           {
             string name = _helper.name(child);
-            
+
             if (name == "default") {
               dataPtr->default_ = _helper.content(child);
             }
@@ -83,14 +83,14 @@ namespace zypp {
         }
         return dataPtr;
       } /* end process */
-      
-      
-      XMLPatternParser::XMLPatternParser(istream &is, const string &baseUrl)
+
+
+      XMLPatternParser::XMLPatternParser(std::istream &is, const std::string &baseUrl)
       : XMLNodeIterator<XMLPatternData_Ptr>(is, baseUrl,PATTERNSCHEMA)
-      { 
+      {
         fetchNext();
       }
-      
+
     } // namespace yum
   } // namespace parser
 } // namespace zypp

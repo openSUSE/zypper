@@ -52,11 +52,11 @@ Mount::~Mount()
    MIL << "~Mount() end" << endl;
 }
 
-void Mount::mount ( const string& source,
-		       const string& target,
-		       const string& filesystem,
-		       const string& options,
-		       const Environment& environment )
+void Mount::mount( const std::string & source,
+                   const std::string & target,
+                   const std::string & filesystem,
+                   const std::string & options,
+                   const Environment & environment )
 {
     const char *const argv[] = {
 	"/bin/mount",
@@ -148,7 +148,7 @@ void Mount::mount ( const string& source,
     }
 }
 
-void Mount::umount (const string& path)
+void Mount::umount( const std::string & path )
 {
     const char *const argv[] = {
 	"/bin/umount",
@@ -266,7 +266,7 @@ Mount::getEntries(const std::string &mtab)
   MountEntries             entries;
   std::vector<std::string> mtabs;
   bool                     verbose = false;
- 
+
   if( mtab.empty())
   {
     mtabs.push_back("/etc/mtab");

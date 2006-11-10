@@ -31,16 +31,16 @@ namespace zypp
     bool haveApplydeltarpm();
 
     /** \name Check if reconstruction of rpm is possible.
-     * \see <tt>man applydeltarpm<\tt>
+     * \see <tt>man applydeltarpm</tt>
     */
     //@{
     /** Check via sequence info.
-     * \see <tt>applydeltarpm [-c|-C] -s sequence<\tt>
+     * \see <tt>applydeltarpm [-c|-C] -s sequence</tt>
     */
     bool check( const std::string & sequenceinfo_r, bool quick_r = false );
 
     /** Check via deltarpm.
-     * \see <tt>applydeltarpm [-c|-C] deltarpm<\tt>
+     * \see <tt>applydeltarpm [-c|-C] deltarpm</tt>
     */
     bool check( const Pathname & delta_r, bool quick_r = false );
 
@@ -54,20 +54,20 @@ namespace zypp
     //@}
 
     /** \name Re-create a new rpm from binary delta.
-     * \see <tt>man applydeltarpm<\tt>
+     * \see <tt>man applydeltarpm</tt>
     */
     //@{
     /** progress reporting */
     typedef function<void( unsigned )> Progress;
 
     /** Apply a binary delta to on-disk data to re-create a new rpm.
-     * \see <tt>applydeltarpm deltarpm newrpm<\tt>
+     * \see <tt>applydeltarpm deltarpm newrpm</tt>
     */
     bool provide( const Pathname & delta_r, const Pathname & new_r,
                   const Progress & report_r = Progress() );
 
     /** Apply a binary delta to an old rpm to re-create a new rpm.
-     * \see <tt>applydeltarpm -r oldrpm deltarpm newrpm<\tt>
+     * \see <tt>applydeltarpm -r oldrpm deltarpm newrpm</tt>
     */
     bool provide( const Pathname & old_r, const Pathname & delta_r,
                   const Pathname & new_r,

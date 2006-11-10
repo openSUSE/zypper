@@ -32,7 +32,7 @@ namespace yum
 YUMProductParser::~YUMProductParser()
 { }
 
-YUMProductParser::YUMProductParser(istream &is, const string& baseUrl, parser::ParserProgress::Ptr progress )
+YUMProductParser::YUMProductParser(std::istream &is, const std::string& baseUrl, parser::ParserProgress::Ptr progress )
     : XMLNodeIterator<YUMProductData_Ptr>(is, baseUrl,PRODUCTSCHEMA, progress)
 {
   fetchNext();

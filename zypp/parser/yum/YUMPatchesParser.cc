@@ -32,7 +32,7 @@ namespace yum
 YUMPatchesParser::~YUMPatchesParser()
 { }
 
-YUMPatchesParser::YUMPatchesParser(istream &is, const string& baseUrl, parser::ParserProgress::Ptr progress )
+YUMPatchesParser::YUMPatchesParser(std::istream &is, const std::string& baseUrl, parser::ParserProgress::Ptr progress )
     : XMLNodeIterator<YUMPatchesData_Ptr>(is, baseUrl,PATCHESSCHEMA, progress)
 {
   fetchNext();

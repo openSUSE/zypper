@@ -138,7 +138,7 @@ MediaHandler::getRealPath(const std::string &path)
 }
 
 zypp::Pathname
-MediaHandler::getRealPath(const zypp::Pathname &path)
+MediaHandler::getRealPath(const Pathname &path)
 {
   return zypp::Pathname(getRealPath(path.asString()));
 }
@@ -1067,8 +1067,8 @@ void MediaHandler::releasePath( Pathname pathname ) const
 //
 //	DESCRIPTION :
 //
-void MediaHandler::dirInfo( list<string> & retlist,
-			       const Pathname & dirname, bool dots ) const
+void MediaHandler::dirInfo( std::list<std::string> & retlist,
+                            const Pathname & dirname, bool dots ) const
 {
   retlist.clear();
 
@@ -1120,7 +1120,7 @@ bool MediaHandler::doesFileExist( const Pathname & filename ) const
   }
   return getDoesFileExist( filename );
   MIL << "doesFileExist(" << filename << ")" << endl;
-}    
+}
 
 ///////////////////////////////////////////////////////////////////
 //

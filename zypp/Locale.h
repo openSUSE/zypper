@@ -119,7 +119,7 @@ namespace zypp
 ///////////////////////////////////////////////////////////////////
 namespace std
 { /////////////////////////////////////////////////////////////////
-  /** \relates Locale Default order for std::container based on code string value.*/
+  /** \relates zypp::Locale Default order for std::container based on code string value.*/
   template<>
     inline bool less<zypp::Locale>::operator()( const zypp::Locale & lhs, const zypp::Locale & rhs ) const
     { return lhs.code() < rhs.code(); }

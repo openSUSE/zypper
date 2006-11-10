@@ -78,7 +78,7 @@ namespace zypp
       {}
     };
 
-    /** \class scoped_ptr scoped_ptr */
+    /** \class scoped_ptr */
     using boost::scoped_ptr;
 
     /** \class shared_ptr */
@@ -90,13 +90,14 @@ namespace zypp
     /** \class intrusive_ptr */
     using boost::intrusive_ptr;
 
-    /**  */
+    /** */
     using boost::static_pointer_cast;
     /**  */
     using boost::const_pointer_cast;
     /**  */
     using boost::dynamic_pointer_cast;
 
+    /** \relates shared_ptr Stream output. */
     template<class _D>
       inline std::ostream &
       operator<<( std::ostream & str, const shared_ptr<_D> & obj )
@@ -106,6 +107,7 @@ namespace zypp
         return str << std::string("NULL");
       }
 
+    /** \relates intrusive_ptr Stream output. */
     template<class _D>
       inline std::ostream &
       operator<<( std::ostream & str, const intrusive_ptr<_D> & obj )

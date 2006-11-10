@@ -205,7 +205,7 @@ namespace zypp
 
     /** Select ResObject by Edition using \a _Compare functor.
      *
-     * Selects ResObject if <tt>_Compare( ResObject->edition(), _edition )<\tt>
+     * Selects ResObject if <tt>_Compare( ResObject->edition(), _edition )</tt>
      * is \c true.
      * \code
      * // use the convenience funktions to create ByEdition:
@@ -246,7 +246,7 @@ namespace zypp
 
     /** Select ResObject by Arch using \a _Compare functor.
      *
-     * Selects ResObject if <tt>_Compare( ResObject->arch(), _arch )<\tt>
+     * Selects ResObject if <tt>_Compare( ResObject->arch(), _arch )</tt>
      * is \c true.
      * \code
      * // use the convenience funktions to create ByArch:

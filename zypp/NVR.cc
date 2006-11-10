@@ -18,7 +18,7 @@
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
-  NVR::NVR( Resolvable::constPtr res_r )
+  NVR::NVR( ResTraits<Resolvable>::constPtrType res_r )
   {
     if ( res_r )
       {

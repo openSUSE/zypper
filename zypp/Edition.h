@@ -216,12 +216,12 @@ namespace zypp
 namespace std
 { /////////////////////////////////////////////////////////////////
 
-  /** \relates Edition Default to lexicographical order in std::container.*/
+  /** \relates zypp::Edition Default to lexicographical order in std::container.*/
   template<>
     inline bool less<zypp::Edition>::operator()( const zypp::Edition & lhs, const zypp::Edition & rhs ) const
     { return lhs.asString() < rhs.asString(); }
 
-  /** \relates Edition Lexicographical equal for std::container. */
+  /** \relates zypp::Edition Lexicographical equal for std::container. */
   template<>
     inline bool equal_to<zypp::Edition>::operator()( const zypp::Edition & lhs, const zypp::Edition & rhs ) const
     { return lhs.asString() == rhs.asString(); }

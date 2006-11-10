@@ -33,7 +33,7 @@ namespace yum
 YUMPatchParser::~YUMPatchParser()
 { }
 
-YUMPatchParser::YUMPatchParser(istream &is, const string& baseUrl, parser::ParserProgress::Ptr progress )
+YUMPatchParser::YUMPatchParser(std::istream &is, const std::string& baseUrl, parser::ParserProgress::Ptr progress )
     : XMLNodeIterator<YUMPatchData_Ptr>(is, baseUrl,PATCHSCHEMA, progress)
     , _zypp_architecture( getZYpp()->architecture() )
 {

@@ -7,9 +7,6 @@
 |                                                                      |
 \---------------------------------------------------------------------*/
 /** \file zypp/ExternalProgram.cc
- *
- * \todo replace by Blocxx
- *
 */
 
 #define _GNU_SOURCE 1 // for ::getline
@@ -33,15 +30,18 @@ using namespace std;
 
 namespace zypp {
 
-    ExternalProgram::ExternalProgram() : use_pty (false)
+    ExternalProgram::ExternalProgram()
+    : use_pty (false)
     {
     }
 
-    ExternalProgram::ExternalProgram (string commandline,
-    				  Stderr_Disposition stderr_disp, bool use_pty,
-    				  int stderr_fd, bool default_locale,
-    				  const Pathname& root)
-      : use_pty (use_pty)
+    ExternalProgram::ExternalProgram( std::string commandline,
+                                      Stderr_Disposition stderr_disp,
+                                      bool use_pty,
+                                      int stderr_fd,
+                                      bool default_locale,
+                                      const Pathname & root )
+    : use_pty (use_pty)
     {
       const char *argv[4];
       argv[0] = "/bin/sh";
@@ -59,11 +59,13 @@ namespace zypp {
     }
 
 
-    ExternalProgram::ExternalProgram (const char *const *argv,
-    				  Stderr_Disposition stderr_disp, bool use_pty,
-    				  int stderr_fd, bool default_locale,
-    				  const Pathname& root)
-      : use_pty (use_pty)
+    ExternalProgram::ExternalProgram( const char *const *argv,
+                                      Stderr_Disposition stderr_disp,
+                                      bool use_pty,
+                                      int stderr_fd,
+                                      bool default_locale,
+                                      const Pathname & root )
+    : use_pty (use_pty)
     {
       const char* rootdir = NULL;
       if(!root.empty() && root != "/")

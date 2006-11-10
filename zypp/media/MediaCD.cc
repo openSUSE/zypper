@@ -229,7 +229,7 @@ namespace zypp {
     //	METHOD NAME : MediaCD::openTray
     //	METHOD TYPE : bool
     //
-    bool MediaCD::openTray( const string & device_r )
+    bool MediaCD::openTray( const std::string & device_r )
     {
       int fd = ::open( device_r.c_str(), O_RDONLY|O_NONBLOCK );
       if ( fd == -1 ) {
@@ -252,7 +252,7 @@ namespace zypp {
     //	METHOD NAME : MediaCD::closeTray
     //	METHOD TYPE : bool
     //
-    bool MediaCD::closeTray( const string & device_r )
+    bool MediaCD::closeTray( const std::string & device_r )
     {
       int fd = ::open( device_r.c_str(), O_RDONLY|O_NONBLOCK );
       if ( fd == -1 ) {
@@ -471,16 +471,16 @@ namespace zypp {
       {
     	options="ro";
       }
-    
+
       //TODO: make configurable
       list<string> filesystems;
-    
+
       // if DVD, try UDF filesystem before iso9660
       if ( _url.getScheme() == "dvd" )
     	filesystems.push_back("udf");
-    
+
       filesystems.push_back("iso9660");
-    
+
       // try all devices in sequence
       for (DeviceList::iterator it = _devices.begin()
     	; !mountsucceeded && it != _devices.end()
@@ -608,7 +608,7 @@ namespace zypp {
 	  }
     	}
       }
-    
+
       if (!mountsucceeded)
       {
     	_lastdev = -1;
@@ -657,7 +657,7 @@ namespace zypp {
 	}
 	ZYPP_RETHROW(excpt_r);
       }
-    
+
       // eject device
       if (eject)
       {
@@ -875,8 +875,8 @@ namespace zypp {
     bool MediaCD::getDoesFileExist( const Pathname & filename ) const
     {
       return MediaHandler::getDoesFileExist( filename );
-    }    
-    
+    }
+
   } // namespace media
 } // namespace zypp
 // vim: set ts=8 sts=2 sw=2 ai noet:

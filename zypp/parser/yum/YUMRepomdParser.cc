@@ -92,7 +92,7 @@ YUMRepomdParser::process(const xmlTextReaderPtr reader)
 } /* end process */
 
 
-YUMRepomdParser::YUMRepomdParser(istream &is, const string &baseUrl, parser::ParserProgress::Ptr progress)
+YUMRepomdParser::YUMRepomdParser(std::istream &is, const std::string &baseUrl, parser::ParserProgress::Ptr progress)
     : XMLNodeIterator<YUMRepomdData_Ptr>(is, baseUrl,REPOMDSCHEMA, progress)
 {
   fetchNext();

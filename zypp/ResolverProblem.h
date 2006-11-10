@@ -1,4 +1,4 @@
-/**
+/*
  *
  * Easy-to use interface to the ZYPP dependency resolver
  *
@@ -21,7 +21,7 @@
 namespace zypp
 { ///////////////////////////////////////////////////////////////////////
 
-    
+
     class ResolverProblem : public base::ReferenceCounted
     {
     private:

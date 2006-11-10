@@ -33,7 +33,7 @@ namespace zypp
    *
    * \note As with pointers, constness of an \c AutoDispose object does
    * \b not apply to the stored \c _Tp object. If the stored \c _Tp object
-   * should be immutable, you should use <tt>AutoDispose\<const _Tp\><\tt>.
+   * should be immutable, you should use <tt>AutoDispose\<const _Tp\></tt>.
    *
    * Pass a filename to the application and provide the appropriate
    * code to be exectued when the file is no longer needed:
@@ -132,7 +132,7 @@ namespace zypp
       reference operator*() const
       { return _pimpl->_value; }
 
-      /** Pointer to the \c _Tp object (asserted to be <tt>!= NULL<\tt>). */
+      /** Pointer to the \c _Tp object (asserted to be <tt>!= NULL</tt>). */
       value_type * operator->() const
       { return & _pimpl->_value; }
 

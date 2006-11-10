@@ -151,7 +151,7 @@ YUMPatternParser::process(const xmlTextReaderPtr reader)
 } /* end process */
 
 
-YUMPatternParser::YUMPatternParser(istream &is, const string &baseUrl, parser::ParserProgress::Ptr progress )
+YUMPatternParser::YUMPatternParser(std::istream &is, const std::string &baseUrl, parser::ParserProgress::Ptr progress )
     : XMLNodeIterator<YUMPatternData_Ptr>(is, baseUrl,PATTERNSCHEMA, progress)
 {
   fetchNext();

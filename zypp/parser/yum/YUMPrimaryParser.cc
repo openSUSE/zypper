@@ -31,7 +31,7 @@ namespace yum
 {
 
 
-YUMPrimaryParser::YUMPrimaryParser(istream &is, const string& baseUrl, parser::ParserProgress::Ptr progress )
+YUMPrimaryParser::YUMPrimaryParser(std::istream &is, const std::string& baseUrl, parser::ParserProgress::Ptr progress )
     : XMLNodeIterator<YUMPrimaryData_Ptr>(is, baseUrl,PRIMARYSCHEMA, progress)
     , _zypp_architecture( getZYpp()->architecture() )
 {
@@ -302,7 +302,7 @@ YUMPrimaryParser::parseFormatNode(YUMPrimaryData_Ptr dataPtr,
 
 
 void
-YUMPrimaryParser::parseDependencyEntries(list<YUMDependency> *depList,
+YUMPrimaryParser::parseDependencyEntries(std::list<YUMDependency> *depList,
     xmlNodePtr depNode)
 {
   xml_assert(depList);
@@ -357,7 +357,7 @@ YUMPrimaryParser::parseDependencyEntries(list<YUMDependency> *depList,
 }
 
 void
-YUMPrimaryParser::parseAuthorEntries(list<string> *authors,
+YUMPrimaryParser::parseAuthorEntries(std::list<std::string> *authors,
                                      xmlNodePtr node)
 {
   xml_assert(authors);
@@ -383,7 +383,7 @@ YUMPrimaryParser::parseAuthorEntries(list<string> *authors,
   }
 }
 
-void YUMPrimaryParser::parseKeywordEntries(list<string> *keywords,
+void YUMPrimaryParser::parseKeywordEntries(std::list<std::string> *keywords,
     xmlNodePtr node)
 {
   xml_assert(keywords);
@@ -409,7 +409,7 @@ void YUMPrimaryParser::parseKeywordEntries(list<string> *keywords,
   }
 }
 
-void YUMPrimaryParser::parseDirsizeEntries(list<YUMDirSize> *sizes,
+void YUMPrimaryParser::parseDirsizeEntries(std::list<YUMDirSize> *sizes,
     xmlNodePtr node)
 {
   xml_assert(sizes);

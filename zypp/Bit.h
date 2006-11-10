@@ -78,7 +78,7 @@ namespace zypp
         static const IntT inverted = ~value;
       };
 
-    /** Range of bits starting at bit \_begin with length \a _size. */
+    /** Range of bits starting at bit \a _begin with length \a _size. */
     template<class _IntT, unsigned _begin, unsigned _size>
       struct Range
       {
@@ -250,7 +250,7 @@ namespace zypp
 
       private:
         friend base::SafeBool<BitField<_IntT> >::operator bool_type() const;
-        /** \ref SafeBool test. */
+        /** \ref base::SafeBool test. */
         bool boolTest() const
         { return _value; }
 
@@ -265,7 +265,6 @@ namespace zypp
       {
         return str << obj.asString();
       }
-
 
     /** \relates BitField */
     template<class _IntT>

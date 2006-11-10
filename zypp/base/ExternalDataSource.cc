@@ -38,16 +38,16 @@ namespace zypp {
         linebuffer_size (0)
     {
     }
-    
-    
+
+
     ExternalDataSource::~ExternalDataSource ()
     {
       if (linebuffer)
     	free (linebuffer);
       close ();
     }
-    
-    
+
+
     bool
     ExternalDataSource::send (const char *buffer, size_t length)
     {
@@ -59,16 +59,16 @@ namespace zypp {
       else
     	return false;
     }
-    
-    
+
+
     bool
-    ExternalDataSource::send (string s)
+    ExternalDataSource::send (std::string s)
     {
       DBG << "send (" << s << ")";
       return send(s.data(), s.length());
     }
-    
-    
+
+
     string
     ExternalDataSource::receiveUpto (char c)
     {
@@ -82,7 +82,7 @@ namespace zypp {
     	    char *writepointer = buffer;
     	    size_t readbytes = 0;
     	    int readc = -1;
-    
+
     	    while (!feof(inputfile) && readbytes < length)
     	    {
     		readc = fgetc(inputfile);
@@ -94,15 +94,15 @@ namespace zypp {
     	    *writepointer = 0;
     	    result += buffer;
     	    if (readbytes < length || (char) readc == c) break;
-    
+
     	}
     	return result;
       }
-    
+
       else return "";
     }
-    
-    
+
+
     size_t
     ExternalDataSource::receive (char *buffer, size_t length)
     {
@@ -111,32 +111,32 @@ namespace zypp {
       else
     	return 0;
     }
-    
+
     void ExternalDataSource::setBlocking(bool mode)
     {
       if(!inputfile) return;
-    
+
       int fd = ::fileno(inputfile);
-    
+
       if(fd == -1)
     	{ ERR << strerror(errno) << endl; return; }
-    
+
       int flags = ::fcntl(fd,F_GETFL);
-    
+
       if(flags == -1)
     	{ ERR << strerror(errno) << endl; return; }
-    
+
       if(!mode)
     	flags = flags | O_NONBLOCK;
       else if(flags & O_NONBLOCK)
     	flags = flags ^ O_NONBLOCK;
-    
+
       flags = ::fcntl(fd,F_SETFL,flags);
-    
+
       if(flags == -1)
     	{ ERR << strerror(errno) << endl; return; }
     }
-    
+
     string
     ExternalDataSource::receiveLine()
     {
@@ -151,8 +151,8 @@ namespace zypp {
       else
     	return "";
     }
-    
-    
+
+
     int
     ExternalDataSource::close ()
     {
@@ -164,7 +164,7 @@ namespace zypp {
       outputfile = 0;
       return 0;
     }
-    
+
 
   } // namespace externalprogram
 } // namespace zypp

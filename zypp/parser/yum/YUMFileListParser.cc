@@ -40,7 +40,7 @@ static boost::regex filenameRegex("^.*(/bin/|/sbin/|/lib/|/lib64/|/etc/|/usr/sha
 static regex_t filenameRegexT;
 static bool filenameRegexOk = false;
 
-YUMFileListParser::YUMFileListParser(istream &is, const string& baseUrl, parser::ParserProgress::Ptr progress )
+YUMFileListParser::YUMFileListParser(std::istream &is, const std::string& baseUrl, parser::ParserProgress::Ptr progress )
     : XMLNodeIterator<YUMFileListData_Ptr>(is, baseUrl,FILELISTSCHEMA, progress)
     , _zypp_architecture( getZYpp()->architecture() )
 {

@@ -29,23 +29,23 @@ namespace zypp {
 
       XMLLanguageParser::XMLLanguageParser()
       { }
-      
+
       XMLLanguageParser::XMLLanguageParser(XMLLanguageData_Ptr& entry)
       : XMLNodeIterator<XMLLanguageData_Ptr>(entry)
       { }
-      
-      
+
+
       XMLLanguageParser::~XMLLanguageParser()
       { }
-      
-      
+
+
       // select for which elements process() will be called
-      bool 
+      bool
       XMLLanguageParser::isInterested(const xmlNodePtr nodePtr)
       {
         return _helper.isElement(nodePtr) && _helper.name(nodePtr) == "language";
       }
-      
+
       // do the actual processing
       XMLLanguageData_Ptr
       XMLLanguageParser::process(const xmlTextReaderPtr reader)
@@ -54,29 +54,29 @@ namespace zypp {
         XMLLanguageData_Ptr dataPtr = new XMLLanguageData;
         xmlNodePtr dataNode = xmlTextReaderExpand(reader);
         xml_assert(dataNode);
-        
+
         parseResObjectCommonData( dataPtr, dataNode);
         parseDependencies( dataPtr, dataNode);
-        
+
 //         for (xmlNodePtr child = dataNode->children; child && child != dataNode; child = child->next)
 //         {
 //           if (_helper.isElement(child))
 //           {
 //             string name = _helper.name(child);
-//             
-//             
+//
+//
 //           }
 //         }
         return dataPtr;
       } /* end process */
-      
-      
-      XMLLanguageParser::XMLLanguageParser(istream &is, const string &baseUrl)
+
+
+      XMLLanguageParser::XMLLanguageParser(std::istream &is, const std::string &baseUrl)
       : XMLNodeIterator<XMLLanguageData_Ptr>(is, baseUrl,LANGUAGESCHEMA)
-      { 
+      {
         fetchNext();
       }
-      
+
     } // namespace yum
   } // namespace parser
 } // namespace zypp

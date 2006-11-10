@@ -109,7 +109,7 @@ namespace xmlstore {
       } /* end process */
 
 
-      XMLSourceCacheParser::XMLSourceCacheParser(istream &is, const string &baseUrl)
+      XMLSourceCacheParser::XMLSourceCacheParser(std::istream &is, const std::string &baseUrl)
         : zypp::parser::XMLNodeIterator<SourceInfo_Ptr>(is, baseUrl, SOURCESCHEMA)
       {
         fetchNext();

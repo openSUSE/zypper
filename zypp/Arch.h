@@ -73,9 +73,9 @@ namespace zypp
     /** Reversed arch order, best Arch first. */
     typedef std::set<Arch,CompareByGT<Arch> > CompatSet;
 
-    /** Return a set of all Arch's \compatible with a targetArch_r.
+    /** Return a set of all Arch's \ref compatibleWith a \a targetArch_r.
      * \note The set is ordered according to compare, thus iterating
-     * will start at Arch_noarch.
+     * will start at \a targetArch_r and end with \c Arch_noarch.
      * \code
      * Arch::CompatSet cset( Arch::compatSet( Arch_x86_64 ) );
      *
@@ -198,7 +198,7 @@ namespace zypp
 ///////////////////////////////////////////////////////////////////
 namespace std
 { /////////////////////////////////////////////////////////////////
-  /** \relates Arch Default order for std::container based Arch::compare.*/
+  /** \relates zypp::Arch Default order for std::container based Arch::compare.*/
   template<>
     inline bool less<zypp::Arch>::operator()( const zypp::Arch & lhs, const zypp::Arch & rhs ) const
     { return lhs.compare( rhs ) < 0; }

@@ -118,7 +118,7 @@ namespace zypp
 ///////////////////////////////////////////////////////////////////
 namespace std
 { /////////////////////////////////////////////////////////////////
-  /** \relates CountryCode Default order for std::container based on code string value.*/
+  /** \relates zypp::CountryCode Default order for std::container based on code string value.*/
   template<>
     inline bool less<zypp::CountryCode>::operator()( const zypp::CountryCode & lhs, const zypp::CountryCode & rhs ) const
     { return lhs.code() < rhs.code(); }
