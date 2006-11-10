@@ -23,6 +23,15 @@ namespace zypp
     // as far as resonable.
     /////////////////////////////////////////////////////////////////
 
+      Pathname ScriptImplIf::do_script() const
+      { return Pathname(); }
+
+      Pathname ScriptImplIf::undo_script() const
+      { return Pathname(); }
+
+      bool ScriptImplIf::undo_available() const
+      { return false; }
+
       ByteCount ScriptImplIf::size() const
       { return ResObjectImplIf::size(); }
 

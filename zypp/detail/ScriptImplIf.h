@@ -38,11 +38,11 @@ namespace zypp
 
     public:
       /** Get the script to perform the change */
-      virtual Pathname do_script() const = 0;
+      virtual Pathname do_script() const PURE_VIRTUAL;
       /** Get the script to undo the change */
-      virtual Pathname undo_script() const = 0;
+      virtual Pathname undo_script() const PURE_VIRTUAL;
       /** Check whether script to undo the change is available */
-      virtual bool undo_available() const = 0;
+      virtual bool undo_available() const PURE_VIRTUAL;
       /** */
       virtual ByteCount size() const;
     };

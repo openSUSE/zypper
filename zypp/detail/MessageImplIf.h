@@ -38,7 +38,7 @@ namespace zypp
 
     public:
       /** Get the text of the message */
-      virtual TranslatedText text() const = 0;
+      virtual TranslatedText text() const PURE_VIRTUAL;
       /** */
       virtual ByteCount size() const;
       /** Patch the message belongs to - if any */

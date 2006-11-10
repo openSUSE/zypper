@@ -23,6 +23,9 @@ namespace zypp
     // as far as resonable.
     /////////////////////////////////////////////////////////////////
 
+      TranslatedText MessageImplIf::text() const
+      { return TranslatedText(); }
+
       ByteCount MessageImplIf::size() const
       { return ResObjectImplIf::size(); }
 

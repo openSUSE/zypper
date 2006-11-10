@@ -42,28 +42,28 @@ namespace zypp
 
     public:
       /** Patch ID */
-      virtual std::string id() const = 0;
+      virtual std::string id() const PURE_VIRTUAL;
       /** Patch time stamp */
-      virtual Date timestamp() const = 0;
+      virtual Date timestamp() const PURE_VIRTUAL;
       /** Patch category (recommended, security,...) */
-      virtual std::string category() const = 0;
+      virtual std::string category() const PURE_VIRTUAL;
       /** Does the system need to reboot to finish the update process? */
-      virtual bool reboot_needed() const = 0;
+      virtual bool reboot_needed() const PURE_VIRTUAL;
       /** Does the patch affect the package manager itself? */
-      virtual bool affects_pkg_manager() const = 0;
+      virtual bool affects_pkg_manager() const PURE_VIRTUAL;
       /** */
       virtual ByteCount size() const;
 
       /** Is the patch installation interactive? (does it need user input?) */
-      virtual bool interactive() const = 0;
+      virtual bool interactive() const PURE_VIRTUAL;
       /** The list of all atoms building the patch */
-      virtual AtomList all_atoms() const = 0;
+      virtual AtomList all_atoms() const PURE_VIRTUAL;
       /** The list of those atoms which have not been installed */
-      virtual AtomList not_installed_atoms() const = 0;
+      virtual AtomList not_installed_atoms() const PURE_VIRTUAL;
 
 // TODO check necessarity of functions below
-      virtual void mark_atoms_to_freshen(bool freshen) = 0;
-      virtual bool any_atom_selected() const = 0;
+      virtual void mark_atoms_to_freshen(bool freshen) PURE_VIRTUAL;
+      virtual bool any_atom_selected() const PURE_VIRTUAL;
     };
     ///////////////////////////////////////////////////////////////////
 
