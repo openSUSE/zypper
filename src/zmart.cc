@@ -203,6 +203,13 @@ int main(int argc, char **argv)
     return -1;
   }
   
+  #ifdef LIBZYPP_1xx
+  // dont add rpms
+  God->initTarget("/", true);
+#else
+  God->initializeTarget("/");
+#endif
+  
   SourceManager_Ptr manager;
   manager = SourceManager::sourceManager();
   
@@ -223,13 +230,6 @@ int main(int argc, char **argv)
   {
     cout << "Warning! No sources. Operating only over the installed resolvables. You will not be able to install stuff" << endl;
   } 
-  
-#ifdef LIBZYPP_1xx
-  // dont add rpms
-  God->initTarget("/", true);
-#else
-  God->initializeTarget("/");
-#endif
   
   std::string token = calculate_token();
   
