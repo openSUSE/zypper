@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Nov 13 18:35:01 CET 2006 - mt@suse.de
+
+- Try to call /bin/eject utility if the eject-ioctl fails.
+- r4568
+
+-------------------------------------------------------------------
 Mon Nov 13 17:00:51 CET 2006 - dmacvicar@suse.de
 
 - ignore empty capabilities
