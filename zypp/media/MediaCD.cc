@@ -49,6 +49,12 @@
 */
 #define  REPORT_EJECT_ERRORS     1
 
+/*
+** If defined to the full path of the eject utility,
+** it will be used additionally to the eject-ioctl.
+*/
+#define EJECT_TOOL_PATH "/bin/eject"
+
 using namespace std;
 
 namespace zypp {
@@ -232,17 +238,53 @@ namespace zypp {
     bool MediaCD::openTray( const std::string & device_r )
     {
       int fd = ::open( device_r.c_str(), O_RDONLY|O_NONBLOCK );
-      if ( fd == -1 ) {
-        WAR << "Unable to open '" << device_r << "' (" << ::strerror( errno ) << ")" << endl;
-        return false;
+      int res = -1;
+
+      if ( fd != -1)
+      {
+	res = ::ioctl( fd, CDROMEJECT );
+	::close( fd );
       }
-      int res = ::ioctl( fd, CDROMEJECT );
-      ::close( fd );
-      if ( res ) {
-        WAR << "Eject " << device_r << " failed (" << ::strerror( errno ) << ")" << endl;
+
+      if ( res )
+      {
+	if( fd == -1)
+	{
+	  WAR << "Unable to open '" << device_r
+	      << "' (" << ::strerror( errno ) << ")" << endl;
+	}
+	else
+	{
+	  WAR << "Eject " << device_r
+	      << " failed (" << ::strerror( errno ) << ")" << endl;
+	}
+
+#if defined(EJECT_TOOL_PATH)
+	DBG << "Try to eject " << device_r << " using "
+	    << EJECT_TOOL_PATH << " utility" << std::endl;
+
+	const char *cmd[3];
+	cmd[0] = EJECT_TOOL_PATH;
+	cmd[1] = device_r.c_str();
+	cmd[2] = NULL;
+	ExternalProgram eject(cmd, ExternalProgram::Stderr_To_Stdout);
+
+	for(std::string out( eject.receiveLine());
+	    out.length(); out = eject.receiveLine())
+	{
+	  DBG << " " << out;
+	}
+
+	if(eject.close() != 0)
+	{
+	  WAR << "Eject of " << device_r << " failed." << std::endl;
+	  return false;
+	}
+#else
         return false;
+#endif
       }
-      MIL << "Eject " << device_r << endl;
+      MIL << "Eject of " << device_r << " successful." << endl;
       return true;
     }
 
