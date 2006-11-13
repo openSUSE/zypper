@@ -21,32 +21,33 @@ Short instruction of all possible options to write a <description>-test.xml file
 		
 	<maxSolverPasses value=".."/> <!-- sets the max solver passes -->
 		
-	<system file=".."/> // <!-- helix-file with system-packages -->
+	<system file=".."/> // <!-- xml-file in helix-format which inlcudes the pre-installed packages -->
 		
 	<hardwareInfo path="..."/> <!-- setenv "ZYPP_MODALIAS_SYSFS" with the given path as value -->
 	
-	<channel name="..." file="..." type="..."/> <!-- this option is to add channels to the repository. type: url or leave it out -->
+	<channel name="..." file="..." type="..."/> <!-- activates a channel. type: url or leave it out -->
+			
+	<!-- channel is for helix-type xml-files and source for yast or repomd (yum) repositories -->			
 
 	<source	url="..." name="..."/> <!-- like channel but with url as type -->
 		
 	<undump	file="..."/> <!-- undump not really supported -->
 
-	<force-install channel="..." package="..." kind="..."/> <!-- forces install of the choosen package -->
+	<force-install channel="..." package="..." kind="..."/> <!-- forces install of the choosen package, ignore solver-problems -->
 								<!-- channel has to be one of the before declared -->
 
-	<force-uninstall package="..." kind="..."/> <!-- forces uninstall of the choosen package -->
+	<force-uninstall package="..." kind="..."/> <!-- forces uninstall of the choosen package, ingore solver-problems -->
 		
 	<lock channel="..." package="..." kind="..."/> <!-- locks the choosen package from channel -->
 
 	<mediaid/> <!-- shows the mediaid -->
-
-	<arch name="..."/> <!-- <arch...> deprecated, use <setup arch="..."> instead -->
 
 	<locale	name="..."/> 
 
    </setup>
    
    <!-- Any trials must be preceeded by the setup! -->
+   <!-- There has to be exactly one setup-section and at least on trial-section -->
    <trial>
    
 	<note/> <!-- -->
@@ -58,6 +59,7 @@ Short instruction of all possible options to write a <description>-test.xml file
 	<subscribe channel="..."> <!-- subscribe choosen channel (NOT YET IMPLEMENTED) -->
 
 	<install channel="..." name="..." package="..."	kind="..." soft="..."/> <!-- installs a package ?? SOFT -->
+																			<!-- kind: package, pattern, patch or product. Default is package -->
 
 	<uninstall name="..." package="..." kind="..." soft="..."/> <!-- uninstalls a package ?? SOFT -->
 
@@ -92,7 +94,7 @@ Short instruction of all possible options to write a <description>-test.xml file
 
 	<takesolution problem="..." solution="..."/> <!-- takes the given solution number to solve the given problem number -->
 
-	<showpool prefix="..." all="..."/> <!-- collect all installed items in a set and print them with the given prefix -->
+	<showpool prefix="..." all="..."/> <!-- collect all objects in pool. With no given all only changing obejcts will be shown otherwise all  -->
 	
 	<lock channel="..." package="..." kind="..."/> <!-- locks the package from channel -->
 
