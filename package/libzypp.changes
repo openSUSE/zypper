@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Nov 13 17:00:51 CET 2006 - dmacvicar@suse.de
+
+- ignore empty capabilities
+- r4565 
+
+-------------------------------------------------------------------
 Fri Nov 10 17:52:10 CET 2006 - dmacvicar@suse.de
 
 - make progress strings translatable (#219783)
