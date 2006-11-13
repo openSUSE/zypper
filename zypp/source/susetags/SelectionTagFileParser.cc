@@ -208,7 +208,7 @@ void SelectionTagFileParser::endParse()
     }
 
   // for every requested locale, get the corresponding locale-specific delpacks
-#warning fallback to LanguageCode (i.e. en) if Locale (i.e. en_US) doesn't match
+#warning fallback to LanguageCode (i.e. en) if Locale (i.e. en_US) does not match
   for (ZYpp::LocaleSet::const_iterator loc = _locales.begin(); loc != _locales.end(); ++loc)
   {
     for (std::set<std::string>::const_iterator it = selImpl->_delpacks[*loc].begin(); it != selImpl->_delpacks[*loc].end(); it++)
