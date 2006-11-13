@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Nov 13 14:07:59 CET 2006 - jkupec@suse.cz
+
+- license confirmation upon installation/update added
+- 0.6.8
+
+-------------------------------------------------------------------
 Fri Nov 10 12:05:36 CET 2006 - jkupec@suse.cz
 
 - solve_and_commit() changed to return informative exit codes if
