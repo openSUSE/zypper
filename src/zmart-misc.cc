@@ -34,6 +34,7 @@ void cond_init_target () {
 }
 
 // return the default value on input failure
+// TODO make this locale dependent?
 bool read_bool_with_default (bool defval) {
   istream & stm = cin;
 
@@ -622,12 +623,16 @@ int solve_and_commit (bool non_interactive) {
 
   show_problems ();
 
+
   // returns -1, 0, ZYPPER_EXIT_INF_REBOOT_NEEDED, or ZYPPER_EXIT_INF_RESTART_NEEDED
   int retv = show_summary();
 
   if (retv >= 0) { // there are resolvables to install/uninstall
     cerr << "Continue? [y/n] " << (non_interactive ? "y\n" : "");
     if (non_interactive || readBoolAnswer()) {
+
+      if (!confirm_licenses(non_interactive)) return ZYPPER_EXIT_OK;
+
       cerr_v << "committing" << endl;
       ZYppCommitResult result = God->commit( ZYppCommitPolicy() );
       if (!result._errors.empty())
@@ -639,14 +644,67 @@ int solve_and_commit (bool non_interactive) {
   if (retv < 0)
     retv = ZYPPER_EXIT_OK;
   else if (retv == ZYPPER_EXIT_INF_REBOOT_NEEDED)
-    cout << "WARNING: One of installed patches requires reboot of"
-      " your machine. Please, do it as soon as possible." << endl;
+    cout << _("WARNING: One of installed patches requires reboot of"
+      " your machine. Please, do it as soon as possible.") << endl;
   else if (retv == ZYPPER_EXIT_INF_RESTART_NEEDED)
-    cout << "WARNING: One of installed patches affects the package"
+    cout << _("WARNING: One of installed patches affects the package"
       " manager itself, thus it requires restart before executing"
-      " next operations." << endl;
+      " next operations.") << endl;
 
   return retv;
+}
+
+// TODO
+// - make this more user-friendly e.g. show only license name and
+//  ask for [y/n/r] with 'r' for read the license text
+//  (opened throu more or less, etc...)
+// - after negative answer, call solve_and_commit() again 
+bool confirm_licenses(bool non_interactive)
+{
+  bool confirmed = true;
+
+  for (ResPool::const_iterator it = God->pool().begin(); it != God->pool().end(); ++it)
+  {
+    if (it->status().isToBeInstalled() &&
+        !it->resolvable()->licenseToConfirm().empty())
+    {
+      cout << it->resolvable()->name() << " " <<
+        it->resolvable()->kind().asString() <<
+        " " << _("license") << ": " <<
+        it->resolvable()->licenseToConfirm() << endl;
+
+      cout << _("In order to install this package, you must agree"
+        " to terms of the above licencse. Continue?") << " [y/n] " <<
+        (non_interactive ? "n\n" : "");
+
+      if (non_interactive || !readBoolAnswer())
+      {
+        confirmed = false;
+        
+        if (non_interactive)
+        {
+          cout << endl <<
+             _("Aborting installation due to the need of"
+            " license(s) confirmation.") <<
+            " " << _("Please, restart the operation in interactive"
+            " mode and confirm agreement with required license(s).")
+            << endl;
+        }
+        else
+        {
+          cout << endl <<
+            _("Aborting installation due to user disagreement"
+            " with ") << it->resolvable()->name() << " " <<
+            it->resolvable()->kind().asString() <<
+            " " << _("license") << "." << endl;
+        }
+
+        break;
+      }
+    }
+  }
+
+  return confirmed;
 }
 
 // Local Variables:

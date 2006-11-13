@@ -39,6 +39,7 @@ void list_updates( const zypp::ResObject::Kind &kind );
 void mark_updates( const zypp::ResObject::Kind &kind );
 void usage(int argc, char **argv);
 int solve_and_commit (bool non_interactive = false);
+bool confirm_licenses(bool non_interactive = false);
 
 // copied from yast2-pkg-bindings:PkgModuleFunctions::DoProvideNameKind
 struct ProvideProcess
