@@ -182,8 +182,7 @@ struct PackagesParser : public parser::tagfile::TagFileParser
       if ( (*it).empty() )
       {
         stringstream ss;
-        ss << "Bad source [" << _source.alias() << "] at URL:[" << _source.url().asString() << "]. Emtpy capability on " << _file_r << " line " << _line_number;
-        ZYPP_THROW( ParseException( ss.str() ) );
+        WAR << "[" << _source.alias() << "] at URL:[" << _source.url().asString() << "]. Emtpy capability on " << _file_r << " line " << _line_number << ". Ignoring." << endl;
       }
       
       try

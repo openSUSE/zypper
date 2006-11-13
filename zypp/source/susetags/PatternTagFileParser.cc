@@ -204,8 +204,7 @@ void PatternTagFileParser::parseDeps( const std::list<std::string> & strdeps, Ca
     if ( (*it).empty() )
     {
       stringstream ss;
-      ss << "Emtpy capability on " << _file_r << " line " << _line_number;
-      ZYPP_THROW( ParseException( ss.str() ) );
+      WAR << "Emtpy capability on " << _file_r << " line " << _line_number << ". Ignoring." << endl;
     }
     
     try
