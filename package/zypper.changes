@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Nov 13 15:47:50 CET 2006 - mvidner@suse.cz
+
+- Fixed service-rename leaving the old name around.
+- 0.6.9
+
+-------------------------------------------------------------------
 Mon Nov 13 14:07:59 CET 2006 - jkupec@suse.cz
 
 - license confirmation upon installation/update added

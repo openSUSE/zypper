@@ -381,6 +381,10 @@ void remove_source( const std::string& anystring )
 //! rename a source, identified in any way: alias, url, id
 void rename_source( const std::string& anystring, const std::string& newalias )
 {
+#ifdef LIBZYPP_1xx
+  // renameSource is recent
+  cerr << "Sorry, not implemented yet for libzypp-1.x.x" << endl;
+#else
   cerr_vv << "Constructing SourceManager" << endl;
   SourceManager_Ptr manager = SourceManager::sourceManager();
   cerr_vv << "Restoring SourceManager" << endl;
@@ -437,11 +441,13 @@ void rename_source( const std::string& anystring, const std::string& newalias )
   }
 
   if (src) {
-    src.setAlias (newalias);
+    // getting Source_Ref is useless if we only can use an id
+    manager->renameSource (src.numericId (), newalias);
   }
 
   cerr_vv << "Storing source data" << endl;
   manager->store( "/", true /*metadata_cache*/ );
+#endif
 }
 
 void refresh_sources()

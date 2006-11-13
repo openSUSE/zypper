@@ -5,7 +5,6 @@ General
 - script progress: does the output contain newline??
 - installation and deletion notifications
 - --dry-run (use ZYppCommitPolicy.h)
-- FIXME zypper service-rename creates duplicates in sources list
 - confirm license: more user friendly (see confirm_licenses() comment)
 - FIXME zypper search ignores target packages that were not installed
   from sources
