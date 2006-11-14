@@ -74,6 +74,7 @@ namespace zypp
 
   /** Algorithm invoking \c action_r on each matching \ref Capability
    * in a \ref ResPool.
+   *
    * \code
    * // Returns wheter willing to collect more items.
    * bool consume( const CapAndItem & cai_r );
@@ -83,7 +84,9 @@ namespace zypp
    * // Invoke consume on all provides that match _cap
    * forEachMatchIn( _pool, Dep::PROVIDES, _cap, consume );
    * \endcode
+   *
    * \relates ResPool.
+   * \see ForEachMatchInPool
   */
   inline int forEachMatchIn( const ResPool & pool_r, const Dep & dep_r,
                              const Capability & lhs_r,
@@ -94,6 +97,115 @@ namespace zypp
                          pool_r.byCapabilityIndexEnd( index, dep_r ),
                          MatchesCapability( lhs_r ), // filter
                          action_r );
+  }
+
+  /** Functor invoking \c action_r on each matching \ref Capability
+   *  in a \ref ResPool.
+   *
+   * Functor is provided to ease using \ref forEachMatchIn as action
+   * in other algorithms.
+   *
+   * \code
+   * bool consume( const CapAndItem & cai_r );
+   *
+   * ResPool  _pool;
+   * PoolItem _pi;
+   *
+   * // Invoke consume on all PoolItems obsoleted by pi.
+   * // short: forEachPoolItemMatchedBy( _pool, _pi, Dep::OBSOLETES, consume );
+   * for_each( _pi->dep(Dep::OBSOLETES).begin(),
+   *           _pi->dep(Dep::OBSOLETES).end(),
+   *           ForEachMatchInPool( _pool, Dep::PROVIDES, consume ) );
+   *
+   * // Invoke consume on all PoolItems obsoleting pi.
+   * // short: forEachPoolItemMatching( _pool, Dep::OBSOLETES, _pi, consume );
+   * for_each( pi->dep(Dep::PROVIDES).begin(),
+   *           pi->dep(Dep::PROVIDES).end(),
+   *           ForEachMatchInPool( _pool, Dep::OBSOLETES, consume ) );
+   *
+   * \endcode
+   *
+   * \ingroup g_Functor
+   * \ingroup CAPFILTERS
+   * \relates ResPool.
+   * \see forEachPoolItemMatchedBy
+   * \see forEachPoolItemMatching
+  */
+  class ForEachMatchInPool
+  {
+  public:
+    typedef function<bool(const CapAndItem &)> Action;
+
+  public:
+    ForEachMatchInPool( const ResPool & pool_r,
+                        const Dep &     dep_r,
+                        const Action &  action_r )
+    : _pool  ( pool_r )
+    , _dep   ( dep_r )
+    , _action( action_r )
+    {}
+
+    bool operator()( const Capability & cap_r ) const
+    {
+      return( forEachMatchIn( _pool, _dep, cap_r, _action )
+              >= 0 ); // i.e. _action did not return false
+    }
+
+  private:
+    ResPool _pool;
+    Dep     _dep;
+    Action  _action;
+  };
+
+  /** Find all items in a ResPool matched by a certain PoolItems
+   *  dependency set.
+   *
+   * Iterates <tt>poolitem_r->dep(poolitemdep_r)</tt>
+   * and invokes \c action_r on each item in \c pool_r,
+   * that provides a match.
+   * \code
+   * bool consume( const CapAndItem & cai_r );
+   *
+   * ResPool  _pool;
+   * PoolItem _pi;
+   *
+   * // Invoke consume on all PoolItems obsoleted by pi.
+   * forEachPoolItemMatchedBy( _pool, _pi, Dep::OBSOLETES, consume );
+   * \endcode
+  */
+  inline void forEachPoolItemMatchedBy( const ResPool &  pool_r,
+                                        const PoolItem & poolitem_r,
+                                        const Dep &      poolitemdep_r,
+                                        function<bool(const CapAndItem &)> action_r )
+  {
+    for_each( poolitem_r->dep(poolitemdep_r).begin(),
+              poolitem_r->dep(poolitemdep_r).end(),
+              ForEachMatchInPool( pool_r, Dep::PROVIDES, action_r ) );
+  }
+
+  /** Find all items in a ResPool matching a certain PoolItem.
+   *
+   * Iterates <tt>poolitem_r->dep(Dep::PROVIDES)</tt>
+   * and invoking \c action_r on each item in \c pool_r,
+   * that provides a match.
+   * \code
+   * bool consume( const CapAndItem & cai_r );
+   *
+   * ResPool  _pool;
+   * PoolItem _pi;
+   *
+   * // Invoke consume on all PoolItems obsoleting pi.
+   * forEachPoolItemMatching( _pool, Dep::OBSOLETES, _pi, consume );
+   * \endcode
+  */
+  inline void forEachPoolItemMatching( const ResPool &  pool_r,
+                                       const Dep &      pooldep_r,
+                                       const PoolItem & poolitem_r,
+                                       function<bool(const CapAndItem &)> action_r )
+  {
+    for_each( poolitem_r->dep(Dep::PROVIDES).begin(),
+              poolitem_r->dep(Dep::PROVIDES).end(),
+              ForEachMatchInPool( pool_r, pooldep_r, action_r ) );
   }
 
   //@}
