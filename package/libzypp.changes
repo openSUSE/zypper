@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue Nov 14 16:32:49 CET 2006 - schubi@suse.de
+
+- Bugfix in generating solver testcases:
+   - added kind of capabilities in description file
+   - removed unneded channel from uninstall in command file
+
+-------------------------------------------------------------------
 Mon Nov 13 18:35:01 CET 2006 - mt@suse.de
 
 - Try to call /bin/eject utility if the eject-ioctl fails.
