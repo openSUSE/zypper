@@ -44,6 +44,7 @@ pkginclude_HEADERS = NeedAType.h \
 	ResFilters.h	\
 	PoolItem.h	\
 	ResPool.h	\
+	CapMatchHelper.h\
 	NameKindProxy.h	\
 	ResPoolProxy.h	\
 	ResPoolManager.h\

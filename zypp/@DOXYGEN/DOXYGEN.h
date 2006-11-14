@@ -43,6 +43,10 @@
  * \verbinclude g_Functor
 */
 ////////////////////////////////////////////////////////////////////////////////
+/*! \defgroup g_Algorithm Algorithms
+ * \verbinclude g_Algorithm
+*/
+////////////////////////////////////////////////////////////////////////////////
 /** \defgroup BOOST Boost libraries.
  * Boost provides free peer-reviewed portable C++ source libraries.
  * Several \c ::boost names were dragged or typedefed into

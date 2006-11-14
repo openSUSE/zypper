@@ -17,6 +17,7 @@
 #include "zypp/base/Algorithm.h"
 #include "zypp/base/Function.h"
 #include "zypp/ResPool.h"
+#include "zypp/CapMatchHelper.h"
 
 using std::endl;
 
@@ -26,46 +27,6 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
   namespace ui
   { /////////////////////////////////////////////////////////////////
-
-    ///////////////////////////////////////////////////////////////////
-    namespace
-    { /////////////////////////////////////////////////////////////////
-
-      /** Functor testing whether argument matches a certain Capability.
-      */
-      class MatchesCapability
-      {
-      public:
-        MatchesCapability( const Capability & lhs_r )
-        : _lhs( lhs_r )
-        {}
-
-        bool operator()( const CapAndItem & capitem_r ) const
-        { return operator()( capitem_r.cap ); }
-
-        bool operator()( const Capability & rhs_r ) const
-        { return( _lhs.matches( rhs_r ) == CapMatch::yes ); }
-
-      private:
-        const Capability & _lhs;
-      };
-
-      /** Algorithm invoking \c action_r on each CapAndItem that matches a
-       * given \ref Capability.
-      */
-      inline int forEachMatchIn( const ResPool & pool_r, const Dep & dep_r, const Capability & lhs_r,
-                                 function<bool(const CapAndItem &)> action_r )
-      {
-        std::string index( lhs_r.index() );
-        return invokeOnEach( pool_r.byCapabilityIndexBegin( index, dep_r ),
-                             pool_r.byCapabilityIndexEnd( index, dep_r ),
-                             MatchesCapability( lhs_r ), // filter
-                             action_r );
-      }
-
-      /////////////////////////////////////////////////////////////////
-    } // namespace
-    ///////////////////////////////////////////////////////////////////
 
     ///////////////////////////////////////////////////////////////////
     //
