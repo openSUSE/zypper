@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<!--
+   Remove MozillaFirefox from SLED10
+-->
+<test>
+<setup arch="i686">
+  <system file="../repos/sled10/sled-10-i386-1408-default-system.xml"/>
+</setup>
+<trial>
+  <uninstall package="MozillaFirefox"/>
+</trial>
+</test>
