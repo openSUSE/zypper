@@ -105,11 +105,13 @@ std::string helixXML( const Capability &cap )
 	    str << " release='" << cap.edition().release() << "'";
 	if (cap.edition().epoch() != Edition::noepoch)
 	    str << " epoch='" << numstring(cap.edition().epoch()) << "'";
-	str << " />" << endl;
     } else {
 	// anything else
-	str << "<dep name='" << xml_escape(cap.asString()) << "' />" << endl;	
+	str << "<dep name='" << xml_escape(cap.asString()) << "'";
     }
+    str << " kind=\"" << toLower (cap.refers().asString()) << "\""
+	<< " />" << endl;
+	
     return str.str();    
 }
 
@@ -344,7 +346,7 @@ void HelixControl::installResolvable(const ResObject::constPtr &resObject)
 void HelixControl::deleteResolvable(const ResObject::constPtr &resObject)
 {
     Source_Ref source  = resObject->source();    
-    *file << "<uninstall channel=\"" << numstring(source.numericId()) << "\" kind=\"" << toLower (resObject->kind().asString()) << "\""
+    *file << "<uninstall " << " kind=\"" << toLower (resObject->kind().asString()) << "\""
 	  << " name=\"" << resObject->name() << "\"" << "/>" << endl;    
 }
 
