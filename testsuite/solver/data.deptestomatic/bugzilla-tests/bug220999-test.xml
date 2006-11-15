@@ -5,8 +5,9 @@
   <channel name="test" file="bug220999-packages.xml"/>
 </setup>
 
-<!-- foo is installed, but obsoleted by candidate foonew; so fooc finds no target
-     for its conflict -->
+<!-- foo and morefoo (provides foo) is installed, 
+     nomorefoo obsoletes foo; installing nomorefoo;
+     foo AND morefoo should be deleted -->
 <trial>
   <install channel="test" package="nomorefoo"/>
 </trial>
