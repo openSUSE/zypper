@@ -1,0 +1,6 @@
+>!> Installing nomorefoo from channel test
+>!> Solution #1:
+>!> install nomorefoo-2.0-1.noarch[test]
+>!> remove  foo-1.0-1.noarch
+>!> remove  morefoo-1.0-1.noarch
+>!> installs=1, upgrades=0, uninstalls=2
