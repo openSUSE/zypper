@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-10-26 09:41+0200\n"
+"POT-Creation-Date: 2006-11-13 10:32+0100\n"
 "PO-Revision-Date: 2006-11-02 14:16\n"
 "Last-Translator: Novell Language <language@novell.com>\n"
 "Language-Team: Novell Language <language@novell.com>\n"
@@ -96,17 +96,17 @@ msgstr "ne pas installer %s"
 msgid "Do not install or delete concerning resolvables"
 msgstr "Ne pas installer ou supprimer les correctifs concernés"
 
-#: solver/detail/ProblemSolutionUnlock.cc:50
+#: solver/detail/ProblemSolutionUnlock.cc:70
 msgid "unlock all resolvables"
 msgstr "déverrouiller tous les correctifs"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: solver/detail/ProblemSolutionUnlock.cc:59
+#: solver/detail/ProblemSolutionUnlock.cc:83
 #, c-format
 msgid "unlock %s"
 msgstr "déverrouiller %s"
 
-#: solver/detail/ProblemSolutionUnlock.cc:68
+#: solver/detail/ProblemSolutionUnlock.cc:92
 msgid "Unlock these resolvables"
 msgstr "Déverrouiller ces correctifs"
 
@@ -605,7 +605,7 @@ msgid "Due problems which are described above/below this resolution will not sol
 msgstr "Étant donné les problèmes décrits ci-dessus/dessous, cette solution ne résoudra pas toutes les dépendances"
 
 #: solver/detail/Resolver_problems.cc:342
-#: solver/detail/Resolver_problems.cc:662
+#: solver/detail/Resolver_problems.cc:666
 #, c-format
 msgid "Cannot install %s because it is conflicting with %s"
 msgstr "Impossible d'installer %s car il est en conflit avec %s"
@@ -641,49 +641,49 @@ msgid "%s cannot be installed due to missing dependencies"
 msgstr "Impossible d'installer %s à cause de dépendances manquantes"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: solver/detail/Resolver_problems.cc:548
+#: solver/detail/Resolver_problems.cc:550
 #, c-format
 msgid "%s fulfil dependencies of %s but will be uninstalled"
 msgstr "%s satisfait les dépendances de %s mais sera désinstallé"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: solver/detail/Resolver_problems.cc:558
+#: solver/detail/Resolver_problems.cc:560
 #, c-format
 msgid "No need to install %s"
 msgstr "Aucune nécessité d'installer %s"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: solver/detail/Resolver_problems.cc:566
+#: solver/detail/Resolver_problems.cc:568
 #, c-format
 msgid "Cannot install %s to fulfil the dependencies of %s"
 msgstr "Impossible d'installer %s pour satisfaire les dépendances de %s"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: solver/detail/Resolver_problems.cc:581
+#: solver/detail/Resolver_problems.cc:583
 #, c-format
 msgid "Cannot be install %s to fulfil the dependencies of %s"
 msgstr "Impossible d'installer %s pour satisfaire les dépendances de %s"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: solver/detail/Resolver_problems.cc:618
-#: solver/detail/Resolver_problems.cc:626
+#: solver/detail/Resolver_problems.cc:620
+#: solver/detail/Resolver_problems.cc:628
 #, c-format
 msgid "%s will not be uninstalled cause it is still required"
 msgstr "%s ne sera pas désinstallé car il est toujours requis"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: solver/detail/Resolver_problems.cc:637
+#: solver/detail/Resolver_problems.cc:639
 #, c-format
 msgid "%s obsoletes %s. But %s cannot be deleted because it is locked."
 msgstr "%s %s obsolètes. Mais il est impossible de supprimer %s qui est verrouillé."
 
-#: solver/detail/Resolver_problems.cc:666
+#: solver/detail/Resolver_problems.cc:670
 #, c-format
 msgid "Cannot install %s because it is conflicting"
 msgstr "Impossible d'installer %s à cause d'un conflit"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: solver/detail/Resolver_problems.cc:685
+#: solver/detail/Resolver_problems.cc:689
 #, c-format
 msgid "%s is uninstallable due to conflicts with %s"
 msgstr "%s ne peut pas être installé car il est en conflit avec %s"
@@ -4259,6 +4259,14 @@ msgstr "Zuni"
 msgid "Cannot acquire zypp lock."
 msgstr "Impossible de verrouiller zypp."
 
+#: SourceManager.h:42
+msgid "Unable to restore all sources."
+msgstr "Impossible de restaurer toutes les sources."
+
+#: SourceManager.h:68
+msgid "At least one source already registered, cannot restore sources from persistent store."
+msgstr "Au moins une source est déjà enregistrée ; impossible de restaurer les sources à partir du stockage persistant."
+
 #. Translator: %s = name of an rpm package. A list of diffs follows
 #. this message.
 #: target/rpm/RpmDb.cc:1799
@@ -4380,7 +4388,7 @@ msgstr "- sauvegarde %s créée"
 msgid "Target commit aborted by user."
 msgstr "Validation de cible abandonnée par l'utilisateur."
 
-#: target/store/XMLFilesBackend.cc:925 target/store/XMLFilesBackend.cc:932
+#: target/store/XMLFilesBackend.cc:1009 target/store/XMLFilesBackend.cc:1016
 #: source/yum/YUMScriptImpl.cc:78 source/yum/YUMScriptImpl.cc:112
 msgid "Can't write the patch script to a temporary file."
 msgstr "Impossible d'écrire le script du patch dans un fichier temporaire."
@@ -4389,14 +4397,91 @@ msgstr "Impossible d'écrire le script du patch dans un fichier temporaire."
 msgid "Failed check for the script file check sum"
 msgstr "Échec de la recherche de contrôles de cohérence du fichier de script"
 
+#. end of single patch parsing
+#. end of patches file parsing
+#. end of copying
+#: source/yum/YUMSourceImpl.cc:216 source/yum/YUMSourceImpl.cc:241
+#, fuzzy
+msgid "Reading index files"
+msgstr "Suppression des fichiers de sauvegarde"
+
 #: source/yum/YUMSourceImpl.cc:247
 msgid "Signed repomd.xml file fails signature check"
 msgstr "Le fichier signé repomd.xml a échoué à la vérification de signature"
 
-#: source/SourceImpl.cc:384
+# TLABEL restore_2002_08_07_0216__60
+#. TranslatorExplanation %s = product file
+#: source/yum/YUMSourceImpl.cc:464 source/yum/YUMSourceImpl.cc:476
+#: source/yum/YUMSourceImpl.cc:482 source/yum/YUMSourceImpl.cc:490
+#, fuzzy, c-format
+msgid "Reading product from %s"
+msgstr "Lecture des entrées de journal depuis %s."
+
+# TLABEL restore_2002_08_07_0216__60
+#. TranslatorExplanation %s = package file list
+#: source/yum/YUMSourceImpl.cc:520 source/yum/YUMSourceImpl.cc:535
+#: source/yum/YUMSourceImpl.cc:541 source/yum/YUMSourceImpl.cc:549
+#, fuzzy, c-format
+msgid "Reading filelist from %s"
+msgstr "Lecture des entrées de journal depuis %s."
+
+# TLABEL restore_2002_08_07_0216__60
+#. TranslatorExplanation %s = packages file
+#: source/yum/YUMSourceImpl.cc:565 source/yum/YUMSourceImpl.cc:605
+#: source/yum/YUMSourceImpl.cc:611 source/yum/YUMSourceImpl.cc:619
+#, fuzzy, c-format
+msgid "Reading packages from %s"
+msgstr "Lecture des entrées de journal depuis %s."
+
+# TLABEL restore_2002_08_07_0216__60
+#. TranslatorExplanation %s = selection metadata file
+#: source/yum/YUMSourceImpl.cc:643 source/yum/YUMSourceImpl.cc:655
+#: source/yum/YUMSourceImpl.cc:661 source/yum/YUMSourceImpl.cc:669
+#, fuzzy, c-format
+msgid "Reading selection from %s"
+msgstr "Lecture des entrées de journal depuis %s."
+
+# TLABEL restore_2002_08_07_0216__60
+#. TranslatorExplanation %s = pattern metadata file
+#: source/yum/YUMSourceImpl.cc:693 source/yum/YUMSourceImpl.cc:705
+#: source/yum/YUMSourceImpl.cc:711 source/yum/YUMSourceImpl.cc:719
+#, fuzzy, c-format
+msgid "Reading pattern from %s"
+msgstr "Lecture des entrées de journal depuis %s."
+
+#. TranslatorExplanation %s = patches index file
+#: source/yum/YUMSourceImpl.cc:746 source/yum/YUMSourceImpl.cc:758
+#: source/yum/YUMSourceImpl.cc:764 source/yum/YUMSourceImpl.cc:772
+#, c-format
+msgid "Reading patches index %s"
+msgstr ""
+
+# TLABEL autoinst_2002_08_07_0216__71
+#. TranslatorExplanation %s = patch metadata file
+#: source/yum/YUMSourceImpl.cc:795 source/yum/YUMSourceImpl.cc:812
+#: source/yum/YUMSourceImpl.cc:818 source/yum/YUMSourceImpl.cc:827
+#, fuzzy, c-format
+msgid "Reading patch %s"
+msgstr "Masquage de correctifs"
+
+#: source/susetags/SuseTagsImpl.cc:641 source/susetags/SuseTagsImpl.cc:651
+#: source/susetags/SuseTagsImpl.cc:654
+#, fuzzy
+msgid "Reading packages file"
+msgstr "Aucun paquetage ne détient le fichier {0}"
+
+# progress indicator label
+#. TranslatorExplanation %s = language name
+#: source/susetags/SuseTagsImpl.cc:704 source/susetags/SuseTagsImpl.cc:708
+#: source/susetags/SuseTagsImpl.cc:722
+#, fuzzy, c-format
+msgid "Reading translation: %s"
+msgstr "Chargement du système d'installation"
+
+#: source/SourceImpl.cc:391
 msgid " miss checksum."
 msgstr " a manqué la somme de contrôle."
 
-#: source/SourceImpl.cc:390
+#: source/SourceImpl.cc:397
 msgid " fails checksum verification."
 msgstr " a échoué lors de la vérification des sommes de contrôle."

@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: zypp.km\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2006-10-26 09:41+0200\n"
-"PO-Revision-Date: 2006-10-26 09:37+0700\n"
+"PO-Revision-Date: 2006-10-27 10:22+0700\n"
 "Last-Translator: auk piseth <piseth_dv@khmeros.info>\n"
 "Language-Team: Khmer <support@khmeros.info>\n"
 "MIME-Version: 1.0\n"
@@ -100,14 +100,12 @@ msgid "do not install %s"
 msgstr "កុំ​ដំឡើង %s"
 
 #: solver/detail/ProblemSolutionUninstall.cc:81
-#, fuzzy
 msgid "Do not install or delete concerning resolvables"
-msgstr "កុំ​ដំឡើង ឬ​លុប​កញ្ចប់​ដោះស្រាយ​ដែល​ផ្ដោត​អារម្មណ៍"
+msgstr "កុំ​ដំឡើង ឬ លុប​កញ្ចប់​ដោះស្រាយ​ផ្ដោត"
 
 #: solver/detail/ProblemSolutionUnlock.cc:50
-#, fuzzy
 msgid "unlock all resolvables"
-msgstr "កំពុង​ដោះសោ​កញ្ចប់​ដោះស្រាយ​ទាំងនេះ"
+msgstr "ដោះសោរ​កញ្ចប់​ដោះ​ស្រាយ​ទាំងអស់"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
 #: solver/detail/ProblemSolutionUnlock.cc:59
@@ -116,9 +114,8 @@ msgid "unlock %s"
 msgstr "ដោះសោ %s"
 
 #: solver/detail/ProblemSolutionUnlock.cc:68
-#, fuzzy
 msgid "Unlock these resolvables"
-msgstr "កំពុង​ដោះសោ​កញ្ចប់​ដោះស្រាយ​ទាំងនេះ"
+msgstr "ដោះសោរ​កញ្ចប់​ដោះ​ស្រាយ​ទាំងនេះ"
 
 #. Translator: 1.%s = dependency; 2.%s and 3.%s = name of package,patch,...
 #: solver/detail/QueueItemRequire.cc:693
@@ -634,21 +631,21 @@ msgstr "មិន​អាច​ដំឡើង %s ដោយ​សារ​ត�
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
 #: solver/detail/Resolver_problems.cc:434
-#, fuzzy, c-format
+#, c-format
 msgid "%s has unfulfilled requirements"
-msgstr "មិន​បាន​បំពេញ​តម្រូវការ​ឲ្យ %s គ្រប់គ្រាន់"
+msgstr "%s មាន​តម្រូវ​ការ​ដែល​មិន​បាន​បំពេញ"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
 #: solver/detail/Resolver_problems.cc:472
-#, fuzzy, c-format
+#, c-format
 msgid "%s has missing dependencies"
-msgstr "មិន​អាច​ដំឡើង %s បាន ដោយ​សារ​បាត់កញ្ចប់តម្រូវការ"
+msgstr "%s មាន​ភាព​អាស្រ័យ​ដែល​បាត់"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
 #: solver/detail/Resolver_problems.cc:510
-#, fuzzy, c-format
+#, c-format
 msgid "%s cannot be installed due to missing dependencies"
-msgstr "មិន​អាច​ដំឡើង %s បាន ដោយ​សារ​បាត់កញ្ចប់តម្រូវការ"
+msgstr "មិន​អាច​ដំឡើង %s បានទេ ដោយ​សារ​បាត់​ភាព​អាស្រ័យ"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
 #: solver/detail/Resolver_problems.cc:548
@@ -683,24 +680,24 @@ msgstr "មិន​អាច​លុប %s បាន ពីព្រោះ​�
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
 #: solver/detail/Resolver_problems.cc:637
-#, fuzzy, c-format
+#, c-format
 msgid "%s obsoletes %s. But %s cannot be deleted because it is locked."
-msgstr "%s លែង​ប្រើ %s ។ ប៉ុន្តែ​មិន​អាច​លុប %s ពីព្រោះ​វា​ត្រូវ​បាន​ចាក់​សោរ ។"
+msgstr "%s លែង​ប្រើ %s ។ ប៉ុន្តែ​មិន​អាច​លុប %s បានទេ ពីព្រោះ​វា​ជាប់​សោរ ។"
 
 #: solver/detail/Resolver_problems.cc:666
-#, fuzzy, c-format
+#, c-format
 msgid "Cannot install %s because it is conflicting"
-msgstr "មិន​អាច​ដំឡើង %s ពីព្រោះ​វា​កំពុង​ប៉ះ​ទង្គិច​ជាមួយនឹង %s"
+msgstr "មិន​អាច​ដំឡើង %s បានទេ ពីព្រោះ​វា​កំពុង​ប៉ះ​ទង្គិច"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
 #: solver/detail/Resolver_problems.cc:685
-#, fuzzy, c-format
+#, c-format
 msgid "%s is uninstallable due to conflicts with %s"
-msgstr "មិន​អាច​លុប %s បាន ដោយ​សារ​តែ​មាន​ការប៉ះ​ទង្គិច​ជាមួយ​នឹង %s"
+msgstr "មិន​អាច​លុប %s បានទេ​ ព្រោះ​វា​ប៉ះទង្គិច​ជា​មួយ​នឹង %s"
 
 #: CountryCode.cc:135
 msgid "Unknown country: "
-msgstr "ប្រទេស​ដែល​មិន​ស្គាល់ ៖"
+msgstr "ប្រទេស​ដែល​មិន​ស្គាល់ ៖ "
 
 #. Defined CountryCode constants
 #. Defined LanguageCode constants
@@ -709,31 +706,26 @@ msgid "noCode"
 msgstr "គ្មាន​កូដ"
 
 #: CountryCode.cc:217
-#, fuzzy
 msgid "Andorra"
 msgstr "អង់ដូរ៉ា"
 
 #. :AND:020:
 #: CountryCode.cc:218
-#, fuzzy
 msgid "United Arab Emirates"
 msgstr "អារ៉ាប់​រួម"
 
 #. :ARE:784:
 #: CountryCode.cc:219
-#, fuzzy
 msgid "Afghanistan"
 msgstr "អាហ្គានីស្ថាន"
 
 #. :AFG:004:
 #: CountryCode.cc:220
-#, fuzzy
 msgid "Antigua and Barbuda"
 msgstr "អង់ទីហ្គា និង បារប៊ុយដា"
 
 #. :ATG:028:
 #: CountryCode.cc:221
-#, fuzzy
 msgid "Anguilla"
 msgstr "អង់ហ្គីឡា"
 
@@ -749,55 +741,46 @@ msgstr "អារមេនី"
 
 #. :ARM:051:
 #: CountryCode.cc:224
-#, fuzzy
 msgid "Netherlands Antilles"
-msgstr "អង់ទីយ៍​ហូល្លង់"
+msgstr "ហូល្លង់ អង់ទីល"
 
 #. :ANT:530:
 #: CountryCode.cc:225
-#, fuzzy
 msgid "Angola"
 msgstr "អង់ហ្គោឡា"
 
 #. :AGO:024:
 #: CountryCode.cc:226
-#, fuzzy
 msgid "Antarctica"
-msgstr "អង់តាក់ទិក"
+msgstr "អង់តាកទិក"
 
 #. :ATA:010:
 #: CountryCode.cc:227
-#, fuzzy
 msgid "Argentina"
 msgstr "អាហ្សង់ទីន"
 
 #. :ARG:032:
 #: CountryCode.cc:228
-#, fuzzy
 msgid "American Samoa"
-msgstr "សាម៉ូអា​បែប​អាមេរិក"
+msgstr "សាម៉ូអា ​អាមេរិក"
 
 #. :ASM:016:
 #: CountryCode.cc:229
-#, fuzzy
 msgid "Austria"
 msgstr "អូទ្រីស"
 
 #. :AUT:040:
 #: CountryCode.cc:230
-#, fuzzy
 msgid "Australia"
 msgstr "អូស្ត្រាលី"
 
 #. :AUS:036:
 #: CountryCode.cc:231
-#, fuzzy
 msgid "Aruba"
-msgstr "អារុយបា"
+msgstr "អារូបា"
 
 #. :ABW:533:
 #: CountryCode.cc:232
-#, fuzzy
 msgid "Aland Islands"
 msgstr "កោះ​អាឡង់"
 
@@ -808,103 +791,86 @@ msgstr "អាហ្ស៊ែរបែហ្សង់"
 
 #. :AZE:031:
 #: CountryCode.cc:234
-#, fuzzy
 msgid "Bosnia and Herzegovina"
-msgstr "បូស្នី និង "
+msgstr "បូស្ន៊ី និង ​ហឺហ្ស៊េហ្គោវីណា"
 
 #. :BIH:070:
 #: CountryCode.cc:235
-#, fuzzy
 msgid "Barbados"
-msgstr "បាបាដូ"
+msgstr "បារបាដូស"
 
 #. :BRB:052:
 #: CountryCode.cc:236
-#, fuzzy
 msgid "Bangladesh"
 msgstr "បង់ក្លាដេស"
 
 #. :BGD:050:
 #: CountryCode.cc:237
-#, fuzzy
 msgid "Belgium"
-msgstr "ប៊ែលស៊ីក"
+msgstr "ប៊ែលហ្ស៊ិក"
 
 #. :BEL:056:
 #: CountryCode.cc:238
-#, fuzzy
 msgid "Burkina Faso"
-msgstr "ប៊ឺឃីនា ហ្វាសូ"
+msgstr "ប៊ូរគីណាហ្វាសូ"
 
 #. :BFA:854:
 #: CountryCode.cc:239
-#, fuzzy
 msgid "Bulgaria"
-msgstr "ប៊ុលហ្ការី"
+msgstr "ប៊ុលហ្គារី"
 
 #. :BGR:100:
 #: CountryCode.cc:240
-#, fuzzy
 msgid "Bahrain"
 msgstr "បារ៉ែន"
 
 #. :BHR:048:
 #: CountryCode.cc:241
-#, fuzzy
 msgid "Burundi"
-msgstr "ប៊ុរុនឌី"
+msgstr "ប៊ូរុនឌី"
 
 #. :BDI:108:
 #: CountryCode.cc:242
-#, fuzzy
 msgid "Benin"
-msgstr "បេនីន"
+msgstr "បេណាំង"
 
 #. :BEN:204:
 #: CountryCode.cc:243
-#, fuzzy
 msgid "Bermuda"
-msgstr "ប៊ឺម្ញូដា"
+msgstr "ប៊េរមូដា"
 
 #. :BMU:060:
 #: CountryCode.cc:244
-#, fuzzy
 msgid "Brunei Darussalam"
-msgstr "ប៊្រុយណេ ដារុយសាលឹម"
+msgstr "ប៊្រុយណេ ដារូសាឡាម"
 
 #. :BRN:096:
 #: CountryCode.cc:245
-#, fuzzy
 msgid "Bolivia"
 msgstr "បូលីវី"
 
 #. :BOL:068:
 #: CountryCode.cc:246
-#, fuzzy
 msgid "Brazil"
 msgstr "ប្រេស៊ីល"
 
 #. :BRA:076:
 #: CountryCode.cc:247
-#, fuzzy
 msgid "Bahamas"
 msgstr "បាហាម៉ាស"
 
 #. :BHS:044:
 #: CountryCode.cc:248
-#, fuzzy
 msgid "Bhutan"
 msgstr "ប៊ូតាន"
 
 #. :BTN:064:
 #: CountryCode.cc:249
-#, fuzzy
 msgid "Bouvet Island"
 msgstr "កោះ​ប៊ូវ៉េត"
 
 #. :BVT:074:
 #: CountryCode.cc:250
-#, fuzzy
 msgid "Botswana"
 msgstr "បុតស្វាណា"
 
@@ -925,9 +891,8 @@ msgstr "កាណាដា"
 
 #. :CAN:124:
 #: CountryCode.cc:254
-#, fuzzy
 msgid "Cocos (Keeling) Islands"
-msgstr "កោះ​កូកូ (ឃីលីង)"
+msgstr "កោះ Cocos (Keeling)"
 
 #. :CCK:166:
 #. :CAF:140:
@@ -1172,457 +1137,381 @@ msgstr "ហ្គីណេ​អេក្វាទ័រ"
 
 #. :GNQ:226:
 #: CountryCode.cc:304
-#, fuzzy
 msgid "Greece"
 msgstr "ក្រិក"
 
 #. :GRC:300:
 #: CountryCode.cc:305
-#, fuzzy
 msgid "South Georgia and the South Sandwich Islands"
-msgstr "ហ្សកហ្ស៊ី​ខាង​ត្បូង និង កោះសាំងវិច​ខាង​ត្បូង"
+msgstr "កោះ​ហ្សកហ្ស៊ី​ខាងត្បូង និង ស៊េនវិច​ខាងត្បូង"
 
 #. :SGS:239:
 #: CountryCode.cc:306
-#, fuzzy
 msgid "Guatemala"
 msgstr "ហ្គាតេម៉ាឡា"
 
 #. :GTM:320:
 #: CountryCode.cc:307
-#, fuzzy
 msgid "Guam"
 msgstr "ហ្គាម"
 
 #. :GUM:316:
 #: CountryCode.cc:308
-#, fuzzy
 msgid "Guinea-Bissau"
 msgstr "ហ្គីណេប៊ីសៅ"
 
 #. :GNB:624:
 #: CountryCode.cc:309
-#, fuzzy
 msgid "Guyana"
 msgstr "ហ្គីយ៉ាណា"
 
 #. :GUY:328:
 #: CountryCode.cc:310
-#, fuzzy
 msgid "Hong Kong"
 msgstr "ហុងកុង"
 
 #. :HKG:344:
 #: CountryCode.cc:311
-#, fuzzy
 msgid "Heard Island and McDonald Islands"
 msgstr "កោះ​ហ៊ើដ និង កោះ​ម៉ាកដូណាល់"
 
 #. :HMD:334:
 #: CountryCode.cc:312
-#, fuzzy
 msgid "Honduras"
 msgstr "ហុងឌូរ៉ាស់"
 
 #. :HND:340:
 #: CountryCode.cc:313
-#, fuzzy
 msgid "Croatia"
 msgstr "ក្រូអាត"
 
 #. :HRV:191:
 #: CountryCode.cc:314
-#, fuzzy
 msgid "Haiti"
 msgstr "ហៃទី"
 
 #. :HTI:332:
 #: CountryCode.cc:315
-#, fuzzy
 msgid "Hungary"
 msgstr "ហុងគ្រី"
 
 #. :HUN:348:
 #: CountryCode.cc:316
-#, fuzzy
 msgid "Indonesia"
 msgstr "ឥណ្ឌូនេស៊ី"
 
 #. :IDN:360:
 #: CountryCode.cc:317
-#, fuzzy
 msgid "Ireland"
 msgstr "អៀរឡង់"
 
 #. :IRL:372:
 #: CountryCode.cc:318
-#, fuzzy
 msgid "Israel"
 msgstr "អ៊ីស្រាអែល"
 
 #. :ISR:376:
 #: CountryCode.cc:319
-#, fuzzy
 msgid "India"
 msgstr "ឥណ្ឌា"
 
 #. :IND:356:
 #: CountryCode.cc:320
-#, fuzzy
 msgid "British Indian Ocean Territory"
 msgstr "អាណាចក្រ​ចក្រភព​អង់គ្លេស​នៅ​មហាសមុទ្រ​ឥណ្ឌា"
 
 #. :IOT:086:
 #: CountryCode.cc:321
-#, fuzzy
 msgid "Iraq"
 msgstr "អ៊ីរ៉ាក់"
 
 #. :IRQ:368:
 #: CountryCode.cc:322
-#, fuzzy
 msgid "Iran"
 msgstr "អ៊ីរ៉ង់"
 
 #. :IRN:364:
 #: CountryCode.cc:323
-#, fuzzy
 msgid "Iceland"
 msgstr "អ៊ីស្លង់"
 
 #. :ISL:352:
 #: CountryCode.cc:324
-#, fuzzy
 msgid "Italy"
 msgstr "អ៊ីតាលី"
 
 #. :ITA:380:
 #: CountryCode.cc:325
-#, fuzzy
 msgid "Jamaica"
-msgstr "ចាម៉ៃកា"
+msgstr "ចាាម៉ៃកា"
 
 #. :JAM:388:
 #: CountryCode.cc:326
-#, fuzzy
 msgid "Jordan"
-msgstr "ហ្ស៊កដានី"
+msgstr "ហ្ស៊កដង់"
 
 #. :JOR:400:
 #: CountryCode.cc:327
-#, fuzzy
 msgid "Japan"
 msgstr "ជប៉ុន"
 
 #. :JPN:392:
 #: CountryCode.cc:328
-#, fuzzy
 msgid "Kenya"
 msgstr "កេនយ៉ា"
 
 #. :KEN:404:
 #: CountryCode.cc:329
-#, fuzzy
 msgid "Kyrgyzstan"
 msgstr "គៀរហ្គីស្តង់"
 
 #. :KGZ:417:
 #: CountryCode.cc:330
-#, fuzzy
 msgid "Cambodia"
 msgstr "កម្ពុជា"
 
 #. :KHM:116:
 #: CountryCode.cc:331
-#, fuzzy
 msgid "Kiribati"
 msgstr "គិរិបាទី"
 
 #. :KIR:296:
 #: CountryCode.cc:332
-#, fuzzy
 msgid "Comoros"
 msgstr "កុំម៉ូរ៉ូស"
 
 #. :COM:174:
 #: CountryCode.cc:333
-#, fuzzy
 msgid "Saint Kitts and Nevis"
 msgstr "សង់ឃីត និង នេវីស"
 
 #. :KNA:659:
 #: CountryCode.cc:334
-#, fuzzy
 msgid "North Korea"
 msgstr "កូរ៉េ​ខាង​ជើង"
 
 #. :PRK:408:
 #: CountryCode.cc:335
-#, fuzzy
 msgid "South Korea"
 msgstr "កូរ៉េ​ខាង​ត្បូង"
 
 #. :KOR:410:
 #: CountryCode.cc:336
-#, fuzzy
 msgid "Kuwait"
 msgstr "គុយ​វ៉ែត"
 
 #. :KWT:414:
 #: CountryCode.cc:337
-#, fuzzy
 msgid "Cayman Islands"
 msgstr "កោះ​កៃម៉ាន"
 
 #. :CYM:136:
 #: CountryCode.cc:338
-#, fuzzy
 msgid "Kazakhstan"
 msgstr "កាហ្សាក់ស្តង់"
 
 #. :KAZ:398:
 #: CountryCode.cc:339
-#, fuzzy
 msgid "Lao People's Democratic Republic"
 msgstr "សាធារណរដ្ឋ​ប្រជាធិបតេយ្យ​ប្រជាមានិត​ឡាវ"
 
 #. :LAO:418:
 #: CountryCode.cc:340
-#, fuzzy
 msgid "Lebanon"
 msgstr "លីបង់"
 
 #. :LBN:422:
 #: CountryCode.cc:341
-#, fuzzy
 msgid "Saint Lucia"
 msgstr "សង់លូស៊ីយ៉ា"
 
 #. :LCA:662:
 #: CountryCode.cc:342
-#, fuzzy
 msgid "Liechtenstein"
 msgstr "លិចទេនស្តែន"
 
 #. :LIE:438:
 #: CountryCode.cc:343
-#, fuzzy
 msgid "Sri Lanka"
 msgstr "ស្រីលង្កា"
 
 #. :LKA:144:
 #: CountryCode.cc:344
-#, fuzzy
 msgid "Liberia"
 msgstr "លីបេរីយ៉ា"
 
 #. :LBR:430:
 #: CountryCode.cc:345
-#, fuzzy
 msgid "Lesotho"
 msgstr "ឡេសូតូ"
 
 #. :LSO:426:
 #: CountryCode.cc:346
-#, fuzzy
 msgid "Lithuania"
 msgstr "លីទុយអានី"
 
 #. :LTU:440:
 #: CountryCode.cc:347
-#, fuzzy
 msgid "Luxembourg"
 msgstr "លុចហ្សំបួរ"
 
 #. :LUX:442:
 #: CountryCode.cc:348
-#, fuzzy
 msgid "Latvia"
 msgstr "ឡាតវីយ៉ា"
 
 #. :LVA:428:
 #: CountryCode.cc:349
-#, fuzzy
 msgid "Libya"
 msgstr "លីប៊ី"
 
 #. :LBY:434:
 #: CountryCode.cc:350
-#, fuzzy
 msgid "Morocco"
 msgstr "ម៉ារ៉ុក"
 
 #. :MAR:504:
 #: CountryCode.cc:351
-#, fuzzy
 msgid "Monaco"
 msgstr "ម៉ូណាកូ"
 
 #. :MCO:492:
 #: CountryCode.cc:352
-#, fuzzy
 msgid "Moldova"
 msgstr "ម៉ុលដូវ៉ា"
 
 #. :MDA:498:
 #: CountryCode.cc:353
-#, fuzzy
 msgid "Madagascar"
 msgstr "ម៉ាដាហ្គាស្ការ"
 
 #. :MDG:450:
 #: CountryCode.cc:354
-#, fuzzy
 msgid "Marshall Islands"
 msgstr "កោះ​ម៉ាស្យល"
 
 #. :MHL:584:
 #: CountryCode.cc:355
-#, fuzzy
 msgid "Macedonia"
 msgstr "ម៉ាសេដូនី"
 
 #. :MKD:807:
 #: CountryCode.cc:356
-#, fuzzy
 msgid "Mali"
 msgstr "ម៉ាលី"
 
 #. :MLI:466:
 #: CountryCode.cc:357
-#, fuzzy
 msgid "Myanmar"
-msgstr "មីយ៉ាន់ម៉ា"
+msgstr "ភូមា"
 
 #. :MMR:104:
 #: CountryCode.cc:358
-#, fuzzy
 msgid "Mongolia"
 msgstr "ម៉ុងហ្គោលី"
 
 #. :MNG:496:
 #: CountryCode.cc:359
-#, fuzzy
 msgid "Macao"
 msgstr "ម៉ាកាវ"
 
 #. :MAC:446:
 #: CountryCode.cc:360
-#, fuzzy
 msgid "Northern Mariana Islands"
 msgstr "កោះ​ម៉ារៀណា​ភាគ​ខាង​ជើង"
 
 #. :MNP:580:
 #: CountryCode.cc:361
-#, fuzzy
 msgid "Martinique"
 msgstr "ម៉ារទីនីគ"
 
 #. :MTQ:474:
 #: CountryCode.cc:362
-#, fuzzy
 msgid "Mauritania"
 msgstr "ម៉ូរីតានី"
 
 #. :MRT:478:
 #: CountryCode.cc:363
-#, fuzzy
 msgid "Montserrat"
 msgstr "ម៉ុងសេរ៉ា"
 
 #. :MSR:500:
 #: CountryCode.cc:364
-#, fuzzy
 msgid "Malta"
 msgstr "ម៉ាល់តា"
 
 #. :MLT:470:
 #: CountryCode.cc:365
-#, fuzzy
 msgid "Mauritius"
 msgstr "ម៉ូរីទុស"
 
 #. :MUS:480:
 #: CountryCode.cc:366
-#, fuzzy
 msgid "Maldives"
 msgstr "ម៉ាល់ឌីវ"
 
 #. :MDV:462:
 #: CountryCode.cc:367
-#, fuzzy
 msgid "Malawi"
 msgstr "ម៉ាឡាវី"
 
 #. :MWI:454:
 #: CountryCode.cc:368
-#, fuzzy
 msgid "Mexico"
 msgstr "ម៉ិចស៊ិក"
 
 #. :MEX:484:
 #: CountryCode.cc:369
-#, fuzzy
 msgid "Malaysia"
 msgstr "ម៉ាឡេស៊ី"
 
 #. :MYS:458:
 #: CountryCode.cc:370
-#, fuzzy
 msgid "Mozambique"
 msgstr "ម៉ូហ្សាំប៊ិក"
 
 #. :MOZ:508:
 #: CountryCode.cc:371
-#, fuzzy
 msgid "Namibia"
 msgstr "ណាមីប៊ី"
 
 #. :NAM:516:
 #: CountryCode.cc:372
-#, fuzzy
 msgid "New Caledonia"
-msgstr "នូវែលកាលេដូនី"
+msgstr "ញូវ កាលេដូនី"
 
 #. :NCL:540:
 #: CountryCode.cc:373
-#, fuzzy
 msgid "Niger"
 msgstr "នីហ្សេរ"
 
 #. :NER:562:
 #: CountryCode.cc:374
-#, fuzzy
 msgid "Norfolk Island"
 msgstr "កោះ​ណរហ្វក"
 
 #. :NFK:574:
 #: CountryCode.cc:375
-#, fuzzy
 msgid "Nigeria"
 msgstr "នីហ្សេរីយ៉ា"
 
 #. :NGA:566:
 #: CountryCode.cc:376
-#, fuzzy
 msgid "Nicaragua"
 msgstr "នីការ៉ាហ្គ័រ"
 
 #. :NIC:558:
 #: CountryCode.cc:377
-#, fuzzy
 msgid "Netherlands"
-msgstr "ហុល្លង់"
+msgstr "ហូល្លង់"
 
 #. :NLD:528:
 #: CountryCode.cc:378
-#, fuzzy
 msgid "Norway"
 msgstr "ន័រវែស"
 
 #. :NOR:578:
 #: CountryCode.cc:379
-#, fuzzy
 msgid "Nepal"
 msgstr "នេប៉ាល់"
 
@@ -1634,283 +1523,236 @@ msgstr "ណូរុ"
 
 #. :NRU:520:
 #: CountryCode.cc:381
-#, fuzzy
 msgid "Niue"
 msgstr "នីវ"
 
 #. :NIU:570:
 #: CountryCode.cc:382
-#, fuzzy
 msgid "New Zealand"
-msgstr "នូវែលហ្សេឡង់"
+msgstr "ញូវ​ហ្សេលែន"
 
 #. :NZL:554:
 #: CountryCode.cc:383
-#, fuzzy
 msgid "Oman"
 msgstr "អូម៉ង់"
 
 #. :OMN:512:
 #: CountryCode.cc:384
-#, fuzzy
 msgid "Panama"
 msgstr "ប៉ាណាម៉ា"
 
 #. :PAN:591:
 #: CountryCode.cc:385
-#, fuzzy
 msgid "Peru"
 msgstr "ប៉េរូ"
 
 #. :PER:604:
 #: CountryCode.cc:386
-#, fuzzy
 msgid "French Polynesia"
 msgstr "ប៉ូលីនេស៊ី​បារាំង"
 
 #. :PYF:258:
 #: CountryCode.cc:387
-#, fuzzy
 msgid "Papua New Guinea"
 msgstr "ប៉ាពូញូវហ្គីណេ"
 
 #. :PNG:598:
 #: CountryCode.cc:388
-#, fuzzy
 msgid "Philippines"
 msgstr "ហ្វីលីពីន"
 
 #. :PHL:608:
 #: CountryCode.cc:389
-#, fuzzy
 msgid "Pakistan"
 msgstr "ប៉ាគីស្ថាន"
 
 #. :PAK:586:
 #: CountryCode.cc:390
-#, fuzzy
 msgid "Poland"
 msgstr "ប៉ូឡូញ"
 
 #. :POL:616:
 #: CountryCode.cc:391
-#, fuzzy
 msgid "Saint Pierre and Miquelon"
 msgstr "សង់​ព្យែរ និង មីគុយអេឡុង"
 
 #. :SPM:666:
 #: CountryCode.cc:392
-#, fuzzy
 msgid "Pitcairn"
 msgstr "ពីតខាយរិន"
 
 #. :PCN:612:
 #: CountryCode.cc:393
-#, fuzzy
 msgid "Puerto Rico"
 msgstr "ព័រតូរីកូ"
 
 #. :PRI:630:
 #: CountryCode.cc:394
-#, fuzzy
 msgid "Palestinian Territory"
 msgstr "ប៉ាឡេស្ទីន"
 
 #. :PSE:275:
 #: CountryCode.cc:395
-#, fuzzy
 msgid "Portugal"
 msgstr "ព័រទុយហ្គាល់"
 
 #. :PRT:620:
 #: CountryCode.cc:396
-#, fuzzy
 msgid "Palau"
 msgstr "ប៉ាឡូ"
 
 #. :PLW:585:
 #: CountryCode.cc:397
-#, fuzzy
 msgid "Paraguay"
 msgstr "ប៉ារ៉ាហ្គាយ"
 
 #. :PRY:600:
 #: CountryCode.cc:398
-#, fuzzy
 msgid "Qatar"
-msgstr "កាតា"
+msgstr "កាតារ"
 
 #. :QAT:634:
 #: CountryCode.cc:399
-#, fuzzy
 msgid "Reunion"
 msgstr "រេអុយញ៉ុង"
 
 #. :REU:638:
 #: CountryCode.cc:400
-#, fuzzy
 msgid "Romania"
-msgstr "រូម៉ានី"
+msgstr "រ៉ូម៉ានី"
 
 #. :ROU:642:
 #: CountryCode.cc:401
-#, fuzzy
 msgid "Russian Federation"
 msgstr "សហព័ន្ធ​រុស្ស៊ី"
 
 #. :RUS:643:
 #: CountryCode.cc:402
-#, fuzzy
 msgid "Rwanda"
 msgstr "រវ៉ាន់ដា"
 
 #. :RWA:646:
 #: CountryCode.cc:403
-#, fuzzy
 msgid "Saudi Arabia"
 msgstr "អារ៉ាប៊ីសាអ៊ូឌីត"
 
 #. :SAU:682:
 #: CountryCode.cc:404
-#, fuzzy
 msgid "Solomon Islands"
 msgstr "កោះ​សូឡូម៉ូន"
 
 #. :SLB:090:
 #: CountryCode.cc:405
-#, fuzzy
 msgid "Seychelles"
 msgstr "សីស្ហែល"
 
 #. :SYC:690:
 #: CountryCode.cc:406
-#, fuzzy
 msgid "Sudan"
 msgstr "ស៊ូដង់"
 
 #. :SDN:736:
 #: CountryCode.cc:407
-#, fuzzy
 msgid "Sweden"
-msgstr "ស៊ុយអែដ"
+msgstr "ស៊ុយអែត"
 
 #. :SWE:752:
 #: CountryCode.cc:408
-#, fuzzy
 msgid "Singapore"
-msgstr "សាំងហ្គាពួរ"
+msgstr "សឹង្ហ​បុរី"
 
 #. :SGP:702:
 #: CountryCode.cc:409
-#, fuzzy
 msgid "Saint Helena"
 msgstr "សង់​ហេឡេណា"
 
 #. :SHN:654:
 #: CountryCode.cc:410
-#, fuzzy
 msgid "Slovenia"
 msgstr "ស្លូវ៉ានី"
 
 #. :SVN:705:
 #: CountryCode.cc:411
-#, fuzzy
 msgid "Svalbard and Jan Mayen"
 msgstr "ស្វាល់បាត និង ហ្សង់ម៉ាយេន"
 
 #. :SJM:744:
 #: CountryCode.cc:412
-#, fuzzy
 msgid "Slovakia"
 msgstr "ស្លូវ៉ាគី"
 
 #. :SVK:703:
 #: CountryCode.cc:413
-#, fuzzy
 msgid "Sierra Leone"
 msgstr "សេរ៉ាឡេអូន"
 
 #. :SLE:694:
 #: CountryCode.cc:414
-#, fuzzy
 msgid "San Marino"
 msgstr "សាន់ម៉ារីណូ"
 
 #. :SMR:674:
 #: CountryCode.cc:415
-#, fuzzy
 msgid "Senegal"
 msgstr "សេណេហ្គាល់"
 
 #. :SEN:686:
 #: CountryCode.cc:416
-#, fuzzy
 msgid "Somalia"
 msgstr "សូម៉ាលី"
 
 #. :SOM:706:
 #: CountryCode.cc:417
-#, fuzzy
 msgid "Suriname"
 msgstr "ស៊ូរីណាមី"
 
 #. :SUR:740:
 #: CountryCode.cc:418
-#, fuzzy
 msgid "Sao Tome and Principe"
 msgstr "សៅតូម និង ព្រីនស៊ីព"
 
 #. :STP:678:
 #: CountryCode.cc:419
-#, fuzzy
 msgid "El Salvador"
 msgstr "អែលសាល់វ៉ាឌ័រ"
 
 #. :SLV:222:
 #: CountryCode.cc:420
-#, fuzzy
 msgid "Syria"
 msgstr "ស៊ីរី"
 
 #. :SYR:760:
 #: CountryCode.cc:421
-#, fuzzy
 msgid "Swaziland"
 msgstr "ស្វាហ្ស៊ីឡង់"
 
 #. :SWZ:748:
 #: CountryCode.cc:422
-#, fuzzy
 msgid "Turks and Caicos Islands"
 msgstr "កោះ​ទួក និង កៃកូស"
 
 #. :TCA:796:
 #: CountryCode.cc:423
-#, fuzzy
 msgid "Chad"
 msgstr "ឆាដ"
 
 #. :TCD:148:
 #: CountryCode.cc:424
-#, fuzzy
 msgid "French Southern Territories"
-msgstr "អាណាចក្រ​ខាង​ត្បូង បារាំង"
+msgstr "អាណាចក្រ​ខាង​ត្បូង​របស់​ បារាំង"
 
 #. :ATF:260:
 #: CountryCode.cc:425
-#, fuzzy
 msgid "Togo"
 msgstr "តូហ្គោ"
 
 #. :TGO:768:
 #: CountryCode.cc:426
-#, fuzzy
 msgid "Thailand"
 msgstr "ថៃ"
 
 #. :THA:764:
 #: CountryCode.cc:427
-#, fuzzy
 msgid "Tajikistan"
 msgstr "តាហ្ស៊ីគីស្តង់"
 
@@ -1922,37 +1764,31 @@ msgstr "តូកេឡាអ៊ូ"
 
 #. :TKL:772:
 #: CountryCode.cc:429
-#, fuzzy
 msgid "Turkmenistan"
 msgstr "ទួគមេនីស្តង់"
 
 #. :TKM:795:
 #: CountryCode.cc:430
-#, fuzzy
 msgid "Tunisia"
 msgstr "ទុយណេស៊ី"
 
 #. :TUN:788:
 #: CountryCode.cc:431
-#, fuzzy
 msgid "Tonga"
-msgstr "តុងហ្គោ"
+msgstr "តុងហ្គា"
 
 #. :TON:776:
 #: CountryCode.cc:432
-#, fuzzy
 msgid "East Timor"
 msgstr "ទីម័រ​ខាង​កើត"
 
 #. :TLS:626:
 #: CountryCode.cc:433
-#, fuzzy
 msgid "Turkey"
 msgstr "ទួរគី"
 
 #. :TUR:792:
 #: CountryCode.cc:434
-#, fuzzy
 msgid "Trinidad and Tobago"
 msgstr "ទ្រីនីដាដ និង តូបាហ្គោ"
 
@@ -1964,139 +1800,117 @@ msgstr "ទុយវ៉ាលុយ"
 
 #. :TUV:798:
 #: CountryCode.cc:436
-#, fuzzy
 msgid "Taiwan"
 msgstr "តៃវ៉ាន់"
 
 #. :TWN:158:
 #: CountryCode.cc:437
-#, fuzzy
 msgid "Tanzania"
 msgstr "តង់ហ្សានី"
 
 #. :TZA:834:
 #: CountryCode.cc:438
-#, fuzzy
 msgid "Ukraine"
 msgstr "អ៊ុយក្រែន"
 
 #. :UKR:804:
 #: CountryCode.cc:439
-#, fuzzy
 msgid "Uganda"
 msgstr "អ៊ូហ្គង់ដា"
 
 #. :UGA:800:
 #: CountryCode.cc:440
-#, fuzzy
 msgid "United States Minor Outlying Islands"
 msgstr "កោះ​ឆ្ងាយៗ​របស់​សហរដ្ឋ​អាមេរិក"
 
 #. :UMI:581:
 #: CountryCode.cc:441
-#, fuzzy
 msgid "United States"
 msgstr "សហរដ្ឋអាមេរិក"
 
 #. :USA:840:
 #: CountryCode.cc:442
-#, fuzzy
 msgid "Uruguay"
 msgstr "អ៊ុយរ៉ាហ្គាយ"
 
 #. :URY:858:
 #: CountryCode.cc:443
-#, fuzzy
 msgid "Uzbekistan"
 msgstr "អ៊ូហ្សបេគីស្តង់"
 
 #. :UZB:860:
 #: CountryCode.cc:444
-#, fuzzy
 msgid "Holy See (Vatican City State)"
-msgstr "ហូលីស៊ី (រដ្ឋ​របស់បូរី​វ៉ាទីកង់)"
+msgstr "ហូលីស៊ី (រដ្ឋ​បូរី​វ៉ាទីកង់)"
 
 #. :VAT:336:
 #: CountryCode.cc:445
-#, fuzzy
 msgid "Saint Vincent and the Grenadines"
 msgstr "សង់វាំងសង់ និង ហ្គ្រីណាឌីន"
 
 #. :VCT:670:
 #: CountryCode.cc:446
-#, fuzzy
 msgid "Venezuela"
 msgstr "វេណេហ៊្សុយអេឡា"
 
 #. :VEN:862:
 #: CountryCode.cc:447
-#, fuzzy
 msgid "British Virgin Islands"
-msgstr "កោះ​វីជីន អង់គ្លេស"
+msgstr "កោះ​វឺជីន អង់គ្លេស"
 
 #. :VGB:092:
 #: CountryCode.cc:448
-#, fuzzy
 msgid "Virgin Islands, U.S."
-msgstr "កោះ​វីជីន អាមេរិក"
+msgstr "កោះ​វឺជីន អាមេរិក"
 
 #. :VIR:850:
 #: CountryCode.cc:449
-#, fuzzy
 msgid "Vietnam"
 msgstr "វៀតណាម"
 
 #. :VNM:704:
 #: CountryCode.cc:450
-#, fuzzy
 msgid "Vanuatu"
 msgstr "វ៉ានុយអាទុយ"
 
 #. :VUT:548:
 #: CountryCode.cc:451
-#, fuzzy
 msgid "Wallis and Futuna"
-msgstr "វ៉ាលីស និង ហ្វ៊ូ​ទុយណា"
+msgstr "វ៉ាលីស និង ហ៊្វូ​ទុយណា"
 
 #. :WLF:876:
 #: CountryCode.cc:452
-#, fuzzy
 msgid "Samoa"
-msgstr "សាមូអា"
+msgstr "សាម៉ូអា"
 
 #. :WSM:882:
 #: CountryCode.cc:453
-#, fuzzy
 msgid "Yemen"
 msgstr "យេមែន"
 
 #. :YEM:887:
 #: CountryCode.cc:454
-#, fuzzy
 msgid "Mayotte"
 msgstr "ម៉ាយុត"
 
 #. :MYT:175:
 #: CountryCode.cc:455
-#, fuzzy
 msgid "South Africa"
 msgstr "អាហ្វ្រិក​ខាង​ត្បូង"
 
 #. :ZAF:710:
 #: CountryCode.cc:456
-#, fuzzy
 msgid "Zambia"
 msgstr "ហ្សាំប៊ី"
 
 #. :ZMB:894:
 #: CountryCode.cc:457
-#, fuzzy
 msgid "Zimbabwe"
 msgstr "ហ្ស៊ីមបាវ៉េ"
 
 #: LanguageCode.cc:145
 msgid "Unknown language: "
-msgstr "មិន​ស្គាល់​ភាសា ៖"
+msgstr "មិន​ស្គាល់​ភាសា ៖ "
 
 #. language code: aar aa
 #: LanguageCode.cc:238
@@ -2225,7 +2039,6 @@ msgstr "អារ៉ាប៉ាអូ"
 
 #. language code: art
 #: LanguageCode.cc:292
-#, fuzzy
 msgid "Artificial (Other)"
 msgstr "សិប្បនិម្មិត (ផ្សេង​ទៀត)"
 
@@ -4450,9 +4263,8 @@ msgid "Zuni"
 msgstr "ហ្ស៊ូនី"
 
 #: ZYppFactory.cc:279 ZYppFactory.cc:334
-#, fuzzy
 msgid "Cannot acquire zypp lock."
-msgstr "មិន​អាច​ទាមទារ​ចាក់​សោរ zypp ។"
+msgstr "មិន​អាច​ទទួល​សោរ zypp បានទេ ។"
 
 #. Translator: %s = name of an rpm package. A list of diffs follows
 #. this message.
@@ -4572,32 +4384,27 @@ msgid "created backup %s"
 msgstr "បាន​បង្កើត​ព័ត៌មាន​បម្រុង %s"
 
 #: target/TargetImpl.cc:630
-#, fuzzy
 msgid "Target commit aborted by user."
-msgstr "គោលដៅ​ដាក់ស្នើ​ត្រូវ​បាន​បដិសេធ​ដោយ​អ្នក​ប្រើ ។"
+msgstr "ការ​ដាក់ស្នើ​ទៅ​កាន់​គោលដៅ​ត្រូវបាន​បោះបង់​ដោយ​អ្នក​ប្រើ ។"
 
 #: target/store/XMLFilesBackend.cc:925 target/store/XMLFilesBackend.cc:932
 #: source/yum/YUMScriptImpl.cc:78 source/yum/YUMScriptImpl.cc:112
-#, fuzzy
 msgid "Can't write the patch script to a temporary file."
-msgstr "មិន​អាច​សរសេរ​ស្គ្រីប​បំណះ​ទៅ​ឯកសារ​បណ្ដោះ​អាសន្ន ។"
+msgstr "មិនអាច​សរសេរ​ស្គ្រីប​បំណះ​​ទៅ​កាន់​ឯកសារ​បណ្ដោះ​អាសន្ន​បានទេ ។"
 
 #: source/yum/YUMScriptImpl.cc:89 source/yum/YUMScriptImpl.cc:123
-#, fuzzy
 msgid "Failed check for the script file check sum"
-msgstr "ការ​ពិនិត្យ​ដែល​បរជ័យ​សម្រាប់​ឆេកសាំ​ឯកសារ​ស្គ្រីប"
+msgstr "បរាជ័យ​ក្នុង​ការ​ពិនិត្យ​រក​ឆេកសាំ​ឯកសារ​ស្គ្រីប ។"
 
 #: source/yum/YUMSourceImpl.cc:247
-#, fuzzy
 msgid "Signed repomd.xml file fails signature check"
-msgstr "ឯកសារ repomd.xml ដែល​បាន​ចុះ​ហត្ថលេខា​ធ្វើ​ឲ្យ​ការ​ពិនិត្យ​ហត្ថលេខា​បរជ័យ"
+msgstr "ឯកសារ repomd.xml ដែលបាន​ចុះហត្ថលេខា​បរាជ័យ​ក្នុងការ​ពិនិត្យ​ហត្ថលេខា"
 
 #: source/SourceImpl.cc:384
-#, fuzzy
 msgid " miss checksum."
 msgstr " បាត់​ឆេកសាំ ។"
 
 #: source/SourceImpl.cc:390
-#, fuzzy
 msgid " fails checksum verification."
-msgstr "បរាជ័យ​ការ​ផ្ទៀងផ្ទាត់​ឆេកសាំ ។"
+msgstr " បរាជ័យ​ក្នុងការ​ផ្ទៀងផ្ទាត់​ឆេកសាំ ។"
+

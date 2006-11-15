@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-10-26 09:41+0200\n"
-"PO-Revision-Date: 2006-10-25 16:33+0200\n"
+"POT-Creation-Date: 2006-11-13 10:32+0100\n"
+"PO-Revision-Date: 2006-11-13 21:46+0300\n"
 "Last-Translator: Andrius Štikonas <stikonas@gmail.com>\n"
 "Language-Team: Lithuanian <i18n@suse.de>\n"
 "MIME-Version: 1.0\n"
@@ -106,18 +106,18 @@ msgstr "neįdiegti %s"
 msgid "Do not install or delete concerning resolvables"
 msgstr "%1 konfliktuoja su %2"
 
-#: solver/detail/ProblemSolutionUnlock.cc:50
+#: solver/detail/ProblemSolutionUnlock.cc:70
 #, fuzzy
 msgid "unlock all resolvables"
 msgstr "%1 konfliktuoja su %2"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: solver/detail/ProblemSolutionUnlock.cc:59
+#: solver/detail/ProblemSolutionUnlock.cc:83
 #, c-format
 msgid "unlock %s"
 msgstr "atrakinti %s"
 
-#: solver/detail/ProblemSolutionUnlock.cc:68
+#: solver/detail/ProblemSolutionUnlock.cc:92
 #, fuzzy
 msgid "Unlock these resolvables"
 msgstr "%1 konfliktuoja su %2"
@@ -346,7 +346,8 @@ msgstr "Nėra alternatyvių įdiegtų %s tiekėjų"
 #. Translator: 1.%s = name of package,patch....
 #. TranslatorExample: for bar
 #. TranslatorExplanation: extension to previous message if we know what the resolvable is
-#: solver/detail/ResolverInfoMisc.cc:298 solver/detail/ResolverInfoMisc.cc:323
+#: solver/detail/ResolverInfoMisc.cc:298
+#: solver/detail/ResolverInfoMisc.cc:323
 #, c-format
 msgid "for %s"
 msgstr "%s"
@@ -612,7 +613,7 @@ msgid "Due problems which are described above/below this resolution will not sol
 msgstr ""
 
 #: solver/detail/Resolver_problems.cc:342
-#: solver/detail/Resolver_problems.cc:662
+#: solver/detail/Resolver_problems.cc:666
 #, c-format
 msgid "Cannot install %s because it is conflicting with %s"
 msgstr ""
@@ -648,49 +649,49 @@ msgid "%s cannot be installed due to missing dependencies"
 msgstr "Netenkinami ryšiai:"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: solver/detail/Resolver_problems.cc:548
+#: solver/detail/Resolver_problems.cc:550
 #, c-format
 msgid "%s fulfil dependencies of %s but will be uninstalled"
 msgstr ""
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: solver/detail/Resolver_problems.cc:558
+#: solver/detail/Resolver_problems.cc:560
 #, fuzzy, c-format
 msgid "No need to install %s"
 msgstr "reikia perinstaliuoti"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: solver/detail/Resolver_problems.cc:566
+#: solver/detail/Resolver_problems.cc:568
 #, c-format
 msgid "Cannot install %s to fulfil the dependencies of %s"
 msgstr ""
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: solver/detail/Resolver_problems.cc:581
+#: solver/detail/Resolver_problems.cc:583
 #, c-format
 msgid "Cannot be install %s to fulfil the dependencies of %s"
 msgstr ""
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: solver/detail/Resolver_problems.cc:618
-#: solver/detail/Resolver_problems.cc:626
+#: solver/detail/Resolver_problems.cc:620
+#: solver/detail/Resolver_problems.cc:628
 #, c-format
 msgid "%s will not be uninstalled cause it is still required"
 msgstr ""
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: solver/detail/Resolver_problems.cc:637
+#: solver/detail/Resolver_problems.cc:639
 #, c-format
 msgid "%s obsoletes %s. But %s cannot be deleted because it is locked."
 msgstr ""
 
-#: solver/detail/Resolver_problems.cc:666
+#: solver/detail/Resolver_problems.cc:670
 #, c-format
 msgid "Cannot install %s because it is conflicting"
 msgstr ""
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: solver/detail/Resolver_problems.cc:685
+#: solver/detail/Resolver_problems.cc:689
 #, fuzzy, c-format
 msgid "%s is uninstallable due to conflicts with %s"
 msgstr "%1 konfliktuoja su %2"
@@ -701,7 +702,8 @@ msgstr "Nežinoma šalis: "
 
 #. Defined CountryCode constants
 #. Defined LanguageCode constants
-#: CountryCode.cc:215 LanguageCode.cc:225
+#: CountryCode.cc:215
+#: LanguageCode.cc:225
 #, fuzzy
 msgid "noCode"
 msgstr "Ko&das"
@@ -914,7 +916,8 @@ msgstr "Kokosų (Kilingo) salos"
 
 #. :CCK:166:
 #. :CAF:140:
-#: CountryCode.cc:255 CountryCode.cc:257
+#: CountryCode.cc:255
+#: CountryCode.cc:257
 msgid "Congo"
 msgstr "Kongas"
 
@@ -1575,7 +1578,8 @@ msgstr "Nepalas"
 
 #. :NPL:524:
 #. language code: nau na
-#: CountryCode.cc:380 LanguageCode.cc:858
+#: CountryCode.cc:380
+#: LanguageCode.cc:858
 msgid "Nauru"
 msgstr "Nauru"
 
@@ -1826,7 +1830,8 @@ msgstr "Tadžikistanas"
 
 #. :TJK:762:
 #. language code: tkl
-#: CountryCode.cc:428 LanguageCode.cc:1122
+#: CountryCode.cc:428
+#: LanguageCode.cc:1122
 msgid "Tokelau"
 msgstr "Tokelau"
 
@@ -1863,7 +1868,8 @@ msgstr "Trinidadas ir Tobagas"
 
 #. :TTO:780:
 #. language code: tvl
-#: CountryCode.cc:435 LanguageCode.cc:1152
+#: CountryCode.cc:435
+#: LanguageCode.cc:1152
 msgid "Tuvalu"
 msgstr "Tuvalu"
 
@@ -2064,7 +2070,8 @@ msgid "Akkadian"
 msgstr "Albanų"
 
 #. language code: alb sqi sq
-#: LanguageCode.cc:262 LanguageCode.cc:264
+#: LanguageCode.cc:262
+#: LanguageCode.cc:264
 msgid "Albanian"
 msgstr "Albanų"
 
@@ -2093,7 +2100,7 @@ msgstr "Automatinė"
 #. language code: ang
 #: LanguageCode.cc:274
 msgid "English, Old (ca.450-1100)"
-msgstr ""
+msgstr "Anglų, Senoji (apie 450-1100)"
 
 #. language code: apa
 #: LanguageCode.cc:276
@@ -2118,7 +2125,8 @@ msgid "Aragonese"
 msgstr "Farerų"
 
 #. language code: arm hye hy
-#: LanguageCode.cc:284 LanguageCode.cc:286
+#: LanguageCode.cc:284
+#: LanguageCode.cc:286
 msgid "Armenian"
 msgstr "Armėnų"
 
@@ -2229,7 +2237,8 @@ msgid "Balinese"
 msgstr "Pagrindai"
 
 #. language code: baq eus eu
-#: LanguageCode.cc:326 LanguageCode.cc:328
+#: LanguageCode.cc:326
+#: LanguageCode.cc:328
 msgid "Basque"
 msgstr "Baskų"
 
@@ -2348,7 +2357,8 @@ msgid "Bulgarian"
 msgstr "Bulgarų"
 
 #. language code: bur mya my
-#: LanguageCode.cc:372 LanguageCode.cc:374
+#: LanguageCode.cc:372
+#: LanguageCode.cc:374
 msgid "Burmese"
 msgstr "Birmiečių"
 
@@ -2421,7 +2431,8 @@ msgid "Chagatai"
 msgstr "Šanchajus"
 
 #. language code: chi zho zh
-#: LanguageCode.cc:400 LanguageCode.cc:402
+#: LanguageCode.cc:400
+#: LanguageCode.cc:402
 msgid "Chinese"
 msgstr "Kinų"
 
@@ -2542,7 +2553,8 @@ msgid "Cushitic (Other)"
 msgstr ""
 
 #. language code: cze ces cs
-#: LanguageCode.cc:446 LanguageCode.cc:448
+#: LanguageCode.cc:446
+#: LanguageCode.cc:448
 msgid "Czech"
 msgstr "Čekų"
 
@@ -2626,7 +2638,8 @@ msgid "Dutch, Middle (ca.1050-1350)"
 msgstr ""
 
 #. language code: dut nld nl
-#: LanguageCode.cc:478 LanguageCode.cc:480
+#: LanguageCode.cc:478
+#: LanguageCode.cc:480
 msgid "Dutch"
 msgstr "Olandų"
 
@@ -2738,7 +2751,8 @@ msgid "Fon"
 msgstr "Šriftai"
 
 #. language code: fre fra fr
-#: LanguageCode.cc:522 LanguageCode.cc:524
+#: LanguageCode.cc:522
+#: LanguageCode.cc:524
 msgid "French"
 msgstr "Prancūzų"
 
@@ -2794,13 +2808,15 @@ msgid "Germanic (Other)"
 msgstr "Vokiečių (su mirusiais klavišais)"
 
 #. language code: geo kat ka
-#: LanguageCode.cc:544 LanguageCode.cc:546
+#: LanguageCode.cc:544
+#: LanguageCode.cc:546
 #, fuzzy
 msgid "Georgian"
 msgstr "Gruzija"
 
 #. language code: ger deu de
-#: LanguageCode.cc:548 LanguageCode.cc:550
+#: LanguageCode.cc:548
+#: LanguageCode.cc:550
 msgid "German"
 msgstr "Vokiečių"
 
@@ -2874,7 +2890,8 @@ msgid "Greek, Ancient (to 1453)"
 msgstr "Graikų, senovės (iki 1453)"
 
 #. language code: gre ell el
-#: LanguageCode.cc:578 LanguageCode.cc:580
+#: LanguageCode.cc:578
+#: LanguageCode.cc:580
 msgid "Greek, Modern (1453-)"
 msgstr "Graikų, šiuolaikinė (1453-)"
 
@@ -2990,7 +3007,8 @@ msgid "Igbo"
 msgstr "Ignoruoti"
 
 #. language code: ice isl is
-#: LanguageCode.cc:622 LanguageCode.cc:624
+#: LanguageCode.cc:622
+#: LanguageCode.cc:624
 msgid "Icelandic"
 msgstr "Islandų"
 
@@ -3402,7 +3420,8 @@ msgid "lushai"
 msgstr "Thai"
 
 #. language code: mac mkd mk
-#: LanguageCode.cc:772 LanguageCode.cc:774
+#: LanguageCode.cc:772
+#: LanguageCode.cc:774
 msgid "Macedonian"
 msgstr "Makedonų"
 
@@ -3449,7 +3468,8 @@ msgid "Mandingo"
 msgstr "Įspėjimas"
 
 #. language code: mao mri mi
-#: LanguageCode.cc:790 LanguageCode.cc:792
+#: LanguageCode.cc:790
+#: LanguageCode.cc:792
 msgid "Maori"
 msgstr "Maorių"
 
@@ -3471,7 +3491,8 @@ msgid "Masai"
 msgstr "Malta"
 
 #. language code: may msa ms
-#: LanguageCode.cc:800 LanguageCode.cc:802
+#: LanguageCode.cc:800
+#: LanguageCode.cc:802
 msgid "Malay"
 msgstr "Malajų"
 
@@ -3845,15 +3866,15 @@ msgid "Persian, Old (ca.600-400 B.C.)"
 msgstr ""
 
 #. language code: per fas fa
-#: LanguageCode.cc:938 LanguageCode.cc:940
+#: LanguageCode.cc:938
+#: LanguageCode.cc:940
 msgid "Persian"
 msgstr "Persų"
 
 #. language code: phi
 #: LanguageCode.cc:942
-#, fuzzy
 msgid "Philippine (Other)"
-msgstr "Filipinai"
+msgstr "Filipinų (Kita)"
 
 #. language code: phn
 #: LanguageCode.cc:944
@@ -3939,7 +3960,8 @@ msgid "Romany"
 msgstr "Rumunija"
 
 #. language code: rum ron ro
-#: LanguageCode.cc:974 LanguageCode.cc:976
+#: LanguageCode.cc:974
+#: LanguageCode.cc:976
 msgid "Romanian"
 msgstr "Rumunų"
 
@@ -4006,7 +4028,8 @@ msgid "Santali"
 msgstr "Skenavimo stotis"
 
 #. language code: scc srp sr
-#: LanguageCode.cc:1000 LanguageCode.cc:1002
+#: LanguageCode.cc:1000
+#: LanguageCode.cc:1002
 msgid "Serbian"
 msgstr "Serbų"
 
@@ -4023,7 +4046,8 @@ msgid "Scots"
 msgstr "Pietūs"
 
 #. language code: scr hrv hr
-#: LanguageCode.cc:1008 LanguageCode.cc:1010
+#: LanguageCode.cc:1008
+#: LanguageCode.cc:1010
 msgid "Croatian"
 msgstr "Kroatų"
 
@@ -4083,7 +4107,8 @@ msgid "Slavic (Other)"
 msgstr ""
 
 #. language code: slo slk sk
-#: LanguageCode.cc:1032 LanguageCode.cc:1034
+#: LanguageCode.cc:1032
+#: LanguageCode.cc:1034
 msgid "Slovak"
 msgstr "Slovakų"
 
@@ -4305,7 +4330,8 @@ msgstr "Thai"
 
 # TW
 #. language code: tib bod bo
-#: LanguageCode.cc:1112 LanguageCode.cc:1114
+#: LanguageCode.cc:1112
+#: LanguageCode.cc:1114
 msgid "Tibetan"
 msgstr "Tibeto"
 
@@ -4508,7 +4534,8 @@ msgid "Washo"
 msgstr "Velšo"
 
 #. language code: wel cym cy
-#: LanguageCode.cc:1192 LanguageCode.cc:1194
+#: LanguageCode.cc:1192
+#: LanguageCode.cc:1194
 msgid "Welsh"
 msgstr "Velšo"
 
@@ -4602,8 +4629,18 @@ msgstr "Zulu"
 msgid "Zuni"
 msgstr "Tunisas"
 
-#: ZYppFactory.cc:279 ZYppFactory.cc:334
+#: ZYppFactory.cc:279
+#: ZYppFactory.cc:334
 msgid "Cannot acquire zypp lock."
+msgstr ""
+
+#: SourceManager.h:42
+#, fuzzy
+msgid "Unable to restore all sources."
+msgstr "Neįmanoma pridėti paslaugos"
+
+#: SourceManager.h:68
+msgid "At least one source already registered, cannot restore sources from persistent store."
 msgstr ""
 
 #. Translator: %s = name of an rpm package. A list of diffs follows
@@ -4648,7 +4685,8 @@ msgstr ""
 msgid "%s install failed"
 msgstr "%s įdiegimas nesėkmingas"
 
-#: target/rpm/RpmDb.cc:1974 target/rpm/RpmDb.cc:2092
+#: target/rpm/RpmDb.cc:1974
+#: target/rpm/RpmDb.cc:2092
 #, fuzzy
 msgid "rpm output:"
 msgstr ""
@@ -4662,7 +4700,8 @@ msgstr ""
 msgid "%s installed ok"
 msgstr "%s įdiegtas sėkmingai"
 
-#: target/rpm/RpmDb.cc:1983 target/rpm/RpmDb.cc:2100
+#: target/rpm/RpmDb.cc:1983
+#: target/rpm/RpmDb.cc:2100
 #, fuzzy
 msgid "Additional rpm output:"
 msgstr "P&apildomos ipppd parinktys"
@@ -4728,25 +4767,114 @@ msgstr "padaryta %s atsarginė kopija"
 msgid "Target commit aborted by user."
 msgstr ""
 
-#: target/store/XMLFilesBackend.cc:925 target/store/XMLFilesBackend.cc:932
-#: source/yum/YUMScriptImpl.cc:78 source/yum/YUMScriptImpl.cc:112
+#: target/store/XMLFilesBackend.cc:1009
+#: target/store/XMLFilesBackend.cc:1016
+#: source/yum/YUMScriptImpl.cc:78
+#: source/yum/YUMScriptImpl.cc:112
 #, fuzzy
 msgid "Can't write the patch script to a temporary file."
 msgstr "negaliu rašyti į laikiną bylą „%1“"
 
-#: source/yum/YUMScriptImpl.cc:89 source/yum/YUMScriptImpl.cc:123
+#: source/yum/YUMScriptImpl.cc:89
+#: source/yum/YUMScriptImpl.cc:123
 msgid "Failed check for the script file check sum"
+msgstr ""
+
+#. end of single patch parsing
+#. end of patches file parsing
+#. end of copying
+#: source/yum/YUMSourceImpl.cc:216
+#: source/yum/YUMSourceImpl.cc:241
+msgid "Reading index files"
 msgstr ""
 
 #: source/yum/YUMSourceImpl.cc:247
 msgid "Signed repomd.xml file fails signature check"
 msgstr ""
 
-#: source/SourceImpl.cc:384
+#. TranslatorExplanation %s = product file
+#: source/yum/YUMSourceImpl.cc:464
+#: source/yum/YUMSourceImpl.cc:476
+#: source/yum/YUMSourceImpl.cc:482
+#: source/yum/YUMSourceImpl.cc:490
+#, c-format
+msgid "Reading product from %s"
+msgstr ""
+
+#. TranslatorExplanation %s = package file list
+#: source/yum/YUMSourceImpl.cc:520
+#: source/yum/YUMSourceImpl.cc:535
+#: source/yum/YUMSourceImpl.cc:541
+#: source/yum/YUMSourceImpl.cc:549
+#, c-format
+msgid "Reading filelist from %s"
+msgstr ""
+
+#. TranslatorExplanation %s = packages file
+#: source/yum/YUMSourceImpl.cc:565
+#: source/yum/YUMSourceImpl.cc:605
+#: source/yum/YUMSourceImpl.cc:611
+#: source/yum/YUMSourceImpl.cc:619
+#, c-format
+msgid "Reading packages from %s"
+msgstr ""
+
+#. TranslatorExplanation %s = selection metadata file
+#: source/yum/YUMSourceImpl.cc:643
+#: source/yum/YUMSourceImpl.cc:655
+#: source/yum/YUMSourceImpl.cc:661
+#: source/yum/YUMSourceImpl.cc:669
+#, c-format
+msgid "Reading selection from %s"
+msgstr ""
+
+#. TranslatorExplanation %s = pattern metadata file
+#: source/yum/YUMSourceImpl.cc:693
+#: source/yum/YUMSourceImpl.cc:705
+#: source/yum/YUMSourceImpl.cc:711
+#: source/yum/YUMSourceImpl.cc:719
+#, c-format
+msgid "Reading pattern from %s"
+msgstr ""
+
+#. TranslatorExplanation %s = patches index file
+#: source/yum/YUMSourceImpl.cc:746
+#: source/yum/YUMSourceImpl.cc:758
+#: source/yum/YUMSourceImpl.cc:764
+#: source/yum/YUMSourceImpl.cc:772
+#, c-format
+msgid "Reading patches index %s"
+msgstr ""
+
+#. TranslatorExplanation %s = patch metadata file
+#: source/yum/YUMSourceImpl.cc:795
+#: source/yum/YUMSourceImpl.cc:812
+#: source/yum/YUMSourceImpl.cc:818
+#: source/yum/YUMSourceImpl.cc:827
+#, fuzzy, c-format
+msgid "Reading patch %s"
+msgstr "Slepiamos pataisos"
+
+#: source/susetags/SuseTagsImpl.cc:641
+#: source/susetags/SuseTagsImpl.cc:651
+#: source/susetags/SuseTagsImpl.cc:654
+#, fuzzy
+msgid "Reading packages file"
+msgstr "Pašalinti paketus"
+
+#. TranslatorExplanation %s = language name
+#: source/susetags/SuseTagsImpl.cc:704
+#: source/susetags/SuseTagsImpl.cc:708
+#: source/susetags/SuseTagsImpl.cc:722
+#, c-format
+msgid "Reading translation: %s"
+msgstr ""
+
+#: source/SourceImpl.cc:391
 msgid " miss checksum."
 msgstr ""
 
-#: source/SourceImpl.cc:390
+#: source/SourceImpl.cc:397
 msgid " fails checksum verification."
 msgstr ""
 
@@ -4756,7 +4884,6 @@ msgstr ""
 #, fuzzy
 #~ msgid "ignore architecture"
 #~ msgstr "Įkrovos architektūra"
-
 #~ msgid "unknown"
 #~ msgstr "nežinomas"
 
@@ -4775,3 +4902,4 @@ msgstr ""
 #, fuzzy
 #~ msgid "to be uninstalled"
 #~ msgstr "reikia perinstaliuoti"
+

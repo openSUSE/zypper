@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypp.bg\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-10-26 09:41+0200\n"
-"PO-Revision-Date: 2006-02-20 13:13+0100\n"
+"POT-Creation-Date: 2006-11-13 10:32+0100\n"
+"PO-Revision-Date: 2006-11-09 18:05+0200\n"
 "Last-Translator: Borislav Mitev <morbid_viper@tkzs.org>\n"
 "Language-Team: Bulgarian <bg@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -23,55 +23,52 @@ msgstr ""
 "X-Generator: KBabel 1.10.2\n"
 
 #: solver/detail/ProblemSolutionIgnore.cc:54
-#, fuzzy
 msgid "Ignore this requirement just here"
-msgstr "Пренебрегване на тези изисквания"
+msgstr "Пренебрегване на това изискване само тук"
 
 #: solver/detail/ProblemSolutionIgnore.cc:63
-#, fuzzy
 msgid "Ignore this requirement generally"
-msgstr "Пренебрегване на тези изисквания"
+msgstr "Пренебрегване на това изискване"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
 #: solver/detail/ProblemSolutionIgnore.cc:75
 #, c-format
 msgid "Install %s although it would change the architecture"
-msgstr ""
+msgstr "Инсталиране на %s, въпреки че ще промени архитектурата"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
 #: solver/detail/ProblemSolutionIgnore.cc:78
 #, c-format
 msgid "%s provides this dependency but would changed the architecture of the installed item"
-msgstr ""
+msgstr "%s задоволява тази зависимост, но ще промени архитектурата на инсталирания пакет"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
 #: solver/detail/ProblemSolutionIgnore.cc:90
 #: solver/detail/ProblemSolutionIgnore.cc:102
-#, fuzzy, c-format
+#, c-format
 msgid "Ignore this conflict of %s"
 msgstr "Пренебрегване на конфликта на %s"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
 #: solver/detail/ProblemSolutionIgnore.cc:117
-#, fuzzy, c-format
+#, c-format
 msgid "Ignore the obsolete %s in %s"
-msgstr "Пренебрегване на конфликта на %s"
+msgstr "Пренебрегване на остарелите %s в %s"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
 #: solver/detail/ProblemSolutionIgnore.cc:130
 #, c-format
 msgid "Ignore that %s is already set to install"
-msgstr ""
+msgstr "Пренебрегване на това, че %s е зададен вече за инсталиране"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
 #: solver/detail/ProblemSolutionInstall.cc:54
 #: solver/detail/ProblemSolutionInstall.cc:56
-#, fuzzy, c-format
+#, c-format
 msgid "install %s"
-msgstr "Инсталиране на %1"
+msgstr "инсталиране на %s"
 
 #: solver/detail/ProblemSolutionInstall.cc:66
-#, fuzzy
 msgid "Install missing resolvables"
 msgstr "Инсталиране на липсващите пакети"
 
@@ -80,49 +77,45 @@ msgstr "Инсталиране на липсващите пакети"
 #: solver/detail/ProblemSolutionKeep.cc:55
 #, c-format
 msgid "keep %s"
-msgstr ""
+msgstr "запазване на %s"
 
 #: solver/detail/ProblemSolutionKeep.cc:65
-#, fuzzy
 msgid "Keep resolvables"
-msgstr "Инсталиране на липсващите пакети"
+msgstr "Запазване на пакетите"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
 #: solver/detail/ProblemSolutionUninstall.cc:64
 #: solver/detail/ProblemSolutionUninstall.cc:66
 #: solver/detail/Resolver_problems.cc:408
 #: solver/detail/Resolver_problems.cc:418
-#, fuzzy, c-format
+#, c-format
 msgid "delete %s"
-msgstr "Изтриване на %1"
+msgstr "изтриване на %s"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
 #: solver/detail/ProblemSolutionUninstall.cc:69
 #: solver/detail/ProblemSolutionUninstall.cc:71
 #: solver/detail/Resolver_problems.cc:411
 #: solver/detail/Resolver_problems.cc:421
-#, fuzzy, c-format
+#, c-format
 msgid "do not install %s"
-msgstr "%s не може да бъде инсталиран"
+msgstr "без инсталиране на %s"
 
 #: solver/detail/ProblemSolutionUninstall.cc:81
-#, fuzzy
 msgid "Do not install or delete concerning resolvables"
-msgstr "Премахване на конфликтните пакети"
+msgstr "Без инсталиране или премахване на конфликтните пакети"
 
-#: solver/detail/ProblemSolutionUnlock.cc:50
-#, fuzzy
+#: solver/detail/ProblemSolutionUnlock.cc:70
 msgid "unlock all resolvables"
-msgstr "Отключване на тези пакети"
+msgstr "отключване на всички пакети"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: solver/detail/ProblemSolutionUnlock.cc:59
-#, fuzzy, c-format
+#: solver/detail/ProblemSolutionUnlock.cc:83
+#, c-format
 msgid "unlock %s"
-msgstr "Отключване на %s"
+msgstr "отключване на %s"
 
-#: solver/detail/ProblemSolutionUnlock.cc:68
-#, fuzzy
+#: solver/detail/ProblemSolutionUnlock.cc:92
 msgid "Unlock these resolvables"
 msgstr "Отключване на тези пакети"
 
@@ -169,9 +162,9 @@ msgstr "%s зависи от %s"
 #. TranslatorExplanation: 1.%s name of package, 2.%s list of names
 #. TranslatorExplanation: 1.%s is dependent on list of names
 #: solver/detail/ResolverInfoDependsOn.cc:69
-#, fuzzy, c-format
+#, c-format
 msgid "%s dependend on %s"
-msgstr "%s зависи от %s"
+msgstr "от %s зависи %s"
 
 #: solver/detail/ResolverInfoMisc.cc:56
 msgid ", Action: "
@@ -219,7 +212,7 @@ msgstr "съобщение"
 #. Translator: Notation for atom (part of a patch)
 #: solver/detail/ResolverInfoMisc.cc:118
 msgid "atom"
-msgstr ""
+msgstr "атом"
 
 #. Translator: Notation for computer system
 #: solver/detail/ResolverInfoMisc.cc:122
@@ -274,9 +267,9 @@ msgstr "%s не може да се инсталира след като вече
 #. other_capability() =
 #. Translator: %s = name of package,patch,...
 #: solver/detail/ResolverInfoMisc.cc:190
-#, fuzzy, c-format
+#, c-format
 msgid "Can't install %s, since %s is already marked as needing to be installed"
-msgstr "Не може да се инсталира %s след като вече е маркиран за деинсталиране"
+msgstr "Не може да се инсталира %s след като %s вече е маркиран за инсталиране"
 
 #. Translator: %s = name of patch,product
 #: solver/detail/ResolverInfoMisc.cc:198
@@ -402,9 +395,9 @@ msgstr "%s доставя %s, но е заключен."
 
 #. Translator: 1.%s = name of package,patch,...; 2.%s = dependency;
 #: solver/detail/ResolverInfoMisc.cc:432
-#, fuzzy, c-format
+#, c-format
 msgid "%s provides %s, but has another architecture."
-msgstr "%s доставя %s, но е заключен."
+msgstr "%s доставя %s, но има друга архитектура."
 
 #. Translator: 1.%s = dependency. 2.%s name of package, patch, ...
 #: solver/detail/ResolverInfoMisc.cc:450
@@ -494,7 +487,7 @@ msgstr "%s е необходим на %s"
 #. TranslatorExplanation: 1.%s name of package, 2.%s list of names
 #. TranslatorExplanation: 1.%s is needed by multiple others
 #: solver/detail/ResolverInfoNeededBy.cc:70
-#, fuzzy, c-format
+#, c-format
 msgid "%s needed by %s"
 msgstr "%s е необходим на %s"
 
@@ -507,7 +500,7 @@ msgstr "%s е заменен от %s"
 #. TranslatorExplanation: 1.%s name of package, 2.%s list of names
 #. TranslatorExplanation: 1.%s is replaced by others
 #: solver/detail/ResolverInfoObsoletes.cc:69
-#, fuzzy, c-format
+#, c-format
 msgid "%s replaced by %s"
 msgstr "%s е заменен от %s"
 
@@ -621,7 +614,7 @@ msgid "Due problems which are described above/below this resolution will not sol
 msgstr "Поради проблемите, които са показани по-долу/горе сега няма да могат да сеудовлетворят всички зависимости."
 
 #: solver/detail/Resolver_problems.cc:342
-#: solver/detail/Resolver_problems.cc:662
+#: solver/detail/Resolver_problems.cc:666
 #, c-format
 msgid "Cannot install %s because it is conflicting with %s"
 msgstr "%s не може да бъде инсталиран, защото е в конфликт с %s"
@@ -634,75 +627,75 @@ msgstr "%s не е инсталиран и не може да бъде марк�
 
 #. TranslatorExplanation %s = name of package,patch,...
 #: solver/detail/Resolver_problems.cc:370
-#, fuzzy, c-format
+#, c-format
 msgid "Cannot install %s due to dependency problems"
 msgstr "%s не може да бъде инсталиран поради пробем със зависимостите"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
 #: solver/detail/Resolver_problems.cc:434
-#, fuzzy, c-format
+#, c-format
 msgid "%s has unfulfilled requirements"
 msgstr "%s има незадоволени изискания"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
 #: solver/detail/Resolver_problems.cc:472
-#, fuzzy, c-format
+#, c-format
 msgid "%s has missing dependencies"
-msgstr "%s не може да бъде инсталиран поради липсващи зависимости"
+msgstr "%s има липсващи зависимости"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
 #: solver/detail/Resolver_problems.cc:510
-#, fuzzy, c-format
+#, c-format
 msgid "%s cannot be installed due to missing dependencies"
 msgstr "%s не може да бъде инсталиран поради липсващи зависимости"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: solver/detail/Resolver_problems.cc:548
+#: solver/detail/Resolver_problems.cc:550
 #, c-format
 msgid "%s fulfil dependencies of %s but will be uninstalled"
 msgstr "%s задоволява зависимостите на %s, но ще бъде деинсталиран"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: solver/detail/Resolver_problems.cc:558
+#: solver/detail/Resolver_problems.cc:560
 #, c-format
 msgid "No need to install %s"
 msgstr "Няма нужда от инсталиране на %s"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: solver/detail/Resolver_problems.cc:566
+#: solver/detail/Resolver_problems.cc:568
 #, c-format
 msgid "Cannot install %s to fulfil the dependencies of %s"
 msgstr "%s не може да бъде инсталиран за задоволяване на зависимостите на %s"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: solver/detail/Resolver_problems.cc:581
+#: solver/detail/Resolver_problems.cc:583
 #, c-format
 msgid "Cannot be install %s to fulfil the dependencies of %s"
 msgstr "%s не може да бъде инсталиран за задоволяване на зависимостите на %s"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: solver/detail/Resolver_problems.cc:618
-#: solver/detail/Resolver_problems.cc:626
+#: solver/detail/Resolver_problems.cc:620
+#: solver/detail/Resolver_problems.cc:628
 #, c-format
 msgid "%s will not be uninstalled cause it is still required"
 msgstr "%s няма да бъде деинсталиран, защото все още е необходим"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: solver/detail/Resolver_problems.cc:637
+#: solver/detail/Resolver_problems.cc:639
 #, c-format
 msgid "%s obsoletes %s. But %s cannot be deleted because it is locked."
-msgstr ""
+msgstr "%s прави ненужен %s, но %s не може да бъде изтрит, защото е заключен."
 
-#: solver/detail/Resolver_problems.cc:666
-#, fuzzy, c-format
+#: solver/detail/Resolver_problems.cc:670
+#, c-format
 msgid "Cannot install %s because it is conflicting"
-msgstr "%s не може да бъде инсталиран, защото е в конфликт с %s"
+msgstr "%s не може да бъде инсталиран, защото е в конфликт"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: solver/detail/Resolver_problems.cc:685
-#, fuzzy, c-format
+#: solver/detail/Resolver_problems.cc:689
+#, c-format
 msgid "%s is uninstallable due to conflicts with %s"
-msgstr "%s е деинсталируем поради конфликта с %s"
+msgstr "%s е недеинсталируем поради конфликта с %s"
 
 #: CountryCode.cc:135
 msgid "Unknown country: "
@@ -711,9 +704,8 @@ msgstr "Неизвестна държава: "
 #. Defined CountryCode constants
 #. Defined LanguageCode constants
 #: CountryCode.cc:215 LanguageCode.cc:225
-#, fuzzy
 msgid "noCode"
-msgstr "Код"
+msgstr "без код"
 
 # AD
 #: CountryCode.cc:217
@@ -2140,7 +2132,6 @@ msgstr "Алют"
 
 #. language code: alg
 #: LanguageCode.cc:268
-#, fuzzy
 msgid "Algonquian languages"
 msgstr "Алгонквиански езици"
 
@@ -2161,7 +2152,6 @@ msgstr "Английски, стар (ок. 450-1100)"
 
 #. language code: apa
 #: LanguageCode.cc:276
-#, fuzzy
 msgid "Apache languages"
 msgstr "Апачи езици"
 
@@ -2218,13 +2208,11 @@ msgstr "Астурийски"
 
 #. language code: ath
 #: LanguageCode.cc:300
-#, fuzzy
 msgid "Athapascan languages"
 msgstr "Атапаскан езици"
 
 #. language code: aus
 #: LanguageCode.cc:302
-#, fuzzy
 msgid "Australian languages"
 msgstr "Австралийски езици"
 
@@ -2262,7 +2250,6 @@ msgstr "Банда"
 
 #. language code: bai
 #: LanguageCode.cc:316
-#, fuzzy
 msgid "Bamileke languages"
 msgstr "Бамилеке езици"
 
@@ -2483,7 +2470,6 @@ msgstr "Мари"
 
 #. language code: chn
 #: LanguageCode.cc:408
-#, fuzzy
 msgid "Chinook jargon"
 msgstr "Чинук жаргон"
 
@@ -2519,7 +2505,6 @@ msgstr "Кайенски"
 
 #. language code: cmc
 #: LanguageCode.cc:422
-#, fuzzy
 msgid "Chamic languages"
 msgstr "Чамик езици"
 
@@ -2540,19 +2525,16 @@ msgstr "Корсикански"
 
 #. language code: cpe
 #: LanguageCode.cc:430
-#, fuzzy
 msgid "Creoles and pidgins, English based (Other)"
 msgstr "Креолски и пидгински, базиран на английски (друг)"
 
 #. language code: cpf
 #: LanguageCode.cc:432
-#, fuzzy
 msgid "Creoles and pidgins, French-based (Other)"
 msgstr "Креолски и пидгински, базиран на френски (друг)"
 
 #. language code: cpp
 #: LanguageCode.cc:434
-#, fuzzy
 msgid "Creoles and pidgins, Portuguese-based (Other)"
 msgstr "Креолски и пидгински, базиран на португалски (друг)"
 
@@ -2568,7 +2550,6 @@ msgstr "Кримин татарски"
 
 #. language code: crp
 #: LanguageCode.cc:440
-#, fuzzy
 msgid "Creoles and pidgins (Other)"
 msgstr "Креолски и пидгински (друг)"
 
@@ -3071,7 +3052,6 @@ msgstr "Ирански (друг)"
 
 #. language code: iro
 #: LanguageCode.cc:652
-#, fuzzy
 msgid "Iroquoian languages"
 msgstr "Ирокуонски езици"
 
@@ -3375,7 +3355,6 @@ msgstr "Луо (Кения и Танзания)"
 
 #. language code: lus
 #: LanguageCode.cc:770
-#, fuzzy
 msgid "lushai"
 msgstr "Лушай"
 
@@ -3481,7 +3460,6 @@ msgstr "Минанкубау"
 
 #. language code: mis
 #: LanguageCode.cc:816
-#, fuzzy
 msgid "Miscellaneous languages"
 msgstr "Разни езици"
 
@@ -3516,7 +3494,6 @@ msgstr "Манпури"
 
 #. language code: mno
 #: LanguageCode.cc:828
-#, fuzzy
 msgid "Manobo languages"
 msgstr "Манобо езици"
 
@@ -3543,13 +3520,11 @@ msgstr "Моси"
 
 #. language code: mul
 #: LanguageCode.cc:838
-#, fuzzy
 msgid "Multiple languages"
 msgstr "Множество езици"
 
 #. language code: mun
 #: LanguageCode.cc:840
-#, fuzzy
 msgid "Munda languages"
 msgstr "Мунда езици"
 
@@ -3572,7 +3547,6 @@ msgstr "Марвари"
 
 #. language code: myn
 #: LanguageCode.cc:848
-#, fuzzy
 msgid "Mayan languages"
 msgstr "Майски езици"
 
@@ -3686,7 +3660,6 @@ msgstr "Северно сото"
 
 #. language code: nub
 #: LanguageCode.cc:892
-#, fuzzy
 msgid "Nubian languages"
 msgstr "Нубийски езици"
 
@@ -3759,9 +3732,8 @@ msgstr "Турски, отомански (1500-1928)"
 
 #. language code: oto
 #: LanguageCode.cc:920
-#, fuzzy
 msgid "Otomian languages"
-msgstr "Отомански езици"
+msgstr "Османски езици"
 
 #. language code: paa
 #: LanguageCode.cc:922
@@ -3840,7 +3812,6 @@ msgstr "Португалска"
 
 #. language code: pra
 #: LanguageCode.cc:954
-#, fuzzy
 msgid "Prakrit languages"
 msgstr "Пракрит езици"
 
@@ -3929,7 +3900,6 @@ msgstr "Южно-американски индиански (друг)"
 
 #. language code: sal
 #: LanguageCode.cc:990
-#, fuzzy
 msgid "Salishan languages"
 msgstr "Салишан езици"
 
@@ -4011,7 +3981,6 @@ msgstr "Синхала"
 
 #. language code: sio
 #: LanguageCode.cc:1026
-#, fuzzy
 msgid "Siouan languages"
 msgstr "Сиуан езици"
 
@@ -4047,7 +4016,6 @@ msgstr "Северно сами"
 
 #. language code: smi
 #: LanguageCode.cc:1042
-#, fuzzy
 msgid "Sami languages (Other)"
 msgstr "Сами езици (друг)"
 
@@ -4309,7 +4277,6 @@ msgstr "Тумбука"
 
 #. language code: tup
 #: LanguageCode.cc:1146
-#, fuzzy
 msgid "Tupi languages"
 msgstr "Тупи езици"
 
@@ -4401,7 +4368,6 @@ msgstr "Вотски"
 
 #. language code: wak
 #: LanguageCode.cc:1184
-#, fuzzy
 msgid "Wakashan languages"
 msgstr "Вакашан езици"
 
@@ -4427,7 +4393,6 @@ msgstr "Уелски"
 
 #. language code: wen
 #: LanguageCode.cc:1196
-#, fuzzy
 msgid "Sorbian languages"
 msgstr "Сорбийски езици"
 
@@ -4474,7 +4439,6 @@ msgstr "Йоруба"
 
 #. language code: ypk
 #: LanguageCode.cc:1214
-#, fuzzy
 msgid "Yupik languages"
 msgstr "Юпик езици"
 
@@ -4512,6 +4476,14 @@ msgstr "Зуни"
 
 #: ZYppFactory.cc:279 ZYppFactory.cc:334
 msgid "Cannot acquire zypp lock."
+msgstr "Не може да се придобие заключването на zypp."
+
+#: SourceManager.h:42
+msgid "Unable to restore all sources."
+msgstr ""
+
+#: SourceManager.h:68
+msgid "At least one source already registered, cannot restore sources from persistent store."
 msgstr ""
 
 #. Translator: %s = name of an rpm package. A list of diffs follows
@@ -4633,28 +4605,97 @@ msgstr "създадено резервно копие %s"
 
 #: target/TargetImpl.cc:630
 msgid "Target commit aborted by user."
-msgstr ""
+msgstr "Целевото извършване бе прекъснато от потребителя."
 
-#: target/store/XMLFilesBackend.cc:925 target/store/XMLFilesBackend.cc:932
+#: target/store/XMLFilesBackend.cc:1009 target/store/XMLFilesBackend.cc:1016
 #: source/yum/YUMScriptImpl.cc:78 source/yum/YUMScriptImpl.cc:112
 msgid "Can't write the patch script to a temporary file."
-msgstr ""
+msgstr "Не може да се скрипта на кръпката във временен файл."
 
 #: source/yum/YUMScriptImpl.cc:89 source/yum/YUMScriptImpl.cc:123
 msgid "Failed check for the script file check sum"
+msgstr "Проверката на контролната сума за скрипта бе неуспешна"
+
+#. end of single patch parsing
+#. end of patches file parsing
+#. end of copying
+#: source/yum/YUMSourceImpl.cc:216 source/yum/YUMSourceImpl.cc:241
+msgid "Reading index files"
 msgstr ""
 
 #: source/yum/YUMSourceImpl.cc:247
 msgid "Signed repomd.xml file fails signature check"
+msgstr "Проверката на контролната сума за подписания repomd.xml файл бе неушпешна"
+
+#. TranslatorExplanation %s = product file
+#: source/yum/YUMSourceImpl.cc:464 source/yum/YUMSourceImpl.cc:476
+#: source/yum/YUMSourceImpl.cc:482 source/yum/YUMSourceImpl.cc:490
+#, c-format
+msgid "Reading product from %s"
 msgstr ""
 
-#: source/SourceImpl.cc:384
+#. TranslatorExplanation %s = package file list
+#: source/yum/YUMSourceImpl.cc:520 source/yum/YUMSourceImpl.cc:535
+#: source/yum/YUMSourceImpl.cc:541 source/yum/YUMSourceImpl.cc:549
+#, c-format
+msgid "Reading filelist from %s"
+msgstr ""
+
+#. TranslatorExplanation %s = packages file
+#: source/yum/YUMSourceImpl.cc:565 source/yum/YUMSourceImpl.cc:605
+#: source/yum/YUMSourceImpl.cc:611 source/yum/YUMSourceImpl.cc:619
+#, c-format
+msgid "Reading packages from %s"
+msgstr ""
+
+#. TranslatorExplanation %s = selection metadata file
+#: source/yum/YUMSourceImpl.cc:643 source/yum/YUMSourceImpl.cc:655
+#: source/yum/YUMSourceImpl.cc:661 source/yum/YUMSourceImpl.cc:669
+#, fuzzy, c-format
+msgid "Reading selection from %s"
+msgstr "Грешка при четенето на сектор %u."
+
+#. TranslatorExplanation %s = pattern metadata file
+#: source/yum/YUMSourceImpl.cc:693 source/yum/YUMSourceImpl.cc:705
+#: source/yum/YUMSourceImpl.cc:711 source/yum/YUMSourceImpl.cc:719
+#, c-format
+msgid "Reading pattern from %s"
+msgstr ""
+
+#. TranslatorExplanation %s = patches index file
+#: source/yum/YUMSourceImpl.cc:746 source/yum/YUMSourceImpl.cc:758
+#: source/yum/YUMSourceImpl.cc:764 source/yum/YUMSourceImpl.cc:772
+#, c-format
+msgid "Reading patches index %s"
+msgstr ""
+
+#. TranslatorExplanation %s = patch metadata file
+#: source/yum/YUMSourceImpl.cc:795 source/yum/YUMSourceImpl.cc:812
+#: source/yum/YUMSourceImpl.cc:818 source/yum/YUMSourceImpl.cc:827
+#, c-format
+msgid "Reading patch %s"
+msgstr ""
+
+#: source/susetags/SuseTagsImpl.cc:641 source/susetags/SuseTagsImpl.cc:651
+#: source/susetags/SuseTagsImpl.cc:654
+msgid "Reading packages file"
+msgstr ""
+
+# progress indicator label
+#. TranslatorExplanation %s = language name
+#: source/susetags/SuseTagsImpl.cc:704 source/susetags/SuseTagsImpl.cc:708
+#: source/susetags/SuseTagsImpl.cc:722
+#, fuzzy, c-format
+msgid "Reading translation: %s"
+msgstr "Зареждане на инсталационната система"
+
+#: source/SourceImpl.cc:391
 msgid " miss checksum."
-msgstr ""
+msgstr "липсва контролната сума."
 
-#: source/SourceImpl.cc:390
+#: source/SourceImpl.cc:397
 msgid " fails checksum verification."
-msgstr ""
+msgstr "неуспешно удостоверяване на контролната сума."
 
 #~ msgid "Default"
 #~ msgstr "Стандартно"

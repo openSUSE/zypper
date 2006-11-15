@@ -1,5 +1,5 @@
+# translation of zypp.po to Polski
 # translation of zypp.po to
-# translation of zypp.po to Polish
 # Polish message file for YaST2 (@memory@).
 # Copyright (C) 2005 SUSE Linux Products GmbH.
 # Copyright (C) 2003 SuSE Linux AG.
@@ -7,14 +7,15 @@
 # Wojciech Kapusta <wojciech@aviary.pl>, 2006.
 # Marek Stepien <marcoos@aviary.pl>, 2006.
 # Łukasz Suchenek <drottnar@oaza.pl>, 2006.
+# Rafal Milecki <zajec5@gmail.com>, 2006.
 msgid ""
 msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-10-26 09:41+0200\n"
-"PO-Revision-Date: 2006-10-13 20:28+0200\n"
-"Last-Translator: Łukasz Suchenek <drottnar@oaza.pl>\n"
-"Language-Team: Polish <pl@li.org>\n"
+"POT-Creation-Date: 2006-11-13 10:32+0100\n"
+"PO-Revision-Date: 2006-11-14 12:14+0100\n"
+"Last-Translator: wadim dziedzic <nikdo@aviary.pl>\n"
+"Language-Team: Polski <pl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -104,18 +105,17 @@ msgstr "nie instaluj %s"
 msgid "Do not install or delete concerning resolvables"
 msgstr "Nie instaluj ani nie usuwaj danych pakietów"
 
-#: solver/detail/ProblemSolutionUnlock.cc:50
-#, fuzzy
+#: solver/detail/ProblemSolutionUnlock.cc:70
 msgid "unlock all resolvables"
-msgstr "Odblokuj te pakiety rozwiązywalne"
+msgstr "Odblokuj wszystkie pakiety rozwiązywalne"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: solver/detail/ProblemSolutionUnlock.cc:59
+#: solver/detail/ProblemSolutionUnlock.cc:83
 #, c-format
 msgid "unlock %s"
 msgstr "odblokuj %s"
 
-#: solver/detail/ProblemSolutionUnlock.cc:68
+#: solver/detail/ProblemSolutionUnlock.cc:92
 msgid "Unlock these resolvables"
 msgstr "Odblokuj te pakiety rozwiązywalne"
 
@@ -342,7 +342,8 @@ msgstr "Nie ma zainstalowanych alternatywnych dostawców %s"
 #. Translator: 1.%s = name of package,patch....
 #. TranslatorExample: for bar
 #. TranslatorExplanation: extension to previous message if we know what the resolvable is
-#: solver/detail/ResolverInfoMisc.cc:298 solver/detail/ResolverInfoMisc.cc:323
+#: solver/detail/ResolverInfoMisc.cc:298
+#: solver/detail/ResolverInfoMisc.cc:323
 #, c-format
 msgid "for %s"
 msgstr "dla %s"
@@ -614,7 +615,7 @@ msgid "Due problems which are described above/below this resolution will not sol
 msgstr "Z powodu powyżej wzgl. poniżej opisanych problemów, rozwiązanie to nie będzie mogło rozwiązać wszystkich zależności"
 
 #: solver/detail/Resolver_problems.cc:342
-#: solver/detail/Resolver_problems.cc:662
+#: solver/detail/Resolver_problems.cc:666
 #, c-format
 msgid "Cannot install %s because it is conflicting with %s"
 msgstr "Nie można zainstalować %s, ponieważ jest w konflikcie z %s"
@@ -650,49 +651,49 @@ msgid "%s cannot be installed due to missing dependencies"
 msgstr "%s nie może zostać zainstalowany z powodu brakujących zależności"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: solver/detail/Resolver_problems.cc:548
+#: solver/detail/Resolver_problems.cc:550
 #, c-format
 msgid "%s fulfil dependencies of %s but will be uninstalled"
 msgstr "%s spełnia zależności %s, ale zostanie odinstalowany"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: solver/detail/Resolver_problems.cc:558
+#: solver/detail/Resolver_problems.cc:560
 #, c-format
 msgid "No need to install %s"
 msgstr "Nie ma potrzeby instalować %s"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: solver/detail/Resolver_problems.cc:566
+#: solver/detail/Resolver_problems.cc:568
 #, c-format
 msgid "Cannot install %s to fulfil the dependencies of %s"
 msgstr "Nie można zainstalować %s by spełnić zależności %s"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: solver/detail/Resolver_problems.cc:581
+#: solver/detail/Resolver_problems.cc:583
 #, c-format
 msgid "Cannot be install %s to fulfil the dependencies of %s"
 msgstr "Nie można zainstalować %s by spełnić zależności %s"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: solver/detail/Resolver_problems.cc:618
-#: solver/detail/Resolver_problems.cc:626
+#: solver/detail/Resolver_problems.cc:620
+#: solver/detail/Resolver_problems.cc:628
 #, c-format
 msgid "%s will not be uninstalled cause it is still required"
 msgstr "%s nie zostanie odinstalowany, ponieważ jest nadal wymagany"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: solver/detail/Resolver_problems.cc:637
+#: solver/detail/Resolver_problems.cc:639
 #, c-format
 msgid "%s obsoletes %s. But %s cannot be deleted because it is locked."
 msgstr "%s dezaktualizuje %s, ale %s nie może zostać usunięty, ponieważ jest zablokowany."
 
-#: solver/detail/Resolver_problems.cc:666
+#: solver/detail/Resolver_problems.cc:670
 #, c-format
 msgid "Cannot install %s because it is conflicting"
 msgstr "Nie można zainstalować %s, ponieważ jest w konflikcie"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: solver/detail/Resolver_problems.cc:685
+#: solver/detail/Resolver_problems.cc:689
 #, c-format
 msgid "%s is uninstallable due to conflicts with %s"
 msgstr "%s jest nie do odinstalowania z powodu konfliktu z %s"
@@ -703,7 +704,8 @@ msgstr "Nieznane państwo: "
 
 #. Defined CountryCode constants
 #. Defined LanguageCode constants
-#: CountryCode.cc:215 LanguageCode.cc:225
+#: CountryCode.cc:215
+#: LanguageCode.cc:225
 msgid "noCode"
 msgstr "noCode"
 
@@ -907,7 +909,8 @@ msgstr "Wyspy Kokosowe"
 
 #. :CCK:166:
 #. :CAF:140:
-#: CountryCode.cc:255 CountryCode.cc:257
+#: CountryCode.cc:255
+#: CountryCode.cc:257
 msgid "Congo"
 msgstr "Kongo"
 
@@ -1554,7 +1557,8 @@ msgstr "Nepal"
 
 #. :NPL:524:
 #. language code: nau na
-#: CountryCode.cc:380 LanguageCode.cc:858
+#: CountryCode.cc:380
+#: LanguageCode.cc:858
 msgid "Nauru"
 msgstr "nauru"
 
@@ -1800,7 +1804,8 @@ msgstr "Tadżykistan"
 
 #. :TJK:762:
 #. language code: tkl
-#: CountryCode.cc:428 LanguageCode.cc:1122
+#: CountryCode.cc:428
+#: LanguageCode.cc:1122
 msgid "Tokelau"
 msgstr "tokelau"
 
@@ -1837,7 +1842,8 @@ msgstr "Trynidad i Tobago"
 
 #. :TTO:780:
 #. language code: tvl
-#: CountryCode.cc:435 LanguageCode.cc:1152
+#: CountryCode.cc:435
+#: LanguageCode.cc:1152
 msgid "Tuvalu"
 msgstr "tuvalu"
 
@@ -2024,7 +2030,8 @@ msgid "Akkadian"
 msgstr "akadyjski"
 
 #. language code: alb sqi sq
-#: LanguageCode.cc:262 LanguageCode.cc:264
+#: LanguageCode.cc:262
+#: LanguageCode.cc:264
 msgid "Albanian"
 msgstr "albański"
 
@@ -2075,7 +2082,8 @@ msgstr "aragoński"
 
 # AM
 #. language code: arm hye hy
-#: LanguageCode.cc:284 LanguageCode.cc:286
+#: LanguageCode.cc:284
+#: LanguageCode.cc:286
 msgid "Armenian"
 msgstr "ormiański"
 
@@ -2180,7 +2188,8 @@ msgid "Balinese"
 msgstr "balijski"
 
 #. language code: baq eus eu
-#: LanguageCode.cc:326 LanguageCode.cc:328
+#: LanguageCode.cc:326
+#: LanguageCode.cc:328
 msgid "Basque"
 msgstr "baskijski"
 
@@ -2291,7 +2300,8 @@ msgid "Bulgarian"
 msgstr "bułgarski"
 
 #. language code: bur mya my
-#: LanguageCode.cc:372 LanguageCode.cc:374
+#: LanguageCode.cc:372
+#: LanguageCode.cc:374
 msgid "Burmese"
 msgstr "birmański"
 
@@ -2356,7 +2366,8 @@ msgid "Chagatai"
 msgstr "czagatajski"
 
 #. language code: chi zho zh
-#: LanguageCode.cc:400 LanguageCode.cc:402
+#: LanguageCode.cc:400
+#: LanguageCode.cc:402
 msgid "Chinese"
 msgstr "chiński"
 
@@ -2466,7 +2477,8 @@ msgid "Cushitic (Other)"
 msgstr "kuszyckie (inne)"
 
 #. language code: cze ces cs
-#: LanguageCode.cc:446 LanguageCode.cc:448
+#: LanguageCode.cc:446
+#: LanguageCode.cc:448
 msgid "Czech"
 msgstr "czeski"
 
@@ -2541,7 +2553,8 @@ msgid "Dutch, Middle (ca.1050-1350)"
 msgstr "średnioholenderski (ok. 1050 - 1350)"
 
 #. language code: dut nld nl
-#: LanguageCode.cc:478 LanguageCode.cc:480
+#: LanguageCode.cc:478
+#: LanguageCode.cc:480
 msgid "Dutch"
 msgstr "holenderski"
 
@@ -2646,7 +2659,8 @@ msgid "Fon"
 msgstr "fon"
 
 #. language code: fre fra fr
-#: LanguageCode.cc:522 LanguageCode.cc:524
+#: LanguageCode.cc:522
+#: LanguageCode.cc:524
 msgid "French"
 msgstr "francuski"
 
@@ -2696,12 +2710,14 @@ msgid "Germanic (Other)"
 msgstr "germańskie (inne)"
 
 #. language code: geo kat ka
-#: LanguageCode.cc:544 LanguageCode.cc:546
+#: LanguageCode.cc:544
+#: LanguageCode.cc:546
 msgid "Georgian"
 msgstr "gruziński"
 
 #. language code: ger deu de
-#: LanguageCode.cc:548 LanguageCode.cc:550
+#: LanguageCode.cc:548
+#: LanguageCode.cc:550
 msgid "German"
 msgstr "niemiecki"
 
@@ -2771,7 +2787,8 @@ msgid "Greek, Ancient (to 1453)"
 msgstr "grecki, starożytny (do 1453)"
 
 #. language code: gre ell el
-#: LanguageCode.cc:578 LanguageCode.cc:580
+#: LanguageCode.cc:578
+#: LanguageCode.cc:580
 msgid "Greek, Modern (1453-)"
 msgstr "grecki, współczesny (1453 -)"
 
@@ -2876,7 +2893,8 @@ msgid "Igbo"
 msgstr "igbo"
 
 #. language code: ice isl is
-#: LanguageCode.cc:622 LanguageCode.cc:624
+#: LanguageCode.cc:622
+#: LanguageCode.cc:624
 msgid "Icelandic"
 msgstr "islandzki"
 
@@ -3248,7 +3266,8 @@ msgid "lushai"
 msgstr "lushai"
 
 #. language code: mac mkd mk
-#: LanguageCode.cc:772 LanguageCode.cc:774
+#: LanguageCode.cc:772
+#: LanguageCode.cc:774
 msgid "Macedonian"
 msgstr "macedoński"
 
@@ -3288,7 +3307,8 @@ msgid "Mandingo"
 msgstr "mandingo"
 
 #. language code: mao mri mi
-#: LanguageCode.cc:790 LanguageCode.cc:792
+#: LanguageCode.cc:790
+#: LanguageCode.cc:792
 msgid "Maori"
 msgstr "maoryjski"
 
@@ -3308,7 +3328,8 @@ msgid "Masai"
 msgstr "masajski"
 
 #. language code: may msa ms
-#: LanguageCode.cc:800 LanguageCode.cc:802
+#: LanguageCode.cc:800
+#: LanguageCode.cc:802
 msgid "Malay"
 msgstr "malajski"
 
@@ -3647,7 +3668,8 @@ msgid "Persian, Old (ca.600-400 B.C.)"
 msgstr "staroperski (ok. 600 - 400 p.n.e.)"
 
 #. language code: per fas fa
-#: LanguageCode.cc:938 LanguageCode.cc:940
+#: LanguageCode.cc:938
+#: LanguageCode.cc:940
 msgid "Persian"
 msgstr "perski"
 
@@ -3732,7 +3754,8 @@ msgid "Romany"
 msgstr "cygański / romani"
 
 #. language code: rum ron ro
-#: LanguageCode.cc:974 LanguageCode.cc:976
+#: LanguageCode.cc:974
+#: LanguageCode.cc:976
 msgid "Romanian"
 msgstr "rumuński"
 
@@ -3792,7 +3815,8 @@ msgid "Santali"
 msgstr "santali"
 
 #. language code: scc srp sr
-#: LanguageCode.cc:1000 LanguageCode.cc:1002
+#: LanguageCode.cc:1000
+#: LanguageCode.cc:1002
 msgid "Serbian"
 msgstr "serbski"
 
@@ -3807,7 +3831,8 @@ msgid "Scots"
 msgstr "szkocki"
 
 #. language code: scr hrv hr
-#: LanguageCode.cc:1008 LanguageCode.cc:1010
+#: LanguageCode.cc:1008
+#: LanguageCode.cc:1010
 msgid "Croatian"
 msgstr "chorwacki"
 
@@ -3862,7 +3887,8 @@ msgid "Slavic (Other)"
 msgstr "słowiańskie (inne)"
 
 #. language code: slo slk sk
-#: LanguageCode.cc:1032 LanguageCode.cc:1034
+#: LanguageCode.cc:1032
+#: LanguageCode.cc:1034
 msgid "Slovak"
 msgstr "słowacki"
 
@@ -4062,7 +4088,8 @@ msgstr "tajski"
 
 # TW
 #. language code: tib bod bo
-#: LanguageCode.cc:1112 LanguageCode.cc:1114
+#: LanguageCode.cc:1112
+#: LanguageCode.cc:1114
 msgid "Tibetan"
 msgstr "tybetański"
 
@@ -4249,7 +4276,8 @@ msgid "Washo"
 msgstr "washo"
 
 #. language code: wel cym cy
-#: LanguageCode.cc:1192 LanguageCode.cc:1194
+#: LanguageCode.cc:1192
+#: LanguageCode.cc:1194
 msgid "Welsh"
 msgstr "walijski"
 
@@ -4335,9 +4363,18 @@ msgstr "zulu"
 msgid "Zuni"
 msgstr "zuni"
 
-#: ZYppFactory.cc:279 ZYppFactory.cc:334
+#: ZYppFactory.cc:279
+#: ZYppFactory.cc:334
 msgid "Cannot acquire zypp lock."
 msgstr "Nie można pobrać blokady zypp."
+
+#: SourceManager.h:42
+msgid "Unable to restore all sources."
+msgstr "Nie udało się odtworzyć wszystkich źródeł."
+
+#: SourceManager.h:68
+msgid "At least one source already registered, cannot restore sources from persistent store."
+msgstr "Przynajmniej jedno źródło jest już zarejestrowane, nie można odtworzyć źródeł z trwałego zasobu."
 
 #. Translator: %s = name of an rpm package. A list of diffs follows
 #. this message.
@@ -4385,7 +4422,8 @@ msgstr ""
 msgid "%s install failed"
 msgstr "Instalacja %s nie powiodła się"
 
-#: target/rpm/RpmDb.cc:1974 target/rpm/RpmDb.cc:2092
+#: target/rpm/RpmDb.cc:1974
+#: target/rpm/RpmDb.cc:2092
 msgid "rpm output:"
 msgstr "Wyjście rpm:"
 
@@ -4396,7 +4434,8 @@ msgstr "Wyjście rpm:"
 msgid "%s installed ok"
 msgstr "Pakiet %s poprawnie zainstalowany"
 
-#: target/rpm/RpmDb.cc:1983 target/rpm/RpmDb.cc:2100
+#: target/rpm/RpmDb.cc:1983
+#: target/rpm/RpmDb.cc:2100
 msgid "Additional rpm output:"
 msgstr "Dodatkowe wyjście rpm:"
 
@@ -4460,23 +4499,113 @@ msgstr "utworzono zapasowy %s"
 msgid "Target commit aborted by user."
 msgstr "Wysłanie do serwera anulowane przez użytkownika."
 
-#: target/store/XMLFilesBackend.cc:925 target/store/XMLFilesBackend.cc:932
-#: source/yum/YUMScriptImpl.cc:78 source/yum/YUMScriptImpl.cc:112
+#: target/store/XMLFilesBackend.cc:1009
+#: target/store/XMLFilesBackend.cc:1016
+#: source/yum/YUMScriptImpl.cc:78
+#: source/yum/YUMScriptImpl.cc:112
 msgid "Can't write the patch script to a temporary file."
 msgstr "Nie można zapisać skryptu poprawki do tymczasowego pliku."
 
-#: source/yum/YUMScriptImpl.cc:89 source/yum/YUMScriptImpl.cc:123
+#: source/yum/YUMScriptImpl.cc:89
+#: source/yum/YUMScriptImpl.cc:123
 msgid "Failed check for the script file check sum"
 msgstr "Weryfikacja poprawności sumy kontrolnej pliku skryptu nie powiodła się."
+
+#. end of single patch parsing
+#. end of patches file parsing
+#. end of copying
+#: source/yum/YUMSourceImpl.cc:216
+#: source/yum/YUMSourceImpl.cc:241
+msgid "Reading index files"
+msgstr "Wczytywanie plików indeksu"
 
 #: source/yum/YUMSourceImpl.cc:247
 msgid "Signed repomd.xml file fails signature check"
 msgstr "Podpisany plik repomd.xml nie przechodzi weryfikacji podpisu."
 
-#: source/SourceImpl.cc:384
+#. TranslatorExplanation %s = product file
+#: source/yum/YUMSourceImpl.cc:464
+#: source/yum/YUMSourceImpl.cc:476
+#: source/yum/YUMSourceImpl.cc:482
+#: source/yum/YUMSourceImpl.cc:490
+#, c-format
+msgid "Reading product from %s"
+msgstr "Wczytywanie produktu z %s"
+
+#. TranslatorExplanation %s = package file list
+#: source/yum/YUMSourceImpl.cc:520
+#: source/yum/YUMSourceImpl.cc:535
+#: source/yum/YUMSourceImpl.cc:541
+#: source/yum/YUMSourceImpl.cc:549
+#, c-format
+msgid "Reading filelist from %s"
+msgstr "Wczytywanie listy plików z %s"
+
+#. TranslatorExplanation %s = packages file
+#: source/yum/YUMSourceImpl.cc:565
+#: source/yum/YUMSourceImpl.cc:605
+#: source/yum/YUMSourceImpl.cc:611
+#: source/yum/YUMSourceImpl.cc:619
+#, c-format
+msgid "Reading packages from %s"
+msgstr "Wczytywanie pakietów z %s"
+
+#. TranslatorExplanation %s = selection metadata file
+#: source/yum/YUMSourceImpl.cc:643
+#: source/yum/YUMSourceImpl.cc:655
+#: source/yum/YUMSourceImpl.cc:661
+#: source/yum/YUMSourceImpl.cc:669
+#, c-format
+msgid "Reading selection from %s"
+msgstr "Wczytywanie wyboru z %s"
+
+#. TranslatorExplanation %s = pattern metadata file
+#: source/yum/YUMSourceImpl.cc:693
+#: source/yum/YUMSourceImpl.cc:705
+#: source/yum/YUMSourceImpl.cc:711
+#: source/yum/YUMSourceImpl.cc:719
+#, c-format
+msgid "Reading pattern from %s"
+msgstr "Wczytywanie wzorców z %s"
+
+#. TranslatorExplanation %s = patches index file
+#: source/yum/YUMSourceImpl.cc:746
+#: source/yum/YUMSourceImpl.cc:758
+#: source/yum/YUMSourceImpl.cc:764
+#: source/yum/YUMSourceImpl.cc:772
+#, c-format
+msgid "Reading patches index %s"
+msgstr "Wczytywanie indeksu poprawek %s"
+
+#. TranslatorExplanation %s = patch metadata file
+#: source/yum/YUMSourceImpl.cc:795
+#: source/yum/YUMSourceImpl.cc:812
+#: source/yum/YUMSourceImpl.cc:818
+#: source/yum/YUMSourceImpl.cc:827
+#, c-format
+msgid "Reading patch %s"
+msgstr "Wczytywanie poprawki %s"
+
+#: source/susetags/SuseTagsImpl.cc:641
+#: source/susetags/SuseTagsImpl.cc:651
+#: source/susetags/SuseTagsImpl.cc:654
+msgid "Reading packages file"
+msgstr "Wczytywanie pliku pakietów"
+
+# progress indicator label
+#. TranslatorExplanation %s = language name
+#: source/susetags/SuseTagsImpl.cc:704
+#: source/susetags/SuseTagsImpl.cc:708
+#: source/susetags/SuseTagsImpl.cc:722
+#, c-format
+msgid "Reading translation: %s"
+msgstr "Wczytywanie tłumaczenia: %s"
+
+#: source/SourceImpl.cc:391
 msgid " miss checksum."
 msgstr "Błędna suma kontrolna"
 
-#: source/SourceImpl.cc:390
+#: source/SourceImpl.cc:397
 msgid " fails checksum verification."
 msgstr "Weryfikacja sumy kontrolnej zakończona niepowodzeniem."
+

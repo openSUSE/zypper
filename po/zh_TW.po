@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-10-26 09:41+0200\n"
+"POT-Creation-Date: 2006-11-13 10:32+0100\n"
 "PO-Revision-Date: 2006-11-02 14:23\n"
 "Last-Translator: Novell Language <language@novell.com>\n"
 "Language-Team: Novell Language <language@novell.com>\n"
@@ -96,17 +96,17 @@ msgstr "請勿安裝 %s"
 msgid "Do not install or delete concerning resolvables"
 msgstr "請勿安裝或刪除相關可解析檔"
 
-#: solver/detail/ProblemSolutionUnlock.cc:50
+#: solver/detail/ProblemSolutionUnlock.cc:70
 msgid "unlock all resolvables"
 msgstr "解除鎖定所有可解析檔"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: solver/detail/ProblemSolutionUnlock.cc:59
+#: solver/detail/ProblemSolutionUnlock.cc:83
 #, c-format
 msgid "unlock %s"
 msgstr "取消鎖住 %s"
 
-#: solver/detail/ProblemSolutionUnlock.cc:68
+#: solver/detail/ProblemSolutionUnlock.cc:92
 msgid "Unlock these resolvables"
 msgstr "取消鎖住這些可解析檔"
 
@@ -605,7 +605,7 @@ msgid "Due problems which are described above/below this resolution will not sol
 msgstr "因為上/下所描述的問題，導致此解析無法解決所有相依性。"
 
 #: solver/detail/Resolver_problems.cc:342
-#: solver/detail/Resolver_problems.cc:662
+#: solver/detail/Resolver_problems.cc:666
 #, c-format
 msgid "Cannot install %s because it is conflicting with %s"
 msgstr "無法安裝 %s，因為它與 %s 衝突"
@@ -641,49 +641,49 @@ msgid "%s cannot be installed due to missing dependencies"
 msgstr "因為缺少相依性，導致無法安裝 %s"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: solver/detail/Resolver_problems.cc:548
+#: solver/detail/Resolver_problems.cc:550
 #, c-format
 msgid "%s fulfil dependencies of %s but will be uninstalled"
 msgstr "%s 滿足對 %s 的相依，但是將無法解除安裝"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: solver/detail/Resolver_problems.cc:558
+#: solver/detail/Resolver_problems.cc:560
 #, c-format
 msgid "No need to install %s"
 msgstr "不需要安裝 %s"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: solver/detail/Resolver_problems.cc:566
+#: solver/detail/Resolver_problems.cc:568
 #, c-format
 msgid "Cannot install %s to fulfil the dependencies of %s"
 msgstr "無法安裝 %s 以滿足對於 %s 的相依"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: solver/detail/Resolver_problems.cc:581
+#: solver/detail/Resolver_problems.cc:583
 #, c-format
 msgid "Cannot be install %s to fulfil the dependencies of %s"
 msgstr "無法安裝 %s 以滿足對於 %s 的相依"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: solver/detail/Resolver_problems.cc:618
-#: solver/detail/Resolver_problems.cc:626
+#: solver/detail/Resolver_problems.cc:620
+#: solver/detail/Resolver_problems.cc:628
 #, c-format
 msgid "%s will not be uninstalled cause it is still required"
 msgstr "不會解除安裝 %s，因為仍需使用它"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: solver/detail/Resolver_problems.cc:637
+#: solver/detail/Resolver_problems.cc:639
 #, c-format
 msgid "%s obsoletes %s. But %s cannot be deleted because it is locked."
 msgstr "%s 汰換 %s，但無法刪除 %s，因為已經鎖定。"
 
-#: solver/detail/Resolver_problems.cc:666
+#: solver/detail/Resolver_problems.cc:670
 #, c-format
 msgid "Cannot install %s because it is conflicting"
 msgstr "無法安裝 %s，因為有衝突"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: solver/detail/Resolver_problems.cc:685
+#: solver/detail/Resolver_problems.cc:689
 #, c-format
 msgid "%s is uninstallable due to conflicts with %s"
 msgstr "%s 無法解除安裝，因為與 %s 衝突"
@@ -4259,6 +4259,14 @@ msgstr "祖尼語"
 msgid "Cannot acquire zypp lock."
 msgstr "無法取得 zypp 鎖。"
 
+#: SourceManager.h:42
+msgid "Unable to restore all sources."
+msgstr "無法還原所有的來源。"
+
+#: SourceManager.h:68
+msgid "At least one source already registered, cannot restore sources from persistent store."
+msgstr "至少已有一個來源完成註冊，無法還原持續儲存的來源。"
+
 #. Translator: %s = name of an rpm package. A list of diffs follows
 #. this message.
 #: target/rpm/RpmDb.cc:1799
@@ -4380,7 +4388,7 @@ msgstr "已建立備份 %s"
 msgid "Target commit aborted by user."
 msgstr "使用者已中止目標委託。"
 
-#: target/store/XMLFilesBackend.cc:925 target/store/XMLFilesBackend.cc:932
+#: target/store/XMLFilesBackend.cc:1009 target/store/XMLFilesBackend.cc:1016
 #: source/yum/YUMScriptImpl.cc:78 source/yum/YUMScriptImpl.cc:112
 msgid "Can't write the patch script to a temporary file."
 msgstr "無法將修補程式碼寫入暫存檔。"
@@ -4389,14 +4397,85 @@ msgstr "無法將修補程式碼寫入暫存檔。"
 msgid "Failed check for the script file check sum"
 msgstr "無法檢查程序檔檢查總數"
 
+#. end of single patch parsing
+#. end of patches file parsing
+#. end of copying
+#: source/yum/YUMSourceImpl.cc:216 source/yum/YUMSourceImpl.cc:241
+#, fuzzy
+msgid "Reading index files"
+msgstr "正在移除備份檔案"
+
 #: source/yum/YUMSourceImpl.cc:247
 msgid "Signed repomd.xml file fails signature check"
 msgstr "已簽署的 repomd.xml 檔案簽章檢查失敗"
 
-#: source/SourceImpl.cc:384
+#. TranslatorExplanation %s = product file
+#: source/yum/YUMSourceImpl.cc:464 source/yum/YUMSourceImpl.cc:476
+#: source/yum/YUMSourceImpl.cc:482 source/yum/YUMSourceImpl.cc:490
+#, fuzzy, c-format
+msgid "Reading product from %s"
+msgstr "正在讀取郵件伺服器領域%s..."
+
+#. TranslatorExplanation %s = package file list
+#: source/yum/YUMSourceImpl.cc:520 source/yum/YUMSourceImpl.cc:535
+#: source/yum/YUMSourceImpl.cc:541 source/yum/YUMSourceImpl.cc:549
+#, fuzzy, c-format
+msgid "Reading filelist from %s"
+msgstr "正在讀取郵件伺服器領域%s..."
+
+#. TranslatorExplanation %s = packages file
+#: source/yum/YUMSourceImpl.cc:565 source/yum/YUMSourceImpl.cc:605
+#: source/yum/YUMSourceImpl.cc:611 source/yum/YUMSourceImpl.cc:619
+#, fuzzy, c-format
+msgid "Reading packages from %s"
+msgstr "正在讀取郵件伺服器領域%s..."
+
+#. TranslatorExplanation %s = selection metadata file
+#: source/yum/YUMSourceImpl.cc:643 source/yum/YUMSourceImpl.cc:655
+#: source/yum/YUMSourceImpl.cc:661 source/yum/YUMSourceImpl.cc:669
+#, fuzzy, c-format
+msgid "Reading selection from %s"
+msgstr "正在讀取郵件伺服器領域%s..."
+
+#. TranslatorExplanation %s = pattern metadata file
+#: source/yum/YUMSourceImpl.cc:693 source/yum/YUMSourceImpl.cc:705
+#: source/yum/YUMSourceImpl.cc:711 source/yum/YUMSourceImpl.cc:719
+#, fuzzy, c-format
+msgid "Reading pattern from %s"
+msgstr "正在讀取郵件伺服器領域%s..."
+
+#. TranslatorExplanation %s = patches index file
+#: source/yum/YUMSourceImpl.cc:746 source/yum/YUMSourceImpl.cc:758
+#: source/yum/YUMSourceImpl.cc:764 source/yum/YUMSourceImpl.cc:772
+#, c-format
+msgid "Reading patches index %s"
+msgstr ""
+
+#. TranslatorExplanation %s = patch metadata file
+#: source/yum/YUMSourceImpl.cc:795 source/yum/YUMSourceImpl.cc:812
+#: source/yum/YUMSourceImpl.cc:818 source/yum/YUMSourceImpl.cc:827
+#, fuzzy, c-format
+msgid "Reading patch %s"
+msgstr "隱藏的修補程式"
+
+#: source/susetags/SuseTagsImpl.cc:641 source/susetags/SuseTagsImpl.cc:651
+#: source/susetags/SuseTagsImpl.cc:654
+#, fuzzy
+msgid "Reading packages file"
+msgstr "沒有擁有檔案 {0} 的套件"
+
+# progress indicator label
+#. TranslatorExplanation %s = language name
+#: source/susetags/SuseTagsImpl.cc:704 source/susetags/SuseTagsImpl.cc:708
+#: source/susetags/SuseTagsImpl.cc:722
+#, fuzzy, c-format
+msgid "Reading translation: %s"
+msgstr "正在載入安裝系統"
+
+#: source/SourceImpl.cc:391
 msgid " miss checksum."
 msgstr "遺失總和檢查碼。"
 
-#: source/SourceImpl.cc:390
+#: source/SourceImpl.cc:397
 msgid " fails checksum verification."
 msgstr "檢查總數驗證失敗。"

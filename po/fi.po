@@ -13,14 +13,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypp.fi\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-10-26 09:41+0200\n"
-"PO-Revision-Date: 2006-11-02 18:35+0300\n"
-"Last-Translator: Joonas Niilola <juippis@roskakori.org>\n"
+"POT-Creation-Date: 2006-11-13 10:32+0100\n"
+"PO-Revision-Date: 2006-11-13 18:04+0200\n"
+"Last-Translator: Jyri Palokangas <jmp@netti.fi>\n"
 "Language-Team: Suomi <yast-trans-fi@kotoistaminen.novell.fi>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: KBabel 1.11.4\n"
 
 #: solver/detail/ProblemSolutionIgnore.cc:54
 msgid "Ignore this requirement just here"
@@ -105,17 +106,17 @@ msgstr "älä asenna ohjelmistoa %s"
 msgid "Do not install or delete concerning resolvables"
 msgstr "Älä asenna tai poista ratkaisimia joita tämä koskettaa"
 
-#: solver/detail/ProblemSolutionUnlock.cc:50
+#: solver/detail/ProblemSolutionUnlock.cc:70
 msgid "unlock all resolvables"
 msgstr "poista kaikkien ratkaisimien lukitus"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: solver/detail/ProblemSolutionUnlock.cc:59
+#: solver/detail/ProblemSolutionUnlock.cc:83
 #, c-format
 msgid "unlock %s"
 msgstr "Poista ohjelmiston %s lukitus"
 
-#: solver/detail/ProblemSolutionUnlock.cc:68
+#: solver/detail/ProblemSolutionUnlock.cc:92
 msgid "Unlock these resolvables"
 msgstr "Poistetaan näiden ratkaisimien lukitus"
 
@@ -614,7 +615,7 @@ msgid "Due problems which are described above/below this resolution will not sol
 msgstr "Yllä tai alla kuvattujen ongelmien takia tämä ehdotus ei ratkaise kaikkia riippuvuuksia"
 
 #: solver/detail/Resolver_problems.cc:342
-#: solver/detail/Resolver_problems.cc:662
+#: solver/detail/Resolver_problems.cc:666
 #, c-format
 msgid "Cannot install %s because it is conflicting with %s"
 msgstr "Ei voida asentaa osaa %s, koska se on ristiriidassa osan %s kanssa"
@@ -650,49 +651,49 @@ msgid "%s cannot be installed due to missing dependencies"
 msgstr "Osaa %s ei voida asentaa puuttuvien riippuvuuksien takia"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: solver/detail/Resolver_problems.cc:548
+#: solver/detail/Resolver_problems.cc:550
 #, c-format
 msgid "%s fulfil dependencies of %s but will be uninstalled"
 msgstr "Osa %s täyttää osan %s riippuvuudet, mutta se poistetaan"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: solver/detail/Resolver_problems.cc:558
+#: solver/detail/Resolver_problems.cc:560
 #, c-format
 msgid "No need to install %s"
 msgstr "Ei tarvetta asentaa %s"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: solver/detail/Resolver_problems.cc:566
+#: solver/detail/Resolver_problems.cc:568
 #, c-format
 msgid "Cannot install %s to fulfil the dependencies of %s"
 msgstr "Ei voida asentaa osaa %s täyttämään osan %s riippuvuudet"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: solver/detail/Resolver_problems.cc:581
+#: solver/detail/Resolver_problems.cc:583
 #, c-format
 msgid "Cannot be install %s to fulfil the dependencies of %s"
 msgstr "Ei voida asentaa osaa %s täyttämään osan %s riippuvuudet"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: solver/detail/Resolver_problems.cc:618
-#: solver/detail/Resolver_problems.cc:626
+#: solver/detail/Resolver_problems.cc:620
+#: solver/detail/Resolver_problems.cc:628
 #, c-format
 msgid "%s will not be uninstalled cause it is still required"
 msgstr "%s ei poisteta, koska sitä tarvitaan edelleen"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: solver/detail/Resolver_problems.cc:637
+#: solver/detail/Resolver_problems.cc:639
 #, c-format
 msgid "%s obsoletes %s. But %s cannot be deleted because it is locked."
 msgstr "%s vanhentaa %s. Mutta %s ei voida poistaa, koska se on lukittu."
 
-#: solver/detail/Resolver_problems.cc:666
+#: solver/detail/Resolver_problems.cc:670
 #, c-format
 msgid "Cannot install %s because it is conflicting"
 msgstr "Ei voida asentaa osaa %s, koska se on ristiriidassa"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: solver/detail/Resolver_problems.cc:685
+#: solver/detail/Resolver_problems.cc:689
 #, c-format
 msgid "%s is uninstallable due to conflicts with %s"
 msgstr "%s ei ole poistettavissa, koska se on ristiriidassa osan %s kanssa"
@@ -4513,6 +4514,14 @@ msgstr "zuni"
 msgid "Cannot acquire zypp lock."
 msgstr "zypp-lukon hankkiminen ei onnistu."
 
+#: SourceManager.h:42
+msgid "Unable to restore all sources."
+msgstr "Kaikkia lähteitä ei voida palauttaa."
+
+#: SourceManager.h:68
+msgid "At least one source already registered, cannot restore sources from persistent store."
+msgstr "Ainakin yksi lähde on jo rekisteröity, lähteiden palauttaminen pysyvästä varastosta ei onnistu."
+
 #. Translator: %s = name of an rpm package. A list of diffs follows
 #. this message.
 #: target/rpm/RpmDb.cc:1799
@@ -4634,7 +4643,7 @@ msgstr "luotiin varmuuskopio %s"
 msgid "Target commit aborted by user."
 msgstr "Käyttäjä keskeytti kohteen kirjoituksen."
 
-#: target/store/XMLFilesBackend.cc:925 target/store/XMLFilesBackend.cc:932
+#: target/store/XMLFilesBackend.cc:1009 target/store/XMLFilesBackend.cc:1016
 #: source/yum/YUMScriptImpl.cc:78 source/yum/YUMScriptImpl.cc:112
 msgid "Can't write the patch script to a temporary file."
 msgstr "Ei voida kirjoittaa korjauskomentojonoa väliaikaiseen tiedostoon."
@@ -4643,15 +4652,84 @@ msgstr "Ei voida kirjoittaa korjauskomentojonoa väliaikaiseen tiedostoon."
 msgid "Failed check for the script file check sum"
 msgstr "Komentojonon tarkistussumman tarkistus epäonnistui"
 
+#. end of single patch parsing
+#. end of patches file parsing
+#. end of copying
+#: source/yum/YUMSourceImpl.cc:216 source/yum/YUMSourceImpl.cc:241
+msgid "Reading index files"
+msgstr "Luetaan indeksitiedostot"
+
 #: source/yum/YUMSourceImpl.cc:247
 msgid "Signed repomd.xml file fails signature check"
 msgstr "Allekirjoitetun repomd.xml -tiedoston allekirjoituksen tarkistus epäonnistui"
 
-#: source/SourceImpl.cc:384
+#. TranslatorExplanation %s = product file
+#: source/yum/YUMSourceImpl.cc:464 source/yum/YUMSourceImpl.cc:476
+#: source/yum/YUMSourceImpl.cc:482 source/yum/YUMSourceImpl.cc:490
+#, c-format
+msgid "Reading product from %s"
+msgstr "Luetaan tuote tiedostosta %s"
+
+#. TranslatorExplanation %s = package file list
+#: source/yum/YUMSourceImpl.cc:520 source/yum/YUMSourceImpl.cc:535
+#: source/yum/YUMSourceImpl.cc:541 source/yum/YUMSourceImpl.cc:549
+#, c-format
+msgid "Reading filelist from %s"
+msgstr "Luetaan tiedostoluettelo tiedostosta %s."
+
+#. TranslatorExplanation %s = packages file
+#: source/yum/YUMSourceImpl.cc:565 source/yum/YUMSourceImpl.cc:605
+#: source/yum/YUMSourceImpl.cc:611 source/yum/YUMSourceImpl.cc:619
+#, c-format
+msgid "Reading packages from %s"
+msgstr "Luetaan paketit tiedostosta %s."
+
+#. TranslatorExplanation %s = selection metadata file
+#: source/yum/YUMSourceImpl.cc:643 source/yum/YUMSourceImpl.cc:655
+#: source/yum/YUMSourceImpl.cc:661 source/yum/YUMSourceImpl.cc:669
+#, c-format
+msgid "Reading selection from %s"
+msgstr "Luetaan valinnat tiedostosta %s."
+
+#. TranslatorExplanation %s = pattern metadata file
+#: source/yum/YUMSourceImpl.cc:693 source/yum/YUMSourceImpl.cc:705
+#: source/yum/YUMSourceImpl.cc:711 source/yum/YUMSourceImpl.cc:719
+#, c-format
+msgid "Reading pattern from %s"
+msgstr "Luetaan kuviot tiedostosta %s."
+
+#. TranslatorExplanation %s = patches index file
+#: source/yum/YUMSourceImpl.cc:746 source/yum/YUMSourceImpl.cc:758
+#: source/yum/YUMSourceImpl.cc:764 source/yum/YUMSourceImpl.cc:772
+#, c-format
+msgid "Reading patches index %s"
+msgstr "Luetaan korjausten indeksi tiedostosta %s"
+
+#. TranslatorExplanation %s = patch metadata file
+#: source/yum/YUMSourceImpl.cc:795 source/yum/YUMSourceImpl.cc:812
+#: source/yum/YUMSourceImpl.cc:818 source/yum/YUMSourceImpl.cc:827
+#, c-format
+msgid "Reading patch %s"
+msgstr "Luetaan korjaukset tiedostosta %s"
+
+#: source/susetags/SuseTagsImpl.cc:641 source/susetags/SuseTagsImpl.cc:651
+#: source/susetags/SuseTagsImpl.cc:654
+msgid "Reading packages file"
+msgstr "Luetaan paketit tiedosto"
+
+# progress indicator label
+#. TranslatorExplanation %s = language name
+#: source/susetags/SuseTagsImpl.cc:704 source/susetags/SuseTagsImpl.cc:708
+#: source/susetags/SuseTagsImpl.cc:722
+#, c-format
+msgid "Reading translation: %s"
+msgstr "Luetaan käännös: %s"
+
+#: source/SourceImpl.cc:391
 msgid " miss checksum."
 msgstr " tarkistussumma puuttuu."
 
-#: source/SourceImpl.cc:390
+#: source/SourceImpl.cc:397
 msgid " fails checksum verification."
 msgstr " tarkistussumman varmistaminen epäonnistui."
 

@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypp.ru\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-10-26 09:41+0200\n"
-"PO-Revision-Date: 2006-11-03 23:39+0200\n"
+"POT-Creation-Date: 2006-11-13 10:32+0100\n"
+"PO-Revision-Date: 2006-11-14 15:44+0200\n"
 "Last-Translator: Aleksey Osipov <aliks-os@yandex.ru>\n"
 "Language-Team: Russian <i18n@suse.de>\n"
 "MIME-Version: 1.0\n"
@@ -106,18 +106,18 @@ msgstr "не устанавливать %s"
 msgid "Do not install or delete concerning resolvables"
 msgstr "%1 конфликтует с %2"
 
-#: solver/detail/ProblemSolutionUnlock.cc:50
+#: solver/detail/ProblemSolutionUnlock.cc:70
 #, fuzzy
 msgid "unlock all resolvables"
 msgstr "%1 конфликтует с %2"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: solver/detail/ProblemSolutionUnlock.cc:59
+#: solver/detail/ProblemSolutionUnlock.cc:83
 #, c-format
 msgid "unlock %s"
 msgstr "разблокировать %s"
 
-#: solver/detail/ProblemSolutionUnlock.cc:68
+#: solver/detail/ProblemSolutionUnlock.cc:92
 #, fuzzy
 msgid "Unlock these resolvables"
 msgstr "%1 конфликтует с %2"
@@ -238,7 +238,7 @@ msgstr "Пометить эту попытку разрешения как не�
 #: solver/detail/ResolverInfoMisc.cc:151
 #, c-format
 msgid "Marking resolvable %s as uninstallable"
-msgstr ""
+msgstr "Пометить пакет %s как неудаляемый"
 
 #. Translator: %s = name of packages,patch,...
 #. TranslatorExplanation: Additional information to dependency solver result.
@@ -588,7 +588,7 @@ msgstr "%s зависит от:%s"
 #. TranslatorExplanation: currently it is unused.
 #: solver/detail/Resolver_problems.cc:314
 msgid "Child of"
-msgstr ""
+msgstr "Дочернее"
 
 #. TranslatorExplanation %s = dependency
 #. TranslatorExplanation %s = name of package,patch,...
@@ -617,7 +617,7 @@ msgid "Due problems which are described above/below this resolution will not sol
 msgstr "Из-за проблем описанных выше/ниже, это разрешение не решить все зависимости"
 
 #: solver/detail/Resolver_problems.cc:342
-#: solver/detail/Resolver_problems.cc:662
+#: solver/detail/Resolver_problems.cc:666
 #, c-format
 msgid "Cannot install %s because it is conflicting with %s"
 msgstr "Невозможно установить %s так как конфликтует с %s"
@@ -653,49 +653,49 @@ msgid "%s cannot be installed due to missing dependencies"
 msgstr "%s невозможно установить из-зи потерянных зависимостей"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: solver/detail/Resolver_problems.cc:548
+#: solver/detail/Resolver_problems.cc:550
 #, c-format
 msgid "%s fulfil dependencies of %s but will be uninstalled"
 msgstr "%s удовлетворяет зависимости %s однако будет удален"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: solver/detail/Resolver_problems.cc:558
+#: solver/detail/Resolver_problems.cc:560
 #, c-format
 msgid "No need to install %s"
 msgstr "Нет необходимости устанавливать %s"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: solver/detail/Resolver_problems.cc:566
+#: solver/detail/Resolver_problems.cc:568
 #, c-format
 msgid "Cannot install %s to fulfil the dependencies of %s"
 msgstr "Невозможно установить %s чтобы удовлетворить зависимости %s"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: solver/detail/Resolver_problems.cc:581
+#: solver/detail/Resolver_problems.cc:583
 #, c-format
 msgid "Cannot be install %s to fulfil the dependencies of %s"
 msgstr "Невозможно установить %s чтобы удовлетворить зависимости %s"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: solver/detail/Resolver_problems.cc:618
-#: solver/detail/Resolver_problems.cc:626
+#: solver/detail/Resolver_problems.cc:620
+#: solver/detail/Resolver_problems.cc:628
 #, c-format
 msgid "%s will not be uninstalled cause it is still required"
 msgstr "%s не будет удален, так как попрежнему необходим"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: solver/detail/Resolver_problems.cc:637
+#: solver/detail/Resolver_problems.cc:639
 #, c-format
 msgid "%s obsoletes %s. But %s cannot be deleted because it is locked."
 msgstr "%s устаревший %s. Но %s не может быть удален, так как он заблокирован."
 
-#: solver/detail/Resolver_problems.cc:666
+#: solver/detail/Resolver_problems.cc:670
 #, c-format
 msgid "Cannot install %s because it is conflicting"
 msgstr "Невозможно установить %s так как конфликтует"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: solver/detail/Resolver_problems.cc:685
+#: solver/detail/Resolver_problems.cc:689
 #, c-format
 msgid "%s is uninstallable due to conflicts with %s"
 msgstr "%s можно удалить из-за конфликта с %s"
@@ -733,7 +733,7 @@ msgstr "Антигуа и Барбадос"
 #. :ATG:028:
 #: CountryCode.cc:221
 msgid "Anguilla"
-msgstr ""
+msgstr "Ангилья"
 
 #. :AIA:660:
 #: CountryCode.cc:222
@@ -794,9 +794,8 @@ msgstr "Аруба"
 
 #. :ABW:533:
 #: CountryCode.cc:232
-#, fuzzy
 msgid "Aland Islands"
-msgstr "Фароские Острова"
+msgstr "Аландские Острова"
 
 # AZ
 #. :ALA:248:
@@ -828,7 +827,7 @@ msgstr "Бельгия"
 #. :BEL:056:
 #: CountryCode.cc:238
 msgid "Burkina Faso"
-msgstr ""
+msgstr "Буркина-Фасо"
 
 #. :BFA:854:
 #: CountryCode.cc:239
@@ -858,7 +857,7 @@ msgstr "Бермудские острова"
 #. :BMU:060:
 #: CountryCode.cc:244
 msgid "Brunei Darussalam"
-msgstr ""
+msgstr "Бруней-Даруссалам"
 
 #. :BRN:096:
 #: CountryCode.cc:245
@@ -884,9 +883,8 @@ msgstr "Бутан"
 
 #. :BTN:064:
 #: CountryCode.cc:249
-#, fuzzy
 msgid "Bouvet Island"
-msgstr "Фароские Острова"
+msgstr "Остров Буве"
 
 #. :BVT:074:
 #: CountryCode.cc:250
@@ -913,7 +911,7 @@ msgstr "Канада"
 #. :CAN:124:
 #: CountryCode.cc:254
 msgid "Cocos (Keeling) Islands"
-msgstr ""
+msgstr "Кокосовые острова"
 
 #. :CCK:166:
 #. :CAF:140:
@@ -936,13 +934,12 @@ msgstr "Швейцария"
 #. :CHE:756:
 #: CountryCode.cc:259
 msgid "Cote D'Ivoire"
-msgstr ""
+msgstr "Кот-д'Ивуар"
 
 #. :CIV:384:
 #: CountryCode.cc:260
-#, fuzzy
 msgid "Cook Islands"
-msgstr "Фароские Острова"
+msgstr "Острова Кука"
 
 #. :COK:184:
 #: CountryCode.cc:261
@@ -987,9 +984,8 @@ msgstr "Капе Верде"
 
 #. :CPV:132:
 #: CountryCode.cc:269
-#, fuzzy
 msgid "Christmas Island"
-msgstr "Чили, Остров Пасхи"
+msgstr "Остров Пасхи"
 
 #  combo box choice:
 #  deliver mail to cyrus-imapd using LMTP
@@ -1055,9 +1051,8 @@ msgstr "Западная Сахара"
 
 #. :ESH:732:
 #: CountryCode.cc:282
-#, fuzzy
 msgid "Eritrea"
-msgstr "Запись"
+msgstr "Эритрея"
 
 #. :ERI:232:
 #: CountryCode.cc:283
@@ -1175,7 +1170,7 @@ msgstr "Греция"
 #. :GRC:300:
 #: CountryCode.cc:305
 msgid "South Georgia and the South Sandwich Islands"
-msgstr ""
+msgstr "Южная Георгия и Южные Сандвичевы острова"
 
 #. :SGS:239:
 #: CountryCode.cc:306
@@ -1206,7 +1201,7 @@ msgstr "Гонг-Конг"
 #. :HKG:344:
 #: CountryCode.cc:311
 msgid "Heard Island and McDonald Islands"
-msgstr ""
+msgstr "Остров Херд и острова МакДональда"
 
 #. :HMD:334:
 #: CountryCode.cc:312
@@ -1320,9 +1315,8 @@ msgstr "Коморы"
 # fuzzy
 #. :COM:174:
 #: CountryCode.cc:333
-#, fuzzy
 msgid "Saint Kitts and Nevis"
-msgstr "о. Св. Кристофа и Невиса"
+msgstr "Сент-Китс и Невис"
 
 #. :KNA:659:
 #: CountryCode.cc:334
@@ -1353,7 +1347,7 @@ msgstr "Казахстан"
 #. :KAZ:398:
 #: CountryCode.cc:339
 msgid "Lao People's Democratic Republic"
-msgstr ""
+msgstr "Лаосская Народная Демократическая республика"
 
 #. :LAO:418:
 #: CountryCode.cc:340
@@ -1464,9 +1458,8 @@ msgstr "Макао"
 
 #. :MAC:446:
 #: CountryCode.cc:360
-#, fuzzy
 msgid "Northern Mariana Islands"
-msgstr "Северная Ирландия"
+msgstr "Северные Марианские Острова"
 
 #. :MNP:580:
 #: CountryCode.cc:361
@@ -1541,9 +1534,8 @@ msgstr "Македония"
 # fuzzy
 #. :NCL:540:
 #: CountryCode.cc:373
-#, fuzzy
 msgid "Niger"
-msgstr "Сербия"
+msgstr "Нигер"
 
 #. :NER:562:
 #: CountryCode.cc:374
@@ -1584,9 +1576,8 @@ msgstr "Науру"
 
 #. :NRU:520:
 #: CountryCode.cc:381
-#, fuzzy
 msgid "Niue"
-msgstr "Минута"
+msgstr "Ниуэ"
 
 #. :NIU:570:
 #: CountryCode.cc:382
@@ -1636,7 +1627,7 @@ msgstr "Польша"
 #. :POL:616:
 #: CountryCode.cc:391
 msgid "Saint Pierre and Miquelon"
-msgstr ""
+msgstr "Сен-Пьер и Микелон"
 
 #. :SPM:666:
 #: CountryCode.cc:392
@@ -1676,7 +1667,7 @@ msgstr "Кватар"
 #. :QAT:634:
 #: CountryCode.cc:399
 msgid "Reunion"
-msgstr ""
+msgstr "Реюньон"
 
 #. :REU:638:
 #: CountryCode.cc:400
@@ -1738,7 +1729,7 @@ msgstr "Словения"
 #. :SVN:705:
 #: CountryCode.cc:411
 msgid "Svalbard and Jan Mayen"
-msgstr ""
+msgstr "Свальбард и Ян Майен"
 
 #. :SJM:744:
 #: CountryCode.cc:412
@@ -1775,7 +1766,7 @@ msgstr "Суринам"
 #. :SUR:740:
 #: CountryCode.cc:418
 msgid "Sao Tome and Principe"
-msgstr ""
+msgstr "Сан-Томе и Принсипи"
 
 #. :STP:678:
 #: CountryCode.cc:419
@@ -1799,7 +1790,7 @@ msgstr "Таиланд"
 #. :SWZ:748:
 #: CountryCode.cc:422
 msgid "Turks and Caicos Islands"
-msgstr ""
+msgstr "Терк и Кайкос"
 
 # TD
 #. :TCA:796:
@@ -1809,9 +1800,8 @@ msgstr "Чад"
 
 #. :TCD:148:
 #: CountryCode.cc:424
-#, fuzzy
 msgid "French Southern Territories"
-msgstr "Северная территория-Дарвин"
+msgstr "Французкие южные территории"
 
 #. :ATF:260:
 #: CountryCode.cc:425
@@ -1868,9 +1858,8 @@ msgstr "Тринидад и Тобаго"
 #. :TTO:780:
 #. language code: tvl
 #: CountryCode.cc:435 LanguageCode.cc:1152
-#, fuzzy
 msgid "Tuvalu"
-msgstr "Разговор"
+msgstr "Тувалу"
 
 # TW
 #. :TUV:798:
@@ -1920,15 +1909,13 @@ msgstr "Узбекистан"
 #. :UZB:860:
 #: CountryCode.cc:444
 msgid "Holy See (Vatican City State)"
-msgstr ""
+msgstr "Ватикан"
 
 # VC
-# fuzzy
 #. :VAT:336:
 #: CountryCode.cc:445
-#, fuzzy
 msgid "Saint Vincent and the Grenadines"
-msgstr "Сент-Винсент и Гренадины"
+msgstr "Сант Винсент и Гренадины"
 
 #. :VCT:670:
 #: CountryCode.cc:446
@@ -1939,9 +1926,8 @@ msgstr "Венесуэлла"
 # fuzzy
 #. :VEN:862:
 #: CountryCode.cc:447
-#, fuzzy
 msgid "British Virgin Islands"
-msgstr "Финляндия"
+msgstr "Вирджинские острова (Великобритания)"
 
 # VI
 # fuzzy
@@ -1958,14 +1944,13 @@ msgstr "Вьетнам"
 
 #. :VNM:704:
 #: CountryCode.cc:450
-#, fuzzy
 msgid "Vanuatu"
-msgstr "Вручную"
+msgstr "Вануату"
 
 #. :VUT:548:
 #: CountryCode.cc:451
 msgid "Wallis and Futuna"
-msgstr ""
+msgstr "Уоллис и Футуна"
 
 #. :WLF:876:
 #: CountryCode.cc:452
@@ -1979,9 +1964,8 @@ msgstr "Йемен"
 
 #. :YEM:887:
 #: CountryCode.cc:454
-#, fuzzy
 msgid "Mayotte"
-msgstr "Основная"
+msgstr "Майотта"
 
 #. :MYT:175:
 #: CountryCode.cc:455
@@ -2005,9 +1989,8 @@ msgstr "Неизвестный язык: "
 
 #. language code: aar aa
 #: LanguageCode.cc:238
-#, fuzzy
 msgid "Afar"
-msgstr "Африка"
+msgstr "Афар"
 
 # AZ
 #. language code: abk ab
@@ -2017,7 +2000,6 @@ msgstr "Абхазкий"
 
 #. language code: ace
 #: LanguageCode.cc:242
-#, fuzzy
 msgid "Achinese"
 msgstr "Китайский"
 
@@ -2636,7 +2618,7 @@ msgstr "Дакар"
 #. language code: dum
 #: LanguageCode.cc:476
 msgid "Dutch, Middle (ca.1050-1350)"
-msgstr ""
+msgstr "Немецкий, средневековый (ca.1050-1350)"
 
 #. language code: dut nld nl
 #: LanguageCode.cc:478 LanguageCode.cc:480
@@ -2683,7 +2665,7 @@ msgstr "Английский (Великобритания)"
 #. language code: enm
 #: LanguageCode.cc:496
 msgid "English, Middle (1100-1500)"
-msgstr ""
+msgstr "Английский, Средневековый (1100-1500)"
 
 #. language code: epo eo
 #: LanguageCode.cc:498
@@ -2742,7 +2724,7 @@ msgstr "Финский"
 #. language code: fiu
 #: LanguageCode.cc:518
 msgid "Finno-Ugrian (Other)"
-msgstr ""
+msgstr "Финно-Угрисйкий (другие)"
 
 #. language code: fon
 #: LanguageCode.cc:520
@@ -2853,12 +2835,12 @@ msgstr "Страницы MAN"
 #. language code: gmh
 #: LanguageCode.cc:564
 msgid "German, Middle High (ca.1050-1500)"
-msgstr ""
+msgstr "Немецкий, средние века (ca.1050-1500)"
 
 #. language code: goh
 #: LanguageCode.cc:566
 msgid "German, Old High (ca.750-1050)"
-msgstr ""
+msgstr "Немецкий, старый (ca.750-1050)"
 
 #. language code: gon
 #: LanguageCode.cc:568
@@ -2891,7 +2873,7 @@ msgstr ""
 #. language code: gre ell el
 #: LanguageCode.cc:578 LanguageCode.cc:580
 msgid "Greek, Modern (1453-)"
-msgstr ""
+msgstr "Греческий, Современный (1453-)"
 
 #. language code: grn gn
 #: LanguageCode.cc:582
@@ -3822,20 +3804,18 @@ msgstr "сохранить"
 
 #. language code: oss os
 #: LanguageCode.cc:916
-#, fuzzy
 msgid "Ossetian"
-msgstr "Русский"
+msgstr "Осетинский"
 
 #. language code: ota
 #: LanguageCode.cc:918
 msgid "Turkish, Ottoman (1500-1928)"
-msgstr ""
+msgstr "Турецкий, Оттоманский (1500-1928)"
 
 #. language code: oto
 #: LanguageCode.cc:920
-#, fuzzy
 msgid "Otomian languages"
-msgstr "Сохранение языка..."
+msgstr ""
 
 #. language code: paa
 #: LanguageCode.cc:922
@@ -4084,7 +4064,7 @@ msgstr ""
 #. language code: sga
 #: LanguageCode.cc:1016
 msgid "Irish, Old (to 900)"
-msgstr ""
+msgstr "Ирландский, Устаревший (до 900)"
 
 #. language code: sgn
 #: LanguageCode.cc:1018
@@ -4203,9 +4183,8 @@ msgstr "Вход в систему"
 # fuzzy
 #. language code: som so
 #: LanguageCode.cc:1060
-#, fuzzy
 msgid "Somali"
-msgstr "Румыния"
+msgstr "Сомалийский"
 
 #. language code: son
 #: LanguageCode.cc:1062
@@ -4308,9 +4287,8 @@ msgstr "Тамильский"
 
 #. language code: tat tt
 #: LanguageCode.cc:1096
-#, fuzzy
 msgid "Tatar"
-msgstr "Кватар"
+msgstr "Татарский"
 
 #. language code: tel te
 #: LanguageCode.cc:1098
@@ -4463,9 +4441,8 @@ msgstr ""
 
 #. language code: tyv
 #: LanguageCode.cc:1156
-#, fuzzy
 msgid "Tuvinian"
-msgstr "Тунис"
+msgstr "Тувинский"
 
 #. language code: udm
 #: LanguageCode.cc:1158
@@ -4585,9 +4562,8 @@ msgstr ""
 
 #. language code: xal
 #: LanguageCode.cc:1202
-#, fuzzy
 msgid "Kalmyk"
-msgstr "Разговор"
+msgstr "Калмыкский"
 
 #. language code: xho xh
 #: LanguageCode.cc:1204
@@ -4660,6 +4636,14 @@ msgstr "Zuni"
 
 #: ZYppFactory.cc:279 ZYppFactory.cc:334
 msgid "Cannot acquire zypp lock."
+msgstr ""
+
+#: SourceManager.h:42
+msgid "Unable to restore all sources."
+msgstr "Невозможно восстановить все источники."
+
+#: SourceManager.h:68
+msgid "At least one source already registered, cannot restore sources from persistent store."
 msgstr ""
 
 #. Translator: %s = name of an rpm package. A list of diffs follows
@@ -4790,7 +4774,7 @@ msgstr "создана резервная копия %s"
 msgid "Target commit aborted by user."
 msgstr ""
 
-#: target/store/XMLFilesBackend.cc:925 target/store/XMLFilesBackend.cc:932
+#: target/store/XMLFilesBackend.cc:1009 target/store/XMLFilesBackend.cc:1016
 #: source/yum/YUMScriptImpl.cc:78 source/yum/YUMScriptImpl.cc:112
 msgid "Can't write the patch script to a temporary file."
 msgstr "Невозможно записать скрипт исправления во временный файл."
@@ -4799,15 +4783,83 @@ msgstr "Невозможно записать скрипт исправлени�
 msgid "Failed check for the script file check sum"
 msgstr "Не удалось проверить контрольную сумму фала скрипта"
 
+#. end of single patch parsing
+#. end of patches file parsing
+#. end of copying
+#: source/yum/YUMSourceImpl.cc:216 source/yum/YUMSourceImpl.cc:241
+msgid "Reading index files"
+msgstr "Читаются индексные файлы"
+
 #: source/yum/YUMSourceImpl.cc:247
 msgid "Signed repomd.xml file fails signature check"
 msgstr "Не удалось проверить подпись файла repomd.xml"
 
-#: source/SourceImpl.cc:384
+#. TranslatorExplanation %s = product file
+#: source/yum/YUMSourceImpl.cc:464 source/yum/YUMSourceImpl.cc:476
+#: source/yum/YUMSourceImpl.cc:482 source/yum/YUMSourceImpl.cc:490
+#, c-format
+msgid "Reading product from %s"
+msgstr "Читается продукт из %s"
+
+#. TranslatorExplanation %s = package file list
+#: source/yum/YUMSourceImpl.cc:520 source/yum/YUMSourceImpl.cc:535
+#: source/yum/YUMSourceImpl.cc:541 source/yum/YUMSourceImpl.cc:549
+#, c-format
+msgid "Reading filelist from %s"
+msgstr "Читается список файлов из %s"
+
+#. TranslatorExplanation %s = packages file
+#: source/yum/YUMSourceImpl.cc:565 source/yum/YUMSourceImpl.cc:605
+#: source/yum/YUMSourceImpl.cc:611 source/yum/YUMSourceImpl.cc:619
+#, c-format
+msgid "Reading packages from %s"
+msgstr "Читаются пакеты из %s"
+
+#. TranslatorExplanation %s = selection metadata file
+#: source/yum/YUMSourceImpl.cc:643 source/yum/YUMSourceImpl.cc:655
+#: source/yum/YUMSourceImpl.cc:661 source/yum/YUMSourceImpl.cc:669
+#, c-format
+msgid "Reading selection from %s"
+msgstr "Читается выбор из %s"
+
+#. TranslatorExplanation %s = pattern metadata file
+#: source/yum/YUMSourceImpl.cc:693 source/yum/YUMSourceImpl.cc:705
+#: source/yum/YUMSourceImpl.cc:711 source/yum/YUMSourceImpl.cc:719
+#, c-format
+msgid "Reading pattern from %s"
+msgstr "Читаются шаблоны из %s"
+
+#. TranslatorExplanation %s = patches index file
+#: source/yum/YUMSourceImpl.cc:746 source/yum/YUMSourceImpl.cc:758
+#: source/yum/YUMSourceImpl.cc:764 source/yum/YUMSourceImpl.cc:772
+#, c-format
+msgid "Reading patches index %s"
+msgstr "Читается индекс исправлений %s"
+
+#. TranslatorExplanation %s = patch metadata file
+#: source/yum/YUMSourceImpl.cc:795 source/yum/YUMSourceImpl.cc:812
+#: source/yum/YUMSourceImpl.cc:818 source/yum/YUMSourceImpl.cc:827
+#, c-format
+msgid "Reading patch %s"
+msgstr "Читается исправление %s"
+
+#: source/susetags/SuseTagsImpl.cc:641 source/susetags/SuseTagsImpl.cc:651
+#: source/susetags/SuseTagsImpl.cc:654
+msgid "Reading packages file"
+msgstr "Читаются файлы пакета"
+
+# progress indicator label
+#. TranslatorExplanation %s = language name
+#: source/susetags/SuseTagsImpl.cc:704 source/susetags/SuseTagsImpl.cc:708
+#: source/susetags/SuseTagsImpl.cc:722
+#, c-format
+msgid "Reading translation: %s"
+msgstr "Читается перевод: %s"
+
+#: source/SourceImpl.cc:391
 msgid " miss checksum."
 msgstr " отсутствует контрольная сумма."
 
-#: source/SourceImpl.cc:390
+#: source/SourceImpl.cc:397
 msgid " fails checksum verification."
 msgstr "проверка контрольной суммы не удалась."
-
