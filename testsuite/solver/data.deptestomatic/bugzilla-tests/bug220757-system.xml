@@ -1,0 +1,60 @@
+<channel>
+  <subchannel>
+    <package>
+      <name>foo</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>1.0</version>
+          <release>1</release>
+          <filename>foo.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+    </package>
+    <package>
+      <name>morefoo</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>1.0</version>
+          <release>1</release>
+          <filename>bar.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+      <provides>
+        <dep name='foo'/>
+      </provides>
+    </package>
+<pattern>
+  <name>oracle_server</name>
+  <summary>Oracle Server Base</summary>
+  <description>Set up the server for installing Oracle databases.</description>
+  <history>
+    <update>
+      <hid>12345</hid>
+      <version>10</version>
+      <release>51.21</release>
+      <arch>i586</arch>
+    </update>
+  </history>
+  <requires>
+    <dep name='foo' refers='package' />
+  </requires>
+  <provides>
+    <dep name='oracle_server' refers='pattern' op='==' version='10' release='51.21' />
+  </provides>
+</pattern>
+  </subchannel>
+</channel>
