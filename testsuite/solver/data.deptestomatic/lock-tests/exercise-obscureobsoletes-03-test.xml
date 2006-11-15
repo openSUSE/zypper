@@ -6,11 +6,9 @@
 </setup>
 
 <!-- 
-# obsolete an virtual provides --> no attempt deleting foo and foo-devel  
+# obsolete an virtual provides --> foo and foo-devel will be deleted
  -->
 <trial>
-  <lock package="foo" channel="@system"/>
-  <lock package="foo-devel" channel="@system"/>
   <install channel="test" package="foo2old"/>
 </trial>
 

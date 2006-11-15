@@ -5,9 +5,5 @@
 >!> Solution #1:
 >!> install A2-2.0-1.noarch[upgrade]
 >!> remove  A-1.0-1.noarch
+>!> |unflag A_new-2.0-1.noarch[upgrade]
 >!> installs=1, upgrades=0, uninstalls=1
->!> Solution #2:
->!> install A2-2.0-1.noarch[upgrade]
->!> install A_new-2.0-1.noarch[upgrade]
->!> remove  A-1.0-1.noarch
->!> installs=2, upgrades=0, uninstalls=1

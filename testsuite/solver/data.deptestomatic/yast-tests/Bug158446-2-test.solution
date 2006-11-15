@@ -6,4 +6,5 @@
 >!> install language:de-.noarch
 >!> install language:de_DE-.noarch
 >!> upgrade kernel-default-2.6.16_rc5_git14-2.i586 => kernel-default-2.6.16_rc5_git14-3.i586[update]
+>!> |unflag kernel-default-2.6.16_rc6_git1-4.i586[packages]
 >!> installs=2, upgrades=1, uninstalls=0

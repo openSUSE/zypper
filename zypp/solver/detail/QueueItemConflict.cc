@@ -181,6 +181,9 @@ struct ConflictProcess
 	    return true;
 	}
 
+#if 0 // Bug 	220999; RPM does obsolete virtual provides too
+
+	
 	/* FIXME: This should probably be a GVersion capability. */
 	/* Obsoletes don't apply to virtual provides, only the items
 	 * themselves.  A provide is "virtual" if it's not the same spec
@@ -195,6 +198,8 @@ struct ConflictProcess
 	    _XDEBUG("obsolete to virtual provide - ignoring");
 	    return true;
 	}
+	
+#endif // Bug 	220999; RPM does obsolete virtual provides too	
 
 	status = context->getStatus(provider);
 

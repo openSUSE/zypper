@@ -48,6 +48,9 @@
 >!> |satisfied atom:omnibook-kmp-xen-20060126_2.6.16.21_0.6-3.1.i586[multi_source]
 >!> |satisfied atom:wlan-kmp-default-1_2.6.16.21_0.6-12.6.i586[multi_source]
 >!> |satisfied atom:wlan-kmp-xen-1_2.6.16.21_0.6-12.6.i586[multi_source]
+>!> |unflag kernel-default-2.6.16.21-0.6.i586[multi_source]
+>!> |unflag kernel-xen-2.6.16.21-0.6.i586[multi_source]
+>!> |unflag kernel-xenpae-2.6.16.21-0.6.i586[multi_source]
 >!> installs=4, upgrades=12, uninstalls=0, satisfied=9
 >!> Solution #2:
 >!> This solution is a duplicate.

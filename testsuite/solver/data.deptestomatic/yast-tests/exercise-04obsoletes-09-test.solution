@@ -1,5 +1,6 @@
 >!> Installing G from channel test
 >!> Solution #1:
 >!> install G-1.0-1.noarch[test]
+>!> remove  libD-1.0-1.noarch
 >!> |unflag D-1.0-1.noarch[test]
->!> installs=1, upgrades=0, uninstalls=0
+>!> installs=1, upgrades=0, uninstalls=1

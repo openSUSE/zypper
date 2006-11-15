@@ -6,6 +6,7 @@
 >!> install apache2-prefork-2.2.0-21.2.i586[sles10]
 >!> install libapr-util1-1.2.7-3.i586[stable]
 >!> install libapr1-1.2.7-3.i586[stable]
+>!> |unflag apache2-2.2.2-5.i586[stable]
 >!> installs=5, upgrades=0, uninstalls=0
 >!> Solution #2:
 >!> install apache2-2.2.0-21.2.i586[sles10]
@@ -13,6 +14,7 @@
 >!> install apache2-prefork-2.2.0-21.2.i586[sles10]
 >!> install libapr-util1-1.2.2-13.2.i586[sles10]
 >!> install libapr1-1.2.7-3.i586[stable]
+>!> |unflag apache2-2.2.2-5.i586[stable]
 >!> installs=5, upgrades=0, uninstalls=0
 >!> Solution #3:
 >!> install apache2-2.2.0-21.2.i586[sles10]
@@ -20,4 +22,5 @@
 >!> install apache2-prefork-2.2.0-21.2.i586[sles10]
 >!> install libapr-util1-1.2.2-13.2.i586[sles10]
 >!> install libapr1-1.2.2-13.2.i586[sles10]
+>!> |unflag apache2-2.2.2-5.i586[stable]
 >!> installs=5, upgrades=0, uninstalls=0
