@@ -227,7 +227,8 @@ std::string timestamp ()
   return outstr;
 }
 
-void add_source_by_url( const zypp::Url &url, std::string alias  )
+void add_source_by_url( const zypp::Url &url, const string &alias,
+			const string &type, bool enabled, bool refresh  )
 {
   cerr_vv << "Constructing SourceManager" << endl;
   SourceManager_Ptr manager = SourceManager::sourceManager();
@@ -239,22 +240,29 @@ void add_source_by_url( const zypp::Url &url, std::string alias  )
   Pathname path;
   Pathname cache;
   bool is_base = false;
-  if (alias.empty ())
-    alias = timestamp();
+  string myalias = alias.empty() ? timestamp() : alias;
    
   // more products?
   // try
   cerr_vv << "Creating source" << endl;
-  Source_Ref source = SourceFactory().createFrom( url, path, alias, cache, is_base );
+  Source_Ref source;
+  if (type.empty()) {
+    source = SourceFactory().createFrom( url, path, myalias, cache, is_base );
+  }
+  else {
+    source = SourceFactory().createFrom( type,
+					 url, path, myalias, cache, is_base,
+					 refresh );
+  }
   cerr_vv << "Adding source" << endl;
   SourceManager::SourceId sourceId = manager->addSource( source );
 
-  //if (enableSource)
+  if (enabled)
     source.enable();
-  //else
-  //  source.disable();
+  else
+    source.disable();
   
-  //source.setAutorefresh (autoRefresh);
+  source.setAutorefresh (refresh);
 
     sourceIds.push_back( sourceId );
       cout << "Added Installation Sources:" << endl;

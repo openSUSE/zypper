@@ -230,6 +230,7 @@ int one_command(const string& command, int argc, char **argv)
   }
   else if (command == "service-add" || command == "sa") {
     static struct option service_add_options[] = {
+      {"type", required_argument, 0, 't'},
       {"disabled", no_argument, 0, 'd'},
       {"no-refresh", no_argument, 0, 'n'},
       {"repo", required_argument, 0, 'r'},
@@ -244,6 +245,9 @@ int one_command(const string& command, int argc, char **argv)
       "  Command options:\n"
       "\t--repo,-r <FILE.repo>\tRead the URL and alias from a file\n"
       "\t\t\t\t(even remote)\n"
+      "\t--type,-t <TYPE>\tType of repository (YaST, YUM, or Plaindir)\n"
+      "\t--disabled,-d\t\tAdd the service as disabled\n"
+      "\t--no-refresh,-n\t\tDo not automatically refresh the metadata\n"
       ;
   }
   else if (command == "service-list" || command == "sl") {
@@ -532,11 +536,13 @@ int one_command(const string& command, int argc, char **argv)
   
   else if (command == "service-add" || command == "sa")
   {
-    if (copts.count("disabled")) {
-      cerr_v << "FAKE Disabled" << endl;
-    }
-    if (copts.count("no-refresh")) {
-      cerr_v << "FAKE No Refresh" << endl;
+    // TODO: repect values in .repo, have these as overrides
+    bool enabled = ! copts.count("disabled");
+    bool refresh = ! copts.count("no-refresh");
+
+    string type = copts.count("type")?  copts["type"].front() : "";
+    if (type != "" && type != "YaST" && type != "YUM" && type != "Plaindir") {
+      cerr << "Warning, unknown metadata type " << type << endl;
     }
 
     string repoalias, repourl;
@@ -573,7 +579,7 @@ int one_command(const string& command, int argc, char **argv)
 
     try {
       // also stores it
-      add_source_by_url(url, alias);
+      add_source_by_url(url, alias, type, enabled, refresh);
     }
     catch ( const Exception & excpt_r )
     {

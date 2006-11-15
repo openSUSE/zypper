@@ -17,7 +17,9 @@ void cond_init_system_sources();
 void init_system_sources();
 void include_source_by_url( const zypp::Url &url );
 bool parse_repo_file (const std::string& file, std::string& url, std::string& alias);
-void add_source_by_url( const zypp::Url &url, std::string alias );
+void add_source_by_url( const zypp::Url &url, const std::string &alias,
+			const std::string &type = "",
+			bool enabled = true, bool refresh = true );
 void remove_source( const std::string& anystring );
 void rename_source( const std::string& anystring, const std::string& newalias );
 void list_system_sources();
@@ -41,4 +43,7 @@ private:
 };
 
 #endif
-
+// Local Variables:
+// mode: c++
+// c-basic-offset: 2
+// End:
