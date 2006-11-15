@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Wed Nov 15 22:41:51 CET 2006 - ma@suse.de
+
+- Reimplemented RpmDb::checkPackage using librpm API instead
+  of parsing "rpm --checksig" output. (#163202)
+- Version 2.7.4
+- revision 4600
+
+-------------------------------------------------------------------
 Wed Nov 15 15:39:26 CET 2006 - schubi@suse.de
 
 - NEW behaviour of the solver:
@@ -24,7 +32,7 @@ Wed Nov 15 15:39:26 CET 2006 - schubi@suse.de
 - Translations added
 
 Version 2.7.3
-rev 4593 
+rev 4593
 
 -------------------------------------------------------------------
 Tue Nov 14 16:32:49 CET 2006 - schubi@suse.de
@@ -43,19 +51,19 @@ Mon Nov 13 18:35:01 CET 2006 - mt@suse.de
 Mon Nov 13 17:00:51 CET 2006 - dmacvicar@suse.de
 
 - ignore empty capabilities
-- r4565 
+- r4565
 
 -------------------------------------------------------------------
 Fri Nov 10 17:52:10 CET 2006 - dmacvicar@suse.de
 
 - make progress strings translatable (#219783)
-- r4556 
+- r4556
 
 -------------------------------------------------------------------
 Tue Nov  7 16:40:28 CET 2006 - schubi@suse.de
 
 -  While deleting a selection all concerning recommended
-   packages will be deleted too. 
+   packages will be deleted too.
    BUT those packages should not be deleted which have been
    set to KEEP by the user. bug 217574
    rev 4526
@@ -65,7 +73,7 @@ Tue Nov  7 16:40:28 CET 2006 - schubi@suse.de
 Tue Nov  7 13:12:49 CET 2006 - schubi@suse.de
 
 - Makefile in zypp2 fixed
-  Revision 4520 
+  Revision 4520
 
 -------------------------------------------------------------------
 Tue Nov  7 11:38:10 CET 2006 - schubi@suse.de
@@ -82,13 +90,13 @@ Mon Nov  6 12:32:22 CET 2006 - dmacvicar@suse.de
   Last fix making the parser relax would break multitag
   descriptions with empty lines, now we check dependencies
   at a higher level. (reference #160607)
-- r4501 
+- r4501
 
 -------------------------------------------------------------------
 Fri Nov  3 11:04:19 CET 2006 - schubi@suse.de
 
 - New problem solution added: Unlock ALL resovables in order to speed up
-  problem solution. Bug 206453 
+  problem solution. Bug 206453
 
 -------------------------------------------------------------------
 Fri Nov  3 10:29:08 CET 2006 - schubi@suse.de
@@ -108,7 +116,7 @@ Thu Nov  2 16:18:27 CET 2006 - dmacvicar@suse.de
 
 - skipping unreachable packages won't work
   (#215445)
-- r4468 
+- r4468
 
 -------------------------------------------------------------------
 Wed Oct 25 19:04:51 CEST 2006 - dmacvicar@suse.de
@@ -124,7 +132,7 @@ Wed Oct 25 19:04:51 CEST 2006 - dmacvicar@suse.de
   still pending: honour the read-only flag
   Changes to make this possible include
   using read_dir instead of boost directory
-  iterator. 
+  iterator.
 
 -------------------------------------------------------------------
 Wed Oct 25 17:09:06 CEST 2006 - schubi@suse.de
