@@ -58,7 +58,7 @@ namespace zypp
       // it can't affect disk usage
       if (inst || rem)
       {
-	Package::constPtr pkg = boost::dynamic_pointer_cast<const Package>( it->resolvable() );
+	Package::constPtr pkg = asKind<Package>( it->resolvable() );
 	DiskUsage du = pkg->diskusage();
 	DiskUsage du_another_package;
 	Edition edition_another_package;
@@ -83,7 +83,7 @@ namespace zypp
 		if (isKind<Package>(nameit->resolvable()))
 		{
 		    // found a package
-		    Package::constPtr pkg_from_source = boost::dynamic_pointer_cast<const Package>( nameit->resolvable() );
+		    Package::constPtr pkg_from_source = asKind<Package>( nameit->resolvable() );
 
 		    if (nameit->status().isToBeInstalled())
 		    {
