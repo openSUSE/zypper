@@ -78,6 +78,7 @@ make install DESTDIR=$RPM_BUILD_ROOT
 %defattr(-,root,root)
 %{_sysconfdir}/logrotate.d/zypper.lr
 %{_bindir}/zypper
+%{_bindir}/installation_sources
 %if %suse_version > 1010
 %{_sbindir}/zypp-checkpatches
 %verify(not mode) %attr (755,root,root) %{_sbindir}/zypp-checkpatches-wrapper

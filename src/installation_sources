@@ -1,0 +1,28 @@
+#!/bin/sh
+# this is a compatibility replacement for a C++ program
+# that was in yast2-packagemanager.rpm
+
+ZYPPER=zypper
+if [ "x$1" = "x-s" ]; then
+   exec $ZYPPER service-list
+fi
+
+if [ "x$1" = "x-e" ]; then
+   shift # do nothing, enabled is default
+elif [ "x$1" = "x-d" ]; then
+   ENABLED=--disable
+   shift
+fi
+
+if [ "x$1" = "x-a" -a -n "$2" ]; then
+   exec $ZYPPER service-add $ENABLED "$2"
+fi
+
+cat >&2 <<EOF
+Usage:
+  installation_sources [-e|-d] -a url   Add source at given URL.
+    -e  Enable source. This is the default.
+    -d  Disable source.
+  installation_sources -s       Show all available sources.
+EOF
+exit 1

@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Wed Nov 15 16:48:13 CET 2006 - mvidner@suse.cz
+
+- Resurrected /usr/bin/installation_sources, as a shell wrapper for
+  zypper (#163737).
+- 0.6.11
+
+-------------------------------------------------------------------
 Wed Nov 15 14:40:11 CET 2006 - mvidner@suse.cz
 
 - service-add: added options --type (especially for Plaindir,
