@@ -77,6 +77,10 @@ namespace zypp
       const std::string & asString() const
       { return name_t; }
 
+      /** String representation. */
+      const char * c_str() const
+      { return name_t.c_str(); }
+
       /** Test for an empty path. */
       bool empty()    const { return name_t.empty(); }
       /** Test for an absolute path. */
