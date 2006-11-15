@@ -172,6 +172,12 @@ namespace zypp
    * // Invoke consume on all PoolItems obsoleted by pi.
    * forEachPoolItemMatchedBy( _pool, _pi, Dep::OBSOLETES, consume );
    * \endcode
+   *
+   * \note \c action_r is invoked for each matching Capability. So if
+   * the same PoolItem provides multiple matches, \c action_r refers
+   * to the same PoolItem multiple times. It may as well be that
+   * \c poolitem_r provides a matching Capability. Use \ref OncePerPoolItem
+   * to compensate this if neccessary.
   */
   inline void forEachPoolItemMatchedBy( const ResPool &  pool_r,
                                         const PoolItem & poolitem_r,
@@ -197,6 +203,12 @@ namespace zypp
    * // Invoke consume on all PoolItems obsoleting pi.
    * forEachPoolItemMatching( _pool, Dep::OBSOLETES, _pi, consume );
    * \endcode
+   *
+   * \note \c action_r is invoked for each matching Capability. So if
+   * the same PoolItem provides multiple matches, \c action_r refers
+   * to the same PoolItem multiple times. It may as well be that
+   * \c poolitem_r provides a matching Capability. Use \ref OncePerPoolItem
+   * to compensate this if neccessary.
   */
   inline void forEachPoolItemMatching( const ResPool &  pool_r,
                                        const Dep &      pooldep_r,
@@ -207,6 +219,68 @@ namespace zypp
               poolitem_r->dep(Dep::PROVIDES).end(),
               ForEachMatchInPool( pool_r, pooldep_r, action_r ) );
   }
+
+  /** Functor translating \ref CapAndItem actions into \ref PoolItem
+   *  actions avoiding multiple invocations for the same \ref PoolItem.
+   *
+   * Additionally you may omit invocation of \a action_r for a
+   * specific PoolItem.
+   *
+   * \code
+   * bool consume( const CapAndItem & cai_r );
+   * bool consumePi( const PoolItem & pi_r );
+   *
+   * ResPool  _pool;
+   * PoolItem _pi;
+   *
+   * // Invoke consume on all PoolItems obsoleted by pi.
+   * // Once for each matching Capability, thus the same PoolItem
+   * // might be involved mutiple times.
+   * forEachPoolItemMatchedBy( _pool, _pi, Dep::OBSOLETES,
+   *                           consume );
+   *
+   * // Invoke consume on all PoolItems obsoleted by pi.
+   * // Once for each PoolItem, still including _pi in case
+   * // it provides a match by itself.
+   * forEachPoolItemMatchedBy( _pool, _pi, Dep::OBSOLETES,
+   *                           OncePerPoolItem( consumePi ) );
+   *
+   * // Invoke consume on all PoolItems obsoleted by pi.
+   * // Once for each PoolItem, omitting invokation for
+   * // _pi (in case it obsoletes itself).
+   * forEachPoolItemMatchedBy( _pool, _pi, Dep::OBSOLETES,
+   *                           OncePerPoolItem( consumePi, _pi ) );
+   * \endcode
+   * \ingroup g_Functor
+   * \ingroup CAPFILTERS
+  */
+  struct OncePerPoolItem
+  {
+  public:
+    typedef function<bool(const PoolItem &)> Action;
+
+  public:
+    OncePerPoolItem( const Action & action_r,
+                     const PoolItem & self_r = PoolItem() )
+    : _action( action_r )
+    , _uset  ( new std::set<PoolItem> )
+    {
+      if ( self_r )
+        _uset->insert( self_r );
+    }
+
+    bool operator()( const CapAndItem & cai_r ) const
+    {
+      if ( _uset->insert( cai_r.item ).second )
+        return _action( cai_r.item );
+      return true;
+    }
+
+  private:
+    Action   _action;
+    shared_ptr<std::set<PoolItem> > _uset;
+  };
+
 
   //@}
 
