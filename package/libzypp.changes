@@ -1,4 +1,32 @@
 -------------------------------------------------------------------
+Wed Nov 15 15:39:26 CET 2006 - schubi@suse.de
+
+- NEW behaviour of the solver:
+  Obsolete virtual provides. E.G.:
+
+  Installed:
+  -----------
+  Name:           test-1.0-0
+
+  Name:           moretest-1.0-0
+  Provides:       test
+
+  To be installed
+  ------------------
+  Name:           nomoretest-1.0-0
+  Obsoletes:      test
+
+  Result
+  --------
+  test-1.0-0 AND  moretest-1.0-0 will be deleted. In former versions only
+  test-1.0-0 had been deleted.
+
+- Translations added
+
+Version 2.7.3
+rev 4593 
+
+-------------------------------------------------------------------
 Tue Nov 14 16:32:49 CET 2006 - schubi@suse.de
 
 - Bugfix in generating solver testcases:
