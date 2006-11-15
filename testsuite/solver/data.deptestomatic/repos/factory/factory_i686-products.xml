@@ -1,0 +1,21 @@
+<channel><subchannel>
+<product>
+  <name>openSUSE</name>
+  <summary>openSUSE FACTORY 10.2</summary>
+  <history>
+    <update>
+      <hid>12345</hid>
+      <version>10.2</version>
+      <arch>i586</arch>
+    </update>
+  </history>
+  <requires>
+    <dep name='openSUSE-release' refers='package' />
+    <dep name='=' refers='package' />
+    <dep name='10.2' refers='package' />
+  </requires>
+  <provides>
+    <dep name='' refers='product' />
+  </provides>
+</product>
+</subchannel></channel>

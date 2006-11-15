@@ -1,0 +1,2690 @@
+<channel><subchannel>
+<pattern>
+  <name>sw_management</name>
+  <summary>Package Management</summary>
+  <description>Package management using directly the native libraries.
+This is a lightweight alternative to the ZENworks Linux Management tools for local systems.
+This pattern provides a graphical update application and a command line tool.</description>
+  <history>
+    <update>
+      <hid>12345</hid>
+      <version>10.2</version>
+      <release>109</release>
+      <arch>i586</arch>
+    </update>
+  </history>
+  <requires>
+    <dep name='zypper' refers='package' />
+  </requires>
+  <provides>
+    <dep name='sw_management' refers='pattern' op='==' version='10.2' release='109' />
+    <dep name='sw_management_pattern' refers='pattern' />
+  </provides>
+</pattern>
+<pattern>
+  <name>laptop</name>
+  <summary>Laptop</summary>
+  <description>Tools designed specifically for use with laptop computers.</description>
+  <history>
+    <update>
+      <hid>12345</hid>
+      <version>10.2</version>
+      <release>109</release>
+      <arch>i586</arch>
+    </update>
+  </history>
+  <requires>
+    <dep name='basesystem' refers='pattern' />
+  </requires>
+  <provides>
+    <dep name='laptop' refers='pattern' op='==' version='10.2' release='109' />
+  </provides>
+  <recommends>
+    <dep name='atmel-firmware' refers='package' />
+    <dep name='hotkey-setup' refers='package' />
+    <dep name='ipw-firmware' refers='package' />
+    <dep name='ipw3945d' refers='package' />
+    <dep name='irda' refers='package' />
+    <dep name='madwifi' refers='package' />
+    <dep name='pcmciautils' refers='package' />
+    <dep name='scpm' refers='package' />
+    <dep name='sumf' refers='package' />
+    <dep name='suspend' refers='package' />
+    <dep name='tpctl' refers='package' />
+    <dep name='wpa_supplicant' refers='package' />
+    <dep name='jarnal' refers='package' />
+    <dep name='xournal' refers='package' />
+    <dep name='xstroke' refers='package' />
+    <dep name='xvkbd' refers='package' />
+    <dep name='x11-input-wacom-tools' refers='package' />
+    <dep name='dockutils' refers='package' />
+  </recommends>
+</pattern>
+<pattern>
+  <name>gateway_server</name>
+  <summary>Internet Gateway</summary>
+  <description>Set up a proxy, firewall, and gateway server. Also provide a virtual private network (VPN) gateway.</description>
+  <history>
+    <update>
+      <hid>12345</hid>
+      <version>10.2</version>
+      <release>109</release>
+      <arch>i586</arch>
+    </update>
+  </history>
+  <requires>
+    <dep name='basesystem' refers='pattern' />
+  </requires>
+  <provides>
+    <dep name='gateway_server' refers='pattern' op='==' version='10.2' release='109' />
+  </provides>
+  <recommends>
+    <dep name='ddclient' refers='package' />
+    <dep name='fetchmail' refers='package' />
+    <dep name='ipsec-tools' refers='package' />
+    <dep name='quagga' refers='package' />
+    <dep name='radvd' refers='package' />
+    <dep name='rarpd' refers='package' />
+    <dep name='squid' refers='package' />
+    <dep name='squidGuard' refers='package' />
+    <dep name='wireshark' refers='package' />
+  </recommends>
+</pattern>
+<pattern>
+  <name>devel_kde</name>
+  <summary>KDE Development</summary>
+  <description>Development for the KDE Desktop</description>
+  <history>
+    <update>
+      <hid>12345</hid>
+      <version>10.2</version>
+      <release>109</release>
+      <arch>i586</arch>
+    </update>
+  </history>
+  <requires>
+    <dep name='devel_C_C++' refers='pattern' />
+    <dep name='kde_basis' refers='pattern' />
+    <dep name='kdebase3-devel' refers='package' />
+  </requires>
+  <provides>
+    <dep name='devel_kde' refers='pattern' op='==' version='10.2' release='109' />
+  </provides>
+  <suggests>
+    <dep name='kdebindings3' refers='package' />
+    <dep name='kdebindings3-java' refers='package' />
+    <dep name='kdebindings3-javascript' refers='package' />
+    <dep name='kdebindings3-perl' refers='package' />
+    <dep name='kdebindings3-python' refers='package' />
+    <dep name='kdegraphics3-devel' refers='package' />
+    <dep name='kdemultimedia3-devel' refers='package' />
+    <dep name='kdepim3-devel' refers='package' />
+    <dep name='kdesdk3-devel' refers='package' />
+    <dep name='kdeutils3-devel' refers='package' />
+    <dep name='qt3-static' refers='package' />
+  </suggests>
+</pattern>
+<pattern>
+  <name>devel_java</name>
+  <summary>Java Development</summary>
+  <description>Tools and libraries for software development using the Java programming language.</description>
+  <history>
+    <update>
+      <hid>12345</hid>
+      <version>10.2</version>
+      <release>109</release>
+      <arch>i586</arch>
+    </update>
+  </history>
+  <requires>
+    <dep name='ant' refers='package' />
+    <dep name='ant-antlr' refers='package' />
+    <dep name='ant-apache-bcel' refers='package' />
+    <dep name='ant-apache-bsf' refers='package' />
+    <dep name='ant-apache-log4j' refers='package' />
+    <dep name='ant-apache-oro' refers='package' />
+    <dep name='ant-apache-regexp' refers='package' />
+    <dep name='ant-apache-resolver' refers='package' />
+    <dep name='ant-commons-logging' refers='package' />
+    <dep name='ant-commons-logging' refers='package' />
+    <dep name='ant-commons-net' refers='package' />
+    <dep name='ant-commons-net' refers='package' />
+    <dep name='ant-jai' refers='package' />
+    <dep name='ant-javadoc' refers='package' />
+    <dep name='ant-javamail' refers='package' />
+    <dep name='ant-jdepend' refers='package' />
+    <dep name='ant-jmf' refers='package' />
+    <dep name='ant-jsch' refers='package' />
+    <dep name='ant-junit' refers='package' />
+    <dep name='ant-manual' refers='package' />
+    <dep name='ant-nodeps' refers='package' />
+    <dep name='ant-scripts' refers='package' />
+    <dep name='ant-swing' refers='package' />
+    <dep name='ant-trax' refers='package' />
+    <dep name='java-1_4_2-cacao-devel' refers='package' />
+    <dep name='java-1_4_2-gcj-compat-devel' refers='package' />
+    <dep name='log4j' refers='package' />
+    <dep name='tomcat' refers='package' />
+    <dep name='xalan-j2' refers='package' />
+    <dep name='xerces-j2' refers='package' />
+    <dep name='xml-commons-apis' refers='package' />
+    <dep name='xml-commons-resolver' refers='package' />
+    <dep name='xml-commons-which' refers='package' />
+  </requires>
+  <provides>
+    <dep name='devel_java' refers='pattern' op='==' version='10.2' release='109' />
+  </provides>
+  <suggests>
+    <dep name='geronimo' refers='package' />
+    <dep name='jakarta-commons-beanutils' refers='package' />
+    <dep name='jakarta-commons-codec' refers='package' />
+    <dep name='jakarta-commons-collections' refers='package' />
+    <dep name='jakarta-commons-daemon' refers='package' />
+    <dep name='jakarta-commons-daemon-jsvc' refers='package' />
+    <dep name='jakarta-commons-dbcp' refers='package' />
+    <dep name='jakarta-commons-digester' refers='package' />
+    <dep name='jakarta-commons-discovery' refers='package' />
+    <dep name='jakarta-commons-el' refers='package' />
+    <dep name='jakarta-commons-fileupload' refers='package' />
+    <dep name='jakarta-commons-httpclient3' refers='package' />
+    <dep name='jakarta-commons-httpclient3-demo' refers='package' />
+    <dep name='jakarta-commons-lang' refers='package' />
+    <dep name='jakarta-commons-launcher' refers='package' />
+    <dep name='jakarta-commons-logging' refers='package' />
+    <dep name='jakarta-commons-modeler' refers='package' />
+    <dep name='jakarta-commons-pool' refers='package' />
+    <dep name='jakarta-commons-validator' refers='package' />
+    <dep name='javacc' refers='package' />
+    <dep name='jboss' refers='package' />
+    <dep name='jdepend' refers='package' />
+    <dep name='jonas' refers='package' />
+    <dep name='mysql-connector-java' refers='package' />
+    <dep name='puretls' refers='package' />
+  </suggests>
+</pattern>
+<pattern>
+  <name>zmd_x11</name>
+  <summary>ZENworks Linux Management - Graphical Tools</summary>
+  <description>ZENworks Linux Management - Graphical Tools</description>
+  <history>
+    <update>
+      <hid>12345</hid>
+      <version>10.2</version>
+      <release>109</release>
+      <arch>i586</arch>
+    </update>
+  </history>
+  <requires>
+    <dep name='zmd' refers='pattern' />
+    <dep name='zen-updater' refers='package' />
+  </requires>
+  <provides>
+    <dep name='zmd_x11' refers='pattern' op='==' version='10.2' release='109' />
+    <dep name='sw_management_x11_pattern' refers='pattern' />
+  </provides>
+</pattern>
+<pattern>
+  <name>zmd</name>
+  <summary>ZENworks Linux Management Support</summary>
+  <description>Novell ZENworks Linux Management makes it easy to embrace and extend Linux within your existing environment.
+The complete functionality is only available in a ZENworks Linux Management server controlled environment.
+ZENworks Linux management allows remote and local management of clients.
+The package management features are usefull for every system.
+This pattern provides a graphical update application, a command line tool and a system daemon.</description>
+  <history>
+    <update>
+      <hid>12345</hid>
+      <version>10.2</version>
+      <release>109</release>
+      <arch>i586</arch>
+    </update>
+  </history>
+  <requires>
+    <dep name='rug' refers='package' />
+    <dep name='zmd' refers='package' />
+  </requires>
+  <provides>
+    <dep name='zmd' refers='pattern' op='==' version='10.2' release='109' />
+    <dep name='sw_management_pattern' refers='pattern' />
+  </provides>
+</pattern>
+<pattern>
+  <name>gnome_basis</name>
+  <summary>GNOME Base System</summary>
+  <description>Basis packages for GNOME Desktop Environment</description>
+  <history>
+    <update>
+      <hid>12345</hid>
+      <version>10.2</version>
+      <release>109</release>
+      <arch>i586</arch>
+    </update>
+  </history>
+  <requires>
+    <dep name='x11' refers='pattern' />
+    <dep name='basesystem' refers='pattern' />
+    <dep name='gdm' refers='package' />
+    <dep name='gnome-panel' refers='package' />
+    <dep name='gnome-main-menu' refers='package' />
+    <dep name='gtk2-themes' refers='package' />
+  </requires>
+  <provides>
+    <dep name='gnome_basis' refers='pattern' op='==' version='10.2' release='109' />
+  </provides>
+  <suggests>
+    <dep name='gnopernicus' refers='package' />
+  </suggests>
+  <recommends>
+    <dep name='aspell' refers='package' />
+    <dep name='at-spi' refers='package' />
+    <dep name='awesfx' refers='package' />
+    <dep name='beagle' refers='package' />
+    <dep name='beagle-evolution' refers='package' />
+    <dep name='beagle-firefox' refers='package' />
+    <dep name='beagle-gui' refers='package' />
+    <dep name='beagle-index' refers='package' />
+    <dep name='bug-buddy' refers='package' />
+    <dep name='cdparanoia' refers='package' />
+    <dep name='cdrdao' refers='package' />
+    <dep name='control-center2' refers='package' />
+    <dep name='cups-backends' refers='package' />
+    <dep name='dbus-1-python' refers='package' />
+    <dep name='dbus-1-x11' refers='package' />
+    <dep name='desktop-file-utils' refers='package' />
+    <dep name='dirmngr' refers='package' />
+    <dep name='dosbootdisk' refers='package' />
+    <dep name='dvd+rw-tools' refers='package' />
+    <dep name='efont-unicode' refers='package' />
+    <dep name='eog' refers='package' />
+    <dep name='evince' refers='package' />
+    <dep name='evolution' refers='package' />
+    <dep name='fam' refers='package' />
+    <dep name='fam-server' refers='package' />
+    <dep name='file-roller' refers='package' />
+    <dep name='gail' refers='package' />
+    <dep name='gaim' refers='package' />
+    <dep name='gcalctool' refers='package' />
+    <dep name='gconf2' refers='package' />
+    <dep name='gconf-editor' refers='package' />
+    <dep name='gdk-pixbuf' refers='package' />
+    <dep name='gedit' refers='package' />
+    <dep name='gle' refers='package' />
+    <dep name='glib-sharp2' refers='package' />
+    <dep name='gnome2-SuSE' refers='package' />
+    <dep name='gnome2-user-docs' refers='package' />
+    <dep name='gnome-applets' refers='package' />
+    <dep name='gnome-audio' refers='package' />
+    <dep name='gnome-cups-manager' refers='package' />
+    <dep name='gnome-desktop' refers='package' />
+    <dep name='gnome-doc-utils' refers='package' />
+    <dep name='gnome-icon-theme' refers='package' />
+    <dep name='gnome-keyring' refers='package' />
+    <dep name='gnome-keyring-manager' refers='package' />
+    <dep name='gnome-mag' refers='package' />
+    <dep name='gnome-media' refers='package' />
+    <dep name='gnome-menus' refers='package' />
+    <dep name='gnome-mime-data' refers='package' />
+    <dep name='gnome-nettool' refers='package' />
+    <dep name='gnome-power-manager' refers='package' />
+    <dep name='gnome-printer-add' refers='package' />
+    <dep name='gnome-screensaver' refers='package' />
+    <dep name='gnome-session' refers='package' />
+    <dep name='gnome-spell2' refers='package' />
+    <dep name='gnome-system-monitor' refers='package' />
+    <dep name='gnome-terminal' refers='package' />
+    <dep name='gnome-themes' refers='package' />
+    <dep name='gnome-utils' refers='package' />
+    <dep name='gnome-vfs2' refers='package' />
+    <dep name='gnome-volume-manager' refers='package' />
+    <dep name='gnome-web-photo' refers='package' />
+    <dep name='gpg2' refers='package' />
+    <dep name='gpgme' refers='package' />
+    <dep name='gstreamer010' refers='package' />
+    <dep name='gstreamer010-plugins-base' refers='package' />
+    <dep name='gstreamer010-plugins-good' refers='package' />
+    <dep name='gtk2-engines' refers='package' />
+    <dep name='gtk-engines' refers='package' />
+    <dep name='gtkhtml2' refers='package' />
+    <dep name='gtk-sharp2' refers='package' />
+    <dep name='gtksourceview' refers='package' />
+    <dep name='gtkspell' refers='package' />
+    <dep name='gucharmap' refers='package' />
+    <dep name='guile' refers='package' />
+    <dep name='hal-gnome' refers='package' />
+    <dep name='htdig' refers='package' />
+    <dep name='input-utils' refers='package' />
+    <dep name='jack' refers='package' />
+    <dep name='kdelibs3' refers='package' />
+    <dep name='latex2html-pngicons' refers='package' />
+    <dep name='lzo' refers='package' />
+    <dep name='mDNSResponder' refers='package' />
+    <dep name='metacity' refers='package' />
+    <dep name='nautilus' refers='package' />
+    <dep name='nautilus-cd-burner' refers='package' />
+    <dep name='nautilus-open-terminal' refers='package' />
+    <dep name='nautilus-sendto' refers='package' />
+    <dep name='nautilus-share' refers='package' />
+    <dep name='ncpfs' refers='package' />
+    <dep name='NetworkManager' refers='package' />
+    <dep name='NetworkManager-gnome' refers='package' />
+    <dep name='notification-daemon' refers='package' />
+    <dep name='orca' refers='package' />
+    <dep name='pinentry' refers='package' />
+    <dep name='pinentry-gtk2' refers='package' />
+    <dep name='poppler' refers='package' />
+    <dep name='poppler-glib' refers='package' />
+    <dep name='python' refers='package' />
+    <dep name='python-gnome' refers='package' />
+    <dep name='python-gtk' refers='package' />
+    <dep name='python-numeric' refers='package' />
+    <dep name='python-orbit' refers='package' />
+    <dep name='samba' refers='package' />
+    <dep name='SDL' refers='package' />
+    <dep name='sensors' refers='package' />
+    <dep name='shared-mime-info' refers='package' />
+    <dep name='sox' refers='package' />
+    <dep name='startup-notification' refers='package' />
+    <dep name='susehelp' refers='package' />
+    <dep name='tango-icon-theme' refers='package' />
+    <dep name='thinkeramik-style' refers='package' />
+    <dep name='tomboy' refers='package' />
+    <dep name='vcdimager' refers='package' />
+    <dep name='vino' refers='package' />
+    <dep name='vte' refers='package' />
+    <dep name='xkeyboard-config' refers='package' />
+    <dep name='xscreensaver' refers='package' />
+    <dep name='yast2-sound' refers='package' />
+    <dep name='yelp' refers='package' />
+    <dep name='zenity' refers='package' />
+  </recommends>
+</pattern>
+<pattern>
+  <name>devel_rpm_build</name>
+  <summary>RPM Build Environment</summary>
+  <description>Minimal set of tools and libraries for building packages using the RPM package manager.</description>
+  <history>
+    <update>
+      <hid>12345</hid>
+      <version>10.2</version>
+      <release>109</release>
+      <arch>i586</arch>
+    </update>
+  </history>
+  <requires>
+    <dep name='basesystem' refers='pattern' />
+    <dep name='acl' refers='package' />
+    <dep name='attr' refers='package' />
+    <dep name='autoconf' refers='package' />
+    <dep name='automake' refers='package' />
+    <dep name='bind-utils' refers='package' />
+    <dep name='binutils' refers='package' />
+    <dep name='bison' refers='package' />
+    <dep name='cpp' refers='package' />
+    <dep name='cracklib' refers='package' />
+    <dep name='cvs' refers='package' />
+    <dep name='cyrus-sasl' refers='package' />
+    <dep name='e2fsprogs' refers='package' />
+    <dep name='flex' refers='package' />
+    <dep name='gawk' refers='package' />
+    <dep name='gcc' refers='package' />
+    <dep name='gdbm-devel' refers='package' />
+    <dep name='gettext-devel' refers='package' />
+    <dep name='glibc-devel' refers='package' />
+    <dep name='glibc-locale' refers='package' />
+    <dep name='gpm' refers='package' />
+    <dep name='klogd' refers='package' />
+    <dep name='less' refers='package' />
+    <dep name='libtool' refers='package' />
+    <dep name='make' refers='package' />
+    <dep name='man' refers='package' />
+    <dep name='module-init-tools' refers='package' />
+    <dep name='ncurses-devel' refers='package' />
+    <dep name='netcfg' refers='package' />
+    <dep name='patch' refers='package' />
+    <dep name='procinfo' refers='package' />
+    <dep name='procps' refers='package' />
+    <dep name='psmisc' refers='package' />
+    <dep name='pwdutils' refers='package' />
+    <dep name='rcs' refers='package' />
+    <dep name='rpm' refers='package' />
+    <dep name='strace' refers='package' />
+    <dep name='sysvinit' refers='package' />
+    <dep name='tar' refers='package' />
+    <dep name='tcpd' refers='package' />
+    <dep name='texinfo' refers='package' />
+    <dep name='timezone' refers='package' />
+    <dep name='unzip' refers='package' />
+    <dep name='util-linux' refers='package' />
+    <dep name='vim' refers='package' />
+    <dep name='zlib-devel' refers='package' />
+  </requires>
+  <provides>
+    <dep name='devel_rpm_build' refers='pattern' op='==' version='10.2' release='109' />
+  </provides>
+  <suggests>
+    <dep name='build' refers='package' />
+  </suggests>
+</pattern>
+<pattern>
+  <name>devel_mono</name>
+  <summary>.NET Development</summary>
+  <description>Tools and libraries for software development using .NET on Linux.</description>
+  <history>
+    <update>
+      <hid>12345</hid>
+      <version>10.2</version>
+      <release>109</release>
+      <arch>i586</arch>
+    </update>
+  </history>
+  <requires>
+    <dep name='mono-core' refers='package' />
+    <dep name='mono-devel' refers='package' />
+    <dep name='monodevelop' refers='package' />
+  </requires>
+  <provides>
+    <dep name='devel_mono' refers='pattern' op='==' version='10.2' release='109' />
+  </provides>
+  <suggests>
+    <dep name='ipod-sharp' refers='package' />
+    <dep name='OpenOffice_org-mono' refers='package' />
+  </suggests>
+  <recommends>
+    <dep name='boo' refers='package' />
+    <dep name='bytefx-data-mysql' refers='package' />
+    <dep name='dbus-1-mono' refers='package' />
+    <dep name='gecko-sharp' refers='package' />
+    <dep name='gecko-sharp2' refers='package' />
+    <dep name='gsf-sharp' refers='package' />
+    <dep name='gtk-sharp-complete' refers='package' />
+    <dep name='gtk-sharp2-complete' refers='package' />
+    <dep name='gtk-sharp2-doc' refers='package' />
+    <dep name='gtk-sharp2-gapi' refers='package' />
+    <dep name='gtk-sharp-gapi' refers='package' />
+    <dep name='gtksourceview-sharp2' refers='package' />
+    <dep name='ikvm' refers='package' />
+    <dep name='mod_mono' refers='package' />
+    <dep name='mono-basic' refers='package' />
+    <dep name='mono-data' refers='package' />
+    <dep name='mono-data-firebird' refers='package' />
+    <dep name='mono-data-oracle' refers='package' />
+    <dep name='mono-data-postgresql' refers='package' />
+    <dep name='mono-data-sqlite' refers='package' />
+    <dep name='mono-data-sybase' refers='package' />
+    <dep name='monodoc-core' refers='package' />
+    <dep name='mono-extras' refers='package' />
+    <dep name='mono-locale-extras' refers='package' />
+    <dep name='mono-nunit' refers='package' />
+    <dep name='mono-tools' refers='package' />
+    <dep name='mono-web' refers='package' />
+    <dep name='mono-winforms' refers='package' />
+  </recommends>
+</pattern>
+<pattern>
+  <name>devel_basis</name>
+  <summary>Basis Development</summary>
+  <description>Minimal set of tools for compiling and linking applications.</description>
+  <history>
+    <update>
+      <hid>12345</hid>
+      <version>10.2</version>
+      <release>109</release>
+      <arch>i586</arch>
+    </update>
+  </history>
+  <requires>
+    <dep name='basesystem' refers='pattern' />
+    <dep name='autoconf' refers='package' />
+    <dep name='automake' refers='package' />
+    <dep name='binutils' refers='package' />
+    <dep name='bison' refers='package' />
+    <dep name='cpp' refers='package' />
+    <dep name='cvs' refers='package' />
+    <dep name='gcc' refers='package' />
+    <dep name='flex' refers='package' />
+    <dep name='gdbm-devel' refers='package' />
+    <dep name='gettext-devel' refers='package' />
+    <dep name='glibc-devel' refers='package' />
+    <dep name='libtool' refers='package' />
+    <dep name='m4' refers='package' />
+    <dep name='make' refers='package' />
+    <dep name='ncurses-devel' refers='package' />
+    <dep name='patch' refers='package' />
+    <dep name='rcs' refers='package' />
+    <dep name='texinfo' refers='package' />
+    <dep name='zlib-devel' refers='package' />
+  </requires>
+  <provides>
+    <dep name='devel_basis' refers='pattern' op='==' version='10.2' release='109' />
+  </provides>
+  <suggests>
+    <dep name='build' refers='package' />
+    <dep name='gcc-fortran' refers='package' />
+    <dep name='gcc-objc' refers='package' />
+    <dep name='libobjc41' refers='package' />
+  </suggests>
+  <recommends>
+    <dep name='bin86' refers='package' />
+    <dep name='db-devel' refers='package' />
+    <dep name='gcc-c++' refers='package' />
+    <dep name='gcc-info' refers='package' />
+    <dep name='glibc-info' refers='package' />
+    <dep name='gmp-devel' refers='package' />
+    <dep name='gperf' refers='package' />
+    <dep name='libaio-devel' refers='package' />
+    <dep name='libelf' refers='package' />
+    <dep name='libgcj-devel' refers='package' />
+    <dep name='libstdc++-devel' refers='package' />
+    <dep name='pkgconfig' refers='package' />
+    <dep name='subversion' refers='package' />
+  </recommends>
+</pattern>
+<pattern>
+  <name>base</name>
+  <summary>openSUSE Base System</summary>
+  <description>This is the base openSUSE runtime system.</description>
+  <history>
+    <update>
+      <hid>12345</hid>
+      <version>10.2</version>
+      <release>109</release>
+      <arch>i586</arch>
+    </update>
+  </history>
+  <requires>
+    <dep name='yast2_basis' refers='pattern' />
+    <dep name='SuSEfirewall2' refers='package' />
+    <dep name='aaa_base' refers='package' />
+    <dep name='aaa_skel' refers='package' />
+    <dep name='acl' refers='package' />
+    <dep name='ash' refers='package' />
+    <dep name='attr' refers='package' />
+    <dep name='audit-libs' refers='package' />
+    <dep name='bash' refers='package' />
+    <dep name='bzip2' refers='package' />
+    <dep name='coreutils' refers='package' />
+    <dep name='cpio' refers='package' />
+    <dep name='cracklib' refers='package' />
+    <dep name='cups-client' refers='package' />
+    <dep name='cups-drivers' refers='package' />
+    <dep name='gutenprint' refers='package' />
+    <dep name='curl' refers='package' />
+    <dep name='cyrus-sasl' refers='package' />
+    <dep name='cyrus-sasl-saslauthd' refers='package' />
+    <dep name='db' refers='package' />
+    <dep name='db-utils' refers='package' />
+    <dep name='dbus-1' refers='package' />
+    <dep name='device-mapper' refers='package' />
+    <dep name='diffutils' refers='package' />
+    <dep name='e2fsprogs' refers='package' />
+    <dep name='ed' refers='package' />
+    <dep name='eject' refers='package' />
+    <dep name='ethtool' refers='package' />
+    <dep name='evms' refers='package' />
+    <dep name='file' refers='package' />
+    <dep name='filesystem' refers='package' />
+    <dep name='fillup' refers='package' />
+    <dep name='findutils' refers='package' />
+    <dep name='glibc' refers='package' />
+    <dep name='grep' refers='package' />
+    <dep name='groff' refers='package' />
+    <dep name='gzip' refers='package' />
+    <dep name='hwinfo' refers='package' />
+    <dep name='insserv' refers='package' />
+    <dep name='iproute2' refers='package' />
+    <dep name='iptables' refers='package' />
+    <dep name='iputils' refers='package' />
+    <dep name='kbd' refers='package' />
+    <dep name='klogd' refers='package' />
+    <dep name='krb5' refers='package' />
+    <dep name='ksymoops' refers='package' />
+    <dep name='ldapcpplib' refers='package' />
+    <dep name='less' refers='package' />
+    <dep name='limal' refers='package' />
+    <dep name='limal-bootloader' refers='package' />
+    <dep name='limal-perl' refers='package' />
+    <dep name='logrotate' refers='package' />
+    <dep name='lvm2' refers='package' />
+    <dep name='mailx' refers='package' />
+    <dep name='mdadm' refers='package' />
+    <dep name='mingetty' refers='package' />
+    <dep name='mkinitrd' refers='package' />
+    <dep name='mkisofs' refers='package' />
+    <dep name='mktemp' refers='package' />
+    <dep name='module-init-tools' refers='package' />
+    <dep name='multipath-tools' refers='package' />
+    <dep name='ncurses' refers='package' />
+    <dep name='net-tools' refers='package' />
+    <dep name='netcfg' refers='package' />
+    <dep name='openssh' refers='package' />
+    <dep name='openssl' refers='package' />
+    <dep name='pam' refers='package' />
+    <dep name='pam-config' refers='package' />
+    <dep name='pam-modules' refers='package' />
+    <dep name='parted' refers='package' />
+    <dep name='perl' refers='package' />
+    <dep name='permissions' refers='package' />
+    <dep name='procps' refers='package' />
+    <dep name='psmisc' refers='package' />
+    <dep name='pwdutils' refers='package' />
+    <dep name='reiserfs' refers='package' />
+    <dep name='rpm' refers='package' />
+    <dep name='sed' refers='package' />
+    <dep name='openSUSE-release' refers='package' />
+    <dep name='smtp_daemon' refers='package' />
+    <dep name='suse-build-key' refers='package' />
+    <dep name='sysconfig' refers='package' />
+    <dep name='sysfsutils' refers='package' />
+    <dep name='syslog-ng' refers='package' />
+    <dep name='sysvinit' refers='package' />
+    <dep name='tar' refers='package' />
+    <dep name='util-linux' refers='package' />
+    <dep name='vim' refers='package' />
+    <dep name='w3m' refers='package' />
+    <dep name='wget' refers='package' />
+    <dep name='zlib' refers='package' />
+    <dep name='microcode_ctl' refers='package' />
+    <dep name='grub' refers='package' />
+  </requires>
+  <provides>
+    <dep name='base' refers='pattern' op='==' version='10.2' release='109' />
+    <dep name='basesystem' refers='pattern' />
+  </provides>
+  <suggests>
+    <dep name='delayacct-utils' refers='package' />
+    <dep name='exim' refers='package' />
+    <dep name='sendmail' refers='package' />
+    <dep name='rsh' refers='package' />
+    <dep name='lilo' refers='package' />
+  </suggests>
+  <recommends>
+    <dep name='apparmor' refers='pattern' />
+    <dep name='zmd' refers='pattern' />
+    <dep name='sw_management_pattern' refers='pattern' />
+    <dep name='acpid' refers='package' />
+    <dep name='at' refers='package' />
+    <dep name='autofs' refers='package' />
+    <dep name='bc' refers='package' />
+    <dep name='bind-libs' refers='package' />
+    <dep name='bind-utils' refers='package' />
+    <dep name='blocxx' refers='package' />
+    <dep name='bootcycle' refers='package' />
+    <dep name='bootsplash' refers='package' />
+    <dep name='bootsplash-theme-SuSE' refers='package' />
+    <dep name='compat' refers='package' />
+    <dep name='compat-libstdc++' refers='package' />
+    <dep name='compat-openssl097g' refers='package' />
+    <dep name='cpufrequtils' refers='package' />
+    <dep name='cron' refers='package' />
+    <dep name='cups' refers='package' />
+    <dep name='dbus-1-glib' refers='package' />
+    <dep name='deltarpm' refers='package' />
+    <dep name='dhcpcd' refers='package' />
+    <dep name='dmraid' refers='package' />
+    <dep name='dos2unix' refers='package' />
+    <dep name='dosfstools' refers='package' />
+    <dep name='expat' refers='package' />
+    <dep name='fbset' refers='package' />
+    <dep name='gawk' refers='package' />
+    <dep name='gdb' refers='package' />
+    <dep name='gdbm' refers='package' />
+    <dep name='gettext' refers='package' />
+    <dep name='glibc-i18ndata' refers='package' />
+    <dep name='glibc-locale' refers='package' />
+    <dep name='gpart' refers='package' />
+    <dep name='gpg' refers='package' />
+    <dep name='gpm' refers='package' />
+    <dep name='hal' refers='package' />
+    <dep name='hal-resmgr' refers='package' />
+    <dep name='hdparm' refers='package' />
+    <dep name='hfsutils' refers='package' />
+    <dep name='hplip' refers='package' />
+    <dep name='ifplugd' refers='package' />
+    <dep name='info' refers='package' />
+    <dep name='initviocons' refers='package' />
+    <dep name='jfsutils' refers='package' />
+    <dep name='joe' refers='package' />
+    <dep name='ksh' refers='package' />
+    <dep name='lsof' refers='package' />
+    <dep name='lukemftp' refers='package' />
+    <dep name='man' refers='package' />
+    <dep name='man-pages' refers='package' />
+    <dep name='master-boot-code' refers='package' />
+    <dep name='mcelog' refers='package' />
+    <dep name='mpt-status' refers='package' />
+    <dep name='netcat' refers='package' />
+    <dep name='nfs-utils' refers='package' />
+    <dep name='nfsidmap' refers='package' />
+    <dep name='nscd' refers='package' />
+    <dep name='ntfsprogs' refers='package' />
+    <dep name='numactl' refers='package' />
+    <dep name='openct' refers='package' />
+    <dep name='openldap2-client' refers='package' />
+    <dep name='opensc' refers='package' />
+    <dep name='openslp' refers='package' />
+    <dep name='patch' refers='package' />
+    <dep name='pax' refers='package' />
+    <dep name='pciutils' refers='package' />
+    <dep name='pcre' refers='package' />
+    <dep name='pcsc-lite' refers='package' />
+    <dep name='pmtools' refers='package' />
+    <dep name='pm-utils' refers='package' />
+    <dep name='popt' refers='package' />
+    <dep name='portmap' refers='package' />
+    <dep name='postfix' refers='package' />
+    <dep name='powersave' refers='package' />
+    <dep name='ppp' refers='package' />
+    <dep name='pptp' refers='package' />
+    <dep name='prctl' refers='package' />
+    <dep name='preload' refers='package' />
+    <dep name='procinfo' refers='package' />
+    <dep name='procmail' refers='package' />
+    <dep name='providers' refers='package' />
+    <dep name='qlogic-firmware' refers='package' />
+    <dep name='readline' refers='package' />
+    <dep name='recode' refers='package' />
+    <dep name='release-notes' refers='package' />
+    <dep name='resmgr' refers='package' />
+    <dep name='rsync' refers='package' />
+    <dep name='sash' refers='package' />
+    <dep name='screen' refers='package' />
+    <dep name='scsi' refers='package' />
+    <dep name='sharutils' refers='package' />
+    <dep name='smartmontools' refers='package' />
+    <dep name='smpppd' refers='package' />
+    <dep name='strace' refers='package' />
+    <dep name='sudo' refers='package' />
+    <dep name='suseRegister' refers='package' />
+    <dep name='suspend' refers='package' />
+    <dep name='tcpdump' refers='package' />
+    <dep name='tcsh' refers='package' />
+    <dep name='telnet' refers='package' />
+    <dep name='terminfo' refers='package' />
+    <dep name='timezone' refers='package' />
+    <dep name='udev' refers='package' />
+    <dep name='ulimit' refers='package' />
+    <dep name='unzip' refers='package' />
+    <dep name='usbutils' refers='package' />
+    <dep name='utempter' refers='package' />
+    <dep name='vlan' refers='package' />
+    <dep name='wireless-tools' refers='package' />
+    <dep name='wol' refers='package' />
+    <dep name='wvdial' refers='package' />
+    <dep name='wvstreams' refers='package' />
+    <dep name='xfsprogs' refers='package' />
+    <dep name='xinetd' refers='package' />
+    <dep name='xntp' refers='package' />
+    <dep name='yp-tools' refers='package' />
+    <dep name='ypbind' refers='package' />
+    <dep name='zip' refers='package' />
+    <dep name='zisofs-tools' refers='package' />
+    <dep name='zsh' refers='package' />
+    <dep name='update-test-trival' refers='package' />
+  </recommends>
+</pattern>
+<pattern>
+  <name>print_server</name>
+  <summary>Print Server</summary>
+  <description>Set up a print server to host print queues so that they may be accessed by other computers on the same network, including machines running Microsoft Windows operating systems. The print server may accept print jobs from client computers and direct them to locally attached printers or to network printers. lpd, cups, and smb print servers and queues are supported.</description>
+  <history>
+    <update>
+      <hid>12345</hid>
+      <version>10.2</version>
+      <release>109</release>
+      <arch>i586</arch>
+    </update>
+  </history>
+  <requires>
+    <dep name='basesystem' refers='pattern' />
+    <dep name='cups' refers='package' />
+  </requires>
+  <provides>
+    <dep name='print_server' refers='pattern' op='==' version='10.2' release='109' />
+  </provides>
+  <recommends>
+    <dep name='cups-drivers' refers='package' />
+    <dep name='gutenprint' refers='package' />
+    <dep name='filters' refers='package' />
+    <dep name='foomatic-filters' refers='package' />
+    <dep name='gutenprint' refers='package' />
+    <dep name='hplip' refers='package' />
+    <dep name='manufacturer-PPDs' refers='package' />
+    <dep name='samba' refers='package' />
+  </recommends>
+</pattern>
+<pattern>
+  <name>gnome_ide</name>
+  <summary>GNOME Integrated Development Environment</summary>
+  <description>Development under GNOME</description>
+  <history>
+    <update>
+      <hid>12345</hid>
+      <version>10.2</version>
+      <release>109</release>
+      <arch>i586</arch>
+    </update>
+  </history>
+  <requires>
+    <dep name='anjuta' refers='package' />
+  </requires>
+  <provides>
+    <dep name='gnome_ide' refers='pattern' op='==' version='10.2' release='109' />
+  </provides>
+  <supplements>
+    <dep name='devel_ide' refers='pattern' />
+  </supplements>
+</pattern>
+<pattern>
+  <name>gnome</name>
+  <summary>GNOME Desktop Environment</summary>
+  <description>The GNOME desktop environment is an intuitive and attractive desktop for users.  The GNOME development platform is an extensive framework for building applications that integrate into the rest of the desktop.</description>
+  <history>
+    <update>
+      <hid>12345</hid>
+      <version>10.2</version>
+      <release>109</release>
+      <arch>i586</arch>
+    </update>
+  </history>
+  <requires>
+    <dep name='gnome_basis' refers='pattern' />
+    <dep name='banshee-player' refers='package' />
+    <dep name='ImageMagick' refers='package' />
+    <dep name='OpenOffice_org' refers='package' />
+    <dep name='OpenOffice_org-gnome' refers='package' />
+    <dep name='alacarte' refers='package' />
+    <dep name='dia' refers='package' />
+    <dep name='dvd+rw-tools' refers='package' />
+    <dep name='f-spot' refers='package' />
+    <dep name='gphoto' refers='package' />
+    <dep name='inkscape' refers='package' />
+    <dep name='mjpegtools' refers='package' />
+    <dep name='totem' refers='package' />
+    <dep name='totem-plugin' refers='package' />
+  </requires>
+  <provides>
+    <dep name='gnome' refers='pattern' op='==' version='10.2' release='109' />
+  </provides>
+  <suggests>
+    <dep name='abiword' refers='package' />
+    <dep name='alacarte' refers='package' />
+    <dep name='evolution-pilot' refers='package' />
+    <dep name='gftp' refers='package' />
+    <dep name='gnet' refers='package' />
+    <dep name='gnome-bluetooth' refers='package' />
+    <dep name='gnumeric' refers='package' />
+    <dep name='goffice' refers='package' />
+    <dep name='pessulus' refers='package' />
+    <dep name='sabayon' refers='package' />
+  </suggests>
+  <recommends>
+    <dep name='games' refers='pattern' />
+    <dep name='imaging' refers='pattern' />
+    <dep name='RealPlayer' refers='package' />
+    <dep name='helix-banshee' refers='package' />
+    <dep name='compiz' refers='package' />
+    <dep name='compiz-gnome' refers='package' />
+    <dep name='gnucash' refers='package' />
+    <dep name='gstreamer010-plugins-base-oil' refers='package' />
+    <dep name='gstreamer010-plugins-base-visual' refers='package' />
+    <dep name='kino' refers='package' />
+    <dep name='libopensync' refers='package' />
+    <dep name='libopensync-plugin-evolution2' refers='package' />
+    <dep name='libopensync-plugin-file' refers='package' />
+    <dep name='libopensync-plugin-gnokii' refers='package' />
+    <dep name='libopensync-plugin-gpe' refers='package' />
+    <dep name='libopensync-plugin-irmc' refers='package' />
+    <dep name='libopensync-plugin-kdepim' refers='package' />
+    <dep name='libopensync-plugin-opie' refers='package' />
+    <dep name='libopensync-plugin-palm' refers='package' />
+    <dep name='libopensync-plugin-sunbird' refers='package' />
+    <dep name='libopensync-plugin-synce' refers='package' />
+    <dep name='libopensync-plugin-syncml' refers='package' />
+    <dep name='libopensync-tools' refers='package' />
+    <dep name='multisync-gui' refers='package' />
+    <dep name='planner' refers='package' />
+    <dep name='xgl' refers='package' />
+  </recommends>
+</pattern>
+<pattern>
+  <name>directory_server</name>
+  <summary>Directory Server (LDAP)</summary>
+  <description>Set up a directory server with OpenLDAP and Kerberos.  The Lightweight Directory Access Protocol (LDAP) is used to access online directory services. It runs directly over TCP and can be used to access a stand-alone LDAP directory service or to access a directory service that has an X.500 back-end.</description>
+  <history>
+    <update>
+      <hid>12345</hid>
+      <version>10.2</version>
+      <release>109</release>
+      <arch>i586</arch>
+    </update>
+  </history>
+  <requires>
+    <dep name='basesystem' refers='pattern' />
+    <dep name='nss_ldap' refers='package' />
+    <dep name='openldap2' refers='package' />
+    <dep name='pam_ldap' refers='package' />
+    <dep name='yast2-ldap-server' refers='package' />
+  </requires>
+  <provides>
+    <dep name='directory_server' refers='pattern' op='==' version='10.2' release='109' />
+  </provides>
+  <recommends>
+  </recommends>
+</pattern>
+<pattern>
+  <name>devel_perl</name>
+  <summary>Perl Development</summary>
+  <description>Tools and libraries for software development using the Perl programming language.</description>
+  <history>
+    <update>
+      <hid>12345</hid>
+      <version>10.2</version>
+      <release>109</release>
+      <arch>i586</arch>
+    </update>
+  </history>
+  <provides>
+    <dep name='devel_perl' refers='pattern' op='==' version='10.2' release='109' />
+  </provides>
+  <suggests>
+    <dep name='kdebindings3-perl' refers='package' />
+    <dep name='perl-Algorithm-Diff' refers='package' />
+    <dep name='perl-AppConfig' refers='package' />
+    <dep name='perl-Archive-Tar' refers='package' />
+    <dep name='perl-Authen-SASL' refers='package' />
+    <dep name='perl-Authen-SASL-Cyrus' refers='package' />
+    <dep name='perl-BIND-Conf_Parser' refers='package' />
+    <dep name='perl-BSD-Resource' refers='package' />
+    <dep name='perl-CDDB_get' refers='package' />
+    <dep name='perl-CGI-Application' refers='package' />
+    <dep name='perl-Carp-Assert' refers='package' />
+    <dep name='perl-Class-Accessor' refers='package' />
+    <dep name='perl-Class-Data-Inheritable' refers='package' />
+    <dep name='perl-Class-Date' refers='package' />
+    <dep name='perl-Class-MethodMaker' refers='package' />
+    <dep name='perl-Class-Multimethods' refers='package' />
+    <dep name='perl-Class-WhiteHole' refers='package' />
+    <dep name='perl-Config-General' refers='package' />
+    <dep name='perl-Config-IniFiles' refers='package' />
+    <dep name='perl-Convert-TNEF' refers='package' />
+    <dep name='perl-Convert-UUlib' refers='package' />
+    <dep name='perl-Crypt-Blowfish' refers='package' />
+    <dep name='perl-Crypt-CBC' refers='package' />
+    <dep name='perl-Crypt-SSLeay' refers='package' />
+    <dep name='perl-DBD-CSV' refers='package' />
+    <dep name='perl-DBD-ODBC' refers='package' />
+    <dep name='perl-DBD-Pg' refers='package' />
+    <dep name='perl-DBD-SQLite' refers='package' />
+    <dep name='perl-DBD-XBase' refers='package' />
+    <dep name='perl-DBD-mysql' refers='package' />
+    <dep name='perl-Devel-CoreStack' refers='package' />
+    <dep name='perl-Devel-Symdump' refers='package' />
+    <dep name='perl-Encode-HanExtra' refers='package' />
+    <dep name='perl-Encode-JIS2K' refers='package' />
+    <dep name='perl-ExtUtils-F77' refers='package' />
+    <dep name='perl-ExtUtils-ParseXS' refers='package' />
+    <dep name='perl-File-MMagic' refers='package' />
+    <dep name='perl-File-Tail' refers='package' />
+    <dep name='perl-Filter' refers='package' />
+    <dep name='perl-Font-AFM' refers='package' />
+    <dep name='perl-GD' refers='package' />
+    <dep name='perl-GD-Graph3d' refers='package' />
+    <dep name='perl-GDGraph' refers='package' />
+    <dep name='perl-GDTextUtil' refers='package' />
+    <dep name='perl-Getopt-Mixed' refers='package' />
+    <dep name='perl-Gtk2' refers='package' />
+    <dep name='perl-HTML-Clean' refers='package' />
+    <dep name='perl-HTML-FillInForm' refers='package' />
+    <dep name='perl-HTML-Format' refers='package' />
+    <dep name='perl-HTML-SimpleParse' refers='package' />
+    <dep name='perl-HTML-Template' refers='package' />
+    <dep name='perl-HTML-Template-Expr' refers='package' />
+    <dep name='perl-HTML-Template-JIT' refers='package' />
+    <dep name='perl-HTML-Tree' refers='package' />
+    <dep name='perl-HTTP-DAV' refers='package' />
+    <dep name='perl-HTTPS-Daemon' refers='package' />
+    <dep name='perl-IO-Zlib' refers='package' />
+    <dep name='perl-IPC-Run' refers='package' />
+    <dep name='perl-Image-Size' refers='package' />
+    <dep name='perl-Inline' refers='package' />
+    <dep name='perl-Inline-C' refers='package' />
+    <dep name='perl-Log-Dispatch' refers='package' />
+    <dep name='perl-Log-Log4perl' refers='package' />
+    <dep name='perl-MIME-Lite' refers='package' />
+    <dep name='perl-MLDBM' refers='package' />
+    <dep name='perl-MLDBM-Sync' refers='package' />
+    <dep name='perl-Mcrypt' refers='package' />
+    <dep name='perl-Module-Build' refers='package' />
+    <dep name='perl-Module-Info' refers='package' />
+    <dep name='perl-Net-DNS' refers='package' />
+    <dep name='perl-Net-Daemon' refers='package' />
+    <dep name='perl-Net-IP' refers='package' />
+    <dep name='perl-Net-Jabber' refers='package' />
+    <dep name='perl-Net-Netmask' refers='package' />
+    <dep name='perl-Net-Server' refers='package' />
+    <dep name='perl-Net-Telnet' refers='package' />
+    <dep name='perl-OpenCA-CRL' refers='package' />
+    <dep name='perl-OpenCA-OpenSSL' refers='package' />
+    <dep name='perl-OpenCA-REQ' refers='package' />
+    <dep name='perl-OpenCA-X509' refers='package' />
+    <dep name='perl-PDL' refers='package' />
+    <dep name='perl-Params-Validate' refers='package' />
+    <dep name='perl-Parse-Yapp' refers='package' />
+    <dep name='perl-PerlMagick' refers='package' />
+    <dep name='perl-Pod-HtmlPsPdf' refers='package' />
+    <dep name='perl-PostScript-Simple' refers='package' />
+    <dep name='perl-Qt' refers='package' />
+    <dep name='perl-Quantum-Superpositions' refers='package' />
+    <dep name='perl-RPC-XML' refers='package' />
+    <dep name='perl-SGMLS' refers='package' />
+    <dep name='perl-SOAP-Lite' refers='package' />
+    <dep name='perl-SQL-Statement' refers='package' />
+    <dep name='perl-Set-Crontab' refers='package' />
+    <dep name='perl-Set-Object' refers='package' />
+    <dep name='perl-Set-Scalar' refers='package' />
+    <dep name='perl-Socket6' refers='package' />
+    <dep name='perl-Spreadsheet-WriteExcel' refers='package' />
+    <dep name='perl-Template-Toolkit' refers='package' />
+    <dep name='perl-Text-CSV_XS' refers='package' />
+    <dep name='perl-Text-DelimMatch' refers='package' />
+    <dep name='perl-Text-Iconv' refers='package' />
+    <dep name='perl-Tie-Cache' refers='package' />
+    <dep name='perl-Time-modules' refers='package' />
+    <dep name='perl-Unicode-Map8' refers='package' />
+    <dep name='perl-Unicode-String' refers='package' />
+    <dep name='perl-Wx' refers='package' />
+    <dep name='perl-XML-LibXML' refers='package' />
+    <dep name='perl-XML-Simple' refers='package' />
+    <dep name='perl-XML-Stream' refers='package' />
+    <dep name='perl-XML-XQL' refers='package' />
+    <dep name='perl-XML-XSLT' refers='package' />
+    <dep name='perl-Xmms' refers='package' />
+    <dep name='perl-YAML' refers='package' />
+    <dep name='perl-libxml-perl' refers='package' />
+  </suggests>
+  <recommends>
+    <dep name='perlref' refers='package' />
+  </recommends>
+</pattern>
+<pattern>
+  <name>devel_kernel</name>
+  <summary>Linux Kernel Development</summary>
+  <description>Tools for Linux Kernel development.</description>
+  <history>
+    <update>
+      <hid>12345</hid>
+      <version>10.2</version>
+      <release>109</release>
+      <arch>i586</arch>
+    </update>
+  </history>
+  <requires>
+    <dep name='devel_basis' refers='pattern' />
+    <dep name='kernel-source' refers='package' />
+  </requires>
+  <provides>
+    <dep name='devel_kernel' refers='pattern' op='==' version='10.2' release='109' />
+  </provides>
+  <suggests>
+    <dep name='kernel-debug' refers='package' />
+    <dep name='kernel-um' refers='package' />
+  </suggests>
+  <recommends>
+    <dep name='build' refers='package' />
+    <dep name='cscope' refers='package' />
+    <dep name='diffstat' refers='package' />
+    <dep name='git-core' refers='package' />
+    <dep name='indent' refers='package' />
+    <dep name='patch-utils' refers='package' />
+    <dep name='quilt' refers='package' />
+  </recommends>
+</pattern>
+<pattern>
+  <name>xen_server</name>
+  <summary>Xen Virtual Machine Host Server</summary>
+  <description>Set up a server to configure, manage, and monitor virtual machines on a single physical machine. Includes:
+ * XEN virtual machine monitor
+ * XEN virtual machine monitor tools and documentation
+ * XEN-adapted Linux kernel for host server
+ * YaST modules to install and configure virtual systems</description>
+  <history>
+    <update>
+      <hid>12345</hid>
+      <version>10.2</version>
+      <release>109</release>
+      <arch>i586</arch>
+    </update>
+  </history>
+  <requires>
+    <dep name='basesystem' refers='pattern' />
+    <dep name='bridge-utils' refers='package' />
+    <dep name='xen' refers='package' />
+    <dep name='xen-libs' refers='package' />
+    <dep name='xen-tools' refers='package' />
+    <dep name='xen-tools-ioemu' refers='package' />
+  </requires>
+  <provides>
+    <dep name='xen_server' refers='pattern' op='==' version='10.2' release='109' />
+  </provides>
+  <recommends>
+    <dep name='xen-doc-html' refers='package' />
+    <dep name='xen-doc-pdf' refers='package' />
+    <dep name='xterm' refers='package' />
+    <dep name='yast2-vm' refers='package' />
+  </recommends>
+</pattern>
+<pattern>
+  <name>non_oss</name>
+  <summary>Misc. Proprietary Source Package</summary>
+  <description>Packages that are proprietary and not under an open soure license.</description>
+  <history>
+    <update>
+      <hid>12345</hid>
+      <version>10.2</version>
+      <release>109</release>
+      <arch>i586</arch>
+    </update>
+  </history>
+  <requires>
+    <dep name='x11' refers='pattern' />
+    <dep name='agfa-fonts' refers='package' />
+    <dep name='flash-player' refers='package' />
+    <dep name='RealPlayer' refers='package' />
+  </requires>
+  <provides>
+    <dep name='non_oss' refers='pattern' op='==' version='10.2' release='109' />
+  </provides>
+  <suggests>
+    <dep name='AdobeICCProfiles' refers='package' />
+    <dep name='IPAGothic' refers='package' />
+    <dep name='IPAMincho' refers='package' />
+    <dep name='IPAPGothic' refers='package' />
+    <dep name='IPAPMincho' refers='package' />
+    <dep name='IPAUIGothic' refers='package' />
+    <dep name='acroread' refers='package' />
+    <dep name='arcad_eval' refers='package' />
+    <dep name='atmel-firmware' refers='package' />
+    <dep name='ipw-firmware' refers='package' />
+    <dep name='ipw3945d' refers='package' />
+    <dep name='iscan' refers='package' />
+    <dep name='iscan-firmware' refers='package' />
+    <dep name='iscan-proprietary-drivers' refers='package' />
+    <dep name='moneyplex' refers='package' />
+    <dep name='opera' refers='package' />
+    <dep name='pico' refers='package' />
+    <dep name='pilot' refers='package' />
+    <dep name='pine' refers='package' />
+    <dep name='pinepg' refers='package' />
+    <dep name='planmaker' refers='package' />
+    <dep name='qlogic-firmware' refers='package' />
+    <dep name='sesam_srv' refers='package' />
+    <dep name='smartlink-softmodem' refers='package' />
+    <dep name='textmaker' refers='package' />
+    <dep name='ttf-founder-simplified' refers='package' />
+    <dep name='ttf-founder-traditional' refers='package' />
+    <dep name='wink' refers='package' />
+    <dep name='xv' refers='package' />
+  </suggests>
+</pattern>
+<pattern>
+  <name>misc_server</name>
+  <summary>Misc. Server</summary>
+  <description>Miscelleaneous Server</description>
+  <history>
+    <update>
+      <hid>12345</hid>
+      <version>10.2</version>
+      <release>109</release>
+      <arch>i586</arch>
+    </update>
+  </history>
+  <requires>
+    <dep name='basesystem' refers='pattern' />
+  </requires>
+  <provides>
+    <dep name='misc_server' refers='pattern' op='==' version='10.2' release='109' />
+  </provides>
+  <recommends>
+    <dep name='openslp-server' refers='package' />
+    <dep name='yast2-boot-server' refers='package' />
+    <dep name='yast2-instserver' refers='package' />
+    <dep name='yast2-iscsi-server' refers='package' />
+    <dep name='yast2-nis-server' refers='package' />
+    <dep name='yast2-slp-server' refers='package' />
+  </recommends>
+</pattern>
+<pattern>
+  <name>games</name>
+  <summary>Games</summary>
+  <description>Games</description>
+  <history>
+    <update>
+      <hid>12345</hid>
+      <version>10.2</version>
+      <release>109</release>
+      <arch>i586</arch>
+    </update>
+  </history>
+  <requires>
+    <dep name='x11' refers='pattern' />
+    <dep name='chromium' refers='package' />
+    <dep name='frozen-bubble' refers='package' />
+    <dep name='freeciv' refers='package' />
+    <dep name='lbreakout' refers='package' />
+    <dep name='supertux' refers='package' />
+    <dep name='xmoto' refers='package' />
+  </requires>
+  <provides>
+    <dep name='games' refers='pattern' op='==' version='10.2' release='109' />
+  </provides>
+  <suggests>
+    <dep name='BASS' refers='package' />
+    <dep name='FOTAQ' refers='package' />
+    <dep name='enigma' refers='package' />
+    <dep name='glest' refers='package' />
+    <dep name='glest-data' refers='package' />
+    <dep name='scummvm' refers='package' />
+    <dep name='torcs' refers='package' />
+    <dep name='torcs-data' refers='package' />
+  </suggests>
+</pattern>
+<pattern>
+  <name>sw_management_x11</name>
+  <summary>Package Management - Graphical Tools</summary>
+  <description>Package Management - Graphical Tools</description>
+  <history>
+    <update>
+      <hid>12345</hid>
+      <version>10.2</version>
+      <release>109</release>
+      <arch>i586</arch>
+    </update>
+  </history>
+  <requires>
+    <dep name='sw_management' refers='pattern' />
+    <dep name='opensuse-updater' refers='package' />
+  </requires>
+  <provides>
+    <dep name='sw_management_x11' refers='pattern' op='==' version='10.2' release='109' />
+    <dep name='sw_management_x11_pattern' refers='pattern' />
+  </provides>
+</pattern>
+<pattern>
+  <name>network_admin</name>
+  <summary>Network Administration</summary>
+  <description>Tools for network administrators to debug the network.</description>
+  <history>
+    <update>
+      <hid>12345</hid>
+      <version>10.2</version>
+      <release>109</release>
+      <arch>i586</arch>
+    </update>
+  </history>
+  <requires>
+    <dep name='basesystem' refers='pattern' />
+    <dep name='nmap' refers='package' />
+    <dep name='quagga' refers='package' />
+    <dep name='tcpdump' refers='package' />
+    <dep name='whois' refers='package' />
+    <dep name='wireshark' refers='package' />
+  </requires>
+  <provides>
+    <dep name='network_admin' refers='pattern' op='==' version='10.2' release='109' />
+  </provides>
+  <recommends>
+    <dep name='arpwatch' refers='package' />
+    <dep name='nagios' refers='package' />
+    <dep name='mtr' refers='package' />
+  </recommends>
+</pattern>
+<pattern>
+  <name>gnome_games</name>
+  <summary>GNOME Games</summary>
+  <description>GNOME Games</description>
+  <history>
+    <update>
+      <hid>12345</hid>
+      <version>10.2</version>
+      <release>109</release>
+      <arch>i586</arch>
+    </update>
+  </history>
+  <requires>
+    <dep name='gnome-games' refers='package' />
+  </requires>
+  <provides>
+    <dep name='gnome_games' refers='pattern' op='==' version='10.2' release='109' />
+  </provides>
+  <supplements>
+    <dep name='games' refers='pattern' />
+  </supplements>
+</pattern>
+<pattern>
+  <name>devel_rails</name>
+  <summary>Ruby on Rails Development</summary>
+  <description>Tools and libraries for software development using the Ruby on Rails framework.</description>
+  <history>
+    <update>
+      <hid>12345</hid>
+      <version>10.2</version>
+      <release>109</release>
+      <arch>i586</arch>
+    </update>
+  </history>
+  <requires>
+    <dep name='devel_ruby' refers='pattern' />
+    <dep name='rubygem-rails' refers='package' />
+  </requires>
+  <provides>
+    <dep name='devel_rails' refers='pattern' op='==' version='10.2' release='109' />
+  </provides>
+  <suggests>
+    <dep name='eruby' refers='package' />
+    <dep name='ruby-RMagick' refers='package' />
+    <dep name='ruby-RMagick-doc' refers='package' />
+    <dep name='ruby-gdchart' refers='package' />
+    <dep name='rubygem-FlexMock' refers='package' />
+    <dep name='rubygem-RedCloth' refers='package' />
+    <dep name='rubygem-abstract' refers='package' />
+    <dep name='rubygem-capistrano' refers='package' />
+    <dep name='rubygem-erubis' refers='package' />
+    <dep name='rubygem-needle' refers='package' />
+    <dep name='rubygem-net-sftp' refers='package' />
+    <dep name='rubygem-net-ssh' refers='package' />
+    <dep name='rubygem-ruby-postgres' refers='package' />
+    <dep name='lighttpd' refers='package' />
+  </suggests>
+  <recommends>
+    <dep name='rubygem-mongrel' refers='package' />
+  </recommends>
+</pattern>
+<pattern>
+  <name>apparmor</name>
+  <summary>Novell AppArmor</summary>
+  <description>Novell AppArmor is an open source Linux application security framework that provides mandatory access control for programs, protecting against the exploitation of software flaws and compromised systems. AppArmor includes everything you need to provide effective containment for programs (including those that run as root) to thwart attempted exploits and even zero-day attacks. AppArmor offers an advanced tool set that largely automates the development of per-program application security so that no new expertise is required.</description>
+  <history>
+    <update>
+      <hid>12345</hid>
+      <version>10.2</version>
+      <release>109</release>
+      <arch>i586</arch>
+    </update>
+  </history>
+  <requires>
+    <dep name='basesystem' refers='pattern' />
+    <dep name='apparmor-parser' refers='package' />
+    <dep name='apparmor-docs' refers='package' />
+    <dep name='apparmor-profiles' refers='package' />
+    <dep name='apparmor-utils' refers='package' />
+    <dep name='libapparmor' refers='package' />
+    <dep name='yast2-apparmor' refers='package' />
+  </requires>
+  <provides>
+    <dep name='apparmor' refers='pattern' op='==' version='10.2' release='109' />
+  </provides>
+  <recommends>
+    <dep name='audit' refers='package' />
+    <dep name='apparmor-admin_en' refers='package' />
+  </recommends>
+</pattern>
+<pattern>
+  <name>x11</name>
+  <summary>X Window System</summary>
+  <description>In continuous use for over 20 years, the X Window System provides the only standard platform-independent networked graphical window system bridging the heterogeneous platforms in today's enterprise: from network servers to desktops, thin clients, laptops, and handhelds, independent of operating system and hardware.</description>
+  <history>
+    <update>
+      <hid>12345</hid>
+      <version>10.2</version>
+      <release>109</release>
+      <arch>i586</arch>
+    </update>
+  </history>
+  <requires>
+    <dep name='basesystem' refers='pattern' />
+    <dep name='fonts' refers='pattern' />
+    <dep name='sw_management_x11_pattern' refers='pattern' />
+    <dep name='xterm' refers='package' />
+    <dep name='MozillaFirefox' refers='package' />
+    <dep name='yast2-qt' refers='package' />
+    <dep name='yast2-x11' refers='package' />
+  </requires>
+  <provides>
+    <dep name='x11' refers='pattern' op='==' version='10.2' release='109' />
+  </provides>
+  <suggests>
+    <dep name='synergy' refers='package' />
+  </suggests>
+  <recommends>
+    <dep name='zmd_x11' refers='pattern' />
+    <dep name='3ddiag' refers='package' />
+    <dep name='915resolution' refers='package' />
+    <dep name='CheckHardware' refers='package' />
+    <dep name='MozillaFirefox-translations' refers='package' />
+    <dep name='cabextract' refers='package' />
+    <dep name='desktop-data-SuSE' refers='package' />
+    <dep name='desktop-translations' refers='package' />
+    <dep name='evms-gui' refers='package' />
+    <dep name='freeglut' refers='package' />
+    <dep name='fvwm2' refers='package' />
+    <dep name='ghostscript-x11' refers='package' />
+    <dep name='libqt4' refers='package' />
+    <dep name='libqt4-sql' refers='package' />
+    <dep name='libqt4-x11' refers='package' />
+    <dep name='lsb' refers='package' />
+    <dep name='numlockx' refers='package' />
+    <dep name='openssh-askpass' refers='package' />
+    <dep name='sax2' refers='package' />
+    <dep name='sax2-gui' refers='package' />
+    <dep name='tcl' refers='package' />
+    <dep name='tightvnc' refers='package' />
+    <dep name='tk' refers='package' />
+    <dep name='unclutter' refers='package' />
+    <dep name='x11-input-synaptics' refers='package' />
+    <dep name='x11-input-wacom' refers='package' />
+    <dep name='x11-tools' refers='package' />
+    <dep name='xaw3d' refers='package' />
+    <dep name='xdg-menu' refers='package' />
+    <dep name='xdg-utils' refers='package' />
+    <dep name='xdmbgrd' refers='package' />
+    <dep name='xkeyboard-config' refers='package' />
+    <dep name='xlockmore' refers='package' />
+    <dep name='xorg-x11' refers='package' />
+    <dep name='xorg-x11-Xvnc' refers='package' />
+    <dep name='xorg-x11-libX11' refers='package' />
+    <dep name='xorg-x11-libX11-ccache' refers='package' />
+    <dep name='xorg-x11-libXext' refers='package' />
+    <dep name='xorg-x11-libXrender' refers='package' />
+    <dep name='xorg-x11-server' refers='package' />
+    <dep name='xtermset' refers='package' />
+    <dep name='yast2-control-center' refers='package' />
+  </recommends>
+</pattern>
+<pattern>
+  <name>lamp_server</name>
+  <summary>Web and LAMP Server</summary>
+  <description>Set up a Web server that is able to serve static, dynamic, and interactive content (like a Web shop). It is based on the Apache HTTP Server, the database management system MySQL, and a scripting language such as PHP, Python, Ruby on Rails, or Perl.</description>
+  <history>
+    <update>
+      <hid>12345</hid>
+      <version>10.2</version>
+      <release>109</release>
+      <arch>i586</arch>
+    </update>
+  </history>
+  <requires>
+    <dep name='basesystem' refers='pattern' />
+    <dep name='apache2' refers='package' />
+    <dep name='yast2-http-server' refers='package' />
+  </requires>
+  <provides>
+    <dep name='lamp_server' refers='pattern' op='==' version='10.2' release='109' />
+  </provides>
+  <suggests>
+    <dep name='php5-gd' refers='package' />
+    <dep name='php5-mbstring' refers='package' />
+    <dep name='php5-zlib' refers='package' />
+  </suggests>
+  <recommends>
+    <dep name='apache2-doc' refers='package' />
+    <dep name='apache2-example-pages' refers='package' />
+    <dep name='apache2-mod_perl' refers='package' />
+    <dep name='apache2-mod_php5' refers='package' />
+    <dep name='apache2-mod_python' refers='package' />
+    <dep name='apache2-prefork' refers='package' />
+    <dep name='libapr-util1' refers='package' />
+    <dep name='libapr1' refers='package' />
+    <dep name='mysql' refers='package' />
+    <dep name='php5-ctype' refers='package' />
+    <dep name='php5-dom' refers='package' />
+    <dep name='php5-iconv' refers='package' />
+    <dep name='php5-mysql' refers='package' />
+  </recommends>
+</pattern>
+<pattern>
+  <name>imaging</name>
+  <summary>Graphics</summary>
+  <description>Handling of digital photos and graphics</description>
+  <history>
+    <update>
+      <hid>12345</hid>
+      <version>10.2</version>
+      <release>109</release>
+      <arch>i586</arch>
+    </update>
+  </history>
+  <requires>
+    <dep name='x11' refers='pattern' />
+    <dep name='gimp' refers='package' />
+  </requires>
+  <provides>
+    <dep name='imaging' refers='pattern' op='==' version='10.2' release='109' />
+  </provides>
+  <recommends>
+    <dep name='AdobeICCProfiles' refers='package' />
+    <dep name='gimp-help' refers='package' />
+  </recommends>
+</pattern>
+<pattern>
+  <name>devel_qt4</name>
+  <summary>Qt 4 Development</summary>
+  <description>Tools and libraries for software development using Qt 4, the latest version of the Qt toolkit. Note that the KDE desktop and Qt applications shipping with openSUSE use Qt 3. </description>
+  <history>
+    <update>
+      <hid>12345</hid>
+      <version>10.2</version>
+      <release>109</release>
+      <arch>i586</arch>
+    </update>
+  </history>
+  <requires>
+    <dep name='libqt4' refers='package' />
+    <dep name='libqt4-dbus-1' refers='package' />
+    <dep name='libqt4-devel' refers='package' />
+    <dep name='libqt4-devel-doc' refers='package' />
+    <dep name='libqt4-qt3support' refers='package' />
+    <dep name='libqt4-sql' refers='package' />
+    <dep name='libqt4-sql-mysql' refers='package' />
+    <dep name='libqt4-sql-postgresql' refers='package' />
+    <dep name='libqt4-sql-sqlite' refers='package' />
+    <dep name='libqt4-sql-unixODBC' refers='package' />
+    <dep name='libqt4-x11' refers='package' />
+  </requires>
+  <provides>
+    <dep name='devel_qt4' refers='pattern' op='==' version='10.2' release='109' />
+  </provides>
+</pattern>
+<pattern>
+  <name>devel_python</name>
+  <summary>Python Development</summary>
+  <description>Tools and libraries for software development using the Python programming language.</description>
+  <history>
+    <update>
+      <hid>12345</hid>
+      <version>10.2</version>
+      <release>109</release>
+      <arch>i586</arch>
+    </update>
+  </history>
+  <requires>
+    <dep name='pychecker' refers='package' />
+    <dep name='python' refers='package' />
+  </requires>
+  <provides>
+    <dep name='devel_python' refers='pattern' op='==' version='10.2' release='109' />
+  </provides>
+  <suggests>
+    <dep name='eric' refers='package' />
+    <dep name='libxml2-python' refers='package' />
+    <dep name='libxslt-python' refers='package' />
+    <dep name='python-gtk' refers='package' />
+    <dep name='python-kde-extensions' refers='package' />
+    <dep name='python-ldap' refers='package' />
+    <dep name='python-qt' refers='package' />
+    <dep name='python-wxGTK' refers='package' />
+    <dep name='python-wxGTK-doc' refers='package' />
+    <dep name='python-wxGTK-examples' refers='package' />
+    <dep name='pyxml' refers='package' />
+    <dep name='treeline' refers='package' />
+  </suggests>
+</pattern>
+<pattern>
+  <name>mail_server</name>
+  <summary>Mail and News Server</summary>
+  <description>Set up electronic mail and message services to handle e-mail, mailing, and news lists. It can also set up a virus scanner to scan messages at the server level.</description>
+  <history>
+    <update>
+      <hid>12345</hid>
+      <version>10.2</version>
+      <release>109</release>
+      <arch>i586</arch>
+    </update>
+  </history>
+  <requires>
+    <dep name='basesystem' refers='pattern' />
+  </requires>
+  <provides>
+    <dep name='mail_server' refers='pattern' op='==' version='10.2' release='109' />
+  </provides>
+  <suggests>
+    <dep name='dovecot' refers='pattern' />
+  </suggests>
+  <recommends>
+    <dep name='avmailgate' refers='package' />
+    <dep name='amavisd-new' refers='package' />
+    <dep name='mailman' refers='package' />
+    <dep name='cyrus-imapd' refers='package' />
+    <dep name='clamav' refers='package' />
+    <dep name='spamassassin' refers='package' />
+    <dep name='inn' refers='package' />
+    <dep name='vacation' refers='package' />
+  </recommends>
+</pattern>
+<pattern>
+  <name>kde_basis</name>
+  <summary>KDE Base System</summary>
+  <description>Basis packages for KDE Desktop Environment</description>
+  <history>
+    <update>
+      <hid>12345</hid>
+      <version>10.2</version>
+      <release>109</release>
+      <arch>i586</arch>
+    </update>
+  </history>
+  <requires>
+    <dep name='x11' refers='pattern' />
+    <dep name='basesystem' refers='pattern' />
+    <dep name='Crystalcursors' refers='package' />
+    <dep name='efont-unicode' refers='package' />
+    <dep name='kdeaddons3-konqueror' refers='package' />
+    <dep name='kdebase3' refers='package' />
+    <dep name='kdebase3-kdm' refers='package' />
+    <dep name='kdebase3-nsplugin' refers='package' />
+    <dep name='kdebase3-SuSE' refers='package' />
+    <dep name='kdebase3-session' refers='package' />
+    <dep name='kdegraphics3-pdf' refers='package' />
+    <dep name='kdelibs3' refers='package' />
+    <dep name='kdepim3' refers='package' />
+    <dep name='kdepim3-networkstatus' refers='package' />
+    <dep name='kdepim3-notes' refers='package' />
+    <dep name='kdeutils3' refers='package' />
+    <dep name='kpowersave' refers='package' />
+    <dep name='NetworkManager' refers='package' />
+    <dep name='NetworkManager-kde' refers='package' />
+  </requires>
+  <provides>
+    <dep name='kde_basis' refers='pattern' op='==' version='10.2' release='109' />
+  </provides>
+  <suggests>
+    <dep name='kdeedu3' refers='package' />
+  </suggests>
+  <recommends>
+    <dep name='beagle-firefox' refers='package' />
+    <dep name='beagle-index' refers='package' />
+    <dep name='kcm_gtk' refers='package' />
+    <dep name='kdebase3-beagle' refers='package' />
+    <dep name='kdebase3-samba' refers='package' />
+    <dep name='kerry' refers='package' />
+    <dep name='kio_beagle' refers='package' />
+    <dep name='kio_iso' refers='package' />
+    <dep name='opensuse-updater' refers='package' />
+    <dep name='pinentry-qt' refers='package' />
+    <dep name='preload' refers='package' />
+    <dep name='qtcurve-gtk2' refers='package' />
+    <dep name='susehelp' refers='package' />
+  </recommends>
+</pattern>
+<pattern>
+  <name>fonts</name>
+  <summary>Fonts</summary>
+  <description>Fonts.</description>
+  <history>
+    <update>
+      <hid>12345</hid>
+      <version>10.2</version>
+      <release>109</release>
+      <arch>i586</arch>
+    </update>
+  </history>
+  <requires>
+    <dep name='dejavu' refers='package' />
+    <dep name='efont-unicode' refers='package' />
+    <dep name='fontconfig' refers='package' />
+    <dep name='fonts-config' refers='package' />
+    <dep name='freetype' refers='package' />
+    <dep name='ghostscript-fonts-std' refers='package' />
+    <dep name='ifnteuro' refers='package' />
+    <dep name='intlfnts' refers='package' />
+    <dep name='xorg-x11-fonts' refers='package' />
+    <dep name='xorg-x11-fonts-core' refers='package' />
+  </requires>
+  <provides>
+    <dep name='fonts' refers='pattern' op='==' version='10.2' release='109' />
+  </provides>
+  <suggests>
+    <dep name='bitstream-vera' refers='package' />
+  </suggests>
+  <recommends>
+    <dep name='agfa-fonts' refers='package' />
+    <dep name='ghostscript-fonts-other' refers='package' />
+  </recommends>
+</pattern>
+<pattern>
+  <name>xfce</name>
+  <summary>XFCE Desktop Environment</summary>
+  <description>Xfce is a lightweight desktop environment for various *NIX systems. Designed for productivity, it loads and executes applications fast, while conserving system resources.</description>
+  <history>
+    <update>
+      <hid>12345</hid>
+      <version>10.2</version>
+      <release>109</release>
+      <arch>i586</arch>
+    </update>
+  </history>
+  <requires>
+    <dep name='x11' refers='pattern' />
+    <dep name='xfce-mcs-manager' refers='package' />
+    <dep name='xfce4-desktop' refers='package' />
+    <dep name='xfce4-panel' refers='package' />
+    <dep name='xfce4-session' refers='package' />
+    <dep name='xfwm4' refers='package' />
+  </requires>
+  <provides>
+    <dep name='xfce' refers='pattern' op='==' version='10.2' release='109' />
+  </provides>
+  <suggests>
+    <dep name='xfce4-toys' refers='package' />
+    <dep name='xfwm4-themes' refers='package' />
+  </suggests>
+  <recommends>
+    <dep name='gtk-xfce-engine' refers='package' />
+    <dep name='xfce4-appfinder' refers='package' />
+    <dep name='xfce4-panel-plugins' refers='package' />
+  </recommends>
+</pattern>
+<pattern>
+  <name>kde_imaging</name>
+  <summary>KDE Graphics</summary>
+  <description>Handling of digital photos and graphics</description>
+  <history>
+    <update>
+      <hid>12345</hid>
+      <version>10.2</version>
+      <release>109</release>
+      <arch>i586</arch>
+    </update>
+  </history>
+  <requires>
+    <dep name='kde_basis' refers='pattern' />
+    <dep name='gwenview' refers='package' />
+    <dep name='koffice-illustration' refers='package' />
+    <dep name='dcraw' refers='package' />
+    <dep name='digikam' refers='package' />
+    <dep name='kdegraphics3' refers='package' />
+    <dep name='kdegraphics3-kamera' refers='package' />
+    <dep name='kdegraphics3-postscript' refers='package' />
+    <dep name='kdegraphics3-scan' refers='package' />
+  </requires>
+  <provides>
+    <dep name='kde_imaging' refers='pattern' op='==' version='10.2' release='109' />
+  </provides>
+  <supplements>
+    <dep name='imaging' refers='pattern' />
+  </supplements>
+  <recommends>
+    <dep name='digikamimageplugins' refers='package' />
+  </recommends>
+</pattern>
+<pattern>
+  <name>kde</name>
+  <summary>KDE Desktop Environment</summary>
+  <description>KDE is a powerful free software graphical desktop environment for Linux workstations. It combines ease of use, contemporary functionality, and outstanding graphical design with the technology of the Linux operating system.</description>
+  <history>
+    <update>
+      <hid>12345</hid>
+      <version>10.2</version>
+      <release>109</release>
+      <arch>i586</arch>
+    </update>
+  </history>
+  <requires>
+    <dep name='kde_basis' refers='pattern' />
+    <dep name='OpenOffice_org' refers='package' />
+    <dep name='OpenOffice_org-kde' refers='package' />
+    <dep name='OpenOffice_org-Quickstarter' refers='package' />
+  </requires>
+  <provides>
+    <dep name='kde' refers='pattern' op='==' version='10.2' release='109' />
+  </provides>
+  <suggests>
+    <dep name='kdirstat' refers='package' />
+    <dep name='kiosktool' refers='package' />
+    <dep name='koffice' refers='package' />
+    <dep name='koffice-database' refers='package' />
+    <dep name='koffice-extra' refers='package' />
+    <dep name='koffice-illustration' refers='package' />
+    <dep name='koffice-planning' refers='package' />
+    <dep name='koffice-presentation' refers='package' />
+    <dep name='koffice-spreadsheet' refers='package' />
+    <dep name='koffice-wordprocessing' refers='package' />
+  </suggests>
+  <recommends>
+    <dep name='imaging' refers='pattern' />
+    <dep name='games' refers='pattern' />
+    <dep name='amarok' refers='package' />
+    <dep name='amarok-libvisual' refers='package' />
+    <dep name='amarok-xine' refers='package' />
+    <dep name='compiz' refers='package' />
+    <dep name='compiz-gnome' refers='package' />
+    <dep name='k3b' refers='package' />
+    <dep name='kaffeine' refers='package' />
+    <dep name='kdeaddons3-kicker' refers='package' />
+    <dep name='kdeartwork3-kscreensaver' refers='package' />
+    <dep name='kdeartwork3-xscreensaver' refers='package' />
+    <dep name='kdebluetooth' refers='package' />
+    <dep name='kdemultimedia3' refers='package' />
+    <dep name='kdemultimedia3-CD' refers='package' />
+    <dep name='kdemultimedia3-mixer' refers='package' />
+    <dep name='kdenetwork3' refers='package' />
+    <dep name='kdenetwork3-InstantMessenger' refers='package' />
+    <dep name='kdenetwork3-news' refers='package' />
+    <dep name='kdenetwork3-vnc' refers='package' />
+    <dep name='kdepim3-kpilot' refers='package' />
+    <dep name='kdetv' refers='package' />
+    <dep name='kio_ipodslave' refers='package' />
+    <dep name='kio_iso' refers='package' />
+    <dep name='kio_slp' refers='package' />
+    <dep name='kitchensync' refers='package' />
+    <dep name='konversation' refers='package' />
+    <dep name='krecord' refers='package' />
+    <dep name='ktorrent' refers='package' />
+    <dep name='libopensync' refers='package' />
+    <dep name='libopensync-plugin-file' refers='package' />
+    <dep name='libopensync-plugin-gnokii' refers='package' />
+    <dep name='libopensync-plugin-gpe' refers='package' />
+    <dep name='libopensync-plugin-irmc' refers='package' />
+    <dep name='libopensync-plugin-kdepim' refers='package' />
+    <dep name='libopensync-plugin-opie' refers='package' />
+    <dep name='libopensync-plugin-palm' refers='package' />
+    <dep name='libopensync-plugin-sunbird' refers='package' />
+    <dep name='libopensync-plugin-synce' refers='package' />
+    <dep name='libopensync-plugin-syncml' refers='package' />
+    <dep name='libopensync-tools' refers='package' />
+    <dep name='xgl' refers='package' />
+    <dep name='yast2-sound' refers='package' />
+    <dep name='RealPlayer' refers='package' />
+  </recommends>
+</pattern>
+<pattern>
+  <name>devel_yast</name>
+  <summary>YaST Development</summary>
+  <description>Tools and libraries for developing modules for YaST, the setup and configuration tool for openSUSE.</description>
+  <history>
+    <update>
+      <hid>12345</hid>
+      <version>10.2</version>
+      <release>109</release>
+      <arch>i586</arch>
+    </update>
+  </history>
+  <requires>
+    <dep name='yast2-devtools' refers='package' />
+    <dep name='yast2-testsuite' refers='package' />
+  </requires>
+  <provides>
+    <dep name='devel_yast' refers='pattern' op='==' version='10.2' release='109' />
+  </provides>
+  <suggests>
+    <dep name='autoyast2-utils' refers='package' />
+    <dep name='createrepo' refers='package' />
+  </suggests>
+</pattern>
+<pattern>
+  <name>default</name>
+  <summary>Default System</summary>
+  <description>This is the default system for this product.</description>
+  <history>
+    <update>
+      <hid>12345</hid>
+      <version>10.2</version>
+      <release>109</release>
+      <arch>i586</arch>
+    </update>
+  </history>
+  <requires>
+    <dep name='basesystem' refers='pattern' />
+  </requires>
+  <provides>
+    <dep name='default' refers='pattern' op='==' version='10.2' release='109' />
+  </provides>
+  <suggests>
+    <dep name='base' refers='pattern' />
+    <dep name='x11' refers='pattern' />
+    <dep name='apparmor' refers='pattern' />
+    <dep name='32bit' refers='pattern' />
+    <dep name='64bit' refers='pattern' />
+    <dep name='x86' refers='pattern' />
+  </suggests>
+</pattern>
+<pattern>
+  <name>xml</name>
+  <summary>XML and LaTeX Editing Tools</summary>
+  <description>Tools to author manuals and create pdfs using XML and LaTeX.</description>
+  <history>
+    <update>
+      <hid>12345</hid>
+      <version>10.2</version>
+      <release>109</release>
+      <arch>i586</arch>
+    </update>
+  </history>
+  <requires>
+    <dep name='docbook-dsssl-stylesheets' refers='package' />
+    <dep name='docbook-xsl-stylesheets' refers='package' />
+    <dep name='ispell-american' refers='package' />
+    <dep name='ispell-british' refers='package' />
+    <dep name='psutils' refers='package' />
+    <dep name='xmlto' refers='package' />
+  </requires>
+  <provides>
+    <dep name='xml' refers='pattern' op='==' version='10.2' release='109' />
+  </provides>
+  <suggests>
+    <dep name='lyx' refers='package' />
+  </suggests>
+  <recommends>
+    <dep name='emacs' refers='package' />
+    <dep name='emacs-auctex' refers='package' />
+    <dep name='emacs-info' refers='package' />
+    <dep name='emacs-x11' refers='package' />
+    <dep name='fop' refers='package' />
+    <dep name='svg-dtd' refers='package' />
+    <dep name='xslide' refers='package' />
+  </recommends>
+</pattern>
+<pattern>
+  <name>kde_laptop</name>
+  <summary>KDE Laptop</summary>
+  <description>KDE Tools designed specifically for use with laptop computers.</description>
+  <history>
+    <update>
+      <hid>12345</hid>
+      <version>10.2</version>
+      <release>109</release>
+      <arch>i586</arch>
+    </update>
+  </history>
+  <requires>
+    <dep name='basesystem' refers='pattern' />
+  </requires>
+  <provides>
+    <dep name='kde_laptop' refers='pattern' op='==' version='10.2' release='109' />
+  </provides>
+  <supplements>
+    <dep name='laptop' refers='pattern' />
+  </supplements>
+  <recommends>
+    <dep name='kdeutils3-laptop' refers='package' />
+    <dep name='kscpm' refers='package' />
+  </recommends>
+</pattern>
+<pattern>
+  <name>kde_ide</name>
+  <summary>KDE Integrated Development Environment</summary>
+  <description>Development under KDE</description>
+  <history>
+    <update>
+      <hid>12345</hid>
+      <version>10.2</version>
+      <release>109</release>
+      <arch>i586</arch>
+    </update>
+  </history>
+  <requires>
+    <dep name='kdbg' refers='package' />
+    <dep name='kdelibs3-doc' refers='package' />
+    <dep name='kdesdk3' refers='package' />
+    <dep name='kdesdk3-translate' refers='package' />
+    <dep name='kdevelop3' refers='package' />
+    <dep name='qt3-devel-tools' refers='package' />
+  </requires>
+  <provides>
+    <dep name='kde_ide' refers='pattern' op='==' version='10.2' release='109' />
+  </provides>
+  <supplements>
+    <dep name='devel_ide' refers='pattern' />
+  </supplements>
+</pattern>
+<pattern>
+  <name>file_server</name>
+  <summary>File Server</summary>
+  <description>Set up a file server to host files so that they may be accessed or retrieved by other computers on the same network, including machines running Microsoft Windows operating systems. The file server can be set up to authenticate against Microsoft Windows domain controllers or to act as a domain controller. Files and directories can be shared with FTP, SMB, and NFS protocols.</description>
+  <history>
+    <update>
+      <hid>12345</hid>
+      <version>10.2</version>
+      <release>109</release>
+      <arch>i586</arch>
+    </update>
+  </history>
+  <requires>
+    <dep name='basesystem' refers='pattern' />
+    <dep name='nfsidmap' refers='package' />
+    <dep name='nfs-utils' refers='package' />
+    <dep name='samba' refers='package' />
+    <dep name='yast2-nfs-server' refers='package' />
+    <dep name='yast2-samba-server' refers='package' />
+  </requires>
+  <provides>
+    <dep name='file_server' refers='pattern' op='==' version='10.2' release='109' />
+  </provides>
+  <recommends>
+    <dep name='vsftpd' refers='package' />
+    <dep name='samba-client' refers='package' />
+    <dep name='samba-pdb' refers='package' />
+    <dep name='samba-winbind' refers='package' />
+    <dep name='tftp' refers='package' />
+    <dep name='yast2-tftp-server' refers='package' />
+  </recommends>
+</pattern>
+<pattern>
+  <name>devel_web</name>
+  <summary>Web Development</summary>
+  <description>Tools and libraries for web application development.</description>
+  <history>
+    <update>
+      <hid>12345</hid>
+      <version>10.2</version>
+      <release>109</release>
+      <arch>i586</arch>
+    </update>
+  </history>
+  <requires>
+    <dep name='lamp_server' refers='pattern' />
+  </requires>
+  <provides>
+    <dep name='devel_web' refers='pattern' op='==' version='10.2' release='109' />
+  </provides>
+  <suggests>
+    <dep name='bluefish' refers='package' />
+    <dep name='html-dtd' refers='package' />
+    <dep name='iso_ent' refers='package' />
+    <dep name='latex2html' refers='package' />
+    <dep name='perl-CGI-Application' refers='package' />
+    <dep name='perl-HTML-Clean' refers='package' />
+    <dep name='perl-HTML-FillInForm' refers='package' />
+    <dep name='perl-HTML-Format' refers='package' />
+    <dep name='perl-HTML-SimpleParse' refers='package' />
+    <dep name='perl-HTML-Tagset' refers='package' />
+    <dep name='perl-HTML-Template' refers='package' />
+    <dep name='perl-HTML-Template-Expr' refers='package' />
+    <dep name='perl-HTML-Template-JIT' refers='package' />
+    <dep name='perl-HTML-Tree' refers='package' />
+    <dep name='perl-HTTP-DAV' refers='package' />
+    <dep name='perl-HTTPS-Daemon' refers='package' />
+    <dep name='perl-Pod-HtmlPsPdf' refers='package' />
+    <dep name='php5' refers='package' />
+    <dep name='php5-bcmath' refers='package' />
+    <dep name='php5-bz2' refers='package' />
+    <dep name='php5-calendar' refers='package' />
+    <dep name='php5-ctype' refers='package' />
+    <dep name='php5-curl' refers='package' />
+    <dep name='php5-dba' refers='package' />
+    <dep name='php5-dbase' refers='package' />
+    <dep name='php5-devel' refers='package' />
+    <dep name='php5-dom' refers='package' />
+    <dep name='php5-exif' refers='package' />
+    <dep name='php5-fastcgi' refers='package' />
+    <dep name='php5-filepro' refers='package' />
+    <dep name='php5-ftp' refers='package' />
+    <dep name='php5-gd' refers='package' />
+    <dep name='php5-gettext' refers='package' />
+    <dep name='php5-gmp' refers='package' />
+    <dep name='php5-iconv' refers='package' />
+    <dep name='php5-imap' refers='package' />
+    <dep name='php5-ldap' refers='package' />
+    <dep name='php5-mbstring' refers='package' />
+    <dep name='php5-mcrypt' refers='package' />
+    <dep name='php5-mhash' refers='package' />
+    <dep name='php5-mysql' refers='package' />
+    <dep name='php5-ncurses' refers='package' />
+    <dep name='php5-odbc' refers='package' />
+    <dep name='php5-openssl' refers='package' />
+    <dep name='php5-pear' refers='package' />
+    <dep name='php5-pgsql' refers='package' />
+    <dep name='php5-shmop' refers='package' />
+    <dep name='php5-snmp' refers='package' />
+    <dep name='php5-sockets' refers='package' />
+    <dep name='php5-sysvsem' refers='package' />
+    <dep name='php5-sysvshm' refers='package' />
+    <dep name='php5-tidy' refers='package' />
+    <dep name='php5-wddx' refers='package' />
+    <dep name='php5-xsl' refers='package' />
+    <dep name='php5-zlib' refers='package' />
+    <dep name='tidy' refers='package' />
+    <dep name='xhtml-dtd' refers='package' />
+    <dep name='xmlcharent' refers='package' />
+    <dep name='apache2-worker' refers='package' />
+    <dep name='apache2-mod_tidy' refers='package' />
+    <dep name='kdewebdev3' refers='package' />
+    <dep name='nvu' refers='package' />
+    <dep name='tomcat5' refers='package' />
+    <dep name='tomcat5-admin-webapps' refers='package' />
+    <dep name='tomcat5-webapps' refers='package' />
+    <dep name='selfhtml' refers='package' />
+    <dep name='selfphp' refers='package' />
+    <dep name='zope' refers='package' />
+    <dep name='zope3' refers='package' />
+    <dep name='zope-mysql' refers='package' />
+  </suggests>
+  <recommends>
+    <dep name='apache2-devel' refers='package' />
+  </recommends>
+</pattern>
+<pattern>
+  <name>console</name>
+  <summary>Console Tools</summary>
+  <description>Applications usefull for people using the console and no graphical desktop environment.</description>
+  <history>
+    <update>
+      <hid>12345</hid>
+      <version>10.2</version>
+      <release>109</release>
+      <arch>i586</arch>
+    </update>
+  </history>
+  <requires>
+    <dep name='finger' refers='package' />
+    <dep name='ivman' refers='package' />
+    <dep name='mc' refers='package' />
+    <dep name='w3m' refers='package' />
+    <dep name='wodim' refers='package' />
+  </requires>
+  <provides>
+    <dep name='console' refers='pattern' op='==' version='10.2' release='109' />
+  </provides>
+  <suggests>
+    <dep name='bsd-games' refers='package' />
+    <dep name='findutils-locate' refers='package' />
+  </suggests>
+  <recommends>
+    <dep name='emacs-nox' refers='package' />
+    <dep name='sox' refers='package' />
+    <dep name='vorbis-tools' refers='package' />
+  </recommends>
+</pattern>
+<pattern>
+  <name>remote_desktop</name>
+  <summary>Remote Desktop</summary>
+  <description>Tools to access a remote desktop.</description>
+  <history>
+    <update>
+      <hid>12345</hid>
+      <version>10.2</version>
+      <release>109</release>
+      <arch>i586</arch>
+    </update>
+  </history>
+  <provides>
+    <dep name='remote_desktop' refers='pattern' op='==' version='10.2' release='109' />
+  </provides>
+  <suggests>
+    <dep name='kdenetwork3-vnc' refers='package' />
+  </suggests>
+  <recommends>
+    <dep name='rdesktop' refers='package' />
+    <dep name='tsclient' refers='package' />
+    <dep name='FreeNX' refers='package' />
+    <dep name='vnc' refers='package' />
+  </recommends>
+</pattern>
+<pattern>
+  <name>kde_games</name>
+  <summary>KDE Games</summary>
+  <description>KDE Games</description>
+  <history>
+    <update>
+      <hid>12345</hid>
+      <version>10.2</version>
+      <release>109</release>
+      <arch>i586</arch>
+    </update>
+  </history>
+  <requires>
+    <dep name='kdegames3' refers='package' />
+    <dep name='knights' refers='package' />
+    <dep name='ksudoku' refers='package' />
+  </requires>
+  <provides>
+    <dep name='kde_games' refers='pattern' op='==' version='10.2' release='109' />
+  </provides>
+  <suggests>
+    <dep name='kdegames3-arcade' refers='package' />
+    <dep name='kdegames3-board' refers='package' />
+    <dep name='kdegames3-card' refers='package' />
+    <dep name='kdegames3-tactic' refers='package' />
+  </suggests>
+  <supplements>
+    <dep name='games' refers='pattern' />
+  </supplements>
+</pattern>
+<pattern>
+  <name>dhcp_dns_server</name>
+  <summary>DHCP and DNS Server</summary>
+  <description>Set up the server for the Dynamic Host Configuration Protocol (DHCP) that provides configuration parameters to client computers to integrate them into a network. Also provide Domain Name System (DNS) services to deliver information associated with domain names, in particular, the IP address.</description>
+  <history>
+    <update>
+      <hid>12345</hid>
+      <version>10.2</version>
+      <release>109</release>
+      <arch>i586</arch>
+    </update>
+  </history>
+  <requires>
+    <dep name='basesystem' refers='pattern' />
+    <dep name='bind' refers='package' />
+    <dep name='bind-chrootenv' refers='package' />
+    <dep name='dhcp' refers='package' />
+    <dep name='dhcp-relay' refers='package' />
+    <dep name='dhcp-server' refers='package' />
+    <dep name='dhcp-tools' refers='package' />
+    <dep name='yast2-dhcp-server' refers='package' />
+    <dep name='yast2-dns-server' refers='package' />
+  </requires>
+  <provides>
+    <dep name='dhcp_dns_server' refers='pattern' op='==' version='10.2' release='109' />
+  </provides>
+  <recommends>
+    <dep name='bind-doc' refers='package' />
+    <dep name='dhcp6' refers='package' />
+  </recommends>
+</pattern>
+<pattern>
+  <name>devel_ide</name>
+  <summary>Integrated Development Environments</summary>
+  <description>Integrated Development Environments</description>
+  <history>
+    <update>
+      <hid>12345</hid>
+      <version>10.2</version>
+      <release>109</release>
+      <arch>i586</arch>
+    </update>
+  </history>
+  <requires>
+    <dep name='devel_basis' refers='pattern' />
+  </requires>
+  <provides>
+    <dep name='devel_ide' refers='pattern' op='==' version='10.2' release='109' />
+  </provides>
+  <suggests>
+    <dep name='anjuta' refers='package' />
+    <dep name='eclipse' refers='package' />
+    <dep name='monodevelop' refers='package' />
+  </suggests>
+</pattern>
+<pattern>
+  <name>yast2_basis</name>
+  <summary>YaST System Administration</summary>
+  <description>Essential YaST System Administration</description>
+  <history>
+    <update>
+      <hid>12345</hid>
+      <version>10.2</version>
+      <release>109</release>
+      <arch>i586</arch>
+    </update>
+  </history>
+  <requires>
+    <dep name='limal' refers='package' />
+    <dep name='limal-bootloader' refers='package' />
+    <dep name='limal-perl' refers='package' />
+    <dep name='yast2' refers='package' />
+    <dep name='yast2-backup' refers='package' />
+    <dep name='yast2-bluetooth' refers='package' />
+    <dep name='yast2-bootfloppy' refers='package' />
+    <dep name='yast2-bootloader' refers='package' />
+    <dep name='yast2-core' refers='package' />
+    <dep name='yast2-country' refers='package' />
+    <dep name='yast2-firewall' refers='package' />
+    <dep name='yast2-hardware-detection' refers='package' />
+    <dep name='yast2-inetd' refers='package' />
+    <dep name='yast2-installation' refers='package' />
+    <dep name='yast2-irda' refers='package' />
+    <dep name='yast2-iscsi-client' refers='package' />
+    <dep name='yast2-kerberos-client' refers='package' />
+    <dep name='yast2-ldap' refers='package' />
+    <dep name='yast2-ldap-client' refers='package' />
+    <dep name='yast2-mail' refers='package' />
+    <dep name='yast2-mail-aliases' refers='package' />
+    <dep name='yast2-mouse' refers='package' />
+    <dep name='yast2-ncurses' refers='package' />
+    <dep name='yast2-network' refers='package' />
+    <dep name='yast2-nfs-client' refers='package' />
+    <dep name='yast2-nis-client' refers='package' />
+    <dep name='yast2-ntp-client' refers='package' />
+    <dep name='yast2-online-update' refers='package' />
+    <dep name='yast2-online-update-frontend' refers='package' />
+    <dep name='yast2-packager' refers='package' />
+    <dep name='yast2-pam' refers='package' />
+    <dep name='yast2-perl-bindings' refers='package' />
+    <dep name='yast2-pkg-bindings' refers='package' />
+    <dep name='yast2-power-management' refers='package' />
+    <dep name='yast2-powertweak' refers='package' />
+    <dep name='yast2-printer' refers='package' />
+    <dep name='yast2-profile-manager' refers='package' />
+    <dep name='yast2-repair' refers='package' />
+    <dep name='yast2-restore' refers='package' />
+    <dep name='yast2-runlevel' refers='package' />
+    <dep name='yast2-samba-client' refers='package' />
+    <dep name='yast2-schema' refers='package' />
+    <dep name='yast2-scanner' refers='package' />
+    <dep name='yast2-security' refers='package' />
+    <dep name='yast2-slp' refers='package' />
+    <dep name='yast2-storage' refers='package' />
+    <dep name='yast2-storage-lib' refers='package' />
+    <dep name='yast2-sudo' refers='package' />
+    <dep name='yast2-support' refers='package' />
+    <dep name='yast2-sysconfig' refers='package' />
+    <dep name='yast2-theme-openSUSE' refers='package' />
+    <dep name='yast2-transfer' refers='package' />
+    <dep name='yast2-tune' refers='package' />
+    <dep name='yast2-tv' refers='package' />
+    <dep name='yast2-update' refers='package' />
+    <dep name='yast2-users' refers='package' />
+    <dep name='yast2-xml' refers='package' />
+  </requires>
+  <provides>
+    <dep name='yast2_basis' refers='pattern' op='==' version='10.2' release='109' />
+  </provides>
+  <suggests>
+    <dep name='yast2-cd-creator' refers='package' />
+  </suggests>
+  <recommends>
+    <dep name='autoyast2' refers='package' />
+    <dep name='autoyast2-installation' refers='package' />
+    <dep name='inst-source-utils' refers='package' />
+  </recommends>
+</pattern>
+<pattern>
+  <name>non_oss_java</name>
+  <summary>Java Environment</summary>
+  <description>Proprietary Java Packages.</description>
+  <history>
+    <update>
+      <hid>12345</hid>
+      <version>10.2</version>
+      <release>109</release>
+      <arch>i586</arch>
+    </update>
+  </history>
+  <requires>
+    <dep name='x11' refers='pattern' />
+    <dep name='java-1_5_0-sun' refers='package' />
+    <dep name='java-1_5_0-sun-plugin' refers='package' />
+  </requires>
+  <provides>
+    <dep name='non_oss_java' refers='pattern' op='==' version='10.2' release='109' />
+  </provides>
+  <suggests>
+    <dep name='ant-antlr' refers='package' />
+    <dep name='ant-javamail' refers='package' />
+    <dep name='jaf' refers='package' />
+    <dep name='jaf-demo' refers='package' />
+    <dep name='jaf-javadoc' refers='package' />
+    <dep name='jaf-manual' refers='package' />
+    <dep name='jai' refers='package' />
+    <dep name='java-1_4_2-sun' refers='package' />
+    <dep name='java-1_4_2-sun-alsa' refers='package' />
+    <dep name='java-1_4_2-sun-devel' refers='package' />
+    <dep name='java-1_4_2-sun-jdbc' refers='package' />
+    <dep name='java-1_4_2-sun-plugin' refers='package' />
+    <dep name='java-1_5_0-sun-alsa' refers='package' />
+    <dep name='java-1_5_0-sun-demo' refers='package' />
+    <dep name='java-1_5_0-sun-devel' refers='package' />
+    <dep name='java-1_5_0-sun-jdbc' refers='package' />
+    <dep name='java-1_5_0-sun-src' refers='package' />
+    <dep name='javamail' refers='package' />
+    <dep name='javamail-demo' refers='package' />
+    <dep name='javamail-javadoc' refers='package' />
+    <dep name='javamail-manual' refers='package' />
+    <dep name='javamail-monolithic' refers='package' />
+    <dep name='jms' refers='package' />
+    <dep name='jms-javadoc' refers='package' />
+    <dep name='jmx' refers='package' />
+    <dep name='jmx-javadoc' refers='package' />
+    <dep name='jta' refers='package' />
+    <dep name='jta-javadoc' refers='package' />
+  </suggests>
+</pattern>
+<pattern>
+  <name>gnome_laptop</name>
+  <summary>GNOME Laptop</summary>
+  <description>GNOME Tools designed specifically for use with laptop computers.</description>
+  <history>
+    <update>
+      <hid>12345</hid>
+      <version>10.2</version>
+      <release>109</release>
+      <arch>i586</arch>
+    </update>
+  </history>
+  <requires>
+    <dep name='gnome_basis' refers='pattern' />
+  </requires>
+  <provides>
+    <dep name='gnome_laptop' refers='pattern' op='==' version='10.2' release='109' />
+  </provides>
+  <supplements>
+    <dep name='laptop' refers='pattern' />
+  </supplements>
+  <recommends>
+    <dep name='gnome-vfs2' refers='package' />
+  </recommends>
+</pattern>
+<pattern>
+  <name>gnome_imaging</name>
+  <summary>GNOME Graphics</summary>
+  <description>Handling of digital photos and graphics</description>
+  <history>
+    <update>
+      <hid>12345</hid>
+      <version>10.2</version>
+      <release>109</release>
+      <arch>i586</arch>
+    </update>
+  </history>
+  <requires>
+    <dep name='gnome_basis' refers='pattern' />
+    <dep name='dcraw' refers='package' />
+    <dep name='eog' refers='package' />
+    <dep name='f-spot' refers='package' />
+  </requires>
+  <provides>
+    <dep name='gnome_imaging' refers='pattern' op='==' version='10.2' release='109' />
+  </provides>
+  <supplements>
+    <dep name='imaging' refers='pattern' />
+  </supplements>
+</pattern>
+<pattern>
+  <name>devel_ruby</name>
+  <summary>Ruby Development</summary>
+  <description>Tools and libraries for software development using the Ruby programming language.</description>
+  <history>
+    <update>
+      <hid>12345</hid>
+      <version>10.2</version>
+      <release>109</release>
+      <arch>i586</arch>
+    </update>
+  </history>
+  <requires>
+    <dep name='ruby' refers='package' />
+    <dep name='rubygems' refers='package' />
+  </requires>
+  <provides>
+    <dep name='devel_ruby' refers='pattern' op='==' version='10.2' release='109' />
+  </provides>
+  <suggests>
+    <dep name='ruby-devel' refers='package' />
+    <dep name='ruby-doc-html' refers='package' />
+    <dep name='ruby-doc-ri' refers='package' />
+    <dep name='ruby-examples' refers='package' />
+    <dep name='ruby-fcgi' refers='package' />
+    <dep name='ruby-gdchart' refers='package' />
+    <dep name='ruby-gettext' refers='package' />
+    <dep name='ruby-ldap' refers='package' />
+    <dep name='ruby-mysql' refers='package' />
+    <dep name='ruby-racc' refers='package' />
+    <dep name='ruby-test-suite' refers='package' />
+    <dep name='ruby-tk' refers='package' />
+    <dep name='rubygem-FlexMock' refers='package' />
+  </suggests>
+</pattern>
+<pattern>
+  <name>devel_gnome</name>
+  <summary>GNOME Development</summary>
+  <description>Development for the GNOME Desktop</description>
+  <history>
+    <update>
+      <hid>12345</hid>
+      <version>10.2</version>
+      <release>109</release>
+      <arch>i586</arch>
+    </update>
+  </history>
+  <requires>
+    <dep name='devel_C_C++' refers='pattern' />
+    <dep name='gnome_basis' refers='pattern' />
+    <dep name='gtk2-devel' refers='package' />
+    <dep name='gtk2-doc' refers='package' />
+    <dep name='gtkdoc' refers='package' />
+  </requires>
+  <provides>
+    <dep name='devel_gnome' refers='pattern' op='==' version='10.2' release='109' />
+  </provides>
+  <recommends>
+    <dep name='aalib-devel' refers='package' />
+    <dep name='alsa-devel' refers='package' />
+    <dep name='at-spi-devel' refers='package' />
+    <dep name='atk-devel' refers='package' />
+    <dep name='audiofile-devel' refers='package' />
+    <dep name='banshee-devel' refers='package' />
+    <dep name='cairo-devel' refers='package' />
+    <dep name='cairo-doc' refers='package' />
+    <dep name='control-center2-devel' refers='package' />
+    <dep name='dbus-1-devel' refers='package' />
+    <dep name='devhelp' refers='package' />
+    <dep name='devhelp-devel' refers='package' />
+    <dep name='eel-devel' refers='package' />
+    <dep name='epiphany-devel' refers='package' />
+    <dep name='epiphany-doc' refers='package' />
+    <dep name='esound-devel' refers='package' />
+    <dep name='evolution-data-server-devel' refers='package' />
+    <dep name='evolution-devel' refers='package' />
+    <dep name='fam-devel' refers='package' />
+    <dep name='gail-devel' refers='package' />
+    <dep name='gail-doc' refers='package' />
+    <dep name='gaim-devel' refers='package' />
+    <dep name='gconf2-devel' refers='package' />
+    <dep name='gconf2-doc' refers='package' />
+    <dep name='ghex' refers='package' />
+    <dep name='glade' refers='package' />
+    <dep name='glib-devel' refers='package' />
+    <dep name='glib2-devel' refers='package' />
+    <dep name='glib2-doc' refers='package' />
+    <dep name='glitz-devel' refers='package' />
+    <dep name='gnome-applets-devel' refers='package' />
+    <dep name='gnome-bluetooth-devel' refers='package' />
+    <dep name='gnome-common' refers='package' />
+    <dep name='gnome-cups-manager-devel' refers='package' />
+    <dep name='gnome-desktop-devel' refers='package' />
+    <dep name='gnome-doc-utils' refers='package' />
+    <dep name='gnome-doc-utils-devel' refers='package' />
+    <dep name='gnome-keyring-devel' refers='package' />
+    <dep name='gnome-main-menu-devel' refers='package' />
+    <dep name='gnome-media-devel' refers='package' />
+    <dep name='gnome-menus-devel' refers='package' />
+    <dep name='gnome-pilot-devel' refers='package' />
+    <dep name='gnome-speech-devel' refers='package' />
+    <dep name='gnome-vfs2-devel' refers='package' />
+    <dep name='gnome-vfs2-doc' refers='package' />
+    <dep name='gnopernicus-devel' refers='package' />
+    <dep name='gob2' refers='package' />
+    <dep name='gstreamer010-devel' refers='package' />
+    <dep name='gstreamer010-doc' refers='package' />
+    <dep name='gstreamer010-plugins-base-devel' refers='package' />
+    <dep name='gtkhtml2-devel' refers='package' />
+    <dep name='gtksourceview-devel' refers='package' />
+    <dep name='gtksourceview-doc' refers='package' />
+    <dep name='gucharmap-devel' refers='package' />
+    <dep name='intltool' refers='package' />
+    <dep name='libart_lgpl-devel' refers='package' />
+    <dep name='libavc1394-devel' refers='package' />
+    <dep name='libbeagle-devel' refers='package' />
+    <dep name='libbonobo-devel' refers='package' />
+    <dep name='libbonobo-doc' refers='package' />
+    <dep name='libbonoboui-devel' refers='package' />
+    <dep name='libbonoboui-doc' refers='package' />
+    <dep name='libbtctl-devel' refers='package' />
+    <dep name='libcroco-devel' refers='package' />
+    <dep name='libgail-gnome-devel' refers='package' />
+    <dep name='libgcrypt-devel' refers='package' />
+    <dep name='libgda-devel' refers='package' />
+    <dep name='libglade2-devel' refers='package' />
+    <dep name='libglade2-doc' refers='package' />
+    <dep name='libgnome-devel' refers='package' />
+    <dep name='libgnome-doc' refers='package' />
+    <dep name='libgnomecanvas-devel' refers='package' />
+    <dep name='libgnomecanvas-doc' refers='package' />
+    <dep name='libgnomecups-devel' refers='package' />
+    <dep name='libgnomedb-devel' refers='package' />
+    <dep name='libgnomeprint-devel' refers='package' />
+    <dep name='libgnomeprint-doc' refers='package' />
+    <dep name='libgnomeprintui-devel' refers='package' />
+    <dep name='libgnomeprintui-doc' refers='package' />
+    <dep name='libgnomesu-devel' refers='package' />
+    <dep name='libgnomeui-devel' refers='package' />
+    <dep name='libgnomeui-doc' refers='package' />
+    <dep name='libgsf-devel' refers='package' />
+    <dep name='libgsf-doc' refers='package' />
+    <dep name='libgtop-devel' refers='package' />
+    <dep name='libidl-devel' refers='package' />
+    <dep name='libksba-devel' refers='package' />
+    <dep name='libmusicbrainz-devel' refers='package' />
+    <dep name='libopencdk-devel' refers='package' />
+    <dep name='libsoup-devel' refers='package' />
+    <dep name='libvisual-devel' refers='package' />
+    <dep name='libwnck-devel' refers='package' />
+    <dep name='libxklavier-devel' refers='package' />
+    <dep name='libxml2-devel' refers='package' />
+    <dep name='libxslt-devel' refers='package' />
+    <dep name='nautilus-cd-burner-devel' refers='package' />
+    <dep name='nautilus-devel' refers='package' />
+    <dep name='neon-devel' refers='package' />
+    <dep name='orbit2-devel' refers='package' />
+    <dep name='pango-devel' refers='package' />
+    <dep name='pango-doc' refers='package' />
+    <dep name='pkgconfig' refers='package' />
+    <dep name='planner-devel' refers='package' />
+    <dep name='startup-notification-devel' refers='package' />
+    <dep name='vte-devel' refers='package' />
+    <dep name='wvstreams-devel' refers='package' />
+  </recommends>
+</pattern>
+<pattern>
+  <name>devel_C_C++</name>
+  <summary>C/C++ Development</summary>
+  <description>Tools and libraries for software development using C/C++ and other derivates of the C programming language.</description>
+  <history>
+    <update>
+      <hid>12345</hid>
+      <version>10.2</version>
+      <release>109</release>
+      <arch>i586</arch>
+    </update>
+  </history>
+  <requires>
+    <dep name='devel_basis' refers='pattern' />
+  </requires>
+  <provides>
+    <dep name='devel_C_C++' refers='pattern' op='==' version='10.2' release='109' />
+  </provides>
+  <recommends>
+    <dep name='boost' refers='package' />
+    <dep name='boost-devel' refers='package' />
+    <dep name='boost-doc' refers='package' />
+    <dep name='boost-jam' refers='package' />
+    <dep name='ddd' refers='package' />
+    <dep name='ElectricFence' refers='package' />
+    <dep name='glibc-info' refers='package' />
+    <dep name='posix_cc' refers='package' />
+    <dep name='swig' refers='package' />
+    <dep name='texinfo' refers='package' />
+    <dep name='valgrind' refers='package' />
+    <dep name='ltrace' refers='package' />
+  </recommends>
+</pattern>
+</subchannel></channel>
