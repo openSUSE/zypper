@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<test>
+<setup>
+  <system file="bug220999-system.xml"/>
+  <channel name="test" file="bug220999-packages.xml"/>
+</setup>
+
+<!-- foo is installed, but obsoleted by candidate foonew; so fooc finds no target
+     for its conflict -->
+<trial>
+  <install channel="test" package="nomorefoo"/>
+</trial>
+
+</test>
