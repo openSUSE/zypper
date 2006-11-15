@@ -226,6 +226,10 @@ namespace zypp
    * Additionally you may omit invocation of \a action_r for a
    * specific PoolItem.
    *
+   * Even if no _action is given, the PoolItems that would have been
+   * processed are collected in a std::set, available via
+   * \ref collectedItems.
+   *
    * \code
    * bool consume( const CapAndItem & cai_r );
    * bool consumePi( const PoolItem & pi_r );
@@ -260,24 +264,38 @@ namespace zypp
     typedef function<bool(const PoolItem &)> Action;
 
   public:
+    explicit
+    OncePerPoolItem( const PoolItem & self_r = PoolItem() )
+    : _self  ( self_r )
+    , _uset  ( new std::set<PoolItem> )
+    {}
+
     OncePerPoolItem( const Action & action_r,
                      const PoolItem & self_r = PoolItem() )
     : _action( action_r )
+    , _self  ( self_r )
     , _uset  ( new std::set<PoolItem> )
-    {
-      if ( self_r )
-        _uset->insert( self_r );
-    }
+    {}
 
     bool operator()( const CapAndItem & cai_r ) const
     {
-      if ( _uset->insert( cai_r.item ).second )
+      if ( cai_r.item == _self ) // omit _self
+        return true;
+      // intentionally collect items in _uset even
+      // if no _action specified.
+      if ( _uset->insert( cai_r.item ).second
+           && _action )
         return _action( cai_r.item );
+
       return true;
     }
 
+    const std::set<PoolItem> & collectedItems() const
+    { return *_uset; }
+
   private:
     Action   _action;
+    PoolItem _self;
     shared_ptr<std::set<PoolItem> > _uset;
   };
 
