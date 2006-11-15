@@ -237,7 +237,7 @@ struct SourceReportReceiver  : public zypp::callback::ReceiveReport<zypp::source
   {
     display_step(100);
     // many of these, avoid newline
-    if (boost::algorithm::starts_with (task, "Parsing patch"))
+    if (boost::algorithm::starts_with (task, "Reading patch"))
       cerr_v << '\r' << flush;
     else
       display_done ();
