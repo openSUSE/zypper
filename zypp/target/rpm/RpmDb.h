@@ -144,7 +144,7 @@ namespace zypp
          * timestamp of the rpm database (last modification)
          */
         Date timestamp() const;
-        
+
         /**
          * @return Root directory for all operations (empty if not initialized).
          **/
@@ -449,33 +449,27 @@ namespace zypp
         };
 
         /**
-         * Bits of possible package corruptions
+         * checkPackage result
          * @see checkPackage
-         * @see checkPackageResult2string
          * */
         enum checkPackageResult
         {
-          CHK_OK                = 0x00,
-          CHK_INCORRECT_VERSION = 0x01, // package does not contain expected version
-          CHK_INCORRECT_FILEMD5 = 0x02, // md5sum of file is wrong (outside)
-          CHK_GPGSIG_MISSING    = 0x04, // package is not signeed
-          CHK_MD5SUM_MISSING    = 0x08, // package is not signeed
-          CHK_INCORRECT_GPGSIG  = 0x10, // signature incorrect
-          CHK_INCORRECT_PKGMD5  = 0x20, // md5sum incorrect (inside)
-          CHK_OTHER_FAILURE     = 0x40  // rpm failed for some reason
+          CHK_OK            = 0, /*!< Signature is OK. */
+          CHK_NOTFOUND      = 1, /*!< Signature is unknown type. */
+          CHK_FAIL          = 2, /*!< Signature does not verify. */
+          CHK_NOTTRUSTED    = 3, /*!< Signature is OK, but key is not trusted. */
+          CHK_NOKEY         = 4, /*!< Public key is unavailable. */
+          CHK_ERROR         = 5  /*!< File does not exist or can't be opened. */
         };
 
-
         /**
-         * Check rpm with rpm --checksig
+         * Check signature of rpm file on disk.
          *
          * @param filename which file to check
-         * @param version check if package really contains this version, leave emtpy to skip check
-         * @param md5 md5sum for whole file, leave empty to skip check (not yet implemented)
          *
          * @return checkPackageResult
         */
-        unsigned checkPackage (const Pathname& filename, std::string version = "", std::string md5 = "" );
+        checkPackageResult checkPackage( const Pathname & path_r );
 
         /** install rpm package
          *
@@ -557,13 +551,6 @@ namespace zypp
          * reason
          * */
         bool queryChangedFiles(FileList & fileList, const std::string& packageName);
-
-      public: // static members
-
-        /** create error description of bits set according to
-         * checkPackageResult
-         * */
-        static std::string checkPackageResult2string(unsigned code);
 
       public:
 
