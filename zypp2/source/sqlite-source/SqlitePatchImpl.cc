@@ -62,7 +62,7 @@ void
 SqlitePatchImpl::readHandle( sqlite_int64 id, sqlite3_stmt *handle )
 {
     _zmdid = id;
-    
+
     // 1-5: nvra, see SqliteSourceImpl
     _size_installed = sqlite3_column_int( handle, PATCHES_TABLE_COLUMN_SIZE_INSTALLED );
     // 7: catalog
@@ -110,9 +110,6 @@ bool SqlitePatchImpl::reboot_needed() const
 /** Does the patch affect the package manager itself? */
 bool SqlitePatchImpl::affects_pkg_manager() const
 { return _affects_pkg_manager; }
-/** Is the patch installation interactive? (does it need user input?) */
-bool SqlitePatchImpl::interactive() const
-{ return _interactive; }
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

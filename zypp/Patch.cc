@@ -18,7 +18,7 @@ namespace zypp
 { /////////////////////////////////////////////////////////////////
 
   IMPL_PTR_TYPE( Patch );
- 
+
   ///////////////////////////////////////////////////////////////////
   //
   //	METHOD NAME : Patch::Patch
@@ -63,14 +63,14 @@ namespace zypp
   bool Patch::interactive() const
   { return pimpl().interactive(); }
 
+
+  // DEPRECATED:
   void Patch::mark_atoms_to_freshen(bool freshen)
-  { pimpl().mark_atoms_to_freshen(freshen); }
-
+  { ; }
   bool Patch::any_atom_selected()
-  { return pimpl().any_atom_selected(); }
-
+  { return false; }
   void Patch::select()
-  { pimpl().mark_atoms_to_freshen(true); }
+  { ; }
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

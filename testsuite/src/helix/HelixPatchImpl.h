@@ -47,20 +47,10 @@ public:
       virtual bool affects_pkg_manager() const ;
       /** */
       virtual ByteCount size() const;
-
-      /** Is the patch installation interactive? (does it need user input?) */
-      virtual bool interactive() const;
       /** The list of all atoms building the patch */
       virtual AtomList all_atoms() const;
-      /** The list of those atoms which have not been installed */
-      virtual AtomList not_installed_atoms() const;
-
-// TODO check necessarity of functions below
-      virtual void mark_atoms_to_freshen(bool freshen) ;
-      virtual bool any_atom_selected() const;
-
-	/** */
-	virtual Source_Ref source() const;
+      /** */
+      virtual Source_Ref source() const;
 
 protected:
 	Source_Ref _source;

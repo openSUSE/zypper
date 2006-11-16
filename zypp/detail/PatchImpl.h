@@ -39,30 +39,22 @@ namespace zypp
 
     public:
       /** Patch ID */
-      std::string id() const;
+      virtual std::string id() const;
       /** Patch time stamp */
-      Date timestamp() const;
+      virtual Date timestamp() const;
       /** Patch summary */
-      TranslatedText summary() const;
+      virtual TranslatedText summary() const;
       /** Patch description */
-      TranslatedText description() const;
+      virtual TranslatedText description() const;
       /** Patch category (recommended, security,...) */
-      std::string category() const;
+      virtual std::string category() const;
       /** Does the system need to reboot to finish the update process? */
-      bool reboot_needed() const;
+      virtual bool reboot_needed() const;
       /** Does the patch affect the package manager itself? */
-      bool affects_pkg_manager() const;
-
-      /** Is the patch installation interactive? (does it need user input?) */
-      bool interactive() const;
+      virtual bool affects_pkg_manager() const;
       /** The list of all atoms building the patch */
-      AtomList all_atoms() const;
-      /** The list of those atoms which have not been installed */
-      AtomList not_installed_atoms() const;
+      virtual AtomList all_atoms() const;
 
-// TODO check necessarity of functions below
-      bool any_atom_selected() const;
-      void mark_atoms_to_freshen(bool freshen);
     protected:
       /** Patch ID */
       std::string _patch_id;

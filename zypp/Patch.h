@@ -20,7 +20,7 @@ namespace zypp
 { /////////////////////////////////////////////////////////////////
 
   DEFINE_PTR_TYPE(Patch);
-  
+
   ///////////////////////////////////////////////////////////////////
   //
   //	CLASS NAME : Patch
@@ -56,10 +56,11 @@ namespace zypp
     AtomList atoms() const;
     /** Is the patch installation interactive? (does it need user input?) */
     bool interactive() const;
-    // TODO add comments and reevaluate the need for functions below
-    void mark_atoms_to_freshen(bool freshen);
-    bool any_atom_selected();
-    void select(); // TODO parameter to specify select/unselect or another function
+
+
+    void mark_atoms_to_freshen(bool freshen) ZYPP_DEPRECATED;
+    bool any_atom_selected() ZYPP_DEPRECATED;
+    void select() ZYPP_DEPRECATED;
 
   protected:
     /** Ctor */

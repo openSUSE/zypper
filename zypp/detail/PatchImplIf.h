@@ -53,17 +53,10 @@ namespace zypp
       virtual bool affects_pkg_manager() const PURE_VIRTUAL;
       /** */
       virtual ByteCount size() const;
-
       /** Is the patch installation interactive? (does it need user input?) */
       virtual bool interactive() const PURE_VIRTUAL;
       /** The list of all atoms building the patch */
       virtual AtomList all_atoms() const PURE_VIRTUAL;
-      /** The list of those atoms which have not been installed */
-      virtual AtomList not_installed_atoms() const PURE_VIRTUAL;
-
-// TODO check necessarity of functions below
-      virtual void mark_atoms_to_freshen(bool freshen) PURE_VIRTUAL;
-      virtual bool any_atom_selected() const PURE_VIRTUAL;
     };
     ///////////////////////////////////////////////////////////////////
 

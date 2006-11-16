@@ -42,19 +42,27 @@ namespace zypp
     { return ByteCount(); }
 
     bool PatchImplIf::interactive() const
-    { return false; }
+    {
+      if ( reboot_needed() )
+        {
+          return true;
+        }
+
+      AtomList atoms = all_atoms();
+      for ( AtomList::const_iterator it = atoms.begin(); it != atoms.end(); it++)
+        {
+          if (    isKind<Message>( *it )
+               || ! licenseToConfirm().empty() )
+            {
+              return true;
+            }
+        }
+
+      return false;
+    }
 
     PatchImplIf::AtomList PatchImplIf::all_atoms() const
     { return AtomList(); }
-
-    PatchImplIf::AtomList PatchImplIf::not_installed_atoms() const
-    { return AtomList(); }
-
-    void PatchImplIf::mark_atoms_to_freshen(bool)
-    { return; }
-
-    bool PatchImplIf::any_atom_selected() const
-    { return false; }
 
     /////////////////////////////////////////////////////////////////
   } // namespace detail
