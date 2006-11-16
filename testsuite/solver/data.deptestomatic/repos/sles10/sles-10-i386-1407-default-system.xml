@@ -47784,5 +47784,760 @@ eG+OZlfOGJj1sdx4JKwpwk9mSdrq2ELhrkPZiVWS7RmRkPr2klwYgKGWbmOJ
 	</provides>
 	</deps>
 	</package>
+
+  <pattern>
+    <name>apparmor</name>
+    <section>Pattern</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>10</version>
+          <release>51.20</release>
+          <arch>i586</arch>
+        </update>
+      </history>
+      <provides>
+        <dep name='apparmor' refers='pattern' op='==' version='10' release='51.20' />
+      </provides>
+      <requires>
+        <dep name='basesystem' refers='pattern' />
+        <dep name='apparmor-profiles' refers='package' />
+        <dep name='apparmor-utils' refers='package' />
+        <dep name='yast2-apparmor' refers='package' />
+        <dep name='libapparmor' refers='package' />
+        <dep name='apparmor-parser' refers='package' />
+        <dep name='apparmor-docs' refers='package' />
+      </requires>
+      <recommends>
+        <dep name='audit' refers='package' />
+        <dep name='apparmor-admin_en' refers='package' />
+      </recommends>
+</pattern>
+  <pattern>
+    <name>gnome</name>
+    <section>Pattern</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>10</version>
+          <release>51.20</release>
+          <arch>i586</arch>
+        </update>
+      </history>
+      <provides>
+        <dep name='gnome' refers='pattern' op='==' version='10' release='51.20' />
+      </provides>
+      <requires>
+        <dep name='x11' refers='pattern' />
+        <dep name='gnome-panel-nld' refers='package' />
+        <dep name='gnome-main-menu' refers='package' />
+        <dep name='basesystem' refers='pattern' />
+      </requires>
+      <recommends>
+        <dep name='desktop-file-utils' refers='package' />
+        <dep name='jack' refers='package' />
+        <dep name='notification-daemon' refers='package' />
+        <dep name='gnome-media' refers='package' />
+        <dep name='python-gtk' refers='package' />
+        <dep name='dbus-1-x11' refers='package' />
+        <dep name='libsamplerate' refers='package' />
+        <dep name='xscreensaver' refers='package' />
+        <dep name='gnome-mime-data' refers='package' />
+        <dep name='glib-sharp2' refers='package' />
+        <dep name='python-numeric' refers='package' />
+        <dep name='python-orbit' refers='package' />
+        <dep name='sensors' refers='package' />
+        <dep name='slang' refers='package' />
+        <dep name='startup-notification' refers='package' />
+        <dep name='rrdtool' refers='package' />
+        <dep name='poppler-glib' refers='package' />
+        <dep name='nautilus-open-terminal' refers='package' />
+        <dep name='nautilus-share' refers='package' />
+        <dep name='poppler' refers='package' />
+        <dep name='lzo' refers='package' />
+        <dep name='ncpfs' refers='package' />
+        <dep name='nautilus-cd-burner' refers='package' />
+        <dep name='metacity' refers='package' />
+        <dep name='libxklavier' refers='package' />
+        <dep name='zen-updater' refers='package' />
+        <dep name='control-center2' refers='package' />
+        <dep name='tango-icon-theme' refers='package' />
+        <dep name='gnome-icon-theme' refers='package' />
+        <dep name='pango' refers='package' />
+        <dep name='gtk2-themes' refers='package' />
+        <dep name='gnome-volume-manager' refers='package' />
+        <dep name='guile' refers='package' />
+        <dep name='gal2' refers='package' />
+        <dep name='gdm' refers='package' />
+        <dep name='gle' refers='package' />
+        <dep name='gedit' refers='package' />
+        <dep name='gnome-keyring-manager' refers='package' />
+        <dep name='gnome-menus' refers='package' />
+        <dep name='input-utils' refers='package' />
+        <dep name='gtkspell' refers='package' />
+        <dep name='gcalctool' refers='package' />
+        <dep name='gdk-pixbuf' refers='package' />
+        <dep name='aspell' refers='package' />
+        <dep name='gconf-editor' refers='package' />
+        <dep name='gnome-desktop' refers='package' />
+        <dep name='gnome-vfs2' refers='package' />
+        <dep name='hal-gnome' refers='package' />
+        <dep name='gtksourceview' refers='package' />
+        <dep name='gnome-nettool' refers='package' />
+        <dep name='libgda' refers='package' />
+        <dep name='gstreamer010' refers='package' />
+        <dep name='gnome-spell2' refers='package' />
+        <dep name='gnome-power-manager' refers='package' />
+        <dep name='gucharmap' refers='package' />
+        <dep name='gnome2-SLES' refers='package' />
+        <dep name='gnome-printer-add' refers='package' />
+        <dep name='evolution' refers='package' />
+        <dep name='htdig' refers='package' />
+        <dep name='info2html' refers='package' />
+        <dep name='mDNSResponder' refers='package' />
+        <dep name='gtk-engines' refers='package' />
+        <dep name='kdelibs3' refers='package' />
+        <dep name='SDL' refers='package' />
+        <dep name='gstreamer010-plugins-good' refers='package' />
+        <dep name='libcroco' refers='package' />
+        <dep name='sox' refers='package' />
+        <dep name='evolution-data-server' refers='package' />
+        <dep name='fam' refers='package' />
+        <dep name='python' refers='package' />
+        <dep name='dvd+rw-tools' refers='package' />
+        <dep name='susehelp' refers='package' />
+        <dep name='gpg2' refers='package' />
+        <dep name='libbonoboui' refers='package' />
+        <dep name='libcddb' refers='package' />
+        <dep name='libcdio' refers='package' />
+        <dep name='libbeagle' refers='package' />
+        <dep name='libbonobo' refers='package' />
+        <dep name='cdparanoia' refers='package' />
+        <dep name='libglade2' refers='package' />
+        <dep name='libexif' refers='package' />
+        <dep name='libao' refers='package' />
+        <dep name='libart_lgpl' refers='package' />
+        <dep name='libdaemon' refers='package' />
+        <dep name='gnome-keyring' refers='package' />
+        <dep name='at-spi' refers='package' />
+        <dep name='awesfx' refers='package' />
+        <dep name='gnome-cups-manager' refers='package' />
+        <dep name='gtkhtml2' refers='package' />
+        <dep name='gail' refers='package' />
+        <dep name='python-gnome' refers='package' />
+        <dep name='yelp' refers='package' />
+        <dep name='zenity' refers='package' />
+        <dep name='vino' refers='package' />
+        <dep name='vte' refers='package' />
+        <dep name='yast2-sound' refers='package' />
+        <dep name='vcdimager' refers='package' />
+        <dep name='cdrdao' refers='package' />
+        <dep name='cdrecord' refers='package' />
+        <dep name='gnome-audio' refers='package' />
+        <dep name='system-tools-backends' refers='package' />
+        <dep name='nautilus' refers='package' />
+        <dep name='libgtop' refers='package' />
+        <dep name='libidl' refers='package' />
+        <dep name='libjasper' refers='package' />
+        <dep name='libgsf-gnome' refers='package' />
+        <dep name='libgsf' refers='package' />
+        <dep name='libgnomeprint' refers='package' />
+        <dep name='libgnomeprintui' refers='package' />
+        <dep name='libgnomeui' refers='package' />
+        <dep name='libgnomedb' refers='package' />
+        <dep name='libgnome' refers='package' />
+        <dep name='libgnomecups' refers='package' />
+        <dep name='libgnomecanvas' refers='package' />
+        <dep name='fam-server' refers='package' />
+        <dep name='file-roller' refers='package' />
+        <dep name='eel' refers='package' />
+        <dep name='efont-unicode' refers='package' />
+        <dep name='gnome-session' refers='package' />
+        <dep name='cups-backends' refers='package' />
+        <dep name='gpgme' refers='package' />
+        <dep name='gnome-applets' refers='package' />
+        <dep name='libxml2-python' refers='package' />
+        <dep name='libksba' refers='package' />
+        <dep name='gconf2' refers='package' />
+        <dep name='gstreamer010-plugins-base' refers='package' />
+        <dep name='evince' refers='package' />
+        <dep name='samba' refers='package' />
+        <dep name='gnome-themes' refers='package' />
+        <dep name='gtk-sharp2' refers='package' />
+        <dep name='orbit2' refers='package' />
+        <dep name='thinkeramik-style' refers='package' />
+        <dep name='latex2html-pngicons' refers='package' />
+        <dep name='gnome-screensaver' refers='package' />
+        <dep name='eog' refers='package' />
+        <dep name='shared-mime-info' refers='package' />
+        <dep name='openmotif-libs' refers='package' />
+        <dep name='gnome-system-monitor' refers='package' />
+        <dep name='libsoup' refers='package' />
+        <dep name='libtheora' refers='package' />
+        <dep name='libwnck' refers='package' />
+        <dep name='libsexy' refers='package' />
+        <dep name='libsmbclient' refers='package' />
+        <dep name='libsndfile' refers='package' />
+        <dep name='librsvg' refers='package' />
+        <dep name='gnome-terminal' refers='package' />
+        <dep name='dosbootdisk' refers='package' />
+        <dep name='pinentry' refers='package' />
+        <dep name='dirmngr' refers='package' />
+        <dep name='dbus-1-python' refers='package' />
+        <dep name='libraw1394' refers='package' />
+        <dep name='libmusicbrainz' refers='package' />
+        <dep name='libnotify' refers='package' />
+        <dep name='libopencdk' refers='package' />
+        <dep name='libgnomesu' refers='package' />
+        <dep name='xkeyboard-config' refers='package' />
+        <dep name='gnome2-SuSE' refers='package' />
+        <dep name='gmime' refers='package' />
+        <dep name='gnome-utils' refers='package' />
+        <dep name='gnome-doc-utils' refers='package' />
+        <dep name='gtk2-engines' refers='package' />
+        <dep name='gnutls' refers='package' />
+        <dep name='gnome2-NLD' refers='package' />
+        <dep name='gnome2-user-docs' refers='package' />
+      </recommends>
+</pattern>
+  <pattern>
+    <name>print_server</name>
+    <section>Pattern</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>10</version>
+          <release>51.20</release>
+          <arch>i586</arch>
+        </update>
+      </history>
+      <provides>
+        <dep name='print_server' refers='pattern' op='==' version='10' release='51.20' />
+      </provides>
+      <requires>
+        <dep name='cups' refers='package' />
+        <dep name='basesystem' refers='pattern' />
+      </requires>
+      <recommends>
+        <dep name='filters' refers='package' />
+        <dep name='manufacturer-PPDs' refers='package' />
+        <dep name='cups-SUSE-ppds-dat' refers='package' />
+        <dep name='foomatic-filters' refers='package' />
+        <dep name='cups-drivers' refers='package' />
+        <dep name='cups-drivers-stp' refers='package' />
+        <dep name='samba' refers='package' />
+      </recommends>
+</pattern>
+  <pattern>
+    <name>x11</name>
+    <section>Pattern</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>10</version>
+          <release>51.20</release>
+          <arch>i586</arch>
+        </update>
+      </history>
+      <provides>
+        <dep name='x11' refers='pattern' op='==' version='10' release='51.20' />
+      </provides>
+      <requires>
+        <dep name='basesystem' refers='pattern' />
+        <dep name='yast2-qt' refers='package' />
+        <dep name='yast2-x11' refers='package' />
+        <dep name='xterm' refers='package' />
+        <dep name='MozillaFirefox' refers='package' />
+        <dep name='mozilla-xulrunner' refers='package' />
+      </requires>
+      <recommends>
+        <dep name='xorg-x11-server' refers='package' />
+        <dep name='qt3' refers='package' />
+        <dep name='freetype' refers='package' />
+        <dep name='dejavu' refers='package' />
+        <dep name='sax2-libsax' refers='package' />
+        <dep name='855resolution' refers='package' />
+        <dep name='glitz' refers='package' />
+        <dep name='pango' refers='package' />
+        <dep name='gtk2' refers='package' />
+        <dep name='agfa-fonts' refers='package' />
+        <dep name='ifnteuro' refers='package' />
+        <dep name='freeglut' refers='package' />
+        <dep name='fonts-config' refers='package' />
+        <dep name='alsa' refers='package' />
+        <dep name='MozillaFirefox-translations' refers='package' />
+        <dep name='libnetpbm' refers='package' />
+        <dep name='mozilla-nspr' refers='package' />
+        <dep name='openssh-askpass' refers='package' />
+        <dep name='xorg-x11-libs' refers='package' />
+        <dep name='atk' refers='package' />
+        <dep name='dialog' refers='package' />
+        <dep name='ghostscript-fonts-other' refers='package' />
+        <dep name='imlib' refers='package' />
+        <dep name='x11-tools' refers='package' />
+        <dep name='xorg-x11-driver-video' refers='package' />
+        <dep name='xorg-x11-server-glx' refers='package' />
+        <dep name='xdg-menu' refers='package' />
+        <dep name='xli' refers='package' />
+        <dep name='3ddiag' refers='package' />
+        <dep name='sax2-libsax-perl' refers='package' />
+        <dep name='bitstream-vera' refers='package' />
+        <dep name='openmotif-libs' refers='package' />
+        <dep name='cairo' refers='package' />
+        <dep name='ghostscript-library' refers='package' />
+        <dep name='CheckHardware' refers='package' />
+        <dep name='libdrm' refers='package' />
+        <dep name='ghostscript-fonts-std' refers='package' />
+        <dep name='ghostscript-x11' refers='package' />
+        <dep name='glib' refers='package' />
+        <dep name='giflib' refers='package' />
+        <dep name='desktop-data-NLD' refers='package' />
+        <dep name='xorg-x11' refers='package' />
+        <dep name='xorg-x11-fonts-scalable' refers='package' />
+        <dep name='xtermset' refers='package' />
+        <dep name='yast2-control-center' refers='package' />
+        <dep name='xorg-x11-driver-video-nvidia' refers='package' />
+        <dep name='xorg-x11-fonts-100dpi' refers='package' />
+        <dep name='xorg-x11-fonts-75dpi' refers='package' />
+        <dep name='xorg-x11-Xvnc' refers='package' />
+        <dep name='xlockmore' refers='package' />
+        <dep name='tk' refers='package' />
+        <dep name='sax2-tools' refers='package' />
+        <dep name='sax2-ident' refers='package' />
+        <dep name='intlfnts' refers='package' />
+        <dep name='cabextract' refers='package' />
+        <dep name='netpbm' refers='package' />
+        <dep name='fvwm2' refers='package' />
+        <dep name='sax2' refers='package' />
+        <dep name='tcl' refers='package' />
+        <dep name='fribidi' refers='package' />
+        <dep name='x11-input-synaptics' refers='package' />
+        <dep name='xaw3d' refers='package' />
+        <dep name='xdmbgrd' refers='package' />
+        <dep name='gtk' refers='package' />
+        <dep name='Mesa' refers='package' />
+        <dep name='fontconfig' refers='package' />
+        <dep name='sax2-gui' refers='package' />
+        <dep name='tightvnc' refers='package' />
+        <dep name='unclutter' refers='package' />
+        <dep name='qt-x11' refers='package' />
+        <dep name='qt-sql' refers='package' />
+        <dep name='qt' refers='package' />
+        <dep name='xkeyboard-config' refers='package' />
+        <dep name='mozilla-nss' refers='package' />
+        <dep name='libstroke' refers='package' />
+        <dep name='lsb' refers='package' />
+        <dep name='evms-gui' refers='package' />
+      </recommends>
+</pattern>
+  <pattern>
+    <name>base</name>
+    <section>Pattern</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>10</version>
+          <release>51.20</release>
+          <arch>i586</arch>
+        </update>
+      </history>
+      <provides>
+        <dep name='basesystem' refers='pattern' />
+        <dep name='base' refers='pattern' op='==' version='10' release='51.20' />
+      </provides>
+      <requires>
+        <dep name='ash' refers='package' />
+        <dep name='filesystem' refers='package' />
+        <dep name='mingetty' refers='package' />
+        <dep name='logrotate' refers='package' />
+        <dep name='aaa_skel' refers='package' />
+        <dep name='cpio' refers='package' />
+        <dep name='permissions' refers='package' />
+        <dep name='bzip2' refers='package' />
+        <dep name='gnome-icon-theme' refers='package' />
+        <dep name='file' refers='package' />
+        <dep name='gzip' refers='package' />
+        <dep name='grep' refers='package' />
+        <dep name='aaa_base' refers='package' />
+        <dep name='m4' refers='package' />
+        <dep name='grub' refers='package' />
+        <dep name='util-linux' refers='package' />
+        <dep name='cups-libs' refers='package' />
+        <dep name='insserv' refers='package' />
+        <dep name='sed' refers='package' />
+        <dep name='db' refers='package' />
+        <dep name='libcom_err' refers='package' />
+        <dep name='device-mapper' refers='package' />
+        <dep name='perl' refers='package' />
+        <dep name='mktemp' refers='package' />
+        <dep name='yast2' refers='package' />
+        <dep name='groff' refers='package' />
+        <dep name='vim' refers='package' />
+        <dep name='iptables' refers='package' />
+        <dep name='pam' refers='package' />
+        <dep name='bash' refers='package' />
+        <dep name='zlib' refers='package' />
+        <dep name='yast2-theme-NLD' refers='package' />
+        <dep name='rpm' refers='package' />
+        <dep name='ldapcpplib' refers='package' />
+        <dep name='libzypp' refers='package' />
+        <dep name='limal-perl' refers='package' />
+        <dep name='dbus-1' refers='package' />
+        <dep name='sysvinit' refers='package' />
+        <dep name='cyrus-sasl' refers='package' />
+        <dep name='netcfg' refers='package' />
+        <dep name='net-tools' refers='package' />
+        <dep name='fillup' refers='package' />
+        <dep name='ethtool' refers='package' />
+        <dep name='iproute2' refers='package' />
+        <dep name='coreutils' refers='package' />
+        <dep name='openssl' refers='package' />
+        <dep name='ksymoops' refers='package' />
+        <dep name='libacl' refers='package' />
+        <dep name='libattr' refers='package' />
+        <dep name='libcap' refers='package' />
+        <dep name='cpp' refers='package' />
+        <dep name='findutils' refers='package' />
+        <dep name='iputils' refers='package' />
+        <dep name='cyrus-sasl-saslauthd' refers='package' />
+        <dep name='ed' refers='package' />
+        <dep name='eject' refers='package' />
+        <dep name='evms' refers='package' />
+        <dep name='libnscd' refers='package' />
+        <dep name='libxcrypt' refers='package' />
+        <dep name='liby2util' refers='package' />
+        <dep name='lilo' refers='package' />
+        <dep name='limal-ca-mgm' refers='package' />
+        <dep name='lvm2' refers='package' />
+        <dep name='microcode_ctl' refers='package' />
+        <dep name='mkinitrd' refers='package' />
+        <dep name='mutt' refers='package' />
+        <dep name='ncompress' refers='package' />
+        <dep name='procps' refers='package' />
+        <dep name='sles-release' refers='package' />
+        <dep name='suse-build-key' refers='package' />
+        <dep name='syslog-ng' refers='package' />
+        <dep name='tcpd' refers='package' />
+        <dep name='yast2-dhcp-server' refers='package' />
+        <dep name='yast2-instserver' refers='package' />
+        <dep name='yast2-ncurses' refers='package' />
+        <dep name='yast2-nfs-server' refers='package' />
+        <dep name='yast2-nis-server' refers='package' />
+        <dep name='yast2-ntp-client' refers='package' />
+        <dep name='yast2-online-update-frontend' refers='package' />
+        <dep name='yast2-pkg-bindings' refers='package' />
+        <dep name='yast2-runlevel' refers='package' />
+        <dep name='yast2-samba-server' refers='package' />
+        <dep name='yast2-support' refers='package' />
+        <dep name='yast2-tftp-server' refers='package' />
+        <dep name='limal' refers='package' />
+        <dep name='cups-client' refers='package' />
+        <dep name='less' refers='package' />
+        <dep name='reiserfs' refers='package' />
+        <dep name='w3m' refers='package' />
+        <dep name='e2fsprogs' refers='package' />
+        <dep name='openssh' refers='package' />
+        <dep name='db-utils' refers='package' />
+        <dep name='sysfsutils' refers='package' />
+        <dep name='make' refers='package' />
+        <dep name='pwdutils' refers='package' />
+        <dep name='hwinfo' refers='package' />
+        <dep name='psmisc' refers='package' />
+        <dep name='pam-modules' refers='package' />
+        <dep name='ncurses' refers='package' />
+        <dep name='mdadm' refers='package' />
+        <dep name='diffutils' refers='package' />
+        <dep name='klogd' refers='package' />
+        <dep name='multipath-tools' refers='package' />
+        <dep name='yast2-xml' refers='package' />
+        <dep name='yast2-hardware-detection' refers='package' />
+        <dep name='yast2-core' refers='package' />
+        <dep name='limal-bootloader' refers='package' />
+        <dep name='parted' refers='package' />
+        <dep name='yast2-storage' refers='package' />
+        <dep name='yast2-trans-stats' refers='package' />
+        <dep name='yast2-perl-bindings' refers='package' />
+        <dep name='yast2-packager' refers='package' />
+        <dep name='sysconfig' refers='package' />
+        <dep name='yast2-country' refers='package' />
+        <dep name='yast2-pam' refers='package' />
+        <dep name='checkmedia' refers='package' />
+        <dep name='yast2-users' refers='package' />
+        <dep name='yast2-installation' refers='package' />
+        <dep name='yast2-storage-lib' refers='package' />
+        <dep name='curl' refers='package' />
+        <dep name='yast2-security' refers='package' />
+        <dep name='yast2-mail-aliases' refers='package' />
+        <dep name='cracklib' refers='package' />
+        <dep name='yast2-ldap-client' refers='package' />
+        <dep name='mkisofs' refers='package' />
+        <dep name='yast2-schema' refers='package' />
+        <dep name='yast2-transfer' refers='package' />
+        <dep name='mailx' refers='package' />
+        <dep name='module-init-tools' refers='package' />
+        <dep name='wget' refers='package' />
+        <dep name='yast2-tune' refers='package' />
+        <dep name='yast2-update' refers='package' />
+        <dep name='yast2-nfs-client' refers='package' />
+        <dep name='autoyast2-installation' refers='package' />
+        <dep name='tar' refers='package' />
+        <dep name='yast2-network' refers='package' />
+        <dep name='limal-ca-mgm-perl' refers='package' />
+        <dep name='yast2-ldap' refers='package' />
+        <dep name='yast2-firewall' refers='package' />
+        <dep name='yast2-mouse' refers='package' />
+        <dep name='yast2-online-update' refers='package' />
+        <dep name='yast2-bootloader' refers='package' />
+        <dep name='yast2-ldap-server' refers='package' />
+        <dep name='yast2-ca-management' refers='package' />
+        <dep name='yast2-dns-server' refers='package' />
+        <dep name='yast2-nis-client' refers='package' />
+        <dep name='yast2-samba-client' refers='package' />
+        <dep name='yast2-sysconfig' refers='package' />
+        <dep name='yast2-printer' refers='package' />
+        <dep name='SPident' refers='package' />
+        <dep name='acl' refers='package' />
+        <dep name='kbd' refers='package' />
+        <dep name='attr' refers='package' />
+        <dep name='audit-libs' refers='package' />
+        <dep name='autoyast2' refers='package' />
+        <dep name='glibc' refers='package' />
+        <dep name='autoyast2-utils' refers='package' />
+        <dep name='libgcc' refers='package' />
+        <dep name='krb5' refers='package' />
+      </requires>
+      <conflicts>
+        <dep name='desktop-base' refers='pattern' />
+      </conflicts>
+      <recommends>
+        <dep name='log4net' refers='package' />
+        <dep name='man' refers='package' />
+        <dep name='librpcsecgss' refers='package' />
+        <dep name='libtiff' refers='package' />
+        <dep name='libpcap' refers='package' />
+        <dep name='libpng' refers='package' />
+        <dep name='freetype2' refers='package' />
+        <dep name='gpg' refers='package' />
+        <dep name='mono-data' refers='package' />
+        <dep name='mono-web' refers='package' />
+        <dep name='mpt-status' refers='package' />
+        <dep name='netdate' refers='package' />
+        <dep name='man-pages' refers='package' />
+        <dep name='lukemftp' refers='package' />
+        <dep name='yast2-power-management' refers='package' />
+        <dep name='gnome-filesystem' refers='package' />
+        <dep name='nscd' refers='package' />
+        <dep name='info' refers='package' />
+        <dep name='sharutils' refers='package' />
+        <dep name='unzip' refers='package' />
+        <dep name='gawk' refers='package' />
+        <dep name='zisofs-tools' refers='package' />
+        <dep name='pax' refers='package' />
+        <dep name='glibc-i18ndata' refers='package' />
+        <dep name='delayacct-utils' refers='package' />
+        <dep name='deltarpm' refers='package' />
+        <dep name='jfsutils' refers='package' />
+        <dep name='finger' refers='package' />
+        <dep name='ipmitool' refers='package' />
+        <dep name='joe' refers='package' />
+        <dep name='convmv' refers='package' />
+        <dep name='cpufrequtils' refers='package' />
+        <dep name='compat-openssl097g' refers='package' />
+        <dep name='compat-libstdc++' refers='package' />
+        <dep name='bootsplash' refers='package' />
+        <dep name='libxml2' refers='package' />
+        <dep name='ppp' refers='package' />
+        <dep name='cron' refers='package' />
+        <dep name='vlock' refers='package' />
+        <dep name='wol' refers='package' />
+        <dep name='utempter' refers='package' />
+        <dep name='timezone' refers='package' />
+        <dep name='usbutils' refers='package' />
+        <dep name='vlan' refers='package' />
+        <dep name='glibc-locale' refers='package' />
+        <dep name='libaio' refers='package' />
+        <dep name='bind-utils' refers='package' />
+        <dep name='prctl' refers='package' />
+        <dep name='procinfo' refers='package' />
+        <dep name='popt' refers='package' />
+        <dep name='patch' refers='package' />
+        <dep name='pmtools' refers='package' />
+        <dep name='powersave-libs' refers='package' />
+        <dep name='openslp-server' refers='package' />
+        <dep name='opie' refers='package' />
+        <dep name='scpm' refers='package' />
+        <dep name='screen' refers='package' />
+        <dep name='rsync' refers='package' />
+        <dep name='release-notes-sles' refers='package' />
+        <dep name='rsh' refers='package' />
+        <dep name='sash' refers='package' />
+        <dep name='providers' refers='package' />
+        <dep name='qlogic-firmware' refers='package' />
+        <dep name='libtool' refers='package' />
+        <dep name='pcsc-lite' refers='package' />
+        <dep name='portmap' refers='package' />
+        <dep name='powersave' refers='package' />
+        <dep name='expat' refers='package' />
+        <dep name='dbus-1-glib' refers='package' />
+        <dep name='tcpdump' refers='package' />
+        <dep name='terminfo' refers='package' />
+        <dep name='suspend' refers='package' />
+        <dep name='syslinux' refers='package' />
+        <dep name='strace' refers='package' />
+        <dep name='smartmontools' refers='package' />
+        <dep name='star' refers='package' />
+        <dep name='sudo' refers='package' />
+        <dep name='openct' refers='package' />
+        <dep name='opensc' refers='package' />
+        <dep name='nfsidmap' refers='package' />
+        <dep name='nfs-utils' refers='package' />
+        <dep name='ntfsprogs' refers='package' />
+        <dep name='udev' refers='package' />
+        <dep name='yast2-restore' refers='package' />
+        <dep name='yast2-repair' refers='package' />
+        <dep name='netcat' refers='package' />
+        <dep name='yast2-inetd' refers='package' />
+        <dep name='blocxx' refers='package' />
+        <dep name='yast2-cd-creator' refers='package' />
+        <dep name='yast2-bootfloppy' refers='package' />
+        <dep name='SuSEfirewall2' refers='package' />
+        <dep name='master-boot-code' refers='package' />
+        <dep name='pptp' refers='package' />
+        <dep name='scsi' refers='package' />
+        <dep name='postfix' refers='package' />
+        <dep name='libxslt' refers='package' />
+        <dep name='procmail' refers='package' />
+        <dep name='wvdial' refers='package' />
+        <dep name='zmd' refers='package' />
+        <dep name='compat' refers='package' />
+        <dep name='yast2-heartbeat' refers='package' />
+        <dep name='yast2-http-server' refers='package' />
+        <dep name='yast2-iscsi-client' refers='package' />
+        <dep name='openldap2-client' refers='package' />
+        <dep name='tcsh' refers='package' />
+        <dep name='sqlite' refers='package' />
+        <dep name='pcre' refers='package' />
+        <dep name='readline' refers='package' />
+        <dep name='libzio' refers='package' />
+        <dep name='hfsutils' refers='package' />
+        <dep name='ivman' refers='package' />
+        <dep name='acpid' refers='package' />
+        <dep name='gpm' refers='package' />
+        <dep name='libpfm' refers='package' />
+        <dep name='powerpc32' refers='package' />
+        <dep name='linux32' refers='package' />
+        <dep name='OpenIPMI' refers='package' />
+        <dep name='yast2-vm' refers='package' />
+        <dep name='zip' refers='package' />
+        <dep name='yast2-slp-server' refers='package' />
+        <dep name='zsh' refers='package' />
+        <dep name='pfmon' refers='package' />
+        <dep name='pdisk' refers='package' />
+        <dep name='salinfo' refers='package' />
+        <dep name='s390-32' refers='package' />
+        <dep name='numactl' refers='package' />
+        <dep name='siga' refers='package' />
+        <dep name='mcelog' refers='package' />
+        <dep name='s390-tools' refers='package' />
+        <dep name='gpart' refers='package' />
+        <dep name='yast2-kerberos-client' refers='package' />
+        <dep name='yast2-slp' refers='package' />
+        <dep name='yast2-mail' refers='package' />
+        <dep name='recode' refers='package' />
+        <dep name='mono-core' refers='package' />
+        <dep name='rug' refers='package' />
+        <dep name='suseRegister' refers='package' />
+        <dep name='yp-tools' refers='package' />
+        <dep name='lsof' refers='package' />
+        <dep name='yast2-irda' refers='package' />
+        <dep name='yast2-iscsi-server' refers='package' />
+        <dep name='yast2-powertweak' refers='package' />
+        <dep name='yast2-profile-manager' refers='package' />
+        <dep name='openslp' refers='package' />
+        <dep name='hdparm' refers='package' />
+        <dep name='gettext' refers='package' />
+        <dep name='xntp' refers='package' />
+        <dep name='yast2-backup' refers='package' />
+        <dep name='yast2-boot-server' refers='package' />
+        <dep name='hal' refers='package' />
+        <dep name='smpppd' refers='package' />
+        <dep name='wvstreams' refers='package' />
+        <dep name='xinetd' refers='package' />
+        <dep name='xfsprogs' refers='package' />
+        <dep name='resmgr' refers='package' />
+        <dep name='sitar' refers='package' />
+        <dep name='sles-admin_en' refers='package' />
+        <dep name='zmd-inventory' refers='package' />
+        <dep name='ypbind' refers='package' />
+        <dep name='ksh' refers='package' />
+        <dep name='bootcycle' refers='package' />
+        <dep name='bootsplash-theme-SuSE-SLES' refers='package' />
+        <dep name='bind-libs' refers='package' />
+        <dep name='libevent' refers='package' />
+        <dep name='autofs' refers='package' />
+        <dep name='bc' refers='package' />
+        <dep name='gdbm' refers='package' />
+        <dep name='initviocons' refers='package' />
+        <dep name='ifplugd' refers='package' />
+        <dep name='at' refers='package' />
+        <dep name='libusb' refers='package' />
+        <dep name='libgcrypt' refers='package' />
+        <dep name='liblcms' refers='package' />
+        <dep name='libidn' refers='package' />
+        <dep name='libjpeg' refers='package' />
+        <dep name='libgpg-error' refers='package' />
+        <dep name='dos2unix' refers='package' />
+        <dep name='dosfstools' refers='package' />
+        <dep name='fbset' refers='package' />
+        <dep name='dhcpcd' refers='package' />
+        <dep name='dmraid' refers='package' />
+        <dep name='binutils' refers='package' />
+        <dep name='gdb' refers='package' />
+        <dep name='wireless-tools' refers='package' />
+        <dep name='telnet' refers='package' />
+        <dep name='glib2' refers='package' />
+        <dep name='libstdc++' refers='package' />
+        <dep name='pciutils' refers='package' />
+        <dep name='libmng' refers='package' />
+        <dep name='libgssapi' refers='package' />
+      </recommends>
+</pattern>
+  <product>
+    <name>SuSE-Linux-full-10.1-i386</name>
+    <section>Product</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>10.1</version>
+          <release>0</release>
+          <arch>i686</arch>
+        </update>
+      </history>
+      <provides>
+        <dep name='SuSE-Linux-full-10.1-i386' refers='product' op='==' version='10.1' release='0' />
+      </provides>
+      <requires>
+        <dep name='distribution-release' refers='package' />
+      </requires>
+</product>
+  <product>
+    <name>SUSE SLES</name>
+    <section>Product</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>10</version>
+          <arch>i686</arch>
+        </update>
+      </history>
+      <provides>
+        <dep name='SUSE SLES' refers='product' op='==' version='10' />
+        <dep name='SUSE-Linux-Enterprise-Server-i386' refers='product' op='==' version='10' release='0' />
+      </provides>
+      <requires>
+        <dep name='sles-release-10' refers='package' />
+        <dep name='basesystem' refers='pattern' />
+      </requires>
+</product>
 	</subchannel>
 	</channel>
