@@ -21,7 +21,11 @@
 ./zypp/solver/detail/ResolverInfoNeededBy.cc
 ./zypp/solver/detail/ResolverInfoObsoletes.cc
 ./zypp/solver/detail/Resolver_problems.cc
+./zypp/source/SourceImpl.cc
+./zypp/source/susetags/SuseTagsImpl.cc
 ./zypp/source/yum/YUMScriptImpl.cc
 ./zypp/source/yum/YUMSourceImpl.cc
 ./zypp/target/TargetImpl.cc
 ./zypp/target/rpm/RpmDb.cc
+./zypp/target/store/XMLFilesBackend.cc
+./zypp2/source/yum/YUMSourceCacher.cc
