@@ -1,7 +1,16 @@
 -------------------------------------------------------------------
+Thu Nov 16 23:39:15 CET 2006 - ma@suse.de
+
+- removed unused methods from Patch and PatchImplIf. Provided
+  reasonable default implementation for Patch::interactive.
+  (#221476).
+- revision 4610
+- Version 2.7.5
+
+-------------------------------------------------------------------
 Thu Nov 16 15:32:04 CET 2006 - dmacvicar@suse.de
 
-- Handle media eject failures (#216545) 
+- Handle media eject failures (#216545)
 - r4606
 
 -------------------------------------------------------------------
