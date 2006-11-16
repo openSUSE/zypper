@@ -584,7 +584,17 @@ const Pathname SourceImpl::provideJustFile(const Pathname & file_r,
             ZYPP_CAUGHT(excpt_r);
             ERR << "Failed to release all sources" << endl;
           }
-          media_mgr.release (_media, true); // one more release needed for eject
+          
+          try
+          {
+            media_mgr.release (_media, true); // one more release needed for eject
+          }
+          catch (const zypp::media::MediaNotEjectedException & excpt_r)
+          {
+            ZYPP_CAUGHT(excpt_r);
+            ERR << "Failed to eject" << endl;
+            break;
+          }
           // FIXME: this will not work, probably
         }
         else if ( user == media::MediaChangeReport::RETRY  ||
