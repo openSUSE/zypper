@@ -227,14 +227,15 @@ namespace zypp
     context.setBaseSource( base_source );
 
     callback::SendReport<ProbeSourceReport> report;
-    bool probeYUM, probeYaST;
+    bool probeYUM = false;
+    bool probeYaST = false;
 
     report->start(url_r);
-    if ( probeYUM = probeSource<yum::YUMSourceImpl>( url_r, path_r, id, "YUM", report ) )
+    if ( (probeYUM = probeSource<yum::YUMSourceImpl>( url_r, path_r, id, "YUM", report )) )
     {
       // nothing
     }
-    else if ( probeYaST = probeSource<susetags::SuseTagsImpl>( url_r, path_r, id, "YaST", report ) )
+    else if ( (probeYaST = probeSource<susetags::SuseTagsImpl>( url_r, path_r, id, "YaST", report )) )
     {
       // nohing
     }
@@ -260,37 +261,6 @@ namespace zypp
     //////////////////////////////////////////////////////////////////
     //FIXME disabled
 
-
-
-
-    return Source_Ref(); // not reached!!
-
-    try
-    {
-      if ( ! ( ( url_r.getScheme() == "file") || ( url_r.getScheme() == "dir ") ) )
-      {
-        MIL << "Trying the Plaindir source" << endl;
-        //Source_Ref::Impl_Ptr impl( base_source
-        //    ? Impl::createBaseSourceImpl<plaindir::PlaindirImpl>(id, path_r, alias_r, cache_dir_r, auto_refresh)
-        //  : Impl::createSourceImpl<plaindir::PlaindirImpl>(id, path_r, alias_r, cache_dir_r, auto_refresh) );
-        MIL << "Using the Plaindir source" << endl;
-        //report->endProbe (url_r);
-        //return Source_Ref(impl);
-        return Source_Ref();
-      }
-      else
-      {
-        ZYPP_THROW(Exception("Url scheme " + url_r.getScheme() + " not compatible with plaindir sources. Only local paths supported"));
-      }
-    }
-    catch (const Exception & excpt_r)
-    {
-            ZYPP_CAUGHT(excpt_r);
-            MIL << "Not Plaindir source, trying next type" << endl;
-    }
-
-    ERR << "No next type of source" << endl;
-    ZYPP_THROW(Exception("Cannot create the installation source"));
     return Source_Ref(); // not reached!!
   }
 
@@ -365,7 +335,7 @@ namespace zypp
       MIL << "Creating a source of type " << type << " failed " << endl;
       ZYPP_RETHROW(excpt_r);
     }
-    
+
     return Source_Ref(); // not reached!!
   }
 
