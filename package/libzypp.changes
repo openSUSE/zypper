@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Nov 16 15:32:04 CET 2006 - dmacvicar@suse.de
+
+- Handle media eject failures (#216545) 
+- r4606
+
+-------------------------------------------------------------------
 Wed Nov 15 22:41:51 CET 2006 - ma@suse.de
 
 - Reimplemented RpmDb::checkPackage using librpm API instead
