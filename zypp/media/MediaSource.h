@@ -36,12 +36,13 @@ namespace zypp {
     public:
       MediaSource(const std::string &_type,  const std::string &_name,
                   unsigned int       _maj=0, unsigned int       _min=0,
-		  const std::string &_bdir=std::string())
+		  const std::string &_bdir=std::string(), bool  _own=true)
         : maj_nr(_maj)
         , min_nr(_min)
         , type(_type)
         , name(_name)
 	, bdir(_bdir)
+	, iown(_own)
       {}
 
       MediaSource()
@@ -88,6 +89,7 @@ namespace zypp {
       std::string  type;    //!< A media handler specific source type.
       std::string  name;    //!< A media handler specific source name.
       std::string  bdir;    //!< Directory, the media may be bound to.
+      bool         iown;    //!< True, if mounted by media manager.
     };
 
 

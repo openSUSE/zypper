@@ -42,7 +42,13 @@
 ** try umount of foreign (user/automounter) media on eject
 **   0 = don't force, 1 = automounted only, 2 == all
 */
-#define  FORCE_RELEASE_FOREIGN   1
+#define  FORCE_RELEASE_FOREIGN   2
+
+/*
+** Reuse foreign (user/automounter) mount points.
+** 0 = don't use, 1 = automounted only, 2 = all
+*/
+#define  REUSE_FOREIGN_MOUNTS    2
 
 /*
 ** if to throw exception on eject errors or ignore them
@@ -54,6 +60,7 @@
 ** it will be used additionally to the eject-ioctl.
 */
 #define EJECT_TOOL_PATH "/bin/eject"
+
 
 using namespace std;
 
@@ -580,10 +587,56 @@ namespace zypp {
 	  mountsucceeded = true;
 	  break;
 	}
-	// FIXME: hmm... we may also
-	// - check against hal/mtab if still mounted
-	// - if !ret, check if already mounted (e.g.
-	//   by automounter) and reuse (!temp) ?
+
+#if REUSE_FOREIGN_MOUNTS > 0
+	{
+	  MediaManager  manager;
+	  MountEntries  entries( manager.getMountEntries());
+	  MountEntries::const_iterator e;
+	  for( e = entries.begin(); e != entries.end(); ++e)
+	  {
+	    bool        is_device = false;
+	    std::string dev_path(Pathname(e->src).asString());
+	    PathInfo    dev_info;
+
+	    if( dev_path.compare(0, sizeof("/dev/")-1, "/dev/") == 0 &&
+	        dev_info(e->src) && dev_info.isBlk())
+	    {
+	      is_device = true;
+	    }
+
+	    if( is_device && media->maj_nr == dev_info.major() &&
+	                     media->min_nr == dev_info.minor())
+	    {
+	      AttachPointRef ap( new AttachPoint(e->dir, false));
+	      AttachedMedia  am( media, ap);
+	      //
+	      // 1 = automounted only, 2 == all
+	      //
+#if REUSE_FOREIGN_MOUNTS == 1
+	      if( isAutoMountedMedia(am))
+#endif
+	      {
+		DBG << "Using a system mounted media "
+		    << media->name
+		    << " attached on "
+		    << ap->path
+		    << endl;
+
+		media->iown = false; // mark attachment as foreign
+
+		setMediaSource(media);
+		setAttachPoint(ap);
+		_lastdev = count;
+		mountsucceeded = true;
+		break;
+	      }
+	    }
+	  }
+	  if( mountsucceeded)
+	    break;
+	}
+#endif  // REUSE_FOREIGN_MOUNTS
 
 	// close tray
 	closeTray( it->name );
@@ -684,15 +737,18 @@ namespace zypp {
     {
       Mount mount;
       try {
-	mount.umount(attachPoint().asString());
+	AttachedMedia am( attachedMedia());
+	if(am.mediaSource && am.mediaSource->iown)
+	  mount.umount(am.attachPoint->path.asString());
       }
       catch (const Exception & excpt_r)
       {
 	ZYPP_CAUGHT(excpt_r);
 	if (eject)
 	{
-#if FORCE_RELEASE_FOREIGN
-	  forceRelaseAllMedia(false, FORCE_RELEASE_FOREIGN != 2);
+#if FORCE_RELEASE_FOREIGN > 0
+	  /* 1 = automounted only, 2 = all */
+	  forceRelaseAllMedia(false, FORCE_RELEASE_FOREIGN == 1);
 #endif
 	  if(openTray( mediaSourceName()))
 	    return;
@@ -703,8 +759,9 @@ namespace zypp {
       // eject device
       if (eject)
       {
-#if FORCE_RELEASE_FOREIGN
-        forceRelaseAllMedia(false, FORCE_RELEASE_FOREIGN != 2);
+#if FORCE_RELEASE_FOREIGN > 0
+	/* 1 = automounted only, 2 = all */
+        forceRelaseAllMedia(false, FORCE_RELEASE_FOREIGN == 1);
 #endif
         if( !openTray( mediaSourceName() ))
 	{
@@ -796,8 +853,9 @@ namespace zypp {
 	  AttachedMedia ret( findAttachedMedia( media));
 	  if( !ret.mediaSource)
 	  {
-#if FORCE_RELEASE_FOREIGN
-	    forceRelaseAllMedia(media, false, FORCE_RELEASE_FOREIGN != 2);
+#if FORCE_RELEASE_FOREIGN > 0
+	    /* 1 = automounted only, 2 = all */
+	    forceRelaseAllMedia(media, false, FORCE_RELEASE_FOREIGN == 1);
 #endif
 	    if ( openTray( it->name ) )
 	    {
@@ -830,11 +888,34 @@ namespace zypp {
 	  if( vol)
 	  {
 	    std::string udi = vol.getUDI();
-	    std::string key = "info.hal_mount.created_mount_point";
-	    std::string mnt = hal.getDevicePropertyString(udi, key);
+	    std::string key;
+	    std::string mnt;
 
-	    if(media.attachPoint->path == mnt)
-	      is_automounted = true;
+	    try
+	    {
+	      key = "info.hal_mount.created_mount_point";
+	      mnt = hal.getDevicePropertyString(udi, key);
+
+	      if(media.attachPoint->path == mnt)
+		is_automounted = true;
+	    }
+	    catch(const HalException &e1)
+	    {
+	      ZYPP_CAUGHT(e1);
+
+	      try
+	      {
+		key = "volume.mount_point";
+		mnt = hal.getDevicePropertyString(udi, key);
+
+		if(media.attachPoint->path == mnt)
+		  is_automounted = true;
+	      }
+	      catch(const HalException &e2)
+	      {
+		ZYPP_CAUGHT(e2);
+	      }
+	    }
 	  }
 	}
         catch(const HalException &e)
