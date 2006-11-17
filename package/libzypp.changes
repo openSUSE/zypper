@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Nov 17 16:57:39 CET 2006
+
+- Implemented volume device check using /sbin/vol_id (#213852).
+- Revision 4619
+
+-------------------------------------------------------------------
 Fri Nov 17 15:53:58 CET 2006 - schubi@suse.de
 
 - new translation added
