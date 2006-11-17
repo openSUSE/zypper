@@ -1,4 +1,15 @@
 -------------------------------------------------------------------
+Fri Nov 17 12:42:04 CET 2006 - mt@suse.de
+
+- Implemented an reuse of already existing foreign CD/DVD mount points 
+  (e.g. automounted) - depends on REUSE_FOREIGN_MOUNTS flag (#220206).
+- Added a fallback check of the volume.mount_point HAL property to 
+  isAutoMountedMedia(); info.hal_mount.created_mount_point seems
+  to be not avaliable in newer HAL versions (on 10.2).
+- Revision 4615
+- Version 2.8.1
+
+-------------------------------------------------------------------
 Thu Nov 16 23:39:15 CET 2006 - ma@suse.de
 
 - removed unused methods from Patch and PatchImplIf. Provided
