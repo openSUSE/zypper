@@ -25,7 +25,9 @@
 #include <errno.h>
 #include <dirent.h>
 
-#define DELAYED_VERIFY 1
+#define DELAYED_VERIFY    1
+
+#define VOL_ID_TOOL_PATH  "/sbin/vol_id"
 
 using namespace std;
 
@@ -142,6 +144,65 @@ namespace zypp {
 		  << " is a volume (disk/by-label link "
 		  << vol_info.path() << ")"
 		  << std::endl;
+	      return true;
+	    }
+	  }
+	}
+      }
+
+      // check if a filesystem volume using the /sbin/vol_id tool
+      // (there is no /dev/disk link for some of them)
+      {
+	const char *cmd[3];
+	cmd[0] = VOL_ID_TOOL_PATH;
+	cmd[1] = dev_name.asString().c_str();
+	cmd[2] = NULL;
+
+	ExternalProgram vol_id(cmd, ExternalProgram::Stderr_To_Stdout);
+
+	std::string vol_fs_usage;
+	std::string vol_fs_uuid;
+	std::string vol_fs_type;
+
+	for(std::string out( vol_id.receiveLine());
+	    out.length(); out = vol_id.receiveLine())
+	{
+	  out = str::rtrim(out);
+
+	  if( out.compare(0, sizeof("ID_FS_USAGE=")-1, "ID_FS_USAGE=") == 0)
+	  {
+	    vol_fs_usage = out.substr(sizeof("ID_FS_USAGE=")-1);
+	  }
+	  else
+	  if( out.compare(0, sizeof("ID_FS_TYPE=")-1, "ID_FS_TYPE=")   == 0)
+	  {
+	    vol_fs_type  = out.substr(sizeof("ID_FS_TYPE=")-1);
+	  }
+	  else
+	  if( out.compare(0, sizeof("ID_FS_UUID=")-1, "ID_FS_UUID=")   == 0)
+	  {
+	    vol_fs_uuid  = out.substr(sizeof("ID_FS_UUID=")-1);
+	  }
+	}
+
+	if( vol_id.close() == 0)
+	{
+	  if( vol_fs_usage == "filesystem")
+	  {
+	    if(vol_fs_type == "iso9660" || vol_fs_type == "udf")
+	    {
+	      DBG << "Specified device name " << dev_name
+	          << " is a CD/DVD volume (type " << vol_fs_type << ")"
+	          << std::endl;
+	      return true;
+	    }
+	    else
+	    if(!vol_fs_type.empty() && !vol_fs_uuid.empty())
+	    {
+	      DBG << "Specified device name " << dev_name
+	          << " is a volume (type " << vol_fs_type
+		  << ", uuid " << vol_fs_uuid << ")"
+	          << std::endl;
 	      return true;
 	    }
 	  }
