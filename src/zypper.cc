@@ -319,6 +319,7 @@ int one_command(const string& command, int argc, char **argv)
     static struct option update_options[] = {
       {"type",		   required_argument, 0, 't'},
       {"no-confirm", no_argument,       0, 'y'},
+      {"skip-interactive", no_argument, 0, 0},
       {"help", no_argument, 0, 'h'},
       {0, 0, 0, 0}
     };
@@ -326,6 +327,7 @@ int one_command(const string& command, int argc, char **argv)
     specific_help = "  Command options:\n"
       "\t--type,-t\t\tType of resolvable (default: patch!)\n"
       "\t--no-confirm,-y\t\tDon't require user confirmation\n"
+      "\t--skip-interactive\t\tSkip interactive updates\n"
       ;
   }
   else if (command == "search" || command == "se") {
@@ -860,7 +862,8 @@ int one_command(const string& command, int argc, char **argv)
     cond_load_resolvables ();
     establish ();
 
-    mark_updates (kind);
+    bool skip_interactive = copts.count("skip-interactive");
+    mark_updates (kind, skip_interactive);
 
     // commit
     // returns ZYPPER_EXIT_OK, ZYPPER_EXIT_ERR_ZYPP,

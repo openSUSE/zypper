@@ -36,7 +36,7 @@ void dump_pool ();
 void show_patches();
 void patch_check();
 void list_updates( const zypp::ResObject::Kind &kind );
-void mark_updates( const zypp::ResObject::Kind &kind );
+void mark_updates( const zypp::ResObject::Kind &kind, bool skip_interactive );
 void usage(int argc, char **argv);
 int solve_and_commit (bool non_interactive = false);
 bool confirm_licenses(bool non_interactive = false);

@@ -616,7 +616,8 @@ bool mark_item_install (const PoolItem& pi) {
   return result;
 }
 
-void mark_patch_updates ()
+static
+void mark_patch_updates (bool skip_interactive)
 {
   if (true) {
     // search twice: if there are none with affects_pkg_manager, retry on all
@@ -633,8 +634,18 @@ void mark_patch_updates ()
 	if ( it->status().isNeeded() ) {
 	  Patch::constPtr patch = asKind<Patch>(res);
 	  if (attempt == 1 || patch->affects_pkg_manager ()) {
-	    nothing_found = false;
-	    mark_item_install (*it);
+	    // #221476
+	    if (skip_interactive && patch->interactive()) {
+	      // Skipping a patch because it is interactive and
+	      // --skip-interactive is requested. %s is a name of a
+	      // patch
+	      cerr << format (_("Warning: %s is interactive, skipped."))
+		% res << endl;
+	    }
+	    else {
+	      nothing_found = false;
+	      mark_item_install (*it);
+	    }
 	  }
 	}
       }
@@ -642,12 +653,12 @@ void mark_patch_updates ()
   }
 }
 
-void mark_updates( const ResObject::Kind &kind )
+void mark_updates( const ResObject::Kind &kind, bool skip_interactive )
 {
   bool k_is_patch = kind == ResTraits<Patch>::kind;
 
   if (k_is_patch) {
-    mark_patch_updates ();
+    mark_patch_updates (skip_interactive);
   }
   else {
     Candidates candidates;

@@ -92,6 +92,11 @@ Type of resolvable (default: patch)
 .TP
 .I \-y, \-\-no-confirm
 Don't require user confirmation.
+.TP
+.I \-\-skip\-interactive
+This will skip interactive patches, that is those that need a reboot,
+contain a message, or update a package whose license needs to be
+confirmed.
 
 .B NOTE:
 Zypper prefers to update only those packages for which a patch
