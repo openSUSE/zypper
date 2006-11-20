@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Mon Nov 20 14:15:38 CET 2006 - schubi@suse.de
+
+- translation added 
+
+-------------------------------------------------------------------
 Mon Nov 20 11:02:04 CET 2006 - ma@suse.de
 
 - Process obsoletes when installing non-package objects. (#217352)
