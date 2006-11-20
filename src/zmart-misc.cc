@@ -499,6 +499,51 @@ void list_patch_updates ()
   cout << tbl;
 }
 
+// collect items, select best edition.
+class LookForArchUpdate : public zypp::resfilter::PoolItemFilterFunctor
+{
+public:
+  PoolItem_Ref uninstalled;
+
+  bool operator()( PoolItem_Ref provider )
+    {
+      if (!provider.status().isLocked()	// is not locked (taboo)
+	  && (!uninstalled		// first match
+	      // or a better edition than candidate
+	      || uninstalled->edition().compare( provider->edition() ) < 0))
+      {
+	uninstalled = provider;	// store 
+      }
+      return true;		// keep going
+    }
+};
+
+// Find best (according to edition) uninstalled item
+// with same kind/name/arch as item.
+// Similar to zypp::solver::detail::Helper::findUpdateItem
+// but that allows changing the arch (#222140).
+static
+PoolItem_Ref
+findArchUpdateItem (const ResPool & pool, PoolItem_Ref item)
+{
+  LookForArchUpdate info;
+
+  invokeOnEach( pool.byNameBegin( item->name() ),
+		pool.byNameEnd( item->name() ),
+		// get uninstalled, equal kind and arch, better edition
+		functor::chain (
+		  functor::chain (
+		    functor::chain (
+		      resfilter::ByUninstalled (),
+		      resfilter::ByKind( item->kind() ) ),
+		    resfilter::byArch<CompareByEQ<Arch> >( item->arch() ) ),
+		  resfilter::byEdition<CompareByGT<Edition> >( item->edition() )),
+		functor::functorRef<bool,PoolItem> (info) );
+
+  _XDEBUG("findArchUpdateItem(" << item << ") => " << info.uninstalled);
+  return info.uninstalled;
+}
+
 typedef set<PoolItem_Ref> Candidates;
 
 void find_updates( const ResObject::Kind &kind, Candidates &candidates )
@@ -513,7 +558,7 @@ void find_updates( const ResObject::Kind &kind, Candidates &candidates )
     if (it->status().isUninstalled())
       continue;
     // (actually similar to ProvideProcess?)
-    PoolItem_Ref candidate = solver::detail::Helper::findUpdateItem (pool, *it);
+    PoolItem_Ref candidate = findArchUpdateItem (pool, *it);
     if (!candidate.resolvable())
       continue;
 
