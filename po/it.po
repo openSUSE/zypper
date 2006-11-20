@@ -15,7 +15,7 @@ msgstr ""
 
 #: zypp/CountryCode.cc:135
 msgid "Unknown country: "
-msgstr "Paese sconosciuto:"
+msgstr "Paese sconosciuto: "
 
 #: zypp/CountryCode.cc:215 zypp/LanguageCode.cc:225
 msgid "noCode"
@@ -983,7 +983,7 @@ msgstr "Zimbabwe"
 
 #: zypp/LanguageCode.cc:145
 msgid "Unknown language: "
-msgstr "Lingua sconosciuta:"
+msgstr "Lingua sconosciuta: "
 
 #: zypp/LanguageCode.cc:238
 msgid "Afar"
@@ -2971,11 +2971,11 @@ msgstr "affinché %s richieda %s durante l'aggiornamento di %s"
 
 #: zypp/solver/detail/ResolverInfo.cc:190
 msgid " Error!"
-msgstr "Errore"
+msgstr " Errore"
 
 #: zypp/solver/detail/ResolverInfo.cc:191
 msgid " Important!"
-msgstr "Importante"
+msgstr " Importante"
 
 #: zypp/solver/detail/ResolverInfoChildOf.cc:56
 #: zypp/solver/detail/ResolverInfoChildOf.cc:71
@@ -3002,15 +3002,15 @@ msgstr "%s dipende da %s"
 
 #: zypp/solver/detail/ResolverInfoMisc.cc:56
 msgid ", Action: "
-msgstr ", Azione:"
+msgstr ", Azione: "
 
 #: zypp/solver/detail/ResolverInfoMisc.cc:58
 msgid ", Trigger: "
-msgstr ", Trigger:"
+msgstr ", Trigger: "
 
 #: zypp/solver/detail/ResolverInfoMisc.cc:90
 msgid "package"
-msgstr "pacchetto "
+msgstr "pacchetto"
 
 #: zypp/solver/detail/ResolverInfoMisc.cc:94
 msgid "selection"
@@ -3330,7 +3330,7 @@ msgstr "%s presenta requisiti non soddisfatti"
 #: zypp/solver/detail/Resolver_problems.cc:472
 #, c-format
 msgid "%s has missing dependencies"
-msgstr "Dipendenze mancanti in %s "
+msgstr "Dipendenze mancanti in %s"
 
 #: zypp/solver/detail/Resolver_problems.cc:510
 #, c-format
@@ -3384,7 +3384,7 @@ msgstr " checksum mancante."
 
 #: zypp/source/SourceImpl.cc:397
 msgid " fails checksum verification."
-msgstr "verifica checksum non riuscita."
+msgstr " verifica checksum non riuscita."
 
 #: zypp/source/susetags/SuseTagsImpl.cc:641
 #: zypp/source/susetags/SuseTagsImpl.cc:651
@@ -3507,7 +3507,7 @@ msgstr ""
 #: zypp/target/rpm/RpmDb.cc:1899
 #, c-format
 msgid "%s install failed"
-msgstr "Impossibile installare %s "
+msgstr "Impossibile installare %s"
 
 #: zypp/target/rpm/RpmDb.cc:1900 zypp/target/rpm/RpmDb.cc:2018
 msgid "rpm output:"

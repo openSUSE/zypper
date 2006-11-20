@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: translation@suse.de\n"
 "POT-Creation-Date: 2006-11-16 10:30+0100\n"
-"PO-Revision-Date: 2006-11-03 13:52\n"
+"PO-Revision-Date: 2006-11-20 11:36\n"
 "Last-Translator: Novell Language <language@novell.com>\n"
 "Language-Team: Novell Language <language@novell.com>\n"
 "MIME-Version: 1.0\n"
@@ -15,7 +15,7 @@ msgstr ""
 
 #: zypp/CountryCode.cc:135
 msgid "Unknown country: "
-msgstr "不明な国:"
+msgstr "不明な国: "
 
 #: zypp/CountryCode.cc:215 zypp/LanguageCode.cc:225
 msgid "noCode"
@@ -983,7 +983,7 @@ msgstr "ジンバブエ"
 
 #: zypp/LanguageCode.cc:145
 msgid "Unknown language: "
-msgstr "不明な言語:"
+msgstr "不明な言語: "
 
 #: zypp/LanguageCode.cc:238
 msgid "Afar"
@@ -2971,11 +2971,11 @@ msgstr "%s の %s 向けのものを要求するため(%s を更新)"
 
 #: zypp/solver/detail/ResolverInfo.cc:190
 msgid " Error!"
-msgstr "エラー!"
+msgstr " エラー!"
 
 #: zypp/solver/detail/ResolverInfo.cc:191
 msgid " Important!"
-msgstr "重要!"
+msgstr " 重要!"
 
 #: zypp/solver/detail/ResolverInfoChildOf.cc:56
 #: zypp/solver/detail/ResolverInfoChildOf.cc:71
@@ -3002,11 +3002,11 @@ msgstr "%s ( %s に依存)"
 
 #: zypp/solver/detail/ResolverInfoMisc.cc:56
 msgid ", Action: "
-msgstr "、アクション:"
+msgstr "、アクション: "
 
 #: zypp/solver/detail/ResolverInfoMisc.cc:58
 msgid ", Trigger: "
-msgstr "、トリガ:"
+msgstr "、トリガ: "
 
 #: zypp/solver/detail/ResolverInfoMisc.cc:90
 msgid "package"

@@ -15,7 +15,7 @@ msgstr ""
 
 #: zypp/CountryCode.cc:135
 msgid "Unknown country: "
-msgstr "Unbekanntes Land:"
+msgstr "Unbekanntes Land: "
 
 #: zypp/CountryCode.cc:215 zypp/LanguageCode.cc:225
 msgid "noCode"
@@ -983,7 +983,7 @@ msgstr "Simbabwe"
 
 #: zypp/LanguageCode.cc:145
 msgid "Unknown language: "
-msgstr "Unbekannte Sprache"
+msgstr "Unbekannte Sprache: "
 
 #: zypp/LanguageCode.cc:238
 msgid "Afar"
@@ -2971,11 +2971,11 @@ msgstr "für die Voraussetzung von %s für %s beim Aufrüsten von %s"
 
 #: zypp/solver/detail/ResolverInfo.cc:190
 msgid " Error!"
-msgstr "Fehler!"
+msgstr " Fehler!"
 
 #: zypp/solver/detail/ResolverInfo.cc:191
 msgid " Important!"
-msgstr "Wichtig!"
+msgstr " Wichtig!"
 
 #: zypp/solver/detail/ResolverInfoChildOf.cc:56
 #: zypp/solver/detail/ResolverInfoChildOf.cc:71
@@ -3002,11 +3002,11 @@ msgstr "%s abhängig von %s"
 
 #: zypp/solver/detail/ResolverInfoMisc.cc:56
 msgid ", Action: "
-msgstr ", Aktion:"
+msgstr ", Aktion: "
 
 #: zypp/solver/detail/ResolverInfoMisc.cc:58
 msgid ", Trigger: "
-msgstr ", Auslöser:"
+msgstr ", Auslöser: "
 
 #: zypp/solver/detail/ResolverInfoMisc.cc:90
 msgid "package"
