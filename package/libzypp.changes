@@ -1,5 +1,12 @@
 -------------------------------------------------------------------
-Fri Nov 17 16:57:39 CET 2006
+Mon Nov 20 11:02:04 CET 2006 - ma@suse.de
+
+- Process obsoletes when installing non-package objects. (#217352)
+- revision 4621
+- version 2.8.2
+
+-------------------------------------------------------------------
+Fri Nov 17 16:57:39 CET 2006 - mt@suse.de
 
 - Implemented volume device check using /sbin/vol_id (#213852).
 - Revision 4619
@@ -12,9 +19,9 @@ Fri Nov 17 15:53:58 CET 2006 - schubi@suse.de
 -------------------------------------------------------------------
 Fri Nov 17 12:42:04 CET 2006 - mt@suse.de
 
-- Implemented an reuse of already existing foreign CD/DVD mount points 
+- Implemented an reuse of already existing foreign CD/DVD mount points
   (e.g. automounted) - depends on REUSE_FOREIGN_MOUNTS flag (#220206).
-- Added a fallback check of the volume.mount_point HAL property to 
+- Added a fallback check of the volume.mount_point HAL property to
   isAutoMountedMedia(); info.hal_mount.created_mount_point seems
   to be not avaliable in newer HAL versions (on 10.2).
 - Revision 4615
