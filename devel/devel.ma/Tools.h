@@ -19,6 +19,52 @@ using namespace zypp;
 using std::endl;
 
 ///////////////////////////////////////////////////////////////////
+//
+
+template<class _Condition>
+  struct SetTrue
+  {
+    SetTrue( _Condition cond_r )
+    : _cond( cond_r )
+    {}
+
+    template<class _Tp>
+      bool operator()( _Tp t ) const
+      {
+        _cond( t );
+        return true;
+      }
+
+    _Condition _cond;
+  };
+
+template<class _Condition>
+  inline SetTrue<_Condition> setTrue_c( _Condition cond_r )
+  {
+    return SetTrue<_Condition>( cond_r );
+  }
+
+struct PrintPoolItem
+{
+  void operator()( const PoolItem & pi ) const
+  { USR << pi << " (" << pi.resolvable().get() << ")" <<endl; }
+};
+
+template <class _Iterator>
+  std::ostream & vdumpPoolStats( std::ostream & str,
+                                 _Iterator begin_r, _Iterator end_r )
+  {
+    pool::PoolStats stats;
+    std::for_each( begin_r, end_r,
+
+                   functor::chain( setTrue_c(PrintPoolItem()),
+                                   setTrue_c(functor::functorRef<void,ResObject::constPtr>(stats)) )
+
+                 );
+    return str << stats;
+  }
+
+///////////////////////////////////////////////////////////////////
 // rstats
 
 typedef zypp::pool::PoolStats Rstats;
@@ -45,7 +91,14 @@ inline Source_Ref createSource( const Url & url_r )
   Measure x( "createSource: " + url_r.asString() );
   try
     {
-      ret = SourceFactory().createFrom( url_r, "/", Date::now().asSeconds() );
+      try
+        {
+          ret = SourceFactory().createFrom( url_r, "/", Date::now().asSeconds() );
+        }
+      catch ( const source::SourceUnknownTypeException & )
+        {
+          ret = SourceFactory().createFrom( "Plaindir", url_r, "/", Date::now().asSeconds(), "", false, true );
+        }
     }
   catch ( const Exception & )
     {

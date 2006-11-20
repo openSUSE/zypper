@@ -6,25 +6,33 @@
 #include <zypp/base/Exception.h>
 #include <zypp/base/ProvideNumericId.h>
 
+using namespace zypp;
+#include "FakePool.h"
+
 #include "zypp/ZYppFactory.h"
 #include "zypp/ResPoolProxy.h"
 #include <zypp/SourceManager.h>
 #include <zypp/SourceFactory.h>
 
 #include "zypp/NVRAD.h"
+#include "zypp/ResTraits.h"
 #include "zypp/ResPool.h"
 #include "zypp/ResFilters.h"
 #include "zypp/CapFilters.h"
+#include "zypp/CapFactory.h"
 #include "zypp/Package.h"
 #include "zypp/Language.h"
 #include "zypp/NameKindProxy.h"
 #include "zypp/pool/GetResolvablesToInsDel.h"
+#include "zypp/target/rpm/RpmDb.h"
 
 
 using namespace std;
 using namespace zypp;
 using namespace zypp::ui;
 using namespace zypp::functor;
+using namespace zypp::debug;
+using namespace zypp::target::rpm;
 
 ///////////////////////////////////////////////////////////////////
 
@@ -32,63 +40,12 @@ static const Pathname sysRoot( "/Local/ROOT" );
 
 ///////////////////////////////////////////////////////////////////
 
-template<class _Condition>
-  struct SetTrue
-  {
-    SetTrue( _Condition cond_r )
-    : _cond( cond_r )
-    {}
-
-    template<class _Tp>
-      bool operator()( _Tp t ) const
-      {
-        _cond( t );
-        return true;
-      }
-
-    _Condition _cond;
-  };
-
-template<class _Condition>
-  inline SetTrue<_Condition> setTrue_c( _Condition cond_r )
-  {
-    return SetTrue<_Condition>( cond_r );
-  }
-
-template <class _Iterator, class _Filter, class _Function>
-  inline _Function for_each_if( _Iterator begin_r, _Iterator end_r,
-                                _Filter filter_r,
-                                _Function fnc_r )
-  {
-    for ( _Iterator it = begin_r; it != end_r; ++it )
-      {
-        if ( filter_r( *it ) )
-          {
-            fnc_r( *it );
-          }
-      }
-    return fnc_r;
-  }
-
-struct PrintPoolItem
+struct Print
 {
-  void operator()( const PoolItem & pi ) const
-  { USR << pi << " (" << pi.resolvable().get() << ")" <<endl; }
+  template<class _Tp>
+    bool operator()( const _Tp & val_r ) const
+    { USR << val_r << endl; return true; }
 };
-
-template <class _Iterator>
-  std::ostream & vdumpPoolStats( std::ostream & str,
-                                 _Iterator begin_r, _Iterator end_r )
-  {
-    pool::PoolStats stats;
-    std::for_each( begin_r, end_r,
-
-                   functor::chain( setTrue_c(PrintPoolItem()),
-                                   setTrue_c(functor::functorRef<void,ResObject::constPtr>(stats)) )
-
-                 );
-    return str << stats;
-  }
 
 ///////////////////////////////////////////////////////////////////
 
@@ -156,6 +113,93 @@ inline bool selectForTransact( const NameKindProxy & nkp, Arch arch = Arch() )
 
 ///////////////////////////////////////////////////////////////////
 
+#include "zypp/CapMatchHelper.h"
+
+struct GetObsoletes
+{
+  void operator()( const PoolItem & pi )
+  {
+    INT << pi << endl;
+    for_each( pi->dep(Dep::OBSOLETES).begin(),
+              pi->dep(Dep::OBSOLETES).end(),
+              ForEachMatchInPool( getZYpp()->pool(), Dep::PROVIDES,
+                                  Print() ) );
+  }
+};
+
+///////////////////////////////////////////////////////////////////
+
+template<class _Iterator>
+  void addPool( _Iterator begin_r, _Iterator end_r )
+  {
+    DataCollect dataCollect;
+    dataCollect.collect( begin_r, end_r );
+    getZYpp()->addResolvables( dataCollect.installed(), true );
+    getZYpp()->addResolvables( dataCollect.available() );
+    vdumpPoolStats( USR << "Pool:" << endl,
+                    getZYpp()->pool().begin(),
+                    getZYpp()->pool().end() ) << endl;
+  }
+
+template<class _Res>
+  void poolRequire( const std::string & capstr_r,
+                    ResStatus::TransactByValue causer_r = ResStatus::USER )
+  {
+    getZYpp()->pool().additionalRequire()[causer_r]
+                     .insert( CapFactory().parse( ResTraits<_Res>::kind,
+                                                  capstr_r ) );
+  }
+
+bool solve( bool establish = false )
+{
+  if ( establish )
+    {
+      bool eres = getZYpp()->resolver()->establishPool();
+      if ( ! eres )
+        {
+          ERR << "establish " << eres << endl;
+          return false;
+        }
+      MIL << "establish " << eres << endl;
+    }
+
+  bool rres = getZYpp()->resolver()->resolvePool();
+  if ( ! rres )
+    {
+      ERR << "resolve " << rres << endl;
+      return false;
+    }
+  MIL << "resolve " << rres << endl;
+  return true;
+}
+
+      struct StorageRemoveObsoleted
+      {
+        StorageRemoveObsoleted( const PoolItem & byPoolitem_r )
+        : _byPoolitem( byPoolitem_r )
+        {}
+
+        bool operator()( const PoolItem & poolitem_r ) const
+        {
+          if ( ! poolitem_r.status().isInstalled() )
+            return true;
+
+          if ( isKind<Package>(poolitem_r.resolvable()) )
+            {
+              ERR << "Ignore unsupported Package/non-Package obsolete: "
+                  << _byPoolitem << " obsoletes " << poolitem_r << endl;
+              return true;
+            }
+
+          INT << poolitem_r << " by " << _byPoolitem << endl;
+
+          return true;
+        }
+
+      private:
+        const PoolItem               _byPoolitem;
+      };
+
 /******************************************************************
 **
 **      FUNCTION NAME : main
@@ -165,67 +209,82 @@ int main( int argc, char * argv[] )
 {
   //zypp::base::LogControl::instance().logfile( "log.restrict" );
   INT << "===[START]==========================================" << endl;
+
+  const char * data2[] = {
+     "@ product"
+    ,"@ installed"
+    ,"- prodold 1 1 x86_64"
+    ,"@ provides"
+    ,"prodfoo"
+    ,"@ available"
+    ,"- prodnew 1 1 x86_64"
+    ,"@ obsoletes"
+    ,"prodfoo"
+    ,"- prodnew2 1 1 x86_64"
+    ,"@ obsoletes"
+    ,"prodold"
+    ,"prodfoo"
+    ,"@ fin"
+  };
+  const char * data[] = {
+     "@ product"
+    ,"@ installed"
+    ,"- test 1 1 x86_64"
+    ,"- moretest 1 1 x86_64"
+    ,"@ provides"
+    ,"test"
+    ,"@ available"
+    ,"- nomoretest 1 1 x86_64"
+    ,"@ obsoletes"
+    ,"test"
+    ,"moretest"
+    ,"nomoretest"
+    ,"@ obsoletes package"
+    ,"xxxxx"
+    ,"- moretest 1 1 x86_64"
+    ,"@ provides"
+    ,"test"
+    ,"@ package"
+    ,"- xxxxx 1 1 x86_64"
+    ,"@ fin"
+  };
+  addPool( data, data + ( sizeof(data) / sizeof(const char *) ) );
+
+
   ResPool pool( getZYpp()->pool() );
-
-  list<string> srcurls;
-  srcurls.push_back( "dir:/mounts/machcd2/CDs/SUSE-Linux-10.1-Remastered-x86_64/CD1" );
-
-  if ( 0 )
-    {
-      zypp::base::LogControl::TmpLineWriter shutUp;
-      getZYpp()->initTarget( sysRoot );
-      USR << "Added target: " << pool << endl;
-    }
-
-  if ( 1 ) {
-    //SourceManager::sourceManager()->restore( sysRoot );
-    if ( SourceManager::sourceManager()->allSources().empty() )
-      {
-        std::for_each( srcurls.begin(), srcurls.end(),
-                       AddSource() );
-        //SourceManager::sourceManager()->store( sysRoot, true );
-      }
-    for_each( SourceManager::sourceManager()->Source_begin(), SourceManager::sourceManager()->Source_end(),
-              AddResolvables() );
-    dumpRange( USR << "Sources: ",
-               SourceManager::sourceManager()->Source_begin(), SourceManager::sourceManager()->Source_end()
-               ) << endl;
-  }
-
-  MIL << *SourceManager::sourceManager() << endl;
-  MIL << pool << endl;
-
-#define selt(K,N) selectForTransact( nameKindProxy<K>( pool, #N ) )
+  poolRequire<Product>( "nomoretest" );
+  //poolRequire<Product>( "prodnew" );
+  //poolRequire<Product>( "prodnew2" );
+  WAR << getZYpp()->pool().additionalRequire()[ResStatus::USER] << endl;
 
 
-
-
-  selt( Product, SUSE LINUX );
-  selt( Language, en_GB );
-  selt( Selection, default  );
-  selt( Selection, Kde-Desktop  );
-  selt( Selection, Laptop   );
-  selt( Package, kernel );
-  selt( Package, yast2-trans-en_GB );
-
+  solve();
   vdumpPoolStats( USR << "Transacting:"<< endl,
                   make_filter_begin<resfilter::ByTransact>(pool),
                   make_filter_end<resfilter::ByTransact>(pool) ) << endl;
 
-  if ( 1 ) {
-    bool eres, rres;
-    {
-      //zypp::base::LogControl::TmpLineWriter shutUp;
-      //zypp::base::LogControl::instance().logfile( "SOLVER" );
-      eres = getZYpp()->resolver()->establishPool();
-      rres = getZYpp()->resolver()->resolvePool();
-    }
-    MIL << "est " << eres << " slv " << rres << endl;
-  }
+  PoolItem pi;
 
-  dumpPoolStats( USR << "Transacting:"<< endl,
-                 make_filter_begin<resfilter::ByTransact>(pool),
-                 make_filter_end<resfilter::ByTransact>(pool) ) << endl;
+  //pi = *pool.byNameBegin("test");
+  //SEC << pi << endl;
+  //forEachPoolItemMatching( pool, Dep::OBSOLETES, pi, Print() );
+
+
+  //pi = *pool.byNameBegin("test");
+  //SEC << pi << endl;
+  //forEachPoolItemMatching( pool, Dep::OBSOLETES, pi, Print() );
+
+
+  pi = *pool.byNameBegin("nomoretest");
+  SEC << pi << endl;
+
+  forEachPoolItemMatchedBy( pool, pi, Dep::OBSOLETES,
+                            OncePerPoolItem( StorageRemoveObsoleted(pi) ) );
+
+  INT << "===[END]============================================" << endl << endl;
+  zypp::base::LogControl::instance().logNothing();
+  return 0;
+
 
   pool::GetResolvablesToInsDel collect( pool, pool::GetResolvablesToInsDel::ORDER_BY_MEDIANR );
   typedef pool::GetResolvablesToInsDel::PoolItemList PoolItemList;
@@ -258,6 +317,7 @@ int main( int argc, char * argv[] )
                  fst, collect._toInstall.end() ) << endl;
       dumpRange( ERR << "toDelete: " << endl,
                  collect._toDelete.begin(), collect._toDelete.end() ) << endl;
+      for_each( collect._toInstall.begin(), fst, GetObsoletes() );
     }
   else
     {

@@ -1,7 +1,7 @@
 ## Process this file with automake to produce Makefile.in
 ## ##################################################
 
-noinst_PROGRAMS =	Main Parse Test Prof Iorder
+noinst_PROGRAMS =	Main Parse Test Prof Iorder Basic
 
 ## ##################################################
 
@@ -12,6 +12,11 @@ AM_LDFLAGS =
 AM_CXXFLAGS = -pg
 
 LDADD =		-L$(top_srcdir)/zypp/.libs -lzypp -lboost_regex
+
+## ##################################################
+
+Basic_SOURCES = Basic.cc
+Basic_LDFLAGS =	-static
 
 ## ##################################################
 
