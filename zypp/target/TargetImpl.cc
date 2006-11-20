@@ -9,19 +9,15 @@
 /** \file	zypp/target/TargetImpl.cc
  *
 */
-//#include <sys/types.h>
-//#include <sys/stat.h>
-
 #include <iostream>
 #include <sstream>
 #include <string>
 #include <list>
 #include <set>
 
-#include <boost/iterator/filter_iterator.hpp>
-
 #include "zypp/base/Logger.h"
 #include "zypp/base/Exception.h"
+#include "zypp/base/Iterator.h"
 #include "zypp/base/Gettext.h"
 #include "zypp/PoolItem.h"
 #include "zypp/Resolvable.h"
@@ -34,6 +30,7 @@
 #include "zypp/Source.h"
 #include "zypp/Url.h"
 
+#include "zypp/CapMatchHelper.h"
 #include "zypp/ResFilters.h"
 #include "zypp/target/CommitLog.h"
 #include "zypp/target/TargetImpl.h"
@@ -47,16 +44,15 @@ using namespace std;
 using namespace zypp;
 using namespace zypp::resfilter;
 using zypp::solver::detail::Helper;
-//using zypp::solver::detail::InstallOrder;
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////
   namespace target
   { /////////////////////////////////////////////////////////////////
 
-///////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////
     namespace
     { /////////////////////////////////////////////////////////////////
       void ExecuteScriptHelper( Script::constPtr script_r, bool do_r )
@@ -130,10 +126,71 @@ namespace zypp
       {
         ExecuteScriptHelper( script_r, false );
       }
-/////////////////////////////////////////////////////////////////
+      /////////////////////////////////////////////////////////////////
     } // namespace
-///////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////
 
+    ///////////////////////////////////////////////////////////////////
+    namespace
+    { /////////////////////////////////////////////////////////////////
+
+      /** Helper removing obsoleted non-Package from store. */
+      struct StorageRemoveObsoleted
+      {
+        StorageRemoveObsoleted( storage::PersistentStorage & storage_r,
+                                const PoolItem & byPoolitem_r )
+        : _storage( storage_r )
+        , _byPoolitem( byPoolitem_r )
+        {}
+
+        bool operator()( const PoolItem & poolitem_r ) const
+        {
+          if ( ! poolitem_r.status().isInstalled() )
+            return true;
+
+          if ( isKind<Package>(poolitem_r.resolvable()) )
+            {
+              ERR << "Ignore unsupported Package/non-Package obsolete: "
+                  << _byPoolitem << " obsoletes " << poolitem_r << endl;
+              return true;
+            }
+
+          try
+            {
+              _storage.deleteObject( poolitem_r.resolvable() );
+               MIL<< "Obsoleted: " << poolitem_r << " (by " << _byPoolitem << ")" << endl;
+            }
+          catch ( Exception & excpt_r )
+            {
+              ZYPP_CAUGHT( excpt_r );
+              WAR << "Failed obsolete: " << poolitem_r << " (by " << _byPoolitem << ")" << endl;
+            }
+
+          return true;
+        }
+
+      private:
+        storage::PersistentStorage & _storage;
+        const PoolItem               _byPoolitem;
+      };
+
+      /** Helper processing non-Package obsoletes.
+      *
+      * Scan \a pool_r for items obsoleted \a byPoolitem_r and remove them from
+      * \a storage_r.
+      */
+      void obsoleteMatchesFromStorage( storage::PersistentStorage & storage_r,
+                                       const ResPool & pool_r,
+                                       const PoolItem & byPoolitem_r )
+      {
+        forEachPoolItemMatchedBy( pool_r, byPoolitem_r, Dep::OBSOLETES,
+                                  OncePerPoolItem( StorageRemoveObsoleted( storage_r,
+                                                                           byPoolitem_r ) ) );
+      }
+
+      /////////////////////////////////////////////////////////////////
+    } // namespace
+    ///////////////////////////////////////////////////////////////////
 
     /** Helper for PackageProvider queries during commit. */
     struct QueryInstalledEditionHelper
@@ -148,7 +205,7 @@ namespace zypp
           return _rpmdb.hasPackage( name_r );
         return _rpmdb.hasPackage( name_r, ed_r );
       }
-private:
+    private:
       rpm::RpmDb & _rpmdb;
     };
 
@@ -165,23 +222,23 @@ private:
     }
 
 
-///////////////////////////////////////////////////////////////////
-//
-//	METHOD NAME : TargetImpl::TargetImpl
-//	METHOD TYPE : Ctor
-//
+    ///////////////////////////////////////////////////////////////////
+    //
+    //	METHOD NAME : TargetImpl::TargetImpl
+    //	METHOD TYPE : Ctor
+    //
     TargetImpl::TargetImpl(const Pathname & root_r)
-        : _root(root_r), _storage_enabled(false)
+    : _root(root_r), _storage_enabled(false)
     {
       _rpm.initDatabase(root_r);
       MIL << "Initialized target on " << _root << endl;
     }
 
-///////////////////////////////////////////////////////////////////
-//
-//	METHOD NAME : TargetImpl::~TargetImpl
-//	METHOD TYPE : Dtor
-//
+    ///////////////////////////////////////////////////////////////////
+    //
+    //	METHOD NAME : TargetImpl::~TargetImpl
+    //	METHOD TYPE : Dtor
+    //
     TargetImpl::~TargetImpl()
     {
       _rpm.closeDatabase();
@@ -248,7 +305,7 @@ private:
       TargetImpl *ptr = const_cast<TargetImpl *>(this);
       ptr->loadKindResolvables(kind_r);
       resfilter::ResFilter filter = ByKind(kind_r);
-      return boost::make_filter_iterator( filter, _store.begin(), _store.end() );
+      return make_filter_iterator( filter, _store.begin(), _store.end() );
     }
 
     ResStore::resfilter_const_iterator TargetImpl::byKindEnd( const ResObject::Kind & kind_r  ) const
@@ -256,7 +313,7 @@ private:
       TargetImpl *ptr = const_cast<TargetImpl *>(this);
       ptr->loadKindResolvables(kind_r);
       resfilter::ResFilter filter = ByKind(kind_r);
-      return boost::make_filter_iterator( filter, _store.end(), _store.end() );
+      return make_filter_iterator( filter, _store.end(), _store.end() );
     }
 
     const ResStore & TargetImpl::resolvables()
@@ -281,7 +338,7 @@ private:
       _resstore_loaded[ResTraits<zypp::Language>::kind] = false;
       _resstore_loaded[ResTraits<zypp::Package>::kind] = false;
     }
-    
+
     ZYppCommitResult TargetImpl::commit( ResPool pool_r, const ZYppCommitPolicy & policy_rX )
     {
       // ----------------------------------------------------------------- //
@@ -397,7 +454,7 @@ private:
       {
         if (isKind<Package>(it->resolvable()))
         {
-          Package::constPtr p = dynamic_pointer_cast<const Package>(it->resolvable());
+          Package::constPtr p = asKind<Package>(it->resolvable());
           if (it->status().isToBeInstalled())
           {
             source::ManagedFile localfile;
@@ -531,6 +588,9 @@ private:
           {
             if (it->status().isToBeInstalled())
             {
+              // Process OBSOLETES and remove them from store.
+              obsoleteMatchesFromStorage( _storage, pool_r, *it );
+
               bool success = false;
               try
               {
@@ -556,6 +616,7 @@ private:
                   {
                     // this would delete the same item over and over
                     //for (PoolItem_Ref old = Helper::findInstalledItem (pool_r, *it); old; )
+#warning REMOVE ALL OLD VERSIONS AND NOT JUST ONE
                     PoolItem_Ref old = Helper::findInstalledItem (pool_r, *it);
                     if (old)
                     {
@@ -679,7 +740,7 @@ private:
       instlist_r.swap( collect._toInstall );
       srclist_r.swap( collect._toSrcinstall );
     }
-    
+
     Date TargetImpl::timestamp() const
     {
       Date ts_rpm;
@@ -708,9 +769,9 @@ private:
       }
     }
 
-/////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////
   } // namespace target
-///////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
