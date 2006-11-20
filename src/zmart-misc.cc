@@ -483,17 +483,24 @@ void list_patch_updates ()
 	tr << patch->category();
 	tr << string_status (it->status ());
 
-	tbl << tr;
 	if (patch->affects_pkg_manager ())
 	  pm_tbl << tr;
+	else
+	  tbl << tr;
       }
     }
   }
 
   // those that affect the package manager go first
   // (TODO: user option for this?)
-  if (!pm_tbl.empty ())
+  if (!pm_tbl.empty ()) {
+    if (!tbl.empty ()) {
+      cerr << _("WARNING: These are only the updates affecting the updater itself.\n"
+		"There are others available too.\n") << flush;
+		
+    }
     tbl = pm_tbl;
+  }
 
   tbl.sort (1); 		// Name
   cout << tbl;
@@ -639,7 +646,7 @@ void mark_patch_updates (bool skip_interactive)
 	      // Skipping a patch because it is interactive and
 	      // --skip-interactive is requested. %s is a name of a
 	      // patch
-	      cerr << format (_("Warning: %s is interactive, skipped."))
+	      cerr << format (_("WARNING: %s is interactive, skipped."))
 		% res << endl;
 	    }
 	    else {

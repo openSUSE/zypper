@@ -2,6 +2,8 @@
 Mon Nov 20 17:29:57 CET 2006 - mvidner@suse.cz
 
 - Respect "update --skip-interactive" (#221476).
+- list-updates: warn if we are listing only patches affecting the
+  package manager and there are also others.
 - 0.6.13
 
 -------------------------------------------------------------------
