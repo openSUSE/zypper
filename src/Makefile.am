@@ -2,7 +2,7 @@
 ## ##################################################
 
 bin_PROGRAMS = zypper
-bin_SCRIPTS = installation_sources
+dist_bin_SCRIPTS = installation_sources
 
 if BUILD_CHECKPATCHES
 sbin_PROGRAMS = zypp-checkpatches zypp-checkpatches-wrapper
