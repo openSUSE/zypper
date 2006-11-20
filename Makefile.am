@@ -29,6 +29,7 @@ package-local:	dist-bzip2 @PACKAGE@.spec
 	rm -f package/*.auto
 	mv $(distdir).tar.bz2 package/
 	mv @PACKAGE@.spec package/
+	$(INSTALL_DATA) -p $(srcdir)/package/@PACKAGE@.changes package/
 
 check-up-to-date:
 	cd $(srcdir) && ! LC_ALL=C svn status --show-updates --quiet | grep -v '^Status against revision'
