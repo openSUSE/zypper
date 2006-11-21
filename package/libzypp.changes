@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue Nov 21 13:11:06 CET 2006 - mt@suse.de
+
+- Fixed target/hal - one more dbus_connection_close found (#216035)
+- revision 4636
+- version 2.8.4
+
+-------------------------------------------------------------------
 Mon Nov 20 14:15:38 CET 2006 - schubi@suse.de
 
 - translation added 
