@@ -109,7 +109,7 @@ struct Hal::Impl
 	    libhal_ctx_free (_context);
 	}
 	if (_connection) {
-	    dbus_connection_close (_connection);
+	    // dbus_connection_close (_connection);				// call only if dbus_bus_get_private was used
 	    dbus_connection_unref (_connection);
 	}
     }
