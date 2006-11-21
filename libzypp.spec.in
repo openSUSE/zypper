@@ -12,6 +12,7 @@
 
 Name:           libzypp
 BuildRequires:  boost-devel curl-devel dejagnu doxygen gcc-c++ graphviz hal-devel libxml2-devel rpm-devel sqlite-devel gettext-devel
+BuildRequires:	update-desktop-files
 License:        GPL
 Group:          System/Packages
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
@@ -78,6 +79,8 @@ make %{?jobs:-j %jobs}
 
 %install
 make install DESTDIR=$RPM_BUILD_ROOT
+# flags copied from zen-installer too
+%suse_update_desktop_file -G "" -C "" package-manager
 # Create filelist with translatins
 %{find_lang} zypp
 
@@ -96,6 +99,9 @@ make install DESTDIR=$RPM_BUILD_ROOT
 %dir %{_libdir}/libzypp*so.*
 %dir %{prefix}/share/zypp
 %{prefix}/share/zypp/*
+%{prefix}/share/pixmaps/package-manager-icon.png
+%{prefix}/share/applications/package-manager.desktop
+%{prefix}/bin/package-manager
 
 %files devel
 %defattr(-,root,root)

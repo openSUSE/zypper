@@ -1,0 +1,36 @@
+[Desktop Entry]
+X-SuSE-translate=true
+Encoding=UTF-8
+Name=Install Software
+Exec=package-manager %F
+Icon=package-manager-icon
+Terminal=false
+Type=Application
+Categories=PackageManager;
+MimeType=application/x-rpm
+StartupNotify=true
+
+Name[bg]=Инсталиране на софтуер
+Name[cs]=Instalace softwaru
+Name[da]=Installér software
+Name[de]=Installieren von Software
+Name[es]=Instalar software
+Name[et]=Tarkvara paigaldamine
+Name[fi]=Asenna ohjelmistoja
+Name[fr]=Installation de logiciels
+Name[hu]=Szoftver telepítése
+Name[it]=Software di installazione
+Name[ja]=ソフトウェアのインストール
+Name[km]=ដំឡើង​ផ្នែកទន់
+Name[ko]=ដំឡើង​ផ្នែកទន់
+Name[lt]=Diegti programinę įrangą
+Name[nb]=Installer programvare via Zen
+Name[nl]=Software installeren
+Name[pl]=Instalacja oprogramownia
+Name[pt]=Instalar o Software
+Name[pt_BR]=Instalar o Software
+Name[ru]=Установка программ
+Name[sv]=Installera program
+Name[uk]=Встановлення ПЗ
+Name[zh_CN]=安装软件
+Name[zh_TW]=安裝軟體

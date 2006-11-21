@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue Nov 21 16:25:03 CET 2006 - mvidner@suse.cz
+
+- Added package-manager wrapper script, with icon and .desktop (#222757).
+  (Used by gnome-main-menu)
+- version 2.8.5
+
+-------------------------------------------------------------------
 Tue Nov 21 13:11:06 CET 2006 - mt@suse.de
 
 - Fixed target/hal - one more dbus_connection_close found (#216035)

@@ -1,0 +1,113 @@
+#! /bin/sh
+# by http://en.opensuse.org/User:Mvidner
+# https://bugzilla.novell.com/show_bug.cgi?id=222757
+usage() {
+    cat >&2 <<EOF
+$0 version 0.2
+Usage:
+  $0 --update ONE_NAME
+  $0 --remove ONE_NAME
+  $0 [--install [ONE_FILE]]
+EOF
+    exit $1
+}
+
+HAVE_ZLM=false
+if rpm -q zen-updater >/dev/null; then
+    HAVE_ZLM=true
+fi
+HAVE_OPENSUSE=false
+if rpm -q yast2-packager >/dev/null; then
+    HAVE_OPENSUSE=true
+fi
+
+if $HAVE_ZLM; then
+    if $HAVE_OPENSUSE; then	
+	if [ -f /etc/sysconfig/sw_management ]; then
+	    . /etc/sysconfig/sw_management
+	    PSMS="$PREFERRED_SW_MANAGER_STACK"
+	fi
+
+	if [ "x$PSMS" = "xzlm" ]; then
+	    STACK=zlm
+	elif [ "x$PSMS" = "xopensuse" ]; then
+	    STACK=opensuse
+	else
+	    echo >&2 "/etc/sysconfig/sw_management:PREFERRED_SW_MANAGER_STACK should contain"
+	    echo >&2 "'zlm' or 'opensuse'"
+	    STACK=ugh
+	fi
+    else
+	STACK=zlm
+    fi
+else
+    if $HAVE_OPENSUSE; then
+	STACK=opensuse
+    else
+	echo >&2 "No package manager installed?"
+	STACK=ugh
+    fi
+fi
+
+xsu() {
+    # FIXME isn't there a desktop agnostic command?
+    XDGSU=/usr/bin/xdg_menu_su
+    GNOMESU=/opt/gnome/bin/gnomesu
+    KDESU=/opt/kde3/bin/kdesu
+    # in order of increasing preference (FIXME detect desktop)
+    if [ -x $XDGSU ]; then
+	XSU=$XDGSU
+    fi
+    if [ -x $GNOMESU ]; then
+	XSU="$GNOMESU --"
+    fi
+    if [ -x $KDESU ]; then
+	XSU="$KDESU --"
+    fi
+
+    if [ -z "$XSU" ]; then
+	echo >&2 "WARNING: kdesu or gnomesu or xdg_menu_su not found"
+    fi
+    $XSU "$@"
+}
+
+# do_* fall back to yast for STACK=ugh
+
+do_update() {
+    if [ $STACK = zlm ]; then
+	zen-updater --no-tray "$@"
+    else
+	xsu yast2 --update "$@"
+    fi
+}
+
+do_remove() {
+    if [ $STACK = zlm ]; then
+	zen-remover "$@"
+    else
+	xsu yast2 --remove "$@"
+    fi
+}
+
+do_install() {
+    if [ $STACK = zlm ]; then
+	zen-installer "$@"
+    else
+	xsu yast2 --install "$@"
+    fi
+}
+
+if [ "x$1" = "x--update" -a $# = 2 ]; then
+    shift
+    do_update "$@"
+elif [ "x$1" = "x--remove" -a $# = 2 ]; then
+    shift
+    do_remove "$@"
+elif [ "x$1" = "x--install" ]; then
+    shift
+    do_install "$@"
+elif [ $# = 0 ]; then
+    do_install
+else
+    usage 1
+fi

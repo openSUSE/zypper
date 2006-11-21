@@ -1,1 +1,1 @@
-SUBDIRS = registration
+SUBDIRS = registration package-manager

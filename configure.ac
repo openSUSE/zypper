@@ -248,6 +248,7 @@ AC_OUTPUT(	 po/Makefile.in\
 	testsuite/media/Makefile	\
 	tools/Makefile	\
   tools/registration/Makefile \
+	tools/package-manager/Makefile \
   examples/Makefile  \
   zypp/Makefile			\
 	zypp/base/Makefile		\
