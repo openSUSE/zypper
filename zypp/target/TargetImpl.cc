@@ -101,7 +101,11 @@ namespace zypp
         ExternalProgram prog( path.asString(), ExternalProgram::Stderr_To_Stdout, false, -1, true );
         for ( std::string output = prog.receiveLine(); output.length(); output = prog.receiveLine() )
         {
-          report->progress( ScriptResolvableReport::OUTPUT, output );
+          if ( ! report->progress( ScriptResolvableReport::OUTPUT, output ) )
+            {
+              WAR << "User request to abort script." << endl;
+              prog.kill(); // the rest is handled by exit code evaluation.
+            }
         }
 
         int exitCode = prog.close();
