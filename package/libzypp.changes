@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Wed Nov 22 19:24:57 CET 2006 - dmacvicar@suse.de
+
+- don't make libzypp-devel depend on sqlite-devel as
+  headers from zypp2 are not installed yet
+- r4663 
+
+-------------------------------------------------------------------
 Wed Nov 22 15:23:55 CET 2006 - ma@suse.de
 
 - Return an error if fork failed. (#204807)
