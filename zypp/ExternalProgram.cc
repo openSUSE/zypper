@@ -262,6 +262,7 @@ namespace zypp {
     	    ::close(from_external[1]);
     	}
     	ERR << "Cannot fork " << strerror(errno) << endl;
+        _exitStatus = -127;
       }
 
       else {
