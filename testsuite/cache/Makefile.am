@@ -13,7 +13,7 @@ check_PROGRAMS = SourceCacheInitializer
 
 ## ##################################################
 
-LDADD =	$(top_srcdir)/zypp/lib@PACKAGE@.la $(top_srcdir)/zypp/lib@PACKAGE@2.la
+LDADD =	$(top_srcdir)/zypp/lib@PACKAGE@.la $(top_srcdir)/zypp2/lib@PACKAGE@2.la
 
 ## ##################################################
 

@@ -8,6 +8,7 @@ AM_CXXFLAGS = -DZYPP_BASE_LOGGER_LOGGROUP=\"zypp2\"
 ## ##################################################
 
 pkginclude_HEADERS = 
+noinst_HEADERS = LazzyText.h
 
 ## ##################################################
 
@@ -15,7 +16,7 @@ noinst_LTLIBRARIES =	lib@PACKAGE@2.la
 
 ## ##################################################
 
-lib@PACKAGE@2_la_SOURCES = dummy.cc
+lib@PACKAGE@2_la_SOURCES = LazzyText.cc
 
 lib@PACKAGE@2_la_LDFLAGS =	@LIBZYPP_VERSION_INFO@
 
