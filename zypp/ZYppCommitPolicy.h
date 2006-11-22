@@ -27,9 +27,10 @@ namespace zypp
   {
   public:
     ZYppCommitPolicy()
-    : _restrictToMedia( 0 )
-    , _dryRun( false )
-    , _rpmNoSignature( false )
+    : _restrictToMedia    ( 0 )
+    , _dryRun             ( false )
+    , _rpmNoSignature     ( false )
+    , _syncPoolAfterCommit( true )
     {}
 
   public:
@@ -41,6 +42,9 @@ namespace zypp
 
     bool rpmNoSignature() const
     { return _rpmNoSignature; }
+
+    bool syncPoolAfterCommit() const
+    { return _syncPoolAfterCommit; }
 
   public:
     /** Restrict commit to a certain media number
@@ -61,10 +65,15 @@ namespace zypp
     ZYppCommitPolicy & rpmNoSignature( bool yesNo_r = true )
     { _rpmNoSignature = yesNo_r; return *this; }
 
+    /** Kepp pool in sync with the Target databases after commit (default: true) */
+    ZYppCommitPolicy & syncPoolAfterCommit( bool yesNo_r = true )
+    { _syncPoolAfterCommit = yesNo_r; return *this; }
+
   private:
     unsigned _restrictToMedia;
     bool     _dryRun;
     bool     _rpmNoSignature;
+    bool     _syncPoolAfterCommit;
   };
   ///////////////////////////////////////////////////////////////////
 

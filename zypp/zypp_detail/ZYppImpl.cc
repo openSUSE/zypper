@@ -252,10 +252,16 @@ namespace zypp
       ZYppCommitResult res = _target->_pimpl->commit( pool(), policy_r );
 
       if (! policy_r.dryRun() ) {
-	// reload new status from target
-	removeInstalledResolvables();
+        // Tag target data invalid, so they are reloaded on the next call to
+        // target->resolvables(). Actually the target should do this without
+        // foreign help.
         _target->reset();
-	addResolvables( _target->resolvables(), true );
+	removeInstalledResolvables();
+        if ( policy_r.syncPoolAfterCommit() )
+          {
+            // reload new status from target
+            addResolvables( _target->resolvables(), true );
+          }
       }
 
       MIL << "Commit (" << policy_r << ") returned: "
