@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Thu Nov 23 14:50:48 CET 2006 - mt@suse.de
+
+- Applied a workaround parsing /proc/sys/dev/cdrom/info as fallback
+  to a HAL query to detect/verify CDROM drives. (#223376, #213194)
+- revision 4666
+- version 2.8.7
+
+-------------------------------------------------------------------
 Wed Nov 22 19:24:57 CET 2006 - dmacvicar@suse.de
 
 - don't make libzypp-devel depend on sqlite-devel as

@@ -12,6 +12,7 @@
 
 #include <iostream>
 
+#include "zypp/base/String.h"
 #include "zypp/base/Logger.h"
 #include "zypp/ExternalProgram.h"
 #include "zypp/media/Mount.h"
@@ -22,6 +23,9 @@
 
 #include <cstring> // strerror
 #include <cstdlib> // getenv
+#include <fstream>
+#include <vector>
+#include <list>
 
 #include <errno.h>
 #include <dirent.h>
@@ -68,6 +72,15 @@ namespace zypp {
   namespace media {
 
     namespace {
+
+      struct drive_info
+      {
+        drive_info(const std::string &_name = std::string(), bool _dvdr = false)
+          : name(_name), dvdr(_dvdr)
+        {}
+        std::string name;
+        bool        dvdr;
+      };
 
       bool isNewDevice(const std::list<MediaSource> &devices,
                        const MediaSource            &media)
@@ -384,6 +397,79 @@ namespace zypp {
       {
 	ZYPP_CAUGHT(e);
       }
+
+      //
+      // Read cdrom info from procfs as fallback ...
+      //
+      std::ifstream f( "/proc/sys/dev/cdrom/info");
+      if( f.is_open())
+      {
+	std::string line;
+	str::regex  rx_drive_name("^drive name:[ \t]+(.*)$");
+	str::regex  rx_dvd_support("^Can read DVD:[ \t]+(.*)$");
+	std::vector<drive_info> drives;
+
+	DBG << "Collecting CD-ROM device info from /proc filesystem" << std::endl;
+	while( std::getline(f, line))
+	{
+	  str::smatch out;
+	  if( regex_match(line, out, rx_drive_name) && out.size() == 2)
+	  {
+	    std::list<std::string>                 vals;
+	    zypp::str::split(out[1].str(), std::back_inserter(vals), " \t");
+
+	    drives.resize( vals.size());
+	    std::list<std::string>::const_iterator v(vals.begin());
+	    for(size_t n = 0; v != vals.end(); ++v, n++)
+	    {
+              drives[n] = drive_info(*v);
+	    }
+	  }
+	  else
+	  if( regex_match(line, out, rx_dvd_support) && out.size() == 2)
+	  {
+	    std::list<std::string>                 vals;
+	    zypp::str::split(out[1].str(), std::back_inserter(vals), " \t");
+	    if( drives.size() == vals.size())
+	    {
+	      std::list<std::string>::const_iterator v(vals.begin());
+	      for(size_t n = 0; v != vals.end(); ++v, n++)
+	      {
+	        drives[n].dvdr = (*v == "1");
+	      }
+	    }
+	  }
+	}
+	f.close();
+	for(size_t i=0; i < drives.size(); i++)
+	{
+	  if( drives[i].name.empty())
+	    continue;
+
+	  PathInfo dev_info("/dev/" + drives[i].name);
+	  if( dev_info.isBlk())
+	  {
+	    MediaSource media("cdrom", dev_info.asString(),
+	                               dev_info.major(),
+	                               dev_info.minor());
+	    if( isNewDevice(detected, media))
+	    {
+	      DBG << "Found a " << (drives[i].dvdr ? "DVD" : "CDROM")
+	          << " " << media.asString()
+	          << " info in /proc" << std::endl;
+	      if( supportingDVD && drives[i].dvdr)
+	      {
+	        detected.push_front(media);
+	      }
+	      else
+	      {
+	        detected.push_back(media);
+	      }
+	    }
+	  }
+	}
+      }
+
 
       //
       // Bug #163971
