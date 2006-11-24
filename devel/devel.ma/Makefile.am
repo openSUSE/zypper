@@ -1,7 +1,7 @@
 ## Process this file with automake to produce Makefile.in
 ## ##################################################
 
-noinst_PROGRAMS =	Main Parse Test Prof Iorder Basic
+noinst_PROGRAMS =	Draft Main Parse Test Prof Iorder Basic Update
 
 ## ##################################################
 
@@ -15,12 +15,24 @@ LDADD =		-L$(top_srcdir)/zypp/.libs -lzypp -lboost_regex
 
 ## ##################################################
 
+ADD_SOURCES = 	xml/Node.cc		xml/Node.h	\
+		xml/Reader.cc		xml/Reader.h	\
+		xml/XmlString.cc	xml/XmlString.h	\
+		xml/libxmlfwd.cc	xml/libxmlfwd.h
+
+## ##################################################
+
 Basic_SOURCES = Basic.cc
 Basic_LDFLAGS =	-static
 
 ## ##################################################
 
-Main_SOURCES = 	Main.cc
+Update_SOURCES = Update.cc
+Update_LDFLAGS = -static
+
+## ##################################################
+
+Main_SOURCES = 	Main.cc $(ADD_SOURCES)
 Main_LDFLAGS =	-static
 
 ## ##################################################
@@ -30,18 +42,19 @@ Parse_LDFLAGS =	-static
 
 ## ##################################################
 
-Test_SOURCES = 	Test.cc \
-		xml/Node.cc		xml/Node.h	\
-		xml/Reader.cc		xml/Reader.h	\
-		xml/XmlString.cc	xml/XmlString.h	\
-		xml/libxmlfwd.cc	xml/libxmlfwd.h
+Test_SOURCES = 	Test.cc $(ADD_SOURCES)
 
 Test_LDFLAGS =	-static
 
 ## ##################################################
 
 Iorder_SOURCES = Iorder.cc
-Iorder_LDFLAGS =	-static
+Iorder_LDFLAGS = -static
+
+## ##################################################
+
+Draft_SOURCES = Draft.cc
+Draft_LDFLAGS =	-static
 
 ## ##################################################
 
