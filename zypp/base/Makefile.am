@@ -12,6 +12,8 @@ baseincludedir = $(pkgincludedir)/base
 
 baseinclude_HEADERS =	\
 	Debug.h		\
+	Measure.h	\
+	\
 	Deprecated.h	\
 	DefaultFalseBool.h	\
 	DefaultIntegral.h	\
@@ -51,6 +53,7 @@ noinst_LTLIBRARIES =	lib@PACKAGE@_base.la
 ## ##################################################
 
 lib@PACKAGE@_base_la_SOURCES =	\
+	Measure.cc		\
 	Fd.cc			\
 	Gettext.cc		\
 	GzStream.cc		\
@@ -63,10 +66,11 @@ lib@PACKAGE@_base_la_SOURCES =	\
 	\
 	Exception.cc		\
 	Sysconfig.cc		\
-	LogControl.cc \
-	ProfilingFormater.cc
-# NO entries below LogControl.cc
-# The static LogControlImpl singleton musr be initialized first!
+	ProfilingFormater.cc 	\
+	\
+	LogControl.cc
+### NO entries below LogControl.cc !!!
+### The static LogControlImpl singleton must be initialized first!
 
 lib@PACKAGE@_base_la_LIBADD = -lboost_regex
 
