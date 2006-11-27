@@ -109,7 +109,7 @@ namespace zypp
     {
       CapSet caps = item_r->dep( cap_r );
       for (CapSet::iterator ic = caps.begin(); ic != caps.end(); ++ic) {
-	store_r[cap_r][ic->index()].insert( CapAndItem( *ic, item_r ) );
+	store_r[cap_r][ic->index()].push_back( CapAndItem( *ic, item_r ) );
       }
     }
 
@@ -252,9 +252,7 @@ namespace zypp
       /* -------------------------------------------------------------------------------
        * 3.) Feed
        * ------------------------------------------------------------------------------- */
-
-      item = *_poolImpl._store.insert( item ).first;
-
+      item = *_poolImpl._store.insert( item ).first;      
       _poolImpl._namehash.insert( item );
       _poolImpl._caphash.insert( item );
       // don't miss to invalidate ResPoolProxy
