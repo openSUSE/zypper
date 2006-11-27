@@ -1189,6 +1189,9 @@ XMLFilesBackend::createProduct( const zypp::parser::xmlstore::XMLProductData & p
       
     }
     
+    // replace spaces to underscores
+    std::replace(prod_name.begin(), prod_name.end(), ' ', '_');
+    
     // Collect basic Resolvable data
     NVRAD dataCollect( prod_name, prod_edition, arch, createDependencies(parsed, ResTraits<Product>::kind) );
     Product::Ptr product = detail::makeResolvableFromImpl( dataCollect, impl );
