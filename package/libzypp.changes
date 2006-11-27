@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Nov 27 18:29:58 CET 2006 - schubi@suse.de
+
+- Pool has multi instances of an item in the pool. Reduced this error
+  to items which are identically at least. #217574 and #223750  
+
+-------------------------------------------------------------------
 Mon Nov 27 17:37:44 CET 2006 - dmacvicar@suse.de
 
 - replace spaces to underscores in product names
