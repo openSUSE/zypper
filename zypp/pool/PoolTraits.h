@@ -54,6 +54,19 @@ namespace zypp
       PoolImpl & _poolImpl;
     };
 
+    struct CapAndItemOrder
+    {
+      bool operator()( const CapAndItem & lhs, const CapAndItem & rhs ) const
+      {
+        if ( CapOrder()( lhs.cap, rhs.cap ) )
+          return true;
+        if ( CapOrder()( rhs.cap, lhs.cap ) )
+          return false;
+        // here: ==
+        return( lhs.item.resolvable() < rhs.item.resolvable() );
+      }
+    };
+
     ///////////////////////////////////////////////////////////////////
     //
     //	CLASS NAME : PoolTraits
@@ -77,7 +90,7 @@ namespace zypp
       typedef ItemContainerT::const_iterator            byName_iterator;
 
       // internal organization
-      typedef std::list<CapAndItem>			CapItemContainerT;	// (why,who) pairs
+      typedef std::set<CapAndItem,CapAndItemOrder>      CapItemContainerT;	// (why,who) pairs
       typedef std::map<std::string,CapItemContainerT>	CapItemStoreT;		// capability.index -> (why,who) pairs
       typedef std::map<Dep,CapItemStoreT>		DepCapItemContainerT;	// Dep -> (capability.index -> (why,who) pairs)
 
@@ -95,7 +108,7 @@ namespace zypp
 
       /** Map of CapSet and "who" has set it*/
       typedef std::map<ResStatus::TransactByValue,CapSet>		AdditionalCapSet;
-	
+
     };
     ///////////////////////////////////////////////////////////////////
 
