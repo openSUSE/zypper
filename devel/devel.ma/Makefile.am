@@ -32,7 +32,6 @@ AOUT_LDFLAGS = -static
 	ln -sf $@.Po .deps/AOUT.Po
 	ln -sf $@.cc AOUT.cc
 	ln -sf $@.o  AOUT.o
-	ls -l
 	$(MAKE) AOUT
 	mv AOUT $@
 
