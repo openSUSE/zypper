@@ -11,7 +11,8 @@
  */
 #include <zypp/url/UrlBase.h>
 #include <zypp/base/String.h>
-
+#include <zypp/base/Gettext.h>
+ 
 #include <stdexcept>
 #include <climits>
 #include <errno.h>
@@ -147,7 +148,7 @@ namespace zypp
         if( regx.empty() || regx == "^$")
         {
           ZYPP_THROW(UrlNotAllowedException(
-            std::string("Url scheme does not allow a " + name)
+            str::form(_("Url scheme does not allow a %s"), name.c_str())
           ));
         }
         else
@@ -166,14 +167,14 @@ namespace zypp
             if( show)
             {
               ZYPP_THROW(UrlBadComponentException(
-                std::string("Invalid " + name + " component '" +
-                            data + "'")
+                str::form(_("Invalid %s component '%s'"),
+                          name.c_str(), data.c_str())
               ));
             }
             else
             {
               ZYPP_THROW(UrlBadComponentException(
-                std::string("Invalid " + name + " component")
+                str::form(_("Invalid %s component"), name.c_str())
               ));
             }
           }
@@ -720,7 +721,7 @@ namespace zypp
           config("vsep_pathparam").empty())
       {
         ZYPP_THROW(UrlNotSupportedException(
-          "Path parameter parsing not supported for this URL"
+          _("Path parameter parsing not supported for this URL")
         ));
       }
       zypp::url::ParamMap pmap;
@@ -775,7 +776,7 @@ namespace zypp
           config("vsep_querystr").empty())
       {
         ZYPP_THROW(UrlNotSupportedException(
-          "Query string parsing not supported for this URL"
+          _("Query string parsing not supported for this URL")
         ));
       }
       zypp::url::ParamMap pmap;
@@ -813,13 +814,13 @@ namespace zypp
       if( scheme.empty())
       {
         ZYPP_THROW(UrlBadComponentException(
-          std::string("Url scheme is a required component")
+          _("Url scheme is a required component")
         ));
       }
       else
       {
         ZYPP_THROW(UrlBadComponentException(
-          std::string("Invalid Url scheme '" + scheme + "'")
+          str::form(_("Invalid Url scheme '%s'"), scheme.c_str())
         ));
       }
     }
@@ -850,7 +851,7 @@ namespace zypp
       else
       {
         ZYPP_THROW(UrlParsingException(
-          "Unable to parse Url authority"
+          _("Unable to parse Url authority")
         ));
       }
     }
@@ -938,7 +939,7 @@ namespace zypp
         if( config("with_authority") != "y")
         {
           ZYPP_THROW(UrlNotAllowedException(
-            std::string("Url scheme does not allow a username")
+            _("Url scheme does not allow a username")
           ));
         }
 
@@ -972,7 +973,7 @@ namespace zypp
         if( config("with_authority") != "y")
         {
           ZYPP_THROW(UrlNotAllowedException(
-            std::string("Url scheme does not allow a password")
+            _("Url scheme does not allow a password")
           ));
         }
 
@@ -1001,7 +1002,7 @@ namespace zypp
         if(config("require_host") == "m")
         {
           ZYPP_THROW(UrlNotAllowedException(
-            std::string("Url scheme requires a host")
+            _("Url scheme requires a host component")
           ));
         }
         m_data->host = host;
@@ -1011,7 +1012,7 @@ namespace zypp
         if( config("with_authority") != "y")
         {
           ZYPP_THROW(UrlNotAllowedException(
-            std::string("Url scheme does not allow a host")
+            _("Url scheme does not allow a host component")
           ));
         }
 
@@ -1038,7 +1039,7 @@ namespace zypp
         else
         {
           ZYPP_THROW(UrlBadComponentException(
-            std::string("Invalid host argument '" + host + "'")
+            str::form(_("Invalid host component '%s'"), host.c_str())
           ));
         }
       }
@@ -1059,7 +1060,7 @@ namespace zypp
             config("with_port")      != "y")
         {
           ZYPP_THROW(UrlNotAllowedException(
-            std::string("Url scheme does not allow a port")
+            _("Url scheme does not allow a port")
           ));
         }
 
@@ -1070,7 +1071,7 @@ namespace zypp
         else
         {
           ZYPP_THROW(UrlBadComponentException(
-            std::string("Invalid host argument '" + port + "'")
+            str::form(_("Invalid port component '%s'"), port.c_str())
           ));
         }
       }
@@ -1087,7 +1088,7 @@ namespace zypp
         if(config("require_pathname") == "m")
         {
           ZYPP_THROW(UrlNotAllowedException(
-            std::string("Url scheme requires path name")
+            _("Url scheme requires path name")
           ));
         }
         m_data->pathname = path;
@@ -1108,7 +1109,7 @@ namespace zypp
                  str::toLower(path.substr(0, 3)) == "%2f")))
             {
               ZYPP_THROW(UrlNotAllowedException(
-                std::string("Relative path not allowed if authority exists")
+                _("Relative path not allowed if authority exists")
               ));
             }
           }
@@ -1122,7 +1123,7 @@ namespace zypp
             if(path.at(0) != '/')
             {
               ZYPP_THROW(UrlNotAllowedException(
-                std::string("Relative path not allowed if authority exists")
+                _("Relative path not allowed if authority exists")
               ));
             }
           }
@@ -1175,7 +1176,7 @@ namespace zypp
           config("vsep_pathparam").empty())
       {
         ZYPP_THROW(UrlNotSupportedException(
-          "Path Parameter parsing not supported for this URL"
+          _("Path Parameter parsing not supported for this URL")
         ));
       }
       setPathParams(
@@ -1220,7 +1221,7 @@ namespace zypp
           config("vsep_querystr").empty())
       {
         ZYPP_THROW(UrlNotSupportedException(
-          "Query string parsing not supported for this URL"
+          _("Query string parsing not supported for this URL")
         ));
       }
       setQueryString(

@@ -10,6 +10,7 @@
  * \file zypp/Url.cc
  */
 #include <zypp/Url.h>
+#include <zypp/base/Gettext.h>
 #include <zypp/base/String.h>
 #include <stdexcept>
 
@@ -106,7 +107,7 @@ namespace zypp
         else
         {
           ZYPP_THROW(url::UrlNotSupportedException(
-            "Invalid LDAP URL query string"
+            _("Invalid LDAP URL query string")
           ));
         }
         return pmap;
@@ -145,7 +146,8 @@ namespace zypp
           if( !found)
           {
             ZYPP_THROW(url::UrlNotSupportedException(
-              "Invalid LDAP URL query parameter '" + p->first + "'"
+              str::form(_("Invalid LDAP URL query parameter '%s'"),
+                          p->first.c_str())
             ));
           }
         }
@@ -285,7 +287,7 @@ namespace zypp
     if( !m_impl)
     {
       ZYPP_THROW(url::UrlException(
-        "Unable to clone Url object"
+        _("Unable to clone Url object")
       ));
     }
   }
@@ -298,7 +300,7 @@ namespace zypp
     if( !m_impl)
     {
       ZYPP_THROW(url::UrlException(
-        "Invalid empty Url reference"
+        _("Invalid empty Url object reference")
       ));
     }
   }
@@ -311,7 +313,7 @@ namespace zypp
     if( !m_impl)
     {
       ZYPP_THROW(url::UrlParsingException(
-        "Unable to parse Url components"
+        _("Unable to parse Url components")
       ));
     }
   }
@@ -325,7 +327,7 @@ namespace zypp
     if( !url)
     {
       ZYPP_THROW(url::UrlParsingException(
-        "Unable to parse Url components"
+        _("Unable to parse Url components")
       ));
     }
     m_impl = url;

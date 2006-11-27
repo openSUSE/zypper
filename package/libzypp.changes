@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Nov 27 16:17:07 CET 2006 - mt@suse.de
+
+- Added translations marks to hal, url and mutex exceptions (#23771)
+- revision 4680
+
+-------------------------------------------------------------------
 Wed Nov 22 19:24:57 CET 2006 - dmacvicar@suse.de
 
 - don't make libzypp-devel depend on sqlite-devel as

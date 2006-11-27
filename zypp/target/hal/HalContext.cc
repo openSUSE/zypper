@@ -17,6 +17,8 @@
 #include <zypp/thread/MutexLock.h>
 #include <zypp/base/NonCopyable.h>
 #include <zypp/base/Logger.h>
+#include <zypp/base/String.h>
+#include <zypp/base/Gettext.h>
 
 #include <dbus/dbus-glib-lowlevel.h>
 #include <dbus/dbus-glib.h>
@@ -70,11 +72,15 @@ namespace zypp
             return dbus_error_is_set(&error);
           }
 
-          inline HalException halException() const
+          inline HalException halException(const std::string &msg = std::string()) const
           {
-            if( error.name != NULL && error.message != NULL) {
+            if( isSet() && error.name != NULL && error.message != NULL) {
               return HalException(error.name, error.message);
-            } else {
+            }
+            else if( !msg.empty()) {
+              return HalException(msg);
+            }
+            else {
               return HalException();
             }
           }
@@ -87,7 +93,7 @@ namespace zypp
         {
           if( !h)
           {
-            ZYPP_THROW(HalException("HalContext not connected"));
+            ZYPP_THROW(HalException(_("HalContext not connected")));
           }
         }
 
@@ -97,7 +103,7 @@ namespace zypp
         {
           if( !d)
           {
-            ZYPP_THROW(HalException("HalDrive not initialized"));
+            ZYPP_THROW(HalException(_("HalDrive not initialized")));
           }
         }
 
@@ -107,7 +113,7 @@ namespace zypp
         {
           if( !v)
           {
-            ZYPP_THROW(HalException("HalVolume not initialized"));
+            ZYPP_THROW(HalException(_("HalVolume not initialized")));
           }
         }
 
@@ -121,6 +127,8 @@ namespace zypp
       {
         if(!e_name.empty() && !e_msg.empty())
           return str << msg() << ": " << e_msg << " (" << e_name << ")";
+        else if(!e_msg.empty())
+          return str << msg() << ": " << e_msg;
         else
           return str << msg();
       }
@@ -196,7 +204,9 @@ namespace zypp
         else
           conn = dbus_bus_get(DBUS_BUS_SYSTEM, &err.error);
         if( !conn) {
-          ZYPP_THROW(err.halException());
+          ZYPP_THROW(err.halException(
+            _("Unable to create dbus connection")
+          ));
         }
 
         if( monitorable)
@@ -211,7 +221,7 @@ namespace zypp
           conn = NULL;
 
           ZYPP_THROW(HalException(
-            "libhal_ctx_new: Can't create libhal context"
+            _("libhal_ctx_new: Can't create libhal context")
           ));
         }
 
@@ -226,7 +236,7 @@ namespace zypp
           conn = NULL;
 
           ZYPP_THROW(HalException(
-            "libhal_set_dbus_connection: Can't set dbus connection"
+            _("libhal_set_dbus_connection: Can't set dbus connection")
           ));
         }
 
@@ -240,7 +250,9 @@ namespace zypp
           dbus_connection_unref(conn);
           conn = NULL;
 
-          ZYPP_THROW(err.halException());
+          ZYPP_THROW(err.halException(
+            _("Unable to initalize HAL context -- hald not running?")
+          ));
         }
       }
 
@@ -828,7 +840,7 @@ namespace zypp
 
 #if 0
         if( libhal_drive_get_type(d_impl->drv) != LIBHAL_DRIVE_TYPE_CDROM)
-          ZYPP_THROW(HalException("Not a CDROM drive"));
+          ZYPP_THROW(HalException(_("Not a CDROM drive")));
 
         /*
         ** FIXME: we use property keys matching

@@ -10,6 +10,7 @@
  */
 #include <zypp/thread/Mutex.h>
 #include <zypp/thread/MutexException.h>
+#include <zypp/base/Gettext.h>
 
 
 //////////////////////////////////////////////////////////////////////
@@ -29,21 +30,21 @@ namespace zypp
       if( ret != 0)
       {
         ZYPP_THROW_ERRNO_MSG(zypp::thread::MutexException,
-        "Can't initialize mutex attributes");
+        _("Can't initialize mutex attributes"));
       }
 
       ret = pthread_mutexattr_settype(&attr, PTHREAD_MUTEX_RECURSIVE);
       if( ret != 0)
       {
         ZYPP_THROW_ERRNO_MSG(MutexException,
-        "Can't set recursive mutex attribute");
+        _("Can't set recursive mutex attribute"));
       }
 
       ret = pthread_mutex_init(&m_mutex, &attr);
       if( ret != 0)
       {
         ZYPP_THROW_ERRNO_MSG(MutexException,
-        "Can't initialize recursive mutex");
+        _("Can't initialize recursive mutex"));
       }
     }
 
@@ -61,7 +62,7 @@ namespace zypp
         else
         {
           ZYPP_THROW_ERRNO_MSG(MutexException,
-          "Can't destroy mutex owned by another thread");
+          _("Can't destroy mutex owned by another thread"));
         }
         */
       }
@@ -73,7 +74,7 @@ namespace zypp
       if( pthread_mutex_lock(&m_mutex) != 0)
       {
         ZYPP_THROW_ERRNO_MSG(MutexException,
-        "Can't acquire the mutex lock");
+        _("Can't acquire the mutex lock"));
       }
     }
 
@@ -83,7 +84,7 @@ namespace zypp
       if( pthread_mutex_unlock(&m_mutex) != 0)
       {
         ZYPP_THROW_ERRNO_MSG(MutexException,
-        "Can't release the mutex lock");
+        _("Can't release the mutex lock"));
       }
     }
 

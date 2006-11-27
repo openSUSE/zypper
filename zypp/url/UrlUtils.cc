@@ -9,6 +9,8 @@
 /**
  * \file zypp/url/UrlUtils.cc
  */
+#include <zypp/base/Gettext.h>
+#include <zypp/base/String.h>
 #include <zypp/url/UrlUtils.h>
 
 #include <stdlib.h>   // strtol
@@ -106,7 +108,7 @@ namespace zypp
               if( !allowNUL)
               {
                 ZYPP_THROW(UrlDecodingException(
-                  "Encoded string contains a NUL byte"
+                  _("Encoded string contains a NUL byte")
                 ));
               }
             default:
@@ -168,7 +170,7 @@ namespace zypp
       if( psep.empty())
       {
         ZYPP_THROW(UrlNotSupportedException(
-          "Invalid split separator character."
+          _("Invalid parameter array split separator character")
         ));
       }
 
@@ -208,7 +210,7 @@ namespace zypp
       if( psep.empty() || vsep.empty())
       {
         ZYPP_THROW(UrlNotSupportedException(
-          "Invalid split separator character."
+          _("Invalid parameter map split separator character")
         ));
       }
 
@@ -278,7 +280,7 @@ namespace zypp
       if( psep.empty() || vsep.empty())
       {
         ZYPP_THROW(UrlNotSupportedException(
-          "Invalid join separator character."
+          _("Invalid parameter array join separator character")
         ));
       }
 
