@@ -1148,7 +1148,11 @@ Product::Ptr YUMSourceImpl::createProduct(
     Arch arch;
     if (!parsed.arch.empty())
       arch = Arch(parsed.arch);
-    NVRAD dataCollect( parsed.name,
+    
+    string name(parsed.name);
+    std::replace(name.begin(), name.end(), ' ', '_');
+    
+    NVRAD dataCollect( name,
                        Edition( parsed.ver, parsed.rel, parsed.epoch ),
                        arch,
                        createDependencies(parsed,

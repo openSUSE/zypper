@@ -93,7 +93,11 @@ void ProductMetadataParser::parse( const Pathname & file_r, Source_Ref source_r 
       std::string value = what[5];
       std::string modifier = what[4];
       if (key == "PRODUCT")
-        prodImpl->_name = value;
+      {
+        string s(value);
+        std::replace(s.begin(), s.end(), ' ', '_');
+        prodImpl->_name = s;
+      }
       else if (key == "VERSION")
         prodImpl->_version = value;
       else if (key == "DISTPRODUCT")
