@@ -12,6 +12,7 @@
 #include <iostream>
 #include <fstream>
 #include "zypp/base/Logger.h"
+#include "zypp/base/Gettext.h"
 #include "zypp/Digest.h"
 #include "zypp/SourceFactory.h"
 #include "zypp/source/SourceImpl.h"
@@ -333,7 +334,9 @@ const Pathname SourceImpl::providePackage( Package::constPtr package )
     if (!digest_ok)
     {
       std::string  package_str = package->name() + "-" + package->edition().asString();
-      source::DownloadResolvableReport::Action useraction = report->problem(package, source::DownloadResolvableReport::INVALID, "Package " + package_str + " fails integrity check. Do you want to retry downloading it, or abort installation?");
+      
+      // TranslatorExplanation %s = package
+      source::DownloadResolvableReport::Action useraction = report->problem(package, source::DownloadResolvableReport::INVALID, str::form(_("Package %s fails integrity check. Do you want to retry downloading it, or abort installation?"), package_str.c_str() ));
 
       if ( useraction == source::DownloadResolvableReport::ABORT )
       {
@@ -434,23 +437,26 @@ const Pathname SourceImpl::provideFile(const Pathname & file_r,
 
   while (retry)
   {
-    report->start( selfSourceRef(), "Downloading " + file_url.asString() );
+    // TranslatorExplanation %s = file being downloaded
+    report->start( selfSourceRef(), str::form( _("Downloading %s"), file_url.asString().c_str() ) );
     try
     {
       downloaded_file = provideJustFile(file_r, media_nr, cached, checkonly);
-      report->finish( selfSourceRef(), "Downloading " + file_url.asString(), SourceReport::NO_ERROR, file_r.asString() + " downloaded " + url().asString() );
+      report->finish( selfSourceRef(), str::form( _("Downloading %s"), file_url.asString().c_str() ), SourceReport::NO_ERROR, str::form(_("Downloaded %s from %s"), file_r.asString().c_str(), url().asString().c_str()) );
       retry = false;
     }
     catch ( const SkipRequestedException &e )
     {
-      report->finish( selfSourceRef(), "Downloading " + file_url.asString(), SourceReport::IO, "Can't provide " + file_r.asString() + " from " + url().asString() );
+      // TranslatorExplanation %s = file being downloaded
+      report->finish( selfSourceRef(), str::form( _("Downloading %s"), file_url.asString().c_str() ), SourceReport::IO, str::form(_("Can't provide %s from %s"), file_r.asString().c_str(), url().asString().c_str()) );
       ZYPP_RETHROW(e);
     }
     catch (const Exception &e)
     {
-      if ( report->problem(selfSourceRef(), SourceReport::IO, "Can't provide " + file_r.asString() + " from " + url().asString()) != SourceReport::RETRY )
+      // TranslatorExplanation %s = file that was not able to download
+      if ( report->problem(selfSourceRef(), SourceReport::IO, str::form(_("Can't provide %s from %s"), file_r.asString().c_str(), url().asString().c_str())) != SourceReport::RETRY )
       {
-        report->finish( selfSourceRef(), "Downloading " + file_url.asString(), SourceReport::IO, "Can't provide " + file_r.asString() + " from " + url().asString() );
+        report->finish( selfSourceRef(), str::form( _("Downloading %s"), file_url.asString().c_str() ), SourceReport::IO, str::form(_("Can't provide %s from %s"), file_r.asString().c_str(), url().asString().c_str()) );
         ZYPP_THROW(Exception("Can't provide " + file_r.asString() + " from " + url().asString() ));
       }
     }

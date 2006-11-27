@@ -12,6 +12,7 @@
 #include <iostream>
 #include <sstream>
 #include "zypp/base/Logger.h"
+#include "zypp/base/Gettext.h"
 
 #include "zypp/source/PackageProvider.h"
 #include "zypp/source/SourceProvideFile.h"
@@ -178,7 +179,7 @@ namespace zypp
       report()->startDeltaApply( delta );
       if ( ! applydeltarpm::check( delta_r.baseversion().sequenceinfo() ) )
         {
-          report()->problemDeltaApply( "applydeltarpm check failed." );
+          report()->problemDeltaApply( _("applydeltarpm check failed.") );
           return ManagedFile();
         }
 
@@ -191,7 +192,7 @@ namespace zypp
       if ( ! applydeltarpm::provide( delta, destination,
                                      bind( &PackageProvider::progressDeltaApply, this, _1 ) ) )
         {
-          report()->problemDeltaApply( "applydeltarpm failed." );
+          report()->problemDeltaApply( _("applydeltarpm failed.") );
           return ManagedFile();
         }
       report()->finishDeltaApply();
@@ -256,10 +257,9 @@ namespace zypp
     bool PackageProvider::failOnChecksumError() const
     {
       std::string package_str = _package->name() + "-" + _package->edition().asString();
-      switch ( report()->problem( _package, source::DownloadResolvableReport::INVALID,
-                                   "Package "
-                                   + package_str
-                                   + " fails integrity check. Do you want to retry downloading it?" ) )
+      
+      // TranslatorExplanation %s = package being checked for integrity
+      switch ( report()->problem( _package, source::DownloadResolvableReport::INVALID, str::form(_("Package %s fails integrity check. Do you want to retry downloading it?"), package_str.c_str() ) ) )
         {
         case source::DownloadResolvableReport::RETRY:
           _retry = true;
