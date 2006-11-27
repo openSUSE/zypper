@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Nov 27 16:54:03 CET 2006 - dmacvicar@suse.de
+
+- Mark some strings for translation (#219783 need it)
+- r4682 
+
+-------------------------------------------------------------------
 Mon Nov 27 16:17:07 CET 2006 - mt@suse.de
 
 - Added translations marks to hal, url and mutex exceptions (#23771)
