@@ -498,7 +498,7 @@ void refresh_sources()
     }
   }
 
-  cout << _("All sytem sources have been refreshed.") << endl;
+  cout << _("All system sources have been refreshed.") << endl;
 #endif
 }
 
