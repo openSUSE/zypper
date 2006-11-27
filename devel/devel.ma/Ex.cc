@@ -9,8 +9,6 @@
 #include <zypp/parser/yum/YUMParser.h>
 #include <zypp/Pathname.h>
 
-#include "Measure.h"
-
 using namespace std;
 using namespace zypp;
 using namespace zypp::parser::yum;

@@ -10,8 +10,6 @@
 #include <zypp/base/LogControl.h>
 #include <zypp/base/LogTools.h>
 
-#include "Measure.h"
-
 #include "zypp/xml/Reader.h"
 
 using namespace std;

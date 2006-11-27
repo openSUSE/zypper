@@ -27,7 +27,7 @@ AOUT_LDFLAGS = -static
 
 ## ##################################################
 
-%: %.cc
+%: %.cc $(top_srcdir)/zypp/lib@PACKAGE@.la
 	ln -sf $@.Po .deps/AOUT.Po
 	ln -sf $@.cc AOUT.cc
 	ln -sf $@.o  AOUT.o

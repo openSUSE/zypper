@@ -3,10 +3,10 @@
 
 #include <iostream>
 
-#include "Measure.h"
 #include "Printing.h"
 
 #include <zypp/base/Counter.h>
+#include <zypp/base/Measure.h>
 
 #include <zypp/Date.h>
 #include <zypp/ResObject.h>
@@ -16,6 +16,7 @@
 #include <zypp/source/susetags/SuseTagsImpl.h>
 
 using namespace zypp;
+using zypp::debug::Measure;
 using std::endl;
 
 ///////////////////////////////////////////////////////////////////
