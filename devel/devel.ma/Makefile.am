@@ -28,6 +28,7 @@ AOUT_LDFLAGS = -static
 ## ##################################################
 
 %: %.cc $(top_srcdir)/zypp/lib@PACKAGE@.la
+	touch .deps/$@.Po
 	ln -sf $@.Po .deps/AOUT.Po
 	ln -sf $@.cc AOUT.cc
 	ln -sf $@.o  AOUT.o
