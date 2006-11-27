@@ -14,9 +14,7 @@
 #include <set>
 #include <map>
 
-#include <stdint.h>
 #include <ext/hash_set>
-#include <ext/hash_map>
 #include <ext/hash_fun.h>
 
 #include "zypp/base/Logger.h"
@@ -54,85 +52,11 @@ namespace
     }
   };
 
-#undef get16bits
-#if (defined(__GNUC__) && defined(__i386__)) || defined(__WATCOMC__) \
-  || defined(_MSC_VER) || defined (__BORLANDC__) || defined (__TURBOC__)
-#define get16bits(d) (*((const uint16_t *) (d)))
-#endif
-
-#if !defined (get16bits)
-#define get16bits(d) ((((uint32_t)(((const uint8_t *)(d))[1])) << 8)\
-                       +(uint32_t)(((const uint8_t *)(d))[0]) )
-#endif
-
-struct SuperFastHash
-{
-  unsigned int operator()( const CapabilityImpl::Ptr &c ) const
-  {
-    const char *data = c->encode().c_str();
-    return hash( data, strlen(data));
-  }
-  
-  unsigned int operator()(const char *data ) const
-  {
-    return hash( data, strlen(data));
-  }
-  
-  static inline unsigned int hash(const char * data, int len)
-  {
-  unsigned int hash = len, tmp;
-  int rem;
-  
-      if (len <= 0 || data == NULL) return 0;
-  
-      rem = len & 3;
-      len >>= 2;
-  
-      /* Main loop */
-      for (;len > 0; len--) {
-          hash  += get16bits (data);
-          tmp    = (get16bits (data+2) << 11) ^ hash;
-          hash   = (hash << 16) ^ tmp;
-          data  += 2*sizeof (uint16_t);
-          hash  += hash >> 11;
-      }
-  
-      /* Handle end cases */
-      switch (rem) {
-          case 3: hash += get16bits (data);
-                  hash ^= hash << 16;
-                  hash ^= data[sizeof (uint16_t)] << 18;
-                  hash += hash >> 11;
-                  break;
-          case 2: hash += get16bits (data);
-                  hash ^= hash << 11;
-                  hash += hash >> 17;
-                  break;
-          case 1: hash += *data;
-                  hash ^= hash << 10;
-                  hash += hash >> 1;
-      }
-  
-      /* Force "avalanching" of final 127 bits */
-      hash ^= hash << 3;
-      hash += hash >> 5;
-      hash ^= hash << 4;
-      hash += hash >> 17;
-      hash ^= hash << 25;
-      hash += hash >> 6;
-  
-      return hash;
-  }
-};  
-  
   /** Set of unique CapabilityImpl. */
   //typedef std::set<CapabilityImpl::Ptr,CapImplOrder> USet;
   typedef __gnu_cxx::hash_set<CapabilityImpl::Ptr, CapImplHashFun, CapImplHashEqual> USet;
-  //typedef __gnu_cxx::hash_map<const char *, CapabilityImpl::Ptr, __gnu_cxx::hash<const char *>, __gnu_cxx::equal_to<const char *> > CapabilityCache;
-  //typedef __gnu_cxx::hash_map<const char *, CapabilityImpl::Ptr, SuperFastHash, __gnu_cxx::equal_to<const char *> > CapabilityCache;
-  typedef std::map<const char *, CapabilityImpl::Ptr> CapabilityCache;
-  typedef std::map<Resolvable::Kind, CapabilityCache> CapabilityKindCache;
-  
+
+
   /** Set to unify created capabilities.
    *
    * This is to unify capabilities. Each CapabilityImpl created
@@ -140,12 +64,6 @@ struct SuperFastHash
    * CapabilityImpl::Ptr has to be uset to create the Capability.
   */
   USet _uset;
-  
-  /**
-   * Cache which stores pre parsed capabilities
-   */
-  CapabilityKindCache _cap_cache;
-  std::string _current_key;
 
   /** Each CapabilityImpl created in CapFactory \b must be wrapped.
    *
@@ -158,9 +76,7 @@ struct SuperFastHash
   */
   CapabilityImpl::Ptr usetInsert( CapabilityImpl * allocated_r )
   {
-    CapabilityImpl::Ptr ptr(allocated_r);
-    _cap_cache[ptr->refers()][_current_key.c_str()] = ptr;
-    return *(_uset.insert( ptr ).first);
+    return *(_uset.insert( CapabilityImpl::Ptr(allocated_r) ).first);
   }
 
   /** Collect USet statistics.
@@ -173,8 +89,6 @@ struct SuperFastHash
     Counter _caps;
     std::map<CapabilityImpl::Kind,Counter> _capKind;
     std::map<Resolvable::Kind,Counter>     _capRefers;
-    static unsigned _cache_hits;
-    static unsigned _cache_misses;
 
     void operator()( const CapabilityImpl::constPtr & cap_r )
     {
@@ -186,8 +100,6 @@ struct SuperFastHash
 
     std::ostream & dumpOn( std::ostream & str ) const
     {
-      str << "  Cache hits: " << _cache_hits << endl;
-      str << "  Cache miss: " << _cache_misses << endl;
       str << "  Capabilities total: " << _caps << endl;
       str << "  Capability kinds:" << endl;
       for ( std::map<CapabilityImpl::Kind,Counter>::const_iterator it = _capKind.begin();
@@ -205,18 +117,6 @@ struct SuperFastHash
     }
   };
 
-  unsigned USetStatsCollect::_cache_hits = 0;
-  unsigned USetStatsCollect::_cache_misses = 0;
-  
-  struct Dummy
-  {
-    ~Dummy()
-    {
-      MIL << "[DUMMY] cacheh: " << USetStatsCollect::_cache_hits << " cachem: " << USetStatsCollect::_cache_misses << endl;
-    }
-  };
-  
-  static Dummy dummy;
   /////////////////////////////////////////////////////////////////
 } // namespace
 ///////////////////////////////////////////////////////////////////
@@ -488,40 +388,22 @@ namespace zypp
   //	METHOD TYPE : Dtor
   //
   CapFactory::~CapFactory()
-  {
-  }
+  {}
 
-  static CapabilityImpl::Ptr cacheLookUp( const Resolvable::Kind &kind_r, const std::string &strval_r )
-  {
-    CapabilityImpl::Ptr ptr = _cap_cache[kind_r][strval_r.c_str()];
-    if (ptr)
-      ++USetStatsCollect::_cache_hits;
-    else
-      ++USetStatsCollect::_cache_misses;
-    
-    return ptr;
-  }
-  
   ///////////////////////////////////////////////////////////////////
   //
   //	METHOD NAME : CapFactory::parse
   //	METHOD TYPE : Capability
   //
   Capability CapFactory::parse( const Resolvable::Kind & refers_r,
-      const std::string & strval_r ) const
+				const std::string & strval_r ) const
 
   try
     {
-      CapabilityImpl::Ptr cap_ptr = cacheLookUp( refers_r, strval_r );
-      if ( cap_ptr )
-        return Capability(cap_ptr);
-      
-      _current_key = strval_r;
-      
       if ( Impl::isHalSpec( strval_r ) )
-      {
-        return Capability( Impl::buildHal( refers_r, strval_r ) );
-      }
+	{
+	  return Capability( Impl::buildHal( refers_r, strval_r ) );
+	}
       if ( Impl::isModaliasSpec( strval_r ) )
         {
           return Capability( Impl::buildModalias( refers_r, strval_r ) );
@@ -579,11 +461,6 @@ namespace zypp
 				const std::string & edition_r ) const
   try
     {
-      _current_key = name_r + " " + op_r + " " + edition_r;
-      CapabilityImpl::Ptr cap_ptr = cacheLookUp( refers_r, _current_key );
-      if ( cap_ptr )
-        return Capability(cap_ptr);
-      
       if ( Impl::isHalSpec( name_r ) )
 	{
 	  return Capability( Impl::buildHal( refers_r, name_r, Rel(op_r), edition_r ) );
@@ -612,11 +489,6 @@ namespace zypp
 				const Edition & edition_r ) const
   try
     {
-      _current_key = name_r + " " + op_r.asString() + " " + edition_r.asString();
-      CapabilityImpl::Ptr cap_ptr = cacheLookUp( refers_r, _current_key );
-      if ( cap_ptr )
-        return Capability(cap_ptr);
-      
       if ( Impl::isHalSpec( name_r ) )
 	{
 	  return Capability( Impl::buildHal( refers_r, name_r, op_r, edition_r.asString() ) );
@@ -683,6 +555,7 @@ namespace zypp
   std::ostream & operator<<( std::ostream & str, const CapFactory & obj )
   {
     str << "CapFactory stats:" << endl;
+
     return for_each( _uset.begin(), _uset.end(), USetStatsCollect() ).dumpOn( str );
   }
 
