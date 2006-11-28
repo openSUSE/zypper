@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue Nov 28 16:36:56 CET 2006 - mt@suse.de
+
+- Added search for /sbin/vol_id tool - that is in /lib/udev/vol_id
+  on the installation image (#213852).
+- revision 4700 
+
+-------------------------------------------------------------------
 Tue Nov 28 11:44:52 CET 2006 - schubi@suse.de
 
 - Avoid duplicate pool entries; Bug 223750; second part of the fix

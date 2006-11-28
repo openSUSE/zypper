@@ -27,7 +27,7 @@
 
 #define DELAYED_VERIFY    1
 
-#define VOL_ID_TOOL_PATH  "/sbin/vol_id"
+#define VOL_ID_TOOL_PATHS { "/sbin/vol_id", "/lib/udev/vol_id", NULL}
 
 using namespace std;
 
@@ -152,9 +152,17 @@ namespace zypp {
 
       // check if a filesystem volume using the /sbin/vol_id tool
       // (there is no /dev/disk link for some of them)
+      for(const char *vol_id_paths[] = VOL_ID_TOOL_PATHS,
+	             **vol_id_path    = vol_id_paths;
+	  vol_id_path != NULL && *vol_id_path != NULL;
+	  vol_id_path++)
       {
+	PathInfo vol_id_info(*vol_id_path);
+	if( !vol_id_info.isFile() || !vol_id_info.isXUsr())
+	  continue;
+
 	const char *cmd[3];
-	cmd[0] = VOL_ID_TOOL_PATH;
+	cmd[0] = *vol_id_path;
 	cmd[1] = dev_name.asString().c_str();
 	cmd[2] = NULL;
 
