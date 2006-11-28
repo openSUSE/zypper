@@ -1,22 +1,30 @@
 -------------------------------------------------------------------
+Tue Nov 28 22:40:12 CET 2006 - ma@suse.de
+
+- fixed Patch::interactive to return true as well, if the patch
+  itself has a licence. (#224192)
+- revision 4702
+- version 2.9.2
+
+-------------------------------------------------------------------
 Tue Nov 28 16:36:56 CET 2006 - mt@suse.de
 
 - Added search for /sbin/vol_id tool - that is in /lib/udev/vol_id
   on the installation image (#213852).
-- revision 4700 
+- revision 4700
 
 -------------------------------------------------------------------
 Tue Nov 28 11:44:52 CET 2006 - schubi@suse.de
 
 - Avoid duplicate pool entries; Bug 223750; second part of the fix
 - r4698
-- Version 2.9.1 
+- Version 2.9.1
 
 -------------------------------------------------------------------
 Mon Nov 27 18:29:58 CET 2006 - schubi@suse.de
 
 - Pool has multi instances of an item in the pool. Reduced this error
-  to items which are identically at least. #217574 and #223750  
+  to items which are identically at least. #217574 and #223750
 - r4695
 
 -------------------------------------------------------------------
@@ -24,13 +32,13 @@ Mon Nov 27 17:37:44 CET 2006 - dmacvicar@suse.de
 
 - replace spaces to underscores in product names
 - 2.8.7
-- r4688 
+- r4688
 
 -------------------------------------------------------------------
 Mon Nov 27 16:54:03 CET 2006 - dmacvicar@suse.de
 
 - Mark some strings for translation (#219783 need it)
-- r4682 
+- r4682
 
 -------------------------------------------------------------------
 Mon Nov 27 16:17:07 CET 2006 - mt@suse.de
@@ -43,7 +51,7 @@ Wed Nov 22 19:24:57 CET 2006 - dmacvicar@suse.de
 
 - don't make libzypp-devel depend on sqlite-devel as
   headers from zypp2 are not installed yet
-- r4663 
+- r4663
 
 -------------------------------------------------------------------
 Wed Nov 22 15:23:55 CET 2006 - ma@suse.de
