@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue Nov 28 11:44:52 CET 2006 - schubi@suse.de
+
+- Avoid duplicate pool entries; Bug 223750; second part of the fix
+- r4698
+- Version 2.9.1 
+
+-------------------------------------------------------------------
 Mon Nov 27 18:29:58 CET 2006 - schubi@suse.de
 
 - Pool has multi instances of an item in the pool. Reduced this error
