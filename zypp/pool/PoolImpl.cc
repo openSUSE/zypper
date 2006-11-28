@@ -252,11 +252,13 @@ namespace zypp
       /* -------------------------------------------------------------------------------
        * 3.) Feed
        * ------------------------------------------------------------------------------- */
-      item = *_poolImpl._store.insert( item ).first;      
-      _poolImpl._namehash.insert( item );
-      _poolImpl._caphash.insert( item );
-      // don't miss to invalidate ResPoolProxy
-      _poolImpl.invalidateProxy();
+      if ( _poolImpl._store.insert( item ).second )
+      {
+	  _poolImpl._namehash.insert( item );
+	  _poolImpl._caphash.insert( item );
+	  // don't miss to invalidate ResPoolProxy
+	  _poolImpl.invalidateProxy();
+      }
     }
 
     /******************************************************************
