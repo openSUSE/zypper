@@ -43,7 +43,8 @@ namespace zypp
 
     bool PatchImplIf::interactive() const
     {
-      if ( reboot_needed() )
+      if ( reboot_needed()
+           || ! licenseToConfirm().empty() )
         {
           return true;
         }
