@@ -1,0 +1,15 @@
+INCLUDE_DIRECTORIES( ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR} )
+
+SET(zypp_zypp_detail_SRCS
+ZYppImpl.cc
+)
+ADD_LIBRARY(zypp_zypp_detail STATIC ${zypp_zypp_detail_SRCS})
+
+SET_SOURCE_FILES_PROPERTIES(${zypp_zypp_detail_SRCS} PROPERTIES COMPILE_FLAGS -DZYPP_BASE_LOGGER_LOGGROUP=\\\"zypp_detail\\\")
+
+INSTALL_FILES( FILES
+ZYppImpl.h
+ZYppReadOnlyHack.h
+DESTINATION
+${CMAKE_INSTALL_PREFIX}/include/zypp/detail
+)

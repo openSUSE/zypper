@@ -40,4 +40,4 @@ lib@PACKAGE@2_source_sqlite_la_SOURCES =			\
 	SqliteAccess.cc \
 	schema.h
 
-lib@PACKAGE@2_source_sqlite_la_LBADD = -lsqlite3
+lib@PACKAGE@2_source_sqlite_la_LBADD = -lsqlitezmd3
