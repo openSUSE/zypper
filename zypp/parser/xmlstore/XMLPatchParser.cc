@@ -88,9 +88,6 @@ namespace zypp {
             else if (name == "affects-package-manager") {
               patchPtr->packageManager = (_helper.content(child) == "true") ? true : false;
             }
-            else if (name == "interactive") {
-              patchPtr->interactive = (_helper.content(child) == "true") ? true : false;
-            }
             else if (name == "atoms") {
               parseAtomsNode(patchPtr, child);
             }

@@ -446,7 +446,6 @@ std::string toXML( const Patch::constPtr &obj )
   out << "<category>" << obj->category() << "</category>" << std::endl;
   out << "<affects-package-manager>" << ( obj->affects_pkg_manager() ? "true" : "false" ) << "</affects-package-manager>" << std::endl;
   out << "<reboot-needed>" << ( obj->reboot_needed() ? "true" : "false" ) << "</reboot-needed>" << std::endl;
-  out << "<interactive>" << ( obj->interactive() ? "true" : "false" ) << "</interactive>" << std::endl;
   
   Patch::AtomList at = obj->atoms();
   out << "  <atoms>" << std::endl;
