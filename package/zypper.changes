@@ -1,6 +1,7 @@
 -------------------------------------------------------------------
-Thu Nov 30 16:54:00 CET 2006 - mvidner@suse.cz
+Thu Nov 30 17:05:36 CET 2006 - mvidner@suse.cz
 
+- Do not needlessly use libtool (#224738).
 - zypp-checkpatches does not need -lboost_program_options (#224764)
 
 -------------------------------------------------------------------
