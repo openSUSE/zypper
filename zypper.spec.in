@@ -14,6 +14,7 @@ Name:           @PACKAGE@
 # da library
 BuildRequires:  libzypp-devel
 BuildRequires:  gcc-c++ pkg-config boost-devel gettext-devel
+Requires:	procps
 License:        GPL
 Group:          System/Packages
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
