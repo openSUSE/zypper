@@ -1,6 +1,8 @@
 -------------------------------------------------------------------
-Thu Nov 30 17:05:36 CET 2006 - mvidner@suse.cz
+Thu Nov 30 17:32:35 CET 2006 - mvidner@suse.cz
 
+- installation_sources: fixed to be compatible even with
+  /opt/kde3/bin/kde_add_yast_source.sh (#223795).
 - Do not needlessly use libtool (#224738).
 - zypp-checkpatches does not need -lboost_program_options (#224764)
 

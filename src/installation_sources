@@ -3,8 +3,19 @@
 # that was in yast2-packagemanager.rpm
 
 ZYPPER=zypper
+
+# be even more compatible, #223795
+Zypper() {
+  $ZYPPER "$@" 2>&1
+  E=$?
+  if [ $E -gt 0 -a $E -lt 100 ]; then
+    echo ERROR
+  fi
+  exit $E
+}
+
 if [ "x$1" = "x-s" ]; then
-   exec $ZYPPER service-list
+   Zypper service-list
 fi
 
 if [ "x$1" = "x-e" ]; then
@@ -15,7 +26,7 @@ elif [ "x$1" = "x-d" ]; then
 fi
 
 if [ "x$1" = "x-a" -a -n "$2" ]; then
-   exec $ZYPPER service-add $ENABLED "$2"
+   Zypper service-add $ENABLED "$2"
 fi
 
 cat >&2 <<EOF
