@@ -1,18 +1,24 @@
 -------------------------------------------------------------------
+Thu Nov 30 09:15:20 CET 2006 - ma@suse.de
+
+- version 3.0.0 (2.x.x now in SuSE-Linux-10_2-Branch)
+- revision 4713
+
+-------------------------------------------------------------------
 Wed Nov 29 19:20:24 CET 2006 - dmacvicar@suse.de
 
 - use sqlite-zmd package for the non yet shipped zypp2/ stuff
-  because backend uses this sqlite and it is no fun to
-  install one and the other to develop (as the -devel packages)
-  conflict.
+  because backend uses this sqlite and it is no fun to
+  install one and the other to develop (as the -devel packages)
+  conflict.
 - add cmake support for building zypp/ lib.
-  TODO: soinfo, compile testcases, devel, zypp2,docs
+  TODO: soinfo, compile testcases, devel, zypp2,docs
   find rpm, curl and others.
 - dont serialize interactive, as it is
-  calculated now.
-  (it was already fixed as we don't reimplement
-  the method, but we still serialized, parsed)
-- r4709 
+  calculated now.
+  (it was already fixed as we don't reimplement
+  the method, but we still serialized, parsed)
+- r4709
 
 -------------------------------------------------------------------
 Tue Nov 28 22:40:12 CET 2006 - ma@suse.de
