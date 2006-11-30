@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Thu Nov 30 16:54:00 CET 2006 - mvidner@suse.cz
+
+- zypp-checkpatches does not need -lboost_program_options (#224764)
+
+-------------------------------------------------------------------
 Thu Nov 30 15:17:03 CET 2006 - jkupec@suse.cz
 
 - Added explicit dependency on procps package.
