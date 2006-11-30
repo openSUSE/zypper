@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Thu Nov 30 15:17:03 CET 2006 - jkupec@suse.cz
+
+- Added explicit dependency on procps package.
+
+-------------------------------------------------------------------
 Mon Nov 20 17:29:57 CET 2006 - mvidner@suse.cz
 
 - Respect "update --skip-interactive" (#221476).
