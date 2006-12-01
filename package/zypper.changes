@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Dec  1 16:34:22 CET 2006 - jkupec@suse.cz
+
+- fixed ignoring of target resolvables in search (#224673)
+- 0.6.14
+
+-------------------------------------------------------------------
 Mon Nov 20 17:29:57 CET 2006 - mvidner@suse.cz
 
 - Respect "update --skip-interactive" (#221476).
