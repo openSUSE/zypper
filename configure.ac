@@ -42,6 +42,7 @@ AC_PROG_CXX
 AC_PROG_CXX
 AC_PROG_CXXCPP
 AC_PROG_INSTALL
+AC_PROG_LIBTOOL
 
 dnl   do AC_CHECK_* tests using c++ (e.g. boost header)
 AC_LANG([C++])
