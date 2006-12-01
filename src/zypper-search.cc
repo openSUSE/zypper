@@ -110,8 +110,6 @@ void ZyppSearch::cacheInstalled() {
   invokeOnEachSearched(Match(_reg,_options.searchDescriptions()),
     functorRef<bool,const zypp::PoolItem &>(_icache));
 
-  _zypp->removeResolvables(tgt_resolvables);
-
   cout_v << _icache.size() << " out of (" <<  tgt_resolvables.size() << ")"  
     "cached." << endl;
 }

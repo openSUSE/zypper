@@ -102,7 +102,7 @@ public:
   bool includeKindInKey() { return _incl_kind_in_key; }
 
   std::string getKey(const zypp::PoolItem & pi) const {
-    return pi.resolvable()->name() + pi.resolvable()->edition().asString() +
+    return pi.resolvable()->name() +
       (_incl_kind_in_key ? pi.resolvable()->kind().asString() : "");
   }
 
@@ -215,8 +215,7 @@ struct FillTable
     zypp::PoolItem inst_item = _icache->getItem(pool_item);
     if (inst_item) {
       // check whether the pool item is installed...
-      if (inst_item.resolvable()->edition() == pool_item.resolvable()->edition() &&
-          inst_item.resolvable()->arch() == pool_item.resolvable()->arch())
+      if (pool_item.status().isInstalled())
         row << "i";
       // ... or there's just another version of it installed
       else
