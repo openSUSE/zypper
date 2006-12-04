@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Mon Dec  4 08:03:57 CET 2006 - jkupec@suse.cz
+
+- fixed missing target resolvables in search (#224673)
+
+-------------------------------------------------------------------
 Fri Dec  1 15:40:10 CET 2006 - mvidner@suse.cz
 
 - installation_sources: fixed to be compatible even with

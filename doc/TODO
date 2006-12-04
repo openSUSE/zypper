@@ -6,8 +6,6 @@ General
 - installation and deletion notifications
 - --dry-run (use ZYppCommitPolicy.h)
 - confirm license: more user friendly (see confirm_licenses() comment)
-- FIXME zypper search ignores target packages that were not installed
-  from sources
 
 Patches
 

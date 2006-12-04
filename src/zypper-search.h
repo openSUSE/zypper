@@ -12,10 +12,10 @@
 #define ZYPPERSEARCH_H_
 
 #include <string>
-#include <ext/hash_map>
 #include <boost/regex.hpp>
 #include <boost/function.hpp>
 #include <zypp/ZYpp.h>
+#include <zypp/base/Hash.h>
 
 #include "zmart.h"
 #include "zypper-tabulator.h"
@@ -81,11 +81,11 @@ struct GenericStringHash {
   }
 };
 
-typedef __gnu_cxx::hash_map<std::string, zypp::PoolItem, GenericStringHash> PoolItemHash;
+typedef zypp::hash_map<std::string, zypp::PoolItem> PoolItemHash;
 
 /**
  * Structure for caching installed PoolItems using a hash map.
- * Name + edition + (if _incl_kind_in_key) kind is used as a key.
+ * Name + (if _incl_kind_in_key) kind is used as a key.
  * The hash map is to be manipulated through addItem() and getItem() methods. 
  */
 struct InstalledCache  {
@@ -123,6 +123,39 @@ public:
   }
 };
 
+
+typedef zypp::hash_set<std::string> IdSet;
+
+/**
+ * Structure for caching identification strings of source PoolItems using
+ * a hash set. Name + edition + kind + architecture is used as a key.
+ * The has set is to be manipulated through addItem() and contains() methods. 
+ */
+struct IdCache {
+private:
+  IdSet _items;
+
+public:
+  std::string getKey(const zypp::PoolItem & pi) const {
+    return pi.resolvable()->name() + pi.resolvable()->edition().asString() +
+      pi.resolvable()->kind().asString() + pi.resolvable()->arch().asString();
+  }
+
+  void addItem(const zypp::PoolItem & pi) { _items.insert(getKey(pi)); }
+
+  bool contains(const zypp::PoolItem & pi) {
+    return _items.count(getKey(pi));
+  }
+
+  /** defined for use as a functor for filling the IdSet in a for_each */ 
+  bool operator()(const zypp::PoolItem & pi) {
+    addItem(pi);
+    return true;
+  }
+
+  int size() { return _items.size(); }
+};
+
 /**
  * TODO
  */
@@ -146,6 +179,7 @@ private:
   boost::regex _reg;
 
   InstalledCache _icache;
+  IdCache _idcache;
 
   void setupRegexp();
   void cacheInstalled();
@@ -215,7 +249,8 @@ struct FillTable
     zypp::PoolItem inst_item = _icache->getItem(pool_item);
     if (inst_item) {
       // check whether the pool item is installed...
-      if (pool_item.status().isInstalled())
+      if (inst_item.resolvable()->edition() == pool_item.resolvable()->edition() &&
+          inst_item.resolvable()->arch() == pool_item.resolvable()->arch())
         row << "i";
       // ... or there's just another version of it installed
       else
@@ -267,6 +302,20 @@ struct Match {
           regex_match(pi.resolvable()->description(), *_regex)
             :
         false);
+  }
+};
+
+/**
+ * Filters target poolitems which have their counterpart among source
+ * resolvables.
+ */
+struct DuplicateFilter {
+  IdCache * _idcache;
+
+  DuplicateFilter(IdCache & idcache) : _idcache(&idcache) {}
+
+  bool operator()(const zypp::PoolItem & pi) const {
+    return !(pi.status().isInstalled() && _idcache->contains(pi));
   }
 };
 

@@ -12,7 +12,6 @@ using namespace zypp;
 using namespace zypp::functor;
 using namespace zypp::resfilter;
 
-// TODO get rid of these globals
 extern RuntimeData gData;
 
 void ZyppSearchOptions::resolveConflicts() {
@@ -30,7 +29,7 @@ void ZyppSearchOptions::resolveConflicts() {
  * Initializes installation sources, creates search regex, caches installed
  * packages from RPM database, and populates ResPool with items from
  * installation sources.
- */ 
+ */
 ZyppSearch::ZyppSearch (
     ZYpp::Ptr & zypp,
     const ZyppSearchOptions & options,
@@ -51,6 +50,10 @@ ZyppSearch::ZyppSearch (
   setupRegexp();
   cacheInstalled();
   load_sources(); // populates ResPool with resolvables from inst. sources
+
+  // cache identification strings of source resolvables (used to check for
+  // duplicates of target resolvables in sources - DuplicateFilter)
+  invokeOnEachSearched(not_c(ByInstalled()), functorRef<bool,const zypp::PoolItem &>(_idcache));
 }
 
 /**
@@ -131,6 +134,8 @@ void ZyppSearch::doSearch(const boost::function<bool(const PoolItem &)> & f) {
     default:
       filter = Match(_reg,_options.searchDescriptions());
   }
+  
+  filter = chain(filter,DuplicateFilter(_idcache));
 
   invokeOnEachSearched(filter, f);
 }
