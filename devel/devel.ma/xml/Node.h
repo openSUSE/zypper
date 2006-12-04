@@ -36,14 +36,10 @@ namespace zypp
     {
     public:
       /** Default ctor. */
-      Node()
-      : _reader( _no_reader )
-      {}
+      Node();
 
       /** Ctor referencing a \ref Reader. */
-      Node( xmlTextReaderPtr const & reader_r )
-      : _reader( reader_r )
-      {}
+      Node( xmlTextReaderPtr const & reader_r );
 
       /** Validate Node in a boolean context. \see \ref SafeBool. */
       using base::SafeBool<Node>::operator bool_type;

@@ -9,7 +9,6 @@
 /** \file zypp/xml/Reader.cc
  *
 */
-
 extern "C"
 {
 #include <libxml/xmlreader.h>

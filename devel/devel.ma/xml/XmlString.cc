@@ -21,6 +21,23 @@ namespace zypp
   namespace xml
   { /////////////////////////////////////////////////////////////////
 
+    ///////////////////////////////////////////////////////////////////
+    //
+    //	METHOD NAME : XmlString::XmlString
+    //	METHOD TYPE : Constructor
+    //
+    XmlString::XmlString( const xmlChar *const xmlstr_r,
+                          OnDelete ondelete_r )
+    {
+      if ( xmlstr_r )
+        {
+          if ( ondelete_r == FREE )
+            _xmlstr.reset( xmlstr_r, Deleter() );
+          else
+            _xmlstr.reset( xmlstr_r, NullDeleter() );
+        }
+    }
+
     /******************************************************************
      **
      **	FUNCTION NAME : operator<<

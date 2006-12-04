@@ -54,16 +54,7 @@ namespace zypp
        * Pass \c FREE as 2nd arg if \c xmlFree needs to be called on destruction.
       */
       XmlString( const xmlChar *const xmlstr_r = NULL,
-                 OnDelete ondelete_r = NOFREE )
-      {
-        if ( xmlstr_r )
-          {
-            if ( ondelete_r == FREE )
-              _xmlstr.reset( xmlstr_r, Deleter() );
-            else
-              _xmlstr.reset( xmlstr_r, NullDeleter() );
-          }
-      }
+                 OnDelete ondelete_r           = NOFREE );
 
       /** Access the <tt>xmlChar *</tt>. */
       const xmlChar *const get() const

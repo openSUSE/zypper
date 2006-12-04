@@ -9,7 +9,6 @@
 /** \file zypp/xml/Reader.cc
  *
 */
-
 extern "C"
 {
 #include <libxml/xmlreader.h>
@@ -34,6 +33,24 @@ namespace zypp
   { /////////////////////////////////////////////////////////////////
 
     xmlTextReaderPtr const Node::_no_reader = 0;
+
+    ///////////////////////////////////////////////////////////////////
+    //
+    //	METHOD NAME : Node::Node
+    //	METHOD TYPE : Constructor
+    //
+    Node::Node()
+    : _reader( _no_reader )
+    {}
+
+    ///////////////////////////////////////////////////////////////////
+    //
+    //	METHOD NAME : Node::Node
+    //	METHOD TYPE : Constructor
+    //
+    Node::Node( xmlTextReaderPtr const & reader_r )
+    : _reader( reader_r )
+    {}
 
     /******************************************************************
      **
