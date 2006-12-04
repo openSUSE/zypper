@@ -1,0 +1,11 @@
+<channel><subchannel>
+<package>
+	<name>kernel-default</name>
+	<version>1</version>
+	<release>1</release>
+	<summary>Kernel</summary>
+	<description>Kernel</description>
+	<arch>i586</arch>
+	<section>system</section>
+</package>
+</subchannel></channel>
