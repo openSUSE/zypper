@@ -20,6 +20,8 @@ Packages
 
 - upgrade
   = Resolver::doUpgrade
+- install
+	--force-install option
 
 Patterns
 
