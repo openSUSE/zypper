@@ -130,6 +130,11 @@ bool ProvideProcess::operator()( const PoolItem& provider )
       item = provider;
     }
   }
+  else {
+    // store encountered target item (installed)
+    installed_item = provider;
+    if (!item) item = provider;
+  }
 
   return true;
 }
@@ -156,10 +161,19 @@ void mark_for_install( const ResObject::Kind &kind,
     cerr << kind << " '" << name << "' not found" << endl;
     return; //error?
   }
-  
-  bool result = installer.item.status().setToBeInstalled( zypp::ResStatus::USER );
-  if (!result) {
-    cerr << "Failed" << endl;
+
+  if (installer.installed_item &&
+      installer.installed_item.resolvable()->edition() == installer.item.resolvable()->edition() &&
+      installer.installed_item.resolvable()->arch() == installer.item.resolvable()->arch()) {
+    cout << "skipping " << kind.asString() << " '" << name << "' (already installed)" << endl;
+  }
+  else {
+    // TODO don't use setToBeInstalled for this purpose but higher level solver API
+    bool result = installer.item.status().setToBeInstalled( zypp::ResStatus::USER );
+    if (!result) {
+      cerr << "Failed to add '" << name <<
+        "' to the list of packages to be installed." << endl;
+    }
   }
 }
 

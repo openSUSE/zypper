@@ -1,7 +1,9 @@
 -------------------------------------------------------------------
 Fri Dec  1 16:34:22 CET 2006 - jkupec@suse.cz
 
-- fixed ignoring of target resolvables in search (#224673)
+- fixed error output when trying to install an already installed
+  package (#224129)
+- fixed missing target resolvables in search (#224673)
 - 0.6.14
 
 -------------------------------------------------------------------

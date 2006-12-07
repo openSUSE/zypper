@@ -45,6 +45,7 @@ bool confirm_licenses(bool non_interactive = false);
 struct ProvideProcess
 {
   zypp::PoolItem_Ref item;
+  zypp::PoolItem_Ref installed_item;
   zypp::ResStatus::TransactByValue whoWantsIt;
   std::string version;
   zypp::Arch _architecture;
