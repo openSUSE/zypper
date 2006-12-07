@@ -21,6 +21,8 @@
 #include "zypp/media/Mount.h"
 #include <limits.h>
 #include <stdlib.h>
+#include <errno.h>
+
 
 using namespace std;
 
@@ -119,11 +121,23 @@ MediaHandler::getRealPath(const std::string &path)
   if( !path.empty())
   {
 #if __GNUC__ > 2
+    /** GNU extension */
     char *ptr = ::realpath(path.c_str(), NULL);
     if( ptr != NULL)
     {
       real = ptr;
       free( ptr);
+    }
+    else
+    /** the SUSv2 way */
+    if( EINVAL == errno)
+    {
+      char buff[PATH_MAX + 2];
+      memset(buff, '\0', sizeof(buff));
+      if( ::realpath(path.c_str(), buff) != NULL)
+      {
+	real = buff;
+      }
     }
 #else
     char buff[PATH_MAX + 2];

@@ -2,7 +2,7 @@
 Mon Dec  4 15:38:12 CET 2006 - mt@suse.de
 
 - Improved realpath() wrapper in media handler class (#222521).
-- revision 4737
+- revision 4758
 
 -------------------------------------------------------------------
 Thu Nov 30 09:15:20 CET 2006 - ma@suse.de
