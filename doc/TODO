@@ -2,10 +2,12 @@ TODO
 
 General
 
+- implement all rug commands, if only to say: Not implemented (yet)
 - script progress: does the output contain newline??
 - installation and deletion notifications
 - --dry-run (use ZYppCommitPolicy.h)
 - confirm license: more user friendly (see confirm_licenses() comment)
+- testsuite
 
 Patches
 
@@ -22,7 +24,14 @@ Packages
   = Resolver::doUpgrade
 - install
 	--force-install option
+- just download, not install. compare to YOU: do not delete after installing
 
 Patterns
 
 - zypper pattern-info
+
+
+Cool Stuff
+
+(document it, brag around)
+- zypper in -t language zh_CN
