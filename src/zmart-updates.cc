@@ -91,11 +91,30 @@ void render_result( const Edition &version, std::ostream &out, const zypp::ResPo
     out << "  <source url=\"" << it->url() << "\" alias=\"" << it->alias() << "\"/>" << std::endl;
   }
   out << " </update-sources>" << std::endl;
+  
+  // this map is used to keep track of seen patches, so we dont report them twice
+  map< string, Date > patch_map;
+  
   out << " <update-list>" << std::endl;
   for ( ResPool::byKind_iterator it = pool.byKindBegin<Patch>(); it != pool.byKindEnd<Patch>(); ++it )
   {
     Resolvable::constPtr res = it->resolvable();
     Patch::constPtr patch = asKind<Patch>(res);
+    
+    // check we already reported this patch from another source
+    map< string, Date >::iterator known_it = patch_map.find( patch->id() );
+    if ( known_it !=  patch_map.end() )
+    {
+      Date date = known_it->second;
+      if ( date == patch->timestamp() )
+        continue;
+    }
+    else
+    {
+      // add it to the list of seen patches
+      patch_map[patch->id()] = patch->timestamp();
+    }
+    
     MIL << patch->name() << " " << patch->edition() << " " << "[" << patch->category() << "]" << ( it->status().isNeeded() ? " [needed]" : " [unneeded]" )<< std::endl;
     if ( it->status().isNeeded() )
     {

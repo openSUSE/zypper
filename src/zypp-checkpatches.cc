@@ -14,6 +14,7 @@
 #include <fstream>
 #include <sstream>
 
+#include <zypp/base/Gettext.h>
 #include <zypp/target/store/PersistentStorage.h>
 
 #include "checkpatches-keyring-callbacks.h"
@@ -197,7 +198,8 @@ int main(int argc, char **argv)
     }
     catch (const Exception &excpt_r )
     {
-      gData.errors.push_back("Couldn't restore source" + ( excpt_r.msg().empty() ? "\n" : (":\n" + excpt_r.msg())));
+      // TranslatorExplanation %s = detailed low level (unstranslated) error message
+      gData.errors.push_back(str::form(_("Couldn't restore source.\nDetail: %s"), excpt_r.msg()));
     }
   }
   
@@ -242,6 +244,11 @@ int main(int argc, char **argv)
   for ( std::list<Source_Ref>::const_iterator it = gData.sources.begin(); it != gData.sources.end(); ++it )
   {
     God->addResolvables(it->resolvables());
+  }
+  
+  if ( gData.sources.size() == 0 )
+  {
+    gData.errors.push_back( str::form( _( "There are no update sources defined. Please add one or more update sources in order to be notified of updates.") ) );
   }
   
   God->addResolvables( God->target()->resolvables(), true);
