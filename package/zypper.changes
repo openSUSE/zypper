@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Mon Dec 18 15:30:49 CET 2006 - dmacvicar@suse.de
+
+- report error if no update sources are configured (#226067)
+- filter duplicate patches from different sources (#223844)
+- mark some strings for translation.
+- r4812 
+
+-------------------------------------------------------------------
 Mon Dec 18 13:30:10 CET 2006 - jkupec@suse.cz
 
 - fixed uncaught checksum exception (#224216)
