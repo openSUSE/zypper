@@ -893,6 +893,32 @@ int one_command(const string& command, int argc, char **argv)
   return ZYPPER_EXIT_ERR_BUG;
 }
 
+/// tell to report a bug, and how
+// (multiline, with endls)
+ostream& report_a_bug (ostream& stm) {
+  return stm << _("Please report a bug about this.") << endl
+    // remember not to translate the URL
+    // unless you translate the actual page :)
+	     << _("See http://en.opensuse.org/Zypper#Troubleshooting for instructions.") << endl;
+}
+
+/// process one command from the OS shell or the zypper shell
+// catch unexpected exceptions and tell the user to report a bug (#224216)
+int safe_one_command(const string& command, int argc, char **argv)
+{
+  int ret = ZYPPER_EXIT_ERR_BUG;
+  try {
+    ret = one_command (command, argc, argv);
+  }
+  catch (const Exception & ex) {
+    ZYPP_CAUGHT(ex);
+    cerr << _("Unexpected exception.") << endl;
+    cerr << ex.asUserString() << endl;
+    report_a_bug(cerr);
+  }
+  return ret;
+}
+
 void command_shell ()
 {
   bool loop = true;
@@ -914,7 +940,7 @@ void command_shell ()
     if (command == "exit")
       loop = false;
     else
-      one_command (command, sh_argc, sh_argv);
+      safe_one_command (command, sh_argc, sh_argv);
   }
 }
 
@@ -938,7 +964,7 @@ int main(int argc, char **argv)
   if (command == "shell" || command == "sh")
     command_shell ();
   else
-    ret = one_command (command, argc, argv);
+    ret = safe_one_command (command, argc, argv);
 
   return ret;
 }
