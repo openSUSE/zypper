@@ -1,10 +1,15 @@
 -------------------------------------------------------------------
-Mon Dec  4 08:03:57 CET 2006 - jkupec@suse.cz
+Mon Dec 18 13:30:10 CET 2006 - jkupec@suse.cz
+
+- fixed uncaught checksum exception (#224216)
+- 0.6.14
+
+-------------------------------------------------------------------
+Fri Dec  1 16:34:22 CET 2006 - jkupec@suse.cz
 
 - fixed error output when trying to install an already installed
   package (#224129)
 - fixed missing target resolvables in search (#224673)
-- r 0.6.14
 
 -------------------------------------------------------------------
 Fri Dec  1 15:40:10 CET 2006 - mvidner@suse.cz
