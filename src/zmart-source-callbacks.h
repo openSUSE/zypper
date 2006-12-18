@@ -192,6 +192,7 @@ struct DownloadResolvableReportReceiver : public zypp::callback::ReceiveReport<z
   
   virtual Action problem( zypp::Resolvable::constPtr resolvable_ptr, Error /*error*/, cbstring description )
   {
+    // TODO read user's answer whether to retry or what. Consider non-interactive mode, too
     std::cerr << resolvable_ptr << " " << description << std::endl;
     std::cerr << "(aborting)" << std::endl;
     return ABORT;

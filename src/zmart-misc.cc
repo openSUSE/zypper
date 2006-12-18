@@ -711,10 +711,33 @@ int solve_and_commit (bool non_interactive) {
       if (!confirm_licenses(non_interactive)) return ZYPPER_EXIT_OK;
 
       cerr_v << "committing" << endl;
-      ZYppCommitResult result = God->commit( ZYppCommitPolicy() );
-      if (!result._errors.empty())
-        retv = ZYPPER_EXIT_ERR_ZYPP;
-      cerr_v << result << std::endl;
+      
+      try {
+        ZYppCommitResult result = God->commit( ZYppCommitPolicy() );
+
+        if (!result._errors.empty())
+          retv = ZYPPER_EXIT_ERR_ZYPP;
+
+        cerr_v << result << std::endl;
+      }
+      catch ( const Exception & excpt_r ) {
+        ZYPP_CAUGHT( excpt_r );
+        
+        // special handling for failed integrity exception
+        if (excpt_r.msg().find("fails integrity check") != string::npos) {
+          cerr << endl
+            << _("Package integrity check failed. This may be a problem"
+            " with installation source or media. Try one of the following:\n"
+            "\n"
+            "- just retry previous command\n"
+            "- refresh installation sources using 'zypper refresh'\n"
+            "- use another installation media (if e.g. damaged)\n"
+            "- use another installation source") << endl;
+          return ZYPPER_EXIT_ERR_ZYPP;
+        }
+        else
+          ZYPP_RETHROW( excpt_r );
+      }
     }
   }
 
