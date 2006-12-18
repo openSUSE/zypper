@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Mon Dec 18 15:59:43 CET 2006 - dmacvicar@suse.de
+
+- Show a better message when we can't acquire the lock
+  (#227073)
+- r4814 
+
+-------------------------------------------------------------------
 Mon Dec 18 15:30:49 CET 2006 - dmacvicar@suse.de
 
 - report error if no update sources are configured (#226067)
