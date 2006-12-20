@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <test allow_virtual_conflicts="yes">
 <setup>
-  <channel name="test" file="exercise-20-packages.xml"/>
+  <channel name="test" file="exercise-20-packages.xml.gz"/>
 </setup>
 <trial>
   <install channel="test" package="G"/>

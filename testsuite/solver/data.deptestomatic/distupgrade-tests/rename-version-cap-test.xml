@@ -4,7 +4,7 @@
 -->
 <test>
 <setup>
-  <system file="version-rename-system.xml"/>
+  <system file="version-rename-system.xml.gz"/>
   <channel name="upgrade" file="version-rename-package.xml"/>
 </setup>
 <trial>

@@ -4,8 +4,8 @@
 -->
 <test>
 <setup>
-  <channel name="sl10_packages" file="beta9-packages.xml"/>
-  <channel name="sl10_selections" file="beta9-selections.xml"/>
+  <channel name="sl10_packages" file="beta9-packages.xml.gz"/>
+  <channel name="sl10_selections" file="beta9-selections.xml.gz"/>
   <locale name="de_DE"/>
   <mediaid/>
 </setup>

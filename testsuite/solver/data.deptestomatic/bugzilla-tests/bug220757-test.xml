@@ -2,8 +2,8 @@
 <!-- testcase for bug 220757; Deleting package should delete concerning packages too -->
 <test>
 <setup arch="i686">
-	<system file="bug220757-system.xml"/>
-	<channel file="../repos/sles10/sles-10-i386-1407-packages.xml" name="1" />
+	<system file="bug220757-system.xml.gz"/>
+	<channel file="../repos/sles10/sles-10-i386-1407-packages.xml.gz" name="1" />
 </setup>
 <trial>
 <uninstall  kind="pattern" name="oracle_server"/>

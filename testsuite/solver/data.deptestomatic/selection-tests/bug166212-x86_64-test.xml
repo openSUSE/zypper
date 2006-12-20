@@ -4,8 +4,8 @@
 -->
 <test>
 <setup arch="x86_64">
-  <channel name="packages" file="beta6-packages.xml"/>
-  <channel name="selections" file="beta6-selections.xml"/>
+  <channel name="packages" file="beta6-packages.xml.gz"/>
+  <channel name="selections" file="beta6-selections.xml.gz"/>
 </setup>
 <trial>
   <install channel="selections" kind="selection" name="x11"/>

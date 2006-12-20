@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <test>
 <setup arch="i686">
-  <channel name="sles10" file="../repos/sles10/sles-10-i386-1407-packages.xml"/>
-  <channel name="stable" file="../repos/stable/stable-i386-20060718-packages.xml"/>
+  <channel name="sles10" file="../repos/sles10/sles-10-i386-1407-packages.xml.gz"/>
+  <channel name="stable" file="../repos/stable/stable-i386-20060718-packages.xml.gz"/>
 </setup>
 <trial>
   <install channel="sles10" package="apache2-mod_python"/>

@@ -4,7 +4,7 @@
 -->
 <test>
 <setup arch="i686">
-  <system file="../repos/sled10/sled-10-i386-1408-default-system.xml"/>
+  <system file="../repos/sled10/sled-10-i386-1408-default-system.xml.gz"/>
 </setup>
 <trial>
   <uninstall package="MozillaFirefox"/>

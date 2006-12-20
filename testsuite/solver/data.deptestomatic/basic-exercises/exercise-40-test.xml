@@ -2,8 +2,8 @@
 <test>
 
 <setup>
-  <system file="exercise-40-system.xml"/>
-  <channel name="empty" file="exercise-40-packages.xml"/>
+  <system file="exercise-40-system.xml.gz"/>
+  <channel name="empty" file="exercise-40-packages.xml.gz"/>
 </setup>
 
 <trial>

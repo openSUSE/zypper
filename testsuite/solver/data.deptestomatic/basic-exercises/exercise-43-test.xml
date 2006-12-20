@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <test>
 <setup>
-  <system file="exercise-25-system.xml"/>
+  <system file="exercise-25-system.xml.gz"/>
   <channel name="redhat" file="exercise-43-packages-1.xml"/>
   <channel name="ximian" file="exercise-43-packages-2.xml"/>
 </setup>

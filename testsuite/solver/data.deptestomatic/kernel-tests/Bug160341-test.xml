@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <test>
 <setup>
-  <system file="Bug160341-system.xml"/>
-  <channel name="packages2" file="2.6.16_rc5_git14-3-packages.xml"/>
+  <system file="Bug160341-system.xml.gz"/>
+  <channel name="packages2" file="2.6.16_rc5_git14-3-packages.xml.gz"/>
   <hardwareInfo path="kernel-hardware"/>
 </setup>
 <!-- 

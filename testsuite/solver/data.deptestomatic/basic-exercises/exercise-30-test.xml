@@ -2,8 +2,8 @@
 <test>
 
 <setup>
-  <channel name="redhat" file="exercise-30-packages.xml"/>
-  <system file="exercise-25-system.xml"/>
+  <channel name="redhat" file="exercise-30-packages.xml.gz"/>
+  <system file="exercise-25-system.xml.gz"/>
 </setup>
 
 <trial>

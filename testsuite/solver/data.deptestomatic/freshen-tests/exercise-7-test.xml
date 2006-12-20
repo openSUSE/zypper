@@ -11,8 +11,8 @@
 -->
 <test allow_virtual_conflicts="yes">
 <setup>
-  <channel name="core" file="exercise-7-packages.xml"/>
-  <channel name="test" file="exercise-1-packages.xml"/>
+  <channel name="core" file="exercise-7-packages.xml.gz"/>
+  <channel name="test" file="exercise-1-packages.xml.gz"/>
 </setup>
 <trial>
   <establish/>

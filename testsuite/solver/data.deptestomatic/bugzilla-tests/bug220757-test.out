@@ -1,0 +1,32 @@
+Load from File './bug220757-system.xml.gz'
+Added source '@system' with 3 resolvables
+Loaded 3 resolvables from bug220757-system.xml.gz.
+Load from File './../repos/sles10/sles-10-i386-1407-packages.xml.gz'
+Added source '1' with 1886 resolvables
+Loaded 1886 resolvables from ../repos/sles10/sles-10-i386-1407-packages.xml.gz.
+
+------------------------------------------------
+
+>!> Uninstalling oracle_server
+>!> No problems so far
+
+Completed solutions: 1
+Pruned solutions: 0
+Deferred solutions: 0
+Invalid solutions: 0
+
+Best Solution:
+>!> Solution #1:
+Checksum = 3a1d5a9e
+>!> remove  pattern:oracle_server-10-51.21.i586
+>!> installs=0, upgrades=0, uninstalls=1
+download size=0.0k, install size=0.0k
+total priority=0, min priority=2147483647, max priority=0
+other penalties=0
+- - - - - - - - - -
+Context Info:
+Context Context:
+ResolverContext with 1 entries
+I_Tu_[S1:0][pattern]oracle_server-10-51.21.i586 : I_Ts_
+
+

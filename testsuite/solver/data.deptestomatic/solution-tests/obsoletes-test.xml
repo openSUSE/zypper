@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <test>
 <setup>
-  <system file="obsoletes-system.xml"/>
-  <channel name="test" file="obsoletes-packages.xml"/>
+  <system file="obsoletes-system.xml.gz"/>
+  <channel name="test" file="obsoletes-packages.xml.gz"/>
 </setup>
 
 <!-- foo is installed, but obsoleted by candidate foonew which is set for installation. 

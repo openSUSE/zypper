@@ -1,0 +1,102 @@
+Load from File './bug208784-system.xml.gz'
+Added source '@system' with 655 resolvables
+Loaded 655 resolvables from bug208784-system.xml.gz.
+Load from File './../repos/sles10/sles-10-i386-1407-packages.xml.gz'
+Added source 'sles10' with 1886 resolvables
+Loaded 1886 resolvables from ../repos/sles10/sles-10-i386-1407-packages.xml.gz.
+Load from File './oes-packages.xml.gz'
+Added source 'oes' with 187 resolvables
+Loaded 187 resolvables from oes-packages.xml.gz.
+
+------------------------------------------------
+
+>!> Installing novell-cluster-services from channel oes
+
+Completed solutions: 3
+Pruned solutions: 0
+Deferred solutions: 0
+Invalid solutions: 0
+
+Best Solution:
+>!> Solution #1:
+Checksum = 34ae9c5
+>!> install novell-cluster-services-1.8.4-8.i586[oes]
+>!> install novell-cluster-services-cli-1.0.31-2.i586[oes]
+>!> install novell-cluster-services-kmp-default-1.8.4_2.6.16.21_0.25-8.i586[oes]
+>!> install novell-evms-plugins-2.0.41-2.i586[oes]
+>!> install nss-kmp-default-4.10.1525_2.6.16.21_0.25-2.i586[oes]
+>!> |unflag evms-ha-2.5.5-24.12.i586[sles10]
+>!> installs=5, upgrades=0, uninstalls=0
+download size=0.0k, install size=0.0k
+total priority=0, min priority=0, max priority=0
+other penalties=0
+- - - - - - - - - -
+Context Info:
+Context Context:
+Parent @0x8acc650
+ResolverContext with 5 entries
+U__s_[S2:1][package]evms-ha-2.5.5-24.12.i586 : U__s_X
+U_Tu_[S3:1][package]novell-cluster-services-1.8.4-8.i586 : U_Ts_
+U_Ts_[S3:1][package]novell-cluster-services-cli-1.0.31-2.i586 : U_Ts_
+U_Ts_[S3:1][package]novell-cluster-services-kmp-default-1.8.4_2.6.16.21_0.25-8.i586 : U_Ts_
+U_Ts_[S3:1][package]novell-evms-plugins-2.0.41-2.i586 : U_Ts_
+ResolverContext with 1 entries
+U_Ts_[S3:1][package]nss-kmp-default-4.10.1525_2.6.16.21_0.25-2.i586 : U_Ts_
+
+
+Other Valid Solutions:
+>!> Solution #2:
+Checksum = f50e145b
+>!> install kernel-smp-2.6.16.21-0.8.i586[sles10]
+>!> install novell-cluster-services-1.8.4-8.i586[oes]
+>!> install novell-cluster-services-cli-1.0.31-2.i586[oes]
+>!> install novell-cluster-services-kmp-default-1.8.4_2.6.16.21_0.25-8.i586[oes]
+>!> install novell-evms-plugins-2.0.41-2.i586[oes]
+>!> install nss-kmp-smp-4.10.1525_2.6.16.21_0.25-2.i586[oes]
+>!> |unflag evms-ha-2.5.5-24.12.i586[sles10]
+>!> installs=6, upgrades=0, uninstalls=0
+download size=0.0k, install size=0.0k
+total priority=0, min priority=0, max priority=0
+other penalties=0
+- - - - - - - - - -
+Context Info:
+Context Context:
+Parent @0x8acc650
+ResolverContext with 5 entries
+U__s_[S2:1][package]evms-ha-2.5.5-24.12.i586 : U__s_X
+U_Tu_[S3:1][package]novell-cluster-services-1.8.4-8.i586 : U_Ts_
+U_Ts_[S3:1][package]novell-cluster-services-cli-1.0.31-2.i586 : U_Ts_
+U_Ts_[S3:1][package]novell-cluster-services-kmp-default-1.8.4_2.6.16.21_0.25-8.i586 : U_Ts_
+U_Ts_[S3:1][package]novell-evms-plugins-2.0.41-2.i586 : U_Ts_
+ResolverContext with 2 entries
+U__s_[S2:1][package]kernel-smp-2.6.16.21-0.8.i586 : U_Ts_
+U__s_[S3:1][package]nss-kmp-smp-4.10.1525_2.6.16.21_0.25-2.i586 : U_Ts_
+
+>!> Solution #3:
+Checksum = 6800e9cf
+>!> install kernel-bigsmp-2.6.16.21-0.8.i586[sles10]
+>!> install novell-cluster-services-1.8.4-8.i586[oes]
+>!> install novell-cluster-services-cli-1.0.31-2.i586[oes]
+>!> install novell-cluster-services-kmp-default-1.8.4_2.6.16.21_0.25-8.i586[oes]
+>!> install novell-evms-plugins-2.0.41-2.i586[oes]
+>!> install nss-kmp-bigsmp-4.10.1525_2.6.16.21_0.25-2.i586[oes]
+>!> |unflag evms-ha-2.5.5-24.12.i586[sles10]
+>!> installs=6, upgrades=0, uninstalls=0
+download size=0.0k, install size=0.0k
+total priority=0, min priority=0, max priority=0
+other penalties=0
+- - - - - - - - - -
+Context Info:
+Context Context:
+Parent @0x8acc650
+ResolverContext with 5 entries
+U__s_[S2:1][package]evms-ha-2.5.5-24.12.i586 : U__s_X
+U_Tu_[S3:1][package]novell-cluster-services-1.8.4-8.i586 : U_Ts_
+U_Ts_[S3:1][package]novell-cluster-services-cli-1.0.31-2.i586 : U_Ts_
+U_Ts_[S3:1][package]novell-cluster-services-kmp-default-1.8.4_2.6.16.21_0.25-8.i586 : U_Ts_
+U_Ts_[S3:1][package]novell-evms-plugins-2.0.41-2.i586 : U_Ts_
+ResolverContext with 2 entries
+U__s_[S2:1][package]kernel-bigsmp-2.6.16.21-0.8.i586 : U_Ts_
+U__s_[S3:1][package]nss-kmp-bigsmp-4.10.1525_2.6.16.21_0.25-2.i586 : U_Ts_
+
+

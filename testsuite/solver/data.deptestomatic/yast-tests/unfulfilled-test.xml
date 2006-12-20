@@ -4,7 +4,7 @@
 <!--error message -->
 <test>
 <setup>
-  <channel name="sles_packages" file="sles10-beta8-packages.xml"/>
+  <channel name="sles_packages" file="sles10-beta8-packages.xml.gz"/>
   <locale name="de"/>
   <locale name="de_DE"/>
   <mediaid/>

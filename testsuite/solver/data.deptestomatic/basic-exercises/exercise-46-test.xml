@@ -2,8 +2,8 @@
 <test>
 
 <setup>
-  <system file="exercise-46-system.xml"/>
-  <channel name="ximian" file="exercise-46-packages.xml"/>
+  <system file="exercise-46-system.xml.gz"/>
+  <channel name="ximian" file="exercise-46-packages.xml.gz"/>
 </setup>
 
 <trial>

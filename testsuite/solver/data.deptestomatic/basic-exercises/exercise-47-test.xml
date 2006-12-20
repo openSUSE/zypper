@@ -2,7 +2,7 @@
 <test>
 
 <setup>
-  <system file="exercise-47-system.xml"/>
+  <system file="exercise-47-system.xml.gz"/>
 </setup>
 
 <trial>

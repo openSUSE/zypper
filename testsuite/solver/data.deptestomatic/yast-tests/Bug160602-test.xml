@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <test>
 <setup>
-  <channel name="patterns" file="Bug160602-patterns.xml"/>
+  <channel name="patterns" file="Bug160602-patterns.xml.gz"/>
 </setup>
 
 <!-- Bug160602 ; Freshens and Supplements in patterns-->

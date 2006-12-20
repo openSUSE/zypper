@@ -1,0 +1,179 @@
+Load from File './bug217574-system.xml.gz'
+Added source '@system' with 657 resolvables
+Loaded 657 resolvables from bug217574-system.xml.gz.
+
+------------------------------------------------
+
+>!> Uninstalling default
+
+Completed solutions: 1
+Pruned solutions: 0
+Deferred solutions: 0
+Invalid solutions: 0
+
+Best Solution:
+>!> Solution #1:
+Checksum = f884f5e3
+>!> remove  autofs-4.1.4-23.4.i586
+>!> remove  compat-2006.1.25-11.2.i586
+>!> remove  cups-1.1.23-40.6.i586
+>!> remove  cups-SUSE-ppds-dat-1.1.20-119.2.i586
+>!> remove  cups-drivers-1.1.23-28.2.i586
+>!> remove  cups-drivers-stp-1.1.23-28.2.i586
+>!> remove  dos2unix-3.1-317.2.i586
+>!> remove  dosbootdisk-1.1-53.2.i586
+>!> remove  dosfstools-2.11-15.2.i586
+>!> remove  filters-2006.1.25-11.2.i586
+>!> remove  gdb-6.4-19.10.i586
+>!> remove  ghostscript-fonts-other-8.15.2rc1-20.4.i586
+>!> remove  ghostscript-x11-8.15.2rc1-20.4.i586
+>!> remove  joe-3.3-15.2.i586
+>!> remove  libcap-1.92-499.4.i586
+>!> remove  libevent-1.1-13.2.i586
+>!> remove  librpcsecgss-0.7-13.4.i586
+>!> remove  libsamplerate-0.1.2-15.2.i586
+>!> remove  log4net-1.2.9-17.4.i586
+>!> remove  man-pages-2.32-0.3.noarch
+>!> remove  manufacturer-PPDs-0.5-19.2.noarch
+>!> remove  microcode_ctl-1.13-13.1.i586
+>!> remove  nfs-utils-1.0.7-36.10.i586
+>!> remove  nfsidmap-0.12-16.2.i586
+>!> remove  ntfsprogs-1.11.2-15.2.i586
+>!> remove  screen-4.0.2-62.2.i586
+>!> remove  selection:default-10.0-115.noarch
+>!> remove  smpppd-1.59-19.2.i586
+>!> remove  strace-4.5.14-15.2.i586
+>!> remove  sudo-1.6.8p12-18.2.i586
+>!> remove  xinetd-2.3.14-14.2.i586
+>!> remove  xntp-4.2.0a-70.4.i586
+>!> remove  yast2-samba-server-2.13.11-1.3.noarch
+>!> remove  ypbind-1.19.1-14.4.i586
+>!> remove  zip-2.31-15.2.i586
+>!> remove  zsh-4.2.6-15.2.i586
+>!> installs=0, upgrades=0, uninstalls=36
+download size=0.0k, install size=0.0k
+total priority=0, min priority=2147483647, max priority=0
+other penalties=0
+- - - - - - - - - -
+Context Info:
+Context Context:
+ResolverContext with 117 entries
+I__s_[S1:0][package]librsvg-2.12.7-16.2.i586 : I__s_
+I_Ts_[S1:0][package]cups-drivers-stp-1.1.23-28.2.i586 : I_TsL
+I_Ts_[S1:0][package]cups-drivers-1.1.23-28.2.i586 : I_TsL
+I__s_[S1:0][package]ghostscript-library-8.15.2rc1-20.4.i586 : I__s_
+I__s_[S1:0][package]python-2.4.2-18.2.i586 : I__s_
+I__s_[S1:0][package]libgnomecanvas-2.12.0-19.2.i586 : I__s_
+I_Ts_[S1:0][package]xntp-4.2.0a-70.4.i586 : I_TsL
+I_Ts_[S1:0][package]nfs-utils-1.0.7-36.10.i586 : I_TsL
+I__s_[S1:0][package]gnome-keyring-0.4.6-18.4.i586 : I__s_
+I__s_[S1:0][package]samba-client-3.0.22-13.16.i586 : I__s_
+I_Ts_[S1:0][package]autofs-4.1.4-23.4.i586 : I_TsL
+I__s_[S1:0][package]libgnomecups-0.2.2-21.2.i586 : I__s_
+I__s_[S1:0][package]a2ps-4.13-1077.2.i586 : I__s_
+I__s_[S1:0][package]wget-1.10.2-15.4.i586 : I__s_
+I__s_[S1:0][package]pango-1.10.2-23.2.i586 : I__s_
+I__s_[S1:0][package]cups-libs-1.1.23-40.6.i586 : I__s_
+I__s_[S1:0][package]gnome-filesystem-0.1-261.2.i586 : I__s_
+I_Ts_[S1:0][package]libevent-1.1-13.2.i586 : I_TsL
+I_Ts_[S1:0][package]compat-2006.1.25-11.2.i586 : I_TsL
+I__s_[S1:0][package]libvorbis-1.1.2-13.2.i586 : I__s_
+I__s_[S1:0][package]xorg-x11-libs-6.9.0-50.14.i586 : I__s_
+I_Ts_[S1:0][package]ntfsprogs-1.11.2-15.2.i586 : I_TsL
+I__s_[S1:0][package]libnetpbm-1.0.0-657.2.i586 : I__s_
+I__s_[S1:0][package]libpcap-0.9.4-12.2.i586 : I__s_
+I__s_[S1:0][package]expat-2.0.0-13.2.i586 : I__s_
+I_Ts_[S1:0][package]manufacturer-PPDs-0.5-19.2.noarch : I_TsL
+I__s_[S1:0][package]gnome-desktop-2.12.2-25.2.i586 : I__s_
+I_Ts_[S1:0][package]yast2-samba-server-2.13.11-1.3.noarch : I_TsL
+I__s_[S1:0][package]libgnomeprintui-2.12.1-20.2.i586 : I__s_
+I__s_[S1:0][package]libgnomesu-1.0.0-32.6.i586 : I__s_
+I__s_[S1:0][package]zen-updater-7.1.0-51.28.i586 : I__s_
+I__s_[S1:0][package]yast2-printer-2.13.19-1.2.i586 : I__s_
+I__s_[S1:0][package]libgnomeui-2.12.0-28.4.i586 : I__s_
+I_Ts_[S1:0][package]cups-SUSE-ppds-dat-1.1.20-119.2.i586 : I_TsL
+I_Ts_[S1:0][package]filters-2006.1.25-11.2.i586 : I_TsL
+I_Ts_[S1:0][package]cups-1.1.23-40.6.i586 : I_TsL
+I_Ts_[S1:0][package]ghostscript-x11-8.15.2rc1-20.4.i586 : I_TsL
+I__s_[S1:0][package]hplip-hpijs-0.9.7-19.2.i586 : I__s_
+I__s_[S1:0][package]gail-1.8.8-15.2.i586 : I__s_
+I_Ts_[S1:0][package]log4net-1.2.9-17.4.i586 : I_TsL
+I__s_[S1:0][package]dbus-1-x11-0.60-33.2.i586 : I__s_
+I_Ts_[S1:0][package]ypbind-1.19.1-14.4.i586 : I_TsL
+I_Ts_[S1:0][package]smpppd-1.59-19.2.i586 : I_TsL
+I__s_[S1:0][package]cdrdao-1.2.0-18.2.i586 : I__s_
+I__s_[S1:0][package]libgnomeprint-2.12.1-20.6.i586 : I__s_
+I__s_[S1:0][package]foomatic-filters-3.0.2-20.5.i586 : I__s_
+I__s_[S1:0][package]xorg-x11-1.54-82.2.i586 : I__s_
+I__s_[S1:0][package]perl-DBI-1.50-13.2.i586 : I__s_
+I__s_[S1:0][package]opensc-0.9.6-17.2.i586 : I__s_
+I__s_[S1:0][package]cups-client-1.1.23-40.6.i586 : I__s_
+I__s_[S1:0][package]cdrecord-2.01-25.2.i586 : I__s_
+I__s_[S1:0][package]gtk2-2.8.10-39.12.i586 : I__s_
+I__s_[S1:0][package]wireless-tools-28pre13-22.4.i586 : I__s_
+I__s_[S1:0][package]libcroco-0.6.0-23.2.i586 : I__s_
+I__s_[S1:0][package]ghostscript-fonts-std-8.15.2rc1-20.4.i586 : I__s_
+I__s_[S1:0][package]atk-1.10.3-15.2.i586 : I__s_
+I__s_[S1:0][package]apparmor-parser-2.0-21.4.i586 : I__s_
+I_Ts_[S1:0][package]xinetd-2.3.14-14.2.i586 : I_TsL
+I__s_[S1:0][package]pptp-1.7.0-13.2.i586 : I__s_
+I__s_[S1:0][package]perl-TimeDate-1.16-136.2.i586 : I__s_
+I__s_[S1:0][package]bootsplash-3.3-17.2.i586 : I__s_
+I__s_[S1:0][package]glib-1.2.10-609.2.i586 : I__s_
+I__s_[S1:0][package]aalib-1.4.0-305.2.i586 : I__s_
+I__s_[S1:0][package]slang-2.0.5-14.2.i586 : I__s_
+I_Ts_[S1:0][package]microcode_ctl-1.13-13.1.i586 : I_TsL
+I__s_[S1:0][package]openct-0.6.6-16.2.i586 : I__s_
+I__s_[S1:0][package]glitz-0.4.4-21.2.i586 : I__s_
+I_Ts_[S1:0][package]zsh-4.2.6-15.2.i586 : I_TsL
+I__s_[S1:0][package]wdiff-0.5.2-674.2.i586 : I__s_
+I_Ts_[S1:0][package]sudo-1.6.8p12-18.2.i586 : I_TsL
+I_Ts_[S1:0][package]screen-4.0.2-62.2.i586 : I_TsL
+I__s_[S1:0][package]ppp-2.4.3-33.2.i586 : I__s_
+I_Ts_[S1:0][package]gdb-6.4-19.10.i586 : I_TsL
+I__s_[S1:0][package]unzip-5.52-16.2.i586 : I__s_
+I__s_[S1:0][package]yp-tools-2.9-16.2.i586 : I__s_
+I_Ts_[S1:0][package]libsamplerate-0.1.2-15.2.i586 : I_TsL
+I__s_[S1:0][package]libogg-1.1.3-13.2.i586 : I__s_
+I__s_[S1:0][package]liblcms-1.15-12.2.i586 : I__s_
+I__s_[S1:0][package]libgimpprint-4.2.7-62.4.i586 : I__s_
+I__s_[S1:0][package]zisofs-tools-1.0.6-15.2.i586 : I__s_
+I__s_[S1:0][package]libpng-1.2.8-19.2.i586 : I__s_
+I_Ts_[S1:0][package]joe-3.3-15.2.i586 : I_TsL
+I_Ts_[S1:0][package]dosfstools-2.11-15.2.i586 : I_TsL
+I__s_[S1:0][package]freetype2-2.1.10-18.5.i586 : I__s_
+I_Ts_[S1:0][package]zip-2.31-15.2.i586 : I_TsL
+I__s_[S1:0][package]libjpeg-6.2.0-752.2.i586 : I__s_
+I__s_[S1:0][package]cifs-mount-3.0.22-13.16.i586 : I__s_
+I__s_[S1:0][package]gle-3.0.6-661.2.i586 : I__s_
+I_Ts_[S1:0][package]man-pages-2.32-0.3.noarch : I_TsL
+I_Ts_[S1:0][package]ghostscript-fonts-other-8.15.2rc1-20.4.i586 : I_TsL
+I__s_[S1:0][package]zmd-7.1.1.0-39.49.i586 : I__s_
+I__s_[S1:0][package]libbonoboui-2.10.1-23.2.i586 : I__s_
+I__s_[S1:0][package]net-snmp-5.3.0.1-25.2.i586 : I__s_
+I__s_[S1:0][package]gpg2-1.9.18-17.2.i586 : I__s_
+I__s_[S1:0][package]perl-DBD-SQLite-1.11-14.2.i586 : I__s_
+I__s_[S1:0][package]libglade2-2.5.1-24.2.i586 : I__s_
+I_Ts_[S1:0][package]nfsidmap-0.12-16.2.i586 : I_TsL
+I__s_[S1:0][package]libao-0.8.6-19.2.i586 : I__s_
+I__s_[S1:0][package]wvstreams-4.2.1-15.2.i586 : I__s_
+I__s_[S1:0][package]shared-mime-info-0.17-9.2.i586 : I__s_
+I__s_[S1:0][package]libgsf-1.13.99-13.4.i586 : I__s_
+I_Ts_[S1:0][package]strace-4.5.14-15.2.i586 : I_TsL
+I__s_[S1:0][package]update-alternatives-1.8.3-16.2.noarch : I__s_
+I__s_[S1:0][package]SDL-1.2.9-19.4.i586 : I__s_
+I__s_[S1:0][package]perl-TermReadKey-2.30-13.2.i586 : I__s_
+I_Ts_[S1:0][package]librpcsecgss-0.7-13.4.i586 : I_TsL
+I__s_[S1:0][package]cairo-1.0.2-27.4.i586 : I__s_
+I__s_[S1:0][package]libgssapi-0.6-13.2.i586 : I__s_
+I__s_[S1:0][package]libmng-1.0.9-16.2.i586 : I__s_
+I_Ts_[S1:0][package]dosbootdisk-1.1-53.2.i586 : I_TsL
+I__s_[S1:0][package]unrar-3.5.4-15.2.i586 : I__s_
+I__s_[S1:0][package]libtiff-3.8.2-5.6.i586 : I__s_
+I__s_[S1:0][package]fontconfig-2.3.94-18.5.i586 : I__s_
+I_Ts_[S1:0][package]dos2unix-3.1-317.2.i586 : I_TsL
+I_Ts_[S1:0][package]libcap-1.92-499.4.i586 : I_TsL
+I__s_[S1:0][package]gnome-icon-theme-2.12.1-27.2.noarch : I__s_
+I_Tu_[S1:0][selection]default-10.0-115.noarch : I_Ts_
+
+

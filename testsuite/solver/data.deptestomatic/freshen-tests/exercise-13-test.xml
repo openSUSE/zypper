@@ -8,7 +8,7 @@
 -->
 <test>
 <setup>
-  <system file="exercise-1-packages.xml"/>
+  <system file="exercise-1-packages.xml.gz"/>
 </setup>
 <trial>
   <establish/>

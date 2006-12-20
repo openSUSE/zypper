@@ -7,7 +7,7 @@
 -->
 <test allow_virtual_conflicts="yes">
 <setup>
-  <channel name="test" file="exercise-bug171590-packages.xml"/>
+  <channel name="test" file="exercise-bug171590-packages.xml.gz"/>
 </setup>
 <trial>
   <establish/>

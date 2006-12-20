@@ -7,8 +7,8 @@
 -->
 <test>
 <setup>
-  <channel name="sl10_packages" file="sl10.1-beta7-packages.xml"/>
-  <channel name="sl10_selections" file="sl10.1-beta7-selections.xml"/>
+  <channel name="sl10_packages" file="sl10.1-beta7-packages.xml.gz"/>
+  <channel name="sl10_selections" file="sl10.1-beta7-selections.xml.gz"/>
   <locale name="de"/>
   <locale name="de_DE"/>
   <mediaid/>

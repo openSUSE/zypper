@@ -4,7 +4,7 @@
 -->
 <test>
 <setup>
-  <channel name="test" file="stable-27-2-2006-packages.xml"/>
+  <channel name="test" file="stable-27-2-2006-packages.xml.gz"/>
   <channel name="selections" file="default-selection.xml"/>
 </setup>
 <trial>

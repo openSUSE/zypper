@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <test>
 <setup>
-  <system file="exercise-inconsistent6-system.xml"/>
-  <channel name="test" file="exercise-inconsistent6-packages.xml"/>
+  <system file="exercise-inconsistent6-system.xml.gz"/>
+  <channel name="test" file="exercise-inconsistent6-packages.xml.gz"/>
 </setup>
 
 <!-- 

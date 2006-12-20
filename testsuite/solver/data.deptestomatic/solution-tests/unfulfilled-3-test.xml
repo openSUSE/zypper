@@ -5,7 +5,7 @@
 -->
 <test>
 <setup>
-  <channel name="test" file="unfulfilled-packages.xml"/>
+  <channel name="test" file="unfulfilled-packages.xml.gz"/>
 </setup>
 <trial>
   <install channel="test" package="unfulfilled1"/>

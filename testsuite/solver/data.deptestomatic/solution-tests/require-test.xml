@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <test>
 <setup>
-  <channel name="test" file="require-packages.xml"/>
+  <channel name="test" file="require-packages.xml.gz"/>
 </setup>
 
 <!-- Install packages which requires a none exist package -->

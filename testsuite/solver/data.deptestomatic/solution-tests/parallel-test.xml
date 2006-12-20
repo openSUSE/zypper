@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <test>
 <setup>
-  <channel name="test1" file="parallel-packages.xml"/>
-  <channel name="test2" file="parallel-packages.xml"/>
+  <channel name="test1" file="parallel-packages.xml.gz"/>
+  <channel name="test2" file="parallel-packages.xml.gz"/>
 </setup>
 
 <!-- Can't install foo with two different version. -->

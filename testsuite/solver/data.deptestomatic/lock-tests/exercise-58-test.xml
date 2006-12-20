@@ -6,7 +6,7 @@
      The update should fail. -->
 
 <setup>
-  <channel name="test" file="exercise-10-packages.xml"/>
+  <channel name="test" file="exercise-10-packages.xml.gz"/>
   <lock package="A" channel="test"/>
 </setup>
 

@@ -1,7 +1,7 @@
 <test>
 	<setup>
 		<setup arch="i586"/>
-		<system file="kernel-system.xml"/>
+		<system file="kernel-system.xml.gz"/>
 		<channel name="kmp" file="kernel-repo.xml"/>
 	</setup>
 	<trial>

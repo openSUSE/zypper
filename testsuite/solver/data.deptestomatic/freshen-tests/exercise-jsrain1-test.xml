@@ -11,8 +11,8 @@
 -->
 <test allow_virtual_conflicts="yes">
 <setup>
-  <system file="exercise-jsrain-system.xml"/>
-  <channel name="test" file="exercise-jsrain-packages.xml"/>
+  <system file="exercise-jsrain-system.xml.gz"/>
+  <channel name="test" file="exercise-jsrain-packages.xml.gz"/>
 </setup>
 <trial>
   <establish/>

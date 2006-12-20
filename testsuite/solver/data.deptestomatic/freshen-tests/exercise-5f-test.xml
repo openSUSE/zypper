@@ -9,8 +9,8 @@
 -->
 <test>
 <setup>
-  <channel name="core" file="exercise-1-system.xml"/>
-  <channel name="test" file="exercise-1-packages.xml"/>
+  <channel name="core" file="exercise-1-system.xml.gz"/>
+  <channel name="test" file="exercise-1-packages.xml.gz"/>
 </setup>
 <trial>
   <establish/>

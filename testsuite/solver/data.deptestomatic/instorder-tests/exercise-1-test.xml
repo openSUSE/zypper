@@ -7,7 +7,7 @@
 -->
 <test>
 <setup>
-  <channel name="test" file="exercise-1-packages.xml"/>
+  <channel name="test" file="exercise-1-packages.xml.gz"/>
 </setup>
 <trial>
   <install channel="test" package="B"/>

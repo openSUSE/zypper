@@ -5,8 +5,8 @@
 -->
 <test>
 <setup>
-		<system file="pattern_obsolete-system.xml"/>
-		<channel file="pattern_obsolete-packages.xml"/>
+		<system file="pattern_obsolete-system.xml.gz"/>
+		<channel file="pattern_obsolete-packages.xml.gz"/>
 </setup>
 <trial>
 	<install name='foo4' kind='pattern'/>

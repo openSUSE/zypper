@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <test>
 <setup>
-  <system file="1.1.2-smp-system.xml"/>
-  <channel name="packages" file="1.1.2-smp-packages.xml"/>
+  <system file="1.1.2-smp-system.xml.gz"/>
+  <channel name="packages" file="1.1.2-smp-packages.xml.gz"/>
 </setup>
 <!-- 
       (1.1.2) Updated some-kmp-$flavor packages are available, but

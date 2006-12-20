@@ -2,8 +2,8 @@
 <test>
 
 <setup>
-  <system file="exercise-25-system.xml"/>
-  <channel name="gnome2" file="exercise-39-packages.xml"/>
+  <system file="exercise-25-system.xml.gz"/>
+  <channel name="gnome2" file="exercise-39-packages.xml.gz"/>
 </setup>
 
 <trial>

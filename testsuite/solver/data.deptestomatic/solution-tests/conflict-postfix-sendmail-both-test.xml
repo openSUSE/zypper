@@ -5,8 +5,8 @@
 -->
 <test>
 <setup>
-  <channel name="packages" file="sl10.1-beta38-packages.xml"/>
-  <channel name="selections" file="sl10.1-beta38-selections.xml"/>
+  <channel name="packages" file="sl10.1-beta38-packages.xml.gz"/>
+  <channel name="selections" file="sl10.1-beta38-selections.xml.gz"/>
   <mediaid/>
 </setup>
 <trial>

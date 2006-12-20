@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <test>
 <setup>
-  <system file="1.1.1-smp-system.xml"/>
-  <channel name="packages" file="1.1.1-smp-packages.xml"/>
+  <system file="1.1.1-smp-system.xml.gz"/>
+  <channel name="packages" file="1.1.1-smp-packages.xml.gz"/>
 </setup>
 
 <!--    (1.1) Kernel ABI has not changed 

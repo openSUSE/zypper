@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <test allow_virtual_conflicts="yes">
 <setup>
-  <system file="exercise-9-system.xml"/>
-  <channel name="test" file="exercise-9-packages.xml"/>
+  <system file="exercise-9-system.xml.gz"/>
+  <channel name="test" file="exercise-9-packages.xml.gz"/>
 </setup>
 <trial>
   <install channel="test" package="Y"/>

@@ -5,7 +5,7 @@
 <test>
 <setup arch="ppc">
   <system file="libzypp-ppc-package.xml"/>
-  <channel file="rc3-ppc-packages.xml" name="rc3"/>
+  <channel file="rc3-ppc-packages.xml.gz" name="rc3"/>
   <source url="file:you.suse.de/pub/suse/update/10.1" name="you"/>
 </setup>
 <trial>

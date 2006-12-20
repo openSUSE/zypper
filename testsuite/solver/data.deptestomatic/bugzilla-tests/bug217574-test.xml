@@ -8,7 +8,7 @@
 
 <test>
 <setup arch="i686">
-  <system file="bug217574-system.xml"/>
+  <system file="bug217574-system.xml.gz"/>
 </setup>
 <trial>
   <keep package="ulimit"/>

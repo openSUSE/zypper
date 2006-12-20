@@ -4,7 +4,7 @@
 -->
 <test>
 <setup>
-  <system file="sles9-i386-packages.xml"/>
+  <system file="sles9-i386-packages.xml.gz"/>
   <channel name="test" file="sles10-beta3-i386-packages.xml.gz"/>
 </setup>
 <trial>

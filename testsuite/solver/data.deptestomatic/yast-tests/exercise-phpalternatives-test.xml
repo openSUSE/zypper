@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <test>
 <setup>
-  <system file="exercise-phpalternatives-system.xml"/>
-  <channel name="test" file="exercise-phpalternatives-packages.xml"/>
+  <system file="exercise-phpalternatives-system.xml.gz"/>
+  <channel name="test" file="exercise-phpalternatives-packages.xml.gz"/>
 </setup>
 
 <!-- 

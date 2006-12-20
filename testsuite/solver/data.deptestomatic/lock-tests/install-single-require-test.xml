@@ -5,7 +5,7 @@
 -->
 <test>
 <setup>
-  <channel name="test" file="required-packages.xml"/>
+  <channel name="test" file="required-packages.xml.gz"/>
 </setup>
 <trial>
   <lock package="B" channel="test"/>

@@ -6,8 +6,8 @@
 -->
 <test>
 <setup arch="i686">
-  <channel name="packages" file="sl10.1-beta3-packages.xml"/>
-  <channel name="selections" file="sl10.1-beta3-selections.xml"/>
+  <channel name="packages" file="sl10.1-beta3-packages.xml.gz"/>
+  <channel name="selections" file="sl10.1-beta3-selections.xml.gz"/>
   <locale name="de"/>
   <mediaid/>
 </setup>

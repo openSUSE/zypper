@@ -1,0 +1,221 @@
+Load from File './bug218492-system.xml.gz'
+Added source '@system' with 485 resolvables
+Loaded 485 resolvables from bug218492-system.xml.gz.
+Load from File './bug218492-package.xml'
+Added source '1' with 2718 resolvables
+Loaded 2718 resolvables from bug218492-package.xml.
+
+------------------------------------------------
+
+>!> Uninstalling zmd
+>!> 3 problems found:
+>!> Problem:
+>!> pattern:base-10.2-115.i586 has missing dependencies
+>!> There are no alternative installed providers of sw_management_pattern for pattern:base-10.2-115.i586
+>!>    Solution:
+>!>       keep zmd
+>!>       keep pattern:zmd-10.2-115.i586
+>!>    Solution:
+>!>       delete base
+>!>       delete pattern:base-10.2-115.i586
+>!>    Solution:
+>!>       Ignore this requirement just here
+>!>       
+>!>    Solution:
+>!>       Ignore this requirement generally
+>!>       
+>!> Problem:
+>!> pattern:x11-10.2-117.i586 has missing dependencies
+>!> There are no alternative installed providers of basesystem for pattern:x11-10.2-117.i586
+>!>    Solution:
+>!>       keep base
+>!>       keep pattern:base-10.2-115.i586
+>!>    Solution:
+>!>       delete x11
+>!>       delete pattern:x11-10.2-117.i586
+>!>    Solution:
+>!>       Ignore this requirement just here
+>!>       
+>!>    Solution:
+>!>       Ignore this requirement generally
+>!>       
+>!> Problem:
+>!> product:openSUSE-10.2.i686 has missing dependencies
+>!> There are no alternative installed providers of basesystem for product:openSUSE-10.2.i686
+>!>    Solution:
+>!>       keep base
+>!>       keep pattern:base-10.2-115.i586
+>!>    Solution:
+>!>       delete openSUSE
+>!>       delete product:openSUSE-10.2.i686
+>!>    Solution:
+>!>       Ignore this requirement just here
+>!>       
+>!>    Solution:
+>!>       Ignore this requirement generally
+>!>       
+
+Pruned solutions: 0
+Deferred solutions: 0
+
+Failed Solution: 
+ResolverContext with 157 entries
+I__s_[S1:0][pattern]base-10.2-115.i586 : I_Ts_
+I_Tu_[S1:0][pattern]zmd-10.2-115.i586 : I_Ts_
+I__s_[S1:0][product]openSUSE-10.2.i686 : I_Ts_
+I__s_[S1:0][pattern]apparmor-10.2-108.i586 : I_Ts_
+I__s_[S1:0][pattern]x11-10.2-117.i586 : I_Ts_
+I__s_[S1:0][pattern]zmd_x11-10.2-117.i586 : I_Ts_
+I__s_[S1:0][package]hfsutils-3.2.6-1066.i586 : I_TsL
+I__s_[S1:0][package]dosfstools-2.11-29.i586 : I_TsL
+I__s_[S1:0][package]terminfo-5.5-36.i586 : I_TsL
+I__s_[S1:0][package]xtermset-0.5.2-148.i586 : I_TsL
+I__s_[S1:0][package]libqt4-4.2.1-7.i586 : I__s_
+I__s_[S1:0][package]readline-5.1-46.i586 : I__s_
+I__s_[S1:0][package]pcre-6.7-16.i586 : I__s_
+I__s_[S1:0][package]dhcpcd-1.3.22pl4-236.i586 : I_TsL
+I__s_[S1:0][package]libqt4-sql-4.2.1-7.i586 : I__s_
+I__s_[S1:0][package]bc-1.06-777.i586 : I__s_
+I__s_[S1:0][package]unzip-5.52-29.i586 : I__s_
+I__s_[S1:0][package]usbutils-0.72-15.i586 : I_TsL
+I__s_[S1:0][package]xorg-x11-libXrender-7.2-7.i586 : I__s_
+I__s_[S1:0][package]screen-4.0.2-76.i586 : I_TsL
+I__s_[S1:0][package]suspend-0.20.20061106-2.i586 : I_TsL
+I__s_[S1:0][package]x11-tools-0.1-52.i586 : I_TsL
+I__s_[S1:0][package]fbset-2.1-810.i586 : I_TsL
+I__s_[S1:0][package]procinfo-18-72.i586 : I_TsL
+I__s_[S1:0][package]openldap2-client-2.3.27-18.i586 : I__s_
+I__s_[S1:0][package]xdg-menu-0.2-79.i586 : I__s_
+I__s_[S1:0][package]bind-libs-9.3.2-41.i586 : I__s_
+I__s_[S1:0][package]at-3.1.8-937.i586 : I__s_
+I__s_[S1:0][package]portmap-5beta-763.i586 : I__s_
+I__s_[S1:0][package]xntp-4.2.2p3-13.i586 : I_TsL
+I__s_[S1:0][package]dbus-1-glib-0.71-20.i586 : I__s_
+I__s_[S1:0][package]xorg-x11-server-7.2-17.i586 : I__s_
+I__s_[S1:0][package]freeglut-060903-13.i586 : I_TsL
+I__s_[S1:0][package]lsb-3.1-17.i586 : I_TsL
+I__s_[S1:0][package]xorg-x11-7.2-14.i586 : I__s_
+I__s_[S1:0][package]audit-1.2.6-15.i586 : I_TsL
+I__s_[S1:0][package]compat-libstdc++-5.0.7-36.i586 : I_TsL
+I__s_[S1:0][package]sax2-8.1-57.i586 : I__s_
+I__s_[S1:0][package]suseRegister-1.1-19.noarch : I__s_
+I__s_[S1:0][package]compat-2006.1.25-24.i586 : I_TsL
+I__s_[S1:0][package]xlockmore-5.23-5.i586 : I_TsL
+I__s_[S1:0][package]x11-input-wacom-0.7.6-12.i586 : I_TsL
+I__s_[S1:0][package]sash-3.7-59.i586 : I_TsL
+I__s_[S1:0][package]providers-2006.1.25-24.noarch : I_TsL
+I__s_[S1:0][package]dos2unix-3.1-330.i586 : I_TsL
+I__s_[S1:0][package]cabextract-1.2-11.i586 : I_TsL
+I__s_[S1:0][package]gpart-0.1h-510.i586 : I__s_
+I__s_[S1:0][package]gdbm-1.8.3-257.i586 : I__s_
+I__s_[S1:0][package]pax-3.4-27.i586 : I__s_
+I__s_[S1:0][package]popt-1.7-297.i586 : I__s_
+I__s_[S1:0][package]master-boot-code-1.6-31.i586 : I__s_
+I__s_[S1:0][package]lsof-4.77-5.i586 : I__s_
+I__s_[S1:0][package]netcat-1.10-897.i586 : I__s_
+I__s_[S1:0][package]utempter-0.5.5-30.i586 : I__s_
+I__s_[S1:0][package]zip-2.31-28.i586 : I_TsL
+I__s_[S1:0][package]joe-3.5-15.i586 : I_TsL
+I__s_[S1:0][package]blocxx-1.0.0-31.i586 : I__s_
+I__s_[S1:0][package]cpufrequtils-002-21.i586 : I_TsL
+I__s_[S1:0][package]ifplugd-0.28-35.i586 : I_TsL
+I__s_[S1:0][package]pm-utils-0.20.0.20061030-5.i586 : I__s_
+I__s_[S1:0][package]ntfsprogs-1.11.2-28.i586 : I_TsL
+I__s_[S1:0][package]procmail-3.22-73.i586 : I_TsL
+I__s_[S1:0][package]gawk-3.1.5-36.i586 : I__s_
+I__s_[S1:0][package]xdg-utils-1.0.1-2.noarch : I_TsL
+I__s_[S1:0][package]info-4.8-37.i586 : I__s_
+I__s_[S1:0][package]yp-tools-2.9-29.i586 : I__s_
+I__s_[S1:0][package]x11-input-synaptics-0.14.6-18.i586 : I_TsL
+I__s_[S1:0][package]timezone-2.5-18.i586 : I_TsL
+I__s_[S1:0][package]gettext-0.15-18.i586 : I__s_
+I__s_[S1:0][package]recode-3.6-517.i586 : I_TsL
+I__s_[S1:0][package]unclutter-8-868.i586 : I_TsL
+I__s_[S1:0][package]bootsplash-3.3-33.i586 : I__s_
+I__s_[S1:0][package]acpid-1.0.4-46.i586 : I_TsL
+I__s_[S1:0][package]gpm-1.20.1-335.i586 : I__s_
+I__s_[S1:0][package]jfsutils-1.1.11-15.i586 : I_TsL
+I__s_[S1:0][package]desktop-data-SuSE-10.2-11.noarch : I__s_
+I__s_[S1:0][package]pcsc-lite-1.3.2-12.i586 : I__s_
+I__s_[S1:0][package]tcsh-6.14.00-38.i586 : I_TsL
+I__s_[S1:0][package]xfsprogs-2.8.11_1-6.i586 : I_TsL
+I__s_[S1:0][package]xaw3d-1.5E-258.i586 : I_TsL
+I__s_[S1:0][package]dmraid-1.0.0.rc11-16.i586 : I_TsL
+I__s_[S1:0][package]preload-0.2-40.i586 : I_TsL
+I__s_[S1:0][package]pmtools-20060606-16.i586 : I__s_
+I__s_[S1:0][package]strace-4.5.14-34.i586 : I_TsL
+I__s_[S1:0][package]xinetd-2.3.14-27.i586 : I_TsL
+I__s_[S1:0][package]tk-8.4.14-6.i586 : I_TsL
+I__s_[S1:0][package]openslp-1.2.0-39.i586 : I__s_
+I__s_[S1:0][package]zisofs-tools-1.0.6-28.i586 : I_TsL
+I__s_[S1:0][package]tcpdump-3.9.4-29.i586 : I_TsL
+I__s_[S1:0][package]wvstreams-4.2.2-6.i586 : I_TsL
+I__s_[S1:0][package]gpg-1.4.5-17.i586 : I__s_
+I__s_[S1:0][package]CheckHardware-0.1-1010.i586 : I_TsL
+I__s_[S1:0][package]autofs-4.1.4-48.i586 : I_TsL
+I__s_[S1:0][package]lukemftp-1.5-612.i586 : I_TsL
+I__s_[S1:0][package]bind-utils-9.3.2-41.i586 : I__s_
+I__s_[S1:0][package]evms-gui-2.5.5-56.i586 : I_TsL
+I__s_[S1:0][package]ksh-93r-33.i586 : I_TsL
+I__s_[S1:0][package]libqt4-x11-4.2.1-7.i586 : I__s_
+I__s_[S1:0][package]rsync-2.6.8-22.i586 : I__s_
+I__s_[S1:0][package]sudo-1.6.8p12-35.i586 : I_TsL
+I__s_[S1:0][package]wvdial-1.54-98.i586 : I_TsL
+I__s_[S1:0][package]openct-0.6.9-13.i586 : I__s_
+I__s_[S1:0][package]smpppd-1.59-33.i586 : I_TsL
+I__s_[S1:0][package]nfs-utils-1.0.10-17.i586 : I_TsL
+I__s_[S1:0][package]postfix-2.3.2-20.i586 : I__s_
+I__s_[S1:0][package]telnet-1.2-28.i586 : I_TsL
+I__s_[S1:0][package]deltarpm-3.3-26.i586 : I_TsL
+I__s_[S1:0][package]powersave-0.15.7-2.i586 : I__s_
+I__s_[S1:0][package]ypbind-1.20.2-22.i586 : I_TsL
+I__s_[S1:0][package]xkeyboard-config-0.9-17.noarch : I_TsL
+I__s_[S1:0][package]hal-resmgr-0.1_SVNr122-5.i586 : I_TsL
+I__s_[S1:0][package]ghostscript-x11-8.15.3-17.i586 : I_TsL
+I__s_[S1:0][package]cups-1.2.5-6.i586 : I__s_
+I__s_[S1:0][package]sax2-gui-8.1-57.i586 : I_TsL
+I__s_[S1:0][package]desktop-translations-10.1-58.noarch : I_TsL
+I__s_[S1:0][package]compat-openssl097g-0.9.7g-28.i586 : I_TsL
+I__s_[S1:0][package]hplip-1.6.10-15.i586 : I_TsL
+I__s_[S1:0][package]update-test-trival-1.0-8.noarch : I_TsL
+I__s_[S1:0][package]man-pages-2.41-6.noarch : I_TsL
+I__s_[S1:0][package]sharutils-4.6.2-17.i586 : I_TsL
+I__s_[S1:0][package]release-notes-10.2.6-2.noarch : I__s_
+I__s_[S1:0][package]glibc-i18ndata-2.5-18.i586 : I__s_
+I__s_[S1:0][package]patch-2.5.9-173.i586 : I__s_
+I__s_[S1:0][package]expat-2.0.0-27.i586 : I__s_
+I__s_[S1:0][package]glibc-locale-2.5-18.i586 : I__s_
+I__s_[S1:0][package]xorg-x11-libX11-7.2-6.i586 : I__s_
+I__s_[S1:0][package]pciutils-2.2.4-8.i586 : I__s_
+I__s_[S1:0][package]initviocons-0.4-329.i586 : I_TsL
+I__s_[S1:0][package]xorg-x11-libXext-7.2-7.i586 : I__s_
+I__s_[S1:0][package]915resolution-0.5.2-10.i586 : I__s_
+I__s_[S1:0][package]ppp-2.4.4-19.i586 : I__s_
+I__s_[S1:0][package]zsh-4.3.2-19.i586 : I_TsL
+I__s_[S1:0][package]hdparm-6.9-3.i586 : I__s_
+I__s_[S1:0][package]nscd-2.5-18.i586 : I_TsL
+I__s_[S1:0][package]resmgr-1.1.0_SVNr123-4.i586 : I__s_
+I__s_[S1:0][package]tcl-8.4.14-6.i586 : I__s_
+I__s_[S1:0][package]udev-103-5.i586 : I__s_
+I__s_[S1:0][package]scsi-1.7_2.36_1.22_0.18_0.99_0.91-19.i586 : I_TsL
+I__s_[S1:0][package]man-2.4.3-21.i586 : I__s_
+I__s_[S1:0][package]xdmbgrd-0.6-15.i586 : I_TsL
+I__s_[S1:0][package]tightvnc-1.2.9-219.i586 : I_TsL
+I__s_[S1:0][package]fvwm2-2.5.16-23.i586 : I__s_
+I__s_[S1:0][package]cron-4.1-63.i586 : I__s_
+I__s_[S1:0][package]opensc-0.11.1-13.i586 : I__s_
+I__s_[S1:0][package]hal-0.5.8_git20061106-4.i586 : I__s_
+I__s_[S1:0][package]openssh-askpass-4.4p1-16.i586 : I_TsL
+I__s_[S1:0][package]3ddiag-0.738-20.i586 : I_TsL
+I__s_[S1:0][package]yast2-control-center-2.13.5-2.i586 : I_TsL
+I__s_[S1:0][package]gdb-6.5-23.i586 : I_TsL
+I__s_[S1:0][package]MozillaFirefox-translations-2.0-11.i586 : I_TsL
+I__s_[S1:0][package]smartmontools-5.36.cvs20061025-3.i586 : I_TsL
+I__s_[S1:0][package]zen-updater-7.1.100-21.i586 : I_TsL
+I__s_[S1:0][package]bootsplash-theme-SuSE-3.1-86.i586 : I_TsL
+I__s_[S1:0][package]pptp-1.7.1-5.i586 : I_TsL
+I__s_[S1:0][package]nfsidmap-0.16-17.i586 : I_TsL
+I__s_[S1:0][package]xorg-x11-Xvnc-7.1-17.i586 : I_TsL
+I__s_[S1:0][package]wireless-tools-29pre10-17.i586 : I__s_
+
+- - - - - - - - - -

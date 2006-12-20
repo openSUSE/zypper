@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <test>
 <setup>
-  <system file="exercise-42-system.xml"/>
+  <system file="exercise-42-system.xml.gz"/>
   <channel name="gnome2snaps" file="exercise-42-packages-1.xml"/>
   <forceResolve/>
 </setup>
