@@ -67,7 +67,7 @@ ENDMACRO(add_subdir_sources)
 ####################################################################
 
 ADD_SUBDIRECTORY( zypp ) 
-#ADD_SUBDIRECTORY( zypp2 ) 
+ADD_SUBDIRECTORY( zypp2 ) 
 #ADD_SUBDIRECTORY( examples ) 
 #ADD_SUBDIRECTORY( tools ) 
 #ADD_SUBDIRECTORY( testsuite ) 
