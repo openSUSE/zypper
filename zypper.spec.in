@@ -46,7 +46,10 @@ gettextize -f
 autoreconf --force --install --symlink --verbose
 %{?suse_update_config:%{suse_update_config -f}}
 %if %suse_version <= 1010
-ZYPP_LIBS=-lzypp ZYPP_CFLAGS="-D_FILE_OFFSET_BITS=64 -DLIBZYPP_1xx" \
+# compatibility defines unless we have the newer libzypp on SLE SP
+if ! pkg-config --modversion libzypp | grep '^2'; then
+export ZYPP_LIBS=-lzypp ZYPP_CFLAGS="-D_FILE_OFFSET_BITS=64 -DLIBZYPP_1xx"
+fi
 %endif
 CFLAGS="$RPM_OPT_FLAGS" \
 CXXFLAGS="$RPM_OPT_FLAGS" \
@@ -58,6 +61,10 @@ make %{?jobs:-j %jobs}
 make install DESTDIR=$RPM_BUILD_ROOT
 # Create filelist with translatins
 %{find_lang} zypper
+%if %suse_version <= 1010
+rm -f ${RPM_BUILD_ROOT}%{_sbindir}/zypp-checkpatches
+rm -f ${RPM_BUILD_ROOT}%{_sbindir}/zypp-checkpatches-wrapper
+%endif
 
 %post
 %run_ldconfig

@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Tue Jan  9 17:13:16 CET 2007 - mvidner@suse.cz
+
+- Fixed building on SLE10-SP1.
+
+-------------------------------------------------------------------
 Mon Dec 18 13:30:10 CET 2006 - jkupec@suse.cz
 
 - fixed uncaught checksum exception (#224216)
