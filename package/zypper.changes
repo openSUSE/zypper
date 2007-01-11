@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Jan 11 17:02:30 CET 2007 - jkupec@suse.cz
+
+- more texts marked for translation
+- r4848
+
+-------------------------------------------------------------------
 Mon Dec 18 15:59:43 CET 2006 - dmacvicar@suse.de
 
 - Show a better message when we can't acquire the lock
