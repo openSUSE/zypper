@@ -22,7 +22,7 @@ void display_done () {
 int read_action_ari () {
   // TODO: respect --yes (abort)
   while (true) {
-    cerr << "(A)bort, (R)etry, (I)gnore?" << endl;
+    cerr << _("(A)bort, (R)etry, (I)gnore?") << endl; // don't translate letters in parentheses!!
     char c;
     cin >> c;
     c = tolower (c);

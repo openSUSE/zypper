@@ -28,7 +28,7 @@ void cond_init_system_sources ()
     return;
 
   if ( geteuid() != 0 ) {
-    cerr << "Sorry, you need root privileges to use system sources, disabling them..." << endl;
+    cerr << _("Sorry, you need root privileges to use system sources, disabling them...") << endl;
     gSettings.disable_system_sources = true;
     MIL << "system sources disabled" << endl;
   }
@@ -45,7 +45,7 @@ void init_system_sources()
   manager = SourceManager::sourceManager();
   try
   {
-    cerr << "Restoring system sources..." << endl;
+    cerr << _("Restoring system sources...") << endl;
     manager->restore("/");
   }
 //  catch (const SourcesAlreadyRestoredException& excpt) {
@@ -54,7 +54,7 @@ void init_system_sources()
   {
     ZYPP_CAUGHT (excpt_r);
     ERR << "Couldn't restore sources" << endl;
-    cerr << "Failed to restore sources" << endl;
+    cerr << _("Failed to restore sources") << endl;
     exit(-1);
   }
     
@@ -77,7 +77,7 @@ void include_source_by_url( const Url &url )
   }
   catch( const Exception & excpt_r )
   {
-    cerr << "Can't access repository" << endl;
+    cerr << _("Can't access repository") << endl;
     ZYPP_CAUGHT( excpt_r );
     exit(-1);
   }
@@ -95,9 +95,9 @@ static void print_source_list(const std::list<SourceInfo> &sources )
   Table tbl;
   TableHeader th;
   th << "#";
-  if (gSettings.is_rug_compatible) th << "Status";
-  else th << "Enabled" << "Refresh";
-  th << "Type" << "Name" << "URI";
+  if (gSettings.is_rug_compatible) th << _("Status");
+  else th << _("Enabled") << _("Refresh");
+  th << _("Type") << _("Name") << "URI";
   tbl << th;
 
   int i = 1;
@@ -113,20 +113,20 @@ static void print_source_list(const std::list<SourceInfo> &sources )
     if (gSettings.is_rug_compatible)
     {
 #ifdef LIBZYPP_1xx
-      tr << "Active";
+      tr << _("Active");
 #else
-      tr << (source.enabled() ? "Active" : "Disabled");
+      tr << (source.enabled() ? _("Active") : _("Disabled"));
 #endif
     }
     // zypper status (enabled, autorefresh)
     else
     {
 #ifdef LIBZYPP_1xx
-      tr << "Yes";
-      tr << (source.autorefresh ? "Yes" : "No");
+      tr << _("Yes");
+      tr << (source.autorefresh ? _("Yes") : _("No"));
 #else
-      tr << (source.enabled() ? "Yes" : "No");
-      tr << (source.autorefresh() ? "Yes" : "No");
+      tr << (source.enabled() ? _("Yes") : _("No"));
+      tr << (source.autorefresh() ? _("Yes") : _("No"));
 #endif
     }
 
@@ -160,7 +160,7 @@ void list_system_sources()
   }
   catch ( const Exception &e )
   {
-    cout << "Error reading system sources: " << e.msg() << std::endl;
+    cout << _("Error reading system sources: ") << e.msg() << std::endl;
     exit(-1); 
   }
   
@@ -187,7 +187,7 @@ bool parse_repo_file (const string& file, string& url, string& alias)
     else if (regex_search (line, match, r_type)) {
       string type = match[1];
       if (type != "rpm-md" && type != "yast2") {
-	cerr << "Unknown repository type " << type << endl;
+	cerr << _("Unknown repository type ") << type << endl;
 	return false;
       }
     }
@@ -199,10 +199,10 @@ bool parse_repo_file (const string& file, string& url, string& alias)
   repo.close ();
 
   if (!have_alias) {
-    cerr << "Name not found" << endl;
+    cerr << _("Name not found") << endl;
   }  
   if (!have_url) {
-    cerr << "baseurl not found" << endl;
+    cerr << _("baseurl not found") << endl;
   }  
   cerr_vv << "Name: " << alias << endl;
   cerr_vv << "URL: " << url << endl;
@@ -327,20 +327,20 @@ void remove_source( const std::string& anystring )
     // we want to delete anyway
     ZYPP_CAUGHT (ex);
     cerr << ex.asUserString () << endl
-	 << "Continuing anyway" << endl;
+	 << _("Continuing anyway") << endl;
   }
 
   SourceManager::SourceId sid = 0;
   safe_lexical_cast (anystring, sid);
   if (sid > 0) {
-    cerr_v << "removing source " << sid << endl;
+    cerr_v << _("removing source ") << sid << endl;
     try {
       manager->findSource (sid);
     }
     catch (const Exception & ex) {
       ZYPP_CAUGHT (ex);
       // boost::format: %s is fine regardless of the actual type :-)
-      cerr << format ("Source %s not found.") % sid << endl;
+      cerr << format (_("Source %s not found.")) % sid << endl;
     }
     manager->removeSource (sid);
   }
@@ -356,7 +356,7 @@ void remove_source( const std::string& anystring )
 	}
 	catch ( const Exception & excpt_r ) {
 	  ZYPP_CAUGHT( excpt_r );
-	  cerr << "URL is invalid: " << excpt_r.asUserString() << endl;
+	  cerr << _("URL is invalid: ") << excpt_r.asUserString() << endl;
 	}
 	if (url.isValid ()) {
 	  try {
@@ -364,7 +364,7 @@ void remove_source( const std::string& anystring )
 	  }
 	  catch (const Exception & ex) {
 	    ZYPP_CAUGHT (ex);
-	    cerr << format ("Source %s not found.") % url.asString() << endl;
+	    cerr << format (_("Source %s not found.")) % url.asString() << endl;
 	  }
 	  manager->removeSourceByUrl (url);
 	}
@@ -376,7 +376,7 @@ void remove_source( const std::string& anystring )
       }
       catch (const Exception & ex) {
 	ZYPP_CAUGHT (ex);
-	cerr << format ("Source %s not found.") % anystring << endl;
+	cerr << format (_("Source %s not found.")) % anystring << endl;
       }
       manager->removeSource (anystring); 	// by alias
     }
@@ -409,7 +409,7 @@ void rename_source( const std::string& anystring, const std::string& newalias )
     catch (const Exception & ex) {
       ZYPP_CAUGHT (ex);
       // boost::format: %s is fine regardless of the actual type :-)
-      cerr << format ("Source %s not found.") % sid << endl;
+      cerr << format (_("Source %s not found.")) % sid << endl;
     }
   }
   else {
@@ -424,7 +424,7 @@ void rename_source( const std::string& anystring, const std::string& newalias )
 	}
 	catch ( const Exception & excpt_r ) {
 	  ZYPP_CAUGHT( excpt_r );
-	  cerr << "URL is invalid: " << excpt_r.asUserString() << endl;
+	  cerr << _("URL is invalid: ") << excpt_r.asUserString() << endl;
 	}
 	if (url.isValid ()) {
 	  try {
@@ -432,7 +432,7 @@ void rename_source( const std::string& anystring, const std::string& newalias )
 	  }
 	  catch (const Exception & ex) {
 	    ZYPP_CAUGHT (ex);
-	    cerr << format ("Source %s not found.") % url.asString() << endl;
+	    cerr << format (_("Source %s not found.")) % url.asString() << endl;
 	  }
 	}
     }
@@ -443,7 +443,7 @@ void rename_source( const std::string& anystring, const std::string& newalias )
       }
       catch (const Exception & ex) {
 	ZYPP_CAUGHT (ex);
-	cerr << format ("Source %s not found.") % anystring << endl;
+	cerr << format (_("Source %s not found.")) % anystring << endl;
       }
     }
   }
@@ -461,7 +461,7 @@ void rename_source( const std::string& anystring, const std::string& newalias )
 void refresh_sources()
 {
 #ifdef LIBZYPP_1xx
-  cerr << "Sorry, not implemented yet for libzypp-1.x.x" << endl;
+  cerr << _("Sorry, not implemented yet for libzypp-1.x.x") << endl;
 #else
   zypp::storage::PersistentStorage store;
   std::list<SourceInfo> sources;
@@ -489,7 +489,7 @@ void refresh_sources()
         false, // base source
         true); // autorefresh
 //      src.refresh();
-      cout << "DONE" << endl << endl;
+      cout << _("DONE") << endl << endl;
     }
     catch ( const zypp::Exception & ex )
     {
@@ -519,7 +519,7 @@ MediaWrapper::MediaWrapper (const string& filename_or_url) {
   catch (const Exception & ex) {
     ZYPP_CAUGHT (ex);
     if (looks_like_url (filename_or_url)) {
-    cerr << "Error while fetching " << filename_or_url << " : "
+    cerr << _("Error while fetching ") << filename_or_url << " : "
 	 << ex << endl;
 //      ex.dumpOn (cerr);		// this suxxz
     }
@@ -535,9 +535,9 @@ MediaWrapper::~MediaWrapper () {
 // #217028
 void warn_if_zmd () {
   if (system ("pgrep -lx zmd") == 0) { // list name, exact match
-    cerr << "ZENworks Management Daemon is running." << endl
-	 << "WARNING: this command will not synchronize changes." << endl
-	 << "Use rug or yast2 for that." << endl;
+    cerr << _("ZENworks Management Daemon is running.") << endl
+	 << _("WARNING: this command will not synchronize changes.") << endl
+	 << _("Use rug or yast2 for that.") << endl;
   }
 }
 

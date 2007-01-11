@@ -1,6 +1,8 @@
 #include "zypper-getopt.h"
+#include "zmart.h"
 #include <iostream>
 #include <zypp/base/String.h>
+
 using namespace std;
 
 string longopts2optstring (const struct option *longopts) {
@@ -51,10 +53,10 @@ parsed_opts parse_options (int argc, char **argv,
     switch (optc) {
     case '?':
       result["_unknown"].push_back("");
-      cerr << "Unknown option " << argv[optind - 1] << endl;
+      cerr << _("Unknown option ") << argv[optind - 1] << endl;
       break;
     case ':':
-      cerr << "Missing argument for " << argv[optind - 1] << endl;
+      cerr << _("Missing argument for ") << argv[optind - 1] << endl;
       break;
     default:
       const char *mapidx = optc? short2long[optc] : longopts[option_index].name;

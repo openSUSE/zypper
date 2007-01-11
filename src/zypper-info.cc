@@ -45,11 +45,11 @@ void printInfo(const string & command, const vector<string> & arguments) {
       );
 
     if (!installer.item) {
-      cout << "\n" << kind.asString() << " " << *nameit << " not found." << endl;
+      cout << "\n" << kind.asString() << " " << *nameit << _(" not found.") << endl;
     }
     else {
       // print info
-      cout << "\nInformation for " << kind.asString() << " " << *nameit << ":\n\n";
+      cout << endl << _("Information for ") << kind.asString() << " " << *nameit << ":\n\n";
 
       if (command == "info" || command == "if")
         printPkgInfo(installer.item,installed);
@@ -81,26 +81,26 @@ Copy and modify /usr/share/vim/current/gvimrc to ~/.gvimrc if needed.
  */
 void printPkgInfo(const PoolItem & pool_item, const PoolItem & ins_pool_item) {
 
-  cout << "Catalog: " << pool_item.resolvable()->source().alias() << endl;
-  cout << "Name: " << pool_item.resolvable()->name() << endl;
-  cout << "Version: " << pool_item.resolvable()->edition().asString() << endl;
-  cout << "Arch: " << pool_item.resolvable()->arch().asString() << endl;
-  cout << "Installed: " << (!ins_pool_item ? "No" : "Yes") << endl;
+  cout << _("Catalog: ") << pool_item.resolvable()->source().alias() << endl;
+  cout << _("Name: ") << pool_item.resolvable()->name() << endl;
+  cout << _("Version: ") << pool_item.resolvable()->edition().asString() << endl;
+  cout << _("Arch: ") << pool_item.resolvable()->arch().asString() << endl;
+  cout << _("Installed: ") << (!ins_pool_item ? "No" : "Yes") << endl;
 
-  cout << "Status: ";
+  cout << _("Status: ");
   if (ins_pool_item &&
       ins_pool_item.resolvable()->edition() >= pool_item.resolvable()->edition())
-    cout << "up-to-date" << endl;
+    cout << _("up-to-date") << endl;
   else if (ins_pool_item) {
-    cout << "out-of-date (version " << ins_pool_item.resolvable()->edition()
-      << " installed) " << endl;
+    cout << _("out-of-date (version ") << ins_pool_item.resolvable()->edition()
+      << _(" installed) ") << endl; // TODO use sformat for this for proper translation
   }
   else
-    cout << "not installed" << endl;
+    cout << _("not installed") << endl;
 
-  cout << "Installed Size: " << pool_item.resolvable()->size().asString() << endl;
-  cout << "Summary: " << pool_item.resolvable()->summary() << endl;
-  cout << "Description: " << endl;
+  cout << _("Installed Size: ") << pool_item.resolvable()->size().asString() << endl;
+  cout << _("Summary: ") << pool_item.resolvable()->summary() << endl;
+  cout << _("Description: ") << endl;
 
   cout << pool_item.resolvable()->description() << endl;
 }
