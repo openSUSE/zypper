@@ -66,7 +66,7 @@ Url make_url (const string & url_s) {
   }
   catch ( const Exception & excpt_r ) {
     ZYPP_CAUGHT( excpt_r );
-    cerr << "URL is invalid." << endl;
+    cerr << _("URL is invalid.") << endl;
     cerr << excpt_r.asUserString() << endl;
     
   }
@@ -117,18 +117,18 @@ string process_globals(int argc, char **argv)
   if (gopts.count("help"))
     ghelp = true;
 
-  string help_global_options = "  Options:\n"
+  string help_global_options = _("  Options:\n"
     "\t--help, -h\t\tHelp\n"
     "\t--version, -V\t\tOutput the version number\n"
     "\t--verbose, -v\t\tIncrease verbosity\n"
     "\t--terse, -t\t\tTerse output for machine consumption\n"
     "\t--table-style, -s\tTable style (integer)\n"
-    "\t--rug-compatible, -r\tTurn on rug compatibility\n"
+    "\t--rug-compatible, -r\tTurn on rug compatibility\n");
     ;
 
   if (gopts.count("verbose")) {
     gSettings.verbose += gopts["verbose"].size();
-    cerr << "verbosity " << gSettings.verbose << endl;
+    cerr << _("verbosity ") << gSettings.verbose << endl;
   }
 
   if (gopts.count("table-style")) {
@@ -137,7 +137,7 @@ string process_globals(int argc, char **argv)
     if (s < _End)
       Table::defaultStyle = (TableStyle) s;
     else
-      cerr << "Invalid table style " << s << endl;
+      cerr << _("Invalid table style ") << s << endl;
   }
   // testing option
   if (gopts.count("opt")) {
@@ -174,7 +174,7 @@ string process_globals(int argc, char **argv)
       cerr << endl;
     }
     else {
-      cerr << "Try -h for help" << endl;
+      cerr << _("Try -h for help") << endl;
     }
   }
 
@@ -191,14 +191,15 @@ int one_command(const string& command, int argc, char **argv)
   struct option *specific_options = &no_options;
   string specific_help;
 
-  string help_global_source_options = "  Source options:\n"
+  string help_global_source_options = _(
+      "  Source options:\n"
       "\t--disable-system-sources, -D\t\tDon't read the system sources\n"
       "\t--source, -S\t\tRead additional source\n"
-      ;
+      );
 
-  string help_global_target_options = "  Target options:\n"
+  string help_global_target_options = _("  Target options:\n"
       "\t--disable-system-resolvables, -T\t\tDon't read system installed resolvables\n"
-      ;
+      );
 
   if (command == "install" || command == "in") {
     static struct option install_options[] = {
@@ -209,11 +210,12 @@ int one_command(const string& command, int argc, char **argv)
       {0, 0, 0, 0}
     };
     specific_options = install_options;
-    specific_help = "  Command options:\n"
+    specific_help = _(
+      "  Command options:\n"
       "\t--catalog,-c\t\tOnly from this catalog (FIXME)\n"
       "\t--type,-t\t\tType of resolvable (default: package)\n"
       "\t--no-confirm,-y\tDon't require user confirmation\n"
-      ;
+      );
   }
   else if (command == "remove" || command == "rm") {
     static struct option remove_options[] = {
@@ -223,10 +225,11 @@ int one_command(const string& command, int argc, char **argv)
       {0, 0, 0, 0}
     };
     specific_options = remove_options;
-    specific_help = "  Command options:\n"
+    specific_help = _(
+      "  Command options:\n"
       "\t--type,-t\t\tType of resolvable (default: package)\n"
       "\t--no-confirm,-y\tDon't require user confirmation\n"
-      ;
+      );
   }
   else if (command == "service-add" || command == "sa") {
     static struct option service_add_options[] = {
@@ -238,7 +241,8 @@ int one_command(const string& command, int argc, char **argv)
       {0, 0, 0, 0}
     };
     specific_options = service_add_options;
-    specific_help = "service-add [options] URI [alias]\n"
+    specific_help = _(
+      "service-add [options] URI [alias]\n"
       "\n"
       "Add a service (installation source) to the system."
       "\n"
@@ -248,7 +252,7 @@ int one_command(const string& command, int argc, char **argv)
       "\t--type,-t <TYPE>\tType of repository (YaST, YUM, or Plaindir)\n"
       "\t--disabled,-d\t\tAdd the service as disabled\n"
       "\t--no-refresh,-n\t\tDo not automatically refresh the metadata\n"
-      ;
+      );
   }
   else if (command == "service-list" || command == "sl") {
     static struct option service_list_options[] = {
@@ -256,12 +260,13 @@ int one_command(const string& command, int argc, char **argv)
       {0, 0, 0, 0}
     };
     specific_options = service_list_options;
-    specific_help = "service-list\n"
+    specific_help = _(
+      "service-list\n"
       "\n"
       "List all defined system services (installation sources)."
       "\n"
       "This command has no options.\n"
-      ;
+      );
   }
   else if (command == "service-delete" || command == "sd") {
     static struct option service_delete_options[] = {
@@ -269,12 +274,13 @@ int one_command(const string& command, int argc, char **argv)
       {0, 0, 0, 0}
     };
     specific_options = service_delete_options;
-    specific_help = "service-delete [options] <URI|alias>\n"
+    specific_help = _(
+      "service-delete [options] <URI|alias>\n"
       "\n"
       "Remove service (installation source) from the system."
       "\n"
       "This command has no options.\n"
-      ;
+      );
   }
   else if (command == "service-rename" || command == "sr") {
     static struct option service_rename_options[] = {
@@ -282,12 +288,13 @@ int one_command(const string& command, int argc, char **argv)
       {0, 0, 0, 0}
     };
     specific_options = service_rename_options;
-    specific_help = "service-rename [options] <URI|alias> <new-alias>\n"
+    specific_help = _(
+      "service-rename [options] <URI|alias> <new-alias>\n"
       "\n"
       "Assign new alias to the service specified by URI or current alias."
       "\n"
       "This command has no options.\n"
-      ;
+      );
   }
   else if (command == "refresh" || command == "ref") {
     static struct option refresh_options[] = {
@@ -295,10 +302,11 @@ int one_command(const string& command, int argc, char **argv)
       {0, 0, 0, 0}
     };
     specific_options = refresh_options;
-    specific_help = _("zypper refresh\n"
+    specific_help = _(
+      "zypper refresh\n"
       "\n"
-      "Refresh all installation sources found in system.\n")
-      ;
+      "Refresh all installation sources found in system.\n"
+      );
   }
   else if (command == "list-updates" || command == "lu") {
     static struct option list_updates_options[] = {
@@ -307,13 +315,14 @@ int one_command(const string& command, int argc, char **argv)
       {0, 0, 0, 0}
     };
     specific_options = list_updates_options;
-    specific_help = "list-updates [options]\n"
+    specific_help = _(
+      "list-updates [options]\n"
       "\n"
       "List all available updates\n"
       "\n"
       "  Command options:\n"
       "\t--type,-t\t\tType of resolvable (default: patch!)\n"
-      ;
+      );
   }
   else if (command == "update" || command == "up") {
     static struct option update_options[] = {
@@ -324,11 +333,12 @@ int one_command(const string& command, int argc, char **argv)
       {0, 0, 0, 0}
     };
     specific_options = update_options;
-    specific_help = "  Command options:\n"
+    specific_help = _(
+      "  Command options:\n"
       "\t--type,-t\t\tType of resolvable (default: patch!)\n"
       "\t--no-confirm,-y\t\tDon't require user confirmation\n"
       "\t--skip-interactive\t\tSkip interactive updates\n"
-      ;
+      );
   }
   else if (command == "search" || command == "se") {
     static struct option search_options[] = {
@@ -348,7 +358,7 @@ int one_command(const string& command, int argc, char **argv)
       {0, 0, 0, 0}
     };
     specific_options = search_options;
-    specific_help =
+    specific_help = _(
       "zypper [global-options] search [options] [querystring...]\n"
       "\n"
       "'search' - Search for packages matching given search strings\n"
@@ -368,7 +378,7 @@ int one_command(const string& command, int argc, char **argv)
       "    --sort-by-catalog      Sort packages by catalog.\n" // ??? catalog/source?
       "\n"
       "* and ? wildcards can also be used within search strings.\n"
-      ;
+      );
   }
   else if (command == "patch-check" || command == "pchk") {
     static struct option patch_check_options[] = {
@@ -376,12 +386,13 @@ int one_command(const string& command, int argc, char **argv)
       {0, 0, 0, 0}
     };
     specific_options = patch_check_options;
-    specific_help = "patch-check\n"
+    specific_help = _(
+      "patch-check\n"
       "\n"
       "Check for available patches\n"
       "\n"
       "This command has no options.\n"
-      ;
+      );
   }
   else if (command == "patches" || command == "pch") {
     static struct option patches_options[] = {
@@ -389,12 +400,13 @@ int one_command(const string& command, int argc, char **argv)
       {0, 0, 0, 0}
     };
     specific_options = patches_options;
-    specific_help = "patches\n"
+    specific_help = _(
+      "patches\n"
       "\n"
       "List all available patches\n"
       "\n"
       "This command has no options.\n"
-      ;
+      );
   }
   else if (command == "info" || command == "if") {
     static struct option info_options[] = {
@@ -402,11 +414,11 @@ int one_command(const string& command, int argc, char **argv)
       {0, 0, 0, 0}
     };
     specific_options = info_options;
-    specific_help =
+    specific_help = _(
       "zypper [global-options] info [name...]\n"
       "\n"
       "'info' - Show full information for packages\n"
-      ;
+      );
   }
   else if (command == "patch-info") {
     static struct option patch_info_options[] = {
@@ -414,11 +426,11 @@ int one_command(const string& command, int argc, char **argv)
       {0, 0, 0, 0}
     };
     specific_options = patch_info_options;
-    specific_help =
+    specific_help = _(
       "zypper [global-options] patch-info [patchname...]\n"
       "\n"
       "'patch-info' - Show detailed information for patches\n"
-      ;
+      );
   }
   else if (command == "moo") {
     static struct option moo_options[] = {
@@ -426,14 +438,14 @@ int one_command(const string& command, int argc, char **argv)
       {0, 0, 0, 0}
     };
     specific_options = moo_options;
-    specific_help =
+    specific_help = _(
       "zypper [global-options] moo\n"
       "\n"
       "'moo' - Show an animal\n"
-      ;
+      );
   }
   else if (!command.empty()) { // empty command is treated earlier
-    cerr << "Unknown command '" << command << "'." << endl << endl;
+    cerr << _("Unknown command") << " '" << command << "'." << endl << endl;
     cerr << help_commands;
     return ZYPPER_EXIT_ERR_SYNTAX;
   }
@@ -448,7 +460,7 @@ int one_command(const string& command, int argc, char **argv)
 
   vector<string> arguments;
   if (optind < argc) {
-    cerr_v << "non-option ARGV-elements: ";
+    cerr_v << _("non-option ARGV-elements: ");
     while (optind < argc) {
       string argument = argv[optind++];
       cerr_v << argument << ' ';
@@ -460,26 +472,26 @@ int one_command(const string& command, int argc, char **argv)
   // === process options ===
 
   if (gopts.count("terse")) {
-      cerr_v << "FAKE Terse" << endl;
+      cerr_v << _("FAKE terse") << endl;
   }
 
   if (gopts.count("disable-system-sources"))
   {
-    MIL << "system sources disabled" << endl;
+    MIL << _("system sources disabled") << endl;
     gSettings.disable_system_sources = true;
   }
   else
   {
-    MIL << "system sources enabled" << endl;
+    MIL << _("system sources enabled") << endl;
   }
 
   if (gopts.count("disable-system-resolvables"))
   {
-    MIL << "system resolvables disabled" << endl;
-    cerr << "Ignoring installed resolvables..." << endl;
+    MIL << _("system resolvables disabled") << endl;
+    cerr << _("Ignoring installed resolvables...") << endl;
     gSettings.disable_system_resolvables = true;
   }
-  
+
   if (gopts.count("source")) {
     list<string> sources = gopts["source"];
     for (list<string>::const_iterator it = sources.begin(); it != sources.end(); ++it )
@@ -498,8 +510,8 @@ int one_command(const string& command, int argc, char **argv)
   }
   catch (Exception & excpt_r) {
     ZYPP_CAUGHT (excpt_r);
-    ERR  << "a ZYpp transaction is already in progress." << endl;
-    cerr << "a ZYpp transaction is already in progress." << endl;
+    ERR  << _("a ZYpp transaction is already in progress.") << endl;
+    cerr << _("a ZYpp transaction is already in progress.") << endl;
     return ZYPPER_EXIT_ERR_ZYPP;
   }
 
@@ -526,7 +538,7 @@ int one_command(const string& command, int argc, char **argv)
 
     if ( geteuid() != 0 )
     {
-      cerr << "Sorry, you need root privileges to view system sources." << endl;
+      cerr << _("Sorry, you need root privileges to view system sources.") << endl;
       return ZYPPER_EXIT_ERR_PRIVILEGES;
     }
     
@@ -544,7 +556,7 @@ int one_command(const string& command, int argc, char **argv)
 
     string type = copts.count("type")?  copts["type"].front() : "";
     if (type != "" && type != "YaST" && type != "YUM" && type != "Plaindir") {
-      cerr << "Warning, unknown metadata type " << type << endl;
+      cerr << _("Warning, unknown metadata type ") << type << endl;
     }
 
     string repoalias, repourl;
@@ -681,7 +693,7 @@ int one_command(const string& command, int argc, char **argv)
     string skind = copts.count("type")?  copts["type"].front() : "package";
     kind = string_to_kind (skind);
     if (kind == ResObject::Kind ()) {
-      cerr << "Unknown resolvable type " << skind << endl;
+      cerr << _("Unknown resolvable type ") << skind << endl;
       return ZYPPER_EXIT_ERR_INVALID_ARGS;
     }
 
@@ -694,7 +706,7 @@ int one_command(const string& command, int argc, char **argv)
   
     if ( gData.sources.empty() )
       {
-	cerr << "Warning! No sources. Operating only over the installed resolvables. You will not be able to install stuff" << endl;
+	cerr << _("Warning! No sources. Operating only over the installed resolvables. You will not be able to install stuff.") << endl;
       } 
 
     cond_init_target ();
@@ -739,7 +751,7 @@ int one_command(const string& command, int argc, char **argv)
       string skind = copts["type"].front();
       kind = string_to_kind (skind);
       if (kind == ResObject::Kind ()) {
-        cerr << "Unknown resolvable type " << skind << endl;
+        cerr << _("Unknown resolvable type ") << skind << endl;
         return ZYPPER_EXIT_ERR_INVALID_ARGS;
       }
       options.setKind(kind);
@@ -825,7 +837,7 @@ int one_command(const string& command, int argc, char **argv)
       gSettings.is_rug_compatible? "package" : "patch";
     kind = string_to_kind (skind);
     if (kind == ResObject::Kind ()) {
-	cerr << "Unknown resolvable type " << skind << endl;
+	cerr << _("Unknown resolvable type ") << skind << endl;
 	return ZYPPER_EXIT_ERR_INVALID_ARGS;
     }
 
@@ -853,7 +865,7 @@ int one_command(const string& command, int argc, char **argv)
       gSettings.is_rug_compatible? "package" : "patch";
     kind = string_to_kind (skind);
     if (kind == ResObject::Kind ()) {
-	cerr << "Unknown resolvable type " << skind << endl;
+	cerr << _("Unknown resolvable type ") << skind << endl;
 	return ZYPPER_EXIT_ERR_INVALID_ARGS;
     }
 

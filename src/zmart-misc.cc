@@ -23,10 +23,10 @@ void cond_init_target () {
   static bool done = false;
   if (!done) {
 #ifdef LIBZYPP_1xx
-    cerr_v << "Initializing Target (old way)" << endl;
+    cerr_v << _("Initializing Target") << _(" (old way)") << endl;
     God->initTarget("/", true);
 #else
-    cerr_v << "Initializing Target" << endl;
+    cerr_v << _("Initializing Target") << endl;
     God->initializeTarget("/");
 #endif
     done = true;
@@ -158,21 +158,20 @@ void mark_for_install( const ResObject::Kind &kind,
 		);
   cerr_vv << "... done" << endl;
   if (!installer.item) {
-    cerr << kind << " '" << name << "' not found" << endl;
+    cerr << kind << " '" << name << "' " << _("not found") << endl;
     return; //error?
   }
 
   if (installer.installed_item &&
       installer.installed_item.resolvable()->edition() == installer.item.resolvable()->edition() &&
       installer.installed_item.resolvable()->arch() == installer.item.resolvable()->arch()) {
-    cout << "skipping " << kind.asString() << " '" << name << "' (already installed)" << endl;
+    cout << _("skipping ") << kind.asString() << " '" << name << "' " << _("(already installed)") << endl;
   }
   else {
     // TODO don't use setToBeInstalled for this purpose but higher level solver API
     bool result = installer.item.status().setToBeInstalled( zypp::ResStatus::USER );
     if (!result) {
-      cerr << "Failed to add '" << name <<
-        "' to the list of packages to be installed." << endl;
+      cerr << format(_("Failed to add '%s' to the list of packages to be installed.")) % name << endl;
     }
   }
 }
@@ -190,7 +189,7 @@ struct DeleteProcess
     cerr_vv << "Marking for deletion: " << provider << endl;
     bool result = provider.status().setToBeUninstalled( zypp::ResStatus::USER );
     if (!result) {
-      cerr << "Failed" << endl;
+      cerr << _("Failed") << endl;
     }
     return true;		// get all of them
   }
@@ -213,7 +212,7 @@ void mark_for_uninstall( const ResObject::Kind &kind,
 		);
   cerr_vv << "... done" << endl;
   if (!deleter.found) {
-    cerr << "Not found" << endl;
+    cerr << _("Not found") << endl;
     return; //error?
   }
 }
@@ -227,10 +226,10 @@ void show_problems () {
     e = rproblems.end (),
     i;
   if (b != e) {
-    cerr << "Problems:" << endl;
+    cerr << _("Problems:") << endl;
   }
   for (i = b; i != e; ++i) {
-    stm << "PROB " << (*i)->description () << endl;
+    stm << _("PROB ") << (*i)->description () << endl;
     stm << ":    " << (*i)->details () << endl;
 
     ProblemSolutionList solutions = (*i)->solutions ();
@@ -239,7 +238,7 @@ void show_problems () {
       ee = solutions.end (),
       ii;
     for (ii = bb; ii != ee; ++ii) {
-      stm << " SOL  " << (*ii)->description () << endl;
+      stm << _(" SOL  ") << (*ii)->description () << endl;
       stm << " :    " << (*ii)->details () << endl;
     }
   }
@@ -255,7 +254,7 @@ int show_summary()
 {
   int retv = -1; // nothing to do;
 
-  cerr << "Summary:" << endl;
+  cerr << _("Summary:") << endl;
 
   MIL << "Pool contains " << God->pool().size() << " items." << std::endl;
   for ( ResPool::const_iterator it = God->pool().begin(); it != God->pool().end(); ++it )
@@ -278,14 +277,14 @@ int show_summary()
       }
 
       if ( it->status().isToBeInstalled() )
-        cerr << "<install>   ";
+        cerr << _("<install>   ");
       if ( it->status().isToBeUninstalled() )
-        cerr << "<uninstall> ";
+        cerr << _("<uninstall> ");
       cerr << *res << endl;
     }
   }
   if (retv == -1)
-    cerr << "Nothing to do." << endl;
+    cerr << _("Nothing to do.") << endl;
 
   return retv;
 }
@@ -341,9 +340,9 @@ void cond_load_resolvables ()
 
 void load_target()
 {
-  cerr << "Parsing RPM database..." << endl;
+  cerr << _("Parsing RPM database...") << endl;
   ResStore tgt_resolvables(God->target()->resolvables());
-  cerr_v << "   " <<  tgt_resolvables.size() << " resolvables." << endl;
+  cerr_v << "   " <<  tgt_resolvables.size() << _(" resolvables.") << endl;
   God->addResolvables(tgt_resolvables, true /*installed*/);
 }
 
@@ -354,16 +353,16 @@ void load_sources()
     if (! it->enabled())
       continue;			// #217297
 
-    cerr << "Parsing metadata for " << it->alias() << "..." << endl;
+    cerr << _("Parsing metadata for ") << it->alias() << "..." << endl;
     ResStore src_resolvables(it->resolvables());
-    cerr_v << "   " <<  src_resolvables.size() << " resolvables." << endl;
+    cerr_v << "   " <<  src_resolvables.size() << _(" resolvables.") << endl;
     God->addResolvables(src_resolvables);
   }
 }
 
 void establish ()
 {
-  cerr_v << "Establishing status of aggregates" << endl;
+  cerr_v << _("Establishing status of aggregates") << endl;
   God->resolver()->establishPool();
   dump_pool ();
 }
@@ -371,7 +370,7 @@ void establish ()
 void resolve()
 {
   establish ();
-  cerr_v << "Resolving dependencies ..." << endl;
+  cerr_v << _("Resolving dependencies...") << endl;
   God->resolver()->resolvePool();
 }
 
@@ -397,22 +396,22 @@ void patch_check ()
     }
   }
 
-  cout << gData.patches_count << " patches needed. ( " << gData.security_patches_count << " security patches )"  << std::endl;
+  cout << gData.patches_count << _(" patches needed") << ". ( " << gData.security_patches_count << _(" security patches") << " )"  << std::endl;
 }
 
 string string_status (const ResStatus& rs)
 {
   bool i = rs.isInstalled ();
   if (rs.isUndetermined ())
-    return i? "Installed": "Uninstalled";
+    return i? _("Installed"): _("Uninstalled");
   else if (rs.isEstablishedUneeded ())
-    return i? "No Longer Applicable": "Not Applicable";
+    return i? _("No Longer Applicable"): _("Not Applicable");
   else if (rs.isEstablishedSatisfied ())
-    return i? "Applied": "Not Needed";
+    return i? _("Applied"): _("Not Needed");
   else if (rs.isEstablishedIncomplete ())
-    return i? "Broken": "Needed";
+    return i? _("Broken"): _("Needed");
   // if ResStatus interface changes
-  return "error";
+  return _("error");
 }
 
 void dump_pool ()
@@ -441,7 +440,7 @@ void show_patches()
 
   Table tbl;
   TableHeader th;
-  th << "Catalog" << "Name" << "Version" << "Category" << "Status";
+  th << _("Catalog") << _("Name") << _("Version") << _("Category") << _("Status");
   tbl << th;
 
   ResPool::byKind_iterator
@@ -475,7 +474,7 @@ void list_patch_updates ()
   TableHeader th;
   unsigned cols;
 
-  th << "Catalog" << "Name" << "Version" << "Category" << "Status";
+  th << _("Catalog") << _("Name") << _("Version") << _("Category") << _("Status");
   cols = 5;
   tbl << th;
   pm_tbl << th;
@@ -598,12 +597,12 @@ void list_updates( const ResObject::Kind &kind )
     Table tbl;
     TableHeader th;
     unsigned cols = 5;
-    th << "S" << "Catalog";
+    th << _("S") << _("Catalog"); // for translators: S stands for Status
     if (gSettings.is_rug_compatible) {
       th << "Bundle";
       ++cols;
     }
-    th << "Name" << "Version" << "Arch";
+    th << _("Name") << _("Version") << _("Arch");
     tbl << th;
 
     Candidates candidates;
@@ -705,12 +704,12 @@ int solve_and_commit (bool non_interactive) {
   int retv = show_summary();
 
   if (retv >= 0) { // there are resolvables to install/uninstall
-    cerr << "Continue? [y/n] " << (non_interactive ? "y\n" : "");
+    cerr << _("Continue?") << " [y/n] " << (non_interactive ? "y\n" : "");
     if (non_interactive || readBoolAnswer()) {
 
       if (!confirm_licenses(non_interactive)) return ZYPPER_EXIT_OK;
 
-      cerr_v << "committing" << endl;
+      cerr_v << _("committing") << endl;
       
       try {
         ZYppCommitResult result = God->commit( ZYppCommitPolicy() );

@@ -33,7 +33,7 @@ namespace zypp {
     {
       virtual bool askUserToAcceptUnsignedFile( const std::string &file )
       {
-        cout << CLEARLN << file << " is unsigned, continue? [y/n]: " << flush;
+        cout << CLEARLN << file << _(" is unsigned, continue?") << " [y/n]: " << flush;
         return readBoolAnswer();
       }
       
@@ -43,7 +43,7 @@ namespace zypp {
         if ( geteuid() != 0 )
           return false;
         
-        cout << CLEARLN << "Import key " << key.id() << " in trusted keyring? [y/n]: " << flush;
+        cout << CLEARLN << _("Import key ") << key.id() << _(" to trusted keyring?") << "  [y/n]: " << flush;
         return readBoolAnswer();
       } 
 #endif
@@ -54,7 +54,7 @@ namespace zypp {
       virtual bool askUserToAcceptUnknownKey( const std::string &file, const std::string &id )
 #endif
       {
-        cout << CLEARLN << file << " is signed with an unknown key id: " << id << ", continue? [y/n]: " << flush;
+        cout << CLEARLN << file << _(" is signed with an unknown key id: ") << id << ", " << _("continue?") << " [y/n]: " << flush;
         return readBoolAnswer();
       }
 
@@ -65,7 +65,7 @@ namespace zypp {
 	const std::string& keyid = key.id(), keyname = key.name(),
 	  fingerprint = key.fingerprint();
 #endif
-        cout  << CLEARLN << "Do you want to trust key id " << keyid << " " << keyname << " fingerprint:" << fingerprint << " ? [y/n]: "  << flush;
+        cout  << CLEARLN << _("Do you want to trust key id ") << keyid << " " << keyname << _(" fingerprint:") << fingerprint << " ? [y/n]: "  << flush;
         return readBoolAnswer();
       }
 
@@ -76,9 +76,9 @@ namespace zypp {
 	const std::string& keyid = key.id(), keyname = key.name(),
 	  fingerprint = key.fingerprint();
 #endif
-        cout << file << "Signature verification for " << file
-	     << " with public key id " << keyid << " " << keyname << " fingerprint:" << fingerprint << " failed, THIS IS RISKY!. continue? [y/n]: " << endl;
-        return readBoolAnswer();
+        cout << file << _("Signature verification for ") << file
+	     << _(" with public key id ") << keyid << " " << keyname << _(" fingerprint:") << fingerprint << _(" failed, THIS IS RISKY!") << ". " << _("continue?") << " [y/n]: " << endl;
+        return readBoolAnswer(); // TODO do this with format()
       }
     };
 
@@ -87,21 +87,21 @@ namespace zypp {
     {
       virtual bool askUserToAcceptNoDigest( const zypp::Pathname &file )
       {
-	cout << CLEARLN << "No digest for " << file
-	     << ", continue [y/n]" << flush;
+	cout << CLEARLN << _("No digest for ") << file
+	     << ", " << _("continue?") << " [y/n]" << flush;
         return readBoolAnswer();
       }
       virtual bool askUserToAccepUnknownDigest( const Pathname &file, const std::string &name )
       {
-	cout << CLEARLN << "Unknown digest " << name << " for " << file
-	     << ", continue [y/n]" << flush;
+	cout << CLEARLN << _("Unknown digest ") << name << _(" for ") << file
+	     << ", " << _("continue?") << " [y/n]" << flush;
         return readBoolAnswer();
       }
       virtual bool askUserToAcceptWrongDigest( const Pathname &file, const std::string &requested, const std::string &found )
       {
-	cout << CLEARLN << "Digest verification failed for " << file
-	     << ", expected " << requested << " found " << found
-	     << ", continue [y/n]" << flush;
+	cout << CLEARLN << _("Digest verification failed for ") << file
+	     << _(", expected ") << requested << _(" found ") << found
+	     << ", " << _("continue?") << " [y/n]" << flush;
         return readBoolAnswer();
       }
     };

@@ -42,8 +42,8 @@ ZyppSearch::ZyppSearch (
 
   // no sources warning
   if (gData.sources.empty()) {
-    cerr << "No sources. Zypper currently searches within installation"
-        "sources only." << endl;
+    cerr << _("No sources. Zypper currently searches within installation"
+        "sources only.") << endl;
     exit(2); // TODO #define zypper error codes?
   }
 
@@ -104,7 +104,7 @@ void ZyppSearch::cacheInstalled() {
   if (_options.kind() != Resolvable::Kind())
     _icache.setIncludeKindInKey(false);
 
-  cout_v << "Pre-caching installed resolvables matching given search criteria... " << endl;
+  cout_v << _("Pre-caching installed resolvables matching given search criteria... ") << endl;
 
   ResStore tgt_resolvables(_zypp->target()->resolvables());
 
@@ -113,8 +113,8 @@ void ZyppSearch::cacheInstalled() {
   invokeOnEachSearched(Match(_reg,_options.searchDescriptions()),
     functorRef<bool,const zypp::PoolItem &>(_icache));
 
-  cout_v << _icache.size() << " out of (" <<  tgt_resolvables.size() << ")"  
-    "cached." << endl;
+  cout_v << _icache.size() << _(" out of (") <<  tgt_resolvables.size() << ")"  
+    << _("cached.") << endl;
 }
 
 /**
@@ -213,9 +213,9 @@ void ZyppSearch::setupRegexp() {
   }
   catch (regex_error & e) {
     cerr << "ZyppSearch::setupRegexp(): " << regstr
-      << " is not a valid regular expression: \""
+      << _(" is not a valid regular expression: \"")
       << e.what() << "\"" << endl;
-    cerr << "This is a bug, please file a bug report against zypper." << endl;
+    cerr << _("This is a bug, please file a bug report against zypper.") << endl;
     exit(1);
   }
 }
