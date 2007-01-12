@@ -45,7 +45,10 @@ gettextize -f
 autoreconf --force --install --symlink --verbose
 %{?suse_update_config:%{suse_update_config -f}}
 %if %suse_version <= 1010
-ZYPP_LIBS=-lzypp ZYPP_CFLAGS="-D_FILE_OFFSET_BITS=64 -DLIBZYPP_1xx" \
+# compatibility defines unless we have the newer libzypp on SLE SP
+if ! pkg-config --modversion libzypp | grep '^2'; then
+export ZYPP_LIBS=-lzypp ZYPP_CFLAGS="-D_FILE_OFFSET_BITS=64 -DLIBZYPP_1xx"
+fi
 %endif
 CFLAGS="$RPM_OPT_FLAGS" \
 CXXFLAGS="$RPM_OPT_FLAGS" \

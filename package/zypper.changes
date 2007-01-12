@@ -2,7 +2,9 @@
 Fri Jan 12 15:08:49 CET 2007 - jkupec@suse.cz
 
 - Texts corrected based on feedback from proof-reading.
-- r4854
+- Fixed building on SLE10-SP1 (mvidner).
+- r4856
+- 0.6.15
 
 -------------------------------------------------------------------
 Thu Jan 11 17:02:30 CET 2007 - jkupec@suse.cz
