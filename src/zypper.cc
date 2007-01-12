@@ -80,7 +80,7 @@ string help_commands = _(
   "\tinstall, in\t\tInstall packages or resolvables\n"
   "\tremove, rm\t\tRemove packages or resolvables\n"
   "\tsearch, se\t\tSearch for packages matching a pattern\n"
-  "\tservice-list, sl\tList services aka installation sources\n"
+  "\tservice-list, sl\tList services, also called installation sources\n"
   "\tservice-add, sa\t\tAdd a new service\n"
   "\tservice-delete, sd\tDelete a service\n"
   "\tservice-rename, sr\tRename a service\n"
@@ -89,8 +89,8 @@ string help_commands = _(
   "\tpatches, pch\t\tList patches\n"
   "\tlist-updates, lu\tList updates\n"
   "\tupdate, up\t\tUpdate packages\n"
-  "\tinfo, if\t\tShow full info for packages\n"
-  "\tpatch-info\t\tShow full info for patches\n"
+  "\tinfo, if\t\tShow full information for packages\n"
+  "\tpatch-info\t\tShow full information for patches\n"
   "");
 
 // global options
@@ -128,7 +128,7 @@ string process_globals(int argc, char **argv)
 
   if (gopts.count("verbose")) {
     gSettings.verbose += gopts["verbose"].size();
-    cerr << _("verbosity ") << gSettings.verbose << endl;
+    cerr << _("Verbosity ") << gSettings.verbose << endl;
   }
 
   if (gopts.count("table-style")) {
@@ -193,12 +193,12 @@ int one_command(const string& command, int argc, char **argv)
 
   string help_global_source_options = _(
       "  Source options:\n"
-      "\t--disable-system-sources, -D\t\tDon't read the system sources\n"
+      "\t--disable-system-sources, -D\t\tDo not read the system sources\n"
       "\t--source, -S\t\tRead additional source\n"
       );
 
   string help_global_target_options = _("  Target options:\n"
-      "\t--disable-system-resolvables, -T\t\tDon't read system installed resolvables\n"
+      "\t--disable-system-resolvables, -T\t\tDo not read system installed resolvables\n"
       );
 
   if (command == "install" || command == "in") {
@@ -212,9 +212,9 @@ int one_command(const string& command, int argc, char **argv)
     specific_options = install_options;
     specific_help = _(
       "  Command options:\n"
-      "\t--catalog,-c\t\tOnly from this catalog (FIXME)\n"
+      "\t--catalog,-c\t\tOnly from this catalog (under development)\n"
       "\t--type,-t\t\tType of resolvable (default: package)\n"
-      "\t--no-confirm,-y\tDon't require user confirmation\n"
+      "\t--no-confirm,-y\tDo not require user confirmation\n"
       );
   }
   else if (command == "remove" || command == "rm") {
@@ -228,7 +228,7 @@ int one_command(const string& command, int argc, char **argv)
     specific_help = _(
       "  Command options:\n"
       "\t--type,-t\t\tType of resolvable (default: package)\n"
-      "\t--no-confirm,-y\tDon't require user confirmation\n"
+      "\t--no-confirm,-y\tDo not require user confirmation\n"
       );
   }
   else if (command == "service-add" || command == "sa") {
@@ -305,7 +305,7 @@ int one_command(const string& command, int argc, char **argv)
     specific_help = _(
       "zypper refresh\n"
       "\n"
-      "Refresh all installation sources found in system.\n"
+      "Refresh all installation sources found in the system.\n"
       );
   }
   else if (command == "list-updates" || command == "lu") {
@@ -321,7 +321,7 @@ int one_command(const string& command, int argc, char **argv)
       "List all available updates\n"
       "\n"
       "  Command options:\n"
-      "\t--type,-t\t\tType of resolvable (default: patch!)\n"
+      "\t--type,-t\t\tType of resolvable (default: patch)\n"
       );
   }
   else if (command == "update" || command == "up") {
@@ -335,8 +335,8 @@ int one_command(const string& command, int argc, char **argv)
     specific_options = update_options;
     specific_help = _(
       "  Command options:\n"
-      "\t--type,-t\t\tType of resolvable (default: patch!)\n"
-      "\t--no-confirm,-y\t\tDon't require user confirmation\n"
+      "\t--type,-t\t\tType of resolvable (default: patch)\n"
+      "\t--no-confirm,-y\t\tDo not require user confirmation\n"
       "\t--skip-interactive\t\tSkip interactive updates\n"
       );
   }
@@ -372,10 +372,10 @@ int one_command(const string& command, int argc, char **argv)
       "-d, --search-descriptions  Search also in package summaries and descriptions.\n"
       "-c, --case-sensitive       Perform case-sensitive search.\n"
       "-i, --installed-only       Show only packages that are already installed.\n"
-      "-u, --uninstalled-only     Show only packages that are not curenly installed.\n"
-      "-t, --type                 Search only for packages of specified type.\n"
+      "-u, --uninstalled-only     Show only packages that are not currently installed.\n"
+      "-t, --type                 Search only for packages of the specified type.\n"
       "    --sort-by-name         Sort packages by name (default).\n"
-      "    --sort-by-catalog      Sort packages by catalog.\n" // ??? catalog/source?
+      "    --sort-by-catalog      Sort packages by catalog (source).\n"
       "\n"
       "* and ? wildcards can also be used within search strings.\n"
       );
@@ -417,7 +417,7 @@ int one_command(const string& command, int argc, char **argv)
     specific_help = _(
       "zypper [global-options] info [name...]\n"
       "\n"
-      "'info' - Show full information for packages\n"
+      "'info' -- Show full information for packages\n"
       );
   }
   else if (command == "patch-info") {
@@ -429,7 +429,7 @@ int one_command(const string& command, int argc, char **argv)
     specific_help = _(
       "zypper [global-options] patch-info [patchname...]\n"
       "\n"
-      "'patch-info' - Show detailed information for patches\n"
+      "'patch-info' -- Show detailed information for patches\n"
       );
   }
   else if (command == "moo") {
@@ -460,7 +460,7 @@ int one_command(const string& command, int argc, char **argv)
 
   vector<string> arguments;
   if (optind < argc) {
-    cerr_v << _("non-option ARGV-elements: ");
+    cerr_v << _("Non-Option Program Arguments: ");
     while (optind < argc) {
       string argument = argv[optind++];
       cerr_v << argument << ' ';
@@ -472,22 +472,22 @@ int one_command(const string& command, int argc, char **argv)
   // === process options ===
 
   if (gopts.count("terse")) {
-      cerr_v << _("FAKE terse") << endl;
+      cerr_v << _("Ignoring --terse (provided only for rug compatibility)") << endl;
   }
 
   if (gopts.count("disable-system-sources"))
   {
-    MIL << _("system sources disabled") << endl;
+    MIL << "System sources disabled" << endl;
     gSettings.disable_system_sources = true;
   }
   else
   {
-    MIL << _("system sources enabled") << endl;
+    MIL << "System sources enabled" << endl;
   }
 
   if (gopts.count("disable-system-resolvables"))
   {
-    MIL << _("system resolvables disabled") << endl;
+    MIL << "System resolvables disabled" << endl;
     cerr << _("Ignoring installed resolvables...") << endl;
     gSettings.disable_system_resolvables = true;
   }
@@ -510,8 +510,8 @@ int one_command(const string& command, int argc, char **argv)
   }
   catch (Exception & excpt_r) {
     ZYPP_CAUGHT (excpt_r);
-    ERR  << _("a ZYpp transaction is already in progress.") << endl;
-    cerr << _("a ZYpp transaction is already in progress.") << endl;
+    ERR  << "A ZYpp transaction is already in progress." << endl;
+    cerr << _("A ZYpp transaction is already in progress.") << endl;
     return ZYPPER_EXIT_ERR_ZYPP;
   }
 
@@ -538,7 +538,7 @@ int one_command(const string& command, int argc, char **argv)
 
     if ( geteuid() != 0 )
     {
-      cerr << _("Sorry, you need root privileges to view system sources.") << endl;
+      cerr << _("Root privileges are required for viewing system sources.") << endl;
       return ZYPPER_EXIT_ERR_PRIVILEGES;
     }
     
@@ -556,7 +556,7 @@ int one_command(const string& command, int argc, char **argv)
 
     string type = copts.count("type")?  copts["type"].front() : "";
     if (type != "" && type != "YaST" && type != "YUM" && type != "Plaindir") {
-      cerr << _("Warning, unknown metadata type ") << type << endl;
+      cerr << _("Warning: Unknown metadata type ") << type << endl;
     }
 
     string repoalias, repourl;
@@ -706,7 +706,7 @@ int one_command(const string& command, int argc, char **argv)
   
     if ( gData.sources.empty() )
       {
-	cerr << _("Warning! No sources. Operating only over the installed resolvables. You will not be able to install stuff.") << endl;
+	cerr << _("Warning: No sources. Operating only with the installed resolvables. Nothing can be installed.") << endl;
       } 
 
     cond_init_target ();
@@ -908,7 +908,7 @@ int one_command(const string& command, int argc, char **argv)
 /// tell to report a bug, and how
 // (multiline, with endls)
 ostream& report_a_bug (ostream& stm) {
-  return stm << _("Please report a bug about this.") << endl
+  return stm << _("Please file a bug report about this.") << endl
     // remember not to translate the URL
     // unless you translate the actual page :)
 	     << _("See http://en.opensuse.org/Zypper#Troubleshooting for instructions.") << endl;
