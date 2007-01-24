@@ -71,6 +71,9 @@ string2kind (const std::string & str)
 	else if (str == "language") {
 	    kind = ResTraits<Language>::kind;
 	}
+	else if (str == "system") {
+	    kind = ResTraits<SystemResObject>::kind;
+	}	
 	else if (str == "atom") {
 	    kind = ResTraits<Atom>::kind;
 	}
@@ -449,6 +452,7 @@ HelixParser::toplevelStart(const std::string & token, const xmlChar **attrs)
 	|| (token == "language")
 	|| (token == "patch")
 	|| (token == "atom")
+	|| (token == "system")	
 	|| (token == "product")) {
 
 	_state = PARSER_RESOLVABLE;
@@ -627,6 +631,7 @@ HelixParser::resolvableEnd (const std::string & token)
 	|| (token == "language")
 	|| (token == "patch")
 	|| (token == "atom")
+	|| (token == "system")	
 	|| (token == "product")) {
 
 	kind = string2kind (token);

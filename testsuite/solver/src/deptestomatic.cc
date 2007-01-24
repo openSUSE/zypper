@@ -1229,7 +1229,7 @@ parse_xml_trial (XmlNode_Ptr node, const ResPool & pool)
     }
     else {
 	for (ResPool::const_iterator it = pool.begin(); it != pool.end(); ++it) {
-	    if (it->status().transacts()) it->status().setTransact( false, ResStatus::USER );
+	    if (it->status().transacts()) it->status().resetTransact( ResStatus::USER );
 	}
     }
 
@@ -1518,11 +1518,12 @@ parse_xml_trial (XmlNode_Ptr node, const ResPool & pool)
 	} else if (node->equals ("addRequire")) {
 	    addDependencies (node->getProp ("kind") , node->getProp ("name"), REQUIRE, pool);
 	} else if (node->equals ("reportproblems")) {
-	    if (resolver->resolvePool() == true) {
+	    if (resolver->resolvePool() == true
+                && node->getProp ("ignoreValidSolution").empty()) {
 		RESULT << "No problems so far" << endl;
 	    }
 	    else {
-		ResolverProblemList problems = resolver->problems ();
+		ResolverProblemList problems = resolver->problems (true);
 		problems.sort(compare_problems());
 		RESULT << problems.size() << " problems found:" << endl;
 		for (ResolverProblemList::iterator iter = problems.begin(); iter != problems.end(); ++iter) {
@@ -1675,7 +1676,7 @@ parse_xml_trial (XmlNode_Ptr node, const ResPool & pool)
 	     }
             
 	} else if (node->equals ("keep")) {
-
+	    string kind_name = node->getProp ("kind");
 	    string name = node->getProp ("name");
 	    if (name.empty())
 		name = node->getProp ("package");
@@ -1692,7 +1693,7 @@ parse_xml_trial (XmlNode_Ptr node, const ResPool & pool)
 
             PoolItem_Ref poolItem;
 
-            poolItem = get_poolItem( source_alias, name, "" );
+            poolItem = get_poolItem( source_alias, name, kind_name );
 
             if (poolItem) {
                 // first: set anything
@@ -1704,7 +1705,6 @@ parse_xml_trial (XmlNode_Ptr node, const ResPool & pool)
                 }
                 // second: keep old state
                 poolItem.status().setTransact( false, ResStatus::USER );
-                resolver->transactResObject( poolItem, false );
             }
             else {
                 cerr << "Unknown item " << source_alias << "::" << name << endl;
@@ -1768,7 +1768,7 @@ parse_xml_transact (XmlNode_Ptr node, const ResPool & pool)
     }
     else {
 	for (ResPool::const_iterator it = pool.begin(); it != pool.end(); ++it) {
-	    if (it->status().transacts()) it->status().setTransact( false, ResStatus::USER );
+	    if (it->status().transacts()) it->status().resetTransact( ResStatus::USER );
 	}
     }
 

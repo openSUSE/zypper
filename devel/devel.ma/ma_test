@@ -35,12 +35,11 @@ else
 fi
 
 $MAKE $PRG || exit 1
-
+echo "====================================================="
 export ZYPP_LOGFILE=-
 export ZYPP_KEYRING_DEFAULT_ACCEPT_ALL=1
 #export ZYPP_TESTSUITE_FAKE_ARCH=x86_64
 #$SUDO ./$PRG "$@" 2>&1 | tee log > $LPIPE
-
 exec 2> >(tee log > $LPIPE)
 $SUDO ./$PRG "$@"
 

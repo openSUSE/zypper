@@ -1,4 +1,78 @@
 -------------------------------------------------------------------
+Wed Jan 24 18:10:41 CET 2007 - dmacvicar@suse.de
+
+- Merged revisions 4705-4906 via svnmerge from SuSE-Linux-10_2-Branch
+- Corrupt download cannot be skipped
+  (#217425 and #224216)
+- Enable package read ahead/caching in commit per default to reduce
+  interactive media changes. If the environment variable
+  ZYPP_COMMIT_NO_PACKAGE_CACHE is set, caching will be disabled. (F100182)
+- added parameter not to reset resolver results while calling
+  freshen pool Bug: 235761
+- Prepare package read ahead/caching of packages in commit. Adatped the
+  workflow. Caching details are now hidden inside CommitPackageCache.
+  The current implementation still performs no read ahead. (for F100182)
+- Skip invalid or broken rpm database entries. (#231211)
+- verifySystem: check if the solution is valid after calling freshenPool()
+  Bug: 235761
+- Added own call for Resolver::verifySystem with additional
+  hardware/language check in order to keep binary compatibility
+  Fate #301224
+- Rpm requires additional quoting of special chars in filenames.
+  (#233967)
+- Resolver::verifySystem checks for new hardware now by calling
+  freshenPool. This is configureable. Fate #301224
+- merged texts from proofread
+- Don't consider patch/delta rpms if package architecture changes.
+  (#231254)
+- update packages: changing architecture is only valid while an
+  system update and NOT while an update via a patch.
+  Bug 230685 - x86_64 MozillaFirefox binaries in security update repository
+- verifySystem: Do only regard items which will be on the system after the
+  commit. Fate 301178
+- feature #301369
+  Import listed GPG Keys from an trusted installation source
+- fix return call in new xml parser
+- Enable system resolvables in Helix parser (Revision 4787)
+- deptestomatic:
+  Resetting transaction with the correct call;
+  bugfix; Added kind in keep state (Revision 4788)
+- Wrong behaviour in soft install/uninstall. --> Setting Transact with
+  soft (Revision 4789)
+- New call added: maySetToBeUninstalledSoft (Revision 4789)
+  Both are only functions for the solver (Revision 4789)
+- Resetting "by causer" in order to distinguish from state
+  "keep by user". ( function setLock in order to remove lock)
+  (Revision 4789)
+- Better fix for Bug 217574: Checking if the resolveable CAN be deleted soft
+  in QueueItemUninstall.cc (Revision 4790)
+- Regarding "keep state by user". So avoiding "reselecting" by
+  other requirements.
+  Give a corresponding problem solution if a resolvable satisfy
+  a dependency, but has been set to keep by the user.
+  Bug : 222531 (Revision 4791)
+- Allow to disable autoprotection of foreign vendor items. Required
+  in zmd-backend. (F301735).
+- use sqlite-zmd if using > 10.2 in spec. Use the one available
+  durin compile.
+- Item could has already been selected to soft uninstall (e.G. remove
+  pattern which recommend this item ). Do not throw an exception anymore.
+  bug#225278
+- Added syscontent::Reader: Parse serialized set of ResObjects.
+  (for F300729)
+- If there has already been selected another item by the solver (e.g. from
+  another source) we will take thatone in order to avoid parallel
+  installation and there concerning error messages.
+  Bug 224698
+- In order to handle conflicting resolvable we try to update the
+  conflicting item. While evaluating these canditates an already selected
+  candidate will not be regarded. So it could be that an older package
+  will be selected for update although a newer has already been selected. Revision 4765
+- Conflicting items: The resolvable will be obsoleted by another. So it is useless finding an
+  update candidate and evaluate additional branches.
+- r4907 
+
+-------------------------------------------------------------------
 Wed Jan 24 14:50:33 CET 2007 - lslezak@suse.cz
 
 - added ZYpp::getPartitions() - return the partitinoning

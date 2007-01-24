@@ -1,123 +1,235 @@
-#include <iostream>
-
 #include "Tools.h"
+#include <libxml/xmlreader.h>
+#include <libxml/xmlerror.h>
+#include <boost/call_traits.hpp>
 
-#include <string>
-#include <ext/hash_set>
-#include <ext/hash_fun.h>
+#include <iostream>
+#include <fstream>
+#include <list>
+#include <map>
+#include <set>
 
-using std::endl;
+#include <zypp/base/Hash.h>
+
+#include <zypp/base/LogControl.h>
+#include <zypp/base/LogTools.h>
+
+#include "zypp/parser/xml/Reader.h"
+
+using namespace std;
 using namespace zypp;
 
-///////////////////////////////////////////////////////////////////
+#include "zypp/base/Exception.h"
+#include "zypp/base/InputStream.h"
+#include "zypp/base/DefaultIntegral.h"
+#include <zypp/base/Function.h>
+#include <zypp/base/Iterator.h>
+#include <zypp/Pathname.h>
+#include <zypp/Edition.h>
+#include <zypp/CheckSum.h>
+#include <zypp/Date.h>
+#include <zypp/Rel.h>
+#include <zypp/CapFactory.h>
 
 ///////////////////////////////////////////////////////////////////
-namespace __gnu_cxx
-{ /////////////////////////////////////////////////////////////////
 
-  template<>
-    struct hash<std::string>
-    {
-      size_t operator()( const std::string & key_r ) const
-      { return __stl_hash_string( key_r.c_str() ); }
-    };
-
-  ///////////////////////////////////////////////////////////////////
-  namespace strhash
-  { /////////////////////////////////////////////////////////////////
-
-    /////////////////////////////////////////////////////////////////
-  } // namespace strhash
-  ///////////////////////////////////////////////////////////////////
-
-  /////////////////////////////////////////////////////////////////
-} // namespace __gnu_cxx
-///////////////////////////////////////////////////////////////////
-
-///////////////////////////////////////////////////////////////////
-namespace zypp
-{ /////////////////////////////////////////////////////////////////
-
-
-
-  /////////////////////////////////////////////////////////////////
-} // namespace zypp
-///////////////////////////////////////////////////////////////////
-
-struct Test
-{
-  Test( const std::string & val_r = std::string() )
-  : _val( val_r )
-  , _len( _val.size() )
-  {}
-
-  const std::string & val() const
-  { return _val; }
-
-  unsigned len() const
-  { return _len; }
-
-  private:
-    std::string _val;
-    unsigned    _len;
-};
-
-template<class _Value, class _Key>
-  struct HashKey
+template<class _Cl>
+  void ti( const _Cl & c )
   {
-    typedef _Value value_type;
-    typedef _Key   key_type;
-  };
+    SEC << __PRETTY_FUNCTION__ << endl;
+  }
 
-struct TestHashByString : public HashKey<Test,std::string>
+///////////////////////////////////////////////////////////////////
+
+bool nopNode( xml::Reader & reader_r )
 {
-  const std::string & operator()( const Test & value_r ) const
-  { return value_r.val(); }
-};
-
-struct TestHashByUnsigned : public HashKey<Test,unsigned>
-{
-  unsigned operator()( const Test & value_r ) const
-  { return value_r.len(); }
-};
-
-
-typedef __gnu_cxx::hash_set<std::string> HSet;
-
-std::ostream & operator<<( std::ostream & str, const HSet & obj )
-{
-  str << "HSet:" << obj.size() << " (" << obj.bucket_count() << ")" << endl;
-  for ( HSet::size_type i = 0; i < obj.bucket_count(); ++i )
-    {
-      HSet::size_type c = obj.elems_in_bucket( i );
-      if ( c )
-        str << "  [" << i << "] " << c << endl;
-    }
-  return str;
+  return true;
 }
 
-template<class _HashKey>
-  struct HashFnc
-  {};
+///////////////////////////////////////////////////////////////////
+
+bool accNode( xml::Reader & reader_r )
+{
+  int i;
+  xml::XmlString s;
+#define X(m) reader_r->m()
+      i=X(readState);
+      i=X(lineNumber);
+      i=X(columnNumber);
+      i=X(depth);
+      i=X(nodeType);
+      s=X(name);
+      s=X(prefix);
+      s=X(localName);
+      i=X(hasAttributes);
+      i=X(attributeCount);
+      i=X(hasValue);
+      s=X(value);
+#undef X
+      return true;
+}
 
 ///////////////////////////////////////////////////////////////////
-namespace __gnu_cxx
-{ /////////////////////////////////////////////////////////////////
 
-  template<>
-    template<class _HashKey>
-    struct hash<HashFnc<_HashKey> >
+bool dumpNode( xml::Reader & reader_r )
+{
+  switch ( reader_r->nodeType() )
     {
-      typedef typename _HashKey::value_type value_type;
-      typedef typename _HashKey::key_type   key_type;
+    case XML_READER_TYPE_ATTRIBUTE:
+       DBG << *reader_r << endl;
+       break;
+    case XML_READER_TYPE_ELEMENT:
+       MIL << *reader_r << endl;
+       break;
+    default:
+       //WAR << *reader_r << endl;
+       break;
+    }
+  return true;
+}
 
-      size_t operator()( const value_type & value_r ) const
-      { return hash<key_type>()( _HashKey()( value_r ) ); }
-    };
-
-  /////////////////////////////////////////////////////////////////
-} // namespace __gnu_cxx
 ///////////////////////////////////////////////////////////////////
+
+bool dumpEd( xml::Reader & reader_r )
+{
+  static int num = 5;
+  if ( reader_r->nodeType() == XML_READER_TYPE_ELEMENT
+       && reader_r->name() == "version" )
+    {
+      MIL << *reader_r << endl;
+      DBG << reader_r->getAttribute( "rel" ) << endl;
+      ERR << *reader_r << endl;
+      DBG << reader_r->getAttribute( "ver" ) << endl;
+      ERR << *reader_r << endl;
+      DBG << reader_r->getAttribute( "epoch" ) << endl;
+      ERR << *reader_r << endl;
+      WAR << Edition( reader_r->getAttribute( "ver" ).asString(),
+                      reader_r->getAttribute( "rel" ).asString(),
+                      reader_r->getAttribute( "epoch" ).asString() ) << endl;
+      --num;
+    }
+  return num;
+}
+
+///////////////////////////////////////////////////////////////////
+
+template<class _OutputIterator>
+  struct DumpDeps
+  {
+    DumpDeps( _OutputIterator result_r )
+    : _result( result_r )
+    {}
+
+    bool operator()( xml::Reader & reader_r )
+    {
+      if ( reader_r->nodeType()     == XML_READER_TYPE_ELEMENT
+           && reader_r->prefix()    == "rpm"
+           && reader_r->localName() == "entry" )
+        {
+          string n( reader_r->getAttribute( "name" ).asString() );
+          Rel op( reader_r->getAttribute( "flags" ).asString() );
+          if ( op != Rel::ANY )
+            {
+              n += " ";
+              n += op.asString();
+              n += " ";
+              n += reader_r->getAttribute( "ver" ).asString();
+              n += "-";
+              n += reader_r->getAttribute( "rel" ).asString();
+            }
+          *_result = n;
+          ++_result;
+        }
+      return true;
+    }
+
+    _OutputIterator _result;
+  };
+
+template<class _OutputIterator>
+  DumpDeps<_OutputIterator> dumpDeps( _OutputIterator result_r )
+  { return DumpDeps<_OutputIterator>( result_r ); }
+
+///////////////////////////////////////////////////////////////////
+
+void fillSet( const std::list<std::string> & list_r )
+{
+  Measure m( "Set " );
+  std::set<std::string> s( list_r.begin(), list_r.end() );
+  MIL << s.size() << endl;
+  m.stop();
+}
+
+void fillHashSet( const std::list<std::string> & list_r )
+{
+  Measure m( "HashSet " );
+  hash_set<std::string> s( list_r.begin(), list_r.end() );
+  MIL << s.size() << endl;
+  m.stop();
+}
+
+void fillMap( const std::list<std::string> & list_r )
+{
+  Measure m( "Map " );
+  std::map<std::string,std::string> s;
+  for ( std::list<std::string>::const_iterator it = list_r.begin(); it != list_r.end(); ++it )
+    {
+      s[*it] = *it;
+    }
+  MIL << s.size() << endl;
+  m.stop();
+}
+
+void fillHashMap( const std::list<std::string> & list_r )
+{
+  Measure m( "HashMap " );
+  hash_map<std::string,std::string> s;
+  for ( std::list<std::string>::const_iterator it = list_r.begin(); it != list_r.end(); ++it )
+    {
+      s[*it] = *it;
+    }
+  MIL << s.size() << endl;
+  m.stop();
+}
+
+void lfillStd( const std::list<std::string> & list_r )
+{
+  Measure x( "lfillStd " );
+  std::set<std::string> s;
+  std::map<std::string,std::string> m;
+
+  for ( std::list<std::string>::const_iterator it = list_r.begin(); it != list_r.end(); ++it )
+    {
+      if ( m[*it].empty() )
+        {
+          m[*it] = *it;
+          s.insert( *it );
+        }
+    }
+  MIL << m.size() << " " << s.size() << endl;
+  x.stop();
+}
+
+void parseCaps( const std::list<std::string> & list_r )
+{
+  Measure x( "parseCaps" );
+  for ( std::list<std::string>::const_iterator it = list_r.begin(); it != list_r.end(); ++it )
+    {
+      CapFactory().parse( ResTraits<Package>::kind, *it );
+    }
+  x.stop();
+}
+
+void parseCapsAndInsert( const std::list<std::string> & list_r )
+{
+  Measure x( "parseCapsAndInsert" );
+  CapSet s;
+  for ( std::list<std::string>::const_iterator it = list_r.begin(); it != list_r.end(); ++it )
+    {
+      s.insert(  CapFactory().parse( ResTraits<Package>::kind, *it ) );
+    }
+  x.stop();
+}
 
 
 /******************************************************************
@@ -127,42 +239,33 @@ namespace __gnu_cxx
 */
 int main( int argc, char * argv[] )
 {
-  //zypp::base::LogControl::instance().logfile( "" );
   INT << "===[START]==========================================" << endl;
+  --argc;
+  ++argv;
 
-  __gnu_cxx::hash_set<Test> t;
-  __gnu_cxx::hash_set<Test, mem_fun(Test::val)> ts;
-  __gnu_cxx::hash_set<Test, mem_fun(Test::len)> tu;
-
-
-  INT << "===[END]============================================" << endl << endl;
-  new zypp::base::LogControl::TmpLineWriter;
-  return 0;
-  HSet hset;
-  MIL << hset << endl;
-
-  for ( unsigned i = 0; i < 200; ++i )
+  Pathname repodata;
+  if ( argc )
     {
-      std::string x( i, 'a' );
-      hset.insert( x );
-      MIL << hset << endl;
+      repodata = *argv;
+    }
+  else
+    {
+      repodata = "/Local/FACTORY/repodata";
+      repodata /= "primary.xml";
     }
 
-  MIL << hset << endl;
+  std::list<std::string> depstrings;
 
-  DBG << __gnu_cxx::hash<const char*>()( "" ) << endl;
-  DBG << __gnu_cxx::hash<const char*>()( "a" ) << endl;
-  DBG << __gnu_cxx::hash<const char*>()( "aa" ) << endl;
-  DBG << __gnu_cxx::hash<const char*>()( "ab" ) << endl;
-  DBG << __gnu_cxx::hash<const char*>()( "ac" ) << endl;
-  DBG << __gnu_cxx::hash<const char*>()( "b" ) << endl;
-  DBG << __gnu_cxx::hash<const char*>()( "c" ) << endl;
-  DBG << __gnu_cxx::hash<const char*>()( "" ) << endl;
-  DBG << __gnu_cxx::hash<std::string>()( std::string("foo") ) << endl;
+  Measure m( "Parse" );
+  xml::Reader reader( repodata );
+  reader.foreachNodeOrAttribute( dumpDeps( std::back_inserter(depstrings) ) );
+  m.stop();
 
+  MIL << "raw depstrings " << depstrings.size() << endl;
+  parseCaps( depstrings );
+  parseCapsAndInsert( depstrings );
 
   INT << "===[END]============================================" << endl << endl;
-  new zypp::base::LogControl::TmpLineWriter;
   return 0;
 }
 

@@ -1,0 +1,98 @@
+>!> Installing patch:libzypp from channel 2
+>!> 8 problems found:
+>!> Problem:
+>!> atom:libzypp-2.8.1-3.i586[2] cannot be installed due to missing dependencies
+>!> There are no installable providers of libzypp >= 2.8.1-3 for atom:libzypp-2.8.1-3.i586[2]
+>!>    Solution:
+>!>       install libzypp
+>!>       install libzypp-2.8.1-3.i586[2]
+>!>    Solution:
+>!>       do not install libzypp
+>!>       do not install atom:libzypp-2.8.1-3.i586[2]
+>!>    Solution:
+>!>       Ignore this requirement just here
+>!>       
+>!> Problem:
+>!> libzypp-zmd-backend-7.1.1.0_0.4-30.i586[2] cannot be installed due to missing dependencies
+>!> There are no installable providers of libzypp >= 2.8.1-3 for libzypp-zmd-backend-7.1.1.0_0.4-30.i586[2]
+>!>    Solution:
+>!>       install libzypp
+>!>       install libzypp-2.8.1-3.i586[2]
+>!>    Solution:
+>!>       do not install libzypp-zmd-backend
+>!>       do not install libzypp-zmd-backend-7.1.1.0_0.4-30.i586[2]
+>!>    Solution:
+>!>       Ignore this requirement just here
+>!>       
+>!> Problem:
+>!> ruby-zypp-0.1-28.i586[2] cannot be installed due to missing dependencies
+>!> There are no installable providers of libzypp.so.208 for ruby-zypp-0.1-28.i586[2]
+>!>    Solution:
+>!>       install libzypp
+>!>       install libzypp-2.8.1-3.i586[2]
+>!>    Solution:
+>!>       do not install ruby-zypp
+>!>       do not install ruby-zypp-0.1-28.i586[2]
+>!>    Solution:
+>!>       Ignore this requirement just here
+>!>       
+>!> Problem:
+>!> yast2-ncurses-2.14.2-7.i586[2] cannot be installed due to missing dependencies
+>!> There are no installable providers of libzypp.so.208 for yast2-ncurses-2.14.2-7.i586[2]
+>!>    Solution:
+>!>       install libzypp
+>!>       install libzypp-2.8.1-3.i586[2]
+>!>    Solution:
+>!>       do not install yast2-ncurses
+>!>       do not install yast2-ncurses-2.14.2-7.i586[2]
+>!>    Solution:
+>!>       Ignore this requirement just here
+>!>       
+>!> Problem:
+>!> yast2-perl-bindings-2.14.0-4.i586[2] cannot be installed due to missing dependencies
+>!> There are no installable providers of libzypp.so.208 for yast2-perl-bindings-2.14.0-4.i586[2]
+>!>    Solution:
+>!>       install libzypp
+>!>       install libzypp-2.8.1-3.i586[2]
+>!>    Solution:
+>!>       do not install yast2-perl-bindings
+>!>       do not install yast2-perl-bindings-2.14.0-4.i586[2]
+>!>    Solution:
+>!>       Ignore this requirement just here
+>!>       
+>!> Problem:
+>!> yast2-pkg-bindings-2.14.2-3.i586[2] cannot be installed due to missing dependencies
+>!> There are no installable providers of libzypp.so.208 for yast2-pkg-bindings-2.14.2-3.i586[2]
+>!>    Solution:
+>!>       install libzypp
+>!>       install libzypp-2.8.1-3.i586[2]
+>!>    Solution:
+>!>       do not install yast2-pkg-bindings
+>!>       do not install yast2-pkg-bindings-2.14.2-3.i586[2]
+>!>    Solution:
+>!>       Ignore this requirement just here
+>!>       
+>!> Problem:
+>!> yast2-qt-2.14.1-6.i586[2] cannot be installed due to missing dependencies
+>!> There are no installable providers of libzypp.so.208 for yast2-qt-2.14.1-6.i586[2]
+>!>    Solution:
+>!>       install libzypp
+>!>       install libzypp-2.8.1-3.i586[2]
+>!>    Solution:
+>!>       do not install yast2-qt
+>!>       do not install yast2-qt-2.14.1-6.i586[2]
+>!>    Solution:
+>!>       Ignore this requirement just here
+>!>       
+>!> Problem:
+>!> zypper-0.6.10-3.i586[2] cannot be installed due to missing dependencies
+>!> There are no installable providers of libzypp.so.208 for zypper-0.6.10-3.i586[2]
+>!>    Solution:
+>!>       install libzypp
+>!>       install libzypp-2.8.1-3.i586[2]
+>!>    Solution:
+>!>       do not install zypper
+>!>       do not install zypper-0.6.10-3.i586[2]
+>!>    Solution:
+>!>       Ignore this requirement just here
+>!>       

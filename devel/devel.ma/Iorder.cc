@@ -1,10 +1,12 @@
 #include <ctime>
 #include <iostream>
+#include <fstream>
 #include "Tools.h"
 
 #include <zypp/base/PtrTypes.h>
 #include <zypp/base/Exception.h>
 #include <zypp/base/ProvideNumericId.h>
+#include <zypp/base/DefaultIntegral.h>
 
 using namespace zypp;
 #include "FakePool.h"
@@ -13,6 +15,7 @@ using namespace zypp;
 #include "zypp/ResPoolProxy.h"
 #include <zypp/SourceManager.h>
 #include <zypp/SourceFactory.h>
+#include <zypp/VendorAttr.h>
 
 #include "zypp/NVRAD.h"
 #include "zypp/ResTraits.h"
@@ -24,28 +27,22 @@ using namespace zypp;
 #include "zypp/Language.h"
 #include "zypp/NameKindProxy.h"
 #include "zypp/pool/GetResolvablesToInsDel.h"
+#include "zypp/source/PackageProvider.h"
 #include "zypp/target/rpm/RpmDb.h"
-
+#include "zypp/TmpPath.h"
+#include "zypp/target/CommitPackageCache.h"
 
 using namespace std;
 using namespace zypp;
 using namespace zypp::ui;
 using namespace zypp::functor;
 using namespace zypp::debug;
+using namespace zypp::target;
 using namespace zypp::target::rpm;
 
 ///////////////////////////////////////////////////////////////////
 
 static const Pathname sysRoot( "/Local/ROOT" );
-
-///////////////////////////////////////////////////////////////////
-
-struct Print
-{
-  template<class _Tp>
-    bool operator()( const _Tp & val_r ) const
-    { USR << val_r << endl; return true; }
-};
 
 ///////////////////////////////////////////////////////////////////
 
@@ -79,7 +76,12 @@ struct SetTransactValue
   ResStatus::TransactByValue _causer;
 
   bool operator()( const PoolItem & pi ) const
-  { return pi.status().setTransactValue( _newVal, _causer ); }
+  {
+    bool ret = pi.status().setTransactValue( _newVal, _causer );
+    if ( ! ret )
+      ERR << _newVal <<  _causer << " " << pi << endl;
+    return ret;
+  }
 };
 
 struct StatusReset : public SetTransactValue
@@ -89,6 +91,12 @@ struct StatusReset : public SetTransactValue
   {}
 };
 
+struct StatusInstall : public SetTransactValue
+{
+  StatusInstall()
+  : SetTransactValue( ResStatus::TRANSACT, ResStatus::USER )
+  {}
+};
 
 inline bool selectForTransact( const NameKindProxy & nkp, Arch arch = Arch() )
 {
@@ -200,6 +208,27 @@ bool solve( bool establish = false )
         const PoolItem               _byPoolitem;
       };
 
+///////////////////////////////////////////////////////////////////
+
+/** Let the Source provide the package.
+*/
+static ManagedFile globalSourceProvidePackage( const PoolItem & pi )
+{
+  Package::constPtr p( asKind<Package>(pi.resolvable()) );
+  string fakename( p->name() + "-" + p->edition().asString() + "." + p->arch().asString() + ".rpm" );
+  Pathname fake( "/tmp/FAKEPKG/" + fakename );
+
+  if ( 0 )
+    {
+      std::ofstream x( fake.c_str() );
+      x << p << endl;
+      WAR << "GEN package " << x << endl;
+    }
+
+  DBG << "SOURCE PACKAGE PROVIDE " << fake << endl;
+  return fake;
+}
+
 /******************************************************************
 **
 **      FUNCTION NAME : main
@@ -210,85 +239,91 @@ int main( int argc, char * argv[] )
   //zypp::base::LogControl::instance().logfile( "log.restrict" );
   INT << "===[START]==========================================" << endl;
 
-  const char * data2[] = {
-     "@ product"
-    ,"@ installed"
-    ,"- prodold 1 1 x86_64"
-    ,"@ provides"
-    ,"prodfoo"
-    ,"@ available"
-    ,"- prodnew 1 1 x86_64"
-    ,"@ obsoletes"
-    ,"prodfoo"
-    ,"- prodnew2 1 1 x86_64"
-    ,"@ obsoletes"
-    ,"prodold"
-    ,"prodfoo"
-    ,"@ fin"
-  };
-  const char * data[] = {
-     "@ product"
-    ,"@ installed"
-    ,"- test 1 1 x86_64"
-    ,"- moretest 1 1 x86_64"
-    ,"@ provides"
-    ,"test"
-    ,"@ available"
-    ,"- nomoretest 1 1 x86_64"
-    ,"@ obsoletes"
-    ,"test"
-    ,"moretest"
-    ,"nomoretest"
-    ,"@ obsoletes package"
-    ,"xxxxx"
-    ,"- moretest 1 1 x86_64"
-    ,"@ provides"
-    ,"test"
-    ,"@ package"
-    ,"- xxxxx 1 1 x86_64"
-    ,"@ fin"
-  };
-  addPool( data, data + ( sizeof(data) / sizeof(const char *) ) );
-
-
   ResPool pool( getZYpp()->pool() );
-  poolRequire<Product>( "nomoretest" );
-  //poolRequire<Product>( "prodnew" );
-  //poolRequire<Product>( "prodnew2" );
-  WAR << getZYpp()->pool().additionalRequire()[ResStatus::USER] << endl;
+
+  if ( 1 )
+    {
+      zypp::base::LogControl::TmpLineWriter shutUp;
+      getZYpp()->initTarget( sysRoot );
+    }
+  MIL << "Added target: " << pool << endl;
+
+  if ( 1 )
+    {
+      zypp::base::LogControl::TmpLineWriter shutUp;
+      Source_Ref src;
+      src = createSource( "dir:/Local/SUSE-Linux-10.1-Build_830-i386/CD1",
+                          "Build_830" );
+      getZYpp()->addResolvables( src.resolvables() );
+      src = createSource( "dir:/Local/SUSE-Linux-10.1-Build_830-Addon-BiArch/CD1",
+                          "Addon-BiArch" );
+      getZYpp()->addResolvables( src.resolvables() );
+    }
+  MIL << "Added sources: " << pool << endl;
+
+  // select...
+  for_each( pool.byKindBegin<Product>(), pool.byKindEnd<Product>(), StatusInstall() );
+#define selt(K,N) selectForTransact( nameKindProxy<K>( pool, #N ) )
+  selt( Selection, default );
+  selt( Package, RealPlayer );
+  selt( Package, acroread );
+  selt( Package, flash-player );
+#undef selt
 
 
   solve();
-  vdumpPoolStats( USR << "Transacting:"<< endl,
-                  make_filter_begin<resfilter::ByTransact>(pool),
-                  make_filter_end<resfilter::ByTransact>(pool) ) << endl;
+  //vdumpPoolStats( USR << "Transacting:"<< endl,
+  //                make_filter_begin<resfilter::ByTransact>(pool),
+  //                make_filter_end<resfilter::ByTransact>(pool) ) << endl;
+  pool::GetResolvablesToInsDel collect( pool, pool::GetResolvablesToInsDel::ORDER_BY_MEDIANR );
+  MIL << "GetResolvablesToInsDel:" << endl << collect << endl;
 
-  PoolItem pi;
-
-  //pi = *pool.byNameBegin("test");
-  //SEC << pi << endl;
-  //forEachPoolItemMatching( pool, Dep::OBSOLETES, pi, Print() );
+  typedef pool::GetResolvablesToInsDel::PoolItemList PoolItemList;
 
 
-  //pi = *pool.byNameBegin("test");
-  //SEC << pi << endl;
-  //forEachPoolItemMatching( pool, Dep::OBSOLETES, pi, Print() );
 
+  {
+    const PoolItemList & items_r( collect._toInstall );
+    // prepare the package cache.
+    CommitPackageCache packageCache( items_r.begin(),
+                                     items_r.end(),
+                                     "/tmp",
+                                     globalSourceProvidePackage );
+    unsigned snr = 0;
 
-  pi = *pool.byNameBegin("nomoretest");
-  SEC << pi << endl;
+    for ( PoolItemList::const_iterator it = items_r.begin(); it != items_r.end(); it++ )
+      {
+        if (isKind<Package>(it->resolvable()))
+          {
+            Package::constPtr p = asKind<Package>(it->resolvable());
+            if (it->status().isToBeInstalled())
+              {
+                ManagedFile localfile;
+                try
+                  {
+                    localfile = packageCache.get( it );
+                  }
+                catch ( const source::SkipRequestedException & e )
+                  {
+                    ZYPP_CAUGHT( e );
+                    WAR << "Skipping package " << p << " in commit" << endl;
+                    continue;
+                  }
 
-  forEachPoolItemMatchedBy( pool, pi, Dep::OBSOLETES,
-                            OncePerPoolItem( StorageRemoveObsoleted(pi) ) );
+                PathInfo chk( localfile.value() );
+                if ( ! chk.isFile() )
+                  {
+                    ERR << "No File: " << chk << endl;
+                    ZYPP_THROW(Exception("No File in commit"));
+                  }
+              }
+          }
+      }
 
+  }
   INT << "===[END]============================================" << endl << endl;
   zypp::base::LogControl::instance().logNothing();
   return 0;
-
-
-  pool::GetResolvablesToInsDel collect( pool, pool::GetResolvablesToInsDel::ORDER_BY_MEDIANR );
-  typedef pool::GetResolvablesToInsDel::PoolItemList PoolItemList;
-  MIL << "GetResolvablesToInsDel:" << endl << collect << endl;
 
   if ( 1 )
     {
@@ -317,7 +352,6 @@ int main( int argc, char * argv[] )
                  fst, collect._toInstall.end() ) << endl;
       dumpRange( ERR << "toDelete: " << endl,
                  collect._toDelete.begin(), collect._toDelete.end() ) << endl;
-      for_each( collect._toInstall.begin(), fst, GetObsoletes() );
     }
   else
     {

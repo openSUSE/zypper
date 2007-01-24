@@ -184,7 +184,7 @@ struct PackagesParser : public parser::tagfile::TagFileParser
         stringstream ss;
         WAR << "[" << _source.alias() << "] at URL:[" << _source.url().asString() << "]. Emtpy capability on " << _file_r << " line " << _line_number << ". Ignoring." << endl;
       }
-      
+
       try
       {
         capset.insert( CapFactory().parse( ResTraits<Package>::kind, *it ) );
@@ -269,6 +269,10 @@ struct PackagesParser : public parser::tagfile::TagFileParser
     if ( stag_r.name == "Grp" )
     {
       _pkgImpl->_group = stag_r.value;
+    }
+    if ( stag_r.name == "Vnd" )
+    {
+      _pkgImpl->_vendor = stag_r.value;
     }
     if ( stag_r.name == "Lic" )
     {

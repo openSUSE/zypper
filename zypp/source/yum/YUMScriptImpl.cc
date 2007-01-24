@@ -75,7 +75,7 @@ Pathname YUMScriptImpl::do_script() const
 
     if ( !st )
     {
-      ZYPP_THROW(Exception(N_("Can't write the patch script to a temporary file.")));
+      ZYPP_THROW(Exception(N_("Cannot create a file needed to perform update installation.")));
     }
 
     st << _do_script << endl;
@@ -86,7 +86,7 @@ Pathname YUMScriptImpl::do_script() const
     Pathname script = source().provideFile(_do_location, _do_media);
     if (! filesystem::is_checksum(script, _do_checksum))
     {
-      ZYPP_THROW(Exception(N_("Failed check for the script file check sum")));
+      ZYPP_THROW(Exception(N_("The script file failed the checksum test.")));
     }
     return script;
   }
@@ -109,7 +109,7 @@ Pathname YUMScriptImpl::undo_script() const
 
     if ( !st )
     {
-      ZYPP_THROW(Exception(N_("Can't write the patch script to a temporary file.")));
+      ZYPP_THROW(Exception(N_("Cannot create a file needed to perform update installation.")));
     }
 
     st << _undo_script << endl;
@@ -120,7 +120,7 @@ Pathname YUMScriptImpl::undo_script() const
     Pathname script = source().provideFile(_undo_location, _undo_media);
     if (! filesystem::is_checksum(script, _undo_checksum) )
     {
-      ZYPP_THROW(Exception(N_("Failed check for the script file check sum")));
+      ZYPP_THROW(Exception(N_("The script file failed the checksum test.")));
     }
     return script;
   }

@@ -17,4 +17,4 @@ noinst_LTLIBRARIES =	lib@PACKAGE@2_sqlite3x.la
 lib@PACKAGE@2_sqlite3x_la_SOURCES =	sqlite3x_command.cpp sqlite3x_connection.cpp \
 	sqlite3x_exception.cpp sqlite3x_reader.cpp sqlite3x_transaction.cpp
 	
-lib@PACKAGE@2_sqlite3x_la_LDFLAGS = -lsqlite3 @LIBZYPP_VERSION_INFO@
+lib@PACKAGE@2_sqlite3x_la_LDFLAGS = $(SQLITE_LIBS) @LIBZYPP_VERSION_INFO@

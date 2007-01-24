@@ -299,23 +299,7 @@ TmpDir SuseTagsImpl::downloadMetadata()
     std::string filename = *it;
     if ( filename.substr(0, 10) == "gpg-pubkey" )
     {
-      Pathname key_src;
-      try
-      {
-        key_src = provideFile(_path + filename);
-      }
-      catch (Exception &e)
-      {
-        ZYPP_THROW(SourceIOException("Can't provide " + (_path + filename).asString() + " from " + url().asString() ));
-      }
-
-      MIL << "Trying to cache " << key_src << std::endl;
-
-      if ( filesystem::copy(key_src, local_dir + "PUBLICKEYS/" + filename) != 0 )
-        ZYPP_THROW(SourceIOException("Unable to copy key " + key_src.asString() + " to " + (local_dir + "PUBLICKEYS").asString()));
-
-      MIL << "cached " << filename << std::endl;
-      z->keyRing()->importKey(local_dir + "PUBLICKEYS/" + filename, false);
+      // we add them later
     }
     else if ( (filename == "content.asc") || (filename == "content.key"))
     {
@@ -352,6 +336,28 @@ TmpDir SuseTagsImpl::downloadMetadata()
   // now we have the content file copied, we need to init data and descrdir from the product
   readContentFile(local_dir + "/DATA/content");
 
+  // if the content file key is trusted then import all the keys of the content file
+  if ( PathInfo(local_dir + "DATA/content.key").isExist() )
+  {
+    std::string key_id = z->keyRing()->readSignatureKeyId(local_dir + "DATA/content.key");
+    
+    if ( ! key_id.empty() )
+    {
+      bool content_trusted = z->keyRing()->isKeyTrusted(key_id);
+      MIL << "content file is " << ( content_trusted ? "" : " not " ) << " trusted" << std::endl;
+      
+      for ( std::map<std::string, CheckSum>::const_iterator it = _prodImpl->_signing_keys.begin(); it != _prodImpl->_signing_keys.end(); ++it)
+      {
+        std::string key = it->first;
+        MIL << "Importing key " << key << " if it did not exists" << std::endl;
+        
+        getPossiblyCachedMetadataFile( _path + key, local_dir + "PUBLICKEYS/" + key, _cache_dir + "PUBLICKEYS/" + key,  _prodImpl->_signing_keys[key] );
+        
+        z->keyRing()->importKey(local_dir + "PUBLICKEYS/" + key, content_trusted);
+      }
+    }
+  }
+  
   // make sure a local descr dir exists
   if ( assert_dir( local_dir + "/DATA/descr") != 0 )
     ZYPP_THROW (SourceIOException( "Error. Can't create local descr directory. "));

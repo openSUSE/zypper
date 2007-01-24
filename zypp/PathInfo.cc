@@ -11,6 +11,7 @@
 */
 
 #include <sys/types.h> // for ::minor, ::major macros
+#include <sys/statvfs.h>
 
 #include <iostream>
 #include <fstream>
@@ -845,6 +846,22 @@ namespace zypp
         close( fd );
       }
 
+      return ret;
+    }
+
+    ///////////////////////////////////////////////////////////////////
+    //
+    //	METHOD NAME : df
+    //	METHOD TYPE : ByteCount
+    //
+    ByteCount df( const Pathname & path_r )
+    {
+      ByteCount ret( -1 );
+      struct statvfs sb;
+      if ( statvfs( path_r.c_str(), &sb ) == 0 )
+        {
+          ret = sb.f_bfree * sb.f_bsize;
+        }
       return ret;
     }
 

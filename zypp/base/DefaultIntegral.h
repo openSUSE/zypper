@@ -35,10 +35,14 @@ namespace zypp
    * \endcode
    *
    * \todo maybe specialize for bool, add logical and bit operators
+   * \todo let _Initial default to 0 then remove base/Counter.h
   */
   template<class _Tp, _Tp _Initial>
     class DefaultIntegral
     {
+    public:
+      typedef _Tp value_type;
+
     public:
       DefaultIntegral( _Tp val_r = _Initial )
       : _val( val_r )

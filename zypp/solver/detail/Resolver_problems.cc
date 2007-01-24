@@ -104,6 +104,9 @@ typedef struct {
     // A map of PoolItems which provides a capability but are set
     // for uninstallation
     ItemCapabilityMap provideAndDeleteMap;
+    // A map of PoolItems which provides a capability but are set
+    // to be kept
+    ItemCapabilityMap provideAndKeptMap;    
     // A map of PoolItems which provides a capability but are locked
     ItemCapabilityMap provideAndLockMap;
     // A map of PoolItems which provides a capability but have another architecture
@@ -137,6 +140,21 @@ collector_cb (ResolverInfo_Ptr info, void *data)
 	    collector->provideAndDeleteMap.insert (make_pair( misc_info->other(), misc_info->capability()));
 	}
     }
+    // Collicting items which are providing requirements but they
+    // are set to be kept
+    if (info->type() == RESOLVER_INFO_TYPE_KEEP_PROVIDER) {
+	ResolverInfoMisc_constPtr misc_info = dynamic_pointer_cast<const ResolverInfoMisc>(info);
+	// does entry already exists ?
+	ItemCapabilityMap::iterator pos = find_if (collector->provideAndKeptMap.begin(),
+						   collector->provideAndKeptMap.end(),
+						   cap_equals<PoolItem_Ref, Capability>(misc_info->capability()));
+	
+	if (pos == collector->provideAndKeptMap.end()) {
+	    _XDEBUG ("Inserting " << misc_info->capability() << "/" <<  misc_info->other()
+		     << " into provideAndKeptMap map");
+	    collector->provideAndKeptMap.insert (make_pair( misc_info->other(), misc_info->capability()));
+	}
+    }    
     // Collecting items which are providing requirements but they
     // are locked
     if (info->type() == RESOLVER_INFO_TYPE_LOCKED_PROVIDER) {
@@ -203,11 +221,11 @@ struct AllRequires
 
 
 ResolverProblemList
-Resolver::problems (void) const
+Resolver::problems (const bool ignoreValidSolution) const
 {
     ResolverProblemList problems;
 
-    if (_best_context) {
+    if (_best_context && !ignoreValidSolution) {
 	MIL << "Valid solution found, no problems" << endl;
 	return problems;
     }
@@ -482,6 +500,15 @@ Resolver::problems (void) const
 		    }
 		}
 
+		// Searching for another item which provides this requires BUT has been set to be kept
+		for (ItemCapabilityMap::const_iterator it = collector.provideAndKeptMap.begin();
+		     it != collector.provideAndKeptMap.end(); ++it) {
+		    if (it->second.matches (misc_info->capability()) == CapMatch::yes) {
+			// Do install
+			problem->addSolution (new ProblemSolutionInstall (problem, it->first));
+		    }
+		}		
+
 		// uninstall
 		problem->addSolution (new ProblemSolutionUninstall (problem, item));
 
@@ -529,6 +556,14 @@ Resolver::problems (void) const
 			problem->addSolution (new ProblemSolutionIgnoreArchitecture (problem, it->first));
 		    }
 		}
+		// Searching for another item which provides this requires BUT has been set to be kept
+		for (ItemCapabilityMap::const_iterator it = collector.provideAndKeptMap.begin();
+		     it != collector.provideAndKeptMap.end(); ++it) {
+		    if (it->second.matches (misc_info->capability()) == CapMatch::yes) {
+			// Do install
+			problem->addSolution (new ProblemSolutionInstall (problem, it->first));
+		    }
+		}		
 		
 		// uninstall
 		problem->addSolution (new ProblemSolutionUninstall (problem, item)); 
@@ -553,6 +588,16 @@ Resolver::problems (void) const
 		details = misc_info->message();
 		// It is only an info --> no solution is needed
 	    }
+	    break;		
+	    case RESOLVER_INFO_TYPE_KEEP_PROVIDER: {		// p provides c but is scheduled to be kept
+		ResolverInfoMisc_constPtr misc_info = dynamic_pointer_cast<const ResolverInfoMisc>(info);
+		// TranslatorExplanation %s = name of package, patch, selection ...				
+		what =str::form (_("%s fulfil dependencies of %s but will be kept on your system"),
+				 misc_info->other()->name().c_str(),
+				 who.c_str());
+		details = misc_info->message();
+		// It is only an info --> no solution is needed
+	    }		
 	    break;
 	    case RESOLVER_INFO_TYPE_PARALLEL_PROVIDER: {		// p provides c but another version is already installed
 		ResolverInfoMisc_constPtr misc_info = dynamic_pointer_cast<const ResolverInfoMisc>(info);

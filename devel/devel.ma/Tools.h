@@ -86,19 +86,20 @@ template<class _Container>
   }
 
 ///////////////////////////////////////////////////////////////////
-inline Source_Ref createSource( const Url & url_r )
+inline Source_Ref createSource( const Url & url_r, const std::string & alias_r = std::string() )
 {
   Source_Ref ret;
   Measure x( "createSource: " + url_r.asString() );
   try
     {
+      std::string alias( alias_r.empty() ? Date::now().asSeconds() : alias_r );
       try
         {
-          ret = SourceFactory().createFrom( url_r, "/", Date::now().asSeconds() );
+          ret = SourceFactory().createFrom( url_r, "/", alias );
         }
       catch ( const source::SourceUnknownTypeException & )
         {
-          ret = SourceFactory().createFrom( "Plaindir", url_r, "/", Date::now().asSeconds(), "", false, true );
+          ret = SourceFactory().createFrom( "Plaindir", url_r, "/", alias, "", false, true );
         }
     }
   catch ( const Exception & )
@@ -117,11 +118,11 @@ inline Source_Ref createSource( const Url & url_r )
 
   return ret;
 }
-inline Source_Ref createSource( const std::string & url_r )
+inline Source_Ref createSource( const std::string & url_r, const std::string & alias_r = std::string() )
 {
   try
     {
-      return createSource( Url(url_r) );
+      return createSource( Url(url_r), alias_r );
     }
   catch ( const Exception & )
     {

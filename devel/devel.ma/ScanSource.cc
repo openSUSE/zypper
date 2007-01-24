@@ -2,13 +2,14 @@
 
 #include <zypp/base/LogControl.h>
 #include <zypp/base/LogTools.h>
-//#include <zypp/base/Algorithm.h>
 #include <zypp/SourceFactory.h>
 #include <zypp/Source.h>
 #include <zypp/ResStore.h>
 #include <zypp/ResObject.h>
 #include <zypp/pool/PoolStats.h>
 #include <zypp/KeyRing.h>
+#include <zypp/Date.h>
+#include <zypp/SourceManager.h>
 
 using namespace std;
 using namespace zypp;
@@ -73,7 +74,7 @@ struct ResStoreStats : public pool::PoolStats
 */
 int main( int argc, char * argv[] )
 {
-  zypp::base::LogControl::instance().logfile( "" );
+  //zypp::base::LogControl::instance().logfile( "" );
   INT << "===[START]==========================================" << endl;
   --argc;
   ++argv;
@@ -125,22 +126,11 @@ int main( int argc, char * argv[] )
           Url url(*argv);
           try
             {
-              src = SourceFactory().createFrom( url, "/", "" );
+              src = SourceFactory().createFrom( url, "/", Date::now().asSeconds() );
             }
-          catch ( const Exception & except_r )
+          catch ( const source::SourceUnknownTypeException & )
             {
-              static string unk( "Unknown source type" );
-              if ( except_r.asString().substr( 0, unk.size() ) == unk )
-                {
-                  source::SourceInfo inf;
-                  inf.setType( "Plaindir" )
-                     .setUrl( url );
-                  SEC << endl;
-                  src = SourceFactory().createFrom( inf );
-                  SEC << src << endl;
-                }
-              else
-                throw;
+              src = SourceFactory().createFrom( "Plaindir", url, "/", Date::now().asSeconds(), "", false, true );
             }
         }
       catch ( const Exception & except_r )
@@ -175,6 +165,9 @@ int main( int argc, char * argv[] )
         {
           dumpRange( LOG, src.resolvables().begin(), src.resolvables().end() ) << endl;
         }
+
+      //SourceManager::sourceManager()->addSource( src );
+      //SourceManager::sourceManager()->store( "/", true );
     }
 
   INT << "===[END]============================================" << endl << endl;

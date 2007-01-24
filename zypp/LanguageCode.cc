@@ -222,7 +222,7 @@ namespace zypp
     CodeMaps::CodeMaps()
     {
       // Defined LanguageCode constants
-      others[""]        = N_( "noCode" );
+      others[""]        = N_("No Code");
 
       struct LangInit
       {
@@ -265,7 +265,7 @@ namespace zypp
 	  // language code: ale
 	  { "ale", NULL, N_( "Aleut" ) },
 	  // language code: alg
-	  { "alg", NULL, N_( "Algonquian languages" ) },
+	  { "alg", NULL, N_( "Algonquian Languages" ) },
 	  // language code: alt
 	  { "alt", NULL, N_( "Southern Altai" ) },
 	  // language code: amh am
@@ -273,7 +273,7 @@ namespace zypp
 	  // language code: ang
 	  { "ang", NULL, N_( "English, Old (ca.450-1100)" ) },
 	  // language code: apa
-	  { "apa", NULL, N_( "Apache languages" ) },
+	  { "apa", NULL, N_( "Apache Languages" ) },
 	  // language code: ara ar
 	  { "ara", "ar", N_( "Arabic" ) },
 	  // language code: arc
@@ -297,9 +297,9 @@ namespace zypp
 	  // language code: ast
 	  { "ast", NULL, N_( "Asturian" ) },
 	  // language code: ath
-	  { "ath", NULL, N_( "Athapascan languages" ) },
+	  { "ath", NULL, N_( "Athapascan Languages" ) },
 	  // language code: aus
-	  { "aus", NULL, N_( "Australian languages" ) },
+	  { "aus", NULL, N_( "Australian Languages" ) },
 	  // language code: ava av
 	  { "ava", "av", N_( "Avaric" ) },
 	  // language code: ave ae
@@ -313,7 +313,7 @@ namespace zypp
 	  // language code: bad
 	  { "bad", NULL, N_( "Banda" ) },
 	  // language code: bai
-	  { "bai", NULL, N_( "Bamileke languages" ) },
+	  { "bai", NULL, N_( "Bamileke Languages" ) },
 	  // language code: bak ba
 	  { "bak", "ba", N_( "Bashkir" ) },
 	  // language code: bal
@@ -405,7 +405,7 @@ namespace zypp
 	  // language code: chm
 	  { "chm", NULL, N_( "Mari" ) },
 	  // language code: chn
-	  { "chn", NULL, N_( "Chinook jargon" ) },
+	  { "chn", NULL, N_( "Chinook Jargon" ) },
 	  // language code: cho
 	  { "cho", NULL, N_( "Choctaw" ) },
 	  // language code: chp
@@ -419,7 +419,7 @@ namespace zypp
 	  // language code: chy
 	  { "chy", NULL, N_( "Cheyenne" ) },
 	  // language code: cmc
-	  { "cmc", NULL, N_( "Chamic languages" ) },
+	  { "cmc", NULL, N_( "Chamic Languages" ) },
 	  // language code: cop
 	  { "cop", NULL, N_( "Coptic" ) },
 	  // language code: cor kw
@@ -427,17 +427,17 @@ namespace zypp
 	  // language code: cos co
 	  { "cos", "co", N_( "Corsican" ) },
 	  // language code: cpe
-	  { "cpe", NULL, N_( "Creoles and pidgins, English based (Other)" ) },
+	  { "cpe", NULL, N_( "Creoles and Pidgins, English-Based (Other)" ) },
 	  // language code: cpf
-	  { "cpf", NULL, N_( "Creoles and pidgins, French-based (Other)" ) },
+	  { "cpf", NULL, N_( "Creoles and Pidgins, French-Based (Other)" ) },
 	  // language code: cpp
-	  { "cpp", NULL, N_( "Creoles and pidgins, Portuguese-based (Other)" ) },
+	  { "cpp", NULL, N_( "Creoles and Pidgins, Portuguese-Based (Other)" ) },
 	  // language code: cre cr
 	  { "cre", "cr", N_( "Cree" ) },
 	  // language code: crh
 	  { "crh", NULL, N_( "Crimean Tatar" ) },
 	  // language code: crp
-	  { "crp", NULL, N_( "Creoles and pidgins (Other)" ) },
+	  { "crp", NULL, N_( "Creoles and Pidgins (Other)" ) },
 	  // language code: csb
 	  { "csb", NULL, N_( "Kashubian" ) },
 	  // language code: cus
@@ -649,7 +649,7 @@ namespace zypp
 	  // language code: ira
 	  { "ira", NULL, N_( "Iranian (Other)" ) },
 	  // language code: iro
-	  { "iro", NULL, N_( "Iroquoian languages" ) },
+	  { "iro", NULL, N_( "Iroquoian Languages" ) },
 	  // language code: ita it
 	  { "ita", "it", N_( "Italian" ) },
 	  // language code: jav jv
@@ -767,7 +767,7 @@ namespace zypp
 	  // language code: luo
 	  { "luo", NULL, N_( "Luo (Kenya and Tanzania)" ) },
 	  // language code: lus
-	  { "lus", NULL, N_( "lushai" ) },
+	  { "lus", NULL, N_( "Lushai" ) },
 	  // language code: mac mkd mk
 	  { "mac", "mk", N_( "Macedonian" ) },
 	  // language code: mac mkd mk
@@ -813,7 +813,7 @@ namespace zypp
 	  // language code: min
 	  { "min", NULL, N_( "Minangkabau" ) },
 	  // language code: mis
-	  { "mis", NULL, N_( "Miscellaneous languages" ) },
+	  { "mis", NULL, N_( "Miscellaneous Languages" ) },
 	  // language code: mkh
 	  { "mkh", NULL, N_( "Mon-Khmer (Other)" ) },
 	  // language code: mlg mg
@@ -825,7 +825,7 @@ namespace zypp
 	  // language code: mni
 	  { "mni", NULL, N_( "Manipuri" ) },
 	  // language code: mno
-	  { "mno", NULL, N_( "Manobo languages" ) },
+	  { "mno", NULL, N_( "Manobo Languages" ) },
 	  // language code: moh
 	  { "moh", NULL, N_( "Mohawk" ) },
 	  // language code: mol mo
@@ -835,7 +835,7 @@ namespace zypp
 	  // language code: mos
 	  { "mos", NULL, N_( "Mossi" ) },
 	  // language code: mul
-	  { "mul", NULL, N_( "Multiple languages" ) },
+	  { "mul", NULL, N_( "Multiple Languages" ) },
 	  // language code: mun
 	  { "mun", NULL, N_( "Munda languages" ) },
 	  // language code: mus
@@ -845,7 +845,7 @@ namespace zypp
 	  // language code: mwr
 	  { "mwr", NULL, N_( "Marwari" ) },
 	  // language code: myn
-	  { "myn", NULL, N_( "Mayan languages" ) },
+	  { "myn", NULL, N_( "Mayan Languages" ) },
 	  // language code: myv
 	  { "myv", NULL, N_( "Erzya" ) },
 	  // language code: nah
@@ -889,7 +889,7 @@ namespace zypp
 	  // language code: nso
 	  { "nso", NULL, N_( "Northern Sotho" ) },
 	  // language code: nub
-	  { "nub", NULL, N_( "Nubian languages" ) },
+	  { "nub", NULL, N_( "Nubian Languages" ) },
 	  // language code: nwc
 	  { "nwc", NULL, N_( "Classical Newari" ) },
 	  // language code: nya ny
@@ -917,7 +917,7 @@ namespace zypp
 	  // language code: ota
 	  { "ota", NULL, N_( "Turkish, Ottoman (1500-1928)" ) },
 	  // language code: oto
-	  { "oto", NULL, N_( "Otomian languages" ) },
+	  { "oto", NULL, N_( "Otomian Languages" ) },
 	  // language code: paa
 	  { "paa", NULL, N_( "Papuan (Other)" ) },
 	  // language code: pag
@@ -951,7 +951,7 @@ namespace zypp
 	  // language code: por pt
 	  { "por", "pt", N_( "Portuguese" ) },
 	  // language code: pra
-	  { "pra", NULL, N_( "Prakrit languages" ) },
+	  { "pra", NULL, N_( "Prakrit Languages" ) },
 	  // language code: pro
 	  { "pro", NULL, N_( "Provencal, Old (to 1500)" ) },
 	  // language code: pus ps
@@ -987,7 +987,7 @@ namespace zypp
 	  // language code: sai
 	  { "sai", NULL, N_( "South American Indian (Other)" ) },
 	  // language code: sal
-	  { "sal", NULL, N_( "Salishan languages" ) },
+	  { "sal", NULL, N_( "Salishan Languages" ) },
 	  // language code: sam
 	  { "sam", NULL, N_( "Samaritan Aramaic" ) },
 	  // language code: san sa
@@ -1023,7 +1023,7 @@ namespace zypp
 	  // language code: sin si
 	  { "sin", "si", N_( "Sinhala" ) },
 	  // language code: sio
-	  { "sio", NULL, N_( "Siouan languages" ) },
+	  { "sio", NULL, N_( "Siouan Languages" ) },
 	  // language code: sit
 	  { "sit", NULL, N_( "Sino-Tibetan (Other)" ) },
 	  // language code: sla
@@ -1039,7 +1039,7 @@ namespace zypp
 	  // language code: sme se
 	  { "sme", "se", N_( "Northern Sami" ) },
 	  // language code: smi
-	  { "smi", NULL, N_( "Sami languages (Other)" ) },
+	  { "smi", NULL, N_( "Sami Languages (Other)" ) },
 	  // language code: smj
 	  { "smj", NULL, N_( "Lule Sami" ) },
 	  // language code: smn
@@ -1143,7 +1143,7 @@ namespace zypp
 	  // language code: tum
 	  { "tum", NULL, N_( "Tumbuka" ) },
 	  // language code: tup
-	  { "tup", NULL, N_( "Tupi languages" ) },
+	  { "tup", NULL, N_( "Tupi Languages" ) },
 	  // language code: tur tr
 	  { "tur", "tr", N_( "Turkish" ) },
 	  // language code: tut
@@ -1181,7 +1181,7 @@ namespace zypp
 	  // language code: vot
 	  { "vot", NULL, N_( "Votic" ) },
 	  // language code: wak
-	  { "wak", NULL, N_( "Wakashan languages" ) },
+	  { "wak", NULL, N_( "Wakashan Languages" ) },
 	  // language code: wal
 	  { "wal", NULL, N_( "Walamo" ) },
 	  // language code: war
@@ -1193,7 +1193,7 @@ namespace zypp
 	  // language code: wel cym cy
 	  { "cym", NULL, N_( "Welsh" ) },
 	  // language code: wen
-	  { "wen", NULL, N_( "Sorbian languages" ) },
+	  { "wen", NULL, N_( "Sorbian Languages" ) },
 	  // language code: wln wa
 	  { "wln", "wa", N_( "Walloon" ) },
 	  // language code: wol wo
@@ -1211,7 +1211,7 @@ namespace zypp
 	  // language code: yor yo
 	  { "yor", "yo", N_( "Yoruba" ) },
 	  // language code: ypk
-	  { "ypk", NULL, N_( "Yupik languages" ) },
+	  { "ypk", NULL, N_( "Yupik Languages" ) },
 	  // language code: zap
 	  { "zap", NULL, N_( "Zapotec" ) },
 	  // language code: zen

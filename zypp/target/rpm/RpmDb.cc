@@ -58,6 +58,22 @@ namespace zypp
   {
     namespace rpm
     {
+      namespace
+      {
+        const char* quoteInFilename_m = " \t";
+        inline std::string rpmQuoteFilename( const Pathname & path_r )
+        {
+          std::string path( path_r.asString() );
+          for ( std::string::size_type pos = path.find_first_of( quoteInFilename_m );
+                pos != std::string::npos;
+                pos = path.find_first_of( quoteInFilename_m, pos ) )
+            {
+              path.insert( pos, "\\" );
+              pos += 2; // skip '\\' and the quoted char.
+            }
+          return path;
+        }
+      }
 
       struct KeyRingSignalReceiver : callback::ReceiveReport<KeyRingSignals>
       {
@@ -1240,9 +1256,13 @@ namespace zypp
                 // of 'gpg-pubkey-VERS-REL'.
                 continue;
               }
-            Date installtime = iter->tag_installtime();
 
             Package::Ptr pptr = makePackageFromHeader( *iter, &_filerequires, location, Source_Ref() );
+            if ( ! pptr )
+              {
+                WAR << "Failed to make package from database header '" << name << "'" << endl;
+                continue;
+              }
 
             _packages._list.push_back( pptr );
           }
@@ -1849,7 +1869,10 @@ namespace zypp
           opts.push_back ("--test");
 
         opts.push_back("--");
-        opts.push_back (filename.asString().c_str());
+
+        // rpm requires additional quoting of special chars:
+        std::string quotedFilename( rpmQuoteFilename( filename ) );
+        opts.push_back ( quotedFilename.c_str() );
 
         modifyDatabase(); // BEFORE run_rpm
         run_rpm( opts, ExternalProgram::Stderr_To_Stdout );

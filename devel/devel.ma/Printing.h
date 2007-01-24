@@ -12,6 +12,17 @@
 #include <zypp/base/Algorithm.h>
 #include <zypp/base/Functional.h>
 
+using std::endl;
+
+///////////////////////////////////////////////////////////////////
+
+struct Print
+{
+  template<class _Tp>
+    bool operator()( const _Tp & val_r ) const
+    { USR << val_r << endl; return true; }
+};
+
 ///////////////////////////////////////////////////////////////////
 
 template<class _Tp>

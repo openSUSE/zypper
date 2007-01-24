@@ -1,6 +1,4 @@
 #include "Tools.h"
-#include <libxml/xmlreader.h>
-#include <libxml/xmlerror.h>
 #include <boost/call_traits.hpp>
 
 #include <iostream>
@@ -10,7 +8,7 @@
 #include <zypp/base/LogControl.h>
 #include <zypp/base/LogTools.h>
 
-#include "zypp/xml/Reader.h"
+#include "zypp/parser/xml/Reader.h"
 
 using namespace std;
 using namespace zypp;

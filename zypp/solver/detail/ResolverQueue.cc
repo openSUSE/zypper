@@ -132,17 +132,21 @@ ResolverQueue::addPoolItemToRemove (PoolItem_Ref poolItem, bool remove_only_mode
 void
 ResolverQueue::addPoolItemToVerify (PoolItem_Ref poolItem)
 {
-    CapSet requires = poolItem->dep (Dep::REQUIRES);
-    for (CapSet::const_iterator iter = requires.begin(); iter != requires.end(); ++iter) {
-	QueueItemRequire_Ptr qitem = new QueueItemRequire (_context->pool(), *iter);
-	qitem->addPoolItem (poolItem);
-	addItem (qitem);
-    }
+    if (poolItem.status().staysInstalled()
+	|| poolItem.status().isToBeInstalled()) {
+	// regarding only items which will on the system after commit
+	CapSet requires = poolItem->dep (Dep::REQUIRES);
+	for (CapSet::const_iterator iter = requires.begin(); iter != requires.end(); ++iter) {
+	    QueueItemRequire_Ptr qitem = new QueueItemRequire (_context->pool(), *iter);
+	    qitem->addPoolItem (poolItem);
+	    addItem (qitem);
+	}
 
-    CapSet conflicts = poolItem->dep (Dep::CONFLICTS);
-    for (CapSet::const_iterator iter = conflicts.begin(); iter != conflicts.end(); ++iter) {
-	QueueItemConflict_Ptr qitem = new QueueItemConflict (_context->pool(), *iter, poolItem);
-	addItem (qitem);
+	CapSet conflicts = poolItem->dep (Dep::CONFLICTS);
+	for (CapSet::const_iterator iter = conflicts.begin(); iter != conflicts.end(); ++iter) {
+	    QueueItemConflict_Ptr qitem = new QueueItemConflict (_context->pool(), *iter, poolItem);
+	    addItem (qitem);
+	}
     }
 }
 

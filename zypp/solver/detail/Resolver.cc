@@ -331,9 +331,9 @@ struct VerifySystem : public resfilter::PoolItemFilterFunctor
 
 
 bool
-Resolver::verifySystem (void)
+Resolver::verifySystem (bool considerNewHardware)
 {
-    _DEBUG( "Resolver::verifySystem()" );
+    _DEBUG ("Resolver::verifySystem() " << (considerNewHardware ? "consider new hardware":""));
 
     VerifySystem info (*this);
 
@@ -345,7 +345,13 @@ Resolver::verifySystem (void)
 
     _verifying = true;
 
-    return resolveDependencies ();
+    if (considerNewHardware) {
+	// evaluate all Freshens/Supplements and solve
+	return freshenPool(false) && bestContext() && bestContext()->isValid();
+    }
+    else {
+	return resolveDependencies (); // do solve only
+    }
 }
 
 
@@ -541,7 +547,8 @@ struct FreshenState
 
 
 void
-Resolver::freshenState( ResolverContext_Ptr context )
+Resolver::freshenState( ResolverContext_Ptr context,
+			bool resetAfterSolve )
 {
     _DEBUG( "Resolver::freshenState ()" );
 
@@ -573,23 +580,23 @@ Resolver::freshenState( ResolverContext_Ptr context )
 
     // process the queue
     resolveDependencies( context );
-
-    reset();
-
-    context->setEstablishing( false );
-
-    _best_context = context;
+    
+    if (resetAfterSolve) {
+	reset();
+	context->setEstablishing( false );
+	_best_context = context;
+    }
 
     return;
 }
 
 
 bool
-Resolver::freshenPool ()
+Resolver::freshenPool (bool resetAfterSolve)
 {
     MIL << "Resolver::freshenPool()" << endl;
 
-    freshenState ();						// establish all packages with freshens !
+    freshenState (NULL, resetAfterSolve);	// establish all packages with freshens; (NULL)= no initial context
     ResolverContext_Ptr solution = bestContext();
 
     if (solution) {						// copy solution back to pool
@@ -672,10 +679,10 @@ Resolver::resolveDependencies (const ResolverContext_Ptr context)
     
     // Initialize all ignoring dependencies
     initial_queue->context()->setIgnoreCababilities (_ignoreConflicts,
-				    ignoreRequires,
-				    _ignoreObsoletes,
-				    _ignoreInstalledItem,
-				    _ignoreArchitectureItem);
+						     ignoreRequires,
+						     _ignoreObsoletes,
+						     _ignoreInstalledItem,
+						     _ignoreArchitectureItem);
     initial_queue->context()->setForceResolve( _forceResolve );
     initial_queue->context()->setUpgradeMode( _upgradeMode );
     initial_queue->context()->setTryAllPossibilities( _tryAllPossibilities );
@@ -775,37 +782,37 @@ Resolver::resolveDependencies (const ResolverContext_Ptr context)
     while (!_pending_queues.empty()) {
 
 	_DEBUG( "Pend " << (long) _pending_queues.size()
-			      << " / Cmpl " << (long) _complete_queues.size()
-			      << " / Prun " << (long) _pruned_queues.size()
-			      << " / Defr " << (long) _deferred_queues.size()
-			      << " / Invl " << (long) _invalid_queues.size() );
+		<< " / Cmpl " << (long) _complete_queues.size()
+		<< " / Prun " << (long) _pruned_queues.size()
+		<< " / Defr " << (long) _deferred_queues.size()
+		<< " / Invl " << (long) _invalid_queues.size() );
 
-	      if (_timeout_seconds > 0) {
-		    time (&t_now);
-		    if (difftime (t_now, t_start) > _timeout_seconds) {
-			_timed_out = true;
-		    MIL << "Timeout " << _timeout_seconds << " seconds reached"
-			<< " -> exit" << endl;
-		    break;
-		}
-	      }
-	      if (_maxSolverPasses > 0) {
-		  if (_maxSolverPasses <= _complete_queues.size() +
-		      _pruned_queues.size() +
-		      _deferred_queues.size() +
-		      _invalid_queues.size()) {
-		      _timed_out = true;
-		      MIL << "Max solver runs ( " << _maxSolverPasses
-			  << " ) reached -> exit" << endl;
-		      break;
-		  }
-	      }		    
+	if (_timeout_seconds > 0) {
+	    time (&t_now);
+	    if (difftime (t_now, t_start) > _timeout_seconds) {
+		_timed_out = true;
+		MIL << "Timeout " << _timeout_seconds << " seconds reached"
+		    << " -> exit" << endl;
+		break;
+	    }
+	}
+	if (_maxSolverPasses > 0) {
+	    if (_maxSolverPasses <= _complete_queues.size() +
+		_pruned_queues.size() +
+		_deferred_queues.size() +
+		_invalid_queues.size()) {
+		_timed_out = true;
+		MIL << "Max solver runs ( " << _maxSolverPasses
+		    << " ) reached -> exit" << endl;
+		break;
+	    }
+	}		    
 	      
-	    ResolverQueue_Ptr queue = _pending_queues.front();
-	    _pending_queues.pop_front();
-	    ResolverContext_Ptr context = queue->context();
+	ResolverQueue_Ptr queue = _pending_queues.front();
+	_pending_queues.pop_front();
+	ResolverContext_Ptr context = queue->context();
 
-	    queue->process();
+	queue->process();
 
 	if (queue->isInvalid ()) {
 
@@ -859,10 +866,10 @@ Resolver::resolveDependencies (const ResolverContext_Ptr context)
 	}
     }
     _DEBUG("Pend " << (long) _pending_queues.size()
-		   << " / Cmpl " << (long) _complete_queues.size()
-		   << " / Prun " << (long) _pruned_queues.size()
-		   << " / Defr " << (long) _deferred_queues.size()
-		   << " / Invl " << (long) _invalid_queues.size() );
+	   << " / Cmpl " << (long) _complete_queues.size()
+	   << " / Prun " << (long) _pruned_queues.size()
+	   << " / Defr " << (long) _deferred_queues.size()
+	   << " / Invl " << (long) _invalid_queues.size() );
     
     
     if ( !(_best_context && _best_context->isValid()) // no valid solution

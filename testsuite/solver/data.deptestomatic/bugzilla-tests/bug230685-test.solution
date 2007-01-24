@@ -1,0 +1,14 @@
+>!> Installing patch:MozillaFirefox2 from channel 9
+>!> Installing patch:MozillaFirefox from channel 9
+>!> No problems so far
+>!> Solution #1:
+>!> install atom:MozillaFirefox-2.0.0.1-0.1.x86_64[9]
+>!> install atom:MozillaFirefox-translations-2.0.0.1-0.1.x86_64[9]
+>!> install patch:MozillaFirefox-2418-0.noarch[9]
+>!> install patch:MozillaFirefox2-2418-0.noarch[9]
+>!> upgrade MozillaFirefox-2.0-30.i586 => MozillaFirefox-2.0.0.1-0.1.i586[9]
+>!> upgrade MozillaFirefox-translations-2.0-30.i586 => MozillaFirefox-translations-2.0.0.1-0.1.i586[9]
+>!> |unflag MozillaFirefox-2.0-30.i586[6]
+>!> |unflag MozillaFirefox-2.0-30.x86_64[6]
+>!> |unflag MozillaFirefox-2.0.0.1-0.1.x86_64[9]
+>!> installs=4, upgrades=2, uninstalls=0

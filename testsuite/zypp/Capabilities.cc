@@ -39,6 +39,12 @@ void capabilities_test()
     BOOST_CHECK_EQUAL( cap3.index(), cap.index());
     BOOST_CHECK_EQUAL( cap3.op(), cap.op());
     BOOST_CHECK_EQUAL( cap3.edition(), cap.edition());
+    
+    Capability cap6 = factory.parse ( kind, "kdelibs* > 1.5");
+    BOOST_CHECK_EQUAL( cap6.index(), "kdelibs*");
+    BOOST_CHECK_EQUAL( cap6.op(), Rel::GT);
+    BOOST_CHECK_EQUAL( cap6.edition(), Edition("1.5"));
+    
 
     string bash = "/bin/bash";
     Capability cap4 = factory.parse ( kind, bash);

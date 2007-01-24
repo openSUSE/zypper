@@ -67,6 +67,7 @@ namespace zypp
       return res.first->second;
     }
 
+    bool applyAutoProtection = true;
 
     /////////////////////////////////////////////////////////////////
   } // namespace
@@ -94,12 +95,24 @@ namespace zypp
     MIL << "Trusted Vendors: " << _trustedVendors << endl;
   }
 
+  void VendorAttr::enableAutoProtect()
+  {
+    MIL << "Foreign vendor auto protection enabled." << endl;
+    applyAutoProtection = true;
+  }
+
+  void VendorAttr::disableAutoProtect()
+  {
+    MIL << "Foreign vendor auto protection disabled." << endl;
+    applyAutoProtection = false;
+  }
+
   bool VendorAttr::isKnown( const Vendor & vendor_r ) const
   { return trusted( vendor_r ); }
 
 
   bool VendorAttr::autoProtect( const Vendor & vendor_r ) const
-  { return ! trusted( vendor_r ); }
+  { return( applyAutoProtection && ! trusted( vendor_r ) ); }
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

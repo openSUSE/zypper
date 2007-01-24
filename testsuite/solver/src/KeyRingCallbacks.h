@@ -35,19 +35,23 @@ namespace zypp {
 	  XXX << "(" << file << ")" << std::endl;
 	  return true;
 	}
-	virtual bool askUserToAcceptUnknownKey( const std::string &file, const std::string &keyid, const std::string &keyname, const std::string &fingerprint )
+	virtual bool askUserToAcceptUnknownKey( const std::string &file, const std::string &id )
 	{
-	  XXX << "(" << file << ", " << keyid << ", " << keyname << ", " << fingerprint << ")" << std::endl;
+	  XXX << "(" << file << ", " << id << ")" << std::endl;
 	  return true;
 	}
-	virtual bool askUserToTrustKey( const std::string &keyid, const std::string &keyname, const std::string &fingerprint )
+	virtual bool askUserToImportKey( const PublicKey &key )
 	{
-	  XXX << "(" << keyid << ", " << keyname <<  ", " << fingerprint << ")" << std::endl;
+	  return false;
+	}
+	virtual bool askUserToTrustKey(  const PublicKey &key  )
+	{
+	  XXX << "(" << key << ")" << std::endl;
 	  return true;
 	}
-	virtual bool askUserToAcceptVerificationFailed( const std::string &file, const std::string &keyid, const std::string &keyname, const std::string &fingerprint )
+	virtual bool askUserToAcceptVerificationFailed( const std::string &file,  const PublicKey &key  )
 	{
-	  XXX << "(" << file << ", " << keyid << ", " << keyname << ", " << fingerprint << ")" << std::endl;
+	  XXX << "(" << file << ", " << key << ")" << std::endl;
 	  return true;
 	}
     };

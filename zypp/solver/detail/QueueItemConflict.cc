@@ -121,7 +121,7 @@ struct UpgradeCandidate
 	ResStatus status = context->getStatus (candidate);
 	if ((item->edition().compare(candidate->edition()) < 0)		// look at real upgrades
 	    && item->arch() == candidate->arch()			// keep the architecture
-	    && (status.wasUninstalled()
+	    && (status.isUninstalled()
 		|| status.isToBeUninstalled())				// FIXME: just for exercise-02conflict-03-test.xml
 									// the original solver found the uninstalled foo-2.0.1 first, this solver
 									// finds the uninstallable first. In the end, we had a duplicate solution
@@ -225,12 +225,14 @@ struct ConflictProcess
 	    // pool->foreachProvidingResItem (maybe_upgrade_dep, upgrade_candidates_cb, (void *)&upgrade_info);
 	    Dep dep( Dep::PROVIDES );
 
-	    invokeOnEach( pool.byCapabilityIndexBegin( maybe_upgrade_cap.index(), dep ),
-			  pool.byCapabilityIndexEnd( maybe_upgrade_cap.index(), dep ),
-			  resfilter::ByCapMatch( maybe_upgrade_cap ),
-			  functor::functorRef<bool,CapAndItem>(upgrade_info) );
+	    if (!actually_an_obsolete) { // The resolvable will be obsoleted by another. So it is useless finding an update candidate.
+		invokeOnEach( pool.byCapabilityIndexBegin( maybe_upgrade_cap.index(), dep ),
+			      pool.byCapabilityIndexEnd( maybe_upgrade_cap.index(), dep ),
+			      resfilter::ByCapMatch( maybe_upgrade_cap ),
+			      functor::functorRef<bool,CapAndItem>(upgrade_info) );
 
-	    _XDEBUG("found " << upgrade_info.upgrades.size() << " upgrade candidates");
+		_XDEBUG("found " << upgrade_info.upgrades.size() << " upgrade candidates");
+	    }
 #endif
 
 	    QueueItemUninstall_Ptr uninstall = new QueueItemUninstall (pool, provider, actually_an_obsolete ? QueueItemUninstall::OBSOLETE : QueueItemUninstall::CONFLICT);
@@ -296,14 +298,14 @@ struct ConflictProcess
 	    context->addInfo (misc_info);
 
 	}
-	else if ((status.isToBeUninstalled() && !status.isToBeUninstalledDueToUnlink())
+	else if (status.isToBeUninstalled()
 		|| status.isImpossible()
 		|| status.isToBeUninstalledDueToObsolete()) {
 
 	    /* This is the easy case -- we do nothing. */
 	}
 	else {
-	    ZYPP_THROW (Exception ("Unhandled status in ConflictProcess"));
+	    ERR << "Unhandled status in ConflictProcess; item: " << provider << " : " << status << endl;
 	}
 
 	return true;

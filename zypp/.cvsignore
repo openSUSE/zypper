@@ -4,5 +4,6 @@ Makefile
 .libs
 *.o
 *.lo
+*.loT
 *.a
 *.la

@@ -106,7 +106,7 @@ std::string SuseTagsPackageImpl::distribution() const
 
 Vendor SuseTagsPackageImpl::vendor() const
 {
-  return _source.vendor();
+  return( _vendor.empty() ? _source.vendor() : _vendor );
 }
 
 Label SuseTagsPackageImpl::license() const

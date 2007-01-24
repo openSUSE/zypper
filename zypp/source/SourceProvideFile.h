@@ -17,7 +17,7 @@
 #include "zypp/base/Function.h"
 #include "zypp/base/Functional.h"
 #include "zypp/Source.h"
-#include "zypp/source/ManagedFile.h"
+#include "zypp/ManagedFile.h"
 #include "zypp/source/OnMediaLocation.h"
 
 ///////////////////////////////////////////////////////////////////

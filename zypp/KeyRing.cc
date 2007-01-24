@@ -110,6 +110,9 @@ namespace zypp
     
     std::string readSignatureKeyId( const Pathname &signature );
     
+    bool isKeyTrusted( const std::string &id);
+    bool isKeyKnown( const std::string &id );
+    
     std::list<PublicKey> trustedPublicKeys();
     std::list<PublicKey> publicKeys();
 
@@ -195,6 +198,19 @@ namespace zypp
     return verifyFile( file, signature, generalKeyRing() );
   }
 
+  bool KeyRing::Impl::isKeyTrusted( const std::string &id)
+  {
+    return publicKeyExists( id, trustedKeyRing() );
+  }
+  
+  bool KeyRing::Impl::isKeyKnown( const std::string &id )
+  {
+    if ( publicKeyExists( id, trustedKeyRing() ) )
+      return true;
+    else
+      return publicKeyExists( id, generalKeyRing() );
+  }
+  
   bool KeyRing::Impl::publicKeyExists( std::string id, const Pathname &keyring)
   {
     MIL << "Searching key [" << id << "] in keyring " << keyring << std::endl;
@@ -659,6 +675,16 @@ namespace zypp
     _pimpl->dumpPublicKey( id, trusted, stream);
   }
 
+  bool KeyRing::isKeyTrusted( const std::string &id )
+  {
+    return _pimpl->isKeyTrusted(id);
+  }
+     
+  bool KeyRing::isKeyKnown( const std::string &id )
+  {
+    return _pimpl->isKeyTrusted(id);
+  }
+  
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////

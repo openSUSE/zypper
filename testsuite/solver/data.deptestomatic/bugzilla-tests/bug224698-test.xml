@@ -1,0 +1,141 @@
+<?xml version="1.0"?>
+<!-- Do not try to install parallel packages which has been selected both by -->
+<!-- the solver  -->
+<test>
+<setup arch="i686">
+	<system file="bug224698-system.xml"/>
+	<channel file="bug224698-3-package.xml" name="3" />
+	<channel file="bug224698-6-package.xml" name="6" />
+</setup>
+<trial>
+<showpool all="yes"/>
+<establish/>
+<showpool all="true" prefix=">!> ESTABLISHED:"/>
+<install channel="3" kind="patch" name="ImageMagick"/>
+<install channel="3" kind="patch" name="sdk-mono-core"/>
+<install channel="3" kind="patch" name="ImageMagick"/>
+<install channel="3" kind="patch" name="sdk-mono-core"/>
+<install channel="3" kind="patch" name="sdk-xine-lib"/>
+<install channel="3" kind="patch" name="sdk-xine-lib"/>
+<install channel="3" kind="patch" name="sdk-ImageMagick"/>
+<install channel="3" kind="patch" name="sdk-ImageMagick"/>
+<install channel="3" kind="patch" name="gimp"/>
+<install channel="6" kind="patch" name="kdelibs3"/>
+<install channel="6" kind="patch" name="Mesa"/>
+<install channel="6" kind="patch" name="kernel"/>
+<install channel="6" kind="patch" name="xorg-x11-server"/>
+<install channel="6" kind="patch" name="bind"/>
+<install channel="6" kind="patch" name="yast2-packager"/>
+<install channel="6" kind="patch" name="xorg-x11-fonts-100dpi"/>
+<install channel="6" kind="patch" name="xorg-x11-server"/>
+<install channel="6" kind="patch" name="openssh"/>
+<install channel="6" kind="patch" name="control-center2"/>
+<install channel="6" kind="patch" name="net-snmp"/>
+<install channel="6" kind="patch" name="cron"/>
+<install channel="6" kind="patch" name="xorg-x11-fonts-75dpi"/>
+<install channel="6" kind="patch" name="yast2-trans-stats"/>
+<install channel="6" kind="patch" name="multipath-tools"/>
+<install channel="6" kind="patch" name="xorg-x11-server"/>
+<install channel="6" kind="patch" name="freetype2"/>
+<install channel="6" kind="patch" name="intlfnts"/>
+<install channel="6" kind="patch" name="MozillaFirefox"/>
+<install channel="6" kind="patch" name="libtiff"/>
+<install channel="6" kind="patch" name="timezone"/>
+<install channel="6" kind="patch" name="mono-core"/>
+<install channel="6" kind="patch" name="kernel"/>
+<install channel="6" kind="patch" name="yast2-samba-client"/>
+<install channel="6" kind="patch" name="openssh"/>
+<install channel="6" kind="patch" name="openldap2-client"/>
+<install channel="6" kind="patch" name="gpg2"/>
+<install channel="6" kind="patch" name="hplip-hpijs"/>
+<install channel="6" kind="patch" name="yast2-storage"/>
+<install channel="6" kind="patch" name="kernel-bigsmp"/>
+<install channel="6" kind="patch" name="openssl"/>
+<install channel="6" kind="patch" name="python"/>
+<install channel="6" kind="patch" name="yast2-trans-de"/>
+<install channel="6" kind="patch" name="MozillaFirefox"/>
+<install channel="6" kind="patch" name="qt3"/>
+<install channel="6" kind="patch" name="perl-Bootloader"/>
+<install channel="6" kind="patch" name="gnome-main-menu"/>
+<install channel="6" kind="patch" name="Mesa"/>
+<install channel="6" kind="patch" name="module-init-tools"/>
+<install channel="6" kind="patch" name="mkinitrd"/>
+<install channel="6" kind="patch" name="Mesa"/>
+<install channel="6" kind="patch" name="mkinitrd"/>
+<install channel="6" kind="patch" name="curl"/>
+<install channel="6" kind="patch" name="MozillaFirefox"/>
+<install channel="6" kind="patch" name="openssh"/>
+<install channel="6" kind="patch" name="gpg"/>
+<install channel="6" kind="patch" name="module-init-tools"/>
+<install channel="6" kind="patch" name="evince"/>
+<install channel="6" kind="patch" name="MozillaFirefox"/>
+<install channel="6" kind="patch" name="e2fsprogs"/>
+<install channel="6" kind="patch" name="screen"/>
+<install channel="6" kind="patch" name="gnome-session"/>
+<install channel="6" kind="patch" name="timezone"/>
+<install channel="6" kind="patch" name="udev"/>
+<install channel="6" kind="patch" name="3ddiag"/>
+<install channel="6" kind="patch" name="sax2-ident"/>
+<install channel="6" kind="patch" name="xorg-x11-server"/>
+<install channel="6" kind="patch" name="gnome-main-menu"/>
+<install channel="6" kind="patch" name="kernel-bigsmp"/>
+<install channel="6" kind="patch" name="gnome-session"/>
+<install channel="6" kind="patch" name="gnome-screensaver"/>
+<install channel="6" kind="patch" name="ghostscript-library"/>
+<install channel="6" kind="patch" name="bind"/>
+<install channel="6" kind="patch" name="pwdutils"/>
+<install channel="6" kind="patch" name="perl-Bootloader"/>
+<install channel="6" kind="patch" name="mkinitrd"/>
+<install channel="6" kind="patch" name="openssh"/>
+<install channel="6" kind="patch" name="libmusicbrainz"/>
+<install channel="6" kind="patch" name="mono-core"/>
+<install channel="6" kind="patch" name="glibc"/>
+<install channel="6" kind="patch" name="xorg-x11-driver-video"/>
+<install channel="6" kind="patch" name="yast2-storage"/>
+<install channel="6" kind="patch" name="openssh"/>
+<install channel="6" kind="patch" name="MozillaFirefox"/>
+<install channel="6" kind="patch" name="mozilla-nss"/>
+<install channel="6" kind="patch" name="gnutls"/>
+<install channel="6" kind="patch" name="evolution-data-server"/>
+<install channel="6" kind="patch" name="at"/>
+<install channel="6" kind="patch" name="libpng"/>
+<install channel="6" kind="patch" name="tar"/>
+<install channel="6" kind="patch" name="gnome-session"/>
+<install channel="6" kind="patch" name="diffutils"/>
+<install channel="6" kind="patch" name="gpg2"/>
+<install channel="6" kind="patch" name="openssl"/>
+<install channel="6" kind="patch" name="gnome-screensaver"/>
+<install channel="6" kind="patch" name="openssl"/>
+<install channel="6" kind="patch" name="kernel-bigsmp"/>
+<install channel="6" kind="patch" name="gdb"/>
+<install channel="6" kind="patch" name="libksba"/>
+<install channel="6" kind="patch" name="MozillaFirefox"/>
+<install channel="6" kind="patch" name="samba"/>
+<install channel="6" kind="patch" name="kernel"/>
+<install channel="6" kind="patch" name="yast2-samba-client"/>
+<install channel="6" kind="patch" name="binutils"/>
+<install channel="6" kind="patch" name="MozillaFirefox"/>
+<install channel="6" kind="patch" name="permissions"/>
+<install channel="6" kind="patch" name="gpg"/>
+<install channel="6" kind="patch" name="procps"/>
+<install channel="6" kind="patch" name="xorg-x11-driver-video"/>
+<install channel="6" kind="patch" name="kernel"/>
+<install channel="6" kind="patch" name="MozillaFirefox"/>
+<install channel="6" kind="patch" name="powersave"/>
+<install channel="6" kind="patch" name="bind"/>
+<install channel="6" kind="patch" name="sysvinit"/>
+<install channel="6" kind="patch" name="compat-openssl097g"/>
+<install channel="6" kind="patch" name="gzip"/>
+<install channel="6" kind="patch" name="gpg"/>
+<install channel="6" kind="patch" name="kdelibs3"/>
+<install channel="6" kind="patch" name="gtk2"/>
+<install channel="6" kind="patch" name="gnome-session"/>
+<install channel="6" kind="patch" name="gpg2"/>
+<install channel="6" kind="patch" name="yast2-transfer"/>
+<install channel="6" kind="patch" name="gdb"/>
+<install channel="6" kind="patch" name="libwnck"/>
+<reportproblems/>
+<takesolution problem="0" solution="1"/>
+<reportproblems/>
+</trial>
+</test>

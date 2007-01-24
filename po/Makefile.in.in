@@ -255,6 +255,9 @@ installdirs-data-yes:
 	  done; \
 	done
 
+pot:
+	createPot
+
 # Define this as empty until I found a useful application.
 installcheck:
 

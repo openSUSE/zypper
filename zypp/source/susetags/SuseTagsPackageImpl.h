@@ -113,6 +113,7 @@ namespace zypp
         std::list<std::string> _keywords;
         ByteCount _size;
         ByteCount _archivesize;
+        Vendor _vendor;
         Label _license;
         Date _buildtime;
         unsigned _media_number;

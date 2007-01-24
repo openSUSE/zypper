@@ -69,6 +69,24 @@ struct ConvertDbReceive : public callback::ReceiveReport<target::ScriptResolvabl
 
 ///////////////////////////////////////////////////////////////////
 
+struct MediaChangeReceive : public callback::ReceiveReport<media::MediaChangeReport>
+{
+  virtual Action requestMedia( Source_Ref source
+                               , unsigned mediumNr
+                               , Error error
+                               , const std::string & description )
+  {
+    SEC << __FUNCTION__ << endl
+    << "  " << source << endl
+    << "  " << mediumNr << endl
+    << "  " << error << endl
+    << "  " << description << endl;
+    return IGNORE;
+  }
+};
+
+///////////////////////////////////////////////////////////////////
+
 namespace container
 {
   template<class _Tp>
@@ -77,64 +95,6 @@ namespace container
 }
 
 ///////////////////////////////////////////////////////////////////
-
-template<class _Condition>
-  struct SetTrue
-  {
-    SetTrue( _Condition cond_r )
-    : _cond( cond_r )
-    {}
-
-    template<class _Tp>
-      bool operator()( _Tp t ) const
-      {
-        _cond( t );
-        return true;
-      }
-
-    _Condition _cond;
-  };
-
-template<class _Condition>
-  inline SetTrue<_Condition> setTrue_c( _Condition cond_r )
-  {
-    return SetTrue<_Condition>( cond_r );
-  }
-
-template <class _Iterator, class _Filter, class _Function>
-  inline _Function for_each_if( _Iterator begin_r, _Iterator end_r,
-                                _Filter filter_r,
-                                _Function fnc_r )
-  {
-    for ( _Iterator it = begin_r; it != end_r; ++it )
-      {
-        if ( filter_r( *it ) )
-          {
-            fnc_r( *it );
-          }
-      }
-    return fnc_r;
-  }
-
-struct PrintPoolItem
-{
-  void operator()( const PoolItem & pi ) const
-  { USR << pi << " (" << pi.resolvable().get() << ")" <<endl; }
-};
-
-template <class _Iterator>
-  std::ostream & vdumpPoolStats( std::ostream & str,
-                                 _Iterator begin_r, _Iterator end_r )
-  {
-    pool::PoolStats stats;
-    std::for_each( begin_r, end_r,
-
-                   functor::chain( setTrue_c(PrintPoolItem()),
-                                   setTrue_c(functor::functorRef<void,ResObject::constPtr>(stats)) )
-
-                 );
-    return str << stats;
-  }
 
 struct PoolItemSelect
 {
@@ -236,8 +196,10 @@ int main( int argc, char * argv[] )
   //zypp::base::LogControl::instance().logfile( "log.restrict" );
   INT << "===[START]==========================================" << endl;
 
-  ConvertDbReceive r;
-  r.connect();
+  ConvertDbReceive cr;
+  cr.connect();
+  MediaChangeReceive mr;
+  mr.connect();
 
   ResPool pool( getZYpp()->pool() );
 
@@ -251,6 +213,7 @@ int main( int argc, char * argv[] )
 
   PoolItem prod( *pool.byKindBegin<Product>() );
   showProd( prod );
+  PoolItem pac( *pool.byNameBegin("java-1_4_2-sun-plugin") );
 
   if ( 1 )
     {
@@ -260,18 +223,12 @@ int main( int argc, char * argv[] )
     }
 
   prod.status().setTransact( true, ResStatus::USER );
+  pac.status().setTransact( true, ResStatus::USER );
   ZYppCommitPolicy policy;
   policy.rpmNoSignature();
   ZYppCommitResult res( getZYpp()->commit( policy ) );
 
-  for_each( pool.byKindBegin<Product>(),
-            pool.byKindEnd<Product>(),
-            showProd );
-
-  dumpPoolStats( USR << "Products:"<< endl,
-                 pool.byKindBegin<Product>(),
-                 pool.byKindEnd<Product>() ) << endl;
-
+  SEC << res << endl;
 
   zypp::base::LogControl::instance().logNothing();
   return 0;

@@ -29,6 +29,7 @@ extern "C"
 
 #include "zypp/Pathname.h"
 #include "zypp/CheckSum.h"
+#include "zypp/ByteCount.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -629,6 +630,15 @@ namespace zypp
      * \todo check cooperation with zypp::TmpFile and zypp::TmpDir
      **/
     int erase( const Pathname & path );
+
+    /**
+     * Report free disk space on a mounted file system.
+     *
+     * path is the path name of any file within the mounted filesystem.
+     *
+     * @return Free disk space or -1 on error.
+     **/
+    ByteCount df( const Pathname & path );
     //@}
 
     /////////////////////////////////////////////////////////////////

@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!-- testcase for bug222531 solver ignores keep state  -->
+<test>
+<setup arch="i686">
+	<system file="bug222531-system.xml"/>
+	<channel file="bug222531-packages1.xml" name="1" />
+	<channel file="bug222531-packages2.xml" name="2" />
+</setup>
+<trial>
+<keep kind="package" name="libzypp"/>
+<keep kind="package" name="libzypp" channel="1"/>
+<keep kind="package" name="libzypp" channel="2"/>
+<install channel="2" kind="patch" name="libzypp"/>
+<reportproblems/>
+</trial>
+</test>

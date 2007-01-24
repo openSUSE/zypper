@@ -212,7 +212,7 @@ namespace zypp
     CodeMaps::CodeMaps()
     {
       // Defined CountryCode constants
-      others[""]        = N_( "noCode" );
+      others[""]        = N_( "No Code" );
 
       iso3166["AD"] = N_( "Andorra" ); 				// :AND:020:
       iso3166["AE"] = N_( "United Arab Emirates" ); 		// :ARE:784:
@@ -253,7 +253,7 @@ namespace zypp
       iso3166["CA"] = N_( "Canada" ); 				// :CAN:124:
       iso3166["CC"] = N_( "Cocos (Keeling) Islands" ); 		// :CCK:166:
       iso3166["CD"] = N_( "Congo" ); 				// :COD:180:
-      iso3166["CF"] = N_( "Centruual African Republic" ); 	// :CAF:140:
+      iso3166["CF"] = N_( "Central African Republic" ); 	// :CAF:140:
       iso3166["CG"] = N_( "Congo" ); 				// :COG:178:
       iso3166["CH"] = N_( "Switzerland" ); 			// :CHE:756:
       iso3166["CI"] = N_( "Cote D'Ivoire" ); 			// :CIV:384:

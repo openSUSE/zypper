@@ -418,6 +418,25 @@ ResolverInfoMisc::message (void) const
 	break;
 
 	//-------------------
+	// p provides c but is set to kept
+
+	case RESOLVER_INFO_TYPE_KEEP_PROVIDER: {
+	    // affected() = requirer of capability
+	    // _capability = provided by other()
+	    // other() = provider of capability
+	    // other_capability() = - empty -
+
+	    string other_str = ResolverInfo::toString(other());
+	    string cap_str = ResolverInfo::toString (_capability);
+	    // Translator: 1.%s = name of package,patch,...; 2.%s = dependency;
+	    msg = str::form (_("%s provides %s,  but is scheduled to be kept."),
+			     other_str.c_str(),
+			     cap_str.c_str());
+	}
+	break;
+	
+
+	//-------------------
 	// p provides c but has other architecture
 
 	case RESOLVER_INFO_TYPE_OTHER_ARCH_PROVIDER: {

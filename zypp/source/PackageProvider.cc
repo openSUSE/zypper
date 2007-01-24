@@ -14,6 +14,7 @@
 #include "zypp/base/Logger.h"
 #include "zypp/base/Gettext.h"
 
+#include "zypp/Source.h"
 #include "zypp/source/PackageProvider.h"
 #include "zypp/source/SourceProvideFile.h"
 #include "zypp/source/Applydeltarpm.h"
@@ -35,10 +36,12 @@ namespace zypp
     //
     ///////////////////////////////////////////////////////////////////
 
-    bool PackageProviderPolicy::queryInstalled( const std::string & name_r, const Edition & ed_r ) const
+    bool PackageProviderPolicy::queryInstalled( const std::string & name_r,
+                                                const Edition &     ed_r,
+                                                const Arch &        arch_r ) const
     {
       if ( _queryInstalledCB )
-        return _queryInstalledCB( name_r, ed_r );
+        return _queryInstalledCB( name_r, ed_r, arch_r );
       return false;
     }
 
@@ -132,6 +135,22 @@ namespace zypp
                       if ( ! ret->empty() )
                         return ret;
                     }
+                }
+            }
+        }
+      else
+        {
+          // allow patch rpm from local source
+          std::list<PatchRpm> patchRpms( _implPtr->patchRpms() );
+          if ( ! patchRpms.empty() && queryInstalled() )
+            {
+              for( std::list<PatchRpm>::const_iterator it = patchRpms.begin();
+                   it != patchRpms.end(); ++it )
+                {
+                  DBG << "tryPatch " << *it << endl;
+                  ManagedFile ret( tryPatch( *it ) );
+                  if ( ! ret->empty() )
+                    return ret;
                 }
             }
         }
@@ -257,12 +276,15 @@ namespace zypp
     bool PackageProvider::failOnChecksumError() const
     {
       std::string package_str = _package->name() + "-" + _package->edition().asString();
-      
+
       // TranslatorExplanation %s = package being checked for integrity
       switch ( report()->problem( _package, source::DownloadResolvableReport::INVALID, str::form(_("Package %s fails integrity check. Do you want to retry downloading it?"), package_str.c_str() ) ) )
         {
         case source::DownloadResolvableReport::RETRY:
           _retry = true;
+          break;
+          case source::DownloadResolvableReport::IGNORE:
+          ZYPP_THROW(source::SkipRequestedException("User requested skip of corrupted file"));
           break;
         default:
           break;
@@ -271,7 +293,7 @@ namespace zypp
     }
 
     bool PackageProvider::queryInstalled( const Edition & ed_r ) const
-    { return _policy.queryInstalled( _package->name(), ed_r ); }
+    { return _policy.queryInstalled( _package->name(), ed_r, _package->arch() ); }
 
 
     /////////////////////////////////////////////////////////////////

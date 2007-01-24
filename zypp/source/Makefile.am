@@ -14,7 +14,6 @@ sourceinclude_HEADERS =	\
 	SourceImpl.h	\
 	Builtin.h	\
 	OnMediaLocation.h	\
-	ManagedFile.h	\
 	SourceProvideFile.h	\
 	PackageProvider.h	\
 	PackageDelta.h	\
@@ -36,12 +35,12 @@ lib@PACKAGE@_source_la_SOURCES = \
 	Applydeltarpm.cc	\
 	MediaSet.cc \
 	SourceInfo.cc
-	
+
 
 
 lib@PACKAGE@_source_la_LIBADD = \
 		plaindir/lib@PACKAGE@_source_plaindir.la	\
 		susetags/lib@PACKAGE@_source_susetags.la	\
-		yum/lib@PACKAGE@_source_yum.la 
+		yum/lib@PACKAGE@_source_yum.la
 
 ## ##################################################

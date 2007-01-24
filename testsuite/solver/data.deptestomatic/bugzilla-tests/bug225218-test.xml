@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!--
+   distupgrade generates an empty solution popup
+-->
+<test>
+<setup>
+  <system file="bug225218-system.xml"/>
+  <channel name="upgrade" file="bug225218-packages.xml"/>
+</setup>
+<trial>
+  <distupgrade/>
+  <reportproblems ignoreValidSolution="true"/>
+</trial>
+</test>

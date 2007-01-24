@@ -106,6 +106,17 @@ namespace zypp
     std::string readSignatureKeyId( const Pathname &signature );
     
     /**
+     * true if the key id is trusted
+     */
+    bool isKeyTrusted( const std::string &id);
+    
+    /**
+     * true if the key id is knows, that means
+     * at least exist on the untrusted keyring
+     */
+    bool isKeyKnown( const std::string &id );
+    
+    /**
      * removes a key from the keyring.
      * If trusted is true, Remove it from trusted keyring too.
      */

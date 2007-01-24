@@ -29,6 +29,7 @@ baseinclude_HEADERS =	\
 	LogControl.h	\
 	ProfilingFormater.h	\
 	\
+	DtorReset.h	\
 	Fd.h		\
 	KindOf.h	\
 	Gettext.h	\

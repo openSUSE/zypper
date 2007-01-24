@@ -276,7 +276,7 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
 
   ZYppFactoryException::ZYppFactoryException( const std::string & msg_r )
-  : Exception(N_("Cannot acquire zypp lock."))
+  : Exception(N_("Software management is already running."))
   {}
 
   ///////////////////////////////////////////////////////////////////
@@ -331,7 +331,7 @@ namespace zypp
       /*--------------------------------------------------*/
       if ( globalLock.zyppLocked() )
       {
-        ZYPP_THROW( ZYppFactoryException(N_("Cannot acquire zypp lock.")) );
+        ZYPP_THROW( ZYppFactoryException(N_("Software management is already running.")) );
       }
       else
       {

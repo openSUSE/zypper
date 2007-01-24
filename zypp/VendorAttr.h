@@ -28,6 +28,19 @@ class VendorAttr : private base::NonCopyable
     /** Singleton */
     static const VendorAttr & instance();
 
+    /** Enable autoprotection of foreign vendor packages.
+     * This is the default.
+     * \note This will \b not change the status of already
+     * loaded pool items.
+    */
+    static void enableAutoProtect();
+    /** Disable autoprotection of foreign vendor packages.
+     * Autoprotection is on per defult.
+     * \note This will \b not change the status of already
+     * loaded pool items.
+    */
+    static void disableAutoProtect();
+
     /**
      * Return whether it's a known vendor
      **/

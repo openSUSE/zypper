@@ -61,6 +61,7 @@ typedef enum {
     RESOLVER_INFO_TYPE_NO_PROVIDER,			// There are no installable providers of c [for p]
     RESOLVER_INFO_TYPE_NO_UPGRADE,			// Upgrade to q to avoid removing p is not possible.
     RESOLVER_INFO_TYPE_UNINSTALL_PROVIDER,		// p provides c but is scheduled to be uninstalled
+    RESOLVER_INFO_TYPE_KEEP_PROVIDER,			// p provides c but is scheduled to be kept
     RESOLVER_INFO_TYPE_PARALLEL_PROVIDER,		// p provides c but another version is already installed
     RESOLVER_INFO_TYPE_NOT_INSTALLABLE_PROVIDER,	// p provides c but is uninstallable
     RESOLVER_INFO_TYPE_LOCKED_PROVIDER,			// p provides c but is locked

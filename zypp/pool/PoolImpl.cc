@@ -119,7 +119,10 @@ namespace zypp
       storeInsert( _store, item_r, Dep::REQUIRES );
       storeInsert( _store, item_r, Dep::CONFLICTS );
       storeInsert( _store, item_r, Dep::OBSOLETES );
+      storeInsert( _store, item_r, Dep::RECOMMENDS );
+      storeInsert( _store, item_r, Dep::SUGGESTS );
       storeInsert( _store, item_r, Dep::FRESHENS );
+      storeInsert( _store, item_r, Dep::ENHANCES );
       storeInsert( _store, item_r, Dep::SUPPLEMENTS );
     }
 
@@ -148,7 +151,10 @@ namespace zypp
       storeDelete( _store, item_r, Dep::REQUIRES );
       storeDelete( _store, item_r, Dep::CONFLICTS );
       storeDelete( _store, item_r, Dep::OBSOLETES );
+      storeDelete( _store, item_r, Dep::RECOMMENDS );
+      storeDelete( _store, item_r, Dep::SUGGESTS );
       storeDelete( _store, item_r, Dep::FRESHENS );
+      storeDelete( _store, item_r, Dep::ENHANCES );
       storeDelete( _store, item_r, Dep::SUPPLEMENTS );
     }
 

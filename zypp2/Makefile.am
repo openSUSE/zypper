@@ -8,7 +8,7 @@ AM_CXXFLAGS = -DZYPP_BASE_LOGGER_LOGGROUP=\"zypp2\"
 ## ##################################################
 
 pkginclude_HEADERS = 
-noinst_HEADERS = LazzyText.h
+noinst_HEADERS = Lazy.h
 
 ## ##################################################
 
@@ -16,14 +16,13 @@ noinst_LTLIBRARIES =	lib@PACKAGE@2.la
 
 ## ##################################################
 
-lib@PACKAGE@2_la_SOURCES = LazzyText.cc
+lib@PACKAGE@2_la_SOURCES = Lazy.cc
 
 lib@PACKAGE@2_la_LDFLAGS =	@LIBZYPP_VERSION_INFO@
 
 lib@PACKAGE@2_la_LIBADD =        cache/lib@PACKAGE@2_cache.la \
 				 source/lib@PACKAGE@2_source.la \
 				-lboost_filesystem \
-				-lsqlite3 \
 				-lutil
 # !!! base/lib@PACKAGE@_base.la MUST BE THE LAST zypp lib linked
 

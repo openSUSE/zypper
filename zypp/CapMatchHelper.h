@@ -179,14 +179,14 @@ namespace zypp
    * \c poolitem_r provides a matching Capability. Use \ref OncePerPoolItem
    * to compensate this if neccessary.
   */
-  inline void forEachPoolItemMatchedBy( const ResPool &  pool_r,
+  inline int forEachPoolItemMatchedBy( const ResPool &  pool_r,
                                         const PoolItem & poolitem_r,
                                         const Dep &      poolitemdep_r,
                                         function<bool(const CapAndItem &)> action_r )
   {
-    for_each( poolitem_r->dep(poolitemdep_r).begin(),
-              poolitem_r->dep(poolitemdep_r).end(),
-              ForEachMatchInPool( pool_r, Dep::PROVIDES, action_r ) );
+    return invokeOnEach( poolitem_r->dep(poolitemdep_r).begin(),
+                         poolitem_r->dep(poolitemdep_r).end(),
+                         ForEachMatchInPool( pool_r, Dep::PROVIDES, action_r ) );
   }
 
   /** Find all items in a ResPool matching a certain PoolItem.
@@ -210,14 +210,14 @@ namespace zypp
    * \c poolitem_r provides a matching Capability. Use \ref OncePerPoolItem
    * to compensate this if neccessary.
   */
-  inline void forEachPoolItemMatching( const ResPool &  pool_r,
-                                       const Dep &      pooldep_r,
-                                       const PoolItem & poolitem_r,
-                                       function<bool(const CapAndItem &)> action_r )
+  inline int forEachPoolItemMatching( const ResPool &  pool_r,
+                                      const Dep &      pooldep_r,
+                                      const PoolItem & poolitem_r,
+                                      function<bool(const CapAndItem &)> action_r )
   {
-    for_each( poolitem_r->dep(Dep::PROVIDES).begin(),
-              poolitem_r->dep(Dep::PROVIDES).end(),
-              ForEachMatchInPool( pool_r, pooldep_r, action_r ) );
+    return invokeOnEach( poolitem_r->dep(Dep::PROVIDES).begin(),
+                         poolitem_r->dep(Dep::PROVIDES).end(),
+                         ForEachMatchInPool( pool_r, pooldep_r, action_r ) );
   }
 
   /** Functor translating \ref CapAndItem actions into \ref PoolItem

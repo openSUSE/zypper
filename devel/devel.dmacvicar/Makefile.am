@@ -1,7 +1,7 @@
 ## Process this file with automake to produce Makefile.in
 ## ##################################################
 
-noinst_PROGRAMS = test lock testbed aj yumparser media
+noinst_PROGRAMS = test lock testbed aj yumparser media tag
 
 ## ##################################################
 
@@ -29,6 +29,9 @@ testbed_LDFLAGS = -static
 
 aj_SOURCES = 	aj.cc
 aj_LDFLAGS =	-static
+
+tag_SOURCES = 	tagfile-ng.cc
+tag_LDFLAGS =	-static
 
 yumparser_SOURCES = 	yum-parser.cc
 yumparser_LDFLAGS =	-static

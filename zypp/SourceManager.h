@@ -65,7 +65,7 @@ namespace zypp
   {
     public:
       SourcesAlreadyRestoredException()
-      : Exception(N_("At least one source already registered, cannot restore sources from persistent store."))
+      : Exception(N_("At least one source already registered, stored sources cannot be restored."))
       {}
       virtual ~SourcesAlreadyRestoredException() throw() {};
   };

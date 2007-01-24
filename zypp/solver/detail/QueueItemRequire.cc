@@ -205,8 +205,10 @@ struct RequireProcess
 	if (! (status.isToBeUninstalled() || status.isImpossible())
 	    && ! _context->isParallelInstall( provider )
 	    && _context->itemIsPossible( provider )
-	    && ! provider.status().isLocked() 
-	) {
+	    && ! provider.status().isLocked()
+	    && ! (provider.status().isKept()
+		  &&provider.status().isByUser())
+	    ) {
 
 	    // if we found a to-be-installed provider, choose this and drop all others
 	    if (status.isToBeInstalled()			// scheduled for install
@@ -291,6 +293,9 @@ struct NoInstallableProviders
 	} else if (provider.status().isLocked()) {
 	    misc_info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_LOCKED_PROVIDER, requirer, RESOLVER_INFO_PRIORITY_VERBOSE, match);
 	    misc_info->setOtherPoolItem (provider);
+	} else if (provider.status().isKept() && provider.status().isByUser()) {
+	    misc_info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_KEEP_PROVIDER, requirer, RESOLVER_INFO_PRIORITY_VERBOSE, match);
+	    misc_info->setOtherPoolItem (provider);	    
  	} else	if (provider->arch().compatibleWith( context->architecture() )) {
 	    misc_info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_OTHER_ARCH_PROVIDER,
 								   requirer, RESOLVER_INFO_PRIORITY_VERBOSE, match);
@@ -310,10 +315,12 @@ typedef map<string, PoolItem_Ref> UpgradesMap;
 struct LookForUpgrades
 {
     PoolItem_Ref installed;
+    ResolverContext_Ptr _context;    
     UpgradesMap upgrades;
 
-    LookForUpgrades (PoolItem_Ref i)
+    LookForUpgrades (PoolItem_Ref i, ResolverContext_Ptr ctx)
 	: installed (i)
+	, _context (ctx)	
     { }
 
     bool operator()( PoolItem_Ref provider )
@@ -322,7 +329,8 @@ struct LookForUpgrades
 
 	if (it != upgrades.end()) {				// provider with same name found
 	    int cmp = it->second->arch().compare( provider->arch() );
-	    if (cmp < 0) {						// new provider has better arch
+	    if (_context->upgradeMode()					// only in upgrade mode
+		&& cmp < 0) {						// new provider has better arch
 		it->second = provider;
 	    }
 	    else if (cmp == 0) {					// new provider has equal arch
@@ -667,7 +675,7 @@ provider_done:;
 	    && _requiring_item)
 	{
 
-	    LookForUpgrades info (_requiring_item);
+	    LookForUpgrades info (_requiring_item, context);
 
 //	    pool()->foreachUpgrade (_requiring_item, new Channel(CHANNEL_TYPE_ANY), look_for_upgrades_cb, (void *)&upgrade_list);
 

@@ -42,7 +42,8 @@ namespace zypp
     Date( ValueType date_r )
     : _date( date_r )
     {}
-    //Date( const std::string & seconds_r ) : _date( fromSECONDS (seconds_r) ) {}
+    /** Ctor taking time_t value as string. */
+    Date( const std::string & seconds_r );
 
     /** Return the current time. */
     static Date now()

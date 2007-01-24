@@ -76,6 +76,7 @@ static struct {
     { RIT(NO_PROVIDER),			"There are no installable providers of c [for p]" },
     { RIT(NO_UPGRADE),			"Upgrade to q to avoid removing p is not possible." },
     { RIT(UNINSTALL_PROVIDER),		"p provides c but is scheduled to be uninstalled" },
+    { RIT(KEEP_PROVIDER),		"p provides c but is scheduled to be kept" },    
     { RIT(PARALLEL_PROVIDER),		"p provides c but another version is already installed" },
     { RIT(NOT_INSTALLABLE_PROVIDER),	"p provides c but is uninstallable" },
     { RIT(LOCKED_PROVIDER),		"p provides c but is locked" },

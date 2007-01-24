@@ -221,6 +221,9 @@ namespace zypp
     bool isLocked() const
     { return fieldValueIs<TransactField>( LOCKED ); }
 
+    bool isKept() const
+    { return fieldValueIs<TransactField>( KEEP_STATE ); }      
+
     bool transacts() const
     { return fieldValueIs<TransactField>( TRANSACT ); }
 
@@ -326,8 +329,11 @@ namespace zypp
       if ( toLock_r ) {
 	  fieldValueAssign<TransactField>( LOCKED );
 	  fieldValueAssign<TransactByField>( causer_r );
-      } else
+      } else {
 	  fieldValueAssign<TransactField>( KEEP_STATE );
+	  fieldValueAssign<TransactByField>( SOLVER ); // reset to lowest causer
+	                                               // in order to distinguish from keep_state_by_user
+      }
       return true;
     }
 
@@ -497,17 +503,31 @@ namespace zypp
 
     bool setToBeInstalledSoft ( )
     {
-      if (!setToBeInstalled(SOLVER)) return false;
+      if (isInstalled()
+	  || !setSoftTransact (true, SOLVER))
+	  return false;
+
       fieldValueAssign<TransactDetailField>(SOFT_INSTALL);
       return true;
     }
 
     bool setToBeUninstalledSoft ( )
     {
-      if (!setToBeUninstalled(SOLVER)) return false;
+      if (!isInstalled()
+	  || !setSoftTransact (true, SOLVER))
+	  return false;
+
       fieldValueAssign<TransactDetailField>(SOFT_REMOVE);
       return true;
     }
+
+    bool maySetToBeUninstalledSoft ()
+    {
+	bit::BitField<FieldType> savBitfield = _bitfield;
+	bool ret = setToBeUninstalledSoft ();
+	_bitfield = savBitfield;
+	return ret;
+    }      
 
     bool isSoftInstall () {
         return fieldValueIs<TransactDetailField> (SOFT_INSTALL);

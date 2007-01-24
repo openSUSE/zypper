@@ -1006,14 +1006,14 @@ XMLFilesBackend::createScript(const zypp::parser::xmlstore::XMLPatchScriptData &
     file.open(impl->_do_script->path().asString().c_str());
 
     if ( ! file )
-      ZYPP_THROW(Exception(N_("Can't write the patch script to a temporary file.")));
+      ZYPP_THROW(Exception(N_("Cannot create a file needed to perform update installation.")));
 
     file << parsed.do_script;;
     file.close();
 
     file.open(impl->_undo_script->path().asString().c_str());
     if ( ! file )
-      ZYPP_THROW(Exception(N_("Can't write the patch script to a temporary file.")));
+      ZYPP_THROW(Exception(N_("Cannot create a file needed to perform update installation.")));
 
     file << parsed.undo_script;;
     file.close();

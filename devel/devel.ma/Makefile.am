@@ -11,29 +11,30 @@ AM_LDFLAGS =
 
 AM_CXXFLAGS = -pg
 
-LDADD =		-L$(top_srcdir)/zypp/.libs -lzypp -lboost_regex
+LDADD =	      -L$(top_srcdir)/zypp/.libs -lzypp -lboost_regex
+# -lcwd
 
 ## ##################################################
 
-ADD_SOURCES = 	xml/Node.cc		xml/Node.h	\
-		xml/Reader.cc		xml/Reader.h	\
-		xml/XmlString.cc	xml/XmlString.h	\
-		xml/libxmlfwd.cc	xml/libxmlfwd.h
+ADD_SOURCES =
+
+#		debug/Debug.cc
 
 ## ##################################################
 
-AOUT_SOURCES = AOUT.cc $(ADD_SOURCES)
+AOUT_SOURCES = $(ADD_SOURCES)
+AOUT_DEPENDENCIES =  $(top_srcdir)/zypp/lib@PACKAGE@.la
 AOUT_LDFLAGS = -static
 
 ## ##################################################
 
-%: %.cc $(top_srcdir)/zypp/lib@PACKAGE@.la
-	touch .deps/$@.Po
-	ln -sf $@.Po .deps/AOUT.Po
-	ln -sf $@.cc AOUT.cc
-	ln -sf $@.o  AOUT.o
-	$(MAKE) AOUT
-	mv AOUT $@
+%: %.cc $(AOUT_DEPENDENCIES) $(AOUT_OBJECTS)
+	if $(CXX) \
+	$(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) \
+	-MT $*.o -MD -MP -MF "$(DEPDIR)/$*.Tpo" -c -o $*.o $<; \
+	then mv -f "$(DEPDIR)/$*.Tpo" "$(DEPDIR)/$*.Po"; else rm -f "$(DEPDIR)/$*.Tpo"; exit 1; fi
+	rm -f $@
+	$(CXXLINK) $(AOUT_LDFLAGS) $*.o $(AOUT_OBJECTS) $(AOUT_LDADD) $(LIBS)
 
 ## ##################################################
 
@@ -47,9 +48,6 @@ Prof_LDFLAGS = $(PROF_OBJ)
 ## ##################################################
 
 .PHONY:		always
-
-Tools.h:	$(top_srcdir)/zypp/lib@PACKAGE@.la
-
 $(top_srcdir)/zypp/lib@PACKAGE@.la:     always
 	$(MAKE) -C $(top_srcdir)/zypp
 

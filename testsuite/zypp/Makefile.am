@@ -19,7 +19,7 @@ TESTS = Arch Url \
 	Digest \
 	Signature \
 	KeyRing \
-	LazzyText
+	Lazy
 
 check_PROGRAMS = Arch Url \
 	RWPtr \
@@ -33,7 +33,7 @@ check_PROGRAMS = Arch Url \
 	Digest \
 	Signature \
 	KeyRing \
-	LazzyText
+	Lazy
 
 ## ##################################################
 
@@ -77,8 +77,8 @@ Url_LDADD  = $(LDADD) -lboost_unit_test_framework
 KeyRing_SOURCES = KeyRing.cc
 KeyRing_LDADD  = $(LDADD) -lboost_unit_test_framework
 
-LazzyText_SOURCES = LazzyText.cc
-LazzyText_LDADD  = $(LDADD) $(top_srcdir)/zypp2/lib@PACKAGE@2.la  -lboost_unit_test_framework
+Lazy_SOURCES = Lazy.cc
+Lazy_LDADD  = $(LDADD) $(top_srcdir)/zypp2/lib@PACKAGE@2.la  -lboost_unit_test_framework
 
 ## ##################################################
 

@@ -254,7 +254,7 @@ struct ProvidesItem
     QueueItemList & qil;
     bool soft;
 
-    ProvidesItem (const ResPool & p, QueueItemList &l, bool s)
+    ProvidesItem (const ResPool & p, QueueItemList &l, bool s)    
 	: pool(p)
 	, qil(l)
 	, soft(s)
@@ -266,14 +266,13 @@ struct ProvidesItem
 	_XDEBUG("remove soft item (" << cai.item << ", " << cai.cap << ")");
 	PoolItem_Ref item( cai.item );
 	if (!item.status().transacts() // not scheduled for transaction yet
-	    && !(item.status().staysInstalled() // not keeping by user (Bug 217574)
-		 && item.status().isByUser())
-	    ) {	
+	    && item.status().maySetToBeUninstalledSoft()) // checking the permission to delete it (Bug 217574)	    
+	{
 	    QueueItemUninstall_Ptr uninstall_item = new QueueItemUninstall (pool, item, QueueItemUninstall::EXPLICIT, soft);
 	    uninstall_item->setUnlink ();
 	    qil.push_back (uninstall_item);
 	} else {
-	    _XDEBUG(" ---> do not remove cause it has been set for transaction or the user has set to KEEP");	    
+	    _XDEBUG(" ---> do not remove cause it has been set for transaction or can not set for uninstallation due right problems.");	    
 	}
 	return true;
     }
@@ -478,7 +477,7 @@ QueueItemUninstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 	for (CapSet::const_iterator iter = recomments.begin(); iter != recomments.end(); iter++) {
 	    const Capability cap = *iter;
 	    _XDEBUG("this recommends " << cap);
-	    ProvidesItem provides( pool(), qil, true ); // soft
+	    ProvidesItem provides( pool(), qil, true ); // soft	    
 
 	    Dep dep(Dep::PROVIDES);
 	    invokeOnEach( pool().byCapabilityIndexBegin( iter->index(), dep ),

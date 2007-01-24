@@ -244,7 +244,7 @@ const TmpDir YUMSourceImpl::downloadMetadata()
   // check signature
   MIL << "Checking [" << (local_dir + "/repodata/repomd.xml") << "] signature"  << endl;
   if (! getZYpp()->keyRing()->verifyFileSignatureWorkflow(local_dir + "/repodata/repomd.xml", (_path + "/repodata/repomd.xml").asString()+ " (" + url().asString() + ")", local_dir + "/repodata/repomd.xml.asc"))
-    ZYPP_THROW(SourceMetadataException(N_("Signed repomd.xml file fails signature check")));
+    ZYPP_THROW(SourceMetadataException(N_("The signed repomd.xml file failed the signature check.")));
 
   // ok, now we have a consistent repo in the tmpdir.
   return tmpdir;

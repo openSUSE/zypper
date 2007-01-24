@@ -196,11 +196,11 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
     void setForceResolve (const bool force) { _forceResolve = force; }
     const bool forceResolve() { return _forceResolve; }
 
-    bool verifySystem (void);
+    bool verifySystem (bool considerNewHardware = false);
     void establishState (ResolverContext_Ptr context = NULL);
     bool establishPool (void);
-    void freshenState( ResolverContext_Ptr context = NULL );
-    bool freshenPool( void );
+    void freshenState( ResolverContext_Ptr context = NULL, bool resetAfterSolve = true );
+    bool freshenPool( bool resetAfterSolve = true );
     bool resolveDependencies (const ResolverContext_Ptr context = NULL);
     bool resolvePool (void);
 
@@ -214,7 +214,7 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
     PoolItemList problematicUpdateItems( void ) const { return _update_items; }
 
 
-    ResolverProblemList problems (void) const;
+    ResolverProblemList problems (const bool ignoreValidSolution = false) const;
     void applySolutions (const ProblemSolutionList &solutions);
     // returns a string list of ResolverInfo of the LAST not valid solution
     std::list<std::string> problemDescription( void ) const;
