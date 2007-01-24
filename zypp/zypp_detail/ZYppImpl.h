@@ -145,6 +145,7 @@ namespace zypp
     public:
       DiskUsageCounter::MountPointSet diskUsage();
       void setPartitions(const DiskUsageCounter::MountPointSet &mp);
+      DiskUsageCounter::MountPointSet getPartitions() const;
 
     private:
       /** */

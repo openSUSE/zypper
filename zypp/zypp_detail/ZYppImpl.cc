@@ -183,6 +183,9 @@ namespace zypp
     void ZYppImpl::setPartitions(const DiskUsageCounter::MountPointSet &mp)
     { _disk_usage.setMountPoints(mp); }
 
+    DiskUsageCounter::MountPointSet ZYppImpl::getPartitions() const
+    { return _disk_usage.getMountPoints(); }
+
     //------------------------------------------------------------------------
     // target
 

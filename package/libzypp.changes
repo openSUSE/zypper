@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Wed Jan 24 14:50:33 CET 2007 - lslezak@suse.cz
+
+- added ZYpp::getPartitions() - return the partitinoning
+
+-------------------------------------------------------------------
 Mon Dec  4 15:38:12 CET 2006 - mt@suse.de
 
 - Improved realpath() wrapper in media handler class (#222521).

@@ -82,7 +82,7 @@ namespace zypp
 	return true;
     }
 
-    MountPointSet getMountPoints()
+    MountPointSet getMountPoints() const
     {
 	return mps;
     }

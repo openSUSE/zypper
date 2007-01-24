@@ -63,6 +63,9 @@ namespace zypp
   void ZYpp::setPartitions(const DiskUsageCounter::MountPointSet &mp)
   { return _pimpl->setPartitions(mp); }
 
+  DiskUsageCounter::MountPointSet ZYpp::getPartitions() const
+  { return _pimpl->getPartitions(); }
+
   ResPoolProxy ZYpp::poolProxy() const
   { return _pimpl->poolProxy(); }
 
