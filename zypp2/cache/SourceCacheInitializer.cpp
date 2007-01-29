@@ -11,7 +11,7 @@
 
 #include "zypp/base/Logger.h"
 #include "zypp/base/String.h"
-#include "zypp2/cache/SourceCacheInitializer.h"
+#include "zypp2/cache/CacheInitializer.h"
 #include "zypp/target/store/PersistentStorage.h"
 #include "zypp2/cache/Utils.h"
 
@@ -71,7 +71,7 @@ static const char * DEPENDENCIES_TABLE_SCHEMA = "\
 
 // id 0, alias 1 , type 2, desc 3, url 4, path 5, enabled 6, autorefresh 7, timestamp 8, checksum 9
   
-SourceCacheInitializer::SourceCacheInitializer( const Pathname &root_r, const Pathname &db_file )
+CacheInitializer::CacheInitializer( const Pathname &root_r, const Pathname &db_file )
   : _root(root_r), _just_initialized(false)
 {
   try
@@ -103,23 +103,23 @@ SourceCacheInitializer::SourceCacheInitializer( const Pathname &root_r, const Pa
   
 }
 
-bool SourceCacheInitializer::justInitialized() const
+bool CacheInitializer::justInitialized() const
 {
   return _just_initialized;
 }
 
-SourceCacheInitializer::~SourceCacheInitializer()
+CacheInitializer::~CacheInitializer()
 {
  
 }
 
-bool SourceCacheInitializer::tablesCreated() const
+bool CacheInitializer::tablesCreated() const
 {
   unsigned int count = _con->executeint("select count(*) from sqlite_master where type='table';");
   return ( count == 1 );
 }
 
-void SourceCacheInitializer::createTables()
+void CacheInitializer::createTables()
 {
   sqlite3_transaction trans(*_con);
   {
@@ -137,7 +137,7 @@ void SourceCacheInitializer::createTables()
   trans.commit();
 }
 
-std::ostream & SourceCacheInitializer::dumpOn( std::ostream & str ) const
+std::ostream & CacheInitializer::dumpOn( std::ostream & str ) const
 {
   return str;
 }

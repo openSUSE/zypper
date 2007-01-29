@@ -7,8 +7,8 @@
 |                                                                      |
 \---------------------------------------------------------------------*/
 
-#ifndef ZYPP_SourceCacheInitializer_H
-#define ZYPP_SourceCacheInitializer_H
+#ifndef ZYPP_CacheInitializer_H
+#define ZYPP_CacheInitializer_H
 
 #include <iosfwd>
 #include <string>
@@ -26,23 +26,23 @@ namespace zypp
   namespace cache
   { /////////////////////////////////////////////////////////////////
 
-    DEFINE_PTR_TYPE(SourceCacheInitializer);
+    DEFINE_PTR_TYPE(CacheInitializer);
 
     ///////////////////////////////////////////////////////////////////
     //
-    //	CLASS NAME : SourceCacheInitializer
+    //	CLASS NAME : CacheInitializer
     //
-    class SourceCacheInitializer : public base::ReferenceCounted, private base::NonCopyable
+    class CacheInitializer : public base::ReferenceCounted, private base::NonCopyable
     {
-      friend std::ostream & operator<<( std::ostream & str, const SourceCacheInitializer & obj );
+      friend std::ostream & operator<<( std::ostream & str, const CacheInitializer & obj );
 
     public:
       /**
        * Tries to initialize the source cache if it was not
        * \throws When cant initialize
        */
-      SourceCacheInitializer( const Pathname &root_r, const Pathname &db_file );
-      ~SourceCacheInitializer();
+      CacheInitializer( const Pathname &root_r, const Pathname &db_file );
+      ~CacheInitializer();
 
       /**
        * only true when cache was not initialized before
@@ -62,8 +62,8 @@ namespace zypp
     };
     ///////////////////////////////////////////////////////////////////
 
-    /** \relates SourceCacheInitializer Stream output */
-    inline std::ostream & operator<<( std::ostream & str, const SourceCacheInitializer & obj )
+    /** \relates CacheInitializer Stream output */
+    inline std::ostream & operator<<( std::ostream & str, const CacheInitializer & obj )
     { return obj.dumpOn( str ); }
 
 
@@ -73,4 +73,4 @@ namespace zypp
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
-#endif // ZYPP_SOURCE_SourceCacheInitializer_H
+#endif // ZYPP_SOURCE_CacheInitializer_H
