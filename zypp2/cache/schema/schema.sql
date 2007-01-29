@@ -4,7 +4,7 @@ CREATE TABLE db_info (
 );
 
 CREATE TABLE resolvables (
-    id INTEGER
+    id INTEGER AUTOINCREMENT
   , name TEXT NOT NULL
   , version TEXT
   , release TEXT
@@ -22,7 +22,7 @@ CREATE TABLE resolvables (
 );
 
 CREATE TABLE dependencies (
-    resolvable_id INTEGER
+    resolvable_id INTEGER REFERENCES resolvable(id)
   , dep_type INTEGER
   , name TEXT
   , version TEXT

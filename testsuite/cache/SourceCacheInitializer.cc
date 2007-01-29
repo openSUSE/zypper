@@ -6,7 +6,7 @@
 #include "zypp/base/Logger.h"
 #include "zypp/Arch.h"
 #include "zypp/TmpPath.h"
-#include "zypp2/cache/SourceCacheInitializer.h"
+#include "zypp2/cache/CacheInitializer.h"
 
 // Boost.Test
 #include <boost/test/floating_point_comparison.hpp>
@@ -33,7 +33,8 @@ using namespace sqlite3x;
 void cacheinit_test()
 {
   filesystem::TmpDir tmpdir;
-  cache::SourceCacheInitializer initializer(tmpdir.path(), "test.db");
+  cache::CacheInitializer initializer(tmpdir.path(), "test.db");
+  
   sqlite3_connection con( (tmpdir.path() + "test.db").asString().c_str());
   //con.executenonquery(SOURCES_TABLE_SCHEMA);
   int count = con.executeint("select count(*) from sqlite_master where type='table';");
