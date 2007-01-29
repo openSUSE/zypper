@@ -10,6 +10,9 @@ TargetImpl.cc
 TargetCallbackReceiver.cc
 TargetException.cc
 CommitLog.cc
+CommitPackageCache.cc
+CommitPackageCacheImpl.cc
+CommitPackageCacheReadAhead.cc
 )
 
 ADD_LIBRARY(zypp_target STATIC ${zypp_target_SRCS})
@@ -25,6 +28,8 @@ CommitLog.h
 TargetCallbackReceiver.h
 TargetException.h
 TargetImpl.h
+CommitPackageCache.h
+CommitPackageCacheReadAhead.h
 DESTINATION
 ${CMAKE_INSTALL_PREFIX}/include/zypp/target
 )

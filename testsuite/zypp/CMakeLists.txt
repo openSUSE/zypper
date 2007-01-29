@@ -211,17 +211,17 @@ ENDIF(KDE3_BUILD_TESTS)
 
 ########### next target ###############
 
-SET(LazzyText_SRCS
-LazzyText.cc
+SET(Lazy_SRCS
+Lazy.cc
 )
 
-KDE3_AUTOMOC(${LazzyText_SRCS})
+KDE3_AUTOMOC(${Lazy_SRCS})
 
 IF(KDE3_BUILD_TESTS)
 
-KDE3_ADD_EXECUTABLE(LazzyText ${LazzyText_SRCS})
+KDE3_ADD_EXECUTABLE(Lazy ${Lazy_SRCS})
 
-TARGET_LINK_LIBRARIES(LazzyText  ${QT_AND_KDECORE_LIBS} boost_unit_test_framework )
+TARGET_LINK_LIBRARIES(Lazy  ${QT_AND_KDECORE_LIBS} boost_unit_test_framework )
 
 ENDIF(KDE3_BUILD_TESTS)
 
@@ -253,7 +253,7 @@ ENDIF(KDE3_BUILD_TESTS)
 #	Digest \
 #	Signature \
 #	KeyRing \
-#	LazzyText
+#	Lazy
 #
 #check_PROGRAMS = Arch Url \
 #	RWPtr \
@@ -267,7 +267,7 @@ ENDIF(KDE3_BUILD_TESTS)
 #	Digest \
 #	Signature \
 #	KeyRing \
-#	LazzyText
+#	Lazy
 #
 ### ##################################################
 #
@@ -311,8 +311,8 @@ ENDIF(KDE3_BUILD_TESTS)
 #KeyRing_SOURCES = KeyRing.cc
 #KeyRing_LDADD  = $(LDADD) -lboost_unit_test_framework
 #
-#LazzyText_SOURCES = LazzyText.cc
-#LazzyText_LDADD  = $(LDADD) $(top_srcdir)/zypp2/lib@PACKAGE@2.la  -lboost_unit_test_framework
+#Lazy_SOURCES = Lazy.cc
+#Lazy_LDADD  = $(LDADD) $(top_srcdir)/zypp2/lib@PACKAGE@2.la  -lboost_unit_test_framework
 #
 ### ##################################################
 #
