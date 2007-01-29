@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Jan 29 19:29:31 CET 2007 - jkupec@suse.cz
+
+- locale support added
+- r4932
+
+-------------------------------------------------------------------
 Mon Jan 22 14:24:12 CET 2007 - mvidner@suse.cz
 
 - installation_sources: fixed to be compatible even with
