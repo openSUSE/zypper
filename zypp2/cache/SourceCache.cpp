@@ -13,7 +13,7 @@
 #include "zypp/base/String.h"
 #include "zypp2/cache/SourceCache.h"
 #include "zypp/target/store/PersistentStorage.h"
-#include "zypp2/cache/SourceCacheInitializer.h"
+#include "zypp2/cache/CacheInitializer.h"
 #include "zypp2/cache/Utils.h"
 
 #define ZYPP_DB_FILE "/var/lib/zypp/zypp.db"
@@ -36,7 +36,7 @@ SourceCache::SourceCache( const Pathname &root_r, const std::string alias )
 {
   try
   {
-    SourceCacheInitializer init( root_r, ZYPP_DB_FILE);
+    CacheInitializer init( root_r, ZYPP_DB_FILE);
     _con.reset( new sqlite3_connection(ZYPP_DB_FILE) );
   }
   catch(exception &ex) {
