@@ -65,7 +65,9 @@ namespace zypp
   bool Resolver::freshenPool ()
   { return _pimpl->freshenPool(); }
   bool Resolver::resolvePool ()
-  { return _pimpl->resolvePool (); }
+  { return _pimpl->resolvePool( false ); }// do not try all possibilities 
+  bool Resolver::resolvePool( bool tryAllPossibilities )
+  { return _pimpl->resolvePool( tryAllPossibilities ); }
   void Resolver::undo()
   { _pimpl->undo(); }
   solver::detail::ResolverContext_Ptr Resolver::context (void) const
@@ -86,6 +88,10 @@ namespace zypp
   { _pimpl->setForceResolve( force ); }
   const bool Resolver::forceResolve()
   { return _pimpl->forceResolve(); }
+    void Resolver::setPreferHighestVersion( const bool highestVersion )
+  { _pimpl->setPreferHighestVersion( highestVersion ); }
+  const bool Resolver::preferHighestVersion()
+  { return _pimpl->preferHighestVersion(); }
   bool Resolver::transactResObject( ResObject::constPtr robj, bool install)
   { return _pimpl->transactResObject( robj, install ); }
   bool Resolver::transactResKind( Resolvable::Kind kind )

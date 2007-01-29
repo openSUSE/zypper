@@ -1,0 +1,642 @@
+<channel><subchannel>
+<language>
+	<name>cs</name>
+	<arch>noarch</arch>
+	<version></version>
+	<provides>
+		<dep name='cs == ' kind="language" />
+	</provides>
+</language>
+<language>
+	<name>sk</name>
+	<arch>noarch</arch>
+	<version></version>
+	<provides>
+		<dep name='sk == ' kind="language" />
+	</provides>
+</language>
+<language>
+	<name>en</name>
+	<arch>noarch</arch>
+	<version></version>
+	<provides>
+		<dep name='en == ' kind="language" />
+	</provides>
+</language>
+<language>
+	<name>el</name>
+	<arch>noarch</arch>
+	<version></version>
+	<provides>
+		<dep name='el == ' kind="language" />
+	</provides>
+</language>
+<language>
+	<name>ar</name>
+	<arch>noarch</arch>
+	<version></version>
+	<provides>
+		<dep name='ar == ' kind="language" />
+	</provides>
+</language>
+<language>
+	<name>he</name>
+	<arch>noarch</arch>
+	<version></version>
+	<provides>
+		<dep name='he == ' kind="language" />
+	</provides>
+</language>
+<language>
+	<name>bg</name>
+	<arch>noarch</arch>
+	<version></version>
+	<provides>
+		<dep name='bg == ' kind="language" />
+	</provides>
+</language>
+<language>
+	<name>mk</name>
+	<arch>noarch</arch>
+	<version></version>
+	<provides>
+		<dep name='mk == ' kind="language" />
+	</provides>
+</language>
+<language>
+	<name>ru</name>
+	<arch>noarch</arch>
+	<version></version>
+	<provides>
+		<dep name='ru == ' kind="language" />
+	</provides>
+</language>
+<language>
+	<name>vi</name>
+	<arch>noarch</arch>
+	<version></version>
+	<provides>
+		<dep name='vi == ' kind="language" />
+	</provides>
+</language>
+<language>
+	<name>ja</name>
+	<arch>noarch</arch>
+	<version></version>
+	<provides>
+		<dep name='ja == ' kind="language" />
+	</provides>
+</language>
+<language>
+	<name>zh_TW</name>
+	<arch>noarch</arch>
+	<version></version>
+	<provides>
+		<dep name='zh_TW == ' kind="language" />
+	</provides>
+	<recommends>
+		<dep name='zh' kind="language" />
+	</recommends>
+</language>
+<language>
+	<name>hi</name>
+	<arch>noarch</arch>
+	<version></version>
+	<provides>
+		<dep name='hi == ' kind="language" />
+	</provides>
+</language>
+<language>
+	<name>km</name>
+	<arch>noarch</arch>
+	<version></version>
+	<provides>
+		<dep name='km == ' kind="language" />
+	</provides>
+</language>
+<language>
+	<name>es</name>
+	<arch>noarch</arch>
+	<version></version>
+	<provides>
+		<dep name='es == ' kind="language" />
+	</provides>
+</language>
+<language>
+	<name>da</name>
+	<arch>noarch</arch>
+	<version></version>
+	<provides>
+		<dep name='da == ' kind="language" />
+	</provides>
+</language>
+<language>
+	<name>de</name>
+	<arch>noarch</arch>
+	<version></version>
+	<provides>
+		<dep name='de == ' kind="language" />
+	</provides>
+</language>
+<language>
+	<name>en_GB</name>
+	<arch>noarch</arch>
+	<version></version>
+	<provides>
+		<dep name='en_GB == ' kind="language" />
+	</provides>
+	<recommends>
+		<dep name='en' kind="language" />
+	</recommends>
+</language>
+<language>
+	<name>fi</name>
+	<arch>noarch</arch>
+	<version></version>
+	<provides>
+		<dep name='fi == ' kind="language" />
+	</provides>
+</language>
+<language>
+	<name>fr</name>
+	<arch>noarch</arch>
+	<version></version>
+	<provides>
+		<dep name='fr == ' kind="language" />
+	</provides>
+</language>
+<language>
+	<name>hu</name>
+	<arch>noarch</arch>
+	<version></version>
+	<provides>
+		<dep name='hu == ' kind="language" />
+	</provides>
+</language>
+<language>
+	<name>it</name>
+	<arch>noarch</arch>
+	<version></version>
+	<provides>
+		<dep name='it == ' kind="language" />
+	</provides>
+</language>
+<language>
+	<name>nb</name>
+	<arch>noarch</arch>
+	<version></version>
+	<provides>
+		<dep name='nb == ' kind="language" />
+	</provides>
+</language>
+<language>
+	<name>nl</name>
+	<arch>noarch</arch>
+	<version></version>
+	<provides>
+		<dep name='nl == ' kind="language" />
+	</provides>
+</language>
+<language>
+	<name>pl</name>
+	<arch>noarch</arch>
+	<version></version>
+	<provides>
+		<dep name='pl == ' kind="language" />
+	</provides>
+</language>
+<language>
+	<name>pt_BR</name>
+	<arch>noarch</arch>
+	<version></version>
+	<provides>
+		<dep name='pt_BR == ' kind="language" />
+	</provides>
+	<recommends>
+		<dep name='en' kind="language" />
+	</recommends>
+</language>
+<language>
+	<name>zh_CN</name>
+	<arch>noarch</arch>
+	<version></version>
+	<provides>
+		<dep name='zh_CN == ' kind="language" />
+	</provides>
+	<recommends>
+		<dep name='zh' kind="language" />
+	</recommends>
+</language>
+<language>
+	<name>se_NO</name>
+	<arch>noarch</arch>
+	<version></version>
+	<provides>
+		<dep name='se_NO == ' kind="language" />
+	</provides>
+	<recommends>
+		<dep name='se' kind="language" />
+	</recommends>
+</language>
+<language>
+	<name>no</name>
+	<arch>noarch</arch>
+	<version></version>
+	<provides>
+		<dep name='no == ' kind="language" />
+	</provides>
+</language>
+<language>
+	<name>nn</name>
+	<arch>noarch</arch>
+	<version></version>
+	<provides>
+		<dep name='nn == ' kind="language" />
+	</provides>
+</language>
+<language>
+	<name>ko</name>
+	<arch>noarch</arch>
+	<version></version>
+	<provides>
+		<dep name='ko == ' kind="language" />
+	</provides>
+</language>
+<language>
+	<name>pt</name>
+	<arch>noarch</arch>
+	<version></version>
+	<provides>
+		<dep name='pt == ' kind="language" />
+	</provides>
+</language>
+<language>
+	<name>de_DE</name>
+	<arch>noarch</arch>
+	<version></version>
+	<provides>
+		<dep name='de_DE == ' kind="language" />
+	</provides>
+	<recommends>
+		<dep name='de' kind="language" />
+	</recommends>
+</language>
+<language>
+	<name>br_FR</name>
+	<arch>noarch</arch>
+	<version></version>
+	<provides>
+		<dep name='br_FR == ' kind="language" />
+	</provides>
+	<recommends>
+		<dep name='br' kind="language" />
+	</recommends>
+</language>
+<language>
+	<name>gu</name>
+	<arch>noarch</arch>
+	<version></version>
+	<provides>
+		<dep name='gu == ' kind="language" />
+	</provides>
+</language>
+<language>
+	<name>ka</name>
+	<arch>noarch</arch>
+	<version></version>
+	<provides>
+		<dep name='ka == ' kind="language" />
+	</provides>
+</language>
+<language>
+	<name>as</name>
+	<arch>noarch</arch>
+	<version></version>
+	<provides>
+		<dep name='as == ' kind="language" />
+	</provides>
+</language>
+<language>
+	<name>fa</name>
+	<arch>noarch</arch>
+	<version></version>
+	<provides>
+		<dep name='fa == ' kind="language" />
+	</provides>
+</language>
+<language>
+	<name>zh_HK</name>
+	<arch>noarch</arch>
+	<version></version>
+	<provides>
+		<dep name='zh_HK == ' kind="language" />
+	</provides>
+	<recommends>
+		<dep name='zh' kind="language" />
+	</recommends>
+</language>
+<language>
+	<name>zh</name>
+	<arch>noarch</arch>
+	<version></version>
+	<provides>
+		<dep name='zh == ' kind="language" />
+	</provides>
+</language>
+<language>
+	<name>bn</name>
+	<arch>noarch</arch>
+	<version></version>
+	<provides>
+		<dep name='bn == ' kind="language" />
+	</provides>
+</language>
+<language>
+	<name>de_BE</name>
+	<arch>noarch</arch>
+	<version></version>
+	<provides>
+		<dep name='de_BE == ' kind="language" />
+	</provides>
+	<recommends>
+		<dep name='de' kind="language" />
+	</recommends>
+</language>
+<language>
+	<name>en_BE</name>
+	<arch>noarch</arch>
+	<version></version>
+	<provides>
+		<dep name='en_BE == ' kind="language" />
+	</provides>
+	<recommends>
+		<dep name='en' kind="language" />
+	</recommends>
+</language>
+<language>
+	<name>fr_BE</name>
+	<arch>noarch</arch>
+	<version></version>
+	<provides>
+		<dep name='fr_BE == ' kind="language" />
+	</provides>
+	<recommends>
+		<dep name='fr' kind="language" />
+	</recommends>
+</language>
+<language>
+	<name>wa_BE</name>
+	<arch>noarch</arch>
+	<version></version>
+	<provides>
+		<dep name='wa_BE == ' kind="language" />
+	</provides>
+	<recommends>
+		<dep name='wa' kind="language" />
+	</recommends>
+</language>
+<language>
+	<name>nl_BE</name>
+	<arch>noarch</arch>
+	<version></version>
+	<provides>
+		<dep name='nl_BE == ' kind="language" />
+	</provides>
+	<recommends>
+		<dep name='nl' kind="language" />
+	</recommends>
+</language>
+<language>
+	<name>am</name>
+	<arch>noarch</arch>
+	<version></version>
+	<provides>
+		<dep name='am == ' kind="language" />
+	</provides>
+</language>
+<language>
+	<name>ta</name>
+	<arch>noarch</arch>
+	<version></version>
+	<provides>
+		<dep name='ta == ' kind="language" />
+	</provides>
+</language>
+<language>
+	<name>th</name>
+	<arch>noarch</arch>
+	<version></version>
+	<provides>
+		<dep name='th == ' kind="language" />
+	</provides>
+</language>
+<language>
+	<name>an_ES</name>
+	<arch>noarch</arch>
+	<version></version>
+	<provides>
+		<dep name='an_ES == ' kind="language" />
+	</provides>
+	<recommends>
+		<dep name='an' kind="language" />
+	</recommends>
+</language>
+<language>
+	<name>zh_SG</name>
+	<arch>noarch</arch>
+	<version></version>
+	<provides>
+		<dep name='zh_SG == ' kind="language" />
+	</provides>
+	<recommends>
+		<dep name='zh' kind="language" />
+	</recommends>
+</language>
+<language>
+	<name>hr</name>
+	<arch>noarch</arch>
+	<version></version>
+	<provides>
+		<dep name='hr == ' kind="language" />
+	</provides>
+</language>
+<language>
+	<name>kk</name>
+	<arch>noarch</arch>
+	<version></version>
+	<provides>
+		<dep name='kk == ' kind="language" />
+	</provides>
+</language>
+<language>
+	<name>kn</name>
+	<arch>noarch</arch>
+	<version></version>
+	<provides>
+		<dep name='kn == ' kind="language" />
+	</provides>
+</language>
+<language>
+	<name>lo</name>
+	<arch>noarch</arch>
+	<version></version>
+	<provides>
+		<dep name='lo == ' kind="language" />
+	</provides>
+</language>
+<language>
+	<name>ml</name>
+	<arch>noarch</arch>
+	<version></version>
+	<provides>
+		<dep name='ml == ' kind="language" />
+	</provides>
+</language>
+<language>
+	<name>my</name>
+	<arch>noarch</arch>
+	<version></version>
+	<provides>
+		<dep name='my == ' kind="language" />
+	</provides>
+</language>
+<language>
+	<name>sv</name>
+	<arch>noarch</arch>
+	<version></version>
+	<provides>
+		<dep name='sv == ' kind="language" />
+	</provides>
+</language>
+<language>
+	<name>ne</name>
+	<arch>noarch</arch>
+	<version></version>
+	<provides>
+		<dep name='ne == ' kind="language" />
+	</provides>
+</language>
+<language>
+	<name>te</name>
+	<arch>noarch</arch>
+	<version></version>
+	<provides>
+		<dep name='te == ' kind="language" />
+	</provides>
+</language>
+<language>
+	<name>pa</name>
+	<arch>noarch</arch>
+	<version></version>
+	<provides>
+		<dep name='pa == ' kind="language" />
+	</provides>
+</language>
+<language>
+	<name>bs</name>
+	<arch>noarch</arch>
+	<version></version>
+	<provides>
+		<dep name='bs == ' kind="language" />
+	</provides>
+</language>
+<language>
+	<name>ca</name>
+	<arch>noarch</arch>
+	<version></version>
+	<provides>
+		<dep name='ca == ' kind="language" />
+	</provides>
+</language>
+<language>
+	<name>cy</name>
+	<arch>noarch</arch>
+	<version></version>
+	<provides>
+		<dep name='cy == ' kind="language" />
+	</provides>
+</language>
+<language>
+	<name>en_US</name>
+	<arch>noarch</arch>
+	<version></version>
+	<provides>
+		<dep name='en_US == ' kind="language" />
+	</provides>
+	<recommends>
+		<dep name='en' kind="language" />
+	</recommends>
+</language>
+<language>
+	<name>et</name>
+	<arch>noarch</arch>
+	<version></version>
+	<provides>
+		<dep name='et == ' kind="language" />
+	</provides>
+</language>
+<language>
+	<name></name>
+	<arch>noarch</arch>
+	<version></version>
+	<provides>
+		<dep name=' == ' kind="language" />
+	</provides>
+</language>
+<language>
+	<name>id</name>
+	<arch>noarch</arch>
+	<version></version>
+	<provides>
+		<dep name='id == ' kind="language" />
+	</provides>
+</language>
+<language>
+	<name>lt</name>
+	<arch>noarch</arch>
+	<version></version>
+	<provides>
+		<dep name='lt == ' kind="language" />
+	</provides>
+</language>
+<language>
+	<name>ro</name>
+	<arch>noarch</arch>
+	<version></version>
+	<provides>
+		<dep name='ro == ' kind="language" />
+	</provides>
+</language>
+<language>
+	<name>sl</name>
+	<arch>noarch</arch>
+	<version></version>
+	<provides>
+		<dep name='sl == ' kind="language" />
+	</provides>
+</language>
+<language>
+	<name>sr</name>
+	<arch>noarch</arch>
+	<version></version>
+	<provides>
+		<dep name='sr == ' kind="language" />
+	</provides>
+</language>
+<language>
+	<name>tr</name>
+	<arch>noarch</arch>
+	<version></version>
+	<provides>
+		<dep name='tr == ' kind="language" />
+	</provides>
+</language>
+<language>
+	<name>uk</name>
+	<arch>noarch</arch>
+	<version></version>
+	<provides>
+		<dep name='uk == ' kind="language" />
+	</provides>
+</language>
+</subchannel></channel>

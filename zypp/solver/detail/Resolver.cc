@@ -99,13 +99,15 @@ Resolver::Resolver (const ResPool & pool)
     , _verifying (false)
     , _testing (false)
     , _tryAllPossibilities (false)
-    , _scippedPossibilities (false)
+    , _skippedPossibilities (false)
     , _valid_solution_count (0)
     , _best_context (NULL)
     , _timed_out (false)
     , _architecture( zypp_detail::defaultArchitecture() )
     , _forceResolve (false)
     , _upgradeMode (false)
+    , _preferHighestVersion (true)
+      
 {}
 
 
@@ -148,7 +150,7 @@ Resolver::reset (void)
     _timed_out = false;
     
     _tryAllPossibilities = false;
-    _scippedPossibilities = false;
+    _skippedPossibilities = false;
     
 }
 
@@ -440,6 +442,7 @@ Resolver::establishState( ResolverContext_Ptr context )
 				    _ignoreInstalledItem,
 				    _ignoreArchitectureItem);
     context->setForceResolve( _forceResolve );
+    context->setPreferHighestVersion ( _preferHighestVersion );
     context->setUpgradeMode( _upgradeMode );
 
     for (KindList::const_iterator iter = ordered.begin(); iter != ordered.end(); iter++) {
@@ -562,6 +565,7 @@ Resolver::freshenState( ResolverContext_Ptr context,
 				    _ignoreInstalledItem,
 				    _ignoreArchitectureItem );
     context->setForceResolve( _forceResolve );
+    context->setPreferHighestVersion( _preferHighestVersion );
     context->setUpgradeMode( _upgradeMode );
 
     FreshenState info;
@@ -684,9 +688,10 @@ Resolver::resolveDependencies (const ResolverContext_Ptr context)
 						     _ignoreInstalledItem,
 						     _ignoreArchitectureItem);
     initial_queue->context()->setForceResolve( _forceResolve );
+    initial_queue->context()->setPreferHighestVersion( _preferHighestVersion );
     initial_queue->context()->setUpgradeMode( _upgradeMode );
     initial_queue->context()->setTryAllPossibilities( _tryAllPossibilities );
-    initial_queue->context()->setScippedPossibilities( _scippedPossibilities );
+    initial_queue->context()->setScippedPossibilities( _skippedPossibilities );
 
     /* If this is a verify, we do a "soft resolution" */
 
@@ -879,13 +884,13 @@ Resolver::resolveDependencies (const ResolverContext_Ptr context)
 	     iter != _invalid_queues.end(); iter++) {
 	    // evaluate if there are other possibilities which have not been regarded
 	    ResolverQueue_Ptr invalid =	*iter;    	    
-	    if (invalid->context()->scippedPossibilities()) {
-		_scippedPossibilities = true;
+	    if (invalid->context()->skippedPossibilities()) {
+		_skippedPossibilities = true;
 		break;
 	    }
 	}
 	
-	if (_scippedPossibilities) { // possible other solutions scipped	 
+	if (_skippedPossibilities) { // possible other solutions skipped	 
 	    // lets try a second run with ALL possibilities
 	    _tryAllPossibilities = true;
 	    MIL << "================================================================"
@@ -1033,13 +1038,20 @@ show_pool( ResPool pool )
 
 
 bool
-Resolver::resolvePool ()
+Resolver::resolvePool( bool tryAllPossibilities )
 {
+    ResolverContext_Ptr context = NULL;
 
     CollectTransact info (*this);
 
     // cleanup before next run
     reset();
+
+    if (tryAllPossibilities) {
+	_tryAllPossibilities = tryAllPossibilities;
+	context = new ResolverContext( _pool, _architecture );
+	context->setTryAllPossibilities( true );
+    }
 
 #if 1
 
@@ -1052,7 +1064,7 @@ Resolver::resolvePool ()
 		   resfilter::ByTransact( ),			// collect transacts from Pool to resolver queue
 		   functor::functorRef<bool,PoolItem>(info) );
 
-    bool have_solution = resolveDependencies ();		// resolve !
+    bool have_solution = resolveDependencies( context );	// resolve !
 
     if (have_solution) {					// copy solution back to pool
 	MIL << "Have solution, copying back to pool" << endl;

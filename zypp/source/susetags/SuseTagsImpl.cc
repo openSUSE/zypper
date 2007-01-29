@@ -89,6 +89,50 @@ bool SuseTagsProber::operator()()
   return false;
 }
 
+static bool translation_needed( const Locale &trans )
+{
+  ZYpp::Ptr z = getZYpp();
+  Locale lang( z->getTextLocale() );
+  
+  while ( (lang != Locale()))
+  {
+    if ( trans == lang )
+    {
+      DBG << lang << " is needed" << std::endl;
+      return true;
+    }
+    lang = lang.fallback();
+  }
+  return false;
+}
+
+static std::string read_line_from_file( const Pathname &file )
+{
+  std::string buffer;
+  std::string token;
+  std::ifstream is(file.asString().c_str());
+  if ( is.good() )
+  {
+    while(is && !is.eof())
+    {
+      getline(is, buffer);
+      token += buffer;
+    }
+    is.close();
+  }
+  return token;
+}
+
+static void write_line_to_file( const Pathname &file, const std::string &line )
+{
+  std::ofstream os(file.asString().c_str());
+  if ( os.good() )
+  {
+    os << line << endl;;
+  }
+  os.close();
+}
+
 ///////////////////////////////////////////////////////////////////
 //
 //	METHOD NAME : SuseTagsImpl::SuseTagsImpl
@@ -155,9 +199,21 @@ std::set<zypp::Resolvable::Kind>
 
     return kinds;
   }
-
+  
 bool SuseTagsImpl::downloadNeeded(const Pathname & localdir)
 {
+  // we only check if the locale was stored in cache
+  if ( PathInfo( localdir + "/locale" ).isExist() )
+  {
+    ZYpp::Ptr z = getZYpp();
+    Locale lang( z->getTextLocale() );
+    
+    std::string old_locale = read_line_from_file(localdir + "/locale");
+    // if it is different we need to redownload what changed
+    if ( lang != old_locale )
+      return true;
+  }
+
   Pathname new_media_file;
   try
   {
@@ -241,6 +297,19 @@ TmpDir SuseTagsImpl::downloadMetadata()
 
   Pathname local_dir = tmpdir.path();
 
+  
+  ZYpp::Ptr z = getZYpp();
+  Locale lang( z->getTextLocale() );
+
+  try
+  {
+    write_line_to_file(local_dir + "/locale", lang.code());
+  }
+  catch (Exception &e)
+  {
+    ZYPP_THROW(SourceIOException("Can't write current locale to cache "  + local_dir.asString() ));
+  }
+  
   // (#163196)
   // before we used _descr_dir, which is is wrong if we
   // store metadata already running from cache
@@ -294,8 +363,6 @@ TmpDir SuseTagsImpl::downloadMetadata()
   // cache all the public keys
   for ( std::list<std::string>::const_iterator it = files.begin(); it != files.end(); ++it)
   {
-    ZYpp::Ptr z = getZYpp();
-
     std::string filename = *it;
     if ( filename.substr(0, 10) == "gpg-pubkey" )
     {
@@ -324,7 +391,6 @@ TmpDir SuseTagsImpl::downloadMetadata()
   }
 
   // verify it is a valid content file
-  ZYpp::Ptr z = getZYpp();
   MIL << "SuseTags source: checking 'content' file vailidity using digital signature.." << endl;
   // verify the content file
   bool valid = z->keyRing()->verifyFileSignatureWorkflow( local_dir + "/DATA/content", (path() + "content").asString() + " (" + url().asString() + ")", local_dir + "/DATA/content.asc");
@@ -370,6 +436,18 @@ TmpDir SuseTagsImpl::downloadMetadata()
     for ( std::map<std::string, CheckSum>::const_iterator it = _prodImpl->_descr_files_checksums.begin(); it != _prodImpl->_descr_files_checksums.end(); ++it)
     {
       std::string key = it->first;
+      
+      // check if it is a package language file we can skip
+      if ( (key.substr(0, 9) == "packages." ) && (key != "packages.DU" ))
+      {
+        MIL << key << " is a package translation." << std::endl;
+        std::string language = key.substr( 9, key.size() - 9 );
+        
+        // check if it needs to be downloaded
+        if ( ! translation_needed( Locale(language) ) )
+          continue;
+      }
+      
       getPossiblyCachedMetadataFile( mediaDescrDir() + key, local_dir + "/DATA/descr" + key, _cache_dir + "/DATA/descr" + key,  _prodImpl->_descr_files_checksums[key] );
     }
   }
@@ -389,6 +467,18 @@ TmpDir SuseTagsImpl::downloadMetadata()
     for ( std::list<std::string>::const_iterator it = descr_dir_file_list.begin(); it != descr_dir_file_list.end(); ++it)
     {
       std::string filename = *it;
+      
+      // check if it is a package language file we can skip
+      if ( (filename.substr(0, 9) == "packages." ) && (filename != "packages.DU" ))
+      {
+        MIL << filename << " is a package translation." << std::endl;
+        std::string language = filename.substr( 9, filename.size() - 9 );
+        
+        // check if it needs to be downloaded
+        if ( ! translation_needed( Locale(language) ) )
+          continue;
+      }
+      
       getPossiblyCachedMetadataFile( mediaDescrDir() + filename, local_dir + "/DATA/descr" + filename, _cache_dir + "/DATA/descr" + filename, CheckSum() );
     }
   }

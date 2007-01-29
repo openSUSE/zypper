@@ -74,7 +74,7 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
     // BUT if there is no valid solution we will regard the "other"
     // resolvables in a second solver run too.
     bool _tryAllPossibilities; // Try ALL alternatives
-    bool _scippedPossibilities;// Flag that there are other possibilities
+    bool _skippedPossibilities;// Flag that there are other possibilities
                                // which we are currently ignore
 
     // list populated by calls to addPoolItemTo*()
@@ -125,7 +125,9 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
     bool _forceResolve; // remove items which are conflicts with others or
                         // have unfulfilled requirements.
                         // This behaviour is favourited by ZMD
-    bool _upgradeMode;  // Resolver has been called with doUpgrade    
+    bool _upgradeMode;  // Resolver has been called with doUpgrade
+    bool _preferHighestVersion; // Prefer the result with the newest version
+                                //if there are more solver results. 
 
     // helpers
     bool doesObsoleteCapability (PoolItem_Ref candidate, const Capability & cap);
@@ -195,6 +197,8 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
 
     void setForceResolve (const bool force) { _forceResolve = force; }
     const bool forceResolve() { return _forceResolve; }
+    void setPreferHighestVersion (const bool highestVersion) { _preferHighestVersion = highestVersion; }
+    const bool preferHighestVersion() { return _preferHighestVersion; }  
 
     bool verifySystem (bool considerNewHardware = false);
     void establishState (ResolverContext_Ptr context = NULL);
@@ -202,7 +206,7 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
     void freshenState( ResolverContext_Ptr context = NULL, bool resetAfterSolve = true );
     bool freshenPool( bool resetAfterSolve = true );
     bool resolveDependencies (const ResolverContext_Ptr context = NULL);
-    bool resolvePool (void);
+    bool resolvePool( bool tryAllPossibilities = false );
 
     bool transactResObject( ResObject::constPtr robj,
 			    bool install = true,

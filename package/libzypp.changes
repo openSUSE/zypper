@@ -1,5 +1,36 @@
 -------------------------------------------------------------------
-Wed Jan 24 18:10:41 CET 2007 - dmacvicar@suse.de
+Mon Jan 29 13:10:37 CET 2007 - dmacvicar@suse.de
+
+- Merged revisions 4907-4926 from SuSE-Linux-10_2-Branch
+
+- update packages: changing architecture is only valid while an
+  system update and NOT while an update via a patch. Last fix does
+  not fit for every case.
+  Bug 230685 
+- Patch has selected not the concerning package for update but
+  a package which has provided the required dependencies too.
+  Algorithmus: If there are exactly two providers which differ in architecture
+	       prefer the better arch. 
+  Fix: Regarding NVRA too. ( only if equal )
+  Bug 238284
+- Download only English and Local translation
+  (#208457)
+- Added solver parameter:
+   tryAllPossibilities: regarding every solver branch ( not only 
+                        branches with e.G. best architectures
+   preferHighestVersion: Prefer solver results which have a higher
+                         version number.
+  Bug #238087 
+- update packages: changing architecture is only valid while an
+  system update and NOT while an update via a patch.
+  Bug 230685 - x86_64 MozillaFirefox binaries in security update
+  repository
+  Fix of version 2.11.2 has not worked if the first founded item 
+  had had another architecture.
+- r4927
+
+-------------------------------------------------------------------
+Wed Jan 24 14:20:28 CET 2007 - dmacvicar@suse.de
 
 - Merged revisions 4705-4906 via svnmerge from SuSE-Linux-10_2-Branch
 - Corrupt download cannot be skipped

@@ -99,8 +99,9 @@ ResolverContext::ResolverContext (const ResPool & pool, const Arch & arch, Resol
     , _architecture(arch)
     , _forceResolve(false)
     , _upgradeMode(false)
+    , _preferHighestVersion(true)
     , _tryAllPossibilities(false)
-    , _scippedPossibilities(false)
+    , _skippedPossibilities(false)
       
 {
 _XDEBUG( "ResolverContext[" << this << "]::ResolverContext(" << parent << ")" );
@@ -121,8 +122,9 @@ _XDEBUG( "ResolverContext[" << this << "]::ResolverContext(" << parent << ")" );
 	_ignoreArchitectureItem = parent->_ignoreArchitectureItem;	
 	_forceResolve        = parent->_forceResolve;
 	_upgradeMode         = parent->_upgradeMode;
+	_preferHighestVersion = parent->_preferHighestVersion;
 	_tryAllPossibilities = parent->_tryAllPossibilities;
-	_scippedPossibilities = parent->_scippedPossibilities;
+	_skippedPossibilities = parent->_skippedPossibilities;
 	
     } else {
 	_min_priority = MAXINT;
@@ -1893,30 +1895,56 @@ ResolverContext::partialCompare (ResolverContext_Ptr context)
 	int  cmpSource = 0;  // compare of Sources
 
 	collectCompareInfo (cmpVersion, cmpSource, context);
-
-	// comparing versions
-	cmp = cmpVersion;
-	DBG << "Comparing versions returned :" << cmp << endl;
-	if (cmp == 0) { 
-	    // High numbers are good... we don't want solutions containing low-priority channels.
-	    // Source priority which has been set externally
-	    cmp = num_cmp (_min_priority, context->_min_priority);
-	    DBG << "Comparing priority returned :" << cmp << endl;
-	    if (cmp == 0) {
-		// High numbers are bad.  Less churn is better.
-		cmp = rev_num_cmp (churn_factor (this), churn_factor (context));
-		DBG << "Comparing churn_factor returned :" << cmp << endl;
-		if (cmp == 0) {		
-		    // Comparing sources regarding the items which has to be installed
-		    cmp = cmpSource;
-		    DBG << "Comparing sources returned :" << cmp << endl;		
-		    if (cmp == 0) {
-			// High numbers are bad.  Bigger #s means more penalties.
-			cmp = rev_num_cmp (_other_penalties, context->_other_penalties);
-			DBG << "Comparing other penalties returned :" << cmp << endl;			
+	if (_preferHighestVersion) {
+	    // comparing versions
+	    cmp = cmpVersion;
+	    DBG << "Comparing versions returned :" << cmp << endl;
+	    if (cmp == 0) { 
+		// High numbers are good... we don't want solutions containing low-priority channels.
+		// Source priority which has been set externally
+		cmp = num_cmp (_min_priority, context->_min_priority);
+		DBG << "Comparing priority returned :" << cmp << endl;
+		if (cmp == 0) {
+		    // High numbers are bad.  Less churn is better.
+		    cmp = rev_num_cmp (churn_factor (this), churn_factor (context));
+		    DBG << "Comparing churn_factor returned :" << cmp << endl;
+		    if (cmp == 0) {		
+			// Comparing sources regarding the items which has to be installed
+			cmp = cmpSource;
+			DBG << "Comparing sources returned :" << cmp << endl;		
+			if (cmp == 0) {
+			    // High numbers are bad.  Bigger #s means more penalties.
+			    cmp = rev_num_cmp (_other_penalties, context->_other_penalties);
+			    DBG << "Comparing other penalties returned :" << cmp << endl;			
+			}
 		    }
 		}
 	    }
+	} else {
+	    // less transaction will be prefered
+	    // High numbers are bad.  Less churn is better.
+	    cmp = rev_num_cmp (churn_factor (this), churn_factor (context));
+	    DBG << "Comparing churn_factor returned :" << cmp << endl;	    
+	    if (cmp == 0) { 
+		// High numbers are good... we don't want solutions containing low-priority channels.
+		// Source priority which has been set externally
+		cmp = num_cmp (_min_priority, context->_min_priority);
+		DBG << "Comparing priority returned :" << cmp << endl;
+		if (cmp == 0) {
+		    cmp = cmpVersion;
+		    DBG << "Comparing versions returned :" << cmp << endl;
+		    if (cmp == 0) {		
+			// Comparing sources regarding the items which has to be installed
+			cmp = cmpSource;
+			DBG << "Comparing sources returned :" << cmp << endl;		
+			if (cmp == 0) {
+			    // High numbers are bad.  Bigger #s means more penalties.
+			    cmp = rev_num_cmp (_other_penalties, context->_other_penalties);
+			    DBG << "Comparing other penalties returned :" << cmp << endl;			
+			}
+		    }
+		}
+	    }	    
 	}
     }
 

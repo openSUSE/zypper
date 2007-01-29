@@ -328,18 +328,26 @@ struct LookForUpgrades
 	UpgradesMap::iterator it = upgrades.find( provider->name() );
 
 	if (it != upgrades.end()) {				// provider with same name found
-	    int cmp = it->second->arch().compare( provider->arch() );
-	    if (_context->upgradeMode()					// only in upgrade mode
-		&& cmp < 0) {						// new provider has better arch
+	    if (!_context->upgradeMode()
+		&& it->second->arch() != installed->arch()
+		&& provider->arch() == installed->arch()) {
+		// prefering the same architecture as the installed item
+		// NOT in upgrade mode
 		it->second = provider;
-	    }
-	    else if (cmp == 0) {					// new provider has equal arch
-		if (it->second->edition().compare( provider->edition() ) < 0) {
-		    it->second = provider;				// new provider has better edition
+	    } else {
+		int cmp = it->second->arch().compare( provider->arch() );
+		if ((_context->upgradeMode()  					// only in upgrade mode
+		     || it->second->arch() != installed->arch())                // or have not found the same arch as installed item
+		    && cmp < 0) {						// new provider has better arch
+		    it->second = provider;
+		}
+		else if (cmp == 0) {					// new provider has equal arch
+		    if (it->second->edition().compare( provider->edition() ) < 0) {
+			it->second = provider;				// new provider has better edition
+		    }
 		}
 	    }
-	}
-	else {
+	} else {
 	    upgrades[provider->name()] = provider;
 	}
 	return true;
@@ -494,15 +502,19 @@ QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_item
 		PoolItem first( *it++ );
 		PoolItem second( *it );
 
-		int cmp = first->arch().compare( second->arch() );
-		if (cmp < 0) {		// second is better
-		    --it;
-		}
+		if (NVRA(first.resolvable()) == NVRA(second.resolvable()))
+		{
+		    // regarding items with the same NVRA only. Bug238284 
+		    int cmp = first->arch().compare( second->arch() );
+		    if (cmp < 0) {		// second is better
+			--it;
+		    }
 
-		if (cmp != 0) {
-		    info.providers.erase( it );		// erase one of both
-		    num_providers = 1;
-		    goto provider_done;
+		    if (cmp != 0) {
+			info.providers.erase( it );		// erase one of both
+			num_providers = 1;
+			goto provider_done;
+		    }
 		}
 	    }
 #endif

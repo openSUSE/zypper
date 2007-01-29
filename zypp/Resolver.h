@@ -99,13 +99,36 @@ namespace zypp
      *
      * Try to execute all pending transactions (there may be more than
      * one!).
+     * The solver pays attention to the BEST packages only in order to
+     * come to a solution. 
+     * If there has not been found a valid results all other branches
+     * (e.G. packages with older version numbers, worse architecture)
+     *  will be regarded.
      *
      * Returns "true" on success (i.e., if there were no problems that
      * need user interaction) and "false" if there were problems.  In
      * the latter case, use problems() and later applySolutions()
      * below.
      **/
-    bool resolvePool (void);
+    bool resolvePool (void);      
+
+    /**
+     * Resolve package dependencies:
+     *
+     * Try to execute all pending transactions (there may be more than
+     * one!).
+     * If tryAllPossibilities is false, restrict searches for matching
+     *  requirements to best architecture, highest version.
+     * If tryAllPossibilities is true, evaluate all possible matches
+     *  for a requirement.
+     *
+     * Returns "true" on success (i.e., if there were no problems that
+     * need user interaction) and "false" if there were problems.  In
+     * the latter case, use problems() and later applySolutions()
+     * below.
+     **/
+    bool resolvePool (bool tryAllPossibilities);
+      
 
     /*
      * Undo solver changes done in resolvePool()
@@ -172,6 +195,13 @@ namespace zypp
      **/
     void setForceResolve (const bool force);
     const bool forceResolve();
+
+    /**      
+     * Prefer the result with the newest version if there are more solver
+     * results. 
+     **/
+    void setPreferHighestVersion (const bool highestVersion);
+    const bool preferHighestVersion();      
 
     /**
      * transact a single ResObject

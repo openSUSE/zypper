@@ -104,6 +104,9 @@ class ResolverContext : public base::ReferenceCounted, private base::NonCopyable
                         // have unfulfilled requirements.
                         // This behaviour is favourited by ZMD    
     bool _upgradeMode;  // Resolver has been called with doUpgrade
+
+    bool _preferHighestVersion; // Prefer the result with the newest version
+                               //if there are more solver results. 
     
     // In order reducing solver time we are reducing the branches
     // by skipping resolvables which have worse architecture,edition
@@ -111,9 +114,8 @@ class ResolverContext : public base::ReferenceCounted, private base::NonCopyable
     // BUT if there is no valid solution we will regard the "other"
     // resolvables in a second solver run too.
     bool _tryAllPossibilities; // Try ALL alternatives
-    bool _scippedPossibilities;// Flag that there are other possibilities
+    bool _skippedPossibilities;// Flag that there are other possibilities
                                // which we are currently ignore
-    
     
   public:
     ResolverContext (const ResPool & pool, const Arch & arch, ResolverContext_Ptr parent = NULL);
@@ -142,8 +144,8 @@ class ResolverContext : public base::ReferenceCounted, private base::NonCopyable
     bool tryAllPossibilities (void) const { return _tryAllPossibilities; }
     void setTryAllPossibilities (bool tryAllPossibilities) { _tryAllPossibilities = tryAllPossibilities; }
     
-    bool scippedPossibilities (void) const { return _scippedPossibilities; }
-    void setScippedPossibilities (bool scippedPossibilities) { _scippedPossibilities = scippedPossibilities; }
+    bool skippedPossibilities (void) const { return _skippedPossibilities; }
+    void setScippedPossibilities (bool skippedPossibilities) { _skippedPossibilities = skippedPossibilities; }
 
     bool establishing (void) const { return _establishing; }
     void setEstablishing (bool establishing) { _establishing = establishing; }
@@ -173,6 +175,9 @@ class ResolverContext : public base::ReferenceCounted, private base::NonCopyable
     
     void setForceResolve (const bool force) { _forceResolve = force; }
     const bool forceResolve() { return _forceResolve; }
+
+    void setPreferHighestVersion (const bool highestVersion) { _preferHighestVersion = highestVersion; }
+    const bool preferHighestVersion() { return _preferHighestVersion; }  
 
     void setUpgradeMode (const bool upgrade) { _upgradeMode = upgrade; }
     const bool upgradeMode() { return _upgradeMode; }    
