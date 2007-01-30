@@ -1,23 +1,51 @@
 
+DROP TABLE IF EXISTS db_info;
+DROP TABLE IF EXISTS patch_packages_baseversions;
+DROP TABLE IF EXISTS patch_packages;
+DROP TABLE IF EXISTS delta_packages;
+DROP TABLE IF EXISTS package_details;
+DROP VIEW IF EXISTS packages;
+DROP TABLE IF EXISTS patch_details;
+DROP VIEW IF EXISTS patches;
+DROP TABLE IF EXISTS pattern_details;
+DROP VIEW IF EXISTS patterns;
+DROP TABLE IF EXISTS product_details;
+DROP VIEW IF EXISTS products;
+DROP TABLE IF EXISTS message_details;
+DROP VIEW IF EXISTS messages;
+DROP TABLE IF EXISTS script_details;
+DROP VIEW IF EXISTS scripts;
+DROP TABLE IF EXISTS dependencies;
+DROP TABLE IF EXISTS sources;
+DROP TABLE IF EXISTS locks;
+DROP TABLE IF EXISTS resolvables;
+
+
 CREATE TABLE db_info (
   version INTEGER
 );
 
 CREATE TABLE resolvables (
-    id INTEGER AUTOINCREMENT
-  , name TEXT NOT NULL
+    id INTEGER AUTO INCREMENT
+  , name TEXT
   , version TEXT
   , release TEXT
   , epoch INTEGER
   , arch INTEGER
-  , installed_size INTEGER
-  , catalog TEXT
-  , installed INTEGER
-  , local INTEGER
-  , status INTEGER
-  , category TEXT
-  , license TEXT
   , kind INTEGER
+  , summary TEXT
+  , description TEXT
+  , insnotify TEXT
+  , delnotify TEXT
+  , license_to_confirm TEXT
+  , vendor TEXT
+  , size INTEGER
+  , archive_size INTEGER
+  , catalog INTEGER
+  , catalog_media_nr INTEGER
+  , install_only INTEGER
+  , build_time INTEGER
+  , install_time INTEGER
   , PRIMARY KEY (id)
 );
 
@@ -34,11 +62,11 @@ CREATE TABLE dependencies (
 );
 
 CREATE TABLE message_details (
-    resolvable_id INTEGER
-  , content TEXT
+    resolvable_id INTEGER  REFERENCES resolvable(id)
+  , text TEXT
 );
 
-CREATE TABLE sources (
+CREATE TABLE catalogs (
     id INTEGER
   , alias TEXT NOT NULL
   , url TEXT
@@ -46,56 +74,79 @@ CREATE TABLE sources (
   , enabled INTEGER
   , autorefresh INTEGER
   , type VARCHAR(20)
-  , cachedir TEXT
+  , cache_dir TEXT
   , path TEXT
   , PRIMARY KEY (id)
 );
 
 CREATE TABLE patch_details (
-    resolvable_id INTEGER REFERENCES resolvables (id)
+    id INTEGER
+  , resolvable_id INTEGER REFERENCES resolvables (id)
   , patch_id TEXT
-  , creation_time INTEGER
-  , reboot INTEGER
-  , restart INTEGER
-  , interactive INTEGER
-  , summary TEXT
-  , description TEXT
-  , id INTEGER
+  , timestamp INTEGER
+  , category TEXT
+  , reboot_needed INTEGER
+  , affects_package_manager INTEGER
+  , PRIMARY KEY (id)
 );
 
 CREATE TABLE pattern_details (
-    resolvable_id INTEGER REFERENCES resolvables (id)
-  , summary TEXT
-  , description TEXT
-  , id INTEGER
+    id INTEGER
+  , resolvable_id INTEGER REFERENCES resolvables (id)
+  , user_default INTEGER
+  , user_visible INTEGER
+  , pattern_category TEXT
+  , icon TEXT
+  , script TEXT
+  , pattern_order TEXT
+  , PRIMARY KEY (id)
 );
 
 CREATE TABLE product_details (
-    resolvable_id INTEGER REFERENCES resolvables (id)
-  , summary TEXT
-  , description TEXT
-  , id INTEGER
+    id INTEGER
+  , resolvable_id INTEGER REFERENCES resolvables (id)
+  , category TEXT
+  , vendor TEXT
+  , release_notes_url TEXT
+  , update_urls TEXT
+  , extra_urls TEXT
+  , optional_urls TEXT
+  , flags TEXT
+  , short_name TEXT
+  , long_name TEXT
+  , distribution_name TEXT
+  , distribution_edition TEXT
+  , PRIMARY KEY (id)
 );
 
 CREATE TABLE script_details (
-    resolvable_id INTEGER REFERENCES resolvables (id)
+    id INTEGER
+  , resolvable_id INTEGER REFERENCES resolvables (id)
   , do_script TEXT
   , undo_script TEXT
-  , id INTEGER
+  , PRIMARY KEY (id)
+  
 );
 
 CREATE TABLE package_details (
     resolvable_id INTEGER REFERENCES resolvables (id)
-  , group TEXT
-  , summary TEXT
-  , description TEXT
+  , checksum TEXT
+  , changelog TEXT
+  , buildhost TEXT
+  , distribution TEXT
+  , license TEXT
+  , packager TEXT
+  , package_group TEXT
   , url TEXT
-  , filename TEXT
-  , signature_filename TEXT
-  , file_size INTEGER
-  , install_only INTEGER
-  , media_nr INTEGER
-  , id INTEGER
+  , os TEXT
+  , prein TEXT
+  , postin TEXT
+  , preun TEXT
+  , postun TEXT
+  , source_size INTEGER
+  , authors TEXT
+  , filenames TEXT
+  , location TEXT
 );
 
 CREATE TABLE locks (
@@ -172,7 +223,6 @@ CREATE TABLE patch_packages_baseversions (
 CREATE INDEX dependency_resolvable ON dependencies (resolvable_id);
 CREATE INDEX package_details_resolvable_id ON package_details (resolvable_id);
 CREATE INDEX resolvable_catalog ON resolvables (catalog);
-CREATE INDEX resolvable_key ON resolvables (key);
 
 CREATE TRIGGER remove_catalogs
   AFTER DELETE ON catalogs
