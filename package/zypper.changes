@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Wed Jan 31 18:20:40 CET 2007 - mvidner@suse.cz
+
+- Fixed building on SLE10-SP1 again.
+
+-------------------------------------------------------------------
 Mon Jan 29 19:29:31 CET 2007 - jkupec@suse.cz
 
 - locale support added

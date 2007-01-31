@@ -60,6 +60,10 @@ make %{?jobs:-j %jobs}
 make install DESTDIR=$RPM_BUILD_ROOT
 # Create filelist with translatins
 %{find_lang} zypper
+%if %suse_version <= 1010
+rm -f ${RPM_BUILD_ROOT}%{_sbindir}/zypp-checkpatches
+rm -f ${RPM_BUILD_ROOT}%{_sbindir}/zypp-checkpatches-wrapper
+%endif
 
 %post
 %run_ldconfig
