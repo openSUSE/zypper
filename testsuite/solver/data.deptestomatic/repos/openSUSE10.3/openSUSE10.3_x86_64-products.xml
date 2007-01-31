@@ -1,0 +1,21 @@
+<channel><subchannel>
+<product>
+  <name>openSUSE-DVD5-download</name>
+  <summary>openSUSE 10.3</summary>
+  <history>
+    <update>
+      <hid>12345</hid>
+      <version>10.3</version>
+      <arch>x86_64</arch>
+    </update>
+  </history>
+  <requires>
+    <dep name='openSUSE-release' refers='package' />
+    <dep name='=' refers='package' />
+    <dep name='10.3' refers='package' />
+    <dep name='basesystem' refers='pattern' />
+  </requires>
+  <provides>openSUSE = 10.3</provides>
+  <obsoletes>SUSE_LINUX <= 10.2</obsoletes>
+</product>
+</subchannel></channel>
