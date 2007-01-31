@@ -97,5 +97,12 @@ extern std::ostream no_stream;
 #define cerr_vv COND_STREAM(cerr,2)
 #define cout_vv COND_STREAM(cout,2)
 
+// undefine _ macro from libzypp
+#ifdef _
+#undef _
 #endif
 
+// define new _ macro
+#define _(MSG) ::gettext(MSG)
+
+#endif

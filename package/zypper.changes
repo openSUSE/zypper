@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Jan 31 16:19:38 CET 2007 - jkupec@suse.cz
+
+- locale support added (merged from 10.2/SP1 branch)
+- r4941
+
+-------------------------------------------------------------------
 Fri Jan 12 15:03:55 CET 2007 - jkupec@suse.cz
 
 - Texts corrected based on feedback from proof-reading.
