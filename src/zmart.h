@@ -51,7 +51,8 @@ struct Settings
   previous_code(-1),
   disable_system_sources(false),
   disable_system_resolvables(false),
-  is_rug_compatible(false)
+  is_rug_compatible(false),
+  non_interactive(false)
   {}
 
   std::list<zypp::Url> additional_sources;
@@ -62,6 +63,7 @@ struct Settings
   bool disable_system_sources;
   bool disable_system_resolvables;
   bool is_rug_compatible;
+  bool non_interactive;
 };
 
 struct Error

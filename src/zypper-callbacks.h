@@ -48,8 +48,12 @@ void display_error (Error error, const std::string& reason) {
   }
 }
 
-// abort, retry, ignore
-int read_action_ari ();
+/** 
+ * Abort, Retry, Ignore stdin prompt.
+ * \param default_action Answer to be returned in non-interactive mode. If none
+ * 		is specified, 0 (ABORT) is returned. In interactive mode, this parameter
+ *    is ignored.
+ */
+int read_action_ari (int default_action = -1);
 std::string to_string (zypp::Resolvable::constPtr resolvable);
 #endif
-

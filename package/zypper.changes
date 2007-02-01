@@ -1,4 +1,14 @@
 -------------------------------------------------------------------
+Thu Feb  1 10:22:06 CET 2007 - jkupec@suse.cz
+
+- enabled DownloadResolvableReportReceiver::problem() callback
+  (#224216)
+- global non-iteractive mode added (needed due to bug #224216 and
+  no-confirm option of install and update commands)
+- r4947
+- 0.6.16
+
+-------------------------------------------------------------------
 Wed Jan 31 18:20:40 CET 2007 - mvidner@suse.cz
 
 - Fixed building on SLE10-SP1 again.

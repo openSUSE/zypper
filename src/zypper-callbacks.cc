@@ -19,10 +19,36 @@ void display_done () {
 
 //template<typename Action>
 //Action ...
-int read_action_ari () {
-  // TODO: respect --yes (abort)
+int read_action_ari (int default_action) {
+  cerr << _("(A)bort, (R)etry, (I)gnore?") << " "; // don't translate letters in parentheses!!
+
+	// non-interactive mode
+	if (gSettings.non_interactive) {
+		// abort if no default has been specified
+		if (default_action == -1) {
+			// print the answer for convenience
+			cout << 'a' << endl;
+
+			return 0; 
+		}
+		// return the specified default
+		else {
+			char c;
+			switch (default_action) {
+				case 0: c = 'a'; break;
+    		case 1: c = 'r'; break;
+    		case 2: c = 'i'; break;
+    		default: c = '?';
+			}
+			// print the answer for conveniecne
+			cout << c << endl;
+
+			return default_action;
+		}
+	}
+
+	// interactive mode, ask user
   while (true) {
-    cerr << _("(A)bort, (R)etry, (I)gnore?") << endl; // don't translate letters in parentheses!!
     char c;
     cin >> c;
     c = tolower (c);
@@ -32,7 +58,7 @@ int read_action_ari () {
       return 1;
     else if (c == 'i')
       return 2;
-    cerr << "?" << endl;
+    cout << "?" << endl;
   }
 }
 
