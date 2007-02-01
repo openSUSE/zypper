@@ -10,6 +10,7 @@ Thu Feb  1 15:15:29 CET 2007 - jkupec@suse.cz
 - global non-iteractive mode added (needed due to bug #224216 and
   no-confirm option of install and update commands).
 - POTFILES.in updated
+- r4959
 
 -------------------------------------------------------------------
 Thu Feb  1 14:25:29 CET 2007 - mvidner@suse.cz
