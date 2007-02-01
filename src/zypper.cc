@@ -53,6 +53,7 @@ static struct option global_options[] = {
   {"terse",	no_argument, 0, 't'},
   {"table-style", required_argument, 0, 's'},
   {"rug-compatible", no_argument, 0, 'r'},
+  {"root",	required_argument, 0, 'R'},
   {"opt",	optional_argument, 0, 'o'},
   {0, 0, 0, 0}
 };
@@ -123,7 +124,8 @@ string process_globals(int argc, char **argv)
     "\t--verbose, -v\t\tIncrease verbosity\n"
     "\t--terse, -t\t\tTerse output for machine consumption\n"
     "\t--table-style, -s\tTable style (integer)\n"
-    "\t--rug-compatible, -r\tTurn on rug compatibility\n");
+    "\t--rug-compatible, -r\tTurn on rug compatibility\n"
+    "\t--root, -R <dir>\tOperate on a different root directory\n");
     ;
 
   if (gopts.count("verbose")) {
@@ -139,6 +141,12 @@ string process_globals(int argc, char **argv)
     else
       cerr << _("Invalid table style ") << s << endl;
   }
+
+  if (gopts.count("root")) {
+    gSettings.root_dir = gopts["root"].front();
+  }
+
+
   // testing option
   if (gopts.count("opt")) {
     cerr << "Opt arg: ";

@@ -46,7 +46,7 @@ void init_system_sources()
   try
   {
     cerr << _("Restoring system sources...") << endl;
-    manager->restore("/");
+    manager->restore(gSettings.root_dir);
   }
 //  catch (const SourcesAlreadyRestoredException& excpt) {
 //  }
@@ -151,10 +151,10 @@ void list_system_sources()
   try
   {
 #ifdef LIBZYPP_1xx
-    sources = SourceManager::sourceManager()->knownSourceInfos ("/");
+    sources = SourceManager::sourceManager()->knownSourceInfos (gSettings.root_dir);
 #else
     zypp::storage::PersistentStorage store;
-    store.init( "/" );
+    store.init( gSettings.root_dir );
     sources = store.storedSources();
 #endif
   }
@@ -233,7 +233,7 @@ void add_source_by_url( const zypp::Url &url, const string &alias,
   cerr_vv << "Constructing SourceManager" << endl;
   SourceManager_Ptr manager = SourceManager::sourceManager();
   cerr_vv << "Restoring SourceManager" << endl;
-  manager->restore ("/", true /*use_cache*/);
+  manager->restore (gSettings.root_dir, true /*use_cache*/);
 
   list<SourceManager::SourceId> sourceIds;
 
@@ -276,7 +276,7 @@ void add_source_by_url( const zypp::Url &url, const string &alias,
     }
 
     cerr_vv << "Storing source data" << endl;
-    manager->store( "/", true /*metadata_cache*/ );
+    manager->store( gSettings.root_dir, true /*metadata_cache*/ );
 }
 
 template<typename T>
@@ -320,7 +320,7 @@ void remove_source( const std::string& anystring )
   SourceManager_Ptr manager = SourceManager::sourceManager();
   cerr_vv << "Restoring SourceManager" << endl;
   try {
-    manager->restore ("/", true /*use_cache*/);
+    manager->restore (gSettings.root_dir, true /*use_cache*/);
     }
   catch (const Exception & ex) {
     // so what if sources cannot be restored
@@ -383,7 +383,7 @@ void remove_source( const std::string& anystring )
   }
 
   cerr_vv << "Storing source data" << endl;
-  manager->store( "/", true /*metadata_cache*/ );
+  manager->store( gSettings.root_dir, true /*metadata_cache*/ );
 }
 
 //! rename a source, identified in any way: alias, url, id
@@ -396,7 +396,7 @@ void rename_source( const std::string& anystring, const std::string& newalias )
   cerr_vv << "Constructing SourceManager" << endl;
   SourceManager_Ptr manager = SourceManager::sourceManager();
   cerr_vv << "Restoring SourceManager" << endl;
-  manager->restore ("/", true /*use_cache*/);
+  manager->restore (gSettings.root_dir, true /*use_cache*/);
 
   Source_Ref src;
 
@@ -454,7 +454,7 @@ void rename_source( const std::string& anystring, const std::string& newalias )
   }
 
   cerr_vv << "Storing source data" << endl;
-  manager->store( "/", true /*metadata_cache*/ );
+  manager->store( gSettings.root_dir, true /*metadata_cache*/ );
 #endif
 }
 
@@ -468,7 +468,7 @@ void refresh_sources()
 
   try
   {
-    store.init( "/" );
+    store.init( gSettings.root_dir );
     sources = store.storedSources();
   }
   catch ( const Exception &e )

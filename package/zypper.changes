@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Feb  1 14:25:29 CET 2007 - mvidner@suse.cz
+
+- Added global option --root to operate on a different directory
+  (#238165, F#301963).
+
+-------------------------------------------------------------------
 Wed Jan 31 16:19:38 CET 2007 - jkupec@suse.cz
 
 - locale support added (merged from 10.2/SP1 branch)

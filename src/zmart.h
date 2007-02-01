@@ -51,7 +51,8 @@ struct Settings
   previous_code(-1),
   disable_system_sources(false),
   disable_system_resolvables(false),
-  is_rug_compatible(false)
+  is_rug_compatible(false),
+  root_dir("/")
   {}
 
   std::list<zypp::Url> additional_sources;
@@ -62,6 +63,7 @@ struct Settings
   bool disable_system_sources;
   bool disable_system_resolvables;
   bool is_rug_compatible;
+  std::string root_dir;
 };
 
 struct Error
@@ -105,4 +107,7 @@ extern std::ostream no_stream;
 // define new _ macro
 #define _(MSG) ::gettext(MSG)
 
+// Local Variables:
+// c-basic-offset: 2
+// End:
 #endif

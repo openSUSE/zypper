@@ -24,10 +24,10 @@ void cond_init_target () {
   if (!done) {
 #ifdef LIBZYPP_1xx
     cerr_v << _("Initializing Target") << _(" (old way)") << endl;
-    God->initTarget("/", true);
+    God->initTarget(gSettings.root_dir, true);
 #else
     cerr_v << _("Initializing Target") << endl;
-    God->initializeTarget("/");
+    God->initializeTarget(gSettings.root_dir);
 #endif
     done = true;
   }
