@@ -5,7 +5,7 @@ Thu Feb  1 10:22:06 CET 2007 - jkupec@suse.cz
   (#224216)
 - global non-iteractive mode added (needed due to bug #224216 and
   no-confirm option of install and update commands)
-- r4947
+- r4949
 - 0.6.16
 
 -------------------------------------------------------------------
