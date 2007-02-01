@@ -1,4 +1,17 @@
 -------------------------------------------------------------------
+Thu Feb  1 15:15:29 CET 2007 - jkupec@suse.cz
+
+- Merged revisions 4943-4944,4946-4958 via svnmerge from
+  SuSE-Linux-10_2-Branch. Changelog follows:
+- Hungarian translation added.
+- Slovak translation added.
+- enabled DownloadResolvableReportReceiver::problem() callback
+  (#224216)
+- global non-iteractive mode added (needed due to bug #224216 and
+  no-confirm option of install and update commands).
+- POTFILES.in updated
+
+-------------------------------------------------------------------
 Thu Feb  1 14:25:29 CET 2007 - mvidner@suse.cz
 
 - Added global option --root to operate on a different directory

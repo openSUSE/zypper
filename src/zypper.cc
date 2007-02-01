@@ -53,6 +53,7 @@ static struct option global_options[] = {
   {"terse",	no_argument, 0, 't'},
   {"table-style", required_argument, 0, 's'},
   {"rug-compatible", no_argument, 0, 'r'},
+  {"non-interactive", no_argument, 0, 0},
   {"root",	required_argument, 0, 'R'},
   {"opt",	optional_argument, 0, 'o'},
   {0, 0, 0, 0}
@@ -125,12 +126,24 @@ string process_globals(int argc, char **argv)
     "\t--terse, -t\t\tTerse output for machine consumption\n"
     "\t--table-style, -s\tTable style (integer)\n"
     "\t--rug-compatible, -r\tTurn on rug compatibility\n"
+    "\t--rug-compatible, -r\tTurn on rug compatibility\n"
+    "\t--non-interactive\tDon't ask anything, use default answers automatically. (under development)\n"
     "\t--root, -R <dir>\tOperate on a different root directory\n");
     ;
 
   if (gopts.count("verbose")) {
     gSettings.verbose += gopts["verbose"].size();
     cerr << _("Verbosity ") << gSettings.verbose << endl;
+  }
+
+  if (gopts.count("non-interactive")) {
+  	gSettings.non_interactive = true;
+  	cout << "Entering non-interactive mode.\n"
+  		"WARNING: global non-interactive mode is still under development, use "
+  		"with caution. This mode has been implemented and tested for install, "
+  		"remove, and update commands so far. In case of problems related to "
+  		"non-interactive mode, please file a bugreport following instructions at "
+  		"http://en.opensuse.org/Zypper#Troubleshooting" << endl;
   }
 
   if (gopts.count("table-style")) {
@@ -729,7 +742,7 @@ int one_command(const string& command, int argc, char **argv)
       }
     }
 
-    solve_and_commit (copts.count("no-confirm"));
+    solve_and_commit (copts.count("no-confirm") || gSettings.non_interactive);
     return ZYPPER_EXIT_OK;
   }
 
@@ -888,7 +901,7 @@ int one_command(const string& command, int argc, char **argv)
     // commit
     // returns ZYPPER_EXIT_OK, ZYPPER_EXIT_ERR_ZYPP,
     // ZYPPER_EXIT_INF_REBOOT_NEEDED, or ZYPPER_EXIT_INF_RESTART_NEEDED
-    return solve_and_commit (copts.count("no-confirm"));
+    return solve_and_commit (copts.count("no-confirm") || gSettings.non_interactive);
   }
 
   // -----------------------------( info )------------------------------------
