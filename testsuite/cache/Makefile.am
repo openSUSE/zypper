@@ -7,9 +7,9 @@ SUBDIRS =
 
 ## ##################################################
 
-TESTS = SourceCacheInitializer
+TESTS = CacheInitializerTest
 
-check_PROGRAMS = SourceCacheInitializer
+check_PROGRAMS = CacheInitializerTest
 
 ## ##################################################
 
@@ -17,8 +17,8 @@ LDADD =	$(top_srcdir)/zypp/lib@PACKAGE@.la $(top_srcdir)/zypp2/lib@PACKAGE@2.la
 
 ## ##################################################
 
-SourceCacheInitializer_SOURCES = SourceCacheInitializer.cc
-SourceCacheInitializer_LDADD = $(LDADD) -lboost_unit_test_framework
+CacheInitializerTest_SOURCES = CacheInitializer.cc
+CacheInitializerTest_LDADD = $(LDADD) -lboost_unit_test_framework
 
 ## ##################################################
 

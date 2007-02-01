@@ -1,7 +1,7 @@
 ## Process this file with automake to produce Makefile.in
 ## ##################################################
 
-SUBDIRS = yum sqlite-source
+SUBDIRS = sqlite-source
 
 INCLUDES = 					\
 	-DZYPP_BASE_LOGGER_LOGGROUP=\"source2\"

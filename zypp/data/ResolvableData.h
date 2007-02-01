@@ -46,12 +46,34 @@ namespace data
   class ResObject : public base::ReferenceCounted, private base::NonCopyable
   {
     public:
+      ResObject()
+        : source_media_nr(1), install_only(false)
+      {}
+      
       std::string name;
       Edition edition;
       Arch arch;
       
       TranslatedText summary;
       TranslatedText description;
+      
+      std::string insnotify;
+      std::string delnotify;
+      
+      std::string license_to_confirm;
+      std::string vendor;
+      
+      ByteCount size;
+      ByteCount archive_size;
+      
+      std::string source;
+      
+      int source_media_nr;
+      
+      bool install_only;
+      
+      Date build_time;
+      Date install_time;
       
       DependencyList provides;
       DependencyList conflicts;
@@ -154,26 +176,26 @@ namespace data
 
       std::string type;
       CheckSum checksum;
-      std::string packager;
-      Url url;
-      ByteCount archive_size;
-      ByteCount installed_size;
-      Date build_time;
-      Pathname location;
-      std::string license;
-      std::string vendor;
-      std::string group;
+      // changlelog?
       std::string buildhost;
+      std::string distribution;
+      std::string license;
+      std::string packager;
+      std::string group;
+      Url url;
+      std::string os;
       
-      //std::list<FileData> files;
-
-      // SuSE specific data
+      std::string prein;
+      std::string postin;
+      std::string preun;
+      std::string postun;
+      
+      ByteCount source_size;
+      
       std::list<std::string> authors;
       std::list<std::string> keywords;
-      //std::string  media;
-      //std::list<YUMDirSize> dirSizes;
-      //bool installOnly;
-      //TranslatedText license_to_confirm;
+      
+      Pathname location;
   };
   
   /* Easy output */

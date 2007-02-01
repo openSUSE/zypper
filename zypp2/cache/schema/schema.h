@@ -1,45 +1,5 @@
 char** getsql() {
   static char *sql[] = {
-  "DROP TABLE IF EXISTS db_info;",
-
-  "DROP TABLE IF EXISTS patch_packages_baseversions;",
-
-  "DROP TABLE IF EXISTS patch_packages;",
-
-  "DROP TABLE IF EXISTS delta_packages;",
-
-  "DROP TABLE IF EXISTS package_details;",
-
-  "DROP VIEW IF EXISTS packages;",
-
-  "DROP TABLE IF EXISTS patch_details;",
-
-  "DROP VIEW IF EXISTS patches;",
-
-  "DROP TABLE IF EXISTS pattern_details;",
-
-  "DROP VIEW IF EXISTS patterns;",
-
-  "DROP TABLE IF EXISTS product_details;",
-
-  "DROP VIEW IF EXISTS products;",
-
-  "DROP TABLE IF EXISTS message_details;",
-
-  "DROP VIEW IF EXISTS messages;",
-
-  "DROP TABLE IF EXISTS script_details;",
-
-  "DROP VIEW IF EXISTS scripts;",
-
-  "DROP TABLE IF EXISTS dependencies;",
-
-  "DROP TABLE IF EXISTS sources;",
-
-  "DROP TABLE IF EXISTS locks;",
-
-  "DROP TABLE IF EXISTS resolvables;",
-
   "CREATE TABLE db_info ("
   "  version INTEGER"
   ");",
@@ -247,40 +207,28 @@ char** getsql() {
   "CREATE TRIGGER remove_catalogs"
   "  AFTER DELETE ON catalogs"
   "  BEGIN"
-  "    DELETE FROM resolvables WHERE catalog = old.id;",
-
+  "    DELETE FROM resolvables WHERE catalog = old.id;"
   "  END;",
 
   "CREATE TRIGGER remove_patch_packages_baseversions"
   "  AFTER DELETE ON patch_packages"
   "  BEGIN"
-  "    DELETE FROM patch_packages_baseversions WHERE patch_package_id = old.id;",
-
+  "    DELETE FROM patch_packages_baseversions WHERE patch_package_id = old.id;"
   "  END;",
 
   "CREATE TRIGGER remove_resolvables"
   "  AFTER DELETE ON resolvables"
   "  BEGIN"
-  "    DELETE FROM package_details WHERE resolvable_id = old.id;",
-
-  "    DELETE FROM patch_details WHERE resolvable_id = old.id;",
-
-  "    DELETE FROM pattern_details WHERE resolvable_id = old.id;",
-
-  "    DELETE FROM product_details WHERE resolvable_id = old.id;",
-
-  "    DELETE FROM message_details WHERE resolvable_id = old.id;",
-
-  "    DELETE FROM script_details WHERE resolvable_id = old.id;",
-
-  "    DELETE FROM dependencies WHERE resolvable_id = old.id;",
-
-  "    DELETE FROM files WHERE resolvable_id = old.id;",
-
-  "    DELETE FROM delta_packages WHERE package_id = old.id;",
-
-  "    DELETE FROM patch_packages WHERE package_id = old.id;",
-
+  "    DELETE FROM package_details WHERE resolvable_id = old.id;"
+  "    DELETE FROM patch_details WHERE resolvable_id = old.id;"
+  "    DELETE FROM pattern_details WHERE resolvable_id = old.id;"
+  "    DELETE FROM product_details WHERE resolvable_id = old.id;"
+  "    DELETE FROM message_details WHERE resolvable_id = old.id;"
+  "    DELETE FROM script_details WHERE resolvable_id = old.id;"
+  "    DELETE FROM dependencies WHERE resolvable_id = old.id;"
+  "    DELETE FROM files WHERE resolvable_id = old.id;"
+  "    DELETE FROM delta_packages WHERE package_id = old.id;"
+  "    DELETE FROM patch_packages WHERE package_id = old.id;"
   "  END;",
 
   0};
