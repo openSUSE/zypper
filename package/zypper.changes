@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Feb  1 11:42:28 CET 2007 - jkupec@suse.cz
+
+- Slovak translation added.
+- r4953
+- 0.6.16
+
+-------------------------------------------------------------------
 Thu Feb  1 10:22:06 CET 2007 - jkupec@suse.cz
 
 - enabled DownloadResolvableReportReceiver::problem() callback
@@ -6,7 +13,6 @@ Thu Feb  1 10:22:06 CET 2007 - jkupec@suse.cz
 - global non-iteractive mode added (needed due to bug #224216 and
   no-confirm option of install and update commands)
 - r4949
-- 0.6.16
 
 -------------------------------------------------------------------
 Wed Jan 31 18:20:40 CET 2007 - mvidner@suse.cz
