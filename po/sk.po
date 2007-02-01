@@ -1,0 +1,380 @@
+# Slovak language translation of zypper messages.
+#
+# Copyright (C) 2006, SUSE Linux GmbH, Nuremberg
+# Ján Kupec <jkupec@suse.cz>, 2007.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: zypper.sk\n"
+"Report-Msgid-Bugs-To: translation@suse.de\n"
+"POT-Creation-Date: 2007-01-15 11:27+0100\n"
+"PO-Revision-Date: 2007-01-25 17:27+0100\n"
+"Last-Translator: Ján Kupec <jkupec@suse.cz>\n"
+"Language-Team: Slovak <i18n@suse.de>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.4\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 1 : (n>=2 && n<=4) ? 2 : 0;\n"
+
+#: src/zypper.cc:69
+msgid "URL is invalid."
+msgstr "Chybná URL adresa."
+
+#: src/zypper.cc:77
+msgid ""
+"  Commands:\n"
+"\thelp\t\t\tHelp\n"
+"\tshell, sh\t\tAccept multiple commands at once\n"
+"\tinstall, in\t\tInstall packages or resolvables\n"
+"\tremove, rm\t\tRemove packages or resolvables\n"
+"\tsearch, se\t\tSearch for packages matching a pattern\n"
+"\tservice-list, sl\tList services, also called installation sources\n"
+"\tservice-add, sa\t\tAdd a new service\n"
+"\tservice-delete, sd\tDelete a service\n"
+"\tservice-rename, sr\tRename a service\n"
+"\trefresh, ref\t\tRefresh all installation sources\n"
+"\tpatch-check, pchk\tCheck for patches\n"
+"\tpatches, pch\t\tList patches\n"
+"\tlist-updates, lu\tList updates\n"
+"\tupdate, up\t\tUpdate packages\n"
+"\tinfo, if\t\tShow full information for packages\n"
+"\tpatch-info\t\tShow full information for patches\n"
+msgstr ""
+"  Príkazy:\n"
+"\thelp\t\t\tPomoc\n"
+"\tshell, sh\t\tUmožňuje zadať viacero príkazov počas jedného sedenia.\n"
+"\tinstall, in\t\tInštalácia balíčkov.\n"
+"\tremove, rm\t\tOdstránenie balíčkov\n"
+"\tsearch, se\t\tVyhľadávanie balíčkov podľa zadaného vzoru.\n"
+"\tservice-list, sl\tZoznam inštalačných zdrojov.\n"
+"\tservice-add, sa\t\tPridanie nového inštalačného zdroja\n"
+"\tservice-delete, sd\tOdstránenie inštalačného zdroja\n"
+"\tservice-rename, sr\tPremenovanie inštalačného zdroja\n"
+"\trefresh, ref\t\tObnovenie/aktualizácia inštalačného zdroja.\n"
+"\tpatch-check, pchk\tZistenie dostupnosti softvérových záplat.\n"
+"\tpatches, pch\t\tZoznam dostupných záplat\n"
+"\tlist-updates, lu\tZoznam dostupných aktualizácií.\n"
+"\tupdate, up\t\tAktualizácia balíčkov.\n"
+"\tinfo, if\t\tPodrobné informácie o balíčkoch.\n"
+"\tpatch-info\t\tPodrobné informácie o záplatách.\n"
+
+#: src/zypper.cc:120
+msgid ""
+"  Options:\n"
+"\t--help, -h\t\tHelp\n"
+"\t--version, -V\t\tOutput the version number\n"
+"\t--verbose, -v\t\tIncrease verbosity\n"
+"\t--terse, -t\t\tTerse output for machine consumption\n"
+"\t--table-style, -s\tTable style (integer)\n"
+"\t--rug-compatible, -r\tTurn on rug compatibility\n"
+msgstr ""
+"  Options:\n"
+"\t--help, -h\t\tPomoc\n"
+"\t--version, -V\t\tVýpis čísla verzie\n"
+"\t--verbose, -v\t\tZvýšenie podrobnosti výstupu\n"
+"\t--terse, -t\t\tVýstup pre spracovanie iným programovm\n"
+"\t--table-style, -s\tŠtýl výstupnej tabuľky (celé číslo)\n"
+"\t--rug-compatible, -r\tZapnutie kompatibility s programom rug\n"
+
+#: src/zypper.cc:131
+msgid "Verbosity "
+msgstr "Úroveň podrobnosti výstupu "
+
+#: src/zypper.cc:140
+msgid "Invalid table style "
+msgstr "Nesprávny typ tabuľky "
+
+#: src/zypper.cc:177
+msgid "Try -h for help"
+msgstr "Skús -h pre zobrazenie nápovede. Pri použití voľby -h za konkrétnym príkazom sa zobrazí nápoveda k tomuto príkazu."
+
+#: src/zypper.cc:195
+msgid ""
+"  Source options:\n"
+"\t--disable-system-sources, -D\t\tDo not read the system sources\n"
+"\t--source, -S\t\tRead additional source\n"
+msgstr ""
+"  Možnosti inštalačného zdroja:\n"
+"\t--disable-system-sources, -D\t\tIgnoruj systémové zdroje (RPM databáza nainštalovaných balíčkov)\n"
+"\t--source, -S\t\tNačítaj prídavný inštalačný zdroj\n"
+
+#: src/zypper.cc:200
+msgid ""
+"  Target options:\n"
+"\t--disable-system-resolvables, -T\t\tDo not read system installed resolvables\n"
+msgstr ""
+"  Možnosti cieľa inštalácie:\n"
+"\t--disable-system-resolvables, -T\t\tIgnoruj systémové balíčky (RPM databáza nainštalovaných balíčkov)\n"
+
+#: src/zypper.cc:214
+msgid ""
+"  Command options:\n"
+"\t--catalog,-c\t\tOnly from this catalog (under development)\n"
+"\t--type,-t\t\tType of resolvable (default: package)\n"
+"\t--no-confirm,-y\tDo not require user confirmation\n"
+msgstr ""
+"  Možnosti príkazu:\n"
+"\t--catalog,-c\t\tLen balíčky zo tohto inštalačného zdroja (vo vývoji)\n"
+"\t--type,-t\t\tTyp balíčka (prednastavená hodnota: package)\n"
+"\t--no-confirm,-y\tNevyžaduj potvrdenie užívateľa\n"
+
+#: src/zypper.cc:229
+msgid ""
+"  Command options:\n"
+"\t--type,-t\t\tType of resolvable (default: package)\n"
+"\t--no-confirm,-y\tDo not require user confirmation\n"
+msgstr ""
+"  Možnosti príkazu:\n"
+"\t--type,-t\t\tTyp balíčka (prednastavená hodnota: package [balíček])\n"
+"\t--no-confirm,-y\tNevyžaduj potvrdenie\n"
+
+#: src/zypper.cc:245
+msgid ""
+"service-add [options] URI [alias]\n"
+"\n"
+"Add a service (installation source) to the system.\n"
+"  Command options:\n"
+"\t--repo,-r <FILE.repo>\tRead the URL and alias from a file\n"
+"\t\t\t\t(even remote)\n"
+"\t--type,-t <TYPE>\tType of repository (YaST, YUM, or Plaindir)\n"
+"\t--disabled,-d\t\tAdd the service as disabled\n"
+"\t--no-refresh,-n\t\tDo not automatically refresh the metadata\n"
+msgstr ""
+"service-add [možnosti] URI [alias]\n"
+"\n"
+"Pridaj inštalačný zdroj do systému.\n"
+"  Možnosti príkazu:\n"
+"\t--repo,-r <SÚBOR.repo>\tNačítaj URL adresu a alias zo zadaného súboru (aj vzdialeného)\n"
+"\t--type,-t <TYPE>\tTyp inštalačného zdroja (YaST, YUM, alebo Plaindir)\n"
+"\t--disabled,-d\t\tPridať inštalačný zdroj ako vypnutý\n"
+"\t--no-refresh,-n\t\tVypnúť automatické obnovovanie/aktualizáciu zdroja\n"
+
+#: src/zypper.cc:264
+msgid ""
+"service-list\n"
+"\n"
+"List all defined system services (installation sources).\n"
+"This command has no options.\n"
+msgstr ""
+"service-list\n"
+"\n"
+"Zobraz zoznam všetkých definovaných inštalačných zdrojov.\n"
+"Tento príkaz nemá žiadne ďalšie možnosti.\n"
+
+#: src/zypper.cc:278
+msgid ""
+"service-delete [options] <URI|alias>\n"
+"\n"
+"Remove service (installation source) from the system.\n"
+"This command has no options.\n"
+msgstr ""
+"service-delete <URI|alias>\n"
+"\n"
+"Odstrániť inštalačný zdroj zo systému.\n"
+"\n"
+"Tento príkaz nemá žiadne ďalšie možnosti.\n"
+
+#: src/zypper.cc:292
+msgid ""
+"service-rename [options] <URI|alias> <new-alias>\n"
+"\n"
+"Assign new alias to the service specified by URI or current alias.\n"
+"This command has no options.\n"
+msgstr ""
+"service-rename <URI|alias> <nový-alias>\n"
+"\n"
+"Premenovanie zdroja. Priradí existujúcemu zdroju so zadanou URI adresou alebo aliasom nový alias.\n"
+"\n"
+"Tento príkaz nemá žiadne ďalšie možnosti.\n"
+
+#: src/zypper.cc:306
+msgid ""
+"zypper refresh\n"
+"\n"
+"Refresh all installation sources found in the system.\n"
+msgstr ""
+"zypper refresh\n"
+"\n"
+"Obnov/aktualizuj všetky inštalačné zdroje v systéme.\n"
+
+#: src/zypper.cc:319
+msgid ""
+"list-updates [options]\n"
+"\n"
+"List all available updates\n"
+"\n"
+"  Command options:\n"
+"\t--type,-t\t\tType of resolvable (default: patch)\n"
+msgstr ""
+"list-updates [options]\n"
+"\n"
+"Zobraz zoznam všetkých dostupných aktualizácií.\n"
+"\n"
+"  Možnosti príkazu:\n"
+"\t--type,-t\t\tTyp balíčka (prednastavená hodnota: patch [záplata])\n"
+
+#: src/zypper.cc:337
+msgid ""
+"  Command options:\n"
+"\t--type,-t\t\tType of resolvable (default: patch)\n"
+"\t--no-confirm,-y\t\tDo not require user confirmation\n"
+"\t--skip-interactive\t\tSkip interactive updates\n"
+msgstr ""
+"  Možnosti príkazu:\n"
+"\t--type,-t\t\tType balíčka (prednastavená hodnota: patch [záplata])\n"
+"\t--no-confirm,-y\t\tNevyžaduj potvrdenie užívateľa\n"
+"\t--skip-interactive\t\tVynechaj interaktívne aktualizácie\n"
+
+#: src/zypper.cc:362
+msgid ""
+"zypper [global-options] search [options] [querystring...]\n"
+"\n"
+"'search' - Search for packages matching given search strings\n"
+"\n"
+"  Command options:\n"
+"    --match-all            Search for a match to all search strings (default)\n"
+"    --match-any            Search for a match to any of the search strings\n"
+"    --match-substrings     Matches for search strings may be partial words (default)\n"
+"    --match-words          Matches for search strings may only be whole words\n"
+"    --match-exact          Searches for an exact package name\n"
+"-d, --search-descriptions  Search also in package summaries and descriptions.\n"
+"-c, --case-sensitive       Perform case-sensitive search.\n"
+"-i, --installed-only       Show only packages that are already installed.\n"
+"-u, --uninstalled-only     Show only packages that are not currently installed.\n"
+"-t, --type                 Search only for packages of the specified type.\n"
+"    --sort-by-name         Sort packages by name (default).\n"
+"    --sort-by-catalog      Sort packages by catalog (source).\n"
+"\n"
+"* and ? wildcards can also be used within search strings.\n"
+msgstr ""
+"zypper [globálne-možnosti] search [špecifické-možnosti] [hľadaný-výraz...]\n"
+"\n"
+"'search' - Hľadaj balíčky podľa zadaného výrazu\n"
+"\n"
+"  Možnosti príkazu:\n"
+"    --match-all            Nájdi balíčky, ktoré obsahujú všetky hľadané výrazy (predvolené)\n"
+"    --match-any            Nájdi balíčky, ktoré obsahujú ktorýkoľvek z hľadaných výrazov\n"
+"    --match-substrings     Hľadané výrazy môžu predstavovať časti slov (predvolené)\n"
+"    --match-words          Hľadané výrazy predstavujú celé slová\n"
+"    --match-exact          Hľadaný výraz sa musí presne zhodovať s názvom balíčka\n"
+"-d, --search-descriptions  Hľadaj aj v popisoch balíčkov\n"
+"-c, --case-sensitive       Rozlišuj veľké a malé písmená\n"
+"-i, --installed-only       Hľadaj iba medzi nainštalovanými balíčkami\n"
+"-u, --uninstalled-only     Hľadaj iba medzi nenainštalovanými balíčkami\n"
+"-t, --type                 Hľadaj iba balíčky určeného typu\n"
+"    --sort-by-name         Zotrieď nájdené balíčky podľa mena (predvolené)\n"
+"    --sort-by-catalog      Zotrieď balíčky podľa inštalačného zdroja\n"
+"\n"
+"Znaky * a ? môžu byt v hľadaných výrazoch použité ako náhrada ľubovoľného reťazca alebo znaku.\n"
+
+#: src/zypper.cc:390
+msgid ""
+"patch-check\n"
+"\n"
+"Check for available patches\n"
+"\n"
+"This command has no options.\n"
+msgstr ""
+"patch-check\n"
+"\n"
+"Zisti dostupnosť záplat.\n"
+"\n"
+"Tento príkaz nemá žiadne ďalšie možnosti.\n"
+
+#: src/zypper.cc:404
+msgid ""
+"patches\n"
+"\n"
+"List all available patches\n"
+"\n"
+"This command has no options.\n"
+msgstr ""
+"patches\n"
+"\n"
+"Zobraz zoznam všetkých dostupných záplat.\n"
+"\n"
+"Tento príkaz nemá žiadne ďalšie možnosti.\n"
+
+#: src/zypper.cc:418
+msgid ""
+"zypper [global-options] info [name...]\n"
+"\n"
+"'info' -- Show full information for packages\n"
+msgstr ""
+"zypper [globálne-možnosti] info [názov...]\n"
+"\n"
+"'info' -- Zobraz podrobné informácie o zadaných balíčkoch.\n"
+"\n"
+"Tento príkaz nemá žiadne ďalšie možnosti.\n"
+
+#: src/zypper.cc:430
+msgid ""
+"zypper [global-options] patch-info [patchname...]\n"
+"\n"
+"'patch-info' -- Show detailed information for patches\n"
+msgstr ""
+"zypper [globálne-možnosti] patch-info [názov-záplaty...]\n"
+"\n"
+"'patch-info' -- Zobraz podrobné informácie o zadaných záplatách.\n"
+"\n"
+"Tento príkaz nemá žiadne ďalšie možnosti.\n"
+
+#: src/zypper.cc:442
+msgid ""
+"zypper [global-options] moo\n"
+"\n"
+"'moo' - Show an animal\n"
+msgstr ""
+"zypper [globálne-možnosti] moo\n"
+"\n"
+"'moo' - Zobraz zviera.\n"
+
+#: src/zypper.cc:448
+msgid "Unknown command"
+msgstr "Neznámy príkaz"
+
+#: src/zypper.cc:463
+msgid "Non-Option Program Arguments: "
+msgstr "Argumenty programu (okrem volieb): "
+
+#: src/zypper.cc:475
+msgid "Ignoring --terse (provided only for rug compatibility)"
+msgstr "Ignorujem voľbu --terse (voľba je súčasne k dispozícii len kvôli kompatibilite s programom rug)"
+
+#: src/zypper.cc:491
+msgid "Ignoring installed resolvables..."
+msgstr "Ignorujem nainštalované balíčky..."
+
+#: src/zypper.cc:514
+msgid "A ZYpp transaction is already in progress."
+msgstr "Práve beží iná aplikácia používajúca ZYpp."
+
+#: src/zypper.cc:541
+msgid "Root privileges are required for viewing system sources."
+msgstr "Pre prácu so systémovými zdrojmi sú potrebné práva správcu systému (root)."
+
+#: src/zypper.cc:559
+msgid "Warning: Unknown metadata type "
+msgstr "Pozor: neznámy typ inštalačného zdroja "
+
+#: src/zypper.cc:696 src/zypper.cc:754 src/zypper.cc:840 src/zypper.cc:868
+msgid "Unknown resolvable type "
+msgstr "Neznámy typ balíčka "
+
+#: src/zypper.cc:709
+msgid "Warning: No sources. Operating only with the installed resolvables. Nothing can be installed."
+msgstr "Pozor: Nie sú dostupné žiadne inštalačné zdroje. Pracujem len s nainštalovanými balíčkami. Nové balíčky nebude možné inštalovať."
+
+#: src/zypper.cc:911
+msgid "Please file a bug report about this."
+msgstr "Prosím, pošlite správu o tejto chybe."
+
+#: src/zypper.cc:914
+msgid "See http://en.opensuse.org/Zypper#Troubleshooting for instructions."
+msgstr "Na adrese http://en.opensuse.org/Zypper#Troubleshooting nájdete návod ako na to."
+
+#: src/zypper.cc:927
+msgid "Unexpected exception."
+msgstr "Neočakávaná výnimka. "
+
