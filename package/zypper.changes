@@ -1,9 +1,16 @@
 -------------------------------------------------------------------
+Fri Feb  2 13:23:10 CET 2007 - jkupec@suse.cz
+
+- Non-interactive mode turns on --skip-interactive as well
+  (part of fix #224216)
+- r4962
+- 0.6.16
+
+-------------------------------------------------------------------
 Thu Feb  1 14:42:42 CET 2007 - jkupec@suse.cz
 
 - Hungarian translation added.
 - r4955
-- 0.6.16
 
 -------------------------------------------------------------------
 Thu Feb  1 11:42:28 CET 2007 - jkupec@suse.cz
