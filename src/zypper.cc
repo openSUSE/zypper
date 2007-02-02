@@ -895,7 +895,7 @@ int one_command(const string& command, int argc, char **argv)
     cond_load_resolvables ();
     establish ();
 
-    bool skip_interactive = copts.count("skip-interactive");
+    bool skip_interactive = copts.count("skip-interactive") || gSettings.non_interactive;
     mark_updates (kind, skip_interactive);
 
     // commit

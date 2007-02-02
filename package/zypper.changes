@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri Feb  2 13:29:27 CET 2007 - jkupec@suse.cz
+
+- Non-interactive mode turns on --skip-interactive as well
+  (part of fix #224216)
+- r4964
+
+-------------------------------------------------------------------
 Thu Feb  1 15:15:29 CET 2007 - jkupec@suse.cz
 
 - Merged revisions 4943-4944,4946-4958 via svnmerge from
