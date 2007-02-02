@@ -1,0 +1,124 @@
+Cache Design Issues
+===================
+dmacvicar@suse.de
+
+stable-x86 distribution facts
+=============================
+
+resolvable names: 8204
+unique resolvable names: 8200
+
+dependency names: 119.425
+unique dependency names: 30062
+
+Glob queries (ie: zypper)
+
+sqlite> explain query plan select * from dependencies where name like "kde%";
+0|0|TABLE dependencies
+
+As we see, this query does not use any index, because, ok, there is none.
+
+sqlite> CREATE INDEX dependency_name ON dependencies (name);
+sqlite> explain query plan select * from dependencies where name like "kde%";
+0|0|TABLE dependencies
+
+This makes sense, as from [1], "The GLOB and LIKE operators are expensive in 
+SQLite because they can't make use of an index. One reason is that these are 
+implemented by user functions which can be overridden". Index can be bypassed, 
+if they slowdown the query:
+
+Example: "WHERE x=5" can be changed to "WHERE x+0=5" or "WHERE +x=5" to bypass the index.
+( [1] 5.5.3 )
+
+In contrast, this query does use an index:
+
+sqlite> explain query plan select * from resolvables r,dependencies d where d.name="kdelibs";
+0|0|TABLE resolvables AS r
+1|1|TABLE dependencies AS d WITH INDEX dependency_name
+
+Database Size
+=============
+
+A zmd style schema made with repotools, of stable-x86 takes 5.2 M
+It is unrealistic as it does not contains descriptions but useful for comparision.
+
+CREATE INDEX dependency_name ON dependencies (name);
+
+Ths increases the size of the database to 8.4M!!.
+
+We normalize the database, taking the names to a new table.
+
+insert into dependencies (id, name_id, deptype_id, resolvable_id, refers_id, relation_id, epoch, version, release, pre ) select db.id, n.id, db.deptype_id, db.resolvable_id, db.refers_id, db.relation_id, db.epoch, db.version, db.release, db.pre from dependencies_backup db, names n where n.name=db.name;
+
+The new result is a 30kb difference, after vacuum. (????????)
+
+5256192 stable.db
+5283840 stable.old.db
+
+sqlite> select sum(length(name)) from names;
+563224
+sqlite> select sum(length(name)) from dependencies;
+1922000
+
+We should have saved at least 1.922.000 - 563.224 ?????
+
+Representing in memory data
+===========================
+
+There are entities that are in memory, like Architectures and we dont
+want to maintain them in the database store but we would like to be able
+to relate database information with memory information.
+
+Virtual tables allow you to do this, so you can create a architectures table
+that is not stored on disk that is only a set of callbacks to answer queries
+but you can still use it in SQL.
+
+See [3] for more information about virtual tables.
+
+
+C style API vs C++ Style API
+============================
+
+1000 insertions and iterating using a select
+
+(sqlite3x insert) 2:05 (u 0.07 s 1.09 c 0.00)
+(sqlite3x select) 0 (u 0.01 s 0.00 c 0.00)
+
+(sqlite-c insert) 2:05 (u 0.09 s 0.89 c 0.00)
+(sqlite-c select) 0 (u 0.00 s 0.00 c 0.00)
+
+Oh sqlite is really slow to insert!!! no, I had autocommit enabled so there 
+was one transaction per insert, if we do all inserts as a transaction
+
+(sqlite3x insert) 0 (u 0.01 s 0.00 c 0.00)
+(sqlite3x select) 0 (u 0.00 s 0.00 c 0.00)
+
+(sqlite-c insert) 1 (u 0.01 s 0.00 c 0.00)
+(sqlite-c select) 0 (u 0.00 s 0.00 c 0.00)
+
+Ok, that is fast, lets do 10.000 inserts in a row.
+
+(sqlite3x insert) 0 (u 0.20 s 0.00 c 0.00)
+(sqlite3x select) 0 (u 0.04 s 0.00 c 0.00)
+
+(sqlite-c insert) 0 (u 0.20 s 0.02 c 0.00)
+(sqlite-c select) 0 (u 0.03 s 0.00 c 0.00)
+
+repeat same testwith flushed caches:
+
+(sqlite3x select) 0 (u 0.04 s 0.00 c 0.00)
+(sqlite3x select) 0 (u 0.04 s 0.00 c 0.00)
+
+(sqlite-c insert) 1 (u 0.18 s 0.00 c 0.00)
+(sqlite-c select) 0 (u 0.04 s 0.00 c 0.00)
+
+Conclusion, the c++ layer does not add a significant performance penalty but 
+does reduce the code by 30%-40% as errors are better handled using exceptions 
+instead of checking error values. same with transactions using block scopes.
+
+References
+
+  [1]: http://web.utk.edu/~jplyon/sqlite/SQLite_optimization_FAQ.html
+  [2]: http://developer.mozilla.org/en/docs/Storage:Performance
+  [3]: http://www.sqlite.org/cvstrac/wiki?p=VirtualTables
+  
