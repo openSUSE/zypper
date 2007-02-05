@@ -61,7 +61,7 @@ zypper_SOURCES = 	zypper.cc zmart-sources.cc zmart-misc.cc \
 	zypper-getopt.h \
 	zypper-getopt.cc \
 	zmart.h
-zypper_LDADD = $(ZYPP_LIBS) -lboost_regex
+zypper_LDADD = $(ZYPP_LIBS) -lboost_regex -lreadline
 
 if BUILD_CHECKPATCHES
 zypp_checkpatches_SOURCES = 	zypp-checkpatches.cc zmart-sources.cc \

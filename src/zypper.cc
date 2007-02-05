@@ -15,6 +15,8 @@
 #include <iterator>
 
 #include <unistd.h>
+#include <readline/readline.h>
+#include <readline/history.h>
 
 #include "zmart.h"
 #include "zmart-sources.h"
@@ -466,7 +468,8 @@ int one_command(const string& command, int argc, char **argv)
       );
   }
   else if (!command.empty()) { // empty command is treated earlier
-    cerr << _("Unknown command") << " '" << command << "'." << endl << endl;
+    if (command != "help")	// #235709
+      cerr << _("Unknown command") << " '" << command << "'." << endl << endl;
     cerr << help_commands;
     return ZYPPER_EXIT_ERR_SYNTAX;
   }
@@ -952,13 +955,51 @@ int safe_one_command(const string& command, int argc, char **argv)
   return ret;
 }
 
+// Read a string. "\004" (^D) on EOF.
+string readline_getline ()
+{
+  // A static variable for holding the line.
+  static char *line_read = NULL;
+
+  /* If the buffer has already been allocated,
+     return the memory to the free pool. */
+  if (line_read) {
+    free (line_read);
+    line_read = NULL;
+  }
+
+  /* Get a line from the user. */
+  line_read = readline ("zypper> ");
+
+  /* If the line has any text in it,
+     save it on the history. */
+  if (line_read && *line_read)
+    add_history (line_read);
+
+  if (line_read)
+    return line_read;
+  else
+    return "\004";
+}
+
 void command_shell ()
 {
+  string histfile;
+  try {
+    Pathname p (getenv ("HOME"));
+    p /= ".zypper_history";
+    histfile = p.asString ();
+  } catch (...) {
+    // no history
+  }
+  using_history ();
+  if (!histfile.empty ())
+    read_history (histfile.c_str ());
+
   bool loop = true;
   while (loop) {
     // read a line
-    cerr << "zypper> " << flush;
-    string line = zypp::str::getline (cin);
+    string line = readline_getline ();
     cerr_vv << "Got: " << line << endl;
     // reset optind etc
     optind = 0;
@@ -968,13 +1009,15 @@ void command_shell ()
     char **sh_argv = args.argv ();
 
     string command = sh_argv[0]? sh_argv[0]: "";
-    // TODO check empty command
 
-    if (command == "exit")
+    if (command == "exit" || command == "quit" || command == "\004")
       loop = false;
     else
       safe_one_command (command, sh_argc, sh_argv);
   }
+
+  if (!histfile.empty ())
+    write_history (histfile.c_str ());
 }
 
 int main(int argc, char **argv)
