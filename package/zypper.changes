@@ -3,6 +3,7 @@ Mon Feb  5 17:00:25 CET 2007 - mvidner@suse.cz
 
 - Shell: added command line editing with history (#232374);
   exit on EOF (#230211, #235709).
+- 0.7.0
 
 -------------------------------------------------------------------
 Fri Feb  2 13:29:27 CET 2007 - jkupec@suse.cz

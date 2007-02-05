@@ -9,6 +9,6 @@ dnl   a feature added (but we should not add them now in the beta
 dnl   phase)
 dnl ==================================================
 m4_define([ZYPPER_MAJOR], 	 [0])
-m4_define([ZYPPER_MINOR],	 [6])
-m4_define([ZYPPER_PATCH],	 [14])
+m4_define([ZYPPER_MINOR],	 [7])
+m4_define([ZYPPER_PATCH],	 [0])
 dnl ==================================================
