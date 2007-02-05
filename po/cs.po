@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper 0.5.0\n"
 "Report-Msgid-Bugs-To: translation@suse.de\n"
-"POT-Creation-Date: 2007-02-01 10:23+0100\n"
+"POT-Creation-Date: 2007-02-05 10:41+0100\n"
 "PO-Revision-Date: 2007-02-01 10:24+0100\n"
 "Last-Translator: Martin Vidner <mvidner@suse.cz>\n"
 "Language-Team: Czech <translation-team-cs@lists.sourceforge.net>\n"
@@ -438,7 +438,7 @@ msgid ""
 "in order to be notified of updates."
 msgstr ""
 
-#: src/zypper-callbacks.cc:25
+#: src/zypper-callbacks.cc:23
 msgid "(A)bort, (R)etry, (I)gnore?"
 msgstr ""
 
@@ -534,11 +534,11 @@ msgstr ""
 msgid "This is a bug, please file a bug report against zypper."
 msgstr ""
 
-#: src/zypper.cc:69
+#: src/zypper.cc:70
 msgid "URL is invalid."
 msgstr "URL je neplatné"
 
-#: src/zypper.cc:77
+#: src/zypper.cc:78
 msgid ""
 "  Commands:\n"
 "\thelp\t\t\tHelp\n"
@@ -576,7 +576,8 @@ msgstr ""
 "\tinfo, if\t\tVypsat všchny informace o balících\n"
 "\tpatch-info\t\tVypsat všchny informace o záplatách\n"
 
-#: src/zypper.cc:120
+#: src/zypper.cc:121
+#, fuzzy
 msgid ""
 "  Options:\n"
 "\t--help, -h\t\tHelp\n"
@@ -585,6 +586,8 @@ msgid ""
 "\t--terse, -t\t\tTerse output for machine consumption\n"
 "\t--table-style, -s\tTable style (integer)\n"
 "\t--rug-compatible, -r\tTurn on rug compatibility\n"
+"\t--non-interactive\tDon't ask anything, use default answers automatically. "
+"(under development)\n"
 msgstr ""
 "  Volby:\n"
 "\t--help, -h\t\tNápověda\n"
@@ -594,33 +597,33 @@ msgstr ""
 "\t--table-style, -s\tStyl tabulek (celé číslo)\n"
 "\t--rug-compatible, -r\tZapnout kompatibilitu s rugem\n"
 
-#: src/zypper.cc:131
+#: src/zypper.cc:133
 msgid "Verbosity "
 msgstr ""
 
-#: src/zypper.cc:140
+#: src/zypper.cc:152
 msgid "Invalid table style "
 msgstr ""
 
-#: src/zypper.cc:177
+#: src/zypper.cc:189
 msgid "Try -h for help"
 msgstr ""
 
-#: src/zypper.cc:195
+#: src/zypper.cc:207
 msgid ""
 "  Source options:\n"
 "\t--disable-system-sources, -D\t\tDo not read the system sources\n"
 "\t--source, -S\t\tRead additional source\n"
 msgstr ""
 
-#: src/zypper.cc:200
+#: src/zypper.cc:212
 msgid ""
 "  Target options:\n"
 "\t--disable-system-resolvables, -T\t\tDo not read system installed "
 "resolvables\n"
 msgstr ""
 
-#: src/zypper.cc:214
+#: src/zypper.cc:226
 msgid ""
 "  Command options:\n"
 "\t--catalog,-c\t\tOnly from this catalog (under development)\n"
@@ -628,14 +631,14 @@ msgid ""
 "\t--no-confirm,-y\tDo not require user confirmation\n"
 msgstr ""
 
-#: src/zypper.cc:229
+#: src/zypper.cc:241
 msgid ""
 "  Command options:\n"
 "\t--type,-t\t\tType of resolvable (default: package)\n"
 "\t--no-confirm,-y\tDo not require user confirmation\n"
 msgstr ""
 
-#: src/zypper.cc:245
+#: src/zypper.cc:257
 msgid ""
 "service-add [options] URI [alias]\n"
 "\n"
@@ -648,7 +651,7 @@ msgid ""
 "\t--no-refresh,-n\t\tDo not automatically refresh the metadata\n"
 msgstr ""
 
-#: src/zypper.cc:264
+#: src/zypper.cc:276
 msgid ""
 "service-list\n"
 "\n"
@@ -656,7 +659,7 @@ msgid ""
 "This command has no options.\n"
 msgstr ""
 
-#: src/zypper.cc:278
+#: src/zypper.cc:290
 msgid ""
 "service-delete [options] <URI|alias>\n"
 "\n"
@@ -664,7 +667,7 @@ msgid ""
 "This command has no options.\n"
 msgstr ""
 
-#: src/zypper.cc:292
+#: src/zypper.cc:304
 msgid ""
 "service-rename [options] <URI|alias> <new-alias>\n"
 "\n"
@@ -672,14 +675,14 @@ msgid ""
 "This command has no options.\n"
 msgstr ""
 
-#: src/zypper.cc:306
+#: src/zypper.cc:318
 msgid ""
 "zypper refresh\n"
 "\n"
 "Refresh all installation sources found in the system.\n"
 msgstr ""
 
-#: src/zypper.cc:319
+#: src/zypper.cc:331
 msgid ""
 "list-updates [options]\n"
 "\n"
@@ -689,7 +692,7 @@ msgid ""
 "\t--type,-t\t\tType of resolvable (default: patch)\n"
 msgstr ""
 
-#: src/zypper.cc:337
+#: src/zypper.cc:349
 msgid ""
 "  Command options:\n"
 "\t--type,-t\t\tType of resolvable (default: patch)\n"
@@ -697,7 +700,7 @@ msgid ""
 "\t--skip-interactive\t\tSkip interactive updates\n"
 msgstr ""
 
-#: src/zypper.cc:362
+#: src/zypper.cc:374
 msgid ""
 "zypper [global-options] search [options] [querystring...]\n"
 "\n"
@@ -725,7 +728,7 @@ msgid ""
 "* and ? wildcards can also be used within search strings.\n"
 msgstr ""
 
-#: src/zypper.cc:390
+#: src/zypper.cc:402
 msgid ""
 "patch-check\n"
 "\n"
@@ -734,7 +737,7 @@ msgid ""
 "This command has no options.\n"
 msgstr ""
 
-#: src/zypper.cc:404
+#: src/zypper.cc:416
 msgid ""
 "patches\n"
 "\n"
@@ -743,73 +746,73 @@ msgid ""
 "This command has no options.\n"
 msgstr ""
 
-#: src/zypper.cc:418
+#: src/zypper.cc:430
 msgid ""
 "zypper [global-options] info [name...]\n"
 "\n"
 "'info' -- Show full information for packages\n"
 msgstr ""
 
-#: src/zypper.cc:430
+#: src/zypper.cc:442
 msgid ""
 "zypper [global-options] patch-info [patchname...]\n"
 "\n"
 "'patch-info' -- Show detailed information for patches\n"
 msgstr ""
 
-#: src/zypper.cc:442
+#: src/zypper.cc:454
 msgid ""
 "zypper [global-options] moo\n"
 "\n"
 "'moo' - Show an animal\n"
 msgstr ""
 
-#: src/zypper.cc:448
+#: src/zypper.cc:460
 msgid "Unknown command"
 msgstr ""
 
-#: src/zypper.cc:463
+#: src/zypper.cc:475
 msgid "Non-Option Program Arguments: "
 msgstr ""
 
-#: src/zypper.cc:475
+#: src/zypper.cc:487
 msgid "Ignoring --terse (provided only for rug compatibility)"
 msgstr ""
 
-#: src/zypper.cc:491
+#: src/zypper.cc:503
 msgid "Ignoring installed resolvables..."
 msgstr ""
 
-#: src/zypper.cc:514
+#: src/zypper.cc:526
 msgid "A ZYpp transaction is already in progress."
 msgstr ""
 
-#: src/zypper.cc:541
+#: src/zypper.cc:553
 msgid "Root privileges are required for viewing system sources."
 msgstr ""
 
-#: src/zypper.cc:559
+#: src/zypper.cc:571
 msgid "Warning: Unknown metadata type "
 msgstr ""
 
-#: src/zypper.cc:696 src/zypper.cc:754 src/zypper.cc:840 src/zypper.cc:868
+#: src/zypper.cc:708 src/zypper.cc:766 src/zypper.cc:852 src/zypper.cc:880
 msgid "Unknown resolvable type "
 msgstr ""
 
-#: src/zypper.cc:709
+#: src/zypper.cc:721
 msgid ""
 "Warning: No sources. Operating only with the installed resolvables. Nothing "
 "can be installed."
 msgstr ""
 
-#: src/zypper.cc:911
+#: src/zypper.cc:923
 msgid "Please file a bug report about this."
 msgstr ""
 
-#: src/zypper.cc:914
+#: src/zypper.cc:926
 msgid "See http://en.opensuse.org/Zypper#Troubleshooting for instructions."
 msgstr ""
 
-#: src/zypper.cc:927
+#: src/zypper.cc:939
 msgid "Unexpected exception."
 msgstr ""
