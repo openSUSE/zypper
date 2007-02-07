@@ -429,7 +429,7 @@ void FnUnzipString(sqlite3_context *context, int argc, sqlite3_value **argv)
     ){
       SQLITE_EXTENSION_INIT2(pApi)
       sqlite3_create_function(db, "unzip", 1, SQLITE_ANY, 0, FnUnzipString, 0, 0);
-      sqlite3_create_function(db, "zip", 1, SQLITE_ANY, 0, FnUnzipString, 0, 0);
+      sqlite3_create_function(db, "zip", 1, SQLITE_ANY, 0, FnZipString, 0, 0);
       return 0;
     }
 

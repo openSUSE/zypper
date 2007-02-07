@@ -36,13 +36,12 @@ CREATE TABLE db_info (
 );
 
 CREATE TABLE names (
-    id INTEGER AUTO INCREMENT
-  , name TEXT
-  , PRIMARY KEY (id)
+    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL
+  , name TEXT UNIQUE
 );
 
 CREATE TABLE resolvables (
-    id INTEGER AUTO INCREMENT
+    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL
   , name TEXT
   , version TEXT
   , release TEXT
@@ -62,24 +61,23 @@ CREATE TABLE resolvables (
   , install_only INTEGER
   , build_time INTEGER
   , install_time INTEGER
-  , PRIMARY KEY (id)
+
 );
 
 CREATE TABLE dependencies (
-    id INTEGER AUTO INCREMENT
+    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL
   , resolvable_id INTEGER REFERENCES resolvables(id)
-  , dep_type INTEGER
-  , dep_target INTEGER
+  , dependency_type INTEGER
+  , refers_kind INTEGER
 );
 
 CREATE TABLE versioned_dependencies (
-  id INTEGER AUTO INCREMENT
+   id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL 
   , dependency_id INTEGER REFERENCES dependencies(id)
   , name_id INTEGER REFERENCES names(id)
   , version TEXT
   , release TEXT
   , epoch INTEGER
-  , arch INTEGER
   , relation INTEGER
 );
 
@@ -89,7 +87,7 @@ CREATE TABLE message_details (
 );
 
 CREATE TABLE catalogs (
-    id INTEGER
+    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL
   , alias TEXT NOT NULL
   , url TEXT
   , description TEXT
@@ -98,22 +96,22 @@ CREATE TABLE catalogs (
   , type VARCHAR(20)
   , cache_dir TEXT
   , path TEXT
-  , PRIMARY KEY (id)
+
 );
 
 CREATE TABLE patch_details (
-    id INTEGER
+    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL 
   , resolvable_id INTEGER REFERENCES resolvables(id)
   , patch_id TEXT
   , timestamp INTEGER
   , category TEXT
   , reboot_needed INTEGER
   , affects_package_manager INTEGER
-  , PRIMARY KEY (id)
+
 );
 
 CREATE TABLE pattern_details (
-    id INTEGER
+    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL
   , resolvable_id INTEGER REFERENCES resolvables(id)
   , user_default INTEGER
   , user_visible INTEGER
@@ -121,11 +119,11 @@ CREATE TABLE pattern_details (
   , icon TEXT
   , script TEXT
   , pattern_order TEXT
-  , PRIMARY KEY (id)
+
 );
 
 CREATE TABLE product_details (
-    id INTEGER
+    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL
   , resolvable_id INTEGER REFERENCES resolvables(id)
   , category TEXT
   , vendor TEXT
@@ -138,20 +136,21 @@ CREATE TABLE product_details (
   , long_name TEXT
   , distribution_name TEXT
   , distribution_edition TEXT
-  , PRIMARY KEY (id)
+
 );
 
 CREATE TABLE script_details (
-    id INTEGER
+    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL
   , resolvable_id INTEGER REFERENCES resolvables(id)
   , do_script TEXT
   , undo_script TEXT
-  , PRIMARY KEY (id)
+
   
 );
 
 CREATE TABLE package_details (
-    resolvable_id INTEGER REFERENCES resolvables(id)
+    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL
+  , resolvable_id INTEGER REFERENCES resolvables(id)
   , checksum TEXT
   , changelog TEXT
   , buildhost TEXT
@@ -172,7 +171,7 @@ CREATE TABLE package_details (
 );
 
 CREATE TABLE locks (
-    id INTEGER
+    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL
   , name TEXT
   , version TEXT
   , release TEXT
@@ -183,7 +182,7 @@ CREATE TABLE locks (
   , glob TEXT
   , importance INTEGER
   , importance_gteq INTEGER
-  , PRIMARY KEY (id)
+
 );
 
 CREATE VIEW messages
@@ -210,7 +209,7 @@ CREATE VIEW scripts AS
   WHERE resolvables.id = script_details.resolvable_id;
 
 CREATE TABLE delta_packages (
-    id INTEGER
+    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL
   , package_id INTEGER REFERENCES packages(id)
   , media_nr INTEGER
   , location TEXT
@@ -223,23 +222,27 @@ CREATE TABLE delta_packages (
   , baseversion_checksum TEXT
   , baseversion_build_time INTEGER
   , baseversion_sequence_info TEXT
+
 );
 
 CREATE TABLE patch_packages (
-    id INTEGER
+    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL
   , package_id INTEGER REFERENCES packages(id)
   , media_nr INTEGER
   , location TEXT
   , checksum TEXT
   , download_size INTEGER
   , build_time INTEGER
+
 );
 
 CREATE TABLE patch_packages_baseversions (
-    patch_package_id INTEGER REFERENCES patch_packages(id)
+    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL
+  , patch_package_id INTEGER REFERENCES patch_packages(id)
   , version TEXT
   , release TEXT
   , epoch INTEGER
+
 );
 
 CREATE INDEX dependency_resolvable ON dependencies (resolvable_id);

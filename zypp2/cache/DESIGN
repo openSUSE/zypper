@@ -2,25 +2,33 @@ Cache Design Issues
 ===================
 dmacvicar@suse.de
 
-stable-x86 distribution facts
-=============================
+stable-x86 distribution facts [^onerepo]
+========================================
 
-resolvable names: 8204
-unique resolvable names: 8200
+* resolvable names: 8.204
+* unique resolvable names: 8.200
+* dependency names: 119.425
+* unique dependency names: 30.062
 
-dependency names: 119.425
-unique dependency names: 30062
+ [^onerepo]: Note that those numbers are only 1 repository. 
+
+If we take the proportions as a fact for every repository, that means 14.5
+dependencies per package in average. 
+
+If you take in count that adding a repository which is not factory has not much 
+chance of adding much new names the unique 30k unique dependency names will not 
+grow too much, where the number of dependencies still grows up.
 
 Glob queries (ie: zypper)
 
-sqlite> explain query plan select * from dependencies where name like "kde%";
-0|0|TABLE dependencies
+    sqlite> explain query plan select * from dependencies where name like "kde%";
+    0|0|TABLE dependencies
 
 As we see, this query does not use any index, because, ok, there is none.
 
-sqlite> CREATE INDEX dependency_name ON dependencies (name);
-sqlite> explain query plan select * from dependencies where name like "kde%";
-0|0|TABLE dependencies
+    sqlite> CREATE INDEX dependency_name ON dependencies (name);
+    sqlite> explain query plan select * from dependencies where name like "kde%";
+    0|0|TABLE dependencies
 
 This makes sense, as from [1], "The GLOB and LIKE operators are expensive in 
 SQLite because they can't make use of an index. One reason is that these are 
@@ -32,9 +40,9 @@ Example: "WHERE x=5" can be changed to "WHERE x+0=5" or "WHERE +x=5" to bypass t
 
 In contrast, this query does use an index:
 
-sqlite> explain query plan select * from resolvables r,dependencies d where d.name="kdelibs";
-0|0|TABLE resolvables AS r
-1|1|TABLE dependencies AS d WITH INDEX dependency_name
+    sqlite> explain query plan select * from resolvables r,dependencies d where d.name="kdelibs";
+    0|0|TABLE resolvables AS r
+   1|1|TABLE dependencies AS d WITH INDEX dependency_name
 
 Database Size
 =============
@@ -42,25 +50,29 @@ Database Size
 A zmd style schema made with repotools, of stable-x86 takes 5.2 M
 It is unrealistic as it does not contains descriptions but useful for comparision.
 
-CREATE INDEX dependency_name ON dependencies (name);
+    CREATE INDEX dependency_name ON dependencies (name);
 
 Ths increases the size of the database to 8.4M!!.
 
 We normalize the database, taking the names to a new table.
 
-insert into dependencies (id, name_id, deptype_id, resolvable_id, refers_id, relation_id, epoch, version, release, pre ) select db.id, n.id, db.deptype_id, db.resolvable_id, db.refers_id, db.relation_id, db.epoch, db.version, db.release, db.pre from dependencies_backup db, names n where n.name=db.name;
+    insert into dependencies (id, name_id, deptype_id, resolvable_id, refers_id, relation_id, epoch, version, release, pre ) select db.id, n.id, db.deptype_id, db.resolvable_id, db.refers_id, db.relation_id, db.epoch, db.version, db.release, db.pre from dependencies_backup db, names n where n.name=db.name;
 
 The new result is a 30kb difference, after vacuum. (????????)
 
-5256192 stable.db
-5283840 stable.old.db
+    5256192 stable.db
+    5283840 stable.old.db
 
-sqlite> select sum(length(name)) from names;
-563224
-sqlite> select sum(length(name)) from dependencies;
-1922000
+    sqlite> select sum(length(name)) from names;
+    563224
+    sqlite> select sum(length(name)) from dependencies;
+    1922000
 
 We should have saved at least 1.922.000 - 563.224 ?????
+
+However the index size for the names column is much smaller.
+The database without normalized names jumps from 5.1M to 6.0M when
+creating a name index, instead of the 8.4M mentioned above.
 
 Representing in memory data
 ===========================
@@ -81,36 +93,36 @@ C style API vs C++ Style API
 
 1000 insertions and iterating using a select
 
-(sqlite3x insert) 2:05 (u 0.07 s 1.09 c 0.00)
-(sqlite3x select) 0 (u 0.01 s 0.00 c 0.00)
+    (sqlite3x insert) 2:05 (u 0.07 s 1.09 c 0.00)
+    (sqlite3x select) 0 (u 0.01 s 0.00 c 0.00)
 
-(sqlite-c insert) 2:05 (u 0.09 s 0.89 c 0.00)
-(sqlite-c select) 0 (u 0.00 s 0.00 c 0.00)
+    (sqlite-c insert) 2:05 (u 0.09 s 0.89 c 0.00)
+    (sqlite-c select) 0 (u 0.00 s 0.00 c 0.00)
 
 Oh sqlite is really slow to insert!!! no, I had autocommit enabled so there 
 was one transaction per insert, if we do all inserts as a transaction
 
-(sqlite3x insert) 0 (u 0.01 s 0.00 c 0.00)
-(sqlite3x select) 0 (u 0.00 s 0.00 c 0.00)
+    (sqlite3x insert) 0 (u 0.01 s 0.00 c 0.00)
+    (sqlite3x select) 0 (u 0.00 s 0.00 c 0.00)
 
-(sqlite-c insert) 1 (u 0.01 s 0.00 c 0.00)
-(sqlite-c select) 0 (u 0.00 s 0.00 c 0.00)
+    (sqlite-c insert) 1 (u 0.01 s 0.00 c 0.00)
+    (sqlite-c select) 0 (u 0.00 s 0.00 c 0.00)
 
 Ok, that is fast, lets do 10.000 inserts in a row.
 
-(sqlite3x insert) 0 (u 0.20 s 0.00 c 0.00)
-(sqlite3x select) 0 (u 0.04 s 0.00 c 0.00)
+    (sqlite3x insert) 0 (u 0.20 s 0.00 c 0.00)
+    (sqlite3x select) 0 (u 0.04 s 0.00 c 0.00)
 
-(sqlite-c insert) 0 (u 0.20 s 0.02 c 0.00)
-(sqlite-c select) 0 (u 0.03 s 0.00 c 0.00)
+    (sqlite-c insert) 0 (u 0.20 s 0.02 c 0.00)
+    (sqlite-c select) 0 (u 0.03 s 0.00 c 0.00)
 
 repeat same testwith flushed caches:
 
-(sqlite3x select) 0 (u 0.04 s 0.00 c 0.00)
-(sqlite3x select) 0 (u 0.04 s 0.00 c 0.00)
+    (sqlite3x select) 0 (u 0.04 s 0.00 c 0.00)
+    (sqlite3x select) 0 (u 0.04 s 0.00 c 0.00)
 
-(sqlite-c insert) 1 (u 0.18 s 0.00 c 0.00)
-(sqlite-c select) 0 (u 0.04 s 0.00 c 0.00)
+    (sqlite-c insert) 1 (u 0.18 s 0.00 c 0.00)
+    (sqlite-c select) 0 (u 0.04 s 0.00 c 0.00)
 
 Conclusion, the c++ layer does not add a significant performance penalty but 
 does reduce the code by 30%-40% as errors are better handled using exceptions 
