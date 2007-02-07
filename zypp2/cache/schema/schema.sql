@@ -1,5 +1,14 @@
 
+DROP INDEX IF EXISTS dependency_resolvable;
+DROP INDEX IF EXISTS package_details_resolvable_id;
+DROP INDEX IF EXISTS resolvable_catalog;
+
+DROP TRIGGER IF EXISTS remove_resolvables;
+DROP TRIGGER IF EXISTS remove_catalogs;
+DROP TRIGGER IF EXISTS remove_patch_packages_baseversions;
+
 DROP TABLE IF EXISTS db_info;
+DROP TABLE IF EXISTS names;
 DROP TABLE IF EXISTS patch_packages_baseversions;
 DROP TABLE IF EXISTS patch_packages;
 DROP TABLE IF EXISTS delta_packages;
@@ -15,14 +24,21 @@ DROP TABLE IF EXISTS message_details;
 DROP VIEW IF EXISTS messages;
 DROP TABLE IF EXISTS script_details;
 DROP VIEW IF EXISTS scripts;
+DROP TABLE IF EXISTS versioned_dependencies;
 DROP TABLE IF EXISTS dependencies;
 DROP TABLE IF EXISTS sources;
 DROP TABLE IF EXISTS locks;
 DROP TABLE IF EXISTS resolvables;
-
+DROP TABLE IF EXISTS catalogs;
 
 CREATE TABLE db_info (
   version INTEGER
+);
+
+CREATE TABLE names (
+    id INTEGER AUTO INCREMENT
+  , name TEXT
+  , PRIMARY KEY (id)
 );
 
 CREATE TABLE resolvables (
@@ -50,19 +66,25 @@ CREATE TABLE resolvables (
 );
 
 CREATE TABLE dependencies (
-    resolvable_id INTEGER REFERENCES resolvable(id)
+    id INTEGER AUTO INCREMENT
+  , resolvable_id INTEGER REFERENCES resolvables(id)
   , dep_type INTEGER
-  , name TEXT
+  , dep_target INTEGER
+);
+
+CREATE TABLE versioned_dependencies (
+  id INTEGER AUTO INCREMENT
+  , dependency_id INTEGER REFERENCES dependencies(id)
+  , name_id INTEGER REFERENCES names(id)
   , version TEXT
   , release TEXT
   , epoch INTEGER
   , arch INTEGER
   , relation INTEGER
-  , dep_target INTEGER
 );
 
 CREATE TABLE message_details (
-    resolvable_id INTEGER  REFERENCES resolvable(id)
+    resolvable_id INTEGER  REFERENCES resolvables(id)
   , text TEXT
 );
 
@@ -81,7 +103,7 @@ CREATE TABLE catalogs (
 
 CREATE TABLE patch_details (
     id INTEGER
-  , resolvable_id INTEGER REFERENCES resolvables (id)
+  , resolvable_id INTEGER REFERENCES resolvables(id)
   , patch_id TEXT
   , timestamp INTEGER
   , category TEXT
@@ -92,7 +114,7 @@ CREATE TABLE patch_details (
 
 CREATE TABLE pattern_details (
     id INTEGER
-  , resolvable_id INTEGER REFERENCES resolvables (id)
+  , resolvable_id INTEGER REFERENCES resolvables(id)
   , user_default INTEGER
   , user_visible INTEGER
   , pattern_category TEXT
@@ -104,7 +126,7 @@ CREATE TABLE pattern_details (
 
 CREATE TABLE product_details (
     id INTEGER
-  , resolvable_id INTEGER REFERENCES resolvables (id)
+  , resolvable_id INTEGER REFERENCES resolvables(id)
   , category TEXT
   , vendor TEXT
   , release_notes_url TEXT
@@ -121,7 +143,7 @@ CREATE TABLE product_details (
 
 CREATE TABLE script_details (
     id INTEGER
-  , resolvable_id INTEGER REFERENCES resolvables (id)
+  , resolvable_id INTEGER REFERENCES resolvables(id)
   , do_script TEXT
   , undo_script TEXT
   , PRIMARY KEY (id)
@@ -129,7 +151,7 @@ CREATE TABLE script_details (
 );
 
 CREATE TABLE package_details (
-    resolvable_id INTEGER REFERENCES resolvables (id)
+    resolvable_id INTEGER REFERENCES resolvables(id)
   , checksum TEXT
   , changelog TEXT
   , buildhost TEXT
