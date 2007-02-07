@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Wed Feb  7 15:52:29 CET 2007 - jkupec@suse.cz
+
+- MediaCurlException::dumpOn() adjusted for ncurses dialogue
+  (#222602)
+- 4984
+
+-------------------------------------------------------------------
 Mon Jan 29 13:10:37 CET 2007 - dmacvicar@suse.de
 
 - Merged revisions 4907-4926 from SuSE-Linux-10_2-Branch
