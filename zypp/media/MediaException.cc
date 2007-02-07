@@ -134,9 +134,9 @@ namespace zypp
 
     std::ostream & MediaCurlException::dumpOn( std::ostream & str) const
     {
-      return str << "Curl error for: " << _url
-	<< ": Error code: " << _err
-	<< " Error message: " << _msg << endl;
+      return str << "Curl error for '" << _url << "':" << endl
+        << "Error code: " << _err << endl
+        << "Error message: " << _msg << endl;
     }
 
     std::ostream & MediaCurlSetOptException::dumpOn( std::ostream & str) const
