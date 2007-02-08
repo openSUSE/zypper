@@ -8,6 +8,7 @@ INCLUDE_DIRECTORIES( ${CMAKE_SOURCE_DIR} ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CUR
 # SOURCES                                                          #
 ####################################################################
 
+ADD_DEFINITIONS(-DLOCALEDIR=\\\"/usr/share/libzypp\\\" -DTEXTDOMAIN=\\\"zypp\\\" )
 
 SET( zypp_SRCS
   Arch.cc
@@ -993,7 +994,7 @@ ${zypp_detail_HEADERS}
 ${zypp_pool_HEADERS}
 )
 
-ADD_LIBRARY(zypp SHARED ${zypp_SRCS})
+ADD_LIBRARY(zypp SHARED ${zypp_lib_SRCS})
 
 # System libraries
 TARGET_LINK_LIBRARIES(zypp boost_filesystem boost_regex util )
