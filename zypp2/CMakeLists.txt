@@ -27,9 +27,6 @@ INSTALL_FILES(  FILES
 SET( zypp2_cache_SRCS
   cache/CacheInitializer.cpp
   cache/CacheStore.cpp
-  cache/KnownSourcesCache.cpp
-  cache/SourceCache.cpp
-  cache/SourceCacher.cpp
   cache/Utils.cpp
 )
 
@@ -37,9 +34,6 @@ SET( zypp2_cache_HEADERS
   cache/CacheCommon.h
   cache/CacheInitializer.h
   cache/CacheStore.h
-  cache/KnownSourcesCache.h
-  cache/SourceCache.h
-  cache/SourceCacher.h
   cache/Utils.h
 )
 
@@ -103,25 +97,11 @@ INSTALL_FILES(  FILES
   DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp2/source/sqlite-source
 )
 
-SET( zypp2_source_yum_SRCS
-  source/yum/YUMSourceCacher.cc
-)
-
-SET( zypp2_source_yum_HEADERS
-  source/yum/YUMSourceCacher.h
-)
-
-INSTALL_FILES(  FILES
-  ${zypp2_source_yum_HEADERS}
-  DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp2/source/yum
-)
-
 
 SET( zypp2_lib_SRCS
 ${zypp2_source_SRCS}
 ${zypp2_SRCS}
 ${zypp2_cache_SRCS}
-${zypp2_source_yum_SRCS}
 ${zypp2_source_sqlite-source_SRCS}
 ${zypp2_cache_sqlite3x_SRCS}
 )
@@ -130,12 +110,11 @@ SET( zypp2_lib_HEADERS
 ${zypp2_source_HEADERS}
 ${zypp2_HEADERS}
 ${zypp2_cache_HEADERS}
-${zypp2_source_yum_HEADERS}
 ${zypp2_source_sqlite-source_HEADERS}
 ${zypp2_cache_sqlite3x_HEADERS}
 )
 
-ADD_LIBRARY(zypp2 SHARED ${zypp2_SRCS})
+ADD_LIBRARY(zypp2 SHARED ${zypp2_lib_SRCS})
 
 # System libraries
 TARGET_LINK_LIBRARIES(zypp2 boost_filesystem boost_regex util )

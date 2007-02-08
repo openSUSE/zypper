@@ -1,10 +1,10 @@
 INCLUDE_DIRECTORIES( ${CMAKE_SOURCE_DIR} ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR} )
 
-SET(SourceCacheInitializer_SRCS
-SourceCacheInitializer.cc
+SET(CacheInitializer_SRCS
+CacheInitializer.cc
 )
 
-ADD_EXECUTABLE(SourceCacheInitializer ${SourceCacheInitializer_SRCS})
-TARGET_LINK_LIBRARIES(SourceCacheInitializer boost_unit_test_framework )
-TARGET_LINK_LIBRARIES(SourceCacheInitializer zypp2 )
-TARGET_LINK_LIBRARIES(SourceCacheInitializer zypp )
+ADD_EXECUTABLE(CacheInitializer ${CacheInitializer_SRCS})
+TARGET_LINK_LIBRARIES(CacheInitializer boost_unit_test_framework )
+TARGET_LINK_LIBRARIES(CacheInitializer zypp2 )
+TARGET_LINK_LIBRARIES(CacheInitializer zypp )
