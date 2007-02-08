@@ -2,6 +2,196 @@ Cache Design Issues
 ===================
 dmacvicar@suse.de
 
+Solver Requisites
+=================
+
+The queries for the solver include:
+(Kindly provided by schubi)
+
+1.  get all installed items
+2.  get all uninstalled items
+3.  get all installed/uninstalled items of a specific kind
+4.  just find installed item with same kind/name as item
+    Helper::findInstalledByNameAndKind (const ResPool & pool, const string &
+    name, const Resolvable::Kind & kind)
+5.  just find uninstalled item with same kind/name as item
+    Helper::findUninstalledByNameAndKind (const ResPool & pool, const string
+    & name, const Resolvable::Kind & kind)
+6.  just find best (according to edition) uninstalled item with same
+    kind/name as item
+    // *DOES* check edition
+    PoolItem_Ref Helper::findUpdateItem (const ResPool & pool, PoolItem_Ref
+    item)
+7.  check if the given item is the best one of the pool
+    // Takes arch, edition in order to check it
+    bool Helper::isBestUninstalledItem (const ResPool & pool, PoolItem_Ref item)
+8.  get all requires,obsoletes,provides,recommends,... of an item
+9.  find all INSTALLED items which provides foo
+10. find all UNINSTALLED items which provides foo
+11. find all items which provides foo
+12. find all locked items
+13. find items which have a freshens entry with a given name or
+    corresponds with one of a given name list
+14. find items which have a supplements entry with a given name or
+    corresponds with one of a given name list
+15. find items which have a conflicts entry with a given name or
+    corresponds with one of a given name list
+16. find items which have a recommend entry with a given name or
+    corresponds with one of a given
+    name list
+17. find all INSTALLED items which requires foo
+18. find all UNINSTALLED items which requires foo
+
+Most of those can be represented by single table queries which don't
+depend on the schema at all except:
+
+* 6. requires edition comparision
+* 9. 10. 11. 17. 18. Style queries are analyzed in our example for
+  different schemas
+* 13. 14. 15. 16. Same as above
+
+Other system schema comparision
+===============================
+
+xpkg - http://www.xpkg.org
+--------------------------
+
+Uses a simple dependency model (name,major,minor).
+Database schema only has a packages table.
+
+YUM - http://linux.duke.edu/projects/yum
+----------------------------------------
+
+/var/cache/yum/stable/
+total 348M
+0    cachecookie
+16M  filelists.xml.gz
+72M  filelists.xml.gz.sqlite
+48   headers
+45M  other.xml.gz
+172M other.xml.gz.sqlite
+48   packages
+6.8M primary.xml.gz
+37M  primary.xml.gz.sqlite
+951  repomd.xml
+
+The schema is basically a 1:1 copy of the XML schema with
+different databases per xml file. They also keep the raw cache.
+
+The names are not normalized and it is easy to see it looking
+at the file sizes.
+
+Summaries and descriptions are together with resolvable data.
+
+The time to create factory cache from scratch via NFS is:
+
+real    2m20.947s
+user    1m47.155s
+sys     0m9.697s
+
+Once is created, looking for information about a file:
+
+real    0m12.470s
+user    0m7.028s
+sys     0m0.464s
+
+Solver queries with yum:
+
+Find package that provides foo:
+
+    sqlite> select pk.name,pk.version,pk.release,pk.epoch from packages pk,provides pr where pk.pkgKey=pr.pkgKey and pr.name="kdelibs3";
+    kdelibs3|3.5.6|4|0
+    kdelibs3|3.5.6|4|0
+
+    real    0m0.008s
+    user    0m0.008s
+    sys     0m0.000s
+
+    sqlite> explain query plan select pk.name,pk.version,pk.release,pk.epoch from packages pk,provides pr where pk.pkgKey=pr.pkgKey and pr.name="kdelibs3";
+    0|1|TABLE provides AS pr WITH INDEX providesname
+    1|0|TABLE packages AS pk USING PRIMARY KEY
+    sqlite>
+
+Smart 
+-----
+
+Smart uses its own cache format. Creating it for stable-x86
+results in a 6.4M cache file. Creating it takes:
+
+    real    2m18.128s
+    user    0m31.826s
+    sys     0m2.740s
+
+And later, searching for a package:
+
+    real    0m3.198s
+    user    0m2.628s
+    sys     0m0.444s
+
+ZYPP Proposed schema Tests
+--------------------------
+
+The current schema available in zypp-trunk.
+
+Find package that provides foo:
+
+    select r.name,r.version,r.release,r.epoch from resolvables r,dependencies d,versioned_dependencies vd,names n where d.resolvable_id=r.id and d.dependency_type=1 and vd.name_id=n.id and n.name="kdelibs3" and vd.dependency_id=d.id;
+    kdelibs3|3.5.6|4|
+    kdelibs3|3.5.6|4|
+    
+    real    0m0.695s
+    user    0m0.636s
+    sys     0m0.036s
+
+Slow, this query is resolved as:
+
+    0|2|TABLE versioned_dependencies AS vd
+    1|1|TABLE dependencies AS d USING PRIMARY KEY
+    2|0|TABLE resolvables AS r USING PRIMARY KEY
+    3|3|TABLE names AS n USING PRIMARY KEY
+
+Trying again with a new index:
+
+    CREATE INDEX dependency_type ON dependencies (dependency_type);
+    12M
+    
+    real    0m0.485s
+    user    0m0.456s
+    sys     0m0.024s
+
+Creating an index for the versioned_dependencies:
+
+    CREATE INDEX versioned_dependencies_dependency ON versioned_dependencies (dependency_id);
+    
+    0|3|TABLE names AS n WITH INDEX sqlite_autoindex_names_1
+    1|1|TABLE dependencies AS d WITH INDEX dependency_type
+    2|0|TABLE resolvables AS r USING PRIMARY KEY
+    3|2|TABLE versioned_dependencies AS vd WITH INDEX versioned_dependencies_dependency
+    
+    real    0m0.579s
+    user    0m0.552s
+    sys     0m0.016s
+
+Still slow. Last try:
+
+create index vd_name_id on versioned_dependencies(name_id);
+
+    real    0m0.007s
+    user    0m0.004s
+    sys     0m0.004s
+  
+This means the bottleneck was in the normalized names table.
+Now the query is done in this way:
+  
+    0|3|TABLE names AS n WITH INDEX sqlite_autoindex_names_1
+    1|2|TABLE versioned_dependencies AS vd WITH INDEX vd_name_id
+    2|1|TABLE dependencies AS d USING PRIMARY KEY
+    3|0|TABLE resolvables AS r USING PRIMARY KEY
+
+Adding all those indexes keep the database (without file lists and
+descriptions) in a 15 M size. Some extra indexes can be dropped
+if the query plan shows they are not used.
+
 stable-x86 distribution facts [^onerepo]
 ========================================
 
@@ -86,7 +276,6 @@ that is not stored on disk that is only a set of callbacks to answer queries
 but you can still use it in SQL.
 
 See [3] for more information about virtual tables.
-
 
 C style API vs C++ Style API
 ============================
