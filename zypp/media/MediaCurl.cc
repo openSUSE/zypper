@@ -441,12 +441,16 @@ void MediaCurl::attachTo (bool next)
       ZYPP_THROW(MediaCurlSetOptException(_url, _curlError));
     }
 
-    if( !_url.getQueryParam("auth").empty() &&
-	(_url.getScheme() == "http" || _url.getScheme() == "https"))
+    if(_url.getScheme() == "http" || _url.getScheme() == "https")
     {
       std::vector<std::string>                 list;
       std::vector<std::string>::const_iterator it;
-      str::split(_url.getQueryParam("auth"), std::back_inserter(list), ",");
+
+      string use_auth = _url.getQueryParam("auth");
+      if( use_auth.empty())
+        use_auth = "digest,basic";
+
+      str::split(use_auth, std::back_inserter(list), ",");
 
       long auth = CURLAUTH_NONE;
       for(it = list.begin(); it != list.end(); ++it)
@@ -491,8 +495,8 @@ void MediaCurl::attachTo (bool next)
 
       if( auth != CURLAUTH_NONE)
       {
-	DBG << "Enabling HTTP authentication methods: "
-	    << _url.getQueryParam("auth") << std::endl;
+        DBG << "Enabling HTTP authentication methods: " << use_auth
+            << " (CURLOPT_HTTPAUTH=" << auth << ")" << std::endl;
 
 	ret = curl_easy_setopt( _curl, CURLOPT_HTTPAUTH, auth);
 	if ( ret != 0 ) {
@@ -1250,3 +1254,4 @@ int MediaCurl::progressCallback( void *clientp, double dltotal, double dlnow,
 
   } // namespace media
 } // namespace zypp
+// 

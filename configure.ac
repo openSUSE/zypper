@@ -195,7 +195,7 @@ AC_CHECK_HEADERS([popt.h],
         AC_MSG_ERROR([popt header not found. please install popt-devel.]))
 
 dnl internationalization macros
-AM_GNU_GETTEXT
+AM_GNU_GETTEXT([external])
 
 dnl ==================================================
 dnl checks for typedefs
