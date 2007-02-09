@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Fri Feb  9 15:21:55 CET 2007 - jkupec@suse.cz
+
+- Setting allowed authentication methods to "basic,digest" if none
+  provided in URL (#243006)
+- fixed gettext and rpath problems in configure.ac and Makefile.cvs
+  (mvidner)
+- r4999
+
+-------------------------------------------------------------------
 Wed Feb  7 15:52:29 CET 2007 - jkupec@suse.cz
 
 - MediaCurlException::dumpOn() adjusted for ncurses dialogue
