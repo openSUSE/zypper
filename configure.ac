@@ -195,7 +195,7 @@ AC_CHECK_HEADERS([popt.h],
         AC_MSG_ERROR([popt header not found. please install popt-devel.]))
 
 dnl internationalization macros
-AM_GNU_GETTEXT([external])
+AM_GNU_GETTEXT
 
 dnl ==================================================
 dnl checks for typedefs
@@ -271,10 +271,16 @@ AC_OUTPUT(	 po/Makefile.in\
 	zypp/solver/Makefile		\
 	zypp/solver/detail/Makefile	\
   zypp/data/Makefile \
+  zypp2/Makefile \
+	zypp2/cache/Makefile \
+  zypp2/cache/sqlite3x/Makefile
+  zypp2/source/Makefile \
+  zypp2/source/yum/Makefile \
   zypp/source/Makefile		\
 	zypp/source/plaindir/Makefile	\
 	zypp/source/susetags/Makefile	\
 	zypp/source/yum/Makefile	\
+	zypp2/source/sqlite-source/Makefile \
   zypp/media/Makefile		\
 	zypp/media/proxyinfo/Makefile	\
 	zypp/ui/Makefile		\
