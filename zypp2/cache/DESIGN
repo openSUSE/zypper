@@ -192,6 +192,16 @@ Adding all those indexes keep the database (without file lists and
 descriptions) in a 15 M size. Some extra indexes can be dropped
 if the query plan shows they are not used.
 
+With 40.000 packages. A database without normalized names uses 50mb, while a normalized one uses
+around 43 mb.
+
+The query in the normalized one takes 2.092s. Adding the names index bumps the size to 
+50mb and gets the query in 0.010s.
+
+The query in the non-normalized one takes 0.443s. Adding the names index bumps the size to 
+76 mb and gets the query in 0.010s.
+
+
 stable-x86 distribution facts [^onerepo]
 ========================================
 
@@ -264,6 +274,34 @@ However the index size for the names column is much smaller.
 The database without normalized names jumps from 5.1M to 6.0M when
 creating a name index, instead of the 8.4M mentioned above.
 
+Growing Test
+============
+
+zypp1.db uses name normalization for dependencies. zypp2.db does not.
+
+8.000 packages
+9.9M zypp1.db
+9.8M zypp2.db
+
+16.000 packages
+18M zypp1.db
+20M zypp2.db
+
+24.000 packages
+26M zypp1.db
+30M zypp2.db
+
+32.000 packages
+34M zypp1.db
+40M zypp2.db
+
+40.000 packages
+43M zypp1.db
+50M zypp2.db
+
+If x = thousand of packages, and y = database size.  A normalized
+schema has a slomp of 1.1 and a unnormalized schema a slomp of 1.25
+
 Representing in memory data
 ===========================
 
@@ -305,7 +343,7 @@ Ok, that is fast, lets do 10.000 inserts in a row.
     (sqlite-c insert) 0 (u 0.20 s 0.02 c 0.00)
     (sqlite-c select) 0 (u 0.03 s 0.00 c 0.00)
 
-repeat same testwith flushed caches:
+repeat same test with flushed caches:
 
     (sqlite3x select) 0 (u 0.04 s 0.00 c 0.00)
     (sqlite3x select) 0 (u 0.04 s 0.00 c 0.00)
@@ -317,9 +355,31 @@ Conclusion, the c++ layer does not add a significant performance penalty but
 does reduce the code by 30%-40% as errors are better handled using exceptions 
 instead of checking error values. same with transactions using block scopes.
 
+Some Conclusions
+================
+
+- Normalization lead to slower queries (due to JOINs)
+- Normalized tables are faster than non-normalized tables
+  using an index.
+- When both use an index, they reach the 0.01s lower limit
+- The index size is much smaller in normalized tables.
+
+Recommendations
+===============
+
+[1] Dependencies names normalization can save space. Especially with
+    indexes.
+[2] Dependency type normalization is cheap and can provide a flexible
+    capability representation.
+[3] separating dependency types in different tables can also save
+    a JOIN, but if combined with [2], leads to (dep types)X(capability impls)
+    tables.
+
+
 References
 
   [1]: http://web.utk.edu/~jplyon/sqlite/SQLite_optimization_FAQ.html
   [2]: http://developer.mozilla.org/en/docs/Storage:Performance
   [3]: http://www.sqlite.org/cvstrac/wiki?p=VirtualTables
+  [4]: http://katastrophos.net/andre/blog/2007/01/04/sqlite-performance-tuning-and-optimization-on-embedded-systems/
   
