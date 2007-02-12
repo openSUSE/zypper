@@ -1,4 +1,25 @@
 -------------------------------------------------------------------
+Mon Feb 12 15:28:08 CET 2007 - jkupec@suse.cz
+
+- Merged revisions 4926-4993,4995,4998-5006 via svnmerge from
+  SuSE-Linux-10_2-Branch
+
+- verifySystem: Regarding patterns too. Bug 239750 (schubi)
+- verifySystem: The result will be set to APPL_HIGH, so it will be not
+  reset by a second "normal" solver run. #239281 (schubi)
+- yast2 reports invalid URL as 'unknown source type'
+  (#209961) (dmacvicar)
+- Added freshen language dependency in supplemements too if there is no
+  entry in supplements.
+  #240617;IPA fonts are not installed even if select Japanese
+  language (schubi)
+- Setting allowed authentication methods to "basic,digest" if none
+  provided in URL (#243006) (jkupec)
+- Stopping after 50 valid solver results. Anymore would be useless. Bug
+  243595 (schubi)
+- r 5007
+
+-------------------------------------------------------------------
 Mon Feb 12 10:37:02 CET 2007 - mvidner@suse.cz
 
 - package-manager: use a generic su script from XDG (#235303, #244442)
