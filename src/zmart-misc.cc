@@ -217,7 +217,8 @@ void mark_for_uninstall( const ResObject::Kind &kind,
   }
 }
 
-void show_problems () {
+// return true if there are no problems
+bool show_problems () {
   ostream& stm = cerr;
   Resolver_Ptr resolver = zypp::getZYpp()->resolver();
   ResolverProblemList rproblems = resolver->problems ();
@@ -225,7 +226,8 @@ void show_problems () {
     b = rproblems.begin (),
     e = rproblems.end (),
     i;
-  if (b != e) {
+  bool no_problem = b == e;
+  if (!no_problem) {
     cerr << _("Problems:") << endl;
   }
   for (i = b; i != e; ++i) {
@@ -242,6 +244,20 @@ void show_problems () {
       stm << " :    " << (*ii)->details () << endl;
     }
   }
+  return no_problem;
+}
+
+//! @return true if any solution was applied
+bool solve_problems (bool non_interactive)
+{
+    // try some solutions:
+    // policies selected by options
+    // ...
+    if (!non_interactive) {
+      // try asking the user
+    }
+    cerr << _("Sorry, problem resolution not implemented yet.") << endl;
+    return false;		// nothing yet
 }
 
 /**
@@ -695,9 +711,17 @@ void mark_updates( const ResObject::Kind &kind, bool skip_interactive )
  *  ZYPPER_EXIT_INF_RESTART_NEEDED - if one of patches to be installed needs package manager restart
  */
 int solve_and_commit (bool non_interactive) {
-  resolve();
+  while (true) {
+    resolve();
 
-  show_problems ();
+    bool no_problem = show_problems ();
+    if (no_problem)		// don't worry, be happy
+      break;
+
+    bool any_applied = solve_problems (non_interactive);
+    if (! any_applied)
+      return ZYPPER_EXIT_ERR_ZYPP; // #242736
+  }
 
 
   // returns -1, 0, ZYPPER_EXIT_INF_REBOOT_NEEDED, or ZYPPER_EXIT_INF_RESTART_NEEDED

@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Mon Feb 12 13:36:08 CET 2007 - mvidner@suse.cz
+
+- Do not allow to commit with unresolved dependency problems (#242736).
+
+-------------------------------------------------------------------
 Mon Feb  5 17:00:25 CET 2007 - mvidner@suse.cz
 
 - Shell: added command line editing with history (#232374);
