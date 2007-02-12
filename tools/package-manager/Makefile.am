@@ -1,4 +1,4 @@
-dist_bin_SCRIPTS = package-manager
+dist_bin_SCRIPTS = package-manager package-manager-su
 
 icondir = $(datadir)/pixmaps
 icon_DATA = package-manager-icon.png

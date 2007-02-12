@@ -50,25 +50,8 @@ else
 fi
 
 xsu() {
-    # FIXME isn't there a desktop agnostic command?
-    XDGSU=/usr/bin/xdg_menu_su
-    GNOMESU=/opt/gnome/bin/gnomesu
-    KDESU=/opt/kde3/bin/kdesu
-    # in order of increasing preference (FIXME detect desktop)
-    if [ -x $XDGSU ]; then
-	XSU=$XDGSU
-    fi
-    if [ -x $GNOMESU ]; then
-	XSU="$GNOMESU --"
-    fi
-    if [ -x $KDESU ]; then
-	XSU="$KDESU --"
-    fi
-
-    if [ -z "$XSU" ]; then
-	echo >&2 "WARNING: kdesu or gnomesu or xdg_menu_su not found"
-    fi
-    $XSU "$@"
+    # a copy of xdg-su.
+    package-manager-su -- "$@"
 }
 
 # do_* fall back to yast for STACK=ugh

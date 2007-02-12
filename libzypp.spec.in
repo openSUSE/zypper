@@ -108,6 +108,7 @@ make install DESTDIR=$RPM_BUILD_ROOT
 %{prefix}/share/pixmaps/package-manager-icon.png
 %{prefix}/share/applications/package-manager.desktop
 %{prefix}/bin/package-manager
+%{prefix}/bin/package-manager-su
 
 %files devel
 %defattr(-,root,root)

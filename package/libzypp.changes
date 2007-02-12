@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Mon Feb 12 10:37:02 CET 2007 - mvidner@suse.cz
+
+- package-manager: use a generic su script from XDG (#235303, #244442)
+
+-------------------------------------------------------------------
 Fri Feb  9 15:21:55 CET 2007 - jkupec@suse.cz
 
 - Setting allowed authentication methods to "basic,digest" if none
