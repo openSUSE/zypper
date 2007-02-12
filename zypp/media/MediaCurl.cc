@@ -114,13 +114,13 @@ namespace zypp {
     {
       ProgressData(const long _timeout, const zypp::Url &_url = zypp::Url(),
                    callback::SendReport<DownloadProgressReport> *_report=NULL)
-	: timeout(_timeout)
-	, reached(false)
-	, report(_report)
-	, ltime( time(NULL))
-	, dload( 0)
-	, uload( 0)
-	, url(_url)
+        : timeout(_timeout)
+        , reached(false)
+        , report(_report)
+        , ltime( time(NULL))
+        , dload( 0)
+        , uload( 0)
+        , url(_url)
       {}
       long                                          timeout;
       bool                                          reached;
@@ -138,9 +138,9 @@ std::string MediaCurl::_agent = "Novell ZYPP Installer";
 ///////////////////////////////////////////////////////////////////
 
 static inline void escape( string & str_r,
-			   const char char_r, const string & escaped_r ) {
+                           const char char_r, const string & escaped_r ) {
   for ( string::size_type pos = str_r.find( char_r );
-	pos != string::npos; pos = str_r.find( char_r, pos ) ) {
+        pos != string::npos; pos = str_r.find( char_r, pos ) ) {
     str_r.replace( pos, 1, escaped_r );
   }
 }
@@ -159,15 +159,15 @@ static inline string unEscape( string text_r ) {
 
 ///////////////////////////////////////////////////////////////////
 //
-//	CLASS NAME : MediaCurl
+//        CLASS NAME : MediaCurl
 //
 ///////////////////////////////////////////////////////////////////
 
 MediaCurl::MediaCurl( const Url &      url_r,
-		      const Pathname & attach_point_hint_r )
+                      const Pathname & attach_point_hint_r )
     : MediaHandler( url_r, attach_point_hint_r,
-		    "/", // urlpath at attachpoint
-		    true ), // does_download
+                    "/", // urlpath at attachpoint
+                    true ), // does_download
       _curl( NULL )
 {
   _curlError[0] = '\0';
@@ -206,10 +206,10 @@ void MediaCurl::setCookieFile( const Pathname &fileName )
 ///////////////////////////////////////////////////////////////////
 //
 //
-//	METHOD NAME : MediaCurl::attachTo
-//	METHOD TYPE : PMError
+//        METHOD NAME : MediaCurl::attachTo
+//        METHOD TYPE : PMError
 //
-//	DESCRIPTION : Asserted that not already attached, and attachPoint is a directory.
+//        DESCRIPTION : Asserted that not already attached, and attachPoint is a directory.
 //
 void MediaCurl::attachTo (bool next)
 {
@@ -230,7 +230,7 @@ void MediaCurl::attachTo (bool next)
     for(proto=curl_info->protocols; !found && *proto; ++proto)
     {
       if( scheme == std::string((const char *)*proto))
-	found = true;
+        found = true;
     }
     if( !found)
     {
@@ -297,7 +297,7 @@ void MediaCurl::attachTo (bool next)
     {
       long num = str::strtonum<long>( param);
       if( num >= 0 && num <= TRANSFER_TIMEOUT_MAX)
-	_xfer_timeout = num;
+        _xfer_timeout = num;
     }
   }
 
@@ -355,33 +355,33 @@ void MediaCurl::attachTo (bool next)
       str::split( verify, std::back_inserter(flags), ",");
       for(flag = flags.begin(); flag != flags.end(); ++flag)
       {
-	if( *flag == "host")
-	{
-	  verify_host = true;
-	}
-	else
-	if( *flag == "peer")
-	{
-	  verify_peer = true;
-	}
-	else
-	{
-      	  disconnectFrom();
-	  ZYPP_THROW(MediaBadUrlException(_url, "Unknown ssl_verify flag"));
-	}
+        if( *flag == "host")
+        {
+          verify_host = true;
+        }
+        else
+        if( *flag == "peer")
+        {
+          verify_peer = true;
+        }
+        else
+        {
+                disconnectFrom();
+          ZYPP_THROW(MediaBadUrlException(_url, "Unknown ssl_verify flag"));
+        }
       }
     }
 
     _ca_path = Pathname(_url.getQueryParam("ssl_capath")).asString();
     if( _ca_path.empty())
     {
-	_ca_path = "/etc/ssl/certs/";
+        _ca_path = "/etc/ssl/certs/";
     }
     else
     if( !PathInfo(_ca_path).isDir() || !Pathname(_ca_path).absolute())
     {
         disconnectFrom();
-	ZYPP_THROW(MediaBadUrlException(_url, "Invalid ssl_capath path"));
+        ZYPP_THROW(MediaBadUrlException(_url, "Invalid ssl_capath path"));
     }
 
     if( verify_peer || verify_host)
@@ -455,42 +455,42 @@ void MediaCurl::attachTo (bool next)
       long auth = CURLAUTH_NONE;
       for(it = list.begin(); it != list.end(); ++it)
       {
-	if(*it == "basic")
-	{
-	  auth |= CURLAUTH_BASIC;
-	}
-	else
-	if(*it == "digest")
-	{
-	  auth |= CURLAUTH_DIGEST;
-	}
-	else
-	if((curl_info && (curl_info->features & CURL_VERSION_NTLM)) &&
-	   (*it == "ntlm"))
-	{
-	  auth |= CURLAUTH_NTLM;
-	}
-	else
-	if((curl_info && (curl_info->features & CURL_VERSION_SPNEGO)) &&
-	   (*it == "spnego" || *it == "negotiate"))
-	{
-	  // there is no separate spnego flag for auth
-	  auth |= CURLAUTH_GSSNEGOTIATE;
-	}
-	else
-	if((curl_info && (curl_info->features & CURL_VERSION_GSSNEGOTIATE)) &&
-	   (*it == "gssnego" || *it == "negotiate"))
-	{
-	  auth |= CURLAUTH_GSSNEGOTIATE;
-	}
-	else
-	{
-	  std::string msg("Unsupported HTTP authentication method '");
-	  msg += *it;
-	  msg += "'";
-      	  disconnectFrom();
-	  ZYPP_THROW(MediaBadUrlException(_url, msg));
-	}
+        if(*it == "basic")
+        {
+          auth |= CURLAUTH_BASIC;
+        }
+        else
+        if(*it == "digest")
+        {
+          auth |= CURLAUTH_DIGEST;
+        }
+        else
+        if((curl_info && (curl_info->features & CURL_VERSION_NTLM)) &&
+           (*it == "ntlm"))
+        {
+          auth |= CURLAUTH_NTLM;
+        }
+        else
+        if((curl_info && (curl_info->features & CURL_VERSION_SPNEGO)) &&
+           (*it == "spnego" || *it == "negotiate"))
+        {
+          // there is no separate spnego flag for auth
+          auth |= CURLAUTH_GSSNEGOTIATE;
+        }
+        else
+        if((curl_info && (curl_info->features & CURL_VERSION_GSSNEGOTIATE)) &&
+           (*it == "gssnego" || *it == "negotiate"))
+        {
+          auth |= CURLAUTH_GSSNEGOTIATE;
+        }
+        else
+        {
+          std::string msg("Unsupported HTTP authentication method '");
+          msg += *it;
+          msg += "'";
+                disconnectFrom();
+          ZYPP_THROW(MediaBadUrlException(_url, msg));
+        }
       }
 
       if( auth != CURLAUTH_NONE)
@@ -498,11 +498,11 @@ void MediaCurl::attachTo (bool next)
         DBG << "Enabling HTTP authentication methods: " << use_auth
             << " (CURLOPT_HTTPAUTH=" << auth << ")" << std::endl;
 
-	ret = curl_easy_setopt( _curl, CURLOPT_HTTPAUTH, auth);
-	if ( ret != 0 ) {
-      	  disconnectFrom();
-	  ZYPP_THROW(MediaCurlSetOptException(_url, _curlError));
-	}
+        ret = curl_easy_setopt( _curl, CURLOPT_HTTPAUTH, auth);
+        if ( ret != 0 ) {
+                disconnectFrom();
+          ZYPP_THROW(MediaCurlSetOptException(_url, _curlError));
+        }
       }
     }
   }
@@ -534,36 +534,36 @@ void MediaCurl::attachTo (bool next)
            it != proxy_info.noProxyEnd();
            it++)
       {
-	std::string host( str::toLower(_url.getHost()));
+        std::string host( str::toLower(_url.getHost()));
         std::string temp( str::toLower(*it));
 
-	// no proxy if it points to a suffix
-	// preceeded by a '.', that maches
-	// the trailing portion of the host.
-	if( temp.size() > 1 && temp.at(0) == '.')
-	{
-	  if(host.size() > temp.size() &&
+        // no proxy if it points to a suffix
+        // preceeded by a '.', that maches
+        // the trailing portion of the host.
+        if( temp.size() > 1 && temp.at(0) == '.')
+        {
+          if(host.size() > temp.size() &&
              host.compare(host.size() - temp.size(), temp.size(), temp) == 0)
-	  {
-	    DBG << "NO_PROXY: '" << *it  << "' matches host '"
-	                         << host << "'" << endl;
-	    useproxy = false;
-	    break;
+          {
+            DBG << "NO_PROXY: '" << *it  << "' matches host '"
+                                 << host << "'" << endl;
+            useproxy = false;
+            break;
           }
-	}
-	else
-	// no proxy if we have an exact match
-	if( host == temp)
-	{
-	  DBG << "NO_PROXY: '" << *it  << "' matches host '"
-	                       << host << "'" << endl;
-	  useproxy = false;
-	  break;
-	}
+        }
+        else
+        // no proxy if we have an exact match
+        if( host == temp)
+        {
+          DBG << "NO_PROXY: '" << *it  << "' matches host '"
+                               << host << "'" << endl;
+          useproxy = false;
+          break;
+        }
       }
 
       if ( useproxy ) {
-	_proxy = proxy_info.proxy(_url.getScheme());
+        _proxy = proxy_info.proxy(_url.getScheme());
       }
     }
   }
@@ -592,32 +592,32 @@ void MediaCurl::attachTo (bool next)
 
       string proxypassword( _url.getQueryParam( "proxypassword" ) );
       if ( ! proxypassword.empty() ) {
-	_proxyuserpwd += ":" + proxypassword;
+        _proxyuserpwd += ":" + proxypassword;
       }
 
     } else {
       char *home = getenv("HOME");
       if( home && *home)
       {
-      	Pathname curlrcFile = string( home ) + string( "/.curlrc" );
+              Pathname curlrcFile = string( home ) + string( "/.curlrc" );
 
         PathInfo h_info(string(home), PathInfo::LSTAT);
-	PathInfo c_info(curlrcFile,   PathInfo::LSTAT);
+        PathInfo c_info(curlrcFile,   PathInfo::LSTAT);
 
         if( h_info.isDir()  && h_info.owner() == getuid() &&
             c_info.isFile() && c_info.owner() == getuid())
-	{
-      	  map<string,string> rc_data = base::sysconfig::read( curlrcFile );
+        {
+                map<string,string> rc_data = base::sysconfig::read( curlrcFile );
 
-      	  map<string,string>::const_iterator it = rc_data.find("proxy-user");
-      	  if (it != rc_data.end())
-	    _proxyuserpwd = it->second;
+                map<string,string>::const_iterator it = rc_data.find("proxy-user");
+                if (it != rc_data.end())
+            _proxyuserpwd = it->second;
         }
-	else
-	{
-	  WAR << "Not allowed to parse '" << curlrcFile
-	      << "': bad file owner" << std::endl;
-	}
+        else
+        {
+          WAR << "Not allowed to parse '" << curlrcFile
+              << "': bad file owner" << std::endl;
+        }
       }
     }
 
@@ -675,8 +675,8 @@ MediaCurl::checkAttachPoint(const Pathname &apoint) const
 ///////////////////////////////////////////////////////////////////
 //
 //
-//	METHOD NAME : MediaCurl::disconnectFrom
-//	METHOD TYPE : PMError
+//        METHOD NAME : MediaCurl::disconnectFrom
+//        METHOD TYPE : PMError
 //
 void MediaCurl::disconnectFrom()
 {
@@ -690,10 +690,10 @@ void MediaCurl::disconnectFrom()
 ///////////////////////////////////////////////////////////////////
 //
 //
-//	METHOD NAME : MediaCurl::releaseFrom
-//	METHOD TYPE : PMError
+//        METHOD NAME : MediaCurl::releaseFrom
+//        METHOD TYPE : PMError
 //
-//	DESCRIPTION : Asserted that media is attached.
+//        DESCRIPTION : Asserted that media is attached.
 //
 void MediaCurl::releaseFrom( bool eject )
 {
@@ -703,8 +703,8 @@ void MediaCurl::releaseFrom( bool eject )
 
 ///////////////////////////////////////////////////////////////////
 //
-//	METHOD NAME : MediaCurl::getFile
-//	METHOD TYPE : PMError
+//        METHOD NAME : MediaCurl::getFile
+//        METHOD TYPE : PMError
 //
 
 void MediaCurl::getFile( const Pathname & filename ) const
@@ -812,7 +812,7 @@ bool MediaCurl::getDoesFileExist( const Pathname & filename ) const
       ERR << "fopen failed for /dev/null" << endl;
       curl_easy_setopt( _curl, CURLOPT_RANGE, NULL );
       if ( ret != 0 ) {
-	  ZYPP_THROW(MediaCurlSetOptException(url, _curlError));
+          ZYPP_THROW(MediaCurlSetOptException(url, _curlError));
       }
       ZYPP_THROW(MediaWriteException("/dev/null"));
   }
@@ -823,7 +823,7 @@ bool MediaCurl::getDoesFileExist( const Pathname & filename ) const
       std::string err( _curlError);
       curl_easy_setopt( _curl, CURLOPT_RANGE, NULL );
       if ( ret != 0 ) {
-	  ZYPP_THROW(MediaCurlSetOptException(url, _curlError));
+          ZYPP_THROW(MediaCurlSetOptException(url, _curlError));
       }
       ZYPP_THROW(MediaCurlSetOptException(url, err));
   }
@@ -837,11 +837,96 @@ bool MediaCurl::getDoesFileExist( const Pathname & filename ) const
   CURLcode ok = curl_easy_perform( _curl );
   MIL << "perform code: " << ok << " [ " << curl_easy_strerror(ok) << " ]" << endl;
 
+  // reset curl settings
   ret = curl_easy_setopt( _curl, CURLOPT_RANGE, NULL );
-  if ( ret != 0 ) {
-	  ZYPP_THROW(MediaCurlSetOptException(url, _curlError));
+  if ( ret != 0 )
+  {
+    ZYPP_THROW(MediaCurlSetOptException(url, _curlError));
   }
+  
+  if ( ok != 0 )
+  {
+    ::fclose( file );
+    
+    std::string err;
+    try
+    {
+      bool err_file_not_found = false;
+      switch ( ok )
+      {
+      case CURLE_UNSUPPORTED_PROTOCOL:
+      case CURLE_URL_MALFORMAT:
+      case CURLE_URL_MALFORMAT_USER:
+      case CURLE_HTTP_RETURNED_ERROR:
+        {
+          long httpReturnCode = 0;
+          CURLcode infoRet = curl_easy_getinfo( _curl,
+                                                CURLINFO_RESPONSE_CODE,
+                                                &httpReturnCode );
+          if ( infoRet == CURLE_OK )
+          {
+            string msg = "HTTP response: " +
+                          str::numstring( httpReturnCode );
+            if ( httpReturnCode == 401 )
+            {
+              err = " Login failed";
+            }
+            else
+            if ( httpReturnCode == 404)
+            {
+               err_file_not_found = true;
+               break;
+            }
 
+            msg += err;
+            DBG << msg << " (URL: " << url.asString() << ")" << std::endl;
+            ZYPP_THROW(MediaCurlException(url, msg, _curlError));
+          }
+          else
+          {
+            string msg = "Unable to retrieve HTTP response:";
+            msg += err;
+            DBG << msg << " (URL: " << url.asString() << ")" << std::endl;
+            ZYPP_THROW(MediaCurlException(url, msg, _curlError));
+          }
+        }
+        break;
+      case CURLE_FTP_COULDNT_RETR_FILE:
+      case CURLE_FTP_ACCESS_DENIED:
+      case CURLE_BAD_PASSWORD_ENTERED:
+      case CURLE_FTP_USER_PASSWORD_INCORRECT:
+      case CURLE_COULDNT_RESOLVE_PROXY:
+      case CURLE_COULDNT_RESOLVE_HOST:
+      case CURLE_COULDNT_CONNECT:
+      case CURLE_FTP_CANT_GET_HOST:
+      case CURLE_WRITE_ERROR:
+      case CURLE_ABORTED_BY_CALLBACK:
+      case CURLE_SSL_PEER_CERTIFICATE:
+      default:
+        err = curl_easy_strerror(ok);
+        if (err.empty())
+          err = "Unrecognized error";
+        break;
+      }
+      
+      if( err_file_not_found)
+      {
+        // file does not exists
+        return false;
+      }
+      else
+      {
+        // there was an error
+        ZYPP_THROW(MediaCurlException(url, string(), _curlError));
+      }
+    }
+    catch (const MediaException & excpt_r)
+    {
+      ZYPP_RETHROW(excpt_r);
+    }
+  } 
+  
+  // exists
   return ( ok == CURLE_OK );
   //if ( curl_easy_setopt( _curl, CURLOPT_PROGRESSDATA, NULL ) != 0 ) {
   //  WAR << "Can't unset CURLOPT_PROGRESSDATA: " << _curlError << endl;;
@@ -966,7 +1051,7 @@ void MediaCurl::doGetFileCopy( const Pathname & filename , const Pathname & targ
     if ( ret != 0 ) {
       ERR << "curl error: " << ret << ": " << _curlError
           << ", temp file size " << PathInfo(destNew).size()
-	  << " byte." << endl;
+          << " byte." << endl;
 
       ::fclose( file );
       filesystem::unlink( destNew );
@@ -978,43 +1063,43 @@ void MediaCurl::doGetFileCopy( const Pathname & filename , const Pathname & targ
         case CURLE_UNSUPPORTED_PROTOCOL:
         case CURLE_URL_MALFORMAT:
         case CURLE_URL_MALFORMAT_USER:
-	  err = " Bad URL";
-	case CURLE_HTTP_RETURNED_ERROR:
+          err = " Bad URL";
+        case CURLE_HTTP_RETURNED_ERROR:
           {
             long httpReturnCode = 0;
             CURLcode infoRet = curl_easy_getinfo( _curl,
-	                                          CURLINFO_RESPONSE_CODE,
+                                                  CURLINFO_RESPONSE_CODE,
                                                   &httpReturnCode );
             if ( infoRet == CURLE_OK ) {
               string msg = "HTTP response: " +
                            str::numstring( httpReturnCode );
               if ( httpReturnCode == 401 )
-	      {
+              {
                 err = " Login failed";
-	      }
+              }
               else
-	      if ( httpReturnCode == 404)
-	      {
-         	ZYPP_THROW(MediaFileNotFoundException(_url, filename));
-	      }
+              if ( httpReturnCode == 404)
+              {
+                 ZYPP_THROW(MediaFileNotFoundException(_url, filename));
+              }
 
               msg += err;
               DBG << msg << " (URL: " << url.asString() << ")" << std::endl;
-	      ZYPP_THROW(MediaCurlException(url, msg, _curlError));
+              ZYPP_THROW(MediaCurlException(url, msg, _curlError));
             }
-	    else
-	    {
-	      string msg = "Unable to retrieve HTTP response:";
-	      msg += err;
+            else
+            {
+              string msg = "Unable to retrieve HTTP response:";
+              msg += err;
               DBG << msg << " (URL: " << url.asString() << ")" << std::endl;
-	      ZYPP_THROW(MediaCurlException(url, msg, _curlError));
-	    }
+              ZYPP_THROW(MediaCurlException(url, msg, _curlError));
+            }
           }
           break;
         case CURLE_FTP_COULDNT_RETR_FILE:
         case CURLE_FTP_ACCESS_DENIED:
           err = "File not found";
-	  err_file_not_found = true;
+          err_file_not_found = true;
           break;
         case CURLE_BAD_PASSWORD_ENTERED:
         case CURLE_FTP_USER_PASSWORD_INCORRECT:
@@ -1033,12 +1118,12 @@ void MediaCurl::doGetFileCopy( const Pathname & filename , const Pathname & targ
           if( progressData.reached)
           {
             err  = "Timeout reached";
-	  }
-	  else
-	  {
+          }
+          else
+          {
             err = "User abort";
           }
-	  break;
+          break;
         case CURLE_SSL_PEER_CERTIFICATE:
         default:
           err = "Unrecognized error";
@@ -1055,7 +1140,7 @@ void MediaCurl::doGetFileCopy( const Pathname & filename , const Pathname & targ
       }
       catch (const MediaException & excpt_r)
       {
-	ZYPP_RETHROW(excpt_r);
+        ZYPP_RETHROW(excpt_r);
       }
     }
 #if DETECT_DIR_INDEX
@@ -1078,21 +1163,21 @@ void MediaCurl::doGetFileCopy( const Pathname & filename , const Pathname & targ
                                          &ptr);
       if ( ret == CURLE_OK && ptr != NULL)
       {
-	try
-	{
-	  Url         eurl( ptr);
-	  std::string path( eurl.getPathName());
-	  if( !path.empty() && path != "/" && *path.rbegin() == '/')
-	  {
-	    DBG << "Effective url ("
-	        << eurl
-	        << ") seems to provide the index of a directory"
-		<< endl;
-	    not_a_file = true;
-	  }
-	}
-	catch( ... )
-	{}
+        try
+        {
+          Url         eurl( ptr);
+          std::string path( eurl.getPathName());
+          if( !path.empty() && path != "/" && *path.rbegin() == '/')
+          {
+            DBG << "Effective url ("
+                << eurl
+                << ") seems to provide the index of a directory"
+                << endl;
+            not_a_file = true;
+          }
+        }
+        catch( ... )
+        {}
       }
 
       if( not_a_file)
@@ -1125,10 +1210,10 @@ void MediaCurl::doGetFileCopy( const Pathname & filename , const Pathname & targ
 ///////////////////////////////////////////////////////////////////
 //
 //
-//	METHOD NAME : MediaCurl::getDir
-//	METHOD TYPE : PMError
+//        METHOD NAME : MediaCurl::getDir
+//        METHOD TYPE : PMError
 //
-//	DESCRIPTION : Asserted that media is attached
+//        DESCRIPTION : Asserted that media is attached
 //
 void MediaCurl::getDir( const Pathname & dirname, bool recurse_r ) const
 {
@@ -1142,21 +1227,21 @@ void MediaCurl::getDir( const Pathname & dirname, bool recurse_r ) const
       switch ( it->type ) {
       case filesystem::FT_NOT_AVAIL: // old directory.yast contains no typeinfo at all
       case filesystem::FT_FILE:
-	getFile( filename );
-	break;
+        getFile( filename );
+        break;
       case filesystem::FT_DIR: // newer directory.yast contain at least directory info
-	if ( recurse_r ) {
-	  getDir( filename, recurse_r );
-	} else {
-	  res = assert_dir( localPath( filename ) );
-	  if ( res ) {
-	    WAR << "Ignore error (" << res <<  ") on creating local directory '" << localPath( filename ) << "'" << endl;
-	  }
-	}
-	break;
+        if ( recurse_r ) {
+          getDir( filename, recurse_r );
+        } else {
+          res = assert_dir( localPath( filename ) );
+          if ( res ) {
+            WAR << "Ignore error (" << res <<  ") on creating local directory '" << localPath( filename ) << "'" << endl;
+          }
+        }
+        break;
       default:
-	// don't provide devices, sockets, etc.
-	break;
+        // don't provide devices, sockets, etc.
+        break;
       }
   }
 }
@@ -1164,13 +1249,13 @@ void MediaCurl::getDir( const Pathname & dirname, bool recurse_r ) const
 ///////////////////////////////////////////////////////////////////
 //
 //
-//	METHOD NAME : MediaCurl::getDirInfo
-//	METHOD TYPE : PMError
+//        METHOD NAME : MediaCurl::getDirInfo
+//        METHOD TYPE : PMError
 //
-//	DESCRIPTION : Asserted that media is attached and retlist is empty.
+//        DESCRIPTION : Asserted that media is attached and retlist is empty.
 //
 void MediaCurl::getDirInfo( std::list<std::string> & retlist,
-			       const Pathname & dirname, bool dots ) const
+                               const Pathname & dirname, bool dots ) const
 {
   getDirectoryYast( retlist, dirname, dots );
 }
@@ -1178,10 +1263,10 @@ void MediaCurl::getDirInfo( std::list<std::string> & retlist,
 ///////////////////////////////////////////////////////////////////
 //
 //
-//	METHOD NAME : MediaCurl::getDirInfo
-//	METHOD TYPE : PMError
+//        METHOD NAME : MediaCurl::getDirInfo
+//        METHOD TYPE : PMError
 //
-//	DESCRIPTION : Asserted that media is attached and retlist is empty.
+//        DESCRIPTION : Asserted that media is attached and retlist is empty.
 //
 void MediaCurl::getDirInfo( filesystem::DirContent & retlist,
                             const Pathname & dirname, bool dots ) const
@@ -1192,10 +1277,10 @@ void MediaCurl::getDirInfo( filesystem::DirContent & retlist,
 ///////////////////////////////////////////////////////////////////
 //
 //
-//	METHOD NAME : MediaCurl::progressCallback
-//	METHOD TYPE : int
+//        METHOD NAME : MediaCurl::progressCallback
+//        METHOD TYPE : int
 //
-//	DESCRIPTION : Progress callback triggered from MediaCurl::getFile
+//        DESCRIPTION : Progress callback triggered from MediaCurl::getFile
 //
 int MediaCurl::progressCallback( void *clientp, double dltotal, double dlnow,
                                  double ultotal, double ulnow )
@@ -1208,7 +1293,7 @@ int MediaCurl::progressCallback( void *clientp, double dltotal, double dlnow,
     {
       if (! (*(pdata->report))->progress(int( dlnow * 100 / dltotal ), pdata->url))
       {
-	return 1; // abort transfer
+        return 1; // abort transfer
       }
     }
 
@@ -1218,33 +1303,33 @@ int MediaCurl::progressCallback( void *clientp, double dltotal, double dlnow,
       time_t now = time(NULL);
       if( now > 0)
       {
-	bool progress = false;
+        bool progress = false;
 
-	// reset time of last change in case initial time()
-	// failed or the time was adjusted (goes backward)
-	if( pdata->ltime <= 0 || pdata->ltime > now)
-	  pdata->ltime = now;
+        // reset time of last change in case initial time()
+        // failed or the time was adjusted (goes backward)
+        if( pdata->ltime <= 0 || pdata->ltime > now)
+          pdata->ltime = now;
 
-	// update download data if changed, mark progress
-	if( dlnow != pdata->dload)
-	{
-	  progress     = true;
-	  pdata->dload = dlnow;
-	  pdata->ltime = now;
-	}
-	// update upload data if changed, mark progress
-	if( ulnow != pdata->uload)
-	{
-	  progress     = true;
-	  pdata->uload = ulnow;
-	  pdata->ltime = now;
-	}
+        // update download data if changed, mark progress
+        if( dlnow != pdata->dload)
+        {
+          progress     = true;
+          pdata->dload = dlnow;
+          pdata->ltime = now;
+        }
+        // update upload data if changed, mark progress
+        if( ulnow != pdata->uload)
+        {
+          progress     = true;
+          pdata->uload = ulnow;
+          pdata->ltime = now;
+        }
 
-	if( !progress && (now >= (pdata->ltime + pdata->timeout)))
-	{
-	  pdata->reached = true;
-	  return 1; // aborts transfer
-	}
+        if( !progress && (now >= (pdata->ltime + pdata->timeout)))
+        {
+          pdata->reached = true;
+          return 1; // aborts transfer
+        }
       }
     }
   }

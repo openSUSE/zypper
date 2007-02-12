@@ -1,0 +1,6 @@
+>!> Solution #1:
+>!> install cvs-1.12.12-19.4.x86_64[4]
+>!> install libapparmor-2.0-16.4.x86_64[4]
+>!> |unflag lprng-3.8.28-21.4.x86_64[4]
+>!> |unflag sendmail-8.13.6-9.11.x86_64[4]
+>!> installs=2, upgrades=0, uninstalls=0

@@ -271,16 +271,10 @@ AC_OUTPUT(	 po/Makefile.in\
 	zypp/solver/Makefile		\
 	zypp/solver/detail/Makefile	\
   zypp/data/Makefile \
-  zypp2/Makefile \
-	zypp2/cache/Makefile \
-  zypp2/cache/sqlite3x/Makefile
-  zypp2/source/Makefile \
-  zypp2/source/yum/Makefile \
   zypp/source/Makefile		\
 	zypp/source/plaindir/Makefile	\
 	zypp/source/susetags/Makefile	\
 	zypp/source/yum/Makefile	\
-	zypp2/source/sqlite-source/Makefile \
   zypp/media/Makefile		\
 	zypp/media/proxyinfo/Makefile	\
 	zypp/ui/Makefile		\

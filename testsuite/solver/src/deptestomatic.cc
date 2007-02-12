@@ -205,16 +205,16 @@ typedef list<string> StringList;
 void addDependencies( const string & kind, const string & name,
                       const DepKind & depKind, const ResPool & pool )
 {
-    CapSet capset;    
+    CapSet capset;
     vector<string> names;
     str::split( name, back_inserter(names), "," );
     for (unsigned i=0; i < names.size(); i++) {
-        capset.insert (CapFactory().parse (string2kind (kind), names[i]));        
+        capset.insert (CapFactory().parse (string2kind (kind), names[i]));
     }
-    
+
     ResPool::AdditionalCapSet aCapSet;
     aCapSet[ResStatus::USER] = capset;
-    
+
     switch (depKind) {
         case PROVIDE:
              pool.setAdditionalProvide( aCapSet );
@@ -776,7 +776,7 @@ load_source (const string & alias, const string & filename, const string & type,
 	    }
 	    else
 		pathname = "";
-		
+
 	    Pathname cache_dir( "" );
 	    src = Source_Ref( SourceFactory().createFrom( url, pathname, alias, cache_dir ) );
 	}
@@ -869,7 +869,7 @@ parse_xml_setup (XmlNode_Ptr node)
 	}
 	if (node->equals ("forceResolve")) {
 	    forceResolve = true;
-            
+
         } else if (node->equals ("maxSolverPasses")) {
             maxSolverPasses = atoi ((node->getProp ("value")).c_str());
 
@@ -1378,7 +1378,9 @@ parse_xml_trial (XmlNode_Ptr node, const ResPool & pool)
 	    string delete_unmaintained = node->getProp ("delete_unmaintained");
 	    if (delete_unmaintained == "false") {
 		stats.delete_unmaintained = false;
-	    }
+	    } else {
+		stats.delete_unmaintained = true;
+            }
 
 	    resolver->doUpgrade(stats);
 
@@ -1396,7 +1398,7 @@ parse_xml_trial (XmlNode_Ptr node, const ResPool & pool)
 	    else {
 		RESULT << "Established context" << endl;
                 StringList items;
-                
+
 		resolver->context()->foreachMarked (print_marked_cb, &items);
                 print_items (items);
 //		print_pool( MARKER, false );
@@ -1415,8 +1417,8 @@ parse_xml_trial (XmlNode_Ptr node, const ResPool & pool)
 	    }
 	    else {
 		RESULT << "Freshened context" << endl;
-                StringList items;                    
-                
+                StringList items;
+
 		resolver->context()->foreachMarked (print_marked_cb, &items);
                 print_items (items);
 	    }
@@ -1426,10 +1428,10 @@ parse_xml_trial (XmlNode_Ptr node, const ResPool & pool)
 	    RESULT << "Calculating installation order ..." << endl;
 
 	    instorder = true;
-            
+
         } else if (node->equals ("maxSolverPasses")) {
             maxSolverPasses = atoi ((node->getProp ("value")).c_str());
-            
+
 	} else if (node->equals ("mediaorder")) {
 
 	    RESULT << "Calculating media installation order ..." << endl;
@@ -1650,7 +1652,7 @@ parse_xml_trial (XmlNode_Ptr node, const ResPool & pool)
 	    }
 
 	    if (name.empty()) {		// assume kind
-                RESULT << "Calling transactResKind( " << kind_name << " )" << endl;;                
+                RESULT << "Calling transactResKind( " << kind_name << " )" << endl;;
  		resolver->transactResKind( string2kind( kind_name ) );
 	    }
 	    else {
@@ -1674,7 +1676,7 @@ parse_xml_trial (XmlNode_Ptr node, const ResPool & pool)
 		}
 
 	     }
-            
+
 	} else if (node->equals ("keep")) {
 	    string kind_name = node->getProp ("kind");
 	    string name = node->getProp ("name");
@@ -1715,7 +1717,7 @@ parse_xml_trial (XmlNode_Ptr node, const ResPool & pool)
                 path = ".";
             Testcase testcase (path);
             testcase.createTestcase (*resolver);
-            
+
 	} else {
 	    cerr << "Unknown tag '" << node->name() << "' in trial" << endl;
 	}
@@ -1900,6 +1902,8 @@ parse_xml_transact (XmlNode_Ptr node, const ResPool & pool)
 	    string delete_unmaintained = node->getProp ("delete_unmaintained");
 	    if (delete_unmaintained == "false") {
 		stats.delete_unmaintained = false;
+	    } else {
+		stats.delete_unmaintained = true;
 	    }
 
 	    resolver->doUpgrade(stats);
@@ -1918,7 +1922,7 @@ parse_xml_transact (XmlNode_Ptr node, const ResPool & pool)
 	    else {
 		RESULT << "Established context" << endl;
                 StringList items;
-                
+
 		resolver->context()->foreachMarked (print_marked_cb, &items);
                 print_items (items);
 //		print_pool( MARKER, false );
@@ -1937,8 +1941,8 @@ parse_xml_transact (XmlNode_Ptr node, const ResPool & pool)
 	    }
 	    else {
 		RESULT << "Freshened context" << endl;
-                StringList items;                    
-                
+                StringList items;
+
 		resolver->context()->foreachMarked (print_marked_cb, &items);
                 print_items (items);
 	    }

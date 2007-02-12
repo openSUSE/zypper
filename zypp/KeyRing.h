@@ -32,9 +32,31 @@ namespace zypp
 
   struct KeyRingReport : public callback::ReportBase
   {
+    
     virtual bool askUserToAcceptUnsignedFile( const std::string &file );
+    
+    /**
+     * we DONT know the key, only its id, but we have never seen it, the difference
+     * with trust key is that if you dont have it, you can't import it later.
+     * The answer means continue yes or no?
+     */
     virtual bool askUserToAcceptUnknownKey( const std::string &file, const std::string &id );
+    
+    /**
+     * This basically means, we know the key, but it is not trusted, Continue
+     * yes ir no?. Nothing else is performed (import, etc)
+     */
     virtual bool askUserToTrustKey( const PublicKey &key);
+    
+    
+    /**
+     * Import the key.
+     * This means saving the key in the trusted database so next run it will appear as trusted.
+     * Nothing to do with trustKey, as you CAN trust a key without importing it, 
+     * basically you will be asked every time again. 
+     * There are programs who prefer to manage the trust keyring on their own and use trustKey 
+     * without importing it into rpm.
+     */
     virtual bool askUserToImportKey( const PublicKey &key);
     virtual bool askUserToAcceptVerificationFailed( const std::string &file, const PublicKey &key );
   };

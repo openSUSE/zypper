@@ -53,9 +53,11 @@ namespace zypp
     struct FilterExtraDependency
     {
       Dependencies & deps;
+	CapSet & languages;
 
-      FilterExtraDependency( Dependencies & d )
-	: deps( d )
+      FilterExtraDependency( Dependencies & d , CapSet  & l)
+	  : deps( d ),
+	    languages( l )
       { }
 
       bool operator()( const Capability & cap_r ) const
@@ -104,6 +106,7 @@ namespace zypp
 	    std::string loc( locales, pos, next-pos );
 	    getZYpp()->availableLocale( Locale( loc ) );
 	    deps[Dep::FRESHENS].insert( f.parse( ResTraits<Language>::kind, loc ) );
+	    languages.insert( f.parse( ResTraits<Language>::kind, loc ) );
 	    pos = next + 1;
 	}
 	return true;
@@ -113,20 +116,31 @@ namespace zypp
     void filterExtraProvides( const Dependencies & from, Dependencies & to )
     {
       CapSet provides;
-      FilterExtraDependency flp( to );
+      CapSet languages;
+      
+      FilterExtraDependency flp( to, languages );
 
       std::remove_copy_if( from[Dep::PROVIDES].begin(), from[Dep::PROVIDES].end(),
                            std::inserter( provides, provides.end() ),
                            flp );
       to[Dep::PROVIDES] = provides;
+
+      // There are language dependencies without a triggering package (e.G. locale(de) ).
+      // So if there is no supplement, the language will be inserted in the supplements too.
+      // (Not only in the freshens). Bug 178721 and 240617
+      if (languages.size() > 0
+	  && to[Dep::SUPPLEMENTS].size() == 0) {
+	  to[Dep::SUPPLEMENTS] = languages;
+      }
     }
 
     void filterExtraSupplements( const Dependencies & from, Dependencies & to )
     {
       CapSet supplements;
-      to[Dep::SUPPLEMENTS].clear();
+      CapSet dummy;      
+      to[Dep::SUPPLEMENTS].clear(); 
 
-      FilterExtraDependency flp( to );
+      FilterExtraDependency flp( to, dummy );
 
       std::remove_copy_if( from[Dep::SUPPLEMENTS].begin(), from[Dep::SUPPLEMENTS].end(),
                            std::inserter( supplements, supplements.end() ),

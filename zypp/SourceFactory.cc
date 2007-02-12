@@ -133,8 +133,6 @@ namespace zypp
   template<typename _SourceImpl>
   static bool probeSource(const Url &url_r, const Pathname &path_r, media::MediaId id, const std::string &type, callback::SendReport<ProbeSourceReport> &report )
   {
-    try
-    {
       boost::function<bool()> probe = typename _SourceImpl::Prober( id, path_r );
 
       if ( probe() )
@@ -147,11 +145,6 @@ namespace zypp
         report->failedProbe(url_r, type);
         return false;
       }
-    }
-    catch (const Exception & excpt_r)
-    {
-      report->finish(url_r, ProbeSourceReport::UNKNOWN, excpt_r.asUserString());
-    }
     return false;
   }
 
@@ -231,31 +224,38 @@ namespace zypp
     bool probeYaST = false;
 
     report->start(url_r);
-    if ( (probeYUM = probeSource<yum::YUMSourceImpl>( url_r, path_r, id, "YUM", report )) )
+    try
     {
-      // nothing
+      if ( (probeYUM = probeSource<yum::YUMSourceImpl>( url_r, path_r, id, "YUM", report )) )
+      {
+        // nothing
+      }
+      else if ( (probeYaST = probeSource<susetags::SuseTagsImpl>( url_r, path_r, id, "YaST", report )) )
+      {
+        // nohing
+      }
+      report->finish(url_r, ProbeSourceReport::NO_ERROR, "");
+  
+      if ( probeYUM )
+      {
+        Source_Ref source(createSourceImplWorkflow<source::yum::YUMSourceImpl>( id, context ));
+        return source;
+      }
+      else if ( probeYaST )
+      {
+        Source_Ref source(createSourceImplWorkflow<susetags::SuseTagsImpl>( id, context ));
+        return source;
+      }
+      else
+      {
+        ZYPP_THROW( SourceUnknownTypeException("Unknown source type for " + url_r.asString() ) );
+      }
     }
-    else if ( (probeYaST = probeSource<susetags::SuseTagsImpl>( url_r, path_r, id, "YaST", report )) )
+    catch ( const Exception &e )
     {
-      // nohing
+      report->finish(url_r, ProbeSourceReport::IO, e.asUserString());
+      ZYPP_RETHROW(e);
     }
-    report->finish(url_r, ProbeSourceReport::NO_ERROR, "");
-
-    if ( probeYUM )
-    {
-      Source_Ref source(createSourceImplWorkflow<source::yum::YUMSourceImpl>( id, context ));
-      return source;
-    }
-    else if ( probeYaST )
-    {
-      Source_Ref source(createSourceImplWorkflow<susetags::SuseTagsImpl>( id, context ));
-      return source;
-    }
-    else
-    {
-      ZYPP_THROW( SourceUnknownTypeException("Unknown source type for " + url_r.asString() ) );
-    }
-
     //////////////////////////////////////////////////////////////////
     // TRY PLAINDIR
     //////////////////////////////////////////////////////////////////
