@@ -302,6 +302,97 @@ zypp1.db uses name normalization for dependencies. zypp2.db does not.
 If x = thousand of packages, and y = database size.  A normalized
 schema has a slomp of 1.1 and a unnormalized schema a slomp of 1.25
 
+File list data
+==============
+
+For factory. Complete file list is
+
+2.840.491 files (unique names: 890.373)
+119.070 directories
+
+We ommited using a schema with one table and one column.
+
+Test 1, Normalized Directories
+
+|-----------------| |----------------------------------|
+| dirs            | | files                            |
+|-----------------| |----------------------------------|
+| id  |   name    | | dir_id | package_id | name       |
+|-----------------| |----------------------------------|
+
+For yum xml format, this is 192M in filelists.xml which can be 
+compressed to 17M filelists.xml.gz
+
+Using a simple schema normalizing the directories:
+
+186M filelist.db
+
+Obtaining the file list of a package:
+
+select d.name,f.name from files f,dirs d where f.dir_id=d.id and f.package_id=7557
+takes 0.135s and  was not able to improve it more using indexes. This assumes you have the
+key of the package.
+
+Reverse lookup, find the id of a package that owns file and dir.
+
+'select f.package_id from files f,dirs d where f.dir_id=d.id and f.name="libzypp.so" and d.name="/usr/lib";'
+takes 1.582s
+
+Adding a index on file name, grows the database to 259M, but resolves the query in 0.007s.
+
+Test 1, Normalized Directories and file names
+
+|-----------------| |-----------------|
+| dir_names       | | file_names      |
+|-----------------| |-----------------|
+| id  |   name    | | id  |   name    |
+|-----------------| |-----------------|
+
+|----------------------------------|
+| files                            |
+|----------------------------------|
+| dir_id | file_id | package_id    |
+|----------------------------------|
+
+This approach generates much slower insertions, which can be reduced with some
+application level cache, for example for the directories, which probably get
+inserted lot of files for the same directory. You can avoid N selects, keeping
+the dir_id and name in memory, where N is the average number of files per directory.
+
+Application level cache for normalized insertions
+=================================================
+
+|-----------------| |-----------------|
+| table1          | | table2          |
+|-----------------| |-----------------|
+| id  |   name    | | id  |   name    |
+|-----------------| |-----------------|
+
+|----------------------------------|
+| table1_table1                    |
+|----------------------------------|
+| t1_id  | t2_id   | other         |
+|----------------------------------|
+
+If you are inserting a list of:
+
+table1   table2  other
+-----------------------
+dog      lalal   423432
+dog      lelele  423432
+cat      foo     423423
+cat      bleh    423423
+cat      ruby    423423
+duck     nah     432432 
+
+If you insert in table1_table1 you will need to
+check if an id already exists for table1 and table2,
+using text comparision, which is slow.
+
+As we insert more than 1 table2 object for the same
+table1 object, the id of table1 can be cached, and
+the followings won't need another select statement.
+
 Representing in memory data
 ===========================
 
