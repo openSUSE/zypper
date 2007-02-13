@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Tue Feb 13 14:10:58 CET 2007 - mvidner@suse.cz
+
+- Shrunk zypp-checkpatches (#224886).
+
+-------------------------------------------------------------------
 Tue Feb 13 12:58:29 CET 2007 - mvidner@suse.cz
 
 - Do not allow to commit with unresolved dependency problems;

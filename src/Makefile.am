@@ -64,7 +64,7 @@ zypper_SOURCES = 	zypper.cc zmart-sources.cc zmart-misc.cc \
 zypper_LDADD = $(ZYPP_LIBS) -lboost_regex -lreadline
 
 if BUILD_CHECKPATCHES
-zypp_checkpatches_SOURCES = 	zypp-checkpatches.cc zmart-sources.cc \
+zypp_checkpatches_SOURCES = 	zypp-checkpatches.cc \
 	zypper-tabulator.h \
 	zypper-tabulator.cc \
 	zmart-updates.cc \
