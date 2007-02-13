@@ -30,8 +30,6 @@
 #include <dirent.h>
 #include <unistd.h>
 
-#include "config.h"
-
 #define  DETECT_DIR_INDEX       0
 #define  CONNECT_TIMEOUT        60
 #define  TRANSFER_TIMEOUT       60 * 3
