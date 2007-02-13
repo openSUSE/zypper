@@ -1010,7 +1010,11 @@ void command_shell ()
 
     string command = sh_argv[0]? sh_argv[0]: "";
 
-    if (command == "exit" || command == "quit" || command == "\004")
+    if (command == "\004") {
+      loop = false;
+      cout << endl;
+    }
+    else if (command == "exit" || command == "quit")
       loop = false;
     else
       safe_one_command (command, sh_argc, sh_argv);
