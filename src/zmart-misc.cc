@@ -217,8 +217,75 @@ void mark_for_uninstall( const ResObject::Kind &kind,
   }
 }
 
-// return true if there are no problems
-bool show_problems () {
+// debugging
+static
+ostream& operator << (ostream & stm, ios::iostate state)
+{
+  return stm << (state & ifstream::eofbit ? "Eof ": "")
+	     << (state & ifstream::badbit ? "Bad ": "")
+	     << (state & ifstream::failbit ? "Fail ": "")
+	     << (state == 0 ? "Good ": "");
+}
+
+//! @return true to retry solving now, false to cancel, indeterminate to continue
+tribool show_problem (bool non_interactive, const ResolverProblem & prob, ProblemSolutionList & todo)
+{
+  ostream& stm = cerr;
+  string det;
+  stm << _("Problem: ") << prob.description () << endl;
+  det = prob.details ();
+  if (!det.empty ())
+    stm << " " << det << endl;
+
+  int n;
+  ProblemSolutionList solutions = prob.solutions ();
+  ProblemSolutionList::iterator
+    bb = solutions.begin (),
+    ee = solutions.end (),
+    ii;
+  for (n = 1, ii = bb; ii != ee; ++n, ++ii) {
+    stm << format (_(" Solution %s: ")) % n << (*ii)->description () << endl;
+    det = (*ii)->details ();
+    if (!det.empty ())
+      stm << "  " << det << endl;
+  }
+
+  if (non_interactive)
+    return false;
+
+  int reply;
+  do {
+    // input prompt
+    cerr << _("number, (r)etry or (c)ancel> ") << flush;
+    string reply_s = str::getline (cin, zypp::str::TRIM);
+
+    if (! cin.good()) {
+      cerr_v << "cin: " << cin.rdstate() << endl;
+      return false;
+    }
+    // translators: corresponds to (r)etry
+    if (reply_s == _("r"))
+      return true;
+    // translators: corresponds to (c)ancel
+    else if (reply_s == _("c"))
+      return false;
+
+    str::strtonum (reply_s, reply);
+  } while (reply <= 0 || reply >= n);
+
+  cerr << format (_("Applying solution %s")) % reply << endl;
+  ProblemSolutionList::iterator reply_i = solutions.begin ();
+  advance (reply_i, reply - 1);
+  todo.push_back (*reply_i);
+
+  tribool go_on = indeterminate; // continue with next problem
+  return go_on;
+}
+
+// return true to retry solving, false to cancel transaction
+bool show_problems (bool non_interactive)
+{
+  bool retry = true;
   ostream& stm = cerr;
   Resolver_Ptr resolver = zypp::getZYpp()->resolver();
   ResolverProblemList rproblems = resolver->problems ();
@@ -226,38 +293,26 @@ bool show_problems () {
     b = rproblems.begin (),
     e = rproblems.end (),
     i;
+  ProblemSolutionList todo;
   bool no_problem = b == e;
   if (!no_problem) {
-    cerr << _("Problems:") << endl;
+    stm << format (_("%s Problems:")) % rproblems.size() << endl;
   }
   for (i = b; i != e; ++i) {
-    stm << _("PROB ") << (*i)->description () << endl;
-    stm << ":    " << (*i)->details () << endl;
-
-    ProblemSolutionList solutions = (*i)->solutions ();
-    ProblemSolutionList::iterator
-      bb = solutions.begin (),
-      ee = solutions.end (),
-      ii;
-    for (ii = bb; ii != ee; ++ii) {
-      stm << _(" SOL  ") << (*ii)->description () << endl;
-      stm << " :    " << (*ii)->details () << endl;
+    stm << _("Problem: ") << (*i)->description () << endl;
+  }
+  for (i = b; i != e; ++i) {
+    stm << endl;
+    tribool stopnow = show_problem (non_interactive, *(*i), todo);
+    if (! indeterminate (stopnow)) {
+      retry = stopnow == true;
+      break;
     }
   }
-  return no_problem;
-}
 
-//! @return true if any solution was applied
-bool solve_problems (bool non_interactive)
-{
-    // try some solutions:
-    // policies selected by options
-    // ...
-    if (!non_interactive) {
-      // try asking the user
-    }
-    cerr << _("Sorry, problem resolution not implemented yet.") << endl;
-    return false;		// nothing yet
+  if (retry)
+    resolver->applySolutions (todo);
+  return retry;
 }
 
 /**
@@ -383,11 +438,11 @@ void establish ()
   dump_pool ();
 }
 
-void resolve()
+bool resolve()
 {
   establish ();
   cerr_v << _("Resolving dependencies...") << endl;
-  God->resolver()->resolvePool();
+  return God->resolver()->resolvePool();
 }
 
 //! are there applicable patches?
@@ -712,15 +767,15 @@ void mark_updates( const ResObject::Kind &kind, bool skip_interactive )
  */
 int solve_and_commit (bool non_interactive) {
   while (true) {
-    resolve();
-
-    bool no_problem = show_problems ();
-    if (no_problem)		// don't worry, be happy
+    bool success = resolve();
+    if (success)
       break;
 
-    bool any_applied = solve_problems (non_interactive);
-    if (! any_applied)
+    success = show_problems (non_interactive);
+    if (! success) {
+      // TODO cancel transaction?
       return ZYPPER_EXIT_ERR_ZYPP; // #242736
+    }
   }
 
 

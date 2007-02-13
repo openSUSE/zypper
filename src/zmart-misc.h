@@ -23,7 +23,6 @@ void mark_for_install( const zypp::ResObject::Kind &kind,
 		       const std::string &name );
 void mark_for_uninstall( const zypp::ResObject::Kind &kind,
 			 const std::string &name );
-bool show_problems();
 int show_summary();
 std::string calculate_token();
 //! load all resolvables that the user wants
@@ -31,7 +30,7 @@ void cond_load_resolvables ();
 void load_target();
 void load_sources();
 void establish ();
-void resolve();
+bool resolve();
 void dump_pool ();
 void show_patches();
 void patch_check();
