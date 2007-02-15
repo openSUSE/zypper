@@ -1,4 +1,0 @@
->!> Installing bash from channel test
->!> Solution #1:
->!> install bash-2.0.2-1.noarch[test]
->!> installs=1, upgrades=0, uninstalls=0

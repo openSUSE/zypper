@@ -1,4 +1,0 @@
-load_lib "target_init.exp"
-proc target_exit {} {}
-proc target_version {} {}
-

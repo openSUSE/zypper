@@ -235,21 +235,6 @@ AC_OUTPUT(	 po/Makefile.in\
 	doc/Makefile			\
 	doc/autodoc/Makefile		\
 	doc/autodoc/Doxyfile		\
-	testsuite/Makefile		\
-  testsuite/src/Makefile \
-	testsuite/src/utils/Makefile	\
-	testsuite/zypp/Makefile		\
-  testsuite/cache/Makefile \
-	testsuite/solver/Makefile	\
-	testsuite/solver/src/Makefile	\
-	testsuite/src/helix/Makefile	\
-	testsuite/solver/single.out/Makefile	\
-	testsuite/source/Makefile	\
-	testsuite/parser/Makefile	\
-	testsuite/parser/tests/Makefile	\
-	testsuite/target/Makefile	\
-	testsuite/target/tests/Makefile	\
-	testsuite/media/Makefile	\
 	tools/Makefile	\
   tools/registration/Makefile \
 	tools/package-manager/Makefile \

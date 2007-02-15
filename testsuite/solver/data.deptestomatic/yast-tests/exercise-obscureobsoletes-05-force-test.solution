@@ -1,6 +1,0 @@
->!> Installing barold2 from channel test
->!> Solution #1:
->!> install barold2-4.0-1.noarch[test]
->!> remove  bar2-1.0-1.noarch
->!> remove  bar2-devel-1.1-1.noarch
->!> installs=1, upgrades=0, uninstalls=2

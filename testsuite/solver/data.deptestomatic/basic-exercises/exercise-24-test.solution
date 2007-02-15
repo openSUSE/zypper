@@ -1,5 +1,0 @@
->!> Installing A from channel test
->!> No problems so far
->!> Solution #1:
->!> upgrade A-1.0-1.noarch => A-2.0-1.noarch[test]
->!> installs=0, upgrades=1, uninstalls=0

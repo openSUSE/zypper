@@ -1,6 +1,0 @@
->!> Installing foo2old from channel test
->!> Solution #1:
->!> install foo2old-2.0-1.noarch[test]
->!> remove  foo-1.0-1.noarch
->!> remove  foo-devel-1.1-1.noarch
->!> installs=1, upgrades=0, uninstalls=2

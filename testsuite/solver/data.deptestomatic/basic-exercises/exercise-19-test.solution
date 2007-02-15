@@ -1,9 +1,0 @@
->!> Installing C from channel test
->!> Solution #1:
->!> install C-1.0-1.noarch[test]
->!> install D-1.0-1.noarch[test]
->!> installs=2, upgrades=0, uninstalls=0
->!> Installing D from channel test
->!> Solution #1:
->!> install D-1.0-1.noarch[test]
->!> installs=1, upgrades=0, uninstalls=0

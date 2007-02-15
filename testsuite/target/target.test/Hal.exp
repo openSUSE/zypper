@@ -1,4 +1,0 @@
-# Hal.exp
-# run tests for Hal
-
-  shouldPass "hal"

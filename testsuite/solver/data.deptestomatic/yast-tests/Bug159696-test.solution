@@ -1,8 +1,0 @@
->!> Uninstalling SuSE-Documentation
->!> No problems so far
->!> Solution #1:
->!> remove  man-pages-2.25-2.noarch
->!> remove  selection:SuSE-Documentation-10-46.noarch
->!> remove  susehelp_en-2006.03.03-5.noarch
->!> remove  suselinux-manual_en-10.1-10.noarch
->!> installs=0, upgrades=0, uninstalls=4

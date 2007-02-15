@@ -1,4 +1,0 @@
->!> Installing barold from channel test
->!> Solution #1:
->!> install barold-4.0-1.noarch[test]
->!> installs=1, upgrades=0, uninstalls=0

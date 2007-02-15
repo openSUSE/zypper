@@ -1,6 +1,0 @@
->!> setting HardwareInfo to: ./kernel-hardware
->!> Installing kernel-default from channel packages2
->!> No problems so far
->!> Solution #1:
->!> upgrade kernel-default-2.6.16_rc5_git14-2.i586 => kernel-default-2.6.16_rc5_git14-3.i586[packages2]
->!> installs=0, upgrades=1, uninstalls=0

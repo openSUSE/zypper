@@ -1,8 +1,0 @@
->!> Installing patch:patch-B1 from channel new_source
->!> 1 problems found:
->!> Problem:
->!> This would invalidate atom:A-1.0-1.i586.
->!> atom:A-1.0-1.i586 has unfulfilled requirements
->!>    Solution:
->!>       delete A
->!>       delete atom:A-1.0-1.i586

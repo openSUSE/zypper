@@ -1,6 +1,0 @@
->!> Installing libbaz2 from channel test
->!> Solution #1:
->!> install libbaz2-2.0-1.noarch[test]
->!> remove  libbaz-1.2-1.noarch
->!> upgrade somemore-1.0-1.noarch => somemore-2.0-1.noarch[test]
->!> installs=1, upgrades=1, uninstalls=1

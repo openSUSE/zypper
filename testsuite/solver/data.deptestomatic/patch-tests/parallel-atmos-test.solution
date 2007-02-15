@@ -1,6 +1,0 @@
->!> Installing patch:patch-B1 from channel new_source
->!> No problems so far
->!> Solution #1:
->!> install patch:patch-B1-1-0.noarch[new_source]
->!> upgrade A-1.0-1.i586 => A-2.0-1.i586[new_source]
->!> installs=1, upgrades=1, uninstalls=0

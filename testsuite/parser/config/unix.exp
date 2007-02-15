@@ -1,4 +1,0 @@
-load_lib "parser_init.exp"
-proc parser_exit {} {}
-proc parser_version {} {}
-

@@ -1,5 +1,0 @@
->!> Installing B from channel test
->!> Solution #1:
->!> install B-1.0-1[test]
->!> remove  A-1.0-1
->!> installs=1, upgrades=0, uninstalls=1

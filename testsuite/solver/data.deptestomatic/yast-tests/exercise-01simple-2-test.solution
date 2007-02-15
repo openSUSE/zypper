@@ -1,6 +1,0 @@
->!> Installing amd from channel test
->!> Solution #1:
->!> install amd-upl102-11.noarch[test]
->!> install libgdbm-1.17-1.noarch[test]
->!> upgrade libc6-2.0.5-1.noarch => libc6-2.0.7-1.noarch[test]
->!> installs=2, upgrades=1, uninstalls=0

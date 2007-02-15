@@ -20,7 +20,7 @@ Version:        @VERSION@
 Release:        0
 Source:         zypp-@VERSION@.tar.bz2
 Prefix:         /usr
-Provides:       yast2-packagemanager
+Provides:       yast2-packagemanager 
 Obsoletes:      yast2-packagemanager
 %if %suse_version > 1010
 BuildRequires:  sqlite-zmd sqlite-zmd-devel
@@ -104,7 +104,8 @@ make install DESTDIR=$RPM_BUILD_ROOT
 %{prefix}/lib/zypp/*
 %dir %{_libdir}/libzypp*so.*
 %dir %{prefix}/share/zypp
-%{prefix}/share/zypp/*
+%dir %{prefix}/share/zypp/schema
+%{prefix}/share/zypp/schema/*
 %{prefix}/share/pixmaps/package-manager-icon.png
 %{prefix}/share/applications/package-manager.desktop
 %{prefix}/bin/package-manager

@@ -1,6 +1,0 @@
->!> Installing libfoo2 from channel test
->!> Solution #1:
->!> install libfoo2-2.0-1.noarch[test]
->!> remove  libfoo-1.2-1.noarch
->!> remove  something-1.0-1.noarch
->!> installs=1, upgrades=0, uninstalls=2

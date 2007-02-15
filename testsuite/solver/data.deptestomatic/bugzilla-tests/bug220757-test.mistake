@@ -1,5 +1,0 @@
->!> Uninstalling oracle_server
->!> No problems so far
->!> Solution #1:
->!> remove  pattern:oracle_server-10-51.21.i586
->!> installs=0, upgrades=0, uninstalls=1

@@ -1,4 +1,0 @@
-# LibrpmDb.exp
-# run tests for librpm target
-
-  shouldPass "librpmDb"

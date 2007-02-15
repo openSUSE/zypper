@@ -1,6 +1,0 @@
->!> Installing AA from channel test
->!> Installing BB from channel test
->!> Solution #1:
->!> install AA-1.0-1.noarch[test]
->!> install BB-1.0-1.noarch[test]
->!> installs=2, upgrades=0, uninstalls=0

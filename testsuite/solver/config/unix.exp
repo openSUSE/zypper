@@ -1,4 +1,0 @@
-load_lib "solver_init.exp"
-proc solver_exit {} {}
-proc solver_version {} {}
-

@@ -1,5 +1,0 @@
->!> Installing required from channel test
->!> Solution #1:
->!> upgrade required-1.0-1.noarch => required-2.0-1.noarch[test]
->!> upgrade requirerer-1.0-1.noarch => requirerer-2.0-1.noarch[test]
->!> installs=0, upgrades=2, uninstalls=0

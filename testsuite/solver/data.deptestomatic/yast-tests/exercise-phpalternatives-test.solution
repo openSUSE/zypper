@@ -1,7 +1,0 @@
->!> Installing horde from channel test
->!> Installing mod_php4 from channel test
->!> Solution #1:
->!> install apache-mod_php4-4.3.4-43.4.noarch[test]
->!> install horde-1.0-1.noarch[test]
->!> upgrade mod_php4-4.2.2-82.noarch => mod_php4-4.3.4-43.4.noarch[test]
->!> installs=2, upgrades=1, uninstalls=0
