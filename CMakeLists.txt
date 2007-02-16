@@ -68,7 +68,7 @@ IF ( NOT HAL_FOUND)
   MESSAGE( FATAL_ERROR " Hal not found" )
 ELSE ( NOT HAL_FOUND)
   INCLUDE_DIRECTORIES(${HAL_INCLUDE_DIR})
-# hal/libhal-storage.h is broken grrr 
+# hal/libhal-storage.h is broken grrr
   INCLUDE_DIRECTORIES(${HAL_INCLUDE_DIR}/hal)
 ENDIF( NOT HAL_FOUND)
 
@@ -121,15 +121,14 @@ ENDMACRO(add_subdir_sources)
 # SUBDIRECTORIES                                                   #
 ####################################################################
 
-ADD_SUBDIRECTORY( zypp ) 
+ADD_SUBDIRECTORY( zypp )
 ADD_SUBDIRECTORY( zypp2 )
 # do not build devel by default
 ADD_SUBDIRECTORY( devel EXCLUDE_FROM_ALL )
 ADD_SUBDIRECTORY( tools EXCLUDE_FROM_ALL )
-#ADD_SUBDIRECTORY( examples ) 
-ADD_SUBDIRECTORY( testsuite EXCLUDE_FROM_ALL ) 
-#ADD_SUBDIRECTORY( po ) 
-#ADD_SUBDIRECTORY( doc ) 
+#ADD_SUBDIRECTORY( examples )
+#ADD_SUBDIRECTORY( po )
+#ADD_SUBDIRECTORY( doc )
 
 ####################################################################
 # INCLUDES                                                         #
