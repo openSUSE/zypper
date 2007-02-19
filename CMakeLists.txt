@@ -5,14 +5,17 @@ PROJECT(libzypp)
 ####################################################################
 
 # where to look first for cmake modules, before ${CMAKE_ROOT}/Modules/ is checked
-SET(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake/modules )
+SET( CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake/modules )
 
-INCLUDE(${CMAKE_SOURCE_DIR}/VERSION.cmake)
-MATH ( EXPR LIBZYPP_CURRENT "${LIBZYPP_MAJOR} * 100 + ${LIBZYPP_MINOR}" )
-MATH ( EXPR LIBZYPP_AGE "${LIBZYPP_MINOR} - ${LIBZYPP_COMPATMINOR}" )
-SET ( LIBZYPP_VERSION_INFO "-version-info ${LIBZYPP_CURRENT}:${LIBZYPP_PATCH}:${LIBZYPP_AGE}" )
+INCLUDE( ${CMAKE_SOURCE_DIR}/VERSION.cmake )
+MATH( EXPR LIBZYPP_CURRENT "${LIBZYPP_MAJOR} * 100 + ${LIBZYPP_MINOR}" )
+MATH( EXPR LIBZYPP_AGE     "${LIBZYPP_MINOR} - ${LIBZYPP_COMPATMINOR}" )
 
-SET(VERSION "${LIBZYPP_MAJOR}.${LIBZYPP_MINOR}.${LIBZYPP_PATCH}")
+SET( PACKAGE "libzypp" )
+SET( VERSION "${LIBZYPP_MAJOR}.${LIBZYPP_MINOR}.${LIBZYPP_PATCH}" )
+SET( LIBZYPP_VERSION_INFO   "-version-info ${LIBZYPP_CURRENT}:${LIBZYPP_PATCH}:${LIBZYPP_AGE}" )
+
+####################################################################
 
 ADD_DEFINITIONS( -DVERSION=\\\"${VERSION}\\\" )
 
@@ -95,6 +98,13 @@ ENDIF(GLIB_FOUND)
 #  MESSAGE( ERROR "dbus-glib not found" )
 #ENDIF(DBUS_GLIB_FOUND)
 
+FIND_PROGRAM( DOXYGEN doxygen )
+IF ( NOT DOXYGEN )
+  MESSAGE( FATAL_ERROR "doxygen not found: install doxygen to build the documentation." )
+ELSE ( NOT DOXYGEN )
+  MESSAGE( STATUS "doxygen found: ${DOXYGEN}" )
+ENDIF ( NOT DOXYGEN )
+
 MESSAGE(STATUS "soname: ${LIBZYPP_CURRENT}.${LIBZYPP_PATCH}.${LIBZYPP_AGE}")
 MESSAGE(STATUS "version: ${VERSION}")
 #yumschemadir=${zyppdir}/schema/yum
@@ -128,7 +138,7 @@ ADD_SUBDIRECTORY( devel EXCLUDE_FROM_ALL )
 ADD_SUBDIRECTORY( tools EXCLUDE_FROM_ALL )
 #ADD_SUBDIRECTORY( examples )
 #ADD_SUBDIRECTORY( po )
-#ADD_SUBDIRECTORY( doc )
+ADD_SUBDIRECTORY( doc EXCLUDE_FROM_ALL )
 
 ####################################################################
 # INCLUDES                                                         #
