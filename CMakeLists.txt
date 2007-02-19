@@ -136,7 +136,7 @@ MESSAGE(STATUS "version: ${VERSION}")
 ####################################################################
 
 MESSAGE(STATUS "Writing spec file...")
-CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/libzypp.spec.in ${CMAKE_BINARY_DIR}/package/libzypp.spec @ONLY)
+CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/libzypp.spec.cmake ${CMAKE_BINARY_DIR}/package/libzypp.spec @ONLY)
 
 MACRO(add_subdir_sources subdir real_sources)
   MESSAGE( STATUS "Adding ${subdir} to sources..." )

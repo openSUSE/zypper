@@ -1011,3 +1011,18 @@ TARGET_LINK_LIBRARIES(zypp ${SQLITE_LIBRARY} )
 TARGET_LINK_LIBRARIES(zypp ${ZLIB_LIBRARY} )
 
 INSTALL(TARGETS zypp LIBRARY DESTINATION ${LIB_INSTALL_DIR} )
+
+FILE(GLOB YUM_SCHEMA_FILES ${CMAKE_SOURCE_DIR}/zypp/parser/yum/schema/*.rng)
+INSTALL(FILES ${YUM_SCHEMA_FILES} DESTINATION ${CMAKE_INSTALL_PREFIX}/share/zypp/schema/yum)
+ 
+FILE(GLOB XMLSTORE_SCHEMA_FILES ${CMAKE_SOURCE_DIR}/zypp/parser/yum/xmlstore/*.rng)
+INSTALL(FILES ${XMLSTORE_SCHEMA_FILES} DESTINATION ${CMAKE_INSTALL_PREFIX}/share/zypp/schema/xmlstore)
+
+ 
+filelists.rng
+other.rng
+patch.rng
+primary.rng
+repomd.rng
+suse-primary.rng
+groups.rng     patches.rng  patterns.rng  product.rng  rpm-ns.rng
