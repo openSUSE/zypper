@@ -10,12 +10,33 @@ SET( CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake/modules )
 INCLUDE( ${CMAKE_SOURCE_DIR}/VERSION.cmake )
 MATH( EXPR LIBZYPP_CURRENT "${LIBZYPP_MAJOR} * 100 + ${LIBZYPP_MINOR}" )
 MATH( EXPR LIBZYPP_AGE     "${LIBZYPP_MINOR} - ${LIBZYPP_COMPATMINOR}" )
-
 SET( PACKAGE "libzypp" )
 SET( VERSION "${LIBZYPP_MAJOR}.${LIBZYPP_MINOR}.${LIBZYPP_PATCH}" )
 SET( LIBZYPP_VERSION_INFO   "-version-info ${LIBZYPP_CURRENT}:${LIBZYPP_PATCH}:${LIBZYPP_AGE}" )
+SET(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Novell's package management core engine.")
+SET(CPACK_PACKAGE_VENDOR "Novell Inc.")
+#SET(CPACK_PACKAGE_DESCRIPTION_FILE "${CMAKE_CURRENT_SOURCE_DIR}/ReadMe.txt")
+#SET(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/Copyright.txt")
+SET(CPACK_PACKAGE_VERSION_MAJOR ${LIBZYPP_MAJOR})
+SET(CPACK_PACKAGE_VERSION_MINOR ${LIBZYPP_MINOR})
+SET(CPACK_PACKAGE_VERSION_PATCH ${LIBZYPP_PATCH})
+SET( CPACK_GENERATOR "TBZ2")
+SET( CPACK_SOURCE_GENERATOR "TBZ2")
+SET( CPACK_SOURCE_PACKAGE_FILE_NAME "${PACKAGE}-${VERSION}" )
 
-####################################################################
+# The following components are regex's to match anywhere (unless anchored)
+# in absolute path + filename to find files or directories to be excluded
+# from source tarball.
+SET (CPACK_SOURCE_IGNORE_FILES
+"/CVS/;/.svn/;/.libs/;/.deps/;.swp$;.#;/#;/build/;.o$;.lo$;.la"
+"~$"
+"\\\\.cvsignore$"
+"/package"
+"Makefile\\\\.in$"
+)
+
+INCLUDE(CPack)
+INCLUDE(DefineInstallationPaths)
 
 ADD_DEFINITIONS( -DVERSION=\\\"${VERSION}\\\" )
 

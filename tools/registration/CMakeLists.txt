@@ -7,3 +7,5 @@ zypp-query-pool.cc
 ADD_EXECUTABLE( zypp-querypool ${querypool_SRC} )
 TARGET_LINK_LIBRARIES( zypp-querypool zypp )
 TARGET_LINK_LIBRARIES( zypp-querypool xml2 )
+
+INSTALL(TARGETS zypp-querypool RUNTIME DESTINATION bin )
