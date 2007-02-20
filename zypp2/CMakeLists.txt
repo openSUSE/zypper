@@ -19,10 +19,9 @@ SET( zypp2_HEADERS
   Lazy.h
 )
 
-INSTALL_FILES(  FILES
-  ${zypp2_HEADERS}
-  DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp2
-)
+#INSTALL(  FILES ${zypp2_HEADERS}
+#  DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp2
+#)
 
 SET( zypp2_cache_SRCS
   cache/CacheInitializer.cpp
@@ -37,10 +36,10 @@ SET( zypp2_cache_HEADERS
   cache/Utils.h
 )
 
-INSTALL_FILES(  FILES
-  ${zypp2_cache_HEADERS}
-  DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp2/cache
-)
+#INSTALL(  FILES
+#  ${zypp2_cache_HEADERS}
+#  DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp2/cache
+#)
 
 SET( zypp2_cache_sqlite3x_SRCS
   cache/sqlite3x/sqlite3x_command.cpp
@@ -54,10 +53,10 @@ SET( zypp2_cache_sqlite3x_HEADERS
   cache/sqlite3x/sqlite3x.hpp
 )
 
-INSTALL_FILES(  FILES
-  ${zypp2_cache_sqlite3x_HEADERS}
-  DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp2/cache/sqlite3x
-)
+#INSTALL(  FILES
+#  ${zypp2_cache_sqlite3x_HEADERS}
+#  DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp2/cache/sqlite3x
+#)
 
 SET( zypp2_source_SRCS
   source/dummy.cc
@@ -92,10 +91,10 @@ SET( zypp2_source_sqlite-source_HEADERS
   source/sqlite-source/schema.h
 )
 
-INSTALL_FILES(  FILES
-  ${zypp2_source_sqlite-source_HEADERS}
-  DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp2/source/sqlite-source
-)
+#INSTALL(  FILES
+#  ${zypp2_source_sqlite-source_HEADERS}
+#  DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp2/source/sqlite-source
+#)
 
 
 SET( zypp2_lib_SRCS

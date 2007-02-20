@@ -173,10 +173,7 @@ SET( zypp_HEADERS
   ZYppFactory.h
 )
 
-INSTALL_FILES(  FILES
-  ${zypp_HEADERS}
-  DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp
-)
+INSTALL(  FILES ${zypp_HEADERS} DESTINATION "${CMAKE_INSTALL_PREFIX}/include/zypp" )
 
 SET( zypp_base_SRCS
   base/Exception.cc
@@ -230,7 +227,7 @@ SET( zypp_base_HEADERS
   base/Unit.h
 )
 
-INSTALL_FILES(  FILES
+INSTALL(  FILES
   ${zypp_base_HEADERS}
   DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/base
 )
@@ -262,7 +259,7 @@ SET( zypp_capability_HEADERS
   capability/VersionedCap.h
 )
 
-INSTALL_FILES(  FILES
+INSTALL(  FILES
   ${zypp_capability_HEADERS}
   DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/capability
 )
@@ -277,7 +274,7 @@ SET( zypp_data_HEADERS
   data/ResolvableDataConsumer.h
 )
 
-INSTALL_FILES(  FILES
+INSTALL(  FILES
   ${zypp_data_HEADERS}
   DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/data
 )
@@ -331,7 +328,7 @@ SET( zypp_detail_HEADERS
   detail/SrcPackageImplIf.h
 )
 
-INSTALL_FILES(  FILES
+INSTALL(  FILES
   ${zypp_detail_HEADERS}
   DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/detail
 )
@@ -371,7 +368,7 @@ SET( zypp_media_HEADERS
   media/ProxyInfo.h
 )
 
-INSTALL_FILES(  FILES
+INSTALL(  FILES
   ${zypp_media_HEADERS}
   DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/media
 )
@@ -386,7 +383,7 @@ SET( zypp_media_proxyinfo_HEADERS
   media/proxyinfo/ProxyInfos.h
 )
 
-INSTALL_FILES(  FILES
+INSTALL(  FILES
   ${zypp_media_proxyinfo_HEADERS}
   DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/media/proxyinfo
 )
@@ -405,7 +402,7 @@ SET( zypp_parser_HEADERS
   parser/xml_parser_assert.h
 )
 
-INSTALL_FILES(  FILES
+INSTALL(  FILES
   ${zypp_parser_HEADERS}
   DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/parser
 )
@@ -420,7 +417,7 @@ SET( zypp_parser_tagfile_HEADERS
   parser/tagfile/TagFileParser.h
 )
 
-INSTALL_FILES(  FILES
+INSTALL(  FILES
   ${zypp_parser_tagfile_HEADERS}
   DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/parser/tagfile
 )
@@ -446,7 +443,7 @@ SET( zypp_parser_xml_HEADERS
   parser/xml/libxmlfwd.h
 )
 
-INSTALL_FILES(  FILES
+INSTALL(  FILES
   ${zypp_parser_xml_HEADERS}
   DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/parser/xml
 )
@@ -472,7 +469,7 @@ SET( zypp_parser_xmlstore_HEADERS
   parser/xmlstore/schemanames.h
 )
 
-INSTALL_FILES(  FILES
+INSTALL(  FILES
   ${zypp_parser_xmlstore_HEADERS}
   DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/parser/xmlstore
 )
@@ -505,7 +502,7 @@ SET( zypp_parser_yum_HEADERS
   parser/yum/schemanames.h
 )
 
-INSTALL_FILES(  FILES
+INSTALL(  FILES
   ${zypp_parser_yum_HEADERS}
   DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/parser/yum
 )
@@ -518,7 +515,7 @@ SET( zypp_parser_yum2_HEADERS
   parser/yum2/YUMPrimaryParser.h
 )
 
-INSTALL_FILES(  FILES
+INSTALL(  FILES
   ${zypp_parser_yum2_HEADERS}
   DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/parser/yum2
 )
@@ -536,7 +533,7 @@ SET( zypp_pool_HEADERS
   pool/PoolTraits.h
 )
 
-INSTALL_FILES(  FILES
+INSTALL(  FILES
   ${zypp_pool_HEADERS}
   DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/pool
 )
@@ -612,7 +609,7 @@ SET( zypp_solver_detail_HEADERS
   solver/detail/Types.h
 )
 
-INSTALL_FILES(  FILES
+INSTALL(  FILES
   ${zypp_solver_detail_HEADERS}
   DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/solver/detail
 )
@@ -640,7 +637,7 @@ SET( zypp_source_HEADERS
   source/SourceProvideFile.h
 )
 
-INSTALL_FILES(  FILES
+INSTALL(  FILES
   ${zypp_source_HEADERS}
   DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/source
 )
@@ -653,7 +650,7 @@ SET( zypp_source_plaindir_HEADERS
   source/plaindir/PlaindirImpl.h
 )
 
-INSTALL_FILES(  FILES
+INSTALL(  FILES
   ${zypp_source_plaindir_HEADERS}
   DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/source/plaindir
 )
@@ -690,7 +687,7 @@ SET( zypp_source_susetags_HEADERS
   source/susetags/SuseTagsSrcPackageImpl.h
 )
 
-INSTALL_FILES(  FILES
+INSTALL(  FILES
   ${zypp_source_susetags_HEADERS}
   DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/source/susetags
 )
@@ -719,7 +716,7 @@ SET( zypp_source_yum_HEADERS
   source/yum/YUMSourceImpl.h
 )
 
-INSTALL_FILES(  FILES
+INSTALL(  FILES
   ${zypp_source_yum_HEADERS}
   DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/source/yum
 )
@@ -744,7 +741,7 @@ SET( zypp_target_HEADERS
   target/TargetImpl.h
 )
 
-INSTALL_FILES(  FILES
+INSTALL(  FILES
   ${zypp_target_HEADERS}
   DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/target
 )
@@ -760,7 +757,7 @@ SET( zypp_target_hal_HEADERS
   target/hal/HalException.h
 )
 
-INSTALL_FILES(  FILES
+INSTALL(  FILES
   ${zypp_target_hal_HEADERS}
   DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/target/hal
 )
@@ -773,7 +770,7 @@ SET( zypp_target_modalias_HEADERS
   target/modalias/Modalias.h
 )
 
-INSTALL_FILES(  FILES
+INSTALL(  FILES
   ${zypp_target_modalias_HEADERS}
   DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/target/modalias
 )
@@ -800,7 +797,7 @@ SET( zypp_target_rpm_HEADERS
   target/rpm/librpmDb.h
 )
 
-INSTALL_FILES(  FILES
+INSTALL(  FILES
   ${zypp_target_rpm_HEADERS}
   DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/target/rpm
 )
@@ -822,7 +819,7 @@ SET( zypp_target_store_HEADERS
   target/store/xml_escape_parser.hpp
 )
 
-INSTALL_FILES(  FILES
+INSTALL(  FILES
   ${zypp_target_store_HEADERS}
   DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/target/store
 )
@@ -847,7 +844,7 @@ SET( zypp_target_store_xml_HEADERS
   target/store/xml/XMLSelectionImpl.h
 )
 
-INSTALL_FILES(  FILES
+INSTALL(  FILES
   ${zypp_target_store_xml_HEADERS}
   DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/target/store/xml
 )
@@ -863,7 +860,7 @@ SET( zypp_thread_HEADERS
   thread/Once.h
 )
 
-INSTALL_FILES(  FILES
+INSTALL(  FILES
   ${zypp_thread_HEADERS}
   DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/thread
 )
@@ -894,7 +891,7 @@ SET( zypp_ui_HEADERS
   ui/UserWantedPackages.h
 )
 
-INSTALL_FILES(  FILES
+INSTALL(  FILES
   ${zypp_ui_HEADERS}
   DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/ui
 )
@@ -910,7 +907,7 @@ SET( zypp_url_HEADERS
   url/UrlUtils.h
 )
 
-INSTALL_FILES(  FILES
+INSTALL(  FILES
   ${zypp_url_HEADERS}
   DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/url
 )
@@ -924,7 +921,7 @@ SET( zypp_zypp_detail_HEADERS
   zypp_detail/ZYppReadOnlyHack.h
 )
 
-INSTALL_FILES(  FILES
+INSTALL(  FILES
   ${zypp_zypp_detail_HEADERS}
   DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/zypp/detail
 )
@@ -1012,10 +1009,9 @@ TARGET_LINK_LIBRARIES(zypp ${ZLIB_LIBRARY} )
 
 INSTALL(TARGETS zypp LIBRARY DESTINATION ${LIB_INSTALL_DIR} )
 
-#FILE(GLOB YUM_SCHEMA_FILES ${CMAKE_SOURCE_DIR}/zypp/parser/yum/schema/*.rng)
-#MESSAGE( STATUS "Schemas ${YUM_SCHEMA_FILES}" )
+# install XML schemas
+FILE( GLOB YUM_SCHEMA_FILES ${CMAKE_SOURCE_DIR}/zypp/parser/yum/schema/*.rng )
+INSTALL(FILES ${YUM_SCHEMA_FILES} DESTINATION "${CMAKE_INSTALL_PREFIX}/share/zypp/schema/yum" )
 
-INSTALL(FILES ${CMAKE_SOURCE_DIR}/zypp/parser/yum/schema/*.rng DESTINATION "${CMAKE_INSTALL_PREFIX}/share/zypp/schema/yum" )
- 
-#FILE(GLOB XMLSTORE_SCHEMA_FILES ${CMAKE_SOURCE_DIR}/zypp/parser/yum/xmlstore/*.rng)
-INSTALL(FILES ${CMAKE_SOURCE_DIR}/zypp/parser/xmlstore/schema/*.rng DESTINATION "${CMAKE_INSTALL_PREFIX}/share/zypp/schema/xmlstore" )
+FILE( GLOB XMLSTORE_SCHEMA_FILES ${CMAKE_SOURCE_DIR}/zypp/parser/xmlstore/schema/*.rng )
+INSTALL(FILES ${XMLSTORE_SCHEMA_FILES} DESTINATION "${CMAKE_INSTALL_PREFIX}/share/zypp/schema/xmlstore" )
