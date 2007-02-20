@@ -18,6 +18,8 @@ FIND_PATH(GLIB_INCLUDE_DIR glib.h
 FIND_PATH(GLIB_CONFIG_INCLUDE_DIR glibconfig.h
   /opt/gnome/lib/glib-2.0/include
   /usr/lib/glib-2.0/include
+  /opt/gnome/lib64/glib-2.0/include
+  /usr/lib64/glib-2.0/include
 )
 
 FIND_LIBRARY(GLIB_LIBRARY NAMES glib glib-2.0
