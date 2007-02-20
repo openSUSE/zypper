@@ -1,10 +1,10 @@
-prefix=@prefix@
-exec_prefix=@exec_prefix@
-libdir=@libdir@
-includedir=@includedir@
+prefix=@CMAKE_INSTALL_PREFIX@
+exec_prefix=@LIB_INSTALL_DIR@/zypp
+libdir=@LIB_INSTALL_DIR@
+includedir=@CMAKE_INSTALL_PREFIX@/include
 
-Name: @PACKAGE_NAME@
-Version: @PACKAGE_VERSION@
+Name: @PACKAGE@
+Version: @VERSION@
 Description: Package, Patch, Pattern, and Product Management
 
 Libs: -L${libdir} -lzypp

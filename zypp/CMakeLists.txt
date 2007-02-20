@@ -1018,4 +1018,4 @@ INSTALL(TARGETS zypp LIBRARY DESTINATION ${LIB_INSTALL_DIR} )
 INSTALL(FILES ${CMAKE_SOURCE_DIR}/zypp/parser/yum/schema/*.rng DESTINATION "${CMAKE_INSTALL_PREFIX}/share/zypp/schema/yum" )
  
 #FILE(GLOB XMLSTORE_SCHEMA_FILES ${CMAKE_SOURCE_DIR}/zypp/parser/yum/xmlstore/*.rng)
-INSTALL(FILES ${CMAKE_SOURCE_DIR}/zypp/parser/yum/xmlstore/*.rng DESTINATION "${CMAKE_INSTALL_PREFIX}/share/zypp/schema/xmlstore" )
+INSTALL(FILES ${CMAKE_SOURCE_DIR}/zypp/parser/yum/*.rng DESTINATION "${CMAKE_INSTALL_PREFIX}/share/zypp/schema/xmlstore" )

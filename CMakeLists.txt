@@ -33,10 +33,9 @@ SET( CPACK_SOURCE_PACKAGE_FILE_NAME "${PACKAGE}-${VERSION}" )
 # in absolute path + filename to find files or directories to be excluded
 # from source tarball.
 SET (CPACK_SOURCE_IGNORE_FILES
-"/CVS/;/.svn/;/.libs/;/.deps/;.swp$;.#;/#;/build/;.o$;.lo$;.la"
+"/CVS/;/.svn/;/.libs/;/.deps/;.swp$;.#;/#;/build/;.o$;.lo$;.la$"
 "~$"
 "\\\\.cvsignore$"
-"/package"
 "Makefile\\\\.in$"
 )
 
@@ -186,3 +185,23 @@ INCLUDE_DIRECTORIES( ${CMAKE_SOURCE_DIR} ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CUR
 ####################################################################
 
 #INSTALL_FILES(  FILES  libzypp.pc )
+
+ADD_CUSTOM_TARGET( svncheck
+  COMMAND cd $(CMAKE_SOURCE_DIR) && ! LC_ALL=C svn status --show-updates --quiet | grep -v '^Status against revision'
+)
+
+SET( AUTOBUILD_COMMAND
+  COMMAND ${CMAKE_MAKE_PROGRAM} package_source
+  COMMAND ${CMAKE_COMMAND} -E copy ${CPACK_SOURCE_PACKAGE_FILE_NAME}.tar.bz2 ${CMAKE_BINARY_DIR}/package
+  COMMAND ${CMAKE_COMMAND} -E remove ${CPACK_SOURCE_PACKAGE_FILE_NAME}.tar.bz2
+  COMMAND ${CMAKE_COMMAND} -E copy "${CMAKE_SOURCE_DIR}/package/${PACKAGE}.changes" "${CMAKE_BINARY_DIR}/package/${PACKAGE}.changes"
+)
+
+ADD_CUSTOM_TARGET( autobuild_local
+  ${AUTOBUILD_COMMAND}
+)
+
+ADD_CUSTOM_TARGET( autobuild 
+  COMMAND ${CMAKE_MAKE_PROGRAM} svncheck
+  ${AUTOBUILD_COMMAND}
+)

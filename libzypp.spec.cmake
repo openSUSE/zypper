@@ -75,7 +75,7 @@ Authors:
 %build
 mkdir build
 cd build
-cmake -DCMAKE_INSTALL_PREFIX=%{prefix} ..
+cmake -DCMAKE_INSTALL_PREFIX=%{prefix} -DCMAKE_SKIP_RPATH=1 ..
 CXXFLAGS="$RPM_OPT_FLAGS" \
 make %{?jobs:-j %jobs}
 #make check
