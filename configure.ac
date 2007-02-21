@@ -85,7 +85,7 @@ dnl ==================================================
 dnl checks for system services
 dnl ==================================================
 dnl AC_CONFIG_FILES([FILE...])
-AC_OUTPUT( po/Makefile.in po/Makefile.in
+AC_OUTPUT( po/Makefile.in 
 	Makefile			\
 	zypper.spec			\
 	src/Makefile			\
