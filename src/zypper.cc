@@ -16,6 +16,8 @@
 
 #include <unistd.h>
 
+#include <zypp/zypp_detail/ZYppReadOnlyHack.h>
+
 #include "zmart.h"
 #include "zmart-sources.h"
 #include "zmart-misc.h"
@@ -515,9 +517,11 @@ int one_command(const string& command, int argc, char **argv)
     }
   }
   
-
   // here come commands that need the lock
   try {
+    if (command == "service-list" || command == "sl")
+      zypp_readonly_hack::IWantIt (); // #247001
+
     God = zypp::getZYpp();
   }
   catch (Exception & excpt_r) {
