@@ -1,8 +1,8 @@
 -------------------------------------------------------------------
 Thu Feb 22 18:30:10 CET 2007 - mvidner@suse.cz
 
-- Use the read-only hacek for service-list (#247001).
-- 0.7.17
+- Use the read-only hack for service-list (#247001).
+- 0.6.17
 
 -------------------------------------------------------------------
 Fri Feb  2 13:23:10 CET 2007 - jkupec@suse.cz
