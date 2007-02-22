@@ -40,7 +40,18 @@ SET (CPACK_SOURCE_IGNORE_FILES
 )
 
 INCLUDE(CPack)
+
+####################################################################
+
 INCLUDE(DefineInstallationPaths)
+
+SET( DOC_INSTALL_DIR
+   "${SHARE_INSTALL_PREFIX}/doc/packages/${PACKAGE}"
+   CACHE PATH "The install dir for documentation (default prefix/share/doc/packages/${PACKAGE})"
+   FORCE
+)
+
+####################################################################
 
 FIND_PACKAGE(Rpm REQUIRED)
 IF ( NOT RPM_FOUND)
@@ -201,7 +212,7 @@ ADD_CUSTOM_TARGET( autobuild_local
   ${AUTOBUILD_COMMAND}
 )
 
-ADD_CUSTOM_TARGET( autobuild 
+ADD_CUSTOM_TARGET( autobuild
   COMMAND ${CMAKE_MAKE_PROGRAM} svncheck
   ${AUTOBUILD_COMMAND}
 )
