@@ -1,40 +1,58 @@
-INCLUDE_DIRECTORIES( ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR} ${KDE3_INCLUDE_DIR} ${QT_INCLUDE_DIR}  )
-
-
-########### install files ###############
-
-INSTALL_FILES(  FILES  @PACKAGE@.doxytag )
-
-
-
-#original Makefile.am contents follow:
-
-### Process this file with automake to produce Makefile.in
 ### ##################################################
-#
-#htmldir =	@pkgdocdir@/autodocs
-#
-#html_DATA =	@PACKAGE@.doxytag
-#
-## lots of files -> xargs
-## (-hook runs _after_ the regular targets which means the dir already exists)
-#install-data-hook:
-#	find html -mindepth 1 | xargs $(INSTALL_DATA) --target-directory=$(DESTDIR)$(htmldir)
-#
+
+FIND_PROGRAM( DOT dot )
+IF ( NOT DOT )
+   MESSAGE( "dot not found: you should install graphviz." )
+   SET( HAVE_DOT NO )
+ELSE ( NOT DOT )
+   SET( HAVE_DOT YES )
+ENDIF ( NOT DOT )
+
+SET( ZYPP_SOURCE_DIR  "${CMAKE_SOURCE_DIR}/zypp" )
+SET( ZYPP_EXAMPLE_DIR "${CMAKE_SOURCE_DIR}/zypp/@DOXYGEN" )
+
+SET( DOXYGEN_INPUT    "${CMAKE_CURRENT_BINARY_DIR}/Doxyfile" )
+SET( DOXYGEN_OUTPUT   "${CMAKE_CURRENT_BINARY_DIR}/html/index.html" )
+
 ### ##################################################
-#
-#@PACKAGE@.doxytag: Doxyfile
-#	@DOCGEN@
-#
-## force remaking the html docs
-#doc:
-#	$(MAKE) -W Doxyfile
-#
+
+CONFIGURE_FILE(
+   ${CMAKE_CURRENT_SOURCE_DIR}/Doxyfile.cmake
+   ${DOXYGEN_INPUT}
+   @ONLY
+   )
+
 ### ##################################################
-#
-#CLEANFILES = $(html_DATA)
-#
-#clean-local:
-#	-rm -rf html
-#
+
+ADD_CUSTOM_COMMAND (
+   OUTPUT  ${DOXYGEN_OUTPUT}
+   COMMAND ${CMAKE_COMMAND} -E echo_append "Building Documentation..."
+   COMMAND ${DOXYGEN} ${DOXYGEN_INPUT}
+   COMMAND ${CMAKE_COMMAND} -E echo "Done."
+   WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+   DEPENDS ${DOXYGEN_INPUT}
+)
+
+ADD_CUSTOM_TARGET( doc ALL
+   DEPENDS ${DOXYGEN_OUTPUT}
+)
+
+ADD_CUSTOM_TARGET( doc_forced
+   COMMAND ${CMAKE_COMMAND} -E echo_append "Building Documentation..."
+   COMMAND ${DOXYGEN} ${DOXYGEN_INPUT}
+   COMMAND ${CMAKE_COMMAND} -E echo "Done."
+   WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+   DEPENDS ${DOXYGEN_INPUT}
+)
+
 ### ##################################################
+
+INSTALL( FILES
+   @PACKAGE@.doxytag
+   DESTINATION ${DOC_INSTALL_DIR}
+)
+INSTALL( DIRECTORY
+   html
+   DESTINATION ${DOC_INSTALL_DIR}
+)
+
