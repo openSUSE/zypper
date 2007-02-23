@@ -346,6 +346,7 @@ SET( zypp_media_SRCS
   media/MediaManager.cc
   media/MediaNFS.cc
   media/MediaSMB.cc
+  media/MediaUserAuth.cc
   media/Mount.cc
   media/ProxyInfo.cc
 )
@@ -364,6 +365,7 @@ SET( zypp_media_HEADERS
   media/MediaNFS.h
   media/MediaSMB.h
   media/MediaSource.h
+  media/MediaUserAuth.h
   media/Mount.h
   media/ProxyInfo.h
 )
