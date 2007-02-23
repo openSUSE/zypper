@@ -1,14 +1,28 @@
-INCLUDE_DIRECTORIES( ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR} )
+## ############################################################
+
+INCLUDE( FindQt3 )
+IF ( NOT QT_FOUND )
+  MESSAGE( FATAL_ERROR " qt3 not found" )
+ELSE ( NOT QT_FOUND )
+  ADD_DEFINITIONS( ${QT_DEFINITIONS} )
+  INCLUDE_DIRECTORIES( ${QT_INCLUDE_DIR} )
+  SET( QT_LIBRARIES
+     "/usr/lib64/qt3/lib64/libqassistantclient.a;/usr/lib64/qt3/lib64/libqt-mt.so;-lSM;-lICE;/usr/X11R6/lib64/libX11.so;/usr/X11R6/lib64/libXext.so;dl;-lpthread"
+  )
+ENDIF( NOT QT_FOUND )
+
+## ############################################################
 
 
-########### next target ###############
+SET( MA_TEST_SRCS
+   MaTest.cc
+)
+ADD_EXECUTABLE( MA_TEST
+   ${MA_TEST_SRCS}
+)
+TARGET_LINK_LIBRARIES( MA_TEST
+   zypp ${QT_LIBRARIES}
+)
 
-#SET(AOUT_SRCS
-#AOUT.cc
-#$(ADD_SOURCES)
-#)
 
-#ADD_EXECUTABLE(AOUT ${AOUT_SRCS})
-#TARGET_LINK_LIBRARIES(AOUT  zypp )
-
-
+## ############################################################
