@@ -28,4 +28,3 @@
 ./zypp/target/TargetImpl.cc
 ./zypp/target/rpm/RpmDb.cc
 ./zypp/target/store/XMLFilesBackend.cc
-./zypp2/source/yum/YUMSourceCacher.cc
