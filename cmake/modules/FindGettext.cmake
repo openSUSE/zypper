@@ -1,61 +1,62 @@
-# Try to find Gettext functionality
-# Once done this will define
+# - Find GNU gettext tools
+# This module looks for the GNU gettext tools. This module defines the 
+# following values:
+#  GETTEXT_MSGMERGE_EXECUTABLE: the full path to the msgmerge tool.
+#  GETTEXT_MSGFMT_EXECUTABLE: the full path to the msgfmt tool.
+#  GETTEXT_FOUND: True if gettext has been found.
 #
-#  GETTEXT_FOUND - system has Gettext
-#  GETTEXT_INCLUDE_DIR - Gettext include directory
-#  GETTEXT_LIBRARIES - Libraries needed to use Gettext
+# Additionally it provides the following macros:
+# GETTEXT_CREATE_TRANSLATIONS ( outputFile [ALL] file1 ... fileN )
+#    This will create a target "translations" which will convert the 
+#    given input po files into the binary output mo file. If the 
+#    ALL option is used, the translations will also be created when
+#    building the default target.
 
-# TODO: This will enable translations only if Gettext functionality is
-# present in libc. Must have more robust system for release, where Gettext
-# functionality can also reside in standalone Gettext library, or the one
-# embedded within kdelibs (cf. gettext.m4 from Gettext source).
+FIND_PROGRAM(GETTEXT_MSGMERGE_EXECUTABLE msgmerge)
 
-if (LIBC_HAS_DGETTEXT OR LIBINTL_HAS_DGETTEXT)
+FIND_PROGRAM(GETTEXT_MSGFMT_EXECUTABLE msgfmt)
 
-  # in cache already
-  SET(GETTEXT_FOUND TRUE)
+MACRO(GETTEXT_CREATE_TRANSLATIONS _potFile _firstPoFile)
 
-else (LIBC_HAS_DGETTEXT OR LIBINTL_HAS_DGETTEXT)
+   SET(_gmoFiles)
+   GET_FILENAME_COMPONENT(_potBasename ${_potFile} NAME_WE)
+   GET_FILENAME_COMPONENT(_absPotFile ${_potFile} ABSOLUTE)
 
-  include(CheckIncludeFiles)
-  include(CheckLibraryExists)
-  include(CheckFunctionExists)
-  
-  check_include_files(libintl.h HAVE_LIBINTL_H)
-  
-  set(GETTEXT_INCLUDE_DIR)
-  set(GETTEXT_LIBRARIES)
-  
-  if (HAVE_LIBINTL_H)
-     check_function_exists(dgettext LIBC_HAS_DGETTEXT)
-     if (LIBC_HAS_DGETTEXT)
-        set(GETTEXT_SOURCE "built in libc")
-        set(GETTEXT_FOUND TRUE)
-     else (LIBC_HAS_DGETTEXT)
-        FIND_LIBRARY(LIBINTL_LIBRARY NAMES intl libintl
-           PATHS
-           /usr/lib
-           /usr/local/lib
-        )
-        CHECK_LIBRARY_EXISTS(${LIBINTL_LIBRARY} "dgettext" "" LIBINTL_HAS_DGETTEXT)
-        if (LIBINTL_HAS_DGETTEXT)
-           set(GETTEXT_SOURCE "in ${LIBINTL_LIBRARY}")
-           set(GETTEXT_LIBRARIES ${LIBINTL_LIBRARY} CACHE FILEPATH "path to libintl library, used for gettext")
-           set(GETTEXT_FOUND TRUE)
-        endif (LIBINTL_HAS_DGETTEXT)
-     endif (LIBC_HAS_DGETTEXT)
-  endif (HAVE_LIBINTL_H)
-  
-  if (GETTEXT_FOUND)
-     if (NOT Gettext_FIND_QUIETLY)
-        message(STATUS "Found Gettext: ${GETTEXT_SOURCE}")
-     endif (NOT Gettext_FIND_QUIETLY)
-  else (GETTEXT_FOUND)
-     if (Gettext_FIND_REQUIRED)
-        message(STATUS "Could NOT find Gettext")
-     endif (Gettext_FIND_REQUIRED)
-  endif (GETTEXT_FOUND)
-  
-  MARK_AS_ADVANCED(GETTEXT_INCLUDE_DIR GETTEXT_LIBRARIES)
+   MESSAGE( STATUS "pot: ${_potFile} converted to ${_potBasename}")
 
-endif (LIBC_HAS_DGETTEXT OR LIBINTL_HAS_DGETTEXT)
+   SET(_addToAll)
+   IF(${_firstPoFile} STREQUAL "ALL")
+      SET(_addToAll "ALL")
+      SET(_firstPoFile)
+   ENDIF(${_firstPoFile} STREQUAL "ALL")
+
+   FOREACH (_currentPoFile ${ARGN})
+      GET_FILENAME_COMPONENT(_absFile ${_currentPoFile} ABSOLUTE)
+      GET_FILENAME_COMPONENT(_abs_PATH ${_absFile} PATH)
+      GET_FILENAME_COMPONENT(_lang ${_absFile} NAME_WE)
+      SET(_gmoFile ${CMAKE_CURRENT_BINARY_DIR}/${_lang}.gmo)
+
+      ADD_CUSTOM_COMMAND( 
+         OUTPUT ${_gmoFile} 
+         COMMAND ${GETTEXT_MSGMERGE_EXECUTABLE} --quiet --update --backup=none -s ${_absFile} ${_absPotFile}
+         COMMAND ${GETTEXT_MSGFMT_EXECUTABLE} -o ${_gmoFile} ${_absFile}
+         DEPENDS ${_absPotFile} ${_absFile} 
+      )
+
+      INSTALL(FILES ${_gmoFile} DESTINATION share/locale/${_lang}/LC_MESSAGES RENAME ${_potBasename}.mo) 
+      SET(_gmoFiles ${_gmoFiles} ${_gmoFile})
+
+   ENDFOREACH (_currentPoFile )
+
+   ADD_CUSTOM_TARGET(translations ${_addToAll} DEPENDS ${_gmoFiles})
+
+ENDMACRO(GETTEXT_CREATE_TRANSLATIONS )
+
+IF (GETTEXT_MSGMERGE_EXECUTABLE AND GETTEXT_MSGFMT_EXECUTABLE )
+   SET(GETTEXT_FOUND TRUE)
+ELSE (GETTEXT_MSGMERGE_EXECUTABLE AND GETTEXT_MSGFMT_EXECUTABLE )
+   SET(GETTEXT_FOUND FALSE)
+   IF (GetText_REQUIRED)
+      MESSAGE(FATAL_ERROR "GetText not found")
+   ENDIF (GetText_REQUIRED)
+ENDIF (GETTEXT_MSGMERGE_EXECUTABLE AND GETTEXT_MSGFMT_EXECUTABLE )

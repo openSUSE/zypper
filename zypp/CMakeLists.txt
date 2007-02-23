@@ -992,7 +992,7 @@ ${zypp_pool_HEADERS}
 )
 
 ADD_LIBRARY(zypp SHARED ${zypp_lib_SRCS})
-
+SET_TARGET_PROPERTIES( zypp PROPERTIES VERSION "${LIBZYPP_VERSION_INFO}" )
 # System libraries
 TARGET_LINK_LIBRARIES(zypp boost_filesystem boost_regex util )
 TARGET_LINK_LIBRARIES(zypp ${DBUS_LIBRARY} )

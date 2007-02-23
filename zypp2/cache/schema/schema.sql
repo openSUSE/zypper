@@ -40,6 +40,21 @@ CREATE TABLE names (
   , name TEXT UNIQUE
 );
 
+CREATE TABLE translated_texts (
+    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL
+  , text_id INTEGER NOT NULL
+  , lang_id INTEGER NOT NULL
+  , text TEXT
+  
+);
+
+CREATE TABLE resolvable_texts (
+  , resolvable_id INTEGER NOT NULL
+  , text_id INTEGER NOT NULL
+  , lang_id INTEGER NOT NULL
+  , field_id INTEGER NOT NULL
+)
+
 CREATE TABLE resolvables (
     id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL
   , name TEXT
@@ -48,8 +63,8 @@ CREATE TABLE resolvables (
   , epoch INTEGER
   , arch INTEGER
   , kind INTEGER
-  , summary TEXT
-  , description TEXT
+  , summary_text_id INTEGER
+  , description_text_id INTEGER
   , insnotify TEXT
   , delnotify TEXT
   , license_to_confirm TEXT

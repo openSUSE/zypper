@@ -78,15 +78,19 @@ cd build
 cmake -DCMAKE_INSTALL_PREFIX=%{prefix} -DCMAKE_SKIP_RPATH=1 ..
 CXXFLAGS="$RPM_OPT_FLAGS" \
 make %{?jobs:-j %jobs}
+make -C doc/autodoc %{?jobs:-j %jobs}
+make -C po %{?jobs:-j %jobs} translations
+
 #make check
 
 %install
 cd build
 make install DESTDIR=$RPM_BUILD_ROOT
-cd ..
+make -C doc/autodoc install DESTDIR=$RPM_BUILD_ROOT
 %suse_update_desktop_file -G "" -C "" package-manager
+make -C po %{?jobs:-j %jobs} install DESTDIR=$RPM_BUILD_ROOT
 # Create filelist with translatins
-%{find_lang} zypp
+%{find_lang} $RPM_BUILD_ROOT zypp
 
 
 %post
@@ -100,8 +104,7 @@ cd ..
 %files -f zypp.lang
 %defattr(-,root,root)
 %{prefix}/lib/zypp
-%{prefix}/lib/zypp/*
-%dir %{_libdir}/libzypp*so.*
+%{_libdir}/libzypp*so.*
 %dir %{prefix}/share/zypp
 %dir %{prefix}/share/zypp/schema
 %{prefix}/share/zypp/schema/*
@@ -112,10 +115,9 @@ cd ..
 
 %files devel
 %defattr(-,root,root)
-%dir %{_libdir}/libzypp.so
-%dir %{_libdir}/libzypp.la
-%dir %{_docdir}/zypp
-%{_docdir}/zypp/*
+%{_libdir}/libzypp.so
+#%dir %{_libdir}/libzypp.la
+%{_docdir}/%{name}
 %dir %{prefix}/include/zypp
 %{prefix}/include/zypp/*
 %{_libdir}/pkgconfig/libzypp.pc

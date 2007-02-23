@@ -359,6 +359,12 @@ application level cache, for example for the directories, which probably get
 inserted lot of files for the same directory. You can avoid N selects, keeping
 the dir_id and name in memory, where N is the average number of files per directory.
 
+This generates a 193M filelist2.db. This includes an index on filenames, otherwise
+every insertion requires a select on a non indexed text column. So this size is
+comparable to the 259M non-normalized table.
+
+I could not get the reverse lookup query under a second.
+
 Application level cache for normalized insertions
 =================================================
 

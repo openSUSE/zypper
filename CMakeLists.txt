@@ -15,7 +15,7 @@ SET( PACKAGE "libzypp" )
 SET( VERSION "${LIBZYPP_MAJOR}.${LIBZYPP_MINOR}.${LIBZYPP_PATCH}" )
 
 ADD_DEFINITIONS( -DVERSION=\\\"${VERSION}\\\" )
-SET( LIBZYPP_VERSION_INFO   "-version-info ${LIBZYPP_CURRENT}:${LIBZYPP_PATCH}:${LIBZYPP_AGE}" )
+SET( LIBZYPP_VERSION_INFO   "${LIBZYPP_CURRENT}.${LIBZYPP_PATCH}.${LIBZYPP_AGE}" )
 
 
 SET(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Novell's package management core engine.")
@@ -33,10 +33,8 @@ SET( CPACK_SOURCE_PACKAGE_FILE_NAME "${PACKAGE}-${VERSION}" )
 # in absolute path + filename to find files or directories to be excluded
 # from source tarball.
 SET (CPACK_SOURCE_IGNORE_FILES
-"/CVS/;/.svn/;/.libs/;/.deps/;.swp$;.#;/#;/build/;.o$;.lo$;.la$"
-"~$"
-"\\\\.cvsignore$"
-"Makefile\\\\.in$"
+#/CVS/;/\\.svn/;/\\.libs/;/\\.deps/;\\.swp$;/build/;\\.o$;\\.lo$;\\.la$;~$;\\\\.cvsignore$;Makefile\\\\.in$;
+/CVS/;/\\\\.svn/;/\\\\.libs/;/\\\\.deps/;\\\\.swp$;/build/;\\\\.o$;\\\\.lo$;\\\\.la$;~$
 )
 
 INCLUDE(CPack)
@@ -52,6 +50,8 @@ SET( DOC_INSTALL_DIR
 )
 
 ####################################################################
+
+FIND_PACKAGE(Gettext REQUIRED)
 
 FIND_PACKAGE(Rpm REQUIRED)
 IF ( NOT RPM_FOUND)
@@ -172,9 +172,9 @@ ADD_SUBDIRECTORY( zypp )
 ADD_SUBDIRECTORY( zypp2 )
 # do not build devel by default
 ADD_SUBDIRECTORY( devel EXCLUDE_FROM_ALL )
-ADD_SUBDIRECTORY( tools EXCLUDE_FROM_ALL )
+ADD_SUBDIRECTORY( tools )
 #ADD_SUBDIRECTORY( examples )
-#ADD_SUBDIRECTORY( po )
+ADD_SUBDIRECTORY( po EXCLUDE_FROM_ALL )
 ADD_SUBDIRECTORY( doc EXCLUDE_FROM_ALL )
 
 ####################################################################
