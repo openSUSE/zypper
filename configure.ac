@@ -260,7 +260,6 @@ AC_OUTPUT(	 po/Makefile.in\
 	zypp2/cache/Makefile \
   zypp2/cache/sqlite3x/Makefile
   zypp2/source/Makefile \
-  zypp2/source/yum/Makefile \
   zypp/source/Makefile		\
 	zypp/source/plaindir/Makefile	\
 	zypp/source/susetags/Makefile	\
