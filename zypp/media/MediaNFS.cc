@@ -11,6 +11,7 @@
 */
 
 #include <iostream>
+#include <sstream>
 
 #include "zypp/base/Logger.h"
 #include "zypp/base/String.h"
@@ -102,19 +103,41 @@ namespace zypp {
       {
     	options="ro";
       }
-    
-      // Add option "nolock", unless option "lock" or "unlock" is already set.
-      // This should prevent the mount command hanging when the portmapper isn't
-      // running.
+
       vector<string> optionList;
       str::split( options, std::back_inserter(optionList), "," );
       vector<string>::const_iterator it;
+      bool contains_lock  = false, contains_soft = false,
+           contains_timeo = false, contains_hard = false;
+
       for( it = optionList.begin(); it != optionList.end(); ++it ) {
-    	if ( *it == "lock" || *it == "nolock" ) break;
+        if ( *it == "lock" || *it == "nolock" ) contains_lock = true;
+        else if ( *it == "soft") contains_soft = true;
+        else if ( *it == "hard") contains_hard = true;
+        else if ( it->find("timeo") != string::npos ) contains_timeo = true;
       }
-      if ( it == optionList.end() ) {
-    	optionList.push_back( "nolock" );
-    	options = str::join( optionList, "," );
+
+      if ( !(contains_lock && contains_soft) ) {
+        // Add option "nolock", unless option "lock" or "unlock" is already set.
+        // This should prevent the mount command hanging when the portmapper isn't
+        // running.
+        if ( !contains_lock ) {
+          optionList.push_back( "nolock" );
+        }
+        // Add options "soft,timeo=NFS_MOUNT_TIMEOUT", unless they are set
+        // already or "hard" option is explicitly specified. This prevent
+        // the mount command from hanging when the nfs server is not responding
+        // and file transactions from an unresponsive to throw an error after
+        // a short time instead of hanging forever
+        if ( !(contains_soft || contains_hard) ) {
+          optionList.push_back( "soft" );
+          if ( !contains_timeo ) {
+            ostringstream s;
+            s << "timeo=" << NFS_MOUNT_TIMEOUT;
+            optionList.push_back( s.str() );
+          }
+        }
+        options = str::join( optionList, "," );
       }
 
       mount.mount(path,mountpoint,filesystem,options);

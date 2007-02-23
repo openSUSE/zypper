@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Feb 23 17:40:23 CET 2007 - jkupec@suse.cz
+
+- adding sotf,timeo=X nfs mount options by default (#235211)
+- r5093
+
+-------------------------------------------------------------------
 Fri Feb 23 14:16:19 CET 2007 - jkupec@suse.cz
 
 - support for HTTP authentication prompt added (#190609)

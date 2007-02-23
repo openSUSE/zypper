@@ -14,6 +14,11 @@
 
 #include "zypp/media/MediaHandler.h"
 
+/**
+ * Value of nfs mount minor timeout in tenths of a second.
+ */
+#define NFS_MOUNT_TIMEOUT 10
+
 namespace zypp {
   namespace media {
 
