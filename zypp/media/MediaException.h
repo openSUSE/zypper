@@ -421,6 +421,41 @@ namespace zypp
       std::string _name;
     };
 
+    class MediaUnauthorizedException: public MediaException
+    {
+    public:
+      MediaUnauthorizedException()
+      : MediaException("Unauthorized media access")
+      , _url("")
+      , _err("")
+      , _hint("")
+      {}
+
+      MediaUnauthorizedException(const Url         &url_r,
+                                 const std::string &msg_r,
+                                 const std::string &err_r,
+                                 const std::string &hint_r)
+      : MediaException(msg_r)
+      , _url(url_r)
+      , _err(err_r)
+      , _hint(hint_r)
+      {}
+
+      virtual ~MediaUnauthorizedException() throw() {};
+
+      const Url         & url()  const { return _url;  }
+      const std::string & err()  const { return _err;  }
+      /** comma separated list of available authentication types */
+      const std::string & hint() const { return _hint; }
+
+    protected:
+      virtual std::ostream & dumpOn( std::ostream & str ) const;
+    private:
+      Url         _url;
+      std::string _err;
+      std::string _hint;
+    };
+
   /////////////////////////////////////////////////////////////////
   } // namespace media
 } // namespace zypp

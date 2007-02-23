@@ -18,6 +18,7 @@
 #include "zypp/Pathname.h"
 #include "zypp/Message.h"
 #include "zypp/Url.h"
+#include "zypp/media/MediaUserAuth.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -254,7 +255,8 @@ namespace zypp
         enum Error {
           NO_ERROR,
           NOT_FOUND, 	// the requested Url was not found
-          IO		// IO error
+          IO,		// IO error
+          ACCESS_DENIED // user authent. failed while accessing restricted file
         };
 
         virtual void start( const Url &/*file*/, Pathname /*localfile*/ ) {}
@@ -273,6 +275,31 @@ namespace zypp
           , Error /*error*/
 	  , const std::string &/*reason*/
         ) {}
+    };
+
+    // authentication issues report
+    struct AuthenticationReport : public callback::ReportBase
+    {
+      /**
+       * Prompt for authentication data.
+       * 
+       * \param url       URL which required the authentication
+       * \param msg       prompt text
+       * \param auth_data input/output object for handling authentication
+       *        data. As an input parameter auth_data can be prefilled with
+       *        username (from previous try) or auth_type (available
+       *        authentication methods aquired from server (only CurlAuthData)).
+       *        As an output parameter it serves for sending username, pasword
+       *        or other special data (derived AuthData objects).
+       * \return true if user chooses to continue with authentication,
+       *         false otherwise
+       */
+      virtual bool prompt(const Url & /* url */,
+        const std::string & /* msg */,
+        AuthData & /* auth_data */)
+      {
+        return false;
+      }
     };
 
     /////////////////////////////////////////////////////////////////

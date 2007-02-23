@@ -163,6 +163,20 @@ namespace zypp
 	return str << "Can't eject media " << _name << endl;
     }
 
+    std::ostream & MediaUnauthorizedException::dumpOn( std::ostream & str ) const
+    {
+      str << msg();
+      if( !_url.asString().empty())
+      {
+        str << " (" << _url << ")";
+      }
+      if( !_err.empty())
+      {
+        str << ": " << _err;
+      }
+      return str;
+    }
+
   /////////////////////////////////////////////////////////////////
   } // namespace media
 } // namespace zypp

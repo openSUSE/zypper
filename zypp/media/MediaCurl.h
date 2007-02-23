@@ -39,7 +39,17 @@ class MediaCurl : public MediaHandler {
                              const Pathname & dirname, bool dots = true ) const;
     virtual void getDirInfo( filesystem::DirContent & retlist,
                              const Pathname & dirname, bool dots = true ) const;
+    /**
+     * Repeatedly calls doGetDoesFileExist() until it successfully returns,
+     * fails unexpectedly, or user cancels the operation. This is used to
+     * handle authentication or similar retry scenarios on media level. 
+     */
     virtual bool getDoesFileExist( const Pathname & filename ) const;
+
+    /**
+     * \see MediaHandler::getDoesFileExist
+     */
+    virtual bool doGetDoesFileExist( const Pathname & filename ) const;
 
     /**
      *
@@ -84,13 +94,19 @@ class MediaCurl : public MediaHandler {
 
     static int progressCallback( void *clientp, double dltotal, double dlnow,
                                  double ultotal, double ulnow );
+  private:
+    /**
+     * Return a comma separated list of available authentication methods
+     * supported by server.
+     */
+    std::string getAuthHint() const;
 
   private:
     CURL *_curl;
     char _curlError[ CURL_ERROR_SIZE ];
     long _curlDebug;
 
-    std::string _userpwd;
+    mutable std::string _userpwd;
     std::string _proxy;
     std::string _proxyuserpwd;
     std::string _currentCookieFile;

@@ -17,10 +17,12 @@
 #include "zypp/ExternalProgram.h"
 #include "zypp/base/String.h"
 #include "zypp/base/Sysconfig.h"
+#include "zypp/base/Gettext.h"
 
 #include "zypp/media/MediaCurl.h"
 #include "zypp/media/proxyinfo/ProxyInfos.h"
 #include "zypp/media/ProxyInfo.h"
+#include "zypp/media/MediaUserAuth.h"
 #include "zypp/thread/Once.h"
 #include <cstdlib>
 #include <sys/types.h>
@@ -29,6 +31,7 @@
 #include <errno.h>
 #include <dirent.h>
 #include <unistd.h>
+#include <boost/format.hpp>
 
 #define  DETECT_DIR_INDEX       0
 #define  CONNECT_TIMEOUT        60
@@ -439,68 +442,38 @@ void MediaCurl::attachTo (bool next)
       ZYPP_THROW(MediaCurlSetOptException(_url, _curlError));
     }
 
+    // HTTP authentication type
     if(_url.getScheme() == "http" || _url.getScheme() == "https")
     {
-      std::vector<std::string>                 list;
-      std::vector<std::string>::const_iterator it;
-
       string use_auth = _url.getQueryParam("auth");
       if( use_auth.empty())
         use_auth = "digest,basic";
 
-      str::split(use_auth, std::back_inserter(list), ",");
-
-      long auth = CURLAUTH_NONE;
-      for(it = list.begin(); it != list.end(); ++it)
+      try
       {
-        if(*it == "basic")
+        long auth = CurlAuthData::auth_type_str2long(use_auth);
+        if( auth != CURLAUTH_NONE)
         {
-          auth |= CURLAUTH_BASIC;
-        }
-        else
-        if(*it == "digest")
-        {
-          auth |= CURLAUTH_DIGEST;
-        }
-        else
-        if((curl_info && (curl_info->features & CURL_VERSION_NTLM)) &&
-           (*it == "ntlm"))
-        {
-          auth |= CURLAUTH_NTLM;
-        }
-        else
-        if((curl_info && (curl_info->features & CURL_VERSION_SPNEGO)) &&
-           (*it == "spnego" || *it == "negotiate"))
-        {
-          // there is no separate spnego flag for auth
-          auth |= CURLAUTH_GSSNEGOTIATE;
-        }
-        else
-        if((curl_info && (curl_info->features & CURL_VERSION_GSSNEGOTIATE)) &&
-           (*it == "gssnego" || *it == "negotiate"))
-        {
-          auth |= CURLAUTH_GSSNEGOTIATE;
-        }
-        else
-        {
-          std::string msg("Unsupported HTTP authentication method '");
-          msg += *it;
-          msg += "'";
-                disconnectFrom();
-          ZYPP_THROW(MediaBadUrlException(_url, msg));
+          DBG << "Enabling HTTP authentication methods: " << use_auth
+              << " (CURLOPT_HTTPAUTH=" << auth << ")" << std::endl;
+  
+          ret = curl_easy_setopt( _curl, CURLOPT_HTTPAUTH, auth);
+          if ( ret != 0 ) {
+            disconnectFrom();
+            ZYPP_THROW(MediaCurlSetOptException(_url, _curlError));
+          }
         }
       }
-
-      if( auth != CURLAUTH_NONE)
+      catch (MediaException & ex_r)
       {
-        DBG << "Enabling HTTP authentication methods: " << use_auth
-            << " (CURLOPT_HTTPAUTH=" << auth << ")" << std::endl;
+        string auth_hint = getAuthHint();
 
-        ret = curl_easy_setopt( _curl, CURLOPT_HTTPAUTH, auth);
-        if ( ret != 0 ) {
-                disconnectFrom();
-          ZYPP_THROW(MediaCurlSetOptException(_url, _curlError));
-        }
+        DBG << "Rethrowing as MediaUnauthorizedException. auth hint: '"
+            << auth_hint << "'" << endl;
+
+        ZYPP_THROW(MediaUnauthorizedException(
+          _url, ex_r.msg(), _curlError, auth_hint
+        ));
       }
     }
   }
@@ -719,20 +692,140 @@ void MediaCurl::getFileCopy( const Pathname & filename , const Pathname & target
 
   Url url( _url );
 
-  try {
-    doGetFileCopy(filename, target, report);
-  }
-  catch (MediaException & excpt_r)
+  bool retry = false;
+  CurlAuthData auth_data;
+
+  do
   {
-    // FIXME: this will not match the first URL
-    // FIXME: error number fix
-    report->finish(url, zypp::media::DownloadProgressReport::NOT_FOUND, excpt_r.msg());
-    ZYPP_RETHROW(excpt_r);
+    try
+    {
+      doGetFileCopy(filename, target, report);
+      retry = false;
+    }
+    // retry with proper authentication data
+    catch (MediaUnauthorizedException & ex_r)
+    {
+      callback::SendReport<AuthenticationReport> auth_report;
+      
+      if (!_url.getUsername().empty() && !retry)
+        auth_data.setUserName(_url.getUsername());
+      
+      string prompt_msg;
+      if (retry || !_url.getUsername().empty())
+        prompt_msg = _("Invalid user name or password.");
+      else // first prompt
+        prompt_msg = boost::str(boost::format(
+          _("Authentication required for '%s'")) % _url.asString()); 
+
+      // set available authentication types from the exception
+      auth_data.setAuthType(ex_r.hint());
+
+      if (auth_report->prompt(_url, prompt_msg, auth_data))
+      {
+        DBG << "callback answer: retry" << endl
+            << "CurlAuthData: " << auth_data << endl;
+
+        if (auth_data.valid()) {
+          _userpwd = auth_data.getUserPwd();  
+
+          // set username and password
+          CURLcode ret = curl_easy_setopt(_curl, CURLOPT_USERPWD, _userpwd.c_str());
+          if ( ret != 0 ) ZYPP_THROW(MediaCurlSetOptException(_url, _curlError));
+          
+          // set auth type
+          ret = curl_easy_setopt(_curl, CURLOPT_HTTPAUTH, auth_data.authType());
+          if ( ret != 0 ) ZYPP_THROW(MediaCurlSetOptException(_url, _curlError));
+        }
+
+        retry = true;
+      }
+      else
+      {
+        DBG << "callback answer: cancel" << endl;
+        report->finish(url, zypp::media::DownloadProgressReport::ACCESS_DENIED, ex_r.msg());
+        ZYPP_RETHROW(ex_r);
+      }
+    }
+    // unexpected exception
+    catch (MediaException & excpt_r)
+    {
+      // FIXME: this will not match the first URL
+      // FIXME: error number fix
+      report->finish(url, zypp::media::DownloadProgressReport::NOT_FOUND, excpt_r.msg());
+      ZYPP_RETHROW(excpt_r);
+    }
   }
+  while (retry);
+
   report->finish(url, zypp::media::DownloadProgressReport::NO_ERROR, "");
 }
 
 bool MediaCurl::getDoesFileExist( const Pathname & filename ) const
+{
+  bool retry = false;
+  CurlAuthData auth_data;
+
+  do
+  {
+    try
+    {
+      return doGetDoesFileExist( filename );
+    }
+    // authentication problem, retry with proper authentication data
+    catch (MediaUnauthorizedException & ex_r)
+    {
+      callback::SendReport<AuthenticationReport> auth_report;
+      
+      if (!_url.getUsername().empty() && !retry)
+        auth_data.setUserName(_url.getUsername());
+      
+      string prompt_msg;
+      if (retry || !_url.getUsername().empty())
+        prompt_msg = _("Invalid user name or password.");
+      else // first prompt
+        prompt_msg = boost::str(boost::format(
+          _("Authentication required for '%s'")) % _url.asString()); 
+
+      // set available authentication types from the exception
+      auth_data.setAuthType(ex_r.hint());
+
+      if (auth_report->prompt(_url, prompt_msg, auth_data))
+      {
+        DBG << "callback answer: retry" << endl
+            << "CurlAuthData: " << auth_data << endl;
+
+        if (auth_data.valid()) {
+          _userpwd = auth_data.getUserPwd();  
+
+          // set username and password
+          CURLcode ret = curl_easy_setopt(_curl, CURLOPT_USERPWD, _userpwd.c_str());
+          if ( ret != 0 ) ZYPP_THROW(MediaCurlSetOptException(_url, _curlError));
+          
+          // set auth type
+          ret = curl_easy_setopt(_curl, CURLOPT_HTTPAUTH, auth_data.authType());
+          if ( ret != 0 ) ZYPP_THROW(MediaCurlSetOptException(_url, _curlError));
+        }
+
+        retry = true;
+      }
+      else
+      {
+        DBG << "callback answer: cancel" << endl;
+        ZYPP_RETHROW(ex_r);
+      }
+    }
+    // unexpected exception
+    catch (MediaException & excpt_r)
+    {
+      ZYPP_RETHROW(excpt_r);
+    }
+  }
+  while (retry);
+  
+  return false;
+}
+
+bool MediaCurl::doGetDoesFileExist( const Pathname & filename ) const
 {
   DBG << filename.asString() << endl;
 
@@ -867,7 +960,14 @@ bool MediaCurl::getDoesFileExist( const Pathname & filename ) const
                           str::numstring( httpReturnCode );
             if ( httpReturnCode == 401 )
             {
-              err = " Login failed";
+              std::string auth_hint = getAuthHint(); 
+
+              DBG << msg << " Login failed (URL: " << url.asString() << ")" << std::endl;
+              DBG << "MediaUnauthorizedException auth hint: '" << auth_hint << "'" << std::endl;
+
+              ZYPP_THROW(MediaUnauthorizedException(
+                url, "Login failed.", _curlError, auth_hint
+              ));
             }
             else
             if ( httpReturnCode == 404)
@@ -949,7 +1049,8 @@ void MediaCurl::doGetFileCopy( const Pathname & filename , const Pathname & targ
       path += filename.asString().substr( 1, filename.asString().size() - 1 );
     } else if ( filename.relative() ) {
       // Add trailing slash to path, if not already there
-      if ( !path.empty() && *path.rbegin() != '/' ) path += "/";
+      if (path.empty()) path = "/";
+      else if (*path.rbegin() != '/' ) path += "/";
       // Remove "./" from begin of relative file name
       path += filename.asString().substr( 2, filename.asString().size() - 2 );
     } else {
@@ -1073,7 +1174,14 @@ void MediaCurl::doGetFileCopy( const Pathname & filename , const Pathname & targ
                            str::numstring( httpReturnCode );
               if ( httpReturnCode == 401 )
               {
-                err = " Login failed";
+                std::string auth_hint = getAuthHint(); 
+
+                DBG << msg << " Login failed (URL: " << url.asString() << ")" << std::endl;
+                DBG << "MediaUnauthorizedException auth hint: '" << auth_hint << "'" << std::endl;
+
+                ZYPP_THROW(MediaUnauthorizedException(
+                  url, "Login failed.", _curlError, auth_hint
+                ));
               }
               else
               if ( httpReturnCode == 404)
@@ -1334,6 +1442,20 @@ int MediaCurl::progressCallback( void *clientp, double dltotal, double dlnow,
   return 0;
 }
 
+string MediaCurl::getAuthHint() const
+{
+  long auth_info = CURLAUTH_NONE;
+
+  CURLcode infoRet =
+    curl_easy_getinfo(_curl, CURLINFO_HTTPAUTH_AVAIL, &auth_info);
+
+  if(infoRet == CURLE_OK)
+  {
+    return CurlAuthData::auth_type_long2str(auth_info);
+  }
+
+  return "";
+}
 
   } // namespace media
 } // namespace zypp
