@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Fri Feb 23 14:16:19 CET 2007 - jkupec@suse.cz
+
+- support for HTTP authentication prompt added (#190609)
+- fixed problem with empty path in URL
+  in MediaCurl::doGetFileCopy()
+- r5085
+
+-------------------------------------------------------------------
 Mon Feb 12 15:28:08 CET 2007 - jkupec@suse.cz
 
 - Merged revisions 4926-4993,4995,4998-5006 via svnmerge from
