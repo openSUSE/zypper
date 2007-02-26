@@ -237,14 +237,6 @@ namespace zypp
     const std::list<Pathname> publicKeys();
     //@}
 
-    //! @name for ZMD
-    //@{
-    std::string zmdName (void) const;
-    void setZmdName (const std::string name_r);
-    std::string zmdDescription (void) const;
-    void setZmdDescription (const std::string desc_r);
-    //@}
-
     //! @name for YaST
     //@{
     Url url (void) const;

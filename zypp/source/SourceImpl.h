@@ -239,15 +239,6 @@ namespace zypp
 
       virtual std::string unique_id (void) const;
 
-      /**
-       * ZMD backend specific stuff
-       * default source only provides dummy implementations
-       */
-      virtual std::string zmdName (void) const;
-      virtual void setZmdName (const std::string name_r);
-      virtual std::string zmdDescription (void) const;
-      virtual void setZmdDescription (const std::string desc_r);
-
       virtual void redirect(unsigned media_nr, const Url & new_url);
       /**
        * Reattach the source if it is not mounted, but downloaded,

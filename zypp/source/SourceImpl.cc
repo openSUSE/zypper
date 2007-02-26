@@ -931,31 +931,6 @@ std::string SourceImpl::unique_id (void) const
 }
 
 /////////////////////////////////////////////////////////////////
-/**
- * ZMD specific stuff
- */
-
-std::string SourceImpl::zmdName (void) const
-{
-  return "zmdname";
-}
-
-void SourceImpl::setZmdName (const std::string name_r)
-{
-  return;
-}
-
-std::string SourceImpl::zmdDescription (void) const
-{
-  return "zmddescription";
-}
-
-void SourceImpl::setZmdDescription (const std::string desc_r)
-{
-  return;
-}
-
-/////////////////////////////////////////////////////////////////
 
 std::ostream & SourceImpl::dumpOn( std::ostream & str ) const
 {

@@ -125,18 +125,6 @@ namespace zypp
   void Source_Ref::setId (const std::string id_r)
   { return _pimpl->setId (id_r); }
 
-  string Source_Ref::zmdName (void) const
-  { return _pimpl->zmdName(); }
-
-  void Source_Ref::setZmdName (const std::string name_r)
-  { return _pimpl->setZmdName( name_r ); }
-
-  string Source_Ref::zmdDescription (void) const
-  { return _pimpl->zmdDescription(); }
-
-  void Source_Ref::setZmdDescription (const std::string desc_r)
-  { return _pimpl->setZmdDescription( desc_r ); }
-
   unsigned Source_Ref::priority (void) const
   { return _pimpl->priority(); }
 
