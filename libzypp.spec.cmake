@@ -89,9 +89,9 @@ cd build
 make install DESTDIR=$RPM_BUILD_ROOT
 make -C doc/autodoc install DESTDIR=$RPM_BUILD_ROOT
 %suse_update_desktop_file -G "" -C "" package-manager
-make -C po %{?jobs:-j %jobs} install DESTDIR=$RPM_BUILD_ROOT
+make -C po install DESTDIR=$RPM_BUILD_ROOT
 # Create filelist with translatins
-%{find_lang} $RPM_BUILD_ROOT zypp
+%{find_lang} zypp
 
 
 %post
