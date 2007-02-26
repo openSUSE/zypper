@@ -250,7 +250,6 @@ AC_OUTPUT(	 po/Makefile.in\
   zypp/parser/yum2/Makefile \
 	zypp/parser/yum/schema/Makefile \
   	zypp/parser/tagfile/Makefile  \
-	zypp/parser/taggedfile/Makefile  \
 	zypp/parser/xmlstore/Makefile   \
   	zypp/parser/xmlstore/schema/Makefile  \
 	zypp/pool/Makefile		\
