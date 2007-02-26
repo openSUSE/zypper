@@ -47,6 +47,7 @@ SET( zypp_SRCS
   PoolItem.cc
   ProblemSolution.cc
   Product.cc
+  ProvideFilePolicy.cc
   PublicKey.cc
   Range.cc
   Rel.cc
@@ -131,6 +132,7 @@ SET( zypp_HEADERS
   ProblemSolution.h
   ProblemTypes.h
   Product.h
+  ProvideFilePolicy.h
   PublicKey.h
   Range.h
   Rel.h
@@ -266,11 +268,13 @@ INSTALL(  FILES
 
 SET( zypp_data_SRCS
   data/ResolvableData.cc
+  data/RecordId.cc
   data/ResolvableDataConsumer.cc
 )
 
 SET( zypp_data_HEADERS
   data/ResolvableData.h
+  data/RecordId.h
   data/ResolvableDataConsumer.h
 )
 
@@ -625,6 +629,7 @@ SET( zypp_source_SRCS
   source/SourceImpl.cc
   source/SourceInfo.cc
   source/SourceProvideFile.cc
+  source/SUSEMediaVerifier.cc
 )
 
 SET( zypp_source_HEADERS
@@ -637,6 +642,7 @@ SET( zypp_source_HEADERS
   source/SourceImpl.h
   source/SourceInfo.h
   source/SourceProvideFile.h
+  source/SUSEMediaVerifier.h
 )
 
 INSTALL(  FILES
@@ -927,7 +933,6 @@ INSTALL(  FILES
   ${zypp_zypp_detail_HEADERS}
   DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/zypp/detail
 )
-
 
 SET( zypp_lib_SRCS
 ${zypp_source_plaindir_SRCS}

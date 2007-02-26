@@ -42,17 +42,36 @@ namespace data
   };
   
   typedef std::list<Dependency> DependencyList;
-  
-  class ResObject : public base::ReferenceCounted, private base::NonCopyable
+
+  class Resolvable : public base::ReferenceCounted, private base::NonCopyable
+  {
+    public:
+    Resolvable()
+    {};
+    
+    std::string name;
+    Edition edition;
+    Arch arch;
+    
+    DependencyList provides;
+    DependencyList conflicts;
+    DependencyList obsoletes;
+    DependencyList freshens;
+    DependencyList requires;
+    DependencyList prerequires;
+    DependencyList recommends;
+    DependencyList suggests;
+    DependencyList supplements;
+    DependencyList enhances;
+  };
+  //a
+  class ResObject : public Resolvable
   {
     public:
       ResObject()
         : source_media_nr(1), install_only(false)
       {}
       
-      std::string name;
-      Edition edition;
-      Arch arch;
       
       TranslatedText summary;
       TranslatedText description;
@@ -74,17 +93,6 @@ namespace data
       
       Date build_time;
       Date install_time;
-      
-      DependencyList provides;
-      DependencyList conflicts;
-      DependencyList obsoletes;
-      DependencyList freshens;
-      DependencyList requires;
-      DependencyList prerequires;
-      DependencyList recommends;
-      DependencyList suggests;
-      DependencyList supplements;
-      DependencyList enhances;
   };
   
   class AtomBase : public ResObject
@@ -139,19 +147,29 @@ namespace data
       Patch() {};
   };
 
+  /*
+   * Data Object for Pattern
+   * resolvable
+   */
   class Pattern : public ResObject
   {
     public:
 
-      Pattern() {};
+      Pattern()
+        : user_visible(true)
+      {};
       
       std::string default_;
-      std::string user_visible;
+      bool user_visible;
       TranslatedText category;
       std::string icon;
       std::string script;
   };
 
+  /*
+   * Data Object for Product
+   * resolvable
+   */
   class Product : public ResObject
   {
     public:
@@ -168,6 +186,10 @@ namespace data
       std::string releasenotesurl;
   };
 
+    /*
+   * Data Object for Package
+   * resolvable
+   */
   class Package : public ResObject
   {
     public:

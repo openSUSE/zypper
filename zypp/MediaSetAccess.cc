@@ -62,9 +62,26 @@ namespace zypp
   {
   }
 
-  void MediaSetAccess::setVerifiers( const std::vector<media::MediaVerifierRef> &verifiers )
+
+  void MediaSetAccess::setVerifier( unsigned media_nr, media::MediaVerifierRef verifier )
   {
-    _verifiers = verifiers;
+    if (_medias.find(media_nr) != _medias.end())
+    {
+      // the media already exists, set theverifier
+      media::MediaAccessId id = _medias[media_nr];
+      media::MediaManager media_mgr;
+      media_mgr.addVerifier( id, verifier );
+      // remove any saved verifier for this media
+      _verifiers.erase(media_nr);
+      //if (! noattach && ! media_mgr.isAttached(id))
+      //media_mgr.attach(id);
+    }
+    else
+    {
+      // save the verifier in the map, and set it when
+      // the media number is first attached
+      _verifiers[media_nr] = verifier;
+    }
   }
 
 //       callback::SendReport<source::DownloadFileReport> report;
@@ -99,6 +116,12 @@ namespace zypp
         ZYPP_THROW(Exception("Can't copy " + downloaded_file.asString() + " to " + destination.asString()));      
     }
   }
+
+  Pathname MediaSetAccess::provideFile( const source::OnMediaLocation & on_media_file )
+  {
+    return provideFile( on_media_file.filename(), on_media_file.medianr() );
+  }
+
 
   Pathname MediaSetAccess::provideFile(const Pathname & file, unsigned media_nr )
   {
@@ -151,7 +174,7 @@ namespace zypp
               MIL << "Failed to release media " << media << endl;
           }
           
-          MIL << "Releasing all medias of all sources" << endl;
+          MIL << "Releasing all _medias of all sources" << endl;
           try
           {
             //zypp::SourceManager::sourceManager()->releaseAllSources();
@@ -239,9 +262,9 @@ namespace zypp
   {
     media::MediaManager media_mgr;
 
-    if (medias.find(medianr) != medias.end())
+    if (_medias.find(medianr) != _medias.end())
     {
-      media::MediaAccessId id = medias[medianr];
+      media::MediaAccessId id = _medias[medianr];
       //if (! noattach && ! media_mgr.isAttached(id))
       //media_mgr.attach(id);
       return id;
@@ -249,21 +272,29 @@ namespace zypp
     Url url;
     url = rewriteUrl (_url, medianr);
     media::MediaAccessId id = media_mgr.open(url, _path);
-    //try {
-    //  MIL << "Adding media verifier" << endl;
-    //  media_mgr.delVerifier(id);
-    //  media_mgr.addVerifier(id, _source.verifier(medianr));
-    //}
-    //catch (const Exception & excpt_r)
-    //{
-    //  ZYPP_CAUGHT(excpt_r);
-    //  WAR << "Verifier not found" << endl;
-    //}
-    medias[medianr] = id;
-    
-    //if (! noattach)
-    //  media_mgr.attach(id);
+    _medias[medianr] = id;
 
+    try
+    {
+      if (_verifiers.find(medianr) != _verifiers.end())
+      {
+        // there is a setted verifier for this media
+        // FIXME check the case where the verifier exists
+        // but we have no access id for the media
+        media::MediaAccessId id = _medias[medianr];
+        media::MediaManager media_mgr;
+        media_mgr.delVerifier(id);
+        media_mgr.addVerifier( id, _verifiers[medianr] );
+        // remove any saved verifier for this media
+        _verifiers.erase(medianr);
+      }
+    }
+    catch ( const Exception &e )
+    {
+      ZYPP_CAUGHT(e);
+      WAR << "Verifier not found" << endl;
+    }
+    
     return id;
   }
 
@@ -314,32 +345,6 @@ namespace zypp
 //     media::MediaVerifierRef MediaSetAccess::verifier(unsigned media_nr)
 //     { return media::MediaVerifierRef(new media::NoVerifier()); }
 
-  MediaVerifier::MediaVerifier(const std::string & vendor_r, const std::string & id_r, const media::MediaNr media_nr)
-    : _media_vendor(vendor_r)
-      , _media_id(id_r)
-      , _media_nr(media_nr)
-  {}
-
-  bool MediaVerifier::isDesiredMedia(const media::MediaAccessRef &ref)
-  {
-    if (_media_vendor.empty() || _media_id.empty())
-      return true;
-
-      Pathname media_file = "/media." + str::numstring(_media_nr) + "/media";
-      ref->provideFile (media_file);
-      media_file = ref->localPath(media_file);
-      std::ifstream str(media_file.asString().c_str());
-      std::string vendor;
-      std::string id;
-
-#warning check the stream status
-      getline(str, vendor);
-      getline(str, id);
-
-      return (vendor == _media_vendor && id == _media_id );
-  }
-
-
 /////////////////////////////////////////////////////////////////
-} // namespace source
+} // namespace zypp
 ///////////////////////////////////////////////////////////////////

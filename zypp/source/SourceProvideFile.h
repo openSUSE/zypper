@@ -19,6 +19,7 @@
 #include "zypp/Source.h"
 #include "zypp/ManagedFile.h"
 #include "zypp/source/OnMediaLocation.h"
+#include "zypp/ProvideFilePolicy.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -26,49 +27,6 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
   namespace source
   { /////////////////////////////////////////////////////////////////
-
-    ///////////////////////////////////////////////////////////////////
-    //
-    //	CLASS NAME : ProvideFilePolicy
-    //
-    /** Policy for \ref provideFile.
-     * Provides callback hooks for e.g progress reporting or
-     * behaviour on checksum failure. Provides default
-     * implementations if no callback is set.
-    */
-    class ProvideFilePolicy
-    {
-    public:
-      /** Progress callback signature. */
-      typedef function<bool ( int )> ProgressCB;
-
-      /** Set callback. */
-      ProvideFilePolicy & progressCB( ProgressCB progressCB_r )
-      { _progressCB = progressCB_r; return *this; }
-
-      /** Evaluate callback. */
-      bool progress( int value ) const;
-
-    public:
-      /** FailOnChecksumError callback signature. */
-      typedef function<bool ()> FailOnChecksumErrorCB;
-
-      /** Set callback. */
-      ProvideFilePolicy & failOnChecksumErrorCB( FailOnChecksumErrorCB failOnChecksumErrorCB_r )
-      { _failOnChecksumErrorCB = failOnChecksumErrorCB_r; return *this; }
-
-      /** Set callback convenience.
-       * Let callback return \c yesno_r.
-      */
-      ProvideFilePolicy & failOnChecksumErrorCB( bool yesno_r );
-
-      /** Evaluate callback. */
-      bool failOnChecksumError() const;
-
-    private:
-      FailOnChecksumErrorCB _failOnChecksumErrorCB;
-      ProgressCB            _progressCB;
-    };
 
     ///////////////////////////////////////////////////////////////////
     //

@@ -83,6 +83,7 @@ std::ostream& operator<<(std::ostream& out, const Script& data)
   return out;
 }  
   
+
 std::ostream& operator<<(std::ostream& out, const Message& data)
 {
   out << "Message Data: " << endl

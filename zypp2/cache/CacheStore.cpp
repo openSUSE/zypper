@@ -1,4 +1,6 @@
 
+#include <sqlite3.h>
+
 #include "zypp/ZYppFactory.h"
 #include "zypp/ZYpp.h"
 
@@ -34,7 +36,7 @@ namespace zypp
 ///////////////////////////////////////////////////////////////////
 namespace cache
 { /////////////////////////////////////////////////////////////////
-  
+
 CacheStore::CacheStore( const Pathname &dbdir )
 {
   cache::CacheInitializer initializer(dbdir, "zypp.db");
@@ -71,11 +73,10 @@ CacheStore::~CacheStore()
 
 void CacheStore::consumePackage( const data::Package &package )
 {
-  long long id = insertResObject( ResTraits<Package>::kind, package );
-  
+  data::RecordId id = insertResObject( ResTraits<Package>::kind, package );
 }
 
-long long CacheStore::insertResObject( const Resolvable::Kind &kind, const data::ResObject &res )
+data::RecordId CacheStore::insertResObject( const Resolvable::Kind &kind, const data::ResObject &res )
 {
   _insert_resolvable_cmd->bind(1,  res.name.c_str(), -1);
   _insert_resolvable_cmd->bind(2,  res.edition.version().c_str(), -1);
@@ -98,18 +99,19 @@ long long CacheStore::insertResObject( const Resolvable::Kind &kind, const data:
   _insert_resolvable_cmd->bind(18, static_cast<int>(res.build_time) ); // FIX cast?
   _insert_resolvable_cmd->bind(19, static_cast<int>(res.install_time) ); // FIX cast?
   _insert_resolvable_cmd->executenonquery();
-  return _con->insertid();
 
+  return static_cast<data::RecordId>( _con->insertid() );
 }
 
-void CacheStore::insertPackage( long long id, const data::Package &pkg )
+void CacheStore::insertPackage( data::RecordId id, const data::Package &pkg )
 {
+  sqlite_int64 sqid = static_cast<sqlite_int64>(id);
   /*
   " resolvable_id, checksum, changelog, buildhost, distribution, license" \
   " , packager, package_group, url, os, prein, postin, preun, postun, source_size" \
   " , authors, filenames, location ) values ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? );"
   */
-  _insert_package_cmd->bind( 1, id );
+  _insert_package_cmd->bind( 1, sqid );
   _insert_package_cmd->bind( 2 );
   //_insert_package_cmd->bind( 2, pkg.checksum.asString().c_str() );
   _insert_package_cmd->bind( 3 );
@@ -120,3 +122,4 @@ void CacheStore::insertPackage( long long id, const data::Package &pkg )
 
 }
 }
+

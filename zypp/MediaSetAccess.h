@@ -21,6 +21,7 @@
 #include "zypp/media/MediaManager.h"
 #include "zypp/Pathname.h"
 #include "zypp/CheckSum.h"
+#include "zypp/source/OnMediaLocation.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -28,22 +29,6 @@ namespace zypp
 
     DEFINE_PTR_TYPE(MediaSetAccess);
 
-
-    class MediaVerifier : public zypp::media::MediaVerifierBase
-    {
-      public:
-      /** ctor */
-      MediaVerifier(const std::string & vendor_r, const std::string & id_r, const media::MediaNr media_nr = 1);
-      /**
-       * Check if the specified attached media contains
-       * the desired media number (e.g. SLES10 CD1).
-       */
-      virtual bool isDesiredMedia(const media::MediaAccessRef &ref);
-      private:
-        std::string _media_vendor;
-        std::string _media_id;
-        media::MediaNr _media_nr;
-    };
 
     class OnMediaLocation
     {
@@ -82,17 +67,33 @@ namespace zypp
     public:
       /**
        * creates a callback enabled media access  for \param url and \param path.
-       * with only  media no verified
+       * with only 1 media no verified
        */
       MediaSetAccess( const Url &url, const Pathname &path );
       ~MediaSetAccess();
+
       /**
-       * the media change callbacks depend on the verifiers given for each media.
+       * Sets a verifier for given media number
        */
-      void setVerifiers( const std::vector<media::MediaVerifierRef> &verifiers );
+      void setVerifier( unsigned media_nr, media::MediaVerifierRef verifier );
+      
+      /**
+       * provide a file fom a multiple media
+       */
+      Pathname provideFile( const source::OnMediaLocation & on_media_file );
+
+      /**
+       * provides a file on multiple media which is possibly cached
+       * The cached_file is provided and the Checksums are compared.
+       * if they match, the cached one is copied to the destination directory
+       * if not the file is provided and copied to the destination directory.
+       */
+      void providePossiblyCachedMetadataFile( const source::OnMediaLocation &file_on_media, const Pathname &destination, const Pathname &cached_file);
+
       Pathname provideFile(const Pathname & file, unsigned media_nr = 1 );
       Pathname provideFile(const Pathname & file, unsigned media_nr, const FileChecker checker );
       void providePossiblyCachedMetadataFile( const Pathname &file_to_download, unsigned medianr, const Pathname &destination, const Pathname &cached_file, const CheckSum &checksum );
+
     protected:
       Pathname provideFileInternal(const Pathname & file, unsigned media_nr, bool checkonly, bool cached);
       Url rewriteUrl (const Url & url_r, const media::MediaNr medianr);
@@ -101,10 +102,11 @@ namespace zypp
     private:
       Url _url;
       Pathname _path;
-      std::vector<media::MediaVerifierRef> _verifiers;
       typedef std::map<media::MediaNr, media::MediaAccessId> MediaMap;
+      typedef std::map<media::MediaNr, media::MediaVerifierRef > VerifierMap;
       /** Mapping between each CD and Media Access ID */
-      MediaMap medias;
+      MediaMap _medias;
+      VerifierMap _verifiers;
     };
     ///////////////////////////////////////////////////////////////////
 

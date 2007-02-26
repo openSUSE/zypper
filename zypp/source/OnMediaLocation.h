@@ -29,7 +29,12 @@ namespace zypp
     //
     //	CLASS NAME : OnMediaLocation
     //
-    /** */
+    /** 
+     * Describes a path ona certain media amongs as the information
+     * required to download it, like its media number, checksum and
+     * size.
+     * it does not specifies the URI of the file.
+    */
     class OnMediaLocation
     {
       friend std::ostream & operator<<( std::ostream & str, const OnMediaLocation & obj );

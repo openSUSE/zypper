@@ -18,6 +18,9 @@
 #include "zypp/base/PtrTypes.h"
 #include "zypp/Pathname.h"
 #include "zypp/data/ResolvableDataConsumer.h"
+#include "zypp/data/RecordId.h"
+
+#include "zypp/data/RecordId.h"
 #include "zypp2/cache/sqlite3x/sqlite3x.hpp"
 
 ///////////////////////////////////////////////////////////////////
@@ -38,8 +41,8 @@ namespace zypp
       void consumePackage( const data::Package &package );
       
       protected:
-      long long insertResObject( const Resolvable::Kind &kind, const data::ResObject &res );
-      void insertPackage( long long id, const data::Package &package );
+      data::RecordId insertResObject( const Resolvable::Kind &kind, const data::ResObject &res );
+      void insertPackage( const data::RecordId id, const data::Package &package );
       
       private:
         shared_ptr<sqlite3x::sqlite3_connection> _con;
@@ -51,3 +54,4 @@ namespace zypp
 }
 
 #endif
+

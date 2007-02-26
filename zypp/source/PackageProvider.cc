@@ -163,7 +163,7 @@ namespace zypp
       .checksum( _package->checksum() )
       .downloadsize( _package->archivesize() );
 
-      source::ProvideFilePolicy policy;
+      ProvideFilePolicy policy;
       policy.progressCB( bind( &PackageProvider::progressPackageDownload, this, _1 ) );
       policy.failOnChecksumErrorCB( bind( &PackageProvider::failOnChecksumError, this ) );
 
@@ -184,7 +184,7 @@ namespace zypp
       ManagedFile delta;
       try
         {
-          source::ProvideFilePolicy policy;
+          ProvideFilePolicy policy;
           policy.progressCB( bind( &PackageProvider::progressDeltaDownload, this, _1 ) );
           delta = source::provideFile( _package->source(), delta_r.location(), policy );
         }
@@ -234,7 +234,7 @@ namespace zypp
       ManagedFile patch;
       try
         {
-          source::ProvideFilePolicy policy;
+          ProvideFilePolicy policy;
           policy.progressCB( bind( &PackageProvider::progressPatchDownload, this, _1 ) );
           patch = source::provideFile( _package->source(), patch_r.location(), policy );
         }
