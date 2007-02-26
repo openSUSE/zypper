@@ -91,6 +91,7 @@ make -C doc/autodoc install DESTDIR=$RPM_BUILD_ROOT
 %suse_update_desktop_file -G "" -C "" package-manager
 make -C po install DESTDIR=$RPM_BUILD_ROOT
 # Create filelist with translatins
+cd ..
 %{find_lang} zypp
 
 
@@ -121,7 +122,7 @@ make -C po install DESTDIR=$RPM_BUILD_ROOT
 %{_docdir}/%{name}
 %dir %{prefix}/include/zypp
 %{prefix}/include/zypp/*
-%{prefix}/share/cmake/Modules/FindLibzypp.cmake
+%{prefix}/share/cmake/Modules/FindZypp.cmake
 %{_libdir}/pkgconfig/libzypp.pc
 
 %changelog -n libzypp

@@ -1,5 +1,15 @@
 PROJECT(libzypp)
 
+# Library
+IF ( ${LIB_SUFFIX} )
+  SET ( LIB_INSTALL_DIR "${CMAKE_INSTALL_PREFIX}/lib${LIB_SUFFIX}" )
+ELSE ( ${LIB_SUFFIX} )
+  IF ( EXISTS "${CMAKE_INSTALL_PREFIX}/lib64" )
+    SET( LIB_SUFFIX "64" )
+  ENDIF ( EXISTS "${CMAKE_INSTALL_PREFIX}/lib64" )
+  SET ( LIB_INSTALL_DIR "${CMAKE_INSTALL_PREFIX}/lib${LIB_SUFFIX}" )
+ENDIF ( ${LIB_SUFFIX} )
+MESSAGE(STATUS "Libraries will be installed in ${LIB_INSTALL_DIR}" )
 ####################################################################
 # CONFIGURATION                                                    #
 ####################################################################
@@ -41,10 +51,8 @@ INCLUDE(CPack)
 
 ####################################################################
 
-INCLUDE(DefineInstallationPaths)
-
 SET( DOC_INSTALL_DIR
-   "${SHARE_INSTALL_PREFIX}/doc/packages/${PACKAGE}"
+   "${CMAKE_INSTALL_PREFIX}/share/doc/packages/${PACKAGE}"
    CACHE PATH "The install dir for documentation (default prefix/share/doc/packages/${PACKAGE})"
    FORCE
 )
