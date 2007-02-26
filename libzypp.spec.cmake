@@ -50,6 +50,7 @@ Authors:
 Requires:       libzypp
 Requires:       libxml2-devel curl-devel openssl-devel rpm-devel glibc-devel zlib-devel
 Requires:       bzip2 popt-devel dbus-1-devel glib2-devel hal-devel boost-devel libstdc++-devel
+Requires:       cmake
 Summary:        Package, Patch, Pattern, and Product Management - developers files
 Group:          System/Packages
 Provides:       yast2-packagemanager-devel
@@ -120,6 +121,7 @@ make -C po %{?jobs:-j %jobs} install DESTDIR=$RPM_BUILD_ROOT
 %{_docdir}/%{name}
 %dir %{prefix}/include/zypp
 %{prefix}/include/zypp/*
+%{prefix}/share/cmake/Modules/FindLibzypp.cmake
 %{_libdir}/pkgconfig/libzypp.pc
 
 %changelog -n libzypp

@@ -145,14 +145,15 @@ MESSAGE(STATUS "version: ${VERSION}")
 ####################################################################
 # RPM SPEC                                                         #
 ####################################################################
-
 MESSAGE(STATUS "Writing spec file...")
 CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/libzypp.spec.cmake ${CMAKE_BINARY_DIR}/package/libzypp.spec @ONLY)
 
 MESSAGE(STATUS "Writing pkg-config file...")
 CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/libzypp.pc.cmake ${CMAKE_BINARY_DIR}/libzypp.pc @ONLY)
-
 INSTALL( FILES ${CMAKE_BINARY_DIR}/libzypp.pc DESTINATION ${LIB_INSTALL_DIR}/pkgconfig )
+
+MESSAGE(STATUS "FindZypp.cmake will be installed in ${CMAKE_INSTALL_PREFIX}/share/cmake/Modules")
+INSTALL( FILES ${CMAKE_SOURCE_DIR}/cmake/modules/FindZypp.cmake DESTINATION ${CMAKE_INSTALL_PREFIX}/share/cmake/Modules )
 
 MACRO(add_subdir_sources subdir real_sources)
   MESSAGE( STATUS "Adding ${subdir} to sources..." )

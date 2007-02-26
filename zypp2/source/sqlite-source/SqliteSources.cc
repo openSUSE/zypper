@@ -73,8 +73,6 @@ SqliteSources::createDummy( const Url & url, const string & catalog )
     SqliteSourceImpl *impl = new SqliteSourceImpl( SqliteSourceImplPolicy() );
     impl->factoryCtor( mediaid, Pathname(), catalog, "", false, false );
     impl->setId( catalog );
-    impl->setZmdName( catalog );
-    impl->setZmdDescription ( catalog );
     impl->setPriority( 0 );
     impl->setSubscribed( true );
 
@@ -170,9 +168,6 @@ SqliteSources::sources( bool refresh )
       SqliteSourceImpl *impl = new SqliteSourceImpl ();
       impl->factoryCtor( mediaid, Pathname(), alias, "", false, false );
       impl->setId( id );
-      //impl->setZmdDescription ( desc );
-      //impl->setPriority( priority );
-      //impl->setSubscribed( subscribed != 0 );
 
       impl->attachDatabase( _db );
       impl->attachIdMap( &_idmap );
