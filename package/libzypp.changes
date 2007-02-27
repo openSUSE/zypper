@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Tue Feb 27 15:50:39 CET 2007 - dmacvicar@suse.de
+
+- merging from 10.2 / SP1
+- #247459 ftp probing
+  denied == dont exists in ftp
+- r5124
+
+-------------------------------------------------------------------
 Tue Feb 27 15:35:06 CET 2007 - schubi@suse.de
 
 - Merging solver related stuff from SuSE-Linux-10_2-Branch ( till r5111):
