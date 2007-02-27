@@ -945,9 +945,10 @@ bool MediaCurl::doGetDoesFileExist( const Pathname & filename ) const
       bool err_file_not_found = false;
       switch ( ok )
       {
-      case CURLE_UNSUPPORTED_PROTOCOL:
-      case CURLE_URL_MALFORMAT:
-      case CURLE_URL_MALFORMAT_USER:
+      case CURLE_FTP_COULDNT_RETR_FILE:
+      case CURLE_FTP_ACCESS_DENIED: 
+        err_file_not_found = true;
+        break;
       case CURLE_HTTP_RETURNED_ERROR:
         {
           long httpReturnCode = 0;
@@ -989,8 +990,9 @@ bool MediaCurl::doGetDoesFileExist( const Pathname & filename ) const
           }
         }
         break;
-      case CURLE_FTP_COULDNT_RETR_FILE:
-      case CURLE_FTP_ACCESS_DENIED:
+      case CURLE_UNSUPPORTED_PROTOCOL:
+      case CURLE_URL_MALFORMAT:
+      case CURLE_URL_MALFORMAT_USER:
       case CURLE_BAD_PASSWORD_ENTERED:
       case CURLE_FTP_USER_PASSWORD_INCORRECT:
       case CURLE_COULDNT_RESOLVE_PROXY:
