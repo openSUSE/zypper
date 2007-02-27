@@ -998,6 +998,52 @@ ${zypp_detail_HEADERS}
 ${zypp_pool_HEADERS}
 )
 
+#
+# Macro to set the log group for a list of files
+#
+MACRO( SET_LOGGROUP _group _files  )
+  SET_SOURCE_FILES_PROPERTIES( ${_files} COMPILE_FLAGS -DZYPP_BASE_LOGGER_LOGGROUP=\\"${_group}\\" )
+  FOREACH (_currentFile ${ARGN})
+    MESSAGE( STATUS "setting loggroup to \"${_group}\" for ${_currentFile}" )
+    SET_SOURCE_FILES_PROPERTIES( ${_currentFile} COMPILE_FLAGS -DZYPP_BASE_LOGGER_LOGGROUP=\\"${_group}\\" )
+  ENDFOREACH (_currentFile ${ARGN})
+ENDMACRO( SET_LOGGROUP )
+
+# Default loggroup for all files
+SET_LOGGROUP( "zypp" ${zypp_lib_SRCS} )
+
+# override some defaults
+SET_LOGGROUP( "plaindir" ${zypp_source_plaindir_SRCS} )
+SET_LOGGROUP( "xmlstore" ${zypp_target_store_xml_SRCS} )
+SET_LOGGROUP( "tagfile" ${zypp_parser_tagfile_SRCS} )
+#SET_LOGGROUP( "group" ${zypp_target_rpm_SRCS} )
+#SET_LOGGROUP( "group" ${zypp_parser_yum2_SRCS} )
+#SET_LOGGROUP( "group" ${zypp_capability_SRCS} )
+#SET_LOGGROUP( "group" ${zypp_ui_SRCS} )
+#SET_LOGGROUP( "group" ${zypp_parser_xmlstore_SRCS} )
+#SET_LOGGROUP( "group" ${zypp_data_SRCS} )
+#SET_LOGGROUP( "group" ${zypp_media_SRCS} )
+#SET_LOGGROUP( "group" ${zypp_target_hal_SRCS} )
+#SET_LOGGROUP( "group" ${zypp_parser_xml_SRCS} )
+#SET_LOGGROUP( "group" ${zypp_media_proxyinfo_SRCS} )
+#SET_LOGGROUP( "group" ${zypp_source_yum_SRCS} )
+#SET_LOGGROUP( "group" ${zypp_base_SRCS} )
+#SET_LOGGROUP( "group" ${zypp_solver_detail_SRCS} )
+#SET_LOGGROUP( "group" ${zypp_target_store_SRCS} )
+#SET_LOGGROUP( "group" ${zypp_url_SRCS} )
+#SET_LOGGROUP( "group" ${zypp_source_SRCS} )
+#SET_LOGGROUP( "group" ${zypp_parser_SRCS} )
+#SET_LOGGROUP( "group" ${zypp_SRCS} )
+#SET_LOGGROUP( "group" ${zypp_zypp_detail_SRCS} )
+#SET_LOGGROUP( "group" ${zypp_thread_SRCS} )
+#SET_LOGGROUP( "group" ${zypp_source_susetags_SRCS} )
+#SET_LOGGROUP( "group" ${zypp_target_modalias_SRCS} )
+#SET_LOGGROUP( "group" ${zypp_target_SRCS} )
+#SET_LOGGROUP( "group" ${zypp_parser_yum_SRCS} )
+#SET_LOGGROUP( "group" ${zypp_detail_SRCS} )
+#SET_LOGGROUP( "group" ${zypp_pool_SRCS} )
+
+
 ADD_LIBRARY(zypp SHARED ${zypp_lib_SRCS})
 SET_TARGET_PROPERTIES( zypp PROPERTIES VERSION "${LIBZYPP_VERSION_INFO}" )
 # System libraries
