@@ -95,7 +95,8 @@ pkginclude_HEADERS = NeedAType.h \
 	PublicKey.h \
 	Signature.h \
 	KeyRing.h \
-	MediaSetAccess.h
+	MediaSetAccess.h \
+	ProvideFilePolicy.h
 
 ## ##################################################
 
@@ -173,7 +174,8 @@ lib@PACKAGE@_la_SOURCES = \
 	PublicKey.cc \
 	Signature.cc \
 	KeyRing.cc \
-	MediaSetAccess.cc
+	MediaSetAccess.cc \
+	ProvideFilePolicy.cc
 
 
 lib@PACKAGE@_la_LDFLAGS =	@LIBZYPP_VERSION_INFO@
