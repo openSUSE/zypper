@@ -1,4 +1,18 @@
 -------------------------------------------------------------------
+Tue Feb 27 15:35:06 CET 2007 - schubi@suse.de
+
+- Merging solver related stuff from SuSE-Linux-10_2-Branch ( till r5111):
+- Simultaneouqusly establishing of items which are conflicting eachother is
+  useless. So only one will be established. Fixed in QueueItemInstall.cc
+  Bug 243595
+- Added new upgrade options to fine tune version and patch handling.
+  (F301990)
+- The context of establishPool will be stored in Resolver and will be
+  regarded for the next solver run everytime. So it will be not reset by
+  any solver run anymore.
+  bug 191810 ( A broken patch will not be installed again) 
+
+-------------------------------------------------------------------
 Fri Feb 23 17:40:23 CET 2007 - jkupec@suse.cz
 
 - adding sotf,timeo=X nfs mount options by default (#235211)
