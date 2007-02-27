@@ -103,6 +103,7 @@ Resolver::Resolver (const ResPool & pool)
     , _skippedPossibilities (false)
     , _valid_solution_count (0)
     , _best_context (NULL)
+    , _establish_context (NULL)
     , _timed_out (false)
     , _architecture( zypp_detail::defaultArchitecture() )
     , _forceResolve (false)
@@ -493,6 +494,7 @@ Resolver::establishState( ResolverContext_Ptr context )
 				    _ignoreInstalledItem,
 				    _ignoreArchitectureItem);
     context->setForceResolve( _forceResolve );
+    context->setEstablishContext( _establish_context );    
     context->setPreferHighestVersion ( _preferHighestVersion );
     context->setUpgradeMode( _upgradeMode );
 
@@ -518,6 +520,7 @@ Resolver::establishState( ResolverContext_Ptr context )
     context->setEstablishing (false);
 
     _best_context = context;
+    _establish_context = context;
 
     return;
 }
@@ -616,6 +619,7 @@ Resolver::freshenState( ResolverContext_Ptr context,
 				    _ignoreInstalledItem,
 				    _ignoreArchitectureItem );
     context->setForceResolve( _forceResolve );
+    context->setEstablishContext( _establish_context );        
     context->setPreferHighestVersion( _preferHighestVersion );
     context->setUpgradeMode( _upgradeMode );
 
@@ -739,6 +743,7 @@ Resolver::resolveDependencies (const ResolverContext_Ptr context)
 						     _ignoreInstalledItem,
 						     _ignoreArchitectureItem);
     initial_queue->context()->setForceResolve( _forceResolve );
+    initial_queue->context()->setEstablishContext( _establish_context );       
     initial_queue->context()->setPreferHighestVersion( _preferHighestVersion );
     initial_queue->context()->setUpgradeMode( _upgradeMode );
     initial_queue->context()->setTryAllPossibilities( _tryAllPossibilities );

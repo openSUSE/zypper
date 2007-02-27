@@ -245,6 +245,7 @@ namespace zypp
     TransactByValue getTransactByValue() const
     { return (TransactByValue)_bitfield.value<TransactByField>(); }
 
+      
     bool isToBeUninstalledDueToObsolete () const
     { return isToBeUninstalled() && fieldValueIs<TransactDetailField>( DUE_TO_OBSOLETE ); }
 
@@ -259,7 +260,6 @@ namespace zypp
 
     bool isToBeInstalledNotSoft () const
     { return isToBeInstalled() && !fieldValueIs<TransactDetailField>( SOFT_INSTALL ); }
-      
 
     bool isToBeUninstalledSoft () const
     { return isToBeUninstalled() && fieldValueIs<TransactDetailField>( SOFT_REMOVE ); }
@@ -479,6 +479,14 @@ namespace zypp
 
     //------------------------------------------------------------------------
     // *** These are only for the Resolver ***
+
+    EstablishValue getEstablishValue() const
+    { return (EstablishValue)_bitfield.value<EstablishField>(); }
+      
+    bool setEstablishValue(const EstablishValue &establish) {
+	fieldValueAssign<EstablishField>(establish);
+	return true;
+    }
 
     bool setToBeUninstalledDueToUnlink ( )
     {

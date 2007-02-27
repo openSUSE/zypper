@@ -104,9 +104,9 @@ struct AVOrder : public std::binary_function<PoolItem_Ref,PoolItem_Ref,bool>
 	    return lhs.resolvable() < rhs.resolvable();
         }
 };
-	
+
 typedef std::set<PoolItem_Ref, AVOrder> PoolItemOrderSet;
-	
+
 
 
 // check if downgrade is allowed
@@ -116,7 +116,7 @@ typedef std::set<PoolItem_Ref, AVOrder> PoolItemOrderSet;
 // newer.
 
 static bool
-downgrade_allowed (PoolItem_Ref installed, PoolItem_Ref candidate, Target_Ptr target)
+downgrade_allowed( PoolItem_Ref installed, PoolItem_Ref candidate, bool silent_downgrades )
 {
     if (installed.status().isLocked()) {
 	MIL << "Installed " << installed << " is locked, not upgrading" << endl;
@@ -127,16 +127,17 @@ downgrade_allowed (PoolItem_Ref installed, PoolItem_Ref candidate, Target_Ptr ta
     Package::constPtr ipkg = asKind<Package>(ires);
     Resolvable::constPtr cres = candidate.resolvable();
     Package::constPtr cpkg = asKind<Package>(cres);
-if (ipkg) DBG << "Installed vendor '" << ipkg->vendor() << "'" << endl;
-if (cpkg) DBG << "Candidate vendor '" << cpkg->vendor() << "'" << endl;
+
+    if (ipkg)
+      DBG << "Installed vendor '" << ipkg->vendor() << "'" << endl;
+    if (cpkg)
+      DBG << "Candidate vendor '" << cpkg->vendor() << "'" << endl;
+
     if (cpkg
 	&& VendorAttr::instance().isKnown( cpkg->vendor() ) )
     {
-	if (target
-	    && target->root().asString() != "/")	// downgrade ok if we're running from inst-sys
-	{
+	if ( silent_downgrades )
 	    return true;
-	}
 	if ( ipkg->buildtime() < cpkg->buildtime() ) {			// installed has older buildtime
 	    MIL << "allowed downgrade " << installed << " to " << candidate << endl;
 	    return true;						// see bug #152760
@@ -273,10 +274,12 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
 	if (!_testing) return;		// can't continue without target
 	MIL << "Running in test mode, continuing without target" << endl;
   }
-MIL << "target at " << target << endl;
+  MIL << "target at " << target << endl;
 
   MIL << "doUpgrade start... "
     << "(delete_unmaintained:" << (opt_stats_r.delete_unmaintained?"yes":"no") << ")"
+    << "(silent_downgrades:" << (opt_stats_r.silent_downgrades?"yes":"no") << ")"
+    << "(keep_installed_patches:" << (opt_stats_r.keep_installed_patches?"yes":"no") << ")"
     << endl;
 
   _update_items.clear();
@@ -327,7 +330,7 @@ MIL << "target at " << target << endl;
 	++opt_stats_r.pre_nocand;
 	continue;
       }
-MIL << "item " << item << " is installed, candidate is " << candidate << endl;
+      MIL << "item " << item << " is installed, candidate is " << candidate << endl;
       if (candidate.status().isSeen()) {			// seen already
 	candidate.status().setSeen(true);
 	continue;
@@ -349,7 +352,7 @@ MIL << "item " << item << " is installed, candidate is " << candidate << endl;
 	  continue;
 	}
 
-MIL << "found installed " << installed << " for item " << candidate << endl;
+        MIL << "found installed " << installed << " for item " << candidate << endl;
 	CandidateMap::const_iterator cand_it = candidatemap.find( installed );
 	if (cand_it == candidatemap.end()						// not in map yet
 	    || (cand_it->second->arch().compare( candidate->arch() ) < 0)		// or the new has better architecture
@@ -364,7 +367,7 @@ MIL << "found installed " << installed << " for item " << candidate << endl;
     ++opt_stats_r.pre_avcand;
     available.insert( candidate );
 
-MIL << "installed " << installed << ", candidate " << candidate << endl;
+    MIL << "installed " << installed << ", candidate " << candidate << endl;
 
     // remember any splitprovides to packages actually installed.
     CapSet caps = candidate->dep (Dep::PROVIDES);
@@ -374,15 +377,16 @@ MIL << "installed " << installed << ", candidate " << candidate << endl;
 	    capability::CapabilityImpl::SplitInfo splitinfo = capability::CapabilityImpl::getSplitInfo( *cit );
 
 	    PoolItem splititem = Helper::findInstalledByNameAndKind (_pool, splitinfo.name, ResTraits<zypp::Package>::kind);
-MIL << "has split cap " << splitinfo.name << ":" << splitinfo.path << ", splititem:" << splititem << endl;
+            MIL << "has split cap " << splitinfo.name << ":" << splitinfo.path << ", splititem:" << splititem << endl;
 	    if (splititem) {
 		if (target) {
 		    ResObject::constPtr robj = target->whoOwnsFile( splitinfo.path );
-if (robj) MIL << "whoOwnsFile(): " << *robj << endl;
+                    if (robj)
+                      MIL << "whoOwnsFile(): " << *robj << endl;
 		    if (robj
 			&& robj->name() == splitinfo.name)
 		    {
-MIL << "split matched !" << endl;
+                      MIL << "split matched !" << endl;
 			splitmap[splititem].insert( candidate );
 		    }
 		}
@@ -396,32 +400,6 @@ MIL << "split matched !" << endl;
   for ( ResPool::const_iterator it = _pool.begin(); it != _pool.end(); ++it ) {
 	it->status().setSeen( false );
   }
-
-#warning Cant update from broken install medium like STABLE
-#if 0
-  // filter packages with requires that are not fulfilled by other candidates,
-  // to reduce errors a bit when trying to update from a broken installation
-  // medium (ie. STABLE)
-  {
-    CheckSetDeps::BrokenMap broken;
-    CheckSetDeps checker(available, broken);
-
-    checker.setTrackRelations(false);
-    checker.checkAll();
-
-    if(!broken.empty())
-    {
-      CheckSetDeps::BrokenMap::iterator bit, bend;
-      for(bit = broken.begin(), bend = broken.end(); bit != bend; ++bit)
-      {
-	MIL << bit->first->name() << " is broken, not considering it for update" << endl;
-	available.remove(bit->first);
-	--opt_stats_r.pre_avcand;
-	++opt_stats_r.pre_nocand;
-      }
-    }
-  }
-#endif
 
   MIL << "doUpgrade: " << opt_stats_r.pre_todel  << " packages tagged to delete" << endl;
   MIL << "doUpgrade: " << opt_stats_r.pre_nocand << " packages without candidate (foreign, replaced or dropped)" << endl;
@@ -478,6 +456,25 @@ MIL << "split matched !" << endl;
       continue;
     }
 
+    if ( isKind<Patch>(installed.resolvable())
+         || isKind<Atom>(installed.resolvable())
+         || isKind<Script>(installed.resolvable())
+         || isKind<Message>(installed.resolvable()) )
+      {
+        if ( ! opt_stats_r.keep_installed_patches )
+          {
+            if ( isKind<Patch>(installed.resolvable()) )
+              MIL << "OUTDATED Patch: " << installed << endl;
+            installed.status().setToBeUninstalled( ResStatus::APPL_HIGH );
+          }
+        else
+          {
+            if ( isKind<Patch>(installed.resolvable()) )
+              MIL << "SKIP Patch: " << installed << endl;
+          }
+        continue;
+      }
+
     CandidateMap::iterator cand_it = candidatemap.find( installed );
 
     bool probably_dropped = false;
@@ -500,8 +497,9 @@ MIL << "split matched !" << endl;
 	  // check whether to downgrade:
 
 	  if (cmp == 0							// equal
-	      || !downgrade_allowed (installed, candidate, target))	//  or downgrade not allowed
-	  {	
+	      || !downgrade_allowed( installed, candidate,
+                                     opt_stats_r.silent_downgrades) )	//  or downgrade not allowed
+	  {
 	    MIL << " ==> (keep installed)" << candidate << endl;	// keep installed
 	    ++opt_stats_r.chk_to_keep_installed;
 	  } else {							// older and downgrade allowed

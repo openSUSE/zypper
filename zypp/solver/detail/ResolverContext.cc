@@ -85,6 +85,7 @@ operator<<( ostream& os, const ResolverContext & context)
 
 ResolverContext::ResolverContext (const ResPool & pool, const Arch & arch, ResolverContext_Ptr parent)
     : _parent (parent)
+    , _establish_context (NULL)
     , _pool (pool)
     , _download_size (0)
     , _install_size (0)
@@ -125,6 +126,7 @@ _XDEBUG( "ResolverContext[" << this << "]::ResolverContext(" << parent << ")" );
 	_preferHighestVersion = parent->_preferHighestVersion;
 	_tryAllPossibilities = parent->_tryAllPossibilities;
 	_skippedPossibilities = parent->_skippedPossibilities;
+	_establish_context = parent->_establish_context;
 	
     } else {
 	_min_priority = MAXINT;
@@ -157,7 +159,15 @@ ResolverContext::getStatus (PoolItem_Ref item)
 	if (it != context->_context.end()) {
 //_XDEBUG( "[" << context << "]:" << it->second );
 	    _last_checked_status = it->second;
-	    return it->second;				// Y: return
+           if (_last_checked_status.isUndetermined()
+               && _establish_context != NULL) {
+	       // take status from the last resolver establish run
+	       // in order to get the correct establishing status of the system
+	       // without any transactions. Bug 191810	       
+               ResStatus status = _establish_context->getStatus(item);
+               _last_checked_status.setEstablishValue (status.getEstablishValue());
+           }
+           return _last_checked_status;                // Y: return
 	}
 	context = context->_parent;			// N: go up the chain
     }
@@ -172,6 +182,13 @@ ResolverContext::getStatus (PoolItem_Ref item)
 #endif
     _last_checked_status = status;
 //_XDEBUG( "[NULL]:" << status );    
+    if (_establish_context != NULL) {
+	// take status from the last resolver establish run
+	// in order to get the correct establishing status of the system
+	// without any transactions. Bug 191810
+	ResStatus status = _establish_context->getStatus(item);
+	_last_checked_status.setEstablishValue (status.getEstablishValue());
+    }
 
     return _last_checked_status;				// Not part of context, return Pool status
 }
