@@ -59,7 +59,6 @@ class ResolverContext : public base::ReferenceCounted, private base::NonCopyable
   private:
 
     ResolverContext_Ptr _parent;		// branches share a common parent
-    ResolverContext_Ptr _establish_context;   // Context of the last Resolver-Establish call
 
     typedef std::map<PoolItem_Ref,ResStatus> Context;
     Context _context;				// the set of items touched in this transaction
@@ -176,8 +175,6 @@ class ResolverContext : public base::ReferenceCounted, private base::NonCopyable
     
     void setForceResolve (const bool force) { _forceResolve = force; }
     const bool forceResolve() { return _forceResolve; }
-
-    void setEstablishContext (const ResolverContext_Ptr establish_context) { _establish_context = establish_context; }
 
     void setPreferHighestVersion (const bool highestVersion) { _preferHighestVersion = highestVersion; }
     const bool preferHighestVersion() { return _preferHighestVersion; }  

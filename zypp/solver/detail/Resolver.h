@@ -116,8 +116,6 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
     int _valid_solution_count;
 
     ResolverContext_Ptr _best_context;
-    // Context of the last establishing call ( without any transaction )
-    ResolverContext_Ptr _establish_context;    
     bool _timed_out;
 
     std::set<Source_Ref> _subscribed;
