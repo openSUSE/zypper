@@ -30,6 +30,7 @@
 #include "zypp/ResPool.h"
 #include "zypp/ResFilters.h"
 #include "zypp/CapFilters.h"
+#include "zypp/CapMatchHelper.h"
 
 #include "zypp/solver/detail/QueueItemInstall.h"
 #include "zypp/solver/detail/QueueItemEstablish.h"
@@ -566,9 +567,23 @@ QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 
 	// schedule all collected items for establish
 
-	for (EstablishMap::iterator it = establish.establishmap.begin(); it != establish.establishmap.end(); ++it) {
-	    QueueItemEstablish_Ptr establish_item = new QueueItemEstablish (pool(), it->second, true);
-	    qil.push_front( establish_item );
+	for (EstablishMap::iterator firstIt = establish.establishmap.begin(); firstIt != establish.establishmap.end(); ++firstIt) {
+	    bool conflictFound = false;
+	    CapSet provides = firstIt->second.resolvable()->deps()[Dep::PROVIDES];
+	    // It is useless to establish items which are conflicting with eachother. So they will
+	    // be filtered out. bug 243595
+	    for (EstablishMap::iterator secondIt = firstIt; secondIt != establish.establishmap.end() && !conflictFound; ++secondIt) {
+		CapSet conflicts = secondIt->second.resolvable()->deps()[Dep::CONFLICTS];
+		if (hasMatches (provides,conflicts)) {
+		    conflictFound = true;
+		    _XDEBUG("Do not establish " << firstIt->second << " cause it is conflicting with " << secondIt->second );
+		}
+	    }
+
+	    if (!conflictFound) {
+		QueueItemEstablish_Ptr establish_item = new QueueItemEstablish (pool(), firstIt->second, true);
+		qil.push_front( establish_item );
+	    }
 	}
 
     } // end of goto-over-definitions-to-finished block
