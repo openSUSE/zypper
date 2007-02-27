@@ -99,6 +99,67 @@ namespace zypp
                          action_r );
   }
 
+
+  ///////////////////////////////////////////////////////////////////
+
+  /** Functor invoking \c action_r on each matching \ref Capability
+   *  in a \ref CapSet.
+   *
+   * Functor is provided to ease using \ref forEachMatchIn as action
+   * in other algorithms (nested loop over two CapSets).
+  */
+  class ForEachMatchInCapSet
+  {
+  public:
+    typedef function<bool(const Capability &, const Capability &)> Action;
+
+  public:
+    ForEachMatchInCapSet( const CapSet & set_r, const Action & action_r )
+    : _set( set_r )
+    , _action( action_r )
+    {}
+
+    bool operator()( const Capability & cap_r ) const
+    {
+      return( forEachMatchIn( _set, cap_r, bind( _action, _1, cap_r ) )
+              >= 0 ); // i.e. _action did not return false
+    }
+
+  private:
+    const CapSet & _set;
+    Action         _action;
+  };
+
+  /** Invoke \c action_r on each matching pair of Capabilities within
+   * two CapSets. */
+  inline int forEachMatchIn( const CapSet & lhs_r,
+                             const CapSet & rhs_r,
+                             function<bool(const Capability &, const Capability &)> action_r )
+  {
+    return invokeOnEach( lhs_r.begin(), lhs_r.end(),
+                         ForEachMatchInCapSet( rhs_r, action_r ) );
+  }
+  ///////////////////////////////////////////////////////////////////
+
+  namespace capmatch_detail {
+    struct AlwaysFalse
+    {
+      bool operator()( const Capability &, const Capability & ) const
+      { return false; }
+    };
+  }
+
+  /** Return \c true if the CapSets contain at least one pair of
+   *  Capabilities that match.
+  */
+  inline bool hasMatches( const CapSet & lhs_r, const CapSet & rhs_r )
+  {
+    return( forEachMatchIn( lhs_r, rhs_r, capmatch_detail::AlwaysFalse() ) < 0 );
+  }
+
+  ///////////////////////////////////////////////////////////////////
+
+
   /** Functor invoking \c action_r on each matching \ref Capability
    *  in a \ref ResPool.
    *
