@@ -413,6 +413,19 @@ INSTALL(  FILES
   DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/parser
 )
 
+SET( zypp_parser_inifile_SRCS
+  parser/inifile/ini_file.cpp
+)
+
+SET( zypp_parser_inifile_HEADERS
+  parser/inifile/ini_file.hpp
+)
+
+INSTALL(  FILES
+  ${zypp_parser_inifile_HEADERS}
+  DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/parser/inifile
+)
+
 SET( zypp_parser_tagfile_SRCS
   parser/tagfile/ParseException.cc
   parser/tagfile/TagFileParser.cc
@@ -962,6 +975,7 @@ ${zypp_source_susetags_SRCS}
 ${zypp_target_modalias_SRCS}
 ${zypp_target_SRCS}
 ${zypp_parser_yum_SRCS}
+${zypp_parser_inifile_SRCS}
 ${zypp_detail_SRCS}
 ${zypp_pool_SRCS}
 )
@@ -994,6 +1008,7 @@ ${zypp_source_susetags_HEADERS}
 ${zypp_target_modalias_HEADERS}
 ${zypp_target_HEADERS}
 ${zypp_parser_yum_HEADERS}
+${zypp_parser_inifile_HEADERS}
 ${zypp_detail_HEADERS}
 ${zypp_pool_HEADERS}
 )
@@ -1004,7 +1019,7 @@ ${zypp_pool_HEADERS}
 MACRO( SET_LOGGROUP _group _files  )
   SET_SOURCE_FILES_PROPERTIES( ${_files} COMPILE_FLAGS -DZYPP_BASE_LOGGER_LOGGROUP=\\"${_group}\\" )
   FOREACH (_currentFile ${ARGN})
-    MESSAGE( STATUS "setting loggroup to \"${_group}\" for ${_currentFile}" )
+#MESSAGE( STATUS "setting loggroup to \"${_group}\" for ${_currentFile}" )
     SET_SOURCE_FILES_PROPERTIES( ${_currentFile} COMPILE_FLAGS -DZYPP_BASE_LOGGER_LOGGROUP=\\"${_group}\\" )
   ENDFOREACH (_currentFile ${ARGN})
 ENDMACRO( SET_LOGGROUP )

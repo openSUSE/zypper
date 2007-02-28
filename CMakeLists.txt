@@ -1,14 +1,14 @@
 PROJECT(libzypp)
 
 # Library
-IF ( ${LIB} )
+IF ( DEFINED LIB )
   SET ( LIB_INSTALL_DIR "${CMAKE_INSTALL_PREFIX}/${LIB}" )
-ELSE ( ${LIB} )
+ELSE ( DEFINED  LIB )
   IF ( EXISTS "${CMAKE_INSTALL_PREFIX}/lib64" )
     SET( LIB_SUFFIX "64" )
   ENDIF ( EXISTS "${CMAKE_INSTALL_PREFIX}/lib64" )
   SET ( LIB_INSTALL_DIR "${CMAKE_INSTALL_PREFIX}/lib${LIB_SUFFIX}" )
-ENDIF ( ${LIB} )
+ENDIF ( DEFINED  LIB )
 MESSAGE(STATUS "Libraries will be installed in ${LIB_INSTALL_DIR}" )
 ####################################################################
 # CONFIGURATION                                                    #

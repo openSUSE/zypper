@@ -22,7 +22,7 @@ MACRO(GETTEXT_CREATE_TRANSLATIONS _potFile _firstPoFile)
    GET_FILENAME_COMPONENT(_potBasename ${_potFile} NAME_WE)
    GET_FILENAME_COMPONENT(_absPotFile ${_potFile} ABSOLUTE)
 
-   MESSAGE( STATUS "pot: ${_potFile} converted to ${_potBasename}")
+#MESSAGE( STATUS "pot: ${_potFile} converted to ${_potBasename}")
 
    SET(_addToAll)
    IF(${_firstPoFile} STREQUAL "ALL")
