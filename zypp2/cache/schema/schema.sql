@@ -1,44 +1,96 @@
 
-DROP INDEX IF EXISTS dependency_resolvable;
-DROP INDEX IF EXISTS package_details_resolvable_id;
-DROP INDEX IF EXISTS resolvable_catalog;
+------------------------------------------------
+-- The cleanup can be generated as:
+-- cat schema.sql | grep "^CREATE" | awk '{print "DROP " $2 " IF EXISTS " $3 ";"}' | sort -r
+------------------------------------------------
 
+DROP VIEW IF EXISTS scripts;
+DROP VIEW IF EXISTS products;
+DROP VIEW IF EXISTS patterns;
+DROP VIEW IF EXISTS patches;
+DROP VIEW IF EXISTS packages;
+DROP VIEW IF EXISTS messages;
 DROP TRIGGER IF EXISTS remove_resolvables;
-DROP TRIGGER IF EXISTS remove_catalogs;
 DROP TRIGGER IF EXISTS remove_patch_packages_baseversions;
-
-DROP TABLE IF EXISTS db_info;
-DROP TABLE IF EXISTS names;
+DROP TABLE IF EXISTS versioned_capabilities;
+DROP TABLE IF EXISTS translated_texts;
+DROP TABLE IF EXISTS script_details;
+DROP TABLE IF EXISTS resolvable_texts;
+DROP TABLE IF EXISTS resolvables_catalogs;
+DROP TABLE IF EXISTS resolvables;
+DROP TABLE IF EXISTS product_details;
+DROP TABLE IF EXISTS pattern_details;
 DROP TABLE IF EXISTS patch_packages_baseversions;
 DROP TABLE IF EXISTS patch_packages;
-DROP TABLE IF EXISTS delta_packages;
-DROP TABLE IF EXISTS package_details;
-DROP VIEW IF EXISTS packages;
 DROP TABLE IF EXISTS patch_details;
-DROP VIEW IF EXISTS patches;
-DROP TABLE IF EXISTS pattern_details;
-DROP VIEW IF EXISTS patterns;
-DROP TABLE IF EXISTS product_details;
-DROP VIEW IF EXISTS products;
+DROP TABLE IF EXISTS package_details;
+DROP TABLE IF EXISTS names;
 DROP TABLE IF EXISTS message_details;
-DROP VIEW IF EXISTS messages;
-DROP TABLE IF EXISTS script_details;
-DROP VIEW IF EXISTS scripts;
-DROP TABLE IF EXISTS versioned_dependencies;
-DROP TABLE IF EXISTS dependencies;
-DROP TABLE IF EXISTS sources;
 DROP TABLE IF EXISTS locks;
-DROP TABLE IF EXISTS resolvables;
+DROP TABLE IF EXISTS files;
+DROP TABLE IF EXISTS file_names;
+DROP TABLE IF EXISTS file_capabilities;
+DROP TABLE IF EXISTS dir_names;
+DROP TABLE IF EXISTS delta_packages;
+DROP TABLE IF EXISTS db_info;
 DROP TABLE IF EXISTS catalogs;
+DROP TABLE IF EXISTS capabilities;
+DROP INDEX IF EXISTS package_details_resolvable_id;
+DROP INDEX IF EXISTS capability_resolvable;
+
+------------------------------------------------
+-- version metadata, probably not needed, there
+-- is pragma user_version
+------------------------------------------------
 
 CREATE TABLE db_info (
   version INTEGER
 );
 
+------------------------------------------------
+-- Knew catalogs. They existed some day.
+------------------------------------------------
+
+CREATE TABLE catalogs (
+    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL
+  , url TEXT NOT NULL
+  , path TEXT NOT NULL
+
+);
+
+------------------------------------------------
+-- Resolvable names
+------------------------------------------------
+
 CREATE TABLE names (
     id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL
   , name TEXT UNIQUE
 );
+
+------------------------------------------------
+-- File names table and normalized sub tables
+------------------------------------------------
+
+CREATE TABLE file_names (
+   id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL 
+  , name TEXT
+);
+
+CREATE TABLE dir_names (
+   id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL 
+  , name TEXT
+);
+
+CREATE TABLE files (
+   id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL 
+  , dir_name_id INTEGER NOT NULL
+  , file_name_id INTEGER NOT NULL
+  , UNIQUE ( dir_name_id, file_name_id )
+);
+
+------------------------------------------------
+-- File names table and normalized sub tables
+------------------------------------------------
 
 CREATE TABLE translated_texts (
     id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL
@@ -49,11 +101,15 @@ CREATE TABLE translated_texts (
 );
 
 CREATE TABLE resolvable_texts (
-  , resolvable_id INTEGER NOT NULL
+    resolvable_id INTEGER NOT NULL
   , text_id INTEGER NOT NULL
   , lang_id INTEGER NOT NULL
   , field_id INTEGER NOT NULL
-)
+);
+
+------------------------------------------------
+-- Resolvables table
+------------------------------------------------
 
 CREATE TABLE resolvables (
     id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL
@@ -69,49 +125,16 @@ CREATE TABLE resolvables (
   , delnotify TEXT
   , license_to_confirm TEXT
   , vendor TEXT
-  , size INTEGER
+  , installed_size INTEGER
   , archive_size INTEGER
-  , catalog INTEGER
-  , catalog_media_nr INTEGER
   , install_only INTEGER
   , build_time INTEGER
   , install_time INTEGER
-
-);
-
-CREATE TABLE dependencies (
-    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL
-  , resolvable_id INTEGER REFERENCES resolvables(id)
-  , dependency_type INTEGER
-  , refers_kind INTEGER
-);
-
-CREATE TABLE versioned_dependencies (
-   id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL 
-  , dependency_id INTEGER REFERENCES dependencies(id)
-  , name_id INTEGER REFERENCES names(id)
-  , version TEXT
-  , release TEXT
-  , epoch INTEGER
-  , relation INTEGER
 );
 
 CREATE TABLE message_details (
     resolvable_id INTEGER  REFERENCES resolvables(id)
   , text TEXT
-);
-
-CREATE TABLE catalogs (
-    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL
-  , alias TEXT NOT NULL
-  , url TEXT
-  , description TEXT
-  , enabled INTEGER
-  , autorefresh INTEGER
-  , type VARCHAR(20)
-  , cache_dir TEXT
-  , path TEXT
-
 );
 
 CREATE TABLE patch_details (
@@ -184,6 +207,11 @@ CREATE TABLE package_details (
   , filenames TEXT
   , location TEXT
 );
+CREATE INDEX package_details_resolvable_id ON package_details (resolvable_id);
+
+------------------------------------------------
+-- Do we need those here?
+------------------------------------------------
 
 CREATE TABLE locks (
     id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL
@@ -251,31 +279,6 @@ CREATE TABLE patch_packages (
 
 );
 
-CREATE TABLE patch_packages_baseversions (
-    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL
-  , patch_package_id INTEGER REFERENCES patch_packages(id)
-  , version TEXT
-  , release TEXT
-  , epoch INTEGER
-
-);
-
-CREATE INDEX dependency_resolvable ON dependencies (resolvable_id);
-CREATE INDEX package_details_resolvable_id ON package_details (resolvable_id);
-CREATE INDEX resolvable_catalog ON resolvables (catalog);
-
-CREATE TRIGGER remove_catalogs
-  AFTER DELETE ON catalogs
-  BEGIN
-    DELETE FROM resolvables WHERE catalog = old.id;
-  END;
-
-CREATE TRIGGER remove_patch_packages_baseversions
-  AFTER DELETE ON patch_packages
-  BEGIN
-    DELETE FROM patch_packages_baseversions WHERE patch_package_id = old.id;
-  END;
-
 CREATE TRIGGER remove_resolvables
   AFTER DELETE ON resolvables
   BEGIN
@@ -290,3 +293,69 @@ CREATE TRIGGER remove_resolvables
     DELETE FROM delta_packages WHERE package_id = old.id;
     DELETE FROM patch_packages WHERE package_id = old.id;
   END;
+
+CREATE TABLE patch_packages_baseversions (
+    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL
+  , patch_package_id INTEGER REFERENCES patch_packages(id)
+  , version TEXT
+  , release TEXT
+  , epoch INTEGER
+
+);
+
+------------------------------------------------
+-- Capabilities
+------------------------------------------------
+
+CREATE TABLE capabilities (
+    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL
+  , resolvable_id INTEGER REFERENCES resolvables(id)
+  , dependency_type INTEGER
+  , refers_kind INTEGER
+);
+CREATE INDEX capability_resolvable ON capabilities (resolvable_id);
+
+CREATE TABLE versioned_capabilities (
+   id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL 
+  , dependency_id INTEGER REFERENCES capabilities (id)
+  , name_id INTEGER REFERENCES names(id)
+  , version TEXT
+  , release TEXT
+  , epoch INTEGER
+  , relation INTEGER
+);
+
+CREATE TABLE file_capabilities (
+   id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL 
+  , dependency_id INTEGER REFERENCES capabilities (id)
+  , file_id INTEGER REFERENCES files(id)
+);
+
+------------------------------------------------
+-- Associate resolvables and catalogs
+------------------------------------------------
+
+-- FIXME do we want to allow same resolvable to
+-- be listed twice in same source but different
+-- medias? I think NOT.
+CREATE TABLE resolvables_catalogs (
+    resolvable_id INTEGER REFERENCES resolvables (id)
+  , catalog_id    INTEGER REFERENCES catalogs    (id)
+  , catalog_media_nr INTEGER
+  , PRIMARY KEY ( resolvable_id, catalog_id )
+);
+
+-- FIX this trigger
+--CREATE TRIGGER remove_catalogs
+--  AFTER DELETE ON catalogs
+--  BEGIN
+--    DELETE FROM resolvables WHERE catalog = old.id;
+--  END;
+
+CREATE TRIGGER remove_patch_packages_baseversions
+  AFTER DELETE ON patch_packages
+  BEGIN
+    DELETE FROM patch_packages_baseversions WHERE patch_package_id = old.id;
+  END;
+
+
