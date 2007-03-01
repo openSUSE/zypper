@@ -944,7 +944,7 @@ SET( zypp_zypp_detail_HEADERS
 
 INSTALL(  FILES
   ${zypp_zypp_detail_HEADERS}
-  DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/zypp/detail
+  DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/zypp_detail
 )
 
 SET( zypp_lib_SRCS
