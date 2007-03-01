@@ -29,16 +29,6 @@ namespace zypp
 
     DEFINE_PTR_TYPE(MediaSetAccess);
 
-
-    class OnMediaLocation
-    {
-      public:
-      OnMediaLocation()
-      {};
-      private:
-      
-    };
-
     typedef boost::function<bool ( const Pathname &file )> FileChecker;
 
     class NullFileChecker
