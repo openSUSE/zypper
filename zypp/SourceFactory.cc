@@ -27,7 +27,11 @@ using namespace zypp::source;
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
-  media::MediaManager media_mgr;
+  static media::MediaManager & media_mgr()
+  {
+	  static media::MediaManager _v;
+	  return _v;
+  }
 
   ///////////////////////////////////////////////////////////////////
   //
@@ -91,13 +95,13 @@ namespace zypp
       ZYPP_THROW( Exception("Empty URL passed to SourceFactory") );
 
     // open the media
-    media::MediaId id = media_mgr.open(url_r);
-    media_mgr.attach(id);
+    media::MediaId id = media_mgr().open(url_r);
+    media_mgr().attach(id);
     Pathname products_file = Pathname("media.1/products");
 
     try  {
-      media_mgr.provideFile (id, products_file);
-      products_file = media_mgr.localPath (id, products_file);
+      media_mgr().provideFile (id, products_file);
+      products_file = media_mgr().localPath (id, products_file);
       scanProductsFile (products_file, products_r);
     }
     catch ( const Exception & excpt ) {
@@ -105,7 +109,7 @@ namespace zypp
       MIL << "No products description found on the Url" << endl;
     }
 
-    media_mgr.release(id);
+    media_mgr().release(id);
   }
 
   Source_Ref SourceFactory::createFrom( const source::SourceInfo &context )
@@ -200,14 +204,14 @@ namespace zypp
 
 #warning if cache_dir is provided, no need to open the original url
     // open the media
-    media::MediaId id = media_mgr.open(url_r);
+    media::MediaId id = media_mgr().open(url_r);
 
     // add dummy verifier
-    media_mgr.addVerifier(id, media::MediaVerifierRef(new media::NoVerifier()));
+    media_mgr().addVerifier(id, media::MediaVerifierRef(new media::NoVerifier()));
     // attach only if initializing from media and not from cache (#153073)
     if (cache_dir_r == "")
     {
-      media_mgr.attach(id);
+      media_mgr().attach(id);
     }
     else
     {
@@ -235,7 +239,7 @@ namespace zypp
         // nohing
       }
       report->finish(url_r, ProbeSourceReport::NO_ERROR, "");
-  
+
       if ( probeYUM )
       {
         Source_Ref source(createSourceImplWorkflow<source::yum::YUMSourceImpl>( id, context ));
@@ -275,14 +279,14 @@ namespace zypp
 
 #warning if cache_dir is provided, no need to open the original url
     // open the media
-    media::MediaId id = media_mgr.open(url_r);
+    media::MediaId id = media_mgr().open(url_r);
 
     // add dummy verifier
-    media_mgr.addVerifier(id, media::MediaVerifierRef(new media::NoVerifier()));
+    media_mgr().addVerifier(id, media::MediaVerifierRef(new media::NoVerifier()));
     // attach only if initializing from media and not from cache (#153073)
     if (cache_dir_r == "")
     {
-      media_mgr.attach(id);
+      media_mgr().attach(id);
     }
     else
     {
