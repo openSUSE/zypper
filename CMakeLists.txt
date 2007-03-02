@@ -163,16 +163,6 @@ INSTALL( FILES ${CMAKE_BINARY_DIR}/libzypp.pc DESTINATION ${LIB_INSTALL_DIR}/pkg
 MESSAGE(STATUS "FindZypp.cmake will be installed in ${CMAKE_INSTALL_PREFIX}/share/cmake/Modules")
 INSTALL( FILES ${CMAKE_SOURCE_DIR}/cmake/modules/FindZypp.cmake DESTINATION ${CMAKE_INSTALL_PREFIX}/share/cmake/Modules )
 
-MACRO(add_subdir_sources subdir real_sources)
-  MESSAGE( STATUS "Adding ${subdir} to sources..." )
-  SET(sources)
-  INCLUDE("${CMAKE_CURRENT_SOURCE_DIR}/${subdir}/CMakeLists.txt")
-  FOREACH(src ${sources})
-    MESSAGE( STATUS "  - ${CMAKE_CURRENT_SOURCE_DIR}/${subdir}/${src}" )
-    SET(real_sources ${real_sources} "${CMAKE_CURRENT_SOURCE_DIR}/${subdir}/${src}")
-  ENDFOREACH(src)
-ENDMACRO(add_subdir_sources)
-
 ####################################################################
 # SUBDIRECTORIES                                                   #
 ####################################################################

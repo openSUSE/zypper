@@ -185,13 +185,13 @@ SET( zypp_base_SRCS
   base/GzStream.cc
   base/IOStream.cc
   base/InputStream.cc
-  base/LogControl.cc
   base/Measure.cc
   base/ProfilingFormater.cc
   base/ReferenceCounted.cc
   base/String.cc
   base/Sysconfig.cc
   base/Unit.cc
+  base/LogControl.cc
 )
 
 SET( zypp_base_HEADERS
@@ -957,12 +957,9 @@ ${zypp_capability_SRCS}
 ${zypp_ui_SRCS}
 ${zypp_parser_xmlstore_SRCS}
 ${zypp_data_SRCS}
-${zypp_media_SRCS}
 ${zypp_target_hal_SRCS}
 ${zypp_parser_xml_SRCS}
-${zypp_media_proxyinfo_SRCS}
 ${zypp_source_yum_SRCS}
-${zypp_base_SRCS}
 ${zypp_solver_detail_SRCS}
 ${zypp_target_store_SRCS}
 ${zypp_url_SRCS}
@@ -978,6 +975,9 @@ ${zypp_parser_yum_SRCS}
 ${zypp_parser_inifile_SRCS}
 ${zypp_detail_SRCS}
 ${zypp_pool_SRCS}
+${zypp_media_SRCS}
+${zypp_media_proxyinfo_SRCS}
+${zypp_base_SRCS}
 )
 
 SET( zypp_lib_HEADERS
