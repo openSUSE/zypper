@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Mar  5 16:09:52 CET 2007 - jkupec@suse.cz
+
+- Russian translation added
+- r5160
+
+-------------------------------------------------------------------
 Thu Feb 22 18:30:10 CET 2007 - mvidner@suse.cz
 
 - Use the read-only hack for service-list (#247001).
