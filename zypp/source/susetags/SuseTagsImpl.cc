@@ -93,7 +93,7 @@ static bool translation_needed( const Locale &trans )
 {
   ZYpp::Ptr z = getZYpp();
   Locale lang( z->getTextLocale() );
-  
+
   while ( (lang != Locale()))
   {
     if ( trans == lang )
@@ -199,7 +199,7 @@ std::set<zypp::Resolvable::Kind>
 
     return kinds;
   }
-  
+
 bool SuseTagsImpl::downloadNeeded(const Pathname & localdir)
 {
   // we only check if the locale was stored in cache
@@ -207,7 +207,7 @@ bool SuseTagsImpl::downloadNeeded(const Pathname & localdir)
   {
     ZYpp::Ptr z = getZYpp();
     Locale lang( z->getTextLocale() );
-    
+
     std::string old_locale = read_line_from_file(localdir + "/locale");
     // if it is different we need to redownload what changed
     if ( lang != old_locale )
@@ -297,7 +297,7 @@ TmpDir SuseTagsImpl::downloadMetadata()
 
   Pathname local_dir = tmpdir.path();
 
-  
+
   ZYpp::Ptr z = getZYpp();
   Locale lang( z->getTextLocale() );
 
@@ -309,7 +309,7 @@ TmpDir SuseTagsImpl::downloadMetadata()
   {
     ZYPP_THROW(SourceIOException("Can't write current locale to cache "  + local_dir.asString() ));
   }
-  
+
   // (#163196)
   // before we used _descr_dir, which is is wrong if we
   // store metadata already running from cache
@@ -406,24 +406,24 @@ TmpDir SuseTagsImpl::downloadMetadata()
   if ( PathInfo(local_dir + "DATA/content.key").isExist() )
   {
     std::string key_id = z->keyRing()->readSignatureKeyId(local_dir + "DATA/content.key");
-    
+
     if ( ! key_id.empty() )
     {
       bool content_trusted = z->keyRing()->isKeyTrusted(key_id);
       MIL << "content file is " << ( content_trusted ? "" : " not " ) << " trusted" << std::endl;
-      
+
       for ( std::map<std::string, CheckSum>::const_iterator it = _prodImpl->_signing_keys.begin(); it != _prodImpl->_signing_keys.end(); ++it)
       {
         std::string key = it->first;
         MIL << "Importing key " << key << " if it did not exists" << std::endl;
-        
+
         getPossiblyCachedMetadataFile( _path + key, local_dir + "PUBLICKEYS/" + key, _cache_dir + "PUBLICKEYS/" + key,  _prodImpl->_signing_keys[key] );
-        
+
         z->keyRing()->importKey(local_dir + "PUBLICKEYS/" + key, content_trusted);
       }
     }
   }
-  
+
   // make sure a local descr dir exists
   if ( assert_dir( local_dir + "/DATA/descr") != 0 )
     ZYPP_THROW (SourceIOException( "Error. Can't create local descr directory. "));
@@ -436,18 +436,18 @@ TmpDir SuseTagsImpl::downloadMetadata()
     for ( std::map<std::string, CheckSum>::const_iterator it = _prodImpl->_descr_files_checksums.begin(); it != _prodImpl->_descr_files_checksums.end(); ++it)
     {
       std::string key = it->first;
-      
+
       // check if it is a package language file we can skip
       if ( (key.substr(0, 9) == "packages." ) && (key != "packages.DU" ))
       {
         MIL << key << " is a package translation." << std::endl;
         std::string language = key.substr( 9, key.size() - 9 );
-        
+
         // check if it needs to be downloaded
         if ( ! translation_needed( Locale(language) ) )
           continue;
       }
-      
+
       getPossiblyCachedMetadataFile( mediaDescrDir() + key, local_dir + "/DATA/descr" + key, _cache_dir + "/DATA/descr" + key,  _prodImpl->_descr_files_checksums[key] );
     }
   }
@@ -467,18 +467,18 @@ TmpDir SuseTagsImpl::downloadMetadata()
     for ( std::list<std::string>::const_iterator it = descr_dir_file_list.begin(); it != descr_dir_file_list.end(); ++it)
     {
       std::string filename = *it;
-      
+
       // check if it is a package language file we can skip
       if ( (filename.substr(0, 9) == "packages." ) && (filename != "packages.DU" ))
       {
         MIL << filename << " is a package translation." << std::endl;
         std::string language = filename.substr( 9, filename.size() - 9 );
-        
+
         // check if it needs to be downloaded
         if ( ! translation_needed( Locale(language) ) )
           continue;
       }
-      
+
       getPossiblyCachedMetadataFile( mediaDescrDir() + filename, local_dir + "/DATA/descr" + filename, _cache_dir + "/DATA/descr" + filename, CheckSum() );
     }
   }
@@ -795,7 +795,7 @@ void SuseTagsImpl::providePackages(Source_Ref source_r, ResStore &store)
 
           SourceEventHandler lang_progress_handler(report);
           progress.reset( new parser::ParserProgress( lang_progress_handler ) );
-          
+
           // TranslatorExplanation %s = language name
           report->start( selfSourceRef(), str::form(_("Reading translation: %s"), packages_lang_name.c_str()) );
           parsePackagesLang( progress, this, p, lang, content );

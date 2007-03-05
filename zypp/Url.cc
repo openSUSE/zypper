@@ -259,8 +259,11 @@ namespace zypp
 
 
     // ---------------------------------------------------------------
-    UrlByScheme g_urlSchemeRepository;
-
+    UrlByScheme & g_urlSchemeRepository()
+    {
+      static UrlByScheme _v;
+      return _v;
+    }
 
     //////////////////////////////////////////////////////////////////
   } // anonymous namespace
@@ -350,7 +353,7 @@ namespace zypp
   Url::registerScheme(const std::string &scheme,
                       UrlRef            urlImpl)
   {
-    return g_urlSchemeRepository.addUrlByScheme(scheme, urlImpl);
+    return g_urlSchemeRepository().addUrlByScheme(scheme, urlImpl);
   }
 
 
@@ -373,7 +376,7 @@ namespace zypp
 
     if(ret && out.size() == 10)
     {
-      url = g_urlSchemeRepository.getUrlByScheme(out[2].str());
+      url = g_urlSchemeRepository().getUrlByScheme(out[2].str());
       if( !url)
       {
         url.reset( new UrlBase());
@@ -393,7 +396,7 @@ namespace zypp
   zypp::url::UrlSchemes
   Url::getRegisteredSchemes()
   {
-    return g_urlSchemeRepository.getRegisteredSchemes();
+    return g_urlSchemeRepository().getRegisteredSchemes();
   }
 
 
@@ -402,7 +405,7 @@ namespace zypp
   bool
   Url::isRegisteredScheme(const std::string &scheme)
   {
-    return g_urlSchemeRepository.isRegisteredScheme(scheme);
+    return g_urlSchemeRepository().isRegisteredScheme(scheme);
   }
 
 
@@ -615,7 +618,7 @@ namespace zypp
       return;
     }
 
-    UrlRef url = g_urlSchemeRepository.getUrlByScheme(scheme);
+    UrlRef url = g_urlSchemeRepository().getUrlByScheme(scheme);
     if( !url)
     {
       url.reset( new UrlBase());

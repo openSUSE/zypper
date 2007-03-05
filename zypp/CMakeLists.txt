@@ -918,8 +918,8 @@ INSTALL(  FILES
 )
 
 SET( zypp_url_SRCS
-  url/UrlBase.cc
   url/UrlUtils.cc
+  url/UrlBase.cc
 )
 
 SET( zypp_url_HEADERS
@@ -965,7 +965,6 @@ ${zypp_target_store_SRCS}
 ${zypp_url_SRCS}
 ${zypp_source_SRCS}
 ${zypp_parser_SRCS}
-${zypp_SRCS}
 ${zypp_zypp_detail_SRCS}
 ${zypp_thread_SRCS}
 ${zypp_source_susetags_SRCS}
@@ -977,6 +976,7 @@ ${zypp_detail_SRCS}
 ${zypp_pool_SRCS}
 ${zypp_media_SRCS}
 ${zypp_media_proxyinfo_SRCS}
+${zypp_SRCS}
 ${zypp_base_SRCS}
 )
 
