@@ -340,7 +340,9 @@ void HelixControl::installResolvable(const ResObject::constPtr &resObject)
 {
     Source_Ref source  = resObject->source();
     *file << "<install channel=\"" << numstring(source.numericId()) << "\" kind=\"" << toLower (resObject->kind().asString()) << "\""
-	  << " name=\"" << resObject->name() << "\"" << "/>" << endl;
+	  << " name=\"" << resObject->name() << "\"" << " arch=\"" << resObject->arch().asString() << "\""
+	  << " version=\"" << resObject->edition().version() << "\"" << " release=\"" << resObject->edition().release() << "\"" 
+	  << " edition=\"" << resObject->edition().asString() << "\"" << "/>" << endl;
 }
     
 void HelixControl::deleteResolvable(const ResObject::constPtr &resObject)
