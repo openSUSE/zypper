@@ -59,6 +59,8 @@ using namespace std;
 
 IMPL_PTR_TYPE(QueueItemConflict);
 
+#define PHI 1
+
 //---------------------------------------------------------------------------
 
 std::ostream &

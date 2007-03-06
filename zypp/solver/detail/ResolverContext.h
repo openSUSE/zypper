@@ -99,7 +99,13 @@ class ResolverContext : public base::ReferenceCounted, private base::NonCopyable
     PoolItemList _ignoreInstalledItem;
     // Ignore the architecture of the item
     PoolItemList _ignoreArchitectureItem;
-    
+
+    // Items which has been selected NOT by the solver
+    // This will be stored while a solver run in order to save time
+    // if this information is needed.
+    PoolItemList _userDeleteItems;
+    PoolItemList _userInstallItems;
+    PoolItemList _userLockUninstalledItems;
 
     bool _forceResolve; // remove items which are conflicts with others or
                         // have unfulfilled requirements.
@@ -183,7 +189,14 @@ class ResolverContext : public base::ReferenceCounted, private base::NonCopyable
     const bool preferHighestVersion() { return _preferHighestVersion; }  
 
     void setUpgradeMode (const bool upgrade) { _upgradeMode = upgrade; }
-    const bool upgradeMode() { return _upgradeMode; }    
+    const bool upgradeMode() { return _upgradeMode; }
+
+    void setUserDeleteItems ( const PoolItemList & deleteItems) { _userDeleteItems = deleteItems; }
+    void setUserInstallItems ( const PoolItemList& installItems) { _userInstallItems = installItems; }
+    void setUserLockUninstalledItems ( const PoolItemList& lockItems) { _userLockUninstalledItems = lockItems; }
+    PoolItemList userDeleteItems () { return _userDeleteItems; }
+    PoolItemList userInstallItems () { return _userInstallItems; }
+    PoolItemList userLockUninstalledItems () { return _userLockUninstalledItems; }
     
     // ---------------------------------- methods
 

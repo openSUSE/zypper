@@ -672,7 +672,18 @@ Resolver::problems (const bool ignoreValidSolution) const
 		// TranslatorExplanation %s = name of package, patch, selection ...				
 		what = str::form (_("%s will not be uninstalled cause it is still required"), who.c_str());		
 		details = misc_info->message();
-		// It is only an info --> no solution is needed				
+
+                ResolverProblem_Ptr problem = new ResolverProblem (what, details);
+                if (item.status().isInstalled()) {
+                    // keep installed
+                    problem->addSolution (new ProblemSolutionKeep (problem, item));
+                } else {
+                    // Do install
+                    problem->addSolution (new ProblemSolutionInstall (problem, item));
+                }
+                problems.push_back (problem);
+                problem_created = true;
+
 	    }
 	    break;
 	    case RESOLVER_INFO_TYPE_UNINSTALL_LOCKED: {			// cant uninstall, its locked

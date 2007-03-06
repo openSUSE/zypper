@@ -75,6 +75,8 @@ DEFINE_PTR_TYPE(QueueItemRequire);
 DEFINE_PTR_TYPE(QueueItemUninstall);
 
 DEFINE_PTR_TYPE(ResolverQueue);
+
+DEFINE_PTR_TYPE(ContextPool);
       
 DEFINE_PTR_TYPE(SolutionAction);
 typedef std::list<SolutionAction_Ptr> SolutionActionList;

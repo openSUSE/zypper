@@ -591,6 +591,7 @@ SET( zypp_solver_detail_SRCS
   solver/detail/Resolver_problems.cc
   solver/detail/SolutionAction.cc
   solver/detail/Testcase.cc
+  solver/detail/ContextPool.cc
 )
 
 SET( zypp_solver_detail_HEADERS
@@ -626,6 +627,7 @@ SET( zypp_solver_detail_HEADERS
   solver/detail/SolutionAction.h
   solver/detail/Testcase.h
   solver/detail/Types.h
+  solver/detail/ContextPool.h
 )
 
 INSTALL(  FILES

@@ -35,6 +35,7 @@
 #include "zypp/solver/detail/Types.h"
 #include "zypp/solver/detail/ResolverQueue.h"
 #include "zypp/solver/detail/ResolverContext.h"
+#include "zypp/solver/detail/ContextPool.h"
 
 #include "zypp/ProblemTypes.h"
 #include "zypp/ResolverProblem.h"
@@ -83,6 +84,10 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
     PoolItemList _items_to_establish;
     PoolItemList _items_to_remove;
     PoolItemList _items_to_verify;
+    PoolItemList _items_to_lockUninstalled;    
+  
+    // pool of valid contexts which are "recycled" in order to fasten the solver
+    ContextPool contextPool;
 
     // list of problematic items after doUpgrade()
     PoolItemList _update_items;
@@ -145,7 +150,8 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
     virtual std::ostream & dumpOn( std::ostream & str ) const;
     friend std::ostream& operator<<(std::ostream& str, const Resolver & obj)
     { return obj.dumpOn (str); }
-
+    void dumpTaskList(const PoolItemList &install, const PoolItemList &remove );
+    
     // ---------------------------------- accessors
 
     QueueItemList initialItems () const { return _initial_items; }
@@ -176,6 +182,8 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
 
     void addPoolItemToInstall (PoolItem_Ref item);
     void addPoolItemsToInstallFromList (PoolItemList & rl);
+
+    void addPoolItemToLockUninstalled (PoolItem_Ref item);
 
     void addPoolItemToRemove (PoolItem_Ref item);
     void addPoolItemsToRemoveFromList (PoolItemList & rl);

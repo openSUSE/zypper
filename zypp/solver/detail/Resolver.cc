@@ -61,8 +61,19 @@ static const unsigned MAX_SECOND_RUNS( 3 );
 static const unsigned MAX_VALID_SOLUTIONS( 50 );	
 static const unsigned TIMOUT_SECOND_RUN( 30 );
 
+static PoolItemSet triggeredSolution;   // only the latest state of an item is interesting
+                                        // for the pool. Documents already inserted items.
+
 //---------------------------------------------------------------------------
 
+class compare_items {
+public:
+    int operator() (PoolItem_Ref p1,
+                    PoolItem_Ref p2) const
+        { return compareByNVRA(p1.resolvable(),p2.resolvable()) < 0; }
+};
+
+	
 std::ostream &
 Resolver::dumpOn( std::ostream & os ) const
 {
@@ -166,6 +177,19 @@ Resolver::context (void) const
     return invalid->context();
 }
 
+void  Resolver::dumpTaskList(const PoolItemList &install, const PoolItemList &remove )
+{
+    for (PoolItemList::const_iterator iter = install.begin();
+         iter != install.end(); iter++) {
+        DBG << "    to_install " << *iter << endl;
+    }
+    for (PoolItemList::const_iterator iter = remove.begin();
+         iter != remove.end(); iter++) {
+        DBG << "    to_remove " << *iter << endl;
+    }
+}
+
+
 //---------------------------------------------------------------------------
 
 void
@@ -186,8 +210,10 @@ Resolver::addPoolItemToInstall (PoolItem_Ref item)
 	    break;
 	}
     }
-    if (!found)
+    if (!found) {
 	_items_to_install.push_back (item);
+	_items_to_install.unique ();
+    }
 }
 
 
@@ -212,8 +238,10 @@ Resolver::addPoolItemToRemove (PoolItem_Ref item)
 	    break;
 	}
     }
-    if (!found)
+    if (!found) {
 	_items_to_remove.push_back (item);
+	_items_to_remove.unique ();	
+    }
 }
 
 
@@ -223,6 +251,13 @@ Resolver::addPoolItemsToRemoveFromList (PoolItemList & rl)
     for (PoolItemList::const_iterator iter = rl.begin(); iter != rl.end(); iter++) {
 	addPoolItemToRemove (*iter);
     }
+}
+
+void
+Resolver::addPoolItemToLockUninstalled (PoolItem_Ref item)
+{
+    _items_to_lockUninstalled.push_back (item);
+    _items_to_lockUninstalled.unique ();
 }
 
 
@@ -417,6 +452,16 @@ Resolver::verifySystem (bool considerNewHardware)
 static void
 solution_to_pool (PoolItem_Ref item, const ResStatus & status, void *data)
 {
+    if (triggeredSolution.find(item) != triggeredSolution.end()) {
+        _XDEBUG("solution_to_pool(" << item << ") is already in the pool --> scip");
+        return;
+    }
+
+    triggeredSolution.insert(item);
+
+    // resetting transaction only
+    item.status().resetTransact((data != NULL) ? ResStatus::APPL_LOW : ResStatus::SOLVER );
+    
     bool r;
 
     if (status.isToBeInstalled()) {
@@ -535,6 +580,7 @@ Resolver::establishPool ()
     ResolverContext_Ptr solution = bestContext();
 
     if (solution) {						// copy solution back to pool
+	triggeredSolution.clear();	
 	solution->foreachMarked (solution_to_pool, (void *)1);	// as APPL_LOW
     }
     else {
@@ -659,6 +705,7 @@ Resolver::freshenPool (bool resetAfterSolve)
     ResolverContext_Ptr solution = bestContext();
 
     if (solution) {						// copy solution back to pool
+	triggeredSolution.clear();
 	solution->foreachMarked (solution_to_pool, (void *)1);	// as APPL_LOW
     }
     else {
@@ -830,7 +877,7 @@ Resolver::resolveDependencies (const ResolverContext_Ptr context)
 
     if (initial_queue->isEmpty()) {
 	INT << "Empty Queue, nothing to resolve" << endl;
-
+	_best_context = context; // Taking old context
 	return true;
     }
 
@@ -984,7 +1031,6 @@ Resolver::resolveDependencies (const ResolverContext_Ptr context)
 //----------------------------------------------------------------------------
 // undo
 
-
 void
 Resolver::undo(void)
 {
@@ -1028,6 +1074,7 @@ struct CollectTransact : public resfilter::PoolItemFilterFunctor
 	bool by_solver = (status.isBySolver() || status.isByApplLow());
 
 	if (by_solver) {
+	    _XDEBUG("Resetting " << item );
 	    item.status().resetTransact( ResStatus::APPL_LOW );// clear any solver/establish transactions
 	    return true;				// back out here, dont re-queue former solver result
 	}
@@ -1048,6 +1095,14 @@ struct CollectTransact : public resfilter::PoolItemFilterFunctor
 		WAR << "Can't find " << item << " for re-installation" << endl;
 	    }
 	}
+	
+        if (status.isLocked()
+            && status.isUninstalled()) {
+            // This item could be selected by solver in a former run. Now it
+            // is locked. So we will have to evaluate a new solver run.
+            resolver.addPoolItemToLockUninstalled (item);
+        }
+	
 	return true;
     }
 };
@@ -1092,8 +1147,7 @@ show_pool( ResPool pool )
 bool
 Resolver::resolvePool( bool tryAllPossibilities )
 {
-    ResolverContext_Ptr context = NULL;
-
+    ResolverContext_Ptr saveContext = _best_context;
     CollectTransact info (*this);
 
     // cleanup before next run
@@ -1101,8 +1155,8 @@ Resolver::resolvePool( bool tryAllPossibilities )
 
     if (tryAllPossibilities) {
 	_tryAllPossibilities = tryAllPossibilities;
-	context = new ResolverContext( _pool, _architecture );
-	context->setTryAllPossibilities( true );
+	saveContext = new ResolverContext( _pool, _architecture );
+	saveContext->setTryAllPossibilities( true );
     }
 
 #if 1
@@ -1116,16 +1170,40 @@ Resolver::resolvePool( bool tryAllPossibilities )
 		   resfilter::ByTransact( ),			// collect transacts from Pool to resolver queue
 		   functor::functorRef<bool,PoolItem>(info) );
 
-    bool have_solution = resolveDependencies( context );	// resolve !
+    invokeOnEach ( _pool.begin(), _pool.end(),
+                   resfilter::ByLock( ),                        // collect locks from Pool to resolver queue
+                   functor::functorRef<bool,PoolItem>(info) );
+    // List of installing/removing items of the complete run (not regarding a recycled solver run)
+    PoolItemList _completeItems_to_install = _items_to_install;
+    PoolItemList _completeItems_to_remove = _items_to_remove;
+    PoolItemList _completeItems_to_lockUninstalled = _items_to_lockUninstalled;
+    
+    // We have to find a valid context in order to recycle it.
+    saveContext = contextPool.findContext (_items_to_install, _items_to_remove, _items_to_lockUninstalled);
+    // _items_to_install, _items_to_remove contains addition items which has been selected but are
+    // not solved with that context. They will be solved now. 
+    // If we have not found any former fitting context, saveContext is NULL. So the solver
+    // make a complete run
+
+    if (saveContext != NULL) {
+        // create a new context in order not overwriting the old
+        saveContext = new ResolverContext (saveContext->pool(), saveContext->architecture(), saveContext);
+    }
+
+    bool have_solution = resolveDependencies (saveContext);             // resolve !
 
     if (have_solution) {					// copy solution back to pool
 	MIL << "Have solution, copying back to pool" << endl;
 	ResolverContext_Ptr solution = bestContext();
+	triggeredSolution.clear();	
 	solution->foreachMarked (solution_to_pool, NULL);
 #if 1
 	_XDEBUG( "Pool after resolve" );
 	show_pool( _pool );
 #endif
+        // insert best_context in ContextPool for further solver runs
+        contextPool.addContext( solution,_completeItems_to_install, _completeItems_to_remove, _completeItems_to_lockUninstalled);
+	
     }
     else {
 	MIL << "!!! Have NO solution !!! Additional solver information:" << endl;
@@ -1164,241 +1242,6 @@ std::list<std::string> Resolver::problemDescription( void ) const
 }
 
 
-//-----------------------------------------------------------------------------
-
-//
-// UI Helper
-// do a single (install/uninstall) transaction
-//  if a previously uninstalled item was just set to-be-installed, return it as 'added'
-
-static bool
-transactItems( PoolItem_Ref installed, PoolItem_Ref uninstalled, bool install, bool soft, PoolItem_Ref & added )
-{
-	if (install) {
-	    if (compareByNVRA (installed.resolvable(), uninstalled.resolvable()) != 0) { // do not update itself Bug 174290
-		if (uninstalled
-		    && !uninstalled.status().isLocked())
-		{
-		    bool adding;	// check if we're succeeding with transaction
-		    if (soft)
-			adding = uninstalled.status().setSoftTransact( true, ResStatus::APPL_LOW );
-		    else
-			adding = uninstalled.status().setTransact( true, ResStatus::APPL_LOW );
-		    if (adding)	// if succeeded, return it as 'just added'
-			added = uninstalled;
-		}
-		if (installed
-		    && !installed.status().isLocked())
-		{
-		    installed.status().resetTransact( ResStatus::APPL_LOW );
-		}
-	    }
-	} else {
-	    // uninstall
-	    if (uninstalled
-		&& !uninstalled.status().isLocked())
-	    {
-		uninstalled.status().resetTransact( ResStatus::APPL_LOW );
-	    }
-	    if (installed
-		&& !installed.status().isLocked())
-	    {
-		if (soft)
-		    installed.status().setSoftTransact( true, ResStatus::APPL_LOW );
-		else
-		    installed.status().setTransact( true, ResStatus::APPL_LOW );
-	    }
-	}
-	if (!uninstalled
-	    && !installed)
-	{
-	    return false;
-	}
-    return true;
-}
-
-
-typedef struct { PoolItem_Ref installed; PoolItem_Ref uninstalled; } IandU;
-typedef map<string, IandU> IandUMap;
-
-// find best available providers for requested capability index
-// (use capability index instead of name in order to find e.g. ccb vs. x11)
-
-struct FindIandU
-{
-    IandUMap iandu;		// install, and best uninstalled
-
-    FindIandU ()
-    { }
-
-    bool operator()( const CapAndItem & cai )
-    {
-	PoolItem item( cai.item );
-	string idx = cai.cap.index();
-
-	if ( item.status().staysInstalled() ) {
-	    iandu[idx].installed = item;
-	}
-	else if ( item.status().isToBeInstalled() ) {			// prefer already to-be-installed
-	    iandu[idx].uninstalled = item;
-	}
-	else if ( item.status().staysUninstalled() ) {			// only look at uninstalled
-	    IandUMap::iterator it = iandu.find( idx );
-
-	    if (it != iandu.end()
-		&& it->second.uninstalled)
-	    {								// uninstalled with same name found
-		int cmp = it->second.uninstalled->arch().compare( item->arch() );
-		if (cmp < 0) {						// new item has better arch
-		    it->second.uninstalled = item;
-		}
-		else if (cmp == 0) {					// new item has equal arch
-		    if (it->second.uninstalled->edition().compare( item->edition() ) < 0) {
-			it->second.uninstalled = item;			// new item has better edition
-		    }
-		}
-	    }
-	    else {
-		iandu[idx].uninstalled = item;
-	    }
-	}
-	return true;
-    }
-};
-
-
-//
-// transact list of capabilities (requires or recommends)
-//  return false if one couldn't be matched
-//
-// see Resolver::transactResObject
-//
-
-static bool
-transactCaps( const ResPool & pool, const CapSet & caps, bool install, bool soft, std::set<PoolItem_Ref> & added_items )
-{
-    bool result = true;
-
-    // loop over capabilities and find (best) matching provider
-
-    for (CapSet::const_iterator cit = caps.begin(); cit != caps.end(); ++cit) {
-
-	// find best providers of requested capability
-
-	FindIandU callback;
-	Dep dep( Dep::PROVIDES );
-	invokeOnEach( pool.byCapabilityIndexBegin( cit->index(), dep ),
-		      pool.byCapabilityIndexEnd( cit->index(), dep ),
-		      resfilter::ByCapMatch( *cit ) ,
-		      functor::functorRef<bool,CapAndItem>(callback) );
-
-	// loop through providers and transact them accordingly
-
-	for (IandUMap::const_iterator it = callback.iandu.begin(); it !=  callback.iandu.end(); ++it) {
-	    PoolItem_Ref just_added;
-	    just_added = PoolItem_Ref();
-	    if (!transactItems( it->second.installed, it->second.uninstalled, install, soft, just_added )) {
-		result = false;
-	    }
-	    else if (just_added) {
-		// transactItems just selected an item of the same kind we're currently processing
-		// add it to the list and handle it equivalent to the origin item
-		added_items.insert( just_added );
-	    }
-	}
-
-    }
-    return result;
-}
-
-
-struct TransactSupplements : public resfilter::PoolItemFilterFunctor
-{
-    const Resolvable::Kind &_kind;
-    bool valid;
-
-    TransactSupplements( const Resolvable::Kind & kind )
-	: _kind( kind )
-	, valid( false )
-    { }
-
-    bool operator()( PoolItem_Ref item )
-    {
-//	MIL << "TransactSupplements(" << item << ")" << endl;
-	if (item->kind() == _kind
-	    && (item.status().staysInstalled()
-		|| item.status().isToBeInstalled()))
-	{
-	    valid = true;
-	    return false;		// end search here
-	}
-	return true;
-    }
-};
-
-//
-// transact due to a language dependency
-// -> look through the pool and run transactResObject() accordingly
-
-struct TransactLanguage : public resfilter::PoolItemFilterFunctor
-{
-    Resolver & _resolver;
-    ResObject::constPtr _langObj;
-    bool _install;
-
-    TransactLanguage( Resolver & r, ResObject::constPtr langObj, bool install )
-	: _resolver( r )
-	, _langObj( langObj )
-	, _install( install )
-    { }
-
-    /* item has a freshens on _langObj
-	_langObj just transacted to _install (true == to-be-installed, false == to-be-uninstalled)
-    */
-    bool operator()( const CapAndItem & cai )
-    {
-	/* check for supplements, if the item has supplements these also must match  */
-
-	PoolItem_Ref item( cai.item );
-//	MIL << "TransactLanguage " << item << ", install " << _install << endl;
-	CapSet supplements( item->dep( Dep::SUPPLEMENTS ) );
-	if (!supplements.empty()) {
-//	    MIL << "has supplements" << endl;
-	    bool valid = false;
-	    for (CapSet::const_iterator it = supplements.begin(); it != supplements.end(); ++it) {
-//		MIL << "Checking " << *it << endl;
-		TransactSupplements callback( it->refers() );
-		invokeOnEach( _resolver.pool().byNameBegin( it->index() ),
-			      _resolver.pool().byNameEnd( it->index() ),
-			      functor::functorRef<bool,PoolItem>( callback ) );
-		if (callback.valid) {
-		    valid = true;		// found a supplements match
-		    break;
-		}
-	    }
-	    if (!valid) {
-//		MIL << "All supplements false" << endl;
-		return true;			// no supplements matched, we're done
-	    }
-	}
-
-	PoolItem_Ref dummy;
-	if (_install) {
-	    if (item.status().staysUninstalled()) {
-		transactItems( PoolItem_Ref(), item, _install, true, dummy );
-	    }
-	}
-	else {
-	    if (item.status().staysInstalled()) {
-		transactItems( item, PoolItem_Ref(), _install, true, dummy );
-	    }
-	}
-	return true;
-    }
-};
-
-
-
 //
 // transact a single object
 // -> do a 'single step' resolving either installing or removing
@@ -1408,128 +1251,29 @@ bool
 Resolver::transactResObject( ResObject::constPtr robj, bool install,
 			     bool recursive)
 {
-    static std::set<PoolItem_Ref> alreadyTransactedObjects;
-
-    if (!recursive) {
-	alreadyTransactedObjects.clear(); // first call
-    }
+    MIL << "transactResObject()" << endl;
+    MIL << "is obsolete; use resolvePool() instead" << endl;
     
-    if (robj == NULL) {
-	ERR << "NULL ResObject" << endl;
-    }
-    _XDEBUG ( "transactResObject(" << *robj << ", " << (install?"install":"remove") << ")");
-
-    if (robj->kind() == ResTraits<Language>::kind) {
-	TransactLanguage callback( *this, robj, install );
-	Dep dep( Dep::FRESHENS );
-	invokeOnEach( pool().byCapabilityIndexBegin( robj->name(), dep ),
-		      pool().byCapabilityIndexEnd( robj->name(), dep ),
-		      functor::functorRef<bool,CapAndItem>( callback ) );
-
-    }
-    std::set<PoolItem_Ref> added;
-
-    // loop over 'recommends' and 'requires' of this item and collect additional
-    //  items of the same kind on the way
-
-    transactCaps( _pool, robj->dep( Dep::RECOMMENDS ), install, true, added );
-    transactCaps( _pool, robj->dep( Dep::REQUIRES ), install, false, added );
-
-    // if any additional items were collected, call this functions again recursively
-    //   This is guaranteed to finish since additional items are those which were not selected before
-    //   and this function is only called for already selected items. So added really only contains
-    //   'new' items.
-
-    for (std::set<PoolItem_Ref>::const_iterator it = added.begin(); it != added.end(); ++it) {
-	if ((*it)->kind() == robj->kind()) {
-	    std::set<PoolItem_Ref>::const_iterator itCmp = alreadyTransactedObjects.find (*it);
-	    if (itCmp == alreadyTransactedObjects.end())
-	    {
-		// not already transacted
-		alreadyTransactedObjects.insert (*it);
-		transactResObject( it->resolvable(), install,
-				   true //recursive
-				   );
-	    }
-	}
-    }
-
-    // not used anyway
     return true;
 }
-
-//
-// helper to transact all objects of a specific kind
-//  see Resolver::transactResKind
-// item is to-be-installed (install == true) or to-be-uninstalled
-// -> run transactResObject() accordingly
-
-struct TransactKind : public resfilter::PoolItemFilterFunctor
-{
-    Resolver & _resolver;
-    bool install;		// true if to-be-installed, else to-be-uninstalled
-    bool result;
-
-    TransactKind( Resolver & r )
-	: _resolver( r )
-	, result( true )
-    { }
-
-    bool operator()( PoolItem_Ref item )
-    {
-	result = _resolver.transactResObject( item.resolvable(), install );
-	return true;
-    }
-};
 
 
 bool
 Resolver::transactResKind( Resolvable::Kind kind )
 {
-    TransactKind callback (*this);
-    _XDEBUG( "transactResKind(" << kind << ")" );
+    MIL << "transactResKind(" << kind << ")" << endl;
+    MIL << "is obsolete; use resolvePool() instead" << endl;    
 
-    // check all uninstalls
-    callback.install = false;
-    invokeOnEach( pool().byKindBegin( kind ),
-		  pool().byKindEnd( kind ),
-		  functor::chain( resfilter::ByTransact(), resfilter::ByInstalled ()),
-		  functor::functorRef<bool,PoolItem>( callback ) );
-
-    // check all installs
-    callback.install = true;
-    invokeOnEach( pool().byKindBegin( kind ),
-		  pool().byKindEnd( kind ),
-		  functor::chain( resfilter::ByTransact(), resfilter::ByUninstalled ()),
-		  functor::functorRef<bool,PoolItem>( callback ) );
-
-    return callback.result;
+    return true;
 }
-
-
-struct TransactReset : public resfilter::PoolItemFilterFunctor
-{
-    ResStatus::TransactByValue _causer;
-    TransactReset( ResStatus::TransactByValue causer )
-	: _causer( causer )
-    { }
-
-    bool operator()( PoolItem_Ref item )		// only transacts() items go here
-    {
-	item.status().resetTransact( _causer );
-	return true;
-    }
-};
 
 
 void
 Resolver::transactReset( ResStatus::TransactByValue causer )
 {
-    TransactReset info( causer );
     MIL << "transactReset(" << causer << ")" << endl;
-    invokeOnEach ( _pool.begin(), _pool.end(),
-		   resfilter::ByTransact( ),
-		   functor::functorRef<bool,PoolItem>(info) );
+    MIL << "is obsolete; use resolvePool() instead" << endl;
+
     return;
 }
 
