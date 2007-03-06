@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue Mar  6 17:25:49 CET 2007 - schubi@suse.de
+
+- Using already existing valid solver results for further solver runs.
+  (partiell solving)
+- r5169 
+
+-------------------------------------------------------------------
 Fri Mar  2 16:11:16 CET 2007 - dmacvicar@suse.de
 
 - fix link order 
