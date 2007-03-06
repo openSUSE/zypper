@@ -11,77 +11,77 @@ INCLUDE_DIRECTORIES( ${CMAKE_SOURCE_DIR} ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CUR
 ADD_DEFINITIONS(-DLOCALEDIR=\\\"/usr/share/libzypp\\\" -DTEXTDOMAIN=\\\"zypp\\\" )
 
 SET( zypp_SRCS
+  LanguageCode.cc
   Arch.cc
   Atom.cc
   ByteCount.cc
+  Capability.cc
   CapFactory.cc
   CapMatch.cc
   CapSet.cc
-  Capability.cc
-  Changelog.cc
   CheckSum.cc
   CountryCode.cc
   Date.cc
   Dep.cc
   Dependencies.cc
-  Digest.cc
-  DiskUsage.cc
-  DiskUsageCounter.cc
   Edition.cc
-  ExternalProgram.cc
-  KeyRing.cc
   Language.cc
-  LanguageCode.cc
   Locale.cc
-  MediaSetAccess.cc
-  Message.cc
   NVR.cc
   NVRA.cc
   NVRAD.cc
-  NameKindProxy.cc
-  Package.cc
-  Patch.cc
-  PathInfo.cc
-  Pathname.cc
-  Pattern.cc
-  PoolItem.cc
-  ProblemSolution.cc
-  Product.cc
-  ProvideFilePolicy.cc
-  PublicKey.cc
   Range.cc
   Rel.cc
   ResObject.cc
-  ResPool.cc
-  ResPoolManager.cc
-  ResPoolProxy.cc
+  SystemResObject.cc
+  Resolvable.cc
+  ResTraits.cc
   ResStatus.cc
   ResStore.cc
-  ResTraits.cc
-  Resolvable.cc
+  PoolItem.cc
+  ResPool.cc
+  NameKindProxy.cc
+  ResPoolProxy.cc
+  ResPoolManager.cc
   Resolver.cc
   ResolverProblem.cc
-  Script.cc
-  Selection.cc
-  Signature.cc
+  ProblemSolution.cc
+  Package.cc
+  Pathname.cc
   Source.cc
-  SourceCache.cc
   SourceFactory.cc
-  SourceFeed.cc
   SourceManager.cc
+  SourceCache.cc
+  SourceFeed.cc
   SrcPackage.cc
   SysContent.cc
-  SystemResObject.cc
   Target.cc
-  TmpPath.cc
-  TranslatedText.cc
-  UpgradeStatistics.cc
+  Selection.cc
+  Pattern.cc
+  Message.cc
+  Script.cc
+  Patch.cc
+  Product.cc
+  Changelog.cc
+  ExternalProgram.cc
+  PathInfo.cc
+  Digest.cc
   Url.cc
+  TmpPath.cc
+  DiskUsage.cc
+  DiskUsageCounter.cc
   VendorAttr.cc
+  UpgradeStatistics.cc
   ZYpp.cc
   ZYppCommitPolicy.cc
   ZYppCommitResult.cc
+  TranslatedText.cc
   ZYppFactory.cc
+  PublicKey.cc
+  Signature.cc
+  KeyRing.cc
+  MediaSetAccess.cc
+  ProvideFilePolicy.cc 
 )
 
 SET( zypp_HEADERS
@@ -178,19 +178,19 @@ SET( zypp_HEADERS
 INSTALL(  FILES ${zypp_HEADERS} DESTINATION "${CMAKE_INSTALL_PREFIX}/include/zypp" )
 
 SET( zypp_base_SRCS
-  base/Exception.cc
-  base/ExternalDataSource.cc
+  base/Measure.cc
   base/Fd.cc
   base/Gettext.cc
   base/GzStream.cc
   base/IOStream.cc
   base/InputStream.cc
-  base/Measure.cc
-  base/ProfilingFormater.cc
   base/ReferenceCounted.cc
   base/String.cc
-  base/Sysconfig.cc
   base/Unit.cc
+  base/ExternalDataSource.cc
+  base/Exception.cc
+  base/Sysconfig.cc  
+  base/ProfilingFormater.cc
   base/LogControl.cc
 )
 
@@ -338,21 +338,21 @@ INSTALL(  FILES
 )
 
 SET( zypp_media_SRCS
+  media/MediaException.cc
   media/MediaAccess.cc
+  media/MediaHandler.cc
+  media/Mount.cc
+  media/MediaNFS.cc
   media/MediaCD.cc
-  media/MediaCIFS.cc
-  media/MediaCurl.cc
   media/MediaDIR.cc
   media/MediaDISK.cc
-  media/MediaException.cc
-  media/MediaHandler.cc
+  media/MediaSMB.cc
+  media/MediaCIFS.cc
+  media/ProxyInfo.cc
+  media/MediaCurl.cc
   media/MediaISO.cc
   media/MediaManager.cc
-  media/MediaNFS.cc
-  media/MediaSMB.cc
   media/MediaUserAuth.cc
-  media/Mount.cc
-  media/ProxyInfo.cc
 )
 
 SET( zypp_media_HEADERS
@@ -948,34 +948,34 @@ INSTALL(  FILES
 )
 
 SET( zypp_lib_SRCS
-${zypp_source_plaindir_SRCS}
-${zypp_target_store_xml_SRCS}
-${zypp_parser_tagfile_SRCS}
-${zypp_target_rpm_SRCS}
-${zypp_parser_yum2_SRCS}
+${zypp_detail_SRCS}
 ${zypp_capability_SRCS}
-${zypp_ui_SRCS}
+${zypp_pool_SRCS}
+${zypp_parser_tagfile_SRCS}
+${zypp_parser_yum2_SRCS}
 ${zypp_parser_xmlstore_SRCS}
-${zypp_data_SRCS}
-${zypp_target_hal_SRCS}
 ${zypp_parser_xml_SRCS}
-${zypp_source_yum_SRCS}
-${zypp_solver_detail_SRCS}
-${zypp_target_store_SRCS}
-${zypp_url_SRCS}
-${zypp_source_SRCS}
-${zypp_parser_SRCS}
-${zypp_zypp_detail_SRCS}
-${zypp_thread_SRCS}
-${zypp_source_susetags_SRCS}
-${zypp_target_modalias_SRCS}
-${zypp_target_SRCS}
 ${zypp_parser_yum_SRCS}
 ${zypp_parser_inifile_SRCS}
-${zypp_detail_SRCS}
-${zypp_pool_SRCS}
-${zypp_media_SRCS}
+${zypp_parser_SRCS}
+${zypp_source_plaindir_SRCS}
+${zypp_source_yum_SRCS}
+${zypp_source_susetags_SRCS}
+${zypp_source_SRCS}
+${zypp_data_SRCS}
 ${zypp_media_proxyinfo_SRCS}
+${zypp_media_SRCS}
+${zypp_url_SRCS}
+${zypp_target_store_xml_SRCS}
+${zypp_target_store_SRCS}
+${zypp_target_rpm_SRCS}
+${zypp_target_hal_SRCS}
+${zypp_target_modalias_SRCS}
+${zypp_target_SRCS}
+${zypp_solver_detail_SRCS}
+${zypp_ui_SRCS}
+${zypp_zypp_detail_SRCS}
+${zypp_thread_SRCS}
 ${zypp_SRCS}
 ${zypp_base_SRCS}
 )
