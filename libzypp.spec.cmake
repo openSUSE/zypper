@@ -47,7 +47,7 @@ Authors:
     Ladislav Slezak <lslezak@suse.cz>
 
 %package devel
-Requires:       libzypp
+Requires:       libzypp == @VERSION@
 Requires:       libxml2-devel curl-devel openssl-devel rpm-devel glibc-devel zlib-devel
 Requires:       bzip2 popt-devel dbus-1-devel glib2-devel hal-devel boost-devel libstdc++-devel
 Requires:       cmake

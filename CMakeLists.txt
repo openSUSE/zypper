@@ -59,8 +59,6 @@ SET( DOC_INSTALL_DIR
 
 ####################################################################
 
-FIND_PACKAGE(Gettext REQUIRED)
-
 FIND_PACKAGE(Rpm REQUIRED)
 IF ( NOT RPM_FOUND)
   MESSAGE( FATAL_ERROR " rpm not found" )

@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Wed Mar  7 15:20:29 CET 2007 - dmacvicar@suse.de
+
+- libzypp-devel -> libzypp requirement is not versioned
+  (#251086)
+- r5181
+
+-------------------------------------------------------------------
 Tue Mar  6 17:25:49 CET 2007 - schubi@suse.de
 
 - Using already existing valid solver results for further solver runs.
