@@ -1,259 +1,265 @@
-# Czech translations for zypper package.
-# Copyright (C) 2006 SuSE Linux Products GmbH, Nuernberg
-# This file is distributed under the same license as the zypper package.
-# Martin Vidner <mvidner@suse.cz>, 2006.
+# @TITLE@
+# Copyright (C) 2006, SUSE Linux GmbH, Nuremberg
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+# This file is distributed under the same license as @PACKAGE@ package. FIRST
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: zypper 0.5.0\n"
+"Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: translation@suse.de\n"
 "POT-Creation-Date: 2007-03-05 16:11+0100\n"
-"PO-Revision-Date: 2007-02-01 10:24+0100\n"
-"Last-Translator: Martin Vidner <mvidner@suse.cz>\n"
-"Language-Team: Czech <translation-team-cs@lists.sourceforge.net>\n"
+"PO-Revision-Date: 2005-08-02 10:52+0300\n"
+"Last-Translator: Novell Language <language@novell.com>\n"
+"Language-Team: Novell Language <language@novell.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"X-Generator: KBabel 1.10.2\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #: src/zmart-keyring-callbacks.h:36
 msgid " is unsigned, continue?"
-msgstr ""
+msgstr "ei ole allekirjoitettu, haluatko jatkaa?"
 
 #: src/zmart-keyring-callbacks.h:46
 msgid "Import key "
-msgstr ""
+msgstr "Tuo avain"
 
 #: src/zmart-keyring-callbacks.h:46
 msgid " to trusted keyring?"
-msgstr ""
+msgstr "luotettuun avainrenkaaseen?"
 
 #: src/zmart-keyring-callbacks.h:57
 msgid " is signed with an unknown key id: "
-msgstr ""
+msgstr "on allekirjoitettu tuntemattomalla avaimen tunnuksella:"
 
 #: src/zmart-keyring-callbacks.h:57 src/zmart-keyring-callbacks.h:80
 #: src/zmart-keyring-callbacks.h:91 src/zmart-keyring-callbacks.h:97
 #: src/zmart-keyring-callbacks.h:104
 msgid "continue?"
-msgstr ""
+msgstr "jatketaanko?"
 
 #: src/zmart-keyring-callbacks.h:68
 msgid "Do you want to trust key id "
-msgstr ""
+msgstr "Haluatko määrittää avaimen tunnuksen luotetuksi"
 
 #: src/zmart-keyring-callbacks.h:68 src/zmart-keyring-callbacks.h:80
 msgid " fingerprint:"
-msgstr ""
+msgstr "sormenjälki:"
 
 #: src/zmart-keyring-callbacks.h:79
 msgid "Signature verification for "
-msgstr ""
+msgstr "Allekirjoituksen vahvistus kohteelle"
 
 #: src/zmart-keyring-callbacks.h:80
 msgid " with public key id "
-msgstr ""
+msgstr "julkisella avaimen tunnuksella"
 
 #: src/zmart-keyring-callbacks.h:80
 msgid " failed, THIS IS RISKY!"
-msgstr ""
+msgstr "epäonnistui. TÄMÄ ON TURVALLISUUSRISKI."
 
 #: src/zmart-keyring-callbacks.h:90
 msgid "No digest for "
-msgstr ""
+msgstr "Ei koostetta kohteelle"
 
 #: src/zmart-keyring-callbacks.h:96
 msgid "Unknown digest "
-msgstr ""
+msgstr "Tuntematon kooste"
 
 #: src/zmart-keyring-callbacks.h:96
 msgid " for "
-msgstr ""
+msgstr "kohteelle"
 
 #: src/zmart-keyring-callbacks.h:102
 msgid "Digest verification failed for "
-msgstr ""
+msgstr "Koosteen varmistus epäonnistui kohteelle"
 
 #: src/zmart-keyring-callbacks.h:103
 msgid ", expected "
-msgstr ""
+msgstr ", odotettiin"
 
 #: src/zmart-keyring-callbacks.h:103
 msgid " found "
-msgstr ""
+msgstr "löytyi"
 
 #: src/zmart-misc.cc:26 src/zmart-misc.cc:29
 msgid "Initializing Target"
-msgstr ""
+msgstr "Alustetaan kohdetta"
 
 #: src/zmart-misc.cc:26
 msgid " (old way)"
-msgstr ""
+msgstr "(vanha tapa)"
 
 #: src/zmart-misc.cc:161
 msgid "not found"
-msgstr ""
+msgstr "ei löytynyt"
 
 #: src/zmart-misc.cc:168
 msgid "skipping "
-msgstr ""
+msgstr "ohitetaan"
 
 #: src/zmart-misc.cc:168
 msgid "(already installed)"
-msgstr ""
+msgstr "(asennettu jo)"
 
 #: src/zmart-misc.cc:174
 #, c-format
 msgid "Failed to add '%s' to the list of packages to be installed."
 msgstr ""
+"Kohteen '%s' lisääminen asennettavien pakettien luetteloon ei onnistunut."
 
 #: src/zmart-misc.cc:192
 msgid "Failed"
-msgstr ""
+msgstr "Epäonnistunut"
 
 #: src/zmart-misc.cc:215
 msgid "Not found"
-msgstr ""
+msgstr "Ei löydetty"
 
 #: src/zmart-misc.cc:229
 msgid "Problems:"
-msgstr ""
+msgstr "Ongelmat:"
 
 #: src/zmart-misc.cc:232
 msgid "PROB "
-msgstr ""
+msgstr "ONGELMA"
 
 #: src/zmart-misc.cc:241
 msgid " SOL  "
-msgstr ""
+msgstr "RATKAISU"
 
 #: src/zmart-misc.cc:257
 msgid "Summary:"
-msgstr ""
+msgstr "Yhteenveto:"
 
 #: src/zmart-misc.cc:280
 msgid "<install>   "
-msgstr ""
+msgstr "<install>"
 
 #: src/zmart-misc.cc:282
 msgid "<uninstall> "
-msgstr ""
+msgstr "<uninstall>"
 
 #: src/zmart-misc.cc:287
 msgid "Nothing to do."
-msgstr ""
+msgstr "Ei tehtäviä toimia."
 
 #: src/zmart-misc.cc:343
 msgid "Parsing RPM database..."
-msgstr ""
+msgstr "Jäsennetään RPM-tietokantaa..."
 
 #: src/zmart-misc.cc:345 src/zmart-misc.cc:358
 msgid " resolvables."
-msgstr ""
+msgstr "riippuvaiselle osalle."
 
 #: src/zmart-misc.cc:356
 msgid "Parsing metadata for "
-msgstr ""
+msgstr "Jäsennetään metadataa kohteelle"
 
 #: src/zmart-misc.cc:365
 msgid "Establishing status of aggregates"
-msgstr ""
+msgstr "Määritetään yhdistettyjen kohteiden tilaa"
 
 #: src/zmart-misc.cc:373
 msgid "Resolving dependencies..."
-msgstr ""
+msgstr "Tarkistetaan riippuvuuksia..."
 
 #: src/zmart-misc.cc:399
 msgid " patches needed"
-msgstr ""
+msgstr "korjausta tarvitaan"
 
 #: src/zmart-misc.cc:399
 msgid " security patches"
-msgstr ""
+msgstr "suojauskorjaukset"
 
 #: src/zmart-misc.cc:406
 msgid "Installed"
-msgstr ""
+msgstr "Asennettu"
 
 #: src/zmart-misc.cc:406
 msgid "Uninstalled"
-msgstr ""
+msgstr "Asennus poistettu"
 
 #: src/zmart-misc.cc:408
 msgid "No Longer Applicable"
-msgstr ""
+msgstr "Ei enää käyttökelpoinen"
 
 #: src/zmart-misc.cc:408
 msgid "Not Applicable"
-msgstr ""
+msgstr "Ei käyttökelpoinen"
 
 #: src/zmart-misc.cc:410
 msgid "Applied"
-msgstr ""
+msgstr "Soveltuva"
 
 #: src/zmart-misc.cc:410
 msgid "Not Needed"
-msgstr ""
+msgstr "Ei tarpeen"
 
 #: src/zmart-misc.cc:412
 msgid "Broken"
-msgstr ""
+msgstr "Rikki"
 
 #: src/zmart-misc.cc:412
 msgid "Needed"
-msgstr ""
+msgstr "Tarvitaan"
 
 #: src/zmart-misc.cc:414
 msgid "error"
-msgstr ""
+msgstr "virhe"
 
 #: src/zmart-misc.cc:443 src/zmart-misc.cc:477 src/zmart-misc.cc:600
 msgid "Catalog"
-msgstr ""
+msgstr "Pakettiluettelo"
 
 #: src/zmart-misc.cc:443 src/zmart-misc.cc:477 src/zmart-misc.cc:605
 #: src/zmart-sources.cc:100
 msgid "Name"
-msgstr ""
+msgstr "Nimi"
 
 #: src/zmart-misc.cc:443 src/zmart-misc.cc:477 src/zmart-misc.cc:605
 msgid "Version"
-msgstr ""
+msgstr "Versio"
 
 #: src/zmart-misc.cc:443 src/zmart-misc.cc:477
 msgid "Category"
-msgstr ""
+msgstr "Luokka"
 
 #: src/zmart-misc.cc:443 src/zmart-misc.cc:477 src/zmart-sources.cc:98
 msgid "Status"
-msgstr ""
+msgstr "Tila"
 
 #: src/zmart-misc.cc:511
 msgid ""
 "WARNING: These are only the updates affecting the updater itself.\n"
 "There are others available too.\n"
 msgstr ""
+"VAROITUS: Nämä ovat ainoastaan itse päivitystoimintoon vaikuttavia "
+"päivityksiä.\n"
+"Myös muita päivityksiä on saatavilla.\n"
 
 #: src/zmart-misc.cc:600
 msgid "S"
-msgstr ""
+msgstr "S"
 
 #: src/zmart-misc.cc:605
 msgid "Arch"
-msgstr ""
+msgstr "Arkkitehtuuri"
 
 #: src/zmart-misc.cc:662
 #, c-format
 msgid "WARNING: %s is interactive, skipped."
-msgstr ""
+msgstr "VAROITUS: %s ei ole vuorovaikutteinen, ohitetaan."
 
 #: src/zmart-misc.cc:707
 msgid "Continue?"
-msgstr ""
+msgstr "Jatkatko?"
 
 #: src/zmart-misc.cc:712
 msgid "committing"
-msgstr ""
+msgstr "kirjataan"
 
 #: src/zmart-misc.cc:728
 msgid ""
@@ -265,158 +271,178 @@ msgid ""
 "- use another installation media (if e.g. damaged)\n"
 "- use another installation source"
 msgstr ""
+"Pakkauksen yhtenäisyystarkistus epäonnistui. Tämä voi olla merkki "
+"asennuslähteen tai tietovälineen ongelmasta. Yritä jotakin seuraavista "
+"keinoista:\n"
+"\n"
+" - yritä suorittaa edellinen komento uudelleen\n"
+" - päivitä asennuslähteet komennolla 'zypper refresh'\n"
+" - käytä jotakin toista asennustietovälinettä (jos se on vaurioitunut))\n"
+" - käytä jotakin muuta asennuslähdettä"
 
 #: src/zmart-misc.cc:746
 msgid ""
 "WARNING: One of installed patches requires reboot of your machine. Please, "
 "do it as soon as possible."
 msgstr ""
+"VAROITUS: Jokin asennetuista päivityksistä edellyttää tietokoneen "
+"käynnistämistä uudelleen. Käynnistä tietokone uudelleen mahdollisimman pian."
 
 #: src/zmart-misc.cc:749
 msgid ""
 "WARNING: One of installed patches affects the package manager itself, thus "
 "it requires restart before executing next operations."
 msgstr ""
+"VAROITUS: Jokin asennetuista korjauksista vaikuttaa itse "
+"paketinhallintasovellukseen. Tästä syystä paketinhallintasovellus on "
+"käynnistettävä uudelleen ennen seuraavien toimintojen tekemistä."
 
 #: src/zmart-misc.cc:772 src/zmart-misc.cc:798
 msgid "license"
-msgstr ""
+msgstr "lisenssi"
 
 #: src/zmart-misc.cc:775
 msgid ""
 "In order to install this package, you must agree to terms of the above "
 "licencse. Continue?"
 msgstr ""
+"Tämän paketin asentaminen edellyttää, että hyväksyt yllä olevan lisenssin "
+"ehdot. Haluatko jatkaa?"
 
 #: src/zmart-misc.cc:786
 msgid "Aborting installation due to the need of license(s) confirmation."
-msgstr ""
+msgstr "Keskeytetään asennus lisenssin vahvistamisen pakollisuuden johdosta."
 
 #: src/zmart-misc.cc:788
 msgid ""
 "Please, restart the operation in interactive mode and confirm agreement with "
 "required license(s)."
 msgstr ""
+"Käynnistä toiminto vuorovaikutteisessa tilassa ja vahvista tarvittavien "
+"lisenssisopimusten hyväksyminen."
 
 #: src/zmart-misc.cc:795
 msgid "Aborting installation due to user disagreement with "
-msgstr ""
+msgstr "Keskeytetään asennus, koska käyttäjä ei hyväksynyt:"
 
 #: src/zmart-sources.cc:31
 msgid ""
 "Sorry, you need root privileges to use system sources, disabling them..."
 msgstr ""
+"Järjestelmälähteiden käyttäminen edellyttää root-käyttöoikeuksia. Poistetaan "
+"järjestelmälähteet käytöstä..."
 
 #: src/zmart-sources.cc:48
 msgid "Restoring system sources..."
-msgstr ""
+msgstr "Palautetaan järjestelmälähteitä..."
 
 #: src/zmart-sources.cc:57
 msgid "Failed to restore sources"
-msgstr ""
+msgstr "Lähteiden palauttaminen epäonnistui"
 
 #: src/zmart-sources.cc:80
 msgid "Can't access repository"
-msgstr ""
+msgstr "Varastoa ei voi käyttää"
 
+# kpowersave.cpp: tooltip
 #: src/zmart-sources.cc:99
 msgid "Enabled"
-msgstr ""
+msgstr "Käyttöön"
 
 #: src/zmart-sources.cc:99
 msgid "Refresh"
-msgstr ""
+msgstr "Päivitä"
 
 #: src/zmart-sources.cc:100
 msgid "Type"
-msgstr ""
+msgstr "Tyyppi"
 
 #: src/zmart-sources.cc:116 src/zmart-sources.cc:118
 msgid "Active"
-msgstr ""
+msgstr "Käytössä"
 
 #: src/zmart-sources.cc:118
 msgid "Disabled"
-msgstr ""
+msgstr "Poissa käytöstä"
 
 #: src/zmart-sources.cc:125 src/zmart-sources.cc:126 src/zmart-sources.cc:128
 #: src/zmart-sources.cc:129
 msgid "Yes"
-msgstr ""
+msgstr "Kyllä"
 
 #: src/zmart-sources.cc:126 src/zmart-sources.cc:128 src/zmart-sources.cc:129
 msgid "No"
-msgstr ""
+msgstr "Ei"
 
 #: src/zmart-sources.cc:163 src/zmart-sources.cc:476
 msgid "Error reading system sources: "
-msgstr ""
+msgstr "Virhe luettaessa järjestelmälähteitä:"
 
 #: src/zmart-sources.cc:190
 msgid "Unknown repository type "
-msgstr ""
+msgstr "Tuntematon varastotyyppi"
 
 #: src/zmart-sources.cc:202
 msgid "Name not found"
-msgstr ""
+msgstr "Nimeä ei löytynyt"
 
 #: src/zmart-sources.cc:205
 msgid "baseurl not found"
-msgstr ""
+msgstr "URL-perusosoitetta ei löytynyt"
 
 #: src/zmart-sources.cc:330
 msgid "Continuing anyway"
-msgstr ""
+msgstr "Jatketaan tästä huolimatta"
 
 #: src/zmart-sources.cc:336
 msgid "removing source "
-msgstr ""
+msgstr "poistetaan lähdettä"
 
 #: src/zmart-sources.cc:343 src/zmart-sources.cc:367 src/zmart-sources.cc:379
 #: src/zmart-sources.cc:412 src/zmart-sources.cc:435 src/zmart-sources.cc:446
 #, c-format
 msgid "Source %s not found."
-msgstr ""
+msgstr "Lähdettä %s ei löytynyt."
 
 #: src/zmart-sources.cc:359 src/zmart-sources.cc:427
 msgid "URL is invalid: "
-msgstr "URL je neplatné: "
+msgstr "URL-osoite ei kelpaa."
 
 #: src/zmart-sources.cc:464
 msgid "Sorry, not implemented yet for libzypp-1.x.x"
-msgstr ""
+msgstr "Valitettavasti tätä ei ole vielä toteutettu tiedostolle libzypp-1.x.x"
 
 #: src/zmart-sources.cc:485
 msgid "Refreshing "
-msgstr ""
+msgstr "Päivitetään"
 
 #: src/zmart-sources.cc:492
 msgid "DONE"
-msgstr ""
+msgstr "VALMIS"
 
 #: src/zmart-sources.cc:496
 msgid "Error while refreshing the source: "
-msgstr ""
+msgstr "Virhe päivitettäessä lähdettä:"
 
 #: src/zmart-sources.cc:501
 msgid "All system sources have been refreshed."
-msgstr ""
+msgstr "Kaikki järjestelmän lähteet on päivitetty."
 
 #: src/zmart-sources.cc:522
 msgid "Error while fetching "
-msgstr ""
+msgstr "Virhe noudettaessa"
 
 #: src/zmart-sources.cc:538
 msgid "ZENworks Management Daemon is running."
-msgstr ""
+msgstr "ZENworks-hallintataustaohjelma on käynnissä."
 
 #: src/zmart-sources.cc:539
 msgid "WARNING: this command will not synchronize changes."
-msgstr ""
+msgstr "VAROITUS: tämä komento ei synkronisoi muutoksia."
 
 #: src/zmart-sources.cc:540
 msgid "Use rug or yast2 for that."
-msgstr ""
+msgstr "Käytä rug- tai yast2-toimintoa siihen."
 
 #: src/zypp-checkpatches.cc:127
 msgid ""
@@ -424,6 +450,9 @@ msgid ""
 "happens when you have another application (like YaST) using it at the same "
 "time. Please close other applications and check again for updates."
 msgstr ""
+"Päivitystoiminto ei voinut käyttää paketinhallintatoimintoa. Näin tapahtuu "
+"yleensä siinä tapauksessa, että jokin toinen sovellus (kuten YaST) käyttää "
+"toimintoa samaan aikaan. Sulje muut sovellukset ja hae päivityksiä uudelleen."
 
 #: src/zypp-checkpatches.cc:213
 #, c-format
@@ -431,112 +460,118 @@ msgid ""
 "Couldn't restore source.\n"
 "Detail: %s"
 msgstr ""
+"Lähdettä ei voi palauttaa.\n"
+"Tiedot: %s"
 
 #: src/zypp-checkpatches.cc:262
 msgid ""
 "There are no update sources defined. Please add one or more update sources "
 "in order to be notified of updates."
 msgstr ""
+"Päivityslähteitä ei ole määritetty. Lisää ainakin yksi päivityslähde, jos "
+"haluat, että saat tiedon päivityksistä."
 
 #: src/zypper-callbacks.cc:23
 msgid "(A)bort, (R)etry, (I)gnore?"
-msgstr ""
+msgstr "(K)eskeytä, (Y)ritä uudelleen, (O)hita?"
 
 #: src/zypper-getopt.cc:56
 msgid "Unknown option "
-msgstr ""
+msgstr "Tuntematon valinta"
 
 #: src/zypper-getopt.cc:59
 msgid "Missing argument for "
-msgstr ""
+msgstr "Argumentti puuttuu:"
 
 #: src/zypper-info.cc:48
 msgid " not found."
-msgstr ""
+msgstr "ei löytynyt."
 
 #: src/zypper-info.cc:52
 msgid "Information for "
-msgstr ""
+msgstr "Tiedot:"
 
 #: src/zypper-info.cc:84
 msgid "Catalog: "
-msgstr ""
+msgstr "Pakettiluettelo: "
 
 #: src/zypper-info.cc:85
 msgid "Name: "
-msgstr ""
+msgstr "Nimi: "
 
 #: src/zypper-info.cc:86
 msgid "Version: "
-msgstr ""
+msgstr "Versio:"
 
 #: src/zypper-info.cc:87
 msgid "Arch: "
-msgstr ""
+msgstr "Arkkitehtuuri: "
 
 #: src/zypper-info.cc:88
 msgid "Installed: "
-msgstr ""
+msgstr "Asennettu: "
 
 #: src/zypper-info.cc:90
 msgid "Status: "
-msgstr ""
+msgstr "Tila: "
 
 #: src/zypper-info.cc:93
 msgid "up-to-date"
-msgstr ""
+msgstr "ajan tasalla"
 
 #: src/zypper-info.cc:95
 msgid "out-of-date (version "
-msgstr ""
+msgstr "vanhentunut (versio"
 
 #: src/zypper-info.cc:96
 msgid " installed) "
-msgstr ""
+msgstr "asennettu)"
 
 #: src/zypper-info.cc:99
 msgid "not installed"
-msgstr ""
+msgstr "ei asennettu"
 
 #: src/zypper-info.cc:101
 msgid "Installed Size: "
-msgstr ""
+msgstr "Koko asennettuna: "
 
 #: src/zypper-info.cc:102
 msgid "Summary: "
-msgstr ""
+msgstr "Yhteenveto: "
 
 #: src/zypper-info.cc:103
 msgid "Description: "
-msgstr ""
+msgstr "Kuvaus: "
 
 #: src/zypper-search.cc:45
 msgid "No sources. Zypper currently searches within installationsources only."
-msgstr ""
+msgstr "Ei lähteitä. Zypper hakee tällä hetkellä vain asennuslähteistä."
 
 #: src/zypper-search.cc:107
 msgid "Pre-caching installed resolvables matching given search criteria... "
 msgstr ""
+"Tallennettaan välimuistiin asennettuja riippuvaisuuksia, jotka vastaavat "
+"määritettyjä hakuehtoja..."
 
 #: src/zypper-search.cc:116
 msgid " out of ("
-msgstr ""
+msgstr "/"
 
 #: src/zypper-search.cc:117
 msgid "cached."
-msgstr ""
+msgstr "tallennettu välimuistiin."
 
 #: src/zypper-search.cc:216
 msgid " is not a valid regular expression: \""
-msgstr ""
+msgstr "ei ole kelvollinen säännöllinen lause: \""
 
 #: src/zypper-search.cc:218
 msgid "This is a bug, please file a bug report against zypper."
-msgstr ""
+msgstr "Tämä on ohjelmavirhe. Tee ilmoitus zypper-ohjelmavirheestä."
 
 #: src/zypper.cc:72
 msgid "URL is invalid."
-msgstr "URL je neplatné"
+msgstr "Verkko-osoite ei kelpaa."
 
 #: src/zypper.cc:80
 msgid ""
@@ -558,26 +593,26 @@ msgid ""
 "\tinfo, if\t\tShow full information for packages\n"
 "\tpatch-info\t\tShow full information for patches\n"
 msgstr ""
-"  Příkazy:\n"
-"\thelp\t\t\tNápověda\n"
-"\tshell, sh\t\tZpracovat více příkazů po sobě\n"
-"\tinstall, in\t\tInstalovat balíky nebo resolvably\n"
-"\tremove, rm\t\tOdebrat balíky nebo resolvably\n"
-"\tsearch, se\t\tHledat balíky vyhovující vzoru\n"
-"\tservice-list, sl\tVypsat služby neboli instalační zdroje\n"
-"\tservice-add, sa\t\tPřidat službu\n"
-"\tservice-delete, sd\tOdebrat službu\n"
-"\tservice-rename, sr\tPřejmenovat službu\n"
-"\trefresh, ref\t\tObnovit všechny instalační zdroje\n"
-"\tpatch-check, pchk\tZjistit jestli jsou dostupné záplaty\n"
-"\tpatches, pch\t\tVypsat všechny záplaty\n"
-"\tlist-updates, lu\tVypsat relevantní aktualizace\n"
-"\tupdate, up\t\tAktualizovat balíky\n"
-"\tinfo, if\t\tVypsat všchny informace o balících\n"
-"\tpatch-info\t\tVypsat všchny informace o záplatách\n"
+"  Komennot:\n"
+"\thelp\t\t\tOhje\n"
+" \tshell, sh\t\tHyväksy useita komentoja kerralla\n"
+" \tinstall, in\t\tAsenna paketteja tai muita osia\n"
+" \tremove, rm\t\tPoista paketteja tai muita osia\n"
+" \tsearch, se\t\tHae kuviota vastaavia paketteja\n"
+" \tservice-list, sl\tNäytä luettelo palveluista, kutsutaan myös "
+"asennuslähteiksi\n"
+" \tservice-add, sa\t\tLisää uusi palvelu\n"
+" \tservice-delete, sd\tPoista palvelu\n"
+" \tservice-rename, sr\tNimeä palvelu uudelleen\n"
+" \trefresh, ref\t\tPäivitä kaikki asennuslähteet\n"
+" \tpatch-check, pchk\tTarkista saatavilla olevat päivitykset\n"
+" \tpatches, pch\t\tNäytä luettelo korjauksista\n"
+" \tlist-updates, lu\tNäytä päivitysten luettelo\n"
+" \tupdate, up\t\tPäivitä paketit\n"
+" \tinfo, if\t\tNäytä pakettien täydet tiedot\n"
+" \tpatch-info\t\tNäytä korjausten täydet tiedot\n"
 
 #: src/zypper.cc:123
-#, fuzzy
 msgid ""
 "  Options:\n"
 "\t--help, -h\t\tHelp\n"
@@ -589,25 +624,27 @@ msgid ""
 "\t--non-interactive\tDon't ask anything, use default answers automatically. "
 "(under development)\n"
 msgstr ""
-"  Volby:\n"
-"\t--help, -h\t\tNápověda\n"
-"\t--version, -V\t\tVypsat číslo verze\n"
-"\t--verbose, -v\t\tZvýšit ukecanost\n"
-"\t--terse, -t\t\tStručný výstup čitelný strojově\n"
-"\t--table-style, -s\tStyl tabulek (celé číslo)\n"
-"\t--rug-compatible, -r\tZapnout kompatibilitu s rugem\n"
+"  Valinnat:\n"
+"\t--help, -h\t\tOhje\n"
+" \t--version, -V\t\tNäytä versionumero\n"
+" \t--verbose, -v\t\tKasvata sanallisuuden astetta\n"
+" \t--terse, -t\t\tLyhytsanainen tuloste koneellista käyttöä varten\n"
+" \t--table-style, -s\tTaulukkotyyli (kokonaisluku)\n"
+" \t--rug-compatible, -r\tOta rug-yhteensopivuus käyttöön\n"
+" \t--non-interactive\tEi vuorovaikutteisuutta, käytä oletusvastauksia "
+"automaattisesti. (kehitysvaiheessa)\n"
 
 #: src/zypper.cc:135
 msgid "Verbosity "
-msgstr ""
+msgstr "Sanallisuus"
 
 #: src/zypper.cc:154
 msgid "Invalid table style "
-msgstr ""
+msgstr "Virheellinen taulukon tyyli"
 
 #: src/zypper.cc:191
 msgid "Try -h for help"
-msgstr ""
+msgstr "Saat ohjeita valitsimella -h"
 
 #: src/zypper.cc:209
 msgid ""
@@ -615,6 +652,9 @@ msgid ""
 "\t--disable-system-sources, -D\t\tDo not read the system sources\n"
 "\t--source, -S\t\tRead additional source\n"
 msgstr ""
+"  Lähdevalinnat:\n"
+"\t--disable-system-sources, -D\t\tÄlä lue järjestelmälähteitä\n"
+" \t--source, -S\t\tLue lisälähde\n"
 
 #: src/zypper.cc:214
 msgid ""
@@ -622,6 +662,9 @@ msgid ""
 "\t--disable-system-resolvables, -T\t\tDo not read system installed "
 "resolvables\n"
 msgstr ""
+"  Kohdevalinnat:\n"
+"\t--disable-system-resolvables, -T\t\tÄlä lue järjestelmään asennettuja "
+"muita osia\n"
 
 #: src/zypper.cc:228
 msgid ""
@@ -630,6 +673,10 @@ msgid ""
 "\t--type,-t\t\tType of resolvable (default: package)\n"
 "\t--no-confirm,-y\tDo not require user confirmation\n"
 msgstr ""
+"  Komentovalinnat:\n"
+"\t--catalog,-c\t\tVain tästä luettelosta (kehitysvaiheessa)\n"
+" \t--type,-t\t\tMuun osan tyyppi (oletusarvo: paketti)\n"
+" \t--no-confirm,-y\tÄlä edellytä käyttäjän varmistusta\n"
 
 #: src/zypper.cc:243
 msgid ""
@@ -637,6 +684,10 @@ msgid ""
 "\t--type,-t\t\tType of resolvable (default: package)\n"
 "\t--no-confirm,-y\tDo not require user confirmation\n"
 msgstr ""
+"  Komentovalinnat:\n"
+"\t--catalog,-c\t\tVain tästä luettelosta (kehitysvaiheessa)\n"
+" \t--type,-t\t\tMuun osan tyyppi (oletusarvo: paketti)\n"
+" \t--no-confirm,-y\tÄlä edellytä käyttäjän varmistusta\n"
 
 #: src/zypper.cc:259
 msgid ""
@@ -650,6 +701,15 @@ msgid ""
 "\t--disabled,-d\t\tAdd the service as disabled\n"
 "\t--no-refresh,-n\t\tDo not automatically refresh the metadata\n"
 msgstr ""
+"service-add [valinnat] URI [alias]\n"
+"\n"
+" Lisää palvelu (asennuslähde) järjestelmään.\n"
+"   Komentovalinnat:\n"
+" \t--repo,-r <TIEDOSTO.varasto>\tLue verkko-osoite ja alias tiedostosta\n"
+" \t\t\t\t(myös etä)\n"
+" \t--type,-t <TYPE>\tVaraston tyyppi (YaST, YUM tai Plaindir)\n"
+" \t--disabled,-d\t\tLisää palvelu käytöstä poistettuna\n"
+" \t--no-refresh,-n\t\tÄlä päivitä metatietoja automaattisesti\n"
 
 #: src/zypper.cc:278
 msgid ""
@@ -658,6 +718,11 @@ msgid ""
 "List all defined system services (installation sources).\n"
 "This command has no options.\n"
 msgstr ""
+"service-list\n"
+"\n"
+" Näyttää luettelon kaikista määritetyistä järjestelmäpalveluista "
+"(asennuslähteet).\n"
+" Tällä komennolla ei ole valitsimia.\n"
 
 #: src/zypper.cc:292
 msgid ""
@@ -666,6 +731,10 @@ msgid ""
 "Remove service (installation source) from the system.\n"
 "This command has no options.\n"
 msgstr ""
+"service-delete [valinnat] <URI|alias>\n"
+"\n"
+" Poista palvelu (asennuslähde) järjestelmästä.\n"
+" Tällä komennolla ei ole valitsimia.\n"
 
 #: src/zypper.cc:306
 msgid ""
@@ -674,6 +743,11 @@ msgid ""
 "Assign new alias to the service specified by URI or current alias.\n"
 "This command has no options.\n"
 msgstr ""
+"service-rename [valinnat] <URI|alias> <new-alias>\n"
+"\n"
+" Määrittää uuden aliaksen palveluun, joka on määritetty URI:n tai nykyisen "
+"aliaksen avulla.\n"
+" Tällä komennolla ei ole valitsimia.\n"
 
 #: src/zypper.cc:320
 msgid ""
@@ -681,6 +755,9 @@ msgid ""
 "\n"
 "Refresh all installation sources found in the system.\n"
 msgstr ""
+"zypper refresh\n"
+"\n"
+" Päivittää kaikki järjestelmästä löytyvät asennuslähteet.\n"
 
 #: src/zypper.cc:333
 msgid ""
@@ -691,6 +768,12 @@ msgid ""
 "  Command options:\n"
 "\t--type,-t\t\tType of resolvable (default: patch)\n"
 msgstr ""
+"list-updates [valinnat]\n"
+"\n"
+" Näyttää kaikki käytettävissä olevat päivitykset\n"
+" \n"
+"   Komentovalinnat:\n"
+" \t--type,-t\t\tMuun osan tyyppi (oletusarvo: korjaus)\n"
 
 #: src/zypper.cc:351
 msgid ""
@@ -699,6 +782,11 @@ msgid ""
 "\t--no-confirm,-y\t\tDo not require user confirmation\n"
 "\t--skip-interactive\t\tSkip interactive updates\n"
 msgstr ""
+"  Komentovalinnat:\n"
+"\t--catalog,-c\t\tVain tästä luettelosta (kehitysvaiheessa)\n"
+" \t--type,-t\t\tMuun osan tyyppi (oletusarvo: korjaus)\n"
+" \t--no-confirm,-y\t\tÄlä edellytä käyttäjän vahvistusta\n"
+" \t--skip-interactive\t\tOhita interaktiiviset päivitykset\n"
 
 #: src/zypper.cc:376
 msgid ""
@@ -727,6 +815,32 @@ msgid ""
 "\n"
 "* and ? wildcards can also be used within search strings.\n"
 msgstr ""
+"zypper [yleiset-valinnat] search [valinnat] [hakumerkkijono...]\n"
+"\n"
+" 'search' - Hae määritettyä merkkijonoa vastaavia paketteja\n"
+" \n"
+"   Komentovalinnat:\n"
+"     --match-all            Hae kaikkien hakumerkkijonojen vastaavuuksia "
+"(oletusarvo)\n"
+"     --match-any            Hae vastaavuutta mille tahansa "
+"hakumerkkijonolle\n"
+"     --match-substrings     Hakumerkkijonojen vastaavuudet voivat olla "
+"osoittaisia sanoja (oletusarvo)\n"
+"     --match-words          Hakumerkkijonojen vastaavuudet voivat olla "
+"kokonaisia sanoja\n"
+"     --match-exact          Hakee tiettyä tarkkaa paketin nimeä\n"
+" -d, --search-descriptions  Hakee myös pakettien yhteenvedoista ja "
+"kuvauksista.\n"
+" -c, --case-sensitive       Suorittaa haun, jossa kirjainkoko on "
+"merkitsevä.\n"
+" -i, --installed-only       Näin vain jo asennetut paketit.\n"
+" -u, --uninstalled-only     Näytä vain paketit, joita ei ole tällä hetkellä "
+"asennettu.\n"
+" -t, --type                 Näytä vain tietyn tyyppiset paketit.\n"
+"     --sort-by-name         Lajittele paketit nimen mukaan (oletusarvo).\n"
+"     --sort-by-catalog      Lajittele paketit luettelon (lähteen) mukaan.\n"
+" \n"
+" Jokerimerkkejä * ja ? voi käyttää hakumerkkijonoissa.\n"
 
 #: src/zypper.cc:404
 msgid ""
@@ -736,6 +850,11 @@ msgid ""
 "\n"
 "This command has no options.\n"
 msgstr ""
+"patch-check\n"
+"\n"
+" Hakee saatavilla olevia korjauksia\n"
+" \n"
+" Tällä komennolla ei ole valitsimia.\n"
 
 #: src/zypper.cc:418
 msgid ""
@@ -745,6 +864,11 @@ msgid ""
 "\n"
 "This command has no options.\n"
 msgstr ""
+"patches\n"
+"\n"
+" Näyttää luettelon kaikista saatavilla olevista korjauksista\n"
+" \n"
+" Tällä komennolla ei ole valitsimia.\n"
 
 #: src/zypper.cc:432
 msgid ""
@@ -752,6 +876,9 @@ msgid ""
 "\n"
 "'info' -- Show full information for packages\n"
 msgstr ""
+"zypper [yleiset-valinnat] info [nimi...]\n"
+"\n"
+" 'info' -- Näytä pakettien täydet tiedot\n"
 
 #: src/zypper.cc:444
 msgid ""
@@ -759,6 +886,9 @@ msgid ""
 "\n"
 "'patch-info' -- Show detailed information for patches\n"
 msgstr ""
+"zypper [yleiset-valinnat] patch-info [korjauksen nimi...]\n"
+"\n"
+" 'patch-info' -- Näytä korjausten yksityiskohtaiset tiedot\n"
 
 #: src/zypper.cc:456
 msgid ""
@@ -766,53 +896,59 @@ msgid ""
 "\n"
 "'moo' - Show an animal\n"
 msgstr ""
+"zypper [yleiset-valinnat] moo\n"
+"\n"
+" 'moo' - Näytä eläin\n"
 
 #: src/zypper.cc:462
 msgid "Unknown command"
-msgstr ""
+msgstr "Tuntematon komento"
 
 #: src/zypper.cc:477
 msgid "Non-Option Program Arguments: "
-msgstr ""
+msgstr "Ohjelman muut määritteet valintojen lisäksi:"
 
 #: src/zypper.cc:489
 msgid "Ignoring --terse (provided only for rug compatibility)"
-msgstr ""
+msgstr "Ignoring --terse (vain rug-yhteensopivuuden takia)"
 
 #: src/zypper.cc:505
 msgid "Ignoring installed resolvables..."
-msgstr ""
+msgstr "Ohitetaan asennettuja muita osia..."
 
 #: src/zypper.cc:530
 msgid "A ZYpp transaction is already in progress."
-msgstr ""
+msgstr "ZYpp-tapahtuma on jo käynnissä."
 
 #: src/zypper.cc:557
 msgid "Root privileges are required for viewing system sources."
 msgstr ""
+"Järjestelmän lähteiden tarkastelemiseen vaaditaan pääkäyttäjän oikeudet."
 
 #: src/zypper.cc:575
 msgid "Warning: Unknown metadata type "
-msgstr ""
+msgstr "Varoitus: Tuntematon metadatatyyppi"
 
 #: src/zypper.cc:712 src/zypper.cc:770 src/zypper.cc:856 src/zypper.cc:884
 msgid "Unknown resolvable type "
-msgstr ""
+msgstr "Tuntematon muun osan tyyppi"
 
 #: src/zypper.cc:725
 msgid ""
 "Warning: No sources. Operating only with the installed resolvables. Nothing "
 "can be installed."
 msgstr ""
+"Varoitus: Ei lähteitä. Käytetään vain asennettuja muita osia. Mitään ei voi "
+"asentaa."
 
 #: src/zypper.cc:927
 msgid "Please file a bug report about this."
-msgstr ""
+msgstr "Tee virheilmoitus tästä viasta."
 
 #: src/zypper.cc:930
 msgid "See http://en.opensuse.org/Zypper#Troubleshooting for instructions."
-msgstr ""
+msgstr "Ohjeita on sivulla http://en.opensuse.org/Zypper#Troubleshooting."
 
 #: src/zypper.cc:943
 msgid "Unexpected exception."
-msgstr ""
+msgstr "Odottamaton poikkeus."

@@ -8,10 +8,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper.sk\n"
 "Report-Msgid-Bugs-To: translation@suse.de\n"
-"POT-Creation-Date: 2007-02-16 10:33+0100\n"
+"POT-Creation-Date: 2007-03-05 16:11+0100\n"
 "PO-Revision-Date: 2007-02-27 10:22+0100\n"
-"Last-Translator: \n"
-"Language-Team:  <en@li.org>\n"
+"Last-Translator: Jan Kupec <jkupec@suse.cz>\n"
+"Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -109,7 +109,9 @@ msgstr "(nainštalovaný)"
 #: src/zmart-misc.cc:174
 #, c-format
 msgid "Failed to add '%s' to the list of packages to be installed."
-msgstr "Balíček '%s' nebolo možné pridať do zoznamu balíčkov, ktoré sa majú nainštalovať."
+msgstr ""
+"Balíček '%s' nebolo možné pridať do zoznamu balíčkov, ktoré sa majú "
+"nainštalovať."
 
 #: src/zmart-misc.cc:192
 msgid "Failed"
@@ -236,7 +238,9 @@ msgstr "Stav"
 msgid ""
 "WARNING: These are only the updates affecting the updater itself.\n"
 "There are others available too.\n"
-msgstr "POZOR: Toto sú len aktualizácie aktualizátora, k dispozícii sú aj ďalšie aktualizácie.\n"
+msgstr ""
+"POZOR: Toto sú len aktualizácie aktualizátora, k dispozícii sú aj ďalšie "
+"aktualizácie.\n"
 
 #: src/zmart-misc.cc:600
 msgid "S"
@@ -262,14 +266,16 @@ msgstr "odovzdávam"
 
 #: src/zmart-misc.cc:728
 msgid ""
-"Package integrity check failed. This may be a problem with installation source or media. Try one of the following:\n"
+"Package integrity check failed. This may be a problem with installation "
+"source or media. Try one of the following:\n"
 "\n"
 "- just retry previous command\n"
 "- refresh installation sources using 'zypper refresh'\n"
 "- use another installation media (if e.g. damaged)\n"
 "- use another installation source"
 msgstr ""
-"Kontrola integrity balíčka zlyhala. Môže to byť problém inštalačného zdroja alebo média. Vyskúšajte jednu z nasledujúcich možností:\n"
+"Kontrola integrity balíčka zlyhala. Môže to byť problém inštalačného zdroja "
+"alebo média. Vyskúšajte jednu z nasledujúcich možností:\n"
 "\n"
 "- jednoducho skúste znova spustiť predchádzajúci príkaz\n"
 "- obnovte inštalačné zdroje pomocou 'zypper refresh'\n"
@@ -277,36 +283,56 @@ msgstr ""
 "- použite iný inštalačný zdroj"
 
 #: src/zmart-misc.cc:746
-msgid "WARNING: One of installed patches requires reboot of your machine. Please, do it as soon as possible."
-msgstr "POZOR: jedna z nainštalovaných záplat vyžaduje reštart vášho počítača. Prosím, reštartujte čo najkôr."
+msgid ""
+"WARNING: One of installed patches requires reboot of your machine. Please, "
+"do it as soon as possible."
+msgstr ""
+"POZOR: jedna z nainštalovaných záplat vyžaduje reštart vášho počítača. "
+"Prosím, reštartujte čo najkôr."
 
 #: src/zmart-misc.cc:749
-msgid "WARNING: One of installed patches affects the package manager itself, thus it requires restart before executing next operations."
-msgstr "POZOR: Jedna z nainštalovaných záplat ovplyvňuje samotného správcu balíčkov. Pred jeho ďalším použitím je teda potrebné ho zavrieť a znovu spustiť."
+msgid ""
+"WARNING: One of installed patches affects the package manager itself, thus "
+"it requires restart before executing next operations."
+msgstr ""
+"POZOR: Jedna z nainštalovaných záplat ovplyvňuje samotného správcu balíčkov. "
+"Pred jeho ďalším použitím je teda potrebné ho zavrieť a znovu spustiť."
 
 #: src/zmart-misc.cc:772 src/zmart-misc.cc:798
 msgid "license"
 msgstr "licencia"
 
 #: src/zmart-misc.cc:775
-msgid "In order to install this package, you must agree to terms of the above licencse. Continue?"
-msgstr "Pred nainštalovaním tohoto balíčka musíte súhlasiť so znením jeho vyššie uvedenej licencie. Pokračovať?"
+msgid ""
+"In order to install this package, you must agree to terms of the above "
+"licencse. Continue?"
+msgstr ""
+"Pred nainštalovaním tohoto balíčka musíte súhlasiť so znením jeho vyššie "
+"uvedenej licencie. Pokračovať?"
 
 #: src/zmart-misc.cc:786
 msgid "Aborting installation due to the need of license(s) confirmation."
-msgstr "Končím inštaláciu kvôli potrebe potvrdenia súhlasu s liceniou/licenciami."
+msgstr ""
+"Končím inštaláciu kvôli potrebe potvrdenia súhlasu s liceniou/licenciami."
 
 #: src/zmart-misc.cc:788
-msgid "Please, restart the operation in interactive mode and confirm agreement with required license(s)."
-msgstr "Prosím, reštartujte túto operáciu v interaktívnom režime a potvrďte súhlas s požadovanými licenciami."
+msgid ""
+"Please, restart the operation in interactive mode and confirm agreement with "
+"required license(s)."
+msgstr ""
+"Prosím, reštartujte túto operáciu v interaktívnom režime a potvrďte súhlas s "
+"požadovanými licenciami."
 
 #: src/zmart-misc.cc:795
 msgid "Aborting installation due to user disagreement with "
 msgstr "Končím inštaláciu kvôli nesúhlasu s "
 
 #: src/zmart-sources.cc:31
-msgid "Sorry, you need root privileges to use system sources, disabling them..."
-msgstr "Na používanie systémových zdrojov potrebujete rootovské práva, vynechávam systémové zdroje..."
+msgid ""
+"Sorry, you need root privileges to use system sources, disabling them..."
+msgstr ""
+"Na používanie systémových zdrojov potrebujete rootovské práva, vynechávam "
+"systémové zdroje..."
 
 #: src/zmart-sources.cc:48
 msgid "Restoring system sources..."
@@ -422,8 +448,14 @@ msgid "Use rug or yast2 for that."
 msgstr "Pre tento účel použite rug alebo yast2."
 
 #: src/zypp-checkpatches.cc:127
-msgid "The updater could not access the package manager engine. This usually happens when you have another application (like YaST) using it at the same time. Please close other applications and check again for updates."
-msgstr "Program nemá prístup ku knižnici pre správu balíčkov. Toto sa zvyčajne stáva ak už máte spustenú iný aplikáciu, ktorá túto knižnicu používa. Prosím, zavrite ostatné aplikácie a skúste znova."
+msgid ""
+"The updater could not access the package manager engine. This usually "
+"happens when you have another application (like YaST) using it at the same "
+"time. Please close other applications and check again for updates."
+msgstr ""
+"Program nemá prístup ku knižnici pre správu balíčkov. Toto sa zvyčajne stáva "
+"ak už máte spustenú iný aplikáciu, ktorá túto knižnicu používa. Prosím, "
+"zavrite ostatné aplikácie a skúste znova."
 
 #: src/zypp-checkpatches.cc:213
 #, c-format
@@ -435,8 +467,12 @@ msgstr ""
 "Podrobnosti: %s"
 
 #: src/zypp-checkpatches.cc:262
-msgid "There are no update sources defined. Please add one or more update sources in order to be notified of updates."
-msgstr "Nie sú definované žiadne aktualizačné zdroje. Prosím, pridajte jeden alebo viacero zdrojov, ak chcete byť upozorňovaní na aktualizácie."
+msgid ""
+"There are no update sources defined. Please add one or more update sources "
+"in order to be notified of updates."
+msgstr ""
+"Nie sú definované žiadne aktualizačné zdroje. Prosím, pridajte jeden alebo "
+"viacero zdrojov, ak chcete byť upozorňovaní na aktualizácie."
 
 #: src/zypper-callbacks.cc:23
 msgid "(A)bort, (R)etry, (I)gnore?"
@@ -512,11 +548,13 @@ msgstr "Popis:"
 
 #: src/zypper-search.cc:45
 msgid "No sources. Zypper currently searches within installationsources only."
-msgstr "Žiadne zdroje. Zypper momentálne vyhľadáva iba v inštalačných zdrojoch."
+msgstr ""
+"Žiadne zdroje. Zypper momentálne vyhľadáva iba v inštalačných zdrojoch."
 
 #: src/zypper-search.cc:107
 msgid "Pre-caching installed resolvables matching given search criteria... "
-msgstr "Prednačítavam nainštalované balíčky vyhovujúce kritériam vyhľadávania... "
+msgstr ""
+"Prednačítavam nainštalované balíčky vyhovujúce kritériam vyhľadávania... "
 
 #: src/zypper-search.cc:116
 msgid " out of ("
@@ -536,11 +574,11 @@ msgstr " nie je platný regulárny výraz: \""
 msgid "This is a bug, please file a bug report against zypper."
 msgstr "Toto je chyba, prosím, náhlaste ju ako chybu programu zypper."
 
-#: src/zypper.cc:70
+#: src/zypper.cc:72
 msgid "URL is invalid."
 msgstr "Chybná URL adresa."
 
-#: src/zypper.cc:78
+#: src/zypper.cc:80
 msgid ""
 "  Commands:\n"
 "\thelp\t\t\tHelp\n"
@@ -578,7 +616,7 @@ msgstr ""
 "\tinfo, if\t\tPodrobné informácie o balíčkoch.\n"
 "\tpatch-info\t\tPodrobné informácie o záplatách.\n"
 
-#: src/zypper.cc:121
+#: src/zypper.cc:123
 msgid ""
 "  Options:\n"
 "\t--help, -h\t\tHelp\n"
@@ -587,7 +625,8 @@ msgid ""
 "\t--terse, -t\t\tTerse output for machine consumption\n"
 "\t--table-style, -s\tTable style (integer)\n"
 "\t--rug-compatible, -r\tTurn on rug compatibility\n"
-"\t--non-interactive\tDon't ask anything, use default answers automatically. (under development)\n"
+"\t--non-interactive\tDon't ask anything, use default answers automatically. "
+"(under development)\n"
 msgstr ""
 "  Možnosti:\n"
 "\t--help, -h\t\tPomoc\n"
@@ -596,39 +635,45 @@ msgstr ""
 "\t--terse, -t\t\tVýstup pre spracovanie iným programom\n"
 "\t--table-style, -s\tŠtýl výstupnej tabuľky (celé číslo)\n"
 "\t--rug-compatible, -r\tZapnutie kompatibility s programom rug\n"
-"\t--non-interactive\tNa nič sa nepýtaj, automaticky použi prednastavené odpovede. (vo vývoji)\n"
+"\t--non-interactive\tNa nič sa nepýtaj, automaticky použi prednastavené "
+"odpovede. (vo vývoji)\n"
 
-#: src/zypper.cc:133
+#: src/zypper.cc:135
 msgid "Verbosity "
 msgstr "Úroveň podrobnosti výstupu "
 
-#: src/zypper.cc:152
+#: src/zypper.cc:154
 msgid "Invalid table style "
 msgstr "Nesprávny typ tabuľky "
 
-#: src/zypper.cc:189
+#: src/zypper.cc:191
 msgid "Try -h for help"
-msgstr "Skús -h pre zobrazenie nápovede. Pri použití voľby -h za konkrétnym príkazom sa zobrazí nápoveda k tomuto príkazu."
+msgstr ""
+"Skús -h pre zobrazenie nápovede. Pri použití voľby -h za konkrétnym príkazom "
+"sa zobrazí nápoveda k tomuto príkazu."
 
-#: src/zypper.cc:207
+#: src/zypper.cc:209
 msgid ""
 "  Source options:\n"
 "\t--disable-system-sources, -D\t\tDo not read the system sources\n"
 "\t--source, -S\t\tRead additional source\n"
 msgstr ""
 "  Možnosti inštalačného zdroja:\n"
-"\t--disable-system-sources, -D\t\tIgnoruj systémové zdroje (RPM databáza nainštalovaných balíčkov)\n"
+"\t--disable-system-sources, -D\t\tIgnoruj systémové zdroje (RPM databáza "
+"nainštalovaných balíčkov)\n"
 "\t--source, -S\t\tNačítaj prídavný inštalačný zdroj\n"
 
-#: src/zypper.cc:212
+#: src/zypper.cc:214
 msgid ""
 "  Target options:\n"
-"\t--disable-system-resolvables, -T\t\tDo not read system installed resolvables\n"
+"\t--disable-system-resolvables, -T\t\tDo not read system installed "
+"resolvables\n"
 msgstr ""
 "  Možnosti cieľa inštalácie:\n"
-"\t--disable-system-resolvables, -T\t\tIgnoruj systémové balíčky (RPM databáza nainštalovaných balíčkov)\n"
+"\t--disable-system-resolvables, -T\t\tIgnoruj systémové balíčky (RPM "
+"databáza nainštalovaných balíčkov)\n"
 
-#: src/zypper.cc:226
+#: src/zypper.cc:228
 msgid ""
 "  Command options:\n"
 "\t--catalog,-c\t\tOnly from this catalog (under development)\n"
@@ -640,7 +685,7 @@ msgstr ""
 "\t--type,-t\t\tTyp balíčka (prednastavená hodnota: package)\n"
 "\t--no-confirm,-y\tNevyžaduj potvrdenie užívateľa\n"
 
-#: src/zypper.cc:241
+#: src/zypper.cc:243
 msgid ""
 "  Command options:\n"
 "\t--type,-t\t\tType of resolvable (default: package)\n"
@@ -650,7 +695,7 @@ msgstr ""
 "\t--type,-t\t\tTyp balíčka (prednastavená hodnota: package [balíček])\n"
 "\t--no-confirm,-y\tNevyžaduj potvrdenie\n"
 
-#: src/zypper.cc:257
+#: src/zypper.cc:259
 msgid ""
 "service-add [options] URI [alias]\n"
 "\n"
@@ -666,12 +711,13 @@ msgstr ""
 "\n"
 "Pridaj inštalačný zdroj do systému.\n"
 "  Možnosti príkazu:\n"
-"\t--repo,-r <SÚBOR.repo>\tNačítaj URL adresu a alias zo zadaného súboru (aj vzdialeného)\n"
+"\t--repo,-r <SÚBOR.repo>\tNačítaj URL adresu a alias zo zadaného súboru (aj "
+"vzdialeného)\n"
 "\t--type,-t <TYPE>\tTyp inštalačného zdroja (YaST, YUM, alebo Plaindir)\n"
 "\t--disabled,-d\t\tPridať inštalačný zdroj ako vypnutý\n"
 "\t--no-refresh,-n\t\tVypnúť automatické obnovovanie/aktualizáciu zdroja\n"
 
-#: src/zypper.cc:276
+#: src/zypper.cc:278
 msgid ""
 "service-list\n"
 "\n"
@@ -683,7 +729,7 @@ msgstr ""
 "Zobraz zoznam všetkých definovaných inštalačných zdrojov.\n"
 "Tento príkaz nemá žiadne ďalšie možnosti.\n"
 
-#: src/zypper.cc:290
+#: src/zypper.cc:292
 msgid ""
 "service-delete [options] <URI|alias>\n"
 "\n"
@@ -696,7 +742,7 @@ msgstr ""
 "\n"
 "Tento príkaz nemá žiadne ďalšie možnosti.\n"
 
-#: src/zypper.cc:304
+#: src/zypper.cc:306
 msgid ""
 "service-rename [options] <URI|alias> <new-alias>\n"
 "\n"
@@ -705,11 +751,12 @@ msgid ""
 msgstr ""
 "service-rename <URI|alias> <nový-alias>\n"
 "\n"
-"Premenovanie zdroja. Priradí existujúcemu zdroju so zadanou URI adresou alebo aliasom nový alias.\n"
+"Premenovanie zdroja. Priradí existujúcemu zdroju so zadanou URI adresou "
+"alebo aliasom nový alias.\n"
 "\n"
 "Tento príkaz nemá žiadne ďalšie možnosti.\n"
 
-#: src/zypper.cc:318
+#: src/zypper.cc:320
 msgid ""
 "zypper refresh\n"
 "\n"
@@ -719,7 +766,7 @@ msgstr ""
 "\n"
 "Obnov/aktualizuj všetky inštalačné zdroje v systéme.\n"
 
-#: src/zypper.cc:331
+#: src/zypper.cc:333
 msgid ""
 "list-updates [options]\n"
 "\n"
@@ -735,7 +782,7 @@ msgstr ""
 "  Možnosti príkazu:\n"
 "\t--type,-t\t\tTyp balíčka (prednastavená hodnota: patch [záplata])\n"
 
-#: src/zypper.cc:349
+#: src/zypper.cc:351
 msgid ""
 "  Command options:\n"
 "\t--type,-t\t\tType of resolvable (default: patch)\n"
@@ -747,22 +794,27 @@ msgstr ""
 "\t--no-confirm,-y\t\tNevyžaduj potvrdenie užívateľa\n"
 "\t--skip-interactive\t\tVynechaj interaktívne aktualizácie\n"
 
-#: src/zypper.cc:374
+#: src/zypper.cc:376
 msgid ""
 "zypper [global-options] search [options] [querystring...]\n"
 "\n"
 "'search' - Search for packages matching given search strings\n"
 "\n"
 "  Command options:\n"
-"    --match-all            Search for a match to all search strings (default)\n"
+"    --match-all            Search for a match to all search strings "
+"(default)\n"
 "    --match-any            Search for a match to any of the search strings\n"
-"    --match-substrings     Matches for search strings may be partial words (default)\n"
-"    --match-words          Matches for search strings may only be whole words\n"
+"    --match-substrings     Matches for search strings may be partial words "
+"(default)\n"
+"    --match-words          Matches for search strings may only be whole "
+"words\n"
 "    --match-exact          Searches for an exact package name\n"
-"-d, --search-descriptions  Search also in package summaries and descriptions.\n"
+"-d, --search-descriptions  Search also in package summaries and "
+"descriptions.\n"
 "-c, --case-sensitive       Perform case-sensitive search.\n"
 "-i, --installed-only       Show only packages that are already installed.\n"
-"-u, --uninstalled-only     Show only packages that are not currently installed.\n"
+"-u, --uninstalled-only     Show only packages that are not currently "
+"installed.\n"
 "-t, --type                 Search only for packages of the specified type.\n"
 "    --sort-by-name         Sort packages by name (default).\n"
 "    --sort-by-catalog      Sort packages by catalog (source).\n"
@@ -774,11 +826,15 @@ msgstr ""
 "'search' - Hľadaj balíčky podľa zadaného výrazu\n"
 "\n"
 "  Možnosti príkazu:\n"
-"    --match-all            Nájdi balíčky, ktoré obsahujú všetky hľadané výrazy (predvolené)\n"
-"    --match-any            Nájdi balíčky, ktoré obsahujú ktorýkoľvek z hľadaných výrazov\n"
-"    --match-substrings     Hľadané výrazy môžu predstavovať časti slov (predvolené)\n"
+"    --match-all            Nájdi balíčky, ktoré obsahujú všetky hľadané "
+"výrazy (predvolené)\n"
+"    --match-any            Nájdi balíčky, ktoré obsahujú ktorýkoľvek z "
+"hľadaných výrazov\n"
+"    --match-substrings     Hľadané výrazy môžu predstavovať časti slov "
+"(predvolené)\n"
 "    --match-words          Hľadané výrazy predstavujú celé slová\n"
-"    --match-exact          Hľadaný výraz sa musí presne zhodovať s názvom balíčka\n"
+"    --match-exact          Hľadaný výraz sa musí presne zhodovať s názvom "
+"balíčka\n"
 "-d, --search-descriptions  Hľadaj aj v popisoch balíčkov\n"
 "-c, --case-sensitive       Rozlišuj veľké a malé písmená\n"
 "-i, --installed-only       Hľadaj iba medzi nainštalovanými balíčkami\n"
@@ -787,9 +843,10 @@ msgstr ""
 "    --sort-by-name         Zotrieď nájdené balíčky podľa mena (predvolené)\n"
 "    --sort-by-catalog      Zotrieď balíčky podľa inštalačného zdroja\n"
 "\n"
-"Znaky * a ? môžu byt v hľadaných výrazoch použité ako náhrada ľubovoľného reťazca alebo znaku.\n"
+"Znaky * a ? môžu byt v hľadaných výrazoch použité ako náhrada ľubovoľného "
+"reťazca alebo znaku.\n"
 
-#: src/zypper.cc:402
+#: src/zypper.cc:404
 msgid ""
 "patch-check\n"
 "\n"
@@ -803,7 +860,7 @@ msgstr ""
 "\n"
 "Tento príkaz nemá žiadne ďalšie možnosti.\n"
 
-#: src/zypper.cc:416
+#: src/zypper.cc:418
 msgid ""
 "patches\n"
 "\n"
@@ -817,7 +874,7 @@ msgstr ""
 "\n"
 "Tento príkaz nemá žiadne ďalšie možnosti.\n"
 
-#: src/zypper.cc:430
+#: src/zypper.cc:432
 msgid ""
 "zypper [global-options] info [name...]\n"
 "\n"
@@ -829,7 +886,7 @@ msgstr ""
 "\n"
 "Tento príkaz nemá žiadne ďalšie možnosti.\n"
 
-#: src/zypper.cc:442
+#: src/zypper.cc:444
 msgid ""
 "zypper [global-options] patch-info [patchname...]\n"
 "\n"
@@ -841,7 +898,7 @@ msgstr ""
 "\n"
 "Tento príkaz nemá žiadne ďalšie možnosti.\n"
 
-#: src/zypper.cc:454
+#: src/zypper.cc:456
 msgid ""
 "zypper [global-options] moo\n"
 "\n"
@@ -851,51 +908,59 @@ msgstr ""
 "\n"
 "'moo' - Zobraz zviera.\n"
 
-#: src/zypper.cc:460
+#: src/zypper.cc:462
 msgid "Unknown command"
 msgstr "Neznámy príkaz"
 
-#: src/zypper.cc:475
+#: src/zypper.cc:477
 msgid "Non-Option Program Arguments: "
 msgstr "Argumenty programu (okrem volieb): "
 
-#: src/zypper.cc:487
+#: src/zypper.cc:489
 msgid "Ignoring --terse (provided only for rug compatibility)"
-msgstr "Ignorujem voľbu --terse (voľba je súčasne k dispozícii len kvôli kompatibilite s programom rug)"
+msgstr ""
+"Ignorujem voľbu --terse (voľba je súčasne k dispozícii len kvôli "
+"kompatibilite s programom rug)"
 
-#: src/zypper.cc:503
+#: src/zypper.cc:505
 msgid "Ignoring installed resolvables..."
 msgstr "Ignorujem nainštalované balíčky..."
 
-#: src/zypper.cc:526
+#: src/zypper.cc:530
 msgid "A ZYpp transaction is already in progress."
 msgstr "Práve beží iná aplikácia používajúca ZYpp."
 
-#: src/zypper.cc:553
+#: src/zypper.cc:557
 msgid "Root privileges are required for viewing system sources."
-msgstr "Pre prácu so systémovými zdrojmi sú potrebné práva správcu systému (root)."
+msgstr ""
+"Pre prácu so systémovými zdrojmi sú potrebné práva správcu systému (root)."
 
-#: src/zypper.cc:571
+#: src/zypper.cc:575
 msgid "Warning: Unknown metadata type "
 msgstr "Pozor: neznámy typ inštalačného zdroja "
 
-#: src/zypper.cc:708 src/zypper.cc:766 src/zypper.cc:852 src/zypper.cc:880
+#: src/zypper.cc:712 src/zypper.cc:770 src/zypper.cc:856 src/zypper.cc:884
 msgid "Unknown resolvable type "
 msgstr "Neznámy typ balíčka "
 
-#: src/zypper.cc:721
-msgid "Warning: No sources. Operating only with the installed resolvables. Nothing can be installed."
-msgstr "Pozor: Nie sú dostupné žiadne inštalačné zdroje. Pracujem len s nainštalovanými balíčkami. Nové balíčky nebude možné inštalovať."
+#: src/zypper.cc:725
+msgid ""
+"Warning: No sources. Operating only with the installed resolvables. Nothing "
+"can be installed."
+msgstr ""
+"Pozor: Nie sú dostupné žiadne inštalačné zdroje. Pracujem len s "
+"nainštalovanými balíčkami. Nové balíčky nebude možné inštalovať."
 
-#: src/zypper.cc:923
+#: src/zypper.cc:927
 msgid "Please file a bug report about this."
 msgstr "Prosím, pošlite správu o tejto chybe."
 
-#: src/zypper.cc:926
+#: src/zypper.cc:930
 msgid "See http://en.opensuse.org/Zypper#Troubleshooting for instructions."
-msgstr "Na adrese http://en.opensuse.org/Zypper#Troubleshooting nájdete návod ako na to."
+msgstr ""
+"Na adrese http://en.opensuse.org/Zypper#Troubleshooting nájdete návod ako na "
+"to."
 
-#: src/zypper.cc:939
+#: src/zypper.cc:943
 msgid "Unexpected exception."
 msgstr "Neočakávaná výnimka. "
-
