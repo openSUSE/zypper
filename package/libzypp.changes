@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Fri Mar  9 00:08:38 CET 2007 - ma@suse.de
+
+- Allow configuration of trusted vendors via
+  /var/lib/zypp/db/trustedVendors. (#186636)
+- revision 5194
+- version 3.0.1
+
+-------------------------------------------------------------------
 Wed Mar  7 15:20:29 CET 2007 - dmacvicar@suse.de
 
 - libzypp-devel -> libzypp requirement is not versioned
@@ -10,12 +18,12 @@ Tue Mar  6 17:25:49 CET 2007 - schubi@suse.de
 
 - Using already existing valid solver results for further solver runs.
   (partiell solving)
-- r5169 
+- r5169
 
 -------------------------------------------------------------------
 Fri Mar  2 16:11:16 CET 2007 - dmacvicar@suse.de
 
-- fix link order 
+- fix link order
 - r5165
 
 -------------------------------------------------------------------
@@ -38,7 +46,7 @@ Tue Feb 27 15:35:06 CET 2007 - schubi@suse.de
 - The context of establishPool will be stored in Resolver and will be
   regarded for the next solver run everytime. So it will be not reset by
   any solver run anymore.
-  bug 191810 ( A broken patch will not be installed again) 
+  bug 191810 ( A broken patch will not be installed again)
 
 -------------------------------------------------------------------
 Fri Feb 23 17:40:23 CET 2007 - jkupec@suse.cz
@@ -104,26 +112,26 @@ Mon Jan 29 13:10:37 CET 2007 - dmacvicar@suse.de
 - update packages: changing architecture is only valid while an
   system update and NOT while an update via a patch. Last fix does
   not fit for every case.
-  Bug 230685 
+  Bug 230685
 - Patch has selected not the concerning package for update but
   a package which has provided the required dependencies too.
   Algorithmus: If there are exactly two providers which differ in architecture
-	       prefer the better arch. 
+	       prefer the better arch.
   Fix: Regarding NVRA too. ( only if equal )
   Bug 238284
 - Download only English and Local translation
   (#208457)
 - Added solver parameter:
-   tryAllPossibilities: regarding every solver branch ( not only 
+   tryAllPossibilities: regarding every solver branch ( not only
                         branches with e.G. best architectures
    preferHighestVersion: Prefer solver results which have a higher
                          version number.
-  Bug #238087 
+  Bug #238087
 - update packages: changing architecture is only valid while an
   system update and NOT while an update via a patch.
   Bug 230685 - x86_64 MozillaFirefox binaries in security update
   repository
-  Fix of version 2.11.2 has not worked if the first founded item 
+  Fix of version 2.11.2 has not worked if the first founded item
   had had another architecture.
 - r4927
 
@@ -199,7 +207,7 @@ Wed Jan 24 14:20:28 CET 2007 - dmacvicar@suse.de
   will be selected for update although a newer has already been selected. Revision 4765
 - Conflicting items: The resolvable will be obsoleted by another. So it is useless finding an
   update candidate and evaluate additional branches.
-- r4907 
+- r4907
 
 -------------------------------------------------------------------
 Wed Jan 24 14:50:33 CET 2007 - lslezak@suse.cz
