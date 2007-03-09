@@ -17,13 +17,16 @@
 /-*/
 
 #include <iostream>
+#include <fstream>
 #include <set>
 #include <map>
 
 #include "zypp/base/LogTools.h"
-
+#include "zypp/base/IOStream.h"
 #include "zypp/base/String.h"
+
 #include "zypp/VendorAttr.h"
+#include "zypp/ZYppFactory.h"
 
 using namespace std;
 
@@ -43,6 +46,16 @@ namespace zypp
 
     typedef std::set<std::string> VendorList;
     VendorList _trustedVendors;
+
+    bool addTrustedVendor( const std::string & str_r )
+    {
+      std::string line( str::trim( str_r ) );
+      if ( ! line.empty() && line[0] != '#')
+        {
+          _trustedVendors.insert( str::toLower( line ) );
+        }
+      return true;
+    }
 
     bool trusted( const Vendor & vendor_r )
     {
@@ -92,6 +105,26 @@ namespace zypp
       "nvidia"
     };
     _trustedVendors.insert( vendors, vendors+(sizeof(vendors)/sizeof(char *)) );
+
+    Pathname vendorrcPath( getZYpp()->homePath() / "db/trustedVendors" );
+    try
+      {
+        Target_Ptr trg( getZYpp()->target() );
+        if ( trg )
+          vendorrcPath = trg->root() / vendorrcPath;
+      }
+    catch ( ... )
+      {
+        // noop: Someone decided to let target() throw if the ptr is NULL ;(
+      }
+
+    PathInfo vendorrc( vendorrcPath );
+    if ( vendorrc.isFile() )
+      {
+        MIL << "Reading " << vendorrc << endl;
+        ifstream inp( vendorrc.asString().c_str() );
+        iostr::forEachLine( inp, addTrustedVendor );
+      }
     MIL << "Trusted Vendors: " << _trustedVendors << endl;
   }
 
