@@ -66,3 +66,6 @@ mediaaccess.cc
 
 ADD_EXECUTABLE(mediaaccess ${mediaaccess_SRCS})
 TARGET_LINK_LIBRARIES(mediaaccess  zypp )
+
+ADD_EXECUTABLE(susetags-downloader SUSETagsDownloader.cc)
+TARGET_LINK_LIBRARIES(susetags-downloader  zypp )
