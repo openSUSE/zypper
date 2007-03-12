@@ -54,6 +54,8 @@ public:
   long long insertid();
   void setbusytimeout(int ms);
 
+  void execute(const std::string &sql);
+  
   void executenonquery(const char *sql);
   void executenonquery(const wchar_t *sql);
   void executenonquery(const std::string &sql);

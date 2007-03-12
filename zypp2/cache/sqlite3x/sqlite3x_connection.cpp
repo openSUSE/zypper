@@ -23,6 +23,16 @@
 		$Revision: 1.1 $
 */
 
+/* 
+  this source contains modifications by Novell Inc.
+  
+  Changes:
+  
+  * dmacvicar@novell.com
+    Wrap sqlite3_exec
+
+*/
+
 #include <sqlite3.h>
 #include "sqlite3x.hpp"
 
@@ -249,6 +259,20 @@ std::string sqlite3_connection::executeblob(const std::wstring &sql)
 {
   if (!this->db) throw database_error("database is not open");
   return sqlite3_command(*this, sql).executeblob();
+}
+
+void sqlite3_connection::execute(const std::string &sql)
+{
+  if (!this->db) throw database_error("database is not open");
+  
+  char *err_msg;
+  
+  if ( sqlite3_exec( this->db, sql.c_str(), NULL, NULL, &err_msg ) != SQLITE_OK )
+  {
+    std::string err(err_msg);
+    sqlite3_free(err_msg);
+    throw database_error(err.c_str());
+  }
 }
 
 }
