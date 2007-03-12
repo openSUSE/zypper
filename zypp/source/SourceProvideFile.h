@@ -18,7 +18,7 @@
 #include "zypp/base/Functional.h"
 #include "zypp/Source.h"
 #include "zypp/ManagedFile.h"
-#include "zypp/source/OnMediaLocation.h"
+#include "zypp/OnMediaLocation.h"
 #include "zypp/ProvideFilePolicy.h"
 
 ///////////////////////////////////////////////////////////////////
@@ -43,7 +43,7 @@ namespace zypp
      * \throws Exception
     */
     ManagedFile provideFile( Source_Ref source_r,
-                             const source::OnMediaLocation & loc_r,
+                             const OnMediaLocation & loc_r,
                              const ProvideFilePolicy & policy_r = ProvideFilePolicy() );
 
     /////////////////////////////////////////////////////////////////

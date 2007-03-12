@@ -56,7 +56,7 @@ namespace zypp
     ///////////////////////////////////////////////////////////////////
 
     ManagedFile provideFile( Source_Ref source_r,
-                             const source::OnMediaLocation & loc_r,
+                             const OnMediaLocation & loc_r,
                              const ProvideFilePolicy & policy_r )
     {
       MIL << "sourceProvideFile " << loc_r << endl;

@@ -15,7 +15,7 @@
 #include <iosfwd>
 #include <list>
 
-#include "zypp/source/OnMediaLocation.h"
+#include "zypp/OnMediaLocation.h"
 #include "zypp/Edition.h"
 #include "zypp/Date.h"
 //#include "zypp/Arch.h"
@@ -40,18 +40,18 @@ namespace zypp
       {}
 
     public:
-      const source::OnMediaLocation & location()     const { return _location; }
+      const OnMediaLocation & location()     const { return _location; }
       const BaseVersions &            baseversions() const { return _baseversions; }
       const Date &                    buildtime()    const { return _buildtime;}
 
     public:
-      PatchRpm & location( const source::OnMediaLocation & val_r ) { _location = val_r; return *this; }
+      PatchRpm & location( const OnMediaLocation & val_r ) { _location = val_r; return *this; }
       PatchRpm & baseversions( const BaseVersions & val_r )        { _baseversions = val_r; return *this; }
       PatchRpm & baseversion( const BaseVersion & val_r )          { _baseversions.push_back( val_r ); return *this; }
       PatchRpm & buildtime( const Date & val_r )                   { _buildtime = val_r; return *this; }
 
     private:
-      source::OnMediaLocation _location;
+      OnMediaLocation _location;
       BaseVersions            _baseversions;
       Date                    _buildtime;
     };
@@ -96,17 +96,17 @@ namespace zypp
       {}
 
     public:
-      const source::OnMediaLocation & location()     const { return _location; }
+      const OnMediaLocation & location()     const { return _location; }
       const BaseVersion &             baseversion()  const { return _baseversion; }
       const Date &                    buildtime()    const { return _buildtime;}
 
     public:
-      DeltaRpm & location( const source::OnMediaLocation & val_r ) { _location = val_r; return *this; }
-      DeltaRpm & baseversion( const BaseVersion & val_r )          { _baseversion = val_r; return *this; }
-      DeltaRpm & buildtime( const Date & val_r )                   { _buildtime = val_r; return *this; }
+      DeltaRpm & location( const OnMediaLocation & val_r ) { _location = val_r; return *this; }
+      DeltaRpm & baseversion( const BaseVersion & val_r )  { _baseversion = val_r; return *this; }
+      DeltaRpm & buildtime( const Date & val_r )           { _buildtime = val_r; return *this; }
 
     private:
-      source::OnMediaLocation _location;
+      OnMediaLocation _location;
       BaseVersion             _baseversion;
       Date                    _buildtime;
     };

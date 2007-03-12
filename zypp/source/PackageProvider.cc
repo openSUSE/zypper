@@ -157,7 +157,7 @@ namespace zypp
 
       // no patch/delta -> provide full package
       ManagedFile ret;
-      source::OnMediaLocation loc;
+      OnMediaLocation loc;
       loc.medianr( _package->sourceMediaNr() )
       .filename( _package->location() )
       .checksum( _package->checksum() )

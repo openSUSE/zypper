@@ -12,31 +12,25 @@
 #include <iostream>
 //#include "zypp/base/Logger.h"
 
-#include "zypp/source/OnMediaLocation.h"
+#include "zypp/OnMediaLocation.h"
 
 using std::endl;
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
-  ///////////////////////////////////////////////////////////////////
-  namespace source
-  { /////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////
+  /******************************************************************
+  **
+  **	FUNCTION NAME : operator<<
+  **	FUNCTION TYPE : std::ostream &
+  */
+  std::ostream & operator<<( std::ostream & str, const OnMediaLocation & obj )
+  {
+    return str << "[" << obj.medianr() << "]" << obj.filename()
+              << "{" << obj.downloadsize() << "|" << obj.checksum() << "}";
+  }
 
-    /******************************************************************
-    **
-    **	FUNCTION NAME : operator<<
-    **	FUNCTION TYPE : std::ostream &
-    */
-    std::ostream & operator<<( std::ostream & str, const OnMediaLocation & obj )
-    {
-      return str << "[" << obj.medianr() << "]" << obj.filename()
-                 << "{" << obj.downloadsize() << "|" << obj.checksum() << "}";
-    }
-
-    /////////////////////////////////////////////////////////////////
-  } // namespace source
-  ///////////////////////////////////////////////////////////////////
-  /////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////

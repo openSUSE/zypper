@@ -117,7 +117,7 @@ namespace zypp
     }
   }
 
-  Pathname MediaSetAccess::provideFile( const source::OnMediaLocation & on_media_file )
+  Pathname MediaSetAccess::provideFile( const OnMediaLocation & on_media_file )
   {
     return provideFile( on_media_file.filename(), on_media_file.medianr() );
   }

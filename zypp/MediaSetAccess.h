@@ -21,7 +21,7 @@
 #include "zypp/media/MediaManager.h"
 #include "zypp/Pathname.h"
 #include "zypp/CheckSum.h"
-#include "zypp/source/OnMediaLocation.h"
+#include "zypp/OnMediaLocation.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -50,6 +50,9 @@ namespace zypp
     //
     //	CLASS NAME : SourceCache
     //
+    /**
+     * The
+     */
     class MediaSetAccess : public base::ReferenceCounted, private base::NonCopyable
     {
       friend std::ostream & operator<<( std::ostream & str, const MediaSetAccess & obj );
@@ -70,7 +73,7 @@ namespace zypp
       /**
        * provide a file fom a multiple media
        */
-      Pathname provideFile( const source::OnMediaLocation & on_media_file );
+      Pathname provideFile( const OnMediaLocation & on_media_file );
 
       /**
        * provides a file on multiple media which is possibly cached
@@ -78,7 +81,7 @@ namespace zypp
        * if they match, the cached one is copied to the destination directory
        * if not the file is provided and copied to the destination directory.
        */
-      void providePossiblyCachedMetadataFile( const source::OnMediaLocation &file_on_media, const Pathname &destination, const Pathname &cached_file);
+      void providePossiblyCachedMetadataFile( const OnMediaLocation &file_on_media, const Pathname &destination, const Pathname &cached_file);
 
       Pathname provideFile(const Pathname & file, unsigned media_nr = 1 );
       Pathname provideFile(const Pathname & file, unsigned media_nr, const FileChecker checker );

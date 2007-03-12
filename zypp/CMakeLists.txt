@@ -81,7 +81,9 @@ SET( zypp_SRCS
   Signature.cc
   KeyRing.cc
   MediaSetAccess.cc
-  ProvideFilePolicy.cc 
+  ProvideFilePolicy.cc
+  OnMediaLocation.cc
+  Fetcher.cc
 )
 
 SET( zypp_HEADERS
@@ -110,6 +112,7 @@ SET( zypp_HEADERS
   DiskUsageCounter.h
   Edition.h
   ExternalProgram.h
+  Fetcher.h
   KVMap.h
   KeyRing.h
   Language.h
@@ -123,6 +126,7 @@ SET( zypp_HEADERS
   NVRAD.h
   NameKindProxy.h
   NeedAType.h
+  OnMediaLocation.h
   Package.h
   Patch.h
   PathInfo.h
@@ -664,7 +668,6 @@ INSTALL(  FILES
 SET( zypp_source_SRCS
   source/Applydeltarpm.cc
   source/MediaSet.cc
-  source/OnMediaLocation.cc
   source/PackageDelta.cc
   source/PackageProvider.cc
   source/SourceImpl.cc
@@ -677,7 +680,6 @@ SET( zypp_source_HEADERS
   source/Applydeltarpm.h
   source/Builtin.h
   source/MediaSet.h
-  source/OnMediaLocation.h
   source/PackageDelta.h
   source/PackageProvider.h
   source/SourceImpl.h
