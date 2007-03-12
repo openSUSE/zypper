@@ -16,7 +16,7 @@
 	2. Altered source versions must be plainly marked as such, and must not be
 		misrepresented as being the original software.
 	3. This notice may not be removed or altered from any source distribution.
-	
+
 	CVS Info :
 		$Author: phrostbyte $
 		$Date: 2005/06/16 20:46:40 $
@@ -26,36 +26,45 @@
 #include <sqlite3.h>
 #include "sqlite3x.hpp"
 
-namespace sqlite3x {
+namespace sqlite3x
+{
 
-sqlite3_transaction::sqlite3_transaction(sqlite3_connection &con, bool start) : con(con),intrans(false) {
-	if(start) begin();
+sqlite3_transaction::sqlite3_transaction(sqlite3_connection &con, bool start) : con(con),intrans(false)
+{
+  if (start) begin();
 }
 
-sqlite3_transaction::~sqlite3_transaction() {
-	if(intrans) {
-		try {
-			rollback();
-		}
-		catch(...) {
-			return;
-		}
-	}
+sqlite3_transaction::~sqlite3_transaction()
+{
+  if (intrans)
+  {
+    try
+    {
+      rollback();
+    }
+    catch (...)
+    {
+      return;
+    }
+  }
 }
 
-void sqlite3_transaction::begin() {
-	con.executenonquery("begin;");
-	intrans=true;
+void sqlite3_transaction::begin()
+{
+  con.executenonquery("begin;");
+  intrans=true;
 }
 
-void sqlite3_transaction::commit() {
-	con.executenonquery("commit;");
-	intrans=false;
+void sqlite3_transaction::commit()
+{
+  con.executenonquery("commit;");
+  intrans=false;
 }
 
-void sqlite3_transaction::rollback() {
-	con.executenonquery("rollback;");
-	intrans=false;
+void sqlite3_transaction::rollback()
+{
+  con.executenonquery("rollback;");
+  intrans=false;
 }
 
 }

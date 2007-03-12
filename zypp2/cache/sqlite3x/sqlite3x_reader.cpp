@@ -16,7 +16,7 @@
 	2. Altered source versions must be plainly marked as such, and must not be
 		misrepresented as being the original software.
 	3. This notice may not be removed or altered from any source distribution.
-	
+
 	CVS Info :
 		$Author: phrostbyte $
 		$Date: 2005/06/16 20:46:40 $
@@ -26,104 +26,123 @@
 #include <sqlite3.h>
 #include "sqlite3x.hpp"
 
-namespace sqlite3x {
+namespace sqlite3x
+{
 
-sqlite3_reader::sqlite3_reader() : cmd(NULL) {}
+sqlite3_reader::sqlite3_reader() : cmd(NULL)
+{}
 
-sqlite3_reader::sqlite3_reader(const sqlite3_reader &copy) : cmd(copy.cmd) {
-	if(this->cmd) ++this->cmd->refs;
+sqlite3_reader::sqlite3_reader(const sqlite3_reader &copy) : cmd(copy.cmd)
+{
+  if (this->cmd) ++this->cmd->refs;
 }
 
-sqlite3_reader::sqlite3_reader(sqlite3_command *cmd) : cmd(cmd) {
-	++cmd->refs;
+sqlite3_reader::sqlite3_reader(sqlite3_command *cmd) : cmd(cmd)
+{
+  ++cmd->refs;
 }
 
-sqlite3_reader::~sqlite3_reader() {
-	this->close();
+sqlite3_reader::~sqlite3_reader()
+{
+  this->close();
 }
 
-sqlite3_reader& sqlite3_reader::operator=(const sqlite3_reader &copy) {
-	this->close();
+sqlite3_reader& sqlite3_reader::operator=(const sqlite3_reader &copy)
+{
+  this->close();
 
-	this->cmd=copy.cmd;
-	if(this->cmd) ++this->cmd->refs;
+  this->cmd=copy.cmd;
+  if (this->cmd) ++this->cmd->refs;
 
-	return *this;
+  return *this;
 }
 
-bool sqlite3_reader::read() {
-	if(!this->cmd) throw database_error("reader is closed");
+bool sqlite3_reader::read()
+{
+  if (!this->cmd) throw database_error("reader is closed");
 
-	switch(sqlite3_step(this->cmd->stmt)) {
-		case SQLITE_ROW:
-			return true;
-		case SQLITE_DONE:
-			return false;
-		default:
-			throw database_error(this->cmd->con);
-	}
+  switch (sqlite3_step(this->cmd->stmt))
+  {
+  case SQLITE_ROW:
+    return true;
+  case SQLITE_DONE:
+    return false;
+  default:
+    throw database_error(this->cmd->con);
+  }
 }
 
-void sqlite3_reader::reset() {
-	if(!this->cmd) throw database_error("reader is closed");
+void sqlite3_reader::reset()
+{
+  if (!this->cmd) throw database_error("reader is closed");
 
-	if(sqlite3_reset(this->cmd->stmt)!=SQLITE_OK)
-		throw database_error(this->cmd->con);
+  if (sqlite3_reset(this->cmd->stmt)!=SQLITE_OK)
+    throw database_error(this->cmd->con);
 }
 
-void sqlite3_reader::close() {
-	if(this->cmd) {
-		if(--this->cmd->refs==0) sqlite3_reset(this->cmd->stmt);
-		this->cmd=NULL;
-	}
+void sqlite3_reader::close()
+{
+  if (this->cmd)
+  {
+    if (--this->cmd->refs==0) sqlite3_reset(this->cmd->stmt);
+    this->cmd=NULL;
+  }
 }
 
-int sqlite3_reader::getint(int index) {
-	if(!this->cmd) throw database_error("reader is closed");
-	if((index)>(this->cmd->argc-1)) throw std::out_of_range("index out of range");
-	return sqlite3_column_int(this->cmd->stmt, index);
+int sqlite3_reader::getint(int index)
+{
+  if (!this->cmd) throw database_error("reader is closed");
+  if ((index)>(this->cmd->argc-1)) throw std::out_of_range("index out of range");
+  return sqlite3_column_int(this->cmd->stmt, index);
 }
 
-long long sqlite3_reader::getint64(int index) {
-	if(!this->cmd) throw database_error("reader is closed");
-	if((index)>(this->cmd->argc-1)) throw std::out_of_range("index out of range");
-	return sqlite3_column_int64(this->cmd->stmt, index);
+long long sqlite3_reader::getint64(int index)
+{
+  if (!this->cmd) throw database_error("reader is closed");
+  if ((index)>(this->cmd->argc-1)) throw std::out_of_range("index out of range");
+  return sqlite3_column_int64(this->cmd->stmt, index);
 }
 
-double sqlite3_reader::getdouble(int index) {
-	if(!this->cmd) throw database_error("reader is closed");
-	if((index)>(this->cmd->argc-1)) throw std::out_of_range("index out of range");
-	return sqlite3_column_double(this->cmd->stmt, index);
+double sqlite3_reader::getdouble(int index)
+{
+  if (!this->cmd) throw database_error("reader is closed");
+  if ((index)>(this->cmd->argc-1)) throw std::out_of_range("index out of range");
+  return sqlite3_column_double(this->cmd->stmt, index);
 }
 
-std::string sqlite3_reader::getstring(int index) {
-	if(!this->cmd) throw database_error("reader is closed");
-	if((index)>(this->cmd->argc-1)) throw std::out_of_range("index out of range");
-	return std::string((const char*)sqlite3_column_text(this->cmd->stmt, index), sqlite3_column_bytes(this->cmd->stmt, index));
+std::string sqlite3_reader::getstring(int index)
+{
+  if (!this->cmd) throw database_error("reader is closed");
+  if ((index)>(this->cmd->argc-1)) throw std::out_of_range("index out of range");
+  return std::string((const char*)sqlite3_column_text(this->cmd->stmt, index), sqlite3_column_bytes(this->cmd->stmt, index));
 }
 
-std::wstring sqlite3_reader::getstring16(int index) {
-	if(!this->cmd) throw database_error("reader is closed");
-	if((index)>(this->cmd->argc-1)) throw std::out_of_range("index out of range");
-	return std::wstring((const wchar_t*)sqlite3_column_text16(this->cmd->stmt, index), sqlite3_column_bytes16(this->cmd->stmt, index)/2);
+std::wstring sqlite3_reader::getstring16(int index)
+{
+  if (!this->cmd) throw database_error("reader is closed");
+  if ((index)>(this->cmd->argc-1)) throw std::out_of_range("index out of range");
+  return std::wstring((const wchar_t*)sqlite3_column_text16(this->cmd->stmt, index), sqlite3_column_bytes16(this->cmd->stmt, index)/2);
 }
 
-std::string sqlite3_reader::getblob(int index) {
-	if(!this->cmd) throw database_error("reader is closed");
-	if((index)>(this->cmd->argc-1)) throw std::out_of_range("index out of range");
-	return std::string((const char*)sqlite3_column_blob(this->cmd->stmt, index), sqlite3_column_bytes(this->cmd->stmt, index));
+std::string sqlite3_reader::getblob(int index)
+{
+  if (!this->cmd) throw database_error("reader is closed");
+  if ((index)>(this->cmd->argc-1)) throw std::out_of_range("index out of range");
+  return std::string((const char*)sqlite3_column_blob(this->cmd->stmt, index), sqlite3_column_bytes(this->cmd->stmt, index));
 }
 
-std::string sqlite3_reader::getcolname(int index) {
-	if(!this->cmd) throw database_error("reader is closed");
-	if((index)>(this->cmd->argc-1)) throw std::out_of_range("index out of range");
-	return sqlite3_column_name(this->cmd->stmt, index);
+std::string sqlite3_reader::getcolname(int index)
+{
+  if (!this->cmd) throw database_error("reader is closed");
+  if ((index)>(this->cmd->argc-1)) throw std::out_of_range("index out of range");
+  return sqlite3_column_name(this->cmd->stmt, index);
 }
 
-std::wstring sqlite3_reader::getcolname16(int index) {
-	if(!this->cmd) throw database_error("reader is closed");
-	if((index)>(this->cmd->argc-1)) throw std::out_of_range("index out of range");
-	return (const wchar_t*)sqlite3_column_name16(this->cmd->stmt, index);
+std::wstring sqlite3_reader::getcolname16(int index)
+{
+  if (!this->cmd) throw database_error("reader is closed");
+  if ((index)>(this->cmd->argc-1)) throw std::out_of_range("index out of range");
+  return (const wchar_t*)sqlite3_column_name16(this->cmd->stmt, index);
 }
 
 }

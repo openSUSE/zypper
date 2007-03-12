@@ -16,7 +16,7 @@
 	2. Altered source versions must be plainly marked as such, and must not be
 		misrepresented as being the original software.
 	3. This notice may not be removed or altered from any source distribution.
-	
+
 	CVS Info :
 		$Author: phrostbyte $
 		$Date: 2005/06/16 20:46:40 $
@@ -26,9 +26,12 @@
 #include <sqlite3.h>
 #include "sqlite3x.hpp"
 
-namespace sqlite3x {
+namespace sqlite3x
+{
 
-database_error::database_error(const char *msg) : runtime_error(msg) {}
-database_error::database_error(sqlite3_connection &con) : runtime_error(sqlite3_errmsg(con.db)) {}
+database_error::database_error(const char *msg) : runtime_error(msg)
+{}
+database_error::database_error(sqlite3_connection &con) : runtime_error(sqlite3_errmsg(con.db))
+{}
 
 }
