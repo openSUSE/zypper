@@ -1,0 +1,11 @@
+2007-03-08 16:24:30 <5> piscola(19785) [Measure] /space/sources/zypp/trunk/libzypp/zypp/base/Measure.cc(~Impl):160 MEASURE(Parse) 42 (u 41.17 s 0.44 c 0.00) [0 (u 0.00 s 0.00 c 0.00)]
+
+2007-03-09 12:09:41 <5> piscola(15522) [Measure] /space/sources/zypp/trunk/libzypp/zypp/base/Measure.cc(~Impl):160 MEASURE(Parse) 45 (u 43.69 s 0.28 c 0.00) [0 (u 0.00 s 0.00 c 0.00)]
+
+2007-03-09 14:19:21 <5> piscola(12400) [Measure] /space/sources/zypp/trunk/libzypp/zypp/base/Measure.cc(~Impl):160 MEASURE(Parse) 43 (u 43.04 s 0.23 c 0.00) [0 (u 0.00 s 0.00 c 0.00)]
+
+
+after change 1
+
+
+2007-03-09 16:49:03 <5> piscola(19367) [Measure] /space/sources/zypp/trunk/libzypp/zypp/base/Measure.cc(~Impl):160 MEASURE(Parse) 36 (u 29.82 s 5.51 c 0.00) [0 (u 0.00 s 0.00 c 0.00)]

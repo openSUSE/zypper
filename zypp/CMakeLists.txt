@@ -441,6 +441,32 @@ INSTALL(  FILES
   DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/parser/tagfile
 )
 
+SET( zypp_parser_taggedfile_SRCS
+  parser/taggedfile/Rep.cc
+  parser/taggedfile/TagCacheRetrieval.cc
+  parser/taggedfile/TaggedFile.cc
+  parser/taggedfile/TaggedParser.cc
+  parser/taggedfile/TagParser.cc
+  parser/taggedfile/TagRetrievalPos.cc
+)
+
+SET( zypp_parser_taggedfile_HEADERS
+  parser/taggedfile/RepDef.h
+  parser/taggedfile/TagCacheRetrieval.h
+  parser/taggedfile/TaggedFile.h
+  parser/taggedfile/TagParser.h
+  parser/taggedfile/Rep.h
+  parser/taggedfile/TagCacheRetrievalPtr.h
+  parser/taggedfile/TaggedParser.h
+  parser/taggedfile/TagRetrievalPos.h
+)
+
+INSTALL(  FILES
+  ${zypp_parser_taggedfile_HEADERS}
+  DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/parser/taggedfile
+)
+
+
 SET( zypp_parser_xml_SRCS
   parser/xml/Node.cc
   parser/xml/ParseDef.cc
@@ -954,6 +980,7 @@ ${zypp_detail_SRCS}
 ${zypp_capability_SRCS}
 ${zypp_pool_SRCS}
 ${zypp_parser_tagfile_SRCS}
+${zypp_parser_taggedfile_SRCS}
 ${zypp_parser_yum2_SRCS}
 ${zypp_parser_xmlstore_SRCS}
 ${zypp_parser_xml_SRCS}
@@ -986,6 +1013,7 @@ SET( zypp_lib_HEADERS
 ${zypp_source_plaindir_HEADERS}
 ${zypp_target_store_xml_HEADERS}
 ${zypp_parser_tagfile_HEADERS}
+${zypp_parser_taggedfile_HEADERS}
 ${zypp_target_rpm_HEADERS}
 ${zypp_parser_yum2_HEADERS}
 ${zypp_capability_HEADERS}
