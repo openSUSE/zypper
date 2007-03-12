@@ -94,29 +94,6 @@ namespace zypp
 //       report->finish( file_url, source::DownloadFileReport::NO_ERROR, "" );
 //       return file;
 
-
-  void MediaSetAccess::providePossiblyCachedMetadataFile( const Pathname &file_to_download, unsigned medianr, const Pathname &destination, const Pathname &cached_file, const CheckSum &checksum )
-  {
-    Url file_url( _url.asString() + file_to_download.asString() );
-    // if we have a cached file and its the same
-    if ( PathInfo(cached_file).isExist() && (! checksum.empty()) && is_checksum( cached_file, checksum ) )
-    {
-      MIL << "file " << file_url << " found in previous cache. Using cached copy." << std::endl;
-      // checksum is already checked.
-      // we could later implement double failover and try to download if file copy fails.
-      if ( filesystem::copy(cached_file, destination) != 0 )
-        ZYPP_THROW(Exception("Can't copy " + cached_file.asString() + " to " + destination.asString()));
-    }
-    else
-    {
-      // we dont have it or its not the same, download it.
-      Pathname downloaded_file = provideFile( file_to_download, medianr, ChecksumFileChecker(checksum) );
-      
-      if ( filesystem::copy(downloaded_file, destination) != 0 )
-        ZYPP_THROW(Exception("Can't copy " + downloaded_file.asString() + " to " + destination.asString()));      
-    }
-  }
-
   Pathname MediaSetAccess::provideFile( const OnMediaLocation & on_media_file )
   {
     return provideFile( on_media_file.filename(), on_media_file.medianr() );

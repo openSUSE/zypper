@@ -7,7 +7,10 @@
 |                                                                      |
 \---------------------------------------------------------------------*/
 
+#include <iostream>
 #include <vector>
+#include <sstream>
+#include <fstream>
 
 #include "zypp/base/Logger.h"
 #include "zypp/base/String.h"
@@ -37,8 +40,10 @@ CacheInitializer::CacheInitializer( const Pathname &root_r, const Pathname &db_f
   {
     _con.reset( new sqlite3_connection( (_root + db_file).asString().c_str()) );
   }
-  catch(exception &ex) {
-    ERR << "Exception Occured: " << ex.what() << endl;
+  catch(exception &ex)
+  {
+    ZYPP_RETHROW(Exception(ex.what()));
+    //ERR << "Exception Occured: " << ex.what() << endl;
   } 
 
   try
@@ -57,7 +62,8 @@ CacheInitializer::CacheInitializer( const Pathname &root_r, const Pathname &db_f
   }
   catch(exception &ex)
   {
-    ERR << "Exception Occured: " << ex.what() << endl;
+    ZYPP_RETHROW(Exception(ex.what()));
+    //ERR << "Exception Occured: " << ex.what() << endl;
   }
   
 }
@@ -80,16 +86,30 @@ bool CacheInitializer::tablesCreated() const
 
 void CacheInitializer::createTables()
 {
+  MIL << "Initializing cache schema..." << endl;
   sqlite3_transaction trans(*_con);
   {
-    char ** statements = getsql();
-    int i = 0;
-    while ( statements[i] != 0 )
+    string sql;
+    const char *filename = "/usr/share/zypp/cache/schema.sql";
+    std::ifstream stream(filename);
+    string buffer;
+    if ( stream )
     {
-      ERR << "Executing " << statements[i] << endl;
-      _con->executenonquery(statements[i]);
-      i++;
+      stringstream str(sql);
+      while ( getline( stream, buffer ) )
+      {
+        sql += (buffer+"\n");
+      }
+      std::cout << sql << endl;
     }
+    else
+    {
+      ZYPP_THROW(Exception("Can't open db schema"));
+    }
+    
+    //ERR << "Executing " << statements[i] << endl;
+    MIL << "Schema size: " << sql.size() << endl;
+    _con->execute(sql.c_str());
   }
   trans.commit();
 }

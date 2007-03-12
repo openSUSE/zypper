@@ -707,6 +707,7 @@ INSTALL(  FILES
 )
 
 SET( zypp_source_susetags_SRCS
+  source/susetags/SUSETagsDownloader.cc
   source/susetags/MediaMetadataParser.cc
   source/susetags/MediaPatchesMetadataParser.cc
   source/susetags/PackagesLangParser.cc
@@ -722,7 +723,8 @@ SET( zypp_source_susetags_SRCS
   source/susetags/SuseTagsSrcPackageImpl.cc
 )
 
-SET( zypp_source_susetags_HEADERS
+SET( zypp_source_susetags_HEADERS  
+  source/susetags/SUSETagsDownloader.h
   source/susetags/MediaMetadataParser.h
   source/susetags/MediaPatchesMetadataParser.h
   source/susetags/PackagesLangParser.h

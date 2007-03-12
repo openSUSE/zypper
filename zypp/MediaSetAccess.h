@@ -66,27 +66,18 @@ namespace zypp
       ~MediaSetAccess();
 
       /**
-       * Sets a verifier for given media number
+       * Sets a \ref MediaVerifierRef verifier for given media number
        */
       void setVerifier( unsigned media_nr, media::MediaVerifierRef verifier );
       
       /**
-       * provide a file fom a multiple media
+       * provide a file from a media location.
        */
       Pathname provideFile( const OnMediaLocation & on_media_file );
 
-      /**
-       * provides a file on multiple media which is possibly cached
-       * The cached_file is provided and the Checksums are compared.
-       * if they match, the cached one is copied to the destination directory
-       * if not the file is provided and copied to the destination directory.
-       */
-      void providePossiblyCachedMetadataFile( const OnMediaLocation &file_on_media, const Pathname &destination, const Pathname &cached_file);
-
       Pathname provideFile(const Pathname & file, unsigned media_nr = 1 );
       Pathname provideFile(const Pathname & file, unsigned media_nr, const FileChecker checker );
-      void providePossiblyCachedMetadataFile( const Pathname &file_to_download, unsigned medianr, const Pathname &destination, const Pathname &cached_file, const CheckSum &checksum );
-
+      
     protected:
       Pathname provideFileInternal(const Pathname & file, unsigned media_nr, bool checkonly, bool cached);
       Url rewriteUrl (const Url & url_r, const media::MediaNr medianr);
