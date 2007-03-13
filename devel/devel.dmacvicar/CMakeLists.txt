@@ -76,3 +76,7 @@ TARGET_LINK_LIBRARIES(susetags-downloader  zypp )
 ADD_EXECUTABLE(cachestore CacheStore.cc)
 TARGET_LINK_LIBRARIES(cachestore  zypp )
 TARGET_LINK_LIBRARIES(cachestore  zypp2 )
+
+ADD_EXECUTABLE(tagsparser SUSETagsParser.cc)
+TARGET_LINK_LIBRARIES(tagsparser  zypp )
+TARGET_LINK_LIBRARIES(tagsparser  zypp2 )
