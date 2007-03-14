@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Wed Mar 14 14:33:26 CET 2007 - schubi@suse.de
+
+- If there is no valid solver result and NOT all resolvables ( other
+  architecture) has been regarded, let the user decide making a new
+  solver run with ALL available resolvables. Bug 223440
+- reducing logging (error -> debug)  bug 252921
+- Revision 5219 
+
+-------------------------------------------------------------------
 Fri Mar  9 00:08:38 CET 2007 - ma@suse.de
 
 - Allow configuration of trusted vendors via
