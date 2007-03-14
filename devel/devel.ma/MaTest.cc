@@ -25,23 +25,10 @@ using namespace zypp;
 
 void setup( QVBox & top, int argc, char **argv )
 {
-  const char * data[] = {
-     "@ package"
-    ,"@ installed"
-    ,"- test 2 1 i386"
-    ,"@ available"
-    ,"- test 2 1 i386"
-    ,"- test 3 1 i386"
-    ,"- test 4 1 i686"
-    ,"@ fin"
-  };
-  ResPool pool( getZYpp()->pool() );
-  ResPoolProxy poolProxy( getZYpp()->poolProxy() );
+  if ( ! argc )
+    return;
 
-  for_each( poolProxy.byKindBegin<Package>(),
-            poolProxy.byKindEnd<Package>(),
-            Print() );
-
+  MIL << argv[0] << endl;
 }
 
 ///////////////////////////////////////////////////////////////////
@@ -58,10 +45,10 @@ int main( int argc, char **argv )
   ++argv;
   setup( top, argc, argv );
 
-  QPushButton  quit( "Quit", &top );
-  QObject::connect( &quit, SIGNAL(clicked()), &app, SLOT(quit()) );
-  top.show();
+  QPushButton quit( "Quit", &top );
+  QObject::connect( &quit,SIGNAL(clicked()), &app, SLOT(quit()) );
   app.setMainWidget( &top );
+  top.show();
   INT << "===[LOOP]==========================================" << endl;
   return app.exec();
 }

@@ -15,7 +15,7 @@ if [ -n "$1" ]; then
 fi
 
 if [ ! -x ~ma/bin/sy2l.tcl ]; then
-	exec ./$PRG
+	exec ./$PRG "$@"
 fi
 
 LPIPE=LOGFILE

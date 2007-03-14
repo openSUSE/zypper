@@ -143,8 +143,6 @@ int main( int argc, char * argv[] )
       LOG << "alias:          " << src.alias() << endl;
       LOG << "vendor:         " << src.vendor() << endl;
       LOG << "unique_id:      " << src.unique_id() << endl;
-      LOG << "zmdName:        " << src.zmdName() << endl;
-      LOG << "zmdDescription: " << src.zmdDescription() << endl;
       LOG << "baseSource:     " << src.baseSource() << endl;
       LOG << "autorefresh:    " << src.autorefresh() << endl;
       LOG << "publicKeys:     " << src.publicKeys() << endl;
