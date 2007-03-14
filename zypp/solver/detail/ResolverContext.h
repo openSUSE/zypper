@@ -152,7 +152,7 @@ class ResolverContext : public base::ReferenceCounted, private base::NonCopyable
     void setTryAllPossibilities (bool tryAllPossibilities) { _tryAllPossibilities = tryAllPossibilities; }
     
     bool skippedPossibilities (void) const { return _skippedPossibilities; }
-    void setScippedPossibilities (bool skippedPossibilities) { _skippedPossibilities = skippedPossibilities; }
+    void setSkippedPossibilities (bool skippedPossibilities) { _skippedPossibilities = skippedPossibilities; }
 
     bool establishing (void) const { return _establishing; }
     void setEstablishing (bool establishing) { _establishing = establishing; }

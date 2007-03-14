@@ -31,6 +31,7 @@
 #include "zypp/solver/detail/ProblemSolutionUninstall.h"
 #include "zypp/solver/detail/ProblemSolutionUnlock.h"
 #include "zypp/solver/detail/ProblemSolutionKeep.h"
+#include "zypp/solver/detail/ProblemSolutionAllBranches.h"
 
 #include "zypp/solver/detail/ResolverInfoChildOf.h"
 #include "zypp/solver/detail/ResolverInfoConflictsWith.h"
@@ -238,6 +239,29 @@ Resolver::problems (const bool ignoreValidSolution) const
     if (invalid.empty()) {
 	WAR << "No solver problems, but there is also no valid solution." << endl;
 	return problems;
+    }
+
+    bool skippedPossibilities = false;    
+    
+    for (ResolverQueueList::iterator iter = invalid.begin();
+	 iter != invalid.end(); iter++) {
+	// evaluate if there are other possibilities which have not been regarded
+	ResolverQueue_Ptr invalidQ =	*iter;    	    
+	if (invalidQ->context()->skippedPossibilities()) {
+	    skippedPossibilities = true;
+	    break;
+	}
+    }
+	
+    if (!_tryAllPossibilities       // a second run with ALL possibilities has not been tried 
+	&& skippedPossibilities) { // possible other solutions skipped
+	// give the user an additional solution for trying all branches
+	string what = _("No valid solution found with only resolvables of best architecture.");
+	string details = _("With this run only resolvables with the best architecture has been regarded.\n");
+	details = details + _("Regarding all possible resolvables takes time but can come to a valid result.");
+	ResolverProblem_Ptr problem = new ResolverProblem (what, details);		
+	problem->addSolution (new ProblemSolutionAllBranches (problem));
+	problems.push_back (problem);
     }
 
     ResolverContext_Ptr context = invalid.front()->context();

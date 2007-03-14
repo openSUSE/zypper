@@ -238,14 +238,20 @@ struct RequireProcess
 			// erase the old provider
 			for (PoolItemList::iterator it = providers.begin(); it != providers.end(); ++it) {
 			    if (*it == upos->second) {
-				_context->setScippedPossibilities( true ); // Flag that there are other possibilities
 				// which we are currently ignore
-				_XDEBUG("Kicking " << *it << " for " << provider)
-				    providers.erase( it );
+				_XDEBUG("Kicking " << *it << " for " << provider);
+				providers.erase( it );
+				_context->setSkippedPossibilities( true ); // Flag that there are other possibilities			
 				break;
 			    }
 			} 
 			upos = uniq.end();	// trigger insertion of new provider below
+		    } else {
+			if (upos->second != provider) {
+			    // which we are currently ignore
+			    _XDEBUG("Ignoring " <<  provider);
+			    _context->setSkippedPossibilities( true ); // Flag that there are other possibilities
+			}
 		    }
 		}
 		if (upos == uniq.end()) {

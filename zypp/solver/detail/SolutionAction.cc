@@ -66,7 +66,8 @@ TransactionSolutionAction::dumpOn( ostream& os) const
 	case KEEP:	os << "Keep"; break;
 	case INSTALL:	os << "Install"; break;
 	case REMOVE:	os << "Remove"; break;
-	case UNLOCK:	os << "Unlock"; break;	    
+	case UNLOCK:	os << "Unlock"; break;
+	case ALLBRANCHES:	os << "All branches"; break;	    	    
     }
     os << " ";
     os << _item;
@@ -157,6 +158,9 @@ TransactionSolutionAction::execute(Resolver & resolver) const
 	case UNLOCK:
 	    ret = _item.status().setLock (false, ResStatus::USER);
 	    if (!ret) ERR << "Cannot unlock " << _item << endl;
+	    break;
+	case ALLBRANCHES:
+	    resolver.setTryAllPossibilities (true);
 	    break;
 	default:
 	    ERR << "Wrong TransactionKind" << endl;

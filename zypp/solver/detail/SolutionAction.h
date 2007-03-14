@@ -67,7 +67,8 @@ namespace zypp
 	    KEEP,
 	    INSTALL,
 	    REMOVE,
-	    UNLOCK
+	    UNLOCK,
+	    ALLBRANCHES
 	} TransactionKind;
 
 
@@ -78,6 +79,10 @@ namespace zypp
 				       TransactionKind action )
 		: SolutionAction(),
 		  _item( item ), _action( action ) {}
+
+	    TransactionSolutionAction( TransactionKind action )
+		: SolutionAction(),
+		  _item(), _action( action ) {}
 
 	  // ---------------------------------- I/O
 	  virtual std::ostream & dumpOn( std::ostream & str ) const;

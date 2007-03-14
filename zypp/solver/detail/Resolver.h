@@ -75,8 +75,6 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
     // BUT if there is no valid solution we will regard the "other"
     // resolvables in a second solver run too.
     bool _tryAllPossibilities; // Try ALL alternatives
-    bool _skippedPossibilities;// Flag that there are other possibilities
-                               // which we are currently ignore
 
     // list populated by calls to addPoolItemTo*()
     QueueItemList _initial_items;
@@ -208,8 +206,11 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
     void setForceResolve (const bool force) { _forceResolve = force; }
     const bool forceResolve() { return _forceResolve; }
     void setPreferHighestVersion (const bool highestVersion) { _preferHighestVersion = highestVersion; }
-    const bool preferHighestVersion() { return _preferHighestVersion; }  
+    const bool preferHighestVersion() { return _preferHighestVersion; }
 
+    void setTryAllPossibilities (const bool tryAllPossibilities) { _tryAllPossibilities = tryAllPossibilities; }
+    const bool tryAllPossibilities () { return _tryAllPossibilities; };
+    
     bool verifySystem (bool considerNewHardware = false);
     void establishState (ResolverContext_Ptr context = NULL);
     bool establishPool (void);

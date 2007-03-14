@@ -111,7 +111,6 @@ Resolver::Resolver (const ResPool & pool)
     , _verifying (false)
     , _testing (false)
     , _tryAllPossibilities (false)
-    , _skippedPossibilities (false)
     , _valid_solution_count (0)
     , _best_context (NULL)
     , _establish_context (NULL)
@@ -161,9 +160,6 @@ Resolver::reset (void)
 
     _best_context = NULL;
     _timed_out = false;
-    
-    _tryAllPossibilities = false;
-    _skippedPossibilities = false;
     
 }
 
@@ -453,7 +449,7 @@ static void
 solution_to_pool (PoolItem_Ref item, const ResStatus & status, void *data)
 {
     if (triggeredSolution.find(item) != triggeredSolution.end()) {
-        _XDEBUG("solution_to_pool(" << item << ") is already in the pool --> scip");
+        _XDEBUG("solution_to_pool(" << item << ") is already in the pool --> skip");
         return;
     }
 
@@ -794,7 +790,6 @@ Resolver::resolveDependencies (const ResolverContext_Ptr context)
     initial_queue->context()->setPreferHighestVersion( _preferHighestVersion );
     initial_queue->context()->setUpgradeMode( _upgradeMode );
     initial_queue->context()->setTryAllPossibilities( _tryAllPossibilities );
-    initial_queue->context()->setScippedPossibilities( _skippedPossibilities );
 
     /* If this is a verify, we do a "soft resolution" */
 
@@ -986,44 +981,6 @@ Resolver::resolveDependencies (const ResolverContext_Ptr context)
 	   << " / Defr " << (long) _deferred_queues.size()
 	   << " / Invl " << (long) _invalid_queues.size() );
     
-    
-    if ( !(_best_context && _best_context->isValid()) // no valid solution
-	 && !_tryAllPossibilities ) { // a second run with ALL possibilities has not been tried
-
-	for (ResolverQueueList::iterator iter = _invalid_queues.begin();
-	     iter != _invalid_queues.end(); iter++) {
-	    // evaluate if there are other possibilities which have not been regarded
-	    ResolverQueue_Ptr invalid =	*iter;    	    
-	    if (invalid->context()->skippedPossibilities()) {
-		_skippedPossibilities = true;
-		break;
-	    }
-	}
-	
-	if (_skippedPossibilities) { // possible other solutions skipped	 
-	    // lets try a second run with ALL possibilities
-	    _tryAllPossibilities = true;
-	    MIL << "================================================================"
-		<< endl;
-	    MIL << "No valid solution, lets try a second run with ALL possibilities"
-		<< endl;
-	    if (_maxSolverPasses <= 0) 
-		_maxSolverPasses = MAX_SECOND_RUNS;	    
-	    if (_timeout_seconds <= 0) 
-		_timeout_seconds = TIMOUT_SECOND_RUN;
-
-	    MIL << "But no longer than " << MAX_SECOND_RUNS << " runs or "
-		<< TIMOUT_SECOND_RUN << " seconds" << endl;
-	    MIL << "================================================================"
-		<< endl;
-	    // saving invalid queue
-	    ResolverQueueList   save_queues = _invalid_queues;
-	    resolveDependencies ();
-	    if (!(_best_context && _best_context->isValid()))
-		_invalid_queues = save_queues; // take the old
-	}
-    }
-
     return _best_context && _best_context->isValid();
 }
 
@@ -1153,10 +1110,25 @@ Resolver::resolvePool( bool tryAllPossibilities )
     // cleanup before next run
     reset();
 
+    bool saveTryAllPossibilities = _tryAllPossibilities;
+
     if (tryAllPossibilities) {
 	_tryAllPossibilities = tryAllPossibilities;
-	saveContext = new ResolverContext( _pool, _architecture );
-	saveContext->setTryAllPossibilities( true );
+    }
+
+    if (_tryAllPossibilities) {
+	MIL << "================================================================"
+	    << endl;
+	MIL << "Solver run with ALL possibilities"
+	    << endl;
+	if (_maxSolverPasses <= 0) 
+	    _maxSolverPasses = MAX_SECOND_RUNS;         
+	if (_timeout_seconds <= 0) 
+	    _timeout_seconds = TIMOUT_SECOND_RUN;
+	
+	MIL << "But no longer than " << MAX_SECOND_RUNS << " runs or "
+	    << TIMOUT_SECOND_RUN << " seconds" << endl;
+	MIL << "================================================================" << endl;
     }
 
 #if 1
@@ -1188,6 +1160,7 @@ Resolver::resolvePool( bool tryAllPossibilities )
     if (saveContext != NULL) {
         // create a new context in order not overwriting the old
         saveContext = new ResolverContext (saveContext->pool(), saveContext->architecture(), saveContext);
+	saveContext->setTryAllPossibilities( true );	
     }
 
     bool have_solution = resolveDependencies (saveContext);             // resolve !
@@ -1219,6 +1192,11 @@ Resolver::resolvePool( bool tryAllPossibilities )
 	    MIL << "-----------------------------------------------------------------" << endl;		
 	}
     }
+
+    if (tryAllPossibilities) {
+	_tryAllPossibilities = saveTryAllPossibilities; // reset to old value
+    }
+	
     return have_solution;
 }
 
