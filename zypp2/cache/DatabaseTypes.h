@@ -195,4 +195,38 @@ db_kind2zypp_kind( Resolvable::Kind kind )
   return db::KIND_UNKNOWN;
 }
 
+db::DependencyType
+db_deptype2zypp_deptype( zypp::Dep deptype )
+{
+  switch ( deptype.inSwitch() )
+  {
+    case zypp::Dep::PROVIDES_e: return db::DEP_TYPE_PROVIDE; break;
+    case zypp::Dep::CONFLICTS_e: return db::DEP_TYPE_CONFLICT; break;
+    case zypp::Dep::OBSOLETES_e: return db::DEP_TYPE_OBSOLETE; break;
+    case zypp::Dep::FRESHENS_e: return db::DEP_TYPE_FRESHEN; break;
+    case zypp::Dep::REQUIRES_e: return db::DEP_TYPE_REQUIRE; break;
+    case zypp::Dep::PREREQUIRES_e: return db::DEP_TYPE_PREREQUIRE; break;
+    case zypp::Dep::RECOMMENDS_e: return db::DEP_TYPE_RECOMMEND; break;
+    case zypp::Dep::SUGGESTS_e: return db::DEP_TYPE_SUGGEST; break;
+    case zypp::Dep::SUPPLEMENTS_e: return db::DEP_TYPE_SUPPLEMENT; break;
+    case zypp::Dep::ENHANCES_e: return db::DEP_TYPE_ENHANCE; break;
+   }
+}
 
+zypp::Dep
+zypp_deptype2db_deptype( db::DependencyType deptype )
+{
+  switch ( deptype )
+  {
+    case db::DEP_TYPE_PROVIDE: return zypp::Dep::PROVIDES; break;
+    case db::DEP_TYPE_CONFLICT: return zypp::Dep::CONFLICTS; break;
+    case db::DEP_TYPE_OBSOLETE: return zypp::Dep::OBSOLETES; break;
+    case db::DEP_TYPE_FRESHEN: return zypp::Dep::FRESHENS; break;
+    case db::DEP_TYPE_REQUIRE: return zypp::Dep::REQUIRES; break;
+    case db::DEP_TYPE_PREREQUIRE: return zypp::Dep::PREREQUIRES; break;
+    case db::DEP_TYPE_RECOMMEND: return zypp::Dep::RECOMMENDS; break;
+    case db::DEP_TYPE_SUGGEST: return zypp::Dep::SUGGESTS; break;
+    case db::DEP_TYPE_SUPPLEMENT: return zypp::Dep::SUPPLEMENTS; break;
+    case db::DEP_TYPE_ENHANCE: return zypp::Dep::ENHANCES; break;
+   }
+}

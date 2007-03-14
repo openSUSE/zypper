@@ -32,8 +32,8 @@ int main(int argc, char **argv)
     try
     {
       ZYpp::Ptr z = getZYpp();
-      SUSETagsDownloader downloader(Url("dir:/home/duncan/suse/repo/stable-x86"), "/");
-      downloader.download("/tmp/repo-cache");
+      SUSETagsDownloader downloader(Url(argv[1]), "/");
+      downloader.download(argv[2]);
     }
     catch ( const Exception &e )
     {

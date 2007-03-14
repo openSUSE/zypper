@@ -16,11 +16,6 @@ namespace zypp
 namespace data
 {
  
-
-Dependency::Dependency(const std::string& kind, const std::string& encoded)
-                               : kind(kind), encoded(encoded)
-{
-}; 
   
 IMPL_PTR_TYPE(ResObject);
 IMPL_PTR_TYPE(Script);

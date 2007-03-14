@@ -127,15 +127,46 @@ struct PackagesParser
       }
     }
   }
- 
+
+  
+  
   void start( const Pathname &path )
   {
-    MIL << "Welcome to new parsing" << endl;
-    Pathname packages_path = (path + "/suse/setup/descr/packages");
-    Pathname locale_path = (path + "/suse/setup/descr/packages.en");
+    std::ifstream content_stream((path + "/content").asString().c_str());
+    std::string buffer;
+    Pathname descr_dir;
+  
+    // Note this code assumes DESCR comes before as META
+    while ( content_stream && !content_stream.eof())
+    {
+      getline(content_stream, buffer);
+      if ( buffer.substr( 0, 5 ) == "DESCR" )
+      {
+        std::vector<std::string> words;
+        if ( str::split( buffer, std::back_inserter(words) ) != 2 )
+        {
+          // error
+          ZYPP_THROW(Exception("bad DESCR line")); 
+        }
+        descr_dir = words[1];
+      }
+    }
 
+    list<Locale> locales;
+    ZYpp::Ptr z = getZYpp();
+    Locale curr_locale( z->getTextLocale() );
+
+    while ( curr_locale != Locale() )
+    {
+      locales.push_back(curr_locale);
+      curr_locale = curr_locale.fallback();
+    }
+    MIL << "I have " << locales.size() << " locales" << endl;
+    
+    MIL << "Welcome to new parsing" << endl;
+    Pathname packages_path = (path + descr_dir + "/packages");
+    
     std::ifstream pkgstream ( packages_path.asString().c_str() );
-    std::ifstream lclstream ( locale_path.asString().c_str() );
 
     if (!pkgstream.is_open())
     {
@@ -143,14 +174,7 @@ struct PackagesParser
       ZYPP_THROW( ParseException( "cant open packages file" ) );
     }
 
-    if (!lclstream.is_open())
-    {
-      ERR << "Cant open " << locale_path << endl;
-      ZYPP_THROW( ParseException( "cant open packages.en file" ) );
-    }
-    //---------------------------------------------------------------
     // find initial version tag
-
     // find any initial tag
     TaggedParser::TagType type = _parser.lookupTag (pkgstream);
     if ((type != TaggedParser::SINGLE) || (_parser.currentTag() != "Ver") || (!_parser.currentLocale().empty()))
@@ -171,11 +195,10 @@ struct PackagesParser
 
     // create a single cache for all packages
     TagCacheRetrievalPtr pkgcache (new TagCacheRetrieval (packages_path));
-    TagCacheRetrievalPtr localecache (new TagCacheRetrieval (locale_path));
+    
     //TagCacheRetrievalPtr ducache (new TagCacheRetrieval (dupath));
 
     pkgcache->startRetrieval();
-    localecache->startRetrieval();
     //ducache->startRetrieval();
 
     //PMError ret = PMError::E_ok;
@@ -190,7 +213,7 @@ struct PackagesParser
       {
         try
         {
-          fromCache (pkgcache, localecache /*, ducache*/);
+          fromCache (pkgcache);
         }
         catch ( const Exception &e )
         {
@@ -211,13 +234,85 @@ struct PackagesParser
     }
 
     pkgcache->stopRetrieval();
-    localecache->stopRetrieval();
+    
     //ducache->stopRetrieval();
 
-    //return ret;
+    // now parse locales files
+    for ( list<Locale>::const_iterator it = locales.begin(); it != locales.end(); ++it )
+    {
+      Locale locale = *it;
+      Pathname locale_path = (path + descr_dir + "/packages." + locale.code() );
+
+      if ( ! PathInfo(locale_path).isExist() )
+      {
+        ERR << locale_path << " doesn't exists." << endl;
+        continue;
+      }
+      
+      TagCacheRetrievalPtr localecache (new TagCacheRetrieval (locale_path));
+      localecache->startRetrieval();
+      
+      std::ifstream localestream (path.asString().c_str());
+  
+      if (!localestream.is_open())
+      {
+        ERR << "Cant open " << path.asString() << endl;
+        ZYPP_THROW( ParseException( "can't open translation" + locale_path.asString() ) );
+      }
+  
+      //---------------------------------------------------------------
+      // find initial version tag
+  
+      // find any initial tag
+      TaggedParser::TagType type = _parser.lookupTag (localestream);
+      if ((type != TaggedParser::SINGLE) || (_parser.currentTag() != "Ver") || (!_parser.currentLocale().empty()))
+      {
+        ERR << path << ": Initial '=Ver:' tag missing" << endl;
+        //return InstSrcError::E_data_bad_packages_lang;
+      }
+  
+      string version = _parser.data();
+      if (version != "2.0")
+      {
+        ERR << path << ": Version '" << version << "' != 2.0" << endl;
+        ZYPP_THROW( ParseException( "wrong packages.en version" ) );
+      }
+  
+      //---------------------------------------------------------------
+      // assign set repeatedly
+      for (;;)
+      {
+        TaggedFile::assignstatus status = _tagset.assignSet (_parser, localestream);
+        if (status == TaggedFile::REJECTED_EOF)
+          break;
+  
+        if (status == TaggedFile::ACCEPTED_FULL)
+        {
+          try
+          {
+            fromLocale ();
+          }
+          catch ( const Exception &e )
+          {
+            ERR << path << ":" << _parser.lineNumber() << endl;
+            ZYPP_RETHROW(e);
+          }
+        }
+        else
+        {
+          ERR << path << ":" << _parser.lineNumber() << endl;
+          ERR << "Status " << (int)status << ", Last tag read: " << _parser.currentTag();
+          ERR << endl;
+          ZYPP_THROW( ParseException( "bad packages file" ) );
+        }
+      } //loop
+      
+      localecache->stopRetrieval();
+      
+    } // locales iterator
   }
 
-  void fromCache ( TagCacheRetrievalPtr pkgcache, TagCacheRetrievalPtr localecache )
+  void fromCache ( TagCacheRetrievalPtr pkgcache)
   {
     //---------------------------------------------------------------
     // PACKAGE
@@ -284,72 +379,12 @@ struct PackagesParser
       //collectDeps( pkglist, _nvrad[Dep::REQUIRES] );
     }
     
-    std::list<std::string> description;
-    if (pkgcache->retrieveData (GET_TAG(DESCRIPTION)->Pos(), pkglist))
-    {
-      cout << pkglist.front() << endl;
-      //collectDeps( pkglist, _nvrad[Dep::REQUIRES] );
-    }
-    
     pkglist.clear();
   }
 
   void fromPathLocale (const Pathname& path)
   {
-    std::ifstream localestream (path.asString().c_str());
-
-    if (!localestream.is_open())
-    {
-      ERR << "Cant open " << path.asString() << endl;
-      ZYPP_THROW( ParseException( "can't open translation" + path.asString() ) );
-    }
-
-    //---------------------------------------------------------------
-    // find initial version tag
-
-    // find any initial tag
-    TaggedParser::TagType type = _parser.lookupTag (localestream);
-    if ((type != TaggedParser::SINGLE) || (_parser.currentTag() != "Ver") || (!_parser.currentLocale().empty()))
-    {
-      ERR << path << ": Initial '=Ver:' tag missing" << endl;
-      //return InstSrcError::E_data_bad_packages_lang;
-    }
-
-    string version = _parser.data();
-    if (version != "2.0")
-    {
-      ERR << path << ": Version '" << version << "' != 2.0" << endl;
-      ZYPP_THROW( ParseException( "wrong packages.en version" ) );
-    }
-
-    //---------------------------------------------------------------
-    // assign set repeatedly
-    for (;;)
-    {
-      TaggedFile::assignstatus status = _tagset.assignSet (_parser, localestream);
-      if (status == TaggedFile::REJECTED_EOF)
-        break;
-
-      if (status == TaggedFile::ACCEPTED_FULL)
-      {
-        try
-        {
-          fromLocale ();
-        }
-        catch ( const Exception &e )
-        {
-          ERR << path << ":" << _parser.lineNumber() << endl;
-          ZYPP_RETHROW(e);
-        }
-      }
-      else
-      {
-        ERR << path << ":" << _parser.lineNumber() << endl;
-        ERR << "Status " << (int)status << ", Last tag read: " << _parser.currentTag();
-        ERR << endl;
-        ZYPP_THROW( ParseException( "bad packages file" ) );
-      }
-    }
+    
   }
 
   void fromLocale ()
@@ -385,6 +420,13 @@ struct PackagesParser
     SET_CACHE (LICENSETOCONFIRM);
     */
 
+    //std::list<std::string> description;
+    //if (localecache->retrieveData (GET_TAG(DESCRIPTION)->Pos(), description))
+    //{
+    //  cout << description.front() << endl;
+      //collectDeps( pkglist, _nvrad[Dep::REQUIRES] );
+    //}
+    
     /*
     if ( ! dataprovider->_attr_LICENSETOCONFIRM.empty() )
     {
@@ -406,7 +448,7 @@ int main(int argc, char **argv)
     {
       ZYpp::Ptr z = getZYpp();
       PackagesParser parser;
-      parser.start("/tmp/repo-cache");
+      parser.start(argv[1]);
     }
     catch ( const Exception &e )
     {

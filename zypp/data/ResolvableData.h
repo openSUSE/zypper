@@ -32,26 +32,42 @@ namespace zypp
 {
 namespace data
 {
-  class Dependency
+  struct Dependency
   {
-    public:
-      Dependency();
-      Dependency(const std::string& kind, const std::string& encoded );
-      std::string kind;
-      std::string encoded;
+    enum DependencyType { TypeNamed, TypeVersioned, TypeHal, TypeFile };
+    virtual DependencyType dependencyType() = 0;
   };
   
-  typedef std::list<Dependency> DependencyList;
-
-  class Resolvable : public base::ReferenceCounted, private base::NonCopyable
+  typedef shared_ptr<Dependency> DependencyPtr;
+  
+  struct VersionedDependency : public Dependency
   {
-    public:
-    Resolvable()
-    {};
-    
-    std::string name;
+    virtual DependencyType dependencyType() { return TypeVersioned; };
+    std::string index();
+    Rel op;
     Edition edition;
-    Arch arch;
+  };
+  
+  typedef std::list< DependencyPtr > DependencyList;
+
+  struct Dependencies
+  {
+//     DependencyList & operator[]( zypp::Dep idx )
+//     {
+//       switch ( idx.inSwitch() )
+//       {
+//         case zypp::Dep::PROVIDES.inSwitch(): return provides; break;
+//         case zypp::Dep::CONFLICTS.inSwitch(): return conflicts; break;
+//         case zypp::Dep::OBSOLETES.inSwitch(): return obsoletes; break;
+//         case zypp::Dep::FRESHENS.inSwitch(): return freshens; break;
+//         case zypp::Dep::REQUIRES.inSwitch(): return requires; break;
+//         case zypp::Dep::PREREQUIRES.inSwitch(): return prerequires; break;
+//         case zypp::Dep::RECOMMENDS.inSwitch(): return recommends; break;
+//         case zypp::Dep::SUGGESTS.inSwitch(): return suggests; break;
+//         case zypp::Dep::SUPPLEMENTS.inSwitch(): return supplements; break;
+//         case zypp::Dep::ENHANCES.inSwitch(): return enhances; break;
+//       }
+//     }
     
     DependencyList provides;
     DependencyList conflicts;
@@ -64,7 +80,49 @@ namespace data
     DependencyList supplements;
     DependencyList enhances;
   };
-  //a
+  
+  class Resolvable : public base::ReferenceCounted, private base::NonCopyable
+  {
+    public:
+    Resolvable()
+    {};
+    
+    std::string name;
+    Edition edition;
+    Arch arch;
+    
+    Dependencies deps;
+  };
+  
+  struct ResObjectData
+  {
+      ResObjectData()
+        : source_media_nr(1), install_only(false)
+      {}
+      
+      TranslatedText summary;
+      TranslatedText description;
+      
+      std::string insnotify;
+      std::string delnotify;
+      
+      std::string license_to_confirm;
+      std::string vendor;
+      
+      ByteCount size;
+      ByteCount archive_size;
+      
+      std::string source;
+      
+      int source_media_nr;
+      
+      bool install_only;
+      
+      Date build_time;
+      Date install_time;
+  };
+  
+  
   class ResObject : public Resolvable
   {
     public:

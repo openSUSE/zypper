@@ -173,6 +173,16 @@ public:
   void bind(int index, const void *data, int datalen);
   void bind(int index, const std::string &data);
   void bind(int index, const std::wstring &data);
+  
+  void bind(const std::string &param);
+  void bind(const std::string &param, int data);
+  void bind(const std::string &param, long long data);
+  void bind(const std::string &param, double data);
+  void bind(const std::string &param, const char *data, int datalen);
+  void bind(const std::string &param, const wchar_t *data, int datalen);
+  void bind(const std::string &param, const void *data, int datalen);
+  void bind(const std::string &param, const std::string &data);
+  void bind(const std::string &param, const std::wstring &data);
 
   sqlite3_reader executereader();
   void executenonquery();

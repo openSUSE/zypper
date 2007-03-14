@@ -29,7 +29,6 @@ namespace data
     virtual ~ResolvableDataConsumer();
 
     virtual void consumePackage( const data::Package &package) = 0;
-   
   };
 
 } // namespace parser

@@ -124,6 +124,64 @@ void sqlite3_command::bind(int index, const std::wstring &data)
     throw database_error(this->con);
 }
 
+// named parameters bind
+
+void sqlite3_command::bind(const std::string &param)
+{
+  if (sqlite3_bind_null(this->stmt, sqlite3_bind_parameter_index( this->stmt, param.c_str() ) )!=SQLITE_OK)
+    throw database_error(this->con);
+}
+
+void sqlite3_command::bind(const std::string &param, int data)
+{
+  if (sqlite3_bind_int(this->stmt, sqlite3_bind_parameter_index( this->stmt, param.c_str() ) , data)!=SQLITE_OK)
+    throw database_error(this->con);
+}
+
+void sqlite3_command::bind(const std::string &param, long long data)
+{
+  if (sqlite3_bind_int64(this->stmt, sqlite3_bind_parameter_index( this->stmt, param.c_str() ) , data)!=SQLITE_OK)
+    throw database_error(this->con);
+}
+
+void sqlite3_command::bind(const std::string &param, double data)
+{
+  if (sqlite3_bind_double(this->stmt, sqlite3_bind_parameter_index( this->stmt, param.c_str() ) , data)!=SQLITE_OK)
+    throw database_error(this->con);
+}
+
+void sqlite3_command::bind(const std::string &param, const char *data, int datalen)
+{
+  if (sqlite3_bind_text(this->stmt, sqlite3_bind_parameter_index( this->stmt, param.c_str() ) , data, datalen, SQLITE_TRANSIENT)!=SQLITE_OK)
+    throw database_error(this->con);
+}
+
+void sqlite3_command::bind(const std::string &param, const wchar_t *data, int datalen)
+{
+  if (sqlite3_bind_text16(this->stmt, sqlite3_bind_parameter_index( this->stmt, param.c_str() ) , data, datalen, SQLITE_TRANSIENT)!=SQLITE_OK)
+    throw database_error(this->con);
+}
+
+void sqlite3_command::bind(const std::string &param, const void *data, int datalen)
+{
+  if (sqlite3_bind_blob(this->stmt, sqlite3_bind_parameter_index( this->stmt, param.c_str() ) , data, datalen, SQLITE_TRANSIENT)!=SQLITE_OK)
+    throw database_error(this->con);
+}
+
+void sqlite3_command::bind(const std::string &param, const std::string &data)
+{
+  if (sqlite3_bind_text(this->stmt, sqlite3_bind_parameter_index( this->stmt, param.c_str() ) , data.data(), (int)data.length(), SQLITE_TRANSIENT)!=SQLITE_OK)
+    throw database_error(this->con);
+}
+
+void sqlite3_command::bind(const std::string &param, const std::wstring &data)
+{
+  if (sqlite3_bind_text16(this->stmt, sqlite3_bind_parameter_index( this->stmt, param.c_str() ) , data.data(), (int)data.length()*2, SQLITE_TRANSIENT)!=SQLITE_OK)
+    throw database_error(this->con);
+}
+
+
+
 sqlite3_reader sqlite3_command::executereader()
 {
   return sqlite3_reader(this);

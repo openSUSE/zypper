@@ -38,11 +38,13 @@ namespace zypp
       ~CacheStore();
       CacheStore( const Pathname &dbdir );
       
-      void consumePackage( const data::Package &package );
+      // data::ResolvableDataConsumer
+      virtual void consumePackage( const data::Package &package);
       
+      data::RecordId appendResolvable( const Resolvable::Kind &kind, const NVRA &nvra, const data::Dependencies &deps );
+      void appendDependencies( data::RecordId resolvable_id, const data::Dependencies &deps );
+      void appendDependency( data::RecordId resolvable_id, zypp::Dep deptype, const data::DependencyList &deplist );
       protected:
-      data::RecordId insertResObject( const Resolvable::Kind &kind, const data::ResObject &res );
-      void insertPackage( const data::RecordId id, const data::Package &package );
       
       private:
         shared_ptr<sqlite3x::sqlite3_connection> _con;
