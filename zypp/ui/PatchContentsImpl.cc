@@ -49,7 +49,7 @@ namespace zypp
 		    // DBG << "Found " << (*atom_it)->name() << " " << (*foundNames)->edition().asString() << endl;
 
 		    if ( ! isKind<Atom>( (*foundNames).resolvable() ) &&
-			 (*atom_it)->edition() == (*foundNames)->edition() &&
+			 (*atom_it)->edition() <= (*foundNames)->edition() &&
 			 (*atom_it)->arch()    == (*foundNames)->arch()      )
 		    {
 			found = true;
@@ -77,7 +77,7 @@ namespace zypp
 			continue;
 		    }
 
-		    ERR << "No resolvable for patch atom in pool: "
+		    DBG << "No resolvable for patch atom in pool: "
 			<< (*atom_it)->name() << "-" << (*atom_it)->edition()
 			<< " arch: " << (*atom_it)->arch().asString()
 			<< endl;
