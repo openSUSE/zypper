@@ -244,6 +244,8 @@ namespace zypp
       const Pathname &    path()     const { return path_t; }
       /** Return current Pathname as String. */
       const std::string & asString() const { return path_t.asString(); }
+      /** Return current Pathname as C-string. */
+      const char * c_str()           const { return path_t.asString().c_str(); }
       /** Return current stat Mode. */
       Mode                mode()     const { return mode_e; }
       /** Return error returned from last stat/lstat call. */
