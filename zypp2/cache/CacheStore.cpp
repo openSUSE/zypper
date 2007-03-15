@@ -10,6 +10,7 @@
 
 using namespace std;
 using namespace zypp;
+using namespace zypp::capability;
 using namespace zypp::cache;
 using namespace sqlite3x;
 
@@ -21,6 +22,8 @@ namespace cache
 { /////////////////////////////////////////////////////////////////
 
 CacheStore::CacheStore( const Pathname &dbdir )
+  :   _select_name_cmd(0)
+    , _insert_name_cmd(0)
 {
   cache::CacheInitializer initializer(dbdir, "zypp.db");
   if ( initializer.justInitialized() )
@@ -40,6 +43,9 @@ CacheStore::CacheStore( const Pathname &dbdir )
     ZYPP_THROW(Exception(ex.what()));
   }
   
+  _select_name_cmd = new sqlite3_command( *_con, "select id from names where name=:name;" );
+  _insert_name_cmd = new sqlite3_command( *_con, "insert into names (name) values (:name);" );
+  
   // disable autocommit
   _con->executenonquery("BEGIN;");
 }
@@ -52,6 +58,8 @@ CacheStore::CacheStore()
 CacheStore::~CacheStore()
 {
   _con->executenonquery("COMMIT;");
+  delete _select_name_cmd;
+  delete _insert_name_cmd;
 }
 
 void CacheStore::consumePackage( const data::Package &package)
@@ -67,7 +75,7 @@ data::RecordId CacheStore::appendResolvable( const Resolvable::Kind &kind, const
   cmd->bind( ":arch", zypp_arch2db_arch(nvra.arch) );
   cmd->bind( ":kind", db_kind2zypp_kind(kind) );
   
-  _insert_resolvable_cmd->executenonquery();
+  cmd->executenonquery();
 
   long long id = _con->insertid();
   
@@ -77,13 +85,13 @@ data::RecordId CacheStore::appendResolvable( const Resolvable::Kind &kind, const
   return 1;
 }
 
-void CacheStore::appendDependencies( data::RecordId resolvable_id, const data::Dependencies &deps )
+void CacheStore::appendDependencies( const data::RecordId &resolvable_id, const data::Dependencies &deps )
 {
-  appendDependency( resolvable_id, Dep::PROVIDES, deps.provides );
-  appendDependency( resolvable_id, Dep::CONFLICTS, deps.conflicts );
-//   appendDependency( resolvable_id, deps.obsoletes );
-//   appendDependency( resolvable_id, deps.freshens );
-//   appendDependency( resolvable_id, deps.requires );
+  appendDependencyList( resolvable_id, Dep::PROVIDES, deps.provides );
+  appendDependencyList( resolvable_id, Dep::CONFLICTS, deps.conflicts );
+  appendDependencyList( resolvable_id, Dep::OBSOLETES, deps.obsoletes );
+  appendDependencyList( resolvable_id, Dep::FRESHENS, deps.freshens );
+  //appendDependencyList( resolvable_id, deps.requires );
 //   appendDependency( resolvable_id, deps.prerequires );
 //   appendDependency( resolvable_id, deps.recommends );
 //   appendDependency( resolvable_id, deps.suggests );
@@ -91,12 +99,52 @@ void CacheStore::appendDependencies( data::RecordId resolvable_id, const data::D
 //   appendDependency( resolvable_id, deps.senhances );
 }
 
-void CacheStore::appendDependency( data::RecordId resolvable_id, zypp::Dep deptype, const data::DependencyList &deplist )
+void CacheStore::appendDependencyList( const data::RecordId &resolvable_id, zypp::Dep deptype, const std::list<capability::CapabilityImpl::constPtr> &caps )
 {
-
+  for ( std::list<capability::CapabilityImpl::constPtr>::const_iterator it = caps.begin(); it != caps.end(); ++it )
+  {
+    appendDependency( resolvable_id, deptype, *it );
+  }
 }
 
+void CacheStore::appendDependency( const data::RecordId &resolvable_id, zypp::Dep deptype, capability::CapabilityImpl::constPtr cap )
+{
+  if ( capability::isKind<VersionedCap>(cap) ) { appendVersionedDependency( resolvable_id, deptype, capability::asKind<VersionedCap>(cap) ); return; }
+//   sqlite3_command *cmd = new sqlite3_command( *_con, "insert into resolvables ( name, version, release, epoch, arch, kind ) values ( :name, :version, :release, :epoch, :arch, :kind );" );
+//   cmd->bind( ":name", nvra.name );
+//   cmd->bind( ":version", nvra.edition.version() );
+//   cmd->bind( ":release", nvra.edition.release() );
+//   cmd->bind( ":epoch", static_cast<int>( nvra.edition.epoch() ) );
+//   cmd->bind( ":arch", zypp_arch2db_arch(nvra.arch) );
+//   cmd->bind( ":kind", db_kind2zypp_kind(kind) );
+//   
+//   _insert_resolvable_cmd->executenonquery();
+}
 
+void CacheStore::appendVersionedDependency( const data::RecordId &resolvable_id, zypp::Dep deptype, capability::VersionedCap::constPtr cap )
+{
+  //isKind<FileCap>(cap)
+}
+
+data::RecordId CacheStore::lookupOrAppendName( const std::string &name )
+{
+  _select_name_cmd->bind(":name", name);
+  long long id = 0;
+  try {
+    id = _select_name_cmd->executeint64();
+  }
+  catch ( const sqlite3x::database_error &e )
+  {
+    // does not exist
+    _insert_name_cmd->bind(":name", name);
+    _insert_name_cmd->executenonquery();
+    id = _con->insertid();
+    return static_cast<data::RecordId>(id);
+    
+  }
+  return static_cast<data::RecordId>(id);
+}
+    
 // data::RecordId CacheStore::insertResObject( const Resolvable::Kind &kind, const data::ResObject &res )
 // {
 //   _insert_resolvable_cmd->bind(1,  res.name.c_str(), -1);

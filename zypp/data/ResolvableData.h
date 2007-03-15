@@ -13,6 +13,7 @@
 
 #include "zypp/base/ReferenceCounted.h"
 #include "zypp/base/NonCopyable.h"
+#include "zypp/capability/CapabilityImpl.h"
 #include "zypp/Pathname.h"
 #include "zypp/Edition.h"
 #include "zypp/ByteCount.h"
@@ -32,23 +33,23 @@ namespace zypp
 {
 namespace data
 {
-  struct Dependency
-  {
-    enum DependencyType { TypeNamed, TypeVersioned, TypeHal, TypeFile };
-    virtual DependencyType dependencyType() = 0;
-  };
+//   struct Dependency
+//   {
+//     enum DependencyType { TypeNamed, TypeVersioned, TypeHal, TypeFile };
+//     virtual DependencyType dependencyType() = 0;
+//   };
+//   
+//   typedef shared_ptr<Dependency> DependencyPtr;
+//   
+//   struct VersionedDependency : public Dependency
+//   {
+//     virtual DependencyType dependencyType() { return TypeVersioned; };
+//     std::string index();
+//     Rel op;
+//     Edition edition;
+//   };
   
-  typedef shared_ptr<Dependency> DependencyPtr;
-  
-  struct VersionedDependency : public Dependency
-  {
-    virtual DependencyType dependencyType() { return TypeVersioned; };
-    std::string index();
-    Rel op;
-    Edition edition;
-  };
-  
-  typedef std::list< DependencyPtr > DependencyList;
+  typedef std::list< capability::CapabilityImpl::constPtr > DependencyList;
 
   struct Dependencies
   {

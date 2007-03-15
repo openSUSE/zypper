@@ -100,7 +100,7 @@ void CacheInitializer::createTables()
       {
         sql += (buffer+"\n");
       }
-      std::cout << sql << endl;
+      //std::cout << sql << endl;
     }
     else
     {
