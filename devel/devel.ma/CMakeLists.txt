@@ -27,7 +27,7 @@ ADD_CUSTOM_TARGET( ma_test
    DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/ma_test
 )
 
-FOREACH( loop_var ScanSource AOUT )
+FOREACH( loop_var ScanSource )
    ADD_EXECUTABLE( ${loop_var}
       ${loop_var}.cc
    )
