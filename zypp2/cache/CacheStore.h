@@ -24,7 +24,7 @@
 #include "zypp/data/ResolvableDataConsumer.h"
 #include "zypp/data/RecordId.h"
 
-#include "zypp2/cache/sqlite3x/sqlite3x.hpp"
+#include "zypp/base/PtrTypes.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -35,7 +35,7 @@ namespace zypp
 
     class CacheStore : public data::ResolvableDataConsumer
     {
-      public:
+    public:
       
       CacheStore();
       ~CacheStore();
@@ -51,15 +51,19 @@ namespace zypp
       void appendDependency( const data::RecordId &, zypp::Dep, capability::CapabilityImpl::constPtr );
       
       void appendVersionedDependency( const data::RecordId &, zypp::Dep, capability::VersionedCap::constPtr);
+      void appendNamedDependency( const data::RecordId &, zypp::Dep, capability::NamedCap::constPtr);
       
+      data::RecordId lookupOrAppendFile( const Pathname & );
       data::RecordId lookupOrAppendName( const std::string &name );
-      protected:
-      
-      private:
-        shared_ptr<sqlite3x::sqlite3_connection> _con;
-        
-        sqlite3x::sqlite3_command *_select_name_cmd;
-        sqlite3x::sqlite3_command *_insert_name_cmd;
+      data::RecordId lookupOrAppendDirName( const std::string &name );
+      data::RecordId lookupOrAppendFileName( const std::string &name );
+    protected:
+      data::RecordId appendDependencyEntry( const data::RecordId &, zypp::Dep, const Resolvable::Kind & );
+    private:
+      /** Implementation. */
+      class Impl;
+      /** Pointer to implementation. */
+      RW_pointer<Impl> _pimpl;
     };
   }
 }

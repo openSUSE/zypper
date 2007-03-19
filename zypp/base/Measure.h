@@ -83,6 +83,9 @@ namespace zypp
       */
       void start( const std::string & ident_r = std::string() );
 
+      /** re start the timer without reset-ing it. */
+      void restart();
+      
       /** Print elapsed time for a running timer.
        * Timer keeps on running.
       */

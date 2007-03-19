@@ -161,6 +161,12 @@ namespace zypp
         dumpMeasure( str );
       }
 
+      void restart()
+      {
+        INT << "RESTART MEASURE(" << _ident << ")" << endl;
+        _start = _stop;
+      }
+      
       void elapsed() const
       {
         _stop.get();
@@ -232,6 +238,16 @@ namespace zypp
       _pimpl.reset( new Impl( ident_r ) );
     }
 
+    ///////////////////////////////////////////////////////////////////
+    //
+    //	METHOD NAME : Measure::start
+    //	METHOD TYPE : void
+    //
+    void Measure::restart()
+    {
+      _pimpl->restart();
+    }
+    
     ///////////////////////////////////////////////////////////////////
     //
     //	METHOD NAME : Measure::

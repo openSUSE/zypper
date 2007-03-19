@@ -196,7 +196,7 @@ db_kind2zypp_kind( Resolvable::Kind kind )
 }
 
 db::DependencyType
-db_deptype2zypp_deptype( zypp::Dep deptype )
+zypp_deptype2db_deptype( zypp::Dep deptype )
 {
   switch ( deptype.inSwitch() )
   {
@@ -214,7 +214,7 @@ db_deptype2zypp_deptype( zypp::Dep deptype )
 }
 
 zypp::Dep
-zypp_deptype2db_deptype( db::DependencyType deptype )
+db_deptype2zypp_deptype( db::DependencyType deptype )
 {
   switch ( deptype )
   {

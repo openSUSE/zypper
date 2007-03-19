@@ -12,6 +12,7 @@ DROP VIEW IF EXISTS packages;
 DROP VIEW IF EXISTS messages;
 DROP TRIGGER IF EXISTS remove_resolvables;
 DROP TRIGGER IF EXISTS remove_patch_packages_baseversions;
+DROP TABLE IF EXISTS named_capabilities;
 DROP TABLE IF EXISTS versioned_capabilities;
 DROP TABLE IF EXISTS translated_texts;
 DROP TABLE IF EXISTS script_details;
@@ -323,6 +324,12 @@ CREATE TABLE versioned_capabilities (
   , release TEXT
   , epoch INTEGER
   , relation INTEGER
+);
+
+CREATE TABLE named_capabilities (
+   id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL 
+  , dependency_id INTEGER REFERENCES capabilities (id)
+  , name_id INTEGER REFERENCES names(id)
 );
 
 CREATE TABLE file_capabilities (

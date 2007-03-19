@@ -14,6 +14,7 @@
 
 #include "zypp/base/Logger.h"
 #include "zypp/base/String.h"
+#include "zypp/base/Measure.h"
 #include "zypp2/cache/CacheInitializer.h"
 #include "zypp2/cache/schema/schema.h"
 #include "zypp/target/store/PersistentStorage.h"
@@ -23,6 +24,7 @@
 
 using namespace sqlite3x;
 using namespace std;
+using zypp::debug::Measure;
 
 //////////////////////////////////////////////////////////////////
 namespace zypp
@@ -31,14 +33,24 @@ namespace zypp
 namespace cache
 { /////////////////////////////////////////////////////////////////
   
-
+struct CacheInitializer::Impl
+{
+  Impl( const Pathname &root_r )
+  : root(root_r), just_initialized(false)
+  {
+  }
+  //typedef std::map<media::MediaNr, media::MediaAccessId> MediaMap
+  shared_ptr<sqlite3x::sqlite3_connection> con;
+  Pathname root;
+  bool just_initialized;
+};
   
 CacheInitializer::CacheInitializer( const Pathname &root_r, const Pathname &db_file )
-  : _root(root_r), _just_initialized(false)
+  : _pimpl( new Impl( root_r ) )
 {
   try
   {
-    _con.reset( new sqlite3_connection( (_root + db_file).asString().c_str()) );
+    _pimpl->con.reset( new sqlite3_connection( ( _pimpl->root + db_file).asString().c_str()) );
   }
   catch(exception &ex)
   {
@@ -51,8 +63,8 @@ CacheInitializer::CacheInitializer( const Pathname &root_r, const Pathname &db_f
     if( ! tablesCreated() )
     {
       createTables();
-      _just_initialized = true;
-      _con->close();
+      _pimpl->just_initialized = true;
+      _pimpl->con->close();
       MIL << "Source cache initialized" << std::endl;
     }
     else
@@ -70,7 +82,7 @@ CacheInitializer::CacheInitializer( const Pathname &root_r, const Pathname &db_f
 
 bool CacheInitializer::justInitialized() const
 {
-  return _just_initialized;
+  return _pimpl->just_initialized;
 }
 
 CacheInitializer::~CacheInitializer()
@@ -80,14 +92,17 @@ CacheInitializer::~CacheInitializer()
 
 bool CacheInitializer::tablesCreated() const
 {
-  unsigned int count = _con->executeint("select count(*) from sqlite_master where type='table';");
+  Measure timer("Check tables exist");
+  unsigned int count = _pimpl->con->executeint("select count(*) from sqlite_master where type='table';");
+  timer.elapsed();
   return ( count == 1 );
 }
 
 void CacheInitializer::createTables()
 {
+  Measure timer("Create database tables");
   MIL << "Initializing cache schema..." << endl;
-  sqlite3_transaction trans(*_con);
+  sqlite3_transaction trans(*_pimpl->con);
   {
     string sql;
     const char *filename = "/usr/share/zypp/cache/schema.sql";
@@ -109,9 +124,10 @@ void CacheInitializer::createTables()
     
     //ERR << "Executing " << statements[i] << endl;
     MIL << "Schema size: " << sql.size() << endl;
-    _con->execute(sql.c_str());
+    _pimpl->con->execute(sql.c_str());
   }
   trans.commit();
+  timer.elapsed();
 }
 
 std::ostream & CacheInitializer::dumpOn( std::ostream & str ) const

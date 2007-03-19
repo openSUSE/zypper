@@ -13,6 +13,7 @@
 #include <iosfwd>
 #include <string>
 
+#include "zypp/base/PtrTypes.h"
 #include "zypp/base/ReferenceCounted.h"
 #include "zypp/base/NonCopyable.h"
 #include "zypp/base/PtrTypes.h"
@@ -54,11 +55,11 @@ namespace zypp
 			void createTables();
       /** Overload to realize stream output. */
       virtual std::ostream & dumpOn( std::ostream & str ) const;
-      //typedef std::map<media::MediaNr, media::MediaAccessId> MediaMap
-      shared_ptr<sqlite3x::sqlite3_connection> _con;
-      Pathname _root;
-      bool _just_initialized;
-      
+    private:
+       /** Implementation. */
+      class Impl;
+      /** Pointer to implementation. */
+      RW_pointer<Impl> _pimpl;
     };
     ///////////////////////////////////////////////////////////////////
 
