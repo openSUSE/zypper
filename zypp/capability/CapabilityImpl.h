@@ -236,6 +236,11 @@ namespace zypp
       inline intrusive_ptr<const _Cap> asKind( const CapabilityImpl::constPtr & cap )
       { return dynamic_pointer_cast<const _Cap>(cap); }
 
+    /** Short for dynamic_pointer_cast. */
+    template<class _Cap>
+      inline intrusive_ptr<_Cap> asKind( const CapabilityImpl::Ptr & cap )
+      { return dynamic_pointer_cast<_Cap>(cap); }
+
     /** Access to Capability details. */
     template<class _Cap>
       inline intrusive_ptr<const _Cap> asKind( const Capability & cap )
