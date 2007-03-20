@@ -177,7 +177,7 @@ string desc2str (const Text t)
 // convert ZYPP Resolvable kind to ZMD db::Kind
 
 db::Kind
-db_kind2zypp_kind( Resolvable::Kind kind )
+zypp_kind2db_kind( Resolvable::Kind kind )
 {
   if (kind == ResTraits<Package>::kind)	 return db::KIND_PACKAGE;
   else if (kind == ResTraits<Script>::kind)	 return db::KIND_SCRIPT;
@@ -200,17 +200,20 @@ zypp_deptype2db_deptype( zypp::Dep deptype )
 {
   switch ( deptype.inSwitch() )
   {
-    case zypp::Dep::PROVIDES_e: return db::DEP_TYPE_PROVIDE; break;
-    case zypp::Dep::CONFLICTS_e: return db::DEP_TYPE_CONFLICT; break;
-    case zypp::Dep::OBSOLETES_e: return db::DEP_TYPE_OBSOLETE; break;
-    case zypp::Dep::FRESHENS_e: return db::DEP_TYPE_FRESHEN; break;
-    case zypp::Dep::REQUIRES_e: return db::DEP_TYPE_REQUIRE; break;
-    case zypp::Dep::PREREQUIRES_e: return db::DEP_TYPE_PREREQUIRE; break;
-    case zypp::Dep::RECOMMENDS_e: return db::DEP_TYPE_RECOMMEND; break;
-    case zypp::Dep::SUGGESTS_e: return db::DEP_TYPE_SUGGEST; break;
-    case zypp::Dep::SUPPLEMENTS_e: return db::DEP_TYPE_SUPPLEMENT; break;
-    case zypp::Dep::ENHANCES_e: return db::DEP_TYPE_ENHANCE; break;
+    case zypp::Dep::PROVIDES_e: return db::DEP_TYPE_PROVIDE;
+    case zypp::Dep::CONFLICTS_e: return db::DEP_TYPE_CONFLICT;
+    case zypp::Dep::OBSOLETES_e: return db::DEP_TYPE_OBSOLETE;
+    case zypp::Dep::FRESHENS_e: return db::DEP_TYPE_FRESHEN;
+    case zypp::Dep::REQUIRES_e: return db::DEP_TYPE_REQUIRE;
+    case zypp::Dep::PREREQUIRES_e: return db::DEP_TYPE_PREREQUIRE;
+    case zypp::Dep::RECOMMENDS_e: return db::DEP_TYPE_RECOMMEND;
+    case zypp::Dep::SUGGESTS_e: return db::DEP_TYPE_SUGGEST;
+    case zypp::Dep::SUPPLEMENTS_e: return db::DEP_TYPE_SUPPLEMENT;
+    case zypp::Dep::ENHANCES_e: return db::DEP_TYPE_ENHANCE;
+    default:
+    return db::DEP_TYPE_UNKNOWN;
    }
+   
 }
 
 zypp::Dep

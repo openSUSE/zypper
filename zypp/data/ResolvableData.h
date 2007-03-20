@@ -49,7 +49,7 @@ namespace data
 //     Edition edition;
 //   };
   
-  typedef std::list< capability::CapabilityImpl::constPtr > DependencyList;
+  typedef std::list< capability::CapabilityImpl::Ptr > DependencyList;
 
   struct Dependencies
   {

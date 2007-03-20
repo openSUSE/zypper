@@ -74,7 +74,8 @@ typedef enum {
   DEP_TYPE_RECOMMEND,			// 6
   DEP_TYPE_SUGGEST,			// 7
   DEP_TYPE_SUPPLEMENT,			// 8
-  DEP_TYPE_ENHANCE			// 9
+  DEP_TYPE_ENHANCE,		// 9
+  DEP_TYPE_UNKNOWN=420
 } DependencyType;
 
 //-----------------------------------------------------------------------------

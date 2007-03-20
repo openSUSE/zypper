@@ -47,11 +47,11 @@ namespace zypp
       data::RecordId appendResolvable( const Resolvable::Kind &kind, const NVRA &nvra, const data::Dependencies &deps );
       
       void appendDependencies( const data::RecordId &, const data::Dependencies & );
-      void appendDependencyList( const data::RecordId &, zypp::Dep, const std::list<capability::CapabilityImpl::constPtr> & );
-      void appendDependency( const data::RecordId &, zypp::Dep, capability::CapabilityImpl::constPtr );
+      void appendDependencyList( const data::RecordId &, zypp::Dep, const std::list<capability::CapabilityImpl::Ptr> & );
+      void appendDependency( const data::RecordId &, zypp::Dep, capability::CapabilityImpl::Ptr );
       
-      void appendVersionedDependency( const data::RecordId &, zypp::Dep, capability::VersionedCap::constPtr);
-      void appendNamedDependency( const data::RecordId &, zypp::Dep, capability::NamedCap::constPtr);
+      void appendVersionedDependency( const data::RecordId &, zypp::Dep, capability::VersionedCap::Ptr);
+      void appendNamedDependency( const data::RecordId &, zypp::Dep, capability::NamedCap::Ptr);
       
       data::RecordId lookupOrAppendFile( const Pathname & );
       data::RecordId lookupOrAppendName( const std::string &name );

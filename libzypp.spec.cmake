@@ -76,8 +76,13 @@ Authors:
 %build
 mkdir build
 cd build
-cmake -DCMAKE_INSTALL_PREFIX=%{prefix} -DLIB=%{_lib} -DCMAKE_SKIP_RPATH=1 ..
-CXXFLAGS="$RPM_OPT_FLAGS" \
+cmake -DCMAKE_INSTALL_PREFIX=%{prefix} \
+      -DLIB=%{_lib} \
+      -DCMAKE_C_FLAGS="%{optflags}" \
+      -DCMAKE_CXX_FLAGS="%{optflags}" \
+      -DCMAKE_BUILD_TYPE=Release \
+      -DCMAKE_SKIP_RPATH=1 \
+      ..
 make %{?jobs:-j %jobs}
 make -C doc/autodoc %{?jobs:-j %jobs}
 make -C po %{?jobs:-j %jobs} translations

@@ -30,6 +30,15 @@ int main(int argc, char **argv)
     try
     {
       ZYpp::Ptr z = getZYpp();
+
+//       CapabilityImpl::Ptr freak = capability::parse( ResTraits<Package>::kind, "libc.so.6");
+//       MIL << freak << endl;
+//       MIL << "isVer: " << isKind<VersionedCap>(freak) << endl;
+//       MIL << "isNam: " << isKind<NamedCap>(freak) << endl;
+//       MIL << "isFil: " << isKind<FileCap>(freak) << endl;
+//       VersionedCap::Ptr v = asKind<VersionedCap>(freak);
+//       DBG << v << endl;
+
       Pathname dbfile = Pathname(getenv("PWD")) + "data.db";
       zypp::cache::CacheStore store(getenv("PWD"));
       //zypp::cache::CacheInitializer init( "/", dbfile );
@@ -46,8 +55,11 @@ int main(int argc, char **argv)
         CapabilityImpl::Ptr cap = capability::parse( ResTraits<Package>::kind, buffer );
         if ( cap == 0L )
         {
-          ZYPP_THROW(Exception("Invalid capability: [" + buffer + "]"));
+          //ZYPP_THROW(Exception("Invalid capability: [" + buffer + "]"));
+          ERR << "Invalid cap: [" << buffer << "]" << endl;
+          continue;
         }
+        //DBG << "capability : [" << buffer << "]" << endl;
         caps.push_back(cap);
       }
       cap_parse_timer.elapsed();
