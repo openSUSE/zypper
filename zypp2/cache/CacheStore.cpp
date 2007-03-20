@@ -30,8 +30,6 @@ struct CacheStore::Impl
   Impl()
   {}
 
-  
-
   sqlite3x::sqlite3_connection con;
   sqlite3x::sqlite3_command *select_name_cmd;
   sqlite3x::sqlite3_command *insert_name_cmd;
@@ -41,7 +39,6 @@ struct CacheStore::Impl
   
   sqlite3x::sqlite3_command *select_filename_cmd;
   sqlite3x::sqlite3_command *insert_filename_cmd;
-  
   
   sqlite3x::sqlite3_command *select_file_cmd;
   sqlite3x::sqlite3_command *insert_file_cmd;
@@ -108,8 +105,10 @@ CacheStore::~CacheStore()
   //delete _pimpl->con;
 }
 
-void CacheStore::consumePackage( const data::Package &package)
-{}
+void CacheStore::consumePackage( const data::Package &package )
+{
+  data::RecordId pkgid = appendResolvable( ResTraits<Package>::kind, NVRA( package.name, package.edition, package.arch ), package.deps );
+}
 
 data::RecordId CacheStore::appendResolvable( const Resolvable::Kind &kind, const NVRA &nvra, const data::Dependencies &deps )
 {

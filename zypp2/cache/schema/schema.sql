@@ -338,6 +338,13 @@ CREATE TABLE file_capabilities (
   , file_id INTEGER REFERENCES files(id)
 );
 
+CREATE TABLE split_capabilities (
+   id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL 
+  , dependency_id INTEGER REFERENCES capabilities (id)
+  , name_id INTEGER REFERENCES names(id)
+  , file_id INTEGER REFERENCES files(id)
+);
+
 ------------------------------------------------
 -- Associate resolvables and catalogs
 ------------------------------------------------

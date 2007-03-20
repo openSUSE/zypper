@@ -33,22 +33,6 @@ namespace zypp
 {
 namespace data
 {
-//   struct Dependency
-//   {
-//     enum DependencyType { TypeNamed, TypeVersioned, TypeHal, TypeFile };
-//     virtual DependencyType dependencyType() = 0;
-//   };
-//   
-//   typedef shared_ptr<Dependency> DependencyPtr;
-//   
-//   struct VersionedDependency : public Dependency
-//   {
-//     virtual DependencyType dependencyType() { return TypeVersioned; };
-//     std::string index();
-//     Rel op;
-//     Edition edition;
-//   };
-  
   typedef std::list< capability::CapabilityImpl::Ptr > DependencyList;
 
   struct Dependencies

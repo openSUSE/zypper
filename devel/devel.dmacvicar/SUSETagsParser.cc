@@ -5,6 +5,9 @@
 #include "zypp/Arch.h"
 #include "zypp/ZYppFactory.h"
 #include "zypp/ZYpp.h"
+#include "zypp/capability/CapabilityImpl.h"
+#include "zypp2/cache/CacheStore.h"
+#include "zypp/data/ResolvableDataConsumer.h"
 #include "zypp/parser/taggedfile/TaggedParser.h"
 #include "zypp/parser/taggedfile/TaggedFile.h"
 #include "zypp/parser/taggedfile/TagCacheRetrieval.h"
@@ -23,6 +26,9 @@ struct PackageDataProvider
 {
   TagRetrievalPos _attr_SUMMARY;
   TagRetrievalPos _attr_DESCRIPTION;
+  TagRetrievalPos _attr_INSNOTIFY;
+  TagRetrievalPos _attr_DELNOTIFY;
+  TagRetrievalPos _attr_LICENSETOCONFIRM;
 
   // retrieval pointer for packages data
   TagCacheRetrievalPtr _package_retrieval;
@@ -76,7 +82,12 @@ struct PackagesParser
   typedef std::map <std::string, PackageDataProviderPtr> pkgmaptype;
   pkgmaptype _pkgmap;
 
-  PackagesParser()
+  zypp::cache::CacheStore *_consumer;
+
+  std::map<std::string, data::RecordId> _idmap;
+
+  PackagesParser( zypp::cache::CacheStore *consumer )
+    : _consumer(consumer)
   {
     ZYpp::Ptr z = getZYpp();
     _system_arch = z->architecture();
@@ -128,8 +139,6 @@ struct PackagesParser
     }
   }
 
-  
-  
   void start( const Pathname &path )
   {
     std::ifstream content_stream((path + "/content").asString().c_str());
@@ -412,13 +421,13 @@ struct PackagesParser
     _tagset.getTagByIndex (tagname)
 #define SET_CACHE(tagname) \
     do { tagptr = GET_TAG (tagname); dataprovider->_attr_##tagname = tagptr->Pos(); } while (0)
-    /*
+    
     SET_CACHE (SUMMARY);
     SET_CACHE (DESCRIPTION);
     SET_CACHE (INSNOTIFY);
     SET_CACHE (DELNOTIFY);
     SET_CACHE (LICENSETOCONFIRM);
-    */
+    
 
     //std::list<std::string> description;
     //if (localecache->retrieveData (GET_TAG(DESCRIPTION)->Pos(), description))
@@ -447,7 +456,10 @@ int main(int argc, char **argv)
     try
     {
       ZYpp::Ptr z = getZYpp();
-      PackagesParser parser;
+      Pathname dbfile = Pathname(getenv("PWD")) + "data.db";
+      zypp::cache::CacheStore store(getenv("PWD"));
+
+      PackagesParser parser(&store);
       parser.start(argv[1]);
     }
     catch ( const Exception &e )
