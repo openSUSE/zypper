@@ -21,6 +21,8 @@ namespace zypp
   namespace capability
   { /////////////////////////////////////////////////////////////////
 
+    DEFINE_PTR_TYPE(NamedCap)
+    
     ///////////////////////////////////////////////////////////////////
     //
     //	CLASS NAME : NamedCap
@@ -32,6 +34,8 @@ namespace zypp
     {
     public:
       typedef NamedCap Self;
+      typedef NamedCap_Ptr       Ptr;
+      typedef NamedCap_constPtr  constPtr;
 
       /** Ctor */
       NamedCap( const Resolvable::Kind & refers_r, const std::string & name_r )
@@ -44,15 +48,17 @@ namespace zypp
       virtual const Kind & kind() const;
 
       /** Return whether the Capabilities match. */
-      virtual CapMatch matches( const constPtr & rhs ) const;
+      virtual CapMatch matches( const CapabilityImpl::constPtr & rhs ) const;
 
       /** Name. */
       virtual std::string encode() const;
-
-    protected:
+      
       /**  */
       const std::string & name() const
       { return _name; }
+      
+    protected:
+      
       /**  Rel::ANY. */
       virtual const Edition::MatchRange & range() const;
 

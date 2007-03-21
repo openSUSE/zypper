@@ -34,37 +34,7 @@ namespace zypp
 namespace data
 {
   typedef std::list< capability::CapabilityImpl::Ptr > DependencyList;
-
-  struct Dependencies
-  {
-//     DependencyList & operator[]( zypp::Dep idx )
-//     {
-//       switch ( idx.inSwitch() )
-//       {
-//         case zypp::Dep::PROVIDES.inSwitch(): return provides; break;
-//         case zypp::Dep::CONFLICTS.inSwitch(): return conflicts; break;
-//         case zypp::Dep::OBSOLETES.inSwitch(): return obsoletes; break;
-//         case zypp::Dep::FRESHENS.inSwitch(): return freshens; break;
-//         case zypp::Dep::REQUIRES.inSwitch(): return requires; break;
-//         case zypp::Dep::PREREQUIRES.inSwitch(): return prerequires; break;
-//         case zypp::Dep::RECOMMENDS.inSwitch(): return recommends; break;
-//         case zypp::Dep::SUGGESTS.inSwitch(): return suggests; break;
-//         case zypp::Dep::SUPPLEMENTS.inSwitch(): return supplements; break;
-//         case zypp::Dep::ENHANCES.inSwitch(): return enhances; break;
-//       }
-//     }
-    
-    DependencyList provides;
-    DependencyList conflicts;
-    DependencyList obsoletes;
-    DependencyList freshens;
-    DependencyList requires;
-    DependencyList prerequires;
-    DependencyList recommends;
-    DependencyList suggests;
-    DependencyList supplements;
-    DependencyList enhances;
-  };
+  typedef std::map< zypp::Dep, DependencyList> Dependencies;
   
   class Resolvable : public base::ReferenceCounted, private base::NonCopyable
   {

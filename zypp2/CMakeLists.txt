@@ -101,7 +101,7 @@ SET( zypp2_lib_SRCS
 ${zypp2_source_SRCS}
 ${zypp2_SRCS}
 ${zypp2_cache_SRCS}
-${zypp2_source_sqlite-source_SRCS}
+#${zypp2_source_sqlite-source_SRCS}
 ${zypp2_cache_sqlite3x_SRCS}
 )
 
@@ -109,7 +109,7 @@ SET( zypp2_lib_HEADERS
 ${zypp2_source_HEADERS}
 ${zypp2_HEADERS}
 ${zypp2_cache_HEADERS}
-${zypp2_source_sqlite-source_HEADERS}
+#${zypp2_source_sqlite-source_HEADERS}
 ${zypp2_cache_sqlite3x_HEADERS}
 )
 

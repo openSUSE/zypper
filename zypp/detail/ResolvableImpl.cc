@@ -168,13 +168,20 @@ namespace zypp
 	// if its a provides, check for non-empty edition since
 	//   kernels provide "kernel-flavor-nongpl" (empty edition)
 	//     and "kernel-flavor = x.y" (non-empty edition)
-
-	if ( it->index().substr( 0, 7 ) == "kernel-"
-	     && (dep == Dep::REQUIRES
-		|| it->edition() != Edition::noedition ) )
-	{
-	  return it->index().erase( 0, 7 );	// erase "kernel-"
-	}
+        capability::VersionedCap::constPtr vercap = capability::asKind<capability::VersionedCap>(*it);
+        if ( vercap ) {
+          
+          if ( vercap->index().substr( 0, 7 ) == "kernel-"
+              && (dep == Dep::REQUIRES
+                  || vercap->edition() != Edition::noedition ) )
+          {
+            return vercap->index().erase( 0, 7 );	// erase "kernel-"
+          }
+        }
+        else
+        {
+          ERR << *it << " is not a VersionedCap" << std::endl;
+        }
       }
       return "";
     }
@@ -201,12 +208,17 @@ namespace zypp
       flavor.append( ":" );
       CapFactory factory;
       deps[dep].clear();
-      for (CapSet::iterator it = cset.begin(); it != cset.end(); ++it) {
+      for (CapSet::const_iterator it = cset.begin(); it != cset.end(); ++it) {
 	std::string idx( it->index() );
 	if ( idx.substr( 0, 7 ) == "kernel("		// capability is "kernel(..."
 	     && idx.find( ":" ) == std::string::npos )	//  without a colon
 	{
-	  deps[dep].insert( factory.parse( it->refers(), idx.insert( 7, flavor ), it->op(), it->edition() ) );
+           capability::VersionedCap::constPtr vercap = capability::asKind<capability::VersionedCap>(*it);
+          if ( vercap )
+           
+            deps[dep].insert( factory.parse( vercap->refers(), idx.insert( 7, flavor ), vercap->op(), vercap->edition() ) );
+          else
+            ERR << *it << " is not a VersionedCap" << std::endl;
 	}
 	else {
 	  deps[dep].insert( *it );

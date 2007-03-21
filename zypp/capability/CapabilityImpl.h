@@ -80,12 +80,6 @@ namespace zypp
       */
       virtual std::string index() const
       { return encode(); }
-      /** \deprecated, defaults to Rel::NONE */
-      virtual Rel op() const
-      { return Rel::NONE; }
-      /** \deprecated, defaults to Edition::noedition */
-      virtual Edition edition() const
-      { return Edition::noedition; }
 
     public:
       /** Solver hack. */

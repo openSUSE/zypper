@@ -94,21 +94,27 @@ template<>
 std::string helixXML( const Capability &cap )
 {
     stringstream str;
-    if (isKind<VersionedCap>(cap)
-	&& cap.op() != Rel::NONE
-	&& cap.op() != Rel::ANY
-	&& !cap.edition().version().empty()) {
-	// version capability
-	str << "<dep name='" << xml_escape(cap.index()) << "' op='" << xml_escape(cap.op().asString()) <<
-	    "' version='" << cap.edition().version() << "'";
-	if (!cap.edition().release().empty())
-	    str << " release='" << cap.edition().release() << "'";
-	if (cap.edition().epoch() != Edition::noepoch)
-	    str << " epoch='" << numstring(cap.edition().epoch()) << "'";
-    } else {
-	// anything else
-	str << "<dep name='" << xml_escape(cap.asString()) << "'";
+    if (isKind<VersionedCap>(cap))
+    {
+      VersionedCap::constPtr vercap = asKind<VersionedCap>(cap);
+      if (
+          vercap->op() != Rel::NONE
+          && vercap->op() != Rel::ANY
+          && !vercap->edition().version().empty() ) {
+          // version capability
+          str << "<dep name='" << xml_escape(vercap->index()) << "' op='" << xml_escape(vercap->op().asString()) <<
+              "' version='" << vercap->edition().version() << "'";
+          if (!vercap->edition().release().empty())
+              str << " release='" << vercap->edition().release() << "'";
+          if (vercap->edition().epoch() != Edition::noepoch)
+              str << " epoch='" << numstring(vercap->edition().epoch()) << "'";
+      }
     }
+    else
+    {
+      str << "<dep name='" << xml_escape(cap.asString()) << "'";
+    }
+    
     str << " kind=\"" << toLower (cap.refers().asString()) << "\""
 	<< " />" << endl;
 	

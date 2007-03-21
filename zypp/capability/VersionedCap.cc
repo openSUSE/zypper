@@ -20,6 +20,8 @@ namespace zypp
   namespace capability
   { /////////////////////////////////////////////////////////////////
 
+    IMPL_PTR_TYPE(VersionedCap)
+    
     std::string VersionedCap::encode() const
     {
       std::string ret( name() );

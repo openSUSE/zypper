@@ -20,10 +20,12 @@ namespace zypp
   namespace capability
   { /////////////////////////////////////////////////////////////////
 
+    IMPL_PTR_TYPE(NamedCap)
+    
     const CapabilityImpl::Kind & NamedCap::kind() const
     { return CapTraits<Self>::kind; }
 
-    CapMatch NamedCap::matches( const constPtr & rhs ) const
+    CapMatch NamedCap::matches( const CapabilityImpl::constPtr & rhs ) const
     {
       if ( sameKindAndRefers( rhs ) )
         {

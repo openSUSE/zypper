@@ -21,6 +21,8 @@ namespace zypp
   namespace capability
   { /////////////////////////////////////////////////////////////////
 
+    DEFINE_PTR_TYPE(FileCap)
+    
     ///////////////////////////////////////////////////////////////////
     //
     //	CLASS NAME : FileCap
@@ -33,6 +35,8 @@ namespace zypp
     {
     public:
       typedef FileCap Self;
+      typedef FileCap_Ptr       Ptr;
+      typedef FileCap_constPtr  constPtr;
 
       /** Ctor */
       FileCap( const Resolvable::Kind & refers_r, const std::string & fname_r )
@@ -41,11 +45,14 @@ namespace zypp
       {}
 
     public:
+      std::string filename() const
+      { return _fname; }
+      
       /**  */
       virtual const Kind & kind() const;
 
       /** Same kind, refers and filename. */
-      virtual CapMatch matches( const constPtr & rhs ) const;
+      virtual CapMatch matches( const CapabilityImpl::constPtr & rhs ) const;
 
       /** Filename. */
       virtual std::string encode() const;

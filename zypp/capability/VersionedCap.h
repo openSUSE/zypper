@@ -21,6 +21,8 @@ namespace zypp
   namespace capability
   { /////////////////////////////////////////////////////////////////
 
+    DEFINE_PTR_TYPE(VersionedCap)
+    
     ///////////////////////////////////////////////////////////////////
     //
     //	CLASS NAME : VersionedCap
@@ -31,7 +33,11 @@ namespace zypp
     */
     class VersionedCap : public NamedCap
     {
-    public:
+      public:
+      typedef VersionedCap Self;
+      typedef VersionedCap_Ptr       Ptr;
+      typedef VersionedCap_constPtr  constPtr;
+
       /** Ctor */
       VersionedCap( const Resolvable::Kind & refers_r,
                     const std::string & name_r,
