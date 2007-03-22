@@ -26,6 +26,7 @@
 #include <string>
 #include <fstream>
 
+#include <zypp/base/ReferenceCounted.h>
 #include <zypp/parser/taggedfile/TaggedParser.h>
 #include <zypp/parser/taggedfile/TagRetrievalPos.h>
 
@@ -36,8 +37,8 @@
 //
 //	CLASS NAME : TagCacheRetrieval
 //
-class TagCacheRetrieval : public CountedRep {
-    REP_BODY(TagCacheRetrieval);
+class TagCacheRetrieval : public zypp::base::ReferenceCounted
+{
     private:
 	// the name of the file
 	std::string _name;

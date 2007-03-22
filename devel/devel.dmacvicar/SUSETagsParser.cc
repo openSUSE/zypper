@@ -1,6 +1,7 @@
 #include <list>
 #include <string>
 #include <fstream>
+#include "zypp/base/Measure.h"
 #include "zypp/base/Logger.h"
 #include "zypp/Arch.h"
 #include "zypp/ZYppFactory.h"
@@ -15,6 +16,7 @@
 
 using namespace zypp;
 using namespace std;
+using zypp::debug::Measure;
 
 typedef Exception ParseException;
 
@@ -31,11 +33,11 @@ struct PackageDataProvider
   TagRetrievalPos _attr_LICENSETOCONFIRM;
 
   // retrieval pointer for packages data
-  TagCacheRetrievalPtr _package_retrieval;
+  TagCacheRetrieval_Ptr _package_retrieval;
   // retrieval pointer for packages.<locale> data
-  TagCacheRetrievalPtr _locale_retrieval;
+  TagCacheRetrieval_Ptr _locale_retrieval;
   // retrieval pointer for packages.DU data
-  TagCacheRetrievalPtr _du_retrieval;
+  TagCacheRetrieval_Ptr _du_retrieval;
   // fallback provider (Share entry in packages)
   PackageDataProviderPtr _fallback_provider;
 };
@@ -203,7 +205,7 @@ struct PackagesParser
     // assign set repeatedly
 
     // create a single cache for all packages
-    TagCacheRetrievalPtr pkgcache (new TagCacheRetrieval (packages_path));
+    TagCacheRetrieval_Ptr pkgcache (new TagCacheRetrieval (packages_path));
     
     //TagCacheRetrievalPtr ducache (new TagCacheRetrieval (dupath));
 
@@ -250,7 +252,7 @@ struct PackagesParser
     for ( list<Locale>::const_iterator it = locales.begin(); it != locales.end(); ++it )
     {
       Locale locale = *it;
-      Pathname locale_path = (path + descr_dir + "/packages." + locale.code() );
+      Pathname locale_path = ( (path + descr_dir + "/packages.").asString() + locale.code() );
 
       if ( ! PathInfo(locale_path).isExist() )
       {
@@ -258,7 +260,8 @@ struct PackagesParser
         continue;
       }
       
-      TagCacheRetrievalPtr localecache (new TagCacheRetrieval (locale_path));
+      MIL << "Parsing " << locale_path << endl;
+      TagCacheRetrieval_Ptr localecache (new TagCacheRetrieval (locale_path));
       localecache->startRetrieval();
       
       std::ifstream localestream (path.asString().c_str());
@@ -277,6 +280,7 @@ struct PackagesParser
       if ((type != TaggedParser::SINGLE) || (_parser.currentTag() != "Ver") || (!_parser.currentLocale().empty()))
       {
         ERR << path << ": Initial '=Ver:' tag missing" << endl;
+        continue;
         //return InstSrcError::E_data_bad_packages_lang;
       }
   
@@ -321,7 +325,7 @@ struct PackagesParser
     } // locales iterator
   }
 
-  void fromCache ( TagCacheRetrievalPtr pkgcache)
+  void fromCache ( TagCacheRetrieval_Ptr pkgcache)
   {
     //---------------------------------------------------------------
     // PACKAGE
@@ -350,14 +354,8 @@ struct PackagesParser
       //return InstSrcError::E_data_bad_packages;
       ZYPP_THROW( ParseException( "Invalid '=Pkg: N V R A' value" ) );
     }
-    
-    // reset
-    // this means this is either the first package, or we just finished parsing a package and a new one is starting
-    // collect previous pending package if needed
-    //collectPkg();
-    cout << splitted[0] << " " << splitted[1] << " " << splitted[2] << " " << splitted[3] << endl;
     std::string arch = splitted[3];
-    
+
     // warning: according to autobuild, this is the wrong check
     //  a 'src/norsrc' packages is determined by _not_ having a "=Src:" tag in packages
     // However, the 'arch' string we're checking here must be remembered since
@@ -368,29 +366,47 @@ struct PackagesParser
       arch = "noarch";
       //_srcPkgImpl = SrcPkgImplPtr( new source::susetags::SuseTagsSrcPackageImpl( _source ) );
     }
-    //else
-    //  _srcPkgImpl = NULL;
-
-    //_pkgImpl = PkgImplPtr( new source::susetags::SuseTagsPackageImpl( _source ) );
-    //_nvrad = NVRAD( splitted[0], Edition( splitted[1], splitted[2] ), Arch( arch ) );
-     //_pkgImpl->_nvra = NVRA( splitted[0], Edition( splitted[1], splitted[2] ), Arch( arch ) );
-
-     //_isPendingPkg = true;
-
+    
+    NVRA nvra( splitted[0], Edition( splitted[1], splitted[2] ), Arch(arch) );
+    
      // DEPENDENCIES
     #define GET_TAG(tagname) \
     _tagset.getTagByIndex (tagname)
      
-    std::list<std::string> pkglist;
-    if (pkgcache->retrieveData (GET_TAG(REQUIRES)->Pos(), pkglist))
-    {
-      cout << pkglist.front() << endl;
-      //collectDeps( pkglist, _nvrad[Dep::REQUIRES] );
-    }
+    data::Dependencies deps;
     
+    std::list<std::string> pkglist;
+    
+#define COLLECT_DEPS(dtype) \
+    if (pkgcache->retrieveData (GET_TAG(dtype)->Pos(), pkglist)) \
+      collectDeps( zypp::Dep::dtype, pkglist, deps); \
     pkglist.clear();
+    
+    COLLECT_DEPS(REQUIRES);
+    COLLECT_DEPS(PROVIDES);
+    COLLECT_DEPS(PREREQUIRES);
+    //COLLECT_DEPS(ENHANCES);
+    COLLECT_DEPS(CONFLICTS);
+    //COLLECT_DEPS(FRESHENS);
+    //COLLECT_DEPS(SUPPLEMENTS);
+    COLLECT_DEPS(RECOMMENDS);
+
+    data::RecordId pkgid = _consumer->appendResolvable( ResTraits<Package>::kind, nvra, deps );
+    _idmap[single] = pkgid;
   }
 
+  void collectDeps( zypp::Dep deptype, const std::list<std::string> &depstrlist, data::Dependencies &deps )
+  {
+    for ( list<string>::const_iterator it = depstrlist.begin(); it != depstrlist.end(); ++it )
+    {
+      capability::CapabilityImpl::Ptr cap = zypp::capability::parse( ResTraits<Package>::kind, *it);
+      if (cap)
+        deps[deptype].push_back(cap);
+      else
+        ZYPP_THROW(ParseException("Invalid capability: [" + *it + "]"));
+    }
+  }
+  
   void fromPathLocale (const Pathname& path)
   {
     
@@ -460,7 +476,9 @@ int main(int argc, char **argv)
       zypp::cache::CacheStore store(getenv("PWD"));
 
       PackagesParser parser(&store);
+      Measure m;
       parser.start(argv[1]);
+      m.elapsed();
     }
     catch ( const Exception &e )
     {
@@ -468,3 +486,4 @@ int main(int argc, char **argv)
     }
     return 0;
 }
+

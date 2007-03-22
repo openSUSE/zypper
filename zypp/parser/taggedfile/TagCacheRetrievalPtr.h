@@ -19,12 +19,12 @@
 #ifndef TagCacheRetrievalPtr_h
 #define TagCacheRetrievalPtr_h
 
-#include <zypp/parser/taggedfile/RepDef.h>
+#include <zypp/base/PtrTypes.h>
 
 ///////////////////////////////////////////////////////////////////
 //      CLASS NAME : TagCacheRetrievalPtr
 //      CLASS NAME : constTagCacheRetrievalPtr
 ///////////////////////////////////////////////////////////////////
-DEFINE_BASE_POINTER(TagCacheRetrieval);
+DEFINE_PTR_TYPE(TagCacheRetrieval)
 
 #endif // TagCacheRetrievalPtr_h
