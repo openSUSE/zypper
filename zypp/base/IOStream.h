@@ -16,6 +16,8 @@
 #include <boost/io/ios_state.hpp>
 
 #include "zypp/base/PtrTypes.h"
+#include <zypp/base/SafeBool.h>
+#include <zypp/base/NonCopyable.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -28,7 +30,7 @@ namespace zypp
 
     /** Save and restore streams \c width, \c precision
      * and \c fmtflags.
-    */
+     */
     typedef boost::io::ios_base_all_saver IosFmtFlagsSaver;
 
 
@@ -38,9 +40,69 @@ namespace zypp
      * is read but not returned.
      *
      * \see \ref forEachLine
-    */
+     */
     std::string getline( std::istream & str );
 
+    ///////////////////////////////////////////////////////////////////
+    //
+    //	CLASS NAME : EachLine
+    //
+    /** Simple lineparser: Traverse each line in a file.
+     *
+     * \code
+     * std::ifstream infile( "somefile" );
+     * for( iostr::EachLine in( infile ); in; in.next() )
+     * {
+     *   DBG << *in << endl;
+     * }
+     * \endcode
+     */
+    class EachLine : private base::SafeBool<EachLine>, private base::NonCopyable
+    {
+      typedef base::SafeBool<EachLine> SafeBool;
+
+      public:
+	/** Ctor taking a stream and reading the 1st line from it. */
+	EachLine( std::istream & str_r );
+
+	/** Evaluate class in a  boolean context. */
+	using SafeBool::operator bool_type;
+
+	/** Whether \c this contains a valid line to consume. */
+	bool valid() const
+	{ return boolTest(); }
+
+	/** Return the current line number. */
+	unsigned lineNo() const
+	{ return _lineNo; }
+
+	/** Access the current line. */
+	const std::string & operator*() const
+	{ return _line; }
+
+	/** Advance to next line. */
+	bool next();
+
+	/** Advance \a num_r lines. */
+	bool next( unsigned num_r )
+	{
+	  while ( num_r-- && next() )
+	    ; /* EMPTY */
+	  return valid();
+	}
+
+      private:
+	friend SafeBool::operator bool_type() const;
+	bool boolTest() const
+	{ return _valid; }
+
+      private:
+	std::istream & _str;
+	std::string _line;
+	unsigned _lineNo;
+	bool _valid;
+    };
+    ///////////////////////////////////////////////////////////////////
 
     /** Simple lineparser: Call functor \a consume_r for each line.
      *
@@ -62,7 +124,7 @@ namespace zypp
      *
      * \todo Should be templated and specialized according to the
      * functors return type, to allow \c void consumer.
-    */
+     */
     template<class _Function>
       _Function & forEachLine( std::istream & str_r, _Function & consume_r )
       {

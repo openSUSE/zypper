@@ -27,7 +27,7 @@ namespace zypp
      **
      **	FUNCTION NAME : getline
      **	FUNCTION TYPE : std::string
-    */
+     */
     std::string getline( std::istream & str )
     {
       static const unsigned tmpBuffLen = 1024;
@@ -40,6 +40,53 @@ namespace zypp
       } while( str.rdstate() == std::ios::failbit );
 
       return ret;
+    }
+
+    ///////////////////////////////////////////////////////////////////
+    //
+    //	CLASS NAME : EachLine
+    //
+    ///////////////////////////////////////////////////////////////////
+
+    ///////////////////////////////////////////////////////////////////
+    //
+    //	METHOD NAME : EachLine::EachLine
+    //	METHOD TYPE : Ctor
+    //
+    EachLine::EachLine( std::istream & str_r )
+      : _str( str_r )
+      , _lineNo( 0 )
+      , _valid( true )
+    {
+      next();
+    }
+
+    ///////////////////////////////////////////////////////////////////
+    //
+    //	METHOD NAME : EachLine::next
+    //	METHOD TYPE : bool
+    //
+    bool EachLine::next()
+    {
+      if ( ! _valid )
+      {
+	return false;
+      }
+
+      if ( ! _str ) // usg: saw EOF in previous read
+      {
+	_line.clear();
+	return(_valid = false);
+      }
+
+      _line = iostr::getline( _str );
+      if ( _str.fail() || _str.bad() )
+      {
+	_line.clear();
+	return(_valid = false);
+      }
+      ++_lineNo;
+      return(_valid = true);
     }
 
     /////////////////////////////////////////////////////////////////
