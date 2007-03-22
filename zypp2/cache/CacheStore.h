@@ -19,7 +19,7 @@
 #include "zypp/Pathname.h"
 
 #include "zypp/capability/CapabilityImpl.h"
-#include "zypp/capability/VersionedCap.h"
+#include "zypp/capability/Capabilities.h"
 
 #include "zypp/data/ResolvableDataConsumer.h"
 #include "zypp/data/RecordId.h"
@@ -33,31 +33,197 @@ namespace zypp
   namespace cache
   { /////////////////////////////////////////////////////////////////
 
+    /**
+     * The cache store caches resolvable data into some backend.
+    */
     class CacheStore : public data::ResolvableDataConsumer
     {
     public:
       
       CacheStore();
       ~CacheStore();
+      
+      /**
+       * Constructor for the CacheStore
+       *
+       * \note a transaction will be started from the moment the
+       * CacheStore is instanciated.
+       * 
+       * The data will be saved in the directory specified in
+       * \a dbdir
+       */
       CacheStore( const Pathname &dbdir );
       
-      // data::ResolvableDataConsumer
+      /**
+       * Implements the ResolvableConsumer consumePackage interface
+       * Consumer a package and inserts it into the database.
+       * Don't use this method yet
+      */
       virtual void consumePackage( const data::Package &package);
       
-      data::RecordId appendResolvable( const Resolvable::Kind &kind, const NVRA &nvra, const data::Dependencies &deps );
+      /**
+       * Appends a resolvable to the store.
+       *
+       * You have to specify with \a kind of resolvable are you inserting
+       * and its \c NVRA (name version release and architecture ).
+       * Optionaly you can pass a list of \c CapabilityImpl::Ptr
+       * as dependencies for the resolvable.
+       * 
+       * You can create those \a deps using \ref capability::parse
+       * functions, or the build methods to create specific types
+       * of capabilities:
+       * \ref capability::buildVersioned for \c VersionedCap
+       * \ref capability::buildNamed for \c NamedCap
+       * etc.
+       *
+       * Once the resolvable is inserted, you will get back the id
+       * if it in the store. Which you can use for later adding
+       * other properties.
+       *
+       */
+      data::RecordId appendResolvable( const Resolvable::Kind &kind,
+                                       const NVRA &nvra,
+                                       const data::Dependencies &deps );
       
-      void appendDependencies( const data::RecordId &, const data::Dependencies & );
-      void appendDependencyList( const data::RecordId &, zypp::Dep, const std::list<capability::CapabilityImpl::Ptr> & );
-      void appendDependency( const data::RecordId &, zypp::Dep, capability::CapabilityImpl::Ptr );
+      /**
+       * Adds dependencies to the store
+       *
+       * A map of dependency lists has to be specified. The map contains
+       * list of capablities for each dependency type \ref zypp::Dep
+       *
+       * \a resolvable_id is the resolvable Id in the CacheStore
+       * that will own those capabilities.
+       *
+       * FIXME should it \throw if the resolvable does not exist?
+       */
+      void appendDependencies( const data::RecordId &resolvable_id,
+                               const data::Dependencies &dependencies );
       
+      /**
+       * Adds dependencies to the store
+       *
+       * A lists of dependencies \a dlist to be specified. Among
+       * which type of dependencies \ref zypp::Dep it is as
+       * the \a deptype argument.
+       * 
+       * \a resolvable_id is the resolvable Id in the CacheStore
+       * that will own those capabilities.
+       *
+       * FIXME should it \throw if the resolvable does not exist?
+       */
+      void appendDependencyList( const data::RecordId &resolvable_id, 
+                                 zypp::Dep deptype,
+                                 const data::DependencyList &dlist );
+      
+      /**
+       * Adds a dependency to the store.
+       *
+       * A \ref CapabilityImpl::Ptr argument \a cap has to be specified. 
+       * Among which type of dependency \ref zypp::Dep it is as
+       * the \a deptype argument.
+       * 
+       * \a resolvable_id is the resolvable Id in the CacheStore
+       * that will own the capability
+       *
+       * FIXME should it \throw if the resolvable does not exist?
+       */
+      void appendDependency( const data::RecordId &resolvable_id,
+                             zypp::Dep deptype,
+                             capability::CapabilityImpl::Ptr cap );
+      
+      /**
+       * Adds a versioned dependency to the store.
+       *
+       * A \ref VersionedCap::Ptr \a dlist to be specified. Among
+       * which type of dependency \ref zypp::Dep it is as
+       * the \a deptype argument.
+       * 
+       * \a resolvable_id is the resolvable Id in the CacheStore
+       * that will own the capability
+       *
+       * You can create the versioned capability using either
+       * \ref capability::parse or \ref capability::buildVersioned
+       *
+       * FIXME should it \throw if the resolvable does not exist?
+       */
       void appendVersionedDependency( const data::RecordId &, zypp::Dep, capability::VersionedCap::Ptr);
+      
+      /**
+       * Adds a Named dependency to the store.
+       *
+       * A \ref NamedCap::Ptr \a dlist to be specified. Among
+       * which type of dependency \ref zypp::Dep it is as
+       * the \a deptype argument.
+       * 
+       * \a resolvable_id is the resolvable Id in the CacheStore
+       * that will own the capability
+       *
+       * You can create the named capability using either
+       * \ref capability::parse or \ref capability::buildNamed
+       *
+       * FIXME should it \throw if the resolvable does not exist?
+       */
       void appendNamedDependency( const data::RecordId &, zypp::Dep, capability::NamedCap::Ptr);
       
-      data::RecordId lookupOrAppendFile( const Pathname & );
+      /**
+       * Adds a file dependency to the store.
+       *
+       * A \ref FileCap::Ptr \a dlist to be specified. Among
+       * which type of dependency \ref zypp::Dep it is as
+       * the \a deptype argument.
+       * 
+       * \a resolvable_id is the resolvable Id in the CacheStore
+       * that will own the capability
+       *
+       * You can create the file capability using either
+       * \ref capability::parse or \ref capability::buildFile
+       *
+       * FIXME should it \throw if the resolvable does not exist?
+       */
+      void appendFileDependency( const data::RecordId &, zypp::Dep, capability::FileCap::Ptr);
+      
+      /**
+       * Returns the record id of a file entry \a path
+       *
+       * \note If the file entry does not exist, it will
+       * be created and the new inserted entry's id will
+       * be returned.
+       */
+      data::RecordId lookupOrAppendFile( const Pathname &path );
+      
+      /**
+       * Returns the record id of a name entry \a name
+       *
+       * \note If the name entry does not exist, it will
+       * be created and the new inserted entry's id will
+       * be returned.
+       */
       data::RecordId lookupOrAppendName( const std::string &name );
+      
+      /**
+       * Returns the record id of a directory name  entry \a name
+       *
+       * \note If the directory name entry does not exist, it will
+       * be created and the new inserted entry's id will
+       * be returned.
+       */
       data::RecordId lookupOrAppendDirName( const std::string &name );
+      
+      /**
+       * Returns the record id of a file name entry \a name
+       *
+       * \note If the file name entry does not exist, it will
+       * be created and the new inserted entry's id will
+       * be returned.
+       */
       data::RecordId lookupOrAppendFileName( const std::string &name );
+      
     protected:
+      /**
+       * Internally used function that appends a entry in
+       * the capabilities table for a specific capability
+       * entry.
+       */
       data::RecordId appendDependencyEntry( const data::RecordId &, zypp::Dep, const Resolvable::Kind & );
     private:
       /** Implementation. */

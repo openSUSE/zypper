@@ -25,23 +25,33 @@ namespace zypp
 namespace cache
 { /////////////////////////////////////////////////////////////////
 
+typedef shared_ptr<sqlite3_command> sqlite3_command_ptr;
+  
 struct CacheStore::Impl
 {
   Impl()
   {}
 
-  sqlite3x::sqlite3_connection con;
-  sqlite3x::sqlite3_command *select_name_cmd;
-  sqlite3x::sqlite3_command *insert_name_cmd;
+  sqlite3_connection con;
+  sqlite3_command_ptr select_name_cmd;
+  sqlite3_command_ptr insert_name_cmd;
   
-  sqlite3x::sqlite3_command *select_dirname_cmd;
-  sqlite3x::sqlite3_command *insert_dirname_cmd;
+  sqlite3_command_ptr select_dirname_cmd;
+  sqlite3_command_ptr insert_dirname_cmd;
   
-  sqlite3x::sqlite3_command *select_filename_cmd;
-  sqlite3x::sqlite3_command *insert_filename_cmd;
+  sqlite3_command_ptr select_filename_cmd;
+  sqlite3_command_ptr insert_filename_cmd;
   
-  sqlite3x::sqlite3_command *select_file_cmd;
-  sqlite3x::sqlite3_command *insert_file_cmd;
+  sqlite3_command_ptr select_file_cmd;
+  sqlite3_command_ptr insert_file_cmd;
+  
+  sqlite3_command_ptr insert_dependency_entry_cmd;
+  
+  sqlite3_command_ptr append_file_dependency_cmd;
+  sqlite3_command_ptr append_named_dependency_cmd;
+  sqlite3_command_ptr append_versioned_dependency_cmd;
+  
+  sqlite3_command_ptr append_resolvable_cmd;
 };
 
 
@@ -66,18 +76,25 @@ CacheStore::CacheStore( const Pathname &dbdir )
     ZYPP_THROW(Exception(ex.what()));
   }
   
-  _pimpl->select_name_cmd = new sqlite3_command( _pimpl->con, "select id from names where name=:name;" );
-  _pimpl->insert_name_cmd = new sqlite3_command( _pimpl->con, "insert into names (name) values (:name);" );
+  _pimpl->select_name_cmd.reset( new sqlite3_command( _pimpl->con, "select id from names where name=:name;" ));
+  _pimpl->insert_name_cmd.reset( new sqlite3_command( _pimpl->con, "insert into names (name) values (:name);" ));
   
-  _pimpl->select_dirname_cmd = new sqlite3_command( _pimpl->con, "select id from dir_names where name=:name;" );
-  _pimpl->insert_dirname_cmd = new sqlite3_command( _pimpl->con, "insert into dir_names (name) values (:name);" );
+  _pimpl->select_dirname_cmd.reset( new sqlite3_command( _pimpl->con, "select id from dir_names where name=:name;" ));
+  _pimpl->insert_dirname_cmd.reset( new sqlite3_command( _pimpl->con, "insert into dir_names (name) values (:name);" ));
   
-  _pimpl->select_filename_cmd = new sqlite3_command( _pimpl->con, "select id from file_names where name=:name;" );
-  _pimpl->insert_filename_cmd = new sqlite3_command( _pimpl->con, "insert into file_names (name) values (:name);" );
+  _pimpl->select_filename_cmd.reset( new sqlite3_command( _pimpl->con, "select id from file_names where name=:name;" ));
+  _pimpl->insert_filename_cmd.reset( new sqlite3_command( _pimpl->con, "insert into file_names (name) values (:name);" ));
 
-  _pimpl->select_file_cmd = new sqlite3_command( _pimpl->con, "select id from files where dir_name_id=:dir_name_id and file_name_id=:file_name_id;" );
-  _pimpl->insert_file_cmd = new sqlite3_command( _pimpl->con, "insert into files (dir_name_id,file_name_id) values (:dir_name_id,:file_name_id);" );
+  _pimpl->select_file_cmd.reset( new sqlite3_command( _pimpl->con, "select id from files where dir_name_id=:dir_name_id and file_name_id=:file_name_id;" ));
+  _pimpl->insert_file_cmd.reset( new sqlite3_command( _pimpl->con, "insert into files (dir_name_id,file_name_id) values (:dir_name_id,:file_name_id);" ));
 
+  _pimpl->insert_dependency_entry_cmd.reset( new sqlite3_command( _pimpl->con, "insert into capabilities ( resolvable_id, dependency_type, refers_kind ) values ( :resolvable_id, :dependency_type, :refers_kind );" ));
+  _pimpl->append_file_dependency_cmd.reset( new sqlite3_command( _pimpl->con, "insert into file_capabilities ( dependency_id, file_id ) values ( :dependency_id, :file_id );" ));
+  _pimpl->append_named_dependency_cmd.reset( new sqlite3_command( _pimpl->con, "insert into named_capabilities ( dependency_id, name_id ) values ( :dependency_id, :name_id );" ));
+  _pimpl->append_versioned_dependency_cmd.reset( new sqlite3_command( _pimpl->con, "insert into versioned_capabilities ( dependency_id, name_id, version, release, epoch, relation ) values ( :dependency_id, :name_id, :version, :release, :epoch, :relation );" ));
+  
+  _pimpl->append_resolvable_cmd.reset( new sqlite3_command( _pimpl->con, "insert into resolvables ( name, version, release, epoch, arch, kind ) values ( :name, :version, :release, :epoch, :arch, :kind );" ));
+  
   // disable autocommit
   _pimpl->con.executenonquery("BEGIN;");
 }
@@ -90,18 +107,24 @@ CacheStore::CacheStore()
 CacheStore::~CacheStore()
 {
   _pimpl->con.executenonquery("COMMIT;");
-  delete _pimpl->select_name_cmd;
-  delete _pimpl->insert_name_cmd;
-  
-  delete _pimpl->select_dirname_cmd;
-  delete _pimpl->insert_dirname_cmd;
-  
-  delete _pimpl->select_filename_cmd;
-  delete _pimpl->insert_filename_cmd;
-
-  delete _pimpl->select_file_cmd;
-  delete _pimpl->insert_file_cmd;
-
+//   delete _pimpl->select_name_cmd;
+//   delete _pimpl->insert_name_cmd;
+//   
+//   delete _pimpl->select_dirname_cmd;
+//   delete _pimpl->insert_dirname_cmd;
+//   
+//   delete _pimpl->select_filename_cmd;
+//   delete _pimpl->insert_filename_cmd;
+// 
+//   delete _pimpl->select_file_cmd;
+//   delete _pimpl->insert_file_cmd;
+// 
+//   delete _pimpl->insert_dependency_entry_cmd;
+//   delete _pimpl->append_file_dependency_cmd;
+//   delete _pimpl->append_named_dependency_cmd;
+//   delete _pimpl->append_versioned_dependency_cmd;
+//   
+//   delete _pimpl->append_resolvable_cmd;
   //delete _pimpl->con;
 }
 
@@ -112,15 +135,14 @@ void CacheStore::consumePackage( const data::Package &package )
 
 data::RecordId CacheStore::appendResolvable( const Resolvable::Kind &kind, const NVRA &nvra, const data::Dependencies &deps )
 {
-  sqlite3_command cmd( _pimpl->con, "insert into resolvables ( name, version, release, epoch, arch, kind ) values ( :name, :version, :release, :epoch, :arch, :kind );" );
-  cmd.bind( ":name", nvra.name );
-  cmd.bind( ":version", nvra.edition.version() );
-  cmd.bind( ":release", nvra.edition.release() );
-  cmd.bind( ":epoch", static_cast<int>( nvra.edition.epoch() ) );
-  cmd.bind( ":arch", zypp_arch2db_arch(nvra.arch) );
-  cmd.bind( ":kind", zypp_kind2db_kind(kind) );
+  _pimpl->append_resolvable_cmd->bind( ":name", nvra.name );
+  _pimpl->append_resolvable_cmd->bind( ":version", nvra.edition.version() );
+  _pimpl->append_resolvable_cmd->bind( ":release", nvra.edition.release() );
+  _pimpl->append_resolvable_cmd->bind( ":epoch", static_cast<int>( nvra.edition.epoch() ) );
+  _pimpl->append_resolvable_cmd->bind( ":arch", zypp_arch2db_arch(nvra.arch) );
+  _pimpl->append_resolvable_cmd->bind( ":kind", zypp_kind2db_kind(kind) );
   
-  cmd.executenonquery();
+  _pimpl->append_resolvable_cmd->executenonquery();
 
   long long id = _pimpl->con.insertid();
   
@@ -132,21 +154,15 @@ data::RecordId CacheStore::appendResolvable( const Resolvable::Kind &kind, const
 
 void CacheStore::appendDependencies( const data::RecordId &resolvable_id, const data::Dependencies &deps )
 {
-  appendDependencyList( resolvable_id, Dep::PROVIDES, deps.provides );
-  appendDependencyList( resolvable_id, Dep::CONFLICTS, deps.conflicts );
-  appendDependencyList( resolvable_id, Dep::OBSOLETES, deps.obsoletes );
-  appendDependencyList( resolvable_id, Dep::FRESHENS, deps.freshens );
-  appendDependencyList( resolvable_id, Dep::REQUIRES, deps.requires );
-  appendDependencyList( resolvable_id, Dep::PREREQUIRES, deps.prerequires );
-  appendDependencyList( resolvable_id, Dep::RECOMMENDS, deps.recommends );
-  appendDependencyList( resolvable_id, Dep::SUGGESTS, deps.suggests );
-  appendDependencyList( resolvable_id, Dep::SUPPLEMENTS, deps.supplements );
-  appendDependencyList( resolvable_id, Dep::ENHANCES, deps.enhances );
+  for ( data::Dependencies::const_iterator it = deps.begin(); it != deps.end(); ++it )
+  {
+    appendDependencyList( resolvable_id, it->first, it->second );
+  }
 }
 
-void CacheStore::appendDependencyList( const data::RecordId &resolvable_id, zypp::Dep deptype, const std::list<capability::CapabilityImpl::Ptr> &caps )
+void CacheStore::appendDependencyList( const data::RecordId &resolvable_id, zypp::Dep deptype, const data::DependencyList &caps )
 {
-  for ( std::list<capability::CapabilityImpl::Ptr>::const_iterator it = caps.begin(); it != caps.end(); ++it )
+  for ( data::DependencyList::const_iterator it = caps.begin(); it != caps.end(); ++it )
   {
     appendDependency( resolvable_id, deptype, *it );
   }
@@ -169,8 +185,7 @@ void CacheStore::appendDependency( const data::RecordId &resolvable_id, zypp::De
   
   if ( capability::isKind<FileCap>(cap) )
   {
-    //appendNamedDependency( resolvable_id, deptype, capability::asKind<NamedCap>(cap) );
-    DBG << "FileCap insert not yet implemented" << endl;
+    appendFileDependency( resolvable_id, deptype, capability::asKind<FileCap>(cap) );
     return;
   }
   else if ( capability::isKind<NamedCap>(cap) )
@@ -193,22 +208,20 @@ void CacheStore::appendVersionedDependency( const data::RecordId &resolvable_id,
 {
   if ( !cap )
     ZYPP_THROW(Exception("bad versioned dep"));
-  DBG << "versioned : " << cap << endl;
-
-  sqlite3_command cmd( _pimpl->con, "insert into versioned_capabilities ( dependency_id, name_id, version, release, epoch, relation ) values ( :dependency_id, :name_id, :version, :release, :epoch, :relation );" );
-  
+  //DBG << "versioned : " << cap << endl;
+ 
   data::RecordId dependency_id = appendDependencyEntry( resolvable_id, deptype, cap->refers() );
-  data::RecordId name_id = lookupOrAppendName(cap->index());
+  data::RecordId name_id = lookupOrAppendName(cap->name());
   
-  cmd.bind( ":dependency_id", dependency_id);
-  cmd.bind( ":name_id", name_id);
+  _pimpl->append_versioned_dependency_cmd->bind( ":dependency_id", dependency_id);
+  _pimpl->append_versioned_dependency_cmd->bind( ":name_id", name_id);
   
-  cmd.bind( ":version", cap->edition().version() );
-  cmd.bind( ":release", cap->edition().release() );
-  cmd.bind( ":epoch", static_cast<int>( cap->edition().epoch() ) );
-  cmd.bind( ":relation", zypp_rel2db_rel( cap->op() ) );
+  _pimpl->append_versioned_dependency_cmd->bind( ":version", cap->edition().version() );
+  _pimpl->append_versioned_dependency_cmd->bind( ":release", cap->edition().release() );
+  _pimpl->append_versioned_dependency_cmd->bind( ":epoch", static_cast<int>( cap->edition().epoch() ) );
+  _pimpl->append_versioned_dependency_cmd->bind( ":relation", zypp_rel2db_rel( cap->op() ) );
   
-  cmd.executenonquery();
+  _pimpl->append_versioned_dependency_cmd->executenonquery();
   //delete cmd;
 }
 
@@ -217,23 +230,35 @@ void CacheStore::appendNamedDependency( const data::RecordId &resolvable_id, zyp
   if ( !cap )
     ZYPP_THROW(Exception("bad named cap"));
 
-  sqlite3_command cmd( _pimpl->con, "insert into named_capabilities ( dependency_id, name_id ) values ( :dependency_id, :name_id );" );
-  
   data::RecordId dependency_id = appendDependencyEntry( resolvable_id, deptype, cap->refers() );
   data::RecordId name_id = lookupOrAppendName(cap->index());
   
-  cmd.bind( ":dependency_id", dependency_id);
-  cmd.bind( ":name_id", name_id);
+  _pimpl->append_named_dependency_cmd->bind( ":dependency_id", dependency_id);
+  _pimpl->append_named_dependency_cmd->bind( ":name_id", name_id);
 
-  cmd.executenonquery();
+  _pimpl->append_named_dependency_cmd->executenonquery();
+  //delete cmd;
+}
+
+void CacheStore::appendFileDependency( const data::RecordId &resolvable_id, zypp::Dep deptype, capability::FileCap::Ptr cap )
+{
+  if ( !cap )
+    ZYPP_THROW(Exception("bad file cap"));
+
+  data::RecordId dependency_id = appendDependencyEntry( resolvable_id, deptype, cap->refers() );
+  data::RecordId file_id = lookupOrAppendFile(cap->filename());
+  
+  _pimpl->append_file_dependency_cmd->bind( ":dependency_id", dependency_id);
+  _pimpl->append_file_dependency_cmd->bind( ":file_id", file_id);
+
+  _pimpl->append_file_dependency_cmd->executenonquery();
   //delete cmd;
 }
 
 data::RecordId CacheStore::appendDependencyEntry( const data::RecordId &resolvable_id, zypp::Dep deptype, const Resolvable::Kind &refers )
 {
   //DBG << "rid: " << resolvable_id << " deptype: " << deptype << " " << "refers: " << refers << endl;
-  sqlite3_command cmd( _pimpl->con, "insert into capabilities ( resolvable_id, dependency_type, refers_kind ) values ( :resolvable_id, :dependency_type, :refers_kind );" );
-  cmd.bind( ":resolvable_id", resolvable_id );
+  _pimpl->insert_dependency_entry_cmd->bind( ":resolvable_id", resolvable_id );
   
   db::DependencyType dt = zypp_deptype2db_deptype(deptype);
   if ( dt == db::DEP_TYPE_UNKNOWN )
@@ -241,10 +266,10 @@ data::RecordId CacheStore::appendDependencyEntry( const data::RecordId &resolvab
     ZYPP_THROW(Exception("Unknown depenency type"));
   }
 
-  cmd.bind( ":dependency_type", zypp_deptype2db_deptype(deptype) );
-  cmd.bind( ":refers_kind", zypp_kind2db_kind(refers) );
+  _pimpl->insert_dependency_entry_cmd->bind( ":dependency_type", zypp_deptype2db_deptype(deptype) );
+  _pimpl->insert_dependency_entry_cmd->bind( ":refers_kind", zypp_kind2db_kind(refers) );
   
-  cmd.executenonquery();
+  _pimpl->insert_dependency_entry_cmd->executenonquery();
   //delete cmd;
 }
 

@@ -446,7 +446,6 @@ INSTALL(  FILES
 )
 
 SET( zypp_parser_taggedfile_SRCS
-  parser/taggedfile/Rep.cc
   parser/taggedfile/TagCacheRetrieval.cc
   parser/taggedfile/TaggedFile.cc
   parser/taggedfile/TaggedParser.cc
@@ -455,11 +454,9 @@ SET( zypp_parser_taggedfile_SRCS
 )
 
 SET( zypp_parser_taggedfile_HEADERS
-  parser/taggedfile/RepDef.h
   parser/taggedfile/TagCacheRetrieval.h
   parser/taggedfile/TaggedFile.h
   parser/taggedfile/TagParser.h
-  parser/taggedfile/Rep.h
   parser/taggedfile/TagCacheRetrievalPtr.h
   parser/taggedfile/TaggedParser.h
   parser/taggedfile/TagRetrievalPos.h
