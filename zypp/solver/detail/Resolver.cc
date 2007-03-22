@@ -136,7 +136,7 @@ Resolver::pool (void) const
 }
 
 void
-Resolver::reset (void)
+Resolver::reset (const bool resetValidResults)
 {
     _verifying = false;
 
@@ -160,6 +160,9 @@ Resolver::reset (void)
 
     _best_context = NULL;
     _timed_out = false;
+
+    if (resetValidResults)
+	contextPool.reset();
     
 }
 

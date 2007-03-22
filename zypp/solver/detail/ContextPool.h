@@ -112,6 +112,13 @@ class ContextPool : public base::ReferenceCounted, private base::NonCopyable {
     ResolverContext_Ptr findContext (PoolItemList & installItems,
 				     PoolItemList & deleteItems,
 				     const PoolItemList & lockUninstalledItems);
+
+    /** 
+     * Delete all sucessful solver run.
+     *
+     * */         
+    void reset () { contextList.clear(); }
+    
 };
 ///////////////////////////////////////////////////////////////////
     };// namespace detail

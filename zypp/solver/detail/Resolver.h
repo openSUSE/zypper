@@ -238,7 +238,7 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
     void undo(void);
 
     // only for testsuite
-    void reset (void);
+    void reset (const bool resetValidResults = false);
 
     Arch architecture() const { return _architecture; }
     void setArchitecture( const Arch & arch) { _architecture = arch; }
