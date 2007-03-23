@@ -175,12 +175,9 @@ namespace zypp
               && (dep == Dep::REQUIRES
                   || vercap->edition() != Edition::noedition ) )
           {
-            return vercap->index().erase( 0, 7 );	// erase "kernel-"
+	    std::string s = vercap->name();
+	    return s.erase(0,7); // erase "kernel-"
           }
-        }
-        else
-        {
-          ERR << *it << " is not a VersionedCap" << std::endl;
         }
       }
       return "";
@@ -214,11 +211,8 @@ namespace zypp
 	     && idx.find( ":" ) == std::string::npos )	//  without a colon
 	{
            capability::VersionedCap::constPtr vercap = capability::asKind<capability::VersionedCap>(*it);
-          if ( vercap )
-           
-            deps[dep].insert( factory.parse( vercap->refers(), idx.insert( 7, flavor ), vercap->op(), vercap->edition() ) );
-          else
-            ERR << *it << " is not a VersionedCap" << std::endl;
+          if ( vercap )           
+	      deps[dep].insert( factory.parse( vercap->refers(), idx.insert( 7, flavor ), vercap->op(), vercap->edition() ) );
 	}
 	else {
 	  deps[dep].insert( *it );
