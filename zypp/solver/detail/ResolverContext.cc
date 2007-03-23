@@ -435,8 +435,10 @@ ResolverContext::uninstall (PoolItem_Ref item, bool part_of_upgrade, bool due_to
     if ( ( (forceResolve() // This is the behaviour of ZMD
 	    || upgradeMode())
 	  && (status.isToBeInstalledNotSoft()             // \ The resolvable will be installed
-	      || item.status().isToBeInstalledNotSoft())) // / explicit. (And not by WEAK dependencies like supplements)
-	 
+	      || item.status().isToBeInstalledNotSoft()   // / explicit. (And not by WEAK dependencies like supplements)
+	      || (item.status().isKept() && item.status().isByUser()) // or is kept by user
+	      )
+	 )
 	 || ( (!forceResolve() // This is the bahaviour of YaST
 	       && !upgradeMode())
 	      && ((status.staysInstalled() || status.isToBeInstalledNotSoft())                   //   \ We will have the resolvable
