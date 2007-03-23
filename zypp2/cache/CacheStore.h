@@ -32,11 +32,11 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
   namespace cache
   { /////////////////////////////////////////////////////////////////
-
+        
     /**
      * The cache store caches resolvable data into some backend.
     */
-    class CacheStore : public data::ResolvableDataConsumer
+    class CacheStore
     {
     public:
       

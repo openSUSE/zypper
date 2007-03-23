@@ -25,6 +25,7 @@ SET( zypp2_HEADERS
 
 SET( zypp2_cache_SRCS
   cache/CacheInitializer.cpp
+  cache/CacheQuery.cc
   cache/CacheStore.cpp
   cache/Utils.cpp
 )
@@ -33,6 +34,7 @@ SET( zypp2_cache_HEADERS
   cache/CacheCommon.h
   cache/CacheInitializer.h
   cache/CacheStore.h
+  cache/CacheQuery.h
   cache/Utils.h
 )
 
@@ -60,6 +62,14 @@ SET( zypp2_cache_sqlite3x_HEADERS
 
 SET( zypp2_source_SRCS
   source/dummy.cc
+)
+
+SET( zypp2_source_cached_SRCS
+  source/cached/CachedSourceImpl.cc
+)
+
+SET( zypp2_source_cached_HEADERS
+  source/cached/CachedSourceImpl.h
 )
 
 SET( zypp2_source_sqlite-source_SRCS
@@ -102,6 +112,7 @@ ${zypp2_source_SRCS}
 ${zypp2_SRCS}
 ${zypp2_cache_SRCS}
 #${zypp2_source_sqlite-source_SRCS}
+${zypp2_source_cached_SRCS}
 ${zypp2_cache_sqlite3x_SRCS}
 )
 
