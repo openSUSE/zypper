@@ -332,12 +332,14 @@ CREATE TABLE named_capabilities (
   , dependency_id INTEGER REFERENCES capabilities (id)
   , name_id INTEGER REFERENCES names(id)
 );
+CREATE INDEX named_capabilities_dependency_id ON named_capabilities (dependency_id);
 
 CREATE TABLE file_capabilities (
    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL 
   , dependency_id INTEGER REFERENCES capabilities (id)
   , file_id INTEGER REFERENCES files(id)
 );
+CREATE INDEX file_capabilities_dependency_id ON file_capabilities (dependency_id);
 
 CREATE TABLE split_capabilities (
    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL 
