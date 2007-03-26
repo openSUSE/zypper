@@ -31,6 +31,7 @@ DROP TABLE IF EXISTS locks;
 DROP TABLE IF EXISTS files;
 DROP TABLE IF EXISTS file_names;
 DROP TABLE IF EXISTS file_capabilities;
+DROP TABLE IF EXISTS split_capabilities;
 DROP TABLE IF EXISTS dir_names;
 DROP TABLE IF EXISTS delta_packages;
 DROP TABLE IF EXISTS db_info;
@@ -38,6 +39,7 @@ DROP TABLE IF EXISTS catalogs;
 DROP TABLE IF EXISTS capabilities;
 DROP INDEX IF EXISTS package_details_resolvable_id;
 DROP INDEX IF EXISTS capability_resolvable;
+DROP INDEX IF EXISTS versioned_capabilities_dependency_id;
 
 ------------------------------------------------
 -- version metadata, probably not needed, there
@@ -254,7 +256,6 @@ CREATE VIEW scripts AS
 
 CREATE TABLE delta_packages (
     id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL
-  , package_id INTEGER REFERENCES packages(id)
   , media_nr INTEGER
   , location TEXT
   , checksum TEXT
@@ -271,7 +272,6 @@ CREATE TABLE delta_packages (
 
 CREATE TABLE patch_packages (
     id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL
-  , package_id INTEGER REFERENCES packages(id)
   , media_nr INTEGER
   , location TEXT
   , checksum TEXT
@@ -325,6 +325,7 @@ CREATE TABLE versioned_capabilities (
   , epoch INTEGER
   , relation INTEGER
 );
+CREATE INDEX versioned_capabilities_dependency_id ON versioned_capabilities (dependency_id);
 
 CREATE TABLE named_capabilities (
    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL 

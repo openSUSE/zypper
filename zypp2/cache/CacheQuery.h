@@ -34,15 +34,54 @@ namespace zypp
   namespace cache
   { /////////////////////////////////////////////////////////////////
  
+   /**
+    * Allows to iterate around the capabilities in
+    * the cache.
+    * Use \ref CacheQuery to create this query.
+    *
+    * \code
+    * CacheQuery query(dbdir);
+    * CapabilityQuery capquery = query.createCapabilityQuery( zypp::Dep::REQUIRES, 1 );
+    * cout << capquery.value() << endl;
+    * while ( capquery.read() )
+    * {
+    *   // value is a CapablityImpl::Ptr
+    *   cout << capquery.value() << endl;
+    * }
+    * \endcode
+    */
     struct CapabilityQuery
     {
     public:
-      class Impl;
-      CapabilityQuery( Impl * );
+     /**
+      * reads the next item for the query
+      * returns false if there are no
+      * more results
+      */
       bool read();
+      /**
+      * true if the last \ref read()
+      * had a new result
+      */
       bool valid() const;
-    private:
+      /**
+      * Return a \ref CapabilityImpl::Ptr
+      * from the current result.
+      */
+      capability::CapabilityImpl::Ptr value();
+      
       /** Implementation. */
+      class Impl;
+     /**
+      * Constructor
+      */
+      CapabilityQuery( Impl *impl );
+     /**
+      * Destructor
+      */
+      ~CapabilityQuery();
+    private:
+      
       /** Pointer to implementation. */
       RW_pointer<Impl> _pimpl;
     };
@@ -53,12 +92,12 @@ namespace zypp
     class CacheQuery
     {
     public:
+       /** Implementation. */
+      class Impl;
       CacheQuery( const Pathname &dbdir );
       ~CacheQuery();
-      CapabilityQuery createCapabilityQuery();
+      CapabilityQuery createCapabilityQuery( const zypp::Dep &deptype, const data::RecordId &id  );
     private:
-      /** Implementation. */
-      class Impl;
       /** Pointer to implementation. */
       RW_pointer<Impl> _pimpl;
     };
@@ -66,3 +105,4 @@ namespace zypp
   } // ns cache
 } // ns zypp
 #endif
+

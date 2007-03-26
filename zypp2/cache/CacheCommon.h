@@ -23,7 +23,6 @@ namespace zypp
 {
 namespace cache
 {
-
 namespace db
 {
   

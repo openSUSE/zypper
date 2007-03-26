@@ -271,6 +271,8 @@ data::RecordId CacheStore::appendDependencyEntry( const data::RecordId &resolvab
   
   _pimpl->insert_dependency_entry_cmd->executenonquery();
   //delete cmd;
+  long long id = _pimpl->con.insertid();
+  return static_cast<data::RecordId>(id);
 }
 
 data::RecordId CacheStore::lookupOrAppendFile( const Pathname &path )

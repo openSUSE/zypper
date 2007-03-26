@@ -27,13 +27,11 @@ namespace zypp
   namespace cache
   { /////////////////////////////////////////////////////////////////
 
-    DEFINE_PTR_TYPE(CacheInitializer);
-
     ///////////////////////////////////////////////////////////////////
     //
     //	CLASS NAME : CacheInitializer
     //
-    class CacheInitializer : public base::ReferenceCounted, private base::NonCopyable
+    class CacheInitializer
     {
       friend std::ostream & operator<<( std::ostream & str, const CacheInitializer & obj );
 

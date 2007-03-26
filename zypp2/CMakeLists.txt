@@ -28,6 +28,7 @@ SET( zypp2_cache_SRCS
   cache/CacheQuery.cc
   cache/CacheStore.cpp
   cache/Utils.cpp
+  cache/DatabaseTypes.cc
 )
 
 SET( zypp2_cache_HEADERS
@@ -36,6 +37,7 @@ SET( zypp2_cache_HEADERS
   cache/CacheStore.h
   cache/CacheQuery.h
   cache/Utils.h
+  cache/DatabaseTypes.h
 )
 
 #INSTALL(  FILES
