@@ -7,17 +7,11 @@
 |                                                                      |
 \---------------------------------------------------------------------*/
 
-#include <sqlite3.h>
-#include "zypp2/cache/sqlite3x/sqlite3x.hpp"
 
 #include "zypp/base/Logger.h"
 
 #include "zypp2/cache/DatabaseTypes.h"
 #include "zypp2/cache/CacheInitializer.h"
-#include "zypp2/cache/CacheQuery.h"
-
-#include "zypp2/cache/sqlite_detail/CacheSqlite.h"
-#include "zypp2/cache/sqlite_detail/CacheQueryImpl.h"
 #include "zypp2/cache/sqlite_detail/CapabilityQueryImpl.h"
 
 using namespace std;
@@ -29,23 +23,21 @@ using namespace sqlite3x;
 namespace zypp { namespace cache {
 
 ///////////////////////////////////////////////////////////////
-// CACHE QUERY                                              //
+// CAPABILITY QUERY                                         //
 //////////////////////////////////////////////////////////////
 
-CacheQuery::CacheQuery( const Pathname &dbdir )
-    : _pimpl( new Impl(dbdir) )
+CapabilityQuery::Impl::Impl( DatabaseContext_Ptr p_context, const data::RecordId &resolvable_id  )
+  : context(p_context), _resolvable_id(resolvable_id)
+    , _vercap_read(false), _namedcap_read(false), _filecap_read(false)
+    , _vercap_done(false), _namedcap_done(false), _filecap_done(false)
+{}
+
+CapabilityQuery::Impl::~Impl()
 {
+  MIL << endl;
 }
 
-CapabilityQuery CacheQuery::createCapabilityQuery( const data::RecordId &resolvable_id  )
-{
-  return CapabilityQuery( new CapabilityQuery::Impl( _pimpl->context, resolvable_id) );
-}
 
-CacheQuery::~CacheQuery()
-{
-}
-
-} } // ns zypp::cache
-
+} // ns cache
+} //ns zypp
 

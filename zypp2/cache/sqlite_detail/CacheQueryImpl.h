@@ -7,9 +7,8 @@
 |                                                                      |
 \---------------------------------------------------------------------*/
 
-
-#ifndef ZYPP_CACHE_QUERY_H
-#define ZYPP_CACHE_QUERY_H
+#ifndef ZYPP_CACHE_QUERY_IMPL_H
+#define ZYPP_CACHE_QUERY_IMPL_H
 
 #include <iosfwd>
 #include <string>
@@ -22,7 +21,7 @@
 #include "zypp/data/RecordId.h"
 #include "zypp/base/PtrTypes.h"
 
-#include "zypp2/cache/CapabilityQuery.h"
+#include "zypp2/cache/CacheQuery.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -30,24 +29,21 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
   namespace cache
   { /////////////////////////////////////////////////////////////////
-     
-    /**
-     * The Cache Query API provides access to the store data
-    */
-    class CacheQuery
+
+  ///////////////////////////////////////////////////////////////
+  // CACHE QUERY                                              //
+  //////////////////////////////////////////////////////////////
+
+    struct CacheQuery::Impl
     {
-    public:
-       /** Implementation. */
-      class Impl;
-      CacheQuery( const Pathname &dbdir );
-      ~CacheQuery();
-      CapabilityQuery createCapabilityQuery( const data::RecordId &id  );
-    private:
-      /** Pointer to implementation. */
-      RW_pointer<Impl> _pimpl;
+      Impl( const zypp::Pathname &pdbdir );
+      ~Impl();
+      
+      DatabaseContext_Ptr context;
     };
-    
+
   } // ns cache
 } // ns zypp
+
 #endif
 

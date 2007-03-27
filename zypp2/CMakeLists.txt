@@ -26,6 +26,9 @@ SET( zypp2_HEADERS
 SET( zypp2_cache_SRCS
   cache/CacheInitializer.cpp
   cache/CacheQuery.cc
+  cache/CapabilityQuery.cc
+  cache/sqlite_detail/CapabilityQueryImpl.cc
+  cache/sqlite_detail/CacheQueryImpl.cc
   cache/CacheStore.cpp
   cache/Utils.cpp
   cache/DatabaseTypes.cc
@@ -35,6 +38,7 @@ SET( zypp2_cache_HEADERS
   cache/CacheCommon.h
   cache/CacheInitializer.h
   cache/CacheStore.h
+  cache/CapablityQuery.h
   cache/CacheQuery.h
   cache/Utils.h
   cache/DatabaseTypes.h

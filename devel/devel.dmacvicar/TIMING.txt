@@ -9,3 +9,8 @@ after change 1
 
 
 2007-03-09 16:49:03 <5> piscola(19367) [Measure] /space/sources/zypp/trunk/libzypp/zypp/base/Measure.cc(~Impl):160 MEASURE(Parse) 36 (u 29.82 s 5.51 c 0.00) [0 (u 0.00 s 0.00 c 0.00)]
+
+Read 19.000 package capabilities:
+real    0m48.739s
+user    0m9.449s
+sys     0m2.716s
