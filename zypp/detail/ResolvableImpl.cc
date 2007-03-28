@@ -161,23 +161,21 @@ namespace zypp
 
     std::string findKernelFlavor( const CapSet & cset, const Dep & dep )
     {
-      for (CapSet::iterator it = cset.begin(); it != cset.end(); ++it) {
-
+      for ( CapSet::iterator it = cset.begin(); it != cset.end(); ++it )
+      {
 	// check for "kernel-" in deps
 	// if its a requires, take it as is
 	// if its a provides, check for non-empty edition since
 	//   kernels provide "kernel-flavor-nongpl" (empty edition)
 	//     and "kernel-flavor = x.y" (non-empty edition)
-	if ( it->index().substr( 0, 7 ) == "kernel-" )
+	capability::NamedCap::constPtr cap = capability::asKind<capability::NamedCap>(*it);
+	if ( cap
+	     && cap->name().substr( 0, 7 ) == "kernel-"
+	     && ( dep == Dep::REQUIRES || cap->edition() != Edition::noedition ) )
 	{
-	  capability::VersionedCap::constPtr vercap = capability::asKind<capability::VersionedCap>(*it);
-	  if ( vercap && (dep == Dep::REQUIRES
-			  || vercap->edition() != Edition::noedition ) )
-          {
-	    std::string s = vercap->name();
-	    return s.erase(0,7); // erase "kernel-"
-          }
-        }
+	  std::string s( cap->name() );
+	  return s.erase(0,7); // erase "kernel-"
+	}
       }
       return "";
     }

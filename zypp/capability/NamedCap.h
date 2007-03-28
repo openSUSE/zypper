@@ -22,7 +22,7 @@ namespace zypp
   { /////////////////////////////////////////////////////////////////
 
     DEFINE_PTR_TYPE(NamedCap)
-    
+
     ///////////////////////////////////////////////////////////////////
     //
     //	CLASS NAME : NamedCap
@@ -52,13 +52,18 @@ namespace zypp
 
       /** Name. */
       virtual std::string encode() const;
-      
-      /**  */
+
+      /** The name. */
       const std::string & name() const
       { return _name; }
-      
+      /** The operator (defaults to Rel::NONE) */
+      virtual Rel op() const
+      { return Rel::NONE; }
+      /** The edition (defaults to Edition::noedition) */
+      virtual Edition edition() const
+      { return Edition::noedition; }
+
     protected:
-      
       /**  Rel::ANY. */
       virtual const Edition::MatchRange & range() const;
 
