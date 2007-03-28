@@ -117,7 +117,7 @@ namespace zypp
     {
       CapSet provides;
       CapSet languages;
-      
+
       FilterExtraDependency flp( to, languages );
 
       std::remove_copy_if( from[Dep::PROVIDES].begin(), from[Dep::PROVIDES].end(),
@@ -137,8 +137,8 @@ namespace zypp
     void filterExtraSupplements( const Dependencies & from, Dependencies & to )
     {
       CapSet supplements;
-      CapSet dummy;      
-      to[Dep::SUPPLEMENTS].clear(); 
+      CapSet dummy;
+      to[Dep::SUPPLEMENTS].clear();
 
       FilterExtraDependency flp( to, dummy );
 
@@ -168,12 +168,11 @@ namespace zypp
 	// if its a provides, check for non-empty edition since
 	//   kernels provide "kernel-flavor-nongpl" (empty edition)
 	//     and "kernel-flavor = x.y" (non-empty edition)
-        capability::VersionedCap::constPtr vercap = capability::asKind<capability::VersionedCap>(*it);
-        if ( vercap ) {
-          
-          if ( vercap->index().substr( 0, 7 ) == "kernel-"
-              && (dep == Dep::REQUIRES
-                  || vercap->edition() != Edition::noedition ) )
+	if ( it->index().substr( 0, 7 ) == "kernel-" )
+	{
+	  capability::VersionedCap::constPtr vercap = capability::asKind<capability::VersionedCap>(*it);
+	  if ( dep == Dep::REQUIRES
+	       || ( vercap && vercap->edition() != Edition::noedition ) )
           {
 	    std::string s = vercap->name();
 	    return s.erase(0,7); // erase "kernel-"
@@ -211,7 +210,7 @@ namespace zypp
 	     && idx.find( ":" ) == std::string::npos )	//  without a colon
 	{
            capability::VersionedCap::constPtr vercap = capability::asKind<capability::VersionedCap>(*it);
-          if ( vercap )           
+          if ( vercap )
 	      deps[dep].insert( factory.parse( vercap->refers(), idx.insert( 7, flavor ), vercap->op(), vercap->edition() ) );
 	}
 	else {
@@ -263,7 +262,7 @@ namespace zypp
     // check for kernel(xxx) and rewrite them to kernel(flavor:xxx)
     if ( _kind == ResTraits<Package>::kind )
       {
-	rewriteKernelDeps( _deps );   
+	rewriteKernelDeps( _deps );
       }
 
     // assert all prerequires are in requires too
