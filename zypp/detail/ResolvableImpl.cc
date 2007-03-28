@@ -171,8 +171,8 @@ namespace zypp
 	if ( it->index().substr( 0, 7 ) == "kernel-" )
 	{
 	  capability::VersionedCap::constPtr vercap = capability::asKind<capability::VersionedCap>(*it);
-	  if ( dep == Dep::REQUIRES
-	       || ( vercap && vercap->edition() != Edition::noedition ) )
+	  if ( vercap && (dep == Dep::REQUIRES
+			  || vercap->edition() != Edition::noedition ) )
           {
 	    std::string s = vercap->name();
 	    return s.erase(0,7); // erase "kernel-"
