@@ -176,7 +176,12 @@ namespace zypp
   CapFactory::~CapFactory()
   {}
 
-  Capability fromImpl( capability::CapabilityImpl::Ptr impl ) const
+  ///////////////////////////////////////////////////////////////////
+  //
+  //	METHOD NAME : CapFactory::fromImpl
+  //	METHOD TYPE : Capability
+  //
+  Capability CapFactory::fromImpl( capability::CapabilityImpl::Ptr impl ) const
   try
   {
     return Capability( usetInsert( impl ) );
