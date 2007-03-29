@@ -176,6 +176,17 @@ namespace zypp
   CapFactory::~CapFactory()
   {}
 
+  Capability fromImpl( capability::CapabilityImpl::Ptr impl ) const
+  try
+  {
+    return Capability( usetInsert( impl ) );
+  }
+  catch ( Exception & excpt )
+  {
+    ZYPP_RETHROW( excpt );
+    return Capability(); // not reached
+  }
+  
   ///////////////////////////////////////////////////////////////////
   //
   //	METHOD NAME : CapFactory::parse

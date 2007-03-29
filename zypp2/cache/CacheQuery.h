@@ -39,6 +39,7 @@ namespace zypp
     public:
        /** Implementation. */
       class Impl;
+      CacheQuery( Impl * );
       CacheQuery( const Pathname &dbdir );
       ~CacheQuery();
       CapabilityQuery createCapabilityQuery( const data::RecordId &id  );

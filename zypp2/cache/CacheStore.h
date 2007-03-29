@@ -146,7 +146,7 @@ namespace zypp
        *
        * FIXME should it \throw if the resolvable does not exist?
        */
-      void appendVersionedDependency( const data::RecordId &, zypp::Dep, capability::VersionedCap::Ptr);
+      //void appendVersionedDependency( const data::RecordId &, zypp::Dep, capability::VersionedCap::Ptr);
       
       /**
        * Adds a Named dependency to the store.

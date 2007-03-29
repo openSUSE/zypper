@@ -22,6 +22,8 @@
 #include "zypp/base/PtrTypes.h"
 
 #include "zypp2/cache/CacheQuery.h"
+#include "zypp2/cache/sqlite_detail/CacheSqlite.h"
+#include "zypp2/cache/sqlite3x/sqlite3x.hpp"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -37,8 +39,9 @@ namespace zypp
     struct CacheQuery::Impl
     {
       Impl( const zypp::Pathname &pdbdir );
+      Impl(  const Pathname &pdbdir, sqlite3x::sqlite3_connection_ptr con );
       ~Impl();
-      
+      void initCommands();
       DatabaseContext_Ptr context;
     };
 

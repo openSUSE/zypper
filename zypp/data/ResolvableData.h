@@ -233,6 +233,36 @@ namespace data
       Pathname location;
   };
   
+  
+ template<class _Res> class SpecificData;
+ 
+ template<> class SpecificData<Package>
+ {
+   public:
+    std::string type;
+    CheckSum checksum;
+      // changlelog?
+    std::string buildhost;
+    std::string distribution;
+    std::string license;
+    std::string packager;
+    std::string group;
+    Url url;
+    std::string os;
+      
+    std::string prein;
+    std::string postin;
+    std::string preun;
+    std::string postun;
+      
+    ByteCount source_size;
+      
+    std::list<std::string> authors;
+    std::list<std::string> keywords;
+      
+    Pathname location;
+ };
+  
   /* Easy output */
 //   std::ostream& operator<<(std::ostream &out, const Dependency& data);
    std::ostream& operator<<(std::ostream &out, const ResObject& data);

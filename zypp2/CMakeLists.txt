@@ -27,6 +27,7 @@ SET( zypp2_cache_SRCS
   cache/CacheInitializer.cpp
   cache/CacheQuery.cc
   cache/CapabilityQuery.cc
+  cache/CachedResolvableDataProvider.cc
   cache/sqlite_detail/CapabilityQueryImpl.cc
   cache/sqlite_detail/CacheQueryImpl.cc
   cache/CacheStore.cpp
@@ -42,6 +43,7 @@ SET( zypp2_cache_HEADERS
   cache/CacheQuery.h
   cache/Utils.h
   cache/DatabaseTypes.h
+  cache/CachedResolvableDataProvider.h
 )
 
 #INSTALL(  FILES
@@ -72,39 +74,12 @@ SET( zypp2_source_SRCS
 
 SET( zypp2_source_cached_SRCS
   source/cached/CachedSourceImpl.cc
+  source/cached/CachedSourcePackageImpl.cc
 )
 
 SET( zypp2_source_cached_HEADERS
   source/cached/CachedSourceImpl.h
-)
-
-SET( zypp2_source_sqlite-source_SRCS
-  source/sqlite-source/SqliteAccess.cc
-  source/sqlite-source/SqliteAtomImpl.cc
-  source/sqlite-source/SqliteLanguageImpl.cc
-  source/sqlite-source/SqliteMessageImpl.cc
-  source/sqlite-source/SqlitePackageImpl.cc
-  source/sqlite-source/SqlitePatchImpl.cc
-  source/sqlite-source/SqlitePatternImpl.cc
-  source/sqlite-source/SqliteProductImpl.cc
-  source/sqlite-source/SqliteScriptImpl.cc
-  source/sqlite-source/SqliteSourceImpl.cc
-  source/sqlite-source/SqliteSources.cc
-)
-
-SET( zypp2_source_sqlite-source_HEADERS
-  source/sqlite-source/SqliteAccess.h
-  source/sqlite-source/SqliteAtomImpl.h
-  source/sqlite-source/SqliteLanguageImpl.h
-  source/sqlite-source/SqliteMessageImpl.h
-  source/sqlite-source/SqlitePackageImpl.h
-  source/sqlite-source/SqlitePatchImpl.h
-  source/sqlite-source/SqlitePatternImpl.h
-  source/sqlite-source/SqliteProductImpl.h
-  source/sqlite-source/SqliteScriptImpl.h
-  source/sqlite-source/SqliteSourceImpl.h
-  source/sqlite-source/SqliteSources.h
-  source/sqlite-source/schema.h
+  source/cached/CachedSourcePackageImpl.h
 )
 
 #INSTALL(  FILES
@@ -117,7 +92,6 @@ SET( zypp2_lib_SRCS
 ${zypp2_source_SRCS}
 ${zypp2_SRCS}
 ${zypp2_cache_SRCS}
-#${zypp2_source_sqlite-source_SRCS}
 ${zypp2_source_cached_SRCS}
 ${zypp2_cache_sqlite3x_SRCS}
 )
@@ -126,7 +100,6 @@ SET( zypp2_lib_HEADERS
 ${zypp2_source_HEADERS}
 ${zypp2_HEADERS}
 ${zypp2_cache_HEADERS}
-#${zypp2_source_sqlite-source_HEADERS}
 ${zypp2_cache_sqlite3x_HEADERS}
 )
 

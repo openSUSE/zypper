@@ -48,7 +48,6 @@ struct CacheStore::Impl
   sqlite3_command_ptr insert_dependency_entry_cmd;
   
   sqlite3_command_ptr append_file_dependency_cmd;
-  sqlite3_command_ptr append_named_dependency_cmd;
   sqlite3_command_ptr append_versioned_dependency_cmd;
   
   sqlite3_command_ptr append_resolvable_cmd;
@@ -90,7 +89,6 @@ CacheStore::CacheStore( const Pathname &dbdir )
 
   _pimpl->insert_dependency_entry_cmd.reset( new sqlite3_command( _pimpl->con, "insert into capabilities ( resolvable_id, dependency_type, refers_kind ) values ( :resolvable_id, :dependency_type, :refers_kind );" ));
   _pimpl->append_file_dependency_cmd.reset( new sqlite3_command( _pimpl->con, "insert into file_capabilities ( dependency_id, file_id ) values ( :dependency_id, :file_id );" ));
-  _pimpl->append_named_dependency_cmd.reset( new sqlite3_command( _pimpl->con, "insert into named_capabilities ( dependency_id, name_id ) values ( :dependency_id, :name_id );" ));
   _pimpl->append_versioned_dependency_cmd.reset( new sqlite3_command( _pimpl->con, "insert into versioned_capabilities ( dependency_id, name_id, version, release, epoch, relation ) values ( :dependency_id, :name_id, :version, :release, :epoch, :relation );" ));
   
   _pimpl->append_resolvable_cmd.reset( new sqlite3_command( _pimpl->con, "insert into resolvables ( name, version, release, epoch, arch, kind ) values ( :name, :version, :release, :epoch, :arch, :kind );" ));
@@ -107,25 +105,6 @@ CacheStore::CacheStore()
 CacheStore::~CacheStore()
 {
   _pimpl->con.executenonquery("COMMIT;");
-//   delete _pimpl->select_name_cmd;
-//   delete _pimpl->insert_name_cmd;
-//   
-//   delete _pimpl->select_dirname_cmd;
-//   delete _pimpl->insert_dirname_cmd;
-//   
-//   delete _pimpl->select_filename_cmd;
-//   delete _pimpl->insert_filename_cmd;
-// 
-//   delete _pimpl->select_file_cmd;
-//   delete _pimpl->insert_file_cmd;
-// 
-//   delete _pimpl->insert_dependency_entry_cmd;
-//   delete _pimpl->append_file_dependency_cmd;
-//   delete _pimpl->append_named_dependency_cmd;
-//   delete _pimpl->append_versioned_dependency_cmd;
-//   
-//   delete _pimpl->append_resolvable_cmd;
-  //delete _pimpl->con;
 }
 
 void CacheStore::consumePackage( const data::Package &package )
@@ -190,21 +169,11 @@ void CacheStore::appendDependency( const data::RecordId &resolvable_id, zypp::De
   }
   else if ( capability::isKind<NamedCap>(cap) )
   {
-    VersionedCap::Ptr vcap = capability::asKind<VersionedCap>(cap);
-    if ( vcap )
-    {
-      appendVersionedDependency( resolvable_id, deptype, vcap );
-      return;
-    }
-    else
-    {
       appendNamedDependency( resolvable_id, deptype, capability::asKind<NamedCap>(cap) );
-      return;
-    } 
   }
 }
 
-void CacheStore::appendVersionedDependency( const data::RecordId &resolvable_id, zypp::Dep deptype, capability::VersionedCap::Ptr cap )
+void CacheStore::appendNamedDependency( const data::RecordId &resolvable_id, zypp::Dep deptype, capability::NamedCap::Ptr cap )
 {
   if ( !cap )
     ZYPP_THROW(Exception("bad versioned dep"));
@@ -222,21 +191,6 @@ void CacheStore::appendVersionedDependency( const data::RecordId &resolvable_id,
   _pimpl->append_versioned_dependency_cmd->bind( ":relation", zypp_rel2db_rel( cap->op() ) );
   
   _pimpl->append_versioned_dependency_cmd->executenonquery();
-  //delete cmd;
-}
-
-void CacheStore::appendNamedDependency( const data::RecordId &resolvable_id, zypp::Dep deptype, capability::NamedCap::Ptr cap )
-{
-  if ( !cap )
-    ZYPP_THROW(Exception("bad named cap"));
-
-  data::RecordId dependency_id = appendDependencyEntry( resolvable_id, deptype, cap->refers() );
-  data::RecordId name_id = lookupOrAppendName(cap->index());
-  
-  _pimpl->append_named_dependency_cmd->bind( ":dependency_id", dependency_id);
-  _pimpl->append_named_dependency_cmd->bind( ":name_id", name_id);
-
-  _pimpl->append_named_dependency_cmd->executenonquery();
   //delete cmd;
 }
 

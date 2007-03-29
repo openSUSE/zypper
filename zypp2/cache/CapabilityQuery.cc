@@ -37,9 +37,6 @@ CapabilityQuery::CapabilityQuery( Impl *impl)
     _pimpl->context->select_versionedcap_cmd->bind(":rid", _pimpl->_resolvable_id);
     _pimpl->_versioned_reader.reset( new sqlite3_reader(_pimpl->context->select_versionedcap_cmd->executereader()));
     
-    _pimpl->context->select_namedcap_cmd->bind(":rid", _pimpl->_resolvable_id);
-    _pimpl->_named_reader.reset( new sqlite3_reader(_pimpl->context->select_namedcap_cmd->executereader()));
-    
     _pimpl->context->select_filecap_cmd->bind(":rid", _pimpl->_resolvable_id);
     _pimpl->_file_reader.reset( new sqlite3_reader(_pimpl->context->select_filecap_cmd->executereader()));
     
@@ -66,23 +63,15 @@ bool CapabilityQuery::read()
     else
       _pimpl->_vercap_done = true;
   }
-        
-  if (!_pimpl->_namedcap_done)
+  
+  if (!_pimpl->_filecap_done)
   {
-    if ( _pimpl->_namedcap_read = _pimpl->_named_reader->read() )
+    if ( _pimpl->_filecap_read = _pimpl->_file_reader->read() )
       return true;
     else
-      _pimpl->_namedcap_done = true;
+      _pimpl->_filecap_done = true;
   }
-  
-//   if (!_pimpl->_filecap_done)
-//   {
-//     if ( _pimpl->_filecap_read = _pimpl->_file_reader->read() )
-//       return true;
-//     else
-//       _pimpl->_filecap_done = true;
-//   }
-  
+
   return false;
 }
   
@@ -90,10 +79,7 @@ bool CapabilityQuery::valid() const
 {
  if ( _pimpl->_vercap_read )
     return true;
-  
-  if ( _pimpl->_namedcap_read )
-    return true;
-  
+    
   if ( _pimpl->_filecap_read )
     return true;
   
@@ -106,16 +92,20 @@ std::pair<zypp::Dep, capability::CapabilityImpl::Ptr> CapabilityQuery::value()
   {
     Resolvable::Kind refer = db_kind2zypp_kind( static_cast<db::Kind>(_pimpl->_versioned_reader->getint(0)) );
     zypp::Rel rel = db_rel2zypp_rel( static_cast<db::Rel>(_pimpl->_versioned_reader->getint(5)) );
-    capability::VersionedCap *vcap = new capability::VersionedCap( refer, _pimpl->_versioned_reader->getstring(1), /* rel */ rel, Edition( _pimpl->_versioned_reader->getstring(2), _pimpl->_versioned_reader->getstring(3), _pimpl->_versioned_reader->getint(4) ) );
-    zypp::Dep deptype = db_deptype2zypp_deptype( static_cast<db::DependencyType>(_pimpl->_versioned_reader->getint(5)) );
-    return make_pair( deptype, capability::VersionedCap::Ptr(vcap) );
-  }
-  if ( _pimpl->_namedcap_read )
-  {
-    Resolvable::Kind refer = db_kind2zypp_kind( static_cast<db::Kind>(_pimpl->_named_reader->getint(0)) );
-    capability::NamedCap *ncap = new capability::NamedCap( refer, _pimpl->_named_reader->getstring(1) );
-    zypp::Dep deptype = db_deptype2zypp_deptype( static_cast<db::DependencyType>(_pimpl->_named_reader->getint(2)) );
-    return make_pair( deptype, capability::NamedCap::Ptr(ncap));
+    
+    if ( rel == zypp::Rel::NONE )
+    {
+      capability::NamedCap *ncap = new capability::NamedCap( refer, _pimpl->_versioned_reader->getstring(1) );
+      zypp::Dep deptype = db_deptype2zypp_deptype( static_cast<db::DependencyType>(_pimpl->_versioned_reader->getint(5)) );
+      return make_pair( deptype, capability::NamedCap::Ptr(ncap) );
+    }
+    else
+    {
+      capability::VersionedCap *vcap = new capability::VersionedCap( refer, _pimpl->_versioned_reader->getstring(1), /* rel */ rel, Edition( _pimpl->_versioned_reader->getstring(2), _pimpl->_versioned_reader->getstring(3), _pimpl->_versioned_reader->getint(4) ) );
+      zypp::Dep deptype = db_deptype2zypp_deptype( static_cast<db::DependencyType>(_pimpl->_versioned_reader->getint(5)) );
+      return make_pair( deptype, capability::VersionedCap::Ptr(vcap) );
+      
+    }
   }
   if ( _pimpl->_filecap_read )
   {

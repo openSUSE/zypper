@@ -9,6 +9,7 @@ namespace sqlite3x {
 
 typedef zypp::shared_ptr<sqlite3_command> sqlite3_command_ptr;
 typedef zypp::shared_ptr<sqlite3_reader> sqlite3_reader_ptr;
+typedef zypp::shared_ptr<sqlite3_connection> sqlite3_connection_ptr;
 
 }
 
@@ -16,7 +17,7 @@ namespace zypp { namespace cache {
 
 struct DatabaseContext
 {
-  sqlite3x::sqlite3_connection con;
+  sqlite3x::sqlite3_connection_ptr con;
   sqlite3x::sqlite3_command_ptr select_versionedcap_cmd;
   sqlite3x::sqlite3_command_ptr select_namedcap_cmd;
   sqlite3x::sqlite3_command_ptr select_filecap_cmd;

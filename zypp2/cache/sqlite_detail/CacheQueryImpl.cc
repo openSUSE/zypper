@@ -31,6 +31,15 @@ namespace zypp { namespace cache {
 // CACHE QUERY                                              //
 //////////////////////////////////////////////////////////////
 
+CacheQuery::Impl::Impl( const Pathname &pdbdir, sqlite3x::sqlite3_connection_ptr con )
+{
+  context.reset(new DatabaseContext);
+  context->dbdir = pdbdir;
+  context->con= con;
+  initCommands();
+}
+    
+  
 CacheQuery::Impl::Impl( const Pathname &pdbdir )
 {
   cache::CacheInitializer initializer(pdbdir, "zypp.db");
@@ -44,16 +53,29 @@ CacheQuery::Impl::Impl( const Pathname &pdbdir )
   
   try
   {
-    context->con.open( (pdbdir + "zypp.db").asString().c_str());
-    
+    context->con->open( (pdbdir + "zypp.db").asString().c_str());
+  }
+  catch(exception &ex)
+  {
+    //ZYPP_CAUGHT(ex);
+    ZYPP_THROW(Exception(ex.what()));
+  }
+ 
+  initCommands();
+}
+
+void CacheQuery::Impl::initCommands()
+{
+  try
+  {
     // precompile statements
-    context->select_versionedcap_cmd.reset( new sqlite3_command( context->con, "select c.refers_kind, n.name, v.version, v.release, v.epoch, v.relation, c.dependency_type from names n, capabilities c, versioned_capabilities v where v.name_id=n.id and c.id=v.dependency_id and c.resolvable_id=:rid;"));
-    context->select_namedcap_cmd.reset( new sqlite3_command( context->con, "select c.refers_kind, n.name, c.dependency_type from names n, capabilities c, named_capabilities nc where nc.name_id=n.id and c.id=nc.dependency_id and c.resolvable_id=:rid;"));
-    context->select_filecap_cmd.reset( new sqlite3_command( context->con, "select c.refers_kind, dn.name, fn.name, c.dependency_type from file_names fn, dir_names dn, capabilities c, file_capabilities fc, files f  where f.id=fc.file_id and f.dir_name_id=dn.id and f.file_name_id=fn.id and c.id=fc.dependency_id and c.resolvable_id=:rid;"));
+    context->select_versionedcap_cmd.reset( new sqlite3_command( *context->con, "select c.refers_kind, n.name, v.version, v.release, v.epoch, v.relation, c.dependency_type from names n, capabilities c, versioned_capabilities v where v.name_id=n.id and c.id=v.dependency_id and c.resolvable_id=:rid;"));
+    context->select_namedcap_cmd.reset( new sqlite3_command( *context->con, "select c.refers_kind, n.name, c.dependency_type from names n, capabilities c, named_capabilities nc where nc.name_id=n.id and c.id=nc.dependency_id and c.resolvable_id=:rid;"));
+    context->select_filecap_cmd.reset( new sqlite3_command( *context->con, "select c.refers_kind, dn.name, fn.name, c.dependency_type from file_names fn, dir_names dn, capabilities c, file_capabilities fc, files f  where f.id=fc.file_id and f.dir_name_id=dn.id and f.file_name_id=fn.id and c.id=fc.dependency_id and c.resolvable_id=:rid;"));
     
     // disable autocommit
-    context->con.executenonquery("PRAGMA cache_size=8000;");
-    context->con.executenonquery("BEGIN;");
+    context->con->executenonquery("PRAGMA cache_size=8000;");
+    context->con->executenonquery("BEGIN;");
   }
   catch(exception &ex)
   {
@@ -61,11 +83,11 @@ CacheQuery::Impl::Impl( const Pathname &pdbdir )
     ZYPP_THROW(Exception(ex.what()));
   }
 }
-  
+
 CacheQuery::Impl::~Impl()
 {
-  context->con.executenonquery("COMMIT;");
-  context->con.executenonquery("PRAGMA cache_size=2000;");
+  context->con->executenonquery("COMMIT;");
+  context->con->executenonquery("PRAGMA cache_size=2000;");
 }
 
 

@@ -6,15 +6,15 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file zmd/backend/dbsource/SqlitePackageImpl.h
+/** \file zmd/backend/dbsource/CachedSourcePackageImpl.h
  *
 */
-#ifndef ZMD_BACKEND_DBSOURCE_DBPACKAGEIMPL_H
-#define ZMD_BACKEND_DBSOURCE_DBPACKAGEIMPL_H
+#ifndef CachedSourcePackageImpl_H
+#define CachedSourcePackageImpl_H
 
 #include "zypp/detail/PackageImpl.h"
 #include "zypp/Source.h"
-#include <sqlite3.h>
+//#include <sqlite3.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -22,15 +22,14 @@ namespace zypp
 
   ///////////////////////////////////////////////////////////////////
   //
-  //        CLASS NAME : SqlitePackageImpl
+  //        CLASS NAME : CachedSourcePackageImpl
   //
-  class SqlitePackageImpl : public detail::PackageImplIf
+  class CachedSourcePackageImpl : public detail::PackageImplIf
   {
   public:
 
-    SqlitePackageImpl( Source_Ref source_r );
-    void readHandle( sqlite_int64 id, sqlite3_stmt *handle );
-
+    CachedSourcePackageImpl( Source_Ref source_r );
+    
     virtual TranslatedText summary() const;
     virtual TranslatedText description() const;
     virtual ByteCount size() const;
@@ -39,7 +38,6 @@ namespace zypp
     virtual Pathname location() const;
     virtual bool installOnly() const;
     virtual Source_Ref source() const;
-    virtual ZmdId zmdid() const;
     virtual unsigned sourceMediaNr() const;
     virtual Vendor vendor() const;
 
@@ -50,7 +48,6 @@ namespace zypp
     PackageGroup _group;
     Pathname _location;
     bool _install_only;
-    ZmdId _zmdid;
     unsigned _media_nr;
 
     ByteCount _size_installed;

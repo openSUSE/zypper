@@ -11,7 +11,7 @@
 #define ZYPP_CachedSourceImpl_H
 
 #include <iosfwd>
-
+#include "zypp/Pathname.h"
 #include "zypp/source/SourceImpl.h"
 
 ///////////////////////////////////////////////////////////////////
@@ -37,7 +37,7 @@ namespace zypp
 
       public:
         /** Default ctor */
-        CachedSourceImpl();
+        CachedSourceImpl( const zypp::Pathname &dbdir );
         /** Dtor */
         ~CachedSourceImpl();
 
@@ -57,6 +57,8 @@ namespace zypp
         */
         virtual void factoryInit();
         virtual void createResolvables(Source_Ref source_r);
+        
+        zypp::Pathname _dbdir;
         
       };
       ///////////////////////////////////////////////////////////////////

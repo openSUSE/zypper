@@ -17,6 +17,7 @@
 #include "zypp/base/PtrTypes.h"
 
 #include "zypp/Capability.h"
+#include "zypp/capability/CapabilityImpl.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -46,6 +47,13 @@ namespace zypp
     ~CapFactory();
 
   public:
+    
+    /** Create capability from Implementation
+     * \a impl is a valid \ref CapabilityImpl Ptr
+     * \throw EXCEPTION on null capability
+    */
+    Capability fromImpl( capability::CapabilityImpl::Ptr impl ) const;
+    
     /** Parse Capability from string providing Resolvable::Kind.
      * \a strval_r is expected to define a valid Capability.
      * \throw EXCEPTION on parse error.

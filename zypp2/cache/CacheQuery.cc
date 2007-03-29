@@ -37,6 +37,11 @@ CacheQuery::CacheQuery( const Pathname &dbdir )
 {
 }
 
+CacheQuery::CacheQuery( Impl *impl )
+    : _pimpl( impl )
+{
+}
+
 CapabilityQuery CacheQuery::createCapabilityQuery( const data::RecordId &resolvable_id  )
 {
   return CapabilityQuery( new CapabilityQuery::Impl( _pimpl->context, resolvable_id) );
