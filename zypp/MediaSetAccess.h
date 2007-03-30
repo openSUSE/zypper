@@ -48,10 +48,46 @@ namespace zypp
 
     ///////////////////////////////////////////////////////////////////
     //
-    //	CLASS NAME : SourceCache
+    //	CLASS NAME : MediaSetAccess
     //
     /**
-     * The
+     * Media access layer responsible for handling media distributed as a set.
+     *
+     * This is provided as a means to handle CD or DVD sets accessible through
+     * dir, iso, nfs or other URL schemes other than cd/dvd (see
+     * \ref MediaManager for info on different implemented media backends).
+     * Currently it handles URLs containing cdN, CDN, dvdN, and DVDN strings,
+     * where N is the number of particular media in the set.
+     * 
+     * Examples:
+     * \code
+     * "iso:/?iso=/path/to/iso/images/openSUSE-10.3-Alpha2plus-DVD-x86_64-DVD1.iso"
+     * "dir:/path/to/cdset/sources/openSUSE-10.3/Alpha2plus/CD1"
+     * \endcode
+     * 
+     * MediaSetAccess accesses files on desired media by rewriting
+     * the original URL, replacing the digit (usually) 1 with requested media
+     * number and uses \ref MediaManager to get the files from the new URL.
+     * 
+     * Additionaly, each media number can be assined a media verifier which
+     * checks if the media we are trying to access is the desired one. See
+     * \ref MediaVerifierBase for more info.
+     * 
+     * Code example:
+     * \code
+     * Url url("dir:/path/to/cdset/sources/openSUSE-10.3/Alpha2plus/CD1");
+     * 
+     * MediaSetAccess access(url, "/");
+     * 
+     * access.setVerifier(1, media1VerifierRef);
+     * access.setVerifier(2, media2VerifierRef);
+     * 
+     * Pathname file1 = "/some/file/on/media1";
+     * access.provideFile(1, file1);
+     * Pathname file2 = "/some/file/on/media2";
+     * access.provideFile(2, file1);
+     *
+     * \endcode
      */
     class MediaSetAccess : public base::ReferenceCounted, private base::NonCopyable
     {
@@ -77,19 +113,26 @@ namespace zypp
 
       Pathname provideFile(const Pathname & file, unsigned media_nr = 1 );
       Pathname provideFile(const Pathname & file, unsigned media_nr, const FileChecker checker );
-      
+
+      static Url rewriteUrl (const Url & url_r, const media::MediaNr medianr);
+
     protected:
       Pathname provideFileInternal(const Pathname & file, unsigned media_nr, bool checkonly, bool cached);
-      Url rewriteUrl (const Url & url_r, const media::MediaNr medianr);
       media::MediaAccessId getMediaAccessId (media::MediaNr medianr);
       virtual std::ostream & dumpOn( std::ostream & str ) const;
+
     private:
+      /** Media or media set URL */
       Url _url;
+      /** Path on the media relative to _url */
       Pathname _path;
+
       typedef std::map<media::MediaNr, media::MediaAccessId> MediaMap;
       typedef std::map<media::MediaNr, media::MediaVerifierRef > VerifierMap;
-      /** Mapping between each CD and Media Access ID */
+
+      /** Mapping between media number and Media Access ID */
       MediaMap _medias;
+      /** Mapping between media number and corespondent verifier */
       VerifierMap _verifiers;
     };
     ///////////////////////////////////////////////////////////////////

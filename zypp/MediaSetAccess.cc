@@ -127,7 +127,8 @@ namespace zypp
     {
       try
       {
-        DBG << "Going to try provide file " << file << " from " << media_nr << endl;        
+        DBG << "Going to try to provide file " << file
+            << " from media number " << media_nr << endl;        
         // try to attach the media
         if ( ! media_mgr.isAttached(media) )
         media_mgr.attach(media);
@@ -151,7 +152,7 @@ namespace zypp
               MIL << "Failed to release media " << media << endl;
           }
           
-          MIL << "Releasing all _medias of all sources" << endl;
+          /*MIL << "Releasing all _medias of all sources" << endl;
           try
           {
             //zypp::SourceManager::sourceManager()->releaseAllSources();
@@ -160,7 +161,7 @@ namespace zypp
           {
               ZYPP_CAUGHT(excpt_r);
               ERR << "Failed to release all sources" << endl;
-          }
+          }*/
 
           // set up the reason
           media::MediaChangeReport::Error reason = media::MediaChangeReport::INVALID;
@@ -169,7 +170,7 @@ namespace zypp
               typeid(excp) == typeid( media::MediaNotAFileException ) )
           {
             reason = media::MediaChangeReport::NOT_FOUND;
-          } 
+          }
           else if( typeid(excp) == typeid( media::MediaNotDesiredException)  ||
               typeid(excp) == typeid( media::MediaNotAttachedException) )
           {
@@ -255,7 +256,7 @@ namespace zypp
     {
       if (_verifiers.find(medianr) != _verifiers.end())
       {
-        // there is a setted verifier for this media
+        // a verifier is set for this media
         // FIXME check the case where the verifier exists
         // but we have no access id for the media
         media::MediaAccessId id = _medias[medianr];
@@ -274,6 +275,7 @@ namespace zypp
     
     return id;
   }
+
 
   Url MediaSetAccess::rewriteUrl (const Url & url_r, const media::MediaNr medianr)
   {
@@ -316,6 +318,7 @@ namespace zypp
 
   std::ostream & MediaSetAccess::dumpOn( std::ostream & str ) const
   {
+    str << "MediaSetAccess (URL='" << _url << "', path='" << _path << "')";
     return str;
   }
 
