@@ -13,7 +13,7 @@
 #include "zypp/Package.h"
 
 #include "zypp2/cache/CacheInitializer.h"
-#include "zypp2/cache/CacheQuery.h"
+#include "zypp2/cache/QueryFactory.h"
 #include "zypp/data/ResolvableData.h"
 #include "zypp/data/RecordId.h"
 #include "zypp/capability/CapabilityImpl.h"
@@ -41,7 +41,7 @@ int main(int argc, char **argv)
 
       Pathname dbfile = Pathname(getenv("PWD")) + "data.db";
       cout << 1 << endl;
-      zypp::cache::CacheQuery query(getenv("PWD"));
+      zypp::cache::QueryFactory query(getenv("PWD"));
       //zypp::cache::CacheInitializer init( "/", dbfile );
       //t.tick("init sqlite database");
       int i = 1;
