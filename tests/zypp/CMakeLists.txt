@@ -1,326 +1,53 @@
-INCLUDE_DIRECTORIES( ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR} ${KDE3_INCLUDE_DIR} ${QT_INCLUDE_DIR}  )
+INCLUDE_DIRECTORIES( ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR} )
 
+ADD_EXECUTABLE(Arch Arch.cc)
+TARGET_LINK_LIBRARIES(Arch zypp boost_unit_test_framework )
 
-########### next target ###############
+ADD_EXECUTABLE(Url Url.cc)
+TARGET_LINK_LIBRARIES(Url zypp boost_unit_test_framework )
 
-SET(Arch_SRCS
-Arch.cc
-)
+#ADD_EXECUTABLE(RWPtr RWPtr.cc)
+#TARGET_LINK_LIBRARIES(RWPtr zypp boost_unit_test_framework )
 
-KDE3_AUTOMOC(${Arch_SRCS})
+ADD_EXECUTABLE(Edition Edition.cc)
+TARGET_LINK_LIBRARIES(Edition zypp boost_unit_test_framework )
 
-IF(KDE3_BUILD_TESTS)
+ADD_EXECUTABLE(Capabilities Capabilities.cc)
+TARGET_LINK_LIBRARIES(Capabilities zypp boost_unit_test_framework )
 
-KDE3_ADD_EXECUTABLE(Arch ${Arch_SRCS})
+ADD_EXECUTABLE(PtrTypes PtrTypes.cc)
+TARGET_LINK_LIBRARIES(PtrTypes zypp  )
 
-TARGET_LINK_LIBRARIES(Arch  ${QT_AND_KDECORE_LIBS} boost_unit_test_framework )
+ADD_EXECUTABLE(TranslatedText TranslatedText.cc)
+TARGET_LINK_LIBRARIES(TranslatedText zypp )
 
-ENDIF(KDE3_BUILD_TESTS)
+ADD_EXECUTABLE(CheckSum CheckSum.cc)
+TARGET_LINK_LIBRARIES(CheckSum zypp boost_unit_test_framework )
 
-########### next target ###############
+ADD_EXECUTABLE(PublicKey PublicKey.cc)
+TARGET_LINK_LIBRARIES(PublicKey zypp boost_unit_test_framework )
 
-SET(Url_SRCS
-Url.cc
-)
+ADD_EXECUTABLE(PathInfo PathInfo.cc)
+TARGET_LINK_LIBRARIES(PathInfo zypp boost_unit_test_framework )
 
-KDE3_AUTOMOC(${Url_SRCS})
+ADD_EXECUTABLE(Digest Digest.cc)
+TARGET_LINK_LIBRARIES(Digest zypp boost_unit_test_framework )
 
-IF(KDE3_BUILD_TESTS)
+ADD_EXECUTABLE(Signature Signature.cc)
+TARGET_LINK_LIBRARIES(Signature zypp boost_unit_test_framework)
 
-KDE3_ADD_EXECUTABLE(Url ${Url_SRCS})
+ADD_EXECUTABLE(KeyRing KeyRing.cc)
+TARGET_LINK_LIBRARIES(KeyRing zypp boost_unit_test_framework )
 
-TARGET_LINK_LIBRARIES(Url  ${QT_AND_KDECORE_LIBS} boost_unit_test_framework )
-
-ENDIF(KDE3_BUILD_TESTS)
-
-########### next target ###############
-
-SET(RWPtr_SRCS
-RWPtr.cc
-)
-
-KDE3_AUTOMOC(${RWPtr_SRCS})
-
-IF(KDE3_BUILD_TESTS)
-
-KDE3_ADD_EXECUTABLE(RWPtr ${RWPtr_SRCS})
-
-TARGET_LINK_LIBRARIES(RWPtr  ${QT_AND_KDECORE_LIBS} )
-
-ENDIF(KDE3_BUILD_TESTS)
-
-########### next target ###############
-
-SET(Edition_SRCS
-Edition.cc
-)
-
-KDE3_AUTOMOC(${Edition_SRCS})
-
-IF(KDE3_BUILD_TESTS)
-
-KDE3_ADD_EXECUTABLE(Edition ${Edition_SRCS})
-
-TARGET_LINK_LIBRARIES(Edition  ${QT_AND_KDECORE_LIBS} boost_unit_test_framework )
-
-ENDIF(KDE3_BUILD_TESTS)
-
-########### next target ###############
-
-SET(Capabilities_SRCS
-Capabilities.cc
-)
-
-KDE3_AUTOMOC(${Capabilities_SRCS})
-
-IF(KDE3_BUILD_TESTS)
-
-KDE3_ADD_EXECUTABLE(Capabilities ${Capabilities_SRCS})
-
-TARGET_LINK_LIBRARIES(Capabilities  ${QT_AND_KDECORE_LIBS} boost_unit_test_framework )
-
-ENDIF(KDE3_BUILD_TESTS)
-
-########### next target ###############
-
-SET(PtrTypes_SRCS
-PtrTypes.cc
-)
-
-KDE3_AUTOMOC(${PtrTypes_SRCS})
-
-IF(KDE3_BUILD_TESTS)
-
-KDE3_ADD_EXECUTABLE(PtrTypes ${PtrTypes_SRCS})
-
-TARGET_LINK_LIBRARIES(PtrTypes  ${QT_AND_KDECORE_LIBS} )
-
-ENDIF(KDE3_BUILD_TESTS)
-
-########### next target ###############
-
-SET(TranslatedText_SRCS
-TranslatedText.cc
-)
-
-KDE3_AUTOMOC(${TranslatedText_SRCS})
-
-IF(KDE3_BUILD_TESTS)
-
-KDE3_ADD_EXECUTABLE(TranslatedText ${TranslatedText_SRCS})
-
-TARGET_LINK_LIBRARIES(TranslatedText  ${QT_AND_KDECORE_LIBS} )
-
-ENDIF(KDE3_BUILD_TESTS)
-
-########### next target ###############
-
-SET(CheckSum_SRCS
-CheckSum.cc
-)
-
-KDE3_AUTOMOC(${CheckSum_SRCS})
-
-IF(KDE3_BUILD_TESTS)
-
-KDE3_ADD_EXECUTABLE(CheckSum ${CheckSum_SRCS})
-
-TARGET_LINK_LIBRARIES(CheckSum  ${QT_AND_KDECORE_LIBS} boost_unit_test_framework )
-
-ENDIF(KDE3_BUILD_TESTS)
-
-########### next target ###############
-
-SET(PublicKey_SRCS
-PublicKey.cc
-)
-
-KDE3_AUTOMOC(${PublicKey_SRCS})
-
-IF(KDE3_BUILD_TESTS)
-
-KDE3_ADD_EXECUTABLE(PublicKey ${PublicKey_SRCS})
-
-TARGET_LINK_LIBRARIES(PublicKey  ${QT_AND_KDECORE_LIBS} boost_unit_test_framework )
-
-ENDIF(KDE3_BUILD_TESTS)
-
-########### next target ###############
-
-SET(PathInfo_SRCS
-PathInfo.cc
-)
-
-KDE3_AUTOMOC(${PathInfo_SRCS})
-
-IF(KDE3_BUILD_TESTS)
-
-KDE3_ADD_EXECUTABLE(PathInfo ${PathInfo_SRCS})
-
-TARGET_LINK_LIBRARIES(PathInfo  ${QT_AND_KDECORE_LIBS} boost_unit_test_framework )
-
-ENDIF(KDE3_BUILD_TESTS)
-
-########### next target ###############
-
-SET(Digest_SRCS
-Digest.cc
-)
-
-KDE3_AUTOMOC(${Digest_SRCS})
-
-IF(KDE3_BUILD_TESTS)
-
-KDE3_ADD_EXECUTABLE(Digest ${Digest_SRCS})
-
-TARGET_LINK_LIBRARIES(Digest  ${QT_AND_KDECORE_LIBS} boost_unit_test_framework )
-
-ENDIF(KDE3_BUILD_TESTS)
-
-########### next target ###############
-
-SET(Signature_SRCS
-Signature.cc
-)
-
-KDE3_AUTOMOC(${Signature_SRCS})
-
-IF(KDE3_BUILD_TESTS)
-
-KDE3_ADD_EXECUTABLE(Signature ${Signature_SRCS})
-
-TARGET_LINK_LIBRARIES(Signature  ${QT_AND_KDECORE_LIBS} boost_unit_test_framework )
-
-ENDIF(KDE3_BUILD_TESTS)
-
-########### next target ###############
-
-SET(KeyRing_SRCS
-KeyRing.cc
-)
-
-KDE3_AUTOMOC(${KeyRing_SRCS})
-
-IF(KDE3_BUILD_TESTS)
-
-KDE3_ADD_EXECUTABLE(KeyRing ${KeyRing_SRCS})
-
-TARGET_LINK_LIBRARIES(KeyRing  ${QT_AND_KDECORE_LIBS} boost_unit_test_framework )
-
-ENDIF(KDE3_BUILD_TESTS)
-
-########### next target ###############
-
-SET(Lazy_SRCS
-Lazy.cc
-)
-
-KDE3_AUTOMOC(${Lazy_SRCS})
-
-IF(KDE3_BUILD_TESTS)
-
-KDE3_ADD_EXECUTABLE(Lazy ${Lazy_SRCS})
-
-TARGET_LINK_LIBRARIES(Lazy  ${QT_AND_KDECORE_LIBS} boost_unit_test_framework )
-
-ENDIF(KDE3_BUILD_TESTS)
-
-########### install files ###############
-
-
-
-
-#original Makefile.am contents follow:
-
-### Process this file with automake to produce Makefile.in
-### ##################################################
-#
-## Do NOT list devel.* in subdirs. It's developers playgound and
-## must not prevent anything from building.
-#SUBDIRS =
-#
-### ##################################################
-#
-#TESTS = Arch Url \
-#	RWPtr \
-#	Edition		\
-#	Capabilities	\
-#	PtrTypes \
-#	TranslatedText \
-#	CheckSum \
-#	PublicKey \
-#	PathInfo \
-#	Digest \
-#	Signature \
-#	KeyRing \
-#	Lazy
-#
-#check_PROGRAMS = Arch Url \
-#	RWPtr \
-#	Edition		\
-#	Capabilities	\
-#	PtrTypes \
-#	TranslatedText \
-#	CheckSum \
-#	PublicKey \
-#	PathInfo \
-#	Digest \
-#	Signature \
-#	KeyRing \
-#	Lazy
-#
-### ##################################################
-#
-#LDADD =	$(top_srcdir)/zypp/lib@PACKAGE@.la 
-#
-### ##################################################
-#
-#Arch_SOURCES = Arch.cc
-#Arch_LDADD = $(LDADD) -lboost_unit_test_framework
-#
-#TranslatedText_SOURCES  = TranslatedText.cc
-#
-#PublicKey_SOURCES = PublicKey.cc
-#PublicKey_LDADD  = $(LDADD) -lboost_unit_test_framework
-#
-#CheckSum_SOURCES = CheckSum.cc
-#CheckSum_LDADD  = $(LDADD) -lboost_unit_test_framework
-#
-#RWPtr_SOURCES = RWPtr.cc
-#
-#Edition_SOURCES = Edition.cc
-#Edition_LDADD  = $(LDADD) -lboost_unit_test_framework
-#
-#Capabilities_SOURCES = Capabilities.cc
-#Capabilities_LDADD  = $(LDADD) -lboost_unit_test_framework
-#
-#PtrTypes_SOURCES = PtrTypes.cc
-#
-#PathInfo_SOURCES = PathInfo.cc
-#PathInfo_LDADD  = $(LDADD) -lboost_unit_test_framework
-#
-#Digest_SOURCES = Digest.cc
-#Digest_LDADD  = $(LDADD) -lboost_unit_test_framework
-#
-#Signature_SOURCES = Signature.cc
-#Signature_LDADD  = $(LDADD) -lboost_unit_test_framework
-#
-#Url_SOURCES = Url.cc
-#Url_LDADD  = $(LDADD) -lboost_unit_test_framework
-#
-#KeyRing_SOURCES = KeyRing.cc
-#KeyRing_LDADD  = $(LDADD) -lboost_unit_test_framework
-#
-#Lazy_SOURCES = Lazy.cc
-#Lazy_LDADD  = $(LDADD) $(top_srcdir)/zypp2/lib@PACKAGE@2.la  -lboost_unit_test_framework
-#
-### ##################################################
-#
-#.PHONY:        always
-#
-#$(noinst_PROGRAMS):    $(top_srcdir)/zypp/lib@PACKAGE@.la
-#
-##$(top_srcdir)/zypp/lib@PACKAGE@.la:     always
-##	$(MAKE) -C $(top_srcdir)/zypp
-#
-### ##################################################
+ADD_TEST(ArchTest ${CMAKE_CURRENT_BINARY_DIR}/Arch)
+ADD_TEST(UrlTest ${CMAKE_CURRENT_BINARY_DIR}/Url)
+ADD_TEST(Edition ${CMAKE_CURRENT_BINARY_DIR}/Edition)
+ADD_TEST(Capabilities ${CMAKE_CURRENT_BINARY_DIR}/Capabilities)
+ADD_TEST(PtrTypesTest ${CMAKE_CURRENT_BINARY_DIR}/PtrTypes)
+ADD_TEST(TranslatedTextTest ${CMAKE_CURRENT_BINARY_DIR}/TranslatedText)
+ADD_TEST(CheckSumTest ${CMAKE_CURRENT_BINARY_DIR}/CheckSum)
+ADD_TEST(PublicKeyTest ${CMAKE_CURRENT_BINARY_DIR}/PublicKey)
+ADD_TEST(PathInfo ${CMAKE_CURRENT_BINARY_DIR}/PathInfo)
+ADD_TEST(Digest ${CMAKE_CURRENT_BINARY_DIR}/Digest)
+ADD_TEST(Signature ${CMAKE_CURRENT_BINARY_DIR}/Signature)
+ADD_TEST(KeyRingTest ${CMAKE_CURRENT_BINARY_DIR}/KeyRing)

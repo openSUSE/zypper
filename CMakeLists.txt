@@ -176,6 +176,7 @@ ADD_SUBDIRECTORY( tools )
 #ADD_SUBDIRECTORY( examples )
 ADD_SUBDIRECTORY( po EXCLUDE_FROM_ALL )
 ADD_SUBDIRECTORY( doc EXCLUDE_FROM_ALL )
+ADD_SUBDIRECTORY( tests EXCLUDE_FROM_ALL )
 
 ####################################################################
 # INCLUDES                                                         #
