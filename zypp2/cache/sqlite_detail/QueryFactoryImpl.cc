@@ -14,10 +14,10 @@
 
 #include "zypp2/cache/DatabaseTypes.h"
 #include "zypp2/cache/CacheInitializer.h"
-#include "zypp2/cache/CacheQuery.h"
+#include "zypp2/cache/QueryFactory.h"
 
 #include "zypp2/cache/sqlite_detail/CacheSqlite.h"
-#include "zypp2/cache/sqlite_detail/CacheQueryImpl.h"
+#include "zypp2/cache/sqlite_detail/QueryFactoryImpl.h"
 
 using namespace std;
 using namespace zypp;
@@ -31,7 +31,7 @@ namespace zypp { namespace cache {
 // CACHE QUERY                                              //
 //////////////////////////////////////////////////////////////
 
-CacheQuery::Impl::Impl( const Pathname &pdbdir, sqlite3x::sqlite3_connection_ptr con )
+QueryFactory::Impl::Impl( const Pathname &pdbdir, sqlite3x::sqlite3_connection_ptr con )
 {
   context.reset(new DatabaseContext);
   context->dbdir = pdbdir;
@@ -40,7 +40,7 @@ CacheQuery::Impl::Impl( const Pathname &pdbdir, sqlite3x::sqlite3_connection_ptr
 }
     
   
-CacheQuery::Impl::Impl( const Pathname &pdbdir )
+QueryFactory::Impl::Impl( const Pathname &pdbdir )
 {
   cache::CacheInitializer initializer(pdbdir, "zypp.db");
   if ( initializer.justInitialized() )
@@ -64,7 +64,7 @@ CacheQuery::Impl::Impl( const Pathname &pdbdir )
   initCommands();
 }
 
-void CacheQuery::Impl::initCommands()
+void QueryFactory::Impl::initCommands()
 {
   try
   {
@@ -84,7 +84,7 @@ void CacheQuery::Impl::initCommands()
   }
 }
 
-CacheQuery::Impl::~Impl()
+QueryFactory::Impl::~Impl()
 {
   context->con->executenonquery("COMMIT;");
   context->con->executenonquery("PRAGMA cache_size=2000;");

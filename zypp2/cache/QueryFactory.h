@@ -7,8 +7,9 @@
 |                                                                      |
 \---------------------------------------------------------------------*/
 
-#ifndef ZYPP_CACHE_QUERY_IMPL_H
-#define ZYPP_CACHE_QUERY_IMPL_H
+
+#ifndef ZYPP_CACHE_QUERY_H
+#define ZYPP_CACHE_QUERY_H
 
 #include <iosfwd>
 #include <string>
@@ -21,9 +22,7 @@
 #include "zypp/data/RecordId.h"
 #include "zypp/base/PtrTypes.h"
 
-#include "zypp2/cache/CacheQuery.h"
-#include "zypp2/cache/sqlite_detail/CacheSqlite.h"
-#include "zypp2/cache/sqlite3x/sqlite3x.hpp"
+#include "zypp2/cache/CapabilityQuery.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -31,22 +30,25 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
   namespace cache
   { /////////////////////////////////////////////////////////////////
-
-  ///////////////////////////////////////////////////////////////
-  // CACHE QUERY                                              //
-  //////////////////////////////////////////////////////////////
-
-    struct CacheQuery::Impl
+     
+    /**
+     * The Cache Query API provides access to the store data
+    */
+    class QueryFactory
     {
-      Impl( const zypp::Pathname &pdbdir );
-      Impl(  const Pathname &pdbdir, sqlite3x::sqlite3_connection_ptr con );
-      ~Impl();
-      void initCommands();
-      DatabaseContext_Ptr context;
+    public:
+       /** Implementation. */
+      class Impl;
+      QueryFactory( Impl * );
+      QueryFactory( const Pathname &dbdir );
+      ~QueryFactory();
+      CapabilityQuery createCapabilityQuery( const data::RecordId &id  );
+    private:
+      /** Pointer to implementation. */
+      RW_pointer<Impl> _pimpl;
     };
-
+    
   } // ns cache
 } // ns zypp
-
 #endif
 

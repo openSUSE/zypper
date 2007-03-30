@@ -14,10 +14,10 @@
 
 #include "zypp2/cache/DatabaseTypes.h"
 #include "zypp2/cache/CacheInitializer.h"
-#include "zypp2/cache/CacheQuery.h"
+#include "zypp2/cache/QueryFactory.h"
 
 #include "zypp2/cache/sqlite_detail/CacheSqlite.h"
-#include "zypp2/cache/sqlite_detail/CacheQueryImpl.h"
+#include "zypp2/cache/sqlite_detail/QueryFactoryImpl.h"
 #include "zypp2/cache/sqlite_detail/CapabilityQueryImpl.h"
 
 using namespace std;
@@ -32,22 +32,22 @@ namespace zypp { namespace cache {
 // CACHE QUERY                                              //
 //////////////////////////////////////////////////////////////
 
-CacheQuery::CacheQuery( const Pathname &dbdir )
+QueryFactory::QueryFactory( const Pathname &dbdir )
     : _pimpl( new Impl(dbdir) )
 {
 }
 
-CacheQuery::CacheQuery( Impl *impl )
+QueryFactory::QueryFactory( Impl *impl )
     : _pimpl( impl )
 {
 }
 
-CapabilityQuery CacheQuery::createCapabilityQuery( const data::RecordId &resolvable_id  )
+CapabilityQuery QueryFactory::createCapabilityQuery( const data::RecordId &resolvable_id  )
 {
   return CapabilityQuery( new CapabilityQuery::Impl( _pimpl->context, resolvable_id) );
 }
 
-CacheQuery::~CacheQuery()
+QueryFactory::~QueryFactory()
 {
 }
 

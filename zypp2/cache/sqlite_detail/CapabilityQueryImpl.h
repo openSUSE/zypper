@@ -23,7 +23,7 @@
 #include "zypp/data/RecordId.h"
 #include "zypp/base/PtrTypes.h"
 #include "zypp2/cache/sqlite_detail/CacheSqlite.h"
-#include "zypp2/cache/CacheQuery.h"
+#include "zypp2/cache/QueryFactory.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

@@ -11,10 +11,10 @@
 #include "zypp/base/Logger.h"
 #include "zypp2/cache/sqlite3x/sqlite3x.hpp"
 #include "zypp2/source/cached/CachedSourceImpl.h"
-#include "zypp2/cache/CacheQuery.h"
+#include "zypp2/cache/QueryFactory.h"
 #include "zypp2/cache/CapabilityQuery.h"
 #include "zypp2/cache/sqlite_detail/CacheSqlite.h"
-#include "zypp2/cache/sqlite_detail/CacheQueryImpl.h"
+#include "zypp2/cache/sqlite_detail/QueryFactoryImpl.h"
 
 #include "zypp2/source/cached/CachedSourcePackageImpl.h"
 #include "zypp/detail/ResImplTraits.h"
@@ -69,7 +69,7 @@ void CachedSourceImpl::createResolvables(Source_Ref source_r)
     con.reset( new sqlite3_connection((_dbdir + "zypp.db").asString().c_str()));
     sqlite3_command cmd( *con, "select id,name,version,release,epoch,arch,kind from resolvables;");
     
-    cache::CacheQuery cachequery( new cache::CacheQuery::Impl( _dbdir, con ) );
+    cache::QueryFactory cachequery( new cache::QueryFactory::Impl( _dbdir, con ) );
     
     sqlite3_reader reader = cmd.executereader();
     while(reader.read())
