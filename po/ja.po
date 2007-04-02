@@ -1,245 +1,242 @@
 # @TITLE@
 # Copyright (C) 2006, SUSE Linux GmbH, Nuremberg
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 # This file is distributed under the same license as @PACKAGE@ package. FIRST
 #
-# Gabor Kelemen <kelemeng@gnome.hu>, 2007.
 msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: translation@suse.de\n"
 "POT-Creation-Date: 2007-02-16 10:33+0100\n"
-"PO-Revision-Date: 2007-02-17 22:58+0100\n"
-"Last-Translator: Gabor Kelemen <kelemeng@gnome.hu>\n"
-"Language-Team: Hungarian <gnome@gnome.hu>\n"
+"PO-Revision-Date: 2006-06-21 13:31\n"
+"Last-Translator: Novell Language <language@novell.com>\n"
+"Language-Team: Novell Language <language@novell.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.11.4\n"
-"Plural-Forms:  nplurals=2; plural=(n != 1);\n"
+"X-Generator: KBabel 1.9\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 #: src/zmart-keyring-callbacks.h:36
 msgid " is unsigned, continue?"
-msgstr " nincs aláírva, folytatja?"
+msgstr "は、署名がありません。続行しますか?"
 
 #: src/zmart-keyring-callbacks.h:46
 msgid "Import key "
-msgstr "Importálja a(z) "
+msgstr "キーを"
 
 #: src/zmart-keyring-callbacks.h:46
 msgid " to trusted keyring?"
-msgstr " kulcsot a megbízható kulcstartóra?"
+msgstr "信頼されたキーリングにインポートしますか?"
 
 #: src/zmart-keyring-callbacks.h:57
 msgid " is signed with an unknown key id: "
-msgstr " ismeretlen azonosítójú kulccsal lett aláírva: "
+msgstr "は、不明なキーIDで署名されています:"
 
+# internal key used: Ok
+# internal key used: Ok
 #: src/zmart-keyring-callbacks.h:57 src/zmart-keyring-callbacks.h:80
 #: src/zmart-keyring-callbacks.h:91 src/zmart-keyring-callbacks.h:97
 #: src/zmart-keyring-callbacks.h:104
 msgid "continue?"
-msgstr "folytatja?"
+msgstr "続行しますか?"
 
-# power-off message
 #: src/zmart-keyring-callbacks.h:68
 msgid "Do you want to trust key id "
-msgstr "Megbízik a következő kulcsazonosítóban: "
+msgstr "信頼するキーIDが必要ですか"
 
 #: src/zmart-keyring-callbacks.h:68 src/zmart-keyring-callbacks.h:80
 msgid " fingerprint:"
-msgstr ", ujjlenyomat:"
+msgstr "指紋:"
 
 #: src/zmart-keyring-callbacks.h:79
 msgid "Signature verification for "
-msgstr "Aláírás-ellenőrzés: "
+msgstr "署名検証:"
 
 #: src/zmart-keyring-callbacks.h:80
 msgid " with public key id "
-msgstr ", nyilvános kulcsazonosító: "
+msgstr "公開鍵ID"
 
 #: src/zmart-keyring-callbacks.h:80
 msgid " failed, THIS IS RISKY!"
-msgstr " meghiúsult, EZ VESZÉLYES!"
+msgstr "失敗しました、危険です!"
 
 #: src/zmart-keyring-callbacks.h:90
 msgid "No digest for "
-msgstr "Nincs kivonat:"
+msgstr "ダイジェストがありません:"
 
 #: src/zmart-keyring-callbacks.h:96
 msgid "Unknown digest "
-msgstr "Ismeretlen kivonat: "
+msgstr "不明なダイジェスト"
 
 #: src/zmart-keyring-callbacks.h:96
 msgid " for "
-msgstr " ehhez: "
+msgstr ":"
 
 #: src/zmart-keyring-callbacks.h:102
 msgid "Digest verification failed for "
-msgstr "A kivonatellenőrzés meghiúsult ehhez: "
+msgstr "ダイジェスト検証に失敗しました:"
 
 #: src/zmart-keyring-callbacks.h:103
 msgid ", expected "
-msgstr ", a várt "
+msgstr "、予定:"
 
 #: src/zmart-keyring-callbacks.h:103
 msgid " found "
-msgstr " helyett: "
+msgstr "該当:"
 
 #: src/zmart-misc.cc:26 src/zmart-misc.cc:29
 msgid "Initializing Target"
-msgstr "Cél inicializálása"
+msgstr "ターゲットを初期化しています"
 
 #: src/zmart-misc.cc:26
 msgid " (old way)"
-msgstr " (régi módszer)"
+msgstr "(古い方法)"
 
 #: src/zmart-misc.cc:161
 msgid "not found"
-msgstr "nem található"
+msgstr "見つかりません"
 
 #: src/zmart-misc.cc:168
 msgid "skipping "
-msgstr "kihagyás: "
+msgstr "スキップ"
 
 #: src/zmart-misc.cc:168
 msgid "(already installed)"
-msgstr "(már telepítve van)"
+msgstr "(すでにインストール済み)"
 
 #: src/zmart-misc.cc:174
 #, c-format
 msgid "Failed to add '%s' to the list of packages to be installed."
-msgstr "\"%s\" hozzáadása a telepítendő alkalmazások listájához meghiúsult."
+msgstr "インストールするパッケージリストへの「%s」の追加に失敗しました。"
 
 #: src/zmart-misc.cc:192
 msgid "Failed"
-msgstr "Sikertelen"
+msgstr "失敗"
 
 #: src/zmart-misc.cc:215
 msgid "Not found"
-msgstr "Nem található"
+msgstr "見つかりません"
 
 #: src/zmart-misc.cc:229
 msgid "Problems:"
-msgstr "Problémák:"
+msgstr "問題:"
 
 #: src/zmart-misc.cc:232
 msgid "PROB "
-msgstr "PROB "
+msgstr "PROB"
 
 #: src/zmart-misc.cc:241
 msgid " SOL  "
-msgstr " MEGOLD "
+msgstr "SOL"
 
 #: src/zmart-misc.cc:257
 msgid "Summary:"
-msgstr "Összefoglaló:"
+msgstr "概要:"
 
 #: src/zmart-misc.cc:280
 msgid "<install>   "
-msgstr "<telepítés>   "
+msgstr "<install>"
 
 #: src/zmart-misc.cc:282
 msgid "<uninstall> "
-msgstr "<eltávolítás> "
+msgstr "<uninstall>"
 
 #: src/zmart-misc.cc:287
 msgid "Nothing to do."
-msgstr "Nincs teendő."
+msgstr "何もすることはありません。"
 
 #: src/zmart-misc.cc:343
 msgid "Parsing RPM database..."
-msgstr "RPM adatbázis feldolgozása..."
+msgstr "RPMデータベースを解析中..."
 
 #: src/zmart-misc.cc:345 src/zmart-misc.cc:358
 msgid " resolvables."
-msgstr " feloldandó."
+msgstr "resolvable"
 
 #: src/zmart-misc.cc:356
 msgid "Parsing metadata for "
-msgstr "Metaadatok értelmezése: "
+msgstr "次のメタデータを解析中:"
 
 #: src/zmart-misc.cc:365
 msgid "Establishing status of aggregates"
-msgstr "Gyűjtemények állapotának kialakítása"
+msgstr "集合のステータスを確立中"
 
 #: src/zmart-misc.cc:373
 msgid "Resolving dependencies..."
-msgstr "Függőségek feloldása..."
+msgstr "依存関係を解決しています..."
 
 #: src/zmart-misc.cc:399
 msgid " patches needed"
-msgstr " javítás szükséges"
+msgstr "パッチが必要"
 
-# modules/inst_config_x11.ycp:216
-# /usr/lib/YaST2/clients/inst_config_x11.ycp:865
 #: src/zmart-misc.cc:399
 msgid " security patches"
-msgstr " biztonsági frissítés"
+msgstr "セキュリティパッチ"
 
 #: src/zmart-misc.cc:406
 msgid "Installed"
-msgstr "Telepítve"
+msgstr "インストール済み"
 
 #: src/zmart-misc.cc:406
 msgid "Uninstalled"
-msgstr "Eltávolítva"
+msgstr "アンインストール済み"
 
 #: src/zmart-misc.cc:408
 msgid "No Longer Applicable"
-msgstr "A továbbiakban nem érvényes"
+msgstr "利用できなくなりました"
 
 #: src/zmart-misc.cc:408
 msgid "Not Applicable"
-msgstr "Nem alkalmazható"
+msgstr "適用不可"
 
 #: src/zmart-misc.cc:410
 msgid "Applied"
-msgstr "Alkalmazva"
+msgstr "適用済み"
 
 #: src/zmart-misc.cc:410
 msgid "Not Needed"
-msgstr "Nem szükséges"
+msgstr "不要"
 
 #: src/zmart-misc.cc:412
 msgid "Broken"
-msgstr "Hibás"
+msgstr "破損"
 
 #: src/zmart-misc.cc:412
 msgid "Needed"
-msgstr "Szükséges"
+msgstr "必要"
 
 #: src/zmart-misc.cc:414
 msgid "error"
-msgstr "hiba"
+msgstr "エラー"
 
 #: src/zmart-misc.cc:443 src/zmart-misc.cc:477 src/zmart-misc.cc:600
 msgid "Catalog"
-msgstr "Katalógus"
+msgstr "カタログ"
 
 #: src/zmart-misc.cc:443 src/zmart-misc.cc:477 src/zmart-misc.cc:605
 #: src/zmart-sources.cc:100
 msgid "Name"
-msgstr "Név"
+msgstr "名前"
 
 #: src/zmart-misc.cc:443 src/zmart-misc.cc:477 src/zmart-misc.cc:605
 msgid "Version"
-msgstr "Verzió"
+msgstr "バージョン"
 
 #: src/zmart-misc.cc:443 src/zmart-misc.cc:477
 msgid "Category"
-msgstr "Kategória"
+msgstr "カテゴリ"
 
 #: src/zmart-misc.cc:443 src/zmart-misc.cc:477 src/zmart-sources.cc:98
 msgid "Status"
-msgstr "Állapot"
+msgstr "状態"
 
 #: src/zmart-misc.cc:511
 msgid ""
 "WARNING: These are only the updates affecting the updater itself.\n"
 "There are others available too.\n"
-msgstr ""
-"FIGYELMEZTETÉS: Ezek a frissítések csak a frissítőt érintik.\n"
-"Ezen kívül mások is elérhetők.\n"
+msgstr "警告: これらは、アップデータ自身に影響するアップデートだけです。\n他のアップデートも利用できます。\n"
 
 #: src/zmart-misc.cc:600
 msgid "S"
@@ -247,20 +244,22 @@ msgstr "S"
 
 #: src/zmart-misc.cc:605
 msgid "Arch"
-msgstr "Architektúra"
+msgstr "アーチ"
 
 #: src/zmart-misc.cc:662
 #, c-format
 msgid "WARNING: %s is interactive, skipped."
-msgstr "FIGYELMEZTETÉS: %s interaktív, kihagyva."
+msgstr "警告: %sは、アクティブではありません。スキップされました。"
 
+# internal key used: Ok
+# internal key used: Ok
 #: src/zmart-misc.cc:707
 msgid "Continue?"
-msgstr "Folytatja?"
+msgstr "続行しますか?"
 
 #: src/zmart-misc.cc:712
 msgid "committing"
-msgstr "véglegesítés"
+msgstr "コミット中"
 
 #: src/zmart-misc.cc:728
 msgid ""
@@ -271,310 +270,277 @@ msgid ""
 "- refresh installation sources using 'zypper refresh'\n"
 "- use another installation media (if e.g. damaged)\n"
 "- use another installation source"
-msgstr ""
-"A csomag integritásellenőrzése meghiúsult. Ez a telepítési forrással vagy "
-"adathordozóval kapcsolatos problémát jelez. Próbálkozzon a következőkkel:\n"
-"\n"
-" - próbálja újra az előző parancsot\n"
-" - frissítse  telepítési forrásokat a \"zypepr refresh\" paranccsal\n"
-" - használjon másik telepítő adathordozót (ha az sérült)\n"
-" - használjon másik telepítési forrást"
+msgstr "パッケージの整合性チェックに失敗しました。 インストールソースまたはメディアに関する問題の可能性があります。 次のいずれかの方法を試してください:\n \n- コマンドを再試行する\n- 「zypper refresh」を使ってインストールソースを更新する\n - 他のインストールメディアを使用する(例:損傷している場合など)\n - 他のインストールソースを使用する"
 
 #: src/zmart-misc.cc:746
 msgid ""
 "WARNING: One of installed patches requires reboot of your machine. Please, "
 "do it as soon as possible."
-msgstr ""
-"FIGYELMEZTETÉS: A telepített javítások egyike a számítógép újraindítását "
-"igényli. Ezt amint lehet, tegye meg."
+msgstr "警告: インストールされたパッチの中には、コンピュータを再起動する必要があるものがあります。 できる限り早めに、コンピュータを再起動してください。"
 
 #: src/zmart-misc.cc:749
 msgid ""
 "WARNING: One of installed patches affects the package manager itself, thus "
 "it requires restart before executing next operations."
-msgstr ""
-"FIGYELMEZTETÉS: A telepített javítások egyike magát a csomagkezelőt érinti, "
-"így az az új műveletek végrehajtása előtt újraindítást igényel."
+msgstr "警告: インストールされているパッチの1つが、パッケージマネージャに影響を与えてしまいます。そのため、次の操作を実行する前に、再起動する必要があります。"
 
 #: src/zmart-misc.cc:772 src/zmart-misc.cc:798
 msgid "license"
-msgstr "licenc"
+msgstr "ライセンス"
 
 #: src/zmart-misc.cc:775
 msgid ""
 "In order to install this package, you must agree to terms of the above "
 "licencse. Continue?"
-msgstr ""
-"A csomag telepítése érdekében el kell fogadnia a fenti licenc feltételeit. "
-"Folytatja?"
+msgstr "このパッケージをインストールするには、上記のライセンス(使用許諾契約)の条項に同意する必要があります。 続行しますか?"
 
 #: src/zmart-misc.cc:786
 msgid "Aborting installation due to the need of license(s) confirmation."
-msgstr ""
-"A telepítés megszakítva a licencek megerősítésének szükségessége miatt."
+msgstr "ライセンス(使用許諾契約)に同意する必要があるため、インストールを中止します。"
 
 #: src/zmart-misc.cc:788
 msgid ""
 "Please, restart the operation in interactive mode and confirm agreement with "
 "required license(s)."
-msgstr ""
-"Indítsa újra a folyamatot interaktív módban és fogadja el a szükséges "
-"licenceket."
+msgstr "インタラクティブモードで操作を再開始して、必要なライセンス(使用許諾契約)に同意してください。"
 
 #: src/zmart-misc.cc:795
 msgid "Aborting installation due to user disagreement with "
-msgstr ""
-"Telepítés megszakítva a felhasználó egyet nem értése miatt a következővel: "
+msgstr "ユーザが次の使用許諾契約に同意しなかったため、インストールを中止しました:"
 
 #: src/zmart-sources.cc:31
 msgid ""
 "Sorry, you need root privileges to use system sources, disabling them..."
-msgstr ""
-"Elnézést, a rendszerforrások használatához root jogosultság szükséges, "
-"letiltás..."
+msgstr "システムソースを使用するには、root権限が必要です、無効にしています..."
 
 #: src/zmart-sources.cc:48
 msgid "Restoring system sources..."
-msgstr "Rendszerforrások visszaállítása..."
+msgstr "システムソースを復元しています..."
 
 #: src/zmart-sources.cc:57
 msgid "Failed to restore sources"
-msgstr "A források visszaállítása meghiúsult"
+msgstr "ソースの復元に失敗しました。"
 
 #: src/zmart-sources.cc:80
 msgid "Can't access repository"
-msgstr "A lerakat nem érhető el"
+msgstr "リポジトリにアクセスできません"
 
 #: src/zmart-sources.cc:99
 msgid "Enabled"
-msgstr "bekapcsolva"
+msgstr "有効"
 
 #: src/zmart-sources.cc:99
 msgid "Refresh"
-msgstr "Frissítés"
+msgstr "更新間隔(F)"
 
 #: src/zmart-sources.cc:100
 msgid "Type"
-msgstr "Típus"
+msgstr "タイプ"
 
 #: src/zmart-sources.cc:116 src/zmart-sources.cc:118
 msgid "Active"
-msgstr "Aktív"
+msgstr "アクティブ"
 
 #: src/zmart-sources.cc:118
 msgid "Disabled"
-msgstr "Tiltva"
+msgstr "無効"
 
 #: src/zmart-sources.cc:125 src/zmart-sources.cc:126 src/zmart-sources.cc:128
 #: src/zmart-sources.cc:129
 msgid "Yes"
-msgstr "Igen"
+msgstr "はい"
 
 #: src/zmart-sources.cc:126 src/zmart-sources.cc:128 src/zmart-sources.cc:129
 msgid "No"
-msgstr "Nem"
+msgstr "いいえ"
 
 #: src/zmart-sources.cc:163 src/zmart-sources.cc:476
 msgid "Error reading system sources: "
-msgstr "Hiba a rendszerforrások olvasása közben: "
+msgstr "システムソースの読み込み時にエラーが発生しました:"
 
 #: src/zmart-sources.cc:190
 msgid "Unknown repository type "
-msgstr "Ismeretlen lerakattípus: "
+msgstr "不明なリポジトリタイプ"
 
 #: src/zmart-sources.cc:202
 msgid "Name not found"
-msgstr "A név nem található"
+msgstr "名前が見つかりません"
 
 #: src/zmart-sources.cc:205
 msgid "baseurl not found"
-msgstr "Az alap URL nem található"
+msgstr "ベースURLが見つかりません"
 
 #: src/zmart-sources.cc:330
 msgid "Continuing anyway"
-msgstr "Folytatás mindenképp"
+msgstr "続行します"
 
 #: src/zmart-sources.cc:336
 msgid "removing source "
-msgstr "forrás eltávolítása: "
+msgstr "ソースを削除しています"
 
 #: src/zmart-sources.cc:343 src/zmart-sources.cc:367 src/zmart-sources.cc:379
 #: src/zmart-sources.cc:412 src/zmart-sources.cc:435 src/zmart-sources.cc:446
-#, c-format
 msgid "Source %s not found."
-msgstr "A(z) %s forrás nem található."
+msgstr "ソース%sが見つかりません。"
 
 #: src/zmart-sources.cc:359 src/zmart-sources.cc:427
 msgid "URL is invalid: "
-msgstr "Az URL érvénytelen: "
+msgstr "URLが無効です:"
 
 #: src/zmart-sources.cc:464
 msgid "Sorry, not implemented yet for libzypp-1.x.x"
-msgstr "Elnézést, még nincs megvalósítva a libzypp-1.x.x verzióhoz"
+msgstr "libzypp-1.x.xでは実装されていません"
 
 #: src/zmart-sources.cc:485
 msgid "Refreshing "
-msgstr "Frissítés: "
+msgstr "更新中"
 
 #: src/zmart-sources.cc:492
 msgid "DONE"
-msgstr "KÉSZ"
+msgstr "完了"
 
 #: src/zmart-sources.cc:496
 msgid "Error while refreshing the source: "
-msgstr "Hiba a forrás frissítése során: "
+msgstr "ソースの更新中にエラーが発生しました:"
 
 #: src/zmart-sources.cc:501
 msgid "All system sources have been refreshed."
-msgstr "Minden rendszerforrás frissítve."
+msgstr "すべてのシステムソースが更新されました。"
 
 #: src/zmart-sources.cc:522
 msgid "Error while fetching "
-msgstr "Hiba a letöltés közben "
+msgstr "フェッチ中にエラーが発生しました"
 
 #: src/zmart-sources.cc:538
 msgid "ZENworks Management Daemon is running."
-msgstr "A ZENworks felügyeleti démon fut."
+msgstr "ZENworks管理デーモンが稼働中です"
 
 #: src/zmart-sources.cc:539
 msgid "WARNING: this command will not synchronize changes."
-msgstr "FIGYELMEZTETÉS: ez a parancs nem szinkronizálja a módosításokat."
+msgstr "警告: このコマンドは、変更内容を同期化しません。"
 
 #: src/zmart-sources.cc:540
 msgid "Use rug or yast2 for that."
-msgstr "Erre használja a rug vagy yast2 programokat."
+msgstr "rugまたはyast2を使用してください。"
 
 #: src/zypp-checkpatches.cc:127
 msgid ""
 "The updater could not access the package manager engine. This usually "
 "happens when you have another application (like YaST) using it at the same "
 "time. Please close other applications and check again for updates."
-msgstr ""
-"A frissítő nem tudta elérni a csomagkezelő alrendszert. Ez általában akkor "
-"történik, ha egyidejűleg másik alkalmazást (például a YaST-ot) is használ. "
-"Zárja be az egyéb alkalmazásokat és keresse újra a frissítéseket."
+msgstr "アップデータは、パッケージマネージャエンジンにアクセスできません。 他のアプリケーション(YaSTなど)を同時に使用している場合などに、このような問題が発生します。 他のアプリケーションを終了してから、アップデートの確認を行ってください。"
 
 #: src/zypp-checkpatches.cc:213
-#, c-format
 msgid ""
 "Couldn't restore source.\n"
 "Detail: %s"
-msgstr ""
-"Nem sikerült visszaállítani a forrást.\n"
-"Részletek: %s"
+msgstr "リソースを復元できません。\n詳細: %s"
 
 #: src/zypp-checkpatches.cc:262
 msgid ""
 "There are no update sources defined. Please add one or more update sources "
 "in order to be notified of updates."
-msgstr ""
-"Nincsenek megadva frissítési források. Vegyen fel legalább egy frissítési "
-"forrást a frissítésekről történő értesítéshez."
+msgstr "アップデートソースが定義されていません。 アップデートを通知するには、アップデートソースを追加してください。"
 
 #: src/zypper-callbacks.cc:23
 msgid "(A)bort, (R)etry, (I)gnore?"
-msgstr "Megszakítás (a), újra (r), mellőz (i)?"
+msgstr "中止(A)、再試行(R)、無視(I)?"
 
 #: src/zypper-getopt.cc:56
 msgid "Unknown option "
-msgstr "Ismeretlen kapcsoló: "
+msgstr "不明なオプション"
 
 #: src/zypper-getopt.cc:59
 msgid "Missing argument for "
-msgstr "A következő argumentuma hiányzik: "
+msgstr "引数がありません:"
 
 #: src/zypper-info.cc:48
 msgid " not found."
-msgstr " nem található."
+msgstr "見つかりません"
 
 #: src/zypper-info.cc:52
 msgid "Information for "
-msgstr "A következő információi: "
+msgstr "情報:"
 
 #: src/zypper-info.cc:84
 msgid "Catalog: "
-msgstr "Katalógus: "
+msgstr "カタログ: "
 
 #: src/zypper-info.cc:85
 msgid "Name: "
-msgstr "Név: "
+msgstr "名前:"
 
 #: src/zypper-info.cc:86
 msgid "Version: "
-msgstr "Verzió: "
+msgstr "バージョン: "
 
 #: src/zypper-info.cc:87
 msgid "Arch: "
-msgstr "Architektúra: "
+msgstr "アーチ: "
 
 #: src/zypper-info.cc:88
 msgid "Installed: "
-msgstr "Telepítés ideje: "
+msgstr "インストール済み: "
 
 #: src/zypper-info.cc:90
 msgid "Status: "
-msgstr "Állapot: "
+msgstr "Status:"
 
 #: src/zypper-info.cc:93
 msgid "up-to-date"
-msgstr "naprakész"
+msgstr "最新"
 
 #: src/zypper-info.cc:95
 msgid "out-of-date (version "
-msgstr "elavult (verziószám: "
+msgstr "有効期限切れ(バージョン"
 
 #: src/zypper-info.cc:96
 msgid " installed) "
-msgstr " telepítve) "
+msgstr "インストール済み)"
 
-# modules/inst_target_part.ycp:676
 #: src/zypper-info.cc:99
 msgid "not installed"
-msgstr "nincs telepítve"
+msgstr "インストールされていません"
 
 #: src/zypper-info.cc:101
 msgid "Installed Size: "
-msgstr "Telepített méret: "
+msgstr "インストール済みのサイズ: "
 
 #: src/zypper-info.cc:102
 msgid "Summary: "
-msgstr "Összegzés: "
+msgstr "概要: "
 
 #: src/zypper-info.cc:103
 msgid "Description: "
-msgstr "Leírás: "
+msgstr "説明: "
 
 #: src/zypper-search.cc:45
 msgid "No sources. Zypper currently searches within installationsources only."
-msgstr ""
-"Nincsenek források. A Zypper jelenleg csak a telepítési forrásokon belül "
-"keres."
+msgstr "ソースがありません。 現在Zypperは、インストールソース内のみを検索しています。"
 
 #: src/zypper-search.cc:107
 msgid "Pre-caching installed resolvables matching given search criteria... "
-msgstr ""
-"Az adott keresési feltételnek megfelelő telepített feloldhatók elő-"
-"gyorsítótárazása... "
+msgstr "指定された検索基準に一致する、インストール済みresolvableをプリキャッシュしています..."
 
 #: src/zypper-search.cc:116
 msgid " out of ("
-msgstr " / ("
+msgstr "/("
 
 #: src/zypper-search.cc:117
 msgid "cached."
-msgstr "gyorsítótárazva."
+msgstr "キャッシュされました。"
 
 #: src/zypper-search.cc:216
 msgid " is not a valid regular expression: \""
-msgstr " nem érvényes reguláris kifejezés: \""
+msgstr "は、有効な方形式ではありません: \""
 
 #: src/zypper-search.cc:218
 msgid "This is a bug, please file a bug report against zypper."
-msgstr "Ez hiba, küldjön erről egy hibajelentést a zypper fejlesztőinek."
+msgstr "これはバグです。zypperにバグレポートを報告してください"
 
 #: src/zypper.cc:70
 msgid "URL is invalid."
-msgstr "Az URL érvénytelen."
+msgstr "URLが無効です。"
 
 #: src/zypper.cc:78
 msgid ""
@@ -596,24 +562,23 @@ msgid ""
 "\tinfo, if\t\tShow full information for packages\n"
 "\tpatch-info\t\tShow full information for patches\n"
 msgstr ""
-"  Parancsok:\n"
-"\thelp\t\t\tSúgó\n"
-"\tshell, sh\t\tTöbb parancs elfogadása egyidejűleg\n"
-"\tinstall, in\t\tCsomagok vagy feloldhatók telepítése\n"
-"\tremove, rm\t\tCsomagok vagy feloldhatók eltávolítása\n"
-"\tsearch, se\t\tMintának megfelelő csomagok keresése\n"
-"\tservice-list, sl\tTelepítési forrásnak nevezett szolgáltatások "
-"felsorolása\n"
-"\tservice-add, sa\t\tÚj szolgáltatás hozzáadása\n"
-"\tservice-delete, sd\tSzolgáltatás hozzáadása\n"
-"\tservice-rename, sr\tSzolgáltatás átnevezése\n"
-"\trefresh, ref\t\tMinden telepítési forrás frissítése\n"
-"\tpatch-check, pchk\tJavítások keresése\n"
-"\tpatches, pch\t\tJavítások felsorolása\n"
-"\tlist-updates, lu\tFrissítések felsorolása\n"
-"\tupdate, up\t\tCsomagok frissítése\n"
-"\tinfo, if\t\tCsomagok teljes információinak megjelenítése\n"
-"\tpatch-info\t\tJavítások teljes információinak megjelenítése\n"
+"  コマンド:\n"
+"\thelp\t\t\tヘルプ\n"
+" \tshell, sh\t\t複数のコマンドを同時に受け付けます\n"
+" \tinstall, in\t\tパッケージまたはresolvableをインストールします\n"
+" \tremove, rm\t\tパッケージまたはresolvableを削除します\n"
+" \tsearch, se\t\tパターンに一致するパッケージを検索します\n"
+" \tservice-list, sl\tサービス、またはインストールソースを一覧表示します\n"
+" \tservice-add, sa\t\t新しいサービスを追加します\n"
+" \tservice-delete, sd\tサービスを削除します\n"
+" \tservice-rename, sr\tサービス名を変更します\n"
+" \trefresh, ref\t\tすべてのインストールソースを更新します\n"
+" \tpatch-check, pchk\tパッチをチェックします\n"
+" \tpatches, pch\t\tパッチを一覧表示します\n"
+" \tlist-updates, lu\tアップデートを一覧表示します\n"
+" \tupdate, up\t\tパッケージをアップデートします\n"
+" \tinfo, if\t\tパッケージの全情報を表示します\n"
+" \tpatch-info\t\tパッチの全情報を表示します\n"
 
 #: src/zypper.cc:121
 msgid ""
@@ -626,28 +591,19 @@ msgid ""
 "\t--rug-compatible, -r\tTurn on rug compatibility\n"
 "\t--non-interactive\tDon't ask anything, use default answers automatically. "
 "(under development)\n"
-msgstr ""
-"  Kapcsolók:\n"
-"\t--help, -h\t\tSúgó\n"
-"\t--version, -V\t\tVerziószám kiírása\n"
-"\t--verbose, -v\t\tBőbeszédűség növelése\n"
-"\t--terse, -t\t\tTömör kimenet gépi fogyasztásra\n"
-"\t--table-style, -s\tTáblastílus (egész)\n"
-"\t--rug-compatible, -r\tA rug kompatibilitás engedélyezése\n"
-"\t--non-interactive\tNe kérdezzen semmit, az alapértelmezett válaszokat "
-"használja automatikusan. (fejlesztés alatt)\n"
+msgstr "  オプション:\n\t--help, -h\t\tヘルプ\n \t--version, -V\t\tバージョン番号を出力します\n \t--verbose, -v\t\t冗長性を増やします\n \t--terse, -t\t\tマシン消費の簡易出力\n \t--table-style, -s\tテーブルスタイル(整数)\n \t--rug-compatible, -r\trug互換性をオンにします\n\t--非対話\t何も問い合わせない、自動的にデフォルトの回答を使用  (開発中)\n"
 
 #: src/zypper.cc:133
 msgid "Verbosity "
-msgstr "Bőbeszédűség "
+msgstr "冗長性"
 
 #: src/zypper.cc:152
 msgid "Invalid table style "
-msgstr "Érvénytelen táblázatstílus "
+msgstr "無効なテーブルスタイル"
 
 #: src/zypper.cc:189
 msgid "Try -h for help"
-msgstr "A súgóhoz használja a -h kapcsolót"
+msgstr "-hでヘルプを表示してください"
 
 #: src/zypper.cc:207
 msgid ""
@@ -655,9 +611,9 @@ msgid ""
 "\t--disable-system-sources, -D\t\tDo not read the system sources\n"
 "\t--source, -S\t\tRead additional source\n"
 msgstr ""
-"  Forrás kapcsolói:\n"
-"\t--disable-system-sources, -D\t\tNe olvassa be a rendszerforrásokat\n"
-"\t--source, -S\t\tKiegészítő forrás beolvasása\n"
+"  ソースオプション:\n"
+"\t--disable-system-sources, -D\t\tシステムソースを読みません\n"
+" \t--source, -S\t\t他のソースを読み込みます\n"
 
 #: src/zypper.cc:212
 msgid ""
@@ -665,9 +621,9 @@ msgid ""
 "\t--disable-system-resolvables, -T\t\tDo not read system installed "
 "resolvables\n"
 msgstr ""
-"  Cél kapcsolói:\n"
-"\t--disable-system-resolvables, -T\t\tNe olvassa be a rendszer által "
-"telepített feloldhatókat\n"
+"  ターゲットオプション:\n"
+"\t--disable-system-resolvables, -T\t\tシステムにインストールされたresolvable"
+"を読み込みません\n"
 
 #: src/zypper.cc:226
 msgid ""
@@ -676,10 +632,10 @@ msgid ""
 "\t--type,-t\t\tType of resolvable (default: package)\n"
 "\t--no-confirm,-y\tDo not require user confirmation\n"
 msgstr ""
-"  Parancs kapcsolói:\n"
-"\t--catalog,-c\t\tCsak ebből a katalógusból (fejlesztés alatt)\n"
-"\t--type,-t\t\tA feloldható típusa (alapértelmezett: csomag)\n"
-"\t--no-confirm,-y\tNe kérjen felhasználói megerősítést\n"
+"  コマンドオプション:\n"
+"\t--catalog,-c\t\tこのカタログからのみ(開発中)\n"
+" \t--type,-t\t\tresolvableのタイプ(デフォルト:package)\n"
+" \t--no-confirm,-y\tユーザの確認を必要としない\n"
 
 #: src/zypper.cc:241
 msgid ""
@@ -687,9 +643,9 @@ msgid ""
 "\t--type,-t\t\tType of resolvable (default: package)\n"
 "\t--no-confirm,-y\tDo not require user confirmation\n"
 msgstr ""
-"  Parancs kapcsolói:\n"
-"\t--type,-t\t\tA feloldható típusa (alapértelmezett: csomag)\n"
-"\t--no-confirm,-y\tNe kérjen felhasználói megerősítést\n"
+"  コマンドオプション:\n"
+"\t--type,-t\t\tresolvableのタイプ(デフォルト: パッケージ)\n"
+" \t--no-confirm,-y\tユーザの確認を必要としない\n"
 
 #: src/zypper.cc:257
 msgid ""
@@ -703,15 +659,15 @@ msgid ""
 "\t--disabled,-d\t\tAdd the service as disabled\n"
 "\t--no-refresh,-n\t\tDo not automatically refresh the metadata\n"
 msgstr ""
-"service-add [kapcsolók] URI [álnév]\n"
+"service-add [options] URI [alias]\n"
 "\n"
-"Szolgáltatás (telepítési forrás) hozzáadása a rendszerhez.\n"
-"  Parancs kapcsolói:\n"
-"\t--repo,-r <FÁJL.repo>\tAz URL és álnév beolvasása fájlból\n"
-"\t\t\t\t(távoli is)\n"
-"\t--type,-t <TÍPUS>\tA lerakat típusa (YaST, YUM, vagy Plaindir)\n"
-"\t--disabled,-d\t\tA szolgáltatás felvétele letiltottként\n"
-"\t--no-refresh,-n\t\tNe frissítse automatikusan a metaadatokat\n"
+" システムにサービス(インストールソース)を追加します。\n"
+"   コマンドオプション:\n"
+" \t--repo,-r <FILE.repo>\tファイルからURLと別名を読み込みます\n"
+" \t\t\t\t(リモートの場合でも)\n"
+" \t--type,-t <TYPE>\tリポジトリのタイプ(YaST、YUM、またはPlaindir)\n"
+" \t--disabled,-d\t\tサービスを無効として追加します\n"
+" \t--no-refresh,-n\t\tメタデータを自動更新しません\n"
 
 #: src/zypper.cc:276
 msgid ""
@@ -722,8 +678,8 @@ msgid ""
 msgstr ""
 "service-list\n"
 "\n"
-"Az összes megadott rendszerszolgáltatás (telepítési források) felsorolása.\n"
-"Ennek a parancsnak nincsenek kapcsolói.\n"
+" 定義されたシステムサービス(インストールソース)をすべて一覧表示します。\n"
+" このコマンドにオプションはありません。\n"
 
 #: src/zypper.cc:290
 msgid ""
@@ -732,10 +688,10 @@ msgid ""
 "Remove service (installation source) from the system.\n"
 "This command has no options.\n"
 msgstr ""
-"service-delete [kapcsolók] <URI|álnév>\n"
+"service-delete [options] <URI|alias>\n"
 "\n"
-"Szolgáltatás (telepítési forrás) eltávolítása a rendszerről.\n"
-"Ennek a parancsnak nincsenek kapcsolói.\n"
+" システムからサービス(インストールソース)を削除します。\n"
+" このコマンドにオプションはありません。\n"
 
 #: src/zypper.cc:304
 msgid ""
@@ -744,11 +700,10 @@ msgid ""
 "Assign new alias to the service specified by URI or current alias.\n"
 "This command has no options.\n"
 msgstr ""
-"service-rename [kapcsolók] <URI|álnév> <új-álnév>\n"
+"service-rename [options] <URI|alias> <new-alias>\n"
 "\n"
-"Új álnév társítása az URI vagy jelenlegi álnév által megadott "
-"szolgáltatáshoz.\n"
-"Ennek a parancsnak nincsenek kapcsolói.\n"
+" URIまたは現在の別名で指定されたサービスに、新しい別名を割り当てます。\n"
+" このコマンドにオプションはありません。\n"
 
 #: src/zypper.cc:318
 msgid ""
@@ -758,7 +713,7 @@ msgid ""
 msgstr ""
 "zypper refresh\n"
 "\n"
-"A rendszeren található összes telepítési forrás frissítése.\n"
+" システム内で見つかったすべてのインストールソースを更新します。\n"
 
 #: src/zypper.cc:331
 msgid ""
@@ -769,12 +724,12 @@ msgid ""
 "  Command options:\n"
 "\t--type,-t\t\tType of resolvable (default: patch)\n"
 msgstr ""
-"list-updates [kapcsolók]\n"
+"list-updates [options]\n"
 "\n"
-"Az összes elérhető frissítés felsorolása\n"
-"\n"
-"  Parancs kapcsolói:\n"
-"\t--type,-t\t\tA feloldható típusa (alapértelmezés: javítás)\n"
+" 利用できるすべてのアップデートを一覧表示します\n"
+" \n"
+"   コマンドオプション:\n"
+" \t--type,-t\t\tresolvableのタイプ(デフォルト: patch)\n"
 
 #: src/zypper.cc:349
 msgid ""
@@ -783,10 +738,10 @@ msgid ""
 "\t--no-confirm,-y\t\tDo not require user confirmation\n"
 "\t--skip-interactive\t\tSkip interactive updates\n"
 msgstr ""
-"  Parancs kapcsolói:\n"
-"\t--type,-t\t\tA feloldható típusa (alapértelmezés: javítás)\n"
-"\t--no-confirm,-y\t\tNe igényeljen felhasználói megerősítést\n"
-"\t--skip-interactive\t\tInteraktív frissítések kihagyása\n"
+"  コマンドオプション:\n"
+"\t--type,-t\t\tresolvableのタイプ(デフォルト: patch)\n"
+" \t--no-confirm,-y\t\tユーザの確認を必要としない\n"
+" \t--skip-interactive\t\tインタラクティブアップデートをスキップする\n"
 
 #: src/zypper.cc:374
 msgid ""
@@ -815,29 +770,30 @@ msgid ""
 "\n"
 "* and ? wildcards can also be used within search strings.\n"
 msgstr ""
-"zypper [globális-kapcsolók] search [kapcsolók] [lekérdezés...]\n"
+"zypper [global-options] search [options] [querystring...]\n"
 "\n"
-"'search' - A megadott keresési kifejezéseknek megfelelő csomagok keresése\n"
-"\n"
-"  Parancs kapcsolói:\n"
-"    --match-all            Keresés minden keresőkifejezésre "
-"(alapértelmezett)\n"
-"    --match-any            Keresés bármely keresőkifejezésre \n"
-"    --match-substrings     A keresőkifejezésekre részleges szavak is "
-"illeszkednek (alapértelmezett)\n"
-"    --match-words          A keresőkifejezésekre csak teljes szavak "
-"illeszkedhetnek \n"
-"    --match-exact          Keresés pontos csomagnévre\n"
-"-d, --search-descriptions  Keresés csomagösszegzésekre és -leírásokra.\n"
-"-c, --case-sensitive       Kis- és nagybetűérzékeny keresés.\n"
-"-i, --installed-only       Csak a telepített csomagok megjelenítése.\n"
-"-u, --uninstalled-only     Csak a nem telepített csomagok megjelenítése.\n"
-"-t, --type                 Csak adott típusú csomagok keresése.\n"
-"    --sort-by-name         Csomagok rendezése név szerint "
-"(alapértelmezett).\n"
-"    --sort-by-catalog      Csomagok rendezése katalógus (forrás) szerint.\n"
-"\n"
-"A * és ? helyettesítő karakterek is használhatók a keresőkifejezésekben.\n"
+" 'search' - 指定した検索文字列に一致するパッケージを検索します\n"
+" \n"
+"   コマンドオプション:\n"
+"     --match-all            すべての検索文字列に一致するパッケージを検索しま"
+"す(デフォルト)\n"
+"     --match-any            いずれかの検索文字列に一致するパッケージを検索し"
+"ます\n"
+"     --match-substrings     検索文字列の一部の文字列が一致する検索(デフォル"
+"ト)\n"
+"     --match-words          検索文字列が単語全体に一致する検索\n"
+"     --match-exact          パッケージ名に正確に一致するものを検索します\n"
+" -d, --search-descriptions  パッケージ要約と説明も検索します。\n"
+" -c, --case-sensitive       大文字と小文字を区別して検索を行います。\n"
+" -i, --installed-only       すでにインストールされているパッケージのみを表示"
+"します。\n"
+" -u, --uninstalled-only     現在インストールされていないパッケージのみを表示"
+"します。\n"
+" -t, --type                 指定したタイプのパッケージのみを検索します。\n"
+"     --sort-by-name         パッケージを名前別にソートします(デフォルト)。\n"
+"     --sort-by-catalog      パッケージをカタログ(ソース)別にソートします。\n"
+" \n"
+" 検索文字列にワイルドカード「*」および「?」を使用することもできます。\n"
 
 #: src/zypper.cc:402
 msgid ""
@@ -849,9 +805,9 @@ msgid ""
 msgstr ""
 "patch-check\n"
 "\n"
-"Elérhető javítások keresése\n"
-"\n"
-"Ennek a parancsnak nincsenek kapcsolói.\n"
+" 利用できるパッチを確認します\n"
+" \n"
+" このコマンドにオプションはありません。\n"
 
 #: src/zypper.cc:416
 msgid ""
@@ -863,9 +819,9 @@ msgid ""
 msgstr ""
 "patches\n"
 "\n"
-"Felsorolja az összes elérhető javítást\n"
-"\n"
-"Ennek a parancsnak nincsenek kapcsolói.\n"
+" 利用できるすべてのパッチを表示します\n"
+" \n"
+" このコマンドにオプションはありません。\n"
 
 #: src/zypper.cc:430
 msgid ""
@@ -873,9 +829,9 @@ msgid ""
 "\n"
 "'info' -- Show full information for packages\n"
 msgstr ""
-"zypper [globális-kapcsolók] info [név...]\n"
+"zypper [global-options] info [name...]\n"
 "\n"
-"'info' -- Csomagok teljes információinak megjelenítése\n"
+" 'info' -- パッケージの全情報を表示します\n"
 
 #: src/zypper.cc:442
 msgid ""
@@ -883,9 +839,9 @@ msgid ""
 "\n"
 "'patch-info' -- Show detailed information for patches\n"
 msgstr ""
-"zypper [globális-kapcsolók] patch-info [javításnév...]\n"
+"zypper [global-options] patch-info [patchname...]\n"
 "\n"
-"'patch-info' -- Javítások részletes információinak megjelenítése\n"
+" 'patch-info' -- パッチの詳細情報を表示します\n"
 
 #: src/zypper.cc:454
 msgid ""
@@ -893,60 +849,59 @@ msgid ""
 "\n"
 "'moo' - Show an animal\n"
 msgstr ""
-"zypper [globális-kapcsolók] moo\n"
+"zypper [global-options] moo\n"
 "\n"
-"'moo' - Egy állat megjelenítése\n"
+" 'moo' - 動物を表示します\n"
 
 #: src/zypper.cc:460
 msgid "Unknown command"
-msgstr "Ismeretlen parancs"
+msgstr "不明なコマンド"
 
 #: src/zypper.cc:475
 msgid "Non-Option Program Arguments: "
-msgstr "Nem kapcsoló programargumentumok: "
+msgstr "オプション以外のプログラム引数:"
 
 #: src/zypper.cc:487
 msgid "Ignoring --terse (provided only for rug compatibility)"
-msgstr "A --terse figyelmen kívül hagyva (csak a rug kompatibilitás miatt van)"
+msgstr "Ignoring --簡易(rug互換性のためにのみ提供)"
 
 #: src/zypper.cc:503
 msgid "Ignoring installed resolvables..."
-msgstr "Telepített feloldhatók figyelmen kívül hagyása..."
+msgstr "インストールされているresolvableを無視しています..."
 
 #: src/zypper.cc:526
 msgid "A ZYpp transaction is already in progress."
-msgstr "Egy Zypp tranzakció már folyamatban van."
+msgstr "ZYppトランザクションはすでに処理中です。"
 
 #: src/zypper.cc:553
 msgid "Root privileges are required for viewing system sources."
-msgstr "A rendszerforrások megjelenítéséhez root jogosultság szükséges."
+msgstr "システムソースを表示するには、ルート権限が必要です。"
 
 #: src/zypper.cc:571
 msgid "Warning: Unknown metadata type "
-msgstr "Figyelmeztetés: Ismeretlen metaadattípus: "
+msgstr "警告: 不明なメタデータタイプ"
 
 #: src/zypper.cc:708 src/zypper.cc:766 src/zypper.cc:852 src/zypper.cc:880
 msgid "Unknown resolvable type "
-msgstr "Ismeretlen feloldhatótípus: "
+msgstr "不明なresolvableタイプ"
 
 #: src/zypper.cc:721
 msgid ""
 "Warning: No sources. Operating only with the installed resolvables. Nothing "
 "can be installed."
 msgstr ""
-"Figyelmeztetés: Nincsenek források. Csak a telepített feloldhatókkal lehet "
-"dolgozni. Semmi sem telepíthető."
+"警告: ソースがありません。 インストールされているresolvableでのみ動作しま"
+"す。 何もインストールできません。"
 
 #: src/zypper.cc:923
 msgid "Please file a bug report about this."
-msgstr "Küldjön erről egy hibajelentést."
+msgstr "これに関するバクレポートをファイルしてください。"
 
 #: src/zypper.cc:926
 msgid "See http://en.opensuse.org/Zypper#Troubleshooting for instructions."
 msgstr ""
-"Utasításokért tekintse meg a http://en.opensuse.org/Zypper#Troubleshooting "
-"oldalt"
+"詳細は、http://en.opensuse.org/Zypper#Troubleshootingを参照してください。"
 
 #: src/zypper.cc:939
 msgid "Unexpected exception."
-msgstr "Váratlan kivétel."
+msgstr "予期しない例外エラーが発生しました。"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: translation@suse.de\n"
-"POT-Creation-Date: 2007-03-05 16:11+0100\n"
+"POT-Creation-Date: 2007-02-16 10:33+0100\n"
 "PO-Revision-Date: 2006-01-04 08:58+0100\n"
 "Last-Translator: Novell Language <language@novell.com>\n"
 "Language-Team: Novell Language <language@novell.com>\n"
@@ -20,181 +20,159 @@ msgstr ""
 
 #: src/zmart-keyring-callbacks.h:36
 msgid " is unsigned, continue?"
-msgstr ""
+msgstr "не подписан, продолжить?"
 
 #: src/zmart-keyring-callbacks.h:46
-#, fuzzy
 msgid "Import key "
-msgstr "Импортировать"
+msgstr "Импортировать ключ"
 
 #: src/zmart-keyring-callbacks.h:46
 msgid " to trusted keyring?"
-msgstr ""
+msgstr "в хранилище доверенных ключей?"
 
 #: src/zmart-keyring-callbacks.h:57
 msgid " is signed with an unknown key id: "
-msgstr ""
+msgstr "подписан ключом с неизвестным идентификатором:"
 
 # continue button label
 #: src/zmart-keyring-callbacks.h:57 src/zmart-keyring-callbacks.h:80
 #: src/zmart-keyring-callbacks.h:91 src/zmart-keyring-callbacks.h:97
 #: src/zmart-keyring-callbacks.h:104
-#, fuzzy
 msgid "continue?"
-msgstr "Продолжить"
+msgstr "продолжить?"
 
 #: src/zmart-keyring-callbacks.h:68
-#, fuzzy
 msgid "Do you want to trust key id "
-msgstr "Вы действительно хотите использовать этот путь?"
+msgstr "Следует ли доверять идентификатору ключа"
 
 #: src/zmart-keyring-callbacks.h:68 src/zmart-keyring-callbacks.h:80
-#, fuzzy
 msgid " fingerprint:"
-msgstr "Отпечаток ключа подписи"
+msgstr "отпечаток:"
 
 #: src/zmart-keyring-callbacks.h:79
 msgid "Signature verification for "
-msgstr ""
+msgstr "Проверка подписи для"
 
 #: src/zmart-keyring-callbacks.h:80
 msgid " with public key id "
-msgstr ""
+msgstr "с идентификатором открытого ключа"
 
 #: src/zmart-keyring-callbacks.h:80
 msgid " failed, THIS IS RISKY!"
-msgstr ""
+msgstr "не удалось, ЭТО РИСКОВАННО!"
 
 #: src/zmart-keyring-callbacks.h:90
 msgid "No digest for "
-msgstr ""
+msgstr "Нет дайджеста для"
 
 #: src/zmart-keyring-callbacks.h:96
-#, fuzzy
 msgid "Unknown digest "
-msgstr "Неизвестный ключ/ошибка в цифрах"
+msgstr "Неизвестный дайджест"
 
 #: src/zmart-keyring-callbacks.h:96
 msgid " for "
-msgstr ""
+msgstr "для"
 
 #: src/zmart-keyring-callbacks.h:102
-#, fuzzy
 msgid "Digest verification failed for "
-msgstr "не удалась операция над файлами"
+msgstr "Сбой при проверке дайджеста для"
 
 #: src/zmart-keyring-callbacks.h:103
-#, fuzzy
 msgid ", expected "
-msgstr "Выбрано"
+msgstr ", ожидается"
 
 #: src/zmart-keyring-callbacks.h:103
 msgid " found "
-msgstr ""
+msgstr "найден"
 
 #: src/zmart-misc.cc:26 src/zmart-misc.cc:29
-#, fuzzy
 msgid "Initializing Target"
-msgstr "Инициализация"
+msgstr "Инициализация цели"
 
 #: src/zmart-misc.cc:26
 msgid " (old way)"
-msgstr ""
+msgstr "(старый способ)"
 
 #: src/zmart-misc.cc:161
-#, fuzzy
 msgid "not found"
-msgstr "Запись не найдена."
+msgstr "не найден"
 
 #: src/zmart-misc.cc:168
 msgid "skipping "
-msgstr ""
+msgstr "пропуск"
 
 #: src/zmart-misc.cc:168
-#, fuzzy
 msgid "(already installed)"
-msgstr "'{0}' уже установлен."
+msgstr "(уже установлен)"
 
 #: src/zmart-misc.cc:174
 #, c-format
 msgid "Failed to add '%s' to the list of packages to be installed."
-msgstr ""
+msgstr "Не удалось добавить '%s' в список пакетов для установки."
 
 #: src/zmart-misc.cc:192
-#, fuzzy
 msgid "Failed"
-msgstr "неудачно"
+msgstr "Ошибка"
 
 #: src/zmart-misc.cc:215
-#, fuzzy
 msgid "Not found"
-msgstr "Соответствия не найдено"
+msgstr "Не найден"
 
 #: src/zmart-misc.cc:229
 msgid "Problems:"
-msgstr ""
+msgstr "Проблемы:"
 
 #: src/zmart-misc.cc:232
 msgid "PROB "
-msgstr ""
+msgstr "PROB"
 
 #: src/zmart-misc.cc:241
 msgid " SOL  "
-msgstr ""
+msgstr "SOL"
 
 #: src/zmart-misc.cc:257
-#, fuzzy
 msgid "Summary:"
-msgstr "Резюме: "
+msgstr "Резюме:"
 
 #: src/zmart-misc.cc:280
-#, fuzzy
 msgid "<install>   "
-msgstr "установить"
+msgstr "<install>"
 
 #: src/zmart-misc.cc:282
-#, fuzzy
 msgid "<uninstall> "
-msgstr "Деинсталяция"
+msgstr "<uninstall>"
 
 #: src/zmart-misc.cc:287
-#, fuzzy
 msgid "Nothing to do."
-msgstr "Нечего устанавливать."
+msgstr "Нечего выполнять."
 
 #: src/zmart-misc.cc:343
-#, fuzzy
 msgid "Parsing RPM database..."
-msgstr "Сохранение базы данных"
+msgstr "Анализ базы данных RPM…"
 
 #: src/zmart-misc.cc:345 src/zmart-misc.cc:358
-#, fuzzy
 msgid " resolvables."
-msgstr "Установить отсутствующие пакеты"
+msgstr "объекты разрешения зависимостей."
 
 #: src/zmart-misc.cc:356
-#, fuzzy
 msgid "Parsing metadata for "
-msgstr "Обрабатываются Метаданные"
+msgstr "Анализ метаданных для"
 
 #: src/zmart-misc.cc:365
 msgid "Establishing status of aggregates"
-msgstr ""
+msgstr "Установка состояния агрегатов"
 
 #: src/zmart-misc.cc:373
-#, fuzzy
 msgid "Resolving dependencies..."
 msgstr "Разрешение зависимостей..."
 
 #: src/zmart-misc.cc:399
-#, fuzzy
 msgid " patches needed"
-msgstr "Заплаток не найдено"
+msgstr "исправлений нужно"
 
 #: src/zmart-misc.cc:399
-#, fuzzy
 msgid " security patches"
-msgstr "Обновления безопасности"
+msgstr "обновления безопасности"
 
 #: src/zmart-misc.cc:406
 msgid "Installed"
@@ -205,9 +183,8 @@ msgid "Uninstalled"
 msgstr "Не установлен"
 
 #: src/zmart-misc.cc:408
-#, fuzzy
 msgid "No Longer Applicable"
-msgstr "Неприменимо"
+msgstr "Более неприменимо"
 
 #: src/zmart-misc.cc:408
 msgid "Not Applicable"
@@ -218,9 +195,8 @@ msgid "Applied"
 msgstr "Применимо"
 
 #: src/zmart-misc.cc:410
-#, fuzzy
 msgid "Not Needed"
-msgstr "Ненужно"
+msgstr "Не нужен"
 
 #: src/zmart-misc.cc:412
 msgid "Broken"
@@ -231,9 +207,8 @@ msgid "Needed"
 msgstr "Необходимо"
 
 #: src/zmart-misc.cc:414
-#, fuzzy
 msgid "error"
-msgstr "Ошибка"
+msgstr "ошибка"
 
 #: src/zmart-misc.cc:443 src/zmart-misc.cc:477 src/zmart-misc.cc:600
 msgid "Catalog"
@@ -263,6 +238,8 @@ msgid ""
 "WARNING: These are only the updates affecting the updater itself.\n"
 "There are others available too.\n"
 msgstr ""
+"ВНИМАНИЕ: эти обновления относятся только к самому средству обновления.\n"
+"Имеются и другие.\n"
 
 #: src/zmart-misc.cc:600
 msgid "S"
@@ -275,17 +252,16 @@ msgstr "Арх."
 #: src/zmart-misc.cc:662
 #, c-format
 msgid "WARNING: %s is interactive, skipped."
-msgstr ""
+msgstr "ВНИМАНИЕ: %s интерактивен, пропущен."
 
 # continue button label
 #: src/zmart-misc.cc:707
-#, fuzzy
 msgid "Continue?"
-msgstr "Продолжить"
+msgstr "Продолжить?"
 
 #: src/zmart-misc.cc:712
 msgid "committing"
-msgstr ""
+msgstr "фиксирование"
 
 #: src/zmart-misc.cc:728
 msgid ""
@@ -297,65 +273,75 @@ msgid ""
 "- use another installation media (if e.g. damaged)\n"
 "- use another installation source"
 msgstr ""
+"Не удалось проверить целостность пакета. Возможна проблема с источником "
+"установки или носителем. Попробуйте одно из следующих действий: \n"
+" - просто повторите предыдущую команду\n"
+" - обновите источники установки при помощи 'zypper refresh'\n"
+" - используйте для установки другой носитель (например, из-за повреждения)\n"
+" - используйте другой источник установки"
 
 #: src/zmart-misc.cc:746
 msgid ""
 "WARNING: One of installed patches requires reboot of your machine. Please, "
 "do it as soon as possible."
 msgstr ""
+"ВНИМАНИЕ: для одного из установленных обновлений требуется перезагрузка "
+"компьютера. Выполните ее как можно быстрее."
 
 #: src/zmart-misc.cc:749
 msgid ""
 "WARNING: One of installed patches affects the package manager itself, thus "
 "it requires restart before executing next operations."
 msgstr ""
+"ВНИМАНИЕ: одно из установленных обновлений затрагивает сам менеджер пакетов, "
+"поэтому для продолжения выполнения операций требуется перезагрузка."
 
 #: src/zmart-misc.cc:772 src/zmart-misc.cc:798
 msgid "license"
-msgstr ""
+msgstr "лицензия"
 
 #: src/zmart-misc.cc:775
 msgid ""
 "In order to install this package, you must agree to terms of the above "
 "licencse. Continue?"
 msgstr ""
+"Чтобы установить этот пакет, вы должны согласиться с условиями "
+"вышеприведенной лицензии. Продолжить?"
 
 #: src/zmart-misc.cc:786
 msgid "Aborting installation due to the need of license(s) confirmation."
-msgstr ""
+msgstr "Установка прервана в связи с необходимостью подтверждения лицензий."
 
 #: src/zmart-misc.cc:788
 msgid ""
 "Please, restart the operation in interactive mode and confirm agreement with "
 "required license(s)."
 msgstr ""
+"Выполните операцию повторно в интерактивном режиме и подтвердите согласие с "
+"требуемыми лицензиями."
 
 #: src/zmart-misc.cc:795
 msgid "Aborting installation due to user disagreement with "
-msgstr ""
+msgstr "Установка прервана из-за несогласия пользователя с "
 
 #: src/zmart-sources.cc:31
-#, fuzzy
 msgid ""
 "Sorry, you need root privileges to use system sources, disabling them..."
 msgstr ""
-"%s: Извинете. Вам необходимы права администратора для запуска этой "
-"программы.\n"
-"\n"
+"Извините, для использования и отключения системных источников требуются "
+"полномочия суперпользователя…"
 
 #: src/zmart-sources.cc:48
-#, fuzzy
 msgid "Restoring system sources..."
-msgstr "Восстанавливаются ресурсы"
+msgstr "Восстановление системных источников…"
 
 #: src/zmart-sources.cc:57
-#, fuzzy
 msgid "Failed to restore sources"
-msgstr "Невозможно восстановить все источники."
+msgstr "Не удалось восстановить источники"
 
 #: src/zmart-sources.cc:80
 msgid "Can't access repository"
-msgstr ""
+msgstr "Не удается получить доступ к репозитарию"
 
 #: src/zmart-sources.cc:99
 msgid "Enabled"
@@ -374,9 +360,8 @@ msgid "Active"
 msgstr "Активный"
 
 #: src/zmart-sources.cc:118
-#, fuzzy
 msgid "Disabled"
-msgstr "Выключить"
+msgstr "Отключен"
 
 #: src/zmart-sources.cc:125 src/zmart-sources.cc:126 src/zmart-sources.cc:128
 #: src/zmart-sources.cc:129
@@ -388,84 +373,74 @@ msgid "No"
 msgstr "Нет"
 
 #: src/zmart-sources.cc:163 src/zmart-sources.cc:476
-#, fuzzy
 msgid "Error reading system sources: "
-msgstr "Ошибка чтения сектора %u."
+msgstr "Ошибка чтения системных источников:"
 
 #: src/zmart-sources.cc:190
-#, fuzzy
 msgid "Unknown repository type "
-msgstr "Неизвестный тип объекта разрешения зависимостей"
+msgstr "Неизвестный тип репозитария"
 
 #: src/zmart-sources.cc:202
-#, fuzzy
 msgid "Name not found"
-msgstr "База данных не найдена."
+msgstr "Имя не найдено"
 
 #: src/zmart-sources.cc:205
-#, fuzzy
 msgid "baseurl not found"
-msgstr "База данных не найдена."
+msgstr "baseurl не найден"
 
 #: src/zmart-sources.cc:330
 msgid "Continuing anyway"
-msgstr ""
+msgstr "Все равно продолжить"
 
 #: src/zmart-sources.cc:336
-#, fuzzy
 msgid "removing source "
-msgstr "Сохраняются ресурсы"
+msgstr "удаление источника"
 
 #: src/zmart-sources.cc:343 src/zmart-sources.cc:367 src/zmart-sources.cc:379
 #: src/zmart-sources.cc:412 src/zmart-sources.cc:435 src/zmart-sources.cc:446
-#, fuzzy, c-format
+#, c-format
 msgid "Source %s not found."
-msgstr "Хост %s не был найден."
+msgstr "Источник %s не найден."
 
 #: src/zmart-sources.cc:359 src/zmart-sources.cc:427
-#, fuzzy
 msgid "URL is invalid: "
-msgstr "Неверный URL-адрес."
+msgstr "Неверный URL-адрес:"
 
 #: src/zmart-sources.cc:464
 msgid "Sorry, not implemented yet for libzypp-1.x.x"
-msgstr ""
+msgstr "Извините, для libzypp-1.x.x еще не реализовано"
 
 #: src/zmart-sources.cc:485
-#, fuzzy
 msgid "Refreshing "
-msgstr "Обновляется: "
+msgstr "Обновление"
 
 #: src/zmart-sources.cc:492
 msgid "DONE"
-msgstr ""
+msgstr "ГОТОВО"
 
 #: src/zmart-sources.cc:496
-#, fuzzy
 msgid "Error while refreshing the source: "
-msgstr "Ошибка при обработке сертификата."
+msgstr "Ошибка при обновлении источника:"
 
 #: src/zmart-sources.cc:501
 msgid "All system sources have been refreshed."
-msgstr ""
+msgstr "Все системные источники обновлены."
 
 #: src/zmart-sources.cc:522
-#, fuzzy
 msgid "Error while fetching "
-msgstr "Ошибка при измененияя NIS пароля."
+msgstr "Ошибка при получении"
 
 #: src/zmart-sources.cc:538
-#, fuzzy
 msgid "ZENworks Management Daemon is running."
-msgstr "Поддержка ZENworks Linux Management"
+msgstr "Демон управления ZENworks запущен."
 
 #: src/zmart-sources.cc:539
 msgid "WARNING: this command will not synchronize changes."
-msgstr ""
+msgstr "ВНИМАНИЕ: эта команда не синхронизирует изменения."
 
 #: src/zmart-sources.cc:540
 msgid "Use rug or yast2 for that."
-msgstr ""
+msgstr "Используйте для этого rug или yast2."
 
 #: src/zypp-checkpatches.cc:127
 msgid ""
@@ -473,42 +448,47 @@ msgid ""
 "happens when you have another application (like YaST) using it at the same "
 "time. Please close other applications and check again for updates."
 msgstr ""
+"Средству обновлений не удалось получить доступ к машине менеджера пакетов. "
+"Обычно так происходит, если в это же время ее использует другое приложение "
+"(например, YaST). Закройте другие приложения и еще раз проверьте наличие "
+"обновлений."
 
 #: src/zypp-checkpatches.cc:213
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Couldn't restore source.\n"
 "Detail: %s"
-msgstr "невозможно восстановить ресурс VAR1 (файл)"
+msgstr ""
+"Не удается восстановить источник.\n"
+"Подробности: %s"
 
 #: src/zypp-checkpatches.cc:262
 msgid ""
 "There are no update sources defined. Please add one or more update sources "
 "in order to be notified of updates."
 msgstr ""
+"Источники обновления не определены. Чтобы получать уведомления об "
+"обновлениях, добавьте один или несколько источников обновления."
 
 #: src/zypper-callbacks.cc:23
 msgid "(A)bort, (R)etry, (I)gnore?"
-msgstr ""
+msgstr "Прервать (A), Повторить (R), Игнорировать (I)?"
 
 #: src/zypper-getopt.cc:56
-#, fuzzy
 msgid "Unknown option "
-msgstr "Неизвестный параметр команды add"
+msgstr "Неизвестный параметр"
 
 #: src/zypper-getopt.cc:59
 msgid "Missing argument for "
-msgstr ""
+msgstr "Отсутствует аргумент для"
 
 #: src/zypper-info.cc:48
-#, fuzzy
 msgid " not found."
-msgstr "Запись не найдена."
+msgstr "не найден."
 
 #: src/zypper-info.cc:52
-#, fuzzy
 msgid "Information for "
-msgstr "Информация"
+msgstr "Сведения для"
 
 #: src/zypper-info.cc:84
 msgid "Catalog: "
@@ -541,17 +521,15 @@ msgstr "актуальный"
 
 #: src/zypper-info.cc:95
 msgid "out-of-date (version "
-msgstr ""
+msgstr "устаревший (версия"
 
 #: src/zypper-info.cc:96
-#, fuzzy
 msgid " installed) "
-msgstr "%s установлен, ok"
+msgstr "установлена)"
 
 #: src/zypper-info.cc:99
-#, fuzzy
 msgid "not installed"
-msgstr "Не установлен"
+msgstr "не установлена"
 
 #: src/zypper-info.cc:101
 msgid "Installed Size: "
@@ -568,35 +546,36 @@ msgstr "Описание: "
 #: src/zypper-search.cc:45
 msgid "No sources. Zypper currently searches within installationsources only."
 msgstr ""
+"Нет источников. В данный момент Zypper выполняет поиск только среди "
+"источников установки."
 
 #: src/zypper-search.cc:107
 msgid "Pre-caching installed resolvables matching given search criteria... "
 msgstr ""
+"Предварительное кэширование установленных объектов разрешения зависимостей, "
+"отвечающих заданным критериям поиска…"
 
 #: src/zypper-search.cc:116
 msgid " out of ("
-msgstr ""
+msgstr "из ("
 
 #: src/zypper-search.cc:117
-#, fuzzy
 msgid "cached."
-msgstr "Кэш"
+msgstr "кэшировано."
 
 #: src/zypper-search.cc:216
-#, fuzzy
 msgid " is not a valid regular expression: \""
-msgstr "- неправильное отношение."
+msgstr "- неверное регулярное выражение: \""
 
 #: src/zypper-search.cc:218
-#, fuzzy
 msgid "This is a bug, please file a bug report against zypper."
-msgstr "Сообщите об этом в отчете об ошибках."
+msgstr "Это ошибка, сообщите о ней в отчете, касающемся zypper."
 
-#: src/zypper.cc:72
+#: src/zypper.cc:70
 msgid "URL is invalid."
 msgstr "Неверный URL-адрес."
 
-#: src/zypper.cc:80
+#: src/zypper.cc:78
 msgid ""
 "  Commands:\n"
 "\thelp\t\t\tHelp\n"
@@ -635,8 +614,7 @@ msgstr ""
 " \tinfo, if\t\tОтображение всех сведений о пакетах\n"
 " \tpatch-info\t\tОтображение всех сведений об исправлениях\n"
 
-#: src/zypper.cc:123
-#, fuzzy
+#: src/zypper.cc:121
 msgid ""
 "  Options:\n"
 "\t--help, -h\t\tHelp\n"
@@ -651,24 +629,25 @@ msgstr ""
 "  Параметры:\n"
 "\t--help, -h\t\tСправка\n"
 " \t--version, -V\t\tВывод номера версии\n"
-" \t--verbose, -v\t\tПовышение уровня детализации\n"
+" \t--verbose, -v\t\tБолее подробные сообщения\n"
 " \t--terse, -t\t\tСжатый вывод для использования компьютером\n"
 " \t--table-style, -s\tСтиль таблицы (целое число)\n"
 " \t--rug-compatible, -r\tВключение режима совместимости с rug\n"
+"  (в процессе разработки)\n"
 
-#: src/zypper.cc:135
+#: src/zypper.cc:133
 msgid "Verbosity "
 msgstr "Уровень детализации"
 
-#: src/zypper.cc:154
+#: src/zypper.cc:152
 msgid "Invalid table style "
 msgstr "Неверный стиль таблицы"
 
-#: src/zypper.cc:191
+#: src/zypper.cc:189
 msgid "Try -h for help"
 msgstr "Для вызова справки укажите -h"
 
-#: src/zypper.cc:209
+#: src/zypper.cc:207
 msgid ""
 "  Source options:\n"
 "\t--disable-system-sources, -D\t\tDo not read the system sources\n"
@@ -678,7 +657,7 @@ msgstr ""
 "\t--disable-system-sources, -D\t\tНе читать системные источники\n"
 " \t--source, -S\t\tЧитать дополнительный источник\n"
 
-#: src/zypper.cc:214
+#: src/zypper.cc:212
 msgid ""
 "  Target options:\n"
 "\t--disable-system-resolvables, -T\t\tDo not read system installed "
@@ -688,7 +667,7 @@ msgstr ""
 "\t--disable-system-resolvables, -T\t\tНе читать установленные в системе "
 "объекты разрешения зависимостей\n"
 
-#: src/zypper.cc:228
+#: src/zypper.cc:226
 msgid ""
 "  Command options:\n"
 "\t--catalog,-c\t\tOnly from this catalog (under development)\n"
@@ -700,7 +679,7 @@ msgstr ""
 " \t--type,-t\t\tТип объекта разрешения зависимостей (по умолчанию: пакет)\n"
 " \t--no-confirm,-y\tНе требовать подтверждения пользователем\n"
 
-#: src/zypper.cc:243
+#: src/zypper.cc:241
 msgid ""
 "  Command options:\n"
 "\t--type,-t\t\tType of resolvable (default: package)\n"
@@ -710,7 +689,7 @@ msgstr ""
 "\t--type,-t\t\tТип объекта разрешения зависимостей (по умолчанию: пакет)\n"
 " \t--no-confirm,-y\tНе требовать подтверждения пользователем\n"
 
-#: src/zypper.cc:259
+#: src/zypper.cc:257
 msgid ""
 "service-add [options] URI [alias]\n"
 "\n"
@@ -732,7 +711,7 @@ msgstr ""
 " \t--disabled,-d\t\tДобавление службы как отключенной\n"
 " \t--no-refresh,-n\t\tНе выполнять автоматическое обновление метаданных\n"
 
-#: src/zypper.cc:278
+#: src/zypper.cc:276
 msgid ""
 "service-list\n"
 "\n"
@@ -745,7 +724,7 @@ msgstr ""
 "установки).\n"
 " Эта команда не имеет параметров.\n"
 
-#: src/zypper.cc:292
+#: src/zypper.cc:290
 msgid ""
 "service-delete [options] <URI|alias>\n"
 "\n"
@@ -757,7 +736,7 @@ msgstr ""
 " Удаление службы (источника установки) из системы.\n"
 " Эта команда не имеет параметров.\n"
 
-#: src/zypper.cc:306
+#: src/zypper.cc:304
 msgid ""
 "service-rename [options] <URI|alias> <new-alias>\n"
 "\n"
@@ -770,7 +749,7 @@ msgstr ""
 "псевдоним.\n"
 " Эта команда не имеет параметров.\n"
 
-#: src/zypper.cc:320
+#: src/zypper.cc:318
 msgid ""
 "zypper refresh\n"
 "\n"
@@ -780,7 +759,7 @@ msgstr ""
 "\n"
 " Обновление всех найденных в системе источников установки.\n"
 
-#: src/zypper.cc:333
+#: src/zypper.cc:331
 msgid ""
 "list-updates [options]\n"
 "\n"
@@ -797,7 +776,7 @@ msgstr ""
 " \t--type,-t\t\tТип объекта разрешения зависимостей (по умолчанию: "
 "исправление)\n"
 
-#: src/zypper.cc:351
+#: src/zypper.cc:349
 msgid ""
 "  Command options:\n"
 "\t--type,-t\t\tType of resolvable (default: patch)\n"
@@ -810,7 +789,7 @@ msgstr ""
 " \t--no-confirm,-y\t\tНе требовать подтверждения пользователем\n"
 " \t--skip-interactive\t\tПропускать интерактивные обновления\n"
 
-#: src/zypper.cc:376
+#: src/zypper.cc:374
 msgid ""
 "zypper [global-options] search [options] [querystring...]\n"
 "\n"
@@ -862,7 +841,7 @@ msgstr ""
 " * и ? -- универсальные символы, которые можно использовать и в строках "
 "поиска.\n"
 
-#: src/zypper.cc:404
+#: src/zypper.cc:402
 msgid ""
 "patch-check\n"
 "\n"
@@ -876,7 +855,7 @@ msgstr ""
 " \n"
 " Эта команда не имеет параметров.\n"
 
-#: src/zypper.cc:418
+#: src/zypper.cc:416
 msgid ""
 "patches\n"
 "\n"
@@ -890,7 +869,7 @@ msgstr ""
 " \n"
 " Эта команда не имеет параметров.\n"
 
-#: src/zypper.cc:432
+#: src/zypper.cc:430
 msgid ""
 "zypper [global-options] info [name...]\n"
 "\n"
@@ -900,7 +879,7 @@ msgstr ""
 "\n"
 " 'info' -- Показать все сведения о пакетах\n"
 
-#: src/zypper.cc:444
+#: src/zypper.cc:442
 msgid ""
 "zypper [global-options] patch-info [patchname...]\n"
 "\n"
@@ -910,7 +889,7 @@ msgstr ""
 "\n"
 " 'patch-info' -- Показать подробные сведения об исправлениях\n"
 
-#: src/zypper.cc:456
+#: src/zypper.cc:454
 msgid ""
 "zypper [global-options] moo\n"
 "\n"
@@ -920,40 +899,40 @@ msgstr ""
 "\n"
 " 'moo' -- Показать животное\n"
 
-#: src/zypper.cc:462
+#: src/zypper.cc:460
 msgid "Unknown command"
 msgstr "Неизвестная команда"
 
-#: src/zypper.cc:477
+#: src/zypper.cc:475
 msgid "Non-Option Program Arguments: "
 msgstr "Аргументы программы, не являющиеся параметрами:"
 
-#: src/zypper.cc:489
+#: src/zypper.cc:487
 msgid "Ignoring --terse (provided only for rug compatibility)"
 msgstr "Игнорировать --terse (предоставляется только для RUG-совместимости)"
 
-#: src/zypper.cc:505
+#: src/zypper.cc:503
 msgid "Ignoring installed resolvables..."
 msgstr "Игнорировать установленные объекты разрешения зависимостей..."
 
-#: src/zypper.cc:530
+#: src/zypper.cc:526
 msgid "A ZYpp transaction is already in progress."
 msgstr "Транзакция ZYpp уже выполняется."
 
-#: src/zypper.cc:557
+#: src/zypper.cc:553
 msgid "Root privileges are required for viewing system sources."
 msgstr ""
 "Для просмотра системных источников требуются привилегии суперпользователя."
 
-#: src/zypper.cc:575
+#: src/zypper.cc:571
 msgid "Warning: Unknown metadata type "
 msgstr "Предупреждение: неизвестный тип метаданных"
 
-#: src/zypper.cc:712 src/zypper.cc:770 src/zypper.cc:856 src/zypper.cc:884
+#: src/zypper.cc:708 src/zypper.cc:766 src/zypper.cc:852 src/zypper.cc:880
 msgid "Unknown resolvable type "
 msgstr "Неизвестный тип объекта разрешения зависимостей"
 
-#: src/zypper.cc:725
+#: src/zypper.cc:721
 msgid ""
 "Warning: No sources. Operating only with the installed resolvables. Nothing "
 "can be installed."
@@ -961,14 +940,14 @@ msgstr ""
 "Предупреждение: нет источников. Работа только с установленными объектами "
 "разрешения зависимостей. Ничего нельзя установить."
 
-#: src/zypper.cc:927
+#: src/zypper.cc:923
 msgid "Please file a bug report about this."
 msgstr "Сообщите об этом в отчете об ошибках."
 
-#: src/zypper.cc:930
+#: src/zypper.cc:926
 msgid "See http://en.opensuse.org/Zypper#Troubleshooting for instructions."
 msgstr "См. http://en.opensuse.org/Zypper#Troubleshooting for instructions."
 
-#: src/zypper.cc:943
+#: src/zypper.cc:939
 msgid "Unexpected exception."
 msgstr "Неожиданное исключение."

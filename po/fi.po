@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: translation@suse.de\n"
-"POT-Creation-Date: 2007-03-05 16:11+0100\n"
+"POT-Creation-Date: 2007-02-16 10:33+0100\n"
 "PO-Revision-Date: 2005-08-02 10:52+0300\n"
 "Last-Translator: Novell Language <language@novell.com>\n"
 "Language-Team: Novell Language <language@novell.com>\n"
@@ -569,11 +569,11 @@ msgstr "ei ole kelvollinen säännöllinen lause: \""
 msgid "This is a bug, please file a bug report against zypper."
 msgstr "Tämä on ohjelmavirhe. Tee ilmoitus zypper-ohjelmavirheestä."
 
-#: src/zypper.cc:72
+#: src/zypper.cc:70
 msgid "URL is invalid."
 msgstr "Verkko-osoite ei kelpaa."
 
-#: src/zypper.cc:80
+#: src/zypper.cc:78
 msgid ""
 "  Commands:\n"
 "\thelp\t\t\tHelp\n"
@@ -612,7 +612,7 @@ msgstr ""
 " \tinfo, if\t\tNäytä pakettien täydet tiedot\n"
 " \tpatch-info\t\tNäytä korjausten täydet tiedot\n"
 
-#: src/zypper.cc:123
+#: src/zypper.cc:121
 msgid ""
 "  Options:\n"
 "\t--help, -h\t\tHelp\n"
@@ -634,19 +634,19 @@ msgstr ""
 " \t--non-interactive\tEi vuorovaikutteisuutta, käytä oletusvastauksia "
 "automaattisesti. (kehitysvaiheessa)\n"
 
-#: src/zypper.cc:135
+#: src/zypper.cc:133
 msgid "Verbosity "
 msgstr "Sanallisuus"
 
-#: src/zypper.cc:154
+#: src/zypper.cc:152
 msgid "Invalid table style "
 msgstr "Virheellinen taulukon tyyli"
 
-#: src/zypper.cc:191
+#: src/zypper.cc:189
 msgid "Try -h for help"
 msgstr "Saat ohjeita valitsimella -h"
 
-#: src/zypper.cc:209
+#: src/zypper.cc:207
 msgid ""
 "  Source options:\n"
 "\t--disable-system-sources, -D\t\tDo not read the system sources\n"
@@ -656,7 +656,7 @@ msgstr ""
 "\t--disable-system-sources, -D\t\tÄlä lue järjestelmälähteitä\n"
 " \t--source, -S\t\tLue lisälähde\n"
 
-#: src/zypper.cc:214
+#: src/zypper.cc:212
 msgid ""
 "  Target options:\n"
 "\t--disable-system-resolvables, -T\t\tDo not read system installed "
@@ -666,7 +666,7 @@ msgstr ""
 "\t--disable-system-resolvables, -T\t\tÄlä lue järjestelmään asennettuja "
 "muita osia\n"
 
-#: src/zypper.cc:228
+#: src/zypper.cc:226
 msgid ""
 "  Command options:\n"
 "\t--catalog,-c\t\tOnly from this catalog (under development)\n"
@@ -678,7 +678,7 @@ msgstr ""
 " \t--type,-t\t\tMuun osan tyyppi (oletusarvo: paketti)\n"
 " \t--no-confirm,-y\tÄlä edellytä käyttäjän varmistusta\n"
 
-#: src/zypper.cc:243
+#: src/zypper.cc:241
 msgid ""
 "  Command options:\n"
 "\t--type,-t\t\tType of resolvable (default: package)\n"
@@ -689,7 +689,7 @@ msgstr ""
 " \t--type,-t\t\tMuun osan tyyppi (oletusarvo: paketti)\n"
 " \t--no-confirm,-y\tÄlä edellytä käyttäjän varmistusta\n"
 
-#: src/zypper.cc:259
+#: src/zypper.cc:257
 msgid ""
 "service-add [options] URI [alias]\n"
 "\n"
@@ -711,7 +711,7 @@ msgstr ""
 " \t--disabled,-d\t\tLisää palvelu käytöstä poistettuna\n"
 " \t--no-refresh,-n\t\tÄlä päivitä metatietoja automaattisesti\n"
 
-#: src/zypper.cc:278
+#: src/zypper.cc:276
 msgid ""
 "service-list\n"
 "\n"
@@ -724,7 +724,7 @@ msgstr ""
 "(asennuslähteet).\n"
 " Tällä komennolla ei ole valitsimia.\n"
 
-#: src/zypper.cc:292
+#: src/zypper.cc:290
 msgid ""
 "service-delete [options] <URI|alias>\n"
 "\n"
@@ -736,7 +736,7 @@ msgstr ""
 " Poista palvelu (asennuslähde) järjestelmästä.\n"
 " Tällä komennolla ei ole valitsimia.\n"
 
-#: src/zypper.cc:306
+#: src/zypper.cc:304
 msgid ""
 "service-rename [options] <URI|alias> <new-alias>\n"
 "\n"
@@ -749,7 +749,7 @@ msgstr ""
 "aliaksen avulla.\n"
 " Tällä komennolla ei ole valitsimia.\n"
 
-#: src/zypper.cc:320
+#: src/zypper.cc:318
 msgid ""
 "zypper refresh\n"
 "\n"
@@ -759,7 +759,7 @@ msgstr ""
 "\n"
 " Päivittää kaikki järjestelmästä löytyvät asennuslähteet.\n"
 
-#: src/zypper.cc:333
+#: src/zypper.cc:331
 msgid ""
 "list-updates [options]\n"
 "\n"
@@ -775,7 +775,7 @@ msgstr ""
 "   Komentovalinnat:\n"
 " \t--type,-t\t\tMuun osan tyyppi (oletusarvo: korjaus)\n"
 
-#: src/zypper.cc:351
+#: src/zypper.cc:349
 msgid ""
 "  Command options:\n"
 "\t--type,-t\t\tType of resolvable (default: patch)\n"
@@ -788,7 +788,7 @@ msgstr ""
 " \t--no-confirm,-y\t\tÄlä edellytä käyttäjän vahvistusta\n"
 " \t--skip-interactive\t\tOhita interaktiiviset päivitykset\n"
 
-#: src/zypper.cc:376
+#: src/zypper.cc:374
 msgid ""
 "zypper [global-options] search [options] [querystring...]\n"
 "\n"
@@ -842,7 +842,7 @@ msgstr ""
 " \n"
 " Jokerimerkkejä * ja ? voi käyttää hakumerkkijonoissa.\n"
 
-#: src/zypper.cc:404
+#: src/zypper.cc:402
 msgid ""
 "patch-check\n"
 "\n"
@@ -856,7 +856,7 @@ msgstr ""
 " \n"
 " Tällä komennolla ei ole valitsimia.\n"
 
-#: src/zypper.cc:418
+#: src/zypper.cc:416
 msgid ""
 "patches\n"
 "\n"
@@ -870,7 +870,7 @@ msgstr ""
 " \n"
 " Tällä komennolla ei ole valitsimia.\n"
 
-#: src/zypper.cc:432
+#: src/zypper.cc:430
 msgid ""
 "zypper [global-options] info [name...]\n"
 "\n"
@@ -880,7 +880,7 @@ msgstr ""
 "\n"
 " 'info' -- Näytä pakettien täydet tiedot\n"
 
-#: src/zypper.cc:444
+#: src/zypper.cc:442
 msgid ""
 "zypper [global-options] patch-info [patchname...]\n"
 "\n"
@@ -890,7 +890,7 @@ msgstr ""
 "\n"
 " 'patch-info' -- Näytä korjausten yksityiskohtaiset tiedot\n"
 
-#: src/zypper.cc:456
+#: src/zypper.cc:454
 msgid ""
 "zypper [global-options] moo\n"
 "\n"
@@ -900,40 +900,40 @@ msgstr ""
 "\n"
 " 'moo' - Näytä eläin\n"
 
-#: src/zypper.cc:462
+#: src/zypper.cc:460
 msgid "Unknown command"
 msgstr "Tuntematon komento"
 
-#: src/zypper.cc:477
+#: src/zypper.cc:475
 msgid "Non-Option Program Arguments: "
 msgstr "Ohjelman muut määritteet valintojen lisäksi:"
 
-#: src/zypper.cc:489
+#: src/zypper.cc:487
 msgid "Ignoring --terse (provided only for rug compatibility)"
 msgstr "Ignoring --terse (vain rug-yhteensopivuuden takia)"
 
-#: src/zypper.cc:505
+#: src/zypper.cc:503
 msgid "Ignoring installed resolvables..."
 msgstr "Ohitetaan asennettuja muita osia..."
 
-#: src/zypper.cc:530
+#: src/zypper.cc:526
 msgid "A ZYpp transaction is already in progress."
 msgstr "ZYpp-tapahtuma on jo käynnissä."
 
-#: src/zypper.cc:557
+#: src/zypper.cc:553
 msgid "Root privileges are required for viewing system sources."
 msgstr ""
 "Järjestelmän lähteiden tarkastelemiseen vaaditaan pääkäyttäjän oikeudet."
 
-#: src/zypper.cc:575
+#: src/zypper.cc:571
 msgid "Warning: Unknown metadata type "
 msgstr "Varoitus: Tuntematon metadatatyyppi"
 
-#: src/zypper.cc:712 src/zypper.cc:770 src/zypper.cc:856 src/zypper.cc:884
+#: src/zypper.cc:708 src/zypper.cc:766 src/zypper.cc:852 src/zypper.cc:880
 msgid "Unknown resolvable type "
 msgstr "Tuntematon muun osan tyyppi"
 
-#: src/zypper.cc:725
+#: src/zypper.cc:721
 msgid ""
 "Warning: No sources. Operating only with the installed resolvables. Nothing "
 "can be installed."
@@ -941,14 +941,14 @@ msgstr ""
 "Varoitus: Ei lähteitä. Käytetään vain asennettuja muita osia. Mitään ei voi "
 "asentaa."
 
-#: src/zypper.cc:927
+#: src/zypper.cc:923
 msgid "Please file a bug report about this."
 msgstr "Tee virheilmoitus tästä viasta."
 
-#: src/zypper.cc:930
+#: src/zypper.cc:926
 msgid "See http://en.opensuse.org/Zypper#Troubleshooting for instructions."
 msgstr "Ohjeita on sivulla http://en.opensuse.org/Zypper#Troubleshooting."
 
-#: src/zypper.cc:943
+#: src/zypper.cc:939
 msgid "Unexpected exception."
 msgstr "Odottamaton poikkeus."
