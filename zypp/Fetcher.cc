@@ -43,7 +43,7 @@ void Fetcher::insertCache( const Pathname &cache_dir )
 void Fetcher::start( const Pathname &dest_dir )
 {
   MediaSetAccess media(_url, _path);
-  
+
   for ( list<OnMediaLocation>::const_iterator it_res = _resources.begin(); it_res != _resources.end(); ++it_res )
   {
     bool got_from_cache = false;
@@ -64,7 +64,7 @@ void Fetcher::start( const Pathname &dest_dir )
             MIL << "file " << (*it_res).filename() << " found in previous cache. Using cached copy." << endl;
             // checksum is already checked.
             // we could later implement double failover and try to download if file copy fails.
-          
+
             // replicate the complete path in the target directory
             Pathname dest_full_path = dest_dir + (*it_res).filename();
             if ( assert_dir( dest_full_path.dirname() ) != 0 )
@@ -77,7 +77,7 @@ void Fetcher::start( const Pathname &dest_dir )
               // try next cache
               continue;
             }
-            
+
             got_from_cache = true;
             break;
           }
@@ -86,7 +86,7 @@ void Fetcher::start( const Pathname &dest_dir )
         {
           // File exists in cache but with a different checksum
           // so just try next cache
-          continue; 
+          continue;
         }
       }
       else
@@ -96,7 +96,7 @@ void Fetcher::start( const Pathname &dest_dir )
         continue;
       }
     }
-    
+
     if ( ! got_from_cache )
     {
       // try to get the file from the net

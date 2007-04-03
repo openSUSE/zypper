@@ -16,6 +16,8 @@ extern "C"
 #include <fcntl.h>
 }
 
+#include <iostream>
+
 #include "zypp/base/Exception.h"
 #include "zypp/base/Fd.h"
 

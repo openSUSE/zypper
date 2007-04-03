@@ -35,3 +35,4 @@ bool SUSEMediaVerifier::isDesiredMedia(const media::MediaAccessRef &ref)
 
 }
 }
+

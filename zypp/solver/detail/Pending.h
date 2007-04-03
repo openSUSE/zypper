@@ -50,7 +50,7 @@ namespace zypp
       //	CLASS NAME : Pending
 
       class Pending : public base::ReferenceCounted, private base::NonCopyable {
-          
+
 
       typedef enum {
           PENDING_STATUS_INVALID = 0,

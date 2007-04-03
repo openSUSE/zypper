@@ -9,6 +9,7 @@
 /** \file zypp/Rel.cc
  *
 */
+#include <iostream>
 #include <map>
 
 #include "zypp/base/Exception.h"

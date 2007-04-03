@@ -17,8 +17,8 @@
 
 namespace zypp
 {
-  
-  /** 
+
+  /**
   * Edition represents <code>[epoch:]version[-release]</code>
   *
   * This class allows to retrieve a group of files which can
@@ -39,7 +39,7 @@ namespace zypp
     * Constructs a fetcher from a url and path
     */
     Fetcher( const Url &url, const Pathname &path );
-    
+
     /**
     * Enqueue a object for transferal, they will not
     * be transfered until \ref start() is called
@@ -60,7 +60,7 @@ namespace zypp
     * directory
     */
     void start( const Pathname &dest_dir );
-  
+
   private:
     Url _url;
     Pathname _path;

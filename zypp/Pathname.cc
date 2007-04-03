@@ -9,6 +9,8 @@
 /** \file	zypp/Pathname.cc
  *
 */
+#include <iostream>
+
 #include "zypp/Pathname.h"
 
 using std::string;

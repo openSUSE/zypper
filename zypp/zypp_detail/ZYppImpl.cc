@@ -39,10 +39,10 @@ namespace zypp
     inline Locale defaultTextLocale()
     {
       Locale ret( "en" );
-      char * envlist[] = { "LC_ALL", "LC_CTYPE", "LANG", NULL };
-      for ( char ** envvar = envlist; *envvar; ++envvar )
+      const char * envlist[] = { "LC_ALL", "LC_CTYPE", "LANG", NULL };
+      for ( const char ** envvar = envlist; *envvar; ++envvar )
         {
-          char * envlang = getenv( *envvar );
+	  const char * envlang = getenv( *envvar );
           if ( envlang )
             {
               std::string envstr( envlang );
