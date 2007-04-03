@@ -203,13 +203,29 @@ int main( int argc, char * argv[] )
 
   ResPool pool( getZYpp()->pool() );
 
-  if ( 1 )
+  if ( 1 ) {
+    //zypp::base::LogControl::TmpLineWriter shutUp;
+    SourceManager::sourceManager()->restore( sysRoot );
+    if ( 0 && SourceManager::sourceManager()->allSources().empty() )
     {
       zypp::base::LogControl::TmpLineWriter shutUp;
-      Source_Ref src( createSource( "dir:/Local/SLES10" ) );
-      getZYpp()->addResolvables( src.resolvables() );
+      Source_Ref src1( createSource( "dir:/Local/SLES10" ) );
+      SourceManager::sourceManager()->addSource( src1 );
+      SourceManager::sourceManager()->store( sysRoot, true );
     }
-  MIL << pool << endl;
+    dumpRange( USR << "Sources: ",
+	       SourceManager::sourceManager()->Source_begin(),
+	       SourceManager::sourceManager()->Source_end()
+	     ) << endl;
+  }
+  //SourceManager::sourceManager()->addSource( src );
+  //SourceManager::sourceManager()->store( "/", true );
+
+
+  INT << "===[END]============================================" << endl << endl;
+  zypp::base::LogControl::instance().logNothing();
+  return 0;
+
 
   PoolItem prod( *pool.byKindBegin<Product>() );
   showProd( prod );

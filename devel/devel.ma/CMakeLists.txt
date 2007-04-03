@@ -27,7 +27,9 @@ ADD_CUSTOM_TARGET( ma_test
    DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/ma_test
 )
 
-FOREACH( loop_var ScanSource )
+## ############################################################
+
+FOREACH( loop_var ScanSource Iorder Parse )
    ADD_EXECUTABLE( ${loop_var}
       ${loop_var}.cc
    )
@@ -36,6 +38,15 @@ FOREACH( loop_var ScanSource )
    )
 ENDFOREACH( loop_var )
 
+
+FOREACH( loop_var AOUT )
+   ADD_EXECUTABLE( ${loop_var}
+      ${loop_var}.cc
+   )
+   TARGET_LINK_LIBRARIES( ${loop_var}
+      boost_filesystem boost_regex
+   )
+ENDFOREACH( loop_var )
 
 FOREACH( loop_var MaTest )
    ADD_EXECUTABLE( ${loop_var}

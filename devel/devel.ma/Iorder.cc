@@ -252,10 +252,7 @@ int main( int argc, char * argv[] )
     {
       zypp::base::LogControl::TmpLineWriter shutUp;
       Source_Ref src;
-      src = createSource( "dir:/Local/SUSE-Linux-10.1-Build_830-i386/CD1",
-                          "Build_830" );
-      getZYpp()->addResolvables( src.resolvables() );
-      src = createSource( "dir:/Local/SUSE-Linux-10.1-Build_830-Addon-BiArch/CD1",
+      src = createSource( "dir:/Local/dist/install/SLP/SLES-10-SP1-Build00052/i386/CD1",
                           "Addon-BiArch" );
       getZYpp()->addResolvables( src.resolvables() );
     }
@@ -264,10 +261,11 @@ int main( int argc, char * argv[] )
   // select...
   for_each( pool.byKindBegin<Product>(), pool.byKindEnd<Product>(), StatusInstall() );
 #define selt(K,N) selectForTransact( nameKindProxy<K>( pool, #N ) )
-  selt( Selection, default );
-  selt( Package, RealPlayer );
-  selt( Package, acroread );
-  selt( Package, flash-player );
+//   selt( Selection, default );
+//   selt( Package, RealPlayer );
+//   selt( Package, acroread );
+//   selt( Package, flash-player );
+  selt( Package, fontconfig );
 #undef selt
 
 
@@ -279,51 +277,6 @@ int main( int argc, char * argv[] )
   MIL << "GetResolvablesToInsDel:" << endl << collect << endl;
 
   typedef pool::GetResolvablesToInsDel::PoolItemList PoolItemList;
-
-
-
-  {
-    const PoolItemList & items_r( collect._toInstall );
-    // prepare the package cache.
-    CommitPackageCache packageCache( items_r.begin(),
-                                     items_r.end(),
-                                     "/tmp",
-                                     globalSourceProvidePackage );
-    unsigned snr = 0;
-
-    for ( PoolItemList::const_iterator it = items_r.begin(); it != items_r.end(); it++ )
-      {
-        if (isKind<Package>(it->resolvable()))
-          {
-            Package::constPtr p = asKind<Package>(it->resolvable());
-            if (it->status().isToBeInstalled())
-              {
-                ManagedFile localfile;
-                try
-                  {
-                    localfile = packageCache.get( it );
-                  }
-                catch ( const source::SkipRequestedException & e )
-                  {
-                    ZYPP_CAUGHT( e );
-                    WAR << "Skipping package " << p << " in commit" << endl;
-                    continue;
-                  }
-
-                PathInfo chk( localfile.value() );
-                if ( ! chk.isFile() )
-                  {
-                    ERR << "No File: " << chk << endl;
-                    ZYPP_THROW(Exception("No File in commit"));
-                  }
-              }
-          }
-      }
-
-  }
-  INT << "===[END]============================================" << endl << endl;
-  zypp::base::LogControl::instance().logNothing();
-  return 0;
 
   if ( 1 )
     {
