@@ -111,12 +111,10 @@ cd ..
 %files -f zypp.lang
 %defattr(-,root,root)
 %{prefix}/lib/zypp
+%{prefix}/share/zypp
 %{_libdir}/libzypp*so.*
-%dir %{prefix}/share/zypp
-%dir %{prefix}/share/zypp/schema
-%{prefix}/share/zypp/schema/*
-%{prefix}/share/pixmaps/package-manager-icon.png
 %{prefix}/share/applications/package-manager.desktop
+%{prefix}/share/pixmaps/package-manager-icon.png
 %{prefix}/bin/package-manager
 %{prefix}/bin/package-manager-su
 
