@@ -48,6 +48,7 @@ namespace zypp
     return true;
   }
 
+
   MediaSetAccess::MediaSetAccess(  const Url &url, const Pathname &path )
       : _url(url),
         _path(path)
@@ -57,7 +58,8 @@ namespace zypp
     //single_media[0] = media::MediaVerifierRef(new media::NoVerifier());
     //_verifiers = single_media;
   }
-  
+
+
   MediaSetAccess::~MediaSetAccess()
   {
   }
@@ -94,6 +96,7 @@ namespace zypp
 //       report->finish( file_url, source::DownloadFileReport::NO_ERROR, "" );
 //       return file;
 
+
   Pathname MediaSetAccess::provideFile( const OnMediaLocation & on_media_file )
   {
     return provideFile( on_media_file.filename(), on_media_file.medianr() );
@@ -104,6 +107,7 @@ namespace zypp
   {
     return provideFileInternal( file, media_nr, false, false);
   }
+
 
   Pathname  MediaSetAccess::provideFile(const Pathname & file, unsigned media_nr, FileChecker checker )
   {
@@ -116,13 +120,14 @@ namespace zypp
     return p;
   }
 
+
   Pathname MediaSetAccess::provideFileInternal(const Pathname & file, unsigned media_nr, bool cached, bool checkonly )
   {
     callback::SendReport<media::MediaChangeReport> report;
     media::MediaManager media_mgr;
     // get the mediaId, but don't try to attach it here
     media::MediaAccessId media = getMediaAccessId( media_nr);
-      
+
     do
     {
       try
@@ -131,7 +136,7 @@ namespace zypp
             << " from media number " << media_nr << endl;        
         // try to attach the media
         if ( ! media_mgr.isAttached(media) )
-        media_mgr.attach(media);
+          media_mgr.attach(media);
         media_mgr.provideFile (media, file, false, false);
         break;
       }
@@ -281,12 +286,15 @@ namespace zypp
   {
     std::string scheme = url_r.getScheme();
     if (scheme == "cd" || scheme == "dvd")
-    return url_r;
+      return url_r;
 
     DBG << "Rewriting url " << url_r << endl;
 
     if( scheme == "iso")
     {
+      // TODO the iso parameter will not be required in the future, this
+      // code has to be adapted together with the MediaISO change.
+      // maybe some MediaISOURL interface should be used.
       std::string isofile = url_r.getQueryParam("iso");
       boost::regex e("^(.*(cd|dvd))([0-9]+)(\\.iso)$", boost::regex::icase);
       boost::smatch what;

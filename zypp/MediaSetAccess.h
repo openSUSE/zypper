@@ -51,7 +51,8 @@ namespace zypp
     //	CLASS NAME : MediaSetAccess
     //
     /**
-     * Media access layer responsible for handling media distributed as a set.
+     * Media access layer responsible for handling files distributed on a set
+     * of media.
      *
      * This is provided as a means to handle CD or DVD sets accessible through
      * dir, iso, nfs or other URL schemes other than cd/dvd (see
@@ -95,25 +96,48 @@ namespace zypp
 
     public:
       /**
-       * creates a callback enabled media access  for \param url and \param path.
-       * with only 1 media no verified
+       * Creates a callback enabled media access  for \a url and \a path.
        */
       MediaSetAccess( const Url &url, const Pathname &path );
       ~MediaSetAccess();
 
       /**
-       * Sets a \ref MediaVerifierRef verifier for given media number
+       * Sets a \ref MediaVerifier verifier for given media number.
        */
       void setVerifier( unsigned media_nr, media::MediaVerifierRef verifier );
       
       /**
-       * provide a file from a media location.
+       * Provides a file from a media location.
        */
       Pathname provideFile( const OnMediaLocation & on_media_file );
 
+      /**
+       * Provides \a file from media \a media_nr. 
+       */
       Pathname provideFile(const Pathname & file, unsigned media_nr = 1 );
+
+      /**
+       * Provides \a file from media \a media_nr and use \a checker on provided
+       * file.
+       * 
+       * \throws Exception if \a checker returns false. TODO use ProvideFilePolicy
+       */
       Pathname provideFile(const Pathname & file, unsigned media_nr, const FileChecker checker );
 
+      /**
+       * Replaces media number in specified url with given \a medianr.
+       * 
+       * Media number in the URL is searched for with regex
+       * <tt> "^(.*(cd|dvd))([0-9]+)(\\.iso)$" </tt> for iso scheme and
+       * with <tt> "^(.*(cd|dvd))([0-9]+)(/?)$" </tt> for other schemes.
+       *
+       * For cd and dvd scheme it returns the original URL, as well as for
+       * URL which do not match the above regexes.
+       *
+       * \param url_r   original URL
+       * \param medianr requested media number
+       * \return        rewritten URL if applicable, the original URL otherwise
+       */
       static Url rewriteUrl (const Url & url_r, const media::MediaNr medianr);
 
     protected:
