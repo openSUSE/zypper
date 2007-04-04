@@ -35,6 +35,7 @@ namespace zypp {
 
         /** number of last successful mounted device in list */
         int        _lastdev;
+        int        _lastdev_tried;
 
         static bool openTray( const std::string & device_r );
         static bool closeTray( const std::string & device_r );
@@ -56,6 +57,8 @@ namespace zypp {
         virtual void forceEject();
 
 	virtual bool isAutoMountedMedia(const AttachedMedia &media);
+        
+        virtual bool hasMoreDevices();
 
       public:
 

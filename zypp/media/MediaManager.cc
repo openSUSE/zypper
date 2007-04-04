@@ -569,7 +569,77 @@ namespace zypp
       ManagedMedia &ref( m_impl->findMM(accessId));
 
       DBG << "attach(id=" << accessId << ")" << std::endl;
+      
       return ref.handler->attach(next);
+    }
+
+    // ---------------------------------------------------------------
+    void MediaManager::attachDesiredMedia(MediaAccessId accessId)
+    {
+      MutexLock glock(g_Mutex);
+
+      ManagedMedia &ref( m_impl->findMM(accessId));
+      
+      DBG << "attach(id=" << accessId << ")" << std::endl;
+
+      // try first mountable/mounted device
+      ref.handler->attach(false);
+      try
+      {
+        ref.checkDesired(accessId);
+        return;
+      }
+      catch (const MediaException & ex)
+      {
+        ZYPP_CAUGHT(ex);
+
+        if (!ref.handler->hasMoreDevices())
+          ZYPP_RETHROW(ex);
+
+        if (ref.handler->isAttached())
+          ref.handler->release();
+      }
+
+      MIL << "checkDesired(" << accessId << ") of first device failed,"
+        " going to try others with attach(true)" << std::endl;
+
+      while (ref.handler->hasMoreDevices())
+      {
+        try
+        {
+          // try to attach next device
+          ref.handler->attach(true);
+          ref.checkDesired(accessId);
+          return;
+        }
+        catch (const MediaNotDesiredException & ex)
+        {
+          ZYPP_CAUGHT(ex);
+
+          if (!ref.handler->hasMoreDevices())
+          {
+            MIL << "No desired media found after trying all detected devices." << std::endl;
+            ZYPP_RETHROW(ex);
+          }
+
+          AttachedMedia media(ref.handler->attachedMedia());
+          DBG << "Skipping " << media.mediaSource->asString() << ": not desired media." << std::endl;
+
+          ref.handler->release();
+        }
+        catch (const MediaException & ex)
+        {
+          ZYPP_CAUGHT(ex);
+
+          if (!ref.handler->hasMoreDevices())
+            ZYPP_RETHROW(ex);
+
+          AttachedMedia media(ref.handler->attachedMedia());
+          DBG << "Skipping " << media.mediaSource->asString() << " because of exception thrown by attach(true)" << std::endl; 
+
+          if (ref.handler->isAttached()) ref.handler->release();
+        }
+      }
     }
 
     // ---------------------------------------------------------------

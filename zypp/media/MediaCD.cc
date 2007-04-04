@@ -124,7 +124,7 @@ namespace zypp {
     		    url_r.getPathName(), // urlpath below attachpoint
     		    false )
       //, does_download
-      , _lastdev(-1)
+      , _lastdev(-1), _lastdev_tried(-1)
     {
       MIL << "MediaCD::MediaCD(" << url_r << ", "
           << attach_point_hint_r << ")" << endl;
@@ -468,7 +468,7 @@ namespace zypp {
     //
     void MediaCD::attachTo(bool next)
     {
-      DBG << "next " << next << " last " << _lastdev << endl;
+      DBG << "next " << next << " last " << _lastdev << " last tried " << _lastdev_tried << endl;
       if (next && _lastdev == -1)
 	ZYPP_THROW(MediaNotSupportedException(url()));
 
@@ -536,11 +536,14 @@ namespace zypp {
     	; ++it, count++ )
       {
     	DBG << "count " << count << endl;
-    	if (next && count<=_lastdev )
+    	if (next && count <=_lastdev_tried )
     	{
     		DBG << "skipping device " << it->name << endl;
     		continue;
     	}
+
+        _lastdev_tried = count;
+
 #if DELAYED_VERIFY
 	MediaSource temp( *it);
 	bool        valid=false;
@@ -1000,6 +1003,15 @@ namespace zypp {
       return MediaHandler::getDoesFileExist( filename );
     }
 
+    bool MediaCD::hasMoreDevices()
+    {
+      if (_devices.size() == 0)
+        return false;
+      else if (_lastdev_tried < 0)
+        return true;
+
+      return (unsigned) _lastdev_tried < _devices.size() - 1;
+    }
   } // namespace media
 } // namespace zypp
 // vim: set ts=8 sts=2 sw=2 ai noet:

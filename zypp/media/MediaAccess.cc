@@ -229,6 +229,13 @@ MediaAccess::isAttached() const
   return( _handler && _handler->isAttached() );
 }
 
+
+bool MediaAccess::hasMoreDevices() const
+{
+  return _handler && _handler->hasMoreDevices();
+}
+
+
 // local directory that corresponds to medias url
 // If media is not open an empty pathname.
 Pathname
@@ -416,6 +423,7 @@ void MediaAccess::getFile( const Url &from, const Pathname &to )
     ZYPP_RETHROW(excpt_r);
   }
 }
+
     std::ostream & operator<<( std::ostream & str, const MediaAccess & obj )
     { return obj.dumpOn( str ); }
 

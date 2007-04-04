@@ -1363,6 +1363,10 @@ bool MediaHandler::getDoesFileExist( const Pathname & filename ) const
   return info.isExist();
 }
 
+bool MediaHandler::hasMoreDevices()
+{
+  return false;
+}
 
   } // namespace media
 } // namespace zypp

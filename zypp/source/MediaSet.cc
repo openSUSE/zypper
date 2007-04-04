@@ -134,10 +134,10 @@ namespace zypp
 
      if (medias.find(medianr) != medias.end())
       {
-	media::MediaAccessId id = medias[medianr];
-	if (! noattach && ! media_mgr.isAttached(id))
-	  media_mgr.attach(id);
-	return id;
+        media::MediaAccessId id = medias[medianr];
+        if (! noattach && ! media_mgr.isAttached(id))
+          media_mgr.attachDesiredMedia(id);
+        return id;
       }
       Url url = _source.url();
       url = rewriteUrl (url, medianr);
@@ -156,7 +156,7 @@ namespace zypp
       medias[medianr] = id;
       
       if (! noattach)
-        media_mgr.attach(id);
+        media_mgr.attachDesiredMedia(id);
 
       return id;
     }

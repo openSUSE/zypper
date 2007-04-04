@@ -136,7 +136,7 @@ namespace zypp
             << " from media number " << media_nr << endl;        
         // try to attach the media
         if ( ! media_mgr.isAttached(media) )
-          media_mgr.attach(media);
+          media_mgr.attachDesiredMedia(media);
         media_mgr.provideFile (media, file, false, false);
         break;
       }

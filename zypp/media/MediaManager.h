@@ -575,9 +575,14 @@ namespace zypp
        * \param accessId A media access id.
        * \param next     Whether to try the next drive if avaliable.
        * \throws MediaNotOpenException for invalid access id.
+       * \deprecated in favor of attachDesiredMedia(MediaAccessId) which looks
+       *   for a desirable media on all available devices.
        */
       void
-      attach(MediaAccessId accessId, bool next = false);
+      attach(MediaAccessId accessId, bool next = false) ZYPP_DEPRECATED;
+
+      void
+      attachDesiredMedia(MediaAccessId accessId);
 
       /**
        * Release the attached media and optionally eject.

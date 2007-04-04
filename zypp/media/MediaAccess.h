@@ -167,6 +167,8 @@ namespace zypp {
 	 *
 	 **/
 	bool isAttached() const;
+        
+        bool hasMoreDevices() const;
 
 	/**
 	 * Return the local directory that corresponds to medias url,

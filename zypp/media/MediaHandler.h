@@ -680,6 +680,10 @@ class MediaHandler {
          **/
         bool doesFileExist( const Pathname & filename ) const;
 
+        /**
+         * Check if the media has one more device available for attach(true). 
+         */
+        virtual bool hasMoreDevices();
 };
 
 ///////////////////////////////////////////////////////////////////
