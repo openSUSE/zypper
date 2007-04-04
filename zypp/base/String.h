@@ -311,6 +311,20 @@ namespace zypp
 
     std::string getline( std::istream & str, const Trim trim_r );
 
+    ///////////////////////////////////////////////////////////////////
+
+    /** \name String prefix handling.
+     */
+    //@{
+    /** Return whether \a str_r has prefix \a prefix_r. */
+    inline bool hasPrefix( const std::string & str_r, const std::string & prefix_r )
+    { return( str_r.substr( 0, prefix_r.size() ) == prefix_r ); }
+
+    /** Strip a \a prefix_r from \a str_r and return the resulting string. */
+    inline std::string stripPrefix( const std::string & str_r, const std::string & prefix_r )
+    { return( hasPrefix( str_r, prefix_r ) ? str_r.substr( prefix_r.size() ) : str_r ); }
+    //@}
+
     /////////////////////////////////////////////////////////////////
   } // namespace str
   ///////////////////////////////////////////////////////////////////
