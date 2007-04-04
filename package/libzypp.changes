@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Wed Apr  4 19:39:12 CEST 2007 - ma@suse.de
+
+- Fix restoring of Sources id root prefix is used. (#238165)
+- revision 5299
+- version 3.0.2
+
+-------------------------------------------------------------------
 Wed Apr  4 15:33:54 CEST 2007 - jkupec@suse.cz
 
 - MediaManager::attachDesiredMedia() added to support multiple
@@ -12,7 +19,7 @@ Wed Mar 14 14:33:26 CET 2007 - schubi@suse.de
   architecture) has been regarded, let the user decide making a new
   solver run with ALL available resolvables. Bug 223440
 - reducing logging (error -> debug)  bug 252921
-- Revision 5219 
+- Revision 5219
 
 -------------------------------------------------------------------
 Fri Mar  9 00:08:38 CET 2007 - ma@suse.de

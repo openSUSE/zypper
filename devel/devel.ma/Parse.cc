@@ -31,6 +31,7 @@ using namespace zypp::functor;
 ///////////////////////////////////////////////////////////////////
 
 static const Pathname sysRoot( "/Local/ROOT" );
+static const Pathname sysRootAlt( "/Local/ALTERNATE/ROOTPATH" );
 
 ///////////////////////////////////////////////////////////////////
 
@@ -201,26 +202,38 @@ int main( int argc, char * argv[] )
   MediaChangeReceive mr;
   mr.connect();
 
-  ResPool pool( getZYpp()->pool() );
-
+  Pathname root( sysRoot );
   if ( 1 ) {
     //zypp::base::LogControl::TmpLineWriter shutUp;
-    SourceManager::sourceManager()->restore( sysRoot );
-    if ( 0 && SourceManager::sourceManager()->allSources().empty() )
-    {
-      zypp::base::LogControl::TmpLineWriter shutUp;
-      Source_Ref src1( createSource( "dir:/Local/SLES10" ) );
-      SourceManager::sourceManager()->addSource( src1 );
-      SourceManager::sourceManager()->store( sysRoot, true );
-    }
-    dumpRange( USR << "Sources: ",
-	       SourceManager::sourceManager()->Source_begin(),
-	       SourceManager::sourceManager()->Source_end()
-	     ) << endl;
-  }
-  //SourceManager::sourceManager()->addSource( src );
-  //SourceManager::sourceManager()->store( "/", true );
+    SourceManager::sourceManager()->restore( root );
 
+
+    if ( SourceManager::sourceManager()->allSources().empty() )
+    {
+      {
+	zypp::base::LogControl::TmpLineWriter shutUp;
+	Source_Ref src1( createSource( "dir:/Local/SLES10" ) );
+	SourceManager::sourceManager()->addSource( src1 );
+	SourceManager::sourceManager()->store( root, true );
+      }
+      dumpRange( USR << "Sources Created: ",
+		 SourceManager::sourceManager()->Source_begin(),
+		 SourceManager::sourceManager()->Source_end()
+	       ) << endl;
+    } else {
+      dumpRange( USR << "Sources Reloaded: ",
+		 SourceManager::sourceManager()->Source_begin(),
+		 SourceManager::sourceManager()->Source_end()
+	       ) << endl;
+    }
+  }
+
+  Source_Ref src1( *SourceManager::sourceManager()->Source_begin() );
+  getZYpp()->addResolvables( src1.resolvables() );
+
+  ResPool pool( getZYpp()->pool() );
+
+  src1.providePackage( asKind<Package>(*pool.byKindBegin<Package>()) );
 
   INT << "===[END]============================================" << endl << endl;
   zypp::base::LogControl::instance().logNothing();
