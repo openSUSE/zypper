@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Wed Apr  4 15:33:54 CEST 2007 - jkupec@suse.cz
+
+- MediaManager::attachDesiredMedia() added to support multiple
+  (CD/DVD) drives (fate #3974)
+- r5296
+
+-------------------------------------------------------------------
 Wed Mar 14 14:33:26 CET 2007 - schubi@suse.de
 
 - If there is no valid solver result and NOT all resolvables ( other
