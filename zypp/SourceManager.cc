@@ -185,7 +185,7 @@ namespace zypp
   void SourceManager::renameSource( SourceId id, const std::string & new_alias_r )
   {
     Source_Ref src = findSource(id);
-    
+
     if ( src )
     {
       // delete the old entry in the storage
@@ -195,9 +195,9 @@ namespace zypp
       // set the new alias
       src.setAlias( new_alias_r );
     }
-    
+
   }
-  
+
   void SourceManager::removeSource(SourceManager::SourceId id)
   {
     if ( ! sourceTableRemove( _sources.find(id) ) )
@@ -316,7 +316,7 @@ namespace zypp
     }
 
     _renamed_sources.clear();
-    
+
     // delete before modifying and creating
     // so that we can recreate a deleted one (#174295)
     for ( SourceMap::iterator it = _deleted_sources.begin(); it != _deleted_sources.end(); it++)
@@ -339,7 +339,17 @@ namespace zypp
       descr.setType( it->second.type() );
       descr.setPath( it->second.path() );
 
-      descr.setCacheDir( it->second.cacheDir() );
+      // WATCH OUT!
+      // Source::cacheDir contains the root prefix.
+      // Strip it from SourceInfo::CacheDir!
+      if ( root_r.empty() || root_r == "/" )
+      {
+	descr.setCacheDir( it->second.cacheDir() );
+      }
+      else
+      {
+	descr.setCacheDir( str::stripPrefix( it->second.cacheDir().asString(), root_r.asString() ) );
+      }
 
       if ( metadata_cache && descr.cacheDir().empty() )
       {
@@ -431,13 +441,19 @@ namespace zypp
       }
 
       // Note: Url(it->url).asString() to hide password in logs
-      MIL << "Restoring source: url:[" << it->url().asString() << "] product_dir:[" << it->path() << "] alias:[" << it->alias() << "] cache_dir:[" << it->cacheDir() << "] auto_refresh:[ " << it->autorefresh() << "]" << endl;
+      MIL << "Restoring source: url:[" << it->url().asString()
+	  << "] product_dir:[" << it->path()
+	  << "] alias:[" << it->alias()
+	  << "] cache_dir:[" << it->cacheDir()
+	  << "] auto_refresh:[ " << it->autorefresh() << "]" << endl;
 
       SourceId id = 0;
 
       try
       {
-        Source_Ref src = SourceFactory().createFrom(it->type(), it->url(), it->path(), it->alias(), it->cacheDir(), false, it->autorefresh());
+        Source_Ref src = SourceFactory().createFrom( it->type(), it->url(), it->path(), it->alias(),
+						     root_r / it->cacheDir(),
+						     false, it->autorefresh() );
         id = addSource(src);
       }
       catch (const Exception &expt )
@@ -457,7 +473,9 @@ namespace zypp
             url2.setQueryParam("devices", "");
             DBG << "CD/DVD devices changed - try again without a devices list" << std::endl;
 
-            id = addSource( SourceFactory().createFrom(url2, it->path(), it->alias(), it->cacheDir(), false ) );
+            id = addSource( SourceFactory().createFrom( url2, it->path(), it->alias(),
+							root_r / it->cacheDir(),
+							false ) );
 
             // This worked ... update it->url ?
             //it->url = url2.asCompleteString();
