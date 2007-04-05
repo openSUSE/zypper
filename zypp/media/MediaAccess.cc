@@ -107,7 +107,6 @@ MediaAccess::open (const Url& url, const Pathname & preferred_attach_point)
     std::string scheme = url.getScheme();
 
     MIL << "Trying scheme '" << scheme << "'" << endl;
-    SEC << "URL " << url << endl;
     /*
     ** WARNING: Don't forget to update MediaAccess::downloads(url)
     **          if you are adding a new url scheme / handler!
