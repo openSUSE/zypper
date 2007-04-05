@@ -4,6 +4,7 @@ Thu Apr  5 15:50:15 CEST 2007 - schubi@suse.de
 - Upgrade: Do NOT delete packages which have unresolved dependencies -->
   Ask the user. Bug 258322
 - revision 5305 
+- version 3.0.3
 
 -------------------------------------------------------------------
 Wed Apr  4 19:39:12 CEST 2007 - ma@suse.de
