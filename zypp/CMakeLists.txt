@@ -193,7 +193,7 @@ SET( zypp_base_SRCS
   base/Unit.cc
   base/ExternalDataSource.cc
   base/Exception.cc
-  base/Sysconfig.cc  
+  base/Sysconfig.cc
   base/ProfilingFormater.cc
   base/LogControl.cc
 )
@@ -230,6 +230,7 @@ SET( zypp_base_HEADERS
   base/SafeBool.h
   base/String.h
   base/Sysconfig.h
+  base/UniqueString.h
   base/Unit.h
 )
 
@@ -722,7 +723,7 @@ SET( zypp_source_susetags_SRCS
   source/susetags/SuseTagsSrcPackageImpl.cc
 )
 
-SET( zypp_source_susetags_HEADERS  
+SET( zypp_source_susetags_HEADERS
   source/susetags/SUSETagsDownloader.h
   source/susetags/MediaMetadataParser.h
   source/susetags/MediaPatchesMetadataParser.h
