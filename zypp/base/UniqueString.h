@@ -30,18 +30,60 @@ namespace zypp
     //
     /** Immutable strings with unique representation in memory.
      *
-     * Uses CRTP to provide the unifying hash and define operators.
-     * All operatoins are string based.
+     * Each UniqueString provides a <tt>const std::string</tt>.
+     * This string is stored in a unifying hash, that way equal
+     * UniqueStrings share their string representation in memory.
+     *
+     * At the same time the unifying hash contains all the string
+     * values created so far. Static methods are provided to query
+     * the hash contents.
+     *
+     * Uses CRTP to provide the unifying hash.
+     *
+     * \code
+     *   struct KeyWord : public base::UniqueString<KeyWord>
+     *   {
+     *     KeyWord()
+     *     {}
+     *     KeyWord( const std::string & name_r )
+     *       :base::UniqueString<KeyWord>( name_r )
+     *     {}
+     *   };
+     *
+     *   int main( int argc, char * argv[] )
+     *   {
+     *     KeyWord();
+     *     KeyWord( "a" );
+     *     KeyWord( "b" );
+     *     KeyWord( "c" );
+     *     KeyWord( "a" );
+     *     KeyWord( "c" );
+     *
+     *     DBG << "Known KeyWords: " << KeyWord::allSize() << endl;
+     *     for ( KeyWord::const_iterator it = KeyWord::allBegin(); it != KeyWord::allEnd(); ++it )
+     *     {
+     *       DBG << *it << endl;
+     *     }
+     *
+     *     return 0;
+     *   }
+     * \endcode
+     * \code
+     * Known KeyWords: 3
+     * a
+     * b
+     * c
+     * \endcode
     */
     template<class _Derived>
 	class UniqueString
     {
     protected:
-      /** Default ctor */
+      /** Default ctor provides an empty string. */
       UniqueString()
       {}
 
-      /** Ctor taking a name to store unified. */
+      /** Ctor taking a name to store. */
       UniqueString( const std::string & name_r )
       {
 	if ( !name_r.empty() )
@@ -113,90 +155,90 @@ namespace zypp
     };
     ///////////////////////////////////////////////////////////////////
 
-    // operator ==
+    /** \relates UniqueString operator == */
     template<class _Derived>
 	inline bool operator==( const UniqueString<_Derived> & lhs, const UniqueString<_Derived> & rhs )
     { return ( lhs.str() == rhs.str() ); }
-
+    /** \relates UniqueString operator == */
     template<class _Derived>
 	inline bool operator==( const UniqueString<_Derived> & lhs, const std::string & rhs )
     { return ( lhs.str() == rhs ); }
-
+    /** \relates UniqueString operator == */
     template<class _Derived>
 	inline bool operator==( const std::string & lhs, const UniqueString<_Derived> & rhs )
     { return ( lhs == rhs.str() ); }
 
 
-     // operator !=
+    /** \relates UniqueString operator != */
     template<class _Derived>
 	inline bool operator!=( const UniqueString<_Derived> & lhs, const UniqueString<_Derived> & rhs )
     { return ( lhs.str() != rhs.str() ); }
-
+    /** \relates UniqueString operator != */
     template<class _Derived>
 	inline bool operator!=( const UniqueString<_Derived> & lhs, const std::string & rhs )
     { return ( lhs.str() != rhs ); }
-
+    /** \relates UniqueString operator != */
     template<class _Derived>
 	inline bool operator!=( const std::string & lhs, const UniqueString<_Derived> & rhs )
     { return ( lhs != rhs.str() ); }
 
 
-     // operator <
+    /** \relates UniqueString operator < */
     template<class _Derived>
 	inline bool operator<( const UniqueString<_Derived> & lhs, const UniqueString<_Derived> & rhs )
     { return ( lhs.str() < rhs.str() ); }
-
+    /** \relates UniqueString operator < */
     template<class _Derived>
 	inline bool operator<( const UniqueString<_Derived> & lhs, const std::string & rhs )
     { return ( lhs.str() < rhs ); }
-
+    /** \relates UniqueString operator < */
     template<class _Derived>
 	inline bool operator<( const std::string & lhs, const UniqueString<_Derived> & rhs )
     { return ( lhs < rhs.str() ); }
 
 
-     // operator >
+    /** \relates UniqueString operator > */
     template<class _Derived>
 	inline bool operator>( const UniqueString<_Derived> & lhs, const UniqueString<_Derived> & rhs )
     { return ( lhs.str() > rhs.str() ); }
-
+    /** \relates UniqueString operator > */
     template<class _Derived>
 	inline bool operator>( const UniqueString<_Derived> & lhs, const std::string & rhs )
     { return ( lhs.str() > rhs ); }
-
+    /** \relates UniqueString operator > */
     template<class _Derived>
 	inline bool operator>( const std::string & lhs, const UniqueString<_Derived> & rhs )
     { return ( lhs > rhs.str() ); }
 
 
-     // operator <=
+    /** \relates UniqueString operator <= */
     template<class _Derived>
 	inline bool operator<=( const UniqueString<_Derived> & lhs, const UniqueString<_Derived> & rhs )
     { return ( lhs.str() <= rhs.str() ); }
-
+    /** \relates UniqueString operator <= */
     template<class _Derived>
 	inline bool operator<=( const UniqueString<_Derived> & lhs, const std::string & rhs )
     { return ( lhs.str() <= rhs ); }
-
+    /** \relates UniqueString operator <= */
     template<class _Derived>
 	inline bool operator<=( const std::string & lhs, const UniqueString<_Derived> & rhs )
     { return ( lhs <= rhs.str() ); }
 
 
-     // operator !=
+    /** \relates UniqueString operator >= */
     template<class _Derived>
 	inline bool operator>=( const UniqueString<_Derived> & lhs, const UniqueString<_Derived> & rhs )
     { return ( lhs.str() >= rhs.str() ); }
-
+    /** \relates UniqueString operator >= */
     template<class _Derived>
 	inline bool operator>=( const UniqueString<_Derived> & lhs, const std::string & rhs )
     { return ( lhs.str() >= rhs ); }
-
+    /** \relates UniqueString operator >= */
     template<class _Derived>
 	inline bool operator>=( const std::string & lhs, const UniqueString<_Derived> & rhs )
     { return ( lhs >= rhs.str() ); }
 
-   /** \relates UniqueString Stream output */
+    /** \relates UniqueString Stream output */
     template<class _Derived>
 	inline std::ostream & operator<<( std::ostream & str, const UniqueString<_Derived> & obj )
     { return str << obj.str(); }

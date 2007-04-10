@@ -128,6 +128,7 @@ SET( zypp_HEADERS
   NeedAType.h
   OnMediaLocation.h
   Package.h
+  PackageKeyword.h
   Patch.h
   PathInfo.h
   Pathname.h
