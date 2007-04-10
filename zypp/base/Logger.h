@@ -59,9 +59,11 @@
 #define _INT(GROUP) ZYPP_BASE_LOGGER_LOG( GROUP, zypp::base::logger::E_INT )
 #define _USR(GROUP) ZYPP_BASE_LOGGER_LOG( GROUP, zypp::base::logger::E_USR )
 
+#define _BASEFILE ( *__FILE__ == '/' ? strrchr( __FILE__, '/' ) + 1 : __FILE__ )
+
 /** Actual call to @ref getStream. */
 #define ZYPP_BASE_LOGGER_LOG(GROUP,LEVEL) \
-        zypp::base::logger::getStream( GROUP, LEVEL, __FILE__, __FUNCTION__, __LINE__ )
+        zypp::base::logger::getStream( GROUP, LEVEL, _BASEFILE, __FUNCTION__, __LINE__ )
 
 /*@}*/
 
