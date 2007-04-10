@@ -25,11 +25,11 @@ namespace zypp
   /** Package keywords. */
   struct PackageKeyword : public base::UniqueString<PackageKeyword>
   {
-    KeyWord()
+    PackageKeyword()
     {}
 
-    KeyWord( const std::string & name_r )
-      :base::UniqueString<KeyWord>( name_r )
+    PackageKeyword( const std::string & name_r )
+      : base::UniqueString<PackageKeyword>( name_r )
     {}
   };
   ///////////////////////////////////////////////////////////////////
