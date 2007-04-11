@@ -29,7 +29,7 @@ ADD_CUSTOM_TARGET( ma_test
 
 ## ############################################################
 
-FOREACH( loop_var ScanSource Iorder Parse )
+FOREACH( loop_var ScanSource Iorder Parse Xml )
    ADD_EXECUTABLE( ${loop_var}
       ${loop_var}.cc
    )

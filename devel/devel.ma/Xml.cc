@@ -90,12 +90,10 @@ bool dumpEd( xml::Reader & reader_r )
        && reader_r->name() == "version" )
     {
       MIL << *reader_r << endl;
-      DBG << reader_r->getAttribute( "rel" ) << endl;
-      ERR << *reader_r << endl;
-      DBG << reader_r->getAttribute( "ver" ) << endl;
-      ERR << *reader_r << endl;
-      DBG << reader_r->getAttribute( "epoch" ) << endl;
-      ERR << *reader_r << endl;
+#define _show(x) DBG << #x << " = " << reader_r->getAttribute( #x ) << endl
+      _show( rel );
+      _show( ver );
+      _show( epoch );
       WAR << Edition( reader_r->getAttribute( "ver" ).asString(),
                       reader_r->getAttribute( "rel" ).asString(),
                       reader_r->getAttribute( "epoch" ).asString() ) << endl;
@@ -172,10 +170,23 @@ int main( int argc, char * argv[] )
     {
       Measure m( "Parse" );
       xml::Reader reader( repodata );
-      if ( 0 )
-	reader.foreachNode( dumpNode );
-      else
-	reader.foreachNodeOrAttribute( dumpNode );
+
+      switch ( 3 )
+      {
+	case 1:
+	  reader.foreachNode( dumpNode );
+	  break;
+	case 2:
+	  reader.foreachNodeOrAttribute( dumpNode );
+	  break;
+	case 3:
+	  reader.foreachNode( dumpEd );
+	  break;
+
+	default:
+	  WAR << "NOP" << endl;
+	  break;
+      }
     }
 
   INT << "===[END]============================================" << endl << endl;
