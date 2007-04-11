@@ -1,9 +1,16 @@
 -------------------------------------------------------------------
+Wed Apr 11 15:24:01 CEST 2007 - ma@suse.de
+
+- Parse and provide package keywords. (Fate 120368)
+- revision 5338
+- version 3.1.0
+
+-------------------------------------------------------------------
 Thu Apr  5 15:50:15 CEST 2007 - schubi@suse.de
 
 - Upgrade: Do NOT delete packages which have unresolved dependencies -->
   Ask the user. Bug 258322
-- revision 5305 
+- revision 5305
 - version 3.0.3
 
 -------------------------------------------------------------------
