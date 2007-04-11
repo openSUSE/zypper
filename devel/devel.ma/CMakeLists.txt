@@ -45,6 +45,7 @@ FOREACH( loop_var AOUT )
    )
    TARGET_LINK_LIBRARIES( ${loop_var}
       boost_filesystem boost_regex
+      zypp
    )
 ENDFOREACH( loop_var )
 

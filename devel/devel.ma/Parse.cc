@@ -19,6 +19,7 @@
 #include "zypp/Package.h"
 #include "zypp/Pattern.h"
 #include "zypp/Language.h"
+#include "zypp/PackageKeyword.h"
 #include "zypp/NameKindProxy.h"
 #include "zypp/pool/GetResolvablesToInsDel.h"
 
@@ -186,6 +187,13 @@ void showProd( const PoolItem & prod )
   MIL << p->installtime() << endl;
 }
 
+void doPkg( const PoolItem & pi )
+{
+  Package::constPtr p( asKind<Package>(pi) );
+  MIL << p << endl;
+  DBG << p->keywords() << endl;
+}
+
 ///////////////////////////////////////////////////////////////////
 /******************************************************************
 **
@@ -207,12 +215,11 @@ int main( int argc, char * argv[] )
     //zypp::base::LogControl::TmpLineWriter shutUp;
     SourceManager::sourceManager()->restore( root );
 
-
     if ( SourceManager::sourceManager()->allSources().empty() )
     {
       {
 	zypp::base::LogControl::TmpLineWriter shutUp;
-	Source_Ref src1( createSource( "dir:/Local/SLES10" ) );
+	Source_Ref src1( createSource( "dir:/dist/install/SLP/openSUSE-10.3-Build00300-DVD/i386/DVD1" ) );
 	SourceManager::sourceManager()->addSource( src1 );
 	SourceManager::sourceManager()->store( root, true );
       }
@@ -228,75 +235,18 @@ int main( int argc, char * argv[] )
     }
   }
 
-  Source_Ref src1( *SourceManager::sourceManager()->Source_begin() );
-  getZYpp()->addResolvables( src1.resolvables() );
+  std::for_each( SourceManager::sourceManager()->Source_begin(),
+		 SourceManager::sourceManager()->Source_end(),
+		 AddResolvables() );
 
   ResPool pool( getZYpp()->pool() );
+  dumpRange( USR << "PackageKeywords: " << PackageKeyword::allSize(),
+	     PackageKeyword::allBegin(),
+	     PackageKeyword::allEnd() ) << endl;
 
-  src1.providePackage( asKind<Package>(*pool.byKindBegin<Package>()) );
-
-  INT << "===[END]============================================" << endl << endl;
-  zypp::base::LogControl::instance().logNothing();
-  return 0;
-
-
-  PoolItem prod( *pool.byKindBegin<Product>() );
-  showProd( prod );
-  PoolItem pac( *pool.byNameBegin("java-1_4_2-sun-plugin") );
-
-  if ( 1 )
-    {
-      zypp::base::LogControl::TmpLineWriter shutUp;
-      getZYpp()->initTarget( sysRoot );
-      USR << "Added target: " << pool << endl;
-    }
-
-  prod.status().setTransact( true, ResStatus::USER );
-  pac.status().setTransact( true, ResStatus::USER );
-  ZYppCommitPolicy policy;
-  policy.rpmNoSignature();
-  ZYppCommitResult res( getZYpp()->commit( policy ) );
-
-  SEC << res << endl;
-
-  zypp::base::LogControl::instance().logNothing();
-  return 0;
-
-
-
-  if ( 1 )
-    {
-#define selt(K,N) selectForTransact( nameKindProxy<K>( pool, #N ) )
-      selt( Script, fetchmsttfonts.sh-patch-fetchmsttfonts.sh-2 );
-#undef selt
-    }
-
-  vdumpPoolStats( USR << "Transacting:"<< endl,
-                  make_filter_begin<resfilter::ByTransact>(pool),
-                  make_filter_end<resfilter::ByTransact>(pool) ) << endl;
-
-  if ( 1 ) {
-    bool eres, rres;
-    {
-      //zypp::base::LogControl::TmpLineWriter shutUp;
-      //zypp::base::LogControl::instance().logfile( "SOLVER" );
-      eres = getZYpp()->resolver()->establishPool();
-      rres = getZYpp()->resolver()->resolvePool();
-    }
-    MIL << "est " << eres << " slv " << rres << endl;
-  }
-
-  dumpPoolStats( USR << "Transacting:"<< endl,
-                  make_filter_begin<resfilter::ByTransact>(pool),
-                  make_filter_end<resfilter::ByTransact>(pool) ) << endl;
-
-
-  if ( 1 )
-    {
-       ZYppCommitPolicy policy;
-       policy.rpmNoSignature();
-       ZYppCommitResult res( getZYpp()->commit( policy ) );
-    }
+  std::for_each( pool.byKindBegin<Package>(),
+		 pool.byKindEnd<Package>(),
+		 doPkg );
 
   INT << "===[END]============================================" << endl << endl;
   zypp::base::LogControl::instance().logNothing();
