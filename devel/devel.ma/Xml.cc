@@ -39,39 +39,16 @@ static const Pathname sysRoot( "/Local/ROOT" );
 ///////////////////////////////////////////////////////////////////
 
 template<class _Cl>
-  void ti( const _Cl & c )
-  {
-    SEC << __PRETTY_FUNCTION__ << endl;
-  }
-
-///////////////////////////////////////////////////////////////////
-
-bool nopNode( xml::Reader & reader_r )
+    void ti( const _Cl & c )
 {
-  return true;
+  SEC << __PRETTY_FUNCTION__ << endl;
 }
 
 ///////////////////////////////////////////////////////////////////
 
-bool accNode( xml::Reader & reader_r )
+bool dump( xml::Reader & reader_r )
 {
-  int i;
-  xml::XmlString s;
-#define X(m) reader_r->m()
-      i=X(readState);
-      i=X(lineNumber);
-      i=X(columnNumber);
-      i=X(depth);
-      i=X(nodeType);
-      s=X(name);
-      s=X(prefix);
-      s=X(localName);
-      i=X(hasAttributes);
-      i=X(attributeCount);
-      i=X(hasValue);
-      s=X(value);
-#undef X
-      return true;
+  MIL << *reader_r << endl;
 }
 
 ///////////////////////////////////////////////////////////////////
@@ -79,20 +56,28 @@ bool accNode( xml::Reader & reader_r )
 bool dumpNode( xml::Reader & reader_r )
 {
   switch ( reader_r->nodeType() )
-    {
+  {
+    case XML_READER_TYPE_ELEMENT:
+      MIL << *reader_r << endl;
+      for ( int i = 0; i < reader_r->attributeCount(); ++i )
+      {
+	MIL << " attr no " << i << " '" << reader_r->getAttributeNo( i ) << "'" << endl;
+      }
+      break;
+
     case XML_READER_TYPE_ATTRIBUTE:
+      WAR << *reader_r << endl;
+      break;
+
     case XML_READER_TYPE_TEXT:
     case XML_READER_TYPE_CDATA:
-       DBG << *reader_r << endl;
-       break;
-    case XML_READER_TYPE_ELEMENT:
+      DBG << *reader_r << endl;
+      break;
 
-       MIL << *reader_r << endl;
-       break;
     default:
-       //WAR << *reader_r << endl;
-       break;
-    }
+      //ERR << *reader_r << endl;
+      break;
+  }
   return true;
 }
 
@@ -180,7 +165,6 @@ int main( int argc, char * argv[] )
   else
     {
       repodata = "/Local/FACTORY/repodata";
-      //repodata = "/Local/PATCHES/repodata";
       repodata /= "primary.xml";
     }
 
@@ -188,11 +172,88 @@ int main( int argc, char * argv[] )
     {
       Measure m( "Parse" );
       xml::Reader reader( repodata );
-      //reader.foreachNodeOrAttribute( accNode );
-      reader.foreachNodeOrAttribute( accNode );
+      if ( 0 )
+	reader.foreachNode( dumpNode );
+      else
+	reader.foreachNodeOrAttribute( dumpNode );
     }
 
   INT << "===[END]============================================" << endl << endl;
   return 0;
 }
 
+/*
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata xmlns="http://linux.duke.edu/metadata/common" xmlns:rpm="http://linux.duke.edu/metadata/rpm" packages="23230">
+<package type="rpm">
+<name>fam-devel</name>
+<arch>ppc</arch>
+<version epoch="0" ver="2.6.10" rel="141"/>
+<checksum type="sha" pkgid="YES">59d6a65cdadd911fe8ceee87740a54305b2ab053</checksum>
+<summary>Include Files and Libraries Mandatory for Development</summary>
+<description>Fam is a file alteration monitoring service. This means that you can
+
+foreachNode( dumpNode )
+=======================
+START MEASURE(Parse)
+0:ELEMENT <metadata>  [attr 3]
+ attr no 0 'http://linux.duke.edu/metadata/common'
+ attr no 1 'http://linux.duke.edu/metadata/rpm'
+ attr no 2 '23230'
+1: ELEMENT <package>  [attr 1]
+ attr no 0 'rpm'
+2:  ELEMENT <name>  [noattr]
+3:   TEXT <#text>  [noattr] {fam-devel}
+2:  ELEMENT <arch>  [noattr]
+3:   TEXT <#text>  [noattr] {ppc}
+2:  ELEMENT <version>  [attr 3|empty]
+ attr no 0 '0'
+ attr no 1 '2.6.10'
+ attr no 2 '141'
+2:  ELEMENT <checksum>  [attr 2]
+ attr no 0 'sha'
+ attr no 1 'YES'
+3:   TEXT <#text>  [noattr] {59d6a65cdadd911fe8ceee87740a54305b2ab053}
+2:  ELEMENT <summary>  [noattr]
+3:   TEXT <#text>  [noattr] {Include Files and Libraries Mandatory for Development}
+2:  ELEMENT <description>  [noattr]
+3:   TEXT <#text>  [noattr] {Fam is a file alteration monitoring service. This means that you can
+
+foreachNodeOrAttribute( dumpNode )
+==================================
+START MEASURE(Parse)
+0:ELEMENT <metadata>  [attr 3]
+ attr no 0 'http://linux.duke.edu/metadata/common'
+ attr no 1 'http://linux.duke.edu/metadata/rpm'
+ attr no 2 '23230'
+1: ATTRIBUTE <xmlns>  [noattr] {http://linux.duke.edu/metadata/common}
+1: ATTRIBUTE <xmlns:rpm>  [noattr] {http://linux.duke.edu/metadata/rpm}
+1: ATTRIBUTE <packages>  [noattr] {23230}
+1: ELEMENT <package>  [attr 1]
+ attr no 0 'rpm'
+2:  ATTRIBUTE <type>  [noattr] {rpm}
+2:  ELEMENT <name>  [noattr]
+3:   TEXT <#text>  [noattr] {fam-devel}
+2:  ELEMENT <arch>  [noattr]
+3:   TEXT <#text>  [noattr] {ppc}
+2:  ELEMENT <version>  [attr 3|empty]
+ attr no 0 '0'
+ attr no 1 '2.6.10'
+ attr no 2 '141'
+3:   ATTRIBUTE <epoch>  [noattr] {0}
+3:   ATTRIBUTE <ver>  [noattr] {2.6.10}
+3:   ATTRIBUTE <rel>  [noattr] {141}
+2:  ELEMENT <checksum>  [attr 2]
+ attr no 0 'sha'
+ attr no 1 'YES'
+3:   ATTRIBUTE <type>  [noattr] {sha}
+3:   ATTRIBUTE <pkgid>  [noattr] {YES}
+3:   TEXT <#text>  [noattr] {59d6a65cdadd911fe8ceee87740a54305b2ab053}
+3:   ATTRIBUTE <type>  [noattr] {sha}
+3:   ATTRIBUTE <pkgid>  [noattr] {YES}
+2:  ELEMENT <summary>  [noattr]
+3:   TEXT <#text>  [noattr] {Include Files and Libraries Mandatory for Development}
+2:  ELEMENT <description>  [noattr]
+3:   TEXT <#text>  [noattr] {Fam is a file alteration monitoring service. This means that you can
+
+*/
