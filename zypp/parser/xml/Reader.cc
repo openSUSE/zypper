@@ -113,6 +113,21 @@ namespace zypp
         }
     }
 
+    XmlString Reader::nodeText()
+    {
+      if ( ! _node.isEmptyElement() )
+      {
+        if ( nextNode() )
+        {
+          if ( _node.nodeType() == XML_READER_TYPE_TEXT )
+          {
+            return _node.value();
+          }
+        }
+      }
+      return XmlString();
+    }
+    
     ///////////////////////////////////////////////////////////////////
     //
     //	METHOD NAME : Reader::nextNode
