@@ -14,6 +14,7 @@
 #include "zypp/Pathname.h"
 #include "zypp/Url.h"
 #include "zypp/OnMediaLocation.h"
+#include "zypp/MediaSetAccess.h"
 
 namespace zypp
 {
@@ -25,10 +26,11 @@ namespace zypp
   * be cached already on the local disk.
   *
   * \code
-  * Fetcher fetcher(url, path);
+  * MediaSetAccess access(url, path);
+  * Fetcher fetcher;
   * fetcher.enqueue( OnMediaLocation().filename("/content") );
-  * fetcher.insertCache("/tmp/cache")
-  * fetcher.start( "/download-dir );
+  * fetcher.addCachePath("/tmp/cache")
+  * fetcher.start( "/download-dir, access );
   * fetcher.reset();
   * \endcode
   */
@@ -36,9 +38,9 @@ namespace zypp
   {
   public:
     /**
-    * Constructs a fetcher from a url and path
+    * Constructor
     */
-    Fetcher( const Url &url, const Pathname &path );
+    Fetcher();
 
     /**
     * Enqueue a object for transferal, they will not
@@ -49,21 +51,23 @@ namespace zypp
     * adds a directory to the list of directories
     * where to look for cached files
     */
-    void insertCache( const Pathname &cache_dir );
+    void addCachePath( const Pathname &cache_dir );
     /**
     * Reset the transfer list and cache list
     */
     void reset();
     /**
     * start the transfer to a destination directory
+    * \a dest_dir
+    * You have to provde a media set access
+    * \a media to get the files from
     * The file tree will be replicated inside this
     * directory
+    *
     */
-    void start( const Pathname &dest_dir );
+    void start( const Pathname &dest_dir, MediaSetAccess &media );
 
   private:
-    Url _url;
-    Pathname _path;
     std::list<OnMediaLocation> _resources;
     std::list<Pathname> _caches;
   };

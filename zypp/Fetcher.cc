@@ -18,8 +18,7 @@ using namespace zypp::filesystem;
 namespace zypp
 {
 
-Fetcher::Fetcher( const Url &url, const Pathname &path )
-  : _url(url), _path(path)
+Fetcher::Fetcher()
 {
 
 }
@@ -35,15 +34,13 @@ void Fetcher::reset()
   _caches.clear();
 }
 
-void Fetcher::insertCache( const Pathname &cache_dir )
+void Fetcher::addCachePath( const Pathname &cache_dir )
 {
   _caches.push_back(cache_dir);
 }
 
-void Fetcher::start( const Pathname &dest_dir )
+void Fetcher::start( const Pathname &dest_dir, MediaSetAccess &media )
 {
-  MediaSetAccess media(_url, _path);
-
   for ( list<OnMediaLocation>::const_iterator it_res = _resources.begin(); it_res != _resources.end(); ++it_res )
   {
     bool got_from_cache = false;
