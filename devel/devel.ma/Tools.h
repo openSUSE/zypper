@@ -2,6 +2,10 @@
 #define Tools_h
 
 #include <iostream>
+#include <fstream>
+#include <list>
+#include <map>
+#include <set>
 
 #include "Printing.h"
 
