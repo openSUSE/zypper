@@ -2,6 +2,7 @@
 #include <fstream>
 #include "zypp/base/String.h"
 #include "zypp/OnMediaLocation.h"
+#include "zypp/MediaSetAccess.h"
 #include "zypp/Fetcher.h"
 
 #include "zypp/source/susetags/SUSETagsDownloader.h"
@@ -23,9 +24,10 @@ SUSETagsDownloader::SUSETagsDownloader( const Url &url, const Pathname &path )
 
 void SUSETagsDownloader::download( const Pathname &dest_dir )
 {
-  Fetcher fetcher(_url, _path);
+  MediaSetAccess media(_url, _path);
+  Fetcher fetcher;
   fetcher.enqueue( OnMediaLocation().filename("/content") );
-  fetcher.start( dest_dir );
+  fetcher.start( dest_dir, media );
   fetcher.reset();
 
   std::ifstream file((dest_dir + "/content").asString().c_str());
@@ -61,7 +63,7 @@ void SUSETagsDownloader::download( const Pathname &dest_dir )
     }
   }
   file.close();
-  fetcher.start( dest_dir );
+  fetcher.start( dest_dir, media );
 }
 
 }// ns susetags
