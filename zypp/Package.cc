@@ -70,6 +70,8 @@ namespace zypp
   PackageGroup Package::group() const
   { return pimpl().group(); }
 
+  Package::Keywords Package::keywords() const
+  { return pimpl().keywords(); }
 
   /** Don't ship it as class Url, because it might be
    * in fact anything but a legal Url. */

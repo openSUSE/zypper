@@ -356,13 +356,12 @@ struct PackagesParser : public parser::tagfile::TagFileParser
     {
       collectDeps( mtag_r.values, _nvrad[Dep::ENHANCES] );
     }
-    else if ( mtag_r.name == "Key" )
+    else if ( mtag_r.name == "Kwd" )
     {
-      _pkgImpl->_keywords = mtag_r.values;
+      _pkgImpl->_keywords.insert( mtag_r.values.begin(), mtag_r.values.end() );
     }
     else if ( mtag_r.name == "Aut" )
     {
-      // MultiTag is a Set but author is a list
       _pkgImpl->_authors = mtag_r.values;
     }
   }

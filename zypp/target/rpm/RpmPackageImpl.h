@@ -85,13 +85,9 @@ namespace zypp
 	/** */
 	virtual ByteCount archivesize() const;
 	/** */
-	virtual std::list<std::string> authors() const;
-	/** */
 	virtual std::list<std::string> filenames() const;
         /** */
         virtual std::string type() const;
-        /** */
-        virtual std::list<std::string> keywords() const;
         /** */
         virtual DiskUsage diskUsage() const;
         /** */
@@ -115,8 +111,6 @@ namespace zypp
 	Changelog _changelog;
 	Pathname _location;			// for 'local' rpms
 	std::string _type;
-	std::list<std::string> _authors;
-	std::list<std::string>_keywords;
 	std::list<std::string> _filenames;
 	DiskUsage _disk_usage;
 	ByteCount _size;

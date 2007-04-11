@@ -50,17 +50,10 @@ namespace zypp
 	_group(data->tag_group()),
 	_changelog(data->tag_changelog()),
 	_type("rpm"), // FIXME in the future
-//	_authors(data->authors),
-//	_keywords(data->keywords),
 	_filenames(data->tag_filenames()),
 //	_disk_usage(data->diskusage),
 	_size(data->tag_size()),
 	_archivesize(data->tag_archivesize())
-#if 0
-	_size_installed( strtol(parsed.sizeInstalled.c_str(), 0, 10)),
-	_sourcepkg( parsed.sourcerpm),
-	_dir_sizes(parsed.dirSizes),
-#endif
       {
         // we know we are reading english.
         _description.setText(data->tag_description(), Locale("en"));
@@ -159,20 +152,12 @@ namespace zypp
       { return _archivesize; }
 
       /** */
-      std::list<std::string> RPMPackageImpl::authors() const
-      { return _authors; }
-
-      /** */
       std::list<std::string> RPMPackageImpl::filenames() const
       { return _filenames; }
 
       /** */
       std::string RPMPackageImpl::type() const
       { return _type; }
-
-      /** */
-      std::list<std::string> RPMPackageImpl::keywords() const
-      { return _keywords; }
 
       /** */
       DiskUsage RPMPackageImpl::diskUsage() const

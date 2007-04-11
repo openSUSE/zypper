@@ -68,7 +68,9 @@ namespace zypp
         /** */
         virtual PackageGroup group() const;
         /** */
-        virtual Changelog changelog() const;
+	virtual Keywords keywords() const;
+	/** */
+	virtual Changelog changelog() const;
         /** */
         virtual Pathname location() const;
         /** Don't ship it as class Url, because it might be
@@ -109,8 +111,8 @@ namespace zypp
         NVRA _nvra;
 
         PackageGroup _group;
+	Keywords _keywords;
         std::list<std::string> _authors;
-        std::list<std::string> _keywords;
         ByteCount _size;
         ByteCount _archivesize;
         Vendor _vendor;

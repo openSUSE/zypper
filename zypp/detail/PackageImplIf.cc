@@ -44,6 +44,9 @@ namespace zypp
       PackageGroup PackageImplIf::group() const
       { return PackageGroup(); }
 
+      PackageImplIf::Keywords PackageImplIf::keywords() const
+      { return std::set<PackageKeyword>(); }
+
       Changelog PackageImplIf::changelog() const
       { return Changelog(); }
 

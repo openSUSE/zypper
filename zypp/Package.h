@@ -29,13 +29,15 @@ namespace zypp
   */
   class Package : public ResObject
   {
-
   public:
     typedef detail::PackageImplIf    Impl;
     typedef Package                  Self;
     typedef ResTraits<Self>          TraitsType;
     typedef TraitsType::PtrType      Ptr;
     typedef TraitsType::constPtrType constPtr;
+
+  public:
+    typedef std::set<PackageKeyword> Keywords;
 
   public:
     /**
@@ -54,6 +56,8 @@ namespace zypp
     std::string packager() const;
     /** */
     PackageGroup group() const;
+    /** */
+    Keywords keywords() const;
     /** Don't ship it as class Url, because it might be
      * in fact anything but a legal Url. */
     std::string url() const;

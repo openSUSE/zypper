@@ -97,7 +97,7 @@ public:
   /** */
   virtual std::string type() const;
   /** */
-  virtual std::list<std::string> keywords() const;
+  virtual Keywords keywords() const;
   /** */
   virtual bool installOnly() const;
   /** */
@@ -123,7 +123,7 @@ protected:
   Changelog _changelog;
   std::string _type;
   std::list<std::string> _authors;
-  std::list<std::string> _keywords;
+  Keywords _keywords;
   unsigned _mediaNumber;
   CheckSum _checksum;
   std::list<std::string> _filenames;

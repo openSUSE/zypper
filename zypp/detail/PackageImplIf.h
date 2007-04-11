@@ -20,6 +20,7 @@
 #include "zypp/Arch.h"
 #include "zypp/Changelog.h"
 #include "zypp/DiskUsage.h"
+#include "zypp/PackageKeyword.h"
 #include "zypp/source/PackageDelta.h"
 
 ///////////////////////////////////////////////////////////////////
@@ -46,6 +47,7 @@ namespace zypp
     public:
       typedef packagedelta::DeltaRpm    DeltaRpm;
       typedef packagedelta::PatchRpm    PatchRpm;
+      typedef std::set<PackageKeyword>  Keywords;
 
     public:
       /** \name Rpm Package Attributes. */
@@ -62,6 +64,8 @@ namespace zypp
       virtual std::string packager() const PURE_VIRTUAL;
       /** */
       virtual PackageGroup group() const PURE_VIRTUAL;
+      /** */
+      virtual Keywords keywords() const PURE_VIRTUAL;
       /** */
       virtual Changelog changelog() const PURE_VIRTUAL;
       /** */

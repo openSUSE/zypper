@@ -53,7 +53,7 @@ YUMPackageImpl::YUMPackageImpl(
     _changelog(), // TODO
     _type(parsed.type),
     _authors(parsed.authors),
-    _keywords( parsed.keywords),
+    _keywords( parsed.keywords.begin(), parsed.keywords.end() ),
     _mediaNumber(str::strtonum<unsigned int>(parsed.media)),
     _checksum(parsed.checksumType,
               parsed.checksum),
@@ -65,14 +65,6 @@ YUMPackageImpl::YUMPackageImpl(
     _package_size(str::strtonum<unsigned int>(parsed.sizePackage)),
     _size(str::strtonum<unsigned int>(parsed.sizeInstalled)),
     _source(source_r)
-#if 0
-    :
-    _size_package(strtol(parsed.sizePackage.c_str(), 0, 10)),
-    _size_archive(strtol(parsed.sizeArchive.c_str(), 0, 10)),
-    _size_installed(strtol(parsed.sizeInstalled.c_str(), 0, 10)),
-    _sourcepkg(parsed.sourcerpm),
-    _dir_sizes(parsed.dirSizes),
-#endif
 {
   for (std::list<FileData>::const_iterator it = filelist.files.begin();
        it != filelist.files.end();
@@ -250,7 +242,7 @@ std::string YUMPackageImpl::type() const
 }
 
 /** */
-std::list<std::string> YUMPackageImpl::keywords() const
+YUMPackageImpl::Keywords YUMPackageImpl::keywords() const
 {
   return _keywords;
 }

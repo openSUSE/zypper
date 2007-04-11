@@ -124,6 +124,11 @@ PackageGroup SuseTagsPackageImpl::group() const
   return _group;
 }
 
+SuseTagsPackageImpl::Keywords SuseTagsPackageImpl::keywords() const
+{
+  return _keywords;
+}
+
 Changelog SuseTagsPackageImpl::changelog() const
 {
   return Changelog();
