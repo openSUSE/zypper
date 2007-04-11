@@ -59,6 +59,7 @@ private:
   virtual bool isInterested(const xmlNodePtr nodePtr);
   virtual YUMProductData_Ptr process(const xmlTextReaderPtr reader);
   LibXMLHelper _helper;
+  Arch _zypp_architecture;
 };
 } // namespace yum
 } // namespace parser

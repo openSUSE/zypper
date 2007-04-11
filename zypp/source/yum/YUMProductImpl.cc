@@ -51,6 +51,8 @@ namespace zypp
       :	_category(parsed.type),
       _vendor(parsed.vendor),
       _short_name(parsed.short_name),
+      _distribution_name(parsed.distribution_name),
+      _distribution_edition(Edition(parsed.distribution_edition)),
       _source(source_r)
       {
       }
@@ -92,12 +94,12 @@ namespace zypp
 
       std::string YUMProductImpl::distributionName() const
       {
-        return ProductImplIf::distributionName();
+        return _distribution_name;
       }
 
       Edition YUMProductImpl::distributionEdition() const
       {
-        return ProductImplIf::distributionEdition();
+        return _distribution_edition;
       }
 
       /////////////////////////////////////////////////////////////////

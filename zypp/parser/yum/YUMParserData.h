@@ -515,6 +515,8 @@ public:
   TranslatedText description;
   TranslatedText short_name;
   // those are suse specific tags
+  std::string distribution_name;
+  std::string distribution_edition;
   std::string releasenotesurl;
 };
 

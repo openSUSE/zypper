@@ -54,7 +54,8 @@ protected:
   TranslatedText _summary;
   TranslatedText _description;
   TranslatedText _short_name;
-
+  std::string _distribution_name;
+  Edition _distribution_edition;
 private:
   Source_Ref _source;
 public:

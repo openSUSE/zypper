@@ -959,7 +959,7 @@ Atom::Ptr YUMSourceImpl::augmentPackage(
       {
         YUMPackageImpl::PatchRpm patch_rpm;
 
-        patch_rpm.location( OnMediaLocation()
+        patch_rpm.location( source::OnMediaLocation()
                             .medianr( str::strtonum<unsigned>( it->media ) )
                             .filename( it->location )
                             .checksum( CheckSum( it->checksumType, it->checksum ) )
@@ -985,7 +985,7 @@ Atom::Ptr YUMSourceImpl::augmentPackage(
       {
         YUMPackageImpl::DeltaRpm delta_rpm;
 
-        delta_rpm.location( OnMediaLocation()
+        delta_rpm.location( source::OnMediaLocation()
                             .medianr( str::strtonum<unsigned>( it->media ) )
                             .filename( it->location )
                             .checksum( CheckSum( it->checksumType, it->checksum ) )

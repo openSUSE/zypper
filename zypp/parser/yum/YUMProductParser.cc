@@ -12,6 +12,8 @@
 
 #include <istream>
 #include <string>
+#include "zypp/ZYppFactory.h"
+#include "zypp/ZYpp.h"
 #include "zypp/parser/xml_parser_assert.h"
 #include <libxml/xmlreader.h>
 #include <libxml/tree.h>
@@ -34,15 +36,18 @@ YUMProductParser::~YUMProductParser()
 
 YUMProductParser::YUMProductParser(std::istream &is, const std::string& baseUrl, parser::ParserProgress::Ptr progress )
     : XMLNodeIterator<YUMProductData_Ptr>(is, baseUrl,PRODUCTSCHEMA, progress)
+      , _zypp_architecture( getZYpp()->architecture() )
 {
   fetchNext();
 }
 
 YUMProductParser::YUMProductParser()
+  : _zypp_architecture( getZYpp()->architecture() )
 { }
 
 YUMProductParser::YUMProductParser(YUMProductData_Ptr& entry)
     : XMLNodeIterator<YUMProductData_Ptr>(entry)
+      , _zypp_architecture( getZYpp()->architecture() )
 { }
 
 
@@ -77,6 +82,25 @@ YUMProductParser::process(const xmlTextReaderPtr reader)
       {
         productPtr->name = _helper.content(child);
       }
+      else if (name == "arch")
+      {
+        productPtr->arch = _helper.content(child);
+        try
+        {
+          if (!Arch(productPtr->arch).compatibleWith( _zypp_architecture ))
+          {
+            productPtr = NULL;			// skip <package>, incompatible architecture
+            break;
+          }
+        }
+        catch ( const Exception & excpt_r )
+        {
+          ZYPP_CAUGHT( excpt_r );
+          DBG << "Skipping malformed " << productPtr->arch << endl;
+          productPtr = NULL;
+          break;
+        }
+      }
       else if (name == "vendor")
       {
         productPtr->vendor = _helper.content(child);
@@ -102,6 +126,14 @@ YUMProductParser::process(const xmlTextReaderPtr reader)
         productPtr->epoch = _helper.attribute(child,"epoch");
         productPtr->ver = _helper.attribute(child,"ver");
         productPtr->rel = _helper.attribute(child,"rel");
+      }
+      else if (name == "distribution-name")
+      {
+        productPtr->distribution_name = _helper.content(child);
+      }
+      else if (name == "distribution-edition")
+      {
+        productPtr->distribution_edition = _helper.content(child);
       }
       else if (name == "provides")
       {
