@@ -17,7 +17,10 @@ using namespace boost::unit_test;
 
 void fetcher_simple_test()
 {
-  //TESTS_SRC_DIR
+  string dir(TESTS_SRC_DIR);
+  dir += "/zypp/data/Fetcher/remote-site";
+  MediaSetAccess media( "dir:" + dir, "/" );
+  Fetcher fetcher;
 }
 
 test_suite*
