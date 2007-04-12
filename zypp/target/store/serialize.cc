@@ -35,15 +35,15 @@ namespace zypp
 namespace storage
 { /////////////////////////////////////////////////////////////////
 
-static std::string xml_escape( const std::string &text )
+static string xml_escape( const string &text )
 {
   iobind::parser::xml_escape_parser parser;
   return parser.escape(text);
 }
 
-static std::string xml_tag_enclose( const std::string &text, const std::string &tag, bool escape = false )
+static string xml_tag_enclose( const string &text, const string &tag, bool escape = false )
 {
-  std::string result;
+  string result;
   result += "<" + tag + ">";
 
   if ( escape)
@@ -55,7 +55,7 @@ static std::string xml_tag_enclose( const std::string &text, const std::string &
   return result;
 }
 
-static std::ostream & operator<<( std::ostream & str, const boost::tribool obj )
+static ostream & operator<<( ostream & str, const boost::tribool obj )
 {
   if (obj)
     return str << "true";
@@ -71,27 +71,27 @@ static std::ostream & operator<<( std::ostream & str, const boost::tribool obj )
  *
  *
  */
-static std::string translatedTextToXML(const TranslatedText &text, const std::string &tagname)
+static string translatedTextToXML(const TranslatedText &text, const string &tagname)
 {
-  std::set<Locale> locales = text.locales();
-  //ERR << "locale contains " << locales.size() << " translations" << std::endl;
-  std::stringstream out;
-  for ( std::set<Locale>::const_iterator it = locales.begin(); it != locales.end(); ++it)
+  set<Locale> locales = text.locales();
+  //ERR << "locale contains " << locales.size() << " translations" << endl;
+  stringstream out;
+  for ( set<Locale>::const_iterator it = locales.begin(); it != locales.end(); ++it)
   {
-    //ERR << "serializing " << (*it).code() << std::endl;
+    //ERR << "serializing " << (*it).code() << endl;
     if ( *it == Locale() )
-      out << "<" << tagname << ">" << xml_escape(text.text(*it)) << "</" << tagname << ">" << std::endl;
+      out << "<" << tagname << ">" << xml_escape(text.text(*it)) << "</" << tagname << ">" << endl;
     else
-      out << "<" << tagname << " lang=\"" << (*it).code() << "\">" << xml_escape(text.text(*it)) << "</" << tagname << ">" << std::endl;
+      out << "<" << tagname << " lang=\"" << (*it).code() << "\">" << xml_escape(text.text(*it)) << "</" << tagname << ">" << endl;
   }
   return out.str();
 }
 
 template<class T>
-std::string toXML( const T &obj ); //undefined
+string toXML( const T &obj ); //undefined
 
 template<> 
-std::string toXML( const Edition &edition )
+string toXML( const Edition &edition )
 {
   stringstream out;
   // sad the yum guys did not acll it edition
@@ -100,7 +100,7 @@ std::string toXML( const Edition &edition )
 }
 
 template<> 
-std::string toXML( const Arch &arch )
+string toXML( const Arch &arch )
 {
   stringstream out;
   out << xml_tag_enclose(xml_escape(arch.asString()), "arch");
@@ -108,17 +108,17 @@ std::string toXML( const Arch &arch )
 }
 
 template<> 
-std::string toXML( const Capability &cap )
+string toXML( const Capability &cap )
 {
   stringstream out;
   CapFactory factory;
 
-  out << "<capability kind=\"" << cap.refers() << "\" >" <<  xml_escape(factory.encode(cap)) << "</capability>" << std::endl;
+  out << "<capability kind=\"" << cap.refers() << "\" >" <<  xml_escape(factory.encode(cap)) << "</capability>" << endl;
   return out.str();
 }
 
 template<> 
-std::string toXML( const CapSet &caps )
+string toXML( const CapSet &caps )
 {
   stringstream out;
   CapSet::iterator it = caps.begin();
@@ -130,49 +130,49 @@ std::string toXML( const CapSet &caps )
 }
 
 template<> 
-std::string toXML( const Dependencies &dep )
+string toXML( const Dependencies &dep )
 {
   stringstream out;
   if ( dep[Dep::PROVIDES].size() > 0 )
-    out << "    " << xml_tag_enclose(toXML(dep[Dep::PROVIDES]), "provides") << std::endl;
+    out << "    " << xml_tag_enclose(toXML(dep[Dep::PROVIDES]), "provides") << endl;
   if ( dep[Dep::PREREQUIRES].size() > 0 )
-    out << "    " << xml_tag_enclose(toXML(dep[Dep::PREREQUIRES]), "prerequires") << std::endl;
+    out << "    " << xml_tag_enclose(toXML(dep[Dep::PREREQUIRES]), "prerequires") << endl;
   if ( dep[Dep::CONFLICTS].size() > 0 )
-    out << "    " << xml_tag_enclose(toXML(dep[Dep::CONFLICTS]), "conflicts") << std::endl;
+    out << "    " << xml_tag_enclose(toXML(dep[Dep::CONFLICTS]), "conflicts") << endl;
   if ( dep[Dep::OBSOLETES].size() > 0 )
-    out << "    " << xml_tag_enclose(toXML(dep[Dep::OBSOLETES]), "obsoletes") << std::endl;
+    out << "    " << xml_tag_enclose(toXML(dep[Dep::OBSOLETES]), "obsoletes") << endl;
   // why the YUM tag is freshen without s????
   if ( dep[Dep::FRESHENS].size() > 0 )
-    out << "    " << xml_tag_enclose(toXML(dep[Dep::FRESHENS]), "freshens") << std::endl;
+    out << "    " << xml_tag_enclose(toXML(dep[Dep::FRESHENS]), "freshens") << endl;
   if ( dep[Dep::REQUIRES].size() > 0 )
-    out << "    " << xml_tag_enclose(toXML(dep[Dep::REQUIRES]), "requires") << std::endl;  
+    out << "    " << xml_tag_enclose(toXML(dep[Dep::REQUIRES]), "requires") << endl;  
   if ( dep[Dep::RECOMMENDS].size() > 0 )
-    out << "    " << xml_tag_enclose(toXML(dep[Dep::RECOMMENDS]), "recommends") << std::endl;
+    out << "    " << xml_tag_enclose(toXML(dep[Dep::RECOMMENDS]), "recommends") << endl;
   if ( dep[Dep::ENHANCES].size() > 0 )
-    out << "    " << xml_tag_enclose(toXML(dep[Dep::ENHANCES]), "enhances") << std::endl;
+    out << "    " << xml_tag_enclose(toXML(dep[Dep::ENHANCES]), "enhances") << endl;
   if ( dep[Dep::SUPPLEMENTS].size() > 0 )
-    out << "    " << xml_tag_enclose(toXML(dep[Dep::SUPPLEMENTS]), "supplements") << std::endl;
+    out << "    " << xml_tag_enclose(toXML(dep[Dep::SUPPLEMENTS]), "supplements") << endl;
   if ( dep[Dep::SUGGESTS].size() > 0 )
-    out << "    " << xml_tag_enclose(toXML(dep[Dep::SUGGESTS]), "suggests") << std::endl;
+    out << "    " << xml_tag_enclose(toXML(dep[Dep::SUGGESTS]), "suggests") << endl;
   return out.str();
 
 }
 
 template<> 
-std::string toXML( const Resolvable::constPtr &obj )
+string toXML( const Resolvable::constPtr &obj )
 {
   stringstream out;
 
-  out << "  <name>" << xml_escape(obj->name()) << "</name>" << std::endl;
+  out << "  <name>" << xml_escape(obj->name()) << "</name>" << endl;
   // is this shared? uh
-  out << "  " << toXML(obj->edition()) << std::endl;
-  out << "  " << toXML(obj->arch()) << std::endl;
-  out << "  " << toXML(obj->deps()) << std::endl;
+  out << "  " << toXML(obj->edition()) << endl;
+  out << "  " << toXML(obj->arch()) << endl;
+  out << "  " << toXML(obj->deps()) << endl;
   return out.str();
 }
 
 template<> 
-std::string toXML( const ResObject::constPtr &obj )
+string toXML( const ResObject::constPtr &obj )
 {
   stringstream out;
 
@@ -183,44 +183,44 @@ std::string toXML( const ResObject::constPtr &obj )
   
   out << translatedTextToXML(pipp->insnotify(), "install-notify");
   out << translatedTextToXML(pipp->delnotify(), "delete-notify");
-  //out << "  <license-to-confirm>" << xml_escape(obj->licenseToConfirm()) << "</license-to-confirm>" << std::endl;
+  //out << "  <license-to-confirm>" << xml_escape(obj->licenseToConfirm()) << "</license-to-confirm>" << endl;
   out << translatedTextToXML(pipp->licenseToConfirm(), "license-to-confirm");
-  out << "  <vendor>" << xml_escape(obj->vendor()) << "</vendor>" << std::endl;
-  out << "  <size>" << static_cast<ByteCount::SizeType>(obj->size()) << "</size>" << std::endl;
-  out << "  <archive-size>" << static_cast<ByteCount::SizeType>(obj->archivesize()) << "</archive-size>" << std::endl;
-  out << "  <install-only>" << ( obj->installOnly() ? "true" : "false" ) << "</install-only>" << std::endl;
-  out << "  <build-time>" << obj->buildtime().asSeconds()  << "</build-time>" << std::endl;
+  out << "  <vendor>" << xml_escape(obj->vendor()) << "</vendor>" << endl;
+  out << "  <size>" << static_cast<ByteCount::SizeType>(obj->size()) << "</size>" << endl;
+  out << "  <archive-size>" << static_cast<ByteCount::SizeType>(obj->archivesize()) << "</archive-size>" << endl;
+  out << "  <install-only>" << ( obj->installOnly() ? "true" : "false" ) << "</install-only>" << endl;
+  out << "  <build-time>" << obj->buildtime().asSeconds()  << "</build-time>" << endl;
   // we assume we serialize on storeObject, set install time to NOW
-  out << "  <install-time>" << Date::now().asSeconds() << "</install-time>" << std::endl;
+  out << "  <install-time>" << Date::now().asSeconds() << "</install-time>" << endl;
   
   return out.str();
 }
 
 template<> 
-std::string toXML( const Package::constPtr &obj )
+string toXML( const Package::constPtr &obj )
 {
   stringstream out;
-  out << "<package>" << std::endl;
+  out << "<package>" << endl;
   // reuse Resolvable information serialize function
   out << toXML(static_cast<Resolvable::constPtr>(obj));
   out << toXML(static_cast<ResObject::constPtr>(obj));
-  //out << "  <do>" << std::endl;
-  //out << "      " << obj->do_script() << std::endl;
-  //out << "  </do>" << std::endl;
-  out << "</package>" << std::endl;
+  //out << "  <do>" << endl;
+  //out << "      " << obj->do_script() << endl;
+  //out << "  </do>" << endl;
+  out << "</package>" << endl;
   return out.str();
 }
 
 template<> 
-std::string toXML( const Script::constPtr &obj )
+string toXML( const Script::constPtr &obj )
 {
   stringstream out;
-  out << "<script>" << std::endl;
+  out << "<script>" << endl;
   // reuse Resolvable information serialize function
   out << toXML(static_cast<Resolvable::constPtr>(obj));
   out << toXML(static_cast<ResObject::constPtr>(obj));
-  out << "  <do>" << std::endl;
-  out << "  <![CDATA[" << std::endl;
+  out << "  <do>" << endl;
+  out << "  <![CDATA[" << endl;
   
   // read script
   ifstream infile;
@@ -233,13 +233,13 @@ std::string toXML( const Script::constPtr &obj )
   }
   infile.close();
   
-  out << "  ]]>" << std::endl;
-  out << "  </do>" << std::endl;
+  out << "  ]]>" << endl;
+  out << "  </do>" << endl;
 
   if ( obj->undo_available() )
   {
-    out << "  <undo>" << std::endl;
-    out << "  <![CDATA[" << std::endl;
+    out << "  <undo>" << endl;
+    out << "  <![CDATA[" << endl;
   
   // read script
     infile.open(obj->undo_script().asString().c_str());
@@ -251,95 +251,95 @@ std::string toXML( const Script::constPtr &obj )
     }
     infile.close();
   
-    out << "  ]]>" << std::endl;
-    out << "  </undo>" << std::endl;
+    out << "  ]]>" << endl;
+    out << "  </undo>" << endl;
 
   }
-  out << "</script>" << std::endl;
+  out << "</script>" << endl;
   return out.str();
 }
 
 template<> 
-std::string toXML( const Message::constPtr &obj )
+string toXML( const Message::constPtr &obj )
 {
   stringstream out;
-  out << "<message>" << std::endl;
+  out << "<message>" << endl;
   // reuse Resolvable information serialize function
   out << toXML(static_cast<Resolvable::constPtr>(obj));
   out << toXML(static_cast<ResObject::constPtr>(obj));
-  out << "  <text>" << xml_escape(obj->text().text()) << "</text>" << std::endl;
-  out << "</message>" << std::endl;
+  out << "  <text>" << xml_escape(obj->text().text()) << "</text>" << endl;
+  out << "</message>" << endl;
   return out.str();
 }
 
 template<> 
-std::string toXML( const Language::constPtr &obj )
+string toXML( const Language::constPtr &obj )
 {
   stringstream out;
-  out << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" << std::endl;
-  out << "<language version=\"" << SERIALIZER_VERSION << "\" xmlns=\"http://www.novell.com/metadata/zypp/xml-store\">" << std::endl;
-  out << toXML(static_cast<Resolvable::constPtr>(obj)) << std::endl;
+  out << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" << endl;
+  out << "<language version=\"" << SERIALIZER_VERSION << "\" xmlns=\"http://www.novell.com/metadata/zypp/xml-store\">" << endl;
+  out << toXML(static_cast<Resolvable::constPtr>(obj)) << endl;
   out << toXML(static_cast<ResObject::constPtr>(obj));
-  out << "</language>" << std::endl;
+  out << "</language>" << endl;
   return out.str();
 }
 
 
 template<> 
-std::string toXML( const Selection::constPtr &obj )
+string toXML( const Selection::constPtr &obj )
 {
   stringstream out;
-  out << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" << std::endl;
-  out << "<pattern version=\"" << SERIALIZER_VERSION << "\" xmlns=\"http://www.novell.com/metadata/zypp/xml-store\">" << std::endl;
+  out << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" << endl;
+  out << "<pattern version=\"" << SERIALIZER_VERSION << "\" xmlns=\"http://www.novell.com/metadata/zypp/xml-store\">" << endl;
   
-  out << toXML(static_cast<Resolvable::constPtr>(obj)) << std::endl;
-  out << toXML(static_cast<ResObject::constPtr>(obj));
-  
-  //out << "  <default>" << (obj->isDefault() ? "true" : "false" ) << "</default>" << std::endl;
-  out << "  <uservisible>" << (obj->visible() ? "true" : "false" ) << "</uservisible>" << std::endl;
-  out << "  <category>" << xml_escape(obj->category()) << "</category>" << std::endl;
-  out << "  <icon></icon>" << std::endl;
-  out << "</pattern>" << std::endl;
-  return out.str();
-}
-
-template<> 
-std::string toXML( const Atom::constPtr &obj )
-{
-  stringstream out;
-  out << "<atom>" << std::endl;
-  out << toXML(static_cast<Resolvable::constPtr>(obj)) << std::endl;
-  out << toXML(static_cast<ResObject::constPtr>(obj));
-  out << "</atom>" << std::endl;
-  return out.str();
-}
-
-template<> 
-std::string toXML( const Pattern::constPtr &obj )
-{
-  stringstream out;
-  out << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" << std::endl;
-  out << "<pattern version=\"" << SERIALIZER_VERSION << "\" xmlns=\"http://www.novell.com/metadata/zypp/xml-store\">" << std::endl;
-
-  out << toXML(static_cast<Resolvable::constPtr>(obj)) << std::endl;
+  out << toXML(static_cast<Resolvable::constPtr>(obj)) << endl;
   out << toXML(static_cast<ResObject::constPtr>(obj));
   
-  out << "  <default>" << (obj->isDefault() ? "true" : "false" ) << "</default>" << std::endl;
-  out << "  <uservisible>" << (obj->userVisible() ? "true" : "false" ) << "</uservisible>" << std::endl;
-  out << "  <category>" << xml_escape(obj->category()) << "</category>" << std::endl;
-  out << "  <icon>" << xml_escape(obj->icon().asString()) << "</icon>" << std::endl;
-  out << "  <script>" << xml_escape(obj->script().asString()) << "</script>" << std::endl;
-  out << "</pattern>" << std::endl;
+  //out << "  <default>" << (obj->isDefault() ? "true" : "false" ) << "</default>" << endl;
+  out << "  <uservisible>" << (obj->visible() ? "true" : "false" ) << "</uservisible>" << endl;
+  out << "  <category>" << xml_escape(obj->category()) << "</category>" << endl;
+  out << "  <icon></icon>" << endl;
+  out << "</pattern>" << endl;
   return out.str();
 }
 
 template<> 
-std::string toXML( const Product::constPtr &obj )
+string toXML( const Atom::constPtr &obj )
 {
   stringstream out;
-  out << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" << std::endl;
-  out << "<product version=\"" << SERIALIZER_VERSION << "\" xmlns=\"http://www.novell.com/metadata/zypp/xml-store\" type=\"" << xml_escape(obj->category()) << "\">" << std::endl;
-  out << toXML(static_cast<Resolvable::constPtr>(obj)) << std::endl;
+  out << "<atom>" << endl;
+  out << toXML(static_cast<Resolvable::constPtr>(obj)) << endl;
+  out << toXML(static_cast<ResObject::constPtr>(obj));
+  out << "</atom>" << endl;
+  return out.str();
+}
+
+template<> 
+string toXML( const Pattern::constPtr &obj )
+{
+  stringstream out;
+  out << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" << endl;
+  out << "<pattern version=\"" << SERIALIZER_VERSION << "\" xmlns=\"http://www.novell.com/metadata/zypp/xml-store\">" << endl;
+
+  out << toXML(static_cast<Resolvable::constPtr>(obj)) << endl;
+  out << toXML(static_cast<ResObject::constPtr>(obj));
+  
+  out << "  <default>" << (obj->isDefault() ? "true" : "false" ) << "</default>" << endl;
+  out << "  <uservisible>" << (obj->userVisible() ? "true" : "false" ) << "</uservisible>" << endl;
+  out << "  <category>" << xml_escape(obj->category()) << "</category>" << endl;
+  out << "  <icon>" << xml_escape(obj->icon().asString()) << "</icon>" << endl;
+  out << "  <script>" << xml_escape(obj->script().asString()) << "</script>" << endl;
+  out << "</pattern>" << endl;
+  return out.str();
+}
+
+template<> 
+string toXML( const Product::constPtr &obj )
+{
+  stringstream out;
+  out << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" << endl;
+  out << "<product version=\"" << SERIALIZER_VERSION << "\" xmlns=\"http://www.novell.com/metadata/zypp/xml-store\" type=\"" << xml_escape(obj->category()) << "\">" << endl;
+  out << toXML(static_cast<Resolvable::constPtr>(obj)) << endl;
   #warning "FIXME description and displayname of products"
   
   out << toXML(static_cast<ResObject::constPtr>(obj));
@@ -348,81 +348,81 @@ std::string toXML( const Product::constPtr &obj )
   detail::ResImplTraits<Product::Impl>::constPtr pipp( detail::ImplConnect::resimpl( obj ) );
   out << translatedTextToXML(pipp->shortName(), "shortname");
   
-  out << "  <distribution-name>" << xml_escape(obj->distributionName()) << "</distribution-name>" << std::endl;
-  out << "  <distribution-edition>" << xml_escape(obj->distributionEdition().asString()) << "</distribution-edition>" << std::endl;
-  out << "  <source>" << xml_escape(obj->source().alias()) << "</source>" << std::endl;  
-  out << "  <release-notes-url>" << xml_escape(obj->releaseNotesUrl().asString()) << "</release-notes-url>" << std::endl;
+  out << "  <distribution-name>" << xml_escape(obj->distributionName()) << "</distribution-name>" << endl;
+  out << "  <distribution-edition>" << xml_escape(obj->distributionEdition().asString()) << "</distribution-edition>" << endl;
+  out << "  <source>" << xml_escape(obj->source().alias()) << "</source>" << endl;  
+  out << "  <release-notes-url>" << xml_escape(obj->releaseNotesUrl().asString()) << "</release-notes-url>" << endl;
   
-  out << "  <update-urls>" << std::endl;
-  std::list<Url> updateUrls = obj->updateUrls();
-  for ( std::list<Url>::const_iterator it = updateUrls.begin(); it != updateUrls.end(); ++it)
+  out << "  <update-urls>" << endl;
+  list<Url> updateUrls = obj->updateUrls();
+  for ( list<Url>::const_iterator it = updateUrls.begin(); it != updateUrls.end(); ++it)
   {
-    out << "    <update-url>" << xml_escape(it->asString()) << "</update-url>" << std::endl; 
+    out << "    <update-url>" << xml_escape(it->asString()) << "</update-url>" << endl; 
   }
-  out << "  </update-urls>" << std::endl;
+  out << "  </update-urls>" << endl;
   
-  out << "  <extra-urls>" << std::endl;
-  std::list<Url> extraUrls = obj->extraUrls();
-  for ( std::list<Url>::const_iterator it = extraUrls.begin(); it != extraUrls.end(); ++it)
+  out << "  <extra-urls>" << endl;
+  list<Url> extraUrls = obj->extraUrls();
+  for ( list<Url>::const_iterator it = extraUrls.begin(); it != extraUrls.end(); ++it)
   {
-    out << "    <extra-url>" << xml_escape(it->asString()) << "</extra-url>" << std::endl; 
+    out << "    <extra-url>" << xml_escape(it->asString()) << "</extra-url>" << endl; 
   }
-  out << "  </extra-urls>" << std::endl;
+  out << "  </extra-urls>" << endl;
   
-  out << "  <optional-urls>" << std::endl;
-  std::list<Url> optionalUrls = obj->optionalUrls();
-  for ( std::list<Url>::const_iterator it = optionalUrls.begin(); it != optionalUrls.end(); ++it)
+  out << "  <optional-urls>" << endl;
+  list<Url> optionalUrls = obj->optionalUrls();
+  for ( list<Url>::const_iterator it = optionalUrls.begin(); it != optionalUrls.end(); ++it)
   {
-    out << "    <optional-url>" << xml_escape(it->asString()) << "</optional-url>" << std::endl; 
+    out << "    <optional-url>" << xml_escape(it->asString()) << "</optional-url>" << endl; 
   }
-  out << "  </optional-urls>" << std::endl;
+  out << "  </optional-urls>" << endl;
   
-  out << "  <product-flags>" << std::endl;
-  std::list<std::string> flags = obj->flags();
-  for ( std::list<std::string>::const_iterator it = flags.begin(); it != flags.end(); ++it)
+  out << "  <product-flags>" << endl;
+  list<string> flags = obj->flags();
+  for ( list<string>::const_iterator it = flags.begin(); it != flags.end(); ++it)
   {
-    out << "    <product-flag>" << xml_escape(*it) << "</product-flag>" << std::endl; 
+    out << "    <product-flag>" << xml_escape(*it) << "</product-flag>" << endl; 
   }
-  out << "  </product-flags>" << std::endl;
+  out << "  </product-flags>" << endl;
   
-  out << "</product>" << std::endl;
+  out << "</product>" << endl;
 
   return out.str();
 }
 
 
-std::string castedToXML( const Resolvable::constPtr &resolvable )
+string castedToXML( const Resolvable::constPtr &resolvable )
 {
   stringstream out;
   if ( isKind<Package>(resolvable) )
-     out << toXML(asKind<const Package>(resolvable)) << std::endl;
+     out << toXML(asKind<const Package>(resolvable)) << endl;
   if ( isKind<Patch>(resolvable) )
-     out << toXML(asKind<const Patch>(resolvable)) << std::endl;
+     out << toXML(asKind<const Patch>(resolvable)) << endl;
   if ( isKind<Message>(resolvable) )
-     out << toXML(asKind<const Message>(resolvable)) << std::endl;
+     out << toXML(asKind<const Message>(resolvable)) << endl;
   if ( isKind<Script>(resolvable) )
-     out << toXML(asKind<const Script>(resolvable)) << std::endl;
+     out << toXML(asKind<const Script>(resolvable)) << endl;
   if ( isKind<Atom>(resolvable) )
-     out << toXML(asKind<const Atom>(resolvable)) << std::endl;
+     out << toXML(asKind<const Atom>(resolvable)) << endl;
   if ( isKind<Product>(resolvable) )
-     out << toXML(asKind<const Product>(resolvable)) << std::endl;
+     out << toXML(asKind<const Product>(resolvable)) << endl;
   if ( isKind<Pattern>(resolvable) )
-     out << toXML(asKind<const Pattern>(resolvable)) << std::endl;
+     out << toXML(asKind<const Pattern>(resolvable)) << endl;
   if ( isKind<Selection>(resolvable) )
-     out << toXML(asKind<const Selection>(resolvable)) << std::endl;
+     out << toXML(asKind<const Selection>(resolvable)) << endl;
   if ( isKind<Language>(resolvable) )
-    out << toXML(asKind<const Language>(resolvable)) << std::endl;
+    out << toXML(asKind<const Language>(resolvable)) << endl;
   return out.str();
 }
 
-std::string resolvableTypeToString( const Resolvable::constPtr &resolvable, bool plural )
+string resolvableTypeToString( const Resolvable::constPtr &resolvable, bool plural )
 {
   return resolvableKindToString(resolvable->kind(), plural);
 }
 
-std::string resolvableKindToString( const Resolvable::Kind &kind, bool plural)
+string resolvableKindToString( const Resolvable::Kind &kind, bool plural)
 {
-  std::string k = kind.asString();
+  string k = kind.asString();
   if (k.substr(k.size() - 2, 2) == "ch")
     return k + (plural?"es":"");
   else
@@ -430,49 +430,49 @@ std::string resolvableKindToString( const Resolvable::Kind &kind, bool plural)
 }
 
 template<> 
-std::string toXML( const Patch::constPtr &obj )
+string toXML( const Patch::constPtr &obj )
 {
   stringstream out;
-  out << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" << std::endl;
-  out << "<patch version=\"" << SERIALIZER_VERSION << "\" xmlns=\"http://www.novell.com/metadata/zypp/xml-store\">" << std::endl; 
+  out << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" << endl;
+  out << "<patch version=\"" << SERIALIZER_VERSION << "\" xmlns=\"http://www.novell.com/metadata/zypp/xml-store\">" << endl; 
   
   // reuse Resolvable information serialize function
   out << toXML(static_cast<Resolvable::constPtr>(obj));
   out << toXML(static_cast<ResObject::constPtr>(obj));
   
-  out << "<id>" << xml_escape(obj->id()) << "</id>" << std::endl;
-  out << "<timestamp>" << obj->timestamp().asSeconds() << "</timestamp>" << std::endl;
+  out << "<id>" << xml_escape(obj->id()) << "</id>" << endl;
+  out << "<timestamp>" << obj->timestamp().asSeconds() << "</timestamp>" << endl;
   
-  out << "<category>" << obj->category() << "</category>" << std::endl;
-  out << "<affects-package-manager>" << ( obj->affects_pkg_manager() ? "true" : "false" ) << "</affects-package-manager>" << std::endl;
-  out << "<reboot-needed>" << ( obj->reboot_needed() ? "true" : "false" ) << "</reboot-needed>" << std::endl;
+  out << "<category>" << obj->category() << "</category>" << endl;
+  out << "<affects-package-manager>" << ( obj->affects_pkg_manager() ? "true" : "false" ) << "</affects-package-manager>" << endl;
+  out << "<reboot-needed>" << ( obj->reboot_needed() ? "true" : "false" ) << "</reboot-needed>" << endl;
   
   Patch::AtomList at = obj->atoms();
-  out << "  <atoms>" << std::endl;
+  out << "  <atoms>" << endl;
   for (Patch::AtomList::iterator it = at.begin(); it != at.end(); it++)
   {
     Resolvable::Ptr one_atom = *it;
-    out << castedToXML(one_atom) << std::endl;
+    out << castedToXML(one_atom) << endl;
   }
-  out << "  </atoms>" << std::endl;
-  out << "</patch>" << std::endl;
+  out << "  </atoms>" << endl;
+  out << "</patch>" << endl;
   return out.str();
 }
 
 template<> 
-std::string toXML( const source::SourceInfo &obj )
+string toXML( const source::SourceInfo &obj )
 {
   stringstream out;
-  out << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" << std::endl;
-  out << "<source version=\"" << SERIALIZER_VERSION << "\" xmlns=\"http://www.novell.com/metadata/zypp/xml-store\">" << std::endl;
-  out << "  <enabled>" << obj.enabled() << "</enabled>" << std::endl;
-  out << "  <auto-refresh>" << obj.autorefresh() << "</auto-refresh>" << std::endl;
-  out << "  <product-dir>" << obj.path() << "</product-dir>" << std::endl;
-  out << "  <cache-dir>" << obj.cacheDir() << "</cache-dir>" << std::endl;
-  out << "  <type>" << xml_escape(obj.type()) << "</type>" << std::endl;
-  out << "  <url>" << xml_escape(obj.url().asCompleteString()) << "</url>" << std::endl;
-  out << "  <alias>" << xml_escape(obj.alias()) << "</alias>" << std::endl;
-  out << "</source>" << std::endl;
+  out << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" << endl;
+  out << "<source version=\"" << SERIALIZER_VERSION << "\" xmlns=\"http://www.novell.com/metadata/zypp/xml-store\">" << endl;
+  out << "  <enabled>" << obj.enabled() << "</enabled>" << endl;
+  out << "  <auto-refresh>" << obj.autorefresh() << "</auto-refresh>" << endl;
+  out << "  <product-dir>" << obj.path() << "</product-dir>" << endl;
+  out << "  <cache-dir>" << obj.cacheDir() << "</cache-dir>" << endl;
+  out << "  <type>" << xml_escape(obj.type()) << "</type>" << endl;
+  out << "  <url>" << xml_escape(obj.url().asCompleteString()) << "</url>" << endl;
+  out << "  <alias>" << xml_escape(obj.alias()) << "</alias>" << endl;
+  out << "</source>" << endl;
   return out.str();
 }
 
