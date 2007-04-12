@@ -326,7 +326,7 @@ void YUMSourceImpl::storeMetadata(const Pathname & cache_dir_r)
 
   MIL << "Metadata saved in " << cache_dir_r << ". Setting as cache." << std::endl;
   _cache_dir = cache_dir_r;
- 
+
   readRepomd();
 }
 
@@ -377,7 +377,7 @@ void YUMSourceImpl::readRepomd()
   _repo_pattern.clear();
   _repo_product.clear();
   _repo_patches.clear();
-  
+
   parser::ParserProgress::Ptr progress;
   callback::SendReport<SourceReport> report;
   YUMSourceEventHandler npp(report);
@@ -422,22 +422,22 @@ std::set<zypp::Resolvable::Kind>
 YUMSourceImpl::resolvableKinds() const
 {
   std::set<zypp::Resolvable::Kind> kinds;
-  
+
   if (_repo_product.size() > 0 )
-    kinds.insert( ResTraits<zypp::Product>::kind ); 
-  
+    kinds.insert( ResTraits<zypp::Product>::kind );
+
   if (_repo_pattern.size() > 0 )
     kinds.insert( ResTraits<zypp::Pattern>::kind );
-  
+
   if (_repo_group.size() > 0 )
     kinds.insert( ResTraits<zypp::Selection>::kind );
-  
+
   if (_repo_primary.size() > 0 )
   kinds.insert( ResTraits<zypp::Package>::kind );
-  
+
   if (_repo_patches.size() > 0 )
     kinds.insert( ResTraits<zypp::Patch>::kind );
-  
+
   return kinds;
 }
 
@@ -462,7 +462,7 @@ void YUMSourceImpl::provideProducts(Source_Ref source_r, ResStore& store)
 
        // TranslatorExplanation %s = product file
       report->start( selfSourceRef(), str::form(_("Reading product from %s"), filename.asString().c_str()) );
-      
+
       YUMProductParser product(st, "", progress);
       for (; !product.atEnd(); ++product)
       {
@@ -1148,10 +1148,10 @@ Product::Ptr YUMSourceImpl::createProduct(
     Arch arch;
     if (!parsed.arch.empty())
       arch = Arch(parsed.arch);
-    
+
     string name(parsed.name);
     std::replace(name.begin(), name.end(), ' ', '_');
-    
+
     NVRAD dataCollect( name,
                        Edition( parsed.ver, parsed.rel, parsed.epoch ),
                        arch,

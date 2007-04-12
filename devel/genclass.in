@@ -10,9 +10,9 @@ EOF
 
 test -z "$1" && usage "Missing name!"
 
-TOPSRCDIR=$( cd @abs_top_srcdir@ && pwd )
+TOPSRCDIR=${XTOPSRCDIR:-$(cd @abs_top_srcdir@ && pwd)}
 test -z "$TOPSRCDIR" && {
-   echo "Dir does not exist '@abs_top_srcdir@'" >&2
+   echo "Dir does not exist '$TOPSRCDIR'" >&2
    exit 1
 }
 

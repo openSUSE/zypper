@@ -10,9 +10,13 @@
 #include "zypp/base/Algorithm.h"
 #include "zypp/base/Function.h"
 #include "zypp/base/Functional.h"
+#include "zypp/base/IOStream.h"
 #include "zypp/base/String.h"
 
+#include "zypp/ZYppFactory.h"
 #include "zypp/ResPool.h"
+#include "zypp/ResPoolProxy.h"
+#include "zypp/NameKindProxy.h"
 #include "zypp/CapFactory.h"
 
 #include "zypp/Atom.h"
@@ -25,6 +29,7 @@
 #include "zypp/Script.h"
 #include "zypp/Message.h"
 #include "zypp/Language.h"
+#include "zypp/VendorAttr.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -38,9 +43,9 @@ namespace zypp
      * const char * data[] = {
      * "@ product"
      * ,"@ installed"
-     * ,"prodold 1 1 x86_64"
+     * ,"- prodold 1 1 x86_64"
      * ,"@ available"
-     * ,"prodnew 1 1 x86_64"
+     * ,"- prodnew 1 1 x86_64"
      * ,"@ obsoletes"
      * ,"prodold"
      * ,"@ fin"
@@ -59,10 +64,15 @@ namespace zypp
       , _defdep( Dep::PROVIDES )
       , _defdepref( _defkind )
       , _verbose( verbose_r )
-      {}
+      {
+	VendorAttr::disableAutoProtect();
+      }
 
-      void operator()( const std::string & line_r )
-      { parseLine( line_r ); }
+      bool operator()( const std::string & line_r )
+      {
+	parseLine( str::trim( line_r ) );
+	return true;
+      }
 
       const ResStore & installed() const
       { return _installed; }
@@ -94,7 +104,10 @@ namespace zypp
     private:
       void parseLine( const std::string & line_r )
       {
-        std::vector<std::string> words;
+	if ( line_r.empty() || line_r[0] == '#' )
+	  return;
+
+	std::vector<std::string> words;
         str::split( line_r, std::back_inserter( words ) );
         if ( words.empty() )
           return;
@@ -203,7 +216,7 @@ namespace zypp
     };
     ///////////////////////////////////////////////////////////////////
 
-    /** \refers DataCollect Stream output. */
+    /** \relates DataCollect Stream output. */
     inline std::ostream & operator<<( std::ostream & str, const DataCollect & obj )
     {
       dumpRange( str << "Installed" << endl,
@@ -216,6 +229,25 @@ namespace zypp
     }
 
     ///////////////////////////////////////////////////////////////////
+
+    template<class _Iterator>
+	inline void addPool( _Iterator begin_r, _Iterator end_r )
+    {
+      DataCollect dataCollect;
+      dataCollect.collect( begin_r, end_r );
+      getZYpp()->addResolvables( dataCollect.installed(), true );
+      getZYpp()->addResolvables( dataCollect.available() );
+    }
+
+    inline void addPool( const Pathname & file_r )
+    {
+      std::ifstream in( file_r.c_str() );
+      DataCollect dataCollect;
+      function<bool(const std::string &)> fnc( ref(dataCollect) );
+      iostr::forEachLine( in, fnc );
+      getZYpp()->addResolvables( dataCollect.installed(), true );
+      getZYpp()->addResolvables( dataCollect.available() );
+    }
 
     /////////////////////////////////////////////////////////////////
   } // namespace debug

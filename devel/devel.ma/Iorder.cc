@@ -276,13 +276,12 @@ int main( int argc, char * argv[] )
   pool::GetResolvablesToInsDel collect( pool, pool::GetResolvablesToInsDel::ORDER_BY_MEDIANR );
   MIL << "GetResolvablesToInsDel:" << endl << collect << endl;
 
-  typedef pool::GetResolvablesToInsDel::PoolItemList PoolItemList;
-
   if ( 1 )
     {
       // Collect until the 1st package from an unwanted media occurs.
       // Further collection could violate install order.
       bool hitUnwantedMedia = false;
+      typedef pool::GetResolvablesToInsDel::PoolItemList PoolItemList;
       PoolItemList::iterator fst=collect._toInstall.end();
       for ( PoolItemList::iterator it = collect._toInstall.begin(); it != collect._toInstall.end(); ++it)
         {

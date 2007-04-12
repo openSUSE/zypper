@@ -40,6 +40,7 @@ int main( int argc, char * argv[] )
 
 
   DBG << "===[END]============================================" << endl;
+  zypp::base::LogControl::instance().logNothing();
   return 0;
 }
 
