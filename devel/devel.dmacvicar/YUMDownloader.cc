@@ -6,6 +6,8 @@
 
 #include "zypp/Date.h"
 
+
+#include "zypp/parser/yum/RepomdFileReader.h"
 #include "YUMDownloader.h"
 
 using namespace std;
@@ -18,87 +20,6 @@ namespace source
 namespace yum
 {
 
-class RepomdFileReader
-{
-public:
-  typedef function<bool( const OnMediaLocation &, const string & )> ProcessResource;
-  
-  enum Tag
-  {
-    tag_NONE,
-    tag_Repomd,
-    tag_Data,
-    tag_Location,
-    tag_CheckSum,
-    tag_Timestamp,
-    tag_OpenCheckSum
-  };
-  
-  RepomdFileReader( const Pathname &repomd_file, ProcessResource callback )
-    : _tag(tag_NONE), _callback(callback)
-  {
-    Reader reader( repomd_file );
-    MIL << "Reading " << repomd_file << endl;
-    reader.foreachNode( bind( &RepomdFileReader::consumeNode, this, _1 ) );
-  }
-  
-  bool consumeNode( Reader & reader_r )
-  {
-    //MIL << reader_r->name() << endl;
-    std::string data_type;
-    if ( reader_r->nodeType() == XML_READER_TYPE_ELEMENT )
-    {
-      if ( reader_r->name() == "repomd" )
-      {
-        _tag = tag_Repomd;
-        return true;
-      }
-      if ( reader_r->name() == "data" )
-      {
-        _tag = tag_Data;
-        _type = reader_r->getAttribute("type").asString();
-        return true;
-      }
-      if ( reader_r->name() == "location" )
-      {
-        _tag = tag_Location;
-        _location.filename( reader_r->getAttribute("href").asString() );
-        return true;
-      }
-      if ( reader_r->name() == "checksum" )
-      {
-        _tag = tag_CheckSum;
-        string checksum_type = reader_r->getAttribute("type").asString() ;
-        string checksum_vaue = reader_r.nodeText().asString();
-        _location.checksum( CheckSum( checksum_type, checksum_vaue ) );
-        return true;
-      }
-      if ( reader_r->name() == "timestamp" )
-      {
-        // ignore it
-        return true;
-      }
-    }
-    else if ( reader_r->nodeType() == XML_READER_TYPE_END_ELEMENT )
-    {
-      //MIL << "end element" << endl;
-      if ( reader_r->name() == "data" )
-        _callback( _location, _type );
-      return true;
-    }
-    return true;
-  }
-  
-  private:
-    OnMediaLocation _location;
-    Tag _tag;
-    std::string _type;
-    ProcessResource _callback;
-    CheckSum _checksum;
-    std::string _checksum_type;
-    Date _timestamp;
-};
- 
 YUMDownloader::YUMDownloader( const Url &url, const Pathname &path )
   : _url(url), _path(path)
 {

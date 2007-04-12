@@ -5,6 +5,7 @@
 #include <zypp/base/Measure.h>
 #include <zypp/SourceFactory.h>
 #include <zypp/Source.h>
+#include <zypp/Product.h>
 #include <zypp/ResStore.h>
 #include <zypp/ResObject.h>
 #include <zypp/pool/PoolStats.h>
@@ -153,24 +154,35 @@ int main( int argc, char * argv[] )
 
       LOG << "===Parse content..." << endl;
       try
-        {
-          debug::Measure m( "Parse" );
-          src.resolvables();
-          m.elapsed();
-          //LOG << m.asString() << endl;
-        }
+      {
+        debug::Measure m( "Parse" );
+        src.resolvables();
+        m.elapsed();
+        //LOG << m.asString() << endl;
+      }
       catch ( const Exception & except_r )
-        {
-          LOG << "***Failed: " << except_r << endl;
-          continue;
-        }
+      {
+        LOG << "***Failed: " << except_r << endl;
+        continue;
+      }
       LOG << for_each( src.resolvables().begin(), src.resolvables().end(),
                        ResStoreStats() ) << endl;
       if ( verbose )
-        {
-          dumpRange( LOG, src.resolvables().begin(), src.resolvables().end() ) << endl;
-        }
+      {
+        dumpRange( LOG, src.resolvables().begin(), src.resolvables().end() ) << endl;
+      }
+#define TestKind Product
 
+      for (ResStore::const_iterator it = src.resolvables().begin(); it != src.resolvables().end(); ++it)
+      {
+        if ( isKind<TestKind>(*it) )
+        {
+          zypp::TestKind::constPtr res = asKind<TestKind>( *it );
+          cout << res->name() << " | " << res->edition() << std::endl;
+          cout << res->distributionName() << " | " << res->distributionEdition() << std::endl;
+        }
+      }
+      
       //SourceManager::sourceManager()->addSource( src );
       //SourceManager::sourceManager()->store( "/", true );
     }
