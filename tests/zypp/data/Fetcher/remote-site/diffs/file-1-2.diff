@@ -1,0 +1,7 @@
+20a21,26
+> [edit] Distribution
+> 
+> In the past SUSE first released the Personal and Professional versions in boxed sets which included extensive printed documentation, then waited a few months before it released versions on its FTP servers. Under Novell and with advent of openSUSE this has been reversed: SUSE Linux 10.0 was available for download well before the retail release of SUSE Linux 10.0. In addition, Novell has discontinued the Personal version, renamed the Professional version to simply "SUSE Linux", and repriced "SUSE Linux" to about the same as the obsolete Personal version. Now Novell has also renamed SUSE Linux to openSUSE with version 10.2 of the distro.
+> 
+> Starting with version 9.2, an unsupported 1 DVD ISO image of SUSE Professional was made available for download as well as a bootable LiveDVD evaluation. The FTP server continues to operate and has the advantage of "streamlined" installs: Only downloading packages the user feels they need. The ISO has the advantages of an easy install package, the ability to operate even if the user's network card does not work 'out of the box', and less experience needed (i.e., an inexperienced Linux user may not know whether or not to install a certain package, and the ISO offers several preselected sets of packages). The retail box DVD supports x86, and x86_64 installs, but the included CD-ROMs do not include x86_64 support.
+> 

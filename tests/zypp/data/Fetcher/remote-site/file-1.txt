@@ -1,0 +1,64 @@
+History
+
+The SUSE Linux distribution was originally a German translation of Slackware Linux. In mid-1992, Softlanding Linux System (SLS) was founded by Peter MacDonald, and was the first comprehensive distribution to contain elements such as X and TCP/IP. The Slackware distribution (maintained by Patrick Volkerding) was initially based largely on SLS.
+
+S.u.S.E was founded in late 1992 as a UNIX consulting group, which among other things regularly released software packages that included SLS and Slackware, and printed UNIX/Linux manuals. S.u.S.E is an acronym for the German phrase "Software- und System-Entwicklung" ("Software and system development"). There is a rumour that the name is a tribute to the German computer pioneer Konrad Zuse. They released the first CD version of SLS/Slackware in 1994, under the name S.u.S.E Linux 1.0. It later integrated with the Jurix distribution by Florian La Roche, to release the first really unique S.u.S.E Linux 4.2 in 1996. Over time, SuSE Linux incorporated many aspects of Red Hat Linux (e.g., using RPMs and /etc/sysconfig). In a move to more effectively reach its business audience, SuSE introduced the SuSE Linux Enterpriser Server in 2001, and consecutively changed the company name to SUSE Linux in September 2003 as a part of its overall new branding strategy, as announced by SUSE's marketing VP Uwe Schmid.[1]
+
+The current mascot of SuSE is Geeko, also known as the "SuSE Lizard"
+
+[edit] Features
+
+SUSE includes an installation and administration program called YaST2 which handles hard disk partitioning, system setup, RPM package management, online updates, network and firewall configuration, user administration and more in an integrated interface.
+
+Starting with the 10.1 release, SuSE includes a secondary installation program known as Zen-Updater, which can be used as a secondary means of installing software and replaces Suse-updater providing notification of software updates on the desktop.
+
+The latest release, openSUSE 10.2 is available as a retail package and as a no-cost open source package. In terms of software, there are major differences between the two packages (see Reference below), including the fact that the retail edition contains a number of proprietary components, such as Macromedia Flash. In addition, the retail package, available for 59.95 USD, includes a printed manual and limited technical support. openSUSE is available to download freely from their website. The retail and eval versions contain one DVD and six CDs, while openSUSE uses five CDs. It is the first SUSE release to be called openSUSE, previous versions were called SUSE Linux.
+
+Other flavors include dedicated server editions and groupware servers geared towards corporate networks and enterprises, along with a stripped-down business desktop which runs some software designed for Microsoft Windows out of the box by virtue of WINE.
+
+SUSE Linux Enterprise Server (SLES) and SUSE Linux Enterprise Desktop (SLED) are Novell's branded version of SUSE targeted at corporate environments. SUSE Linux Enterprise product line (SLES and SLED) include some proprietary software as well as technical support. For instance, SuSE Linux Enterprise Server 9 (SLES 9) has fewer packages (around 1,000 packages) than the SuSE Linux Professional (consumer) distribution which has around 3,500 packages. Most of the packages that have been removed are desktop applications which are more suited to consumers than to a business environment. SLES has a guaranteed life cycle of 5 years and only the SLES products are certified by independent hardware and software vendors.
+
+[edit] See also
+Portal:Free software
+	Free software Portal
+
+    * Novell
+    * OpenSUSE
+    * Linux on zSeries
+    * List of Linux distributions
+    * Comparison of Linux distributions
+    * Commercial and community Linux distributions by the same vendor
+    * Sax2
+
+[edit] References
+
+   1. ^ Proffitt, B. (2003). SuSE Rebrands Ahead of 9.0 Launch.
+   2. ^ Shankland, S. (2003). Novell to acquire SuSE Linux. Retrieved December 20, 2003.
+   3. ^ Kennedy, D. (2003). Novell's Linux buy opens road to top. Retrieved December 20, 2003.
+   4. ^ Ramesh, R. (2004). Novell: SuSE stays the same, for now. Retrieved January 14, 2004.
+
+    * SuSE Roadmap
+    * Differences between boxed and retail version
+
+[edit] External links
+
+    * openSUSE
+    * Novell SUSE Linux Enterprise 10
+    * suse at DistroWatch
+    * Hacking SUSE Linux
+    * Fultus Technical Documentation eLibrary - SUSE
+    * 10.1 Review (tuxmachines.org)
+    * The Unofficial SUSE FAQ
+    * SUSE Linux Support Forums
+    * SUSE Linux Community Forums
+    * SuseBR Brazilian SUSE Linux Community Forums -
+    * SUSE Wiki
+    * SUSEroot
+    * The Linux Master Forums
+    * 10.0 Review
+    * SUSE Support Knowledgebase
+    * Links about SUSE Linux
+    * SuSE Linux OS Turkiye
+    * Planet SuSE - Blogs of SUSE employees and SUSE community members
+    * Linux Desktop Multiplier - Turn one SLED or openSUSE computer into 10 independent, full-client desktops
+    * Hong Kong & Macau Novell User Group - An unofficial web site provides news, articles and technical tips.
