@@ -756,4 +756,8 @@
     <checksum type="sha">f96cebcb74f4e9067976240f8da5dff3dbc954e3</checksum>
     <location href="repodata/patch-xmms-3073.xml"/>
   </patch>
+  <patch id="spamassassin-3077">
+    <checksum type="sha">5d11f1e0772a8eae3d0276c2fc0c36fd024ff969</checksum>
+    <location href="repodata/patch-spamassassin-3077.xml"/>
+  </patch>
 </patches>
