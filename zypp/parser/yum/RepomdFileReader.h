@@ -26,6 +26,18 @@ namespace zypp
     namespace yum
     {
     
+     /**
+      * Iterates through a repomd.xml file giving on each iteration
+      * a \ref OnMediaLocation object with the resource and its
+      * type ( primary, patches, filelists, etc ).
+      * The iteration is done via a callback provided on
+      * construction.
+      *
+      * \code
+      * RepomdFileReader reader(repomd_file, 
+      *                  bind( &SomeClass::callbackfunc, &object, _1, _2 ) );
+      * \endcode
+      */
       class RepomdFileReader
       {
       public:
@@ -42,7 +54,16 @@ namespace zypp
           tag_OpenCheckSum
         };
         
+       /**
+        * Constructor
+        * \param repomd_file is the repomd.xml file you want to read
+        * \param callback is a function. \see RepomdFileReader::ProcessResource
+        */
         RepomdFileReader( const Pathname &repomd_file, ProcessResource callback );
+        
+        /**
+        * Callback provided to the XML parser. Don't use it.
+        */
         bool consumeNode( Reader & reader_r );
         
         private:
@@ -57,5 +78,7 @@ namespace zypp
     }
   }
 }
+
 #endif
+
 
