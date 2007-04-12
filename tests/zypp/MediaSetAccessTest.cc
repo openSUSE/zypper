@@ -94,9 +94,10 @@ void msa_url_rewrite()
 /*
  * Provide files from set without verifiers.
  */
-void msa_provide_files_set(const string &url)
+void msa_provide_files_set(const string &urlstr)
 {
-  MediaSetAccess setaccess(Url(url), "/");
+  Url url(urlstr);
+  MediaSetAccess setaccess(url);
 
   Pathname file1 = setaccess.provideFile("/test.txt", 1);
   BOOST_CHECK(check_file_exists(file1) == true);
@@ -111,9 +112,10 @@ void msa_provide_files_set(const string &url)
 /*
  * Provide files from set with verifiers.
  */
-void msa_provide_files_set_verified(const string &url)
+void msa_provide_files_set_verified(const string &urlstr)
 {
-  MediaSetAccess setaccess(Url(url), "/");
+  Url url(urlstr);
+  MediaSetAccess setaccess(url);
 
   setaccess.setVerifier(1, media::MediaVerifierRef(new SimpleVerifier("media1")));
   setaccess.setVerifier(2, media::MediaVerifierRef(new SimpleVerifier("media2")));
@@ -135,9 +137,10 @@ void msa_provide_files_set_verified(const string &url)
 /*
  * Provide file from single media with verifier.
  */
-void msa_provide_files_single(const string &url)
+void msa_provide_files_single(const string &urlstr)
 {
-  MediaSetAccess setaccess(Url(url), "/");
+  Url url(urlstr);
+  MediaSetAccess setaccess(url);
   setaccess.setVerifier(1, media::MediaVerifierRef(new SimpleVerifier("media")));
 
   // provide file from media

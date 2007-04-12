@@ -78,7 +78,7 @@ namespace zypp
      * \code
      * Url url("dir:/path/to/cdset/sources/openSUSE-10.3/Alpha2plus/CD1");
      * 
-     * MediaSetAccess access(url, "/");
+     * MediaSetAccess access(url);
      * 
      * access.setVerifier(1, media1VerifierRef);
      * access.setVerifier(2, media2VerifierRef);
@@ -96,9 +96,12 @@ namespace zypp
 
     public:
       /**
-       * Creates a callback enabled media access  for \a url and \a path.
+       * Creates a callback enabled media access for specified \a url.
+       *
+       * \param url 
+       * \param path Prefered attach (mount) point.
        */
-      MediaSetAccess( const Url &url, const Pathname &path );
+      MediaSetAccess(const Url &url, const Pathname &path = "");
       ~MediaSetAccess();
 
       /**
@@ -148,7 +151,11 @@ namespace zypp
     private:
       /** Media or media set URL */
       Url _url;
-      /** Path on the media relative to _url */
+      /**
+       * Prefered mount point.
+       *
+       * \see MediaManager::open(Url,Pathname) MediaHandler::_attachPoint
+       */
       Pathname _path;
 
       typedef std::map<media::MediaNr, media::MediaAccessId> MediaMap;
