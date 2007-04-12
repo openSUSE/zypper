@@ -28,13 +28,14 @@
 /-*/
 
 #include "zypp/solver/detail/InstallOrder.h"
-#include "zypp/base/Logger.h"
+#include "zypp/base/LogTools.h"
 #include "zypp/base/Iterator.h"
 #include "zypp/base/Algorithm.h"
 
 #include "zypp/ResFilters.h"
 #include "zypp/ResStatus.h"
 #include "zypp/CapAndItem.h"
+#include "zypp/NameKindProxy.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp
@@ -225,20 +226,29 @@ InstallOrder::rdfsvisit (const PoolItem_Ref item)
     nodeinfo.begintime = _rdfstime;
     _rdfstime++;
 
+    // items prereq
+    CapSet prq( item->dep(Dep::PREREQUIRES) );
+    // an installed items prereq (in case they are reqired for uninstall scripts)
+    NameKindProxy nkp( _pool, item->name(), item->kind() );
+    if ( ! nkp.installedEmpty() )
+    {
+      prq.insert( (*nkp.installedBegin())->dep(Dep::PREREQUIRES).begin(),
+		  (*nkp.installedBegin())->dep(Dep::PREREQUIRES).end() );
+    }
     // put prerequires first and requires last on list to ensure
     // that prerequires are processed first
-    for (CapSet::const_iterator it = item->dep (Dep::PREREQUIRES).begin(); it != item->dep (Dep::PREREQUIRES).end(); ++it)
+    for (CapSet::const_iterator it = prq.begin(); it != prq.end(); ++it)
     {
-	const Capability cap = *it;
-	requires.push_back(cap);
+	requires.push_back(*it);
     }
 
+    // Product requirements are ignored to assert Product gets installed
+    // as early as possible. Some stuff depends on it (e.g. registration).
     if ( ! isKind<Product>( item.resolvable() ) )
       {
         for (CapSet::const_iterator it = item->dep (Dep::REQUIRES).begin(); it != item->dep (Dep::REQUIRES).end(); ++it)
           {
-            const Capability cap = *it;
-            requires.push_back(cap);
+            requires.push_back(*it);
           }
       }
 

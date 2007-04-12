@@ -85,7 +85,7 @@ class InstallOrder
 	    NodeInfo() : begintime(0), endtime(0), visited(false), order(0) {}
 	    NodeInfo(PoolItem_Ref item) : begintime(0), endtime(0), visited(false), order(0), item(item) {}
 	};
-	
+
 	typedef std::map<PoolItem_Ref, NodeInfo> Nodes;
 
 	Nodes _nodes;
@@ -106,7 +106,7 @@ class InstallOrder
 
     public:
 
-	/** 
+	/**
 	 * Constructor
 	 *
 	 * @param toinstall Set of ResItems that have to be installed
@@ -125,7 +125,7 @@ class InstallOrder
 	 * set then
 	 * */
 	void setInstalled( PoolItem_Ref item );
-	
+
 	/**
 	 * like above, for convenience
 	 * */
