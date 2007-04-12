@@ -41,6 +41,11 @@ namespace zypp
       class RepomdFileReader
       {
       public:
+       /**
+        * Callback definition
+        * first parameter is a \ref OnMediaLocation object with the resource
+        * second parameter is the resource type
+        */
         typedef function<bool( const OnMediaLocation &, const string & )> ProcessResource;
         
         enum Tag

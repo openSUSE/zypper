@@ -32,15 +32,15 @@ bool PatchesFileReader::consumeNode( Reader & reader_r )
   std::string data_type;
   if ( reader_r->nodeType() == XML_READER_TYPE_ELEMENT )
   {
-    if ( reader_r->name() == "repomd" )
+    if ( reader_r->name() == "patches" )
     {
       _tag = tag_Patches;
       return true;
     }
-    if ( reader_r->name() == "data" )
+    if ( reader_r->name() == "patch" )
     {
-      _tag = tag_Data;
-      _type = reader_r->getAttribute("type").asString();
+      _tag = tag_Patch;
+      _id = reader_r->getAttribute("id").asString();
       return true;
     }
     if ( reader_r->name() == "location" )
@@ -66,8 +66,8 @@ bool PatchesFileReader::consumeNode( Reader & reader_r )
   else if ( reader_r->nodeType() == XML_READER_TYPE_END_ELEMENT )
   {
     //MIL << "end element" << endl;
-    if ( reader_r->name() == "data" )
-      _callback( _location, _type );
+    if ( reader_r->name() == "patch" )
+      _callback( _location, _id );
     return true;
   }
   return true;
