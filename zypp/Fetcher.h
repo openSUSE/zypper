@@ -19,9 +19,7 @@
 namespace zypp
 {
 
-  /**
-  * Edition represents <code>[epoch:]version[-release]</code>
-  *
+ /**
   * This class allows to retrieve a group of files which can
   * be cached already on the local disk.
   *
