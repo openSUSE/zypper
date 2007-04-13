@@ -550,7 +550,7 @@ SET( zypp_parser_yum_HEADERS
   parser/yum/YUMProductParser.h
   parser/yum/YUMRepomdParser.h
   parser/yum/RepomdFileReader.h
-  parser/yum/PatchesReader.cc
+  parser/yum/PatchesFileReader.h
   parser/yum/schemanames.h
 )
 
