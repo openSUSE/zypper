@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Apr 13 17:32:55 CEST 2007 - dmacvicar@suse.de
+
+- fix FileCap with attributes
+- r5376
+
+-------------------------------------------------------------------
 Thu Apr 12 02:33:18 CEST 2007 - ma@suse.de
 
 - Fixed computation of install order. Take requirements of
