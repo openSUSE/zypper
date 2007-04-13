@@ -133,24 +133,26 @@ namespace zypp
     {
       // NullCap check first:
       if ( name_r.empty() )
-	{
-	  // Singleton, so no need to put it into _uset !?
-	  return capability::NullCap::instance();
-	}
+      {
+        // Singleton, so no need to put it into _uset !?
+        return capability::NullCap::instance();
+      }
 
       assertResKind( refers_r );
 
       // file:    /absolute/path
       if ( isFileSpec( name_r ) )
-	new capability::FileCap( refers_r, name_r );
+      {
+        return new capability::FileCap( refers_r, name_r );
+      }
 
       //split:   name:/absolute/path
       static const str::regex  rx( "([^/]*):(/.*)" );
       str::smatch what;
       if( str::regex_match( name_r.begin(), name_r.end(), what, rx ) )
-	{
-	  new capability::SplitCap( refers_r, what[1].str(), what[2].str() );
-	}
+      {
+        return new capability::SplitCap( refers_r, what[1].str(), what[2].str() );
+      }
 
       //name:    name
       return new capability::NamedCap( refers_r, name_r );
