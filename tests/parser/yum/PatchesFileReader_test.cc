@@ -7,7 +7,7 @@
 #include <boost/test/parameterized_test.hpp>
 #include <boost/test/unit_test_log.hpp>
 
-#include "zypp/parser/yum/RepomdFileReader.h"
+#include "zypp/parser/yum/PatchesFileReader.h"
 #include "zypp/Url.h"
 #include "zypp/PathInfo.h"
 
@@ -25,9 +25,9 @@ public:
   Collector()
   {}
   
-  bool callback( const OnMediaLocation &loc, const string &dtype )
+  bool callback( const OnMediaLocation &loc, const string &id )
   {
-    items.push_back( make_pair( dtype, loc ) );
+    items.push_back( make_pair( id, loc ) );
     //items.push_back(loc);
     //cout << items.size() << endl;
     return true;
@@ -37,34 +37,35 @@ public:
   //vector<OnMediaLocation> items;
 };
 
-void repomd_read_test(const string &dir)
+void patches_read_test(const string &dir)
 {
   list<Pathname> entries;
   if ( filesystem::readdir( entries, Pathname(dir), false ) != 0 )
     ZYPP_THROW(Exception("failed to read directory"));
-    
+  
   for ( list<Pathname>::const_iterator it = entries.begin(); it != entries.end(); ++it )
   {
     Pathname file = *it;
-    if ( ( file.basename().substr(0, 6) == "repomd" ) && (file.extension() == ".xml" ) )
+    //cout << file.basename().substr(0, 7) << " " << file.extension() << endl;
+    if ( ( file.basename().substr(0, 7) == "patches" ) && (file.extension() == ".xml" ) )
     {
-      cout << *it << endl;
+      //cout << *it << endl;
       
       Collector collect;
-      RepomdFileReader( file, bind( &Collector::callback, &collect, _1, _2 ));
+      PatchesFileReader( file, bind( &Collector::callback, &collect, _1, _2 ));
       
       std::ifstream ifs( file.extend(".solution").asString().c_str() );
-      
+      cout << "Comparing to " << file.extend(".solution") << endl;
       int count = 0;
       while ( ifs && ! ifs.eof() && count < collect.items.size() )
       {
-        string dtype;
+        string id;
         string checksum_type;
         string checksum;
         string loc;
         
-        getline(ifs, dtype);
-        BOOST_CHECK_EQUAL( collect.items[count].first, dtype);
+        getline(ifs, id);
+        BOOST_CHECK_EQUAL( collect.items[count].first, id);
         getline(ifs, checksum_type);
         getline(ifs, checksum);
         BOOST_CHECK_EQUAL( collect.items[count].second.checksum(), CheckSum(checksum_type, checksum) );
@@ -81,17 +82,25 @@ void repomd_read_test(const string &dir)
 test_suite*
 init_unit_test_suite( int argc, char *argv[] )
 {
+  string datadir;
   if (argc < 2)
   {
-    cout << "RepomdFileReader_test:"
-      " path to directory with test data required as parameter" << endl;
-    return (test_suite *)0;
+    datadir = TESTS_SRC_DIR;
+    datadir = (Pathname(datadir) + "/parser/yum/data").asString();
+    cout << "PatchesFileReader_test:"
+      " path to directory with test data required as parameter. Using " << datadir  << endl;
+    //return (test_suite *)0;
+    
+  }
+  else
+  {
+    datadir = argv[1];
   }
   
-  test_suite* test= BOOST_TEST_SUITE("RepomdFileReader");
-  string datadir = argv[1];
+  test_suite* test= BOOST_TEST_SUITE("PatchesFileReader");
+  
   std::string const params[] = { datadir };
-  test->add(BOOST_PARAM_TEST_CASE(&repomd_read_test,
+  test->add(BOOST_PARAM_TEST_CASE(&patches_read_test,
                                  (std::string const*)params, params+1));
   return test;
 }
