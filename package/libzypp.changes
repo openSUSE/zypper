@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Apr 16 11:23:15 CEST 2007 - jkupec@suse.cz
+
+- avoiding attaching media where not needed (#263207)
+- r5381
+
+-------------------------------------------------------------------
 Fri Apr 13 17:32:55 CEST 2007 - dmacvicar@suse.de
 
 - fix FileCap with attributes

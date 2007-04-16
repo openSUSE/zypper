@@ -207,7 +207,7 @@ SourceImpl::~SourceImpl()
 {
   if (_media_set)
   {
-    media::MediaAccessId _media = _media_set->getMediaAccessId( 1 );
+    media::MediaAccessId _media = _media_set->getMediaAccessId( 1, true );
     media_mgr.release (_media, false);
   }
 }
@@ -739,7 +739,7 @@ const void SourceImpl::releaseFile(const Pathname & file_r,
                                    const unsigned media_nr)
 {
   DBG << "releaseFile(" << file_r << ", " << media_nr << ")" << endl;
-  media::MediaAccessId _media = _media_set->getMediaAccessId( media_nr );
+  media::MediaAccessId _media = _media_set->getMediaAccessId( media_nr, true );
   media_mgr.releaseFile(_media, file_r);
 }
 
@@ -748,7 +748,7 @@ const void SourceImpl::releaseDir(const Pathname & path_r,
                                   const bool recursive)
 {
   DBG << "releaseDir(" << path_r << ", " << media_nr << (recursive?", recursive":"") << ")" << endl;
-  media::MediaAccessId _media = _media_set->getMediaAccessId( media_nr );
+  media::MediaAccessId _media = _media_set->getMediaAccessId( media_nr, true );
   if (recursive)
     media_mgr.releasePath(_media, path_r);
   else
