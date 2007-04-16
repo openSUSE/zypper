@@ -44,8 +44,14 @@ namespace zypp
 
       ~MediaSet();
 
-      /** Get the media access ID to specified media */
+      /**
+       * Get the media access ID to specified media
+       * 
+       * \throws MediaNotDesiredException if no_attach is false and no desired
+       *         media is found.
+       */
       media::MediaAccessId getMediaAccessId (media::MediaNr medianr, bool no_attach = false);
+
       /** Redirect specified media to a new MediaId */
       void redirect (media::MediaNr medianr, media::MediaAccessId media_id);
       /**
