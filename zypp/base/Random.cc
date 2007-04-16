@@ -1,9 +1,13 @@
 
-
+#include <cstdlib>
+#include <cstdio>
+#include <iostream>
+#include <fcntl.h>
 #include "zypp/base/Random.h"
 
+using namespace std;
+
 namespace zypp { namespace base {
-  
 
  // Taken from KApplication
 int random_int()
