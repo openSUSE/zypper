@@ -183,6 +183,7 @@ SET( zypp_HEADERS
 INSTALL(  FILES ${zypp_HEADERS} DESTINATION "${CMAKE_INSTALL_PREFIX}/include/zypp" )
 
 SET( zypp_base_SRCS
+  base/Random.cc
   base/Measure.cc
   base/Fd.cc
   base/Gettext.cc
@@ -200,6 +201,7 @@ SET( zypp_base_SRCS
 )
 
 SET( zypp_base_HEADERS
+  base/Random.h
   base/Algorithm.h
   base/Counter.h
   base/Debug.h
@@ -751,6 +753,7 @@ INSTALL(  FILES
 )
 
 SET( zypp_source_yum_SRCS
+  source/yum/YUMDownloader.cc
   source/yum/YUMAtomImpl.cc
   source/yum/YUMGroupImpl.cc
   source/yum/YUMMessageImpl.cc
@@ -763,6 +766,7 @@ SET( zypp_source_yum_SRCS
 )
 
 SET( zypp_source_yum_HEADERS
+  source/yum/YUMDownloader.h
   source/yum/YUMAtomImpl.h
   source/yum/YUMGroupImpl.h
   source/yum/YUMMessageImpl.h
