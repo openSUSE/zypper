@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--PATCHINFO id="0ea8e66732bf0740881da44bc2526b0e"!-->
+<patch
+    xmlns="http://novell.com/package/metadata/suse/patch"
+    xmlns:yum="http://linux.duke.edu/metadata/common"
+    xmlns:rpm="http://linux.duke.edu/metadata/rpm"
+    xmlns:suse="http://novell.com/package/metadata/suse/common"
+    patchid="flash-player-2359"
+    timestamp="1165540363"
+    engine="1.0">
+  <yum:name>flash-player</yum:name>
+  <summary lang="en">flash-player: Security upgrade to 7.0.69</summary>
+  <summary lang="de">flash-player: Security Upgrade auf Version 7.0.69</summary>
+  <description lang="en">This security update brings the Adobe Flash Player to
+version 7.0.69. It fixes the following security problem:
+
+CVE-2006-5330: CRLF injection vulnerability in Adobe Flash
+Player allows remote attackers to modify HTTP headers of
+client requests and conduct HTTP Request Splitting attacks
+via CRLF sequences in arguments to the ActionScript
+functions (1) XML.addRequestHeader and (2)
+XML.contentType. NOTE: the flexibility of the attack varies
+depending on the type of web browser being used.
+</description>
+  <description lang="de">Dieses Securityupgrade bringt den Adobe Flash Player auf
+Version 7.0.69. Dieses Update behebt damit folgendes
+Sicherheitsproblem:
+
+CVE-2006-5330: Ein CRLF Injectionsangriff in Adobe Flash
+Player erlaubt entfernten Angreifern die HTTP Header von
+Client Anfragen zu verändern und damit HTTP Request
+Splitting Angriffe auszuführen. Dies geschieht durch
+Einschleusen von CRLF Sequenzen in die ActionScript
+Funktionen (1) XML.addRequestHeader und (2)
+XML.contentType. Note: Die Flexibilität dieses Angriffs ist
+abhängig vom benutzten Webbrowser.
+</description>
+  <yum:version ver="2359" rel="0"/>
+  <rpm:requires>
+    <rpm:entry kind="atom" name="flash-player" epoch="0" ver="7.0.69.0" rel="1.1" flags="EQ"/>
+  </rpm:requires>
+  <category>security</category>
+  <atoms>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>flash-player</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="7.0.69.0" rel="1.1"/>
+      <checksum type="sha" pkgid="YES">e0add7ff093ece07c6967f658073bfd74607fb64</checksum>
+      <time file="1165572820" build="1165540363"/>
+      <size package="990457" installed="2164975" archive="2165716"/>
+      <location href="rpm/i586/flash-player-7.0.69.0-1.1.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="flash-player" epoch="0" ver="7.0.69.0" rel="1.1" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="flash-player"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/flash-player-7.0.69.0-1.1.i586.patch.rpm"/>
+          <checksum type="sha">8a6adc0ca575d8a56c3a1ba2d88e8438939debe9</checksum>
+          <time file="1165574182" build="1165540363"/>
+          <size package="990592" archive="2164560"/>
+          <base-version epoch="0" ver="7.0.68.0" rel="16"/>
+        </patchrpm>
+      </pkgfiles>
+    </package>
+  </atoms>
+</patch>

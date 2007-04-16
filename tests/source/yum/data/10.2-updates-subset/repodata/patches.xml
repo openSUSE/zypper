@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<patches xmlns="http://novell.com/package/metadata/suse/patches">
+  <patch id="fetchmsttfonts.sh-2333">
+    <checksum type="sha">6b72b4f3617d0d51af28399c0f5e0af401440245</checksum>
+    <location href="repodata/patch-fetchmsttfonts.sh-2333.xml"/>
+  </patch>
+  <patch id="glabels-2348">
+    <checksum type="sha">b02ba598d8ed5f8a31859d3b34e72e1ddecbe894</checksum>
+    <location href="repodata/patch-glabels-2348.xml"/>
+  </patch>
+  <patch id="openssl-2349">
+    <checksum type="sha">321ee41de68be4e83dfb74559c14300a59b85ccf</checksum>
+    <location href="repodata/patch-openssl-2349.xml"/>
+  </patch>
+  <patch id="gv-2350">
+    <checksum type="sha">ec9e8a3f3ce2588cecd84ab95ec910d41db5d74b</checksum>
+    <location href="repodata/patch-gv-2350.xml"/>
+  </patch>
+  <patch id="tar-2351">
+    <checksum type="sha">d803372cd5d844ee01ab6fb3d1b4332391fa1206</checksum>
+    <location href="repodata/patch-tar-2351.xml"/>
+  </patch>
+  <patch id="flash-player-2359">
+    <checksum type="sha">c2de5dd35ec2dcccc118d9d7f539e768dfd5ec50</checksum>
+    <location href="repodata/patch-flash-player-2359.xml"/>
+  </patch>
+</patches>

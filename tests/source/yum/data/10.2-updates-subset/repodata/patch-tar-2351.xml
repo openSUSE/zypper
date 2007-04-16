@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--PATCHINFO id="d71c6eacf4460c45dd8ec1d3e2be6a98"!-->
+<patch
+    xmlns="http://novell.com/package/metadata/suse/patch"
+    xmlns:yum="http://linux.duke.edu/metadata/common"
+    xmlns:rpm="http://linux.duke.edu/metadata/rpm"
+    xmlns:suse="http://novell.com/package/metadata/suse/common"
+    patchid="tar-2351"
+    timestamp="1165492446"
+    engine="1.0">
+  <yum:name>tar</yum:name>
+  <summary lang="en">tar: Securityupdate to fix symlink traversal</summary>
+  <summary lang="de">tar: Sicherheitsupdate das behebt ein Symlinkproblem behebt</summary>
+  <description lang="en">This security update fixes a directory traversal in tar,
+where unpacked symlinks could be followed outside of the
+directory where the tar file is unpacked. (CVE-2006-6097)
+
+This feature was made optional and needs to be enabled with
+a commandline option.
+</description>
+  <description lang="de">Dieses Sicherheitsupdate behebt ein Problem, wo beim
+Entpacken eines TAR Archives dieses durch Symlinks aus dem
+aktuellen Verzeichnis ausbrechen konnte. (CVE-2006-6097)
+
+Das alte obsolete Feature in GNU Tar wurde optional gemacht
+und kann für alte TAR Archive mit einer
+Kommandozeilenoption angeschaltet werden.
+</description>
+  <yum:version ver="2351" rel="0"/>
+  <rpm:requires>
+    <rpm:entry kind="atom" name="tar" epoch="0" ver="1.15.1" rel="42.2" flags="EQ"/>
+  </rpm:requires>
+  <category>security</category>
+  <atoms>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>tar</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="1.15.1" rel="42.2"/>
+      <checksum type="sha" pkgid="YES">7842746e863cbad136ce916a9720ff5913a5bf66</checksum>
+      <time file="1165536210" build="1165492446"/>
+      <size package="643349" installed="1491226" archive="1498148"/>
+      <location href="rpm/i586/tar-1.15.1-42.2.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="tar" epoch="0" ver="1.15.1" rel="42.2" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="tar"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/tar-1.15.1-42.2.i586.patch.rpm"/>
+          <checksum type="sha">f944b5b3c727df8ab7995a0cb64aa8239ab285f1</checksum>
+          <time file="1165538141" build="1165492446"/>
+          <size package="107779" archive="198684"/>
+          <base-version epoch="0" ver="1.15.1" rel="42"/>
+        </patchrpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>tar</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="1.15.1" rel="42.2"/>
+      <checksum type="sha" pkgid="YES">def753a1b7fe65e49653e22ae6d42b329306be53</checksum>
+      <time file="1165536257" build="1165492414"/>
+      <size package="649921" installed="1532230" archive="1539152"/>
+      <location href="rpm/ppc/tar-1.15.1-42.2.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="tar" epoch="0" ver="1.15.1" rel="42.2" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="tar"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/tar-1.15.1-42.2.ppc.patch.rpm"/>
+          <checksum type="sha">2ad27c3ec52ac94fc599372fe310f946dff91b53</checksum>
+          <time file="1165538142" build="1165492414"/>
+          <size package="118362" archive="239688"/>
+          <base-version epoch="0" ver="1.15.1" rel="42"/>
+        </patchrpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>tar</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="1.15.1" rel="42.2"/>
+      <checksum type="sha" pkgid="YES">8fe39477a30f01b18d6c1f2b76a61b96f07a8969</checksum>
+      <time file="1165536168" build="1165492249"/>
+      <size package="654218" installed="1512106" archive="1519028"/>
+      <location href="rpm/x86_64/tar-1.15.1-42.2.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="tar" epoch="0" ver="1.15.1" rel="42.2" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="tar"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/tar-1.15.1-42.2.x86_64.patch.rpm"/>
+          <checksum type="sha">c2ba500358a3bb3144ef43ba12001724dee7c7ec</checksum>
+          <time file="1165538143" build="1165492249"/>
+          <size package="117658" archive="219564"/>
+          <base-version epoch="0" ver="1.15.1" rel="42"/>
+        </patchrpm>
+      </pkgfiles>
+    </package>
+  </atoms>
+</patch>

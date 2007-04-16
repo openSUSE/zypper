@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--PATCHINFO id="8975f0d388b1ef6cf1058b8c743a304a"!-->
+<patch
+    xmlns="http://novell.com/package/metadata/suse/patch"
+    xmlns:yum="http://linux.duke.edu/metadata/common"
+    xmlns:rpm="http://linux.duke.edu/metadata/rpm"
+    xmlns:suse="http://novell.com/package/metadata/suse/common"
+    patchid="gv-2350"
+    timestamp="1165492324"
+    engine="1.0">
+  <yum:name>gv</yum:name>
+  <summary lang="en">gv: Additional fix for previous security update</summary>
+  <summary lang="de">gv: Weiterer Fix für vorheriges Sicherheitsupdate</summary>
+  <description lang="en">The previous &quot;gv&quot; update to fix a stack overflow did not
+completely fix the problem spotted. An attacker could
+still cause the handling to use up all system memory, or
+open windows much wider than the X display and crash. Code
+execution however was not possible.
+</description>
+  <description lang="de">Das vorherige &quot;gv&quot; Update hat zwar den berichteten
+Stacküberlauf behoben,  es konnte aber immer noch eine
+fehlerhaftes PS den Viewer zum Absturz bringen und/oder
+den Systemspeicher aufbrauchen. Das Ausführen von Schadcode
+war allerdings nicht mehr möglich.
+</description>
+  <yum:version ver="2350" rel="0"/>
+  <rpm:requires>
+    <rpm:entry kind="atom" name="gv" epoch="0" ver="3.5.8" rel="1184.2" flags="EQ"/>
+  </rpm:requires>
+  <category>security</category>
+  <atoms>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>gv</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="3.5.8" rel="1184.2"/>
+      <checksum type="sha" pkgid="YES">ef3e9360d99cd36ba269af1abd2e8ac963c8c838</checksum>
+      <time file="1165536209" build="1165492324"/>
+      <size package="230028" installed="537756" archive="543948"/>
+      <location href="rpm/i586/gv-3.5.8-1184.2.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="gv" epoch="0" ver="3.5.8" rel="1184.2" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="gv"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/gv-3.5.8-1184.2.i586.patch.rpm"/>
+          <checksum type="sha">d76be82ebb51285250baaf698cd6649803b35794</checksum>
+          <time file="1165538134" build="1165492324"/>
+          <size package="111809" archive="256776"/>
+          <base-version epoch="0" ver="3.5.8" rel="1184"/>
+        </patchrpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>gv</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="3.5.8" rel="1184.2"/>
+      <checksum type="sha" pkgid="YES">508bdeacfb23a0a210a27e3ed164f58b5c5c4590</checksum>
+      <time file="1165536257" build="1165492338"/>
+      <size package="242827" installed="566264" archive="572456"/>
+      <location href="rpm/ppc/gv-3.5.8-1184.2.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="gv" epoch="0" ver="3.5.8" rel="1184.2" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="gv"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/gv-3.5.8-1184.2.ppc.patch.rpm"/>
+          <checksum type="sha">a77d288b75a8821227d0402639effd99f194c12f</checksum>
+          <time file="1165538136" build="1165492338"/>
+          <size package="124741" archive="285284"/>
+          <base-version epoch="0" ver="3.5.8" rel="1184"/>
+        </patchrpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>gv</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="3.5.8" rel="1184.2"/>
+      <checksum type="sha" pkgid="YES">d1ceecc9b2442fe298040690bf91ae224cc2bfd4</checksum>
+      <time file="1165536168" build="1165492270"/>
+      <size package="244258" installed="562996" archive="569188"/>
+      <location href="rpm/x86_64/gv-3.5.8-1184.2.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="gv" epoch="0" ver="3.5.8" rel="1184.2" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="gv"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/gv-3.5.8-1184.2.x86_64.patch.rpm"/>
+          <checksum type="sha">9424c4ba6f46d26bb1ae1d33fae80061b968ccb3</checksum>
+          <time file="1165538137" build="1165492270"/>
+          <size package="125854" archive="282016"/>
+          <base-version epoch="0" ver="3.5.8" rel="1184"/>
+        </patchrpm>
+      </pkgfiles>
+    </package>
+  </atoms>
+</patch>

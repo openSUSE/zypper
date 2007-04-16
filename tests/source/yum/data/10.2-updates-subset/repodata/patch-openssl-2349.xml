@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--PATCHINFO id="b7dfa4c9cfaf8657e2602bbbcf92ec30"!-->
+<patch
+    xmlns="http://novell.com/package/metadata/suse/patch"
+    xmlns:yum="http://linux.duke.edu/metadata/common"
+    xmlns:rpm="http://linux.duke.edu/metadata/rpm"
+    xmlns:suse="http://novell.com/package/metadata/suse/common"
+    patchid="openssl-2349"
+    timestamp="1165493634"
+    engine="1.0">
+  <yum:name>openssl</yum:name>
+  <summary lang="en">Security update for OpenSSL</summary>
+  <summary lang="de">Sicherheitsupdate für OpenSSL</summary>
+  <description lang="en">A previous openssl update (CVE-2006-2940) introduced
+another bug that can lead to a crash by providing a large
+prime number. An uninitialized pointer is freed during
+error handling. This bug allows remote attackers to crash
+services that use openssl.
+</description>
+  <description lang="de">Ein vorheriges Sicherheitsupdate von OpenSSL
+(CVE-2006-2940) hat einen weiteren Fehler verursacht, der
+von entfernten Angreifern ausgenutzt werden kann, um
+Applikationen, die OpenSSL benutzen, zum Absturz zu bringen.
+</description>
+  <yum:version ver="2349" rel="0"/>
+  <rpm:requires>
+    <rpm:entry kind="atom" name="openssl" epoch="0" ver="0.9.8d" rel="17.2" flags="EQ"/>
+    <rpm:entry kind="atom" name="openssl-32bit" epoch="0" ver="0.9.8d" rel="17.2" flags="EQ"/>
+    <rpm:entry kind="atom" name="openssl-64bit" epoch="0" ver="0.9.8d" rel="17.2" flags="EQ"/>
+    <rpm:entry kind="atom" name="openssl-devel" epoch="0" ver="0.9.8d" rel="17.2" flags="EQ"/>
+    <rpm:entry kind="atom" name="openssl-devel-32bit" epoch="0" ver="0.9.8d" rel="17.2" flags="EQ"/>
+    <rpm:entry kind="atom" name="openssl-devel-64bit" epoch="0" ver="0.9.8d" rel="17.2" flags="EQ"/>
+  </rpm:requires>
+  <category>security</category>
+  <atoms>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>openssl</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="0.9.8d" rel="17.2"/>
+      <checksum type="sha" pkgid="YES">a923a481bc975916121811645c9957303c90172c</checksum>
+      <time file="1165536196" build="1165493634"/>
+      <size package="1190812" installed="2767741" archive="2787168"/>
+      <location href="rpm/i586/openssl-0.9.8d-17.2.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="openssl" epoch="0" ver="0.9.8d" rel="17.2" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="openssl"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/openssl-0.9.8d-17.2.i586.patch.rpm"/>
+          <checksum type="sha">2936166db09a46956c80a4ac4f69038f6f470cb0</checksum>
+          <time file="1165538106" build="1165493634"/>
+          <size package="838816" archive="1999084"/>
+          <base-version epoch="0" ver="0.9.8d" rel="17"/>
+        </patchrpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>openssl</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="0.9.8d" rel="17.2"/>
+      <checksum type="sha" pkgid="YES">3751ba88267a45f6bae72285bc3295f1550ad80e</checksum>
+      <time file="1165536248" build="1165493907"/>
+      <size package="1242242" installed="3031173" archive="3050600"/>
+      <location href="rpm/ppc/openssl-0.9.8d-17.2.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="openssl" epoch="0" ver="0.9.8d" rel="17.2" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="openssl"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/openssl-0.9.8d-17.2.ppc.patch.rpm"/>
+          <checksum type="sha">5fc8bbefa21ffa770c810d26e2ffec6bb2cf5397</checksum>
+          <time file="1165538109" build="1165493907"/>
+          <size package="872746" archive="2126292"/>
+          <base-version epoch="0" ver="0.9.8d" rel="17"/>
+        </patchrpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>openssl</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="0.9.8d" rel="17.2"/>
+      <checksum type="sha" pkgid="YES">0a6e313ab112570584d82725dbb1fb81862bfdf0</checksum>
+      <time file="1165536159" build="1165493227"/>
+      <size package="1278381" installed="3079113" archive="3098568"/>
+      <location href="rpm/x86_64/openssl-0.9.8d-17.2.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="openssl" epoch="0" ver="0.9.8d" rel="17.2" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="openssl"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/openssl-0.9.8d-17.2.x86_64.patch.rpm"/>
+          <checksum type="sha">1a69d600b7689a7d73eb02c9a8393aeea6be7159</checksum>
+          <time file="1165538111" build="1165493227"/>
+          <size package="906139" archive="2204696"/>
+          <base-version epoch="0" ver="0.9.8d" rel="17"/>
+        </patchrpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>openssl-32bit</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="0.9.8d" rel="17.2"/>
+      <checksum type="sha" pkgid="YES">485659fe4f32303bb951e557367564f920eb1740</checksum>
+      <time file="1165536197" build="1165493667"/>
+      <size package="687177" installed="1664224" archive="1666028"/>
+      <location href="rpm/x86_64/openssl-32bit-0.9.8d-17.2.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="openssl-32bit" epoch="0" ver="0.9.8d" rel="17.2" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="openssl-32bit"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/openssl-32bit-0.9.8d-17.2.x86_64.patch.rpm"/>
+          <checksum type="sha">559c13e02265269a9f08ff0d1aeebb895dd90530</checksum>
+          <time file="1165538113" build="1165493667"/>
+          <size package="674841" archive="1601976"/>
+          <base-version epoch="0" ver="0.9.8d" rel="17"/>
+        </patchrpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>openssl-64bit</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="0.9.8d" rel="17.2"/>
+      <checksum type="sha" pkgid="YES">96d57cc3d4539e0355374526af16c0d4a4919ea6</checksum>
+      <time file="1165536216" build="1165494120"/>
+      <size package="797366" installed="2586832" archive="2588664"/>
+      <location href="rpm/ppc/openssl-64bit-0.9.8d-17.2.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="openssl-64bit" epoch="0" ver="0.9.8d" rel="17.2" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="openssl-64bit"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/openssl-64bit-0.9.8d-17.2.ppc.patch.rpm"/>
+          <checksum type="sha">06f6c63e668e7ba4869efa100502272d986fcdbc</checksum>
+          <time file="1165538116" build="1165494120"/>
+          <size package="796277" archive="2581984"/>
+          <base-version epoch="0" ver="0.9.8d" rel="17"/>
+        </patchrpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>openssl-devel</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="0.9.8d" rel="17.2"/>
+      <checksum type="sha" pkgid="YES">9f6a44015ad97680e9f93d0edefa1d533940479c</checksum>
+      <time file="1165536197" build="1165493634"/>
+      <size package="930588" installed="3937193" archive="3948464"/>
+      <location href="rpm/i586/openssl-devel-0.9.8d-17.2.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="openssl-devel" epoch="0" ver="0.9.8d" rel="17.2" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="openssl-devel"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/openssl-devel-0.9.8d-17.2.i586.patch.rpm"/>
+          <checksum type="sha">8b2815cb139ab9d99849ad1bf11fd193e48c599a</checksum>
+          <time file="1165538119" build="1165493634"/>
+          <size package="637241" archive="2351696"/>
+          <base-version epoch="0" ver="0.9.8d" rel="17"/>
+        </patchrpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>openssl-devel</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="0.9.8d" rel="17.2"/>
+      <checksum type="sha" pkgid="YES">aefc1215e506133131739f86a77eaef17e598dd6</checksum>
+      <time file="1165536249" build="1165493907"/>
+      <size package="986896" installed="4033294" archive="4044564"/>
+      <location href="rpm/ppc/openssl-devel-0.9.8d-17.2.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="openssl-devel" epoch="0" ver="0.9.8d" rel="17.2" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="openssl-devel"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/openssl-devel-0.9.8d-17.2.ppc.patch.rpm"/>
+          <checksum type="sha">6b065d695dcd9e9c26d9fcde0dc37757c3c68a94</checksum>
+          <time file="1165538121" build="1165493907"/>
+          <size package="686833" archive="2446944"/>
+          <base-version epoch="0" ver="0.9.8d" rel="17"/>
+        </patchrpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>openssl-devel</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="0.9.8d" rel="17.2"/>
+      <checksum type="sha" pkgid="YES">72d8cd8e5273cc13d821e3179b49c1ca1225d471</checksum>
+      <time file="1165536160" build="1165493227"/>
+      <size package="939300" installed="4853257" archive="4864540"/>
+      <location href="rpm/x86_64/openssl-devel-0.9.8d-17.2.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="openssl-devel" epoch="0" ver="0.9.8d" rel="17.2" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="openssl-devel"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/openssl-devel-0.9.8d-17.2.x86_64.patch.rpm"/>
+          <checksum type="sha">64a038710ac2e2ba9918b48dcbf8fcf0aef143c7</checksum>
+          <time file="1165538123" build="1165493227"/>
+          <size package="644833" archive="3135336"/>
+          <base-version epoch="0" ver="0.9.8d" rel="17"/>
+        </patchrpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>openssl-devel-32bit</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="0.9.8d" rel="17.2"/>
+      <checksum type="sha" pkgid="YES">acbbb17d623d1a509f1811ab75297a6015d4ee8e</checksum>
+      <time file="1165536197" build="1165493668"/>
+      <size package="742019" installed="2753796" archive="2754492"/>
+      <location href="rpm/x86_64/openssl-devel-32bit-0.9.8d-17.2.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="openssl-devel-32bit" epoch="0" ver="0.9.8d" rel="17.2" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="openssl-devel-32bit"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/openssl-devel-32bit-0.9.8d-17.2.x86_64.patch.rpm"/>
+          <checksum type="sha">7c47e37c419d0556a1bdf8e50b7ebee845dea752</checksum>
+          <time file="1165538125" build="1165493668"/>
+          <size package="631757" archive="2351696"/>
+          <base-version epoch="0" ver="0.9.8d" rel="17"/>
+        </patchrpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>openssl-devel-64bit</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="0.9.8d" rel="17.2"/>
+      <checksum type="sha" pkgid="YES">e9b398feb88d4fbe24a0a52f20e9d20feb5caf49</checksum>
+      <time file="1165536217" build="1165494124"/>
+      <size package="801166" installed="4124288" archive="4124988"/>
+      <location href="rpm/ppc/openssl-devel-64bit-0.9.8d-17.2.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="openssl-devel-64bit" epoch="0" ver="0.9.8d" rel="17.2" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="openssl-devel-64bit"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/openssl-devel-64bit-0.9.8d-17.2.ppc.patch.rpm"/>
+          <checksum type="sha">177a83d2b430effeeadaf884ada00b3e09862c66</checksum>
+          <time file="1165538128" build="1165494124"/>
+          <size package="683533" archive="3552068"/>
+          <base-version epoch="0" ver="0.9.8d" rel="17"/>
+        </patchrpm>
+      </pkgfiles>
+    </package>
+  </atoms>
+</patch>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--PATCHINFO id="94977d0dc5b5998b09101f56ba9ce27a"!-->
+<patch
+    xmlns="http://novell.com/package/metadata/suse/patch"
+    xmlns:yum="http://linux.duke.edu/metadata/common"
+    xmlns:rpm="http://linux.duke.edu/metadata/rpm"
+    xmlns:suse="http://novell.com/package/metadata/suse/common"
+    patchid="glabels-2348"
+    timestamp="1165501960"
+    engine="1.0">
+  <yum:name>glabels</yum:name>
+  <summary lang="en">If you installed glabels, you should update.</summary>
+  <summary lang="de">If you installed glabels, you should update.</summary>
+  <description lang="en">If you cannot install glabels or experienced problem with
+file types (MIME) or you cannot find glabels in the menu,
+you should update.
+</description>
+  <description lang="de">If you cannot install glabels or experienced problem with
+file types (MIME) or you cannot find glabels in the menu,
+you should update.
+</description>
+  <yum:version ver="2348" rel="0"/>
+  <rpm:requires>
+    <rpm:entry kind="atom" name="glabels" epoch="0" ver="2.0.4" rel="30.2" flags="EQ"/>
+  </rpm:requires>
+  <category>recommended</category>
+  <atoms>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>glabels</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="2.0.4" rel="30.2"/>
+      <checksum type="sha" pkgid="YES">34adf06a0c4873b9d53b4634beb8bee458b45767</checksum>
+      <time file="1165536261" build="1165501960"/>
+      <size package="983124" installed="2257356" archive="2271256"/>
+      <location href="rpm/i586/glabels-2.0.4-30.2.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="glabels" epoch="0" ver="2.0.4" rel="30.2" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="glabels"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/glabels-2.0.4-30.2.i586.patch.rpm"/>
+          <checksum type="sha">225d498134c8f369051005b808ee662917e48667</checksum>
+          <time file="1165538099" build="1165501960"/>
+          <size package="15910" archive="2424"/>
+          <base-version epoch="0" ver="2.0.4" rel="30"/>
+        </patchrpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>glabels</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="2.0.4" rel="30.2"/>
+      <checksum type="sha" pkgid="YES">40f24dc53e8f800fc1383b0ac1b357a7134f8eea</checksum>
+      <time file="1165536201" build="1165503062"/>
+      <size package="1023074" installed="2349352" archive="2363264"/>
+      <location href="rpm/x86_64/glabels-2.0.4-30.2.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="glabels" epoch="0" ver="2.0.4" rel="30.2" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="glabels"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/glabels-2.0.4-30.2.x86_64.patch.rpm"/>
+          <checksum type="sha">a505aef1188ba45022a6c1241a14f569fa19b0a8</checksum>
+          <time file="1165538101" build="1165503062"/>
+          <size package="16423" archive="2424"/>
+          <base-version epoch="0" ver="2.0.4" rel="30"/>
+        </patchrpm>
+      </pkgfiles>
+    </package>
+  </atoms>
+</patch>
