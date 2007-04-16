@@ -135,9 +135,7 @@ public:
   
 
   protected:
-  std::string randomString(int length) const;
-  int random() const;
-
+  
   /**
    * delete a path in the database, only used by deleteObject
    * and workarounds

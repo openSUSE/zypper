@@ -18,7 +18,7 @@ int main(int argc, char **argv)
       ZYpp::Ptr z = getZYpp();
       Pathname dbfile = Pathname(getenv("PWD")) + "data.db";
       zypp::cache::CacheStore store(getenv("PWD"));
-      data::RecordId catalog_id = store.lookupOrAppendCatalog( Url(argv[1]), "/");
+      data::RecordId catalog_id = store.lookupOrAppendCatalog( Url("http://www.google.com"), "/");
       PackagesParser parser( catalog_id, store);
       Measure m;
       parser.start(argv[1]);

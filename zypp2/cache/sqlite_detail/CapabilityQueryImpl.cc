@@ -34,7 +34,7 @@ CapabilityQuery::Impl::Impl( DatabaseContext_Ptr p_context, const data::RecordId
 
 CapabilityQuery::Impl::~Impl()
 {
-  MIL << endl;
+  //MIL << endl;
 }
 
 

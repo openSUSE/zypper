@@ -33,6 +33,10 @@ struct CacheStore::Impl
   {}
 
   sqlite3_connection con;
+  
+  sqlite3_command_ptr update_catalog_cmd;
+  sqlite3_command_ptr insert_resolvable_in_catalog_cmd;
+  
   sqlite3_command_ptr select_name_cmd;
   sqlite3_command_ptr insert_name_cmd;
   
@@ -41,6 +45,9 @@ struct CacheStore::Impl
   
   sqlite3_command_ptr select_filename_cmd;
   sqlite3_command_ptr insert_filename_cmd;
+  
+  sqlite3_command_ptr select_catalog_cmd;
+  sqlite3_command_ptr insert_catalog_cmd;
   
   sqlite3_command_ptr select_file_cmd;
   sqlite3_command_ptr insert_file_cmd;
@@ -75,6 +82,13 @@ CacheStore::CacheStore( const Pathname &dbdir )
     ZYPP_THROW(Exception(ex.what()));
   }
   
+  _pimpl->insert_resolvable_in_catalog_cmd.reset( new sqlite3_command( _pimpl->con, "insert into resolvables_catalogs (resolvable_id, catalog_id) values (:resolvable_id, :catalog_id);" ));
+  
+  _pimpl->update_catalog_cmd.reset( new sqlite3_command( _pimpl->con, "update catalogs set checksum=:checksum, timestamp=:timestamp where id=:catalog_id;" ));
+  
+  _pimpl->select_catalog_cmd.reset( new sqlite3_command( _pimpl->con, "select id from catalogs where url=:url and path=:path;" ));
+  _pimpl->insert_catalog_cmd.reset( new sqlite3_command( _pimpl->con, "insert into catalogs (url,path,timestamp) values (:url,:path,:timestamp);" ));
+  
   _pimpl->select_name_cmd.reset( new sqlite3_command( _pimpl->con, "select id from names where name=:name;" ));
   _pimpl->insert_name_cmd.reset( new sqlite3_command( _pimpl->con, "insert into names (name) values (:name);" ));
   
@@ -89,9 +103,9 @@ CacheStore::CacheStore( const Pathname &dbdir )
 
   _pimpl->insert_dependency_entry_cmd.reset( new sqlite3_command( _pimpl->con, "insert into capabilities ( resolvable_id, dependency_type, refers_kind ) values ( :resolvable_id, :dependency_type, :refers_kind );" ));
   _pimpl->append_file_dependency_cmd.reset( new sqlite3_command( _pimpl->con, "insert into file_capabilities ( dependency_id, file_id ) values ( :dependency_id, :file_id );" ));
-  _pimpl->append_versioned_dependency_cmd.reset( new sqlite3_command( _pimpl->con, "insert into versioned_capabilities ( dependency_id, name_id, version, release, epoch, relation ) values ( :dependency_id, :name_id, :version, :release, :epoch, :relation );" ));
+  _pimpl->append_versioned_dependency_cmd.reset( new sqlite3_command( _pimpl->con, "insert into named_capabilities ( dependency_id, name_id, version, release, epoch, relation ) values ( :dependency_id, :name_id, :version, :release, :epoch, :relation );" ));
   
-  _pimpl->append_resolvable_cmd.reset( new sqlite3_command( _pimpl->con, "insert into resolvables ( name, version, release, epoch, arch, kind ) values ( :name, :version, :release, :epoch, :arch, :kind );" ));
+  _pimpl->append_resolvable_cmd.reset( new sqlite3_command( _pimpl->con, "insert into resolvables ( name, version, release, epoch, arch, kind, catalog_id ) values ( :name, :version, :release, :epoch, :arch, :kind, :catalog_id );" ));
   
   // disable autocommit
   _pimpl->con.executenonquery("BEGIN;");
@@ -109,10 +123,13 @@ CacheStore::~CacheStore()
 
 void CacheStore::consumePackage( const data::Package &package )
 {
-  data::RecordId pkgid = appendResolvable( ResTraits<Package>::kind, NVRA( package.name, package.edition, package.arch ), package.deps );
+  //data::RecordId pkgid = appendResolvable( ResTraits<Package>::kind, NVRA( package.name, package.edition, package.arch ), package.deps );
 }
 
-data::RecordId CacheStore::appendResolvable( const Resolvable::Kind &kind, const NVRA &nvra, const data::Dependencies &deps )
+data::RecordId CacheStore::appendResolvable( const data::RecordId &catalog_id,
+                                             const Resolvable::Kind &kind, 
+                                             const NVRA &nvra, 
+                                             const data::Dependencies &deps )
 {
   _pimpl->append_resolvable_cmd->bind( ":name", nvra.name );
   _pimpl->append_resolvable_cmd->bind( ":version", nvra.edition.version() );
@@ -120,12 +137,17 @@ data::RecordId CacheStore::appendResolvable( const Resolvable::Kind &kind, const
   _pimpl->append_resolvable_cmd->bind( ":epoch", static_cast<int>( nvra.edition.epoch() ) );
   _pimpl->append_resolvable_cmd->bind( ":arch", zypp_arch2db_arch(nvra.arch) );
   _pimpl->append_resolvable_cmd->bind( ":kind", zypp_kind2db_kind(kind) );
+  _pimpl->append_resolvable_cmd->bind( ":catalog_id", catalog_id );
   
   _pimpl->append_resolvable_cmd->executenonquery();
 
   long long id = _pimpl->con.insertid();
   
   appendDependencies( id, deps );
+  /*
+  _pimpl->insert_resolvable_in_catalog_cmd->bind(":catalog_id", catalog_id);
+  _pimpl->insert_resolvable_in_catalog_cmd->bind(":resolvable_id", id);
+  _pimpl->insert_resolvable_in_catalog_cmd->executenonquery();*/
   
   return static_cast<data::RecordId>(id);
   return 1;
@@ -246,6 +268,39 @@ data::RecordId CacheStore::lookupOrAppendFile( const Pathname &path )
     _pimpl->insert_file_cmd->bind(":dir_name_id", dir_name_id);
     _pimpl->insert_file_cmd->bind(":file_name_id", file_name_id);
     _pimpl->insert_file_cmd->executenonquery();
+    id = _pimpl->con.insertid();
+    return static_cast<data::RecordId>(id);
+    
+  }
+  return static_cast<data::RecordId>(id);
+}
+
+void CacheStore::updateCatalog( const data::RecordId &id, 
+                    const std::string &checksum, 
+                    const Date &timestamp )
+{
+  _pimpl->update_catalog_cmd->bind(":catalog_id", id);
+  _pimpl->update_catalog_cmd->bind(":checksum", checksum);
+  _pimpl->update_catalog_cmd->bind(":timestamp", static_cast<int>((Date::ValueType) timestamp) );
+  _pimpl->insert_catalog_cmd->executenonquery();
+}
+
+data::RecordId CacheStore::lookupOrAppendCatalog( const Url &url, const Pathname &path )
+{
+  _pimpl->select_catalog_cmd->bind(":url", url.asString());
+  _pimpl->select_catalog_cmd->bind(":path", path.asString());
+  
+  long long id = 0;
+  try {
+    id = _pimpl->select_catalog_cmd->executeint64();
+  }
+  catch ( const sqlite3x::database_error &e )
+  {
+    // does not exist
+    _pimpl->insert_catalog_cmd->bind(":url", url.asString());
+    _pimpl->insert_catalog_cmd->bind(":path", path.asString());
+    _pimpl->insert_catalog_cmd->bind(":timestamp", static_cast<int>((Date::ValueType) Date::now()) );
+    _pimpl->insert_catalog_cmd->executenonquery();
     id = _pimpl->con.insertid();
     return static_cast<data::RecordId>(id);
     

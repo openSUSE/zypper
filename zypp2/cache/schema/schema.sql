@@ -12,7 +12,7 @@ DROP VIEW IF EXISTS packages;
 DROP VIEW IF EXISTS messages;
 DROP TRIGGER IF EXISTS remove_resolvables;
 DROP TRIGGER IF EXISTS remove_patch_packages_baseversions;
-DROP TABLE IF EXISTS versioned_capabilities;
+DROP TABLE IF EXISTS named_capabilities;
 DROP TABLE IF EXISTS translated_texts;
 DROP TABLE IF EXISTS script_details;
 DROP TABLE IF EXISTS resolvable_texts;
@@ -38,7 +38,7 @@ DROP TABLE IF EXISTS catalogs;
 DROP TABLE IF EXISTS capabilities;
 DROP INDEX IF EXISTS package_details_resolvable_id;
 DROP INDEX IF EXISTS capability_resolvable;
-DROP INDEX IF EXISTS versioned_capabilities_dependency_id;
+DROP INDEX IF EXISTS named_capabilities_dependency_id;
 
 ------------------------------------------------
 -- version metadata, probably not needed, there
@@ -57,7 +57,8 @@ CREATE TABLE catalogs (
     id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL
   , url TEXT NOT NULL
   , path TEXT NOT NULL
-
+  , checksum TEXT DEFAULT NULL
+  , timestamp INTEGER NOT NULL
 );
 
 ------------------------------------------------
@@ -132,6 +133,7 @@ CREATE TABLE resolvables (
   , install_only INTEGER
   , build_time INTEGER
   , install_time INTEGER
+  , catalog_id INTEGER REFERENCES catalogs(id)
 );
 
 CREATE TABLE message_details (
@@ -315,7 +317,7 @@ CREATE TABLE capabilities (
 );
 CREATE INDEX capability_resolvable ON capabilities (resolvable_id);
 
-CREATE TABLE versioned_capabilities (
+CREATE TABLE named_capabilities (
    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL 
   , dependency_id INTEGER REFERENCES capabilities (id)
   , name_id INTEGER REFERENCES names(id)
@@ -324,7 +326,7 @@ CREATE TABLE versioned_capabilities (
   , epoch INTEGER
   , relation INTEGER
 );
-CREATE INDEX versioned_capabilities_dependency_id ON versioned_capabilities (dependency_id);
+CREATE INDEX named_capabilities_dependency_id ON named_capabilities (dependency_id);
 
 CREATE TABLE file_capabilities (
    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL 

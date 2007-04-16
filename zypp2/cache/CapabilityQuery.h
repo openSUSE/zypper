@@ -54,6 +54,12 @@ namespace zypp
     struct CapabilityQuery
     {
     public:
+      class Result
+      {
+        data::RecordId id;
+        zypp::Dep dep;
+        capability::CapabilityImpl::Ptr cap;
+      };
      /**
       * reads the next item for the query
       * returns false if there are no

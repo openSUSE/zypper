@@ -17,7 +17,7 @@
 #include "zypp/base/NonCopyable.h"
 #include "zypp/base/PtrTypes.h"
 #include "zypp/Pathname.h"
-
+#include "zypp/NVRA.h"
 #include "zypp/capability/CapabilityImpl.h"
 #include "zypp/capability/Capabilities.h"
 
@@ -69,6 +69,10 @@ namespace zypp
        * Optionaly you can pass a list of \c CapabilityImpl::Ptr
        * as dependencies for the resolvable.
        * 
+       * You have to specify the RecordId for the catalog owning
+       * this resolvable. Yuu can obtain it with
+       * \ref lookupOrAppendCatalog
+       * 
        * You can create those \a deps using \ref capability::parse
        * functions, or the build methods to create specific types
        * of capabilities:
@@ -81,7 +85,8 @@ namespace zypp
        * other properties.
        *
        */
-      data::RecordId appendResolvable( const Resolvable::Kind &kind,
+      data::RecordId appendResolvable( const data::RecordId &catalog_id,
+                                       const Resolvable::Kind &kind,
                                        const NVRA &nvra,
                                        const data::Dependencies &deps );
       
@@ -132,23 +137,6 @@ namespace zypp
                              capability::CapabilityImpl::Ptr cap );
       
       /**
-       * Adds a versioned dependency to the store.
-       *
-       * A \ref VersionedCap::Ptr \a dlist to be specified. Among
-       * which type of dependency \ref zypp::Dep it is as
-       * the \a deptype argument.
-       * 
-       * \a resolvable_id is the resolvable Id in the CacheStore
-       * that will own the capability
-       *
-       * You can create the versioned capability using either
-       * \ref capability::parse or \ref capability::buildVersioned
-       *
-       * FIXME should it \throw if the resolvable does not exist?
-       */
-      //void appendVersionedDependency( const data::RecordId &, zypp::Dep, capability::VersionedCap::Ptr);
-      
-      /**
        * Adds a Named dependency to the store.
        *
        * A \ref NamedCap::Ptr \a dlist to be specified. Among
@@ -163,7 +151,8 @@ namespace zypp
        *
        * FIXME should it \throw if the resolvable does not exist?
        */
-      void appendNamedDependency( const data::RecordId &, zypp::Dep, capability::NamedCap::Ptr);
+      void appendNamedDependency( const data::RecordId &, zypp::Dep,
+                                  capability::NamedCap::Ptr);
       
       /**
        * Adds a file dependency to the store.
@@ -180,7 +169,32 @@ namespace zypp
        *
        * FIXME should it \throw if the resolvable does not exist?
        */
-      void appendFileDependency( const data::RecordId &, zypp::Dep, capability::FileCap::Ptr);
+      void appendFileDependency( const data::RecordId &, zypp::Dep, 
+                                 capability::FileCap::Ptr);
+      
+      /**
+       * Returns the record id of a catalog (Source) \a path
+       *
+       * \note If the catalog entry does not exist, it will
+       * be created and the new inserted entry's id will
+       * be returned.
+       */
+      data::RecordId lookupOrAppendCatalog( const Url &url, 
+                                            const Pathname &path );
+      
+       /**
+       * Update a known catalog checksum and timestamp
+       *
+       * \note If you don't provide timestamp it defaults
+       * to now.
+       *
+       * It is responsability of the caller to operate with
+       * a valid record id. You can get one
+       * Using \ref lookupOrAppendCatalog
+       */
+      void updateCatalog( const data::RecordId &id, 
+                                    const std::string &checksum, 
+                                    const Date &timestamp = Date::now() );
       
       /**
        * Returns the record id of a file entry \a path
@@ -224,7 +238,8 @@ namespace zypp
        * the capabilities table for a specific capability
        * entry.
        */
-      data::RecordId appendDependencyEntry( const data::RecordId &, zypp::Dep, const Resolvable::Kind & );
+      data::RecordId appendDependencyEntry( const data::RecordId &, 
+                                            zypp::Dep, const Resolvable::Kind & );
     private:
       /** Implementation. */
       class Impl;

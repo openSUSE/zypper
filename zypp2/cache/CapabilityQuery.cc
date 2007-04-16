@@ -40,9 +40,9 @@ CapabilityQuery::CapabilityQuery( Impl *impl)
     _pimpl->context->select_filecap_cmd->bind(":rid", _pimpl->_resolvable_id);
     _pimpl->_file_reader.reset( new sqlite3_reader(_pimpl->context->select_filecap_cmd->executereader()));
     
-    MIL << "Done setup query" << endl;
+    //MIL << "Done setup query" << endl;
     read();
-    MIL << "Done first read" << endl;
+    //MIL << "Done first read" << endl;
 }
 
 CapabilityQuery::~CapabilityQuery()

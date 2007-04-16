@@ -32,6 +32,10 @@ ADD_EXECUTABLE(yum-downloader YUMDownloader_tp.cc)
 TARGET_LINK_LIBRARIES(yum-downloader  zypp )
 TARGET_LINK_LIBRARIES(yum-downloader  zypp2 )
 
+ADD_EXECUTABLE(cachedsource CachedSource_tp.cc)
+TARGET_LINK_LIBRARIES(cachedsource  zypp )
+TARGET_LINK_LIBRARIES(cachedsource  zypp2 )
+
 FIND_PACKAGE(Zsync)
 IF(ZSYNC_FOUND)
   ADD_EXECUTABLE(zsync zsync.cc)
