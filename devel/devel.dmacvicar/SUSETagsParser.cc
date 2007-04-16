@@ -14,16 +14,16 @@
 #include "zypp/parser/taggedfile/TagCacheRetrieval.h"
 #include "zypp/parser/taggedfile/TagCacheRetrievalPtr.h"
 
+#include "SUSETagsParser.h"
+
 using namespace zypp;
 using namespace std;
 using zypp::debug::Measure;
 
+namespace zypp {
+
 typedef Exception ParseException;
-
-struct PackageDataProvider;
-
-typedef shared_ptr<PackageDataProvider> PackageDataProviderPtr;
-
+  
 struct PackageDataProvider
 {
   TagRetrievalPos _attr_SUMMARY;
@@ -42,54 +42,9 @@ struct PackageDataProvider
   PackageDataProviderPtr _fallback_provider;
 };
 
-struct PackagesParser
-{
-  // tag ids for the TaggedParser
-  enum Tags {
-    PACKAGE,  // name version release arch
-    REQUIRES, // list of requires tags
-    PREREQUIRES,// list of pre-requires tags
-    PROVIDES, // list of provides tags
-    CONFLICTS,  // list of conflicts tags
-    OBSOLETES,  // list of obsoletes tags
-    RECOMMENDS, // list of recommends tags
-    SUGGESTS, // list of suggests tags
-    LOCATION, // file location
-    SIZE, // packed and unpacked size
-    BUILDTIME,  // buildtime
-    SOURCERPM,  // source package
-    GROUP,  // rpm group
-    LICENSE,  // license
-    AUTHORS,  // list of authors
-    SHAREWITH,  // package to share data with
-    KEYWORDS, // list of keywords
 
-      // packages.<locale>
-    SUMMARY,  // short summary (label)
-    DESCRIPTION,// long description
-    INSNOTIFY,  // install notification
-    DELNOTIFY,  // delete notification
-    LICENSETOCONFIRM, // license to confirm upon install
-    // packages.DU
-    DU,   // disk usage data
-    NUM_TAGS
-  };
-
-  // our parser
-  TaggedParser _parser;
-  // our set of tags, initialized in constructor
-  TaggedFile::TagSet _tagset;
-  zypp::Arch _system_arch;
-
-  typedef std::map <std::string, PackageDataProviderPtr> pkgmaptype;
-  pkgmaptype _pkgmap;
-
-  zypp::cache::CacheStore *_consumer;
-
-  std::map<std::string, data::RecordId> _idmap;
-
-  PackagesParser( zypp::cache::CacheStore *consumer )
-    : _consumer(consumer)
+  PackagesParser::PackagesParser( const data::RecordId &catalog_id, zypp::cache::CacheStore consumer )
+    : _consumer(consumer), _catalog_id(catalog_id)
   {
     ZYpp::Ptr z = getZYpp();
     _system_arch = z->architecture();
@@ -141,7 +96,7 @@ struct PackagesParser
     }
   }
 
-  void start( const Pathname &path )
+  void PackagesParser::start( const Pathname &path )
   {
     std::ifstream content_stream((path + "/content").asString().c_str());
     std::string buffer;
@@ -325,7 +280,7 @@ struct PackagesParser
     } // locales iterator
   }
 
-  void fromCache ( TagCacheRetrieval_Ptr pkgcache)
+  void PackagesParser::fromCache ( TagCacheRetrieval_Ptr pkgcache)
   {
     //---------------------------------------------------------------
     // PACKAGE
@@ -369,10 +324,10 @@ struct PackagesParser
     
     NVRA nvra( splitted[0], Edition( splitted[1], splitted[2] ), Arch(arch) );
     
-     // DEPENDENCIES
+    // DEPENDENCIES
     #define GET_TAG(tagname) \
     _tagset.getTagByIndex (tagname)
-     
+    
     data::Dependencies deps;
     
     std::list<std::string> pkglist;
@@ -391,11 +346,11 @@ struct PackagesParser
     //COLLECT_DEPS(SUPPLEMENTS);
     COLLECT_DEPS(RECOMMENDS);
 
-    data::RecordId pkgid = _consumer->appendResolvable( ResTraits<Package>::kind, nvra, deps );
+    data::RecordId pkgid = _consumer.appendResolvable( _catalog_id, ResTraits<Package>::kind, nvra, deps );
     _idmap[single] = pkgid;
   }
 
-  void collectDeps( zypp::Dep deptype, const std::list<std::string> &depstrlist, data::Dependencies &deps )
+  void PackagesParser::collectDeps( zypp::Dep deptype, const std::list<std::string> &depstrlist, data::Dependencies &deps )
   {
     for ( list<string>::const_iterator it = depstrlist.begin(); it != depstrlist.end(); ++it )
     {
@@ -407,12 +362,12 @@ struct PackagesParser
     }
   }
   
-  void fromPathLocale (const Pathname& path)
+  void PackagesParser::fromPathLocale (const Pathname& path)
   {
     
   }
 
-  void fromLocale ()
+  void PackagesParser::fromLocale ()
   {
     //---------------------------------------------------------------
     // PACKAGE.<locale>
@@ -465,25 +420,5 @@ struct PackagesParser
 #undef SET_CACHE
   }
 
-};
 
-int main(int argc, char **argv)
-{
-    try
-    {
-      ZYpp::Ptr z = getZYpp();
-      Pathname dbfile = Pathname(getenv("PWD")) + "data.db";
-      zypp::cache::CacheStore store(getenv("PWD"));
-
-      PackagesParser parser(&store);
-      Measure m;
-      parser.start(argv[1]);
-      m.elapsed();
-    }
-    catch ( const Exception &e )
-    {
-      cout << "ups! " << e.msg() << std::endl;
-    }
-    return 0;
-}
-
+} // ns zypp

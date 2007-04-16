@@ -12,7 +12,7 @@ TARGET_LINK_LIBRARIES(scansource  zypp )
 ADD_EXECUTABLE(susetags-downloader SUSETagsDownloader_tp.cc)
 TARGET_LINK_LIBRARIES(susetags-downloader  zypp )
 
-ADD_EXECUTABLE(cachestore CacheStore.cc)
+ADD_EXECUTABLE(cachestore CacheStore_tp.cc)
 TARGET_LINK_LIBRARIES(cachestore  zypp )
 TARGET_LINK_LIBRARIES(cachestore  zypp2 )
 
@@ -20,7 +20,7 @@ ADD_EXECUTABLE(cachequery CacheQuery_test.cc)
 TARGET_LINK_LIBRARIES(cachequery  zypp )
 TARGET_LINK_LIBRARIES(cachequery  zypp2 )
 
-ADD_EXECUTABLE(tagsparser SUSETagsParser.cc)
+ADD_EXECUTABLE(tagsparser SUSETagsParser.cc SUSETagsParser_tp.cc)
 TARGET_LINK_LIBRARIES(tagsparser  zypp )
 TARGET_LINK_LIBRARIES(tagsparser  zypp2 )
 
@@ -28,7 +28,7 @@ ADD_EXECUTABLE(testbed testbed.cc)
 TARGET_LINK_LIBRARIES(testbed  zypp )
 TARGET_LINK_LIBRARIES(testbed  zypp2 )
 
-ADD_EXECUTABLE(yum-downloader YUMDownloader.cc YUMDownloader_tp.cc)
+ADD_EXECUTABLE(yum-downloader YUMDownloader_tp.cc)
 TARGET_LINK_LIBRARIES(yum-downloader  zypp )
 TARGET_LINK_LIBRARIES(yum-downloader  zypp2 )
 

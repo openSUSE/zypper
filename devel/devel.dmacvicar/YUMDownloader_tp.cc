@@ -6,17 +6,17 @@
 #include <list>
 #include <set>
 
-#include <zypp/base/Logger.h>
-#include <zypp/base/String.h>
-#include <zypp/ZYpp.h>
-#include <zypp/ZYppFactory.h>
-#include <zypp/media/MediaAccess.h>
-#include <zypp/media/MediaManager.h>
-#include <zypp/MediaSetAccess.h>
-#include <zypp/source/SUSEMediaVerifier.h>
-#include <zypp/OnMediaLocation.h>
-#include <YUMDownloader.h>
-#include <zypp/Fetcher.h>
+#include "zypp/base/Logger.h"
+#include "zypp/base/String.h"
+#include "zypp/ZYpp.h"
+#include "zypp/ZYppFactory.h"
+#include "zypp/media/MediaAccess.h"
+#include "zypp/media/MediaManager.h"
+#include "zypp/MediaSetAccess.h"
+#include "zypp/source/SUSEMediaVerifier.h"
+#include "zypp/OnMediaLocation.h"
+#include "zypp/source/yum/YUMDownloader.h"
+#include "zypp/Fetcher.h"
 
 #include "zypp/Product.h"
 #include "zypp/Package.h"

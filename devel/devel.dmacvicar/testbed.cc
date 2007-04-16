@@ -10,7 +10,7 @@
 #include "zypp/Product.h"
 #include "zypp/detail/PackageImplIf.h"
 #include "zypp/Package.h"
-
+#include "zypp/SourceFactory.h"
 #include "zypp2/source/cached/CachedSourceImpl.h"
 #include "zypp/data/ResolvableData.h"
 
@@ -28,8 +28,12 @@ int main(int argc, char **argv)
     
       Pathname dbpath = Pathname(getenv("PWD"));
       
-      CachedSourceImpl source(dbpath);
-      //ResStore dbres = src.resolvables();
+      SourceImpl_Ptr sourceImpl(new CachedSourceImpl(dbpath));
+      SourceFactory factory;
+      Source_Ref source = factory.createFrom(sourceImpl);
+      ResStore dbres = source.resolvables();
+      
+      MIL << dbres.size() << " resolvables" << endl;
 
     }
     catch ( const Exception &e )
