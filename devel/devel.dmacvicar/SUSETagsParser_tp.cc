@@ -11,6 +11,11 @@ using namespace std;
 using namespace zypp;
 using namespace zypp::debug;
 
+bool progress_function( int p )
+{
+  MIL << p << "%" << endl;
+}
+
 int main(int argc, char **argv)
 {
     try
@@ -21,7 +26,7 @@ int main(int argc, char **argv)
       data::RecordId catalog_id = store.lookupOrAppendCatalog( Url("http://www.google.com"), "/");
       PackagesParser parser( catalog_id, store);
       Measure m;
-      parser.start(argv[1]);
+      parser.start(argv[1], &progress_function);
       m.elapsed();
     }
     catch ( const Exception &e )

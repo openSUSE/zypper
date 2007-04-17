@@ -1,5 +1,6 @@
 
 #include <sqlite3.h>
+#include <map>
 #include "zypp2/cache/sqlite3x/sqlite3x.hpp"
 
 #include "zypp/base/Measure.h"
@@ -30,8 +31,13 @@ typedef shared_ptr<sqlite3_command> sqlite3_command_ptr;
 struct CacheStore::Impl
 {
   Impl()
+  : name_cache_hits(0)
   {}
 
+ /**
+  * SQL statements
+  * (we precompile them
+  */
   sqlite3_connection con;
   
   sqlite3_command_ptr update_catalog_cmd;
@@ -58,6 +64,9 @@ struct CacheStore::Impl
   sqlite3_command_ptr append_versioned_dependency_cmd;
   
   sqlite3_command_ptr append_resolvable_cmd;
+  
+  map<string, data::RecordId> name_cache;
+  int name_cache_hits;
 };
 
 
@@ -119,6 +128,7 @@ CacheStore::CacheStore()
 CacheStore::~CacheStore()
 {
   _pimpl->con.executenonquery("COMMIT;");
+  MIL << "name cache hits: " << _pimpl->name_cache_hits << " | cache size: " << _pimpl->name_cache.size() << endl;
 }
 
 void CacheStore::consumePackage( const data::Package &package )
@@ -310,10 +320,17 @@ data::RecordId CacheStore::lookupOrAppendCatalog( const Url &url, const Pathname
 
 data::RecordId CacheStore::lookupOrAppendName( const std::string &name )
 {
+  if ( _pimpl->name_cache.find(name) != _pimpl->name_cache.end() )
+  {
+    _pimpl->name_cache_hits++;
+    return _pimpl->name_cache[name];
+  }
+  
   _pimpl->select_name_cmd->bind(":name", name);
   long long id = 0;
   try {
     id = _pimpl->select_name_cmd->executeint64();
+    _pimpl->name_cache[name] = id;
   }
   catch ( const sqlite3x::database_error &e )
   {

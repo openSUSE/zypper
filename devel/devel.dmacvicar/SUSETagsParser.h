@@ -5,7 +5,7 @@
 // #include <string>
 // #include <fstream>
 #include "zypp/base/PtrTypes.h"
-// #include "zypp/base/Measure.h"
+#include "zypp/base/Function.h"
 // #include "zypp/Arch.h"
 // #include "zypp/ZYppFactory.h"
 // #include "zypp/ZYpp.h"
@@ -25,6 +25,8 @@ namespace zypp
   
   struct PackagesParser
   {
+    typedef function<bool( int )> Progress;
+    
     // tag ids for the TaggedParser
     enum Tags {
       PACKAGE,  // name version release arch
@@ -57,7 +59,7 @@ namespace zypp
     };
   
     PackagesParser( const data::RecordId &catalog_id, zypp::cache::CacheStore consumer );
-    void start( const zypp::Pathname &path );
+    void start( const zypp::Pathname &path, Progress progress_fnc );
     void fromCache ( TagCacheRetrieval_Ptr pkgcache);
     void collectDeps( zypp::Dep deptype, const std::list<std::string> &depstrlist, data::Dependencies &deps );
     void fromPathLocale (const zypp::Pathname& path);

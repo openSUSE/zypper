@@ -66,6 +66,7 @@ namespace zypp
         */
         PatchesFileReader( const Pathname &patches_file, ProcessResource callback );
         
+        private:
         /**
         * Callback provided to the XML parser. Don't use it.
         */
