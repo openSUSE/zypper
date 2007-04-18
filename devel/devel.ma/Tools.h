@@ -8,6 +8,7 @@
 #include <set>
 
 #include "Printing.h"
+#include "FakePool.h"
 
 #include <zypp/base/Counter.h>
 #include <zypp/base/Measure.h>

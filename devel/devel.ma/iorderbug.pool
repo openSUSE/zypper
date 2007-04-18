@@ -22,5 +22,7 @@ readline = 2
 - fontcfg 2 1 i686
 #@ prerequires
 #bash
+filesystem()
+filesystem(sdfa)
 
 @ fin

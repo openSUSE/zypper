@@ -1,22 +1,17 @@
-#include <iostream>
-#include <fstream>
-#include <string>
-#include <list>
+#include "Tools.h"
 
-#include <zypp/base/Logger.h>
-#include <zypp/base/LogTools.h>
-#include <zypp/PackageKeyword.h>
+#include "zypp/base/Sysconfig.h"
 
 using std::endl;
 using namespace zypp;
+namespace sysconfig = base::sysconfig;
 
 ///////////////////////////////////////////////////////////////////
-namespace parse
+namespace zypp
 { /////////////////////////////////////////////////////////////////
 
-
   /////////////////////////////////////////////////////////////////
-} // namespace parse
+} // namespace zypp
 ///////////////////////////////////////////////////////////////////
 
 
@@ -29,15 +24,13 @@ int main( int argc, char * argv[] )
 {
   DBG << "===[START]==========================================" << endl;
 
-  const char * _l[] = { "a", "b", "c", "a", "b", "c" };
-  std::list<std::string> l( _l, _l+(sizeof(_l)/sizeof(*_l)) );
-  DBG << l << endl;
+  Capability f( CapFactory().parse( Resolvable::Kind( "package" ), "filesystem(foo)" ) );
+  Capability e( CapFactory().filesystemEvalCap() );
 
-  std::list<PackageKeyword> k( l.begin(), l.end() );
-  DBG << k << endl;
-
-  dumpRange( MIL, PackageKeyword::allBegin(), PackageKeyword::allEnd() );
-
+  MIL << f << endl;
+  MIL << e << endl;
+  MIL << f.matches( e ) << endl;
+  MIL << e.matches( f ) << endl;
 
   DBG << "===[END]============================================" << endl;
   zypp::base::LogControl::instance().logNothing();
