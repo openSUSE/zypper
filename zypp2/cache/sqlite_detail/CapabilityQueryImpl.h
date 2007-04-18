@@ -35,19 +35,16 @@ namespace zypp
     class CapabilityQuery::Impl
     {
       public:
-      Impl( DatabaseContext_Ptr p_context, const data::RecordId &resolvable_id  );
+      Impl( DatabaseContext_Ptr p_context );
       ~Impl();
       
       DatabaseContext_Ptr context;
-      sqlite3x::sqlite3_reader_ptr _versioned_reader;
       sqlite3x::sqlite3_reader_ptr _named_reader;
       sqlite3x::sqlite3_reader_ptr _file_reader;
       data::RecordId _resolvable_id;
-      bool _vercap_read;
       bool _namedcap_read;
       bool _filecap_read;
       
-      bool _vercap_done;
       bool _namedcap_done;
       bool _filecap_done;
     };

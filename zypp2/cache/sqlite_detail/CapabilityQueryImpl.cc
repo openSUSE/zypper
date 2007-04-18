@@ -26,10 +26,10 @@ namespace zypp { namespace cache {
 // CAPABILITY QUERY                                         //
 //////////////////////////////////////////////////////////////
 
-CapabilityQuery::Impl::Impl( DatabaseContext_Ptr p_context, const data::RecordId &resolvable_id  )
-  : context(p_context), _resolvable_id(resolvable_id)
-    , _vercap_read(false), _filecap_read(false)
-    , _vercap_done(false), _filecap_done(false)
+CapabilityQuery::Impl::Impl( DatabaseContext_Ptr p_context )
+  : context(p_context)
+    , _namedcap_read(false), _filecap_read(false)
+    , _namedcap_done(false), _filecap_done(false)
 {}
 
 CapabilityQuery::Impl::~Impl()

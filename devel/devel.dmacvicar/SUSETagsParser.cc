@@ -73,7 +73,7 @@ private:
   Pathname _descr_dir;
 };
 
-PackagesParser::PackagesParser( const data::RecordId &catalog_id, zypp::cache::CacheStore consumer )
+PackagesParser::PackagesParser( const data::RecordId &catalog_id, zypp::cache::CacheStore &consumer )
     : _consumer(consumer), _catalog_id(catalog_id)
 {
   ZYpp::Ptr z = getZYpp();

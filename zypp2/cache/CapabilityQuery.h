@@ -54,9 +54,19 @@ namespace zypp
     struct CapabilityQuery
     {
     public:
-      class Result
+      struct Result
       {
-        data::RecordId id;
+        Result( const data::RecordId &p_resolvable_id,
+            //    const data::RecordId &p_id,
+                const zypp::Dep &p_dep,
+                capability::CapabilityImpl::Ptr p_cap )
+        : resolvable_id(p_resolvable_id),
+          //id(p_id),
+          dep(p_dep),
+          cap(p_cap)
+        {}
+        data::RecordId resolvable_id;
+        //data::RecordId id;
         zypp::Dep dep;
         capability::CapabilityImpl::Ptr cap;
       };
@@ -75,7 +85,7 @@ namespace zypp
       * Return a \ref CapabilityImpl::Ptr
       * from the current result.
       */
-      std::pair<zypp::Dep, capability::CapabilityImpl::Ptr> value();
+      Result value();
       
       /** Implementation. */
       class Impl;

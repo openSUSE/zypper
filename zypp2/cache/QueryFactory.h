@@ -42,7 +42,7 @@ namespace zypp
       QueryFactory( Impl * );
       QueryFactory( const Pathname &dbdir );
       ~QueryFactory();
-      CapabilityQuery createCapabilityQuery( const data::RecordId &id  );
+      CapabilityQuery createCapabilityQuery();
     private:
       /** Pointer to implementation. */
       RW_pointer<Impl> _pimpl;

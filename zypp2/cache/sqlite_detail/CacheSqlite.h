@@ -18,9 +18,8 @@ namespace zypp { namespace cache {
 struct DatabaseContext
 {
   sqlite3x::sqlite3_connection_ptr con;
-  sqlite3x::sqlite3_command_ptr select_versionedcap_cmd;
-  sqlite3x::sqlite3_command_ptr select_namedcap_cmd;
-  sqlite3x::sqlite3_command_ptr select_filecap_cmd;
+  sqlite3x::sqlite3_command_ptr select_named_cmd;
+  sqlite3x::sqlite3_command_ptr select_file_cmd;
   Pathname dbdir;
 };
 

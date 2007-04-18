@@ -69,9 +69,8 @@ void QueryFactory::Impl::initCommands()
   try
   {
     // precompile statements
-    context->select_versionedcap_cmd.reset( new sqlite3_command( *context->con, "select c.refers_kind, n.name, v.version, v.release, v.epoch, v.relation, c.dependency_type from names n, capabilities c, named_capabilities v where v.name_id=n.id and c.id=v.dependency_id and c.resolvable_id=:rid;"));
-    context->select_namedcap_cmd.reset( new sqlite3_command( *context->con, "select c.refers_kind, n.name, c.dependency_type from names n, capabilities c, named_capabilities nc where nc.name_id=n.id and c.id=nc.dependency_id and c.resolvable_id=:rid;"));
-    context->select_filecap_cmd.reset( new sqlite3_command( *context->con, "select c.refers_kind, dn.name, fn.name, c.dependency_type from file_names fn, dir_names dn, capabilities c, file_capabilities fc, files f  where f.id=fc.file_id and f.dir_name_id=dn.id and f.file_name_id=fn.id and c.id=fc.dependency_id and c.resolvable_id=:rid;"));
+    context->select_named_cmd.reset( new sqlite3_command( *context->con, "select c.refers_kind, n.name, v.version, v.release, v.epoch, v.relation, c.dependency_type, c.resolvable_id from names n, capabilities c, named_capabilities v where v.name_id=n.id and c.id=v.dependency_id"));
+    context->select_file_cmd.reset( new sqlite3_command( *context->con, "select c.refers_kind, dn.name, fn.name, c.dependency_type, c.resolvable_id from file_names fn, dir_names dn, capabilities c, file_capabilities fc, files f  where f.id=fc.file_id and f.dir_name_id=dn.id and f.file_name_id=fn.id and c.id=fc.dependency_id"));
     
     // disable autocommit
     context->con->executenonquery("PRAGMA cache_size=8000;");

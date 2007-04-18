@@ -45,8 +45,8 @@ int main(int argc, char **argv)
       //zypp::cache::CacheInitializer init( "/", dbfile );
       //t.tick("init sqlite database");
       int i = 1;
-      for ( ; i < 19000; i++ ) {
-        zypp::cache::CapabilityQuery capquery = query.createCapabilityQuery( i );
+      //for ( ; i < 19000; i++ ) {
+        zypp::cache::CapabilityQuery capquery = query.createCapabilityQuery( );
         //cout << capquery.value() << endl;
         //cout << 2 << endl;
         while ( capquery.read() )
@@ -54,7 +54,7 @@ int main(int argc, char **argv)
           //cout << 3 << endl;
           //cout << capquery.value() << endl;
         }
-      }
+      //}
     }
     catch ( const Exception &e )
     {

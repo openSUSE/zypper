@@ -319,14 +319,23 @@ CREATE INDEX capability_resolvable ON capabilities (resolvable_id);
 
 CREATE TABLE named_capabilities (
    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL 
-  , dependency_id INTEGER REFERENCES capabilities (id)
+--  , dependency_id INTEGER REFERENCES capabilities (id)
   , name_id INTEGER REFERENCES names(id)
   , version TEXT
   , release TEXT
   , epoch INTEGER
   , relation INTEGER
 );
-CREATE INDEX named_capabilities_dependency_id ON named_capabilities (dependency_id);
+--CREATE INDEX named_capabilities_dependency_id ON named_capabilities (dependency_id);
+CREATE INDEX named_capabilities_attributes ON named_capabilities(name_id, version, release, epoch, release);
+
+CREATE TABLE named_capabilities_capabilities (
+   capability_id INTEGER REFERENCES capabilities (id)
+  , named_capability_id  INTEGER REFERENCES named_capabilities(id)
+  , PRIMARY KEY(capability_id, named_capability_id)
+);
+CREATE INDEX named_capabilities_capabilities_capability_id ON named_capabilities_capabilities(capability_id);
+CREATE INDEX named_capabilities_capabilities_named_capability_id ON named_capabilities_capabilities(named_capability_id);
 
 CREATE TABLE file_capabilities (
    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL 

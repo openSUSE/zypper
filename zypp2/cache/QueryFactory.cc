@@ -42,9 +42,9 @@ QueryFactory::QueryFactory( Impl *impl )
 {
 }
 
-CapabilityQuery QueryFactory::createCapabilityQuery( const data::RecordId &resolvable_id  )
+CapabilityQuery QueryFactory::createCapabilityQuery()
 {
-  return CapabilityQuery( new CapabilityQuery::Impl( _pimpl->context, resolvable_id) );
+  return CapabilityQuery( new CapabilityQuery::Impl( _pimpl->context ) );
 }
 
 QueryFactory::~QueryFactory()

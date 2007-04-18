@@ -240,6 +240,10 @@ namespace zypp
        */
       data::RecordId appendDependencyEntry( const data::RecordId &, 
                                             zypp::Dep, const Resolvable::Kind & );
+      
+      data::RecordId lookupOrAppendNamedDependencyEntry( const data::RecordId name_id,
+                                                    const Edition &edition,
+                                                    const zypp::Rel &rel );
     private:
       /** Implementation. */
       class Impl;

@@ -58,7 +58,7 @@ namespace zypp
       NUM_TAGS
     };
   
-    PackagesParser( const data::RecordId &catalog_id, zypp::cache::CacheStore consumer );
+    PackagesParser( const data::RecordId &catalog_id, zypp::cache::CacheStore &consumer );
     void start( const zypp::Pathname &path, Progress progress_fnc );
     void fromCache ( TagCacheRetrieval_Ptr pkgcache);
     void collectDeps( zypp::Dep deptype, const std::list<std::string> &depstrlist, data::Dependencies &deps );
@@ -73,7 +73,7 @@ namespace zypp
     zypp::Arch _system_arch;
     typedef std::map <std::string, PackageDataProviderPtr> pkgmaptype;
     pkgmaptype _pkgmap;
-    zypp::cache::CacheStore _consumer;
+    zypp::cache::CacheStore &_consumer;
     std::map<std::string, data::RecordId> _idmap;
     data::RecordId _catalog_id;
   };
