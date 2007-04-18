@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Wed Apr 18 14:56:17 CEST 2007 - ma@suse.de
+
+- Support filesystem dependencies to add needed filesystem RPMs
+  automatically (Fate 301966).
+- revision 5404
+- version 3.2.0
+
+-------------------------------------------------------------------
 Mon Apr 16 11:23:15 CEST 2007 - jkupec@suse.cz
 
 - avoiding attaching media where not needed (#263207)
