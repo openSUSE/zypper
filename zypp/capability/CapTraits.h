@@ -38,6 +38,7 @@ namespace zypp
     class SplitCap;
     class HalCap;
     class ModaliasCap;
+    class FilesystemCap;
     class OrCap;
     class ConditionalCap;
 

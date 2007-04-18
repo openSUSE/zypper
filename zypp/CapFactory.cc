@@ -148,7 +148,7 @@ namespace zypp
   */
   struct CapFactory::Impl
   {
- 
+
   };
   ///////////////////////////////////////////////////////////////////
 
@@ -191,7 +191,7 @@ namespace zypp
     ZYPP_RETHROW( excpt );
     return Capability(); // not reached
   }
-  
+
   ///////////////////////////////////////////////////////////////////
   //
   //	METHOD NAME : CapFactory::parse
@@ -278,6 +278,22 @@ namespace zypp
       ZYPP_RETHROW( excpt );
       return Capability(); // not reached
     }
+
+  ///////////////////////////////////////////////////////////////////
+  //
+  //	METHOD NAME : CapFactory::filesystemEvalCap
+  //	METHOD TYPE : Capability
+  //
+  Capability CapFactory::filesystemEvalCap() const
+  try
+  {
+    return Capability( usetInsert( ::zypp::capability::buildFilesystem( Resolvable::Kind(), "filesystem()" ) ) );
+  }
+  catch ( Exception & excpt )
+  {
+    ZYPP_RETHROW( excpt );
+    return Capability(); // not reached
+  }
 
   ///////////////////////////////////////////////////////////////////
   //

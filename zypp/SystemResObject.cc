@@ -51,6 +51,7 @@ namespace zypp
         NVRAD dataCollect( "system" );
         dataCollect[Dep::PROVIDES].insert( CapFactory().halEvalCap() );
         dataCollect[Dep::PROVIDES].insert( CapFactory().modaliasEvalCap() );
+        dataCollect[Dep::PROVIDES].insert( CapFactory().filesystemEvalCap() );
 
         detail::ResImplTraits<detail::SystemResObjectImplIf>::Ptr sysImpl;
         _ptr = detail::makeResolvableAndImpl( dataCollect, sysImpl );

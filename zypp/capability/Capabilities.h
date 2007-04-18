@@ -21,6 +21,8 @@
 #include "zypp/capability/SplitCap.h"
 #include "zypp/capability/HalCap.h"
 #include "zypp/capability/ModaliasCap.h"
+#include "zypp/capability/FilesystemCap.h"
+
 //#include "zypp/capability/OrCap.h"
 //#include "zypp/capability/ConditionalCap.h"
 

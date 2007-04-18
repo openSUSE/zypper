@@ -92,7 +92,7 @@ namespace zypp
       ZYPP_THROW( Exception("Unknow Operator NONE is not allowed in Capability") );
       return false; // not reached
     }
-    
+
     bool isFileSpec( const std::string & name_r )
     {
       return *name_r.c_str() == '/';
@@ -111,6 +111,11 @@ namespace zypp
     bool isModaliasSpec( const std::string & name_r )
     {
       return name_r.substr(0,9) == "modalias(";
+    }
+
+    bool isFilesystemSpec( const std::string & name_r )
+    {
+      return name_r.substr(0,11) == "filesystem(";
     }
 
     CapabilityImpl::Ptr buildFile( const Resolvable::Kind & refers_r,
@@ -144,6 +149,10 @@ namespace zypp
       if ( isFileSpec( name_r ) )
       {
         return new capability::FileCap( refers_r, name_r );
+      }
+      if ( isFilesystemSpec( name_r ) )
+      {
+	return buildFilesystem( refers_r, name_r );
       }
 
       //split:   name:/absolute/path
@@ -224,9 +233,31 @@ namespace zypp
       return NULL; // make gcc happy
     }
 
-  CapabilityImpl::Ptr parse( const Resolvable::Kind & refers_r,
-				const std::string & strval_r )
+    /******************************************************************
+    **
+    **	FUNCTION NAME : buildFilesystem
+    **	FUNCTION TYPE : CapabilityImpl::Ptr
+    */
+    CapabilityImpl::Ptr buildFilesystem( const Resolvable::Kind & refers_r,
+				       const std::string & name_r )
+    {
+      //split:   filesystem(name) [op string]
+      static const str::regex  rx( "filesystem\\(([^)]*)\\)" );
+      str::smatch what;
+      if( str::regex_match( name_r.begin(), name_r.end(), what, rx ) )
+      {
+	// Filesystem always refers to 'System' kind of Resolvable
+	return new capability::FilesystemCap( ResTraits<SystemResObject>::kind,
+					      what[1].str() );
+      }
+      // otherwise
+      ZYPP_THROW( Exception("Unsupported kind of Filesystem Capability'" + name_r + "'") );
+      return NULL; // make gcc happy
+    }
 
+
+    CapabilityImpl::Ptr parse( const Resolvable::Kind & refers_r,
+			       const std::string & strval_r )
   try
     {
       if ( isHalSpec( strval_r ) )
@@ -236,6 +267,10 @@ namespace zypp
       if ( isModaliasSpec( strval_r ) )
         {
           return buildModalias( refers_r, strval_r );
+        }
+      if ( isFilesystemSpec( strval_r ) )
+        {
+          return buildFilesystem( refers_r, strval_r );
         }
       if ( isFileSpec( strval_r ) )
         {
@@ -287,7 +322,7 @@ namespace zypp
     {
       if ( isHalSpec( name_r ) )
       {
-        return buildHal( refers_r, name_r, Rel(op_r), edition_r ); 
+        return buildHal( refers_r, name_r, Rel(op_r), edition_r );
       }
       if ( isModaliasSpec( name_r ) )
 	{
@@ -308,9 +343,9 @@ namespace zypp
   //	METHOD TYPE : Capability
   //
   CapabilityImpl::Ptr parse( const Resolvable::Kind & refers_r,
-				const std::string & name_r,
-				Rel op_r,
-				const Edition & edition_r )
+			     const std::string & name_r,
+			     Rel op_r,
+			     const Edition & edition_r )
   try
   {
       if ( isHalSpec( name_r ) )
@@ -328,7 +363,7 @@ namespace zypp
       ZYPP_RETHROW( excpt );
       return NULL; // not reached
   }
-    
+
   ///////////////////////////////////////////////////////////////////
 
     /////////////////////////////////////////////////////////////////

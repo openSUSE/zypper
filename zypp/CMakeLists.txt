@@ -235,6 +235,7 @@ SET( zypp_base_HEADERS
   base/Sysconfig.h
   base/UniqueString.h
   base/Unit.h
+  base/WatchFile.h
 )
 
 INSTALL(  FILES
@@ -248,6 +249,7 @@ SET( zypp_capability_SRCS
   capability/FileCap.cc
   capability/HalCap.cc
   capability/ModaliasCap.cc
+  capability/FilesystemCap.cc
   capability/NamedCap.cc
   capability/NullCap.cc
   capability/SplitCap.cc
@@ -262,6 +264,7 @@ SET( zypp_capability_HEADERS
   capability/FileCap.h
   capability/HalCap.h
   capability/ModaliasCap.h
+  capability/FilesystemCap.h
   capability/NamedCap.h
   capability/NullCap.h
   capability/OrCap.h

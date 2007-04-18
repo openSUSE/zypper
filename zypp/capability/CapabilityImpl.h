@@ -27,12 +27,41 @@ namespace zypp
   { /////////////////////////////////////////////////////////////////
     DEFINE_PTR_TYPE(CapabilityImpl)
 
-        
+
     ///////////////////////////////////////////////////////////////////
     //
     //	CLASS NAME : CapabilityImpl
     //
     /** Abstract base for Capability implementations.
+     *
+     * Example: Adding a new kind of capability: FilesystemCap
+     * \code
+     * 1) Create the implementataion files
+     *       zypp/capability/FilesystemCap.h
+     *       zypp/capability/FilesystemCap.cc
+     *    for
+     *       class FilesystemCap : public CapabilityImpl
+     *
+     * 2) Add include in zypp/capability/Capabilities.h
+     *       #include "zypp/capability/FilesystemCap.h"
+     *
+     * 3) Add forward declaration in zypp/capability/CapTraits.h
+     *       class FilesystemCap;
+     *
+     * 4) Define the capabilities kind in zypp/capability/CapTraits.cc
+     *       template<>
+     *       const CapabilityTraits::KindType CapTraits<FilesystemCap> ::kind( "FilesystemCap" );
+     *
+     * 5) If needed, define the EvalCap in zypp/CapFactory.h
+     *       Capability filesystemEvalCap() const;
+     *    What's this?
+     *    Some capabilities are not evaluated by comparing 2 capabilities, but represent a query
+     *    for some system property: 'filesystem(xfs)' -> 'xfs is listed in /etc/sysconfig/stoage'.
+     *    The query is performed iff the capability is compared to a special EvalCap, which is usg.
+     *    provided by a special SystemResolvable>
+     *       <System> : provides    : filesystem()    // the filesystemEvalCap
+     *       <Package>: supplements : filesystem(xfs) // a package that supplements xfs filesystem
+     * \endcode
     */
     class CapabilityImpl : public base::ReferenceCounted, private base::NonCopyable
     {
@@ -129,7 +158,7 @@ namespace zypp
       virtual bool capImplOrderLess( const constPtr & rhs ) const;
     };
     ///////////////////////////////////////////////////////////////////
-    
+
     /** Check whether \a op_r and \a edition_r make a valid edition spec.
      *
      * Rel::NONE is not usefull thus forbidden. Rel::ANY can be ignored,
@@ -140,22 +169,31 @@ namespace zypp
      * is not Rel::ANY.
     */
     bool isEditionSpec( Rel op_r, const Edition & edition_r );
-    
+
     /** Test for a FileCap. \a name_r starts with \c "/". */
     bool isFileSpec( const std::string & name_r );
-    
+
     /** Test for a SplitCap. \a name_r constains \c ":/". */
     bool isSplitSpec( const std::string & name_r );
-    
+
     /** Test for a HalCap. \a name_r starts with  "hal(". */
     bool isHalSpec( const std::string & name_r );
-    
-        /** Test for a ModaliasCap. \a name_r starts with  "modalias(". */
+
+    /** Test for a ModaliasCap. \a name_r starts with  "modalias(". */
     bool isModaliasSpec( const std::string & name_r );
-    
+
+    /** Test for a FilesystemCap. \a name_r starts with  "filesystem(". */
+    bool isFilesystemSpec( const std::string & name_r );
+
+    /** Try to build a file cap from \a name_r .
+     *
+     * The CapabilityImpl is built here and inserted into _uset.
+     * The final Capability must be created by CapFactory, as it
+     * is a friend of Capability. Here we can't access the ctor.
+     */
     CapabilityImpl::Ptr buildFile( const Resolvable::Kind & refers_r,
-                                          const std::string & name_r );
-    
+				   const std::string & name_r );
+
     /** Try to build a non versioned cap from \a name_r .
      *
      * The CapabilityImpl is built here and inserted into _uset.
@@ -163,8 +201,8 @@ namespace zypp
      * is a friend of Capability. Here we can't access the ctor.
     */
     CapabilityImpl::Ptr buildNamed( const Resolvable::Kind & refers_r,
-				           const std::string & name_r );
-    
+				    const std::string & name_r );
+
     /** Try to build a versioned cap from \a name_r .
      *
      * The CapabilityImpl is built here and inserted into _uset.
@@ -174,10 +212,10 @@ namespace zypp
      * \todo Quick check for name not being filename or split.
     */
     CapabilityImpl::Ptr buildVersioned( const Resolvable::Kind & refers_r,
-				               const std::string & name_r,
-				               Rel op_r,
-				               const Edition & edition_r );
-    
+					const std::string & name_r,
+					Rel op_r,
+					const Edition & edition_r );
+
     /** Try to build a hal cap from \a name_r .
      *
      * The CapabilityImpl is built here
@@ -187,10 +225,10 @@ namespace zypp
      * \todo Fix incaccuracy.
     */
     CapabilityImpl::Ptr buildHal( const Resolvable::Kind & refers_r,
-                                         const std::string & name_r,
-                                         Rel op_r = Rel::ANY,
-                                         const std::string & value_r = std::string() );
-    
+				  const std::string & name_r,
+				  Rel op_r = Rel::ANY,
+				  const std::string & value_r = std::string() );
+
     /** Try to build a modalias cap from \a name_r .
      *
      * The CapabilityImpl is built here
@@ -200,22 +238,36 @@ namespace zypp
      * \todo Fix incaccuracy.
     */
     CapabilityImpl::Ptr buildModalias( const Resolvable::Kind & refers_r,
-                                              const std::string & name_r,
-                                              Rel op_r = Rel::ANY,
-                                              const std::string & value_r = std::string() );
-    
-    
-     CapabilityImpl::Ptr parse( const Resolvable::Kind & refers_r,
-				const std::string & strval_r );
-     CapabilityImpl::Ptr parse( const Resolvable::Kind & refers_r,
-				const std::string & name_r,
-				const std::string & op_r,
-				const std::string & edition_r );
-     CapabilityImpl::Ptr parse( const Resolvable::Kind & refers_r,
-				const std::string & name_r,
-				Rel op_r,
-				const Edition & edition_r );
-    
+				       const std::string & name_r,
+				       Rel op_r = Rel::ANY,
+				       const std::string & value_r = std::string() );
+
+    /** Try to build a filesystem cap from \a name_r .
+     *
+     * The CapabilityImpl is built here
+     * The final Capability must be created by CapFactory, as it
+     * is a friend of Capability. Here we can't access the ctor.
+     *
+     * \todo Fix incaccuracy.
+    */
+    CapabilityImpl::Ptr buildFilesystem( const Resolvable::Kind & refers_r,
+					 const std::string & name_r );
+
+    ///////////////////////////////////////////////////////////////////
+
+    CapabilityImpl::Ptr parse( const Resolvable::Kind & refers_r,
+			       const std::string & strval_r );
+
+    CapabilityImpl::Ptr parse( const Resolvable::Kind & refers_r,
+			       const std::string & name_r,
+			       const std::string & op_r,
+			       const std::string & edition_r );
+
+    CapabilityImpl::Ptr parse( const Resolvable::Kind & refers_r,
+			       const std::string & name_r,
+			       Rel op_r,
+			       const Edition & edition_r );
+
     /** Test whether a CapabilityImpl is of a certain Kind.
      * \code
      * isKind<FileCap>(cap);
