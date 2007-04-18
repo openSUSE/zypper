@@ -20,14 +20,10 @@ Version:        @VERSION@
 Release:        0
 Source:         @PACKAGE@-@VERSION@.tar.bz2
 Prefix:         /usr
-Provides:       yast2-packagemanager 
+Provides:       yast2-packagemanager
 Obsoletes:      yast2-packagemanager
 BuildRequires:  cmake
-%if %suse_version > 1010
-BuildRequires:  sqlite-zmd sqlite-zmd-devel
-%else
 BuildRequires:  sqlite sqlite-devel
-%endif
 BuildRequires:  boost-devel curl-devel dejagnu doxygen gcc-c++ graphviz hal-devel libxml2-devel rpm-devel gettext-devel
 BuildRequires:	update-desktop-files
 
