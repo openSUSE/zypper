@@ -1,5 +1,5 @@
 # - Find GNU gettext tools
-# This module looks for the GNU gettext tools. This module defines the 
+# This module looks for the GNU gettext tools. This module defines the
 # following values:
 #  GETTEXT_MSGMERGE_EXECUTABLE: the full path to the msgmerge tool.
 #  GETTEXT_MSGFMT_EXECUTABLE: the full path to the msgfmt tool.
@@ -7,8 +7,8 @@
 #
 # Additionally it provides the following macros:
 # GETTEXT_CREATE_TRANSLATIONS ( outputFile [ALL] file1 ... fileN )
-#    This will create a target "translations" which will convert the 
-#    given input po files into the binary output mo file. If the 
+#    This will create a target "translations" which will convert the
+#    given input po files into the binary output mo file. If the
 #    ALL option is used, the translations will also be created when
 #    building the default target.
 
@@ -36,14 +36,15 @@ MACRO(GETTEXT_CREATE_TRANSLATIONS _potFile _firstPoFile)
       GET_FILENAME_COMPONENT(_lang ${_absFile} NAME_WE)
       SET(_gmoFile ${CMAKE_CURRENT_BINARY_DIR}/${_lang}.gmo)
 
-      ADD_CUSTOM_COMMAND( 
-         OUTPUT ${_gmoFile} 
+      ADD_CUSTOM_COMMAND(
+         OUTPUT ${_gmoFile}
 #COMMAND ${GETTEXT_MSGMERGE_EXECUTABLE} --quiet --update --backup=none -s ${_absFile} ${_absPotFile}
          COMMAND ${GETTEXT_MSGFMT_EXECUTABLE} -o ${_gmoFile} ${_absFile}
-         DEPENDS ${_absPotFile} ${_absFile} 
+#DEPENDS ${_absPotFile} ${_absFile}
+         DEPENDS ${_absFile}
       )
 
-      INSTALL(FILES ${_gmoFile} DESTINATION share/locale/${_lang}/LC_MESSAGES RENAME ${_potBasename}.mo) 
+      INSTALL(FILES ${_gmoFile} DESTINATION share/locale/${_lang}/LC_MESSAGES RENAME ${_potBasename}.mo)
       SET(_gmoFiles ${_gmoFiles} ${_gmoFile})
 
    ENDFOREACH (_currentPoFile )
