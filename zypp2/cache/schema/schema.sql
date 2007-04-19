@@ -38,7 +38,7 @@ DROP TABLE IF EXISTS catalogs;
 DROP TABLE IF EXISTS capabilities;
 DROP INDEX IF EXISTS package_details_resolvable_id;
 DROP INDEX IF EXISTS capability_resolvable;
-DROP INDEX IF EXISTS named_capabilities_dependency_id;
+DROP INDEX IF EXISTS named_capabilities_capability_id;
 
 ------------------------------------------------
 -- version metadata, probably not needed, there
@@ -319,34 +319,26 @@ CREATE INDEX capability_resolvable ON capabilities (resolvable_id);
 
 CREATE TABLE named_capabilities (
    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL 
---  , dependency_id INTEGER REFERENCES capabilities (id)
+  , capability_id INTEGER REFERENCES capabilities (id)
   , name_id INTEGER REFERENCES names(id)
   , version TEXT
   , release TEXT
   , epoch INTEGER
   , relation INTEGER
 );
---CREATE INDEX named_capabilities_dependency_id ON named_capabilities (dependency_id);
-CREATE INDEX named_capabilities_attributes ON named_capabilities(name_id, version, release, epoch, release);
-
-CREATE TABLE named_capabilities_capabilities (
-   capability_id INTEGER REFERENCES capabilities (id)
-  , named_capability_id  INTEGER REFERENCES named_capabilities(id)
-  , PRIMARY KEY(capability_id, named_capability_id)
-);
-CREATE INDEX named_capabilities_capabilities_capability_id ON named_capabilities_capabilities(capability_id);
-CREATE INDEX named_capabilities_capabilities_named_capability_id ON named_capabilities_capabilities(named_capability_id);
+CREATE INDEX named_capabilities_capability_id ON named_capabilities (capability_id);
+CREATE INDEX named_capabilities_name ON named_capabilities(name_id);
 
 CREATE TABLE file_capabilities (
    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL 
-  , dependency_id INTEGER REFERENCES capabilities (id)
+  , capability_id INTEGER REFERENCES capabilities (id)
   , file_id INTEGER REFERENCES files(id)
 );
-CREATE INDEX file_capabilities_dependency_id ON file_capabilities (dependency_id);
+CREATE INDEX file_capabilities_capability_id ON file_capabilities (capability_id);
 
 CREATE TABLE split_capabilities (
    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL 
-  , dependency_id INTEGER REFERENCES capabilities (id)
+  , capability_id INTEGER REFERENCES capabilities (id)
   , name_id INTEGER REFERENCES names(id)
   , file_id INTEGER REFERENCES files(id)
 );

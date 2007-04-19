@@ -91,12 +91,11 @@ void CachedSourceImpl::createResolvables(Source_Ref source_r)
       arch = Arch(archstring);
 
       // Collect basic Resolvable data
-      NVRAD dataCollect( reader.getstring(1),
+      nvras[id] = NVRAD( reader.getstring(1),
                        Edition( reader.getstring(2), reader.getstring(3), reader.getint(4) ),
                        arch,
                        deps
                      );
-      nvras[id] = dataCollect;
     }
     
     MIL << "Done reading resolvables nvra" << endl;
@@ -133,8 +132,8 @@ void read_capabilities( sqlite3_connection &con, map<data::RecordId, NVRAD> &nvr
 //       
 //     }
 //   }
-  sqlite3_command select_named_cmd( con, "select c.refers_kind, n.name, v.version, v.release, v.epoch, v.relation, c.dependency_type, c.resolvable_id from  names n , named_capabilities v, named_capabilities_capabilities ncc, capabilities c where v.name_id=n.id and c.id=ncc.capability_id and ncc.named_capability_id=v.id;");
-  sqlite3_command select_file_cmd( con, "select c.refers_kind, dn.name, fn.name, c.dependency_type, c.resolvable_id from file_capabilities fc, capabilities c, files f, dir_names dn, file_names fn where f.id=fc.file_id and f.dir_name_id=dn.id and f.file_name_id=fn.id and c.id=fc.dependency_id;");
+  sqlite3_command select_named_cmd( con, "select c.refers_kind, n.name, v.version, v.release, v.epoch, v.relation, c.dependency_type, c.resolvable_id from  names n , named_capabilities v, capabilities c where v.name_id=n.id and c.id=v.capability_id ;");
+  sqlite3_command select_file_cmd( con, "select c.refers_kind, dn.name, fn.name, c.dependency_type, c.resolvable_id from file_capabilities fc, capabilities c, files f, dir_names dn, file_names fn where f.id=fc.file_id and f.dir_name_id=dn.id and f.file_name_id=fn.id and c.id=fc.capability_id;");
   
   {
     debug::Measure mnc("read named capabilities");
@@ -173,6 +172,8 @@ void read_capabilities( sqlite3_connection &con, map<data::RecordId, NVRAD> &nvr
       nvras[rid][deptype].insert( capfactory.fromImpl( capability::CapabilityImpl::Ptr(fcap) ) ); 
     }
   }
+  
+  MIL << nvras.size() << " capabilities" << endl;
 }
 
 
