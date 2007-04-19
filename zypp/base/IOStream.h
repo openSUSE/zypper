@@ -63,9 +63,9 @@ namespace zypp
 
       public:
 	/** Ctor taking a stream and reading the 1st line from it. */
-	EachLine( std::istream & str_r );
+	EachLine( std::istream & str_r, unsigned lineNo_r = 0 );
 
-	/** Evaluate class in a  boolean context. */
+	/** Evaluate class in a boolean context. */
 	using SafeBool::operator bool_type;
 
 	/** Whether \c this contains a valid line to consume. */
@@ -75,6 +75,10 @@ namespace zypp
 	/** Return the current line number. */
 	unsigned lineNo() const
 	{ return _lineNo; }
+
+	/** Set current line number. */
+	void setLineNo( unsigned lineNo_r )
+	{ _lineNo = lineNo_r; }
 
 	/** Access the current line. */
 	const std::string & operator*() const

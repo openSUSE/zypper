@@ -53,9 +53,9 @@ namespace zypp
     //	METHOD NAME : EachLine::EachLine
     //	METHOD TYPE : Ctor
     //
-    EachLine::EachLine( std::istream & str_r )
+    EachLine::EachLine( std::istream & str_r, unsigned lineNo_r )
       : _str( str_r )
-      , _lineNo( 0 )
+      , _lineNo( lineNo_r )
       , _valid( true )
     {
       next();

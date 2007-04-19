@@ -93,7 +93,7 @@ namespace zypp
     { return *_stream; }
 
     /** Allow implicit conversion to std::istream.*/
-    operator std::istream &()
+    operator std::istream &() const
     { return *_stream; }
 
     /** Name of the std::istream.
