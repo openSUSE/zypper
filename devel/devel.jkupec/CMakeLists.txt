@@ -1,0 +1,9 @@
+INCLUDE_DIRECTORIES( ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR} )
+
+ADD_DEFINITIONS(-DSRC_DIR=\\\"${CMAKE_CURRENT_SOURCE_DIR}\\\")
+
+#ADD_EXECUTABLE(sourcedownload sourcedownload.cc)
+#TARGET_LINK_LIBRARIES(sourcedownload zypp zypp2)
+
+ADD_EXECUTABLE( yumparsertest YUMParser_test.cc YUMParser.cc)
+TARGET_LINK_LIBRARIES(yumparsertest zypp zypp2)

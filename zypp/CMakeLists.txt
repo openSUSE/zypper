@@ -540,6 +540,7 @@ SET( zypp_parser_yum_SRCS
   parser/yum/YUMRepomdParser.cc
   parser/yum/RepomdFileReader.cc
   parser/yum/PatchesFileReader.cc
+  parser/yum/PrimaryFileReader.cc
 )
 
 SET( zypp_parser_yum_HEADERS
@@ -556,6 +557,7 @@ SET( zypp_parser_yum_HEADERS
   parser/yum/YUMRepomdParser.h
   parser/yum/RepomdFileReader.h
   parser/yum/PatchesFileReader.h
+  parser/yum/PrimaryFileReader.h
   parser/yum/schemanames.h
 )
 
