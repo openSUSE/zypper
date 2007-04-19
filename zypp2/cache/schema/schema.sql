@@ -309,36 +309,32 @@ CREATE TABLE patch_packages_baseversions (
 -- Capabilities
 ------------------------------------------------
 
-CREATE TABLE capabilities (
-    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL
+CREATE TABLE named_capabilities (
+   id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL 
   , resolvable_id INTEGER REFERENCES resolvables(id)
   , dependency_type INTEGER
   , refers_kind INTEGER
-);
-CREATE INDEX capability_resolvable ON capabilities (resolvable_id);
-
-CREATE TABLE named_capabilities (
-   id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL 
-  , capability_id INTEGER REFERENCES capabilities (id)
   , name_id INTEGER REFERENCES names(id)
   , version TEXT
   , release TEXT
   , epoch INTEGER
   , relation INTEGER
 );
-CREATE INDEX named_capabilities_capability_id ON named_capabilities (capability_id);
 CREATE INDEX named_capabilities_name ON named_capabilities(name_id);
 
 CREATE TABLE file_capabilities (
    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL 
-  , capability_id INTEGER REFERENCES capabilities (id)
+  , resolvable_id INTEGER REFERENCES resolvables(id)
+  , dependency_type INTEGER
+  , refers_kind INTEGER
   , file_id INTEGER REFERENCES files(id)
 );
-CREATE INDEX file_capabilities_capability_id ON file_capabilities (capability_id);
 
 CREATE TABLE split_capabilities (
    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL 
-  , capability_id INTEGER REFERENCES capabilities (id)
+  , resolvable_id INTEGER REFERENCES resolvables(id)
+  , dependency_type INTEGER
+  , refers_kind INTEGER
   , name_id INTEGER REFERENCES names(id)
   , file_id INTEGER REFERENCES files(id)
 );

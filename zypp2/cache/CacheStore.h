@@ -238,8 +238,8 @@ namespace zypp
        * the capabilities table for a specific capability
        * entry.
        */
-      data::RecordId appendDependencyEntry( const data::RecordId &, 
-                                            zypp::Dep, const Resolvable::Kind & );
+//       data::RecordId appendDependencyEntry( const data::RecordId &, 
+//                                             zypp::Dep, const Resolvable::Kind & );
       
     private:
       /** Implementation. */
