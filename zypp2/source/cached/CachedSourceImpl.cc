@@ -132,8 +132,8 @@ void read_capabilities( sqlite3_connection &con, map<data::RecordId, NVRAD> &nvr
 //       
 //     }
 //   }
-  sqlite3_command select_named_cmd( con, "select v.refers_kind, n.name, v.version, v.release, v.epoch, v.relation, v.dependency_type, v.resolvable_id from  names n , named_capabilities v where v.name_id=n.id;");
-  sqlite3_command select_file_cmd( con, "select fc.refers_kind, dn.name, fn.name, v.dependency_type, v.resolvable_id from file_capabilities fc, files f, dir_names dn, file_names fn where f.id=fc.file_id and f.dir_name_id=dn.id and f.file_name_id=fn.id;");
+  sqlite3_command select_named_cmd( con, "select v.refers_kind, n.name, v.version, v.release, v.epoch, v.relation, v.dependency_type, v.resolvable_id from named_capabilities v, names n where v.name_id=n.id;");
+  sqlite3_command select_file_cmd( con, "select fc.refers_kind, dn.name, fn.name, fc.dependency_type, fc.resolvable_id from file_capabilities fc, files f, dir_names dn, file_names fn where f.id=fc.file_id and f.dir_name_id=dn.id and f.file_name_id=fn.id;");
   
   {
     debug::Measure mnc("read named capabilities");
