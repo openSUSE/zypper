@@ -16,7 +16,7 @@ namespace zypp
 namespace data
 {
  
-  
+IMPL_PTR_TYPE(Resolvable);  
 IMPL_PTR_TYPE(ResObject);
 IMPL_PTR_TYPE(Script);
 IMPL_PTR_TYPE(Message);

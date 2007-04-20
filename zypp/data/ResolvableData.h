@@ -33,8 +33,11 @@ namespace zypp
 {
 namespace data
 {
+  
   typedef std::list< capability::CapabilityImpl::Ptr > DependencyList;
   typedef std::map< zypp::Dep, DependencyList> Dependencies;
+  
+  DEFINE_PTR_TYPE(Resolvable);
   
   class Resolvable : public base::ReferenceCounted, private base::NonCopyable
   {
@@ -49,34 +52,7 @@ namespace data
     Dependencies deps;
   };
   
-  struct ResObjectData
-  {
-      ResObjectData()
-        : source_media_nr(1), install_only(false)
-      {}
-      
-      TranslatedText summary;
-      TranslatedText description;
-      
-      std::string insnotify;
-      std::string delnotify;
-      
-      std::string license_to_confirm;
-      std::string vendor;
-      
-      ByteCount size;
-      ByteCount archive_size;
-      
-      std::string source;
-      
-      int source_media_nr;
-      
-      bool install_only;
-      
-      Date build_time;
-      Date install_time;
-  };
-  
+  DEFINE_PTR_TYPE(ResObject);
   
   class ResObject : public Resolvable
   {

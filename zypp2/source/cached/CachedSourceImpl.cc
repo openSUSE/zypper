@@ -85,11 +85,8 @@ void CachedSourceImpl::createResolvables(Source_Ref source_r)
       long long id = reader.getint64(0);
       Dependencies deps;
       
-      Arch arch;
-      string archstring = reader.getstring(5);
-      if (!archstring.empty())
-      arch = Arch(archstring);
-
+      Arch arch = db_arch2zypp_arch( static_cast<db::Arch>(reader.getint(5)));
+      
       // Collect basic Resolvable data
       nvras[id] = NVRAD( reader.getstring(1),
                        Edition( reader.getstring(2), reader.getstring(3), reader.getint(4) ),

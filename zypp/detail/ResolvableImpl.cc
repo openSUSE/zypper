@@ -115,6 +115,7 @@ namespace zypp
 
     void filterExtraProvides( const Dependencies & from, Dependencies & to )
     {
+      //return;
       CapSet provides;
       CapSet languages;
 
@@ -136,6 +137,7 @@ namespace zypp
 
     void filterExtraSupplements( const Dependencies & from, Dependencies & to )
     {
+      //return;
       CapSet supplements;
       CapSet dummy;
       to[Dep::SUPPLEMENTS].clear();

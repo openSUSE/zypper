@@ -9,7 +9,7 @@
 
 #include "zypp/base/Random.h"
 #include "zypp/base/Logger.h"
-#include "zypp/base/GzStream.h"
+
 #include "zypp/base/Measure.h"
 #include "zypp/capability/CapabilityImpl.h"
 #include "zypp/data/ResolvableData.h"
@@ -19,91 +19,18 @@
 #include "zypp/PathInfo.h"
 #include "zypp/TmpPath.h"
 
+#include "SimplePackagesParser.h"
+
 using namespace std;
 using namespace zypp;
 using namespace boost::unit_test;
 
-void read_dash( zypp::ifgzstream &ifs, const std::string &s, int &line )
-{
-  string buffer;
-  // get the "-"
-  getline(ifs, buffer);
-  line++;
-  if ( buffer != s )
-  {
-    ERR << "line : " << line << endl;
-    ZYPP_THROW(Exception("missing " + s ));
-  }
-}
-
-void read_deps( zypp::ifgzstream &ifs, data::DependencyList &list, int &line, const string &endchar )
-{
-  string buffer;
-  while ( ifs && !ifs.eof())
-  {
-    getline(ifs, buffer);
-    line++;
-    if ( buffer == endchar )
-      break;
-    try
-    {
-      capability::CapabilityImpl::Ptr cap = zypp::capability::parse( ResTraits<Package>::kind, buffer);
-      if (cap)
-        list.push_back(cap);
-    }
-    catch( const Exception  &e )
-    {
-      ERR << "line : " << line << endl;
-      ZYPP_THROW(Exception("bad capability line")); 
-    }    
-  }
-}
-
-struct MiniResolvable
-{
-  NVRA nvra;
-  data::Dependencies deps;
-};
-
 void cache_write_test(const string &dir)
 {
-  list<MiniResolvable> res_list;
-  std::string buffer;
   Pathname nvra_list = Pathname(dir) + "package-set.txt.gz";
+  list<MiniResolvable> res_list;
   
-  int line = 0;
-  zypp::ifgzstream nvra_stream(nvra_list.c_str());
-  MIL << "reading " << nvra_list << endl;
-  
-  if ( ! nvra_stream )
-    ZYPP_THROW(Exception("cant open data file " + nvra_list.asString()));
-  
-  while ( nvra_stream && !nvra_stream.eof())
-  {
-    MiniResolvable res;
-    getline(nvra_stream, buffer);
-    line++;
-    
-    if ( buffer.empty() )
-      break;
-    
-    std::vector<std::string> words;
-    if ( str::split( buffer, std::back_inserter(words) ) != 4 )
-    {
-      ERR << nvra_list << " : line : " << line << endl;
-      ZYPP_THROW(Exception("bad NVRA line"));
-    }
-    
-    res.nvra = NVRA(words[0], Edition(words[1], words[2]), Arch(words[3]));
-    // requires
-    read_dash( nvra_stream, "+r", line);
-    read_deps( nvra_stream, res.deps[Dep::REQUIRES], line, "-r");
-    read_dash( nvra_stream, "+p", line);
-    read_deps( nvra_stream, res.deps[Dep::PROVIDES], line, "-p");
-    
-    res_list.push_back(res);
-  }
-  //MIL << deps.size() << " capabilities read." << endl;
+  parse_mini_file( nvra_list, res_list );
   
   filesystem::TmpDir tmpdir;
   cache::CacheStore store(tmpdir.path());

@@ -38,9 +38,11 @@ namespace zypp
       * first parameter is the resolvable id.
       * second parameter is a \ref data::ResObjectData object with the resource
       */
-      typedef function<bool( const data::RecordId &, const data::ResObjectData & )> ProcessResolvable;
+      typedef function<bool( const data::RecordId &, 
+                             data::ResObject_Ptr )> ProcessResolvable;
       
-      ResolvableQuery( const Pathname &dbdir, ProcessResolvable fnc );
+      ResolvableQuery( const Pathname &dbdir,
+                       ProcessResolvable fnc );
       
       /**
       * Query by record id
