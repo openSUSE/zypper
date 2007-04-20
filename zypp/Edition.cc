@@ -202,9 +202,9 @@ namespace zypp
     /** return validated version/release or throw */
     static const std::string & validateVR( const std::string & vr_r )
     {
-      str::smatch what;
-      if( ! str::regex_match( vr_r.begin(), vr_r.end(), what, _rxVR ) )
+      if ( vr_r.find('-') != string::npos )
         ZYPP_THROW( Exception(string("Invalid version/release: ")+vr_r) );
+    
       return vr_r;
     }
 
@@ -212,12 +212,9 @@ namespace zypp
     std::string _version;
     std::string _release;
 
-    static const str::regex _rxVR;
     static const str::regex _rxEdition;
   };
   ///////////////////////////////////////////////////////////////////
-
-  const str::regex Edition::Impl::_rxVR( "([^-]*)" );
 
   const str::regex Edition::Impl::_rxEdition( "(([0-9]+):)?([^-]*)(-([^-]*))?" );
 
