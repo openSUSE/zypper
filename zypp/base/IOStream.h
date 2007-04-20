@@ -76,6 +76,9 @@ namespace zypp
 	unsigned lineNo() const
 	{ return _lineNo; }
 
+	std::streamoff lineStart() const
+	{ return _lineStart; };
+
 	/** Set current line number. */
 	void setLineNo( unsigned lineNo_r )
 	{ _lineNo = lineNo_r; }
@@ -102,9 +105,10 @@ namespace zypp
 
       private:
 	std::istream & _str;
-	std::string _line;
-	unsigned _lineNo;
-	bool _valid;
+	std::string    _line;
+	std::streamoff _lineStart;
+	unsigned       _lineNo;
+	bool           _valid;
     };
     ///////////////////////////////////////////////////////////////////
 

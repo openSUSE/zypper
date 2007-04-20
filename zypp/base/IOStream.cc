@@ -55,6 +55,7 @@ namespace zypp
     //
     EachLine::EachLine( std::istream & str_r, unsigned lineNo_r )
       : _str( str_r )
+      , _lineStart( -1 )
       , _lineNo( lineNo_r )
       , _valid( true )
     {
@@ -79,13 +80,14 @@ namespace zypp
 	return(_valid = false);
       }
 
+      _lineStart = _str.tellg();
       _line = iostr::getline( _str );
+      ++_lineNo;
       if ( _str.fail() || _str.bad() )
       {
 	_line.clear();
 	return(_valid = false);
       }
-      ++_lineNo;
       return(_valid = true);
     }
 
