@@ -1,1 +1,2 @@
 ADD_SUBDIRECTORY( yum )
+ADD_SUBDIRECTORY( inifile )
