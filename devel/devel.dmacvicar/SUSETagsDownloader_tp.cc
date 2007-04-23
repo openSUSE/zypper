@@ -29,6 +29,10 @@ using namespace source::susetags;
 
 int main(int argc, char **argv)
 {
+    if (argc < 3) {
+	cerr << "Usage: " << argv[0] << " <url> <destination>" << std::endl;
+        return 1;
+    }
     try
     {
       ZYpp::Ptr z = getZYpp();
