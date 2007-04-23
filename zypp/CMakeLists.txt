@@ -425,11 +425,11 @@ INSTALL(  FILES
 )
 
 SET( zypp_parser_inifile_SRCS
-  parser/inifile/ini_file.cpp
+  parser/inifile/iniparser.c
 )
 
 SET( zypp_parser_inifile_HEADERS
-  parser/inifile/ini_file.hpp
+  parser/inifile/iniparser.h
 )
 
 INSTALL(  FILES
