@@ -4,6 +4,9 @@
 #include "zypp/base/LogControl.h"
 #include "zypp/parser/yum/PrimaryFileReader.h"
 #include "YUMParser.h"
+#include "zypp/parser/ParserProgress.h"
+#include "zypp/base/Measure.h"
+
 
 
 #undef ZYPP_BASE_LOGGER_LOGGROUP
@@ -12,32 +15,47 @@
 using namespace std;
 using namespace zypp;
 using namespace zypp::parser::yum;
+using zypp::debug::Measure;
 
 bool progress_function(int p)
 {
-  MIL << p << "%" << endl;
+//  cout << "\r                                       " << flush;
+  cout << "\rParsing primary.xml.gz [" << p << "%]" << flush;
+//  MIL << p << "%" << endl;
 }
 
 int main(int argc, char **argv)
 {
   base::LogControl::instance().logfile("yumparsertest.log");
+  
+  if (argc < 2)
+  {
+    cout << "usage: yumparsertest path/to/yumsourcedir" << endl << endl;
+    return 1;
+  }
 
   try
   {
     ZYpp::Ptr z = getZYpp();
-//, bind( &YUMDownloader::patches_Callback, this, _1, _2));
 
-//    Pathname dbfile = Pathname(getenv("PWD")) + "data.db";
+    Measure open_catalog_timer("CacheStore: lookupOrAppendCatalog");
+
     cache::CacheStore store(getenv("PWD"));
-    data::RecordId catalog_id = store.lookupOrAppendCatalog( Url("http://www.google.com"), "/");
+    data::RecordId catalog_id = store.lookupOrAppendCatalog( Url("http://some.url"), "/");
+
+    open_catalog_timer.stop();
 
     MIL << "creating PrimaryFileParser" << endl;
-    parser::yum::YUMParser parser( catalog_id, store);
-    parser.start(argv[1], &progress_function);
+    parser::ParserProgress::Ptr progress;
+    progress.reset(new parser::ParserProgress(&progress_function));
+    Measure parse_primary_timer("primary.xml.gz parsing");
 
-/*
-      YUMDownloader downloader(Url(argv[1]), "/");
-      downloader.download(argv[2]);*/
+    parser::yum::YUMParser parser( catalog_id, store);
+    parser.start(argv[1], progress);
+
+    parse_primary_timer.stop();
+
+    cout << endl;
   }
   catch ( const Exception &e )
   {
