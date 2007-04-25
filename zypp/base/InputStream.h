@@ -15,6 +15,7 @@
 #include <iosfwd>
 
 #include "zypp/base/PtrTypes.h"
+#include "zypp/base/DefaultIntegral.h"
 #include "zypp/Pathname.h"
 
 ///////////////////////////////////////////////////////////////////
@@ -110,10 +111,27 @@ namespace zypp
     const Pathname & path() const
     { return _path; }
 
+    /** Size of the input stream (might be estimated).
+     * If constructed from a file, the file size. Otherwise \c -1.
+     * See \ref setSize;
+    */
+    std::streamoff size() const
+    { return _size; }
+
+    /** Set the (estimated) size of the input stream.
+     * You may set it to whatever vaule is appropriate. E.g.
+     * <tt>*=10</tt> to compensate gzip comression. or the
+     * number of items, lines, ... The value is not used here,
+     * just provided.
+    */
+    void setSize( std::streamoff val_r )
+    { _size = val_r; }
+
   private:
     Pathname                 _path;
     shared_ptr<std::istream> _stream;
     std::string              _name;
+    DefaultIntegral<std::streamoff,-1> _size;
   };
   ///////////////////////////////////////////////////////////////////
 

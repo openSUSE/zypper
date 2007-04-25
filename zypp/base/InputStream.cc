@@ -15,11 +15,29 @@
 #include "zypp/base/InputStream.h"
 #include "zypp/base/GzStream.h"
 
+#include "zypp/PathInfo.h"
+
 using std::endl;
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
+
+  ///////////////////////////////////////////////////////////////////
+  namespace
+  { /////////////////////////////////////////////////////////////////
+
+    inline std::streamoff _heplerInitSize( const Pathname & file_r )
+    {
+      PathInfo p( file_r );
+      if ( p.isFile() )
+	return p.size();
+      return -1;
+    }
+
+    /////////////////////////////////////////////////////////////////
+  } // namespace
+  ///////////////////////////////////////////////////////////////////
 
   ///////////////////////////////////////////////////////////////////
   //
@@ -51,6 +69,7 @@ namespace zypp
   : _path( file_r )
   , _stream( new ifgzstream( _path.asString().c_str() ) )
   , _name( _path.asString() )
+  , _size( _heplerInitSize( _path ) )
   {}
 
   ///////////////////////////////////////////////////////////////////
@@ -63,6 +82,7 @@ namespace zypp
   : _path( file_r )
   , _stream( new ifgzstream( _path.asString().c_str() ) )
   , _name( name_r )
+  , _size( _heplerInitSize( _path ) )
   {}
 
   ///////////////////////////////////////////////////////////////////
@@ -74,6 +94,7 @@ namespace zypp
   : _path( file_r )
   , _stream( new ifgzstream( _path.asString().c_str() ) )
   , _name( _path.asString() )
+  , _size( _heplerInitSize( _path ) )
   {}
 
   ///////////////////////////////////////////////////////////////////
@@ -86,6 +107,7 @@ namespace zypp
   : _path( file_r )
   , _stream( new ifgzstream( _path.asString().c_str() ) )
   , _name( name_r )
+  , _size( _heplerInitSize( _path ) )
   {}
 
   ///////////////////////////////////////////////////////////////////
@@ -97,6 +119,7 @@ namespace zypp
   : _path( file_r )
   , _stream( new ifgzstream( _path.asString().c_str() ) )
   , _name( _path.asString() )
+  , _size( _heplerInitSize( _path ) )
   {}
 
   ///////////////////////////////////////////////////////////////////
@@ -109,6 +132,7 @@ namespace zypp
   : _path( file_r )
   , _stream( new ifgzstream( _path.asString().c_str() ) )
   , _name( name_r )
+  , _size( _heplerInitSize( _path ) )
   {}
 
   ///////////////////////////////////////////////////////////////////
