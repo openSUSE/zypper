@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Thu Apr 26 14:16:20 CEST 2007 - jkupec@suse.cz
+
+- Show a user readable message when check-patches
+  can't acquire the lock. (#227073) (Merged from
+  SuSE-Linux-10_2-Branch r4814)
+- r5451
+
+-------------------------------------------------------------------
 Thu Feb 22 18:30:10 CET 2007 - mvidner@suse.cz
 
 - Use the read-only hacek for service-list (#247001).
