@@ -130,7 +130,6 @@ string process_globals(int argc, char **argv)
     "\t--terse, -t\t\tTerse output for machine consumption\n"
     "\t--table-style, -s\tTable style (integer)\n"
     "\t--rug-compatible, -r\tTurn on rug compatibility\n"
-    "\t--rug-compatible, -r\tTurn on rug compatibility\n"
     "\t--non-interactive\tDon't ask anything, use default answers automatically. (under development)\n"
     "\t--root, -R <dir>\tOperate on a different root directory\n");
     ;

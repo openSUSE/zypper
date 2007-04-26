@@ -14,6 +14,7 @@
 #include <fstream>
 #include <sstream>
 
+#include <zypp/base/Gettext.h>
 #include <zypp/target/store/PersistentStorage.h>
 
 #include "checkpatches-keyring-callbacks.h"
@@ -89,6 +90,23 @@ typedef zypp::SourceManager::SourceInfo SourceInfo;
 using zypp::source::SourceInfo;
 #endif
 
+int exit_with_error( const std::string &error_str )
+{
+  gData.errors.push_back(Error(error_str));
+    
+  std::ofstream os(RESULT_FILE);
+  if ( os.good() )
+  {
+    render_error( Edition(XML_FORMAT_VERSION), os );
+    render_error( Edition(XML_FORMAT_VERSION), cout );
+    os.close();
+  }
+  // save a random token so we try again next time
+  save_token(utils::randomString(48));
+  save_version(Edition(XML_FORMAT_VERSION));
+  return -1;
+}
+
 int main(int argc, char **argv)
 {
   const char *logfile = getenv("ZYPP_LOGFILE");
@@ -103,23 +121,16 @@ int main(int argc, char **argv)
   {
     God = zypp::getZYpp();
   }
-  catch (Exception & excpt_r)
+  catch ( const ZYppFactoryException & excpt_r )
   {
     ZYPP_CAUGHT (excpt_r);
-    
-    gData.errors.push_back(Error(excpt_r.msg()));
-    
-    std::ofstream os(RESULT_FILE);
-    if ( os.good() )
-    {
-      render_error( Edition(XML_FORMAT_VERSION), os );
-      render_error( Edition(XML_FORMAT_VERSION), cout );
-      os.close();
-    }
-     // save a random token so we try again next time
-     save_token(utils::randomString(48));
-     save_version(Edition(XML_FORMAT_VERSION));
-    return -1;
+    string error_str( _("The updater could not access the package manager engine. This usually happens when you have another application (like YaST) using it at the same time. Please close other applications and check again for updates." ) );
+    return exit_with_error( error_str );
+  }
+  catch ( const Exception & excpt_r)
+  {
+    ZYPP_CAUGHT (excpt_r);
+    return exit_with_error(excpt_r.msg());
   }
   
   SourceManager_Ptr manager;
@@ -197,7 +208,9 @@ int main(int argc, char **argv)
     }
     catch (const Exception &excpt_r )
     {
-      gData.errors.push_back("Couldn't restore source" + ( excpt_r.msg().empty() ? "\n" : (":\n" + excpt_r.msg())));
+      // TranslatorExplanation %s = detailed low level (unstranslated) error message
+      string error = excpt_r.msg();
+      gData.errors.push_back(str::form(_("Couldn't restore source.\nDetail: %s"), error.c_str()));
     }
   }
   
@@ -242,6 +255,11 @@ int main(int argc, char **argv)
   for ( std::list<Source_Ref>::const_iterator it = gData.sources.begin(); it != gData.sources.end(); ++it )
   {
     God->addResolvables(it->resolvables());
+  }
+  
+  if ( gData.sources.size() == 0 )
+  {
+    gData.errors.push_back( str::form( _( "There are no update sources defined. Please add one or more update sources in order to be notified of updates.") ) );
   }
   
   God->addResolvables( God->target()->resolvables(), true);
