@@ -34,9 +34,9 @@ namespace zypp
     {
     public:
       typedef NamedCap Self;
-      typedef NamedCap_Ptr       Ptr;
-      typedef NamedCap_constPtr  constPtr;
-
+      typedef NamedCap_Ptr Ptr;
+      typedef NamedCap_constPtr constPtr;
+      
       /** Ctor */
       NamedCap( const Resolvable::Kind & refers_r, const std::string & name_r )
       : CapabilityImpl( refers_r )

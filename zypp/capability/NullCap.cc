@@ -41,7 +41,7 @@ namespace zypp
     bool NullCap::relevant() const
     { return false; }
 
-    CapMatch NullCap::matches( const constPtr & rhs ) const
+    CapMatch NullCap::matches( const CapabilityImpl::constPtr & rhs ) const
     { return CapMatch::irrelevant; }
 
     std::string NullCap::encode() const

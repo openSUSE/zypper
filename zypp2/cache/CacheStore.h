@@ -173,6 +173,63 @@ namespace zypp
                                  capability::FileCap::Ptr);
       
       /**
+       * Adds a Modalias dependency to the store.
+       *
+       * A \ref ModaliasCap::Ptr \a cap to be specified. Among
+       * which type of dependency \ref zypp::Dep it is as
+       * the \a deptype argument.
+       * 
+       * \a resolvable_id is the resolvable Id in the CacheStore
+       * that will own the capability
+       *
+       * You can create the modalias capability using either
+       * \ref capability::parse or \ref capability::buildModalias
+       *
+       * FIXME should it \throw if the resolvable does not exist?
+       */
+      void appendModaliasDependency( const data::RecordId &resolvable_id,
+                                     zypp::Dep deptype,
+                                     capability::ModaliasCap::Ptr cap);
+      
+      /**
+       * Adds a Hal dependency to the store.
+       *
+       * A \ref HalCap::Ptr \a cap to be specified. Among
+       * which type of dependency \ref zypp::Dep it is as
+       * the \a deptype argument.
+       * 
+       * \a resolvable_id is the resolvable Id in the CacheStore
+       * that will own the capability
+       *
+       * You can create the modalias capability using either
+       * \ref capability::parse or \ref capability::buildHal
+       *
+       * FIXME should it \throw if the resolvable does not exist?
+       */
+      void appendHalDependency( const data::RecordId &resolvable_id,
+                                      zypp::Dep deptype,
+                                      capability::HalCap::Ptr cap );
+      
+      /**
+       * Adds a unknown dependency to the store.
+       *
+       * A \ref Capability::Ptr \a cap to be specified. Among
+       * which type of dependency \ref zypp::Dep it is as
+       * the \a deptype argument.
+       * 
+       * \a resolvable_id is the resolvable Id in the CacheStore
+       * that will own the capability
+       *
+       * You can create the capability using either
+       * \ref capability::parse
+       *
+       * FIXME should it \throw if the resolvable does not exist?
+       */
+      void appendUnknownDependency( const data::RecordId &resolvable_id,
+                                          zypp::Dep deptype,
+                                          capability::CapabilityImpl::Ptr cap );
+      
+      /**
        * Returns the record id of a catalog (Source) \a path
        *
        * \note If the catalog entry does not exist, it will

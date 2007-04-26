@@ -35,9 +35,9 @@ namespace zypp
     {
     public:
       typedef FileCap Self;
-      typedef FileCap_Ptr       Ptr;
-      typedef FileCap_constPtr  constPtr;
-
+      typedef FileCap_Ptr Ptr;
+      typedef FileCap_constPtr constPtr;
+      
       /** Ctor */
       FileCap( const Resolvable::Kind & refers_r, const std::string & fname_r )
       : CapabilityImpl( refers_r )

@@ -35,9 +35,7 @@ namespace zypp
     {
       public:
       typedef VersionedCap Self;
-      typedef VersionedCap_Ptr       Ptr;
-      typedef VersionedCap_constPtr  constPtr;
-
+      
       /** Ctor */
       VersionedCap( const Resolvable::Kind & refers_r,
                     const std::string & name_r,

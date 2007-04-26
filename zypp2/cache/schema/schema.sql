@@ -4,42 +4,6 @@
 -- cat schema.sql | grep "^CREATE" | awk '{print "DROP " $2 " IF EXISTS " $3 ";"}' | sort -r
 ------------------------------------------------
 
-DROP VIEW IF EXISTS scripts;
-DROP VIEW IF EXISTS products;
-DROP VIEW IF EXISTS patterns;
-DROP VIEW IF EXISTS patches;
-DROP VIEW IF EXISTS packages;
-DROP VIEW IF EXISTS messages;
-DROP TRIGGER IF EXISTS remove_resolvables;
-DROP TRIGGER IF EXISTS remove_patch_packages_baseversions;
-DROP TABLE IF EXISTS named_capabilities;
-DROP TABLE IF EXISTS translated_texts;
-DROP TABLE IF EXISTS script_details;
-DROP TABLE IF EXISTS resolvable_texts;
-DROP TABLE IF EXISTS resolvables_catalogs;
-DROP TABLE IF EXISTS resolvables;
-DROP TABLE IF EXISTS product_details;
-DROP TABLE IF EXISTS pattern_details;
-DROP TABLE IF EXISTS patch_packages_baseversions;
-DROP TABLE IF EXISTS patch_packages;
-DROP TABLE IF EXISTS patch_details;
-DROP TABLE IF EXISTS package_details;
-DROP TABLE IF EXISTS names;
-DROP TABLE IF EXISTS message_details;
-DROP TABLE IF EXISTS locks;
-DROP TABLE IF EXISTS files;
-DROP TABLE IF EXISTS file_names;
-DROP TABLE IF EXISTS file_capabilities;
-DROP TABLE IF EXISTS split_capabilities;
-DROP TABLE IF EXISTS dir_names;
-DROP TABLE IF EXISTS delta_packages;
-DROP TABLE IF EXISTS db_info;
-DROP TABLE IF EXISTS catalogs;
-DROP TABLE IF EXISTS capabilities;
-DROP INDEX IF EXISTS package_details_resolvable_id;
-DROP INDEX IF EXISTS capability_resolvable;
-DROP INDEX IF EXISTS named_capabilities_capability_id;
-
 ------------------------------------------------
 -- version metadata, probably not needed, there
 -- is pragma user_version
@@ -322,12 +286,40 @@ CREATE TABLE named_capabilities (
 );
 CREATE INDEX named_capabilities_name ON named_capabilities(name_id);
 
+CREATE TABLE modalias_capabilities (
+   id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL 
+  , resolvable_id INTEGER REFERENCES resolvables(id)
+  , dependency_type INTEGER
+  , refers_kind INTEGER
+  , name TEXT
+  , value TEXT
+  , relation INTEGER
+);
+
+CREATE TABLE hal_capabilities (
+   id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL 
+  , resolvable_id INTEGER REFERENCES resolvables(id)
+  , dependency_type INTEGER
+  , refers_kind INTEGER
+  , name TEXT
+  , value TEXT
+  , relation INTEGER
+);
+
 CREATE TABLE file_capabilities (
    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL 
   , resolvable_id INTEGER REFERENCES resolvables(id)
   , dependency_type INTEGER
   , refers_kind INTEGER
   , file_id INTEGER REFERENCES files(id)
+);
+
+CREATE TABLE other_capabilities (
+   id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL 
+  , resolvable_id INTEGER REFERENCES resolvables(id)
+  , dependency_type INTEGER
+  , refers_kind INTEGER
+  , value TEXT
 );
 
 CREATE TABLE split_capabilities (

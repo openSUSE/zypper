@@ -21,6 +21,8 @@ namespace zypp
   namespace capability
   { /////////////////////////////////////////////////////////////////
 
+    DEFINE_PTR_TYPE(SplitCap)
+    
     ///////////////////////////////////////////////////////////////////
     //
     //	CLASS NAME : SplitCap
@@ -42,7 +44,9 @@ namespace zypp
     {
     public:
       typedef SplitCap Self;
-
+      typedef SplitCap_Ptr Ptr;
+      typedef SplitCap_constPtr constPtr;
+      
       /** Ctor */
       SplitCap( const Resolvable::Kind & refers_r,
                 const std::string & name_r,
@@ -59,7 +63,7 @@ namespace zypp
       { return false; }
 
       /** */
-      virtual CapMatch matches( const constPtr & rhs ) const;
+      virtual CapMatch matches( const CapabilityImpl::constPtr & rhs ) const;
 
       /**  <tt>name:/path</tt> */
       virtual std::string encode() const;

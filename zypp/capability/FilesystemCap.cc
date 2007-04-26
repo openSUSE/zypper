@@ -26,6 +26,8 @@ namespace zypp
   namespace capability
   { /////////////////////////////////////////////////////////////////
 
+    IMPL_PTR_TYPE(FilesystemCap)
+    
     /** Ctor */
     FilesystemCap::FilesystemCap( const Resolvable::Kind & refers_r,
 				  const std::string & name_r )
@@ -36,7 +38,7 @@ namespace zypp
     const CapabilityImpl::Kind & FilesystemCap::kind() const
     { return CapTraits<Self>::kind; }
 
-    CapMatch FilesystemCap::matches( const constPtr & rhs ) const
+    CapMatch FilesystemCap::matches( const CapabilityImpl::constPtr & rhs ) const
     {
       if ( sameKindAndRefers( rhs ) )
         {

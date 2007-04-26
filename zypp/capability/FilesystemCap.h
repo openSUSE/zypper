@@ -21,6 +21,8 @@ namespace zypp
   namespace capability
   { /////////////////////////////////////////////////////////////////
 
+    DEFINE_PTR_TYPE(FilesystemCap)
+    
     ///////////////////////////////////////////////////////////////////
     //
     //	CLASS NAME : FilesystemCap
@@ -42,7 +44,9 @@ namespace zypp
     {
     public:
       typedef FilesystemCap Self;
-
+      typedef FilesystemCap_Ptr Ptr;
+      typedef FilesystemCap_constPtr constPtr;
+      
     public:
       /** Ctor */
       FilesystemCap( const Resolvable::Kind & refers_r, const std::string & name_r );
@@ -52,7 +56,7 @@ namespace zypp
       virtual const Kind & kind() const;
 
       /** Query USED_FS_LIST. */
-      virtual CapMatch matches( const constPtr & rhs ) const;
+      virtual CapMatch matches( const CapabilityImpl::constPtr & rhs ) const;
 
       /** <tt>filesystem(name)</tt> */
       virtual std::string encode() const;

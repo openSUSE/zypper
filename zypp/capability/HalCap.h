@@ -21,6 +21,8 @@ namespace zypp
   namespace capability
   { /////////////////////////////////////////////////////////////////
 
+    DEFINE_PTR_TYPE(HalCap)
+    
     ///////////////////////////////////////////////////////////////////
     //
     //	CLASS NAME : HalCap
@@ -42,6 +44,8 @@ namespace zypp
     {
     public:
       typedef HalCap Self;
+      typedef HalCap_Ptr       Ptr;
+      typedef HalCap_constPtr  constPtr;
 
     public:
       /** Ctor */
@@ -66,13 +70,23 @@ namespace zypp
       virtual const Kind & kind() const;
 
       /** Query target::Hal. */
-      virtual CapMatch matches( const constPtr & rhs ) const;
+      virtual CapMatch matches( const CapabilityImpl::constPtr & rhs ) const;
 
       /** <tt>hal(name) [op value]</tt> */
       virtual std::string encode() const;
 
       /** <tt>hal(name)</tt> */
       virtual std::string index() const;
+      
+    public:
+      const std::string & name() const
+      { return _name; }
+      
+      Rel op() const
+      { return _op; }
+      
+      const std::string & value() const
+      { return _value; }
 
     private:
       /** Empty HalCap <tt>hal()</tt> */

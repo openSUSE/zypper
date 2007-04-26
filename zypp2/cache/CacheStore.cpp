@@ -62,6 +62,9 @@ struct CacheStore::Impl
   
   sqlite3_command_ptr append_file_dependency_cmd;
   sqlite3_command_ptr append_named_dependency_cmd;
+  sqlite3_command_ptr append_modalias_dependency_cmd;
+  sqlite3_command_ptr append_hal_dependency_cmd;
+  sqlite3_command_ptr append_other_dependency_cmd;
   
   sqlite3_command_ptr append_resolvable_cmd;
   
@@ -114,6 +117,12 @@ CacheStore::CacheStore( const Pathname &dbdir )
   _pimpl->append_file_dependency_cmd.reset( new sqlite3_command( _pimpl->con, "insert into file_capabilities ( resolvable_id, dependency_type, refers_kind, file_id ) values ( :resolvable_id, :dependency_type, :refers_kind, :file_id );" ));
   _pimpl->append_named_dependency_cmd.reset( new sqlite3_command( _pimpl->con, "insert into named_capabilities ( resolvable_id, dependency_type, refers_kind, name_id, version, release, epoch, relation ) values ( :resolvable_id, :dependency_type, :refers_kind, :name_id, :version, :release, :epoch, :relation );" ));
   
+   _pimpl->append_modalias_dependency_cmd.reset( new sqlite3_command( _pimpl->con, "insert into modalias_capabilities ( resolvable_id, dependency_type, refers_kind, name, value, relation ) values ( :resolvable_id, :dependency_type, :refers_kind, :name, :value, :relation );" ));
+  
+   _pimpl->append_hal_dependency_cmd.reset( new sqlite3_command( _pimpl->con, "insert into hal_capabilities ( resolvable_id, dependency_type, refers_kind, name, value, relation ) values ( :resolvable_id, :dependency_type, :refers_kind, :name, :value, :relation );" ));
+   
+   _pimpl->append_other_dependency_cmd.reset( new sqlite3_command( _pimpl->con, "insert into other_capabilities ( resolvable_id, dependency_type, refers_kind, value ) values ( :resolvable_id, :dependency_type, :refers_kind, :value );" ));
+   
   _pimpl->append_resolvable_cmd.reset( new sqlite3_command( _pimpl->con, "insert into resolvables ( name, version, release, epoch, arch, kind, catalog_id ) values ( :name, :version, :release, :epoch, :arch, :kind, :catalog_id );" ));
   
   // disable autocommit
@@ -181,27 +190,32 @@ void CacheStore::appendDependencyList( const data::RecordId &resolvable_id, zypp
 
 void CacheStore::appendDependency( const data::RecordId &resolvable_id, zypp::Dep deptype, capability::CapabilityImpl::Ptr cap )
 {
-  //DBG << cap << endl;
-  if ( cap->refers() != ResTraits<Package>::kind )
-  {
-    DBG << "invalid capability" << endl;
-    return;
-  }
-  
   if ( cap == 0 )
   {
     DBG << "invalid capability" << endl;
     return;
   }
   
-  if ( capability::isKind<FileCap>(cap) )
+  if ( capability::isKind<NamedCap>(cap) )
+  {
+      appendNamedDependency( resolvable_id, deptype, capability::asKind<NamedCap>(cap) );
+  }
+  else if ( capability::isKind<FileCap>(cap) )
   {
     appendFileDependency( resolvable_id, deptype, capability::asKind<FileCap>(cap) );
     return;
   }
-  else if ( capability::isKind<NamedCap>(cap) )
+  else if ( capability::isKind<ModaliasCap>(cap) )
   {
-      appendNamedDependency( resolvable_id, deptype, capability::asKind<NamedCap>(cap) );
+      appendModaliasDependency( resolvable_id, deptype, capability::asKind<ModaliasCap>(cap) );
+  }
+  else if ( capability::isKind<HalCap>(cap) )
+  {
+      appendHalDependency( resolvable_id, deptype, capability::asKind<HalCap>(cap) );
+  }
+  else
+  {
+      appendUnknownDependency( resolvable_id, deptype, cap );
   }
 }
 
@@ -255,10 +269,51 @@ void CacheStore::appendNamedDependency( const data::RecordId &resolvable_id, zyp
   //delete cmd;
 }
 
-void CacheStore::appendFileDependency( const data::RecordId &resolvable_id, zypp::Dep deptype, capability::FileCap::Ptr cap )
+void CacheStore::appendModaliasDependency( const data::RecordId &resolvable_id,
+                                                 zypp::Dep deptype,
+                                                 capability::ModaliasCap::Ptr cap )
 {
   if ( !cap )
-    ZYPP_THROW(Exception("bad file cap"));
+    ZYPP_THROW(Exception("Null modalias capability"));
+
+  _pimpl->append_modalias_dependency_cmd->bind( ":resolvable_id", resolvable_id );
+  _pimpl->append_modalias_dependency_cmd->bind( ":dependency_type", zypp_deptype2db_deptype(deptype) );
+  _pimpl->append_modalias_dependency_cmd->bind( ":refers_kind", zypp_kind2db_kind(cap->refers()) );
+  
+  //_pimpl->append_modalias_dependency_cmd->bind( ":capability_id", capability_id);
+  _pimpl->append_modalias_dependency_cmd->bind( ":name", cap->name());
+  _pimpl->append_modalias_dependency_cmd->bind( ":value", cap->value());
+  _pimpl->append_modalias_dependency_cmd->bind( ":relation", zypp_rel2db_rel( cap->op() ) );
+  
+  _pimpl->append_modalias_dependency_cmd->executenonquery();
+  //delete cmd;
+}
+
+void CacheStore::appendHalDependency( const data::RecordId &resolvable_id,
+                                                 zypp::Dep deptype,
+                                                 capability::HalCap::Ptr cap )
+{
+  if ( !cap )
+    ZYPP_THROW(Exception("Null HAL capability"));
+
+  _pimpl->append_hal_dependency_cmd->bind( ":resolvable_id", resolvable_id );
+  _pimpl->append_hal_dependency_cmd->bind( ":dependency_type", zypp_deptype2db_deptype(deptype) );
+  _pimpl->append_hal_dependency_cmd->bind( ":refers_kind", zypp_kind2db_kind(cap->refers()) );
+  
+  //_pimpl->append_hal_dependency_cmd->bind( ":capability_id", capability_id);
+  _pimpl->append_hal_dependency_cmd->bind( ":name", cap->name());
+  _pimpl->append_hal_dependency_cmd->bind( ":value", cap->value());
+  _pimpl->append_hal_dependency_cmd->bind( ":relation", zypp_rel2db_rel( cap->op() ) );
+  
+  _pimpl->append_hal_dependency_cmd->executenonquery();
+  //delete cmd;
+}
+
+void CacheStore::appendFileDependency( const data::RecordId &resolvable_id, zypp::Dep deptype,
+                                       capability::FileCap::Ptr cap )
+{
+  if ( !cap )
+    ZYPP_THROW(Exception("Null file capability"));
 
   //data::RecordId capability_id = appendDependencyEntry( resolvable_id, deptype, cap->refers() );
   data::RecordId file_id = lookupOrAppendFile(cap->filename());
@@ -273,6 +328,23 @@ void CacheStore::appendFileDependency( const data::RecordId &resolvable_id, zypp
   _pimpl->append_file_dependency_cmd->executenonquery();
   //delete cmd;
 }
+
+void CacheStore::appendUnknownDependency( const data::RecordId &resolvable_id,
+                                               zypp::Dep deptype,
+                                               capability::CapabilityImpl::Ptr cap )
+{
+  if ( !cap )
+    ZYPP_THROW(Exception("Null unknown capability"));
+
+  _pimpl->append_other_dependency_cmd->bind( ":resolvable_id", resolvable_id );
+  _pimpl->append_other_dependency_cmd->bind( ":dependency_type", zypp_deptype2db_deptype(deptype) );
+  _pimpl->append_other_dependency_cmd->bind( ":refers_kind", zypp_kind2db_kind(cap->refers()) );
+  _pimpl->append_other_dependency_cmd->bind( ":value", cap->encode());
+  
+  _pimpl->append_hal_dependency_cmd->executenonquery();
+  //delete cmd;
+}
+
 
 // data::RecordId CacheStore::appendDependencyEntry( const data::RecordId &resolvable_id, zypp::Dep deptype, const Resolvable::Kind &refers )
 // {

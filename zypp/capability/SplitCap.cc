@@ -20,10 +20,12 @@ namespace zypp
   namespace capability
   { /////////////////////////////////////////////////////////////////
 
+    IMPL_PTR_TYPE(SplitCap)
+    
     const CapabilityImpl::Kind & SplitCap::kind() const
     { return CapTraits<Self>::kind; }
 
-    CapMatch SplitCap::matches( const constPtr & rhs ) const
+    CapMatch SplitCap::matches( const CapabilityImpl::constPtr & rhs ) const
     {
       return CapMatch::irrelevant;
     }

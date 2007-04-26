@@ -24,6 +24,8 @@ namespace zypp
   namespace capability
   { /////////////////////////////////////////////////////////////////
 
+    IMPL_PTR_TYPE(ModaliasCap)
+    
     /** If name_r contains 2 ':', the 1st part is a package name. */
     inline void modsplit( std::string & name_r, std::string & pkgname_r )
     {
@@ -57,7 +59,7 @@ namespace zypp
     const CapabilityImpl::Kind & ModaliasCap::kind() const
     { return CapTraits<Self>::kind; }
 
-    CapMatch ModaliasCap::matches( const constPtr & rhs ) const
+    CapMatch ModaliasCap::matches( const CapabilityImpl::constPtr & rhs ) const
     {
       if ( sameKindAndRefers( rhs ) )
         {

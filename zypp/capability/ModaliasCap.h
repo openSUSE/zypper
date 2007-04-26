@@ -12,6 +12,7 @@
 #ifndef ZYPP_CAPABILITY_MODALIASCAP_H
 #define ZYPP_CAPABILITY_MODALIASCAP_H
 
+#include "zypp/base/Deprecated.h"
 #include "zypp/capability/CapabilityImpl.h"
 
 ///////////////////////////////////////////////////////////////////
@@ -21,6 +22,8 @@ namespace zypp
   namespace capability
   { /////////////////////////////////////////////////////////////////
 
+    DEFINE_PTR_TYPE(ModaliasCap)
+    
     ///////////////////////////////////////////////////////////////////
     //
     //	CLASS NAME : ModaliasCap
@@ -42,7 +45,9 @@ namespace zypp
     {
     public:
       typedef ModaliasCap Self;
-
+      typedef ModaliasCap_Ptr Ptr;
+      typedef ModaliasCap_constPtr constPtr;
+      
     public:
       /** Ctor */
       ModaliasCap( const Resolvable::Kind & refers_r, const std::string & name_r );
@@ -58,7 +63,7 @@ namespace zypp
       virtual const Kind & kind() const;
 
       /** Query target::Modalias. */
-      virtual CapMatch matches( const constPtr & rhs ) const;
+      virtual CapMatch matches( const CapabilityImpl::constPtr & rhs ) const;
 
       /** <tt>modalias(name) [op value]</tt> */
       virtual std::string encode() const;
@@ -70,9 +75,18 @@ namespace zypp
       const std::string & pkgname() const
       { return _pkgname; }
 
-      const std::string & querystring() const
+      ZYPP_DEPRECATED const std::string & querystring() const
       { return _name; }
 
+      const std::string & name() const
+      { return _name; }
+      
+      Rel op() const
+      { return _op; }
+      
+      const std::string & value() const
+      { return _value; }
+      
     private:
       /** Empty ModaliasCap <tt>modalias()</tt> */
       bool isEvalCmd() const;

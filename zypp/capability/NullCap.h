@@ -52,7 +52,7 @@ namespace zypp
       virtual bool relevant() const;
 
       /** Iirrelevant. */
-      virtual CapMatch matches( const constPtr & rhs ) const;
+      virtual CapMatch matches( const CapabilityImpl::constPtr & rhs ) const;
 
       /** Empty string. */
       virtual std::string encode() const;
