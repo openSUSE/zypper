@@ -5,8 +5,9 @@
 #include <list>
 #include "zypp/base/ReferenceCounted.h"
 #include "zypp/base/NonCopyable.h"
-#include "zypp/source/SourceInfo.h"
 #include "zypp/Pathname.h"
+
+#include "zypp2/RepositoryInfo.h"
 
 namespace zypp
 {
@@ -16,9 +17,11 @@ namespace zypp
     friend std::ostream & operator<<( std::ostream & str, const RepositoryManager & obj );
   public:
     RepositoryManager();
-    std::list<source::SourceInfo> knownRepositories();
+    std::list<RepositoryInfo> knownRepositories();
   };
   
   
 }
+
 #endif
+

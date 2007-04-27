@@ -1,23 +1,19 @@
 
 
-
-
-
-
-
 #include <iostream>
 #include <list>
 #include <algorithm>
-#include "RepositoryManager.h"
 #include "zypp/base/Exception.h"
 #include "zypp/base/Logger.h"
 #include "zypp/PathInfo.h"
 #include "zypp/parser/inifile/iniparser.h"
 
+#include "zypp2/RepositoryManager.h"
+
+
 using namespace std;
 using namespace zypp;
 using namespace zypp::filesystem;
-using namespace zypp::source;
 
 namespace zypp {
 
@@ -26,7 +22,7 @@ RepositoryManager::RepositoryManager()
 
 }
 
-static std::list<source::SourceInfo> repositories_in_file( const Pathname &file )
+static std::list<RepositoryInfo> repositories_in_file( const Pathname &file )
 {
   dictionary *d = iniparser_new(file.c_str());
   
@@ -41,12 +37,12 @@ static std::list<source::SourceInfo> repositories_in_file( const Pathname &file 
     MIL << iniparser_getsecname(d, i) << endl;
     
   }
-  return std::list<source::SourceInfo>();
+  return std::list<RepositoryInfo>();
 }
 
-static std::list<source::SourceInfo> repositories_in_path( const Pathname &dir )
+static std::list<RepositoryInfo> repositories_in_path( const Pathname &dir )
 {
-  std::list<source::SourceInfo> repos;
+  std::list<RepositoryInfo> repos;
   list<Pathname> entries;
   if ( filesystem::readdir( entries, Pathname(dir), false ) != 0 )
     ZYPP_THROW(Exception("failed to read directory"));
@@ -54,17 +50,18 @@ static std::list<source::SourceInfo> repositories_in_path( const Pathname &dir )
   for ( list<Pathname>::const_iterator it = entries.begin(); it != entries.end(); ++it )
   {
     Pathname file = *it;
-    std::list<source::SourceInfo> repos_here = repositories_in_file(file);
+    std::list<RepositoryInfo> repos_here = repositories_in_file(file);
     std::copy( repos_here.begin(), repos_here.end(), std::back_inserter(repos));
   }
   return repos;
 }
 
-std::list<source::SourceInfo> RepositoryManager::knownRepositories()
+std::list<RepositoryInfo> RepositoryManager::knownRepositories()
 {
   
 
-  return std::list<source::SourceInfo>();
+  return std::list<RepositoryInfo>();
 }
 
 } // ns zypp
+

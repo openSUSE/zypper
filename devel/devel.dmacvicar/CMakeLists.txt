@@ -32,9 +32,9 @@ ADD_EXECUTABLE(cachedsource CachedSource_tp.cc)
 TARGET_LINK_LIBRARIES(cachedsource  zypp )
 TARGET_LINK_LIBRARIES(cachedsource  zypp2 )
 
-ADD_EXECUTABLE(repomanager RepositoryManager_tp.cc RepositoryManager.cc)
+ADD_EXECUTABLE(repomanager RepositoryManager_tp.cc)
 TARGET_LINK_LIBRARIES(repomanager zypp )
-#TARGET_LINK_LIBRARIES(repomanager zypp2 )
+TARGET_LINK_LIBRARIES(repomanager zypp2 )
 
 FIND_PACKAGE(Zsync)
 IF(ZSYNC_FOUND)
