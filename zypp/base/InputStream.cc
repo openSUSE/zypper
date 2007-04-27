@@ -30,7 +30,7 @@ namespace zypp
     inline std::streamoff _heplerInitSize( const Pathname & file_r )
     {
       PathInfo p( file_r );
-      if ( p.isFile() )
+      if ( p.isFile() && filesystem::zipType( file_r ) == filesystem::ZT_NONE )
 	return p.size();
       return -1;
     }

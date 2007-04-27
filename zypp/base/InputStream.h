@@ -111,14 +111,14 @@ namespace zypp
     const Pathname & path() const
     { return _path; }
 
-    /** Size of the input stream (might be estimated).
-     * If constructed from a file, the file size. Otherwise \c -1.
-     * See \ref setSize;
+    /** Size of the input stream (informal).
+     * If constructed from an uncompressed file, the file size.
+     * Otherwise \c -1. See \ref setSize;
     */
     std::streamoff size() const
     { return _size; }
 
-    /** Set the (estimated) size of the input stream.
+    /** Set the size of the input stream.
      * You may set it to whatever vaule is appropriate. E.g.
      * <tt>*=10</tt> to compensate gzip comression. or the
      * number of items, lines, ... The value is not used here,
