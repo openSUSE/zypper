@@ -10,19 +10,19 @@ INCLUDE_DIRECTORIES( ${CMAKE_SOURCE_DIR} ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CUR
 
 
 SET( zypp2_SRCS
-  Repository.cc
-  RepositoryInfo.cc
-  RepositoryManager.cc
-  RepositoryFactory.cc
+#  Repository.cc
+#  RepositoryInfo.cc
+#  RepositoryManager.cc
+#  RepositoryFactory.cc
   Lazy.cc
   dummy.cc
 )
 
 SET( zypp2_HEADERS
-  Repository.h
-  RepositoryInfo.h
-  RepositoryManager.h
-  RepositoryFactory.h
+#  Repository.h
+#  RepositoryInfo.h
+#  RepositoryManager.h
+#  RepositoryFactory.h
   CommiterIface.h
   Lazy.h
 )
@@ -78,25 +78,25 @@ SET( zypp2_cache_sqlite3x_HEADERS
 #  DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp2/cache/sqlite3x
 #)
 
-SET( zypp2_repository_SRCS
-  repository/dummy.cc
-  repository/RepositoryImpl.cc
-)
+#SET( zypp2_repository_SRCS
+#  repository/dummy.cc
+#  repository/RepositoryImpl.cc
+#)
 
-SET( zypp2_repository_HEADERS
-  repository/dummy.h
-  repository/RepositoryImpl.h
-)
+#SET( zypp2_repository_HEADERS
+#  repository/dummy.h
+#  repository/RepositoryImpl.h
+#)
 
-SET( zypp2_repository_cached_SRCS
-  repository/cached/CachedRepositoryImpl.cc
-  repository/cached/CachedRepositoryPackageImpl.cc
-)
+#SET( zypp2_repository_cached_SRCS
+#  repository/cached/CachedRepositoryImpl.cc
+#  repository/cached/CachedRepositoryPackageImpl.cc
+#)
 
-SET( zypp2_repository_cached_HEADERS
-  repository/cached/CachedRepositoryImpl.h
-  repository/cached/CachedRepositoryPackageImpl.h
-)
+#SET( zypp2_repository_cached_HEADERS
+#  repository/cached/CachedRepositoryImpl.h
+#  repository/cached/CachedRepositoryPackageImpl.h
+#)
 
 #INSTALL(  FILES
 #  ${zypp2_repository_sqlite-repository_HEADERS}
