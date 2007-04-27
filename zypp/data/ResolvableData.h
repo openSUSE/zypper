@@ -175,7 +175,7 @@ namespace data
       std::string releasenotesurl;
   };
 
-    /*
+  /*
    * Data Object for Package
    * resolvable
    */
@@ -193,9 +193,13 @@ namespace data
       std::string license;
       std::string packager;
       std::string group;
-      Url url;
+      /**
+       * Upstream home page URL.
+       * \see zypp::Package::url();
+       */
+      std::string url;
       std::string os;
-      
+
       std::string prein;
       std::string postin;
       std::string preun;
@@ -223,7 +227,7 @@ namespace data
     std::string license;
     std::string packager;
     std::string group;
-    Url url;
+    std::string url;
     std::string os;
       
     std::string prein;
