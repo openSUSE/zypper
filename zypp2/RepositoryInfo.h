@@ -28,7 +28,7 @@ namespace zypp
 
     RepositoryInfo();
 
-    RepositoryInfo( const Url & url, const Pathname & path, const std::string & alias = "", const Pathname & cache_dir = "", boost::tribool autorefresh = boost::indeterminate );
+    RepositoryInfo( const Url & url, const Pathname & path, const std::string & alias = "", boost::tribool autorefresh = boost::indeterminate );
 
     RepositoryInfo & setEnabled( boost::tribool enabled );
     RepositoryInfo & setAutorefresh( boost::tribool autorefresh );
@@ -44,7 +44,6 @@ namespace zypp
     boost::tribool enabled() const;
     boost::tribool autorefresh() const;
     boost::tribool baseRepository() const;
-    Pathname cacheDir() const;
     Pathname path() const;
     std::string alias() const;
     std::string type() const;

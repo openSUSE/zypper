@@ -10,14 +10,14 @@
 #include "zypp/Product.h"
 #include "zypp/detail/PackageImplIf.h"
 #include "zypp/Package.h"
-#include "zypp/SourceFactory.h"
-#include "zypp2/source/cached/CachedSourceImpl.h"
+#include "zypp2/RepositoryFactory.h"
+#include "zypp2/repository/cached/CachedRepositoryImpl.h"
 #include "zypp/data/ResolvableData.h"
 
 using namespace std;
 using namespace zypp;
-using namespace zypp::source;
-using namespace zypp::source::cached;
+using namespace zypp::repository;
+using namespace zypp::repository::cached;
 
 
 int main(int argc, char **argv)
@@ -28,12 +28,12 @@ int main(int argc, char **argv)
     
       Pathname dbpath = Pathname(getenv("PWD"));
       
-      SourceImpl_Ptr sourceImpl(new CachedSourceImpl(dbpath));
-      SourceFactory factory;
-      Source_Ref source = factory.createFrom(sourceImpl);
-      ResStore dbres = source.resolvables();
+      //RepositoryImpl_Ptr repositoryImpl(new CachedRepositoryImpl(dbpath));
+      //RepositoryFactory factory;
+      //Repository_Ref repository = factory.createFrom(repositoryImpl);
+      //ResStore dbres = repository.resolvables();
       
-      MIL << dbres.size() << " resolvables" << endl;
+      //MIL << dbres.size() << " resolvables" << endl;
 
     }
     catch ( const Exception &e )

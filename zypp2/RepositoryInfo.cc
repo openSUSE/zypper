@@ -31,13 +31,11 @@ namespace zypp
   RepositoryInfo::RepositoryInfo( const Url & url,
                                   const Pathname & path,
                                   const std::string & alias,
-                                  const Pathname & cache_dir,
                                   tribool autorefresh)
   : _enabled (true),
     _autorefresh(autorefresh),
     _base_repository( indeterminate ),
     _url(url),
-    _cache_dir(cache_dir),
     _path(path),
     _alias(alias)
   {
@@ -86,12 +84,6 @@ namespace zypp
     return *this;
   }
 
-  RepositoryInfo & RepositoryInfo::setCacheDir( const Pathname &p )
-  {
-    _cache_dir = p;
-    return *this;
-  }
-
   RepositoryInfo & RepositoryInfo::setDescription( const std::string &description )
   {
     _description = description;
@@ -118,9 +110,6 @@ namespace zypp
 
   boost::tribool RepositoryInfo::baseRepository() const
   { return _base_repository; }
-
-  Pathname RepositoryInfo::cacheDir() const
-  { return _cache_dir; }
 
   Pathname RepositoryInfo::path() const
   { return _path; }
@@ -153,7 +142,6 @@ namespace zypp
     str << "- enabled     : " << enabled() << std::endl;
     str << "- autorefresh : " << autorefresh() << std::endl;
     str << "- path        : " << path() << std::endl;
-    str << "- cache_dir   : " << cacheDir() << std::endl;
     return str;
   }
   
