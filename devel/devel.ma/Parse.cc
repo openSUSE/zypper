@@ -1,5 +1,3 @@
-#include <ctime>
-#include <iostream>
 #include "Tools.h"
 
 #include <zypp/base/PtrTypes.h>
@@ -23,16 +21,20 @@
 #include "zypp/NameKindProxy.h"
 #include "zypp/pool/GetResolvablesToInsDel.h"
 
+#include "zypp/parser/tagfile/TagFileParser.h"
+#include "zypp/parser/TagParser.h"
 
 using namespace std;
 using namespace zypp;
 using namespace zypp::ui;
 using namespace zypp::functor;
 
+using zypp::parser::tagfile::TagFileParser;
+using zypp::parser::TagParser;
+
 ///////////////////////////////////////////////////////////////////
 
 static const Pathname sysRoot( "/Local/ROOT" );
-static const Pathname sysRootAlt( "/Local/ALTERNATE/ROOTPATH" );
 
 ///////////////////////////////////////////////////////////////////
 
@@ -98,18 +100,6 @@ namespace container
 
 ///////////////////////////////////////////////////////////////////
 
-struct PoolItemSelect
-{
-  void operator()( const PoolItem & pi ) const
-  {
-    if ( pi->source().numericId() == 2 )
-      pi.status().setTransact( true, ResStatus::USER );
-  }
-};
-
-///////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////
-
 struct AddResolvables
 {
   bool operator()( const Source_Ref & src ) const
@@ -121,80 +111,14 @@ struct AddResolvables
 
 ///////////////////////////////////////////////////////////////////
 
-struct SetTransactValue
+
+std::ostream & operator<<( std::ostream & str, const iostr::EachLine & obj )
 {
-  SetTransactValue( ResStatus::TransactValue newVal_r, ResStatus::TransactByValue causer_r )
-  : _newVal( newVal_r )
-  , _causer( causer_r )
-  {}
+  str << "(" << obj.valid() << ")[" << obj.lineNo() << "|" << obj.lineStart() << "]{" << *obj << "}";
+  return str;
 
-  ResStatus::TransactValue   _newVal;
-  ResStatus::TransactByValue _causer;
-
-  bool operator()( const PoolItem & pi ) const
-  { return pi.status().setTransactValue( _newVal, _causer ); }
-};
-
-struct StatusReset : public SetTransactValue
-{
-  StatusReset()
-  : SetTransactValue( ResStatus::KEEP_STATE, ResStatus::USER )
-  {}
-};
-
-
-inline bool selectForTransact( const NameKindProxy & nkp, Arch arch = Arch() )
-{
-  if ( nkp.availableEmpty() ) {
-    ERR << "No Item to select: " << nkp << endl;
-    return false;
-    ZYPP_THROW( Exception("No Item to select") );
-  }
-
-  if ( arch != Arch() )
-    {
-      typeof( nkp.availableBegin() ) it =  nkp.availableBegin();
-      for ( ; it != nkp.availableEnd(); ++it )
-      {
-        if ( (*it)->arch() == arch )
-	  return (*it).status().setTransact( true, ResStatus::USER );
-      }
-    }
-
-  return nkp.availableBegin()->status().setTransact( true, ResStatus::USER );
 }
 
-void seltest( const NameKindProxy & nks )
-{
-  SEC << nks << endl;
-  PoolItem av( *nks.availableBegin() );
-  SEC << av << endl;
-  Pattern::constPtr pat( asKind<Pattern>(av.resolvable()) );
-  SEC << pat << endl;
-  WAR << pat->install_packages() << endl;
-  MIL << pat->deps() << endl;
-  MIL << pat->includes() << endl;
-  MIL << pat->extends() << endl;
-}
-
-void showProd( const PoolItem & prod )
-{
-  Product::constPtr p( asKind<Product>(prod) );
-  DBG << prod << endl;
-  MIL << p << endl;
-  MIL << p->distributionName() << endl;
-  MIL << p->distributionEdition() << endl;
-  MIL << p->installtime() << endl;
-}
-
-void doPkg( const PoolItem & pi )
-{
-  Package::constPtr p( asKind<Package>(pi) );
-  MIL << p << endl;
-  DBG << p->keywords() << endl;
-}
-
-///////////////////////////////////////////////////////////////////
 /******************************************************************
 **
 **      FUNCTION NAME : main
@@ -205,49 +129,56 @@ int main( int argc, char * argv[] )
   //zypp::base::LogControl::instance().logfile( "log.restrict" );
   INT << "===[START]==========================================" << endl;
 
-  ConvertDbReceive cr;
-  cr.connect();
-  MediaChangeReceive mr;
-  mr.connect();
+  //Pathname p( "lmd/suse/setup/descr/packages" );
+  Pathname p( "packages" );
 
-  Pathname root( sysRoot );
-  if ( 1 ) {
-    //zypp::base::LogControl::TmpLineWriter shutUp;
-    SourceManager::sourceManager()->restore( root );
-
-    if ( SourceManager::sourceManager()->allSources().empty() )
-    {
-      {
-	zypp::base::LogControl::TmpLineWriter shutUp;
-	Source_Ref src1( createSource( "dir:/dist/install/SLP/openSUSE-10.3-Build00300-DVD/i386/DVD1" ) );
-	SourceManager::sourceManager()->addSource( src1 );
-	SourceManager::sourceManager()->store( root, true );
-      }
-      dumpRange( USR << "Sources Created: ",
-		 SourceManager::sourceManager()->Source_begin(),
-		 SourceManager::sourceManager()->Source_end()
-	       ) << endl;
-    } else {
-      dumpRange( USR << "Sources Reloaded: ",
-		 SourceManager::sourceManager()->Source_begin(),
-		 SourceManager::sourceManager()->Source_end()
-	       ) << endl;
-    }
+  if ( 1 )
+  {
+    Pathname p( "packages" );
+    Measure x( p.basename() );
+    TagFileParser tp( (zypp::parser::ParserProgress::Ptr()) );
+    tp.parse( p );
   }
 
-  std::for_each( SourceManager::sourceManager()->Source_begin(),
-		 SourceManager::sourceManager()->Source_end(),
-		 AddResolvables() );
+  if ( 1 ) {
+    Pathname p( "p" );
+    Measure x( p.basename() );
+    TagParser tp;
+    tp.parse( p );
+  }
+  if ( 1 ) {
+    Pathname p( "p.gz" );
+    Measure x( p.basename() );
+    TagParser tp;
+    tp.parse( p );
+  }
+  if ( 1 ) {
+    Pathname p( "packages" );
+    Measure x( p.basename() );
+    TagParser tp;
+    tp.parse( p );
+  }
+  if ( 1 ) {
+    Pathname p( "packages.gz" );
+    Measure x( p.basename() );
+    TagParser tp;
+    tp.parse( p );
+  }
 
-  ResPool pool( getZYpp()->pool() );
-  dumpRange( USR << "PackageKeywords: " << PackageKeyword::allSize(),
-	     PackageKeyword::allBegin(),
-	     PackageKeyword::allEnd() ) << endl;
-
-  std::for_each( pool.byKindBegin<Package>(),
-		 pool.byKindEnd<Package>(),
-		 doPkg );
-
+  if ( 0 )
+  {
+    Measure x( "lmd.idx" );
+    std::ifstream fIndex( "lmd.idx" );
+    for( iostr::EachLine in( fIndex ); in; in.next() )
+    {
+      Measure x( *in );
+      std::ifstream fIn( (*in).c_str() );
+      for( iostr::EachLine l( fIn ); l; l.next() )
+      {
+	;
+      }
+    }
+  }
   INT << "===[END]============================================" << endl << endl;
   zypp::base::LogControl::instance().logNothing();
   return 0;

@@ -208,7 +208,7 @@ namespace zypp
           }
           
           new_progress = (int)((((float)readed)/((float)_file_size))*100);
-          if ( new_progress != previous_progress )
+          if ( _progress && new_progress != previous_progress )
             _progress->progress( new_progress );
           previous_progress = new_progress;
           

@@ -48,6 +48,7 @@ SET( zypp_SRCS
   ProblemSolution.cc
   Package.cc
   Pathname.cc
+  ProgressData.cc
   Source.cc
   SourceFactory.cc
   SourceManager.cc
@@ -132,6 +133,7 @@ SET( zypp_HEADERS
   Patch.h
   PathInfo.h
   Pathname.h
+  ProgressData.h
   Pattern.h
   PoolItem.h
   ProblemSolution.h
@@ -406,12 +408,14 @@ INSTALL(  FILES
 )
 
 SET( zypp_parser_SRCS
+  parser/TagParser.cc
   parser/LibXMLHelper.cc
   parser/SAXParser.cc
   parser/XMLNodeIterator.cc
 )
 
 SET( zypp_parser_HEADERS
+  parser/TagParser.h
   parser/LibXMLHelper.h
   parser/ParserProgress.h
   parser/SAXParser.h
