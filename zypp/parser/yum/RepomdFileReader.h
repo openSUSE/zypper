@@ -15,13 +15,14 @@
 #include "zypp/OnMediaLocation.h"
 #include "zypp/base/Function.h"
 #include "zypp/parser/xml/Reader.h"
+#include "zypp/source/yum/YUMResourceType.h"
 
 using namespace std;
 using namespace zypp::xml;
 
 namespace zypp
 {
-  namespace source
+  namespace parser
   {
     namespace yum
     {
@@ -46,8 +47,11 @@ namespace zypp
         * first parameter is a \ref OnMediaLocation object with the resource
         * second parameter is the resource type
         */
-        typedef function<bool( const OnMediaLocation &, const string & )> ProcessResource;
-        
+        typedef function< bool(
+            const OnMediaLocation &,
+            const source::yum::YUMResourceType & )>
+          ProcessResource;
+
         enum Tag
         {
           tag_NONE,
@@ -74,7 +78,7 @@ namespace zypp
         private:
           OnMediaLocation _location;
           Tag _tag;
-          std::string _type;
+          source::yum::YUMResourceType _type;
           ProcessResource _callback;
           CheckSum _checksum;
           std::string _checksum_type;

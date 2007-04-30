@@ -16,6 +16,7 @@
 #include "zypp/OnMediaLocation.h"
 #include "zypp/MediaSetAccess.h"
 #include "zypp/parser/xml/Reader.h"
+#include "zypp/source/yum/YUMResourceType.h"
 
 namespace zypp
 {
@@ -46,7 +47,7 @@ namespace zypp
         void download( const Pathname &dest_dir );
         
        protected:
-        bool repomd_Callback( const OnMediaLocation &loc, const std::string &dtype );
+        bool repomd_Callback( const OnMediaLocation &loc, const YUMResourceType &dtype );
         bool patches_Callback( const OnMediaLocation &loc, const std::string &id );
        private:
         Url _url;

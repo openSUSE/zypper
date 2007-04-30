@@ -541,6 +541,7 @@ SET( zypp_parser_yum_SRCS
   parser/yum/RepomdFileReader.cc
   parser/yum/PatchesFileReader.cc
   parser/yum/PrimaryFileReader.cc
+  parser/yum/PatchFileReader.cc
 )
 
 SET( zypp_parser_yum_HEADERS
@@ -558,20 +559,13 @@ SET( zypp_parser_yum_HEADERS
   parser/yum/RepomdFileReader.h
   parser/yum/PatchesFileReader.h
   parser/yum/PrimaryFileReader.h
+  parser/yum/PatchFileReader.h
   parser/yum/schemanames.h
 )
 
 INSTALL(  FILES
   ${zypp_parser_yum_HEADERS}
   DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/parser/yum
-)
-
-SET( zypp_parser_yum2_SRCS
-  parser/yum2/YUMPrimaryParser.cc
-)
-
-SET( zypp_parser_yum2_HEADERS
-  parser/yum2/YUMPrimaryParser.h
 )
 
 INSTALL(  FILES
@@ -768,6 +762,7 @@ SET( zypp_source_yum_SRCS
   source/yum/YUMProductImpl.cc
   source/yum/YUMScriptImpl.cc
   source/yum/YUMSourceImpl.cc
+  source/yum/YUMResourceType.cc
 )
 
 SET( zypp_source_yum_HEADERS
@@ -781,6 +776,7 @@ SET( zypp_source_yum_HEADERS
   source/yum/YUMProductImpl.h
   source/yum/YUMScriptImpl.h
   source/yum/YUMSourceImpl.h
+  source/yum/YUMResourceType.h
 )
 
 INSTALL(  FILES

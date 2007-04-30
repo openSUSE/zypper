@@ -20,6 +20,7 @@
 
 using namespace std;
 using namespace zypp::xml;
+using namespace zypp::parser::yum;
 
 namespace zypp
 {
@@ -41,7 +42,7 @@ bool YUMDownloader::patches_Callback( const OnMediaLocation &loc, const string &
 }
 
 
-bool YUMDownloader::repomd_Callback( const OnMediaLocation &loc, const string &dtype )
+bool YUMDownloader::repomd_Callback( const OnMediaLocation &loc, const YUMResourceType &dtype )
 {
   MIL << dtype << " : " << loc << endl;
   _fetcher.enqueue(loc);
@@ -49,7 +50,7 @@ bool YUMDownloader::repomd_Callback( const OnMediaLocation &loc, const string &d
   // We got a patches file we need to read, to add patches listed
   // there, so we transfer what we have in the queue, and 
   // queue the patches in the patches callback
-  if ( dtype == "patches" )
+  if ( dtype == YUMResourceType::PATCHES )
   {
     _fetcher.start( _dest_dir, _media);
     // now the patches.xml file must exists

@@ -63,10 +63,10 @@ namespace zypp
     /** */
     Vendor vendor() const;
 
-    /** */
+    /** Installed size. */
     ByteCount size() const;
 
-    /** */
+    /** Size of the rpm package. */
     ByteCount archivesize() const;
 
     /** Backlink to the source providing this. */

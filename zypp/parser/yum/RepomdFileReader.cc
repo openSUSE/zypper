@@ -15,11 +15,12 @@
 
 using namespace std;
 using namespace zypp::xml;
+using zypp::source::yum::YUMResourceType;
 
-namespace zypp { namespace source { namespace yum {
+namespace zypp { namespace parser { namespace yum {
 
 RepomdFileReader::RepomdFileReader( const Pathname &repomd_file, ProcessResource callback )
-    : _tag(tag_NONE), _callback(callback)
+    : _tag(tag_NONE), _callback(callback), _type(YUMResourceType::NONE_e)
 {
   Reader reader( repomd_file );
   MIL << "Reading " << repomd_file << endl;
@@ -40,7 +41,7 @@ bool RepomdFileReader::consumeNode( Reader & reader_r )
     if ( reader_r->name() == "data" )
     {
       _tag = tag_Data;
-      _type = reader_r->getAttribute("type").asString();
+      _type = YUMResourceType(reader_r->getAttribute("type").asString());
       return true;
     }
     if ( reader_r->name() == "location" )

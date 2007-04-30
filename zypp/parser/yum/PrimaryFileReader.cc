@@ -1,9 +1,18 @@
-//#include "zypp/base/String.h"
+/*---------------------------------------------------------------------\
+|                          ____ _   __ __ ___                          |
+|                         |__  / \ / / . \ . \                         |
+|                           / / \ V /|  _/  _/                         |
+|                          / /__ | | | | | |                           |
+|                         /_____||_| |_| |_|                           |
+|                                                                      |
+\---------------------------------------------------------------------*/
+
 #include "zypp/base/Logger.h"
 #include "zypp/parser/yum/PrimaryFileReader.h"
 #include "zypp/Arch.h"
 #include "zypp/Edition.h"
 #include "zypp/TranslatedText.h"
+#include "zypp/ByteCount.h"
 
 using namespace std;
 using namespace zypp::xml;
@@ -16,8 +25,13 @@ namespace zypp
     {
 
 
-  PrimaryFileReader::PrimaryFileReader(const Pathname &primary_file, ProcessPackage callback, ParserProgress::Ptr progress)
-    : _callback(callback), _package(NULL), _count(0), _total_packages(0),
+  PrimaryFileReader::PrimaryFileReader(
+      const Pathname &primary_file,
+      ProcessPackage callback,
+      ParserProgress::Ptr progress)
+    :
+      _callback(callback), _package(NULL),
+      _count(0), _total_packages(0),
       _tag(tag_NONE), _expect_rpm_entry(false), _dtype(zypp::Dep::REQUIRES),
       _progress(progress), _old_progress(0)
   {
@@ -95,13 +109,40 @@ namespace zypp
   
       if (reader_r->name() == "packager")
       {
-        _package->packager = reader_r.nodeText().asString(); 
+        _package->packager = reader_r.nodeText().asString();
+//        DBG << "packager: " << _package->packager << endl; 
         return true;
       }
 
-      // TODO url
-      // TODO time
-      // TODO size
+      if (reader_r->name() == "url")
+      {
+//        DBG << "url: " <<  reader_r.nodeText().asString() << endl;
+        _package->url = reader_r.nodeText().asString();
+        return true;
+      }
+
+      if (reader_r->name() == "time")
+      {
+        _package->build_time = reader_r->getAttribute("build").asString();
+        // ignoring reader_r->getAttribute("file").asString(); (rpm file timestamp)
+        return true;
+      }
+
+      if (reader_r->name() == "size")
+      {
+        // ???
+        // reader_r->getAttribute("archive").asString();
+
+        // installed size
+        ByteCount size(str::strtonum<long long>(reader_r->getAttribute("installed").asString()), Unit());
+        _package->size = size;
+
+        // rpm package size
+        ByteCount size_rpm(str::strtonum<long long>(reader_r->getAttribute("package").asString()), Unit());
+        _package->archive_size = size_rpm;
+
+        return true;
+      }
 
       if (reader_r->name() == "location")
       {
@@ -112,7 +153,6 @@ namespace zypp
       if (reader_r->name() == "format")
       {
         _tag = tag_format;
-        _deps.clear();
         return true;
       }
     }
@@ -120,7 +160,7 @@ namespace zypp
     {
       if (reader_r->name() == "package")
       {
-        _callback(*_package, _deps);
+        _callback(*_package);
         if (_package)
         {
           delete _package;
@@ -169,7 +209,7 @@ namespace zypp
             << reader_r->getAttribute("name").asString()
             << " " << edition << endl;
 */
-        _deps[_dtype].push_back(
+        _package->deps[_dtype].push_back(
           zypp::capability::parse(
             ResTraits<Package>::kind,
             reader_r->getAttribute("name").asString(),
@@ -179,12 +219,42 @@ namespace zypp
         );
       }
 
-      // TODO license
-      // TODO vendor
-      // TODO group
-      // TODO buildhost
-      // TODO sourcerpm
-      // TODO header-range
+      if (reader_r->name() == "rpm:license")
+      {
+        _package->license = reader_r.nodeText().asString();
+        return true;
+      }
+
+      if (reader_r->name() == "rpm:vendor")
+      {
+        _package->vendor = reader_r.nodeText().asString();
+        return true;
+      }
+
+      if (reader_r->name() == "rpm:group")
+      {
+        _package->group = reader_r.nodeText().asString();
+        return true;
+      }
+
+      if (reader_r->name() == "rpm:buildhost")
+      {
+        _package->buildhost = reader_r.nodeText().asString();
+        return true;
+      }
+
+      if (reader_r->name() == "rpm:sourcerpm")
+      {
+        //package->source = reader_r.nodeText().asString();
+        return true;
+      }
+
+      if (reader_r->name() == "rpm:header-range")
+      {
+        //reader_r->getAttribute("start").asString(),
+        //reader_r->getAttribute("end").asString(),
+        return true;
+      }
 
       if (reader_r->name() == "rpm:provides")
       {
@@ -240,7 +310,14 @@ namespace zypp
         _expect_rpm_entry = true;
         return true;
       }
-      // TODO file
+      
+      if (reader_r->name() == "file")
+      {
+        // TODO figure out how to read files
+        // file = reader_r.nodeText().asString();
+        // type = reader_r->getAttribute("type").asString();
+        return true;
+      }
     }
     else if (reader_r->nodeType() == XML_READER_TYPE_END_ELEMENT)
     {

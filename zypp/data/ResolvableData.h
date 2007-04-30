@@ -71,9 +71,11 @@ namespace data
       std::string license_to_confirm;
       std::string vendor;
       
+      /** Installed size. \see zypp::ResObject::size() */
       ByteCount size;
+      /** RPM package size. \see zypp::ResObject::archive_size() */
       ByteCount archive_size;
-      
+
       std::string source;
       
       int source_media_nr;
@@ -83,7 +85,7 @@ namespace data
       Date build_time;
       Date install_time;
   };
-  
+
   class AtomBase : public ResObject
   {
     public:
@@ -134,6 +136,21 @@ namespace data
   {
     public:
       Patch() {};
+
+    /** Patch ID */
+    std::string id;
+    /** Patch time stamp */
+    Date timestamp;
+    /** Patch category (recommended, security,...) */
+    std::string category;
+    /** Does the system need to reboot to finish the update process? */
+    bool reboot_needed;
+    /** Does the patch affect the package manager itself? */
+    bool affects_pkg_manager;
+    /** The list of all atoms building the patch */
+    //AtomList atoms;
+    /** Is the patch installation interactive? (does it need user input?) */
+    bool interactive;
   };
 
   /*
@@ -229,7 +246,7 @@ namespace data
     std::string group;
     std::string url;
     std::string os;
-      
+
     std::string prein;
     std::string postin;
     std::string preun;

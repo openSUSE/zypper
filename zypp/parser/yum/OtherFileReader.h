@@ -7,8 +7,8 @@
 |                                                                      |
 \---------------------------------------------------------------------*/
 
-#ifndef ZYPP_PARSER_YUM_PRIMARYFILEPARSER_H
-#define ZYPP_PARSER_YUM_PRIMARYFILEPARSER_H
+#ifndef OTHERFILEREADER_H_
+#define OTHERFILEREADER_H_
 
 #include "zypp/base/Function.h"
 #include "zypp/base/Logger.h"
@@ -27,11 +27,12 @@ namespace zypp
     {
 
   /**
-   * Reads through a primary.xml file and collects package data including
-   * dependencies.
-   * 
-   * After a package is read, a \ref zypp::data::Package object is prepared
-   * and \ref _callback is called with this object passed in.
+   * Reads through a other.xml file and collects additional package data
+   * like changelogs.
+   *
+   * After a package is read, a \ref zypp::data::Resolvable
+   * and \ref changelog TODO is prepared and \ref _callback
+   * is called with these two objects passed in. 
    *
    * The \ref _callback is provided on construction.
    *
@@ -40,58 +41,32 @@ namespace zypp
    *                          bind(&SomeClass::callbackfunc, &object, _1));
    * \endcode
    */
-  class PrimaryFileReader
+  class OtherFileReader
   {
   public:
     /**
      * Callback definition.
      */
-    typedef function<bool(const zypp::data::Package &)> ProcessPackage;
+    typedef function<bool(const zypp::data::Resolvable &)> ProcessPackage;
 
-    /**
-     * Enumeration of some primary.xml tags.
-     */
-    enum Tag
-    {
-      tag_NONE,
-      tag_package,
-      tag_format
-    };
 
     /**
      * Constructor
-     * \param primary_file the primary.xml.gz file you want to read
-     * \param function to process \ref _package data.
+     * \param other_file the other.xml.gz file you want to read
+     * \param function to process \ref _resolvable data.
+     * \param progress progress reporting function TODO better progress reporting
      * 
-     * \see PrimaryFileReader::ProcessPackage
+     * \see OtherFileReader::ProcessPackage
      */
-    PrimaryFileReader(const Pathname &primary_file, ProcessPackage callback, ParserProgress::Ptr progress);
-  
+    PrimaryFileReader(const Pathname & other_file,
+        ProcessPackage callback, ParserProgress::Ptr progress);
+
     /**
      * Callback provided to the XML parser.
      */
     bool consumeNode(zypp::xml::Reader & reader_r);
 
   private:
-    /**
-     * Function for processing all <code>format</code> tag subtree nodes.
-     */
-    bool consumeFormatChildNodes(zypp::xml::Reader & reader_r);
-
-  private:
-    /** Used to remember primary.xml tag beeing currently processed. */
-    Tag _tag;
-
-    /**
-     * Used to remember whether we are expecting an rpm:entry tag
-     * e.g. for rpm:requires
-     */
-    bool _expect_rpm_entry;
-
-    /**
-     * Type of dependecy beeing processed.
-     */
-    Dep _dtype;
 
     /**
      * Number of packages read so far.
@@ -100,15 +75,15 @@ namespace zypp
 
     /**
      * Total number of packages to be read. This information is acquired from
-     * the <code>packages</code> attribute of <code>metadata<code> tag.
+     * the <code>packages</code> attribute of <code>otherdata<code> tag.
      */
     unsigned _total_packages;
 
     /**
-     * Pointer to the \ref zypp::data::Package object for storing the package
-     * metada
+     * Pointer to the \ref zypp::data::Resolvable object for storing the NVRA
+     * data.
      */
-    zypp::data::Package *_package;
+    zypp::data::Resolvable *_resolvable;
 
     /**
      * Callback for processing package metadata passed in through constructor.
@@ -119,7 +94,7 @@ namespace zypp
      * Progress reporting object.
      */
     ParserProgress::Ptr _progress;
-    
+
     long int _old_progress;
   };
 
@@ -128,6 +103,6 @@ namespace zypp
   } // ns parser
 } // ns yum
 
-#endif /* ZYPP_PARSER_YUM_PRIMARYFILEPARSER_H */
+#endif /*OTHERFILEREADER_H_*/
 
 // vim: set ts=2 sts=2 sw=2 et ai:
