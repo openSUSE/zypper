@@ -88,9 +88,9 @@ namespace zypp
        * for each tag. \ref consume might throw other exceptions
        * as well.
       */
-      void parse( const InputStream & imput_r );
+      virtual void parse( const InputStream & imput_r );
 
-    public:
+    protected:
       /** Called when start parsing. */
       virtual void beginParse();
       /** Called when a single-tag is found. */
@@ -100,7 +100,7 @@ namespace zypp
       /** Called when the parse is done. */
       virtual void endParse();
 
-    public:
+    protected:
       /** Prefix exception message with line and tag information. */
       std::string errPrefix( unsigned lineNo_r,
 			     const std::string & msg_r = std::string() ) const;
@@ -116,7 +116,6 @@ namespace zypp
 
     private:
       std::string _inputname;
-      //ProgressData _ticks;
     };
     ///////////////////////////////////////////////////////////////////
 
@@ -128,6 +127,14 @@ namespace zypp
 
     /** \relates TagParser::MultiTag Stream output. */
     std::ostream & operator<<( std::ostream & str, const TagParser::MultiTag & obj );
+
+    template<class _D>
+    inline std::ostream & operator<<( std::ostream & str, const shared_ptr<_D> & obj )
+    {
+      if ( obj )
+	return str << *obj;
+      return str << std::string("NULL");
+    }
 
     /////////////////////////////////////////////////////////////////
   } // namespace parser

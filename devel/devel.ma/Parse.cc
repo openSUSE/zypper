@@ -23,10 +23,10 @@
 
 #include "zypp/parser/tagfile/TagFileParser.h"
 #include "zypp/parser/TagParser.h"
+#include "zypp/parser/susetags/PackagesFileReader.h"
 
 using namespace std;
 using namespace zypp;
-using namespace zypp::ui;
 using namespace zypp::functor;
 
 using zypp::parser::tagfile::TagFileParser;
@@ -119,6 +119,58 @@ std::ostream & operator<<( std::ostream & str, const iostr::EachLine & obj )
 
 }
 
+#include "zypp/ProgressData.h"
+
+///////////////////////////////////////////////////////////////////
+namespace zypp
+{ /////////////////////////////////////////////////////////////////
+
+
+  ///////////////////////////////////////////////////////////////////
+  namespace parser
+  { /////////////////////////////////////////////////////////////////
+   ///////////////////////////////////////////////////////////////////
+    namespace susetags
+    { /////////////////////////////////////////////////////////////////
+
+      bool testRec( ProgressData::value_type v )
+      {
+	WAR << "->" << v << endl;
+	return( v <= 100 );
+      }
+
+      struct Test
+      {
+	void action( int l = 10 )
+	{
+	  ProgressData tics( 10 );
+	  tics.name( "test ticks" );
+	  //tics.sendTo( testRec );
+	  tics.toMin(); // start send
+
+	  for ( int i = 0; i < l; ++i )
+	  {
+	    if ( ! tics.set( i ) )
+	      return; // user requested abort
+	  }
+
+	  tics.toMax(); // take care 100% are reported on success
+	}
+      };
+
+
+      /////////////////////////////////////////////////////////////////
+    } // namespace susetags
+    ///////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////
+  } // namespace parser
+  ///////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////
+} // namespace zypp
+///////////////////////////////////////////////////////////////////
+
+using namespace zypp::parser::susetags;
+
 /******************************************************************
 **
 **      FUNCTION NAME : main
@@ -128,6 +180,11 @@ int main( int argc, char * argv[] )
 {
   //zypp::base::LogControl::instance().logfile( "log.restrict" );
   INT << "===[START]==========================================" << endl;
+
+  Test t;
+  t.action();
+  t.action( 20 );
+  return ( 0 );
 
   //Pathname p( "lmd/suse/setup/descr/packages" );
   Pathname p( "packages" );
@@ -140,28 +197,28 @@ int main( int argc, char * argv[] )
     tp.parse( p );
   }
 
-  if ( 1 ) {
+  if ( 0 ) {
     Pathname p( "p" );
     Measure x( p.basename() );
-    TagParser tp;
+    PackagesFileReader tp;
     tp.parse( p );
   }
   if ( 1 ) {
     Pathname p( "p.gz" );
     Measure x( p.basename() );
-    TagParser tp;
+    PackagesFileReader tp;
     tp.parse( p );
   }
   if ( 1 ) {
     Pathname p( "packages" );
     Measure x( p.basename() );
-    TagParser tp;
+    PackagesFileReader tp;
     tp.parse( p );
   }
   if ( 1 ) {
     Pathname p( "packages.gz" );
     Measure x( p.basename() );
-    TagParser tp;
+    PackagesFileReader tp;
     tp.parse( p );
   }
 

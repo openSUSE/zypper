@@ -441,6 +441,19 @@ INSTALL(  FILES
   DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/parser/inifile
 )
 
+SET( zypp_parser_susetags_SRCS
+  parser/susetags/PackagesFileReader.cc
+)
+
+SET( zypp_parser_susetags_HEADERS
+  parser/susetags/PackagesFileReader.h
+)
+
+INSTALL(  FILES
+  ${zypp_parser_susetags_HEADERS}
+  DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/parser/susetags
+)
+
 SET( zypp_parser_tagfile_SRCS
   parser/tagfile/ParseException.cc
   parser/tagfile/TagFileParser.cc
@@ -999,6 +1012,7 @@ ${zypp_capability_SRCS}
 ${zypp_pool_SRCS}
 ${zypp_parser_tagfile_SRCS}
 ${zypp_parser_taggedfile_SRCS}
+${zypp_parser_susetags_SRCS}
 ${zypp_parser_yum2_SRCS}
 ${zypp_parser_xmlstore_SRCS}
 ${zypp_parser_xml_SRCS}
@@ -1032,6 +1046,7 @@ ${zypp_source_plaindir_HEADERS}
 ${zypp_target_store_xml_HEADERS}
 ${zypp_parser_tagfile_HEADERS}
 ${zypp_parser_taggedfile_HEADERS}
+${zypp_parser_susetags_HEADERS}
 ${zypp_target_rpm_HEADERS}
 ${zypp_parser_yum2_HEADERS}
 ${zypp_capability_HEADERS}
