@@ -27,8 +27,16 @@ namespace zypp
   //	METHOD NAME : ProgressData::report
   //	METHOD TYPE : void
   //
-  void ProgressData::report()
+  bool ProgressData::report()
   {
+    // DISABLED to get DBG output from 'if ( doReport )'
+    //if ( ! _d->_receiver )
+    //  return true;
+
+    bool goOn     = true;  // continue per default
+    bool doReport = false;
+
+    // compute value and check whether to report it
     if ( hasRange() )
     {
       value_type newVal = _d->_val * 100;
@@ -36,30 +44,50 @@ namespace zypp
 
       if ( newVal - _d->_last_val > 5 || Date::now() - _d->_last_send > 1 || _d->_state == END )
       {
-	DBG << str::form( "{%u|%s}(%d%%)",
-			  numericId(), name().c_str(), newVal ) << endl;
 	_d->_last_val  = newVal;
 	_d->_last_send = Date::now();
-	if ( _d->_state == INIT )
-	{
-	  _d->_state = RUN;
-	}
+	doReport = true;
       }
     }
     else
     {
       if ( Date::now() - _d->_last_send > 1 || _d->_state == END )
       {
-	DBG << str::form( "{%u|%s}(%d!)",
-			numericId(), name().c_str(), _d->_val ) << endl;
 	_d->_last_val  = _d->_val;
 	_d->_last_send = Date::now();
-	if ( _d->_state == INIT )
-	{
-	  _d->_state = RUN;
-	}
+	doReport = true;
       }
     }
+
+    // report if necessary
+    if ( doReport )
+    {
+      if ( _d->_state == INIT )
+      {
+	_d->_state = RUN;
+      }
+
+      if ( _d->_receiver )
+      {
+	goOn = _d->_receiver( _d->_last_val );
+      }
+      else
+      {
+	DBG << str::form( "{#%u|%s}(%lld%s)",
+			numericId(), name().c_str(),
+			_d->_last_val, ( hasRange() ? "%" : "!" ) ) << endl;
+      }
+    }
+
+    // log abort request and return
+    if ( ! goOn && _d->_state != END )
+    {
+      WAR << "User request to ABORT pending action. "
+	  << str::form( "{#%u|%s}(%lld%s)",
+			numericId(), name().c_str(),
+			_d->_last_val, ( hasRange() ? "%" : "!" ) ) << endl;
+    }
+    return goOn;
   }
 
   /******************************************************************

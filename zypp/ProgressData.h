@@ -16,6 +16,7 @@
 #include <string>
 
 #include "zypp/base/PtrTypes.h"
+#include "zypp/base/Function.h"
 #include "zypp/base/ProvideNumericId.h"
 
 #include "zypp/Date.h"
@@ -47,9 +48,17 @@ namespace zypp
   {
     public:
       typedef long long value_type;
-      enum State { INIT, RUN, END };
+      /** Most simple version of progress reporting - a single value.
+       * The percentage in most cases. Sometimes just keepalive.
+       *
+       * \todo tell recipient whether percentage or keepalive is sent
+       * and maybe tell whether task is abortable or not.
+       */
+      typedef function<bool(value_type)> ReceiverFnc;
 
     private:
+      enum State { INIT, RUN, END };
+
       class Data
       {
 	public:
@@ -59,14 +68,15 @@ namespace zypp
 	  {}
 
 	public:
-	  State _state;
+	  State       _state;
 	  std::string _name;
-	  value_type _min;
-	  value_type _max;
-	  value_type _val;
+	  value_type  _min;
+	  value_type  _max;
+	  value_type  _val;
 
-	  value_type _last_val;
-	  Date       _last_send;
+	  ReceiverFnc _receiver;
+	  value_type  _last_val;
+	  Date        _last_send;
 
 	private:
 	  /** clone for RWCOW_pointer */
@@ -105,27 +115,6 @@ namespace zypp
       }
 
     public:
-      /** @return Current \c min value. */
-      value_type min() const
-      { return _d->_min; }
-
-      /** @return Current \c max value. */
-      value_type max() const
-      { return _d->_max; }
-
-      /** @return Current counter \c value. */
-      value_type val() const
-      { return _d->_val; }
-
-      /** @return Wheter <tt>[min,max]</tt> defines a nonempty range. */
-      bool hasRange() const
-      { return min() != max(); }
-
-      /** @return The counters name. */
-      const std::string & name() const
-      { return _d->_name; }
-
-    public:
       /** Set new \c min value. */
       void min( value_type min_r )
       { _d->_min = min_r; }
@@ -147,41 +136,87 @@ namespace zypp
       { min( min_r ); max( max_r ); }
 
     public:
-      /** Set new counter \c value. */
-      void set( value_type val_r )
-      {
-	_d->_val = val_r;
-	report();
-      }
-
-      /** Increment counter \c value (default by 1). */
-      void incr( value_type val_r = 1 )
-      { set( val() + val_r ); }
-
-      /** Decrement counter \c value (default by 1). */
-      void decr( value_type val_r = 1 )
-      { set( val() - val_r ); }
-
-      /** Set counter value to current \c min value. */
-      void toMin()
-      { set( min() ); }
-
-      /** Set counter value to current \c max value (unless no range). */
-      void toMax()
-      { if ( hasRange() ) set( max() ); }
-
-      /** Leave counter value unchanged (still alive). */
-      void tick()
-      { set( val() ); }
-
-    public:
       /** Set counter name. */
       void name( const std::string & name_r )
       { _d->_name = name_r; }
 
+      /** Set ReceiverFnc. */
+      void sendTo( ReceiverFnc fnc_r )
+      { _d->_receiver = fnc_r; }
+
+      /** Set no ReceiverFnc. */
+      void noSend()
+      { _d->_receiver = ReceiverFnc(); }
+
+    public:
+      /** \name Progress reporting.
+       *
+       * These methods may actually cause a progress report to be sent.
+       *
+       * All methods return \c bool, because a progress receiver may
+       * return \c false to indicate the desire to abort the pending
+       * action. The incident is logged, but it's finaly up to the caller
+       * to honor this.
+       */
+      //@{
+
+      /** Set new counter \c value. */
+      bool set( value_type val_r )
+      {
+	_d->_val = val_r;
+	return report();
+      }
+
+      /** Increment counter \c value (default by 1). */
+      bool incr( value_type val_r = 1 )
+      { return set( val() + val_r ); }
+
+      /** Decrement counter \c value (default by 1). */
+      bool decr( value_type val_r = 1 )
+      { return set( val() - val_r ); }
+
+      /** Set counter value to current \c min value. */
+      bool toMin()
+      { return set( min() ); }
+
+      /** Set counter value to current \c max value (unless no range). */
+      bool toMax()
+      { return set( hasRange() ? max() : val() ); }
+
+      /** Leave counter value unchanged (still alive). */
+      bool tick()
+      { return set( val() ); }
+
+      //@}
+
+    public:
+      /** @return Current \c min value. */
+      value_type min() const
+      { return _d->_min; }
+
+      /** @return Current \c max value. */
+      value_type max() const
+      { return _d->_max; }
+
+      /** @return Current counter \c value. */
+      value_type val() const
+      { return _d->_val; }
+
+      /** @return Wheter <tt>[min,max]</tt> defines a nonempty range. */
+      bool hasRange() const
+      { return min() != max(); }
+
+      /** @return The counters name. */
+      const std::string & name() const
+      { return _d->_name; }
+
+      /** @return The ReceiverFnc. */
+      ReceiverFnc receiver() const
+      { return _d->_receiver; }
+
     private:
       /** Send report if necessary. */
-      void report();
+      bool report();
 
       /** Pointer to data. */
       RWCOW_pointer<Data> _d;
