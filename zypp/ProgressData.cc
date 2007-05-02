@@ -42,7 +42,7 @@ namespace zypp
       value_type newVal = _d->_val * 100;
       newVal /= ( _d->_max - _d->_min );
 
-      if ( newVal - _d->_last_val > 5 || Date::now() - _d->_last_send > 1 || _d->_state == END )
+      if ( newVal - _d->_last_val > 20 || Date::now() - _d->_last_send > 1 || _d->_state == END )
       {
 	_d->_last_val  = newVal;
 	_d->_last_send = Date::now();

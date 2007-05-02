@@ -42,7 +42,95 @@ namespace zypp
    * Each ProgressData object provides a unique numeric id and you may assign
    * it a name.
    *
-   * \todo complete the progess sending.
+   * \code
+   *      bool exampleReceiver( ProgressData::value_type v )
+   *      {
+   *        DBG << "got ->" << v << endl;
+   *        return( v <= 100 ); // Abort if ( v > 100 )
+   *      }
+   *
+   *      class Example
+   *      {
+   *        public:
+   *
+   *          Example( const ProgressData::ReceiverFnc & fnc_r = ProgressData::ReceiverFnc() )
+   *          : _fnc( fnc_r )
+   *          {}
+   *
+   *          void SendTo( const ProgressData::ReceiverFnc & fnc_r )
+   *          { _fnc = fnc_r; }
+   *
+   *        public:
+   *
+   *          void action()
+   *          {
+   *            ProgressData tics( 10 );    // Expect range 0 -> 10
+   *            tics.name( "test ticks" );  // Some arbitrary name
+   *            tics.sendTo( _fnc );        // Send reports to _fnc
+   *            tics.toMin();               // start sending min (0)
+   *
+   *            for ( int i = 0; i < 10; ++i )
+   *            {
+   *              if ( ! tics.set( i ) )
+   *                return; // user requested abort
+   *            }
+   *
+   *            tics.toMax(); // take care 100% are reported on success
+   *          }
+   *
+   *          void action2()
+   *          {
+   *            ProgressData tics;          // Just send 'still alive' messages
+   *            tics.name( "test ticks" );  // Some arbitrary name
+   *            tics.sendTo( _fnc );        // Send reports to _fnc
+   *            tics.toMin();               // start sending min (0)
+   *
+   *            for ( int i = 0; i < 10; ++i )
+   *            {
+   *              if ( ! tics.set( i ) )
+   *                return; // user requested abort
+   *            }
+   *
+   *            tics.toMax(); //
+   *          }
+   *
+   *        private:
+   *          ProgressData::ReceiverFnc _fnc;
+   *      };
+   * \endcode
+   * \code
+   *   Example t( exampleReceiver );
+   *   DBG << "Reporting %:" << endl;
+   *   t.action();
+   *   DBG << "Reporting 'still alive':" << endl;
+   *   t.action2();
+   * \endcode
+   * \code
+   * Reporting %:
+   * got ->0
+   * got ->10
+   * got ->20
+   * got ->30
+   * got ->40
+   * got ->50
+   * got ->60
+   * got ->70
+   * got ->80
+   * got ->90
+   * got ->100
+   * got ->100
+   * Reporting 'still alive':
+   * got ->0
+   * got ->9
+   * \endcode
+   *
+   * The different ammount of triggers is due to different rules for sending
+   * percent or 'still alive' messages.
+   *
+   * \todo Complete the progess sending.
+   * \todo Tell recipient whether percentage or keepalive is sent,
+   * the id and name might be helpfull, and maybe tell whether task
+   * is abortable or not; i.e extend the ReceiverFnc signature.
    */
   class ProgressData : public base::ProvideNumericId<ProgressData,unsigned>
   {
@@ -50,9 +138,6 @@ namespace zypp
       typedef long long value_type;
       /** Most simple version of progress reporting - a single value.
        * The percentage in most cases. Sometimes just keepalive.
-       *
-       * \todo tell recipient whether percentage or keepalive is sent
-       * and maybe tell whether task is abortable or not.
        */
       typedef function<bool(value_type)> ReceiverFnc;
 
@@ -141,7 +226,7 @@ namespace zypp
       { _d->_name = name_r; }
 
       /** Set ReceiverFnc. */
-      void sendTo( ReceiverFnc fnc_r )
+      void sendTo( const ReceiverFnc & fnc_r )
       { _d->_receiver = fnc_r; }
 
       /** Set no ReceiverFnc. */
@@ -211,7 +296,7 @@ namespace zypp
       { return _d->_name; }
 
       /** @return The ReceiverFnc. */
-      ReceiverFnc receiver() const
+      const ReceiverFnc & receiver() const
       { return _d->_receiver; }
 
     private:

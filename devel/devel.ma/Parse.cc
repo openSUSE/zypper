@@ -133,30 +133,89 @@ namespace zypp
     namespace susetags
     { /////////////////////////////////////////////////////////////////
 
-      bool testRec( ProgressData::value_type v )
+      bool exampleReceiver( ProgressData::value_type v )
       {
-	WAR << "->" << v << endl;
-	return( v <= 100 );
+	WAR << "got ->" << v << endl;
+	return( v <= 100 ); // Abort if ( v > 100
       }
 
-      struct Test
+      class Example
       {
-	void action( int l = 10 )
-	{
-	  ProgressData tics( 10 );
-	  tics.name( "test ticks" );
-	  //tics.sendTo( testRec );
-	  tics.toMin(); // start send
+	public:
 
-	  for ( int i = 0; i < l; ++i )
+	  Example( const ProgressData::ReceiverFnc & fnc_r = ProgressData::ReceiverFnc() )
+	  : _fnc( fnc_r )
+	  {}
+
+	  void SendTo( const ProgressData::ReceiverFnc & fnc_r )
+	  { _fnc = fnc_r; }
+
+	public:
+
+	  void action()
 	  {
-	    if ( ! tics.set( i ) )
-	      return; // user requested abort
+	    ProgressData tics( 10 );    // Expect range 0 -> 10
+	    tics.name( "test ticks" );  // Some arbitrary name
+	    tics.sendTo( _fnc );        // Send reports to _fnc
+	    tics.toMin();               // start sending min (0)
+
+	    for ( int i = 0; i < 10; ++i )
+	    {
+	      if ( ! tics.set( i ) )
+		return; // user requested abort
+	    }
+
+	    tics.toMax(); // take care 100% are reported on success
 	  }
 
-	  tics.toMax(); // take care 100% are reported on success
-	}
+	  void action2()
+	  {
+	    ProgressData tics;          // Just send 'still alive' messages
+	    tics.name( "test ticks" );  // Some arbitrary name
+	    tics.sendTo( _fnc );        // Send reports to _fnc
+	    tics.toMin();               // start sending min (0)
+
+	    for ( int i = 0; i < 10; ++i )
+	    {
+	      if ( ! tics.set( i ) )
+		return; // user requested abort
+	    }
+
+	    tics.toMax(); //
+	  }
+
+	private:
+	  ProgressData::ReceiverFnc _fnc;
       };
+
+
+      //ProgressData makeProgressData( const InputStream & input_r )
+      //{
+      //  ProgressData ret;
+      //  ret.name( input_r.name() );
+      //  if ( input_r.size() > 0 )
+      //    ret.range( input_r.size() );
+      //  return ret;
+      //}
+
+      void simpleParser( const InputStream & input_r,
+			 const ProgressData::ReceiverFnc & fnc_r = ProgressData::ReceiverFnc() )
+      {
+	ProgressData ticks( makeProgressData( input_r ) );
+	ticks.sendTo( fnc_r );
+	ticks.toMin(); // start sending min (0)
+
+	iostr::EachLine line( input_r );
+	for( ; line; line.next() )
+	{
+	  /* process the line */
+
+	  if ( ! ticks.set( input_r.stream().tellg() ) )
+	    return; // user requested abort
+	}
+
+	ticks.toMax(); // take care 100% are reported on success
+      }
 
 
       /////////////////////////////////////////////////////////////////
@@ -181,9 +240,8 @@ int main( int argc, char * argv[] )
   //zypp::base::LogControl::instance().logfile( "log.restrict" );
   INT << "===[START]==========================================" << endl;
 
-  Test t;
-  t.action();
-  t.action( 20 );
+  simpleParser( "packages" );
+  simpleParser( "packages.gz" );
   return ( 0 );
 
   //Pathname p( "lmd/suse/setup/descr/packages" );
