@@ -179,7 +179,7 @@ int main( int argc, char * argv[] )
     PackagesFileReader tp;
     tp.parse( p );
   }
-  if ( 1 ) {
+  if ( 0 ) {
     Pathname p( "p.gz" );
     Measure x( p.basename() );
     PackagesFileReader tp;
@@ -191,7 +191,7 @@ int main( int argc, char * argv[] )
     PackagesFileReader tp;
     tp.parse( p );
   }
-  if ( 0 ) {
+  if ( 1 ) {
     Pathname p( "packages.gz" );
     Measure x( p.basename() );
     PackagesFileReader tp;

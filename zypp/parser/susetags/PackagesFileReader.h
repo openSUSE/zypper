@@ -32,15 +32,13 @@ namespace zypp
       //	CLASS NAME : PackagesFileReader
       //
       /** */
-      class PackagesFileReader : private TagParser
+      class PackagesFileReader : public TagParser
       {
 	public:
 	  /** Default ctor */
 	  PackagesFileReader();
 	  /** Dtor */
 	  virtual ~PackagesFileReader();
-
-	  virtual void parse( const InputStream & imput_r );
 
 	private:
 	  /** Called when start parsing. */

@@ -35,6 +35,8 @@ namespace zypp
       struct PackagesFileReader::Impl
       {
 	///data::Package
+	Impl() { SEC << endl; }
+	~Impl() { SEC << endl; }
       };
       ///////////////////////////////////////////////////////////////////
 
@@ -59,16 +61,6 @@ namespace zypp
       //
       PackagesFileReader::~PackagesFileReader()
       {}
-
-      ///////////////////////////////////////////////////////////////////
-      //
-      //	METHOD NAME : PackagesFileReader::
-      //	METHOD TYPE : void
-      //
-      void PackagesFileReader::parse( const InputStream & imput_r )
-      {
-	TagParser::parse( imput_r );
-      }
 
       ///////////////////////////////////////////////////////////////////
       //
