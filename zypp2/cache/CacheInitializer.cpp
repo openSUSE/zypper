@@ -32,7 +32,7 @@ namespace zypp
 ///////////////////////////////////////////////////////////////////
 namespace cache
 { /////////////////////////////////////////////////////////////////
-  
+
 struct CacheInitializer::Impl
 {
   Impl( const Pathname &root_r )
@@ -44,7 +44,7 @@ struct CacheInitializer::Impl
   Pathname root;
   bool just_initialized;
 };
-  
+
 CacheInitializer::CacheInitializer( const Pathname &root_r, const Pathname &db_file )
   : _pimpl( new Impl( root_r ) )
 {
@@ -56,7 +56,7 @@ CacheInitializer::CacheInitializer( const Pathname &root_r, const Pathname &db_f
   {
     ZYPP_RETHROW(Exception(ex.what()));
     //ERR << "Exception Occured: " << ex.what() << endl;
-  } 
+  }
 
   try
   {
@@ -77,7 +77,7 @@ CacheInitializer::CacheInitializer( const Pathname &root_r, const Pathname &db_f
     ZYPP_RETHROW(Exception(ex.what()));
     //ERR << "Exception Occured: " << ex.what() << endl;
   }
-  
+
 }
 
 bool CacheInitializer::justInitialized() const
@@ -87,7 +87,7 @@ bool CacheInitializer::justInitialized() const
 
 CacheInitializer::~CacheInitializer()
 {
- 
+
 }
 
 bool CacheInitializer::tablesCreated() const
@@ -119,9 +119,9 @@ void CacheInitializer::createTables()
     }
     else
     {
-      ZYPP_THROW(Exception("Can't open db schema"));
+      ZYPP_THROW(Exception(str::form("Can't open db schema %s", filename)));
     }
-    
+
     //ERR << "Executing " << statements[i] << endl;
     MIL << "Schema size: " << sql.size() << endl;
     _pimpl->con->execute(sql.c_str());

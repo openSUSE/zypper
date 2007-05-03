@@ -53,7 +53,8 @@ namespace zypp
     ///////////////////////////////////////////////////////////////////
 
     /** Create CodeLocation object storing the current location. */
-    #define ZYPP_EX_CODELOCATION ::zypp::exception_detail::CodeLocation(__FILE__,__FUNCTION__,__LINE__)
+    //#define ZYPP_EX_CODELOCATION ::zypp::exception_detail::CodeLocation(__FILE__,__FUNCTION__,__LINE__)
+#define ZYPP_EX_CODELOCATION ::zypp::exception_detail::CodeLocation(( *__FILE__ == '/' ? strrchr( __FILE__, '/' ) + 1 : __FILE__ ),__FUNCTION__,__LINE__)
 
     /** \relates CodeLocation Stream output */
     std::ostream & operator<<( std::ostream & str, const CodeLocation & obj );

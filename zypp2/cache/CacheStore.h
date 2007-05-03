@@ -32,35 +32,35 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
   namespace cache
   { /////////////////////////////////////////////////////////////////
-        
+
     /**
      * The cache store caches resolvable data into some backend.
     */
     class CacheStore
     {
     public:
-      
+
       CacheStore();
       ~CacheStore();
-      
+
       /**
        * Constructor for the CacheStore
        *
        * \note a transaction will be started from the moment the
        * CacheStore is instanciated.
-       * 
+       *
        * The data will be saved in the directory specified in
        * \a dbdir
        */
       CacheStore( const Pathname &dbdir );
-      
+
       /**
        * Implements the ResolvableConsumer consumePackage interface
        * Consumer a package and inserts it into the database.
        * Don't use this method yet
       */
       virtual void consumePackage( const data::Package &package);
-      
+
       /**
        * Appends a resolvable to the store.
        *
@@ -68,11 +68,11 @@ namespace zypp
        * and its \c NVRA (name version release and architecture ).
        * Optionaly you can pass a list of \c CapabilityImpl::Ptr
        * as dependencies for the resolvable.
-       * 
+       *
        * You have to specify the RecordId for the catalog owning
        * this resolvable. Yuu can obtain it with
        * \ref lookupOrAppendCatalog
-       * 
+       *
        * You can create those \a deps using \ref capability::parse
        * functions, or the build methods to create specific types
        * of capabilities:
@@ -89,7 +89,7 @@ namespace zypp
                                        const Resolvable::Kind &kind,
                                        const NVRA &nvra,
                                        const data::Dependencies &deps );
-      
+
       /**
        * Adds dependencies to the store
        *
@@ -103,30 +103,30 @@ namespace zypp
        */
       void appendDependencies( const data::RecordId &resolvable_id,
                                const data::Dependencies &dependencies );
-      
+
       /**
        * Adds dependencies to the store
        *
        * A lists of dependencies \a dlist to be specified. Among
        * which type of dependencies \ref zypp::Dep it is as
        * the \a deptype argument.
-       * 
+       *
        * \a resolvable_id is the resolvable Id in the CacheStore
        * that will own those capabilities.
        *
        * FIXME should it \throw if the resolvable does not exist?
        */
-      void appendDependencyList( const data::RecordId &resolvable_id, 
+      void appendDependencyList( const data::RecordId &resolvable_id,
                                  zypp::Dep deptype,
                                  const data::DependencyList &dlist );
-      
+
       /**
        * Adds a dependency to the store.
        *
-       * A \ref CapabilityImpl::Ptr argument \a cap has to be specified. 
+       * A \ref CapabilityImpl::Ptr argument \a cap has to be specified.
        * Among which type of dependency \ref zypp::Dep it is as
        * the \a deptype argument.
-       * 
+       *
        * \a resolvable_id is the resolvable Id in the CacheStore
        * that will own the capability
        *
@@ -135,14 +135,14 @@ namespace zypp
       void appendDependency( const data::RecordId &resolvable_id,
                              zypp::Dep deptype,
                              capability::CapabilityImpl::Ptr cap );
-      
+
       /**
        * Adds a Named dependency to the store.
        *
        * A \ref NamedCap::Ptr \a dlist to be specified. Among
        * which type of dependency \ref zypp::Dep it is as
        * the \a deptype argument.
-       * 
+       *
        * \a resolvable_id is the resolvable Id in the CacheStore
        * that will own the capability
        *
@@ -153,14 +153,14 @@ namespace zypp
        */
       void appendNamedDependency( const data::RecordId &, zypp::Dep,
                                   capability::NamedCap::Ptr);
-      
+
       /**
        * Adds a file dependency to the store.
        *
        * A \ref FileCap::Ptr \a dlist to be specified. Among
        * which type of dependency \ref zypp::Dep it is as
        * the \a deptype argument.
-       * 
+       *
        * \a resolvable_id is the resolvable Id in the CacheStore
        * that will own the capability
        *
@@ -169,16 +169,16 @@ namespace zypp
        *
        * FIXME should it \throw if the resolvable does not exist?
        */
-      void appendFileDependency( const data::RecordId &, zypp::Dep, 
+      void appendFileDependency( const data::RecordId &, zypp::Dep,
                                  capability::FileCap::Ptr);
-      
+
       /**
        * Adds a Modalias dependency to the store.
        *
        * A \ref ModaliasCap::Ptr \a cap to be specified. Among
        * which type of dependency \ref zypp::Dep it is as
        * the \a deptype argument.
-       * 
+       *
        * \a resolvable_id is the resolvable Id in the CacheStore
        * that will own the capability
        *
@@ -190,14 +190,14 @@ namespace zypp
       void appendModaliasDependency( const data::RecordId &resolvable_id,
                                      zypp::Dep deptype,
                                      capability::ModaliasCap::Ptr cap);
-      
+
       /**
        * Adds a Hal dependency to the store.
        *
        * A \ref HalCap::Ptr \a cap to be specified. Among
        * which type of dependency \ref zypp::Dep it is as
        * the \a deptype argument.
-       * 
+       *
        * \a resolvable_id is the resolvable Id in the CacheStore
        * that will own the capability
        *
@@ -209,14 +209,14 @@ namespace zypp
       void appendHalDependency( const data::RecordId &resolvable_id,
                                       zypp::Dep deptype,
                                       capability::HalCap::Ptr cap );
-      
+
       /**
        * Adds a unknown dependency to the store.
        *
        * A \ref Capability::Ptr \a cap to be specified. Among
        * which type of dependency \ref zypp::Dep it is as
        * the \a deptype argument.
-       * 
+       *
        * \a resolvable_id is the resolvable Id in the CacheStore
        * that will own the capability
        *
@@ -228,7 +228,7 @@ namespace zypp
       void appendUnknownDependency( const data::RecordId &resolvable_id,
                                           zypp::Dep deptype,
                                           capability::CapabilityImpl::Ptr cap );
-      
+
       /**
        * Returns the record id of a catalog (Source) \a path
        *
@@ -236,9 +236,9 @@ namespace zypp
        * be created and the new inserted entry's id will
        * be returned.
        */
-      data::RecordId lookupOrAppendCatalog( const Url &url, 
+      data::RecordId lookupOrAppendCatalog( const Url &url,
                                             const Pathname &path );
-      
+
        /**
        * Update a known catalog checksum and timestamp
        *
@@ -249,10 +249,10 @@ namespace zypp
        * a valid record id. You can get one
        * Using \ref lookupOrAppendCatalog
        */
-      void updateCatalog( const data::RecordId &id, 
-                                    const std::string &checksum, 
+      void updateCatalog( const data::RecordId &id,
+                                    const std::string &checksum,
                                     const Date &timestamp = Date::now() );
-      
+
       /**
        * Returns the record id of a file entry \a path
        *
@@ -261,7 +261,7 @@ namespace zypp
        * be returned.
        */
       data::RecordId lookupOrAppendFile( const Pathname &path );
-      
+
       /**
        * Returns the record id of a name entry \a name
        *
@@ -270,7 +270,7 @@ namespace zypp
        * be returned.
        */
       data::RecordId lookupOrAppendName( const std::string &name );
-      
+
       /**
        * Returns the record id of a directory name  entry \a name
        *
@@ -279,7 +279,7 @@ namespace zypp
        * be returned.
        */
       data::RecordId lookupOrAppendDirName( const std::string &name );
-      
+
       /**
        * Returns the record id of a file name entry \a name
        *
@@ -288,16 +288,16 @@ namespace zypp
        * be returned.
        */
       data::RecordId lookupOrAppendFileName( const std::string &name );
-      
+
     protected:
       /**
        * Internally used function that appends a entry in
        * the capabilities table for a specific capability
        * entry.
        */
-//       data::RecordId appendDependencyEntry( const data::RecordId &, 
+//       data::RecordId appendDependencyEntry( const data::RecordId &,
 //                                             zypp::Dep, const Resolvable::Kind & );
-      
+
     private:
       /** Implementation. */
       class Impl;

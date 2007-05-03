@@ -29,7 +29,7 @@ ADD_CUSTOM_TARGET( ma_test
 
 ## ############################################################
 
-FOREACH( loop_var ScanSource Iorder Parse Xml Main)
+FOREACH( loop_var ScanSource Iorder Xml Main)
    ADD_EXECUTABLE( ${loop_var}
       ${loop_var}.cc
    )
@@ -39,13 +39,12 @@ FOREACH( loop_var ScanSource Iorder Parse Xml Main)
 ENDFOREACH( loop_var )
 
 
-FOREACH( loop_var AOUT )
+FOREACH( loop_var AOUT Parse)
    ADD_EXECUTABLE( ${loop_var}
       ${loop_var}.cc
    )
    TARGET_LINK_LIBRARIES( ${loop_var}
-      boost_filesystem boost_regex
-      zypp
+      zypp zypp2
    )
 ENDFOREACH( loop_var )
 

@@ -152,6 +152,8 @@ namespace zypp
 
 using namespace zypp::parser::susetags;
 
+#include "zypp2/cache/CacheStore.h"
+
 /******************************************************************
 **
 **      FUNCTION NAME : main
@@ -161,6 +163,45 @@ int main( int argc, char * argv[] )
 {
   //zypp::base::LogControl::instance().logfile( "log.restrict" );
   INT << "===[START]==========================================" << endl;
+
+  //try
+  {
+    //cache::CacheStore( "./store" );
+    cache::CacheStore( "/home/ma/zypp-trunk/BUILD/libzypp/devel/devel.ma/store" );
+  }
+
+#if 0
+    try
+    {
+      ZYpp::Ptr z = getZYpp();
+
+      Pathname dbfile( "data.db" );
+      cache::CacheStore store(getenv("PWD"));
+
+      data::RecordId catalog_id = store.lookupOrAppendCatalog( Url("http://www.google.com"), "/");
+
+      PackagesParser parser( catalog_id, store);
+      Measure m;
+      parser.start(argv[1], &progress_function);
+      m.elapsed();
+    }
+    catch ( const Exception &e )
+    {
+      cout << "ups! " << e.msg() << std::endl;
+    }
+#endif
+
+  INT << "===[END]============================================" << endl << endl;
+  zypp::base::LogControl::instance().logNothing();
+  return 0;
+
+
+
+
+
+
+
+
 
   //Pathname p( "lmd/suse/setup/descr/packages" );
   Pathname p( "packages" );
