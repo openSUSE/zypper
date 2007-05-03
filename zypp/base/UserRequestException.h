@@ -27,7 +27,39 @@ namespace zypp
   /** Base for exceptions caused by explicit user request.
    *
    * Use the derived convenience classes to throw exceptions
-   * of a certain kind..
+   * of a certain kind.
+   * \code
+   *     ProgressData ticks( makeProgressData( input_r ) );
+   *     ticks.sendTo( fnc_r );
+   *     ticks.toMin(); // start sending min (0)
+   *
+   *     iostr::EachLine line( input_r );
+   *     for( ; line; line.next() )
+   *     {
+   *       // process the line
+   *
+   *       if ( ! ticks.set( input_r.stream().tellg() ) )
+   *         ZYPP_THROW( AbortRequestException( "" ) );
+   *     }
+   * \endcode
+   * \code
+   * // either this way
+   * catch ( const AbortRequestException & excpt_r )
+   * {
+   *   ...
+   * }
+   *
+   * // or that
+   * catch ( const UserRequestException & excpt_r )
+   * {
+   *   switch ( excpt_r.kind() )
+   *   {
+   *     case UserRequestException::ABORT:
+   *       ...
+   *       break;
+   *   }
+   * }
+   * \endcode
   */
   class UserRequestException : public Exception
   {
