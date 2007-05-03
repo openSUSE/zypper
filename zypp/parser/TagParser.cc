@@ -15,6 +15,8 @@
 #include "zypp/base/Logger.h"
 #include "zypp/base/String.h"
 #include "zypp/base/IOStream.h"
+#include "zypp/base/UserRequestException.h"
+#include "zypp/parser/tagfile/ParseException.h"
 
 #include "zypp/parser/TagParser.h"
 #include "zypp/ProgressData.h"
@@ -92,6 +94,9 @@ namespace zypp
     {}
     void TagParser::endParse()
     {}
+
+    void TagParser::userRequestedAbort( unsigned lineNo_r )
+    { ZYPP_THROW( AbortRequestException( errPrefix( lineNo_r ) ) ); }
 
     ///////////////////////////////////////////////////////////////////
     //
@@ -190,14 +195,16 @@ namespace zypp
     //	METHOD NAME : TagParser::parse
     //	METHOD TYPE : void
     //
-    void TagParser::parse( const InputStream & input_r )
+    void TagParser::parse( const InputStream & input_r, const ProgressData::ReceiverFnc & fnc_r )
     {
       MIL << "Start parsing " << input_r << endl;
       _inputname = input_r.name();
       beginParse();
 
       ProgressData ticks( makeProgressData( input_r ) );
-      ticks.toMin();
+      ticks.sendTo( fnc_r );
+      if ( ! ticks.toMin() )
+	userRequestedAbort( 0 );
 
       iostr::EachLine line( input_r );
       for( ; line; line.next() )
@@ -317,10 +324,13 @@ namespace zypp
 	  break;
 	}
 
-	ticks.set( input_r.stream().tellg() );
+
+	if ( ! ticks.set( input_r.stream().tellg() ) )
+	  userRequestedAbort( line.lineNo() );
       }
 
-      ticks.toMax();
+      if ( ! ticks.toMax() )
+	userRequestedAbort( line.lineNo() );
 
       endParse();
       _inputname.clear();

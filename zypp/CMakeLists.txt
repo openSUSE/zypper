@@ -197,6 +197,7 @@ SET( zypp_base_SRCS
   base/Unit.cc
   base/ExternalDataSource.cc
   base/Exception.cc
+  base/UserRequestException.cc
   base/Sysconfig.cc
   base/ProfilingFormater.cc
   base/LogControl.cc
@@ -212,6 +213,7 @@ SET( zypp_base_HEADERS
   base/Deprecated.h
   base/DtorReset.h
   base/Exception.h
+  base/UserRequestException.h
   base/ExternalDataSource.h
   base/Fd.h
   base/Function.h

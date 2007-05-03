@@ -125,7 +125,6 @@ std::ostream & operator<<( std::ostream & str, const iostr::EachLine & obj )
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
-
   ///////////////////////////////////////////////////////////////////
   namespace parser
   { /////////////////////////////////////////////////////////////////
@@ -240,8 +239,9 @@ int main( int argc, char * argv[] )
   //zypp::base::LogControl::instance().logfile( "log.restrict" );
   INT << "===[START]==========================================" << endl;
 
-  simpleParser( "packages" );
-  simpleParser( "packages.gz" );
+  TagParser c;
+  c.parse( "packages.gz", exampleReceiver );
+
   return ( 0 );
 
   //Pathname p( "lmd/suse/setup/descr/packages" );
