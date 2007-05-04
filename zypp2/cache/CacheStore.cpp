@@ -25,9 +25,9 @@ namespace zypp
 ///////////////////////////////////////////////////////////////////
 namespace cache
 { /////////////////////////////////////////////////////////////////
-    
+
 typedef shared_ptr<sqlite3_command> sqlite3_command_ptr;
-  
+
 struct CacheStore::Impl
 {
   Impl()
@@ -39,35 +39,35 @@ struct CacheStore::Impl
   * (we precompile them
   */
   sqlite3_connection con;
-  
+
   sqlite3_command_ptr update_catalog_cmd;
   sqlite3_command_ptr insert_resolvable_in_catalog_cmd;
-  
+
   sqlite3_command_ptr select_name_cmd;
   sqlite3_command_ptr insert_name_cmd;
-  
+
   sqlite3_command_ptr select_dirname_cmd;
   sqlite3_command_ptr insert_dirname_cmd;
-  
+
   sqlite3_command_ptr select_filename_cmd;
   sqlite3_command_ptr insert_filename_cmd;
-  
+
   sqlite3_command_ptr select_catalog_cmd;
   sqlite3_command_ptr insert_catalog_cmd;
-  
+
   sqlite3_command_ptr select_file_cmd;
   sqlite3_command_ptr insert_file_cmd;
-  
+
   //sqlite3_command_ptr insert_dependency_entry_cmd;
-  
+
   sqlite3_command_ptr append_file_dependency_cmd;
   sqlite3_command_ptr append_named_dependency_cmd;
   sqlite3_command_ptr append_modalias_dependency_cmd;
   sqlite3_command_ptr append_hal_dependency_cmd;
   sqlite3_command_ptr append_other_dependency_cmd;
-  
+
   sqlite3_command_ptr append_resolvable_cmd;
-  
+
   map<string, data::RecordId> name_cache;
   int name_cache_hits;
 };
@@ -81,11 +81,11 @@ CacheStore::CacheStore( const Pathname &dbdir )
   {
     MIL << "database " << (dbdir + "zypp.db") << " was just created" << endl;
   }
-  
+
   try
   {
     _pimpl->con.open( (dbdir + "zypp.db").asString().c_str());
-    //_insert_resolvable_cmd = new sqlite3_command( *_con, INSERT_RESOLVABLE_QUERY );                                    
+    //_insert_resolvable_cmd = new sqlite3_command( *_con, INSERT_RESOLVABLE_QUERY );
     //_insert_package_cmd = new sqlite3_command( *_con, INSERT_PACKAGE_QUERY );
   }
   catch(exception &ex)
@@ -93,20 +93,20 @@ CacheStore::CacheStore( const Pathname &dbdir )
     //ZYPP_CAUGHT(ex);
     ZYPP_THROW(Exception(ex.what()));
   }
-  
+
   _pimpl->insert_resolvable_in_catalog_cmd.reset( new sqlite3_command( _pimpl->con, "insert into resolvables_catalogs (resolvable_id, catalog_id) values (:resolvable_id, :catalog_id);" ));
-  
+
   _pimpl->update_catalog_cmd.reset( new sqlite3_command( _pimpl->con, "update catalogs set checksum=:checksum, timestamp=:timestamp where id=:catalog_id;" ));
-  
+
   _pimpl->select_catalog_cmd.reset( new sqlite3_command( _pimpl->con, "select id from catalogs where url=:url and path=:path;" ));
   _pimpl->insert_catalog_cmd.reset( new sqlite3_command( _pimpl->con, "insert into catalogs (url,path,timestamp) values (:url,:path,:timestamp);" ));
-  
+
   _pimpl->select_name_cmd.reset( new sqlite3_command( _pimpl->con, "select id from names where name=:name;" ));
   _pimpl->insert_name_cmd.reset( new sqlite3_command( _pimpl->con, "insert into names (name) values (:name);" ));
-  
+
   _pimpl->select_dirname_cmd.reset( new sqlite3_command( _pimpl->con, "select id from dir_names where name=:name;" ));
   _pimpl->insert_dirname_cmd.reset( new sqlite3_command( _pimpl->con, "insert into dir_names (name) values (:name);" ));
-  
+
   _pimpl->select_filename_cmd.reset( new sqlite3_command( _pimpl->con, "select id from file_names where name=:name;" ));
   _pimpl->insert_filename_cmd.reset( new sqlite3_command( _pimpl->con, "insert into file_names (name) values (:name);" ));
 
@@ -116,15 +116,15 @@ CacheStore::CacheStore( const Pathname &dbdir )
   //_pimpl->insert_dependency_entry_cmd.reset( new sqlite3_command( _pimpl->con, "insert into capabilities ( resolvable_id, dependency_type, refers_kind ) values ( :resolvable_id, :dependency_type, :refers_kind );" ));
   _pimpl->append_file_dependency_cmd.reset( new sqlite3_command( _pimpl->con, "insert into file_capabilities ( resolvable_id, dependency_type, refers_kind, file_id ) values ( :resolvable_id, :dependency_type, :refers_kind, :file_id );" ));
   _pimpl->append_named_dependency_cmd.reset( new sqlite3_command( _pimpl->con, "insert into named_capabilities ( resolvable_id, dependency_type, refers_kind, name_id, version, release, epoch, relation ) values ( :resolvable_id, :dependency_type, :refers_kind, :name_id, :version, :release, :epoch, :relation );" ));
-  
+
    _pimpl->append_modalias_dependency_cmd.reset( new sqlite3_command( _pimpl->con, "insert into modalias_capabilities ( resolvable_id, dependency_type, refers_kind, name, value, relation ) values ( :resolvable_id, :dependency_type, :refers_kind, :name, :value, :relation );" ));
-  
+
    _pimpl->append_hal_dependency_cmd.reset( new sqlite3_command( _pimpl->con, "insert into hal_capabilities ( resolvable_id, dependency_type, refers_kind, name, value, relation ) values ( :resolvable_id, :dependency_type, :refers_kind, :name, :value, :relation );" ));
-   
+
    _pimpl->append_other_dependency_cmd.reset( new sqlite3_command( _pimpl->con, "insert into other_capabilities ( resolvable_id, dependency_type, refers_kind, value ) values ( :resolvable_id, :dependency_type, :refers_kind, :value );" ));
-   
+
   _pimpl->append_resolvable_cmd.reset( new sqlite3_command( _pimpl->con, "insert into resolvables ( name, version, release, epoch, arch, kind, catalog_id ) values ( :name, :version, :release, :epoch, :arch, :kind, :catalog_id );" ));
-  
+
   // disable autocommit
   _pimpl->con.executenonquery("BEGIN;");
 }
@@ -146,8 +146,8 @@ void CacheStore::consumePackage( const data::Package &package )
 }
 
 data::RecordId CacheStore::appendResolvable( const data::RecordId &catalog_id,
-                                             const Resolvable::Kind &kind, 
-                                             const NVRA &nvra, 
+                                             const Resolvable::Kind &kind,
+                                             const NVRA &nvra,
                                              const data::Dependencies &deps )
 {
   _pimpl->append_resolvable_cmd->bind( ":name", nvra.name );
@@ -157,17 +157,17 @@ data::RecordId CacheStore::appendResolvable( const data::RecordId &catalog_id,
   _pimpl->append_resolvable_cmd->bind( ":arch", zypp_arch2db_arch(nvra.arch) );
   _pimpl->append_resolvable_cmd->bind( ":kind", zypp_kind2db_kind(kind) );
   _pimpl->append_resolvable_cmd->bind( ":catalog_id", catalog_id );
-  
+
   _pimpl->append_resolvable_cmd->executenonquery();
 
   long long id = _pimpl->con.insertid();
-  
+
   appendDependencies( id, deps );
   /*
   _pimpl->insert_resolvable_in_catalog_cmd->bind(":catalog_id", catalog_id);
   _pimpl->insert_resolvable_in_catalog_cmd->bind(":resolvable_id", id);
   _pimpl->insert_resolvable_in_catalog_cmd->executenonquery();*/
-  
+
   return static_cast<data::RecordId>(id);
   return 1;
 }
@@ -195,7 +195,7 @@ void CacheStore::appendDependency( const data::RecordId &resolvable_id, zypp::De
     DBG << "invalid capability" << endl;
     return;
   }
-  
+
   if ( capability::isKind<NamedCap>(cap) )
   {
       appendNamedDependency( resolvable_id, deptype, capability::asKind<NamedCap>(cap) );
@@ -250,14 +250,14 @@ void CacheStore::appendNamedDependency( const data::RecordId &resolvable_id, zyp
   if ( !cap )
     ZYPP_THROW(Exception("bad versioned dep"));
   //DBG << "versioned : " << cap << endl;
- 
+
   //data::RecordId capability_id = appendDependencyEntry( resolvable_id, deptype, cap->refers() );
   data::RecordId name_id = lookupOrAppendName(cap->name());
-  
+
   _pimpl->append_named_dependency_cmd->bind( ":resolvable_id", resolvable_id );
   _pimpl->append_named_dependency_cmd->bind( ":dependency_type", zypp_deptype2db_deptype(deptype) );
   _pimpl->append_named_dependency_cmd->bind( ":refers_kind", zypp_kind2db_kind(cap->refers()) );
-  
+
   //_pimpl->append_named_dependency_cmd->bind( ":capability_id", capability_id);
   _pimpl->append_named_dependency_cmd->bind( ":name_id", name_id);
   _pimpl->append_named_dependency_cmd->bind( ":version", cap->edition().version() );
@@ -279,12 +279,12 @@ void CacheStore::appendModaliasDependency( const data::RecordId &resolvable_id,
   _pimpl->append_modalias_dependency_cmd->bind( ":resolvable_id", resolvable_id );
   _pimpl->append_modalias_dependency_cmd->bind( ":dependency_type", zypp_deptype2db_deptype(deptype) );
   _pimpl->append_modalias_dependency_cmd->bind( ":refers_kind", zypp_kind2db_kind(cap->refers()) );
-  
+
   //_pimpl->append_modalias_dependency_cmd->bind( ":capability_id", capability_id);
   _pimpl->append_modalias_dependency_cmd->bind( ":name", cap->name());
   _pimpl->append_modalias_dependency_cmd->bind( ":value", cap->value());
   _pimpl->append_modalias_dependency_cmd->bind( ":relation", zypp_rel2db_rel( cap->op() ) );
-  
+
   _pimpl->append_modalias_dependency_cmd->executenonquery();
   //delete cmd;
 }
@@ -299,12 +299,12 @@ void CacheStore::appendHalDependency( const data::RecordId &resolvable_id,
   _pimpl->append_hal_dependency_cmd->bind( ":resolvable_id", resolvable_id );
   _pimpl->append_hal_dependency_cmd->bind( ":dependency_type", zypp_deptype2db_deptype(deptype) );
   _pimpl->append_hal_dependency_cmd->bind( ":refers_kind", zypp_kind2db_kind(cap->refers()) );
-  
+
   //_pimpl->append_hal_dependency_cmd->bind( ":capability_id", capability_id);
   _pimpl->append_hal_dependency_cmd->bind( ":name", cap->name());
   _pimpl->append_hal_dependency_cmd->bind( ":value", cap->value());
   _pimpl->append_hal_dependency_cmd->bind( ":relation", zypp_rel2db_rel( cap->op() ) );
-  
+
   _pimpl->append_hal_dependency_cmd->executenonquery();
   //delete cmd;
 }
@@ -317,11 +317,11 @@ void CacheStore::appendFileDependency( const data::RecordId &resolvable_id, zypp
 
   //data::RecordId capability_id = appendDependencyEntry( resolvable_id, deptype, cap->refers() );
   data::RecordId file_id = lookupOrAppendFile(cap->filename());
-  
+
   _pimpl->append_file_dependency_cmd->bind( ":resolvable_id", resolvable_id );
   _pimpl->append_file_dependency_cmd->bind( ":dependency_type", zypp_deptype2db_deptype(deptype) );
   _pimpl->append_file_dependency_cmd->bind( ":refers_kind", zypp_kind2db_kind(cap->refers()) );
-  
+
   //_pimpl->append_file_dependency_cmd->bind( ":capability_id", capability_id);
   _pimpl->append_file_dependency_cmd->bind( ":file_id", file_id);
 
@@ -340,7 +340,7 @@ void CacheStore::appendUnknownDependency( const data::RecordId &resolvable_id,
   _pimpl->append_other_dependency_cmd->bind( ":dependency_type", zypp_deptype2db_deptype(deptype) );
   _pimpl->append_other_dependency_cmd->bind( ":refers_kind", zypp_kind2db_kind(cap->refers()) );
   _pimpl->append_other_dependency_cmd->bind( ":value", cap->encode());
-  
+
   _pimpl->append_hal_dependency_cmd->executenonquery();
   //delete cmd;
 }
@@ -350,16 +350,16 @@ void CacheStore::appendUnknownDependency( const data::RecordId &resolvable_id,
 // {
 //   //DBG << "rid: " << resolvable_id << " deptype: " << deptype << " " << "refers: " << refers << endl;
 //   _pimpl->insert_dependency_entry_cmd->bind( ":resolvable_id", resolvable_id );
-//   
+//
 //   db::DependencyType dt = zypp_deptype2db_deptype(deptype);
 //   if ( dt == db::DEP_TYPE_UNKNOWN )
 //   {
 //     ZYPP_THROW(Exception("Unknown depenency type"));
 //   }
-// 
+//
 //   _pimpl->insert_dependency_entry_cmd->bind( ":dependency_type", zypp_deptype2db_deptype(deptype) );
 //   _pimpl->insert_dependency_entry_cmd->bind( ":refers_kind", zypp_kind2db_kind(refers) );
-//   
+//
 //   _pimpl->insert_dependency_entry_cmd->executenonquery();
 //   //delete cmd;
 //   long long id = _pimpl->con.insertid();
@@ -370,7 +370,7 @@ data::RecordId CacheStore::lookupOrAppendFile( const Pathname &path )
 {
   data::RecordId dir_name_id = lookupOrAppendDirName(path.dirname().asString());
   data::RecordId file_name_id = lookupOrAppendFileName(path.basename());
-  
+
   _pimpl->select_file_cmd->bind(":dir_name_id", dir_name_id);
   _pimpl->select_file_cmd->bind(":file_name_id", file_name_id);
   long long id = 0;
@@ -385,13 +385,13 @@ data::RecordId CacheStore::lookupOrAppendFile( const Pathname &path )
     _pimpl->insert_file_cmd->executenonquery();
     id = _pimpl->con.insertid();
     return static_cast<data::RecordId>(id);
-    
+
   }
   return static_cast<data::RecordId>(id);
 }
 
-void CacheStore::updateCatalog( const data::RecordId &id, 
-                    const std::string &checksum, 
+void CacheStore::updateCatalog( const data::RecordId &id,
+                    const std::string &checksum,
                     const Date &timestamp )
 {
   _pimpl->update_catalog_cmd->bind(":catalog_id", id);
@@ -404,7 +404,7 @@ data::RecordId CacheStore::lookupOrAppendCatalog( const Url &url, const Pathname
 {
   _pimpl->select_catalog_cmd->bind(":url", url.asString());
   _pimpl->select_catalog_cmd->bind(":path", path.asString());
-  
+
   long long id = 0;
   try {
     id = _pimpl->select_catalog_cmd->executeint64();
@@ -418,7 +418,7 @@ data::RecordId CacheStore::lookupOrAppendCatalog( const Url &url, const Pathname
     _pimpl->insert_catalog_cmd->executenonquery();
     id = _pimpl->con.insertid();
     return static_cast<data::RecordId>(id);
-    
+
   }
   return static_cast<data::RecordId>(id);
 }
@@ -430,7 +430,7 @@ data::RecordId CacheStore::lookupOrAppendName( const std::string &name )
     _pimpl->name_cache_hits++;
     return _pimpl->name_cache[name];
   }
-  
+
   _pimpl->select_name_cmd->bind(":name", name);
   long long id = 0;
   try {
@@ -444,7 +444,7 @@ data::RecordId CacheStore::lookupOrAppendName( const std::string &name )
     _pimpl->insert_name_cmd->executenonquery();
     id = _pimpl->con.insertid();
     return static_cast<data::RecordId>(id);
-    
+
   }
   return static_cast<data::RecordId>(id);
 }
@@ -463,7 +463,7 @@ data::RecordId CacheStore::lookupOrAppendDirName( const std::string &name )
     _pimpl->insert_dirname_cmd->executenonquery();
     id = _pimpl->con.insertid();
     return static_cast<data::RecordId>(id);
-    
+
   }
   return static_cast<data::RecordId>(id);
 }
@@ -482,11 +482,11 @@ data::RecordId CacheStore::lookupOrAppendFileName( const std::string &name )
     _pimpl->insert_filename_cmd->executenonquery();
     id = _pimpl->con.insertid();
     return static_cast<data::RecordId>(id);
-    
+
   }
   return static_cast<data::RecordId>(id);
 }
-    
+
 // data::RecordId CacheStore::insertResObject( const Resolvable::Kind &kind, const data::ResObject &res )
 // {
 //   _insert_resolvable_cmd->bind(1,  res.name.c_str(), -1);
@@ -504,13 +504,13 @@ data::RecordId CacheStore::lookupOrAppendFileName( const std::string &name )
 //   _insert_resolvable_cmd->bind(13, res.size ); // FIX cast?
 //   _insert_resolvable_cmd->bind(14, res.archive_size ); // FIX cast?
 //   _insert_resolvable_cmd->bind(15, res.source.c_str(), -1);
-//   
+//
 //   _insert_resolvable_cmd->bind(16, res.source_media_nr);
 //   _insert_resolvable_cmd->bind(17, static_cast<int>(res.install_only));
 //   _insert_resolvable_cmd->bind(18, static_cast<int>(res.build_time) ); // FIX cast?
 //   _insert_resolvable_cmd->bind(19, static_cast<int>(res.install_time) ); // FIX cast?
 //   _insert_resolvable_cmd->executenonquery();
-// 
+//
 //   return static_cast<data::RecordId>( _con->insertid() );
 // }
 

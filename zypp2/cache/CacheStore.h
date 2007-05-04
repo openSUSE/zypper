@@ -41,7 +41,7 @@ namespace zypp
     public:
 
       CacheStore();
-      ~CacheStore();
+      virtual ~CacheStore();
 
       /**
        * Constructor for the CacheStore
@@ -50,7 +50,7 @@ namespace zypp
        * CacheStore is instanciated.
        *
        * The data will be saved in the directory specified in
-       * \a dbdir
+       * \a dbdir. \a dbdir must exist.
        */
       CacheStore( const Pathname &dbdir );
 

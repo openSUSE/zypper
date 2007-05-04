@@ -38,10 +38,10 @@ namespace zypp
     public:
       /**
        * Tries to initialize the source cache if it was not
-       * \throws When cant initialize
+       * \throws Exception When cant initialize
        */
       CacheInitializer( const Pathname &root_r, const Pathname &db_file );
-      ~CacheInitializer();
+      virtual ~CacheInitializer();
 
       /**
        * only true when cache was not initialized before

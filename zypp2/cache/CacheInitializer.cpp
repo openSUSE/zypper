@@ -51,15 +51,7 @@ CacheInitializer::CacheInitializer( const Pathname &root_r, const Pathname &db_f
   try
   {
     _pimpl->con.reset( new sqlite3_connection( ( _pimpl->root + db_file).asString().c_str()) );
-  }
-  catch(exception &ex)
-  {
-    ZYPP_RETHROW(Exception(ex.what()));
-    //ERR << "Exception Occured: " << ex.what() << endl;
-  }
 
-  try
-  {
     if( ! tablesCreated() )
     {
       createTables();
@@ -72,7 +64,7 @@ CacheInitializer::CacheInitializer( const Pathname &root_r, const Pathname &db_f
       MIL << "Source cache already initialized" << std::endl;
     }
   }
-  catch(exception &ex)
+  catch( const exception &ex )
   {
     ZYPP_RETHROW(Exception(ex.what()));
     //ERR << "Exception Occured: " << ex.what() << endl;
