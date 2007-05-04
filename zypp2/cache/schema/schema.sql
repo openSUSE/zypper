@@ -9,6 +9,7 @@
 -- is pragma user_version
 ------------------------------------------------
 
+DROP TABLE IF EXISTS db_info;
 CREATE TABLE db_info (
   version INTEGER
 );
@@ -17,6 +18,7 @@ CREATE TABLE db_info (
 -- Knew catalogs. They existed some day.
 ------------------------------------------------
 
+DROP TABLE IF EXISTS catalogs;
 CREATE TABLE catalogs (
     id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL
   , url TEXT NOT NULL
@@ -29,6 +31,7 @@ CREATE TABLE catalogs (
 -- Resolvable names
 ------------------------------------------------
 
+DROP TABLE IF EXISTS names;
 CREATE TABLE names (
     id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL
   , name TEXT UNIQUE
@@ -38,18 +41,21 @@ CREATE TABLE names (
 -- File names table and normalized sub tables
 ------------------------------------------------
 
+DROP TABLE IF EXISTS file_names;
 CREATE TABLE file_names (
-   id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL 
+   id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL
   , name TEXT
 );
 
+DROP TABLE IF EXISTS dir_names;
 CREATE TABLE dir_names (
-   id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL 
+   id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL
   , name TEXT
 );
 
+DROP TABLE IF EXISTS files;
 CREATE TABLE files (
-   id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL 
+   id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL
   , dir_name_id INTEGER NOT NULL
   , file_name_id INTEGER NOT NULL
   , UNIQUE ( dir_name_id, file_name_id )
@@ -59,14 +65,16 @@ CREATE TABLE files (
 -- File names table and normalized sub tables
 ------------------------------------------------
 
+DROP TABLE IF EXISTS translated_texts;
 CREATE TABLE translated_texts (
     id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL
   , text_id INTEGER NOT NULL
   , lang_id INTEGER NOT NULL
   , text TEXT
-  
+
 );
 
+DROP TABLE IF EXISTS resolvable_texts;
 CREATE TABLE resolvable_texts (
     resolvable_id INTEGER NOT NULL
   , text_id INTEGER NOT NULL
@@ -78,6 +86,7 @@ CREATE TABLE resolvable_texts (
 -- Resolvables table
 ------------------------------------------------
 
+DROP TABLE IF EXISTS resolvables;
 CREATE TABLE resolvables (
     id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL
   , name TEXT
@@ -100,13 +109,15 @@ CREATE TABLE resolvables (
   , catalog_id INTEGER REFERENCES catalogs(id)
 );
 
+DROP TABLE IF EXISTS message_details;
 CREATE TABLE message_details (
     resolvable_id INTEGER  REFERENCES resolvables(id)
   , text TEXT
 );
 
+DROP TABLE IF EXISTS patch_details;
 CREATE TABLE patch_details (
-    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL 
+    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL
   , resolvable_id INTEGER REFERENCES resolvables(id)
   , patch_id TEXT
   , timestamp INTEGER
@@ -116,6 +127,7 @@ CREATE TABLE patch_details (
 
 );
 
+DROP TABLE IF EXISTS pattern_details;
 CREATE TABLE pattern_details (
     id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL
   , resolvable_id INTEGER REFERENCES resolvables(id)
@@ -128,6 +140,7 @@ CREATE TABLE pattern_details (
 
 );
 
+DROP TABLE IF EXISTS product_details;
 CREATE TABLE product_details (
     id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL
   , resolvable_id INTEGER REFERENCES resolvables(id)
@@ -145,15 +158,17 @@ CREATE TABLE product_details (
 
 );
 
+DROP TABLE IF EXISTS script_details;
 CREATE TABLE script_details (
     id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL
   , resolvable_id INTEGER REFERENCES resolvables(id)
   , do_script TEXT
   , undo_script TEXT
 
-  
+
 );
 
+DROP TABLE IF EXISTS package_details;
 CREATE TABLE package_details (
     id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL
   , resolvable_id INTEGER REFERENCES resolvables(id)
@@ -181,6 +196,7 @@ CREATE INDEX package_details_resolvable_id ON package_details (resolvable_id);
 -- Do we need those here?
 ------------------------------------------------
 
+DROP TABLE IF EXISTS locks;
 CREATE TABLE locks (
     id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL
   , name TEXT
@@ -219,6 +235,7 @@ CREATE VIEW scripts AS
   SELECT * FROM resolvables, script_details
   WHERE resolvables.id = script_details.resolvable_id;
 
+DROP TABLE IF EXISTS delta_packages;
 CREATE TABLE delta_packages (
     id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL
   , media_nr INTEGER
@@ -235,6 +252,7 @@ CREATE TABLE delta_packages (
 
 );
 
+DROP TABLE IF EXISTS patch_packages;
 CREATE TABLE patch_packages (
     id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL
   , media_nr INTEGER
@@ -260,6 +278,7 @@ CREATE TRIGGER remove_resolvables
     DELETE FROM patch_packages WHERE package_id = old.id;
   END;
 
+DROP TABLE IF EXISTS patch_packages_baseversions;
 CREATE TABLE patch_packages_baseversions (
     id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL
   , patch_package_id INTEGER REFERENCES patch_packages(id)
@@ -273,8 +292,9 @@ CREATE TABLE patch_packages_baseversions (
 -- Capabilities
 ------------------------------------------------
 
+DROP TABLE IF EXISTS named_capabilities;
 CREATE TABLE named_capabilities (
-   id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL 
+   id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL
   , resolvable_id INTEGER REFERENCES resolvables(id)
   , dependency_type INTEGER
   , refers_kind INTEGER
@@ -286,8 +306,9 @@ CREATE TABLE named_capabilities (
 );
 CREATE INDEX named_capabilities_name ON named_capabilities(name_id);
 
+DROP TABLE IF EXISTS modalias_capabilities;
 CREATE TABLE modalias_capabilities (
-   id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL 
+   id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL
   , resolvable_id INTEGER REFERENCES resolvables(id)
   , dependency_type INTEGER
   , refers_kind INTEGER
@@ -296,8 +317,9 @@ CREATE TABLE modalias_capabilities (
   , relation INTEGER
 );
 
+DROP TABLE IF EXISTS hal_capabilities;
 CREATE TABLE hal_capabilities (
-   id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL 
+   id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL
   , resolvable_id INTEGER REFERENCES resolvables(id)
   , dependency_type INTEGER
   , refers_kind INTEGER
@@ -306,24 +328,27 @@ CREATE TABLE hal_capabilities (
   , relation INTEGER
 );
 
+DROP TABLE IF EXISTS file_capabilities;
 CREATE TABLE file_capabilities (
-   id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL 
+   id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL
   , resolvable_id INTEGER REFERENCES resolvables(id)
   , dependency_type INTEGER
   , refers_kind INTEGER
   , file_id INTEGER REFERENCES files(id)
 );
 
+DROP TABLE IF EXISTS other_capabilities;
 CREATE TABLE other_capabilities (
-   id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL 
+   id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL
   , resolvable_id INTEGER REFERENCES resolvables(id)
   , dependency_type INTEGER
   , refers_kind INTEGER
   , value TEXT
 );
 
+DROP TABLE IF EXISTS split_capabilities;
 CREATE TABLE split_capabilities (
-   id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL 
+   id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL
   , resolvable_id INTEGER REFERENCES resolvables(id)
   , dependency_type INTEGER
   , refers_kind INTEGER
@@ -338,6 +363,7 @@ CREATE TABLE split_capabilities (
 -- FIXME do we want to allow same resolvable to
 -- be listed twice in same source but different
 -- medias? I think NOT.
+DROP TABLE IF EXISTS resolvables_catalogs;
 CREATE TABLE resolvables_catalogs (
     resolvable_id INTEGER REFERENCES resolvables (id)
   , catalog_id    INTEGER REFERENCES catalogs    (id)
