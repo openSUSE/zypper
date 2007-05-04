@@ -71,7 +71,7 @@ WARN_LOGFILE           =
 #---------------------------------------------------------------------------
 # configuration options related to the input files
 #---------------------------------------------------------------------------
-INPUT                  = @ZYPP_SOURCE_DIR@
+INPUT                  = @ZYPP_SOURCE_DIR@ @ZYPP_SOURCE_DIR@/../zypp2
 FILE_PATTERNS          =
 RECURSIVE              = YES
 EXCLUDE                =
