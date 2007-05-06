@@ -411,6 +411,8 @@ INSTALL(  FILES
 
 SET( zypp_parser_SRCS
   parser/TagParser.cc
+  parser/IniParser.cc
+  parser/IniDict.cc
   parser/LibXMLHelper.cc
   parser/SAXParser.cc
   parser/XMLNodeIterator.cc
@@ -418,6 +420,8 @@ SET( zypp_parser_SRCS
 
 SET( zypp_parser_HEADERS
   parser/TagParser.h
+  parser/IniParser.h
+  parser/IniDict.h
   parser/LibXMLHelper.h
   parser/ParserProgress.h
   parser/SAXParser.h
