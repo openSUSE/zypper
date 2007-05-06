@@ -45,7 +45,7 @@ namespace zypp
 //    DBG << "**node: " << reader_r->name() << " (" << reader_r->nodeType() << ")" << endl;
     if (_tag == tag_format)
       return consumeFormatChildNodes(reader_r);
-  
+
     if (reader_r->nodeType() == XML_READER_TYPE_ELEMENT)
     {
       if (reader_r->name() == "metadata")
@@ -59,38 +59,38 @@ namespace zypp
   //      DBG << "got " << reader_r->getAttribute("type") << " package" << endl;
         if (_package) delete _package;
         _package = new zypp::data::Package();
-  
-        return true; 
+
+        return true;
       }
-  
+
       if (reader_r->name() == "name")
       {
         _package->name = reader_r.nodeText().asString();
         return true;
       }
-  
+
       if (reader_r->name() == "arch")
       {
         //if (arch == "src" || arch == "nosrc") arch = "noarch";
         _package->arch = Arch(reader_r.nodeText().asString());
         return true;
       }
-  
+
       if (reader_r->name() == "version")
       {
         _package->edition = Edition(reader_r->getAttribute("ver").asString(),
                                     reader_r->getAttribute("rel").asString(),
                                     reader_r->getAttribute("epoch").asString());
       }
-      
+
       if (reader_r->name() == "checksum")
       {
         _package->checksum = CheckSum(reader_r->getAttribute("type").asString(),
                                      reader_r.nodeText().asString());
-        // ignoring pkgid attribute 
+        // ignoring pkgid attribute
         return true;
       }
-  
+
       if (reader_r->name() == "summary")
       {
         _package->summary.setText(
@@ -98,7 +98,7 @@ namespace zypp
             Locale(reader_r->getAttribute("lang").asString()));
         return true;
       }
-  
+
       if (reader_r->name() == "description")
       {
         _package->description.setText(
@@ -106,11 +106,11 @@ namespace zypp
             Locale(reader_r->getAttribute("lang").asString()));
         return true;
       }
-  
+
       if (reader_r->name() == "packager")
       {
         _package->packager = reader_r.nodeText().asString();
-//        DBG << "packager: " << _package->packager << endl; 
+//        DBG << "packager: " << _package->packager << endl;
         return true;
       }
 
@@ -134,12 +134,10 @@ namespace zypp
         // reader_r->getAttribute("archive").asString();
 
         // installed size
-        ByteCount size(str::strtonum<long long>(reader_r->getAttribute("installed").asString()), Unit());
-        _package->size = size;
+        _package->size = str::strtonum<ByteCount::SizeType>( reader_r->getAttribute("installed").asString() );
 
         // rpm package size
-        ByteCount size_rpm(str::strtonum<long long>(reader_r->getAttribute("package").asString()), Unit());
-        _package->archive_size = size_rpm;
+        _package->archive_size = str::strtonum<ByteCount::SizeType>( reader_r->getAttribute("package").asString() );
 
         return true;
       }
@@ -310,7 +308,7 @@ namespace zypp
         _expect_rpm_entry = true;
         return true;
       }
-      
+
       if (reader_r->name() == "file")
       {
         // TODO figure out how to read files
