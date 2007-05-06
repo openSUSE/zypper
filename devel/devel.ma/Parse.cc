@@ -23,7 +23,6 @@
 
 #include "zypp/parser/tagfile/TagFileParser.h"
 #include "zypp/parser/TagParser.h"
-#include "zypp/parser/susetags/PackagesFileReader.h"
 
 using namespace std;
 using namespace zypp;
@@ -119,41 +118,6 @@ std::ostream & operator<<( std::ostream & str, const iostr::EachLine & obj )
 
 }
 
-#include "zypp/ProgressData.h"
-
-///////////////////////////////////////////////////////////////////
-namespace zypp
-{ /////////////////////////////////////////////////////////////////
-
-  ///////////////////////////////////////////////////////////////////
-  namespace parser
-  { /////////////////////////////////////////////////////////////////
-   ///////////////////////////////////////////////////////////////////
-    namespace susetags
-    { /////////////////////////////////////////////////////////////////
-
-      bool exampleReceiver( ProgressData::value_type v )
-      {
-	WAR << "got ->" << v << "%" << endl;
-	return true;
-      }
-
-
-
-      /////////////////////////////////////////////////////////////////
-    } // namespace susetags
-    ///////////////////////////////////////////////////////////////////
-    /////////////////////////////////////////////////////////////////
-  } // namespace parser
-  ///////////////////////////////////////////////////////////////////
-  /////////////////////////////////////////////////////////////////
-} // namespace zypp
-///////////////////////////////////////////////////////////////////
-
-using namespace zypp::parser::susetags;
-
-#include "zypp2/cache/CacheStore.h"
-
 /******************************************************************
 **
 **      FUNCTION NAME : main
@@ -163,45 +127,6 @@ int main( int argc, char * argv[] )
 {
   //zypp::base::LogControl::instance().logfile( "log.restrict" );
   INT << "===[START]==========================================" << endl;
-
-  //try
-  {
-    //cache::CacheStore( "./store" );
-    cache::CacheStore( "/home/ma/zypp-trunk/BUILD/libzypp/devel/devel.ma/store" );
-  }
-
-#if 0
-    try
-    {
-      ZYpp::Ptr z = getZYpp();
-
-      Pathname dbfile( "data.db" );
-      cache::CacheStore store(getenv("PWD"));
-
-      data::RecordId catalog_id = store.lookupOrAppendCatalog( Url("http://www.google.com"), "/");
-
-      PackagesParser parser( catalog_id, store);
-      Measure m;
-      parser.start(argv[1], &progress_function);
-      m.elapsed();
-    }
-    catch ( const Exception &e )
-    {
-      cout << "ups! " << e.msg() << std::endl;
-    }
-#endif
-
-  INT << "===[END]============================================" << endl << endl;
-  zypp::base::LogControl::instance().logNothing();
-  return 0;
-
-
-
-
-
-
-
-
 
   //Pathname p( "lmd/suse/setup/descr/packages" );
   Pathname p( "packages" );
@@ -214,28 +139,28 @@ int main( int argc, char * argv[] )
     tp.parse( p );
   }
 
-  if ( 0 ) {
+  if ( 1 ) {
     Pathname p( "p" );
     Measure x( p.basename() );
-    PackagesFileReader tp;
+    TagParser tp;
     tp.parse( p );
   }
-  if ( 0 ) {
+  if ( 1 ) {
     Pathname p( "p.gz" );
     Measure x( p.basename() );
-    PackagesFileReader tp;
+    TagParser tp;
     tp.parse( p );
   }
-  if ( 0 ) {
+  if ( 1 ) {
     Pathname p( "packages" );
     Measure x( p.basename() );
-    PackagesFileReader tp;
+    TagParser tp;
     tp.parse( p );
   }
   if ( 1 ) {
     Pathname p( "packages.gz" );
     Measure x( p.basename() );
-    PackagesFileReader tp;
+    TagParser tp;
     tp.parse( p );
   }
 

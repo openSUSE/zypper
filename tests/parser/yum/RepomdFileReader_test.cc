@@ -17,7 +17,8 @@ using std::string;
 using namespace zypp;
 using namespace boost::unit_test;
 
-using namespace zypp::source::yum;
+using namespace zypp::parser::yum;
+using source::yum::YUMResourceType;
 
 class Collector
 {
@@ -25,15 +26,15 @@ public:
   Collector()
   {}
   
-  bool callback( const OnMediaLocation &loc, const string &dtype )
+  bool callback( const OnMediaLocation &loc, const YUMResourceType &t )
   {
-    items.push_back( make_pair( dtype, loc ) );
+    items.push_back( make_pair( t, loc ) );
     //items.push_back(loc);
     //cout << items.size() << endl;
     return true;
   }
   
-  vector<pair<string, OnMediaLocation> > items;
+  vector<pair<YUMResourceType, OnMediaLocation> > items;
   //vector<OnMediaLocation> items;
 };
 
@@ -64,7 +65,7 @@ void repomd_read_test(const string &dir)
         string loc;
         
         getline(ifs, dtype);
-        BOOST_CHECK_EQUAL( collect.items[count].first, dtype);
+        BOOST_CHECK_EQUAL( collect.items[count].first, YUMResourceType(dtype));
         getline(ifs, checksum_type);
         getline(ifs, checksum);
         BOOST_CHECK_EQUAL( collect.items[count].second.checksum(), CheckSum(checksum_type, checksum) );

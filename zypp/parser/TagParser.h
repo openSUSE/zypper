@@ -20,7 +20,7 @@
 #include "zypp/base/NonCopyable.h"
 #include "zypp/base/InputStream.h"
 
-#include "zypp/ProgressData.h"
+#include "zypp/parser/tagfile/ParseException.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -28,6 +28,8 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
   namespace parser
   { /////////////////////////////////////////////////////////////////
+
+    using tagfile::ParseException;
 
     ///////////////////////////////////////////////////////////////////
     //
@@ -82,15 +84,13 @@ namespace zypp
       /** Dtor */
       virtual ~TagParser();
       /** Parse the stream.
-       * \throw ParseExcetion on errors.
-       * \throws AbortRequestException on user request.
-       * Invokes \ref consume for each tag. \ref consume might throw
-       * other exceptions as well.
+       * \throw ParseExcetion on errors. Invoke \ref consume
+       * for each tag. \ref consume might throw other exceptions
+       * as well.
       */
-      virtual void parse( const InputStream & imput_r,
-			  const ProgressData::ReceiverFnc & fnc_r = ProgressData::ReceiverFnc() );
+      void parse( const InputStream & imput_r );
 
-    protected:
+    public:
       /** Called when start parsing. */
       virtual void beginParse();
       /** Called when a single-tag is found. */
@@ -100,13 +100,7 @@ namespace zypp
       /** Called when the parse is done. */
       virtual void endParse();
 
-    protected:
-      /** Called when user(callback) request to abort.
-       * \throws AbortRequestException unless overloaded.
-      */
-      virtual void userRequestedAbort( unsigned lineNo_r );
-
-    protected:
+    public:
       /** Prefix exception message with line and tag information. */
       std::string errPrefix( unsigned lineNo_r,
 			     const std::string & msg_r = std::string() ) const;
@@ -122,6 +116,7 @@ namespace zypp
 
     private:
       std::string _inputname;
+      //ProgressData _ticks;
     };
     ///////////////////////////////////////////////////////////////////
 
@@ -133,14 +128,6 @@ namespace zypp
 
     /** \relates TagParser::MultiTag Stream output. */
     std::ostream & operator<<( std::ostream & str, const TagParser::MultiTag & obj );
-
-    template<class _D>
-    inline std::ostream & operator<<( std::ostream & str, const shared_ptr<_D> & obj )
-    {
-      if ( obj )
-	return str << *obj;
-      return str << std::string("NULL");
-    }
 
     /////////////////////////////////////////////////////////////////
   } // namespace parser
