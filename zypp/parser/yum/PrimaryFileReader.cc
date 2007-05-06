@@ -16,6 +16,7 @@
 
 using namespace std;
 using namespace zypp::xml;
+using zypp::base::Unit;
 
 namespace zypp
 {
