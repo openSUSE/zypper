@@ -15,30 +15,39 @@ namespace zypp
 {
 namespace data
 {
- 
-IMPL_PTR_TYPE(Resolvable);  
+
+IMPL_PTR_TYPE(Resolvable);
 IMPL_PTR_TYPE(ResObject);
+IMPL_PTR_TYPE(AtomBase);
 IMPL_PTR_TYPE(Script);
 IMPL_PTR_TYPE(Message);
-IMPL_PTR_TYPE(Selection);  
+IMPL_PTR_TYPE(Selection);
+IMPL_PTR_TYPE(Patch);
 IMPL_PTR_TYPE(Pattern);
-  
+IMPL_PTR_TYPE(Product);
+IMPL_PTR_TYPE(Package);
 
-std::ostream& operator<<(std::ostream& out, const ResObject &data)
+
+std::ostream & ResObject::dumpOn( std::ostream & str ) const
 {
-      out << "[ " << data.name << " " << data.edition << " ]" << endl;
-      return out;
-//       << "  provides: " << data.provides << endl
-//       << "  conflicts: " << data.conflicts << endl
-//       << "  obsoletes: " << data.obsoletes << endl
-//       << "  freshens: " << data.freshens << endl
-//       << "  requires: " << data.requires << endl
-//       << "  recommends:" << endl << data.recommends << endl
-//       << "  suggests:" << endl << data.suggests << endl
-//       << "  supplements:" << endl << data.supplements << endl
-//       << "  enhances:" << endl << data.enhances << endl
+  str << "[ " << name << " " << edition << " ]" << endl;
+  return str;
+//       << "  provides: " << provides << endl
+//       << "  conflicts: " << conflicts << endl
+//       << "  obsoletes: " << obsoletes << endl
+//       << "  freshens: " << freshens << endl
+//       << "  requires: " << requires << endl
+//       << "  recommends:" << endl << recommends << endl
+//       << "  suggests:" << endl << suggests << endl
+//       << "  supplements:" << endl << supplements << endl
+//       << "  enhances:" << endl << enhances << endl
 }
 
+
+// COMMENT BLOCK BELOW:
+// Overload 'virtual std::ostream & dumpOn' to realize 'std::ostream & operator<<'.
+// That's the intended way for ReferenceCounted objects.
+//
 /*
 std::ostream& operator<<(std::ostream& out, const zypp::shared_ptr<AtomBase> data)
 {
@@ -61,8 +70,8 @@ std::ostream& operator<<(std::ostream& out, const zypp::shared_ptr<AtomBase> dat
       out << "Unknown atom type" << endl;
   }
   return out;
-}  
-  
+}
+
 std::ostream& operator<<(std::ostream& out, const Script& data)
 {
       out << "  do script: " << data.do_script << endl
@@ -76,8 +85,8 @@ std::ostream& operator<<(std::ostream& out, const Script& data)
       << "  undo checksum type: " << data.undo_checksum_type << endl
       << "  undo checksum: " << data.undo_checksum << endl;
   return out;
-}  
-  
+}
+
 
 std::ostream& operator<<(std::ostream& out, const Message& data)
 {
@@ -99,6 +108,6 @@ std::ostream& operator<<(std::ostream& out, const Message& data)
   return out;
 }
 */
-  
+
 } // namespace cache
 } // namespace zypp

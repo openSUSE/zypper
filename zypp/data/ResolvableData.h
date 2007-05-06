@@ -11,8 +11,13 @@
 #ifndef ResolvableData_h
 #define ResolvableData_h
 
+#include <iosfwd>
+#include <list>
+
+#include "zypp/base/PtrTypes.h"
 #include "zypp/base/ReferenceCounted.h"
 #include "zypp/base/NonCopyable.h"
+
 #include "zypp/capability/CapabilityImpl.h"
 #include "zypp/Pathname.h"
 #include "zypp/Edition.h"
@@ -22,69 +27,75 @@
 #include "zypp/Url.h"
 #include "zypp/Date.h"
 #include "zypp/TranslatedText.h"
-#include <string>
-#include <list>
-#include <iostream>
-#include <zypp/base/PtrTypes.h>
-
-using namespace zypp::base;
 
 namespace zypp
 {
 namespace data
 {
-  
-  typedef std::list< capability::CapabilityImpl::Ptr > DependencyList;
-  typedef std::map< zypp::Dep, DependencyList> Dependencies;
-  
+
+  typedef std::list<capability::CapabilityImpl::Ptr> DependencyList;
+  typedef std::map<zypp::Dep, DependencyList> Dependencies;
+
+  ///////////////////////////////////////////////////////////////////
+
   DEFINE_PTR_TYPE(Resolvable);
-  
+
   class Resolvable : public base::ReferenceCounted, private base::NonCopyable
   {
     public:
     Resolvable()
     {};
-    
+
     std::string name;
     Edition edition;
     Arch arch;
-    
+
     Dependencies deps;
   };
-  
+
+  ///////////////////////////////////////////////////////////////////
+
   DEFINE_PTR_TYPE(ResObject);
-  
+
   class ResObject : public Resolvable
   {
     public:
       ResObject()
         : source_media_nr(1), install_only(false)
       {}
-      
-      
+
+
       TranslatedText summary;
       TranslatedText description;
-      
+
       std::string insnotify;
       std::string delnotify;
-      
+
       std::string license_to_confirm;
       std::string vendor;
-      
+
       /** Installed size. \see zypp::ResObject::size() */
       ByteCount size;
       /** RPM package size. \see zypp::ResObject::archive_size() */
       ByteCount archive_size;
 
       std::string source;
-      
+
       int source_media_nr;
-      
+
       bool install_only;
-      
+
       Date build_time;
       Date install_time;
+
+    protected:
+      /** Overload to realize std::ostream & operator\<\<. */
+      virtual std::ostream & dumpOn( std::ostream & str ) const;
   };
+
+  ///////////////////////////////////////////////////////////////////
+
+  DEFINE_PTR_TYPE(AtomBase);
 
   class AtomBase : public ResObject
   {
@@ -92,7 +103,11 @@ namespace data
       enum AtomType { TypePackage, TypeScript, TypeMessage };
       virtual AtomType atomType() = 0;
   };
-  
+
+  ///////////////////////////////////////////////////////////////////
+
+  DEFINE_PTR_TYPE(Script);
+
   class Script : public AtomBase
   {
     public:
@@ -110,6 +125,10 @@ namespace data
       std::string undo_checksum;
   };
 
+  ///////////////////////////////////////////////////////////////////
+
+  DEFINE_PTR_TYPE(Message);
+
   class Message : public AtomBase
   {
     public:
@@ -117,8 +136,12 @@ namespace data
       virtual AtomType atomType() { return TypeMessage; };
       TranslatedText text;
   };
-  
-  class Selection : public base::ReferenceCounted, private base::NonCopyable
+
+  ///////////////////////////////////////////////////////////////////
+
+  DEFINE_PTR_TYPE(Selection);
+
+  class Selection : public ResObject
   {
     public:
 
@@ -131,6 +154,10 @@ namespace data
       //std::list<MetaPkg> grouplist;
       //std::list<PackageReq> packageList;
   };
+
+  ///////////////////////////////////////////////////////////////////
+
+  DEFINE_PTR_TYPE(Patch);
 
   class Patch : public ResObject
   {
@@ -153,6 +180,10 @@ namespace data
     bool interactive;
   };
 
+  ///////////////////////////////////////////////////////////////////
+
+  DEFINE_PTR_TYPE(Pattern);
+
   /*
    * Data Object for Pattern
    * resolvable
@@ -164,13 +195,17 @@ namespace data
       Pattern()
         : user_visible(true)
       {};
-      
+
       std::string default_;
       bool user_visible;
       TranslatedText category;
       std::string icon;
       std::string script;
   };
+
+  ///////////////////////////////////////////////////////////////////
+
+  DEFINE_PTR_TYPE(Product);
 
   /*
    * Data Object for Product
@@ -184,13 +219,17 @@ namespace data
 
       std::string type;
       std::string vendor;
-      std::string name; 
-      std::string distribution_name; 
+      std::string name;
+      std::string distribution_name;
       Edition distribution_edition;
       TranslatedText short_name;
         // those are suse specific tags
       std::string releasenotesurl;
   };
+
+  ///////////////////////////////////////////////////////////////////
+
+  DEFINE_PTR_TYPE(Package);
 
   /*
    * Data Object for Package
@@ -221,18 +260,20 @@ namespace data
       std::string postin;
       std::string preun;
       std::string postun;
-      
+
       ByteCount source_size;
-      
+
       std::list<std::string> authors;
       std::list<std::string> keywords;
-      
+
       Pathname location;
   };
-  
-  
+
+
+  ///////////////////////////////////////////////////////////////////
+
  template<class _Res> class SpecificData;
- 
+
  template<> class SpecificData<Package>
  {
    public:
@@ -251,23 +292,15 @@ namespace data
     std::string postin;
     std::string preun;
     std::string postun;
-      
+
     ByteCount source_size;
-      
+
     std::list<std::string> authors;
     std::list<std::string> keywords;
-      
+
     Pathname location;
  };
-  
-  /* Easy output */
-//   std::ostream& operator<<(std::ostream &out, const Dependency& data);
-   std::ostream& operator<<(std::ostream &out, const ResObject& data);
-   //std::ostream& operator<<(std::ostream &out, const Package& data);
-//   std::ostream& operator<<(std::ostream &out, const Product& data);
-//   std::ostream& operator<<(std::ostream &out, const Pattern& data);
-//   std::ostream& operator<<(std::ostream &out, const Selection& data);
-  
+
 } // namespace data
 } // namespace zypp
 
