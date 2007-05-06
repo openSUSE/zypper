@@ -12,7 +12,8 @@
 #ifndef ZYPP_TARGET_RPM_BINHEADER_H
 #define ZYPP_TARGET_RPM_BINHEADER_H
 
-extern "C" {
+extern "C"
+{
 #include <stdint.h>
 }
 
@@ -25,126 +26,149 @@ extern "C" {
 #include "zypp/base/PtrTypes.h"
 #include "zypp/target/rpm/librpm.h"
 
-namespace zypp {
-  namespace target {
-    namespace rpm {
-      ///////////////////////////////////////////////////////////////////
-      //
-      //	CLASS NAME : BinHeader
-      /**
-       *
-       **/
-      class BinHeader : public base::ReferenceCounted, private base::NonCopyable
-      {
+namespace zypp
+{
+namespace target
+{
+namespace rpm
+{
+///////////////////////////////////////////////////////////////////
+//
+//	CLASS NAME : BinHeader
+/**
+ *
+ **/
+class BinHeader : public base::ReferenceCounted, private base::NonCopyable
+{
 
-        public:
-      
-	  typedef intrusive_ptr<BinHeader> Ptr;
+public:
 
-	  typedef intrusive_ptr<const BinHeader> constPtr;
+  typedef intrusive_ptr<BinHeader> Ptr;
 
-          typedef int32_t tag;
-      
-          class intList;
-      
-          class stringList;
-      
-        private:
-      
-          Header _h;
-      
-          bool assertHeader();
-      
-        public:
-      
-          BinHeader( Header h_r = 0 );
-      
-          /**
-           * <B>Dangerous!<\B> This one takes the header out of rhs
-           * and leaves rhs empty.
-           **/
-          BinHeader( BinHeader::Ptr & rhs );
-      
-          virtual ~BinHeader();
-      
-        public:
-      
-          bool empty() const { return( _h == NULL ); }
-      
-          bool has_tag( tag tag_r ) const;
-      
-          unsigned int_list( tag tag_r, intList & lst_r ) const;
-      
-          unsigned string_list( tag tag_r, stringList & lst_r ) const;
-      
-          int int_val( tag tag_r ) const;
-      
-          std::string string_val( tag tag_r ) const;
-      
-        public:
-      
-          std::list<std::string> stringList_val( tag tag_r ) const;
-      
-        public:
-      
-          virtual std::ostream & dumpOn( std::ostream & str ) const;
-      };
-      
-      ///////////////////////////////////////////////////////////////////
-      
-      ///////////////////////////////////////////////////////////////////
-      //
-      //	CLASS NAME : BinHeader::intList
-      /**
-       *
-       **/
-      class BinHeader::intList {
-        intList            ( const intList & );
-        intList & operator=( const intList & );
-        private:
-          unsigned cnt;
-          void *   val;
-          tag      type;
-        private:
-          friend class BinHeader;
-          unsigned set( void * val_r, tag cnt_r, tag type_r );
-        public:
-          intList();
-	  bool empty() const { return cnt==0; }
-          unsigned size() const { return cnt; }
-          int operator[]( const unsigned idx_r ) const;
-      };
-      
-      ///////////////////////////////////////////////////////////////////
-      
-      ///////////////////////////////////////////////////////////////////
-      //
-      //	CLASS NAME : BinHeader::stringList
-      /**
-       *
-       **/
-      class BinHeader::stringList {
-        stringList            ( const stringList & );
-        stringList & operator=( const stringList & );
-        private:
-          unsigned cnt;
-          char **  val;
-          void clear();
-        private:
-          friend class BinHeader;
-          unsigned set( char ** val_r, tag cnt_r );
-        public:
-          stringList();
-          ~stringList() { clear(); }
-	  bool empty() const { return cnt==0; }
-          unsigned size() const { return cnt; }
-          std::string operator[]( const unsigned idx_r ) const;
-      };
-      
-      ///////////////////////////////////////////////////////////////////
+  typedef intrusive_ptr<const BinHeader> constPtr;
 
-    } // namespace rpm
-  } // namespace target
+  typedef int32_t tag;
+
+  class intList;
+
+  class stringList;
+
+private:
+
+  Header _h;
+
+  bool assertHeader();
+
+public:
+
+  BinHeader( Header h_r = 0 );
+
+  /**
+   * <B>Dangerous!<\B> This one takes the header out of rhs
+   * and leaves rhs empty.
+   **/
+  BinHeader( BinHeader::Ptr & rhs );
+
+  virtual ~BinHeader();
+
+public:
+
+  bool empty() const
+  {
+    return( _h == NULL );
+  }
+
+  bool has_tag( tag tag_r ) const;
+
+  unsigned int_list( tag tag_r, intList & lst_r ) const;
+
+  unsigned string_list( tag tag_r, stringList & lst_r ) const;
+
+  int int_val( tag tag_r ) const;
+
+  std::string string_val( tag tag_r ) const;
+
+public:
+
+  std::list<std::string> stringList_val( tag tag_r ) const;
+
+public:
+
+  virtual std::ostream & dumpOn( std::ostream & str ) const;
+};
+
+///////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////
+//
+//	CLASS NAME : BinHeader::intList
+/**
+ *
+ **/
+class BinHeader::intList
+{
+  intList            ( const intList & );
+  intList & operator=( const intList & );
+private:
+  unsigned cnt;
+  void *   val;
+  tag      type;
+private:
+  friend class BinHeader;
+  unsigned set( void * val_r, tag cnt_r, tag type_r );
+public:
+  intList();
+  bool empty() const
+  {
+    return cnt==0;
+  }
+  unsigned size() const
+  {
+    return cnt;
+  }
+  int operator[]( const unsigned idx_r ) const;
+};
+
+///////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////
+//
+//	CLASS NAME : BinHeader::stringList
+/**
+ *
+ **/
+class BinHeader::stringList
+{
+  stringList            ( const stringList & );
+  stringList & operator=( const stringList & );
+private:
+  unsigned cnt;
+  char **  val;
+  void clear();
+private:
+  friend class BinHeader;
+  unsigned set( char ** val_r, tag cnt_r );
+public:
+  stringList();
+  ~stringList()
+  {
+    clear();
+  }
+  bool empty() const
+  {
+    return cnt==0;
+  }
+  unsigned size() const
+  {
+    return cnt;
+  }
+  std::string operator[]( const unsigned idx_r ) const;
+};
+
+///////////////////////////////////////////////////////////////////
+
+} // namespace rpm
+} // namespace target
 } // namespace zypp
 
 #endif // ZYPP_TARGET_RPM_BINHEADER_H

@@ -20,74 +20,85 @@
 
 using namespace std;
 
-namespace zypp {
-  namespace target {
-    namespace rpm {
+namespace zypp
+{
+namespace target
+{
+namespace rpm
+{
 ///////////////////////////////////////////////////////////////////
 //
 //	CLASS NAME : librpmDb::D
 /**
  * @short librpmDb internal database handle
  **/
-class librpmDb::D {
+class librpmDb::D
+{
   D & operator=( const D & ); // NO ASSIGNMENT!
   D ( const D & );            // NO COPY!
-  public:
+public:
 
-    const Pathname _root;   // root directory for all operations
-    const Pathname _dbPath; // directory (below root) that contains the rpmdb
-    rpmdb          _db;     // database handle
-    shared_ptr<RpmException> _error;  // database error
+  const Pathname _root;   // root directory for all operations
+  const Pathname _dbPath; // directory (below root) that contains the rpmdb
+  rpmdb          _db;     // database handle
+  shared_ptr<RpmException> _error;  // database error
 
-    friend ostream & operator<<( ostream & str, const D & obj ) {
-      str << "{" << obj._error  << "(" << obj._root << ")" << obj._dbPath << "}";
-      return str;
-    }
+  friend ostream & operator<<( ostream & str, const D & obj )
+  {
+    str << "{" << obj._error  << "(" << obj._root << ")" << obj._dbPath << "}";
+    return str;
+  }
 
-    D( const Pathname & root_r, const Pathname & dbPath_r, bool readonly_r )
+  D( const Pathname & root_r, const Pathname & dbPath_r, bool readonly_r )
       : _root  ( root_r )
       , _dbPath( dbPath_r )
       , _db    ( 0 )
+  {
+    _error.reset();
+    // set %_dbpath macro
+    ::addMacro( NULL, "_dbpath", NULL, _dbPath.asString().c_str(), RMIL_CMDLINE );
+    const char * root = ( _root == "/" ? NULL : _root.asString().c_str() );
+    int          perms = 0644;
+
+    // check whether to create a new db
+    PathInfo master( _root + _dbPath + "Packages" );
+    if ( ! master.isFile() )
     {
-      _error.reset();
-      // set %_dbpath macro
-      ::addMacro( NULL, "_dbpath", NULL, _dbPath.asString().c_str(), RMIL_CMDLINE );
-      const char * root = ( _root == "/" ? NULL : _root.asString().c_str() );
-      int          perms = 0644;
-
-      // check whether to create a new db
-      PathInfo master( _root + _dbPath + "Packages" );
-      if ( ! master.isFile() ) {
-	// init database
-	int res = ::rpmdbInit( root, perms );
-	if ( res ) {
-	  ERR << "rpmdbInit error(" << res << "): " << *this << endl;
-	  _error = shared_ptr<RpmInitException>(new RpmInitException(_root, _dbPath));
-	  ZYPP_THROW(*_error);
-	}
+      // init database
+      int res = ::rpmdbInit( root, perms );
+      if ( res )
+      {
+        ERR << "rpmdbInit error(" << res << "): " << *this << endl;
+        _error = shared_ptr<RpmInitException>(new RpmInitException(_root, _dbPath));
+        ZYPP_THROW(*_error);
       }
-
-      // open database
-      int res = ::rpmdbOpen( root, &_db, (readonly_r ? O_RDONLY : O_RDWR ), perms );
-      if ( res || !_db ) {
-	if ( _db ) {
-	  ::rpmdbClose( _db );
-	  _db = 0;
-	}
-	ERR << "rpmdbOpen error(" << res << "): " << *this << endl;
-	_error = shared_ptr<RpmDbOpenException>(new RpmDbOpenException(_root, _dbPath));
-	ZYPP_THROW(*_error);
-	return;
-      }
-
-      DBG << "DBACCESS " << *this << endl;
     }
 
-    ~D() {
-      if ( _db ) {
+    // open database
+    int res = ::rpmdbOpen( root, &_db, (readonly_r ? O_RDONLY : O_RDWR ), perms );
+    if ( res || !_db )
+    {
+      if ( _db )
+      {
+        ::rpmdbClose( _db );
+        _db = 0;
+      }
+      ERR << "rpmdbOpen error(" << res << "): " << *this << endl;
+      _error = shared_ptr<RpmDbOpenException>(new RpmDbOpenException(_root, _dbPath));
+      ZYPP_THROW(*_error);
+      return;
+    }
+
+    DBG << "DBACCESS " << *this << endl;
+  }
+
+  ~D()
+  {
+    if ( _db )
+    {
       ::rpmdbClose( _db );
-      }
     }
+  }
 };
 
 ///////////////////////////////////////////////////////////////////
@@ -117,7 +128,8 @@ bool librpmDb::globalInit()
     return true;
 
   int rc = ::rpmReadConfigFiles( NULL, NULL );
-  if ( rc ) {
+  if ( rc )
+  {
     ERR << "rpmReadConfigFiles returned " << rc << endl;
     return false;
   }
@@ -129,9 +141,9 @@ bool librpmDb::globalInit()
 
 #define OUTVAL(n) << " (" #n ":" << expand( "%{" #n "}" ) << ")"
   MIL << "librpm init done:"
-    OUTVAL(_target)
-    OUTVAL(_dbpath)
-      << endl;
+  OUTVAL(_target)
+  OUTVAL(_dbpath)
+  << endl;
 #undef OUTVAL
   return initialized;
 }
@@ -165,18 +177,21 @@ std::string librpmDb::expand( const std::string & macro_r )
 librpmDb * librpmDb::newLibrpmDb( Pathname root_r, Pathname dbPath_r, bool readonly_r )
 {
   // check arguments
-  if ( ! (root_r.absolute() && dbPath_r.absolute()) ) {
+  if ( ! (root_r.absolute() && dbPath_r.absolute()) )
+  {
     ZYPP_THROW(RpmInvalidRootException(root_r, dbPath_r));
   }
 
   // initialize librpm
-  if ( ! globalInit() ) {
+  if ( ! globalInit() )
+  {
     ZYPP_THROW(GlobalRpmInitException());
   }
 
   // open rpmdb
   librpmDb * ret = 0;
-  try {
+  try
+  {
     ret = new librpmDb( root_r, dbPath_r, readonly_r );
   }
   catch (const RpmException & excpt_r)
@@ -198,15 +213,18 @@ librpmDb * librpmDb::newLibrpmDb( Pathname root_r, Pathname dbPath_r, bool reado
 void librpmDb::dbAccess( const Pathname & root_r, const Pathname & dbPath_r )
 {
   // check arguments
-  if ( ! (root_r.absolute() && dbPath_r.absolute()) ) {
+  if ( ! (root_r.absolute() && dbPath_r.absolute()) )
+  {
     ZYPP_THROW(RpmInvalidRootException(root_r, dbPath_r));
   }
 
-  if ( _defaultDb ) {
+  if ( _defaultDb )
+  {
     // already accessing a database: switching is not allowed.
     if ( _defaultRoot == root_r && _defaultDbPath == dbPath_r )
       return;
-    else {
+    else
+    {
       ZYPP_THROW(RpmDbAlreadyOpenException(_defaultRoot, _defaultDbPath, root_r, dbPath_r));
     }
   }
@@ -227,11 +245,13 @@ void librpmDb::dbAccess( const Pathname & root_r, const Pathname & dbPath_r )
 //
 void librpmDb::dbAccess()
 {
-  if ( _dbBlocked ) {
+  if ( _dbBlocked )
+  {
     ZYPP_THROW(RpmAccessBlockedException(_defaultRoot, _defaultDbPath));
   }
 
-  if ( !_defaultDb ) {
+  if ( !_defaultDb )
+  {
     // get access
     _defaultDb = newLibrpmDb( _defaultRoot, _defaultDbPath, /*readonly*/true );
   }
@@ -245,7 +265,8 @@ void librpmDb::dbAccess()
 //
 void librpmDb::dbAccess( librpmDb::constPtr & ptr_r )
 {
-  try {
+  try
+  {
     dbAccess();
   }
   catch (const RpmException & excpt_r)
@@ -265,22 +286,25 @@ void librpmDb::dbAccess( librpmDb::constPtr & ptr_r )
 //
 unsigned librpmDb::dbRelease( bool force_r )
 {
-  if ( !_defaultDb ) {
+  if ( !_defaultDb )
+  {
     return 0;
   }
 
   unsigned outstanding = _defaultDb->refCount() - 1; // refCount can't be 0
 
-  switch ( outstanding ) {
+  switch ( outstanding )
+  {
   default:
-    if ( !force_r ) {
+    if ( !force_r )
+    {
       DBG << "dbRelease: keep access, outstanding " << outstanding << endl;
       break;
     }
     // else fall through:
   case 0:
     DBG << "dbRelease: release" << (force_r && outstanding ? "(forced)" : "")
-      << ", outstanding " << outstanding << endl;
+    << ", outstanding " << outstanding << endl;
 
     _defaultDb->_d._error = shared_ptr<RpmAccessBlockedException>(new RpmAccessBlockedException(_defaultDb->_d._root, _defaultDb->_d._dbPath));
     // tag handle invalid
@@ -324,7 +348,8 @@ void librpmDb::unblockAccess()
 //
 ostream & librpmDb::dumpState( ostream & str )
 {
-  if ( !_defaultDb ) {
+  if ( !_defaultDb )
+  {
     return str << "[librpmDb " << (_dbBlocked?"BLOCKED":"CLOSED") << " " << stringPath( _defaultRoot, _defaultDbPath ) << "]";
   }
   return str << "[" << _defaultDb << "]";
@@ -346,8 +371,7 @@ ostream & librpmDb::dumpState( ostream & str )
 //
 librpmDb::librpmDb( const Pathname & root_r, const Pathname & dbPath_r, bool readonly_r )
     : _d( * new D( root_r, dbPath_r, readonly_r ) )
-{
-}
+{}
 
 ///////////////////////////////////////////////////////////////////
 //
@@ -370,7 +394,8 @@ librpmDb::~librpmDb()
 //
 void librpmDb::unref_to( unsigned refCount_r ) const
 {
-  if ( refCount_r == 1 ) {
+  if ( refCount_r == 1 )
+  {
     dbRelease();
   }
 }
@@ -429,23 +454,23 @@ unsigned librpmDb::size() const
 {
   unsigned count = 0;
   if ( valid() )
+  {
+    dbiIndex dbi = dbiOpen( _d._db, RPMTAG_NAME, 0 );
+    if ( dbi )
     {
-      dbiIndex dbi = dbiOpen( _d._db, RPMTAG_NAME, 0 );
-      if ( dbi )
-        {
-          DBC * dbcursor = 0;
-          dbiCopen( dbi, dbi->dbi_txnid, &dbcursor, 0 );
+      DBC * dbcursor = 0;
+      dbiCopen( dbi, dbi->dbi_txnid, &dbcursor, 0 );
 
-          DBT key, data;
-          memset( &key, 0, sizeof(key) );
-          memset( &data, 0, sizeof(data) );
-          while ( dbiGet( dbi, dbcursor, &key, &data, DB_NEXT ) == 0 )
-            count += data.size / dbi->dbi_jlen;
+      DBT key, data;
+      memset( &key, 0, sizeof(key) );
+      memset( &data, 0, sizeof(data) );
+      while ( dbiGet( dbi, dbcursor, &key, &data, DB_NEXT ) == 0 )
+        count += data.size / dbi->dbi_jlen;
 
-          dbiCclose( dbi, dbcursor, 0 );
-          /* no need to close dbi */
-        }
+      dbiCclose( dbi, dbcursor, 0 );
+      /* no need to close dbi */
     }
+  }
   return count;
 }
 
@@ -491,9 +516,12 @@ librpmDb::DbDirInfo::DbDirInfo( const Pathname & root_r, const Pathname & dbPath
     , _dbPath( dbPath_r )
 {
   // check and adjust arguments
-  if ( ! (root_r.absolute() && dbPath_r.absolute()) ) {
+  if ( ! (root_r.absolute() && dbPath_r.absolute()) )
+  {
     ERR << "Relative path for root(" << _root << ") or dbPath(" << _dbPath << ")" << endl;
-  } else {
+  }
+  else
+  {
     _dbDir   ( _root + _dbPath );
     _dbV4    ( _dbDir.path() + "Packages" );
     _dbV3    ( _dbDir.path() + "packages.rpm" );
@@ -525,9 +553,12 @@ void librpmDb::DbDirInfo::restat()
 */
 std::ostream & operator<<( std::ostream & str, const librpmDb::DbDirInfo & obj )
 {
-  if ( obj.illegalArgs() ) {
+  if ( obj.illegalArgs() )
+  {
     str << "ILLEGAL: '(" << obj.root() << ")" << obj.dbPath() << "'";
-  } else {
+  }
+  else
+  {
     str << "'(" << obj.root() << ")" << obj.dbPath() << "':" << endl;
     str << "  Dir:    " << obj._dbDir << endl;
     str << "  V4:     " << obj._dbV4 << endl;
@@ -543,120 +574,138 @@ std::ostream & operator<<( std::ostream & str, const librpmDb::DbDirInfo & obj )
 /**
  *
  **/
-class librpmDb::db_const_iterator::D {
+class librpmDb::db_const_iterator::D
+{
   D & operator=( const D & ); // NO ASSIGNMENT!
   D ( const D & );            // NO COPY!
-  public:
+public:
 
-    librpmDb::constPtr     _dbptr;
-    shared_ptr<RpmException> _dberr;
+  librpmDb::constPtr     _dbptr;
+  shared_ptr<RpmException> _dberr;
 
-    RpmHeader::constPtr _hptr;
-    rpmdbMatchIterator   _mi;
+  RpmHeader::constPtr _hptr;
+  rpmdbMatchIterator   _mi;
 
-    D( librpmDb::constPtr dbptr_r )
+  D( librpmDb::constPtr dbptr_r )
       : _dbptr( dbptr_r )
       , _mi( 0 )
+  {
+    if ( !_dbptr )
     {
-      if ( !_dbptr ) {
-	try {
-	  librpmDb::dbAccess( _dbptr );
-	}
-        catch (const RpmException & excpt_r)
-	{
-	  ZYPP_CAUGHT(excpt_r);
-	}
-	if ( !_dbptr ) {
-	  WAR << "No database access: " << _dberr << endl;
-	}
-      } else {
-	destroy(); // Checks whether _dbptr still valid
+      try
+      {
+        librpmDb::dbAccess( _dbptr );
+      }
+      catch (const RpmException & excpt_r)
+      {
+        ZYPP_CAUGHT(excpt_r);
+      }
+      if ( !_dbptr )
+      {
+        WAR << "No database access: " << _dberr << endl;
       }
     }
-
-    ~D() {
-      if ( _mi ) {
-	::rpmdbFreeIterator( _mi );
-      }
+    else
+    {
+      destroy(); // Checks whether _dbptr still valid
     }
+  }
 
-    /**
-     * Let iterator access a dbindex file. Call @ref advance to access the
-     * 1st element (if present).
-     **/
-    bool create( int rpmtag, const void * keyp = NULL, size_t keylen = 0 ) {
+  ~D()
+  {
+    if ( _mi )
+    {
+      ::rpmdbFreeIterator( _mi );
+    }
+  }
+
+  /**
+   * Let iterator access a dbindex file. Call @ref advance to access the
+   * 1st element (if present).
+   **/
+  bool create( int rpmtag, const void * keyp = NULL, size_t keylen = 0 )
+  {
+    destroy();
+    if ( ! _dbptr )
+      return false;
+    _mi = ::rpmdbInitIterator( _dbptr->_d._db, rpmTag(rpmtag), keyp, keylen );
+    return _mi;
+  }
+
+  /**
+   * Destroy iterator. Invalidates _dbptr, if database was blocked meanwile.
+   * Always returns false.
+   **/
+  bool destroy()
+  {
+    if ( _mi )
+    {
+      _mi = ::rpmdbFreeIterator( _mi );
+      _hptr = 0;
+    }
+    if ( _dbptr && _dbptr->error() )
+    {
+      _dberr = _dbptr->error();
+      WAR << "Lost database access: " << _dberr << endl;
+      _dbptr = 0;
+    }
+    return false;
+  }
+
+  /**
+   * Advance to the first/next header in iterator. Destroys iterator if
+   * no more headers available.
+   **/
+  bool advance()
+  {
+    if ( !_mi )
+      return false;
+    Header h = ::rpmdbNextIterator( _mi );
+    if ( ! h )
+    {
       destroy();
-      if ( ! _dbptr )
-	return false;
-      _mi = ::rpmdbInitIterator( _dbptr->_d._db, rpmTag(rpmtag), keyp, keylen );
-      return _mi;
-    }
-
-    /**
-     * Destroy iterator. Invalidates _dbptr, if database was blocked meanwile.
-     * Always returns false.
-     **/
-    bool destroy() {
-      if ( _mi ) {
-	_mi = ::rpmdbFreeIterator( _mi );
-	_hptr = 0;
-      }
-      if ( _dbptr && _dbptr->error() ) {
-	_dberr = _dbptr->error();
-	WAR << "Lost database access: " << _dberr << endl;
-	_dbptr = 0;
-      }
       return false;
     }
+    _hptr = new RpmHeader( h );
+    return true;
+  }
 
-    /**
-     * Advance to the first/next header in iterator. Destroys iterator if
-     * no more headers available.
-     **/
-    bool advance() {
-      if ( !_mi )
-	return false;
-      Header h = ::rpmdbNextIterator( _mi );
-      if ( ! h ) {
-	destroy();
-	return false;
-      }
-      _hptr = new RpmHeader( h );
-      return true;
-    }
+  /**
+   * Access a dbindex file and advance to the 1st header.
+   **/
+  bool init( int rpmtag, const void * keyp = NULL, size_t keylen = 0 )
+  {
+    if ( ! create( rpmtag, keyp, keylen ) )
+      return false;
+    return advance();
+  }
 
-    /**
-     * Access a dbindex file and advance to the 1st header.
-     **/
-    bool init( int rpmtag, const void * keyp = NULL, size_t keylen = 0 ) {
-      if ( ! create( rpmtag, keyp, keylen ) )
-	return false;
-      return advance();
-    }
-
-    /**
-     * Create an itertator that contains the database entry located at
-     * off_r, and advance to the 1st header.
-     **/
-    bool set( int off_r ) {
-      if ( ! create( RPMDBI_PACKAGES ) )
-	return false;
+  /**
+   * Create an itertator that contains the database entry located at
+   * off_r, and advance to the 1st header.
+   **/
+  bool set( int off_r )
+  {
+    if ( ! create( RPMDBI_PACKAGES ) )
+      return false;
 #warning TESTCASE: rpmdbAppendIterator and (non)sequential access?
-      ::rpmdbAppendIterator( _mi, &off_r, 1 );
-      return advance();
-    }
+    ::rpmdbAppendIterator( _mi, &off_r, 1 );
+    return advance();
+  }
 
-    unsigned offset() {
-      return( _mi ? ::rpmdbGetIteratorOffset( _mi ) : 0 );
-    }
+  unsigned offset()
+  {
+    return( _mi ? ::rpmdbGetIteratorOffset( _mi ) : 0 );
+  }
 
-    int size() {
-      if ( !_mi )
-	return 0;
-      int ret = ::rpmdbGetIteratorCount( _mi );
+  int size()
+  {
+    if ( !_mi )
+      return 0;
+    int ret = ::rpmdbGetIteratorCount( _mi );
 #warning TESTCASE: rpmdbGetIteratorCount returns 0 on sequential access?
-      return( ret ? ret : -1 ); // -1: sequential access
-    }
+    return( ret ? ret : -1 ); // -1: sequential access
+  }
 };
 
 ///////////////////////////////////////////////////////////////////
@@ -746,9 +795,9 @@ shared_ptr<RpmException> librpmDb::db_const_iterator::dbError() const
 ostream & operator<<( ostream & str, const librpmDb::db_const_iterator & obj )
 {
   str << "db_const_iterator(" << obj._d._dbptr
-    << " Size:" << obj._d.size()
-      << " HdrNum:" << obj._d.offset()
-	<< ")";
+  << " Size:" << obj._d.size()
+  << " HdrNum:" << obj._d.offset()
+  << ")";
   return str;
 }
 
@@ -835,8 +884,10 @@ bool librpmDb::db_const_iterator::findPackage( const string & name_r )
   // check installtime on multiple entries
   int match    = 0;
   time_t itime = 0;
-  for ( ; operator*(); operator++() ) {
-    if ( operator*()->tag_installtime() > itime ) {
+  for ( ; operator*(); operator++() )
+  {
+    if ( operator*()->tag_installtime() > itime )
+    {
       match = _d.offset();
       itime = operator*()->tag_installtime();
     }
@@ -856,8 +907,10 @@ bool librpmDb::db_const_iterator::findPackage( const std::string & name_r, const
   if ( ! _d.init( RPMTAG_NAME, name_r.c_str() ) )
     return false;
 
-  for ( ; operator*(); operator++() ) {
-    if ( ed_r == operator*()->tag_edition() ) {
+  for ( ; operator*(); operator++() )
+  {
+    if ( ed_r == operator*()->tag_edition() )
+    {
       int match = _d.offset();
       return _d.set( match );
     }
@@ -880,6 +933,6 @@ bool librpmDb::db_const_iterator::findPackage( const Package::constPtr & which_r
   return findPackage( which_r->name(), which_r->edition() );
 }
 
-    } // namespace rpm
-  } // namespace target
+} // namespace rpm
+} // namespace target
 } // namespace zypp

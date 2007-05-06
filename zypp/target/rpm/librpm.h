@@ -12,7 +12,8 @@
 #ifndef ZYPP_TARGET_RPM_LIBRPM_H
 #define ZYPP_TARGET_RPM_LIBRPM_H
 
-extern "C" {
+extern "C"
+{
 #include <rpm/rpmlib.h>
 #include <rpm/rpmmacro.h>
 #include <rpm/rpmdb.h>

@@ -20,77 +20,90 @@
 #include "zypp/base/Exception.h"
 #include "zypp/Pathname.h"
 
-namespace zypp {
-  namespace target {
-    namespace rpm {
+namespace zypp
+{
+namespace target
+{
+namespace rpm
+{
 
-      ///////////////////////////////////////////////////////////////////
-      // Reporting progress of package removing
-      ///////////////////////////////////////////////////////////////////
-      struct RpmRemoveReport : public callback::ReportBase {
+///////////////////////////////////////////////////////////////////
+// Reporting progress of package removing
+///////////////////////////////////////////////////////////////////
+struct RpmRemoveReport : public callback::ReportBase
+{
 
-	enum Action {
-          ABORT,  // abort and return error
-          RETRY,   // retry
-	  IGNORE   // ignore
-        };
+  enum Action {
+    ABORT,  // abort and return error
+    RETRY,   // retry
+    IGNORE   // ignore
+  };
 
-        /** Start the operation */
-        virtual void start( const std::string & name )
-        { }
-        /**
-         * Inform about progress
-         * Return true on abort
-         */
-        virtual bool progress( unsigned percent )
-        { return false; }
+  /** Start the operation */
+  virtual void start( const std::string & name )
+  { }
+  /**
+   * Inform about progress
+   * Return true on abort
+   */
+  virtual bool progress( unsigned percent )
+  {
+    return false;
+  }
 
-	virtual Action problem( Exception & excpt_r )
-	 { return ABORT; }
+  virtual Action problem( Exception & excpt_r )
+  {
+    return ABORT;
+  }
 
-        /** Finish operation in case of success */
-        virtual void finish()
-        { }
-        /** Finish operation in case of fail, report fail exception */
-        virtual void finish( Exception & excpt_r )
-        { }
-      };
+  /** Finish operation in case of success */
+  virtual void finish()
+  { }
+  /** Finish operation in case of fail, report fail exception */
+  virtual void finish( Exception & excpt_r )
+  { }
+};
 
-      ///////////////////////////////////////////////////////////////////
-      // Reporting progress of package installation
-      ///////////////////////////////////////////////////////////////////
-      struct RpmInstallReport : public callback::ReportBase {
+///////////////////////////////////////////////////////////////////
+// Reporting progress of package installation
+///////////////////////////////////////////////////////////////////
+struct RpmInstallReport : public callback::ReportBase
+{
 
-	enum Action {
-          ABORT,  // abort and return error
-          RETRY,   // retry
-	  IGNORE   // ignore
-        };
+  enum Action {
+    ABORT,  // abort and return error
+    RETRY,   // retry
+    IGNORE   // ignore
+  };
 
-        /** Start the operation */
-        virtual void start( const Pathname & name ) 
-        { }
-        /**
-         * Inform about progress
-         * Return false on abort
-         */
-        virtual bool progress( unsigned percent )
-        { return true; }
+  /** Start the operation */
+  virtual void start( const Pathname & name )
+  { }
+  /**
+   * Inform about progress
+   * Return false on abort
+   */
+  virtual bool progress( unsigned percent )
+  {
+    return true;
+  }
 
-        /** Finish operation in case of success */
-        virtual void finish()
-        { }
-	
-	virtual Action problem( Exception & excpt_r )
-	 { return ABORT; }
+  /** Finish operation in case of success */
+  virtual void finish()
+  { }
 
-        /** Finish operation in case of fail, report fail exception */
-        virtual void finish( Exception & excpt_r )
-        { }
-      };
+  virtual Action problem( Exception & excpt_r )
+  {
+    return ABORT;
+  }
 
-    } // namespace rpm
-  } // namespace target
+  /** Finish operation in case of fail, report fail exception */
+  virtual void finish( Exception & excpt_r )
+  { }
+};
+
+} // namespace rpm
+} // namespace target
 } // namespace zypp
 
 #endif // ZYPP_TARGET_RPM_RPMCALLBACKS_H
