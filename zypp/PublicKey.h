@@ -26,7 +26,10 @@
 namespace zypp
 { /////////////////////////////////////////////////////////////////
   
-  
+  /**
+   * Exception thrown when the supplied key is
+   * not a valid gpg key
+   */
   class BadKeyException : public Exception
   {
     public:
@@ -57,8 +60,9 @@ namespace zypp
   //
   //	CLASS NAME : PublicKey
   //
-  /** Class that represent a GPG Public Key
-  */
+  /** 
+   * Class that represent a GPG Public Key
+   */
   class PublicKey
   {
     friend std::ostream & operator<<( std::ostream & str, const PublicKey & obj );

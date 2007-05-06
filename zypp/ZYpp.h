@@ -49,7 +49,8 @@ namespace zypp
   //
   /**
    * \todo define Exceptions
-  */
+   * ZYpp API main interface
+   */
   class ZYpp : public base::ReferenceCounted, private base::NonCopyable
   {
   public:
@@ -59,7 +60,10 @@ namespace zypp
 
   public:
 
-    /** Pool of ResStatus for individual ResObjetcs. */
+    /** 
+     * Access to the main resolvable pool
+     * \ref zypp::ResPool
+     */
     ResPool pool() const;
 
     /** Pool of ui::Selectable.
