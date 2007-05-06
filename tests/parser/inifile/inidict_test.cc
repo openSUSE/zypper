@@ -25,6 +25,13 @@ void ini_read_test(const string &dir)
 {
   InputStream is((Pathname(dir)+"/1.ini"));
   IniDict dict(is);
+
+  //MIL << dict["homedmacvicar"]["type"] << endl;
+
+  for ( IniDict::const_iterator it = dict.begin(); it != dict.end(); ++it )
+  {
+    MIL << (*it).first << endl;
+  }
 }
 
 test_suite*

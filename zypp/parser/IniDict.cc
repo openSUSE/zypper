@@ -10,7 +10,7 @@
  *
 */
 #include <iostream>
-//#include "zypp/base/Logger.h"
+#include "zypp/base/Logger.h"
 #include <map>
 #include <string>
 #include "zypp/parser/IniDict.h"
@@ -53,7 +53,11 @@ namespace zypp
 
     void IniDict::consume( const std::string &section, const std::string &key, const std::string &value )
     {
-      _dict[section][key] = value;
+      //MIL << endl;
+      PropertySet keys = _dict[section];
+      keys[key] = value;
+      _dict[section] = keys;
+      //MIL << this->size() << endl;
     }
 
 

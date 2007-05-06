@@ -26,14 +26,9 @@ int main(int argc, char **argv)
     {
       ZYpp::Ptr z = getZYpp();
     
-      Pathname dbpath = Pathname(getenv("PWD"));
-      
-      //RepositoryImpl_Ptr repositoryImpl(new CachedRepositoryImpl(dbpath));
-      //RepositoryFactory factory;
-      //Repository_Ref repository = factory.createFrom(repositoryImpl);
-      //ResStore dbres = repository.resolvables();
-      
-      //MIL << dbres.size() << " resolvables" << endl;
+      z->initializeTarget("/");
+      ResStore res = z->target()->resolvables();
+      MIL << res.size() << " resolvables" << endl;
 
     }
     catch ( const Exception &e )

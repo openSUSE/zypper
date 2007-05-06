@@ -32,17 +32,26 @@ namespace zypp
     //	CLASS NAME : IniDict
     //
     /**
+     * Parses a INI file and offers its structure as a
+     * dictionary.
      * 
      */
     class IniDict : public IniParser
     {
       friend std::ostream & operator<<( std::ostream & str, const IniDict & obj );
     public:
+      typedef std::map<std::string, std::string> PropertySet;
+      typedef std::map<std::string, PropertySet> ConfigSet;
+      typedef ConfigSet::const_iterator const_iterator;
+      
+      const_iterator begin() const { return _dict.begin(); }
+      const_iterator end() const { return _dict.end(); }
       /** Default ctor */
       IniDict( const InputStream &is );
       /** Dtor */
       ~IniDict();
 
+      
     public:
 
       /** Called when a section is found. */
@@ -51,7 +60,7 @@ namespace zypp
       virtual void consume( const std::string &section, const std::string &key, const std::string &value );
 
     private:
-      std::map<std::string, std::map<std::string, std::string> > _dict;
+      ConfigSet _dict;
     };
     ///////////////////////////////////////////////////////////////////
 
