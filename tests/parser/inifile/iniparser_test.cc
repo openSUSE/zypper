@@ -8,7 +8,8 @@
 #include <boost/test/unit_test_log.hpp>
 
 #include "zypp/base/Logger.h"
-#include "zypp/parser/inifile/iniparser.h"
+#include "zypp/base/InputStream.h"
+#include "zypp/parser/IniParser.h"
 #include "zypp/Url.h"
 #include "zypp/PathInfo.h"
 
@@ -16,24 +17,27 @@ using std::cout;
 using std::endl;
 using std::string;
 using namespace zypp;
+using namespace zypp::parser;
 using namespace boost::unit_test;
 
+class IniTest : public IniParser
+{
+  virtual void consume( const std::string &section )
+  {
+    MIL << section << endl;
+  }
+
+  virtual void consume( const std::string &section, const std::string &key, const std::string &value )
+  {
+    MIL << section << " | " << key << " | " << value << endl;
+  }
+};
 
 void ini_read_test(const string &dir)
 {
-  dictionary *d = iniparser_new((Pathname(dir)+"/1.ini").c_str());
-  
-  if ( d == NULL )
-    ZYPP_THROW(Exception("Failed creating dictionary"));
-  
-  int n = iniparser_getnsec(d);
-  BOOST_CHECK_EQUAL( n, 6 );
-  MIL << n << endl;
-  
-  for ( int i = 0; i < n; i++ )
-  {
-    MIL << iniparser_getsecname(d, i) << endl;
-  }
+  InputStream is((Pathname(dir)+"/1.ini"));
+  IniTest parser;
+  parser.parse(is);
 }
 
 test_suite*
