@@ -93,15 +93,7 @@ namespace zypp
     /**
      * helper to debug regular expressions matches
      */
-    std::ostream & dumpRegexpResult( const boost::smatch &what, std::ostream & str )
-    {
-      for ( unsigned int k=0; k < what.size(); k++)
-      {
-        str << "[match "<< k << "] [" << what[k] << "]" << std::endl;
-      }
-      
-      return str;
-    }
+    std::ostream & dumpRegexpResult( const boost::smatch &what, std::ostream & str );
     
     ///////////////////////////////////////////////////////////////////
     /** \name String representation of number.
