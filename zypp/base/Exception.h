@@ -195,6 +195,8 @@ namespace zypp
 
   /** Helper for \ref ZYPP_THROW. */
   template<class _Excpt>
+    void _ZYPP_THROW( const _Excpt & excpt_r, const exception_detail::CodeLocation & where_r ) __attribute__((noreturn));
+  template<class _Excpt>
     void _ZYPP_THROW( const _Excpt & excpt_r, const exception_detail::CodeLocation & where_r )
     {
       excpt_r.relocate( where_r );
@@ -210,6 +212,8 @@ namespace zypp
     }
 
   /** Helper for \ref ZYPP_THROW. */
+  template<class _Excpt>
+    void _ZYPP_RETHROW( const _Excpt & excpt_r, const exception_detail::CodeLocation & where_r ) __attribute__((noreturn));
   template<class _Excpt>
     void _ZYPP_RETHROW( const _Excpt & excpt_r, const exception_detail::CodeLocation & where_r )
     {
