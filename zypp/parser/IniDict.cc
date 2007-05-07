@@ -54,13 +54,44 @@ namespace zypp
     void IniDict::consume( const std::string &section, const std::string &key, const std::string &value )
     {
       //MIL << endl;
-      PropertySet keys = _dict[section];
-      keys[key] = value;
-      _dict[section] = keys;
+      _dict[section][key] = value;
       //MIL << this->size() << endl;
     }
 
 
+    IniDict::entry_const_iterator IniDict::entriesBegin(const std::string &section) const
+    {
+      SectionSet::const_iterator secit = _dict.find(section);
+      if ( secit == _dict.end() )
+      {
+        return _empty_map.begin();
+      }
+      
+      return (secit->second).begin();
+    }
+    
+    IniDict::entry_const_iterator IniDict::entriesEnd(const std::string &section) const
+    {
+      SectionSet::const_iterator secit = _dict.find(section);
+      if ( secit == _dict.end() )
+      {
+        return _empty_map.end();
+      }
+      
+      return (secit->second).end();
+    }
+    
+    
+    IniDict::section_const_iterator IniDict::sectionsBegin() const
+    {
+      return make_map_key_begin( _dict );
+    }
+    
+    IniDict::section_const_iterator IniDict::sectionsEnd() const
+    {
+      return make_map_key_end( _dict );
+    }
+      
     /******************************************************************
     **
     **	FUNCTION NAME : operator<<

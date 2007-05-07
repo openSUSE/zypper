@@ -28,9 +28,14 @@ void ini_read_test(const string &dir)
 
   //MIL << dict["homedmacvicar"]["type"] << endl;
 
-  for ( IniDict::const_iterator it = dict.begin(); it != dict.end(); ++it )
+  for ( IniDict::section_const_iterator it = dict.sectionsBegin(); it != dict.sectionsEnd(); ++it )
   {
-    MIL << (*it).first << endl;
+    MIL << (*it) << endl;
+    
+    for ( IniDict::entry_const_iterator it2 = dict.entriesBegin(*it); it2 != dict.entriesEnd(*it); ++it2 )
+    {
+      MIL << "  - " << (*it2).first << " | " << (*it2).second << endl;
+    }
   }
 }
 

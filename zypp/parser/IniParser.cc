@@ -59,14 +59,6 @@ void IniParser::consume( const std::string &section )
 void IniParser::endParse()
 {}
 
-void dumpRegexpResults( const boost::smatch &what )
-{
-  for ( unsigned int k=0; k < what.size(); k++)
-  {
-    DBG << "[match "<< k << "] [" << what[k] << "]" << std::endl;
-  }
-}
-
 ///////////////////////////////////////////////////////////////////
 //
 //	METHOD NAME : IniParser::parse
@@ -98,7 +90,7 @@ void IniParser::parse( const InputStream & input_r )
         boost::smatch what;
         if(boost::regex_match(trimmed, what, rxSection, boost::match_extra))
         {
-          //dumpRegexpResults(what);
+          //DBG << what << endl;
           std::string section = what[1];
           consume(section);
           section.swap(_current_section);
@@ -109,7 +101,7 @@ void IniParser::parse( const InputStream & input_r )
         boost::smatch what;
         if(boost::regex_match(trimmed, what, rxKeyValue, boost::match_extra))
         {
-          //dumpRegexpResults(what);
+          //DBG << what << endl;
           consume( _current_section, what[1], what[2] );
         }
       }

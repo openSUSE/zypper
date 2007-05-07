@@ -18,6 +18,7 @@
 
 #include "zypp/base/PtrTypes.h"
 #include "zypp/base/InputStream.h"
+#include "zypp/base/Iterator.h"
 #include "zypp/parser/IniParser.h"
 
 ///////////////////////////////////////////////////////////////////
@@ -40,18 +41,55 @@ namespace zypp
     {
       friend std::ostream & operator<<( std::ostream & str, const IniDict & obj );
     public:
-      typedef std::map<std::string, std::string> PropertySet;
-      typedef std::map<std::string, PropertySet> ConfigSet;
-      typedef ConfigSet::const_iterator const_iterator;
+      typedef std::map<std::string, std::string> EntrySet;
+      typedef std::map<std::string, EntrySet> SectionSet;
+      typedef MapKVIteratorTraits<SectionSet>::Key_const_iterator section_const_iterator;
+      typedef EntrySet::const_iterator entry_const_iterator;
       
-      const_iterator begin() const { return _dict.begin(); }
-      const_iterator end() const { return _dict.end(); }
-      /** Default ctor */
+      /**
+       * \name Section Iterators
+       * Iterate trough ini file sections
+       * \code
+       * for ( IniDict::section_const_iterator it = dict.sectionsBegin(); 
+       *       it != dict.sectionsEnd();
+       *       ++it )
+       * {
+       *   MIL << (*it) << endl;
+       * }
+       * \endcode
+       */
+       //@{
+      section_const_iterator sectionsBegin() const;
+      section_const_iterator sectionsEnd() const;
+      //@}
+      
+      /**
+       * \name Entries Iterators
+       * Iterate trough ini file entries in a section
+       * \code
+       * for ( IniDict::entry_const_iterator it = dict.entriesBegin("updates"); 
+       *       it != dict.entriesEnd("updates");
+       *       ++it )
+       * {
+       *   MIL << (*it).first << endl;
+       * }
+       * \endcode
+       */
+       
+      //@{
+      entry_const_iterator entriesBegin(const std::string &section) const;
+      entry_const_iterator entriesEnd(const std::string &section) const;
+      //@{
+      
+      /**
+       * Creates a dictionary from a InputStream
+       * containing a ini structured file
+       */
       IniDict( const InputStream &is );
+      
       /** Dtor */
       ~IniDict();
 
-      
     public:
 
       /** Called when a section is found. */
@@ -60,7 +98,14 @@ namespace zypp
       virtual void consume( const std::string &section, const std::string &key, const std::string &value );
 
     private:
-      ConfigSet _dict;
+      SectionSet _dict;
+      
+      /**
+       * empty map used to simulate
+       * iteration in non existant
+       * sections
+       */
+      EntrySet _empty_map;
     };
     ///////////////////////////////////////////////////////////////////
 
