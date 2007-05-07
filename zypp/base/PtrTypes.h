@@ -97,25 +97,46 @@ namespace zypp
     /**  */
     using boost::dynamic_pointer_cast;
 
-    /** \relates shared_ptr Stream output. */
-    template<class _D>
-      inline std::ostream &
-      operator<<( std::ostream & str, const shared_ptr<_D> & obj )
-      {
-        if ( obj )
-          return str << *obj;
-        return str << std::string("NULL");
-      }
+  /////////////////////////////////////////////////////////////////
+} // namespace zypp
+///////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////
+namespace std
+{ /////////////////////////////////////////////////////////////////
 
-    /** \relates intrusive_ptr Stream output. */
-    template<class _D>
-      inline std::ostream &
-      operator<<( std::ostream & str, const intrusive_ptr<_D> & obj )
-      {
-        if ( obj )
-          return str << *obj;
-        return str << std::string("NULL");
-      }
+  // namespace sub {
+  //    class Foo;
+  //    typedef zypp::intrusive_ptr<Foo> Foo_Ptr; // see DEFINE_PTR_TYPE(NAME) macro below
+  // }
+
+  // Defined in namespace std g++ finds the output operator (König-Lookup),
+  // even if we typedef the pointer in a different namespace than ::zypp.
+  // Otherwise we had to define an output operator always in the same namespace
+  // as the typedef (else g++ will just print the pointer value).
+
+  /** \relates zypp::shared_ptr Stream output. */
+  template<class _D>
+  inline std::ostream & operator<<( std::ostream & str, const zypp::shared_ptr<_D> & obj )
+  {
+    if ( obj )
+      return str << *obj;
+    return str << std::string("NULL");
+  }
+
+  /** \relates zypp::intrusive_ptr Stream output. */
+  template<class _D>
+  inline std::ostream & operator<<( std::ostream & str, const zypp::intrusive_ptr<_D> & obj )
+  {
+    if ( obj )
+      return str << *obj;
+    return str << std::string("NULL");
+  }
+  /////////////////////////////////////////////////////////////////
+} // namespace std
+///////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////
+namespace zypp
+{ /////////////////////////////////////////////////////////////////
 
     ///////////////////////////////////////////////////////////////////
     //
@@ -405,7 +426,6 @@ namespace zypp
     ///////////////////////////////////////////////////////////////////
 
     /*@}*/
-
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
