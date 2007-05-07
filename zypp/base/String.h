@@ -90,6 +90,19 @@ namespace zypp
     using boost::wsmatch;
     //@}
 
+    /**
+     * helper to debug regular expressions matches
+     */
+    std::ostream & dumpRegexpResult( const boost::smatch &what, std::ostream & str )
+    {
+      for ( unsigned int k=0; k < what.size(); k++)
+      {
+        str << "[match "<< k << "] [" << what[k] << "]" << std::endl;
+      }
+      
+      return str;
+    }
+    
     ///////////////////////////////////////////////////////////////////
     /** \name String representation of number.
      *
@@ -324,7 +337,7 @@ namespace zypp
     inline std::string stripPrefix( const std::string & str_r, const std::string & prefix_r )
     { return( hasPrefix( str_r, prefix_r ) ? str_r.substr( prefix_r.size() ) : str_r ); }
     //@}
-
+ 
     /////////////////////////////////////////////////////////////////
   } // namespace str
   ///////////////////////////////////////////////////////////////////
