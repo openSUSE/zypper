@@ -20,7 +20,7 @@
 #include "zypp/base/NonCopyable.h"
 #include "zypp/base/InputStream.h"
 
-#include "zypp/parser/tagfile/ParseException.h"
+#include "zypp/ProgressData.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -28,8 +28,6 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
   namespace parser
   { /////////////////////////////////////////////////////////////////
-
-    using tagfile::ParseException;
 
     ///////////////////////////////////////////////////////////////////
     //
@@ -84,13 +82,15 @@ namespace zypp
       /** Dtor */
       virtual ~TagParser();
       /** Parse the stream.
-       * \throw ParseExcetion on errors. Invoke \ref consume
-       * for each tag. \ref consume might throw other exceptions
-       * as well.
+       * \throw ParseExcetion on errors.
+       * \throws AbortRequestException on user request.
+       * Invokes \ref consume for each tag. \ref consume might throw
+       * other exceptions as well.
       */
-      void parse( const InputStream & imput_r );
+      virtual void parse( const InputStream & imput_r,
+			  const ProgressData::ReceiverFnc & fnc_r = ProgressData::ReceiverFnc() );
 
-    public:
+    protected:
       /** Called when start parsing. */
       virtual void beginParse();
       /** Called when a single-tag is found. */
@@ -100,7 +100,13 @@ namespace zypp
       /** Called when the parse is done. */
       virtual void endParse();
 
-    public:
+    protected:
+      /** Called when user(callback) request to abort.
+       * \throws AbortRequestException unless overloaded.
+      */
+      virtual void userRequestedAbort( unsigned lineNo_r );
+
+    protected:
       /** Prefix exception message with line and tag information. */
       std::string errPrefix( unsigned lineNo_r,
 			     const std::string & msg_r = std::string() ) const;
@@ -116,7 +122,6 @@ namespace zypp
 
     private:
       std::string _inputname;
-      //ProgressData _ticks;
     };
     ///////////////////////////////////////////////////////////////////
 

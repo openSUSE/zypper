@@ -75,7 +75,6 @@ namespace data
       std::string vendor;
 
       /** Installed size. \see zypp::ResObject::size() */
-      /** Installed size. \see zypp::ResObject::size() */
       ByteCount size;
       /** RPM package size. \see zypp::ResObject::archive_size() */
       ByteCount archive_size;
@@ -93,6 +92,10 @@ namespace data
       /** Overload to realize std::ostream & operator\<\<. */
       virtual std::ostream & dumpOn( std::ostream & str ) const;
   };
+
+  ///////////////////////////////////////////////////////////////////
+
+  DEFINE_PTR_TYPE(AtomBase);
 
   class AtomBase : public ResObject
   {
@@ -226,17 +229,19 @@ namespace data
 
   ///////////////////////////////////////////////////////////////////
 
-  DEFINE_PTR_TYPE(Package);
+  DEFINE_PTR_TYPE(Packagebase);
 
-  /*
-   * Data Object for Package
-   * resolvable
+  /**
+   * Common Data Object for Package and Sourcepackage.
+   *
+   * We treat them as differend kind of Resolvable, but they have
+   * almost identical data.
    */
-  class Package : public ResObject
+  class Packagebase : public ResObject
   {
     public:
-      Package() {};
-      ~Package() {};
+      Packagebase() {};
+      ~Packagebase() {};
 
       std::string type;
       CheckSum checksum;
@@ -266,7 +271,19 @@ namespace data
       Pathname location;
   };
 
+  DEFINE_PTR_TYPE(Package);
+  /**
+   * Data Object for Package resolvable
+   */
+  struct Package : public Packagebase
+  {};
 
+  DEFINE_PTR_TYPE(Sourcepackage);
+  /**
+   * Data Object for Sourcepackage resolvable
+   */
+  struct Sourcepackage : public Packagebase
+  {};
   ///////////////////////////////////////////////////////////////////
 
  template<class _Res> class SpecificData;

@@ -16,6 +16,7 @@
 #include <string>
 
 #include "zypp/base/PtrTypes.h"
+#include "zypp/base/Function.h"
 #include "zypp/base/ProvideNumericId.h"
 
 #include "zypp/Date.h"
@@ -41,15 +42,108 @@ namespace zypp
    * Each ProgressData object provides a unique numeric id and you may assign
    * it a name.
    *
-   * \todo complete the progess sending.
+   * \code
+   *      bool exampleReceiver( ProgressData::value_type v )
+   *      {
+   *        DBG << "got ->" << v << endl;
+   *        return( v <= 100 ); // Abort if ( v > 100 )
+   *      }
+   *
+   *      class Example
+   *      {
+   *        public:
+   *
+   *          Example( const ProgressData::ReceiverFnc & fnc_r = ProgressData::ReceiverFnc() )
+   *          : _fnc( fnc_r )
+   *          {}
+   *
+   *          void SendTo( const ProgressData::ReceiverFnc & fnc_r )
+   *          { _fnc = fnc_r; }
+   *
+   *        public:
+   *
+   *          void action()
+   *          {
+   *            ProgressData tics( 10 );    // Expect range 0 -> 10
+   *            tics.name( "test ticks" );  // Some arbitrary name
+   *            tics.sendTo( _fnc );        // Send reports to _fnc
+   *            tics.toMin();               // start sending min (0)
+   *
+   *            for ( int i = 0; i < 10; ++i )
+   *            {
+   *              if ( ! tics.set( i ) )
+   *                return; // user requested abort
+   *            }
+   *
+   *            tics.toMax(); // take care 100% are reported on success
+   *          }
+   *
+   *          void action2()
+   *          {
+   *            ProgressData tics;          // Just send 'still alive' messages
+   *            tics.name( "test ticks" );  // Some arbitrary name
+   *            tics.sendTo( _fnc );        // Send reports to _fnc
+   *            tics.toMin();               // start sending min (0)
+   *
+   *            for ( int i = 0; i < 10; ++i )
+   *            {
+   *              if ( ! tics.set( i ) )
+   *                return; // user requested abort
+   *            }
+   *
+   *            tics.toMax(); //
+   *          }
+   *
+   *        private:
+   *          ProgressData::ReceiverFnc _fnc;
+   *      };
+   * \endcode
+   * \code
+   *   Example t( exampleReceiver );
+   *   DBG << "Reporting %:" << endl;
+   *   t.action();
+   *   DBG << "Reporting 'still alive':" << endl;
+   *   t.action2();
+   * \endcode
+   * \code
+   * Reporting %:
+   * got ->0
+   * got ->10
+   * got ->20
+   * got ->30
+   * got ->40
+   * got ->50
+   * got ->60
+   * got ->70
+   * got ->80
+   * got ->90
+   * got ->100
+   * got ->100
+   * Reporting 'still alive':
+   * got ->0
+   * got ->9
+   * \endcode
+   *
+   * The different ammount of triggers is due to different rules for sending
+   * percent or 'still alive' messages.
+   *
+   * \todo Complete the progess sending.
+   * \todo Tell recipient whether percentage or keepalive is sent,
+   * the id and name might be helpfull, and maybe tell whether task
+   * is abortable or not; i.e extend the ReceiverFnc signature.
    */
   class ProgressData : public base::ProvideNumericId<ProgressData,unsigned>
   {
     public:
       typedef long long value_type;
-      enum State { INIT, RUN, END };
+      /** Most simple version of progress reporting - a single value.
+       * The percentage in most cases. Sometimes just keepalive.
+       */
+      typedef function<bool(value_type)> ReceiverFnc;
 
     private:
+      enum State { INIT, RUN, END };
+
       class Data
       {
 	public:
@@ -59,14 +153,15 @@ namespace zypp
 	  {}
 
 	public:
-	  State _state;
+	  State       _state;
 	  std::string _name;
-	  value_type _min;
-	  value_type _max;
-	  value_type _val;
+	  value_type  _min;
+	  value_type  _max;
+	  value_type  _val;
 
-	  value_type _last_val;
-	  Date       _last_send;
+	  ReceiverFnc _receiver;
+	  value_type  _last_val;
+	  Date        _last_send;
 
 	private:
 	  /** clone for RWCOW_pointer */
@@ -105,27 +200,6 @@ namespace zypp
       }
 
     public:
-      /** @return Current \c min value. */
-      value_type min() const
-      { return _d->_min; }
-
-      /** @return Current \c max value. */
-      value_type max() const
-      { return _d->_max; }
-
-      /** @return Current counter \c value. */
-      value_type val() const
-      { return _d->_val; }
-
-      /** @return Wheter <tt>[min,max]</tt> defines a nonempty range. */
-      bool hasRange() const
-      { return min() != max(); }
-
-      /** @return The counters name. */
-      const std::string & name() const
-      { return _d->_name; }
-
-    public:
       /** Set new \c min value. */
       void min( value_type min_r )
       { _d->_min = min_r; }
@@ -147,41 +221,87 @@ namespace zypp
       { min( min_r ); max( max_r ); }
 
     public:
-      /** Set new counter \c value. */
-      void set( value_type val_r )
-      {
-	_d->_val = val_r;
-	report();
-      }
-
-      /** Increment counter \c value (default by 1). */
-      void incr( value_type val_r = 1 )
-      { set( val() + val_r ); }
-
-      /** Decrement counter \c value (default by 1). */
-      void decr( value_type val_r = 1 )
-      { set( val() - val_r ); }
-
-      /** Set counter value to current \c min value. */
-      void toMin()
-      { set( min() ); }
-
-      /** Set counter value to current \c max value (unless no range). */
-      void toMax()
-      { if ( hasRange() ) set( max() ); }
-
-      /** Leave counter value unchanged (still alive). */
-      void tick()
-      { set( val() ); }
-
-    public:
       /** Set counter name. */
       void name( const std::string & name_r )
       { _d->_name = name_r; }
 
+      /** Set ReceiverFnc. */
+      void sendTo( const ReceiverFnc & fnc_r )
+      { _d->_receiver = fnc_r; }
+
+      /** Set no ReceiverFnc. */
+      void noSend()
+      { _d->_receiver = ReceiverFnc(); }
+
+    public:
+      /** \name Progress reporting.
+       *
+       * These methods may actually cause a progress report to be sent.
+       *
+       * All methods return \c bool, because a progress receiver may
+       * return \c false to indicate the desire to abort the pending
+       * action. The incident is logged, but it's finaly up to the caller
+       * to honor this.
+       */
+      //@{
+
+      /** Set new counter \c value. */
+      bool set( value_type val_r )
+      {
+	_d->_val = val_r;
+	return report();
+      }
+
+      /** Increment counter \c value (default by 1). */
+      bool incr( value_type val_r = 1 )
+      { return set( val() + val_r ); }
+
+      /** Decrement counter \c value (default by 1). */
+      bool decr( value_type val_r = 1 )
+      { return set( val() - val_r ); }
+
+      /** Set counter value to current \c min value. */
+      bool toMin()
+      { return set( min() ); }
+
+      /** Set counter value to current \c max value (unless no range). */
+      bool toMax()
+      { return set( hasRange() ? max() : val() ); }
+
+      /** Leave counter value unchanged (still alive). */
+      bool tick()
+      { return set( val() ); }
+
+      //@}
+
+    public:
+      /** @return Current \c min value. */
+      value_type min() const
+      { return _d->_min; }
+
+      /** @return Current \c max value. */
+      value_type max() const
+      { return _d->_max; }
+
+      /** @return Current counter \c value. */
+      value_type val() const
+      { return _d->_val; }
+
+      /** @return Wheter <tt>[min,max]</tt> defines a nonempty range. */
+      bool hasRange() const
+      { return min() != max(); }
+
+      /** @return The counters name. */
+      const std::string & name() const
+      { return _d->_name; }
+
+      /** @return The ReceiverFnc. */
+      const ReceiverFnc & receiver() const
+      { return _d->_receiver; }
+
     private:
       /** Send report if necessary. */
-      void report();
+      bool report();
 
       /** Pointer to data. */
       RWCOW_pointer<Data> _d;

@@ -15,6 +15,8 @@
 #include "zypp/base/Logger.h"
 #include "zypp/base/String.h"
 #include "zypp/base/IOStream.h"
+#include "zypp/base/UserRequestException.h"
+#include "zypp/parser/tagfile/ParseException.h"
 
 #include "zypp/parser/TagParser.h"
 #include "zypp/ProgressData.h"
@@ -93,6 +95,9 @@ namespace zypp
     void TagParser::endParse()
     {}
 
+    void TagParser::userRequestedAbort( unsigned lineNo_r )
+    { ZYPP_THROW( AbortRequestException( errPrefix( lineNo_r ) ) ); }
+
     ///////////////////////////////////////////////////////////////////
     //
     //	METHOD NAME : TagParser::errPrefix
@@ -101,30 +106,31 @@ namespace zypp
     std::string TagParser::errPrefix( unsigned lineNo_r,
 				      const std::string & msg_r ) const
     {
-      return str::form( "%s:%u:%s: %s",
+      return str::form( "%s:%u:- | %s",
 			_inputname.c_str(),
 			lineNo_r,
-			"-",
 			msg_r.c_str() );
     }
 
     std::string TagParser::errPrefix( const SingleTagPtr & tag_r,
 				      const std::string & msg_r ) const
     {
-      return str::form( "%s:%u:=%s %s",
+      return str::form( "%s:%u:=%s %s | %s",
 			_inputname.c_str(),
 			tag_r->lineNo,
 			tag_r->asString().c_str(),
+			tag_r->value.c_str(),
 			msg_r.c_str() );
     }
 
     std::string TagParser::errPrefix( const MultiTagPtr & tag_r,
 				      const std::string & msg_r ) const
     {
-      return str::form( "%s:%u:+%s %s",
+      return str::form( "%s:%u:+%s (@%ld) | %s",
 			_inputname.c_str(),
 			tag_r->lineNo,
 			tag_r->asString().c_str(),
+			tag_r->value.size(),
 			msg_r.c_str() );
     }
 
@@ -190,14 +196,16 @@ namespace zypp
     //	METHOD NAME : TagParser::parse
     //	METHOD TYPE : void
     //
-    void TagParser::parse( const InputStream & input_r )
+    void TagParser::parse( const InputStream & input_r, const ProgressData::ReceiverFnc & fnc_r )
     {
       MIL << "Start parsing " << input_r << endl;
       _inputname = input_r.name();
       beginParse();
 
       ProgressData ticks( makeProgressData( input_r ) );
-      ticks.toMin();
+      ticks.sendTo( fnc_r );
+      if ( ! ticks.toMin() )
+	userRequestedAbort( 0 );
 
       iostr::EachLine line( input_r );
       for( ; line; line.next() )
@@ -317,10 +325,13 @@ namespace zypp
 	  break;
 	}
 
-	ticks.set( input_r.stream().tellg() );
+
+	if ( ! ticks.set( input_r.stream().tellg() ) )
+	  userRequestedAbort( line.lineNo() );
       }
 
-      ticks.toMax();
+      if ( ! ticks.toMax() )
+	userRequestedAbort( line.lineNo() );
 
       endParse();
       _inputname.clear();

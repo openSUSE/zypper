@@ -25,12 +25,14 @@ IMPL_PTR_TYPE(Selection);
 IMPL_PTR_TYPE(Patch);
 IMPL_PTR_TYPE(Pattern);
 IMPL_PTR_TYPE(Product);
+IMPL_PTR_TYPE(Packagebase);
 IMPL_PTR_TYPE(Package);
+IMPL_PTR_TYPE(Sourcepackage);
 
 
 std::ostream & ResObject::dumpOn( std::ostream & str ) const
 {
-  str << "[ " << name << " " << edition << " ]" << endl;
+  str << "[ " << name << " " << edition << " ]";
   return str;
 //       << "  provides: " << provides << endl
 //       << "  conflicts: " << conflicts << endl
