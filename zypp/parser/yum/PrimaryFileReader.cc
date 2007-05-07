@@ -16,7 +16,6 @@
 
 using namespace std;
 using namespace zypp::xml;
-using zypp::base::Unit;
 
 namespace zypp
 {
@@ -135,12 +134,10 @@ namespace zypp
         // reader_r->getAttribute("archive").asString();
 
         // installed size
-        ByteCount size(str::strtonum<long long>(reader_r->getAttribute("installed").asString()), Unit());
-        _package->size = size;
+        _package->size = str::strtonum<ByteCount::SizeType>( reader_r->getAttribute("installed").asString() );
 
         // rpm package size
-        ByteCount size_rpm(str::strtonum<long long>(reader_r->getAttribute("package").asString()), Unit());
-        _package->archive_size = size_rpm;
+        _package->archive_size = str::strtonum<ByteCount::SizeType>( reader_r->getAttribute("package").asString() );
 
         return true;
       }
