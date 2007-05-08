@@ -27,12 +27,12 @@ IMPL_PTR_TYPE(Pattern);
 IMPL_PTR_TYPE(Product);
 IMPL_PTR_TYPE(Packagebase);
 IMPL_PTR_TYPE(Package);
-IMPL_PTR_TYPE(Sourcepackage);
+IMPL_PTR_TYPE(SrcPackage);
 
 
 std::ostream & ResObject::dumpOn( std::ostream & str ) const
 {
-  str << "[ " << name << " " << edition << " ]";
+  str << "[ " << name << " " << edition << " " << arch << " ]";
   return str;
 //       << "  provides: " << provides << endl
 //       << "  conflicts: " << conflicts << endl

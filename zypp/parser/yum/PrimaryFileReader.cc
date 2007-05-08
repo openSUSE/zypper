@@ -110,7 +110,7 @@ namespace zypp
       if (reader_r->name() == "packager")
       {
         _package->packager = reader_r.nodeText().asString();
-//        DBG << "packager: " << _package->packager << endl; 
+//        DBG << "packager: " << _package->packager << endl;
         return true;
       }
 
@@ -207,7 +207,7 @@ namespace zypp
             << reader_r->getAttribute("name").asString()
             << " " << edition << endl;
 */
-        _package->deps[_dtype].push_back(
+        _package->deps[_dtype].insert(
           zypp::capability::parse(
             ResTraits<Package>::kind,
             reader_r->getAttribute("name").asString(),
@@ -308,7 +308,7 @@ namespace zypp
         _expect_rpm_entry = true;
         return true;
       }
-      
+
       if (reader_r->name() == "file")
       {
         // TODO figure out how to read files

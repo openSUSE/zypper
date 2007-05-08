@@ -20,6 +20,7 @@
 
 #include "zypp/capability/CapabilityImpl.h"
 #include "zypp/Pathname.h"
+#include "zypp/NVR.h"
 #include "zypp/Edition.h"
 #include "zypp/ByteCount.h"
 #include "zypp/Arch.h"
@@ -33,7 +34,7 @@ namespace zypp
 namespace data
 {
 
-  typedef std::list<capability::CapabilityImpl::Ptr> DependencyList;
+  typedef std::set<capability::CapabilityImpl::Ptr> DependencyList;
   typedef std::map<zypp::Dep, DependencyList> Dependencies;
 
   ///////////////////////////////////////////////////////////////////
@@ -43,14 +44,14 @@ namespace data
   class Resolvable : public base::ReferenceCounted, private base::NonCopyable
   {
     public:
-    Resolvable()
-    {};
+      Resolvable()
+      {};
 
-    std::string name;
-    Edition edition;
-    Arch arch;
+      std::string name;
+      Edition edition;
+      Arch arch;
 
-    Dependencies deps;
+      Dependencies deps;
   };
 
   ///////////////////////////////////////////////////////////////////
@@ -64,14 +65,13 @@ namespace data
         : source_media_nr(1), install_only(false)
       {}
 
-
       TranslatedText summary;
       TranslatedText description;
 
-      std::string insnotify;
-      std::string delnotify;
+      TranslatedText insnotify;
+      TranslatedText delnotify;
 
-      std::string license_to_confirm;
+      TranslatedText license_to_confirm;
       std::string vendor;
 
       /** Installed size. \see zypp::ResObject::size() */
@@ -193,14 +193,18 @@ namespace data
     public:
 
       Pattern()
-        : user_visible(true)
+        : is_default(false), user_visible(true)
       {};
 
-      std::string default_;
+      bool is_default;
       bool user_visible;
       TranslatedText category;
       std::string icon;
+      std::string order;
       std::string script;
+
+      DependencyList includes;
+      DependencyList extends;
   };
 
   ///////////////////////////////////////////////////////////////////
@@ -215,7 +219,6 @@ namespace data
   {
     public:
       Product() {};
-      ~Product() {};
 
       std::string type;
       std::string vendor;
@@ -240,9 +243,9 @@ namespace data
   class Packagebase : public ResObject
   {
     public:
-      Packagebase() {};
-      ~Packagebase() {};
-
+      enum PackageType { BIN, SRC };
+      virtual PackageType packageType() const = 0;
+    public:
       std::string type;
       CheckSum checksum;
       // changlelog?
@@ -276,14 +279,21 @@ namespace data
    * Data Object for Package resolvable
    */
   struct Package : public Packagebase
-  {};
+  {
+    virtual PackageType packageType() const { return BIN; }
 
-  DEFINE_PTR_TYPE(Sourcepackage);
+    /** NVR of the corresponding SrcPackage. */
+    shared_ptr<NVR> srcPackageIdent;
+  };
+
+  DEFINE_PTR_TYPE(SrcPackage);
   /**
-   * Data Object for Sourcepackage resolvable
+   * Data Object for SrcPackage resolvable
    */
-  struct Sourcepackage : public Packagebase
-  {};
+  struct SrcPackage : public Packagebase
+  {
+    virtual PackageType packageType() const { return SRC; }
+  };
   ///////////////////////////////////////////////////////////////////
 
  template<class _Res> class SpecificData;
