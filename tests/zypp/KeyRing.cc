@@ -11,6 +11,7 @@
 #include "zypp/TmpPath.h"
 
 #include <boost/test/unit_test.hpp>
+#include <boost/test/parameterized_test.hpp>
 #include <boost/test/unit_test_log.hpp>
 
 using boost::unit_test::test_suite;
@@ -249,25 +250,30 @@ struct KeyRingReceive : public zypp::callback::ReceiveReport<zypp::KeyRingReport
 
   virtual bool askUserToAcceptUnsignedFile( const std::string &file )
   {
+    MIL << std::endl;
     return true;
   }
   virtual bool askUserToAcceptUnknownKey( const std::string &file, const std::string &id )
   {
+    MIL << std::endl;
     return true;
   }
 
   virtual bool askUserToImportKey( const PublicKey &key )
   {
+    MIL << std::endl;
     DBG << "By default zypp-query-pool does not import keys for now." << std::endl;
     return false;
   }
 
   virtual bool askUserToTrustKey(  const PublicKey &key  )
   {
+    MIL << std::endl;
     return true;
   }
   virtual bool askUserToAcceptVerificationFailed( const std::string &file,  const PublicKey &key  )
   {
+    MIL << std::endl;
     return true;
   }
 };
@@ -322,7 +328,7 @@ struct KeyRingSignalReceiver : callback::ReceiveReport<KeyRingSignals>
   
 };
 
-void keyring_test()
+void keyring_test( const string &dir )
 {
   KeyRingCallbacks keyring_callbacks;
   KeyRingSignalReceiver receiver;
@@ -356,9 +362,25 @@ void keyring_test()
 test_suite*
 init_unit_test_suite( int argc, char* argv[] )
 {
+  string datadir;
+  if (argc < 2)
+  {
+    datadir = TESTS_SRC_DIR;
+    datadir = (Pathname(datadir) + "/zypp/data/KeyRing").asString();
+    cout << "keyring_test:"
+      " path to directory with test data required as parameter. Using " << datadir  << endl;
+    //return (test_suite *)0;
+  }
+  else
+  {
+    datadir = argv[1];
+  }
+
+  std::string const params[] = { datadir };
     //set_log_stream( std::cout );
-    test_suite* test= BOOST_TEST_SUITE( "PublicKeyTest" );
-    test->add( BOOST_TEST_CASE( &keyring_test ), 0 /* expected zero error */ );
-    return test;
+  test_suite* test= BOOST_TEST_SUITE( "PublicKeyTest" );
+  test->add(BOOST_PARAM_TEST_CASE( &keyring_test,
+                              (std::string const*)params, params+1));
+  return test;
 }
 
