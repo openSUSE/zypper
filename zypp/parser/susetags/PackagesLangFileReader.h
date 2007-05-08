@@ -6,15 +6,16 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file	zypp/parser/susetags/PackagesFileReader.h
+/** \file	zypp/parser/susetags/PackagesLangFileReader.h
  *
 */
-#ifndef ZYPP_PARSER_SUSETAGS_PACKAGESFILEREADER_H
-#define ZYPP_PARSER_SUSETAGS_PACKAGESFILEREADER_H
+#ifndef ZYPP_PARSER_SUSETAGS_PACKAGESLANGFILEREADER_H
+#define ZYPP_PARSER_SUSETAGS_PACKAGESLANGFILEREADER_H
 
 #include <iosfwd>
 
 #include "zypp/parser/susetags/FileReaderBase.h"
+#include "zypp/Locale.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -40,10 +41,10 @@ namespace zypp
 
       ///////////////////////////////////////////////////////////////////
       //
-      //	CLASS NAME : PackagesFileReader
+      //	CLASS NAME : PackagesLangFileReader
       //
       /** */
-      class PackagesFileReader : public FileReaderBase
+      class PackagesLangFileReader : public FileReaderBase
       {
 	public:
 	  typedef function<void(const data::Package_Ptr &)> PkgConsumer;
@@ -51,11 +52,15 @@ namespace zypp
 
 	public:
 	  /** Default ctor */
-	  PackagesFileReader();
+	  PackagesLangFileReader();
 	  /** Dtor */
-	  virtual ~PackagesFileReader();
+	  virtual ~PackagesLangFileReader();
 
 	public:
+	  /** Locale to parse. */
+	  void setLocale( const Locale & locale_r )
+	  { _locale = locale_r; }
+
 	  /** Consumer to call when a (binary) package entry was parsed. */
 	  void setPkgConsumer( const PkgConsumer & fnc_r )
 	  { _pkgConsumer = fnc_r; }
@@ -77,6 +82,7 @@ namespace zypp
 	private:
 	  class Impl;
 	  scoped_ptr<Impl> _pimpl;
+	  Locale           _locale;
 	  PkgConsumer      _pkgConsumer;
 	  SrcPkgConsumer   _srcPkgConsumer;
       };
@@ -91,4 +97,4 @@ namespace zypp
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
-#endif // ZYPP_PARSER_SUSETAGS_PACKAGESFILEREADER_H
+#endif // ZYPP_PARSER_SUSETAGS_PACKAGESLANGFILEREADER_H

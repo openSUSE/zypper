@@ -449,10 +449,16 @@ INSTALL(  FILES
 
 SET( zypp_parser_susetags_SRCS
   parser/susetags/PackagesFileReader.cc
+  parser/susetags/PackagesLangFileReader.cc
+  parser/susetags/PatternFileReader.cc
 )
 
 SET( zypp_parser_susetags_HEADERS
+  parser/susetags/FileReaderBase.h
+  parser/susetags/FileReaderBaseImpl.h
   parser/susetags/PackagesFileReader.h
+  parser/susetags/PackagesLangFileReader.h
+  parser/susetags/PatternFileReader.h
 )
 
 INSTALL(  FILES

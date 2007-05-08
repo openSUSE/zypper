@@ -6,11 +6,11 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file	zypp/parser/susetags/PackagesFileReader.h
+/** \file	zypp/parser/susetags/PatternFileReader.h
  *
 */
-#ifndef ZYPP_PARSER_SUSETAGS_PACKAGESFILEREADER_H
-#define ZYPP_PARSER_SUSETAGS_PACKAGESFILEREADER_H
+#ifndef ZYPP_PARSER_SUSETAGS_PATTERNFILEREADER_H
+#define ZYPP_PARSER_SUSETAGS_PATTERNFILEREADER_H
 
 #include <iosfwd>
 
@@ -23,10 +23,8 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
   namespace data
   { /////////////////////////////////////////////////////////////////
-    class Package;
-    DEFINE_PTR_TYPE(Package);
-    class SrcPackage;
-    DEFINE_PTR_TYPE(SrcPackage);
+    class Pattern;
+    DEFINE_PTR_TYPE(Pattern);
     /////////////////////////////////////////////////////////////////
   } // namespace data
   ///////////////////////////////////////////////////////////////////
@@ -40,29 +38,24 @@ namespace zypp
 
       ///////////////////////////////////////////////////////////////////
       //
-      //	CLASS NAME : PackagesFileReader
+      //	CLASS NAME : PatternFileReader
       //
       /** */
-      class PackagesFileReader : public FileReaderBase
+      class PatternFileReader : public FileReaderBase
       {
 	public:
-	  typedef function<void(const data::Package_Ptr &)> PkgConsumer;
-	  typedef function<void(const data::SrcPackage_Ptr &)> SrcPkgConsumer;
+	  typedef function<void(const data::Pattern_Ptr &)> Consumer;
 
 	public:
 	  /** Default ctor */
-	  PackagesFileReader();
+	  PatternFileReader();
 	  /** Dtor */
-	  virtual ~PackagesFileReader();
+	  virtual ~PatternFileReader();
 
 	public:
-	  /** Consumer to call when a (binary) package entry was parsed. */
-	  void setPkgConsumer( const PkgConsumer & fnc_r )
-	  { _pkgConsumer = fnc_r; }
-
-	  /** Consumer to call when a (source) package entry was parsed. */
-	  void setSrcPkgConsumer( const SrcPkgConsumer & fnc_r )
-	  { _srcPkgConsumer = fnc_r; }
+	  /** Consumer to call when a pattern was parsed. */
+	  void setConsumer( const Consumer & fnc_r )
+	  { _consumer = fnc_r; }
 
 	private:
 	  /** Called when start parsing. */
@@ -77,8 +70,7 @@ namespace zypp
 	private:
 	  class Impl;
 	  scoped_ptr<Impl> _pimpl;
-	  PkgConsumer      _pkgConsumer;
-	  SrcPkgConsumer   _srcPkgConsumer;
+	  Consumer         _consumer;
       };
       ///////////////////////////////////////////////////////////////////
 
@@ -91,4 +83,4 @@ namespace zypp
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
-#endif // ZYPP_PARSER_SUSETAGS_PACKAGESFILEREADER_H
+#endif // ZYPP_PARSER_SUSETAGS_PATTERNFILEREADER_H
