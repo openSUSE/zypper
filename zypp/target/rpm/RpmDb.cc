@@ -89,9 +89,17 @@ struct KeyRingSignalReceiver : callback::ReceiveReport<KeyRingSignals>
 
   virtual void trustedKeyAdded( const KeyRing &keyring, const PublicKey &key )
   {
-    MIL << "trusted key added to zypp Keyring. Syncronizing keys with rpm keyring" << std::endl;
-    _rpmdb.importZyppKeyRingTrustedKeys();
-    _rpmdb.exportTrustedKeysInZyppKeyRing();
+    MIL << "trusted key added to zypp Keyring. Importing" << std::endl;
+    // now import the key in rpm
+    try
+    {
+      _rpmdb.importPubkey( key.path() );
+      MIL << "Trusted key " << key.id() << " (" << key.name() << ") imported in rpm database." << std::endl;
+    }
+    catch (RpmException &e)
+    {
+      ERR << "Could not import key " << key.id() << " (" << key.name() << " from " << key.path() << " in rpm database" << std::endl;
+    }
   }
 
   virtual void trustedKeyRemoved( const KeyRing &keyring, const PublicKey &key  )

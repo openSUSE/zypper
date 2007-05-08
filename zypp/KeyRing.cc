@@ -39,24 +39,10 @@ namespace zypp
 
   IMPL_PTR_TYPE(KeyRing);
 
-  static void dumpRegexpResults( const str::smatch &what )
-  {
-    for ( unsigned int k=0; k < what.size(); k++)
-    {
-      XXX << "[match "<< k << "] [" << what[k] << "]" << std::endl;
-    }
-  }
-
   static bool printLine( const std::string &line )
   {
     MIL <<  line << std::endl;
     return true;
-  }
-
-  static void dumpFile(const Pathname &file)
-  {
-    std::ifstream is(file.asString().c_str());
-    iostr::forEachLine( is, printLine);
   }
 
   namespace
@@ -168,8 +154,6 @@ namespace zypp
 
   void KeyRing::Impl::importKey( const PublicKey &key, bool trusted)
   {
-    callback::SendReport<KeyRingSignals> emitSignal;
-    
     importKey( key.path(), trusted ? trustedKeyRing() : generalKeyRing() );
   }
 
@@ -205,6 +189,7 @@ namespace zypp
   
   bool KeyRing::Impl::isKeyKnown( const std::string &id )
   {
+    MIL << std::endl;
     if ( publicKeyExists( id, trustedKeyRing() ) )
       return true;
     else
@@ -285,7 +270,7 @@ namespace zypp
   bool KeyRing::Impl::verifyFileSignatureWorkflow( const Pathname &file, const std::string filedesc, const Pathname &signature)
   {
     callback::SendReport<KeyRingReport> report;
-    callback::SendReport<KeyRingSignals> emitSignal;
+    //callback::SendReport<KeyRingSignals> emitSignal;
     MIL << "Going to verify signature for " << file << " with " << signature << std::endl;
 
     // if signature does not exists, ask user if he wants to accept unsigned file.
@@ -329,8 +314,7 @@ namespace zypp
           if ( report->askUserToImportKey( key ) )
           {
             MIL << "User wants to import key " << id << " " << key.name() << std::endl;
-            importKey( key.path(), trustedKeyRing() );
-            emitSignal->trustedKeyAdded( (const KeyRing &)(*this), key );
+            importKey( key, true );
             which_keyring = trustedKeyRing();
           }
           else
@@ -386,6 +370,9 @@ namespace zypp
 
   std::list<PublicKey> KeyRing::Impl::publicKeys(const Pathname &keyring)
   {
+    static str::regex rxColons("^([^:]*):([^:]*):([^:]*):([^:]*):([^:]*):([^:]*):([^:]*):([^:]*):([^:]*):([^:]*):([^:]*):([^:]*):\n$");
+    static str::regex rxColonsFpr("^([^:]*):([^:]*):([^:]*):([^:]*):([^:]*):([^:]*):([^:]*):([^:]*):([^:]*):([^:]*):\n$");
+
     const char* argv[] =
     {
       "gpg",
@@ -408,9 +395,6 @@ namespace zypp
     ExternalProgram prog(argv,ExternalProgram::Discard_Stderr, false, -1, true);
     std::string line;
     int count = 0;
-
-    str::regex rxColons("^([^:]*):([^:]*):([^:]*):([^:]*):([^:]*):([^:]*):([^:]*):([^:]*):([^:]*):([^:]*):([^:]*):([^:]*):\n$");
-    str::regex rxColonsFpr("^([^:]*):([^:]*):([^:]*):([^:]*):([^:]*):([^:]*):([^:]*):([^:]*):([^:]*):([^:]*):\n$");
 
     for(line = prog.receiveLine(), count=0; !line.empty(); line = prog.receiveLine(), count++ )
     {
@@ -632,7 +616,11 @@ namespace zypp
   
   void KeyRing::importKey( const PublicKey &key, bool trusted )
   {
+    callback::SendReport<KeyRingSignals> emitSignal;
     _pimpl->importKey( key.path(), trusted );
+    
+    if ( trusted )
+      emitSignal->trustedKeyAdded( (const KeyRing &)(*this), key );
   }
   
   std::string KeyRing::readSignatureKeyId( const Pathname &signature )
@@ -682,7 +670,7 @@ namespace zypp
      
   bool KeyRing::isKeyKnown( const std::string &id )
   {
-    return _pimpl->isKeyTrusted(id);
+    return _pimpl->isKeyKnown(id);
   }
   
   /////////////////////////////////////////////////////////////////
