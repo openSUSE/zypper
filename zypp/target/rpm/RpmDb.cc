@@ -957,7 +957,7 @@ void RpmDb::importPubkey( const PublicKey & pubkey_r )
   for ( set<Edition>::const_iterator it = rpm_keys.begin(); it != rpm_keys.end(); ++it)
   {
     string id = str::toUpper( (*it).version() );
-    string keyshortid = pubkey_r.id().substr(0,8);
+    string keyshortid = pubkey_r.id().substr(8,8);
     MIL << "Comparing '" << id << "' to '" << keyshortid << "'" << endl;
     if ( id == keyshortid )
     {
