@@ -90,11 +90,8 @@ namespace zypp
     std::string fingerprint() const;
     Pathname path() const; 
     
-    bool operator==( PublicKey b )
-    { return (b.id() == id()) && (b.fingerprint() == fingerprint() ); }
-    
-    bool operator==( std::string sid )
-    { return sid == id(); }
+    bool operator==( PublicKey b ) const;
+    bool operator==( std::string sid ) const;
     
   private:
     /** Pointer to implementation */

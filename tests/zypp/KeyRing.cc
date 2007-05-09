@@ -153,7 +153,7 @@ struct KeyRingSignalReceiver : callback::ReceiveReport<KeyRingSignals>
     disconnect();
   }
 
-  virtual void trustedKeyAdded( const KeyRing &keyring, const PublicKey &key )
+  virtual void trustedKeyAdded( const PublicKey &key )
   {
     MIL << "TEST: trusted key added to zypp Keyring. Syncronizing keys with fake rpm keyring" << std::endl;
     _trusted_key_added_called = true;
@@ -162,7 +162,7 @@ struct KeyRingSignalReceiver : callback::ReceiveReport<KeyRingSignals>
     //_rpmdb.exportTrustedKeysInZyppKeyRing();
   }
 
-  virtual void trustedKeyRemoved( const KeyRing &keyring, const PublicKey &key  )
+  virtual void trustedKeyRemoved( const PublicKey &key  )
   {
   }
   

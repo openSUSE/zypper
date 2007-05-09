@@ -76,6 +76,8 @@ namespace zypp
       
      void readFromFile( const Pathname &keyfile)
      {
+       static str::regex rxColons("^([^:]*):([^:]*):([^:]*):([^:]*):([^:]*):([^:]*):([^:]*):([^:]*):([^:]*):([^:]*):\n$");
+       
        PathInfo info(keyfile);
        MIL << "Reading pubkey from " << keyfile << " of size " << info.size() << " and sha1 " << filesystem::checksum(keyfile, "sha1")<< endl; 
        if ( !info.isExist() )
@@ -109,8 +111,6 @@ namespace zypp
   
         std::string line;
         int count = 0;
-  
-        str::regex rxColons("^([^:]*):([^:]*):([^:]*):([^:]*):([^:]*):([^:]*):([^:]*):([^:]*):([^:]*):([^:]*):\n$");
   
       // pub:-:1024:17:A84EDAE89C800ACA:2000-10-19:2008-06-21::-:SuSE Package Signing Key <build@suse.de>:
   
@@ -200,6 +200,16 @@ namespace zypp
   Pathname PublicKey::path() const
   { return _pimpl->path(); }
 
+  bool PublicKey::operator==( PublicKey b ) const
+  {
+    return (b.id() == id()) && (b.fingerprint() == fingerprint() );
+  }
+    
+  bool PublicKey::operator==( std::string sid ) const
+  {
+    return sid == id();
+  }
+  
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////

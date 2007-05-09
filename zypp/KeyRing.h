@@ -63,9 +63,9 @@ namespace zypp
   
   struct KeyRingSignals : public callback::ReportBase
   {
-    virtual void trustedKeyAdded( const KeyRing &/*keyring*/, const PublicKey &/*key*/ )
+    virtual void trustedKeyAdded( const PublicKey &/*key*/ )
     {}
-    virtual void trustedKeyRemoved( const KeyRing &/*keyring*/, const PublicKey &/*key*/ )
+    virtual void trustedKeyRemoved( const PublicKey &/*key*/ )
     {}
   };
 
@@ -144,9 +144,26 @@ namespace zypp
      */
     void deleteKey( const std::string &id, bool trusted =  false);
 
+    /**
+     * Get a list of public keys in the keyring
+     */
     std::list<PublicKey> publicKeys();
+    
+    /**
+     * Get a list of trusted public keys in the keyring
+     */
     std::list<PublicKey> trustedPublicKeys();
-
+    
+    /**
+     * Get a list of public key ids in the keyring
+     */
+    std::list<std::string> publicKeyIds();
+    
+    /**
+     * Get a list of trusted public key ids in the keyring
+     */
+    std::list<std::string> trustedPublicKeyIds();
+    
     /**
      * Follows a signature verification interacting with the user.
      * The boolr eturned depends on user desicion to trust or not.

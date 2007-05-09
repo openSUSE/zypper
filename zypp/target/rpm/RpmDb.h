@@ -218,7 +218,7 @@ public:
    * \throws RpmException
    *
    **/
-  void importPubkey( const Pathname & pubkey_r );
+  void importPubkey( const PublicKey & pubkey_r );
 
   /**
    * Return the long ids of all installed public keys.

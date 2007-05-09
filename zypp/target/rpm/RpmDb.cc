@@ -61,11 +61,11 @@ namespace rpm
 namespace
 {
 const char* quoteInFilename_m = " \t";
-inline std::string rpmQuoteFilename( const Pathname & path_r )
+inline string rpmQuoteFilename( const Pathname & path_r )
 {
-  std::string path( path_r.asString() );
-  for ( std::string::size_type pos = path.find_first_of( quoteInFilename_m );
-        pos != std::string::npos;
+  string path( path_r.asString() );
+  for ( string::size_type pos = path.find_first_of( quoteInFilename_m );
+        pos != string::npos;
         pos = path.find_first_of( quoteInFilename_m, pos ) )
   {
     path.insert( pos, "\\" );
@@ -87,22 +87,21 @@ struct KeyRingSignalReceiver : callback::ReceiveReport<KeyRingSignals>
     disconnect();
   }
 
-  virtual void trustedKeyAdded( const KeyRing &keyring, const PublicKey &key )
+  virtual void trustedKeyAdded( const PublicKey &key )
   {
-    MIL << "trusted key added to zypp Keyring. Importing" << std::endl;
+    MIL << "trusted key added to zypp Keyring. Importing" << endl;
     // now import the key in rpm
     try
     {
-      _rpmdb.importPubkey( key.path() );
-      MIL << "Trusted key " << key.id() << " (" << key.name() << ") imported in rpm database." << std::endl;
+      _rpmdb.importPubkey( key );
     }
     catch (RpmException &e)
     {
-      ERR << "Could not import key " << key.id() << " (" << key.name() << " from " << key.path() << " in rpm database" << std::endl;
+      ERR << "Could not import key " << key.id() << " (" << key.name() << " from " << key.path() << " in rpm database" << endl;
     }
   }
 
-  virtual void trustedKeyRemoved( const KeyRing &keyring, const PublicKey &key  )
+  virtual void trustedKeyRemoved( const PublicKey &key  )
   {}
 
   RpmDb &_rpmdb;
@@ -110,7 +109,7 @@ struct KeyRingSignalReceiver : callback::ReceiveReport<KeyRingSignals>
 
 static shared_ptr<KeyRingSignalReceiver> sKeyRingReceiver;
 
-unsigned diffFiles(const std::string file1, const std::string file2, std::string& out, int maxlines)
+unsigned diffFiles(const string file1, const string file2, string& out, int maxlines)
 {
   const char* argv[] =
     {
@@ -213,7 +212,7 @@ class RpmDb::Packages
 {
 public:
   list<Package::Ptr>        _list;
-  map<std::string,Package::Ptr> _index;
+  map<string,Package::Ptr> _index;
   bool                      _valid;
   Packages() : _valid( false )
   {}
@@ -329,9 +328,9 @@ Date RpmDb::timestamp() const
 //
 //
 //	METHOD NAME : RpmDb::dumpOn
-//	METHOD TYPE : std::ostream &
+//	METHOD TYPE : ostream &
 //
-std::ostream & RpmDb::dumpOn( std::ostream & str ) const
+ostream & RpmDb::dumpOn( ostream & str ) const
 {
   str << "RpmDb[";
 
@@ -454,8 +453,9 @@ void RpmDb::initDatabase( Pathname root_r, Pathname dbPath_r )
   }
 #endif
 
-  MIL << "Syncronizing keys with zypp keyring" << std::endl;
-  importZyppKeyRingTrustedKeys();
+  MIL << "Syncronizing keys with zypp keyring" << endl;
+  // we do this one by one now.
+  //importZyppKeyRingTrustedKeys();
   exportTrustedKeysInZyppKeyRing();
 
   // Close the database in case any write acces (create/convert)
@@ -887,89 +887,55 @@ void RpmDb::doRebuildDatabase(callback::SendReport<RebuildDBReport> & report)
 
 void RpmDb::exportTrustedKeysInZyppKeyRing()
 {
-  MIL << "Exporting rpm keyring into zypp trusted keyring" <<std::endl;
+  MIL << "Exporting rpm keyring into zypp trusted keyring" <<endl;
 
-  std::set<Edition> rpm_keys = pubkeyEditions();
+  set<Edition> rpm_keys = pubkeyEditions();
 
-  std::list<PublicKey> zypp_keys;
+  list<PublicKey> zypp_keys;
   zypp_keys = getZYpp()->keyRing()->trustedPublicKeys();
 
-  for ( std::set<Edition>::const_iterator it = rpm_keys.begin(); it != rpm_keys.end(); ++it)
-    {
-      // search the zypp key into the rpm keys
-      // long id is edition version + release
-      std::string id = str::toUpper( (*it).version() + (*it).release());
-      std::list<PublicKey>::iterator ik = find( zypp_keys.begin(), zypp_keys.end(), id);
-      if ( ik != zypp_keys.end() )
-      {
-        MIL << "Key " << (*it) << " is already in zypp database." << std::endl;
-      }
-      else
-      {
-        // we export the rpm key into a file
-        RpmHeader::constPtr result = new RpmHeader();
-        getData( std::string("gpg-pubkey"), *it, result );
-        TmpFile file(getZYpp()->tmpPath());
-        std::ofstream os;
-        try
-        {
-          os.open(file.path().asString().c_str());
-          // dump rpm key into the tmp file
-          os << result->tag_description();
-          //MIL << "-----------------------------------------------" << std::endl;
-          //MIL << result->tag_description() <<std::endl;
-          //MIL << "-----------------------------------------------" << std::endl;
-          os.close();
-        }
-        catch (std::exception &e)
-        {
-          ERR << "Could not dump key " << (*it) << " in tmp file " << file.path() << std::endl;
-          // just ignore the key
-        }
-
-        // now import the key in zypp
-        try
-        {
-          getZYpp()->keyRing()->importKey( file.path(), true /*trusted*/);
-          MIL << "Trusted key " << (*it) << " imported in zypp keyring." << std::endl;
-        }
-        catch (Exception &e)
-        {
-          ERR << "Could not import key " << (*it) << " in zypp keyring" << std::endl;
-        }
-      }
-    }
-}
-
-void RpmDb::importZyppKeyRingTrustedKeys()
-{
-  MIL << "Importing zypp trusted keyring" << std::endl;
-
-  std::list<PublicKey> rpm_keys = pubkeys();
-
-  std::list<PublicKey> zypp_keys;
-
-  zypp_keys = getZYpp()->keyRing()->trustedPublicKeys();
-
-  for ( std::list<PublicKey>::const_iterator it = zypp_keys.begin(); it != zypp_keys.end(); ++it)
+  for ( set<Edition>::const_iterator it = rpm_keys.begin(); it != rpm_keys.end(); ++it)
   {
-    // we find only the left part of the long gpg key, as rpm does not support long ids
-    std::list<PublicKey>::iterator ik = find( rpm_keys.begin(), rpm_keys.end(), (*it));
-    if ( ik != rpm_keys.end() )
+    // search the zypp key into the rpm keys
+    // long id is edition version + release
+    string id = str::toUpper( (*it).version() + (*it).release());
+    list<PublicKey>::iterator ik = find( zypp_keys.begin(), zypp_keys.end(), id);
+    if ( ik != zypp_keys.end() )
     {
-      MIL << "Key " << (*it).id() << " (" << (*it).name() << ") is already in rpm database." << std::endl;
+      MIL << "Key " << (*it) << " is already in zypp database." << endl;
     }
     else
     {
-      // now import the key in rpm
+      // we export the rpm key into a file
+      RpmHeader::constPtr result = new RpmHeader();
+      getData( string("gpg-pubkey"), *it, result );
+      TmpFile file(getZYpp()->tmpPath());
+      ofstream os;
       try
       {
-        importPubkey((*it).path());
-        MIL << "Trusted key " << (*it).id() << " (" << (*it).name() << ") imported in rpm database." << std::endl;
+        os.open(file.path().asString().c_str());
+        // dump rpm key into the tmp file
+        os << result->tag_description();
+        //MIL << "-----------------------------------------------" << endl;
+        //MIL << result->tag_description() <<endl;
+        //MIL << "-----------------------------------------------" << endl;
+        os.close();
       }
-      catch (RpmException &e)
+      catch (exception &e)
       {
-        ERR << "Could not import key " << (*it).id() << " (" << (*it).name() << " from " << (*it).path() << " in rpm database" << std::endl;
+        ERR << "Could not dump key " << (*it) << " in tmp file " << file.path() << endl;
+        // just ignore the key
+      }
+
+      // now import the key in zypp
+      try
+      {
+        getZYpp()->keyRing()->importKey( file.path(), true /*trusted*/);
+        MIL << "Trusted key " << (*it) << " imported in zypp keyring." << endl;
+      }
+      catch (Exception &e)
+      {
+        ERR << "Could not import key " << (*it) << " in zypp keyring" << endl;
       }
     }
   }
@@ -981,14 +947,32 @@ void RpmDb::importZyppKeyRingTrustedKeys()
 //	METHOD NAME : RpmDb::importPubkey
 //	METHOD TYPE : PMError
 //
-void RpmDb::importPubkey( const Pathname & pubkey_r )
+void RpmDb::importPubkey( const PublicKey & pubkey_r )
 {
   FAILIFNOTINITIALIZED;
 
+  // check if the key is already in the rpm database and just
+  // return if it does.
+  set<Edition> rpm_keys = pubkeyEditions();
+  for ( set<Edition>::const_iterator it = rpm_keys.begin(); it != rpm_keys.end(); ++it)
+  {
+    string id = str::toUpper( (*it).version() );
+    string keyshortid = pubkey_r.id().substr(0,8);
+    MIL << "Comparing '" << id << "' to '" << keyshortid << "'" << endl;
+    if ( id == keyshortid )
+    {
+      // they match id
+      // FIXME id is not sufficient?
+      MIL << "Key " << pubkey_r << " is already in the rpm trusted keyring." << endl;
+      return;
+    }
+  }
+  // key does not exists, lets import it
+  
   RpmArgVec opts;
   opts.push_back ( "--import" );
   opts.push_back ( "--" );
-  opts.push_back ( pubkey_r.asString().c_str() );
+  opts.push_back ( pubkey_r.path().asString().c_str() );
 
   // don't call modifyDatabase because it would remove the old
   // rpm3 database, if the current database is a temporary one.
@@ -1017,7 +1001,7 @@ void RpmDb::importPubkey( const Pathname & pubkey_r )
   }
   else
   {
-    MIL << "Imported public key from file " << pubkey_r << endl;
+    MIL << "Key " << pubkey_r << " imported in rpm trusted keyring." << endl;
   }
 }
 
@@ -1039,25 +1023,25 @@ list<PublicKey> RpmDb::pubkeys() const
     {
       // we export the rpm key into a file
       RpmHeader::constPtr result = new RpmHeader();
-      getData( std::string("gpg-pubkey"), edition, result );
+      getData( string("gpg-pubkey"), edition, result );
       TmpFile file(getZYpp()->tmpPath());
-      std::ofstream os;
+      ofstream os;
       try
       {
         os.open(file.path().asString().c_str());
         // dump rpm key into the tmp file
         os << result->tag_description();
-        //MIL << "-----------------------------------------------" << std::endl;
-        //MIL << result->tag_description() <<std::endl;
-        //MIL << "-----------------------------------------------" << std::endl;
+        //MIL << "-----------------------------------------------" << endl;
+        //MIL << result->tag_description() <<endl;
+        //MIL << "-----------------------------------------------" << endl;
         os.close();
         // read the public key from the dumped file
         PublicKey key(file.path());
         ret.push_back(key);
       }
-      catch (std::exception &e)
+      catch (exception &e)
       {
-        ERR << "Could not dump key " << edition.asString() << " in tmp file " << file.path() << std::endl;
+        ERR << "Could not dump key " << edition.asString() << " in tmp file " << file.path() << endl;
         // just ignore the key
       }
     }
@@ -1094,11 +1078,11 @@ bool RpmDb::packagesValid() const
 //
 //
 //	METHOD NAME : RpmDb::getPackages
-//	METHOD TYPE : const std::list<Package::Ptr> &
+//	METHOD TYPE : const list<Package::Ptr> &
 //
 //	DESCRIPTION :
 //
-const std::list<Package::Ptr> & RpmDb::getPackages()
+const list<Package::Ptr> & RpmDb::getPackages()
 {
   callback::SendReport<ScanDBReport> report;
 
@@ -1106,7 +1090,7 @@ const std::list<Package::Ptr> & RpmDb::getPackages()
 
   try
   {
-    const std::list<Package::Ptr> & ret = doGetPackages(report);
+    const list<Package::Ptr> & ret = doGetPackages(report);
     report->finish(ScanDBReport::NO_ERROR, "");
     return ret;
   }
@@ -1116,7 +1100,7 @@ const std::list<Package::Ptr> & RpmDb::getPackages()
     ZYPP_RETHROW(excpt_r);
   }
 #warning fixme
-  static const std::list<Package::Ptr> empty_list;
+  static const list<Package::Ptr> empty_list;
   return empty_list;
 }
 
@@ -1125,7 +1109,7 @@ const std::list<Package::Ptr> & RpmDb::getPackages()
 // make Package::Ptr from RpmHeader
 // return NULL on error
 //
-Package::Ptr RpmDb::makePackageFromHeader( const RpmHeader::constPtr header, std::set<std::string> * filerequires, const Pathname & location, Source_Ref source )
+Package::Ptr RpmDb::makePackageFromHeader( const RpmHeader::constPtr header, set<string> * filerequires, const Pathname & location, Source_Ref source )
 {
   if ( ! header )
     return 0;
@@ -1229,7 +1213,7 @@ Package::Ptr RpmDb::makePackageFromHeader( const RpmHeader::constPtr header, std
 }
 
 
-const std::list<Package::Ptr> & RpmDb::doGetPackages(callback::SendReport<ScanDBReport> & report)
+const list<Package::Ptr> & RpmDb::doGetPackages(callback::SendReport<ScanDBReport> & report)
 {
   if ( packagesValid() )
   {
@@ -1309,10 +1293,10 @@ const std::list<Package::Ptr> & RpmDb::doGetPackages(callback::SendReport<ScanDB
 //
 //	DESCRIPTION :
 //
-std::list<FileInfo>
-RpmDb::fileList( const std::string & name_r, const Edition & edition_r ) const
+list<FileInfo>
+RpmDb::fileList( const string & name_r, const Edition & edition_r ) const
 {
-  std::list<FileInfo> result;
+  list<FileInfo> result;
 
   librpmDb::db_const_iterator it;
   bool found;
@@ -1339,7 +1323,7 @@ RpmDb::fileList( const std::string & name_r, const Edition & edition_r ) const
 //
 //	DESCRIPTION :
 //
-bool RpmDb::hasFile( const std::string & file_r, const std::string & name_r ) const
+bool RpmDb::hasFile( const string & file_r, const string & name_r ) const
 {
   librpmDb::db_const_iterator it;
   bool res;
@@ -1365,7 +1349,7 @@ bool RpmDb::hasFile( const std::string & file_r, const std::string & name_r ) co
 //
 //	DESCRIPTION :
 //
-std::string RpmDb::whoOwnsFile( const std::string & file_r) const
+string RpmDb::whoOwnsFile( const string & file_r) const
 {
   librpmDb::db_const_iterator it;
   if (it.findByFile( file_r ))
@@ -1383,7 +1367,7 @@ std::string RpmDb::whoOwnsFile( const std::string & file_r) const
 //
 //	DESCRIPTION :
 //
-bool RpmDb::hasProvides( const std::string & tag_r ) const
+bool RpmDb::hasProvides( const string & tag_r ) const
 {
   librpmDb::db_const_iterator it;
   return it.findByProvides( tag_r );
@@ -1397,7 +1381,7 @@ bool RpmDb::hasProvides( const std::string & tag_r ) const
 //
 //	DESCRIPTION :
 //
-bool RpmDb::hasRequiredBy( const std::string & tag_r ) const
+bool RpmDb::hasRequiredBy( const string & tag_r ) const
 {
   librpmDb::db_const_iterator it;
   return it.findByRequiredBy( tag_r );
@@ -1411,7 +1395,7 @@ bool RpmDb::hasRequiredBy( const std::string & tag_r ) const
 //
 //	DESCRIPTION :
 //
-bool RpmDb::hasConflicts( const std::string & tag_r ) const
+bool RpmDb::hasConflicts( const string & tag_r ) const
 {
   librpmDb::db_const_iterator it;
   return it.findByConflicts( tag_r );
@@ -1471,7 +1455,7 @@ void RpmDb::getData( const string & name_r,
 //
 //	DESCRIPTION :
 //
-void RpmDb::getData( const std::string & name_r, const Edition & ed_r,
+void RpmDb::getData( const string & name_r, const Edition & ed_r,
                      RpmHeader::constPtr & result_r ) const
 {
   librpmDb::db_const_iterator it;
@@ -1742,7 +1726,7 @@ void RpmDb::processConfigFiles(const string& line, const string& name, const cha
         break;
       }
       file += Date(Date::now()).form("config_diff_%Y_%m_%d.log");
-      ofstream notify(file.asString().c_str(), std::ios::out|std::ios::app);
+      ofstream notify(file.asString().c_str(), ios::out|ios::app);
       if (!notify)
       {
         ERR << "Could not open " <<  file << endl;
@@ -1880,7 +1864,7 @@ void RpmDb::doInstallPackage( const Pathname & filename, unsigned flags, callbac
   opts.push_back("--");
 
   // rpm requires additional quoting of special chars:
-  std::string quotedFilename( rpmQuoteFilename( filename ) );
+  string quotedFilename( rpmQuoteFilename( filename ) );
   opts.push_back ( quotedFilename.c_str() );
 
   modifyDatabase(); // BEFORE run_rpm
@@ -2139,7 +2123,7 @@ bool RpmDb::backupPackage(const string& packageName)
       return false;
     }
 
-    std::ofstream fp ( filestobackupfile.asString().c_str(), std::ios::out|std::ios::trunc );
+    ofstream fp ( filestobackupfile.asString().c_str(), ios::out|ios::trunc );
 
     if (!fp)
     {
