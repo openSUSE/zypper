@@ -16,10 +16,6 @@ ADD_EXECUTABLE(cachestore CacheStore_tp.cc)
 TARGET_LINK_LIBRARIES(cachestore  zypp )
 TARGET_LINK_LIBRARIES(cachestore  zypp2 )
 
-ADD_EXECUTABLE(tagsparser SUSETagsParser.cc SUSETagsParser_tp.cc)
-TARGET_LINK_LIBRARIES(tagsparser  zypp )
-TARGET_LINK_LIBRARIES(tagsparser  zypp2 )
-
 ADD_EXECUTABLE(testbed testbed.cc)
 TARGET_LINK_LIBRARIES(testbed  zypp )
 TARGET_LINK_LIBRARIES(testbed  zypp2 )
