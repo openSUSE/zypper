@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <map>
 #include "db.h"
 #include "resolvable.h"
 
@@ -15,9 +16,9 @@ using namespace zypp;
 unsigned int getResolvables();
 
 int main(){
-	//* old Test-Main
-	//database *db = new database("lorien.suse.de", "rpmread", "Salahm1", "rpm");
-	database *db = new database("lorien.suse.de", "rpmread", "Salahm1", "package");
+	/* old Test-Main
+	database *db = new database("lorien.suse.de", "rpmread", "Salahm1", "rpm");
+	//database *db = new database("lorien.suse.de", "rpmread", "Salahm1", "package");
 	//resolvable *test = new resolvable("art", "386", "1.0", "99", "tr");
 
 	string sqlcom = "";
@@ -43,11 +44,11 @@ int main(){
 			std::cout << result[i].at(y) << " | ";
 		std::cout << std::endl;
 	}
-	//*/	
+	*/	
 	//std::cout << "Anzahl an Zeilen: "  << result.size() << std::endl;
 	
 	
-	//std::cout << "Returncode: " << getResolvables() << std::endl;
+	std::cout << "Returncode: " << getResolvables() << std::endl;
 	
 	return 0;
 }
@@ -75,45 +76,133 @@ unsigned int getResolvables(){
 
 	std::vector< std::vector<string> > packIDs = dbPackages->getResult();
 	std::cout << "get packages from db...\n";
+
 	for(unsigned int i = 0; i < packIDs.size(); i++){
 
-		string sqlcom("SELECT BinPackID, Version FROM BinaryPackages WHERE PackID=");
+		string sqlcom("SELECT PackID FROM Packages WHERE BasedOnID=");
 		sqlcom.append(packIDs[i].at(0));
-		dbDeps->sqlexecute(sqlcom);
-		std::vector< std::vector<string> > binPack = dbDeps->getResult();
+		dbPackages->sqlexecute(sqlcom);
+		std::vector< std::vector<string> > basedIDs = dbPackages->getResult();
 		
+		std::vector< std::vector<string> > binPack;
+	
+		for(unsigned int j = 0; j < basedIDs.size(); j++){	
+		
+			sqlcom = "SELECT BinPackID, Version FROM BinaryPackages WHERE PackID=";
+			sqlcom.append(basedIDs[j].at(0));
+			dbDeps->sqlexecute(sqlcom);
+			std::vector< std::vector<string> > tempVec = dbDeps->getResult();
+			for(unsigned int x = 0; x < tempVec.size(); x++)
+				binPack.push_back(tempVec.at(x));
+		}
+
 		intrusive_ptr<resolvZypp> pkg;
-		CapSet caps;
+		CapSet prov;
+		CapSet preq;
+		CapSet req;
+		CapSet conf;
+		CapSet obs;
+		CapSet rec;
+		CapSet sug;
+		CapSet fre;
+		CapSet enh;
+		CapSet sup;
+
 		string edition = "";
 
 		// If Deps
 		if(binPack.size() != 0){
 
-			sqlcom = "SELECT Symbol, Kind, Compare, Version FROM PackReqProv WHERE BinPackID=";
-			sqlcom.append(binPack[0].at(0));
-			dbDeps->sqlexecute(sqlcom);		
-			std::vector< std::vector<string> > packDeps = dbDeps->getResult();
+				std::vector< std::vector<string> > packDeps;
+
+			for(unsigned int k = 0; k < binPack.size(); k++){
+				sqlcom = "SELECT Symbol, Kind, Compare, Version FROM PackReqProv WHERE BinPackID=";
+				sqlcom.append(binPack[k].at(0));
+				dbDeps->sqlexecute(sqlcom);		
+				std::vector< std::vector<string> > tempVec = dbDeps->getResult();
+				for(unsigned int l = 0; l < tempVec.size(); l++)
+					packDeps.push_back(tempVec.at(l));
+
+
+			}
 
 			for(unsigned int y = 0; y < packDeps.size(); y++){
 
 				string ed = "";
-				string rel = "";
+				Rel rel = Rel::ANY;
 				
+				if(packDeps[y].at(0) == "(none)")
+					break;
+
 				if(packDeps[y].at(2) != "NULL"){
-					rel = packDeps[y].at(2);
+					rel = Rel(packDeps[y].at(2));
 					ed = packDeps[y].at(3);
 				}
-				caps.insert(CapFactory().parse(Resolvable::Kind(packDeps[y].at(1)), packDeps[y].at(0)
-							 , Rel(rel), Edition(ed)));
+				if(rel.asString() == "ANY")
+					break;
+				//	std::cout << "Symbol: " << packDeps[y].at(0) << " Operator:  " << rel << " edition: " << ed << " kind: " << packDeps[y].at(1) << "\n";
+				//std::cout << rel << std::endl;
+
+				if(packDeps[y].at(1) == "provides"){
+					prov.insert(CapFactory().parse(Resolvable::Kind("Package"), packDeps[y].at(0)
+							   , rel, Edition(ed)));
+				}else if(packDeps[y].at(1) == "prerequires"){
+					preq.insert(CapFactory().parse(Resolvable::Kind("Package"), packDeps[y].at(0)
+							   , rel, Edition(ed)));
+				}else if(packDeps[y].at(1) == "requires"){
+					req.insert(CapFactory().parse(Resolvable::Kind("Package"), packDeps[y].at(0)
+							   , rel, Edition(ed)));
+				}else if(packDeps[y].at(1) == "conflicts"){
+					conf.insert(CapFactory().parse(Resolvable::Kind("Package"), packDeps[y].at(0)
+							   , rel, Edition(ed)));
+				}else if(packDeps[y].at(1) == "obsoletes"){
+					obs.insert(CapFactory().parse(Resolvable::Kind("Package"), packDeps[y].at(0)
+							   , rel, Edition(ed)));
+				}else if(packDeps[y].at(1) == "recommends"){
+					rec.insert(CapFactory().parse(Resolvable::Kind("Package"), packDeps[y].at(0)
+							   , rel, Edition(ed)));
+				}else if(packDeps[y].at(1) == "suggests"){
+					sug.insert(CapFactory().parse(Resolvable::Kind("Package"), packDeps[y].at(0)
+							   , rel, Edition(ed)));
+				}else if(packDeps[y].at(1) == "freshens"){
+					fre.insert(CapFactory().parse(Resolvable::Kind("Package"), packDeps[y].at(0)
+							   , rel, Edition(ed)));
+				}else if(packDeps[y].at(1) == "enhances"){
+					enh.insert(CapFactory().parse(Resolvable::Kind("Package"), packDeps[y].at(0)
+							   , rel, Edition(ed)));
+				}else if(packDeps[y].at(1) == "supplements"){
+					sup.insert(CapFactory().parse(Resolvable::Kind("Package"), packDeps[y].at(0)
+							   , rel, Edition(ed)));
+				}
 			}
 
 			edition = binPack[0].at(1);
 
 		}
 
-		//Dependencies deps(caps);
+		Dependencies deps;
+		if(prov.size() > 0)
+			deps[Dep::PROVIDES] = prov;
+		if(preq.size() > 0)
+			deps[Dep::PREREQUIRES] = preq;
+		if(req.size() > 0)
+			deps[Dep::REQUIRES] = req;
+		if(conf.size() > 0)
+			deps[Dep::CONFLICTS] = conf;
+		if(obs.size() > 0)
+			deps[Dep::OBSOLETES] = obs;
+		if(rec.size() > 0)
+			deps[Dep::RECOMMENDS] = rec;
+		if(sug.size() > 0)
+			deps[Dep::SUGGESTS] = sug;
+		if(fre.size() > 0)
+			deps[Dep::FRESHENS] = fre;
+		if(enh.size() > 0)
+			deps[Dep::ENHANCES] = enh;
+		if(sup.size() > 0)
+			deps[Dep::SUPPLEMENTS] = sup;
 
-		NVRAD nvPkg(packIDs[i].at(1), Edition(edition), Arch("i386"));
+		NVRAD nvPkg(packIDs[i].at(1), Edition(edition), Arch("i386"), deps);
 		Package::Ptr p( detail::makeResolvableAndImpl(nvPkg, pkg));		
 
 		store->insert(p);
