@@ -69,6 +69,16 @@ CREATE TABLE db_info (
 );
 
 ------------------------------------------------
+-- Basic types like archs, attributes, languages
+------------------------------------------------
+
+CREATE TABLE types (
+    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL
+  , class TEXT NOT NULL
+  , name TEXT NOT NULL
+);
+
+------------------------------------------------
 -- Knew catalogs. They existed some day.
 ------------------------------------------------
 
@@ -120,8 +130,8 @@ CREATE TABLE resolvables (
   , version TEXT
   , release TEXT
   , epoch INTEGER
-  , arch INTEGER
-  , kind INTEGER
+  , arch INTEGER REFERENCES types(id)
+  , kind INTEGER REFERENCES types(id)
   , catalog_id INTEGER REFERENCES catalogs(id)
   ,  installed_size INTEGER
   , archive_size INTEGER
@@ -131,33 +141,11 @@ CREATE TABLE resolvables (
 );
 
 -- Resolvables translated strings
-CREATE TABLE resolvable_ttext_attributes (
+CREATE TABLE text_attributes (
     id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL
-  , lang_code INTEGER
-  , summary TEXT
-  , description TEXT
-  , insnotify TEXT
-  , delnotify TEXT
-  , license_to_confirm
-);
-
--- Association between ttext attributes and resolvables
-CREATE TABLE resolvable_resolvable_ttext_attributes (
-    resolvable_id INTEGER REFERENCES resolvable(id)
-  , ttext_attribute_id INTEGER REFERENCES resolvable_ttext_attributes(id)
-  , PRIMARY KEY ( resolvable_id, ttext_attribute_id )
-);
-
--- Resolvables untranslated strings
-CREATE TABLE resolvable_text_attributes (
-    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL
-);
-
--- Association between text attributes and resolvables
-CREATE TABLE resolvable_resolvable_text_attributes (
-    resolvable_id INTEGER REFERENCES resolvable(id)
-  , text_attribute_id INTEGER REFERENCES text_attribute(id)
-  , PRIMARY KEY ( resolvable_id, text_attribute_id )
+  , lang INTEGER REFERENCES types(id)
+  , attr INTEGER REFERENCES types(id)
+  , text TEXT
 );
 
 ------------------------------------------------
@@ -169,24 +157,6 @@ CREATE TABLE message_details (
   , text TEXT
 );
 
--- messages translated strings
-CREATE TABLE message_ttext_attributes (
-    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL
-  , lang_code INTEGER
-  , summary TEXT
-  , description TEXT
-  , insnotify TEXT
-  , delnotify TEXT
-  , license_to_confirm
-);
-
--- Association between ttext attributes and messages
-CREATE TABLE message_message_ttext_attributes (
-    message_id INTEGER REFERENCES message(id)
-  , ttext_attribute_id INTEGER REFERENCES message_ttext_attributes(id)
-  , PRIMARY KEY ( message_id, ttext_attribute_id )
-);
-
 CREATE TABLE patch_details (
     id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL
   , resolvable_id INTEGER REFERENCES resolvables(id)
@@ -196,20 +166,6 @@ CREATE TABLE patch_details (
   , reboot_needed INTEGER
   , affects_package_manager INTEGER
 
-);
-
--- patchs translated strings
-CREATE TABLE patch_text_attributes (
-    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL
-  , patch_id TEXT
-  , category TEXT
-);
-
--- Association between ttext attributes and patchs
-CREATE TABLE patch_patch_text_attributes (
-    patch_id INTEGER REFERENCES patch(id)
-  , text_attribute_id INTEGER REFERENCES patch_text_attributes(id)
-  , PRIMARY KEY ( patch_id, text_attribute_id )
 );
 
 CREATE TABLE pattern_details (
@@ -229,41 +185,6 @@ CREATE TABLE product_details (
   , resolvable_id INTEGER REFERENCES resolvables(id)
 );
 
--- products translated strings
-CREATE TABLE product_ttext_attributes (
-    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL
-  , lang_code INTEGER
-  , short_name TEXT
-);
-
--- Association between ttext attributes and products
-CREATE TABLE product_product_ttext_attributes (
-    product_id INTEGER REFERENCES product(id)
-  , ttext_attribute_id INTEGER REFERENCES product_ttext_attributes(id)
-  , PRIMARY KEY ( product_id, ttext_attribute_id )
-);
-
--- products translated strings
-CREATE TABLE product_text_attributes (
-    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL
-  , category TEXT
-  , distribution_name TEXT
-  , distribution_edition TEXT
-  , vendor TEXT
-  , release_notes_url TEXT
-  , update_urls TEXT
-  , extra_urls TEXT
-  , optional_urls TEXT
-  , flags TEXT
-  , short_name TEXT
-);
-
--- Association between ttext attributes and products
-CREATE TABLE product_product_text_attributes (
-    product_id INTEGER REFERENCES product(id)
-  , text_attribute_id INTEGER REFERENCES product_text_attributes(id)
-  , PRIMARY KEY ( product_id, text_attribute_id )
-);
 
 CREATE TABLE script_details (
     id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL
@@ -276,26 +197,6 @@ CREATE TABLE script_ttext_attributes (
   , lang_code INTEGER
 );
 
--- Association between ttext attributes and scripts
-CREATE TABLE script_script_ttext_attributes (
-    script_id INTEGER REFERENCES script(id)
-  , ttext_attribute_id INTEGER REFERENCES script_ttext_attributes(id)
-  , PRIMARY KEY ( script_id, ttext_attribute_id )
-);
-
--- scripts translated strings
-CREATE TABLE script_text_attributes (
-    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL
-  , do_script TEXT
-  , undo_script TEXT
-);
-
--- Association between ttext attributes and scripts
-CREATE TABLE script_script_text_attributes (
-    script_id INTEGER REFERENCES script(id)
-  , text_attribute_id INTEGER REFERENCES script_text_attributes(id)
-  , PRIMARY KEY ( script_id, text_attribute_id )
-);
 
 CREATE TABLE package_details (
     id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL
@@ -319,43 +220,6 @@ CREATE TABLE package_details (
   , location TEXT
 );
 CREATE INDEX package_details_resolvable_id ON package_details (resolvable_id);
-
--- packages translated strings
-CREATE TABLE package_ttext_attributes (
-    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL
-  , lang_code INTEGER
-  , short_name TEXT
-);
-
--- Association between ttext attributes and packages
-CREATE TABLE package_package_ttext_attributes (
-    package_id INTEGER REFERENCES package(id)
-  , ttext_attribute_id INTEGER REFERENCES package_ttext_attributes(id)
-  , PRIMARY KEY ( package_id, ttext_attribute_id )
-);
-
--- packages translated strings
-CREATE TABLE package_text_attributes (
-    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL
-  , category TEXT
-  , distribution_name TEXT
-  , distribution_edition TEXT
-  , vendor TEXT
-  , release_notes_url TEXT
-  , update_urls TEXT
-  , extra_urls TEXT
-  , optional_urls TEXT
-  , flags TEXT
-  , short_name TEXT
-);
-
--- Association between ttext attributes and packages
-CREATE TABLE package_package_text_attributes (
-    package_id INTEGER REFERENCES package(id)
-  , text_attribute_id INTEGER REFERENCES package_text_attributes(id)
-  , PRIMARY KEY ( package_id, text_attribute_id )
-);
-
 
 ------------------------------------------------
 -- Do we need those here?

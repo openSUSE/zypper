@@ -39,7 +39,7 @@ static void read_deps( ifgzstream &ifs, data::DependencyList &list, int &line, c
     {
       capability::CapabilityImpl::Ptr cap = capability::parse( ResTraits<Package>::kind, buffer);
       if (cap)
-        list.push_back(cap);
+        list.insert(cap);
     }
     catch( const Exception  &e )
     {

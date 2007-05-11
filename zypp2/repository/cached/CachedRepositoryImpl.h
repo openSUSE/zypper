@@ -11,9 +11,16 @@
 #define ZYPP_CachedRepositoryImpl_H
 
 #include <iosfwd>
+#include <map>
+#include "zypp/Arch.h"
+#include "zypp/Rel.h"
 #include "zypp/Pathname.h"
+#include "zypp/data/RecordId.h"
 #include "zypp2/repository/RepositoryImpl.h"
 #include "zypp/ResStore.h"
+
+#include <sqlite3.h>
+#include "zypp2/cache/sqlite3x/sqlite3x.hpp"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -51,16 +58,32 @@ namespace zypp
         virtual std::string type() const
         { return typeString(); }
 
+        const ResStore & resolvables() const
+        { return _store; }
+        
+        virtual void createResolvables();
       private:
         /** Ctor substitute.
          * Actually get the metadata.
          * \throw EXCEPTION on fail
         */
         virtual void factoryInit();
-        virtual void createResolvables();
+        
         
         zypp::Pathname _dbdir;
         ResStore _store;
+        
+        Rel relationFor( const data::RecordId &id );
+        Resolvable::Kind kindFor( const data::RecordId &id );
+        Dep deptypeFor( const data::RecordId &id );
+        Arch archFor( const data::RecordId &id );
+        
+        void read_capabilities( sqlite3x::sqlite3_connection &con, std::map<data::RecordId, NVRAD> &nvras );
+        
+        std::map<data::RecordId, Rel> _rel_cache;
+        std::map<data::RecordId, Resolvable::Kind> _kind_cache;
+        std::map<data::RecordId, std::string> _deptype_cache;
+        std::map<data::RecordId, Arch> _arch_cache;
       };
       ///////////////////////////////////////////////////////////////////
 

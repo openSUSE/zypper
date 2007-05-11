@@ -14,6 +14,7 @@
 #include "zypp/capability/CapabilityImpl.h"
 #include "zypp/data/ResolvableData.h"
 #include "zypp2/cache/CacheStore.h"
+#include "zypp2/repository/cached/CachedRepositoryImpl.h"
 #include "zypp/Url.h"
 #include "zypp/NVRA.h"
 #include "zypp/PathInfo.h"
@@ -23,27 +24,42 @@
 
 using namespace std;
 using namespace zypp;
+using namespace zypp::repository;
+using namespace zypp::repository::cached;
 using namespace boost::unit_test;
 
 void cache_write_test(const string &dir)
 {
-  Pathname nvra_list = Pathname(dir) + "package-set.txt.gz";
-  list<MiniResolvable> res_list;
-  
-  parse_mini_file( nvra_list, res_list );
-  
   filesystem::TmpDir tmpdir;
-  cache::CacheStore store(tmpdir.path());
-  
-  data::RecordId catalog_id = store.lookupOrAppendCatalog( Url("http://novell.com"), "/");
-  
-  zypp::debug::Measure cap_parse_timer("store resolvables");
-  for ( list<MiniResolvable>::iterator it = res_list.begin(); it != res_list.end(); it++)
   {
-    data::RecordId id = store.appendResolvable( catalog_id,
-                                       ResTraits<Package>::kind,
-                                       (*it).nvra,
-                                       (*it).deps );
+    Pathname nvra_list = Pathname(dir) + "package-set.txt.gz";
+    list<MiniResolvable> res_list;
+    
+    parse_mini_file( nvra_list, res_list );
+    
+    cache::CacheStore store(tmpdir.path());
+    
+    data::RecordId catalog_id = store.lookupOrAppendCatalog( Url("http://novell.com"), "/");
+    
+    zypp::debug::Measure cap_parse_timer("store resolvables");
+    for ( list<MiniResolvable>::iterator it = res_list.begin(); it != res_list.end(); it++)
+    {
+      data::RecordId id = store.appendResolvable( catalog_id,
+                                        ResTraits<Package>::kind,
+                                        (*it).nvra,
+                                        (*it).deps );
+    }
+  }
+  {
+    MIL << "now read resolvables" << endl;
+    
+    CachedRepositoryImpl *repositoryImpl = new CachedRepositoryImpl(tmpdir.path());
+    //RepositoryFactory factory;
+    //Repository_Ref repository = factory.createFrom(repositoryImpl);
+    repositoryImpl->createResolvables();
+    ResStore dbres = repositoryImpl->resolvables();
+        
+    MIL << dbres.size() << " resolvables" << endl;
   }
 }
 

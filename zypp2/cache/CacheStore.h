@@ -228,7 +228,22 @@ namespace zypp
       void appendUnknownDependency( const data::RecordId &resolvable_id,
                                           zypp::Dep deptype,
                                           capability::CapabilityImpl::Ptr cap );
-
+      
+      /**
+       * Returns the record id of a type
+       *
+       * Types are mostly used internally. To give concepts
+       * a record id to associate with.
+       * Examples could be arch::i386, lang::en_US
+       * Packages::summary, rel:>, kind::Package
+       *
+       * \note If the type entry does not exist, it will
+       * be created and the new inserted entry's id will
+       * be returned.
+       */
+      data::RecordId lookupOrAppendType( const std::string &klass,
+                                         const std::string &name );
+      
       /**
        * Returns the record id of a catalog (Source) \a path
        *
