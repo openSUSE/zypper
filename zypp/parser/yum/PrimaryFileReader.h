@@ -46,7 +46,7 @@ namespace zypp
     /**
      * Callback definition.
      */
-    typedef function<bool(const zypp::data::Package &)> ProcessPackage;
+    typedef function<bool(const data::Package_Ptr &)> ProcessPackage;
 
     /**
      * Enumeration of some primary.xml tags.
@@ -78,7 +78,34 @@ namespace zypp
      */
     bool consumeFormatChildNodes(zypp::xml::Reader & reader_r);
 
+    /**
+     * Creates a new Package_Ptr swaps its contents with \ref _package and
+     * returns it.
+     */
+    data::Package_Ptr handoutPackage();
+
   private:
+    /**
+     * Callback for processing package metadata passed in through constructor.
+     */
+    ProcessPackage _callback;
+
+    /**
+     * \ref zypp::data::Package object for storing the package metada
+     */
+    data::Package_Ptr _package;
+
+    /**
+     * Number of packages read so far.
+     */
+    unsigned _count;
+
+    /**
+     * Total number of packages to be read. This information is acquired from
+     * the <code>packages</code> attribute of <code>metadata<code> tag.
+     */
+    unsigned _total_packages;
+
     /** Used to remember primary.xml tag beeing currently processed. */
     Tag _tag;
 
@@ -94,32 +121,10 @@ namespace zypp
     Dep _dtype;
 
     /**
-     * Number of packages read so far.
-     */
-    unsigned _count;
-
-    /**
-     * Total number of packages to be read. This information is acquired from
-     * the <code>packages</code> attribute of <code>metadata<code> tag.
-     */
-    unsigned _total_packages;
-
-    /**
-     * Pointer to the \ref zypp::data::Package object for storing the package
-     * metada
-     */
-    zypp::data::Package *_package;
-
-    /**
-     * Callback for processing package metadata passed in through constructor.
-     */
-    ProcessPackage _callback;
-
-    /**
      * Progress reporting object.
      */
     ParserProgress::Ptr _progress;
-    
+
     long int _old_progress;
   };
 

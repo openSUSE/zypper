@@ -32,7 +32,8 @@ namespace zypp
     :
       _callback(callback), _package(NULL),
       _count(0), _total_packages(0),
-      _tag(tag_NONE), _expect_rpm_entry(false), _dtype(zypp::Dep::REQUIRES),
+      _tag(tag_NONE), _expect_rpm_entry(false),
+      _dtype(zypp::Dep::REQUIRES),
       _progress(progress), _old_progress(0)
   {
     Reader reader( primary_file );
@@ -57,8 +58,7 @@ namespace zypp
       {
         _tag = tag_package;
   //      DBG << "got " << reader_r->getAttribute("type") << " package" << endl;
-        if (_package) delete _package;
-        _package = new zypp::data::Package();
+        _package = new data::Package;
 
         return true;
       }
@@ -81,6 +81,7 @@ namespace zypp
         _package->edition = Edition(reader_r->getAttribute("ver").asString(),
                                     reader_r->getAttribute("rel").asString(),
                                     reader_r->getAttribute("epoch").asString());
+        return true;
       }
 
       if (reader_r->name() == "checksum")
@@ -158,12 +159,9 @@ namespace zypp
     {
       if (reader_r->name() == "package")
       {
-        _callback(*_package);
-        if (_package)
-        {
-          delete _package;
-          _package = NULL;
-        }
+        if (_package && _callback)
+          _callback(handoutPackage());
+
         _count++;
 
         // report progress
@@ -341,6 +339,12 @@ namespace zypp
     return true;
   }
 
+  data::Package_Ptr PrimaryFileReader::handoutPackage()
+  {
+    data::Package_Ptr ret;
+    ret.swap(_package);
+    return ret;
+  }
 
     } // ns yum
   } // ns parser

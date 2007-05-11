@@ -60,7 +60,7 @@ namespace zypp
     void doJobs(const zypp::Pathname & path, ParserProgress::Ptr progress);
 
     bool repomd_CB(const OnMediaLocation & loc, const YUMResourceType & dtype);
-    bool primary_CB(const zypp::data::Package & package);
+    bool primary_CB(const data::Package_Ptr & package_r); 
     bool patches_CB(const OnMediaLocation &loc, const std::string & patch_id);
     bool patch_CB(const zypp::data::Patch & patch);
 

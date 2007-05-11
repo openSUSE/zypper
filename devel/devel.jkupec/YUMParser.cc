@@ -48,12 +48,12 @@ namespace zypp
     return true;
   }
 
-  bool YUMParser::primary_CB(const zypp::data::Package & package)
+  bool YUMParser::primary_CB(const data::Package_Ptr & package_r)
   {
-    NVRA nvra(package.name, package.edition, package.arch);
+    NVRA nvra(package_r->name, package_r->edition, package_r->arch);
     data::RecordId pkgid =
       _consumer.appendResolvable(
-        _catalog_id, ResTraits<Package>::kind, nvra, package.deps);
+        _catalog_id, ResTraits<Package>::kind, nvra, package_r->deps);
 
 /*    MIL << "got package "
       << package.name << package.edition << " "
