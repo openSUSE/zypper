@@ -14,10 +14,7 @@
 #include "zypp/base/Logger.h"
 #include "zypp/parser/xml/Reader.h"
 #include "zypp/data/ResolvableData.h"
-#include "zypp/parser/ParserProgress.h"
-
-#undef ZYPP_BASE_LOGGER_LOGGROUP
-#define ZYPP_BASE_LOGGER_LOGGROUP "parser"
+#include "zypp/ProgressData.h"
 
 namespace zypp
 {
@@ -61,12 +58,16 @@ namespace zypp
     /**
      * Constructor
      * \param primary_file the primary.xml.gz file you want to read
-     * \param function to process \ref _package data.
+     * \param callback function to process \ref _package data.
+     * \param progress progress reporting function
      * 
      * \see PrimaryFileReader::ProcessPackage
      */
-    PrimaryFileReader(const Pathname &primary_file, ProcessPackage callback, ParserProgress::Ptr progress);
-  
+    PrimaryFileReader(
+      const Pathname &primary_file,
+      const ProcessPackage & callback,
+      const ProgressData::ReceiverFnc & progress = ProgressData::ReceiverFnc());
+
     /**
      * Callback provided to the XML parser.
      */
@@ -100,12 +101,6 @@ namespace zypp
      */
     unsigned _count;
 
-    /**
-     * Total number of packages to be read. This information is acquired from
-     * the <code>packages</code> attribute of <code>metadata<code> tag.
-     */
-    unsigned _total_packages;
-
     /** Used to remember primary.xml tag beeing currently processed. */
     Tag _tag;
 
@@ -123,9 +118,7 @@ namespace zypp
     /**
      * Progress reporting object.
      */
-    ParserProgress::Ptr _progress;
-
-    long int _old_progress;
+    ProgressData _ticks;
   };
 
 

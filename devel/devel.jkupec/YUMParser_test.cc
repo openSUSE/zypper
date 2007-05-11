@@ -17,11 +17,11 @@ using namespace zypp;
 using namespace zypp::parser::yum;
 using zypp::debug::Measure;
 
-bool progress_function(int p)
+bool progress_function(ProgressData::value_type p)
 {
-//  cout << "\r                                       " << flush;
-  cout << "\rParsing primary.xml.gz [" << p << "%]" << flush;
-//  MIL << p << "%" << endl;
+  cout << "Parsing YUM source [" << p << "%]" << endl;
+//  cout << "\rParsing YUM source [" << p << "%]" << flush;
+  return true;
 }
 
 int main(int argc, char **argv)
@@ -46,12 +46,10 @@ int main(int argc, char **argv)
     open_catalog_timer.stop();
 
     MIL << "creating PrimaryFileParser" << endl;
-    parser::ParserProgress::Ptr progress;
-    progress.reset(new parser::ParserProgress(&progress_function));
     Measure parse_primary_timer("primary.xml.gz parsing");
 
-    parser::yum::YUMParser parser( catalog_id, store);
-    parser.start(argv[1], progress);
+    parser::yum::YUMParser parser( catalog_id, store, &progress_function);
+    parser.start(argv[1]);
 
     parse_primary_timer.stop();
 

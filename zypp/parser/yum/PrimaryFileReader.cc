@@ -14,6 +14,9 @@
 #include "zypp/TranslatedText.h"
 #include "zypp/ByteCount.h"
 
+#undef ZYPP_BASE_LOGGER_LOGGROUP
+#define ZYPP_BASE_LOGGER_LOGGROUP "parser"
+
 using namespace std;
 using namespace zypp::xml;
 
@@ -26,16 +29,17 @@ namespace zypp
 
 
   PrimaryFileReader::PrimaryFileReader(
-      const Pathname &primary_file,
-      ProcessPackage callback,
-      ParserProgress::Ptr progress)
+      const Pathname & primary_file,
+      const ProcessPackage & callback,
+      const ProgressData::ReceiverFnc & progress)
     :
       _callback(callback), _package(NULL),
-      _count(0), _total_packages(0),
+      _count(0),
       _tag(tag_NONE), _expect_rpm_entry(false),
-      _dtype(zypp::Dep::REQUIRES),
-      _progress(progress), _old_progress(0)
+      _dtype(zypp::Dep::REQUIRES)
   {
+    _ticks.sendTo(progress);
+
     Reader reader( primary_file );
     MIL << "Reading " << primary_file << endl;
     reader.foreachNode( bind( &PrimaryFileReader::consumeNode, this, _1 ) );
@@ -51,7 +55,10 @@ namespace zypp
     {
       if (reader_r->name() == "metadata")
       {
-        zypp::str::strtonum(reader_r->getAttribute("packages").asString(), _total_packages);
+        unsigned total_packages;
+        zypp::str::strtonum(reader_r->getAttribute("packages").asString(), total_packages);
+        _ticks.range(total_packages);
+        _ticks.toMin();
         return true;
       }
       if (reader_r->name() == "package")
@@ -162,17 +169,14 @@ namespace zypp
         if (_package && _callback)
           _callback(handoutPackage());
 
-        _count++;
+        _ticks.set(_count++);
 
-        // report progress
-        long int new_progress = (long int) ((_count/(double) _total_packages)*100);
-        if (new_progress - _old_progress >= 5)
-        {
-          _progress->progress(new_progress);
-          _old_progress = new_progress;
-        }
         _tag = tag_NONE;
         return true;
+      }
+      if (reader_r->name() == "metadata")
+      {
+        _ticks.toMax();
       }
     }
 

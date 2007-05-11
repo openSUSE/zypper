@@ -18,6 +18,10 @@
 
 #include "YUMParser.h"
 
+
+#undef ZYPP_BASE_LOGGER_LOGGROUP
+#define ZYPP_BASE_LOGGER_LOGGROUP "parser"
+
 using std::endl;
 
 namespace zypp
@@ -27,13 +31,26 @@ namespace zypp
     namespace yum
     {
 
+  // TODO make this through ZYppCallbacks.h 
+  bool progress_function(ProgressData::value_type p)
+  {
+    cout << "Parsing $name_would_come_in_handy [" << p << "%]" << endl;
+//    cout << "\rParsing $name_would_come_in_handy [" << p << "%]" << flush;
+    return true;
+  }
 
-  YUMParser::YUMParser(const zypp::data::RecordId &catalog_id, zypp::cache::CacheStore &consumer)
-    : _consumer(consumer), _catalog_id(catalog_id)
+  YUMParser::YUMParser(
+      const zypp::data::RecordId &catalog_id,
+      zypp::cache::CacheStore &consumer,
+      const ProgressData::ReceiverFnc & progress)
+    :
+      _consumer(consumer), _catalog_id(catalog_id)
   {
     ZYpp::Ptr z = getZYpp();
 //    _system_arch = z->architecture();
 
+    _ticks.name("YUMParser");
+    _ticks.sendTo(progress);
     MIL << "constructed" << endl;
   }
 
@@ -61,6 +78,8 @@ namespace zypp
       << endl;
     MIL << "checksum: " << package.checksum << endl;
     MIL << "summary: " << package.summary << endl;*/
+
+    return true;
   }
 
 
@@ -85,20 +104,28 @@ namespace zypp
       << patch.name << patch.edition << " "
       << patch.arch
       << endl;
+
+    return true;
   }
 
 
-  void YUMParser::start(const Pathname &cache_dir, ParserProgress::Ptr progress)
+  void YUMParser::start(const Pathname &cache_dir)
   {
     zypp::parser::yum::RepomdFileReader(
         cache_dir + "/repodata/repomd.xml",
         bind(&YUMParser::repomd_CB, this, _1, _2));
 
-    doJobs(cache_dir, progress);
+
+    _ticks.range(_jobs.size());
+    _ticks.toMin();
+
+    doJobs(cache_dir);
+
+    _ticks.toMax();
   }
 
 
-  void YUMParser::doJobs(const Pathname &cache_dir, ParserProgress::Ptr progress)
+  void YUMParser::doJobs(const Pathname &cache_dir)
   {
     for(list<YUMParserJob>::const_iterator it = _jobs.begin(); it != _jobs.end(); ++it)
     {
@@ -114,7 +141,7 @@ namespace zypp
           zypp::parser::yum::PrimaryFileReader(
             cache_dir + job.filename(),
             bind(&YUMParser::primary_CB, this, _1),
-            progress);
+            &progress_function);
           break;
         }
         case YUMResourceType::PATCHES_e:
@@ -122,6 +149,9 @@ namespace zypp
           zypp::source::yum::PatchesFileReader(
             cache_dir + job.filename(),
             bind(&YUMParser::patches_CB, this, _1, _2));
+          // reset progress reporter max value (number of jobs changed if
+          // there are patches to parse)
+          _ticks.range(_jobs.size());
           break;
         }
         case YUMResourceType::PATCH_e:
@@ -138,6 +168,8 @@ namespace zypp
               << job.filename() << endl;
         }
       }
+
+      _ticks.incr();
     }
   }
 

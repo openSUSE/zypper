@@ -13,12 +13,9 @@
 #include "zypp/base/Logger.h"
 #include "zypp2/cache/CacheStore.h"
 #include "zypp/data/ResolvableData.h"
-#include "zypp/parser/ParserProgress.h"
 #include "zypp/source/yum/YUMResourceType.h"
+#include "zypp/ProgressData.h"
 
-
-#undef ZYPP_BASE_LOGGER_LOGGROUP
-#define ZYPP_BASE_LOGGER_LOGGROUP "parser"
 
 using zypp::source::yum::YUMResourceType;
 
@@ -52,12 +49,14 @@ namespace zypp
   class YUMParser
   {
   public:
-    typedef function<bool( int )> Progress;
+    YUMParser(
+      const zypp::data::RecordId & catalog_id,
+      zypp::cache::CacheStore & consumer,
+      const ProgressData::ReceiverFnc & progress = ProgressData::ReceiverFnc()
+    );
 
-    YUMParser(const zypp::data::RecordId & catalog_id, zypp::cache::CacheStore & consumer);
-
-    void start(const zypp::Pathname & path, ParserProgress::Ptr progress);
-    void doJobs(const zypp::Pathname & path, ParserProgress::Ptr progress);
+    void start(const zypp::Pathname & path);
+    void doJobs(const zypp::Pathname & path);
 
     bool repomd_CB(const OnMediaLocation & loc, const YUMResourceType & dtype);
     bool primary_CB(const data::Package_Ptr & package_r); 
@@ -66,8 +65,15 @@ namespace zypp
 
   private:
     zypp::cache::CacheStore & _consumer;
+    
+    /** ID of the repository record in the DB (catalogs.id) */
     zypp::data::RecordId _catalog_id;
+
+    /** List of parser jobs read from repomd.xml and patches.xml files. */
     std::list<YUMParserJob> _jobs;
+
+    /** Progress reporting object. */
+    ProgressData _ticks;
   };
 
 
