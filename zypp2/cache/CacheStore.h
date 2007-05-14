@@ -226,8 +226,8 @@ namespace zypp
        * FIXME should it \throw if the resolvable does not exist?
        */
       void appendUnknownDependency( const data::RecordId &resolvable_id,
-                                          zypp::Dep deptype,
-                                          capability::CapabilityImpl::Ptr cap );
+                                    zypp::Dep deptype,
+                                    capability::CapabilityImpl::Ptr cap );
       
       /**
        * Returns the record id of a type
@@ -254,6 +254,47 @@ namespace zypp
       data::RecordId lookupOrAppendCatalog( const Url &url,
                                             const Pathname &path );
 
+      /**
+       * Append a translated string value to a resolvable
+       * \param resolvable_id Resovable Id, owner of the attribute
+       * \param text Translated text
+       */
+      void appendStringAttribute( const data::RecordId &resolvable_id,
+                                  const TranslatedText &text );
+      
+      /**
+       * Append a string value to a resolvable
+       * \param resolvable_id Resovable Id, owner of the attribute
+       * \param locale locale of the text language
+       * \param text text
+       */
+      void appendStringAttribute( const data::RecordId &resolvable_id,
+                                  const Locale &locale,
+                                  const std::string &text );
+      
+      /**
+       * Append a string value to a resolvable
+       * \param resolvable_id Resovable Id, owner of the attribute
+       * \param klass Type class i.e "Package" "lang" "kind"
+       * \param name Type name i.e : "summary" "none" "Script"
+       * \param value string value
+       */
+      void appendStringAttribute( const data::RecordId &resolvable_id,
+                                  const std::string &klass,
+                                  const std::string &name,
+                                  const std::string &value );
+      
+      /**
+       * Append a string value to a resolvable
+       * \param resolvable_id Resovable Id, owner of the attribute
+       * \param type_id Type id, \see lookupOrAppendType
+       * \param value string value
+       */
+      void appendStringAttribute( const data::RecordId &resolvable_id,
+                                  const data::RecordId &type_id,
+                                  const std::string &value );
+      
+      
        /**
        * Update a known catalog checksum and timestamp
        *
@@ -312,6 +353,11 @@ namespace zypp
        */
 //       data::RecordId appendDependencyEntry( const data::RecordId &,
 //                                             zypp::Dep, const Resolvable::Kind & );
+      
+      void appendStringAttribute( const data::RecordId &resolvable_id,
+                                  const data::RecordId &lang_id,
+                                  const data::RecordId &type_id,
+                                  const std::string &value );
 
     private:
       /** Implementation. */

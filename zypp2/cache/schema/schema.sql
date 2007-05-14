@@ -12,40 +12,24 @@ DROP VIEW IF EXISTS packages;
 DROP VIEW IF EXISTS messages;
 DROP TRIGGER IF EXISTS remove_resolvables;
 DROP TRIGGER IF EXISTS remove_patch_packages_baseversions;
+DROP TABLE IF EXISTS types;
+DROP TABLE IF EXISTS text_attributes_set;
+DROP TABLE IF EXISTS text_attributes;
 DROP TABLE IF EXISTS split_capabilities;
 DROP TABLE IF EXISTS script_ttext_attributes;
-DROP TABLE IF EXISTS script_text_attributes;
-DROP TABLE IF EXISTS script_script_ttext_attributes;
-DROP TABLE IF EXISTS script_script_text_attributes;
 DROP TABLE IF EXISTS script_details;
-DROP TABLE IF EXISTS resolvable_ttext_attributes;
-DROP TABLE IF EXISTS resolvable_text_attributes;
 DROP TABLE IF EXISTS resolvables_catalogs;
 DROP TABLE IF EXISTS resolvables;
-DROP TABLE IF EXISTS resolvable_resolvable_ttext_attributes;
-DROP TABLE IF EXISTS resolvable_resolvable_text_attributes;
-DROP TABLE IF EXISTS product_ttext_attributes;
-DROP TABLE IF EXISTS product_text_attributes;
-DROP TABLE IF EXISTS product_product_ttext_attributes;
-DROP TABLE IF EXISTS product_product_text_attributes;
 DROP TABLE IF EXISTS product_details;
 DROP TABLE IF EXISTS pattern_details;
-DROP TABLE IF EXISTS patch_text_attributes;
-DROP TABLE IF EXISTS patch_patch_text_attributes;
 DROP TABLE IF EXISTS patch_packages_baseversions;
 DROP TABLE IF EXISTS patch_packages;
 DROP TABLE IF EXISTS patch_details;
-DROP TABLE IF EXISTS package_ttext_attributes;
-DROP TABLE IF EXISTS package_text_attributes;
-DROP TABLE IF EXISTS package_package_ttext_attributes;
-DROP TABLE IF EXISTS package_package_text_attributes;
 DROP TABLE IF EXISTS package_details;
 DROP TABLE IF EXISTS other_capabilities;
 DROP TABLE IF EXISTS names;
 DROP TABLE IF EXISTS named_capabilities;
 DROP TABLE IF EXISTS modalias_capabilities;
-DROP TABLE IF EXISTS message_ttext_attributes;
-DROP TABLE IF EXISTS message_message_ttext_attributes;
 DROP TABLE IF EXISTS message_details;
 DROP TABLE IF EXISTS locks;
 DROP TABLE IF EXISTS hal_capabilities;
@@ -124,6 +108,15 @@ CREATE TABLE files (
 -- Resolvables table
 ------------------------------------------------
 
+-- Resolvables translated strings
+CREATE TABLE text_attributes (
+    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL
+  , weak_resolvable_id INTEGER NOT NULL
+  , lang_id INTEGER REFERENCES types(id)
+  , attr_id INTEGER REFERENCES types(id)
+  , text TEXT
+);
+
 CREATE TABLE resolvables (
     id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL
   , name TEXT
@@ -138,14 +131,7 @@ CREATE TABLE resolvables (
   , install_only INTEGER
   , build_time INTEGER
   , install_time INTEGER
-);
-
--- Resolvables translated strings
-CREATE TABLE text_attributes (
-    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL
-  , lang INTEGER REFERENCES types(id)
-  , attr INTEGER REFERENCES types(id)
-  , text TEXT
+  , shared_id INTEGER DEFAULT NULL
 );
 
 ------------------------------------------------

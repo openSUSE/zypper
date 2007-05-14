@@ -62,6 +62,10 @@ namespace zypp
         { return _store; }
         
         virtual void createResolvables();
+      public:
+        
+        
+        
       private:
         /** Ctor substitute.
          * Actually get the metadata.
