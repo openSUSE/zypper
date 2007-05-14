@@ -257,20 +257,28 @@ namespace zypp
       /**
        * Append a translated string value to a resolvable
        * \param resolvable_id Resovable Id, owner of the attribute
+       * \param klass Type class i.e "Package" "lang" "kind"
+       * \param name Type name i.e : "summary" "none" "Script"
        * \param text Translated text
        */
-      void appendStringAttribute( const data::RecordId &resolvable_id,
-                                  const TranslatedText &text );
+      void appendTranslatedStringAttribute( const data::RecordId &resolvable_id,
+                                            const std::string &klass,
+                                            const std::string &name,
+                                            const TranslatedText &text );
       
       /**
        * Append a string value to a resolvable
        * \param resolvable_id Resovable Id, owner of the attribute
        * \param locale locale of the text language
+       * \param klass Type class i.e "Package" "lang" "kind"
+       * \param name Type name i.e : "summary" "none" "Script"
        * \param text text
        */
-      void appendStringAttribute( const data::RecordId &resolvable_id,
-                                  const Locale &locale,
-                                  const std::string &text );
+      void appendStringAttributeTranslation( const data::RecordId &resolvable_id,
+                                             const Locale &locale,
+                                             const std::string &klass,
+                                             const std::string &name,
+                                             const std::string &text );
       
       /**
        * Append a string value to a resolvable

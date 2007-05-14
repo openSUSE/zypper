@@ -527,23 +527,28 @@ RecordId CacheStore::lookupOrAppendFileName( const string &name )
   return static_cast<RecordId>(id);
 }
 
-void CacheStore::appendStringAttribute( const data::RecordId &resolvable_id,
-                                        const TranslatedText &text )
+void CacheStore::appendTranslatedStringAttribute( const data::RecordId &resolvable_id,
+                                                  const std::string &klass,
+                                                  const std::string &name,
+                                                  const TranslatedText &text )
 {
   set<Locale> locales = text.locales();
   for ( set<Locale>::const_iterator it = locales.begin(); it != locales.end(); ++it )
   {
-    appendStringAttribute( resolvable_id, *it, text.text(*it) );
+    appendStringAttributeTranslation( resolvable_id, *it, klass, name, text.text(*it) );
   }
 }
 
 
-void CacheStore::appendStringAttribute( const data::RecordId &resolvable_id,
-                                        const Locale &locale,
-                                        const std::string &text )
+void CacheStore::appendStringAttributeTranslation( const data::RecordId &resolvable_id,
+                                                   const Locale &locale,
+                                                   const std::string &klass,
+                                                   const std::string &name,
+                                                   const std::string &text )
 {
   RecordId lang_id = lookupOrAppendType("lang", locale.code() );
-  appendStringAttribute( resolvable_id, lang_id, text );
+  RecordId type_id = lookupOrAppendType( klass, name );
+  appendStringAttribute( resolvable_id, lang_id, type_id, text );
 }
 
 void CacheStore::appendStringAttribute( const data::RecordId &resolvable_id,

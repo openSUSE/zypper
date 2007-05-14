@@ -11,8 +11,8 @@ namespace zypp { namespace cache {
 
 struct ResolvableQuery::Impl
 {
-  Impl( const Pathname &dbdir, ProcessResolvable fnc )
-  : _dbdir(dbdir), _fnc(fnc)
+  Impl( const Pathname &dbdir)
+  : _dbdir(dbdir)
   {
     _fields = "id, name, version, release, epoch, arch, kind, insnotify, delnotify, license_to_confirm, vendor, installed_size, archive_size, install_only, build_time, install_time, catalog_id";
   }
@@ -32,7 +32,8 @@ struct ResolvableQuery::Impl
     return ptr;
   }
   
-  void query( const data::RecordId &id )
+  void query( const data::RecordId &id,
+                  ProcessResolvable fnc )
   {
     sqlite3_connection con((_dbdir + "zypp.db").asString().c_str());
     //con.executenonquery("PRAGMA cache_size=8000;");
@@ -42,12 +43,13 @@ struct ResolvableQuery::Impl
     sqlite3_reader reader = cmd.executereader();
     while(reader.read())
     {
-      _fnc( id, fromRow(reader) );
+      fnc( id, fromRow(reader) );
     }
     con.executenonquery("COMMIT;");
   }
         
-  void query( const std::string &s )
+  void query( const std::string &s,
+              ProcessResolvable fnc  )
   {
     sqlite3_connection con((_dbdir + "zypp.db").asString().c_str());
     //con.executenonquery("PRAGMA cache_size=8000;");
@@ -57,29 +59,28 @@ struct ResolvableQuery::Impl
     sqlite3_reader reader = cmd.executereader();
     while(reader.read())
     {
-      _fnc( reader.getint64(0), fromRow(reader) );
+      fnc( reader.getint64(0), fromRow(reader) );
     }
     con.executenonquery("COMMIT;");
   }
   
   Pathname _dbdir;
-  ProcessResolvable _fnc;
   string _fields;
 };
   
-ResolvableQuery::ResolvableQuery( const Pathname &dbdir, ProcessResolvable fnc )
-  : _pimpl(new Impl(dbdir, fnc))
+ResolvableQuery::ResolvableQuery( const Pathname &dbdir)
+  : _pimpl(new Impl(dbdir))
 {
 }
       
-void ResolvableQuery::query( const data::RecordId &id )
+void ResolvableQuery::query( const data::RecordId &id, ProcessResolvable fnc  )
 {
-  _pimpl->query(id);
+  _pimpl->query(id, fnc);
 }
       
-void ResolvableQuery::query( const std::string &s )
+void ResolvableQuery::query( const std::string &s, ProcessResolvable fnc  )
 {
-  _pimpl->query(s);
+  _pimpl->query(s, fnc);
 }
   
 

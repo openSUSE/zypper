@@ -15,20 +15,7 @@ namespace zypp
   { /////////////////////////////////////////////////////////////////
  
    /**
-    * Allows to iterate around the capabilities in
-    * the cache.
-    * Use \ref CacheQuery to create this query.
-    *
-    * \code
-    * CacheQuery query(dbdir);
-    * CapabilityQuery capquery = query.createCapabilityQuery( zypp::Dep::REQUIRES, 1 );
-    * cout << capquery.value() << endl;
-    * while ( capquery.read() )
-    * {
-    *   // value is a CapablityImpl::Ptr
-    *   cout << capquery.value() << endl;
-    * }
-    * \endcode
+    * 
     */
     struct ResolvableQuery
     {
@@ -41,18 +28,29 @@ namespace zypp
       typedef function<bool( const data::RecordId &, 
                              data::ResObject_Ptr )> ProcessResolvable;
       
-      ResolvableQuery( const Pathname &dbdir,
-                       ProcessResolvable fnc );
+      ResolvableQuery( const Pathname &dbdir );
       
       /**
       * Query by record id
+      * \param record_id Resolvable id to query
+      * \param fnc callback to send the data to. (Will be called once or none)
       */
-      void query( const data::RecordId & );
+      void query( const data::RecordId &record_id,
+                  ProcessResolvable fnc  );
       
       /**
       * Query by matching text
+      * \param text text to match
+      * \param fnc callback to send the data to. (Will be called once per result)
       */
-      void query( const std::string & );
+      void query( const std::string &text,
+                  ProcessResolvable fnc  );
+      
+      /*void queryAttribute( const std::string &text,
+                           const std::string &klass
+                           const std::string 
+                           ProcessResolvable fnc  );
+      */
     private:
       /** Implementation. */
       class Impl;
