@@ -11,10 +11,11 @@
 #define ZYPP_PARSER_YUM_PRIMARYFILEPARSER_H
 
 #include "zypp/base/Function.h"
-#include "zypp/base/Logger.h"
 #include "zypp/parser/xml/Reader.h"
+#include "zypp/parser/yum/FileReaderBase.h"
 #include "zypp/data/ResolvableData.h"
 #include "zypp/ProgressData.h"
+
 
 namespace zypp
 {
@@ -37,23 +38,13 @@ namespace zypp
    *                          bind(&SomeClass::callbackfunc, &object, _1));
    * \endcode
    */
-  class PrimaryFileReader
+  class PrimaryFileReader : public FileReaderBase
   {
   public:
     /**
      * Callback definition.
      */
     typedef function<bool(const data::Package_Ptr &)> ProcessPackage;
-
-    /**
-     * Enumeration of some primary.xml tags.
-     */
-    enum Tag
-    {
-      tag_NONE,
-      tag_package,
-      tag_format
-    };
 
     /**
      * Constructor
@@ -64,21 +55,16 @@ namespace zypp
      * \see PrimaryFileReader::ProcessPackage
      */
     PrimaryFileReader(
-      const Pathname &primary_file,
+      const Pathname & primary_file,
       const ProcessPackage & callback,
       const ProgressData::ReceiverFnc & progress = ProgressData::ReceiverFnc());
 
     /**
      * Callback provided to the XML parser.
      */
-    bool consumeNode(zypp::xml::Reader & reader_r);
+    bool consumeNode(xml::Reader & reader_r);
 
   private:
-    /**
-     * Function for processing all <code>format</code> tag subtree nodes.
-     */
-    bool consumeFormatChildNodes(zypp::xml::Reader & reader_r);
-
     /**
      * Creates a new Package_Ptr swaps its contents with \ref _package and
      * returns it.
@@ -95,25 +81,6 @@ namespace zypp
      * \ref zypp::data::Package object for storing the package metada
      */
     data::Package_Ptr _package;
-
-    /**
-     * Number of packages read so far.
-     */
-    unsigned _count;
-
-    /** Used to remember primary.xml tag beeing currently processed. */
-    Tag _tag;
-
-    /**
-     * Used to remember whether we are expecting an rpm:entry tag
-     * e.g. for rpm:requires
-     */
-    bool _expect_rpm_entry;
-
-    /**
-     * Type of dependecy beeing processed.
-     */
-    Dep _dtype;
 
     /**
      * Progress reporting object.

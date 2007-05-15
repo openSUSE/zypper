@@ -20,7 +20,7 @@ using zypp::source::yum::YUMResourceType;
 namespace zypp { namespace parser { namespace yum {
 
 RepomdFileReader::RepomdFileReader( const Pathname &repomd_file, ProcessResource callback )
-    : _tag(tag_NONE), _callback(callback), _type(YUMResourceType::NONE_e)
+    : _tag(tag_NONE), _type(YUMResourceType::NONE_e), _callback(callback) 
 {
   Reader reader( repomd_file );
   MIL << "Reading " << repomd_file << endl;

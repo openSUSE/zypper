@@ -191,6 +191,7 @@ namespace data
   {
     public:
       Patch()
+        : rebootNeeded(false), affectsPkgManager(false)
       {};
 
       /** Patch ID */
@@ -199,16 +200,16 @@ namespace data
       Date timestamp;
       /** Patch category (recommended, security,...) */
       std::string category;
-
+  
       // Flags:
       /** Does the system need to reboot to finish the update process? */
       DefaultIntegral<bool,false> rebootNeeded;
       /** Does the patch affect the package manager itself? */
       DefaultIntegral<bool,false> affectsPkgManager;
-
+  
       /** The list of all atoms building the patch.
        * \todo See whether we need this.
-      */
+       */
       std::set<RecordId> atomList;
   };
 

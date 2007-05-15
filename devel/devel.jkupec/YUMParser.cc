@@ -90,13 +90,13 @@ namespace zypp
   }
 
 
-  bool YUMParser::patch_CB(const zypp::data::Patch & patch)
+  bool YUMParser::patch_CB(const data::Patch_Ptr & patch)
   {
     _consumer.consumePatch( _catalog_id, patch );
-    
+
     MIL << "got patch "
-      << patch.name << patch.edition << " "
-      << patch.arch
+      << patch->name << patch->edition << " "
+      << patch->arch
       << endl;
 
     return true;

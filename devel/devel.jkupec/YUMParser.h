@@ -61,7 +61,7 @@ namespace zypp
     bool repomd_CB(const OnMediaLocation & loc, const YUMResourceType & dtype);
     bool primary_CB(const data::Package_Ptr & package_r); 
     bool patches_CB(const OnMediaLocation &loc, const std::string & patch_id);
-    bool patch_CB(const zypp::data::Patch & patch);
+    bool patch_CB(const data::Patch_Ptr & patch);
 
   private:
     zypp::cache::CacheStore & _consumer;

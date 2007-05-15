@@ -11,12 +11,9 @@
 #define PATCHFILEREADER_H_
 
 #include "zypp/base/Function.h"
-#include "zypp/base/Logger.h"
 #include "zypp/parser/xml/Reader.h"
+#include "zypp/parser/yum/FileReaderBase.h"
 #include "zypp/data/ResolvableData.h"
-
-#undef ZYPP_BASE_LOGGER_LOGGROUP
-#define ZYPP_BASE_LOGGER_LOGGROUP "parser"
 
 namespace zypp
 {
@@ -29,14 +26,14 @@ namespace zypp
   /**
    * 
    */
-  class PatchFileReader
+  class PatchFileReader : FileReaderBase
   {
   public:
 
     /**
      * Callback definition.
      */
-    typedef function<bool(const zypp::data::Patch &)> ProcessPatch;
+    typedef function<bool(const data::Patch_Ptr &)> ProcessPatch;
 
     /**
      * 
@@ -46,7 +43,12 @@ namespace zypp
     /**
      * Callback provided to the XML parser.
      */
-    bool consumeNode(zypp::xml::Reader & reader_r);
+    bool consumeNode(xml::Reader & reader_r);
+
+
+  private:
+    data::Patch_Ptr handoutPatch();
+
 
   private:
     /**
@@ -58,19 +60,12 @@ namespace zypp
      * Pointer to the \ref zypp::data::Patch object for storing the patch
      * metada (except of depencencies).
      */
-    zypp::data::Patch *_patch;
-
-    /**
-     * A map of lists of strings for storing dependencies.
-     * 
-     * \see zypp::data::Dependencies
-     */
-    zypp::data::Dependencies _deps;
+    data::Patch_Ptr _patch;
   };
 
 
-    }
-  }
-}
+    } // ns yum
+  } // ns parser
+} // ns zypp
 
 #endif /*PATCHFILEREADER_H_*/
