@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue May 15 14:03:34 CEST 2007 - ma@suse.de
+
+- Fix excess calls to releaseFile. (#274357)
+- revision 5545
+
+-------------------------------------------------------------------
 Wed May  9 18:44:20 CEST 2007 - dmacvicar@suse.de
 
 - Fix importing keys into rpm. (#270125)
