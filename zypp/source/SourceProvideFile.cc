@@ -51,6 +51,26 @@ namespace zypp
         function<bool ( int )> _redirect;
       };
 
+      /** ManagedFile Dispose functor.
+       * The Pathname argument is ignored, as Source_Ref::releaseFile expects the filename
+       * relative to the medias root (i.e. same args as to provideFile).
+      */
+      struct SourceReleaseFile
+      {
+	SourceReleaseFile( Source_Ref source_r, const Pathname & location_r, unsigned mediaNr_r )
+	  : _source( source_r ), _location( location_r ), _medianr( mediaNr_r )
+	{}
+
+	void operator()( const Pathname & /*UNUSED*/ )
+	{
+	  _source.releaseFile( _location, _medianr );
+	}
+
+	Source_Ref _source;
+	Pathname   _location;
+	unsigned   _medianr;
+      };
+
       /////////////////////////////////////////////////////////////////
     } // namespace
     ///////////////////////////////////////////////////////////////////
@@ -70,7 +90,7 @@ namespace zypp
 
 
       ManagedFile ret( source_r.provideFile( loc_r.filename(), loc_r.medianr() ),
-                       bind( &Source_Ref::releaseFile, source_r, _1, loc_r.medianr() ) );
+		       SourceReleaseFile( source_r, loc_r.filename(), loc_r.medianr() ) );
 
       if ( loc_r.checksum().empty() )
         {

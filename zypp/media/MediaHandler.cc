@@ -394,6 +394,7 @@ MediaHandler::createAttachPoint(const Pathname &attach_root) const
   //
   // FIXME: use mkdtemp?
   //
+#warning Use class TmpDir from TmpPath.h
   Pathname abase( attach_root + "AP_" );
   //        ma and sh need more than 42 for debugging :-)
   //        since the readonly fs are handled now, ...

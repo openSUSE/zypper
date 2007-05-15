@@ -10,6 +10,7 @@
 #include <zypp/KeyRing.h>
 #include <zypp/Date.h>
 #include <zypp/SourceManager.h>
+#include <zypp/ManagedFile.h>
 
 using namespace std;
 using namespace zypp;
@@ -18,6 +19,27 @@ static bool verbose = false;
 static bool debug   = false;
 
 #define LOG (debug ? USR : cout)
+
+#include <zypp/ManagedFile.h>
+#include "zypp/source/PackageProvider.h"
+
+    static void sourceProvidePackage( const ResObject::Ptr & pi )
+    {
+      // Redirect PackageProvider queries for installed editions
+      // (in case of patch/delta rpm processing) to rpmDb.
+      source::PackageProviderPolicy packageProviderPolicy;
+      //packageProviderPolicy.queryInstalledCB( QueryInstalledEditionHelper() );
+
+      Package::constPtr p = asKind<Package>(pi);
+      if ( p )
+      {
+	source::PackageProvider pkgProvider( p, packageProviderPolicy );
+	SEC << "++++" << endl;
+	ManagedFile r( pkgProvider.providePackage() );
+	SEC << "---" << endl;
+      }
+      SEC << "-" << endl;
+    }
 
 struct KeyRingReceiver : public callback::ReceiveReport<KeyRingReport>
 {
@@ -159,6 +181,11 @@ int main( int argc, char * argv[] )
         }
       LOG << for_each( src.resolvables().begin(), src.resolvables().end(),
                        ResStoreStats() ) << endl;
+
+      for_each( src.resolvables().begin(),
+		src.resolvables().end(),
+		sourceProvidePackage );
+
       if ( verbose )
         {
           dumpRange( LOG, src.resolvables().begin(), src.resolvables().end() ) << endl;
