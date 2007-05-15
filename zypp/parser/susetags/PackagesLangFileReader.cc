@@ -115,7 +115,7 @@ namespace zypp
 	  /** Consume +Eul:. */
 	  void consumeEul( const MultiTagPtr & tag_r )
 	  {
-	    _data->license_to_confirm.setText( tag_r->value, _locale );
+	    _data->licenseToConfirm.setText( tag_r->value, _locale );
 	  }
 
 	  /** Consume +Ins:. */

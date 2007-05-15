@@ -93,7 +93,7 @@ namespace zypp
 
       if (reader_r->name() == "checksum")
       {
-        _package->checksum = CheckSum(reader_r->getAttribute("type").asString(),
+        _package->repositoryLocation.fileChecksum = CheckSum(reader_r->getAttribute("type").asString(),
                                      reader_r.nodeText().asString());
         // ignoring pkgid attribute
         return true;
@@ -131,7 +131,7 @@ namespace zypp
 
       if (reader_r->name() == "time")
       {
-        _package->build_time = reader_r->getAttribute("build").asString();
+        _package->buildTime = reader_r->getAttribute("build").asString();
         // ignoring reader_r->getAttribute("file").asString(); (rpm file timestamp)
         return true;
       }
@@ -142,17 +142,17 @@ namespace zypp
         // reader_r->getAttribute("archive").asString();
 
         // installed size
-        _package->size = str::strtonum<ByteCount::SizeType>( reader_r->getAttribute("installed").asString() );
+        _package->installedSize = str::strtonum<ByteCount::SizeType>( reader_r->getAttribute("installed").asString() );
 
         // rpm package size
-        _package->archive_size = str::strtonum<ByteCount::SizeType>( reader_r->getAttribute("package").asString() );
+        _package->repositoryLocation.fileSize = str::strtonum<ByteCount::SizeType>( reader_r->getAttribute("package").asString() );
 
         return true;
       }
 
       if (reader_r->name() == "location")
       {
-        _package->location = reader_r->getAttribute("href").asString();
+        _package->repositoryLocation.filePath = reader_r->getAttribute("href").asString();
         return true;
       }
 

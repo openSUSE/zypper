@@ -81,7 +81,7 @@ namespace zypp
 	  /** Consume =Vis:. */
 	  void consumeVis( const SingleTagPtr & tag_r )
 	  {
-	    _data->user_visible = ( tag_r->value == "true" );
+	    _data->userVisible = ( tag_r->value == "true" );
 	  }
 
 	  /** Consume =Cat:. */

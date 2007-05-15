@@ -94,7 +94,7 @@ namespace zypp
      * helper to debug regular expressions matches
      */
     std::ostream & dumpRegexpResult( const boost::smatch &what, std::ostream & str );
-    
+
     ///////////////////////////////////////////////////////////////////
     /** \name String representation of number.
      *
@@ -180,7 +180,7 @@ namespace zypp
      * \endcode
     */
     template<typename _It>
-      inline _It strtonum( const std::string & str );
+      _It strtonum( const std::string & str );
 
     template<>
       inline short              strtonum( const std::string & str ) { return ::strtol  ( str.c_str(), NULL, 0 ); }
@@ -329,7 +329,7 @@ namespace zypp
     inline std::string stripPrefix( const std::string & str_r, const std::string & prefix_r )
     { return( hasPrefix( str_r, prefix_r ) ? str_r.substr( prefix_r.size() ) : str_r ); }
     //@}
- 
+
     /////////////////////////////////////////////////////////////////
   } // namespace str
   ///////////////////////////////////////////////////////////////////

@@ -6,10 +6,11 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-
-
-#ifndef ResolvableData_h
-#define ResolvableData_h
+/** \file zypp/data/ResolvableData.h
+ *
+*/
+#ifndef ZYPP_DATA_RESOLVABLEDATA_H
+#define ZYPP_DATA_RESOLVABLEDATA_H
 
 #include <iosfwd>
 #include <list>
@@ -18,6 +19,7 @@
 #include "zypp/base/ReferenceCounted.h"
 #include "zypp/base/NonCopyable.h"
 
+#include "zypp/data/RecordId.h"
 #include "zypp/capability/CapabilityImpl.h"
 #include "zypp/Pathname.h"
 #include "zypp/NVR.h"
@@ -25,6 +27,7 @@
 #include "zypp/ByteCount.h"
 #include "zypp/Arch.h"
 #include "zypp/CheckSum.h"
+#include "zypp/Changelog.h"
 #include "zypp/Url.h"
 #include "zypp/Date.h"
 #include "zypp/TranslatedText.h"
@@ -33,24 +36,51 @@ namespace zypp
 {
 namespace data
 {
-
+  /** ::data dependencies are CapabilityImpl. */
   typedef std::set<capability::CapabilityImpl::Ptr> DependencyList;
-  typedef std::map<zypp::Dep, DependencyList> Dependencies;
+  typedef std::map<zypp::Dep, DependencyList>       Dependencies;
+
+  typedef DefaultIntegral<unsigned,0u>              MediaNr;
+
+  /** Data to retrieve a file from some media. */
+  struct Location
+  {
+    Location()
+      : fileSize( -1 ), gzSize( -1 )
+    {}
+
+    /** Media number (0==no media access required). */
+    MediaNr     mediaNr;
+    /** Path on the media. */
+    Pathname    filePath;
+    /** The uncompressed files size. */
+    ByteCount   fileSize;
+    /** The uncompressed files checksum. */
+    CheckSum    fileChecksum;
+    /** The compressed (gz) files size. */
+    ByteCount   gzSize;
+    /** The compressed (gz) files checksum. */
+    CheckSum    gzChecksum;
+  };
 
   ///////////////////////////////////////////////////////////////////
 
   DEFINE_PTR_TYPE(Resolvable);
 
+  /** Mandatory resolvable data. */
   class Resolvable : public base::ReferenceCounted, private base::NonCopyable
   {
     public:
       Resolvable()
       {};
 
+      /** Name */
       std::string name;
+      /** Edition */
       Edition edition;
+      /** Architecture */
       Arch arch;
-
+      /** Dependencies */
       Dependencies deps;
   };
 
@@ -58,35 +88,43 @@ namespace data
 
   DEFINE_PTR_TYPE(ResObject);
 
+  /** Common resolvable data. */
   class ResObject : public Resolvable
   {
     public:
       ResObject()
-        : source_media_nr(1), install_only(false)
       {}
 
-      TranslatedText summary;
-      TranslatedText description;
+      /** Share some data with another resolvable.*/
+      RecordId shareDataWith;
 
+      // Common attributes:
+      /** Vendor */
+      std::string vendor;
+      /** Installed size (UI hint). */
+      ByteCount installedSize;
+      /** Bildtime. */
+      Date buildTime;
+
+      // Flags:
+      /** 'rpm -i' mode. */
+      DefaultIntegral<bool,false> installOnly;
+
+      // Translated texts:
+      /** One line summary. */
+      TranslatedText summary;
+      /** Multiline description. */
+      TranslatedText description;
+      /** License to confirm. */
+      TranslatedText licenseToConfirm;
+      /** UI notification text if selected to install. */
       TranslatedText insnotify;
+      /** UI notification text if selected to delete. */
       TranslatedText delnotify;
 
-      TranslatedText license_to_confirm;
-      std::string vendor;
-
-      /** Installed size. \see zypp::ResObject::size() */
-      ByteCount size;
-      /** RPM package size. \see zypp::ResObject::archive_size() */
-      ByteCount archive_size;
-
-      std::string source;
-
-      int source_media_nr;
-
-      bool install_only;
-
-      Date build_time;
-      Date install_time;
+      // Repository related:
+      /** Repository providing this resolvable. */
+      RecordId  repository;
 
     protected:
       /** Overload to realize std::ostream & operator\<\<. */
@@ -95,115 +133,115 @@ namespace data
 
   ///////////////////////////////////////////////////////////////////
 
-  DEFINE_PTR_TYPE(AtomBase);
+  DEFINE_PTR_TYPE(Atom);
 
-  class AtomBase : public ResObject
+  /* Data Object for Atom resolvable. */
+  class Atom : public ResObject
   {
     public:
-      enum AtomType { TypePackage, TypeScript, TypeMessage };
-      virtual AtomType atomType() = 0;
+      Atom()
+      {};
   };
 
   ///////////////////////////////////////////////////////////////////
 
   DEFINE_PTR_TYPE(Script);
 
-  class Script : public AtomBase
+  /* Data Object for Script resolvable. */
+  class Script : public ResObject
   {
     public:
-      Script() {};
-      virtual AtomType atomType() { return TypeScript; };
-      std::string do_script;
-      std::string undo_script;
-      std::string do_location;
-      std::string undo_location;
-      std::string do_media;
-      std::string undo_media;
-      std::string do_checksum_type;
-      std::string do_checksum;
-      std::string undo_checksum_type;
-      std::string undo_checksum;
+      Script()
+      {};
+
+      /** Inlined doScript. */
+      std::string doScript;
+      /** Location of doScript on the repositories media. */
+      Location doScriptLocation;
+
+      /** Inlined undoScript. */
+      std::string undoScript;
+      /** Location of undoScript on the repositories media. */
+      Location undoScriptLocation;
   };
 
   ///////////////////////////////////////////////////////////////////
 
   DEFINE_PTR_TYPE(Message);
 
-  class Message : public AtomBase
+  /* Data Object for Message resolvable. */
+  class Message : public ResObject
   {
     public:
-      Message() {};
-      virtual AtomType atomType() { return TypeMessage; };
+      Message()
+      {};
+
+      /** Inlined Text. */
       TranslatedText text;
-  };
-
-  ///////////////////////////////////////////////////////////////////
-
-  DEFINE_PTR_TYPE(Selection);
-
-  class Selection : public ResObject
-  {
-    public:
-
-      Selection() {};
-      std::string groupId;
-      TranslatedText name;
-      std::string default_;
-      std::string user_visible;
-      TranslatedText description;
-      //std::list<MetaPkg> grouplist;
-      //std::list<PackageReq> packageList;
+      /** Location od textfile on the repositories media. */
+      //Location  repositoryLoaction;
   };
 
   ///////////////////////////////////////////////////////////////////
 
   DEFINE_PTR_TYPE(Patch);
 
+  /* Data Object for Patch resolvable. */
   class Patch : public ResObject
   {
     public:
-      Patch() {};
+      Patch()
+      {};
 
-    /** Patch ID */
-    std::string id;
-    /** Patch time stamp */
-    Date timestamp;
-    /** Patch category (recommended, security,...) */
-    std::string category;
-    /** Does the system need to reboot to finish the update process? */
-    bool reboot_needed;
-    /** Does the patch affect the package manager itself? */
-    bool affects_pkg_manager;
-    /** The list of all atoms building the patch */
-    //AtomList atoms;
-    /** Is the patch installation interactive? (does it need user input?) */
-    bool interactive;
+      /** Patch ID */
+      std::string id;
+      /** Patch time stamp */
+      Date timestamp;
+      /** Patch category (recommended, security,...) */
+      std::string category;
+
+      // Flags:
+      /** Does the system need to reboot to finish the update process? */
+      DefaultIntegral<bool,false> rebootNeeded;
+      /** Does the patch affect the package manager itself? */
+      DefaultIntegral<bool,false> affectsPkgManager;
+
+      /** The list of all atoms building the patch.
+       * \todo See whether we need this.
+      */
+      std::set<RecordId> atomList;
   };
 
   ///////////////////////////////////////////////////////////////////
 
   DEFINE_PTR_TYPE(Pattern);
 
-  /*
-   * Data Object for Pattern
-   * resolvable
-   */
+  /* Data Object for Pattern resolvable. */
   class Pattern : public ResObject
   {
     public:
-
       Pattern()
-        : is_default(false), user_visible(true)
-      {};
+      {}
 
-      bool is_default;
-      bool user_visible;
+      // Flags
+      /** */
+      DefaultIntegral<bool,false> isDefault;
+      /** Visible or hidden at the UI. */
+      DefaultIntegral<bool,false> userVisible;
+
+      /** Category */
       TranslatedText category;
+
+      /** Icon path. */
       std::string icon;
+      /** UI order string */
       std::string order;
+      /** ? */
       std::string script;
 
+      /** Included patterns. */
       DependencyList includes;
+      /** Extended patterns. */
       DependencyList extends;
   };
 
@@ -211,23 +249,36 @@ namespace data
 
   DEFINE_PTR_TYPE(Product);
 
-  /*
-   * Data Object for Product
-   * resolvable
-   */
+  /* Data Object for Product resolvable. */
   class Product : public ResObject
   {
     public:
-      Product() {};
+      Product()
+      {};
 
-      std::string type;
-      std::string vendor;
-      std::string name;
-      std::string distribution_name;
-      Edition distribution_edition;
-      TranslatedText short_name;
-        // those are suse specific tags
-      std::string releasenotesurl;
+      /** Abbreviation like \c SLES10 */
+      TranslatedText shortName;
+      /** More verbose Name like <tt>Suse Linux Enterprise Server 10</tt>*/
+      TranslatedText longName;
+
+      /** The product flags.
+       * \todo What is it?
+      */
+      std::list<std::string> flags;
+
+      /** Releasenotes url. */
+      Url releasenotesUrl;
+      /** Update repositories for the product. */
+      std::list<Url> updateUrls;
+      /** Additional software for the product.  */
+      std::list<Url> extraUrls;
+      /** Optional software for the product. */
+      std::list<Url> optionalUrls;
+
+      /** Vendor specific distribution id. */
+      std::string distributionName;
+      /** Vendor specific distribution version. */
+      Edition distributionEdition;
   };
 
   ///////////////////////////////////////////////////////////////////
@@ -245,33 +296,41 @@ namespace data
     public:
       enum PackageType { BIN, SRC };
       virtual PackageType packageType() const = 0;
+
     public:
-      std::string type;
-      CheckSum checksum;
-      // changlelog?
-      std::string buildhost;
-      std::string distribution;
-      std::string license;
-      std::string packager;
+      /** Location on the repositories media. */
+      Location repositoryLocation;
+
+      /** Rpm group.*/
       std::string group;
-      /**
-       * Upstream home page URL.
-       * \see zypp::Package::url();
-       */
-      std::string url;
-      std::string os;
-
-      std::string prein;
-      std::string postin;
-      std::string preun;
-      std::string postun;
-
-      ByteCount source_size;
-
-      std::list<std::string> authors;
+      /** PackageDb keywors (tags). */
       std::list<std::string> keywords;
 
-      Pathname location;
+      /** Changelog. */
+      Changelog changelog;
+      /** Author list. */
+      std::list<std::string> authors;
+
+
+      /** Buildhost. */
+      std::string buildhost;
+      /** Distribution. */
+      std::string distribution;
+      /** Licensetype. Not the text you have to confirm. */
+      std::string license;
+      /** Packager. */
+      std::string packager;
+      /** Upstream home page URL.*/
+      std::string url;
+
+      /** Pre install script. */
+      std::string prein;
+      /** Post install script. */
+      std::string postin;
+      /** Pre uninstall script. */
+      std::string preun;
+      /** Post uninstall script. */
+      std::string postun;
   };
 
   DEFINE_PTR_TYPE(Package);
@@ -283,7 +342,7 @@ namespace data
     virtual PackageType packageType() const { return BIN; }
 
     /** NVR of the corresponding SrcPackage. */
-    shared_ptr<NVR> srcPackageIdent;
+    NVR srcPackageIdent;
   };
 
   DEFINE_PTR_TYPE(SrcPackage);
@@ -296,38 +355,6 @@ namespace data
   };
   ///////////////////////////////////////////////////////////////////
 
- template<class _Res> class SpecificData;
-
- template<> class SpecificData<Package>
- {
-   public:
-    std::string type;
-    CheckSum checksum;
-      // changlelog?
-    std::string buildhost;
-    std::string distribution;
-    std::string license;
-    std::string packager;
-    std::string group;
-    std::string url;
-    std::string os;
-
-    std::string prein;
-    std::string postin;
-    std::string preun;
-    std::string postun;
-
-    ByteCount source_size;
-
-    std::list<std::string> authors;
-    std::list<std::string> keywords;
-
-    Pathname location;
- };
-
 } // namespace data
 } // namespace zypp
-
-
-#endif
-
+#endif // ZYPP_DATA_RESOLVABLEDATA_H

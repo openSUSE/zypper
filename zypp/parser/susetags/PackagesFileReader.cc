@@ -106,7 +106,7 @@ namespace zypp
 	    {
 	      ZYPP_THROW( error( tag_r, "Expected [type checksum]") );
 	    }
-	    _data->checksum = CheckSum( words[0], words[1] );
+	    _data->repositoryLocation.fileChecksum = CheckSum( words[0], words[1] );
 	  }
 
 	  /** Consume =Grp:. */
@@ -141,13 +141,13 @@ namespace zypp
 	      ZYPP_THROW( error( tag_r, "Expected sourcepackages [name version release arch]") );
 	    }
 
-	    _pkgData->srcPackageIdent.reset( new NVR( words[0], Edition( words[1],words[2] ) ) );
+	    _pkgData->srcPackageIdent = NVR( words[0], Edition( words[1],words[2] ) );
 	  }
 
 	  /** Consume =Tim:. */
 	  void consumeTim( const SingleTagPtr & tag_r )
 	  {
-	    _data->build_time = str::strtonum<Date::ValueType>( tag_r->value );
+	    _data->buildTime = str::strtonum<Date::ValueType>( tag_r->value );
 	  }
 
 	  /** Consume =Loc:. */
@@ -157,15 +157,15 @@ namespace zypp
 	    switch ( str::split( tag_r->value, std::back_inserter(words) ) )
 	    {
 	      case 2: // [medianr filename]
-		str::strtonum( words[0], _data->source_media_nr );
-		_data->location = _data->arch.asString();
-		_data->location /= words[1];
+		str::strtonum( words[0], _data->repositoryLocation.mediaNr.get() );
+		_data->repositoryLocation.filePath = _data->arch.asString();
+		_data->repositoryLocation.filePath /= words[1];
 		break;
 
 	      case 3: // [medianr filename dir]
-		str::strtonum( words[0], _data->source_media_nr );
-		_data->location = words[2];
-		_data->location /= words[1];
+		str::strtonum( words[0], _data->repositoryLocation.mediaNr.get() );
+		_data->repositoryLocation.filePath = words[2];
+		_data->repositoryLocation.filePath /= words[1];
     		break;
 
 	      default:
@@ -182,8 +182,8 @@ namespace zypp
 	    {
 	      ZYPP_THROW( error( tag_r, "Expected [archivesize size]") );
 	    }
-	    _data->archive_size = str::strtonum<ByteCount::SizeType>( words[0] );
-	    _data->size         = str::strtonum<ByteCount::SizeType>( words[1] );
+	    _data->repositoryLocation.fileSize = str::strtonum<ByteCount::SizeType>( words[0] );
+	    _data->installedSize = str::strtonum<ByteCount::SizeType>( words[1] );
 	  }
 
 	  /** Consume =Shr:. */
