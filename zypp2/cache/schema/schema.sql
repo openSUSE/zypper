@@ -4,33 +4,20 @@
 -- cat schema.sql | grep "^CREATE" | awk '{print "DROP " $2 " IF EXISTS " $3 ";"}' | sort -r
 ------------------------------------------------
 
-DROP VIEW IF EXISTS scripts;
-DROP VIEW IF EXISTS products;
-DROP VIEW IF EXISTS patterns;
-DROP VIEW IF EXISTS patches;
-DROP VIEW IF EXISTS packages;
-DROP VIEW IF EXISTS messages;
 DROP TRIGGER IF EXISTS remove_resolvables;
 DROP TRIGGER IF EXISTS remove_patch_packages_baseversions;
 DROP TABLE IF EXISTS types;
-DROP TABLE IF EXISTS text_attributes_set;
 DROP TABLE IF EXISTS text_attributes;
 DROP TABLE IF EXISTS split_capabilities;
-DROP TABLE IF EXISTS script_ttext_attributes;
-DROP TABLE IF EXISTS script_details;
 DROP TABLE IF EXISTS resolvables_catalogs;
 DROP TABLE IF EXISTS resolvables;
-DROP TABLE IF EXISTS product_details;
-DROP TABLE IF EXISTS pattern_details;
 DROP TABLE IF EXISTS patch_packages_baseversions;
 DROP TABLE IF EXISTS patch_packages;
-DROP TABLE IF EXISTS patch_details;
-DROP TABLE IF EXISTS package_details;
 DROP TABLE IF EXISTS other_capabilities;
+DROP TABLE IF EXISTS numeric_attributes;
 DROP TABLE IF EXISTS names;
 DROP TABLE IF EXISTS named_capabilities;
 DROP TABLE IF EXISTS modalias_capabilities;
-DROP TABLE IF EXISTS message_details;
 DROP TABLE IF EXISTS locks;
 DROP TABLE IF EXISTS hal_capabilities;
 DROP TABLE IF EXISTS files;
@@ -40,7 +27,9 @@ DROP TABLE IF EXISTS dir_names;
 DROP TABLE IF EXISTS delta_packages;
 DROP TABLE IF EXISTS db_info;
 DROP TABLE IF EXISTS catalogs;
-DROP INDEX IF EXISTS package_details_resolvable_id;
+DROP INDEX IF EXISTS types_class_name_index;
+DROP INDEX IF EXISTS text_attributes_index;
+DROP INDEX IF EXISTS numeric_attributes_index;
 DROP INDEX IF EXISTS named_capabilities_name;
 
 ------------------------------------------------
@@ -61,6 +50,7 @@ CREATE TABLE types (
   , class TEXT NOT NULL
   , name TEXT NOT NULL
 );
+CREATE INDEX types_class_name_index ON types(class, name);
 
 ------------------------------------------------
 -- Knew catalogs. They existed some day.
@@ -116,6 +106,17 @@ CREATE TABLE text_attributes (
   , attr_id INTEGER REFERENCES types(id)
   , text TEXT
 );
+CREATE INDEX text_attributes_index ON text_attributes(weak_resolvable_id, lang_id, attr_id);
+
+-- Resolvables numeric attributes
+CREATE TABLE numeric_attributes (
+    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL
+  , weak_resolvable_id INTEGER NOT NULL
+  , attr_id INTEGER REFERENCES types(id)
+  , value INTEGER NOT NULL
+);
+CREATE INDEX numeric_attributes_index ON numeric_attributes(weak_resolvable_id, attr_id);
+
 
 CREATE TABLE resolvables (
     id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL
@@ -126,86 +127,13 @@ CREATE TABLE resolvables (
   , arch INTEGER REFERENCES types(id)
   , kind INTEGER REFERENCES types(id)
   , catalog_id INTEGER REFERENCES catalogs(id)
-  ,  installed_size INTEGER
+  , installed_size INTEGER
   , archive_size INTEGER
   , install_only INTEGER
   , build_time INTEGER
   , install_time INTEGER
   , shared_id INTEGER DEFAULT NULL
 );
-
-------------------------------------------------
--- Resolvables kind details
-------------------------------------------------
-
-CREATE TABLE message_details (
-    resolvable_id INTEGER  REFERENCES resolvables(id)
-  , text TEXT
-);
-
-CREATE TABLE patch_details (
-    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL
-  , resolvable_id INTEGER REFERENCES resolvables(id)
-  , patch_id TEXT
-  , timestamp INTEGER
-  , category TEXT
-  , reboot_needed INTEGER
-  , affects_package_manager INTEGER
-
-);
-
-CREATE TABLE pattern_details (
-    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL
-  , resolvable_id INTEGER REFERENCES resolvables(id)
-  , user_default INTEGER
-  , user_visible INTEGER
-  , pattern_category TEXT
-  , icon TEXT
-  , script TEXT
-  , pattern_order TEXT
-
-);
-
-CREATE TABLE product_details (
-    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL
-  , resolvable_id INTEGER REFERENCES resolvables(id)
-);
-
-
-CREATE TABLE script_details (
-    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL
-  , resolvable_id INTEGER REFERENCES resolvables(id)
-);
-
--- scripts translated strings
-CREATE TABLE script_ttext_attributes (
-    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL
-  , lang_code INTEGER
-);
-
-
-CREATE TABLE package_details (
-    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL
-  , resolvable_id INTEGER REFERENCES resolvables(id)
-  , checksum TEXT
-  , changelog TEXT
-  , buildhost TEXT
-  , distribution TEXT
-  , license TEXT
-  , packager TEXT
-  , package_group TEXT
-  , url TEXT
-  , os TEXT
-  , prein TEXT
-  , postin TEXT
-  , preun TEXT
-  , postun TEXT
-  , source_size INTEGER
-  , authors TEXT
-  , filenames TEXT
-  , location TEXT
-);
-CREATE INDEX package_details_resolvable_id ON package_details (resolvable_id);
 
 ------------------------------------------------
 -- Do we need those here?
@@ -225,29 +153,6 @@ CREATE TABLE locks (
   , importance_gteq INTEGER
 
 );
-
-CREATE VIEW messages
-  AS SELECT * FROM resolvables, message_details
-  WHERE resolvables.id = message_details.resolvable_id;
-
-CREATE VIEW packages
-  AS SELECT * FROM resolvables, package_details
-  WHERE resolvables.id = package_details.resolvable_id;
-
-CREATE VIEW patches
-  AS SELECT * FROM resolvables, patch_details
-  WHERE resolvables.id = patch_details.resolvable_id;
-
-CREATE VIEW patterns AS SELECT * FROM resolvables, pattern_details
-  WHERE resolvables.id = pattern_details.resolvable_id;
-
-CREATE VIEW products AS
-  SELECT * FROM resolvables, product_details
-  WHERE resolvables.id = product_details.resolvable_id;
-
-CREATE VIEW scripts AS
-  SELECT * FROM resolvables, script_details
-  WHERE resolvables.id = script_details.resolvable_id;
 
 CREATE TABLE delta_packages (
     id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL

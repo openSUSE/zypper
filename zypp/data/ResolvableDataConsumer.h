@@ -11,7 +11,7 @@
 #define ZYPP_ResolvableDataConsumer_H
 
 
-
+#include "zypp/data/RecordId.h"
 #include "zypp/data/ResolvableData.h"
 
 
@@ -28,7 +28,7 @@ namespace data
     ResolvableDataConsumer();
     virtual ~ResolvableDataConsumer();
 
-    virtual void consumePackage( const data::Package &package) = 0;
+    virtual void consumePackage( const data::RecordId &catalog_id, const data::Package &package) = 0;
     virtual void consumePackage( const data::Pattern &package) = 0;
     virtual void consumePackage( const data::Patch &package) = 0;
     virtual void consumePackage( const data::Script &package) = 0;

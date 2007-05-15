@@ -323,6 +323,9 @@ namespace data
       /** Upstream home page URL.*/
       std::string url;
 
+      /** operating system **/
+      std::string operatingSystem;
+      
       /** Pre install script. */
       std::string prein;
       /** Post install script. */

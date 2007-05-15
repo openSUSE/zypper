@@ -31,6 +31,7 @@ using namespace boost::unit_test;
 bool result(const data::RecordId &id, data::ResObject_Ptr ptr )
 {
   MIL << "result: " << id << " | " << ptr->name << " | " << ptr->edition << " | " << ptr->arch << endl;
+  return true;
 }
 
 void resolvable_query_test(const string &dir)
@@ -62,8 +63,8 @@ void resolvable_query_test(const string &dir)
     MIL << "packages writen to store" << endl;
   }
   
-  ResolvableQuery query(tmpdir.path(), &result);
-  query.query("lib");
+  ResolvableQuery query(tmpdir.path() );
+  query.query(10, &result);
 }
 
 test_suite*

@@ -73,6 +73,9 @@ struct CacheStore::Impl
   sqlite3_command_ptr append_resolvable_cmd;
 
   sqlite3_command_ptr append_text_attribute_cmd;
+  sqlite3_command_ptr append_num_attribute_cmd;
+  
+  sqlite3_command_ptr set_shared_flag_cmd;
   
   map<string, RecordId> name_cache;
   map< pair<string,string>, RecordId> type_cache;
@@ -123,7 +126,10 @@ CacheStore::CacheStore( const Pathname &dbdir )
   _pimpl->select_type_cmd.reset( new sqlite3_command( _pimpl->con, "select id from types where class=:class and name=:name;" ));
   _pimpl->insert_type_cmd.reset( new sqlite3_command( _pimpl->con, "insert into types (class,name) values (:class,:name);" ));
 
+  _pimpl->set_shared_flag_cmd.reset( new sqlite3_command( _pimpl->con, "update resolvables set shared_id=:shared_id where id=:resolvable_id;" ));
+  
   _pimpl->append_text_attribute_cmd.reset( new sqlite3_command( _pimpl->con, "insert into text_attributes ( weak_resolvable_id, lang_id, attr_id, text ) values ( :rid, :lang_id, :attr_id, :text );" ));
+  _pimpl->append_num_attribute_cmd.reset( new sqlite3_command( _pimpl->con, "insert into numeric_attributes ( weak_resolvable_id, attr_id, value ) values ( :rid, :attr_id, :value );" ));
   
   //_pimpl->insert_dependency_entry_cmd.reset( new sqlite3_command( _pimpl->con, "insert into capabilities ( resolvable_id, dependency_type, refers_kind ) values ( :resolvable_id, :dependency_type, :refers_kind );" ));
   _pimpl->append_file_dependency_cmd.reset( new sqlite3_command( _pimpl->con, "insert into file_capabilities ( resolvable_id, dependency_type, refers_kind, file_id ) values ( :resolvable_id, :dependency_type, :refers_kind, :file_id );" ));
@@ -152,9 +158,65 @@ CacheStore::~CacheStore()
   MIL << "name cache hits: " << _pimpl->name_cache_hits << " | cache size: " << _pimpl->name_cache.size() << endl;
 }
 
-void CacheStore::consumePackage( const data::Package &package )
+void CacheStore::consumePackage( const RecordId &catalog_id, data::Package_Ptr package )
 {
-  //RecordId pkgid = appendResolvable( ResTraits<Package>::kind, NVRA( package.name, package.edition, package.arch ), package.deps );
+  RecordId pkgid = appendResolvable( catalog_id, ResTraits<Package>::kind, NVRA( package->name, package->edition, package->arch ), package->deps );
+  consumeResObject( pkgid, package );
+  
+  appendStringAttribute( pkgid, "Package", "checksum", package->repositoryLocation.fileChecksum.checksum() );
+  appendStringAttribute( pkgid, "Package", "buildhost", package->buildhost );
+  appendStringAttribute( pkgid, "Package", "distribution", package->distribution );
+  appendStringAttribute( pkgid, "Package", "license", package->license );
+  appendStringAttribute( pkgid, "Package", "group", package->packager );
+  appendStringAttribute( pkgid, "Package", "url", package->url );
+  appendStringAttribute( pkgid, "Package", "operatingSystem", package->operatingSystem );
+  appendStringAttribute( pkgid, "Package", "prein", package->prein );
+  appendStringAttribute( pkgid, "Package", "postin", package->postin );
+  appendStringAttribute( pkgid, "Package", "preun", package->preun );
+  appendStringAttribute( pkgid, "Package", "postun", package->postun );
+  
+  //FIXME save authors and keyword (lists) for packages
+  
+  appendStringAttribute( pkgid, "Package", "location", package->repositoryLocation.filePath.asString() );
+}
+
+void CacheStore::consumePatch( const data::RecordId &catalog_id, data::Patch_Ptr patch)
+{
+  RecordId id = appendResolvable( catalog_id, ResTraits<Patch>::kind, NVRA( patch->name, patch->edition, patch->arch ), patch->deps );
+  consumeResObject( id, patch );
+  
+}
+
+void CacheStore::consumeMessage( const data::RecordId &catalog_id, data::Message_Ptr message )
+{
+  RecordId id = appendResolvable( catalog_id, ResTraits<Message>::kind, NVRA( message->name, message->edition, message->arch ), message->deps );
+  consumeResObject( id, message );
+}
+
+void CacheStore::consumeScript( const data::RecordId &catalog_id, data::Script_Ptr script )
+{
+  RecordId id = appendResolvable( catalog_id, ResTraits<Script>::kind, NVRA( script->name, script->edition, script->arch ), script->deps );
+  consumeResObject( id, script );
+}
+
+void CacheStore::consumePattern( const data::RecordId &catalog_id, data::Pattern_Ptr pattern )
+{
+  RecordId id = appendResolvable( catalog_id, ResTraits<Pattern>::kind, NVRA( pattern->name, pattern->edition, pattern->arch ), pattern->deps );
+  consumeResObject( id, pattern );
+}
+
+void CacheStore::consumeProduct( const data::RecordId &catalog_id, data::Product_Ptr product )
+{
+  RecordId id = appendResolvable( catalog_id, ResTraits<Product>::kind, NVRA( product->name, product->edition, product->arch ), product->deps );
+  consumeResObject( id, product );
+}
+
+void CacheStore::consumeResObject( const data::RecordId &rid, data::ResObject_Ptr res )
+{
+  appendTranslatedStringAttribute( rid, "ResObject", "description", res->description );
+  appendTranslatedStringAttribute( rid, "ResObject", "summary", res->summary );
+  appendNumericAttribute( rid, "ResObject", "installedSize", res->installedSize );
+  appendNumericAttribute( rid, "ResObject", "buildTime", res->buildTime );
 }
 
 RecordId CacheStore::appendResolvable( const RecordId &catalog_id,
@@ -527,6 +589,42 @@ RecordId CacheStore::lookupOrAppendFileName( const string &name )
   return static_cast<RecordId>(id);
 }
 
+void CacheStore::setSharedData( const data::RecordId &resolvable_id,
+                                const data::RecordId &shared_id )
+{
+  _pimpl->set_shared_flag_cmd->bind(":resolvable_id", resolvable_id);
+  
+  if ( shared_id == data::noRecordId )
+   _pimpl->set_shared_flag_cmd->bind(":shared_id");
+  else
+   _pimpl->set_shared_flag_cmd->bind(":shared_id", shared_id);
+  
+  _pimpl->set_shared_flag_cmd->executenonquery();
+}
+
+void CacheStore::appendNumericAttribute( const data::RecordId &resolvable_id,
+                                         const std::string &klass,
+                                         const std::string &name,
+                                         int value )
+{
+  RecordId type_id = lookupOrAppendType( klass, name );
+  appendNumericAttribute( resolvable_id, type_id, value );
+}
+
+void CacheStore::appendNumericAttribute( const RecordId &resolvable_id,
+                                         const RecordId &type_id,
+                                         int value )
+{
+  // weak resolvable_id
+  _pimpl->append_num_attribute_cmd->bind(":rid", resolvable_id );
+  _pimpl->append_num_attribute_cmd->bind(":attr_id", type_id );
+  
+  _pimpl->append_num_attribute_cmd->bind(":value", value );
+  
+  _pimpl->append_num_attribute_cmd->executenonquery();
+}
+
+
 void CacheStore::appendTranslatedStringAttribute( const data::RecordId &resolvable_id,
                                                   const std::string &klass,
                                                   const std::string &name,
@@ -576,40 +674,12 @@ void CacheStore::appendStringAttribute( const RecordId &resolvable_id,
   // weak resolvable_id
   _pimpl->append_text_attribute_cmd->bind(":rid", resolvable_id );
   _pimpl->append_text_attribute_cmd->bind(":lang_id", lang_id );
-  _pimpl->append_text_attribute_cmd->bind(":type_id", type_id );
+  _pimpl->append_text_attribute_cmd->bind(":attr_id", type_id );
   
-  _pimpl->append_text_attribute_cmd->bind(":value", value );
+  _pimpl->append_text_attribute_cmd->bind(":text", value );
   
   _pimpl->append_text_attribute_cmd->executenonquery();
 }
-
-// RecordId CacheStore::insertResObject( const Resolvable::Kind &kind, const data::ResObject &res )
-// {
-//   _insert_resolvable_cmd->bind(1,  res.name.c_str(), -1);
-//   _insert_resolvable_cmd->bind(2,  res.edition.version().c_str(), -1);
-//   _insert_resolvable_cmd->bind(3,  res.edition.release().c_str(), -1);
-//   _insert_resolvable_cmd->bind(4,  static_cast<int>( res.edition.epoch() ));
-//   _insert_resolvable_cmd->bind(5,  zypp_arch2db_arch(res.arch));
-//   _insert_resolvable_cmd->bind(6,  db_kind2zypp_kind(kind));
-//   _insert_resolvable_cmd->bind(7,  res.summary.text().c_str(), -1);
-//   _insert_resolvable_cmd->bind(8,  res.description.text().c_str(), -1);
-//   _insert_resolvable_cmd->bind(9,  res.insnotify.c_str(), -1);
-//   _insert_resolvable_cmd->bind(10, res.delnotify.c_str(), -1);
-//   _insert_resolvable_cmd->bind(11, res.license_to_confirm.c_str(), -1);
-//   _insert_resolvable_cmd->bind(12, res.vendor.c_str(), -1);
-//   _insert_resolvable_cmd->bind(13, res.size ); // FIX cast?
-//   _insert_resolvable_cmd->bind(14, res.archive_size ); // FIX cast?
-//   _insert_resolvable_cmd->bind(15, res.source.c_str(), -1);
-//
-//   _insert_resolvable_cmd->bind(16, res.source_media_nr);
-//   _insert_resolvable_cmd->bind(17, static_cast<int>(res.install_only));
-//   _insert_resolvable_cmd->bind(18, static_cast<int>(res.build_time) ); // FIX cast?
-//   _insert_resolvable_cmd->bind(19, static_cast<int>(res.install_time) ); // FIX cast?
-//   _insert_resolvable_cmd->executenonquery();
-//
-//   return static_cast<RecordId>( _con->insertid() );
-// }
-
 
 }
 }

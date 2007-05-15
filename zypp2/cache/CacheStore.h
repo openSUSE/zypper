@@ -55,12 +55,59 @@ namespace zypp
       CacheStore( const Pathname &dbdir );
 
       /**
-       * Implements the ResolvableConsumer consumePackage interface
-       * Consumer a package and inserts it into the database.
-       * Don't use this method yet
+       * Implementation of the \ref ResolvableConsumer interface
+       *
+       * Consume a package, inserting it in the cache, under
+       * \param catalog_id ownership.
+       * \param package Package data
       */
-      virtual void consumePackage( const data::Package &package);
+      virtual void consumePackage( const data::RecordId &catalog_id, data::Package_Ptr package);
+      
+      /**
+       * Implementation of the \ref ResolvableConsumer interface
+       *
+       * Consume a patch, inserting it in the cache, under
+       * \param catalog_id ownership.
+       * \param patch Patch data
+      */
+      virtual void consumePatch( const data::RecordId &catalog_id, data::Patch_Ptr patch);
+      
+      /**
+       * Implementation of the \ref ResolvableConsumer interface
+       *
+       * Consume a message, inserting it in the cache, under
+       * \param catalog_id ownership.
+       * \param message Message data
+      */
+      virtual void consumeMessage( const data::RecordId &catalog_id, data::Message_Ptr);
+      
+      /**
+       * Implementation of the \ref ResolvableConsumer interface
+       *
+       * Consume a script, inserting it in the cache, under
+       * \param catalog_id ownership.
+       * \param script Script data
+      */
+      virtual void consumeScript( const data::RecordId &catalog_id, data::Script_Ptr);
+      
+      /**
+       * Implementation of the \ref ResolvableConsumer interface
+       *
+       * Consume a pattern, inserting it in the cache, under
+       * \param catalog_id ownership.
+       * \param pattern Pattern data
+      */
+      virtual void consumePattern( const data::RecordId &catalog_id, data::Pattern_Ptr pattern );
 
+      /**
+       * Implementation of the \ref ResolvableConsumer interface
+       *
+       * Consume a product, inserting it in the cache, under
+       * \param catalog_id ownership.
+       * \param pattern Pattern data
+      */
+      virtual void consumeProduct( const data::RecordId &catalog_id, data::Product_Ptr product );
+      
       /**
        * Appends a resolvable to the store.
        *
@@ -245,7 +292,10 @@ namespace zypp
                                          const std::string &name );
       
       /**
-       * Returns the record id of a catalog (Source) \a path
+       * Returns the record id of a catalog (Source)
+       *
+       * \param url Url of the catalog
+       * \param path path of the catalog (relative to url)
        *
        * \note If the catalog entry does not exist, it will
        * be created and the new inserted entry's id will
@@ -253,7 +303,37 @@ namespace zypp
        */
       data::RecordId lookupOrAppendCatalog( const Url &url,
                                             const Pathname &path );
+      
+      /**
+       * Set the resolvable shared data flag pointing to
+       * another resolvable.
+       *
+       * This is a hint for cache readers. If any attribute
+       * of a resolvable is empty, is because it is shared
+       * with another resolvable.
+       *
+       * \param resolvable_id Id of the resolvable. Must exists
+       * \param shared_id The resolvable providing the data
+       * This one is a weak reference, the reader should just
+       * try to look the data there as a hint.
+       * use \ref data::noRecordId to reset the value.
+       *
+       */
+      void setSharedData( const data::RecordId &resolvable_id,
+                          const data::RecordId &shared_id );
 
+      /**
+       * Append a numeric attribute to a resolvable
+       * \param resolvable_id Resovable Id, owner of the attribute
+       * \param klass Type class i.e "Package" "lang" "kind"
+       * \param name Type name i.e : "size" "media_number"
+       * \param value numeric value
+       */
+      void appendNumericAttribute( const data::RecordId &resolvable_id,
+                                   const std::string &klass,
+                                   const std::string &name,
+                                   int value );
+      
       /**
        * Append a translated string value to a resolvable
        * \param resolvable_id Resovable Id, owner of the attribute
@@ -366,6 +446,21 @@ namespace zypp
                                   const data::RecordId &lang_id,
                                   const data::RecordId &type_id,
                                   const std::string &value );
+      
+      /**
+       * Append a numeric attribute to a resolvable
+       * \param resolvable_id Resovable Id, owner of the attribute
+       * \param type_id attribute id
+       * \param value numeric value
+       */
+      void appendNumericAttribute( const data::RecordId &resolvable_id,
+                                   const data::RecordId &type_id,
+                                   int value );
+      
+      
+      // this functions are used by ResolvableConsumer interface functions
+      // to avoid some duplication across types.
+      void consumeResObject( const data::RecordId &rid, data::ResObject_Ptr res );
 
     private:
       /** Implementation. */

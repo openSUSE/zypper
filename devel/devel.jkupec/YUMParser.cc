@@ -67,10 +67,7 @@ namespace zypp
 
   bool YUMParser::primary_CB(const data::Package_Ptr & package_r)
   {
-    NVRA nvra(package_r->name, package_r->edition, package_r->arch);
-    data::RecordId pkgid =
-      _consumer.appendResolvable(
-        _catalog_id, ResTraits<Package>::kind, nvra, package_r->deps);
+    _consumer.consumePackage( _catalog_id, package_r );
 
 /*    MIL << "got package "
       << package.name << package.edition << " "
@@ -86,7 +83,7 @@ namespace zypp
   bool YUMParser::patches_CB(const OnMediaLocation &loc, const string & patch_id)
   {
     DBG << "Adding patch " << loc.filename() << " to YUMParser jobs " << endl;
-
+    
     _jobs.push_back(YUMParserJob(loc.filename(), YUMResourceType::PATCH));
 
     return true;
@@ -95,11 +92,8 @@ namespace zypp
 
   bool YUMParser::patch_CB(const zypp::data::Patch & patch)
   {
-    NVRA nvra(patch.name, patch.edition, patch.arch);
-    data::RecordId pkgid =
-      _consumer.appendResolvable(
-        _catalog_id, ResTraits<Patch>::kind, nvra, patch.deps);
-
+    _consumer.consumePatch( _catalog_id, patch );
+    
     MIL << "got patch "
       << patch.name << patch.edition << " "
       << patch.arch

@@ -46,11 +46,66 @@ namespace zypp
       void query( const std::string &text,
                   ProcessResolvable fnc  );
       
-      /*void queryAttribute( const std::string &text,
-                           const std::string &klass
-                           const std::string 
-                           ProcessResolvable fnc  );
-      */
+      /**
+       * Queries a specifc attribute for a resolvable
+       *
+       * \param record_id Resolvable cache id
+       * \param klass Attribute Class
+       * \param name Attribute Name
+       *
+       * \return The attribute or 0 if
+       * no record is found.
+       */
+      int queryNumericAttribute( const data::RecordId &record_id,
+                                 const std::string &klass,
+                                 const std::string &name );
+      
+      /**
+       * Queries a specifc attribute for a resolvable
+       *
+       * \param record_id Resolvable cache id
+       * \param klass Attribute Class
+       * \param name Attribute Name
+       *
+       * \return The attribute or a empty string if
+       * no record is found.
+       */
+      std::string queryStringAttribute( const data::RecordId &record_id,
+                                        const std::string &klass,
+                                        const std::string &name );
+      
+      /**
+       * Queries a specifc attribute translation
+       * for a resolvable.
+       *
+       * \param record_id Resolvable cache id
+       * \param locale Locale of the translation
+       * \param klass Attribute Class
+       * \param name Attribute Name
+       *
+       * \return The attribute or a empty string if
+       * no record is found.
+       */
+      std::string queryStringAttributeTranslation( const data::RecordId &record_id,
+                                                   const Locale &locale,
+                                                   const std::string &klass,
+                                                   const std::string &name );
+      
+      /**
+       * Queries all translations for a specific attribute
+       * in a resolvable.
+       *
+       * \param record_id Resolvable cache id
+       * \param klass Attribute Class
+       * \param name Attribute Name
+       *
+       * \return all attribute translations or a empty 
+       * \ref TranslatedString if no record is found.
+       */
+      TranslatedText queryTranslatedStringAttribute( const data::RecordId &record_id,
+                                                     const std::string &klass,
+                                                     const std::string &name );
+      
     private:
       /** Implementation. */
       class Impl;
