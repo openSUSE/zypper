@@ -574,7 +574,6 @@ namespace zypp
               it->status().resetTransact( ResStatus::USER );
             }
             progress.disconnect();
-            p->source().releaseFile( p->location(), p->sourceMediaNr() );
           }
           else
           {
