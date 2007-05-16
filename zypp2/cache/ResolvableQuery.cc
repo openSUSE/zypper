@@ -7,7 +7,7 @@ using namespace sqlite3x;
 using namespace std;
 
 namespace zypp { namespace cache {
-  
+
 
 struct ResolvableQuery::Impl
 {
@@ -16,24 +16,24 @@ struct ResolvableQuery::Impl
   {
     _fields = "id, name, version, release, epoch, arch, kind, installed_size, archive_size, install_only, build_time, install_time, catalog_id";
   }
-  
+
   ~Impl()
   {
   }
-  
+
   data::ResObject_Ptr fromRow( sqlite3_reader &reader )
   {
     data::ResObject_Ptr ptr (new data::ResObject);
-    
+
     ptr->name = reader.getstring(1);
     ptr->edition = Edition( reader.getstring(2), reader.getstring(3), reader.getint(4));
     ptr->arch = db_arch2zypp_arch( static_cast<db::Arch>(reader.getint(5)));
-    
+
     // TODO get the rest of the data
-    
+
     return ptr;
   }
-  
+
   void query( const data::RecordId &id,
                   ProcessResolvable fnc )
   {
@@ -49,7 +49,7 @@ struct ResolvableQuery::Impl
     }
     con.executenonquery("COMMIT;");
   }
-        
+
   void query( const std::string &s,
               ProcessResolvable fnc  )
   {
@@ -65,7 +65,7 @@ struct ResolvableQuery::Impl
     }
     con.executenonquery("COMMIT;");
   }
-  
+
   std::string queryStringAttribute( const data::RecordId &record_id,
                                     const std::string &klass,
                                     const std::string &name )
@@ -90,7 +90,7 @@ struct ResolvableQuery::Impl
     sqlite3_connection con((_dbdir + "zypp.db").asString().c_str());
     return queryTranslatedStringAttributeInternal( con, record_id, klass, name );
   }
-  
+
   int queryNumericAttribute( const data::RecordId &record_id,
                                  const std::string &klass,
                                  const std::string &name )
@@ -98,9 +98,9 @@ struct ResolvableQuery::Impl
     sqlite3_connection con((_dbdir + "zypp.db").asString().c_str());
     return queryNumericAttributeInternal( con, record_id, klass, name);
   }
-  
+
 private:
-  
+
   int queryNumericAttributeInternal( sqlite3_connection &con,
                                      const data::RecordId &record_id,
                                      const std::string &klass,
@@ -108,15 +108,15 @@ private:
   {
     con.executenonquery("BEGIN;");
     sqlite3_command cmd( con, "select a.value from numeric_attributes a,types t where a.weak_resolvable_id=:rid and a.attr_id=t.id and t.class=:tclass and t.name=:tname;");
-    
+
     cmd.bind(":rid", record_id);
-    
+
     cmd.bind(":tclass", klass);
     cmd.bind(":tname", name);
-    
+
     return cmd.executeint();
   }
-  
+
   TranslatedText queryTranslatedStringAttributeInternal( sqlite3_connection &con,
                                                          const data::RecordId &record_id,
                                                          const std::string &klass,
@@ -125,13 +125,13 @@ private:
     //con.executenonquery("PRAGMA cache_size=8000;");
     con.executenonquery("BEGIN;");
     sqlite3_command cmd( con, "select a.text, l.name from text_attributes a,types l,types t where a.weak_resolvable_id=:rid and a.lang_id=l.id and a.attr_id=t.id and l.class=:lclass and t.class=:tclass and t.name=:tname;");
-    
+
     cmd.bind(":rid", record_id);
     cmd.bind(":lclass", "lang");
 
     cmd.bind(":tclass", klass);
     cmd.bind(":tname", name);
-    
+
     TranslatedText result;
     sqlite3_reader reader = cmd.executereader();
     while(reader.read())
@@ -140,7 +140,7 @@ private:
     }
     return result;
   }
-  
+
   std::string queryStringAttributeInternal( sqlite3_connection &con,
                                             const data::RecordId &record_id,
                                             const std::string &klass,
@@ -158,20 +158,20 @@ private:
     //con.executenonquery("PRAGMA cache_size=8000;");
     con.executenonquery("BEGIN;");
     sqlite3_command cmd( con, "select a.text from text_attributes a,types l,types t where a.weak_resolvable_id=:rid and a.lang_id=l.id and a.attr_id=t.id and l.class=:lclass and l.name=:lname and t.class=:tclass and t.name=:tname;");
-    
+
     cmd.bind(":rid", record_id);
     cmd.bind(":lclass", "lang");
     if (locale == Locale() )
       cmd.bind(":lname", "none");
     else
       cmd.bind(":lname", locale.code());
-    
+
     cmd.bind(":tclass", klass);
     cmd.bind(":tname", name);
-    
+
     return cmd.executestring();
   }
-  
+
   Pathname _dbdir;
   string _fields;
 };
@@ -205,7 +205,7 @@ int ResolvableQuery::queryNumericAttribute( const data::RecordId &record_id,
                                             const std::string &klass,
                                             const std::string &name )
 {
-  _pimpl->queryNumericAttribute(record_id, klass, name);
+  return _pimpl->queryNumericAttribute(record_id, klass, name);
 }
 
 std::string ResolvableQuery::queryStringAttribute( const data::RecordId &record_id,
