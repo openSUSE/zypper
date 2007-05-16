@@ -134,6 +134,7 @@ CREATE TABLE resolvables (
   , install_time INTEGER
   , shared_id INTEGER DEFAULT NULL
 );
+CREATE INDEX resolvable_catalog_id ON resolvables(catalog_id);
 
 ------------------------------------------------
 -- Do we need those here?
@@ -180,21 +181,6 @@ CREATE TABLE patch_packages (
 
 );
 
-CREATE TRIGGER remove_resolvables
-  AFTER DELETE ON resolvables
-  BEGIN
-    DELETE FROM package_details WHERE resolvable_id = old.id;
-    DELETE FROM patch_details WHERE resolvable_id = old.id;
-    DELETE FROM pattern_details WHERE resolvable_id = old.id;
-    DELETE FROM product_details WHERE resolvable_id = old.id;
-    DELETE FROM message_details WHERE resolvable_id = old.id;
-    DELETE FROM script_details WHERE resolvable_id = old.id;
-    DELETE FROM dependencies WHERE resolvable_id = old.id;
-    DELETE FROM files WHERE resolvable_id = old.id;
-    DELETE FROM delta_packages WHERE package_id = old.id;
-    DELETE FROM patch_packages WHERE package_id = old.id;
-  END;
-
 CREATE TABLE patch_packages_baseversions (
     id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL
   , patch_package_id INTEGER REFERENCES patch_packages(id)
@@ -220,6 +206,7 @@ CREATE TABLE named_capabilities (
   , relation INTEGER
 );
 CREATE INDEX named_capabilities_name ON named_capabilities(name_id);
+CREATE INDEX named_capabilities_resolvable ON named_capabilities(resolvable_id);
 
 CREATE TABLE modalias_capabilities (
    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL
@@ -230,6 +217,7 @@ CREATE TABLE modalias_capabilities (
   , value TEXT
   , relation INTEGER
 );
+CREATE INDEX modalias_capabilities_resolvable ON modalias_capabilities(resolvable_id);
 
 CREATE TABLE hal_capabilities (
    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL
@@ -248,6 +236,7 @@ CREATE TABLE file_capabilities (
   , refers_kind INTEGER
   , file_id INTEGER REFERENCES files(id)
 );
+CREATE INDEX file_capabilities_resolvable ON file_capabilities(resolvable_id);
 
 CREATE TABLE other_capabilities (
    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL
@@ -256,6 +245,7 @@ CREATE TABLE other_capabilities (
   , refers_kind INTEGER
   , value TEXT
 );
+CREATE INDEX other_capabilities_resolvable ON other_capabilities(resolvable_id);
 
 CREATE TABLE split_capabilities (
    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL
@@ -265,6 +255,19 @@ CREATE TABLE split_capabilities (
   , name_id INTEGER REFERENCES names(id)
   , file_id INTEGER REFERENCES files(id)
 );
+CREATE INDEX split_capabilities_resolvable ON split_capabilities(resolvable_id);
+
+-- Auto clean capabilities
+CREATE TRIGGER remove_resolvables
+  AFTER DELETE ON resolvables
+  BEGIN
+    DELETE FROM named_capabilities WHERE resolvable_id = old.id;
+    DELETE FROM modalias_capabilities WHERE resolvable_id = old.id;
+    DELETE FROM hal_capabilities WHERE resolvable_id = old.id;
+    DELETE FROM file_capabilities WHERE resolvable_id = old.id;
+    DELETE FROM split_capabilities WHERE resolvable_id = old.id;
+    DELETE FROM other_capabilities WHERE resolvable_id = old.id;
+  END;
 
 ------------------------------------------------
 -- Associate resolvables and catalogs
@@ -280,12 +283,12 @@ CREATE TABLE resolvables_catalogs (
   , PRIMARY KEY ( resolvable_id, catalog_id )
 );
 
--- FIX this trigger
---CREATE TRIGGER remove_catalogs
---  AFTER DELETE ON catalogs
---  BEGIN
---    DELETE FROM resolvables WHERE catalog = old.id;
---  END;
+-- Auto clean catalogs
+CREATE TRIGGER remove_catalogs
+  AFTER DELETE ON catalogs
+  BEGIN
+    DELETE FROM resolvables WHERE catalog_id = old.id;
+  END;
 
 CREATE TRIGGER remove_patch_packages_baseversions
   AFTER DELETE ON patch_packages
