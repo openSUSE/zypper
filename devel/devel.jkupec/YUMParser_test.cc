@@ -50,7 +50,7 @@ int main(int argc, char **argv)
 
     parser::yum::YUMParser parser( catalog_id, store, &progress_function);
     parser.start(argv[1]);
-
+    store.commit();
     parse_primary_timer.stop();
 
     cout << endl;

@@ -94,6 +94,10 @@ struct CacheStore::Impl
   
     append_resolvable_cmd.reset( new sqlite3_command( con, "insert into resolvables ( name, version, release, epoch, arch, kind, catalog_id ) values ( :name, :version, :release, :epoch, :arch, :kind, :catalog_id );" ));
   
+    count_shared_cmd.reset( new sqlite3_command( con, "select count(id) from resolvables where shared_id=:rid;" ));
+    
+    
+    
     // disable autocommit
     con.executenonquery("BEGIN;");
   }
@@ -149,6 +153,8 @@ struct CacheStore::Impl
   sqlite3_command_ptr append_num_attribute_cmd;
   
   sqlite3_command_ptr set_shared_flag_cmd;
+  
+  sqlite3_command_ptr count_shared_cmd;
   
   map<string, RecordId> name_cache;
   map< pair<string,string>, RecordId> type_cache;
