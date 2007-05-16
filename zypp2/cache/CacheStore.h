@@ -34,8 +34,18 @@ namespace zypp
   { /////////////////////////////////////////////////////////////////
 
     /**
-     * The cache store caches resolvable data into some backend.
-    */
+     * The cache store caches resolvable data.
+     *
+     * \code
+     * CacheStore store("/path");
+     * RecordId catalog_id = 
+     *   store.lookupOrAppendCatalog("http://updates.novell.com", "/");
+     * store.consumePackage( catalog_id, package_ptr );
+     * store.commit();
+     * \endcode
+     *
+     * \note Data will not be commited until you explicitely commit.
+     */
     class CacheStore
     {
     public:
@@ -54,6 +64,11 @@ namespace zypp
        */
       CacheStore( const Pathname &dbdir );
 
+      /**
+       * Commit the changes.
+       */
+      void commit();
+      
       /**
        * Implementation of the \ref ResolvableConsumer interface
        *

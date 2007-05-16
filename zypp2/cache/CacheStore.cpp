@@ -31,9 +31,82 @@ typedef shared_ptr<sqlite3_command> sqlite3_command_ptr;
 
 struct CacheStore::Impl
 {
-  Impl()
+  Impl( const Pathname &dbdir )
   : name_cache_hits(0)
-  {}
+  {
+    cache::CacheInitializer initializer(dbdir, "zypp.db");
+    if ( initializer.justInitialized() )
+    {
+      MIL << "database " << (dbdir + "zypp.db") << " was just created" << endl;
+    }
+  
+    try
+    {
+      con.open( (dbdir + "zypp.db").asString().c_str());
+      //_insert_resolvable_cmd = new sqlite3_command( *_con, INSERT_RESOLVABLE_QUERY );
+      //_insert_package_cmd = new sqlite3_command( *_con, INSERT_PACKAGE_QUERY );
+    }
+    catch(exception &ex)
+    {
+      //ZYPP_CAUGHT(ex);
+      ZYPP_THROW(Exception(ex.what()));
+    }
+  
+    
+    // initialize all pre-compiled statements
+    
+    insert_resolvable_in_catalog_cmd.reset( new sqlite3_command( con, "insert into resolvables_catalogs (resolvable_id, catalog_id) values (:resolvable_id, :catalog_id);" ));
+  
+    update_catalog_cmd.reset( new sqlite3_command( con, "update catalogs set checksum=:checksum, timestamp=:timestamp where id=:catalog_id;" ));
+  
+    select_catalog_cmd.reset( new sqlite3_command( con, "select id from catalogs where url=:url and path=:path;" ));
+    insert_catalog_cmd.reset( new sqlite3_command( con, "insert into catalogs (url,path,timestamp) values (:url,:path,:timestamp);" ));
+  
+    select_name_cmd.reset( new sqlite3_command( con, "select id from names where name=:name;" ));
+    insert_name_cmd.reset( new sqlite3_command( con, "insert into names (name) values (:name);" ));
+  
+    select_dirname_cmd.reset( new sqlite3_command( con, "select id from dir_names where name=:name;" ));
+    insert_dirname_cmd.reset( new sqlite3_command( con, "insert into dir_names (name) values (:name);" ));
+  
+    select_filename_cmd.reset( new sqlite3_command( con, "select id from file_names where name=:name;" ));
+    insert_filename_cmd.reset( new sqlite3_command( con, "insert into file_names (name) values (:name);" ));
+  
+    select_file_cmd.reset( new sqlite3_command( con, "select id from files where dir_name_id=:dir_name_id and file_name_id=:file_name_id;" ));
+    insert_file_cmd.reset( new sqlite3_command( con, "insert into files (dir_name_id,file_name_id) values (:dir_name_id,:file_name_id);" ));
+  
+    select_type_cmd.reset( new sqlite3_command( con, "select id from types where class=:class and name=:name;" ));
+    insert_type_cmd.reset( new sqlite3_command( con, "insert into types (class,name) values (:class,:name);" ));
+  
+    set_shared_flag_cmd.reset( new sqlite3_command( con, "update resolvables set shared_id=:shared_id where id=:resolvable_id;" ));
+    
+    append_text_attribute_cmd.reset( new sqlite3_command( con, "insert into text_attributes ( weak_resolvable_id, lang_id, attr_id, text ) values ( :rid, :lang_id, :attr_id, :text );" ));
+    append_num_attribute_cmd.reset( new sqlite3_command( con, "insert into numeric_attributes ( weak_resolvable_id, attr_id, value ) values ( :rid, :attr_id, :value );" ));
+    
+    //insert_dependency_entry_cmd.reset( new sqlite3_command( con, "insert into capabilities ( resolvable_id, dependency_type, refers_kind ) values ( :resolvable_id, :dependency_type, :refers_kind );" ));
+    append_file_dependency_cmd.reset( new sqlite3_command( con, "insert into file_capabilities ( resolvable_id, dependency_type, refers_kind, file_id ) values ( :resolvable_id, :dependency_type, :refers_kind, :file_id );" ));
+    append_named_dependency_cmd.reset( new sqlite3_command( con, "insert into named_capabilities ( resolvable_id, dependency_type, refers_kind, name_id, version, release, epoch, relation ) values ( :resolvable_id, :dependency_type, :refers_kind, :name_id, :version, :release, :epoch, :relation );" ));
+  
+    append_modalias_dependency_cmd.reset( new sqlite3_command( con, "insert into modalias_capabilities ( resolvable_id, dependency_type, refers_kind, name, value, relation ) values ( :resolvable_id, :dependency_type, :refers_kind, :name, :value, :relation );" ));
+  
+    append_hal_dependency_cmd.reset( new sqlite3_command( con, "insert into hal_capabilities ( resolvable_id, dependency_type, refers_kind, name, value, relation ) values ( :resolvable_id, :dependency_type, :refers_kind, :name, :value, :relation );" ));
+  
+    append_other_dependency_cmd.reset( new sqlite3_command( con, "insert into other_capabilities ( resolvable_id, dependency_type, refers_kind, value ) values ( :resolvable_id, :dependency_type, :refers_kind, :value );" ));
+  
+    append_resolvable_cmd.reset( new sqlite3_command( con, "insert into resolvables ( name, version, release, epoch, arch, kind, catalog_id ) values ( :name, :version, :release, :epoch, :arch, :kind, :catalog_id );" ));
+  
+    // disable autocommit
+    con.executenonquery("BEGIN;");
+  }
+  
+  Impl()
+  {
+    Impl( getZYpp()->homePath() );
+  }
+  
+  ~Impl()
+  {
+    MIL << "name cache hits: " << name_cache_hits << " | cache size: " << name_cache.size() << endl;
+  }
 
  /**
   * SQL statements
@@ -84,78 +157,25 @@ struct CacheStore::Impl
 
 
 CacheStore::CacheStore( const Pathname &dbdir )
-  : _pimpl( new Impl() )
+  : _pimpl( new Impl(dbdir) )
 {
-  cache::CacheInitializer initializer(dbdir, "zypp.db");
-  if ( initializer.justInitialized() )
-  {
-    MIL << "database " << (dbdir + "zypp.db") << " was just created" << endl;
-  }
-
-  try
-  {
-    _pimpl->con.open( (dbdir + "zypp.db").asString().c_str());
-    //_insert_resolvable_cmd = new sqlite3_command( *_con, INSERT_RESOLVABLE_QUERY );
-    //_insert_package_cmd = new sqlite3_command( *_con, INSERT_PACKAGE_QUERY );
-  }
-  catch(exception &ex)
-  {
-    //ZYPP_CAUGHT(ex);
-    ZYPP_THROW(Exception(ex.what()));
-  }
-
-  _pimpl->insert_resolvable_in_catalog_cmd.reset( new sqlite3_command( _pimpl->con, "insert into resolvables_catalogs (resolvable_id, catalog_id) values (:resolvable_id, :catalog_id);" ));
-
-  _pimpl->update_catalog_cmd.reset( new sqlite3_command( _pimpl->con, "update catalogs set checksum=:checksum, timestamp=:timestamp where id=:catalog_id;" ));
-
-  _pimpl->select_catalog_cmd.reset( new sqlite3_command( _pimpl->con, "select id from catalogs where url=:url and path=:path;" ));
-  _pimpl->insert_catalog_cmd.reset( new sqlite3_command( _pimpl->con, "insert into catalogs (url,path,timestamp) values (:url,:path,:timestamp);" ));
-
-  _pimpl->select_name_cmd.reset( new sqlite3_command( _pimpl->con, "select id from names where name=:name;" ));
-  _pimpl->insert_name_cmd.reset( new sqlite3_command( _pimpl->con, "insert into names (name) values (:name);" ));
-
-  _pimpl->select_dirname_cmd.reset( new sqlite3_command( _pimpl->con, "select id from dir_names where name=:name;" ));
-  _pimpl->insert_dirname_cmd.reset( new sqlite3_command( _pimpl->con, "insert into dir_names (name) values (:name);" ));
-
-  _pimpl->select_filename_cmd.reset( new sqlite3_command( _pimpl->con, "select id from file_names where name=:name;" ));
-  _pimpl->insert_filename_cmd.reset( new sqlite3_command( _pimpl->con, "insert into file_names (name) values (:name);" ));
-
-  _pimpl->select_file_cmd.reset( new sqlite3_command( _pimpl->con, "select id from files where dir_name_id=:dir_name_id and file_name_id=:file_name_id;" ));
-  _pimpl->insert_file_cmd.reset( new sqlite3_command( _pimpl->con, "insert into files (dir_name_id,file_name_id) values (:dir_name_id,:file_name_id);" ));
-
-  _pimpl->select_type_cmd.reset( new sqlite3_command( _pimpl->con, "select id from types where class=:class and name=:name;" ));
-  _pimpl->insert_type_cmd.reset( new sqlite3_command( _pimpl->con, "insert into types (class,name) values (:class,:name);" ));
-
-  _pimpl->set_shared_flag_cmd.reset( new sqlite3_command( _pimpl->con, "update resolvables set shared_id=:shared_id where id=:resolvable_id;" ));
   
-  _pimpl->append_text_attribute_cmd.reset( new sqlite3_command( _pimpl->con, "insert into text_attributes ( weak_resolvable_id, lang_id, attr_id, text ) values ( :rid, :lang_id, :attr_id, :text );" ));
-  _pimpl->append_num_attribute_cmd.reset( new sqlite3_command( _pimpl->con, "insert into numeric_attributes ( weak_resolvable_id, attr_id, value ) values ( :rid, :attr_id, :value );" ));
-  
-  //_pimpl->insert_dependency_entry_cmd.reset( new sqlite3_command( _pimpl->con, "insert into capabilities ( resolvable_id, dependency_type, refers_kind ) values ( :resolvable_id, :dependency_type, :refers_kind );" ));
-  _pimpl->append_file_dependency_cmd.reset( new sqlite3_command( _pimpl->con, "insert into file_capabilities ( resolvable_id, dependency_type, refers_kind, file_id ) values ( :resolvable_id, :dependency_type, :refers_kind, :file_id );" ));
-  _pimpl->append_named_dependency_cmd.reset( new sqlite3_command( _pimpl->con, "insert into named_capabilities ( resolvable_id, dependency_type, refers_kind, name_id, version, release, epoch, relation ) values ( :resolvable_id, :dependency_type, :refers_kind, :name_id, :version, :release, :epoch, :relation );" ));
-
-   _pimpl->append_modalias_dependency_cmd.reset( new sqlite3_command( _pimpl->con, "insert into modalias_capabilities ( resolvable_id, dependency_type, refers_kind, name, value, relation ) values ( :resolvable_id, :dependency_type, :refers_kind, :name, :value, :relation );" ));
-
-   _pimpl->append_hal_dependency_cmd.reset( new sqlite3_command( _pimpl->con, "insert into hal_capabilities ( resolvable_id, dependency_type, refers_kind, name, value, relation ) values ( :resolvable_id, :dependency_type, :refers_kind, :name, :value, :relation );" ));
-
-   _pimpl->append_other_dependency_cmd.reset( new sqlite3_command( _pimpl->con, "insert into other_capabilities ( resolvable_id, dependency_type, refers_kind, value ) values ( :resolvable_id, :dependency_type, :refers_kind, :value );" ));
-
-  _pimpl->append_resolvable_cmd.reset( new sqlite3_command( _pimpl->con, "insert into resolvables ( name, version, release, epoch, arch, kind, catalog_id ) values ( :name, :version, :release, :epoch, :arch, :kind, :catalog_id );" ));
-
-  // disable autocommit
-  _pimpl->con.executenonquery("BEGIN;");
 }
 
 CacheStore::CacheStore()
+    : _pimpl( new Impl() )
 {
-  CacheStore( getZYpp()->homePath() );
+
 }
 
 CacheStore::~CacheStore()
 {
+
+}
+
+void CacheStore::commit()
+{
   _pimpl->con.executenonquery("COMMIT;");
-  MIL << "name cache hits: " << _pimpl->name_cache_hits << " | cache size: " << _pimpl->name_cache.size() << endl;
 }
 
 void CacheStore::consumePackage( const RecordId &catalog_id, data::Package_Ptr package )
