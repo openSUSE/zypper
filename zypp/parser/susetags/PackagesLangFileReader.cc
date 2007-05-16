@@ -203,7 +203,7 @@ namespace zypp
 	else if TAGFWD( Sum );
 	else if TAGFWD( Ver );
 	else
-	{ ERR << tag_r << endl; }
+	{ WAR << errPrefix( tag_r, "Unknown tag" ) << endl; }
       }
 
       ///////////////////////////////////////////////////////////////////
@@ -218,7 +218,7 @@ namespace zypp
 	else if TAGFWD( Ins );
 	else if TAGFWD( Del );
 	else
-	{ ERR << tag_r << endl; }
+	{ WAR << errPrefix( tag_r, "Unknown tag" ) << endl; }
       }
 
       ///////////////////////////////////////////////////////////////////

@@ -87,7 +87,7 @@ namespace zypp
        * Invokes \ref consume for each tag. \ref consume might throw
        * other exceptions as well.
       */
-      virtual void parse( const InputStream & imput_r,
+      virtual void parse( const InputStream & input_r,
 			  const ProgressData::ReceiverFnc & fnc_r = ProgressData::ReceiverFnc() );
 
     protected:

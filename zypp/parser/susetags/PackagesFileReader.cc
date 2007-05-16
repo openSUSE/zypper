@@ -345,7 +345,7 @@ namespace zypp
 	else if TAGFWD( Shr );
 	else if TAGFWD( Ver );
 	else
-	{ ERR << tag_r << endl; }
+	{ WAR << errPrefix( tag_r, "Unknown tag" ) << endl; }
       }
 
       ///////////////////////////////////////////////////////////////////
@@ -368,7 +368,7 @@ namespace zypp
 	else if TAGFWD( Kwd );
 	else if TAGFWD( Aut );
 	else
-	{ ERR << tag_r << endl; }
+	{ WAR << errPrefix( tag_r, "Unknown tag" ) << endl; }
       }
 
       ///////////////////////////////////////////////////////////////////

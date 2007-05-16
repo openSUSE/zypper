@@ -126,7 +126,7 @@ namespace zypp
     std::string TagParser::errPrefix( const MultiTagPtr & tag_r,
 				      const std::string & msg_r ) const
     {
-      return str::form( "%s:%u:+%s (@%lu) | %s",
+      return str::form( "%s:%u:+%s (@%u) | %s",
 			_inputname.c_str(),
 			tag_r->lineNo,
 			tag_r->asString().c_str(),
@@ -324,7 +324,6 @@ namespace zypp
 	  }
 	  break;
 	}
-
 
 	if ( ! ticks.set( input_r.stream().tellg() ) )
 	  userRequestedAbort( line.lineNo() );

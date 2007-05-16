@@ -11,6 +11,7 @@ INCLUDE_DIRECTORIES( ${CMAKE_SOURCE_DIR} ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CUR
 ADD_DEFINITIONS(-DLOCALEDIR=\\\"/usr/share/libzypp\\\" -DTEXTDOMAIN=\\\"zypp\\\" )
 
 SET( zypp_SRCS
+  ZConfig.cc
   LanguageCode.cc
   Arch.cc
   Atom.cc
@@ -87,7 +88,8 @@ SET( zypp_SRCS
   Fetcher.cc
 )
 
-SET( zypp_HEADERS
+SET( zypp_HEADERSZ
+  ZConfig.h
   Arch.h
   Atom.h
   AutoDispose.h
@@ -448,12 +450,16 @@ INSTALL(  FILES
 )
 
 SET( zypp_parser_susetags_SRCS
+  parser/susetags/RepoIndex.cc
+  parser/susetags/ContentFileReader.cc
   parser/susetags/PackagesFileReader.cc
   parser/susetags/PackagesLangFileReader.cc
   parser/susetags/PatternFileReader.cc
 )
 
 SET( zypp_parser_susetags_HEADERS
+  parser/susetags/RepoIndex.h
+  parser/susetags/ContentFileReader.h
   parser/susetags/FileReaderBase.h
   parser/susetags/FileReaderBaseImpl.h
   parser/susetags/PackagesFileReader.h

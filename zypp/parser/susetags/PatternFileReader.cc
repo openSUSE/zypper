@@ -292,7 +292,7 @@ namespace zypp
 	else if TAGFWD( Ord );
 	else if TAGFWD( Ver );
 	else
-	{ ERR << tag_r << endl; }
+	{ WAR << errPrefix( tag_r, "Unknown tag" ) << endl; }
       }
 
       ///////////////////////////////////////////////////////////////////
@@ -326,7 +326,7 @@ namespace zypp
 	else if TAGFWD( Inc ); // UI hint: includes
 	else if TAGFWD( Ext ); // UI hint: extends
 	else
-	{ ERR << tag_r << endl; }
+	{ WAR << errPrefix( tag_r, "Unknown tag" ) << endl; }
       }
 
       ///////////////////////////////////////////////////////////////////
