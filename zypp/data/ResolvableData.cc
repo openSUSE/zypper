@@ -20,6 +20,7 @@ IMPL_PTR_TYPE(Resolvable);
 IMPL_PTR_TYPE(ResObject);
 IMPL_PTR_TYPE(Script);
 IMPL_PTR_TYPE(Message);
+IMPL_PTR_TYPE(Atom);
 IMPL_PTR_TYPE(Patch);
 IMPL_PTR_TYPE(Pattern);
 IMPL_PTR_TYPE(Product);

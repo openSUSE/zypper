@@ -191,7 +191,6 @@ namespace data
   {
     public:
       Patch()
-        : rebootNeeded(false), affectsPkgManager(false)
       {};
 
       /** Patch ID */
@@ -206,11 +205,12 @@ namespace data
       DefaultIntegral<bool,false> rebootNeeded;
       /** Does the patch affect the package manager itself? */
       DefaultIntegral<bool,false> affectsPkgManager;
-  
-      /** The list of all atoms building the patch.
-       * \todo See whether we need this.
+
+      /**
+       * The set of all atoms building the patch. These can be either
+       * \ref Atom, \ref Message or \ref Script.
        */
-      std::set<RecordId> atomList;
+      std::set<ResObject_Ptr> atoms;
   };
 
   ///////////////////////////////////////////////////////////////////
