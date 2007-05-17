@@ -38,7 +38,10 @@ namespace zypp
       tag_NONE,
       tag_package,
       tag_format,
-      tag_atoms
+      tag_patch,
+      tag_atoms,
+      tag_script,
+      tag_message
     };
 
     /**
@@ -136,7 +139,9 @@ namespace zypp
     Dep _dtype;
   };
 
+  /** \relates FileReaderBase::TagPath */
   std::ostream & operator << (std::ostream & out, const FileReaderBase::TagPath & obj);
+
 
     } // ns yum
   } // ns parser

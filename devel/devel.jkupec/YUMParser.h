@@ -56,6 +56,8 @@ namespace zypp
     );
 
     void start(const zypp::Pathname & path);
+
+  private:
     void doJobs(const zypp::Pathname & path);
 
     bool repomd_CB(const OnMediaLocation & loc, const YUMResourceType & dtype);

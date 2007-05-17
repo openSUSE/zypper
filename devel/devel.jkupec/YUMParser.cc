@@ -22,8 +22,6 @@
 #undef ZYPP_BASE_LOGGER_LOGGROUP
 #define ZYPP_BASE_LOGGER_LOGGROUP "parser"
 
-using std::endl;
-
 namespace zypp
 {
   namespace parser
@@ -46,9 +44,6 @@ namespace zypp
     :
       _consumer(consumer), _catalog_id(catalog_id)
   {
-    ZYpp::Ptr z = getZYpp();
-//    _system_arch = z->architecture();
-
     _ticks.name("YUMParser");
     _ticks.sendTo(progress);
     MIL << "constructed" << endl;

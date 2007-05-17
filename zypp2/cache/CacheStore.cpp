@@ -211,6 +211,33 @@ void CacheStore::consumePatch( const data::RecordId &catalog_id, data::Patch_Ptr
   RecordId id = appendResolvable( catalog_id, ResTraits<Patch>::kind, NVRA( patch->name, patch->edition, patch->arch ), patch->deps );
   consumeResObject( id, patch );
   
+  /*
+  DBG << "got patch " << patch->name << ", atoms: ";
+  for (set<data::ResObject_Ptr>::const_iterator p = patch->atoms.begin();
+       p != patch->atoms.end(); ++p)
+  {
+    data::Atom_Ptr atom = dynamic_pointer_cast<data::Atom>(*p);
+    if (atom)
+    {
+      DBG << atom->name << "(atom) ";
+      continue;
+    }
+    data::Script_Ptr script = dynamic_pointer_cast<data::Script>(*p);
+    if (script)
+    {
+      DBG << script->name << "(script) ";
+      continue;
+    }
+    data::Message_Ptr message = dynamic_pointer_cast<data::Message>(*p);
+    if (message)
+    {
+      DBG << message->name << "(message) ";
+      continue;
+    }
+    DBG << "!badatom! ";
+  }
+  DBG << endl;
+  */
 }
 
 void CacheStore::consumeMessage( const data::RecordId &catalog_id, data::Message_Ptr message )

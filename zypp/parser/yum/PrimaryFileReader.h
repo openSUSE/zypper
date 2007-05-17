@@ -60,14 +60,27 @@ namespace zypp
       const ProgressData::ReceiverFnc & progress = ProgressData::ReceiverFnc());
 
     /**
-     * Callback provided to the XML parser.
+     * Callback provided to the XML reader.
+     * 
+     * This is the main parsing method which gets envoked by the \ref xml::Reader
+     * to process each node, one at a time. It is responsible for parsing the
+     * node and calling all other consume* methods.
+     *
+     * \param  the xml reader object reading the file  
+     * \return true to tell the reader to continue, false to tell it to stop
+     *
+     * \note Semantics of this method's return value also differs from other
+     *       consume* methods. While this method's return value tells the the
+     *       xml reader to continue or stop, return value of the rest tells
+     *       their callers if further
      */
     bool consumeNode(xml::Reader & reader_r);
 
   private:
     /**
-     * Creates a new Package_Ptr swaps its contents with \ref _package and
-     * returns it.
+     * Creates a new \ref data::Package_Ptr, swaps its contents with \ref
+     * _package and returns it. Used to hand-out the data object to its consumer
+     * (a \ref ProcessPackage function) after it has been read.
      */
     data::Package_Ptr handoutPackage();
 
