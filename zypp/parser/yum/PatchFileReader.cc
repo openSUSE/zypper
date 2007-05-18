@@ -34,6 +34,17 @@ namespace zypp
 
   // --------------------------------------------------------------------------
 
+  /*
+   * xpath and multiplicity of processed nodes are included in the code
+   * for convenience:
+   * 
+   * // xpath: <xpath> (?|*|+)
+   * 
+   * if multiplicity is ommited, then the node has multiplicity 'one'. 
+   */
+
+  // --------------------------------------------------------------------------
+
   bool PatchFileReader::consumeNode(Reader & reader_r)
   {
     if (isBeingProcessed(tag_atoms) && consumeAtomsNode(reader_r))
@@ -76,10 +87,11 @@ namespace zypp
         _patch->description.setText(reader_r.nodeText().asString(), locale);
         return true;
       }
-      
-      // xpath: /patch/licence-to-confirm
+
+      // xpath: /patch/licence-to-confirm (*)
       if (reader_r->name() == "license-to-confirm")
       {
+        // TODO support several licenses in several languages?
         Locale locale(reader_r->getAttribute("lang").asString());
         _patch->licenseToConfirm.setText(reader_r.nodeText().asString(), locale);
         return true;
@@ -105,29 +117,34 @@ namespace zypp
         return true;
       }
 
-      // xpath: /patch/reboot-needed
+      // xpath: /patch/reboot-needed (?)
       if (reader_r->name() == "reboot-needed")
       {
         _patch->rebootNeeded = true;
         return true;
       }
 
-      // xpath: /patch/package-manager
+      // xpath: /patch/package-manager (?)
       if (reader_r->name() == "package-manager")
       {
         _patch->affectsPkgManager = true;
         return true;
       }
 
-      // TODO xpath: /patch/update-script
+      // xpath: /patch/update-script (?)
+      if (reader_r->name() == "update-script")
+      {
+        _patch->updateScript = reader_r.nodeText().asString();
+      }
 
-      // xpath: /patch/atoms
+      // xpath: /patch/atoms (+)
       if (reader_r->name() == "atoms")
       {
         // remember that we are processing atoms from now on
         // xpath: /patch/atoms/*
         tag(tag_atoms);
-        // no need to further process this node so not calling consumeAtomsNode();
+        // no need to further process this node so not calling
+        // consumeAtomsNode() here
         return true;
       }
     }
@@ -208,7 +225,7 @@ namespace zypp
       if (reader_r->name() == "package")
       {
         data::Atom_Ptr atom_ptr = new data::Atom;
-        copyAtomFromTmpObj(atom_ptr); 
+        copyPackageAtomFromTmpObj(atom_ptr); 
         _patch->atoms.insert(atom_ptr);
 
         DBG << "Atom " << atom_ptr->name << " " << atom_ptr->edition << " successfully read." << endl;  
@@ -276,7 +293,7 @@ namespace zypp
 
   bool PatchFileReader::consumeMessageNode(Reader & reader_r)
   {
-    if (FileReaderBase::consumeDependency(reader_r, _tmpResObj->deps))
+    if (consumeDependency(reader_r, _tmpResObj->deps))
       return true;
 
     if (reader_r->nodeType() == XML_READER_TYPE_ELEMENT)
@@ -325,8 +342,18 @@ namespace zypp
 
   bool PatchFileReader::consumeScriptNode(Reader & reader_r)
   {
+    if (consumeDependency(reader_r, _tmpResObj->deps))
+      return true;
+
     if (reader_r->nodeType() == XML_READER_TYPE_ELEMENT)
     {
+      data::Script_Ptr script = dynamic_pointer_cast<data::Script>(_tmpResObj);
+      if (!script)
+      {
+        WAR << "data::Script object expected, but not found" << endl;
+        return true;
+      }
+
       // xpath: /patch/atoms/script/yum:name
       if (reader_r->name() == "yum:name")
       {
@@ -340,6 +367,58 @@ namespace zypp
         _tmpResObj->edition = Edition(reader_r->getAttribute("ver").asString(),
                                     reader_r->getAttribute("rel").asString(),
                                     reader_r->getAttribute("epoch").asString());
+        return true;
+      }
+
+      // xpath: /patch/atoms/script/do
+      if (reader_r->name() == "do")
+      {
+        script->doScript = reader_r.nodeText().asString();
+        return true;
+      }
+
+      // xpath: /patch/atoms/script/undo
+      if (reader_r->name() == "undo")
+      {
+        script->undoScript = reader_r.nodeText().asString();
+        return true;
+      }
+
+      // TODO xpath: /patch/atoms/script/do-location
+      if (reader_r->name() == "do-location")
+      {
+        // xsd:anyURI
+//        script->doScriptLocation.filepath = reader_r->getAttribute("xml:base").asString();
+        // xsd:anyURI
+//        script->doScriptLocation.? = reader_r->getAttribute("href").asString();
+        return true;
+      }
+
+      // xpath: /patch/atoms/script/do-checksum
+      if (reader_r->name() == "do-checksum")
+      {
+        script->doScriptLocation.fileChecksum = CheckSum(
+                            reader_r->getAttribute("type").asString(),
+                            reader_r.nodeText().asString());
+        return true;
+      }
+
+      // TODO xpath: /patch/atoms/script/undo-location
+      if (reader_r->name() == "undo-location")
+      {
+        // xsd:anyURI
+//        script->undoScriptLocation.filepath = reader_r->getAttribute("xml:base").asString();
+        // xsd:anyURI
+//        script->undoScriptLocation.? = reader_r->getAttribute("href").asString();
+        return true;
+      }
+
+      // xpath: /patch/atoms/script/undo-checksum
+      if (reader_r->name() == "undo-checksum")
+      {
+        script->undoScriptLocation.fileChecksum = CheckSum(
+                            reader_r->getAttribute("type").asString(),
+                            reader_r.nodeText().asString());
         return true;
       }
     }
@@ -376,7 +455,7 @@ namespace zypp
 
   // --------------------------------------------------------------------------
 
-  void PatchFileReader::copyAtomFromTmpObj(data::Atom_Ptr & atom_ptr) const
+  void PatchFileReader::copyPackageAtomFromTmpObj(data::Atom_Ptr & atom_ptr) const
   {
     atom_ptr->name = _tmpResObj->name;
     atom_ptr->edition = _tmpResObj->edition;

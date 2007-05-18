@@ -206,6 +206,9 @@ namespace data
       /** Does the patch affect the package manager itself? */
       DefaultIntegral<bool,false> affectsPkgManager;
 
+      /** TODO Don't know what this is, but it's defined in patch.rnc */
+      std::string updateScript;
+
       /**
        * The set of all atoms building the patch. These can be either
        * \ref Atom, \ref Message or \ref Script.

@@ -24,19 +24,27 @@ namespace zypp
 
 
   /**
+   * Reader of patch.xml files conforming to RNC/RNG definition located
+   * in zypp/parser/yum/schema/patch.rn(c|g).
    * 
+   * \see zypp::data::Patch
+   * \see zypp::parser::xml::Reader
    */
   class PatchFileReader : FileReaderBase
   {
   public:
 
     /**
-     * Callback definition.
+     * Consumer callback definition. Function which will process the read
+     * data must be of this type.
      */
     typedef function<bool(const data::Patch_Ptr &)> ProcessPatch;
 
     /**
-     * 
+     * CTOR. Creates also \ref xml::Reader and starts reading.
+     *
+     * \param patch_file patch.xml file to read.
+     * \param callback Function which will process read data.
      */
     PatchFileReader(const Pathname & patch_file, ProcessPatch callback);
 
@@ -53,15 +61,30 @@ namespace zypp
     bool consumeNode(xml::Reader & reader_r);
 
     /**
-     * Process atoms node and all of its children.
+     * Process <tt>atoms</tt> node and all of its children.
      * 
+     * \param reader_r XML file reader reading the patch file.
      * \return true if current node has been completely processed, false
      *         if additional processing is required outside of the method. 
      */
     bool consumeAtomsNode(xml::Reader & reader_r);
 
+    /**
+     * Process <tt>message</tt> node and all of its children.
+     * 
+     * \param reader_r XML file reader reading the patch file.
+     * \return true if current node has been completely processed, false
+     *         if additional processing is required outside of the method. 
+     */
     bool consumeMessageNode(xml::Reader & reader_r);
 
+    /**
+     * Process <tt>script</tt> node and all of its children.
+     * 
+     * \param reader_r XML file reader reading the patch file.
+     * \return true if current node has been completely processed, false
+     *         if additional processing is required outside of the method. 
+     */
     bool consumeScriptNode(xml::Reader & reader_r);
 
     /**
@@ -71,9 +94,17 @@ namespace zypp
      */
     data::Patch_Ptr handoutPatch();
 
+    /**
+     * Creates a new \ref data::ResObject_Ptr, swap its contents with
+     * \ref _tmpResObj and inserts it into <tt>_patch.atoms</tt>. Used
+     * after an atom is read.
+     */
     void saveAtomInPatch();
-    
-    void copyAtomFromTmpObj(data::Atom_Ptr & atom_ptr) const;
+
+    /**
+     * 
+     */
+    void copyPackageAtomFromTmpObj(data::Atom_Ptr & atom_ptr) const;
 
   private:
     /**
