@@ -10,11 +10,11 @@
  *
 */
 
-
-
+#include <iostream>
 #include <zypp/parser/xmlstore/XMLParserData.h>
 
 using namespace std;
+
 namespace zypp {
   namespace parser {
     namespace xmlstore {
