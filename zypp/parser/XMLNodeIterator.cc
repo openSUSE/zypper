@@ -17,7 +17,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
-
+#include <sstream>
 #include <zypp/parser/XMLNodeIterator.h>
 #include <zypp/base/Logger.h>
 #include <libxml2/libxml/xmlreader.h>
