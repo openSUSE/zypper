@@ -13,54 +13,45 @@
 
 using namespace zypp;
 
-unsigned int getResolvables();
+unsigned int getResolvables(ResStore*);
 
 int main(){
-	/* old Test-Main
-	database *db = new database("lorien.suse.de", "rpmread", "Salahm1", "rpm");
-	//database *db = new database("lorien.suse.de", "rpmread", "Salahm1", "package");
-	//resolvable *test = new resolvable("art", "386", "1.0", "99", "tr");
+	
+	static ZYpp::Ptr God;
+	ResStore *store = new ResStore();
 
-	string sqlcom = "";
+	std::cout << "Returncode: " << getResolvables(store) << std::endl;
+	
+	// Get Zypp lock	
+	try {
+	    God = zypp::getZYpp();
+    }
+    catch (const Exception & excpt_r ) {
+    	ZYPP_CAUGHT( excpt_r );
+		std::cerr << "Can't aquire ZYpp lock" << std::endl;
+    	return 1;
+    }	
 
-	if(db->connect() == 1){
-		while(1){
-			std::cout << "SQL-Kommando: ";
-			std::getline(std::cin, sqlcom);
+	God->addResolvables(*store);
+	
+	std::cout << "Number of elements in pool: " << God->pool().size() << std::endl;
+	std::cout << "Verify System: " << God->resolver()->verifySystem() << std::endl;
 
-			if(sqlcom.compare("quit") == 0)
-				break;
-
-			db->sqlexecute(sqlcom);
-		}
+	for (ResPool::const_iterator it = God->pool().begin(); it != God->pool().end(); ++it) {
+			if(it->resolvable()->name() == "pidgin"){
+				CapSet caps = it->resolvable()->dep (Dep::PROVIDES);
+				for (CapSet::const_iterator itCap = caps.begin(); itCap != caps.end(); ++itCap)
+					std::cout << "Requires: " << itCap->asString()  << std::endl;
+			}
 	}
 
-	//test->addDep(REQUIRES, "test2");
-	std::vector< std::vector<string> > result = db->getResult();
-	db->close();
-
-	for(unsigned int i = 0; i < result.size(); i++){
-		for(unsigned int y = 0; y < result[i].size(); y++)
-			std::cout << result[i].at(y) << " | ";
-		std::cout << std::endl;
-	}
-	*/	
-	//std::cout << "Anzahl an Zeilen: "  << result.size() << std::endl;
-	
-	
-	std::cout << "Returncode: " << getResolvables() << std::endl;
-	
 	return 0;
 }
 
-unsigned int getResolvables(){
+unsigned int getResolvables(ResStore *store){
 
 	database *dbDeps = new database("lorien.suse.de", "rpmread", "Salahm1", "rpm");
 	database *dbPackages = new database("lorien.suse.de", "rpmread", "Salahm1", "package");
-
-	ResStore *store = new ResStore();
-
-	static ZYpp::Ptr God;
 
 	if(dbPackages->connect() != 1){
 		std::cout << "NO DB CONNECTION!!!\n";
@@ -77,7 +68,7 @@ unsigned int getResolvables(){
 	std::vector< std::vector<string> > packIDs = dbPackages->getResult();
 	std::cout << "get packages from db...\n";
 
-	for(unsigned int i = 0; i < packIDs.size(); i++){
+	for(unsigned int i = 4300; i < packIDs.size(); i++){
 
 		string sqlcom("SELECT PackID FROM Packages WHERE BasedOnID=");
 		sqlcom.append(packIDs[i].at(0));
@@ -132,16 +123,14 @@ unsigned int getResolvables(){
 				Rel rel = Rel::ANY;
 				
 				if(packDeps[y].at(0) == "(none)")
-					break;
+					continue;
 
 				if(packDeps[y].at(2) != "NULL"){
 					rel = Rel(packDeps[y].at(2));
 					ed = packDeps[y].at(3);
 				}
-				if(rel.asString() == "ANY")
-					break;
-				//	std::cout << "Symbol: " << packDeps[y].at(0) << " Operator:  " << rel << " edition: " << ed << " kind: " << packDeps[y].at(1) << "\n";
-				//std::cout << rel << std::endl;
+				//if(rel.asString() == "ANY")
+				//	continue;
 
 				if(packDeps[y].at(1) == "provides"){
 					prov.insert(CapFactory().parse(Resolvable::Kind("Package"), packDeps[y].at(0)
@@ -214,20 +203,41 @@ unsigned int getResolvables(){
 	dbDeps->close();
 	dbPackages->close();
 
-
-	// Get Zypp lock	
-	try {
-	    God = zypp::getZYpp();
-    }
-    catch (const Exception & excpt_r ) {
-    	ZYPP_CAUGHT( excpt_r );
-		std::cerr << "Can't aquire ZYpp lock" << std::endl;
-    	return 1;
-    }	
-
-	God->addResolvables(*store);
-
 	return 0;
 
 }
 
+int old_test(){
+
+	//* old Test-Main
+	database *db = new database("lorien.suse.de", "rpmread", "Salahm1", "rpm");
+	//database *db = new database("lorien.suse.de", "rpmread", "Salahm1", "package");
+	//resolvable *test = new resolvable("art", "386", "1.0", "99", "tr");
+
+	string sqlcom = "";
+
+	if(db->connect() == 1){
+		while(1){
+			std::cout << "SQL-Kommando: ";
+			std::getline(std::cin, sqlcom);
+
+			if(sqlcom.compare("quit") == 0)
+				break;
+
+			db->sqlexecute(sqlcom);
+		}
+	}
+
+	//test->addDep(REQUIRES, "test2");
+	std::vector< std::vector<string> > result = db->getResult();
+	db->close();
+
+	for(unsigned int i = 0; i < result.size(); i++){
+		for(unsigned int y = 0; y < result[i].size(); y++)
+			std::cout << result[i].at(y) << " | ";
+		std::cout << std::endl;
+	}
+		
+	//std::cout << "Anzahl an Zeilen: "  << result.size() << std::endl;
+	return 0;
+}
