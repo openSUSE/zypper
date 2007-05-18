@@ -308,7 +308,7 @@ namespace data
       /** Rpm group.*/
       std::string group;
       /** PackageDb keywors (tags). */
-      std::list<std::string> keywords;
+      std::set<std::string> keywords;
 
       /** Changelog. */
       Changelog changelog;

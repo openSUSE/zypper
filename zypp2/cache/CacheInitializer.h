@@ -16,7 +16,6 @@
 #include "zypp/base/PtrTypes.h"
 #include "zypp/base/ReferenceCounted.h"
 #include "zypp/base/NonCopyable.h"
-#include "zypp/base/PtrTypes.h"
 #include "zypp/Pathname.h"
 #include "zypp2/cache/sqlite3x/sqlite3x.hpp"
 

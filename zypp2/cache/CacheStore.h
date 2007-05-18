@@ -46,7 +46,7 @@ namespace zypp
      *
      * \note Data will not be commited until you explicitely commit.
      */
-    class CacheStore
+    class CacheStore : public data::ResolvableDataConsumer
     {
     public:
 

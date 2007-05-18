@@ -15,7 +15,8 @@ namespace zypp
   { /////////////////////////////////////////////////////////////////
  
    /**
-    * 
+    * The resolvable query class allows you to query for resolvable
+    * data and properties from the cache.
     */
     struct ResolvableQuery
     {
@@ -28,6 +29,11 @@ namespace zypp
       typedef function<bool( const data::RecordId &, 
                              data::ResObject_Ptr )> ProcessResolvable;
       
+      /**
+       * Constructor
+       *
+       * \param dbdir Cache location path
+       */
       ResolvableQuery( const Pathname &dbdir );
       
       /**

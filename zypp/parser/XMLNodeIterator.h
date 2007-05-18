@@ -14,9 +14,9 @@
 #define XMLNodeIterator_h
 
 #include <zypp/parser/LibXMLHelper.h>
-#include <iostream>
-#include <ostream>
-#include <sstream>
+#include <iosfwd>
+//#include <ostream>
+//#include <sstream>
 #include "zypp/parser/xml_parser_assert.h"
 #include "zypp/Pathname.h"
 #include "zypp/parser/ParserProgress.h"

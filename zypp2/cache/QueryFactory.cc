@@ -12,7 +12,6 @@
 
 #include "zypp/base/Logger.h"
 
-#include "zypp2/cache/DatabaseTypes.h"
 #include "zypp2/cache/CacheInitializer.h"
 #include "zypp2/cache/QueryFactory.h"
 

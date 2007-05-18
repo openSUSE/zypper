@@ -5,7 +5,6 @@
 #ifndef ZYPP_REPOSITORY_IMPL_h
 #define ZYPP_REPOSITORY_IMPL_h
 
-#include <iostream>
 #include <iosfwd>
 #include <string>
 

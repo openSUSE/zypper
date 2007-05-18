@@ -1,6 +1,6 @@
 
+#include "zypp2/cache/CacheTypes.h"
 #include "zypp2/cache/ResolvableQuery.h"
-#include "zypp2/cache/DatabaseTypes.h"
 #include "zypp2/cache/sqlite3x/sqlite3x.hpp"
 
 using namespace sqlite3x;
@@ -11,8 +11,13 @@ namespace zypp { namespace cache {
 
 struct ResolvableQuery::Impl
 {
+  Pathname _dbdir;
+  string _fields;
+  CacheTypes _type_cache;
+  
   Impl( const Pathname &dbdir)
   : _dbdir(dbdir)
+    , _type_cache(dbdir)
   {
     _fields = "id, name, version, release, epoch, arch, kind, installed_size, archive_size, install_only, build_time, install_time, catalog_id";
   }
@@ -27,7 +32,7 @@ struct ResolvableQuery::Impl
 
     ptr->name = reader.getstring(1);
     ptr->edition = Edition( reader.getstring(2), reader.getstring(3), reader.getint(4));
-    ptr->arch = db_arch2zypp_arch( static_cast<db::Arch>(reader.getint(5)));
+    ptr->arch = _type_cache.archFor(reader.getint(5));
 
     // TODO get the rest of the data
 
@@ -52,7 +57,8 @@ struct ResolvableQuery::Impl
 
   void query( const std::string &s,
               ProcessResolvable fnc  )
-  {
+  {  
+    
     sqlite3_connection con((_dbdir + "zypp.db").asString().c_str());
     //con.executenonquery("PRAGMA cache_size=8000;");
     con.executenonquery("BEGIN;");
@@ -171,9 +177,6 @@ private:
 
     return cmd.executestring();
   }
-
-  Pathname _dbdir;
-  string _fields;
 };
 
 //////////////////////////////////////////////////////////////////////////////

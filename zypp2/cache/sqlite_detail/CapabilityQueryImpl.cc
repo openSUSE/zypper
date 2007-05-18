@@ -10,7 +10,6 @@
 
 #include "zypp/base/Logger.h"
 
-#include "zypp2/cache/DatabaseTypes.h"
 #include "zypp2/cache/CacheInitializer.h"
 #include "zypp2/cache/sqlite_detail/CapabilityQueryImpl.h"
 
@@ -30,6 +29,7 @@ CapabilityQuery::Impl::Impl( DatabaseContext_Ptr p_context )
   : context(p_context)
     , _namedcap_read(false), _filecap_read(false)
     , _namedcap_done(false), _filecap_done(false)
+    , _
 {}
 
 CapabilityQuery::Impl::~Impl()

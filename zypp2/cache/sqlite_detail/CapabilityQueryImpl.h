@@ -21,9 +21,9 @@
 #include "zypp/base/PtrTypes.h"
 #include "zypp/Pathname.h"
 #include "zypp/data/RecordId.h"
-#include "zypp/base/PtrTypes.h"
 #include "zypp2/cache/sqlite_detail/CacheSqlite.h"
 #include "zypp2/cache/QueryFactory.h"
+#include "zypp2/cache/CacheTypes.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -47,6 +47,9 @@ namespace zypp
       
       bool _namedcap_done;
       bool _filecap_done;
+      
+      CacheTypes _type_cache;
+      
     };
 
   } //NS cache

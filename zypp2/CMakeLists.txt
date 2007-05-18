@@ -33,27 +33,27 @@ SET( zypp2_HEADERS
 
 SET( zypp2_cache_SRCS
   cache/CacheInitializer.cpp
-  cache/QueryFactory.cc
-  cache/CapabilityQuery.cc
+  cache/CacheTypes.cc
+#  cache/QueryFactory.cc
+#  cache/CapabilityQuery.cc
   cache/ResolvableQuery.cc
-  cache/CachedResolvableDataProvider.cc
-  cache/sqlite_detail/CapabilityQueryImpl.cc
-  cache/sqlite_detail/QueryFactoryImpl.cc
+#  cache/CachedResolvableDataProvider.cc
+#  cache/sqlite_detail/CapabilityQueryImpl.cc
+#  cache/sqlite_detail/QueryFactoryImpl.cc
   cache/CacheStore.cpp
   cache/Utils.cpp
-  cache/DatabaseTypes.cc
 )
 
 SET( zypp2_cache_HEADERS
   cache/CacheCommon.h
+  cache/CacheTypes.h
   cache/CacheInitializer.h
   cache/CacheStore.h
   cache/ResolvableQuery.h
-  cache/CapablityQuery.h
-  cache/QueryFactory.h
+#  cache/CapablityQuery.h
+#  cache/QueryFactory.h
   cache/Utils.h
-  cache/DatabaseTypes.h
-  cache/CachedResolvableDataProvider.h
+#  cache/CachedResolvableDataProvider.h
 )
 
 #INSTALL(  FILES
@@ -98,6 +98,15 @@ SET( zypp2_repository_cached_HEADERS
   repository/cached/CachedRepositoryPackageImpl.h
 )
 
+SET( zypp2_repository_data_SRCS
+  repository/memory/DataPackageImpl.cc
+)
+
+SET( zypp2_repository_data_HEADERS
+  repository/memory/DataPackageImpl.h
+)
+
+
 #INSTALL(  FILES
 #  ${zypp2_repository_sqlite-repository_HEADERS}
 #  DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp2/repository/sqlite-repository
@@ -109,6 +118,7 @@ ${zypp2_repository_SRCS}
 ${zypp2_SRCS}
 ${zypp2_cache_SRCS}
 ${zypp2_repository_cached_SRCS}
+${zypp2_repository_data_SRCS}
 ${zypp2_cache_sqlite3x_SRCS}
 )
 

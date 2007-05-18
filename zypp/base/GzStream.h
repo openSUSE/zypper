@@ -21,7 +21,7 @@
 #ifndef ZYPP_BASE_GZSTREAM_H
 #define ZYPP_BASE_GZSTREAM_H
 
-#include <iostream>
+#include <iosfwd>
 #include <vector>
 #include <zlib.h>
 

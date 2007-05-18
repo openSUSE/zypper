@@ -23,7 +23,6 @@ namespace zypp
   RepositoryInfo::RepositoryInfo()
   : _enabled (indeterminate)
   , _autorefresh(indeterminate)
-  , _base_repository( indeterminate )
   {
 
   }
@@ -34,8 +33,7 @@ namespace zypp
                                   tribool autorefresh)
   : _enabled (true),
     _autorefresh(autorefresh),
-    _base_repository( indeterminate ),
-    _url(url),
+    _baseurl(url),
     _path(path),
     _alias(alias)
   {
@@ -54,15 +52,9 @@ namespace zypp
     return *this;
   }
 
-  RepositoryInfo & RepositoryInfo::setBaseRepository( bool val_r )
+  RepositoryInfo & RepositoryInfo::setBaseUrl( const Url &url )
   {
-    _base_repository = val_r;
-    return *this;
-  }
-
-  RepositoryInfo & RepositoryInfo::setUrl( const Url &url )
-  {
-    _url = url;
+    _baseurl = url;
     return *this;
   }
 
@@ -108,9 +100,7 @@ namespace zypp
   tribool RepositoryInfo::autorefresh() const
   { return _autorefresh; }
 
-  boost::tribool RepositoryInfo::baseRepository() const
-  { return _base_repository; }
-
+  
   Pathname RepositoryInfo::path() const
   { return _path; }
 
@@ -129,16 +119,24 @@ namespace zypp
   std::string RepositoryInfo::type() const
   { return _type; }
 
-  Url RepositoryInfo::url() const
-  { return _url; }
+  Url RepositoryInfo::baseUrl() const
+  { return _baseurl; }
 
+  std::set<Url> RepositoryInfo::urls() const
+  { return _urls; }
+    
+  RepositoryInfo::urls_const_iterator RepositoryInfo::urlsBegin() const
+  { return _urls.begin(); }
+    
+  RepositoryInfo::urls_const_iterator RepositoryInfo::urlsEnd() const
+  { return _urls.end(); }
+  
   std::ostream & RepositoryInfo::dumpOn( std::ostream & str ) const
   {
     str << "--------------------------------------" << std::endl;
     str << "- alias       : " << alias() << std::endl;
-    str << "- url         : " << url() << std::endl;
+    str << "- url         : " << baseUrl() << std::endl;
     str << "- type        : " << type() << std::endl;
-    str << "- baserepository  : " << baseRepository() << std::endl;
     str << "- enabled     : " << enabled() << std::endl;
     str << "- autorefresh : " << autorefresh() << std::endl;
     str << "- path        : " << path() << std::endl;

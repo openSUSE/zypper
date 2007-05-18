@@ -18,7 +18,7 @@
 #include "zypp/TranslatedText.h"
 #include <string>
 #include <list>
-#include <iostream>
+#include <iosfwd>
 #include <zypp/base/PtrTypes.h>
 
 using namespace zypp::base;

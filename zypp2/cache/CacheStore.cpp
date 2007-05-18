@@ -3,13 +3,13 @@
 #include <map>
 #include "zypp2/cache/sqlite3x/sqlite3x.hpp"
 
+#include "zypp/base/Logger.h"
 #include "zypp/base/Measure.h"
 #include "zypp/ZYppFactory.h"
 #include "zypp/ZYpp.h"
 
 #include "zypp2/cache/CacheInitializer.h"
 #include "zypp2/cache/CacheStore.h"
-#include "zypp2/cache/DatabaseTypes.h"
 
 using namespace std;
 using namespace zypp;

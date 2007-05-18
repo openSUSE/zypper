@@ -22,6 +22,8 @@
 #include <sqlite3.h>
 #include "zypp2/cache/sqlite3x/sqlite3x.hpp"
 
+#include "zypp2/cache/CacheTypes.h"
+
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
@@ -84,10 +86,7 @@ namespace zypp
         
         void read_capabilities( sqlite3x::sqlite3_connection &con, std::map<data::RecordId, NVRAD> &nvras );
         
-        std::map<data::RecordId, Rel> _rel_cache;
-        std::map<data::RecordId, Resolvable::Kind> _kind_cache;
-        std::map<data::RecordId, std::string> _deptype_cache;
-        std::map<data::RecordId, Arch> _arch_cache;
+        cache::CacheTypes _type_cache;
       };
       ///////////////////////////////////////////////////////////////////
 

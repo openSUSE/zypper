@@ -20,7 +20,6 @@
 #include "zypp/base/PtrTypes.h"
 #include "zypp/Pathname.h"
 #include "zypp/data/RecordId.h"
-#include "zypp/base/PtrTypes.h"
 
 #include "zypp2/cache/CapabilityQuery.h"
 

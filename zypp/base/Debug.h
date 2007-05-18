@@ -14,9 +14,9 @@
 #ifndef ZYPP_BASE_DEBUG_H
 #define ZYPP_BASE_DEBUG_H
 
-#include <iostream>
-#include <sstream>
-#include <string>
+#include <iosfwd>
+//#include <sstream>
+//#include <string>
 #include "zypp/base/Logger.h"
 #include "zypp/base/String.h"
 #include "zypp/ExternalProgram.h"
