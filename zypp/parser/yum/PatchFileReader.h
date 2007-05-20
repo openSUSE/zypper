@@ -70,6 +70,35 @@ namespace zypp
     bool consumeAtomsNode(xml::Reader & reader_r);
 
     /**
+     * Process <tt>package</tt> node and all of its children. This method
+     * uses \ref FileReaderBase::consumePackageNode(xml::Reader,data::Package_Ptr)
+     * method and adds <tt>pkgfiles</tt> element processing.
+     * 
+     * \param reader_r XML file reader reading the patch file.
+     * \return true if current node has been completely processed, false
+     *         if additional processing is required outside of the method. 
+     */
+    bool consumePackageNode(xml::Reader & reader_r);
+
+    /**
+     * Process <tt>patchrpm</tt> node and all of its children.
+     * 
+     * \param reader_r XML file reader reading the patch file.
+     * \return true if current node has been completely processed, false
+     *         if additional processing is required outside of the method. 
+     */
+    bool consumePatchrpmNode(xml::Reader & reader_r);
+
+    /**
+     * Process <tt>deltarpm</tt> node and all of its children.
+     * 
+     * \param reader_r XML file reader reading the patch file.
+     * \return true if current node has been completely processed, false
+     *         if additional processing is required outside of the method. 
+     */
+    bool consumeDeltarpmNode(xml::Reader & reader_r);
+
+    /**
      * Process <tt>message</tt> node and all of its children.
      * 
      * \param reader_r XML file reader reading the patch file.
@@ -118,8 +147,19 @@ namespace zypp
      */
     data::Patch_Ptr _patch;
 
-    /** Pointer to an atom currently being read. */
+    /**
+     * Pointer to an atom currently being read. This can be either
+     * a \ref data::PackageAtom, \ref data::Message, or \ref data::Script.
+     *
+     * \see data::Patch::atoms
+     */
     data::ResObject_Ptr _tmpResObj;
+
+    /** Data object for storing patchrpm data */
+    data::PatchRpm_Ptr _patchrpm;
+
+    /** Data object for storing deltarpm data */
+    data::DeltaRpm_Ptr _deltarpm;
   };
 
 

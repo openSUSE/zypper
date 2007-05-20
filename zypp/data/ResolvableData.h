@@ -211,7 +211,7 @@ namespace data
 
       /**
        * The set of all atoms building the patch. These can be either
-       * \ref Atom, \ref Message or \ref Script.
+       * \ref PackageAtom, \ref Message or \ref Script.
        */
       std::set<ResObject_Ptr> atoms;
   };
@@ -298,7 +298,7 @@ namespace data
   class Packagebase : public ResObject
   {
     public:
-      enum PackageType { BIN, SRC };
+      enum PackageType { BIN, SRC, ATOM };
       virtual PackageType packageType() const = 0;
 
     public:
@@ -360,6 +360,75 @@ namespace data
   {
     virtual PackageType packageType() const { return SRC; }
   };
+
+  // --- ---------------------------------------------------------------------
+  // --- the following are the data structures for storing YUM package atom
+  // --- metadata (part of patch support). This is probably subject to change
+  // --- in near future.
+  // --- ---------------------------------------------------------------------
+
+  DEFINE_PTR_TYPE(BaseVersion);
+  /** Patch RPM baseversion */
+  struct BaseVersion : public base::ReferenceCounted, private base::NonCopyable
+  {
+    Edition     edition;
+  };
+
+  /** Shared RPM attributes */
+  struct RpmBase : public base::ReferenceCounted, private base::NonCopyable
+  {
+    // Base <patchrpm>/<deltarpm> element attributes
+
+    Arch attr_arch;
+    std::string attr_filename;
+    std::string attr_md5sum;
+    ByteCount attr_downloadSize;
+    Date attr_buildTime;
+
+    // Shared RPM data
+
+    Location location;
+    Date buildTime;
+    Date fileTime;
+    ByteCount archiveSize; // ??
+  };
+
+  DEFINE_PTR_TYPE(PatchRpm);
+  /** Patch RPM data object */
+  struct PatchRpm : RpmBase
+  {
+    std::set<BaseVersion_Ptr> baseVersions;
+  };
+
+  DEFINE_PTR_TYPE(DeltaRpm);
+  /** Delta RPM data object */
+  struct DeltaRpm : RpmBase
+  {
+    struct DeltaBaseVersion : BaseVersion
+    {
+      Date        buildTime;
+      CheckSum    checkSum;
+      std::string sequenceInfo;
+    };
+
+    DeltaBaseVersion baseVersion; 
+  };
+
+  DEFINE_PTR_TYPE(PackageAtom);
+  /**
+   * Data Object for YUM package atom.
+   * 
+   * \see zypp/parser/yum/schema/patch.rng
+   */
+  struct PackageAtom : public Package
+  {
+    std::set<PatchRpm_Ptr> patchRpms;
+    std::set<DeltaRpm_Ptr> deltaRpms;
+    // TODO support mulitple licenses (licenseToConfirm)
+  };
+
+  // --- ----------END--YUM-package-atom-metadata-----------------------------
+
   ///////////////////////////////////////////////////////////////////
 
 } // namespace data

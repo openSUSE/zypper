@@ -153,7 +153,8 @@ namespace zypp
       // xpath: /patch
       if (reader_r->name() == "patch")
       {
-        // TODO some validation? e.g. _patch->atoms.size() > 0 
+        if (!_patch->atoms.size())
+          WAR << "No atoms found for patch " << _patch->name << " " << _patch->edition << endl; 
 
       	if (_callback)
       	  _callback(handoutPatch());
@@ -172,12 +173,8 @@ namespace zypp
   bool PatchFileReader::consumeAtomsNode(Reader & reader_r)
   {
     // consumePackageNode
-    if (isBeingProcessed(tag_package))
-    {
-       data::Package_Ptr package_ptr = zypp::dynamic_pointer_cast<data::Package>(_tmpResObj); 
-       if (package_ptr && consumePackageNode(reader_r, package_ptr))
-        return true;
-    }
+    if (isBeingProcessed(tag_package) && consumePackageNode(reader_r))
+      return true;
     // consumeMessageNode
     else if (isBeingProcessed(tag_message) && consumeMessageNode(reader_r))
       return true;
@@ -194,19 +191,20 @@ namespace zypp
         // remember that we are processing package from now on
         // xpath: /patch/atoms/package/*
         tag(tag_package);
-        // this object will be used by FileReaderBase::consumePackageNodes()
-        // which needs Package object, not Atom. But it will be saved as Atom
-        // after it's been filled.
-        data::Package_Ptr package = new data::Package;
-        consumePackageNode(reader_r, package);
-        _tmpResObj = package;
+        // DBG << "Atom node, tagpath: " << tagPath() << endl;
+        _tmpResObj = new data::PackageAtom;
+        // process also the package node attributes
+        consumePackageNode(reader_r);
         return true;
       }
 
       // xpath: /patch/atoms/message
       if (reader_r->name() == "message")
       {
+        // remember that we are processing message from now on
+        // xpath: /patch/atoms/message/*
         tag(tag_message);
+        // DBG << "Message node, tagpath: " << tagPath() << endl;
         _tmpResObj = new data::Message;
         return true;
       }
@@ -214,7 +212,10 @@ namespace zypp
       // xpath: /patch/atoms/script
       if (reader_r->name() == "script")
       {
+        // remember that we are processing script from now on
+        // xpath: /patch/atoms/script/*
         tag(tag_script);
+        // DBG << "Script node, tagpath: " << tagPath() << endl;
         _tmpResObj = new data::Script;
         return true;
       }
@@ -224,16 +225,9 @@ namespace zypp
       // xpath: /patch/atoms/package
       if (reader_r->name() == "package")
       {
-        data::Atom_Ptr atom_ptr = new data::Atom;
-        copyPackageAtomFromTmpObj(atom_ptr); 
-        _patch->atoms.insert(atom_ptr);
+        // DBG << "Atom " << _tmpResObj->name << " " << _tmpResObj->edition << " successfully read." << endl;  
 
-        DBG << "Atom " << atom_ptr->name << " " << atom_ptr->edition << " successfully read." << endl;  
-
-        // get rid of the old package object
-        data::ResObject_Ptr tmp;
-        tmp.swap(_tmpResObj);
-
+        saveAtomInPatch();
         toParentTag(); // back to processing of previous tag (atoms)
         return true;
       }
@@ -241,7 +235,7 @@ namespace zypp
       // xpath: /patch/atoms/message
       if (reader_r->name() == "message")
       {
-        DBG << "Message " << _tmpResObj->name << " " << _tmpResObj->edition << " successfully read." << endl;
+        // DBG << "Message " << _tmpResObj->name << " " << _tmpResObj->edition << " successfully read." << endl;
 
         saveAtomInPatch();
         toParentTag(); // back to processing of previous tag (atoms)
@@ -251,7 +245,7 @@ namespace zypp
       // xpath: /patch/atoms/script
       if (reader_r->name() == "script")
       {
-        DBG << "Script " << _tmpResObj->name << " " << _tmpResObj->edition << " successfully read." << endl;
+        // DBG << "Script " << _tmpResObj->name << " " << _tmpResObj->edition << " successfully read." << endl;
 
         saveAtomInPatch();
         toParentTag(); // back to processing of previous tag (atoms)
@@ -271,24 +265,269 @@ namespace zypp
 
   // --------------------------------------------------------------------------
 
-/*  bool PatchFileReader::consumePackageNode(Reader & reader_r)
+  bool PatchFileReader::consumePackageNode(Reader & reader_r)
   {
-     data::Package_Ptr package_ptr = zypp::dynamic_pointer_cast<data::Package>(_tmpResObj); 
-     if (package_ptr && consumePackageNode(reader_r, package_ptr))
+    if (isBeingProcessed(tag_patchrpm) && consumePatchrpmNode(reader_r))
       return true;
-    
+    else if (isBeingProcessed(tag_deltarpm) && consumeDeltarpmNode(reader_r))
+      return true;
+
     if (reader_r->nodeType() == XML_READER_TYPE_ELEMENT)
     {
       // TODO package extensions -> pkg-files, license-to-confirm
-      if (reader_r->name() == "")
+      // xpath: /patch/atoms/package/pkgfiles
+      if (reader_r->name() == "pkgfiles")
       {
+        tag(tag_pkgfiles);
         return true;
+      }
+
+      // xpath: /patch/atoms/package/pkgfiles/patchrpm (*)
+      if (reader_r->name() == "patchrpm")
+      {
+        tag(tag_patchrpm);
+        _patchrpm = new data::PatchRpm;
+        return true;
+      }
+
+      // xpath: /patch/atoms/package/pkgfiles/deltarpm (*)
+      if (reader_r->name() == "deltarpm")
+      {
+        tag(tag_deltarpm);
+        _deltarpm = new data::DeltaRpm;
+        return true;
+      }
+
+      // xpath: /patch/atoms/package/license-to-confirm (*)
+      if (reader_r->name() == "license-to-confirm")
+      {
+        DBG << "got license-to-confirm, lang: " << reader_r->getAttribute("lang").asString();
+
+        // no way to determine which translation is associated
+        // with another, all previous will be overwritten with
+        // the last one
+        // TODO introduce an identifier in YUM data
+        // TODO make this rely on tag order as a temporary solution?
+
+        _tmpResObj->licenseToConfirm.setText(
+            reader_r.nodeText().asString(),
+            Locale(reader_r->getAttribute("lang").asString()));
+
+        return true;
+      }
+    }
+
+    else if (reader_r->nodeType() == XML_READER_TYPE_END_ELEMENT)
+    {
+      // xpath: /patch/atoms/package/pkgfiles
+      if (reader_r->name() == "pkgfiles")
+      {
+        toParentTag();
+        return true;
+      }
+
+      // xpath: /patch/atoms/package/pkgfiles/patchrpm (*)
+      if (reader_r->name() == "patchrpm")
+      {
+        data::PatchRpm_Ptr tmp;
+        tmp.swap(_patchrpm);
+        data::PackageAtom_Ptr patom_ptr = zypp::dynamic_pointer_cast<data::PackageAtom>(_tmpResObj);
+        if (patom_ptr)
+          patom_ptr->patchRpms.insert(tmp);
+        toParentTag();
+        return true;
+      }
+
+      // xpath: /patch/atoms/package/pkgfiles/deltarpm (*)
+      if (reader_r->name() == "deltarpm")
+      {
+        data::DeltaRpm_Ptr tmp;
+        tmp.swap(_deltarpm);
+        data::PackageAtom_Ptr patom_ptr = zypp::dynamic_pointer_cast<data::PackageAtom>(_tmpResObj);
+        if (patom_ptr)
+          patom_ptr->deltaRpms.insert(tmp);
+        toParentTag();
+        return true;
+      }
+    }
+
+    // FileReaderBase::consumePackageNode() call here, otherwise the pkgfiles
+    // would not be read.
+    data::Package_Ptr package_ptr = zypp::dynamic_pointer_cast<data::Package>(_tmpResObj);
+    if (package_ptr)
+    {
+      // xpath: /patch/atoms/package/* (except pkgfiles/* and license-to-confirm) (*)
+      if (isBeingProcessed(tag_package))
+        return FileReaderBase::consumePackageNode(reader_r, package_ptr);
+    }
+    else
+    {
+      ZYPP_THROW(Exception("Error in parser code. Package atom object not found."));
+    }
+
+    return true;
+  }
+
+  // --------------------------------------------------------------------------
+
+  bool PatchFileReader::consumePatchrpmNode(Reader & reader_r)
+  {
+    if (reader_r->nodeType() == XML_READER_TYPE_ELEMENT)
+    {
+      // xpath: /patch/atoms/package/patchrpm/location
+      if (reader_r->name() == "location")
+      {
+        _patchrpm->location.filePath = reader_r->getAttribute("href").asString();
+        // ignoring attribute 'base'
+        return true;
+      }
+
+      // xpath: /patch/atoms/package/patchrpm/checksum
+      if (reader_r->name() == "checksum")
+      {
+        _patchrpm->location.fileChecksum = CheckSum(
+                  reader_r->getAttribute("type").asString(),
+                  reader_r.nodeText().asString());
+        return true;
+      }
+
+      // xpath: /patch/atoms/package/patchrpm/time
+      if (reader_r->name() == "time")
+      {
+        _patchrpm->buildTime =
+            Date(reader_r->getAttribute("build").asString());
+
+        _patchrpm->fileTime =
+            Date(reader_r->getAttribute("file").asString());
+
+        return true;
+      }
+
+      // xpath: /patch/atoms/package/patchrpm/size
+      if (reader_r->name() == "size")
+      {
+        // size of the rpm file
+        _patchrpm->location.fileSize = str::strtonum<ByteCount::SizeType>(
+            reader_r->getAttribute("package").asString());
+
+        // size of ??
+        _patchrpm->archiveSize = str::strtonum<ByteCount::SizeType>(
+            reader_r->getAttribute("archive").asString());
+
+        return true;
+      }
+
+      // xpath: /patch/atoms/package/patchrpm/baseversion (+)
+      if (reader_r->name() == "baseversion")
+      {
+        data::BaseVersion_Ptr base_ptr = new data::BaseVersion;
+
+        // size of the rpm file
+        base_ptr->edition = Edition(reader_r->getAttribute("ver").asString(),
+                                    reader_r->getAttribute("rel").asString(),
+                                    reader_r->getAttribute("epoch").asString());
+
+        _patchrpm->baseVersions.insert(base_ptr);
+        return true;
+      }
+    }
+
+    else if (reader_r->nodeType() == XML_READER_TYPE_END_ELEMENT)
+    {
+      // xpath: /patch/atoms/package/pkgfiles/patchrpm
+      if (reader_r->name() == "patchrpm")
+      {
+        return false;
       }
     }
 
     return true;
   }
-*/
+
+  // --------------------------------------------------------------------------
+
+  bool PatchFileReader::consumeDeltarpmNode(Reader & reader_r)
+  {
+    if (reader_r->nodeType() == XML_READER_TYPE_ELEMENT)
+    {
+      // xpath: /patch/atoms/package/deltarpm/location
+      if (reader_r->name() == "location")
+      {
+        _deltarpm->location.filePath = reader_r->getAttribute("href").asString();
+        // ignoring attribute 'base'
+        return true;
+      }
+
+      // xpath: /patch/atoms/package/deltarpm/checksum
+      if (reader_r->name() == "checksum")
+      {
+        _deltarpm->location.fileChecksum = CheckSum(
+                  reader_r->getAttribute("type").asString(),
+                  reader_r.nodeText().asString());
+        return true;
+      }
+
+      // xpath: /patch/atoms/package/deltarpm/time
+      if (reader_r->name() == "time")
+      {
+        _deltarpm->buildTime =
+            Date(reader_r->getAttribute("build").asString());
+
+        _deltarpm->fileTime =
+            Date(reader_r->getAttribute("file").asString());
+
+        return true;
+      }
+
+      // xpath: /patch/atoms/package/deltarpm/size
+      if (reader_r->name() == "size")
+      {
+        // size of the rpm file
+        _deltarpm->location.fileSize = str::strtonum<ByteCount::SizeType>(
+            reader_r->getAttribute("package").asString());
+
+        // size of ??
+        _deltarpm->archiveSize = str::strtonum<ByteCount::SizeType>(
+            reader_r->getAttribute("archive").asString());
+
+        return true;
+      }
+
+      // xpath: /patch/atoms/package/deltarpm/baseversion
+      if (reader_r->name() == "baseversion")
+      {
+        // size of the rpm file
+        _deltarpm->baseVersion.edition = Edition(reader_r->getAttribute("ver").asString(),
+                                    reader_r->getAttribute("rel").asString(),
+                                    reader_r->getAttribute("epoch").asString());
+        // checksum
+        _deltarpm->baseVersion.checkSum =
+            CheckSum("md5", reader_r->getAttribute("md5sum").asString());
+
+        // build time
+        _deltarpm->baseVersion.buildTime =
+            Date(reader_r->getAttribute("buildtime").asString());
+
+        // sequence info
+        _deltarpm->baseVersion.sequenceInfo =
+            reader_r->getAttribute("sequence_info").asString();
+
+        return true;
+      }
+    }
+
+    else if (reader_r->nodeType() == XML_READER_TYPE_END_ELEMENT)
+    {
+      // xpath: /patch/atoms/package/pkgfiles/deltarpm
+      if (reader_r->name() == "deltarpm")
+      {
+        return false;
+      }
+    }
+
+    return true;
+  }
+
   // --------------------------------------------------------------------------
 
   bool PatchFileReader::consumeMessageNode(Reader & reader_r)
@@ -387,10 +626,10 @@ namespace zypp
       // TODO xpath: /patch/atoms/script/do-location
       if (reader_r->name() == "do-location")
       {
-        // xsd:anyURI
-//        script->doScriptLocation.filepath = reader_r->getAttribute("xml:base").asString();
-        // xsd:anyURI
-//        script->doScriptLocation.? = reader_r->getAttribute("href").asString();
+        // xsd:anyURI do script file path base (is this used at all?)
+        // ignoring reader_r->getAttribute("xml:base").asString();
+        // xsd:anyURI do script file path
+        script->doScriptLocation.filePath = reader_r->getAttribute("href").asString();
         return true;
       }
 
@@ -406,10 +645,10 @@ namespace zypp
       // TODO xpath: /patch/atoms/script/undo-location
       if (reader_r->name() == "undo-location")
       {
-        // xsd:anyURI
-//        script->undoScriptLocation.filepath = reader_r->getAttribute("xml:base").asString();
-        // xsd:anyURI
-//        script->undoScriptLocation.? = reader_r->getAttribute("href").asString();
+        // xsd:anyURI undo script file path base (is this used at all?)
+        // ignoring reader_r->getAttribute("xml:base").asString();
+        // xsd:anyURI undo script file path
+        script->undoScriptLocation.filePath = reader_r->getAttribute("href").asString();
         return true;
       }
 
@@ -451,25 +690,6 @@ namespace zypp
     data::ResObject_Ptr tmp;
     tmp.swap(_tmpResObj);
     _patch->atoms.insert(tmp);
-  }
-
-  // --------------------------------------------------------------------------
-
-  void PatchFileReader::copyPackageAtomFromTmpObj(data::Atom_Ptr & atom_ptr) const
-  {
-    atom_ptr->name = _tmpResObj->name;
-    atom_ptr->edition = _tmpResObj->edition;
-    atom_ptr->arch = _tmpResObj->arch;
-    atom_ptr->deps = _tmpResObj->deps;
-    atom_ptr->vendor = _tmpResObj->vendor;
-    atom_ptr->installedSize = _tmpResObj->installedSize;
-    atom_ptr->buildTime = _tmpResObj->buildTime;
-    atom_ptr->installOnly = _tmpResObj->installOnly;
-    atom_ptr->summary = _tmpResObj->summary;
-    atom_ptr->description = _tmpResObj->description;
-    atom_ptr->licenseToConfirm = _tmpResObj->licenseToConfirm;
-    atom_ptr->insnotify = _tmpResObj->insnotify;
-    atom_ptr->delnotify = _tmpResObj->delnotify;
   }
 
 

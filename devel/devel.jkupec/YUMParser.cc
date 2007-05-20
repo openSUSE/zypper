@@ -152,7 +152,7 @@ namespace zypp
         }
         default:
         {
-          DBG << "oh yeah, time will come, when we will parse "
+          WAR << "Don't know how to read "
               << job.type() << " file "
               << job.filename() << endl;
         }

@@ -28,6 +28,11 @@ IMPL_PTR_TYPE(Packagebase);
 IMPL_PTR_TYPE(Package);
 IMPL_PTR_TYPE(SrcPackage);
 
+IMPL_PTR_TYPE(DeltaRpm);
+IMPL_PTR_TYPE(PatchRpm);
+IMPL_PTR_TYPE(PackageAtom);
+IMPL_PTR_TYPE(BaseVersion);
+
 
 std::ostream & ResObject::dumpOn( std::ostream & str ) const
 {

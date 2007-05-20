@@ -41,7 +41,10 @@ namespace zypp
       tag_patch,
       tag_atoms,
       tag_script,
-      tag_message
+      tag_message,
+      tag_pkgfiles,
+      tag_deltarpm,
+      tag_patchrpm
     };
 
     /**
@@ -84,7 +87,6 @@ namespace zypp
   public:
 
     FileReaderBase();
-    virtual ~FileReaderBase() {}
 
     /**
      * Process package node and its subtree.
@@ -93,7 +95,7 @@ namespace zypp
      * \return true if the package node or current subnode has been consumed
      *         (no further processing is required), false otherwise.
      */
-    virtual bool consumePackageNode(xml::Reader & reader_r, data::Package_Ptr & package_ptr);
+    bool consumePackageNode(xml::Reader & reader_r, data::Package_Ptr & package_ptr);
 
     /**
      * Function for processing all <code>format</code> tag subtree nodes.
@@ -120,6 +122,8 @@ namespace zypp
 
     /** Move to parent tag in the \ref _tagpath. */
     void toParentTag() { _tagpath.remove(); }
+
+    const TagPath & tagPath() const { return _tagpath; }
 
 
   private:
