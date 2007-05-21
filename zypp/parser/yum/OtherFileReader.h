@@ -14,7 +14,8 @@
 #include "zypp/base/Logger.h"
 #include "zypp/parser/xml/Reader.h"
 #include "zypp/data/ResolvableData.h"
-#include "zypp/parser/ParserProgress.h"
+#include "zypp/ProgressData.h"
+#include "zypp/Changelog.h"
 
 #undef ZYPP_BASE_LOGGER_LOGGROUP
 #define ZYPP_BASE_LOGGER_LOGGROUP "parser"
@@ -26,19 +27,20 @@ namespace zypp
     namespace yum
     {
 
+
   /**
    * Reads through a other.xml file and collects additional package data
-   * like changelogs.
+   * (currently only changelogs).
    *
-   * After a package is read, a \ref zypp::data::Resolvable
-   * and \ref changelog TODO is prepared and \ref _callback
-   * is called with these two objects passed in. 
+   * After a package is read, a \ref data::Resolvable
+   * and \ref Changelog is prepared and \ref _callback
+   * is called with these two objects passed in.
    *
    * The \ref _callback is provided on construction.
    *
    * \code
-   * PrimaryFileReader reader(repomd_file, 
-   *                          bind(&SomeClass::callbackfunc, &object, _1));
+   * OtherFileReader reader(other_file,
+   *                        bind(&SomeClass::callbackfunc, &object, _1));
    * \endcode
    */
   class OtherFileReader
@@ -47,43 +49,47 @@ namespace zypp
     /**
      * Callback definition.
      */
-    typedef function<bool(const zypp::data::Resolvable &)> ProcessPackage;
-
+    typedef function<bool(const data::Resolvable_Ptr &, const Changelog)> ProcessPackage;
 
     /**
      * Constructor
      * \param other_file the other.xml.gz file you want to read
-     * \param function to process \ref _resolvable data.
-     * \param progress progress reporting function TODO better progress reporting
-     * 
+     * \param callback function to process \ref _resolvable data.
+     * \param progress progress reporting object
+     *
      * \see OtherFileReader::ProcessPackage
      */
-    PrimaryFileReader(const Pathname & other_file,
-        ProcessPackage callback, ParserProgress::Ptr progress);
-
-    /**
-     * Callback provided to the XML parser.
-     */
-    bool consumeNode(zypp::xml::Reader & reader_r);
+    OtherFileReader(
+      const Pathname & other_file,
+      const ProcessPackage & callback,
+      const ProgressData::ReceiverFnc & progress = ProgressData::ReceiverFnc());
 
   private:
 
     /**
-     * Number of packages read so far.
+     * Callback provided to the XML parser.
      */
-    unsigned _count;
+    bool consumeNode(xml::Reader & reader_r);
 
     /**
-     * Total number of packages to be read. This information is acquired from
-     * the <code>packages</code> attribute of <code>otherdata<code> tag.
+     * Creates a new \ref data::Resolvable_Ptr, swaps its contents with
+     * \ref _resolvable and returns it. Used to hand-out the data object to its consumer
+     * (a \ref ProcessPackage function) after it has been read.
      */
-    unsigned _total_packages;
+    data::Resolvable_Ptr handoutResolvable();
+
+  private:
 
     /**
      * Pointer to the \ref zypp::data::Resolvable object for storing the NVRA
      * data.
      */
-    zypp::data::Resolvable *_resolvable;
+    zypp::data::Resolvable_Ptr _resolvable;
+
+    /**
+     * Changelog of \ref _resolvable.
+     */
+    Changelog _changelog;
 
     /**
      * Callback for processing package metadata passed in through constructor.
@@ -93,9 +99,7 @@ namespace zypp
     /**
      * Progress reporting object.
      */
-    ParserProgress::Ptr _progress;
-
-    long int _old_progress;
+    ProgressData _ticks;
   };
 
 

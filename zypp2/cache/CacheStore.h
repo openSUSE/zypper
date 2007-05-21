@@ -124,6 +124,16 @@ namespace zypp
       virtual void consumeProduct( const data::RecordId &catalog_id, data::Product_Ptr product );
       
       /**
+       * Implementation of the \ref ResolvableConsumer interface
+       *
+       * Consume changelog of a resolvable, inserting it in the cache.
+       * \param catalog_id ownership.
+       * \param resolvable resolvable for which the changelog data are to be saved
+       * \param changelog  the changelog
+      */
+      virtual void consumeChangelog( const data::RecordId &catalog_id, data::Resolvable_Ptr resolvable, Changelog changelog );
+
+      /**
        * Appends a resolvable to the store.
        *
        * You have to specify with \a kind of resolvable are you inserting

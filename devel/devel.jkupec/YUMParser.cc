@@ -15,6 +15,7 @@
 #include "zypp/parser/yum/PrimaryFileReader.h"
 #include "zypp/parser/yum/PatchesFileReader.h"
 #include "zypp/parser/yum/PatchFileReader.h"
+#include "zypp/parser/yum/OtherFileReader.h"
 
 #include "YUMParser.h"
 
@@ -98,6 +99,21 @@ namespace zypp
   }
 
 
+  bool YUMParser::other_CB(const data::Resolvable_Ptr & res_ptr, const Changelog & changelog)
+  {
+    _consumer.consumeChangelog(_catalog_id, res_ptr, changelog);
+/*
+    DBG << "got changelog for "
+      << res_ptr->name << res_ptr->edition << " "
+      << res_ptr->arch
+      << endl;
+
+    DBG << "last entry: " << changelog.front() << endl;
+*/
+    return true;
+  }
+
+
   void YUMParser::start(const Pathname &cache_dir)
   {
     zypp::parser::yum::RepomdFileReader(
@@ -133,6 +149,7 @@ namespace zypp
             &progress_function);
           break;
         }
+
         case YUMResourceType::PATCHES_e:
         {
           zypp::source::yum::PatchesFileReader(
@@ -143,6 +160,7 @@ namespace zypp
           _ticks.range(_jobs.size());
           break;
         }
+
         case YUMResourceType::PATCH_e:
         {
           zypp::parser::yum::PatchFileReader(
@@ -150,6 +168,16 @@ namespace zypp
             bind(&YUMParser::patch_CB, this, _1));
           break;
         }
+
+        case YUMResourceType::OTHER_e:
+        {
+          zypp::parser::yum::OtherFileReader(
+            cache_dir + job.filename(),
+            bind(&YUMParser::other_CB, this, _1, _2),
+            &progress_function);
+          break;
+        }
+
         default:
         {
           WAR << "Don't know how to read "
@@ -168,3 +196,4 @@ namespace zypp
 } // ns zypp
 
 // vim: set ts=2 sts=2 sw=2 et ai:
+

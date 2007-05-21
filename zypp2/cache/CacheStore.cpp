@@ -264,6 +264,14 @@ void CacheStore::consumeProduct( const data::RecordId &catalog_id, data::Product
   consumeResObject( id, product );
 }
 
+void CacheStore::consumeChangelog( const data::RecordId &catalog_id, data::Resolvable_Ptr resolvable, Changelog changelog )
+{
+  // TODO
+  // maybe consumeChangelog(const data::RecordId & resolvable_id, Changelog changelog) will
+  // be needed for inserting the changelog using in-memory record id of corresponding
+  // resolvable. (first, we'll see how fast is the inserting without remembering those ids)
+}
+
 void CacheStore::consumeResObject( const data::RecordId &rid, data::ResObject_Ptr res )
 {
   appendTranslatedStringAttribute( rid, "ResObject", "description", res->description );

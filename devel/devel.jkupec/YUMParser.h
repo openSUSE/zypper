@@ -15,6 +15,7 @@
 #include "zypp/data/ResolvableData.h"
 #include "zypp/source/yum/YUMResourceType.h"
 #include "zypp/ProgressData.h"
+#include "zypp/Changelog.h"
 
 
 using zypp::source::yum::YUMResourceType;
@@ -64,6 +65,7 @@ namespace zypp
     bool primary_CB(const data::Package_Ptr & package_r); 
     bool patches_CB(const OnMediaLocation &loc, const std::string & patch_id);
     bool patch_CB(const data::Patch_Ptr & patch);
+    bool other_CB(const data::Resolvable_Ptr & res_ptr, const Changelog & changelog);
 
   private:
     zypp::cache::CacheStore & _consumer;
