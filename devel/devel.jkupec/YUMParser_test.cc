@@ -4,8 +4,7 @@
 #include "zypp/base/LogControl.h"
 #include "zypp/base/Measure.h"
 #include "zypp2/cache/CacheStore.h"
-#include "YUMParser.h"
-
+#include "zypp2/parser/yum/YUMParser.h"
 
 
 #undef ZYPP_BASE_LOGGER_LOGGROUP
