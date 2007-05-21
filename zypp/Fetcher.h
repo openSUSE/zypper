@@ -6,20 +6,25 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-
+/** \file	zypp/Fetcher.h
+ *
+*/
 #ifndef ZYPP_FETCHER_H
 #define ZYPP_FETCHER_H
 
-#include <list>
+#include <iosfwd>
+
+#include "zypp/base/PtrTypes.h"
 #include "zypp/Pathname.h"
 #include "zypp/Url.h"
 #include "zypp/OnMediaLocation.h"
 #include "zypp/MediaSetAccess.h"
 
+///////////////////////////////////////////////////////////////////
 namespace zypp
-{
+{ /////////////////////////////////////////////////////////////////
 
- /**
+  /**
   * This class allows to retrieve a group of files which can
   * be cached already on the local disk.
   *
@@ -34,13 +39,20 @@ namespace zypp
   */
   class Fetcher
   {
-  public:
-    /**
-    * Constructor
-    */
-    Fetcher();
+    friend std::ostream & operator<<( std::ostream & str, const Fetcher & obj );
 
-    /**
+  public:
+    /** Implementation  */
+    class Impl;
+
+  public:
+    /** Default ctor */
+    Fetcher();
+    /** Dtor */
+    ~Fetcher();
+
+  public:
+   /**
     * Enqueue a object for transferal, they will not
     * be transfered until \ref start() is called
     */
@@ -66,9 +78,15 @@ namespace zypp
     void start( const Pathname &dest_dir, MediaSetAccess &media );
 
   private:
-    std::list<OnMediaLocation> _resources;
-    std::list<Pathname> _caches;
+    /** Pointer to implementation */
+    RWCOW_pointer<Impl> _pimpl;
   };
+  ///////////////////////////////////////////////////////////////////
 
-} // ns zypp
-#endif
+  /** \relates Fetcher Stream output */
+  std::ostream & operator<<( std::ostream & str, const Fetcher & obj );
+
+  /////////////////////////////////////////////////////////////////
+} // namespace zypp
+///////////////////////////////////////////////////////////////////
+#endif // ZYPP_FETCHER_H

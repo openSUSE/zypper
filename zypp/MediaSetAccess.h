@@ -128,6 +128,14 @@ namespace zypp
       Pathname provideFile(const Pathname & file, unsigned media_nr, const FileChecker checker );
 
       /**
+       * check if a file exists on the specified media
+       *
+       * \param file file to check
+       * \param media_nr Media number
+       */
+      bool doesFileExist(const Pathname & file, unsigned media_nr );
+
+      /**
        * Replaces media number in specified url with given \a medianr.
        * 
        * Media number in the URL is searched for with regex

@@ -64,6 +64,9 @@ void YUMDownloader::download( const Pathname &dest_dir )
   _dest_dir = dest_dir;
   _fetcher.enqueue( OnMediaLocation().filename("/repodata/repomd.xml") );
   _fetcher.start( dest_dir, _media);
+
+  //if ( _media.doesFile
+
   _fetcher.reset();
 
   Reader reader( dest_dir + "/repodata/repomd.xml" );

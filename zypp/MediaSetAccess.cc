@@ -109,6 +109,11 @@ namespace zypp
   }
 
 
+  bool MediaSetAccess::doesFileExist(const Pathname & file, unsigned media_nr )
+  {
+    return false;
+  }
+
   Pathname  MediaSetAccess::provideFile(const Pathname & file, unsigned media_nr, FileChecker checker )
   {
     Pathname p = provideFileInternal( file, media_nr, false, false);
@@ -119,7 +124,6 @@ namespace zypp
     }
     return p;
   }
-
 
   Pathname MediaSetAccess::provideFileInternal(const Pathname & file, unsigned media_nr, bool cached, bool checkonly )
   {
