@@ -29,7 +29,7 @@ namespace zypp
   {
   }
 
-  bool Fetcher::ChecksumFileChecker::operator()( const Pathname &file )
+  bool Fetcher::ChecksumFileChecker::operator()( const Pathname &file ) const
   {
     callback::SendReport<DigestReport> report;
     CheckSum real_checksum( _checksum.type(), filesystem::checksum( file, _checksum.type() ));
@@ -68,15 +68,15 @@ namespace zypp
     }
   }
 
-  bool Fetcher::NullFileChecker::operator()(const Pathname &file )
+  bool Fetcher::NullFileChecker::operator()(const Pathname &file ) const
   {
     return true;
   }
 
-  bool Fetcher::CompositeFileChecker::operator()(const Pathname &file )
+  bool Fetcher::CompositeFileChecker::operator()(const Pathname &file ) const
   {
     bool result = true;
-    for ( list<Fetcher::FileChecker>::iterator it = _checkers.begin(); it != _checkers.end(); ++it )
+    for ( list<Fetcher::FileChecker>::const_iterator it = _checkers.begin(); it != _checkers.end(); ++it )
     {
       result = result && (*it)(file);
     }
@@ -103,10 +103,10 @@ namespace zypp
     z->keyRing()->importKey(publickey, false);
   }
   
-  bool Fetcher::SignatureFileChecker::operator()(const Pathname &file )
+  bool Fetcher::SignatureFileChecker::operator()(const Pathname &file ) const
   {
     ZYpp::Ptr z = getZYpp();
-    MIL << "checking " << file << " file vailidity using digital signature.." << endl;
+    MIL << "checking " << file << " file validity using digital signature.." << endl;
     bool valid = z->keyRing()->verifyFileSignatureWorkflow( file, string(), _signature);
     return valid;
   }
@@ -256,6 +256,8 @@ namespace zypp
           {
             ZYPP_THROW( Exception("Can't copy " + tmp_file.asString() + " to " + dest_dir.asString()));
           }
+          
+          
         }
         catch (const Exception & excpt_r)
         {
@@ -269,7 +271,18 @@ namespace zypp
         // continue with next file
         continue;
       }
-    }
+      
+      // no matter where did we got the file, try to validate it:
+       Pathname localfile = dest_dir + (*it_res).location.filename();
+       // call the checker function
+       bool good = (*it_res).checkers(localfile);
+       if (!good)
+       {
+         //FIXME better message
+         ZYPP_THROW(Exception("File " + (*it_res).location.filename().asString() + " does not validate." ));
+       }
+      
+    } // for each job
   }
 
   /** \relates Fetcher::Impl Stream output */

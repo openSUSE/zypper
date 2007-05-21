@@ -92,7 +92,7 @@ namespace zypp
       * \short Try to validate the file
       * \param file File to validate.
       */
-     bool operator()( const Pathname &file );
+     bool operator()( const Pathname &file ) const;
      
    private:
      CheckSum _checksum;
@@ -127,7 +127,7 @@ namespace zypp
       * \short Try to validate the file
       * \param file File to validate.
       */
-      bool operator()( const Pathname &file );
+      bool operator()( const Pathname &file ) const;
      
      private:
       Pathname _signature;
@@ -140,7 +140,7 @@ namespace zypp
    class NullFileChecker
    {
    public:
-     bool operator()( const Pathname &file );
+     bool operator()( const Pathname &file )  const;
    };
     
    /**
@@ -161,7 +161,7 @@ namespace zypp
    {
    public:
      void add( const FileChecker &checker );
-     bool operator()( const Pathname &file );
+     bool operator()( const Pathname &file ) const;
    private:
      std::list<FileChecker> _checkers;
    };
