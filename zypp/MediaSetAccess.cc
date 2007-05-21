@@ -108,10 +108,108 @@ namespace zypp
     return provideFileInternal( file, media_nr, false, false);
   }
 
-
   bool MediaSetAccess::doesFileExist(const Pathname & file, unsigned media_nr )
   {
-    return false;
+    callback::SendReport<media::MediaChangeReport> report;
+    media::MediaManager media_mgr;
+    // get the mediaId, but don't try to attach it here
+    media::MediaAccessId media = getMediaAccessId( media_nr);
+
+    bool exists = false;
+    
+    do
+    {
+      try
+      {
+        DBG << "Cheking if file " << file
+            << " from media number " << media_nr << " exists." << endl;        
+        // try to attach the media
+        if ( ! media_mgr.isAttached(media) )
+          media_mgr.attachDesiredMedia(media);
+        exists = media_mgr.doesFileExist(media, file);
+        break;
+      }
+      catch ( Exception & excp )
+      {
+        ZYPP_CAUGHT(excp);
+        media::MediaChangeReport::Action user;
+        do
+        {
+          DBG << "Media couldn't provide file " << file << " , releasing." << endl;
+          try
+          {
+            media_mgr.release (media, false);
+          }
+          catch (const Exception & excpt_r)
+          {
+              ZYPP_CAUGHT(excpt_r);
+              MIL << "Failed to release media " << media << endl;
+          }
+
+          // set up the reason
+          media::MediaChangeReport::Error reason = media::MediaChangeReport::INVALID;
+          
+          if( typeid(excp) == typeid( media::MediaFileNotFoundException )  ||
+              typeid(excp) == typeid( media::MediaNotAFileException ) )
+          {
+            reason = media::MediaChangeReport::NOT_FOUND;
+          }
+          else if( typeid(excp) == typeid( media::MediaNotDesiredException)  ||
+              typeid(excp) == typeid( media::MediaNotAttachedException) )
+          {
+            reason = media::MediaChangeReport::WRONG;
+          }
+
+          user  = media::MediaChangeReport::ABORT;
+          DBG << "doesFileExist exception caught, callback answer: " << user << endl;
+
+          if( user == media::MediaChangeReport::ABORT )
+          {
+            DBG << "Aborting" << endl;
+            ZYPP_RETHROW ( excp );
+          }
+          else if ( user == media::MediaChangeReport::IGNORE )
+          {
+            DBG << "Skipping" << endl;
+            ZYPP_THROW ( source::SkipRequestedException("User-requested skipping of a file") );
+          }
+          else if ( user == media::MediaChangeReport::EJECT )
+          {
+            DBG << "Eject: try to release" << endl;
+            try
+            {
+              //zypp::SourceManager::sourceManager()->releaseAllSources();
+            }
+            catch (const zypp::Exception& excpt_r)
+            {
+              ZYPP_CAUGHT(excpt_r);
+              ERR << "Failed to release all sources" << endl;
+            }
+            media_mgr.release (media, true); // one more release needed for eject
+            // FIXME: this will not work, probably
+          }
+          else if ( user == media::MediaChangeReport::RETRY  ||
+            user == media::MediaChangeReport::CHANGE_URL )
+          {
+            // retry
+            DBG << "Going to try again" << endl;
+
+            // not attaching, media set will do that for us
+            // this could generate uncaught exception (#158620)
+            break;
+          }
+          else
+          {
+            DBG << "Don't know, let's ABORT" << endl;
+            ZYPP_RETHROW ( excp );
+          }
+        } while( user == media::MediaChangeReport::EJECT );
+      }
+
+      // retry or change URL
+    } while( true );
+
+    return exists;
   }
 
   Pathname  MediaSetAccess::provideFile(const Pathname & file, unsigned media_nr, FileChecker checker )
