@@ -29,23 +29,6 @@ namespace zypp
 
     DEFINE_PTR_TYPE(MediaSetAccess);
 
-    typedef boost::function<bool ( const Pathname &file )> FileChecker;
-
-    class NullFileChecker
-    {
-      public:
-      bool operator()( const Pathname &file );
-    };
-
-    class ChecksumFileChecker
-    {
-      public:
-      ChecksumFileChecker( const CheckSum &checksum );
-      bool operator()( const Pathname &file );
-      private:
-      CheckSum _checksum;
-    };
-
     ///////////////////////////////////////////////////////////////////
     //
     //	CLASS NAME : MediaSetAccess
@@ -120,20 +103,12 @@ namespace zypp
       Pathname provideFile(const Pathname & file, unsigned media_nr = 1 );
 
       /**
-       * Provides \a file from media \a media_nr and use \a checker on provided
-       * file.
-       * 
-       * \throws Exception if \a checker returns false. TODO use ProvideFilePolicy
-       */
-      Pathname provideFile(const Pathname & file, unsigned media_nr, const FileChecker checker );
-
-      /**
        * check if a file exists on the specified media
        *
        * \param file file to check
        * \param media_nr Media number
        */
-      bool doesFileExist(const Pathname & file, unsigned media_nr );
+      bool doesFileExist(const Pathname & file, unsigned media_nr = 1 );
 
       /**
        * Replaces media number in specified url with given \a medianr.

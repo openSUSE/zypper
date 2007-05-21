@@ -14,8 +14,9 @@
 
 #include "zypp/base/Logger.h"
 #include "zypp/base/DefaultIntegral.h"
+#include "zypp/ZYppFactory.h"
 #include "zypp/Fetcher.h"
-
+#include "zypp/KeyRing.h"
 
 using namespace std;
 
@@ -23,6 +24,97 @@ using namespace std;
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
+  Fetcher::ChecksumFileChecker::ChecksumFileChecker( const CheckSum &checksum )
+    : _checksum(checksum)
+  {
+  }
+
+  bool Fetcher::ChecksumFileChecker::operator()( const Pathname &file )
+  {
+    callback::SendReport<DigestReport> report;
+    CheckSum real_checksum( _checksum.type(), filesystem::checksum( file, _checksum.type() ));
+    
+    if ( _checksum.empty() )
+    {
+      MIL << "File " <<  file << " has no checksum available." << std::endl;
+      if ( report->askUserToAcceptNoDigest(file) )
+      {
+        MIL << "User accepted " <<  file << " with no checksum." << std::endl;
+        return true;
+      }
+      else
+      {
+        return false;
+      }
+    }
+    else
+    {
+      if ( (real_checksum == _checksum) )
+      {
+        if ( report->askUserToAcceptWrongDigest( file, _checksum.checksum(), real_checksum.checksum() ) )
+        {
+          WAR << "User accepted " <<  file << " with WRONG CHECKSUM." << std::endl;
+          return true;
+        }
+        else
+        {
+          return false;
+        }
+      }
+      else
+      {
+        return true;
+      }
+    }
+  }
+
+  bool Fetcher::NullFileChecker::operator()(const Pathname &file )
+  {
+    return true;
+  }
+
+  bool Fetcher::CompositeFileChecker::operator()(const Pathname &file )
+  {
+    bool result = true;
+    for ( list<Fetcher::FileChecker>::iterator it = _checkers.begin(); it != _checkers.end(); ++it )
+    {
+      result = result && (*it)(file);
+    }
+    return result;
+  }
+  
+  void Fetcher::CompositeFileChecker::add( const FileChecker &checker )
+  {
+    _checkers.push_back(checker);
+  }
+
+  Fetcher::SignatureFileChecker::SignatureFileChecker( const Pathname &signature )
+    : _signature(signature)
+  {
+  }
+  
+  Fetcher::SignatureFileChecker::SignatureFileChecker()
+  {
+  }
+  
+  void Fetcher::SignatureFileChecker::addPublicKey( const Pathname &publickey )
+  {
+    ZYpp::Ptr z = getZYpp();
+    z->keyRing()->importKey(publickey, false);
+  }
+  
+  bool Fetcher::SignatureFileChecker::operator()(const Pathname &file )
+  {
+    ZYpp::Ptr z = getZYpp();
+    MIL << "checking " << file << " file vailidity using digital signature.." << endl;
+    bool valid = z->keyRing()->verifyFileSignatureWorkflow( file, string(), _signature);
+    return valid;
+  }
+  
+  /**
+   * Class to encapsulate the \ref OnMediaLocation object
+   * and the \ref Fetcher::FileChcker together
+   */
   struct FetcherJob
   {
     FetcherJob( const OnMediaLocation &loc )
@@ -32,6 +124,7 @@ namespace zypp
     }
 
     OnMediaLocation location;
+    Fetcher::CompositeFileChecker checkers;
   };
 
   ///////////////////////////////////////////////////////////////////
@@ -44,7 +137,8 @@ namespace zypp
 
   public:
 
-    void enqueue( const OnMediaLocation &resource );    
+    void enqueue( const OnMediaLocation &resource, const Fetcher::FileChecker &checker  );
+    void enqueueDigested( const OnMediaLocation &resource, const Fetcher::FileChecker &checker );
     void addCachePath( const Pathname &cache_dir );
     void reset();
     void start( const Pathname &dest_dir, MediaSetAccess &media );
@@ -68,11 +162,21 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
 
 
-  void Fetcher::Impl::enqueue( const OnMediaLocation &resource )
+  void Fetcher::Impl::enqueueDigested( const OnMediaLocation &resource, const FileChecker &checker )
   {
-    _resources.push_back(FetcherJob(resource));
+    CompositeFileChecker composite;
+    composite.add(ChecksumFileChecker(resource.checksum()));
+    composite.add(checker);
+    enqueue(resource, composite);
   }
   
+  void Fetcher::Impl::enqueue( const OnMediaLocation &resource, const FileChecker &checker )
+  {
+    FetcherJob job(resource);
+    job.checkers.add(checker);
+    _resources.push_back(resource);
+  }
+
   void Fetcher::Impl::reset()
   {
     _resources.clear();
@@ -197,9 +301,14 @@ namespace zypp
   Fetcher::~Fetcher()
   {}
 
-  void Fetcher::enqueue( const OnMediaLocation &resource )
+  void Fetcher::enqueueDigested( const OnMediaLocation &resource, const Fetcher::FileChecker &checker )
   {
-    _pimpl->enqueue(resource);
+    _pimpl->enqueue(resource, checker);
+  }
+  
+  void Fetcher::enqueue( const OnMediaLocation &resource, const Fetcher::FileChecker &checker  )
+  {
+    _pimpl->enqueue(resource, checker);
   }
   
   void Fetcher::addCachePath( const Pathname &cache_dir )
@@ -231,24 +340,4 @@ namespace zypp
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
-
-//       callback::SendReport<DigestReport> report;
-//       if ( checksum.empty() )
-//       {
-//         MIL << "File " <<  file_url << " has no checksum available." << std::endl;
-//         if ( report->askUserToAcceptNoDigest(file_to_download) )
-//         {
-//           MIL << "User accepted " <<  file_url << " with no checksum." << std::endl;
-//           return;
-//         }
-//         else
-//         {
-//           ZYPP_THROW(SourceMetadataException( file_url.asString() + " " + N_(" miss checksum.") ));
-//         }
-//       }
-//       else
-//       {
-//         if (! is_checksum( destination, checksum))
-//           ZYPP_THROW(SourceMetadataException( file_url.asString() + " " + N_(" fails checksum verification.") ));
-//       }
 

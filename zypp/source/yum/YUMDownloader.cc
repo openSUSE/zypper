@@ -37,7 +37,7 @@ YUMDownloader::YUMDownloader( const Url &url, const Pathname &path )
 bool YUMDownloader::patches_Callback( const OnMediaLocation &loc, const string &id )
 {
   MIL << id << " : " << loc << endl;
-  _fetcher.enqueue(loc);
+  _fetcher.enqueueDigested(loc);
   return true;
 }
 
@@ -45,7 +45,7 @@ bool YUMDownloader::patches_Callback( const OnMediaLocation &loc, const string &
 bool YUMDownloader::repomd_Callback( const OnMediaLocation &loc, const YUMResourceType &dtype )
 {
   MIL << dtype << " : " << loc << endl;
-  _fetcher.enqueue(loc);
+  _fetcher.enqueueDigested(loc);
   
   // We got a patches file we need to read, to add patches listed
   // there, so we transfer what we have in the queue, and 
@@ -61,12 +61,32 @@ bool YUMDownloader::repomd_Callback( const OnMediaLocation &loc, const YUMResour
 
 void YUMDownloader::download( const Pathname &dest_dir )
 {
+  Pathname repomdpath =  "/repodata/repomd.xml";
+  Pathname keypath =  "/repodata/repomd.xml.key";
+  Pathname sigpath =  "/repodata/repomd.xml.asc";
+  
+  
   _dest_dir = dest_dir;
-  _fetcher.enqueue( OnMediaLocation().filename("/repodata/repomd.xml") );
+  if ( _media.doesFileExist(keypath) )
+    _fetcher.enqueue( OnMediaLocation().filename(keypath) );
+
+  if ( _media.doesFileExist(sigpath) )
+     _fetcher.enqueue( OnMediaLocation().filename(sigpath) );
+  
+  _fetcher.start( dest_dir, _media );
+  
+  Fetcher::SignatureFileChecker sigchecker;
+  
+  if ( PathInfo( dest_dir + sigpath ).isExist() )
+    sigchecker = Fetcher::SignatureFileChecker(dest_dir + sigpath);
+  
+  if ( PathInfo( dest_dir + keypath ).isExist() )
+    sigchecker.addPublicKey(dest_dir + keypath );
+  
+  _fetcher.enqueue( OnMediaLocation().filename(repomdpath), sigchecker );
   _fetcher.start( dest_dir, _media);
-
-  //if ( _media.doesFile
-
+  
+  
   _fetcher.reset();
 
   Reader reader( dest_dir + "/repodata/repomd.xml" );
@@ -79,5 +99,6 @@ void YUMDownloader::download( const Pathname &dest_dir )
 }// ns yum
 }// ns source 
 } // ns zypp
+
 
 
