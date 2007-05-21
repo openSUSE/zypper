@@ -17,9 +17,6 @@
 #include "zypp/ProgressData.h"
 #include "zypp/Changelog.h"
 
-#undef ZYPP_BASE_LOGGER_LOGGROUP
-#define ZYPP_BASE_LOGGER_LOGGROUP "parser"
-
 namespace zypp
 {
   namespace parser
