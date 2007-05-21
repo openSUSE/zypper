@@ -2,10 +2,9 @@
 #include "zypp/ZYppFactory.h"
 #include "zypp/base/Logger.h"
 #include "zypp/base/LogControl.h"
-#include "zypp/parser/yum/PrimaryFileReader.h"
-#include "YUMParser.h"
-#include "zypp/parser/ParserProgress.h"
 #include "zypp/base/Measure.h"
+#include "zypp2/cache/CacheStore.h"
+#include "YUMParser.h"
 
 
 

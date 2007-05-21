@@ -11,7 +11,7 @@
 #define YUMPARSER_H_
 
 #include "zypp/base/Logger.h"
-#include "zypp2/cache/CacheStore.h"
+#include "zypp/data/ResolvableDataConsumer.h"
 #include "zypp/data/ResolvableData.h"
 #include "zypp/source/yum/YUMResourceType.h"
 #include "zypp/ProgressData.h"
@@ -27,8 +27,9 @@ namespace zypp
     namespace yum
     {
 
+
   /**
-   * 
+   * Structure encapsulating YUM parser data type and filename.
    */
   struct YUMParserJob
   {
@@ -39,7 +40,9 @@ namespace zypp
     const YUMResourceType & type() const { return _type; } 
 
   private:
+    /** File to be processed */
     Pathname _filename;
+    /** Type of YUM file */
     YUMResourceType _type;
   };
 
@@ -51,8 +54,8 @@ namespace zypp
   {
   public:
     YUMParser(
-      const zypp::data::RecordId & catalog_id,
-      zypp::cache::CacheStore & consumer,
+      const data::RecordId & catalog_id,
+      data::ResolvableDataConsumer & consumer,
       const ProgressData::ReceiverFnc & progress = ProgressData::ReceiverFnc()
     );
 
@@ -66,17 +69,18 @@ namespace zypp
     bool patches_CB(const OnMediaLocation &loc, const std::string & patch_id);
     bool patch_CB(const data::Patch_Ptr & patch);
     bool other_CB(const data::Resolvable_Ptr & res_ptr, const Changelog & changelog);
+    bool filelist_CB(const data::Resolvable_Ptr & res_ptr, const data::Filenames & filenames);
 
   private:
-    zypp::cache::CacheStore & _consumer;
-    
+    data::ResolvableDataConsumer & _consumer;
+
     /** ID of the repository record in the DB (catalogs.id) */
-    zypp::data::RecordId _catalog_id;
+    data::RecordId _catalog_id;
 
     /** List of parser jobs read from repomd.xml and patches.xml files. */
     std::list<YUMParserJob> _jobs;
 
-    /** Progress reporting object. */
+    /** Progress reporting object for overall YUM parser progress. */
     ProgressData _ticks;
   };
 
@@ -88,3 +92,4 @@ namespace zypp
 #endif /*YUMPARSER_H_*/
 
 // vim: set ts=2 sts=2 sw=2 et ai:
+

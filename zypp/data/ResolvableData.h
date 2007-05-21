@@ -42,6 +42,10 @@ namespace data
 
   typedef DefaultIntegral<unsigned,0u>              MediaNr;
 
+  /** List of files contained in a package (info for UI) */
+  typedef std::list<std::string>                    Filenames;
+
+
   /** Data to retrieve a file from some media. */
   struct Location
   {

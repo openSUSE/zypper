@@ -16,6 +16,7 @@
 #include "zypp/parser/yum/PatchesFileReader.h"
 #include "zypp/parser/yum/PatchFileReader.h"
 #include "zypp/parser/yum/OtherFileReader.h"
+#include "zypp/parser/yum/FilelistsFileReader.h"
 
 #include "YUMParser.h"
 
@@ -38,16 +39,16 @@ namespace zypp
     return true;
   }
 
+
   YUMParser::YUMParser(
-      const zypp::data::RecordId &catalog_id,
-      zypp::cache::CacheStore &consumer,
+      const data::RecordId & catalog_id,
+      data::ResolvableDataConsumer & consumer,
       const ProgressData::ReceiverFnc & progress)
     :
       _consumer(consumer), _catalog_id(catalog_id)
   {
     _ticks.name("YUMParser");
     _ticks.sendTo(progress);
-    MIL << "constructed" << endl;
   }
 
 
@@ -60,6 +61,7 @@ namespace zypp
 
     return true;
   }
+
 
   bool YUMParser::primary_CB(const data::Package_Ptr & package_r)
   {
@@ -109,6 +111,21 @@ namespace zypp
       << endl;
 
     DBG << "last entry: " << changelog.front() << endl;
+*/
+    return true;
+  }
+
+
+  bool YUMParser::filelist_CB(const data::Resolvable_Ptr & res_ptr, const data::Filenames & filenames)
+  {
+    _consumer.consumeFilelist(_catalog_id, res_ptr, filenames);
+/*
+    DBG << "got filelist for "
+      << res_ptr->name << res_ptr->edition << " "
+      << res_ptr->arch
+      << endl;
+
+    DBG << "last entry: " << filenames.front() << endl;
 */
     return true;
   }
@@ -174,6 +191,15 @@ namespace zypp
           zypp::parser::yum::OtherFileReader(
             cache_dir + job.filename(),
             bind(&YUMParser::other_CB, this, _1, _2),
+            &progress_function);
+          break;
+        }
+
+        case YUMResourceType::FILELISTS_e:
+        {
+          zypp::parser::yum::FilelistsFileReader(
+            cache_dir + job.filename(),
+            bind(&YUMParser::filelist_CB, this, _1, _2),
             &progress_function);
           break;
         }

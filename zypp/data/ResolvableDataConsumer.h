@@ -34,7 +34,8 @@ namespace data
     virtual void consumeMessage( const data::RecordId &catalog_id, data::Message_Ptr ) = 0;
     virtual void consumeScript( const data::RecordId &catalog_id, data::Script_Ptr ) = 0;
 
-    virtual void consumeChangelog( const data::RecordId &catalog_id, data::Resolvable_Ptr, Changelog ) = 0;
+    virtual void consumeChangelog( const data::RecordId & catalog_id, const data::Resolvable_Ptr &, const Changelog & ) = 0;
+    virtual void consumeFilelist( const data::RecordId & catalog_id, const data::Resolvable_Ptr &, const data::Filenames & ) = 0;
 
     //virtual void consumeSourcePackage( const data::SrcPackage_Ptr ) = 0;
   };

@@ -131,7 +131,17 @@ namespace zypp
        * \param resolvable resolvable for which the changelog data are to be saved
        * \param changelog  the changelog
       */
-      virtual void consumeChangelog( const data::RecordId &catalog_id, data::Resolvable_Ptr resolvable, Changelog changelog );
+      virtual void consumeChangelog( const data::RecordId &catalog_id, const data::Resolvable_Ptr & resolvable, const Changelog & changelog );
+
+      /**
+       * Implementation of the \ref ResolvableConsumer interface
+       *
+       * Consume filelist of a resolvable, inserting it in the cache.
+       * \param catalog_id ownership.
+       * \param resolvable resolvable for which the filelist is to be saved
+       * \param filenames  list of filenames the resolvable contains
+      */
+      virtual void consumeFilelist( const data::RecordId &catalog_id, const data::Resolvable_Ptr & resolvable, const data::Filenames & filenames );
 
       /**
        * Appends a resolvable to the store.
