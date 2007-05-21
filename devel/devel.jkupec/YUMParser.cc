@@ -51,8 +51,10 @@ namespace zypp
     _ticks.sendTo(progress);
   }
 
+  // -------------------------------------------------------------------------
 
-  bool YUMParser::repomd_CB( const OnMediaLocation &loc, const YUMResourceType &dtype )
+  bool YUMParser::repomd_CB(
+    const OnMediaLocation & loc, const YUMResourceType & dtype)
   {
     DBG << "Adding " << dtype
         << " (" << loc.filename() << ") to YUMParser jobs " << endl;
@@ -62,6 +64,7 @@ namespace zypp
     return true;
   }
 
+  // -------------------------------------------------------------------------
 
   bool YUMParser::primary_CB(const data::Package_Ptr & package_r)
   {
@@ -77,8 +80,10 @@ namespace zypp
     return true;
   }
 
+  // -------------------------------------------------------------------------
 
-  bool YUMParser::patches_CB(const OnMediaLocation &loc, const string & patch_id)
+  bool YUMParser::patches_CB(
+    const OnMediaLocation & loc, const string & patch_id)
   {
     DBG << "Adding patch " << loc.filename() << " to YUMParser jobs " << endl;
     
@@ -87,6 +92,7 @@ namespace zypp
     return true;
   }
 
+  // -------------------------------------------------------------------------
 
   bool YUMParser::patch_CB(const data::Patch_Ptr & patch)
   {
@@ -100,8 +106,10 @@ namespace zypp
     return true;
   }
 
+  // -------------------------------------------------------------------------
 
-  bool YUMParser::other_CB(const data::Resolvable_Ptr & res_ptr, const Changelog & changelog)
+  bool YUMParser::other_CB(
+    const data::Resolvable_Ptr & res_ptr, const Changelog & changelog)
   {
     _consumer.consumeChangelog(_catalog_id, res_ptr, changelog);
 /*
@@ -115,8 +123,10 @@ namespace zypp
     return true;
   }
 
+  // -------------------------------------------------------------------------
 
-  bool YUMParser::filelist_CB(const data::Resolvable_Ptr & res_ptr, const data::Filenames & filenames)
+  bool YUMParser::filelist_CB(
+    const data::Resolvable_Ptr & res_ptr, const data::Filenames & filenames)
   {
     _consumer.consumeFilelist(_catalog_id, res_ptr, filenames);
 /*
@@ -130,6 +140,7 @@ namespace zypp
     return true;
   }
 
+  // -------------------------------------------------------------------------
 
   void YUMParser::start(const Pathname &cache_dir)
   {
@@ -146,10 +157,12 @@ namespace zypp
     _ticks.toMax();
   }
 
+  // -------------------------------------------------------------------------
 
   void YUMParser::doJobs(const Pathname &cache_dir)
   {
-    for(list<YUMParserJob>::const_iterator it = _jobs.begin(); it != _jobs.end(); ++it)
+    for(list<YUMParserJob>::const_iterator it = _jobs.begin();
+        it != _jobs.end(); ++it)
     {
       YUMParserJob job = *it;
 
