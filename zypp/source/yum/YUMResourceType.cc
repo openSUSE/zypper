@@ -28,8 +28,8 @@ namespace zypp
   const YUMResourceType YUMResourceType::GROUP(YUMResourceType::GROUP_e);
   const YUMResourceType YUMResourceType::PATCHES(YUMResourceType::PATCHES_e);
   const YUMResourceType YUMResourceType::PATCH(YUMResourceType::PATCH_e);
-  const YUMResourceType YUMResourceType::PRODUCT(YUMResourceType::PRODUCT_e);
-  const YUMResourceType YUMResourceType::PATTERN(YUMResourceType::PATTERN_e);
+  const YUMResourceType YUMResourceType::PRODUCTS(YUMResourceType::PRODUCTS_e);
+  const YUMResourceType YUMResourceType::PATTERNS(YUMResourceType::PATTERNS_e);
 
 
   YUMResourceType::YUMResourceType(const std::string & strval_r)
@@ -48,8 +48,8 @@ namespace zypp
       _table["group"] = YUMResourceType::GROUP_e;
       _table["patches"] = YUMResourceType::PATCHES_e;
       _table["patch"] = YUMResourceType::PATCH_e;
-      _table["product"] = YUMResourceType::PRODUCT_e;
-      _table["patterns"] = YUMResourceType::PATTERN_e;
+      _table["products"] = YUMResourceType::PRODUCTS_e;
+      _table["patterns"] = YUMResourceType::PATTERNS_e;
       _table["NONE"] = _table["none"] = YUMResourceType::NONE_e;
     }
 
@@ -77,8 +77,8 @@ namespace zypp
       _table[GROUP_e]   = "group";
       _table[PATCHES_e]   = "patches";
       _table[PATCH_e]  = "patch";
-      _table[PRODUCT_e]  = "product";
-      _table[PATTERN_e]  = "patterns";
+      _table[PRODUCTS_e]  = "products";
+      _table[PATTERNS_e]  = "patterns";
       _table[NONE_e] = "NONE";
     }
     return _table[_type];

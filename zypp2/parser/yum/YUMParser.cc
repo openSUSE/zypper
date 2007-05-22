@@ -7,8 +7,7 @@
 |                                                                      |
 \---------------------------------------------------------------------*/
 
-#include "zypp/ZYpp.h"
-#include "zypp/ZYppFactory.h"
+#include <iostream>
 #include "zypp/base/Logger.h"
 
 #include "zypp/parser/yum/RepomdFileReader.h"
@@ -16,6 +15,7 @@
 #include "zypp/parser/yum/PatchesFileReader.h"
 #include "zypp/parser/yum/PatchFileReader.h"
 #include "zypp/parser/yum/PatternFileReader.h"
+#include "zypp/parser/yum/ProductFileReader.h"
 #include "zypp/parser/yum/OtherFileReader.h"
 #include "zypp/parser/yum/FilelistsFileReader.h"
 
@@ -35,7 +35,7 @@ namespace zypp
   // TODO make this through ZYppCallbacks.h 
   bool progress_function(ProgressData::value_type p)
   {
-    cout << "Parsing $name_would_come_in_handy [" << p << "%]" << endl;
+    std::cout << "Parsing $name_would_come_in_handy [" << p << "%]" << endl;
 //    cout << "\rParsing $name_would_come_in_handy [" << p << "%]" << flush;
     return true;
   }
@@ -143,14 +143,23 @@ namespace zypp
 
   // -------------------------------------------------------------------------
 
-  bool YUMParser::pattern_CB(const data::Pattern_Ptr & pattern_ptr)
+  bool YUMParser::pattern_CB(const data::Pattern_Ptr & product_ptr)
   {
-    _consumer.consumePattern(_catalog_id, pattern_ptr);
+    _consumer.consumePattern(_catalog_id, product_ptr);
 
-    DBG << "got pattern "
-      << pattern_ptr->name << pattern_ptr->edition << " "
-      << pattern_ptr->arch
-      << endl;
+    MIL << "got pattern " << product_ptr->name << endl;
+
+    return true;
+  }
+
+  // -------------------------------------------------------------------------
+
+  bool YUMParser::product_CB(const data::Product_Ptr & product_ptr)
+  {
+    _consumer.consumeProduct(_catalog_id, product_ptr);
+
+    MIL << "got product " << product_ptr->name
+        << "-" << product_ptr->edition << endl;
 
     return true;
   }
@@ -235,11 +244,19 @@ namespace zypp
           break;
         }
 
-        case YUMResourceType::PATTERN_e:
+        case YUMResourceType::PATTERNS_e:
         {
           zypp::parser::yum::PatternFileReader(
             cache_dir + job.filename(),
             bind(&YUMParser::pattern_CB, this, _1));
+          break;
+        }
+
+        case YUMResourceType::PRODUCTS_e:
+        {
+          zypp::parser::yum::ProductFileReader(
+            cache_dir + job.filename(),
+            bind(&YUMParser::product_CB, this, _1));
           break;
         }
 

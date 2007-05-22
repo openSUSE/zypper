@@ -72,6 +72,7 @@ namespace zypp
    *
    * \see RepomdFileReader, PrimaryFileReader, OtherFileReader
    * \see FilelistsFileReader, PatchesFileReader, PatchFileReader
+   * \see PatternFileReader, ProductFileReader
    */
   class YUMParser
   {
@@ -168,6 +169,14 @@ namespace zypp
      * \param pattern_ptr pointer to pattern data object
      */
     bool pattern_CB(const data::Pattern_Ptr & pattern_ptr);
+
+    /**
+     * Callback for processing data returned from \ref ProductFileReader.
+     * Uses \ref _consumer to process read product.
+     *
+     * \param product_ptr pointer to product data object
+     */
+    bool product_CB(const data::Product_Ptr & product_ptr);
 
   private:
     /** Object for processing the read data */

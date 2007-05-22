@@ -560,6 +560,7 @@ SET( zypp_parser_yum_SRCS
   parser/yum/FilelistsFileReader.cc
   parser/yum/PatchFileReader.cc
   parser/yum/PatternFileReader.cc
+  parser/yum/ProductFileReader.cc
 )
 
 SET( zypp_parser_yum_HEADERS
@@ -582,6 +583,7 @@ SET( zypp_parser_yum_HEADERS
   parser/yum/FilelistsFileReader.h
   parser/yum/PatchFileReader.h
   parser/yum/PatternFileReader.h
+  parser/yum/ProductFileReader.h
   parser/yum/schemanames.h
 )
 

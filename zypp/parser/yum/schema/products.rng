@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<grammar xmlns:ns1="http://novell.com/package/metadata/suse/products" xmlns="http://relaxng.org/ns/structure/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+  <include href="suse-primary.rng">
+    <start>
+      <ref name="products"/>
+    </start>
+  </include>
+  <define name="products">
+    <element name="ns1:products">
+      <oneOrMore>
+        <element name="ns1:product">
+          <attribute name="type"/>
+          <element name="ns1:vendor">
+            <text/>
+          </element>
+          <element name="ns1:name">
+            <text/>
+          </element>
+          <element name="ns1:version">
+            <attribute name="epoch">
+              <data type="nonNegativeInteger"/>
+            </attribute>
+            <attribute name="ver"/>
+            <attribute name="rel"/>
+          </element>
+          <oneOrMore>
+            <element name="ns1:displayname">
+              <ref name="localized-string"/>
+            </element>
+          </oneOrMore>
+          <zeroOrMore>
+            <element name="ns1:shortname">
+              <ref name="localized-string"/>
+            </element>
+          </zeroOrMore>
+          <oneOrMore>
+            <element name="ns1:description">
+              <ref name="localized-string"/>
+            </element>
+          </oneOrMore>
+          <ref name="dependencies"/>
+        </element>
+      </oneOrMore>
+    </element>
+  </define>
+</grammar>

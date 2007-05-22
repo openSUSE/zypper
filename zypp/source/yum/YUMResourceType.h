@@ -33,8 +33,8 @@ namespace zypp
     static const YUMResourceType GROUP;
     static const YUMResourceType PATCHES; // suse extension
     static const YUMResourceType PATCH;   // suse extension
-    static const YUMResourceType PRODUCT; // suse extension
-    static const YUMResourceType PATTERN; // suse extension
+    static const YUMResourceType PRODUCTS; // suse extension
+    static const YUMResourceType PATTERNS; // suse extension
 
     enum Type
     {
@@ -46,8 +46,8 @@ namespace zypp
       GROUP_e,
       PATCHES_e,
       PATCH_e,
-      PRODUCT_e,
-      PATTERN_e
+      PRODUCTS_e,
+      PATTERNS_e
     };
 
     YUMResourceType(Type type) : _type(type) {}

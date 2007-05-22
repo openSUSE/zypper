@@ -45,7 +45,8 @@ namespace zypp
       tag_pkgfiles,
       tag_deltarpm,
       tag_patchrpm,
-      tag_pattern
+      tag_pattern,
+      tag_product
     };
 
     /**
