@@ -14,9 +14,7 @@
 
 #include "zypp/base/Logger.h"
 #include "zypp/base/DefaultIntegral.h"
-#include "zypp/ZYppFactory.h"
 #include "zypp/Fetcher.h"
-#include "zypp/KeyRing.h"
 
 using namespace std;
 
@@ -24,96 +22,9 @@ using namespace std;
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
-  Fetcher::ChecksumFileChecker::ChecksumFileChecker( const CheckSum &checksum )
-    : _checksum(checksum)
-  {
-  }
-
-  bool Fetcher::ChecksumFileChecker::operator()( const Pathname &file ) const
-  {
-    callback::SendReport<DigestReport> report;
-    CheckSum real_checksum( _checksum.type(), filesystem::checksum( file, _checksum.type() ));
-    
-    if ( _checksum.empty() )
-    {
-      MIL << "File " <<  file << " has no checksum available." << std::endl;
-      if ( report->askUserToAcceptNoDigest(file) )
-      {
-        MIL << "User accepted " <<  file << " with no checksum." << std::endl;
-        return true;
-      }
-      else
-      {
-        return false;
-      }
-    }
-    else
-    {
-      if ( (real_checksum == _checksum) )
-      {
-        if ( report->askUserToAcceptWrongDigest( file, _checksum.checksum(), real_checksum.checksum() ) )
-        {
-          WAR << "User accepted " <<  file << " with WRONG CHECKSUM." << std::endl;
-          return true;
-        }
-        else
-        {
-          return false;
-        }
-      }
-      else
-      {
-        return true;
-      }
-    }
-  }
-
-  bool Fetcher::NullFileChecker::operator()(const Pathname &file ) const
-  {
-    return true;
-  }
-
-  bool Fetcher::CompositeFileChecker::operator()(const Pathname &file ) const
-  {
-    bool result = true;
-    for ( list<Fetcher::FileChecker>::const_iterator it = _checkers.begin(); it != _checkers.end(); ++it )
-    {
-      result = result && (*it)(file);
-    }
-    return result;
-  }
-  
-  void Fetcher::CompositeFileChecker::add( const FileChecker &checker )
-  {
-    _checkers.push_back(checker);
-  }
-
-  Fetcher::SignatureFileChecker::SignatureFileChecker( const Pathname &signature )
-    : _signature(signature)
-  {
-  }
-  
-  Fetcher::SignatureFileChecker::SignatureFileChecker()
-  {
-  }
-  
-  void Fetcher::SignatureFileChecker::addPublicKey( const Pathname &publickey )
-  {
-    ZYpp::Ptr z = getZYpp();
-    z->keyRing()->importKey(publickey, false);
-  }
-  
-  bool Fetcher::SignatureFileChecker::operator()(const Pathname &file ) const
-  {
-    ZYpp::Ptr z = getZYpp();
-    MIL << "checking " << file << " file validity using digital signature.." << endl;
-    bool valid = z->keyRing()->verifyFileSignatureWorkflow( file, string(), _signature);
-    return valid;
-  }
-  
   /**
    * Class to encapsulate the \ref OnMediaLocation object
-   * and the \ref Fetcher::FileChcker together
+   * and the \ref FileChcker together
    */
   struct FetcherJob
   {
@@ -124,7 +35,7 @@ namespace zypp
     }
 
     OnMediaLocation location;
-    Fetcher::CompositeFileChecker checkers;
+    CompositeFileChecker checkers;
   };
 
   ///////////////////////////////////////////////////////////////////
@@ -137,8 +48,8 @@ namespace zypp
 
   public:
 
-    void enqueue( const OnMediaLocation &resource, const Fetcher::FileChecker &checker  );
-    void enqueueDigested( const OnMediaLocation &resource, const Fetcher::FileChecker &checker );
+    void enqueue( const OnMediaLocation &resource, const FileChecker &checker  );
+    void enqueueDigested( const OnMediaLocation &resource, const FileChecker &checker );
     void addCachePath( const Pathname &cache_dir );
     void reset();
     void start( const Pathname &dest_dir, MediaSetAccess &media );
@@ -275,13 +186,21 @@ namespace zypp
       // no matter where did we got the file, try to validate it:
        Pathname localfile = dest_dir + (*it_res).location.filename();
        // call the checker function
-       bool good = (*it_res).checkers(localfile);
-       if (!good)
-       {
-         //FIXME better message
-         ZYPP_THROW(Exception("File " + (*it_res).location.filename().asString() + " does not validate." ));
+       try {
+         (*it_res).checkers(localfile);
        }
-      
+       catch ( const FileCheckException &e )
+       {
+          ZYPP_RETHROW(e);
+       }
+       catch ( const Exception &e )
+       {
+          ZYPP_RETHROW(e);
+       }
+       catch (...)
+       {
+          ZYPP_THROW(Exception("Unknown error while validating " + (*it_res).location.filename().asString()));
+       }
     } // for each job
   }
 
@@ -314,12 +233,12 @@ namespace zypp
   Fetcher::~Fetcher()
   {}
 
-  void Fetcher::enqueueDigested( const OnMediaLocation &resource, const Fetcher::FileChecker &checker )
+  void Fetcher::enqueueDigested( const OnMediaLocation &resource, const FileChecker &checker )
   {
     _pimpl->enqueue(resource, checker);
   }
   
-  void Fetcher::enqueue( const OnMediaLocation &resource, const Fetcher::FileChecker &checker  )
+  void Fetcher::enqueue( const OnMediaLocation &resource, const FileChecker &checker  )
   {
     _pimpl->enqueue(resource, checker);
   }

@@ -86,6 +86,7 @@ SET( zypp_SRCS
   ProvideFilePolicy.cc
   OnMediaLocation.cc
   Fetcher.cc
+  FileChecker.cc
 )
 
 SET( zypp_HEADERSZ
@@ -182,6 +183,7 @@ SET( zypp_HEADERSZ
   ZYppCommitPolicy.h
   ZYppCommitResult.h
   ZYppFactory.h
+  FileChecker.h
 )
 
 INSTALL(  FILES ${zypp_HEADERS} DESTINATION "${CMAKE_INSTALL_PREFIX}/include/zypp" )

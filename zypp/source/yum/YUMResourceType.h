@@ -10,8 +10,8 @@
 #ifndef YUMRESOURCETYPE_H_
 #define YUMRESOURCETYPE_H_
 
+#include <iosfwd>
 #include<string>
-
 
 namespace zypp
 {

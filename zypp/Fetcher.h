@@ -21,6 +21,7 @@
 #include "zypp/OnMediaLocation.h"
 #include "zypp/Digest.h"
 #include "zypp/MediaSetAccess.h"
+#include "zypp/FileChecker.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -66,106 +67,6 @@ namespace zypp
   public:
     /** Implementation  */
     class Impl;
-
-  /**
-   * Functor signature used to check files.
-   * \param file File to check.
-   */
-  typedef boost::function<bool ( const Pathname &file )> FileChecker;
-  
-  /**
-   * Built in file checkers
-   */
-  
-  /**
-   * \short Checks for a valid checksum and interacts with the user.
-   */
-   class ChecksumFileChecker
-   {
-   public:
-     /**
-      * Constructor.
-      * \param checksum Checksum that validates the file
-      */
-     ChecksumFileChecker( const CheckSum &checksum );
-     /**
-      * \short Try to validate the file
-      * \param file File to validate.
-      */
-     bool operator()( const Pathname &file ) const;
-     
-   private:
-     CheckSum _checksum;
-   };
-   
-   /**
-    * \short Checks for the validity of a signature
-    */
-   class SignatureFileChecker
-   {
-     public:
-      /**
-      * Constructor.
-      * \param signature Signature that validates the file
-      */
-      SignatureFileChecker( const Pathname &signature );
-      
-      /**
-      * Default Constructor.
-      * \short Signature for unsigned files
-      * Use it when you dont have a signature but you want
-      * to check the user to accept an unsigned file.
-      */
-      SignatureFileChecker();
-      
-      
-      /**
-       * add a public key to the list of known keys
-       */
-      void addPublicKey( const Pathname &publickey );
-      /**
-      * \short Try to validate the file
-      * \param file File to validate.
-      */
-      bool operator()( const Pathname &file ) const;
-     
-     private:
-      Pathname _signature;
-   };
-   
-   /**
-   * \short Checks for nothing
-   * Used as the default checker
-   */
-   class NullFileChecker
-   {
-   public:
-     bool operator()( const Pathname &file )  const;
-   };
-    
-   /**
-    * \short Checker composed of more checkers.
-    * 
-    * Allows to create a checker composed of various
-    * checkers altothether. It will only
-    * validate if all the checkers validate.
-    *
-    * \code
-    * CompositeFileChecker com;
-    * com.add(checker1);
-    * com.add(checker2);
-    * fetcher.enqueue(location, com);
-    * \endcode
-    */
-   class CompositeFileChecker
-   {
-   public:
-     void add( const FileChecker &checker );
-     bool operator()( const Pathname &file ) const;
-   private:
-     std::list<FileChecker> _checkers;
-   };
-   
   public:
     /** Default ctor */
     Fetcher();

@@ -45,6 +45,14 @@ bool YUMDownloader::patches_Callback( const OnMediaLocation &loc, const string &
 bool YUMDownloader::repomd_Callback( const OnMediaLocation &loc, const YUMResourceType &dtype )
 {
   MIL << dtype << " : " << loc << endl;
+  
+  // skip other
+  if ( dtype == YUMResourceType::OTHER )
+  {
+    MIL << "Skipping other.xml" << endl;
+    return true;
+  }
+  
   _fetcher.enqueueDigested(loc);
   
   // We got a patches file we need to read, to add patches listed
@@ -56,6 +64,7 @@ bool YUMDownloader::repomd_Callback( const OnMediaLocation &loc, const YUMResour
     // now the patches.xml file must exists
     PatchesFileReader( _dest_dir + loc.filename(), bind( &YUMDownloader::patches_Callback, this, _1, _2));
   }
+    
   return true;
 }
 
@@ -75,10 +84,10 @@ void YUMDownloader::download( const Pathname &dest_dir )
   
   _fetcher.start( dest_dir, _media );
   
-  Fetcher::SignatureFileChecker sigchecker;
+  SignatureFileChecker sigchecker;
   
   if ( PathInfo( dest_dir + sigpath ).isExist() )
-    sigchecker = Fetcher::SignatureFileChecker(dest_dir + sigpath);
+    sigchecker = SignatureFileChecker(dest_dir + sigpath);
   
   if ( PathInfo( dest_dir + keypath ).isExist() )
     sigchecker.addPublicKey(dest_dir + keypath );
