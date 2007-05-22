@@ -11,6 +11,7 @@
 */
 #include <iostream>
 
+#undef ZYPP_BASE_LOGGER_LOGGROUP
 #define ZYPP_BASE_LOGGER_LOGGROUP "HAL"
 #include "zypp/base/Logger.h"
 

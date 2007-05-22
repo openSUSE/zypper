@@ -11,6 +11,7 @@
 */
 #include <iostream>
 
+#undef ZYPP_BASE_LOGGER_LOGGROUP
 #define ZYPP_BASE_LOGGER_LOGGROUP "MODALIAS"
 #include "zypp/base/Logger.h"
 
@@ -106,14 +107,14 @@ iterate_devices(const char *dir, const char *file, void *arg)
 		goto out;
 	}
 	if ((entry->modalias = strdup(modalias)) == NULL) {
-	        free(entry);	    
+	        free(entry);
 		ret = -1;
 		goto out;
 	}
 	entry->next = *list;
 	*list = entry;
 	XXX << "system modalias: " << entry->modalias << endl;
-	
+
 out:
 	(void) close(fd);
 	return 0;
