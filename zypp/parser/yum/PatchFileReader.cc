@@ -274,7 +274,6 @@ namespace zypp
 
     if (reader_r->nodeType() == XML_READER_TYPE_ELEMENT)
     {
-      // TODO package extensions -> pkg-files, license-to-confirm
       // xpath: /patch/atoms/package/pkgfiles
       if (reader_r->name() == "pkgfiles")
       {
@@ -623,11 +622,12 @@ namespace zypp
         return true;
       }
 
-      // TODO xpath: /patch/atoms/script/do-location
+      // xpath: /patch/atoms/script/do-location
       if (reader_r->name() == "do-location")
       {
-        // xsd:anyURI do script file path base (is this used at all?)
+        // xsd:anyURI do script file path base (not used)
         // ignoring reader_r->getAttribute("xml:base").asString();
+
         // xsd:anyURI do script file path
         script->doScriptLocation.filePath = reader_r->getAttribute("href").asString();
         return true;
@@ -642,11 +642,12 @@ namespace zypp
         return true;
       }
 
-      // TODO xpath: /patch/atoms/script/undo-location
+      // xpath: /patch/atoms/script/undo-location
       if (reader_r->name() == "undo-location")
       {
-        // xsd:anyURI undo script file path base (is this used at all?)
+        // xsd:anyURI undo script file path base (not used)
         // ignoring reader_r->getAttribute("xml:base").asString();
+
         // xsd:anyURI undo script file path
         script->undoScriptLocation.filePath = reader_r->getAttribute("href").asString();
         return true;

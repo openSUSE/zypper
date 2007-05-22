@@ -1,25 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<grammar ns="http://novell.com/package/metadata/suse/pattern" xmlns="http://relaxng.org/ns/structure/1.0">
+<!--
+  Elements:
+  
+  name
+  summary
+    short summary
+  description
+    detailed description
+  default
+    if present, this element indicates that the pattern should be installed
+    by default
+  uservisible 
+    if present, this element indicates that the pattern should be presented
+    to user in the UI.
+  category
+    one of defined categories to which the pattern belongs
+    (e.g Graphical Environments, Desktop Functions)
+  icon
+    path to icon (relative to installation source URL) file representing
+    the pattern
+  script
+    ?
+  dependencies
+    see rpm-ns.rnc
+-->
+<grammar ns="http://novell.com/package/metadata/suse/pattern" xmlns="http://relaxng.org/ns/structure/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
   <include href="suse-primary.rng">
     <start>
-      <ref name="element-pattern"/>
+      <ref name="element-patterns"/>
     </start>
-    <!-- names in dependencies can include a "kind". Should not be used for packages. -->
-    <define name="attribute-name">
+  </include>
+  <define name="element-patterns">
+    <element name="patterns">
       <optional>
-        <attribute name="kind">
-          <choice>
-            <value>package</value>
-            <value>patch</value>
-            <value>script</value>
-            <value>message</value>
-            <value>product</value>
-          </choice>
+        <attribute name="count">
+          <data type="nonNegativeInteger"/>
         </attribute>
       </optional>
-      <attribute name="name"/>
-    </define>
-  </include>
+      <oneOrMore>
+        <ref name="element-pattern"/>
+      </oneOrMore>
+    </element>
+  </define>
   <define name="element-pattern">
     <element name="pattern">
       <ref name="pattern"/>
@@ -31,45 +53,39 @@
     </element>
     <oneOrMore>
       <element name="summary">
-        <optional>
-          <attribute name="lang"/>
-        </optional>
-        <text/>
+        <ref name="localized-string"/>
+      </element>
+    </oneOrMore>
+    <oneOrMore>
+      <element name="description">
+        <ref name="localized-string"/>
       </element>
     </oneOrMore>
     <optional>
       <element name="default">
-        <choice>
-          <value>true</value>
-          <value>false</value>
-        </choice>
+        <empty/>
       </element>
     </optional>
-    <element name="uservisible">
-      <choice>
-        <value>true</value>
-        <value>false</value>
-      </choice>
-    </element>
-    <element name="category">
-      <text/>
-    </element>
-    <element name="icon">
-      <text/>
-    </element>
+    <optional>
+      <element name="uservisible">
+        <empty/>
+      </element>
+    </optional>
+    <oneOrMore>
+      <element name="category">
+        <ref name="localized-string"/>
+      </element>
+    </oneOrMore>
+    <optional>
+      <element name="icon">
+        <text/>
+      </element>
+    </optional>
     <optional>
       <element name="script">
         <text/>
       </element>
     </optional>
-    <oneOrMore>
-      <element name="description">
-        <optional>
-          <attribute name="lang"/>
-        </optional>
-        <text/>
-      </element>
-    </oneOrMore>
     <ref name="dependencies"/>
   </define>
 </grammar>

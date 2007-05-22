@@ -44,7 +44,8 @@ namespace zypp
       tag_message,
       tag_pkgfiles,
       tag_deltarpm,
-      tag_patchrpm
+      tag_patchrpm,
+      tag_pattern
     };
 
     /**

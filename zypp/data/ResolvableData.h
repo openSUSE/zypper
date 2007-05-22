@@ -232,7 +232,7 @@ namespace data
       {}
 
       // Flags
-      /** */
+      /** Should the pattern be installed by default? */
       DefaultIntegral<bool,false> isDefault;
       /** Visible or hidden at the UI. */
       DefaultIntegral<bool,false> userVisible;
@@ -240,7 +240,7 @@ namespace data
       /** Category */
       TranslatedText category;
 
-      /** Icon path. */
+      /** Icon path relative to repository URL. */
       std::string icon;
       /** UI order string */
       std::string order;

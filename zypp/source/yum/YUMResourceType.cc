@@ -8,11 +8,8 @@
 \---------------------------------------------------------------------*/
 
 #include <map>
-
 #include "zypp/base/Exception.h"
-
 #include "YUMResourceType.h"
-//#include <iostream>
 
 namespace zypp
 {
@@ -32,6 +29,7 @@ namespace zypp
   const YUMResourceType YUMResourceType::PATCHES(YUMResourceType::PATCHES_e);
   const YUMResourceType YUMResourceType::PATCH(YUMResourceType::PATCH_e);
   const YUMResourceType YUMResourceType::PRODUCT(YUMResourceType::PRODUCT_e);
+  const YUMResourceType YUMResourceType::PATTERN(YUMResourceType::PATTERN_e);
 
 
   YUMResourceType::YUMResourceType(const std::string & strval_r)
@@ -51,6 +49,7 @@ namespace zypp
       _table["patches"] = YUMResourceType::PATCHES_e;
       _table["patch"] = YUMResourceType::PATCH_e;
       _table["product"] = YUMResourceType::PRODUCT_e;
+      _table["patterns"] = YUMResourceType::PATTERN_e;
       _table["NONE"] = _table["none"] = YUMResourceType::NONE_e;
     }
 
@@ -79,12 +78,15 @@ namespace zypp
       _table[PATCHES_e]   = "patches";
       _table[PATCH_e]  = "patch";
       _table[PRODUCT_e]  = "product";
+      _table[PATTERN_e]  = "patterns";
       _table[NONE_e] = "NONE";
     }
     return _table[_type];
   }
 
 
-    }
-  }
-}
+    } // ns yum
+  } // ns source
+} // ns zypp
+
+// vim: set ts=2 sts=2 sw=2 et ai:

@@ -161,6 +161,14 @@ namespace zypp
      */
     bool filelist_CB(const data::Resolvable_Ptr & res_ptr, const data::Filenames & filenames);
 
+    /**
+     * Callback for processing data returned from \ref PatternFileReader.
+     * Uses \ref _consumer to process read pattern.
+     *
+     * \param pattern_ptr pointer to pattern data object
+     */
+    bool pattern_CB(const data::Pattern_Ptr & pattern_ptr);
+
   private:
     /** Object for processing the read data */
     data::ResolvableDataConsumer & _consumer;

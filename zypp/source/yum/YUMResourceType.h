@@ -34,6 +34,7 @@ namespace zypp
     static const YUMResourceType PATCHES; // suse extension
     static const YUMResourceType PATCH;   // suse extension
     static const YUMResourceType PRODUCT; // suse extension
+    static const YUMResourceType PATTERN; // suse extension
 
     enum Type
     {
@@ -45,7 +46,8 @@ namespace zypp
       GROUP_e,
       PATCHES_e,
       PATCH_e,
-      PRODUCT_e
+      PRODUCT_e,
+      PATTERN_e
     };
 
     YUMResourceType(Type type) : _type(type) {}
@@ -68,9 +70,11 @@ namespace zypp
   inline bool operator==(const YUMResourceType & obj1, const YUMResourceType & obj2)
   { return obj1._type == obj2._type; }
 
-    }
-  }
-}
+
+    } // ns yum
+  } // ns source
+} // ns zypp
+
 #endif /*YUMRESOURCETYPE_H_*/
 
 // vim: set ts=2 sts=2 sw=2 et ai:

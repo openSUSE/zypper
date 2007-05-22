@@ -1,28 +1,47 @@
+# Elements:
+# 
+# name
+# summary
+#   short summary
+# description
+#   detailed description
+# default
+#   if present, this element indicates that the pattern should be installed
+#   by default
+# uservisible 
+#   if present, this element indicates that the pattern should be presented
+#   to user in the UI.
+# category
+#   one of defined categories to which the pattern belongs
+#   (e.g Graphical Environments, Desktop Functions)
+# icon
+#   path to icon (relative to installation source URL) file representing
+#   the pattern
+# script
+#   ?
+# dependencies
+#   see rpm-ns.rnc
+
 default namespace = "http://novell.com/package/metadata/suse/pattern"
 
 include "suse-primary.rnc" {
-  start = element-pattern
-  # names in dependencies can include a "kind". Should not be used for packages.
-  attribute-name =
-    attribute kind { "package" | "patch" | "script" | "message" | "product" }?,
-    attribute name { text }
+  start = element-patterns
+}
+
+element-patterns = element patterns {
+  attribute count { xsd:nonNegativeInteger }?,
+  element-pattern+
 }
 
 element-pattern = element pattern { pattern }
 
 pattern =
     element name { text },
-    element summary {
-      attribute lang { text }?,
-      text
-    }+,
-    element default { "true" | "false" }?,
-    element uservisible { "true" | "false" },
-    element category { text },
-    element icon { text },
+    element summary { localized-string }+,
+    element description { localized-string }+,
+    element default { empty }?,
+    element uservisible { empty }?,
+    element category { localized-string }+,
+    element icon { text }?,
     element script { text }?,
-    element description {
-      attribute lang { text }?,
-      text
-    }+, dependencies
-    
+    dependencies

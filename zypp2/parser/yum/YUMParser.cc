@@ -15,6 +15,7 @@
 #include "zypp/parser/yum/PrimaryFileReader.h"
 #include "zypp/parser/yum/PatchesFileReader.h"
 #include "zypp/parser/yum/PatchFileReader.h"
+#include "zypp/parser/yum/PatternFileReader.h"
 #include "zypp/parser/yum/OtherFileReader.h"
 #include "zypp/parser/yum/FilelistsFileReader.h"
 
@@ -142,6 +143,20 @@ namespace zypp
 
   // -------------------------------------------------------------------------
 
+  bool YUMParser::pattern_CB(const data::Pattern_Ptr & pattern_ptr)
+  {
+    _consumer.consumePattern(_catalog_id, pattern_ptr);
+
+    DBG << "got pattern "
+      << pattern_ptr->name << pattern_ptr->edition << " "
+      << pattern_ptr->arch
+      << endl;
+
+    return true;
+  }
+
+  // -------------------------------------------------------------------------
+
   void YUMParser::start(const Pathname &cache_dir)
   {
     zypp::parser::yum::RepomdFileReader(
@@ -201,10 +216,13 @@ namespace zypp
 
         case YUMResourceType::OTHER_e:
         {
+          WAR << "ignoring other.xml.gz for now..." << endl;
+          /*
           zypp::parser::yum::OtherFileReader(
             cache_dir + job.filename(),
             bind(&YUMParser::other_CB, this, _1, _2),
             &progress_function);
+          */
           break;
         }
 
@@ -214,6 +232,14 @@ namespace zypp
             cache_dir + job.filename(),
             bind(&YUMParser::filelist_CB, this, _1, _2),
             &progress_function);
+          break;
+        }
+
+        case YUMResourceType::PATTERN_e:
+        {
+          zypp::parser::yum::PatternFileReader(
+            cache_dir + job.filename(),
+            bind(&YUMParser::pattern_CB, this, _1));
           break;
         }
 
