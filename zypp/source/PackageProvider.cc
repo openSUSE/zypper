@@ -278,7 +278,7 @@ namespace zypp
       std::string package_str = _package->name() + "-" + _package->edition().asString();
 
       // TranslatorExplanation %s = package being checked for integrity
-      switch ( report()->problem( _package, source::DownloadResolvableReport::INVALID, str::form(_("Package %s fails integrity check. Do you want to retry downloading it?"), package_str.c_str() ) ) )
+      switch ( report()->problem( _package, source::DownloadResolvableReport::INVALID, str::form(_("Package %s fails integrity check. Do you want to retry?"), package_str.c_str() ) ) )
         {
         case source::DownloadResolvableReport::RETRY:
           _retry = true;

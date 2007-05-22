@@ -334,9 +334,9 @@ const Pathname SourceImpl::providePackage( Package::constPtr package )
     if (!digest_ok)
     {
       std::string  package_str = package->name() + "-" + package->edition().asString();
-      
+
       // TranslatorExplanation %s = package
-      source::DownloadResolvableReport::Action useraction = report->problem(package, source::DownloadResolvableReport::INVALID, str::form(_("Package %s fails integrity check. Do you want to retry downloading it, or abort installation?"), package_str.c_str() ));
+      source::DownloadResolvableReport::Action useraction = report->problem(package, source::DownloadResolvableReport::INVALID, str::form(_("Package %s fails integrity check. Do you want to retry, or abort installation?"), package_str.c_str() ));
 
       if ( useraction == source::DownloadResolvableReport::ABORT )
       {
@@ -590,7 +590,7 @@ const Pathname SourceImpl::provideJustFile(const Pathname & file_r,
             ZYPP_CAUGHT(excpt_r);
             ERR << "Failed to release all sources" << endl;
           }
-          
+
           try
           {
             media_mgr.release (_media, true); // one more release needed for eject
