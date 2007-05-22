@@ -24,6 +24,10 @@ ADD_EXECUTABLE(yum-downloader YUMDownloader_tp.cc)
 TARGET_LINK_LIBRARIES(yum-downloader  zypp )
 TARGET_LINK_LIBRARIES(yum-downloader  zypp2 )
 
+ADD_EXECUTABLE(yum-reader YUMReader_tp.cc)
+TARGET_LINK_LIBRARIES(yum-reader  zypp )
+TARGET_LINK_LIBRARIES(yum-reader  zypp2 )
+
 ADD_EXECUTABLE(cachedsource CachedSource_tp.cc)
 TARGET_LINK_LIBRARIES(cachedsource  zypp )
 TARGET_LINK_LIBRARIES(cachedsource  zypp2 )

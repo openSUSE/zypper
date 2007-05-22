@@ -6,13 +6,15 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
+/** \file	zypp/source/memory/DPackageImpl.h
+ *
+*/
+#ifndef ZYPP_SOURCE_MEMORYPACKAGEIMPL_H
+#define ZYPP_SOURCE_MEMORYPACKAGEIMPL_H
 
-#ifndef ZYPP_REPO_DataPACKAGEIMPL_H
-#define ZYPP_REPO_DataPACKAGEIMPL_H
-
-#include "zypp/data/ResolvableData.h"
 #include "zypp/detail/PackageImplIf.h"
 #include "zypp/Source.h"
+#include "zypp/data/ResolvableData.h"
 #include "zypp/DiskUsage.h"
 #include "zypp/CheckSum.h"
 
@@ -22,17 +24,21 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
   namespace repository
   { /////////////////////////////////////////////////////////////////
-    namespace data
+    namespace memory
     { /////////////////////////////////////////////////////////////////
+
+      DEFINE_PTR_TYPE(DImpl);
 
       ///////////////////////////////////////////////////////////////////
       //
-      //	CLASS NAME : DataPackageImpl
+      //	CLASS NAME : PackageImpl
       //
-      struct DataPackageImpl : public zypp::detail::PackageImplIf
+      /**
+      */
+      struct DPackageImpl : public zypp::detail::PackageImplIf
       {
-        DataPackageImpl( zypp::data::Package_Ptr );
-        virtual ~DataPackageImpl();
+        DPackageImpl( data::Package_Ptr ptr );
+        virtual ~DPackageImpl();
 
         /** \name ResObject attributes. */
         //@{
@@ -54,7 +60,7 @@ namespace zypp
         virtual Label license() const;
         virtual std::string packager() const;
         virtual PackageGroup group() const;
-       virtual Keywords keywords() const;
+        virtual Keywords keywords() const;
 	virtual Changelog changelog() const;
         virtual Pathname location() const;
         virtual std::string url() const;
@@ -72,14 +78,32 @@ namespace zypp
         virtual std::list<DeltaRpm> deltaRpms() const;
         virtual std::list<PatchRpm> patchRpms() const;
         virtual bool installOnly() const;
-      private:
-        zypp::data::Package_Ptr _data;
+
+        TranslatedText _summary;
+        TranslatedText _description;
+        TranslatedText _insnotify;
+        TranslatedText _delnotify;
+        TranslatedText _license_to_confirm;
+        
+        PackageGroup _group;
+	Keywords _keywords;
+        std::list<std::string> _authors;
+        ByteCount _size;
+        ByteCount _archivesize;
+        Vendor _vendor;
+        Label _license;
+        Date _buildtime;
+        unsigned _media_number;
+        Pathname _location;
+        DiskUsage _diskusage;
+        CheckSum _checksum;
+private:
       };
       ///////////////////////////////////////////////////////////////////
       /////////////////////////////////////////////////////////////////
-    } // namespace Data
+    } // namespace memory
     /////////////////////////////////////////////////////////////////
-  } // namespace source
+  } // namespace repository
   ///////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

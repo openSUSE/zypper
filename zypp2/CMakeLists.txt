@@ -99,11 +99,17 @@ SET( zypp2_repository_cached_HEADERS
 )
 
 SET( zypp2_repository_data_SRCS
-  repository/memory/DataPackageImpl.cc
+  repository/memory/DPackageImpl.cc
+  repository/memory/DPatternImpl.cc
+  repository/memory/DProductImpl.cc
+  repository/memory/DSrcPackageImpl.cc
 )
 
 SET( zypp2_repository_data_HEADERS
-  repository/memory/DataPackageImpl.h
+  repository/memory/DPackageImpl.h
+  repository/memory/DPatternImpl.h
+  repository/memory/DProductImpl.h
+  repository/memory/DSrcPackageImpl.h
 )
 
 SET( zypp2_parser_yum_SRCS
