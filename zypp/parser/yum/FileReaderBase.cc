@@ -240,14 +240,22 @@ namespace zypp
           reader_r->getAttribute("rel").asString(),
           reader_r->getAttribute("epoch").asString()
         );
+        
+        string kind_str = reader_r->getAttribute("kind").asString();
+        Resolvable::Kind kind;
+        if (kind_str.empty())
+           kind = ResTraits<Package>::kind;
+        else
+          kind = Resolvable::Kind(kind_str); 
+          
 /*
         DBG << "got rpm:entry for " << _dtype << ": "
             << reader_r->getAttribute("name").asString()
-            << " " << edition << endl;
+            << " " << edition << " (" << kind << ")" << endl;
 */
         deps_r[_dtype].insert(
           zypp::capability::parse(
-            ResTraits<Package>::kind,
+            kind,
             reader_r->getAttribute("name").asString(),
             Rel(reader_r->getAttribute("flags").asString()),
             edition
