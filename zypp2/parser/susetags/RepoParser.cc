@@ -22,6 +22,8 @@
 #include "zypp/parser/susetags/RepoIndex.h"
 #include "zypp/parser/tagfile/ParseException.h"
 
+#include "zypp/ZConfig.h"
+
 using std::endl;
 
 ///////////////////////////////////////////////////////////////////
@@ -38,7 +40,9 @@ namespace zypp
       //
       //	CLASS NAME : RepoParser::Impl
       //
-      /** RepoParser implementation. */
+      /** RepoParser implementation.
+       * \todo Clean data on exeption.
+      */
       class RepoParser::Impl
       {
 	public:
@@ -51,8 +55,11 @@ namespace zypp
 	    _ticks.sendTo( fnc_r );
 	  }
 
+	  /** Main entry to parser. */
 	  void parse( const Pathname & reporoot_r );
 
+	  /** \name FileReader callbacks delivering data. */
+	  //@{
 	  void consumeIndex( const RepoIndex_Ptr & data_r )
 	  {
 	    SEC << "[Index]" << data_r << endl;
@@ -80,6 +87,7 @@ namespace zypp
           {
             SEC << "[Pattern]" << data_r << endl;
           }
+	  //@}
 
         public:
 
@@ -88,13 +96,71 @@ namespace zypp
             return( name_r.size() > 4 && name_r.substr( name_r.size() - 4 ) == ".pat" );
           }
 
+          /** Test for \c packages.lang in \ref _repoIndex.*/
+	  bool haveLocale( const Locale & locale_r ) const
+          {
+            std::string searchFor( "packages." + locale_r.code() );
+	    for ( RepoIndex::FileChecksumMap::const_iterator it = _repoIndex->metaFileChecksums.begin();
+	          it != _repoIndex->metaFileChecksums.end(); ++it )
+	    {
+	      if ( it->first == searchFor )
+                return true; // got it
+	    }
+	    return false; // not found
+	  }
+
+	  /** Take care translations for \a locale_r or an appropriate
+	   * fallback were parsed.
+	  */
+	  void parseLocaleIf( const Locale & locale_r )
+	  {
+	    Locale toParse( locale_r );
+	    bool alreadyParsed = false;
+
+	    while ( toParse != Locale::noCode )
+	    {
+	      alreadyParsed = ( _parsedLocales.find( toParse ) != _parsedLocales.end() );
+	      if ( alreadyParsed || haveLocale( toParse ) )
+		break; // no return because we want to log in case of a fallback
+	      toParse = toParse.fallback();
+	    }
+
+	    if ( toParse != locale_r )
+	    {
+	      WAR << "Using fallback locale " << toParse << " for " << locale_r << endl;
+	    }
+
+	    if ( alreadyParsed )
+	    {
+	      return; // now return...
+	    }
+
+	    // ...or parse
+	    _parsedLocales.insert( toParse ); // don't try again.
+
+	    PackagesLangFileReader reader;
+	    reader.setLocale( toParse );
+	    reader.setPkgConsumer( bind( &Impl::consumePkg, this, _1 ) );
+	    reader.setSrcPkgConsumer( bind( &Impl::consumeSrcPkg, this, _1 ) );
+	    reader.parse( _descrdir / ("packages." + toParse.code()) );
+
+	    if ( ! _ticks.incr() )
+	      ZYPP_THROW( AbortRequestException() );
+	  }
+
 	private:
 	  data::RecordId                 _catalogId;
 	  data::ResolvableDataConsumer & _consumer;
 	  ProgressData                   _ticks;
 
+	private: // these (and _ticks) are actually scoped per parse() run.
 	  RepoIndex_Ptr     _repoIndex;
 	  data::Product_Ptr _prodData;
+	  Pathname          _descrdir; // full path
+	  Pathname          _datadir;  // full path
+
+	  /** Translations processed by \ref parseLocaleIf so far.*/
+	  std::set<Locale>  _parsedLocales;
       };
       ///////////////////////////////////////////////////////////////////
 
@@ -107,6 +173,8 @@ namespace zypp
       {
 	_prodData = 0;
 	_repoIndex = 0;
+	_descrdir = _datadir = Pathname();
+	_parsedLocales.clear();
 
         // Content file first to get the repoindex
         {
@@ -119,9 +187,11 @@ namespace zypp
 	{
 	  ZYPP_THROW( ParseException( reporoot_r.asString() + ": " + "No reository index in content file." ) );
 	}
-
 	DBG << _repoIndex << endl;
-        Pathname descrdir( reporoot_r / _repoIndex->descrdir );
+
+	// Prepare parsing
+	_descrdir = reporoot_r / _repoIndex->descrdir;
+	_datadir = reporoot_r / _repoIndex->datadir;
 
 	_ticks.name( "Parsing susetags repo at " + reporoot_r.asString() );
 	_ticks.range( _repoIndex->metaFileChecksums.size() );
@@ -133,27 +203,19 @@ namespace zypp
           PackagesFileReader reader;
           reader.setPkgConsumer( bind( &Impl::consumePkg, this, _1 ) );
           reader.setSrcPkgConsumer( bind( &Impl::consumeSrcPkg, this, _1 ) );
-          reader.parse( descrdir / "packages" );
+          reader.parse( _descrdir / "packages" );
         }
         if ( ! _ticks.incr() )
           ZYPP_THROW( AbortRequestException() );
 
-#warning FIX selection of language files to parse
         // Now process packages.lang
-	//for ( RepoIndex::FileChecksumMap::const_iterator it = _repoIndex->metaFileChecksums.begin();
-	//      it != _repoIndex->metaFileChecksums.end(); ++it )
-        {
-          PackagesLangFileReader reader;
-          reader.setLocale( Locale("en") );
-          reader.setPkgConsumer( bind( &Impl::consumePkg, this, _1 ) );
-          reader.setSrcPkgConsumer( bind( &Impl::consumeSrcPkg, this, _1 ) );
-          reader.parse( descrdir / "packages.en" );
-        }
-        if ( ! _ticks.incr() )
-          ZYPP_THROW( AbortRequestException() );
+	// Always parse 'en'. For each wanted locale at least
+	// some fallback, if locale is not present.
+	parseLocaleIf( Locale("en") );
+	parseLocaleIf( Locale("de_DE") );
+	parseLocaleIf( ZConfig().defaultTextLocale() );
 
-
-        // Now process the RepoIndex
+        // Now process the rest of RepoIndex
 	for ( RepoIndex::FileChecksumMap::const_iterator it = _repoIndex->metaFileChecksums.begin();
 	      it != _repoIndex->metaFileChecksums.end(); ++it )
         {
@@ -161,7 +223,7 @@ namespace zypp
           {
             PatternFileReader reader;
             reader.setConsumer( bind( &Impl::consumePat, this, _1 ) );
-            reader.parse( descrdir / it->first );
+            reader.parse( _descrdir / it->first );
           }
 
           if ( ! _ticks.incr() )
