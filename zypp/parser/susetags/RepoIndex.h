@@ -13,10 +13,17 @@
 #define ZYPP_PARSER_SUSETAGS_REPOINDEX_H
 
 #include <iosfwd>
+#include <list>
+#include <map>
 
 #include "zypp/base/ReferenceCounted.h"
 #include "zypp/base/NonCopyable.h"
 #include "zypp/base/PtrTypes.h"
+
+#include "zypp/Arch.h"
+#include "zypp/CheckSum.h"
+#include "zypp/Pathname.h"
+#include "zypp/Locale.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -40,6 +47,18 @@ namespace zypp
       class RepoIndex : public base::ReferenceCounted, private base::NonCopyable
       {
 	public:
+
+	  Locale                 language;
+	  std::string            timezone;
+	  Arch                   defaultBase;
+	  std::list<Locale>      languages;
+	  std::list<std::string> flags;
+
+	  Pathname descrdir;
+	  Pathname datadir;
+
+	  std::map<std::string, CheckSum> metaFileChecksums;
+	  std::map<std::string, CheckSum> signingKeys;
 
 	protected:
 	  /** Overload to realize std::ostream & operator\<\<. */

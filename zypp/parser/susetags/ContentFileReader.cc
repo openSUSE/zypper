@@ -121,7 +121,7 @@ namespace zypp
 	    return errors;
 	  }
 
-	  void setDependencies( data::DependencyList & deplist_r,const std::string & value ) const
+	  void setDependencies( data::DependencyList & deplist_r, const std::string & value ) const
 	  {
 	    std::list<std::string> words;
 	    str::split( value, std::back_inserter( words ) );
@@ -172,6 +172,21 @@ namespace zypp
 	      // Add the dependency
 	      deplist_r.insert( capability::parse( kind, name ) );
 	    }
+	  }
+
+	  bool setFileCheckSum( std::map<std::string, CheckSum> & map_r, const std::string & value ) const
+	  {
+	    bool error = false;
+	    std::vector<std::string> words;
+	    if ( str::split( value, std::back_inserter( words ) ) == 3 )
+	    {
+	      map_r[words[2]] = CheckSum( words[0], words[1] );
+	    }
+	    else
+	    {
+	      error = true;
+	    }
+	    return error;
 	  }
 
 	public:
@@ -282,6 +297,8 @@ namespace zypp
 	if ( ! ticks.toMin() )
 	  userRequestedAbort( 0 );
 
+	Arch sysarch( ZConfig().systemArchitecture() );
+
 	iostr::EachLine line( input_r );
 	for( ; line; line.next() )
 	{
@@ -303,6 +320,9 @@ namespace zypp
 	    key.erase( pos );
 	  }
 
+	  //
+	  // Product related data:
+	  //
 	  if ( key == "PRODUCT" )
 	  {
 	    std::replace( value.begin(), value.end(), ' ', '_' );
@@ -311,6 +331,18 @@ namespace zypp
 	  else if ( key == "VERSION" )
 	  {
 	    _pimpl->product().edition = value;
+	  }
+	  else if ( key == "ARCH" )
+	  {
+	    // Default product arch is noarch. We update, if the
+	    // ARCH.xxx tag is better than the current product arch
+	    // and still compatible with the sysarch.
+	    Arch carch( modifier );
+	    if ( Arch::compare( _pimpl->product().arch, carch ) < 0
+		 &&  carch.compatibleWith( sysarch ) )
+	    {
+	      _pimpl->product().arch = carch;
+	    }
 	  }
 	  else if ( key == "DISTPRODUCT" )
 	  {
@@ -323,6 +355,10 @@ namespace zypp
 	  else if ( key == "VENDOR" )
 	  {
 	    _pimpl->product().vendor = value;
+	  }
+	  else if ( key == "LABEL" )
+	  {
+	    _pimpl->product().summary.setText( value, Locale(modifier) );
 	  }
 	  else if ( key == "SHORTLABEL" )
 	  {
@@ -366,14 +402,6 @@ namespace zypp
 	      WAR << errPrefix( line.lineNo(), "Ignored malformed URL(s)", *line ) << endl;
 	    }
 	  }
-	  else if ( key == "ARCH" )
-	  {
-	    /*unused ?*/;
-	  }
-	  else if ( key == "DEFAULTBASE" )
-	  {
-	    /*unused ?*/;
-	  }
 	  else if ( key == "PREREQUIRES" )
 	  {
 	    _pimpl->setDependencies( _pimpl->product().deps[Dep::PREREQUIRES], value );
@@ -410,45 +438,55 @@ namespace zypp
 	  {
 	    _pimpl->setDependencies( _pimpl->product().deps[Dep::ENHANCES], value );
 	  }
-	  else if ( key == "LINGUAS" )
+	  //
+	  // ReppoIndex related data:
+	  //
+	  else if ( key == "DEFAULTBASE" )
 	  {
-	    /*unused ?*/;
-	  }
-	  else if ( key == "LABEL" )
-	  {
-	    _pimpl->product().summary.setText( value, Locale(modifier) );
+	    _pimpl->repoindex().defaultBase = Arch(value);
 	  }
 	  else if ( key == "DESCRDIR" )
 	  {
-	    /*unused ?*/;
+	    _pimpl->repoindex().descrdir = value;
 	  }
 	  else if ( key == "DATADIR" )
 	  {
-	    /*unused ?*/;
+	    _pimpl->repoindex().datadir = value;
 	  }
 	  else if ( key == "FLAGS" )
 	  {
-	    /*unused ?*/;
-	  }
-	  else if ( key == "LANGUAGE" )
-	  {
-	    /*unused ?*/;
-	  }
-	  else if ( key == "TIMEZONE" )
-	  {
-	    /*unused ?*/;
-	  }
-	  else if ( key == "META" )
-	  {
-	    /*unused ?*/;
+	    str::split( value, std::back_inserter( _pimpl->repoindex().flags ) );
 	  }
 	  else if ( key == "KEY" )
 	  {
-	    /*unused ?*/;
+	    if ( _pimpl->setFileCheckSum( _pimpl->repoindex().signingKeys, value ) )
+	    {
+	      ZYPP_THROW( ParseException( errPrefix( line.lineNo(), "Expected [algorithm checksum filename]", *line ) ) );
+	    }
 	  }
-	  else if ( key == "VOLATILE_CONTENT" )
+	  else if ( key == "LANGUAGE" )
 	  {
-	    /*unused ? add to FLAGS*/;
+	    _pimpl->repoindex().language;
+	  }
+	  else if ( key == "LINGUAS" )
+	  {
+	    std::set<std::string> strval;
+	    str::split( value, std::inserter( strval, strval.end() ) );
+	    for ( std::set<std::string>::const_iterator it = strval.begin(); it != strval.end(); ++it )
+	    {
+	      _pimpl->repoindex().languages.push_back( Locale(*it) );
+	    }
+	  }
+	  else if ( key == "META" )
+	  {
+	    if ( _pimpl->setFileCheckSum( _pimpl->repoindex().metaFileChecksums, value ) )
+	    {
+	      ZYPP_THROW( ParseException( errPrefix( line.lineNo(), "Expected [algorithm checksum filename]", *line ) ) );
+	    }
+	  }
+	  else if ( key == "TIMEZONE" )
+	  {
+	    _pimpl->repoindex().timezone = value;
 	  }
 	  else
 	  { WAR << errPrefix( line.lineNo(), "Unknown tag", *line ) << endl; }
@@ -458,6 +496,21 @@ namespace zypp
 	    userRequestedAbort( line.lineNo() );
 	}
 
+	//
+	// post processing
+	//
+	if ( _pimpl->hasProduct() )
+	{
+	  // Insert a "Provides" _dist_name" == _dist_version"
+	  if ( ! _pimpl->product().distributionName.empty() )
+	  {
+	    _pimpl->product().deps[Dep::PROVIDES].insert(
+		capability::parse( ResTraits<Product>::kind,
+				   _pimpl->product().distributionName,
+				   Rel::EQ,
+				   _pimpl->product().distributionEdition ) );
+	  }
+	}
 	if ( ! ticks.toMax() )
 	  userRequestedAbort( line.lineNo() );
 

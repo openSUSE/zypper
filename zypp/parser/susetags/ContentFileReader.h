@@ -15,6 +15,7 @@
 #include <iosfwd>
 
 #include "zypp/base/PtrTypes.h"
+#include "zypp/base/NonCopyable.h"
 #include "zypp/base/Function.h"
 #include "zypp/base/InputStream.h"
 
@@ -48,7 +49,7 @@ namespace zypp
       //	CLASS NAME : ContentFileReader
       //
       /** */
-      class ContentFileReader
+      class ContentFileReader : private base::NonCopyable
       {
 	public:
 	  typedef function<void(const data::Product_Ptr &)> ProductConsumer;
@@ -60,8 +61,8 @@ namespace zypp
 	  /** Dtor */
 	  virtual ~ContentFileReader();
           /** Parse the stream.
-	   * \throw ParseExcetion on errors.
-	   * \throws AbortRequestException on user request.
+	   * \throw ParseException on errors.
+	   * \throw AbortRequestException on user request.
 	   * Invokes \ref consume for each tag. \ref consume might throw
 	   * other exceptions as well.
 	   */
@@ -97,7 +98,7 @@ namespace zypp
 
 	private:
 	  class Impl;
-	  scoped_ptr<Impl> _pimpl;
+	  RW_pointer<Impl,rw_pointer::Scoped<Impl> > _pimpl;
 	  ProductConsumer _productConsumer;
 	  RepoIndexConsumer _repoIndexConsumer;
       };

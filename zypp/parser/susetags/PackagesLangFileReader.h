@@ -81,7 +81,7 @@ namespace zypp
 
 	private:
 	  class Impl;
-	  scoped_ptr<Impl> _pimpl;
+	  RW_pointer<Impl,rw_pointer::Scoped<Impl> > _pimpl;
 	  Locale           _locale;
 	  PkgConsumer      _pkgConsumer;
 	  SrcPkgConsumer   _srcPkgConsumer;
