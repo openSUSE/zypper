@@ -67,7 +67,7 @@ operator<<( ostream& os, const ResolverQueue & resolverqueue)
 ResolverQueue::ResolverQueue (const ResPool & pool, const Arch & arch, ResolverContext_Ptr context)
     : _context (context)
 {
-    _XDEBUG("ResolverQueue::ResolverQueue(pool, " << context << ")");
+    _XDEBUG("ResolverQueue::ResolverQueue(pool,... )");
     if (context == NULL)
 	_context = new ResolverContext(pool, arch);
 }
