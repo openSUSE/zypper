@@ -70,22 +70,25 @@ namespace zypp
 	  {
 	    SEC << "[Prod]" << data_r << endl;
 	    _prodData = data_r;
-	    _consumer.consumeProduct( _catalogId, _prodData );
+	    _consumer.consumeProduct( _catalogId, data_r );
 	  }
 
           void consumePkg( const data::Package_Ptr & data_r )
           {
             SEC << "[Package]" << data_r << endl;
+	    _consumer.consumePackage( _catalogId, data_r );
           }
 
           void consumeSrcPkg( const data::SrcPackage_Ptr & data_r )
           {
             SEC << "[SrcPackage]" << data_r << endl;
+	    _consumer.consumeSourcePackage( _catalogId, data_r );
           }
 
           void consumePat( const data::Pattern_Ptr & data_r )
           {
             SEC << "[Pattern]" << data_r << endl;
+	    _consumer.consumePattern( _catalogId, data_r );
           }
 	  //@}
 

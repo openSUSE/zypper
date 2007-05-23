@@ -39,7 +39,7 @@ struct CacheStore::Impl
     {
       MIL << "database " << (dbdir + "zypp.db") << " was just created" << endl;
     }
-  
+
     try
     {
       con.open( (dbdir + "zypp.db").asString().c_str());
@@ -51,62 +51,62 @@ struct CacheStore::Impl
       //ZYPP_CAUGHT(ex);
       ZYPP_THROW(Exception(ex.what()));
     }
-  
-    
+
+
     // initialize all pre-compiled statements
-    
+
     insert_resolvable_in_catalog_cmd.reset( new sqlite3_command( con, "insert into resolvables_catalogs (resolvable_id, catalog_id) values (:resolvable_id, :catalog_id);" ));
-  
+
     update_catalog_cmd.reset( new sqlite3_command( con, "update catalogs set checksum=:checksum, timestamp=:timestamp where id=:catalog_id;" ));
-  
+
     select_catalog_cmd.reset( new sqlite3_command( con, "select id from catalogs where url=:url and path=:path;" ));
     insert_catalog_cmd.reset( new sqlite3_command( con, "insert into catalogs (url,path,timestamp) values (:url,:path,:timestamp);" ));
-  
+
     select_name_cmd.reset( new sqlite3_command( con, "select id from names where name=:name;" ));
     insert_name_cmd.reset( new sqlite3_command( con, "insert into names (name) values (:name);" ));
-  
+
     select_dirname_cmd.reset( new sqlite3_command( con, "select id from dir_names where name=:name;" ));
     insert_dirname_cmd.reset( new sqlite3_command( con, "insert into dir_names (name) values (:name);" ));
-  
+
     select_filename_cmd.reset( new sqlite3_command( con, "select id from file_names where name=:name;" ));
     insert_filename_cmd.reset( new sqlite3_command( con, "insert into file_names (name) values (:name);" ));
-  
+
     select_file_cmd.reset( new sqlite3_command( con, "select id from files where dir_name_id=:dir_name_id and file_name_id=:file_name_id;" ));
     insert_file_cmd.reset( new sqlite3_command( con, "insert into files (dir_name_id,file_name_id) values (:dir_name_id,:file_name_id);" ));
-  
+
     select_type_cmd.reset( new sqlite3_command( con, "select id from types where class=:class and name=:name;" ));
     insert_type_cmd.reset( new sqlite3_command( con, "insert into types (class,name) values (:class,:name);" ));
-  
+
     set_shared_flag_cmd.reset( new sqlite3_command( con, "update resolvables set shared_id=:shared_id where id=:resolvable_id;" ));
-    
+
     append_text_attribute_cmd.reset( new sqlite3_command( con, "insert into text_attributes ( weak_resolvable_id, lang_id, attr_id, text ) values ( :rid, :lang_id, :attr_id, :text );" ));
     append_num_attribute_cmd.reset( new sqlite3_command( con, "insert into numeric_attributes ( weak_resolvable_id, attr_id, value ) values ( :rid, :attr_id, :value );" ));
-    
+
     //insert_dependency_entry_cmd.reset( new sqlite3_command( con, "insert into capabilities ( resolvable_id, dependency_type, refers_kind ) values ( :resolvable_id, :dependency_type, :refers_kind );" ));
     append_file_dependency_cmd.reset( new sqlite3_command( con, "insert into file_capabilities ( resolvable_id, dependency_type, refers_kind, file_id ) values ( :resolvable_id, :dependency_type, :refers_kind, :file_id );" ));
     append_named_dependency_cmd.reset( new sqlite3_command( con, "insert into named_capabilities ( resolvable_id, dependency_type, refers_kind, name_id, version, release, epoch, relation ) values ( :resolvable_id, :dependency_type, :refers_kind, :name_id, :version, :release, :epoch, :relation );" ));
-  
+
     append_modalias_dependency_cmd.reset( new sqlite3_command( con, "insert into modalias_capabilities ( resolvable_id, dependency_type, refers_kind, name, value, relation ) values ( :resolvable_id, :dependency_type, :refers_kind, :name, :value, :relation );" ));
-  
+
     append_hal_dependency_cmd.reset( new sqlite3_command( con, "insert into hal_capabilities ( resolvable_id, dependency_type, refers_kind, name, value, relation ) values ( :resolvable_id, :dependency_type, :refers_kind, :name, :value, :relation );" ));
-  
+
     append_other_dependency_cmd.reset( new sqlite3_command( con, "insert into other_capabilities ( resolvable_id, dependency_type, refers_kind, value ) values ( :resolvable_id, :dependency_type, :refers_kind, :value );" ));
-  
+
     append_resolvable_cmd.reset( new sqlite3_command( con, "insert into resolvables ( name, version, release, epoch, arch, kind, catalog_id ) values ( :name, :version, :release, :epoch, :arch, :kind, :catalog_id );" ));
-  
+
     count_shared_cmd.reset( new sqlite3_command( con, "select count(id) from resolvables where shared_id=:rid;" ));
-    
-    
-    
+
+
+
     // disable autocommit
     con.executenonquery("BEGIN;");
   }
-  
+
   Impl()
   {
     Impl( getZYpp()->homePath() );
   }
-  
+
   ~Impl()
   {
     MIL << "name cache hits: " << name_cache_hits << " | cache size: " << name_cache.size() << endl;
@@ -138,7 +138,7 @@ struct CacheStore::Impl
 
   sqlite3_command_ptr select_type_cmd;
   sqlite3_command_ptr insert_type_cmd;
-  
+
   //sqlite3_command_ptr insert_dependency_entry_cmd;
 
   sqlite3_command_ptr append_file_dependency_cmd;
@@ -151,11 +151,11 @@ struct CacheStore::Impl
 
   sqlite3_command_ptr append_text_attribute_cmd;
   sqlite3_command_ptr append_num_attribute_cmd;
-  
+
   sqlite3_command_ptr set_shared_flag_cmd;
-  
+
   sqlite3_command_ptr count_shared_cmd;
-  
+
   map<string, RecordId> name_cache;
   map< pair<string,string>, RecordId> type_cache;
   int name_cache_hits;
@@ -165,7 +165,7 @@ struct CacheStore::Impl
 CacheStore::CacheStore( const Pathname &dbdir )
   : _pimpl( new Impl(dbdir) )
 {
-  
+
 }
 
 CacheStore::CacheStore()
@@ -188,7 +188,7 @@ void CacheStore::consumePackage( const RecordId &catalog_id, data::Package_Ptr p
 {
   RecordId pkgid = appendResolvable( catalog_id, ResTraits<Package>::kind, NVRA( package->name, package->edition, package->arch ), package->deps );
   consumeResObject( pkgid, package );
-  
+
   appendStringAttribute( pkgid, "Package", "checksum", package->repositoryLocation.fileChecksum.checksum() );
   appendStringAttribute( pkgid, "Package", "buildhost", package->buildhost );
   appendStringAttribute( pkgid, "Package", "distribution", package->distribution );
@@ -200,17 +200,22 @@ void CacheStore::consumePackage( const RecordId &catalog_id, data::Package_Ptr p
   appendStringAttribute( pkgid, "Package", "postin", package->postin );
   appendStringAttribute( pkgid, "Package", "preun", package->preun );
   appendStringAttribute( pkgid, "Package", "postun", package->postun );
-  
+
   //FIXME save authors and keyword (lists) for packages
-  
+
   appendStringAttribute( pkgid, "Package", "location", package->repositoryLocation.filePath.asString() );
+}
+
+void CacheStore::consumeSourcePackage( const data::RecordId &catalog_id, data::SrcPackage_Ptr srcpackage )
+{
+#warning TBD
 }
 
 void CacheStore::consumePatch( const data::RecordId &catalog_id, data::Patch_Ptr patch)
 {
   RecordId id = appendResolvable( catalog_id, ResTraits<Patch>::kind, NVRA( patch->name, patch->edition, patch->arch ), patch->deps );
   consumeResObject( id, patch );
-  
+
   DBG << "got patch " << patch->name << ", atoms: ";
   // cosume atoms
   for (set<data::ResObject_Ptr>::const_iterator p = patch->atoms.begin();
@@ -588,7 +593,7 @@ RecordId CacheStore::lookupOrAppendType( const string &klass, const string &name
     //_pimpl->name_cache_hits++;
     return _pimpl->type_cache[thetype];
   }
-  
+
   _pimpl->select_type_cmd->bind(":class", klass);
   _pimpl->select_type_cmd->bind(":name", name);
   long long id = 0;
@@ -676,12 +681,12 @@ void CacheStore::setSharedData( const data::RecordId &resolvable_id,
                                 const data::RecordId &shared_id )
 {
   _pimpl->set_shared_flag_cmd->bind(":resolvable_id", resolvable_id);
-  
+
   if ( shared_id == data::noRecordId )
    _pimpl->set_shared_flag_cmd->bind(":shared_id");
   else
    _pimpl->set_shared_flag_cmd->bind(":shared_id", shared_id);
-  
+
   _pimpl->set_shared_flag_cmd->executenonquery();
 }
 
@@ -701,9 +706,9 @@ void CacheStore::appendNumericAttribute( const RecordId &resolvable_id,
   // weak resolvable_id
   _pimpl->append_num_attribute_cmd->bind(":rid", resolvable_id );
   _pimpl->append_num_attribute_cmd->bind(":attr_id", type_id );
-  
+
   _pimpl->append_num_attribute_cmd->bind(":value", value );
-  
+
   _pimpl->append_num_attribute_cmd->executenonquery();
 }
 
@@ -758,9 +763,9 @@ void CacheStore::appendStringAttribute( const RecordId &resolvable_id,
   _pimpl->append_text_attribute_cmd->bind(":rid", resolvable_id );
   _pimpl->append_text_attribute_cmd->bind(":lang_id", lang_id );
   _pimpl->append_text_attribute_cmd->bind(":attr_id", type_id );
-  
+
   _pimpl->append_text_attribute_cmd->bind(":text", value );
-  
+
   _pimpl->append_text_attribute_cmd->executenonquery();
 }
 

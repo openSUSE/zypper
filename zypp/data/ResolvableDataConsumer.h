@@ -29,6 +29,7 @@ namespace data
     virtual ~ResolvableDataConsumer();
 
     virtual void consumePackage( const data::RecordId &catalog_id, data::Package_Ptr ) = 0;
+    virtual void consumeSourcePackage( const data::RecordId &catalog_id, data::SrcPackage_Ptr ) = 0;
     virtual void consumeProduct( const data::RecordId &catalog_id, data::Product_Ptr ) = 0;
     virtual void consumePatch( const data::RecordId &catalog_id, data::Patch_Ptr ) = 0;
     virtual void consumePackageAtom( const data::RecordId &catalog_id, const data::PackageAtom_Ptr & ) = 0;
@@ -38,8 +39,6 @@ namespace data
 
     virtual void consumeChangelog( const data::RecordId & catalog_id, const data::Resolvable_Ptr &, const Changelog & ) = 0;
     virtual void consumeFilelist( const data::RecordId & catalog_id, const data::Resolvable_Ptr &, const data::Filenames & ) = 0;
-
-    //virtual void consumeSourcePackage( const data::SrcPackage_Ptr ) = 0;
   };
 
 } // namespace parser

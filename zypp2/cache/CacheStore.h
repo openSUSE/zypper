@@ -38,7 +38,7 @@ namespace zypp
      *
      * \code
      * CacheStore store("/path");
-     * RecordId catalog_id = 
+     * RecordId catalog_id =
      *   store.lookupOrAppendCatalog("http://updates.novell.com", "/");
      * store.consumePackage( catalog_id, package_ptr );
      * store.commit();
@@ -68,7 +68,7 @@ namespace zypp
        * Commit the changes.
        */
       void commit();
-      
+
       /**
        * Implementation of the \ref ResolvableConsumer interface
        *
@@ -77,7 +77,16 @@ namespace zypp
        * \param package Package data
       */
       virtual void consumePackage( const data::RecordId &catalog_id, data::Package_Ptr package);
-      
+
+      /**
+       * Implementation of the \ref ResolvableConsumer interface
+       *
+       * Consume a source package, inserting it in the cache, under
+       * \param catalog_id ownership.
+       * \param srcpackage Source package data
+      */
+      virtual void consumeSourcePackage( const data::RecordId &catalog_id, data::SrcPackage_Ptr srcpackage );
+
       /**
        * Implementation of the \ref ResolvableConsumer interface
        *
@@ -92,12 +101,12 @@ namespace zypp
        *
        * Consume a package atom, inserting it in the cache, under
        * \a catalog_id ownership.
-       * 
+       *
        * \param catalog_id record id of catalog to which to append the resolvable.
        * \param atom package atom data
        *
        * \note this is somewhat specific to current YUM patch metadata design
-       *       and may change (to consumeAtom(data::RecordId,data::Atom)). 
+       *       and may change (to consumeAtom(data::RecordId,data::Atom)).
        */
       virtual void consumePackageAtom( const data::RecordId &catalog_id, const data::PackageAtom_Ptr & atom );
 
@@ -109,7 +118,7 @@ namespace zypp
        * \param message Message data
       */
       virtual void consumeMessage( const data::RecordId &catalog_id, data::Message_Ptr);
-      
+
       /**
        * Implementation of the \ref ResolvableConsumer interface
        *
@@ -118,7 +127,7 @@ namespace zypp
        * \param script Script data
       */
       virtual void consumeScript( const data::RecordId &catalog_id, data::Script_Ptr);
-      
+
       /**
        * Implementation of the \ref ResolvableConsumer interface
        *
@@ -136,7 +145,7 @@ namespace zypp
        * \param pattern Pattern data
       */
       virtual void consumeProduct( const data::RecordId &catalog_id, data::Product_Ptr product );
-      
+
       /**
        * Implementation of the \ref ResolvableConsumer interface
        *
@@ -324,7 +333,7 @@ namespace zypp
       void appendUnknownDependency( const data::RecordId &resolvable_id,
                                     zypp::Dep deptype,
                                     capability::CapabilityImpl::Ptr cap );
-      
+
       /**
        * Returns the record id of a type
        *
@@ -339,7 +348,7 @@ namespace zypp
        */
       data::RecordId lookupOrAppendType( const std::string &klass,
                                          const std::string &name );
-      
+
       /**
        * Returns the record id of a catalog (Source)
        *
@@ -352,7 +361,7 @@ namespace zypp
        */
       data::RecordId lookupOrAppendCatalog( const Url &url,
                                             const Pathname &path );
-      
+
       /**
        * Set the resolvable shared data flag pointing to
        * another resolvable.
@@ -382,7 +391,7 @@ namespace zypp
                                    const std::string &klass,
                                    const std::string &name,
                                    int value );
-      
+
       /**
        * Append a translated string value to a resolvable
        * \param resolvable_id Resovable Id, owner of the attribute
@@ -394,7 +403,7 @@ namespace zypp
                                             const std::string &klass,
                                             const std::string &name,
                                             const TranslatedText &text );
-      
+
       /**
        * Append a string value to a resolvable
        * \param resolvable_id Resovable Id, owner of the attribute
@@ -408,7 +417,7 @@ namespace zypp
                                              const std::string &klass,
                                              const std::string &name,
                                              const std::string &text );
-      
+
       /**
        * Append a string value to a resolvable
        * \param resolvable_id Resovable Id, owner of the attribute
@@ -420,7 +429,7 @@ namespace zypp
                                   const std::string &klass,
                                   const std::string &name,
                                   const std::string &value );
-      
+
       /**
        * Append a string value to a resolvable
        * \param resolvable_id Resovable Id, owner of the attribute
@@ -430,8 +439,8 @@ namespace zypp
       void appendStringAttribute( const data::RecordId &resolvable_id,
                                   const data::RecordId &type_id,
                                   const std::string &value );
-      
-      
+
+
        /**
        * Update a known catalog checksum and timestamp
        *
@@ -490,12 +499,12 @@ namespace zypp
        */
 //       data::RecordId appendDependencyEntry( const data::RecordId &,
 //                                             zypp::Dep, const Resolvable::Kind & );
-      
+
       void appendStringAttribute( const data::RecordId &resolvable_id,
                                   const data::RecordId &lang_id,
                                   const data::RecordId &type_id,
                                   const std::string &value );
-      
+
       /**
        * Append a numeric attribute to a resolvable
        * \param resolvable_id Resovable Id, owner of the attribute
@@ -505,8 +514,8 @@ namespace zypp
       void appendNumericAttribute( const data::RecordId &resolvable_id,
                                    const data::RecordId &type_id,
                                    int value );
-      
-      
+
+
       // this functions are used by ResolvableConsumer interface functions
       // to avoid some duplication across types.
       void consumeResObject( const data::RecordId &rid, data::ResObject_Ptr res );
