@@ -1,15 +1,21 @@
 -------------------------------------------------------------------
+Wed May 23 17:03:29 CEST 2007 - ma@suse.de
+
+- Fixed package-manager script (#275847)
+- revision 5614
+
+-------------------------------------------------------------------
 Wed May 23 13:32:02 CEST 2007 - schubi@suse.de
 
 - fixed cmake
-- version 3.2.2 
+- version 3.2.2
 
 -------------------------------------------------------------------
 Wed May 23 11:25:55 CEST 2007 - schubi@suse.de
 
 - Reduced logging in order to speedup solving Bug 275100
 - revision 5603
-- version 3.2.1 
+- version 3.2.1
 
 -------------------------------------------------------------------
 Tue May 15 14:03:34 CEST 2007 - ma@suse.de
