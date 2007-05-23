@@ -46,7 +46,7 @@ public:
   /** Dtor */
   virtual ~IniParser();
   /** Parse the stream.
-   * \throw ParseExcetion on errors. Invoke \ref consume
+   * \throw ParseException on errors. Invoke \ref consume
    * for each tag. \ref consume might throw other exceptions
    * as well.
   */

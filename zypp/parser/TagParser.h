@@ -82,7 +82,7 @@ namespace zypp
       /** Dtor */
       virtual ~TagParser();
       /** Parse the stream.
-       * \throw ParseExcetion on errors.
+       * \throw ParseException on errors.
        * \throws AbortRequestException on user request.
        * Invokes \ref consume for each tag. \ref consume might throw
        * other exceptions as well.
