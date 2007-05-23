@@ -89,7 +89,7 @@ SET( zypp_SRCS
   FileChecker.cc
 )
 
-SET( zypp_HEADERSZ
+SET( zypp_HEADERS
   ZConfig.h
   Arch.h
   Atom.h
