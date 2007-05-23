@@ -29,6 +29,8 @@
 #include "zypp/parser/susetags/ContentFileReader.h"
 #include "zypp/parser/susetags/RepoIndex.h"
 
+#include "zypp2/parser/susetags/RepoParser.h"
+
 using namespace std;
 using namespace zypp;
 using namespace zypp::functor;
@@ -123,91 +125,9 @@ std::ostream & operator<<( std::ostream & str, const iostr::EachLine & obj )
 
 }
 
-#include "zypp/ProgressData.h"
-#include "zypp2/cache/CacheStore.h"
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
-
-  ///////////////////////////////////////////////////////////////////
-  namespace parser
-  { /////////////////////////////////////////////////////////////////
-   ///////////////////////////////////////////////////////////////////
-    namespace susetags
-    { /////////////////////////////////////////////////////////////////
-#if 0
-      class RepoParser
-      {
-	public:
-	  RepoParser( const Pathname & reporoot_r, data::RecordId catalogId_r, const Pathname & dbdir_r )
-	  : _reporoot( reporoot_r )
-	  , _catalogId( catalogId_r )
-	  , _store( store_r );
-	  {
-	    if ( 1 )
-	    {
-	      std::string file( "content" );
-	      Measure x( file );
-
-	      ContentFileReader tp;
-
-
-	    }
-
-
-	    if ( 1 )
-	    {
-	      std::string file("packages");
-	      Measure x( file );
-
-	      PackagesFileReader tp;
-	      tp.setPkgConsumer   ( bind( &RepoParser::consumePkg, this, _1 ) );
-	      tp.setSrcPkgConsumer( bind( &RepoParser::consumeSrcPkg , this, _1 ) );
-	      tp.parse(repodescr()/file );
-	    }
-	  }
-
-
-	public:
-	  const Pathname & reporoot() const
-	  { return _reporoot; }
-
-	  Pathname repodescr() const
-	  { return _reporoot/"suse/setup/descr"; }
-
-	  Pathname repodata() const
-	  { return _reporoot/"suse"; }
-
-	private:
-	  void consumePkg( const data::Package_Ptr & pkg_r )
-	  {
-            MIL << "[Pkg]" << pkg_r << endl;
-	  }
-
-	  void consumeSrcPkg( const data::SrcPackage_Ptr & pkg_r )
-	  {
-            //DBG << "[Src]" << pkg_r << endl;
-	  }
-
-	  void consumePat( const data::Pattern_Ptr & pat_r )
-	  {
-	    MIL << "[Pat]" << pat_r << endl;
-	  }
-	public:
-	  Pathname          _reporoot;
-	  data::RecordId    _catalogId;
-	  cache::CacheStore _store;
-
-      };
-
-#endif
-
-      /////////////////////////////////////////////////////////////////
-    } // namespace susetags
-    ///////////////////////////////////////////////////////////////////
-    /////////////////////////////////////////////////////////////////
-  } // namespace parser
-  ///////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
@@ -276,9 +196,22 @@ int main( int argc, char * argv[] )
   //zypp::base::LogControl::instance().logfile( "log.restrict" );
   INT << "===[START]==========================================" << endl;
 
-  Pathname p( "lmd/content" );
+  Pathname dbdir( "store" );
+  Pathname reporoot( "lmd" );
 
-  Measure x( p.basename() );
+  cache::CacheStore store( dbdir );
+  data::RecordId catalogId = store.lookupOrAppendCatalog( Url("dir:///"), "/" );
+  {
+    Measure x( "XXXXXXXXXXXXX" );
+
+    parser::susetags::RepoParser repo( catalogId, store );
+    repo.parse( reporoot );
+
+    store.commit();
+  }
+
+
+#if 0
   ContentFileReader tp;
   tp.setProductConsumer( consumeProd );
   tp.setRepoIndexConsumer( consumeIndex );
@@ -286,7 +219,6 @@ int main( int argc, char * argv[] )
   tp.parse( p );
 
 
-#if 0
   //try
   {
     //Pathname dbdir( "/Local/ma/zypp-TRUNK/BUILD/libzypp/devel/devel.ma/store" );
