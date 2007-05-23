@@ -183,7 +183,25 @@ namespace zypp
           long use_count( const _Ptr & ptr_r ) const
           { return ptr_r ? ptr_r->refCount() : 0; }
         };
-    }
+
+       template<class _D>
+        struct Scoped
+        {
+          typedef scoped_ptr<_D>       _Ptr;
+          typedef scoped_ptr<const _D> _constPtr;
+          /** Check whether pointer is not shared. */
+          bool unique( const _constPtr & ptr_r )
+          { return true; }
+          bool unique( const _Ptr & ptr_r )
+          { return true; }
+          /** Return number of references. */
+          long use_count( const _constPtr & ptr_r ) const
+          { return ptr_r ? 1 : 0; }
+          long use_count( const _Ptr & ptr_r ) const
+          { return ptr_r ? 1 : 0; }
+        };
+
+   }
     ///////////////////////////////////////////////////////////////////
 
     ///////////////////////////////////////////////////////////////////
