@@ -116,6 +116,15 @@ SET( zypp2_repository_data_HEADERS
   repository/memory/DSrcPackageImpl.h
 )
 
+SET( zypp2_parser_susetags_SRCS
+  parser/susetags/RepoParser.cc
+)
+
+SET( zypp2_parser_susetags_HEADERS
+  parser/susetags/RepoParser.h
+)
+
+
 SET( zypp2_parser_yum_SRCS
   parser/yum/YUMParser.cc
 )
@@ -138,6 +147,7 @@ ${zypp2_repository_cached_SRCS}
 ${zypp2_repository_data_SRCS}
 ${zypp2_cache_sqlite3x_SRCS}
 ${zypp2_parser_yum_SRCS}
+${zypp2_parser_susetags_SRCS}
 )
 
 SET( zypp2_lib_HEADERS
@@ -146,6 +156,7 @@ ${zypp2_HEADERS}
 ${zypp2_cache_HEADERS}
 ${zypp2_cache_sqlite3x_HEADERS}
 ${zypp2_parser_yum_HEADERS}
+${zypp2_parser_susetags_HEADERS}
 )
 
 ADD_LIBRARY(zypp2 SHARED ${zypp2_lib_SRCS})
