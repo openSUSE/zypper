@@ -19,6 +19,8 @@
 #include "zypp/target/store/PersistentStorage.h"
 #include "zypp2/cache/Utils.h"
 
+#include "schema.h"
+
 #define ZYPP_DB_FILE "/var/lib/zypp/zypp.db"
 
 using namespace sqlite3x;

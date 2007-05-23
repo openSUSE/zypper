@@ -8,13 +8,17 @@ INCLUDE_DIRECTORIES( ${CMAKE_SOURCE_DIR} ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CUR
 # SOURCES                                                          #
 ####################################################################
 
+ADD_EXECUTABLE(mkarray ${CMAKE_SOURCE_DIR}/zypp2/cache/schema/mkarray.c )
+
+#FILE(WRITE filename "message to write"... )
+
+ADD_CUSTOM_COMMAND( OUTPUT ${CMAKE_BINARY_DIR}/zypp2/schema.h PRE_BUILD COMMAND "${CMAKE_BINARY_DIR}/zypp2/mkarray" ARGS "${CMAKE_SOURCE_DIR}/zypp2/cache/schema/schema.sql" "schemaData" "${CMAKE_BINARY_DIR}/zypp2/schema.h" DEPENDS mkarray)
 
 SET( zypp2_SRCS
   Repository.cc
   RepositoryInfo.cc
   RepositoryManager.cc
   RepositoryFactory.cc
-  Lazy.cc
   dummy.cc
 )
 
@@ -24,7 +28,6 @@ SET( zypp2_HEADERS
   RepositoryManager.h
   RepositoryFactory.h
   CommiterIface.h
-  Lazy.h
 )
 
 #INSTALL(  FILES ${zypp2_HEADERS}
@@ -32,6 +35,7 @@ SET( zypp2_HEADERS
 #)
 
 SET( zypp2_cache_SRCS
+  ${CMAKE_BINARY_DIR}/zypp2/schema.h
   cache/CacheInitializer.cpp
   cache/CacheTypes.cc
 #  cache/QueryFactory.cc
@@ -112,14 +116,6 @@ SET( zypp2_repository_data_HEADERS
   repository/memory/DSrcPackageImpl.h
 )
 
-SET( zypp2_parser_susetags_SRCS
-  parser/susetags/RepoParser.cc
-)
-
-SET( zypp2_parser_susetags_HEADERS
-  parser/susetags/RepoParser.h
-)
-
 SET( zypp2_parser_yum_SRCS
   parser/yum/YUMParser.cc
 )
@@ -141,7 +137,6 @@ ${zypp2_cache_SRCS}
 ${zypp2_repository_cached_SRCS}
 ${zypp2_repository_data_SRCS}
 ${zypp2_cache_sqlite3x_SRCS}
-${zypp2_parser_susetags_SRCS}
 ${zypp2_parser_yum_SRCS}
 )
 
@@ -150,11 +145,11 @@ ${zypp2_repository_HEADERS}
 ${zypp2_HEADERS}
 ${zypp2_cache_HEADERS}
 ${zypp2_cache_sqlite3x_HEADERS}
-${zypp2_parser_susetags_HEADERS}
 ${zypp2_parser_yum_HEADERS}
 )
 
 ADD_LIBRARY(zypp2 SHARED ${zypp2_lib_SRCS})
+ADD_DEPENDENCIES(zypp2 schema_header)
 
 # System libraries
 TARGET_LINK_LIBRARIES(zypp2 boost_filesystem boost_regex util )
