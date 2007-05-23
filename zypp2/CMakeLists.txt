@@ -12,7 +12,7 @@ ADD_EXECUTABLE(mkarray ${CMAKE_SOURCE_DIR}/zypp2/cache/schema/mkarray.c )
 
 #FILE(WRITE filename "message to write"... )
 
-ADD_CUSTOM_COMMAND( OUTPUT ${CMAKE_BINARY_DIR}/zypp2/schema.h PRE_BUILD COMMAND "${CMAKE_BINARY_DIR}/zypp2/mkarray" ARGS "${CMAKE_SOURCE_DIR}/zypp2/cache/schema/schema.sql" "schemaData" "${CMAKE_BINARY_DIR}/zypp2/schema.h" DEPENDS mkarray)
+ADD_CUSTOM_COMMAND( OUTPUT ${CMAKE_BINARY_DIR}/zypp2/schema.h PRE_BUILD COMMAND "${CMAKE_BINARY_DIR}/zypp2/mkarray" ARGS "${CMAKE_SOURCE_DIR}/zypp2/cache/schema/schema.sql" "schemaData" "${CMAKE_BINARY_DIR}/zypp2/schema.h" DEPENDS mkarray DEPENDS ${CMAKE_SOURCE_DIR}/zypp2/cache/schema/schema.sql )
 
 SET( zypp2_SRCS
   Repository.cc
@@ -178,5 +178,4 @@ TARGET_LINK_LIBRARIES(zypp2 ${ZLIB_LIBRARY} )
 
 # install DB schema
 # install XML schemas
-FILE( GLOB YUM_SCHEMA_FILES ${CMAKE_SOURCE_DIR}/zypp2/cache/schema/schema.sql )
-INSTALL(FILES ${CMAKE_SOURCE_DIR}/zypp2/cache/schema/schema.sql DESTINATION "${CMAKE_INSTALL_PREFIX}/share/zypp/cache" )
+#FILE( GLOB YUM_SCHEMA_FILES ${CMAKE_SOURCE_DIR}/zypp2/cache/schema/schema.sql )

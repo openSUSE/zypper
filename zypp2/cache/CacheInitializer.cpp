@@ -97,24 +97,7 @@ void CacheInitializer::createTables()
   MIL << "Initializing cache schema..." << endl;
   sqlite3_transaction trans(*_pimpl->con);
   {
-    string sql;
-    const char *filename = "/usr/share/zypp/cache/schema.sql";
-    std::ifstream stream(filename);
-    string buffer;
-    if ( stream )
-    {
-      stringstream str(sql);
-      while ( getline( stream, buffer ) )
-      {
-        sql += (buffer+"\n");
-      }
-      //std::cout << sql << endl;
-    }
-    else
-    {
-      ZYPP_THROW(Exception(str::form("Can't open db schema %s", filename)));
-    }
-
+    string sql( schemaData, _schemaData_size);
     //ERR << "Executing " << statements[i] << endl;
     MIL << "Schema size: " << sql.size() << endl;
     _pimpl->con->execute(sql.c_str());
