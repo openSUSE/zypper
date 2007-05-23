@@ -134,6 +134,7 @@ namespace zypp
     , _architecture( defaultArchitecture() )
     , _disk_usage()
     {
+      MIL << "libzypp: " << VERSION << " $Revision$ built " << __DATE__ << " " <<  __TIME__ << endl;
       MIL << "defaultTextLocale: '" << _textLocale << "'" << endl;
       MIL << "System architecture is '" << _architecture << "'" << endl;
 
