@@ -47,6 +47,7 @@ namespace zypp
       class RepoIndex : public base::ReferenceCounted, private base::NonCopyable
       {
 	public:
+	  typedef std::map<std::string, CheckSum> FileChecksumMap;
 
 	  Locale                 language;
 	  std::string            timezone;
@@ -57,14 +58,14 @@ namespace zypp
 	  Pathname descrdir;
 	  Pathname datadir;
 
-	  std::map<std::string, CheckSum> metaFileChecksums;
-	  std::map<std::string, CheckSum> signingKeys;
+	  FileChecksumMap metaFileChecksums;
+	  FileChecksumMap signingKeys;
 
 	protected:
 	  /** Overload to realize std::ostream & operator\<\<. */
 	  //virtual std::ostream & dumpOn( std::ostream & str ) const;
       };
-      ///////////////////////////////////////////////////////////////////
+      //////////////////////////////////////////////////////////////////
 
       /////////////////////////////////////////////////////////////////
     } // namespace susetags
