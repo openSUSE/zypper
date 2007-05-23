@@ -31,6 +31,7 @@ namespace data
     virtual void consumePackage( const data::RecordId &catalog_id, data::Package_Ptr ) = 0;
     virtual void consumeProduct( const data::RecordId &catalog_id, data::Product_Ptr ) = 0;
     virtual void consumePatch( const data::RecordId &catalog_id, data::Patch_Ptr ) = 0;
+    virtual void consumePackageAtom( const data::RecordId &catalog_id, const data::PackageAtom_Ptr & ) = 0;
     virtual void consumeMessage( const data::RecordId &catalog_id, data::Message_Ptr ) = 0;
     virtual void consumeScript( const data::RecordId &catalog_id, data::Script_Ptr ) = 0;
     virtual void consumePattern( const data::RecordId &catalog_id, data::Pattern_Ptr ) = 0;

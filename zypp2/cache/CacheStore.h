@@ -86,7 +86,21 @@ namespace zypp
        * \param patch Patch data
       */
       virtual void consumePatch( const data::RecordId &catalog_id, data::Patch_Ptr patch);
-      
+
+      /**
+       * Implementation of the \ref ResolvableConsumer interface.
+       *
+       * Consume a package atom, inserting it in the cache, under
+       * \a catalog_id ownership.
+       * 
+       * \param catalog_id record id of catalog to which to append the resolvable.
+       * \param atom package atom data
+       *
+       * \note this is somewhat specific to current YUM patch metadata design
+       *       and may change (to consumeAtom(data::RecordId,data::Atom)). 
+       */
+      virtual void consumePackageAtom( const data::RecordId &catalog_id, const data::PackageAtom_Ptr & atom );
+
       /**
        * Implementation of the \ref ResolvableConsumer interface
        *

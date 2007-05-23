@@ -211,33 +211,47 @@ void CacheStore::consumePatch( const data::RecordId &catalog_id, data::Patch_Ptr
   RecordId id = appendResolvable( catalog_id, ResTraits<Patch>::kind, NVRA( patch->name, patch->edition, patch->arch ), patch->deps );
   consumeResObject( id, patch );
   
-  /*
   DBG << "got patch " << patch->name << ", atoms: ";
+  // cosume atoms
   for (set<data::ResObject_Ptr>::const_iterator p = patch->atoms.begin();
        p != patch->atoms.end(); ++p)
   {
-    data::Atom_Ptr atom = dynamic_pointer_cast<data::Atom>(*p);
+    data::PackageAtom_Ptr atom = dynamic_pointer_cast<data::PackageAtom>(*p);
     if (atom)
     {
       DBG << atom->name << "(atom) ";
+      consumePackageAtom(catalog_id, atom);
       continue;
     }
+
     data::Script_Ptr script = dynamic_pointer_cast<data::Script>(*p);
     if (script)
     {
       DBG << script->name << "(script) ";
+      consumeScript(catalog_id, script);
       continue;
     }
+
     data::Message_Ptr message = dynamic_pointer_cast<data::Message>(*p);
     if (message)
     {
       DBG << message->name << "(message) ";
+      consumeMessage(catalog_id, message);
       continue;
     }
-    DBG << "!badatom! ";
+
+    ERR << " ignoring !badatom! ";
+    if (*p) ERR << (*p)->name;
+    ERR << endl;
   }
+
   DBG << endl;
-  */
+}
+
+void CacheStore::consumePackageAtom( const data::RecordId &catalog_id, const data::PackageAtom_Ptr & atom )
+{
+  RecordId id = appendResolvable( catalog_id, ResTraits<Atom>::kind, NVRA( atom->name, atom->edition, atom->arch ), atom->deps );
+  consumeResObject( id, atom );
 }
 
 void CacheStore::consumeMessage( const data::RecordId &catalog_id, data::Message_Ptr message )
