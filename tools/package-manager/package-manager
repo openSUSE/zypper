@@ -51,7 +51,7 @@ fi
 
 xsu() {
     # a copy of xdg-su.
-    package-manager-su -- "$@"
+    package-manager-su -c "$*"
 }
 
 # do_* fall back to yast for STACK=ugh
