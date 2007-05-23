@@ -15,6 +15,7 @@
 #include <iosfwd>
 
 #include "zypp/Arch.h"
+#include "zypp/Locale.h"
 #include "zypp/Pathname.h"
 
 ///////////////////////////////////////////////////////////////////
@@ -34,6 +35,11 @@ namespace zypp
     public:
       /** The system architecture. */
       Arch systemArchitecture() const;
+
+      /** The prefered locale for translated labels, descriptions,
+       *  descriptions, etc. passed to the UI.
+       */
+      Locale defaultTextLocale() const;
   };
   ///////////////////////////////////////////////////////////////////
 
