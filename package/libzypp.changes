@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Wed May 23 11:25:55 CEST 2007 - schubi@suse.de
+
+- Reduced logging in order to speedup solving Bug 275100
+- revision 5603
+- version 3.2.1 
+
+-------------------------------------------------------------------
 Tue May 15 14:03:34 CEST 2007 - ma@suse.de
 
 - Fix excess calls to releaseFile. (#274357)
