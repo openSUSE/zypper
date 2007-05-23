@@ -1,5 +1,4 @@
 [Desktop Entry]
-X-SuSE-translate=true
 Encoding=UTF-8
 Name=Install Software
 Exec=package-manager %F
