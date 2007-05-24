@@ -76,19 +76,19 @@ namespace zypp
           void consumePkg( const data::Package_Ptr & data_r )
           {
             SEC << "[Package]" << data_r << endl;
-	    _consumer.consumePackage( _catalogId, data_r );
+	    _consumer.consumePackage( _repositoryId, data_r );
           }
 
           void consumeSrcPkg( const data::SrcPackage_Ptr & data_r )
           {
             SEC << "[SrcPackage]" << data_r << endl;
-	    _consumer.consumeSourcePackage( _catalogId, data_r );
+	    _consumer.consumeSourcePackage( _repositoryId, data_r );
           }
 
           void consumePat( const data::Pattern_Ptr & data_r )
           {
             SEC << "[Pattern]" << data_r << endl;
-	    _consumer.consumePattern( _catalogId, data_r );
+	    _consumer.consumePattern( _repositoryId, data_r );
           }
 	  //@}
 

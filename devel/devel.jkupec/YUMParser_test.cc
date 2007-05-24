@@ -36,10 +36,10 @@ int main(int argc, char **argv)
   {
     ZYpp::Ptr z = getZYpp();
 
-    Measure open_repository_timer("CacheStore: lookupOrAppendCatalog");
+    Measure open_repository_timer("CacheStore: lookupOrAppendRepository");
 
     cache::CacheStore store(getenv("PWD"));
-    data::RecordId repository_id = store.lookupOrAppendCatalog( Url("http://some.url"), "/");
+    data::RecordId repository_id = store.lookupOrAppendRepository( Url("http://some.url"), "/");
 
     open_repository_timer.stop();
 

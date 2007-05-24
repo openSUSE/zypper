@@ -49,7 +49,7 @@ namespace zypp
        *   Pathname reporoot( "lmd" );
        *
        *   cache::CacheStore store( dbdir );
-       *   data::RecordId catalogId = store.lookupOrAppendCatalog( Url("dir:///somewhere"), "/" );
+       *   data::RecordId catalogId = store.lookupOrAppendRepository( Url("dir:///somewhere"), "/" );
        *
        *   parser::susetags::RepoParser repo( catalogId, store );
        *   repo.parse( reporoot );

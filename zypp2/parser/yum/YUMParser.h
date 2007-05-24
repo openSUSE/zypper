@@ -59,7 +59,7 @@ namespace zypp
    * \code
    * 
    * cache::CacheStore store(dbdir);
-   * data::RecordId repository_id = store.lookupOrAppendCatalog(sourceurl, "/");
+   * data::RecordId repository_id = store.lookupOrAppendRepository(sourceurl, "/");
    *
    * YUMParser parser(repository_id, store, &progress_function);
    * parser.start(source_cache_dir);

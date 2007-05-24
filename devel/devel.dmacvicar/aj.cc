@@ -84,7 +84,7 @@ int main()
     
     for (SourceManager::Source_const_iterator it = manager->Source_begin(); it !=  manager->Source_end(); ++it) {
       zypp::ResStore store = it->resolvables();
-      MIL << "Catalog " << it->id() << " contributing " << store.size() << " resolvables" << endl;
+      MIL << "Repository " << it->id() << " contributing " << store.size() << " resolvables" << endl;
       z->addResolvables( store, false );
     }  
   

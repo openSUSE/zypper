@@ -49,7 +49,7 @@ void resolvable_query_test(const string &dir)
   {
     cache::CacheStore store(tmpdir.path());
     
-    data::RecordId repository_id = store.lookupOrAppendCatalog( Url("http://novell.com"), "/");
+    data::RecordId repository_id = store.lookupOrAppendRepository( Url("http://novell.com"), "/");
     
     zypp::debug::Measure cap_parse_timer("store resolvables");
     for ( list<MiniResolvable>::iterator it = res_list.begin(); it != res_list.end(); it++)

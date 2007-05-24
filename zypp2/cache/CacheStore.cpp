@@ -206,12 +206,12 @@ void CacheStore::consumePackage( const RecordId &repository_id, data::Package_Pt
   appendStringAttribute( pkgid, "Package", "location", package->repositoryLocation.filePath.asString() );
 }
 
-void CacheStore::consumeSourcePackage( const data::RecordId &catalog_id, data::SrcPackage_Ptr srcpackage )
+void CacheStore::consumeSourcePackage( const data::RecordId &repository_id, data::SrcPackage_Ptr srcpackage )
 {
 #warning TBD
 }
 
-void CacheStore::consumePatch( const data::RecordId &catalog_id, data::Patch_Ptr patch)
+void CacheStore::consumePatch( const data::RecordId &repository_id, data::Patch_Ptr patch)
 {
   RecordId id = appendResolvable( repository_id, ResTraits<Patch>::kind, NVRA( patch->name, patch->edition, patch->arch ), patch->deps );
   consumeResObject( id, patch );
@@ -552,7 +552,7 @@ RecordId CacheStore::lookupOrAppendFile( const Pathname &path )
   return static_cast<RecordId>(id);
 }
 
-void CacheStore::updateCatalog( const RecordId &id,
+void CacheStore::updateRepository( const RecordId &id,
                     const string &checksum,
                     const Date &timestamp )
 {
@@ -562,7 +562,7 @@ void CacheStore::updateCatalog( const RecordId &id,
   _pimpl->insert_repository_cmd->executenonquery();
 }
 
-RecordId CacheStore::lookupOrAppendCatalog( const Url &url, const Pathname &path )
+RecordId CacheStore::lookupOrAppendRepository( const Url &url, const Pathname &path )
 {
   _pimpl->select_repository_cmd->bind(":url", url.asString());
   _pimpl->select_repository_cmd->bind(":path", path.asString());

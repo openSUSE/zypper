@@ -39,7 +39,7 @@ namespace zypp
      * \code
      * CacheStore store("/path");
      * RecordId repository_id =
-     *   store.lookupOrAppendCatalog("http://updates.novell.com", "/");
+     *   store.lookupOrAppendRepository("http://updates.novell.com", "/");
      * store.consumePackage( repository_id, package_ptr );
      * store.commit();
      * \endcode
@@ -176,7 +176,7 @@ namespace zypp
        *
        * You have to specify the RecordId for the repository owning
        * this resolvable. Yuu can obtain it with
-       * \ref lookupOrAppendCatalog
+       * \ref lookupOrAppendRepository
        *
        * You can create those \a deps using \ref capability::parse
        * functions, or the build methods to create specific types
@@ -359,7 +359,7 @@ namespace zypp
        * be created and the new inserted entry's id will
        * be returned.
        */
-      data::RecordId lookupOrAppendCatalog( const Url &url,
+      data::RecordId lookupOrAppendRepository( const Url &url,
                                             const Pathname &path );
 
       /**
@@ -449,9 +449,9 @@ namespace zypp
        *
        * It is responsability of the caller to operate with
        * a valid record id. You can get one
-       * Using \ref lookupOrAppendCatalog
+       * Using \ref lookupOrAppendRepository
        */
-      void updateCatalog( const data::RecordId &id,
+      void updateRepository( const data::RecordId &id,
                                     const std::string &checksum,
                                     const Date &timestamp = Date::now() );
 
