@@ -37,6 +37,29 @@ namespace zypp
       //	CLASS NAME : RepoParser
       //
       /** SuseTags metadata parser.
+       *
+       * Reads a \c content file to get the \ref data::Product and a \Ref RepoIndex.
+       * Then parses the remaining files and feeds them to a \ref data::ResolvableDataConsumer
+       * (typically to store them in a database).
+       *
+       * \see \ref ContentFileReader and \ref FileReaderBase
+       *
+       * \code
+       *   Pathname dbdir( "store" );
+       *   Pathname reporoot( "lmd" );
+       *
+       *   cache::CacheStore store( dbdir );
+       *   data::RecordId catalogId = store.lookupOrAppendCatalog( Url("dir:///somewhere"), "/" );
+       *
+       *   parser::susetags::RepoParser repo( catalogId, store );
+       *   repo.parse( reporoot );
+       *
+       *   store.commit();
+       * \endcode
+       *
+       * \todo Improve selection of Languages to parse
+       * \todo Improve feeding of translations into Cachestore. Add specialized consumer, for Du too.
+       * \todo DiskUsage filereader and parsing
        * \todo more doc and Exception specification
        */
       class RepoParser : private base::NonCopyable
