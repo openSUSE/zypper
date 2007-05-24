@@ -30,6 +30,7 @@
 #include "zypp/parser/susetags/RepoIndex.h"
 
 #include "zypp2/parser/susetags/RepoParser.h"
+#include "zypp2/cache/CacheStore.h"
 
 using namespace std;
 using namespace zypp;
@@ -186,6 +187,7 @@ void pPattern( const Pathname & p )
   tp.setConsumer( consumePat );
   tp.parse( p );
 }
+
  /******************************************************************
 **
 **      FUNCTION NAME : main
