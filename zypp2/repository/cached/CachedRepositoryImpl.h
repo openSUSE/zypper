@@ -47,7 +47,7 @@ namespace zypp
 
       public:
         /** Default ctor */
-        CachedRepositoryImpl( const zypp::Pathname &dbdir );
+        CachedRepositoryImpl( const zypp::Pathname &dbdir, const data::RecordId &repository_id );
         /** Dtor */
         ~CachedRepositoryImpl();
 
@@ -87,6 +87,7 @@ namespace zypp
         void read_capabilities( sqlite3x::sqlite3_connection &con, std::map<data::RecordId, NVRAD> &nvras );
         
         cache::CacheTypes _type_cache;
+        data::RecordId _repository_id;
       };
       ///////////////////////////////////////////////////////////////////
 

@@ -355,7 +355,7 @@ cd ..
 - release last used source at end of commit (#155002)
 - rev 2277
 * Fri Mar 03 2006 - kkaempf@suse.de
-- cope with NULL values in zmd catalogs table (#153584)
+- cope with NULL values in zmd repositorys table (#153584)
 - set YAST_IS_RUNNING in transact zmd helper (#154820)
 - run SuSEconfig after transact zmd helper (#154820)
 - add softTransact to honor user vs. soft requirements (#154650)

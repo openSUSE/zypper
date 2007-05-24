@@ -49,12 +49,12 @@ void resolvable_query_test(const string &dir)
   {
     cache::CacheStore store(tmpdir.path());
     
-    data::RecordId catalog_id = store.lookupOrAppendCatalog( Url("http://novell.com"), "/");
+    data::RecordId repository_id = store.lookupOrAppendCatalog( Url("http://novell.com"), "/");
     
     zypp::debug::Measure cap_parse_timer("store resolvables");
     for ( list<MiniResolvable>::iterator it = res_list.begin(); it != res_list.end(); it++)
     {
-      data::RecordId id = store.appendResolvable( catalog_id,
+      data::RecordId id = store.appendResolvable( repository_id,
                                         ResTraits<Package>::kind,
                                         (*it).nvra,
                                         (*it).deps );

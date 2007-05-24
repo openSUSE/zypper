@@ -30,6 +30,7 @@ using namespace boost::unit_test;
 
 void cache_write_test(const string &dir)
 {
+  data::RecordId repository_id;
   filesystem::TmpDir tmpdir;
   {
     Pathname nvra_list = Pathname(dir) + "package-set.txt.gz";
@@ -39,12 +40,12 @@ void cache_write_test(const string &dir)
     
     cache::CacheStore store(tmpdir.path());
     
-    data::RecordId catalog_id = store.lookupOrAppendCatalog( Url("http://novell.com"), "/");
+    repository_id = store.lookupOrAppendCatalog( Url("http://novell.com"), "/");
     
     zypp::debug::Measure cap_parse_timer("store resolvables");
     for ( list<MiniResolvable>::iterator it = res_list.begin(); it != res_list.end(); it++)
     {
-      data::RecordId id = store.appendResolvable( catalog_id,
+      data::RecordId id = store.appendResolvable( repository_id,
                                         ResTraits<Package>::kind,
                                         (*it).nvra,
                                         (*it).deps );
@@ -53,7 +54,7 @@ void cache_write_test(const string &dir)
   {
     MIL << "now read resolvables" << endl;
     
-    CachedRepositoryImpl *repositoryImpl = new CachedRepositoryImpl(tmpdir.path());
+    CachedRepositoryImpl *repositoryImpl = new CachedRepositoryImpl(tmpdir.path(), repository_id);
     //RepositoryFactory factory;
     //Repository_Ref repository = factory.createFrom(repositoryImpl);
     repositoryImpl->createResolvables();

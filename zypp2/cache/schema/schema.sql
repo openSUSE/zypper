@@ -9,7 +9,7 @@ DROP TRIGGER IF EXISTS remove_patch_packages_baseversions;
 DROP TABLE IF EXISTS types;
 DROP TABLE IF EXISTS text_attributes;
 DROP TABLE IF EXISTS split_capabilities;
-DROP TABLE IF EXISTS resolvables_catalogs;
+DROP TABLE IF EXISTS resolvables_repositories;
 DROP TABLE IF EXISTS resolvables;
 DROP TABLE IF EXISTS patch_packages_baseversions;
 DROP TABLE IF EXISTS patch_packages;
@@ -26,7 +26,7 @@ DROP TABLE IF EXISTS file_capabilities;
 DROP TABLE IF EXISTS dir_names;
 DROP TABLE IF EXISTS delta_packages;
 DROP TABLE IF EXISTS db_info;
-DROP TABLE IF EXISTS catalogs;
+DROP TABLE IF EXISTS repositories;
 DROP INDEX IF EXISTS types_class_name_index;
 DROP INDEX IF EXISTS text_attributes_index;
 DROP INDEX IF EXISTS numeric_attributes_index;
@@ -53,10 +53,10 @@ CREATE TABLE types (
 CREATE INDEX types_class_name_index ON types(class, name);
 
 ------------------------------------------------
--- Knew catalogs. They existed some day.
+-- Knew repositories. They existed some day.
 ------------------------------------------------
 
-CREATE TABLE catalogs (
+CREATE TABLE repositories (
     id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL
   , url TEXT NOT NULL
   , path TEXT NOT NULL
@@ -126,7 +126,7 @@ CREATE TABLE resolvables (
   , epoch INTEGER
   , arch INTEGER REFERENCES types(id)
   , kind INTEGER REFERENCES types(id)
-  , catalog_id INTEGER REFERENCES catalogs(id)
+  , repository_id INTEGER REFERENCES repositories(id)
   , installed_size INTEGER
   , archive_size INTEGER
   , install_only INTEGER
@@ -134,7 +134,7 @@ CREATE TABLE resolvables (
   , install_time INTEGER
   , shared_id INTEGER DEFAULT NULL
 );
-CREATE INDEX resolvable_catalog_id ON resolvables(catalog_id);
+CREATE INDEX resolvable_repository_id ON resolvables(repository_id);
 
 ------------------------------------------------
 -- Do we need those here?
@@ -148,7 +148,7 @@ CREATE TABLE locks (
   , epoch INTEGER
   , arch INTEGER
   , relation INTEGER
-  , catalog TEXT
+  , repository TEXT
   , glob TEXT
   , importance INTEGER
   , importance_gteq INTEGER
@@ -270,24 +270,24 @@ CREATE TRIGGER remove_resolvables
   END;
 
 ------------------------------------------------
--- Associate resolvables and catalogs
+-- Associate resolvables and repositories
 ------------------------------------------------
 
 -- FIXME do we want to allow same resolvable to
 -- be listed twice in same source but different
 -- medias? I think NOT.
-CREATE TABLE resolvables_catalogs (
+CREATE TABLE resolvables_repositories (
     resolvable_id INTEGER REFERENCES resolvables (id)
-  , catalog_id    INTEGER REFERENCES catalogs    (id)
-  , catalog_media_nr INTEGER
-  , PRIMARY KEY ( resolvable_id, catalog_id )
+  , repository_id    INTEGER REFERENCES repositories    (id)
+  , repository_media_nr INTEGER
+  , PRIMARY KEY ( resolvable_id, repository_id )
 );
 
--- Auto clean catalogs
-CREATE TRIGGER remove_catalogs
-  AFTER DELETE ON catalogs
+-- Auto clean repositories
+CREATE TRIGGER remove_repositories
+  AFTER DELETE ON repositories
   BEGIN
-    DELETE FROM resolvables WHERE catalog_id = old.id;
+    DELETE FROM resolvables WHERE repository_id = old.id;
   END;
 
 CREATE TRIGGER remove_patch_packages_baseversions

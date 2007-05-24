@@ -38,9 +38,9 @@ namespace zypp
      *
      * \code
      * CacheStore store("/path");
-     * RecordId catalog_id =
+     * RecordId repository_id =
      *   store.lookupOrAppendCatalog("http://updates.novell.com", "/");
-     * store.consumePackage( catalog_id, package_ptr );
+     * store.consumePackage( repository_id, package_ptr );
      * store.commit();
      * \endcode
      *
@@ -73,10 +73,10 @@ namespace zypp
        * Implementation of the \ref ResolvableConsumer interface
        *
        * Consume a package, inserting it in the cache, under
-       * \param catalog_id ownership.
+       * \param repository_id ownership.
        * \param package Package data
       */
-      virtual void consumePackage( const data::RecordId &catalog_id, data::Package_Ptr package);
+      virtual void consumePackage( const data::RecordId &repository_id, data::Package_Ptr package);
 
       /**
        * Implementation of the \ref ResolvableConsumer interface
@@ -91,80 +91,80 @@ namespace zypp
        * Implementation of the \ref ResolvableConsumer interface
        *
        * Consume a patch, inserting it in the cache, under
-       * \param catalog_id ownership.
+       * \param repository_id ownership.
        * \param patch Patch data
       */
-      virtual void consumePatch( const data::RecordId &catalog_id, data::Patch_Ptr patch);
+      virtual void consumePatch( const data::RecordId &repository_id, data::Patch_Ptr patch);
 
       /**
        * Implementation of the \ref ResolvableConsumer interface.
        *
        * Consume a package atom, inserting it in the cache, under
-       * \a catalog_id ownership.
+       * \a repository_id ownership.
        *
-       * \param catalog_id record id of catalog to which to append the resolvable.
+       * \param repository_id record id of repository to which to append the resolvable.
        * \param atom package atom data
        *
        * \note this is somewhat specific to current YUM patch metadata design
        *       and may change (to consumeAtom(data::RecordId,data::Atom)).
        */
-      virtual void consumePackageAtom( const data::RecordId &catalog_id, const data::PackageAtom_Ptr & atom );
+      virtual void consumePackageAtom( const data::RecordId &repository_id, const data::PackageAtom_Ptr & atom );
 
       /**
        * Implementation of the \ref ResolvableConsumer interface
        *
        * Consume a message, inserting it in the cache, under
-       * \param catalog_id ownership.
+       * \param repository_id ownership.
        * \param message Message data
       */
-      virtual void consumeMessage( const data::RecordId &catalog_id, data::Message_Ptr);
+      virtual void consumeMessage( const data::RecordId &repository_id, data::Message_Ptr);
 
       /**
        * Implementation of the \ref ResolvableConsumer interface
        *
        * Consume a script, inserting it in the cache, under
-       * \param catalog_id ownership.
+       * \param repository_id ownership.
        * \param script Script data
       */
-      virtual void consumeScript( const data::RecordId &catalog_id, data::Script_Ptr);
+      virtual void consumeScript( const data::RecordId &repository_id, data::Script_Ptr);
 
       /**
        * Implementation of the \ref ResolvableConsumer interface
        *
        * Consume a pattern, inserting it in the cache, under
-       * \param catalog_id ownership.
+       * \param repository_id ownership.
        * \param pattern Pattern data
       */
-      virtual void consumePattern( const data::RecordId &catalog_id, data::Pattern_Ptr pattern );
+      virtual void consumePattern( const data::RecordId &repository_id, data::Pattern_Ptr pattern );
 
       /**
        * Implementation of the \ref ResolvableConsumer interface
        *
        * Consume a product, inserting it in the cache, under
-       * \param catalog_id ownership.
+       * \param repository_id ownership.
        * \param pattern Pattern data
       */
-      virtual void consumeProduct( const data::RecordId &catalog_id, data::Product_Ptr product );
+      virtual void consumeProduct( const data::RecordId &repository_id, data::Product_Ptr product );
 
       /**
        * Implementation of the \ref ResolvableConsumer interface
        *
        * Consume changelog of a resolvable, inserting it in the cache.
-       * \param catalog_id ownership.
+       * \param repository_id ownership.
        * \param resolvable resolvable for which the changelog data are to be saved
        * \param changelog  the changelog
       */
-      virtual void consumeChangelog( const data::RecordId &catalog_id, const data::Resolvable_Ptr & resolvable, const Changelog & changelog );
+      virtual void consumeChangelog( const data::RecordId &repository_id, const data::Resolvable_Ptr & resolvable, const Changelog & changelog );
 
       /**
        * Implementation of the \ref ResolvableConsumer interface
        *
        * Consume filelist of a resolvable, inserting it in the cache.
-       * \param catalog_id ownership.
+       * \param repository_id ownership.
        * \param resolvable resolvable for which the filelist is to be saved
        * \param filenames  list of filenames the resolvable contains
       */
-      virtual void consumeFilelist( const data::RecordId &catalog_id, const data::Resolvable_Ptr & resolvable, const data::Filenames & filenames );
+      virtual void consumeFilelist( const data::RecordId &repository_id, const data::Resolvable_Ptr & resolvable, const data::Filenames & filenames );
 
       /**
        * Appends a resolvable to the store.
@@ -174,7 +174,7 @@ namespace zypp
        * Optionaly you can pass a list of \c CapabilityImpl::Ptr
        * as dependencies for the resolvable.
        *
-       * You have to specify the RecordId for the catalog owning
+       * You have to specify the RecordId for the repository owning
        * this resolvable. Yuu can obtain it with
        * \ref lookupOrAppendCatalog
        *
@@ -190,7 +190,7 @@ namespace zypp
        * other properties.
        *
        */
-      data::RecordId appendResolvable( const data::RecordId &catalog_id,
+      data::RecordId appendResolvable( const data::RecordId &repository_id,
                                        const Resolvable::Kind &kind,
                                        const NVRA &nvra,
                                        const data::Dependencies &deps );
@@ -350,12 +350,12 @@ namespace zypp
                                          const std::string &name );
 
       /**
-       * Returns the record id of a catalog (Source)
+       * Returns the record id of a repository (Source)
        *
-       * \param url Url of the catalog
-       * \param path path of the catalog (relative to url)
+       * \param url Url of the repository
+       * \param path path of the repository (relative to url)
        *
-       * \note If the catalog entry does not exist, it will
+       * \note If the repository entry does not exist, it will
        * be created and the new inserted entry's id will
        * be returned.
        */
@@ -442,7 +442,7 @@ namespace zypp
 
 
        /**
-       * Update a known catalog checksum and timestamp
+       * Update a known repository checksum and timestamp
        *
        * \note If you don't provide timestamp it defaults
        * to now.

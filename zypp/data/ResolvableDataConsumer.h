@@ -28,17 +28,17 @@ namespace data
     ResolvableDataConsumer();
     virtual ~ResolvableDataConsumer();
 
-    virtual void consumePackage( const data::RecordId &catalog_id, data::Package_Ptr ) = 0;
-    virtual void consumeSourcePackage( const data::RecordId &catalog_id, data::SrcPackage_Ptr ) = 0;
-    virtual void consumeProduct( const data::RecordId &catalog_id, data::Product_Ptr ) = 0;
-    virtual void consumePatch( const data::RecordId &catalog_id, data::Patch_Ptr ) = 0;
-    virtual void consumePackageAtom( const data::RecordId &catalog_id, const data::PackageAtom_Ptr & ) = 0;
-    virtual void consumeMessage( const data::RecordId &catalog_id, data::Message_Ptr ) = 0;
-    virtual void consumeScript( const data::RecordId &catalog_id, data::Script_Ptr ) = 0;
-    virtual void consumePattern( const data::RecordId &catalog_id, data::Pattern_Ptr ) = 0;
+    virtual void consumePackage( const data::RecordId &repository_id, data::Package_Ptr ) = 0;
+    virtual void consumeSourcePackage( const data::RecordId &repository_id, data::SrcPackage_Ptr ) = 0;
+    virtual void consumeProduct( const data::RecordId &repository_id, data::Product_Ptr ) = 0;
+    virtual void consumePatch( const data::RecordId &repository_id, data::Patch_Ptr ) = 0;
+    virtual void consumePackageAtom( const data::RecordId &repository_id, const data::PackageAtom_Ptr & ) = 0;
+    virtual void consumeMessage( const data::RecordId &repository_id, data::Message_Ptr ) = 0;
+    virtual void consumeScript( const data::RecordId &repository_id, data::Script_Ptr ) = 0;
+    virtual void consumePattern( const data::RecordId &repository_id, data::Pattern_Ptr ) = 0;
 
-    virtual void consumeChangelog( const data::RecordId & catalog_id, const data::Resolvable_Ptr &, const Changelog & ) = 0;
-    virtual void consumeFilelist( const data::RecordId & catalog_id, const data::Resolvable_Ptr &, const data::Filenames & ) = 0;
+    virtual void consumeChangelog( const data::RecordId & repository_id, const data::Resolvable_Ptr &, const Changelog & ) = 0;
+    virtual void consumeFilelist( const data::RecordId & repository_id, const data::Resolvable_Ptr &, const data::Filenames & ) = 0;
   };
 
 } // namespace parser

@@ -20,8 +20,8 @@ char** getsql() {
   "  , vendor TEXT"
   "  , size INTEGER"
   "  , archive_size INTEGER"
-  "  , catalog INTEGER"
-  "  , catalog_media_nr INTEGER"
+  "  , repository INTEGER"
+  "  , repository_media_nr INTEGER"
   "  , install_only INTEGER"
   "  , build_time INTEGER"
   "  , install_time INTEGER"
@@ -45,7 +45,7 @@ char** getsql() {
   "  , text TEXT"
   ");",
 
-  "CREATE TABLE catalogs ("
+  "CREATE TABLE repositories ("
   "    id INTEGER"
   "  , alias TEXT NOT NULL"
   "  , url TEXT"
@@ -135,7 +135,7 @@ char** getsql() {
   "  , epoch INTEGER"
   "  , arch INTEGER"
   "  , relation INTEGER"
-  "  , catalog TEXT"
+  "  , repository TEXT"
   "  , glob TEXT"
   "  , importance INTEGER"
   "  , importance_gteq INTEGER"
@@ -202,12 +202,12 @@ char** getsql() {
 
   "CREATE INDEX package_details_resolvable_id ON package_details (resolvable_id);",
 
-  "CREATE INDEX resolvable_catalog ON resolvables (catalog);",
+  "CREATE INDEX resolvable_repository ON resolvables (repository);",
 
-  "CREATE TRIGGER remove_catalogs"
-  "  AFTER DELETE ON catalogs"
+  "CREATE TRIGGER remove_repositories"
+  "  AFTER DELETE ON repositories"
   "  BEGIN"
-  "    DELETE FROM resolvables WHERE catalog = old.id;"
+  "    DELETE FROM resolvables WHERE repository = old.id;"
   "  END;",
 
   "CREATE TRIGGER remove_patch_packages_baseversions"

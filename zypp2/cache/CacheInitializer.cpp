@@ -88,7 +88,7 @@ bool CacheInitializer::tablesCreated() const
   Measure timer("Check tables exist");
   unsigned int count = _pimpl->con->executeint("select count(*) from sqlite_master where type='table';");
   timer.elapsed();
-  return ( count == 26 );
+  return ( count > 0 );
 }
 
 void CacheInitializer::createTables()

@@ -24,16 +24,16 @@ using namespace zypp;
 class PrintItem : public resfilter::PoolItemFilterFunctor
 {
 public:
-  string _catalog;
+  string _repository;
 
-  PrintItem( const string & catalog )
-      : _catalog( catalog )
+  PrintItem( const string & repository )
+      : _repository( repository )
   { }
 
   bool operator()( PoolItem_Ref item )
   {
-    if (_catalog.empty()
-        || _catalog == item->source().alias())
+    if (_repository.empty()
+        || _repository == item->source().alias())
     {
       cout << (item.status().isInstalled() ? "i" : " ");
       cout << "|" << item->kind();
@@ -59,7 +59,7 @@ public:
 
 
 static void
-query_pool( ZYpp::Ptr Z, const string & filter, const string & catalog)
+query_pool( ZYpp::Ptr Z, const string & filter, const string & repository)
 {
   Resolvable::Kind kind;
 
@@ -76,9 +76,9 @@ query_pool( ZYpp::Ptr Z, const string & filter, const string & catalog)
     exit( 1 );
   }
 
-  bool system = (catalog == "@system");
+  bool system = (repository == "@system");
 
-  MIL << "query_pool kind '" << kind << "', catalog '" << catalog << "'" << endl;
+  MIL << "query_pool kind '" << kind << "', repository '" << repository << "'" << endl;
 
   SourceManager_Ptr manager = SourceManager::sourceManager();
 
@@ -113,7 +113,7 @@ query_pool( ZYpp::Ptr Z, const string & filter, const string & catalog)
   }
 
   // add all non-installed (cached sources) resolvables to the pool
-  // remark: If only the systems resolvables should be shown (catalog == "@system")
+  // remark: If only the systems resolvables should be shown (repository == "@system")
   //         then the SourceManager is not initialized (see approx. 20 lines above)
   //         and the following loop is not run at all.
 
@@ -129,7 +129,7 @@ query_pool( ZYpp::Ptr Z, const string & filter, const string & catalog)
   if (filter.empty()
       || filter == FILTER_ALL)
   {
-    PrintItem printitem( system ? "" : catalog );
+    PrintItem printitem( system ? "" : repository );
     if (system)
       zypp::invokeOnEach( Z->pool().begin(), Z->pool().end(),				// all kinds
                           zypp::resfilter::ByInstalled(),
@@ -141,7 +141,7 @@ query_pool( ZYpp::Ptr Z, const string & filter, const string & catalog)
   }
   else
   {
-    PrintItem printitem( system ? "" : catalog );
+    PrintItem printitem( system ? "" : repository );
     if (system)
       zypp::invokeOnEach( Z->pool().byKindBegin( kind ), Z->pool().byKindEnd( kind ),	// filter kind
                           zypp::resfilter::ByInstalled(),
@@ -162,11 +162,11 @@ main (int argc, char **argv)
   string filter;
   if (argc > 1)
     filter = argv[1];
-  string catalog;
+  string repository;
   if (argc > 2)
-    catalog = argv[2];
+    repository = argv[2];
 
-  MIL << "START zypp-query-pool " << filter << " " << catalog << endl;
+  MIL << "START zypp-query-pool " << filter << " " << repository << endl;
 
   zypp::zypp_readonly_hack::IWantIt();
   ZYpp::Ptr Z = zypp::getZYpp();
@@ -176,7 +176,7 @@ main (int argc, char **argv)
 
   Z->initializeTarget( "/" );
 
-  query_pool( Z, filter, catalog );
+  query_pool( Z, filter, repository );
 
   MIL << "END zypp-query-pool, result 0" << endl;
 

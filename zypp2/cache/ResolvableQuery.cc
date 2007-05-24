@@ -19,7 +19,7 @@ struct ResolvableQuery::Impl
   : _dbdir(dbdir)
     , _type_cache(dbdir)
   {
-    _fields = "id, name, version, release, epoch, arch, kind, installed_size, archive_size, install_only, build_time, install_time, catalog_id";
+    _fields = "id, name, version, release, epoch, arch, kind, installed_size, archive_size, install_only, build_time, install_time, repository_id";
   }
 
   ~Impl()

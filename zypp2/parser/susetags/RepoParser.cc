@@ -46,10 +46,10 @@ namespace zypp
       class RepoParser::Impl
       {
 	public:
-	  Impl( const data::RecordId & catalogId_r,
+	  Impl( const data::RecordId & repositoryId_r,
 		data::ResolvableDataConsumer & consumer_r,
 		const ProgressData::ReceiverFnc & fnc_r )
-	  : _catalogId( catalogId_r )
+	  : _repositoryId( repositoryId_r )
 	  , _consumer( consumer_r )
 	  {
 	    _ticks.sendTo( fnc_r );
@@ -70,7 +70,7 @@ namespace zypp
 	  {
 	    SEC << "[Prod]" << data_r << endl;
 	    _prodData = data_r;
-	    _consumer.consumeProduct( _catalogId, data_r );
+	    _consumer.consumeProduct( _repositoryId, data_r );
 	  }
 
           void consumePkg( const data::Package_Ptr & data_r )
@@ -152,7 +152,7 @@ namespace zypp
 	  }
 
 	private:
-	  data::RecordId                 _catalogId;
+	  data::RecordId                 _repositoryId;
 	  data::ResolvableDataConsumer & _consumer;
 	  ProgressData                   _ticks;
 
@@ -248,10 +248,10 @@ namespace zypp
       //	METHOD NAME : RepoParser::RepoParser
       //	METHOD TYPE : Ctor
       //
-      RepoParser::RepoParser( const data::RecordId & catalogId_r,
+      RepoParser::RepoParser( const data::RecordId & repositoryId_r,
 			      data::ResolvableDataConsumer & consumer_r,
 			      const ProgressData::ReceiverFnc & fnc_r )
-      : _pimpl( new Impl( catalogId_r, consumer_r, fnc_r ) )
+      : _pimpl( new Impl( repositoryId_r, consumer_r, fnc_r ) )
       {}
 
       ///////////////////////////////////////////////////////////////////

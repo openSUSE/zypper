@@ -40,9 +40,10 @@ namespace repository
 namespace cached
 { /////////////////////////////////////////////////////////////////
 
-CachedRepositoryImpl::CachedRepositoryImpl( const Pathname &dbdir)
-  : _dbdir(dbdir)
-    , _type_cache(dbdir)
+CachedRepositoryImpl::CachedRepositoryImpl( const Pathname &dbdir, const data::RecordId &repository_id )
+  : _dbdir(dbdir),
+    _type_cache(dbdir),
+    _repository_id(repository_id)
 {
 
 }
@@ -71,7 +72,8 @@ void CachedRepositoryImpl::createResolvables()
     con.executenonquery("PRAGMA cache_size=8000;");
     con.executenonquery("BEGIN;");
 
-    sqlite3_command cmd( con, "select id,name,version,release,epoch,arch,kind from resolvables;");
+    sqlite3_command cmd( con, "select id,name,version,release,epoch,arch,kind from resolvables where repository_id=:repository_id;");
+    cmd.bind(":repository_id", _repository_id);
     map<data::RecordId, NVRAD> nvras;
     
     sqlite3_reader reader = cmd.executereader();

@@ -42,11 +42,11 @@ namespace zypp
 
 
   YUMParser::YUMParser(
-      const data::RecordId & catalog_id,
+      const data::RecordId & repository_id,
       data::ResolvableDataConsumer & consumer,
       const ProgressData::ReceiverFnc & progress)
     :
-      _consumer(consumer), _catalog_id(catalog_id)
+      _consumer(consumer), _repository_id(repository_id)
   {
     _ticks.name("YUMParser");
     _ticks.sendTo(progress);
@@ -69,7 +69,7 @@ namespace zypp
 
   bool YUMParser::primary_CB(const data::Package_Ptr & package_r)
   {
-    _consumer.consumePackage( _catalog_id, package_r );
+    _consumer.consumePackage( _repository_id, package_r );
 
 /*    MIL << "got package "
       << package.name << package.edition << " "
@@ -97,7 +97,7 @@ namespace zypp
 
   bool YUMParser::patch_CB(const data::Patch_Ptr & patch)
   {
-    _consumer.consumePatch( _catalog_id, patch );
+    _consumer.consumePatch( _repository_id, patch );
 
     MIL << "got patch "
       << patch->name << patch->edition << " "
@@ -112,7 +112,7 @@ namespace zypp
   bool YUMParser::other_CB(
     const data::Resolvable_Ptr & res_ptr, const Changelog & changelog)
   {
-    _consumer.consumeChangelog(_catalog_id, res_ptr, changelog);
+    _consumer.consumeChangelog(_repository_id, res_ptr, changelog);
 /*
     DBG << "got changelog for "
       << res_ptr->name << res_ptr->edition << " "
@@ -129,7 +129,7 @@ namespace zypp
   bool YUMParser::filelist_CB(
     const data::Resolvable_Ptr & res_ptr, const data::Filenames & filenames)
   {
-    _consumer.consumeFilelist(_catalog_id, res_ptr, filenames);
+    _consumer.consumeFilelist(_repository_id, res_ptr, filenames);
 /*
     DBG << "got filelist for "
       << res_ptr->name << res_ptr->edition << " "
@@ -145,7 +145,7 @@ namespace zypp
 
   bool YUMParser::pattern_CB(const data::Pattern_Ptr & product_ptr)
   {
-    _consumer.consumePattern(_catalog_id, product_ptr);
+    _consumer.consumePattern(_repository_id, product_ptr);
 
     MIL << "got pattern " << product_ptr->name << endl;
 
@@ -156,7 +156,7 @@ namespace zypp
 
   bool YUMParser::product_CB(const data::Product_Ptr & product_ptr)
   {
-    _consumer.consumeProduct(_catalog_id, product_ptr);
+    _consumer.consumeProduct(_repository_id, product_ptr);
 
     MIL << "got product " << product_ptr->name
         << "-" << product_ptr->edition << endl;

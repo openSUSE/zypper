@@ -202,11 +202,11 @@ int main( int argc, char * argv[] )
   Pathname reporoot( "lmd" );
 
   cache::CacheStore store( dbdir );
-  data::RecordId catalogId = store.lookupOrAppendCatalog( Url("dir:///"), "/" );
+  data::RecordId repositoryId = store.lookupOrAppendCatalog( Url("dir:///"), "/" );
   {
     Measure x( "XXXXXXXXXXXXX" );
 
-    parser::susetags::RepoParser repo( catalogId, store );
+    parser::susetags::RepoParser repo( repositoryId, store );
     repo.parse( reporoot );
 
     store.commit();
@@ -230,9 +230,9 @@ int main( int argc, char * argv[] )
     Pathname metadir( "lmd" );
 
     cache::CacheStore store( dbdir );
-    data::RecordId catalogId = store.lookupOrAppendCatalog( Url("http://www.google.com"), "/" );
+    data::RecordId repositoryId = store.lookupOrAppendCatalog( Url("http://www.google.com"), "/" );
 
-    RepoParser( metadir, catalogId, store );
+    RepoParser( metadir, repositoryId, store );
 
   }
 
@@ -243,9 +243,9 @@ int main( int argc, char * argv[] )
       Pathname dbfile( "data.db" );
       cache::CacheStore store(getenv("PWD"));
 
-      data::RecordId catalog_id = store.lookupOrAppendCatalog( Url("http://www.google.com"), "/");
+      data::RecordId repository_id = store.lookupOrAppendCatalog( Url("http://www.google.com"), "/");
 
-      PackagesParser parser( catalog_id, store);
+      PackagesParser parser( repository_id, store);
       Measure m;
       parser.start(argv[1], &progress_function);
       m.elapsed();

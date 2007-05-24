@@ -45,6 +45,7 @@ SET( zypp2_cache_SRCS
 #  cache/sqlite_detail/CapabilityQueryImpl.cc
 #  cache/sqlite_detail/QueryFactoryImpl.cc
   cache/CacheStore.cpp
+  cache/CacheFSCK.cc
   cache/Utils.cpp
 )
 
@@ -53,6 +54,7 @@ SET( zypp2_cache_HEADERS
   cache/CacheTypes.h
   cache/CacheInitializer.h
   cache/CacheStore.h
+  cache/CacheFSCK.h
   cache/ResolvableQuery.h
 #  cache/CapablityQuery.h
 #  cache/QueryFactory.h

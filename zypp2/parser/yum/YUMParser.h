@@ -59,9 +59,9 @@ namespace zypp
    * \code
    * 
    * cache::CacheStore store(dbdir);
-   * data::RecordId catalog_id = store.lookupOrAppendCatalog(sourceurl, "/");
+   * data::RecordId repository_id = store.lookupOrAppendCatalog(sourceurl, "/");
    *
-   * YUMParser parser(catalog_id, store, &progress_function);
+   * YUMParser parser(repository_id, store, &progress_function);
    * parser.start(source_cache_dir);
    *
    * store.commit();
@@ -81,12 +81,12 @@ namespace zypp
     /**
      * CTOR
      *
-     * \param catalog_id repository identifier
+     * \param repository_id repository identifier
      * \param consumer consumer of parsed data
      * \param progress progress reporting function
      */
     YUMParser(
-      const data::RecordId & catalog_id,
+      const data::RecordId & repository_id,
       data::ResolvableDataConsumer & consumer,
       const ProgressData::ReceiverFnc & progress = ProgressData::ReceiverFnc()
     );
@@ -182,8 +182,8 @@ namespace zypp
     /** Object for processing the read data */
     data::ResolvableDataConsumer & _consumer;
 
-    /** ID of the repository record in the DB (catalogs.id) */
-    data::RecordId _catalog_id;
+    /** ID of the repository record in the DB (repositories.id) */
+    data::RecordId _repository_id;
 
     /** List of parser jobs read from repomd.xml and patches.xml files. */
     std::list<YUMParserJob> _jobs;

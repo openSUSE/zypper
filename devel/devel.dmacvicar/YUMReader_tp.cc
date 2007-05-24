@@ -57,7 +57,7 @@ class ResolvableConsumer : public data::ResolvableDataConsumer
   
   }
 
-  virtual void consumePackage( const data::RecordId &catalog_id, data::Package_Ptr ptr )
+  virtual void consumePackage( const data::RecordId &repository_id, data::Package_Ptr ptr )
   {
     PkgImplPtr impl = PkgImplPtr( new DPackageImpl(ptr) );
     Dependencies deps;
@@ -66,28 +66,28 @@ class ResolvableConsumer : public data::ResolvableDataConsumer
     Package::Ptr pkg = detail::makeResolvableFromImpl( NVRAD( ptr->name, ptr->edition, ptr->arch, deps), impl );
     _store.insert(pkg);
   }
-  virtual void consumeProduct( const data::RecordId &catalog_id, data::Product_Ptr )
+  virtual void consumeProduct( const data::RecordId &repository_id, data::Product_Ptr )
   {
   }
-  virtual void consumePatch( const data::RecordId &catalog_id, data::Patch_Ptr )
+  virtual void consumePatch( const data::RecordId &repository_id, data::Patch_Ptr )
   {
   }
-  virtual void consumeMessage( const data::RecordId &catalog_id, data::Message_Ptr )
+  virtual void consumeMessage( const data::RecordId &repository_id, data::Message_Ptr )
   {
   
   }
   
-  virtual void consumeScript( const data::RecordId &catalog_id, data::Script_Ptr )
+  virtual void consumeScript( const data::RecordId &repository_id, data::Script_Ptr )
   {
   
   }
 
-  virtual void consumeChangelog( const data::RecordId & catalog_id, const data::Resolvable_Ptr &, const Changelog & )
+  virtual void consumeChangelog( const data::RecordId & repository_id, const data::Resolvable_Ptr &, const Changelog & )
   {
   
   }
   
-  virtual void consumeFilelist( const data::RecordId & catalog_id, const data::Resolvable_Ptr &, const data::Filenames & )
+  virtual void consumeFilelist( const data::RecordId & repository_id, const data::Resolvable_Ptr &, const data::Filenames & )
   {}
 
     //virtual void consumeSourcePackage( const data::SrcPackage_Ptr ) = 0;

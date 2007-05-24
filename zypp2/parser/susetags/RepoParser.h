@@ -67,11 +67,11 @@ namespace zypp
       public:
        /** Ctor.
         *
-        * \param catalogId_r repository identifier
+        * \param repositoryId_r repository identifier
         * \param consumer_r consumer of parsed data
         * \param fnc_r progress reporting function
 	*/
-	RepoParser( const data::RecordId & catalogId_r,
+	RepoParser( const data::RecordId & repositoryId_r,
 		    data::ResolvableDataConsumer & consumer_r,
 		    const ProgressData::ReceiverFnc & fnc_r = ProgressData::ReceiverFnc() );
         /** Dtor */

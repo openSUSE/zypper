@@ -55,12 +55,12 @@ struct CacheStore::Impl
 
     // initialize all pre-compiled statements
 
-    insert_resolvable_in_catalog_cmd.reset( new sqlite3_command( con, "insert into resolvables_catalogs (resolvable_id, catalog_id) values (:resolvable_id, :catalog_id);" ));
+    insert_resolvable_in_repository_cmd.reset( new sqlite3_command( con, "insert into resolvables_repositories (resolvable_id, repository_id) values (:resolvable_id, :repository_id);" ));
 
-    update_catalog_cmd.reset( new sqlite3_command( con, "update catalogs set checksum=:checksum, timestamp=:timestamp where id=:catalog_id;" ));
+    update_repository_cmd.reset( new sqlite3_command( con, "update repositories set checksum=:checksum, timestamp=:timestamp where id=:repository_id;" ));
 
-    select_catalog_cmd.reset( new sqlite3_command( con, "select id from catalogs where url=:url and path=:path;" ));
-    insert_catalog_cmd.reset( new sqlite3_command( con, "insert into catalogs (url,path,timestamp) values (:url,:path,:timestamp);" ));
+    select_repository_cmd.reset( new sqlite3_command( con, "select id from repositories where url=:url and path=:path;" ));
+    insert_repository_cmd.reset( new sqlite3_command( con, "insert into repositories (url,path,timestamp) values (:url,:path,:timestamp);" ));
 
     select_name_cmd.reset( new sqlite3_command( con, "select id from names where name=:name;" ));
     insert_name_cmd.reset( new sqlite3_command( con, "insert into names (name) values (:name);" ));
@@ -92,7 +92,7 @@ struct CacheStore::Impl
 
     append_other_dependency_cmd.reset( new sqlite3_command( con, "insert into other_capabilities ( resolvable_id, dependency_type, refers_kind, value ) values ( :resolvable_id, :dependency_type, :refers_kind, :value );" ));
 
-    append_resolvable_cmd.reset( new sqlite3_command( con, "insert into resolvables ( name, version, release, epoch, arch, kind, catalog_id ) values ( :name, :version, :release, :epoch, :arch, :kind, :catalog_id );" ));
+    append_resolvable_cmd.reset( new sqlite3_command( con, "insert into resolvables ( name, version, release, epoch, arch, kind, repository_id ) values ( :name, :version, :release, :epoch, :arch, :kind, :repository_id );" ));
 
     count_shared_cmd.reset( new sqlite3_command( con, "select count(id) from resolvables where shared_id=:rid;" ));
 
@@ -118,8 +118,8 @@ struct CacheStore::Impl
   */
   sqlite3_connection con;
 
-  sqlite3_command_ptr update_catalog_cmd;
-  sqlite3_command_ptr insert_resolvable_in_catalog_cmd;
+  sqlite3_command_ptr update_repository_cmd;
+  sqlite3_command_ptr insert_resolvable_in_repository_cmd;
 
   sqlite3_command_ptr select_name_cmd;
   sqlite3_command_ptr insert_name_cmd;
@@ -130,8 +130,8 @@ struct CacheStore::Impl
   sqlite3_command_ptr select_filename_cmd;
   sqlite3_command_ptr insert_filename_cmd;
 
-  sqlite3_command_ptr select_catalog_cmd;
-  sqlite3_command_ptr insert_catalog_cmd;
+  sqlite3_command_ptr select_repository_cmd;
+  sqlite3_command_ptr insert_repository_cmd;
 
   sqlite3_command_ptr select_file_cmd;
   sqlite3_command_ptr insert_file_cmd;
@@ -184,9 +184,9 @@ void CacheStore::commit()
   _pimpl->con.executenonquery("COMMIT;");
 }
 
-void CacheStore::consumePackage( const RecordId &catalog_id, data::Package_Ptr package )
+void CacheStore::consumePackage( const RecordId &repository_id, data::Package_Ptr package )
 {
-  RecordId pkgid = appendResolvable( catalog_id, ResTraits<Package>::kind, NVRA( package->name, package->edition, package->arch ), package->deps );
+  RecordId pkgid = appendResolvable( repository_id, ResTraits<Package>::kind, NVRA( package->name, package->edition, package->arch ), package->deps );
   consumeResObject( pkgid, package );
 
   appendStringAttribute( pkgid, "Package", "checksum", package->repositoryLocation.fileChecksum.checksum() );
@@ -213,7 +213,7 @@ void CacheStore::consumeSourcePackage( const data::RecordId &catalog_id, data::S
 
 void CacheStore::consumePatch( const data::RecordId &catalog_id, data::Patch_Ptr patch)
 {
-  RecordId id = appendResolvable( catalog_id, ResTraits<Patch>::kind, NVRA( patch->name, patch->edition, patch->arch ), patch->deps );
+  RecordId id = appendResolvable( repository_id, ResTraits<Patch>::kind, NVRA( patch->name, patch->edition, patch->arch ), patch->deps );
   consumeResObject( id, patch );
 
   DBG << "got patch " << patch->name << ", atoms: ";
@@ -225,7 +225,7 @@ void CacheStore::consumePatch( const data::RecordId &catalog_id, data::Patch_Ptr
     if (atom)
     {
       DBG << atom->name << "(atom) ";
-      consumePackageAtom(catalog_id, atom);
+      consumePackageAtom(repository_id, atom);
       continue;
     }
 
@@ -233,7 +233,7 @@ void CacheStore::consumePatch( const data::RecordId &catalog_id, data::Patch_Ptr
     if (script)
     {
       DBG << script->name << "(script) ";
-      consumeScript(catalog_id, script);
+      consumeScript(repository_id, script);
       continue;
     }
 
@@ -241,7 +241,7 @@ void CacheStore::consumePatch( const data::RecordId &catalog_id, data::Patch_Ptr
     if (message)
     {
       DBG << message->name << "(message) ";
-      consumeMessage(catalog_id, message);
+      consumeMessage(repository_id, message);
       continue;
     }
 
@@ -253,37 +253,37 @@ void CacheStore::consumePatch( const data::RecordId &catalog_id, data::Patch_Ptr
   DBG << endl;
 }
 
-void CacheStore::consumePackageAtom( const data::RecordId &catalog_id, const data::PackageAtom_Ptr & atom )
+void CacheStore::consumePackageAtom( const data::RecordId &repository_id, const data::PackageAtom_Ptr & atom )
 {
-  RecordId id = appendResolvable( catalog_id, ResTraits<Atom>::kind, NVRA( atom->name, atom->edition, atom->arch ), atom->deps );
+  RecordId id = appendResolvable( repository_id, ResTraits<Atom>::kind, NVRA( atom->name, atom->edition, atom->arch ), atom->deps );
   consumeResObject( id, atom );
 }
 
-void CacheStore::consumeMessage( const data::RecordId &catalog_id, data::Message_Ptr message )
+void CacheStore::consumeMessage( const data::RecordId &repository_id, data::Message_Ptr message )
 {
-  RecordId id = appendResolvable( catalog_id, ResTraits<Message>::kind, NVRA( message->name, message->edition, message->arch ), message->deps );
+  RecordId id = appendResolvable( repository_id, ResTraits<Message>::kind, NVRA( message->name, message->edition, message->arch ), message->deps );
   consumeResObject( id, message );
 }
 
-void CacheStore::consumeScript( const data::RecordId &catalog_id, data::Script_Ptr script )
+void CacheStore::consumeScript( const data::RecordId &repository_id, data::Script_Ptr script )
 {
-  RecordId id = appendResolvable( catalog_id, ResTraits<Script>::kind, NVRA( script->name, script->edition, script->arch ), script->deps );
+  RecordId id = appendResolvable( repository_id, ResTraits<Script>::kind, NVRA( script->name, script->edition, script->arch ), script->deps );
   consumeResObject( id, script );
 }
 
-void CacheStore::consumePattern( const data::RecordId &catalog_id, data::Pattern_Ptr pattern )
+void CacheStore::consumePattern( const data::RecordId &repository_id, data::Pattern_Ptr pattern )
 {
-  RecordId id = appendResolvable( catalog_id, ResTraits<Pattern>::kind, NVRA( pattern->name, pattern->edition, pattern->arch ), pattern->deps );
+  RecordId id = appendResolvable( repository_id, ResTraits<Pattern>::kind, NVRA( pattern->name, pattern->edition, pattern->arch ), pattern->deps );
   consumeResObject( id, pattern );
 }
 
-void CacheStore::consumeProduct( const data::RecordId &catalog_id, data::Product_Ptr product )
+void CacheStore::consumeProduct( const data::RecordId &repository_id, data::Product_Ptr product )
 {
-  RecordId id = appendResolvable( catalog_id, ResTraits<Product>::kind, NVRA( product->name, product->edition, product->arch ), product->deps );
+  RecordId id = appendResolvable( repository_id, ResTraits<Product>::kind, NVRA( product->name, product->edition, product->arch ), product->deps );
   consumeResObject( id, product );
 }
 
-void CacheStore::consumeChangelog( const data::RecordId &catalog_id, const data::Resolvable_Ptr & resolvable, const Changelog & changelog )
+void CacheStore::consumeChangelog( const data::RecordId &repository_id, const data::Resolvable_Ptr & resolvable, const Changelog & changelog )
 {
   // TODO
   // maybe consumeChangelog(const data::RecordId & resolvable_id, Changelog changelog) will
@@ -291,7 +291,7 @@ void CacheStore::consumeChangelog( const data::RecordId &catalog_id, const data:
   // resolvable. (first, we'll see how fast is the inserting without remembering those ids)
 }
 
-void CacheStore::consumeFilelist( const data::RecordId &catalog_id, const data::Resolvable_Ptr & resolvable, const data::Filenames & filenames )
+void CacheStore::consumeFilelist( const data::RecordId &repository_id, const data::Resolvable_Ptr & resolvable, const data::Filenames & filenames )
 {
   // TODO
   // maybe consumeFilelist(const data::RecordId & resolvable_id, data::Filenames &) will
@@ -307,7 +307,7 @@ void CacheStore::consumeResObject( const data::RecordId &rid, data::ResObject_Pt
   appendNumericAttribute( rid, "ResObject", "buildTime", res->buildTime );
 }
 
-RecordId CacheStore::appendResolvable( const RecordId &catalog_id,
+RecordId CacheStore::appendResolvable( const RecordId &repository_id,
                                              const Resolvable::Kind &kind,
                                              const NVRA &nvra,
                                              const data::Dependencies &deps )
@@ -318,7 +318,7 @@ RecordId CacheStore::appendResolvable( const RecordId &catalog_id,
   _pimpl->append_resolvable_cmd->bind( ":epoch", static_cast<int>( nvra.edition.epoch() ) );
   _pimpl->append_resolvable_cmd->bind( ":arch", lookupOrAppendType("arch", nvra.arch.asString()) );
   _pimpl->append_resolvable_cmd->bind( ":kind", lookupOrAppendType("kind", kind.asString()) );
-  _pimpl->append_resolvable_cmd->bind( ":catalog_id", catalog_id );
+  _pimpl->append_resolvable_cmd->bind( ":repository_id", repository_id );
 
   _pimpl->append_resolvable_cmd->executenonquery();
 
@@ -326,9 +326,9 @@ RecordId CacheStore::appendResolvable( const RecordId &catalog_id,
 
   appendDependencies( id, deps );
   /*
-  _pimpl->insert_resolvable_in_catalog_cmd->bind(":catalog_id", catalog_id);
-  _pimpl->insert_resolvable_in_catalog_cmd->bind(":resolvable_id", id);
-  _pimpl->insert_resolvable_in_catalog_cmd->executenonquery();*/
+  _pimpl->insert_resolvable_in_repository_cmd->bind(":repository_id", repository_id);
+  _pimpl->insert_resolvable_in_repository_cmd->bind(":resolvable_id", id);
+  _pimpl->insert_resolvable_in_repository_cmd->executenonquery();*/
 
   return static_cast<RecordId>(id);
   return 1;
@@ -556,28 +556,28 @@ void CacheStore::updateCatalog( const RecordId &id,
                     const string &checksum,
                     const Date &timestamp )
 {
-  _pimpl->update_catalog_cmd->bind(":catalog_id", id);
-  _pimpl->update_catalog_cmd->bind(":checksum", checksum);
-  _pimpl->update_catalog_cmd->bind(":timestamp", static_cast<int>((Date::ValueType) timestamp) );
-  _pimpl->insert_catalog_cmd->executenonquery();
+  _pimpl->update_repository_cmd->bind(":repository_id", id);
+  _pimpl->update_repository_cmd->bind(":checksum", checksum);
+  _pimpl->update_repository_cmd->bind(":timestamp", static_cast<int>((Date::ValueType) timestamp) );
+  _pimpl->insert_repository_cmd->executenonquery();
 }
 
 RecordId CacheStore::lookupOrAppendCatalog( const Url &url, const Pathname &path )
 {
-  _pimpl->select_catalog_cmd->bind(":url", url.asString());
-  _pimpl->select_catalog_cmd->bind(":path", path.asString());
+  _pimpl->select_repository_cmd->bind(":url", url.asString());
+  _pimpl->select_repository_cmd->bind(":path", path.asString());
 
   long long id = 0;
   try {
-    id = _pimpl->select_catalog_cmd->executeint64();
+    id = _pimpl->select_repository_cmd->executeint64();
   }
   catch ( const sqlite3x::database_error &e )
   {
     // does not exist
-    _pimpl->insert_catalog_cmd->bind(":url", url.asString());
-    _pimpl->insert_catalog_cmd->bind(":path", path.asString());
-    _pimpl->insert_catalog_cmd->bind(":timestamp", static_cast<int>((Date::ValueType) Date::now()) );
-    _pimpl->insert_catalog_cmd->executenonquery();
+    _pimpl->insert_repository_cmd->bind(":url", url.asString());
+    _pimpl->insert_repository_cmd->bind(":path", path.asString());
+    _pimpl->insert_repository_cmd->bind(":timestamp", static_cast<int>((Date::ValueType) Date::now()) );
+    _pimpl->insert_repository_cmd->executenonquery();
     id = _pimpl->con.insertid();
     return static_cast<RecordId>(id);
 

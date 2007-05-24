@@ -36,17 +36,17 @@ int main(int argc, char **argv)
   {
     ZYpp::Ptr z = getZYpp();
 
-    Measure open_catalog_timer("CacheStore: lookupOrAppendCatalog");
+    Measure open_repository_timer("CacheStore: lookupOrAppendCatalog");
 
     cache::CacheStore store(getenv("PWD"));
-    data::RecordId catalog_id = store.lookupOrAppendCatalog( Url("http://some.url"), "/");
+    data::RecordId repository_id = store.lookupOrAppendCatalog( Url("http://some.url"), "/");
 
-    open_catalog_timer.stop();
+    open_repository_timer.stop();
 
     MIL << "creating PrimaryFileParser" << endl;
     Measure parse_primary_timer("primary.xml.gz parsing");
 
-    parser::yum::YUMParser parser( catalog_id, store, &progress_function);
+    parser::yum::YUMParser parser( repository_id, store, &progress_function);
     parser.start(argv[1]);
     store.commit();
     parse_primary_timer.stop();

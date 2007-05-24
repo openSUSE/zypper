@@ -1,0 +1,12 @@
+INCLUDE_DIRECTORIES( ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR} )
+
+SET( zyppcache_SRC
+zypp-cache.cc
+)
+
+ADD_EXECUTABLE( zypp-cache ${zyppcache_SRC} )
+TARGET_LINK_LIBRARIES( zypp-cache zypp )
+TARGET_LINK_LIBRARIES( zypp-cache zypp2 )
+TARGET_LINK_LIBRARIES( zypp-cache xml2 )
+
+#INSTALL(TARGETS zypp-query-pool RUNTIME DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/zypp )
