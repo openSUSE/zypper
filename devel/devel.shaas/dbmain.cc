@@ -37,13 +37,13 @@ int main(){
 	std::cout << "Number of elements in pool: " << God->pool().size() << std::endl;
 	std::cout << "Verify System: " << God->resolver()->verifySystem() << std::endl;
 
-	for (ResPool::const_iterator it = God->pool().begin(); it != God->pool().end(); ++it) {
-			if(it->resolvable()->name() == "pidgin"){
-				CapSet caps = it->resolvable()->dep (Dep::PROVIDES);
+	/*for (ResPool::const_iterator it = God->pool().begin(); it != God->pool().end(); ++it) {
+			if(it->resolvable()->name() == "tvbrowser"){
+				CapSet caps = it->resolvable()->dep (Dep::REQUIRES);
 				for (CapSet::const_iterator itCap = caps.begin(); itCap != caps.end(); ++itCap)
-					std::cout << "Requires: " << itCap->asString()  << std::endl;
+					std::cout << "Requires: " << itCap->op().asString()  << " " << itCap->asString() << std::endl;
 			}
-	}
+	}*/
 
 	return 0;
 }
@@ -68,7 +68,10 @@ unsigned int getResolvables(ResStore *store){
 	std::vector< std::vector<string> > packIDs = dbPackages->getResult();
 	std::cout << "get packages from db...\n";
 
-	for(unsigned int i = 4300; i < packIDs.size(); i++){
+	Resolvable::Kind kind = ResTraits<Package>::kind;
+	CapFactory factory;
+
+	for(unsigned int i = 2000; i < packIDs.size(); i++){
 
 		string sqlcom("SELECT PackID FROM Packages WHERE BasedOnID=");
 		sqlcom.append(packIDs[i].at(0));
@@ -129,38 +132,37 @@ unsigned int getResolvables(ResStore *store){
 					rel = Rel(packDeps[y].at(2));
 					ed = packDeps[y].at(3);
 				}
-				//if(rel.asString() == "ANY")
-				//	continue;
+				
 
 				if(packDeps[y].at(1) == "provides"){
-					prov.insert(CapFactory().parse(Resolvable::Kind("Package"), packDeps[y].at(0)
+					prov.insert(factory.parse(kind, packDeps[y].at(0)
 							   , rel, Edition(ed)));
 				}else if(packDeps[y].at(1) == "prerequires"){
-					preq.insert(CapFactory().parse(Resolvable::Kind("Package"), packDeps[y].at(0)
+					preq.insert(factory.parse(kind, packDeps[y].at(0)
 							   , rel, Edition(ed)));
 				}else if(packDeps[y].at(1) == "requires"){
-					req.insert(CapFactory().parse(Resolvable::Kind("Package"), packDeps[y].at(0)
+					req.insert(factory.parse(kind, packDeps[y].at(0)
 							   , rel, Edition(ed)));
 				}else if(packDeps[y].at(1) == "conflicts"){
-					conf.insert(CapFactory().parse(Resolvable::Kind("Package"), packDeps[y].at(0)
+					conf.insert(factory.parse(kind, packDeps[y].at(0)
 							   , rel, Edition(ed)));
 				}else if(packDeps[y].at(1) == "obsoletes"){
-					obs.insert(CapFactory().parse(Resolvable::Kind("Package"), packDeps[y].at(0)
+					obs.insert(factory.parse(kind, packDeps[y].at(0)
 							   , rel, Edition(ed)));
 				}else if(packDeps[y].at(1) == "recommends"){
-					rec.insert(CapFactory().parse(Resolvable::Kind("Package"), packDeps[y].at(0)
+					rec.insert(factory.parse(kind, packDeps[y].at(0)
 							   , rel, Edition(ed)));
 				}else if(packDeps[y].at(1) == "suggests"){
-					sug.insert(CapFactory().parse(Resolvable::Kind("Package"), packDeps[y].at(0)
+					sug.insert(factory.parse(kind, packDeps[y].at(0)
 							   , rel, Edition(ed)));
 				}else if(packDeps[y].at(1) == "freshens"){
-					fre.insert(CapFactory().parse(Resolvable::Kind("Package"), packDeps[y].at(0)
+					fre.insert(factory.parse(kind, packDeps[y].at(0)
 							   , rel, Edition(ed)));
 				}else if(packDeps[y].at(1) == "enhances"){
-					enh.insert(CapFactory().parse(Resolvable::Kind("Package"), packDeps[y].at(0)
+					enh.insert(factory.parse(kind, packDeps[y].at(0)
 							   , rel, Edition(ed)));
 				}else if(packDeps[y].at(1) == "supplements"){
-					sup.insert(CapFactory().parse(Resolvable::Kind("Package"), packDeps[y].at(0)
+					sup.insert(factory.parse(kind, packDeps[y].at(0)
 							   , rel, Edition(ed)));
 				}
 			}
@@ -191,13 +193,21 @@ unsigned int getResolvables(ResStore *store){
 		if(sup.size() > 0)
 			deps[Dep::SUPPLEMENTS] = sup;
 
+		//std::cout << "Package: " << packIDs[i].at(1) << std::endl;
 		NVRAD nvPkg(packIDs[i].at(1), Edition(edition), Arch("i386"), deps);
+
+		CapSet::const_iterator testIter;
+
+		for(testIter = req.begin(); testIter != req.end(); testIter++){
+			//std::cout << testIter->asString() << std::endl;
+		}
+
 		Package::Ptr p( detail::makeResolvableAndImpl(nvPkg, pkg));		
 
 		store->insert(p);
 
 		if(i%1000 == 0)
-				std::cout << i << " packages parsed!\n";
+			std::cout << std::endl << i << " packages parsed!\n";
 	}
 
 	dbDeps->close();
