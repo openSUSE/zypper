@@ -8,6 +8,10 @@
 \---------------------------------------------------------------------*/
 
 #include "zypp/base/Logger.h"
+#include "zypp/parser/xml/Reader.h"
+#include "zypp/data/ResolvableData.h"
+
+#include "zypp/parser/yum/FileReaderBaseImpl.h"
 #include "zypp/parser/yum/ProductFileReader.h"
 
 #undef ZYPP_BASE_LOGGER_LOGGROUP
@@ -24,12 +28,56 @@ namespace zypp
     {
 
 
-  ProductFileReader::ProductFileReader(const Pathname & product_file, ProcessProduct callback)
-      : _callback(callback)
+  ///////////////////////////////////////////////////////////////////
+  //
+  //  CLASS NAME : ProductFileReader::Impl
+  //
+  class ProductFileReader::Impl : public BaseImpl
   {
-    Reader reader(product_file);
-    MIL << "Reading " << product_file << endl;
-    reader.foreachNode(bind(&ProductFileReader::consumeNode, this, _1));
+  public:
+    Impl(const Pathname & products_file,
+         const ProcessProduct & callback);
+
+    /**
+     * Callback provided to the XML reader.
+     * 
+     * \param  the xml reader object reading the file  
+     * \return true to tell the reader to continue, false to tell it to stop
+     *
+     * \see PrimaryFileReader::consumeNode(xml::Reader)
+     */
+    bool consumeNode(xml::Reader & reader_r);
+
+    /**
+     * Creates a new \ref data::Product_Ptr, swaps its contents with \ref _product
+     * and returns it. Used to hand-out the data object to its consumer
+     * (a \ref ProcessProduct function) after it has been read.
+     */
+    data::Product_Ptr handoutProduct();
+
+  private:
+    /**
+     * Callback for processing product metadata.
+     */
+    ProcessProduct _callback;
+
+    /**
+     * Pointer to the \ref zypp::data::Product object for storing the product
+     * metada.
+     */
+    data::Product_Ptr _product;
+  };
+  ///////////////////////////////////////////////////////////////////
+
+  ProductFileReader::Impl::Impl(
+      const Pathname & products_file,
+      const ProcessProduct & callback)
+    :
+      _callback(callback)
+  {
+    Reader reader(products_file);
+    MIL << "Reading " << products_file << endl;
+    reader.foreachNode(bind(&ProductFileReader::Impl::consumeNode, this, _1));
   }
 
   // --------------------------------------------------------------------------
@@ -45,7 +93,7 @@ namespace zypp
 
   // --------------------------------------------------------------------------
 
-  bool ProductFileReader::consumeNode(Reader & reader_r)
+  bool ProductFileReader::Impl::consumeNode(Reader & reader_r)
   {
     // dependency block nodes
     if (_product && consumeDependency(reader_r, _product->deps))
@@ -128,12 +176,26 @@ namespace zypp
 
   // --------------------------------------------------------------------------
 
-  data::Product_Ptr ProductFileReader::handoutProduct()
+  data::Product_Ptr ProductFileReader::Impl::handoutProduct()
   {
     data::Product_Ptr ret;
     ret.swap(_product);
     return ret;
   }
+
+  ///////////////////////////////////////////////////////////////////
+  //
+  //  CLASS NAME : ProductFileReader
+  //
+  ///////////////////////////////////////////////////////////////////
+
+  ProductFileReader::ProductFileReader(const Pathname & product_file, ProcessProduct callback)
+      : _pimpl(new ProductFileReader::Impl(product_file, callback))
+  {}
+
+
+  ProductFileReader::~ProductFileReader()
+  {}
 
 
     } // ns yum

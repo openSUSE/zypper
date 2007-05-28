@@ -6,26 +6,33 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-
+/** \file zypp/parser/yum/PrimaryFileReader.h
+ * Interface definition of primary.xml.gz file reader.
+ */
 #ifndef ZYPP_PARSER_YUM_PRIMARYFILEPARSER_H
 #define ZYPP_PARSER_YUM_PRIMARYFILEPARSER_H
 
-#include "zypp/base/Function.h"
-#include "zypp/parser/xml/Reader.h"
-#include "zypp/parser/yum/FileReaderBase.h"
-#include "zypp/data/ResolvableData.h"
 #include "zypp/ProgressData.h"
 
+#include "zypp/parser/yum/FileReaderBase.h"
 
 namespace zypp
 {
+
+  namespace data
+  {
+    class Package;
+    DEFINE_PTR_TYPE(Package);
+  } // ns data
+
+
   namespace parser
   {
     namespace yum
     {
 
   /**
-   * Reads through a primary.xml file and collects package data including
+   * Reads through a primary.xml.gz file and collects package data including
    * dependencies.
    * 
    * After a package is read, a \ref zypp::data::Package object is prepared
@@ -47,7 +54,8 @@ namespace zypp
     typedef function<bool(const data::Package_Ptr &)> ProcessPackage;
 
     /**
-     * Constructor
+     * CTOR. Creates also \ref xml::Reader and starts reading.
+     * 
      * \param primary_file the primary.xml.gz file you want to read
      * \param callback function to process \ref _package data.
      * \param progress progress reporting function
@@ -60,45 +68,13 @@ namespace zypp
       const ProgressData::ReceiverFnc & progress = ProgressData::ReceiverFnc());
 
     /**
-     * Callback provided to the XML reader.
-     * 
-     * This is the main parsing method which gets envoked by the \ref xml::Reader
-     * to process each node, one at a time. It is responsible for parsing the
-     * node and calling all other consume* methods.
-     *
-     * \param  the xml reader object reading the file  
-     * \return true to tell the reader to continue, false to tell it to stop
-     *
-     * \note Semantics of this method's return value also differs from other
-     *       consume* methods. While this method's return value tells the the
-     *       xml reader to continue or stop, return value of the rest tells
-     *       their callers if further
+     * DTOR.
      */
-    bool consumeNode(xml::Reader & reader_r);
+    ~PrimaryFileReader();
 
   private:
-    /**
-     * Creates a new \ref data::Package_Ptr, swaps its contents with \ref
-     * _package and returns it. Used to hand-out the data object to its consumer
-     * (a \ref ProcessPackage function) after it has been read.
-     */
-    data::Package_Ptr handoutPackage();
-
-  private:
-    /**
-     * Callback for processing package metadata passed in through constructor.
-     */
-    ProcessPackage _callback;
-
-    /**
-     * \ref zypp::data::Package object for storing the package metada
-     */
-    data::Package_Ptr _package;
-
-    /**
-     * Progress reporting object.
-     */
-    ProgressData _ticks;
+    class Impl;
+    RW_pointer<Impl,rw_pointer::Scoped<Impl> > _pimpl;
   };
 
 

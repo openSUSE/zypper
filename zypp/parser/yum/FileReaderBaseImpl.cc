@@ -6,8 +6,11 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-
-#include <iosfwd>
+/** \file zypp/parser/yum/FileReaderBaseImpl.cc
+ * Implementation of shared code for yum::*FileReaders.
+ */
+//#include <iostream>
+#include <sstream>
 
 #include "zypp/base/Logger.h"
 #include "zypp/base/Function.h"
@@ -16,10 +19,7 @@
 #include "zypp/TranslatedText.h"
 #include "zypp/ByteCount.h"
 
-#include "zypp/parser/yum/FileReaderBase.h"
-
-#undef ZYPP_BASE_LOGGER_LOGGROUP
-#define ZYPP_BASE_LOGGER_LOGGROUP "parser"
+#include "zypp/parser/yum/FileReaderBaseImpl.h"
 
 using namespace std;
 using namespace zypp::xml;
@@ -32,13 +32,13 @@ namespace zypp
     {
 
 
-  FileReaderBase::FileReaderBase()
+  FileReaderBase::BaseImpl::BaseImpl()
     : _expect_rpm_entry(false), _dtype(zypp::Dep::REQUIRES)
   {}
 
   // --------------------------------------------------------------------------
 
-  bool FileReaderBase::consumePackageNode(xml::Reader & reader_r, data::Package_Ptr & package_ptr)
+  bool FileReaderBase::BaseImpl::consumePackageNode(xml::Reader & reader_r, data::Package_Ptr & package_ptr)
   {
     //DBG << "**node: " << reader_r->name() << " (" << reader_r->nodeType() << ") tagpath = " << _tagpath << endl;
     if (isBeingProcessed(tag_format) && consumeFormatNode(reader_r, package_ptr))
@@ -155,7 +155,7 @@ namespace zypp
 
   // --------------( consume <format> tag )------------------------------------
 
-  bool FileReaderBase::consumeFormatNode(xml::Reader & reader_r, data::Package_Ptr & package_ptr)
+  bool FileReaderBase::BaseImpl::consumeFormatNode(xml::Reader & reader_r, data::Package_Ptr & package_ptr)
   {
     if (consumeDependency(reader_r, package_ptr->deps))
       // this node has been a dependency, which has been handled by
@@ -222,8 +222,9 @@ namespace zypp
     return true;
   }
 
+  // --------------------------------------------------------------------------
 
-  bool FileReaderBase::consumeDependency(xml::Reader & reader_r, data::Dependencies & deps_r)
+  bool FileReaderBase::BaseImpl::consumeDependency(xml::Reader & reader_r, data::Dependencies & deps_r)
   {
     if (reader_r->nodeType() == XML_READER_TYPE_ELEMENT)
     {
@@ -338,29 +339,34 @@ namespace zypp
     return false;
   }
 
+  // --------------------------------------------------------------------------
 
-  std::ostream & operator << (std::ostream & out, const FileReaderBase::TagPath & obj)
+  string FileReaderBase::BaseImpl::TagPath::asString()
   {
-    out << "(";
-    
-    if (obj.depth())
+    ostringstream s;
+
+    s << "(";
+
+    if (depth())
     {
-      FileReaderBase::TagPath::TagList::const_iterator p = obj.path.begin();
-      out << *p;
+      TagList::const_iterator p = path.begin();
+      s << *p;
       ++p;
 
-      for (; p != obj.path.end(); ++p)
-        out << "," << *p; 
+      for (; p != path.end(); ++p)
+        s << "," << *p;
     }
     else
-      out << "empty";
+      s << "empty";
 
-    out << ")";
+    s << ")";
 
-    return out;
+    return s.str();
   }
 
 
-    }
-  }
-}
+    } // ns yum
+  } // ns parser
+} // ns zypp
+
+// vim: set ts=2 sts=2 sw=2 et ai:

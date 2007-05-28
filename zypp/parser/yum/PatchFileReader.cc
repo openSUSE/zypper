@@ -6,9 +6,16 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-
+/** \file zypp/parser/yum/PatchFileReader.cc
+ * Implementation of patch XML file reader.
+ */
 #include "zypp/base/Logger.h"
+#include "zypp/parser/xml/Reader.h"
+#include "zypp/data/ResolvableData.h"
+
 #include "zypp/parser/yum/PatchFileReader.h"
+#include "zypp/parser/yum/FileReaderBaseImpl.h"
+
 
 #undef ZYPP_BASE_LOGGER_LOGGROUP
 #define ZYPP_BASE_LOGGER_LOGGROUP "parser"
@@ -24,12 +31,139 @@ namespace zypp
     {
 
 
-  PatchFileReader::PatchFileReader(const Pathname & patch_file, ProcessPatch callback)
-      : _callback(callback)
+  ///////////////////////////////////////////////////////////////////////////
+  //
+  //  CLASS NAME : PatchFileReader::Impl
+  //
+  class PatchFileReader::Impl : public BaseImpl
+  {
+  public:
+    /** CTOR */
+    Impl(const Pathname & patch_file,
+         const ProcessPatch & callback);
+
+    /**
+     * Callback provided to the XML reader.
+     * 
+     * \param  the xml reader object reading the file  
+     * \return true to tell the reader to continue, false to tell it to stop
+     *
+     * \see PrimaryFileReader::consumeNode(xml::Reader)
+     */
+    bool consumeNode(xml::Reader & reader_r);
+
+    /**
+     * Process <tt>atoms</tt> node and all of its children.
+     * 
+     * \param reader_r XML file reader reading the patch file.
+     * \return true if current node has been completely processed, false
+     *         if additional processing is required outside of the method. 
+     */
+    bool consumeAtomsNode(xml::Reader & reader_r);
+
+    /**
+     * Process <tt>package</tt> node and all of its children. This method
+     * uses \ref FileReaderBase::consumePackageNode(xml::Reader,data::Package_Ptr)
+     * method and adds <tt>pkgfiles</tt> element processing.
+     * 
+     * \param reader_r XML file reader reading the patch file.
+     * \return true if current node has been completely processed, false
+     *         if additional processing is required outside of the method. 
+     */
+    bool consumePackageNode(xml::Reader & reader_r);
+
+    /**
+     * Process <tt>patchrpm</tt> node and all of its children.
+     * 
+     * \param reader_r XML file reader reading the patch file.
+     * \return true if current node has been completely processed, false
+     *         if additional processing is required outside of the method. 
+     */
+    bool consumePatchrpmNode(xml::Reader & reader_r);
+
+    /**
+     * Process <tt>deltarpm</tt> node and all of its children.
+     * 
+     * \param reader_r XML file reader reading the patch file.
+     * \return true if current node has been completely processed, false
+     *         if additional processing is required outside of the method. 
+     */
+    bool consumeDeltarpmNode(xml::Reader & reader_r);
+
+    /**
+     * Process <tt>message</tt> node and all of its children.
+     * 
+     * \param reader_r XML file reader reading the patch file.
+     * \return true if current node has been completely processed, false
+     *         if additional processing is required outside of the method. 
+     */
+    bool consumeMessageNode(xml::Reader & reader_r);
+
+    /**
+     * Process <tt>script</tt> node and all of its children.
+     * 
+     * \param reader_r XML file reader reading the patch file.
+     * \return true if current node has been completely processed, false
+     *         if additional processing is required outside of the method. 
+     */
+    bool consumeScriptNode(xml::Reader & reader_r);
+
+    /**
+     * Creates a new \ref data::Patch_Ptr, swaps its contents with \ref _patch
+     * and returns it. Used to hand-out the data object to its consumer
+     * (a \ref ProcessPatch function) after it has been read.
+     */
+    data::Patch_Ptr handoutPatch();
+
+    /**
+     * Creates a new \ref data::ResObject_Ptr, swap its contents with
+     * \ref _tmpResObj and inserts it into <tt>_patch.atoms</tt>. Used
+     * after an atom is read.
+     */
+    void saveAtomInPatch();
+
+    /**
+     * 
+     */
+    void copyPackageAtomFromTmpObj(data::Atom_Ptr & atom_ptr) const;
+
+  private:
+    /**
+     * Callback for processing patch metadata passed in through constructor.
+     */
+    ProcessPatch _callback;
+
+    /**
+     * Pointer to the \ref zypp::data::Patch object for storing the patch
+     * metada (except of depencencies).
+     */
+    data::Patch_Ptr _patch;
+
+    /**
+     * Pointer to an atom currently being read. This can be either
+     * a \ref data::PackageAtom, \ref data::Message, or \ref data::Script.
+     *
+     * \see data::Patch::atoms
+     */
+    data::ResObject_Ptr _tmpResObj;
+
+    /** Data object for storing patchrpm data */
+    data::PatchRpm_Ptr _patchrpm;
+
+    /** Data object for storing deltarpm data */
+    data::DeltaRpm_Ptr _deltarpm;
+  };
+  ///////////////////////////////////////////////////////////////////////////
+
+  PatchFileReader::Impl::Impl(
+      const Pathname & patch_file,
+      const ProcessPatch & callback)
+    :
+      _callback(callback)
   {
     Reader reader(patch_file);
     MIL << "Reading " << patch_file << endl;
-    reader.foreachNode(bind(&PatchFileReader::consumeNode, this, _1));
+    reader.foreachNode(bind(&PatchFileReader::Impl::consumeNode, this, _1));
   }
 
   // --------------------------------------------------------------------------
@@ -45,7 +179,7 @@ namespace zypp
 
   // --------------------------------------------------------------------------
 
-  bool PatchFileReader::consumeNode(Reader & reader_r)
+  bool PatchFileReader::Impl::consumeNode(Reader & reader_r)
   {
     if (isBeingProcessed(tag_atoms) && consumeAtomsNode(reader_r))
       return true;
@@ -170,7 +304,7 @@ namespace zypp
 
   // --------------------------------------------------------------------------
 
-  bool PatchFileReader::consumeAtomsNode(Reader & reader_r)
+  bool PatchFileReader::Impl::consumeAtomsNode(Reader & reader_r)
   {
     // consumePackageNode
     if (isBeingProcessed(tag_package) && consumePackageNode(reader_r))
@@ -265,7 +399,7 @@ namespace zypp
 
   // --------------------------------------------------------------------------
 
-  bool PatchFileReader::consumePackageNode(Reader & reader_r)
+  bool PatchFileReader::Impl::consumePackageNode(Reader & reader_r)
   {
     if (isBeingProcessed(tag_patchrpm) && consumePatchrpmNode(reader_r))
       return true;
@@ -357,7 +491,7 @@ namespace zypp
     {
       // xpath: /patch/atoms/package/* (except pkgfiles/* and license-to-confirm) (*)
       if (isBeingProcessed(tag_package))
-        return FileReaderBase::consumePackageNode(reader_r, package_ptr);
+        return FileReaderBase::BaseImpl::consumePackageNode(reader_r, package_ptr);
     }
     else
     {
@@ -369,7 +503,7 @@ namespace zypp
 
   // --------------------------------------------------------------------------
 
-  bool PatchFileReader::consumePatchrpmNode(Reader & reader_r)
+  bool PatchFileReader::Impl::consumePatchrpmNode(Reader & reader_r)
   {
     if (reader_r->nodeType() == XML_READER_TYPE_ELEMENT)
     {
@@ -445,7 +579,7 @@ namespace zypp
 
   // --------------------------------------------------------------------------
 
-  bool PatchFileReader::consumeDeltarpmNode(Reader & reader_r)
+  bool PatchFileReader::Impl::consumeDeltarpmNode(Reader & reader_r)
   {
     if (reader_r->nodeType() == XML_READER_TYPE_ELEMENT)
     {
@@ -529,7 +663,7 @@ namespace zypp
 
   // --------------------------------------------------------------------------
 
-  bool PatchFileReader::consumeMessageNode(Reader & reader_r)
+  bool PatchFileReader::Impl::consumeMessageNode(Reader & reader_r)
   {
     if (consumeDependency(reader_r, _tmpResObj->deps))
       return true;
@@ -578,7 +712,7 @@ namespace zypp
 
   // --------------------------------------------------------------------------
 
-  bool PatchFileReader::consumeScriptNode(Reader & reader_r)
+  bool PatchFileReader::Impl::consumeScriptNode(Reader & reader_r)
   {
     if (consumeDependency(reader_r, _tmpResObj->deps))
       return true;
@@ -677,7 +811,7 @@ namespace zypp
 
   // --------------------------------------------------------------------------
 
-  data::Patch_Ptr PatchFileReader::handoutPatch()
+  data::Patch_Ptr PatchFileReader::Impl::handoutPatch()
   {
     data::Patch_Ptr ret;
     ret.swap(_patch);
@@ -686,12 +820,26 @@ namespace zypp
 
   // --------------------------------------------------------------------------
 
-  void PatchFileReader::saveAtomInPatch()
+  void PatchFileReader::Impl::saveAtomInPatch()
   {
     data::ResObject_Ptr tmp;
     tmp.swap(_tmpResObj);
     _patch->atoms.insert(tmp);
   }
+
+
+  ///////////////////////////////////////////////////////////////////////////
+  //
+  //  CLASS NAME : PatchFileReader::Impl
+  //
+  ///////////////////////////////////////////////////////////////////////////
+
+  PatchFileReader::PatchFileReader(const Pathname & patch_file, ProcessPatch callback)
+      : _pimpl(new PatchFileReader::Impl(patch_file, callback))
+  {}
+
+  PatchFileReader::~PatchFileReader()
+  {}
 
 
     } // ns yum

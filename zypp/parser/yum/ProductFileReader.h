@@ -10,13 +10,18 @@
 #ifndef ZYPP_PARSER_YUM_PRODUCTFILEREADER_H_
 #define ZYPP_PARSER_YUM_PRODUCTFILEREADER_H_
 
-#include "zypp/base/Function.h"
-#include "zypp/parser/xml/Reader.h"
 #include "zypp/parser/yum/FileReaderBase.h"
-#include "zypp/data/ResolvableData.h"
 
 namespace zypp
 {
+
+  namespace data
+  {
+    class Product;
+    DEFINE_PTR_TYPE(Product);
+  } // ns data
+
+
   namespace parser
   {
     namespace yum
@@ -25,7 +30,7 @@ namespace zypp
 
   /**
    * Reader of products.xml file conforming to RNC definition located
-   * in zypp/parser/yum/schema/products.rnc
+   * at zypp/parser/yum/schema/products.rnc.
    * 
    * \see zypp::data::Product
    * \see zypp::parser::xml::Reader
@@ -47,37 +52,15 @@ namespace zypp
      * \param callback Function which will process read data.
      */
     ProductFileReader(const Pathname & products_file, ProcessProduct callback);
+    
+    /**
+     * DTOR.
+     */
+    ~ProductFileReader();
 
   private:
-
-    /**
-     * Callback provided to the XML reader.
-     * 
-     * \param  the xml reader object reading the file  
-     * \return true to tell the reader to continue, false to tell it to stop
-     *
-     * \see PrimaryFileReader::consumeNode(xml::Reader)
-     */
-    bool consumeNode(xml::Reader & reader_r);
-
-    /**
-     * Creates a new \ref data::Product_Ptr, swaps its contents with \ref _product
-     * and returns it. Used to hand-out the data object to its consumer
-     * (a \ref ProcessProduct function) after it has been read.
-     */
-    data::Product_Ptr handoutProduct();
-
-  private:
-    /**
-     * Callback for processing product metadata.
-     */
-    ProcessProduct _callback;
-
-    /**
-     * Pointer to the \ref zypp::data::Product object for storing the product
-     * metada.
-     */
-    data::Product_Ptr _product;
+    class Impl;
+    RW_pointer<Impl,rw_pointer::Scoped<Impl> > _pimpl;
   };
 
 

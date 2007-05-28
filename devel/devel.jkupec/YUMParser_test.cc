@@ -6,7 +6,6 @@
 #include "zypp2/cache/CacheStore.h"
 #include "zypp2/parser/yum/YUMParser.h"
 
-
 #undef ZYPP_BASE_LOGGER_LOGGROUP
 #define ZYPP_BASE_LOGGER_LOGGROUP "yumparsertest"
 
@@ -47,7 +46,8 @@ int main(int argc, char **argv)
     Measure parse_primary_timer("primary.xml.gz parsing");
 
     parser::yum::YUMParser parser( repository_id, store, &progress_function);
-    parser.start(argv[1]);
+    parser.parse(argv[1]);
+
     store.commit();
     parse_primary_timer.stop();
 

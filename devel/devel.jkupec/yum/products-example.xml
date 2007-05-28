@@ -12,7 +12,7 @@
     <description lang="en">The best server OS so far</description>
     <description lang="sk">Doposiaľ najlepší OS pre servery</description>
     <rpm:requires>
-      <rpm:entry kind="package" name="pikaball" epoch="0" ver="3.0" rel="3" flags="GE" pre="1"/>
+      <rpm:entry kind="ackage" name="pikaball" epoch="0" ver="3.0" rel="3" flags="GE" pre="1"/>
       <rpm:entry kind="package" name="base" epoch="0" ver="3.0" rel="3" flags="GE"/>
     </rpm:requires>
     <rpm:provides>
