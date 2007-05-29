@@ -6,8 +6,13 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-
-#include <fstream>
+/** \file zypp/parser/yum/OtherFileReader.cc
+ * Implementation of other.xml.gz file reader.
+ */
+#include "zypp/base/Logger.h"
+#include "zypp/parser/xml/Reader.h"
+#include "zypp/data/ResolvableData.h"
+#include "zypp/Changelog.h"
 
 #include "zypp/parser/yum/OtherFileReader.h"
 
@@ -25,6 +30,72 @@ namespace zypp
     {
 
 
+  ///////////////////////////////////////////////////////////////////////
+  //
+  //  CLASS NAME : OtherFileReader::Impl
+  //
+  class OtherFileReader::Impl : private base::NonCopyable
+  {
+  public:
+    Impl(
+    const Pathname & other_file,
+    const ProcessPackage & callback,
+    const ProgressData::ReceiverFnc & progress);
+
+  public:
+
+    /**
+     * Callback provided to the XML parser.
+     */
+    bool consumeNode(xml::Reader & reader_r);
+
+    /**
+     * Creates a new \ref data::Resolvable_Ptr, swaps its contents with
+     * \ref _resolvable and returns it. Used to hand-out the data object to its consumer
+     * (a \ref ProcessPackage function) after it has been read.
+     */
+    data::Resolvable_Ptr handoutResolvable();
+
+  private:
+
+    /**
+     * Pointer to the \ref zypp::data::Resolvable object for storing the NVRA
+     * data.
+     */
+    zypp::data::Resolvable_Ptr _resolvable;
+
+    /**
+     * Changelog of \ref _resolvable.
+     */
+    Changelog _changelog;
+
+    /**
+     * Callback for processing package metadata passed in through constructor.
+     */
+    ProcessPackage _callback;
+
+    /**
+     * Progress reporting object.
+     */
+    ProgressData _ticks;
+  };
+  ///////////////////////////////////////////////////////////////////////
+
+  OtherFileReader::Impl::Impl(
+      const Pathname & other_file,
+      const ProcessPackage & callback,
+      const ProgressData::ReceiverFnc & progress)
+    :
+      _callback(callback)
+  {
+    _ticks.sendTo(progress);
+    _ticks.name("other.xml.gz");
+
+    Reader reader(other_file);
+    MIL << "Reading " << other_file << endl;
+    reader.foreachNode(bind(&OtherFileReader::Impl::consumeNode, this, _1));
+  }
+
   // --------------------------------------------------------------------------
 
   /*
@@ -38,24 +109,7 @@ namespace zypp
 
   // --------------------------------------------------------------------------
 
-  OtherFileReader::OtherFileReader(
-      const Pathname & other_file,
-      const ProcessPackage & callback,
-      const ProgressData::ReceiverFnc & progress)
-    :
-      _callback(callback)
-  {
-    _ticks.sendTo(progress);
-    _ticks.name("other.xml.gz");
-
-    Reader reader(other_file);
-    MIL << "Reading " << other_file << endl;
-    reader.foreachNode(bind(&OtherFileReader::consumeNode, this, _1));
-  }
-
-  // --------------------------------------------------------------------------
-
-  bool OtherFileReader::consumeNode(Reader & reader_r)
+  bool OtherFileReader::Impl::consumeNode(Reader & reader_r)
   {
     if (reader_r->nodeType() == XML_READER_TYPE_ELEMENT)
     {
@@ -128,12 +182,30 @@ namespace zypp
 
   // --------------------------------------------------------------------------
 
-  data::Resolvable_Ptr OtherFileReader::handoutResolvable()
+  data::Resolvable_Ptr OtherFileReader::Impl::handoutResolvable()
   {
     data::Resolvable_Ptr ret;
     ret.swap(_resolvable);
     return ret;
   }
+
+
+  ///////////////////////////////////////////////////////////////////
+  //
+  //  CLASS NAME : OtherFileReader
+  //
+  ///////////////////////////////////////////////////////////////////
+
+  OtherFileReader::OtherFileReader(
+      const Pathname & other_file,
+      const ProcessPackage & callback,
+      const ProgressData::ReceiverFnc & progress)
+    :
+      _pimpl(new Impl(other_file, callback, progress))
+  {}
+
+  OtherFileReader::~OtherFileReader()
+  {}
 
 
     } // ns yum

@@ -6,73 +6,169 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-
-#include <fstream>
+/** \file zypp/parser/yum/RepomdFileReader.cc
+ * Implementation of repomd.xml file reader.
+ */
 #include "zypp/base/String.h"
 #include "zypp/base/Logger.h"
-#include "zypp/parser/yum/RepomdFileReader.h"
 
+#include "zypp/Date.h"
+#include "zypp/CheckSum.h"
+#include "zypp/parser/xml/Reader.h"
+
+#include "zypp/parser/yum/RepomdFileReader.h"
 
 using namespace std;
 using namespace zypp::xml;
 using zypp::source::yum::YUMResourceType;
 
-namespace zypp { namespace parser { namespace yum {
+namespace zypp
+{
+  namespace parser
+  {
+    namespace yum
+    {
 
-RepomdFileReader::RepomdFileReader( const Pathname &repomd_file, ProcessResource callback )
-    : _tag(tag_NONE), _type(YUMResourceType::NONE_e), _callback(callback) 
-{
-  Reader reader( repomd_file );
-  MIL << "Reading " << repomd_file << endl;
-  reader.foreachNode( bind( &RepomdFileReader::consumeNode, this, _1 ) );
-}
-  
-bool RepomdFileReader::consumeNode( Reader & reader_r )
-{
-  //MIL << reader_r->name() << endl;
-  std::string data_type;
-  if ( reader_r->nodeType() == XML_READER_TYPE_ELEMENT )
+
+  ///////////////////////////////////////////////////////////////////////
+  //
+  //  CLASS NAME : RepomdFileReader::Impl
+  //
+  class RepomdFileReader::Impl : private base::NonCopyable
   {
-    if ( reader_r->name() == "repomd" )
+  public:
+
+    /**
+     * Enumeration of repomd.xml tags.
+     * \see _tag
+     */
+    enum Tag
     {
-      _tag = tag_Repomd;
-      return true;
-    }
-    if ( reader_r->name() == "data" )
-    {
-      _tag = tag_Data;
-      _type = YUMResourceType(reader_r->getAttribute("type").asString());
-      return true;
-    }
-    if ( reader_r->name() == "location" )
-    {
-      _tag = tag_Location;
-      _location.filename( reader_r->getAttribute("href").asString() );
-      return true;
-    }
-    if ( reader_r->name() == "checksum" )
-    {
-      _tag = tag_CheckSum;
-      string checksum_type = reader_r->getAttribute("type").asString() ;
-      string checksum_vaue = reader_r.nodeText().asString();
-      _location.checksum( CheckSum( checksum_type, checksum_vaue ) );
-      return true;
-    }
-    if ( reader_r->name() == "timestamp" )
-    {
-      // ignore it
-      return true;
-    }
+      tag_NONE,
+      tag_Repomd,
+      tag_Data,
+      tag_Location,
+      tag_CheckSum,
+      tag_Timestamp,
+      tag_OpenCheckSum
+    };
+
+  public:
+    /**
+     * CTOR
+     * 
+     * \see RepomdFileReader::RepomdFileReader(Pathname,ProcessResource)
+     */
+    Impl(const Pathname &repomd_file, const ProcessResource & callback);
+
+    /**
+     * Callback provided to the XML parser.
+     */
+    bool consumeNode( Reader & reader_r );
+
+
+  private:
+    /** Location of metadata file. */
+    OnMediaLocation _location;
+
+    /** Used to remember currently processed tag */
+    Tag _tag;
+
+    /** Type of metadata file. */
+    source::yum::YUMResourceType _type;
+
+    /** Function for processing collected data. Passed in through constructor. */
+    ProcessResource _callback;
+
+    /** Checksum of metadata file */
+    CheckSum _checksum;
+    
+    /** Type of checksum of metadata file */
+    std::string _checksum_type;
+
+    /** Metadata file time-stamp. */
+    Date _timestamp;
+  };
+  ///////////////////////////////////////////////////////////////////////
+
+  RepomdFileReader::Impl::Impl(
+      const Pathname &repomd_file, const ProcessResource & callback)
+    :
+      _tag(tag_NONE), _type(YUMResourceType::NONE_e), _callback(callback) 
+  {
+    Reader reader( repomd_file );
+    MIL << "Reading " << repomd_file << endl;
+    reader.foreachNode( bind( &RepomdFileReader::Impl::consumeNode, this, _1 ) );
   }
-  else if ( reader_r->nodeType() == XML_READER_TYPE_END_ELEMENT )
+
+  // --------------------------------------------------------------------------
+
+  bool RepomdFileReader::Impl::consumeNode( Reader & reader_r )
   {
-    //MIL << "end element" << endl;
-    if ( reader_r->name() == "data" )
-      _callback( _location, _type );
+    //MIL << reader_r->name() << endl;
+    std::string data_type;
+    if ( reader_r->nodeType() == XML_READER_TYPE_ELEMENT )
+    {
+      if ( reader_r->name() == "repomd" )
+      {
+        _tag = tag_Repomd;
+        return true;
+      }
+      if ( reader_r->name() == "data" )
+      {
+        _tag = tag_Data;
+        _type = YUMResourceType(reader_r->getAttribute("type").asString());
+        return true;
+      }
+      if ( reader_r->name() == "location" )
+      {
+        _tag = tag_Location;
+        _location.filename( reader_r->getAttribute("href").asString() );
+        return true;
+      }
+      if ( reader_r->name() == "checksum" )
+      {
+        _tag = tag_CheckSum;
+        string checksum_type = reader_r->getAttribute("type").asString() ;
+        string checksum_vaue = reader_r.nodeText().asString();
+        _location.checksum( CheckSum( checksum_type, checksum_vaue ) );
+        return true;
+      }
+      if ( reader_r->name() == "timestamp" )
+      {
+        // ignore it
+        return true;
+      }
+    }
+    else if ( reader_r->nodeType() == XML_READER_TYPE_END_ELEMENT )
+    {
+      //MIL << "end element" << endl;
+      if ( reader_r->name() == "data" )
+        _callback( _location, _type );
+      return true;
+    }
     return true;
   }
-  return true;
-}
 
-} } } //ns zypp::source::yum
 
+  ///////////////////////////////////////////////////////////////////
+  //
+  //  CLASS NAME : RepomdFileReader
+  //
+  ///////////////////////////////////////////////////////////////////
+
+  RepomdFileReader::RepomdFileReader(
+      const Pathname & repomd_file, const ProcessResource & callback)
+    :
+      _pimpl(new Impl(repomd_file, callback)) 
+  {}
+
+  RepomdFileReader::~RepomdFileReader()
+  {}
+
+
+    } // ns yum
+  } // ns parser
+} // ns zypp
+
+// vim: set ts=2 sts=2 sw=2 et ai:

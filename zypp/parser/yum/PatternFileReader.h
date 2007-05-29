@@ -7,10 +7,10 @@
 |                                                                      |
 \---------------------------------------------------------------------*/
 /** \file zypp/parser/yum/PatternFileReader.h
- * 
+ * Interface of patterns.xml file reader.
  */
-#ifndef PATTERNFILEREADER_H_
-#define PATTERNFILEREADER_H_
+#ifndef ZYPP_PARSER_YUM_PATTERNFILEREADER_H_
+#define ZYPP_PARSER_YUM_PATTERNFILEREADER_H_
 
 #include "zypp/parser/yum/FileReaderBase.h"
 
@@ -70,4 +70,4 @@ namespace zypp
   } // ns parser
 } // ns zypp
 
-#endif /*PATTERNFILEREADER_H_*/
+#endif /*ZYPP_PARSER_YUM_PATTERNFILEREADER_H_*/

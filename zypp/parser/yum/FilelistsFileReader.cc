@@ -6,8 +6,11 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-
-#include <fstream>
+/** \file zypp/parser/yum/FilelistsFileReader.cc
+ * Implementation of filelists.xml.gz file reader.
+ */
+#include "zypp/base/Logger.h"
+#include "zypp/parser/xml/Reader.h"
 
 #include "zypp/parser/yum/FilelistsFileReader.h"
 
@@ -25,6 +28,72 @@ namespace zypp
     {
 
 
+  ///////////////////////////////////////////////////////////////////////
+  //
+  //  CLASS NAME : FilelistsFileReader::Impl
+  //
+  class FilelistsFileReader::Impl : private base::NonCopyable
+  {
+  public:
+    Impl(
+      const Pathname & filelists_file,
+      const ProcessPackage & callback,
+      const ProgressData::ReceiverFnc & progress = ProgressData::ReceiverFnc());
+
+  public:
+
+    /**
+     * Callback provided to the XML parser.
+     */
+    bool consumeNode(xml::Reader & reader_r);
+
+    /**
+     * Creates a new \ref data::Resolvable_Ptr, swaps its contents with
+     * \ref _resolvable and returns it. Used to hand-out the data object to its consumer
+     * (a \ref ProcessPackage function) after it has been read.
+     */
+    data::Resolvable_Ptr handoutResolvable();
+
+  private:
+
+    /**
+     * Pointer to the \ref zypp::data::Resolvable object for storing the NVRA
+     * data.
+     */
+    zypp::data::Resolvable_Ptr _resolvable;
+
+    /**
+     * Changelog of \ref _resolvable.
+     */
+    data::Filenames _filenames;
+
+    /**
+     * Callback for processing package metadata. Passed in through constructor.
+     */
+    ProcessPackage _callback;
+
+    /**
+     * Progress reporting object.
+     */
+    ProgressData _ticks;
+  };
+  ///////////////////////////////////////////////////////////////////////
+
+  FilelistsFileReader::Impl::Impl(
+      const Pathname & filelists_file,
+      const ProcessPackage & callback,
+      const ProgressData::ReceiverFnc & progress)
+    :
+      _callback(callback)
+  {
+    _ticks.sendTo(progress);
+    _ticks.name("filelist.xml.gz");
+
+    Reader reader(filelists_file);
+    MIL << "Reading " << filelists_file << endl;
+    reader.foreachNode(bind(&FilelistsFileReader::Impl::consumeNode, this, _1));
+  }
+
   // --------------------------------------------------------------------------
 
   /*
@@ -38,24 +107,8 @@ namespace zypp
 
   // --------------------------------------------------------------------------
 
-  FilelistsFileReader::FilelistsFileReader(
-      const Pathname & filelist_file,
-      const ProcessPackage & callback,
-      const ProgressData::ReceiverFnc & progress)
-    :
-      _callback(callback)
-  {
-    _ticks.sendTo(progress);
-    _ticks.name("filelist.xml.gz");
 
-    Reader reader(filelist_file);
-    MIL << "Reading " << filelist_file << endl;
-    reader.foreachNode(bind(&FilelistsFileReader::consumeNode, this, _1));
-  }
-
-  // --------------------------------------------------------------------------
-
-  bool FilelistsFileReader::consumeNode(Reader & reader_r)
+  bool FilelistsFileReader::Impl::consumeNode(Reader & reader_r)
   {
     if (reader_r->nodeType() == XML_READER_TYPE_ELEMENT)
     {
@@ -125,7 +178,7 @@ namespace zypp
 
   // --------------------------------------------------------------------------
 
-  data::Resolvable_Ptr FilelistsFileReader::handoutResolvable()
+  data::Resolvable_Ptr FilelistsFileReader::Impl::handoutResolvable()
   {
     data::Resolvable_Ptr ret;
     ret.swap(_resolvable);
@@ -133,9 +186,26 @@ namespace zypp
   }
 
 
+  ///////////////////////////////////////////////////////////////////
+  //
+  //  CLASS NAME : FilelistsFileReader
+  //
+  ///////////////////////////////////////////////////////////////////
+
+  FilelistsFileReader::FilelistsFileReader(
+      const Pathname & filelists_file,
+      const ProcessPackage & callback,
+      const ProgressData::ReceiverFnc & progress)
+    :
+      _pimpl(new Impl(filelists_file, callback, progress))
+  {}
+
+  FilelistsFileReader::~FilelistsFileReader()
+  {}
+
+
     } // ns yum
   } // ns parser
 } // ns zypp
 
 // vim: set ts=2 sts=2 sw=2 et ai:
-

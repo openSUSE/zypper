@@ -6,16 +6,18 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-
+/** \file zypp/parser/yum/OtherFileReader.h
+ * Interface of other.xml.gz file reader.
+ */
 #ifndef OTHERFILEREADER_H_
 #define OTHERFILEREADER_H_
 
-#include "zypp/base/Function.h"
-#include "zypp/base/Logger.h"
-#include "zypp/parser/xml/Reader.h"
+#include "zypp/base/PtrTypes.h"
+#include "zypp/base/NonCopyable.h"
 #include "zypp/data/ResolvableData.h"
+#include "zypp/base/Function.h"
+
 #include "zypp/ProgressData.h"
-#include "zypp/Changelog.h"
 
 namespace zypp
 {
@@ -27,7 +29,7 @@ namespace zypp
 
   /**
    * Reads through a other.xml file and collects additional package data
-   * (currently only changelogs).
+   * (changelogs).
    *
    * After a package is read, a \ref data::Resolvable
    * and \ref Changelog is prepared and \ref _callback
@@ -37,10 +39,10 @@ namespace zypp
    *
    * \code
    * OtherFileReader reader(other_file,
-   *                        bind(&SomeClass::callbackfunc, &object, _1));
+   *                        bind(&SomeClass::callbackfunc, &SomeClassInstance, _1, _2));
    * \endcode
    */
-  class OtherFileReader
+  class OtherFileReader : private base::NonCopyable
   {
   public:
     /**
@@ -49,7 +51,8 @@ namespace zypp
     typedef function<bool(const data::Resolvable_Ptr &, const Changelog)> ProcessPackage;
 
     /**
-     * Constructor
+     * CTOR. Creates also \ref xml::Reader and starts reading.
+     * 
      * \param other_file the other.xml.gz file you want to read
      * \param callback function to process \ref _resolvable data.
      * \param progress progress reporting object
@@ -60,43 +63,15 @@ namespace zypp
       const Pathname & other_file,
       const ProcessPackage & callback,
       const ProgressData::ReceiverFnc & progress = ProgressData::ReceiverFnc());
+    
+    /**
+     * DTOR
+     */
+    ~OtherFileReader();
 
   private:
-
-    /**
-     * Callback provided to the XML parser.
-     */
-    bool consumeNode(xml::Reader & reader_r);
-
-    /**
-     * Creates a new \ref data::Resolvable_Ptr, swaps its contents with
-     * \ref _resolvable and returns it. Used to hand-out the data object to its consumer
-     * (a \ref ProcessPackage function) after it has been read.
-     */
-    data::Resolvable_Ptr handoutResolvable();
-
-  private:
-
-    /**
-     * Pointer to the \ref zypp::data::Resolvable object for storing the NVRA
-     * data.
-     */
-    zypp::data::Resolvable_Ptr _resolvable;
-
-    /**
-     * Changelog of \ref _resolvable.
-     */
-    Changelog _changelog;
-
-    /**
-     * Callback for processing package metadata passed in through constructor.
-     */
-    ProcessPackage _callback;
-
-    /**
-     * Progress reporting object.
-     */
-    ProgressData _ticks;
+    class Impl;
+    RW_pointer<Impl,rw_pointer::Scoped<Impl> > _pimpl;
   };
 
 

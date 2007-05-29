@@ -6,14 +6,17 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
+/** \file zypp/parser/yum/FilelistsFileReader.h
+ * Interface of filelists.xml.gz file reader.
+ */
+#ifndef ZYPP_PARSER_YUM_FILELISTFILEREADER_H_
+#define ZYPP_PARSER_YUM_FILELISTFILEREADER_H_
 
-#ifndef FILELISTFILEREADER_H_
-#define FILELISTFILEREADER_H_
-
+#include "zypp/base/PtrTypes.h"
+#include "zypp/base/NonCopyable.h"
 #include "zypp/base/Function.h"
-#include "zypp/base/Logger.h"
-#include "zypp/parser/xml/Reader.h"
 #include "zypp/data/ResolvableData.h"
+
 #include "zypp/ProgressData.h"
 
 namespace zypp
@@ -39,7 +42,7 @@ namespace zypp
    *                        bind(&SomeClass::callbackfunc, &SomeClassInstance, _1, _2));
    * \endcode
    */
-  class FilelistsFileReader
+  class FilelistsFileReader : private base::NonCopyable
   {
   public:
     /**
@@ -48,7 +51,8 @@ namespace zypp
     typedef function<bool(const data::Resolvable_Ptr &, const data::Filenames &)> ProcessPackage;
 
     /**
-     * Constructor
+     * CTOR. Creates also \ref xml::Reader and starts reading.
+     * 
      * \param filelists_file the filelists.xml.gz file you want to read
      * \param callback function to process \ref _resolvable data.
      * \param progress progress reporting object
@@ -60,42 +64,14 @@ namespace zypp
       const ProcessPackage & callback,
       const ProgressData::ReceiverFnc & progress = ProgressData::ReceiverFnc());
 
-  private:
-
     /**
-     * Callback provided to the XML parser.
+     * DTOR.
      */
-    bool consumeNode(xml::Reader & reader_r);
-
-    /**
-     * Creates a new \ref data::Resolvable_Ptr, swaps its contents with
-     * \ref _resolvable and returns it. Used to hand-out the data object to its consumer
-     * (a \ref ProcessPackage function) after it has been read.
-     */
-    data::Resolvable_Ptr handoutResolvable();
+    ~FilelistsFileReader();
 
   private:
-
-    /**
-     * Pointer to the \ref zypp::data::Resolvable object for storing the NVRA
-     * data.
-     */
-    zypp::data::Resolvable_Ptr _resolvable;
-
-    /**
-     * Changelog of \ref _resolvable.
-     */
-    data::Filenames _filenames;
-
-    /**
-     * Callback for processing package metadata passed in through constructor.
-     */
-    ProcessPackage _callback;
-
-    /**
-     * Progress reporting object.
-     */
-    ProgressData _ticks;
+    class Impl;
+    RW_pointer<Impl,rw_pointer::Scoped<Impl> > _pimpl;
   };
 
 
@@ -103,6 +79,6 @@ namespace zypp
   } // ns parser
 } // ns yum
 
-#endif /*FILELISTFILEREADER_H_*/
+#endif /*ZYPP_PARSER_YUM_FILELISTFILEREADER_H_*/
 
 // vim: set ts=2 sts=2 sw=2 et ai:
