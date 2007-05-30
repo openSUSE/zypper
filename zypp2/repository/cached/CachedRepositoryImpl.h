@@ -18,11 +18,9 @@
 #include "zypp/data/RecordId.h"
 #include "zypp2/repository/RepositoryImpl.h"
 #include "zypp/ResStore.h"
-
-#include <sqlite3.h>
 #include "zypp2/cache/sqlite3x/sqlite3x.hpp"
-
 #include "zypp2/cache/CacheTypes.h"
+#include "zypp2/cache/ResolvableQuery.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -52,6 +50,9 @@ namespace zypp
         ~CachedRepositoryImpl();
 
       public:
+        
+        cache::ResolvableQuery resolvableQuery();
+        
         /** String identifying the type of the source. */
 	static std::string typeString()
 	{ return "CachedSource"; }
@@ -88,6 +89,8 @@ namespace zypp
         
         cache::CacheTypes _type_cache;
         data::RecordId _repository_id;
+        
+        cache::ResolvableQuery _rquery;
       };
       ///////////////////////////////////////////////////////////////////
 

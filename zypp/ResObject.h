@@ -33,7 +33,10 @@ namespace zypp
   //
   //	CLASS NAME : ResObject
   //
-  /** Interface base for resolvable objects (common data).
+  /**
+   * Interface base for resolvable objects (common data).
+   * That is, all data not needed for solving, but common
+   * across al Resolvable kinds.
   */
   class ResObject : public Resolvable
   {
@@ -45,22 +48,46 @@ namespace zypp
     typedef TraitsType::constPtrType constPtr;
 
   public:
-    /** */
+    /**
+     * \short Short text describing the resolvable.
+     * This attribute is usually displayed in columns.
+     */
     Text summary() const;
 
-    /** */
+    /**
+     * \short Long text describing the resolvable.
+     */
     Text description() const;
 
-    /** */
+    /**
+     * \short Installation Notification
+     *
+     * This text can be used to tell the user some notes
+     * When he selects the resovable for installation.
+     */
     Text insnotify() const;
 
-    /** */
+    /**
+     * \short De-Installation Notification
+     *
+     * This text can be used to tell the user some notes
+     * When he selects the resovable for deinstall.
+     */
     Text delnotify() const;
 
-    /** */
+    /**
+     * \short License or agreement to accept
+     *
+     * Agreement, warning or license the user should
+     * accept before installing the resolvable.
+     */
     Text licenseToConfirm() const;
 
-    /** */
+    /**
+     * \short Vendor
+     *
+     * For Example "Novell Inc."
+     */
     Vendor vendor() const;
 
     /** Installed size. */
@@ -69,30 +96,43 @@ namespace zypp
     /** Size of the rpm package. */
     ByteCount archivesize() const;
 
-    /** Backlink to the source providing this. */
+    /**
+     * Source providing this resolvable
+     */
     Source_Ref source() const;
 
-    /** Number of the source media that provides the data
-     *  required for installation. Zero, if no media access
-     *  is required.
+    /**
+     * Media number where the resolvable is located
+     * 0 if no media access is required.
     */
     unsigned sourceMediaNr() const;
 
-    /** Use sourceMediaNr */
+    /**
+     * \deprecated Use sourceMediaNr 
+     */
     ZYPP_DEPRECATED unsigned mediaId() const
     { return sourceMediaNr(); }
 
-    /** */
+    /**
+     * \TODO FIXME what is this?
+     */
     bool installOnly() const;
 
-    /** */
+    /**
+     * \short build time of the resolvable
+     */
     Date buildtime() const;
 
-    /** Time of installation, or \c 0 */
+    /**
+     * \short Installation time
+     * 0 if the resolvable is not installed.
+     */
     Date installtime() const;
 
-    /** */
-    ZmdId zmdid () const;
+    /**
+     * \deprecated No replacement.
+     */
+    ZYPP_DEPRECATED ZmdId zmdid () const;
 
   protected:
     /** Ctor */

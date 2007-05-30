@@ -12,12 +12,9 @@
 
 #include "zypp/base/Logger.h"
 #include "zypp/base/Measure.h"
-
-#include "zypp2/cache/QueryFactory.h"
-#include "zypp2/cache/CapabilityQuery.h"
-#include "zypp2/cache/sqlite_detail/CacheSqlite.h"
+#include "zypp/capability/Capabilities.h"
+#include "zypp2/cache/ResolvableQuery.h"
 #include "zypp2/cache/CacheCommon.h"
-#include "zypp2/cache/sqlite_detail/QueryFactoryImpl.h"
 #include "zypp/detail/ResImplTraits.h"
 #include "zypp/CapFactory.h"
 
@@ -43,7 +40,8 @@ namespace cached
 CachedRepositoryImpl::CachedRepositoryImpl( const Pathname &dbdir, const data::RecordId &repository_id )
   : _dbdir(dbdir),
     _type_cache(dbdir),
-    _repository_id(repository_id)
+    _repository_id(repository_id),
+    _rquery(dbdir)
 {
 
 }
@@ -96,7 +94,7 @@ void CachedRepositoryImpl::createResolvables()
     
     for ( map<data::RecordId, NVRAD>::const_iterator it = nvras.begin(); it != nvras.end(); ++it )
     {
-      ResImplTraits<CachedRepositoryPackageImpl>::Ptr impl = new CachedRepositoryPackageImpl(selfRepository());
+      ResImplTraits<CachedRepositoryPackageImpl>::Ptr impl = new CachedRepositoryPackageImpl(it->first, this);
       Package::Ptr package = detail::makeResolvableFromImpl( it->second, impl );
       _store.insert (package);
     }
@@ -107,6 +105,12 @@ void CachedRepositoryImpl::createResolvables()
    }
   //extract_packages_from_directory( _store, thePath, selfRepositoryRef(), true );
    
+}
+
+
+ResolvableQuery CachedRepositoryImpl::resolvableQuery()
+{
+  return _rquery;
 }
 
 void CachedRepositoryImpl::read_capabilities( sqlite3_connection &con, map<data::RecordId, NVRAD> &nvras )

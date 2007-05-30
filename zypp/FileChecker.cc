@@ -47,7 +47,7 @@ namespace zypp
     }
     else
     {
-      if ( (real_checksum == _checksum) )
+      if ( (real_checksum != _checksum) )
       {
         if ( report->askUserToAcceptWrongDigest( file, _checksum.checksum(), real_checksum.checksum() ) )
         {

@@ -15,7 +15,6 @@
 #include "zypp/TranslatedText.h"
 #include "zypp/base/String.h"
 #include "zypp/base/Logger.h"
-#include "zypp2/cache/CachedResolvableDataProvider.h"
 
 using namespace std;
 using namespace zypp::detail;

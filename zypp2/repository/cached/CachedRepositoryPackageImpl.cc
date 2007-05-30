@@ -13,13 +13,13 @@
 #include "zypp/TranslatedText.h"
 #include "zypp/base/String.h"
 #include "zypp/base/Logger.h"
-#include "zypp2/cache/CachedResolvableDataProvider.h"
 #include "zypp2/repository/RepositoryImpl.h"
 #include "CachedRepositoryPackageImpl.h"
 
 
 using namespace std;
 using namespace zypp::detail;
+using zypp::repository::cached::CachedRepositoryImpl;
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -33,61 +33,62 @@ namespace zypp
 
 /** Default ctor
 */
-CachedRepositoryPackageImpl::CachedRepositoryPackageImpl (Repository repository_r)
+CachedRepositoryPackageImpl::CachedRepositoryPackageImpl (const data::RecordId &id, repository::cached::CachedRepositoryImpl::Ptr repository_r)
     : _repository (repository_r)
     , _install_only(false)
     , _size_installed(0)
     , _size_archive(0)
     , _data_loaded(false)
+    , _id(id)
 {}
 
 Repository
 CachedRepositoryPackageImpl::repository() const
 {
-  return _repository;
+  return _repository->selfRepository();
 }
 
 /** Package summary */
 TranslatedText CachedRepositoryPackageImpl::summary() const
 {
-  return _summary;
+  return _repository->resolvableQuery().queryTranslatedStringAttribute( _id, "ResObject", "summary" );
 }
 
 /** Package description */
 TranslatedText CachedRepositoryPackageImpl::description() const
 {
-  return _description;
+  return _repository->resolvableQuery().queryTranslatedStringAttribute( _id, "ResObject", "description" );
 }
 
 PackageGroup CachedRepositoryPackageImpl::group() const
 {
-  return _group;
+  return _repository->resolvableQuery().queryStringAttribute( _id, "Package", "group" );
 }
 
 Pathname CachedRepositoryPackageImpl::location() const
 {
-  return _location;
+  return _repository->resolvableQuery().queryStringAttribute( _id, "Package", "group" );
 }
 
 ByteCount CachedRepositoryPackageImpl::size() const
 {
-  return _size_installed;
+  return _repository->resolvableQuery().queryNumericAttribute( _id, "ResObject", "size" );
 }
 
 /** */
 ByteCount CachedRepositoryPackageImpl::archivesize() const
 {
-  return _size_archive;
+  return _repository->resolvableQuery().queryNumericAttribute( _id, "ResObject", "archivesize" );
 }
 
 bool CachedRepositoryPackageImpl::installOnly() const
 {
-  return _install_only;
+  return _repository->resolvableQuery().queryNumericAttribute( _id, "ResObject", "installOnly" );
 }
 
 unsigned CachedRepositoryPackageImpl::repositoryMediaNr() const
 {
-  return _media_nr;
+  return _repository->resolvableQuery().queryNumericAttribute( _id, "ResObject", "repositoryMediaNr" );
 }
 
 Vendor CachedRepositoryPackageImpl::vendor() const

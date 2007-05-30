@@ -38,12 +38,7 @@ SET( zypp2_cache_SRCS
   ${CMAKE_BINARY_DIR}/zypp2/schema.h
   cache/CacheInitializer.cpp
   cache/CacheTypes.cc
-#  cache/QueryFactory.cc
-#  cache/CapabilityQuery.cc
   cache/ResolvableQuery.cc
-#  cache/CachedResolvableDataProvider.cc
-#  cache/sqlite_detail/CapabilityQueryImpl.cc
-#  cache/sqlite_detail/QueryFactoryImpl.cc
   cache/CacheStore.cpp
   cache/CacheFSCK.cc
   cache/Utils.cpp
@@ -56,10 +51,7 @@ SET( zypp2_cache_HEADERS
   cache/CacheStore.h
   cache/CacheFSCK.h
   cache/ResolvableQuery.h
-#  cache/CapablityQuery.h
-#  cache/QueryFactory.h
   cache/Utils.h
-#  cache/CachedResolvableDataProvider.h
 )
 
 #INSTALL(  FILES

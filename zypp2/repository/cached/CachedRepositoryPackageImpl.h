@@ -13,8 +13,7 @@
 #define CachedRepositoryPackageImpl_H
 
 #include "zypp/detail/PackageImpl.h"
-#include "zypp2/Repository.h"
-//#include <sqlite3.h>
+#include "zypp2/repository/cached/CachedRepositoryImpl.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -28,7 +27,7 @@ namespace zypp
   {
   public:
 
-    CachedRepositoryPackageImpl( Repository repository_r );
+    CachedRepositoryPackageImpl( const data::RecordId &id, repository::cached::CachedRepositoryImpl::Ptr repository_r );
     
     virtual TranslatedText summary() const;
     virtual TranslatedText description() const;
@@ -42,7 +41,7 @@ namespace zypp
     virtual Vendor vendor() const;
 
   protected:
-    Repository _repository;
+    repository::cached::CachedRepositoryImpl::Ptr _repository;
     TranslatedText _summary;
     TranslatedText _description;
     PackageGroup _group;
@@ -54,6 +53,7 @@ namespace zypp
     ByteCount _size_archive;
 
     bool _data_loaded;
+    data::RecordId _id;
   };
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

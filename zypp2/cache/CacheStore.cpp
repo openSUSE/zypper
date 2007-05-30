@@ -184,6 +184,14 @@ void CacheStore::commit()
   _pimpl->con.executenonquery("COMMIT;");
 }
 
+void CacheStore::consumeResObject( const data::RecordId &rid, data::ResObject_Ptr res )
+{
+  appendTranslatedStringAttribute( rid, "ResObject", "description", res->description );
+  appendTranslatedStringAttribute( rid, "ResObject", "summary", res->summary );
+  appendNumericAttribute( rid, "ResObject", "installedSize", res->installedSize );
+  appendNumericAttribute( rid, "ResObject", "buildTime", res->buildTime );
+}
+
 void CacheStore::consumePackage( const RecordId &repository_id, data::Package_Ptr package )
 {
   RecordId pkgid = appendResolvable( repository_id, ResTraits<Package>::kind, NVRA( package->name, package->edition, package->arch ), package->deps );
@@ -296,15 +304,6 @@ void CacheStore::consumeFilelist( const data::RecordId &repository_id, const dat
   // TODO
   // maybe consumeFilelist(const data::RecordId & resolvable_id, data::Filenames &) will
   // be needed
-}
-
-
-void CacheStore::consumeResObject( const data::RecordId &rid, data::ResObject_Ptr res )
-{
-  appendTranslatedStringAttribute( rid, "ResObject", "description", res->description );
-  appendTranslatedStringAttribute( rid, "ResObject", "summary", res->summary );
-  appendNumericAttribute( rid, "ResObject", "installedSize", res->installedSize );
-  appendNumericAttribute( rid, "ResObject", "buildTime", res->buildTime );
 }
 
 RecordId CacheStore::appendResolvable( const RecordId &repository_id,

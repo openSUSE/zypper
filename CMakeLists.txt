@@ -183,7 +183,8 @@ ADD_SUBDIRECTORY( tests EXCLUDE_FROM_ALL )
 # INCLUDES                                                         #
 ####################################################################
 
-INCLUDE_DIRECTORIES( ${CMAKE_SOURCE_DIR} ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR})
+SET (CMAKE_INCLUDE_DIRECTORIES_BEFORE ON)
+INCLUDE_DIRECTORIES( ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR} SYSTEM )
 
 ####################################################################
 # OTHERS                                                           #
