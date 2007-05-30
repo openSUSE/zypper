@@ -14,6 +14,8 @@
 #include <boost/test/parameterized_test.hpp>
 #include <boost/test/unit_test_log.hpp>
 
+#include "KeyRingTestReceiver.h"
+
 using boost::unit_test::test_suite;
 using boost::unit_test::test_case;
 using namespace boost::unit_test::log;
@@ -21,154 +23,6 @@ using namespace boost::unit_test::log;
 using namespace std;
 using namespace zypp;
 using namespace zypp::filesystem;
-
-/**
- * Keyring Callback Receiver with some features
- * Allows to simulate and configure user answer
- * Can record which callbacks were called
- */
-struct KeyRingReceive : public zypp::callback::ReceiveReport<zypp::KeyRingReport>
-{
-  KeyRingReceive()
-  {
-    reset();
-    connect();
-  }
-
-  void reset()
-  {
-    _answer_accept_unknown_key = false;
-    _answer_trust_key = false;
-    _answer_import_key = false;
-    _answer_ver_failed = false;
-    _answer_accept_unsigned_file = false;
-    _asked_user_to_accept_unknown_key = false;
-    _asked_user_to_trust_key = false;
-    _asked_user_to_import_key = false;
-    _asked_user_to_accept_ver_failed = false;
-    _asked_user_to_accept_unsigned_file = false;
-  }
-  
-  ~KeyRingReceive()
-  {
-    disconnect();
-  }
-  
-  void answerAcceptVerFailed( bool answer )
-  { _answer_ver_failed = answer; }
-  
-  bool askedAcceptVerFailed() const
-  { return _asked_user_to_accept_ver_failed; }
-  
-  void answerAcceptUnknownKey( bool answer )
-  { _answer_accept_unknown_key = answer; }
-  
-  bool askedAcceptUnknownKey() const
-  { return _asked_user_to_accept_unknown_key; }
-  
-  void answerTrustKey( bool answer )
-  { _answer_trust_key = answer; }
-  
-  bool askedTrustKey() const
-  { return _asked_user_to_trust_key; }
-  
-  void answerImportKey( bool answer )
-  { _answer_import_key = answer; }
-  
-  bool askedImportKey() const
-  { return _asked_user_to_import_key; }
-  
-  void answerAcceptUnsignedFile( bool answer )
-  { _answer_accept_unsigned_file = answer; }
-  
-  bool askedAcceptUnsignedFile() const
-  { return _asked_user_to_accept_unsigned_file; }
-    
-  virtual bool askUserToAcceptUnsignedFile( const std::string &file )
-  {
-    MIL << std::endl;
-    _asked_user_to_accept_unsigned_file = true;
-    return _answer_accept_unsigned_file;
-  }
-  
-  virtual bool askUserToAcceptUnknownKey( const std::string &file, const std::string &id )
-  {
-    MIL << std::endl;
-    _asked_user_to_accept_unknown_key = true;
-    return _answer_accept_unknown_key;
-  }
-
-  virtual bool askUserToImportKey( const PublicKey &key )
-  {
-    MIL << std::endl;
-    _asked_user_to_import_key = true;
-    return _answer_import_key;
-  }
-
-  virtual bool askUserToTrustKey(  const PublicKey &key  )
-  {
-    MIL << std::endl;
-    _asked_user_to_trust_key = true;
-    return _answer_trust_key;
-  }
-  virtual bool askUserToAcceptVerificationFailed( const std::string &file,  const PublicKey &key  )
-  {
-    MIL << std::endl;
-    _asked_user_to_accept_ver_failed = true;
-    return _answer_ver_failed;
-  }
-  
-  // how to answer
-  bool _answer_accept_unknown_key;
-  bool _answer_trust_key;
-  bool _answer_import_key;
-  bool _answer_ver_failed;
-  bool _answer_accept_unsigned_file;
-  
-  // we use this variables to check that the
-  // callbacks were called
-  bool _asked_user_to_accept_unknown_key;
-  bool _asked_user_to_trust_key;
-  bool _asked_user_to_import_key;
-  bool _asked_user_to_accept_ver_failed;
-  bool _asked_user_to_accept_unsigned_file;
-};
-
-/**
- * Keyring Signal Receiver with some features
- * Allows to simulate and configure user answer
- * Can record which callbacks were called
- */
-struct KeyRingSignalReceiver : callback::ReceiveReport<KeyRingSignals>
-{
-  KeyRingSignalReceiver(/*RpmDb &rpmdb*/)
-  : _trusted_key_added_called(false)
-  {
-    MIL << "KeyRing signals enabled" << endl;
-    connect();
-  }
-
-  ~KeyRingSignalReceiver()
-  {
-    disconnect();
-  }
-
-  virtual void trustedKeyAdded( const PublicKey &key )
-  {
-    MIL << "TEST: trusted key added to zypp Keyring. Syncronizing keys with fake rpm keyring" << std::endl;
-    _trusted_key_added_called = true;
-    //std::cout << "trusted key added to zypp Keyring. Syncronizing keys with rpm keyring" << std::endl;
-    //_rpmdb.importZyppKeyRingTrustedKeys();
-    //_rpmdb.exportTrustedKeysInZyppKeyRing();
-  }
-
-  virtual void trustedKeyRemoved( const PublicKey &key  )
-  {
-  }
-  
-  bool _trusted_key_added_called;
-  
-};
 
 void keyring_test( const string &dir )
 {
@@ -181,8 +35,8 @@ void keyring_test( const string &dir )
   * ask for import, answer no
   */
   {
-    KeyRingReceive keyring_callbacks;
-    KeyRingSignalReceiver receiver;
+    KeyRingTestReceiver keyring_callbacks;
+    KeyRingTestSignalReceiver receiver;
     // base sandbox for playing
     TmpDir tmp_dir;
     KeyRing keyring( tmp_dir.path() );
@@ -218,8 +72,8 @@ void keyring_test( const string &dir )
   * vorrupt the file and check
   */
   {
-    KeyRingReceive keyring_callbacks;
-    KeyRingSignalReceiver receiver;
+    KeyRingTestReceiver keyring_callbacks;
+    KeyRingTestSignalReceiver receiver;
     // base sandbox for playing
     TmpDir tmp_dir;
     KeyRing keyring( tmp_dir.path() );
@@ -252,8 +106,8 @@ void keyring_test( const string &dir )
   * check without signature
   */
   {
-    KeyRingReceive keyring_callbacks;
-    KeyRingSignalReceiver receiver;
+    KeyRingTestReceiver keyring_callbacks;
+    KeyRingTestSignalReceiver receiver;
     // base sandbox for playing
     TmpDir tmp_dir;
     KeyRing keyring( tmp_dir.path() );
@@ -280,8 +134,8 @@ void keyring_test( const string &dir )
   * answer no
   */
   {
-    KeyRingReceive keyring_callbacks;
-    KeyRingSignalReceiver receiver;
+    KeyRingTestReceiver keyring_callbacks;
+    KeyRingTestSignalReceiver receiver;
     // base sandbox for playing
     TmpDir tmp_dir;
     KeyRing keyring( tmp_dir.path() );
@@ -303,8 +157,8 @@ void keyring_test( const string &dir )
   * should emit signal
   */
   {
-    KeyRingReceive keyring_callbacks;
-    KeyRingSignalReceiver receiver;
+    KeyRingTestReceiver keyring_callbacks;
+    KeyRingTestSignalReceiver receiver;
     // base sandbox for playing
     TmpDir tmp_dir;
     KeyRing keyring( tmp_dir.path() );

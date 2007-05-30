@@ -17,7 +17,9 @@ TARGET_LINK_LIBRARIES(CacheQuery zypp )
 
 ADD_TEST(CacheInitializer ${CMAKE_CURRENT_BINARY_DIR}/CacheInitializer ${CMAKE_CURRENT_SOURCE_DIR}/data )
 ADD_TEST(CacheStore ${CMAKE_CURRENT_BINARY_DIR}/CacheStore ${CMAKE_CURRENT_SOURCE_DIR}/data )
-ADD_TEST(CacheQuery ${CMAKE_CURRENT_BINARY_DIR}/CacheQuery ${CMAKE_CURRENT_SOURCE_DIR}/data )
+
+# run this test against a YUM repo
+ADD_TEST(CacheQuery ${CMAKE_CURRENT_BINARY_DIR}/CacheQuery ${CMAKE_SOURCE_DIR}/tests/repository/yum/data/10.2-updates-subset )
 
 
 

@@ -14,11 +14,9 @@
 #include "zypp/TmpPath.h"
 
 #include "zypp2/cache/CacheStore.h"
-#include "zypp2/cache/CapabilityQuery.h"
 #include "zypp/data/ResolvableData.h"
 #include "zypp2/cache/ResolvableQuery.h"
-
-#include "SimplePackagesParser.h"
+#include "zypp2/parser/yum/YUMParser.h"
 
 using namespace std;
 using namespace zypp;
@@ -26,6 +24,7 @@ using namespace zypp::debug;
 using namespace zypp::capability;
 using namespace zypp::filesystem;
 using namespace zypp::cache;
+using namespace zypp::parser::yum;
 using namespace boost::unit_test;
 
 bool result(const data::RecordId &id, data::ResObject_Ptr ptr )
@@ -36,14 +35,6 @@ bool result(const data::RecordId &id, data::ResObject_Ptr ptr )
 
 void resolvable_query_test(const string &dir)
 {
-  Pathname nvra_list = Pathname(dir) + "package-set.txt.gz";
-  
-  MIL << "parsing " << nvra_list << endl;
-  
-  list<MiniResolvable> res_list;
-  
-  parse_mini_file( nvra_list, res_list );
-  
   filesystem::TmpDir tmpdir;
   // let the store go out of scope to drop the connection
   {
@@ -51,20 +42,15 @@ void resolvable_query_test(const string &dir)
     
     data::RecordId repository_id = store.lookupOrAppendRepository( Url("http://novell.com"), "/");
     
-    zypp::debug::Measure cap_parse_timer("store resolvables");
-    for ( list<MiniResolvable>::iterator it = res_list.begin(); it != res_list.end(); it++)
-    {
-      data::RecordId id = store.appendResolvable( repository_id,
-                                        ResTraits<Package>::kind,
-                                        (*it).nvra,
-                                        (*it).deps );
-    }
-    
-    MIL << "packages writen to store" << endl;
+    YUMParser parser( repository_id, store );
+    parser.parse(dir);
+    store.commit();
   }
   
   ResolvableQuery query(tmpdir.path() );
   query.query(10, &result);
+  
+  MIL << query.queryTranslatedStringAttribute( 10, "ResObject", "summary" ).text() << endl;
 }
 
 test_suite*
@@ -74,7 +60,7 @@ init_unit_test_suite( int argc, char *argv[] )
   if (argc < 2)
   {
     datadir = TESTS_SRC_DIR;
-    datadir = (Pathname(datadir) + "/cache/data").asString();
+    datadir = (Pathname(datadir) + "/repository/yum/data/10.2-updates-subset").asString();
     cout << "CacheStore_test:"
       " path to directory with test data required as parameter. Using " << datadir  << endl;
     //return (test_suite *)0;

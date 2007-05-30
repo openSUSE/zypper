@@ -11,9 +11,7 @@
 #include "zypp/Url.h"
 #include "zypp/PathInfo.h"
 
-using std::cout;
-using std::endl;
-using std::string;
+using namespace std;
 using namespace zypp;
 using namespace boost::unit_test;
 
