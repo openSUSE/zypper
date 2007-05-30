@@ -13,6 +13,7 @@
 
 #include "zypp/parser/xml/Reader.h"
 #include "zypp/data/ResolvableData.h"
+#include "zypp/base/UserRequestException.h"
 
 #include "zypp/parser/yum/FileReaderBaseImpl.h"
 #include "zypp/parser/yum/PrimaryFileReader.h"
@@ -138,7 +139,8 @@ namespace zypp
         if (_package && _callback)
           _callback(handoutPackage());
 
-        _ticks.incr();
+        if (!_ticks.incr())
+          ZYPP_THROW(AbortRequestException());
 
         toParentTag();
         return true;

@@ -13,6 +13,7 @@
 #include "zypp/parser/xml/Reader.h"
 #include "zypp/data/ResolvableData.h"
 #include "zypp/Changelog.h"
+#include "zypp/base/UserRequestException.h"
 
 #include "zypp/parser/yum/OtherFileReader.h"
 
@@ -164,7 +165,8 @@ namespace zypp
         if (_callback && !_changelog.empty())
           _callback(handoutResolvable(), _changelog);
 
-        _ticks.incr();
+        if (!_ticks.incr())
+          ZYPP_THROW(AbortRequestException());
 
         return true;
       }

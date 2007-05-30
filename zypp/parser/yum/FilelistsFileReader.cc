@@ -11,6 +11,7 @@
  */
 #include "zypp/base/Logger.h"
 #include "zypp/parser/xml/Reader.h"
+#include "zypp/base/UserRequestException.h"
 
 #include "zypp/parser/yum/FilelistsFileReader.h"
 
@@ -160,7 +161,8 @@ namespace zypp
         if (_callback && !_filenames.empty())
           _callback(handoutResolvable(), _filenames);
 
-        _ticks.incr();
+        if (!_ticks.incr())
+          ZYPP_THROW(AbortRequestException());
 
         return true;
       }

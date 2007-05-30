@@ -14,6 +14,7 @@
 #include "zypp/ZConfig.h"
 #include "zypp/base/Logger.h"
 
+#include "zypp/base/UserRequestException.h"
 #include "zypp/source/yum/YUMResourceType.h"
 
 #include "zypp/parser/yum/RepomdFileReader.h"
@@ -405,7 +406,8 @@ namespace zypp
         }
       }
 
-      _ticks.incr();
+      if (!_ticks.incr())
+        ZYPP_THROW(AbortRequestException());
     }
   }
 
