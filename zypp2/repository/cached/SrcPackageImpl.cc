@@ -6,11 +6,11 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file zmd/backend/dbsource/CachedSourcePackageImpl.h
+/** \file zmd/backend/dbsource/SrcPackageImpl.h
  *
 */
 
-#include "CachedSourcePackageImpl.h"
+#include "SrcPackageImpl.h"
 #include "zypp/source/SourceImpl.h"
 #include "zypp/TranslatedText.h"
 #include "zypp/base/String.h"
@@ -25,13 +25,13 @@ namespace zypp
 
 ///////////////////////////////////////////////////////////////////
 //
-//        CLASS NAME : CachedSourcePackageImpl
+//        CLASS NAME : SrcPackageImpl
 //
 ///////////////////////////////////////////////////////////////////
 
 /** Default ctor
 */
-CachedSourcePackageImpl::CachedSourcePackageImpl (Source_Ref source_r)
+SrcPackageImpl::SrcPackageImpl (Source_Ref source_r)
     : _source (source_r)
     , _install_only(false)
     , _size_installed(0)
@@ -40,55 +40,55 @@ CachedSourcePackageImpl::CachedSourcePackageImpl (Source_Ref source_r)
 {}
 
 Source_Ref
-CachedSourcePackageImpl::source() const
+SrcPackageImpl::source() const
 {
   return _source;
 }
 
 /** Package summary */
-TranslatedText CachedSourcePackageImpl::summary() const
+TranslatedText SrcPackageImpl::summary() const
 {
   return _summary;
 }
 
 /** Package description */
-TranslatedText CachedSourcePackageImpl::description() const
+TranslatedText SrcPackageImpl::description() const
 {
   return _description;
 }
 
-PackageGroup CachedSourcePackageImpl::group() const
+PackageGroup SrcPackageImpl::group() const
 {
   return _group;
 }
 
-Pathname CachedSourcePackageImpl::location() const
+Pathname SrcPackageImpl::location() const
 {
   return _location;
 }
 
-ByteCount CachedSourcePackageImpl::size() const
+ByteCount SrcPackageImpl::size() const
 {
   return _size_installed;
 }
 
 /** */
-ByteCount CachedSourcePackageImpl::archivesize() const
+ByteCount SrcPackageImpl::archivesize() const
 {
   return _size_archive;
 }
 
-bool CachedSourcePackageImpl::installOnly() const
+bool SrcPackageImpl::installOnly() const
 {
   return _install_only;
 }
 
-unsigned CachedSourcePackageImpl::sourceMediaNr() const
+unsigned SrcPackageImpl::sourceMediaNr() const
 {
   return _media_nr;
 }
 
-Vendor CachedSourcePackageImpl::vendor() const
+Vendor SrcPackageImpl::vendor() const
 {
   return "suse";
 }

@@ -6,7 +6,7 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file zmd/backend/dbrepository/CachedRepositoryPackageImpl.h
+/** \file zmd/backend/dbrepository/PackageImpl.h
  *
 */
 
@@ -14,26 +14,25 @@
 #include "zypp/base/String.h"
 #include "zypp/base/Logger.h"
 #include "zypp2/repository/RepositoryImpl.h"
-#include "CachedRepositoryPackageImpl.h"
+#include "PackageImpl.h"
 
 
 using namespace std;
 using namespace zypp::detail;
-using zypp::repository::cached::CachedRepositoryImpl;
+using namespace::zypp::repository;
 
 ///////////////////////////////////////////////////////////////////
-namespace zypp
-{ /////////////////////////////////////////////////////////////////
+namespace zypp { namespace repository { namespace cached {
 
 ///////////////////////////////////////////////////////////////////
 //
-//        CLASS NAME : CachedRepositoryPackageImpl
+//        CLASS NAME : PackageImpl
 //
 ///////////////////////////////////////////////////////////////////
 
 /** Default ctor
 */
-CachedRepositoryPackageImpl::CachedRepositoryPackageImpl (const data::RecordId &id, repository::cached::CachedRepositoryImpl::Ptr repository_r)
+PackageImpl::PackageImpl (const data::RecordId &id, cached::RepoImpl::Ptr repository_r)
     : _repository (repository_r)
     , _install_only(false)
     , _size_installed(0)
@@ -43,60 +42,60 @@ CachedRepositoryPackageImpl::CachedRepositoryPackageImpl (const data::RecordId &
 {}
 
 Repository
-CachedRepositoryPackageImpl::repository() const
+PackageImpl::repository() const
 {
   return _repository->selfRepository();
 }
 
 /** Package summary */
-TranslatedText CachedRepositoryPackageImpl::summary() const
+TranslatedText PackageImpl::summary() const
 {
   return _repository->resolvableQuery().queryTranslatedStringAttribute( _id, "ResObject", "summary" );
 }
 
 /** Package description */
-TranslatedText CachedRepositoryPackageImpl::description() const
+TranslatedText PackageImpl::description() const
 {
   return _repository->resolvableQuery().queryTranslatedStringAttribute( _id, "ResObject", "description" );
 }
 
-PackageGroup CachedRepositoryPackageImpl::group() const
+PackageGroup PackageImpl::group() const
 {
   return _repository->resolvableQuery().queryStringAttribute( _id, "Package", "group" );
 }
 
-Pathname CachedRepositoryPackageImpl::location() const
+Pathname PackageImpl::location() const
 {
   return _repository->resolvableQuery().queryStringAttribute( _id, "Package", "group" );
 }
 
-ByteCount CachedRepositoryPackageImpl::size() const
+ByteCount PackageImpl::size() const
 {
   return _repository->resolvableQuery().queryNumericAttribute( _id, "ResObject", "size" );
 }
 
 /** */
-ByteCount CachedRepositoryPackageImpl::archivesize() const
+ByteCount PackageImpl::archivesize() const
 {
   return _repository->resolvableQuery().queryNumericAttribute( _id, "ResObject", "archivesize" );
 }
 
-bool CachedRepositoryPackageImpl::installOnly() const
+bool PackageImpl::installOnly() const
 {
   return _repository->resolvableQuery().queryNumericAttribute( _id, "ResObject", "installOnly" );
 }
 
-unsigned CachedRepositoryPackageImpl::repositoryMediaNr() const
+unsigned PackageImpl::repositoryMediaNr() const
 {
   return _repository->resolvableQuery().queryNumericAttribute( _id, "ResObject", "repositoryMediaNr" );
 }
 
-Vendor CachedRepositoryPackageImpl::vendor() const
+Vendor PackageImpl::vendor() const
 {
   return "suse";
 }
 
 /////////////////////////////////////////////////////////////////
-} // namespace zypp
+} } } // namespace zypp::repository::cached
 ///////////////////////////////////////////////////////////////////
 

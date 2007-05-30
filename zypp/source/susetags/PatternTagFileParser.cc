@@ -22,7 +22,7 @@
 #include "zypp/CapFactory.h"
 
 #include "zypp/source/susetags/PatternTagFileParser.h"
-#include "zypp/parser/tagfile/ParseException.h"
+#include "zypp/parser/ParseException.h"
 #include <boost/regex.hpp>
 
 #undef ZYPP_BASE_LOGGER_LOGGROUP
@@ -30,6 +30,7 @@
 
 using namespace std;
 using namespace boost;
+using namespace zypp::parser;
 using namespace zypp::parser::tagfile;
 
 ///////////////////////////////////////////////////////////////////
@@ -72,7 +73,7 @@ Pattern::Ptr parsePattern( parser::ParserProgress::Ptr progress, Source_Ref sour
   {
     p.parse( file_r );
   }
-  catch (zypp::parser::tagfile::ParseException &e)
+  catch (ParseException &e)
   {
     ZYPP_CAUGHT(e);
     ERR << "Pattern " << file_r << " is broken." << std::endl;
@@ -106,7 +107,7 @@ void PatternTagFileParser::consume( const SingleTag &tag )
     std::vector<std::string> words;
 
     if (str::split( line, std::back_inserter(words), " " ) != 4 )
-      ZYPP_THROW( parser::tagfile::ParseException( "Expected [name version release arch] ], got [" + tag.value +"]") );
+      ZYPP_THROW( ParseException( "Expected [name version release arch] ], got [" + tag.value +"]") );
 
     _scrap->_name    = words[0];
     _scrap->_version = words[1];

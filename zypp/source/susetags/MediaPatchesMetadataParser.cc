@@ -17,10 +17,10 @@
 #include <boost/algorithm/string.hpp>
 
 #include "zypp/base/Logger.h"
-#include "zypp/base/Exception.h"
 #include "zypp/base/PtrTypes.h"
 #include "zypp/base/String.h"
 
+#include "zypp/parser/ParseException.h"
 #include "zypp/parser/tagfile/TagFileParser.h"
 #include "zypp/source/susetags/MediaPatchesMetadataParser.h"
 #include <boost/regex.hpp>

@@ -22,6 +22,7 @@
 #include "zypp/CapFactory.h"
 #include "zypp/ZYpp.h"
 
+#include "zypp/parser/ParseException.h"
 #include "zypp/parser/ParserProgress.h"
 #include "zypp/source/susetags/SelectionTagFileParser.h"
 #include <boost/regex.hpp>
@@ -31,6 +32,8 @@
 
 using namespace std;
 using namespace boost;
+using namespace zypp::parser;
+using namespace zypp::parser::tagfile;
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -51,7 +54,7 @@ Selection::Ptr parseSelection( parser::ParserProgress::Ptr progress, Source_Ref 
   {
     p.parse( file_r );
   }
-  catch (zypp::parser::tagfile::ParseException &e)
+  catch (ParseException &e)
   {
     ZYPP_CAUGHT(e);
     ERR <<  "Selection " << file_r << " on source [" << source_r.alias() << "] at URL:[" << source_r.url().asString() << "] is broken. Ignoring selection." << std::endl;
@@ -109,7 +112,7 @@ void SelectionTagFileParser::consume( const SingleTag &tag )
       selImpl->_name    = words[0];
       break;
     default:
-      ZYPP_THROW( parser::tagfile::ParseException( "Selection " + _file_r.asString() + ". Expected [name [version] [release] [arch] ], got [" + tag.value +"]"));
+      ZYPP_THROW( ParseException( "Selection " + _file_r.asString() + ". Expected [name [version] [release] [arch] ], got [" + tag.value +"]"));
       break;
     }
   }

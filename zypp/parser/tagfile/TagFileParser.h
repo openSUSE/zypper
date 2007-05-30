@@ -19,7 +19,6 @@
 #include <boost/regex.hpp>
 
 #include "zypp/parser/ParserProgress.h"
-#include "zypp/parser/tagfile/ParseException.h"
 #include "zypp/Pathname.h"
 
 ///////////////////////////////////////////////////////////////////

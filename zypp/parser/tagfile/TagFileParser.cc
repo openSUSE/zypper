@@ -22,7 +22,7 @@
 #include "zypp/PathInfo.h"
 
 #include "zypp/parser/tagfile/TagFileParser.h"
-#include "zypp/parser/tagfile/ParseException.h"
+#include "zypp/parser/ParseException.h"
 
 
 #undef ZYPP_BASE_LOGGER_LOGGROUP

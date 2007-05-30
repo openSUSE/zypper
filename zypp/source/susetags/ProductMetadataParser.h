@@ -17,8 +17,6 @@
 #include <map>
 #include <list>
 
-#include "zypp/parser/tagfile/ParseException.h"
-
 #include "zypp/CheckSum.h"
 #include "zypp/Pathname.h"
 #include "zypp/Product.h"

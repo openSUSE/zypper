@@ -7,8 +7,8 @@
 |                                                                      |
 \---------------------------------------------------------------------*/
 
-#ifndef ZYPP_CachedRepositoryImpl_H
-#define ZYPP_CachedRepositoryImpl_H
+#ifndef ZYPP_RepoImpl_H
+#define ZYPP_RepoImpl_H
 
 #include <iosfwd>
 #include <map>
@@ -34,20 +34,20 @@ namespace zypp
 
       ///////////////////////////////////////////////////////////////////
       //
-      //	CLASS NAME : CachedRepositoryImpl
+      //	CLASS NAME : RepoImpl
       //
       /** */
-      class CachedRepositoryImpl : public repository::RepositoryImpl
+      class RepoImpl : public repository::RepositoryImpl
       {
       public:
-        typedef intrusive_ptr<CachedRepositoryImpl>       Ptr;
-        typedef intrusive_ptr<const CachedRepositoryImpl> constPtr;
+        typedef intrusive_ptr<RepoImpl>       Ptr;
+        typedef intrusive_ptr<const RepoImpl> constPtr;
 
       public:
         /** Default ctor */
-        CachedRepositoryImpl( const zypp::Pathname &dbdir, const data::RecordId &repository_id );
+        RepoImpl( const zypp::Pathname &dbdir, const data::RecordId &repository_id );
         /** Dtor */
-        ~CachedRepositoryImpl();
+        ~RepoImpl();
 
       public:
         
@@ -98,7 +98,7 @@ namespace zypp
     } // namespace cached
     ///////////////////////////////////////////////////////////////////
 
-    using cached::CachedRepositoryImpl;
+    using cached::RepoImpl;
 
     /////////////////////////////////////////////////////////////////
   } // namespace source

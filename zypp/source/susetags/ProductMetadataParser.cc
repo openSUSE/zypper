@@ -18,12 +18,12 @@
 
 #include "zypp/ZYppFactory.h"
 #include "zypp/base/Logger.h"
-#include "zypp/base/Exception.h"
 #include "zypp/base/PtrTypes.h"
 #include "zypp/base/String.h"
 
 #include "zypp/CapFactory.h"
 
+#include "zypp/parser/ParseException.h"
 #include "zypp/source/susetags/ProductMetadataParser.h"
 #include "zypp/source/susetags/SuseTagsProductImpl.h"
 #include <boost/regex.hpp>
@@ -33,6 +33,7 @@
 
 using namespace std;
 using namespace boost;
+using namespace zypp::parser;
 
 typedef find_iterator<string::iterator> string_find_iterator;
 

@@ -17,9 +17,7 @@
 #include <map>
 #include <list>
 
-
 #include "zypp/parser/tagfile/TagFileParser.h"
-#include "zypp/parser/tagfile/ParseException.h"
 #include "zypp/Pattern.h"
 #include "zypp/source/susetags/SuseTagsPatternImpl.h"
 #include "zypp/Pathname.h"

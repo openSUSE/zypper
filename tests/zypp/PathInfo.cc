@@ -52,11 +52,19 @@ void pathinfo_checksum_test()
   BOOST_REQUIRE( is_checksum( file.path(), file_md5 ) );
 }
 
+void pathinfo_misc_test()
+{
+  TmpDir dir;
+  PathInfo info(dir.path());
+  BOOST_CHECK(info.isDir());
+}
+
 test_suite*
 init_unit_test_suite( int, char* [] )
 {
     test_suite* test= BOOST_TEST_SUITE( "PathInfoTest" );
     test->add( BOOST_TEST_CASE( &pathinfo_checksum_test ), 0 /* expected zero error */ );
+    test->add( BOOST_TEST_CASE( &pathinfo_misc_test ), 0 /* expected zero error */ );
     return test;
 }
 

@@ -6,17 +6,15 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file	zypp/parser/tagfile/ParseException.h
+/** \file	zypp/parser/ParseException.cc
  *
 */
-#ifndef ZYPP_PARSER_TAGFILE_PARSEEXCEPTION_H
-#define ZYPP_PARSER_TAGFILE_PARSEEXCEPTION_H
+#include <iostream>
+//#include "zypp/base/Logger.h"
 
-#include <iosfwd>
-#include <string>
+#include "zypp/parser/ParseException.h"
 
-#include "zypp/base/Exception.h"
-#include "zypp/base/UserRequestException.h"
+using std::endl;
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -24,35 +22,42 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
   namespace parser
   { /////////////////////////////////////////////////////////////////
+ 
     ///////////////////////////////////////////////////////////////////
-    namespace tagfile
-    { /////////////////////////////////////////////////////////////////
+    //
+    //	METHOD NAME : ParseException::ParseException
+    //	METHOD TYPE : Ctor
+    //
+    ParseException::ParseException()
+    : Exception( "Parse exception" )
+    {}
 
-      ///////////////////////////////////////////////////////////////////
-      //
-      //	CLASS NAME : ParseException
-      //
-      /** */
-      class ParseException : public Exception
-      {
-      public:
-        /** Default ctor */
-        ParseException();
-        /** Ctor */
-        ParseException( const std::string & msg_r );
-         /** Dtor */
-        virtual ~ParseException() throw();
-      protected:
-        virtual std::ostream & dumpOn( std::ostream & str ) const;
-      };
-      ///////////////////////////////////////////////////////////////////
-
-      /////////////////////////////////////////////////////////////////
-    } // namespace tagfile
     ///////////////////////////////////////////////////////////////////
+    //
+    //	METHOD NAME : ParseException::ParseException
+    //	METHOD TYPE : Ctor
+    //
+    ParseException::ParseException( const std::string & msg_r )
+    : Exception( msg_r )
+    {}
 
-    /** \todo cleanup by trying to get rid of tagfile namespace. */
-    using tagfile::ParseException;
+    ///////////////////////////////////////////////////////////////////
+    //
+    //	METHOD NAME : ParseException::~ParseException
+    //	METHOD TYPE : Dtor
+    //
+    ParseException::~ParseException() throw()
+    {}
+
+    ///////////////////////////////////////////////////////////////////
+    //
+    //	METHOD NAME : ParseException::dumpOn
+    //	METHOD TYPE : std::ostream &
+    //
+    std::ostream & ParseException::dumpOn( std::ostream & str ) const
+    {
+      return Exception::dumpOn( str );
+    }
 
     /////////////////////////////////////////////////////////////////
   } // namespace parser
@@ -60,4 +65,3 @@ namespace zypp
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
-#endif // ZYPP_PARSER_TAGFILE_PARSEEXCEPTION_H

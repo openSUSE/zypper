@@ -24,7 +24,7 @@ using namespace zypp::source::yum;
 void yum_download_test(const string &dir)
 {
   Pathname p = dir + "/10.2-updates-subset";
-  Url url("file:" + p.asString());
+  Url url("dir:" + p.asString());
   YUMDownloader yum(url, "/");
   filesystem::TmpDir tmp;
   
@@ -35,7 +35,7 @@ void yum_download_test(const string &dir)
   const char* files[] =
   {
     "filelists.xml.gz",
-    "other.xml.gz",
+//    "other.xml.gz",
     "patches.xml",
     "patch-fetchmsttfonts.sh-2333.xml",
     "patch-flash-player-2359.xml",
@@ -66,7 +66,7 @@ init_unit_test_suite( int argc, char *argv[] )
   if (argc < 2)
   {
     datadir = TESTS_SRC_DIR;
-    datadir = (Pathname(datadir) + "/source/yum/data").asString();
+    datadir = (Pathname(datadir) + "/repository/yum/data").asString();
     cout << "YUMDownloader_test:"
       " path to directory with test data required as parameter. Using " << datadir  << endl;
     //return (test_suite *)0;

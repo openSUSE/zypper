@@ -1,5 +1,5 @@
 
-#include "repository/RepositoryImpl.h"
+#include "zypp2/repository/RepositoryImpl.h"
 
 namespace zypp { namespace repository {
 

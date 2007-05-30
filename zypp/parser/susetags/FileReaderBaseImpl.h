@@ -18,7 +18,7 @@
 #include "zypp/base/Function.h"
 
 #include "zypp/parser/susetags/FileReaderBase.h"
-#include "zypp/parser/tagfile/ParseException.h"
+#include "zypp/parser/ParseException.h"
 #include "zypp/data/ResolvableData.h"
 
 using std::endl;

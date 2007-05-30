@@ -18,7 +18,6 @@
 #include <list>
 
 #include "zypp/parser/tagfile/TagFileParser.h"
-#include "zypp/parser/tagfile/ParseException.h"
 #include "zypp/Selection.h"
 #include "zypp/source/susetags/SuseTagsSelectionImpl.h"
 

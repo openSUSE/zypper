@@ -12,6 +12,8 @@
 #include <iostream>
 #include "zypp/base/Logger.h"
 
+#include "zypp/parser/ParseException.h"
+
 #include "zypp/source/susetags/PackagesLangParser.h"
 #include "zypp/parser/tagfile/TagFileParser.h"
 #include "zypp/Package.h"
@@ -21,6 +23,8 @@
 #include "zypp/ZYppFactory.h"
 
 using std::endl;
+using namespace zypp::parser;
+using namespace zypp::parser::tagfile;
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -31,8 +35,6 @@ namespace source
 ///////////////////////////////////////////////////////////////////
 namespace susetags
 { /////////////////////////////////////////////////////////////////
-
-using namespace parser::tagfile;
 
 struct PackagesLangParser : public parser::tagfile::TagFileParser
 {
@@ -123,7 +125,7 @@ void parsePackagesLang( parser::ParserProgress::Ptr progress, SuseTagsImpl::Ptr 
   {
     p.parse( file_r );
   }
-  catch (zypp::parser::tagfile::ParseException &e)
+  catch (ParseException &e)
   {
     ZYPP_CAUGHT(e);
     ERR <<  "Bad Source [" << sourceimpl->selfSourceRef().alias() << "] at URL:[" << sourceimpl->selfSourceRef().url().asString() << "]. Packages descriptions/translations " << file_r << " is broken. You will not see translations." << std::endl;

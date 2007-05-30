@@ -2,6 +2,8 @@
 # SOURCES                                                          #
 ####################################################################
 
+INCLUDE_DIRECTORIES(${CMAKE_CURRENT_BINARY_DIR})
+
 ADD_EXECUTABLE(mkarray ${CMAKE_SOURCE_DIR}/zypp2/cache/schema/mkarray.c )
 
 #FILE(WRITE filename "message to write"... )
@@ -81,13 +83,13 @@ SET( zypp2_repository_HEADERS
 )
 
 SET( zypp2_repository_cached_SRCS
-  repository/cached/CachedRepositoryImpl.cc
-  repository/cached/CachedRepositoryPackageImpl.cc
+  repository/cached/RepoImpl.cc
+  repository/cached/PackageImpl.cc
 )
 
 SET( zypp2_repository_cached_HEADERS
-  repository/cached/CachedRepositoryImpl.h
-  repository/cached/CachedRepositoryPackageImpl.h
+  repository/cached/RepoImpl.h
+  repository/cached/PackageImpl.h
 )
 
 SET( zypp2_repository_data_SRCS

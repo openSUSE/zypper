@@ -16,7 +16,7 @@
 #include "zypp/base/String.h"
 #include "zypp/base/IOStream.h"
 #include "zypp/base/UserRequestException.h"
-#include "zypp/parser/tagfile/ParseException.h"
+#include "zypp/parser/ParseException.h"
 
 #include "zypp/parser/TagParser.h"
 #include "zypp/ProgressData.h"

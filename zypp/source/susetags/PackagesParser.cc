@@ -16,6 +16,8 @@
 
 #include "zypp/base/Logger.h"
 
+#include "zypp/parser/ParseException.h"
+
 #include "zypp/source/susetags/PackagesParser.h"
 #include "zypp/parser/tagfile/TagFileParser.h"
 #include "zypp/Arch.h"
@@ -25,8 +27,9 @@
 
 #include "zypp/ZYppFactory.h"
 
-using std::endl;
 using namespace std;
+using namespace zypp::parser;
+using namespace zypp::parser::tagfile;
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -37,9 +40,6 @@ namespace source
 ///////////////////////////////////////////////////////////////////
 namespace susetags
 { /////////////////////////////////////////////////////////////////
-
-using namespace parser::tagfile;
-
 
 class PackageDiskUsageParser : public parser::tagfile::TagFileParser
 {
@@ -383,7 +383,7 @@ PkgContent parsePackages( parser::ParserProgress::Ptr progress, Source_Ref sourc
   {
     p.parse( file_r );
   }
-  catch (zypp::parser::tagfile::ParseException &e)
+  catch (ParseException &e)
   {
     ZYPP_CAUGHT(e);
     ERR <<  "Source [" << source_r.alias() << "] at URL:[" << source_r.url().asString() << "] has a broken packages file." << std::endl;
@@ -400,7 +400,7 @@ PkgDiskUsage parsePackagesDiskUsage( parser::ParserProgress::Ptr progress, const
   {
     duParser.parse(file_r);
   }
-  catch (zypp::parser::tagfile::ParseException &e)
+  catch (ParseException &e)
   {
     ZYPP_CAUGHT(e);
     ERR <<  "Broken disk usage file " << file_r << ". Ignoring." << std::endl;

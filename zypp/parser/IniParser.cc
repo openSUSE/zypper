@@ -18,6 +18,7 @@
 #include "zypp/base/String.h"
 #include "zypp/base/IOStream.h"
 
+#include "zypp/parser/ParseException.h"
 #include "zypp/parser/IniParser.h"
 #include "zypp/ProgressData.h"
 

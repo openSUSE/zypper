@@ -6,28 +6,30 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file zmd/backend/dbrepository/CachedRepositoryPackageImpl.h
- *
-*/
-#ifndef CachedRepositoryPackageImpl_H
-#define CachedRepositoryPackageImpl_H
+
+#ifndef CachedRepoSrcPackageImpl_H
+#define CachedRepoSrcPackageImpl_H
 
 #include "zypp/detail/PackageImpl.h"
-#include "zypp2/repository/cached/CachedRepositoryImpl.h"
+#include "zypp/Source.h"
+//#include <sqlite3.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
-
+namespace repository
+{
+namespace cached
+{
   ///////////////////////////////////////////////////////////////////
   //
-  //        CLASS NAME : CachedRepositoryPackageImpl
+  //        CLASS NAME : CachedSourcePackageImpl
   //
-  class CachedRepositoryPackageImpl : public detail::PackageImplIf
+  class SrcPackageImpl : public detail::SrcPackageImplIf
   {
   public:
 
-    CachedRepositoryPackageImpl( const data::RecordId &id, repository::cached::CachedRepositoryImpl::Ptr repository_r );
+    SrcPackageImpl( Source_Ref source_r );
     
     virtual TranslatedText summary() const;
     virtual TranslatedText description() const;
@@ -36,12 +38,12 @@ namespace zypp
     virtual ByteCount archivesize() const;
     virtual Pathname location() const;
     virtual bool installOnly() const;
-    virtual Repository repository() const;
-    virtual unsigned repositoryMediaNr() const;
+    virtual Source_Ref source() const;
+    virtual unsigned sourceMediaNr() const;
     virtual Vendor vendor() const;
 
   protected:
-    repository::cached::CachedRepositoryImpl::Ptr _repository;
+    Source_Ref _source;
     TranslatedText _summary;
     TranslatedText _description;
     PackageGroup _group;
@@ -53,10 +55,8 @@ namespace zypp
     ByteCount _size_archive;
 
     bool _data_loaded;
-    data::RecordId _id;
   };
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
 #endif // ZMD_BACKEND_DBSOURCE_DBPACKAGEIMPL_H
-

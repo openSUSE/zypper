@@ -20,7 +20,7 @@
 #include "zypp/parser/susetags/PackagesLangFileReader.h"
 #include "zypp/parser/susetags/PatternFileReader.h"
 #include "zypp/parser/susetags/RepoIndex.h"
-#include "zypp/parser/tagfile/ParseException.h"
+#include "zypp/parser/ParseException.h"
 
 #include "zypp/ZConfig.h"
 

@@ -408,6 +408,7 @@ INSTALL(  FILES
 )
 
 SET( zypp_parser_SRCS
+  parser/ParseException.cc
   parser/TagParser.cc
   parser/IniParser.cc
   parser/IniDict.cc
@@ -417,6 +418,7 @@ SET( zypp_parser_SRCS
 )
 
 SET( zypp_parser_HEADERS
+  parser/ParseException.h
   parser/TagParser.h
   parser/IniParser.h
   parser/IniDict.h
@@ -469,12 +471,10 @@ INSTALL(  FILES
 )
 
 SET( zypp_parser_tagfile_SRCS
-  parser/tagfile/ParseException.cc
   parser/tagfile/TagFileParser.cc
 )
 
 SET( zypp_parser_tagfile_HEADERS
-  parser/tagfile/ParseException.h
   parser/tagfile/TagFileParser.h
 )
 
