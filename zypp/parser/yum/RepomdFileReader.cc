@@ -77,7 +77,7 @@ namespace zypp
     /** Type of metadata file. */
     source::yum::YUMResourceType _type;
 
-    /** Function for processing collected data. Passed in through constructor. */
+    /** Function for processing collected data. Passed-in through constructor. */
     ProcessResource _callback;
 
     /** Checksum of metadata file */
@@ -103,29 +103,46 @@ namespace zypp
 
   // --------------------------------------------------------------------------
 
+  /*
+   * xpath and multiplicity of processed nodes are included in the code
+   * for convenience:
+   * 
+   * // xpath: <xpath> (?|*|+)
+   * 
+   * if multiplicity is ommited, then the node has multiplicity 'one'. 
+   */
+
+  // --------------------------------------------------------------------------
+
   bool RepomdFileReader::Impl::consumeNode( Reader & reader_r )
   {
-    //MIL << reader_r->name() << endl;
-    std::string data_type;
     if ( reader_r->nodeType() == XML_READER_TYPE_ELEMENT )
     {
+      // xpath: /repomd
       if ( reader_r->name() == "repomd" )
       {
         _tag = tag_Repomd;
         return true;
       }
+
+      // xpath: /repomd/data
       if ( reader_r->name() == "data" )
       {
         _tag = tag_Data;
         _type = YUMResourceType(reader_r->getAttribute("type").asString());
         return true;
       }
+
+      // xpath: /repomd/location
       if ( reader_r->name() == "location" )
       {
         _tag = tag_Location;
         _location.filename( reader_r->getAttribute("href").asString() );
+        // ignoring attribute xml:base
         return true;
       }
+
+      // xpath: /repomd/checksum
       if ( reader_r->name() == "checksum" )
       {
         _tag = tag_CheckSum;
@@ -134,19 +151,29 @@ namespace zypp
         _location.checksum( CheckSum( checksum_type, checksum_vaue ) );
         return true;
       }
+
+      // xpath: /repomd/timestamp
       if ( reader_r->name() == "timestamp" )
       {
         // ignore it
         return true;
       }
+
+      // xpath: /repomd/open-checksum (?)
     }
+
     else if ( reader_r->nodeType() == XML_READER_TYPE_END_ELEMENT )
     {
-      //MIL << "end element" << endl;
+      // xpath: /repomd/data
       if ( reader_r->name() == "data" )
-        _callback( _location, _type );
-      return true;
+      {
+        if (_callback)
+          _callback( _location, _type );
+
+        return true;
+      }
     }
+
     return true;
   }
 

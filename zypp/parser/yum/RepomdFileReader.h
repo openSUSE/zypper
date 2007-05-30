@@ -78,10 +78,10 @@ namespace zypp
   };
 
 
-    }
-  }
-}
+    } // ns yum
+  } // ns parser
+} // ns zypp
 
-#endif
+#endif /*zypp_source_yum_RepomdFileReader_H*/
 
-
+// vim: set ts=2 sts=2 sw=2 et ai:
