@@ -62,6 +62,14 @@ SET( DOC_INSTALL_DIR
 )
 
 ####################################################################
+# INCLUDES                                                         #
+####################################################################
+
+#SET (CMAKE_INCLUDE_DIRECTORIES_BEFORE ON)
+INCLUDE_DIRECTORIES( ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR} SYSTEM )
+
+####################################################################
+
 
 FIND_PACKAGE(Rpm REQUIRED)
 IF ( NOT RPM_FOUND)
@@ -178,13 +186,6 @@ ADD_SUBDIRECTORY( tools )
 ADD_SUBDIRECTORY( po EXCLUDE_FROM_ALL )
 ADD_SUBDIRECTORY( doc EXCLUDE_FROM_ALL )
 ADD_SUBDIRECTORY( tests EXCLUDE_FROM_ALL )
-
-####################################################################
-# INCLUDES                                                         #
-####################################################################
-
-SET (CMAKE_INCLUDE_DIRECTORIES_BEFORE ON)
-INCLUDE_DIRECTORIES( ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR} SYSTEM )
 
 ####################################################################
 # OTHERS                                                           #
