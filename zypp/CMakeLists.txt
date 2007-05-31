@@ -434,19 +434,6 @@ INSTALL(  FILES
   DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/parser
 )
 
-SET( zypp_parser_inifile_SRCS
-  parser/inifile/iniparser.c
-)
-
-SET( zypp_parser_inifile_HEADERS
-  parser/inifile/iniparser.h
-)
-
-INSTALL(  FILES
-  ${zypp_parser_inifile_HEADERS}
-  DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/parser/inifile
-)
-
 SET( zypp_parser_susetags_SRCS
   parser/susetags/RepoIndex.cc
   parser/susetags/ContentFileReader.cc
@@ -1018,7 +1005,6 @@ ${zypp_parser_yum2_SRCS}
 ${zypp_parser_xmlstore_SRCS}
 ${zypp_parser_xml_SRCS}
 ${zypp_parser_yum_SRCS}
-${zypp_parser_inifile_SRCS}
 ${zypp_parser_SRCS}
 ${zypp_source_plaindir_SRCS}
 ${zypp_source_yum_SRCS}
@@ -1071,7 +1057,6 @@ ${zypp_source_susetags_HEADERS}
 ${zypp_target_modalias_HEADERS}
 ${zypp_target_HEADERS}
 ${zypp_parser_yum_HEADERS}
-${zypp_parser_inifile_HEADERS}
 ${zypp_detail_HEADERS}
 ${zypp_pool_HEADERS}
 )

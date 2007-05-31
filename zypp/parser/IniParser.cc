@@ -17,6 +17,7 @@
 #include "zypp/base/Logger.h"
 #include "zypp/base/String.h"
 #include "zypp/base/IOStream.h"
+#include "zypp/base/UserRequestException.h"
 
 #include "zypp/parser/ParseException.h"
 #include "zypp/parser/IniParser.h"
@@ -65,7 +66,7 @@ void IniParser::endParse()
 //	METHOD NAME : IniParser::parse
 //	METHOD TYPE : void
 //
-void IniParser::parse( const InputStream & input_r )
+void IniParser::parse( const InputStream & input_r, const ProgressData::ReceiverFnc & progress )
 {
   boost::regex rxSection("^\\[(.+)\\]$");
   boost::regex rxKeyValue("^(.+)[[:space:]]*=[[:space:]]*(.+)$");
@@ -75,6 +76,7 @@ void IniParser::parse( const InputStream & input_r )
   beginParse();
 
   ProgressData ticks( makeProgressData( input_r ) );
+  ticks.sendTo(progress);
   ticks.toMin();
 
   iostr::EachLine line( input_r );
@@ -107,7 +109,10 @@ void IniParser::parse( const InputStream & input_r )
         }
       }
     }
-    ticks.set( input_r.stream().tellg() );
+    
+    // set progress and allow cancel
+    if ( ! ticks.set( input_r.stream().tellg() ) )
+      ZYPP_THROW(AbortRequestException());
   }
   ticks.toMax();
 

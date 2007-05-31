@@ -6,7 +6,7 @@
 #include "zypp/base/Exception.h"
 #include "zypp/base/Logger.h"
 #include "zypp/PathInfo.h"
-#include "zypp/parser/inifile/iniparser.h"
+#include "zypp/parser/IniDict.h"
 
 #include "zypp2/RepositoryManager.h"
 
@@ -24,19 +24,19 @@ RepositoryManager::RepositoryManager()
 
 static std::list<RepositoryInfo> repositories_in_file( const Pathname &file )
 {
-  dictionary *d = iniparser_new(file.c_str());
-  
-  if ( d == NULL )
-    ZYPP_THROW(Exception("Failed creating dictionary"));
-  
-  int n = iniparser_getnsec(d);
-  MIL << n << endl;
-  
-  for ( int i = 0; i < n; i++ )
-  {
-    MIL << iniparser_getsecname(d, i) << endl;
-    
-  }
+//   dictionary *d = iniparser_new(file.c_str());
+//   
+//   if ( d == NULL )
+//     ZYPP_THROW(Exception("Failed creating dictionary"));
+//   
+//   int n = iniparser_getnsec(d);
+//   MIL << n << endl;
+//   
+//   for ( int i = 0; i < n; i++ )
+//   {
+//     MIL << iniparser_getsecname(d, i) << endl;
+//     
+//   }
   return std::list<RepositoryInfo>();
 }
 

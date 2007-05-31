@@ -85,7 +85,7 @@ namespace zypp
        * Creates a dictionary from a InputStream
        * containing a ini structured file
        */
-      IniDict( const InputStream &is );
+      IniDict( const InputStream &is, const ProgressData::ReceiverFnc & progress = ProgressData::ReceiverFnc() );
       
       /** Dtor */
       ~IniDict();

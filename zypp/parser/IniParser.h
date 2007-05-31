@@ -47,7 +47,7 @@ public:
    * for each tag. \ref consume might throw other exceptions
    * as well.
   */
-  void parse( const InputStream & imput_r );
+  void parse( const InputStream & imput_r, const ProgressData::ReceiverFnc & progress = ProgressData::ReceiverFnc() );
 
 public:
   /** Called when start parsing. */
