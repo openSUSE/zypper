@@ -60,7 +60,7 @@ init_unit_test_suite( int argc, char *argv[] )
   if (argc < 2)
   {
     datadir = TESTS_SRC_DIR;
-    datadir = (Pathname(datadir) + "/repository/yum/data/10.2-updates-subset").asString();
+    datadir = (Pathname(datadir) + "/repo/yum/data/10.2-updates-subset").asString();
     cout << "CacheStore_test:"
       " path to directory with test data required as parameter. Using " << datadir  << endl;
     //return (test_suite *)0;
