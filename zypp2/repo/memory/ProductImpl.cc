@@ -9,7 +9,7 @@
 /** \file	zypp2/repo/memory/ProductImpl.cc
  *
 */
-#include "zypp2/repo/memory/DProductImpl.h"
+#include "zypp2/repo/memory/ProductImpl.h"
 
 using namespace std;
 

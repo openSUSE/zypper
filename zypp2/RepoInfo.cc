@@ -37,13 +37,10 @@ namespace zypp
     boost::tribool enabled;
     boost::tribool autorefresh;
     std::string type;
-    Url baseurl;
+    Url mirrorlist_url;
     std::set<Url> urls;
-    Pathname path;
     std::string alias;
     std::string name;
-    CheckSum checksum;
-    Date timestamp;
 
   public:
     /** Offer default Impl. */
@@ -104,15 +101,15 @@ namespace zypp
     return *this;
   }
 
-  RepoInfo & RepoInfo::setBaseUrl( const Url &url )
+  RepoInfo & RepoInfo::setMirrorListUrl( const Url &url )
   {
-    _pimpl->baseurl = url;
+    _pimpl->mirrorlist_url = url;
     return *this;
   }
 
-  RepoInfo & RepoInfo::setPath( const Pathname &p )
+  RepoInfo & RepoInfo::addBaseUrl( const Url &url )
   {
-    _pimpl->path = p;
+    _pimpl->urls.insert(url);
     return *this;
   }
 
@@ -134,27 +131,11 @@ namespace zypp
     return *this;
   }
 
-  RepoInfo & RepoInfo::setChecksum( const CheckSum &checksum )
-  {
-    _pimpl->checksum = checksum;
-    return *this;
-  }
-
-  RepoInfo & RepoInfo::setTimestamp( const Date &timestamp )
-  {
-    _pimpl->timestamp = timestamp;
-    return *this;
-  }
-
   tribool RepoInfo::enabled() const
   { return _pimpl->enabled; }
 
   tribool RepoInfo::autorefresh() const
   { return _pimpl->autorefresh; }
-
-  
-  Pathname RepoInfo::path() const
-  { return _pimpl->path; }
 
   std::string RepoInfo::alias() const
   { return _pimpl->alias; }
@@ -162,17 +143,11 @@ namespace zypp
   std::string RepoInfo::name() const
   { return _pimpl->name; }
 
-  CheckSum RepoInfo::checksum() const
-  { return _pimpl->checksum; }
-
-  Date RepoInfo::timestamp() const
-  { return _pimpl->timestamp; }
-
   std::string RepoInfo::type() const
   { return _pimpl->type; }
 
-  Url RepoInfo::baseUrl() const
-  { return _pimpl->baseurl; }
+  Url RepoInfo::mirrorListUrl() const
+  { return _pimpl->mirrorlist_url; }
 
   std::set<Url> RepoInfo::urls() const
   { return _pimpl->urls; }
@@ -187,11 +162,11 @@ namespace zypp
   {
     str << "--------------------------------------" << std::endl;
     str << "- alias       : " << alias() << std::endl;
-    str << "- url         : " << baseUrl() << std::endl;
+    //str << "- url         : " << baseUrl() << std::endl;
     str << "- type        : " << type() << std::endl;
     str << "- enabled     : " << enabled() << std::endl;
     str << "- autorefresh : " << autorefresh() << std::endl;
-    str << "- path        : " << path() << std::endl;
+    //str << "- path        : " << path() << std::endl;
     return str;
   }
 

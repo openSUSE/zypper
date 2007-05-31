@@ -10,7 +10,7 @@
  *
 */
 
-#include "zypp2/repo/memory/DPackageImpl.h"
+#include "zypp2/repo/memory/PackageImpl.h"
 
 using namespace std;
 

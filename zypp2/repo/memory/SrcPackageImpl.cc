@@ -9,7 +9,7 @@
 /** \file	zypp2/repo/memory/SrcPackageImpl.cc
  *
 */
-#include "zypp2/repo/memory/DSrcPackageImpl.h"
+#include "zypp2/repo/memory/SrcPackageImpl.h"
 
 using namespace std;
 

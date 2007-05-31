@@ -13,6 +13,7 @@
 //#include "zypp/base/Logger.h"
 #include "zypp2/RepoStatus.h"
 
+
 using std::endl;
 
 ///////////////////////////////////////////////////////////////////
@@ -28,6 +29,10 @@ namespace zypp
   {
 
   public:
+    
+    CheckSum checksum;
+    Date timestamp;
+    
     /** Offer default Impl. */
     static shared_ptr<Impl> nullimpl()
     {
@@ -72,6 +77,24 @@ namespace zypp
   RepoStatus::~RepoStatus()
   {}
 
+  RepoStatus & RepoStatus::setChecksum( const CheckSum &checksum )
+  {
+    _pimpl->checksum = checksum;
+    return *this;
+  }
+
+  RepoStatus & RepoStatus::setTimestamp( const Date &timestamp )
+  {
+    _pimpl->timestamp = timestamp;
+    return *this;
+  }
+  
+  CheckSum RepoStatus::checksum() const
+  { return _pimpl->checksum; }
+
+  Date RepoStatus::timestamp() const
+  { return _pimpl->timestamp; }
+  
   /******************************************************************
   **
   **	FUNCTION NAME : operator<<

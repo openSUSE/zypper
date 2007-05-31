@@ -9,7 +9,7 @@
 /** \file	zypp2/repository/memory/PatternImpl.cc
  *
 */
-#include "zypp2/repo/memory/DPatternImpl.h"
+#include "zypp2/repo/memory/PatternImpl.h"
 
 using namespace std;
 

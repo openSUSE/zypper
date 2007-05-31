@@ -20,8 +20,6 @@
 #include <boost/logic/tribool.hpp>
 #include "zypp/Pathname.h"
 #include "zypp/Url.h"
-#include "zypp/CheckSum.h"
-#include "zypp/Date.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -87,15 +85,16 @@ namespace zypp
      * the base url is http://updates.novell.com/10.2
      *
      * This can't be empty in order the repository to be valid
-     */
-    Url baseUrl() const;
-
-    /**
-     * Urls is a list of Urls where this repository
-     * is located.
-     * If empty, the base url will be used.
+     * unless the download of the mirror list succeeds and it
+     * contains a valid url.
      */
     std::set<Url> urls() const;
+
+    /**
+     * Url of a file which contains a list of Urls
+     * If empty, the base url will be used.
+     */
+     Url mirrorListUrl() const;
     
     typedef std::set<Url>::const_iterator urls_const_iterator;
     
@@ -108,12 +107,6 @@ namespace zypp
      * iterator that points at end of repository urls
      */
     urls_const_iterator urlsEnd() const;
-    
-    /**
-     * Path on the url where the repository root
-     * is located.
-     */
-    Pathname path() const;
     
     /**
      * If enabled is false, then this repository must be ignored as if does
@@ -141,27 +134,18 @@ namespace zypp
      * ie: "SUSE Linux 10.2 updates"
      */
     std::string name() const;
-    
+
     /**
-     * Checksum of the repository.
-     * Usually the checksum of the index, but any
-     * checksum that changes when the repository changes
-     * in any way is sufficient.
-     */
-    CheckSum checksum() const;
-    
-    /**
-     * timestamp of the repository. If the repository
-     * changes, it has to be updated as well with the
-     * new timestamp.
-     */
-    Date timestamp() const;
-    
-    /**
-     * Set the base url. \see baseUrl
+     * Add a base url. \see baseUrl
      * \param url The base url for the repository.
      */
-    RepoInfo & setBaseUrl( const Url &url );
+    RepoInfo & addBaseUrl( const Url &url );
+    
+    /**
+     * Set mirror list url. \see mirrorListUrl
+     * \param url The base url for the list
+     */
+    RepoInfo & setMirrorListUrl( const Url &url );
     
     /**
      * enable or disable the repository \see enabled
@@ -174,12 +158,6 @@ namespace zypp
      * \param enabled
      */
     RepoInfo & setAutorefresh( boost::tribool autorefresh );
-    
-    /**
-     * set the repository path \see path
-     * \param p
-     */
-    RepoInfo & setPath( const Pathname &p );
     
     /**
      * set the repository alias \see alias
@@ -198,19 +176,7 @@ namespace zypp
      * \param name
      */
     RepoInfo & setName( const std::string &name );
-    
-    /**
-     * set the repository checksum \see checksum
-     * \param checksum
-     */
-    RepoInfo & setChecksum( const CheckSum &checksum );
-    
-    /**
-     * set the repository timestamp \see timestamp
-     * \param timestamp
-     */
-    RepoInfo & setTimestamp( const Date &timestamp );
-    
+
     std::ostream & dumpOn( std::ostream & str ) const;
     
     class Impl;

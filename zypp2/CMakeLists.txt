@@ -94,17 +94,17 @@ SET( zypp2_repository_cached_HEADERS
 )
 
 SET( zypp2_repository_data_SRCS
-  repo/memory/DPackageImpl.cc
-  repo/memory/DPatternImpl.cc
-  repo/memory/DProductImpl.cc
-  repo/memory/DSrcPackageImpl.cc
+  repo/memory/PackageImpl.cc
+  repo/memory/PatternImpl.cc
+  repo/memory/ProductImpl.cc
+  repo/memory/SrcPackageImpl.cc
 )
 
 SET( zypp2_repository_data_HEADERS
-  repo/memory/DPackageImpl.h
-  repo/memory/DPatternImpl.h
-  repo/memory/DProductImpl.h
-  repo/memory/DSrcPackageImpl.h
+  repo/memory/PackageImpl.h
+  repo/memory/PatternImpl.h
+  repo/memory/ProductImpl.h
+  repo/memory/SrcPackageImpl.h
 )
 
 SET( zypp2_parser_susetags_SRCS

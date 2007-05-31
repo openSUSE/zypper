@@ -14,6 +14,8 @@
 
 #include <iosfwd>
 #include "zypp/base/PtrTypes.h"
+#include "zypp/CheckSum.h"
+#include "zypp/Date.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -23,12 +25,48 @@ namespace zypp
   //
   //	CLASS NAME : RepoStatus
   //
-  /** */
+  /**
+   * \short Local facts about a repository
+   * This class represents the status of a
+   * repository on the system.
+   *
+   * Anything that is not provided on the metadata
+   * files, like the timestamp of the downloaded
+   * metadata, and its checksum.
+   */
   class RepoStatus
   {
     friend std::ostream & operator<<( std::ostream & str, const RepoStatus & obj );
 
   public:
+    
+    /**
+     * Checksum of the repository.
+     * Usually the checksum of the index, but any
+     * checksum that changes when the repository changes
+     * in any way is sufficient.
+     */
+    CheckSum checksum() const;
+    
+    /**
+     * timestamp of the repository. If the repository
+     * changes, it has to be updated as well with the
+     * new timestamp.
+     */
+    Date timestamp() const;
+    
+    /**
+     * set the repository checksum \see checksum
+     * \param checksum
+     */
+    RepoStatus & setChecksum( const CheckSum &checksum );
+    
+    /**
+     * set the repository timestamp \see timestamp
+     * \param timestamp
+     */
+    RepoStatus & setTimestamp( const Date &timestamp );
+
     /** Implementation  */
     class Impl;
 

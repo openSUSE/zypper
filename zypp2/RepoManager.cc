@@ -37,14 +37,23 @@ static std::list<RepoInfo> repositories_in_file( const Pathname &file )
     MIL << (*its) << endl;
     
     RepoInfo info;
-    
+    info.setAlias(*its);
+                  
     for ( IniDict::entry_const_iterator it = dict.entriesBegin(*its);
           it != dict.entriesEnd(*its);
           ++it )
     {
       
       MIL << (*it).first << endl;
+      if (it->first == "name" )
+        info.setName(it-> second);
+      else if ( it->first == "enabled" )
+        info.setEnabled( it->second == "1" );
+      else if ( it->first == "baseurl" )
+        info.addBaseUrl( Url(it->second) );
     }
+    
+    // add it to the list.
   }
   
 //   dictionary *d = iniparser_new(file.c_str());
