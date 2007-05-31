@@ -7,29 +7,29 @@
 |                                                                      |
 \---------------------------------------------------------------------*/
 
-#ifndef zypp_repo_cached_PackageImpl_H
-#define zypp_repo_cached_PackageImpl_H
+#ifndef CachedRepoSrcPackageImpl_H
+#define CachedRepoSrcPackageImpl_H
 
 #include "zypp/detail/PackageImpl.h"
-#include "zypp2/repository/cached/RepoImpl.h"
+#include "zypp/Source.h"
+//#include <sqlite3.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
-namespace repository
-{ /////////////////////////////////////////////////////////////////
+namespace repo
+{
 namespace cached
-{ /////////////////////////////////////////////////////////////////
-
+{
   ///////////////////////////////////////////////////////////////////
   //
-  //        CLASS NAME : PackageImpl
+  //        CLASS NAME : CachedSourcePackageImpl
   //
-  class PackageImpl : public detail::PackageImplIf
+  class SrcPackageImpl : public detail::SrcPackageImplIf
   {
   public:
 
-    PackageImpl( const data::RecordId &id, repository::cached::RepoImpl::Ptr repository_r );
+    SrcPackageImpl( Source_Ref source_r );
     
     virtual TranslatedText summary() const;
     virtual TranslatedText description() const;
@@ -38,12 +38,12 @@ namespace cached
     virtual ByteCount archivesize() const;
     virtual Pathname location() const;
     virtual bool installOnly() const;
-    virtual Repository repository() const;
-    virtual unsigned repositoryMediaNr() const;
+    virtual Source_Ref source() const;
+    virtual unsigned sourceMediaNr() const;
     virtual Vendor vendor() const;
 
   protected:
-    repository::cached::RepoImpl::Ptr _repository;
+    Source_Ref _source;
     TranslatedText _summary;
     TranslatedText _description;
     PackageGroup _group;
@@ -55,12 +55,11 @@ namespace cached
     ByteCount _size_archive;
 
     bool _data_loaded;
-    data::RecordId _id;
   };
   /////////////////////////////////////////////////////////////////
-} // namespace cached
-} // namespace repository
+} // ns cached
+} // ns repo
 } // namespace zypp
+
 ///////////////////////////////////////////////////////////////////
 #endif // ZMD_BACKEND_DBSOURCE_DBPACKAGEIMPL_H
-

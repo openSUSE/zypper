@@ -6,7 +6,7 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file	zypp2/repository/memory/DPatternImpl.h
+/** \file	zypp2/repository/memory/PatternImpl.h
  *
 */
 #ifndef ZYPP_DETAIL_MEMORY_PATTERNIMPL_H
@@ -20,7 +20,7 @@
 namespace zypp
 { /////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////
-  namespace repository
+  namespace repo
   { /////////////////////////////////////////////////////////////////
     namespace memory
     {
@@ -31,11 +31,11 @@ namespace zypp
       //
       /**
       */
-      struct DPatternImpl : public zypp::detail::PatternImplIf
+      struct PatternImpl : public zypp::detail::PatternImplIf
       {
 public:
-        DPatternImpl(data::Pattern_Ptr ptr);
-        virtual ~DPatternImpl();
+        PatternImpl(data::Pattern_Ptr ptr);
+        virtual ~PatternImpl();
 
         virtual TranslatedText summary() const;
         virtual TranslatedText description() const;

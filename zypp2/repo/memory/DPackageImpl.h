@@ -6,7 +6,7 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file	zypp/source/memory/DPackageImpl.h
+/** \file	zypp/repo/memory/PackageImpl.h
  *
 */
 #ifndef ZYPP_SOURCE_MEMORYPACKAGEIMPL_H
@@ -22,7 +22,7 @@
 namespace zypp
 { /////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////
-  namespace repository
+  namespace repo
   { /////////////////////////////////////////////////////////////////
     namespace memory
     { /////////////////////////////////////////////////////////////////
@@ -35,10 +35,10 @@ namespace zypp
       //
       /**
       */
-      struct DPackageImpl : public zypp::detail::PackageImplIf
+      struct PackageImpl : public zypp::detail::PackageImplIf
       {
-        DPackageImpl( data::Package_Ptr ptr );
-        virtual ~DPackageImpl();
+        PackageImpl( data::Package_Ptr ptr );
+        virtual ~PackageImpl();
 
         /** \name ResObject attributes. */
         //@{

@@ -3,7 +3,7 @@
 #define ZYPP_REPOSITORY_FACTORY_H
 
 #include "zypp2/Repository.h"
-#include "zypp2/RepositoryInfo.h"
+#include "zypp2/RepoInfo.h"
 
 namespace zypp
 {
@@ -21,7 +21,7 @@ namespace zypp
     /** Construct source.
      * \throw EXCEPTION on fail
      */
-    Repository createFrom( const RepositoryInfo & context );
+    Repository createFrom( const RepoInfo & context );
   };
 }
 

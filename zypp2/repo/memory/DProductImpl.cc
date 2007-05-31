@@ -6,10 +6,10 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file	zypp2/repository/memory/DProductImpl.cc
+/** \file	zypp2/repo/memory/ProductImpl.cc
  *
 */
-#include "zypp2/repository/memory/DProductImpl.h"
+#include "zypp2/repo/memory/DProductImpl.h"
 
 using namespace std;
 
@@ -17,7 +17,7 @@ using namespace std;
 namespace zypp
 { /////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////
-  namespace repository
+  namespace repo
   { /////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////
     namespace memory
@@ -25,77 +25,77 @@ namespace zypp
 
       ///////////////////////////////////////////////////////////////////
       //
-      //	METHOD NAME : DProductImpl::DProductImpl
+      //	METHOD NAME : ProductImpl::ProductImpl
       //	METHOD TYPE : Ctor
       //
-      DProductImpl::DProductImpl(data::Product_Ptr ptr)
+      ProductImpl::ProductImpl(data::Product_Ptr ptr)
       {}
 
       ///////////////////////////////////////////////////////////////////
       //
-      //	METHOD NAME : DProductImpl::~DProductImpl
+      //	METHOD NAME : ProductImpl::~ProductImpl
       //	METHOD TYPE : Dtor
       //
-      DProductImpl::~DProductImpl()
+      ProductImpl::~ProductImpl()
       {}
 
 
-      std::string DProductImpl::category() const
+      std::string ProductImpl::category() const
       {
         return _category;
       }
 
-      Label DProductImpl::vendor() const
+      Label ProductImpl::vendor() const
       {
         return _vendor;
       }
 
-      TranslatedText DProductImpl::summary() const
+      TranslatedText ProductImpl::summary() const
       {
         return _summary;
       }
 
-      Source_Ref DProductImpl::source() const
+      Source_Ref ProductImpl::source() const
       {
         return Source_Ref::noSource;
       }
 
-      Url DProductImpl::releaseNotesUrl() const
+      Url ProductImpl::releaseNotesUrl() const
       {
         return _release_notes_url;
       }
 
-      std::list<Url> DProductImpl::updateUrls() const
+      std::list<Url> ProductImpl::updateUrls() const
       {
         return _update_urls;
       }
 
-      std::list<Url> DProductImpl::extraUrls() const
+      std::list<Url> ProductImpl::extraUrls() const
       {
         return _extra_urls;
       }
       
-      std::list<Url> DProductImpl::optionalUrls() const
+      std::list<Url> ProductImpl::optionalUrls() const
       {
         return _optional_urls;
       }
       
-      std::list<std::string> DProductImpl::flags() const
+      std::list<std::string> ProductImpl::flags() const
       {
         return _flags;
       }
 
-      TranslatedText DProductImpl::shortName() const
+      TranslatedText ProductImpl::shortName() const
       {
         return TranslatedText(_shortlabel);
       }
 
-      std::string DProductImpl::distributionName() const
+      std::string ProductImpl::distributionName() const
       {
         return _dist_name;
       }
 
-      Edition DProductImpl::distributionEdition() const
+      Edition ProductImpl::distributionEdition() const
       {
         return _dist_version;
       }

@@ -6,7 +6,7 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file	zypp2/repository/memory/DSrcPackageImpl.h
+/** \file	zypp2/repository/memory/SrcPackageImpl.h
  *
 */
 #ifndef ZYPP_SOURCE_MEMORYSRCPackageIMPL_H
@@ -21,7 +21,7 @@
 namespace zypp
 { /////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////
-  namespace repository
+  namespace repo
   { /////////////////////////////////////////////////////////////////
     namespace memory
     { /////////////////////////////////////////////////////////////////
@@ -32,10 +32,10 @@ namespace zypp
       //
       /**
       */
-      struct DSrcPackageImpl : public zypp::detail::SrcPackageImplIf
+      struct SrcPackageImpl : public zypp::detail::SrcPackageImplIf
       {
-        DSrcPackageImpl(data::SrcPackage_Ptr ptr);
-        virtual ~DSrcPackageImpl();
+        SrcPackageImpl(data::SrcPackage_Ptr ptr);
+        virtual ~SrcPackageImpl();
 
         /** */
         virtual Pathname location() const;

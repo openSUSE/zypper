@@ -6,7 +6,7 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file	zypp2/repository/memory/DProductImpl.h
+/** \file	zypp2/repo/memory/ProductImpl.h
  *
 */
 #ifndef ZYPP_DETAIL_MEMORY_PRODUCTIMPL_H
@@ -25,7 +25,7 @@
 namespace zypp
 { /////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////
-  namespace repository
+  namespace repo
   { /////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////
     namespace memory
@@ -37,11 +37,11 @@ namespace zypp
       //
       /**
       */
-      struct DProductImpl : public zypp::detail::ProductImplIf
+      struct ProductImpl : public zypp::detail::ProductImplIf
       {
       public:
-        DProductImpl(data::Product_Ptr ptr);
-        virtual ~DProductImpl();
+        ProductImpl(data::Product_Ptr ptr);
+        virtual ~ProductImpl();
 
         virtual std::string category() const;
         virtual Label vendor() const;

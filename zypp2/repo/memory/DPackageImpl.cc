@@ -6,11 +6,11 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file	zypp2/repository/memory/DPackageImpl.cc
+/** \file	zypp/repo/memory/PackageImpl.cc
  *
 */
 
-#include "zypp2/repository/memory/DPackageImpl.h"
+#include "zypp2/repo/memory/DPackageImpl.h"
 
 using namespace std;
 
@@ -18,7 +18,7 @@ using namespace std;
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////
-namespace repository
+namespace repo
 { /////////////////////////////////////////////////////////////////
 namespace memory
 { /////////////////////////////////////////////////////////////////
@@ -28,7 +28,7 @@ namespace memory
 //	METHOD NAME : PackageImpl::PackageImpl
 //	METHOD TYPE : Ctor
 //
-DPackageImpl::DPackageImpl(data::Package_Ptr ptr)
+PackageImpl::PackageImpl(data::Package_Ptr ptr)
     : 
       _summary(ptr->summary),
       _description(ptr->description),
@@ -55,176 +55,176 @@ DPackageImpl::DPackageImpl(data::Package_Ptr ptr)
 //	METHOD NAME : PackageImpl::~PackageImpl
 //	METHOD TYPE : Dtor
 //
-DPackageImpl::~DPackageImpl()
+PackageImpl::~PackageImpl()
 {}
 
-TranslatedText DPackageImpl::summary() const
+TranslatedText PackageImpl::summary() const
 {
   return _summary;
 }
 
-TranslatedText DPackageImpl::description() const
+TranslatedText PackageImpl::description() const
 {
   return _description;
 }
 
-TranslatedText DPackageImpl::insnotify() const
+TranslatedText PackageImpl::insnotify() const
 {
   return _insnotify;
 }
 
-TranslatedText DPackageImpl::delnotify() const
+TranslatedText PackageImpl::delnotify() const
 {
   return _delnotify;
 }
 
-TranslatedText DPackageImpl::licenseToConfirm() const
+TranslatedText PackageImpl::licenseToConfirm() const
 {
   return _license_to_confirm;
 }
 
-Source_Ref DPackageImpl::source() const
+Source_Ref PackageImpl::source() const
 {
   return Source_Ref::noSource;
 }
 
-unsigned DPackageImpl::sourceMediaNr() const
+unsigned PackageImpl::sourceMediaNr() const
 {
   return _media_number;
 }
 
-CheckSum DPackageImpl::checksum() const
+CheckSum PackageImpl::checksum() const
 {
   return _checksum;
 }
 
-Date DPackageImpl::buildtime() const
+Date PackageImpl::buildtime() const
 {
   return _buildtime;
 }
 
-string DPackageImpl::buildhost() const
+string PackageImpl::buildhost() const
 {
   return string();
 }
 
-Date DPackageImpl::installtime() const
+Date PackageImpl::installtime() const
 {
   return Date();
 }				// it was never installed
 
-string DPackageImpl::distribution() const
+string PackageImpl::distribution() const
 {
   return string();
 }
 
-Vendor DPackageImpl::vendor() const
+Vendor PackageImpl::vendor() const
 {
   return string();
 }
 
-Label DPackageImpl::license() const
+Label PackageImpl::license() const
 {
   return _license;
 }
 
-string DPackageImpl::packager() const
+string PackageImpl::packager() const
 {
   return string();
 }
 
-PackageGroup DPackageImpl::group() const
+PackageGroup PackageImpl::group() const
 {
   return _group;
 }
 
-DPackageImpl::Keywords DPackageImpl::keywords() const
+PackageImpl::Keywords PackageImpl::keywords() const
 {
   return _keywords;
 }
 
-Changelog DPackageImpl::changelog() const
+Changelog PackageImpl::changelog() const
 {
   return Changelog();
 }
 
-Pathname DPackageImpl::location() const
+Pathname PackageImpl::location() const
 {
   return _location;
 }
 
-string DPackageImpl::url() const
+string PackageImpl::url() const
 {
   return string();
 }
 
-string DPackageImpl::os() const
+string PackageImpl::os() const
 {
   return string();
 }
 
-Text DPackageImpl::prein() const
+Text PackageImpl::prein() const
 {
   return Text();
 }
 
-Text DPackageImpl::postin() const
+Text PackageImpl::postin() const
 {
   return Text();
 }
 
-Text DPackageImpl::preun() const
+Text PackageImpl::preun() const
 {
   return Text();
 }
 
-Text DPackageImpl::postun() const
+Text PackageImpl::postun() const
 {
   return Text();
 }
 
-ByteCount DPackageImpl::size() const
+ByteCount PackageImpl::size() const
 {
   return _size;
 }
 
-ByteCount DPackageImpl::sourcesize() const
+ByteCount PackageImpl::sourcesize() const
 // FIXME
 {
   return 0;
 }
 
-ByteCount DPackageImpl::archivesize() const
+ByteCount PackageImpl::archivesize() const
 {
   return _archivesize;
 }
 
-DiskUsage DPackageImpl::diskusage() const
+DiskUsage PackageImpl::diskusage() const
 {
   return _diskusage;
 }
 
-list<string> DPackageImpl::authors() const
+list<string> PackageImpl::authors() const
 {
   return list<string>();
 }
 
-list<string> DPackageImpl::filenames() const
+list<string> PackageImpl::filenames() const
 {
   return list<string>();
 }
 
-list<detail::PackageImplIf::DeltaRpm> DPackageImpl::deltaRpms() const
+list<detail::PackageImplIf::DeltaRpm> PackageImpl::deltaRpms() const
 {
   return detail::PackageImplIf::deltaRpms();
 }
 
-list<detail::PackageImplIf::PatchRpm> DPackageImpl::patchRpms() const
+list<detail::PackageImplIf::PatchRpm> PackageImpl::patchRpms() const
 {
   return detail::PackageImplIf::patchRpms();
 }
 
-bool DPackageImpl::installOnly() const
+bool PackageImpl::installOnly() const
 {
   return false;
 }

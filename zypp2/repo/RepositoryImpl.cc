@@ -1,7 +1,7 @@
 
-#include "zypp2/repository/RepositoryImpl.h"
+#include "zypp2/repo/RepositoryImpl.h"
 
-namespace zypp { namespace repository {
+namespace zypp { namespace repo {
 
 IMPL_PTR_TYPE(RepositoryImpl)
 

@@ -6,10 +6,10 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file	zypp2/repository/memory/DSrcPackageImpl.cc
+/** \file	zypp2/repo/memory/SrcPackageImpl.cc
  *
 */
-#include "zypp2/repository/memory/DSrcPackageImpl.h"
+#include "zypp2/repo/memory/DSrcPackageImpl.h"
 
 using namespace std;
 
@@ -17,7 +17,7 @@ using namespace std;
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////
-namespace repository
+namespace repo
 { /////////////////////////////////////////////////////////////////
 namespace memory
 { /////////////////////////////////////////////////////////////////
@@ -27,7 +27,7 @@ namespace memory
 //	METHOD NAME : SrcPackageImpl::SrcPackageImpl
 //	METHOD TYPE : Ctor
 //
-DSrcPackageImpl::DSrcPackageImpl(data::SrcPackage_Ptr ptr)
+SrcPackageImpl::SrcPackageImpl(data::SrcPackage_Ptr ptr)
     : _media_number( 1 )
 {}
 
@@ -36,31 +36,31 @@ DSrcPackageImpl::DSrcPackageImpl(data::SrcPackage_Ptr ptr)
 //	METHOD NAME : SrcPackageImpl::~SrcPackageImpl
 //	METHOD TYPE : Dtor
 //
-DSrcPackageImpl::~DSrcPackageImpl()
+SrcPackageImpl::~SrcPackageImpl()
 {}
 
 
-Pathname DSrcPackageImpl::location() const
+Pathname SrcPackageImpl::location() const
 {
   return _location;
 }
 
-ByteCount DSrcPackageImpl::archivesize() const
+ByteCount SrcPackageImpl::archivesize() const
 {
   return _archivesize;
 }
 
-DiskUsage DSrcPackageImpl::diskusage() const
+DiskUsage SrcPackageImpl::diskusage() const
 {
   return _diskusage;
 }
 
-Source_Ref DSrcPackageImpl::source() const
+Source_Ref SrcPackageImpl::source() const
 {
   return Source_Ref::noSource;
 }
 
-unsigned DSrcPackageImpl::sourceMediaNr() const
+unsigned SrcPackageImpl::sourceMediaNr() const
 {
   return _media_number;
 }

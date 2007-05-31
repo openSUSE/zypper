@@ -12,18 +12,19 @@ ADD_CUSTOM_COMMAND( OUTPUT ${CMAKE_BINARY_DIR}/zypp2/schema.h PRE_BUILD COMMAND 
 
 SET( zypp2_SRCS
   Repository.cc
-  RepositoryInfo.cc
-  RepositoryManager.cc
+  RepoInfo.cc
+  RepoStatus.cc
+  RepoManager.cc
   RepositoryFactory.cc
   dummy.cc
 )
 
 SET( zypp2_HEADERS
   Repository.h
-  RepositoryInfo.h
-  RepositoryManager.h
+  RepoInfo.h
+  RepoStatus.h
+  RepoManager.h
   RepositoryFactory.h
-  CommiterIface.h
 )
 
 #INSTALL(  FILES ${zypp2_HEADERS}
@@ -73,37 +74,37 @@ SET( zypp2_cache_sqlite3x_HEADERS
 #)
 
 SET( zypp2_repository_SRCS
-  repository/dummy.cc
-  repository/RepositoryImpl.cc
+  repo/dummy.cc
+  repo/RepositoryImpl.cc
 )
 
 SET( zypp2_repository_HEADERS
-  repository/dummy.h
-  repository/RepositoryImpl.h
+  repo/dummy.h
+  repo/RepositoryImpl.h
 )
 
 SET( zypp2_repository_cached_SRCS
-  repository/cached/RepoImpl.cc
-  repository/cached/PackageImpl.cc
+  repo/cached/RepoImpl.cc
+  repo/cached/PackageImpl.cc
 )
 
 SET( zypp2_repository_cached_HEADERS
-  repository/cached/RepoImpl.h
-  repository/cached/PackageImpl.h
+  repo/cached/RepoImpl.h
+  repo/cached/PackageImpl.h
 )
 
 SET( zypp2_repository_data_SRCS
-  repository/memory/DPackageImpl.cc
-  repository/memory/DPatternImpl.cc
-  repository/memory/DProductImpl.cc
-  repository/memory/DSrcPackageImpl.cc
+  repo/memory/DPackageImpl.cc
+  repo/memory/DPatternImpl.cc
+  repo/memory/DProductImpl.cc
+  repo/memory/DSrcPackageImpl.cc
 )
 
 SET( zypp2_repository_data_HEADERS
-  repository/memory/DPackageImpl.h
-  repository/memory/DPatternImpl.h
-  repository/memory/DProductImpl.h
-  repository/memory/DSrcPackageImpl.h
+  repo/memory/DPackageImpl.h
+  repo/memory/DPatternImpl.h
+  repo/memory/DProductImpl.h
+  repo/memory/DSrcPackageImpl.h
 )
 
 SET( zypp2_parser_susetags_SRCS

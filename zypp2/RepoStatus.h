@@ -6,34 +6,50 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file	zypp2/CommitIface.h
+/** \file	zypp/RepoStatus.h
  *
 */
-#ifndef ZYPP_COMMIT_IFACE_H
-#define ZYPP_COMMIT_IFACE_H
+#ifndef ZYPP2_REPOSTATUS_H
+#define ZYPP2_REPOSTATUS_H
 
 #include <iosfwd>
-#include <map>
-#include <list>
-#include <set>
-#include <string>
-
-#include "zypp/ZYppCommit.h"
+#include "zypp/base/PtrTypes.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
-  class CommitIface
+  ///////////////////////////////////////////////////////////////////
+  //
+  //	CLASS NAME : RepoStatus
+  //
+  /** */
+  class RepoStatus
   {
+    friend std::ostream & operator<<( std::ostream & str, const RepoStatus & obj );
+
   public:
-    CommitIface() {};
-    virtual ~CommitIface() {};
-    virtual ZYppCommitResult commit( ResPool pool_r, const ZYppCommitPolicy & policy_r ) = 0;
+    /** Implementation  */
+    class Impl;
+
+  public:
+    /** Default ctor */
+    RepoStatus();
+    /** Dtor */
+    ~RepoStatus();
+
+  public:
+
+  private:
+    /** Pointer to implementation */
+    RWCOW_pointer<Impl> _pimpl;
   };
   ///////////////////////////////////////////////////////////////////
 
+  /** \relates RepoStatus Stream output */
+  std::ostream & operator<<( std::ostream & str, const RepoStatus & obj );
+
   /////////////////////////////////////////////////////////////////
-} // namespace zypp
+} // namespace zypp2
 ///////////////////////////////////////////////////////////////////
-#endif // ZYPP_COMMIT_IFACE_H
+#endif // ZYPP2_REPOSTATUS_H

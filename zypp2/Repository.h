@@ -10,7 +10,7 @@
 
 namespace zypp
 {
-  namespace repository 
+  namespace repo
   {
     DEFINE_PTR_TYPE(RepositoryImpl);
     class RepositoryImpl;
@@ -24,8 +24,8 @@ namespace zypp
     friend bool operator<( const Repository & lhs, const Repository & rhs );
 
   public:
-    typedef repository::RepositoryImpl     Impl;
-    typedef repository::RepositoryImpl_Ptr Impl_Ptr;
+    typedef repo::RepositoryImpl     Impl;
+    typedef repo::RepositoryImpl_Ptr Impl_Ptr;
 
   public:
 
@@ -58,7 +58,7 @@ namespace zypp
   private:
     /** Factory */
     friend class RepositoryFactory;
-    friend class repository::RepositoryImpl;
+    friend class repo::RepositoryImpl;
 
   private:
     /** Factory ctor */

@@ -13,16 +13,16 @@
 #include "zypp/TranslatedText.h"
 #include "zypp/base/String.h"
 #include "zypp/base/Logger.h"
-#include "zypp2/repository/RepositoryImpl.h"
+#include "zypp2/repo/RepositoryImpl.h"
 #include "PackageImpl.h"
 
 
 using namespace std;
 using namespace zypp::detail;
-using namespace::zypp::repository;
+using namespace::zypp::repo;
 
 ///////////////////////////////////////////////////////////////////
-namespace zypp { namespace repository { namespace cached {
+namespace zypp { namespace repo { namespace cached {
 
 ///////////////////////////////////////////////////////////////////
 //
@@ -96,6 +96,6 @@ Vendor PackageImpl::vendor() const
 }
 
 /////////////////////////////////////////////////////////////////
-} } } // namespace zypp::repository::cached
+} } } // namespace zypp::repo::cached
 ///////////////////////////////////////////////////////////////////
 

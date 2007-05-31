@@ -6,12 +6,17 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
+/** \file	zypp2/RepoInfo.h
+ *
+*/
+#ifndef ZYPP2_REPOSITORYINFO_H
+#define ZYPP2_REPOSITORYINFO_H
 
-#ifndef ZYPP_RepositoryInfo_H
-#define ZYPP_RepositoryInfo_H
-
+#include <iosfwd>
 #include <list>
 #include <set>
+#include "zypp/base/PtrTypes.h"
+
 #include <boost/logic/tribool.hpp>
 #include "zypp/Pathname.h"
 #include "zypp/Url.h"
@@ -22,21 +27,53 @@
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
+  ///////////////////////////////////////////////////////////////////
+  //
+  //	CLASS NAME : RepoInfo
+  //
   /**
-   * The class RepositoryInfo represents everything that
+   * \short What is known about a repository
+   *
+   * The class RepoInfo represents everything that
    * is known about a software repository.
+   *
+   * It can be used to store information about known
+   * sources.
+   *
+   * This class tries to be compatible with the
+   * concept of a .repo file used by YUM and
+   * also available in the openSUSE build service.
+   *
+   * Example file
+   *
+   * \code
+   * [ruby]
+   * name=Ruby repository (openSUSE_10.2)
+   * type=rpm-md
+   * baseurl=http://software.opensuse.org/download/ruby/openSUSE_10.2/
+   * gpgcheck=1
+   * gpgkey=http://software.opensuse.org/openSUSE-Build-Service.asc
+   * enabled=1
+   * \endcode
+   *
+   * \note A Repository info is a hint about how
+   * to create a repository.
    */
-  class RepositoryInfo
+  class RepoInfo
   {
+    friend std::ostream & operator<<( std::ostream & str, const RepoInfo & obj );
+    
     public:
-
-    RepositoryInfo();
-
-    RepositoryInfo( const Url & url, const Pathname & path, const std::string & alias = "", boost::tribool autorefresh = boost::indeterminate );
+    RepoInfo();
+    ~RepoInfo();
+    //RepoInfo( const Url & url, const Pathname & path, const std::string & alias = "", boost::tribool autorefresh = boost::indeterminate );
     
     /**
      * unique identifier for this source. If not specified
      * It should be generated from the base url.
+     *
+     * Normally, in a .repo file the section name is used
+     * ( [somerepo] )
      */
     std::string alias() const;
     
@@ -97,10 +134,13 @@ namespace zypp
     std::string type() const;
     
     /**
-     * Description of the repository, to be used on
+     * \short Repository short label
+     *
+     * Short label or description of the repository, to be used on
      * the user interface.
+     * ie: "SUSE Linux 10.2 updates"
      */
-    std::string description() const;
+    std::string name() const;
     
     /**
      * Checksum of the repository.
@@ -121,81 +161,71 @@ namespace zypp
      * Set the base url. \see baseUrl
      * \param url The base url for the repository.
      */
-    RepositoryInfo & setBaseUrl( const Url &url );
+    RepoInfo & setBaseUrl( const Url &url );
     
     /**
      * enable or disable the repository \see enabled
      * \param enabled
      */
-    RepositoryInfo & setEnabled( boost::tribool enabled );
+    RepoInfo & setEnabled( boost::tribool enabled );
     
     /**
      * enable or disable autorefresh \see autorefresh
      * \param enabled
      */
-    RepositoryInfo & setAutorefresh( boost::tribool autorefresh );
+    RepoInfo & setAutorefresh( boost::tribool autorefresh );
     
     /**
      * set the repository path \see path
      * \param p
      */
-    RepositoryInfo & setPath( const Pathname &p );
+    RepoInfo & setPath( const Pathname &p );
     
     /**
      * set the repository alias \see alias
      * \param alias
      */
-    RepositoryInfo & setAlias( const std::string &alias );
+    RepoInfo & setAlias( const std::string &alias );
     
     /**
      * set the repository type \see type
      * \param t
      */
-    RepositoryInfo & setType( const std::string &t );
+    RepoInfo & setType( const std::string &t );
     
     /**
-     * set the repository description \see description
-     * \param description
+     * set the repository name \see name
+     * \param name
      */
-    RepositoryInfo & setDescription( const std::string &description );
+    RepoInfo & setName( const std::string &name );
     
     /**
      * set the repository checksum \see checksum
      * \param checksum
      */
-    RepositoryInfo & setChecksum( const CheckSum &checksum );
+    RepoInfo & setChecksum( const CheckSum &checksum );
     
     /**
      * set the repository timestamp \see timestamp
      * \param timestamp
      */
-    RepositoryInfo & setTimestamp( const Date &timestamp );
+    RepoInfo & setTimestamp( const Date &timestamp );
     
-    /** Overload to realize stream output. */
     std::ostream & dumpOn( std::ostream & str ) const;
     
-    private:
-
-    boost::tribool _enabled;
-    boost::tribool _autorefresh;
-    std::string _type;
-    Url _baseurl;
-    std::set<Url> _urls;
-    Pathname _path;
-    std::string _alias;
-    std::string _description;
-    CheckSum _checksum;
-    Date _timestamp;
+    class Impl;
+  private:
+    /** Pointer to implementation */
+    RWCOW_pointer<Impl> _pimpl;
   };
+  ///////////////////////////////////////////////////////////////////
 
-  /** \relates RepositoryInfo Stream output */
-  inline std::ostream & operator<<( std::ostream & str, const RepositoryInfo & obj )
-  { return obj.dumpOn( str ); }
+  /** \relates RepoInfo Stream output */
+  std::ostream & operator<<( std::ostream & str, const RepoInfo & obj );
 
-  typedef std::list<RepositoryInfo> RepositoryInfoList;
-
-} // namespace zypp
+  typedef std::list<RepoInfo> RepoInfoList;
+  
+  /////////////////////////////////////////////////////////////////
+} // namespace zypp2
 ///////////////////////////////////////////////////////////////////
-#endif // ZYPP_RepositoryInfo_H
-
-
+#endif // ZYPP2_REPOSITORYINFO_H

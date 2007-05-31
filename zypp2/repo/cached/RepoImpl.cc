@@ -18,8 +18,8 @@
 #include "zypp/detail/ResImplTraits.h"
 #include "zypp/CapFactory.h"
 
-#include "zypp2/repository/cached/RepoImpl.h"
-#include "zypp2/repository/cached/PackageImpl.h"
+#include "zypp2/repo/cached/RepoImpl.h"
+#include "zypp2/repo/cached/PackageImpl.h"
 
 
 using namespace zypp::detail;
@@ -31,7 +31,7 @@ using namespace sqlite3x;
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////
-namespace repository
+namespace repo
 { /////////////////////////////////////////////////////////////////
  ///////////////////////////////////////////////////////////////////
 namespace cached

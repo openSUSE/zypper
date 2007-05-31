@@ -16,7 +16,7 @@
 #include "zypp/Rel.h"
 #include "zypp/Pathname.h"
 #include "zypp/data/RecordId.h"
-#include "zypp2/repository/RepositoryImpl.h"
+#include "zypp2/repo/RepositoryImpl.h"
 #include "zypp/ResStore.h"
 #include "zypp2/cache/sqlite3x/sqlite3x.hpp"
 #include "zypp2/cache/CacheTypes.h"
@@ -26,7 +26,7 @@
 namespace zypp
 { /////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////
-  namespace repository
+  namespace repo
   { /////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////
     namespace cached
@@ -37,7 +37,7 @@ namespace zypp
       //	CLASS NAME : RepoImpl
       //
       /** */
-      class RepoImpl : public repository::RepositoryImpl
+      class RepoImpl : public repo::RepositoryImpl
       {
       public:
         typedef intrusive_ptr<RepoImpl>       Ptr;

@@ -6,10 +6,10 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file	zypp2/repository/memory/DPatternImpl.cc
+/** \file	zypp2/repository/memory/PatternImpl.cc
  *
 */
-#include "zypp2/repository/memory/DPatternImpl.h"
+#include "zypp2/repo/memory/DPatternImpl.h"
 
 using namespace std;
 
@@ -17,7 +17,7 @@ using namespace std;
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////
-namespace repository
+namespace repo
 { /////////////////////////////////////////////////////////////////
 namespace memory
 {
@@ -26,7 +26,7 @@ namespace memory
 //	METHOD NAME : PatternImpl::PatternImpl
 //	METHOD TYPE : Ctor
 //
-DPatternImpl::DPatternImpl(data::Pattern_Ptr ptr)
+PatternImpl::PatternImpl(data::Pattern_Ptr ptr)
 {}
 
 ///////////////////////////////////////////////////////////////////
@@ -34,40 +34,40 @@ DPatternImpl::DPatternImpl(data::Pattern_Ptr ptr)
 //	METHOD NAME : PatternImpl::~PatternImpl
 //	METHOD TYPE : Dtor
 //
-DPatternImpl::~DPatternImpl()
+PatternImpl::~PatternImpl()
 {}
 
-Source_Ref DPatternImpl::source() const
+Source_Ref PatternImpl::source() const
 {
   return Source_Ref::noSource;
 }
 
-TranslatedText DPatternImpl::summary() const
+TranslatedText PatternImpl::summary() const
 {
   return _summary;
 }
 
-TranslatedText DPatternImpl::description() const
+TranslatedText PatternImpl::description() const
 {
   return _description;
 }
 
-TranslatedText DPatternImpl::category() const
+TranslatedText PatternImpl::category() const
 {
   return _category;
 }
 
-bool DPatternImpl::userVisible() const
+bool PatternImpl::userVisible() const
 {
   return _visible;
 }
 
-Label DPatternImpl::order() const
+Label PatternImpl::order() const
 {
   return _order;
 }
 
-Pathname DPatternImpl::icon() const
+Pathname PatternImpl::icon() const
 {
   return _icon;
 }

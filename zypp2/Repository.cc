@@ -2,7 +2,7 @@
 #include <iostream>
 
 #include "zypp2/Repository.h"
-#include "zypp2/repository/RepositoryImpl.h"
+#include "zypp2/repo/RepositoryImpl.h"
 
 using namespace std;
 

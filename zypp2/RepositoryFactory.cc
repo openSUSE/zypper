@@ -13,7 +13,7 @@ RepositoryFactory::~RepositoryFactory()
 }
 
 
-Repository RepositoryFactory::createFrom( const RepositoryInfo & context )
+Repository RepositoryFactory::createFrom( const RepoInfo & context )
 {
 
 }
