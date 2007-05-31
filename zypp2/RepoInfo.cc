@@ -162,7 +162,14 @@ namespace zypp
   {
     str << "--------------------------------------" << std::endl;
     str << "- alias       : " << alias() << std::endl;
-    //str << "- url         : " << baseUrl() << std::endl;
+    std::set<Url> url_set(urls());
+    for ( std::set<Url>::const_iterator it = url_set.begin();
+          it != url_set.end();
+          ++it )
+    {
+      str << "- url         : " << *it << std::endl;
+    }
+    
     str << "- type        : " << type() << std::endl;
     str << "- enabled     : " << enabled() << std::endl;
     str << "- autorefresh : " << autorefresh() << std::endl;
@@ -170,6 +177,11 @@ namespace zypp
     return str;
   }
 
+  std::ostream & operator<<( std::ostream & str, const RepoInfo & obj )
+  {
+    return obj.dumpOn(str);
+  }
+  
   /////////////////////////////////////////////////////////////////
 } // namespace zypp2
 ///////////////////////////////////////////////////////////////////

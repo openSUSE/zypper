@@ -783,6 +783,10 @@ namespace zypp
     return str << url.asString();
   }
 
+  bool operator<( const Url &lhs, const Url &rhs )
+  {
+    return (lhs.asString() < rhs.asString());
+  }
 
   ////////////////////////////////////////////////////////////////////
 } // namespace zypp

@@ -12,13 +12,13 @@
 #include "zypp/detail/PackageImplIf.h"
 #include "zypp/Package.h"
 #include "zypp2/RepositoryFactory.h"
-#include "zypp2/RepositoryInfo.h"
+#include "zypp2/RepoInfo.h"
 
-#include "zypp2/repository/cached/CachedRepositoryImpl.h"
+#include "zypp2/repo/cached/RepoImpl.h"
 #include "zypp/data/ResolvableData.h"
 
-#include "zypp2/RepositoryManager.h"
-#include "zypp2/RepositoryInfo.h"
+#include "zypp2/RepoManager.h"
+#include "zypp2/RepoInfo.h"
 
 
 using namespace std;
@@ -34,10 +34,10 @@ int main(int argc, char **argv)
     
       Pathname dbpath = Pathname(getenv("PWD"));
       
-      RepositoryManager manager;
-      RepositoryInfoList repos = manager.knownRepositories();
+      RepoManager manager;
+      RepoInfoList repos = manager.knownRepositories();
 
-      for ( RepositoryInfoList::const_iterator it = repos.begin(); it != repos.end(); ++it )
+      for ( RepoInfoList::const_iterator it = repos.begin(); it != repos.end(); ++it )
       {
         cout << *it << endl;
       }

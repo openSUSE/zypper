@@ -772,6 +772,11 @@ namespace zypp
 
   std::ostream & operator<<( std::ostream & str, const Url & url );
 
+  /**
+   * needed for std::set
+   */
+  bool operator<( const Url &lhs, const Url &rhs );
+  
   ////////////////////////////////////////////////////////////////////
 } // namespace zypp
 //////////////////////////////////////////////////////////////////////

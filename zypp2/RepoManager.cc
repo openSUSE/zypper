@@ -44,7 +44,7 @@ static std::list<RepoInfo> repositories_in_file( const Pathname &file )
           ++it )
     {
       
-      MIL << (*it).first << endl;
+      //MIL << (*it).first << endl;
       if (it->first == "name" )
         info.setName(it-> second);
       else if ( it->first == "enabled" )
@@ -54,22 +54,10 @@ static std::list<RepoInfo> repositories_in_file( const Pathname &file )
     }
     
     // add it to the list.
+    repos.push_back(info);
   }
   
-//   dictionary *d = iniparser_new(file.c_str());
-//   
-//   if ( d == NULL )
-//     ZYPP_THROW(Exception("Failed creating dictionary"));
-//   
-//   int n = iniparser_getnsec(d);
-//   MIL << n << endl;
-//   
-//   for ( int i = 0; i < n; i++ )
-//   {
-//     MIL << iniparser_getsecname(d, i) << endl;
-//     
-//   }
-  return std::list<RepoInfo>();
+  return repos;
 }
 
 static std::list<RepoInfo> repositories_in_path( const Pathname &dir )
@@ -90,9 +78,7 @@ static std::list<RepoInfo> repositories_in_path( const Pathname &dir )
 
 std::list<RepoInfo> RepoManager::knownRepositories()
 {
-  
-
-  return std::list<RepoInfo>();
+  return repositories_in_path("/etc/zypp/repos.d");
 }
 
 } // ns zypp
