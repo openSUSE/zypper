@@ -14,7 +14,7 @@
 #include "zypp/capability/CapabilityImpl.h"
 #include "zypp/data/ResolvableData.h"
 #include "zypp2/cache/CacheStore.h"
-#include "zypp2/repository/cached/RepoImpl.h"
+#include "zypp2/repo/cached/RepoImpl.h"
 #include "zypp/Url.h"
 #include "zypp/NVRA.h"
 #include "zypp/PathInfo.h"
@@ -24,8 +24,8 @@
 
 using namespace std;
 using namespace zypp;
-using namespace zypp::repository;
-using namespace zypp::repository::cached;
+using namespace zypp::repo;
+using namespace zypp::repo::cached;
 using namespace boost::unit_test;
 
 void cache_write_test(const string &dir)
