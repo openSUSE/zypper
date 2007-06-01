@@ -56,7 +56,7 @@ namespace zypp
      * thrown when it was impossible to
      * determine one url for this repo.
      */
-    class RepoNoUrl : public RepoException
+    class RepoNoUrlException : public RepoException
     {
     
     };
@@ -65,7 +65,7 @@ namespace zypp
      * thrown when it was impossible to
      * determine an alias for this repo.
      */
-    class RepoNoAlias : public RepoException
+    class RepoNoAliasException : public RepoException
     {
     
     };

@@ -10,7 +10,10 @@
 #include "zypp/base/NonCopyable.h"
 #include "zypp/base/PtrTypes.h"
 #include "zypp/base/ProvideNumericId.h"
+#include "zypp/ResStore.h"
 #include "zypp2/Repository.h"
+#include "zypp2/RepoInfo.h"
+
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
@@ -21,14 +24,32 @@ namespace zypp
     DEFINE_PTR_TYPE(RepositoryImpl);
 
     class RepositoryImpl : public base::ReferenceCounted,
-                          public base::ProvideNumericId<RepositoryImpl,Repository::NumericId>,
-                          private base::NonCopyable
+                           public base::ProvideNumericId<RepositoryImpl,Repository::NumericId>,
+                           private base::NonCopyable
     {
       friend std::ostream & operator<<( std::ostream & str, const RepositoryImpl & obj );
     public:
-      RepositoryImpl();
       
+      /**
+       * \short Ctor.
+       * \param info What is known about this source at construction time.
+       *
+       */
+      RepositoryImpl( const RepoInfo &info = RepoInfo() );
+      
+      /**
+       * \short Information about this repository
+       * You can't change this information after creation.
+       * Use \ref RepoManager for that.
+       */
+      const RepoInfo info() const;
+      
+      /**
+       * \short Dtor
+       */
       ~RepositoryImpl();
+
+      const ResStore & resolvables() const;
 
       struct null {};
     public:
@@ -43,8 +64,11 @@ namespace zypp
 
       Repository selfRepository()
       { return Repository( this ); }
+    protected:
+      RepoInfo _info;
+      
+      ResStore _store;
     };
-
   }
 }
 

@@ -20,7 +20,7 @@
 //#include "zypp/base/NonCopyable.h"
 #include "zypp/Pathname.h"
 #include "zypp/ZConfig.h"
-
+#include "zypp2/Repository.h"
 #include "zypp2/RepoInfo.h"
 #include "zypp2/repo/RepoException.h"
 
@@ -55,7 +55,9 @@ namespace zypp
 
   public:
    RepoManager( const RepoManagerOptions &options = RepoManagerOptions() );
-   
+   /** Dtor */
+    ~RepoManager();
+    
    /**
     * \short List known repositories.
     *
@@ -66,8 +68,60 @@ namespace zypp
     */
    std::list<RepoInfo> knownRepositories();
    
-    /** Dtor */
-    ~RepoManager();
+   /**
+    * \short Refresh local cache
+    *
+    * Will try to download the metadata
+    *
+    * \throws RepoNoUrl if no urls are available.
+    * \throws RepoNoAlias if can't figure an alias
+    * \throws Exception on unknown error.
+    */
+   void refreshMetadata( const RepoInfo &info );
+   
+   /**
+    * \short Clean local metadata
+    *
+    * Empty local metadata.
+    *
+    * \throws RepoNoAlias if can't figure an alias
+    * \throws Exception on unknown error.
+    */
+   void cleanMetadata( const RepoInfo &info );
+   
+   /**
+    * \short Refresh local cache
+    *
+    * Will try to build the cache from
+    * local metadata.
+    *
+    * If the cache exists it will be overwriten.
+    *
+    * \note the local metadata must be valid.
+    *
+    * \throws RepoNoAlias if can't figure an alias to look in cache
+    * \throws Exception on unknown error.
+    */
+   void buildCache( const RepoInfo &info );
+   
+   /**
+    * \short clean local cache
+    *
+    * Clean the cached version of the metadata
+    *
+    * \note the local metadata must be valid.
+    *
+    * \throws RepoNoAlias if can't figure an alias to look in cache
+    * \throws Exception on unknown error.
+    */
+   void cleanCache( const RepoInfo &info );
+   
+   /**
+    * \short Create a repository object from the cache data
+    *
+    * \throw RepoNotCachedException When the source is not cached.
+    */
+   Repository createFromCache( const RepoInfo &info );
 
   public:
 

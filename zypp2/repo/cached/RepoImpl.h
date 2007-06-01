@@ -48,45 +48,15 @@ namespace zypp
         RepoImpl( const zypp::Pathname &dbdir, const data::RecordId &repository_id );
         /** Dtor */
         ~RepoImpl();
-
+        void factoryInit();
       public:
         
         cache::ResolvableQuery resolvableQuery();
+        void createResolvables();
         
-        /** String identifying the type of the source. */
-	static std::string typeString()
-	{ return "CachedSource"; }
-
-        /** String identifying the type of the source. */
-        virtual std::string type() const
-        { return typeString(); }
-
-        const ResStore & resolvables() const
-        { return _store; }
-        
-        virtual void createResolvables();
-      public:
-        
-        
-        
-      private:
-        /** Ctor substitute.
-         * Actually get the metadata.
-         * \throw EXCEPTION on fail
-        */
-        virtual void factoryInit();
-        
-        
-        zypp::Pathname _dbdir;
-        ResStore _store;
-        
-        Rel relationFor( const data::RecordId &id );
-        Resolvable::Kind kindFor( const data::RecordId &id );
-        Dep deptypeFor( const data::RecordId &id );
-        Arch archFor( const data::RecordId &id );
-        
+      protected:
         void read_capabilities( sqlite3x::sqlite3_connection &con, std::map<data::RecordId, NVRAD> &nvras );
-        
+        Pathname _dbdir;
         cache::CacheTypes _type_cache;
         data::RecordId _repository_id;
         

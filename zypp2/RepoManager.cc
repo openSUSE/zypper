@@ -13,16 +13,17 @@
 #include <iostream>
 #include <list>
 #include <algorithm>
-#include "zypp/base/Exception.h"
 #include "zypp/base/InputStream.h"
 #include "zypp/base/Logger.h"
 #include "zypp/PathInfo.h"
 #include "zypp/parser/IniDict.h"
 
+#include "zypp2/repo/RepoException.h"
 #include "zypp2/RepoManager.h"
 
 using namespace std;
 using namespace zypp;
+using namespace zypp::repo;
 using namespace zypp::filesystem;
 using parser::IniDict;
 
@@ -170,6 +171,45 @@ namespace zypp
   RepoManager::~RepoManager()
   {}
 
+  static void assert_alias( const RepoInfo &info )
+  {
+    if (info.alias().empty())
+        ZYPP_THROW(RepoNoAliasException());
+  }
+  
+  static Pathname rawcache_path_for_alias( const RepoManagerOptions &opt, const string &alias )
+  {
+    //repoRawCachePath
+    return Pathname();
+  }
+  
+  void RepoManager::refreshMetadata( const RepoInfo &info )
+  {
+    assert_alias(info);
+    
+    
+  }
+  
+  void RepoManager::cleanMetadata( const RepoInfo &info )
+  {
+  
+  }
+  
+  void RepoManager::buildCache( const RepoInfo &info )
+  {
+  
+  }
+  
+  void RepoManager::cleanCache( const RepoInfo &info )
+  {
+  
+  }
+  
+  Repository RepoManager::createFromCache( const RepoInfo &info )
+  {
+    return Repository::noRepository;
+  }
+ 
   /******************************************************************
   **
   **	FUNCTION NAME : operator<<
