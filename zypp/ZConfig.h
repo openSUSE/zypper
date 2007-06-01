@@ -40,6 +40,23 @@ namespace zypp
        *  descriptions, etc. passed to the UI.
        */
       Locale defaultTextLocale() const;
+      
+      /**
+       * Path where the repo metadata is downloaded and kept.
+       */
+      Pathname defaultRepoRawCachePath() const;
+      
+      /**
+       * Path where the processed cache is kept
+       * (this is where zypp.db is located.
+       */
+      Pathname defaultRepoCachePath() const;
+      
+      /**
+       * Path where the known repositories
+       * .repo files are kept
+       */
+      Pathname defaultKnownReposPath() const;
   };
   ///////////////////////////////////////////////////////////////////
 

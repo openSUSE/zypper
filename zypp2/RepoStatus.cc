@@ -14,7 +14,7 @@
 #include "zypp2/RepoStatus.h"
 
 
-using std::endl;
+using namespace std;
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -30,7 +30,7 @@ namespace zypp
 
   public:
     
-    CheckSum checksum;
+    string checksum;
     Date timestamp;
     
     /** Offer default Impl. */
@@ -77,7 +77,7 @@ namespace zypp
   RepoStatus::~RepoStatus()
   {}
 
-  RepoStatus & RepoStatus::setChecksum( const CheckSum &checksum )
+  RepoStatus & RepoStatus::setChecksum( const string &checksum )
   {
     _pimpl->checksum = checksum;
     return *this;
@@ -89,7 +89,7 @@ namespace zypp
     return *this;
   }
   
-  CheckSum RepoStatus::checksum() const
+  string RepoStatus::checksum() const
   { return _pimpl->checksum; }
 
   Date RepoStatus::timestamp() const

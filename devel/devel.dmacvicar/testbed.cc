@@ -11,13 +11,13 @@
 #include "zypp/detail/PackageImplIf.h"
 #include "zypp/Package.h"
 #include "zypp2/RepositoryFactory.h"
-#include "zypp2/repository/cached/CachedRepositoryImpl.h"
+#include "zypp2/repo/cached/RepoImpl.h"
 #include "zypp/data/ResolvableData.h"
 
 using namespace std;
 using namespace zypp;
-using namespace zypp::repository;
-using namespace zypp::repository::cached;
+using namespace zypp::repo;
+using namespace zypp::repo::cached;
 
 
 int main(int argc, char **argv)

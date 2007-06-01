@@ -7,7 +7,7 @@
 #include "zypp/base/Measure.h"
 #include "zypp/detail/ResObjectFactory.h"
 #include "zypp2/parser/yum/YUMParser.h"
-#include "zypp2/repository/memory/DPackageImpl.h"
+#include "zypp2/repo/memory/PackageImpl.h"
 
 
 #undef ZYPP_BASE_LOGGER_LOGGROUP
@@ -17,7 +17,7 @@ using namespace std;
 using namespace zypp;
 using namespace zypp::parser::yum;
 using zypp::debug::Measure;
-using namespace zypp::repository::memory;
+using namespace zypp::repo::memory;
 
 bool progress_function(ProgressData::value_type p)
 {
@@ -30,8 +30,8 @@ class ResolvableConsumer : public data::ResolvableDataConsumer
 {
   public:
     
-  typedef detail::ResImplTraits<DPackageImpl>::Ptr PkgImplPtr;
-  typedef detail::ResImplTraits<DPackageImpl>::Ptr SrcPkgImplPtr;
+  typedef detail::ResImplTraits<PackageImpl>::Ptr PkgImplPtr;
+  typedef detail::ResImplTraits<PackageImpl>::Ptr SrcPkgImplPtr;
   
   ResolvableConsumer()
   {
@@ -59,7 +59,7 @@ class ResolvableConsumer : public data::ResolvableDataConsumer
 
   virtual void consumePackage( const data::RecordId &repository_id, data::Package_Ptr ptr )
   {
-    PkgImplPtr impl = PkgImplPtr( new DPackageImpl(ptr) );
+    PkgImplPtr impl = PkgImplPtr( new PackageImpl(ptr) );
     Dependencies deps;
     collectDeps( deps, ptr->deps );
     
@@ -90,6 +90,16 @@ class ResolvableConsumer : public data::ResolvableDataConsumer
   virtual void consumeFilelist( const data::RecordId & repository_id, const data::Resolvable_Ptr &, const data::Filenames & )
   {}
 
+  
+  virtual void consumeSourcePackage(const zypp::data::RecordId&, zypp::data::SrcPackage_Ptr)
+  {}
+  
+  virtual void consumePackageAtom(const zypp::data::RecordId&, const zypp::data::PackageAtom_Ptr&)
+  {}
+  
+  virtual void consumePattern(const zypp::data::RecordId&, zypp::data::Pattern_Ptr)
+  {}
+
     //virtual void consumeSourcePackage( const data::SrcPackage_Ptr ) = 0;
   ResStore _store;
 };
@@ -113,7 +123,7 @@ int main(int argc, char **argv)
     Measure parse_primary_timer("primary.xml.gz parsing");
     ResolvableConsumer store;
     parser::yum::YUMParser parser( 0, store, &progress_function);
-    parser.start(argv[1]);
+    parser.parse(argv[1]);
     parse_primary_timer.stop();
 
     cout << endl;

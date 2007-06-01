@@ -41,6 +41,21 @@ namespace zypp
     return getZYpp()->getTextLocale();
   }
 
+  Pathname ZConfig::defaultRepoRawCachePath() const
+  {
+    return Pathname("/var/lib/zypp/cache/raw");
+  }
+      
+  Pathname ZConfig::defaultRepoCachePath() const
+  {
+    return Pathname("/var/lib/zypp/cache");
+  }
+  
+  Pathname ZConfig::defaultKnownReposPath() const
+  {
+    return Pathname("/etc/zypp/repos.d");
+  }
+  
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////

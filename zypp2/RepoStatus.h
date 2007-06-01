@@ -46,7 +46,7 @@ namespace zypp
      * checksum that changes when the repository changes
      * in any way is sufficient.
      */
-    CheckSum checksum() const;
+    std::string checksum() const;
     
     /**
      * timestamp of the repository. If the repository
@@ -59,7 +59,7 @@ namespace zypp
      * set the repository checksum \see checksum
      * \param checksum
      */
-    RepoStatus & setChecksum( const CheckSum &checksum );
+    RepoStatus & setChecksum( const std::string &checksum );
     
     /**
      * set the repository timestamp \see timestamp

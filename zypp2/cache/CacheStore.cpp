@@ -10,6 +10,7 @@
 
 #include "zypp2/cache/CacheInitializer.h"
 #include "zypp2/cache/CacheStore.h"
+#include "zypp2/cache/CacheException.h"
 
 using namespace std;
 using namespace zypp;
@@ -59,8 +60,8 @@ struct CacheStore::Impl
 
     update_repository_cmd.reset( new sqlite3_command( con, "update repositories set checksum=:checksum, timestamp=:timestamp where id=:repository_id;" ));
 
-    select_repository_cmd.reset( new sqlite3_command( con, "select id from repositories where url=:url and path=:path;" ));
-    insert_repository_cmd.reset( new sqlite3_command( con, "insert into repositories (url,path,timestamp) values (:url,:path,:timestamp);" ));
+    select_repository_cmd.reset( new sqlite3_command( con, "select id from repositories where alias=:alias;" ));
+    insert_repository_cmd.reset( new sqlite3_command( con, "insert into repositories (alias,timestamp) values (:alias, :timestamp);" ));
 
     select_name_cmd.reset( new sqlite3_command( con, "select id from names where name=:name;" ));
     insert_name_cmd.reset( new sqlite3_command( con, "insert into names (name) values (:name);" ));
@@ -561,11 +562,10 @@ void CacheStore::updateRepository( const RecordId &id,
   _pimpl->insert_repository_cmd->executenonquery();
 }
 
-RecordId CacheStore::lookupOrAppendRepository( const Url &url, const Pathname &path )
+RecordId CacheStore::lookupOrAppendRepository( const string &alias )
 {
-  _pimpl->select_repository_cmd->bind(":url", url.asString());
-  _pimpl->select_repository_cmd->bind(":path", path.asString());
-
+  _pimpl->select_repository_cmd->bind(":alias", alias);
+  
   long long id = 0;
   try {
     id = _pimpl->select_repository_cmd->executeint64();
@@ -573,8 +573,7 @@ RecordId CacheStore::lookupOrAppendRepository( const Url &url, const Pathname &p
   catch ( const sqlite3x::database_error &e )
   {
     // does not exist
-    _pimpl->insert_repository_cmd->bind(":url", url.asString());
-    _pimpl->insert_repository_cmd->bind(":path", path.asString());
+    _pimpl->insert_repository_cmd->bind(":alias", alias);
     _pimpl->insert_repository_cmd->bind(":timestamp", static_cast<int>((Date::ValueType) Date::now()) );
     _pimpl->insert_repository_cmd->executenonquery();
     id = _pimpl->con.insertid();
@@ -582,6 +581,62 @@ RecordId CacheStore::lookupOrAppendRepository( const Url &url, const Pathname &p
 
   }
   return static_cast<RecordId>(id);
+}
+
+RepoStatus CacheStore::repositoryStatus( const data::RecordId &id )
+{
+  sqlite3_command cmd( _pimpl->con, "select id,alias,checksum,timestamp from repositories where id=:id");
+  cmd.bind(":id", id);
+  
+  try
+  {
+    sqlite3_reader reader = cmd.executereader();
+    RepoStatus status;
+    while ( reader.read() )
+    {
+      status.setChecksum( reader.getstring(2) );
+      status.setTimestamp( reader.getstring(3) );
+    }
+    return status;
+  }
+  catch ( const sqlite3x::database_error &e )
+  {
+    ZYPP_THROW(CacheRecordNotFoundException());
+  }
+}
+
+RepoStatus CacheStore::repositoryStatus( const string &alias )
+{
+  return repositoryStatus(lookupRepository(alias));
+}
+
+bool CacheStore::isCached( const string &alias )
+{
+  try
+  {
+    lookupRepository(alias);
+  }
+  catch( const CacheRecordNotFoundException &e )
+  {
+    return false;
+  }
+  return true;
+}
+
+RecordId CacheStore::lookupRepository( const string &alias )
+{
+  sqlite3_command cmd(_pimpl->con, "select id from repositories where alias=:alias;");
+  cmd.bind(":alias", alias);
+  
+  long long id = 0;
+  try {
+    id = cmd.executeint64();
+  }
+  catch ( const sqlite3x::database_error &e )
+  {
+    ZYPP_THROW(CacheRecordNotFoundException());
+  }
+  return id;
 }
 
 RecordId CacheStore::lookupOrAppendType( const string &klass, const string &name )

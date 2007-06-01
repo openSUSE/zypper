@@ -40,7 +40,7 @@ void cache_write_test(const string &dir)
     
     cache::CacheStore store(tmpdir.path());
     
-    repository_id = store.lookupOrAppendRepository( Url("http://novell.com"), "/");
+    repository_id = store.lookupOrAppendRepository("novell.com");
     
     zypp::debug::Measure cap_parse_timer("store resolvables");
     for ( list<MiniResolvable>::iterator it = res_list.begin(); it != res_list.end(); it++)
@@ -50,6 +50,7 @@ void cache_write_test(const string &dir)
                                         (*it).nvra,
                                         (*it).deps );
     }
+    store.commit();
   }
   {
     MIL << "now read resolvables" << endl;

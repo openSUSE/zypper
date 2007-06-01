@@ -1,0 +1,7 @@
+[filesharing]
+name=Filesharing applications (SUSE_Factory)
+type=rpm-md
+baseurl=http://software.opensuse.org/download/filesharing/SUSE_Factory/
+gpgcheck=1
+gpgkey=http://software.opensuse.org/openSUSE-Build-Service.asc
+enabled=1

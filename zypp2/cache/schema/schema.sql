@@ -58,11 +58,11 @@ CREATE INDEX types_class_name_index ON types(class, name);
 
 CREATE TABLE repositories (
     id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL
-  , url TEXT NOT NULL
-  , path TEXT NOT NULL
+  , alias TEXT NOT NULL UNIQUE
   , checksum TEXT DEFAULT NULL
   , timestamp INTEGER NOT NULL
 );
+CREATE INDEX repo_alias_index ON repositories(alias);
 
 ------------------------------------------------
 -- Resolvable names

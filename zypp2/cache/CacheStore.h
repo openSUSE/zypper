@@ -25,6 +25,7 @@
 #include "zypp/data/RecordId.h"
 
 #include "zypp/base/PtrTypes.h"
+#include "zypp2/RepoStatus.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -39,7 +40,7 @@ namespace zypp
      * \code
      * CacheStore store("/path");
      * RecordId repository_id =
-     *   store.lookupOrAppendRepository("http://updates.novell.com", "/");
+     *   store.lookupOrAppendRepository("some-alias");
      * store.consumePackage( repository_id, package_ptr );
      * store.commit();
      * \endcode
@@ -352,15 +353,13 @@ namespace zypp
       /**
        * Returns the record id of a repository (Source)
        *
-       * \param url Url of the repository
-       * \param path path of the repository (relative to url)
+       * \param alias Unique alias for this repo
        *
        * \note If the repository entry does not exist, it will
        * be created and the new inserted entry's id will
        * be returned.
        */
-      data::RecordId lookupOrAppendRepository( const Url &url,
-                                            const Pathname &path );
+      data::RecordId lookupOrAppendRepository( const std::string &alias );
 
       /**
        * Set the resolvable shared data flag pointing to
@@ -450,11 +449,59 @@ namespace zypp
        * It is responsability of the caller to operate with
        * a valid record id. You can get one
        * Using \ref lookupOrAppendRepository
+       *
+       * If the repository does not exists, nothing will happen
        */
       void updateRepository( const data::RecordId &id,
-                                    const std::string &checksum,
-                                    const Date &timestamp = Date::now() );
+                             const std::string &checksum,
+                             const Date &timestamp = Date::now() );
+      
+      /**
+       * get the status of a cached repository
+       *
+       * It is responsability of the caller to operate with
+       * a valid record id. You can get one
+       * Using \ref lookupOrAppendRepository
+       *
+       * You can check existence using \ref isCached
+       *
+       * \throws CacheRecordNotFoundException if the repository
+       * id is invalid.
+       */
+      RepoStatus repositoryStatus( const data::RecordId &id );
+      
+      /**
+       * get the status of a cached repository
+       *
+       * It is responsability of the caller to operate with
+       * a valid alias. You can insert one
+       * Using \ref lookupOrAppendRepository
+       *
+       * You can check existence using \ref isCached
+       *
+       * \throws CacheRecordNotFoundException if the repository
+       * alias is unknown
+       */
+      RepoStatus repositoryStatus( const std::string &alias );
 
+      /**
+       * \short Does a repository exists in cache?
+       *
+       * True if the repository is cached
+       */
+      bool isCached( const std::string &alias );
+      
+      /**
+       * \short looks the id for a repository in cache
+       *
+       * \param alias Repository unique alias
+       *
+       * \throws CacheRecordNotFoundException if the repository
+       * alias is unknown
+       */
+      data::RecordId lookupRepository( const std::string &alias );
+      
+      
       /**
        * Returns the record id of a file entry \a path
        *

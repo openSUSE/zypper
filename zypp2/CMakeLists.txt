@@ -34,6 +34,7 @@ SET( zypp2_HEADERS
 SET( zypp2_cache_SRCS
   ${CMAKE_BINARY_DIR}/zypp2/schema.h
   cache/CacheInitializer.cpp
+  cache/CacheException.cc
   cache/CacheTypes.cc
   cache/ResolvableQuery.cc
   cache/CacheStore.cpp
@@ -45,6 +46,7 @@ SET( zypp2_cache_HEADERS
   cache/CacheCommon.h
   cache/CacheTypes.h
   cache/CacheInitializer.h
+  cache/CacheException.h
   cache/CacheStore.h
   cache/CacheFSCK.h
   cache/ResolvableQuery.h
@@ -76,11 +78,13 @@ SET( zypp2_cache_sqlite3x_HEADERS
 SET( zypp2_repository_SRCS
   repo/dummy.cc
   repo/RepositoryImpl.cc
+  repo/RepoException.cc
 )
 
 SET( zypp2_repository_HEADERS
   repo/dummy.h
   repo/RepositoryImpl.h
+  repo/RepoException.h
 )
 
 SET( zypp2_repository_cached_SRCS

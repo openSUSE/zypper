@@ -38,7 +38,7 @@ int main(int argc, char **argv)
     Measure open_repository_timer("CacheStore: lookupOrAppendRepository");
 
     cache::CacheStore store(getenv("PWD"));
-    data::RecordId repository_id = store.lookupOrAppendRepository( Url("http://some.url"), "/");
+    data::RecordId repository_id = store.lookupOrAppendRepository("somealias");
 
     open_repository_timer.stop();
 
