@@ -26,6 +26,7 @@ struct ResolvableQuery::Impl
   {
   }
 
+
   data::ResObject_Ptr fromRow( sqlite3_reader &reader )
   {
     data::ResObject_Ptr ptr (new data::ResObject);
@@ -39,6 +40,7 @@ struct ResolvableQuery::Impl
     return ptr;
   }
 
+  
   void query( const data::RecordId &id,
                   ProcessResolvable fnc )
   {
@@ -54,6 +56,7 @@ struct ResolvableQuery::Impl
     }
     con.executenonquery("COMMIT;");
   }
+
 
   void query( const std::string &s,
               ProcessResolvable fnc  )
@@ -72,6 +75,7 @@ struct ResolvableQuery::Impl
     con.executenonquery("COMMIT;");
   }
 
+
   std::string queryStringAttribute( const data::RecordId &record_id,
                                     const std::string &klass,
                                     const std::string &name )
@@ -79,6 +83,7 @@ struct ResolvableQuery::Impl
     sqlite3_connection con((_dbdir + "zypp.db").asString().c_str());
     return queryStringAttributeTranslationInternal( con, record_id, Locale(), klass, name);
   }
+
 
   std::string queryStringAttributeTranslation( const data::RecordId &record_id,
                                                const Locale &locale,
@@ -89,6 +94,7 @@ struct ResolvableQuery::Impl
     return queryStringAttributeTranslationInternal( con, record_id, locale, klass, name );
   }
 
+
   TranslatedText queryTranslatedStringAttribute( const data::RecordId &record_id,
                                                  const std::string &klass,
                                                  const std::string &name )
@@ -96,6 +102,7 @@ struct ResolvableQuery::Impl
     sqlite3_connection con((_dbdir + "zypp.db").asString().c_str());
     return queryTranslatedStringAttributeInternal( con, record_id, klass, name );
   }
+
 
   int queryNumericAttribute( const data::RecordId &record_id,
                                  const std::string &klass,
@@ -210,6 +217,14 @@ int ResolvableQuery::queryNumericAttribute( const data::RecordId &record_id,
 {
   return _pimpl->queryNumericAttribute(record_id, klass, name);
 }
+
+bool ResolvableQuery::queryBooleanAttribute( const data::RecordId &record_id,
+                                             const std::string &klass,
+                                             const std::string &name )
+{
+  return _pimpl->queryNumericAttribute(record_id, klass, name);
+}
+
 
 std::string ResolvableQuery::queryStringAttribute( const data::RecordId &record_id,
                                                    const std::string &klass,

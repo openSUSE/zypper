@@ -82,7 +82,7 @@ ByteCount PackageImpl::archivesize() const
 
 bool PackageImpl::installOnly() const
 {
-  return _repository->resolvableQuery().queryNumericAttribute( _id, "ResObject", "installOnly" );
+  return _repository->resolvableQuery().queryBooleanAttribute( _id, "ResObject", "installOnly" );
 }
 
 unsigned PackageImpl::repositoryMediaNr() const

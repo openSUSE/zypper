@@ -97,6 +97,19 @@ struct CacheStore::Impl
 
     count_shared_cmd.reset( new sqlite3_command( con, "select count(id) from resolvables where shared_id=:rid;" ));
 
+    insert_patchrpm_cmd.reset( new sqlite3_command (con,
+      "insert into patch_packages (media_nr, location, checksum, download_size, build_time) "
+      "values (:media_nr, :location, :checksum, :download_size, :build_time);" ));
+    insert_deltarpm_cmd.reset( new sqlite3_command (con,
+      "insert into delta_packages (media_nr, location, checksum, download_size, build_time, "
+        "baseversion_version, baseversion_release, baseversion_epoch, baseversion_checksum, "
+        "baseversion_build_time, baseversion_sequence_info) "
+      "values (:media_nr, :location, :checksum, :download_size, :build_time, "
+        ":baseversion_version, :baseversion_release, :baseversion_epoch, :baseversion_checksum, "
+        ":baseversion_build_time, :baseversion_sequence_info);" ));
+    append_patch_baseversion_cmd.reset( new sqlite3_command (con,
+      "insert into patch_packages_baseversions (patch_package_id, version, release, epoch) "
+      "values (:patch_package_id, :version, :release, :epoch)" ));
 
 
     // disable autocommit
@@ -157,6 +170,10 @@ struct CacheStore::Impl
 
   sqlite3_command_ptr count_shared_cmd;
 
+  sqlite3_command_ptr insert_patchrpm_cmd;
+  sqlite3_command_ptr insert_deltarpm_cmd;
+  sqlite3_command_ptr append_patch_baseversion_cmd;
+
   map<string, RecordId> name_cache;
   map< pair<string,string>, RecordId> type_cache;
   int name_cache_hits;
@@ -185,19 +202,24 @@ void CacheStore::commit()
   _pimpl->con.executenonquery("COMMIT;");
 }
 
-void CacheStore::consumeResObject( const data::RecordId &rid, data::ResObject_Ptr res )
+void CacheStore::appendResObjectAttributes( const data::RecordId &rid,
+                                            const data::ResObject_Ptr & res )
 {
   appendTranslatedStringAttribute( rid, "ResObject", "description", res->description );
   appendTranslatedStringAttribute( rid, "ResObject", "summary", res->summary );
   appendNumericAttribute( rid, "ResObject", "installedSize", res->installedSize );
   appendNumericAttribute( rid, "ResObject", "buildTime", res->buildTime );
+  appendBooleanAttribute( rid, "ResObject", "installOnly", res->installOnly );
+  appendStringAttribute( rid, "ResObject", "vendor", res->vendor );
+  appendTranslatedStringAttribute( rid, "ResObject", "licenseToConfirm", res->licenseToConfirm );
+  appendTranslatedStringAttribute( rid, "ResObject", "insnotify", res->insnotify );
+  appendTranslatedStringAttribute( rid, "ResObject", "delnotify", res->delnotify );
 }
 
-void CacheStore::consumePackage( const RecordId &repository_id, data::Package_Ptr package )
-{
-  RecordId pkgid = appendResolvable( repository_id, ResTraits<Package>::kind, NVRA( package->name, package->edition, package->arch ), package->deps );
-  consumeResObject( pkgid, package );
 
+void CacheStore::appendPackageBaseAttributes( const RecordId & pkgid,
+                                              const data::Packagebase_Ptr & package )
+{
   appendStringAttribute( pkgid, "Package", "checksum", package->repositoryLocation.fileChecksum.checksum() );
   appendStringAttribute( pkgid, "Package", "buildhost", package->buildhost );
   appendStringAttribute( pkgid, "Package", "distribution", package->distribution );
@@ -215,15 +237,40 @@ void CacheStore::consumePackage( const RecordId &repository_id, data::Package_Pt
   appendStringAttribute( pkgid, "Package", "location", package->repositoryLocation.filePath.asString() );
 }
 
-void CacheStore::consumeSourcePackage( const data::RecordId &repository_id, data::SrcPackage_Ptr srcpackage )
+void CacheStore::consumePackage( const RecordId & repository_id,
+                                 const data::Package_Ptr & package )
 {
+  RecordId pkgid = appendResolvable( repository_id, ResTraits<Package>::kind,
+      NVRA( package->name, package->edition, package->arch ), package->deps );
+  appendResObjectAttributes( pkgid, package );
+  appendPackageBaseAttributes( pkgid, package );
+}
+
+void CacheStore::consumeSourcePackage( const data::RecordId & repository_id,
+                                       const data::SrcPackage_Ptr & package )
+{
+  RecordId pkgid = appendResolvable( repository_id, ResTraits<SrcPackage>::kind,
+      NVRA( package->name, package->edition, package->arch ), package->deps );
+  appendResObjectAttributes( pkgid, package );
+  appendPackageBaseAttributes( pkgid, package );
 #warning TBD
 }
 
-void CacheStore::consumePatch( const data::RecordId &repository_id, data::Patch_Ptr patch)
+void CacheStore::consumePatch( const data::RecordId & repository_id,
+                               const data::Patch_Ptr & patch)
 {
-  RecordId id = appendResolvable( repository_id, ResTraits<Patch>::kind, NVRA( patch->name, patch->edition, patch->arch ), patch->deps );
-  consumeResObject( id, patch );
+  RecordId id = appendResolvable(
+      repository_id, ResTraits<Patch>::kind,
+      NVRA( patch->name, patch->edition, patch->arch ), patch->deps );
+
+  appendResObjectAttributes( id, patch );
+
+  // patch attributes
+  appendNumericAttribute( id, "Patch", "timestamp",         patch->timestamp );
+  appendStringAttribute(  id, "Patch", "category",          patch->category );
+  appendBooleanAttribute( id, "Patch", "rebootNeeded",      patch->rebootNeeded );
+  appendBooleanAttribute( id, "Patch", "affectsPkgManager", patch->affectsPkgManager );
+
 
   DBG << "got patch " << patch->name << ", atoms: ";
   // cosume atoms
@@ -262,45 +309,95 @@ void CacheStore::consumePatch( const data::RecordId &repository_id, data::Patch_
   DBG << endl;
 }
 
-void CacheStore::consumePackageAtom( const data::RecordId &repository_id, const data::PackageAtom_Ptr & atom )
+void CacheStore::consumePackageAtom( const data::RecordId & repository_id,
+                                     const data::PackageAtom_Ptr & atom )
 {
-  RecordId id = appendResolvable( repository_id, ResTraits<Atom>::kind, NVRA( atom->name, atom->edition, atom->arch ), atom->deps );
-  consumeResObject( id, atom );
+  RecordId id = appendResolvable( repository_id, ResTraits<Atom>::kind,
+      NVRA( atom->name, atom->edition, atom->arch ), atom->deps );
+  appendResObjectAttributes( id, atom );
+  appendPackageBaseAttributes( id, atom );
+
+  for (set<data::PatchRpm_Ptr>::const_iterator p = atom->patchRpms.begin();
+       p != atom->patchRpms.end(); ++p)
+    appendPatchRpm(*p);
+
+  for (set<data::DeltaRpm_Ptr>::const_iterator d = atom->deltaRpms.begin();
+       d != atom->deltaRpms.end(); ++d)
+    appendDeltaRpm(*d);
 }
 
-void CacheStore::consumeMessage( const data::RecordId &repository_id, data::Message_Ptr message )
+void CacheStore::consumeMessage( const data::RecordId & repository_id,
+                                 const data::Message_Ptr & message )
 {
-  RecordId id = appendResolvable( repository_id, ResTraits<Message>::kind, NVRA( message->name, message->edition, message->arch ), message->deps );
-  consumeResObject( id, message );
+  RecordId id = appendResolvable( repository_id, ResTraits<Message>::kind,
+      NVRA( message->name, message->edition, message->arch ), message->deps );
+  appendResObjectAttributes( id, message );
+
+  appendTranslatedStringAttribute( id, "Message", "text", message->text );
 }
 
-void CacheStore::consumeScript( const data::RecordId &repository_id, data::Script_Ptr script )
+void CacheStore::consumeScript( const data::RecordId & repository_id,
+                                const data::Script_Ptr & script )
 {
-  RecordId id = appendResolvable( repository_id, ResTraits<Script>::kind, NVRA( script->name, script->edition, script->arch ), script->deps );
-  consumeResObject( id, script );
+  RecordId id = appendResolvable( repository_id, ResTraits<Script>::kind,
+      NVRA( script->name, script->edition, script->arch ), script->deps );
+  appendResObjectAttributes( id, script );
+
+  appendStringAttribute( id, "Script", "doScript", script->doScript );
+  appendStringAttribute( id, "Script", "doScriptLocation", script->doScriptLocation.filePath.asString() );
+  appendStringAttribute( id, "Script", "doScriptChecksum", script->doScriptLocation.fileChecksum.checksum() );
+  //! \todo what about checksum type?
+  appendStringAttribute( id, "Script", "undoScript", script->undoScript );
+  appendStringAttribute( id, "Script", "undoScriptLocation", script->undoScriptLocation.filePath.asString() );
+  appendStringAttribute( id, "Script", "undoScriptChecksum", script->undoScriptLocation.fileChecksum.checksum() );
+  //! \todo what about checksum type?
 }
 
-void CacheStore::consumePattern( const data::RecordId &repository_id, data::Pattern_Ptr pattern )
+void CacheStore::consumePattern( const data::RecordId & repository_id,
+                                 const data::Pattern_Ptr & pattern )
 {
-  RecordId id = appendResolvable( repository_id, ResTraits<Pattern>::kind, NVRA( pattern->name, pattern->edition, pattern->arch ), pattern->deps );
-  consumeResObject( id, pattern );
+  RecordId id = appendResolvable( repository_id, ResTraits<Pattern>::kind,
+      NVRA( pattern->name, pattern->edition, pattern->arch ), pattern->deps );
+  appendResObjectAttributes( id, pattern );
+
+  appendBooleanAttribute( id, "Pattern", "isDefault", pattern->isDefault );
+  appendBooleanAttribute( id, "Pattern", "userVisible", pattern->userVisible );
+  appendTranslatedStringAttribute( id, "Pattern", "category", pattern->category );
+  appendStringAttribute( id, "Pattern", "icon", pattern->icon );
+  appendStringAttribute( id, "Pattern", "order", pattern->order );
 }
 
-void CacheStore::consumeProduct( const data::RecordId &repository_id, data::Product_Ptr product )
+void CacheStore::consumeProduct( const data::RecordId & repository_id,
+                                 const data::Product_Ptr & product )
 {
-  RecordId id = appendResolvable( repository_id, ResTraits<Product>::kind, NVRA( product->name, product->edition, product->arch ), product->deps );
-  consumeResObject( id, product );
+  RecordId id = appendResolvable( repository_id, ResTraits<Product>::kind,
+      NVRA( product->name, product->edition, product->arch ), product->deps );
+  appendResObjectAttributes( id, product );
+
+  appendTranslatedStringAttribute( id, "Product", "shortName", product->shortName );
+  appendTranslatedStringAttribute( id, "Product", "longName", product->longName );
+  //! \todo std::list<std::string> flags;
+  appendStringAttribute( id, "Pattern", "releasenotesUrl", product->releasenotesUrl.asString() );
+  //! \todo std::list<Url> updateUrls;
+  //! \todo std::list<Url> extraUrls;
+  //! \todo std::list<Url> optionalUrls;
+  appendStringAttribute( id, "Pattern", "distributionName", product->distributionName );
+  appendStringAttribute( id, "Pattern", "distributionEdition", product->distributionEdition.asString() );
 }
 
-void CacheStore::consumeChangelog( const data::RecordId &repository_id, const data::Resolvable_Ptr & resolvable, const Changelog & changelog )
+void CacheStore::consumeChangelog( const data::RecordId & repository_id,
+                                   const data::Resolvable_Ptr & resolvable,
+                                   const Changelog & changelog )
 {
   // TODO
-  // maybe consumeChangelog(const data::RecordId & resolvable_id, Changelog changelog) will
+  // maybe appendChangelog(const data::RecordId & resolvable_id, Changelog changelog) will
   // be needed for inserting the changelog using in-memory record id of corresponding
   // resolvable. (first, we'll see how fast is the inserting without remembering those ids)
 }
 
-void CacheStore::consumeFilelist( const data::RecordId &repository_id, const data::Resolvable_Ptr & resolvable, const data::Filenames & filenames )
+void CacheStore::consumeFilelist( const data::RecordId & repository_id,
+                                  const data::Resolvable_Ptr & resolvable,
+                                  const data::Filenames & filenames )
 {
   // TODO
   // maybe consumeFilelist(const data::RecordId & resolvable_id, data::Filenames &) will
@@ -308,9 +405,9 @@ void CacheStore::consumeFilelist( const data::RecordId &repository_id, const dat
 }
 
 RecordId CacheStore::appendResolvable( const RecordId &repository_id,
-                                             const Resolvable::Kind &kind,
-                                             const NVRA &nvra,
-                                             const data::Dependencies &deps )
+                                       const Resolvable::Kind &kind,
+                                       const NVRA &nvra,
+                                       const data::Dependencies &deps )
 {
   _pimpl->append_resolvable_cmd->bind( ":name", nvra.name );
   _pimpl->append_resolvable_cmd->bind( ":version", nvra.edition.version() );
@@ -505,6 +602,59 @@ void CacheStore::appendUnknownDependency( const RecordId &resolvable_id,
 
   _pimpl->append_hal_dependency_cmd->executenonquery();
   //delete cmd;
+}
+
+
+/** \todo lookupOrAppend ? */
+RecordId CacheStore::appendPatchRpm(const data::PatchRpm_Ptr & prpm)
+{
+  RecordId id;
+
+  //! \todo what's this? _pimpl->insert_patchrpm_cmd->bind(":media_nr", ???);
+  _pimpl->insert_patchrpm_cmd->bind(":location", prpm->location.filePath.asString());
+  _pimpl->insert_patchrpm_cmd->bind(":checksum", prpm->location.fileChecksum.checksum());
+  _pimpl->insert_patchrpm_cmd->bind(":download_size", static_cast<ByteCount::SizeType>(prpm->location.fileSize));
+  _pimpl->insert_patchrpm_cmd->bind(":build_time", prpm->buildTime.asSeconds());
+  _pimpl->insert_patchrpm_cmd->executenonquery();
+
+  id = _pimpl->con.insertid();
+
+  for (set<data::BaseVersion_Ptr>::const_iterator bv = prpm->baseVersions.begin();
+       bv != prpm->baseVersions.end(); ++bv)
+  {
+    _pimpl->append_patch_baseversion_cmd->bind(":patch_package_id", id);
+    _pimpl->append_patch_baseversion_cmd->bind(":version", (*bv)->edition.version());
+    _pimpl->append_patch_baseversion_cmd->bind(":release", (*bv)->edition.release());
+    _pimpl->append_patch_baseversion_cmd->bind(":epoch", (int) (*bv)->edition.epoch());
+    _pimpl->append_patch_baseversion_cmd->executenonquery();
+  }
+ 
+  return id;
+}
+
+
+/** \todo lookupOrAppend ? */
+RecordId CacheStore::appendDeltaRpm(const data::DeltaRpm_Ptr & drpm)
+{
+  RecordId id;
+
+  //! \todo what's this? _pimpl->insert_deltarpm_cmd->bind(":media_nr", ???);
+  _pimpl->insert_deltarpm_cmd->bind(":location", drpm->location.filePath.asString());
+  _pimpl->insert_deltarpm_cmd->bind(":checksum", drpm->location.fileChecksum.checksum());
+  _pimpl->insert_deltarpm_cmd->bind(":download_size", static_cast<ByteCount::SizeType>(drpm->location.fileSize));
+  _pimpl->insert_deltarpm_cmd->bind(":build_time", drpm->buildTime.asSeconds());
+
+  _pimpl->insert_deltarpm_cmd->bind(":baseversion_version", drpm->baseVersion.edition.version());
+  _pimpl->insert_deltarpm_cmd->bind(":baseversion_release", drpm->baseVersion.edition.release());
+  _pimpl->insert_deltarpm_cmd->bind(":baseversion_epoch", (int) drpm->baseVersion.edition.epoch());
+  _pimpl->insert_deltarpm_cmd->bind(":baseversion_build_time", drpm->baseVersion.buildTime.asSeconds());
+  _pimpl->insert_deltarpm_cmd->bind(":baseversion_checksum", drpm->baseVersion.checkSum.checksum());
+  _pimpl->insert_deltarpm_cmd->bind(":baseversion_sequence_info", drpm->baseVersion.sequenceInfo);
+
+  _pimpl->insert_deltarpm_cmd->executenonquery();
+  id = _pimpl->con.insertid();
+
+  return id;
 }
 
 
@@ -744,6 +894,15 @@ void CacheStore::setSharedData( const data::RecordId &resolvable_id,
   _pimpl->set_shared_flag_cmd->executenonquery();
 }
 
+void CacheStore::appendBooleanAttribute( const data::RecordId & resolvable_id,
+                                         const std::string & klass,
+                                         const std::string & name,
+                                         bool value)
+{
+  RecordId type_id = lookupOrAppendType( klass, name );
+  appendNumericAttribute( resolvable_id, type_id, value ? 1 : 0 );
+}
+
 void CacheStore::appendNumericAttribute( const data::RecordId &resolvable_id,
                                          const std::string &klass,
                                          const std::string &name,
@@ -786,7 +945,11 @@ void CacheStore::appendStringAttributeTranslation( const data::RecordId &resolva
                                                    const std::string &name,
                                                    const std::string &text )
 {
-  RecordId lang_id = lookupOrAppendType("lang", locale.code() );
+  // don't bother with writing if the string is empty
+  if (text.empty()) return;
+
+  RecordId lang_id = lookupOrAppendType("lang",
+      locale.code().empty() ? "none" : locale.code() );
   RecordId type_id = lookupOrAppendType( klass, name );
   appendStringAttribute( resolvable_id, lang_id, type_id, text );
 }
@@ -813,6 +976,9 @@ void CacheStore::appendStringAttribute( const RecordId &resolvable_id,
                             const RecordId &type_id,
                             const string &value )
 {
+  // don't bother with writing if the string is empty
+  if (value.empty()) return;
+
   // weak resolvable_id
   _pimpl->append_text_attribute_cmd->bind(":rid", resolvable_id );
   _pimpl->append_text_attribute_cmd->bind(":lang_id", lang_id );

@@ -65,7 +65,23 @@ namespace zypp
       int queryNumericAttribute( const data::RecordId &record_id,
                                  const std::string &klass,
                                  const std::string &name );
-      
+
+
+      /**
+       * Queries a specifc attribute for a resolvable
+       *
+       * \param record_id Resolvable cache id
+       * \param klass Attribute Class
+       * \param name Attribute Name
+       *
+       * \return The bool value of the attribute or <tt>false</tt>
+       *         if no record is found.
+       */
+      bool queryBooleanAttribute( const data::RecordId &record_id,
+                                  const std::string &klass,
+                                  const std::string &name );
+
+
       /**
        * Queries a specifc attribute for a resolvable
        *
