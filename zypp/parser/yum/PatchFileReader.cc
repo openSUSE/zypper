@@ -550,8 +550,8 @@ namespace zypp
         return true;
       }
 
-      // xpath: /patch/atoms/package/patchrpm/baseversion (+)
-      if (reader_r->name() == "baseversion")
+      // xpath: /patch/atoms/package/patchrpm/base-version (+)
+      if (reader_r->name() == "base-version")
       {
         data::BaseVersion_Ptr base_ptr = new data::BaseVersion;
 
@@ -626,8 +626,8 @@ namespace zypp
         return true;
       }
 
-      // xpath: /patch/atoms/package/deltarpm/baseversion
-      if (reader_r->name() == "baseversion")
+      // xpath: /patch/atoms/package/deltarpm/base-version
+      if (reader_r->name() == "base-version")
       {
         // size of the rpm file
         _deltarpm->baseVersion.edition = Edition(reader_r->getAttribute("ver").asString(),
