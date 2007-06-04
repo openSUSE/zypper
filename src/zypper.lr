@@ -1,4 +1,4 @@
-/var/log/YaST2/zypper.log {
+/var/log/zypper.log {
     compress
     dateext
     notifempty
@@ -9,5 +9,4 @@
     rotate 99
     size 10M
 }
-
 
