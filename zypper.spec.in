@@ -66,6 +66,8 @@ make install DESTDIR=$RPM_BUILD_ROOT
 rm -f ${RPM_BUILD_ROOT}%{_sbindir}/zypp-checkpatches
 rm -f ${RPM_BUILD_ROOT}%{_sbindir}/zypp-checkpatches-wrapper
 %endif
+%{__install} -d -m755 %buildroot%_var/log
+touch %buildroot%_var/log/zypper.log
 
 %post
 %run_ldconfig
@@ -96,3 +98,6 @@ rm -f ${RPM_BUILD_ROOT}%{_sbindir}/zypp-checkpatches-wrapper
 %doc %dir %{_datadir}/doc/packages/zypper
 %doc %{_datadir}/doc/packages/zypper/TODO
 %doc %{_datadir}/doc/packages/zypper/zypper-rug
+# declare ownership of the log file but prevent
+# it from being erased by rpm -e
+%ghost %config(noreplace) /var/log/zypper.log
