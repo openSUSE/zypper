@@ -41,5 +41,10 @@ namespace zypp
   Repository::NumericId Repository::numericId() const
   { return _pimpl->numericId(); }
 
+  const ResStore & Repository::resolvables()
+  {
+    return _pimpl->resolvables();
+  }
+  
 }
 

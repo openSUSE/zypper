@@ -7,6 +7,7 @@
 
 #include "zypp/base/PtrTypes.h"
 #include "zypp/base/SafeBool.h"
+#include "zypp/ResStore.h"
 
 namespace zypp
 {
@@ -49,6 +50,9 @@ namespace zypp
 
     /** Runtime unique numeric Repository Id. */
     NumericId numericId() const;
+    
+    const ResStore & resolvables();
+    
   private:
     friend base::SafeBool<Repository>::operator bool_type() const;
     /** \ref SafeBool test. */
@@ -57,7 +61,7 @@ namespace zypp
 
   private:
     /** Factory */
-    friend class RepositoryFactory;
+    friend class RepoManager;
     friend class repo::RepositoryImpl;
 
   private:

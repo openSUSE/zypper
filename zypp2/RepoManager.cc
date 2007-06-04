@@ -16,16 +16,30 @@
 #include "zypp/base/InputStream.h"
 #include "zypp/base/Logger.h"
 #include "zypp/PathInfo.h"
+#include "zypp/TmpPath.h"
 #include "zypp/parser/IniDict.h"
 
 #include "zypp2/repo/RepoException.h"
 #include "zypp2/RepoManager.h"
+
+#include "zypp2/cache/CacheStore.h"
+#include "zypp2/repo/cached/RepoImpl.h"
+#include "zypp/MediaSetAccess.h"
+
+#include "zypp/source/yum/YUMDownloader.h"
+#include "zypp2/parser/yum/YUMParser.h"
+
+#include "zypp/source/susetags/SUSETagsDownloader.h"
+#include "zypp2/parser/susetags/RepoParser.h"
 
 using namespace std;
 using namespace zypp;
 using namespace zypp::repo;
 using namespace zypp::filesystem;
 using parser::IniDict;
+
+using zypp::source::yum::YUMDownloader;
+using zypp::source::susetags::SUSETagsDownloader;
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -71,7 +85,7 @@ namespace zypp
         else if ( it->first == "baseurl" )
           info.addBaseUrl( Url(it->second) );
         else if ( it->first == "type" )
-          info.setType(it->second);
+          info.setType(repo::RepoType(it->second));
       }
       
       // add it to the list.
@@ -177,37 +191,166 @@ namespace zypp
         ZYPP_THROW(RepoNoAliasException());
   }
   
-  static Pathname rawcache_path_for_alias( const RepoManagerOptions &opt, const string &alias )
+  static void assert_urls( const RepoInfo &info )
   {
-    //repoRawCachePath
-    return Pathname();
+    if (info.urls().empty())
+        ZYPP_THROW(RepoNoUrlException());
   }
   
+  static Pathname rawcache_path_for_repoinfo( const RepoManagerOptions &opt, const RepoInfo &info )
+  {
+    assert_alias(info);
+    return opt.repoRawCachePath + info.alias();
+  }
+
   void RepoManager::refreshMetadata( const RepoInfo &info )
   {
     assert_alias(info);
+    assert_urls(info);
     
-    
+    // try urls one by one
+    for ( RepoInfo::urls_const_iterator it = info.urlsBegin(); it != info.urlsEnd(); ++it )
+    {
+      Url url(*it);
+      filesystem::TmpDir tmpdir;
+      
+      repo::RepoType repokind = info.type();
+      
+      // if the type is unknown, try probing.
+      switch ( repokind.toEnum() )
+      {
+        case RepoType::NONE_e:
+          // unknown, probe it
+          repokind = probe(*it);
+        break;
+        default:
+        break;
+      }
+      
+      switch ( repokind.toEnum() )
+      {
+        case RepoType::RPMMD_e :
+        {
+          YUMDownloader downloader( url, "/" );
+          downloader.download(tmpdir.path());
+           // no error
+        }
+        break;
+        case RepoType::YAST2_e :
+        {
+          SUSETagsDownloader downloader( url, "/" );
+          downloader.download(tmpdir.path());
+          // no error
+        }
+        break;
+        default:
+          ZYPP_THROW(RepoUnknownTypeException());
+      }
+      
+      // ok we have the metadata, now exchange
+      // the contents
+      Pathname rawpath = rawcache_path_for_repoinfo(_pimpl->options, info);
+      TmpDir oldmetadata;
+      filesystem::assert_dir(rawpath);
+      filesystem::rename( rawpath, oldmetadata.path() );
+      // move the just downloaded there
+      filesystem::rename( tmpdir.path(), rawpath );
+      
+      // we are done.
+    }
   }
   
   void RepoManager::cleanMetadata( const RepoInfo &info )
   {
-  
+    filesystem::recursive_rmdir(rawcache_path_for_repoinfo(_pimpl->options, info));
   }
   
   void RepoManager::buildCache( const RepoInfo &info )
   {
+    assert_alias(info);
+    Pathname rawpath = rawcache_path_for_repoinfo(_pimpl->options, info);
+    
+    cache::CacheStore store(_pimpl->options.repoCachePath);
+    
+    if ( store.isCached( info.alias() ) )
+    {
+      MIL << info.alias() << " is already cached, cleaning..." << endl;
+      data::RecordId id = store.lookupRepository(info.alias());
+      store.cleanRepository(id);
+    }
+    
+    data::RecordId id = store.lookupOrAppendRepository(info.alias());
+    
+    // do we have type?
+    repo::RepoType repokind = info.type();
+      
+      // if the type is unknown, try probing.
+      switch ( repokind.toEnum() )
+      {
+        case RepoType::NONE_e:
+          // unknown, probe the local metadata
+          repokind = probe(Url(rawpath.asString()));
+        break;
+        default:
+        break;
+      }
+      
+      switch ( repokind.toEnum() )
+      {
+        case RepoType::RPMMD_e :
+        {
+          parser::yum::YUMParser parser(id, store);
+          parser.parse(rawpath);
+           // no error
+        }
+        break;
+        case RepoType::YAST2_e :
+        {
+          parser::susetags::RepoParser parser(id, store);
+          parser.parse(rawpath);
+          // no error
+        }
+        break;
+        default:
+          ZYPP_THROW(RepoUnknownTypeException());
+      }
+      
+      MIL << "Commit cache.." << endl;
+      store.commit();
+  }
   
+  repo::RepoType RepoManager::probe( const Url &url )
+  {
+    MediaSetAccess access(url);
+    if ( access.doesFileExist("/repodata/repomd.xml") )
+      return repo::RepoType::RPMMD;
+    if ( access.doesFileExist("/content") )
+      return repo::RepoType::YAST2;
+    
+    return repo::RepoType("UNKNOWN");
   }
   
   void RepoManager::cleanCache( const RepoInfo &info )
   {
-  
+    cache::CacheStore store(_pimpl->options.repoCachePath);
+
+    data::RecordId id = store.lookupRepository(info.alias());
+    store.cleanRepository(id);
+    store.commit();
   }
   
   Repository RepoManager::createFromCache( const RepoInfo &info )
   {
-    return Repository::noRepository;
+    cache::CacheStore store(_pimpl->options.repoCachePath);
+    
+    if ( ! store.isCached( info.alias() ) )
+      ZYPP_THROW(RepoNotCachedException());
+    
+    MIL << "Repository " << info.alias() << " is cached" << endl;
+    
+    data::RecordId id = store.lookupRepository(info.alias());
+    repo::cached::RepoImpl::Ptr repoimpl = new repo::cached::RepoImpl( info, _pimpl->options.repoCachePath, id );
+    return Repository(repoimpl);
   }
  
   /******************************************************************

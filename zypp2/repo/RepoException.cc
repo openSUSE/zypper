@@ -22,37 +22,29 @@ namespace zypp
   namespace repo
   { /////////////////////////////////////////////////////////////////
  
-    ///////////////////////////////////////////////////////////////////
-    //
-    //	METHOD NAME : RepoException::RepoException
-    //	METHOD TYPE : Ctor
-    //
     RepoException::RepoException()
     : Exception( "Repo exception" )
     {}
 
-    ///////////////////////////////////////////////////////////////////
-    //
-    //	METHOD NAME : RepoException::RepoException
-    //	METHOD TYPE : Ctor
-    //
     RepoException::RepoException( const std::string & msg_r )
     : Exception( msg_r )
     {}
 
-    ///////////////////////////////////////////////////////////////////
-    //
-    //	METHOD NAME : RepoException::~RepoException
-    //	METHOD TYPE : Dtor
-    //
     RepoException::~RepoException() throw()
     {}
+    
+    RepoNotCachedException::RepoNotCachedException()
+    : RepoException( "Repository not Cached" )
+    {}
 
-    ///////////////////////////////////////////////////////////////////
-    //
-    //	METHOD NAME : RepoException::dumpOn
-    //	METHOD TYPE : std::ostream &
-    //
+    RepoNotCachedException::RepoNotCachedException( const std::string & msg_r )
+    : RepoException( msg_r )
+    {}
+
+    RepoNotCachedException::~RepoNotCachedException() throw()
+    {}
+
+
     std::ostream & RepoException::dumpOn( std::ostream & str ) const
     {
       return Exception::dumpOn( str );

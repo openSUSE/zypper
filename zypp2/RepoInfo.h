@@ -20,6 +20,8 @@
 #include <boost/logic/tribool.hpp>
 #include "zypp/Pathname.h"
 #include "zypp/Url.h"
+#include "zypp2/repo/RepoType.h"
+
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -122,9 +124,9 @@ namespace zypp
     
     /**
      * Type of repository,
-     * FIXME should be an enum?
+     * 
      */
-    std::string type() const;
+    repo::RepoType type() const;
     
     /**
      * \short Repository short label
@@ -169,7 +171,7 @@ namespace zypp
      * set the repository type \see type
      * \param t
      */
-    RepoInfo & setType( const std::string &t );
+    RepoInfo & setType( const repo::RepoType &t );
     
     /**
      * set the repository name \see name

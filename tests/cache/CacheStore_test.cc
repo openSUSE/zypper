@@ -14,6 +14,7 @@
 #include "zypp/capability/CapabilityImpl.h"
 #include "zypp/data/ResolvableData.h"
 #include "zypp2/cache/CacheStore.h"
+#include "zypp2/RepoInfo.h"
 #include "zypp2/repo/cached/RepoImpl.h"
 #include "zypp/Url.h"
 #include "zypp/NVRA.h"
@@ -55,7 +56,7 @@ void cache_write_test(const string &dir)
   {
     MIL << "now read resolvables" << endl;
     
-    cached::RepoImpl *repositoryImpl = new cached::RepoImpl(tmpdir.path(), repository_id);
+    cached::RepoImpl *repositoryImpl = new cached::RepoImpl( RepoInfo(), tmpdir.path(), repository_id);
     //RepositoryFactory factory;
     //Repository_Ref repository = factory.createFrom(repositoryImpl);
     repositoryImpl->createResolvables();

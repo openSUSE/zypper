@@ -37,8 +37,9 @@ namespace repo
 namespace cached
 { /////////////////////////////////////////////////////////////////
 
-RepoImpl::RepoImpl( const Pathname &dbdir, const data::RecordId &repository_id )
-  : _dbdir(dbdir),
+RepoImpl::RepoImpl( const RepoInfo &repoinfo, const Pathname &dbdir, const data::RecordId &repository_id )
+  : RepositoryImpl(repoinfo),
+    _dbdir(dbdir),
     _type_cache(dbdir),
     _repository_id(repository_id),
     _rquery(dbdir)

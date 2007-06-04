@@ -49,7 +49,10 @@ namespace zypp
      */
     class RepoNotCachedException : public RepoException
     {
-    
+    public:
+      RepoNotCachedException();
+      RepoNotCachedException( const std::string & msg_r );
+      virtual ~RepoNotCachedException() throw();
     };
     
     /**
@@ -66,6 +69,15 @@ namespace zypp
      * determine an alias for this repo.
      */
     class RepoNoAliasException : public RepoException
+    {
+    
+    };
+    
+    /**
+     * thrown when it was impossible to
+     * determine an alias for this repo.
+     */
+    class RepoUnknownTypeException : public RepoException
     {
     
     };

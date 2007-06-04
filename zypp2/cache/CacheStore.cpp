@@ -733,6 +733,26 @@ RecordId CacheStore::lookupOrAppendRepository( const string &alias )
   return static_cast<RecordId>(id);
 }
 
+void CacheStore::cleanRepository( const data::RecordId &id )
+{
+  sqlite3_command cmd( _pimpl->con, "delete from repositories where id=:id");
+  cmd.bind(":id", id);
+  
+  try
+  {
+    cmd.executenonquery();
+  }
+  catch ( const sqlite3x::database_error &e )
+  {
+    ZYPP_THROW(CacheRecordNotFoundException());
+  }
+}
+      
+void CacheStore::cleanRepository( const std::string &alias )
+{
+  cleanRepository(lookupRepository(alias));
+}
+
 RepoStatus CacheStore::repositoryStatus( const data::RecordId &id )
 {
   sqlite3_command cmd( _pimpl->con, "select id,alias,checksum,timestamp from repositories where id=:id");
@@ -770,6 +790,7 @@ bool CacheStore::isCached( const string &alias )
   {
     return false;
   }
+  
   return true;
 }
 

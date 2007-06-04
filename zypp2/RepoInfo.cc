@@ -31,12 +31,13 @@ namespace zypp
     
     Impl()
       : enabled (indeterminate),
-        autorefresh(indeterminate)
+        autorefresh(indeterminate),
+        type(repo::RepoType::NONE_e)
     {}
   public:
     boost::tribool enabled;
     boost::tribool autorefresh;
-    std::string type;
+    repo::RepoType type;
     Url mirrorlist_url;
     std::set<Url> urls;
     std::string alias;
@@ -119,7 +120,7 @@ namespace zypp
     return *this;
   }
 
-  RepoInfo & RepoInfo::setType( const std::string &t )
+  RepoInfo & RepoInfo::setType( const repo::RepoType &t )
   {
     _pimpl->type = t;
     return *this;
@@ -143,7 +144,7 @@ namespace zypp
   std::string RepoInfo::name() const
   { return _pimpl->name; }
 
-  std::string RepoInfo::type() const
+  repo::RepoType RepoInfo::type() const
   { return _pimpl->type; }
 
   Url RepoInfo::mirrorListUrl() const

@@ -9,6 +9,7 @@
 #include "zypp/KeyRing.h"
 #include "zypp/PublicKey.h"
 #include "zypp/TmpPath.h"
+#include "zypp/ResStore.h"
 
 #include "zypp2/RepoManager.h"
 
@@ -25,6 +26,7 @@ using namespace boost::unit_test::log;
 using namespace std;
 using namespace zypp;
 using namespace zypp::filesystem;
+using namespace zypp::repo;
 
 void repomanager_test( const string &dir )
 {
@@ -42,6 +44,24 @@ void repomanager_test( const string &dir )
   list<RepoInfo> repos = manager.knownRepositories();
   
   BOOST_CHECK_EQUAL(repos.size(), (unsigned) 3);
+  
+  RepoInfo repo(repos.front());
+  manager.refreshMetadata(repo);
+  
+  Repository repository;
+  try {
+    repository = manager.createFromCache(repo);
+  }
+  catch ( const RepoNotCachedException &e )
+  {
+    ZYPP_CAUGHT(e);
+    MIL << "repo " << repo.alias() << " not cached yet. Caching..." << endl;
+    manager.buildCache(repo);
+    repository = manager.createFromCache(repo);
+  }
+  
+  ResStore store = repository.resolvables();
+  MIL << store.size() << " resolvables" << endl;
 }
 
 test_suite*

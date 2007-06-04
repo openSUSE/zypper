@@ -21,6 +21,7 @@
 #include "zypp2/cache/sqlite3x/sqlite3x.hpp"
 #include "zypp2/cache/CacheTypes.h"
 #include "zypp2/cache/ResolvableQuery.h"
+#include "zypp2/RepoInfo.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -45,7 +46,7 @@ namespace zypp
 
       public:
         /** Default ctor */
-        RepoImpl( const zypp::Pathname &dbdir, const data::RecordId &repository_id );
+        RepoImpl( const RepoInfo &repoinfo, const Pathname &dbdir, const data::RecordId &repository_id );
         /** Dtor */
         ~RepoImpl();
         void factoryInit();

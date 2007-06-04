@@ -490,6 +490,30 @@ namespace zypp
                              const Date &timestamp = Date::now() );
       
       /**
+       * \short Clean repository from cache
+       *
+       * \param id repository identifier in cache
+       *
+       * You can check existence using \ref isCached
+       *
+       * \throws CacheRecordNotFoundException if the repository
+       * id does not refer to a valid repository.
+       */
+      void cleanRepository( const data::RecordId &id );
+      
+      /**
+       * \short Clean repository from cache
+       *
+       * \param alias Repository unique alias
+       *
+       * You can check existence using \ref isCached
+       *
+       * \throws CacheRecordNotFoundException if the repository
+       * alias does not refer to a valid repository.
+       */
+      void cleanRepository( const std::string &alias );
+      
+      /**
        * get the status of a cached repository
        *
        * It is responsability of the caller to operate with
@@ -499,7 +523,7 @@ namespace zypp
        * You can check existence using \ref isCached
        *
        * \throws CacheRecordNotFoundException if the repository
-       * id is invalid.
+       * id does not refer to a valid repository.
        */
       RepoStatus repositoryStatus( const data::RecordId &id );
       

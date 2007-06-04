@@ -23,6 +23,7 @@
 #include "zypp2/Repository.h"
 #include "zypp2/RepoInfo.h"
 #include "zypp2/repo/RepoException.h"
+#include "zypp2/repo/RepoType.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -73,8 +74,12 @@ namespace zypp
     *
     * Will try to download the metadata
     *
-    * \throws RepoNoUrl if no urls are available.
-    * \throws RepoNoAlias if can't figure an alias
+    * In case of falure the metadata remains
+    * as it was before.
+    *
+    * \throws RepoNoUrlException if no urls are available.
+    * \throws RepoNoAliasException if can't figure an alias
+    * \throws RepoUnknownTypeException if the metadata is unknown
     * \throws Exception on unknown error.
     */
    void refreshMetadata( const RepoInfo &info );
@@ -123,6 +128,14 @@ namespace zypp
     */
    Repository createFromCache( const RepoInfo &info );
 
+   
+   /**
+    * \short Probe repo metadata type.
+    *
+    * \todo FIXME Should this be private?
+    */
+   repo::RepoType probe( const Url &url );
+   
   public:
 
   private:
