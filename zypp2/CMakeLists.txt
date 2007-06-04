@@ -79,12 +79,14 @@ SET( zypp2_repository_SRCS
   repo/dummy.cc
   repo/RepositoryImpl.cc
   repo/RepoException.cc
+  repo/RepoType.cc
 )
 
 SET( zypp2_repository_HEADERS
   repo/dummy.h
   repo/RepositoryImpl.h
   repo/RepoException.h
+  repo/RepoType.h
 )
 
 SET( zypp2_repository_cached_SRCS
