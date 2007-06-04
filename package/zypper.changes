@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Jun  4 22:32:52 CEST 2007 - jkupec@suse.cz
+
+- fixed changed log file path also in zypper.lr
+- r5669
+
+-------------------------------------------------------------------
 Mon Jun  4 18:06:51 CEST 2007 - jkupec@suse.cz
 
 - moved zypper log from /var/log/YaST2 to /var/log
