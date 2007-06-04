@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: translation@suse.de\n"
-"POT-Creation-Date: 2007-02-05 13:55+0100\n"
+"POT-Creation-Date: 2007-04-26 11:12+0200\n"
 "PO-Revision-Date: 2007-01-26 19:44+0100\n"
 "Last-Translator: Gabor Kelemen <kelemeng@gnome.hu>\n"
 "Language-Team: Hungarian <gnome@gnome.hu>\n"
@@ -118,148 +118,167 @@ msgstr ""
 msgid "Not found"
 msgstr ""
 
-#: src/zmart-misc.cc:229
-msgid "Problems:"
+#: src/zmart-misc.cc:235 src/zmart-misc.cc:302
+msgid "Problem: "
 msgstr ""
 
-#: src/zmart-misc.cc:232
-msgid "PROB "
+#: src/zmart-misc.cc:247
+#, c-format
+msgid " Solution %s: "
 msgstr ""
 
-#: src/zmart-misc.cc:241
-msgid " SOL  "
+#: src/zmart-misc.cc:259
+msgid "number, (r)etry or (c)ancel> "
 msgstr ""
 
-#: src/zmart-misc.cc:257
+#: src/zmart-misc.cc:267
+msgid "r"
+msgstr ""
+
+#: src/zmart-misc.cc:270
+msgid "c"
+msgstr ""
+
+#: src/zmart-misc.cc:276
+#, c-format
+msgid "Applying solution %s"
+msgstr ""
+
+#: src/zmart-misc.cc:299
+#, c-format
+msgid "%s Problems:"
+msgstr ""
+
+#: src/zmart-misc.cc:328
 msgid "Summary:"
 msgstr ""
 
-#: src/zmart-misc.cc:280
+#: src/zmart-misc.cc:351
 msgid "<install>   "
 msgstr ""
 
-#: src/zmart-misc.cc:282
+#: src/zmart-misc.cc:353
 msgid "<uninstall> "
 msgstr ""
 
-#: src/zmart-misc.cc:287
+#: src/zmart-misc.cc:358
 msgid "Nothing to do."
 msgstr ""
 
-#: src/zmart-misc.cc:343
+#: src/zmart-misc.cc:414
 msgid "Parsing RPM database..."
 msgstr ""
 
-#: src/zmart-misc.cc:345 src/zmart-misc.cc:358
+#: src/zmart-misc.cc:416 src/zmart-misc.cc:429
 msgid " resolvables."
 msgstr ""
 
-#: src/zmart-misc.cc:356
+#: src/zmart-misc.cc:427
 #, fuzzy
 msgid "Parsing metadata for "
 msgstr "Figyelmeztetés: Ismeretlen metaadattípus: "
 
-#: src/zmart-misc.cc:365
+#: src/zmart-misc.cc:436
 msgid "Establishing status of aggregates"
 msgstr ""
 
-#: src/zmart-misc.cc:373
+#: src/zmart-misc.cc:444
 msgid "Resolving dependencies..."
 msgstr ""
 
-#: src/zmart-misc.cc:399
+#: src/zmart-misc.cc:470
 msgid " patches needed"
 msgstr ""
 
-#: src/zmart-misc.cc:399
+#: src/zmart-misc.cc:470
 msgid " security patches"
 msgstr ""
 
-#: src/zmart-misc.cc:406
+#: src/zmart-misc.cc:477
 msgid "Installed"
 msgstr ""
 
-#: src/zmart-misc.cc:406
+#: src/zmart-misc.cc:477
 msgid "Uninstalled"
 msgstr ""
 
-#: src/zmart-misc.cc:408
+#: src/zmart-misc.cc:479
 msgid "No Longer Applicable"
 msgstr ""
 
-#: src/zmart-misc.cc:408
+#: src/zmart-misc.cc:479
 msgid "Not Applicable"
 msgstr ""
 
-#: src/zmart-misc.cc:410
+#: src/zmart-misc.cc:481
 msgid "Applied"
 msgstr ""
 
-#: src/zmart-misc.cc:410
+#: src/zmart-misc.cc:481
 msgid "Not Needed"
 msgstr ""
 
-#: src/zmart-misc.cc:412
+#: src/zmart-misc.cc:483
 msgid "Broken"
 msgstr ""
 
-#: src/zmart-misc.cc:412
+#: src/zmart-misc.cc:483
 msgid "Needed"
 msgstr ""
 
-#: src/zmart-misc.cc:414
+#: src/zmart-misc.cc:485
 msgid "error"
 msgstr ""
 
-#: src/zmart-misc.cc:443 src/zmart-misc.cc:477 src/zmart-misc.cc:600
+#: src/zmart-misc.cc:514 src/zmart-misc.cc:548 src/zmart-misc.cc:671
 msgid "Catalog"
 msgstr ""
 
-#: src/zmart-misc.cc:443 src/zmart-misc.cc:477 src/zmart-misc.cc:605
+#: src/zmart-misc.cc:514 src/zmart-misc.cc:548 src/zmart-misc.cc:676
 #: src/zmart-sources.cc:100
 msgid "Name"
 msgstr ""
 
-#: src/zmart-misc.cc:443 src/zmart-misc.cc:477 src/zmart-misc.cc:605
+#: src/zmart-misc.cc:514 src/zmart-misc.cc:548 src/zmart-misc.cc:676
 msgid "Version"
 msgstr ""
 
-#: src/zmart-misc.cc:443 src/zmart-misc.cc:477
+#: src/zmart-misc.cc:514 src/zmart-misc.cc:548
 msgid "Category"
 msgstr ""
 
-#: src/zmart-misc.cc:443 src/zmart-misc.cc:477 src/zmart-sources.cc:98
+#: src/zmart-misc.cc:514 src/zmart-misc.cc:548 src/zmart-sources.cc:98
 msgid "Status"
 msgstr ""
 
-#: src/zmart-misc.cc:511
+#: src/zmart-misc.cc:582
 msgid ""
 "WARNING: These are only the updates affecting the updater itself.\n"
 "There are others available too.\n"
 msgstr ""
 
-#: src/zmart-misc.cc:600
+#: src/zmart-misc.cc:671
 msgid "S"
 msgstr ""
 
-#: src/zmart-misc.cc:605
+#: src/zmart-misc.cc:676
 msgid "Arch"
 msgstr ""
 
-#: src/zmart-misc.cc:662
+#: src/zmart-misc.cc:733
 #, c-format
 msgid "WARNING: %s is interactive, skipped."
 msgstr ""
 
-#: src/zmart-misc.cc:707
+#: src/zmart-misc.cc:786
 msgid "Continue?"
 msgstr ""
 
-#: src/zmart-misc.cc:712
+#: src/zmart-misc.cc:791
 msgid "committing"
 msgstr ""
 
-#: src/zmart-misc.cc:728
+#: src/zmart-misc.cc:807
 msgid ""
 "Package integrity check failed. This may be a problem with installation "
 "source or media. Try one of the following:\n"
@@ -270,39 +289,39 @@ msgid ""
 "- use another installation source"
 msgstr ""
 
-#: src/zmart-misc.cc:746
+#: src/zmart-misc.cc:825
 msgid ""
 "WARNING: One of installed patches requires reboot of your machine. Please, "
 "do it as soon as possible."
 msgstr ""
 
-#: src/zmart-misc.cc:749
+#: src/zmart-misc.cc:828
 msgid ""
 "WARNING: One of installed patches affects the package manager itself, thus "
 "it requires restart before executing next operations."
 msgstr ""
 
-#: src/zmart-misc.cc:772 src/zmart-misc.cc:798
+#: src/zmart-misc.cc:851 src/zmart-misc.cc:877
 msgid "license"
 msgstr ""
 
-#: src/zmart-misc.cc:775
+#: src/zmart-misc.cc:854
 msgid ""
 "In order to install this package, you must agree to terms of the above "
 "licencse. Continue?"
 msgstr ""
 
-#: src/zmart-misc.cc:786
+#: src/zmart-misc.cc:865
 msgid "Aborting installation due to the need of license(s) confirmation."
 msgstr ""
 
-#: src/zmart-misc.cc:788
+#: src/zmart-misc.cc:867
 msgid ""
 "Please, restart the operation in interactive mode and confirm agreement with "
 "required license(s)."
 msgstr ""
 
-#: src/zmart-misc.cc:795
+#: src/zmart-misc.cc:874
 msgid "Aborting installation due to user disagreement with "
 msgstr ""
 
@@ -424,6 +443,26 @@ msgstr ""
 msgid "Use rug or yast2 for that."
 msgstr ""
 
+#: src/zypp-checkpatches.cc:127
+msgid ""
+"The updater could not access the package manager engine. This usually "
+"happens when you have another application (like YaST) using it at the same "
+"time. Please close other applications and check again for updates."
+msgstr ""
+
+#: src/zypp-checkpatches.cc:213
+#, c-format
+msgid ""
+"Couldn't restore source.\n"
+"Detail: %s"
+msgstr ""
+
+#: src/zypp-checkpatches.cc:262
+msgid ""
+"There are no update sources defined. Please add one or more update sources "
+"in order to be notified of updates."
+msgstr ""
+
 #: src/zypper-callbacks.cc:23
 msgid "(A)bort, (R)etry, (I)gnore?"
 msgstr ""
@@ -523,11 +562,11 @@ msgstr ""
 msgid "This is a bug, please file a bug report against zypper."
 msgstr "Küldjön erről egy hibajelentést."
 
-#: src/zypper.cc:71
+#: src/zypper.cc:75
 msgid "URL is invalid."
 msgstr "Az URL érvénytelen."
 
-#: src/zypper.cc:79
+#: src/zypper.cc:83
 msgid ""
 "  Commands:\n"
 "\thelp\t\t\tHelp\n"
@@ -566,7 +605,7 @@ msgstr ""
 "\tinfo, if\t\tCsomagok teljes információinak megjelenítése\n"
 "\tpatch-info\t\tJavítások teljes információinak megjelenítése\n"
 
-#: src/zypper.cc:122
+#: src/zypper.cc:126
 #, fuzzy
 msgid ""
 "  Options:\n"
@@ -575,7 +614,6 @@ msgid ""
 "\t--verbose, -v\t\tIncrease verbosity\n"
 "\t--terse, -t\t\tTerse output for machine consumption\n"
 "\t--table-style, -s\tTable style (integer)\n"
-"\t--rug-compatible, -r\tTurn on rug compatibility\n"
 "\t--rug-compatible, -r\tTurn on rug compatibility\n"
 "\t--non-interactive\tDon't ask anything, use default answers automatically. "
 "(under development)\n"
@@ -589,19 +627,19 @@ msgstr ""
 "\t--table-style, -s\tTáblastílus (egész)\n"
 "\t--rug-compatible, -r\tA rug kompatibilitás engedélyezése\n"
 
-#: src/zypper.cc:136
+#: src/zypper.cc:139
 msgid "Verbosity "
 msgstr "Bőbeszédűség "
 
-#: src/zypper.cc:155
+#: src/zypper.cc:158
 msgid "Invalid table style "
 msgstr "Érvénytelen táblázatstílus "
 
-#: src/zypper.cc:198
+#: src/zypper.cc:201
 msgid "Try -h for help"
 msgstr "A súgóhoz használja a -h kapcsolót"
 
-#: src/zypper.cc:216
+#: src/zypper.cc:219
 msgid ""
 "  Source options:\n"
 "\t--disable-system-sources, -D\t\tDo not read the system sources\n"
@@ -611,7 +649,7 @@ msgstr ""
 "\t--disable-system-sources, -D\t\tNe olvassa be a rendszerforrásokat\n"
 "\t--source, -S\t\tKiegészítő forrás beolvasása\n"
 
-#: src/zypper.cc:221
+#: src/zypper.cc:224
 msgid ""
 "  Target options:\n"
 "\t--disable-system-resolvables, -T\t\tDo not read system installed "
@@ -621,7 +659,7 @@ msgstr ""
 "\t--disable-system-resolvables, -T\t\tNe olvassa be a rendszer által "
 "telepített feloldhatókat\n"
 
-#: src/zypper.cc:235
+#: src/zypper.cc:238
 msgid ""
 "  Command options:\n"
 "\t--catalog,-c\t\tOnly from this catalog (under development)\n"
@@ -633,7 +671,7 @@ msgstr ""
 "\t--type,-t\t\tA feloldható típusa (alapértelmezett: csomag)\n"
 "\t--no-confirm,-y\tNe kérjen felhasználói megerősítést\n"
 
-#: src/zypper.cc:250
+#: src/zypper.cc:253
 msgid ""
 "  Command options:\n"
 "\t--type,-t\t\tType of resolvable (default: package)\n"
@@ -643,7 +681,7 @@ msgstr ""
 "\t--type,-t\t\tA feloldható típusa (alapértelmezett: csomag)\n"
 "\t--no-confirm,-y\tNe kérjen felhasználói megerősítést\n"
 
-#: src/zypper.cc:266
+#: src/zypper.cc:269
 msgid ""
 "service-add [options] URI [alias]\n"
 "\n"
@@ -665,7 +703,7 @@ msgstr ""
 "\t--disabled,-d\t\tA szolgáltatás felvétele letiltottként\n"
 "\t--no-refresh,-n\t\tNe frissítse automatikusan a metaadatokat\n"
 
-#: src/zypper.cc:285
+#: src/zypper.cc:288
 msgid ""
 "service-list\n"
 "\n"
@@ -677,7 +715,7 @@ msgstr ""
 "Az összes megadott rendszerszolgáltatás (telepítési források) felsorolása.\n"
 "Ennek a parancsnak nincsenek kapcsolói.\n"
 
-#: src/zypper.cc:299
+#: src/zypper.cc:302
 msgid ""
 "service-delete [options] <URI|alias>\n"
 "\n"
@@ -689,7 +727,7 @@ msgstr ""
 "Szolgáltatás (telepítési forrás) eltávolítása a rendszerről.\n"
 "Ennek a parancsnak nincsenek kapcsolói.\n"
 
-#: src/zypper.cc:313
+#: src/zypper.cc:316
 msgid ""
 "service-rename [options] <URI|alias> <new-alias>\n"
 "\n"
@@ -702,7 +740,7 @@ msgstr ""
 "szolgáltatáshoz.\n"
 "Ennek a parancsnak nincsenek kapcsolói.\n"
 
-#: src/zypper.cc:327
+#: src/zypper.cc:330
 msgid ""
 "zypper refresh\n"
 "\n"
@@ -712,7 +750,7 @@ msgstr ""
 "\n"
 "A rendszeren található összes telepítési forrás frissítése.\n"
 
-#: src/zypper.cc:340
+#: src/zypper.cc:343
 msgid ""
 "list-updates [options]\n"
 "\n"
@@ -728,7 +766,7 @@ msgstr ""
 "  Parancs kapcsolói:\n"
 "\t--type,-t\t\tA feloldható típusa (alapértelmezés: javítás)\n"
 
-#: src/zypper.cc:358
+#: src/zypper.cc:361
 msgid ""
 "  Command options:\n"
 "\t--type,-t\t\tType of resolvable (default: patch)\n"
@@ -740,7 +778,7 @@ msgstr ""
 "\t--no-confirm,-y\t\tNe igényeljen felhasználói megerősítést\n"
 "\t--skip-interactive\t\tInteraktív frissítések kihagyása\n"
 
-#: src/zypper.cc:383
+#: src/zypper.cc:386
 msgid ""
 "zypper [global-options] search [options] [querystring...]\n"
 "\n"
@@ -791,7 +829,7 @@ msgstr ""
 "\n"
 "A * és ? helyettesítő karakterek is használhatók a keresőkifejezésekben.\n"
 
-#: src/zypper.cc:411
+#: src/zypper.cc:414
 msgid ""
 "patch-check\n"
 "\n"
@@ -805,7 +843,7 @@ msgstr ""
 "\n"
 "Ennek a parancsnak nincsenek kapcsolói.\n"
 
-#: src/zypper.cc:425
+#: src/zypper.cc:428
 msgid ""
 "patches\n"
 "\n"
@@ -819,7 +857,7 @@ msgstr ""
 "\n"
 "Ennek a parancsnak nincsenek kapcsolói.\n"
 
-#: src/zypper.cc:439
+#: src/zypper.cc:442
 msgid ""
 "zypper [global-options] info [name...]\n"
 "\n"
@@ -829,7 +867,7 @@ msgstr ""
 "\n"
 "'info' -- Csomagok teljes információinak megjelenítése\n"
 
-#: src/zypper.cc:451
+#: src/zypper.cc:454
 msgid ""
 "zypper [global-options] patch-info [patchname...]\n"
 "\n"
@@ -839,7 +877,7 @@ msgstr ""
 "\n"
 "'patch-info' -- Javítások részletes információinak megjelenítése\n"
 
-#: src/zypper.cc:463
+#: src/zypper.cc:466
 msgid ""
 "zypper [global-options] moo\n"
 "\n"
@@ -849,39 +887,39 @@ msgstr ""
 "\n"
 "'moo' - Egy állat megjelenítése\n"
 
-#: src/zypper.cc:469
+#: src/zypper.cc:473
 msgid "Unknown command"
 msgstr "Ismeretlen parancs"
 
-#: src/zypper.cc:484
+#: src/zypper.cc:488
 msgid "Non-Option Program Arguments: "
 msgstr "Nem kapcsoló programargumentumok: "
 
-#: src/zypper.cc:496
+#: src/zypper.cc:500
 msgid "Ignoring --terse (provided only for rug compatibility)"
 msgstr "A --terse figyelmen kívül hagyva (csak a rug kompatibilitás miatt van)"
 
-#: src/zypper.cc:512
+#: src/zypper.cc:516
 msgid "Ignoring installed resolvables..."
 msgstr "Telepített feloldhatók figyelmen kívül hagyása..."
 
-#: src/zypper.cc:535
+#: src/zypper.cc:541
 msgid "A ZYpp transaction is already in progress."
 msgstr "Egy ZYpp tranzakció már folyamatban van."
 
-#: src/zypper.cc:562
+#: src/zypper.cc:568
 msgid "Root privileges are required for viewing system sources."
 msgstr "A rendszerforrások megjelenítéséhez root jogosultság szükséges."
 
-#: src/zypper.cc:580
+#: src/zypper.cc:586
 msgid "Warning: Unknown metadata type "
 msgstr "Figyelmeztetés: Ismeretlen metaadattípus: "
 
-#: src/zypper.cc:717 src/zypper.cc:775 src/zypper.cc:861 src/zypper.cc:889
+#: src/zypper.cc:723 src/zypper.cc:781 src/zypper.cc:867 src/zypper.cc:895
 msgid "Unknown resolvable type "
 msgstr "Ismeretlen feloldhatótípus: "
 
-#: src/zypper.cc:730
+#: src/zypper.cc:736
 msgid ""
 "Warning: No sources. Operating only with the installed resolvables. Nothing "
 "can be installed."
@@ -889,16 +927,16 @@ msgstr ""
 "Figyelmeztetés: Nincsenek források. Csak a telepített feloldhatókkal lehet "
 "dolgozni. Semmi sem telepíthető."
 
-#: src/zypper.cc:932
+#: src/zypper.cc:938
 msgid "Please file a bug report about this."
 msgstr "Küldjön erről egy hibajelentést."
 
-#: src/zypper.cc:935
+#: src/zypper.cc:941
 msgid "See http://en.opensuse.org/Zypper#Troubleshooting for instructions."
 msgstr ""
 "Utasításokért tekintse meg a http://en.opensuse.org/Zypper#Troubleshooting "
 "oldalt"
 
-#: src/zypper.cc:948
+#: src/zypper.cc:954
 msgid "Unexpected exception."
 msgstr "Váratlan kivétel."

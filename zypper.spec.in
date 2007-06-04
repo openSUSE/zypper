@@ -29,6 +29,8 @@ Prefix:         /usr
 # zypper is not a fully featured replacement yet
 #Provides:       y2pmsh
 #Obsoletes:      y2pmsh
+#Provides:       rug
+#Obsoletes:      rug
 
 %description
 Command Line Package Management Using Libzypp
