@@ -82,9 +82,10 @@ namespace zypp
        * Creates a callback enabled media access for specified \a url.
        *
        * \param url 
-       * \param path Prefered attach (mount) point.
+       * \param prefered_attach_point Prefered attach (mount) point. Use, if
+       *        you want to mount the media to a specific directory.
        */
-      MediaSetAccess(const Url &url, const Pathname &path = "");
+      MediaSetAccess(const Url &url, const Pathname & prefered_attach_point = "");
       ~MediaSetAccess();
 
       /**
@@ -134,12 +135,14 @@ namespace zypp
     private:
       /** Media or media set URL */
       Url _url;
+
       /**
        * Prefered mount point.
        *
-       * \see MediaManager::open(Url,Pathname) MediaHandler::_attachPoint
+       * \see MediaManager::open(Url,Pathname)
+       * \see MediaHandler::_attachPoint
        */
-      Pathname _path;
+      Pathname _prefAttachPoint;
 
       typedef std::map<media::MediaNr, media::MediaAccessId> MediaMap;
       typedef std::map<media::MediaNr, media::MediaVerifierRef > VerifierMap;

@@ -23,9 +23,10 @@ namespace zypp
 { /////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////
 
-  MediaSetAccess::MediaSetAccess(  const Url &url, const Pathname &path )
+  MediaSetAccess::MediaSetAccess(const Url &url,
+                                 const Pathname & prefered_attach_point)
       : _url(url),
-        _path(path)
+        _prefAttachPoint(prefered_attach_point)
   {
     MIL << "initializing.." << std::endl;
     //std::vector<media::MediaVerifierRef> single_media;
@@ -319,7 +320,7 @@ namespace zypp
     }
     Url url;
     url = rewriteUrl (_url, medianr);
-    media::MediaAccessId id = media_mgr.open(url, _path);
+    media::MediaAccessId id = media_mgr.open(url, _prefAttachPoint);
     _medias[medianr] = id;
 
     try
@@ -391,7 +392,7 @@ namespace zypp
 
   std::ostream & MediaSetAccess::dumpOn( std::ostream & str ) const
   {
-    str << "MediaSetAccess (URL='" << _url << "', path='" << _path << "')";
+    str << "MediaSetAccess (URL='" << _url << "', attach_point_hint='" << _prefAttachPoint << "')";
     return str;
   }
 
