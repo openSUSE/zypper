@@ -19,6 +19,7 @@
 #include "zypp/TranslatedText.h"
 #include "zypp/ByteCount.h"
 
+#include "zypp/parser/ParseException.h"
 #include "zypp/parser/yum/FileReaderBaseImpl.h"
 
 using namespace std;
@@ -35,6 +36,17 @@ namespace zypp
   FileReaderBase::BaseImpl::BaseImpl()
     : _expect_rpm_entry(false), _dtype(zypp::Dep::REQUIRES)
   {}
+
+  // --------------------------------------------------------------------------
+
+  /*
+   * xpath and multiplicity of processed nodes are included in the code
+   * for convenience:
+   *
+   * // xpath: <xpath> (?|*|+)
+   *
+   * if multiplicity is ommited, then the node has multiplicity 'one'.
+   */
 
   // --------------------------------------------------------------------------
 
@@ -228,33 +240,44 @@ namespace zypp
   {
     if (reader_r->nodeType() == XML_READER_TYPE_ELEMENT)
     {
-      if (reader_r->name() == "rpm:entry")
+      // xpath: //format/*/rpm:entry | //format/suse-freshens/suse:entry (+)
+      if (reader_r->name() == "rpm:entry" | reader_r->name() == "suse:entry")
       {
         if (!_expect_rpm_entry)
-        {
-          // TODO make this a ParseException (once created/taken out of tagfile ns?)
-          ZYPP_THROW(Exception("rpm:entry found when not expected"));
-        }
+          ZYPP_THROW(ParseException("rpm:entry found when not expected"));
 
         Edition edition(
           reader_r->getAttribute("ver").asString(),
           reader_r->getAttribute("rel").asString(),
           reader_r->getAttribute("epoch").asString()
         );
-        
+
+        // read kind of resolvable this entry refers, default to Package
         string kind_str = reader_r->getAttribute("kind").asString();
         Resolvable::Kind kind;
         if (kind_str.empty())
            kind = ResTraits<Package>::kind;
         else
           kind = Resolvable::Kind(kind_str); 
-          
+
+        // Check whether this is actually a prerequires dependency.
+        // If so, it will be stored in deps_r as Dep::PREREQUIRES
+        // instead of Dep::REQUIRES (a prerequires can appear as part
+        // of requires dependencies only).
+        bool pre = false;
+        if (reader_r->getAttribute("pre").asString() == "1")
+        {
+          if (_dtype.inSwitch() != Dep::REQUIRES_e)
+            ZYPP_THROW(ParseException("pre=\"1\" found for non-requires dependency"));
+          pre = true;
+        }
 /*
         DBG << "got rpm:entry for " << _dtype << ": "
             << reader_r->getAttribute("name").asString()
             << " " << edition << " (" << kind << ")" << endl;
 */
-        deps_r[_dtype].insert(
+        // insert the dependency into the list
+        deps_r[pre ? Dep::PREREQUIRES : _dtype].insert(
           zypp::capability::parse(
             kind,
             reader_r->getAttribute("name").asString(),
@@ -262,65 +285,76 @@ namespace zypp
             edition
           )
         );
+
+        //! \todo check <rpm:entry name="/bin/sh" pre="1">
       }
 
+      // xpath: //format/rpm:provides (?)
       if (reader_r->name() == "rpm:provides")
       {
         _dtype = zypp::Dep::PROVIDES;
         _expect_rpm_entry = true;
         return true;
       }
+      // xpath: //format/rpm:conflicts (?)
       if (reader_r->name() == "rpm:conflicts")
       {
         _dtype = zypp::Dep::CONFLICTS;
         _expect_rpm_entry = true;
         return true;
       }
+      // xpath: //format/rpm:obsoletes (?)
       if (reader_r->name() == "rpm:obsoletes")
       {
         _dtype = zypp::Dep::OBSOLETES;
         _expect_rpm_entry = true;
         return true;
       }
+      // xpath: //format/rpm:requires (?)
       if (reader_r->name() == "rpm:requires")
       {
         _dtype = zypp::Dep::REQUIRES;
         _expect_rpm_entry = true;
         return true;
       }
+      // xpath: //format/rpm:recommends (?)
       if (reader_r->name() == "rpm:recommends")
       {
         _dtype = zypp::Dep::RECOMMENDS;
         _expect_rpm_entry = true;
         return true;
       }
+      // xpath: //format/rpm:enhances (?)
       if (reader_r->name() == "rpm:enhances")
       {
         _dtype = zypp::Dep::ENHANCES;
         _expect_rpm_entry = true;
         return true;
       }
+      // xpath: //format/rpm:supplements (?)
       if (reader_r->name() == "rpm:supplements")
       {
         _dtype = zypp::Dep::SUPPLEMENTS;
         _expect_rpm_entry = true;
         return true;
       }
+      // xpath: //format/rpm:suggests (?)
       if (reader_r->name() == "rpm:suggests")
       {
         _dtype = zypp::Dep::SUGGESTS;
         _expect_rpm_entry = true;
         return true;
       }
-      if (reader_r->name() == "rpm:suggests")
+      // xpath: //format/suse:freshens (?)
+      if (reader_r->name() == "suse:freshens")
       {
-        _dtype = zypp::Dep::SUGGESTS;
+        _dtype = zypp::Dep::FRESHENS;
         _expect_rpm_entry = true;
-        return true;
       }
     }
     else if (reader_r->nodeType() == XML_READER_TYPE_END_ELEMENT)
     {
+      // xpath: //format/* (?)
       if (reader_r->name() == "rpm:requires"
           || reader_r->name() == "rpm:provides"
           || reader_r->name() == "rpm:conflicts"
@@ -328,7 +362,8 @@ namespace zypp
           || reader_r->name() == "rpm:recommends"
           || reader_r->name() == "rpm:enhances"
           || reader_r->name() == "rpm:supplements"
-          || reader_r->name() == "rpm:suggests")
+          || reader_r->name() == "rpm:suggests"
+          || reader_r->name() == "suse:freshens")
       {
         _expect_rpm_entry = false;
         return true;
