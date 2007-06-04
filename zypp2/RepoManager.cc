@@ -350,6 +350,8 @@ namespace zypp
     
     data::RecordId id = store.lookupRepository(info.alias());
     repo::cached::RepoImpl::Ptr repoimpl = new repo::cached::RepoImpl( info, _pimpl->options.repoCachePath, id );
+    // read the resolvables from cache
+    repoimpl->createResolvables();
     return Repository(repoimpl);
   }
  
