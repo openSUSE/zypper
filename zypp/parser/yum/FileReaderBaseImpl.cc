@@ -9,7 +9,6 @@
 /** \file zypp/parser/yum/FileReaderBaseImpl.cc
  * Implementation of shared code for yum::*FileReaders.
  */
-//#include <iostream>
 #include <sstream>
 
 #include "zypp/base/Logger.h"
@@ -52,18 +51,23 @@ namespace zypp
 
   bool FileReaderBase::BaseImpl::consumePackageNode(xml::Reader & reader_r, data::Package_Ptr & package_ptr)
   {
-    //DBG << "**node: " << reader_r->name() << " (" << reader_r->nodeType() << ") tagpath = " << _tagpath << endl;
+    // DBG << "**node: " << reader_r->name() << " (" << reader_r->nodeType() << ") tagpath = " << _tagpath << endl;
+    if (!isBeingProcessed(tag_package))
+      ZYPP_THROW(ParseException("consumePackageNode() called outside of package element"));
+
     if (isBeingProcessed(tag_format) && consumeFormatNode(reader_r, package_ptr))
       return true;
 
     if (reader_r->nodeType() == XML_READER_TYPE_ELEMENT)
     {
+      // xpath: //package/name
       if (reader_r->name() == "name")
       {
         package_ptr->name = reader_r.nodeText().asString();
         return true;
       }
 
+      // xpath: //package/arch
       if (reader_r->name() == "arch")
       {
         //if (arch == "src" || arch == "nosrc") arch = "noarch";
@@ -71,6 +75,7 @@ namespace zypp
         return true;
       }
 
+      // xpath: //package/version
       if (reader_r->name() == "version")
       {
         package_ptr->edition = Edition(reader_r->getAttribute("ver").asString(),
@@ -79,6 +84,7 @@ namespace zypp
         return true;
       }
 
+      // xpath: //package/checksum
       if (reader_r->name() == "checksum")
       {
         package_ptr->repositoryLocation.fileChecksum = CheckSum(
@@ -88,36 +94,39 @@ namespace zypp
         return true;
       }
 
+      // xpath: //package/summary (*)
       if (reader_r->name() == "summary")
       {
+        Locale locale(reader_r->getAttribute("lang").asString());
         package_ptr->summary.setText(
-            reader_r.nodeText().asString(),
-            Locale(reader_r->getAttribute("lang").asString()));
+            reader_r.nodeText().asString(), locale);
         return true;
       }
 
+      // xpath: //package/description (*)
       if (reader_r->name() == "description")
       {
+        Locale locale(reader_r->getAttribute("lang").asString());
         package_ptr->description.setText(
-            reader_r.nodeText().asString(),
-            Locale(reader_r->getAttribute("lang").asString()));
+            reader_r.nodeText().asString(), locale);
         return true;
       }
 
+      // xpath: //package/packager 
       if (reader_r->name() == "packager")
       {
         package_ptr->packager = reader_r.nodeText().asString();
-//        DBG << "packager: " << package_ptr->packager << endl;
         return true;
       }
 
+      // xpath: //package/url
       if (reader_r->name() == "url")
       {
-//        DBG << "url: " <<  reader_r.nodeText().asString() << endl;
         package_ptr->url = reader_r.nodeText().asString();
         return true;
       }
 
+      // xpath: //package/time
       if (reader_r->name() == "time")
       {
         package_ptr->buildTime = reader_r->getAttribute("build").asString();
@@ -125,9 +134,10 @@ namespace zypp
         return true;
       }
 
+      // xpath: //package/size
       if (reader_r->name() == "size")
       {
-        // ???
+        //! \todo what's 'archive' size of the package (it is neither the rpm file size nor its installed size)
         // reader_r->getAttribute("archive").asString();
 
         // installed size
@@ -139,12 +149,14 @@ namespace zypp
         return true;
       }
 
+      // xpath: //package/location
       if (reader_r->name() == "location")
       {
         package_ptr->repositoryLocation.filePath = reader_r->getAttribute("href").asString();
         return true;
       }
 
+      // xpath: //package/format
       if (reader_r->name() == "format")
       {
         tag(tag_format);
@@ -154,9 +166,11 @@ namespace zypp
 
     else if ( reader_r->nodeType() == XML_READER_TYPE_END_ELEMENT )
     {
+      // xpath: //package
       if (reader_r->name() == "package")
       {
         // indicate that further processing is required
+        // e.g. caller needs to to check for </package> to trigger some action
         return false;
       }
     }
@@ -167,46 +181,54 @@ namespace zypp
 
   // --------------( consume <format> tag )------------------------------------
 
-  bool FileReaderBase::BaseImpl::consumeFormatNode(xml::Reader & reader_r, data::Package_Ptr & package_ptr)
+  bool FileReaderBase::BaseImpl::consumeFormatNode(
+    xml::Reader & reader_r, data::Package_Ptr & package_ptr)
   {
     if (consumeDependency(reader_r, package_ptr->deps))
       // this node has been a dependency, which has been handled by
       // consumeDependency(), so return right away. 
       return true;
 
-//    DBG << "format subtag: " << reader_r->name() << endl;
+    // DBG << "format subtag: " << reader_r->name() << endl;
+
     if (reader_r->nodeType() == XML_READER_TYPE_ELEMENT)
     {
+      // xpath: //format/rpm:license
       if (reader_r->name() == "rpm:license")
       {
         package_ptr->license = reader_r.nodeText().asString();
         return true;
       }
 
+      // xpath: //format/rpm:vendor
       if (reader_r->name() == "rpm:vendor")
       {
         package_ptr->vendor = reader_r.nodeText().asString();
         return true;
       }
 
+      // xpath: //format/rpm:group
       if (reader_r->name() == "rpm:group")
       {
         package_ptr->group = reader_r.nodeText().asString();
         return true;
       }
 
+      // xpath: //format/rpm:buildhost
       if (reader_r->name() == "rpm:buildhost")
       {
         package_ptr->buildhost = reader_r.nodeText().asString();
         return true;
       }
 
+      //! \todo xpath: //format/rpm:sourcerpm where to store this?
       if (reader_r->name() == "rpm:sourcerpm")
       {
         //package->source = reader_r.nodeText().asString();
         return true;
       }
 
+      //! \todo xpath: //format/rpm:header-range what is this? 
       if (reader_r->name() == "rpm:header-range")
       {
         //reader_r->getAttribute("start").asString(),
@@ -214,16 +236,52 @@ namespace zypp
         return true;
       }
 
+      //! \todo xpath: //format/file (*) figure out where to store this and what's it about (in regard to filelists.xml.gz) 
       if (reader_r->name() == "file")
       {
-        // TODO figure out how to read files
         // file = reader_r.nodeText().asString();
         // type = reader_r->getAttribute("type").asString();
+        return true;
+      }
+
+      // xpath: //format/suse:authors/suse:author (+)
+      // but tolerating multiplicity (*)
+      if (reader_r->name() == "suse:author")
+      {
+        package_ptr->authors.push_back(reader_r.nodeText().asString());
+        return true;
+      }
+
+      // xpath: //format/suse:keywords (?)
+      // xpath: //format/suse:keywords/suse:keyword (+)
+      if (reader_r->name() == "suse:keyword")
+      {
+        package_ptr->keywords.insert(reader_r.nodeText().asString());
+        return true;
+      }
+
+      //! \todo xpath: //format/suse:dirsizes (?)
+
+      // xpath: //format/suse:install-only (?)
+      if (reader_r->name() == "suse:install-only")
+      {
+        package_ptr->installOnly = true;
+        return true;
+      }
+
+      // xpath: //format/suse:license-to-confirm (*)
+      //! \todo this is ambiguous - fix the rnc schema
+      if (reader_r->name() == "suse:license-to-confirm")
+      {
+        Locale locale(reader_r->getAttribute("lang").asString());
+        package_ptr->licenseToConfirm.setText(
+            reader_r.nodeText().asString(), locale);
         return true;
       }
     }
     else if (reader_r->nodeType() == XML_READER_TYPE_END_ELEMENT)
     {
+      // xpath: //format
       if (reader_r->name() == "format")
       {
         toParentTag();
@@ -236,7 +294,8 @@ namespace zypp
 
   // --------------------------------------------------------------------------
 
-  bool FileReaderBase::BaseImpl::consumeDependency(xml::Reader & reader_r, data::Dependencies & deps_r)
+  bool FileReaderBase::BaseImpl::consumeDependency(
+    xml::Reader & reader_r, data::Dependencies & deps_r)
   {
     if (reader_r->nodeType() == XML_READER_TYPE_ELEMENT)
     {
