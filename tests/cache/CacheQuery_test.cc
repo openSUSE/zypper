@@ -16,7 +16,7 @@
 #include "zypp2/cache/CacheStore.h"
 #include "zypp/data/ResolvableData.h"
 #include "zypp2/cache/ResolvableQuery.h"
-#include "zypp2/parser/yum/YUMParser.h"
+#include "zypp/parser/yum/RepoParser.h"
 
 using namespace std;
 using namespace zypp;
@@ -42,7 +42,7 @@ void resolvable_query_test(const string &dir)
     
     data::RecordId repository_id = store.lookupOrAppendRepository("novell");
     
-    YUMParser parser( repository_id, store );
+    RepoParser parser( repository_id, store );
     parser.parse(dir);
     store.commit();
   }
