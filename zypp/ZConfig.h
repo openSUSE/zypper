@@ -57,6 +57,12 @@ namespace zypp
        * .repo files are kept
        */
       Pathname defaultKnownReposPath() const;
+      
+      /**
+       * Separator string for storing/reading sets of strings to/from
+       * metadata cache DB.
+       */
+      const std::string & cacheDBSplitJoinSeparator() const;
   };
   ///////////////////////////////////////////////////////////////////
 

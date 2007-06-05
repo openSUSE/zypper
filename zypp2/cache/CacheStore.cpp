@@ -7,6 +7,7 @@
 #include "zypp/base/Measure.h"
 #include "zypp/ZYppFactory.h"
 #include "zypp/ZYpp.h"
+#include "zypp/ZConfig.h"
 
 #include "zypp2/cache/CacheInitializer.h"
 #include "zypp2/cache/CacheStore.h"
@@ -231,9 +232,8 @@ void CacheStore::appendPackageBaseAttributes( const RecordId & pkgid,
   appendStringAttribute( pkgid, "Package", "postin", package->postin );
   appendStringAttribute( pkgid, "Package", "preun", package->preun );
   appendStringAttribute( pkgid, "Package", "postun", package->postun );
-
-  //FIXME save authors and keyword (lists) for packages
-
+  appendStringContainerAttribute( pkgid, "Package", "keywords", package->keywords );
+  appendStringContainerAttribute( pkgid, "Package", "authors", package->authors );
   appendStringAttribute( pkgid, "Package", "location", package->repositoryLocation.filePath.asString() );
 }
 
@@ -376,11 +376,12 @@ void CacheStore::consumeProduct( const data::RecordId & repository_id,
 
   appendTranslatedStringAttribute( id, "Product", "shortName", product->shortName );
   appendTranslatedStringAttribute( id, "Product", "longName", product->longName );
-  //! \todo std::list<std::string> flags;
+  appendStringContainerAttribute( id, "Product", "flags", product->flags );
   appendStringAttribute( id, "Pattern", "releasenotesUrl", product->releasenotesUrl.asString() );
-  //! \todo std::list<Url> updateUrls;
-  //! \todo std::list<Url> extraUrls;
-  //! \todo std::list<Url> optionalUrls;
+  //! \todo figure out how to store list of Urls. A separate method appendUrlContainerAttribute? Or change it to plain string in ResolvableData.h?
+//  appendStringContainerAttribute( id, "Product", "updateUrls", product->updateUrls );
+//  appendStringContainerAttribute( id, "Product", "extraUrls", product->extraUrls );
+//  appendStringContainerAttribute( id, "Product", "optionalUrls", product->optionalUrls );
   appendStringAttribute( id, "Pattern", "distributionName", product->distributionName );
   appendStringAttribute( id, "Pattern", "distributionEdition", product->distributionEdition.asString() );
 }
@@ -389,19 +390,16 @@ void CacheStore::consumeChangelog( const data::RecordId & repository_id,
                                    const data::Resolvable_Ptr & resolvable,
                                    const Changelog & changelog )
 {
-  // TODO
-  // maybe appendChangelog(const data::RecordId & resolvable_id, Changelog changelog) will
-  // be needed for inserting the changelog using in-memory record id of corresponding
-  // resolvable. (first, we'll see how fast is the inserting without remembering those ids)
+  //! \todo maybe appendChangelog(const data::RecordId & resolvable_id, Changelog changelog) will be needed
+  //! for inserting the changelog using in-memory record id of corresponding resolvable.
+  //! (first, we'll see how fast is the inserting without remembering those ids)
 }
 
 void CacheStore::consumeFilelist( const data::RecordId & repository_id,
                                   const data::Resolvable_Ptr & resolvable,
                                   const data::Filenames & filenames )
 {
-  // TODO
-  // maybe consumeFilelist(const data::RecordId & resolvable_id, data::Filenames &) will
-  // be needed
+  //! \todo maybe consumeFilelist(const data::RecordId & resolvable_id, data::Filenames &) will be needed
 }
 
 RecordId CacheStore::appendResolvable( const RecordId &repository_id,
@@ -980,6 +978,9 @@ void CacheStore::appendStringAttribute( const data::RecordId &resolvable_id,
                                         const std::string &name,
                                         const std::string &value )
 {
+  // don't bother with writing if the string is empty
+  if (value.empty()) return;
+  
   RecordId type_id = lookupOrAppendType(klass, name);
   appendStringAttribute( resolvable_id, type_id, value );
 }
@@ -988,6 +989,9 @@ void CacheStore::appendStringAttribute( const RecordId &resolvable_id,
                                         const RecordId &type_id,
                                         const std::string &value )
 {
+  // don't bother with writing if the string is empty
+  if (value.empty()) return;
+
   RecordId lang_id = lookupOrAppendType("lang", "none");
   appendStringAttribute( resolvable_id, lang_id, type_id, value );
 }
@@ -1008,6 +1012,20 @@ void CacheStore::appendStringAttribute( const RecordId &resolvable_id,
   _pimpl->append_text_attribute_cmd->bind(":text", value );
 
   _pimpl->append_text_attribute_cmd->executenonquery();
+}
+
+template <class _Container>
+void CacheStore::appendStringContainerAttribute( const data::RecordId &resolvable_id,
+                                                 const std::string &klass,
+                                                 const std::string &name,
+                                                 const _Container &cont )
+{
+  // don't bother with writing if the container is empty
+  if (cont.empty()) return;
+
+  string value = str::join(cont, ZConfig().cacheDBSplitJoinSeparator());
+
+  appendStringAttribute( resolvable_id, klass, name, value );
 }
 
 }

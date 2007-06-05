@@ -56,6 +56,12 @@ namespace zypp
     return Pathname("/etc/zypp/repos.d");
   }
   
+  const std::string & ZConfig::cacheDBSplitJoinSeparator() const
+  {
+    static std::string s("!@$");
+    return s;
+  }
+
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////

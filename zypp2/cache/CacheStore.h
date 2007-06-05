@@ -473,6 +473,23 @@ namespace zypp
                                   const std::string &value );
 
 
+      /**
+       * Append strings from _Container to a resolvable.
+       * Uses \ref zypp::str::split(_Container, std::string) with
+       * \ref ZConfig::cacheDBSplitJoinSeparator() as the second argument
+       * (a separator string) of split().
+       * 
+       * \param resolvable_id Resovable Id, owner of the attribute
+       * \param klass Type class i.e "Package" "lang" "kind"
+       * \param name Type name i.e : "summary" "none" "Script"
+       * \param cont The string container.
+       */
+      template <class _Container>
+      void appendStringContainerAttribute( const data::RecordId &resolvable_id,
+                                           const std::string &klass,
+                                           const std::string &name,
+                                           const _Container &cont );
+
        /**
        * Update a known repository checksum and timestamp
        *
