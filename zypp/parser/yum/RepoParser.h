@@ -6,12 +6,12 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file zypp2/parser/yum/YUMParser.h
+/** \file zypp2/parser/yum/RepoParser.h
  *
  * YUM parser public API definition. 
  */
-#ifndef YUMPARSER_H_
-#define YUMPARSER_H_
+#ifndef ZYPP_PARSER_YUM_REPOPARSER_H_
+#define ZYPP_PARSER_YUM_REPOPARSER_H_
 
 #include "zypp/base/PtrTypes.h"
 #include "zypp/base/NonCopyable.h"
@@ -31,10 +31,10 @@ namespace zypp
 
 
   /**
-   * YUM metada parser.
+   * Main YUM repository metada parser.
    *
    * Reads repomd.xml file to get the list of files to parse and enques them
-   * as YUMParserJobs. Then uses *FileReader classes to parse the files and
+   * as RepoParserJobs. Then uses *FileReader classes to parse the files and
    * a \ref ResolvableDataConsumer to process the read data (typically to
    * store them in a database).
    *
@@ -44,7 +44,7 @@ namespace zypp
    * cache::CacheStore store(dbdir);
    * data::RecordId repository_id = store.lookupOrAppendRepository(sourceurl, "/");
    *
-   * YUMParser parser(repository_id, store, &progress_function);
+   * RepoParser parser(repository_id, store, &progress_function);
    * parser.parse(source_cache_dir);
    *
    * store.commit();
@@ -57,7 +57,7 @@ namespace zypp
    * \see FilelistsFileReader, PatchesFileReader, PatchFileReader
    * \see PatternFileReader, ProductFileReader
    */
-  class YUMParser : private base::NonCopyable
+  class RepoParser : private base::NonCopyable
   {
   public:
 
@@ -68,7 +68,7 @@ namespace zypp
      * \param consumer consumer of parsed data
      * \param progress progress reporting function
      */
-    YUMParser(
+    RepoParser(
       const data::RecordId & repository_id,
       data::ResolvableDataConsumer & consumer,
       const ProgressData::ReceiverFnc & progress = ProgressData::ReceiverFnc()
@@ -77,7 +77,7 @@ namespace zypp
     /**
      * DTOR 
      */
-    ~YUMParser();
+    ~RepoParser();
 
     /**
      * Starts parsing of repository cache dir located at \a path.
@@ -99,6 +99,6 @@ namespace zypp
   } // ns parser
 } // ns zypp
 
-#endif /*YUMPARSER_H_*/
+#endif /*ZYPP_PARSER_YUM_REPOPARSER_H_*/
 
 // vim: set ts=2 sts=2 sw=2 et ai:

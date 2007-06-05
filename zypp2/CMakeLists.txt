@@ -122,14 +122,6 @@ SET( zypp2_parser_susetags_HEADERS
 )
 
 
-SET( zypp2_parser_yum_SRCS
-  parser/yum/YUMParser.cc
-)
-
-SET( zypp2_parser_yum_HEADERS
-  parser/yum/YUMParser.h
-)
-
 #INSTALL(  FILES
 #  ${zypp2_repository_sqlite-repository_HEADERS}
 #  DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp2/repository/sqlite-repository

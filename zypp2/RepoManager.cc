@@ -27,7 +27,7 @@
 #include "zypp/MediaSetAccess.h"
 
 #include "zypp/source/yum/YUMDownloader.h"
-#include "zypp2/parser/yum/YUMParser.h"
+#include "zypp/parser/yum/RepoParser.h"
 
 #include "zypp/source/susetags/SUSETagsDownloader.h"
 #include "zypp2/parser/susetags/RepoParser.h"
@@ -299,7 +299,7 @@ namespace zypp
       {
         case RepoType::RPMMD_e :
         {
-          parser::yum::YUMParser parser(id, store);
+          parser::yum::RepoParser parser(id, store);
           parser.parse(rawpath);
            // no error
         }

@@ -6,7 +6,7 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file zypp2/parser/yum/YUMParser.cc
+/** \file zypp2/parser/yum/RepoParser.cc
  * YUM parser implementation. 
  */
 #include <iostream>
@@ -26,7 +26,7 @@
 #include "zypp/parser/yum/OtherFileReader.h"
 #include "zypp/parser/yum/FilelistsFileReader.h"
 
-#include "YUMParser.h"
+#include "zypp/parser/yum/RepoParser.h"
 
 
 #undef ZYPP_BASE_LOGGER_LOGGROUP
@@ -54,9 +54,9 @@ namespace zypp
   /**
    * Structure encapsulating YUM parser data type and filename.
    */
-  struct YUMParserJob
+  struct RepoParserJob
   {
-    YUMParserJob(const Pathname & filename, const YUMResourceType & type)
+    RepoParserJob(const Pathname & filename, const YUMResourceType & type)
       : _filename(filename), _type(type) {}
 
     const Pathname & filename() const { return _filename; }
@@ -72,9 +72,9 @@ namespace zypp
 
   ///////////////////////////////////////////////////////////////////////////
   //
-  //  CLASS NAME : YUMParser::Impl
+  //  CLASS NAME : RepoParser::Impl
   //
-  class YUMParser::Impl : private base::NonCopyable
+  class RepoParser::Impl : private base::NonCopyable
   {
   public:
     /** CTOR */
@@ -84,7 +84,7 @@ namespace zypp
       const ProgressData::ReceiverFnc & progress = ProgressData::ReceiverFnc()
     );
 
-    /** Implementation of \ref YUMParser::parse(Pathname) */
+    /** Implementation of \ref RepoParser::parse(Pathname) */
     void parse(const Pathname &cache_dir);
 
     /**
@@ -171,7 +171,7 @@ namespace zypp
     data::ResolvableDataConsumer & _consumer;
 
     /** List of parser jobs read from repomd.xml and patches.xml files. */
-    std::list<YUMParserJob> _jobs;
+    std::list<RepoParserJob> _jobs;
 
     /** Progress reporting object for overall YUM parser progress. */
     ProgressData _ticks;
@@ -179,33 +179,33 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////////////
 
 
-  YUMParser::Impl::Impl(
+  RepoParser::Impl::Impl(
       const data::RecordId & repository_id,
       data::ResolvableDataConsumer & consumer,
       const ProgressData::ReceiverFnc & progress)
     :
       _repository_id(repository_id), _consumer(consumer)
   {
-    _ticks.name("YUMParser");
+    _ticks.name("RepoParser");
     _ticks.sendTo(progress);
   }
 
   // -------------------------------------------------------------------------
 
-  bool YUMParser::Impl::repomd_CB(
+  bool RepoParser::Impl::repomd_CB(
     const OnMediaLocation & loc, const YUMResourceType & dtype)
   {
     DBG << "Adding " << dtype
-        << " (" << loc.filename() << ") to YUMParser jobs " << endl;
+        << " (" << loc.filename() << ") to RepoParser jobs " << endl;
 
-    _jobs.push_back(YUMParserJob(loc.filename(), dtype));
+    _jobs.push_back(RepoParserJob(loc.filename(), dtype));
 
     return true;
   }
 
   // -------------------------------------------------------------------------
 
-  bool YUMParser::Impl::primary_CB(const data::Package_Ptr & package_r)
+  bool RepoParser::Impl::primary_CB(const data::Package_Ptr & package_r)
   {
     _consumer.consumePackage( _repository_id, package_r );
 
@@ -221,19 +221,19 @@ namespace zypp
 
   // -------------------------------------------------------------------------
 
-  bool YUMParser::Impl::patches_CB(
+  bool RepoParser::Impl::patches_CB(
     const OnMediaLocation & loc, const string & patch_id)
   {
-    DBG << "Adding patch " << loc.filename() << " to YUMParser jobs " << endl;
+    DBG << "Adding patch " << loc.filename() << " to RepoParser jobs " << endl;
 
-    _jobs.push_back(YUMParserJob(loc.filename(), YUMResourceType::PATCH));
+    _jobs.push_back(RepoParserJob(loc.filename(), YUMResourceType::PATCH));
 
     return true;
   }
 
   // -------------------------------------------------------------------------
 
-  bool YUMParser::Impl::patch_CB(const data::Patch_Ptr & patch)
+  bool RepoParser::Impl::patch_CB(const data::Patch_Ptr & patch)
   {
     _consumer.consumePatch( _repository_id, patch );
 
@@ -247,7 +247,7 @@ namespace zypp
 
   // -------------------------------------------------------------------------
 
-  bool YUMParser::Impl::other_CB(
+  bool RepoParser::Impl::other_CB(
     const data::Resolvable_Ptr & res_ptr, const Changelog & changelog)
   {
     _consumer.consumeChangelog(_repository_id, res_ptr, changelog);
@@ -264,7 +264,7 @@ namespace zypp
 
   // -------------------------------------------------------------------------
 
-  bool YUMParser::Impl::filelist_CB(
+  bool RepoParser::Impl::filelist_CB(
     const data::Resolvable_Ptr & res_ptr, const data::Filenames & filenames)
   {
     _consumer.consumeFilelist(_repository_id, res_ptr, filenames);
@@ -281,7 +281,7 @@ namespace zypp
 
   // --------------------------------------------------------------------------
 
-  bool YUMParser::Impl::pattern_CB(const data::Pattern_Ptr & product_ptr)
+  bool RepoParser::Impl::pattern_CB(const data::Pattern_Ptr & product_ptr)
   {
     _consumer.consumePattern(_repository_id, product_ptr);
 
@@ -292,7 +292,7 @@ namespace zypp
 
   // --------------------------------------------------------------------------
 
-  bool YUMParser::Impl::product_CB(const data::Product_Ptr & product_ptr)
+  bool RepoParser::Impl::product_CB(const data::Product_Ptr & product_ptr)
   {
     _consumer.consumeProduct(_repository_id, product_ptr);
 
@@ -304,11 +304,11 @@ namespace zypp
 
   // --------------------------------------------------------------------------
 
-  void YUMParser::Impl::parse(const Pathname &cache_dir)
+  void RepoParser::Impl::parse(const Pathname &cache_dir)
   {
     zypp::parser::yum::RepomdFileReader(
         cache_dir + "/repodata/repomd.xml",
-        bind(&YUMParser::Impl::repomd_CB, this, _1, _2));
+        bind(&RepoParser::Impl::repomd_CB, this, _1, _2));
 
 
     _ticks.range(_jobs.size());
@@ -321,12 +321,12 @@ namespace zypp
 
   // --------------------------------------------------------------------------
 
-  void YUMParser::Impl::doJobs(const Pathname &cache_dir)
+  void RepoParser::Impl::doJobs(const Pathname &cache_dir)
   {
-    for(list<YUMParserJob>::const_iterator it = _jobs.begin();
+    for(list<RepoParserJob>::const_iterator it = _jobs.begin();
         it != _jobs.end(); ++it)
     {
-      YUMParserJob job = *it;
+      RepoParserJob job = *it;
 
       MIL << "going to parse " << job.type() << " file " << job.filename() << endl;
 
@@ -337,7 +337,7 @@ namespace zypp
         {
           zypp::parser::yum::PrimaryFileReader(
             cache_dir + job.filename(),
-            bind(&YUMParser::Impl::primary_CB, this, _1),
+            bind(&RepoParser::Impl::primary_CB, this, _1),
             &progress_function);
           break;
         }
@@ -346,7 +346,7 @@ namespace zypp
         {
           zypp::source::yum::PatchesFileReader(
             cache_dir + job.filename(),
-            bind(&YUMParser::Impl::patches_CB, this, _1, _2));
+            bind(&RepoParser::Impl::patches_CB, this, _1, _2));
           // reset progress reporter max value (number of jobs changed if
           // there are patches to parse)
           _ticks.range(_jobs.size());
@@ -357,7 +357,7 @@ namespace zypp
         {
           zypp::parser::yum::PatchFileReader(
             cache_dir + job.filename(),
-            bind(&YUMParser::Impl::patch_CB, this, _1));
+            bind(&RepoParser::Impl::patch_CB, this, _1));
           break;
         }
 
@@ -367,7 +367,7 @@ namespace zypp
           /*
           zypp::parser::yum::Impl::OtherFileReader(
             cache_dir + job.filename(),
-            bind(&YUMParser::other_CB, this, _1, _2),
+            bind(&RepoParser::other_CB, this, _1, _2),
             &progress_function);
           */
           break;
@@ -377,7 +377,7 @@ namespace zypp
         {
           zypp::parser::yum::FilelistsFileReader(
             cache_dir + job.filename(),
-            bind(&YUMParser::Impl::filelist_CB, this, _1, _2),
+            bind(&RepoParser::Impl::filelist_CB, this, _1, _2),
             &progress_function);
           break;
         }
@@ -386,7 +386,7 @@ namespace zypp
         {
           zypp::parser::yum::PatternFileReader(
             cache_dir + job.filename(),
-            bind(&YUMParser::Impl::pattern_CB, this, _1));
+            bind(&RepoParser::Impl::pattern_CB, this, _1));
           break;
         }
 
@@ -394,7 +394,7 @@ namespace zypp
         {
           zypp::parser::yum::ProductFileReader(
             cache_dir + job.filename(),
-            bind(&YUMParser::Impl::product_CB, this, _1));
+            bind(&RepoParser::Impl::product_CB, this, _1));
           break;
         }
 
@@ -414,11 +414,11 @@ namespace zypp
 
   ///////////////////////////////////////////////////////////////////
   //
-  //  CLASS : YUMParser
+  //  CLASS : RepoParser
   //
   ///////////////////////////////////////////////////////////////////
 
-  YUMParser::YUMParser(
+  RepoParser::RepoParser(
       const data::RecordId & repository_id,
       data::ResolvableDataConsumer & consumer,
       const ProgressData::ReceiverFnc & progress)
@@ -427,11 +427,11 @@ namespace zypp
   {}
 
 
-  YUMParser::~YUMParser()
+  RepoParser::~RepoParser()
   {}
 
 
-  void YUMParser::parse(const Pathname & cache_dir)
+  void RepoParser::parse(const Pathname & cache_dir)
   {
     _pimpl->parse(cache_dir);
   }
