@@ -222,6 +222,7 @@ void CacheStore::appendPackageBaseAttributes( const RecordId & pkgid,
                                               const data::Packagebase_Ptr & package )
 {
   appendStringAttribute( pkgid, "Package", "checksum", package->repositoryLocation.fileChecksum.checksum() );
+  appendStringAttribute( pkgid, "Package", "checksumType", package->repositoryLocation.fileChecksum.type() );
   appendStringAttribute( pkgid, "Package", "buildhost", package->buildhost );
   appendStringAttribute( pkgid, "Package", "distribution", package->distribution );
   appendStringAttribute( pkgid, "Package", "license", package->license );
@@ -346,11 +347,11 @@ void CacheStore::consumeScript( const data::RecordId & repository_id,
   appendStringAttribute( id, "Script", "doScript", script->doScript );
   appendStringAttribute( id, "Script", "doScriptLocation", script->doScriptLocation.filePath.asString() );
   appendStringAttribute( id, "Script", "doScriptChecksum", script->doScriptLocation.fileChecksum.checksum() );
-  //! \todo what about checksum type?
+  appendStringAttribute( id, "Script", "doScriptChecksumType", script->doScriptLocation.fileChecksum.type() );
   appendStringAttribute( id, "Script", "undoScript", script->undoScript );
   appendStringAttribute( id, "Script", "undoScriptLocation", script->undoScriptLocation.filePath.asString() );
   appendStringAttribute( id, "Script", "undoScriptChecksum", script->undoScriptLocation.fileChecksum.checksum() );
-  //! \todo what about checksum type?
+  appendStringAttribute( id, "Script", "undoScriptChecksumType", script->undoScriptLocation.fileChecksum.type() );
 }
 
 void CacheStore::consumePattern( const data::RecordId & repository_id,
@@ -611,6 +612,7 @@ RecordId CacheStore::appendPatchRpm(const data::PatchRpm_Ptr & prpm)
   //! \todo what's this? _pimpl->insert_patchrpm_cmd->bind(":media_nr", ???);
   _pimpl->insert_patchrpm_cmd->bind(":location", prpm->location.filePath.asString());
   _pimpl->insert_patchrpm_cmd->bind(":checksum", prpm->location.fileChecksum.checksum());
+  //! \todo checksum type
   _pimpl->insert_patchrpm_cmd->bind(":download_size", static_cast<ByteCount::SizeType>(prpm->location.fileSize));
   _pimpl->insert_patchrpm_cmd->bind(":build_time", prpm->buildTime.asSeconds());
   _pimpl->insert_patchrpm_cmd->executenonquery();
@@ -639,6 +641,7 @@ RecordId CacheStore::appendDeltaRpm(const data::DeltaRpm_Ptr & drpm)
   //! \todo what's this? _pimpl->insert_deltarpm_cmd->bind(":media_nr", ???);
   _pimpl->insert_deltarpm_cmd->bind(":location", drpm->location.filePath.asString());
   _pimpl->insert_deltarpm_cmd->bind(":checksum", drpm->location.fileChecksum.checksum());
+  //! \todo checksum type
   _pimpl->insert_deltarpm_cmd->bind(":download_size", static_cast<ByteCount::SizeType>(drpm->location.fileSize));
   _pimpl->insert_deltarpm_cmd->bind(":build_time", drpm->buildTime.asSeconds());
 
