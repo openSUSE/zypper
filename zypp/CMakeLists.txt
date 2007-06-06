@@ -3,6 +3,11 @@
 ####################################################################
 
 ADD_DEFINITIONS(-DLOCALEDIR=\\\"/usr/share/libzypp\\\" -DTEXTDOMAIN=\\\"zypp\\\" )
+ADD_EXECUTABLE(mkarray ${CMAKE_SOURCE_DIR}/zypp/cache/schema/mkarray.c )
+INCLUDE_DIRECTORIES(${CMAKE_CURRENT_BINARY_DIR})
+#FILE(WRITE filename "message to write"... )
+
+ADD_CUSTOM_COMMAND( OUTPUT ${CMAKE_BINARY_DIR}/zypp/sqlite-schema.h PRE_BUILD COMMAND "${CMAKE_BINARY_DIR}/zypp/mkarray" ARGS "${CMAKE_SOURCE_DIR}/zypp/cache/schema/schema.sql" "schemaData" "${CMAKE_BINARY_DIR}/zypp/sqlite-schema.h" DEPENDS mkarray DEPENDS ${CMAKE_SOURCE_DIR}/zypp/cache/schema/schema.sql )
 
 SET( zypp_SRCS
   ZConfig.cc
@@ -81,6 +86,11 @@ SET( zypp_SRCS
   OnMediaLocation.cc
   Fetcher.cc
   FileChecker.cc
+  Repository.cc
+  RepoInfo.cc
+  RepoStatus.cc
+  RepoManager.cc
+  RepositoryFactory.cc
 )
 
 SET( zypp_HEADERS
@@ -178,6 +188,11 @@ SET( zypp_HEADERS
   ZYppCommitResult.h
   ZYppFactory.h
   FileChecker.h
+  Repository.h
+  RepoInfo.h
+  RepoStatus.h
+  RepoManager.h
+  RepositoryFactory.h
 )
 
 INSTALL(  FILES ${zypp_HEADERS} DESTINATION "${CMAKE_INSTALL_PREFIX}/include/zypp" )
@@ -415,6 +430,7 @@ SET( zypp_parser_SRCS
   parser/LibXMLHelper.cc
   parser/SAXParser.cc
   parser/XMLNodeIterator.cc
+  parser/RepoFileReader.cc
 )
 
 SET( zypp_parser_HEADERS
@@ -427,6 +443,7 @@ SET( zypp_parser_HEADERS
   parser/SAXParser.h
   parser/XMLNodeIterator.h
   parser/xml_parser_assert.h
+  parser/RepoFileReader.h
 )
 
 INSTALL(  FILES
@@ -440,6 +457,7 @@ SET( zypp_parser_susetags_SRCS
   parser/susetags/PackagesFileReader.cc
   parser/susetags/PackagesLangFileReader.cc
   parser/susetags/PatternFileReader.cc
+  parser/susetags/RepoParser.cc
 )
 
 SET( zypp_parser_susetags_HEADERS
@@ -450,6 +468,7 @@ SET( zypp_parser_susetags_HEADERS
   parser/susetags/PackagesFileReader.h
   parser/susetags/PackagesLangFileReader.h
   parser/susetags/PatternFileReader.h
+  parser/susetags/RepoParser.h
 )
 
 INSTALL(  FILES
@@ -998,9 +1017,92 @@ INSTALL(  FILES
   DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/zypp_detail
 )
 
+SET( zypp_cache_SRCS
+  ${CMAKE_BINARY_DIR}/zypp/sqlite-schema.h
+  cache/CacheInitializer.cpp
+  cache/CacheException.cc
+  cache/CacheTypes.cc
+  cache/ResolvableQuery.cc
+  cache/CacheStore.cpp
+  cache/CacheFSCK.cc
+  cache/Utils.cpp
+)
+
+SET( zypp_cache_HEADERS
+  cache/CacheTypes.h
+  cache/CacheInitializer.h
+  cache/CacheException.h
+  cache/CacheStore.h
+  cache/CacheFSCK.h
+  cache/ResolvableQuery.h
+  cache/Utils.h
+)
+
+#INSTALL(  FILES
+#  ${zypp_cache_HEADERS}
+#  DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/cache
+#)
+
+SET( zypp_cache_sqlite3x_SRCS
+  cache/sqlite3x/sqlite3x_command.cpp
+  cache/sqlite3x/sqlite3x_connection.cpp
+  cache/sqlite3x/sqlite3x_exception.cpp
+  cache/sqlite3x/sqlite3x_reader.cpp
+  cache/sqlite3x/sqlite3x_transaction.cpp
+)
+
+SET( zypp_cache_sqlite3x_HEADERS
+  cache/sqlite3x/sqlite3x.hpp
+)
+
+#INSTALL(  FILES
+#  ${zypp_cache_sqlite3x_HEADERS}
+#  DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/cache/sqlite3x
+#)
+
+SET( zypp_repository_SRCS
+  repo/dummy.cc
+  repo/RepositoryImpl.cc
+  repo/RepoException.cc
+  repo/RepoType.cc
+)
+
+SET( zypp_repository_HEADERS
+  repo/dummy.h
+  repo/RepositoryImpl.h
+  repo/RepoException.h
+  repo/RepoType.h
+)
+
+SET( zypp_repository_cached_SRCS
+  repo/cached/RepoImpl.cc
+  repo/cached/PackageImpl.cc
+)
+
+SET( zypp_repository_cached_HEADERS
+  repo/cached/RepoImpl.h
+  repo/cached/PackageImpl.h
+)
+
+SET( zypp_repository_data_SRCS
+  repo/memory/PackageImpl.cc
+  repo/memory/PatternImpl.cc
+  repo/memory/ProductImpl.cc
+  repo/memory/SrcPackageImpl.cc
+)
+
+SET( zypp_repository_data_HEADERS
+  repo/memory/PackageImpl.h
+  repo/memory/PatternImpl.h
+  repo/memory/ProductImpl.h
+  repo/memory/SrcPackageImpl.h
+)
+
 SET( zypp_lib_SRCS
 ${zypp_detail_SRCS}
 ${zypp_capability_SRCS}
+${zypp_cache_SRCS}
+${zypp_cache_sqlite3x_SRCS}
 ${zypp_pool_SRCS}
 ${zypp_parser_tagfile_SRCS}
 ${zypp_parser_susetags_SRCS}
@@ -1017,6 +1119,9 @@ ${zypp_data_SRCS}
 ${zypp_media_proxyinfo_SRCS}
 ${zypp_media_SRCS}
 ${zypp_url_SRCS}
+${zypp_repository_SRCS}
+${zypp_repository_cached_SRCS}
+${zypp_repository_data_SRCS}
 ${zypp_target_store_xml_SRCS}
 ${zypp_target_store_SRCS}
 ${zypp_target_rpm_SRCS}
@@ -1039,6 +1144,8 @@ ${zypp_parser_susetags_HEADERS}
 ${zypp_target_rpm_HEADERS}
 ${zypp_parser_yum2_HEADERS}
 ${zypp_capability_HEADERS}
+${zypp_cache_HEADERS}
+${zypp_cache_sqlite3x_HEADERS}
 ${zypp_ui_HEADERS}
 ${zypp_parser_xmlstore_HEADERS}
 ${zypp_data_HEADERS}
@@ -1056,6 +1163,7 @@ ${zypp_parser_HEADERS}
 ${zypp_HEADERS}
 ${zypp_zypp_detail_HEADERS}
 ${zypp_thread_HEADERS}
+${zypp_repository_HEADERS}
 ${zypp_source_susetags_HEADERS}
 ${zypp_target_modalias_HEADERS}
 ${zypp_target_HEADERS}
@@ -1112,6 +1220,7 @@ SET_LOGGROUP( "tagfile" ${zypp_parser_tagfile_SRCS} )
 
 ADD_LIBRARY(zypp SHARED ${zypp_lib_SRCS})
 SET_TARGET_PROPERTIES( zypp PROPERTIES VERSION "${LIBZYPP_VERSION_INFO}" )
+ADD_DEPENDENCIES(zypp schema_header)
 # System libraries
 TARGET_LINK_LIBRARIES(zypp boost_filesystem boost_regex util )
 TARGET_LINK_LIBRARIES(zypp ${DBUS_LIBRARY} )

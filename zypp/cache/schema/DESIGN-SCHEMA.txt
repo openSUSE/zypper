@@ -1,0 +1,3 @@
+
+See:
+http://en.opensuse.org/Libzypp/Refactoring/CacheSchema
