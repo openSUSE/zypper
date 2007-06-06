@@ -43,7 +43,6 @@ SET( zypp2_cache_SRCS
 )
 
 SET( zypp2_cache_HEADERS
-  cache/CacheCommon.h
   cache/CacheTypes.h
   cache/CacheInitializer.h
   cache/CacheException.h

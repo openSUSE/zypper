@@ -14,7 +14,6 @@
 #include "zypp/base/Measure.h"
 #include "zypp/capability/Capabilities.h"
 #include "zypp2/cache/ResolvableQuery.h"
-#include "zypp2/cache/CacheCommon.h"
 #include "zypp/detail/ResImplTraits.h"
 #include "zypp/CapFactory.h"
 
