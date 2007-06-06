@@ -37,7 +37,7 @@ namespace zypp
         
     ~Impl()
     {
-      MIL << std::endl;
+      //MIL << std::endl;
     }
   public:
     boost::tribool enabled;
