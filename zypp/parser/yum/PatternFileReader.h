@@ -71,3 +71,5 @@ namespace zypp
 } // ns zypp
 
 #endif /*ZYPP_PARSER_YUM_PATTERNFILEREADER_H_*/
+
+// vim: set ts=2 sts=2 sw=2 et ai:

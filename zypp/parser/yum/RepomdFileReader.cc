@@ -125,7 +125,7 @@ namespace zypp
         return true;
       }
 
-      // xpath: /repomd/data
+      // xpath: /repomd/data (+)
       if ( reader_r->name() == "data" )
       {
         _tag = tag_Data;
@@ -159,7 +159,7 @@ namespace zypp
         return true;
       }
 
-      // xpath: /repomd/open-checksum (?)
+      //! \todo xpath: /repomd/open-checksum (?)
     }
 
     else if ( reader_r->nodeType() == XML_READER_TYPE_END_ELEMENT )

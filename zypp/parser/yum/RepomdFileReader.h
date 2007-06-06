@@ -43,7 +43,7 @@ namespace zypp
    *                  bind( &SomeClass::callbackfunc, &SomeClassInstance, _1, _2 ) );
    * \endcode
    */
-  class RepomdFileReader
+  class RepomdFileReader : private base::NonCopyable
   {
   public:
    /**
@@ -66,7 +66,7 @@ namespace zypp
     */
     RepomdFileReader(
       const Pathname & repomd_file, const ProcessResource & callback);
-    
+
     /**
      * DTOR
      */
