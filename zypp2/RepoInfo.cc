@@ -34,6 +34,11 @@ namespace zypp
         autorefresh(indeterminate),
         type(repo::RepoType::NONE_e)
     {}
+        
+    ~Impl()
+    {
+      MIL << std::endl;
+    }
   public:
     boost::tribool enabled;
     boost::tribool autorefresh;
@@ -44,12 +49,6 @@ namespace zypp
     std::string name;
 
   public:
-    /** Offer default Impl. */
-    static shared_ptr<Impl> nullimpl()
-    {
-      static shared_ptr<Impl> _nullimpl( new Impl );
-      return _nullimpl;
-    }
 
   private:
     friend Impl * rwcowClone<Impl>( const Impl * rhs );
@@ -77,7 +76,7 @@ namespace zypp
   //	METHOD TYPE : Ctor
   //
   RepoInfo::RepoInfo()
-  : _pimpl( Impl::nullimpl() )
+  : _pimpl( new Impl() )
   {}
 
   ///////////////////////////////////////////////////////////////////
@@ -86,7 +85,9 @@ namespace zypp
   //	METHOD TYPE : Dtor
   //
   RepoInfo::~RepoInfo()
-  {}
+  {
+    //MIL << std::endl;
+  }
 
   
   

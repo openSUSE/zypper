@@ -75,6 +75,24 @@ namespace zypp
     
     /**
      * thrown when it was impossible to
+     * match a repository
+     */
+    class RepoNotFoundException : public RepoException
+    {
+    
+    };
+    
+    /**
+     * Repository already exists and some unique
+     * attribute can't be duplicated.
+     */
+    class RepoAlreadyExistsException : public RepoException
+    {
+    
+    };
+    
+    /**
+     * thrown when it was impossible to
      * determine an alias for this repo.
      */
     class RepoUnknownTypeException : public RepoException

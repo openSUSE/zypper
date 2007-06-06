@@ -121,6 +121,13 @@ SET( zypp2_parser_susetags_HEADERS
   parser/susetags/RepoParser.h
 )
 
+SET( zypp2_parser_SRCS
+  parser/RepoFileReader.cc
+)
+
+SET( zypp2_parser_HEADERS
+  parser/RepoFileReader.h
+)
 
 #INSTALL(  FILES
 #  ${zypp2_repository_sqlite-repository_HEADERS}
@@ -135,6 +142,7 @@ ${zypp2_cache_SRCS}
 ${zypp2_repository_cached_SRCS}
 ${zypp2_repository_data_SRCS}
 ${zypp2_cache_sqlite3x_SRCS}
+${zypp2_parser_SRCS}
 ${zypp2_parser_yum_SRCS}
 ${zypp2_parser_susetags_SRCS}
 )
@@ -144,6 +152,7 @@ ${zypp2_repository_HEADERS}
 ${zypp2_HEADERS}
 ${zypp2_cache_HEADERS}
 ${zypp2_cache_sqlite3x_HEADERS}
+${zypp2_parser_HEADERS}
 ${zypp2_parser_yum_HEADERS}
 ${zypp2_parser_susetags_HEADERS}
 )

@@ -15,7 +15,7 @@ namespace zypp
   struct RepoParserOpts
   {
     /** Skip parsing of other.xml.gz */
-    DefaultIntegral<bool,false> skipOther;
+    DefaultIntegral<bool,true> skipOther;
 
     /** Skip parsing of filelists.xml.gz */
     DefaultIntegral<bool,false> skipFilelists;

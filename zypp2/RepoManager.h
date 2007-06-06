@@ -67,7 +67,7 @@ namespace zypp
     * Which defaults to ZYpp global settings.
     *
     */
-   std::list<RepoInfo> knownRepositories();
+   std::list<RepoInfo> knownRepositories() const;
    
    /**
     * \short Refresh local cache
@@ -122,19 +122,43 @@ namespace zypp
    void cleanCache( const RepoInfo &info );
    
    /**
+    * \short Wether a repository exists in cache
+    *
+    * \param RepoInfo to be checked.
+    */
+    bool isCached( const RepoInfo &info ) const;
+   
+   /**
     * \short Create a repository object from the cache data
     *
     * \throw RepoNotCachedException When the source is not cached.
     */
    Repository createFromCache( const RepoInfo &info );
 
-   
    /**
     * \short Probe repo metadata type.
     *
     * \todo FIXME Should this be private?
     */
    repo::RepoType probe( const Url &url );
+   
+   
+   /**
+    * \short Adds a repository to the list of known repositories.
+    *
+    * 
+    *
+    * \throws RepoAlreadyExistsException If the repo clash some 
+    * unique attribute like alias
+    */
+   void addRepository( const RepoInfo &info );
+   
+   /**
+    * Adds a .repo file directly, which can contain
+    * one or more repositories.
+    */
+   //void addRepositories( const Url &url );
+   
    
   public:
 

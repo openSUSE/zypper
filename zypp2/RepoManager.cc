@@ -15,9 +15,9 @@
 #include <algorithm>
 #include "zypp/base/InputStream.h"
 #include "zypp/base/Logger.h"
+#include "zypp/base/Function.h"
 #include "zypp/PathInfo.h"
 #include "zypp/TmpPath.h"
-#include "zypp/parser/IniDict.h"
 
 #include "zypp2/repo/RepoException.h"
 #include "zypp2/RepoManager.h"
@@ -26,6 +26,7 @@
 #include "zypp2/repo/cached/RepoImpl.h"
 #include "zypp/MediaSetAccess.h"
 
+#include "zypp2/parser/RepoFileReader.h"
 #include "zypp/source/yum/YUMDownloader.h"
 #include "zypp/parser/yum/RepoParser.h"
 
@@ -36,7 +37,6 @@ using namespace std;
 using namespace zypp;
 using namespace zypp::repo;
 using namespace zypp::filesystem;
-using parser::IniDict;
 
 using zypp::source::yum::YUMDownloader;
 using zypp::source::susetags::SUSETagsDownloader;
@@ -45,6 +45,12 @@ using zypp::source::susetags::SUSETagsDownloader;
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
+  ///////////////////////////////////////////////////////////////////
+  //
+  //	CLASS NAME : RepoManagerOptions
+  //
+  ///////////////////////////////////////////////////////////////////
+  
   RepoManagerOptions::RepoManagerOptions()
   {
     ZConfig globalConfig;
@@ -52,48 +58,34 @@ namespace zypp
     repoRawCachePath = globalConfig.defaultRepoRawCachePath();
     knownReposPath = globalConfig.defaultKnownReposPath();
   }
-    
+  
   /**
-   * \short List of RepoInfo's from a file.
-   * \param file pathname of the file to read.
-   */
-  static std::list<RepoInfo> repositories_in_file( const Pathname &file )
+    * \short Simple callback to collect the results
+    */
+  struct RepoCollector
   {
-    InputStream is(file);
-    IniDict dict(is);
-    std::list<RepoInfo> repos;
-    
-    for ( IniDict::section_const_iterator its = dict.sectionsBegin();
-          its != dict.sectionsEnd();
-          ++its )
+    RepoCollector()
     {
-      MIL << (*its) << endl;
-      
-      RepoInfo info;
-      info.setAlias(*its);
-                    
-      for ( IniDict::entry_const_iterator it = dict.entriesBegin(*its);
-            it != dict.entriesEnd(*its);
-            ++it )
-      {
-        
-        //MIL << (*it).first << endl;
-        if (it->first == "name" )
-          info.setName(it-> second);
-        else if ( it->first == "enabled" )
-          info.setEnabled( it->second == "1" );
-        else if ( it->first == "baseurl" )
-          info.addBaseUrl( Url(it->second) );
-        else if ( it->first == "type" )
-          info.setType(repo::RepoType(it->second));
-      }
-      
-      // add it to the list.
-      repos.push_back(info);
+      MIL << endl;
     }
     
-    return repos;
-  }
+    ~RepoCollector()
+    {
+      MIL << endl;
+    }
+    
+    bool collect( const RepoInfo &repo )
+    {
+      //MIL << "here in collector: " << repo.alias() << endl;
+      repos.push_back(repo);
+      //MIL << "added: " << repo.alias() << endl;
+      return true;
+    }
+  
+    RepoInfoList repos;
+  };
+   
+  ////////////////////////////////////////////////////////////////////////////
   
   /**
    * \short List of RepoInfo's from a directory
@@ -105,6 +97,8 @@ namespace zypp
    */
   static std::list<RepoInfo> repositories_in_path( const Pathname &dir )
   {
+    MIL << " " << dir << endl;
+    RepoCollector collector;
     std::list<RepoInfo> repos;
     list<Pathname> entries;
     if ( filesystem::readdir( entries, Pathname(dir), false ) != 0 )
@@ -113,18 +107,50 @@ namespace zypp
     for ( list<Pathname>::const_iterator it = entries.begin(); it != entries.end(); ++it )
     {
       Pathname file = *it;
-      std::list<RepoInfo> repos_here = repositories_in_file(file);
-      std::copy( repos_here.begin(), repos_here.end(), std::back_inserter(repos));
+      parser::RepoFileReader parser( file, bind( &RepoCollector::collect, &collector, _1 ) );
+
+      //std::copy( collector.repos.begin(), collector.repos.end(), std::back_inserter(repos));
+      //MIL << "ok" << endl;
     }
-    return repos;
+    return collector.repos;
   }
   
-  std::list<RepoInfo> RepoManager::knownRepositories()
+  ////////////////////////////////////////////////////////////////////////////
+  
+  static void assert_alias( const RepoInfo &info )
   {
-    return repositories_in_path("/etc/zypp/repos.d");
+    if (info.alias().empty())
+        ZYPP_THROW(RepoNoAliasException());
+  }
+  
+  ////////////////////////////////////////////////////////////////////////////
+  
+  static void assert_urls( const RepoInfo &info )
+  {
+    if (info.urls().empty())
+        ZYPP_THROW(RepoNoUrlException());
+  }
+  
+  ////////////////////////////////////////////////////////////////////////////
+  
+  /**
+   * \short Calculates the raw cache path for a repository
+   */
+  static Pathname rawcache_path_for_repoinfo( const RepoManagerOptions &opt, const RepoInfo &info )
+  {
+    assert_alias(info);
+    return opt.repoRawCachePath + info.alias();
   }
 
-  /** RepoManager implementation. */
+  ///////////////////////////////////////////////////////////////////
+  //
+  //	CLASS NAME : RepoManager::Impl
+  //
+  ///////////////////////////////////////////////////////////////////
+  
+  /**
+   * \short RepoManager implementation.
+   */
   struct RepoManager::Impl
   {
     Impl( const RepoManagerOptions &opt )
@@ -168,41 +194,26 @@ namespace zypp
   //
   ///////////////////////////////////////////////////////////////////
 
-  ///////////////////////////////////////////////////////////////////
-  //
-  //	METHOD NAME : RepoManager::RepoManager
-  //	METHOD TYPE : Ctor
-  //
   RepoManager::RepoManager( const RepoManagerOptions &opt )
   : _pimpl( new Impl(opt) )
   {}
 
-  ///////////////////////////////////////////////////////////////////
-  //
-  //	METHOD NAME : RepoManager::~RepoManager
-  //	METHOD TYPE : Dtor
-  //
+  ////////////////////////////////////////////////////////////////////////////
+  
   RepoManager::~RepoManager()
   {}
-
-  static void assert_alias( const RepoInfo &info )
+  
+  ////////////////////////////////////////////////////////////////////////////
+  
+  std::list<RepoInfo> RepoManager::knownRepositories() const
   {
-    if (info.alias().empty())
-        ZYPP_THROW(RepoNoAliasException());
+    MIL << endl;
+    return repositories_in_path("/etc/zypp/repos.d");
+    MIL << endl;
   }
   
-  static void assert_urls( const RepoInfo &info )
-  {
-    if (info.urls().empty())
-        ZYPP_THROW(RepoNoUrlException());
-  }
+  ////////////////////////////////////////////////////////////////////////////
   
-  static Pathname rawcache_path_for_repoinfo( const RepoManagerOptions &opt, const RepoInfo &info )
-  {
-    assert_alias(info);
-    return opt.repoRawCachePath + info.alias();
-  }
-
   void RepoManager::refreshMetadata( const RepoInfo &info )
   {
     assert_alias(info);
@@ -260,10 +271,14 @@ namespace zypp
     }
   }
   
+  ////////////////////////////////////////////////////////////////////////////
+  
   void RepoManager::cleanMetadata( const RepoInfo &info )
   {
     filesystem::recursive_rmdir(rawcache_path_for_repoinfo(_pimpl->options, info));
   }
+  
+  ////////////////////////////////////////////////////////////////////////////
   
   void RepoManager::buildCache( const RepoInfo &info )
   {
@@ -319,6 +334,8 @@ namespace zypp
       store.commit();
   }
   
+  ////////////////////////////////////////////////////////////////////////////
+  
   repo::RepoType RepoManager::probe( const Url &url )
   {
     MediaSetAccess access(url);
@@ -330,6 +347,8 @@ namespace zypp
     return repo::RepoType("UNKNOWN");
   }
   
+  ////////////////////////////////////////////////////////////////////////////
+  
   void RepoManager::cleanCache( const RepoInfo &info )
   {
     cache::CacheStore store(_pimpl->options.repoCachePath);
@@ -337,6 +356,14 @@ namespace zypp
     data::RecordId id = store.lookupRepository(info.alias());
     store.cleanRepository(id);
     store.commit();
+  }
+  
+  ////////////////////////////////////////////////////////////////////////////
+  
+  bool RepoManager::isCached( const RepoInfo &info ) const
+  {
+    cache::CacheStore store(_pimpl->options.repoCachePath);
+    return store.isCached(info.alias());
   }
   
   Repository RepoManager::createFromCache( const RepoInfo &info )
@@ -349,17 +376,22 @@ namespace zypp
     MIL << "Repository " << info.alias() << " is cached" << endl;
     
     data::RecordId id = store.lookupRepository(info.alias());
-    repo::cached::RepoImpl::Ptr repoimpl = new repo::cached::RepoImpl( info, _pimpl->options.repoCachePath, id );
+    repo::cached::RepoImpl::Ptr repoimpl =
+        new repo::cached::RepoImpl( info, _pimpl->options.repoCachePath, id );
     // read the resolvables from cache
     repoimpl->createResolvables();
     return Repository(repoimpl);
   }
  
-  /******************************************************************
-  **
-  **	FUNCTION NAME : operator<<
-  **	FUNCTION TYPE : std::ostream &
-  */
+  ////////////////////////////////////////////////////////////////////////////
+  
+  void RepoManager::addRepository( const RepoInfo &info )
+  {
+  
+  }
+  
+  ////////////////////////////////////////////////////////////////////////////
+  
   std::ostream & operator<<( std::ostream & str, const RepoManager & obj )
   {
     return str << *obj._pimpl;
