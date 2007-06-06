@@ -7,7 +7,7 @@
 |                                                                      |
 \---------------------------------------------------------------------*/
 /** \file zypp2/parser/yum/RepoParser.cc
- * YUM parser implementation. 
+ * YUM repository metadata parser implementation. 
  */
 #include <iostream>
 
@@ -81,6 +81,7 @@ namespace zypp
     Impl(
       const data::RecordId & repository_id,
       data::ResolvableDataConsumer & consumer,
+      const RepoParserOpts & options = RepoParserOpts(),
       const ProgressData::ReceiverFnc & progress = ProgressData::ReceiverFnc()
     );
 
@@ -175,6 +176,9 @@ namespace zypp
 
     /** Progress reporting object for overall YUM parser progress. */
     ProgressData _ticks;
+
+    /** */
+    const RepoParserOpts & _options;
   };
   ///////////////////////////////////////////////////////////////////////////
 
@@ -182,9 +186,10 @@ namespace zypp
   RepoParser::Impl::Impl(
       const data::RecordId & repository_id,
       data::ResolvableDataConsumer & consumer,
+      const RepoParserOpts & options,
       const ProgressData::ReceiverFnc & progress)
     :
-      _repository_id(repository_id), _consumer(consumer)
+      _repository_id(repository_id), _consumer(consumer), _options(options)
   {
     _ticks.name("RepoParser");
     _ticks.sendTo(progress);
@@ -335,7 +340,7 @@ namespace zypp
         // parse primary.xml.gz
         case YUMResourceType::PRIMARY_e:
         {
-          zypp::parser::yum::PrimaryFileReader(
+          PrimaryFileReader(
             cache_dir + job.filename(),
             bind(&RepoParser::Impl::primary_CB, this, _1),
             &progress_function);
@@ -344,7 +349,7 @@ namespace zypp
 
         case YUMResourceType::PATCHES_e:
         {
-          zypp::source::yum::PatchesFileReader(
+          source::yum::PatchesFileReader(
             cache_dir + job.filename(),
             bind(&RepoParser::Impl::patches_CB, this, _1, _2));
           // reset progress reporter max value (number of jobs changed if
@@ -355,7 +360,7 @@ namespace zypp
 
         case YUMResourceType::PATCH_e:
         {
-          zypp::parser::yum::PatchFileReader(
+          PatchFileReader(
             cache_dir + job.filename(),
             bind(&RepoParser::Impl::patch_CB, this, _1));
           break;
@@ -363,28 +368,36 @@ namespace zypp
 
         case YUMResourceType::OTHER_e:
         {
-          WAR << "ignoring other.xml.gz for now..." << endl;
-          /*
-          zypp::parser::yum::Impl::OtherFileReader(
-            cache_dir + job.filename(),
-            bind(&RepoParser::other_CB, this, _1, _2),
-            &progress_function);
-          */
+          if (!_options.skipOther)
+          {
+            OtherFileReader(
+              cache_dir + job.filename(),
+              bind(&RepoParser::Impl::other_CB, this, _1, _2),
+              &progress_function);
+          }
+          else
+            MIL << "skipping other.xml.gz";
           break;
         }
 
         case YUMResourceType::FILELISTS_e:
         {
-          zypp::parser::yum::FilelistsFileReader(
-            cache_dir + job.filename(),
-            bind(&RepoParser::Impl::filelist_CB, this, _1, _2),
-            &progress_function);
+          if (!_options.skipFilelists)
+          {
+            FilelistsFileReader(
+              cache_dir + job.filename(),
+              bind(&RepoParser::Impl::filelist_CB, this, _1, _2),
+              &progress_function);
+          }
+          else
+            MIL << "skipping filelists.xml.gz";
+
           break;
         }
 
         case YUMResourceType::PATTERNS_e:
         {
-          zypp::parser::yum::PatternFileReader(
+          PatternFileReader(
             cache_dir + job.filename(),
             bind(&RepoParser::Impl::pattern_CB, this, _1));
           break;
@@ -392,7 +405,7 @@ namespace zypp
 
         case YUMResourceType::PRODUCTS_e:
         {
-          zypp::parser::yum::ProductFileReader(
+          ProductFileReader(
             cache_dir + job.filename(),
             bind(&RepoParser::Impl::product_CB, this, _1));
           break;
@@ -421,9 +434,10 @@ namespace zypp
   RepoParser::RepoParser(
       const data::RecordId & repository_id,
       data::ResolvableDataConsumer & consumer,
+      const RepoParserOpts & options,
       const ProgressData::ReceiverFnc & progress)
     :
-      _pimpl(new Impl(repository_id, consumer, progress))
+      _pimpl(new Impl(repository_id, consumer, options, progress))
   {}
 
 

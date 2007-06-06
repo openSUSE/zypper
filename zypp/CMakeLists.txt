@@ -558,6 +558,7 @@ SET( zypp_parser_yum_HEADERS
   parser/yum/YUMProductParser.h
   parser/yum/YUMRepomdParser.h
   parser/yum/RepoParser.h
+  parser/yum/RepoParserOpts.h
   parser/yum/FileReaderBase.h
   parser/yum/FileReaderBaseImpl.h
   parser/yum/RepomdFileReader.h

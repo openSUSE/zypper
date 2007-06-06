@@ -7,8 +7,7 @@
 |                                                                      |
 \---------------------------------------------------------------------*/
 /** \file zypp2/parser/yum/RepoParser.h
- *
- * YUM parser public API definition. 
+ * YUM repository metadata parser public API definition. 
  */
 #ifndef ZYPP_PARSER_YUM_REPOPARSER_H_
 #define ZYPP_PARSER_YUM_REPOPARSER_H_
@@ -20,6 +19,7 @@
 #include "zypp/data/ResolvableDataConsumer.h"
 
 #include "zypp/ProgressData.h"
+#include "zypp/parser/yum/RepoParserOpts.h"
 
 
 namespace zypp
@@ -71,9 +71,10 @@ namespace zypp
     RepoParser(
       const data::RecordId & repository_id,
       data::ResolvableDataConsumer & consumer,
+      const RepoParserOpts & options = RepoParserOpts(),
       const ProgressData::ReceiverFnc & progress = ProgressData::ReceiverFnc()
     );
-    
+
     /**
      * DTOR 
      */
