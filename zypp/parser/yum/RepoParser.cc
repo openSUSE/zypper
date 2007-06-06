@@ -349,7 +349,7 @@ namespace zypp
 
         case YUMResourceType::PATCHES_e:
         {
-          source::yum::PatchesFileReader(
+          PatchesFileReader(
             cache_dir + job.filename(),
             bind(&RepoParser::Impl::patches_CB, this, _1, _2));
           // reset progress reporter max value (number of jobs changed if
