@@ -32,6 +32,7 @@
 #undef ZYPP_BASE_LOGGER_LOGGROUP
 #define ZYPP_BASE_LOGGER_LOGGROUP "parser"
 
+using namespace std;
 using zypp::source::yum::YUMResourceType;
 
 namespace zypp
@@ -45,7 +46,7 @@ namespace zypp
   /** \todo make this through ZYppCallbacks.h */ 
   bool progress_function(ProgressData::value_type p)
   {
-    std::cout << "Parsing $name_would_come_in_handy [" << p << "%]" << endl;
+    cout << "Parsing $name_would_come_in_handy [" << p << "%]" << endl;
 //    cout << "\rParsing $name_would_come_in_handy [" << p << "%]" << flush;
     return true;
   }

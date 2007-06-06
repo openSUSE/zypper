@@ -6,10 +6,17 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-
-#include <fstream>
+/** \file zypp/parser/yum/PatchesFileReader.cc
+ * Implementation of patches.xml file reader.
+ */
 #include "zypp/base/String.h"
 #include "zypp/base/Logger.h"
+
+#include "zypp/Date.h"
+#include "zypp/CheckSum.h"
+#include "zypp/OnMediaLocation.h"
+
+#include "zypp/parser/xml/Reader.h"
 #include "zypp/parser/yum/PatchesFileReader.h"
 
 
@@ -24,15 +31,59 @@ namespace zypp
     {
 
 
-  PatchesFileReader::PatchesFileReader( const Pathname &repomd_file, ProcessResource callback )
-      : _tag(tag_NONE), _callback(callback)
+  enum Tag
   {
-    Reader reader( repomd_file );
-    MIL << "Reading " << repomd_file << endl;
-    reader.foreachNode( bind( &PatchesFileReader::consumeNode, this, _1 ) );
-  }
+    tag_NONE,
+    tag_Patches,
+    tag_Patch,
+    tag_Location,
+    tag_CheckSum,
+    tag_Timestamp,
+    tag_OpenCheckSum
+  };
+
+
+  ///////////////////////////////////////////////////////////////////////
+  //
+  //  CLASS NAME : PatchesFileReader::Impl
+  //
+  class PatchesFileReader::Impl : private base::NonCopyable
+  {
+  public:
+   /**
+    * CTOR
+    */
+    Impl(const Pathname &patches_file, const ProcessResource & callback);
+
+    /**
+    * Callback provided to the XML parser. Don't use it.
+    */
+    bool consumeNode( Reader & reader_r );
     
-  bool PatchesFileReader::consumeNode( Reader & reader_r )
+  private:
+    OnMediaLocation _location;
+    Tag _tag;
+    std::string _id;
+    ProcessResource _callback;
+    CheckSum _checksum;
+    std::string _checksum_type;
+    Date _timestamp;
+  };
+  ///////////////////////////////////////////////////////////////////////
+
+
+  PatchesFileReader::Impl::Impl(const Pathname & patches_file,
+                                const ProcessResource & callback)
+    : _tag(tag_NONE), _callback(callback)
+  {
+    Reader reader( patches_file );
+    MIL << "Reading " << patches_file << endl;
+    reader.foreachNode(bind( &PatchesFileReader::Impl::consumeNode, this, _1 ));
+  }
+
+  // --------------------------------------------------------------------------
+
+  bool PatchesFileReader::Impl::consumeNode( Reader & reader_r )
   {
     //MIL << reader_r->name() << endl;
     std::string data_type;
@@ -78,6 +129,21 @@ namespace zypp
     }
     return true;
   }
+
+
+  ///////////////////////////////////////////////////////////////////
+  //
+  //  CLASS NAME : PatchesFileReader
+  //
+  ///////////////////////////////////////////////////////////////////
+
+  PatchesFileReader::PatchesFileReader(const Pathname & patches_file,
+                                       const ProcessResource & callback)
+    : _pimpl(new Impl(patches_file, callback))
+  {}
+  
+  PatchesFileReader::~PatchesFileReader()
+  {}
 
 
     } // ns yum

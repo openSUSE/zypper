@@ -7,17 +7,16 @@
 #include <boost/test/parameterized_test.hpp>
 #include <boost/test/unit_test_log.hpp>
 
+#include "zypp/OnMediaLocation.h"
 #include "zypp/parser/yum/PatchesFileReader.h"
 #include "zypp/Url.h"
 #include "zypp/PathInfo.h"
 
-using std::cout;
-using std::endl;
-using std::string;
+using namespace std;
 using namespace zypp;
 using namespace boost::unit_test;
 
-using namespace zypp::source::yum;
+using namespace zypp::parser::yum;
 
 class Collector
 {

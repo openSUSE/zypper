@@ -6,18 +6,15 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-
+/** \file zypp/parser/yum/PatchesFileReader.h
+ * Interface of patches.xml file reader.
+ */
 #ifndef zypp_source_yum_PatchesFileReader_H
 #define zypp_source_yum_PatchesFileReader_H
 
-#include "zypp/Date.h"
-#include "zypp/CheckSum.h"
-#include "zypp/OnMediaLocation.h"
+#include "zypp/base/PtrTypes.h"
+#include "zypp/base/NonCopyable.h"
 #include "zypp/base/Function.h"
-#include "zypp/parser/xml/Reader.h"
-
-using namespace std;
-using namespace zypp::xml;
 
 
 namespace zypp
@@ -40,49 +37,39 @@ namespace zypp
    *                  bind( &SomeClass::callbackfunc, &object, _1, _2 ) );
    * \endcode
    */
-  class PatchesFileReader
+  class PatchesFileReader : private base::NonCopyable
   {
   public:
-    
-   /**
-    * Callback definition
-    * first parameter is a \ref OnMediaLocation object with the resource
-    * second parameter is the patch id.
-    */
-    typedef function<bool( const OnMediaLocation &, const string & )> ProcessResource;
-    
-    enum Tag
-    {
-      tag_NONE,
-      tag_Patches,
-      tag_Patch,
-      tag_Location,
-      tag_CheckSum,
-      tag_Timestamp,
-      tag_OpenCheckSum
-    };
-    
-   /**
-    * Constructor
-    * \param patches_file is the patches.xml file you want to read
-    * \param callback is a function. \see PatchesFileReader::ProcessResource
-    */
-    PatchesFileReader( const Pathname &patches_file, ProcessResource callback );
-    
-    private:
+
     /**
-    * Callback provided to the XML parser. Don't use it.
-    */
-    bool consumeNode( Reader & reader_r );
-    
-    private:
-      OnMediaLocation _location;
-      Tag _tag;
-      std::string _id;
-      ProcessResource _callback;
-      CheckSum _checksum;
-      std::string _checksum_type;
-      Date _timestamp;
+     * Callback definition
+     * first parameter is a \ref OnMediaLocation object with the resource
+     * second parameter is the patch id.
+     */
+    typedef
+      function<bool( const OnMediaLocation &, const std::string & )>
+      ProcessResource;
+
+
+    /**
+    * CTOR. Creates also \ref xml::Reader and starts reading.
+    * 
+     * \param patches_file is the patches.xml file you want to read
+     * \param callback is a function.
+     * 
+     * \see PatchesFileReader::ProcessResource
+     */
+    PatchesFileReader(const Pathname &patches_file,
+                      const ProcessResource & callback);
+
+    /**
+     * DTOR
+     */
+    ~PatchesFileReader();
+
+  private:
+    class Impl;
+    RW_pointer<Impl,rw_pointer::Scoped<Impl> > _pimpl;
   };
 
 
