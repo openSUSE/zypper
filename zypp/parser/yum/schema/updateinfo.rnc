@@ -1,0 +1,68 @@
+default namespace = "http://linux.duke.edu/metadata/other"
+
+element updates {
+  element update {
+    attribute from { xsd:string },
+    attribute status { "final" | "whatever" },
+    attribute type { "security" | "whatever" },
+    attribute version { xsd:string },
+    element id { text },
+    element title { text },
+    element issued {
+      attribute date { xsd:dateTime },
+      empty
+    },
+    element updated {
+      attribute date { xsd:dateTime },
+      empty
+    },
+    element references {
+      element reference {
+        attribute href { xsd:anyURI },
+        attribute id { xsd:string },
+        attribute type { "bugzilla" | "cve" },
+        empty
+      }*,
+      empty
+    },
+    element description { text },
+    element pkglist {
+      element collection {
+        attribute short { xsd:string },
+        element name { text },
+        element package {
+          attribute arch {
+            "noarch"
+            | "athlon"
+            | "i386"
+            | "i486"
+            | "i586"
+            | "i686"
+            | "ia64"
+            | "ppc"
+            | "ppc64"
+            | "s390"
+            | "x390x"
+            | "x86_64"
+            | "src"
+          },
+          attribute epoch { xsd:nonNegativeInteger },
+          attribute version { xsd:string },
+          attribute release { xsd:string },
+          attribute src { xsd:anyURI },
+          element filename { text },
+          element sum {
+            attribute type { xsd:string },
+            text
+          },
+          empty
+        }*,
+        empty
+      },
+      empty
+    },
+    empty
+  }*,
+  empty
+}
+
