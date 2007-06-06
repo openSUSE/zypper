@@ -1068,10 +1068,14 @@ SET( zypp_repository_SRCS
 )
 
 SET( zypp_repository_HEADERS
-  repo/dummy.h
   repo/RepositoryImpl.h
   repo/RepoException.h
   repo/RepoType.h
+)
+
+INSTALL( FILES
+  ${zypp_repository_HEADERS}
+  DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/repo
 )
 
 SET( zypp_repository_cached_SRCS
