@@ -11,14 +11,14 @@
 #include "zypp/Product.h"
 #include "zypp/detail/PackageImplIf.h"
 #include "zypp/Package.h"
-#include "zypp2/RepositoryFactory.h"
-#include "zypp2/RepoInfo.h"
+#include "zypp/RepositoryFactory.h"
+#include "zypp/RepoInfo.h"
 
-#include "zypp2/repo/cached/RepoImpl.h"
+#include "zypp/repo/cached/RepoImpl.h"
 #include "zypp/data/ResolvableData.h"
 
-#include "zypp2/RepoManager.h"
-#include "zypp2/RepoInfo.h"
+#include "zypp/RepoManager.h"
+#include "zypp/RepoInfo.h"
 
 
 using namespace std;

@@ -47,7 +47,7 @@ ADD_EXECUTABLE( FileChecker FileChecker_test.cc )
 TARGET_LINK_LIBRARIES( FileChecker zypp boost_unit_test_framework )
 
 ADD_EXECUTABLE( RepoManager RepoManager_test.cc )
-TARGET_LINK_LIBRARIES( RepoManager zypp zypp2 boost_unit_test_framework )
+TARGET_LINK_LIBRARIES( RepoManager zypp boost_unit_test_framework )
 
 ADD_TEST(ArchTest ${CMAKE_CURRENT_BINARY_DIR}/Arch)
 ADD_TEST(UrlTest ${CMAKE_CURRENT_BINARY_DIR}/Url)

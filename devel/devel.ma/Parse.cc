@@ -29,8 +29,8 @@
 #include "zypp/parser/susetags/ContentFileReader.h"
 #include "zypp/parser/susetags/RepoIndex.h"
 
-#include "zypp2/parser/susetags/RepoParser.h"
-#include "zypp2/cache/CacheStore.h"
+#include "zypp/parser/susetags/RepoParser.h"
+#include "zypp/cache/CacheStore.h"
 
 using namespace std;
 using namespace zypp;
@@ -134,7 +134,7 @@ namespace zypp
 ///////////////////////////////////////////////////////////////////
 
 using namespace zypp::parser::susetags;
-#include "zypp2/cache/CacheStore.h"
+#include "zypp/cache/CacheStore.h"
 
 void consumeIndex( const parser::susetags::RepoIndex_Ptr & index_r )
 {

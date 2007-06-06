@@ -5,7 +5,6 @@ zypp-cache.cc
 
 ADD_EXECUTABLE( zypp-cache ${zyppcache_SRC} )
 TARGET_LINK_LIBRARIES( zypp-cache zypp )
-TARGET_LINK_LIBRARIES( zypp-cache zypp2 )
 TARGET_LINK_LIBRARIES( zypp-cache xml2 )
 
 #INSTALL(TARGETS zypp-query-pool RUNTIME DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/zypp )

@@ -3,7 +3,7 @@
 #include "zypp/base/Logger.h"
 #include "zypp/base/LogControl.h"
 #include "zypp/base/Measure.h"
-#include "zypp2/cache/CacheStore.h"
+#include "zypp/cache/CacheStore.h"
 #include "zypp/parser/yum/RepoParser.h"
 
 #undef ZYPP_BASE_LOGGER_LOGGROUP

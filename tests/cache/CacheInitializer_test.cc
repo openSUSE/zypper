@@ -6,8 +6,8 @@
 #include "zypp/base/Logger.h"
 #include "zypp/Arch.h"
 #include "zypp/TmpPath.h"
-#include "zypp2/cache/CacheInitializer.h"
-#include "zypp2/cache/sqlite3x/sqlite3x.hpp"
+#include "zypp/cache/CacheInitializer.h"
+#include "zypp/cache/sqlite3x/sqlite3x.hpp"
 
 // Boost.Test
 #include <boost/test/floating_point_comparison.hpp>

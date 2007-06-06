@@ -12,8 +12,8 @@
 #include "zypp/detail/PackageImplIf.h"
 #include "zypp/Package.h"
 
-#include "zypp2/cache/CacheInitializer.h"
-#include "zypp2/cache/CacheStore.h"
+#include "zypp/cache/CacheInitializer.h"
+#include "zypp/cache/CacheStore.h"
 #include "zypp/data/ResolvableData.h"
 #include "zypp/data/RecordId.h"
 #include "zypp/capability/CapabilityImpl.h"

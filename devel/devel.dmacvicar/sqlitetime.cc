@@ -4,7 +4,7 @@
 #include <fstream>
 
 #include "sqlite3.h"
-#include "zypp2/cache/sqlite3x/sqlite3x.hpp"
+#include "zypp/cache/sqlite3x/sqlite3x.hpp"
 
 #include <zypp/base/Logger.h>
 #include <zypp/base/Measure.h>

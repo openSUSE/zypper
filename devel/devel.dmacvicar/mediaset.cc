@@ -30,7 +30,7 @@
 #include "zypp/ZYppFactory.h"
 
 #include "zypp/MediaSetAccess.h"
-#include "zypp2/source/yum/YUMSourceCacher.h"
+#include "zypp/source/yum/YUMSourceCacher.h"
 
 using namespace zypp::detail;
 

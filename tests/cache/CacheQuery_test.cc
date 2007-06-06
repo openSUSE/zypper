@@ -13,9 +13,9 @@
 #include "zypp/ZYppFactory.h"
 #include "zypp/TmpPath.h"
 
-#include "zypp2/cache/CacheStore.h"
+#include "zypp/cache/CacheStore.h"
 #include "zypp/data/ResolvableData.h"
-#include "zypp2/cache/ResolvableQuery.h"
+#include "zypp/cache/ResolvableQuery.h"
 #include "zypp/parser/yum/RepoParser.h"
 
 using namespace std;

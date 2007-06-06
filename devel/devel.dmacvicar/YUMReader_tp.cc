@@ -6,8 +6,8 @@
 #include "zypp/data/ResolvableDataConsumer.h"
 #include "zypp/base/Measure.h"
 #include "zypp/detail/ResObjectFactory.h"
-#include "zypp2/parser/yum/YUMParser.h"
-#include "zypp2/repo/memory/PackageImpl.h"
+#include "zypp/parser/yum/YUMParser.h"
+#include "zypp/repo/memory/PackageImpl.h"
 
 
 #undef ZYPP_BASE_LOGGER_LOGGROUP

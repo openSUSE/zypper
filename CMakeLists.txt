@@ -178,7 +178,7 @@ INSTALL( FILES ${CMAKE_SOURCE_DIR}/cmake/modules/FindZypp.cmake DESTINATION ${CM
 ####################################################################
 
 ADD_SUBDIRECTORY( zypp )
-ADD_SUBDIRECTORY( zypp2 )
+#ADD_SUBDIRECTORY( zypp2 )
 # do not build devel by default
 ADD_SUBDIRECTORY( devel EXCLUDE_FROM_ALL )
 ADD_SUBDIRECTORY( tools )

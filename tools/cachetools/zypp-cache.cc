@@ -6,7 +6,7 @@
 #include "zypp/ZYpp.h"
 #include "zypp/zypp_detail/ZYppReadOnlyHack.h"
 #include "zypp/ZYppFactory.h"
-#include "zypp2/cache/CacheFSCK.h"
+#include "zypp/cache/CacheFSCK.h"
 
 #undef ZYPP_BASE_LOGGER_LOGGROUP
 #define ZYPP_BASE_LOGGER_LOGGROUP "zypp-cache"

@@ -11,7 +11,7 @@
 #include "zypp/TmpPath.h"
 #include "zypp/ResStore.h"
 
-#include "zypp2/RepoManager.h"
+#include "zypp/RepoManager.h"
 
 #include <boost/test/unit_test.hpp>
 #include <boost/test/parameterized_test.hpp>
