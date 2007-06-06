@@ -12,7 +12,7 @@
 #include <iostream>
 #include "zypp/base/Logger.h"
 
-#include "zypp2/RepoInfo.h"
+#include "zypp/RepoInfo.h"
 
 using namespace std;
 using namespace boost;
@@ -185,5 +185,5 @@ namespace zypp
   }
   
   /////////////////////////////////////////////////////////////////
-} // namespace zypp2
+} // namespace zypp
 ///////////////////////////////////////////////////////////////////

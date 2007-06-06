@@ -6,7 +6,7 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file	zypp2/RepoInfo.h
+/** \file	zypp/RepoInfo.h
  *
 */
 #ifndef ZYPP2_REPOSITORYINFO_H
@@ -20,7 +20,7 @@
 #include <boost/logic/tribool.hpp>
 #include "zypp/Pathname.h"
 #include "zypp/Url.h"
-#include "zypp2/repo/RepoType.h"
+#include "zypp/repo/RepoType.h"
 
 
 ///////////////////////////////////////////////////////////////////
@@ -194,6 +194,6 @@ namespace zypp
   typedef std::list<RepoInfo> RepoInfoList;
   
   /////////////////////////////////////////////////////////////////
-} // namespace zypp2
+} // namespace zypp
 ///////////////////////////////////////////////////////////////////
 #endif // ZYPP2_REPOSITORYINFO_H
