@@ -693,13 +693,11 @@ int one_command(const string& command, int argc, char **argv)
   // --------------------------( remove/install )-----------------------------
 
   else if (command == "install" || command == "in" ||
-      command == "remove" || command == "rm") {
+           command == "remove" || command == "rm") {
 
     if (command == "install" || command == "in") {
       if (ghelp || arguments.size() < 1) {
-        cerr << "install [options] name...\n"
-        << specific_help
-        ;
+        cerr << "install [options] name...\n" << specific_help;
         return !ghelp;
       }
 
@@ -717,6 +715,7 @@ int one_command(const string& command, int argc, char **argv)
       gData.packages_to_uninstall = arguments;
     }
 
+    // read resolvable type
     string skind = copts.count("type")?  copts["type"].front() : "package";
     kind = string_to_kind (skind);
     if (kind == ResObject::Kind ()) {
@@ -724,27 +723,32 @@ int one_command(const string& command, int argc, char **argv)
       return ZYPPER_EXIT_ERR_INVALID_ARGS;
     }
 
-    cond_init_system_sources ();
+    init_repos();
 
+    //! \todo support temporary additional sources
+    /*
     for ( std::list<Url>::const_iterator it = gSettings.additional_sources.begin(); it != gSettings.additional_sources.end(); ++it )
-      {
-	include_source_by_url( *it );
-      }
-  
-    if ( gData.sources.empty() )
-      {
-	cerr << _("Warning: No sources. Operating only with the installed resolvables. Nothing can be installed.") << endl;
-      } 
+    {
+      include_source_by_url( *it );
+    }
+    */
+
+    if ( gData.repos.empty() )
+    {
+      cerr << _("Warning: No sources. Operating only with the installed resolvables. Nothing can be installed.") << endl;
+    }
 
     cond_init_target ();
-    cond_load_resolvables ();
+    cout_v << "loading repo resolvables... ";
+    load_repo_resolvables();
+    cout_v << "DONE" << endl;
 
     for ( vector<string>::const_iterator it = arguments.begin(); it != arguments.end(); ++it ) {
       if (command == "install" || command == "in") {
-	mark_for_install(kind, *it);
+        mark_for_install(kind, *it);
       }
       else {
-	mark_for_uninstall(kind, *it);
+        mark_for_uninstall(kind, *it);
       }
     }
 

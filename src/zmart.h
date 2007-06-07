@@ -23,6 +23,8 @@
 #include <zypp/Digest.h>
 #include <zypp/CapFactory.h>
 
+#include <zypp/RepoInfo.h>
+
 #define ZYPP_CHECKPATCHES_LOG "/var/log/zypper.log"
 #undef  ZYPP_BASE_LOGGER_LOGGROUP
 #define ZYPP_BASE_LOGGER_LOGGROUP "zypper"
@@ -84,7 +86,9 @@ struct RuntimeData
   {}
     
   std::list<Error> errors;
+  // deprecated
   std::list<zypp::Source_Ref> sources;
+  std::list<zypp::RepoInfo> repos;
   int patches_count;
   int security_patches_count;
   std::vector<std::string> packages_to_install; 

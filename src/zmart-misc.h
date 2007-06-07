@@ -29,6 +29,7 @@ std::string calculate_token();
 void cond_load_resolvables ();
 void load_target();
 void load_sources();
+void load_repo_resolvables();
 void establish ();
 bool resolve();
 void dump_pool ();

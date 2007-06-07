@@ -13,8 +13,9 @@
 #include "zypp/Url.h"
 
 //! calls init_system_sources if not disabled by user (or non-root)
-void cond_init_system_sources();
-void init_system_sources();
+void cond_init_system_sources(); // OLD
+void init_system_sources(); // OLD
+void init_repos();
 void include_source_by_url( const zypp::Url &url );
 bool parse_repo_file (const std::string& file, std::string& url, std::string& alias);
 void add_source_by_url( const zypp::Url &url, const std::string &alias,

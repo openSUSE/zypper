@@ -8,6 +8,10 @@
 #include <zypp/base/Algorithm.h>
 #include <zypp/solver/detail/Helper.h>
 
+#include <zypp/RepoManager.h>
+#include <zypp/RepoInfo.h>
+#include <zypp/repo/RepoException.h>
+
 using namespace zypp::detail;
 
 using namespace std;
@@ -401,9 +405,10 @@ std::string calculate_token()
 
 void cond_load_resolvables ()
 {	
-  // something changed
+  // load repository resolvables
   load_sources();
-    
+
+  // load target resolvables
   if ( ! gSettings.disable_system_resolvables ) {
     load_target();
   }
@@ -429,6 +434,42 @@ void load_sources()
     cerr_v << "   " <<  src_resolvables.size() << _(" resolvables.") << endl;
     God->addResolvables(src_resolvables);
   }
+}
+
+
+/** read repository resolvables */
+void load_repo_resolvables()
+{
+  RepoManager manager;
+
+  for (std::list<RepoInfo>::iterator it = gData.repos.begin();
+       it !=  gData.repos.end(); ++it)
+  {
+    RepoInfo repo(*it);
+
+    if (! it->enabled())
+      continue;     // #217297
+
+    Repository repository;
+
+    try {
+      repository = manager.createFromCache(repo);
+    }
+    catch ( const repo::RepoNotCachedException &e )
+    {
+     ZYPP_CAUGHT(e);
+     cout_v << "Repository " << repo.alias() << " not cached. Caching..." << endl;
+     manager.buildCache(repo);
+     repository = manager.createFromCache(repo);
+    }
+
+    ResStore store = repository.resolvables();
+    //! \todo use format
+    cout_vv << "(" << store.size() << " resolvables found)" << endl;
+
+    God->addResolvables(store);
+  }
+
 }
 
 void establish ()

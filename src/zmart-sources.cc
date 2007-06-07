@@ -10,6 +10,9 @@
 #include <zypp/target/store/PersistentStorage.h>
 #include <zypp/base/IOStream.h>
 
+#include <zypp/RepoManager.h>
+#include <zypp/RepoInfo.h>
+
 
 using namespace zypp::detail;
 
@@ -38,7 +41,22 @@ void cond_init_system_sources ()
   }
   done = true;
 } 
+/*
+void cond_init_system_sources ()
+{
+  static bool done = false;
+  //! \todo this has to be done so that it works in zypper shell 
+  if (done)
+    return;
 
+  if ( ! gSettings.disable_system_sources ) {
+    init_system_sources();
+  }
+
+  done = true;
+}
+*/
+// OLD
 void init_system_sources()
 {
   SourceManager_Ptr manager;
@@ -64,6 +82,30 @@ void init_system_sources()
     gData.sources.push_back(src);
   }
 }
+
+/** reads known repositories and stores them into gData, does refresh */
+void init_repos()
+{
+  RepoManager manager;
+  gData.repos = manager.knownRepositories();
+
+  for (std::list<RepoInfo>::iterator it = gData.repos.begin();
+       it !=  gData.repos.end(); ++it)
+  {
+    RepoInfo repo(*it);
+
+//    bool do_refresh = repo.autorefresh(); //! \todo honor command line options/commands
+    bool do_refresh = false;
+
+    if (do_refresh)
+    {
+      //! \todo progress reporting
+      cout << "Refreshing " << repo.alias() << endl;
+      manager.refreshMetadata(repo);
+    }
+  }
+}
+
 
 void include_source_by_url( const Url &url )
 {
