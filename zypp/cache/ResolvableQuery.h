@@ -128,6 +128,24 @@ namespace zypp
                                                      const std::string &klass,
                                                      const std::string &name );
       
+      /**
+       * Queries for a specific container attribute
+       * in a resolvable.
+       *
+       * \param record_id Resolvable cache id
+       * \param klass Attribute Class
+       * \param name Attribute Name
+       *
+       * \return the attribute or a empty 
+       * \ref _Container if no record is found.
+       */
+      template<class _Container>
+      _Container queryStringContainerAttribute( const data::RecordId &record_id,
+                                                const std::string &klass,
+                                                const std::string &name );
+      
+      
+      
     private:
       /** Implementation. */
       class Impl;

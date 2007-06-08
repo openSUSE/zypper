@@ -7,10 +7,10 @@
 |                                                                      |
 \---------------------------------------------------------------------*/
 
-#ifndef zypp_repo_cached_PackageImpl_H
-#define zypp_repo_cached_PackageImpl_H
+#ifndef zypp_repo_cached_PatchImpl_H
+#define zypp_repo_cached_PatchImpl_H
 
-#include "zypp/detail/PackageImpl.h"
+#include "zypp/detail/PatchImpl.h"
 #include "zypp/repo/cached/RepoImpl.h"
 
 ///////////////////////////////////////////////////////////////////
@@ -23,13 +23,13 @@ namespace cached
 
   ///////////////////////////////////////////////////////////////////
   //
-  //        CLASS NAME : PackageImpl
+  //        CLASS NAME : PatchImpl
   //
-  class PackageImpl : public detail::PackageImplIf
+  class PatchImpl : public detail::PatchImplIf
   {
   public:
 
-    PackageImpl( const data::RecordId &id, repo::cached::RepoImpl::Ptr repository_r );
+    PatchImpl( const data::RecordId &id, repo::cached::RepoImpl::Ptr repository_r );
     
     virtual TranslatedText summary() const;
     virtual TranslatedText description() const;
@@ -46,34 +46,17 @@ namespace cached
     virtual Source_Ref source() const;
     virtual unsigned sourceMediaNr() const;
     
-    // PACKAGE
-    virtual CheckSum checksum() const;
-    virtual std::string buildhost() const;
-    virtual std::string distribution() const;
-    virtual Label license() const;
-    virtual std::string packager() const;
-    virtual PackageGroup group() const;
-    virtual Keywords keywords() const;
-    virtual Changelog changelog() const;
-    virtual Pathname location() const;
-    virtual std::string url() const;
-    virtual std::string os() const;
-    virtual Text prein() const;
-    virtual Text postin() const;
-    virtual Text preun() const;
-    virtual Text postun() const;
-    virtual ByteCount sourcesize() const;
-    virtual DiskUsage diskusage() const;
-    virtual std::list<std::string> authors() const;
-    virtual std::list<std::string> filenames() const;
-    /*virtual std::list<DeltaRpm> deltaRpms() const;
-    virtual std::list<PatchRpm> patchRpms() const;
-    */    
-    virtual unsigned repositoryMediaNr() const;
-   
+    // PATCH
+    virtual std::string id() const;
+    virtual Date timestamp() const;
+    virtual std::string category() const;
+    virtual bool reboot_needed() const;
+    virtual bool affects_pkg_manager() const;
+    virtual bool interactive() const;
+    virtual AtomList all_atoms() const;
+       
     virtual Repository repository() const;
     
-
   protected:
     repo::cached::RepoImpl::Ptr _repository;
     data::RecordId _id;

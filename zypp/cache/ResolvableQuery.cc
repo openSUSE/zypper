@@ -104,6 +104,28 @@ struct ResolvableQuery::Impl
   }
 
 
+  bool queryBooleanAttribute( const data::RecordId &record_id,
+                                        const std::string &klass,
+                                        const std::string &name )
+  {
+    sqlite3_connection con((_dbdir + "zypp.db").asString().c_str());
+    return ( queryNumericAttributeInternal( con, record_id, klass, name) != 0 );
+  }
+      
+  template <class _Container> _Container 
+  queryStringContainerAttribute( const data::RecordId &record_id,
+                                 const std::string &klass,
+                                 const std::string &name )
+  {
+    sqlite3_connection con((_dbdir + "zypp.db").asString().c_str());
+    string all = queryStringAttributeInternal( con, record_id, klass, name);
+    _Container words;
+    
+    str::split( all, std::back_inserter(words) );
+    return words;
+  }
+  
+  
   int queryNumericAttribute( const data::RecordId &record_id,
                                  const std::string &klass,
                                  const std::string &name )
@@ -129,7 +151,7 @@ private:
 
     return cmd.executeint();
   }
-
+  
   TranslatedText queryTranslatedStringAttributeInternal( sqlite3_connection &con,
                                                          const data::RecordId &record_id,
                                                          const std::string &klass,

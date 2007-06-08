@@ -38,9 +38,6 @@ namespace zypp
     bool PatchImplIf::affects_pkg_manager() const
     { return false; }
 
-    ByteCount PatchImplIf::size() const
-    { return ByteCount(); }
-
     bool PatchImplIf::interactive() const
     {
       if ( reboot_needed()

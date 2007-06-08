@@ -15,6 +15,7 @@
 #include <list>
 #include <string>
 
+#include "zypp/base/Deprecated.h"
 #include "zypp/detail/ResImplTraits.h"
 #include "zypp/detail/ResObjectFactory.h"
 
@@ -101,7 +102,7 @@ namespace zypp
       virtual Date installtime() const;
 
       /** Id used inside ZMD */
-      virtual ZmdId zmdid() const PURE_VIRTUAL;
+      ZYPP_DEPRECATED virtual ZmdId zmdid() const PURE_VIRTUAL;
       //@}
 
     public:
