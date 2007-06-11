@@ -133,8 +133,10 @@ namespace zypp
     std::string name() const;
 
     /**
-     * Add a base url. \see baseUrl
+     * Add a base url. \see baseUrls
      * \param url The base url for the repository.
+     *
+     * To edit or remove urls, create a new RepoInfo instead.
      */
     RepoInfo & addBaseUrl( const Url &url );
     

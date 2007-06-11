@@ -77,9 +77,9 @@ namespace zypp
     * In case of falure the metadata remains
     * as it was before.
     *
-    * \throws RepoNoUrlException if no urls are available.
-    * \throws RepoNoAliasException if can't figure an alias
-    * \throws RepoUnknownTypeException if the metadata is unknown
+    * \throws repo::RepoNoUrlException if no urls are available.
+    * \throws repo::RepoNoAliasException if can't figure an alias
+    * \throws repo::RepoUnknownTypeException if the metadata is unknown
     * \throws Exception on unknown error.
     */
    void refreshMetadata( const RepoInfo &info );
@@ -89,7 +89,7 @@ namespace zypp
     *
     * Empty local metadata.
     *
-    * \throws RepoNoAlias if can't figure an alias
+    * \throws repo::RepoNoAliasException if can't figure an alias
     * \throws Exception on unknown error.
     */
    void cleanMetadata( const RepoInfo &info );
@@ -104,7 +104,7 @@ namespace zypp
     *
     * \note the local metadata must be valid.
     *
-    * \throws RepoNoAlias if can't figure an alias to look in cache
+    * \throws repo::RepoNoAliasException if can't figure an alias to look in cache
     * \throws Exception on unknown error.
     */
    void buildCache( const RepoInfo &info );
@@ -116,13 +116,13 @@ namespace zypp
     *
     * \note the local metadata must be valid.
     *
-    * \throws RepoNoAlias if can't figure an alias to look in cache
+    * \throws repo::RepoNoAliasException if can't figure an alias to look in cache
     * \throws Exception on unknown error.
     */
    void cleanCache( const RepoInfo &info );
    
    /**
-    * \short Wether a repository exists in cache
+    * \short Whether a repository exists in cache
     *
     * \param RepoInfo to be checked.
     */
@@ -148,7 +148,7 @@ namespace zypp
     *
     * 
     *
-    * \throws RepoAlreadyExistsException If the repo clash some 
+    * \throws repo::RepoAlreadyExistsException If the repo clash some 
     * unique attribute like alias
     */
    void addRepository( const RepoInfo &info );
