@@ -187,7 +187,20 @@ struct RequireProcess
 	}
 
 	if ( upgrades
-	     && upgrades.resolvable()->arch() != provider->arch()) {
+	     && upgrades.resolvable()->arch() != provider->arch()
+	     && provider->kind() != ResTraits<Atom>::kind )             // if patch provides arch upgrade, allow it (#266178)
+ 	                                                                // (because of #168840 and #170098, the patch parser grabs the 'best' atom
+                                                                        //  and does not have knowledge about already installed atom with the same name.
+                                                                        //  The problem #266178 shows is a previously installed patch (noarch) and atom (ppc)
+                                                                        //  conflict with a later patch which offers an arch upgrade (ppc -> ppc64)
+                                                                        //  This has no effect on the patch, since the patch is noarch. But is has effect
+                                                                        //  on the atom, since it is installed as ppc and the upgrade is ppc64.
+                                                                        //  Here, we look at arch changes only if they don't affect an atom. So atoms are
+                                                                        //  allowed for arch upgrades.
+                                                                        //  However, this only applies to atoms, not to packages. The package will stay
+                                                                        //  at its architecture. Not doing arch upgrades was one of the requirements for Code10.)
+	{
+	    
 	    MIL << "provider " << provider << " has OTHER arch '" << provider->arch() << "' than the updated item "
 		<< upgrades << endl;
 	    PoolItemList ignore = _context->getIgnoreArchitectureItem();
