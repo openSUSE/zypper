@@ -60,13 +60,13 @@ sqlite3_connection::~sqlite3_connection()
 void sqlite3_connection::open(const char *db)
 {
   if (sqlite3_open(db, &this->db)!=SQLITE_OK)
-    throw database_error("unable to open database");
+    SQLITE3X_THROW(database_error("unable to open database"));
 }
 
 void sqlite3_connection::open(const wchar_t *db)
 {
   if (sqlite3_open16(db, &this->db)!=SQLITE_OK)
-    throw database_error("unable to open database");
+    SQLITE3X_THROW(database_error("unable to open database"));
 }
 
 void sqlite3_connection::close()
@@ -74,7 +74,7 @@ void sqlite3_connection::close()
   if (this->db)
   {
     if (sqlite3_close(this->db)!=SQLITE_OK)
-      throw database_error(*this);
+      SQLITE3X_THROW(database_error(*this));
     this->db=NULL;
   }
 }
@@ -87,183 +87,183 @@ long long sqlite3_connection::insertid()
 
 void sqlite3_connection::setbusytimeout(int ms)
 {
-  if (!this->db) throw database_error("database is not open");
+  if (!this->db) SQLITE3X_THROW(database_error("database is not open"));
 
   if (sqlite3_busy_timeout(this->db, ms)!=SQLITE_OK)
-    throw database_error(*this);
+    SQLITE3X_THROW(database_error(*this));
 }
 
 void sqlite3_connection::executenonquery(const char *sql)
 {
-  if (!this->db) throw database_error("database is not open");
+  if (!this->db) SQLITE3X_THROW(database_error("database is not open"));
   sqlite3_command(*this, sql).executenonquery();
 }
 
 void sqlite3_connection::executenonquery(const wchar_t *sql)
 {
-  if (!this->db) throw database_error("database is not open");
+  if (!this->db) SQLITE3X_THROW(database_error("database is not open"));
   sqlite3_command(*this, sql).executenonquery();
 }
 
 void sqlite3_connection::executenonquery(const std::string &sql)
 {
-  if (!this->db) throw database_error("database is not open");
+  if (!this->db) SQLITE3X_THROW(database_error("database is not open"));
   sqlite3_command(*this, sql).executenonquery();
 }
 
 void sqlite3_connection::executenonquery(const std::wstring &sql)
 {
-  if (!this->db) throw database_error("database is not open");
+  if (!this->db) SQLITE3X_THROW(database_error("database is not open"));
   sqlite3_command(*this, sql).executenonquery();
 }
 
 int sqlite3_connection::executeint(const char *sql)
 {
-  if (!this->db) throw database_error("database is not open");
+  if (!this->db) SQLITE3X_THROW(database_error("database is not open"));
   return sqlite3_command(*this, sql).executeint();
 }
 
 int sqlite3_connection::executeint(const wchar_t *sql)
 {
-  if (!this->db) throw database_error("database is not open");
+  if (!this->db) SQLITE3X_THROW(database_error("database is not open"));
   return sqlite3_command(*this, sql).executeint();
 }
 
 int sqlite3_connection::executeint(const std::string &sql)
 {
-  if (!this->db) throw database_error("database is not open");
+  if (!this->db) SQLITE3X_THROW(database_error("database is not open"));
   return sqlite3_command(*this, sql).executeint();
 }
 
 int sqlite3_connection::executeint(const std::wstring &sql)
 {
-  if (!this->db) throw database_error("database is not open");
+  if (!this->db) SQLITE3X_THROW(database_error("database is not open"));
   return sqlite3_command(*this, sql).executeint();
 }
 
 long long sqlite3_connection::executeint64(const char *sql)
 {
-  if (!this->db) throw database_error("database is not open");
+  if (!this->db) SQLITE3X_THROW(database_error("database is not open"));
   return sqlite3_command(*this, sql).executeint64();
 }
 
 long long sqlite3_connection::executeint64(const wchar_t *sql)
 {
-  if (!this->db) throw database_error("database is not open");
+  if (!this->db) SQLITE3X_THROW(database_error("database is not open"));
   return sqlite3_command(*this, sql).executeint64();
 }
 
 long long sqlite3_connection::executeint64(const std::string &sql)
 {
-  if (!this->db) throw database_error("database is not open");
+  if (!this->db) SQLITE3X_THROW(database_error("database is not open"));
   return sqlite3_command(*this, sql).executeint64();
 }
 
 long long sqlite3_connection::executeint64(const std::wstring &sql)
 {
-  if (!this->db) throw database_error("database is not open");
+  if (!this->db) SQLITE3X_THROW(database_error("database is not open"));
   return sqlite3_command(*this, sql).executeint64();
 }
 
 double sqlite3_connection::executedouble(const char *sql)
 {
-  if (!this->db) throw database_error("database is not open");
+  if (!this->db) SQLITE3X_THROW(database_error("database is not open"));
   return sqlite3_command(*this, sql).executedouble();
 }
 
 double sqlite3_connection::executedouble(const wchar_t *sql)
 {
-  if (!this->db) throw database_error("database is not open");
+  if (!this->db) SQLITE3X_THROW(database_error("database is not open"));
   return sqlite3_command(*this, sql).executedouble();
 }
 
 double sqlite3_connection::executedouble(const std::string &sql)
 {
-  if (!this->db) throw database_error("database is not open");
+  if (!this->db) SQLITE3X_THROW(database_error("database is not open"));
   return sqlite3_command(*this, sql).executedouble();
 }
 
 double sqlite3_connection::executedouble(const std::wstring &sql)
 {
-  if (!this->db) throw database_error("database is not open");
+  if (!this->db) SQLITE3X_THROW(database_error("database is not open"));
   return sqlite3_command(*this, sql).executedouble();
 }
 
 std::string sqlite3_connection::executestring(const char *sql)
 {
-  if (!this->db) throw database_error("database is not open");
+  if (!this->db) SQLITE3X_THROW(database_error("database is not open"));
   return sqlite3_command(*this, sql).executestring();
 }
 
 std::string sqlite3_connection::executestring(const wchar_t *sql)
 {
-  if (!this->db) throw database_error("database is not open");
+  if (!this->db) SQLITE3X_THROW(database_error("database is not open"));
   return sqlite3_command(*this, sql).executestring();
 }
 
 std::string sqlite3_connection::executestring(const std::string &sql)
 {
-  if (!this->db) throw database_error("database is not open");
+  if (!this->db) SQLITE3X_THROW(database_error("database is not open"));
   return sqlite3_command(*this, sql).executestring();
 }
 
 std::string sqlite3_connection::executestring(const std::wstring &sql)
 {
-  if (!this->db) throw database_error("database is not open");
+  if (!this->db) SQLITE3X_THROW(database_error("database is not open"));
   return sqlite3_command(*this, sql).executestring();
 }
 
 std::wstring sqlite3_connection::executestring16(const char *sql)
 {
-  if (!this->db) throw database_error("database is not open");
+  if (!this->db) SQLITE3X_THROW(database_error("database is not open"));
   return sqlite3_command(*this, sql).executestring16();
 }
 
 std::wstring sqlite3_connection::executestring16(const wchar_t *sql)
 {
-  if (!this->db) throw database_error("database is not open");
+  if (!this->db) SQLITE3X_THROW(database_error("database is not open"));
   return sqlite3_command(*this, sql).executestring16();
 }
 
 std::wstring sqlite3_connection::executestring16(const std::string &sql)
 {
-  if (!this->db) throw database_error("database is not open");
+  if (!this->db) SQLITE3X_THROW(database_error("database is not open"));
   return sqlite3_command(*this, sql).executestring16();
 }
 
 std::wstring sqlite3_connection::executestring16(const std::wstring &sql)
 {
-  if (!this->db) throw database_error("database is not open");
+  if (!this->db) SQLITE3X_THROW(database_error("database is not open"));
   return sqlite3_command(*this, sql).executestring16();
 }
 
 std::string sqlite3_connection::executeblob(const char *sql)
 {
-  if (!this->db) throw database_error("database is not open");
+  if (!this->db) SQLITE3X_THROW(database_error("database is not open"));
   return sqlite3_command(*this, sql).executeblob();
 }
 
 std::string sqlite3_connection::executeblob(const wchar_t *sql)
 {
-  if (!this->db) throw database_error("database is not open");
+  if (!this->db) SQLITE3X_THROW(database_error("database is not open"));
   return sqlite3_command(*this, sql).executeblob();
 }
 
 std::string sqlite3_connection::executeblob(const std::string &sql)
 {
-  if (!this->db) throw database_error("database is not open");
+  if (!this->db) SQLITE3X_THROW(database_error("database is not open"));
   return sqlite3_command(*this, sql).executeblob();
 }
 
 std::string sqlite3_connection::executeblob(const std::wstring &sql)
 {
-  if (!this->db) throw database_error("database is not open");
+  if (!this->db) SQLITE3X_THROW(database_error("database is not open"));
   return sqlite3_command(*this, sql).executeblob();
 }
 
 void sqlite3_connection::execute(const std::string &sql)
 {
-  if (!this->db) throw database_error("database is not open");
+  if (!this->db) SQLITE3X_THROW(database_error("database is not open"));
   
   char *err_msg;
   
@@ -271,7 +271,7 @@ void sqlite3_connection::execute(const std::string &sql)
   {
     std::string err(err_msg);
     sqlite3_free(err_msg);
-    throw database_error(err.c_str());
+    SQLITE3X_THROW(database_error(err.c_str()));
   }
 }
 

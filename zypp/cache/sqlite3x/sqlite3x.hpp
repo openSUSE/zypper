@@ -27,9 +27,10 @@
 #define __SQLITE3X_HPP__
 
 #include <string>
-#include <exception>
-#include <stdexcept>
+#include "zypp/base/Exception.h"
 #include <boost/utility.hpp>
+
+#define SQLITE3X_THROW zypp::ZYPP_THROW
 
 namespace sqlite3x
 {
@@ -94,7 +95,7 @@ public:
 
 class sqlite3_command;
 
-class database_error : public std::runtime_error
+class database_error : public zypp::Exception
 {
 public:
   database_error(const char *msg);
