@@ -85,12 +85,36 @@ namespace zypp
             return true;	// strip from provides
           }
 
-	if (cap_r.index().substr( 0, 7 ) != "locale(")
+       std::string capString = cap_r.index();
+
+       if (capString.substr( 0, 11 ) == "packageand(") {
+           // inject a supplement/freshen in order to simulate an AND dependency
+           // Required kmp packges FOR EACH installed/to_be_installed kernel will be installed.
+           // Bug 255011
+           if (capString[capString.size()-1] == ')') {                 // trailing ")" given ?
+               CapFactory f;       
+               std::string andDep( capString, 11 );                    // strip "packageand("
+               std::string::size_type pos = andDep.find( ":" );        // colon given ?
+               if (pos != std::string::npos) {
+                   deps[Dep::SUPPLEMENTS].insert( f.parse( ResTraits<Package>::kind, std::string( andDep, 0, pos ) ) );
+                   pos++; // skip ":"
+                   std::string depString( andDep, pos, andDep.size()-pos-1 );
+                   deps[Dep::FRESHENS].insert( f.parse( ResTraits<Package>::kind, depString ) );                   
+               } else {
+                   ERR << "wrong dependency (missing \":\") : " << capString <<endl;
+               }
+           } else {
+               ERR << "wrong dependency (missing \")\"): " << capString <<endl;
+           }
+           return true;
+       }
+
+       if (capString.substr( 0, 7 ) != "locale(")
 	    return false;
 
 	CapFactory f;
 
-	std::string locales( cap_r.index(), 7 );			// strip "locale("
+	std::string locales( capString, 7 );			// strip "locale("
 	std::string::size_type pos = locales.find( ":" );		// colon given ?
 	if (pos != std::string::npos) {
 	    deps[Dep::SUPPLEMENTS].insert( f.parse( ResTraits<Package>::kind, std::string( locales, 0, pos ) ) );
