@@ -1,5 +1,5 @@
 #
-# spec file for package zypper
+# spec file for package @PACKAGE@ (Version @VERSION@)
 #
 # Copyright (c) 2006 SUSE LINUX Products GmbH, Nuernberg, Germany.
 # This file and all modifications and additions to the pristine
@@ -11,7 +11,6 @@
 # norootforbuild
 
 Name:           @PACKAGE@
-# da library
 BuildRequires:  libzypp-devel
 BuildRequires:  gcc-c++ pkg-config boost-devel gettext-devel
 BuildRequires:  readline-devel
@@ -21,11 +20,12 @@ Group:          System/Packages
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 Autoreqprov:    on
 PreReq:         permissions
-Summary:        Command Line Package Management Using Libzypp
+Summary:        Command line package management tool using libzypp
 Version:        @VERSION@
 Release:        0
 Source:         @PACKAGE@-@VERSION@.tar.bz2
 Prefix:         /usr
+Url:            http://en.opensuse.org/Zypper
 # zypper is not a fully featured replacement yet
 #Provides:       y2pmsh
 #Obsoletes:      y2pmsh
@@ -33,7 +33,7 @@ Prefix:         /usr
 #Obsoletes:      rug
 
 %description
-Command Line Package Management Using Libzypp
+Command line package management tool using libzypp.
 
 Authors:
 --------
@@ -45,29 +45,27 @@ Authors:
 %setup -q
 
 %build
-gettextize -f
-autoreconf --force --install --symlink --verbose
-%{?suse_update_config:%{suse_update_config -f}}
-%if %suse_version <= 1010
-# compatibility defines unless we have the newer libzypp on SLE SP
-if ! pkg-config --modversion libzypp | grep '^2'; then
-export ZYPP_LIBS=-lzypp ZYPP_CFLAGS="-D_FILE_OFFSET_BITS=64 -DLIBZYPP_1xx"
-fi
-%endif
-CFLAGS="$RPM_OPT_FLAGS" \
-CXXFLAGS="$RPM_OPT_FLAGS" \
-./configure --prefix=%{prefix} --libdir=%{_libdir} --mandir=%{_mandir} --sysconfdir=%{_sysconfdir} --disable-static
+mkdir build
+cd build
+cmake -DCMAKE_INSTALL_PREFIX=%{prefix} \
+      -DSYSCONFDIR=%{_sysconfdir} \
+      -DMANDIR=%{_mandir} \
+      -DCMAKE_C_FLAGS="%{optflags}" \
+      -DCMAKE_CXX_FLAGS="%{optflags}" \
+      -DCMAKE_BUILD_TYPE=Release \
+      ..
+
+#gettextize -f
 make %{?jobs:-j %jobs}
-#make check
+
 
 %install
+cd build
 make install DESTDIR=$RPM_BUILD_ROOT
+
 # Create filelist with translatins
-%{find_lang} zypper
-%if %suse_version <= 1010
-rm -f ${RPM_BUILD_ROOT}%{_sbindir}/zypp-checkpatches
+#%{find_lang} zypper
 rm -f ${RPM_BUILD_ROOT}%{_sbindir}/zypp-checkpatches-wrapper
-%endif
 %{__install} -d -m755 %buildroot%_var/log
 touch %buildroot%_var/log/zypper.log
 
@@ -86,20 +84,20 @@ touch %buildroot%_var/log/zypper.log
 %run_ldconfig
 
 %clean
+rpm -rf $RPM_BUILD_ROOT
 
-%files -f zypper.lang
+#%files -f zypper.lang
+%files
 %defattr(-,root,root)
 %{_sysconfdir}/logrotate.d/zypper.lr
 %{_bindir}/zypper
 %{_bindir}/installation_sources
-%if %suse_version > 1010
 %{_sbindir}/zypp-checkpatches
 %verify(not mode) %attr (755,root,root) %{_sbindir}/zypp-checkpatches-wrapper
-%endif
 %doc %{_mandir}/*/*
 %doc %dir %{_datadir}/doc/packages/zypper
 %doc %{_datadir}/doc/packages/zypper/TODO
 %doc %{_datadir}/doc/packages/zypper/zypper-rug
 # declare ownership of the log file but prevent
 # it from being erased by rpm -e
-%ghost %config(noreplace) /var/log/zypper.log
+%ghost %config(noreplace) %{_var}/log/zypper.log

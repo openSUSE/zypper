@@ -1,6 +1,6 @@
 
-#include "zmart.h"
-#include "zmart-sources.h"
+#include "zypper.h"
+#include "zypper-sources.h"
 #include "zypper-tabulator.h"
 
 #include <fstream>

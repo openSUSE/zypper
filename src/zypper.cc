@@ -20,21 +20,21 @@
 
 #include <zypp/zypp_detail/ZYppReadOnlyHack.h>
 
-#include "zmart.h"
-#include "zmart-sources.h"
-#include "zmart-misc.h"
+#include "zypper.h"
+#include "zypper-sources.h"
+#include "zypper-misc.h"
 
-#include "zmart-rpm-callbacks.h"
-#include "zmart-keyring-callbacks.h"
-#include "zmart-source-callbacks.h"
-#include "zmart-media-callbacks.h"
+#include "zypper-rpm-callbacks.h"
+#include "zypper-keyring-callbacks.h"
+#include "zypper-source-callbacks.h"
+#include "zypper-media-callbacks.h"
 #include "zypper-tabulator.h"
 #include "zypper-search.h"
 #include "zypper-info.h"
 #include "zypper-getopt.h"
 
 using namespace std;
-using namespace boost;
+//using namespace boost;
 using namespace zypp;
 using namespace zypp::detail;
 
@@ -191,7 +191,7 @@ string process_globals(int argc, char **argv)
       cerr << help_global_options << help_commands;
     }
     else if (gopts.count("version")) {
-      cerr << PACKAGE_STRING;
+      cerr << PACKAGE;
 #ifdef LIBZYPP_1xx
       cerr << " (libzypp-1.x.x)";
 #endif

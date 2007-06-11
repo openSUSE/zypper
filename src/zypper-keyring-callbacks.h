@@ -20,7 +20,7 @@
 #include <zypp/Digest.h>
 
 #include "AliveCursor.h"
-#include "zmart-misc.h"
+#include "zypper-misc.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp {

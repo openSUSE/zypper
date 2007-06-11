@@ -17,9 +17,9 @@
 #include <zypp/Digest.h>
 #include <zypp/target/store/xml_escape_parser.hpp>
 
-#include "zmart.h"
-#include "zmart-updates.h"
-#include "zmart-utils.h"
+#include "zypper.h"
+#include "zypper-updates.h"
+#include "zypper-utils.h"
 
 using namespace std;
 using namespace zypp;

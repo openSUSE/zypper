@@ -1,8 +1,8 @@
 #include <fstream>
 #include <sstream>
 #include <boost/format.hpp>
-#include "zmart.h"
-#include "zmart-misc.h"
+#include "zypper.h"
+#include "zypper-misc.h"
 
 #include <zypp/Patch.h>
 #include <zypp/base/Algorithm.h>

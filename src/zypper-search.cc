@@ -1,8 +1,8 @@
 #include "zypper-search.h"
 
-#include "zmart.h"
-#include "zmart-sources.h"
-#include "zmart-misc.h"
+#include "zypper.h"
+#include "zypper-sources.h"
+#include "zypper-misc.h"
 
 #include <zypp/base/Algorithm.h>
 

@@ -17,7 +17,7 @@
 #include <zypp/ZYpp.h>
 #include <zypp/base/Hash.h>
 
-#include "zmart.h"
+#include "zypper.h"
 #include "zypper-tabulator.h"
 
 extern Settings gSettings;

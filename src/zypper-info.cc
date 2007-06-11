@@ -6,8 +6,8 @@
 #include <zypp/base/Algorithm.h>
 #include <zypp/Patch.h>
 
-#include "zmart.h"
-#include "zmart-misc.h"
+#include "zypper.h"
+#include "zypper-misc.h"
 
 using namespace std;
 using namespace zypp;

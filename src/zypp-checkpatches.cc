@@ -18,8 +18,8 @@
 #include <zypp/target/store/PersistentStorage.h>
 
 #include "checkpatches-keyring-callbacks.h"
-#include "zmart.h"
-#include "zmart-updates.h"
+#include "zypper.h"
+#include "zypper-updates.h"
 
 #undef  ZYPP_BASE_LOGGER_LOGGROUP
 #define ZYPP_BASE_LOGGER_LOGGROUP "zypp::CheckPatches"
