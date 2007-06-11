@@ -1,4 +1,16 @@
 -------------------------------------------------------------------
+Mon Jun 11 17:02:49 CEST 2007 - schubi@suse.de
+
+- Required kmp packges FOR EACH installed/to_be_installed kernel will be installed.
+  New dependency "packageand(foo:bar)" which provides an AND dependency by
+  injecting a supplement/freshen.
+  e.G. package novell-cluster-services-kmp-smp 
+  supplements: packageand(kernel-smp:novell-cluster-services-kmp)
+  Bug 255011
+- Dont check for architecture changes in atoms (#266178)
+- Revision 5720
+
+-------------------------------------------------------------------
 Wed May 23 17:03:29 CEST 2007 - ma@suse.de
 
 - Fixed package-manager script (#275847)
