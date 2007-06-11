@@ -61,12 +61,13 @@ namespace zypp
        * \param klass Attribute Class
        * \param name Attribute Name
        *
-       * \return The attribute or 0 if
+       * \return The attribute or -1 if
        * no record is found.
        */
       int queryNumericAttribute( const data::RecordId &record_id,
                                  const std::string &klass,
-                                 const std::string &name );
+                                 const std::string &name,
+                                 int default_value = -1 );
 
 
       /**
@@ -81,7 +82,8 @@ namespace zypp
        */
       bool queryBooleanAttribute( const data::RecordId &record_id,
                                   const std::string &klass,
-                                  const std::string &name );
+                                  const std::string &name,
+                                  bool default_value = false );
 
 
       /**
@@ -96,7 +98,8 @@ namespace zypp
        */
       std::string queryStringAttribute( const data::RecordId &record_id,
                                         const std::string &klass,
-                                        const std::string &name );
+                                        const std::string &name,
+                                        const std::string &default_value = std::string() );
       
       /**
        * Queries a specifc attribute translation
@@ -113,7 +116,8 @@ namespace zypp
       std::string queryStringAttributeTranslation( const data::RecordId &record_id,
                                                    const Locale &locale,
                                                    const std::string &klass,
-                                                   const std::string &name );
+                                                   const std::string &name,
+                                                   const std::string &default_value = std::string() );
       
       /**
        * Queries all translations for a specific attribute
@@ -128,7 +132,8 @@ namespace zypp
        */
       TranslatedText queryTranslatedStringAttribute( const data::RecordId &record_id,
                                                      const std::string &klass,
-                                                     const std::string &name );
+                                                     const std::string &name,
+                                                     const TranslatedText &default_vaue = TranslatedText() );
       
       /**
        * Queries for a specific container attribute
@@ -138,8 +143,8 @@ namespace zypp
        * \param klass Attribute Class
        * \param name Attribute Name
        *
-       * \return the attribute or a empty 
-       * \ref _Container if no record is found.
+       * The results are filled to the provided
+       * \ref _OutputIterator
        */
       template<class _OutputIterator>
       void queryStringContainerAttribute( const data::RecordId &record_id,

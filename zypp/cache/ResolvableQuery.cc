@@ -80,46 +80,98 @@ struct ResolvableQuery::Impl
 
   std::string queryStringAttribute( const data::RecordId &record_id,
                                     const std::string &klass,
-                                    const std::string &name )
+                                    const std::string &name,
+                                    const std::string &default_value )
   {
     sqlite3_connection con((_dbdir + "zypp.db").asString().c_str());
-    return queryStringAttributeTranslationInternal( con, record_id, Locale(), klass, name);
+    
+    string value;
+    try {
+      value = queryStringAttributeTranslationInternal( con, record_id, Locale(), klass, name);
+    }
+    catch ( const Exception &e )
+    {
+      ZYPP_CAUGHT(e);
+      return default_value;
+    }
+    
+    return value;
   }
 
 
   std::string queryStringAttributeTranslation( const data::RecordId &record_id,
                                                const Locale &locale,
                                                const std::string &klass,
-                                               const std::string &name )
+                                               const std::string &name,
+                                               const std::string &default_value )
   {
     sqlite3_connection con((_dbdir + "zypp.db").asString().c_str());
-    return queryStringAttributeTranslationInternal( con, record_id, locale, klass, name );
+    string value;
+    try {
+      value = queryStringAttributeTranslationInternal( con, record_id, locale, klass, name );
+    }
+    catch ( const Exception &e )
+    {
+      ZYPP_CAUGHT(e);
+      return default_value;
+    }
+    return value;
   }
 
 
   TranslatedText queryTranslatedStringAttribute( const data::RecordId &record_id,
                                                  const std::string &klass,
-                                                 const std::string &name )
+                                                 const std::string &name,
+                                                 const TranslatedText &default_value )
   {
     sqlite3_connection con((_dbdir + "zypp.db").asString().c_str());
-    return queryTranslatedStringAttributeInternal( con, record_id, klass, name );
+    TranslatedText value;
+    try {
+      value = queryTranslatedStringAttributeInternal( con, record_id, klass, name );
+    }
+    catch ( const Exception &e )
+    {
+      ZYPP_CAUGHT(e);
+      return default_value;
+    }
+    return value;
   }
 
 
   bool queryBooleanAttribute( const data::RecordId &record_id,
-                                        const std::string &klass,
-                                        const std::string &name )
+                              const std::string &klass,
+                              const std::string &name,
+                              bool default_value )
   {
     sqlite3_connection con((_dbdir + "zypp.db").asString().c_str());
-    return ( queryNumericAttributeInternal( con, record_id, klass, name) != 0 );
+    bool value;
+    try {
+      value = queryNumericAttributeInternal( con, record_id, klass, name);
+    }
+    catch ( const Exception &e )
+    {
+      ZYPP_CAUGHT(e);
+      return default_value;
+    }
+    return value;
   }
       
   int queryNumericAttribute( const data::RecordId &record_id,
-                                 const std::string &klass,
-                                 const std::string &name )
+                             const std::string &klass,
+                             const std::string &name,
+                             int default_value )
   {
     sqlite3_connection con((_dbdir + "zypp.db").asString().c_str());
-    return queryNumericAttributeInternal( con, record_id, klass, name);
+    int n;
+    try {
+      n = queryNumericAttributeInternal( con, record_id, klass, name);
+    }
+    catch ( const Exception &e )
+    {
+      ZYPP_CAUGHT(e);
+      return default_value;
+    }
+    return n;
   }
 
 private:
@@ -223,24 +275,27 @@ void ResolvableQuery::query( const std::string &s, ProcessResolvable fnc  )
 
 int ResolvableQuery::queryNumericAttribute( const data::RecordId &record_id,
                                             const std::string &klass,
-                                            const std::string &name )
+                                            const std::string &name,
+                                            int default_value )
 {
-  return _pimpl->queryNumericAttribute(record_id, klass, name);
+  return _pimpl->queryNumericAttribute(record_id, klass, name, default_value);
 }
 
 bool ResolvableQuery::queryBooleanAttribute( const data::RecordId &record_id,
                                              const std::string &klass,
-                                             const std::string &name )
+                                             const std::string &name,
+                                             bool default_value )
 {
-  return _pimpl->queryNumericAttribute(record_id, klass, name);
+  return _pimpl->queryNumericAttribute(record_id, klass, name, default_value);
 }
 
 
 std::string ResolvableQuery::queryStringAttribute( const data::RecordId &record_id,
                                                    const std::string &klass,
-                                                   const std::string &name )
+                                                   const std::string &name,
+                                                   const std::string &default_value )
 {
-  return _pimpl->queryStringAttribute(record_id, klass, name);
+  return _pimpl->queryStringAttribute(record_id, klass, name, default_value);
 }
 
 //////////////////////////////////////////////////////////////////////////////
@@ -248,18 +303,20 @@ std::string ResolvableQuery::queryStringAttribute( const data::RecordId &record_
 std::string ResolvableQuery::queryStringAttributeTranslation( const data::RecordId &record_id,
                                                               const Locale &locale,
                                                               const std::string &klass,
-                                                              const std::string &name )
+                                                              const std::string &name,
+                                                              const std::string &default_value )
 {
-  return _pimpl->queryStringAttributeTranslation(record_id, locale, klass, name);
+  return _pimpl->queryStringAttributeTranslation(record_id, locale, klass, name, default_value );
 }
 
 //////////////////////////////////////////////////////////////////////////////
 
 TranslatedText ResolvableQuery::queryTranslatedStringAttribute( const data::RecordId &record_id,
                                                                 const std::string &klass,
-                                                                const std::string &name )
+                                                                const std::string &name,
+                                                                const TranslatedText &default_value )
 {
-  return _pimpl->queryTranslatedStringAttribute(record_id, klass, name);
+  return _pimpl->queryTranslatedStringAttribute(record_id, klass, name, default_value );
 }
 
 //////////////////////////////////////////////////////////////////////////////

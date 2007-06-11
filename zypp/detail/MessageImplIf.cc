@@ -26,9 +26,6 @@ namespace zypp
       TranslatedText MessageImplIf::text() const
       { return TranslatedText(); }
 
-      ByteCount MessageImplIf::size() const
-      { return ResObjectImplIf::size(); }
-
       /** Patch the message belongs to - if any */
       Patch::constPtr MessageImplIf::patch() const
       { return Patch::constPtr(); }

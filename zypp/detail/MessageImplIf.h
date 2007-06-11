@@ -39,8 +39,6 @@ namespace zypp
     public:
       /** Get the text of the message */
       virtual TranslatedText text() const PURE_VIRTUAL;
-      /** */
-      virtual ByteCount size() const;
       /** Patch the message belongs to - if any */
       virtual Patch::constPtr patch() const; // TODO make it abstract = 0;
     };
