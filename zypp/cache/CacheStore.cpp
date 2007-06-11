@@ -8,7 +8,7 @@
 #include "zypp/ZYppFactory.h"
 #include "zypp/ZYpp.h"
 #include "zypp/ZConfig.h"
-
+#include "zypp/Package.h"
 #include "zypp/cache/CacheInitializer.h"
 #include "zypp/cache/CacheStore.h"
 #include "zypp/cache/CacheException.h"
@@ -1031,6 +1031,24 @@ void CacheStore::appendStringContainerAttribute( const data::RecordId &resolvabl
   appendStringAttribute( resolvable_id, klass, name, value );
 }
 
+template
+void CacheStore::appendStringContainerAttribute( const data::RecordId &resolvable_id,
+                                                 const std::string &klass,
+                                                 const std::string &name,
+                                                 const std::set<std::string> &cont );
+template
+void CacheStore::appendStringContainerAttribute( const data::RecordId &resolvable_id,
+                                                 const std::string &klass,
+                                                 const std::string &name,
+                                                 const std::list<std::string> &cont );
+template
+ void CacheStore::appendStringContainerAttribute( const data::RecordId &resolvable_id,
+                                                  const std::string &klass,
+                                                  const std::string &name,
+                                                  const Package::Keywords &cont );
+
+    
+    
 }
 }
 

@@ -1,6 +1,7 @@
 
 #include "zypp/cache/CacheTypes.h"
 #include "zypp/cache/ResolvableQuery.h"
+#include "zypp/Package.h"
 #include "zypp/cache/sqlite3x/sqlite3x.hpp"
 
 using namespace sqlite3x;
@@ -25,7 +26,6 @@ struct ResolvableQuery::Impl
   ~Impl()
   {
   }
-
 
   data::ResObject_Ptr fromRow( sqlite3_reader &reader )
   {
@@ -121,7 +121,8 @@ struct ResolvableQuery::Impl
     string all = queryStringAttributeInternal( con, record_id, klass, name);
     _Container words;
     
-    str::split( all, std::back_inserter(words) );
+    //
+    //str::split( all, std::inserter(words) );
     return words;
   }
   
@@ -208,6 +209,16 @@ private:
   }
 };
 
+template 
+list<string> ResolvableQuery::Impl::queryStringContainerAttribute( const data::RecordId &record_id,
+                                                                   const std::string &klass,
+                                                                   const std::string &name );
+
+template 
+set<string> ResolvableQuery::Impl::queryStringContainerAttribute( const data::RecordId &record_id,
+                                                                  const std::string &klass,
+                                                                  const std::string &name );
+
 //////////////////////////////////////////////////////////////////////////////
 // FORWARD TO IMPLEMENTATION
 //////////////////////////////////////////////////////////////////////////////
@@ -273,6 +284,29 @@ TranslatedText ResolvableQuery::queryTranslatedStringAttribute( const data::Reco
 {
   return _pimpl->queryTranslatedStringAttribute(record_id, klass, name);
 }
+
+template<class _Container>
+_Container ResolvableQuery::queryStringContainerAttribute( const data::RecordId &record_id,
+                                                           const std::string &klass,
+                                                           const std::string &name )
+{
+  return _pimpl->queryStringContainerAttribute<_Container>(record_id, klass, name);
+}
+
+template
+std::set<std::string> ResolvableQuery::queryStringContainerAttribute( const data::RecordId &record_id,
+                                                                      const std::string &klass,
+                                                                      const std::string &name );
+
+template
+std::list<std::string> ResolvableQuery::queryStringContainerAttribute( const data::RecordId &record_id,
+                                                                       const std::string &klass,
+                                                                       const std::string &name );
+
+template
+Package::Keywords ResolvableQuery::queryStringContainerAttribute( const data::RecordId &record_id,
+                                                                  const std::string &klass,
+                                                                  const std::string &name );
 
 //////////////////////////////////////////////////////////////////////////////
 

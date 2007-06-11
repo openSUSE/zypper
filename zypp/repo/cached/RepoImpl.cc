@@ -72,31 +72,33 @@ void RepoImpl::createResolvables()
 
     sqlite3_command cmd( con, "select id,name,version,release,epoch,arch,kind from resolvables where repository_id=:repository_id;");
     cmd.bind(":repository_id", _repository_id);
-    map<data::RecordId, NVRAD> nvras;
+    map<data::RecordId, pair<Resolvable::Kind, NVRAD> > nvras;
     
     sqlite3_reader reader = cmd.executereader();
     while(reader.read())
     {
       long long id = reader.getint64(0);
       Dependencies deps;
-      
+      Resolvable::Kind kind = _type_cache.kindFor(reader.getint(6));
       // Collect basic Resolvable data
-      nvras[id] = NVRAD( reader.getstring(1),
-                       Edition( reader.getstring(2), reader.getstring(3), reader.getint(4) ),
-                       _type_cache.archFor(reader.getint(5)),
-                       deps
-                     );
+      nvras[id] = make_pair( kind, NVRAD( reader.getstring(1),
+                                          Edition( reader.getstring(2), reader.getstring(3), reader.getint(4) ),
+                                          _type_cache.archFor(reader.getint(5)),
+                                           deps ) );
     }
     
     MIL << "Done reading resolvables nvra" << endl;
     
     read_capabilities( con, nvras);
     
-    for ( map<data::RecordId, NVRAD>::const_iterator it = nvras.begin(); it != nvras.end(); ++it )
+    for ( map<data::RecordId, pair<Resolvable::Kind, NVRAD> >::const_iterator it = nvras.begin(); it != nvras.end(); ++it )
     {
-      ResImplTraits<cached::PackageImpl>::Ptr impl = new cached::PackageImpl(it->first, this);
-      Package::Ptr package = detail::makeResolvableFromImpl( it->second, impl );
-      _store.insert (package);
+      if ( it->second.first == ResTraits<Package>::kind )
+      {
+        ResImplTraits<cached::PackageImpl>::Ptr impl = new cached::PackageImpl(it->first, this);
+        Package::Ptr package = detail::makeResolvableFromImpl( it->second.second, impl );
+        _store.insert (package);
+      }
     }
     con.executenonquery("COMMIT;");
   }
@@ -113,7 +115,7 @@ ResolvableQuery RepoImpl::resolvableQuery()
   return _rquery;
 }
 
-void RepoImpl::read_capabilities( sqlite3_connection &con, map<data::RecordId, NVRAD> &nvras )
+void RepoImpl::read_capabilities( sqlite3_connection &con, map<data::RecordId, pair<Resolvable::Kind, NVRAD> > &nvras )
 {
   CapFactory capfactory;
   
@@ -150,13 +152,13 @@ void RepoImpl::read_capabilities( sqlite3_connection &con, map<data::RecordId, N
       {
         capability::NamedCap *ncap = new capability::NamedCap( refer, reader.getstring(1) );
         zypp::Dep deptype = _type_cache.deptypeFor(reader.getint(6));  
-        nvras[rid][deptype].insert( capfactory.fromImpl( capability::CapabilityImpl::Ptr(ncap) ) ); 
+        nvras[rid].second[deptype].insert( capfactory.fromImpl( capability::CapabilityImpl::Ptr(ncap) ) ); 
       }
       else
       {
         capability::VersionedCap *vcap = new capability::VersionedCap( refer, reader.getstring(1), /* rel */ rel, Edition( reader.getstring(2), reader.getstring(3), reader.getint(4) ) );
         zypp::Dep deptype = _type_cache.deptypeFor(reader.getint(6));
-        nvras[rid][deptype].insert( capfactory.fromImpl( capability::CapabilityImpl::Ptr(vcap) ) ); 
+        nvras[rid].second[deptype].insert( capfactory.fromImpl( capability::CapabilityImpl::Ptr(vcap) ) ); 
       }
     }
   }
@@ -170,7 +172,7 @@ void RepoImpl::read_capabilities( sqlite3_connection &con, map<data::RecordId, N
       capability::FileCap *fcap = new capability::FileCap( refer, reader.getstring(1) + "/" + reader.getstring(2) );
       zypp::Dep deptype = _type_cache.deptypeFor(reader.getint(3));
       data::RecordId rid = reader.getint64(4);
-      nvras[rid][deptype].insert( capfactory.fromImpl( capability::CapabilityImpl::Ptr(fcap) ) ); 
+      nvras[rid].second[deptype].insert( capfactory.fromImpl( capability::CapabilityImpl::Ptr(fcap) ) ); 
     }
   }
   

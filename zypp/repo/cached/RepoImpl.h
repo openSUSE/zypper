@@ -12,6 +12,7 @@
 
 #include <iosfwd>
 #include <map>
+#include <utility>
 #include "zypp/Arch.h"
 #include "zypp/Rel.h"
 #include "zypp/Pathname.h"
@@ -56,7 +57,7 @@ namespace zypp
         void createResolvables();
         
       protected:
-        void read_capabilities( sqlite3x::sqlite3_connection &con, std::map<data::RecordId, NVRAD> &nvras );
+        void read_capabilities( sqlite3x::sqlite3_connection &con, std::map<data::RecordId, std::pair<Resolvable::Kind, NVRAD> > &nvras );
         Pathname _dbdir;
         cache::CacheTypes _type_cache;
         data::RecordId _repository_id;

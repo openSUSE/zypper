@@ -2,6 +2,8 @@
 #ifndef ZYPP_CACHE_RESOLVABLE_QUERY_H
 #define ZYPP_CACHE_RESOLVABLE_QUERY_H
 
+#include <set>
+#include <list>
 #include "zypp/base/Function.h"
 #include "zypp/Pathname.h"
 #include "zypp/data/ResolvableData.h"
@@ -152,7 +154,6 @@ namespace zypp
       /** Pointer to implementation. */
       RW_pointer<Impl> _pimpl;
     };
-
   } //NS cache
 } //NS zypp
 
