@@ -105,7 +105,7 @@ ResolverContext::ResolverContext (const ResPool & pool, const Arch & arch, Resol
     , _skippedPossibilities(false)
       
 {
-//_XDEBUG( "ResolverContext[" << this << "]::ResolverContext(" << parent << ")" );
+_XDEBUG( "new ResolverContext()" );
     if (parent != NULL) {
 	_pool		     = parent->_pool;
 	_download_size       = parent->_download_size;
