@@ -7,7 +7,6 @@
 #include "zypp/base/Measure.h"
 #include "zypp/ZYppFactory.h"
 #include "zypp/ZYpp.h"
-#include "zypp/ZConfig.h"
 #include "zypp/Package.h"
 #include "zypp/cache/CacheInitializer.h"
 #include "zypp/cache/CacheStore.h"
@@ -233,8 +232,8 @@ void CacheStore::appendPackageBaseAttributes( const RecordId & pkgid,
   appendStringAttribute( pkgid, "Package", "postin", package->postin );
   appendStringAttribute( pkgid, "Package", "preun", package->preun );
   appendStringAttribute( pkgid, "Package", "postun", package->postun );
-  appendStringContainerAttribute( pkgid, "Package", "keywords", package->keywords );
-  appendStringContainerAttribute( pkgid, "Package", "authors", package->authors );
+  appendStringContainerAttribute( pkgid, "Package", "keywords", package->keywords.begin(), package->keywords.end() );
+  appendStringContainerAttribute( pkgid, "Package", "authors", package->authors.begin(), package->authors.end() );
   appendStringAttribute( pkgid, "Package", "location", package->repositoryLocation.filePath.asString() );
 }
 
@@ -377,7 +376,7 @@ void CacheStore::consumeProduct( const data::RecordId & repository_id,
 
   appendTranslatedStringAttribute( id, "Product", "shortName", product->shortName );
   appendTranslatedStringAttribute( id, "Product", "longName", product->longName );
-  appendStringContainerAttribute( id, "Product", "flags", product->flags );
+  appendStringContainerAttribute( id, "Product", "flags", product->flags.begin(), product->flags.end() );
   appendStringAttribute( id, "Pattern", "releasenotesUrl", product->releasenotesUrl.asString() );
   //! \todo figure out how to store list of Urls. A separate method appendUrlContainerAttribute? Or change it to plain string in ResolvableData.h?
 //  appendStringContainerAttribute( id, "Product", "updateUrls", product->updateUrls );
@@ -1017,38 +1016,6 @@ void CacheStore::appendStringAttribute( const RecordId &resolvable_id,
   _pimpl->append_text_attribute_cmd->executenonquery();
 }
 
-template <class _Container>
-void CacheStore::appendStringContainerAttribute( const data::RecordId &resolvable_id,
-                                                 const std::string &klass,
-                                                 const std::string &name,
-                                                 const _Container &cont )
-{
-  // don't bother with writing if the container is empty
-  if (cont.empty()) return;
-
-  string value = str::join(cont, ZConfig().cacheDBSplitJoinSeparator());
-
-  appendStringAttribute( resolvable_id, klass, name, value );
-}
-
-template
-void CacheStore::appendStringContainerAttribute( const data::RecordId &resolvable_id,
-                                                 const std::string &klass,
-                                                 const std::string &name,
-                                                 const std::set<std::string> &cont );
-template
-void CacheStore::appendStringContainerAttribute( const data::RecordId &resolvable_id,
-                                                 const std::string &klass,
-                                                 const std::string &name,
-                                                 const std::list<std::string> &cont );
-template
- void CacheStore::appendStringContainerAttribute( const data::RecordId &resolvable_id,
-                                                  const std::string &klass,
-                                                  const std::string &name,
-                                                  const Package::Keywords &cont );
-
-    
-    
 }
 }
 

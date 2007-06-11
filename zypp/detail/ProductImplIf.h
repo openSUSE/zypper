@@ -45,9 +45,6 @@ namespace zypp
       /** Get the category of the product - addon or base*/
       virtual std::string category() const PURE_VIRTUAL;
 
-      /** Get the vendor of the product */
-      virtual Label vendor() const PURE_VIRTUAL;
-
       virtual Url releaseNotesUrl() const PURE_VIRTUAL;
 
       virtual std::list<Url> updateUrls() const PURE_VIRTUAL;

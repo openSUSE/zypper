@@ -18,6 +18,7 @@
 #include "zypp/base/PtrTypes.h"
 #include "zypp/Pathname.h"
 #include "zypp/NVRA.h"
+#include "zypp/ZConfig.h"
 #include "zypp/capability/CapabilityImpl.h"
 #include "zypp/capability/Capabilities.h"
 
@@ -474,21 +475,30 @@ namespace zypp
 
 
       /**
-       * Append strings from _Container to a resolvable.
-       * Uses \ref zypp::str::split(_Container, std::string) with
+       * Append strings from _Iterator to a resolvable.
+       *
+       * Uses \ref zypp::str::split(_Iterator,_Iterator, std::string) with
        * \ref ZConfig::cacheDBSplitJoinSeparator() as the second argument
        * (a separator string) of split().
-       * 
+       *
+       * Any container of any class providing asString() can be used.
+       *
        * \param resolvable_id Resovable Id, owner of the attribute
        * \param klass Type class i.e "Package" "lang" "kind"
        * \param name Type name i.e : "summary" "none" "Script"
-       * \param cont The string container.
+       * \param begin begin Iterator to the container
+       * \param end end Iterator to the container
        */
-      template <class _Container>
+      template <class _Iterator>
       void appendStringContainerAttribute( const data::RecordId &resolvable_id,
                                            const std::string &klass,
                                            const std::string &name,
-                                           const _Container &cont );
+                                           _Iterator begin,
+                                           _Iterator end )
+      {
+        std::string value = str::join(begin, end, ZConfig().cacheDBSplitJoinSeparator());
+        appendStringAttribute( resolvable_id, klass, name, value );
+      }
 
        /**
        * Update a known repository checksum and timestamp

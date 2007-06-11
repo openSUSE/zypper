@@ -141,10 +141,17 @@ namespace zypp
        * \return the attribute or a empty 
        * \ref _Container if no record is found.
        */
-      template<class _Container>
-      _Container queryStringContainerAttribute( const data::RecordId &record_id,
-                                                const std::string &klass,
-                                                const std::string &name );
+      template<class _OutputIterator>
+      void queryStringContainerAttribute( const data::RecordId &record_id,
+                                    const std::string &klass,
+                                    const std::string &name,
+                                    _OutputIterator result )
+      {
+        
+        std::string all = queryStringAttribute( record_id, klass, name);
+        //FIXME use zypp separator
+        str::split( all, result );
+      }
       
       
       

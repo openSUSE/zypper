@@ -27,6 +27,19 @@ namespace zypp
   { /////////////////////////////////////////////////////////////////
 
     ///////////////////////////////////////////////////////////////////
+    /**
+     * Global asString() that works with std::string too
+     */
+    template<class _T>
+    std::string asString( const _T &t )
+    {
+      return t.asString();
+    }
+
+    template<>
+    std::string asString( const std::string &t );
+    
+    ///////////////////////////////////////////////////////////////////
     /** Printf style construction of std::string. */
     std::string form( const char * format, ... )
     __attribute__ ((format (printf, 1, 2)));
@@ -261,7 +274,7 @@ namespace zypp
           {
             if ( iter != begin )
               res += sep_r;
-            res += *iter;
+            res += asString(*iter);
           }
         return res;
       }

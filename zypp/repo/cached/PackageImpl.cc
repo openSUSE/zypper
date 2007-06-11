@@ -154,7 +154,9 @@ PackageGroup PackageImpl::group() const
 
 PackageImpl::Keywords PackageImpl::keywords() const
 {
-  return _repository->resolvableQuery().queryStringContainerAttribute< PackageImpl::Keywords >( _id, "Package", "keywords" );
+  PackageImpl::Keywords keywords;
+  _repository->resolvableQuery().queryStringContainerAttribute( _id, "Package", "keywords", std::inserter(keywords, keywords.begin()) );
+  return keywords;
 }
 
 Changelog PackageImpl::changelog() const
@@ -209,7 +211,9 @@ DiskUsage PackageImpl::diskusage() const
 
 list<string> PackageImpl::authors() const
 {
-  return _repository->resolvableQuery().queryStringContainerAttribute< list<string> >( _id, "Package", "authors" );
+  list<string> authors;
+  _repository->resolvableQuery().queryStringContainerAttribute( _id, "Package", "authors", back_inserter(authors) );
+  return authors;
 }
 
 std::list<std::string> PackageImpl::filenames() const

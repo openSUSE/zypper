@@ -114,21 +114,6 @@ struct ResolvableQuery::Impl
     return ( queryNumericAttributeInternal( con, record_id, klass, name) != 0 );
   }
       
-  template <class _Container> _Container 
-  queryStringContainerAttribute( const data::RecordId &record_id,
-                                 const std::string &klass,
-                                 const std::string &name )
-  {
-    sqlite3_connection con((_dbdir + "zypp.db").asString().c_str());
-    string all = queryStringAttributeInternal( con, record_id, klass, name);
-    _Container words;
-    
-    //
-    str::split( all, std::inserter(words, words.begin()) );
-    return words;
-  }
-  
-  
   int queryNumericAttribute( const data::RecordId &record_id,
                                  const std::string &klass,
                                  const std::string &name )
@@ -276,29 +261,6 @@ TranslatedText ResolvableQuery::queryTranslatedStringAttribute( const data::Reco
 {
   return _pimpl->queryTranslatedStringAttribute(record_id, klass, name);
 }
-
-template<class _Container>
-_Container ResolvableQuery::queryStringContainerAttribute( const data::RecordId &record_id,
-                                                           const std::string &klass,
-                                                           const std::string &name )
-{
-  return _pimpl->queryStringContainerAttribute<_Container>(record_id, klass, name);
-}
-
-template
-std::set<std::string> ResolvableQuery::queryStringContainerAttribute( const data::RecordId &record_id,
-                                                                      const std::string &klass,
-                                                                      const std::string &name );
-
-template
-std::list<std::string> ResolvableQuery::queryStringContainerAttribute( const data::RecordId &record_id,
-                                                                       const std::string &klass,
-                                                                       const std::string &name );
-
-template
-Package::Keywords ResolvableQuery::queryStringContainerAttribute( const data::RecordId &record_id,
-                                                                  const std::string &klass,
-                                                                  const std::string &name );
 
 //////////////////////////////////////////////////////////////////////////////
 

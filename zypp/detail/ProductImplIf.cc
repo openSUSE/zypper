@@ -24,10 +24,6 @@ namespace zypp
       std::string ProductImplIf::category() const
       { return std::string(); }
 
-      /** Get the vendor of the product */
-      Label ProductImplIf::vendor() const
-      { return Label(); }
-
       Url ProductImplIf::releaseNotesUrl() const
       { return Url(); }
 
