@@ -43,6 +43,7 @@ namespace zypp
    * This class tries to be compatible with the
    * concept of a .repo file used by YUM and
    * also available in the openSUSE build service.
+   * See <tt>man yum.conf</tt>.
    *
    * Example file
    *
@@ -56,8 +57,8 @@ namespace zypp
    * enabled=1
    * \endcode
    *
-   * \note A Repository info is a hint about how
-   * to create a repository.
+   * \note A RepoInfo is a hint about how
+   * to create a Repository.
    */
   class RepoInfo
   {
@@ -78,37 +79,31 @@ namespace zypp
     std::string alias() const;
     
     /**
-     * The base Url is the Url of the repository that generates
-     * the authoritative metadata this repository provides.
-     *
-     * For example for the url http://updates.novell.com/10.2
-     * the base url is http://updates.novell.com/10.2.
-     * For the url http://host.com/mirror/update.novell.com/10.2
-     * the base url is http://updates.novell.com/10.2
+     * A Url under which the metadata are located, or a set of mirrors.
      *
      * This can't be empty in order the repository to be valid
      * unless the download of the mirror list succeeds and it
      * contains a valid url.
      */
-    std::set<Url> urls() const;
+    std::set<Url> baseUrls() const;
 
     /**
      * Url of a file which contains a list of Urls
      * If empty, the base url will be used.
      */
-     Url mirrorListUrl() const;
+    Url mirrorListUrl() const;
     
     typedef std::set<Url>::const_iterator urls_const_iterator;
     
     /**
      * iterator that points at begin of repository urls
      */
-    urls_const_iterator urlsBegin() const;
+    urls_const_iterator baseUrlsBegin() const;
     
     /**
      * iterator that points at end of repository urls
      */
-    urls_const_iterator urlsEnd() const;
+    urls_const_iterator baseUrlsEnd() const;
     
     /**
      * If enabled is false, then this repository must be ignored as if does

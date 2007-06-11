@@ -70,7 +70,7 @@ namespace zypp
    std::list<RepoInfo> knownRepositories() const;
    
    /**
-    * \short Refresh local cache
+    * \short Refresh local raw cache
     *
     * Will try to download the metadata
     *

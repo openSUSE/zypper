@@ -31,7 +31,7 @@ namespace zypp
   public:
 
     /** Default ctor: noRepository.
-     * Real Repositorys are to be created via RepositoryFactory.
+     * \see RepoManager::createFromCache.
     */
     Repository();
 

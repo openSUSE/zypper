@@ -44,7 +44,7 @@ namespace zypp
     boost::tribool autorefresh;
     repo::RepoType type;
     Url mirrorlist_url;
-    std::set<Url> urls;
+    std::set<Url> baseUrls;
     std::string alias;
     std::string name;
 
@@ -111,7 +111,7 @@ namespace zypp
 
   RepoInfo & RepoInfo::addBaseUrl( const Url &url )
   {
-    _pimpl->urls.insert(url);
+    _pimpl->baseUrls.insert(url);
     return *this;
   }
 
@@ -151,20 +151,20 @@ namespace zypp
   Url RepoInfo::mirrorListUrl() const
   { return _pimpl->mirrorlist_url; }
 
-  std::set<Url> RepoInfo::urls() const
-  { return _pimpl->urls; }
+  std::set<Url> RepoInfo::baseUrls() const
+  { return _pimpl->baseUrls; }
     
-  RepoInfo::urls_const_iterator RepoInfo::urlsBegin() const
-  { return _pimpl->urls.begin(); }
+  RepoInfo::urls_const_iterator RepoInfo::baseUrlsBegin() const
+  { return _pimpl->baseUrls.begin(); }
     
-  RepoInfo::urls_const_iterator RepoInfo::urlsEnd() const
-  { return _pimpl->urls.end(); }
+  RepoInfo::urls_const_iterator RepoInfo::baseUrlsEnd() const
+  { return _pimpl->baseUrls.end(); }
   
   std::ostream & RepoInfo::dumpOn( std::ostream & str ) const
   {
     str << "--------------------------------------" << std::endl;
     str << "- alias       : " << alias() << std::endl;
-    std::set<Url> url_set(urls());
+    std::set<Url> url_set(baseUrls());
     for ( std::set<Url>::const_iterator it = url_set.begin();
           it != url_set.end();
           ++it )

@@ -127,7 +127,7 @@ namespace zypp
   
   static void assert_urls( const RepoInfo &info )
   {
-    if (info.urls().empty())
+    if (info.baseUrls().empty())
         ZYPP_THROW(RepoNoUrlException());
   }
   
@@ -220,7 +220,7 @@ namespace zypp
     assert_urls(info);
     
     // try urls one by one
-    for ( RepoInfo::urls_const_iterator it = info.urlsBegin(); it != info.urlsEnd(); ++it )
+    for ( RepoInfo::urls_const_iterator it = info.baseUrlsBegin(); it != info.baseUrlsEnd(); ++it )
     {
       Url url(*it);
       filesystem::TmpDir tmpdir;
