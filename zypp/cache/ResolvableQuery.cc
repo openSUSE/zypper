@@ -1,3 +1,5 @@
+#include <iterator>
+#include <algorithm>
 
 #include "zypp/cache/CacheTypes.h"
 #include "zypp/cache/ResolvableQuery.h"
@@ -122,7 +124,7 @@ struct ResolvableQuery::Impl
     _Container words;
     
     //
-    //str::split( all, std::inserter(words) );
+    str::split( all, std::inserter(words, words.begin()) );
     return words;
   }
   
@@ -208,16 +210,6 @@ private:
     return cmd.executestring();
   }
 };
-
-template 
-list<string> ResolvableQuery::Impl::queryStringContainerAttribute( const data::RecordId &record_id,
-                                                                   const std::string &klass,
-                                                                   const std::string &name );
-
-template 
-set<string> ResolvableQuery::Impl::queryStringContainerAttribute( const data::RecordId &record_id,
-                                                                  const std::string &klass,
-                                                                  const std::string &name );
 
 //////////////////////////////////////////////////////////////////////////////
 // FORWARD TO IMPLEMENTATION
