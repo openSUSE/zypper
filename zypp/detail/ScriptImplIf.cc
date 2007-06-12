@@ -32,9 +32,6 @@ namespace zypp
       bool ScriptImplIf::undo_available() const
       { return false; }
 
-      ByteCount ScriptImplIf::size() const
-      { return ResObjectImplIf::size(); }
-
     /////////////////////////////////////////////////////////////////
   } // namespace detail
   ///////////////////////////////////////////////////////////////////

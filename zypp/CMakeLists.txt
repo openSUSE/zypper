@@ -1085,6 +1085,8 @@ SET( zypp_repository_cached_SRCS
   repo/cached/PatternImpl.cc
   repo/cached/ProductImpl.cc
   repo/cached/MessageImpl.cc
+  repo/cached/ScriptImpl.cc
+  repo/cached/AtomImpl.cc
 )
 
 SET( zypp_repository_cached_HEADERS
@@ -1094,6 +1096,8 @@ SET( zypp_repository_cached_HEADERS
   repo/cached/PatternImpl.h
   repo/cached/ProductImpl.h
   repo/cached/MessageImpl.h
+  repo/cached/ScriptImpl.h
+  repo/cached/AtomImpl.h
 )
 
 SET( zypp_repository_data_SRCS
