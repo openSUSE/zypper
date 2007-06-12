@@ -223,7 +223,7 @@ static void print_repo_list( const std::list<zypp::RepoInfo> &repos )
     tr << repo.alias();
     
     std::set<Url> urls;
-    urls = repo.urls();
+    urls = repo.baseUrls();
     for ( RepoInfo::urls_const_iterator uit = urls.begin();
           uit != urls.end();
           ++uit )
@@ -547,46 +547,31 @@ void rename_source( const std::string& anystring, const std::string& newalias )
 
 void refresh_sources()
 {
-#ifdef LIBZYPP_1xx
-  cerr << _("Sorry, not implemented yet for libzypp-1.x.x") << endl;
-#else
-  zypp::storage::PersistentStorage store;
-  std::list<SourceInfo> sources;
+  RepoManager manager;
+  gData.repos = manager.knownRepositories();
 
-  try
+  for (std::list<RepoInfo>::iterator it = gData.repos.begin();
+       it !=  gData.repos.end(); ++it)
   {
-    store.init( gSettings.root_dir );
-    sources = store.storedSources();
-  }
-  catch ( const Exception &e )
-  {
-    cerr << _("Error reading system sources: ") << e.msg() << std::endl;
-    exit(-1); 
-  }
-
-  for(std::list<SourceInfo>::const_iterator it = sources.begin();
-       it != sources.end() ; ++it)
-  {
+    RepoInfo repo(*it);
     try
     {
-      cout << _("Refreshing ") << it->alias() << endl <<
-        "URI: " << it->url() << endl; 
-      Source_Ref src = SourceFactory().createFrom(
-        it->type(), it->url(), it->path(), it->alias(), it->cacheDir(),
-        false, // base source
-        true); // autorefresh
-//      src.refresh();
+      cout << _("Refreshing ") << it->alias() << endl;
+      //<< "URI: " << it->url() << endl; 
+      
+      manager.refreshMetadata(repo);
+      if ( manager.isCached(repo ) )
+        manager.cleanCache(repo);
+      manager.buildCache(repo);
       cout << _("DONE") << endl << endl;
     }
-    catch ( const zypp::Exception & ex )
+    catch ( const Exception &e )
     {
-      cerr << _("Error while refreshing the source: ") << ex.asString();
-      // continuing with next source, however
+      cerr << _("Error reading system sources: ") << e.msg() << std::endl;
+      exit(-1); 
     }
   }
-
   cout << _("All system sources have been refreshed.") << endl;
-#endif
 }
 
 MediaWrapper::MediaWrapper (const string& filename_or_url) {
