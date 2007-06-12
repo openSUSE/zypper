@@ -54,7 +54,7 @@ void repomd_read_test(const string &dir)
       
       std::ifstream ifs( file.extend(".solution").asString().c_str() );
       
-      int count = 0;
+      unsigned int count = 0;
       while ( ifs && ! ifs.eof() && count < collect.items.size() )
       {
         string dtype;

@@ -55,7 +55,7 @@ void patches_read_test(const string &dir)
       
       std::ifstream ifs( file.extend(".solution").asString().c_str() );
       cout << "Comparing to " << file.extend(".solution") << endl;
-      int count = 0;
+      unsigned int count = 0;
       while ( ifs && ! ifs.eof() && count < collect.items.size() )
       {
         string id;
