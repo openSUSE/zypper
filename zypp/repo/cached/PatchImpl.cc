@@ -112,7 +112,7 @@ Source_Ref PatchImpl::source() const
   return Source_Ref::noSource;
 }
 
-unsigned PatchImpl::sourceMediaNr() const
+unsigned PatchImpl::mediaNr() const
 {
   return 1;
 }

@@ -12,6 +12,7 @@
 #include "zypp/detail/ResObjectImplIf.h"
 #include "zypp/source/SourceImpl.h"
 #include "zypp/SourceFactory.h"
+#include "zypp/Repository.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -51,7 +52,13 @@ namespace zypp
 
       Source_Ref ResObjectImplIf::source() const
       { return Source_Ref::noSource; }
+      
+      Repository ResObjectImplIf::repository() const
+      { return Repository::noRepository; }
 
+      unsigned ResObjectImplIf::mediaNr() const
+      { return 0; }
+      
       unsigned ResObjectImplIf::sourceMediaNr() const
       { return 0; }
 

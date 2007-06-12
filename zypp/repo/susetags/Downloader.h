@@ -15,15 +15,15 @@
 
 namespace zypp
 {
-  namespace source
+  namespace repo
   {
     namespace susetags
     {
   
-      class SUSETagsDownloader
+      class Downloader
       {
        public:
-        SUSETagsDownloader( const Url &url, const Pathname &path );
+        Downloader( const Url &url, const Pathname &path );
         void download( const Pathname &dest_dir );
        private:
         Url _url;

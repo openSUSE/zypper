@@ -15,7 +15,7 @@
 
 namespace zypp
 {
-  namespace source
+  namespace repo
   {
     namespace yum
     {
@@ -24,17 +24,17 @@ namespace zypp
   /**
    * 
    */
-  struct YUMResourceType
+  struct ResourceType
   {
-    static const YUMResourceType REPOMD;
-    static const YUMResourceType PRIMARY;
-    static const YUMResourceType OTHER;
-    static const YUMResourceType FILELISTS;
-    static const YUMResourceType GROUP;
-    static const YUMResourceType PATCHES; // suse extension
-    static const YUMResourceType PATCH;   // suse extension
-    static const YUMResourceType PRODUCTS; // suse extension
-    static const YUMResourceType PATTERNS; // suse extension
+    static const ResourceType REPOMD;
+    static const ResourceType PRIMARY;
+    static const ResourceType OTHER;
+    static const ResourceType FILELISTS;
+    static const ResourceType GROUP;
+    static const ResourceType PATCHES; // suse extension
+    static const ResourceType PATCH;   // suse extension
+    static const ResourceType PRODUCTS; // suse extension
+    static const ResourceType PATTERNS; // suse extension
 
     enum Type
     {
@@ -50,13 +50,13 @@ namespace zypp
       PATTERNS_e
     };
 
-    YUMResourceType(Type type) : _type(type) {}
+    ResourceType(Type type) : _type(type) {}
 
-    explicit YUMResourceType(const std::string & strval_r);
+    explicit ResourceType(const std::string & strval_r);
 
     const Type toEnum() const { return _type; }
     
-    YUMResourceType::Type parse(const std::string & strval_r);
+    ResourceType::Type parse(const std::string & strval_r);
 
     const std::string & asString() const;
 
@@ -64,10 +64,10 @@ namespace zypp
   };
 
 
-  inline std::ostream & operator<<( std::ostream & str, const YUMResourceType & obj )
+  inline std::ostream & operator<<( std::ostream & str, const ResourceType & obj )
   { return str << obj.asString(); }
 
-  inline bool operator==(const YUMResourceType & obj1, const YUMResourceType & obj2)
+  inline bool operator==(const ResourceType & obj1, const ResourceType & obj2)
   { return obj1._type == obj2._type; }
 
 

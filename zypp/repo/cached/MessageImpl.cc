@@ -109,7 +109,7 @@ Source_Ref MessageImpl::source() const
   return Source_Ref::noSource;
 }
 
-unsigned MessageImpl::sourceMediaNr() const
+unsigned MessageImpl::mediaNr() const
 {
   return 1;
 }

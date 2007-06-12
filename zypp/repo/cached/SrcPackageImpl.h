@@ -39,7 +39,7 @@ namespace cached
     virtual Pathname location() const;
     virtual bool installOnly() const;
     virtual Source_Ref source() const;
-    virtual unsigned sourceMediaNr() const;
+    virtual unsigned mediaNr() const;
     virtual Vendor vendor() const;
 
   protected:

@@ -10,7 +10,7 @@
 #include "zypp/Url.h"
 #include "zypp/PathInfo.h"
 #include "zypp/TmpPath.h"
-#include "zypp/source/yum/YUMDownloader.h"
+#include "zypp/repo/yum/Downloader.h"
 
 
 using std::cout;
@@ -19,13 +19,13 @@ using std::string;
 using namespace zypp;
 using namespace boost::unit_test;
 
-using namespace zypp::source::yum;
+using namespace zypp::repo;
 
 void yum_download_test(const string &dir)
 {
   Pathname p = dir + "/10.2-updates-subset";
   Url url("dir:" + p.asString());
-  YUMDownloader yum(url, "/");
+  yum::Downloader yum(url, "/");
   filesystem::TmpDir tmp;
   
   Pathname localdir(tmp.path());

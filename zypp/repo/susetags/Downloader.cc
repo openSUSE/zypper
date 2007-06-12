@@ -5,24 +5,24 @@
 #include "zypp/MediaSetAccess.h"
 #include "zypp/Fetcher.h"
 
-#include "zypp/source/susetags/SUSETagsDownloader.h"
+#include "zypp/repo/susetags/Downloader.h"
 
 using namespace std;
 
 namespace zypp
 {
-namespace source
+namespace repo
 {
 namespace susetags
 {
   
-SUSETagsDownloader::SUSETagsDownloader( const Url &url, const Pathname &path )
+Downloader::Downloader( const Url &url, const Pathname &path )
     : _url(url), _path(path)
 {
   
 }
 
-void SUSETagsDownloader::download( const Pathname &dest_dir )
+void Downloader::download( const Pathname &dest_dir )
 {
   MediaSetAccess media(_url, _path);
   Fetcher fetcher;

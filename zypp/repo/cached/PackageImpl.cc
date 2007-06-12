@@ -117,7 +117,7 @@ Source_Ref PackageImpl::source() const
   return Source_Ref::noSource;
 }
 
-unsigned PackageImpl::sourceMediaNr() const
+unsigned PackageImpl::mediaNr() const
 {
   return 1;
 }

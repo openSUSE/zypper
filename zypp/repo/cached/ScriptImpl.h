@@ -44,7 +44,7 @@ namespace cached
     virtual Date installtime() const;
     
     virtual Source_Ref source() const;
-    virtual unsigned sourceMediaNr() const;
+    virtual unsigned mediaNr() const;
     
     // SCRIPT
     virtual Pathname do_script() const;

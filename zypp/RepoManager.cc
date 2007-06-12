@@ -27,10 +27,10 @@
 #include "zypp/MediaSetAccess.h"
 
 #include "zypp/parser/RepoFileReader.h"
-#include "zypp/source/yum/YUMDownloader.h"
+#include "zypp/repo/yum/Downloader.h"
 #include "zypp/parser/yum/RepoParser.h"
 
-#include "zypp/source/susetags/SUSETagsDownloader.h"
+#include "zypp/repo/susetags/Downloader.h"
 #include "zypp/parser/susetags/RepoParser.h"
 
 using namespace std;
@@ -38,8 +38,7 @@ using namespace zypp;
 using namespace zypp::repo;
 using namespace zypp::filesystem;
 
-using zypp::source::yum::YUMDownloader;
-using zypp::source::susetags::SUSETagsDownloader;
+using namespace zypp::repo;
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -242,14 +241,14 @@ namespace zypp
       {
         case RepoType::RPMMD_e :
         {
-          YUMDownloader downloader( url, "/" );
+          yum::Downloader downloader( url, "/" );
           downloader.download(tmpdir.path());
            // no error
         }
         break;
         case RepoType::YAST2_e :
         {
-          SUSETagsDownloader downloader( url, "/" );
+          susetags::Downloader downloader( url, "/" );
           downloader.download(tmpdir.path());
           // no error
         }

@@ -20,7 +20,7 @@
 
 using namespace std;
 using namespace zypp::xml;
-using zypp::source::yum::YUMResourceType;
+using zypp::repo::yum::ResourceType;
 
 namespace zypp
 {
@@ -75,7 +75,7 @@ namespace zypp
     Tag _tag;
 
     /** Type of metadata file. */
-    source::yum::YUMResourceType _type;
+    repo::yum::ResourceType _type;
 
     /** Function for processing collected data. Passed-in through constructor. */
     ProcessResource _callback;
@@ -94,7 +94,7 @@ namespace zypp
   RepomdFileReader::Impl::Impl(
       const Pathname &repomd_file, const ProcessResource & callback)
     :
-      _tag(tag_NONE), _type(YUMResourceType::NONE_e), _callback(callback) 
+      _tag(tag_NONE), _type(ResourceType::NONE_e), _callback(callback) 
   {
     Reader reader( repomd_file );
     MIL << "Reading " << repomd_file << endl;
@@ -129,7 +129,7 @@ namespace zypp
       if ( reader_r->name() == "data" )
       {
         _tag = tag_Data;
-        _type = YUMResourceType(reader_r->getAttribute("type").asString());
+        _type = ResourceType(reader_r->getAttribute("type").asString());
         return true;
       }
 

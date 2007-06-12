@@ -112,7 +112,7 @@ Source_Ref PatternImpl::source() const
   return Source_Ref::noSource;
 }
 
-unsigned PatternImpl::sourceMediaNr() const
+unsigned PatternImpl::mediaNr() const
 {
   return 1;
 }

@@ -11,6 +11,7 @@
 */
 #include "zypp/ResObject.h"
 #include "zypp/source/SourceImpl.h"
+#include "zypp/Repository.h"
 #include "zypp/detail/ResObjectImplIf.h"
 
 using namespace std;
@@ -83,6 +84,12 @@ namespace zypp
 
   unsigned ResObject::sourceMediaNr() const
   { return pimpl().sourceMediaNr(); }
+  
+  Repository ResObject::repository() const
+  { return pimpl().repository(); }
+
+  unsigned ResObject::mediaNr() const
+  { return pimpl().mediaNr(); }
 
   bool ResObject::installOnly() const
   { return pimpl().installOnly(); }

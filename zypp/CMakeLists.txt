@@ -741,7 +741,6 @@ INSTALL(  FILES
 )
 
 SET( zypp_source_susetags_SRCS
-  source/susetags/SUSETagsDownloader.cc
   source/susetags/MediaMetadataParser.cc
   source/susetags/MediaPatchesMetadataParser.cc
   source/susetags/PackagesLangParser.cc
@@ -758,7 +757,6 @@ SET( zypp_source_susetags_SRCS
 )
 
 SET( zypp_source_susetags_HEADERS
-  source/susetags/SUSETagsDownloader.h
   source/susetags/MediaMetadataParser.h
   source/susetags/MediaPatchesMetadataParser.h
   source/susetags/PackagesLangParser.h
@@ -780,7 +778,6 @@ INSTALL(  FILES
 )
 
 SET( zypp_source_yum_SRCS
-  source/yum/YUMDownloader.cc
   source/yum/YUMAtomImpl.cc
   source/yum/YUMGroupImpl.cc
   source/yum/YUMMessageImpl.cc
@@ -790,11 +787,9 @@ SET( zypp_source_yum_SRCS
   source/yum/YUMProductImpl.cc
   source/yum/YUMScriptImpl.cc
   source/yum/YUMSourceImpl.cc
-  source/yum/YUMResourceType.cc
 )
 
 SET( zypp_source_yum_HEADERS
-  source/yum/YUMDownloader.h
   source/yum/YUMAtomImpl.h
   source/yum/YUMGroupImpl.h
   source/yum/YUMMessageImpl.h
@@ -804,7 +799,6 @@ SET( zypp_source_yum_HEADERS
   source/yum/YUMProductImpl.h
   source/yum/YUMScriptImpl.h
   source/yum/YUMSourceImpl.h
-  source/yum/YUMResourceType.h
 )
 
 INSTALL(  FILES
@@ -1060,25 +1054,25 @@ SET( zypp_cache_sqlite3x_HEADERS
 #  DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/cache/sqlite3x
 #)
 
-SET( zypp_repository_SRCS
+SET( zypp_repo_SRCS
   repo/dummy.cc
   repo/RepositoryImpl.cc
   repo/RepoException.cc
   repo/RepoType.cc
 )
 
-SET( zypp_repository_HEADERS
+SET( zypp_repo_HEADERS
   repo/RepositoryImpl.h
   repo/RepoException.h
   repo/RepoType.h
 )
 
 INSTALL( FILES
-  ${zypp_repository_HEADERS}
+  ${zypp_repo_HEADERS}
   DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/repo
 )
 
-SET( zypp_repository_cached_SRCS
+SET( zypp_repo_cached_SRCS
   repo/cached/RepoImpl.cc
   repo/cached/PackageImpl.cc
   repo/cached/PatchImpl.cc
@@ -1089,7 +1083,7 @@ SET( zypp_repository_cached_SRCS
   repo/cached/AtomImpl.cc
 )
 
-SET( zypp_repository_cached_HEADERS
+SET( zypp_repo_cached_HEADERS
   repo/cached/RepoImpl.h
   repo/cached/PackageImpl.h
   repo/cached/PatchImpl.h
@@ -1100,14 +1094,33 @@ SET( zypp_repository_cached_HEADERS
   repo/cached/AtomImpl.h
 )
 
-SET( zypp_repository_data_SRCS
+SET( zypp_repo_yum_SRCS
+  repo/yum/Downloader.cc
+  repo/yum/ResourceType.cc
+)
+
+SET( zypp_repo_yum_HEADERS
+  repo/yum/Downloader.h
+  repo/yum/ResourceType.h
+)
+
+SET( zypp_repo_susetags_SRCS
+  repo/susetags/Downloader.cc
+)
+
+SET( zypp_repo_susetags_HEADERS
+  repo/susetags/Downloader.h
+)
+
+
+SET( zypp_repo_data_SRCS
   repo/memory/PackageImpl.cc
   repo/memory/PatternImpl.cc
   repo/memory/ProductImpl.cc
   repo/memory/SrcPackageImpl.cc
 )
 
-SET( zypp_repository_data_HEADERS
+SET( zypp_repo_data_HEADERS
   repo/memory/PackageImpl.h
   repo/memory/PatternImpl.h
   repo/memory/ProductImpl.h
@@ -1135,9 +1148,11 @@ ${zypp_data_SRCS}
 ${zypp_media_proxyinfo_SRCS}
 ${zypp_media_SRCS}
 ${zypp_url_SRCS}
-${zypp_repository_SRCS}
-${zypp_repository_cached_SRCS}
-${zypp_repository_data_SRCS}
+${zypp_repo_SRCS}
+${zypp_repo_cached_SRCS}
+${zypp_repo_yum_SRCS}
+${zypp_repo_susetags_SRCS}
+${zypp_repo_data_SRCS}
 ${zypp_target_store_xml_SRCS}
 ${zypp_target_store_SRCS}
 ${zypp_target_rpm_SRCS}
@@ -1179,7 +1194,7 @@ ${zypp_parser_HEADERS}
 ${zypp_HEADERS}
 ${zypp_zypp_detail_HEADERS}
 ${zypp_thread_HEADERS}
-${zypp_repository_HEADERS}
+${zypp_repo_HEADERS}
 ${zypp_source_susetags_HEADERS}
 ${zypp_target_modalias_HEADERS}
 ${zypp_target_HEADERS}

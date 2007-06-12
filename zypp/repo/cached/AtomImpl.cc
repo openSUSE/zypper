@@ -109,7 +109,7 @@ Source_Ref AtomImpl::source() const
   return Source_Ref::noSource;
 }
 
-unsigned AtomImpl::sourceMediaNr() const
+unsigned AtomImpl::mediaNr() const
 {
   return 1;
 }

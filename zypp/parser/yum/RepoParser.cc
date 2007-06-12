@@ -6,7 +6,7 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file zypp2/parser/yum/RepoParser.cc
+/** \file zypp/parser/yum/RepoParser.cc
  * YUM repository metadata parser implementation. 
  */
 #include <iostream>
@@ -15,7 +15,7 @@
 #include "zypp/base/Logger.h"
 
 #include "zypp/base/UserRequestException.h"
-#include "zypp/source/yum/YUMResourceType.h"
+#include "zypp/repo/yum/ResourceType.h"
 
 #include "zypp/parser/yum/RepomdFileReader.h"
 #include "zypp/parser/yum/PrimaryFileReader.h"
@@ -33,7 +33,7 @@
 #define ZYPP_BASE_LOGGER_LOGGROUP "parser"
 
 using namespace std;
-using zypp::source::yum::YUMResourceType;
+using zypp::repo::yum::ResourceType;
 
 namespace zypp
 {
@@ -57,17 +57,17 @@ namespace zypp
    */
   struct RepoParserJob
   {
-    RepoParserJob(const Pathname & filename, const YUMResourceType & type)
+    RepoParserJob(const Pathname & filename, const ResourceType & type)
       : _filename(filename), _type(type) {}
 
     const Pathname & filename() const { return _filename; }
-    const YUMResourceType & type() const { return _type; }
+    const ResourceType & type() const { return _type; }
 
   private:
     /** File to be processed */
     Pathname _filename;
     /** Type of YUM file */
-    YUMResourceType _type;
+    ResourceType _type;
   };
 
 
@@ -104,7 +104,7 @@ namespace zypp
      * \param loc location of discovered data file
      * \param dtype YUM data type
      */
-    bool repomd_CB(const OnMediaLocation & loc, const YUMResourceType & dtype);
+    bool repomd_CB(const OnMediaLocation & loc, const ResourceType & dtype);
 
     /**
      * Callback for processing packages returned from \ref PrimaryFileReader.
@@ -199,7 +199,7 @@ namespace zypp
   // -------------------------------------------------------------------------
 
   bool RepoParser::Impl::repomd_CB(
-    const OnMediaLocation & loc, const YUMResourceType & dtype)
+    const OnMediaLocation & loc, const ResourceType & dtype)
   {
     DBG << "Adding " << dtype
         << " (" << loc.filename() << ") to RepoParser jobs " << endl;
@@ -232,7 +232,7 @@ namespace zypp
   {
     DBG << "Adding patch " << loc.filename() << " to RepoParser jobs " << endl;
 
-    _jobs.push_back(RepoParserJob(loc.filename(), YUMResourceType::PATCH));
+    _jobs.push_back(RepoParserJob(loc.filename(), ResourceType::PATCH));
 
     return true;
   }
@@ -339,7 +339,7 @@ namespace zypp
       switch(job.type().toEnum())
       {
         // parse primary.xml.gz
-        case YUMResourceType::PRIMARY_e:
+        case ResourceType::PRIMARY_e:
         {
           PrimaryFileReader(
             cache_dir + job.filename(),
@@ -348,7 +348,7 @@ namespace zypp
           break;
         }
 
-        case YUMResourceType::PATCHES_e:
+        case ResourceType::PATCHES_e:
         {
           PatchesFileReader(
             cache_dir + job.filename(),
@@ -359,7 +359,7 @@ namespace zypp
           break;
         }
 
-        case YUMResourceType::PATCH_e:
+        case ResourceType::PATCH_e:
         {
           PatchFileReader(
             cache_dir + job.filename(),
@@ -367,7 +367,7 @@ namespace zypp
           break;
         }
 
-        case YUMResourceType::OTHER_e:
+        case ResourceType::OTHER_e:
         {
           if (!_options.skipOther)
           {
@@ -381,7 +381,7 @@ namespace zypp
           break;
         }
 
-        case YUMResourceType::FILELISTS_e:
+        case ResourceType::FILELISTS_e:
         {
           if (!_options.skipFilelists)
           {
@@ -396,7 +396,7 @@ namespace zypp
           break;
         }
 
-        case YUMResourceType::PATTERNS_e:
+        case ResourceType::PATTERNS_e:
         {
           PatternFileReader(
             cache_dir + job.filename(),
@@ -404,7 +404,7 @@ namespace zypp
           break;
         }
 
-        case YUMResourceType::PRODUCTS_e:
+        case ResourceType::PRODUCTS_e:
         {
           ProductFileReader(
             cache_dir + job.filename(),

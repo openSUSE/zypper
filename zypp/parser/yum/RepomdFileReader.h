@@ -17,7 +17,7 @@
 #include "zypp/base/Function.h"
 
 #include "zypp/OnMediaLocation.h"
-#include "zypp/source/yum/YUMResourceType.h"
+#include "zypp/repo/yum/ResourceType.h"
 
 namespace zypp
 {
@@ -32,7 +32,7 @@ namespace zypp
    * other data about metadata files to be processed.
    *
    * After each package is read, a \ref OnMediaLocation
-   * and \ref source::yum::YUMResourceType is prepared and \ref _callback
+   * and \ref repo::yum::ResourceType is prepared and \ref _callback
    * is called with these two objects passed in.
    *
    * The \ref _callback is provided on construction.
@@ -53,7 +53,7 @@ namespace zypp
     */
     typedef function< bool(
         const OnMediaLocation &,
-        const source::yum::YUMResourceType &)>
+        const repo::yum::ResourceType &)>
       ProcessResource;
 
    /**

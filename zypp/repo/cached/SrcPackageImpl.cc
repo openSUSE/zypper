@@ -82,7 +82,7 @@ bool SrcPackageImpl::installOnly() const
   return _install_only;
 }
 
-unsigned SrcPackageImpl::sourceMediaNr() const
+unsigned SrcPackageImpl::mediaNr() const
 {
   return _media_nr;
 }

@@ -8,6 +8,7 @@
 #include "zypp/base/PtrTypes.h"
 #include "zypp/base/SafeBool.h"
 #include "zypp/ResStore.h"
+#include "zypp/RepoInfo.h"
 
 namespace zypp
 {
@@ -52,6 +53,8 @@ namespace zypp
     NumericId numericId() const;
     
     const ResStore & resolvables();
+    
+    const RepoInfo info() const;
     
   private:
     friend base::SafeBool<Repository>::operator bool_type() const;

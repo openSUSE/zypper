@@ -27,6 +27,7 @@ namespace zypp
     class ResObjectImplIf;
   }
   class Source_Ref;
+  class Repository;
   class ByteCount;
 
   ///////////////////////////////////////////////////////////////////
@@ -99,18 +100,29 @@ namespace zypp
     /**
      * Source providing this resolvable
      */
-    Source_Ref source() const;
+    /*ZYPP_DEPRECATED */ Source_Ref source() const;
 
+    /**
+     * Source providing this resolvable
+     */
+    Repository repository() const;
+    
     /**
      * Media number where the resolvable is located
      * 0 if no media access is required.
     */
-    unsigned sourceMediaNr() const;
+    unsigned mediaNr() const;
+    
+    /**
+     * Media number where the resolvable is located
+     * 0 if no media access is required.
+    */
+    /* ZYPP_DEPRECATED */ unsigned sourceMediaNr() const;
 
     /**
      * \deprecated Use sourceMediaNr 
      */
-    ZYPP_DEPRECATED unsigned mediaId() const
+    /* ZYPP_DEPRECATED */ unsigned mediaId() const
     { return sourceMediaNr(); }
 
     /**

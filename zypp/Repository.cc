@@ -46,5 +46,10 @@ namespace zypp
     return _pimpl->resolvables();
   }
   
+  const RepoInfo Repository::info() const
+  {
+    return _pimpl->info();
+  }
+  
 }
 

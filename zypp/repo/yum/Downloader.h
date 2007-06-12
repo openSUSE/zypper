@@ -16,11 +16,11 @@
 #include "zypp/OnMediaLocation.h"
 #include "zypp/MediaSetAccess.h"
 #include "zypp/parser/xml/Reader.h"
-#include "zypp/source/yum/YUMResourceType.h"
+#include "zypp/repo/yum/ResourceType.h"
 
 namespace zypp
 {
-  namespace source
+  namespace repo
   {
     namespace yum
     {
@@ -29,25 +29,25 @@ namespace zypp
       * to a local directory
       *
       * \code
-      * YUMDownloader yum(url, path);
+      * Downloader yum(url, path);
       * yum.download("localdir");
       * \endcode
       */
-      class YUMDownloader
+      class Downloader
       {
        public:
        /**
         * Create the download object for a repository
         * located in \a url with path \a path
         */
-        YUMDownloader( const Url &url, const Pathname &path );
+        Downloader( const Url &url, const Pathname &path );
        /**
         * starts the download to local directory \a dest_dir
         */
         void download( const Pathname &dest_dir );
         
        protected:
-        bool repomd_Callback( const OnMediaLocation &loc, const YUMResourceType &dtype );
+        bool repomd_Callback( const OnMediaLocation &loc, const ResourceType &dtype );
         bool patches_Callback( const OnMediaLocation &loc, const std::string &id );
        private:
         Url _url;

@@ -109,7 +109,7 @@ Source_Ref ProductImpl::source() const
   return Source_Ref::noSource;
 }
 
-unsigned ProductImpl::sourceMediaNr() const
+unsigned ProductImpl::mediaNr() const
 {
   return 1;
 }

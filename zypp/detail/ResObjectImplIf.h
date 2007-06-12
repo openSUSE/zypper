@@ -35,6 +35,7 @@ namespace zypp
 
   class Resolvable;
   class Source_Ref;
+  class Repository;
 
   ///////////////////////////////////////////////////////////////////
   namespace detail
@@ -83,6 +84,15 @@ namespace zypp
       /** */
       virtual ByteCount archivesize() const PURE_VIRTUAL;
 
+      /** Backlink to the source providing this. */
+      virtual Repository repository() const PURE_VIRTUAL;
+
+      /** Number of the source media that provides the data
+       *  required for installation. Zero, if no media access
+       *  is required.
+      */
+      virtual unsigned mediaNr() const PURE_VIRTUAL;
+      
       /** Backlink to the source providing this. */
       virtual Source_Ref source() const PURE_VIRTUAL;
 

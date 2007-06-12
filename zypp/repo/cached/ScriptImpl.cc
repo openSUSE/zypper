@@ -109,7 +109,7 @@ Source_Ref ScriptImpl::source() const
   return Source_Ref::noSource;
 }
 
-unsigned ScriptImpl::sourceMediaNr() const
+unsigned ScriptImpl::mediaNr() const
 {
   return 1;
 }

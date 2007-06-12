@@ -16,7 +16,7 @@
 
 #include "zypp/parser/yum/RepomdFileReader.h"
 #include "zypp/parser/yum/PatchesFileReader.h"
-#include "YUMDownloader.h"
+#include "Downloader.h"
 
 using namespace std;
 using namespace zypp::xml;
@@ -24,17 +24,17 @@ using namespace zypp::parser::yum;
 
 namespace zypp
 {
-namespace source
+namespace repo
 {
 namespace yum
 {
 
-YUMDownloader::YUMDownloader( const Url &url, const Pathname &path )
+Downloader::Downloader( const Url &url, const Pathname &path )
   : _url(url), _path(path), _media(url, path)
 {
 }
 
-bool YUMDownloader::patches_Callback( const OnMediaLocation &loc, const string &id )
+bool Downloader::patches_Callback( const OnMediaLocation &loc, const string &id )
 {
   MIL << id << " : " << loc << endl;
   _fetcher.enqueueDigested(loc);
@@ -42,12 +42,12 @@ bool YUMDownloader::patches_Callback( const OnMediaLocation &loc, const string &
 }
 
 
-bool YUMDownloader::repomd_Callback( const OnMediaLocation &loc, const YUMResourceType &dtype )
+bool Downloader::repomd_Callback( const OnMediaLocation &loc, const ResourceType &dtype )
 {
   MIL << dtype << " : " << loc << endl;
   
   // skip other
-  if ( dtype == YUMResourceType::OTHER )
+  if ( dtype == ResourceType::OTHER )
   {
     MIL << "Skipping other.xml" << endl;
     return true;
@@ -58,17 +58,17 @@ bool YUMDownloader::repomd_Callback( const OnMediaLocation &loc, const YUMResour
   // We got a patches file we need to read, to add patches listed
   // there, so we transfer what we have in the queue, and 
   // queue the patches in the patches callback
-  if ( dtype == YUMResourceType::PATCHES )
+  if ( dtype == ResourceType::PATCHES )
   {
     _fetcher.start( _dest_dir, _media);
     // now the patches.xml file must exists
-    PatchesFileReader( _dest_dir + loc.filename(), bind( &YUMDownloader::patches_Callback, this, _1, _2));
+    PatchesFileReader( _dest_dir + loc.filename(), bind( &Downloader::patches_Callback, this, _1, _2));
   }
     
   return true;
 }
 
-void YUMDownloader::download( const Pathname &dest_dir )
+void Downloader::download( const Pathname &dest_dir )
 {
   Pathname repomdpath =  "/repodata/repomd.xml";
   Pathname keypath =  "/repodata/repomd.xml.key";
@@ -99,7 +99,7 @@ void YUMDownloader::download( const Pathname &dest_dir )
   _fetcher.reset();
 
   Reader reader( dest_dir + "/repodata/repomd.xml" );
-  RepomdFileReader( dest_dir + "/repodata/repomd.xml", bind( &YUMDownloader::repomd_Callback, this, _1, _2));
+  RepomdFileReader( dest_dir + "/repodata/repomd.xml", bind( &Downloader::repomd_Callback, this, _1, _2));
 
   // ready, go!
   _fetcher.start( dest_dir, _media);
