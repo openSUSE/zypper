@@ -18,6 +18,7 @@ using namespace zypp::detail;
 
 using namespace std;
 using namespace zypp;
+using namespace zypp::repo;
 using namespace boost;
 
 extern ZYpp::Ptr God;
@@ -186,19 +187,63 @@ static void print_source_list(const std::list<SourceInfo> &sources )
   cout << tbl;
 }
 
+static void print_repo_list( const std::list<zypp::RepoInfo> &repos )
+{
+  Table tbl;
+  TableHeader th;
+  th << "#";
+  if (gSettings.is_rug_compatible) th << _("Status");
+  else th << _("Enabled") << _("Refresh");
+  th << _("Type") << _("Name") << "URI";
+  tbl << th;
+
+  int i = 1;
+  
+  for (std::list<RepoInfo>::const_iterator it = repos.begin();
+       it !=  repos.end(); ++it)
+  {
+    RepoInfo repo = *it;
+    TableRow tr (gSettings.is_rug_compatible ? 5 : 6);
+    tr << str::numstring (i);
+
+    // rug's status (active, pending => active, disabled <= enabled, disabled)
+    // this is probably the closest possible compatibility arrangement
+    if (gSettings.is_rug_compatible)
+    {
+      tr << (repo.enabled() ? _("Active") : _("Disabled"));
+    }
+    // zypper status (enabled, autorefresh)
+    else
+    {
+      tr << (repo.enabled() ? _("Yes") : _("No"));
+      tr << (repo.autorefresh() ? _("Yes") : _("No"));
+    }
+
+    tr << repo.type().asString();
+    tr << repo.alias();
+    
+    std::set<Url> urls;
+    urls = repo.urls();
+    for ( RepoInfo::urls_const_iterator uit = urls.begin();
+          uit != urls.end();
+          ++uit )
+    {
+      tr << (*uit).asString();
+    }
+    
+    tbl << tr;
+  }
+  cout << tbl;
+}
+
 void list_system_sources()
 {
-  std::list<SourceInfo> sources;
+  RepoManager manager;
+  std::list<zypp::RepoInfo> repos;
   
-  try
+try
   {
-#ifdef LIBZYPP_1xx
-    sources = SourceManager::sourceManager()->knownSourceInfos (gSettings.root_dir);
-#else
-    zypp::storage::PersistentStorage store;
-    store.init( gSettings.root_dir );
-    sources = store.storedSources();
-#endif
+    repos = manager.knownRepositories();
   }
   catch ( const Exception &e )
   {
@@ -206,7 +251,7 @@ void list_system_sources()
     exit(-1); 
   }
   
-  print_source_list(sources);
+  print_repo_list(repos);
 }
 
 bool parse_repo_file (const string& file, string& url, string& alias)
