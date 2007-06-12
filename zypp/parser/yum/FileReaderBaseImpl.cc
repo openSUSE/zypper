@@ -305,12 +305,6 @@ namespace zypp
         if (!_expect_rpm_entry)
           ZYPP_THROW(ParseException("rpm:entry found when not expected"));
 
-        Edition edition(
-          reader_r->getAttribute("ver").asString(),
-          reader_r->getAttribute("rel").asString(),
-          reader_r->getAttribute("epoch").asString()
-        );
-
         // read kind of resolvable this entry refers, default to Package
         string kind_str = reader_r->getAttribute("kind").asString();
         Resolvable::Kind kind;
@@ -335,15 +329,36 @@ namespace zypp
             << reader_r->getAttribute("name").asString()
             << " " << edition << " (" << kind << ")" << endl;
 */
-        // insert the dependency into the list
-        deps_r[pre ? Dep::PREREQUIRES : _dtype].insert(
-          zypp::capability::parse(
-            kind,
-            reader_r->getAttribute("name").asString(),
-            Rel(reader_r->getAttribute("flags").asString()),
-            edition
-          )
-        );
+
+        string version = reader_r->getAttribute("ver").asString();
+
+        if (version.empty())
+        {
+          // insert unversion dependency into the list
+          deps_r[pre ? Dep::PREREQUIRES : _dtype].insert(
+            zypp::capability::parse(
+              kind, reader_r->getAttribute("name").asString()
+            )
+          );
+        }
+        else
+        {
+          Edition edition(
+            version,
+            reader_r->getAttribute("rel").asString(),
+            reader_r->getAttribute("epoch").asString()
+          );
+
+          // insert versioned dependency into the list
+          deps_r[pre ? Dep::PREREQUIRES : _dtype].insert(
+            zypp::capability::parse(
+              kind,
+              reader_r->getAttribute("name").asString(),
+              Rel(reader_r->getAttribute("flags").asString()),
+              edition
+            )
+          );
+        }
 
         //! \todo check <rpm:entry name="/bin/sh" pre="1">
       }
