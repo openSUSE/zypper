@@ -55,7 +55,7 @@ namespace zypp
         
         cache::ResolvableQuery resolvableQuery();
         void createResolvables();
-        
+        void createPatchAndDeltas();
       protected:
         void read_capabilities( sqlite3x::sqlite3_connection &con, std::map<data::RecordId, std::pair<Resolvable::Kind, NVRAD> > &nvras );
         Pathname _dbdir;

@@ -20,7 +20,6 @@
 #include "zypp/repo/cached/RepoImpl.h"
 #include "zypp/repo/cached/PackageImpl.h"
 
-
 using namespace zypp::detail;
 using namespace zypp::cache;
 using namespace std;
@@ -109,7 +108,132 @@ void RepoImpl::createResolvables()
    
 }
 
+static CheckSum encoded_string_to_checksum( const std::string &encoded )
+{
+  vector<string> words;
+  if ( str::split( encoded, std::back_inserter(words), ":" ) != 2 )
+  {
+    return CheckSum();
+  }
+  else
+  {
+    return CheckSum( words[0], words[1] );
+  }
+}
 
+void RepoImpl::createPatchAndDeltas()
+{
+  try
+  { 
+    sqlite3_connection con((_dbdir + "zypp.db").asString().c_str());
+    con.executenonquery("PRAGMA cache_size=8000;");
+    con.executenonquery("BEGIN;");
+
+    string pp_query =
+   //     0       1          2         3        4            5
+    "SELECT id, media_nr, location, checksum, download_size, build_time "
+    "FROM patch_packages WHERE repository_id=:repository_id;";
+
+    string pp_bv_query =
+    "SELECT version, release, epoch "
+    "FROM patch_packages_baseversions WHERE patch_package_id = :patch_package_id";
+    
+    string delta_query =
+    //       0     1      2          3        4         5              6                      7                      8                 9                     10
+    "SELECT id, media_nr, location, checksum, download_size, build_time,  baseversion_version, baseversion_release, baseversion_epoch, baseversion_checksum, baseversion_build_time "
+    //    11
+    ", baseversion_sequence_info "
+    "FROM delta_packages WHERE repository_id=:repository_id;";
+    
+    // bind the master repo id to the query
+    sqlite3_command deltas_cmd( con, delta_query);
+    deltas_cmd.bind(":repository_id", _repository_id);
+    sqlite3_reader reader = deltas_cmd.executereader();
+    while ( reader.read() )
+    {
+      zypp::OnMediaLocation on_media;
+      on_media.medianr(reader.getint(1));
+      on_media.filename(reader.getstring(2));
+      
+      string checksum_string(reader.getstring(3));
+      CheckSum checksum = encoded_string_to_checksum(checksum_string);
+      if ( checksum.empty() )
+      {
+        ERR << "Wrong checksum for delta, skipping..." << endl;
+        continue;
+      }
+      on_media.checksum(checksum);
+      on_media.downloadsize(reader.getint(4));
+      
+      packagedelta::DeltaRpm::BaseVersion baseversion;
+      baseversion.edition( Edition(reader.getstring(6), reader.getstring(7), reader.getstring(8) ) );
+      
+      checksum_string = reader.getstring(9);
+      checksum = encoded_string_to_checksum(checksum_string);
+      if ( checksum.empty() )
+      {
+        ERR << "Wrong checksum for delta, skipping..." << endl;
+        continue;
+      }
+      baseversion.checksum(checksum);
+      baseversion.buildtime(reader.getint(10));
+      baseversion.sequenceinfo(reader.getstring(11));
+        
+      zypp::packagedelta::DeltaRpm delta;
+      delta.location( on_media );
+      delta.baseversion( baseversion );
+      delta.buildtime(reader.getint(5));
+      
+      //impl->addDeltaRpm(delta);
+    }
+    
+    // patch rpms
+    // bind the master package id to the query
+    // bind the master repo id to the query
+    sqlite3_command pp_cmd( con, pp_query);
+    sqlite3_command pp_bv_cmd( con, pp_bv_query);
+    pp_cmd.bind(":repository_id", _repository_id);
+    reader = pp_cmd.executereader();
+
+    while ( reader.read() )
+    {
+      long long patch_package_id = reader.getint64(0);
+      
+      zypp::OnMediaLocation on_media;
+      on_media.medianr( reader.getint(1) );
+      on_media.filename( reader.getstring(2) );
+      
+      string checksum_string(reader.getstring(3));
+      CheckSum checksum = encoded_string_to_checksum(checksum_string);
+      if ( checksum.empty() )
+      {
+        ERR << "Wrong checksum for delta, skipping..." << endl;
+        continue;
+      }
+      on_media.checksum(checksum);
+      on_media.downloadsize(reader.getint(4));
+      
+      zypp::packagedelta::PatchRpm patch;
+      patch.location( on_media );
+      patch.buildtime(reader.getint(5));
+      
+      pp_bv_cmd.bind( ":patch_package_id", patch_package_id );
+      
+      sqlite3_reader bv_reader = pp_bv_cmd.executereader();
+      while (bv_reader.read())
+      {
+        packagedelta::PatchRpm::BaseVersion baseversion = packagedelta::PatchRpm::BaseVersion( bv_reader.getstring(0) , bv_reader.getstring(1), bv_reader.getint(2) );
+        patch.baseversion(baseversion);
+      }
+        
+      //impl->addPatchRpm(patch);
+    }
+  }
+  catch(exception &ex) {
+      cerr << "Exception Occured: " << ex.what() << endl;
+  }
+}
+    
 ResolvableQuery RepoImpl::resolvableQuery()
 {
   return _rquery;
