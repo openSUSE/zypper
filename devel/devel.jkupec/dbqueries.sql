@@ -40,4 +40,15 @@ select dt.name "dtype", kt.name "kind", n.name "name", rt.name "rel", c.version 
     and c.refers_kind= kt.id
     and c.relation = rt.id
     and c.name_id = n.id
-    and resolvable_id = 2;
+    and c.resolvable_id = 2;
+
+-- print all file dependencies of resolvable with id = 2
+select dt.name "dtype", kt.name "kind", (dname.name || '/' || fname.name) "file"
+  from file_capabilities c, types dt, types kt, files f
+    left outer join file_names fname on fname.id = f.file_name_id
+    left outer join dir_names dname on dname.id = f.dir_name_id
+  where c.dependency_type = dt.id
+    and c.refers_kind= kt.id
+    and c.file_id = f.id
+    and c.resolvable_id = 2;
+
