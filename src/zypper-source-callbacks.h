@@ -37,17 +37,17 @@ namespace ZmartRecipients
         cout << "Determining " << url << " source type..." << endl;
       }
       
-      virtual void failedProbe( const zypp::Url &/*url*/, cbstring type )
+      virtual void failedProbe( const zypp::Url &/*url*/, const std::string & type )
       {
         cout << ".. not " << type << endl;
       }
       
-      virtual void successProbe( const zypp::Url &url, cbstring type )
+      virtual void successProbe( const zypp::Url &url, const std::string & type )
       {
         cout << url << " is type " << type << endl;
       }
       
-      virtual void finish(const zypp::Url &/*url*/, Error error, cbstring reason )
+      virtual void finish(const zypp::Url &/*url*/, Error error, const std::string & reason )
       {
         if ( error == INVALID )
         {
@@ -59,7 +59,7 @@ namespace ZmartRecipients
       virtual bool progress(const zypp::Url &/*url*/, int /*value*/)
       { return true; }
 
-      virtual Action problem( const zypp::Url &/*url*/, Error error, cbstring description )
+      virtual Action problem( const zypp::Url &/*url*/, Error error, const std::string & description )
       {
 	display_done ();
 	display_error (error, description);
@@ -103,7 +103,7 @@ struct DownloadResolvableReportReceiver : public zypp::callback::ReceiveReport<z
     return true;
   }
   
-  virtual void problemDeltaDownload( cbstring description )
+  virtual void problemDeltaDownload( const std::string & description )
   {
     std::cerr << description << std::endl;
   }
@@ -128,7 +128,7 @@ struct DownloadResolvableReportReceiver : public zypp::callback::ReceiveReport<z
     display_step( "Applying delta " /* + _delta.asString()*/, value );
   }
   
-  virtual void problemDeltaApply( cbstring description )
+  virtual void problemDeltaApply( const std::string & description )
   {
     std::cerr << description << std::endl;
   }
@@ -156,7 +156,7 @@ struct DownloadResolvableReportReceiver : public zypp::callback::ReceiveReport<z
     return true;
   }
   
-  virtual void problemPatchDownload( cbstring description )
+  virtual void problemPatchDownload( const std::string & description )
   {
     std::cerr << description << std::endl;
   }
@@ -167,7 +167,7 @@ struct DownloadResolvableReportReceiver : public zypp::callback::ReceiveReport<z
   }
   
   
-  virtual void start( zypp::Resolvable::constPtr resolvable_ptr, cbUrl url )
+  virtual void start( zypp::Resolvable::constPtr resolvable_ptr, const zypp::Url & url )
   {
     _resolvable_ptr =  resolvable_ptr;
     _url = url;
@@ -190,13 +190,13 @@ struct DownloadResolvableReportReceiver : public zypp::callback::ReceiveReport<z
     return true;
   }
 
-  virtual Action problem( zypp::Resolvable::constPtr resolvable_ptr, Error /*error*/, cbstring description )
+  virtual Action problem( zypp::Resolvable::constPtr resolvable_ptr, Error /*error*/, const std::string & description )
   {
     std::cerr << description << std::endl;
     return (Action) read_action_ari(ABORT);
   }
 
-  virtual void finish( zypp::Resolvable::constPtr /*resolvable_ptr*/, Error error, cbstring reason )
+  virtual void finish( zypp::Resolvable::constPtr /*resolvable_ptr*/, Error error, const std::string & reason )
   {
     display_done ();
     display_error (error, reason);
@@ -206,7 +206,7 @@ struct DownloadResolvableReportReceiver : public zypp::callback::ReceiveReport<z
 #ifndef LIBZYPP_1xx
 struct SourceReportReceiver  : public zypp::callback::ReceiveReport<zypp::source::SourceReport>
 {     
-  virtual void start( zypp::Source_Ref source, cbstring task )
+  virtual void start( zypp::Source_Ref source, const std::string & task )
   {
     _task = task;
     _source = source;
@@ -225,14 +225,14 @@ struct SourceReportReceiver  : public zypp::callback::ReceiveReport<zypp::source
     return true;
   }
   
-  virtual Action problem( zypp::Source_Ref /*source*/, Error error, cbstring description )
+  virtual Action problem( zypp::Source_Ref /*source*/, Error error, const std::string & description )
   {
     display_done ();
     display_error (error, description);
     return (Action) read_action_ari ();
   }
 
-  virtual void finish( zypp::Source_Ref /*source*/, cbstring task, Error error, cbstring reason )
+  virtual void finish( zypp::Source_Ref /*source*/, const std::string & task, Error error, const std::string & reason )
   {
     display_step(100);
     // many of these, avoid newline

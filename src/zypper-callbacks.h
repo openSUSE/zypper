@@ -13,15 +13,6 @@
 #include <string>
 #include <zypp/Resolvable.h>
 
-// trying to compile for 10.1 where the callbacks had different signatures
-#ifdef LIBZYPP_1xx
-typedef std::string cbstring;
-typedef zypp::Url cbUrl;
-#else
-typedef const std::string& cbstring;
-typedef const zypp::Url& cbUrl;
-#endif
-
 /*
 enum Error {
     NO_ERROR,

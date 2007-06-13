@@ -10,17 +10,17 @@ using namespace std;
 void display_progress (const string& s, int percent) {
   static AliveCursor cursor;
 
-  cerr_v << CLEARLN << cursor++ << " " << s << "[" << percent << "%]" << flush;
+  cout_v << CLEARLN << cursor++ << " " << s << "[" << percent << "%]" << flush;
 }
 
 void display_done () {
-  cerr_v << endl;
+  cout_v << endl;
 }
 
 //template<typename Action>
 //Action ...
 int read_action_ari (int default_action) {
-  cerr << _("(A)bort, (R)etry, (I)gnore?") << " "; // don't translate letters in parentheses!!
+  cout << _("(A)bort, (R)etry, (I)gnore?") << " "; // don't translate letters in parentheses!!
 
 	// non-interactive mode
 	if (gSettings.non_interactive) {

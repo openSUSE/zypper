@@ -111,12 +111,12 @@ struct ScanRpmDbReceive : public zypp::callback::ReceiveReport<zypp::target::rpm
     return true;
   }
 
-  virtual Action problem( zypp::target::rpm::ScanDBReport::Error error, cbstring description )
+  virtual Action problem( zypp::target::rpm::ScanDBReport::Error error, const std::string & description )
   {
     return zypp::target::rpm::ScanDBReport::problem( error, description );
   }
 
-  virtual void finish( Error error, cbstring reason )
+  virtual void finish( Error error, const std::string & reason )
   {
     display_done ();
     display_error (error, reason);
@@ -138,14 +138,14 @@ struct RemoveResolvableReportReceiver : public zypp::callback::ReceiveReport<zyp
     return true;
   }
 
-  virtual Action problem( zypp::Resolvable::constPtr resolvable, Error error, cbstring description )
+  virtual Action problem( zypp::Resolvable::constPtr resolvable, Error error, const std::string & description )
   {
     cerr << resolvable << endl;
     display_error (error, description);
     return (Action) read_action_ari ();
   }
 
-  virtual void finish( zypp::Resolvable::constPtr /*resolvable*/, Error error, cbstring reason )
+  virtual void finish( zypp::Resolvable::constPtr /*resolvable*/, Error error, const std::string & reason )
   {
     display_done ();
     display_error (error, reason);
@@ -182,7 +182,7 @@ struct InstallResolvableReportReceiver : public zypp::callback::ReceiveReport<zy
     return true;
   }
 
-  virtual Action problem( zypp::Resolvable::constPtr resolvable, Error error, cbstring description, RpmLevel level )
+  virtual Action problem( zypp::Resolvable::constPtr resolvable, Error error, const std::string & description, RpmLevel level )
   {
     cerr << resolvable << " " << description << std::endl;
     cerr << level;
@@ -194,7 +194,7 @@ struct InstallResolvableReportReceiver : public zypp::callback::ReceiveReport<zy
     return (Action) read_action_ari ();
   }
 
-  virtual void finish( zypp::Resolvable::constPtr /*resolvable*/, Error error, cbstring reason, RpmLevel level )
+  virtual void finish( zypp::Resolvable::constPtr /*resolvable*/, Error error, const std::string & reason, RpmLevel level )
   {
     display_done ();
     if (error != NO_ERROR) {
