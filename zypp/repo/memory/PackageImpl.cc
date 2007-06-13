@@ -28,25 +28,29 @@ namespace memory
 //	METHOD NAME : PackageImpl::PackageImpl
 //	METHOD TYPE : Ctor
 //
-PackageImpl::PackageImpl(data::Package_Ptr ptr)
-    : 
-      _summary(ptr->summary),
-      _description(ptr->description),
-      _insnotify(ptr->insnotify),
-      _delnotify(ptr->delnotify),
-      _license_to_confirm(ptr->licenseToConfirm),
-      _group(ptr->group),
-      _keywords(),
-      _authors(ptr->authors),
-      _size(ptr->installedSize),
-      _archivesize(ptr->repositoryLocation.fileSize),
-      _vendor(ptr->vendor),
-      _license(ptr->license),
-      _buildtime(ptr->buildTime),
-      _media_number(ptr->repositoryLocation.mediaNr),
-      _location(ptr->repositoryLocation.filePath),
-      _diskusage(),
-      _checksum(ptr->repositoryLocation.fileChecksum)
+PackageImpl::PackageImpl( repo::memory::RepoImpl::Ptr repo, data::Package_Ptr ptr)
+    : _repository(repo),
+                  
+    _summary(ptr->summary),
+    _description(ptr->description),
+    _insnotify(ptr->insnotify),
+    _delnotify(ptr->delnotify),
+    _license_to_confirm(ptr->licenseToConfirm),
+    _vendor(ptr->vendor),
+    _size(ptr->installedSize),
+    _archivesize(ptr->repositoryLocation.fileSize),
+    _install_only(false),
+    _buildtime(ptr->buildTime),
+    _media_nr(ptr->repositoryLocation.mediaNr),
+
+    _group(ptr->group),
+    _keywords(),
+    _authors(ptr->authors),
+    _license(ptr->license),
+    _buildtime(ptr->buildTime),
+    _location(ptr->repositoryLocation.filePath),
+    _diskusage(),
+    _checksum(ptr->repositoryLocation.fileChecksum)
 {
 }
 
@@ -58,39 +62,81 @@ PackageImpl::PackageImpl(data::Package_Ptr ptr)
 PackageImpl::~PackageImpl()
 {}
 
-TranslatedText PackageImpl::summary() const
+Repository
+PackageImpl::repository() const
+{
+  return _repository->selfRepository();
+}
+
+///////////////////////////////////////////////////
+// ResObject Attributes
+///////////////////////////////////////////////////
+
+TranslatedText PackageImpl::summary()
 {
   return _summary;
 }
 
-TranslatedText PackageImpl::description() const
+TranslatedText PackageImpl::description()
 {
   return _description;
 }
 
-TranslatedText PackageImpl::insnotify() const
+TranslatedText PackageImpl::insnotify()
 {
   return _insnotify;
 }
 
-TranslatedText PackageImpl::delnotify() const
+TranslatedText PackageImpl::delnotify()
 {
   return _delnotify;
 }
 
-TranslatedText PackageImpl::licenseToConfirm() const
+TranslatedText PackageImpl::licenseToConfirm()
 {
   return _license_to_confirm;
 }
 
+Vendor PackageImpl::vendor()
+{
+  return _vendor;
+}
+
+ByteCount PackageImpl::size()
+{
+  return _size;
+}
+
+ByteCount PackageImpl::archivesize()
+{
+  return _archivesize;
+}
+
+bool PackageImpl::installOnly()
+{
+  return _install_only;
+}
+
+Date PackageImpl::buildtime()
+{
+  return _buildtime;
+}
+
+Date PackageImpl::installtime()
+{
+  return _installtime;
+}
+
+unsigned PackageImpl::mediaNr()
+{
+  return _media_nr;
+}
+
+////////////////////////////////////////////////////
+
 Source_Ref PackageImpl::source() const
 {
   return Source_Ref::noSource;
-}
-
-unsigned PackageImpl::sourceMediaNr() const
-{
-  return _media_number;
 }
 
 CheckSum PackageImpl::checksum() const
@@ -183,20 +229,10 @@ Text PackageImpl::postun() const
   return Text();
 }
 
-ByteCount PackageImpl::size() const
-{
-  return _size;
-}
-
 ByteCount PackageImpl::sourcesize() const
 // FIXME
 {
   return 0;
-}
-
-ByteCount PackageImpl::archivesize() const
-{
-  return _archivesize;
 }
 
 DiskUsage PackageImpl::diskusage() const
@@ -212,21 +248,6 @@ list<string> PackageImpl::authors() const
 list<string> PackageImpl::filenames() const
 {
   return list<string>();
-}
-
-list<detail::PackageImplIf::DeltaRpm> PackageImpl::deltaRpms() const
-{
-  return detail::PackageImplIf::deltaRpms();
-}
-
-list<detail::PackageImplIf::PatchRpm> PackageImpl::patchRpms() const
-{
-  return detail::PackageImplIf::patchRpms();
-}
-
-bool PackageImpl::installOnly() const
-{
-  return false;
 }
 
 /////////////////////////////////////////////////////////////////

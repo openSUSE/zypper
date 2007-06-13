@@ -26,8 +26,11 @@ namespace memory
 //	METHOD NAME : PatternImpl::PatternImpl
 //	METHOD TYPE : Ctor
 //
-PatternImpl::PatternImpl(data::Pattern_Ptr ptr)
-{}
+PatternImpl::PatternImpl( repo::memory::RepoImpl::Ptr repo, data::Pattern_Ptr ptr)
+  : _repository(repo)
+{
+
+}
 
 ///////////////////////////////////////////////////////////////////
 //
@@ -37,37 +40,84 @@ PatternImpl::PatternImpl(data::Pattern_Ptr ptr)
 PatternImpl::~PatternImpl()
 {}
 
-Source_Ref PatternImpl::source() const
-{
-  return Source_Ref::noSource;
-}
-
-TranslatedText PatternImpl::summary() const
+TranslatedText PatternImpl::summary()
 {
   return _summary;
 }
 
-TranslatedText PatternImpl::description() const
+TranslatedText PatternImpl::description()
 {
   return _description;
 }
 
-TranslatedText PatternImpl::category() const
+TranslatedText PatternImpl::insnotify()
+{
+  return _insnotify;
+}
+
+TranslatedText PatternImpl::delnotify()
+{
+  return _delnotify;
+}
+
+TranslatedText PatternImpl::licenseToConfirm()
+{
+  return _license_to_confirm;
+}
+
+Vendor PatternImpl::vendor()
+{
+  return _vendor;
+}
+
+ByteCount PatternImpl::size()
+{
+  return _size;
+}
+
+ByteCount PatternImpl::archivesize()
+{
+  return _archivesize;
+}
+
+bool PatternImpl::installOnly()
+{
+  return _install_only;
+}
+
+Date PatternImpl::buildtime()
+{
+  return _buildtime;
+}
+
+Date PatternImpl::installtime()
+{
+  return _installtime;
+}
+
+unsigned PatternImpl::mediaNr()
+{
+  return _media_nr;
+}
+
+///////////////////////////////////////
+
+TranslatedText PatternImpl::category()
 {
   return _category;
 }
 
-bool PatternImpl::userVisible() const
+bool PatternImpl::userVisible()
 {
   return _visible;
 }
 
-Label PatternImpl::order() const
+Label PatternImpl::order()
 {
   return _order;
 }
 
-Pathname PatternImpl::icon() const
+Pathname PatternImpl::icon()
 {
   return _icon;
 }

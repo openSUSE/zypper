@@ -40,7 +40,7 @@ DROP INDEX IF EXISTS named_capabilities_name;
 CREATE TABLE db_info (
   version INTEGER
 );
-
+--INSERT INTO db_info (version) VALUES ('
 ------------------------------------------------
 -- Basic types like archs, attributes, languages
 ------------------------------------------------
@@ -168,7 +168,7 @@ CREATE TABLE delta_packages (
   , baseversion_checksum TEXT
   , baseversion_build_time INTEGER
   , baseversion_sequence_info TEXT
-
+  , repository_id INTEGER REFERENCES repositories(id)
 );
 
 CREATE TABLE patch_packages (
@@ -178,7 +178,7 @@ CREATE TABLE patch_packages (
   , checksum TEXT
   , download_size INTEGER
   , build_time INTEGER
-
+  , repository_id INTEGER REFERENCES repositories(id)
 );
 
 CREATE TABLE patch_packages_baseversions (
@@ -187,7 +187,6 @@ CREATE TABLE patch_packages_baseversions (
   , version TEXT
   , release TEXT
   , epoch INTEGER
-
 );
 
 ------------------------------------------------
