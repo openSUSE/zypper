@@ -44,65 +44,66 @@ ScriptImpl::repository() const
 // ResObject Attributes
 ///////////////////////////////////////////////////
 
-TranslatedText ScriptImpl::summary()
+TranslatedText ScriptImpl::summary() const
 {
   return _summary;
 }
 
-TranslatedText ScriptImpl::description()
+TranslatedText ScriptImpl::description() const
 {
   return _description;
 }
 
-TranslatedText ScriptImpl::insnotify()
+TranslatedText ScriptImpl::insnotify() const
 {
   return _insnotify;
 }
 
-TranslatedText ScriptImpl::delnotify()
+TranslatedText ScriptImpl::delnotify() const
 {
   return _delnotify;
 }
 
-TranslatedText ScriptImpl::licenseToConfirm()
+TranslatedText ScriptImpl::licenseToConfirm() const
 {
   return _license_to_confirm;
 }
 
-Vendor ScriptImpl::vendor()
+Vendor ScriptImpl::vendor() const
 {
   return _vendor;
 }
 
-ByteCount ScriptImpl::size()
+ByteCount ScriptImpl::size() const
 {
   return _size;
 }
 
-ByteCount ScriptImpl::archivesize()
+ByteCount ScriptImpl::archivesize() const
 {
   return _archivesize;
 }
 
-bool ScriptImpl::installOnly()
+bool ScriptImpl::installOnly() const
 {
   return _install_only;
 }
 
-Date ScriptImpl::buildtime()
+Date ScriptImpl::buildtime() const
 {
   return _buildtime;
 }
 
-Date ScriptImpl::installtime()
+Date ScriptImpl::installtime() const
 {
   return _installtime;
 }
 
-unsigned ScriptImpl::mediaNr()
+unsigned ScriptImpl::mediaNr() const
 {
   return _media_nr;
 }
+
 
 //////////////////////////////////////////
 // MESSAGE

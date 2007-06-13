@@ -44,65 +44,66 @@ AtomImpl::repository() const
 // ResObject Attributes
 ///////////////////////////////////////////////////
 
-TranslatedText AtomImpl::summary()
+TranslatedText AtomImpl::summary() const
 {
   return _summary;
 }
 
-TranslatedText AtomImpl::description()
+TranslatedText AtomImpl::description() const
 {
   return _description;
 }
 
-TranslatedText AtomImpl::insnotify()
+TranslatedText AtomImpl::insnotify() const
 {
   return _insnotify;
 }
 
-TranslatedText AtomImpl::delnotify()
+TranslatedText AtomImpl::delnotify() const
 {
   return _delnotify;
 }
 
-TranslatedText AtomImpl::licenseToConfirm()
+TranslatedText AtomImpl::licenseToConfirm() const
 {
   return _license_to_confirm;
 }
 
-Vendor AtomImpl::vendor()
+Vendor AtomImpl::vendor() const
 {
   return _vendor;
 }
 
-ByteCount AtomImpl::size()
+ByteCount AtomImpl::size() const
 {
   return _size;
 }
 
-ByteCount AtomImpl::archivesize()
+ByteCount AtomImpl::archivesize() const
 {
   return _archivesize;
 }
 
-bool AtomImpl::installOnly()
+bool AtomImpl::installOnly() const
 {
   return _install_only;
 }
 
-Date AtomImpl::buildtime()
+Date AtomImpl::buildtime() const
 {
   return _buildtime;
 }
 
-Date AtomImpl::installtime()
+Date AtomImpl::installtime() const
 {
   return _installtime;
 }
 
-unsigned AtomImpl::mediaNr()
+unsigned AtomImpl::mediaNr() const
 {
   return _media_nr;
 }
+
 
 //////////////////////////////////////////
 // DEPRECATED

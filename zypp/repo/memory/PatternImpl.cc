@@ -32,73 +32,73 @@ PatternImpl::PatternImpl( repo::memory::RepoImpl::Ptr repo, data::Pattern_Ptr pt
 
 }
 
-///////////////////////////////////////////////////////////////////
-//
-//	METHOD NAME : PatternImpl::~PatternImpl
-//	METHOD TYPE : Dtor
-//
 PatternImpl::~PatternImpl()
 {}
 
-TranslatedText PatternImpl::summary()
+///////////////////////////////////////////////////
+// ResObject Attributes
+///////////////////////////////////////////////////
+
+TranslatedText PatternImpl::summary() const
 {
   return _summary;
 }
 
-TranslatedText PatternImpl::description()
+TranslatedText PatternImpl::description() const
 {
   return _description;
 }
 
-TranslatedText PatternImpl::insnotify()
+TranslatedText PatternImpl::insnotify() const
 {
   return _insnotify;
 }
 
-TranslatedText PatternImpl::delnotify()
+TranslatedText PatternImpl::delnotify() const
 {
   return _delnotify;
 }
 
-TranslatedText PatternImpl::licenseToConfirm()
+TranslatedText PatternImpl::licenseToConfirm() const
 {
   return _license_to_confirm;
 }
 
-Vendor PatternImpl::vendor()
+Vendor PatternImpl::vendor() const
 {
   return _vendor;
 }
 
-ByteCount PatternImpl::size()
+ByteCount PatternImpl::size() const
 {
   return _size;
 }
 
-ByteCount PatternImpl::archivesize()
+ByteCount PatternImpl::archivesize() const
 {
   return _archivesize;
 }
 
-bool PatternImpl::installOnly()
+bool PatternImpl::installOnly() const
 {
   return _install_only;
 }
 
-Date PatternImpl::buildtime()
+Date PatternImpl::buildtime() const
 {
   return _buildtime;
 }
 
-Date PatternImpl::installtime()
+Date PatternImpl::installtime() const
 {
   return _installtime;
 }
 
-unsigned PatternImpl::mediaNr()
+unsigned PatternImpl::mediaNr() const
 {
   return _media_nr;
 }
+
 
 ///////////////////////////////////////
 

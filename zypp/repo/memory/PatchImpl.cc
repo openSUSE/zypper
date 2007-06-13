@@ -43,65 +43,66 @@ PatchImpl::repository() const
 // ResObject Attributes
 ///////////////////////////////////////////////////
 
-TranslatedText PatchImpl::summary()
+TranslatedText PatchImpl::summary() const
 {
   return _summary;
 }
 
-TranslatedText PatchImpl::description()
+TranslatedText PatchImpl::description() const
 {
   return _description;
 }
 
-TranslatedText PatchImpl::insnotify()
+TranslatedText PatchImpl::insnotify() const
 {
   return _insnotify;
 }
 
-TranslatedText PatchImpl::delnotify()
+TranslatedText PatchImpl::delnotify() const
 {
   return _delnotify;
 }
 
-TranslatedText PatchImpl::licenseToConfirm()
+TranslatedText PatchImpl::licenseToConfirm() const
 {
   return _license_to_confirm;
 }
 
-Vendor PatchImpl::vendor()
+Vendor PatchImpl::vendor() const
 {
   return _vendor;
 }
 
-ByteCount PatchImpl::size()
+ByteCount PatchImpl::size() const
 {
   return _size;
 }
 
-ByteCount PatchImpl::archivesize()
+ByteCount PatchImpl::archivesize() const
 {
   return _archivesize;
 }
 
-bool PatchImpl::installOnly()
+bool PatchImpl::installOnly() const
 {
   return _install_only;
 }
 
-Date PatchImpl::buildtime()
+Date PatchImpl::buildtime() const
 {
   return _buildtime;
 }
 
-Date PatchImpl::installtime()
+Date PatchImpl::installtime() const
 {
   return _installtime;
 }
 
-unsigned PatchImpl::mediaNr()
+unsigned PatchImpl::mediaNr() const
 {
   return _media_nr;
 }
+
 
 //////////////////////////////////////////
 // PATCH

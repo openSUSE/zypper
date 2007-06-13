@@ -44,66 +44,66 @@ MessageImpl::repository() const
 // ResObject Attributes
 ///////////////////////////////////////////////////
 
-TranslatedText MessageImpl::summary()
+TranslatedText MessageImpl::summary() const
 {
   return _summary;
 }
 
-TranslatedText MessageImpl::description()
+TranslatedText MessageImpl::description() const
 {
   return _description;
 }
 
-TranslatedText MessageImpl::insnotify()
+TranslatedText MessageImpl::insnotify() const
 {
   return _insnotify;
 }
 
-TranslatedText MessageImpl::delnotify()
+TranslatedText MessageImpl::delnotify() const
 {
   return _delnotify;
 }
 
-TranslatedText MessageImpl::licenseToConfirm()
+TranslatedText MessageImpl::licenseToConfirm() const
 {
   return _license_to_confirm;
 }
 
-Vendor MessageImpl::vendor()
+Vendor MessageImpl::vendor() const
 {
   return _vendor;
 }
 
-ByteCount MessageImpl::size()
+ByteCount MessageImpl::size() const
 {
   return _size;
 }
 
-ByteCount MessageImpl::archivesize()
+ByteCount MessageImpl::archivesize() const
 {
   return _archivesize;
 }
 
-bool MessageImpl::installOnly()
+bool MessageImpl::installOnly() const
 {
   return _install_only;
 }
 
-Date MessageImpl::buildtime()
+Date MessageImpl::buildtime() const
 {
   return _buildtime;
 }
 
-Date MessageImpl::installtime()
+Date MessageImpl::installtime() const
 {
   return _installtime;
 }
 
-unsigned MessageImpl::mediaNr()
+unsigned MessageImpl::mediaNr() const
 {
   return _media_nr;
 }
-}
+
 
 //////////////////////////////////////////
 // DEPRECATED

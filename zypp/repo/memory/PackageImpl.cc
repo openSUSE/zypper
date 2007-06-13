@@ -47,7 +47,6 @@ PackageImpl::PackageImpl( repo::memory::RepoImpl::Ptr repo, data::Package_Ptr pt
     _keywords(),
     _authors(ptr->authors),
     _license(ptr->license),
-    _buildtime(ptr->buildTime),
     _location(ptr->repositoryLocation.filePath),
     _diskusage(),
     _checksum(ptr->repositoryLocation.fileChecksum)
@@ -72,76 +71,49 @@ PackageImpl::repository() const
 // ResObject Attributes
 ///////////////////////////////////////////////////
 
-TranslatedText PackageImpl::summary()
+TranslatedText PackageImpl::summary() const
 {
   return _summary;
 }
 
-TranslatedText PackageImpl::description()
+TranslatedText PackageImpl::description() const
 {
   return _description;
 }
 
-TranslatedText PackageImpl::insnotify()
+TranslatedText PackageImpl::insnotify() const
 {
   return _insnotify;
 }
 
-TranslatedText PackageImpl::delnotify()
+TranslatedText PackageImpl::delnotify() const
 {
   return _delnotify;
 }
 
-TranslatedText PackageImpl::licenseToConfirm()
+TranslatedText PackageImpl::licenseToConfirm() const
 {
   return _license_to_confirm;
 }
 
-Vendor PackageImpl::vendor()
+Vendor PackageImpl::vendor() const
 {
   return _vendor;
 }
 
-ByteCount PackageImpl::size()
+ByteCount PackageImpl::size() const
 {
   return _size;
 }
 
-ByteCount PackageImpl::archivesize()
+ByteCount PackageImpl::archivesize() const
 {
   return _archivesize;
 }
 
-bool PackageImpl::installOnly()
+bool PackageImpl::installOnly() const
 {
   return _install_only;
-}
-
-Date PackageImpl::buildtime()
-{
-  return _buildtime;
-}
-
-Date PackageImpl::installtime()
-{
-  return _installtime;
-}
-
-unsigned PackageImpl::mediaNr()
-{
-  return _media_nr;
-}
-
-////////////////////////////////////////////////////
-
-Source_Ref PackageImpl::source() const
-{
-  return Source_Ref::noSource;
-}
-
-CheckSum PackageImpl::checksum() const
-{
-  return _checksum;
 }
 
 Date PackageImpl::buildtime() const
@@ -149,22 +121,30 @@ Date PackageImpl::buildtime() const
   return _buildtime;
 }
 
+Date PackageImpl::installtime() const
+{
+  return _installtime;
+}
+
+unsigned PackageImpl::mediaNr() const
+{
+  return _media_nr;
+}
+
+////////////////////////////////////////////////////
+
+
+CheckSum PackageImpl::checksum() const
+{
+  return _checksum;
+}
+
 string PackageImpl::buildhost() const
 {
   return string();
 }
 
-Date PackageImpl::installtime() const
-{
-  return Date();
-}				// it was never installed
-
 string PackageImpl::distribution() const
-{
-  return string();
-}
-
-Vendor PackageImpl::vendor() const
 {
   return string();
 }
