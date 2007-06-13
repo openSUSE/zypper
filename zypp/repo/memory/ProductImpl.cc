@@ -6,9 +6,7 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file	zypp/repo/memory/ProductImpl.cc
- *
-*/
+
 #include "zypp/repo/memory/ProductImpl.h"
 
 using namespace std;
@@ -16,96 +14,155 @@ using namespace std;
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
-  ///////////////////////////////////////////////////////////////////
-  namespace repo
-  { /////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////
-    namespace memory
-    { /////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////
+namespace repo
+{ /////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////
+namespace memory
+{ /////////////////////////////////////////////////////////////////
 
-      ///////////////////////////////////////////////////////////////////
-      //
-      //	METHOD NAME : ProductImpl::ProductImpl
-      //	METHOD TYPE : Ctor
-      //
-      ProductImpl::ProductImpl(data::Product_Ptr ptr)
-      {}
+ProductImpl::ProductImpl( memory::RepoImpl::Ptr repo, data::Product_Ptr ptr)
+  : _repository(repo),
+  _summary(ptr->summary),
+  _description(ptr->description),
+  _insnotify(ptr->insnotify),
+  _delnotify(ptr->delnotify),
+  _license_to_confirm(ptr->licenseToConfirm),
+  _vendor(ptr->vendor),
+  _size(ptr->installedSize),
+  //_archivesize(ptr->repositoryLocation.fileSize),
+  _install_only(false),
+  _buildtime(ptr->buildTime)
+  //_media_nr(ptr->repositoryLocation.mediaNr)
+  // TODO products attrs
+{}
 
-      ///////////////////////////////////////////////////////////////////
-      //
-      //	METHOD NAME : ProductImpl::~ProductImpl
-      //	METHOD TYPE : Dtor
-      //
-      ProductImpl::~ProductImpl()
-      {}
+ProductImpl::~ProductImpl()
+{}
 
+Repository
+ProductImpl::repository() const
+{
+  return _repository->selfRepository();
+}
 
-      std::string ProductImpl::category() const
-      {
-        return _category;
-      }
+///////////////////////////////////////////////////
+// ResObject Attributes
+///////////////////////////////////////////////////
 
-      Label ProductImpl::vendor() const
-      {
-        return _vendor;
-      }
+TranslatedText ProductImpl::summary() const
+{
+  return _summary;
+}
 
-      TranslatedText ProductImpl::summary() const
-      {
-        return _summary;
-      }
+TranslatedText ProductImpl::description() const
+{
+  return _description;
+}
 
-      Source_Ref ProductImpl::source() const
-      {
-        return Source_Ref::noSource;
-      }
+TranslatedText ProductImpl::insnotify() const
+{
+  return _insnotify;
+}
 
-      Url ProductImpl::releaseNotesUrl() const
-      {
-        return _release_notes_url;
-      }
+TranslatedText ProductImpl::delnotify() const
+{
+  return _delnotify;
+}
 
-      std::list<Url> ProductImpl::updateUrls() const
-      {
-        return _update_urls;
-      }
+TranslatedText ProductImpl::licenseToConfirm() const
+{
+  return _license_to_confirm;
+}
 
-      std::list<Url> ProductImpl::extraUrls() const
-      {
-        return _extra_urls;
-      }
-      
-      std::list<Url> ProductImpl::optionalUrls() const
-      {
-        return _optional_urls;
-      }
-      
-      std::list<std::string> ProductImpl::flags() const
-      {
-        return _flags;
-      }
+Vendor ProductImpl::vendor() const
+{
+  return _vendor;
+}
 
-      TranslatedText ProductImpl::shortName() const
-      {
-        return TranslatedText(_shortlabel);
-      }
+ByteCount ProductImpl::size() const
+{
+  return _size;
+}
 
-      std::string ProductImpl::distributionName() const
-      {
-        return _dist_name;
-      }
+ByteCount ProductImpl::archivesize() const
+{
+  return _archivesize;
+}
 
-      Edition ProductImpl::distributionEdition() const
-      {
-        return _dist_version;
-      }
+bool ProductImpl::installOnly() const
+{
+  return _install_only;
+}
 
-      /////////////////////////////////////////////////////////////////
-    } // namespace memory
-    ///////////////////////////////////////////////////////////////////
-    /////////////////////////////////////////////////////////////////
-  } // namespace repository
-  ///////////////////////////////////////////////////////////////////
-  /////////////////////////////////////////////////////////////////
+Date ProductImpl::buildtime() const
+{
+  return _buildtime;
+}
+
+Date ProductImpl::installtime() const
+{
+  return _installtime;
+}
+
+unsigned ProductImpl::mediaNr() const
+{
+  return _media_nr;
+}
+
+///////////////////////////////////////////
+
+std::string ProductImpl::category() const
+{
+  return _category;
+}
+
+Url ProductImpl::releaseNotesUrl() const
+{
+  return _release_notes_url;
+}
+
+std::list<Url> ProductImpl::updateUrls() const
+{
+  return _update_urls;
+}
+
+std::list<Url> ProductImpl::extraUrls() const
+{
+  return _extra_urls;
+}
+
+std::list<Url> ProductImpl::optionalUrls() const
+{
+  return _optional_urls;
+}
+
+std::list<std::string> ProductImpl::flags() const
+{
+  return _flags;
+}
+
+TranslatedText ProductImpl::shortName() const
+{
+  return TranslatedText(_shortlabel);
+}
+
+std::string ProductImpl::distributionName() const
+{
+  return _dist_name;
+}
+
+Edition ProductImpl::distributionEdition() const
+{
+  return _dist_version;
+}
+
+/////////////////////////////////////////////////////////////////
+} // namespace memory
+///////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////
+} // namespace repository
+///////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////

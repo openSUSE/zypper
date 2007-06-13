@@ -29,9 +29,8 @@ namespace zypp { namespace repo { namespace memory {
 
 /** Default ctor
 */
-AtomImpl::AtomImpl (const data::RecordId &id, memory::RepoImpl::Ptr repository_r)
-    : _repository (repository_r),
-      _id(id)
+AtomImpl::AtomImpl ( memory::RepoImpl::Ptr repo, data::Atom_Ptr ptr)
+    : _repository (repo)
 {}
 
 Repository
@@ -102,21 +101,6 @@ Date AtomImpl::installtime() const
 unsigned AtomImpl::mediaNr() const
 {
   return _media_nr;
-}
-
-
-//////////////////////////////////////////
-// DEPRECATED
-//////////////////////////////////////////
-
-Source_Ref AtomImpl::source() const
-{
-  return Source_Ref::noSource;
-}
-
-unsigned AtomImpl::mediaNr() const
-{
-  return 1;
 }
 
 /////////////////////////////////////////////////////////////////

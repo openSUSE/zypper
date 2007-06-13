@@ -13,7 +13,6 @@
 #define ZYPP_SOURCE_MEMORYSRCPackageIMPL_H
 
 #include "zypp/detail/SrcPackageImplIf.h"
-#include "zypp/Source.h"
 #include "zypp/DiskUsage.h"
 #include "zypp/data/ResolvableData.h"
 
@@ -50,9 +49,7 @@ private:
         ByteCount _archivesize;
         unsigned _media_number;
         Pathname _location;
-        DiskUsage _diskusage;
-public:
-        Source_Ref source() const;
+        DiskUsage _diskusage;      
       };
       ///////////////////////////////////////////////////////////////////
       /////////////////////////////////////////////////////////////////

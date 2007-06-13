@@ -21,6 +21,8 @@
 #include "zypp/data/ResolvableData.h"
 #include "zypp/TranslatedText.h"
 
+#include "zypp/repo/memory/RepoImpl.h"
+
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
@@ -31,64 +33,68 @@ namespace zypp
     namespace memory
     { /////////////////////////////////////////////////////////////////
 
-      ///////////////////////////////////////////////////////////////////
-      //
-      //	CLASS NAME : ProductImpl
-      //
-      /**
-      */
       struct ProductImpl : public zypp::detail::ProductImplIf
       {
       public:
-        ProductImpl(data::Product_Ptr ptr);
+        ProductImpl( memory::RepoImpl::Ptr repo, data::Product_Ptr ptr);
         virtual ~ProductImpl();
 
-        virtual std::string category() const;
-        virtual Label vendor() const;
+        virtual Repository repository() const;
+
         virtual TranslatedText summary() const;
-        virtual Source_Ref source() const;
+        virtual TranslatedText description() const;
+        virtual TranslatedText insnotify() const;
+        virtual TranslatedText delnotify() const;
+        virtual TranslatedText licenseToConfirm() const;
+        virtual Vendor vendor() const;
+        virtual ByteCount size() const;
+        virtual ByteCount archivesize() const;
+        virtual bool installOnly() const;
+        virtual Date buildtime() const;
+        virtual Date installtime() const;
+        virtual unsigned mediaNr() const;
+
+        virtual std::string category() const;
         virtual Url releaseNotesUrl() const;
-        
         virtual std::list<Url> updateUrls() const;
         virtual std::list<Url> extraUrls() const;
         virtual std::list<Url> optionalUrls() const;
-        
         virtual std::list<std::string> flags() const;
         virtual TranslatedText shortName() const;
         virtual std::string distributionName() const;
         virtual Edition distributionEdition() const;
 
-        std::string _category;
+        repo::memory::RepoImpl::Ptr _repository;
 
-        std::string _name;
-        std::string _version;
+        //ResObject
+        TranslatedText _summary;
+        TranslatedText _description;
+        TranslatedText _insnotify;
+        TranslatedText _delnotify;
+        TranslatedText _license_to_confirm;
+        Vendor _vendor;
+        ByteCount _size;
+        ByteCount _archivesize;
+        bool _install_only;
+        Date _buildtime;
+        Date _installtime;
+        unsigned _media_nr;
+
+        std::string _category;
         std::string _dist_name;
         Edition     _dist_version;
-
         std::string _base_product;
         std::string _base_version;
         std::string _you_type;
         std::string _shortlabel;
-        std::string _vendor;
         Url _release_notes_url;
         
         std::list<Url> _update_urls;
         std::list<Url> _extra_urls;
         std::list<Url> _optional_urls;
         
-        std::map< std::string, std::list<std::string> > _arch;	// map of 'arch : "arch1 arch2 arch3"', arch1 being 'best', arch3 being 'noarch' (ususally)
         std::string _default_base;
-        Dependencies _deps;
-        std::list<std::string> _languages;
-        TranslatedText _summary;
-        std::string _description_dir;
-        std::string _data_dir;
         std::list<std::string> _flags;
-        std::string _language;
-        std::string _timezone;
-
-        std::map<std::string, CheckSum> _descr_files_checksums;
-        std::map<std::string, CheckSum> _signing_keys;
       };
       ///////////////////////////////////////////////////////////////////
 

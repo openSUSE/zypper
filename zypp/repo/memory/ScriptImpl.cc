@@ -31,7 +31,18 @@ namespace zypp { namespace repo { namespace memory {
 */
 ScriptImpl::ScriptImpl (const data::RecordId &id, memory::RepoImpl::Ptr repository_r)
     : _repository (repository_r),
-      _id(id)
+    _summary(ptr->summary),
+    _description(ptr->description),
+    _insnotify(ptr->insnotify),
+    _delnotify(ptr->delnotify),
+    _license_to_confirm(ptr->licenseToConfirm),
+    _vendor(ptr->vendor),
+    _size(ptr->installedSize),
+    _archivesize(ptr->repositoryLocation.fileSize),
+    _install_only(false),
+    _buildtime(ptr->buildTime),
+    _media_nr(ptr->repositoryLocation.mediaNr)
+    //TODO script attrs
 {}
 
 Repository

@@ -1115,19 +1115,21 @@ SET( zypp_repo_susetags_HEADERS
 
 SET( zypp_repo_data_SRCS
   repo/memory/PackageImpl.cc
-# repo/memory/PatternImpl.cc
-#  repo/memory/ProductImpl.cc
-#  repo/memory/PatchImpl.cc
-#  repo/memory/RepoImpl.cc
+  repo/memory/PatternImpl.cc
+  repo/memory/ProductImpl.cc
+  repo/memory/PatchImpl.cc
+  repo/memory/RepoImpl.cc
+  repo/memory/AtomImpl.cc
   repo/memory/SrcPackageImpl.cc
 )
 
 SET( zypp_repo_data_HEADERS
   repo/memory/PackageImpl.h
-#  repo/memory/PatternImpl.h
-#  repo/memory/ProductImpl.h
-#  repo/memory/PatchImpl.h
-#  repo/memory/RepoImpl.h
+  repo/memory/PatternImpl.h
+  repo/memory/ProductImpl.h
+  repo/memory/PatchImpl.h
+  repo/memory/RepoImpl.h
+  repo/memory/AtomImpl.h
   repo/memory/SrcPackageImpl.h
 )
 

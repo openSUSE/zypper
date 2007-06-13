@@ -30,7 +30,7 @@ namespace memory
 //
 PackageImpl::PackageImpl( repo::memory::RepoImpl::Ptr repo, data::Package_Ptr ptr)
     : _repository(repo),
-                  
+
     _summary(ptr->summary),
     _description(ptr->description),
     _insnotify(ptr->insnotify),

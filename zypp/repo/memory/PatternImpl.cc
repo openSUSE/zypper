@@ -6,9 +6,7 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file	zypp/repository/memory/PatternImpl.cc
- *
-*/
+
 #include "zypp/repo/memory/PatternImpl.h"
 
 using namespace std;
@@ -21,19 +19,34 @@ namespace repo
 { /////////////////////////////////////////////////////////////////
 namespace memory
 {
-///////////////////////////////////////////////////////////////////
-//
-//	METHOD NAME : PatternImpl::PatternImpl
-//	METHOD TYPE : Ctor
-//
+
 PatternImpl::PatternImpl( repo::memory::RepoImpl::Ptr repo, data::Pattern_Ptr ptr)
-  : _repository(repo)
+  : _repository(repo),
+  _summary(ptr->summary),
+  _description(ptr->description),
+  _insnotify(ptr->insnotify),
+  _delnotify(ptr->delnotify),
+  _license_to_confirm(ptr->licenseToConfirm),
+  _vendor(ptr->vendor),
+  _size(ptr->installedSize),
+  //_archivesize(ptr->repositoryLocation.fileSize),
+  _install_only(false),
+  _buildtime(ptr->buildTime)
+  //_media_nr(ptr->repositoryLocation.mediaNr)
+  //TODO pattern attrs
 {
 
 }
 
 PatternImpl::~PatternImpl()
 {}
+
+Repository
+PatternImpl::repository() const
+{
+  return _repository->selfRepository();
+}
+
 
 ///////////////////////////////////////////////////
 // ResObject Attributes
@@ -102,22 +115,22 @@ unsigned PatternImpl::mediaNr() const
 
 ///////////////////////////////////////
 
-TranslatedText PatternImpl::category()
+TranslatedText PatternImpl::category() const
 {
   return _category;
 }
 
-bool PatternImpl::userVisible()
+bool PatternImpl::userVisible() const
 {
   return _visible;
 }
 
-Label PatternImpl::order()
+Label PatternImpl::order() const
 {
   return _order;
 }
 
-Pathname PatternImpl::icon()
+Pathname PatternImpl::icon() const
 {
   return _icon;
 }

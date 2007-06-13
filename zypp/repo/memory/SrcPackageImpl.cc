@@ -55,11 +55,6 @@ DiskUsage SrcPackageImpl::diskusage() const
   return _diskusage;
 }
 
-Source_Ref SrcPackageImpl::source() const
-{
-  return Source_Ref::noSource;
-}
-
 unsigned SrcPackageImpl::sourceMediaNr() const
 {
   return _media_number;

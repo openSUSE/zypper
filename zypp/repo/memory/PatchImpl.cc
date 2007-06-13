@@ -13,7 +13,6 @@
 #include "zypp/repo/RepositoryImpl.h"
 #include "PatchImpl.h"
 
-
 using namespace std;
 using namespace zypp::detail;
 using namespace::zypp::repo;
@@ -21,16 +20,26 @@ using namespace::zypp::repo;
 ///////////////////////////////////////////////////////////////////
 namespace zypp { namespace repo { namespace memory {
 
-///////////////////////////////////////////////////////////////////
-//
-//        CLASS NAME : PatchImpl
-//
-///////////////////////////////////////////////////////////////////
-
-/** Default ctor
-*/
 PatchImpl::PatchImpl ( repo::memory::RepoImpl::Ptr repo, data::Patch_Ptr ptr)
-  : _repository(repo)
+  : _repository(repo),
+
+  _summary(ptr->summary),
+  _description(ptr->description),
+  _insnotify(ptr->insnotify),
+  _delnotify(ptr->delnotify),
+  _license_to_confirm(ptr->licenseToConfirm),
+  _vendor(ptr->vendor),
+  _size(ptr->installedSize),
+  //_archivesize(ptr->repositoryLocation.fileSize),
+  _install_only(false),
+  _buildtime(ptr->buildTime),
+  //_media_nr(ptr->repositoryLocation.mediaNr),
+
+  _patch_id(ptr->id),
+  _timestamp(ptr->timestamp),
+  _category(ptr->category),
+  _reboot_needed(ptr->rebootNeeded),
+  _affects_pkg_manager(ptr->affectsPkgManager)
 {}
 
 Repository
@@ -103,19 +112,18 @@ unsigned PatchImpl::mediaNr() const
   return _media_nr;
 }
 
-
 //////////////////////////////////////////
 // PATCH
 /////////////////////////////////////////
 
 std::string PatchImpl::id() const
 {
-  return _repository->resolvableQuery().queryStringAttribute( _id, "Patch", "id" );
+  return _patch_id;
 }
 
 Date PatchImpl::timestamp() const
 {
-  return _patch_id;
+  return _timestamp;
 }
 
 std::string PatchImpl::category() const
@@ -125,7 +133,7 @@ std::string PatchImpl::category() const
 
 bool PatchImpl::reboot_needed() const
 {
-  return _reboot_nedeed;
+  return _reboot_needed;
 }
 
 bool PatchImpl::affects_pkg_manager() const

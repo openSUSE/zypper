@@ -29,7 +29,7 @@ namespace memory
   {
   public:
 
-    AtomImpl( const data::RecordId &id, repo::memory::RepoImpl::Ptr repository_r );
+    AtomImpl( memory::RepoImpl::Ptr repo, data::Atom_Ptr ptr);
     
     virtual TranslatedText summary() const;
     virtual TranslatedText description() const;
@@ -43,7 +43,6 @@ namespace memory
     virtual Date buildtime() const;
     virtual Date installtime() const;
     
-    virtual Source_Ref source() const;
     virtual unsigned mediaNr() const;
 
     virtual Repository repository() const;

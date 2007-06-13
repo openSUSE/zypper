@@ -58,7 +58,7 @@ namespace zypp
         virtual std::string packager() const;
         virtual PackageGroup group() const;
         virtual Keywords keywords() const;
-	virtual Changelog changelog() const;
+        virtual Changelog changelog() const;
         virtual Pathname location() const;
         virtual std::string url() const;
         virtual std::string os() const;
@@ -88,13 +88,13 @@ namespace zypp
         unsigned _media_nr;
         
         PackageGroup _group;
-	Keywords _keywords;
+        Keywords _keywords;
         std::list<std::string> _authors;
         Label _license;
         Pathname _location;
         DiskUsage _diskusage;
         CheckSum _checksum;
-private:
+        private:
       };
       ///////////////////////////////////////////////////////////////////
       /////////////////////////////////////////////////////////////////

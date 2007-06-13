@@ -14,7 +14,8 @@
 
 #include "zypp/detail/PatternImplIf.h"
 #include "zypp/data/ResolvableData.h"
-#include "zypp/Source.h"
+#include "zypp/Repository.h"
+#include "zypp/repo/memory/RepoImpl.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -25,17 +26,13 @@ namespace zypp
     namespace memory
     {
 
-      ///////////////////////////////////////////////////////////////////
-      //
-      //	CLASS NAME : PatternImpl
-      //
-      /**
-      */
       struct PatternImpl : public zypp::detail::PatternImplIf
       {
       public:
-        PatternImpl( repo::memory::RepoImpl::Ptr repo, data::Pattern_Ptr ptr);
+        PatternImpl( memory::RepoImpl::Ptr repo, data::Pattern_Ptr ptr);
         virtual ~PatternImpl();
+
+        virtual Repository repository() const;
 
         virtual TranslatedText summary() const;
         virtual TranslatedText description() const;
@@ -50,11 +47,14 @@ namespace zypp
         virtual Date installtime() const;
         virtual unsigned mediaNr() const;
         
+        virtual TranslatedText category() const;
         virtual bool userVisible() const;
         virtual Label order() const;
         virtual Pathname icon() const;
       private:
         
+        repo::memory::RepoImpl::Ptr _repository;
+
         //ResObject
         TranslatedText _summary;
         TranslatedText _description;
