@@ -17,8 +17,20 @@
 #include "zypp/detail/ResImplTraits.h"
 #include "zypp/CapFactory.h"
 
+#include "zypp/Package.h"
+#include "zypp/Pattern.h"
+#include "zypp/Patch.h"
+#include "zypp/Message.h"
+#include "zypp/Script.h"
+#include "zypp/Atom.h"
+
 #include "zypp/repo/cached/RepoImpl.h"
 #include "zypp/repo/cached/PackageImpl.h"
+#include "zypp/repo/cached/PatternImpl.h"
+#include "zypp/repo/cached/PatchImpl.h"
+#include "zypp/repo/cached/MessageImpl.h"
+#include "zypp/repo/cached/ScriptImpl.h"
+#include "zypp/repo/cached/AtomImpl.h"
 
 using namespace zypp::detail;
 using namespace zypp::cache;
@@ -97,6 +109,36 @@ void RepoImpl::createResolvables()
         ResImplTraits<cached::PackageImpl>::Ptr impl = new cached::PackageImpl(it->first, this);
         Package::Ptr package = detail::makeResolvableFromImpl( it->second.second, impl );
         _store.insert (package);
+      }
+      else if ( it->second.first == ResTraits<Pattern>::kind )
+      {
+        ResImplTraits<cached::PatternImpl>::Ptr impl = new cached::PatternImpl(it->first, this);
+        Pattern::Ptr pattern = detail::makeResolvableFromImpl( it->second.second, impl );
+        _store.insert (pattern);
+      }
+      else if ( it->second.first == ResTraits<Patch>::kind )
+      {
+        ResImplTraits<cached::PatchImpl>::Ptr impl = new cached::PatchImpl(it->first, this);
+        Patch::Ptr patch = detail::makeResolvableFromImpl( it->second.second, impl );
+        _store.insert (patch);
+      }
+      else if ( it->second.first == ResTraits<Message>::kind )
+      {
+        ResImplTraits<cached::MessageImpl>::Ptr impl = new cached::MessageImpl(it->first, this);
+        Message::Ptr message = detail::makeResolvableFromImpl( it->second.second, impl );
+        _store.insert (message);
+      }
+      else if ( it->second.first == ResTraits<Script>::kind )
+      {
+        ResImplTraits<cached::ScriptImpl>::Ptr impl = new cached::ScriptImpl(it->first, this);
+        Script::Ptr script = detail::makeResolvableFromImpl( it->second.second, impl );
+        _store.insert (script);
+      }
+      else if ( it->second.first == ResTraits<Atom>::kind )
+      {
+        ResImplTraits<cached::AtomImpl>::Ptr impl = new cached::AtomImpl(it->first, this);
+        Atom::Ptr atom = detail::makeResolvableFromImpl( it->second.second, impl );
+        _store.insert (atom);
       }
     }
     con.executenonquery("COMMIT;");
