@@ -106,7 +106,7 @@ namespace zypp
    * \note Source is a reference to the implementation. No COW
    * is performed.
   */
-  class Source_Ref : protected base::SafeBool<Source_Ref> /* private, but gcc refuses */
+  class Source_Ref : private base::SafeBool<Source_Ref>
   {
     friend std::ostream & operator<<( std::ostream & str, const Source_Ref & obj );
     friend bool operator==( const Source_Ref & lhs, const Source_Ref & rhs );

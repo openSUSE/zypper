@@ -159,7 +159,7 @@ namespace zypp
     */
     template<class _IntT>
       class BitField  : public Range<_IntT, 0, MaxBits<_IntT>::value>
-                      , public base::SafeBool<BitField<_IntT> > /* private, but gcc refuses */
+                      , private base::SafeBool<BitField<_IntT> >
       {
         typedef typename base::SafeBool<BitField<_IntT> >::bool_type bool_type;
 

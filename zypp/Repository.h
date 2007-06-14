@@ -17,8 +17,8 @@ namespace zypp
     DEFINE_PTR_TYPE(RepositoryImpl);
     class RepositoryImpl;
   }
-  
-  class Repository : protected base::SafeBool<Repository> /* private, but gcc refuses */
+
+  class Repository : private base::SafeBool<Repository>
   {
     public:
     friend std::ostream & operator<<( std::ostream & str, const Repository & obj );
@@ -51,11 +51,11 @@ namespace zypp
 
     /** Runtime unique numeric Repository Id. */
     NumericId numericId() const;
-    
+
     const ResStore & resolvables();
-    
+
     const RepoInfo info() const;
-    
+
   private:
     friend base::SafeBool<Repository>::operator bool_type() const;
     /** \ref SafeBool test. */
@@ -74,7 +74,7 @@ namespace zypp
 
   private:
     /** Pointer to implementation */
-    Impl_Ptr _pimpl;
+    RW_pointer<Impl,rw_pointer::Intrusive<Impl> > _pimpl;
   };
 
 }

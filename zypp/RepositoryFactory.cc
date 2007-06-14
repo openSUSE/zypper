@@ -15,7 +15,7 @@ RepositoryFactory::~RepositoryFactory()
 
 Repository RepositoryFactory::createFrom( const RepoInfo & context )
 {
-
+  return Repository::noRepository;
 }
 
 } // ns zypp
