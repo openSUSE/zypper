@@ -561,18 +561,18 @@ int one_command(const string& command_str, int argc, char **argv)
   
   else if (command.toEnum() == ZypperCommand::LIST_REPOS_e)
   {
-    if (ghelp) {
-      cerr << specific_help << endl;
-      return !ghelp;
-    }
+    if (ghelp) { cout << specific_help << endl; return !ghelp; }
+    // if (ghelp) display_command_help()
 
+    //! \todo modify according to final decition on /etc/zypp/repos.d
+    /* 
     if ( geteuid() != 0 )
     {
       cerr << _("Root privileges are required for viewing system sources.") << endl;
       return ZYPPER_EXIT_ERR_PRIVILEGES;
-    }
-    
-    list_system_sources();
+    }*/
+
+    list_repos();
     return ZYPPER_EXIT_OK;
   }
 
@@ -688,7 +688,7 @@ int one_command(const string& command_str, int argc, char **argv)
   {
     if (ghelp) { cout << specific_help; return !ghelp; }
 
-    refresh_sources();
+    refresh_repos();
   }
 
   // --------------------------( remove/install )-----------------------------

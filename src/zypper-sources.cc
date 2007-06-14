@@ -13,9 +13,6 @@
 #include <zypp/RepoManager.h>
 #include <zypp/RepoInfo.h>
 
-
-using namespace zypp::detail;
-
 using namespace std;
 using namespace zypp;
 using namespace zypp::repo;
@@ -25,67 +22,8 @@ extern ZYpp::Ptr God;
 extern RuntimeData gData;
 extern Settings gSettings;
 
-void cond_init_system_sources ()
-{
-  static bool done = false;
-  if (done)
-    return;
 
-  if ( geteuid() != 0 ) {
-    cerr << _("Sorry, you need root privileges to use system sources, disabling them...") << endl;
-    gSettings.disable_system_sources = true;
-    MIL << "system sources disabled" << endl;
-  }
-
-  if ( ! gSettings.disable_system_sources ) {
-    init_system_sources();
-  }
-  done = true;
-} 
-/*
-void cond_init_system_sources ()
-{
-  static bool done = false;
-  //! \todo this has to be done so that it works in zypper shell 
-  if (done)
-    return;
-
-  if ( ! gSettings.disable_system_sources ) {
-    init_system_sources();
-  }
-
-  done = true;
-}
-*/
-// OLD
-void init_system_sources()
-{
-  SourceManager_Ptr manager;
-  manager = SourceManager::sourceManager();
-  try
-  {
-    cerr << _("Restoring system sources...") << endl;
-    manager->restore(gSettings.root_dir);
-  }
-//  catch (const SourcesAlreadyRestoredException& excpt) {
-//  }
-  catch (Exception & excpt_r)
-  {
-    ZYPP_CAUGHT (excpt_r);
-    ERR << "Couldn't restore sources" << endl;
-    cerr << _("Failed to restore sources") << endl;
-    exit(-1);
-  }
-    
-  for ( SourceManager::Source_const_iterator it = manager->Source_begin(); it !=  manager->Source_end(); ++it )
-  {
-    Source_Ref src = manager->findSource(it->alias());
-    gData.sources.push_back(src);
-  }
-}
-
-/** reads known repositories and stores them into gData, does refresh */
-void init_repos()
+static void do_init_repos()
 {
   RepoManager manager;
   gData.repos = manager.knownRepositories();
@@ -95,8 +33,8 @@ void init_repos()
   {
     RepoInfo repo(*it);
 
-//    bool do_refresh = repo.autorefresh(); //! \todo honor command line options/commands
-    bool do_refresh = false;
+    //! \todo honor command line options/commands
+    bool do_refresh = repo.enabled() && repo.autorefresh(); 
 
     if (do_refresh)
     {
@@ -107,85 +45,24 @@ void init_repos()
   }
 }
 
+// ----------------------------------------------------------------------------
 
-void include_source_by_url( const Url &url )
+void init_repos()
 {
-  try
+  static bool done = false;
+  //! \todo this has to be done so that it works in zypper shell 
+  if (done)
+    return;
+
+  if ( !gSettings.disable_system_sources )
   {
-    //cout << "Creating source from " << url << endl;
-    Source_Ref src;
-    src = SourceFactory().createFrom(url, "/", url.asString(), "");
-    //cout << "Source created.. " << endl << src << endl;
-    gData.sources.push_back(src);
+    do_init_repos();
   }
-  catch( const Exception & excpt_r )
-  {
-    cerr << _("Can't access repository") << endl;
-    ZYPP_CAUGHT( excpt_r );
-    exit(-1);
-  }
-  
+
+  done = true;
 }
 
-#ifdef LIBZYPP_1xx
-typedef zypp::SourceManager::SourceInfo SourceInfo;
-#else
-using zypp::source::SourceInfo;
-#endif
-
-static void print_source_list(const std::list<SourceInfo> &sources )
-{
-  Table tbl;
-  TableHeader th;
-  th << "#";
-  if (gSettings.is_rug_compatible) th << _("Status");
-  else th << _("Enabled") << _("Refresh");
-  th << _("Type") << _("Name") << "URI";
-  tbl << th;
-
-  int i = 1;
-  for( std::list<SourceInfo>::const_iterator it = sources.begin() ;
-       it != sources.end() ; ++it, ++i )
-  {
-    SourceInfo source = *it;
-    TableRow tr (gSettings.is_rug_compatible ? 5 : 6);
-    tr << str::numstring (i);
-
-    // rug's status (active, pending => active, disabled <= enabled, disabled)
-    // this is probably the closest possible compatibility arrangement
-    if (gSettings.is_rug_compatible)
-    {
-#ifdef LIBZYPP_1xx
-      tr << _("Active");
-#else
-      tr << (source.enabled() ? _("Active") : _("Disabled"));
-#endif
-    }
-    // zypper status (enabled, autorefresh)
-    else
-    {
-#ifdef LIBZYPP_1xx
-      tr << _("Yes");
-      tr << (source.autorefresh ? _("Yes") : _("No"));
-#else
-      tr << (source.enabled() ? _("Yes") : _("No"));
-      tr << (source.autorefresh() ? _("Yes") : _("No"));
-#endif
-    }
-
-#ifdef LIBZYPP_1xx
-    tr << source.type;
-    tr << source.alias;
-    tr << source.url.asString();
-#else
-    tr << source.type();
-    tr << source.alias();
-    tr << source.url().asString();
-#endif
-    tbl << tr;
-  }
-  cout << tbl;
-}
+// ----------------------------------------------------------------------------
 
 static void print_repo_list( const std::list<zypp::RepoInfo> &repos )
 {
@@ -236,23 +113,77 @@ static void print_repo_list( const std::list<zypp::RepoInfo> &repos )
   cout << tbl;
 }
 
-void list_system_sources()
+// ----------------------------------------------------------------------------
+
+void list_repos()
 {
   RepoManager manager;
-  std::list<zypp::RepoInfo> repos;
-  
-try
+  list<RepoInfo> repos;
+
+  try
   {
     repos = manager.knownRepositories();
   }
   catch ( const Exception &e )
   {
-    cout << _("Error reading system sources: ") << e.msg() << std::endl;
-    exit(-1); 
+    cerr << _("Error reading system sources: ") << endl
+         << e.msg() << endl;
+    exit(ZYPPER_EXIT_ERR_ZYPP);
   }
-  
+
   print_repo_list(repos);
 }
+
+// ----------------------------------------------------------------------------
+
+void refresh_repos()
+{
+  RepoManager manager;
+  gData.repos = manager.knownRepositories();
+
+  for (std::list<RepoInfo>::iterator it = gData.repos.begin();
+       it !=  gData.repos.end(); ++it)
+  {
+    RepoInfo repo(*it);
+
+    // skip disabled sources
+    if (!repo.enabled())
+    {
+      cout_v << format(_("Skipping disabled repository '%s'")) % repo.alias()
+             << endl;
+      continue;
+    }
+
+    try
+    {
+      cout << _("Refreshing ") << it->alias() << endl;
+      //<< "URI: " << it->url() << endl; 
+
+      manager.refreshMetadata(repo);
+
+      if ( manager.isCached(repo ) )
+      {
+        cout_v << _("Cleaning cache...") << endl;
+        manager.cleanCache(repo);
+      }
+      cout_v << _("Parsing repository metadata...") << endl;
+      manager.buildCache(repo);
+
+      cout << _("DONE") << endl << endl;
+    }
+    catch ( const Exception &e )
+    {
+      cerr << format(_("Error reading repository '%s':")) % repo.alias() << endl
+           << e.msg() << endl;
+      cerr << format(_("Skipping repository '%s'")) % repo.alias()
+           << endl; 
+    }
+  }
+
+  cout << _("All system sources have been refreshed.") << endl;
+}
+
+// ----------------------------------------------------------------------------
 
 bool parse_repo_file (const string& file, string& url, string& alias)
 {
@@ -476,10 +407,6 @@ void remove_source( const std::string& anystring )
 //! rename a source, identified in any way: alias, url, id
 void rename_source( const std::string& anystring, const std::string& newalias )
 {
-#ifdef LIBZYPP_1xx
-  // renameSource is recent
-  cerr << "Sorry, not implemented yet for libzypp-1.x.x" << endl;
-#else
   cerr_vv << "Constructing SourceManager" << endl;
   SourceManager_Ptr manager = SourceManager::sourceManager();
   cerr_vv << "Restoring SourceManager" << endl;
@@ -542,37 +469,8 @@ void rename_source( const std::string& anystring, const std::string& newalias )
 
   cerr_vv << "Storing source data" << endl;
   manager->store( gSettings.root_dir, true /*metadata_cache*/ );
-#endif
 }
 
-void refresh_sources()
-{
-  RepoManager manager;
-  gData.repos = manager.knownRepositories();
-
-  for (std::list<RepoInfo>::iterator it = gData.repos.begin();
-       it !=  gData.repos.end(); ++it)
-  {
-    RepoInfo repo(*it);
-    try
-    {
-      cout << _("Refreshing ") << it->alias() << endl;
-      //<< "URI: " << it->url() << endl; 
-      
-      manager.refreshMetadata(repo);
-      if ( manager.isCached(repo ) )
-        manager.cleanCache(repo);
-      manager.buildCache(repo);
-      cout << _("DONE") << endl << endl;
-    }
-    catch ( const Exception &e )
-    {
-      cerr << _("Error reading system sources: ") << e.msg() << std::endl;
-      exit(-1); 
-    }
-  }
-  cout << _("All system sources have been refreshed.") << endl;
-}
 
 MediaWrapper::MediaWrapper (const string& filename_or_url) {
   try {
@@ -605,13 +503,85 @@ MediaWrapper::~MediaWrapper () {
 }
 
 // #217028
-void warn_if_zmd () {
-  if (system ("pgrep -lx zmd") == 0) { // list name, exact match
-    cerr << _("ZENworks Management Daemon is running.") << endl
-	 << _("WARNING: this command will not synchronize changes.") << endl
-	 << _("Use rug or yast2 for that.") << endl;
+void warn_if_zmd()
+{
+  if (system ("pgrep -lx zmd") == 0)
+  { // list name, exact match
+    cerr << _("ZENworks Management Daemon is running.\n"
+              "WARNING: this command will not synchronize changes.\n"
+              "Use rug or yast2 for that.\n");
   }
 }
+
+// ----------------------------------------------------------------------------
+
+// OLD code
+
+void cond_init_system_sources ()
+{
+  static bool done = false;
+  if (done)
+    return;
+
+  if ( geteuid() != 0 ) {
+    cerr << _("Sorry, you need root privileges to use system sources, disabling them...") << endl;
+    gSettings.disable_system_sources = true;
+    MIL << "system sources disabled" << endl;
+  }
+
+  if ( ! gSettings.disable_system_sources ) {
+    init_system_sources();
+  }
+  done = true;
+} 
+
+// OLD
+void init_system_sources()
+{
+  SourceManager_Ptr manager;
+  manager = SourceManager::sourceManager();
+  try
+  {
+    cerr << _("Restoring system sources...") << endl;
+    manager->restore(gSettings.root_dir);
+  }
+//  catch (const SourcesAlreadyRestoredException& excpt) {
+//  }
+  catch (Exception & excpt_r)
+  {
+    ZYPP_CAUGHT (excpt_r);
+    ERR << "Couldn't restore sources" << endl;
+    cerr << _("Failed to restore sources") << endl;
+    exit(-1);
+  }
+    
+  for ( SourceManager::Source_const_iterator it = manager->Source_begin(); it !=  manager->Source_end(); ++it )
+  {
+    Source_Ref src = manager->findSource(it->alias());
+    gData.sources.push_back(src);
+  }
+}
+
+// OLD
+void include_source_by_url( const Url &url )
+{
+  try
+  {
+    //cout << "Creating source from " << url << endl;
+    Source_Ref src;
+    src = SourceFactory().createFrom(url, "/", url.asString(), "");
+    //cout << "Source created.. " << endl << src << endl;
+    gData.sources.push_back(src);
+  }
+  catch( const Exception & excpt_r )
+  {
+    cerr << _("Can't access repository") << endl;
+    ZYPP_CAUGHT( excpt_r );
+    exit(-1);
+  }
+
+}
+
 
 // Local Variables:
 // c-basic-offset: 2
