@@ -6,26 +6,28 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file	zypp/source/PackageProvider.h
+/** \file	zypp/repo/PackageProvider.h
  *
 */
-#ifndef ZYPP_SOURCE_PACKAGEPROVIDER_H
-#define ZYPP_SOURCE_PACKAGEPROVIDER_H
+#ifndef ZYPP_REPO_PACKAGEPROVIDER_H
+#define ZYPP_REPO_PACKAGEPROVIDER_H
 
 #include <iosfwd>
 
 #include "zypp/base/NonCopyable.h"
 
 #include "zypp/ZYppCallbacks.h"
-#include "zypp/Source.h"
+#include "zypp/Repository.h"
 #include "zypp/Package.h"
 #include "zypp/ManagedFile.h"
+
+#include "zypp/repo/DeltaCandidates.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////
-  namespace source
+  namespace repo
   { /////////////////////////////////////////////////////////////////
 
     ///////////////////////////////////////////////////////////////////
@@ -73,6 +75,7 @@ namespace zypp
     public:
       /** Ctor taking the Package to provide. */
       PackageProvider( const Package::constPtr & package,
+                       const DeltaCandidates & deltas,
                        const PackageProviderPolicy & policy_r = PackageProviderPolicy() );
       ~PackageProvider();
 
@@ -103,12 +106,12 @@ namespace zypp
       PackageImpl_constPtr       _implPtr;
       mutable bool               _retry;
       mutable shared_ptr<Report> _report;
-
+      DeltaCandidates _deltas;
     };
     ///////////////////////////////////////////////////////////////////
 
     /////////////////////////////////////////////////////////////////
-  } // namespace source
+  } // namespace repo
   ///////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

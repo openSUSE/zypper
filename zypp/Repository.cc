@@ -51,5 +51,18 @@ namespace zypp
     return _pimpl->info();
   }
   
+  const std::list<packagedelta::PatchRpm> &
+  Repository::patchRpms() const
+  {
+    return _pimpl->patchRpms();
+  }
+    
+  const std::list<packagedelta::DeltaRpm> &
+  Repository::deltaRpms() const
+  {
+    return _pimpl->deltaRpms();
+  }
+  
+  
 }
 

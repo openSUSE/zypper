@@ -31,5 +31,17 @@ const ResStore & RepositoryImpl::resolvables() const
   return _store;
 }
 
+const std::list<packagedelta::PatchRpm> &
+RepositoryImpl::patchRpms() const
+{
+  return _patchRpms;
+}
+    
+const std::list<packagedelta::DeltaRpm> &
+RepositoryImpl::deltaRpms() const
+{
+    return _deltaRpms;
+}
+
 } } // ns
 

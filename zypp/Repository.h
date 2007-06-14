@@ -31,13 +31,14 @@ namespace zypp
 
   public:
 
-    /** Default ctor: noRepository.
+    /** 
+     * \short Default ctor: noRepository.
      * \see RepoManager::createFromCache.
     */
     Repository();
 
-    /** A dummy Repository (Id \c 0) providing nothing, doing nothing.
-     * \todo provide a _constRef
+    /** 
+     * A dummy Repository (Id \c 0) providing nothing, doing nothing.
     */
     static const Repository noRepository;
 
@@ -52,10 +53,26 @@ namespace zypp
     /** Runtime unique numeric Repository Id. */
     NumericId numericId() const;
 
+    /**
+     * \short Get the resolvables for repo
+     */
     const ResStore & resolvables();
 
+    /**
+     * \short Repository info used to create this repository
+     */
     const RepoInfo info() const;
 
+    /**
+     * \short Patch RPMs the repository provides
+     */
+    const std::list<packagedelta::PatchRpm> & patchRpms() const;
+    
+    /**
+     * \short Delta RPMs the repository provides
+     */
+    const std::list<packagedelta::DeltaRpm> & deltaRpms() const;
+    
   private:
     friend base::SafeBool<Repository>::operator bool_type() const;
     /** \ref SafeBool test. */

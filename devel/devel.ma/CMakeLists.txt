@@ -44,7 +44,7 @@ FOREACH( loop_var AOUT Parse)
       ${loop_var}.cc
    )
    TARGET_LINK_LIBRARIES( ${loop_var}
-      zypp zypp2
+      zypp
    )
 ENDFOREACH( loop_var )
 

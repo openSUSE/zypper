@@ -6,17 +6,18 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file	zypp/source/PackageProvider.cc
+/** \file	zypp/repo/PackageProvider.cc
  *
 */
 #include <iostream>
 #include <sstream>
 #include "zypp/base/Logger.h"
 #include "zypp/base/Gettext.h"
+#include "zypp/base/UserRequestException.h"
 
-#include "zypp/Source.h"
-#include "zypp/source/PackageProvider.h"
-#include "zypp/source/SourceProvideFile.h"
+#include "zypp/Repository.h"
+#include "zypp/repo/PackageProvider.h"
+#include "zypp/repo/RepoProvideFile.h"
 #include "zypp/source/Applydeltarpm.h"
 #include "zypp/source/PackageDelta.h"
 #include "zypp/detail/ImplConnect.h"
@@ -32,7 +33,7 @@ using zypp::media::MediaManager;
 namespace zypp
 { /////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////
-  namespace source
+  namespace repo
   { /////////////////////////////////////////////////////////////////
 
     ///////////////////////////////////////////////////////////////////
@@ -71,10 +72,12 @@ namespace zypp
     } // namespace source
     ///////////////////////////////////////////////////////////////////
     PackageProvider::PackageProvider( const Package::constPtr & package,
+                                      const DeltaCandidates & deltas,
                                       const PackageProviderPolicy & policy_r )
     : _policy( policy_r )
     , _package( package )
     , _implPtr( detail::ImplConnect::resimpl( _package ) )
+    , _deltas(deltas)
     {}
 
     PackageProvider::~PackageProvider()
@@ -128,8 +131,8 @@ namespace zypp
       // check whether to process patch/delta rpms
       if ( MediaManager::downloads(url) )
         {
-          std::list<DeltaRpm> deltaRpms( _implPtr->deltaRpms() );
-          std::list<PatchRpm> patchRpms( _implPtr->patchRpms() );
+          std::list<DeltaRpm> deltaRpms = _deltas.deltaRpms(_package);
+          std::list<PatchRpm> patchRpms = _deltas.patchRpms(_package);
 
           if ( ! ( deltaRpms.empty() && patchRpms.empty() )
                && queryInstalled() )
@@ -162,7 +165,7 @@ namespace zypp
       else
         {
           // allow patch rpm from local source
-          std::list<PatchRpm> patchRpms( _implPtr->patchRpms() );
+          std::list<PatchRpm> patchRpms = _deltas.patchRpms(_package);
           if ( ! patchRpms.empty() && queryInstalled() )
             {
               for( std::list<PatchRpm>::const_iterator it = patchRpms.begin();
@@ -188,7 +191,7 @@ namespace zypp
       policy.progressCB( bind( &PackageProvider::progressPackageDownload, this, _1 ) );
       policy.failOnChecksumErrorCB( bind( &PackageProvider::failOnChecksumError, this ) );
 
-      return source::provideFile( url, loc, policy );
+      return repo::provideFile( _package->repository(), loc, policy );
     }
 
     ManagedFile PackageProvider::tryDelta( const DeltaRpm & delta_r ) const
@@ -207,7 +210,7 @@ namespace zypp
         {
           ProvideFilePolicy policy;
           policy.progressCB( bind( &PackageProvider::progressDeltaDownload, this, _1 ) );
-          delta = source::provideFile( Url(), delta_r.location(), policy );
+          delta = repo::provideFile( _package->repository(), delta_r.location(), policy );
         }
       catch ( const Exception & excpt )
         {
@@ -257,7 +260,7 @@ namespace zypp
         {
           ProvideFilePolicy policy;
           policy.progressCB( bind( &PackageProvider::progressPatchDownload, this, _1 ) );
-          patch = source::provideFile( Url(), patch_r.location(), policy );
+          patch = repo::provideFile( _package->repository(), patch_r.location(), policy );
         }
       catch ( const Exception & excpt )
         {
@@ -305,7 +308,7 @@ namespace zypp
           _retry = true;
           break;
           case source::DownloadResolvableReport::IGNORE:
-          ZYPP_THROW(source::SkipRequestedException("User requested skip of corrupted file"));
+          ZYPP_THROW(SkipRequestException("User requested skip of corrupted file"));
           break;
         default:
           break;

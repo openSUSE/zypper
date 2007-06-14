@@ -52,6 +52,10 @@ namespace zypp
       const ResStore & resolvables() const;
 
       struct null {};
+      
+      const std::list<packagedelta::PatchRpm> & patchRpms() const;
+      const std::list<packagedelta::DeltaRpm> & deltaRpms() const;
+    
     public:
       /** Offer default Impl. */
       static RepositoryImpl_Ptr nullimpl()
@@ -68,6 +72,9 @@ namespace zypp
       RepoInfo _info;
       
       ResStore _store;
+      
+      std::list<packagedelta::PatchRpm> _patchRpms;
+      std::list<packagedelta::DeltaRpm> _deltaRpms;
     };
   }
 }

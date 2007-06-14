@@ -356,7 +356,7 @@ namespace zypp
        * \param prpm The patch RPM object to insert.
        * \return Record ID of the newly inserted record.
        */
-      data::RecordId appendPatchRpm( const data::PatchRpm_Ptr & prpm);
+      data::RecordId appendPatchRpm( const data::RecordId &repo_id, const data::PatchRpm_Ptr & prpm);
 
 
       /**
@@ -365,7 +365,7 @@ namespace zypp
        * \param drpm The delta RPM object to insert.
        * \return Record ID of the newly inserted record.
        */
-      data::RecordId appendDeltaRpm( const data::DeltaRpm_Ptr & drpm);
+      data::RecordId appendDeltaRpm( const data::RecordId &repo_id, const data::DeltaRpm_Ptr & drpm);
 
 
       /**

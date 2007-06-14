@@ -1059,12 +1059,18 @@ SET( zypp_repo_SRCS
   repo/RepositoryImpl.cc
   repo/RepoException.cc
   repo/RepoType.cc
+  repo/PackageProvider.cc
+  repo/RepoProvideFile.cc
+  repo/DeltaCandidates.cc
 )
 
 SET( zypp_repo_HEADERS
   repo/RepositoryImpl.h
   repo/RepoException.h
   repo/RepoType.h
+  repo/PackageProvider.h
+  repo/RepoProvideFile.h
+  repo/DeltaCandidates.h
 )
 
 INSTALL( FILES
