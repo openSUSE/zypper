@@ -1013,13 +1013,13 @@ INSTALL(  FILES
 
 SET( zypp_cache_SRCS
   ${CMAKE_BINARY_DIR}/zypp/sqlite-schema.h
-  cache/CacheInitializer.cpp
+  cache/CacheInitializer.cc
   cache/CacheException.cc
   cache/CacheTypes.cc
   cache/ResolvableQuery.cc
-  cache/CacheStore.cpp
+  cache/CacheStore.cc
   cache/CacheFSCK.cc
-  cache/Utils.cpp
+  cache/Utils.cc
 )
 
 SET( zypp_cache_HEADERS

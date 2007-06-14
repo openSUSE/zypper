@@ -78,8 +78,8 @@ namespace zypp
        * \param repository_id ownership.
        * \param package Package data
       */
-      virtual void consumePackage(const data::RecordId &repository_id,
-                                  const data::Package_Ptr & package);
+      virtual data::RecordId consumePackage(const data::RecordId &repository_id,
+					    const data::Package_Ptr & package);
 
       /**
        * Implementation of the \ref ResolvableConsumer interface
@@ -88,9 +88,8 @@ namespace zypp
        * \param catalog_id ownership.
        * \param srcpackage Source package data
       */
-      virtual void consumeSourcePackage(
-                                      const data::RecordId &catalog_id,
-                                      const data::SrcPackage_Ptr & srcpackage );
+      virtual data::RecordId consumeSourcePackage( const data::RecordId &catalog_id,
+	                                           const data::SrcPackage_Ptr & srcpackage );
 
       /**
        * Implementation of the \ref ResolvableConsumer interface
@@ -99,8 +98,8 @@ namespace zypp
        * \param repository_id ownership.
        * \param patch Patch data
       */
-      virtual void consumePatch( const data::RecordId &repository_id,
-                                 const data::Patch_Ptr & patch );
+      virtual data::RecordId consumePatch( const data::RecordId &repository_id,
+					   const data::Patch_Ptr & patch );
 
       /**
        * Implementation of the \ref ResolvableConsumer interface.
@@ -114,8 +113,8 @@ namespace zypp
        * \note this is somewhat specific to current YUM patch metadata design
        *       and may change (to consumeAtom(data::RecordId,data::Atom)).
        */
-      virtual void consumePackageAtom( const data::RecordId &repository_id,
-                                       const data::PackageAtom_Ptr & atom );
+      virtual data::RecordId consumePackageAtom( const data::RecordId &repository_id,
+	                                         const data::PackageAtom_Ptr & atom );
 
       /**
        * Implementation of the \ref ResolvableConsumer interface
@@ -124,8 +123,8 @@ namespace zypp
        * \param repository_id ownership.
        * \param message Message data
       */
-      virtual void consumeMessage( const data::RecordId & repository_id,
-                                   const data::Message_Ptr & message);
+      virtual data::RecordId consumeMessage( const data::RecordId & repository_id,
+					     const data::Message_Ptr & message);
 
       /**
        * Implementation of the \ref ResolvableConsumer interface
@@ -134,8 +133,8 @@ namespace zypp
        * \param repository_id ownership.
        * \param script Script data
       */
-      virtual void consumeScript( const data::RecordId & repository_id,
-                                  const data::Script_Ptr & script);
+      virtual data::RecordId consumeScript( const data::RecordId & repository_id,
+					    const data::Script_Ptr & script);
 
       /**
        * Implementation of the \ref ResolvableConsumer interface
@@ -144,8 +143,8 @@ namespace zypp
        * \param repository_id ownership.
        * \param pattern Pattern data
       */
-      virtual void consumePattern( const data::RecordId & repository_id,
-                                   const data::Pattern_Ptr & pattern );
+      virtual data::RecordId consumePattern( const data::RecordId & repository_id,
+					     const data::Pattern_Ptr & pattern );
 
       /**
        * Implementation of the \ref ResolvableConsumer interface
@@ -154,8 +153,8 @@ namespace zypp
        * \param repository_id ownership.
        * \param pattern Pattern data
       */
-      virtual void consumeProduct( const data::RecordId &repository_id,
-                                   const data::Product_Ptr & product );
+      virtual data::RecordId consumeProduct( const data::RecordId &repository_id,
+					     const data::Product_Ptr & product );
 
       /**
        * Implementation of the \ref ResolvableConsumer interface
@@ -166,9 +165,9 @@ namespace zypp
        * \param changelog  the changelog
        * \todo see implementation
        */
-      virtual void consumeChangelog( const data::RecordId & repository_id,
-                                     const data::Resolvable_Ptr & resolvable,
-                                     const Changelog & changelog );
+      virtual data::RecordId consumeChangelog( const data::RecordId & repository_id,
+					       const data::Resolvable_Ptr & resolvable,
+					       const Changelog & changelog );
 
       /**
        * Implementation of the \ref ResolvableConsumer interface
@@ -179,9 +178,9 @@ namespace zypp
        * \param filenames  list of filenames the resolvable contains
        * \todo see implementation
        */
-      virtual void consumeFilelist( const data::RecordId &repository_id,
-                                    const data::Resolvable_Ptr & resolvable,
-                                    const data::Filenames & filenames );
+      virtual data::RecordId consumeFilelist( const data::RecordId &repository_id,
+					      const data::Resolvable_Ptr & resolvable,
+					      const data::Filenames & filenames );
 
       /**
        * Appends a resolvable to the store.
@@ -500,6 +499,21 @@ namespace zypp
         appendStringAttribute( resolvable_id, klass, name, value );
       }
 
+      /**
+       * Append strings from a _Container to a resolvable.
+       *
+       * Convenience method taking the container instead of it's
+       * begin/end iterators as argument.
+       *
+       * \see appendStringContainerAttribute
+      */
+      template <class _Container>
+      void appendStringContainerAttribute( const data::RecordId &resolvable_id,
+                                           const std::string &klass,
+                                           const std::string &name,
+                                           const _Container & container )
+      {	appendStringContainerAttribute( resolvable_id, klass, name, container.begin(), container.end() ); }
+
        /**
        * Update a known repository checksum and timestamp
        *
@@ -515,7 +529,7 @@ namespace zypp
       void updateRepository( const data::RecordId &id,
                              const std::string &checksum,
                              const Date &timestamp = Date::now() );
-      
+
       /**
        * \short Clean repository from cache
        *
@@ -527,7 +541,7 @@ namespace zypp
        * id does not refer to a valid repository.
        */
       void cleanRepository( const data::RecordId &id );
-      
+
       /**
        * \short Clean repository from cache
        *
@@ -539,7 +553,7 @@ namespace zypp
        * alias does not refer to a valid repository.
        */
       void cleanRepository( const std::string &alias );
-      
+
       /**
        * get the status of a cached repository
        *
@@ -553,7 +567,7 @@ namespace zypp
        * id does not refer to a valid repository.
        */
       RepoStatus repositoryStatus( const data::RecordId &id );
-      
+
       /**
        * get the status of a cached repository
        *
@@ -574,7 +588,7 @@ namespace zypp
        * True if the repository is cached
        */
       bool isCached( const std::string &alias );
-      
+
       /**
        * \short looks the id for a repository in cache
        *
@@ -584,8 +598,8 @@ namespace zypp
        * alias is unknown
        */
       data::RecordId lookupRepository( const std::string &alias );
-      
-      
+
+
       /**
        * Returns the record id of a file entry \a path
        *
@@ -649,7 +663,7 @@ namespace zypp
       /**
        * Append a bool attribute to a resolvable. Will be stored as
        * numeric 1 or 0.
-       * 
+       *
        * \param resolvable_id Resovable Id, owner of the attribute
        * \param type_id attribute id
        * \param value bool value

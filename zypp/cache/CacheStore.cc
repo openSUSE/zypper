@@ -237,26 +237,28 @@ void CacheStore::appendPackageBaseAttributes( const RecordId & pkgid,
   appendStringAttribute( pkgid, "Package", "location", package->repositoryLocation.filePath.asString() );
 }
 
-void CacheStore::consumePackage( const RecordId & repository_id,
+RecordId CacheStore::consumePackage( const RecordId & repository_id,
                                  const data::Package_Ptr & package )
 {
-  RecordId pkgid = appendResolvable( repository_id, ResTraits<Package>::kind,
+  RecordId id = appendResolvable( repository_id, ResTraits<Package>::kind,
       NVRA( package->name, package->edition, package->arch ), package->deps );
-  appendResObjectAttributes( pkgid, package );
-  appendPackageBaseAttributes( pkgid, package );
+  appendResObjectAttributes( id, package );
+  appendPackageBaseAttributes( id, package );
+  return id;
 }
 
-void CacheStore::consumeSourcePackage( const data::RecordId & repository_id,
+RecordId CacheStore::consumeSourcePackage( const data::RecordId & repository_id,
                                        const data::SrcPackage_Ptr & package )
 {
-  RecordId pkgid = appendResolvable( repository_id, ResTraits<SrcPackage>::kind,
+  RecordId id = appendResolvable( repository_id, ResTraits<SrcPackage>::kind,
       NVRA( package->name, package->edition, package->arch ), package->deps );
-  appendResObjectAttributes( pkgid, package );
-  appendPackageBaseAttributes( pkgid, package );
-#warning TBD
+  appendResObjectAttributes( id, package );
+  appendPackageBaseAttributes( id, package );
+#warning TBD WRONG IMPLEMENTATION
+  return id;
 }
 
-void CacheStore::consumePatch( const data::RecordId & repository_id,
+RecordId CacheStore::consumePatch( const data::RecordId & repository_id,
                                const data::Patch_Ptr & patch)
 {
   RecordId id = appendResolvable(
@@ -307,9 +309,10 @@ void CacheStore::consumePatch( const data::RecordId & repository_id,
   }
 
   DBG << endl;
+  return id;
 }
 
-void CacheStore::consumePackageAtom( const data::RecordId & repository_id,
+RecordId CacheStore::consumePackageAtom( const data::RecordId & repository_id,
                                      const data::PackageAtom_Ptr & atom )
 {
   RecordId id = appendResolvable( repository_id, ResTraits<Atom>::kind,
@@ -324,9 +327,10 @@ void CacheStore::consumePackageAtom( const data::RecordId & repository_id,
   for (set<data::DeltaRpm_Ptr>::const_iterator d = atom->deltaRpms.begin();
        d != atom->deltaRpms.end(); ++d)
     appendDeltaRpm(*d);
+  return id;
 }
 
-void CacheStore::consumeMessage( const data::RecordId & repository_id,
+RecordId CacheStore::consumeMessage( const data::RecordId & repository_id,
                                  const data::Message_Ptr & message )
 {
   RecordId id = appendResolvable( repository_id, ResTraits<Message>::kind,
@@ -334,9 +338,10 @@ void CacheStore::consumeMessage( const data::RecordId & repository_id,
   appendResObjectAttributes( id, message );
 
   appendTranslatedStringAttribute( id, "Message", "text", message->text );
+  return id;
 }
 
-void CacheStore::consumeScript( const data::RecordId & repository_id,
+RecordId CacheStore::consumeScript( const data::RecordId & repository_id,
                                 const data::Script_Ptr & script )
 {
   RecordId id = appendResolvable( repository_id, ResTraits<Script>::kind,
@@ -351,9 +356,10 @@ void CacheStore::consumeScript( const data::RecordId & repository_id,
   appendStringAttribute( id, "Script", "undoScriptLocation", script->undoScriptLocation.filePath.asString() );
   appendStringAttribute( id, "Script", "undoScriptChecksum", script->undoScriptLocation.fileChecksum.checksum() );
   appendStringAttribute( id, "Script", "undoScriptChecksumType", script->undoScriptLocation.fileChecksum.type() );
+  return id;
 }
 
-void CacheStore::consumePattern( const data::RecordId & repository_id,
+RecordId CacheStore::consumePattern( const data::RecordId & repository_id,
                                  const data::Pattern_Ptr & pattern )
 {
   RecordId id = appendResolvable( repository_id, ResTraits<Pattern>::kind,
@@ -365,9 +371,10 @@ void CacheStore::consumePattern( const data::RecordId & repository_id,
   appendTranslatedStringAttribute( id, "Pattern", "category", pattern->category );
   appendStringAttribute( id, "Pattern", "icon", pattern->icon );
   appendStringAttribute( id, "Pattern", "order", pattern->order );
+  return id;
 }
 
-void CacheStore::consumeProduct( const data::RecordId & repository_id,
+RecordId CacheStore::consumeProduct( const data::RecordId & repository_id,
                                  const data::Product_Ptr & product )
 {
   RecordId id = appendResolvable( repository_id, ResTraits<Product>::kind,
@@ -377,16 +384,16 @@ void CacheStore::consumeProduct( const data::RecordId & repository_id,
   appendTranslatedStringAttribute( id, "Product", "shortName", product->shortName );
   appendTranslatedStringAttribute( id, "Product", "longName", product->longName );
   appendStringContainerAttribute( id, "Product", "flags", product->flags.begin(), product->flags.end() );
-  appendStringAttribute( id, "Pattern", "releasenotesUrl", product->releasenotesUrl.asString() );
-  //! \todo figure out how to store list of Urls. A separate method appendUrlContainerAttribute? Or change it to plain string in ResolvableData.h?
-//  appendStringContainerAttribute( id, "Product", "updateUrls", product->updateUrls );
-//  appendStringContainerAttribute( id, "Product", "extraUrls", product->extraUrls );
-//  appendStringContainerAttribute( id, "Product", "optionalUrls", product->optionalUrls );
-  appendStringAttribute( id, "Pattern", "distributionName", product->distributionName );
-  appendStringAttribute( id, "Pattern", "distributionEdition", product->distributionEdition.asString() );
+  appendStringAttribute( id, "Product", "releasenotesUrl", product->releasenotesUrl.asString() );
+  appendStringContainerAttribute( id, "Product", "updateUrls", product->updateUrls );
+  appendStringContainerAttribute( id, "Product", "extraUrls", product->extraUrls );
+  appendStringContainerAttribute( id, "Product", "optionalUrls", product->optionalUrls );
+  appendStringAttribute( id, "Product", "distributionName", product->distributionName );
+  appendStringAttribute( id, "Product", "distributionEdition", product->distributionEdition.asString() );
+  return id;
 }
 
-void CacheStore::consumeChangelog( const data::RecordId & repository_id,
+RecordId CacheStore::consumeChangelog( const data::RecordId & repository_id,
                                    const data::Resolvable_Ptr & resolvable,
                                    const Changelog & changelog )
 {
@@ -395,7 +402,7 @@ void CacheStore::consumeChangelog( const data::RecordId & repository_id,
   //! (first, we'll see how fast is the inserting without remembering those ids)
 }
 
-void CacheStore::consumeFilelist( const data::RecordId & repository_id,
+RecordId CacheStore::consumeFilelist( const data::RecordId & repository_id,
                                   const data::Resolvable_Ptr & resolvable,
                                   const data::Filenames & filenames )
 {
@@ -627,7 +634,7 @@ RecordId CacheStore::appendPatchRpm(const data::PatchRpm_Ptr & prpm)
     _pimpl->append_patch_baseversion_cmd->bind(":epoch", (int) (*bv)->edition.epoch());
     _pimpl->append_patch_baseversion_cmd->executenonquery();
   }
- 
+
   return id;
 }
 
@@ -715,7 +722,7 @@ void CacheStore::updateRepository( const RecordId &id,
 RecordId CacheStore::lookupOrAppendRepository( const string &alias )
 {
   _pimpl->select_repository_cmd->bind(":alias", alias);
-  
+
   long long id = 0;
   try {
     id = _pimpl->select_repository_cmd->executeint64();
@@ -737,7 +744,7 @@ void CacheStore::cleanRepository( const data::RecordId &id )
 {
   sqlite3_command cmd( _pimpl->con, "delete from repositories where id=:id");
   cmd.bind(":id", id);
-  
+
   try
   {
     cmd.executenonquery();
@@ -747,7 +754,7 @@ void CacheStore::cleanRepository( const data::RecordId &id )
     ZYPP_THROW(CacheRecordNotFoundException());
   }
 }
-      
+
 void CacheStore::cleanRepository( const std::string &alias )
 {
   cleanRepository(lookupRepository(alias));
@@ -757,7 +764,7 @@ RepoStatus CacheStore::repositoryStatus( const data::RecordId &id )
 {
   sqlite3_command cmd( _pimpl->con, "select id,alias,checksum,timestamp from repositories where id=:id");
   cmd.bind(":id", id);
-  
+
   try
   {
     sqlite3_reader reader = cmd.executereader();
@@ -790,7 +797,7 @@ bool CacheStore::isCached( const string &alias )
   {
     return false;
   }
-  
+
   return true;
 }
 
@@ -798,7 +805,7 @@ RecordId CacheStore::lookupRepository( const string &alias )
 {
   sqlite3_command cmd(_pimpl->con, "select id from repositories where alias=:alias;");
   cmd.bind(":alias", alias);
-  
+
   long long id = 0;
   try {
     id = cmd.executeint64();
@@ -982,7 +989,7 @@ void CacheStore::appendStringAttribute( const data::RecordId &resolvable_id,
 {
   // don't bother with writing if the string is empty
   if (value.empty()) return;
-  
+
   RecordId type_id = lookupOrAppendType(klass, name);
   appendStringAttribute( resolvable_id, type_id, value );
 }
