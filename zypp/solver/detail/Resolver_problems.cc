@@ -64,7 +64,8 @@ namespace zypp
 
 using namespace std;
 
-typedef map<PoolItem_Ref, ResolverInfo_Ptr> ProblemMap;
+	
+typedef multimap<PoolItem_Ref, ResolverInfo_Ptr> ProblemMap;	
 typedef multimap<PoolItem_Ref, Capability> ItemCapabilityMap;
 typedef multimap<PoolItem_Ref, PoolItem_Ref> ConflictMap;	
 
@@ -124,7 +125,7 @@ collector_cb (ResolverInfo_Ptr info, void *data)
     PoolItem_Ref item = info->affected();
     if (item
 	&& info->error()) {
-	collector->problems[item] = info;
+	collector->problems.insert (make_pair( item, info));	
     }
     // Collicting items which are providing requirements but they
     // are set for uninstall
