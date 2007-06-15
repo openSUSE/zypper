@@ -1,9 +1,7 @@
 #!/bin/bash
 
 # search for sourcecode-files
-SRCFILES=$(find .. -type f -name "*.h" \
--o -name "*.c"   \
--o -name "*.cc")
-echo $SRCFILES
+SRCFILES=$(cat POTFILES.in | grep -v -P '#.+')
+
 #calling xgettext with the sourcefiles
 xgettext --no-wrap --add-comments --add-location --keyword=_ --keyword=_:1,2 --keyword=__ --keyword=N_ --foreign-user --copyright-holder="SuSE Linux Products GmbH, Nuernberg" --default-domain=zypper --output=zypper.pot $SRCFILES
