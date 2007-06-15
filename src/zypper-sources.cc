@@ -6,6 +6,7 @@
 #include <fstream>
 #include <boost/format.hpp>
 #include <boost/lexical_cast.hpp>
+#include <boost/logic/tribool.hpp>
 
 #include <zypp/target/store/PersistentStorage.h>
 #include <zypp/base/IOStream.h>
@@ -185,49 +186,6 @@ void refresh_repos()
 
 // ----------------------------------------------------------------------------
 
-bool parse_repo_file (const string& file, string& url, string& alias)
-{
-  static const boost::regex
-    r_alias ("^\\[(.*)\\]$"),
-    r_type ("^type=(.*)"),
-    r_url ("^baseurl=(.*)");
-  boost::smatch match;
-
-  std::ifstream repo(file.c_str());
-  bool have_alias = false, have_url = false;
-  while (repo.good ()) {
-    string line = zypp::iostr::getline (repo);
-
-    if (regex_search (line, match, r_alias)) {
-      alias = match[1];
-      have_alias = true;
-    }
-    else if (regex_search (line, match, r_type)) {
-      string type = match[1];
-      if (type != "rpm-md" && type != "yast2") {
-	cerr << _("Unknown repository type ") << type << endl;
-	return false;
-      }
-    }
-    else if (regex_search (line, match, r_url)) {
-      url = match[1];
-      have_url = true;
-    }
-  }
-  repo.close ();
-
-  if (!have_alias) {
-    cerr << _("Name not found") << endl;
-  }  
-  if (!have_url) {
-    cerr << _("baseurl not found") << endl;
-  }  
-  cerr_vv << "Name: " << alias << endl;
-  cerr_vv << "URL: " << url << endl;
-
-  return have_alias && have_url;
-}
-
 static
 std::string timestamp ()
 {
@@ -245,57 +203,111 @@ std::string timestamp ()
   return outstr;
 }
 
-void add_source_by_url( const zypp::Url &url, const string &alias,
-			const string &type, bool enabled, bool refresh  )
+// ----------------------------------------------------------------------------
+
+//! \todo handle zypp exceptions
+static
+int add_repo(const RepoInfo & repo)
 {
-  cerr_vv << "Constructing SourceManager" << endl;
-  SourceManager_Ptr manager = SourceManager::sourceManager();
-  cerr_vv << "Restoring SourceManager" << endl;
-  manager->restore (gSettings.root_dir, true /*use_cache*/);
+  RepoManager manager;
 
-  list<SourceManager::SourceId> sourceIds;
+  cout_v << format(_("Adding repository '%s'.")) % repo.alias() << endl;
+  manager.addRepository(repo);
 
-  Pathname path;
-  Pathname cache;
-  bool is_base = false;
-  string myalias = alias.empty() ? timestamp() : alias;
-   
-  // more products?
-  // try
-  cerr_vv << "Creating source" << endl;
-  Source_Ref source;
-  if (type.empty()) {
-    source = SourceFactory().createFrom( url, path, myalias, cache, is_base );
-  }
-  else {
-    source = SourceFactory().createFrom( type,
-					 url, path, myalias, cache, is_base,
-					 refresh );
-  }
-  cerr_vv << "Adding source" << endl;
-  SourceManager::SourceId sourceId = manager->addSource( source );
+  cout << format(_("Repository '%s' successfully added:")) % repo.alias() << endl;
+  cout << ( repo.enabled() ? "[x]" : "[ ]" );
+  cout << ( repo.autorefresh() ? "* " : "  " );
+  cout << repo.alias() << " (" << *repo.baseUrlsBegin() << ")" << endl;
 
-  if (enabled)
-    source.enable();
-  else
-    source.disable();
-  
-  source.setAutorefresh (refresh);
-
-    sourceIds.push_back( sourceId );
-      cout << "Added Installation Sources:" << endl;
-  
-    list<SourceManager::SourceId>::const_iterator it;
-    for( it = sourceIds.begin(); it != sourceIds.end(); ++it ) {
-      Source_Ref source = manager->findSource(*it);
-      cout << ( source.enabled() ? "[x]" : "[ ]" );
-      cout << ( source.autorefresh() ? "* " : "  " );
-      cout << source.alias() << " (" << source.url() << ")" << endl;
-    }
-
-    cerr_vv << "Storing source data" << endl;
-    manager->store( gSettings.root_dir, true /*metadata_cache*/ );
+  return ZYPPER_EXIT_OK;
 }
+
+// ----------------------------------------------------------------------------
+
+int add_repo_by_url( const zypp::Url & url, const string & alias,
+                     const string & type, bool enabled, bool refresh )
+{
+  RepoManager manager;
+
+  // determine repository type
+  RepoType repotype_probed = manager.probe(url);
+  RepoType repotype = RepoType::RPMMD;
+  if (type.empty())
+    repotype = repotype_probed;
+  else
+  {
+    try
+    {
+      repotype = RepoType(type);
+
+      if (repotype == repotype_probed)
+      {
+        cout_v << _("Zypper happy! Detected repository type matches the one"
+                     " specified in the --type option.");
+      }
+      else
+      {
+        cerr << format(_(
+            "Warning! Overriding detected repository type '%s' with "
+            "manually specified '%s'.")) % repotype_probed % repotype
+          << endl;
+      }
+    }
+    catch (Exception & e)
+    {
+      string message = _(
+        "Warning: Unknown repository type '%s'."
+        " Using detected type '%s' instead.");
+      cerr << format(message) % type % repotype_probed << endl;
+
+      repotype = repotype_probed;
+    }
+  }
+
+  RepoInfo repo;
+  repo.setAlias(alias.empty() ? timestamp() : alias);
+  repo.setType(repotype);
+  repo.addBaseUrl(url);
+  repo.setEnabled(enabled);
+  repo.setAutorefresh(refresh);
+
+  return add_repo(repo);
+}
+
+// ----------------------------------------------------------------------------
+
+//! \todo handle zypp exceptions
+int add_repo_from_file(const std::string & repo_file_url,
+                       const tribool enabled, const tribool autorefresh)
+{
+  //! \todo handle local .repo files, validate the URL
+  Url url(repo_file_url);
+  RepoManager manager;
+  list<RepoInfo> repos = manager.readRepoFile(url);
+
+  for (list<RepoInfo>::iterator it = repos.begin();
+       it !=  repos.end(); ++it)
+  {
+    RepoInfo repo = *it;
+
+    if (!indeterminate(enabled))
+      repo.setEnabled(enabled);
+    if (!indeterminate(autorefresh))
+      repo.setAutorefresh(autorefresh);
+
+    // by default set enabled and autorefresh to true
+    if (indeterminate(repo.enabled()))
+      repo.setEnabled(true);
+    if (indeterminate(repo.autorefresh()))
+      repo.setAutorefresh(true);
+
+    add_repo(repo);
+  }
+
+  return ZYPPER_EXIT_OK;
+}
+
+// ----------------------------------------------------------------------------
 
 template<typename T>
 ostream& operator << (ostream& s, const vector<T>& v) {
@@ -471,36 +483,7 @@ void rename_source( const std::string& anystring, const std::string& newalias )
   manager->store( gSettings.root_dir, true /*metadata_cache*/ );
 }
 
-
-MediaWrapper::MediaWrapper (const string& filename_or_url) {
-  try {
-    // the interface cannot provide a "complete path" :-(
-    Url url (filename_or_url);
-    Pathname path (url.getPathName ());
-    url.setPathName ("/");
-
-    _id = _mm.open (url);
-    _mm.attach (_id);
-
-    _mm.provideFile (_id, path);
-    Pathname local = _mm.localPath (_id, path);
-    _local_path = local.asString ();
-  }
-  catch (const Exception & ex) {
-    ZYPP_CAUGHT (ex);
-    if (looks_like_url (filename_or_url)) {
-    cerr << _("Error while fetching ") << filename_or_url << " : "
-	 << ex << endl;
-//      ex.dumpOn (cerr);		// this suxxz
-    }
-    _local_path = filename_or_url;
-  }
-}
-
-MediaWrapper::~MediaWrapper () {
-  if (_mm.isOpen (_id))
-    _mm.close (_id);
-}
+// ----------------------------------------------------------------------------
 
 // #217028
 void warn_if_zmd()

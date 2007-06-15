@@ -18,6 +18,8 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 
+#include <boost/logic/tribool.hpp>
+
 #include <zypp/zypp_detail/ZYppReadOnlyHack.h>
 
 #include "zypper.h"
@@ -35,9 +37,9 @@
 #include "zypper-command.h"
 
 using namespace std;
-//using namespace boost;
 using namespace zypp;
 using namespace zypp::detail;
+using namespace boost;
 
 ZYpp::Ptr God = NULL;
 RuntimeData gData;
@@ -64,8 +66,10 @@ static struct option global_options[] = {
   {0, 0, 0, 0}
 };
 
-//! a constructor wrapper catching exceptions
-// returns an empty one on error
+/**
+ * Constructor wrapper catching exceptions,
+ * returning an empty one on error.
+ */
 Url make_url (const string & url_s) {
   Url u;
   try {
@@ -75,7 +79,6 @@ Url make_url (const string & url_s) {
     ZYPP_CAUGHT( excpt_r );
     cerr << _("URL is invalid.") << endl;
     cerr << excpt_r.asUserString() << endl;
-    
   }
   return u;
 }
@@ -580,56 +583,52 @@ int one_command(const string& command_str, int argc, char **argv)
   
   else if (command.toEnum() == ZypperCommand::ADD_REPO_e)
   {
-    // TODO: repect values in .repo, have these as overrides
-    bool enabled = ! copts.count("disabled");
-    bool refresh = ! copts.count("no-refresh");
+    tribool enabled(indeterminate);
+    tribool refresh(indeterminate);
 
-    string type = copts.count("type")?  copts["type"].front() : "";
-    if (type != "" && type != "YaST" && type != "YUM" && type != "Plaindir") {
-      cerr << _("Warning: Unknown metadata type ") << type << endl;
+    if (copts.count("disabled"))
+      enabled = false;
+    if (copts.count("no-refresh"))
+      refresh = false;
+
+    // add repository specified in .repo file
+    if (copts.count("repo"))
+    {
+      return add_repo_from_file(copts["repo"].front(), enabled, refresh);
     }
 
-    string repoalias, repourl;
-    if (copts.count("repo")) {
-      string filename = copts["repo"].front();
-      // it may be an URL; cache the file while MediaWrapper exists
-      MediaWrapper download (filename);
-      filename = download.localPath ();
-      cerr_vv << "Got: " << filename << endl;
-      parse_repo_file (filename, repourl, repoalias);
-    }
+    // force specific repository type. Validation is done in add_repo_by_url()
+    string type = copts.count("type") ? copts["type"].front() : "";
 
-    if (ghelp || (arguments.size() < 1 && repoalias.empty ())) {
+    // display help message if insufficient info was given
+    if (ghelp || arguments.size() < 1)
+    {
+      //! todo display_help()
       cerr << specific_help;
-      return !ghelp;
+      if (ghelp) return ZYPPER_EXIT_OK;
+      return ZYPPER_EXIT_ERR_INVALID_ARGS;
     }
 
-    if (repourl.empty())
-      repourl = arguments[0];
-
-    Url url = make_url (repourl);
-    if (!url.isValid())
+    Url url = make_url (arguments[0]);
+    if (!url.isValid()) //! \todo error message
       return ZYPPER_EXIT_ERR_INVALID_ARGS;
-    string alias = repoalias;
-    if (alias.empty ())
-      alias = url.asString();
+
+    string alias;
     if (arguments.size() > 1)
       alias = arguments[1];
+    //! \todo use timestamp as alias, if no alias was given
+    if (alias.empty ())
+      alias = url.asString();
 
-    warn_if_zmd ();
+    if (indeterminate(enabled)) enabled = true;
+    if (indeterminate(refresh)) refresh = true;
+
+    warn_if_zmd();
 
     // load gpg keys
     cond_init_target ();
 
-    try {
-      // also stores it
-      add_source_by_url(url, alias, type, enabled, refresh);
-    }
-    catch ( const Exception & excpt_r )
-    {
-      cerr << excpt_r.asUserString() << endl;
-      return ZYPPER_EXIT_ERR_ZYPP;
-    }
+    return add_repo_by_url(url, alias, type, enabled, refresh);
 
     return ZYPPER_EXIT_OK;
   }
