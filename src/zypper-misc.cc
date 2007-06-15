@@ -25,14 +25,10 @@ extern Settings gSettings;
 
 void cond_init_target () {
   static bool done = false;
+  //! \todo do this so that it works in zypper shell
   if (!done) {
-#ifdef LIBZYPP_1xx
-    cerr_v << _("Initializing Target") << _(" (old way)") << endl;
-    God->initTarget(gSettings.root_dir, true);
-#else
-    cerr_v << _("Initializing Target") << endl;
+    cout_v << _("Initializing Target") << endl;
     God->initializeTarget(gSettings.root_dir);
-#endif
     done = true;
   }
 }
