@@ -87,33 +87,47 @@ namespace zypp
   ////////////////////////////////////////////////////////////////////////////
   
   /**
+   * Reads RepoInfo's from a repo file.
+   *
+   * \param file pathname of the file to read.
+   */
+  static std::list<RepoInfo> repositories_in_file( const Pathname & file )
+  {
+    MIL << "repo file: " << file << endl;
+    RepoCollector collector;
+    parser::RepoFileReader parser( file, bind( &RepoCollector::collect, &collector, _1 ) );
+    return collector.repos;
+  }
+
+  ////////////////////////////////////////////////////////////////////////////
+  
+  /**
    * \short List of RepoInfo's from a directory
    *
    * Goes trough every file in a directory and adds all
    * RepoInfo's contained in that file.
    *
-   * \param file pathname of the file to read.
+   * \param dir pathname of the directory to read.
    */
-  static std::list<RepoInfo> repositories_in_path( const Pathname &dir )
+  static std::list<RepoInfo> repositories_in_dir( const Pathname &dir )
   {
-    MIL << " " << dir << endl;
-    RepoCollector collector;
-    std::list<RepoInfo> repos;
+    MIL << "directory " << dir << endl;
+    list<RepoInfo> repos;
     list<Pathname> entries;
     if ( filesystem::readdir( entries, Pathname(dir), false ) != 0 )
       ZYPP_THROW(Exception("failed to read directory"));
     
     for ( list<Pathname>::const_iterator it = entries.begin(); it != entries.end(); ++it )
     {
-      Pathname file = *it;
-      parser::RepoFileReader parser( file, bind( &RepoCollector::collect, &collector, _1 ) );
+      list<RepoInfo> tmp = repositories_in_file( *it ); 
+      repos.insert( repos.end(), tmp.begin(), tmp.end() );
 
       //std::copy( collector.repos.begin(), collector.repos.end(), std::back_inserter(repos));
       //MIL << "ok" << endl;
     }
-    return collector.repos;
+    return repos;
   }
-  
+
   ////////////////////////////////////////////////////////////////////////////
   
   static void assert_alias( const RepoInfo &info )
@@ -203,14 +217,33 @@ namespace zypp
   {}
   
   ////////////////////////////////////////////////////////////////////////////
-  
+
   std::list<RepoInfo> RepoManager::knownRepositories() const
   {
     MIL << endl;
-    return repositories_in_path("/etc/zypp/repos.d");
+    return repositories_in_dir("/etc/zypp/repos.d");
     MIL << endl;
   }
-  
+
+  ////////////////////////////////////////////////////////////////////////////
+
+  std::list<RepoInfo> RepoManager::readRepoFile(const Url & repo_file) const
+  {
+
+    // no interface to download a specific file, using workaround:
+    //! \todo add MediaManager::provideFile(Url file_url) to easily access any file URLs? (no need for media access id or media_nr)  
+    Url url(repo_file);
+    Pathname path(url.getPathName());
+    url.setPathName ("/");
+
+    MediaSetAccess access(url);
+    Pathname local = access.provideFile(path);
+
+    DBG << "reading repo file " << repo_file << ", local path: " << local << endl;
+
+    return repositories_in_file(local);
+  }
+
   ////////////////////////////////////////////////////////////////////////////
   
   void RepoManager::refreshMetadata( const RepoInfo &info )

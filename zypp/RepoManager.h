@@ -65,10 +65,19 @@ namespace zypp
     * The known repositories are read from
     * \ref RepoManagerOptions::knownReposPath passed on the Ctor.
     * Which defaults to ZYpp global settings.
-    *
+    * \return found list<RepoInfo>
     */
    std::list<RepoInfo> knownRepositories() const;
-   
+
+    /**
+     * Parses \a repo_file and returns a list of \ref RepoInfo objects
+     * corresponding to repositories found within the file.
+     * 
+     * \param repo_file Valid URL of the repo file.
+     * \return found list<RepoInfo>
+     */
+    std::list<RepoInfo> readRepoFile(const Url & repo_file) const;
+
    /**
     * \short Refresh local raw cache
     *
@@ -158,8 +167,12 @@ namespace zypp
     * one or more repositories.
     */
    //void addRepositories( const Url &url );
-   
-   
+
+    /**
+     * PROPOSAL
+     */
+    void removeRepository( const std::string & alias );
+
   public:
 
   private:
