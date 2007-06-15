@@ -1,4 +1,3 @@
-
 #include <sqlite3.h>
 #include <map>
 #include "zypp/cache/sqlite3x/sqlite3x.hpp"
@@ -98,13 +97,13 @@ struct CacheStore::Impl
     count_shared_cmd.reset( new sqlite3_command( con, "select count(id) from resolvables where shared_id=:rid;" ));
 
     insert_patchrpm_cmd.reset( new sqlite3_command (con,
-      "insert into patch_packages (media_nr, location, checksum, download_size, build_time) "
-      "values (:media_nr, :location, :checksum, :download_size, :build_time);" ));
+      "insert into patch_packages (repository_id, media_nr, location, checksum, download_size, build_time) "
+      "values (:repository_id, :media_nr, :location, :checksum, :download_size, :build_time);" ));
     insert_deltarpm_cmd.reset( new sqlite3_command (con,
-      "insert into delta_packages (media_nr, location, checksum, download_size, build_time, "
+      "insert into delta_packages (repository_id, media_nr, location, checksum, download_size, build_time, "
         "baseversion_version, baseversion_release, baseversion_epoch, baseversion_checksum, "
         "baseversion_build_time, baseversion_sequence_info) "
-      "values (:media_nr, :location, :checksum, :download_size, :build_time, "
+      "values (:repository_id, :media_nr, :location, :checksum, :download_size, :build_time, "
         ":baseversion_version, :baseversion_release, :baseversion_epoch, :baseversion_checksum, "
         ":baseversion_build_time, :baseversion_sequence_info);" ));
     append_patch_baseversion_cmd.reset( new sqlite3_command (con,
@@ -322,11 +321,11 @@ RecordId CacheStore::consumePackageAtom( const data::RecordId & repository_id,
 
   for (set<data::PatchRpm_Ptr>::const_iterator p = atom->patchRpms.begin();
        p != atom->patchRpms.end(); ++p)
-    appendPatchRpm(*p);
+    appendPatchRpm(repository_id, *p);
 
   for (set<data::DeltaRpm_Ptr>::const_iterator d = atom->deltaRpms.begin();
        d != atom->deltaRpms.end(); ++d)
-    appendDeltaRpm(*d);
+    appendDeltaRpm(repository_id, *d);
   return id;
 }
 
@@ -611,11 +610,12 @@ void CacheStore::appendUnknownDependency( const RecordId &resolvable_id,
 
 
 /** \todo lookupOrAppend ? */
-RecordId CacheStore::appendPatchRpm(const data::PatchRpm_Ptr & prpm)
+RecordId CacheStore::appendPatchRpm(const zypp::data::RecordId &repository_id, const data::PatchRpm_Ptr & prpm)
 {
   RecordId id;
 
   //! \todo what's this? _pimpl->insert_patchrpm_cmd->bind(":media_nr", ???);
+  _pimpl->insert_patchrpm_cmd->bind(":repository_id", repository_id);
   _pimpl->insert_patchrpm_cmd->bind(":location", prpm->location.filePath.asString());
   _pimpl->insert_patchrpm_cmd->bind(":checksum", prpm->location.fileChecksum.checksum());
   //! \todo checksum type
@@ -640,11 +640,12 @@ RecordId CacheStore::appendPatchRpm(const data::PatchRpm_Ptr & prpm)
 
 
 /** \todo lookupOrAppend ? */
-RecordId CacheStore::appendDeltaRpm(const data::DeltaRpm_Ptr & drpm)
+RecordId CacheStore::appendDeltaRpm(const zypp::data::RecordId &repository_id, const data::DeltaRpm_Ptr & drpm)
 {
   RecordId id;
 
   //! \todo what's this? _pimpl->insert_deltarpm_cmd->bind(":media_nr", ???);
+  _pimpl->insert_deltarpm_cmd->bind(":repository_id", repository_id);
   _pimpl->insert_deltarpm_cmd->bind(":location", drpm->location.filePath.asString());
   _pimpl->insert_deltarpm_cmd->bind(":checksum", drpm->location.fileChecksum.checksum());
   //! \todo checksum type
@@ -693,20 +694,26 @@ RecordId CacheStore::lookupOrAppendFile( const Pathname &path )
   _pimpl->select_file_cmd->bind(":dir_name_id", dir_name_id);
   _pimpl->select_file_cmd->bind(":file_name_id", file_name_id);
   long long id = 0;
-  try {
-    id = _pimpl->select_file_cmd->executeint64();
+
+  try
+  {
+    sqlite3_reader reader= _pimpl->select_file_cmd->executereader();
+    if (!reader.read())
+    {
+      // does not exist
+      _pimpl->insert_file_cmd->bind(":dir_name_id", dir_name_id);
+      _pimpl->insert_file_cmd->bind(":file_name_id", file_name_id);
+      _pimpl->insert_file_cmd->executenonquery();
+      id = _pimpl->con.insertid();
+      return id;
+   }
+   return reader.getint64(0);
   }
   catch ( const sqlite3x::database_error &e )
   {
-    // does not exist
-    _pimpl->insert_file_cmd->bind(":dir_name_id", dir_name_id);
-    _pimpl->insert_file_cmd->bind(":file_name_id", file_name_id);
-    _pimpl->insert_file_cmd->executenonquery();
-    id = _pimpl->con.insertid();
-    return static_cast<RecordId>(id);
-
+    ZYPP_RETHROW(e);
   }
-  return static_cast<RecordId>(id);
+  return id;
 }
 
 void CacheStore::updateRepository( const RecordId &id,
@@ -722,22 +729,26 @@ void CacheStore::updateRepository( const RecordId &id,
 RecordId CacheStore::lookupOrAppendRepository( const string &alias )
 {
   _pimpl->select_repository_cmd->bind(":alias", alias);
-
   long long id = 0;
-  try {
-    id = _pimpl->select_repository_cmd->executeint64();
+  try
+  {
+    sqlite3_reader reader= _pimpl->select_repository_cmd->executereader();
+    if (!reader.read())
+    {
+      // does not exist
+      _pimpl->insert_repository_cmd->bind(":alias", alias);
+      _pimpl->insert_repository_cmd->bind(":timestamp", static_cast<int>((Date::ValueType) Date::now()) );
+      _pimpl->insert_repository_cmd->executenonquery();
+      id = _pimpl->con.insertid();
+      return id;
+   }
+   return reader.getint64(0);
   }
   catch ( const sqlite3x::database_error &e )
   {
-    // does not exist
-    _pimpl->insert_repository_cmd->bind(":alias", alias);
-    _pimpl->insert_repository_cmd->bind(":timestamp", static_cast<int>((Date::ValueType) Date::now()) );
-    _pimpl->insert_repository_cmd->executenonquery();
-    id = _pimpl->con.insertid();
-    return static_cast<RecordId>(id);
-
+    ZYPP_RETHROW(e);
   }
-  return static_cast<RecordId>(id);
+  return id;
 }
 
 void CacheStore::cleanRepository( const data::RecordId &id )
@@ -803,16 +814,22 @@ bool CacheStore::isCached( const string &alias )
 
 RecordId CacheStore::lookupRepository( const string &alias )
 {
+  long long id = 0;
   sqlite3_command cmd(_pimpl->con, "select id from repositories where alias=:alias;");
   cmd.bind(":alias", alias);
-
-  long long id = 0;
-  try {
-    id = cmd.executeint64();
+  try
+  {
+    sqlite3_reader reader= cmd.executereader();
+    if (!reader.read())
+    {
+      // does not exist
+      ZYPP_THROW(CacheRecordNotFoundException());
+   }
+   return reader.getint64(0);
   }
   catch ( const sqlite3x::database_error &e )
   {
-    ZYPP_THROW(CacheRecordNotFoundException());
+    ZYPP_RETHROW(e);
   }
   return id;
 }
@@ -829,18 +846,24 @@ RecordId CacheStore::lookupOrAppendType( const string &klass, const string &name
   _pimpl->select_type_cmd->bind(":class", klass);
   _pimpl->select_type_cmd->bind(":name", name);
   long long id = 0;
-  try {
-    id = _pimpl->select_type_cmd->executeint64();
-    _pimpl->type_cache[thetype] = id;
+  try
+  {
+    sqlite3_reader reader= _pimpl->select_type_cmd->executereader();
+    if (!reader.read())
+    {
+      // does not exist
+      _pimpl->insert_type_cmd->bind(":class", klass);
+      _pimpl->insert_type_cmd->bind(":name", name);
+      _pimpl->insert_type_cmd->executenonquery();
+      id = _pimpl->con.insertid();
+      _pimpl->type_cache[thetype] = id;
+      return id;
+   }
+   return reader.getint64(0);
   }
   catch ( const sqlite3x::database_error &e )
   {
-    // does not exist
-    _pimpl->insert_type_cmd->bind(":class", klass);
-    _pimpl->insert_type_cmd->bind(":name", name);
-    _pimpl->insert_type_cmd->executenonquery();
-    id = _pimpl->con.insertid();
-    return id;
+    ZYPP_RETHROW(e);
   }
   return id;
 }
@@ -852,61 +875,72 @@ RecordId CacheStore::lookupOrAppendName( const string &name )
     _pimpl->name_cache_hits++;
     return _pimpl->name_cache[name];
   }
-
-  _pimpl->select_name_cmd->bind(":name", name);
   long long id = 0;
-  try {
-    id = _pimpl->select_name_cmd->executeint64();
-    _pimpl->name_cache[name] = id;
+  try
+  {
+    sqlite3_reader reader= _pimpl->select_name_cmd->executereader();
+    if (!reader.read())
+    {
+      // does not exist
+      _pimpl->insert_name_cmd->bind(":name", name);
+      _pimpl->insert_name_cmd->executenonquery();
+      id = _pimpl->con.insertid();
+      _pimpl->name_cache[name] = id;
+      return id;
+   }
+   return reader.getint64(0);
   }
   catch ( const sqlite3x::database_error &e )
   {
-    // does not exist
-    _pimpl->insert_name_cmd->bind(":name", name);
-    _pimpl->insert_name_cmd->executenonquery();
-    id = _pimpl->con.insertid();
-    return static_cast<RecordId>(id);
-
+    ZYPP_RETHROW(e);
   }
-  return static_cast<RecordId>(id);
+  return id;
 }
 
 RecordId CacheStore::lookupOrAppendDirName( const string &name )
 {
-  _pimpl->select_dirname_cmd->bind(":name", name);
   long long id = 0;
-  try {
-    id = _pimpl->select_dirname_cmd->executeint64();
+  try
+  {
+    sqlite3_reader reader= _pimpl->select_dirname_cmd->executereader();
+    if (!reader.read())
+    {
+      // does not exist
+      _pimpl->insert_dirname_cmd->bind(":name", name);
+      _pimpl->insert_dirname_cmd->executenonquery();
+      id = _pimpl->con.insertid();
+      return id;
+   }
+   return reader.getint64(0);
   }
   catch ( const sqlite3x::database_error &e )
   {
-    // does not exist
-    _pimpl->insert_dirname_cmd->bind(":name", name);
-    _pimpl->insert_dirname_cmd->executenonquery();
-    id = _pimpl->con.insertid();
-    return static_cast<RecordId>(id);
-
+    ZYPP_RETHROW(e);
   }
-  return static_cast<RecordId>(id);
+  return id;
 }
 
 RecordId CacheStore::lookupOrAppendFileName( const string &name )
 {
-  _pimpl->select_filename_cmd->bind(":name", name);
   long long id = 0;
-  try {
-    id = _pimpl->select_filename_cmd->executeint64();
+  try
+  {
+    sqlite3_reader reader= _pimpl->select_filename_cmd->executereader();
+    if (!reader.read())
+    {
+      // does not exist
+      _pimpl->insert_filename_cmd->bind(":name", name);
+      _pimpl->insert_filename_cmd->executenonquery();
+      id = _pimpl->con.insertid();
+      return id;
+   }
+   return reader.getint64(0);
   }
   catch ( const sqlite3x::database_error &e )
   {
-    // does not exist
-    _pimpl->insert_filename_cmd->bind(":name", name);
-    _pimpl->insert_filename_cmd->executenonquery();
-    id = _pimpl->con.insertid();
-    return static_cast<RecordId>(id);
-
+    ZYPP_RETHROW(e);
   }
-  return static_cast<RecordId>(id);
+  return id;
 }
 
 void CacheStore::setSharedData( const data::RecordId &resolvable_id,
