@@ -22,6 +22,7 @@
 #include "zypp/Digest.h"
 #include "zypp/MediaSetAccess.h"
 #include "zypp/FileChecker.h"
+#include "zypp/ProgressData.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -112,7 +113,9 @@ namespace zypp
     * directory
     *
     */
-    void start( const Pathname &dest_dir, MediaSetAccess &media );
+    void start( const Pathname &dest_dir,
+                MediaSetAccess &media,
+                 const ProgressData::ReceiverFnc & progress = ProgressData::ReceiverFnc() );
 
   private:
     /** Pointer to implementation */

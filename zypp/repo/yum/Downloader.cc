@@ -17,6 +17,7 @@
 #include "zypp/parser/yum/RepomdFileReader.h"
 #include "zypp/parser/yum/PatchesFileReader.h"
 #include "Downloader.h"
+#include "zypp/base/UserRequestException.h"
 
 using namespace std;
 using namespace zypp::xml;
@@ -68,13 +69,17 @@ bool Downloader::repomd_Callback( const OnMediaLocation &loc, const ResourceType
   return true;
 }
 
-void Downloader::download( const Pathname &dest_dir )
+void Downloader::download( const Pathname &dest_dir,
+                           const ProgressData::ReceiverFnc & progressrcv )
 {
   Pathname repomdpath =  "/repodata/repomd.xml";
   Pathname keypath =  "/repodata/repomd.xml.key";
   Pathname sigpath =  "/repodata/repomd.xml.asc";
   
-  
+  ProgressData progress;
+  progress.sendTo(progressrcv);
+  progress.toMin();
+
   _dest_dir = dest_dir;
   if ( _media.doesFileExist(keypath) )
     _fetcher.enqueue( OnMediaLocation().filename(keypath) );
@@ -84,6 +89,9 @@ void Downloader::download( const Pathname &dest_dir )
   
   _fetcher.start( dest_dir, _media );
   
+  if ( ! progress.tick() )
+    ZYPP_THROW(AbortRequestException());
+
   SignatureFileChecker sigchecker;
   
   if ( PathInfo( dest_dir + sigpath ).isExist() )
@@ -95,7 +103,9 @@ void Downloader::download( const Pathname &dest_dir )
   _fetcher.enqueue( OnMediaLocation().filename(repomdpath), sigchecker );
   _fetcher.start( dest_dir, _media);
   
-  
+  if ( ! progress.tick() )
+        ZYPP_THROW(AbortRequestException());
+
   _fetcher.reset();
 
   Reader reader( dest_dir + "/repodata/repomd.xml" );
@@ -103,6 +113,7 @@ void Downloader::download( const Pathname &dest_dir )
 
   // ready, go!
   _fetcher.start( dest_dir, _media);
+  progress.toMax();
 }
 
 }// ns yum

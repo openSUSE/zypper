@@ -6,7 +6,7 @@
 #include "zypp/data/ResolvableDataConsumer.h"
 #include "zypp/base/Measure.h"
 #include "zypp/detail/ResObjectFactory.h"
-#include "zypp/parser/yum/YUMParser.h"
+#include "zypp/parser/yum/RepoParser.h"
 #include "zypp/repo/memory/PackageImpl.h"
 
 
@@ -122,7 +122,7 @@ int main(int argc, char **argv)
     MIL << "creating PrimaryFileParser" << endl;
     Measure parse_primary_timer("primary.xml.gz parsing");
     ResolvableConsumer store;
-    parser::yum::YUMParser parser( 0, store, &progress_function);
+    parser::yum::RepoParser parser( 0, store, &progress_function);
     parser.parse(argv[1]);
     parse_primary_timer.stop();
 

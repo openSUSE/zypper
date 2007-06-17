@@ -15,6 +15,7 @@
 #include "zypp/base/Logger.h"
 #include "zypp/base/DefaultIntegral.h"
 #include "zypp/Fetcher.h"
+#include "zypp/base/UserRequestException.h"
 
 using namespace std;
 
@@ -52,7 +53,9 @@ namespace zypp
     void enqueueDigested( const OnMediaLocation &resource, const FileChecker &checker );
     void addCachePath( const Pathname &cache_dir );
     void reset();
-    void start( const Pathname &dest_dir, MediaSetAccess &media );
+    void start( const Pathname &dest_dir,
+                MediaSetAccess &media,
+                const ProgressData::ReceiverFnc & progress_receiver );
 
     /** Offer default Impl. */
     static shared_ptr<Impl> nullimpl()
@@ -99,8 +102,13 @@ namespace zypp
     _caches.push_back(cache_dir);
   }
   
-  void Fetcher::Impl::start( const Pathname &dest_dir, MediaSetAccess &media )
+  void Fetcher::Impl::start( const Pathname &dest_dir,
+                             MediaSetAccess &media,
+                             const ProgressData::ReceiverFnc & progress_receiver )
   {
+    ProgressData progress(_resources.size());
+    progress.sendTo(progress_receiver);
+
     for ( list<FetcherJob>::const_iterator it_res = _resources.begin(); it_res != _resources.end(); ++it_res )
     {
       bool got_from_cache = false;
@@ -201,6 +209,9 @@ namespace zypp
        {
           ZYPP_THROW(Exception("Unknown error while validating " + (*it_res).location.filename().asString()));
        }
+
+       if ( ! progress.incr() )
+        ZYPP_THROW(AbortRequestException());
     } // for each job
   }
 
@@ -253,9 +264,11 @@ namespace zypp
     _pimpl->reset();
   }
 
-  void Fetcher::start( const Pathname &dest_dir, MediaSetAccess &media )
+  void Fetcher::start( const Pathname &dest_dir,
+                       MediaSetAccess &media,
+                       const ProgressData::ReceiverFnc & progress_receiver )
   {
-    _pimpl->start(dest_dir, media);
+    _pimpl->start(dest_dir, media, progress_receiver);
   }
 
 

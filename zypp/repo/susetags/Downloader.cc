@@ -6,6 +6,7 @@
 #include "zypp/Fetcher.h"
 
 #include "zypp/repo/susetags/Downloader.h"
+#include "zypp/base/UserRequestException.h"
 
 using namespace std;
 
@@ -22,7 +23,8 @@ Downloader::Downloader( const Url &url, const Pathname &path )
   
 }
 
-void Downloader::download( const Pathname &dest_dir )
+void Downloader::download( const Pathname &dest_dir,
+                           const ProgressData::ReceiverFnc & progress )
 {
   MediaSetAccess media(_url, _path);
   Fetcher fetcher;

@@ -27,6 +27,7 @@
 
 #include "zypp/base/PtrTypes.h"
 #include "zypp/RepoStatus.h"
+#include "zypp/ProgressData.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -356,7 +357,8 @@ namespace zypp
        * \param prpm The patch RPM object to insert.
        * \return Record ID of the newly inserted record.
        */
-      data::RecordId appendPatchRpm( const data::RecordId &repo_id, const data::PatchRpm_Ptr & prpm);
+      data::RecordId appendPatchRpm( const data::RecordId &repo_id,
+                                     const data::PatchRpm_Ptr & prpm);
 
 
       /**
@@ -365,7 +367,8 @@ namespace zypp
        * \param drpm The delta RPM object to insert.
        * \return Record ID of the newly inserted record.
        */
-      data::RecordId appendDeltaRpm( const data::RecordId &repo_id, const data::DeltaRpm_Ptr & drpm);
+      data::RecordId appendDeltaRpm( const data::RecordId &repo_id,
+                                     const data::DeltaRpm_Ptr & drpm);
 
 
       /**
@@ -540,7 +543,8 @@ namespace zypp
        * \throws CacheRecordNotFoundException if the repository
        * id does not refer to a valid repository.
        */
-      void cleanRepository( const data::RecordId &id );
+      void cleanRepository( const data::RecordId &id,
+                            const ProgressData::ReceiverFnc & progressrcv = ProgressData::ReceiverFnc() );
 
       /**
        * \short Clean repository from cache
@@ -552,7 +556,8 @@ namespace zypp
        * \throws CacheRecordNotFoundException if the repository
        * alias does not refer to a valid repository.
        */
-      void cleanRepository( const std::string &alias );
+      void cleanRepository( const std::string &alias,
+                            const ProgressData::ReceiverFnc & progressrcv = ProgressData::ReceiverFnc() );
 
       /**
        * get the status of a cached repository

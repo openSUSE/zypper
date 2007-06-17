@@ -12,6 +12,7 @@
 
 #include "zypp/Url.h"
 #include "zypp/Pathname.h"
+#include "zypp/ProgressData.h"
 
 namespace zypp
 {
@@ -24,7 +25,8 @@ namespace zypp
       {
        public:
         Downloader( const Url &url, const Pathname &path );
-        void download( const Pathname &dest_dir );
+        void download( const Pathname &dest_dir,
+                       const ProgressData::ReceiverFnc & progress = ProgressData::ReceiverFnc() );
        private:
         Url _url;
         Pathname _path;

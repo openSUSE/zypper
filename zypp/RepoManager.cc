@@ -44,6 +44,24 @@ using namespace zypp::repo;
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
+//   class SubJobReceiverFnc
+//   {
+//     SubJobReceiverFnc( ProgressData::value_type jobtotal, const ProgressData::ReceiverFnc &receiver )
+//       : _jobtotal(jobtotal)
+//       , _receiver(receiver)
+//     {
+//     
+//     }
+//       
+//     bool operator()( ProgressData::value_type progress )
+//     {
+//       return true;
+//     }
+// 
+//     ProgressData::value_type _jobtotal;
+//     ProgressData::ReceiverFnc _receiver;
+//   };
+
   ///////////////////////////////////////////////////////////////////
   //
   //	CLASS NAME : RepoManagerOptions
@@ -59,8 +77,15 @@ namespace zypp
   }
   
   /**
-    * \short Simple callback to collect the results
-    */
+   * \short Simple callback to collect the results
+   *
+   * Classes like RepoFileParser call the callback
+   * once per each repo in a file.
+   *
+   * Passing this functor as callback, you can collect
+   * all resuls at the end, without dealing with async
+   * code.
+   */
   struct RepoCollector
   {
     RepoCollector()
@@ -246,7 +271,8 @@ namespace zypp
 
   ////////////////////////////////////////////////////////////////////////////
   
-  void RepoManager::refreshMetadata( const RepoInfo &info )
+  void RepoManager::refreshMetadata( const RepoInfo &info,
+                                     const ProgressData::ReceiverFnc & progress )
   {
     assert_alias(info);
     assert_urls(info);
@@ -305,14 +331,16 @@ namespace zypp
   
   ////////////////////////////////////////////////////////////////////////////
   
-  void RepoManager::cleanMetadata( const RepoInfo &info )
+  void RepoManager::cleanMetadata( const RepoInfo &info,
+                                   const ProgressData::ReceiverFnc & progress )
   {
     filesystem::recursive_rmdir(rawcache_path_for_repoinfo(_pimpl->options, info));
   }
   
   ////////////////////////////////////////////////////////////////////////////
   
-  void RepoManager::buildCache( const RepoInfo &info )
+  void RepoManager::buildCache( const RepoInfo &info,
+                                const ProgressData::ReceiverFnc & progress )
   {
     assert_alias(info);
     Pathname rawpath = rawcache_path_for_repoinfo(_pimpl->options, info);
@@ -381,8 +409,12 @@ namespace zypp
   
   ////////////////////////////////////////////////////////////////////////////
   
-  void RepoManager::cleanCache( const RepoInfo &info )
+  void RepoManager::cleanCache( const RepoInfo &info,
+                                const ProgressData::ReceiverFnc & progressrcv )
   {
+    ProgressData progress;
+    progress.sendTo(progressrcv);
+
     cache::CacheStore store(_pimpl->options.repoCachePath);
 
     data::RecordId id = store.lookupRepository(info.alias());
@@ -398,7 +430,8 @@ namespace zypp
     return store.isCached(info.alias());
   }
   
-  Repository RepoManager::createFromCache( const RepoInfo &info )
+  Repository RepoManager::createFromCache( const RepoInfo &info,
+                                           const ProgressData::ReceiverFnc & progress )
   {
     cache::CacheStore store(_pimpl->options.repoCachePath);
     
@@ -417,9 +450,10 @@ namespace zypp
  
   ////////////////////////////////////////////////////////////////////////////
   
-  void RepoManager::addRepository( const RepoInfo &info )
+  void RepoManager::addRepository( const RepoInfo &info,
+                                   const ProgressData::ReceiverFnc & progress )
   {
-  
+    
   }
   
   ////////////////////////////////////////////////////////////////////////////

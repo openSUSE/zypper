@@ -11,27 +11,21 @@ TARGET_LINK_LIBRARIES(susetags-downloader  zypp )
 
 ADD_EXECUTABLE(cachestore CacheStore_tp.cc)
 TARGET_LINK_LIBRARIES(cachestore  zypp )
-TARGET_LINK_LIBRARIES(cachestore  zypp2 )
 
 ADD_EXECUTABLE(testbed testbed.cc)
 TARGET_LINK_LIBRARIES(testbed  zypp )
-TARGET_LINK_LIBRARIES(testbed  zypp2 )
 
 ADD_EXECUTABLE(yum-downloader YUMDownloader_tp.cc)
 TARGET_LINK_LIBRARIES(yum-downloader  zypp )
-TARGET_LINK_LIBRARIES(yum-downloader  zypp2 )
 
-ADD_EXECUTABLE(yum-reader YUMReader_tp.cc)
-TARGET_LINK_LIBRARIES(yum-reader  zypp )
-TARGET_LINK_LIBRARIES(yum-reader  zypp2 )
+# ADD_EXECUTABLE(yum-reader YUMReader_tp.cc)
+# TARGET_LINK_LIBRARIES(yum-reader  zypp )
 
 ADD_EXECUTABLE(cachedsource CachedSource_tp.cc)
 TARGET_LINK_LIBRARIES(cachedsource  zypp )
-TARGET_LINK_LIBRARIES(cachedsource  zypp2 )
 
 ADD_EXECUTABLE(repomanager RepositoryManager_tp.cc)
 TARGET_LINK_LIBRARIES(repomanager zypp )
-TARGET_LINK_LIBRARIES(repomanager zypp2 )
 
 FIND_PACKAGE(Zsync)
 IF(ZSYNC_FOUND)

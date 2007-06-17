@@ -751,7 +751,8 @@ RecordId CacheStore::lookupOrAppendRepository( const string &alias )
   return id;
 }
 
-void CacheStore::cleanRepository( const data::RecordId &id )
+void CacheStore::cleanRepository( const data::RecordId &id,
+                                  const ProgressData::ReceiverFnc & progressrcv )
 {
   sqlite3_command cmd( _pimpl->con, "delete from repositories where id=:id");
   cmd.bind(":id", id);
@@ -766,9 +767,10 @@ void CacheStore::cleanRepository( const data::RecordId &id )
   }
 }
 
-void CacheStore::cleanRepository( const std::string &alias )
+void CacheStore::cleanRepository( const std::string &alias,
+                                  const ProgressData::ReceiverFnc & progressrcv )
 {
-  cleanRepository(lookupRepository(alias));
+  cleanRepository(lookupRepository(alias), progressrcv);
 }
 
 RepoStatus CacheStore::repositoryStatus( const data::RecordId &id )

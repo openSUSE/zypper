@@ -24,6 +24,7 @@
 #include "zypp/RepoInfo.h"
 #include "zypp/repo/RepoException.h"
 #include "zypp/repo/RepoType.h"
+#include "zypp/ProgressData.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -91,7 +92,8 @@ namespace zypp
     * \throws repo::RepoUnknownTypeException if the metadata is unknown
     * \throws Exception on unknown error.
     */
-   void refreshMetadata( const RepoInfo &info );
+   void refreshMetadata( const RepoInfo &info,
+                         const ProgressData::ReceiverFnc & progressrcv = ProgressData::ReceiverFnc() );
    
    /**
     * \short Clean local metadata
@@ -101,7 +103,8 @@ namespace zypp
     * \throws repo::RepoNoAliasException if can't figure an alias
     * \throws Exception on unknown error.
     */
-   void cleanMetadata( const RepoInfo &info );
+   void cleanMetadata( const RepoInfo &info,
+                       const ProgressData::ReceiverFnc & progressrcv = ProgressData::ReceiverFnc() );
    
    /**
     * \short Refresh local cache
@@ -116,7 +119,8 @@ namespace zypp
     * \throws repo::RepoNoAliasException if can't figure an alias to look in cache
     * \throws Exception on unknown error.
     */
-   void buildCache( const RepoInfo &info );
+   void buildCache( const RepoInfo &info,
+                    const ProgressData::ReceiverFnc & progressrcv = ProgressData::ReceiverFnc() );
    
    /**
     * \short clean local cache
@@ -128,7 +132,8 @@ namespace zypp
     * \throws repo::RepoNoAliasException if can't figure an alias to look in cache
     * \throws Exception on unknown error.
     */
-   void cleanCache( const RepoInfo &info );
+   void cleanCache( const RepoInfo &info,
+                    const ProgressData::ReceiverFnc & progressrcv = ProgressData::ReceiverFnc() );
    
    /**
     * \short Whether a repository exists in cache
@@ -142,7 +147,8 @@ namespace zypp
     *
     * \throw RepoNotCachedException When the source is not cached.
     */
-   Repository createFromCache( const RepoInfo &info );
+   Repository createFromCache( const RepoInfo &info,
+                               const ProgressData::ReceiverFnc & progressrcv = ProgressData::ReceiverFnc() );
 
    /**
     * \short Probe repo metadata type.
@@ -160,7 +166,8 @@ namespace zypp
     * \throws repo::RepoAlreadyExistsException If the repo clash some 
     * unique attribute like alias
     */
-   void addRepository( const RepoInfo &info );
+   void addRepository( const RepoInfo &info,
+                       const ProgressData::ReceiverFnc & progressrcv = ProgressData::ReceiverFnc() );
    
    /**
     * Adds a .repo file directly, which can contain
@@ -171,7 +178,8 @@ namespace zypp
     /**
      * PROPOSAL
      */
-    void removeRepository( const std::string & alias );
+    void removeRepository( const std::string & alias,
+                           const ProgressData::ReceiverFnc & progressrcv = ProgressData::ReceiverFnc() );
 
   public:
 

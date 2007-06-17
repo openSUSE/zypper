@@ -15,7 +15,7 @@
 #include "zypp/MediaSetAccess.h"
 #include "zypp/source/SUSEMediaVerifier.h"
 #include "zypp/OnMediaLocation.h"
-#include "zypp/source/yum/YUMDownloader.h"
+#include "zypp/repo/yum/Downloader.h"
 #include "zypp/Fetcher.h"
 
 #include "zypp/Product.h"
@@ -25,7 +25,7 @@
 using namespace std;
 using namespace zypp;
 using namespace media;
-using namespace source::yum;
+using namespace repo::yum;
 
 int main(int argc, char **argv)
 {
@@ -36,7 +36,7 @@ int main(int argc, char **argv)
     try
     {
       ZYpp::Ptr z = getZYpp();
-      YUMDownloader downloader(Url(argv[1]), "/");
+      Downloader downloader(Url(argv[1]), "/");
       downloader.download(argv[2]);
     }
     catch ( const Exception &e )

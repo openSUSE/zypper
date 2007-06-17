@@ -17,6 +17,7 @@
 #include "zypp/MediaSetAccess.h"
 #include "zypp/parser/xml/Reader.h"
 #include "zypp/repo/yum/ResourceType.h"
+#include "zypp/ProgressData.h"
 
 namespace zypp
 {
@@ -44,7 +45,8 @@ namespace zypp
        /**
         * starts the download to local directory \a dest_dir
         */
-        void download( const Pathname &dest_dir );
+        void download( const Pathname &dest_dir,
+                       const ProgressData::ReceiverFnc & progress = ProgressData::ReceiverFnc() );
         
        protected:
         bool repomd_Callback( const OnMediaLocation &loc, const ResourceType &dtype );
