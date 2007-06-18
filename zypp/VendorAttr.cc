@@ -94,7 +94,7 @@ namespace zypp
 
   VendorAttr::VendorAttr ()
   {
-    char * vendors[] = {
+    const char * vendors[] = {
       "jpackage project",
       "novell",
       "opensuse",
@@ -104,7 +104,7 @@ namespace zypp
       "ati technologies inc.",
       "nvidia"
     };
-    _trustedVendors.insert( vendors, vendors+(sizeof(vendors)/sizeof(char *)) );
+    _trustedVendors.insert( vendors, vendors+(sizeof(vendors)/sizeof(const char *)) );
 
     Pathname vendorrcPath( getZYpp()->homePath() / "db/trustedVendors" );
     try

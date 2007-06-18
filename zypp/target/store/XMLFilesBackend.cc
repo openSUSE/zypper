@@ -85,13 +85,13 @@ namespace storage
  *  see: https://bugzilla.novell.com/show_bug.cgi?id=205392
  */
 
-typedef struct
+struct PRODUCT_TABLE_ENTRY
 {
-  char * dist_name;
-  char * dist_version;
-  char * product_name;
-  char * product_version;
-} PRODUCT_TABLE_ENTRY;
+  const char * dist_name;
+  const char * dist_version;
+  const char * product_name;
+  const char * product_version;
+};
 
 /**
  * create the map on demand so we 

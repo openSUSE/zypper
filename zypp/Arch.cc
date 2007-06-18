@@ -289,7 +289,7 @@ namespace zypp
   static const string
   canonical_arch (const string & arch)
   {
-    typedef struct { char *from; char *to; } canonical;
+    struct canonical { const char *from; const char *to; };
     // convert machine string to known_arch
     static canonical canonical_archs[] = {
       { "noarch",  "noarch" },

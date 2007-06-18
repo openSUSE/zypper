@@ -245,13 +245,13 @@ namespace zypp
 	    //
 	    // Filter some common unwanted mountpoints
 	    //
-	    char * mpunwanted[] = {
+	    const char * mpunwanted[] = {
 	      "/mnt", "/media", "/mounts", "/floppy", "/cdrom",
 	      "/suse", "/var/tmp", "/var/adm/mount", "/var/adm/YaST",
 	      /*last*/0/*entry*/
 	    };
 
-	    char ** nomp = mpunwanted;
+	    const char ** nomp = mpunwanted;
 	    for ( ; *nomp; ++nomp ) {
 	      std::string pre( *nomp );
 	      if ( mp.compare( 0, pre.size(), pre ) == 0 // mp has prefix pre
