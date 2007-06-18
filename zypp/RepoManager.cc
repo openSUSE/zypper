@@ -338,7 +338,11 @@ namespace zypp
               refresh = true;
             }
           }
-          
+          else
+          {
+            refresh = true;
+          }
+
           if ( refresh )
             downloader.download(tmpdir.path());
           
@@ -360,7 +364,11 @@ namespace zypp
               refresh = true;
             }
           }
-          
+          else
+          {
+            refresh = true;
+          }
+ 
           if ( refresh )
             downloader.download(tmpdir.path());
           // no error

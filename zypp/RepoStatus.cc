@@ -66,7 +66,7 @@ namespace zypp
   //	METHOD TYPE : Ctor
   //
   RepoStatus::RepoStatus()
-  : _pimpl( new Impl() )
+    : _pimpl( new Impl() )
   {}
 
   ///////////////////////////////////////////////////////////////////
@@ -78,6 +78,7 @@ namespace zypp
   {}
 
   RepoStatus::RepoStatus( const Pathname &path )
+    : _pimpl( new Impl() )
   {
      _pimpl->checksum = filesystem::sha1sum(path);
   }
