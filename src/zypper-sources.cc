@@ -283,7 +283,7 @@ int add_repo_from_file(const std::string & repo_file_url,
   //! \todo handle local .repo files, validate the URL
   Url url(repo_file_url);
   RepoManager manager;
-  list<RepoInfo> repos = manager.readRepoFile(url);
+  list<RepoInfo> repos = readRepoFile(url);
 
   for (list<RepoInfo>::iterator it = repos.begin();
        it !=  repos.end(); ++it)
