@@ -26,7 +26,7 @@ BuildRequires:  cmake
 BuildRequires:  sqlite sqlite-devel
 BuildRequires:  boost-devel curl-devel dejagnu doxygen gcc-c++ graphviz hal-devel libxml2-devel rpm-devel gettext-devel
 BuildRequires:	update-desktop-files
-
+Requires:       gpg2
 
 %description
 Package, Patch, Pattern, and Product Management

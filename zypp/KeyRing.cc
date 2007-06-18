@@ -32,6 +32,8 @@ using namespace zypp::filesystem;
 #undef  ZYPP_BASE_LOGGER_LOGGROUP
 #define ZYPP_BASE_LOGGER_LOGGROUP "zypp::KeyRing"
 
+#define GPG_BINARY "/usr/bin/gpg2"
+
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
@@ -262,7 +264,7 @@ namespace zypp
   {
     const char* argv[] =
     {
-      "gpg",
+      GPG_BINARY,
       "--no-default-keyring",
       "--quiet",
       "--no-tty",
@@ -397,7 +399,7 @@ namespace zypp
     
     const char* argv[] =
     {
-      "gpg",
+      GPG_BINARY,
       "--no-default-keyring",
       "--quiet",
       "--list-public-keys",
@@ -476,7 +478,7 @@ namespace zypp
     
     const char* argv[] =
     {
-      "gpg",
+      GPG_BINARY,
       "--no-default-keyring",
       "--quiet",
       "--no-tty",
@@ -503,7 +505,7 @@ namespace zypp
   {
     const char* argv[] =
     {
-      "gpg",
+      GPG_BINARY,
       "--no-default-keyring",
       "--yes",
       "--quiet",
@@ -537,7 +539,7 @@ namespace zypp
 
     const char* argv[] =
     {
-      "gpg",
+      GPG_BINARY,
       "--no-default-keyring",
       "--quiet",
       "--no-tty",
@@ -580,7 +582,7 @@ namespace zypp
   {
     const char* argv[] =
     {
-      "gpg",
+      GPG_BINARY,
       "--no-default-keyring",
       "--quiet",
       "--no-tty",
