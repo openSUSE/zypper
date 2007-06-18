@@ -161,13 +161,7 @@ void refresh_repos()
       //<< "URI: " << it->url() << endl; 
 
       manager.refreshMetadata(repo);
-
-      if ( manager.isCached(repo ) )
-      {
-        cout_v << _("Cleaning cache...") << endl;
-        manager.cleanCache(repo);
-      }
-      cout_v << _("Parsing repository metadata...") << endl;
+      cout_v << _("Creating repository cache...") << endl;
       manager.buildCache(repo);
 
       cout << _("DONE") << endl << endl;
