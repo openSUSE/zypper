@@ -18,7 +18,7 @@ namespace zypp
 {
   namespace data
   {
-    /** Chache strore record id. */
+    /** Cache store record id. */
     typedef DefaultIntegral<long long, -1> RecordId;
     /** The default RecordId is a value we don't use for records. */
     static const RecordId noRecordId;

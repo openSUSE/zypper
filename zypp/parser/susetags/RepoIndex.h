@@ -41,8 +41,9 @@ namespace zypp
       //
       //	CLASS NAME : RepoIndex
       //
-      /** Repository content data.
+      /** Repository content data (from /content file).
        * File and Checksum definitions required by Downloader and Parser.
+       * (Do not confuse with NU's repoindex.xml)
       */
       class RepoIndex : public base::ReferenceCounted, private base::NonCopyable
       {
