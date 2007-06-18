@@ -629,8 +629,6 @@ int one_command(const string& command_str, int argc, char **argv)
     cond_init_target ();
 
     return add_repo_by_url(url, alias, type, enabled, refresh);
-
-    return ZYPPER_EXIT_OK;
   }
 
   // --------------------------( service delete )-----------------------------

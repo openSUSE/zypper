@@ -39,6 +39,8 @@
 #define ZYPPER_EXIT_ERR_INVALID_ARGS       3 // invalid arguments given, e.g. zypper source-add httttps://asdf.net 
 #define ZYPPER_EXIT_ERR_ZYPP               4 // error indicated from within libzypp, e.g. God = zypp::getZYpp() threw an exception
 #define ZYPPER_EXIT_ERR_PRIVILEGES         5 // unsufficient privileges for the operation
+#define ZYPPER_EXIT_NO_REPOS               6 // no repositories defined
+
 // info
 #define ZYPPER_EXIT_INF_UPDATE_NEEDED      100 // update needed
 #define ZYPPER_EXIT_INF_SEC_UPDATE_NEEDED  101 // security update needed

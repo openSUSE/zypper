@@ -38,18 +38,19 @@ ZyppSearch::ZyppSearch (
     _zypp(zypp), _options(options), _qstrings(qstrings) {
 
   cond_init_target();         // calls ZYpp::initializeTarget("/");
-  cond_init_system_sources(); // calls manager->restore("/");
+  init_repos();
 
   // no sources warning
-  if (gData.sources.empty()) {
-    cerr << _("No sources. Zypper currently searches within installation"
-        "sources only.") << endl;
-    exit(2); // TODO #define zypper error codes?
+  if (gData.repos.empty()) {
+    cerr << _("No repositories configured. Please, add at least one"
+              " repository using 'zypper addrepo' command before using search.")
+         << endl;
+    exit(ZYPPER_EXIT_NO_REPOS); // TODO #define zypper error codes?
   }
 
   setupRegexp();
   cacheInstalled();
-  load_sources(); // populates ResPool with resolvables from inst. sources
+  load_repo_resolvables(); // populates ResPool with resolvables from repos
 
   // cache identification strings of source resolvables (used to check for
   // duplicates of target resolvables in sources - DuplicateFilter)

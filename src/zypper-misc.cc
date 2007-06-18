@@ -448,24 +448,31 @@ void load_repo_resolvables()
 
     Repository repository;
 
-    try {
+    try 
+    {
+      if (!manager.isCached(repo))
+      {
+        cout_v << format(_("Repository '%s' not cached. Caching..."))
+                         % repo.alias() << endl;
+        manager.buildCache(repo);
+      }
+
       repository = manager.createFromCache(repo);
+      ResStore store = repository.resolvables();
+      God->addResolvables(store);
+  
+      cout_vv << format(_("(%d resolvables found)")) % store.size() << endl;
     }
     catch ( const repo::RepoNotCachedException &e )
     {
-     ZYPP_CAUGHT(e);
-     cout_v << "Repository " << repo.alias() << " not cached. Caching..." << endl;
-     manager.buildCache(repo);
-     repository = manager.createFromCache(repo);
+      ZYPP_CAUGHT(e);
+      cerr << format(_("Problem loading data from '%s'")) % repo.alias();
+      cerr_v << ":" << e.msg();
+      cerr << endl;
+      cerr << format(_("Resolvables from '%s' not loaded because of error."))
+                      % repo.alias() << endl;
     }
-
-    ResStore store = repository.resolvables();
-    //! \todo use format
-    cout_vv << "(" << store.size() << " resolvables found)" << endl;
-
-    God->addResolvables(store);
   }
-
 }
 
 void establish ()

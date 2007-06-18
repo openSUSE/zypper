@@ -176,7 +176,8 @@ void refresh_repos()
     {
       cerr << format(_("Error reading repository '%s':")) % repo.alias() << endl
            << e.msg() << endl;
-      cerr << format(_("Skipping repository '%s'")) % repo.alias()
+      cerr << format(_("Skipping repository '%s' because of the above error."))
+              % repo.alias()
            << endl; 
     }
   }
