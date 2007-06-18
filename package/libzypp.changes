@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Jun 18 17:20:45 CEST 2007 - mvidner@suse.cz
+
+- fixed so versioning from libtool to cmake
+- 3.3.0
+
+-------------------------------------------------------------------
 Mon Jun 18 09:47:32 CEST 2007 - dmacvicar@suse.de
 
 - Use gpg2 instead of gpg for keyring and make
