@@ -41,7 +41,8 @@ sqlite3_command::sqlite3_command(sqlite3_connection &con, const char *sql) : con
 sqlite3_command::sqlite3_command(sqlite3_connection &con, const wchar_t *sql) : con(con),refs(0)
 {
   const wchar_t *tail=NULL;
-  if (sqlite3_prepare16(con.db, sql, -1, &this->stmt, (const void**)&tail)!=SQLITE_OK)
+  const wchar_t **tmpptr=&tail;
+  if (sqlite3_prepare16(con.db, sql, -1, &this->stmt, (const void**)tmpptr)!=SQLITE_OK)
     SQLITE3X_THROW(database_error(con));
 
   this->argc=sqlite3_column_count(this->stmt);
@@ -59,7 +60,8 @@ sqlite3_command::sqlite3_command(sqlite3_connection &con, const std::string &sql
 sqlite3_command::sqlite3_command(sqlite3_connection &con, const std::wstring &sql) : con(con),refs(0)
 {
   const wchar_t *tail=NULL;
-  if (sqlite3_prepare16(con.db, sql.data(), (int)sql.length()*2, &this->stmt, (const void**)&tail)!=SQLITE_OK)
+  const wchar_t **tmpptr=&tail;
+  if (sqlite3_prepare16(con.db, sql.data(), (int)sql.length()*2, &this->stmt, (const void**)tmpptr)!=SQLITE_OK)
     SQLITE3X_THROW(database_error(con));
 
   this->argc=sqlite3_column_count(this->stmt);

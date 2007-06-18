@@ -15,7 +15,7 @@ static char rcsid[]="$Id: mkarray.c,v 1.2 2004/12/11 18:21:51 aisa0 Exp $";
 #include <stdlib.h>
 #include <string.h>
 
-static
+static int
 mkarray(filename, file, ofile, varname)
   char *filename;
   FILE *file;
@@ -23,7 +23,7 @@ mkarray(filename, file, ofile, varname)
   char *varname;
 {
   char buf[BUFSIZ];
-  size_t i, rsize, tsize=0;
+  size_t rsize, tsize=0;
   int done=0, line=8, status=EXIT_SUCCESS;
 
   fprintf(ofile, "/*\n");
@@ -71,7 +71,7 @@ mkarray(filename, file, ofile, varname)
   if(8!=line) fputc('\n', ofile);
   fputs("};\n\n", ofile);
 
-  fprintf(ofile, "size_t _%s_size=%d;\n", varname, tsize);
+  fprintf(ofile, "size_t _%s_size=%d;\n", varname, (int)tsize);
   fprintf(ofile, "size_t *%s_size=&_%s_size;\n", varname, varname);
 
   if(ferror(ofile)) {
@@ -86,11 +86,11 @@ mkarray(filename, file, ofile, varname)
   return status;
 }
 
+int
 main(argc, argv)
   char *argv[];
 {
   char *filename, *ofilename, *varname;
-  FILE *file;
   int status=EXIT_SUCCESS;
 
   --argc;

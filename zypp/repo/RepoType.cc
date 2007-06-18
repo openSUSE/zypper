@@ -7,6 +7,7 @@
 |                                                                      |
 \---------------------------------------------------------------------*/
 
+#include <iostream>
 #include <map>
 #include "zypp/base/Exception.h"
 #include "RepoType.h"

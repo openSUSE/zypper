@@ -399,6 +399,7 @@ RecordId CacheStore::consumeChangelog( const data::RecordId & repository_id,
   //! \todo maybe appendChangelog(const data::RecordId & resolvable_id, Changelog changelog) will be needed
   //! for inserting the changelog using in-memory record id of corresponding resolvable.
   //! (first, we'll see how fast is the inserting without remembering those ids)
+  return data::noRecordId;
 }
 
 RecordId CacheStore::consumeFilelist( const data::RecordId & repository_id,
@@ -406,6 +407,7 @@ RecordId CacheStore::consumeFilelist( const data::RecordId & repository_id,
                                   const data::Filenames & filenames )
 {
   //! \todo maybe consumeFilelist(const data::RecordId & resolvable_id, data::Filenames &) will be needed
+  return data::noRecordId;
 }
 
 RecordId CacheStore::appendResolvable( const RecordId &repository_id,
