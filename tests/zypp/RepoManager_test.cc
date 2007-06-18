@@ -62,6 +62,16 @@ void repomanager_test( const string &dir )
   
   ResStore store = repository.resolvables();
   MIL << store.size() << " resolvables" << endl;
+  
+  manager.refreshMetadata(repo);
+
+  if ( manager.isCached(repo ) )
+  {
+    MIL << "Repo already in cache, clean cache"<< endl;
+    manager.cleanCache(repo);
+  }
+  MIL << "Parsing repository metadata..." << endl;
+  manager.buildCache(repo);
 }
 
 test_suite*

@@ -886,6 +886,7 @@ RecordId CacheStore::lookupOrAppendName( const string &name )
   long long id = 0;
   try
   {
+    _pimpl->select_name_cmd->bind(":name", name);
     sqlite3_reader reader= _pimpl->select_name_cmd->executereader();
     if (!reader.read())
     {
@@ -910,6 +911,7 @@ RecordId CacheStore::lookupOrAppendDirName( const string &name )
   long long id = 0;
   try
   {
+    _pimpl->select_dirname_cmd->bind(":name", name);
     sqlite3_reader reader= _pimpl->select_dirname_cmd->executereader();
     if (!reader.read())
     {
@@ -933,6 +935,7 @@ RecordId CacheStore::lookupOrAppendFileName( const string &name )
   long long id = 0;
   try
   {
+    _pimpl->select_filename_cmd->bind(":name", name);
     sqlite3_reader reader= _pimpl->select_filename_cmd->executereader();
     if (!reader.read())
     {
