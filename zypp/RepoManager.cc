@@ -345,7 +345,8 @@ namespace zypp
 
           if ( refresh )
             downloader.download(tmpdir.path());
-          
+          else
+            return;
            // no error
         }
         break;
@@ -371,6 +372,8 @@ namespace zypp
  
           if ( refresh )
             downloader.download(tmpdir.path());
+          else
+            return;
           // no error
         }
         break;
