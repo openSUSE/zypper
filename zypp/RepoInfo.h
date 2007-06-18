@@ -133,6 +133,14 @@ namespace zypp
     std::string name() const;
 
     /**
+     * \short File where this repo was read from
+     *
+     * \note could be an empty pathname for repo
+     * infos created in memory.
+     */
+     Pathname filepath() const;
+    
+    /**
      * Add a base url. \see baseUrls
      * \param url The base url for the repository.
      *
@@ -176,6 +184,12 @@ namespace zypp
      */
     RepoInfo & setName( const std::string &name );
 
+    /**
+     * \short set the repository filepath
+     * \param path File path
+     */
+    RepoInfo & setFilepath( const Pathname &filename );
+    
     std::ostream & dumpOn( std::ostream & str ) const;
     
     std::ostream & dumpRepoOn( std::ostream & str ) const;

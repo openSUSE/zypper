@@ -802,16 +802,22 @@ RepoStatus CacheStore::repositoryStatus( const string &alias )
 
 bool CacheStore::isCached( const string &alias )
 {
+  sqlite3_command cmd(_pimpl->con, "select id from repositories where alias=:alias;");
+  cmd.bind(":alias", alias);
   try
   {
-    lookupRepository(alias);
+    sqlite3_reader reader= cmd.executereader();
+    if (!reader.read())
+    {
+      return false;
+   }
+   return true;
   }
-  catch( const CacheRecordNotFoundException &e )
+  catch ( const sqlite3x::database_error &e )
   {
-    return false;
+    ZYPP_RETHROW(e);
   }
-
-  return true;
+  return false;
 }
 
 RecordId CacheStore::lookupRepository( const string &alias )

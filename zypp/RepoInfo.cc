@@ -47,7 +47,7 @@ namespace zypp
     std::set<Url> baseUrls;
     std::string alias;
     std::string name;
-
+    Pathname filepath;
   public:
 
   private:
@@ -133,6 +133,12 @@ namespace zypp
     return *this;
   }
 
+  RepoInfo & RepoInfo::setFilepath( const Pathname &filepath )
+  {
+    _pimpl->filepath = filepath;
+    return *this;
+  }
+  
   tribool RepoInfo::enabled() const
   { return _pimpl->enabled; }
 
@@ -145,6 +151,9 @@ namespace zypp
   std::string RepoInfo::name() const
   { return _pimpl->name; }
 
+  Pathname RepoInfo::filepath() const
+  { return _pimpl->filepath; }
+  
   repo::RepoType RepoInfo::type() const
   { return _pimpl->type; }
 

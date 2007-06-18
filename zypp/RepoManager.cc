@@ -450,7 +450,34 @@ namespace zypp
   void RepoManager::addRepositories( const Url &url,
                                      const ProgressData::ReceiverFnc & progressrcv )
   {
-  
+    std::list<RepoInfo> knownrepos = knownRepositories();
+    std::list<RepoInfo> repos = readRepoFile(url);
+    for ( std::list<RepoInfo>::const_iterator it = repos.begin();
+          it != repos.end();
+          ++it )
+    {
+      // look if the alias is in the known repos.
+      for ( std::list<RepoInfo>::const_iterator kit = knownrepos.begin();
+          kit != repos.end();
+          ++kit )
+      {
+        if ( (*it).alias() == (*kit).alias() )
+          ZYPP_THROW(RepoAlreadyExistsException((*it).alias()));
+      }
+    }
+    
+    Pathname filename = Pathname(url.getPathName()).basename();
+    
+    if ( filename == Pathname() )
+      ZYPP_THROW(RepoException("Invalid repo file name at " + url.asString() ));
+    
+    // FIXME move this code to a separate function
+    Pathname final_filename = filename;
+    int counter = 1;
+    while ( PathInfo(_pimpl->options.knownReposPath + filename).isExist() )
+    {
+      filename = Pathname( filename.asString() );
+    }
   }
   
   ////////////////////////////////////////////////////////////////////////////

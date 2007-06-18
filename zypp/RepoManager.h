@@ -73,6 +73,16 @@ namespace zypp
    /** Dtor */
     ~RepoManager();
     
+    enum RepoRefreshPolicy
+    {
+      RefreshIfChanged,
+      RefreshForced
+    };
+    
+    enum RepoAddPolicy
+    {
+    };
+    
    /**
     * \short List known repositories.
     *
