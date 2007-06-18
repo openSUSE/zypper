@@ -12,7 +12,7 @@
 #include <iostream>
 //#include "zypp/base/Logger.h"
 #include "zypp/RepoStatus.h"
-
+#include "zypp/PathInfo.h"
 
 using namespace std;
 
@@ -66,7 +66,7 @@ namespace zypp
   //	METHOD TYPE : Ctor
   //
   RepoStatus::RepoStatus()
-  : _pimpl( Impl::nullimpl() )
+  : _pimpl( new Impl() )
   {}
 
   ///////////////////////////////////////////////////////////////////
@@ -77,6 +77,11 @@ namespace zypp
   RepoStatus::~RepoStatus()
   {}
 
+  RepoStatus::RepoStatus( const Pathname &path )
+  {
+     _pimpl->checksum = filesystem::sha1sum(path);
+  }
+  
   RepoStatus & RepoStatus::setChecksum( const string &checksum )
   {
     _pimpl->checksum = checksum;

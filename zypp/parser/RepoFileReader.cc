@@ -61,7 +61,7 @@ namespace zypp
           else if ( it->first == "type" )
             info.setType(repo::RepoType(it->second));
         }
-        
+        info.setFilepath(file);
         // add it to the list.
         callback(info);
         //if (!progress.tick())

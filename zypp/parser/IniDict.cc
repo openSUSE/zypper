@@ -91,7 +91,19 @@ namespace zypp
     {
       return make_map_key_end( _dict );
     }
+    
+    void IniDict::insertEntry( const std::string &section,
+                               const std::string &key,
+                               const std::string &value )
+    {
+      consume( section, key, value );
+    }
       
+    void IniDict::deleteSection( const std::string &section )
+    {
+      _dict.erase(section);
+    }
+    
     /******************************************************************
     **
     **	FUNCTION NAME : operator<<
@@ -99,6 +111,19 @@ namespace zypp
     */
     std::ostream & operator<<( std::ostream & str, const IniDict & obj )
     {
+      for ( IniDict::section_const_iterator si = obj.sectionsBegin();
+            si != obj.sectionsEnd();
+            ++si )
+      {
+        str << "[" << *si << "]" << endl;
+        for ( IniDict::entry_const_iterator ei = obj.entriesBegin(*si);
+              ei != obj.entriesEnd(*si);
+              ++ei )
+        {
+          str << ei->first << " = " << ei->second << endl;
+        }
+        str << endl;
+      }
       return str;
     }
 

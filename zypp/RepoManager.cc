@@ -253,12 +253,52 @@ namespace zypp
 
   ////////////////////////////////////////////////////////////////////////////
   
+  RepoStatus RepoManager::rawMetadataStatus( const RepoInfo &info )
+  {
+    Pathname rawpath = rawcache_path_for_repoinfo( _pimpl->options, info );
+    RepoType repokind = info.type();
+    switch ( repokind.toEnum() )
+    {
+      case RepoType::NONE_e:
+      // unknown, probe the local metadata
+        repokind = probe(Url(rawpath.asString()));
+      break;
+      default:
+      break;
+    }
+      
+    switch ( repokind.toEnum() )
+    {
+      case RepoType::RPMMD_e :
+      {
+        return RepoStatus( rawpath + "/repodata/repomd.xml");
+      }
+      break;
+      case RepoType::YAST2_e :
+      {
+        return RepoStatus( rawpath + "/content");
+      }
+      break;
+      default:
+        ZYPP_THROW(RepoUnknownTypeException());
+    }
+  }
+  
+  RepoStatus RepoManager::cacheStatus( const RepoInfo &info )
+  {
+    return RepoStatus();
+  }
+    
+  
   void RepoManager::refreshMetadata( const RepoInfo &info,
+                                     RepoRefreshPolicy policy,
                                      const ProgressData::ReceiverFnc & progress )
   {
     assert_alias(info);
     assert_urls(info);
     
+    RepoStatus oldstatus;
+    RepoStatus newstatus;
     // try urls one by one
     for ( RepoInfo::urls_const_iterator it = info.baseUrlsBegin(); it != info.baseUrlsEnd(); ++it )
     {
@@ -278,19 +318,51 @@ namespace zypp
         break;
       }
       
+      Pathname rawpath = rawcache_path_for_repoinfo( _pimpl->options, info );
+      oldstatus = rawMetadataStatus(info);
+      
       switch ( repokind.toEnum() )
       {
         case RepoType::RPMMD_e :
         {
           yum::Downloader downloader( url, "/" );
-          downloader.download(tmpdir.path());
+          
+          RepoStatus newstatus = downloader.status();
+          bool refresh = false;
+          if ( oldstatus.checksum() == newstatus.checksum() )
+          {
+            MIL << "repo has not changed" << endl;
+            if ( policy == RefreshForced )
+            {
+              MIL << "refresh set to forced" << endl;
+              refresh = true;
+            }
+          }
+          
+          if ( refresh )
+            downloader.download(tmpdir.path());
+          
            // no error
         }
         break;
         case RepoType::YAST2_e :
         {
           susetags::Downloader downloader( url, "/" );
-          downloader.download(tmpdir.path());
+          
+          RepoStatus newstatus = downloader.status();
+          bool refresh = false;
+          if ( oldstatus.checksum() == newstatus.checksum() )
+          {
+            MIL << "repo has not changed" << endl;
+            if ( policy == RefreshForced )
+            {
+              MIL << "refresh set to forced" << endl;
+              refresh = true;
+            }
+          }
+          
+          if ( refresh )
+            downloader.download(tmpdir.path());
           // no error
         }
         break;
@@ -300,7 +372,6 @@ namespace zypp
       
       // ok we have the metadata, now exchange
       // the contents
-      Pathname rawpath = rawcache_path_for_repoinfo(_pimpl->options, info);
       TmpDir oldmetadata;
       filesystem::assert_dir(rawpath);
       filesystem::rename( rawpath, oldmetadata.path() );
@@ -322,6 +393,7 @@ namespace zypp
   ////////////////////////////////////////////////////////////////////////////
   
   void RepoManager::buildCache( const RepoInfo &info,
+                                CacheBuildPolicy policy,
                                 const ProgressData::ReceiverFnc & progress )
   {
     assert_alias(info);
@@ -371,6 +443,9 @@ namespace zypp
         default:
           ZYPP_THROW(RepoUnknownTypeException());
       }
+      
+      // update timestamp and checksum
+      //store.updateRepository(id, )
       
       MIL << "Commit cache.." << endl;
       store.commit();
@@ -476,8 +551,11 @@ namespace zypp
     int counter = 1;
     while ( PathInfo(_pimpl->options.knownReposPath + filename).isExist() )
     {
-      filename = Pathname( filename.asString() );
+      filename = Pathname( filename.asString() + "_" + str::numstring(counter));
+      counter++;
     }
+    // now we have a filename that does not exists
+    
   }
   
   ////////////////////////////////////////////////////////////////////////////

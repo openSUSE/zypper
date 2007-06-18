@@ -18,6 +18,7 @@
 #include "zypp/parser/xml/Reader.h"
 #include "zypp/repo/yum/ResourceType.h"
 #include "zypp/ProgressData.h"
+#include "zypp/RepoStatus.h"
 
 namespace zypp
 {
@@ -47,6 +48,11 @@ namespace zypp
         */
         void download( const Pathname &dest_dir,
                        const ProgressData::ReceiverFnc & progress = ProgressData::ReceiverFnc() );
+        
+        /**
+         * \short Status of the remote repository
+         */
+        RepoStatus status();
         
        protected:
         bool repomd_Callback( const OnMediaLocation &loc, const ResourceType &dtype );

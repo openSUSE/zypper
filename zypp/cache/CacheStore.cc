@@ -717,8 +717,8 @@ RecordId CacheStore::lookupOrAppendFile( const Pathname &path )
 }
 
 void CacheStore::updateRepository( const RecordId &id,
-                    const string &checksum,
-                    const Date &timestamp )
+                                   const string &checksum,
+                                   const Date &timestamp )
 {
   _pimpl->update_repository_cmd->bind(":repository_id", id);
   _pimpl->update_repository_cmd->bind(":checksum", checksum);
@@ -782,7 +782,7 @@ RepoStatus CacheStore::repositoryStatus( const data::RecordId &id )
   {
     sqlite3_reader reader = cmd.executereader();
     RepoStatus status;
-    while ( reader.read() )
+    if ( reader.read() )
     {
       status.setChecksum( reader.getstring(2) );
       status.setTimestamp( reader.getstring(3) );

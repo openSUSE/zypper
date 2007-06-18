@@ -13,6 +13,7 @@
 #include "zypp/Url.h"
 #include "zypp/Pathname.h"
 #include "zypp/ProgressData.h"
+#include "zypp/RepoStatus.h"
 
 namespace zypp
 {
@@ -27,6 +28,10 @@ namespace zypp
         Downloader( const Url &url, const Pathname &path );
         void download( const Pathname &dest_dir,
                        const ProgressData::ReceiverFnc & progress = ProgressData::ReceiverFnc() );
+        /**
+         * \short Status of the remote repository
+         */
+        RepoStatus status();
        private:
         Url _url;
         Pathname _path;

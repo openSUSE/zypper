@@ -35,6 +35,12 @@ Downloader::Downloader( const Url &url, const Pathname &path )
 {
 }
 
+RepoStatus Downloader::status()
+{
+  Pathname repomd = _media.provideFile("/repodata/repomd.xml");
+  return RepoStatus(repomd);
+}
+
 bool Downloader::patches_Callback( const OnMediaLocation &loc, const string &id )
 {
   MIL << id << " : " << loc << endl;

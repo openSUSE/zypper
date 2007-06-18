@@ -24,6 +24,7 @@
 #include "zypp/RepoInfo.h"
 #include "zypp/repo/RepoException.h"
 #include "zypp/repo/RepoType.h"
+#include "zypp/RepoStatus.h"
 #include "zypp/ProgressData.h"
 
 ///////////////////////////////////////////////////////////////////
@@ -75,8 +76,14 @@ namespace zypp
     
     enum RepoRefreshPolicy
     {
-      RefreshIfChanged,
+      RefreshIfNeeded,
       RefreshForced
+    };
+    
+    enum CacheBuildPolicy
+    {
+      BuildIfNeeded,
+      BuildForced
     };
     
     enum RepoAddPolicy
@@ -107,6 +114,7 @@ namespace zypp
     * \throws Exception on unknown error.
     */
    void refreshMetadata( const RepoInfo &info,
+                         RepoRefreshPolicy policy = RefreshIfNeeded,
                          const ProgressData::ReceiverFnc & progressrcv = ProgressData::ReceiverFnc() );
    
    /**
@@ -134,6 +142,7 @@ namespace zypp
     * \throws Exception on unknown error.
     */
    void buildCache( const RepoInfo &info,
+                    CacheBuildPolicy policy = BuildIfNeeded,
                     const ProgressData::ReceiverFnc & progressrcv = ProgressData::ReceiverFnc() );
    
    /**
@@ -205,6 +214,10 @@ namespace zypp
     void removeRepository( const std::string & alias,
                            const ProgressData::ReceiverFnc & progressrcv = ProgressData::ReceiverFnc() );
 
+    RepoStatus rawMetadataStatus( const RepoInfo &info );
+    RepoStatus cacheStatus( const RepoInfo &info );
+       
+    
   public:
 
   private:

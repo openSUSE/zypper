@@ -73,6 +73,15 @@ namespace zypp
   public:
     /** Default ctor */
     RepoStatus();
+    
+    /**
+     * \short Status from a single file
+     * As most repository state is represented
+     * by the status of the index file, you can
+     * construct the status from a file.
+     */
+    RepoStatus( const Pathname &file );
+    
     /** Dtor */
     ~RepoStatus();
 

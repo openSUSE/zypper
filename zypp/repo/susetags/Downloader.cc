@@ -23,6 +23,13 @@ Downloader::Downloader( const Url &url, const Pathname &path )
   
 }
 
+RepoStatus Downloader::status()
+{
+  MediaSetAccess media(_url, _path);
+  Pathname content = media.provideFile("/content");
+  return RepoStatus(content);
+}
+
 void Downloader::download( const Pathname &dest_dir,
                            const ProgressData::ReceiverFnc & progress )
 {

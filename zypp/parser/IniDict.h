@@ -85,21 +85,41 @@ namespace zypp
        * Creates a dictionary from a InputStream
        * containing a ini structured file
        */
-      IniDict( const InputStream &is, const ProgressData::ReceiverFnc & progress = ProgressData::ReceiverFnc() );
+      IniDict( const InputStream &is,
+               const ProgressData::ReceiverFnc & progress = ProgressData::ReceiverFnc() );
       
       /** Dtor */
       ~IniDict();
+
+      /**
+       * \short add an entry
+       * \param section
+       * \param key
+       * \param value
+       */
+      void insertEntry( const std::string &section,
+                        const std::string &key,
+                        const std::string &value );
+      
+      /**
+       * \short add an entry
+       * \param section
+       * \param key
+       * \param value
+       */
+      void deleteSection( const std::string &section );
 
     public:
 
       /** Called when a section is found. */
       virtual void consume( const std::string &section );
       /** Called when a key value is found. */
-      virtual void consume( const std::string &section, const std::string &key, const std::string &value );
+      virtual void consume( const std::string &section,
+                            const std::string &key,
+                            const std::string &value );
 
     private:
       SectionSet _dict;
-      
       /**
        * empty map used to simulate
        * iteration in non existant
