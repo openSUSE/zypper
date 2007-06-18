@@ -229,7 +229,7 @@ Date SourceImpl::timestamp() const
 
 std::string SourceImpl::checksum() const
 {
-  return randomString(48);
+  return base::randomString(48);
 }
 
 void SourceImpl::dirInfo(const unsigned media_nr,
