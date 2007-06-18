@@ -35,8 +35,6 @@ namespace zypp
       RepoException();
       /** Ctor */
       RepoException( const std::string & msg_r );
-        /** Dtor */
-      virtual ~RepoException() throw();
     protected:
       virtual std::ostream & dumpOn( std::ostream & str ) const;
     };
@@ -52,7 +50,6 @@ namespace zypp
     public:
       RepoNotCachedException();
       RepoNotCachedException( const std::string & msg_r );
-      virtual ~RepoNotCachedException() throw();
     };
     
     /**
@@ -79,7 +76,7 @@ namespace zypp
      */
     class RepoNotFoundException : public RepoException
     {
-    
+      RepoNotFoundException(){}
     };
     
     /**
@@ -88,7 +85,25 @@ namespace zypp
      */
     class RepoAlreadyExistsException : public RepoException
     {
-    
+    public:
+      ~RepoAlreadyExistsException() throw()
+      {}
+      
+      RepoAlreadyExistsException( const std::string &alias,
+                                  const std::string & msg_r )
+        : RepoException(msg_r)
+        , _alias(alias)
+      {}
+        
+      RepoAlreadyExistsException( const std::string &alias )
+        : _alias(alias)
+      {}
+      
+      std::string alias()
+      { return _alias; }
+      
+    private:
+      std::string _alias;
     };
     
     /**

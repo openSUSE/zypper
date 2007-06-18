@@ -44,24 +44,6 @@ using namespace zypp::repo;
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
-//   class SubJobReceiverFnc
-//   {
-//     SubJobReceiverFnc( ProgressData::value_type jobtotal, const ProgressData::ReceiverFnc &receiver )
-//       : _jobtotal(jobtotal)
-//       , _receiver(receiver)
-//     {
-//     
-//     }
-//       
-//     bool operator()( ProgressData::value_type progress )
-//     {
-//       return true;
-//     }
-// 
-//     ProgressData::value_type _jobtotal;
-//     ProgressData::ReceiverFnc _receiver;
-//   };
-
   ///////////////////////////////////////////////////////////////////
   //
   //	CLASS NAME : RepoManagerOptions
@@ -75,40 +57,42 @@ namespace zypp
     repoRawCachePath = globalConfig.defaultRepoRawCachePath();
     knownReposPath = globalConfig.defaultKnownReposPath();
   }
-  
+
+  ////////////////////////////////////////////////////////////////////////////
+
   /**
-   * \short Simple callback to collect the results
-   *
-   * Classes like RepoFileParser call the callback
-   * once per each repo in a file.
-   *
-   * Passing this functor as callback, you can collect
-   * all resuls at the end, without dealing with async
-   * code.
-   */
-  struct RepoCollector
-  {
-    RepoCollector()
+    * \short Simple callback to collect the results
+    *
+    * Classes like RepoFileParser call the callback
+    * once per each repo in a file.
+    *
+    * Passing this functor as callback, you can collect
+    * all resuls at the end, without dealing with async
+    * code.
+    */
+    struct RepoCollector
     {
-      MIL << endl;
-    }
+      RepoCollector()
+      {
+        MIL << endl;
+      }
+      
+      ~RepoCollector()
+      {
+        MIL << endl;
+      }
+      
+      bool collect( const RepoInfo &repo )
+      {
+        //MIL << "here in collector: " << repo.alias() << endl;
+        repos.push_back(repo);
+        //MIL << "added: " << repo.alias() << endl;
+        return true;
+      }
     
-    ~RepoCollector()
-    {
-      MIL << endl;
-    }
-    
-    bool collect( const RepoInfo &repo )
-    {
-      //MIL << "here in collector: " << repo.alias() << endl;
-      repos.push_back(repo);
-      //MIL << "added: " << repo.alias() << endl;
-      return true;
-    }
-  
-    RepoInfoList repos;
-  };
-   
+      RepoInfoList repos;
+    };
+ 
   ////////////////////////////////////////////////////////////////////////////
   
   /**
@@ -123,6 +107,23 @@ namespace zypp
     parser::RepoFileReader parser( file, bind( &RepoCollector::collect, &collector, _1 ) );
     return collector.repos;
   }
+
+  ////////////////////////////////////////////////////////////////////////////
+
+  std::list<RepoInfo> readRepoFile(const Url & repo_file)
+   {
+     // no interface to download a specific file, using workaround:
+     //! \todo add MediaManager::provideFile(Url file_url) to easily access any file URLs? (no need for media access id or media_nr)  
+     Url url(repo_file);
+     Pathname path(url.getPathName());
+     url.setPathName ("/");
+     MediaSetAccess access(url);
+     Pathname local = access.provideFile(path);
+  
+     DBG << "reading repo file " << repo_file << ", local path: " << local << endl;
+  
+     return repositories_in_file(local);
+   }
 
   ////////////////////////////////////////////////////////////////////////////
   
@@ -248,25 +249,6 @@ namespace zypp
     MIL << endl;
     return repositories_in_dir("/etc/zypp/repos.d");
     MIL << endl;
-  }
-
-  ////////////////////////////////////////////////////////////////////////////
-
-  std::list<RepoInfo> RepoManager::readRepoFile(const Url & repo_file) const
-  {
-
-    // no interface to download a specific file, using workaround:
-    //! \todo add MediaManager::provideFile(Url file_url) to easily access any file URLs? (no need for media access id or media_nr)  
-    Url url(repo_file);
-    Pathname path(url.getPathName());
-    url.setPathName ("/");
-
-    MediaSetAccess access(url);
-    Pathname local = access.provideFile(path);
-
-    DBG << "reading repo file " << repo_file << ", local path: " << local << endl;
-
-    return repositories_in_file(local);
   }
 
   ////////////////////////////////////////////////////////////////////////////
@@ -449,11 +431,26 @@ namespace zypp
   }
  
   ////////////////////////////////////////////////////////////////////////////
-  
+
   void RepoManager::addRepository( const RepoInfo &info,
-                                   const ProgressData::ReceiverFnc & progress )
+                                   const ProgressData::ReceiverFnc & progressrcv )
   {
+    assert_alias(info);
     
+    std::list<RepoInfo> repos = knownRepositories();
+    for ( std::list<RepoInfo>::const_iterator it = repos.begin();
+          it != repos.end();
+          ++it )
+    {
+      if ( info.alias() == (*it).alias() )
+        ZYPP_THROW(RepoAlreadyExistsException(info.alias()));
+    }
+  }
+   
+  void RepoManager::addRepositories( const Url &url,
+                                     const ProgressData::ReceiverFnc & progressrcv )
+  {
+  
   }
   
   ////////////////////////////////////////////////////////////////////////////

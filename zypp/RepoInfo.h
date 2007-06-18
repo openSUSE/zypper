@@ -178,6 +178,8 @@ namespace zypp
 
     std::ostream & dumpOn( std::ostream & str ) const;
     
+    std::ostream & dumpRepoOn( std::ostream & str ) const;
+
     class Impl;
   private:
     /** Pointer to implementation */

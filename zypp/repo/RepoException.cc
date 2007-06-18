@@ -30,9 +30,6 @@ namespace zypp
     : Exception( msg_r )
     {}
 
-    RepoException::~RepoException() throw()
-    {}
-    
     RepoNotCachedException::RepoNotCachedException()
     : RepoException( "Repository not Cached" )
     {}
@@ -41,15 +38,12 @@ namespace zypp
     : RepoException( msg_r )
     {}
 
-    RepoNotCachedException::~RepoNotCachedException() throw()
-    {}
-
 
     std::ostream & RepoException::dumpOn( std::ostream & str ) const
     {
       return Exception::dumpOn( str );
     }
-
+    
     /////////////////////////////////////////////////////////////////
   } // namespace repo
   ///////////////////////////////////////////////////////////////////

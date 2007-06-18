@@ -30,6 +30,19 @@
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
+   /**
+    * Parses \a repo_file and returns a list of \ref RepoInfo objects
+    * corresponding to repositories found within the file.
+    * 
+    * \param repo_file Valid URL of the repo file.
+    * \return found list<RepoInfo>
+    *
+    * \throws MediaException If the access to the url fails
+    * \throws ParseException If the file parsing fails
+    * \throws Exception On other errors.
+    */
+   std::list<RepoInfo> readRepoFile(const Url & repo_file);
+
   /**
    * Repo manager settings.
    * Settings default to ZYpp global settings.
@@ -69,15 +82,6 @@ namespace zypp
     * \return found list<RepoInfo>
     */
    std::list<RepoInfo> knownRepositories() const;
-
-    /**
-     * Parses \a repo_file and returns a list of \ref RepoInfo objects
-     * corresponding to repositories found within the file.
-     * 
-     * \param repo_file Valid URL of the repo file.
-     * \return found list<RepoInfo>
-     */
-    std::list<RepoInfo> readRepoFile(const Url & repo_file) const;
 
    /**
     * \short Refresh local raw cache
@@ -165,16 +169,26 @@ namespace zypp
     *
     * \throws repo::RepoAlreadyExistsException If the repo clash some 
     * unique attribute like alias
+    *
+    * \throws RepoAlreadyExistsException
     */
    void addRepository( const RepoInfo &info,
                        const ProgressData::ReceiverFnc & progressrcv = ProgressData::ReceiverFnc() );
    
    /**
-    * Adds a .repo file directly, which can contain
-    * one or more repositories.
+    * \short Adds repositores from a repo file to the list of known repositories.
+    * \param url Url of the repo file
+    * 
+    * \throws repo::RepoAlreadyExistsException If the repo clash some 
+    * unique attribute like alias
+    *
+    * \throws RepoAlreadyExistsException
+    * \throws MediaException If the access to the url fails
+    * \throws ParseException If the file parsing fails
+    * \throws Exception On other errors.
     */
-   //void addRepositories( const Url &url );
-
+   void addRepositories( const Url &url,
+                         const ProgressData::ReceiverFnc & progressrcv = ProgressData::ReceiverFnc() );
     /**
      * PROPOSAL
      */
