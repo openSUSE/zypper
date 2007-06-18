@@ -257,6 +257,7 @@ namespace zypp
   {
     Pathname rawpath = rawcache_path_for_repoinfo( _pimpl->options, info );
     RepoType repokind = info.type();
+    RepoStatus status;
     switch ( repokind.toEnum() )
     {
       case RepoType::NONE_e:
@@ -271,27 +272,23 @@ namespace zypp
     {
       case RepoType::RPMMD_e :
       {
-        return RepoStatus( rawpath + "/repodata/repomd.xml");
+        status = RepoStatus( rawpath + "/repodata/repomd.xml");
       }
       break;
       case RepoType::YAST2_e :
       {
-        return RepoStatus( rawpath + "/content");
+        status = RepoStatus( rawpath + "/content");
       }
       break;
       default:
         ZYPP_THROW(RepoUnknownTypeException());
     }
-  }
-  
-  RepoStatus RepoManager::cacheStatus( const RepoInfo &info )
-  {
-    return RepoStatus();
+    return status;
   }
     
   
   void RepoManager::refreshMetadata( const RepoInfo &info,
-                                     RepoRefreshPolicy policy,
+                                     RawMetadataRefreshPolicy policy,
                                      const ProgressData::ReceiverFnc & progress )
   {
     assert_alias(info);
@@ -405,22 +402,38 @@ namespace zypp
   
   void RepoManager::buildCache( const RepoInfo &info,
                                 CacheBuildPolicy policy,
-                                const ProgressData::ReceiverFnc & progress )
+                                const ProgressData::ReceiverFnc & progressrcv )
   {
+    ProgressData progress;
+    progress.sendTo(progressrcv);
+    progress.toMin();
     assert_alias(info);
     Pathname rawpath = rawcache_path_for_repoinfo(_pimpl->options, info);
     
     cache::CacheStore store(_pimpl->options.repoCachePath);
     
+    RepoStatus raw_metadata_status = rawMetadataStatus(info);
     if ( store.isCached( info.alias() ) )
     {
-      MIL << info.alias() << " is already cached, cleaning..." << endl;
+      MIL << info.alias() << " is already cached." << endl;
       data::RecordId id = store.lookupRepository(info.alias());
+      RepoStatus cache_status = store.repositoryStatus(id);
+
+      if ( cache_status.checksum() == raw_metadata_status.checksum() )
+      {
+        MIL << info.alias() << " cache is up to date with metadata." << endl;
+        if ( policy == BuildIfNeeded ) {
+          progress.toMax();
+          return;
+        }
+        else {
+          MIL << "Build cache is forced" << endl;
+        }
+      }
       store.cleanRepository(id);
     }
     
     data::RecordId id = store.lookupOrAppendRepository(info.alias());
-    
     // do we have type?
     repo::RepoType repokind = info.type();
       
@@ -456,10 +469,11 @@ namespace zypp
       }
       
       // update timestamp and checksum
-      //store.updateRepository(id, )
+      store.updateRepositoryStatus(id, raw_metadata_status);
       
       MIL << "Commit cache.." << endl;
       store.commit();
+      progress.toMax();
   }
   
   ////////////////////////////////////////////////////////////////////////////

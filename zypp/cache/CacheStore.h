@@ -529,9 +529,8 @@ namespace zypp
        *
        * If the repository does not exists, nothing will happen
        */
-      void updateRepository( const data::RecordId &id,
-                             const std::string &checksum,
-                             const Date &timestamp = Date::now() );
+      void updateRepositoryStatus( const data::RecordId &id,
+                                   const RepoStatus &status );
 
       /**
        * \short Clean repository from cache

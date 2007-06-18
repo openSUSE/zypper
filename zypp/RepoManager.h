@@ -74,7 +74,7 @@ namespace zypp
    /** Dtor */
     ~RepoManager();
     
-    enum RepoRefreshPolicy
+    enum RawMetadataRefreshPolicy
     {
       RefreshIfNeeded,
       RefreshForced
@@ -114,7 +114,7 @@ namespace zypp
     * \throws Exception on unknown error.
     */
    void refreshMetadata( const RepoInfo &info,
-                         RepoRefreshPolicy policy = RefreshIfNeeded,
+                         RawMetadataRefreshPolicy policy = RefreshIfNeeded,
                          const ProgressData::ReceiverFnc & progressrcv = ProgressData::ReceiverFnc() );
    
    /**

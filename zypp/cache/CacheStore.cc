@@ -57,8 +57,6 @@ struct CacheStore::Impl
 
     insert_resolvable_in_repository_cmd.reset( new sqlite3_command( con, "insert into resolvables_repositories (resolvable_id, repository_id) values (:resolvable_id, :repository_id);" ));
 
-    update_repository_cmd.reset( new sqlite3_command( con, "update repositories set checksum=:checksum, timestamp=:timestamp where id=:repository_id;" ));
-
     select_repository_cmd.reset( new sqlite3_command( con, "select id from repositories where alias=:alias;" ));
     insert_repository_cmd.reset( new sqlite3_command( con, "insert into repositories (alias,timestamp) values (:alias, :timestamp);" ));
 
@@ -131,7 +129,6 @@ struct CacheStore::Impl
   */
   sqlite3_connection con;
 
-  sqlite3_command_ptr update_repository_cmd;
   sqlite3_command_ptr insert_resolvable_in_repository_cmd;
 
   sqlite3_command_ptr select_name_cmd;
@@ -718,14 +715,21 @@ RecordId CacheStore::lookupOrAppendFile( const Pathname &path )
   return id;
 }
 
-void CacheStore::updateRepository( const RecordId &id,
-                                   const string &checksum,
-                                   const Date &timestamp )
+void CacheStore::updateRepositoryStatus( const RecordId &id,
+                                         const RepoStatus &status )
 {
-  _pimpl->update_repository_cmd->bind(":repository_id", id);
-  _pimpl->update_repository_cmd->bind(":checksum", checksum);
-  _pimpl->update_repository_cmd->bind(":timestamp", static_cast<int>((Date::ValueType) timestamp) );
-  _pimpl->insert_repository_cmd->executenonquery();
+  sqlite3_command cmd( _pimpl->con, "update repositories set checksum=:checksum, timestamp=:timestamp where id=:repository_id;");
+  cmd.bind(":repository_id", id);
+  cmd.bind(":checksum", status.checksum());
+  cmd.bind(":timestamp", static_cast<int>((Date::ValueType) status.timestamp()) );
+  try
+  {
+    cmd.executenonquery();
+  }
+  catch ( const sqlite3x::database_error &e )
+  {
+    ZYPP_RETHROW(e);
+  }
 }
 
 RecordId CacheStore::lookupOrAppendRepository( const string &alias )
@@ -788,12 +792,14 @@ RepoStatus CacheStore::repositoryStatus( const data::RecordId &id )
     {
       status.setChecksum( reader.getstring(2) );
       status.setTimestamp( reader.getstring(3) );
+      return status;
     }
-    return status;
+    else
+      ZYPP_THROW(CacheRecordNotFoundException());
   }
   catch ( const sqlite3x::database_error &e )
   {
-    ZYPP_THROW(CacheRecordNotFoundException());
+    ZYPP_RETHROW(e);
   }
 }
 
