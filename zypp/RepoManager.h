@@ -86,8 +86,9 @@ namespace zypp
       BuildForced
     };
     
-    enum RepoAddPolicy
+    enum RepoRemovePolicy
     {
+      
     };
     
    /**
@@ -209,9 +210,11 @@ namespace zypp
     void addRepositories( const Url &url,
                          const ProgressData::ReceiverFnc & progressrcv = ProgressData::ReceiverFnc() );
     /**
-     * PROPOSAL
+     * \short Remove the best matching repository from known repos list
+     *
+     * \throws RepoNotFoundException If no repo match
      */
-    void removeRepository( const std::string & alias,
+    void removeRepository( const RepoInfo & info,
                            const ProgressData::ReceiverFnc & progressrcv = ProgressData::ReceiverFnc() );
     
   protected:

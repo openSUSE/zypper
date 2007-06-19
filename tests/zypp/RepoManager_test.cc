@@ -34,16 +34,51 @@ void repomanager_test( const string &dir )
   
   TmpDir tmpCachePath;
   TmpDir tmpRawCachePath;
+  TmpDir tmpKnownReposPath;
+  
+  BOOST_CHECK_EQUAL( filesystem::copy_dir_content( Pathname(dir) + "/repos.d", tmpKnownReposPath.path() ), 0 );
   
   opts.repoCachePath = tmpCachePath.path();
   opts.repoRawCachePath = tmpRawCachePath.path();
-  opts.knownReposPath = Pathname(dir) + "/repos.d";
+  opts.knownReposPath = tmpKnownReposPath.path();
   
   RepoManager manager(opts);
   
   list<RepoInfo> repos = manager.knownRepositories();
+  BOOST_CHECK_EQUAL(repos.size(), (unsigned) 4);
   
-  BOOST_CHECK_EQUAL(repos.size(), (unsigned) 3);
+  // now add a .repo file with 2 repositories in it
+  Url url;
+  url.setPathName((Pathname(dir) + "/proprietary.repo").asString());
+  url.setScheme("file");
+
+  manager.addRepositories(url);
+  
+  // check it was not overwriten the proprietary.repo file
+  BOOST_CHECK( PathInfo(Pathname(dir) + "/repos.d/proprietary_1.repo").isExist() );
+  
+  // now there should be 6 repos
+  repos = manager.knownRepositories();
+  BOOST_CHECK_EQUAL(repos.size(), (unsigned) 6);
+  
+  // delete the office repo inside the propietary_1.repo
+  RepoInfo office;
+  office.setAlias("office");
+  manager.removeRepository(office);
+  // now there should be 5 repos
+  repos = manager.knownRepositories();
+  BOOST_CHECK_EQUAL(repos.size(), (unsigned) 5);
+  // the file still contained one repo, so it should still exists
+  BOOST_CHECK( PathInfo(Pathname(dir) + "/repos.d/proprietary_1.repo").isExist() );
+  
+  // now delete the macromedia one
+  RepoInfo macromedia;
+  macromedia.setAlias("macromedia");
+  manager.removeRepository(macromedia);
+  repos = manager.knownRepositories();
+  BOOST_CHECK_EQUAL(repos.size(), (unsigned) 4);
+  // the file should not exist anymore
+  BOOST_CHECK( ! PathInfo(Pathname(dir) + "/repos.d/proprietary_1.repo").isExist() );
   
   RepoInfo repo(repos.front());
   manager.refreshMetadata(repo);

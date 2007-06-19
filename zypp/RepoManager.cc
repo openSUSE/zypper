@@ -248,7 +248,7 @@ namespace zypp
   std::list<RepoInfo> RepoManager::knownRepositories() const
   {
     MIL << endl;
-    return repositories_in_dir("/etc/zypp/repos.d");
+    return repositories_in_dir(_pimpl->options.knownReposPath);
     MIL << endl;
   }
 
@@ -300,95 +300,105 @@ namespace zypp
     // try urls one by one
     for ( RepoInfo::urls_const_iterator it = info.baseUrlsBegin(); it != info.baseUrlsEnd(); ++it )
     {
-      Url url(*it);
-      filesystem::TmpDir tmpdir;
-      
-      repo::RepoType repokind = info.type();
-      
-      // if the type is unknown, try probing.
-      switch ( repokind.toEnum() )
+      try
       {
-        case RepoType::NONE_e:
-          // unknown, probe it
-          repokind = probe(*it);
-        break;
-        default:
-        break;
-      }
-      
-      Pathname rawpath = rawcache_path_for_repoinfo( _pimpl->options, info );
-      oldstatus = rawMetadataStatus(info);
-      
-      switch ( repokind.toEnum() )
-      {
-        case RepoType::RPMMD_e :
+        Url url(*it);
+        filesystem::TmpDir tmpdir;
+        
+        repo::RepoType repokind = info.type();
+        
+        // if the type is unknown, try probing.
+        switch ( repokind.toEnum() )
         {
-          yum::Downloader downloader( url, "/" );
-          
-          RepoStatus newstatus = downloader.status();
-          bool refresh = false;
-          if ( oldstatus.checksum() == newstatus.checksum() )
+          case RepoType::NONE_e:
+            // unknown, probe it
+            repokind = probe(*it);
+          break;
+          default:
+          break;
+        }
+        
+        Pathname rawpath = rawcache_path_for_repoinfo( _pimpl->options, info );
+        oldstatus = rawMetadataStatus(info);
+        
+        switch ( repokind.toEnum() )
+        {
+          case RepoType::RPMMD_e :
           {
-            MIL << "repo has not changed" << endl;
-            if ( policy == RefreshForced )
+            yum::Downloader downloader( url, "/" );
+            
+            RepoStatus newstatus = downloader.status();
+            bool refresh = false;
+            if ( oldstatus.checksum() == newstatus.checksum() )
             {
-              MIL << "refresh set to forced" << endl;
+              MIL << "repo has not changed" << endl;
+              if ( policy == RefreshForced )
+              {
+                MIL << "refresh set to forced" << endl;
+                refresh = true;
+              }
+            }
+            else
+            {
               refresh = true;
             }
+  
+            if ( refresh )
+              downloader.download(tmpdir.path());
+            else
+              return;
+            // no error
           }
-          else
+          break;
+          case RepoType::YAST2_e :
           {
-            refresh = true;
-          }
-
-          if ( refresh )
-            downloader.download(tmpdir.path());
-          else
-            return;
-           // no error
-        }
-        break;
-        case RepoType::YAST2_e :
-        {
-          susetags::Downloader downloader( url, "/" );
-          
-          RepoStatus newstatus = downloader.status();
-          bool refresh = false;
-          if ( oldstatus.checksum() == newstatus.checksum() )
-          {
-            MIL << "repo has not changed" << endl;
-            if ( policy == RefreshForced )
+            susetags::Downloader downloader( url, "/" );
+            
+            RepoStatus newstatus = downloader.status();
+            bool refresh = false;
+            if ( oldstatus.checksum() == newstatus.checksum() )
             {
-              MIL << "refresh set to forced" << endl;
+              MIL << "repo has not changed" << endl;
+              if ( policy == RefreshForced )
+              {
+                MIL << "refresh set to forced" << endl;
+                refresh = true;
+              }
+            }
+            else
+            {
               refresh = true;
             }
+  
+            if ( refresh )
+              downloader.download(tmpdir.path());
+            else
+              return;
+            // no error
           }
-          else
-          {
-            refresh = true;
-          }
- 
-          if ( refresh )
-            downloader.download(tmpdir.path());
-          else
-            return;
-          // no error
+          break;
+          default:
+            ZYPP_THROW(RepoUnknownTypeException());
         }
-        break;
-        default:
-          ZYPP_THROW(RepoUnknownTypeException());
+        
+        // ok we have the metadata, now exchange
+        // the contents
+        TmpDir oldmetadata;
+        filesystem::assert_dir(rawpath);
+        filesystem::rename( rawpath, oldmetadata.path() );
+        // move the just downloaded there
+        filesystem::rename( tmpdir.path(), rawpath );
+        // we are done.
+        return;
       }
-      
-      // ok we have the metadata, now exchange
-      // the contents
-      TmpDir oldmetadata;
-      filesystem::assert_dir(rawpath);
-      filesystem::rename( rawpath, oldmetadata.path() );
-      // move the just downloaded there
-      filesystem::rename( tmpdir.path(), rawpath );
-      
-      // we are done.
-    }
+      catch ( const Exception &e )
+      {
+        ZYPP_CAUGHT(e);
+        ERR << "Trying another url..." << endl;
+      }
+    } // for every url
+    ERR << "No more urls..." << endl;
+    ZYPP_THROW(RepoException("Cant refresh metadata"));
   }
   
   ////////////////////////////////////////////////////////////////////////////
@@ -601,11 +611,14 @@ namespace zypp
     {
       // look if the alias is in the known repos.
       for ( std::list<RepoInfo>::const_iterator kit = knownrepos.begin();
-          kit != repos.end();
+          kit != knownrepos.end();
           ++kit )
       {
         if ( (*it).alias() == (*kit).alias() )
+        {
+          ERR << "To be added repo " << (*it).alias() << " conflicts with existing repo " << (*kit).alias() << endl;
           ZYPP_THROW(RepoAlreadyExistsException((*it).alias()));
+        }
       }
     }
     
@@ -631,6 +644,68 @@ namespace zypp
       (*it).dumpRepoOn(file);
     }
     MIL << "done" << endl;
+  }
+  
+  ////////////////////////////////////////////////////////////////////////////
+  
+  void RepoManager::removeRepository( const RepoInfo & info,
+                                      const ProgressData::ReceiverFnc & progressrcv)
+  {
+    std::list<RepoInfo> repos = knownRepositories();
+    for ( std::list<RepoInfo>::const_iterator it = repos.begin();
+          it != repos.end();
+          ++it )
+    {
+      // they can be the same only if the provided is empty, that means
+      // the provided repo has no alias
+      // then skip
+      if ( (!info.alias().empty()) && ( info.alias() != (*it).alias() ) )
+        continue;
+      
+      // TODO match by url
+       
+      // we have a matcing repository, now we need to know
+      // where it does come from.
+      if (info.filepath().empty())
+      {
+        ZYPP_THROW(RepoException("Can't figure where the repo is stored"));
+      }
+      else
+      {
+        // figure how many repos are there in the file:
+        std::list<RepoInfo> filerepos = repositories_in_file(info.filepath());
+        if ( (filerepos.size() == 1) && ( filerepos.front().alias() == info.alias() ) )
+        {
+          // easy, only this one, just delete the file
+          if ( filesystem::unlink(info.filepath()) != 0 )
+          {
+            ZYPP_THROW(RepoException("Can't delete " + info.filepath().asString()));
+          }
+          return;
+        }
+        else
+        {
+          // there are more repos in the same file
+          // write them back except the deleted one.
+          TmpFile tmp;
+          std::ofstream file(tmp.path().c_str());
+          if (!file) {
+            ZYPP_THROW (Exception( "Can't open " + tmp.path().asString() ) );
+          }
+          for ( std::list<RepoInfo>::const_iterator fit = filerepos.begin();
+                fit != filerepos.end();
+                ++fit )
+          {
+            if ( (*fit).alias() != info.alias() )
+              (*fit).dumpRepoOn(file);
+          }
+          return;
+        }
+      } // else filepath is empty
+      
+    }
+    // should not be reached on a sucess workflow
+    ZYPP_THROW(RepoNotFoundException(info));
   }
   
   ////////////////////////////////////////////////////////////////////////////

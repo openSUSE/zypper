@@ -1,0 +1,14 @@
+[macromedia]
+name=Macromedia for i386 Linux
+baseurl=http://macromedia.rediris.es/rpm/
+enabled=1
+gpgcheck=1
+gpgkey=http://macromedia.mplug.org/FEDORA-GPG-KEY
+
+[office]
+name=Microsoft Office for Linux
+baseurl=http://www.microsoft.com/linux/office
+enabled=1
+gpgcheck=1
+gpgkey=http://www.microsoft.com/~sballmer/gpgkey.txt
+

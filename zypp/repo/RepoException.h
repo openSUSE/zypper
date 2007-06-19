@@ -17,7 +17,7 @@
 
 #include "zypp/base/Exception.h"
 #include "zypp/base/UserRequestException.h"
-
+#include "zypp/RepoInfo.h"
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
@@ -76,7 +76,17 @@ namespace zypp
      */
     class RepoNotFoundException : public RepoException
     {
-      RepoNotFoundException(){}
+    public:
+      RepoNotFoundException( const RepoInfo &info)
+        : _info(info)
+      {}
+      ~RepoNotFoundException() throw()
+      {}
+      
+      RepoInfo info()
+      { return _info; }
+    private:
+      RepoInfo _info;
     };
     
     /**
