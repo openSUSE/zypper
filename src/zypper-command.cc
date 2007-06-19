@@ -25,6 +25,18 @@ const ZypperCommand ZypperCommand::INSTALL(ZypperCommand::INSTALL_e);
 const ZypperCommand ZypperCommand::REMOVE(ZypperCommand::REMOVE_e);
 const ZypperCommand ZypperCommand::UPDATE(ZypperCommand::UPDATE_e);
 
+const ZypperCommand ZypperCommand::INFO(ZypperCommand::INFO_e);
+
+const ZypperCommand ZypperCommand::HELP(ZypperCommand::HELP_e);
+const ZypperCommand ZypperCommand::SHELL(ZypperCommand::SHELL_e);
+const ZypperCommand ZypperCommand::SHELL_QUIT(ZypperCommand::SHELL_QUIT_e);
+const ZypperCommand ZypperCommand::NONE(ZypperCommand::NONE_e);
+const ZypperCommand ZypperCommand::MOO(ZypperCommand::MOO_e);
+
+
+const ZypperCommand ZypperCommand::RUG_PATCH_INFO(ZypperCommand::RUG_PATCH_INFO_e);
+
+
 ZypperCommand::ZypperCommand(const std::string & strval_r)
   : _command(parse(strval_r))
 {}
@@ -42,7 +54,18 @@ ZypperCommand::Command ZypperCommand::parse(const std::string & strval_r)
     _table["install"] = _table["in"] = ZypperCommand::INSTALL_e;
     _table["remove"] = _table["rm"] = ZypperCommand::REMOVE_e;
     _table["update"] = _table["up"] = ZypperCommand::UPDATE_e;
-    _table["NONE"] = _table["none"] = ZypperCommand::NONE_e;
+
+    _table["info"] = _table["if"] = ZypperCommand::INFO_e;
+
+    _table["help"] = ZypperCommand::HELP_e;
+    _table["shell"] = _table["sh"] = ZypperCommand::SHELL_e;
+    _table["quit"] = _table["exit"] = _table["\004"] = ZypperCommand::SHELL_QUIT_e;
+    _table["NONE"] = _table["none"] = _table[""] = ZypperCommand::NONE_e;
+    _table["moo"] = ZypperCommand::MOO_e;
+
+
+    // rug commands doable with zypper commands
+    _table["patch-info"] = ZypperCommand::RUG_PATCH_INFO_e;
   }
 
   std::map<std::string,ZypperCommand::Command>::const_iterator it

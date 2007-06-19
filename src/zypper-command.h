@@ -10,6 +10,7 @@
  */
 struct ZypperCommand
 {
+  static const ZypperCommand NONE;
   static const ZypperCommand ADD_REPO;
   static const ZypperCommand REMOVE_REPO;
   static const ZypperCommand LIST_REPOS;
@@ -18,6 +19,16 @@ struct ZypperCommand
   static const ZypperCommand INSTALL;
   static const ZypperCommand REMOVE;
   static const ZypperCommand UPDATE;
+  
+  static const ZypperCommand INFO;
+
+  static const ZypperCommand HELP;
+  static const ZypperCommand SHELL;
+  static const ZypperCommand SHELL_QUIT;
+  static const ZypperCommand MOO;
+  
+  // rug commands
+  static const ZypperCommand RUG_PATCH_INFO;
 
   enum Command
   {
@@ -30,6 +41,15 @@ struct ZypperCommand
     INSTALL_e,
     REMOVE_e,
     UPDATE_e,
+    
+    INFO_e,
+    
+    HELP_e,
+    SHELL_e,
+    SHELL_QUIT_e,
+    MOO_e,
+    
+    RUG_PATCH_INFO_e
   };
 
   ZypperCommand(Command command) : _command(command) {}
