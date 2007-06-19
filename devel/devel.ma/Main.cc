@@ -118,25 +118,25 @@ int main( int argc, char * argv[] )
   if ( 0 )
   {
     const char * data[] = {
-      "@ product",
-      "@ installed",
-      "- prodold 1 1 x86_64",
+      "@ package",
       "@ available",
       "- prodnew 1 1 x86_64",
-      "@ obsoletes",
-      "prodold",
       "@ fin",
     };
     debug::addPool( data, data + ( sizeof(data) / sizeof(const char *) ) );
   }
   else
   {
-    debug::addPool( "SRC/iorderbug.pool" );
+    debug::addPool( "TEST" );
   }
+
   ResPool pool( getZYpp()->pool() );
+
   vdumpPoolStats( USR << "Initial pool:" << endl,
 		  pool.begin(),
 		  pool.end() ) << endl;
+
+  return 0;
 
   ///////////////////////////////////////////////////////////////////
   // define transaction

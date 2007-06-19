@@ -202,7 +202,7 @@ int main( int argc, char * argv[] )
   Pathname reporoot( "lmd" );
 
   cache::CacheStore store( dbdir );
-  data::RecordId repositoryId = store.lookupOrAppendRepository("foo");
+  data::RecordId repositoryId = store.lookupOrAppendRepository( "foosource" );
   {
     Measure x( "XXXXXXXXXXXXX" );
 
