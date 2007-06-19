@@ -11,25 +11,47 @@ include "suse-primary.rnc" {
   element-license-to-confirm = element license-to-confirm { localized-string }  
 # packages in patches have an additional rpmfiles element
   element-package = element yum:package { package & element-pkgfiles & (element license-to-confirm { localized-string }?) }
+
+# first part made optional
+  format =
+    ( element-license & element-vendor & element-group & element-buildhost & element-sourcerpm & element-header-range )?,
+    ( element-provides | element-conflicts | element-obsoletes | element-requires | element-recommends | element-enhances | element-supplements | element-suggests )*,
+    element-file*
+
+# wrong namespace again, grr
+  element-time =
+    element yum:time {time} |
+    element time {time}
+  element-size =
+    element yum:size {size} |
+    # and wrong content too...
+    element size {
+      attribute package { xsd:nonNegativeInteger },
+      attribute installed { xsd:nonNegativeInteger }?,
+      attribute archive { xsd:nonNegativeInteger },
+      empty
+    }
+
 }
 
 
 element-patch = element patch { patch }
 
+# &, fetchmsttfonts mixes up the order
 patch =
-  attribute patchid { text },
-  attribute timestamp { xsd:nonNegativeInteger },
-  attribute engine { text },
-  element-name,
-  element-summary,
-  element-description,
-  element-license-to-confirm*,
-  element-version,
-  ( element-provides | element-conflicts | element-obsoletes | element-requires | element-freshens | element-recommends | element-suggests | element-supplements | element-enhances )*,
-  element-category,
-  element reboot-needed { empty }?,
-  element package-manager { empty }?,
-  element-update-script?,
+  attribute patchid { text }&
+  attribute timestamp { xsd:nonNegativeInteger }&
+  attribute engine { text }&
+  element-name&
+  element-summary&
+  element-description&
+  element-license-to-confirm*&
+  element-version&
+  ( element-provides | element-conflicts | element-obsoletes | element-requires | element-freshens | element-recommends | element-suggests | element-supplements | element-enhances )*&
+  element-category&
+  element reboot-needed { empty }?&
+  element package-manager { empty }?&
+  element-update-script?&
   element atoms { (element-package | element-script | element-message)+ }+
 
 # shortcut since all atoms have the same dependency section
@@ -37,7 +59,8 @@ dependency-block =
   ( element-provides | element-conflicts | element-obsoletes | element-requires | element-freshens | element-recommends | element-suggests | element-supplements | element-enhances )*
 
 element-category =
-  element category { "youfix" | "security" | "recommended" | "bonus" | "beta" }
+#  element category { "youfix" | "security" | "recommended" | "bonus" | "beta" }
+  element category { "optional" | "recommended" | "security" }
 
 element-update-script = element update-script { text }
 
@@ -119,10 +142,11 @@ element-deltarpm =
     element-delta-base-version
   }
 
+# none used in fact...
 shared-rpmfile-attributes =
-  attribute arch { arch },
-  attribute filename { text },
-  attribute downloadsize { text } ,
+  attribute arch { arch } ?,
+  attribute filename { text } ?,
+  attribute downloadsize { text } ? ,
   attribute md5sum { text } ?,
   attribute buildtime { text } ?
 

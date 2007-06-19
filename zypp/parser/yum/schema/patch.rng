@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<grammar xmlns:yum="http://linux.duke.edu/metadata/common" ns="http://novell.com/package/metadata/suse/patch" xmlns="http://relaxng.org/ns/structure/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+<grammar ns="http://novell.com/package/metadata/suse/patch" xmlns:yum="http://linux.duke.edu/metadata/common" xmlns="http://relaxng.org/ns/structure/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
   <include href="suse-primary.rng">
     <start>
       <ref name="element-patch"/>
@@ -38,63 +38,127 @@
         </interleave>
       </element>
     </define>
+    <!-- first part made optional -->
+    <define name="format">
+      <optional>
+        <interleave>
+          <ref name="element-license"/>
+          <ref name="element-vendor"/>
+          <ref name="element-group"/>
+          <ref name="element-buildhost"/>
+          <ref name="element-sourcerpm"/>
+          <ref name="element-header-range"/>
+        </interleave>
+      </optional>
+      <zeroOrMore>
+        <choice>
+          <ref name="element-provides"/>
+          <ref name="element-conflicts"/>
+          <ref name="element-obsoletes"/>
+          <ref name="element-requires"/>
+          <ref name="element-recommends"/>
+          <ref name="element-enhances"/>
+          <ref name="element-supplements"/>
+          <ref name="element-suggests"/>
+        </choice>
+      </zeroOrMore>
+      <zeroOrMore>
+        <ref name="element-file"/>
+      </zeroOrMore>
+    </define>
+    <!-- wrong namespace again, grr -->
+    <define name="element-time">
+      <choice>
+        <element name="yum:time">
+          <ref name="time"/>
+        </element>
+        <element name="time">
+          <ref name="time"/>
+        </element>
+      </choice>
+    </define>
+    <define name="element-size">
+      <choice>
+        <element name="yum:size">
+          <ref name="size"/>
+        </element>
+        <!-- and wrong content too... -->
+        <element name="size">
+          <attribute name="package">
+            <data type="nonNegativeInteger"/>
+          </attribute>
+          <optional>
+            <attribute name="installed">
+              <data type="nonNegativeInteger"/>
+            </attribute>
+          </optional>
+          <attribute name="archive">
+            <data type="nonNegativeInteger"/>
+          </attribute>
+          <empty/>
+        </element>
+      </choice>
+    </define>
   </include>
   <define name="element-patch">
     <element name="patch">
       <ref name="patch"/>
     </element>
   </define>
+  <!-- &, fetchmsttfonts mixes up the order -->
   <define name="patch">
-    <attribute name="patchid"/>
-    <attribute name="timestamp">
-      <data type="nonNegativeInteger"/>
-    </attribute>
-    <attribute name="engine"/>
-    <ref name="element-name"/>
-    <ref name="element-summary"/>
-    <ref name="element-description"/>
-    <zeroOrMore>
-      <ref name="element-license-to-confirm"/>
-    </zeroOrMore>
-    <ref name="element-version"/>
-    <zeroOrMore>
-      <choice>
-        <ref name="element-provides"/>
-        <ref name="element-conflicts"/>
-        <ref name="element-obsoletes"/>
-        <ref name="element-requires"/>
-        <ref name="element-freshens"/>
-        <ref name="element-recommends"/>
-        <ref name="element-suggests"/>
-        <ref name="element-supplements"/>
-        <ref name="element-enhances"/>
-      </choice>
-    </zeroOrMore>
-    <ref name="element-category"/>
-    <optional>
-      <element name="reboot-needed">
-        <empty/>
-      </element>
-    </optional>
-    <optional>
-      <element name="package-manager">
-        <empty/>
-      </element>
-    </optional>
-    <optional>
-      <ref name="element-update-script"/>
-    </optional>
-    <oneOrMore>
-      <element name="atoms">
-        <oneOrMore>
-          <choice>
-            <ref name="element-package"/>
-            <ref name="element-script"/>
-            <ref name="element-message"/>
-          </choice>
-        </oneOrMore>
-      </element>
-    </oneOrMore>
+    <interleave>
+      <attribute name="patchid"/>
+      <attribute name="timestamp">
+        <data type="nonNegativeInteger"/>
+      </attribute>
+      <attribute name="engine"/>
+      <ref name="element-name"/>
+      <ref name="element-summary"/>
+      <ref name="element-description"/>
+      <zeroOrMore>
+        <ref name="element-license-to-confirm"/>
+      </zeroOrMore>
+      <ref name="element-version"/>
+      <zeroOrMore>
+        <choice>
+          <ref name="element-provides"/>
+          <ref name="element-conflicts"/>
+          <ref name="element-obsoletes"/>
+          <ref name="element-requires"/>
+          <ref name="element-freshens"/>
+          <ref name="element-recommends"/>
+          <ref name="element-suggests"/>
+          <ref name="element-supplements"/>
+          <ref name="element-enhances"/>
+        </choice>
+      </zeroOrMore>
+      <ref name="element-category"/>
+      <optional>
+        <element name="reboot-needed">
+          <empty/>
+        </element>
+      </optional>
+      <optional>
+        <element name="package-manager">
+          <empty/>
+        </element>
+      </optional>
+      <optional>
+        <ref name="element-update-script"/>
+      </optional>
+      <oneOrMore>
+        <element name="atoms">
+          <oneOrMore>
+            <choice>
+              <ref name="element-package"/>
+              <ref name="element-script"/>
+              <ref name="element-message"/>
+            </choice>
+          </oneOrMore>
+        </element>
+      </oneOrMore>
+    </interleave>
   </define>
   <!-- shortcut since all atoms have the same dependency section -->
   <define name="dependency-block">
@@ -113,13 +177,12 @@
     </zeroOrMore>
   </define>
   <define name="element-category">
+    <!--  element category { "youfix" | "security" | "recommended" | "bonus" | "beta" } -->
     <element name="category">
       <choice>
-        <value>youfix</value>
-        <value>security</value>
+        <value>optional</value>
         <value>recommended</value>
-        <value>bonus</value>
-        <value>beta</value>
+        <value>security</value>
       </choice>
     </element>
   </define>
@@ -279,12 +342,19 @@
       <ref name="element-delta-base-version"/>
     </element>
   </define>
+  <!-- none used in fact... -->
   <define name="shared-rpmfile-attributes">
-    <attribute name="arch">
-      <ref name="arch"/>
-    </attribute>
-    <attribute name="filename"/>
-    <attribute name="downloadsize"/>
+    <optional>
+      <attribute name="arch">
+        <ref name="arch"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="filename"/>
+    </optional>
+    <optional>
+      <attribute name="downloadsize"/>
+    </optional>
     <optional>
       <attribute name="md5sum"/>
     </optional>

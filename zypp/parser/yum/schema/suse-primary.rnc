@@ -14,12 +14,12 @@ suse-format =
     suse-additional-format?
 
 suse-additional-format =
-    element-authors,
+    element-authors?,
     element-keywords?,
     element-dirsizes?,
     element-freshens?,
     element-install-only?,
-    element license-to-confirm { localized-string }*
+    element suse:license-to-confirm { localized-string }*
 
 element-authors =
   element authors { authors }
@@ -53,8 +53,12 @@ dirsize =
 element-freshens =
     element freshens { freshens }
 
+# suse-entry looks like an unwanted oversight
 freshens =
-    element-entry*
+    (element-entry | element-suse-entry) *
+
+element-suse-entry =
+    element suse:entry { usual-entry-content }
 
 element-install-only =
     element install-only { empty }

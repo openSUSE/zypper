@@ -39,10 +39,10 @@ header-range =
 attribute-kind = 
   attribute kind { "package" | "patch" | "script" | "message" | "product" | "atom" }
 
-attribute-flags-provides =
-  attribute flags { "EQ" | "LE" | "GE" }
-attribute-flags-obsoletes =
-  attribute flags { "EQ" | "LE" | "GE" | "LT" }
+#attribute-flags-provides =
+#  attribute flags { "EQ" | "LE" | "GE" }
+#attribute-flags-obsoletes =
+#  attribute flags { "EQ" | "LE" | "GE" | "LT" }
 attribute-flags =
   attribute flags { "EQ" | "LE" | "GE" | "LT" | "GT" }
 
@@ -58,21 +58,21 @@ usual-entry-content =
     , empty
 )
   
-element-obsoletes-entry = 
-(
-  element entry {
-    (shared-entry-attributes & attribute-flags-obsoletes?)
-    , empty
-  }
-)  
-  
-element-provides-entry = 
-(
-  element entry {
-    (shared-entry-attributes & attribute-flags-provides?)
-    , empty
-}
-)  
+#element-obsoletes-entry = 
+#(
+#  element entry {
+#    (shared-entry-attributes & attribute-flags-obsoletes?)
+#    , empty
+#  }
+#)  
+#  
+#element-provides-entry = 
+#(
+#  element entry {
+#    (shared-entry-attributes & attribute-flags-provides?)
+#    , empty
+#}
+#)  
   
 element-requires-entry = 
 (
@@ -91,7 +91,7 @@ element-provides =
     element provides { provides }
     
 provides =
-    element-provides-entry*
+    element-entry*
 
 element-conflicts =
     element conflicts { conflicts }
@@ -104,7 +104,7 @@ element-obsoletes =
     element obsoletes { obsoletes }
 
 obsoletes =
-    element-obsoletes-entry*
+    element-entry*
 
 element-requires =
     element requires { requires }

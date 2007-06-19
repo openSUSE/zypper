@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<grammar xmlns:ns1="http://linux.duke.edu/metadata/common" xmlns:rpm="http://linux.duke.edu/metadata/rpm" ns="http://linux.duke.edu/metadata/rpm" xmlns="http://relaxng.org/ns/structure/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+<grammar ns="http://linux.duke.edu/metadata/rpm" xmlns:ns1="http://linux.duke.edu/metadata/common" xmlns:rpm="http://linux.duke.edu/metadata/rpm" xmlns="http://relaxng.org/ns/structure/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
   <define name="element-format">
     <element name="ns1:format">
       <ref name="format"/>
@@ -82,25 +82,12 @@
       </choice>
     </attribute>
   </define>
-  <define name="attribute-flags-provides">
-    <attribute name="flags">
-      <choice>
-        <value>EQ</value>
-        <value>LE</value>
-        <value>GE</value>
-      </choice>
-    </attribute>
-  </define>
-  <define name="attribute-flags-obsoletes">
-    <attribute name="flags">
-      <choice>
-        <value>EQ</value>
-        <value>LE</value>
-        <value>GE</value>
-        <value>LT</value>
-      </choice>
-    </attribute>
-  </define>
+  <!--
+    attribute-flags-provides =
+     attribute flags { "EQ" | "LE" | "GE" }
+    attribute-flags-obsoletes =
+     attribute flags { "EQ" | "LE" | "GE" | "LT" }
+  -->
   <define name="attribute-flags">
     <attribute name="flags">
       <choice>
@@ -143,28 +130,23 @@
     </interleave>
     <empty/>
   </define>
-  <define name="element-obsoletes-entry">
-    <element name="entry">
-      <interleave>
-        <ref name="shared-entry-attributes"/>
-        <optional>
-          <ref name="attribute-flags-obsoletes"/>
-        </optional>
-      </interleave>
-      <empty/>
-    </element>
-  </define>
-  <define name="element-provides-entry">
-    <element name="entry">
-      <interleave>
-        <ref name="shared-entry-attributes"/>
-        <optional>
-          <ref name="attribute-flags-provides"/>
-        </optional>
-      </interleave>
-      <empty/>
-    </element>
-  </define>
+  <!--
+    element-obsoletes-entry = 
+    (
+     element entry {
+       (shared-entry-attributes & attribute-flags-obsoletes?)
+       , empty
+     }
+    )  
+     
+    element-provides-entry = 
+    (
+     element entry {
+       (shared-entry-attributes & attribute-flags-provides?)
+       , empty
+    }
+    )  
+  -->
   <define name="element-requires-entry">
     <element name="entry">
       <interleave>
@@ -196,7 +178,7 @@
   </define>
   <define name="provides">
     <zeroOrMore>
-      <ref name="element-provides-entry"/>
+      <ref name="element-entry"/>
     </zeroOrMore>
   </define>
   <define name="element-conflicts">
@@ -216,7 +198,7 @@
   </define>
   <define name="obsoletes">
     <zeroOrMore>
-      <ref name="element-obsoletes-entry"/>
+      <ref name="element-entry"/>
     </zeroOrMore>
   </define>
   <define name="element-requires">

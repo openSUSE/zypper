@@ -1,4 +1,5 @@
 default namespace = "http://linux.duke.edu/metadata/common"
+namespace suse = "http://novell.com/package/metadata/suse/common"
 
 grammar {
 
@@ -18,20 +19,22 @@ metadata =
 element-package = 
   element package { package }
 
+# ?: for package in atoms (suse-broken)
 package = 
     attribute type { "rpm" } &
     element-name &
     element-arch &
     element-version &
     element-checksum &
-    (element-summary*) &
-    (element-description*) &
-    element-packager &
-    element-url &
+    element-summary* &
+    element-description* &
+    element-packager? &
+    element-url? &
     element-time &
     element-size &
     element-location &
-    element-format
+    element-format &
+    element suse:license-to-confirm {text}?
 
 element-name =
     element name { text }
