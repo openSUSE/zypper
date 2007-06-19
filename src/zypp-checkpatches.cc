@@ -16,6 +16,7 @@
 
 #include <zypp/base/Gettext.h>
 #include <zypp/target/store/PersistentStorage.h>
+#include <zypp/RepoManager.h>
 
 #include "checkpatches-keyring-callbacks.h"
 #include "zypper.h"
@@ -84,11 +85,6 @@ namespace utils
 
 }
 
-#ifdef LIBZYPP_1xx
-typedef zypp::SourceManager::SourceInfo SourceInfo;
-#else
-using zypp::source::SourceInfo;
-#endif
 
 int exit_with_error( const std::string &error_str )
 {
@@ -133,78 +129,52 @@ int main(int argc, char **argv)
     return exit_with_error(excpt_r.msg());
   }
   
-  SourceManager_Ptr manager;
-  manager = SourceManager::sourceManager();
-  
+  RepoManager manager;
+
   KeyRingCallbacks keyring_callbacks;
   DigestCallbacks digest_callbacks;
   
-#ifdef LIBZYPP_1xx
-  // dont add rpms
-  God->initTarget("/", true);
-#else
   God->initializeTarget("/");
-#endif
   
   std::string token;
   stringstream token_stream;
   
-#ifdef LIBZYPP_1xx
-  token_stream << "[" << "target" << "| " << Date::now() << "]"; // too bad
-#else
   token_stream << "[" << "target" << "| " << God->target()->timestamp() << "]";
-#endif
 
-  std::list<SourceInfo> new_sources = manager->knownSourceInfos("/");
-  MIL << "Found " << new_sources.size()  << " sources." << endl;
+  std::list<RepoInfo> new_sources = manager.knownRepositories();
+  MIL << "Found " << new_sources.size()  << " repos." << endl;
 
-  for ( std::list<SourceInfo>::iterator it = new_sources.begin(); it != new_sources.end(); ++it)
+  for (std::list<RepoInfo>::iterator it = new_sources.begin(); it != new_sources.end(); ++it)
   {
-#ifdef LIBZYPP_1xx
-    Url url = it->url;
-#else
-    Url url = it->url();
-#endif
+    Url url = *(it->baseUrlsBegin());
 
     std::string scheme( url.getScheme());
 
     if ( (scheme == "cd" || scheme == "dvd") )
     {
-      MIL << "Skipping CD/DVD source: url:[" << it->url().asString() << "] product_dir:[" << it->path() << "] alias:[" << it->alias() << "] cache_dir:[" << it->cacheDir() << "] auto_refresh:[ " << it->autorefresh() << "]" << endl;
+      MIL << "Skipping CD/DVD source: url:[" << (it->baseUrlsBegin())->asString() << "] alias:[" << it->alias() << "] auto_refresh:[ " << it->autorefresh() << "]" << endl;
       continue;
     }
-    
+
     if ( ! it->enabled() )
     {
-      MIL << "Skipping disabled source: url:[" << url.asString() << "] product_dir:[" << it->path() << "] alias:[" << it->alias() << "] cache_dir:[" << it->cacheDir() << "] auto_refresh:[ " << it->autorefresh() << "]" << endl;
+      MIL << "Skipping disabled source: url:[" << url.asString() << "] alias:[" << it->alias() << "] auto_refresh:[ " << it->autorefresh() << "]" << endl;
       continue;
     }
 
     // Note: Url(it->url).asString() to hide password in logs
-    MIL << "Creating source: url:[" << url.asString() << "] product_dir:[" << it->path() << "] alias:[" << it->alias() << "] cache_dir:[" << it->cacheDir() << "] auto_refresh:[ " << it->autorefresh() << "]" << endl;
-    
+    MIL << "Creating source: url:[" << url.asString() << "] alias:[" << it->alias() << "] auto_refresh:[ " << it->autorefresh() << "]" << endl;
+
     try
     {
-      Source_Ref src = SourceFactory().createFrom(it->type(), url, it->path(), it->alias(), it->cacheDir(), false, it->autorefresh());
-      src.refresh();
-      token_stream << "[" << src.alias() << "| " << src.url() << src.timestamp() << "]";
-    
-      MIL << "Source: " << src.alias() << " from " << src.timestamp() << std::endl;
-    
-      // skip sources without patches sources for now
-      bool has_patches = true;
-#ifndef LIBZYPP_1xx
-      has_patches = src.hasResolvablesOfKind( ResTraits<zypp::Patch>::kind );
-#endif
-      if ( has_patches )
-      {
-        MIL << "Including source " << src.url() << std::endl;
-        gData.sources.push_back(src);
-      }
-      else
-      {
-        MIL << "Excluding source " << src.url() << " ( no patches ) "<< std::endl;
-      }  
+      manager.refreshMetadata(*it);
+      manager.buildCache(*it);
+
+      token_stream << "[" << it->alias() << "| " << *(it->baseUrlsBegin()) << "]"; // src.timestamp() << "]";
+
+      MIL << "Source: " << it->alias() << std::endl; //" from " << src.timestamp() << std::endl;
+
+      gData.repos.push_back(*it);
     }
     catch (const Exception &excpt_r )
     {
@@ -213,7 +183,7 @@ int main(int argc, char **argv)
       gData.errors.push_back(str::form(_("Couldn't restore source.\nDetail: %s"), error.c_str()));
     }
   }
-  
+
   string previous_token;
   if ( PathInfo(TOKEN_FILE).isExist() )
     previous_token = read_old_token();
@@ -252,16 +222,17 @@ int main(int argc, char **argv)
     MIL << "System has changed, recalculation of updates needed" << endl;
   }
   
-  for ( std::list<Source_Ref>::const_iterator it = gData.sources.begin(); it != gData.sources.end(); ++it )
+  for ( std::list<RepoInfo>::const_iterator it = gData.repos.begin(); it != gData.repos.end(); ++it )
   {
-    God->addResolvables(it->resolvables());
+    Repository repository = manager.createFromCache(*it);
+    God->addResolvables(repository.resolvables());
   }
-  
-  if ( gData.sources.size() == 0 )
+
+  if ( gData.repos.size() == 0 )
   {
     gData.errors.push_back( str::form( _( "There are no update sources defined. Please add one or more update sources in order to be notified of updates.") ) );
   }
-  
+
   God->addResolvables( God->target()->resolvables(), true);
   
   God->resolver()->establishPool();

@@ -12,7 +12,7 @@
 #include <zypp/ZYpp.h>
 #include <zypp/ZYppFactory.h>
 #include <zypp/zypp_detail/ZYppReadOnlyHack.h>
-#include <zypp/SourceManager.h>
+#include <zypp/RepoManager.h>
 #include <zypp/base/Logger.h>
 #include <zypp/Digest.h>
 #include <zypp/target/store/xml_escape_parser.hpp>
@@ -86,9 +86,9 @@ void render_result( const Edition &version, std::ostream &out, const zypp::ResPo
   out << " </errors>" << std::endl;
   
   out << " <update-sources>" << std::endl;
-  for ( std::list<Source_Ref>::const_iterator it = gData.sources.begin(); it != gData.sources.end(); ++it )
+  for ( std::list<RepoInfo>::const_iterator it = gData.repos.begin(); it != gData.repos.end(); ++it )
   {
-    out << "  <source url=\"" << it->url() << "\" alias=\"" << it->alias() << "\"/>" << std::endl;
+    out << "  <source url=\"" << *(it->baseUrlsBegin()) << "\" alias=\"" << it->alias() << "\"/>" << std::endl;
   }
   out << " </update-sources>" << std::endl;
   out << " <update-list>" << std::endl;

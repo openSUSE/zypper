@@ -359,7 +359,7 @@ int show_summary()
 
   return retv;
 }
-
+/*
 std::string calculate_token()
 {
   SourceManager_Ptr manager;
@@ -382,11 +382,7 @@ std::string calculate_token()
     MIL << "Source: " << src.alias() << " from " << src.timestamp() << std::endl;  
   }
 
-#ifdef LIBZYPP_1xx
-  token_stream << "[" << "target" << "| " << Date::now() << "]"; // too bad
-#else
   token_stream << "[" << "target" << "| " << God->target()->timestamp() << "]";
-#endif
   
   //static std::string digest(const std::string& name, std::istream& is
   token = Digest::digest("sha1", token_stream);
@@ -398,7 +394,8 @@ std::string calculate_token()
   
   return token;
 }
-
+*/
+/*
 void cond_load_resolvables ()
 {	
   // load repository resolvables
@@ -409,7 +406,7 @@ void cond_load_resolvables ()
     load_target();
   }
 }
-
+*/
 void load_target()
 {
   cerr << _("Parsing RPM database...") << endl;
@@ -417,7 +414,7 @@ void load_target()
   cerr_v << "   " <<  tgt_resolvables.size() << _(" resolvables.") << endl;
   God->addResolvables(tgt_resolvables, true /*installed*/);
 }
-
+/*
 void load_sources()
 {
   for ( std::list<Source_Ref>::iterator it = gData.sources.begin(); it !=  gData.sources.end(); ++it )
@@ -431,7 +428,7 @@ void load_sources()
     God->addResolvables(src_resolvables);
   }
 }
-
+*/
 
 /** read repository resolvables */
 void load_repo_resolvables()

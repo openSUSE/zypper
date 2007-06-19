@@ -18,10 +18,10 @@ extern Settings gSettings;
 /**
  * 
  */
-void printInfo(const string & command, const vector<string> & arguments) {
+void printInfo(const ZypperCommand & command, const vector<string> & arguments) {
   Resolvable::Kind kind;
-  if (command == "info" || command == "if") kind =  ResTraits<Package>::kind;
-  else if (command == "patch-info") kind = ResTraits<Patch>::kind;
+  if (command == ZypperCommand::INFO) kind =  ResTraits<Package>::kind;
+  else if (command == ZypperCommand::RUG_PATCH_INFO) kind = ResTraits<Patch>::kind;
 
   ResPool pool = God->pool();
 
@@ -51,9 +51,9 @@ void printInfo(const string & command, const vector<string> & arguments) {
       // print info
       cout << endl << _("Information for ") << kind.asString() << " " << *nameit << ":\n\n";
 
-      if (command == "info" || command == "if")
+      if (command == ZypperCommand::INFO)
         printPkgInfo(installer.item,installed);
-      else if (command == "patch-info")
+      else if (command == ZypperCommand::RUG_PATCH_INFO)
         printPatchInfo(installer.item,installed);
     }
   }

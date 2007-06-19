@@ -6,7 +6,6 @@
 #include <fstream>
 #include <boost/format.hpp>
 #include <boost/lexical_cast.hpp>
-#include <boost/logic/tribool.hpp>
 
 #include <zypp/target/store/PersistentStorage.h>
 #include <zypp/base/IOStream.h>
@@ -347,13 +346,14 @@ void remove_repo( const std::string &alias )
 
 //! remove a source, identified in any way: alias, url, id
 // may throw:
+/*
 void remove_source( const std::string& anystring )
 {
   cerr_vv << "Constructing SourceManager" << endl;
   SourceManager_Ptr manager = SourceManager::sourceManager();
   cerr_vv << "Restoring SourceManager" << endl;
   try {
-    manager->restore (gSettings.root_dir, true /*use_cache*/);
+    manager->restore (gSettings.root_dir, true /*use_cache*//*);
     }
   catch (const Exception & ex) {
     // so what if sources cannot be restored
@@ -416,16 +416,17 @@ void remove_source( const std::string& anystring )
   }
 
   cerr_vv << "Storing source data" << endl;
-  manager->store( gSettings.root_dir, true /*metadata_cache*/ );
+  manager->store( gSettings.root_dir, true /*metadata_cache*//* );
 }
-
+*/
+/*
 //! rename a source, identified in any way: alias, url, id
 void rename_source( const std::string& anystring, const std::string& newalias )
 {
   cerr_vv << "Constructing SourceManager" << endl;
   SourceManager_Ptr manager = SourceManager::sourceManager();
   cerr_vv << "Restoring SourceManager" << endl;
-  manager->restore (gSettings.root_dir, true /*use_cache*/);
+  manager->restore (gSettings.root_dir, true /*use_cache*//*);
 
   Source_Ref src;
 
@@ -483,9 +484,9 @@ void rename_source( const std::string& anystring, const std::string& newalias )
   }
 
   cerr_vv << "Storing source data" << endl;
-  manager->store( gSettings.root_dir, true /*metadata_cache*/ );
+  manager->store( gSettings.root_dir, true /*metadata_cache*//* );
 }
-
+*/
 // ----------------------------------------------------------------------------
 
 // #217028
@@ -502,7 +503,7 @@ void warn_if_zmd()
 // ----------------------------------------------------------------------------
 
 // OLD code
-
+/*
 void cond_init_system_sources ()
 {
   static bool done = false;
@@ -520,8 +521,9 @@ void cond_init_system_sources ()
   }
   done = true;
 } 
-
+*/
 // OLD
+/*
 void init_system_sources()
 {
   SourceManager_Ptr manager;
@@ -547,8 +549,9 @@ void init_system_sources()
     gData.sources.push_back(src);
   }
 }
-
+*/
 // OLD
+/*
 void include_source_by_url( const Url &url )
 {
   try
@@ -567,7 +570,7 @@ void include_source_by_url( const Url &url )
   }
 
 }
-
+*/
 
 // Local Variables:
 // c-basic-offset: 2

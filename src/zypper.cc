@@ -107,13 +107,19 @@ string help_commands = _(
 parsed_opts gopts;
 bool ghelp = false;
 
-// parses global options, returns the command
-string process_globals(int argc, char **argv)
+/*
+ * parses global options, returns the command
+ * 
+ * \returns ZypperCommand object representing the command or ZypperCommand::NONE
+ *          if an unknown command has been given. 
+ */
+ZypperCommand process_globals(int argc, char **argv)
 {
   // global options
   gopts = parse_options (argc, argv, global_options);
   if (gopts.count("_unknown"))
-    return "_unknown";
+    return ZypperCommand::NONE;
+    //return "_unknown";
 
   if (gopts.count("rug-compatible"))
     gSettings.is_rug_compatible = true;
@@ -175,47 +181,48 @@ string process_globals(int argc, char **argv)
     cerr << endl;
   }
 
-  string command;
+  // get command
 
-  if (optind < argc) {
-    command = argv[optind++];
+  ZypperCommand command(ZypperCommand::NONE_e);
+  try
+  {
+    if (optind < argc)
+      command = ZypperCommand(argv[optind++]);
+
+    if (command == ZypperCommand::HELP)
+    {
+      ghelp = true;
+      if (optind < argc)
+        command = ZypperCommand(argv[optind++]);
+      else
+        command = ZypperCommand::NONE;
+    }
   }
-  if (command == "help") {
-    ghelp = true;
-    if (optind < argc) {
-      command = argv[optind++];
-    }
-    else {
-      command = "";
-    }
+  // exception from command parsing
+  catch (Exception & e)
+  {
+    cerr << e.msg() <<  endl;
+    command = ZypperCommand::NONE;
   }
 
-  if (command.empty()) {
-    if (ghelp) {
-      cerr << help_global_options << help_commands;
-    }
-    else if (gopts.count("version")) {
-      cerr << PACKAGE;
-#ifdef LIBZYPP_1xx
-      cerr << " (libzypp-1.x.x)";
-#endif
-      cerr << endl;
-    }
-    else {
+  if (command == ZypperCommand::NONE)
+  {
+    if (ghelp)
+      cerr << help_global_options << endl << help_commands;
+    else if (gopts.count("version"))
+      cerr << PACKAGE << endl;
+    else
       cerr << _("Try -h for help") << endl;
-    }
   }
 
-  cerr_vv << "COMMAND: " << command << endl;
+  //cerr_vv << "COMMAND: " << command << endl;
   return command;
 }
 
 /// process one command from the OS shell or the zypper shell
-int one_command(const string& command_str, int argc, char **argv)
+int one_command(const ZypperCommand & command, int argc, char **argv)
 {
   // === command-specific options ===
-
-  ZypperCommand command(command_str);
 
   struct option no_options = {0, 0, 0, 0};
   struct option *specific_options = &no_options;
@@ -231,7 +238,11 @@ int one_command(const string& command_str, int argc, char **argv)
       "\t--disable-system-resolvables, -T\t\tDo not read system installed resolvables\n"
       );
 
-  if (command.toEnum() == ZypperCommand::INSTALL_e) {
+  if (command == ZypperCommand::HELP)
+  {
+    //cout << help_global_options << endl << help_commands;
+  }
+  else if (command == ZypperCommand::INSTALL) {
     static struct option install_options[] = {
       {"catalog",	   required_argument, 0, 'c'},
       {"type",	     required_argument, 0, 't'},
@@ -247,7 +258,7 @@ int one_command(const string& command_str, int argc, char **argv)
       "\t--no-confirm,-y\tDo not require user confirmation\n"
       );
   }
-  else if (command.toEnum() == ZypperCommand::REMOVE_e) {
+  else if (command == ZypperCommand::REMOVE) {
     static struct option remove_options[] = {
       {"type",       required_argument, 0, 't'},
       {"no-confirm", no_argument,       0, 'y'},
@@ -261,7 +272,7 @@ int one_command(const string& command_str, int argc, char **argv)
       "\t--no-confirm,-y\tDo not require user confirmation\n"
       );
   }
-  else if (command.toEnum() == ZypperCommand::ADD_REPO_e) {
+  else if (command == ZypperCommand::ADD_REPO) {
     static struct option service_add_options[] = {
       {"type", required_argument, 0, 't'},
       {"disabled", no_argument, 0, 'd'},
@@ -284,7 +295,7 @@ int one_command(const string& command_str, int argc, char **argv)
       "\t--no-refresh,-n\t\tDo not automatically refresh the metadata\n"
       );
   }
-  else if (command.toEnum() == ZypperCommand::LIST_REPOS_e) {
+  else if (command == ZypperCommand::LIST_REPOS) {
     static struct option service_list_options[] = {
       {"help", no_argument, 0, 'h'},
       {0, 0, 0, 0}
@@ -298,7 +309,7 @@ int one_command(const string& command_str, int argc, char **argv)
       "This command has no options.\n"
       );
   }
-  else if (command.toEnum() == ZypperCommand::REMOVE_REPO_e) {
+  else if (command == ZypperCommand::REMOVE_REPO) {
     static struct option service_delete_options[] = {
       {"help", no_argument, 0, 'h'},
       {0, 0, 0, 0}
@@ -312,7 +323,7 @@ int one_command(const string& command_str, int argc, char **argv)
       "This command has no options.\n"
       );
   }
-  else if (command_str == "service-rename" || command_str == "sr") {
+  else if (command == ZypperCommand::NONE) {//command_str == "service-rename" || command_str == "sr") {
     static struct option service_rename_options[] = {
       {"help", no_argument, 0, 'h'},
       {0, 0, 0, 0}
@@ -326,7 +337,7 @@ int one_command(const string& command_str, int argc, char **argv)
       "This command has no options.\n"
       );
   }
-  else if (command.toEnum() == ZypperCommand::REFRESH_e) {
+  else if (command == ZypperCommand::REFRESH) {
     static struct option refresh_options[] = {
       {"help", no_argument, 0, 'h'},
       {0, 0, 0, 0}
@@ -338,7 +349,7 @@ int one_command(const string& command_str, int argc, char **argv)
       "Refresh all installation sources found in the system.\n"
       );
   }
-  else if (command_str == "list-updates" || command_str == "lu") {
+  else if (command == ZypperCommand::NONE) { //command_str == "list-updates" || command_str == "lu") {
     static struct option list_updates_options[] = {
       {"type",		required_argument, 0, 't'},
       {"help", no_argument, 0, 'h'},
@@ -354,7 +365,7 @@ int one_command(const string& command_str, int argc, char **argv)
       "\t--type,-t\t\tType of resolvable (default: patch)\n"
       );
   }
-  else if (command_str == "update" || command_str == "up") {
+  else if (command == ZypperCommand::NONE) { //command_str == "update" || command_str == "up") {
     static struct option update_options[] = {
       {"type",		   required_argument, 0, 't'},
       {"no-confirm", no_argument,       0, 'y'},
@@ -370,7 +381,7 @@ int one_command(const string& command_str, int argc, char **argv)
       "\t--skip-interactive\t\tSkip interactive updates\n"
       );
   }
-  else if (command_str == "search" || command_str == "se") {
+  else if (command == ZypperCommand::SEARCH) {
     static struct option search_options[] = {
       {"installed-only", no_argument, 0, 'i'},
       {"uninstalled-only", no_argument, 0, 'u'},
@@ -410,7 +421,7 @@ int one_command(const string& command_str, int argc, char **argv)
       "* and ? wildcards can also be used within search strings.\n"
       );
   }
-  else if (command_str == "patch-check" || command_str == "pchk") {
+  else if (command == ZypperCommand::NONE) {//command_str == "patch-check" || command_str == "pchk") {
     static struct option patch_check_options[] = {
       {"help", no_argument, 0, 'h'},
       {0, 0, 0, 0}
@@ -424,7 +435,7 @@ int one_command(const string& command_str, int argc, char **argv)
       "This command has no options.\n"
       );
   }
-  else if (command_str == "patches" || command_str == "pch") {
+  else if (command == ZypperCommand::NONE) {//command_str == "patches" || command_str == "pch") {
     static struct option patches_options[] = {
       {"help", no_argument, 0, 'h'},
       {0, 0, 0, 0}
@@ -438,7 +449,7 @@ int one_command(const string& command_str, int argc, char **argv)
       "This command has no options.\n"
       );
   }
-  else if (command_str == "info" || command_str == "if") {
+  else if (command == ZypperCommand::NONE) {//command_str == "info" || command_str == "if") {
     static struct option info_options[] = {
       {"help", no_argument, 0, 'h'},
       {0, 0, 0, 0}
@@ -450,7 +461,7 @@ int one_command(const string& command_str, int argc, char **argv)
       "'info' -- Show full information for packages\n"
       );
   }
-  else if (command_str == "patch-info") {
+  else if (command == ZypperCommand::NONE) {//command_str == "patch-info") {
     static struct option patch_info_options[] = {
       {"help", no_argument, 0, 'h'},
       {0, 0, 0, 0}
@@ -462,7 +473,7 @@ int one_command(const string& command_str, int argc, char **argv)
       "'patch-info' -- Show detailed information for patches\n"
       );
   }
-  else if (command_str == "moo") {
+  else if (command == ZypperCommand::MOO) {
     static struct option moo_options[] = {
       {"help", no_argument, 0, 'h'},
       {0, 0, 0, 0}
@@ -473,12 +484,6 @@ int one_command(const string& command_str, int argc, char **argv)
       "\n"
       "'moo' - Show an animal\n"
       );
-  }
-  else if (!command_str.empty()) { // empty command is treated earlier
-    if (command_str != "help")	// #235709
-      cerr << _("Unknown command") << " '" << command_str << "'." << endl << endl;
-    cerr << help_commands;
-    return ZYPPER_EXIT_ERR_SYNTAX;
   }
 
   parsed_opts copts = parse_options (argc, argv, specific_options);
@@ -491,7 +496,7 @@ int one_command(const string& command_str, int argc, char **argv)
 
   vector<string> arguments;
   if (optind < argc) {
-    cerr_v << _("Non-Option Program Arguments: ");
+    cerr_v << _("Non-option program arguments: ");
     while (optind < argc) {
       string argument = argv[optind++];
       cerr_v << argument << ' ';
@@ -536,7 +541,7 @@ int one_command(const string& command_str, int argc, char **argv)
   
   // here come commands that need the lock
   try {
-    if (command_str == "service-list" || command_str == "sl")
+    if (command == ZypperCommand::LIST_REPOS)
       zypp_readonly_hack::IWantIt (); // #247001
 
     God = zypp::getZYpp();
@@ -555,14 +560,15 @@ int one_command(const string& command_str, int argc, char **argv)
 
   // --------------------------( moo )----------------------------------------
 
-  if (command_str == "moo") {
+  if (command == ZypperCommand::MOO)
+  {
     cout << "   \\\\\\\\\\\n  \\\\\\\\\\\\\\__o\n__\\\\\\\\\\\\\\'/_" << endl;
     return ZYPPER_EXIT_OK;
   }
 
   // --------------------------( service list )-------------------------------
   
-  else if (command.toEnum() == ZypperCommand::LIST_REPOS_e)
+  else if (command == ZypperCommand::LIST_REPOS)
   {
     if (ghelp) { cout << specific_help << endl; return !ghelp; }
     // if (ghelp) display_command_help()
@@ -581,7 +587,7 @@ int one_command(const string& command_str, int argc, char **argv)
 
   // --------------------------( service add )--------------------------------
   
-  else if (command.toEnum() == ZypperCommand::ADD_REPO_e)
+  else if (command == ZypperCommand::ADD_REPO)
   {
     tribool enabled(indeterminate);
     tribool refresh(indeterminate);
@@ -633,7 +639,7 @@ int one_command(const string& command_str, int argc, char **argv)
 
   // --------------------------( service delete )-----------------------------
 
-  else if (command.toEnum() == ZypperCommand::REMOVE_REPO_e)
+  else if (command == ZypperCommand::REMOVE_REPO)
   {
     if (ghelp || arguments.size() < 1) {
       cerr << specific_help;
@@ -656,8 +662,8 @@ int one_command(const string& command_str, int argc, char **argv)
   }
 
   // --------------------------( service rename )-----------------------------
-
-  else if (command_str == "service-rename" || command_str == "sr")
+/*
+  else if (command == ZypperCommand::NONE) //command_str == "service-rename" || command_str == "sr")
   {
     if (ghelp || arguments.size() < 2) {
       cerr << specific_help;
@@ -678,10 +684,10 @@ int one_command(const string& command_str, int argc, char **argv)
 
     return ZYPPER_EXIT_OK;
   }
-  
+  */
   // --------------------------( refresh )------------------------------------
 
-  else if (command.toEnum() == ZypperCommand::REFRESH_e)
+  else if (command == ZypperCommand::REFRESH)
   {
     if (ghelp) { cout << specific_help; return !ghelp; }
 
@@ -690,10 +696,10 @@ int one_command(const string& command_str, int argc, char **argv)
 
   // --------------------------( remove/install )-----------------------------
 
-  else if (command.toEnum() == ZypperCommand::INSTALL_e ||
-           command.toEnum() == ZypperCommand::REMOVE_e )
+  else if (command == ZypperCommand::INSTALL ||
+           command == ZypperCommand::REMOVE)
   {
-    if (command.toEnum() == ZypperCommand::INSTALL_e) {
+    if (command == ZypperCommand::INSTALL) {
       if (ghelp || arguments.size() < 1) {
         cerr << "install [options] name...\n" << specific_help;
         return !ghelp;
@@ -702,7 +708,7 @@ int one_command(const string& command_str, int argc, char **argv)
       gData.packages_to_install = arguments;
     }
 
-    if (command.toEnum() == ZypperCommand::REMOVE_e) {
+    if (command == ZypperCommand::REMOVE) {
       if (ghelp || arguments.size() < 1) {
         cerr << "remove [options] name...\n"
         << specific_help
@@ -744,7 +750,7 @@ int one_command(const string& command_str, int argc, char **argv)
     zypp::getZYpp()->addResolvables(zypp::getZYpp()->target()->resolvables(), true);
     
     for ( vector<string>::const_iterator it = arguments.begin(); it != arguments.end(); ++it ) {
-      if (command.toEnum() == ZypperCommand::INSTALL_e) {
+      if (command == ZypperCommand::INSTALL) {
         mark_for_install(kind, *it);
       }
       else {
@@ -760,7 +766,8 @@ int one_command(const string& command_str, int argc, char **argv)
 
   // TODO -c, --catalog option
 
-  else if (command_str == "search" || command_str == "se") {
+  else if (command == ZypperCommand::SEARCH)
+  {
     ZyppSearchOptions options;
 
     if (ghelp) {
@@ -814,20 +821,20 @@ int one_command(const string& command_str, int argc, char **argv)
   // --------------------------( patch check )--------------------------------
 
   // TODO: rug summary
-  else if (command_str == "patch-check" || command_str == "pchk") {
+  else if (command == ZypperCommand::NONE) {//command_str == "patch-check" || command_str == "pchk") {
     if (ghelp) {
       cerr << specific_help;
       return !ghelp;
     }
 
     cond_init_target ();
-    cond_init_system_sources ();
+    init_repos ();
     // TODO additional_sources
     // TODO warn_no_sources
     // TODO calc token?
 
     // now load resolvables:
-    cond_load_resolvables ();
+    load_repo_resolvables ();
 
     establish ();
     patch_check ();
@@ -841,15 +848,15 @@ int one_command(const string& command_str, int argc, char **argv)
 
   // --------------------------( patches )------------------------------------
 
-  else if (command_str == "patches" || command_str == "pch") {
+  else if (command == ZypperCommand::NONE) {//command_str == "patches" || command_str == "pch") {
     if (ghelp) {
       cerr << specific_help;
       return !ghelp;
     }
 
     cond_init_target ();
-    cond_init_system_sources ();
-    cond_load_resolvables ();
+    init_repos ();
+    load_repo_resolvables ();
     establish ();
     show_patches ();
     return ZYPPER_EXIT_OK;
@@ -857,7 +864,7 @@ int one_command(const string& command_str, int argc, char **argv)
 
   // --------------------------( list updates )-------------------------------
 
-  else if (command_str == "list-updates" || command_str == "lu") {
+  else if (command == ZypperCommand::NONE) {//command_str == "list-updates" || command_str == "lu") {
     if (ghelp) {
       // FIXME catalog...
       cerr << specific_help;
@@ -873,8 +880,8 @@ int one_command(const string& command_str, int argc, char **argv)
     }
 
     cond_init_target ();
-    cond_init_system_sources ();
-    cond_load_resolvables ();
+    init_repos ();
+    load_repo_resolvables ();
     establish ();
 
     list_updates (kind);
@@ -884,7 +891,7 @@ int one_command(const string& command_str, int argc, char **argv)
 
   // -----------------------------( update )----------------------------------
 
-  else if (command_str == "update" || command_str == "up") {
+  else if (command == ZypperCommand::NONE) {//command_str == "update" || command_str == "up") {
     if (ghelp) {
       cerr << "update [options]\n"
 	   << specific_help
@@ -901,8 +908,8 @@ int one_command(const string& command_str, int argc, char **argv)
     }
 
     cond_init_target ();
-    cond_init_system_sources ();
-    cond_load_resolvables ();
+    init_repos ();
+    load_repo_resolvables ();
     establish ();
 
     bool skip_interactive = copts.count("skip-interactive") || gSettings.non_interactive;
@@ -916,18 +923,18 @@ int one_command(const string& command_str, int argc, char **argv)
 
   // -----------------------------( info )------------------------------------
 
-  else if (command_str == "info" || command_str == "if" || command_str == "patch-info") {
+  else if (command == ZypperCommand::NONE) {//command_str == "info" || command_str == "if" || command_str == "patch-info") {
     if (ghelp || arguments.size() == 0) {
       cerr << specific_help;
       return !ghelp;
     }
 
     cond_init_target ();
-    cond_init_system_sources ();
-    cond_load_resolvables ();
+    init_repos ();
+    load_repo_resolvables ();
     establish ();
 
-    printInfo(command_str,arguments);
+    printInfo(command,arguments);
 
     return ZYPPER_EXIT_OK;
   }
@@ -935,6 +942,8 @@ int one_command(const string& command_str, int argc, char **argv)
   // if the program reaches this line, something went wrong
   return ZYPPER_EXIT_ERR_BUG;
 }
+
+// ----------------------------------------------------------------------------
 
 /// tell to report a bug, and how
 // (multiline, with endls)
@@ -945,9 +954,11 @@ ostream& report_a_bug (ostream& stm) {
 	     << _("See http://en.opensuse.org/Zypper#Troubleshooting for instructions.") << endl;
 }
 
+// ----------------------------------------------------------------------------
+
 /// process one command from the OS shell or the zypper shell
 // catch unexpected exceptions and tell the user to report a bug (#224216)
-int safe_one_command(const string& command, int argc, char **argv)
+int safe_one_command(const ZypperCommand & command, int argc, char **argv)
 {
   int ret = ZYPPER_EXIT_ERR_BUG;
   try {
@@ -961,6 +972,8 @@ int safe_one_command(const string& command, int argc, char **argv)
   }
   return ret;
 }
+
+// ----------------------------------------------------------------------------
 
 // Read a string. "\004" (^D) on EOF.
 string readline_getline ()
@@ -989,6 +1002,8 @@ string readline_getline ()
     return "\004";
 }
 
+// ----------------------------------------------------------------------------
+
 void command_shell ()
 {
   string histfile;
@@ -1005,6 +1020,9 @@ void command_shell ()
 
   bool loop = true;
   while (loop) {
+    // reset globals
+    ghelp = false;
+    
     // read a line
     string line = readline_getline ();
     cerr_vv << "Got: " << line << endl;
@@ -1015,21 +1033,37 @@ void command_shell ()
     int sh_argc = args.argc ();
     char **sh_argv = args.argv ();
 
-    string command = sh_argv[0]? sh_argv[0]: "";
+    string command_str = sh_argv[0]? sh_argv[0]: "";
 
-    if (command == "\004") {
+    if (command_str == "\004") // ^D
+    {
       loop = false;
-      cout << endl;
+      cout << endl; // print newline after ^D
     }
-    else if (command == "exit" || command == "quit")
-      loop = false;
     else
-      safe_one_command (command, sh_argc, sh_argv);
+    {
+      try
+      {
+        ZypperCommand command(command_str);
+        if (command == ZypperCommand::SHELL_QUIT)
+          loop = false;
+        else if (command == ZypperCommand::SHELL)
+          cout << _("You already are running zypper's shell.") << endl;
+        else
+          safe_one_command (command, sh_argc, sh_argv);
+      }
+      catch (Exception & e)
+      {
+        cerr << e.msg() <<  endl;
+      }
+    }
   }
 
   if (!histfile.empty ())
     write_history (histfile.c_str ());
 }
+
+// ----------------------------------------------------------------------------
 
 int main(int argc, char **argv)
 {
@@ -1049,17 +1083,26 @@ int main(int argc, char **argv)
   if (logfile == NULL)
     logfile = ZYPP_CHECKPATCHES_LOG;
   zypp::base::LogControl::instance().logfile( logfile );
-  
-  // parse global options and the command
-  string command = process_globals (argc, argv);
-  int ret = 0;
-  if (command == "shell" || command == "sh")
-    command_shell ();
-  else
-    ret = safe_one_command (command, argc, argv);
 
-  return ret;
+  // parse global options and the command
+  ZypperCommand command = process_globals (argc, argv);
+  switch(command.toEnum())
+  {
+  case ZypperCommand::SHELL_e:
+    command_shell();
+    return ZYPPER_EXIT_OK;
+
+  case ZypperCommand::NONE_e:
+    return ZYPPER_EXIT_ERR_SYNTAX;
+
+  default:
+    return safe_one_command(command, argc, argv);
+  }
+
+  cerr_v << "This line should never be reached." << endl;
+  return ZYPPER_EXIT_ERR_BUG;
 }
+
 // Local Variables:
 // c-basic-offset: 2
 // End:

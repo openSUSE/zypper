@@ -6,7 +6,9 @@
 
 #include "zypp/PoolItem.h"
 
-void printInfo(const std::string & command, const std::vector<std::string> & arguments);
+#include "zypper-command.h"
+
+void printInfo(const ZypperCommand & command, const std::vector<std::string> & arguments);
 void printPkgInfo(const zypp::PoolItem & pool_item,  const zypp::PoolItem & ins_pool_item);
 void printPatchInfo(const zypp::PoolItem & pool_item, const zypp::PoolItem & ins_pool_item);
 #endif /*ZYPPERINFO_H_*/

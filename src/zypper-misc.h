@@ -26,9 +26,9 @@ void mark_for_uninstall( const zypp::ResObject::Kind &kind,
 int show_summary();
 std::string calculate_token();
 //! load all resolvables that the user wants
-void cond_load_resolvables ();
+//void cond_load_resolvables ();
 void load_target();
-void load_sources();
+//void load_sources();
 void load_repo_resolvables();
 void establish ();
 bool resolve();

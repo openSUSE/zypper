@@ -1,6 +1,8 @@
 #ifndef ZMART_SOURCES_H
 #define ZMART_SOURCES_H
 
+#include <boost/logic/tribool.hpp>
+
 #include "zypp/Url.h"
 
 /**
@@ -46,7 +48,7 @@ int add_repo_by_url( const zypp::Url & url,
  *         ZYPPER_EXIT_OK otherwise
  */
 int add_repo_from_file(const std::string & repo_file_url,
-                        tribool enabled = true, tribool autorefresh = true);
+                        boost::tribool enabled = true, boost::tribool autorefresh = true);
 
 /**
  * If ZMD process found, notify user that ZMD is running and that changes
@@ -57,7 +59,7 @@ void warn_if_zmd();
 
 
 //! calls init_system_sources if not disabled by user (or non-root)
-void cond_init_system_sources(); // OLD
+//void cond_init_system_sources(); // OLD
 void init_system_sources(); // OLD
 
 void remove_source( const std::string& anystring ); // OLD

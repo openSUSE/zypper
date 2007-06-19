@@ -1,14 +1,5 @@
-/*-----------------------------------------------------------*- c++ -*-\
-|                          ____ _   __ __ ___                          |
-|                         |__  / \ / / . \ . \                         |
-|                           / / \ V /|  _/  _/                         |
-|                          / /__ | | | | | |                           |
-|                         /_____||_| |_| |_|                           |
-|                                                                      |
-\---------------------------------------------------------------------*/
-
-#ifndef ZMART_H
-#define ZMART_H
+#ifndef ZYPPER_H
+#define ZYPPER_H
 
 #include <zypp/base/LogControl.h>
 #include <zypp/base/Logger.h>
@@ -16,14 +7,12 @@
 #include <zypp/Locale.h>
 #include <zypp/ZYpp.h>
 #include <zypp/ZYppFactory.h>
-#include <zypp/SourceManager.h>
-#include <zypp/SourceFactory.h>
 #include <zypp/ResStore.h>
 #include <zypp/base/String.h>
 #include <zypp/Digest.h>
 #include <zypp/CapFactory.h>
-
 #include <zypp/RepoInfo.h>
+
 
 #define ZYPP_CHECKPATCHES_LOG "/var/log/zypper.log"
 #undef  ZYPP_BASE_LOGGER_LOGGROUP
@@ -88,8 +77,6 @@ struct RuntimeData
   {}
     
   std::list<Error> errors;
-  // deprecated
-  std::list<zypp::Source_Ref> sources;
   std::list<zypp::RepoInfo> repos;
   int patches_count;
   int security_patches_count;
@@ -115,7 +102,8 @@ extern std::ostream no_stream;
 // define new _ macro
 #define _(MSG) ::gettext(MSG)
 
+#endif /*ZYPPER_H*/
+
 // Local Variables:
 // c-basic-offset: 2
 // End:
-#endif
