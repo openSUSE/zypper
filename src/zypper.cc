@@ -740,7 +740,9 @@ int one_command(const string& command_str, int argc, char **argv)
     cout_v << "loading repo resolvables... ";
     load_repo_resolvables();
     cout_v << "DONE" << endl;
-
+    cout_v << "loading installed resolvables... ";
+    zypp::getZYpp()->addResolvables(zypp::getZYpp()->target()->resolvables(), true);
+    
     for ( vector<string>::const_iterator it = arguments.begin(); it != arguments.end(); ++it ) {
       if (command.toEnum() == ZypperCommand::INSTALL_e) {
         mark_for_install(kind, *it);
