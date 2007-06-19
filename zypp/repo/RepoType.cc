@@ -9,7 +9,7 @@
 
 #include <iostream>
 #include <map>
-#include "zypp/base/Exception.h"
+#include "zypp/repo/RepoException.h"
 #include "RepoType.h"
 
 namespace zypp
@@ -46,8 +46,8 @@ namespace repo
       = _table.find(strval_r);
     if (it == _table.end())
     {
-      ZYPP_THROW(Exception(
-        "RepoType parse: illegal string value '" + strval_r + "'"));
+      ZYPP_THROW(RepoUnknownTypeException(
+        "Unknown repository type '" + strval_r + "'"));
     }
     return it->second;
   }

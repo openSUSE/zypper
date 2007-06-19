@@ -122,7 +122,16 @@ namespace zypp
      */
     class RepoUnknownTypeException : public RepoException
     {
-    
+    public:
+      RepoUnknownTypeException( const std::string & msg_r )
+        : RepoException(msg_r)
+      {}
+
+      RepoUnknownTypeException()
+      {}
+
+      ~RepoUnknownTypeException() throw()
+      {}
     };
     
     /////////////////////////////////////////////////////////////////
