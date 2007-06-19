@@ -11,6 +11,7 @@
 */
 
 #include <iostream>
+#include <fstream>
 #include <list>
 #include <algorithm>
 #include "zypp/base/InputStream.h"
@@ -531,6 +532,36 @@ namespace zypp
   }
  
   ////////////////////////////////////////////////////////////////////////////
+  
+  /**
+   * Generate a non existing filename in a directory, using a base
+   * name. For example if a directory contains 3 files
+   *
+   * |-- bar
+   * |-- foo
+   * `-- moo
+   *
+   * If you try to generate a unique filename for this directory, 
+   * based on "ruu" you will get "ruu", but if you use the base
+   * "foo" you will get "foo_1"
+   *
+   * \param dir Directory where the file needs to be unique
+   * \param basefilename string to base the filename on.
+   */
+  static Pathname generate_non_existing_name( const Pathname &dir,
+                                              const std::string &basefilename )
+  {
+    string final_filename = basefilename;
+    int counter = 1;
+    while ( PathInfo(dir + final_filename).isExist() )
+    {
+      final_filename = basefilename + "_" + str::numstring(counter);
+      counter++;
+    }
+    return dir + Pathname(final_filename);
+  }
+  
+  ////////////////////////////////////////////////////////////////////////////
 
   void RepoManager::addRepository( const RepoInfo &info,
                                    const ProgressData::ReceiverFnc & progressrcv )
@@ -545,6 +576,18 @@ namespace zypp
       if ( info.alias() == (*it).alias() )
         ZYPP_THROW(RepoAlreadyExistsException(info.alias()));
     }
+    
+    Pathname repofile = generate_non_existing_name(_pimpl->options.knownReposPath, info.alias()).extend(".repo");
+    // now we have a filename that does not exists
+    MIL << "Saving repo in " << repofile << endl;
+    
+    std::ofstream file(repofile.c_str());
+    if (!file) {
+      ZYPP_THROW (Exception( "Can't open " + repofile.asString() ) );
+    }
+    
+    info.dumpRepoOn(file);
+    MIL << "done" << endl;
   }
    
   void RepoManager::addRepositories( const Url &url,
@@ -566,21 +609,28 @@ namespace zypp
       }
     }
     
-    Pathname filename = Pathname(url.getPathName()).basename();
+    string filename = Pathname(url.getPathName()).basename();
     
     if ( filename == Pathname() )
       ZYPP_THROW(RepoException("Invalid repo file name at " + url.asString() ));
     
-    // FIXME move this code to a separate function
-    Pathname final_filename = filename;
-    int counter = 1;
-    while ( PathInfo(_pimpl->options.knownReposPath + filename).isExist() )
-    {
-      filename = Pathname( filename.asString() + "_" + str::numstring(counter));
-      counter++;
-    }
+    Pathname repofile = generate_non_existing_name(_pimpl->options.knownReposPath, filename).extend(".repo");
     // now we have a filename that does not exists
+    MIL << "Saving " << repos.size() << " repo" << ( repos.size() ? "s" : "" ) << " in " << repofile << endl;
     
+    std::ofstream file(repofile.c_str());
+    if (!file) {
+      ZYPP_THROW (Exception( "Can't open " + repofile.asString() ) );
+    }
+    
+    for ( std::list<RepoInfo>::const_iterator it = repos.begin();
+          it != repos.end();
+          ++it )
+    {
+      MIL << "Saving " << (*it).alias() << endl;
+      (*it).dumpRepoOn(file);
+    }
+    MIL << "done" << endl;
   }
   
   ////////////////////////////////////////////////////////////////////////////

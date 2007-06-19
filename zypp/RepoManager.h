@@ -206,18 +206,17 @@ namespace zypp
     * \throws ParseException If the file parsing fails
     * \throws Exception On other errors.
     */
-   void addRepositories( const Url &url,
+    void addRepositories( const Url &url,
                          const ProgressData::ReceiverFnc & progressrcv = ProgressData::ReceiverFnc() );
     /**
      * PROPOSAL
      */
     void removeRepository( const std::string & alias,
                            const ProgressData::ReceiverFnc & progressrcv = ProgressData::ReceiverFnc() );
-
+    
+  protected:
     RepoStatus rawMetadataStatus( const RepoInfo &info );
     RepoStatus cacheStatus( const RepoInfo &info );
-       
-    
   public:
 
   private:
