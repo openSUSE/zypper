@@ -704,7 +704,12 @@ namespace zypp
               (*fit).dumpRepoOn(file);
           }
           
-          
+          cache::CacheStore store(_pimpl->options.repoCachePath);
+    
+          if ( store.isCached( todelete.alias() ) ) {
+            MIL << "repository was cached. cleaning cache" << endl;
+            store.cleanRepository(todelete.alias());
+          }
           
           return;
         }
