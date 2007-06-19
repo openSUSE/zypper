@@ -835,7 +835,9 @@ int solve_and_commit (bool non_interactive) {
       cerr_v << _("committing") << endl;
       
       try {
-        ZYppCommitResult result = God->commit( ZYppCommitPolicy() );
+        // FIXME do resync if in shell mode, how
+        // do I know if in shell mode?
+        ZYppCommitResult result = God->commit( ZYppCommitPolicy().syncPoolAfterCommit(false) );
 
         if (!result._errors.empty())
           retv = ZYPPER_EXIT_ERR_ZYPP;
