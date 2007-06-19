@@ -59,7 +59,10 @@ void warn_if_zmd();
 //! calls init_system_sources if not disabled by user (or non-root)
 void cond_init_system_sources(); // OLD
 void init_system_sources(); // OLD
+
 void remove_source( const std::string& anystring ); // OLD
+void remove_repo( const std::string &alias );
+
 void rename_source( const std::string& anystring, const std::string& newalias ); // OLD
 void include_source_by_url( const zypp::Url &url ); // OLD
 

@@ -337,6 +337,14 @@ bool looks_like_url (const string& s) {
   return false;
 }
 
+void remove_repo( const std::string &alias )
+{
+  RepoManager manager;
+  RepoInfo info;
+  info.setAlias(alias);
+  manager.removeRepository(info);
+}
+
 //! remove a source, identified in any way: alias, url, id
 // may throw:
 void remove_source( const std::string& anystring )

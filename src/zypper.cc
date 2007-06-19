@@ -643,7 +643,7 @@ int one_command(const string& command_str, int argc, char **argv)
     warn_if_zmd ();
     try {
       // also stores it
-      remove_source(arguments[0]);
+      remove_repo(arguments[0]);
     }
     catch ( const Exception & excpt_r )
     {
