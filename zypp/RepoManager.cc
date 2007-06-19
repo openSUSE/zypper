@@ -587,7 +587,8 @@ namespace zypp
         ZYPP_THROW(RepoAlreadyExistsException(info.alias()));
     }
     
-    Pathname repofile = generate_non_existing_name(_pimpl->options.knownReposPath, info.alias()).extend(".repo");
+    Pathname repofile = generate_non_existing_name(_pimpl->options.knownReposPath,
+                                                    Pathname(info.alias()).extend(".repo").asString());
     // now we have a filename that does not exists
     MIL << "Saving repo in " << repofile << endl;
     
@@ -627,7 +628,7 @@ namespace zypp
     if ( filename == Pathname() )
       ZYPP_THROW(RepoException("Invalid repo file name at " + url.asString() ));
     
-    Pathname repofile = generate_non_existing_name(_pimpl->options.knownReposPath, filename).extend(".repo");
+    Pathname repofile = generate_non_existing_name(_pimpl->options.knownReposPath, filename);
     // now we have a filename that does not exists
     MIL << "Saving " << repos.size() << " repo" << ( repos.size() ? "s" : "" ) << " in " << repofile << endl;
     
@@ -666,20 +667,21 @@ namespace zypp
        
       // we have a matcing repository, now we need to know
       // where it does come from.
-      if (info.filepath().empty())
+      RepoInfo todelete = *it;
+      if (todelete.filepath().empty())
       {
         ZYPP_THROW(RepoException("Can't figure where the repo is stored"));
       }
       else
       {
         // figure how many repos are there in the file:
-        std::list<RepoInfo> filerepos = repositories_in_file(info.filepath());
-        if ( (filerepos.size() == 1) && ( filerepos.front().alias() == info.alias() ) )
+        std::list<RepoInfo> filerepos = repositories_in_file(todelete.filepath());
+        if ( (filerepos.size() == 1) && ( filerepos.front().alias() == todelete.alias() ) )
         {
           // easy, only this one, just delete the file
-          if ( filesystem::unlink(info.filepath()) != 0 )
+          if ( filesystem::unlink(todelete.filepath()) != 0 )
           {
-            ZYPP_THROW(RepoException("Can't delete " + info.filepath().asString()));
+            ZYPP_THROW(RepoException("Can't delete " + todelete.filepath().asString()));
           }
           return;
         }
@@ -687,18 +689,23 @@ namespace zypp
         {
           // there are more repos in the same file
           // write them back except the deleted one.
-          TmpFile tmp;
-          std::ofstream file(tmp.path().c_str());
+          //TmpFile tmp;
+          //std::ofstream file(tmp.path().c_str());
+          std::ofstream file(todelete.filepath().c_str());
           if (!file) {
-            ZYPP_THROW (Exception( "Can't open " + tmp.path().asString() ) );
+            //ZYPP_THROW (Exception( "Can't open " + tmp.path().asString() ) );
+            ZYPP_THROW (Exception( "Can't open " + todelete.filepath().asString() ) );
           }
           for ( std::list<RepoInfo>::const_iterator fit = filerepos.begin();
                 fit != filerepos.end();
                 ++fit )
           {
-            if ( (*fit).alias() != info.alias() )
+            if ( (*fit).alias() != todelete.alias() )
               (*fit).dumpRepoOn(file);
           }
+          
+          
+          
           return;
         }
       } // else filepath is empty

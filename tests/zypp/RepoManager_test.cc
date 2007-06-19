@@ -55,7 +55,7 @@ void repomanager_test( const string &dir )
   manager.addRepositories(url);
   
   // check it was not overwriten the proprietary.repo file
-  BOOST_CHECK( PathInfo(Pathname(dir) + "/repos.d/proprietary_1.repo").isExist() );
+  BOOST_CHECK( PathInfo(tmpKnownReposPath.path() + "/proprietary.repo_1").isExist() );
   
   // now there should be 6 repos
   repos = manager.knownRepositories();
@@ -69,7 +69,7 @@ void repomanager_test( const string &dir )
   repos = manager.knownRepositories();
   BOOST_CHECK_EQUAL(repos.size(), (unsigned) 5);
   // the file still contained one repo, so it should still exists
-  BOOST_CHECK( PathInfo(Pathname(dir) + "/repos.d/proprietary_1.repo").isExist() );
+  BOOST_CHECK( PathInfo(tmpKnownReposPath.path() + "/proprietary.repo_1").isExist() );
   
   // now delete the macromedia one
   RepoInfo macromedia;
@@ -78,7 +78,10 @@ void repomanager_test( const string &dir )
   repos = manager.knownRepositories();
   BOOST_CHECK_EQUAL(repos.size(), (unsigned) 4);
   // the file should not exist anymore
-  BOOST_CHECK( ! PathInfo(Pathname(dir) + "/repos.d/proprietary_1.repo").isExist() );
+  BOOST_CHECK( ! PathInfo(tmpKnownReposPath.path() + "/proprietary.repo_1").isExist() );
+  
+  // for now skip creation
+  return;
   
   RepoInfo repo(repos.front());
   manager.refreshMetadata(repo);
