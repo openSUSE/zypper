@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Tue Jun 19 12:53:23 CEST 2007 - mvidner@suse.cz
+
+- Fixed an endless loop in Abort/Retry/Ignore (#269263).
+
+-------------------------------------------------------------------
 Mon Jun  4 22:32:52 CEST 2007 - jkupec@suse.cz
 
 - fixed changed log file path also in zypper.lr

@@ -22,17 +22,13 @@ void display_done () {
 int read_action_ari (int default_action) {
   cout << _("(A)bort, (R)etry, (I)gnore?") << " "; // don't translate letters in parentheses!!
 
+  // abort if no default has been specified
+  if (default_action == -1) {
+    default_action = 0;
+  }
+
   // non-interactive mode
   if (gSettings.non_interactive) {
-    // abort if no default has been specified
-    if (default_action == -1) {
-      // print the answer for convenience
-      cout << 'a' << endl;
-
-      return 0; 
-    }
-    // return the specified default
-    else {
       char c;
       switch (default_action) {
 	  case 0: c = 'a'; break;
@@ -44,11 +40,10 @@ int read_action_ari (int default_action) {
       cout << c << endl;
 
       return default_action;
-    }
   }
 
   // interactive mode, ask user
-  while (true) {
+  while (cin.good()) {		// #269263
     char c;
     cin >> c;
     c = tolower (c);
@@ -60,6 +55,8 @@ int read_action_ari (int default_action) {
       return 2;
     cout << "?" << endl;
   }
+
+  return default_action;
 }
 
 string to_string (zypp::Resolvable::constPtr resolvable) {
