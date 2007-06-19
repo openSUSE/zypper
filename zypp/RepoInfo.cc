@@ -191,19 +191,19 @@ namespace zypp
   std::ostream & RepoInfo::dumpRepoOn( std::ostream & str ) const
   {
     str << "[" << alias() << "]" << endl;
-    str << "name = " << name() << endl;
+    str << "name=" << name() << endl;
 
     if ( ! baseUrls().empty() )
-      str << "baseurl = ";
+      str << "baseurl=";
     for ( urls_const_iterator it = baseUrlsBegin();
           it != baseUrlsEnd();
           ++it )
     {
       str << *it << endl;
     }
-    str << "mirrorlist = " << mirrorListUrl() << endl;
-    str << "type = " << type().asString() << endl;
-    str << "enabled = " << (enabled() ? "1" : "0") << endl;
+    str << "mirrorlist=" << mirrorListUrl() << endl;
+    str << "type=" << type().asString() << endl;
+    str << "enabled=" << (enabled() ? "1" : "0") << endl;
     return str;
   }
 

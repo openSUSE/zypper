@@ -16,6 +16,7 @@
 using std::cout;
 using std::endl;
 using std::string;
+using std::map;
 using namespace zypp;
 using namespace zypp::parser;
 using namespace boost::unit_test;
@@ -39,6 +40,16 @@ void ini_read_test(const string &dir)
   }
 }
 
+void ini_read_test2(const string &dir)
+{
+  InputStream is((Pathname(dir)+"/2.ini"));
+  IniDict dict(is);
+
+  BOOST_CHECK( find( dict.sectionsBegin(), dict.sectionsEnd(), "base" ) != dict.sectionsEnd() );
+  //IniDict::entry_const_iterator i = find( dict.entriesBegin("base"), dict.entriesEnd("base"), "name");
+  //BOOST_CHECK( i != dict.entriesEnd("base") );
+}
+
 test_suite*
 init_unit_test_suite( int argc, char *argv[] )
 {
@@ -60,6 +71,8 @@ init_unit_test_suite( int argc, char *argv[] )
   
   std::string const params[] = { datadir };
   test->add(BOOST_PARAM_TEST_CASE(&ini_read_test,
+                                 (std::string const*)params, params+1));
+  test->add(BOOST_PARAM_TEST_CASE(&ini_read_test2,
                                  (std::string const*)params, params+1));
   return test;
 }

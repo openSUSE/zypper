@@ -29,7 +29,26 @@ class IniTest : public IniParser
 
   virtual void consume( const std::string &section, const std::string &key, const std::string &value )
   {
-    MIL << section << " | " << key << " | " << value << endl;
+    MIL << "'" << section << "'" << " | " << "'" << key << "'" << " | " << "'" << value << "'" << endl;
+  }
+};
+
+
+class WithSpacesTest : public IniParser
+{
+  virtual void consume( const std::string &section )
+  {
+    MIL << section << endl;
+  }
+
+  virtual void consume( const std::string &section, const std::string &key, const std::string &value )
+  {
+    MIL << "'" << section << "'" << " | " << "'" << key << "'" << " | " << "'" << value << "'" << endl;
+    if ( section == "base")
+    {
+      if ( key == "name" )
+        BOOST_CHECK_EQUAL( value, "foo" );
+    }
   }
 };
 
@@ -37,6 +56,13 @@ void ini_read_test(const string &dir)
 {
   InputStream is((Pathname(dir)+"/1.ini"));
   IniTest parser;
+  parser.parse(is);
+}
+
+void ini_spaces_test(const string &dir)
+{
+  InputStream is((Pathname(dir)+"/2.ini"));
+  WithSpacesTest parser;
   parser.parse(is);
 }
 
@@ -61,6 +87,8 @@ init_unit_test_suite( int argc, char *argv[] )
   
   std::string const params[] = { datadir };
   test->add(BOOST_PARAM_TEST_CASE(&ini_read_test,
+                                 (std::string const*)params, params+1));
+  test->add(BOOST_PARAM_TEST_CASE(&ini_spaces_test,
                                  (std::string const*)params, params+1));
   return test;
 }
