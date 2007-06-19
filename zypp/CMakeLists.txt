@@ -3,6 +3,11 @@
 ####################################################################
 
 ADD_DEFINITIONS(-DLOCALEDIR=\\\"/usr/share/libzypp\\\" -DTEXTDOMAIN=\\\"zypp\\\" )
+
+IF(ZYPP_REFACTORING)
+  ADD_DEFINITIONS(-DZYPP_REFACTORING)
+ENDIF(ZYPP_REFACTORING)
+
 ADD_EXECUTABLE(mkarray ${CMAKE_SOURCE_DIR}/zypp/cache/schema/mkarray.c )
 INCLUDE_DIRECTORIES(${CMAKE_CURRENT_BINARY_DIR})
 #FILE(WRITE filename "message to write"... )

@@ -12,6 +12,7 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <set>
 #include "zypp/base/Logger.h"
 
 #include "zypp/repo/RepoProvideFile.h"
@@ -19,6 +20,7 @@
 #include "zypp/MediaSetAccess.h"
 
 using std::endl;
+using std::set;
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -91,29 +93,35 @@ namespace zypp
 
       Url url;
       RepoInfo info = repo_r.info();
-      // FIXME we only support the first url for now.
-      if ( info.baseUrls().empty() )
+      set<Url> urls = info.baseUrls();
+      if ( urls.empty() )
         ZYPP_THROW(Exception("No url in repository."));
-      else
-        url = * info.baseUrls().begin();
       
-      MediaSetAccess access(url);
-      
-      ManagedFile ret( access.provideFile(loc_r),
-		       RepoReleaseFile( repo_r, loc_r.filename(), loc_r.medianr() ) );
-
-      if ( loc_r.checksum().empty() )
+      for ( RepoInfo::urls_const_iterator it = urls.begin();
+            it != urls.end();
+            ++it )
+      {
+        url = *it;
+        try
         {
-          // no checksum in metadata
-          WAR << "No checksum in metadata " << loc_r << endl;
-        }
-      else
-        {
-          std::ifstream input( ret->asString().c_str() );
-          CheckSum retChecksum( loc_r.checksum().type(), input );
-          input.close();
-
-          if ( loc_r.checksum() != retChecksum )
+        
+          MediaSetAccess access(url);
+          
+          ManagedFile ret( access.provideFile(loc_r),
+                          RepoReleaseFile( repo_r, loc_r.filename(), loc_r.medianr() ) );
+    
+          if ( loc_r.checksum().empty() )
+          {
+            // no checksum in metadata
+            WAR << "No checksum in metadata " << loc_r << endl;
+          }
+          else
+          {
+            std::ifstream input( ret->asString().c_str() );
+            CheckSum retChecksum( loc_r.checksum().type(), input );
+            input.close();
+  
+            if ( loc_r.checksum() != retChecksum )
             {
               // failed integity check
               std::ostringstream err;
@@ -129,10 +137,17 @@ namespace zypp
               else
                 WAR << "NO failOnChecksumError: " << err.str() << endl;
             }
+          }
+    
+          MIL << "sourceProvideFile at " << ret << endl;
+          return ret;
         }
-
-      MIL << "sourceProvideFile at " << ret << endl;
-      return ret;
+        catch ( const Exception &e )
+        {
+          ERR << "Trying next url" << endl;
+          continue;
+        }
+      } // iteration over urls
     }
 
     /////////////////////////////////////////////////////////////////

@@ -40,7 +40,13 @@
 
 #include "zypp/pool/GetResolvablesToInsDel.h"
 #include "zypp/solver/detail/Helper.h"
+
+#ifdef ZYPP_REFACTORING
+#include "zypp/repo/DeltaCandidates.h"
+#include "zypp/repo/PackageProvider.h"
+#else
 #include "zypp/source/PackageProvider.h"
+#endif
 
 using namespace std;
 using namespace zypp;
@@ -224,11 +230,22 @@ namespace zypp
     {
       // Redirect PackageProvider queries for installed editions
       // (in case of patch/delta rpm processing) to rpmDb.
+#ifdef ZYPP_REFACTORING
+      repo::PackageProviderPolicy packageProviderPolicy;
+#else
       source::PackageProviderPolicy packageProviderPolicy;
+#endif
       packageProviderPolicy.queryInstalledCB( QueryInstalledEditionHelper() );
 
       Package::constPtr p = asKind<Package>(pi.resolvable());
+#ifdef ZYPP_REFACTORING
+      // FIXME no repo list
+      std::set<Repository> repos;
+      repo::DeltaCandidates deltas(repos);
+      repo::PackageProvider pkgProvider( p, deltas, packageProviderPolicy );
+#else
       source::PackageProvider pkgProvider( p, packageProviderPolicy );
+#endif
       return pkgProvider.providePackage();
     }
 
