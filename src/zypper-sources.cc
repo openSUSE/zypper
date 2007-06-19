@@ -12,11 +12,16 @@
 
 #include <zypp/RepoManager.h>
 #include <zypp/RepoInfo.h>
+#include <zypp/repo/RepoException.h>
+#include <zypp/parser/ParseException.h>
+#include <zypp/media/MediaException.h>
 
 using namespace std;
 using namespace zypp;
 using namespace zypp::repo;
 using namespace boost;
+using namespace zypp::media;
+using namespace zypp::parser;
 
 extern ZYpp::Ptr God;
 extern RuntimeData gData;
@@ -206,7 +211,34 @@ int add_repo(const RepoInfo & repo)
   RepoManager manager;
 
   cout_v << format(_("Adding repository '%s'.")) % repo.alias() << endl;
-  manager.addRepository(repo);
+
+  try
+  {
+    manager.addRepository(repo);
+  }
+  catch (const MediaException & e)
+  {
+    cerr << "Problem transfering repository data for reading." << endl;
+    return ZYPPER_EXIT_ERR_ZYPP;
+  }
+  catch (const ParseException & e)
+  {
+    cerr << "Problem while reading repository data." << endl;
+    return ZYPPER_EXIT_ERR_ZYPP;
+  }
+  catch (const RepoAlreadyExistsException & e)
+  {
+    string message = _(
+        "A repository named '%s'."
+        " already exists.");
+    cerr << format(message) % repo.alias() << endl;
+    return ZYPPER_EXIT_ERR_ZYPP;
+  }
+  catch (const Exception & e)
+  {
+    cerr << e.msg() << endl;
+    return ZYPPER_EXIT_ERR_BUG;
+  }
 
   cout << format(_("Repository '%s' successfully added:")) % repo.alias() << endl;
   cout << ( repo.enabled() ? "[x]" : "[ ]" );
@@ -247,7 +279,7 @@ int add_repo_by_url( const zypp::Url & url, const string & alias,
           << endl;
       }
     }
-    catch (Exception & e)
+    catch (RepoUnknownTypeException & e)
     {
       string message = _(
         "Warning: Unknown repository type '%s'."
@@ -264,7 +296,7 @@ int add_repo_by_url( const zypp::Url & url, const string & alias,
   repo.addBaseUrl(url);
   repo.setEnabled(enabled);
   repo.setAutorefresh(refresh);
-
+  
   return add_repo(repo);
 }
 
