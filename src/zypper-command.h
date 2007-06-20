@@ -22,6 +22,7 @@ struct ZypperCommand
   static const ZypperCommand SEARCH;
   static const ZypperCommand INFO;
   static const ZypperCommand LIST_UPDATES;
+  static const ZypperCommand PATCH_CHECK;
 
   static const ZypperCommand HELP;
   static const ZypperCommand SHELL;
@@ -50,7 +51,8 @@ struct ZypperCommand
     SEARCH_e,
     INFO_e,
     LIST_UPDATES_e,
-    
+    PATCH_CHECK_e,
+
     HELP_e,
     SHELL_e,
     SHELL_QUIT_e,
@@ -58,7 +60,7 @@ struct ZypperCommand
     
     NONE_e,
 
-    RUG_PATCH_INFO_e
+    RUG_PATCH_INFO_e,
   };
 
   ZypperCommand(Command command) : _command(command) {}

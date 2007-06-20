@@ -20,12 +20,15 @@ const ZypperCommand ZypperCommand::ADD_REPO(ZypperCommand::ADD_REPO_e);
 const ZypperCommand ZypperCommand::REMOVE_REPO(ZypperCommand::REMOVE_REPO_e);
 const ZypperCommand ZypperCommand::LIST_REPOS(ZypperCommand::LIST_REPOS_e);
 const ZypperCommand ZypperCommand::REFRESH(ZypperCommand::REFRESH_e);
-const ZypperCommand ZypperCommand::SEARCH(ZypperCommand::SEARCH_e);
+
 const ZypperCommand ZypperCommand::INSTALL(ZypperCommand::INSTALL_e);
 const ZypperCommand ZypperCommand::REMOVE(ZypperCommand::REMOVE_e);
 const ZypperCommand ZypperCommand::UPDATE(ZypperCommand::UPDATE_e);
 
+const ZypperCommand ZypperCommand::SEARCH(ZypperCommand::SEARCH_e);
 const ZypperCommand ZypperCommand::INFO(ZypperCommand::INFO_e);
+const ZypperCommand ZypperCommand::LIST_UPDATES(ZypperCommand::LIST_UPDATES_e);
+const ZypperCommand ZypperCommand::PATCH_CHECK(ZypperCommand::PATCH_CHECK_e);
 
 const ZypperCommand ZypperCommand::HELP(ZypperCommand::HELP_e);
 const ZypperCommand ZypperCommand::SHELL(ZypperCommand::SHELL_e);
@@ -50,12 +53,15 @@ ZypperCommand::Command ZypperCommand::parse(const std::string & strval_r)
     _table["rmrepo"] = _table["service-delete"] = _table["sd"] = ZypperCommand::REMOVE_REPO_e;
     _table["listrepos"] = _table["service-list"] = _table["sl"] = ZypperCommand::LIST_REPOS_e;
     _table["refresh"] = _table["ref"] = ZypperCommand::REFRESH_e;
-    _table["search"] = _table["se"] = ZypperCommand::SEARCH_e;
+
     _table["install"] = _table["in"] = ZypperCommand::INSTALL_e;
     _table["remove"] = _table["rm"] = ZypperCommand::REMOVE_e;
     _table["update"] = _table["up"] = ZypperCommand::UPDATE_e;
 
+    _table["search"] = _table["se"] = ZypperCommand::SEARCH_e;
     _table["info"] = _table["if"] = ZypperCommand::INFO_e;
+    _table["list-updates"] = _table["lu"] = ZypperCommand::LIST_UPDATES_e;
+    _table["patch-check"] = _table["pchk"] = ZypperCommand::PATCH_CHECK_e;
 
     _table["help"] = ZypperCommand::HELP_e;
     _table["shell"] = _table["sh"] = ZypperCommand::SHELL_e;

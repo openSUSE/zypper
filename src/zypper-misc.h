@@ -28,7 +28,7 @@ void mark_for_install( const zypp::ResObject::Kind &kind,
 void mark_for_uninstall( const zypp::ResObject::Kind &kind,
 			 const std::string &name );
 int show_summary();
-std::string calculate_token();
+//std::string calculate_token();
 
 /**
  * Load both repository and target resolvables into the pool respecting
@@ -50,8 +50,18 @@ void establish ();
 bool resolve();
 void dump_pool ();
 void show_patches();
+
+/**
+ * Are there applicable patches?
+ */
 void patch_check();
+
+/**
+ * Lists available updates of installed resolvables of specified \a kind.
+ * Prints the table of updates to stdout.
+ */
 void list_updates( const zypp::ResObject::Kind &kind );
+
 void mark_updates( const zypp::ResObject::Kind &kind, bool skip_interactive );
 void usage(int argc, char **argv);
 int solve_and_commit (bool non_interactive = false);

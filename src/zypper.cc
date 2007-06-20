@@ -349,7 +349,7 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
       "Refresh all installation sources found in the system.\n"
       );
   }
-  else if (command == ZypperCommand::NONE) { //command_str == "list-updates" || command_str == "lu") {
+  else if (command == ZypperCommand::LIST_UPDATES) {
     static struct option list_updates_options[] = {
       {"type",		required_argument, 0, 't'},
       {"help", no_argument, 0, 'h'},
@@ -421,7 +421,7 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
       "* and ? wildcards can also be used within search strings.\n"
       );
   }
-  else if (command == ZypperCommand::NONE) {//command_str == "patch-check" || command_str == "pchk") {
+  else if (command == ZypperCommand::PATCH_CHECK) {
     static struct option patch_check_options[] = {
       {"help", no_argument, 0, 'h'},
       {0, 0, 0, 0}
@@ -817,7 +817,7 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
   // --------------------------( patch check )--------------------------------
 
   // TODO: rug summary
-  else if (command == ZypperCommand::NONE) {//command_str == "patch-check" || command_str == "pchk") {
+  else if (command == ZypperCommand::PATCH_CHECK) {
     if (ghelp) {
       cerr << specific_help;
       return !ghelp;
@@ -860,7 +860,7 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
 
   // --------------------------( list updates )-------------------------------
 
-  else if (command == ZypperCommand::NONE) {//command_str == "list-updates" || command_str == "lu") {
+  else if (command == ZypperCommand::LIST_UPDATES) {
     if (ghelp) {
       // FIXME catalog...
       cerr << specific_help;

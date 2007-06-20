@@ -469,10 +469,9 @@ bool resolve()
   return God->resolver()->resolvePool();
 }
 
-//! are there applicable patches?
 void patch_check ()
 {
-  cerr_vv << "patch check" << endl;
+  cout_vv << "patch check" << endl;
   gData.patches_count = gData.security_patches_count = 0;
 
   ResPool::byKind_iterator
@@ -491,7 +490,9 @@ void patch_check ()
     }
   }
 
-  cout << gData.patches_count << _(" patches needed") << ". ( " << gData.security_patches_count << _(" security patches") << " )"  << std::endl;
+  cout << format(_("%d patches needed (%d security patches)"))
+                 % gData.patches_count % gData.security_patches_count
+       << std::endl;
 }
 
 string string_status (const ResStatus& rs)
@@ -562,6 +563,8 @@ void show_patches()
   cout << tbl;
 }
 
+// ----------------------------------------------------------------------------
+
 void list_patch_updates ()
 {
   Table tbl;
@@ -611,8 +614,14 @@ void list_patch_updates ()
   }
 
   tbl.sort (1); 		// Name
-  cout << tbl;
+
+  if (tbl.empty())
+    cout << _("No updates found.") << endl;
+  else
+    cout << tbl;
 }
+
+// ----------------------------------------------------------------------------
 
 // collect items, select best edition.
 class LookForArchUpdate : public zypp::resfilter::PoolItemFilterFunctor
@@ -632,6 +641,8 @@ public:
       return true;		// keep going
     }
 };
+
+// ----------------------------------------------------------------------------
 
 // Find best (according to edition) uninstalled item
 // with same kind/name/arch as item.
@@ -659,6 +670,8 @@ findArchUpdateItem (const ResPool & pool, PoolItem_Ref item)
   return info.uninstalled;
 }
 
+// ----------------------------------------------------------------------------
+
 typedef set<PoolItem_Ref> Candidates;
 
 void find_updates( const ResObject::Kind &kind, Candidates &candidates )
@@ -683,6 +696,8 @@ void find_updates( const ResObject::Kind &kind, Candidates &candidates )
   }
 }
 
+// ----------------------------------------------------------------------------
+
 void list_updates( const ResObject::Kind &kind )
 {
   bool k_is_patch = kind == ResTraits<Patch>::kind;
@@ -690,6 +705,8 @@ void list_updates( const ResObject::Kind &kind )
     list_patch_updates ();
   else {
     Table tbl;
+    
+    // header
     TableHeader th;
     unsigned cols = 5;
     th << _("S") << _("Catalog"); // for translators: S stands for Status
@@ -718,7 +735,11 @@ void list_updates( const ResObject::Kind &kind )
       tbl << tr;
     }
     tbl.sort (gSettings.is_rug_compatible? 3: 2); // Name
-    cout << tbl;
+
+    if (tbl.empty())
+      cout << _("No updates found.") << endl;
+    else
+      cout << tbl;
   }
 }
 
@@ -730,6 +751,8 @@ bool mark_item_install (const PoolItem& pi) {
   }
   return result;
 }
+
+// ----------------------------------------------------------------------------
 
 static
 void mark_patch_updates (bool skip_interactive)
@@ -768,6 +791,8 @@ void mark_patch_updates (bool skip_interactive)
   }
 }
 
+// ----------------------------------------------------------------------------
+
 void mark_updates( const ResObject::Kind &kind, bool skip_interactive )
 {
   bool k_is_patch = kind == ResTraits<Patch>::kind;
@@ -782,6 +807,7 @@ void mark_updates( const ResObject::Kind &kind, bool skip_interactive )
   }
 }
 
+// ----------------------------------------------------------------------------
 
 /**
  * @return ZYPPER_EXIT_OK - successful commit,
