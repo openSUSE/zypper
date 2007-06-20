@@ -1,9 +1,12 @@
 #!/bin/sh
+# $Id$
+set -o errexit
 USAGE=false
 DO_xmllint=false
 DO_jing_compact=false
 DO_jing_xml=false
 DO_rnv=false
+ERROREXIT=false
 
 #SDIR=/home/martin/zyppschema
 SDIR=/home/mvidner/svn/zypp/trunk/libzypp/zypp/parser/yum/schema
@@ -11,7 +14,7 @@ SDIR=/home/mvidner/svn/zypp/trunk/libzypp/zypp/parser/yum/schema
 while getopts ceghrs:x FLAG; do
     case $FLAG in
 	c) DO_jing_compact=true;;
-	e) set -o errexit;;
+	e) ERROREXIT=true;;
 	g) DO_jing_xml=true;;
 	h) USAGE=true;;
 	r) DO_rnv=true;;
@@ -89,7 +92,7 @@ val() {
     done
 
     rm -f $TEMP
-    if $FAIL; then
+    if $ERROREXIT && $FAIL; then
 	exit 1
     fi
 }
