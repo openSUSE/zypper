@@ -1,4 +1,17 @@
 -------------------------------------------------------------------
+Wed Jun 20 11:47:33 CEST 2007 - schubi@suse.de
+
+- Ignore conflicting items which are uninstallable
+- Create a "needed by" info if a requirement is still fulfilled.
+- Allow only one needed_by and needed_by_capability in QueueItemInstall
+- Added capability and type (REQUIRE, RECOMMEND,....) to
+  ResolverInfoNeededBy
+- Evaluate ResolverInfoNeededBy for more information in the error
+  messages
+- Enlarge detail description in the error messages
+- Revision 5807 
+
+-------------------------------------------------------------------
 Tue Jun 19 13:59:09 CEST 2007 - ma@suse.de
 
 - Fixes for gcc-4.2
