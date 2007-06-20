@@ -743,11 +743,7 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
     }
 
     cond_init_target ();
-    cout_v << "loading repo resolvables... ";
-    load_repo_resolvables();
-    cout_v << "DONE" << endl;
-    cout_v << "loading installed resolvables... ";
-    zypp::getZYpp()->addResolvables(zypp::getZYpp()->target()->resolvables(), true);
+    cond_load_resolvables();
     
     for ( vector<string>::const_iterator it = arguments.begin(); it != arguments.end(); ++it ) {
       if (command == ZypperCommand::INSTALL) {
@@ -834,7 +830,7 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
     // TODO calc token?
 
     // now load resolvables:
-    load_repo_resolvables ();
+    cond_load_resolvables();
 
     establish ();
     patch_check ();
@@ -856,7 +852,7 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
 
     cond_init_target ();
     init_repos ();
-    load_repo_resolvables ();
+    cond_load_resolvables();
     establish ();
     show_patches ();
     return ZYPPER_EXIT_OK;
@@ -881,7 +877,7 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
 
     cond_init_target ();
     init_repos ();
-    load_repo_resolvables ();
+    cond_load_resolvables();
     establish ();
 
     list_updates (kind);
@@ -909,7 +905,7 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
 
     cond_init_target ();
     init_repos ();
-    load_repo_resolvables ();
+    cond_load_resolvables ();
     establish ();
 
     bool skip_interactive = copts.count("skip-interactive") || gSettings.non_interactive;
@@ -931,7 +927,7 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
 
     cond_init_target ();
     init_repos ();
-    load_repo_resolvables ();
+    cond_load_resolvables ();
     establish ();
 
     printInfo(command,arguments);

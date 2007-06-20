@@ -395,40 +395,15 @@ std::string calculate_token()
   return token;
 }
 */
-/*
-void cond_load_resolvables ()
+
+void cond_load_resolvables()
 {	
-  // load repository resolvables
-  load_sources();
+  load_repo_resolvables();
 
-  // load target resolvables
   if ( ! gSettings.disable_system_resolvables ) {
-    load_target();
+    load_target_resolvables();
   }
 }
-*/
-void load_target()
-{
-  cerr << _("Parsing RPM database...") << endl;
-  ResStore tgt_resolvables(God->target()->resolvables());
-  cerr_v << "   " <<  tgt_resolvables.size() << _(" resolvables.") << endl;
-  God->addResolvables(tgt_resolvables, true /*installed*/);
-}
-/*
-void load_sources()
-{
-  for ( std::list<Source_Ref>::iterator it = gData.sources.begin(); it !=  gData.sources.end(); ++it )
-  {
-    if (! it->enabled())
-      continue;			// #217297
-
-    cerr << _("Parsing metadata for ") << it->alias() << "..." << endl;
-    ResStore src_resolvables(it->resolvables());
-    cerr_v << "   " <<  src_resolvables.size() << _(" resolvables.") << endl;
-    God->addResolvables(src_resolvables);
-  }
-}
-*/
 
 /** read repository resolvables */
 void load_repo_resolvables()
@@ -470,6 +445,14 @@ void load_repo_resolvables()
                       % repo.alias() << endl;
     }
   }
+}
+
+void load_target_resolvables()
+{
+  cout << _("Reading RPM database...") << endl;
+  ResStore tgt_resolvables(God->target()->resolvables());
+  cout_v << "   " <<  format(_("%s resolvables.")) % tgt_resolvables.size() << endl;
+  God->addResolvables(tgt_resolvables, true /*installed*/);
 }
 
 void establish ()

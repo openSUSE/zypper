@@ -16,7 +16,11 @@
 #include "zypp/PoolItem.h"
 #include "zypper-tabulator.h"
 
-void cond_init_target ();
+/**
+ * Initialize rpm database on target, if not already initialized. 
+ */
+void cond_init_target();
+
 bool readBoolAnswer();
 zypp::ResObject::Kind string_to_kind (const std::string &skind);
 void mark_for_install( const zypp::ResObject::Kind &kind,
@@ -25,11 +29,23 @@ void mark_for_uninstall( const zypp::ResObject::Kind &kind,
 			 const std::string &name );
 int show_summary();
 std::string calculate_token();
-//! load all resolvables that the user wants
-//void cond_load_resolvables ();
-void load_target();
-//void load_sources();
+
+/**
+ * Load both repository and target resolvables into the pool respecting
+ * user defined conditions.
+ */
+void cond_load_resolvables ();
+
+/**
+ * Load resolvables from all repositories into the pool. 
+ */
+void load_target_resolvables();
+
+/**
+ * Load installed resolvables from target into the pool.
+ */
 void load_repo_resolvables();
+
 void establish ();
 bool resolve();
 void dump_pool ();
