@@ -64,9 +64,9 @@ namespace zypp
    * \invariant Unified \c _pimpl asserted by CapFactory.
    *
    * \todo Need a trival return from matches. E.g. Conditional
-   * cpabilities must be able to indicate that they should be
+   * capabilities must be able to indicate that they should be
    * treated as if they were not present at all, if the precondition
-   * does no apply. Same for the defaut Capability.
+   * does no apply. Same for the default Capability.
   */
   class Capability
   {

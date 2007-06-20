@@ -42,7 +42,7 @@ namespace zypp
    *                                 WatchFile::NO_INIT );
    * if ( sysconfigFile.hasChanged() )
    * {
-   *   // releoad the file...
+   *   // reload the file...
    * }
    * \endcode
   */

@@ -29,7 +29,7 @@ namespace zypp
   //
   /** Reference to a PoolItem conecting ResObject and ResStatus.
    *
-   * The "real" PoolItem is usg. somwhere in the ResPool. This is
+   * The "real" PoolItem is usg. somewhere in the ResPool. This is
    * a reference to it. All copies made will reference (and modify)
    * the same PoolItem. All changes via a PoolItem_Ref are immediately
    * visible in all copies (now COW).

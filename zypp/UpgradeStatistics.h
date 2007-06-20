@@ -231,7 +231,7 @@ class UpgradeStatistics : public UpgradeOptions {
     }
 
     /**
-     * total number of packages that will be finaly deleted
+     * total number of packages that will be finally deleted
      * (does not count the replaced packages)
      **/
     unsigned totalToDelete() const

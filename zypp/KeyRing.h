@@ -44,7 +44,7 @@ namespace zypp
     
     /**
      * This basically means, we know the key, but it is not trusted, Continue
-     * yes ir no?. Nothing else is performed (import, etc)
+     * yes or no?. Nothing else is performed (import, etc)
      */
     virtual bool askUserToTrustKey( const PublicKey &key);
     

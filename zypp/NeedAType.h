@@ -26,14 +26,14 @@ namespace zypp
    Whenever you find something that might be worth being a
    type, and not just an \c unsigned or \c string. Keep it here.
 
-   Start with a resonable \c typedef or \c class draft, so you
+   Start with a reasonable \c typedef or \c class draft, so you
    can start using the type within the implementation. If you're
    in need for interface methods, add them to the draft. Think about
    the interface and expected behaviour, but implement \b here just
    as much as you actually need.
 
    Goal is to provide a real class for it, or to find out that a
-   typedef is sufficient, ot the type is not needed anyway.
+   typedef is sufficient, or the type is not needed anyway.
 
    If you already implemented something which would fit into this
    group, but don't want to move it here, put doxygens
@@ -47,7 +47,7 @@ namespace zypp
 
 
   /** Single line of (human readable) text.
-  probabely sufficient as typedef. we may use it to classify the
+  probably sufficient as typedef. we may use it to classify the
   various strings and string lists within resolvable and other classes.
   More a hint to the UI describing the purpose of the string. */
   typedef std::string Label;
@@ -59,7 +59,7 @@ namespace zypp
   /** Offer a License text and methods to remember confirmation. */
   typedef std::string License;
 
-  /** An rpm package group value. Also provide acces to a
+  /** An rpm package group value. Also provide access to a
    * (singleton) tree like group hierarchy which contains
    * all existing groups. No more need to fiddle with YStringTreeItem
    * classes and forgetting to add parsed groups there for use in the UI.

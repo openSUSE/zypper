@@ -124,7 +124,7 @@ namespace zypp
     Resolver_Ptr resolver() const;
     KeyRing_Ptr keyRing() const;
   public:
-    /** Set the preferd locale for translated labels, descriptions,
+    /** Set the preferred locale for translated labels, descriptions,
      *  etc. passed to the UI.
      */
     void setTextLocale( const Locale & textLocale_r );

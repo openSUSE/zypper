@@ -42,7 +42,7 @@ namespace zypp
    *
    * That way the sending side does not need to know whether some receiver
    * is listening. And it enables the receiver to return a reasonable value,
-   * in case he's got no idea, what to else to return.
+   * in case he's got no idea, what else to return.
    *
    * \code
    *   struct Foo : public callback::ReportBase
@@ -98,10 +98,10 @@ namespace zypp
    * structure had to provide this value, so it's probabely better
    * than anything you \e invent.
    * \code
-   *   int somefunktion()
+   *   int somefunction()
    *   {
    *     ...// don't know what to return?
-   *     return Foo::somefunktion();
+   *     return Foo::somefunction();
    *   }
    * \endcode
    *

@@ -28,7 +28,7 @@ namespace zypp
     //
     /** Simple handling of Units.
      *
-     * Unit strores factor and symbol, and a precision value for printing.
+     * Unit stores factor and symbol, and a precision value for printing.
      * \ref form builds a string from a value according to the format
      * specification.
      * \code

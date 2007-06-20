@@ -70,7 +70,7 @@ namespace zypp
           return _archStr == targetEntry_r._archStr;
           break;
         }
-      // This is a builtin: comatible if mentioned in targetEntry_r
+      // This is a builtin: compatible if mentioned in targetEntry_r
       return targetEntry_r._compatBits & _idBit;
     }
 
@@ -97,7 +97,7 @@ namespace zypp
   }
 
   /** \relates Arch::CompatEntry ComaptSet ordering.
-   * \note This is purely based on _archStr, as required by class ComaptSet.
+   * \note This is purely based on _archStr, as required by class CompatSet.
   */
   inline bool operator<( const Arch::CompatEntry & lhs, const Arch::CompatEntry & rhs )
   { return lhs._archStr < rhs._archStr; }
@@ -186,7 +186,7 @@ namespace zypp
       {
         // _noarch must have _idBit 0.
         // Other builtins have 1-bit set
-        // and are intiialized done on the fly.
+        // and are initialized done on the fly.
         _compatSet.insert( Arch::CompatEntry( _noarch, 0 ) );
         ///////////////////////////////////////////////////////////////////
         // Define the CompatibleWith relation:

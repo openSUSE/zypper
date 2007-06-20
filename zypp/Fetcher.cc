@@ -25,7 +25,7 @@ namespace zypp
 
   /**
    * Class to encapsulate the \ref OnMediaLocation object
-   * and the \ref FileChcker together
+   * and the \ref FileChecker together
    */
   struct FetcherJob
   {

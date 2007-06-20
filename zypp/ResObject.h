@@ -37,7 +37,7 @@ namespace zypp
   /**
    * Interface base for resolvable objects (common data).
    * That is, all data not needed for solving, but common
-   * across al Resolvable kinds.
+   * across all Resolvable kinds.
   */
   class ResObject : public Resolvable
   {

@@ -22,7 +22,7 @@ namespace zypp
   /* http://www.boost.org/libs/functional/mem_fun.html
 
    The header functional.hpp includes improved versions of
-   the full range of member function adapters from the the
+   the full range of member function adapters from the
    C++ Standard Library.
   */
   using boost::mem_fun;
@@ -205,7 +205,7 @@ namespace zypp
      *     \ref Cain functor.
      *
      * \code
-     *  struct Print; // functor priniting elements
+     *  struct Print; // functor printing elements
      *  struct Count; // functor counting number of elements
      *
      *  std::for_each( c.begin(), c.end(),

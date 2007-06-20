@@ -141,7 +141,7 @@ namespace zypp
     { _where = where_r; }
 
     /** Return the message string provided to the ctor.
-     * \note This is not neccessarily the complete error message.
+     * \note This is not necessarily the complete error message.
      * The whole error message is provided by \ref asString or
      * \ref dumpOn.
     */

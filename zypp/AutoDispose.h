@@ -36,7 +36,7 @@ namespace zypp
    * should be immutable, you should use <tt>AutoDispose\<const _Tp\></tt>.
    *
    * Pass a filename to the application and provide the appropriate
-   * code to be exectued when the file is no longer needed:
+   * code to be executed when the file is no longer needed:
    * \code
    * struct FileCache
    * {
