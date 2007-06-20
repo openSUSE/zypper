@@ -51,8 +51,8 @@ class QueueItemInstall : public QueueItem {
     PoolItem_Ref _item;					// the item to-be-installed
     bool _soft;						// if triggered by a soft requirement (a recommends)
     PoolItem_Ref _upgrades;				// the item this install upgrades (if any)
-    CapSet _deps_satisfied_by_this_install;
-    PoolItemList _needed_by;
+    Capability _dep_satisfied_by_this_install;
+    PoolItem_Ref _needed_by;
     int _channel_priority;
     int _other_penalty;
 
@@ -96,8 +96,8 @@ class QueueItemInstall : public QueueItem {
     virtual bool isRedundant (ResolverContext_Ptr context) const { return false; }
     virtual bool isSatisfied (ResolverContext_Ptr context) const;
 
-    void addDependency (const Capability & capability);
-    void addNeededBy (const PoolItem_Ref item);
+    void setDependency (const Capability & capability) {_dep_satisfied_by_this_install = capability;}
+    void setNeededBy (const PoolItem_Ref item) {_needed_by=item;}
 
 };
 

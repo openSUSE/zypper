@@ -127,7 +127,7 @@ QueueItemEstablish::process (ResolverContext_Ptr context, QueueItemList & qil)
     CapSet::const_iterator iter;
     for (iter = freshens.begin(); iter != freshens.end(); iter++) {
 	const Capability cap = *iter;
-	if (context->requirementIsMet (cap)) {
+	if (context->requirementIsMet (cap, _item, Dep::FRESHENS)) {
 	    _XDEBUG("this freshens " << cap);
 	    break;
 	}
@@ -153,7 +153,7 @@ QueueItemEstablish::process (ResolverContext_Ptr context, QueueItemList & qil)
 	    CapSet::const_iterator iter;
 	    for (iter = supplements.begin(); iter != supplements.end(); iter++) {
 		const Capability cap = *iter;
-		if (context->requirementIsMet (cap)) {
+		if (context->requirementIsMet (cap, _item, Dep::SUPPLEMENTS)) {
 		    _XDEBUG("this supplements " << cap);
 		    break;
 		}
@@ -199,7 +199,7 @@ QueueItemEstablish::process (ResolverContext_Ptr context, QueueItemList & qil)
 	for (iter = requires.begin(); iter != requires.end(); iter++) {
 	    missing = *iter;
 	    bool unneeded;
-	    if (!context->requirementIsMet (missing, &unneeded)) {
+	    if (!context->requirementIsMet (missing, _item, Dep::REQUIRES, &unneeded)) {
 		all_unneeded = false;
 		break;
 	    }

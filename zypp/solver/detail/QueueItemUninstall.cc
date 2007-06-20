@@ -144,13 +144,14 @@ struct UnlinkCheck
 
     bool operator()( const CapAndItem & cai )
     {
+	PoolItem provider( cai.item );	
 	if (cancel_unlink)				// already cancelled
 	    return true;
 
 	if (! context->isPresent (cai.item))		// item is not (to-be-)installed
 	    return true;
 
-	if (context->requirementIsMet (cai.cap))	// another resolvable provided match
+	if (context->requirementIsMet (cai.cap, provider, Dep::REQUIRES))	// another resolvable provided match
 	    return true;
 
 	cancel_unlink = true;				// cancel, as this would break dependencies
@@ -190,7 +191,7 @@ struct UninstallProcess
 	if (! context->isPresent (requirer))				// its not installed -> dont care
 	    return true;
 
-	if (context->requirementIsMet( cai.cap ))		// its provided by another installed resolvable -> dont care
+	if (context->requirementIsMet( cai.cap, requirer, Dep::REQUIRES ))		// its provided by another installed resolvable -> dont care
 	    return true;
 
 	if (context->getStatus(requirer).isSatisfied()) {		// it is just satisfied, check freshens and supplements

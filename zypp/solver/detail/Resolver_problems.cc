@@ -102,7 +102,10 @@ public:
 // set resolvables with errors
 
 typedef struct {
+    // Map of errors 
     ProblemMap problems;
+    // Map of additional information applied to an item
+    ProblemMap additionalInfo;    
     // A map of PoolItems which provides a capability but are set
     // for uninstallation
     ItemCapabilityMap provideAndDeleteMap;
@@ -123,9 +126,12 @@ collector_cb (ResolverInfo_Ptr info, void *data)
 {
     ResItemCollector *collector = (ResItemCollector *)data;
     PoolItem_Ref item = info->affected();
-    if (item
-	&& info->error()) {
-	collector->problems.insert (make_pair( item, info));	
+    if (item) {
+	if (info->error()) {
+	    collector->problems.insert (make_pair( item, info));
+	} else {
+	    collector->additionalInfo.insert (make_pair( item, info));
+	}
     }
     // Collicting items which are providing requirements but they
     // are set for uninstall
@@ -221,6 +227,63 @@ struct AllRequires
     }
 };
 
+std::string logAdditionalInfo ( const ProblemMap &additionalInfo, const PoolItem_Ref item)
+{
+    string infoStr = "\n";
+    for (ProblemMap::const_iterator iter = additionalInfo.find(item); iter != additionalInfo.end();) {
+	ResolverInfo_Ptr info = iter->second;
+	PoolItem_Ref iterItem = iter->first;
+	
+	if (iter == additionalInfo.find(item)) {
+	    string who = ResolverInfo::toString( item );
+	    infoStr = "\n\n" + who + "\n";
+	    for (unsigned int i = 1; i <= who.length(); i++) infoStr += "=";
+	    infoStr += "\n\n";
+	    
+	    ResStatus status = iterItem.status();
+	    if (status.isToBeUninstalled()) {
+		if (status.isByUser())
+		    // Translator: all.%s = name of package,patch,...
+		    infoStr += str::form (_("%s will be deleted by the user.\n"),
+					  who.c_str());
+		if (status.isByApplHigh()
+		    || status.isByApplLow())
+		    // Translator: all.%s = name of package,patch,...
+		    infoStr += str::form (_("%s will be deleted by another application. (ApplLow/ApplHigh)\n"),
+					  who.c_str());
+	    }
+	    if (status.isToBeInstalled()) {
+		if (status.isByUser())
+		    // Translator: all.%s = name of package,patch,...
+		    infoStr += str::form (_("%s will be installed by the user.\n"),
+					  who.c_str());
+		if (status.isByApplHigh()
+		    || status.isByApplLow())
+		    // Translator: all.%s = name of package,patch,...
+		    infoStr += str::form (_("%s will be installed by another application. (ApplLow/ApplHigh)\n"),
+					  who.c_str());
+	    }
+	}
+	if (iterItem == item) {
+	    // filter out useless information
+	    if (info->type() != RESOLVER_INFO_TYPE_INSTALLING
+		&& info->type() != RESOLVER_INFO_TYPE_ESTABLISHING
+		&& info->type() != RESOLVER_INFO_TYPE_UPDATING
+		&& info->type() != RESOLVER_INFO_TYPE_SKIPPING
+		&& info->type() != RESOLVER_INFO_TYPE_UNINSTALLABLE
+		&& info->type() != RESOLVER_INFO_TYPE_CONFLICT_UNINSTALLABLE) {
+		infoStr += info->message();
+		infoStr += "\n";
+	    }
+	    iter++;
+	} else {
+	    // exit
+	    iter = additionalInfo.end();
+	}
+    }
+    return infoStr;
+}
+
 
 ResolverProblemList
 Resolver::problems (const bool ignoreValidSolution) const
@@ -305,7 +368,14 @@ Resolver::problems (const bool ignoreValidSolution) const
 		else
 		    // TranslatorExplanation %s = name of package, patch, selection ...		
 		    what = str::form (_("%s conflicts with %s"), who.c_str(), conflicts_with->itemsToString(true).c_str());
+		
 		details = str::form (_("%s conflicts with:\n%s"), who.c_str(), conflicts_with->itemsToString(false).c_str());
+		details += logAdditionalInfo(collector.additionalInfo, item);
+		PoolItemList item_list = conflicts_with->items();
+		for (PoolItemList::const_iterator it = item_list.begin(); it != item_list.end(); ++it) {
+		    details += logAdditionalInfo(collector.additionalInfo, *it);
+		}
+		    
 		ResolverProblem_Ptr problem = new ResolverProblem (what, details);		
 		// Uninstall p
 		problem->addSolution (new ProblemSolutionUninstall (problem, item));
@@ -335,6 +405,7 @@ Resolver::problems (const bool ignoreValidSolution) const
 		// TranslatorExplanation %s = name of package, patch, selection ...				
 		details = str::form (_("%s obsoletes:%s"), who.c_str(), obsoletes->itemsToString(false).c_str());
 		details += _("\nThese resolvables will be deleted from the system.");
+		details += logAdditionalInfo(collector.additionalInfo, item);		
 	    }
 	    break;
 	    case RESOLVER_INFO_TYPE_DEPENDS_ON: { // no solution; it is only a info
@@ -384,8 +455,9 @@ Resolver::problems (const bool ignoreValidSolution) const
 		    if (it->first == item) {
 			what = str::form (_("Cannot install %s because it is conflicting with %s"),
 					  who.c_str(),
-					  it->second->name().c_str());				
-			details = ""; // no further details
+					  it->second->name().c_str());
+			details = logAdditionalInfo(collector.additionalInfo, item);
+			details += logAdditionalInfo(collector.additionalInfo, it->second);			
 			ResolverProblem_Ptr problem = new ResolverProblem (what, details);		
 			// Uninstall p
 			problem->addSolution (new ProblemSolutionUninstall (problem, item));
@@ -400,6 +472,7 @@ Resolver::problems (const bool ignoreValidSolution) const
 		    what = misc_info->message();
 		    // TranslatorExplanation %s = name of package,patch,...		
 		    details = str::form (_("%s is not installed and has been marked as uninstallable"), who.c_str());
+		    details += logAdditionalInfo(collector.additionalInfo, item);		    
 		    ResolverProblem_Ptr problem = new ResolverProblem (what, details);
 		    problem->addSolution (new ProblemSolutionInstall (problem, item)); // Install resolvable again
 		    problems.push_back (problem);
@@ -412,6 +485,7 @@ Resolver::problems (const bool ignoreValidSolution) const
 		// TranslatorExplanation %s = name of package,patch,...				
 		what = str::form (_("Cannot install %s due to dependency problems"), who.c_str());
 		details = misc_info->message();
+		details += logAdditionalInfo(collector.additionalInfo, item);		
 		ResolverProblem_Ptr problem = new ResolverProblem (what, details);
 		// Uninstall it; 
 		problem->addSolution (new ProblemSolutionUninstall (problem, item));
@@ -424,6 +498,7 @@ Resolver::problems (const bool ignoreValidSolution) const
 		ResolverInfoMisc_constPtr misc_info = dynamic_pointer_cast<const ResolverInfoMisc>(info);
 		// TranslatorExplanation %s = name of package,patch,...				
 		what = misc_info->message();
+		details = logAdditionalInfo(collector.additionalInfo, item);		
 		ResolverProblem_Ptr problem = new ResolverProblem (what, details);
 		problem->addSolution (new ProblemSolutionInstall (problem, item)); // Install resolvable again
 		problems.push_back (problem);
@@ -442,6 +517,8 @@ Resolver::problems (const bool ignoreValidSolution) const
 		// TranslatorExplanation %s = name of package,patch,...				
 		what = str::form (_("Cannot install %s"), who.c_str());
 		details = misc_info->message();
+		details += logAdditionalInfo(collector.additionalInfo, item);
+		details += logAdditionalInfo(collector.additionalInfo, misc_info->other());				
 		ResolverProblem_Ptr problem = new ResolverProblem (what, details);
 		// Uninstall the item
 		ResStatus status = item.status();
@@ -475,6 +552,7 @@ Resolver::problems (const bool ignoreValidSolution) const
 		what = misc_info->message();
 		// TranslatorExplanation %s = name of package, patch, selection ...				
 		details = str::form (_("%s has unfulfilled requirements"), who.c_str());
+		details += logAdditionalInfo(collector.additionalInfo, item);		
 		ResolverProblem_Ptr problem = new ResolverProblem (what, details);
 		// Uninstall 
 		problem->addSolution (new ProblemSolutionUninstall (problem, item));
@@ -514,6 +592,7 @@ Resolver::problems (const bool ignoreValidSolution) const
 		// TranslatorExplanation %s = name of package, patch, selection ...				
 		what = str::form (_("%s has missing dependencies"), who.c_str());
 		details = misc_info->message();
+		details += logAdditionalInfo(collector.additionalInfo, item);				
 		ResolverProblem_Ptr problem = new ResolverProblem (what, details);
 
 		// Searching for another item which provides this requires BUT has been set to uninstall
@@ -561,6 +640,7 @@ Resolver::problems (const bool ignoreValidSolution) const
 		// TranslatorExplanation %s = name of package, patch, selection ...				
 		what = str::form (_("%s cannot be installed due to missing dependencies"), who.c_str());		
 		details = misc_info->message();
+		details += logAdditionalInfo(collector.additionalInfo, item);				
 		ResolverProblem_Ptr problem = new ResolverProblem (what, details);
 		
 		// Searching for another item which provides this requires BUT has been locked
@@ -660,6 +740,7 @@ Resolver::problems (const bool ignoreValidSolution) const
 	    case RESOLVER_INFO_TYPE_CANT_SATISFY: {			// Can't satisfy requirement c
 		ResolverInfoMisc_constPtr misc_info = dynamic_pointer_cast<const ResolverInfoMisc>(info);
 		what = misc_info->message();
+		details = logAdditionalInfo(collector.additionalInfo, item);				
 		ResolverProblem_Ptr problem = new ResolverProblem (what, details);
 		// uninstall
 		problem->addSolution (new ProblemSolutionUninstall (problem, item)); 
@@ -697,6 +778,7 @@ Resolver::problems (const bool ignoreValidSolution) const
 		// TranslatorExplanation %s = name of package, patch, selection ...				
 		what = str::form (_("%s will not be uninstalled cause it is still required"), who.c_str());		
 		details = misc_info->message();
+		details += logAdditionalInfo(collector.additionalInfo, item);						
 
                 ResolverProblem_Ptr problem = new ResolverProblem (what, details);
                 if (item.status().isInstalled()) {
@@ -720,6 +802,7 @@ Resolver::problems (const bool ignoreValidSolution) const
 		    details = str::form (_("%s obsoletes %s. But %s cannot be deleted because it is locked."),
 					 misc_info->other()->name().c_str(),
 					 who.c_str(), who.c_str());
+		    details += logAdditionalInfo(collector.additionalInfo, item);						    
 		}
 		
 		ResolverProblem_Ptr problem = new ResolverProblem (what, details);
@@ -751,6 +834,9 @@ Resolver::problems (const bool ignoreValidSolution) const
 		    what = str::form (_("Cannot install %s because it is conflicting"),
 				      who.c_str());
 		details = misc_info->message();
+		details += logAdditionalInfo(collector.additionalInfo, item);
+		if (misc_info->other())		
+		    details += logAdditionalInfo(collector.additionalInfo, misc_info->other());
 		ResolverProblem_Ptr problem = new ResolverProblem (what, details);		
 		// Uninstall p
 		problem->addSolution (new ProblemSolutionUninstall (problem, item));

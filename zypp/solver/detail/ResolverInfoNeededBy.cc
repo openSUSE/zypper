@@ -26,6 +26,7 @@
 #include "zypp/solver/detail/ResolverInfoNeededBy.h"
 #include "zypp/base/String.h"
 #include "zypp/base/Gettext.h"
+#include "zypp/Dep.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp 
@@ -52,10 +53,47 @@ ResolverInfoNeededBy::dumpOn( std::ostream & os ) const
     ostringstream affected_str;
     affected_str << ResolverInfo::toString (affected());
 
-	  // Translator: all.%s = name of package,patch,...
-    os << str::form (_("%s is needed by %s"),
-			    affected_str.str().c_str(),
-			    itemsToString(true).c_str());
+    switch ( _capKind.inSwitch() )
+    {
+	case Dep::RECOMMENDS_e:
+	    // Translator: all.%s = name of package,patch,...
+	    os << str::form (_("%s is recommended by %s"),
+			     affected_str.str().c_str(),
+			     itemsToString(true).c_str());
+	    break;
+	case Dep::SUGGESTS_e:
+	    // Translator: all.%s = name of package,patch,...
+	    os << str::form (_("%s is suggested by %s"),
+			     affected_str.str().c_str(),
+			     itemsToString(true).c_str());
+	    break;
+	case Dep::FRESHENS_e:
+	    // Translator: all.%s = name of package,patch,...
+	    os << str::form (_("%s is freshened by %s"),
+			     affected_str.str().c_str(),
+			     itemsToString(true).c_str());
+	    break;
+	case Dep::ENHANCES_e:
+	    // Translator: all.%s = name of package,patch,...
+	    os << str::form (_("%s is enhanced by %s"),
+			     affected_str.str().c_str(),
+			     itemsToString(true).c_str());
+	    break;
+	case Dep::SUPPLEMENTS_e:
+	    // Translator: all.%s = name of package,patch,...
+	    os << str::form (_("%s is supplemented by %s"),
+			     affected_str.str().c_str(),
+			     itemsToString(true).c_str());
+	    break;	    	    	    	    
+	default:
+	    // Translator: all.%s = name of package,patch,...
+	    os << str::form (_("%s is needed by %s"),
+			     affected_str.str().c_str(),
+			     itemsToString(true).c_str());
+    }
+    if (_cap != Capability::noCap)
+	os << " (" << _cap << ")";
+
     return os;
 }
 
@@ -63,19 +101,58 @@ string
 ResolverInfoNeededBy::message( ) const
 {
     string affected_str = ResolverInfo::toString(affected());
-    string container_str = itemsToString( false );
+    string ret;
+    
+    switch ( _capKind.inSwitch() )
+    {
+	case Dep::RECOMMENDS_e:
+	    // Translator: all.%s = name of package,patch,...
+	    ret = str::form (_("%s is recommended by %s"),
+			     affected_str.c_str(),
+		 	     itemsToString(false).c_str());
+	    break;
+	case Dep::SUGGESTS_e:
+	    // Translator: all.%s = name of package,patch,...
+	    ret = str::form (_("%s is suggested by %s"),
+			     affected_str.c_str(),
+			     itemsToString(false).c_str());
+	    break;
+	case Dep::FRESHENS_e:
+	    // Translator: all.%s = name of package,patch,...
+	    ret = str::form (_("%s is freshened by %s"),
+			     affected_str.c_str(),
+			     itemsToString(false).c_str());
+	    break;
+	case Dep::ENHANCES_e:
+	    // Translator: all.%s = name of package,patch,...
+	    ret = str::form (_("%s is enhanced by %s"),
+			     affected_str.c_str(),
+			     itemsToString(false).c_str());
+	    break;
+	case Dep::SUPPLEMENTS_e:
+	    // Translator: all.%s = name of package,patch,...
+	    ret = str::form (_("%s is supplemented by %s"),
+			     affected_str.c_str(),
+			     itemsToString(false).c_str());
+	    break;	    	    	    	    
+	default:
+	    // Translator: all.%s = name of package,patch,...
+	    ret = str::form (_("%s is needed by %s"),
+			     affected_str.c_str(),
+			     itemsToString(false).c_str());
+    }
+    if (_cap != Capability::noCap)
+	ret += " (" + _cap.asString() + ")";
 
-    // TranslatorExplanation: 1.%s name of package, 2.%s list of names
-    // TranslatorExplanation: 1.%s is needed by multiple others
-    return str::form (_("%s needed by %s"),
-			affected_str.c_str(),
-			container_str.c_str());
+    return ret;
 }
 
 //---------------------------------------------------------------------------
 
 ResolverInfoNeededBy::ResolverInfoNeededBy (PoolItem_Ref item)
     : ResolverInfoContainer (RESOLVER_INFO_TYPE_NEEDED_BY, item, RESOLVER_INFO_PRIORITY_USER)
+    , _cap(Capability::noCap)
+    , _capKind(Dep::REQUIRES)
 {
 }
 

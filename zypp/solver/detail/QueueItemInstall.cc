@@ -69,22 +69,11 @@ QueueItemInstall::dumpOn( std::ostream & os ) const
 	os << ", Upgrades ";
 	os << _upgrades;
     }
-    if (!_deps_satisfied_by_this_install.empty()) {
-	os << ", Satisfies [";
-	for (CapSet::const_iterator iter = _deps_satisfied_by_this_install.begin();
-	    iter != _deps_satisfied_by_this_install.end(); iter++)
-	{
-	    if (iter != _deps_satisfied_by_this_install.begin()) os << ", ";
-	    os << (*iter);
-	}
-	os << "]";
+    if (_dep_satisfied_by_this_install != Capability::noCap) {
+	os << ", Satisfies [" << _dep_satisfied_by_this_install << "]";
     }
-    if (!_needed_by.empty()) {
-	os << ", Needed by ";
-	for (PoolItemList::const_iterator it = _needed_by.begin(); it != _needed_by.end(); ++it) {
-	    if (it != _needed_by.begin()) os << ", ";
-	    os << *it;
-	}
+    if (_needed_by) {
+	os << ", Needed by " << _needed_by;
     }
     if (_explicitly_requested) os << ", Explicit !";
     os << "]";
@@ -97,6 +86,8 @@ QueueItemInstall::QueueItemInstall (const ResPool & pool, PoolItem_Ref item, boo
     : QueueItem (QUEUE_ITEM_TYPE_INSTALL, pool)
     , _item (item)
     , _soft (soft)
+    , _dep_satisfied_by_this_install (Capability::noCap)
+    , _needed_by (PoolItem_Ref())
     , _channel_priority (0)
     , _other_penalty (0)
     , _explicitly_requested (false)
@@ -315,23 +306,16 @@ QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
     // check if this install is still needed
     //   (maybe other resolver processing made this install obsolete
 
-    if (!_needed_by.empty()) {
-	bool still_needed = false;
-
+    if (_needed_by) {
 	_XDEBUG( "still needed ");
 
-	for (PoolItemList::const_iterator iter = _needed_by.begin(); iter != _needed_by.end() && !still_needed; ++iter) {
-	    ResStatus status = iter->status();
-	    _XDEBUG("by: [status: " << status << "] " << *iter);
-	    if (! status.isToBeUninstalled()
-		&& ! status.isImpossible())
-	    {
-		still_needed = true;
-	    }
+	ResStatus status = _needed_by.status();
+	_XDEBUG("by: [status: " << status << "] " << _needed_by);
+	if ( status.isToBeUninstalled()
+	    || status.isImpossible())
+	{
+	    goto finished;	    
 	}
-
-	if (! still_needed)
-	    goto finished;
     }
 
     /* If we are in verify mode and this install is about to fail, don't let it happen...
@@ -340,14 +324,11 @@ QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 
     if (context->verifying()
 	&& (status.isToBeUninstalled() || status.isImpossible())
-	&& !_needed_by.empty()) {
+	&& _needed_by) {
 
 	QueueItemUninstall_Ptr uninstall_item;
-
-	for (PoolItemList::const_iterator iter = _needed_by.begin(); iter != _needed_by.end(); iter++) {
-	    uninstall_item = new QueueItemUninstall (pool(), *iter, QueueItemUninstall::BACKOUT);
-	    qil.push_front (uninstall_item);
-	}
+	uninstall_item = new QueueItemUninstall (pool(), _needed_by, QueueItemUninstall::BACKOUT);
+	qil.push_front (uninstall_item);
 
 	goto finished;
     }
@@ -396,12 +377,13 @@ QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 
     /* Log which item need this install */
 
-    if (!_needed_by.empty()) {
+    if (_needed_by) {
 
 	ResolverInfoNeededBy_Ptr info;
 
 	info = new ResolverInfoNeededBy (_item);
-	info->addRelatedPoolItemList (_needed_by);
+	info->addRelatedPoolItem (_needed_by);
+	info->setCapability (_dep_satisfied_by_this_install, _soft?Dep::RECOMMENDS:Dep::REQUIRES);
 	context->addInfo (info);
     }
 
@@ -447,12 +429,7 @@ QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 	    _XDEBUG("this requires " << cap);
 	    bool fulfilled = false;
 	    
-	    if (_item)
-	    {
-		fulfilled = context->requirementIsInstalledOrUnneeded (_item->kind(), cap);
-	    } else {
-		fulfilled = context->requirementIsMet (cap);
-	    }
+	    fulfilled = context->requirementIsInstalledOrUnneeded (cap, _item, Dep::REQUIRES);
 
 	    if (!fulfilled) {
 		_XDEBUG("this requirement is still unfulfilled");
@@ -469,7 +446,7 @@ QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 	    const Capability cap = *iter;
 	    _XDEBUG("this recommends " << cap);
 
-	    if (!context->requirementIsMet (cap)) {
+	    if (!context->requirementIsMet (cap, _item, Dep::RECOMMENDS)) {
 		_XDEBUG("this recommends is still unfulfilled");
 		QueueItemRequire_Ptr req_item = new QueueItemRequire (pool(), cap, true);	// this is a soft requires
 		req_item->addPoolItem (_item);
@@ -601,8 +578,8 @@ QueueItemInstall::copy (void) const
     new_install->QueueItem::copy(this);
 
     new_install->_upgrades = _upgrades;
-    new_install->_deps_satisfied_by_this_install = CapSet(_deps_satisfied_by_this_install.begin(), _deps_satisfied_by_this_install.end());
-    new_install->_needed_by = PoolItemList (_needed_by.begin(), _needed_by.end());
+    new_install->_dep_satisfied_by_this_install = _dep_satisfied_by_this_install;
+    new_install->_needed_by = _needed_by;
     new_install->_channel_priority = _channel_priority;
     new_install->_other_penalty = _other_penalty;
     new_install->_explicitly_requested = _explicitly_requested;
@@ -621,20 +598,6 @@ QueueItemInstall::cmp (QueueItem_constPtr item) const
     return compareByNVRA (_item.resolvable(), install->_item.resolvable());
 }
 
-//---------------------------------------------------------------------------
-
-void
-QueueItemInstall::addDependency (const Capability & dep)
-{
-    _deps_satisfied_by_this_install.insert (dep);
-}
-
-
-void
-QueueItemInstall::addNeededBy (PoolItem_Ref item)
-{
-    _needed_by.push_front (item);
-}
 
 ///////////////////////////////////////////////////////////////////
     };// namespace detail

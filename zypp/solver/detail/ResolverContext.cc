@@ -40,6 +40,7 @@
 #include "zypp/solver/detail/ResolverContext.h"
 #include "zypp/solver/detail/ResolverInfoMisc.h"
 #include "zypp/solver/detail/ResolverInfoConflictsWith.h"
+#include "zypp/solver/detail/ResolverInfoNeededBy.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp
@@ -514,9 +515,12 @@ ResolverContext::uninstall (PoolItem_Ref item, bool part_of_upgrade, bool due_to
 		if ( !other_found
 		     && (info->affected() == item
 			 || other_item == item)) {
-		    // put the info on the end as error
-		    found = true;
-		    addList.push_back (info);
+		    if (!getStatus(info->affected()).isImpossible() // Check, if the both items are still "installable"
+			&& !getStatus(other_item).isImpossible()) { // If not this is not an error anymore
+			// put the info on the end as an error
+			addList.push_back (info);
+			found = true;
+		    }
 		}
 	    } else if (	(info->type() == RESOLVER_INFO_TYPE_NO_PROVIDER
 			 || info->type() == RESOLVER_INFO_TYPE_NO_OTHER_PROVIDER
@@ -572,7 +576,8 @@ ResolverContext::uninstall (PoolItem_Ref item, bool part_of_upgrade, bool due_to
     else if (due_to_unlink) {
 	setStatus (item, ResStatus::toBeUninstalledDueToUnlink);
     }
-    else if (status.wasUninstalled()) {
+    else if (status.wasUninstalled() ||
+	     (status.isToBeInstalled() && status.isBySolver())) {
 	setStatus (item, ResStatus::impossible);
     }
     else if (part_of_upgrade) {
@@ -1484,12 +1489,16 @@ struct RequirementMet
     bool flag;
     bool unneeded;
     bool *installed;
+    const PoolItem_Ref whoNeeds;
+    const Dep cap;
 
-    RequirementMet (ResolverContext_Ptr ctx, bool *inst)
+    RequirementMet (ResolverContext_Ptr ctx, bool *inst, const PoolItem_Ref who, const Dep & capKind)
 	: context (ctx)
 	, flag (false)
 	, unneeded( false )
 	, installed( inst )
+	, whoNeeds( who )
+	, cap( capKind )
     { }
 
 
@@ -1504,6 +1513,22 @@ struct RequirementMet
 	{
 	    unneeded = my_unneeded;
 	    flag = true;
+	    ResolverInfoNeededBy_Ptr info;
+
+	    if (cap == Dep::PREREQUIRES
+		|| cap == Dep::REQUIRES
+		|| cap == Dep::RECOMMENDS
+		|| cap == Dep::SUGGESTS) {
+		info = new ResolverInfoNeededBy (provider);
+		info->addRelatedPoolItem (whoNeeds);
+	    } else {
+		// FRESHENS, ENHANCES, SUPPLEMENTS
+		// are reverse dependencies
+		info = new ResolverInfoNeededBy (whoNeeds);
+		info->addRelatedPoolItem (provider);
+	    }
+	    info->setCapability (match, cap);
+	    context->addInfo (info);	    
 	}
 
 //	ERR << "RequirementMet(" <<  provider << ", " << match << ") [capability " <<
@@ -1519,9 +1544,12 @@ struct RequirementMet
 
 
 bool
-ResolverContext::requirementIsMet (const Capability & capability, bool *unneeded, bool *installed)
+ResolverContext::requirementIsMet (const Capability & capability,
+				   const PoolItem_Ref who,
+				   const Dep & capKind,
+				   bool *unneeded, bool *installed)
 {
-    RequirementMet info (this, installed);
+    RequirementMet info (this, installed, who, capKind);
 
     //    world()->foreachProviding (capability, requirement_met_cb, (void *)&info);
 
@@ -1547,9 +1575,11 @@ _XDEBUG( "ResolverContext::requirementIsMet(" << capability << ") " << (info.fla
  *which requires this capability.
  */
 bool
-ResolverContext::requirementIsInstalledOrUnneeded (const ResObject::Kind & kind,
-						   const Capability & capability)
+ResolverContext::requirementIsInstalledOrUnneeded (const Capability & capability,
+						   const PoolItem_Ref who,
+						   const Dep & capKind)
 {
+    ResObject::Kind kind = who->kind();
     bool fulfilled = false;
            
     if (kind != ResTraits<Package>::kind
@@ -1557,7 +1587,7 @@ ResolverContext::requirementIsInstalledOrUnneeded (const ResObject::Kind & kind,
 	|| kind != ResTraits<Message>::kind)
     {
        bool unneeded, installed;
-       fulfilled = requirementIsMet (capability, &unneeded, &installed);
+       fulfilled = requirementIsMet (capability, who, capKind, &unneeded, &installed);
        if (!fulfilled
            || (!unneeded
                && !installed)) {
@@ -1567,7 +1597,7 @@ ResolverContext::requirementIsInstalledOrUnneeded (const ResObject::Kind & kind,
            // Bug 192535/204913
        }
     }else {
-       fulfilled = requirementIsMet (capability);
+       fulfilled = requirementIsMet (capability, who, capKind);
     }
 
     return fulfilled;

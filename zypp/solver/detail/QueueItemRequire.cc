@@ -31,6 +31,7 @@
 #include "zypp/ResFilters.h"
 #include "zypp/CapFilters.h"
 #include "zypp/ResStatus.h"
+#include "zypp/Dep.h"
 
 #include "zypp/ZYppFactory.h"
 
@@ -454,9 +455,10 @@ QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_item
 	    
     if (_requiring_item)
     {
-	fulfilled = context->requirementIsInstalledOrUnneeded (_requiring_item->kind(),_capability);
+	fulfilled = context->requirementIsInstalledOrUnneeded (_capability, _requiring_item,
+							       _soft?Dep::RECOMMENDS:Dep::REQUIRES);
     } else {
-	fulfilled = context->requirementIsMet (_capability);
+	fulfilled = context->requirementIsMet (_capability, PoolItem_Ref(), Dep::REQUIRES);
     }
     
     if (fulfilled) {
@@ -747,6 +749,7 @@ provider_done:;
 			ResolverInfoNeededBy_Ptr upgrade_info = new ResolverInfoNeededBy (upgrade_item);
 			if (_upgraded_item)
 			    upgrade_info->addRelatedPoolItem (_upgraded_item);
+			upgrade_info->setCapability (_capability, Dep::REQUIRES);
 			install_item->addInfo (upgrade_info);
 
 			// If an upgrade item has its requirements met, don't do the uninstall branch.
@@ -757,7 +760,7 @@ provider_done:;
 			    CapSet::const_iterator iter = requires.begin();
 			    for (; iter != requires.end(); iter++) {
 				const Capability req = *iter;
-				if (! context->requirementIsMet (req)) {
+				if (! context->requirementIsMet (req, upgrade_item, Dep::REQUIRES)) {
 					break;
 				}
 			    }
@@ -894,11 +897,11 @@ provider_done:;
 	    goto finished;
 	}
 	QueueItemInstall_Ptr install_item = new QueueItemInstall (pool(), item, _soft);
-	install_item->addDependency (_capability);
+	install_item->setDependency (_capability);
 
 	// The requiring item could be NULL if the requirement was added as an extra dependency.
 	if (_requiring_item) {
-	    install_item->addNeededBy (_requiring_item);
+	    install_item->setNeededBy (_requiring_item);
 	}
 	new_items.push_front (install_item);
 
@@ -929,12 +932,12 @@ provider_done:;
 	    }
 
 	    QueueItemInstall_Ptr install_item = new QueueItemInstall( pool(), item, _soft );
-	    install_item->addDependency( _capability );
+	    install_item->setDependency( _capability );
 	    branch_item->addItem( install_item );
 
 	    // The requiring item could be NULL if the requirement was added as an extra dependency.
 	    if (_requiring_item) {
-		install_item->addNeededBy( _requiring_item );
+		install_item->setNeededBy( _requiring_item );
 	    }
 	}
 

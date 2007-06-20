@@ -44,6 +44,8 @@ class ResolverInfoNeededBy : public ResolverInfoContainer {
     
 
   private:
+    Capability _cap;
+    Dep _capKind;
 
   public:
 
@@ -62,6 +64,8 @@ class ResolverInfoNeededBy : public ResolverInfoContainer {
 
     virtual std::string message (void) const;
     virtual ResolverInfo_Ptr copy (void) const;
+    void setCapability (const Capability & cap, const Dep & capKind) { _cap = cap; _capKind = capKind; }
+;
 };
 
  ///////////////////////////////////////////////////////////////////
