@@ -20,7 +20,7 @@ zypper provides a number of \fBcommands\fR. Each command accepts the option flag
 .TP
 .B shell (sh)
 Starts a shell for entering multiple commands in one session.
-(NEW, beware of bugs!)
+End it by "exit", "quit", or Ctrl-D.
 
 .LP 
 .B Package Management Commands
@@ -250,6 +250,9 @@ Switches to non-interactive mode. In this mode zypper doesn't ask user to type a
 .TP
 .B /var/lib/zypp/cache
 Directory for storing metadata contained in installation sources.
+.TP
+.B ~/.zypper_history
+Command history for the shell.
 
 .SH "EXIT CODES"
 .LP

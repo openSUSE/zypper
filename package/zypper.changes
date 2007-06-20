@@ -1,4 +1,39 @@
 -------------------------------------------------------------------
+Wed Jun 20 16:41:57 CEST 2007 - jkupec@suse.cz
+
+- Merged revisions 4714,4720-4721,4724-4727,4730-4754,4758-4797,4799-4804,4806-4810,4812-4837,4839-4846,4848-4849,4851,4854-4940,4945-4953,4955-4957,4961-4963,4965-4967,4969-4971,4974-5028,5030-5060,5062-5078,5080-5308,5310-5450,5452,5454-5666,5671-5697,5699-5710,5712-5714,5716-5732,5734-5737,5740,5742-5748,5750-5757,5761-5765,5767-5768,5770-5780,5783,5786-5787,5789-5791,5793,5795-5797,5799,5801,5803,5805-5813 via svnmerge from
+http://svn.opensuse.org/svn/zypp/trunk/zypper
+
+........
+  r4969 | mvidner | 2007-02-05 17:03:44 +0100 (Mon, 05 Feb 2007) | 3 lines
+
+  Shell: added command line editing with history (#232374);
+  exit on EOF (#230211, #235709).
+........
+  r4977 | mvidner | 2007-02-05 18:01:52 +0100 (Mon, 05 Feb 2007) | 2 lines
+
+  BuildRequires:  readline-devel
+........
+  r5003 | mvidner | 2007-02-12 13:36:47 +0100 (Mon, 12 Feb 2007) | 2 lines
+
+  Do not allow to commit with unresolved dependency problems (#242736).
+........
+  r5016 | mvidner | 2007-02-13 10:53:33 +0100 (Tue, 13 Feb 2007) | 2 lines
+
+  Echo a newline after the user enters EOF.
+........
+  r5020 | mvidner | 2007-02-13 12:59:29 +0100 (Tue, 13 Feb 2007) | 2 lines
+
+  Added interactive resolution of resolver problems (#242736).
+........
+  r5021 | mvidner | 2007-02-13 14:12:46 +0100 (Tue, 13 Feb 2007) | 2 lines
+
+  Shrunk zypp-checkpatches (#224886).
+........
+
+- r5814
+
+-------------------------------------------------------------------
 Mon Apr  2 10:44:20 CEST 2007 - jkupec@suse.cz
 
 - Translation update (final translation round)
