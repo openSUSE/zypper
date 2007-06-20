@@ -84,18 +84,13 @@ struct ResolvableQuery::Impl
                                     const std::string &default_value )
   {
     sqlite3_connection con((_dbdir + "zypp.db").asString().c_str());
-    
-    string value;
     try {
-      value = queryStringAttributeTranslationInternal( con, record_id, Locale(), klass, name);
+      return queryStringAttributeTranslationInternal( con, record_id, Locale(), klass, name, default_value);
     }
     catch ( const Exception &e )
     {
-      ZYPP_CAUGHT(e);
-      return default_value;
+      ZYPP_RETHROW(e);
     }
-    
-    return value;
   }
 
 
@@ -106,16 +101,13 @@ struct ResolvableQuery::Impl
                                                const std::string &default_value )
   {
     sqlite3_connection con((_dbdir + "zypp.db").asString().c_str());
-    string value;
     try {
-      value = queryStringAttributeTranslationInternal( con, record_id, locale, klass, name );
+      return queryStringAttributeTranslationInternal( con, record_id, locale, klass, name, default_value );
     }
     catch ( const Exception &e )
     {
-      ZYPP_CAUGHT(e);
-      return default_value;
+      ZYPP_RETHROW(e);
     }
-    return value;
   }
 
 
@@ -125,16 +117,13 @@ struct ResolvableQuery::Impl
                                                  const TranslatedText &default_value )
   {
     sqlite3_connection con((_dbdir + "zypp.db").asString().c_str());
-    TranslatedText value;
     try {
-      value = queryTranslatedStringAttributeInternal( con, record_id, klass, name );
+      return queryTranslatedStringAttributeInternal( con, record_id, klass, name, default_value );
     }
     catch ( const Exception &e )
     {
-      ZYPP_CAUGHT(e);
-      return default_value;
+      ZYPP_RETHROW(e);
     }
-    return value;
   }
 
 
@@ -144,16 +133,13 @@ struct ResolvableQuery::Impl
                               bool default_value )
   {
     sqlite3_connection con((_dbdir + "zypp.db").asString().c_str());
-    bool value;
     try {
-      value = queryNumericAttributeInternal( con, record_id, klass, name);
+      return queryNumericAttributeInternal( con, record_id, klass, name, default_value);
     }
     catch ( const Exception &e )
     {
-      ZYPP_CAUGHT(e);
-      return default_value;
+      ZYPP_RETHROW(e);
     }
-    return value;
   }
       
   int queryNumericAttribute( const data::RecordId &record_id,
@@ -162,16 +148,13 @@ struct ResolvableQuery::Impl
                              int default_value )
   {
     sqlite3_connection con((_dbdir + "zypp.db").asString().c_str());
-    int n;
     try {
-      n = queryNumericAttributeInternal( con, record_id, klass, name);
+      return queryNumericAttributeInternal( con, record_id, klass, name, default_value);
     }
     catch ( const Exception &e )
     {
-      ZYPP_CAUGHT(e);
-      return default_value;
+      ZYPP_RETHROW(e);
     }
-    return n;
   }
 
 private:
@@ -179,7 +162,8 @@ private:
   int queryNumericAttributeInternal( sqlite3_connection &con,
                                      const data::RecordId &record_id,
                                      const std::string &klass,
-                                     const std::string &name )
+                                     const std::string &name,
+                                     int default_value )
   {
     con.executenonquery("BEGIN;");
     sqlite3_command cmd( con, "select a.value from numeric_attributes a,types t where a.weak_resolvable_id=:rid and a.attr_id=t.id and t.class=:tclass and t.name=:tname;");
@@ -189,13 +173,18 @@ private:
     cmd.bind(":tclass", klass);
     cmd.bind(":tname", name);
 
-    return cmd.executeint();
+    sqlite3_reader reader = cmd.executereader();
+    if ( reader.read() )
+      return reader.getint(0);
+    else
+      return default_value;
   }
   
   TranslatedText queryTranslatedStringAttributeInternal( sqlite3_connection &con,
                                                          const data::RecordId &record_id,
                                                          const std::string &klass,
-                                                         const std::string &name )
+                                                         const std::string &name,
+                                                         const TranslatedText &default_value )
   {
     //con.executenonquery("PRAGMA cache_size=8000;");
     con.executenonquery("BEGIN;");
@@ -209,26 +198,30 @@ private:
 
     TranslatedText result;
     sqlite3_reader reader = cmd.executereader();
-    while(reader.read())
+    if ( reader.read() )
     {
       result.setText( reader.getstring(0), Locale( reader.getstring(1) ) );
+      return result;
     }
-    return result;
+    else
+      return default_value;
   }
 
   std::string queryStringAttributeInternal( sqlite3_connection &con,
                                             const data::RecordId &record_id,
                                             const std::string &klass,
-                                            const std::string &name )
+                                            const std::string &name,
+                                            const std::string &default_value )
   {
-    return queryStringAttributeTranslationInternal( con, record_id, Locale(), klass, name);
+    return queryStringAttributeTranslationInternal( con, record_id, Locale(), klass, name, default_value);
   }
 
   std::string queryStringAttributeTranslationInternal( sqlite3_connection &con,
                                                        const data::RecordId &record_id,
                                                        const Locale &locale,
                                                        const std::string &klass,
-                                                       const std::string &name )
+                                                       const std::string &name,
+                                                       const std::string &default_value )
   {
     //con.executenonquery("PRAGMA cache_size=8000;");
     con.executenonquery("BEGIN;");
@@ -244,7 +237,11 @@ private:
     cmd.bind(":tclass", klass);
     cmd.bind(":tname", name);
 
-    return cmd.executestring();
+    sqlite3_reader reader = cmd.executereader();
+    if ( reader.read() )
+      return reader.getstring(0);
+    else
+      return default_value;
   }
 };
 
