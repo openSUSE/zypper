@@ -993,6 +993,9 @@ void command_shell ()
 
   bool loop = true;
   while (loop) {
+    // reset globals
+    ghelp = false;
+    
     // read a line
     string line = readline_getline ();
     cerr_vv << "Got: " << line << endl;
