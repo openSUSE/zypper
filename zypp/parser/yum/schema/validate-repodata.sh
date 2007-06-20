@@ -73,20 +73,25 @@ val() {
     case $F in
 	*.gz)
 	    TEMP=`mktemp /tmp/${F%.gz}.XXXXXX`
-	    trap "rm -f $TEMP" RETURN ERR
 	    zcat $F > $TEMP
 	    F=$TEMP
 	    ;;
     esac
 
+    FAIL=false
     for VALIDATOR in xmllint jing_compact jing_xml rnv; do
 	COND_ref=DO_$VALIDATOR
 	CALL=val_$VALIDATOR
 	if ${!COND_ref}; then
 	    echo \*\* $VALIDATOR
-	    $CALL $1 $F
+	    $CALL $1 $F || FAIL=true
 	fi
     done
+
+    rm -f $TEMP
+    if $FAIL; then
+	exit 1
+    fi
 }
 
 # $1 file name
@@ -110,7 +115,7 @@ val_file() {
 if [ -f "$1" ]; then
     val_file "$1"
 else
-    if [ -d "$1"]; then
+    if [ -d "$1" ]; then
 	cd "$1"
     fi
     
