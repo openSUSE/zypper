@@ -435,7 +435,7 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
       "This command has no options.\n"
       );
   }
-  else if (command == ZypperCommand::NONE) {//command_str == "patches" || command_str == "pch") {
+  else if (command == ZypperCommand::SHOW_PATCHES) {
     static struct option patches_options[] = {
       {"help", no_argument, 0, 'h'},
       {0, 0, 0, 0}
@@ -844,7 +844,7 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
 
   // --------------------------( patches )------------------------------------
 
-  else if (command == ZypperCommand::NONE) {//command_str == "patches" || command_str == "pch") {
+  else if (command == ZypperCommand::SHOW_PATCHES) {
     if (ghelp) {
       cerr << specific_help;
       return !ghelp;

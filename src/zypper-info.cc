@@ -81,7 +81,7 @@ Copy and modify /usr/share/vim/current/gvimrc to ~/.gvimrc if needed.
  */
 void printPkgInfo(const PoolItem & pool_item, const PoolItem & ins_pool_item) {
 
-  cout << _("Catalog: ") << pool_item.resolvable()->source().alias() << endl;
+  cout << _("Catalog: ") << pool_item.resolvable()->repository().info().alias() << endl;
   cout << _("Name: ") << pool_item.resolvable()->name() << endl;
   cout << _("Version: ") << pool_item.resolvable()->edition().asString() << endl;
   cout << _("Arch: ") << pool_item.resolvable()->arch().asString() << endl;

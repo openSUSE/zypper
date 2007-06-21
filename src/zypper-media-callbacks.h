@@ -21,7 +21,6 @@
 #include <zypp/KeyRing.h>
 #include <zypp/Digest.h>
 #include <zypp/Url.h>
-#include <zypp/Source.h>
 
 #include "AliveCursor.h"
 
@@ -33,7 +32,7 @@ namespace ZmartRecipients
 {
 
   struct MediaChangeReportReceiver : public zypp::callback::ReceiveReport<MediaChangeReport>
-  {
+  {/*
     virtual MediaChangeReport::Action requestMedia( zypp::Source_Ref source, unsigned mediumNr, MediaChangeReport::Error error, const std::string & description )
     { 
       cout << "Please insert media [" << description << "] # " << mediumNr << ". Retry [y/n]: " << endl;
@@ -43,6 +42,7 @@ namespace ZmartRecipients
         return MediaChangeReport::ABORT; 
     
     }
+    */
   };
 
     // progress for downloading a file

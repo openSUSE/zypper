@@ -435,7 +435,7 @@ void load_repo_resolvables()
   
       cout_vv << format(_("(%d resolvables found)")) % store.size() << endl;
     }
-    catch ( const repo::RepoNotCachedException &e )
+    catch (const Exception & e)
     {
       ZYPP_CAUGHT(e);
       cerr << format(_("Problem loading data from '%s'")) % repo.alias();
@@ -553,7 +553,7 @@ void show_patches()
     Patch::constPtr patch = asKind<Patch>(res);
 
     TableRow tr;
-    tr << patch->source ().alias ();
+    tr << patch->repository().info().alias ();
     tr << res->name () << res->edition ().asString();
     tr << patch->category();
     tr << string_status (it->status ());
@@ -589,7 +589,7 @@ void list_patch_updates ()
 
       if (true) {
 	TableRow tr (cols);
-	tr << patch->source ().alias ();
+	tr << patch->repository().info().alias ();
 	tr << res->name () << res->edition ().asString();
 	tr << patch->category();
 	tr << string_status (it->status ());
@@ -726,7 +726,7 @@ void list_updates( const ResObject::Kind &kind )
 //      candstat.setToBeInstalled (ResStatus::USER);
       ResObject::constPtr res = ci->resolvable();
       TableRow tr (cols);
-      tr << "v" << res->source ().alias ();
+      tr << "v" << res->repository().info().alias();
       if (gSettings.is_rug_compatible)
 	tr << "";		// Bundle
       tr << res->name ()

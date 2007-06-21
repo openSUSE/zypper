@@ -5,7 +5,7 @@ using namespace std;
 TableStyle Table::defaultStyle = Ascii;
 
 static
-char * lines[][3] = {
+const char * lines[][3] = {
   { "|", "-", "+"},		///< Ascii
   // utf 8. TODO wchars?
   { "\xE2\x94\x82", "\xE2\x94\x80", "\xE2\x94\xBC"}, ///< light
@@ -38,7 +38,7 @@ void TableRow::dumbDumpTo (ostream &stream) const {
 
 void TableRow::dumpTo (ostream &stream, const vector<unsigned>& widths,
 		       TableStyle st) const {
-  char * vline = lines[st][0];
+  const char * vline = lines[st][0];
 
   bool seen_first = false;
   container::const_iterator
@@ -90,8 +90,8 @@ void Table::updateColWidths (const TableRow& tr) {
 }
 
 void Table::dumpRule (ostream &stream) const {
-  char * hline = lines[_style][1];
-  char * cross = lines[_style][2];
+  const char * hline = lines[_style][1];
+  const char * cross = lines[_style][2];
 
   bool seen_first = false;
   

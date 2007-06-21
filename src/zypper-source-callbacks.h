@@ -20,7 +20,6 @@
 #include <zypp/KeyRing.h>
 #include <zypp/Digest.h>
 #include <zypp/Url.h>
-#include <zypp/Source.h>
 
 #include "zypper-callbacks.h"
 
@@ -28,8 +27,7 @@
 namespace ZmartRecipients
 {
 ///////////////////////////////////////////////////////////////////    
-#ifndef LIBZYPP_1xx
-    // progress for probing a source
+/*    // progress for probing a source
     struct ProbeSourceReceive : public zypp::callback::ReceiveReport<zypp::source::ProbeSourceReport>
     {
       virtual void start(const zypp::Url &url)
@@ -37,7 +35,7 @@ namespace ZmartRecipients
         cout << "Determining " << url << " source type..." << endl;
       }
       
-      virtual void failedProbe( const zypp::Url &/*url*/, const std::string & type )
+      virtual void failedProbe( const zypp::Url &/*url*//*, const std::string & type )
       {
         cout << ".. not " << type << endl;
       }
@@ -47,7 +45,7 @@ namespace ZmartRecipients
         cout << url << " is type " << type << endl;
       }
       
-      virtual void finish(const zypp::Url &/*url*/, Error error, const std::string & reason )
+      virtual void finish(const zypp::Url &/*url*//*, Error error, const std::string & reason )
       {
         if ( error == INVALID )
         {
@@ -56,10 +54,10 @@ namespace ZmartRecipients
         }
       }
 
-      virtual bool progress(const zypp::Url &/*url*/, int /*value*/)
+      virtual bool progress(const zypp::Url &/*url*//*, int /*value*//*)
       { return true; }
 
-      virtual Action problem( const zypp::Url &/*url*/, Error error, const std::string & description )
+      virtual Action problem( const zypp::Url &/*url*//*, Error error, const std::string & description )
       {
 	display_done ();
 	display_error (error, description);
@@ -67,8 +65,7 @@ namespace ZmartRecipients
         return ABORT;
       }
     };
-#endif
-    
+    */
 // progress for downloading a resolvable
 struct DownloadResolvableReportReceiver : public zypp::callback::ReceiveReport<zypp::source::DownloadResolvableReport>
 {
@@ -203,7 +200,7 @@ struct DownloadResolvableReportReceiver : public zypp::callback::ReceiveReport<z
   }
 };
 
-#ifndef LIBZYPP_1xx
+/*
 struct SourceReportReceiver  : public zypp::callback::ReceiveReport<zypp::source::SourceReport>
 {     
   virtual void start( zypp::Source_Ref source, const std::string & task )
@@ -225,14 +222,14 @@ struct SourceReportReceiver  : public zypp::callback::ReceiveReport<zypp::source
     return true;
   }
   
-  virtual Action problem( zypp::Source_Ref /*source*/, Error error, const std::string & description )
+  virtual Action problem( zypp::Source_Ref /*source*//*, Error error, const std::string & description )
   {
     display_done ();
     display_error (error, description);
     return (Action) read_action_ari ();
   }
 
-  virtual void finish( zypp::Source_Ref /*source*/, const std::string & task, Error error, const std::string & reason )
+  virtual void finish( zypp::Source_Ref /*source*//*, const std::string & task, Error error, const std::string & reason )
   {
     display_step(100);
     // many of these, avoid newline
@@ -246,8 +243,7 @@ struct SourceReportReceiver  : public zypp::callback::ReceiveReport<zypp::source
   std::string _task;
   zypp::Source_Ref _source;
 };
-#endif
-
+*/
     ///////////////////////////////////////////////////////////////////
 }; // namespace ZmartRecipients
 ///////////////////////////////////////////////////////////////////
@@ -255,27 +251,21 @@ struct SourceReportReceiver  : public zypp::callback::ReceiveReport<zypp::source
 class SourceCallbacks {
 
   private:
-#ifndef LIBZYPP_1xx
-    ZmartRecipients::ProbeSourceReceive _sourceProbeReport;
-    ZmartRecipients::SourceReportReceiver _SourceReport;
-#endif
+//    ZmartRecipients::ProbeSourceReceive _sourceProbeReport;
+//    ZmartRecipients::SourceReportReceiver _SourceReport;
     ZmartRecipients::DownloadResolvableReportReceiver _downloadReport;
   public:
     SourceCallbacks()
     {
-#ifndef LIBZYPP_1xx
-      _sourceProbeReport.connect();
-      _SourceReport.connect();
-#endif
+//      _sourceProbeReport.connect();
+//      _SourceReport.connect();
       _downloadReport.connect();
     }
 
     ~SourceCallbacks()
     {
-#ifndef LIBZYPP_1xx
-      _sourceProbeReport.disconnect();
-      _SourceReport.disconnect();
-#endif
+//      _sourceProbeReport.disconnect();
+//      _SourceReport.disconnect();
       _downloadReport.disconnect();
     }
 

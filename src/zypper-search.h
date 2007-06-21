@@ -262,7 +262,7 @@ struct FillTable
     }
 
     // add other fields to the result table
-    row << pool_item.resolvable()->source().alias()
+    row << pool_item.resolvable()->repository().info().alias()
         // TODO what about rug's Bundle?
         << (gSettings.is_rug_compatible ? "" : pool_item.resolvable()->kind().asString()) 
         << pool_item.resolvable()->name()

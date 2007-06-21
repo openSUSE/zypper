@@ -102,8 +102,8 @@ void render_result( const Edition &version, std::ostream &out, const zypp::ResPo
       out << " <update category=\"" << patch ->category() << "\" name=\"" << patch->name() << "\" edition=\"" << patch->edition() << "\"" << ">" << std::endl;
       out << " <summary>" << xml_escape(patch->summary()) << "</summary>" << endl;
       out << " <description>" << xml_escape(patch->description()) << "</description>" << endl;
-      if ( patch->source() != Source_Ref::noSource )
-        out << "<source url=\"" << patch->source().url() << "\" alias=\"" << patch->source().alias() << "\"/>" << std::endl;
+      if ( patch->repository() != Repository::noRepository )
+        out << "<source url=\"" << *(patch->repository().info().baseUrlsBegin()) << "\" alias=\"" << patch->repository().info().alias() << "\"/>" << std::endl;
       out << "</update>" << endl;
       
       count++;

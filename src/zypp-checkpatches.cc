@@ -9,6 +9,7 @@
 
 /* (c) Novell Inc. */
 
+#include <fcntl.h>
 
 #include <iostream>
 #include <fstream>
@@ -17,6 +18,7 @@
 #include <zypp/base/Gettext.h>
 #include <zypp/target/store/PersistentStorage.h>
 #include <zypp/RepoManager.h>
+#include <zypp/PathInfo.h>
 
 #include "checkpatches-keyring-callbacks.h"
 #include "zypper.h"
