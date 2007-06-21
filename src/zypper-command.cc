@@ -29,6 +29,7 @@ const ZypperCommand ZypperCommand::SEARCH(ZypperCommand::SEARCH_e);
 const ZypperCommand ZypperCommand::INFO(ZypperCommand::INFO_e);
 const ZypperCommand ZypperCommand::LIST_UPDATES(ZypperCommand::LIST_UPDATES_e);
 const ZypperCommand ZypperCommand::PATCH_CHECK(ZypperCommand::PATCH_CHECK_e);
+const ZypperCommand ZypperCommand::SHOW_PATCHES(ZypperCommand::SHOW_PATCHES_e);
 
 const ZypperCommand ZypperCommand::HELP(ZypperCommand::HELP_e);
 const ZypperCommand ZypperCommand::SHELL(ZypperCommand::SHELL_e);
@@ -62,6 +63,7 @@ ZypperCommand::Command ZypperCommand::parse(const std::string & strval_r)
     _table["info"] = _table["if"] = ZypperCommand::INFO_e;
     _table["list-updates"] = _table["lu"] = ZypperCommand::LIST_UPDATES_e;
     _table["patch-check"] = _table["pchk"] = ZypperCommand::PATCH_CHECK_e;
+    _table["patches"] = _table["pch"] = ZypperCommand::SHOW_PATCHES_e;
 
     _table["help"] = ZypperCommand::HELP_e;
     _table["shell"] = _table["sh"] = ZypperCommand::SHELL_e;
