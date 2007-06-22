@@ -98,7 +98,7 @@ string help_commands = _(
   "\tpatch-check, pchk\tCheck for patches\n"
   "\tpatches, pch\t\tList patches\n"
   "\tlist-updates, lu\tList updates\n"
-  "\tupdate, up\t\tUpdate packages\n"
+  "\tupdate, up\t\tUpdate installed resolvables with newer versions.\n"
   "\tinfo, if\t\tShow full information for packages\n"
   "\tpatch-info\t\tShow full information for patches\n"
   "");
@@ -252,10 +252,14 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
     };
     specific_options = install_options;
     specific_help = _(
+      "install [options] <name> ...\n"
+      "\n"
+      "'install' - Install resolvabe(s) with specified name(s).\n"
+      "\n"
       "  Command options:\n"
-      "\t--catalog,-c\t\tOnly from this catalog (under development)\n"
-      "\t--type,-t\t\tType of resolvable (default: package)\n"
-      "\t--no-confirm,-y\tDo not require user confirmation\n"
+      "\t--catalog,-c\t\t\tOnly from this catalog (under development)\n"
+      "\t--type,-t <resolvable_type>\tType of resolvable (default: package)\n"
+      "\t--no-confirm,-y\t\t\tDo not require user confirmation\n"
       );
   }
   else if (command == ZypperCommand::REMOVE) {
@@ -267,9 +271,13 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
     };
     specific_options = remove_options;
     specific_help = _(
+      "remove [options] <name> ...\n"
+      "\n"
+      "'remove' - Remove resolvabe(s) with specified name(s).\n"
+      "\n"
       "  Command options:\n"
-      "\t--type,-t\t\tType of resolvable (default: package)\n"
-      "\t--no-confirm,-y\tDo not require user confirmation\n"
+      "\t--type,-t <resolvable_type>\tType of resolvable (default: package)\n"
+      "\t--no-confirm,-y\t\t\tDo not require user confirmation\n"
       );
   }
   else if (command == ZypperCommand::ADD_REPO) {
@@ -283,7 +291,7 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
     };
     specific_options = service_add_options;
     specific_help = _(
-      "service-add [options] URI [alias]\n"
+      "service-add [options] <URI> <alias>\n"
       "\n"
       "Add a service (installation source) to the system."
       "\n"
@@ -306,7 +314,7 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
       "\n"
       "List all defined system services (installation sources)."
       "\n"
-      "This command has no options.\n"
+      "This command has no additional options.\n"
       );
   }
   else if (command == ZypperCommand::REMOVE_REPO) {
@@ -316,11 +324,11 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
     };
     specific_options = service_delete_options;
     specific_help = _(
-      "service-delete [options] <URI|alias>\n"
+      "service-delete [options] <alias>\n"
       "\n"
       "Remove service (installation source) from the system."
       "\n"
-      "This command has no options.\n"
+      "This command has no additional options.\n"
       );
   }
   else if (command == ZypperCommand::NONE) {//command_str == "service-rename" || command_str == "sr") {
@@ -330,11 +338,11 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
     };
     specific_options = service_rename_options;
     specific_help = _(
-      "service-rename [options] <URI|alias> <new-alias>\n"
+      "service-rename [options] <alias> <new-alias>\n"
       "\n"
       "Assign new alias to the service specified by URI or current alias."
       "\n"
-      "This command has no options.\n"
+      "This command has no additional options.\n"
       );
   }
   else if (command == ZypperCommand::REFRESH) {
@@ -344,9 +352,11 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
     };
     specific_options = refresh_options;
     specific_help = _(
-      "zypper refresh\n"
+      "refresh\n"
       "\n"
       "Refresh all installation sources found in the system.\n"
+      "\n"
+      "This command has no additional options.\n"
       );
   }
   else if (command == ZypperCommand::LIST_UPDATES) {
@@ -362,10 +372,10 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
       "List all available updates\n"
       "\n"
       "  Command options:\n"
-      "\t--type,-t\t\tType of resolvable (default: patch)\n"
+      "\t--type,-t <resolvable_type>\tType of resolvable (default: patch)\n"
       );
   }
-  else if (command == ZypperCommand::NONE) { //command_str == "update" || command_str == "up") {
+  else if (command == ZypperCommand::UPDATE) {
     static struct option update_options[] = {
       {"type",		   required_argument, 0, 't'},
       {"no-confirm", no_argument,       0, 'y'},
@@ -375,9 +385,12 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
     };
     specific_options = update_options;
     specific_help = _(
+      "'update' - Update all installed resolvables with newer versions, where applicable.\n"
+      "\n"
       "  Command options:\n"
-      "\t--type,-t\t\tType of resolvable (default: patch)\n"
-      "\t--no-confirm,-y\t\tDo not require user confirmation\n"
+      "\n"
+      "\t--type,-t <resolvable_type>\tType of resolvable (default: patch)\n"
+      "\t--no-confirm,-y\t\t\tDo not require user confirmation\n"
       "\t--skip-interactive\t\tSkip interactive updates\n"
       );
   }
@@ -400,7 +413,7 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
     };
     specific_options = search_options;
     specific_help = _(
-      "zypper [global-options] search [options] [querystring...]\n"
+      "search [options] [querystring...]\n"
       "\n"
       "'search' - Search for packages matching given search strings\n"
       "\n"
@@ -432,7 +445,7 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
       "\n"
       "Check for available patches\n"
       "\n"
-      "This command has no options.\n"
+      "This command has no additional options.\n"
       );
   }
   else if (command == ZypperCommand::SHOW_PATCHES) {
@@ -446,7 +459,7 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
       "\n"
       "List all available patches\n"
       "\n"
-      "This command has no options.\n"
+      "This command has no additional options.\n"
       );
   }
   else if (command == ZypperCommand::NONE) {//command_str == "info" || command_str == "if") {
@@ -456,9 +469,11 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
     };
     specific_options = info_options;
     specific_help = _(
-      "zypper [global-options] info [name...]\n"
+      "info <name> ...\n"
       "\n"
       "'info' -- Show full information for packages\n"
+      "\n"
+      "This command has no additional options.\n"
       );
   }
   else if (command == ZypperCommand::NONE) {//command_str == "patch-info") {
@@ -468,9 +483,11 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
     };
     specific_options = patch_info_options;
     specific_help = _(
-      "zypper [global-options] patch-info [patchname...]\n"
+      "patch-info <patchname> ...\n"
       "\n"
       "'patch-info' -- Show detailed information for patches\n"
+      "\n"
+      "This command has no additional options.\n"
       );
   }
   else if (command == ZypperCommand::MOO) {
@@ -480,9 +497,11 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
     };
     specific_options = moo_options;
     specific_help = _(
-      "zypper [global-options] moo\n"
+      "moo\n"
       "\n"
       "'moo' - Show an animal\n"
+      "\n"
+      "This command has no additional options.\n"
       );
   }
 
@@ -562,6 +581,8 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
 
   if (command == ZypperCommand::MOO)
   {
+    if (ghelp) { cout << specific_help << endl; return !ghelp; }
+
     cout << "   \\\\\\\\\\\n  \\\\\\\\\\\\\\__o\n__\\\\\\\\\\\\\\'/_" << endl;
     return ZYPPER_EXIT_OK;
   }
@@ -701,7 +722,7 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
   {
     if (command == ZypperCommand::INSTALL) {
       if (ghelp || arguments.size() < 1) {
-        cerr << "install [options] name...\n" << specific_help;
+        cerr << specific_help;
         return !ghelp;
       }
 
@@ -710,9 +731,7 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
 
     if (command == ZypperCommand::REMOVE) {
       if (ghelp || arguments.size() < 1) {
-        cerr << "remove [options] name...\n"
-        << specific_help
-        ;
+        cerr << specific_help;
         return !ghelp;
       }
 
@@ -887,13 +906,8 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
 
   // -----------------------------( update )----------------------------------
 
-  else if (command == ZypperCommand::NONE) {//command_str == "update" || command_str == "up") {
-    if (ghelp) {
-      cerr << "update [options]\n"
-	   << specific_help
-	;
-      return !ghelp;
-    }
+  else if (command == ZypperCommand::UPDATE) {
+    if (ghelp) { cerr << specific_help; return !ghelp; }
 
     string skind = copts.count("type")?  copts["type"].front() :
       gSettings.is_rug_compatible? "package" : "patch";
