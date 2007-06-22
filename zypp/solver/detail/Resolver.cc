@@ -33,6 +33,7 @@
 #include "zypp/CapFilters.h"
 #include "zypp/ZYppFactory.h"
 #include "zypp/SystemResObject.h"
+#include "zypp/solver/detail/ResolverInfoNeededBy.h"
 
 
 /////////////////////////////////////////////////////////////////////////
@@ -161,12 +162,99 @@ Resolver::reset (const bool resetValidResults)
     _best_context = NULL;
     _timed_out = false;
 
+    _isSelectedBy.clear();
+    _selects.clear();
+
     if (resetValidResults)
 	contextPool.reset();
     
 }
 
+//--------------------------------------------------------------------------------------------------
+// Get more information about the solverrun
+// Which item will be triggerd by another item or triggers an item for installation
+typedef struct {
+    ItemCapKindMap isSelectedBy;
+    ItemCapKindMap selects;
+} Collector;
 
+
+static void
+collector_cb_needed (ResolverInfo_Ptr info, void *data)
+{
+    Collector *collector = (Collector *)data;
+    if (info->type() == RESOLVER_INFO_TYPE_NEEDED_BY) {
+	ResolverInfoNeededBy_constPtr needed_by = dynamic_pointer_cast<const ResolverInfoNeededBy>(info);
+	if (needed_by->items().size() >= 1) {
+	    PoolItem_Ref item = info->affected();
+	    PoolItemList itemList = needed_by->items();
+	    
+	    for (PoolItemList::const_iterator iter = itemList.begin();
+		 iter != itemList.end(); iter++) {
+		ItemCapKind capKind( *iter, needed_by->capability(), needed_by->capKind() );
+		collector->isSelectedBy.insert (make_pair( item, capKind));
+	
+		ItemCapKind capKindReverse( item, needed_by->capability(), needed_by->capKind() );
+		collector->selects.insert (make_pair( *iter, capKindReverse));
+	    }
+	    
+	}
+    }
+}
+	
+void 
+Resolver::collectResolverInfo(void)
+{
+    ResolverContext_Ptr collectContext = context(); // best context or failed context
+    if ( collectContext != NULL
+	 && _isSelectedBy.empty()
+	 && _selects.empty()) {
+	Collector collector;
+	collectContext->foreachInfo (PoolItem(), RESOLVER_INFO_PRIORITY_VERBOSE, collector_cb_needed, &collector);
+	_isSelectedBy = collector.isSelectedBy;
+	_selects = collector.selects;
+    }
+}
+
+
+const ItemCapKindList Resolver::isSelectedBy (const PoolItem_Ref item) {
+    ItemCapKindList ret;
+    collectResolverInfo();
+     
+    for (ItemCapKindMap::const_iterator iter = _isSelectedBy.find(item); iter != _isSelectedBy.end();) {
+	ItemCapKind info = iter->second;
+	PoolItem_Ref iterItem = iter->first;
+	if (iterItem == item) {
+	    ret.push_back(info);
+	    iter++;
+	} else {
+	    // exit
+	    iter = _isSelectedBy.end();
+	}	
+    }
+    return ret;
+}
+
+const ItemCapKindList Resolver::selects (const PoolItem_Ref item) {
+    ItemCapKindList ret;
+    collectResolverInfo();
+    
+    for (ItemCapKindMap::const_iterator iter = _selects.find(item); iter != _selects.end();) {
+	ItemCapKind info = iter->second;
+	PoolItem_Ref iterItem = iter->first;
+	if (iterItem == item) {
+	    ret.push_back(info);
+	    iter++;
+	} else {
+	    // exit
+	    iter = _selects.end();
+	}	
+    }
+    return ret;    
+}
+
+
+//----------------------------------------------------------------------------------------------------
 ResolverContext_Ptr
 Resolver::context (void) const
 {

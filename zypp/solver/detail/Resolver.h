@@ -54,6 +54,27 @@ namespace zypp
     /////////////////////////////////////////////////////////////////////
     namespace detail
     { ///////////////////////////////////////////////////////////////////
+	
+    ///////////////////////////////////////////////////////////////////
+    //
+    //	CLASS NAME : ItemCapKind
+    //
+    /** */
+    struct ItemCapKind
+    {
+	public:
+	Capability cap; //Capability which has triggerd this selection
+	Dep capKind; //Kind of that capability
+	PoolItem_Ref item; //Item which has triggered this selection
+
+	    ItemCapKind( PoolItem i, Capability c, Dep k)
+		: cap( c )
+		, capKind( k )
+		, item( i )
+	    { }
+    };
+    typedef std::multimap<PoolItem_Ref,ItemCapKind> ItemCapKindMap;
+    typedef std::list<ItemCapKind> ItemCapKindList;	
 
 ///////////////////////////////////////////////////////////////////
 //
@@ -90,7 +111,10 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
     // list of problematic items after doUpgrade()
     PoolItemList _update_items;
 
-
+    // Additional information about the solverrun
+    ItemCapKindMap _isSelectedBy;
+    ItemCapKindMap _selects;
+    
     CapSet _extra_caps;
     CapSet _extra_conflicts;
 
@@ -137,6 +161,9 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
     // helpers
     bool doesObsoleteCapability (PoolItem_Ref candidate, const Capability & cap);
     bool doesObsoleteItem (PoolItem_Ref candidate, PoolItem_Ref installed);
+
+    void collectResolverInfo (void);
+    
 
   public:
 
@@ -236,6 +263,12 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
 
     // reset all SOLVER transaction in pool
     void undo(void);
+
+    // Get more information about the solverrun
+    // Which item will be triggerd by another item or triggers an item for
+    // installation    
+    const ItemCapKindList isSelectedBy (const PoolItem_Ref item);
+    const ItemCapKindList selects (const PoolItem_Ref item);
 
     // only for testsuite
     void reset (const bool resetValidResults = false);

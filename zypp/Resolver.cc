@@ -110,7 +110,14 @@ namespace zypp
   { return _pimpl->maxSolverPasses(); }
   bool Resolver::createSolverTestcase (const std::string & dumpPath)
   { solver::detail::Testcase testcase (dumpPath);
-    return testcase.createTestcase(*_pimpl);}          
+    return testcase.createTestcase(*_pimpl);}
+#if 1
+  const solver::detail::ItemCapKindList Resolver::isSelectedBy (const PoolItem_Ref item)
+  { return _pimpl->isSelectedBy (item); }
+  const solver::detail::ItemCapKindList Resolver::selects (const PoolItem_Ref item)
+  { return _pimpl->selects (item); }
+#endif
+
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

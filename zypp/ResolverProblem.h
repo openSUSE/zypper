@@ -14,7 +14,6 @@
 
 #include "zypp/base/ReferenceCounted.h"
 #include "zypp/base/PtrTypes.h"
-#include "zypp/Resolver.h"
 #include "zypp/ProblemSolution.h"
 
 /////////////////////////////////////////////////////////////////////////

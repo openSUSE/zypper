@@ -270,9 +270,40 @@ namespace zypp
     /**
      * Generates a solver Testcase of the current state
      *
-     * return true if it was successful     
+     * \parame dumpPath destination directory of the created directory
+     * \return true if it was successful     
      */
-    bool createSolverTestcase (const std::string & dumpPath = "/var/log/YaST2/solverTestcase");      
+    bool createSolverTestcase (const std::string & dumpPath = "/var/log/YaST2/solverTestcase");
+
+
+    /**
+     * Gives information about WHO has selected an item for installation.
+     *
+     * \param item    Evaluate additional information for this resolvable.
+     * \return A list of structures which contains:
+     *		item     Item which has triggered the selection of the given param item.
+     *		cap      Capability which has triggerd this selection
+     *		capKind  Kind of that capability (e.g.  Dep::REQUIRES,Dep::RECOMMENDS,... )
+     *
+     * Note: Start a solver run before in order to have a result. Not matter if it is valid or invalid.
+     *
+     */
+    const solver::detail::ItemCapKindList isSelectedBy (const PoolItem_Ref item);
+
+    /**
+     * Gives information about WHICH additional items have been selected by the given item.
+     *
+     * \param item     Evaluate additional information for this resolvable.
+     * \return A list of structures which contains:
+     *		item     Item which has BEEN triggered by the selection of the given param item.
+     *		cap      Capability which has BEEN triggerd by this selection
+     *		capKind  Kind of that capability (e.g.  Dep::REQUIRES,Dep::RECOMMENDS,... )
+     *
+     * Note: Start a solver run before in order to have a result. Not matter if it is valid or invalid.
+     *
+     */      
+    const solver::detail::ItemCapKindList selects (const PoolItem_Ref item);
+      
 
   protected:
 
