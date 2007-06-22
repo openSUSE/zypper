@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Fri Jun 22 15:28:03 CEST 2007 - schubi@suse.de
+
+- New API calls which provides more information about one 
+  resolvable after a solverrun:
+  isSelectedBy (const PoolItem_Ref item);
+  selects (const PoolItem_Ref item);
+- Revision 5829 
+
+-------------------------------------------------------------------
 Wed Jun 20 11:47:33 CEST 2007 - schubi@suse.de
 
 - Ignore conflicting items which are uninstallable
