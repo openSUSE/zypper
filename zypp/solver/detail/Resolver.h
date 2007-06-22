@@ -112,8 +112,8 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
     PoolItemList _update_items;
 
     // Additional information about the solverrun
-    ItemCapKindMap _isSelectedBy;
-    ItemCapKindMap _selects;
+    ItemCapKindMap _isInstalledBy;
+    ItemCapKindMap _installs;
     
     CapSet _extra_caps;
     CapSet _extra_conflicts;
@@ -265,10 +265,10 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
     void undo(void);
 
     // Get more information about the solverrun
-    // Which item will be triggerd by another item or triggers an item for
+    // Which item will be installed by another item or triggers an item for
     // installation    
-    const ItemCapKindList isSelectedBy (const PoolItem_Ref item);
-    const ItemCapKindList selects (const PoolItem_Ref item);
+    const ItemCapKindList isInstalledBy (const PoolItem_Ref item);
+    const ItemCapKindList installs (const PoolItem_Ref item);
 
     // only for testsuite
     void reset (const bool resetValidResults = false);

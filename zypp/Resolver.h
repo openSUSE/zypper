@@ -277,32 +277,32 @@ namespace zypp
 
 
     /**
-     * Gives information about WHO has selected an item for installation.
+     * Gives information about WHO has pused an installation of an given item.
      *
      * \param item    Evaluate additional information for this resolvable.
      * \return A list of structures which contains:
-     *		item     Item which has triggered the selection of the given param item.
-     *		cap      Capability which has triggerd this selection
+     *		item     Item which has triggered the installation of the given param item.
+     *		cap      Capability which has triggerd this installation
      *		capKind  Kind of that capability (e.g.  Dep::REQUIRES,Dep::RECOMMENDS,... )
      *
-     * Note: Start a solver run before in order to have a result. Not matter if it is valid or invalid.
+     * Note: In order to have a result start a solver run before. Not matter if it is valid or invalid.
      *
      */
-    const solver::detail::ItemCapKindList isSelectedBy (const PoolItem_Ref item);
+    const solver::detail::ItemCapKindList isInstalledBy (const PoolItem_Ref item);
 
     /**
-     * Gives information about WHICH additional items have been selected by the given item.
+     * Gives information about WHICH additional items will be installed due the installation of an item.
      *
      * \param item     Evaluate additional information for this resolvable.
      * \return A list of structures which contains:
-     *		item     Item which has BEEN triggered by the selection of the given param item.
-     *		cap      Capability which has BEEN triggerd by this selection
+     *		item     Item which will be installed due to the installation of the given param item too.
+     *		cap      Capability which causes the installation
      *		capKind  Kind of that capability (e.g.  Dep::REQUIRES,Dep::RECOMMENDS,... )
      *
-     * Note: Start a solver run before in order to have a result. Not matter if it is valid or invalid.
+     * Note: In order to have a result start a solver run before. Not matter if it is valid or invalid.
      *
      */      
-    const solver::detail::ItemCapKindList selects (const PoolItem_Ref item);
+    const solver::detail::ItemCapKindList installs (const PoolItem_Ref item);
       
 
   protected:

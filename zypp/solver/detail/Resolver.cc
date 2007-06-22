@@ -162,8 +162,8 @@ Resolver::reset (const bool resetValidResults)
     _best_context = NULL;
     _timed_out = false;
 
-    _isSelectedBy.clear();
-    _selects.clear();
+    _isInstalledBy.clear();
+    _installs.clear();
 
     if (resetValidResults)
 	contextPool.reset();
@@ -172,10 +172,10 @@ Resolver::reset (const bool resetValidResults)
 
 //--------------------------------------------------------------------------------------------------
 // Get more information about the solverrun
-// Which item will be triggerd by another item or triggers an item for installation
+// Which item will be installed by another item or triggers an item for installation
 typedef struct {
-    ItemCapKindMap isSelectedBy;
-    ItemCapKindMap selects;
+    ItemCapKindMap isInstalledBy;
+    ItemCapKindMap installs;
 } Collector;
 
 
@@ -192,10 +192,10 @@ collector_cb_needed (ResolverInfo_Ptr info, void *data)
 	    for (PoolItemList::const_iterator iter = itemList.begin();
 		 iter != itemList.end(); iter++) {
 		ItemCapKind capKind( *iter, needed_by->capability(), needed_by->capKind() );
-		collector->isSelectedBy.insert (make_pair( item, capKind));
+		collector->isInstalledBy.insert (make_pair( item, capKind));
 	
 		ItemCapKind capKindReverse( item, needed_by->capability(), needed_by->capKind() );
-		collector->selects.insert (make_pair( *iter, capKindReverse));
+		collector->installs.insert (make_pair( *iter, capKindReverse));
 	    }
 	    
 	}
@@ -207,21 +207,21 @@ Resolver::collectResolverInfo(void)
 {
     ResolverContext_Ptr collectContext = context(); // best context or failed context
     if ( collectContext != NULL
-	 && _isSelectedBy.empty()
-	 && _selects.empty()) {
+	 && _isInstalledBy.empty()
+	 && _installs.empty()) {
 	Collector collector;
 	collectContext->foreachInfo (PoolItem(), RESOLVER_INFO_PRIORITY_VERBOSE, collector_cb_needed, &collector);
-	_isSelectedBy = collector.isSelectedBy;
-	_selects = collector.selects;
+	_isInstalledBy = collector.isInstalledBy;
+	_installs = collector.installs;
     }
 }
 
 
-const ItemCapKindList Resolver::isSelectedBy (const PoolItem_Ref item) {
+const ItemCapKindList Resolver::isInstalledBy (const PoolItem_Ref item) {
     ItemCapKindList ret;
     collectResolverInfo();
      
-    for (ItemCapKindMap::const_iterator iter = _isSelectedBy.find(item); iter != _isSelectedBy.end();) {
+    for (ItemCapKindMap::const_iterator iter = _isInstalledBy.find(item); iter != _isInstalledBy.end();) {
 	ItemCapKind info = iter->second;
 	PoolItem_Ref iterItem = iter->first;
 	if (iterItem == item) {
@@ -229,17 +229,17 @@ const ItemCapKindList Resolver::isSelectedBy (const PoolItem_Ref item) {
 	    iter++;
 	} else {
 	    // exit
-	    iter = _isSelectedBy.end();
+	    iter = _isInstalledBy.end();
 	}	
     }
     return ret;
 }
 
-const ItemCapKindList Resolver::selects (const PoolItem_Ref item) {
+const ItemCapKindList Resolver::installs (const PoolItem_Ref item) {
     ItemCapKindList ret;
     collectResolverInfo();
     
-    for (ItemCapKindMap::const_iterator iter = _selects.find(item); iter != _selects.end();) {
+    for (ItemCapKindMap::const_iterator iter = _installs.find(item); iter != _installs.end();) {
 	ItemCapKind info = iter->second;
 	PoolItem_Ref iterItem = iter->first;
 	if (iterItem == item) {
@@ -247,7 +247,7 @@ const ItemCapKindList Resolver::selects (const PoolItem_Ref item) {
 	    iter++;
 	} else {
 	    // exit
-	    iter = _selects.end();
+	    iter = _installs.end();
 	}	
     }
     return ret;    
