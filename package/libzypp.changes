@@ -3,9 +3,9 @@ Fri Jun 22 15:28:03 CEST 2007 - schubi@suse.de
 
 - New API calls which provides more information about one 
   resolvable after a solverrun:
-  isSelectedBy (const PoolItem_Ref item);
-  selects (const PoolItem_Ref item);
-- Revision 5829 
+  isInstalledBy (const PoolItem_Ref item);
+  installs (const PoolItem_Ref item);
+- Revision 5835
 
 -------------------------------------------------------------------
 Wed Jun 20 11:47:33 CEST 2007 - schubi@suse.de
