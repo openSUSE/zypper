@@ -47,47 +47,47 @@ A resolvable is a package, patch, pattern, language, or a product.
 
 
 .TP
-.B info (if) [name] ...
+.B info (if) <name> ...
 Displays full info for the specified packages.
 
 .TP
-.B install (in) [name] ...
+.B install (in) <name> ...
 Install resolvables.
 .TP
-\fI\-c, \-\-catalog\fR
+\fI\-c, \-\-catalog\fR <catalog>
 Only from this catalog (FIXME not implemented yet)
 .TP
-\fI\-t, \-\-type\fR [resolvable]
+\fI\-t, \-\-type\fR <resolvable_type>
 Type of resolvable (default: package)
 .TP
 .I \-y, \-\-no-confirm
 Don't require user confirmation.
 
 .TP
-.B list-updates (lu)
+.B list-updates (lu) [options]
 List available updates.
 .TP
-\fI\-t, --type\fR
+\fI\-t, --type\fR <resolvable_type>
 Type of resolvable (default: patch)
 
 See also the NOTE at
 .BR update .
 
 .TP
-.B remove (rm) [name]..
+.B remove (rm) <name> ...
 Remove resolvables.
 .TP
-\fI\-t, -\-type\fR [resolvable]
+\fI\-t, -\-type\fR <resolvable_type>
 Type of resolvable (default: package)
 .TP
 .I \-y, \-\-no-confirm
 Don't require user confirmation.
 
 .TP
-.B update (up)
-Update resolvables.
+.B update (up) [options]
+Update all installed resolvables with newer versions, where applicable.
 .TP
-\fI\-t, -\-type\fR [resolvable]
+\fI\-t, -\-type\fR <resolvable_type>
 Type of resolvable (default: patch)
 .TP
 .I \-y, \-\-no-confirm
@@ -167,7 +167,7 @@ List patches. Lists all patches that are available, including
 installed and not applicable ones.
 
 .TP
-.B patch-info [name] ...
+.B patch-info <name> ...
 Displays full info for the specified patches.
 
 .LP 
@@ -186,7 +186,7 @@ and option names (service-add, --catalog) as rug. In libzypp, an
 installation source is a repository is a service is a catalog.
 
 .TP
-.B service-add (sa) <URI> [alias]
+.B service-add (sa) <URI> <alias>
 Add a new service (installation source).
 .TP
 \fI\-r, -\-repo\fR <FILE.repo>
@@ -202,7 +202,7 @@ Add the service as disabled.
 Do not automatically refresh the metadata.
 
 .TP
-.B service-delete (sd) <URI|alias|number>
+.B service-delete (sd) <alias>
 Delete a service (installation source).
 
 .TP
@@ -214,7 +214,7 @@ Following data are printed for each source found: Enabled (whether the source is
 rug compatibility mode: if \fI-r\fR global option is set, zypper doesn't include 'Enabled' and 'Refresh' columns and prints rug's 'Status' column with values "Active" or "Disabled" instead.
 
 .TP
-.B service-rename (sr) <URI|alias|number> <new-alias>
+.B service-rename (sr) <alias> <new-alias>
 Rename a service (installation source).
 
 .TP
