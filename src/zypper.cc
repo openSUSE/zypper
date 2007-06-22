@@ -462,7 +462,7 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
       "This command has no additional options.\n"
       );
   }
-  else if (command == ZypperCommand::NONE) {//command_str == "info" || command_str == "if") {
+  else if (command == ZypperCommand::INFO) {
     static struct option info_options[] = {
       {"help", no_argument, 0, 'h'},
       {0, 0, 0, 0}
@@ -476,7 +476,7 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
       "This command has no additional options.\n"
       );
   }
-  else if (command == ZypperCommand::NONE) {//command_str == "patch-info") {
+  else if (command == ZypperCommand::RUG_PATCH_INFO) {
     static struct option patch_info_options[] = {
       {"help", no_argument, 0, 'h'},
       {0, 0, 0, 0}
@@ -933,7 +933,8 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
 
   // -----------------------------( info )------------------------------------
 
-  else if (command == ZypperCommand::NONE) {//command_str == "info" || command_str == "if" || command_str == "patch-info") {
+  else if (command == ZypperCommand::INFO ||
+           command == ZypperCommand::RUG_PATCH_INFO) {
     if (ghelp || arguments.size() == 0) {
       cerr << specific_help;
       return !ghelp;
