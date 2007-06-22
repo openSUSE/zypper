@@ -12,6 +12,7 @@ struct ZypperCommand
 {
   static const ZypperCommand ADD_REPO;
   static const ZypperCommand REMOVE_REPO;
+  static const ZypperCommand RENAME_REPO;
   static const ZypperCommand LIST_REPOS;
   static const ZypperCommand REFRESH;
 
@@ -42,6 +43,7 @@ struct ZypperCommand
   {
     ADD_REPO_e,
     REMOVE_REPO_e,
+    RENAME_REPO_e,
     LIST_REPOS_e,
     REFRESH_e,
 

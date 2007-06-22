@@ -341,6 +341,8 @@ ostream& operator << (ostream& s, const vector<T>& v) {
   return s;
 }
 
+// ----------------------------------------------------------------------------
+
 template <typename Target, typename Source>
 void safe_lexical_cast (Source s, Target &tr) {
   try {
@@ -349,6 +351,8 @@ void safe_lexical_cast (Source s, Target &tr) {
   catch (boost::bad_lexical_cast &) {
   }
 }
+
+// ----------------------------------------------------------------------------
 
 static
 bool looks_like_url (const string& s) {
@@ -368,6 +372,8 @@ bool looks_like_url (const string& s) {
   return false;
 }
 
+// ----------------------------------------------------------------------------
+
 void remove_repo( const std::string &alias )
 {
   RepoManager manager;
@@ -376,81 +382,29 @@ void remove_repo( const std::string &alias )
   manager.removeRepository(info);
 }
 
-//! remove a source, identified in any way: alias, url, id
-// may throw:
-/*
-void remove_source( const std::string& anystring )
+// ----------------------------------------------------------------------------
+
+void rename_repo(const std::string & alias, const std::string & newalias)
 {
-  cerr_vv << "Constructing SourceManager" << endl;
-  SourceManager_Ptr manager = SourceManager::sourceManager();
-  cerr_vv << "Restoring SourceManager" << endl;
-  try {
-    manager->restore (gSettings.root_dir, true /*use_cache*//*);
-    }
-  catch (const Exception & ex) {
-    // so what if sources cannot be restored
-    // we want to delete anyway
-    ZYPP_CAUGHT (ex);
-    cerr << ex.asUserString () << endl
-	 << _("Continuing anyway") << endl;
+  RepoManager manager;
+  
+  RepoInfo repo(manager.getRepositoryInfo(alias));
+  repo.setAlias(newalias);
+  
+  try
+  {
+    manager.modifyRepository(alias, repo);
+
+    cout << format(_("Repository %s renamed to %s")) % alias % repo.alias() << endl;
   }
-
-  SourceManager::SourceId sid = 0;
-  safe_lexical_cast (anystring, sid);
-  if (sid > 0) {
-    cerr_v << _("removing source ") << sid << endl;
-    try {
-      manager->findSource (sid);
-    }
-    catch (const Exception & ex) {
-      ZYPP_CAUGHT (ex);
-      // boost::format: %s is fine regardless of the actual type :-)
-      cerr << format (_("Source %s not found.")) % sid << endl;
-    }
-    manager->removeSource (sid);
+  catch (const Exception & ex)
+  {
+    cerr << _("Error while modifying the repository:") << endl;
+    cerr << ex.asUserString();
+    cerr << format(_("Leaving repository %s unchanged.")) % alias << endl;
   }
-  else {
-    bool is_url = false;
-    if (looks_like_url (anystring)) {
-	is_url = true;
-	cerr_vv << "Looks like a URL" << endl;
-
-	Url url;
-	try {
-	  url = Url (anystring);
-	}
-	catch ( const Exception & excpt_r ) {
-	  ZYPP_CAUGHT( excpt_r );
-	  cerr << _("URL is invalid: ") << excpt_r.asUserString() << endl;
-	}
-	if (url.isValid ()) {
-	  try {
-	    manager->findSourceByUrl (url);
-	  }
-	  catch (const Exception & ex) {
-	    ZYPP_CAUGHT (ex);
-	    cerr << format (_("Source %s not found.")) % url.asString() << endl;
-	  }
-	  manager->removeSourceByUrl (url);
-	}
-    }
-
-    if (!is_url) {
-      try {
-	manager->findSource (anystring);
-      }
-      catch (const Exception & ex) {
-	ZYPP_CAUGHT (ex);
-	cerr << format (_("Source %s not found.")) % anystring << endl;
-      }
-      manager->removeSource (anystring); 	// by alias
-    }
-  }
-
-  cerr_vv << "Storing source data" << endl;
-  manager->store( gSettings.root_dir, true /*metadata_cache*//* );
 }
-*/
+
 /*
 //! rename a source, identified in any way: alias, url, id
 void rename_source( const std::string& anystring, const std::string& newalias )

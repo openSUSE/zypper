@@ -62,11 +62,18 @@ void warn_if_zmd();
 //void cond_init_system_sources(); // OLD
 void init_system_sources(); // OLD
 
-void remove_source( const std::string& anystring ); // OLD
+/**
+ * Delte repository specified by \a alias.
+ */
 void remove_repo( const std::string &alias );
 
-void rename_source( const std::string& anystring, const std::string& newalias ); // OLD
-void include_source_by_url( const zypp::Url &url ); // OLD
+
+/**
+ * Rename repository specified by \a alias to \a newalias.
+ */
+void rename_repo(const std::string & alias, const std::string & newalias);
+
+//void include_source_by_url( const zypp::Url &url ); // OLD
 
 #endif
 // Local Variables:

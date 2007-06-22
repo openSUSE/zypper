@@ -683,19 +683,16 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
   }
 
   // --------------------------( service rename )-----------------------------
-/*
-  else if (command == ZypperCommand::NONE) //command_str == "service-rename" || command_str == "sr")
-  {
-    if (ghelp || arguments.size() < 2) {
-      cerr << specific_help;
-      return !ghelp;
-    }
 
-    cond_init_target ();
+  else if (command == ZypperCommand::RENAME_REPO)
+  {
+    if (ghelp || arguments.size() < 2) { cerr << specific_help; return !ghelp; }
+
+//    cond_init_target ();
     warn_if_zmd ();
     try {
       // also stores it
-      rename_source (arguments[0], arguments[1]);
+      rename_repo(arguments[0], arguments[1]);
     }
     catch ( const Exception & excpt_r )
     {
@@ -705,7 +702,7 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
 
     return ZYPPER_EXIT_OK;
   }
-  */
+
   // --------------------------( refresh )------------------------------------
 
   else if (command == ZypperCommand::REFRESH)
