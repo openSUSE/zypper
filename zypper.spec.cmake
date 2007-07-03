@@ -11,7 +11,7 @@
 # norootforbuild
 
 Name:           @PACKAGE@
-BuildRequires:  libzypp-devel
+BuildRequires:  libzypp-devel >= 3.10.0
 BuildRequires:  gcc-c++ pkg-config boost-devel gettext-devel
 BuildRequires:  readline-devel
 Requires:	procps
@@ -26,11 +26,8 @@ Release:        0
 Source:         @PACKAGE@-@VERSION@.tar.bz2
 Prefix:         /usr
 Url:            http://en.opensuse.org/Zypper
-# zypper is not a fully featured replacement yet
-#Provides:       y2pmsh
-#Obsoletes:      y2pmsh
-#Provides:       rug
-#Obsoletes:      rug
+Provides:       y2pmsh rug
+Obsoletes:      y2pmsh rug
 
 %description
 Command line package management tool using libzypp.
@@ -57,37 +54,34 @@ cmake -DCMAKE_INSTALL_PREFIX=%{prefix} \
 
 #gettextize -f
 make %{?jobs:-j %jobs}
-
+make -C po %{?jobs:-j %jobs} translations
 
 %install
 cd build
 make install DESTDIR=$RPM_BUILD_ROOT
+make -C po install DESTDIR=$RPM_BUILD_ROOT
 
 # Create filelist with translatins
-#%{find_lang} zypper
-rm -f ${RPM_BUILD_ROOT}%{_sbindir}/zypp-checkpatches-wrapper
+cd ..
+%{find_lang} zypper
+#rm -f ${RPM_BUILD_ROOT}%{_sbindir}/zypp-checkpatches-wrapper
 %{__install} -d -m755 %buildroot%_var/log
 touch %buildroot%_var/log/zypper.log
 
 %post
 %run_ldconfig
-%if %suse_version > 1010
 %run_permissions
-%endif
 
-%if %suse_version > 1010
 %verifyscript
 %verify_permissions -e %{_sbindir}/zypp-checkpatches-wrapper
-%endif
 
 %postun
 %run_ldconfig
 
 %clean
-rpm -rf $RPM_BUILD_ROOT
 
-#%files -f zypper.lang
-%files
+
+%files -f zypper.lang
 %defattr(-,root,root)
 %{_sysconfdir}/logrotate.d/zypper.lr
 %{_bindir}/zypper

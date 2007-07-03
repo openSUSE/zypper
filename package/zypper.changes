@@ -1,7 +1,27 @@
 -------------------------------------------------------------------
+Tue Jul  3 13:34:09 CEST 2007 - jkupec@suse.cz
+
+- adapted to refactored libzypp repository management
+- dropped some 10.1 ifdefs
+- fixed consistency of <required> and [optional] arguments
+- improved update command description
+- changed sa, sr descriptions + some other minor changes
+- made help texts consistent
+- fixed spec file
+- r5873
+- 0.8.0
+
+-------------------------------------------------------------------
 Tue Jun 19 12:53:23 CEST 2007 - mvidner@suse.cz
 
 - Fixed an endless loop in Abort/Retry/Ignore (#269263).
+
+-------------------------------------------------------------------
+Tue Jun 16 15:33:33 CEST 2007 - jkupec@suse.cz
+
+- switched building from autotools to cmake
+- replaced zmart occurances with zypper
+- r5711
 
 -------------------------------------------------------------------
 Mon Jun  4 22:32:52 CEST 2007 - jkupec@suse.cz
