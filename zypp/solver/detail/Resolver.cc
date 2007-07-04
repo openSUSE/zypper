@@ -191,10 +191,10 @@ collector_cb_needed (ResolverInfo_Ptr info, void *data)
 	    
 	    for (PoolItemList::const_iterator iter = itemList.begin();
 		 iter != itemList.end(); iter++) {
-		ItemCapKind capKind( *iter, needed_by->capability(), needed_by->capKind() );
+		ItemCapKind capKind( *iter, needed_by->capability(), needed_by->capKind(), needed_by->initialInstallation() );
 		collector->isInstalledBy.insert (make_pair( item, capKind));
 	
-		ItemCapKind capKindReverse( item, needed_by->capability(), needed_by->capKind() );
+		ItemCapKind capKindReverse( item, needed_by->capability(), needed_by->capKind(), needed_by->initialInstallation() );
 		collector->installs.insert (make_pair( *iter, capKindReverse));
 	    }
 	    

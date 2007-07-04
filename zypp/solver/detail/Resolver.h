@@ -66,11 +66,14 @@ namespace zypp
 	Capability cap; //Capability which has triggerd this selection
 	Dep capKind; //Kind of that capability
 	PoolItem_Ref item; //Item which has triggered this selection
+	bool initialInstallation; //This item has triggered the installation
+	                          //Not already fullfilled requierement only.
 
-	    ItemCapKind( PoolItem i, Capability c, Dep k)
+	    ItemCapKind( PoolItem i, Capability c, Dep k, bool initial)
 		: cap( c )
 		, capKind( k )
 		, item( i )
+		, initialInstallation( initial )
 	    { }
     };
     typedef std::multimap<PoolItem_Ref,ItemCapKind> ItemCapKindMap;

@@ -384,6 +384,7 @@ QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 	info = new ResolverInfoNeededBy (_item);
 	info->addRelatedPoolItem (_needed_by);
 	info->setCapability (_dep_satisfied_by_this_install, _soft?Dep::RECOMMENDS:Dep::REQUIRES);
+	info->setInitialInstallation (true);
 	context->addInfo (info);
     }
 

@@ -46,6 +46,7 @@ class ResolverInfoNeededBy : public ResolverInfoContainer {
   private:
     Capability _cap;
     Dep _capKind;
+    bool _initialInstallation; 
 
   public:
 
@@ -65,8 +66,10 @@ class ResolverInfoNeededBy : public ResolverInfoContainer {
     virtual std::string message (void) const;
     virtual ResolverInfo_Ptr copy (void) const;
     void setCapability (const Capability & cap, const Dep & capKind) { _cap = cap; _capKind = capKind; }
+    void setInitialInstallation (const bool initial) { _initialInstallation = initial; }
     Dep capKind() const {return _capKind;}
     Capability capability() const {return _cap;};
+    bool initialInstallation() const {return _initialInstallation;};
 };
 
  ///////////////////////////////////////////////////////////////////

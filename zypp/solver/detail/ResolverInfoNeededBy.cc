@@ -153,6 +153,7 @@ ResolverInfoNeededBy::ResolverInfoNeededBy (PoolItem_Ref item)
     : ResolverInfoContainer (RESOLVER_INFO_TYPE_NEEDED_BY, item, RESOLVER_INFO_PRIORITY_USER)
     , _cap(Capability::noCap)
     , _capKind(Dep::REQUIRES)
+    , _initialInstallation(false)
 {
 }
 
