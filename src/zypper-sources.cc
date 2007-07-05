@@ -44,7 +44,7 @@ static void do_init_repos()
     if (do_refresh)
     {
       //! \todo progress reporting
-      cout << "Refreshing " << repo.alias() << endl;
+      cout_n << "Refreshing " << repo.alias() << endl;
       manager.refreshMetadata(repo);
     }
   }
@@ -115,7 +115,13 @@ static void print_repo_list( const std::list<zypp::RepoInfo> &repos )
     
     tbl << tr;
   }
-  cout << tbl;
+
+  if (tbl.empty())
+    cout_n << _("No repositories defined."
+        " Use 'zypper addrepo' command to add one or more repositories.")
+         << endl;
+  else
+    cout << tbl;
 }
 
 // ----------------------------------------------------------------------------
@@ -131,8 +137,9 @@ void list_repos()
   }
   catch ( const Exception &e )
   {
-    cerr << _("Error reading system sources: ") << endl
-         << e.msg() << endl;
+    ZYPP_CAUGHT(e);
+    cerr << _("Error reading system sources:") << endl
+         << e.asUserString() << endl;
     exit(ZYPPER_EXIT_ERR_ZYPP);
   }
 
@@ -161,26 +168,29 @@ void refresh_repos()
 
     try
     {
-      cout << _("Refreshing ") << it->alias() << endl;
-      //<< "URI: " << it->url() << endl; 
+      cout_n << _("Refreshing ") << it->alias() << endl;
+      manager.refreshMetadata(repo); //! \todo progress reporting
 
-      manager.refreshMetadata(repo);
       cout_v << _("Creating repository cache...") << endl;
       manager.buildCache(repo);
 
-      cout << _("DONE") << endl << endl;
+      cout_n << _("DONE") << endl << endl;
     }
     catch ( const Exception &e )
     {
-      cerr << format(_("Error reading repository '%s':")) % repo.alias() << endl
-           << e.msg() << endl;
+      cerr << format(_("Error reading repository '%s':")) % repo.alias()
+        << endl << e.msg() << endl;
       cerr << format(_("Skipping repository '%s' because of the above error."))
-              % repo.alias()
-           << endl; 
+        % repo.alias() << endl;
+      // log untranslated message
+      ERR << format("Error reading repository '%s':") % repo.alias()
+        << endl << e.msg() << endl;
+      ERR << format("Skipping repository '%s' because of the above error.")
+        % repo.alias() << endl;
     }
   }
 
-  cout << _("All system sources have been refreshed.") << endl;
+  cout_n << _("All system sources have been refreshed.") << endl;
 }
 
 // ----------------------------------------------------------------------------
@@ -211,6 +221,7 @@ int add_repo(const RepoInfo & repo)
   RepoManager manager;
 
   cout_v << format(_("Adding repository '%s'.")) % repo.alias() << endl;
+  MIL << "Going to add repository: " << repo << endl;
 
   try
   {
@@ -218,32 +229,35 @@ int add_repo(const RepoInfo & repo)
   }
   catch (const MediaException & e)
   {
-    cerr << "Problem transfering repository data for reading." << endl;
+    cerr << _("Problem transfering repository data from specified URL.") << endl;
+    ERR << "Problem transfering repository data from specified URL." << endl;
     return ZYPPER_EXIT_ERR_ZYPP;
   }
   catch (const ParseException & e)
   {
-    cerr << "Problem while reading repository data." << endl;
+    cerr << _("Problem parsing repository data.") << endl;
+    ERR << "Problem parsing repository data." << endl;
     return ZYPPER_EXIT_ERR_ZYPP;
   }
   catch (const RepoAlreadyExistsException & e)
   {
-    string message = _(
-        "A repository named '%s'."
-        " already exists.");
-    cerr << format(message) % repo.alias() << endl;
+    cerr << format("Repository named '%s' already exists.") % repo.alias() << endl;
+    ERR << "Repository named '%s' already exists." << endl;
     return ZYPPER_EXIT_ERR_ZYPP;
   }
   catch (const Exception & e)
   {
-    cerr << e.msg() << endl;
+    ZYPP_CAUGHT(e);
+    cerr << e.asUserString() << endl;
     return ZYPPER_EXIT_ERR_BUG;
   }
 
-  cout << format(_("Repository '%s' successfully added:")) % repo.alias() << endl;
-  cout << ( repo.enabled() ? "[x]" : "[ ]" );
-  cout << ( repo.autorefresh() ? "* " : "  " );
-  cout << repo.alias() << " (" << *repo.baseUrlsBegin() << ")" << endl;
+  cout_n << format(_("Repository '%s' successfully added:")) % repo.alias() << endl;
+  cout_n << ( repo.enabled() ? "[x]" : "[ ]" );
+  cout_n << ( repo.autorefresh() ? "* " : "  " );
+  cout_n << repo.alias() << " (" << *repo.baseUrlsBegin() << ")" << endl;
+
+  MIL << "Repository successfully added: " << repo << endl;
 
   return ZYPPER_EXIT_OK;
 }
@@ -276,15 +290,22 @@ int add_repo_by_url( const zypp::Url & url, const string & alias,
         cerr << format(_(
             "Warning! Overriding detected repository type '%s' with "
             "manually specified '%s'.")) % repotype_probed % repotype
-          << endl;
+            << endl;
+        WAR << format(
+            "Overriding detected repository type '%s' with "
+            "manually specified '%s'.") % repotype_probed % repotype
+            << endl;
       }
     }
     catch (RepoUnknownTypeException & e)
     {
       string message = _(
-        "Warning: Unknown repository type '%s'."
+        "Unknown repository type '%s'."
         " Using detected type '%s' instead.");
       cerr << format(message) % type % repotype_probed << endl;
+
+      WAR << format("Unknown repository type '%s'."
+        " Using detected type '%s' instead.") % type % repotype_probed << endl;
 
       repotype = repotype_probed;
     }
@@ -395,13 +416,16 @@ void rename_repo(const std::string & alias, const std::string & newalias)
   {
     manager.modifyRepository(alias, repo);
 
-    cout << format(_("Repository %s renamed to %s")) % alias % repo.alias() << endl;
+    cout_n << format(_("Repository %s renamed to %s")) % alias % repo.alias() << endl;
+    MIL << format(_("Repository %s renamed to %s")) % alias % repo.alias() << endl;
   }
   catch (const Exception & ex)
   {
     cerr << _("Error while modifying the repository:") << endl;
     cerr << ex.asUserString();
     cerr << format(_("Leaving repository %s unchanged.")) % alias << endl;
+
+    ERR << "Error while modifying the repository:" << ex.asUserString() << endl;
   }
 }
 
@@ -480,9 +504,11 @@ void warn_if_zmd()
 {
   if (system ("pgrep -lx zmd") == 0)
   { // list name, exact match
-    cerr << _("ZENworks Management Daemon is running.\n"
+    cout_n << _("ZENworks Management Daemon is running.\n"
               "WARNING: this command will not synchronize changes.\n"
               "Use rug or yast2 for that.\n");
+    USR << ("ZMD is running. Tell the user this will get"
+        " ZMD and libzypp out of sync.") << endl;
   }
 }
 

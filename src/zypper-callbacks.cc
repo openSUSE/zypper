@@ -20,9 +20,11 @@ void display_done () {
 //template<typename Action>
 //Action ...
 int read_action_ari (int default_action) {
-  cout << _("(A)bort, (R)etry, (I)gnore?") << " "; // don't translate letters in parentheses!!
+  if (gSettings.verbosity >= 0 || !gSettings.non_interactive)
+    // TranslatorExplanation don't translate letters in parentheses!!
+    cout << _("(A)bort, (R)etry, (I)gnore?") << " "; 
 
-  // abort if no default has been specified
+  // choose abort if no default has been specified
   if (default_action == -1) {
     default_action = 0;
   }
@@ -37,7 +39,7 @@ int read_action_ari (int default_action) {
 	  default: c = '?';
       }
       // print the answer for conveniecne
-      cout << c << endl;
+      cout_n << c << endl;
 
       return default_action;
   }
@@ -53,7 +55,7 @@ int read_action_ari (int default_action) {
       return 1;
     else if (c == 'i')
       return 2;
-    cout << "?" << endl;
+    cerr << _("Invalid answer. Choose letter a, r, or i.") << endl;
   }
 
   return default_action;

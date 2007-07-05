@@ -13,6 +13,8 @@
 #include <iostream>
 #include <string>
 
+#include <boost/format.hpp>
+
 #include <zypp/base/Logger.h>
 #include <zypp/ZYppCallbacks.h>
 #include <zypp/Package.h>
@@ -33,13 +35,12 @@ struct MessageResolvableReportReceiver : public zypp::callback::ReceiveReport<zy
 {
   virtual void show( zypp::Message::constPtr message )
   {
-    cerr_v << message << endl; // [message]important-msg-1.0-1
-    std::cerr << message->text() << endl;
-    // TODO in interactive mode, wait for ENTER?
+    cout_v << message << endl; // [message]important-msg-1.0-1
+    cout_n << message->text() << endl;
+    //! \todo in interactive mode, wait for ENTER?
   }
 };
 
-#ifndef LIBZYPP_1xx
 ostream& operator<< (ostream& stm, zypp::target::ScriptResolvableReport::Task task) {
   return stm << (task==zypp::target::ScriptResolvableReport::DO? "DO": "UNDO");
 }
@@ -51,8 +52,9 @@ struct ScriptResolvableReportReceiver : public zypp::callback::ReceiveReport<zyp
   virtual void start( const zypp::Resolvable::constPtr & script_r,
 		      const zypp::Pathname & path_r,
 		      Task task) {
-    cerr << "Running: " << script_r
-	 << " (" << task << ", " << path_r << ")" << endl;
+    // TranslatorExplanation speaking of a script
+    cout_n << boost::format(_("Running: %s  (%s, %s)"))
+        % script_r % task % path_r << endl;
   }
   /** Progress provides the script output. If the script is quiet ,
    * from time to time still-alive pings are sent to the ui. (Notify=PING)
@@ -62,10 +64,10 @@ struct ScriptResolvableReportReceiver : public zypp::callback::ReceiveReport<zyp
   virtual bool progress( Notify kind, const std::string &output ) {
     if (kind == PING) {
       static AliveCursor cursor;
-      cerr_v << '\r' << cursor++ << flush;
+      cout_v << '\r' << cursor++ << flush;
     }
     else {
-      cerr << output << flush;
+      cout_n << output << flush;
     }
     // hmm, how to signal abort in zypper? catch sigint? (document it)
     return true;
@@ -82,7 +84,6 @@ struct ScriptResolvableReportReceiver : public zypp::callback::ReceiveReport<zyp
   }
 
 };
-#endif
 
 ///////////////////////////////////////////////////////////////////
 struct ScanRpmDbReceive : public zypp::callback::ReceiveReport<zypp::target::rpm::ScanDBReport>
@@ -129,7 +130,8 @@ struct RemoveResolvableReportReceiver : public zypp::callback::ReceiveReport<zyp
 {
   virtual void start( zypp::Resolvable::constPtr resolvable )
   {
-    std::cerr << "Removing: " << *resolvable << std::endl;
+    cout << boost::format(_("Removing: %s-%s"))
+        % resolvable->name() % resolvable->edition() << endl;
   }
 
   virtual bool progress(int value, zypp::Resolvable::constPtr resolvable)

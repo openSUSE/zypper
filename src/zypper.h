@@ -36,6 +36,9 @@
 #define ZYPPER_EXIT_INF_REBOOT_NEEDED      102 // reboot needed after install/upgrade 
 #define ZYPPER_EXIT_INF_RESTART_NEEDED     103 // restart of package manager itself needed
 
+/**
+ * Structure for holding various start-up setting.
+ */
 struct Settings
 {
   Settings()
@@ -51,6 +54,17 @@ struct Settings
 
   std::list<zypp::Url> additional_sources;
   std::string previous_token;
+
+  /**
+   * Level of the amount of output.
+   *
+   * <ul> 
+   * <li>-1 silent</li>
+   * <li> 0 normal (default)</li>
+   * <li> 1 verbose</li>
+   * <li> 2 debug</li>
+   * </ul>
+   */
   int verbose;
   int previous_code;
   std::string command;
@@ -88,11 +102,33 @@ extern RuntimeData gData;
 extern Settings gSettings;
 extern std::ostream no_stream;
 
-#define COND_STREAM(STREAM,LEVEL) ((gSettings.verbose >= LEVEL)? STREAM: no_stream)
-#define cerr_v COND_STREAM(cerr,1)
-#define cout_v COND_STREAM(cout,1)
-#define cerr_vv COND_STREAM(cerr,2)
-#define cout_vv COND_STREAM(cout,2)
+/**
+ * Macro to filter output above the current verbosity level.
+ *
+ * \see Output Macros
+ * \see Settings::verbose
+ */
+#define COND_STREAM(STREAM,LEVEL) ((gSettings.verbose >= LEVEL) ? STREAM : no_stream)
+
+/** \name Output Macros
+ * Alway use these macros to produce output so that the verbosity options
+ * like -v or --silent are respected. Use standard cout and cerr only in
+ * cases where it is desirable to ignore them (e.g. help texts (when -h is
+ * used) or brief error messages must always be displayed, even if --silent
+ * has been specified).
+ */
+//!@{
+//! normal output
+#define cout_n COND_STREAM(cout, 0)
+//! verbose output
+#define cout_v COND_STREAM(cout, 1)
+//! verbose error output
+#define cerr_v COND_STREAM(cerr, 1)
+//! debug info output
+#define cout_vv COND_STREAM(cout, 2)
+//! debug error output (details)
+#define cerr_vv COND_STREAM(cerr, 2)
+//!@}
 
 // undefine _ macro from libzypp
 #ifdef _

@@ -1,8 +1,16 @@
-TODO
+0.9.0
+
+- implement all rug commands (where it has sense)
+- clean up and improve output, add --silent mode, sort normal, verbose
+  and debug output.
+- refresh - show progress on default output, verbose progress with -v
+
+
+NOT SCHEDULED
+-------------
 
 General
 
-- implement all rug commands, if only to say: Not implemented (yet)
 - script progress: does the output contain newline??
 - installation and deletion notifications
 - --dry-run (use ZYppCommitPolicy.h)
@@ -15,7 +23,7 @@ Patches
  (svn up ncurses)
 - reboot-needed: ?
 - cron updater:
--- wrapper script for restart-packager
+- wrapper script for restart-packager
 - zypper patch-search (for rug compatibility)
 
 Packages

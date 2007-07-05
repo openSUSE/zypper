@@ -20,6 +20,7 @@
 
 #include <boost/logic/tribool.hpp>
 
+#include <zypp/base/Logger.h>
 #include <zypp/zypp_detail/ZYppReadOnlyHack.h>
 
 #include "zypper.h"
@@ -56,6 +57,7 @@ DigestCallbacks digest_callbacks;
 static struct option global_options[] = {
   {"help",	no_argument, 0, 'h'},
   {"verbose",	no_argument, 0, 'v'},
+  {"silent",	no_argument, 0, 'S'},
   {"version",	no_argument, 0, 'V'},
   {"terse",	no_argument, 0, 't'},
   {"table-style", required_argument, 0, 's'},
@@ -136,6 +138,7 @@ ZypperCommand process_globals(int argc, char **argv)
   string help_global_options = _("  Options:\n"
     "\t--help, -h\t\tHelp\n"
     "\t--version, -V\t\tOutput the version number\n"
+    "\t--silent, -S\t\tSuppress normal output\n"
     "\t--verbose, -v\t\tIncrease verbosity\n"
     "\t--terse, -t\t\tTerse output for machine consumption\n"
     "\t--table-style, -s\tTable style (integer)\n"
@@ -143,15 +146,21 @@ ZypperCommand process_globals(int argc, char **argv)
     "\t--non-interactive\tDon't ask anything, use default answers automatically. (under development)\n"
     "\t--root, -R <dir>\tOperate on a different root directory\n");
     ;
+  
+  if (gopts.count("silent")) {
+    gSettings.verbose = -1;
+    DBG << "Verbosity " << gSettings.verbose << endl;
+  }
 
   if (gopts.count("verbose")) {
     gSettings.verbose += gopts["verbose"].size();
-    cerr << _("Verbosity ") << gSettings.verbose << endl;
+    cout << _("Verbosity ") << gSettings.verbose << endl;
+    DBG << _("Verbosity ") << gSettings.verbose << endl;
   }
 
   if (gopts.count("non-interactive")) {
   	gSettings.non_interactive = true;
-  	cout << "Entering non-interactive mode.\n"
+  	cout_n << "Entering non-interactive mode.\n"
   		"WARNING: global non-interactive mode is still under development, use "
   		"with caution. This mode has been implemented and tested for install, "
   		"remove, and update commands so far. In case of problems related to "
@@ -175,10 +184,10 @@ ZypperCommand process_globals(int argc, char **argv)
 
   // testing option
   if (gopts.count("opt")) {
-    cerr << "Opt arg: ";
+    cout << "Opt arg: ";
     std::copy (gopts["opt"].begin(), gopts["opt"].end(),
-	       ostream_iterator<string> (cerr, ", "));
-    cerr << endl;
+	       ostream_iterator<string> (cout, ", "));
+    cout << endl;
   }
 
   // get command
@@ -201,16 +210,16 @@ ZypperCommand process_globals(int argc, char **argv)
   // exception from command parsing
   catch (Exception & e)
   {
-    cerr << e.msg() <<  endl;
+    cerr << e.msg() << endl;
     command = ZypperCommand::NONE;
   }
 
   if (command == ZypperCommand::NONE)
   {
     if (ghelp)
-      cerr << help_global_options << endl << help_commands;
+      cout << help_global_options << endl << help_commands;
     else if (gopts.count("version"))
-      cerr << PACKAGE << endl;
+      cout << PACKAGE << endl;
     else
       cerr << _("Try -h for help") << endl;
   }
@@ -515,19 +524,20 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
 
   vector<string> arguments;
   if (optind < argc) {
-    cerr_v << _("Non-option program arguments: ");
+    cout_v << _("Non-option program arguments: ");
     while (optind < argc) {
       string argument = argv[optind++];
-      cerr_v << argument << ' ';
+      cout_v << argument << ' ';
       arguments.push_back (argument);
     }
-    cerr_v << endl;
+    cout_v << endl;
   }
 
   // === process options ===
 
   if (gopts.count("terse")) {
-      cerr_v << _("Ignoring --terse (provided only for rug compatibility)") << endl;
+      cout_v << _("Ignoring --terse (provided only for rug compatibility)") << endl;
+      WAR << "Ignoring --terse (provided only for rug compatibility)" << endl;
   }
 
   if (gopts.count("disable-system-sources"))
@@ -543,7 +553,7 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
   if (gopts.count("disable-system-resolvables"))
   {
     MIL << "System resolvables disabled" << endl;
-    cerr << _("Ignoring installed resolvables...") << endl;
+    cout_v << _("Ignoring installed resolvables...") << endl;
     gSettings.disable_system_resolvables = true;
   }
 
@@ -583,7 +593,7 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
   {
     if (ghelp) { cout << specific_help << endl; return !ghelp; }
 
-    cout << "   \\\\\\\\\\\n  \\\\\\\\\\\\\\__o\n__\\\\\\\\\\\\\\'/_" << endl;
+    cout_n << "   \\\\\\\\\\\n  \\\\\\\\\\\\\\__o\n__\\\\\\\\\\\\\\'/_" << endl;
     return ZYPPER_EXIT_OK;
   }
 
@@ -628,12 +638,20 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
     string type = copts.count("type") ? copts["type"].front() : "";
 
     // display help message if insufficient info was given
-    if (ghelp || arguments.size() < 1)
+    if (ghelp || arguments.size() < 2)
     {
-      //! todo display_help()
-      cerr << specific_help;
-      if (ghelp) return ZYPPER_EXIT_OK;
-      return ZYPPER_EXIT_ERR_INVALID_ARGS;
+      if (ghelp)
+      {
+        cout << specific_help;
+        return ZYPPER_EXIT_OK;
+      }
+      else
+      {
+        cerr << _("Too few arguments. At least URL and alias are required.") << endl;
+        ERR << "Too few arguments. At least URL and alias are required." << endl;
+        cout_n << specific_help;
+        return ZYPPER_EXIT_ERR_INVALID_ARGS;
+      }
     }
 
     Url url = make_url (arguments[0]);
@@ -662,9 +680,20 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
 
   else if (command == ZypperCommand::REMOVE_REPO)
   {
-    if (ghelp || arguments.size() < 1) {
-      cerr << specific_help;
-      return !ghelp;
+    if (ghelp || arguments.size() < 1)
+    {
+      if (ghelp)
+      {
+        cout << specific_help;
+        return ZYPPER_EXIT_OK;
+      }
+      else
+      {
+        cerr << _("Required argument missing.") << endl;
+        ERR << "Required argument missing." << endl;
+        cout_n << specific_help;
+        return ZYPPER_EXIT_ERR_INVALID_ARGS;
+      }
     }
 
     warn_if_zmd ();
@@ -686,7 +715,21 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
 
   else if (command == ZypperCommand::RENAME_REPO)
   {
-    if (ghelp || arguments.size() < 2) { cerr << specific_help; return !ghelp; }
+    if (ghelp || arguments.size() < 2)
+    {
+      if (ghelp)
+      {
+        cout << specific_help;
+        return ZYPPER_EXIT_OK;
+      }
+      else
+      {
+        cerr << _("Too few arguments. At least URL and alias are required.") << endl;
+        ERR << "Too few arguments. At least URL and alias are required." << endl;
+        cout_n << specific_help;
+        return ZYPPER_EXIT_ERR_INVALID_ARGS;
+      }
+    }
 
 //    cond_init_target ();
     warn_if_zmd ();
@@ -783,7 +826,7 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
     ZyppSearchOptions options;
 
     if (ghelp) {
-      cerr << specific_help;
+      cout << specific_help;
       return !ghelp;
     }
 
@@ -820,7 +863,7 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
     search.doSearch(FillTable(t, search.installedCache()));
 
     if (t.empty())
-      cout << "No packages found." << endl;
+      cout_n << "No packages found." << endl;
     else {
       if (copts.count("sort-by-catalog")) t.sort(1);
       else t.sort(3); // sort by name
@@ -835,7 +878,7 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
   // TODO: rug summary
   else if (command == ZypperCommand::PATCH_CHECK) {
     if (ghelp) {
-      cerr << specific_help;
+      cout << specific_help;
       return !ghelp;
     }
 
@@ -862,7 +905,7 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
 
   else if (command == ZypperCommand::SHOW_PATCHES) {
     if (ghelp) {
-      cerr << specific_help;
+      cout << specific_help;
       return !ghelp;
     }
 
@@ -879,7 +922,7 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
   else if (command == ZypperCommand::LIST_UPDATES) {
     if (ghelp) {
       // FIXME catalog...
-      cerr << specific_help;
+      cout << specific_help;
       return !ghelp;
     }
 
@@ -904,7 +947,7 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
   // -----------------------------( update )----------------------------------
 
   else if (command == ZypperCommand::UPDATE) {
-    if (ghelp) { cerr << specific_help; return !ghelp; }
+    if (ghelp) { cout << specific_help; return !ghelp; }
 
     string skind = copts.count("type")?  copts["type"].front() :
       gSettings.is_rug_compatible? "package" : "patch";

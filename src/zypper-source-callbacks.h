@@ -21,6 +21,7 @@
 #include <zypp/Digest.h>
 #include <zypp/Url.h>
 
+#include "zypper.h"
 #include "zypper-callbacks.h"
 
 ///////////////////////////////////////////////////////////////////
@@ -90,8 +91,8 @@ struct DownloadResolvableReportReceiver : public zypp::callback::ReceiveReport<z
   {
       _delta = filename;
       _delta_size = downloadsize;
-      std::cerr << "Downloading delta: "
-		<< _delta << ", " << _delta_size << std::endl;
+      cout_n << "Downloading delta: "
+          << _delta << ", " << _delta_size << std::endl;
   }
   
   virtual bool progressDeltaDownload( int value )
@@ -109,7 +110,7 @@ struct DownloadResolvableReportReceiver : public zypp::callback::ReceiveReport<z
   {
     display_done ();
   }
-  
+
   // Apply delta rpm:
   // - local path of downloaded delta
   // - aplpy is not interruptable
@@ -117,24 +118,24 @@ struct DownloadResolvableReportReceiver : public zypp::callback::ReceiveReport<z
   virtual void startDeltaApply( const zypp::Pathname & filename )
   {
     _delta = filename;
-    std::cerr << "Applying delta: " << _delta << std::endl;
+    cout_n << "Applying delta: " << _delta << std::endl;
   }
-  
+
   virtual void progressDeltaApply( int value )
   {
     display_step( "Applying delta " /* + _delta.asString()*/, value );
   }
-  
+
   virtual void problemDeltaApply( const std::string & description )
   {
     std::cerr << description << std::endl;
   }
-  
+
   virtual void finishDeltaApply()
   {
     display_done ();
   }
-  
+
   // Dowmload patch rpm:
   // - path below url reported on start()
   // - expected download size (0 if unknown)
@@ -143,7 +144,7 @@ struct DownloadResolvableReportReceiver : public zypp::callback::ReceiveReport<z
   {
     _patch = filename;
     _patch_size = downloadsize;
-    std::cerr << "Downloading patch.rpm: "
+    cout_n << "Downloading patch.rpm: "
 	      << _patch << ", " << _patch_size << std::endl;
   }
   
@@ -168,16 +169,16 @@ struct DownloadResolvableReportReceiver : public zypp::callback::ReceiveReport<z
   {
     _resolvable_ptr =  resolvable_ptr;
     _url = url;
-    std::cerr << "Downloading: " << _resolvable_ptr;
+    cout_n << "Downloading: " << _resolvable_ptr;
 // grr, bad class??
 //    zypp::ResObject::constPtr ro =
 //      dynamic_pointer_cast<const zypp::ResObject::constPtr> (resolvable_ptr);
     zypp::Package::constPtr ro = zypp::asKind<zypp::Package> (resolvable_ptr);
     if (ro) {
-      std::cerr << ", " << ro->archivesize ()
+      cout_n << ", " << ro->archivesize ()
 		<< "(" << ro->size () << " unpacked)";
     }
-    std::cerr << std::endl;
+    cout_n << std::endl;
   }
    
   // return false if the download should be aborted right now

@@ -150,28 +150,32 @@ void mark_for_install( const ResObject::Kind &kind,
   // name and kind match:
 
   ProvideProcess installer (God->architecture(), "" /*version*/);
-  cerr_vv << "Iterating over [" << kind << "]" << name << endl;
+  cout_vv << "Iterating over [" << kind << "]" << name << endl;
   invokeOnEach( pool.byNameBegin( name ),
 		pool.byNameEnd( name ),
 		resfilter::ByKind( kind ),
 		zypp::functor::functorRef<bool,const zypp::PoolItem&> (installer)
 		);
-  cerr_vv << "... done" << endl;
+  cout_vv << "... done" << endl;
   if (!installer.item) {
-    cerr << kind << " '" << name << "' " << _("not found") << endl;
-    return; //error?
+    // TranslatorExplanation e.g. "package 'pornview' not found"
+    cerr << format(_("%s '%s' not found")) % kind % name << endl;
+    WAR << format("%s '%s' not found") % kind % name << endl;
+
+    return;
   }
 
   if (installer.installed_item &&
       installer.installed_item.resolvable()->edition() == installer.item.resolvable()->edition() &&
       installer.installed_item.resolvable()->arch() == installer.item.resolvable()->arch()) {
-    cout << _("skipping ") << kind.asString() << " '" << name << "' " << _("(already installed)") << endl;
+    cout_n << _("skipping ") << kind.asString() << " '" << name << "' " << _("(already installed)") << endl;
   }
   else {
     // TODO don't use setToBeInstalled for this purpose but higher level solver API
     bool result = installer.item.status().setToBeInstalled( zypp::ResStatus::USER );
     if (!result) {
       cerr << format(_("Failed to add '%s' to the list of packages to be installed.")) % name << endl;
+      ERR << "Could not set " << name << " as to-be-installed" << endl;
     }
   }
 }
@@ -186,10 +190,14 @@ struct DeleteProcess
   bool operator() ( const PoolItem& provider )
   {
     found = true;
-    cerr_vv << "Marking for deletion: " << provider << endl;
+    cout_vv << "Marking for deletion: " << provider << endl;
     bool result = provider.status().setToBeUninstalled( zypp::ResStatus::USER );
     if (!result) {
-      cerr << _("Failed") << endl;
+      cerr << format(
+          _("Failed to add '%s' to the list of packages to be removed."))
+          % provider.resolvable()->name() << endl;
+      ERR << "Could not set " << provider.resolvable()->name()
+          << " as to-be-uninstalled" << endl;
     }
     return true;		// get all of them
   }
@@ -449,9 +457,15 @@ void load_repo_resolvables()
 
 void load_target_resolvables()
 {
-  cout << _("Reading RPM database...") << endl;
+  cout_n << _("Reading RPM database...");
+  MIL << "Going to read RPM database" << endl;
+
   ResStore tgt_resolvables(God->target()->resolvables());
-  cout_v << "   " <<  format(_("%s resolvables.")) % tgt_resolvables.size() << endl;
+
+  cout_v << "   " <<  format(_("(%s resolvables)")) % tgt_resolvables.size();
+  cout_n << endl;
+  DBG << tgt_resolvables.size() << " resolvables read";
+
   God->addResolvables(tgt_resolvables, true /*installed*/);
 }
 
@@ -560,7 +574,12 @@ void show_patches()
     tbl << tr;
   }
   tbl.sort (1);			// Name
-  cout << tbl;
+
+  if (tbl.empty())
+    cout_n << _("No needed patches found.") << endl;
+  else
+    // display the result, even if --silent specified
+    cout << tbl;
 }
 
 // ----------------------------------------------------------------------------
@@ -616,7 +635,7 @@ void list_patch_updates ()
   tbl.sort (1); 		// Name
 
   if (tbl.empty())
-    cout << _("No updates found.") << endl;
+    cout_n << _("No updates found.") << endl;
   else
     cout << tbl;
 }
@@ -737,7 +756,7 @@ void list_updates( const ResObject::Kind &kind )
     tbl.sort (gSettings.is_rug_compatible? 3: 2); // Name
 
     if (tbl.empty())
-      cout << _("No updates found.") << endl;
+      cout_n << _("No updates found.") << endl;
     else
       cout << tbl;
   }
