@@ -17,6 +17,11 @@ Fri Jun 22 15:28:03 CEST 2007 - schubi@suse.de
 - Revision 5835
 
 -------------------------------------------------------------------
+Thu Jun 21 15:58:16 CEST 2007 - adrian@suse.de
+
+- fix changelog entry order
+
+-------------------------------------------------------------------
 Wed Jun 20 11:47:33 CEST 2007 - schubi@suse.de
 
 - Ignore conflicting items which are uninstallable
@@ -295,6 +300,11 @@ Mon Jan 29 13:10:37 CET 2007 - dmacvicar@suse.de
 - r4927
 
 -------------------------------------------------------------------
+Wed Jan 24 14:50:33 CET 2007 - lslezak@suse.cz
+
+- added ZYpp::getPartitions() - return the partitinoning
+
+-------------------------------------------------------------------
 Wed Jan 24 14:20:28 CET 2007 - dmacvicar@suse.de
 
 - Merged revisions 4705-4906 via svnmerge from SuSE-Linux-10_2-Branch
@@ -367,11 +377,6 @@ Wed Jan 24 14:20:28 CET 2007 - dmacvicar@suse.de
 - Conflicting items: The resolvable will be obsoleted by another. So it is useless finding an
   update candidate and evaluate additional branches.
 - r4907
-
--------------------------------------------------------------------
-Wed Jan 24 14:50:33 CET 2007 - lslezak@suse.cz
-
-- added ZYpp::getPartitions() - return the partitinoning
 
 -------------------------------------------------------------------
 Mon Dec  4 15:38:12 CET 2006 - mt@suse.de
@@ -849,6 +854,12 @@ Mon Oct 16 15:02:00 CEST 2006 - jkupec@suse.cz
 - Revision 4303
 
 -------------------------------------------------------------------
+Mon Oct 16 13:27:50 CEST 2006 - mvidner@suse.cz
+
+- Prevent the user from sending signals to zypp-checkpatches-wrapper
+  (#211286).
+
+-------------------------------------------------------------------
 Mon Oct 16 12:57:56 CEST 2006 - schubi@suse.de
 
 - Dont incomplete an uninstalled resolvable, even not when establishing.
@@ -859,12 +870,6 @@ Mon Oct 16 12:57:56 CEST 2006 - schubi@suse.de
 
 - Do not branch for packages with the same NVE but different architectures.
   Take the best architecture.
-
--------------------------------------------------------------------
-Mon Oct 16 13:27:50 CEST 2006 - mvidner@suse.cz
-
-- Prevent the user from sending signals to zypp-checkpatches-wrapper
-  (#211286).
 
 -------------------------------------------------------------------
 Fri Oct 13 16:51:43 CEST 2006 - dmacvicar@suse.de
@@ -1008,16 +1013,16 @@ Mon Sep 18 17:42:26 CEST 2006 - lslezak@suse.cz
 - use RPM_OPT_FLAGS (meissner@suse.de)
 
 -------------------------------------------------------------------
-Mon Sep 18 12:00:46 CEST 2006 - kkaempf@suse.de
-
-- reduce logging in ResolvableImpl.cc
-- rev 4157
-
--------------------------------------------------------------------
 Mon Sep 18 15:19:53 CEST 2006 - lslezak@suse.cz
 
 - SourceFactory::createFrom() - don't loose url,...
 - r4160
+
+-------------------------------------------------------------------
+Mon Sep 18 12:00:46 CEST 2006 - kkaempf@suse.de
+
+- reduce logging in ResolvableImpl.cc
+- rev 4157
 
 -------------------------------------------------------------------
 Thu Sep 14 15:59:47 CEST 2006 - schubi@suse.de
@@ -1163,8 +1168,8 @@ Tue Aug 22 22:35:30 CEST 2006 - dmacvicar@suse.de
   media test for existence functions.
 - r4019
 
--------------------------------------------------------------------
 
+-------------------------------------------------------------------
 Tue Aug 22 17:56:53 CEST 2006 - mt@suse.de
 
 - Fixed getDoesFileExist to reset the transfer range
@@ -1396,13 +1401,6 @@ Mon Jun 19 13:52:14 CEST 2006 - dmacvicar@suse.de
   (#181204)
 
 -------------------------------------------------------------------
-Mon Jun 12 15:37:10 CEST 2006 - dmacvicar@suse.de
-
-- right fix for tmpdir initialized in static constructor
-- catch around provideJustFile in providePackage
--rev 3654
-
--------------------------------------------------------------------
 Thu Jun 15 17:53:40 CEST 2006 - mvidner@suse.cz
 
 - autodocs: use find+xargs to overcome command length limit,
@@ -1453,6 +1451,13 @@ Mon Jun 12 16:27:46 CEST 2006 - kkaempf@suse.de
 
 - honor parallel installs in resolver context (#181103)
 - rev 3592
+
+-------------------------------------------------------------------
+Mon Jun 12 15:37:10 CEST 2006 - dmacvicar@suse.de
+
+- right fix for tmpdir initialized in static constructor
+- catch around provideJustFile in providePackage
+-rev 3654
 
 -------------------------------------------------------------------
 Mon Jun 12 15:15:07 CEST 2006 - dmacvicar@suse.de
@@ -1507,11 +1512,19 @@ Wed Jun  7 11:40:46 CEST 2006 - mt@suse.de
 - rev 3530
 
 -------------------------------------------------------------------
-Wed Jun  7 01:00:05 CEST 2006 - dmacvicar@suse.de
+Wed Jun  7 01:00:06 CEST 2006 - dmacvicar@suse.de
 
 - Merge fix for stalle tmpdir due to cyclic references, using a master
  TmpDir for zypp. (#178292) . There is still 1 tmpdir to fix.
 - rev 3521
+
+-------------------------------------------------------------------
+Wed Jun  7 01:00:05 CEST 2006 - dmacvicar@suse.de
+
+- Fixes unneeded file download, and add download callbacks
+  (still need yast side) #181204 and #160206
+- Fix stalle tmpdir due to cyclic references, using a master
+  TmpDir for zypp. # 178292
 
 -------------------------------------------------------------------
 Wed Jun  7 00:02:18 CEST 2006 - ma@suse.de
@@ -1524,14 +1537,6 @@ Tue Jun  6 22:24:00 CEST 2006 - ma@suse.de
 
 - fixed memory leak in XMLSourceCacheParser (#168690)
 - revision 3517
-
--------------------------------------------------------------------
-Wed Jun  7 01:00:05 CEST 2006 - dmacvicar@suse.de
-
-- Fixes unneeded file download, and add download callbacks
-  (still need yast side) #181204 and #160206
-- Fix stalle tmpdir due to cyclic references, using a master
-  TmpDir for zypp. # 178292
 
 -------------------------------------------------------------------
 Fri Jun  2 16:09:03 CEST 2006 - schubi@suse.de
@@ -2251,15 +2256,15 @@ Fri Apr 14 16:04:35 CEST 2006 - visnov@suse.cz
 - rev 3098
 
 -------------------------------------------------------------------
+Thu Apr 13 17:01:41 CEST 2006 - visnov@suse.cz
+
+- ask for file without a checksum (#165125)
+
+-------------------------------------------------------------------
 Thu Apr 13 16:59:38 CEST 2006 - kkaempf@suse.de
 
 - dont install satisfied resolvables (#165843)
 - rev 3095
-
--------------------------------------------------------------------
-Thu Apr 13 17:01:41 CEST 2006 - visnov@suse.cz
-
-- ask for file without a checksum (#165125)
 
 -------------------------------------------------------------------
 Thu Apr 13 16:00:21 CEST 2006 - kkaempf@suse.de
@@ -2572,17 +2577,17 @@ Wed Apr  5 17:47:04 CEST 2006 - dmacvicar@suse.de
 - r2952
 
 -------------------------------------------------------------------
+Wed Apr  5 16:44:08 CEST 2006 - kkaempf@suse.de
+
+- add Source::setUrl() for zmd backend helper.
+- rev 2946
+
+-------------------------------------------------------------------
 Wed Apr  5 16:44:01 CEST 2006 - dmacvicar@suse.de
 
 - implement rpm keyring / zypp tmp keyring two-way syncronization at rpm
 target init. (dmacvicar)
 - r2949
-
--------------------------------------------------------------------
-Wed Apr  5 16:44:08 CEST 2006 - kkaempf@suse.de
-
-- add Source::setUrl() for zmd backend helper.
-- rev 2946
 
 -------------------------------------------------------------------
 Wed Apr  5 16:28:42 CEST 2006 - mt@suse.de
@@ -2641,17 +2646,17 @@ Tue Apr  4 16:57:51 CEST 2006 - dmacvicar@suse.de
 - r2913
 
 -------------------------------------------------------------------
-Tue Apr  4 14:47:14 CEST 2006 - dmacvicar@suse.de
-
-- r2906
-
--------------------------------------------------------------------
 Tue Apr  4 16:54:44 CEST 2006 - kkaempf@suse.de
 
 - Keep packages with no version upgrade installed during
   distribution upgrade (#162972)
 - add 'transactReset()' helper function for UI.
 - rev 2908
+
+-------------------------------------------------------------------
+Tue Apr  4 14:47:14 CEST 2006 - dmacvicar@suse.de
+
+- r2906
 
 -------------------------------------------------------------------
 Tue Apr  4 14:43:15 CEST 2006 - ma@suse.de
@@ -2778,15 +2783,15 @@ Thu Mar 30 16:48:01 CEST 2006 - kkaempf@suse.de
 - calculate product architecture (#158198)
 
 -------------------------------------------------------------------
-Wed Mar 29 23:12:30 CEST 2006 - ma@suse.de
-
-- Auto protect installed packages from unknown vendor. (#157446)
-
--------------------------------------------------------------------
 Wed Mar 29 23:28:13 CEST 2006 - jsrain@suse.de
 
 - fixed checking checksum of YUM metadata, added sha1 vs. sha256
   detection
+
+-------------------------------------------------------------------
+Wed Mar 29 23:12:30 CEST 2006 - ma@suse.de
+
+- Auto protect installed packages from unknown vendor. (#157446)
 
 -------------------------------------------------------------------
 Wed Mar 29 09:13:51 CEST 2006 - visnov@suse.de
