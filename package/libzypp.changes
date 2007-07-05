@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Thu Jul  5 09:31:02 CEST 2007 - schubi@suse.de
+
+- function isInstalledBy/installs
+  Added an initial installation flag which shows if the item has been
+  triggered for installation, or the dependency is already satisfied.
+- Revision 5884
+- Version 3.4.0
+
+-------------------------------------------------------------------
 Fri Jun 22 15:28:03 CEST 2007 - schubi@suse.de
 
 - New API calls which provides more information about one 
