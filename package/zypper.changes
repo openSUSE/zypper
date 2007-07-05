@@ -4,7 +4,7 @@ Thu Jul  5 23:06:49 CEST 2007 - jkupec@suse.cz
 - --silent global option added. Use cout_n for normal program
   output which should be suppressed by --silent option.
 - some output clean-up (still work to do)
-- r5898
+- r5899
 
 -------------------------------------------------------------------
 Tue Jul  3 13:34:09 CEST 2007 - jkupec@suse.cz

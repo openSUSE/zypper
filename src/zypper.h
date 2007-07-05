@@ -43,7 +43,7 @@ struct Settings
 {
   Settings()
   : previous_token(RANDOM_TOKEN),
-  verbose(0),  
+  verbosity(0),  
   previous_code(-1),
   disable_system_sources(false),
   disable_system_resolvables(false),
@@ -65,7 +65,7 @@ struct Settings
    * <li> 2 debug</li>
    * </ul>
    */
-  int verbose;
+  int verbosity;
   int previous_code;
   std::string command;
   bool disable_system_sources;
@@ -106,9 +106,9 @@ extern std::ostream no_stream;
  * Macro to filter output above the current verbosity level.
  *
  * \see Output Macros
- * \see Settings::verbose
+ * \see Settings::verbosity
  */
-#define COND_STREAM(STREAM,LEVEL) ((gSettings.verbose >= LEVEL) ? STREAM : no_stream)
+#define COND_STREAM(STREAM,LEVEL) ((gSettings.verbosity >= LEVEL) ? STREAM : no_stream)
 
 /** \name Output Macros
  * Alway use these macros to produce output so that the verbosity options

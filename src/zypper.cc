@@ -148,14 +148,14 @@ ZypperCommand process_globals(int argc, char **argv)
     ;
   
   if (gopts.count("silent")) {
-    gSettings.verbose = -1;
-    DBG << "Verbosity " << gSettings.verbose << endl;
+    gSettings.verbosity = -1;
+    DBG << "Verbosity " << gSettings.verbosity << endl;
   }
 
   if (gopts.count("verbose")) {
-    gSettings.verbose += gopts["verbose"].size();
-    cout << _("Verbosity ") << gSettings.verbose << endl;
-    DBG << _("Verbosity ") << gSettings.verbose << endl;
+    gSettings.verbosity += gopts["verbose"].size();
+    cout << _("Verbosity ") << gSettings.verbosity << endl;
+    DBG << _("Verbosity ") << gSettings.verbosity << endl;
   }
 
   if (gopts.count("non-interactive")) {
