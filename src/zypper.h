@@ -59,7 +59,7 @@ struct Settings
    * Level of the amount of output.
    *
    * <ul> 
-   * <li>-1 silent</li>
+   * <li>-1 quiet</li>
    * <li> 0 normal (default)</li>
    * <li> 1 verbose</li>
    * <li> 2 debug</li>
@@ -112,9 +112,9 @@ extern std::ostream no_stream;
 
 /** \name Output Macros
  * Alway use these macros to produce output so that the verbosity options
- * like -v or --silent are respected. Use standard cout and cerr only in
+ * like -v or --quiet are respected. Use standard cout and cerr only in
  * cases where it is desirable to ignore them (e.g. help texts (when -h is
- * used) or brief error messages must always be displayed, even if --silent
+ * used) or brief error messages must always be displayed, even if --quiet
  * has been specified).
  */
 //!@{

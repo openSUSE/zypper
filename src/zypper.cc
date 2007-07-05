@@ -57,7 +57,7 @@ DigestCallbacks digest_callbacks;
 static struct option global_options[] = {
   {"help",	no_argument, 0, 'h'},
   {"verbose",	no_argument, 0, 'v'},
-  {"silent",	no_argument, 0, 'S'},
+  {"quiet",	no_argument, 0, 'q'},
   {"version",	no_argument, 0, 'V'},
   {"terse",	no_argument, 0, 't'},
   {"table-style", required_argument, 0, 's'},
@@ -136,18 +136,18 @@ ZypperCommand process_globals(int argc, char **argv)
     ghelp = true;
 
   string help_global_options = _("  Options:\n"
-    "\t--help, -h\t\tHelp\n"
-    "\t--version, -V\t\tOutput the version number\n"
-    "\t--silent, -S\t\tSuppress normal output\n"
-    "\t--verbose, -v\t\tIncrease verbosity\n"
-    "\t--terse, -t\t\tTerse output for machine consumption\n"
-    "\t--table-style, -s\tTable style (integer)\n"
-    "\t--rug-compatible, -r\tTurn on rug compatibility\n"
-    "\t--non-interactive\tDon't ask anything, use default answers automatically. (under development)\n"
-    "\t--root, -R <dir>\tOperate on a different root directory\n");
+    "\t--help, -h\t\tHelp.\n"
+    "\t--version, -V\t\tOutput the version number.\n"
+    "\t--quiet, -q\t\tSuppress normal output, print only error messages.\n"
+    "\t--verbose, -v\t\tIncrease verbosity.\n"
+    "\t--terse, -t\t\tTerse output for machine consumption.\n"
+    "\t--table-style, -s\tTable style (integer).\n"
+    "\t--rug-compatible, -r\tTurn on rug compatibility.\n"
+    "\t--non-interactive\tDon't ask anything, use default answers automatically. (under development).\n"
+    "\t--root, -R <dir>\tOperate on a different root directory.\n");
     ;
   
-  if (gopts.count("silent")) {
+  if (gopts.count("quiet")) {
     gSettings.verbosity = -1;
     DBG << "Verbosity " << gSettings.verbosity << endl;
   }

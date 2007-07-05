@@ -578,7 +578,7 @@ void show_patches()
   if (tbl.empty())
     cout_n << _("No needed patches found.") << endl;
   else
-    // display the result, even if --silent specified
+    // display the result, even if --quiet specified
     cout << tbl;
 }
 
