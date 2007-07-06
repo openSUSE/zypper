@@ -13,6 +13,7 @@
 #include <stdlib.h>
 #include <iostream>
 #include <boost/algorithm/string.hpp>
+#include <boost/format.hpp>
 
 #include <zypp/base/Logger.h>
 #include <zypp/ZYppCallbacks.h>
@@ -91,16 +92,17 @@ struct DownloadResolvableReportReceiver : public zypp::callback::ReceiveReport<z
   {
       _delta = filename;
       _delta_size = downloadsize;
-      cout_n << "Downloading delta: "
+      cout_n << _("Downloading delta") << ": "
           << _delta << ", " << _delta_size << std::endl;
   }
-  
+
   virtual bool progressDeltaDownload( int value )
   {
-    display_step( "Downloading delta " /*+ _delta.asString()*/, value );
+    // TranslatorExplanation This text is a progress display label e.g. "Downloading delta [42%]"
+    display_step( _("Downloading delta") /*+ _delta.asString()*/, value );
     return true;
   }
-  
+
   virtual void problemDeltaDownload( const std::string & description )
   {
     std::cerr << description << std::endl;
@@ -118,12 +120,13 @@ struct DownloadResolvableReportReceiver : public zypp::callback::ReceiveReport<z
   virtual void startDeltaApply( const zypp::Pathname & filename )
   {
     _delta = filename;
-    cout_n << "Applying delta: " << _delta << std::endl;
+    cout_n << _("Applying delta") << ": " << _delta << std::endl;
   }
 
   virtual void progressDeltaApply( int value )
   {
-    display_step( "Applying delta " /* + _delta.asString()*/, value );
+    // TranslatorExplanation This text is a progress display label e.g. "Applying delta [42%]"
+    display_step( _("Applying delta") /* + _delta.asString()*/, value );
   }
 
   virtual void problemDeltaApply( const std::string & description )
@@ -144,13 +147,14 @@ struct DownloadResolvableReportReceiver : public zypp::callback::ReceiveReport<z
   {
     _patch = filename;
     _patch_size = downloadsize;
-    cout_n << "Downloading patch.rpm: "
+    cout_n << _("Downloading patch rpm") << ": "
 	      << _patch << ", " << _patch_size << std::endl;
   }
-  
+
   virtual bool progressPatchDownload( int value )
   {
-    display_step( "Applying patchrpm " /* + _patch.asString() */, value );
+    // TranslatorExplanation This text is a progress display label e.g. "Applying patch rpm [42%]"
+    display_step( _("Applying patch rpm") /* + _patch.asString() */, value );
     return true;
   }
   
@@ -169,22 +173,28 @@ struct DownloadResolvableReportReceiver : public zypp::callback::ReceiveReport<z
   {
     _resolvable_ptr =  resolvable_ptr;
     _url = url;
-    cout_n << "Downloading: " << _resolvable_ptr;
+
+    cout_n << boost::format(_("Downloading %s %s-%s.%s"))
+        % _resolvable_ptr->kind() % _resolvable_ptr->name()
+        % _resolvable_ptr->edition() % _resolvable_ptr->arch();
+
 // grr, bad class??
 //    zypp::ResObject::constPtr ro =
 //      dynamic_pointer_cast<const zypp::ResObject::constPtr> (resolvable_ptr);
     zypp::Package::constPtr ro = zypp::asKind<zypp::Package> (resolvable_ptr);
     if (ro) {
-      cout_n << ", " << ro->archivesize ()
-		<< "(" << ro->size () << " unpacked)";
+      cout_n << ", " << ro->downloadSize () << " "
+          // TranslatorExplanation %s is package size like "5.6 M"
+          << boost::format(_("(%s unpacked)")) % ro->size();
     }
     cout_n << std::endl;
   }
-   
+
   // return false if the download should be aborted right now
   virtual bool progress(int value, zypp::Resolvable::constPtr /*resolvable_ptr*/)
   {
-    display_step( "Downloading " /* + resolvable_ptr->name() */, value );
+    // TranslatorExplanation This text is a progress display label e.g. "Downloading [42%]"
+    display_step( _("Downloading") /* + resolvable_ptr->name() */, value );
     return true;
   }
 

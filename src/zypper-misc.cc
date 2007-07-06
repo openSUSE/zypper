@@ -168,7 +168,7 @@ void mark_for_install( const ResObject::Kind &kind,
   if (installer.installed_item &&
       installer.installed_item.resolvable()->edition() == installer.item.resolvable()->edition() &&
       installer.installed_item.resolvable()->arch() == installer.item.resolvable()->arch()) {
-    cout_n << _("skipping ") << kind.asString() << " '" << name << "' " << _("(already installed)") << endl;
+    cout_n << format(_("skipping %s '%s' (already installed)")) % kind.asString() % name << endl;
   }
   else {
     // TODO don't use setToBeInstalled for this purpose but higher level solver API
