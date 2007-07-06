@@ -436,18 +436,21 @@ void load_repo_resolvables()
                          % repo.alias() << endl;
         manager.buildCache(repo);
       }
-
+      // TranslatorExplanation speaking of a repository
+      cout_n << format(_("Reading repository %s...")) % repo.alias() << flush;
       repository = manager.createFromCache(repo);
+
       ResStore store = repository.resolvables();
+      cout_v << " " << format(_("(%d resolvables found)")) % store.size();
+
       God->addResolvables(store);
-  
-      cout_vv << format(_("(%d resolvables found)")) % store.size() << endl;
+      cout_n << endl;
     }
     catch (const Exception & e)
     {
       ZYPP_CAUGHT(e);
       cerr << format(_("Problem loading data from '%s'")) % repo.alias();
-      cerr_v << ":" << e.msg();
+      cerr_v << ":" << endl << e.msg();
       cerr << endl;
       cerr << format(_("Resolvables from '%s' not loaded because of error."))
                       % repo.alias() << endl;

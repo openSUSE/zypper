@@ -153,6 +153,8 @@ void refresh_repos()
   RepoManager manager;
   gData.repos = manager.knownRepositories();
 
+  int error_count = 0;
+  int enabled_repo_count = gData.repos.size();
   for (std::list<RepoInfo>::iterator it = gData.repos.begin();
        it !=  gData.repos.end(); ++it)
   {
@@ -163,6 +165,7 @@ void refresh_repos()
     {
       cout_v << format(_("Skipping disabled repository '%s'")) % repo.alias()
              << endl;
+      enabled_repo_count--;
       continue;
     }
 
@@ -179,7 +182,7 @@ void refresh_repos()
     catch ( const Exception &e )
     {
       cerr << format(_("Error reading repository '%s':")) % repo.alias()
-        << endl << e.msg() << endl;
+        << endl << e.asUserString() << endl;
       cerr << format(_("Skipping repository '%s' because of the above error."))
         % repo.alias() << endl;
       // log untranslated message
@@ -187,10 +190,16 @@ void refresh_repos()
         << endl << e.msg() << endl;
       ERR << format("Skipping repository '%s' because of the above error.")
         % repo.alias() << endl;
+      error_count++;
     }
   }
 
-  cout_n << _("All system sources have been refreshed.") << endl;
+  if (error_count == enabled_repo_count)
+    cerr << _("Could not refresh the repositories because of errors.") << endl;
+  else if (error_count)
+    cerr << _("Some of the repositories have not been refreshed because of error.") << endl;
+  else
+    cout_n << _("All repositories have been refreshed.") << endl;
 }
 
 // ----------------------------------------------------------------------------
