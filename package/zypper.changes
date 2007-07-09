@@ -18,14 +18,12 @@ Thu Jul  5 23:06:49 CEST 2007 - jkupec@suse.cz
 -------------------------------------------------------------------
 Tue Jul  3 13:34:09 CEST 2007 - jkupec@suse.cz
 
-- adapted to refactored libzypp repository management
-- dropped some 10.1 ifdefs
+- Adapted to refactored libzypp repository management
 - fixed consistency of <required> and [optional] arguments
 - improved update command description
 - changed sa, sr descriptions + some other minor changes
 - made help texts consistent
-- fixed spec file
-- r5873
+- r5871
 - 0.8.0
 
 -------------------------------------------------------------------
