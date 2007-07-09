@@ -417,16 +417,97 @@ void remove_repo( const std::string &alias )
 void rename_repo(const std::string & alias, const std::string & newalias)
 {
   RepoManager manager;
-  
-  RepoInfo repo(manager.getRepositoryInfo(alias));
-  repo.setAlias(newalias);
-  
+
   try
   {
+    RepoInfo repo(manager.getRepositoryInfo(alias));
+    repo.setAlias(newalias);
     manager.modifyRepository(alias, repo);
 
     cout_n << format(_("Repository %s renamed to %s")) % alias % repo.alias() << endl;
-    MIL << format(_("Repository %s renamed to %s")) % alias % repo.alias() << endl;
+    MIL << format("Repository %s renamed to %s") % alias % repo.alias() << endl;
+  }
+  catch (const RepoNotFoundException & ex)
+  {
+    cerr << format(_("Repository %s not found.")) % alias << endl;
+    ERR << "Repo " << alias << " not found" << endl; 
+  }
+  catch (const Exception & ex)
+  {
+    cerr << _("Error while modifying the repository:") << endl;
+    cerr << ex.asUserString();
+    cerr << format(_("Leaving repository %s unchanged.")) % alias << endl;
+
+    ERR << "Error while modifying the repository:" << ex.asUserString() << endl;
+  }
+}
+
+// ----------------------------------------------------------------------------
+
+void modify_repo(const string & alias, const parsed_opts & copts)
+{
+  // tell whether currenlty processed options are contradicting each other
+  bool contradiction = false;
+  // TranslatorExplanation speaking of two mutually contradicting command line options
+  string msg_contradition =
+    _("%s used together with %s, which contradict each other."
+      " This property will be left unchanged.");
+
+  // enable/disable repo
+  tribool enable = indeterminate;
+  if (copts.count("enable"))
+    enable = true;
+  if (copts.count("disable"))
+  {
+    if (enable)
+    {
+      cerr << format(msg_contradition) % "--enable" % "--disable" << endl;
+      
+      enable = indeterminate;
+    }
+    else
+      enable = false;
+  }
+  DBG << "enable = " << enable << endl;
+
+  // autorefresh
+  tribool autoref = indeterminate;
+  if (copts.count("enable-autorefresh"))
+    autoref = true;
+  if (copts.count("disable-autorefresh"))
+  {
+    if (autoref)
+    {
+      cerr << format(msg_contradition)
+        % "--enable-autorefresh" % "--disable-autorefresh" << endl;
+
+      autoref = indeterminate;
+    }
+    else
+      autoref = false;
+  }
+  DBG << "autoref = " << autoref << endl;
+
+  try
+  {
+    RepoManager manager;
+    RepoInfo repo(manager.getRepositoryInfo(alias));
+
+    if (!indeterminate(enable))
+      repo.setEnabled(enable);
+
+    if (!indeterminate(autoref))
+      repo.setAutorefresh(autoref);
+
+    manager.modifyRepository(alias, repo);
+
+    cout_n << format(_("Repository %s has been sucessfully modified.")) % alias << endl;
+    MIL << format("Repository %s modified:") % alias << repo << endl;
+  }
+  catch (const RepoNotFoundException & ex)
+  {
+    cerr << format(_("Repository %s not found.")) % alias << endl;
+    ERR << "Repo " << alias << " not found" << endl; 
   }
   catch (const Exception & ex)
   {

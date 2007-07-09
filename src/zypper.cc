@@ -96,6 +96,7 @@ string help_commands = _(
   "\tservice-add, sa\t\tAdd a new service\n"
   "\tservice-delete, sd\tDelete a service\n"
   "\tservice-rename, sr\tRename a service\n"
+  "\tservice-modify, sm\tModify a service\n"
   "\trefresh, ref\t\tRefresh all installation sources\n"
   "\tpatch-check, pchk\tCheck for patches\n"
   "\tpatches, pch\t\tList patches\n"
@@ -340,7 +341,7 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
       "This command has no additional options.\n"
       );
   }
-  else if (command == ZypperCommand::NONE) {//command_str == "service-rename" || command_str == "sr") {
+  else if (command == ZypperCommand::RENAME_REPO) {
     static struct option service_rename_options[] = {
       {"help", no_argument, 0, 'h'},
       {0, 0, 0, 0}
@@ -349,10 +350,31 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
     specific_help = _(
       "service-rename [options] <alias> <new-alias>\n"
       "\n"
-      "Assign new alias to the service specified by URI or current alias."
+      "Assign new alias to the service specified by alias."
       "\n"
       "This command has no additional options.\n"
       );
+  }
+  else if (command == ZypperCommand::MODIFY_REPO) {
+    static struct option service_modify_options[] = {
+      {"help", no_argument, 0, 'h'},
+      {"disable", no_argument, 0, 'd'},
+      {"enable", no_argument, 0, 'e'},
+      {"enable-autorefresh", no_argument, 0, 'a'},
+      {"disable-autorefresh", no_argument, 0, 0},
+      {0, 0, 0, 0}
+    };
+    specific_options = service_modify_options;
+    specific_help = _(
+      "service-modify (sm) <options> <alias>\n"
+      "\n"
+      "Modify properties of a service specified by alias."
+      "\n"
+      "\t--disable,-d\t\tDisable the service (but don't remove it)\n"
+      "\t--enable,-e\t\tEnable a disabled service\n"
+      "\t--enable-autorefresh,-a\tEnable auto-refresh of the service\n"
+      "\t--disable-autorefresh\tDisable auto-refresh of the service\n"
+    );
   }
   else if (command == ZypperCommand::REFRESH) {
     static struct option refresh_options[] = {
@@ -744,6 +766,29 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
     }
 
     return ZYPPER_EXIT_OK;
+  }
+
+  // --------------------------( service modify )-----------------------------
+
+  else if (command == ZypperCommand::MODIFY_REPO)
+  {
+    if (ghelp || arguments.size() < 1)
+    {
+      if (ghelp)
+      {
+        cout << specific_help;
+        return ZYPPER_EXIT_OK;
+      }
+      else
+      {
+        cerr << _("Alias is a required argument.") << endl;
+        ERR << "Na alias argument given." << endl;
+        cout_n << specific_help;
+        return ZYPPER_EXIT_ERR_INVALID_ARGS;
+      }
+    }
+
+    modify_repo(arguments[0], copts);
   }
 
   // --------------------------( refresh )------------------------------------

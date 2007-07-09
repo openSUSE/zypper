@@ -5,6 +5,8 @@
 
 #include "zypp/Url.h"
 
+#include "zypper-getopt.h"
+
 /**
  * Reads known enabled repositories and stores them in gData.
  * This command also refreshes repos with auto-refresh enabled.
@@ -72,6 +74,12 @@ void remove_repo( const std::string &alias );
  * Rename repository specified by \a alias to \a newalias.
  */
 void rename_repo(const std::string & alias, const std::string & newalias);
+
+
+/**
+ * 
+ */
+void modify_repo(const std::string & alias, const parsed_opts & copts);
 
 //void include_source_by_url( const zypp::Url &url ); // OLD
 

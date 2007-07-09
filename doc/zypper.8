@@ -189,7 +189,7 @@ installation source is a repository is a service is a catalog.
 .B service-add (sa) <URI> <alias>
 Add a new service (installation source).
 .TP
-\fI\-r, -\-repo\fR <FILE.repo>
+\fI\-r, \-\-repo\fR <FILE.repo>
 Read URI and alias from a file
 .TP
 \fI\-t, \-\-type\fR <TYPE>
@@ -216,6 +216,22 @@ rug compatibility mode: if \fI-r\fR global option is set, zypper doesn't include
 .TP
 .B service-rename (sr) <alias> <new-alias>
 Rename a service (installation source).
+
+.TP
+.B service-modify (sm) <options> <alias>
+Modify a service (installation source).
+.TP
+\fI\-e, \-\-enable\fR
+Enable the service.
+.TP
+\fI\-d, \-\-disable\fR
+Disable the service.
+.TP
+\fI\-a, \-\-enable-autorefresh\fR
+Enable auto-refresh for the service.
+.TP
+\fI    \-\-disable\-autorefresh\fR
+Disable auto-refresh for the service.
 
 .TP
 .B refresh (ref)
