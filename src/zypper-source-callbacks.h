@@ -30,7 +30,7 @@ namespace ZmartRecipients
 {
 ///////////////////////////////////////////////////////////////////    
 /*    // progress for probing a source
-    struct ProbeSourceReceive : public zypp::callback::ReceiveReport<zypp::source::ProbeSourceReport>
+    struct ProbeSourceReceive : public zypp::callback::ReceiveReport<zypp::source::ProbeRepoReport>
     {
       virtual void start(const zypp::Url &url)
       {
@@ -69,7 +69,7 @@ namespace ZmartRecipients
     };
     */
 // progress for downloading a resolvable
-struct DownloadResolvableReportReceiver : public zypp::callback::ReceiveReport<zypp::source::DownloadResolvableReport>
+struct DownloadResolvableReportReceiver : public zypp::callback::ReceiveReport<zypp::repo::DownloadResolvableReport>
 {
   zypp::Resolvable::constPtr _resolvable_ptr;
   zypp::Url _url;
@@ -211,20 +211,19 @@ struct DownloadResolvableReportReceiver : public zypp::callback::ReceiveReport<z
   }
 };
 
-/*
-struct SourceReportReceiver  : public zypp::callback::ReceiveReport<zypp::source::SourceReport>
+struct RepoReportReceiver  : public zypp::callback::ReceiveReport<zypp::repo::RepoReport>
 {     
-  virtual void start( zypp::Source_Ref source, const std::string & task )
+  virtual void start( zypp::Repository repo, const std::string & task )
   {
     _task = task;
-    _source = source;
+    _repo = repo;
     
     display_step(0);
   }
   
   void display_step( int value )
   {
-    display_progress ("(" + _source.alias() + ") " + _task , value);
+    display_progress ("(" + _repo.info().alias() + ") " + _task , value);
   }
   
   virtual bool progress( int value )
@@ -233,14 +232,14 @@ struct SourceReportReceiver  : public zypp::callback::ReceiveReport<zypp::source
     return true;
   }
   
-  virtual Action problem( zypp::Source_Ref /*source*//*, Error error, const std::string & description )
+  virtual Action problem( zypp::Repository /*repo*/, Error error, const std::string & description )
   {
     display_done ();
     display_error (error, description);
     return (Action) read_action_ari ();
   }
 
-  virtual void finish( zypp::Source_Ref /*source*//*, const std::string & task, Error error, const std::string & reason )
+  virtual void finish( zypp::Repository /*repo*/, const std::string & task, Error error, const std::string & reason )
   {
     display_step(100);
     // many of these, avoid newline
@@ -252,9 +251,8 @@ struct SourceReportReceiver  : public zypp::callback::ReceiveReport<zypp::source
   }
   
   std::string _task;
-  zypp::Source_Ref _source;
+  zypp::Repository _repo;
 };
-*/
     ///////////////////////////////////////////////////////////////////
 }; // namespace ZmartRecipients
 ///////////////////////////////////////////////////////////////////
@@ -263,20 +261,20 @@ class SourceCallbacks {
 
   private:
 //    ZmartRecipients::ProbeSourceReceive _sourceProbeReport;
-//    ZmartRecipients::SourceReportReceiver _SourceReport;
+    ZmartRecipients::RepoReportReceiver _repoReport;
     ZmartRecipients::DownloadResolvableReportReceiver _downloadReport;
   public:
     SourceCallbacks()
     {
 //      _sourceProbeReport.connect();
-//      _SourceReport.connect();
+      _repoReport.connect();
       _downloadReport.connect();
     }
 
     ~SourceCallbacks()
     {
 //      _sourceProbeReport.disconnect();
-//      _SourceReport.disconnect();
+      _repoReport.disconnect();
       _downloadReport.disconnect();
     }
 
