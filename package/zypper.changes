@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Mon Jul  9 12:59:16 CEST 2007 - jkupec@suse.cz
+
+- modifyrepo command added (alias service-modify, sm, mr).
+  The command is able to enable/disable repo and enable/disable
+  auto-refresh for it.
+- r5928
+- 0.8.1
+
+-------------------------------------------------------------------
 Thu Jul  5 23:06:49 CEST 2007 - jkupec@suse.cz
 
 - --silent global option added. Use cout_n for normal program

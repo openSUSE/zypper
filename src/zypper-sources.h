@@ -77,7 +77,10 @@ void rename_repo(const std::string & alias, const std::string & newalias);
 
 
 /**
+ * Modify repository properties.
  * 
+ * \param alias repository alias
+ * \param copts pre-parsed command line options
  */
 void modify_repo(const std::string & alias, const parsed_opts & copts);
 
