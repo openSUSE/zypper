@@ -49,6 +49,12 @@ class AliveCursor
     return *this;
   }
   
+  AliveCursor & done()
+  {
+    _current = '*';
+    return *this;
+  }
+  
   private:
   char _current;
 };

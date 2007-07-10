@@ -22,6 +22,8 @@ enum Error {
 };
 */
 void display_progress (const std::string& s, int percent);
+void display_tick (const std::string& s);
+void display_done (const std::string& s);
 // newline if normal progress is on single line
 void display_done ();
 

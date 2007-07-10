@@ -211,6 +211,45 @@ struct DownloadResolvableReportReceiver : public zypp::callback::ReceiveReport<z
   }
 };
 
+struct ProgressReportReceiver  : public zypp::callback::ReceiveReport<zypp::ProgressReport>
+{
+  void tick( const zypp::ProgressData &data )
+  {
+    if ( data.reportAlive() )
+    {
+      display_tick ( data.name() );
+    }
+    else
+    {
+      display_progress ( data.name() , data.val() );
+    }
+    
+    
+  }
+  
+  virtual void start( const zypp::ProgressData &data )
+  { tick(data); }
+  
+  virtual bool progress( const zypp::ProgressData &data )
+  {
+    tick(data);
+    return true;
+  }
+  
+//   virtual Action problem( zypp::Repository /*repo*/, Error error, const std::string & description )
+//   {
+//     display_done ();
+//     display_error (error, description);
+//     return (Action) read_action_ari ();
+//   }
+
+  virtual void finish( const zypp::ProgressData &data )
+  {
+    display_done( data.name() );
+  }
+};
+
+
 struct RepoReportReceiver  : public zypp::callback::ReceiveReport<zypp::repo::RepoReport>
 {     
   virtual void start( zypp::Repository repo, const std::string & task )
@@ -263,12 +302,14 @@ class SourceCallbacks {
 //    ZmartRecipients::ProbeSourceReceive _sourceProbeReport;
     ZmartRecipients::RepoReportReceiver _repoReport;
     ZmartRecipients::DownloadResolvableReportReceiver _downloadReport;
+    ZmartRecipients::ProgressReportReceiver _progressReport;
   public:
     SourceCallbacks()
     {
 //      _sourceProbeReport.connect();
       _repoReport.connect();
       _downloadReport.connect();
+      _progressReport.connect();
     }
 
     ~SourceCallbacks()
@@ -276,6 +317,7 @@ class SourceCallbacks {
 //      _sourceProbeReport.disconnect();
       _repoReport.disconnect();
       _downloadReport.disconnect();
+      _progressReport.disconnect();
     }
 
 };

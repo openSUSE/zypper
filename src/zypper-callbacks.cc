@@ -10,10 +10,27 @@ using namespace std;
 void display_progress (const string& s, int percent) {
   static AliveCursor cursor;
 
-  cout_v << CLEARLN << cursor++ << " " << s;
+  if ( percent == 100 )
+    cout_v << CLEARLN << cursor.done() << " " << s;
+  else
+    cout_v << CLEARLN << cursor++ << " " << s;
   // dont display percents if invalid
   if (percent >= 0 && percent <= 100)
     cout_v << " [" << percent << "%]";
+  cout_v << flush;
+}
+
+void display_tick (const string& s) {
+  static AliveCursor cursor;
+
+  cout_v << CLEARLN << cursor++ << " " << s;
+  cout_v << flush;
+}
+
+void display_done (const string& s) {
+  static AliveCursor cursor;
+
+  cout_v << CLEARLN << cursor.done() << " " << s;
   cout_v << flush;
 }
 
