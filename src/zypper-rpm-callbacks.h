@@ -107,7 +107,7 @@ struct ScanRpmDbReceive : public zypp::callback::ReceiveReport<zypp::target::rpm
     // this is called too often. relax a bit.
     static int last = -1;
     if (last != value)
-      display_progress ("RPM database", value);
+      display_progress (_("Reading installed packages"), value);
     last = value;
     return true;
   }
