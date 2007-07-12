@@ -1354,7 +1354,8 @@ mark_important_info (const ResolverInfoList & il)
 }
 
 void
-ResolverContext::foreachInfo (PoolItem_Ref item, int priority, ResolverInfoFn fn, void *data) const
+ResolverContext::foreachInfo (PoolItem_Ref item, int priority, ResolverInfoFn fn, void *data,
+			      const bool merge) const
 {
     ResolverInfoList info_list;
 
@@ -1375,25 +1376,26 @@ ResolverContext::foreachInfo (PoolItem_Ref item, int priority, ResolverInfoFn fn
 	}
 	context = context->_parent;
     }
-#if 1
-    // Merge info objects
-    for (ResolverInfoList::iterator iter = info_list.begin(); iter != info_list.end(); ++iter) {
+    if (merge) {
+	// Merge info objects
+	for (ResolverInfoList::iterator iter = info_list.begin(); iter != info_list.end(); ++iter) {
 
-	ResolverInfo_Ptr info1 = (*iter);
-	ResolverInfoList::iterator subiter = iter;
+	    ResolverInfo_Ptr info1 = (*iter);
+	    ResolverInfoList::iterator subiter = iter;
 
-	if (info1 != NULL) {
-	    for (subiter++; subiter != info_list.end();) {
-		ResolverInfo_Ptr info2 = *subiter;
-		ResolverInfoList::iterator next = subiter; ++next;
-		if (info2 && info1->merge (info2)) {
-		    info_list.erase( subiter );
+	    if (info1 != NULL) {
+		for (subiter++; subiter != info_list.end();) {
+		    ResolverInfo_Ptr info2 = *subiter;
+		    ResolverInfoList::iterator next = subiter; ++next;
+		    if (info2 && info1->merge (info2)) {
+			info_list.erase( subiter );
+		    }
+		    subiter = next;
 		}
-		subiter = next;
 	    }
 	}
     }
-#endif
+
     mark_important_info( info_list );
 
     // Walk across the list of info objects and invoke our callback

@@ -304,7 +304,7 @@ class ResolverContext : public base::ReferenceCounted, private base::NonCopyable
     void addError (ResolverInfo_Ptr info, bool askUser = false);// error progress info
     
     // iterate over report log
-    void foreachInfo (PoolItem_Ref item, int priority, ResolverInfoFn fn, void *data) const;
+    void foreachInfo (PoolItem_Ref item, int priority, ResolverInfoFn fn, void *data, const bool merge=true) const;
     ResolverInfoList getInfo (void) const;
 
     // Context compare to identify equal branches

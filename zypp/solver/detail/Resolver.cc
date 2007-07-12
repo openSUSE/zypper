@@ -191,11 +191,32 @@ collector_cb_needed (ResolverInfo_Ptr info, void *data)
 	    
 	    for (PoolItemList::const_iterator iter = itemList.begin();
 		 iter != itemList.end(); iter++) {
-		ItemCapKind capKind( *iter, needed_by->capability(), needed_by->capKind(), needed_by->initialInstallation() );
-		collector->isInstalledBy.insert (make_pair( item, capKind));
-	
-		ItemCapKind capKindReverse( item, needed_by->capability(), needed_by->capKind(), needed_by->initialInstallation() );
-		collector->installs.insert (make_pair( *iter, capKindReverse));
+		bool found = false;
+		ItemCapKindMap::const_iterator pos = collector->isInstalledBy.find(item);
+		while (pos != collector->isInstalledBy.end()
+		       && pos->first == item
+		       && !found) {
+			   ItemCapKind capKind = pos->second;
+			   if (capKind.item == *iter) found = true;
+			   pos++;
+		       }
+		if (!found) {
+		    ItemCapKind capKind( *iter, needed_by->capability(), needed_by->capKind(), needed_by->initialInstallation() );
+		    collector->isInstalledBy.insert (make_pair( item, capKind));
+		}
+		found = false;
+		pos = collector->installs.find (*iter);
+		while (pos != collector->installs.end()
+		       && pos->first == *iter
+		       && !found) {
+			   ItemCapKind capKind = pos->second;
+			   if (capKind.item == item) found = true;
+			   pos++;			   
+		       }		
+		if (!found) {
+		    ItemCapKind capKindReverse( item, needed_by->capability(), needed_by->capKind(), needed_by->initialInstallation() );
+		    collector->installs.insert (make_pair( *iter, capKindReverse));
+		}
 	    }
 	    
 	}
@@ -210,7 +231,7 @@ Resolver::collectResolverInfo(void)
 	 && _isInstalledBy.empty()
 	 && _installs.empty()) {
 	Collector collector;
-	collectContext->foreachInfo (PoolItem(), RESOLVER_INFO_PRIORITY_VERBOSE, collector_cb_needed, &collector);
+	collectContext->foreachInfo (PoolItem(), RESOLVER_INFO_PRIORITY_VERBOSE, collector_cb_needed, &collector, false); // do not merge information
 	_isInstalledBy = collector.isInstalledBy;
 	_installs = collector.installs;
     }
