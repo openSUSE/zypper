@@ -26,9 +26,9 @@ void ZyppSearchOptions::resolveConflicts() {
 }
 
 /**
- * Initializes installation sources, creates search regex, caches installed
+ * Initializes repositories, creates search regex, caches installed
  * packages from RPM database, and populates ResPool with items from
- * installation sources.
+ * repositories.
  */
 ZyppSearch::ZyppSearch (
     ZYpp::Ptr & zypp,
@@ -40,7 +40,7 @@ ZyppSearch::ZyppSearch (
   cond_init_target();         // calls ZYpp::initializeTarget("/");
   init_repos();
 
-  // no sources warning
+  // no repos warning
   if (gData.repos.empty()) {
     cerr << _("No repositories configured. Please, add at least one"
               " repository using 'zypper addrepo' command before using search.")
@@ -53,7 +53,7 @@ ZyppSearch::ZyppSearch (
   load_repo_resolvables(); // populates ResPool with resolvables from repos
 
   // cache identification strings of source resolvables (used to check for
-  // duplicates of target resolvables in sources - DuplicateFilter)
+  // duplicates of target resolvables in repos - DuplicateFilter)
   invokeOnEachSearched(not_c(ByInstalled()), functorRef<bool,const zypp::PoolItem &>(_idcache));
 }
 

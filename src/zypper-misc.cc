@@ -879,12 +879,12 @@ int solve_and_commit (bool non_interactive) {
         if (excpt_r.msg().find("fails integrity check") != string::npos) {
           cerr << endl
             << _("Package integrity check failed. This may be a problem"
-            " with installation source or media. Try one of the following:\n"
+            " with repository or media. Try one of the following:\n"
             "\n"
             "- just retry previous command\n"
-            "- refresh installation sources using 'zypper refresh'\n"
+            "- refresh repositories using 'zypper refresh'\n"
             "- use another installation media (if e.g. damaged)\n"
-            "- use another installation source") << endl;
+            "- use another repository") << endl;
           return ZYPPER_EXIT_ERR_ZYPP;
         }
         else

@@ -154,18 +154,18 @@ int main(int argc, char **argv)
 
     if ( (scheme == "cd" || scheme == "dvd") )
     {
-      MIL << "Skipping CD/DVD source: url:[" << (it->baseUrlsBegin())->asString() << "] alias:[" << it->alias() << "] auto_refresh:[ " << it->autorefresh() << "]" << endl;
+      MIL << "Skipping CD/DVD repository: url:[" << (it->baseUrlsBegin())->asString() << "] alias:[" << it->alias() << "] auto_refresh:[ " << it->autorefresh() << "]" << endl;
       continue;
     }
 
     if ( ! it->enabled() )
     {
-      MIL << "Skipping disabled source: url:[" << url.asString() << "] alias:[" << it->alias() << "] auto_refresh:[ " << it->autorefresh() << "]" << endl;
+      MIL << "Skipping disabled repository: url:[" << url.asString() << "] alias:[" << it->alias() << "] auto_refresh:[ " << it->autorefresh() << "]" << endl;
       continue;
     }
 
     // Note: Url(it->url).asString() to hide password in logs
-    MIL << "Creating source: url:[" << url.asString() << "] alias:[" << it->alias() << "] auto_refresh:[ " << it->autorefresh() << "]" << endl;
+    MIL << "Creating repository: url:[" << url.asString() << "] alias:[" << it->alias() << "] auto_refresh:[ " << it->autorefresh() << "]" << endl;
 
     try
     {
@@ -174,7 +174,7 @@ int main(int argc, char **argv)
 
       token_stream << "[" << it->alias() << "| " << *(it->baseUrlsBegin()) << "]"; // src.timestamp() << "]";
 
-      MIL << "Source: " << it->alias() << std::endl; //" from " << src.timestamp() << std::endl;
+      MIL << "repository: " << it->alias() << std::endl; //" from " << src.timestamp() << std::endl;
 
       gData.repos.push_back(*it);
     }
@@ -182,7 +182,7 @@ int main(int argc, char **argv)
     {
       // TranslatorExplanation %s = detailed low level (unstranslated) error message
       string error = excpt_r.msg();
-      gData.errors.push_back(str::form(_("Couldn't restore source.\nDetail: %s"), error.c_str()));
+      gData.errors.push_back(str::form(_("Couldn't restore repository.\nDetail: %s"), error.c_str()));
     }
   }
 
@@ -232,7 +232,7 @@ int main(int argc, char **argv)
 
   if ( gData.repos.size() == 0 )
   {
-    gData.errors.push_back( str::form( _( "There are no update sources defined. Please add one or more update sources in order to be notified of updates.") ) );
+    gData.errors.push_back( str::form( _( "There are no update repositories defined. Please add one or more update repositories in order to be notified of updates.") ) );
   }
 
   God->addResolvables( God->target()->resolvables(), true);

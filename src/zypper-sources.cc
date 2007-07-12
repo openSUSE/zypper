@@ -44,7 +44,9 @@ static void do_init_repos()
     if (do_refresh)
     {
       //! \todo progress reporting
-      cout_n << "Refreshing " << repo.alias() << endl;
+      cout_v << format(
+          _("Checking whether to refresh metadata for %s.")) % repo.alias()
+          << endl;
       manager.refreshMetadata(repo);
     }
   }
@@ -138,7 +140,7 @@ void list_repos()
   catch ( const Exception &e )
   {
     ZYPP_CAUGHT(e);
-    cerr << _("Error reading system sources:") << endl
+    cerr << _("Error reading repositories:") << endl
          << e.asUserString() << endl;
     exit(ZYPPER_EXIT_ERR_ZYPP);
   }
@@ -160,7 +162,7 @@ void refresh_repos()
   {
     RepoInfo repo(*it);
 
-    // skip disabled sources
+    // skip disabled repos
     if (!repo.enabled())
     {
       cout_v << format(_("Skipping disabled repository '%s'")) % repo.alias()

@@ -306,7 +306,7 @@ struct Match {
 };
 
 /**
- * Filters target poolitems which have their counterpart among source
+ * Filters target poolitems which have their counterpart among repository
  * resolvables.
  */
 struct DuplicateFilter {

@@ -863,7 +863,7 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
 
     init_repos();
 
-    //! \todo support temporary additional sources
+    //! \todo support temporary additional repos
     /*
     for ( std::list<Url>::const_iterator it = gSettings.additional_sources.begin(); it != gSettings.additional_sources.end(); ++it )
     {
@@ -873,12 +873,14 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
 
     if ( gData.repos.empty() )
     {
-      cerr << _("Warning: No sources. Operating only with the installed resolvables. Nothing can be installed.") << endl;
+      cerr << _("Warning: No repositories defined."
+          " Operating only with the installed resolvables."
+          " Nothing can be installed.") << endl;
     }
 
     cond_init_target ();
     cond_load_resolvables();
-    
+
     for ( vector<string>::const_iterator it = arguments.begin(); it != arguments.end(); ++it ) {
       if (command == ZypperCommand::INSTALL) {
         mark_for_install(kind, *it);

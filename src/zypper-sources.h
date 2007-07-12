@@ -59,11 +59,6 @@ int add_repo_from_file(const std::string & repo_file_url,
  */
 void warn_if_zmd();
 
-
-//! calls init_system_sources if not disabled by user (or non-root)
-//void cond_init_system_sources(); // OLD
-void init_system_sources(); // OLD
-
 /**
  * Delte repository specified by \a alias.
  */
@@ -83,8 +78,6 @@ void rename_repo(const std::string & alias, const std::string & newalias);
  * \param copts pre-parsed command line options
  */
 void modify_repo(const std::string & alias, const parsed_opts & copts);
-
-//void include_source_by_url( const zypp::Url &url ); // OLD
 
 #endif
 // Local Variables:
