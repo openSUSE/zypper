@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Thu Jul 12 13:01:56 CEST 2007 - jkupec@suse.cz
+
+- s/source/repository in zypper texts, help page will follow
+- display a non-root error message for commands which require root
+- callbacks improved
+- r5984
+- 0.8.2
+
+-------------------------------------------------------------------
 Mon Jul  9 12:59:16 CEST 2007 - jkupec@suse.cz
 
 - modifyrepo command added (alias service-modify, sm, mr).
