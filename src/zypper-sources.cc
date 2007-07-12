@@ -435,7 +435,7 @@ void rename_repo(const std::string & alias, const std::string & newalias)
   catch (const Exception & ex)
   {
     cerr << _("Error while modifying the repository:") << endl;
-    cerr << ex.asUserString();
+    cerr << ex.asUserString() << endl;
     cerr << format(_("Leaving repository %s unchanged.")) % alias << endl;
 
     ERR << "Error while modifying the repository:" << ex.asUserString() << endl;

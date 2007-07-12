@@ -626,14 +626,6 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
     if (ghelp) { cout << specific_help << endl; return !ghelp; }
     // if (ghelp) display_command_help()
 
-    //! \todo modify according to final decition on /etc/zypp/repos.d
-    /* 
-    if ( geteuid() != 0 )
-    {
-      cerr << _("Root privileges are required for viewing system sources.") << endl;
-      return ZYPPER_EXIT_ERR_PRIVILEGES;
-    }*/
-
     list_repos();
     return ZYPPER_EXIT_OK;
   }
@@ -642,6 +634,19 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
   
   else if (command == ZypperCommand::ADD_REPO)
   {
+    if (ghelp)
+    {
+      cout << specific_help;
+      return ZYPPER_EXIT_OK;
+    }
+
+    // check root user
+    if (geteuid() != 0)
+    {
+      cerr << _("Root privileges are required for modifying system repositories.") << endl;
+      return ZYPPER_EXIT_ERR_PRIVILEGES;
+    }
+
     tribool enabled(indeterminate);
     tribool refresh(indeterminate);
 
@@ -660,20 +665,12 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
     string type = copts.count("type") ? copts["type"].front() : "";
 
     // display help message if insufficient info was given
-    if (ghelp || arguments.size() < 2)
+    if (arguments.size() < 2)
     {
-      if (ghelp)
-      {
-        cout << specific_help;
-        return ZYPPER_EXIT_OK;
-      }
-      else
-      {
-        cerr << _("Too few arguments. At least URL and alias are required.") << endl;
-        ERR << "Too few arguments. At least URL and alias are required." << endl;
-        cout_n << specific_help;
-        return ZYPPER_EXIT_ERR_INVALID_ARGS;
-      }
+      cerr << _("Too few arguments. At least URL and alias are required.") << endl;
+      ERR << "Too few arguments. At least URL and alias are required." << endl;
+      cout_n << specific_help;
+      return ZYPPER_EXIT_ERR_INVALID_ARGS;
     }
 
     Url url = make_url (arguments[0]);
@@ -702,20 +699,25 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
 
   else if (command == ZypperCommand::REMOVE_REPO)
   {
-    if (ghelp || arguments.size() < 1)
+    if (ghelp)
     {
-      if (ghelp)
-      {
-        cout << specific_help;
-        return ZYPPER_EXIT_OK;
-      }
-      else
-      {
-        cerr << _("Required argument missing.") << endl;
-        ERR << "Required argument missing." << endl;
-        cout_n << specific_help;
-        return ZYPPER_EXIT_ERR_INVALID_ARGS;
-      }
+      cout << specific_help;
+      return ZYPPER_EXIT_OK;
+    }
+
+    // check root user
+    if (geteuid() != 0)
+    {
+      cerr << _("Root privileges are required for modifying system repositories.") << endl;
+      return ZYPPER_EXIT_ERR_PRIVILEGES;
+    }
+
+    if (arguments.size() < 1)
+    {
+      cerr << _("Required argument missing.") << endl;
+      ERR << "Required argument missing." << endl;
+      cout_n << specific_help;
+      return ZYPPER_EXIT_ERR_INVALID_ARGS;
     }
 
     warn_if_zmd ();
@@ -737,20 +739,25 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
 
   else if (command == ZypperCommand::RENAME_REPO)
   {
-    if (ghelp || arguments.size() < 2)
+    if (ghelp)
     {
-      if (ghelp)
-      {
-        cout << specific_help;
-        return ZYPPER_EXIT_OK;
-      }
-      else
-      {
-        cerr << _("Too few arguments. At least URL and alias are required.") << endl;
-        ERR << "Too few arguments. At least URL and alias are required." << endl;
-        cout_n << specific_help;
-        return ZYPPER_EXIT_ERR_INVALID_ARGS;
-      }
+      cout << specific_help;
+      return ZYPPER_EXIT_OK;
+    }
+
+    // check root user
+    if (geteuid() != 0)
+    {
+      cerr << _("Root privileges are required for modifying system repositories.") << endl;
+      return ZYPPER_EXIT_ERR_PRIVILEGES;
+    }
+
+    if (arguments.size() < 2)
+    {
+      cerr << _("Too few arguments. At least URL and alias are required.") << endl;
+      ERR << "Too few arguments. At least URL and alias are required." << endl;
+      cout_n << specific_help;
+      return ZYPPER_EXIT_ERR_INVALID_ARGS;
     }
 
 //    cond_init_target ();
@@ -772,20 +779,25 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
 
   else if (command == ZypperCommand::MODIFY_REPO)
   {
-    if (ghelp || arguments.size() < 1)
+    if (ghelp)
     {
-      if (ghelp)
-      {
-        cout << specific_help;
-        return ZYPPER_EXIT_OK;
-      }
-      else
-      {
-        cerr << _("Alias is a required argument.") << endl;
-        ERR << "Na alias argument given." << endl;
-        cout_n << specific_help;
-        return ZYPPER_EXIT_ERR_INVALID_ARGS;
-      }
+      cout << specific_help;
+      return ZYPPER_EXIT_OK;
+    }
+
+    // check root user
+    if (geteuid() != 0)
+    {
+      cerr << _("Root privileges are required for modifying system repositories.") << endl;
+      return ZYPPER_EXIT_ERR_PRIVILEGES;
+    }
+
+    if (arguments.size() < 1)
+    {
+      cerr << _("Alias is a required argument.") << endl;
+      ERR << "Na alias argument given." << endl;
+      cout_n << specific_help;
+      return ZYPPER_EXIT_ERR_INVALID_ARGS;
     }
 
     modify_repo(arguments[0], copts);
@@ -795,7 +807,18 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
 
   else if (command == ZypperCommand::REFRESH)
   {
-    if (ghelp) { cout << specific_help; return !ghelp; }
+    if (ghelp)
+    {
+      cout << specific_help;
+      return ZYPPER_EXIT_OK;
+    }
+
+    // check root user
+    if (geteuid() != 0)
+    {
+      cerr << _("Root privileges are required for refreshing system repositories.") << endl;
+      return ZYPPER_EXIT_ERR_PRIVILEGES;
+    }
 
     refresh_repos();
   }
@@ -821,6 +844,13 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
       }
 
       gData.packages_to_uninstall = arguments;
+    }
+
+    // check root user
+    if (geteuid() != 0)
+    {
+      cerr << _("Root privileges are required for installing or uninstalling packages.") << endl;
+      return ZYPPER_EXIT_ERR_PRIVILEGES;
     }
 
     // read resolvable type
@@ -993,6 +1023,13 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
 
   else if (command == ZypperCommand::UPDATE) {
     if (ghelp) { cout << specific_help; return !ghelp; }
+
+    // check root user
+    if (geteuid() != 0)
+    {
+      cerr << _("Root privileges are required for updating packages.") << endl;
+      return ZYPPER_EXIT_ERR_PRIVILEGES;
+    }
 
     string skind = copts.count("type")?  copts["type"].front() :
       gSettings.is_rug_compatible? "package" : "patch";
