@@ -20,12 +20,16 @@ void display_progress (const string& s, int percent) {
   cout_v << flush;
 }
 
+// ----------------------------------------------------------------------------
+
 void display_tick (const string& s) {
   static AliveCursor cursor;
 
   cout_v << CLEARLN << cursor++ << " " << s;
   cout_v << flush;
 }
+
+// ----------------------------------------------------------------------------
 
 void display_done (const string& s) {
   static AliveCursor cursor;
@@ -34,9 +38,13 @@ void display_done (const string& s) {
   cout_v << flush;
 }
 
+// ----------------------------------------------------------------------------
+
 void display_done () {
   cout_v << endl;
 }
+
+// ----------------------------------------------------------------------------
 
 //template<typename Action>
 //Action ...
@@ -81,6 +89,36 @@ int read_action_ari (int default_action) {
 
   return default_action;
 }
+
+// ----------------------------------------------------------------------------
+
+// return the default value on input failure
+// TODO make this locale dependent?
+bool read_bool_with_default (bool defval) {
+  istream & stm = cin;
+
+  string c = "";
+  while (stm.good () && c != "y" && c != "Y" && c != "N" && c != "n")
+    c = zypp::str::getline (stm, zypp::str::TRIM);
+      
+  if (c == "y" || c == "Y")
+    return true;
+  else if (c == "n" || c == "N")
+    return false;
+  else
+    return defval;
+}
+
+// ----------------------------------------------------------------------------
+
+// Read an answer (ynYN)
+// Defaults to 'false'
+bool readBoolAnswer()
+{
+  return read_bool_with_default (false);
+}
+
+// ----------------------------------------------------------------------------
 
 string to_string (zypp::Resolvable::constPtr resolvable) {
   ostringstream ss;

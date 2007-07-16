@@ -20,7 +20,7 @@
 #include <zypp/Digest.h>
 
 #include "AliveCursor.h"
-#include "zypper-misc.h"
+#include "zypper-callbacks.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp {
@@ -37,7 +37,6 @@ namespace zypp {
         return readBoolAnswer();
       }
       
-#ifndef LIBZYPP_1xx
       virtual bool askUserToImportKey( const PublicKey &key )
       {
         if ( geteuid() != 0 )
@@ -46,36 +45,25 @@ namespace zypp {
         cout << CLEARLN << _("Import key ") << key.id() << _(" to trusted keyring?") << "  [y/n]: " << flush;
         return readBoolAnswer();
       } 
-#endif
 
-#ifdef LIBZYPP_1xx
-      virtual bool askUserToAcceptUnknownKey( const std::string &file, const std::string &id, const std::string &/*keyname*/, const std::string &/*fingerprint*/ )
-#else
       virtual bool askUserToAcceptUnknownKey( const std::string &file, const std::string &id )
-#endif
       {
         cout << CLEARLN << file << _(" is signed with an unknown key id: ") << id << ", " << _("continue?") << " [y/n]: " << flush;
         return readBoolAnswer();
       }
 
-#ifdef LIBZYPP_1xx
-      virtual bool askUserToTrustKey( const std::string &keyid, const std::string &keyname, const std::string &fingerprint) {
-#else
-      virtual bool askUserToTrustKey( const PublicKey &key ) {
+      virtual bool askUserToTrustKey( const PublicKey &key )
+      {
 	const std::string& keyid = key.id(), keyname = key.name(),
 	  fingerprint = key.fingerprint();
-#endif
         cout  << CLEARLN << _("Do you want to trust key id ") << keyid << " " << keyname << _(" fingerprint:") << fingerprint << " ? [y/n]: "  << flush;
         return readBoolAnswer();
       }
 
-#ifdef LIBZYPP_1xx
-      virtual bool askUserToAcceptVerificationFailed( const std::string &file, const std::string &keyid, const std::string &keyname, const std::string &fingerprint ) {
-#else
-      virtual bool askUserToAcceptVerificationFailed( const std::string &file,const PublicKey &key ) {
+      virtual bool askUserToAcceptVerificationFailed( const std::string &file,const PublicKey &key )
+      {
 	const std::string& keyid = key.id(), keyname = key.name(),
 	  fingerprint = key.fingerprint();
-#endif
         cout << file << _("Signature verification for ") << file
 	     << _(" with public key id ") << keyid << " " << keyname << _(" fingerprint:") << fingerprint << _(" failed, THIS IS RISKY!") << ". " << _("continue?") << " [y/n]: " << endl;
         return readBoolAnswer(); // TODO do this with format()

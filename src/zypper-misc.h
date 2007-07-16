@@ -21,7 +21,6 @@
  */
 void cond_init_target();
 
-bool readBoolAnswer();
 zypp::ResObject::Kind string_to_kind (const std::string &skind);
 void mark_for_install( const zypp::ResObject::Kind &kind,
 		       const std::string &name );

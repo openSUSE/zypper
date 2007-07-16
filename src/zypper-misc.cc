@@ -1,8 +1,6 @@
 #include <fstream>
 #include <sstream>
 #include <boost/format.hpp>
-#include "zypper.h"
-#include "zypper-misc.h"
 
 #include <zypp/Patch.h>
 #include <zypp/base/Algorithm.h>
@@ -11,6 +9,10 @@
 #include <zypp/RepoManager.h>
 #include <zypp/RepoInfo.h>
 #include <zypp/repo/RepoException.h>
+
+#include "zypper.h"
+#include "zypper-misc.h"
+#include "zypper-callbacks.h"
 
 using namespace zypp::detail;
 
@@ -31,30 +33,6 @@ void cond_init_target () {
     God->initializeTarget(gSettings.root_dir);
     done = true;
   }
-}
-
-// return the default value on input failure
-// TODO make this locale dependent?
-bool read_bool_with_default (bool defval) {
-  istream & stm = cin;
-
-  string c = "";
-  while (stm.good () && c != "y" && c != "Y" && c != "N" && c != "n")
-    c = zypp::str::getline (stm, zypp::str::TRIM);
-      
-  if (c == "y" || c == "Y")
-    return true;
-  else if (c == "n" || c == "N")
-    return false;
-  else
-    return defval;
-}
-
-// Read an answer (ynYN)
-// Defaults to 'false'
-bool readBoolAnswer()
-{
-  return read_bool_with_default (false);
 }
 
 // converts a user-supplied kind to a zypp kind object

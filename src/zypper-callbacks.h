@@ -48,5 +48,15 @@ void display_error (Error error, const std::string& reason) {
  *    is ignored.
  */
 int read_action_ari (int default_action = -1);
+
+/**
+ * Prompt for Yes/No answer from stdin.
+ * 
+ * \todo work with default
+ * \todo non-interactive mode
+ * \todo make this localized
+ */
+bool readBoolAnswer();
+
 std::string to_string (zypp::Resolvable::constPtr resolvable);
 #endif
