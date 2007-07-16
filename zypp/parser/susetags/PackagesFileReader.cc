@@ -278,7 +278,9 @@ namespace zypp
 	  /** Consume +Kwd:. */
 	  void consumeKwd( const MultiTagPtr & tag_r )
 	  {
-	    _data->authors.swap( tag_r->value );
+            std::copy( tag_r->value.begin(),
+                       tag_r->value.end(),
+                       std::inserter(_data->keywords, _data->keywords.begin()) );
 	  }
 
 	  /** Consume +Aut:. */
