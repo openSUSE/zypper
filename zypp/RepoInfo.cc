@@ -32,6 +32,7 @@ namespace zypp
     Impl()
       : enabled (indeterminate),
         autorefresh(indeterminate),
+        gpgcheck(indeterminate),
         type(repo::RepoType::NONE_e)
     {}
 
@@ -254,15 +255,15 @@ namespace zypp
     
     str << "type=" << type().asString() << endl;
     
-    if ( enabled() != indeterminate )
+    if ( ! indeterminate(enabled()) )
       str << "enabled=" << (enabled() ? "1" : "0") << endl;
-    if ( autorefresh() != indeterminate )
+    if ( ! indeterminate(autorefresh()) )
       str << "autorefresh=" << (autorefresh() ? "1" : "0") << endl;
-    if ( autorefresh() != indeterminate )
+    if ( ! indeterminate(gpgCheck()) )
       str << "gpgcheck=" << (gpgCheck() ? "1" : "0") << endl;
     if ( ! (gpgKeyUrl().asString().empty()) )
       str << "gpgkey=" <<gpgKeyUrl() << endl;
-    
+
     return str;
   }
 
