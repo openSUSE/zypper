@@ -99,7 +99,8 @@ static void print_repo_list( const std::list<zypp::RepoInfo> &repos )
     // zypper status (enabled, autorefresh)
     else
     {
-      tr << (repo.enabled() ? _("Yes") : _("No"));
+      tr << (repo.enabled() || indeterminate(repo.enabled()) ?
+          _("Yes") : _("No"));
       tr << (repo.autorefresh() ? _("Yes") : _("No"));
     }
 
