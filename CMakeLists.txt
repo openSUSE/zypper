@@ -168,6 +168,9 @@ MESSAGE(STATUS "version: ${VERSION}")
 MESSAGE(STATUS "Writing spec file...")
 CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/libzypp.spec.cmake ${CMAKE_BINARY_DIR}/package/libzypp.spec @ONLY)
 
+MESSAGE(STATUS "I hate you rpm-lint...!!!")
+CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/package/libzypp-rpmlint.cmake ${CMAKE_BINARY_DIR}/package/libzypp-${VERSION}-rpmlintrc @ONLY)
+
 MESSAGE(STATUS "Writing pkg-config file...")
 CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/libzypp.pc.cmake ${CMAKE_BINARY_DIR}/libzypp.pc @ONLY)
 INSTALL( FILES ${CMAKE_BINARY_DIR}/libzypp.pc DESTINATION ${LIB_INSTALL_DIR}/pkgconfig )

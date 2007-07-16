@@ -19,6 +19,7 @@ Summary:        Package, Patch, Pattern, and Product Management
 Version:        @VERSION@
 Release:        0
 Source:         @PACKAGE@-@VERSION@.tar.bz2
+Source1:        @PACKAGE@-@VERSION@-rpmlintrc
 Prefix:         /usr
 Provides:       yast2-packagemanager
 Obsoletes:      yast2-packagemanager
