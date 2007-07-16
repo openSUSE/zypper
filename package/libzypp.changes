@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Jul 16 15:41:31 CEST 2007 - jkupec@suse.cz
+
+- fixed some tribool bugs in RepoInfo
+- revision 6022
+
+-------------------------------------------------------------------
 Mon Jul 16 11:43:33 CEST 2007 - dmacvicar@suse.de
 
 - fix reading of non existant repo
