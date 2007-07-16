@@ -10,6 +10,8 @@
  *
 */
 #include <iostream>
+#include <boost/logic/tribool_io.hpp>
+
 #include "zypp/base/Logger.h"
 
 #include "zypp/RepoInfo.h"
