@@ -18,7 +18,7 @@
 #include "zypp/parser/yum/OtherFileReader.h"
 
 #undef ZYPP_BASE_LOGGER_LOGGROUP
-#define ZYPP_BASE_LOGGER_LOGGROUP "parser"
+#define ZYPP_BASE_LOGGER_LOGGROUP "parser::yum"
 
 using namespace std;
 using namespace zypp::xml;
