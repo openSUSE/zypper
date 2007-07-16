@@ -2,8 +2,9 @@
 Mon Jul 16 11:43:33 CEST 2007 - dmacvicar@suse.de
 
 - fix reading of non existant repo
-- r6015
+- r6018
 - first submission to stable
+- fix keywords parsing in susetags parser
 - version 3.11.8
 
 -------------------------------------------------------------------
