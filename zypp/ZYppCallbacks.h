@@ -14,16 +14,75 @@
 
 #include "zypp/Callback.h"
 #include "zypp/Resolvable.h"
-#include "zypp/Source.h"
+#include "zypp/Repository.h"
 #include "zypp/Pathname.h"
 #include "zypp/Message.h"
 #include "zypp/Url.h"
+#include "zypp/ProgressData.h"
 #include "zypp/media/MediaUserAuth.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
-  namespace source
+  
+  struct ProgressReport : public callback::ReportBase
+  {
+    virtual void start( const ProgressData &/*task*/ )
+    {}
+    
+    virtual bool progress( const ProgressData &/*task*/ )
+    { return true; }
+
+//     virtual Action problem(
+//         Repository /*source*/
+//         , Error /*error*/
+//         , const std::string &/*description*/ )
+//     { return ABORT; }
+
+    virtual void finish( const ProgressData &/*task*/ )
+    {}
+
+  };
+
+  struct ProgressReportAdaptor
+  {
+    
+    ProgressReportAdaptor( const ProgressData::ReceiverFnc &fnc,
+                           callback::SendReport<ProgressReport> &report )
+      : _fnc(fnc)
+      , _report(report)
+      , _first(true)
+    {
+    }
+    
+    bool operator()( const ProgressData &progress )
+    {
+      if ( _first )
+      {
+        _report->start(progress);
+        _first = false;
+      }
+      
+      _report->progress(progress);
+      bool value = true;
+      if ( _fnc )
+        value = _fnc(progress);
+      
+      if ( progress.val() == progress.max() )
+      {
+        _report->finish(progress);
+      }
+      return value;
+    }
+    
+    ProgressData::ReceiverFnc _fnc;
+    callback::SendReport<ProgressReport> &_report;
+    bool _first;
+  };
+  
+  ////////////////////////////////////////////////////////////////////////////
+  
+  namespace repo
   {
     // progress for downloading a resolvable
     struct DownloadResolvableReport : public callback::ReportBase
@@ -114,7 +173,7 @@ namespace zypp
     };
 
     // progress for probing a source
-    struct ProbeSourceReport : public callback::ReportBase
+    struct ProbeRepoReport : public callback::ReportBase
     {
       enum Action {
         ABORT,  // abort and return error
@@ -140,7 +199,7 @@ namespace zypp
       virtual Action problem( const Url &/*url*/, Error /*error*/, const std::string &/*description*/ ) { return ABORT; }
     };
 
-    struct SourceCreateReport : public callback::ReportBase
+    struct RepoCreateReport : public callback::ReportBase
     {
       enum Action {
         ABORT,  // abort and return error
@@ -174,7 +233,7 @@ namespace zypp
       {}
     };
 
-    struct SourceReport : public callback::ReportBase
+    struct RepoReport : public callback::ReportBase
     {
       enum Action {
         ABORT,  // abort and return error
@@ -189,18 +248,18 @@ namespace zypp
         INVALID		// th source is invalid
       };
 
-      virtual void start( Source_Ref /*source*/, const std::string &/*task*/ ) {}
-      virtual bool progress( int /*value*/ )
+      virtual void start( const ProgressData &/*task*/, const RepoInfo /*repo*/  ) {}
+      virtual bool progress( const ProgressData &/*task*/ )
       { return true; }
 
       virtual Action problem(
-          Source_Ref /*source*/
+          Repository /*source*/
           , Error /*error*/
           , const std::string &/*description*/ )
       { return ABORT; }
 
       virtual void finish(
-          Source_Ref /*source*/
+          Repository /*source*/
           , const std::string &/*task*/
           , Error /*error*/
           , const std::string &/*reason*/ )
@@ -236,7 +295,7 @@ namespace zypp
       };
 
       virtual Action requestMedia(
-        Source_Ref /*source*/
+        Repository /*source*/
         , unsigned /*mediumNr*/
         , Error /*error*/
         , const std::string &/*description*/

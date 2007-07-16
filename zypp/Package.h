@@ -40,10 +40,7 @@ namespace zypp
     typedef std::set<PackageKeyword> Keywords;
 
   public:
-    /**
-     * Checksum the source says this package should have
-     */
-    CheckSum checksum() const;
+    
     /** Get the package change log */
     Changelog changelog() const;
     /** */
@@ -80,10 +77,19 @@ namespace zypp
 
     /** Disk usage per directory */
     DiskUsage diskusage() const;
-
-    /** location in source */
-    Pathname location() const;
-
+    
+    /**
+     * Checksum the source says this package should have
+     * \deprecated Use location().checksum()
+     */
+    ZYPP_DEPRECATED CheckSum checksum() const
+    { return location().checksum(); }
+    
+    /**
+     * \short Location of the resolvable in the repository
+     */
+    OnMediaLocation location() const;
+    
   protected:
     Package( const NVRAD & nvrad_r );
     /** Dtor */

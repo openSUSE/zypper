@@ -31,6 +31,8 @@ namespace sqlite3x
 
 database_error::database_error(const char *msg) : zypp::Exception(msg)
 {}
+database_error::database_error(const std::string & msg) : zypp::Exception(msg)
+{}
 database_error::database_error(sqlite3_connection &con) : zypp::Exception(sqlite3_errmsg(con.db))
 {}
 

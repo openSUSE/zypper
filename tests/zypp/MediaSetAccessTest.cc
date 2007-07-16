@@ -11,11 +11,10 @@ using std::cout;
 using std::endl;
 using std::string;
 using namespace zypp;
-using namespace zypp::media;
 using namespace boost::unit_test;
 
 
-class SimpleVerifier : public zypp::media::MediaVerifierBase
+class SimpleVerifier : public media::MediaVerifierBase
 {
 public:
 
@@ -127,7 +126,7 @@ void msa_provide_files_set_verified(const string &urlstr)
 
   // provide file from invalid media
   BOOST_CHECK_THROW(setaccess.provideFile("/test.txt", 2),
-                    zypp::media::MediaNotDesiredException);
+                    media::MediaNotDesiredException);
 
   // provide file from media3
   Pathname file3 = setaccess.provideFile("/test.txt", 3);
@@ -146,6 +145,61 @@ void msa_provide_files_single(const string &urlstr)
   // provide file from media
   Pathname file = setaccess.provideFile("/test.txt", 1);
   BOOST_CHECK(check_file_exists(file) == true);
+  
+  // provide non-existent file
+  // (default answer from callback should be ABORT)
+  BOOST_CHECK_THROW(setaccess.provideFile("/imnothere", 2),
+                    media::MediaFileNotFoundException);
+}
+
+/*
+ * Provide directory from src/cd1.
+ */
+void msa_provide_dir(const string &urlstr)
+{
+  Url url(urlstr);
+  MediaSetAccess setaccess(url);
+
+  Pathname dir = setaccess.provideDir("/dir", false, 1);
+  
+  Pathname file1 = dir + "/file1";
+  BOOST_CHECK(check_file_exists(file1) == true);
+
+  Pathname file2 = dir + "/file2";
+  BOOST_CHECK(check_file_exists(file2) == true);
+
+  // provide non-existent dir
+  // (default answer from callback should be ABORT)
+  BOOST_CHECK_THROW(setaccess.provideDir("/imnothere", 2),
+                    media::MediaFileNotFoundException);
+
+  // This can't be properly tested with 'dir' schema, probably only curl
+  // schemas (http, ftp) where download is actually needed.
+  // Other schemas just get mounted onto a local dir and the whole subtree
+  // is automatically available that way.
+  // BOOST_CHECK(check_file_exists(dir + "/subdir/file") == false);
+  // BOOST_CHECK(check_file_exists(dir + "/subdir") == false);
+}
+
+
+/*
+ * Provide directory from src/cd1 (recursively).
+ */
+void msa_provide_dirtree(const string &urlstr)
+{
+  Url url(urlstr);
+  MediaSetAccess setaccess(url);
+
+  Pathname dir = setaccess.provideDir("/dir", true, 1);
+
+  Pathname file1 = dir + "/file1";
+  BOOST_CHECK(check_file_exists(file1) == true);
+
+  Pathname file2 = dir + "/file2";
+  BOOST_CHECK(check_file_exists(file2) == true);
+
+  Pathname file3 = dir + "/subdir/file";
+  BOOST_CHECK(check_file_exists(file3) == true);
 }
 
 
@@ -153,19 +207,21 @@ void msa_provide_files_single(const string &urlstr)
  * 
  * test data dir structure:
  * 
- * src1/
- * src1/cd1/
- * src1/cd1/test.txt
- * src1/cd1/.media1
- * src1/cd2/
- * src1/cd2/test.txt
- * src1/cd2/.mediabad
- * src1/cd3/
- * src1/cd3/test.txt
- * src1/cd3/.media3
- * src2
- * src2/test.txt
- * src2/.media
+ * .
+ * |-- src1
+ * |   |-- cd1
+ * |   |   |-- dir
+ * |   |   |   |-- file1
+ * |   |   |   |-- file2
+ * |   |   |   `-- subdir
+ * |   |   |       `-- file
+ * |   |   `-- test.txt
+ * |   |-- cd2
+ * |   |   `-- test.txt
+ * |   `-- cd3
+ * |       `-- test.txt
+ * `-- src2
+ *     `-- test.txt
  * 
  */
 
@@ -175,7 +231,8 @@ init_unit_test_suite( int argc, char *argv[] )
   if (argc < 2)
   {
     cout << "mediasetaccesstest:"
-      " path to directory with test data required as parameter" << endl;
+      " absolute path to local directory with test data required as parameter"
+      << endl;
     return (test_suite *)0;
   }
 
@@ -200,6 +257,14 @@ init_unit_test_suite( int argc, char *argv[] )
   // provide file from single media
   test->add(BOOST_PARAM_TEST_CASE(&msa_provide_files_single,
                                   (std::string const*)params_single, params_single+1));
+
+  // provide directory
+  test->add(BOOST_PARAM_TEST_CASE(&msa_provide_dir,
+                                  (std::string const*)params, params+1));
+
+  // provide directory tree
+  test->add(BOOST_PARAM_TEST_CASE(&msa_provide_dirtree,
+                                  (std::string const*)params, params+1));
 
   return test;
 }

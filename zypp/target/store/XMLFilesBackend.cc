@@ -17,11 +17,9 @@
 #include "zypp/base/Logger.h"
 #include "zypp/base/Exception.h"
 #include "zypp/base/Random.h"
-
+#include "zypp/base/Gettext.h"
 #include "zypp/CapFactory.h"
 #include "zypp/Digest.h"
-#include "zypp/Source.h"
-#include "zypp/SourceManager.h"
 #include "zypp/ExternalProgram.h"
 
 #include "zypp/target/store/xml/XMLPatchImpl.h"
@@ -48,8 +46,6 @@
 #include <zypp/ZYppFactory.h>
 #include <zypp/ZYpp.h>
 #include <zypp/PathInfo.h>
-
-#include "zypp/parser/xmlstore/XMLSourceCacheParser.h"
 
 #include "boost/filesystem/operations.hpp" // includes boost/filesystem/path.hpp
 #include "boost/filesystem/fstream.hpp"    // ditto
@@ -812,7 +808,7 @@ XMLFilesBackend::createPatch( const zypp::parser::xmlstore::XMLPatchData & parse
     impl->_delete_notify = parsed.delete_notify;
     impl->_license_to_confirm = parsed.license_to_confirm;
     impl->_size = parsed.size;
-    impl->_archive_size = parsed.archive_size;
+    impl->_downloadSize = parsed.downloadSize;
     impl->_install_only = parsed.install_only;
     impl->_build_time = parsed.build_time;
     impl->_install_time = parsed.install_time;
@@ -902,7 +898,7 @@ XMLFilesBackend::createAtom( const zypp::parser::xmlstore::XMLPatchAtomData & pa
     impl->_delete_notify = parsed.delete_notify;
     impl->_license_to_confirm = parsed.license_to_confirm;
     impl->_size = parsed.size;
-    impl->_archive_size = parsed.archive_size;
+    impl->_downloadSize = parsed.downloadSize;
     impl->_install_only = parsed.install_only;
     impl->_build_time = parsed.build_time;
     impl->_install_time = parsed.install_time;
@@ -937,7 +933,7 @@ XMLFilesBackend::createMessage( const zypp::parser::xmlstore::XMLPatchMessageDat
     impl->_delete_notify = parsed.delete_notify;
     impl->_license_to_confirm = parsed.license_to_confirm;
     impl->_size = parsed.size;
-    impl->_archive_size = parsed.archive_size;
+    impl->_downloadSize = parsed.downloadSize;
     impl->_install_only = parsed.install_only;
     impl->_build_time = parsed.build_time;
     impl->_install_time = parsed.install_time;
@@ -989,7 +985,7 @@ XMLFilesBackend::createScript(const zypp::parser::xmlstore::XMLPatchScriptData &
     impl->_delete_notify = parsed.delete_notify;
     impl->_license_to_confirm = parsed.license_to_confirm;
     impl->_size = parsed.size;
-    impl->_archive_size = parsed.archive_size;
+    impl->_downloadSize = parsed.downloadSize;
     impl->_install_only = parsed.install_only;
     impl->_build_time = parsed.build_time;
     impl->_install_time = parsed.install_time;
@@ -1044,7 +1040,7 @@ XMLFilesBackend::createProduct( const zypp::parser::xmlstore::XMLProductData & p
     impl->_delete_notify = parsed.delete_notify;
     impl->_license_to_confirm = parsed.license_to_confirm;
     impl->_size = parsed.size;
-    impl->_archive_size = parsed.archive_size;
+    impl->_downloadSize = parsed.downloadSize;
     impl->_install_only = parsed.install_only;
     impl->_build_time = parsed.build_time;
     impl->_install_time = parsed.install_time;
@@ -1186,7 +1182,7 @@ XMLFilesBackend::createPattern( const zypp::parser::xmlstore::XMLPatternData & p
     impl->_delete_notify = parsed.delete_notify;
     impl->_license_to_confirm = parsed.license_to_confirm;
     impl->_size = parsed.size;
-    impl->_archive_size = parsed.archive_size;
+    impl->_downloadSize = parsed.downloadSize;
     impl->_install_only = parsed.install_only;
     impl->_build_time = parsed.build_time;
     impl->_install_time = parsed.install_time;
@@ -1228,7 +1224,7 @@ XMLFilesBackend::createSelection( const zypp::parser::xmlstore::XMLPatternData &
     impl->_delete_notify = parsed.delete_notify;
     impl->_license_to_confirm = parsed.license_to_confirm;
     impl->_size = parsed.size;
-    impl->_archive_size = parsed.archive_size;
+    impl->_downloadSize = parsed.downloadSize;
     impl->_install_only = parsed.install_only;
     impl->_build_time = parsed.build_time;
     impl->_install_time = parsed.install_time;
@@ -1341,93 +1337,6 @@ void XMLFilesBackend::doTest()
 std::ostream & operator<<( std::ostream & str, const XMLFilesBackend & obj )
 {
 	return str;
-}
-
-/////////////////////////////////////////////////////////
-// SOURCES API
-////////////////////////////////////////////////////////
-
-source::SourceInfoList
-XMLFilesBackend::storedSources() const
-{
-  path source_p = path(d->root.asString()) / path(ZYPP_DB_DIR) / path ("sources");
-  source::SourceInfoList sources;
-  DBG << "Reading source cache in " << source_p.string() << std::endl;
-  directory_iterator end_iter;
-  // return empty list if the dir does not exist
-  if ( !exists( source_p ) )
-  {
-    ERR << "path " << source_p.string() << " does not exists. Required to read source cache " << std::endl;
-    return source::SourceInfoList();
-  }
-
-  for ( directory_iterator dir_itr( source_p ); dir_itr != end_iter; ++dir_itr )
-  {
-    DBG << "[source-list] - " << dir_itr->leaf() << std::endl;
-    //sources.insert( sourceDataFromCacheFile( source_p + "/" + dir_itr->leaf() ) );
-    std::string full_path = (source_p / dir_itr->leaf()).string();
-    std::ifstream anIstream(full_path.c_str());
-    zypp::parser::xmlstore::XMLSourceCacheParser iter(anIstream, "");
-    for (; ! iter.atEnd(); ++iter) {
-      source::SourceInfo data = **iter;
-      sources.push_back(data);
-    }
-  }
-  MIL << "done reading source cache" << std::endl;
-  return sources;
-
-}
-
-void
-XMLFilesBackend::storeSource(const source::SourceInfo &data)
-{
-  // serialize and save a file
-  std::string xml = toXML(data);
-  path source_p = path(d->root.asString()) / path(ZYPP_DB_DIR) / path ("sources");
-
-  // generate a filename
-  if (data.alias().size() == 0)
-  {
-    ZYPP_THROW(Exception("Cant save source with empty alias"));
-  }
-
-  //DBG << std::endl << xml << std::endl;
-  std::ofstream file;
-  //DBG << filename << std::endl;
-  try
-  {
-    std::stringstream message_stream(data.alias());
-    std::string full_path = (source_p / Digest::digest("MD5", message_stream)).string();
-
-    file.open(full_path.c_str());
-    file << xml;
-    file.close();
-  }
-  catch ( std::exception &e )
-  {
-    ERR << "Error saving source " << data.alias() << " in the cache" << std::endl;
-    ZYPP_THROW(Exception(e.what()));
-  }
-  updateTimestamp();
-}
-
-void
-XMLFilesBackend::deleteSource(const std::string &alias)
-{
-  // just delete the files
-  path source_p = path(d->root.asString()) / path(ZYPP_DB_DIR) / path ("sources");
-  try
-  {
-    std::stringstream message_stream(alias);
-    std::string full_path = (source_p / Digest::digest("MD5", message_stream)).string();
-    remove(full_path);
-  }
-  catch ( std::exception &e )
-  {
-    ERR << "Error deleting source " << alias << " in the cache" << std::endl;
-    ZYPP_THROW(Exception(e.what()));
-  }
-  updateTimestamp();
 }
 
 /////////////////////////////////////////////////////////////////

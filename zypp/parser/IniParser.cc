@@ -69,7 +69,7 @@ void IniParser::endParse()
 void IniParser::parse( const InputStream & input_r, const ProgressData::ReceiverFnc & progress )
 {
   boost::regex rxSection("^\\[(.+)\\]$");
-  boost::regex rxKeyValue("^(.+)[[:space:]]*=[[:space:]]*(.+)$");
+  boost::regex rxKeyValue("^(.*[^[:space:]])[ [:space:]]*=[[:space:]]*(.+)$");
   
   MIL << "Start parsing " << input_r << endl;
   _inputname = input_r.name();

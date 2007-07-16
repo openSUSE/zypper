@@ -1,4 +1,87 @@
 -------------------------------------------------------------------
+Mon Jul 16 11:43:33 CEST 2007 - dmacvicar@suse.de
+
+- fix reading of non existant repo
+- r6015
+- first submission to stable
+- version 3.11.8
+
+-------------------------------------------------------------------
+Wed Jul 11 19:14:47 CEST 2007 - jkupec@suse.cz
+
+- make resolvable query complete exceptionless with the database
+- test that packages have some attributes
+- disable progress adaptor for now
+- revision 5977
+- version 3.11.7
+
+-------------------------------------------------------------------
+Wed Jul 11 14:37:02 CEST 2007 - ma@suse.de
+
+- fixed unresolved symbols
+- revision 5972
+- version 3.11.6
+
+-------------------------------------------------------------------
+Wed Jul 11 13:31:39 CEST 2007 - ma@suse.de
+
+- fixed TranslatedText creating unwanted entries.
+- fixed capability processing
+- revision 5964
+- version 3.11.5
+
+-------------------------------------------------------------------
+Tue Jul 10 20:01:18 CEST 2007 - jkupec@suse.cz
+
+- MediaSetAccess::release() added
+- Use attachDesiredMedia in MediaProducts
+- Progress reporting improved
+- revision 5959
+- version 3.11.4
+
+-------------------------------------------------------------------
+Tue Jul 10 14:23:13 CEST 2007 - ma@suse.de
+
+- fixed parsing translated texts.
+- added source packages.
+- revision 5947
+- version 3.11.3
+
+-------------------------------------------------------------------
+Tue Jul 10 13:11:31 CEST 2007 - jkupec@suse.cz
+
+- repo callbacks fixed
+- Fixed YUM parser progress reporting
+- Added CombinedProgressData
+- make RepoImpl::resolvables() load lazy
+- MediaProducts added for scanning products file
+- Implement cache schema versioning and automatic invalidation of
+  cache when schema changes
+- revision 5942
+- version 3.11.2
+
+-------------------------------------------------------------------
+Fri Jul  6 13:51:50 CEST 2007 - ma@suse.de
+
+- Propagate pools repository_iterator to the UI
+- revision 5911
+- version 3.11.1
+
+-------------------------------------------------------------------
+Thu Jul  5 17:02:08 CEST 2007 - ma@suse.de
+
+- Package::location is now returns an OnMediaLocation
+- archivesize() renamed to downloadSize()
+- Allow to iterate all Repositories that contribute
+  Resolvables to the Pool.
+- MediaSetAccess::provideDir added
+- remove useless url check
+- add old-api-style wrapper
+- Add MediaProducts class
+- revision 5892
+- version 3.11.0
+
+-------------------------------------------------------------------
 Thu Jul  5 09:31:02 CEST 2007 - schubi@suse.de
 
 - function isInstalledBy/installs
@@ -6,6 +89,22 @@ Thu Jul  5 09:31:02 CEST 2007 - schubi@suse.de
   triggered for installation, or the dependency is already satisfied.
 - Revision 5884
 - Version 3.4.0
+
+-------------------------------------------------------------------
+Tue Jul  3 13:07:31 CEST 2007 - jkupec@suse.cz
+
+- removed unused %{prefix}/lib/zypp from %files in spec file
+- revision 5870
+
+-------------------------------------------------------------------
+Tue Jul  3 10:37:37 CEST 2007 - jkupec@suse.cz
+
+- Old API (SourceManager, metadata parsers) dropped in favor of the
+  new refactored ones (RepoManager, RepoParser(s), cache subtree,
+  repo subtree).
+- Some new API improvements.
+- revision 5868
+- version 3.10.0 (bumped minor to 10 to indicate refactoring branch)
 
 -------------------------------------------------------------------
 Fri Jun 22 15:28:03 CEST 2007 - schubi@suse.de
@@ -32,7 +131,7 @@ Wed Jun 20 11:47:33 CEST 2007 - schubi@suse.de
 - Evaluate ResolverInfoNeededBy for more information in the error
   messages
 - Enlarge detail description in the error messages
-- Revision 5807 
+- Revision 5807
 
 -------------------------------------------------------------------
 Tue Jun 19 13:59:09 CEST 2007 - ma@suse.de

@@ -510,7 +510,7 @@ namespace zypp
       // xpath: /patch/atoms/package/patchrpm/location
       if (reader_r->name() == "location")
       {
-        _patchrpm->location.filePath = reader_r->getAttribute("href").asString();
+        _patchrpm->location.setFilename(reader_r->getAttribute("href").asString());
         // ignoring attribute 'base'
         return true;
       }
@@ -518,9 +518,9 @@ namespace zypp
       // xpath: /patch/atoms/package/patchrpm/checksum
       if (reader_r->name() == "checksum")
       {
-        _patchrpm->location.fileChecksum = CheckSum(
+        _patchrpm->location.setChecksum(CheckSum(
                   reader_r->getAttribute("type").asString(),
-                  reader_r.nodeText().asString());
+                  reader_r.nodeText().asString()));
         return true;
       }
 
@@ -540,8 +540,8 @@ namespace zypp
       if (reader_r->name() == "size")
       {
         // size of the rpm file
-        _patchrpm->location.fileSize = str::strtonum<ByteCount::SizeType>(
-            reader_r->getAttribute("package").asString());
+        _patchrpm->location.setDownloadSize(str::strtonum<ByteCount::SizeType>(
+            reader_r->getAttribute("package").asString()));
 
         // size of ??
         _patchrpm->archiveSize = str::strtonum<ByteCount::SizeType>(
@@ -586,7 +586,7 @@ namespace zypp
       // xpath: /patch/atoms/package/deltarpm/location
       if (reader_r->name() == "location")
       {
-        _deltarpm->location.filePath = reader_r->getAttribute("href").asString();
+        _deltarpm->location.setFilename(reader_r->getAttribute("href").asString());
         // ignoring attribute 'base'
         return true;
       }
@@ -594,9 +594,9 @@ namespace zypp
       // xpath: /patch/atoms/package/deltarpm/checksum
       if (reader_r->name() == "checksum")
       {
-        _deltarpm->location.fileChecksum = CheckSum(
+        _deltarpm->location.setChecksum(CheckSum(
                   reader_r->getAttribute("type").asString(),
-                  reader_r.nodeText().asString());
+                  reader_r.nodeText().asString()));
         return true;
       }
 
@@ -616,8 +616,8 @@ namespace zypp
       if (reader_r->name() == "size")
       {
         // size of the rpm file
-        _deltarpm->location.fileSize = str::strtonum<ByteCount::SizeType>(
-            reader_r->getAttribute("package").asString());
+        _deltarpm->location.setDownloadSize(str::strtonum<ByteCount::SizeType>(
+            reader_r->getAttribute("package").asString()));
 
         // size of ??
         _deltarpm->archiveSize = str::strtonum<ByteCount::SizeType>(
@@ -763,16 +763,16 @@ namespace zypp
         // ignoring reader_r->getAttribute("xml:base").asString();
 
         // xsd:anyURI do script file path
-        script->doScriptLocation.filePath = reader_r->getAttribute("href").asString();
+        script->doScriptLocation.setFilename(reader_r->getAttribute("href").asString());
         return true;
       }
 
       // xpath: /patch/atoms/script/do-checksum
       if (reader_r->name() == "do-checksum")
       {
-        script->doScriptLocation.fileChecksum = CheckSum(
+        script->doScriptLocation.setChecksum(CheckSum(
                             reader_r->getAttribute("type").asString(),
-                            reader_r.nodeText().asString());
+                            reader_r.nodeText().asString()));
         return true;
       }
 
@@ -783,16 +783,16 @@ namespace zypp
         // ignoring reader_r->getAttribute("xml:base").asString();
 
         // xsd:anyURI undo script file path
-        script->undoScriptLocation.filePath = reader_r->getAttribute("href").asString();
+        script->undoScriptLocation.setFilename(reader_r->getAttribute("href").asString());
         return true;
       }
 
       // xpath: /patch/atoms/script/undo-checksum
       if (reader_r->name() == "undo-checksum")
       {
-        script->undoScriptLocation.fileChecksum = CheckSum(
+        script->undoScriptLocation.setChecksum(CheckSum(
                             reader_r->getAttribute("type").asString(),
-                            reader_r.nodeText().asString());
+                            reader_r.nodeText().asString()));
         return true;
       }
     }

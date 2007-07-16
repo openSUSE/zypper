@@ -21,9 +21,6 @@
 #include <zypp/Url.h>
 #include <zypp/Date.h>
 #include <zypp/Patch.h>
-#include <zypp/source/SourceInfo.h>
-
-using namespace zypp::source;
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -115,22 +112,6 @@ namespace zypp
       void removeFlag( const std::string &key, const std::string &flag );
       std::set<std::string> flags( const std::string &key ) const;
       bool hasFlag( const std::string &key, const std::string &flag ) const;
-
-      /////////////////////////////////////////////////////////
-      // SOURCES API
-      ////////////////////////////////////////////////////////
-      /**
-       * Query for installed Sources
-       */
-      std::list<SourceInfo> storedSources() const;
-      /**
-       * Add a new installed source
-       */
-      void storeSource(const SourceInfo &data);
-      /**
-       * Delete an installed source
-       */
-      void deleteSource(const std::string &alias);
 
     private:
       class Private;

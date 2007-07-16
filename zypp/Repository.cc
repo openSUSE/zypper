@@ -41,28 +41,41 @@ namespace zypp
   Repository::NumericId Repository::numericId() const
   { return _pimpl->numericId(); }
 
-  const ResStore & Repository::resolvables()
+  const ResStore & Repository::resolvables() const
   {
     return _pimpl->resolvables();
   }
-  
-  const RepoInfo Repository::info() const
+
+  const RepoInfo & Repository::info() const
   {
     return _pimpl->info();
   }
-  
+
   const std::list<packagedelta::PatchRpm> &
   Repository::patchRpms() const
   {
     return _pimpl->patchRpms();
   }
-    
+
   const std::list<packagedelta::DeltaRpm> &
   Repository::deltaRpms() const
   {
     return _pimpl->deltaRpms();
   }
-  
-  
+
+  std::ostream & operator<<( std::ostream & str, const Repository & obj )
+  {
+    return str << "[" << obj.info().alias() << "]";
+  }
+
+  bool operator==( const Repository & lhs, const Repository & rhs )
+  {
+    return (lhs.info().alias() == rhs.info().alias());
+  }
+
+  bool operator<( const Repository & lhs, const Repository & rhs )
+  {
+    return (lhs.info().alias() < rhs.info().alias());
+  }
 }
 

@@ -30,8 +30,10 @@
 #ifndef ZYPP_SOLVER_DETAIL_INSTALLORDER_H
 #define ZYPP_SOLVER_DETAIL_INSTALLORDER_H
 
+#include <string>
 #include <list>
 #include <map>
+#include <set>
 
 #include "zypp/PoolItem.h"
 #include "zypp/ResPool.h"
@@ -97,6 +99,8 @@ class InstallOrder
 	bool _dirty;
 
 	unsigned _numrun;
+
+	std::set<std::string> _logset;
 
     private:
 	void rdfsvisit (PoolItem_Ref item);

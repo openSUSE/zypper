@@ -13,7 +13,6 @@
 #define ZYPP_TARGET_RPM_RPMPACKAGEIMPL_H
 
 #include "zypp/detail/PackageImplIf.h"
-#include "zypp/Source.h"
 #include "zypp/Changelog.h"
 #include "zypp/target/rpm/RpmHeader.h"
 
@@ -65,8 +64,7 @@ public:
   virtual PackageGroup group() const;
   /** */
   virtual Changelog changelog() const;
-  /** */
-  virtual Pathname location() const;
+  
   /** Don't ship it as class Url, because it might be
    * in fact anything but a legal Url. */
   virtual std::string url() const;
@@ -83,24 +81,25 @@ public:
   /** */
   virtual ByteCount sourcesize() const;
   /** */
-  virtual ByteCount archivesize() const;
-  /** */
   virtual std::list<std::string> filenames() const;
   /** */
   virtual std::string type() const;
   /** */
   virtual DiskUsage diskUsage() const;
   /** */
-  virtual Source_Ref source() const;
+  virtual Repository repository() const;
 
   /** for 'local' RPMs  */
-  void setLocation (const Pathname & pathname)
+  void setLocation (const OnMediaLocation &loc)
   {
-    _location = pathname;
+    _location = loc;
   }
-  void setSource (Source_Ref source)
+  
+  OnMediaLocation location() const;
+  
+  void setRepository (Repository repo)
   {
-    _source = source;
+    _repository = repo;
   }
 
 protected:
@@ -115,13 +114,12 @@ protected:
   std::string _packager;
   PackageGroup _group;
   Changelog _changelog;
-  Pathname _location;			// for 'local' rpms
   std::string _type;
   std::list<std::string> _filenames;
   DiskUsage _disk_usage;
   ByteCount _size;
-  ByteCount _archivesize;
-  Source_Ref _source;
+  Repository _repository;
+  OnMediaLocation _location;
 };
 ///////////////////////////////////////////////////////////////////
 } // namespace rpm

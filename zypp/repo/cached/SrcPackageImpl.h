@@ -10,51 +10,43 @@
 #ifndef CachedRepoSrcPackageImpl_H
 #define CachedRepoSrcPackageImpl_H
 
-#include "zypp/detail/PackageImpl.h"
-#include "zypp/Source.h"
-//#include <sqlite3.h>
+#include "zypp/detail/SrcPackageImpl.h"
+#include "zypp/repo/cached/RepoImpl.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 namespace repo
-{
+{ /////////////////////////////////////////////////////////////////
 namespace cached
 {
   ///////////////////////////////////////////////////////////////////
   //
-  //        CLASS NAME : CachedSourcePackageImpl
+  //        CLASS NAME : SourcePackageImpl
   //
   class SrcPackageImpl : public detail::SrcPackageImplIf
   {
   public:
 
-    SrcPackageImpl( Source_Ref source_r );
+    SrcPackageImpl( const data::RecordId &id, repo::cached::RepoImpl::Ptr repository_r );
+
+    virtual Repository repository() const;
     
     virtual TranslatedText summary() const;
     virtual TranslatedText description() const;
-    virtual ByteCount size() const;
-    virtual PackageGroup group() const;
-    virtual ByteCount archivesize() const;
-    virtual Pathname location() const;
-    virtual bool installOnly() const;
-    virtual Source_Ref source() const;
-    virtual unsigned mediaNr() const;
+    virtual TranslatedText insnotify() const;
+    virtual TranslatedText delnotify() const;
+    virtual TranslatedText licenseToConfirm() const;
     virtual Vendor vendor() const;
-
-  protected:
-    Source_Ref _source;
-    TranslatedText _summary;
-    TranslatedText _description;
-    PackageGroup _group;
-    Pathname _location;
-    bool _install_only;
-    unsigned _media_nr;
-
-    ByteCount _size_installed;
-    ByteCount _size_archive;
-
-    bool _data_loaded;
+    virtual ByteCount size() const;
+    virtual bool installOnly() const;
+    virtual Date buildtime() const;
+    virtual Date installtime() const;
+    
+    virtual OnMediaLocation location() const;
+  private:
+    repo::cached::RepoImpl::Ptr _repository;
+    data::RecordId              _id;
   };
   /////////////////////////////////////////////////////////////////
 } // ns cached

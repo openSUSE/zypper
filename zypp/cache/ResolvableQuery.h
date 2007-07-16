@@ -8,6 +8,7 @@
 #include "zypp/Pathname.h"
 #include "zypp/data/ResolvableData.h"
 #include "zypp/data/RecordId.h"
+#include "zypp/cache/Attribute.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -15,7 +16,7 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
   namespace cache
   { /////////////////////////////////////////////////////////////////
- 
+
    /**
     * The resolvable query class allows you to query for resolvable
     * data and properties from the cache.
@@ -28,9 +29,9 @@ namespace zypp
       * first parameter is the resolvable id.
       * second parameter is a \ref data::ResObjectData object with the resource
       */
-      typedef function<bool( const data::RecordId &, 
+      typedef function<bool( const data::RecordId &,
                              data::ResObject_Ptr )> ProcessResolvable;
-      
+
       /**
        * Constructor
        *
@@ -38,6 +39,8 @@ namespace zypp
        */
       ResolvableQuery( const Pathname &dbdir );
       
+      ~ResolvableQuery();
+
       /**
       * Query by record id
       * \param record_id Resolvable id to query
@@ -45,7 +48,7 @@ namespace zypp
       */
       void query( const data::RecordId &record_id,
                   ProcessResolvable fnc  );
-      
+
       /**
       * Query by matching text
       * \param text text to match
@@ -53,7 +56,7 @@ namespace zypp
       */
       void query( const std::string &text,
                   ProcessResolvable fnc  );
-      
+
       /**
        * Queries a specifc attribute for a resolvable
        *
@@ -68,6 +71,11 @@ namespace zypp
                                  const std::string &klass,
                                  const std::string &name,
                                  int default_value = -1 );
+      /** \overload */
+      int queryNumericAttribute( const data::RecordId &record_id,
+                                 const Attribute& attr,
+                                 int default_value = -1 )
+      { return queryNumericAttribute( record_id, attr.klass, attr.name, default_value ); }
 
 
       /**
@@ -84,6 +92,11 @@ namespace zypp
                                   const std::string &klass,
                                   const std::string &name,
                                   bool default_value = false );
+      /** \overload */
+      bool queryBooleanAttribute( const data::RecordId &record_id,
+                                  const Attribute& attr,
+                                  bool default_value = false )
+      { return queryBooleanAttribute( record_id, attr.klass, attr.name, default_value ); }
 
 
       /**
@@ -100,7 +113,12 @@ namespace zypp
                                         const std::string &klass,
                                         const std::string &name,
                                         const std::string &default_value = std::string() );
-      
+      /** \overload */
+      std::string queryStringAttribute( const data::RecordId &record_id,
+                                        const Attribute& attr,
+                                        const std::string &default_value = std::string() )
+      { return queryStringAttribute( record_id, attr.klass, attr.name, default_value ); }
+
       /**
        * Queries a specifc attribute translation
        * for a resolvable.
@@ -118,7 +136,13 @@ namespace zypp
                                                    const std::string &klass,
                                                    const std::string &name,
                                                    const std::string &default_value = std::string() );
-      
+      /** \overload */
+      std::string queryStringAttributeTranslation( const data::RecordId &record_id,
+                                                   const Locale &locale,
+                                                   const Attribute& attr,
+                                                   const std::string &default_value = std::string() )
+      { return queryStringAttributeTranslation( record_id, locale, attr.klass, attr.name, default_value ); }
+
       /**
        * Queries all translations for a specific attribute
        * in a resolvable.
@@ -127,14 +151,19 @@ namespace zypp
        * \param klass Attribute Class
        * \param name Attribute Name
        *
-       * \return all attribute translations or a empty 
+       * \return all attribute translations or a empty
        * \ref TranslatedString if no record is found.
        */
       TranslatedText queryTranslatedStringAttribute( const data::RecordId &record_id,
                                                      const std::string &klass,
                                                      const std::string &name,
-                                                     const TranslatedText &default_vaue = TranslatedText() );
-      
+                                                     const TranslatedText &default_value = TranslatedText() );
+      /** \overload */
+      TranslatedText queryTranslatedStringAttribute( const data::RecordId &record_id,
+                                                     const Attribute& attr,
+                                                     const TranslatedText &default_value = TranslatedText() )
+      { return queryTranslatedStringAttribute( record_id, attr.klass, attr.name, default_value ); }
+
       /**
        * Queries for a specific container attribute
        * in a resolvable.
@@ -152,14 +181,20 @@ namespace zypp
                                     const std::string &name,
                                     _OutputIterator result )
       {
-        
+
         std::string all = queryStringAttribute( record_id, klass, name);
         //FIXME use zypp separator
         str::split( all, result );
       }
-      
-      
-      
+      /** \overload */
+      template<class _OutputIterator>
+      void queryStringContainerAttribute( const data::RecordId &record_id,
+                                          const Attribute& attr,
+                                          _OutputIterator result )
+      { queryStringContainerAttribute( record_id, attr.klass, attr.name, result ); }
+
+
+
     private:
       /** Implementation. */
       class Impl;

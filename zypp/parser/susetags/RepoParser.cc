@@ -10,10 +10,14 @@
  *
 */
 #include <iostream>
+#include "zypp/base/Easy.h"
 #include "zypp/base/Logger.h"
+#include "zypp/base/LogTools.h"
 #include "zypp/base/Iterator.h"
 #include "zypp/base/String.h"
+#include "zypp/base/Gettext.h"
 
+#include "zypp/parser/susetags/FileReaderBaseImpl.h"
 #include "zypp/parser/susetags/RepoParser.h"
 #include "zypp/parser/susetags/ContentFileReader.h"
 #include "zypp/parser/susetags/PackagesFileReader.h"
@@ -25,6 +29,8 @@
 #include "zypp/ZConfig.h"
 
 using std::endl;
+#undef  ZYPP_BASE_LOGGER_LOGGROUP
+#define ZYPP_BASE_LOGGER_LOGGROUP "parser::susetags"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -60,41 +66,150 @@ namespace zypp
 
 	  /** \name FileReader callbacks delivering data. */
 	  //@{
+	  ///////////////////////////////////////////////////////////////////
 	  void consumeIndex( const RepoIndex_Ptr & data_r )
 	  {
-	    SEC << "[Index]" << data_r << endl;
+	    //SEC << "[Index]" << data_r << endl;
 	    _repoIndex = data_r;
 	  }
 
+	  ///////////////////////////////////////////////////////////////////
 	  void consumeProd( const data::Product_Ptr & data_r )
 	  {
-	    SEC << "[Prod]" << data_r << endl;
+	    MIL << "[Product] " << data_r << endl;
+	    ++_stats.prod;
 	    _prodData = data_r;
+	    _defaultVendor = data_r->vendor;
 	    _consumer.consumeProduct( _repositoryId, data_r );
 	  }
 
+	  ///////////////////////////////////////////////////////////////////
           void consumePkg( const data::Package_Ptr & data_r )
           {
-            SEC << "[Package]" << data_r << endl;
-	    _consumer.consumePackage( _repositoryId, data_r );
+	    fixVendor( data_r );
+	    fixLocationPath( data_r );
+	    resolveSharedDataTag( data_r );
+
+	    ++_stats.pack;
+	    data::RecordId newid = _consumer.consumePackage( _repositoryId, data_r );
+
+	    // remember for later reference
+	    idMapAdd( makeSharedIdent( ResTraits<Package>::kind,
+		                       data_r->name,
+				       data_r->edition,
+				       data_r->arch ),
+		      newid );
           }
 
+	  ///////////////////////////////////////////////////////////////////
           void consumeSrcPkg( const data::SrcPackage_Ptr & data_r )
           {
-            SEC << "[SrcPackage]" << data_r << endl;
-	    _consumer.consumeSourcePackage( _repositoryId, data_r );
+	    fixVendor( data_r );
+	    fixLocationPath( data_r );
+	    resolveSharedDataTag( data_r );
+
+	    ++_stats.srcp;
+	    data::RecordId newid = _consumer.consumeSourcePackage( _repositoryId, data_r );
+
+	    // remember for later reference
+	    idMapAdd( makeSharedIdent( ResTraits<SrcPackage>::kind,
+		                       data_r->name,
+				       data_r->edition,
+				       data_r->arch ),
+		      newid );
           }
 
+	  ///////////////////////////////////////////////////////////////////
+	  void consumePkgLang( const data::Package_Ptr & data_r )
+          {
+	    data::RecordId id = idMapGet( makeSharedIdent( ResTraits<Package>::kind,
+							   data_r->name,
+							   data_r->edition,
+							   data_r->arch ) );
+	    if ( id != data::noRecordId )
+	    {
+	      _consumer.updatePackageLang( id, data_r );
+	    }
+	  }
+
+	  ///////////////////////////////////////////////////////////////////
+          void consumeSrcPkgLang( const data::SrcPackage_Ptr & data_r )
+          {
+	    data::RecordId id = idMapGet( makeSharedIdent( ResTraits<SrcPackage>::kind,
+							   data_r->name,
+							   data_r->edition,
+							   data_r->arch ) );
+	    if ( id != data::noRecordId )
+	    {
+	      _consumer.updatePackageLang( id, data_r );
+	    }
+	  }
+
+	  ///////////////////////////////////////////////////////////////////
           void consumePat( const data::Pattern_Ptr & data_r )
           {
-            SEC << "[Pattern]" << data_r << endl;
+            //SEC << "[Pattern]" << data_r << endl;
+	    fixVendor( data_r );
+	    ++_stats.patt;
 	    _consumer.consumePattern( _repositoryId, data_r );
           }
 	  //@}
 
-        public:
+	public:
+	  /** Use products vendor if vendor was not specified. */
+	  void fixVendor( const data::ResObject_Ptr & data_r )
+	  {
+	    if ( data_r->vendor.empty() && ! _defaultVendor.empty() )
+	    {
+	      data_r->vendor = _defaultVendor;
+	    }
+	  }
 
-          bool isPatternFile( const std::string & name_r ) const
+	  /** Prepend location with 'datadir'. */
+	  void fixLocationPath( const data::Packagebase_Ptr & data_r )
+	  {
+	    Pathname tofix( data_r->repositoryLocation.filename() );
+	    data_r->repositoryLocation.setFilename( _datadir / tofix );
+	  }
+
+	  /** Resolve shared data tag. */
+	  void resolveSharedDataTag( const data::Packagebase_Ptr & data_r )
+	  {
+	    if ( ! data_r->sharedDataTag.empty() )
+	    {
+	      data_r->shareDataWith = idMapGet( data_r->sharedDataTag );
+	    }
+	  }
+
+	public:
+	  /** Throw \ref ParseException if a required file is not
+	   * available below \ref _reporoot on disk.
+	  */
+	  Pathname assertMandatoryFile( const Pathname & file_r ) const
+	  {
+	    PathInfo inputfile( _reporoot / file_r );
+	    if ( ! inputfile.isFile() )
+	    {
+	      ZYPP_THROW( ParseException( _reporoot.asString() + ": " + _("Required file is missing: ") + file_r.asString() ) );
+	    }
+	    return inputfile.path();
+	  }
+
+	  /** Print a warning if an optional file is not
+	   * available below \ref _reporoot on disk.
+	  */
+ 	  Pathname getOptionalFile( const Pathname & file_r ) const
+	  {
+	    PathInfo inputfile( _reporoot / file_r );
+	    if ( ! inputfile.isFile() )
+	    {
+	      WAR << _reporoot << ": Skip optional file: " <<  file_r.asString() << endl;
+	      return Pathname();
+	    }
+	    return inputfile.path();
+	  }
+
+	  bool isPatternFile( const std::string & name_r ) const
           {
             return( name_r.size() > 4 && name_r.substr( name_r.size() - 4 ) == ".pat" );
           }
@@ -107,7 +222,16 @@ namespace zypp
 	          it != _repoIndex->metaFileChecksums.end(); ++it )
 	    {
 	      if ( it->first == searchFor )
-                return true; // got it
+	      {
+		// got it
+		PathInfo inputfile( _reporoot / _descrdir / searchFor );
+		if ( ! inputfile.isFile() )
+		{
+		  WAR << "Known and desired file is not on disk: " << inputfile << endl;
+		}
+		else
+		  return true; // got it
+	      }
 	    }
 	    return false; // not found
 	  }
@@ -137,18 +261,42 @@ namespace zypp
 	    {
 	      return; // now return...
 	    }
-
 	    // ...or parse
 	    _parsedLocales.insert( toParse ); // don't try again.
 
-	    PackagesLangFileReader reader;
-	    reader.setLocale( toParse );
-	    reader.setPkgConsumer( bind( &Impl::consumePkg, this, _1 ) );
-	    reader.setSrcPkgConsumer( bind( &Impl::consumeSrcPkg, this, _1 ) );
-	    reader.parse( _descrdir / ("packages." + toParse.code()) );
+	    Pathname inputfile( getOptionalFile( _descrdir / ("packages." + toParse.code()) ) );
+	    if ( ! inputfile.empty() )
+	    {
+	      PackagesLangFileReader reader;
+	      reader.setLocale( toParse );
+	      reader.setPkgConsumer( bind( &Impl::consumePkgLang, this, _1 ) );
+	      reader.setSrcPkgConsumer( bind( &Impl::consumeSrcPkgLang, this, _1 ) );
+	      reader.parse( inputfile );
+	    }
 
-	    if ( ! _ticks.incr() )
-	      ZYPP_THROW( AbortRequestException() );
+            if ( ! _ticks.incr( PathInfo(inputfile).size() ) )
+              ZYPP_THROW( AbortRequestException() );
+	  }
+
+	private:
+	  void idMapAdd( const std::string & key_r, data::RecordId value_r )
+	  {
+	    if ( _idMap[key_r] != data::noRecordId )
+	    {
+	      WAR << "Multiple record ids for " << key_r
+		  << " (first " << _idMap[key_r] << ", now " << value_r << ")" << endl;
+	    }
+	    _idMap[key_r] = value_r;
+	  }
+
+	  data::RecordId idMapGet( const std::string & key_r )
+	  {
+	    data::RecordId ret = _idMap[key_r];
+	    if ( ret == data::noRecordId )
+	    {
+	      WAR << "No record id for " << key_r << endl;
+	    }
+	    return ret;
 	  }
 
 	private:
@@ -159,11 +307,24 @@ namespace zypp
 	private: // these (and _ticks) are actually scoped per parse() run.
 	  RepoIndex_Ptr     _repoIndex;
 	  data::Product_Ptr _prodData;
-	  Pathname          _descrdir; // full path
-	  Pathname          _datadir;  // full path
+	  std::string       _defaultVendor;
+	  Pathname          _reporoot; // full path
+	  Pathname          _descrdir; // path below reporoot
+	  Pathname          _datadir;  // path below reporoot
 
 	  /** Translations processed by \ref parseLocaleIf so far.*/
 	  std::set<Locale>  _parsedLocales;
+
+	  /** Remember the record ids of created packages and soucepackages. */
+	  std::map<std::string,data::RecordId> _idMap;
+
+	  struct Stats {
+	    DefaultIntegral<unsigned,0> prod;
+	    DefaultIntegral<unsigned,0> patt;
+	    DefaultIntegral<unsigned,0> pack;
+	    DefaultIntegral<unsigned,0> srcp;
+	  };
+	  Stats _stats;
       };
       ///////////////////////////////////////////////////////////////////
 
@@ -176,15 +337,18 @@ namespace zypp
       {
 	_prodData = 0;
 	_repoIndex = 0;
+	_defaultVendor.clear();
+	_reporoot = reporoot_r;
 	_descrdir = _datadir = Pathname();
 	_parsedLocales.clear();
 
         // Content file first to get the repoindex
         {
+	  Pathname inputfile( assertMandatoryFile( "content" ) );
           ContentFileReader content;
           content.setProductConsumer( bind( &Impl::consumeProd, this, _1 ) );
           content.setRepoIndexConsumer( bind( &Impl::consumeIndex, this, _1 ) );
-          content.parse( reporoot_r / "content" );
+          content.parse( inputfile );
         }
 	if ( ! _repoIndex )
 	{
@@ -193,29 +357,44 @@ namespace zypp
 	DBG << _repoIndex << endl;
 
 	// Prepare parsing
-	_descrdir = reporoot_r / _repoIndex->descrdir;
-	_datadir = reporoot_r / _repoIndex->datadir;
+	_descrdir = _repoIndex->descrdir; // path below reporoot
+	_datadir  = _repoIndex->datadir;  // path below reporoot
 
 	_ticks.name( "Parsing susetags repo at " + reporoot_r.asString() );
-	_ticks.range( _repoIndex->metaFileChecksums.size() );
+
+        // calculate progress range based on file sizes to parse
+        int jobssize = 0;
+        for ( RepoIndex::FileChecksumMap::const_iterator it = _repoIndex->metaFileChecksums.begin();
+	      it != _repoIndex->metaFileChecksums.end(); ++it )
+        {
+          jobssize += PathInfo(getOptionalFile(_descrdir / it->first)).size();
+
+        }
+        MIL << "Total job size: " << jobssize << endl;
+
+	_ticks.range(jobssize);
+
         if ( ! _ticks.toMin() )
           ZYPP_THROW( AbortRequestException() );
 
         // Start with packages
         {
+          Pathname inputfile( assertMandatoryFile( _descrdir / "packages" ) );
           PackagesFileReader reader;
           reader.setPkgConsumer( bind( &Impl::consumePkg, this, _1 ) );
           reader.setSrcPkgConsumer( bind( &Impl::consumeSrcPkg, this, _1 ) );
-          reader.parse( _descrdir / "packages" );
-        }
-        if ( ! _ticks.incr() )
-          ZYPP_THROW( AbortRequestException() );
 
-        // Now process packages.lang
-	// Always parse 'en'. For each wanted locale at least
-	// some fallback, if locale is not present.
+          CombinedProgressData packageprogress( _ticks, PathInfo(inputfile).size() );
+          reader.parse( inputfile, packageprogress );
+        }
+
+        // Now process packages.lang. Always parse 'en'.
+	// At least packages.en is mandatory, because the file might
+	// contain license texts.
+	assertMandatoryFile( _descrdir / "packages.en" );
 	parseLocaleIf( Locale("en") );
-	parseLocaleIf( Locale("de_DE") );
+	// For each wanted locale at least
+	// some fallback, if locale is not present.
 	parseLocaleIf( ZConfig().defaultTextLocale() );
 
         // Now process the rest of RepoIndex
@@ -224,18 +403,26 @@ namespace zypp
         {
           if ( isPatternFile( it->first ) )
           {
-            PatternFileReader reader;
-            reader.setConsumer( bind( &Impl::consumePat, this, _1 ) );
-            reader.parse( _descrdir / it->first );
+	    Pathname inputfile( getOptionalFile( _descrdir / it->first) );
+	    if ( ! inputfile.empty() )
+	    {
+	      PatternFileReader reader;
+	      reader.setConsumer( bind( &Impl::consumePat, this, _1 ) );
+              CombinedProgressData patternprogress( _ticks, PathInfo(inputfile).size()  );
+	      reader.parse( inputfile, patternprogress );
+	    }
           }
-
-          if ( ! _ticks.incr() )
-            ZYPP_THROW( AbortRequestException() );
         }
 
         // Done
 	if ( ! _ticks.toMax() )
           ZYPP_THROW( AbortRequestException() );
+
+	MIL << "DONE " << reporoot_r << "("
+	    << _stats.prod << " products, "
+	    << _stats.patt << " patterns, "
+	    << _stats.pack << " packages, "
+	    << _stats.srcp << " srcpackages)" << endl;
       }
       ///////////////////////////////////////////////////////////////////
       //

@@ -10,7 +10,6 @@
  *
 */
 #include "zypp/SrcPackage.h"
-#include "zypp/source/SourceImpl.h"
 #include "zypp/base/Exception.h"
 
 using namespace std;
@@ -44,15 +43,13 @@ namespace zypp
   //
   ///////////////////////////////////////////////////////////////////
 
-  ByteCount SrcPackage::archivesize() const
-  { return pimpl().archivesize(); }
-
   DiskUsage SrcPackage::diskusage() const
   { return pimpl().diskusage(); }
 
-  Pathname SrcPackage::location() const
+  OnMediaLocation SrcPackage::location() const
   { return pimpl().location(); }
 
+  
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////

@@ -18,7 +18,7 @@
 #include "zypp/base/Deprecated.h"
 #include "zypp/detail/ResImplTraits.h"
 #include "zypp/detail/ResObjectFactory.h"
-
+#include "zypp/Repository.h"
 #include "zypp/Locale.h"
 #include "zypp/ByteCount.h"
 #include "zypp/Date.h"
@@ -34,7 +34,6 @@ namespace zypp
 { /////////////////////////////////////////////////////////////////
 
   class Resolvable;
-  class Source_Ref;
   class Repository;
 
   ///////////////////////////////////////////////////////////////////
@@ -82,7 +81,7 @@ namespace zypp
       virtual ByteCount size() const PURE_VIRTUAL;
 
       /** */
-      virtual ByteCount archivesize() const PURE_VIRTUAL;
+      virtual ByteCount downloadSize() const PURE_VIRTUAL;
 
       /** Backlink to the source providing this. */
       virtual Repository repository() const PURE_VIRTUAL;
@@ -93,15 +92,6 @@ namespace zypp
       */
       virtual unsigned mediaNr() const PURE_VIRTUAL;
       
-      /** Backlink to the source providing this. */
-      virtual Source_Ref source() const PURE_VIRTUAL;
-
-      /** Number of the source media that provides the data
-       *  required for installation. Zero, if no media access
-       *  is required.
-      */
-      virtual unsigned sourceMediaNr() const PURE_VIRTUAL;
-
       /** */
       virtual bool installOnly() const PURE_VIRTUAL;
 
@@ -110,9 +100,7 @@ namespace zypp
 
       /** Time of installation, or \c 0 */
       virtual Date installtime() const;
-
-      /** Id used inside ZMD */
-      ZYPP_DEPRECATED virtual ZmdId zmdid() const PURE_VIRTUAL;
+      
       //@}
 
     public:

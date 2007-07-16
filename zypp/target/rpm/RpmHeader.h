@@ -22,6 +22,8 @@
 #include "zypp/CapSetFwd.h"
 #include "zypp/Pathname.h"
 #include "zypp/DiskUsage.h"
+#include "zypp/capability/CapabilityImpl.h"
+
 
 namespace zypp
 {
@@ -68,7 +70,7 @@ public:
 
 private:
 
-  CapSet PkgRelList_val( tag tag_r, bool pre, std::set<std::string> * freq_r = 0 ) const;
+  capability::CapabilityImplPtrSet PkgRelList_val( tag tag_r, bool pre, std::set<std::string> * freq_r = 0 ) const;
 
 public:
 
@@ -107,31 +109,31 @@ public:
   /**
    * If <code>freq_r</code> is not NULL, file dependencies found are inserted.
    **/
-  CapSet tag_provides ( std::set<std::string> * freq_r = 0 ) const;
+  capability::CapabilityImplPtrSet tag_provides ( std::set<std::string> * freq_r = 0 ) const;
   /**
    * @see #tag_provides
    **/
-  CapSet tag_requires ( std::set<std::string> * freq_r = 0 ) const;
+  capability::CapabilityImplPtrSet tag_requires ( std::set<std::string> * freq_r = 0 ) const;
   /**
    * @see #tag_provides
    **/
-  CapSet tag_prerequires ( std::set<std::string> * freq_r = 0 ) const;
+  capability::CapabilityImplPtrSet tag_prerequires ( std::set<std::string> * freq_r = 0 ) const;
   /**
    * @see #tag_provides
    **/
-  CapSet tag_conflicts( std::set<std::string> * freq_r = 0 ) const;
+  capability::CapabilityImplPtrSet tag_conflicts( std::set<std::string> * freq_r = 0 ) const;
   /**
    * @see #tag_provides
    **/
-  CapSet tag_obsoletes( std::set<std::string> * freq_r = 0 ) const;
+  capability::CapabilityImplPtrSet tag_obsoletes( std::set<std::string> * freq_r = 0 ) const;
   /**
    * @see #tag_provides
    **/
-  CapSet tag_enhances( std::set<std::string> * freq_r = 0 ) const;
+  capability::CapabilityImplPtrSet tag_enhances( std::set<std::string> * freq_r = 0 ) const;
   /**
    * @see #tag_provides
    **/
-  CapSet tag_supplements( std::set<std::string> * freq_r = 0 ) const;
+  capability::CapabilityImplPtrSet tag_supplements( std::set<std::string> * freq_r = 0 ) const;
 
   ByteCount tag_size()        const;
   ByteCount tag_archivesize() const;

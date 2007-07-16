@@ -26,14 +26,14 @@ namespace zypp
     // as far as resonable.
     /////////////////////////////////////////////////////////////////
 
-      ByteCount SrcPackageImplIf::archivesize() const
-      { return ByteCount(); }
+      OnMediaLocation SrcPackageImplIf::location() const
+      { return OnMediaLocation(); }
+    
+      ByteCount SrcPackageImplIf::downloadSize() const
+      { return location().downloadSize(); }
 
       DiskUsage SrcPackageImplIf::diskusage() const
       { return DiskUsage(); }
-
-      Pathname SrcPackageImplIf::location() const
-      { return Pathname(); }
 
     /////////////////////////////////////////////////////////////////
   } // namespace detail

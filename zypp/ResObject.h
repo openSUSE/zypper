@@ -18,6 +18,8 @@
 #include "zypp/Resolvable.h"
 #include "zypp/TranslatedText.h"
 #include "zypp/NeedAType.h"
+#include "zypp/Date.h"
+#include "zypp/OnMediaLocation.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -26,7 +28,7 @@ namespace zypp
     class ImplConnect;
     class ResObjectImplIf;
   }
-  class Source_Ref;
+
   class Repository;
   class ByteCount;
 
@@ -95,35 +97,25 @@ namespace zypp
     ByteCount size() const;
 
     /** Size of the rpm package. */
-    ByteCount archivesize() const;
+    ByteCount downloadSize() const;
 
     /**
-     * Source providing this resolvable
+     * \short Download size
+     * \deprecated Use downloadSize()
      */
-    /*ZYPP_DEPRECATED */ Source_Ref source() const;
+    ZYPP_DEPRECATED ByteCount archivesize() const
+    { return downloadSize(); }
 
     /**
      * Source providing this resolvable
      */
     Repository repository() const;
-    
+
     /**
      * Media number where the resolvable is located
      * 0 if no media access is required.
     */
     unsigned mediaNr() const;
-    
-    /**
-     * Media number where the resolvable is located
-     * 0 if no media access is required.
-    */
-    /* ZYPP_DEPRECATED */ unsigned sourceMediaNr() const;
-
-    /**
-     * \deprecated Use sourceMediaNr 
-     */
-    /* ZYPP_DEPRECATED */ unsigned mediaId() const
-    { return sourceMediaNr(); }
 
     /**
      * \TODO FIXME what is this?
@@ -140,11 +132,6 @@ namespace zypp
      * 0 if the resolvable is not installed.
      */
     Date installtime() const;
-
-    /**
-     * \deprecated No replacement.
-     */
-    ZYPP_DEPRECATED ZmdId zmdid () const;
 
   protected:
     /** Ctor */

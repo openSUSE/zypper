@@ -28,13 +28,13 @@ namespace zypp
   /** RepoInfo implementation. */
   struct RepoInfo::Impl
   {
-    
+
     Impl()
       : enabled (indeterminate),
         autorefresh(indeterminate),
         type(repo::RepoType::NONE_e)
     {}
-        
+
     ~Impl()
     {
       //MIL << std::endl;
@@ -42,9 +42,12 @@ namespace zypp
   public:
     boost::tribool enabled;
     boost::tribool autorefresh;
+    boost::tribool gpgcheck;
+    Url gpgkey_url;
     repo::RepoType type;
     Url mirrorlist_url;
     std::set<Url> baseUrls;
+    Pathname path;
     std::string alias;
     std::string name;
     Pathname filepath;
@@ -89,8 +92,6 @@ namespace zypp
     //MIL << std::endl;
   }
 
-  
-  
   RepoInfo & RepoInfo::setEnabled( boost::tribool enabled )
   {
     _pimpl->enabled = enabled;
@@ -102,10 +103,22 @@ namespace zypp
     _pimpl->autorefresh = autorefresh;
     return *this;
   }
+  
+  RepoInfo & RepoInfo::setGpgCheck( boost::tribool check )
+  {
+    _pimpl->gpgcheck = check;
+    return *this;
+  }
 
   RepoInfo & RepoInfo::setMirrorListUrl( const Url &url )
   {
     _pimpl->mirrorlist_url = url;
+    return *this;
+  }
+  
+  RepoInfo & RepoInfo::setGpgKeyUrl( const Url &url )
+  {
+    _pimpl->gpgkey_url = url;
     return *this;
   }
 
@@ -115,6 +128,19 @@ namespace zypp
     return *this;
   }
 
+  RepoInfo & RepoInfo::setBaseUrl( const Url &url )
+  {
+    _pimpl->baseUrls.clear();
+    addBaseUrl(url);
+    return *this;
+  }
+
+  RepoInfo & RepoInfo::setPath( const Pathname &path )
+  {
+    _pimpl->path = path;
+    return *this;
+  }
+  
   RepoInfo & RepoInfo::setAlias( const std::string &alias )
   {
     _pimpl->alias = alias;
@@ -138,12 +164,15 @@ namespace zypp
     _pimpl->filepath = filepath;
     return *this;
   }
-  
+
   tribool RepoInfo::enabled() const
   { return _pimpl->enabled; }
 
   tribool RepoInfo::autorefresh() const
   { return _pimpl->autorefresh; }
+  
+  tribool RepoInfo::gpgCheck() const
+  { return _pimpl->gpgcheck; }
 
   std::string RepoInfo::alias() const
   { return _pimpl->alias; }
@@ -153,22 +182,34 @@ namespace zypp
 
   Pathname RepoInfo::filepath() const
   { return _pimpl->filepath; }
-  
+
   repo::RepoType RepoInfo::type() const
   { return _pimpl->type; }
 
   Url RepoInfo::mirrorListUrl() const
   { return _pimpl->mirrorlist_url; }
+  
+  Url RepoInfo::gpgKeyUrl() const
+  { return _pimpl->gpgkey_url; }
 
   std::set<Url> RepoInfo::baseUrls() const
   { return _pimpl->baseUrls; }
-    
+
+  Pathname RepoInfo::path() const
+  { return _pimpl->path; }
+  
   RepoInfo::urls_const_iterator RepoInfo::baseUrlsBegin() const
   { return _pimpl->baseUrls.begin(); }
-    
+
   RepoInfo::urls_const_iterator RepoInfo::baseUrlsEnd() const
   { return _pimpl->baseUrls.end(); }
-  
+
+  RepoInfo::urls_size_type RepoInfo::baseUrlsSize() const
+  { return _pimpl->baseUrls.size(); }
+
+  bool RepoInfo::baseUrlsEmpty() const
+  { return _pimpl->baseUrls.empty(); }
+
   std::ostream & RepoInfo::dumpOn( std::ostream & str ) const
   {
     str << "--------------------------------------" << std::endl;
@@ -180,11 +221,14 @@ namespace zypp
     {
       str << "- url         : " << *it << std::endl;
     }
-    
+    str << "- path        : " << path() << std::endl;
     str << "- type        : " << type() << std::endl;
     str << "- enabled     : " << enabled() << std::endl;
+    
     str << "- autorefresh : " << autorefresh() << std::endl;
-    //str << "- path        : " << path() << std::endl;
+    str << "- gpgcheck : " << gpgCheck() << std::endl;
+    str << "- gpgkey : " << gpgKeyUrl() << std::endl;
+    
     return str;
   }
 
@@ -201,9 +245,24 @@ namespace zypp
     {
       str << *it << endl;
     }
-    str << "mirrorlist=" << mirrorListUrl() << endl;
+    
+    if ( ! path().empty() )
+      str << "path="<< path() << endl;
+    
+    if ( ! (mirrorListUrl().asString().empty()) )
+      str << "mirrorlist=" << mirrorListUrl() << endl;
+    
     str << "type=" << type().asString() << endl;
-    str << "enabled=" << (enabled() ? "1" : "0") << endl;
+    
+    if ( enabled() != indeterminate )
+      str << "enabled=" << (enabled() ? "1" : "0") << endl;
+    if ( autorefresh() != indeterminate )
+      str << "autorefresh=" << (autorefresh() ? "1" : "0") << endl;
+    if ( autorefresh() != indeterminate )
+      str << "gpgcheck=" << (gpgCheck() ? "1" : "0") << endl;
+    if ( ! (gpgKeyUrl().asString().empty()) )
+      str << "gpgkey=" <<gpgKeyUrl() << endl;
+    
     return str;
   }
 
@@ -211,7 +270,7 @@ namespace zypp
   {
     return obj.dumpOn(str);
   }
-  
+
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////

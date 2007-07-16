@@ -103,7 +103,7 @@ namespace zypp
       if ( reader_r->name() == "location" )
       {
         _tag = tag_Location;
-        _location.filename( reader_r->getAttribute("href").asString() );
+        _location.setFilename( reader_r->getAttribute("href").asString() );
         return true;
       }
       if ( reader_r->name() == "checksum" )
@@ -111,7 +111,7 @@ namespace zypp
         _tag = tag_CheckSum;
         string checksum_type = reader_r->getAttribute("type").asString() ;
         string checksum_vaue = reader_r.nodeText().asString();
-        _location.checksum( CheckSum( checksum_type, checksum_vaue ) );
+        _location.setChecksum( CheckSum( checksum_type, checksum_vaue ) );
         return true;
       }
       if ( reader_r->name() == "timestamp" )

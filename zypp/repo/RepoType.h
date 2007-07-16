@@ -17,7 +17,7 @@ namespace zypp
 {
   namespace repo
   {
-  
+
   /**
    * \short Repository type enumeration
    *
@@ -28,21 +28,25 @@ namespace zypp
   {
     static const RepoType RPMMD;
     static const RepoType YAST2;
-    //static const RepoType NONE;
-    
+    static const RepoType RPMPLAINDIR;
+    static const RepoType NONE;
+
     enum Type
     {
       NONE_e,
       RPMMD_e,
-      YAST2_e
+      YAST2_e,
+      RPMPLAINDIR_e,
     };
+
+    RepoType() : _type(NONE_e) {}
 
     RepoType(Type type) : _type(type) {}
 
     explicit RepoType(const std::string & strval_r);
 
     const Type toEnum() const { return _type; }
-    
+
     RepoType::Type parse(const std::string & strval_r);
 
     const std::string & asString() const;

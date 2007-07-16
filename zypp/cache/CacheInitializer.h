@@ -19,6 +19,8 @@
 #include "zypp/Pathname.h"
 #include "zypp/cache/sqlite3x/sqlite3x.hpp"
 
+#define ZYPP_CACHE_SCHEMA_VERSION 1000
+
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
@@ -43,10 +45,22 @@ namespace zypp
       virtual ~CacheInitializer();
 
       /**
+       * \short Has the cache been reinitialized?
+       *
        * only true when cache was not initialized before
        * and was just initialized with success
        */
       bool justInitialized() const;
+      
+      /**
+       * \short Has the cache been reinitialized?
+       *
+       * This is true when the cache was already initialized
+       * but an old schema was detected, so the cache
+       * was reinitialized in order to get the new schema
+       */
+      bool justReinitialized() const;
+      
     protected:
       bool tablesCreated() const;
 			void createTables();

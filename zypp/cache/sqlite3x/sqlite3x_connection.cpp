@@ -23,11 +23,11 @@
 		$Revision: 1.1 $
 */
 
-/* 
+/*
   this source contains modifications by Novell Inc.
-  
+
   Changes:
-  
+
   * dmacvicar@novell.com
     Wrap sqlite3_exec
 
@@ -57,10 +57,19 @@ sqlite3_connection::~sqlite3_connection()
   if (this->db) sqlite3_close(this->db);
 }
 
+void sqlite3_connection::setprogresshandler( int n, int(*fnc)(void*), void* ptr )
+{
+  sqlite3_progress_handler(db, n, fnc, ptr);
+}
+
 void sqlite3_connection::open(const char *db)
 {
   if (sqlite3_open(db, &this->db)!=SQLITE_OK)
-    SQLITE3X_THROW(database_error("unable to open database"));
+  {
+    std::string msg( "unable to open database at " );
+    msg += ( db ? db : "NULL" );
+    SQLITE3X_THROW(database_error(msg));
+  }
 }
 
 void sqlite3_connection::open(const wchar_t *db)
@@ -264,9 +273,9 @@ std::string sqlite3_connection::executeblob(const std::wstring &sql)
 void sqlite3_connection::execute(const std::string &sql)
 {
   if (!this->db) SQLITE3X_THROW(database_error("database is not open"));
-  
+
   char *err_msg;
-  
+
   if ( sqlite3_exec( this->db, sql.c_str(), NULL, NULL, &err_msg ) != SQLITE_OK )
   {
     std::string err(err_msg);

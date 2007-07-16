@@ -319,10 +319,10 @@ ResolverQueue::copy_queue_except_for_branch (QueueItem_Ptr branch_qitem, QueueIt
 		QueueItemInstall_Ptr install_qitem = dynamic_pointer_cast<QueueItemInstall>(new_qitem);
 
 		/* Penalties are negative priorities */
-		int penalty;
-		Source_Ref src = install_qitem->item()->source();
-		penalty = - src.priority();
-
+#warning FIX priorities                
+		int penalty = 0;
+		Repository repo = install_qitem->item()->repository();
+		//penalty = - src.priority();
 		install_qitem->setOtherPenalty (penalty);
 	    }
 
@@ -375,12 +375,12 @@ ResolverQueue::splitFirstBranch (ResolverQueueList & new_queues, ResolverQueueLi
 	    if (qitem->isInstall() && qitem2->isInstall()) {
 		PoolItem_Ref r = (dynamic_pointer_cast<QueueItemInstall>(qitem))->item();
 		PoolItem_Ref r2 = (dynamic_pointer_cast<QueueItemInstall>(qitem2))->item();
-		Source_Ref source = r->source();
-		Source_Ref source2 = r2->source();
+		Repository repo1 = r->repository();
+		Repository repo2 = r2->repository();
 		int priority, priority2;
 
-		priority = _context->getSourcePriority( source );
-		priority2 = _context->getSourcePriority( source2 );
+		priority = _context->getRepoPriority( repo1 );
+		priority2 = _context->getRepoPriority( repo2 );
 
 		if (priority != priority2 && r->name() == r2->name()) {
 		    if (r->edition().compare(r2->edition()) == 0

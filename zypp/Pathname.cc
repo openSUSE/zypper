@@ -12,6 +12,7 @@
 #include <iostream>
 
 #include "zypp/Pathname.h"
+#include "zypp/Url.h"
 
 using std::string;
 
@@ -225,6 +226,18 @@ namespace zypp
       }
 
       return ret_t;
+    }
+
+    ///////////////////////////////////////////////////////////////////
+    //
+    //	METHOD NAME : Pathname::asUrl
+    //	METHOD TYPE : Url
+    //
+    Url Pathname::asUrl() const
+    {
+      Url ret( "dir:///" );
+      ret.setPathName( asString() );
+      return ret;
     }
 
     ///////////////////////////////////////////////////////////////////

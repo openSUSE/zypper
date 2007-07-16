@@ -29,8 +29,8 @@ namespace memory
   {
   public:
 
-    MessageImpl( const data::RecordId &id, repo::memory::RepoImpl::Ptr repository_r );
-    
+    MessageImpl( memory::RepoImpl::Ptr repo, data::Message_Ptr ptr);
+
     virtual TranslatedText summary() const;
     virtual TranslatedText description() const;
     virtual TranslatedText insnotify() const;
@@ -38,23 +38,19 @@ namespace memory
     virtual TranslatedText licenseToConfirm() const;
     virtual Vendor vendor() const;
     virtual ByteCount size() const;
-    virtual ByteCount archivesize() const;
     virtual bool installOnly() const;
     virtual Date buildtime() const;
     virtual Date installtime() const;
-    
-    virtual Source_Ref source() const;
-    virtual unsigned mediaNr() const;
-    
+
     // MESSAGE
     virtual TranslatedText text() const;
     virtual Patch::constPtr patch() const;
-    
+
     virtual Repository repository() const;
-    
+
   protected:
     repo::memory::RepoImpl::Ptr _repository;
-    
+
     //ResObject
     TranslatedText _summary;
     TranslatedText _description;
@@ -63,11 +59,11 @@ namespace memory
     TranslatedText _license_to_confirm;
     Vendor _vendor;
     ByteCount _size;
-    ByteCount _archivesize;
     bool _install_only;
     Date _buildtime;
     Date _installtime;
-    unsigned _media_nr;
+
+    TranslatedText _text;
   };
   /////////////////////////////////////////////////////////////////
 } // namespace memory

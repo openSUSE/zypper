@@ -28,16 +28,32 @@ using namespace sqlite3x;
 
 void cacheinit_test()
 {
-  //unit_test_log::instance().set_log_threshold_level(log_messages);
   filesystem::TmpDir tmpdir;
-  cache::CacheInitializer initializer(tmpdir.path(), "test.db");
+  {
+    //unit_test_log::instance().set_log_threshold_level(log_messages);
+    cache::CacheInitializer initializer(tmpdir.path(), "test.db");
+    
+    sqlite3_connection con( (tmpdir.path() + "test.db").asString().c_str());
+    //con.executenonquery(SOURCES_TABLE_SCHEMA);
+    int count = con.executeint("select count(*) from sqlite_master where type='table';");
+    BOOST_CHECK( initializer.justInitialized() );
+    BOOST_CHECK( !initializer.justReinitialized() );
+    // 14 tables need to be created
+    BOOST_CHECK( count > 0);
+    int version = con.executeint("select version from db_info;");
+    BOOST_CHECK_EQUAL( version, ZYPP_CACHE_SCHEMA_VERSION );
+  }
   
-  sqlite3_connection con( (tmpdir.path() + "test.db").asString().c_str());
-  //con.executenonquery(SOURCES_TABLE_SCHEMA);
-  int count = con.executeint("select count(*) from sqlite_master where type='table';");
-  BOOST_CHECK( initializer.justInitialized() );
-  // 14 tables need to be created
-  BOOST_CHECK( count > 0);
+  // now screw up the versioning and check if schema is rebuilt
+  {
+    sqlite3_connection con( (tmpdir.path() + "test.db").asString().c_str());
+    con.executenonquery("update db_info set version=9999 where 1;");
+    cache::CacheInitializer initializer(tmpdir.path(), "test.db");
+    BOOST_CHECK( !initializer.justInitialized() );
+    BOOST_CHECK( initializer.justReinitialized() );
+    
+  }
+  
 }
 
 test_suite*

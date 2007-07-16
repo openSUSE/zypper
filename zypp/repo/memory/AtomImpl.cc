@@ -78,11 +78,6 @@ ByteCount AtomImpl::size() const
   return _size;
 }
 
-ByteCount AtomImpl::archivesize() const
-{
-  return _archivesize;
-}
-
 bool AtomImpl::installOnly() const
 {
   return _install_only;
@@ -96,11 +91,6 @@ Date AtomImpl::buildtime() const
 Date AtomImpl::installtime() const
 {
   return _installtime;
-}
-
-unsigned AtomImpl::mediaNr() const
-{
-  return _media_nr;
 }
 
 /////////////////////////////////////////////////////////////////

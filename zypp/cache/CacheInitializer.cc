@@ -17,10 +17,8 @@
 #include "zypp/cache/CacheInitializer.h"
 #include "zypp/target/store/PersistentStorage.h"
 #include "zypp/cache/Utils.h"
-
+#include "zypp/PathInfo.h"
 #include "sqlite-schema.h"
-
-#define ZYPP_DB_FILE "/var/lib/zypp/zypp.db"
 
 using namespace sqlite3x;
 using namespace std;
@@ -36,13 +34,15 @@ namespace cache
 struct CacheInitializer::Impl
 {
   Impl( const Pathname &root_r )
-  : root(root_r), just_initialized(false)
+  : root(root_r), just_initialized(false),
+    just_reinitialized(false)
   {
   }
   //typedef std::map<media::MediaNr, media::MediaAccessId> MediaMap
   shared_ptr<sqlite3x::sqlite3_connection> con;
   Pathname root;
   bool just_initialized;
+  bool just_reinitialized;
 };
 
 CacheInitializer::CacheInitializer( const Pathname &root_r, const Pathname &db_file )
@@ -51,17 +51,47 @@ CacheInitializer::CacheInitializer( const Pathname &root_r, const Pathname &db_f
   try
   {
     _pimpl->con.reset( new sqlite3_connection( ( _pimpl->root + db_file).asString().c_str()) );
-
+    _pimpl->con->executenonquery("begin;");
     if( ! tablesCreated() )
     {
       createTables();
       _pimpl->just_initialized = true;
-      _pimpl->con->close();
-      MIL << "Source cache initialized" << std::endl;
+      //_pimpl->con->close();
+      MIL << "Repository cache initialized" << std::endl;
     }
     else
     {
-      MIL << "Source cache already initialized" << std::endl;
+      int version = _pimpl->con->executeint("select version from db_info;");
+      if ( version != ZYPP_CACHE_SCHEMA_VERSION )
+      {
+        WAR << "cache schema version is different from ZYpp cache version" << endl;
+        // FIXME should this code ask first?
+        sqlite3_command tables_cmd( *_pimpl->con, "select name from sqlite_master where type='table';");
+        sqlite3_reader reader = tables_cmd.executereader();
+        list<string> tables;
+        while ( reader.read() )
+        {
+          string tablename = reader.getstring(0);
+          if ( tablename != "sqlite_sequence" )
+            tables.push_back(tablename);
+        }
+        reader.close();
+        
+        for ( list<string>::const_iterator it = tables.begin();
+              it != tables.end();
+              ++it )
+        {
+          MIL << "Removing table " << *it << endl;
+          _pimpl->con->execute("drop table " + (*it) + ";");
+        }
+        
+        createTables();
+        _pimpl->just_reinitialized = true;
+        MIL << "Repository cache re-initialized" << std::endl;
+        return;
+      }
+      
+      MIL << "Repository cache already initialized" << std::endl;
     }
   }
   catch( const exception &ex )
@@ -69,12 +99,18 @@ CacheInitializer::CacheInitializer( const Pathname &root_r, const Pathname &db_f
     ZYPP_RETHROW(Exception(ex.what()));
     //ERR << "Exception Occured: " << ex.what() << endl;
   }
-
+  _pimpl->con->executenonquery("commit;");
+  _pimpl->con->close();
 }
 
 bool CacheInitializer::justInitialized() const
 {
   return _pimpl->just_initialized;
+}
+
+bool CacheInitializer::justReinitialized() const
+{
+  return _pimpl->just_reinitialized;
 }
 
 CacheInitializer::~CacheInitializer()
@@ -92,17 +128,20 @@ bool CacheInitializer::tablesCreated() const
 
 void CacheInitializer::createTables()
 {
-  Measure timer("Create database tables");
+  //Measure timer("Create database tables");
   MIL << "Initializing cache schema..." << endl;
-  sqlite3_transaction trans(*_pimpl->con);
-  {
+  //sqlite3_transaction trans(*_pimpl->con);
+  //{
     string sql( schemaData, _schemaData_size);
     //ERR << "Executing " << statements[i] << endl;
     MIL << "Schema size: " << sql.size() << endl;
     _pimpl->con->execute(sql.c_str());
-  }
-  trans.commit();
-  timer.elapsed();
+    sqlite3_command version_cmd( *_pimpl->con, "insert into db_info (version) values(:version);");
+    version_cmd.bind(":version", ZYPP_CACHE_SCHEMA_VERSION);
+    version_cmd.executenonquery();
+  //}
+  //trans.commit();
+  //timer.elapsed();
 }
 
 std::ostream & CacheInitializer::dumpOn( std::ostream & str ) const

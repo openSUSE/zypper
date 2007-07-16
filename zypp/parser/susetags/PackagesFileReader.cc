@@ -16,6 +16,8 @@
 #include "zypp/parser/susetags/FileReaderBaseImpl.h"
 
 using std::endl;
+#undef  ZYPP_BASE_LOGGER_LOGGROUP
+#define ZYPP_BASE_LOGGER_LOGGROUP "parser::susetags"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -106,7 +108,7 @@ namespace zypp
 	    {
 	      ZYPP_THROW( error( tag_r, "Expected [type checksum]") );
 	    }
-	    _data->repositoryLocation.fileChecksum = CheckSum( words[0], words[1] );
+	    _data->repositoryLocation.setChecksum(CheckSum( words[0], words[1] ));
 	  }
 
 	  /** Consume =Grp:. */
@@ -157,16 +159,14 @@ namespace zypp
 	    switch ( str::split( tag_r->value, std::back_inserter(words) ) )
 	    {
 	      case 2: // [medianr filename]
-		str::strtonum( words[0], _data->repositoryLocation.mediaNr.get() );
-		_data->repositoryLocation.filePath = _data->arch.asString();
-		_data->repositoryLocation.filePath /= words[1];
+		_data->repositoryLocation.setMedianr( str::strtonum<unsigned>(words[0]) );
+		_data->repositoryLocation.setFilename( Pathname(_data->arch.asString()) / words[1] );
 		break;
 
 	      case 3: // [medianr filename dir]
-		str::strtonum( words[0], _data->repositoryLocation.mediaNr.get() );
-		_data->repositoryLocation.filePath = words[2];
-		_data->repositoryLocation.filePath /= words[1];
-    		break;
+		_data->repositoryLocation.setMedianr( str::strtonum<unsigned>(words[0]) );
+		_data->repositoryLocation.setFilename( Pathname(words[2]) / words[1] );
+		break;
 
 	      default:
 		ZYPP_THROW( error( tag_r, "Expected [medianr filename dir]") );
@@ -182,14 +182,36 @@ namespace zypp
 	    {
 	      ZYPP_THROW( error( tag_r, "Expected [archivesize size]") );
 	    }
-	    _data->repositoryLocation.fileSize = str::strtonum<ByteCount::SizeType>( words[0] );
+	    _data->repositoryLocation.setDownloadSize(str::strtonum<ByteCount::SizeType>( words[0] ));
 	    _data->installedSize = str::strtonum<ByteCount::SizeType>( words[1] );
 	  }
 
-	  /** Consume =Shr:. */
+	  /** Consume =Shr:.
+	   * Raw data to identify the object is the string
+	   * <tt>kind:name-version-realease.arch</tt>.
+	  */
 	  void consumeShr( const SingleTagPtr & tag_r )
 	  {
-#warning TBD
+	    std::vector<std::string> words;
+	    if ( str::split( tag_r->value, std::back_inserter(words) ) != 4 )
+	    {
+	      ZYPP_THROW( error( tag_r, "Expected [name version release arch]") );
+	    }
+
+	    if ( words[3] == "src" || words[3] == "nosrc")
+	    {
+	      _data->sharedDataTag = makeSharedIdent( ResTraits<SrcPackage>::kind,
+		                                      words[0],
+						      Edition( words[1], words[2] ),
+						      Arch() );
+	    }
+	    else
+	    {
+	      _data->sharedDataTag = makeSharedIdent( ResTraits<Package>::kind,
+		                                      words[0],
+						      Edition( words[1], words[2] ),
+						      Arch( words[3] ) );
+	    }
 	  }
 
 	public: // multi tags

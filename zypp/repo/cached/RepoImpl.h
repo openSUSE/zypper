@@ -16,6 +16,7 @@
 #include "zypp/Arch.h"
 #include "zypp/Rel.h"
 #include "zypp/Pathname.h"
+#include "zypp/ProgressData.h"
 #include "zypp/data/RecordId.h"
 #include "zypp/repo/RepositoryImpl.h"
 #include "zypp/ResStore.h"
@@ -34,11 +35,30 @@ namespace zypp
     namespace cached
     { /////////////////////////////////////////////////////////////////
 
-      ///////////////////////////////////////////////////////////////////
-      //
-      //	CLASS NAME : RepoImpl
-      //
-      /** */
+      struct RepoOptions
+      {
+        RepoOptions( const RepoInfo &repoinfo_,
+                     const Pathname &dbdir_,
+                     const data::RecordId &repository_id_ )
+
+          : repoinfo(repoinfo_)
+          , dbdir(dbdir_)
+          , repository_id(repository_id_)
+        {}
+        
+        
+        ProgressData::ReceiverFnc readingResolvablesProgress;
+        ProgressData::ReceiverFnc readingPatchDeltasProgress;
+        RepoInfo repoinfo;
+        Pathname dbdir;
+        data::RecordId repository_id;
+      };
+      
+      /**
+       * \short Cached repository implementation
+       *
+       * Reads attributes on demand from cache
+       */
       class RepoImpl : public repo::RepositoryImpl
       {
       public:
@@ -47,22 +67,26 @@ namespace zypp
 
       public:
         /** Default ctor */
-        RepoImpl( const RepoInfo &repoinfo, const Pathname &dbdir, const data::RecordId &repository_id );
+        RepoImpl( const RepoOptions &opts );
         /** Dtor */
         ~RepoImpl();
         void factoryInit();
       public:
+        virtual void createResolvables();
+        virtual void createPatchAndDeltas();
         
         cache::ResolvableQuery resolvableQuery();
-        void createResolvables();
-        void createPatchAndDeltas();
-      protected:
-        void read_capabilities( sqlite3x::sqlite3_connection &con, std::map<data::RecordId, std::pair<Resolvable::Kind, NVRAD> > &nvras );
-        Pathname _dbdir;
-        cache::CacheTypes _type_cache;
-        data::RecordId _repository_id;
-        
+      private:
+        void read_capabilities( sqlite3x::sqlite3_connection &con,
+                                data::RecordId repo_id,
+                                std::map<data::RecordId,
+                                std::pair<Resolvable::Kind, NVRAD> > &nvras );
+        cache::CacheTypes _type_cache; 
         cache::ResolvableQuery _rquery;
+        RepoOptions _options;
+        ProgressData _ticks;
+      public:
+        int progress_handler(void*);
       };
       ///////////////////////////////////////////////////////////////////
 

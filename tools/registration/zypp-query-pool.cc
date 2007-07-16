@@ -5,7 +5,7 @@
 #include <zypp/ZYpp.h>
 #include <zypp/zypp_detail/ZYppReadOnlyHack.h>
 #include <zypp/ZYppFactory.h>
-#include <zypp/SourceManager.h>
+#include <zypp/RepoManager.h>
 #include <zypp/base/Logger.h>
 #include <zypp/base/Exception.h>
 #include <zypp/base/Algorithm.h>
@@ -80,7 +80,7 @@ query_pool( ZYpp::Ptr Z, const string & filter, const string & repository)
 
   MIL << "query_pool kind '" << kind << "', repository '" << repository << "'" << endl;
 
-  SourceManager_Ptr manager = SourceManager::sourceManager();
+  RepoManager manager;
 
   if (!system)
   {

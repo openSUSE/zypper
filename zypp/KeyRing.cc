@@ -21,7 +21,7 @@
 #include "zypp/base/Logger.h"
 #include "zypp/base/IOStream.h"
 #include "zypp/base/String.h"
-#include "zypp/Pathname.h"
+#include "zypp/PathInfo.h"
 #include "zypp/KeyRing.h"
 #include "zypp/ExternalProgram.h"
 #include "zypp/TmpPath.h"

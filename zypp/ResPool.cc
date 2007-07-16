@@ -87,21 +87,30 @@ namespace zypp
   ResPool::byCapabilityIndex_iterator ResPool::byCapabilityIndexEnd( const std::string & index_r, Dep depType_r ) const
   { return _pimpl->_caphash.end( index_r, depType_r ); }
 
+  ResPool::size_type ResPool::knownRepositoriesSize() const
+  { return _pimpl->knownRepositories().size(); }
+
+  ResPool::repository_iterator ResPool::knownRepositoriesBegin() const
+  { return _pimpl->knownRepositories().begin(); }
+
+  ResPool::repository_iterator ResPool::knownRepositoriesEnd() const
+  { return _pimpl->knownRepositories().end(); }
+
   void ResPool::setAdditionalRequire( const AdditionalCapSet & capset ) const
   { _pimpl->setAdditionalRequire( capset ); }
   ResPool::AdditionalCapSet & ResPool::additionalRequire() const
   { return _pimpl->additionalRequire(); }
-    
+
   void ResPool::setAdditionalConflict( const AdditionalCapSet & capset ) const
   { _pimpl->setAdditionalConflict( capset ); }
   ResPool::AdditionalCapSet & ResPool::additionaConflict() const
   { return _pimpl->additionaConflict(); }
-    
+
   void ResPool::setAdditionalProvide( const AdditionalCapSet & capset ) const
   { _pimpl->setAdditionalProvide( capset ); }
   ResPool::AdditionalCapSet & ResPool::additionaProvide() const
   { return _pimpl->additionaProvide(); }
-    
+
 
   /******************************************************************
   **

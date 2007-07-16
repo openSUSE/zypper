@@ -18,8 +18,8 @@
 #include "zypp/Repository.h"
 #include "zypp/repo/PackageProvider.h"
 #include "zypp/repo/RepoProvideFile.h"
-#include "zypp/source/Applydeltarpm.h"
-#include "zypp/source/PackageDelta.h"
+#include "zypp/repo/Applydeltarpm.h"
+#include "zypp/repo/PackageDelta.h"
 #include "zypp/detail/ImplConnect.h"
 
 #include "zypp/RepoInfo.h"
@@ -113,7 +113,7 @@ namespace zypp
           }
       } while ( _retry );
 
-      report()->finish( _package, source::DownloadResolvableReport::NO_ERROR, std::string() );
+      report()->finish( _package, repo::DownloadResolvableReport::NO_ERROR, std::string() );
       MIL << "provided Package " << _package << " at " << ret << endl;
       return ret;
     }
@@ -181,12 +181,8 @@ namespace zypp
 
       // no patch/delta -> provide full package
       ManagedFile ret;
-      OnMediaLocation loc;
-      loc.medianr( _package->mediaNr() )
-      .filename( _package->location() )
-      .checksum( _package->checksum() )
-      .downloadsize( _package->archivesize() );
-
+      OnMediaLocation loc = _package->location();
+      
       ProvideFilePolicy policy;
       policy.progressCB( bind( &PackageProvider::progressPackageDownload, this, _1 ) );
       policy.failOnChecksumErrorCB( bind( &PackageProvider::failOnChecksumError, this ) );
@@ -204,7 +200,7 @@ namespace zypp
         return ManagedFile();
 
       report()->startDeltaDownload( delta_r.location().filename(),
-                                    delta_r.location().downloadsize() );
+                                    delta_r.location().downloadSize() );
       ManagedFile delta;
       try
         {
@@ -228,8 +224,9 @@ namespace zypp
 
       Pathname destination( Pathname::dirname( delta ) / defRpmFileName( _package ) );
       /* just to ease testing with non remote sources */
-      if ( ! _package->source().remote() )
-        destination = Pathname("/tmp") / defRpmFileName( _package );
+      // FIXME removed API
+      //if ( ! _package->source().remote() )
+      //  destination = Pathname("/tmp") / defRpmFileName( _package );
       /**/
 
       if ( ! applydeltarpm::provide( delta, destination,
@@ -254,7 +251,7 @@ namespace zypp
         return ManagedFile();
 
       report()->startPatchDownload( patch_r.location().filename(),
-                                    patch_r.location().downloadsize() );
+                                    patch_r.location().downloadSize() );
       ManagedFile patch;
       try
         {
@@ -302,12 +299,12 @@ namespace zypp
       std::string package_str = _package->name() + "-" + _package->edition().asString();
 
       // TranslatorExplanation %s = package being checked for integrity
-      switch ( report()->problem( _package, source::DownloadResolvableReport::INVALID, str::form(_("Package %s fails integrity check. Do you want to retry?"), package_str.c_str() ) ) )
+      switch ( report()->problem( _package, repo::DownloadResolvableReport::INVALID, str::form(_("Package %s fails integrity check. Do you want to retry?"), package_str.c_str() ) ) )
         {
-        case source::DownloadResolvableReport::RETRY:
+        case repo::DownloadResolvableReport::RETRY:
           _retry = true;
           break;
-          case source::DownloadResolvableReport::IGNORE:
+          case repo::DownloadResolvableReport::IGNORE:
           ZYPP_THROW(SkipRequestException("User requested skip of corrupted file"));
           break;
         default:
@@ -321,7 +318,7 @@ namespace zypp
 
 
     /////////////////////////////////////////////////////////////////
-  } // namespace source
+  } // namespace repo
   ///////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

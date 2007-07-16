@@ -10,7 +10,6 @@
 #include "zypp/Product.h"
 #include "zypp/detail/PackageImplIf.h"
 #include "zypp/Package.h"
-#include "zypp/RepositoryFactory.h"
 #include "zypp/repo/cached/RepoImpl.h"
 #include "zypp/data/ResolvableData.h"
 

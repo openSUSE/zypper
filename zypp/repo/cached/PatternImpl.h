@@ -30,7 +30,7 @@ namespace cached
   public:
 
     PatternImpl( const data::RecordId &id, repo::cached::RepoImpl::Ptr repository_r );
-    
+
     virtual TranslatedText summary() const;
     virtual TranslatedText description() const;
     virtual TranslatedText insnotify() const;
@@ -38,14 +38,10 @@ namespace cached
     virtual TranslatedText licenseToConfirm() const;
     virtual Vendor vendor() const;
     virtual ByteCount size() const;
-    virtual ByteCount archivesize() const;
     virtual bool installOnly() const;
     virtual Date buildtime() const;
     virtual Date installtime() const;
-    
-    virtual Source_Ref source() const;
-    virtual unsigned mediaNr() const;
-    
+
     // PATTERN
     virtual bool isDefault() const;
     virtual bool userVisible() const;
@@ -56,11 +52,11 @@ namespace cached
     //virtual std::set<std::string> install_packages( const Locale & lang = Locale("") ) const;
 //     virtual const CapSet & includes() const;
 //     virtual const CapSet & extends() const;
-         
-      
+
+
     virtual Repository repository() const;
-    
-  protected:
+
+  private:
     repo::cached::RepoImpl::Ptr _repository;
     data::RecordId _id;
   };

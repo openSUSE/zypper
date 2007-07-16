@@ -15,6 +15,7 @@
 #include <iosfwd>
 #include <map>
 
+#include "zypp/base/Easy.h"
 #include "zypp/pool/PoolTraits.h"
 #include "zypp/ResPoolProxy.h"
 #include "zypp/ZYppFactory.h"
@@ -25,7 +26,6 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
   namespace pool
   { /////////////////////////////////////////////////////////////////
-
 
     ///////////////////////////////////////////////////////////////////
     //
@@ -191,7 +191,8 @@ namespace zypp
     typedef PoolTraits::size_type		size_type;
     typedef PoolTraits::Inserter		Inserter;
     typedef PoolTraits::Deleter			Deleter;
-    typedef PoolTraits::AdditionalCapSet 	AdditionalCapSet;	
+    typedef PoolTraits::AdditionalCapSet 	AdditionalCapSet;
+    typedef PoolTraits::RepoContainerT          KnownRepositories;
 
     public:
       /** Default ctor */
@@ -233,11 +234,11 @@ namespace zypp
       { return _store.end(); }
 
       /**
-       *  Handling additional requirement. E.G. need package "foo" and package 
+       *  Handling additional requirement. E.G. need package "foo" and package
        *  "foo1" which has a greater version than 1.0:
        *
        *  Capset capset;
-       *  capset.insert (CapFactory().parse( ResTraits<Package>::kind, "foo"));    
+       *  capset.insert (CapFactory().parse( ResTraits<Package>::kind, "foo"));
        *  capset.insert (CapFactory().parse( ResTraits<Package>::kind, "foo1 > 1.0"));
        *
        *  setAdditionalRequire( capset );
@@ -250,25 +251,25 @@ namespace zypp
        /**
 	*  Handling additional conflicts. E.G. do not install anything which provides "foo":
 	*
-	*  Capset capset;    
+	*  Capset capset;
 	*  capset.insert (CapFactory().parse( ResTraits<Package>::kind, "foo"));
 	*
-	*  setAdditionalConflict( capset );    
-	*/      
+	*  setAdditionalConflict( capset );
+	*/
 	void setAdditionalConflict( const AdditionalCapSet & capset ) const
-	    { _additionaConflict = capset; } 
+	    { _additionaConflict = capset; }
 	AdditionalCapSet & additionaConflict() const
 	    { return _additionaConflict; }
-      
+
 	/**
 	 *  Handling additional provides. This is used for ignoring a requirement.
 	 *  e.G. Do ignore the requirement "foo":
 	 *
-	 *  Capset capset;    
+	 *  Capset capset;
 	 *  capset.insert (CapFactory().parse( ResTraits<Package>::kind, "foo"));
 	 *
-	 *  setAdditionalProvide( cap );    
-	 */      
+	 *  setAdditionalProvide( cap );
+	 */
 	void setAdditionalProvide( const AdditionalCapSet & capset ) const
 	    { _additionaProvide = capset; }
 	AdditionalCapSet & additionaProvide() const
@@ -282,12 +283,34 @@ namespace zypp
         _additionalRequire.clear();
 	_additionaConflict.clear();
 	_additionaProvide.clear();
-
+	// don't miss to invalidate ResPoolProxy
+	invalidateProxy();
 	return;
       }
 
       /** erase all resolvables coming from the target  */
       void eraseInstalled() const;
+
+    public:
+      /** Access list of Repositories that contribute ResObjects.
+       * Built on demand.
+      */
+      const KnownRepositories & knownRepositories() const
+      {
+	if ( ! _knownRepositoriesPtr )
+	{
+	  _knownRepositoriesPtr.reset( new KnownRepositories );
+	  for_( it, _store.begin(), _store.end() )
+	  {
+	    if ( (*it)->repository() != Repository::noRepository )
+	    {
+	      _knownRepositoriesPtr->insert( (*it)->repository() );
+	    }
+	  }
+	}
+
+	return *_knownRepositoriesPtr;
+      }
 
     public:
       /** \name Save and restore state. */
@@ -314,9 +337,18 @@ namespace zypp
         return *_poolProxy;
       }
       void invalidateProxy()
-      { _poolProxy.reset(); }
+      {
+	_poolProxy.reset();
+	_knownRepositoriesPtr.reset();
+      }
 
       mutable shared_ptr<ResPoolProxy> _poolProxy;
+
+      private:
+	/** Set of known repositories built on demand.
+	 * Invalidated on any Pool content change. Rebuilt on next access.
+	*/
+	mutable scoped_ptr<KnownRepositories> _knownRepositoriesPtr;
     };
     ///////////////////////////////////////////////////////////////////
 

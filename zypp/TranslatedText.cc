@@ -6,17 +6,15 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file	zypp/TranslatedText.cc
+/** \file        zypp/TranslatedText.cc
  *
 */
 #include <iostream>
-//#include "zypp/base/Logger.h"
-
-#include "zypp/ZYppFactory.h"
-#include "zypp/ZYpp.h"
 
 #include "zypp/base/String.h"
+
 #include "zypp/TranslatedText.h"
+#include "zypp/ZConfig.h"
 
 using std::endl;
 
@@ -26,11 +24,13 @@ namespace zypp
 
   ///////////////////////////////////////////////////////////////////
   //
-  //	CLASS NAME : TranslatedText::Impl
+  //        CLASS NAME : TranslatedText::Impl
   //
   /** TranslatedText implementation. */
   struct TranslatedText::Impl
   {
+    typedef std::map<Locale, std::string> TranslationMap;
+
     Impl()
     {}
 
@@ -44,52 +44,45 @@ namespace zypp
     {
       return translations.empty();
     }
-    
-    std::string text( const Locale &lang = Locale() ) const
-    {
-      Locale empty_locale;
-      // if there are no translation for the requested locale
-      // or the passed locale is a empty one, we activate the
-      // fallback mechanism, otherwise (else case), we just provide
-      // the (existant) requested locale)
-      if ( translations[lang].empty() || (lang == empty_locale))
-      {
-          // first, detect the locale
-          ZYpp::Ptr z = getZYpp();
-          Locale detected_lang( z->getTextLocale() );
-          if ( translations[detected_lang].empty() )
-          {
-            Locale fallback_locale = detected_lang.fallback();
-            while ( fallback_locale != empty_locale )
-            {
-              if ( ! translations[fallback_locale].empty() )
-                return translations[fallback_locale];
 
-              fallback_locale = fallback_locale.fallback();
-            }
-            // we gave up, there are no translations with fallbacks
-            // last try, emtpy locale
-            
-            if ( ! translations[empty_locale].empty() )
-              return translations[empty_locale];
-            else
-              return std::string();
-          }
-          else
-          {
-            return translations[detected_lang];
-          }
-      }
-      else
+    std::string text( const Locale &lang ) const
+    {
+      // Traverse fallback list and return the 1st nonempty match.
+      // Take care NOT to create new map entries in queries.
+      Locale toReturn( lang );
+      if ( lang == Locale::noCode )
       {
-        return translations[lang]; 
+        toReturn = ZConfig().defaultTextLocale();
       }
+
+      do
+      {
+        TranslationMap::const_iterator it = translations.find( toReturn );
+        if ( it != translations.end()
+             && ! it->second.empty() )
+        {
+          return it->second;
+        }
+
+	if ( toReturn != Locale::noCode )
+	{
+	  // retry using next fallback:
+	  toReturn = toReturn.fallback();
+	}
+	else
+	{
+	  // there are no further fallbacks
+	  return std::string();
+	}
+      } while( true );
+      // not reached.
+      return std::string();
     }
 
     std::set<Locale> locales() const
     {
       std::set<Locale> lcls;
-      for(std::map<Locale, std::string>::const_iterator it = translations.begin(); it != translations.end(); ++it)
+      for( TranslationMap::const_iterator it = translations.begin(); it != translations.end(); ++it )
       {
         lcls.insert((*it).first);
       }
@@ -109,7 +102,7 @@ namespace zypp
     }
 
   private:
-    mutable std::map<Locale, std::string> translations;
+    mutable TranslationMap translations;
 
   public:
     /** Offer default Impl. */
@@ -129,7 +122,7 @@ namespace zypp
 
   ///////////////////////////////////////////////////////////////////
   //
-  //	CLASS NAME : TranslatedText
+  //        CLASS NAME : TranslatedText
   //
   ///////////////////////////////////////////////////////////////////
 
@@ -137,8 +130,8 @@ namespace zypp
 
   ///////////////////////////////////////////////////////////////////
   //
-  //	METHOD NAME : TranslatedText::TranslatedText
-  //	METHOD TYPE : Ctor
+  //        METHOD NAME : TranslatedText::TranslatedText
+  //        METHOD TYPE : Ctor
   //
   TranslatedText::TranslatedText()
   : _pimpl( Impl::nullimpl() )
@@ -146,8 +139,8 @@ namespace zypp
 
   ///////////////////////////////////////////////////////////////////
   //
-  //	METHOD NAME : TranslatedText::TranslatedText
-  //	METHOD TYPE : Ctor
+  //        METHOD NAME : TranslatedText::TranslatedText
+  //        METHOD TYPE : Ctor
   //
   TranslatedText::TranslatedText( const std::string &text,
                                   const Locale &lang )
@@ -156,8 +149,8 @@ namespace zypp
 
   ///////////////////////////////////////////////////////////////////
   //
-  //	METHOD NAME : TranslatedText::TranslatedText
-  //	METHOD TYPE : Ctor
+  //        METHOD NAME : TranslatedText::TranslatedText
+  //        METHOD TYPE : Ctor
   //
   TranslatedText::TranslatedText( const std::list<std::string> &text,
                                   const Locale &lang )
@@ -166,8 +159,8 @@ namespace zypp
 
   ///////////////////////////////////////////////////////////////////
   //
-  //	METHOD NAME : TranslatedText::~TranslatedText
-  //	METHOD TYPE : Dtor
+  //        METHOD NAME : TranslatedText::~TranslatedText
+  //        METHOD TYPE : Dtor
   //
   TranslatedText::~TranslatedText()
   {}

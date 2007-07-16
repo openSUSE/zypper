@@ -47,11 +47,13 @@ namespace zypp
     { return _syncPoolAfterCommit; }
 
   public:
-    /** Restrict commit to a certain media number
-     * \deprecated
+    /** Restrict commit to media 1.
+     * Fake outstanding YCP fix: Honour restriction to media 1
+     * at installation, but install all remaining packages if
+     * post-boot (called with <tt>mediaNr_r &gt; 1</tt>).
      */
     ZYppCommitPolicy & restrictToMedia( unsigned mediaNr_r )
-    { _restrictToMedia = mediaNr_r; return *this; }
+    { _restrictToMedia = ( mediaNr_r == 1 ) ? 1 : 0; return *this; }
 
     /** Process all media (default) */
     ZYppCommitPolicy & allMedia()

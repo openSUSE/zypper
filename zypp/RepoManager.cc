@@ -16,6 +16,7 @@
 #include <algorithm>
 #include "zypp/base/InputStream.h"
 #include "zypp/base/Logger.h"
+#include "zypp/base/Gettext.h"
 #include "zypp/base/Function.h"
 #include "zypp/PathInfo.h"
 #include "zypp/TmpPath.h"
@@ -25,14 +26,17 @@
 
 #include "zypp/cache/CacheStore.h"
 #include "zypp/repo/cached/RepoImpl.h"
+#include "zypp/media/MediaManager.h"
 #include "zypp/MediaSetAccess.h"
 
 #include "zypp/parser/RepoFileReader.h"
 #include "zypp/repo/yum/Downloader.h"
 #include "zypp/parser/yum/RepoParser.h"
-
+#include "zypp/parser/plaindir/RepoParser.h"
 #include "zypp/repo/susetags/Downloader.h"
 #include "zypp/parser/susetags/RepoParser.h"
+
+#include "zypp/ZYppCallbacks.h"
 
 using namespace std;
 using namespace zypp;
@@ -50,7 +54,7 @@ namespace zypp
   //	CLASS NAME : RepoManagerOptions
   //
   ///////////////////////////////////////////////////////////////////
-  
+
   RepoManagerOptions::RepoManagerOptions()
   {
     ZConfig globalConfig;
@@ -77,12 +81,12 @@ namespace zypp
       {
         MIL << endl;
       }
-      
+
       ~RepoCollector()
       {
         MIL << endl;
       }
-      
+
       bool collect( const RepoInfo &repo )
       {
         //MIL << "here in collector: " << repo.alias() << endl;
@@ -90,12 +94,12 @@ namespace zypp
         //MIL << "added: " << repo.alias() << endl;
         return true;
       }
-    
+
       RepoInfoList repos;
     };
- 
+
   ////////////////////////////////////////////////////////////////////////////
-  
+
   /**
    * Reads RepoInfo's from a repo file.
    *
@@ -114,20 +118,20 @@ namespace zypp
   std::list<RepoInfo> readRepoFile(const Url & repo_file)
    {
      // no interface to download a specific file, using workaround:
-     //! \todo add MediaManager::provideFile(Url file_url) to easily access any file URLs? (no need for media access id or media_nr)  
+     //! \todo add MediaManager::provideFile(Url file_url) to easily access any file URLs? (no need for media access id or media_nr)
      Url url(repo_file);
      Pathname path(url.getPathName());
      url.setPathName ("/");
      MediaSetAccess access(url);
      Pathname local = access.provideFile(path);
-  
+
      DBG << "reading repo file " << repo_file << ", local path: " << local << endl;
-  
+
      return repositories_in_file(local);
    }
 
   ////////////////////////////////////////////////////////////////////////////
-  
+
   /**
    * \short List of RepoInfo's from a directory
    *
@@ -143,10 +147,10 @@ namespace zypp
     list<Pathname> entries;
     if ( filesystem::readdir( entries, Pathname(dir), false ) != 0 )
       ZYPP_THROW(Exception("failed to read directory"));
-    
+
     for ( list<Pathname>::const_iterator it = entries.begin(); it != entries.end(); ++it )
     {
-      list<RepoInfo> tmp = repositories_in_file( *it ); 
+      list<RepoInfo> tmp = repositories_in_file( *it );
       repos.insert( repos.end(), tmp.begin(), tmp.end() );
 
       //std::copy( collector.repos.begin(), collector.repos.end(), std::back_inserter(repos));
@@ -156,23 +160,23 @@ namespace zypp
   }
 
   ////////////////////////////////////////////////////////////////////////////
-  
+
   static void assert_alias( const RepoInfo &info )
   {
     if (info.alias().empty())
         ZYPP_THROW(RepoNoAliasException());
   }
-  
+
   ////////////////////////////////////////////////////////////////////////////
-  
+
   static void assert_urls( const RepoInfo &info )
   {
     if (info.baseUrls().empty())
         ZYPP_THROW(RepoNoUrlException());
   }
-  
+
   ////////////////////////////////////////////////////////////////////////////
-  
+
   /**
    * \short Calculates the raw cache path for a repository
    */
@@ -187,7 +191,7 @@ namespace zypp
   //	CLASS NAME : RepoManager::Impl
   //
   ///////////////////////////////////////////////////////////////////
-  
+
   /**
    * \short RepoManager implementation.
    */
@@ -196,16 +200,16 @@ namespace zypp
     Impl( const RepoManagerOptions &opt )
       : options(opt)
     {
-    
+
     }
-    
+
     Impl()
     {
-    
+
     }
-    
+
     RepoManagerOptions options;
-    
+
   public:
     /** Offer default Impl. */
     static shared_ptr<Impl> nullimpl()
@@ -239,36 +243,42 @@ namespace zypp
   {}
 
   ////////////////////////////////////////////////////////////////////////////
-  
+
   RepoManager::~RepoManager()
   {}
-  
+
   ////////////////////////////////////////////////////////////////////////////
 
   std::list<RepoInfo> RepoManager::knownRepositories() const
   {
     MIL << endl;
-    return repositories_in_dir(_pimpl->options.knownReposPath);
+    
+    if ( PathInfo(_pimpl->options.knownReposPath).isExist() )
+      return repositories_in_dir(_pimpl->options.knownReposPath);
+    else
+      return std::list<RepoInfo>();
+
     MIL << endl;
   }
 
   ////////////////////////////////////////////////////////////////////////////
-  
+
   RepoStatus RepoManager::rawMetadataStatus( const RepoInfo &info )
   {
     Pathname rawpath = rawcache_path_for_repoinfo( _pimpl->options, info );
     RepoType repokind = info.type();
     RepoStatus status;
+
     switch ( repokind.toEnum() )
     {
       case RepoType::NONE_e:
       // unknown, probe the local metadata
-        repokind = probe(Url(rawpath.asString()));
+        repokind = probe(rawpath.asUrl());
       break;
       default:
       break;
     }
-      
+
     switch ( repokind.toEnum() )
     {
       case RepoType::RPMMD_e :
@@ -276,25 +286,37 @@ namespace zypp
         status = RepoStatus( rawpath + "/repodata/repomd.xml");
       }
       break;
+
       case RepoType::YAST2_e :
       {
         status = RepoStatus( rawpath + "/content");
       }
       break;
-      default:
-        ZYPP_THROW(RepoUnknownTypeException());
+      
+      case RepoType::RPMPLAINDIR_e :
+      {
+        if ( PathInfo(Pathname(rawpath + "/cookie")).isExist() )
+          status = RepoStatus( rawpath + "/cookie");
+      }
+      break;
+
+      case RepoType::NONE_e :
+	// Return default RepoStatus in case of RepoType::NONE
+	// indicating it should be created?
+        // ZYPP_THROW(RepoUnknownTypeException());
+	break;
     }
     return status;
   }
-    
-  
+
+
   void RepoManager::refreshMetadata( const RepoInfo &info,
                                      RawMetadataRefreshPolicy policy,
                                      const ProgressData::ReceiverFnc & progress )
   {
     assert_alias(info);
     assert_urls(info);
-    
+
     RepoStatus oldstatus;
     RepoStatus newstatus;
     // try urls one by one
@@ -304,9 +326,9 @@ namespace zypp
       {
         Url url(*it);
         filesystem::TmpDir tmpdir;
-        
+
         repo::RepoType repokind = info.type();
-        
+
         // if the type is unknown, try probing.
         switch ( repokind.toEnum() )
         {
@@ -317,16 +339,16 @@ namespace zypp
           default:
           break;
         }
-        
+
         Pathname rawpath = rawcache_path_for_repoinfo( _pimpl->options, info );
         oldstatus = rawMetadataStatus(info);
-        
+
         switch ( repokind.toEnum() )
         {
           case RepoType::RPMMD_e :
           {
             yum::Downloader downloader( url, "/" );
-            
+
             RepoStatus newstatus = downloader.status();
             bool refresh = false;
             if ( oldstatus.checksum() == newstatus.checksum() )
@@ -342,7 +364,7 @@ namespace zypp
             {
               refresh = true;
             }
-  
+
             if ( refresh )
               downloader.download(tmpdir.path());
             else
@@ -353,7 +375,7 @@ namespace zypp
           case RepoType::YAST2_e :
           {
             susetags::Downloader downloader( url, "/" );
-            
+
             RepoStatus newstatus = downloader.status();
             bool refresh = false;
             if ( oldstatus.checksum() == newstatus.checksum() )
@@ -369,9 +391,44 @@ namespace zypp
             {
               refresh = true;
             }
-  
+
             if ( refresh )
               downloader.download(tmpdir.path());
+            else
+              return;
+            // no error
+          }
+          break;
+          
+          case RepoType::RPMPLAINDIR_e :
+          {
+            RepoStatus newstatus = parser::plaindir::dirStatus(url.getPathName());
+            bool refresh = false;
+            if ( oldstatus.checksum() == newstatus.checksum() )
+            {
+              MIL << "repo has not changed" << endl;
+              if ( policy == RefreshForced )
+              {
+                MIL << "refresh set to forced" << endl;
+                refresh = true;
+              }
+            }
+            else
+            {
+              refresh = true;
+            }
+
+            if ( refresh )
+            {
+              std::ofstream file(( tmpdir.path() + "/cookie").c_str());
+              if (!file) {
+                ZYPP_THROW (Exception( "Can't open " + tmpdir.path().asString() + "/cookie" ) );
+              }
+              file << url << endl;
+              file << newstatus.checksum() << endl;
+
+              file.close();
+            }
             else
               return;
             // no error
@@ -380,7 +437,7 @@ namespace zypp
           default:
             ZYPP_THROW(RepoUnknownTypeException());
         }
-        
+
         // ok we have the metadata, now exchange
         // the contents
         TmpDir oldmetadata;
@@ -400,29 +457,30 @@ namespace zypp
     ERR << "No more urls..." << endl;
     ZYPP_THROW(RepoException("Cant refresh metadata"));
   }
-  
+
   ////////////////////////////////////////////////////////////////////////////
-  
+
   void RepoManager::cleanMetadata( const RepoInfo &info,
                                    const ProgressData::ReceiverFnc & progress )
   {
     filesystem::recursive_rmdir(rawcache_path_for_repoinfo(_pimpl->options, info));
   }
-  
-  ////////////////////////////////////////////////////////////////////////////
-  
+
   void RepoManager::buildCache( const RepoInfo &info,
                                 CacheBuildPolicy policy,
                                 const ProgressData::ReceiverFnc & progressrcv )
   {
-    ProgressData progress;
-    progress.sendTo(progressrcv);
+    ProgressData progress(100);
+    callback::SendReport<ProgressReport> report;
+    progress.sendTo( ProgressReportAdaptor( progressrcv, report ) );
+    progress.name(str::form(_("Building repository '%s' cache"), info.alias().c_str()));
     progress.toMin();
+    
     assert_alias(info);
     Pathname rawpath = rawcache_path_for_repoinfo(_pimpl->options, info);
-    
+
     cache::CacheStore store(_pimpl->options.repoCachePath);
-    
+
     RepoStatus raw_metadata_status = rawMetadataStatus(info);
     if ( store.isCached( info.alias() ) )
     {
@@ -438,111 +496,156 @@ namespace zypp
           return;
         }
         else {
-          MIL << "Build cache is forced" << endl;
+          MIL << info.alias() << " cache rebuild is forced" << endl;
         }
       }
       store.cleanRepository(id);
     }
-    
+
+    MIL << info.alias() << " building cache..." << endl;
     data::RecordId id = store.lookupOrAppendRepository(info.alias());
     // do we have type?
     repo::RepoType repokind = info.type();
-      
-      // if the type is unknown, try probing.
-      switch ( repokind.toEnum() )
+
+    // if the type is unknown, try probing.
+    switch ( repokind.toEnum() )
+    {
+      case RepoType::NONE_e:
+        // unknown, probe the local metadata
+        repokind = probe(rawpath.asUrl());
+      break;
+      default:
+      break;
+    }
+
+    CombinedProgressData subprogrcv( progress, 100);
+    
+    switch ( repokind.toEnum() )
+    {
+      case RepoType::RPMMD_e :
       {
-        case RepoType::NONE_e:
-          // unknown, probe the local metadata
-          repokind = probe(Url(rawpath.asString()));
-        break;
-        default:
-        break;
-      }
-      
-      switch ( repokind.toEnum() )
-      {
-        case RepoType::RPMMD_e :
-        {
-          parser::yum::RepoParser parser(id, store);
-          parser.parse(rawpath);
-           // no error
-        }
-        break;
-        case RepoType::YAST2_e :
-        {
-          parser::susetags::RepoParser parser(id, store);
-          parser.parse(rawpath);
+        parser::yum::RepoParser parser(id, store, parser::yum::RepoParserOpts(), subprogrcv);
+        parser.parse(rawpath);
           // no error
-        }
-        break;
-        default:
-          ZYPP_THROW(RepoUnknownTypeException());
       }
-      
-      // update timestamp and checksum
-      store.updateRepositoryStatus(id, raw_metadata_status);
-      
-      MIL << "Commit cache.." << endl;
-      store.commit();
-      progress.toMax();
+      break;
+      case RepoType::YAST2_e :
+      {
+        parser::susetags::RepoParser parser(id, store, subprogrcv);
+        parser.parse(rawpath);
+        // no error
+      }
+      break;
+      case RepoType::RPMPLAINDIR_e :
+      {
+        InputStream is(rawpath + "cookie");
+        string buffer;
+        getline( is.stream(), buffer);
+        Url url(buffer);
+        parser::plaindir::RepoParser parser(id, store, subprogrcv);
+        parser.parse(url.getPathName());
+      }
+      break;
+      default:
+        ZYPP_THROW(RepoUnknownTypeException());
+    }
+
+    // update timestamp and checksum
+    store.updateRepositoryStatus(id, raw_metadata_status);
+
+    MIL << "Commit cache.." << endl;
+    store.commit();
+    progress.toMax();
   }
-  
+
   ////////////////////////////////////////////////////////////////////////////
-  
+
   repo::RepoType RepoManager::probe( const Url &url )
   {
+    if ( url.getScheme() == "dir" && ! PathInfo( url.getPathName() ).isDir() )
+    {
+      // Handle non existing local directory in advance, as
+      // MediaSetAccess does not support it.
+      return repo::RepoType::NONE;
+    }
+
     MediaSetAccess access(url);
     if ( access.doesFileExist("/repodata/repomd.xml") )
       return repo::RepoType::RPMMD;
     if ( access.doesFileExist("/content") )
       return repo::RepoType::YAST2;
-    
-    return repo::RepoType("UNKNOWN");
+
+    // if it is a local url of type dir
+    if ( (! media::MediaManager::downloads(url)) && ( url.getScheme() == "dir" ) )
+    {
+      Pathname path = Pathname(url.getPathName());
+      if ( PathInfo(path).isDir() )
+      {
+        // allow empty dirs for now
+        return repo::RepoType::RPMPLAINDIR;
+      }
+    }
+
+    return repo::RepoType::NONE;
   }
-  
+
   ////////////////////////////////////////////////////////////////////////////
-  
+
   void RepoManager::cleanCache( const RepoInfo &info,
                                 const ProgressData::ReceiverFnc & progressrcv )
   {
-    ProgressData progress;
-    progress.sendTo(progressrcv);
-
+    ProgressData progress(100);
+    callback::SendReport<ProgressReport> report;
+    progress.sendTo( ProgressReportAdaptor( progressrcv, report ) );
+    progress.name(str::form(_("Cleaning repository '%s' cache"), info.alias().c_str()));
+    progress.toMin();
+    
     cache::CacheStore store(_pimpl->options.repoCachePath);
 
     data::RecordId id = store.lookupRepository(info.alias());
     store.cleanRepository(id);
     store.commit();
   }
-  
+
   ////////////////////////////////////////////////////////////////////////////
-  
+
   bool RepoManager::isCached( const RepoInfo &info ) const
   {
     cache::CacheStore store(_pimpl->options.repoCachePath);
     return store.isCached(info.alias());
   }
-  
+
   Repository RepoManager::createFromCache( const RepoInfo &info,
-                                           const ProgressData::ReceiverFnc & progress )
+                                           const ProgressData::ReceiverFnc & progressrcv )
   {
-    cache::CacheStore store(_pimpl->options.repoCachePath);
+    callback::SendReport<ProgressReport> report;
+    ProgressData progress;
+    progress.sendTo(ProgressReportAdaptor( progressrcv, report ));
+    progress.sendTo( progressrcv );
+    progress.name(str::form(_("Reading repository '%s' cache"), info.alias().c_str()));
+    progress.toMin();
     
+    cache::CacheStore store(_pimpl->options.repoCachePath);
+
     if ( ! store.isCached( info.alias() ) )
       ZYPP_THROW(RepoNotCachedException());
-    
+
     MIL << "Repository " << info.alias() << " is cached" << endl;
-    
+
     data::RecordId id = store.lookupRepository(info.alias());
+    
+    repo::cached::RepoOptions opts( info, _pimpl->options.repoCachePath, id );
+    opts.readingResolvablesProgress = progressrcv;
     repo::cached::RepoImpl::Ptr repoimpl =
-        new repo::cached::RepoImpl( info, _pimpl->options.repoCachePath, id );
+        new repo::cached::RepoImpl( opts );
+    
+    repoimpl->resolvables();
     // read the resolvables from cache
-    repoimpl->createResolvables();
     return Repository(repoimpl);
   }
- 
+
   ////////////////////////////////////////////////////////////////////////////
-  
+
   /**
    * Generate a non existing filename in a directory, using a base
    * name. For example if a directory contains 3 files
@@ -551,7 +654,7 @@ namespace zypp
    * |-- foo
    * `-- moo
    *
-   * If you try to generate a unique filename for this directory, 
+   * If you try to generate a unique filename for this directory,
    * based on "ruu" you will get "ruu", but if you use the base
    * "foo" you will get "foo_1"
    *
@@ -570,13 +673,19 @@ namespace zypp
     }
     return dir + Pathname(final_filename);
   }
-  
+
   ////////////////////////////////////////////////////////////////////////////
 
   void RepoManager::addRepository( const RepoInfo &info,
                                    const ProgressData::ReceiverFnc & progressrcv )
   {
     assert_alias(info);
+
+    ProgressData progress(100);
+    callback::SendReport<ProgressReport> report;
+    progress.sendTo( ProgressReportAdaptor( progressrcv, report ) );
+    progress.name(str::form(_("Adding repository '%s'"), info.alias().c_str()));
+    progress.toMin();
     
     std::list<RepoInfo> repos = knownRepositories();
     for ( std::list<RepoInfo>::const_iterator it = repos.begin();
@@ -586,21 +695,27 @@ namespace zypp
       if ( info.alias() == (*it).alias() )
         ZYPP_THROW(RepoAlreadyExistsException(info.alias()));
     }
+
+    progress.set(50);
+    
+    // assert the directory exists
+    filesystem::assert_dir(_pimpl->options.knownReposPath);
     
     Pathname repofile = generate_non_existing_name(_pimpl->options.knownReposPath,
                                                     Pathname(info.alias()).extend(".repo").asString());
     // now we have a filename that does not exists
     MIL << "Saving repo in " << repofile << endl;
-    
+
     std::ofstream file(repofile.c_str());
     if (!file) {
       ZYPP_THROW (Exception( "Can't open " + repofile.asString() ) );
     }
-    
+
     info.dumpRepoOn(file);
+    progress.toMax();
     MIL << "done" << endl;
   }
-   
+
   void RepoManager::addRepositories( const Url &url,
                                      const ProgressData::ReceiverFnc & progressrcv )
   {
@@ -622,21 +737,24 @@ namespace zypp
         }
       }
     }
-    
+
     string filename = Pathname(url.getPathName()).basename();
-    
+
     if ( filename == Pathname() )
       ZYPP_THROW(RepoException("Invalid repo file name at " + url.asString() ));
+
+    // assert the directory exists
+    filesystem::assert_dir(_pimpl->options.knownReposPath);
     
     Pathname repofile = generate_non_existing_name(_pimpl->options.knownReposPath, filename);
     // now we have a filename that does not exists
     MIL << "Saving " << repos.size() << " repo" << ( repos.size() ? "s" : "" ) << " in " << repofile << endl;
-    
+
     std::ofstream file(repofile.c_str());
     if (!file) {
       ZYPP_THROW (Exception( "Can't open " + repofile.asString() ) );
     }
-    
+
     for ( std::list<RepoInfo>::const_iterator it = repos.begin();
           it != repos.end();
           ++it )
@@ -646,12 +764,14 @@ namespace zypp
     }
     MIL << "done" << endl;
   }
-  
+
   ////////////////////////////////////////////////////////////////////////////
-  
+
   void RepoManager::removeRepository( const RepoInfo & info,
                                       const ProgressData::ReceiverFnc & progressrcv)
   {
+    MIL << "Going to delete repo " << info.alias() << endl;
+
     std::list<RepoInfo> repos = knownRepositories();
     for ( std::list<RepoInfo>::const_iterator it = repos.begin();
           it != repos.end();
@@ -662,9 +782,9 @@ namespace zypp
       // then skip
       if ( (!info.alias().empty()) && ( info.alias() != (*it).alias() ) )
         continue;
-      
+
       // TODO match by url
-       
+
       // we have a matcing repository, now we need to know
       // where it does come from.
       RepoInfo todelete = *it;
@@ -683,6 +803,7 @@ namespace zypp
           {
             ZYPP_THROW(RepoException("Can't delete " + todelete.filepath().asString()));
           }
+	  MIL << todelete.alias() << " sucessfully deleted." << endl;
           return;
         }
         else
@@ -691,6 +812,10 @@ namespace zypp
           // write them back except the deleted one.
           //TmpFile tmp;
           //std::ofstream file(tmp.path().c_str());
+          
+          // assert the directory exists
+          filesystem::assert_dir(todelete.filepath().dirname());
+          
           std::ofstream file(todelete.filepath().c_str());
           if (!file) {
             //ZYPP_THROW (Exception( "Can't open " + tmp.path().asString() ) );
@@ -703,25 +828,88 @@ namespace zypp
             if ( (*fit).alias() != todelete.alias() )
               (*fit).dumpRepoOn(file);
           }
-          
+
           cache::CacheStore store(_pimpl->options.repoCachePath);
-    
+
           if ( store.isCached( todelete.alias() ) ) {
             MIL << "repository was cached. cleaning cache" << endl;
             store.cleanRepository(todelete.alias());
           }
-          
+
+	  MIL << todelete.alias() << " sucessfully deleted." << endl;
           return;
         }
       } // else filepath is empty
-      
+
     }
     // should not be reached on a sucess workflow
     ZYPP_THROW(RepoNotFoundException(info));
   }
-  
+
   ////////////////////////////////////////////////////////////////////////////
-  
+
+  void RepoManager::modifyRepository( const std::string &alias,
+                                      const RepoInfo & newinfo,
+                                      const ProgressData::ReceiverFnc & progressrcv )
+  {
+    RepoInfo toedit = getRepositoryInfo(alias);
+
+    if (toedit.filepath().empty())
+    {
+      ZYPP_THROW(RepoException("Can't figure where the repo is stored"));
+    }
+    else
+    {
+      // figure how many repos are there in the file:
+      std::list<RepoInfo> filerepos = repositories_in_file(toedit.filepath());
+
+      // there are more repos in the same file
+      // write them back except the deleted one.
+      //TmpFile tmp;
+      //std::ofstream file(tmp.path().c_str());
+      
+      // assert the directory exists
+      filesystem::assert_dir(toedit.filepath().dirname());
+      
+      std::ofstream file(toedit.filepath().c_str());
+      if (!file) {
+        //ZYPP_THROW (Exception( "Can't open " + tmp.path().asString() ) );
+        ZYPP_THROW (Exception( "Can't open " + toedit.filepath().asString() ) );
+      }
+      for ( std::list<RepoInfo>::const_iterator fit = filerepos.begin();
+            fit != filerepos.end();
+            ++fit )
+      {
+          // if the alias is different, dump the original
+          // if it is the same, dump the provided one
+          if ( (*fit).alias() != toedit.alias() )
+            (*fit).dumpRepoOn(file);
+          else
+            newinfo.dumpRepoOn(file);
+      }
+    }
+  }
+
+  ////////////////////////////////////////////////////////////////////////////
+
+  RepoInfo RepoManager::getRepositoryInfo( const std::string &alias,
+                                           const ProgressData::ReceiverFnc & progressrcv )
+  {
+    std::list<RepoInfo> repos = knownRepositories();
+    for ( std::list<RepoInfo>::const_iterator it = repos.begin();
+          it != repos.end();
+          ++it )
+    {
+      if ( (*it).alias() == alias )
+        return *it;
+    }
+    RepoInfo info;
+    info.setAlias(info.alias());
+    ZYPP_THROW(RepoNotFoundException(info));
+  }
+
+  ////////////////////////////////////////////////////////////////////////////
+
   std::ostream & operator<<( std::ostream & str, const RepoManager & obj )
   {
     return str << *obj._pimpl;

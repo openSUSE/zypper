@@ -1,0 +1,47 @@
+##----------------------------------------
+=Pkg: kdelibs3 3.5.7 24 i586
+=Sum: KDE Base Libraries
++Des:
+<!-- DT:Rich -->
+<p>This package contains kdelibs, one of the basic packages of the K
+Desktop Environment. It contains the necessary libraries for the KDE desktop.
+</p><p>
+This package is absolutely necessary for using KDE.
+</p>
+-Des:
+##----------------------------------------
+=Pkg: kdelibs3-arts 3.5.7 24 i586
+=Sum: KDE aRts support
++Des:
+<!-- DT:Rich -->
+<p>This package contains bindings and gui elements for using aRts sound daemon.
+</p>
+-Des:
+##----------------------------------------
+=Pkg: kdelibs3-debuginfo 3.5.7 24 i586
+=Sum: KDE Base Libraries
++Des:
+<!-- DT:Rich -->
+<p>This package contains kdelibs, one of the basic packages of the K
+Desktop Environment. It contains the necessary libraries for the KDE desktop.
+</p><p>
+This package is absolutely necessary for using KDE.
+</p>
+-Des:
+##----------------------------------------
+=Pkg: kdelibs3-devel 3.5.7 24 i586
+=Sum: KDE Base Package: Build Environment
++Des:
+<!-- DT:Rich -->
+<p>This package contains all necessary include files and libraries needed to develop applications that require these.
+</p>
+-Des:
+##----------------------------------------
+=Pkg: kdelibs3-doc 3.5.7 24 i586
+=Sum: Documentation for KDE Base Libraries
++Des:
+<!-- DT:Rich -->
+<p>This package contains the core environment and templates for the KDE help system.
+</p>
+-Des:
+##----------------------------------------

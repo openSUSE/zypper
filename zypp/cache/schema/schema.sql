@@ -40,7 +40,7 @@ DROP INDEX IF EXISTS named_capabilities_name;
 CREATE TABLE db_info (
   version INTEGER
 );
---INSERT INTO db_info (version) VALUES ('
+
 ------------------------------------------------
 -- Basic types like archs, attributes, languages
 ------------------------------------------------
@@ -170,6 +170,7 @@ CREATE TABLE delta_packages (
   , baseversion_sequence_info TEXT
   , repository_id INTEGER REFERENCES repositories(id)
 );
+CREATE INDEX delta_package_repository_id ON delta_packages(repository_id);
 
 CREATE TABLE patch_packages (
     id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL
@@ -180,6 +181,7 @@ CREATE TABLE patch_packages (
   , build_time INTEGER
   , repository_id INTEGER REFERENCES repositories(id)
 );
+CREATE INDEX patch_package_repository_id ON patch_packages(repository_id);
 
 CREATE TABLE patch_packages_baseversions (
     id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL
@@ -266,6 +268,9 @@ CREATE TRIGGER remove_resolvables
     DELETE FROM file_capabilities WHERE resolvable_id = old.id;
     DELETE FROM split_capabilities WHERE resolvable_id = old.id;
     DELETE FROM other_capabilities WHERE resolvable_id = old.id;
+    
+    DELETE FROM text_attributes  WHERE weak_resolvable_id = old.id;
+    DELETE FROM numeric_attributes  WHERE weak_resolvable_id = old.id;
   END;
 
 ------------------------------------------------
@@ -287,6 +292,8 @@ CREATE TRIGGER remove_repositories
   AFTER DELETE ON repositories
   BEGIN
     DELETE FROM resolvables WHERE repository_id = old.id;
+    DELETE FROM delta_packages WHERE repository_id = old.id;
+    DELETE FROM patch_packages WHERE repository_id = old.id;
   END;
 
 CREATE TRIGGER remove_patch_packages_baseversions

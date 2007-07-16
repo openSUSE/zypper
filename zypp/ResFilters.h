@@ -18,14 +18,15 @@
 #include "zypp/Resolvable.h"
 #include "zypp/CapFilters.h"
 
-#include "zypp/Source.h"
-
 #include "zypp/PoolItem.h"
 #include "zypp/CapAndItem.h"
+
+//#include "zypp/Repository.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
+  class Repository;
   ///////////////////////////////////////////////////////////////////
   namespace resfilter
   { /////////////////////////////////////////////////////////////////
@@ -187,19 +188,19 @@ namespace zypp
     };
 
 
-    /** Select ResObject by source. */
-    struct BySource : public ResObjectFilterFunctor
+    /** Select ResObject by repository. */
+    struct ByRepository : public ResObjectFilterFunctor
     {
-      BySource( Source_Ref source_r )
-      : _source( source_r )
+      ByRepository( Repository repository_r )
+      : _repository( repository_r )
       {}
 
       bool operator()( ResObject::constPtr p ) const
       {
-        return p->source() == _source;
+       return p->repository() == _repository;
       }
 
-      Source_Ref _source;
+      Repository _repository;
     };
 
 

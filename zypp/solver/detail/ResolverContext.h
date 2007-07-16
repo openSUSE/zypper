@@ -29,7 +29,7 @@
 #include "zypp/ResPool.h"
 #include "zypp/PoolItem.h"
 #include "zypp/Capability.h"
-#include "zypp/Source.h"
+#include "zypp/Repository.h"
 
 #include "zypp/solver/detail/Types.h"
 #include "zypp/solver/detail/ResolverInfo.h"
@@ -48,7 +48,7 @@ typedef void (*ResolverContextFn) (ResolverContext_Ptr ctx, void *data);
 typedef void (*MarkedPoolItemFn) (PoolItem_Ref item, const ResStatus & status, void *data);
 typedef void (*MarkedPoolItemPairFn) (PoolItem_Ref item1, const ResStatus & status1, PoolItem_Ref item2, const ResStatus & status2, void *data);
 typedef std::multimap<PoolItem_Ref,Capability> IgnoreMap;
-typedef std::map<Source_Ref ,int> SourceCounter;	
+typedef std::map<Repository ,int> RepositoryCounter;	
 
 ///////////////////////////////////////////////////////////////////
 //
@@ -319,7 +319,7 @@ class ResolverContext : public base::ReferenceCounted, private base::NonCopyable
     void spew (void);
     void spewInfo (void) const;
 
-    int getSourcePriority (Source_Ref source) const;
+    int getRepoPriority (Repository source) const;
 };
 
 ///////////////////////////////////////////////////////////////////

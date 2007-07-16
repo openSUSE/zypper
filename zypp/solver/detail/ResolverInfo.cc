@@ -23,7 +23,7 @@
 #include <sstream>
 
 #include "zypp/solver/detail/ResolverInfo.h"
-#include "zypp/Source.h"
+#include "zypp/Repository.h"
 #include "zypp/Capability.h"
 #include "zypp/base/String.h"
 #include "zypp/base/Gettext.h"
@@ -149,13 +149,13 @@ ResolverInfo::toString (PoolItem_Ref item)
     if (item->arch() != "") {
 	os << '.' << item->arch();
     }
-    Source_Ref s = item->source();
+    Repository s = item->repository();
     if (s) {
-	string alias = s.alias();
+	string alias = s.info().alias();
 	if (!alias.empty()
 	    && alias != "@system")
 	{
-	    os << '[' << s.alias() << ']';
+	    os << '[' << s.info().alias() << ']';
 	}
     }
     return os.str();

@@ -116,23 +116,6 @@ public:
   std::set<std::string> flagsFromFile( const std::string &filename ) const;
   
   void updateTimestamp() const;
-  /////////////////////////////////////////////////////////
-  // SOURCES API
-  ////////////////////////////////////////////////////////
-  public:
-  /**
-    * Query for installed Sources
-    */
-    virtual source::SourceInfoList storedSources() const;
-  /**
-    * Query for installed Sources
-    */
-    virtual void storeSource(const source::SourceInfo &data);
-  /**
-    * Query for installed Sources
-    */
-  virtual void deleteSource(const std::string &alias);
-  
 
   protected:
   

@@ -16,6 +16,8 @@
 #include "zypp/parser/susetags/FileReaderBaseImpl.h"
 
 using std::endl;
+#undef  ZYPP_BASE_LOGGER_LOGGROUP
+#define ZYPP_BASE_LOGGER_LOGGROUP "parser::susetags"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

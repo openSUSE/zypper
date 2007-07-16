@@ -40,12 +40,12 @@ namespace zypp
       typedef SrcPackage ResType;
 
     public:
+      virtual OnMediaLocation location() const PURE_VIRTUAL;
       /** */
-      virtual ByteCount archivesize() const PURE_VIRTUAL;
+      virtual ByteCount downloadSize() const PURE_VIRTUAL;
       /** */
       virtual DiskUsage diskusage() const PURE_VIRTUAL;
-      /** */
-      virtual Pathname location() const PURE_VIRTUAL;
+      
     };
     ///////////////////////////////////////////////////////////////////
 

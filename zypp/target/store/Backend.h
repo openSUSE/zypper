@@ -99,22 +99,6 @@ public:
   virtual std::set<std::string> flags( const std::string &key ) const = 0;
   virtual bool hasFlag( const std::string &key, const std::string &flag ) const = 0;
 
-  /////////////////////////////////////////////////////////
-  // SOURCES API
-  ////////////////////////////////////////////////////////
-  /**
-    * Query for installed Sources
-    */
-  virtual source::SourceInfoList storedSources() const = 0;
-  /**
-    * Query for installed Sources
-    */
-  virtual void storeSource(const source::SourceInfo &data) = 0;
-  /**
-    * Query for installed Sources
-    */
-  virtual void deleteSource(const std::string &alias) = 0;
-
 private:
   /** Pointer to implementation */
   class Private;

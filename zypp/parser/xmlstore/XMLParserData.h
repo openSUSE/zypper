@@ -77,7 +77,7 @@ namespace zypp {
         TranslatedText license_to_confirm;
         std::string vendor;
         ByteCount size;
-        ByteCount archive_size;
+        ByteCount downloadSize;
         bool install_only;
         Date build_time;
         Date install_time;

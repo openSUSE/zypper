@@ -43,7 +43,7 @@ namespace zypp
        * We redirect the static report triggered from Repository::provideFile
        * to feed the ProvideFilePolicy callbacks.
       */
-      struct DownloadFileReportHack : public callback::ReceiveReport<source::SourceReport>
+      struct DownloadFileReportHack : public callback::ReceiveReport<repo::RepoReport>
       {
         virtual bool progress( int value )
         {
@@ -89,7 +89,7 @@ namespace zypp
       DownloadFileReportHack dumb;
       dumb._redirect = bind( mem_fun_ref( &ProvideFilePolicy::progress ),
                              ref( policy_r ), _1 );
-      callback::TempConnect<source::SourceReport> temp( dumb );
+      callback::TempConnect<repo::RepoReport> temp( dumb );
 
       Url url;
       RepoInfo info = repo_r.info();

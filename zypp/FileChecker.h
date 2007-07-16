@@ -16,7 +16,7 @@
 #include <list>
 #include "zypp/base/Exception.h"
 #include "zypp/base/Function.h"
-#include "zypp/Pathname.h"
+#include "zypp/PathInfo.h"
 #include "zypp/CheckSum.h"
 
 ///////////////////////////////////////////////////////////////////

@@ -46,6 +46,8 @@ namespace zypp
     typedef SelectableIndex::const_iterator const_iterator;
     typedef SelectableIndex::size_type      size_type;
 
+    typedef ResPool::repository_iterator    repository_iterator;
+
   public:
     /** Default ctor: no pool */
     ResPoolProxy();
@@ -85,6 +87,17 @@ namespace zypp
       const_iterator byKindEnd() const
       { return byKindEnd( ResTraits<_Res>::kind ); }
     //@}
+
+ public:
+   /** \name Iterate through all Repositories that contribute ResObjects.
+   */
+   //@{
+   size_type knownRepositoriesSize() const;
+
+   repository_iterator knownRepositoriesBegin() const;
+
+   repository_iterator knownRepositoriesEnd() const;
+   //@}
 
   public:
     /** Test whether there is at least one ui::Selectable with

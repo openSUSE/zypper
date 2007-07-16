@@ -26,9 +26,6 @@ namespace zypp
     // as far as resonable.
     /////////////////////////////////////////////////////////////////
 
-      CheckSum PackageImplIf::checksum() const
-      { return CheckSum(); }
-
       std::string PackageImplIf::buildhost() const
       { return std::string(); }
 
@@ -50,9 +47,6 @@ namespace zypp
       Changelog PackageImplIf::changelog() const
       { return Changelog(); }
 
-      Pathname PackageImplIf::location() const
-      { return Pathname(); }
-
       std::string PackageImplIf::url() const
       { return std::string(); }
 
@@ -73,7 +67,13 @@ namespace zypp
 
       ByteCount PackageImplIf::sourcesize() const
       { return ByteCount(); }
+      
+      ByteCount PackageImplIf::downloadSize() const
+      { return location().downloadSize(); }
 
+      OnMediaLocation PackageImplIf::location() const
+      { return OnMediaLocation(); }
+      
       DiskUsage PackageImplIf::diskusage() const
       { return DiskUsage(); }
 

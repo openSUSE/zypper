@@ -17,7 +17,7 @@ ADD_EXECUTABLE(PtrTypes PtrTypes.cc)
 TARGET_LINK_LIBRARIES(PtrTypes zypp  )
 
 ADD_EXECUTABLE(TranslatedText TranslatedText.cc)
-TARGET_LINK_LIBRARIES(TranslatedText zypp )
+TARGET_LINK_LIBRARIES(TranslatedText zypp boost_unit_test_framework)
 
 ADD_EXECUTABLE(CheckSum CheckSum.cc)
 TARGET_LINK_LIBRARIES(CheckSum zypp boost_unit_test_framework )
@@ -52,6 +52,9 @@ TARGET_LINK_LIBRARIES( RepoManager zypp boost_unit_test_framework )
 ADD_EXECUTABLE( RepoInfo RepoInfo_test.cc )
 TARGET_LINK_LIBRARIES( RepoInfo zypp boost_unit_test_framework )
 
+ADD_EXECUTABLE( ProgressData ProgressData_test.cc )
+TARGET_LINK_LIBRARIES( ProgressData zypp boost_unit_test_framework )
+
 ADD_TEST(ArchTest ${CMAKE_CURRENT_BINARY_DIR}/Arch)
 ADD_TEST(UrlTest ${CMAKE_CURRENT_BINARY_DIR}/Url)
 ADD_TEST(Edition ${CMAKE_CURRENT_BINARY_DIR}/Edition)
@@ -69,3 +72,4 @@ ADD_TEST(FileCheckerTest ${CMAKE_CURRENT_BINARY_DIR}/FileChecker ${CMAKE_CURRENT
 ADD_TEST(RepoManagerTest ${CMAKE_CURRENT_BINARY_DIR}/RepoManager ${CMAKE_CURRENT_SOURCE_DIR}/data/RepoManager)
 ADD_TEST(RepoInfoTest ${CMAKE_CURRENT_BINARY_DIR}/RepoInfo ${CMAKE_CURRENT_SOURCE_DIR}/data/RepoInfo)
 ADD_TEST(FetcherTest ${CMAKE_CURRENT_BINARY_DIR}/Fetcher)
+ADD_TEST(ProgressData_test ${CMAKE_CURRENT_BINARY_DIR}/ProgressData)

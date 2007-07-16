@@ -16,7 +16,6 @@
 
 #include "zypp/TmpPath.h"
 #include "zypp/ResPoolManager.h"
-#include "zypp/SourceFeed.h"
 #include "zypp/Target.h"
 #include "zypp/Resolver.h"
 #include "zypp/Locale.h"
@@ -58,10 +57,6 @@ namespace zypp
 
       ResPoolProxy poolProxy() const
       { return _pool.proxy(); }
-
-      /** */
-      SourceFeed_Ref sourceFeed() const
-      { return _sourceFeed; }
 
       /** */
       KeyRing_Ptr keyRing() const
@@ -150,8 +145,6 @@ namespace zypp
     private:
       /** */
       ResPoolManager _pool;
-      /** */
-      SourceFeed_Ref _sourceFeed;
       /** */
       Target_Ptr _target;
       /** */

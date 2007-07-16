@@ -12,11 +12,11 @@
 #include "zypp/base/Logger.h"
 #include "zypp/repo/RepositoryImpl.h"
 #include "AtomImpl.h"
-
+#include "zypp/cache/CacheAttributes.h"
 
 using namespace std;
 using namespace zypp::detail;
-using namespace::zypp::repo;
+//using namespace::zypp::repo;
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp { namespace repo { namespace cached {
@@ -46,67 +46,52 @@ AtomImpl::repository() const
 
 TranslatedText AtomImpl::summary() const
 {
-  return _repository->resolvableQuery().queryTranslatedStringAttribute( _id, "ResObject", "summary" );
+  return _repository->resolvableQuery().queryTranslatedStringAttribute( _id, cache::attrResObjectSummary() );
 }
 
 TranslatedText AtomImpl::description() const
 {
-  return _repository->resolvableQuery().queryTranslatedStringAttribute( _id, "ResObject", "description" );
+  return _repository->resolvableQuery().queryTranslatedStringAttribute( _id, cache::attrResObjectDescription() );
 }
 
 TranslatedText AtomImpl::insnotify() const
 {
-  return _repository->resolvableQuery().queryTranslatedStringAttribute( _id, "ResObject", "insnotify" );
+  return _repository->resolvableQuery().queryTranslatedStringAttribute( _id, cache::attrResObjectInsnotify() );
 }
 
 TranslatedText AtomImpl::delnotify() const
 {
-  return _repository->resolvableQuery().queryTranslatedStringAttribute( _id, "ResObject", "delnotify" );
+  return _repository->resolvableQuery().queryTranslatedStringAttribute( _id, cache::attrResObjectDelnotify() );
 }
 
 TranslatedText AtomImpl::licenseToConfirm() const
 {
-  return _repository->resolvableQuery().queryTranslatedStringAttribute( _id, "ResObject", "licenseToConfirm" );
+  return _repository->resolvableQuery().queryTranslatedStringAttribute( _id, cache::attrResObjectLicenseToConfirm() );
 }
 
 Vendor AtomImpl::vendor() const
 {
-  return _repository->resolvableQuery().queryStringAttribute( _id, "ResObject", "vendor" );
+  return _repository->resolvableQuery().queryStringAttribute( _id, cache::attrResObjectVendor() );
 }
-
 
 ByteCount AtomImpl::size() const
 {
-  return _repository->resolvableQuery().queryNumericAttribute( _id, "ResObject", "size" );
-}
-
-ByteCount AtomImpl::archivesize() const
-{
-  return _repository->resolvableQuery().queryNumericAttribute( _id, "ResObject", "archivesize" );
+  return _repository->resolvableQuery().queryNumericAttribute( _id, cache::attrResObjectInstalledSize() );
 }
 
 bool AtomImpl::installOnly() const
 {
-  return _repository->resolvableQuery().queryBooleanAttribute( _id, "ResObject", "installOnly" );
+  return _repository->resolvableQuery().queryBooleanAttribute( _id, cache::attrResObjectInstallOnly() );
 }
 
 Date AtomImpl::buildtime() const
 {
-  return _repository->resolvableQuery().queryNumericAttribute( _id, "ResObject", "buildtime" );
+  return _repository->resolvableQuery().queryNumericAttribute( _id, cache::attrResObjectBuildTime() );
 }
 
 Date AtomImpl::installtime() const
 {
   return Date();
-}
-
-//////////////////////////////////////////
-// DEPRECATED
-//////////////////////////////////////////
-
-Source_Ref AtomImpl::source() const
-{
-  return Source_Ref::noSource;
 }
 
 unsigned AtomImpl::mediaNr() const

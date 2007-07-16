@@ -59,6 +59,8 @@ namespace zypp
      * \param primary_file the primary.xml.gz file you want to read
      * \param callback function to process \ref _package data.
      * \param progress progress reporting function
+     * \throws AbortRequestException if user request for aborting the parsing
+     *         has been received through progress reporting callback.
      * 
      * \see PrimaryFileReader::ProcessPackage
      */

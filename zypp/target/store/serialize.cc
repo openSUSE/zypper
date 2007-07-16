@@ -17,7 +17,6 @@
 
 #include "zypp/base/Logger.h"
 #include "zypp/CapFactory.h"
-#include "zypp/Source.h"
 #include "zypp/Url.h"
 
 #include "zypp/ResObject.h"
@@ -187,7 +186,7 @@ string toXML( const ResObject::constPtr &obj )
   out << translatedTextToXML(pipp->licenseToConfirm(), "license-to-confirm");
   out << "  <vendor>" << xml_escape(obj->vendor()) << "</vendor>" << endl;
   out << "  <size>" << static_cast<ByteCount::SizeType>(obj->size()) << "</size>" << endl;
-  out << "  <archive-size>" << static_cast<ByteCount::SizeType>(obj->archivesize()) << "</archive-size>" << endl;
+  out << "  <archive-size>" << static_cast<ByteCount::SizeType>(obj->downloadSize()) << "</archive-size>" << endl;
   out << "  <install-only>" << ( obj->installOnly() ? "true" : "false" ) << "</install-only>" << endl;
   out << "  <build-time>" << obj->buildtime().asSeconds()  << "</build-time>" << endl;
   // we assume we serialize on storeObject, set install time to NOW
@@ -350,7 +349,7 @@ string toXML( const Product::constPtr &obj )
   
   out << "  <distribution-name>" << xml_escape(obj->distributionName()) << "</distribution-name>" << endl;
   out << "  <distribution-edition>" << xml_escape(obj->distributionEdition().asString()) << "</distribution-edition>" << endl;
-  out << "  <source>" << xml_escape(obj->source().alias()) << "</source>" << endl;  
+  out << "  <source>" << xml_escape(obj->repository().info().alias()) << "</source>" << endl;  
   out << "  <release-notes-url>" << xml_escape(obj->releaseNotesUrl().asString()) << "</release-notes-url>" << endl;
   
   out << "  <update-urls>" << endl;
@@ -456,23 +455,6 @@ string toXML( const Patch::constPtr &obj )
   }
   out << "  </atoms>" << endl;
   out << "</patch>" << endl;
-  return out.str();
-}
-
-template<> 
-string toXML( const source::SourceInfo &obj )
-{
-  stringstream out;
-  out << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" << endl;
-  out << "<source version=\"" << SERIALIZER_VERSION << "\" xmlns=\"http://www.novell.com/metadata/zypp/xml-store\">" << endl;
-  out << "  <enabled>" << obj.enabled() << "</enabled>" << endl;
-  out << "  <auto-refresh>" << obj.autorefresh() << "</auto-refresh>" << endl;
-  out << "  <product-dir>" << obj.path() << "</product-dir>" << endl;
-  out << "  <cache-dir>" << obj.cacheDir() << "</cache-dir>" << endl;
-  out << "  <type>" << xml_escape(obj.type()) << "</type>" << endl;
-  out << "  <url>" << xml_escape(obj.url().asCompleteString()) << "</url>" << endl;
-  out << "  <alias>" << xml_escape(obj.alias()) << "</alias>" << endl;
-  out << "</source>" << endl;
   return out.str();
 }
 

@@ -176,6 +176,15 @@ namespace zypp
     const_iterator byKindEnd( const ResObject::Kind & kind_r ) const
     { return _selPool[kind_r].end(); }
 
+  public:
+    size_type knownRepositoriesSize() const
+    { return _pool.knownRepositoriesSize(); }
+
+    repository_iterator knownRepositoriesBegin() const
+    { return _pool.knownRepositoriesBegin(); }
+
+    repository_iterator knownRepositoriesEnd() const
+    { return _pool.knownRepositoriesEnd(); }
 
   public:
 
@@ -266,6 +275,15 @@ namespace zypp
 
   ResPoolProxy::const_iterator ResPoolProxy::byKindEnd( const ResObject::Kind & kind_r ) const
   { return _pimpl->byKindEnd( kind_r ); }
+
+  ResPoolProxy::size_type ResPoolProxy::knownRepositoriesSize() const
+  { return _pimpl->knownRepositoriesSize(); }
+
+  ResPoolProxy::repository_iterator ResPoolProxy::knownRepositoriesBegin() const
+  { return _pimpl->knownRepositoriesBegin(); }
+
+  ResPoolProxy::repository_iterator ResPoolProxy::knownRepositoriesEnd() const
+  { return _pimpl->knownRepositoriesEnd(); }
 
   void ResPoolProxy::saveState() const
   { _pimpl->saveState(); }

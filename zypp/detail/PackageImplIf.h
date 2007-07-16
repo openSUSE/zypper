@@ -21,7 +21,7 @@
 #include "zypp/Changelog.h"
 #include "zypp/DiskUsage.h"
 #include "zypp/PackageKeyword.h"
-#include "zypp/source/PackageDelta.h"
+#include "zypp/repo/PackageDelta.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -53,8 +53,6 @@ namespace zypp
       /** \name Rpm Package Attributes. */
       //@{
 
-      virtual CheckSum checksum() const PURE_VIRTUAL;
-      /** */
       virtual std::string buildhost() const PURE_VIRTUAL;
       /** */
       virtual std::string distribution() const PURE_VIRTUAL;
@@ -69,7 +67,6 @@ namespace zypp
       /** */
       virtual Changelog changelog() const PURE_VIRTUAL;
       /** */
-      virtual Pathname location() const PURE_VIRTUAL;
       /** Don't ship it as class Url, because it might be
        * in fact anything but a legal Url. */
       virtual std::string url() const PURE_VIRTUAL;
@@ -95,6 +92,10 @@ namespace zypp
       virtual std::list<DeltaRpm> deltaRpms() const PURE_VIRTUAL;
       /** */
       virtual std::list<PatchRpm> patchRpms() const PURE_VIRTUAL;
+      
+      virtual ByteCount downloadSize() const PURE_VIRTUAL;
+      
+      virtual OnMediaLocation location() const PURE_VIRTUAL;
 
       //@}
 

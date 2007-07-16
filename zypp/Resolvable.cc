@@ -15,7 +15,6 @@
 #include "zypp/detail/ResolvableImpl.h"
 
 #include "zypp/ResObject.h"
-#include "zypp/Source.h"
 
 using namespace std;
 

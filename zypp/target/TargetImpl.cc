@@ -19,6 +19,8 @@
 #include "zypp/base/Exception.h"
 #include "zypp/base/Iterator.h"
 #include "zypp/base/Gettext.h"
+#include "zypp/base/UserRequestException.h"
+
 #include "zypp/PoolItem.h"
 #include "zypp/Resolvable.h"
 #include "zypp/ResObject.h"
@@ -27,7 +29,6 @@
 #include "zypp/Selection.h"
 #include "zypp/Script.h"
 #include "zypp/Message.h"
-#include "zypp/Source.h"
 #include "zypp/Url.h"
 
 #include "zypp/CapMatchHelper.h"
@@ -41,12 +42,8 @@
 #include "zypp/pool/GetResolvablesToInsDel.h"
 #include "zypp/solver/detail/Helper.h"
 
-#ifdef ZYPP_REFACTORING
 #include "zypp/repo/DeltaCandidates.h"
 #include "zypp/repo/PackageProvider.h"
-#else
-#include "zypp/source/PackageProvider.h"
-#endif
 
 using namespace std;
 using namespace zypp;
@@ -224,31 +221,45 @@ namespace zypp
       }
     };
 
-    /** Let the Source provide the package.
+    /** 
+     * \short Let the Source provide the package.
+     * \p pool_r \ref ResPool used to get candidates
+     * \p pi item to be commited
     */
-    static ManagedFile sourceProvidePackage( const PoolItem & pi )
+    struct RepoProvidePackage
     {
-      // Redirect PackageProvider queries for installed editions
-      // (in case of patch/delta rpm processing) to rpmDb.
-#ifdef ZYPP_REFACTORING
-      repo::PackageProviderPolicy packageProviderPolicy;
-#else
-      source::PackageProviderPolicy packageProviderPolicy;
-#endif
-      packageProviderPolicy.queryInstalledCB( QueryInstalledEditionHelper() );
-
-      Package::constPtr p = asKind<Package>(pi.resolvable());
-#ifdef ZYPP_REFACTORING
-      // FIXME no repo list
-      std::set<Repository> repos;
-      repo::DeltaCandidates deltas(repos);
-      repo::PackageProvider pkgProvider( p, deltas, packageProviderPolicy );
-#else
-      source::PackageProvider pkgProvider( p, packageProviderPolicy );
-#endif
-      return pkgProvider.providePackage();
-    }
-
+      ResPool _pool;
+      RepoProvidePackage( ResPool pool_r )
+        : _pool(pool_r)
+      {
+      
+      }
+      
+      ManagedFile operator()( const PoolItem & pi )
+      {
+        // Redirect PackageProvider queries for installed editions
+        // (in case of patch/delta rpm processing) to rpmDb.
+        repo::PackageProviderPolicy packageProviderPolicy;
+        packageProviderPolicy.queryInstalledCB( QueryInstalledEditionHelper() );
+  
+        Package::constPtr p = asKind<Package>(pi.resolvable());
+        
+        
+        // Build a repository list for repos
+        // contributing to the pool
+        std::list<Repository> repos;
+        for ( ResPool::repository_iterator it = _pool.knownRepositoriesBegin();
+              it != _pool.knownRepositoriesEnd();
+              ++it )
+        {
+          repos.push_back(*it);
+        }
+  
+        repo::DeltaCandidates deltas(repos);
+        repo::PackageProvider pkgProvider( p, deltas, packageProviderPolicy );
+        return pkgProvider.providePackage();
+      }
+    };
     ///////////////////////////////////////////////////////////////////
 
     IMPL_PTR_TYPE(TargetImpl);
@@ -432,7 +443,7 @@ namespace zypp
           ResObject::constPtr res( it->resolvable() );
 
           if ( hitUnwantedMedia
-               || ( res->sourceMediaNr() && res->sourceMediaNr() != policy_r.restrictToMedia() ) )
+               || ( res->mediaNr() && res->mediaNr() != policy_r.restrictToMedia() ) )
           {
             hitUnwantedMedia = true;
             result._remaining.push_back( *it );
@@ -450,9 +461,9 @@ namespace zypp
         {
           Resolvable::constPtr res( it->resolvable() );
           Package::constPtr pkg( asKind<Package>(res) );
-          if (pkg && policy_r.restrictToMedia() != pkg->sourceMediaNr()) // check medianr for packages only
+          if (pkg && policy_r.restrictToMedia() != pkg->mediaNr()) // check medianr for packages only
           {
-            XXX << "Package " << *pkg << ", wrong media " << pkg->sourceMediaNr() << endl;
+            XXX << "Package " << *pkg << ", wrong media " << pkg->mediaNr() << endl;
             result._srcremaining.push_back( *it );
           }
           else
@@ -482,11 +493,12 @@ namespace zypp
       bool abort = false;
 
       // remember the last used source (if any)
-      Source_Ref lastUsedSource;
+      Repository lastUsedRepo;
 
+      RepoProvidePackage repoProvidePackage(pool_r);
       // prepare the package cache.
       CommitPackageCache packageCache( items_r.begin(), items_r.end(),
-                                       root() / "tmp", sourceProvidePackage );
+                                       root() / "tmp", repoProvidePackage );
 
       for (TargetImpl::PoolItemList::const_iterator it = items_r.begin(); it != items_r.end(); it++)
       {
@@ -500,14 +512,14 @@ namespace zypp
             {
               localfile = packageCache.get( it );
             }
-            catch ( const source::SkipRequestedException & e )
+            catch ( const SkipRequestException &e )
             {
               ZYPP_CAUGHT( e );
               WAR << "Skipping package " << p << " in commit" << endl;
               continue;
             }
 
-            lastUsedSource = p->source();			// remember the package source
+            lastUsedRepo = p->repository();			// remember the package source
 
 #warning Exception handling
             // create a installation progress report proxy
@@ -718,9 +730,9 @@ namespace zypp
       //   In the case of 'commit any media', end of commit means we're completely
       //   done and don't need the source's media anyways.
 
-      if (lastUsedSource)
+      if (lastUsedRepo)
       {		// if a source was used
-        lastUsedSource.release();	//  release their medias
+        //lastUsedRepo.release();	//  release their medias
       }
 
       if ( abort )
@@ -762,19 +774,6 @@ namespace zypp
     {
       CommitLog::setFname(path_r);
       return true;
-    }
-
-    void
-    TargetImpl::getResolvablesToInsDel ( const ResPool pool_r,
-                                         TargetImpl::PoolItemList & dellist_r,
-                                         TargetImpl::PoolItemList & instlist_r,
-                                         TargetImpl::PoolItemList & srclist_r ) const
-    {
-      pool::GetResolvablesToInsDel collect( pool_r );
-      MIL << "GetResolvablesToInsDel: " << endl << collect << endl;
-      dellist_r.swap( collect._toDelete );
-      instlist_r.swap( collect._toInstall );
-      srclist_r.swap( collect._toSrcinstall );
     }
 
     Date TargetImpl::timestamp() const

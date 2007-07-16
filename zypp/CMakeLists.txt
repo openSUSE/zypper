@@ -4,10 +4,6 @@
 
 ADD_DEFINITIONS(-DLOCALEDIR=\\\"/usr/share/libzypp\\\" -DTEXTDOMAIN=\\\"zypp\\\" )
 
-IF(ZYPP_REFACTORING)
-  ADD_DEFINITIONS(-DZYPP_REFACTORING)
-ENDIF(ZYPP_REFACTORING)
-
 ADD_EXECUTABLE(mkarray ${CMAKE_SOURCE_DIR}/zypp/cache/schema/mkarray.c )
 INCLUDE_DIRECTORIES(${CMAKE_CURRENT_BINARY_DIR})
 #FILE(WRITE filename "message to write"... )
@@ -54,11 +50,6 @@ SET( zypp_SRCS
   Package.cc
   Pathname.cc
   ProgressData.cc
-  Source.cc
-  SourceFactory.cc
-  SourceManager.cc
-  SourceCache.cc
-  SourceFeed.cc
   SrcPackage.cc
   SysContent.cc
   Target.cc
@@ -95,7 +86,7 @@ SET( zypp_SRCS
   RepoInfo.cc
   RepoStatus.cc
   RepoManager.cc
-  RepositoryFactory.cc
+  MediaProducts.cc
 )
 
 SET( zypp_HEADERS
@@ -171,11 +162,6 @@ SET( zypp_HEADERS
   Selection.h
   Signature.h
   SilentCallbacks.h
-  Source.h
-  SourceCache.h
-  SourceFactory.h
-  SourceFeed.h
-  SourceManager.h
   SrcPackage.h
   SysContent.h
   SystemResObject.h
@@ -197,7 +183,7 @@ SET( zypp_HEADERS
   RepoInfo.h
   RepoStatus.h
   RepoManager.h
-  RepositoryFactory.h
+  MediaProducts.h
 )
 
 INSTALL(  FILES ${zypp_HEADERS} DESTINATION "${CMAKE_INSTALL_PREFIX}/include/zypp" )
@@ -222,6 +208,7 @@ SET( zypp_base_SRCS
 )
 
 SET( zypp_base_HEADERS
+  base/Easy.h
   base/Random.h
   base/Algorithm.h
   base/Counter.h
@@ -433,7 +420,6 @@ SET( zypp_parser_SRCS
   parser/IniParser.cc
   parser/IniDict.cc
   parser/LibXMLHelper.cc
-  parser/SAXParser.cc
   parser/XMLNodeIterator.cc
   parser/RepoFileReader.cc
 )
@@ -445,7 +431,6 @@ SET( zypp_parser_HEADERS
   parser/IniDict.h
   parser/LibXMLHelper.h
   parser/ParserProgress.h
-  parser/SAXParser.h
   parser/XMLNodeIterator.h
   parser/xml_parser_assert.h
   parser/RepoFileReader.h
@@ -481,17 +466,17 @@ INSTALL(  FILES
   DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/parser/susetags
 )
 
-SET( zypp_parser_tagfile_SRCS
-  parser/tagfile/TagFileParser.cc
+SET( zypp_parser_plaindir_SRCS
+  parser/plaindir/RepoParser.cc
 )
 
-SET( zypp_parser_tagfile_HEADERS
-  parser/tagfile/TagFileParser.h
+SET( zypp_parser_plaindir_HEADERS
+  parser/plaindir/RepoParser.h
 )
 
 INSTALL(  FILES
-  ${zypp_parser_tagfile_HEADERS}
-  DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/parser/tagfile
+  ${zypp_parser_plaindir_HEADERS}
+  DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/parser/plaindir
 )
 
 SET( zypp_parser_xml_SRCS
@@ -547,16 +532,6 @@ INSTALL(  FILES
 )
 
 SET( zypp_parser_yum_SRCS
-  parser/yum/YUMFileListParser.cc
-  parser/yum/YUMGroupParser.cc
-  parser/yum/YUMOtherParser.cc
-  parser/yum/YUMParserData.cc
-  parser/yum/YUMPatchParser.cc
-  parser/yum/YUMPatchesParser.cc
-  parser/yum/YUMPatternParser.cc
-  parser/yum/YUMPrimaryParser.cc
-  parser/yum/YUMProductParser.cc
-  parser/yum/YUMRepomdParser.cc
   parser/yum/RepoParser.cc
   parser/yum/FileReaderBaseImpl.cc
   parser/yum/RepomdFileReader.cc
@@ -570,17 +545,6 @@ SET( zypp_parser_yum_SRCS
 )
 
 SET( zypp_parser_yum_HEADERS
-  parser/yum/YUMFileListParser.h
-  parser/yum/YUMGroupParser.h
-  parser/yum/YUMOtherParser.h
-  parser/yum/YUMParser.h
-  parser/yum/YUMParserData.h
-  parser/yum/YUMPatchParser.h
-  parser/yum/YUMPatchesParser.h
-  parser/yum/YUMPatternParser.h
-  parser/yum/YUMPrimaryParser.h
-  parser/yum/YUMProductParser.h
-  parser/yum/YUMRepomdParser.h
   parser/yum/RepoParser.h
   parser/yum/RepoParserOpts.h
   parser/yum/FileReaderBase.h
@@ -599,11 +563,6 @@ SET( zypp_parser_yum_HEADERS
 INSTALL(  FILES
   ${zypp_parser_yum_HEADERS}
   DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/parser/yum
-)
-
-INSTALL(  FILES
-  ${zypp_parser_yum2_HEADERS}
-  DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/parser/yum2
 )
 
 SET( zypp_pool_SRCS
@@ -702,113 +661,6 @@ SET( zypp_solver_detail_HEADERS
 INSTALL(  FILES
   ${zypp_solver_detail_HEADERS}
   DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/solver/detail
-)
-
-SET( zypp_source_SRCS
-  source/Applydeltarpm.cc
-  source/MediaSet.cc
-  source/PackageDelta.cc
-  source/PackageProvider.cc
-  source/SourceImpl.cc
-  source/SourceInfo.cc
-  source/SourceProvideFile.cc
-  source/SUSEMediaVerifier.cc
-)
-
-SET( zypp_source_HEADERS
-  source/Applydeltarpm.h
-  source/Builtin.h
-  source/MediaSet.h
-  source/PackageDelta.h
-  source/PackageProvider.h
-  source/SourceImpl.h
-  source/SourceInfo.h
-  source/SourceProvideFile.h
-  source/SUSEMediaVerifier.h
-)
-
-INSTALL(  FILES
-  ${zypp_source_HEADERS}
-  DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/source
-)
-
-SET( zypp_source_plaindir_SRCS
-  source/plaindir/PlaindirImpl.cc
-)
-
-SET( zypp_source_plaindir_HEADERS
-  source/plaindir/PlaindirImpl.h
-)
-
-INSTALL(  FILES
-  ${zypp_source_plaindir_HEADERS}
-  DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/source/plaindir
-)
-
-SET( zypp_source_susetags_SRCS
-  source/susetags/MediaMetadataParser.cc
-  source/susetags/MediaPatchesMetadataParser.cc
-  source/susetags/PackagesLangParser.cc
-  source/susetags/PackagesParser.cc
-  source/susetags/PatternTagFileParser.cc
-  source/susetags/ProductMetadataParser.cc
-  source/susetags/SelectionTagFileParser.cc
-  source/susetags/SuseTagsImpl.cc
-  source/susetags/SuseTagsPackageImpl.cc
-  source/susetags/SuseTagsPatternImpl.cc
-  source/susetags/SuseTagsProductImpl.cc
-  source/susetags/SuseTagsSelectionImpl.cc
-  source/susetags/SuseTagsSrcPackageImpl.cc
-)
-
-SET( zypp_source_susetags_HEADERS
-  source/susetags/MediaMetadataParser.h
-  source/susetags/MediaPatchesMetadataParser.h
-  source/susetags/PackagesLangParser.h
-  source/susetags/PackagesParser.h
-  source/susetags/PatternTagFileParser.h
-  source/susetags/ProductMetadataParser.h
-  source/susetags/SelectionTagFileParser.h
-  source/susetags/SuseTagsImpl.h
-  source/susetags/SuseTagsPackageImpl.h
-  source/susetags/SuseTagsPatternImpl.h
-  source/susetags/SuseTagsProductImpl.h
-  source/susetags/SuseTagsSelectionImpl.h
-  source/susetags/SuseTagsSrcPackageImpl.h
-)
-
-INSTALL(  FILES
-  ${zypp_source_susetags_HEADERS}
-  DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/source/susetags
-)
-
-SET( zypp_source_yum_SRCS
-  source/yum/YUMAtomImpl.cc
-  source/yum/YUMGroupImpl.cc
-  source/yum/YUMMessageImpl.cc
-  source/yum/YUMPackageImpl.cc
-  source/yum/YUMPatchImpl.cc
-  source/yum/YUMPatternImpl.cc
-  source/yum/YUMProductImpl.cc
-  source/yum/YUMScriptImpl.cc
-  source/yum/YUMSourceImpl.cc
-)
-
-SET( zypp_source_yum_HEADERS
-  source/yum/YUMAtomImpl.h
-  source/yum/YUMGroupImpl.h
-  source/yum/YUMMessageImpl.h
-  source/yum/YUMPackageImpl.h
-  source/yum/YUMPatchImpl.h
-  source/yum/YUMPatternImpl.h
-  source/yum/YUMProductImpl.h
-  source/yum/YUMScriptImpl.h
-  source/yum/YUMSourceImpl.h
-)
-
-INSTALL(  FILES
-  ${zypp_source_yum_HEADERS}
-  DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/source/yum
 )
 
 SET( zypp_target_SRCS
@@ -1020,6 +872,7 @@ SET( zypp_cache_SRCS
   ${CMAKE_BINARY_DIR}/zypp/sqlite-schema.h
   cache/CacheInitializer.cc
   cache/CacheException.cc
+  cache/Attribute.cc
   cache/CacheTypes.cc
   cache/ResolvableQuery.cc
   cache/CacheStore.cc
@@ -1028,6 +881,8 @@ SET( zypp_cache_SRCS
 )
 
 SET( zypp_cache_HEADERS
+  cache/Attribute.h
+  cache/CacheAttributes.h
   cache/CacheTypes.h
   cache/CacheInitializer.h
   cache/CacheException.h
@@ -1067,6 +922,9 @@ SET( zypp_repo_SRCS
   repo/PackageProvider.cc
   repo/RepoProvideFile.cc
   repo/DeltaCandidates.cc
+  repo/Applydeltarpm.cc
+  repo/PackageDelta.cc
+  repo/SUSEMediaVerifier.cc
 )
 
 SET( zypp_repo_HEADERS
@@ -1076,6 +934,9 @@ SET( zypp_repo_HEADERS
   repo/PackageProvider.h
   repo/RepoProvideFile.h
   repo/DeltaCandidates.h
+  repo/Applydeltarpm.h
+  repo/PackageDelta.h
+  repo/SUSEMediaVerifier.h
 )
 
 INSTALL( FILES
@@ -1086,6 +947,7 @@ INSTALL( FILES
 SET( zypp_repo_cached_SRCS
   repo/cached/RepoImpl.cc
   repo/cached/PackageImpl.cc
+  repo/cached/SrcPackageImpl.cc
   repo/cached/PatchImpl.cc
   repo/cached/PatternImpl.cc
   repo/cached/ProductImpl.cc
@@ -1097,6 +959,7 @@ SET( zypp_repo_cached_SRCS
 SET( zypp_repo_cached_HEADERS
   repo/cached/RepoImpl.h
   repo/cached/PackageImpl.h
+  repo/cached/SrcPackageImpl.h
   repo/cached/PatchImpl.h
   repo/cached/PatternImpl.h
   repo/cached/ProductImpl.h
@@ -1125,6 +988,8 @@ SET( zypp_repo_susetags_HEADERS
 
 
 SET( zypp_repo_data_SRCS
+  repo/memory/ScriptImpl.cc
+  repo/memory/MessageImpl.cc
   repo/memory/PackageImpl.cc
   repo/memory/PatternImpl.cc
   repo/memory/ProductImpl.cc
@@ -1150,17 +1015,12 @@ ${zypp_capability_SRCS}
 ${zypp_cache_SRCS}
 ${zypp_cache_sqlite3x_SRCS}
 ${zypp_pool_SRCS}
-${zypp_parser_tagfile_SRCS}
 ${zypp_parser_susetags_SRCS}
-${zypp_parser_yum2_SRCS}
 ${zypp_parser_xmlstore_SRCS}
 ${zypp_parser_xml_SRCS}
 ${zypp_parser_yum_SRCS}
+${zypp_parser_plaindir_SRCS}
 ${zypp_parser_SRCS}
-${zypp_source_plaindir_SRCS}
-${zypp_source_yum_SRCS}
-${zypp_source_susetags_SRCS}
-${zypp_source_SRCS}
 ${zypp_data_SRCS}
 ${zypp_media_proxyinfo_SRCS}
 ${zypp_media_SRCS}
@@ -1185,12 +1045,14 @@ ${zypp_base_SRCS}
 )
 
 SET( zypp_lib_HEADERS
-${zypp_source_plaindir_HEADERS}
 ${zypp_target_store_xml_HEADERS}
+${zypp_target_rpm_HEADERS}
 ${zypp_parser_tagfile_HEADERS}
 ${zypp_parser_susetags_HEADERS}
-${zypp_target_rpm_HEADERS}
-${zypp_parser_yum2_HEADERS}
+${zypp_parser_yum_HEADERS}
+${zypp_parser_plaindir_HEADERS}
+${zypp_parser_xml_HEADERS}
+${zypp_parser_HEADERS}
 ${zypp_capability_HEADERS}
 ${zypp_cache_HEADERS}
 ${zypp_cache_sqlite3x_HEADERS}
@@ -1199,15 +1061,11 @@ ${zypp_parser_xmlstore_HEADERS}
 ${zypp_data_HEADERS}
 ${zypp_media_HEADERS}
 ${zypp_target_hal_HEADERS}
-${zypp_parser_xml_HEADERS}
 ${zypp_media_proxyinfo_HEADERS}
-${zypp_source_yum_HEADERS}
 ${zypp_base_HEADERS}
 ${zypp_solver_detail_HEADERS}
 ${zypp_target_store_HEADERS}
 ${zypp_url_HEADERS}
-${zypp_source_HEADERS}
-${zypp_parser_HEADERS}
 ${zypp_HEADERS}
 ${zypp_zypp_detail_HEADERS}
 ${zypp_thread_HEADERS}
@@ -1215,7 +1073,6 @@ ${zypp_repo_HEADERS}
 ${zypp_source_susetags_HEADERS}
 ${zypp_target_modalias_HEADERS}
 ${zypp_target_HEADERS}
-${zypp_parser_yum_HEADERS}
 ${zypp_detail_HEADERS}
 ${zypp_pool_HEADERS}
 )
@@ -1235,9 +1092,7 @@ ENDMACRO( SET_LOGGROUP )
 SET_LOGGROUP( "zypp" ${zypp_lib_SRCS} )
 
 # override some defaults
-SET_LOGGROUP( "plaindir" ${zypp_source_plaindir_SRCS} )
 SET_LOGGROUP( "xmlstore" ${zypp_target_store_xml_SRCS} )
-SET_LOGGROUP( "tagfile" ${zypp_parser_tagfile_SRCS} )
 #SET_LOGGROUP( "group" ${zypp_target_rpm_SRCS} )
 #SET_LOGGROUP( "group" ${zypp_parser_yum2_SRCS} )
 #SET_LOGGROUP( "group" ${zypp_capability_SRCS} )

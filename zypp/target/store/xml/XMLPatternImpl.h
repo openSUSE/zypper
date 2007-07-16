@@ -47,8 +47,8 @@ namespace zypp
       { return _vendor; }    
       virtual ByteCount size() const
       { return _size; }    
-      virtual ByteCount archivesize() const
-      { return _archive_size; }    
+      virtual ByteCount downloadSize() const
+      { return _downloadSize; }    
       virtual unsigned sourceMediaNr() const
       { return 0; }    
       virtual bool installOnly() const
@@ -74,7 +74,7 @@ namespace zypp
       TranslatedText _license_to_confirm;
       std::string _vendor;
       ByteCount _size;
-      ByteCount _archive_size;
+      ByteCount _downloadSize;
       bool _install_only;
       Date _build_time;
       Date _install_time;

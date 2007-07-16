@@ -136,10 +136,12 @@ namespace zypp
   {
     public:
       typedef long long value_type;
-      /** Most simple version of progress reporting - a single value.
+      /** Most simple version of progress reporting
        * The percentage in most cases. Sometimes just keepalive.
+       * \p sender ProgressData object who sends the progress info
+       * \p
        */
-      typedef function<bool(value_type)> ReceiverFnc;
+      typedef function<bool( const ProgressData & )> ReceiverFnc;
 
     private:
       enum State { INIT, RUN, END };
@@ -275,6 +277,9 @@ namespace zypp
       //@}
 
     public:
+      /** \name Progress receiving.
+       */
+      //@{
       /** @return Current \c min value. */
       value_type min() const
       { return _d->_min; }
@@ -291,6 +296,26 @@ namespace zypp
       bool hasRange() const
       { return min() != max(); }
 
+      /** @return Wheter \ref reportValue will return a percent value.
+       * Same as \ref hasRange.
+       *  \see \ref reportAlive
+       */
+      bool reportPercent() const
+      { return hasRange(); }
+
+      /** @return Wheter \ref reportValue always returns -1, because we
+       * trigger 'still alive' messages. I.e. \ref hasrange is \c false.
+       * \see \ref reportPercent
+      */
+      bool reportAlive() const
+      { return ! hasRange(); }
+
+      /** @return Either a a percent value or -1.
+       * \see \ref reportPercent and \ref reportAlive.
+      */
+      value_type reportValue() const
+      {	return hasRange() ? val() * 100 / ( max() - min() ) : -1; }
+
       /** @return The counters name. */
       const std::string & name() const
       { return _d->_name; }
@@ -298,6 +323,14 @@ namespace zypp
       /** @return The ReceiverFnc. */
       const ReceiverFnc & receiver() const
       { return _d->_receiver; }
+
+      /** @return Retrun \c true if this the final report sent by the
+       *  ProgressData dtor.
+      */
+      bool finalReport() const
+      { return( _d->_state == END ); }
+
+      //@}
 
     private:
       /** Send report if necessary. */
@@ -316,6 +349,72 @@ namespace zypp
   class InputStream;
   /** \relates ProgressData Setup from \ref InputStream. */
   ProgressData makeProgressData( const InputStream & input_r );
+
+  ///////////////////////////////////////////////////////////////////
+
+  /**
+   * \short Progress callback from another progress
+   *
+   * This class allows you to pass a progress callback to a
+   * subtask based on a current progress data, plus a weight
+   * value. Every progress reported by the subtask via
+   * this callback will be forwarded to the main progress
+   * data, with the corresponding weight.
+   *
+   * Example:
+   *
+   * \code
+   *
+   * // receiver for main task
+   * void task_receiver( ProgressData &progress );
+   *
+   * // subtask prototypes
+   * void do_subtask_one( ProgressData::ReceiverFnc &fnc );
+   * void do_subtask_two( ProgressData::ReceiverFnc &fnc );
+   *
+   * // main task
+   * ProgressData progress;
+   * //progress for subtask 1
+   * // which is 80%
+   * CombinedProgressData sub1(pd, 80);
+   * // the second is only 20%
+   * CombinedProgressData sub2(pd, 20);
+   * do_subtask_one( sub1 );
+   * do_subtask_two( sub2 );
+   *
+   * \endcode
+   */
+  class CombinedProgressData
+  {
+  public:
+    /**
+     * \short Ctor
+     *
+     * Creates a \ref ProgressData::ReceiverFnc
+     * from a \ref ProgressData object
+     *
+     * \param pd \ref ProgressData object
+     * \param weight Weight of the subtask
+     * relative to the main task range.
+     *
+     * If weight is 0, or \param pd only reports
+     * keepalives. then only ticks are sent.
+     *
+     */
+    CombinedProgressData( ProgressData &pd,
+                          ProgressData::value_type weight = 0 );
+
+    /**
+     * Implements the \ref ProgressData::ReceiverFnc
+     * callback interface
+     */
+    bool operator()( const ProgressData &progress );
+
+  private:
+    ProgressData::value_type _weight;
+    ProgressData::value_type _last_value;
+    ProgressData &_pd;
+  };
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

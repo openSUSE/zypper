@@ -1,0 +1,512 @@
+##----------------------------------------
+=Pkg: kdelibs3 3.5.7 24 i586
+=Cks: SHA1 05f0647241433d01636785fd282cc824a6527269
++Req:
+rpmlib(VersionedDependencies) <= 3.0.3-1
+qt3 >= 3.3.8
+openssl
+hicolor-icon-theme
+sudo
+/bin/sh
+/bin/sh
+rpmlib(PayloadFilesHavePrefix) <= 4.0-1
+rpmlib(CompressedFileNames) <= 3.0.4-1
+/bin/sh
+/usr/bin/perl
+libDCOP.so.4
+libHalf.so.4
+libICE.so.6
+libIlmImf.so.4
+libSM.so.6
+libX11.so.6
+libXau.so.6
+libXcursor.so.1
+libXext.so.6
+libXfixes.so.3
+libXft.so.2
+libXi.so.6
+libXinerama.so.1
+libXrandr.so.2
+libXrender.so.1
+libacl.so.1
+libacl.so.1(ACL_1.0)
+libart_lgpl_2.so.2
+libasound.so.2
+libasound.so.2(ALSA_0.9)
+libaspell.so.15
+libattr.so.1
+libattr.so.1(ATTR_1.0)
+libbz2.so.1
+libc.so.6
+libc.so.6(GLIBC_2.0)
+libc.so.6(GLIBC_2.1)
+libc.so.6(GLIBC_2.1.2)
+libc.so.6(GLIBC_2.1.3)
+libc.so.6(GLIBC_2.2)
+libc.so.6(GLIBC_2.3)
+libc.so.6(GLIBC_2.3.4)
+libc.so.6(GLIBC_2.4)
+libcups.so.2
+libdl.so.2
+libdl.so.2(GLIBC_2.0)
+libdl.so.2(GLIBC_2.1)
+libdns_sd.so.1
+libexpat.so.1
+libfam.so.0
+libfontconfig.so.1
+libfreetype.so.6
+libgcc_s.so.1
+libgcc_s.so.1(GCC_3.0)
+libgcc_s.so.1(GLIBC_2.0)
+libgssapi_krb5.so.2
+libgssapi_krb5.so.2(gssapi_krb5_2_MIT)
+libidn.so.11
+libjasper.so.1
+libjpeg.so.62
+libkabc.so.1
+libkabc_dir.so.1
+libkabc_file.so.1
+libkabc_ldapkio.so.1
+libkatepartinterfaces.so.0
+libkdecore.so.4
+libkdefakes.so.4
+libkdefx.so.4
+libkdeinit_cupsdconf.so
+libkdeinit_dcopserver.so
+libkdeinit_kaddprinterwizard.so
+libkdeinit_kbuildsycoca.so
+libkdeinit_kcmshell.so
+libkdeinit_kconf_update.so
+libkdeinit_kcookiejar.so
+libkdeinit_kded.so
+libkdeinit_kio_http_cache_cleaner.so
+libkdeinit_kio_uiserver.so
+libkdeinit_klauncher.so
+libkdeinit_knotify.so
+libkdemm.so.0
+libkdeprint.so.4
+libkdeprint_management.so.4
+libkdesu.so.4
+libkdeui.so.4
+libkhtml.so.4
+libkio.so.4
+libkjs.so.1
+libkmediaplayer.so.0
+libknewstuff.so.1
+libkntlm.so.0
+libkparts.so.2
+libkresources.so.1
+libkscript.so.0
+libkspell2.so.1
+libktexteditor.so.0
+libkutils.so.1
+libkwalletbackend.so.1
+libkwalletclient.so.1
+libm.so.6
+libm.so.6(GLIBC_2.0)
+libnetworkstatus.so.0
+libpcre.so.0
+libpng12.so.0
+libpthread.so.0
+libpthread.so.0(GLIBC_2.0)
+libpthread.so.0(GLIBC_2.2)
+libqt-mt.so.3
+libresolv.so.2
+libresolv.so.2(GLIBC_2.0)
+libresolv.so.2(GLIBC_2.2)
+libstdc++.so.6
+libstdc++.so.6(CXXABI_1.3)
+libstdc++.so.6(CXXABI_1.3.1)
+libstdc++.so.6(GLIBCXX_3.4)
+libstdc++.so.6(GLIBCXX_3.4.9)
+libtiff.so.3
+libutil.so.1
+libvcard.so.0
+libxcb-xlib.so.0
+libxcb.so.1
+libxml2.so.2
+libxslt.so.1
+libz.so.1
+rpmlib(PayloadIsBzip2) <= 3.0.5-1
+-Req:
++Prq:
+rpmlib(VersionedDependencies) <= 3.0.3-1
+/bin/sh
+/bin/sh
+rpmlib(PayloadFilesHavePrefix) <= 4.0-1
+rpmlib(CompressedFileNames) <= 3.0.4-1
+rpmlib(PayloadIsBzip2) <= 3.0.5-1
+-Prq:
++Prv:
+kups
+keramik
+kdelibs3-cups
+kdelibs3-33addons
+kdepim3-networkstatus
+kdelibs3_base = 3.3
+cupsdconf.so
+dcopserver.so
+highcolor.so
+highcontrast.so
+kabc_dir.so
+kabc_file.so
+kabc_ldapkio.so
+kabcformat_binary.so
+kaddprinterwizard.so
+kbuildsycoca.so
+kbzip2filter.so
+kcm_kresources.so
+kcmshell.so
+kconf_update.so
+kcookiejar.so
+kded.so
+kded_kcookiejar.so
+kded_kdeprintd.so
+kded_kdetrayproxy.so
+kded_kpasswdserver.so
+kded_kssld.so
+kded_kwalletd.so
+kded_networkstatus.so
+kded_proxyscout.so
+kdeprint_cups.so
+kdeprint_ext.so
+kdeprint_lpdunix.so
+kdeprint_lpr.so
+kdeprint_rlpr.so
+kdeprint_tool_escputil.so
+kdewidgets.so
+keramik.so
+kfileaudiopreview.so
+kgzipfilter.so
+khtmlimagepart.so
+kimg_dds.so
+kimg_eps.so
+kimg_exr.so
+kimg_hdr.so
+kimg_ico.so
+kimg_jp2.so
+kimg_pcx.so
+kimg_psd.so
+kimg_rgb.so
+kimg_tga.so
+kimg_tiff.so
+kimg_xcf.so
+kimg_xview.so
+kio_file.so
+kio_ftp.so
+kio_ghelp.so
+kio_help.so
+kio_http.so
+kio_http_cache_cleaner.so
+kio_metainfo.so
+kio_uiserver.so
+kjavaappletviewer.so
+klauncher.so
+knotify.so
+kspell_aspell.so
+kspell_ispell.so
+kstyle_highcontrast_config.so
+kstyle_plastik_config.so
+ktexteditor_docwordcompletion.so
+ktexteditor_insertfile.so
+ktexteditor_isearch.so
+ktexteditor_kdatatool.so
+kthemestyle.so
+libDCOP.so.4
+libconnectionmanager.so.0
+libkabc.so.1
+libkabc_dir.so.1
+libkabc_file.so.1
+libkabc_ldapkio.so.1
+libkatepart.so
+libkatepartinterfaces.so.0
+libkcertpart.so
+libkdecore.so.4
+libkdefakes.so.4
+libkdefx.so.4
+libkdeinit_cupsdconf.so
+libkdeinit_dcopserver.so
+libkdeinit_kaddprinterwizard.so
+libkdeinit_kbuildsycoca.so
+libkdeinit_kcmshell.so
+libkdeinit_kconf_update.so
+libkdeinit_kcookiejar.so
+libkdeinit_kded.so
+libkdeinit_kio_http_cache_cleaner.so
+libkdeinit_kio_uiserver.so
+libkdeinit_klauncher.so
+libkdeinit_knotify.so
+libkdemm.so.0
+libkdeprint.so.4
+libkdeprint_management.so.4
+libkdeprint_management_module.so
+libkdesasl.so.1
+libkdesu.so.4
+libkdeui.so.4
+libkdnssd.so.1
+libkhtml.so.4
+libkhtmlpart.so
+libkimproxy.so.0
+libkio.so.4
+libkjava.so.1
+libkjs.so.1
+libkmdi.so.1
+libkmdi2.so.1
+libkmediaplayer.so.0
+libkmid.so.0
+libkmultipart.so
+libknewstuff.so.1
+libkntlm.so.0
+libkparts.so.2
+libkresources.so.1
+libkscreensaver.so.4
+libkscript.so.0
+libkspell.so.4
+libkspell2.so.1
+libktexteditor.so.0
+libkunittest.so.1
+libkutils.so.1
+libkwalletbackend.so.1
+libkwalletclient.so.1
+libnetworkstatus.so.0
+libshellscript.so
+libvcard.so.0
+light.so
+plastik.so
+kdelibs3 = 3.5.7-24
+-Prv:
++Obs:
+kde3-i18n
+kups
+keramik
+kdelibs3-cups
+kdelibs3-33addons
+kdepim3-networkstatus
+-Obs:
++Rec:
+ispell
+ispell_dictionary
+enscript
+-Rec:
+=Grp: System/GUI/KDE
+=Lic: BSD License and BSD-like, GNU General Public License (GPL)
+=Src: kdelibs3 3.5.7 24 src
+=Tim: 1183399094
+=Loc: 1 kdelibs3-3.5.7-24.i586.rpm
+=Siz: 16356019 38850584
++Aut:
+The KDE Team <kde@kde.org>
+-Aut:
+##----------------------------------------
+=Pkg: kdelibs3-arts 3.5.7 24 i586
+=Cks: SHA1 84d8c8e875395b8caaed90ae40bdfad3fe903eb7
++Req:
+arts >= 1.5.7
+/bin/sh
+/bin/sh
+rpmlib(PayloadFilesHavePrefix) <= 4.0-1
+rpmlib(CompressedFileNames) <= 3.0.4-1
+libX11.so.6
+libartsflow.so.1
+libartsflow_idl.so.1
+libc.so.6
+libc.so.6(GLIBC_2.0)
+libc.so.6(GLIBC_2.1.3)
+libc.so.6(GLIBC_2.4)
+libkdecore.so.4
+libkdeui.so.4
+libkio.so.4
+libkmedia2_idl.so.1
+libmcop.so.1
+libpthread.so.0
+libpthread.so.0(GLIBC_2.0)
+libqt-mt.so.3
+libqtmcop.so.1
+libsoundserver_idl.so.1
+libstdc++.so.6
+libstdc++.so.6(CXXABI_1.3)
+libstdc++.so.6(GLIBCXX_3.4)
+libstdc++.so.6(GLIBCXX_3.4.9)
+rpmlib(PayloadIsBzip2) <= 3.0.5-1
+-Req:
++Prq:
+/bin/sh
+/bin/sh
+rpmlib(PayloadFilesHavePrefix) <= 4.0-1
+rpmlib(CompressedFileNames) <= 3.0.4-1
+rpmlib(PayloadIsBzip2) <= 3.0.5-1
+-Prq:
++Prv:
+kdelibs3:/opt/kde3/bin/artsmessage
+libartskde.so.1
+kdelibs3-arts = 3.5.7-24
+-Prv:
++Rec:
+kdemultimedia3-arts
+-Rec:
+=Grp: System/GUI/KDE
+=Lic: BSD License and BSD-like, GNU General Public License (GPL)
+=Src: kdelibs3 3.5.7 24 src
+=Tim: 1183399094
+=Loc: 1 kdelibs3-arts-3.5.7-24.i586.rpm
+=Siz: 183999 393828
++Aut:
+The KDE Team <kde@kde.org>
+-Aut:
+##----------------------------------------
+=Pkg: kdelibs3-debuginfo 3.5.7 24 i586
+=Cks: SHA1 0f4c7798729fae70830fd03962dff8cdcadb7bdc
++Req:
+kdelibs3 = 3.5.7-24
+rpmlib(PayloadFilesHavePrefix) <= 4.0-1
+rpmlib(CompressedFileNames) <= 3.0.4-1
+rpmlib(PayloadIsBzip2) <= 3.0.5-1
+-Req:
++Prq:
+rpmlib(PayloadFilesHavePrefix) <= 4.0-1
+rpmlib(CompressedFileNames) <= 3.0.4-1
+rpmlib(PayloadIsBzip2) <= 3.0.5-1
+-Prq:
++Prv:
+kdelibs3-debuginfo = 3.5.7-24
+-Prv:
+=Grp: Development/Debug
+=Lic: BSD License and BSD-like, GNU General Public License (GPL)
+=Src: kdelibs3 3.5.7 24 src
+=Tim: 1183399094
+=Loc: 1 kdelibs3-debuginfo-3.5.7-24.i586.rpm
+=Siz: 44452218 139124954
++Aut:
+The KDE Team <kde@kde.org>
+-Aut:
+##----------------------------------------
+=Pkg: kdelibs3-devel 3.5.7 24 i586
+=Cks: SHA1 46cfb73e29561af9e5445f6c525821856d067e61
++Req:
+qt3-devel
+libvorbis-devel
+kdelibs3 = 3.5.7
+autoconf
+automake
+libxslt-devel
+libxml2-devel
+libart_lgpl-devel
+libjpeg-devel
+kdelibs3-doc
+libtiff-devel
+openssl-devel
+unsermake
+update-desktop-files
+libdrm-devel
+dbus-1-qt3-devel
+libattr-devel
+libacl-devel
+avahi-compat-mDNSResponder-devel
+libbz2-devel
+kdelibs3-arts
+fam-devel
+pcre-devel
+libidn-devel
+arts-devel
+rpmlib(PayloadFilesHavePrefix) <= 4.0-1
+rpmlib(CompressedFileNames) <= 3.0.4-1
+/bin/bash
+/bin/sh
+/usr/bin/env
+/usr/bin/perl
+libc.so.6
+libc.so.6(GLIBC_2.0)
+libc.so.6(GLIBC_2.1.3)
+libc.so.6(GLIBC_2.4)
+libkdecore.so.4
+libkio.so.4
+libkunittest.so.1
+libqt-mt.so.3
+libstdc++.so.6
+libstdc++.so.6(CXXABI_1.3)
+libstdc++.so.6(GLIBCXX_3.4)
+libstdc++.so.6(GLIBCXX_3.4.9)
+rpmlib(PayloadIsBzip2) <= 3.0.5-1
+-Req:
++Prq:
+rpmlib(PayloadFilesHavePrefix) <= 4.0-1
+rpmlib(CompressedFileNames) <= 3.0.4-1
+rpmlib(PayloadIsBzip2) <= 3.0.5-1
+-Prq:
++Prv:
+perl(Ast)
+perl(Iter)
+perl(kalyptusCxxToDcopIDL)
+perl(kdocAstUtil)
+perl(kdocParseDoc)
+perl(kdocUtil)
+kdelibs3-devel = 3.5.7-24
+-Prv:
+=Grp: System/GUI/KDE
+=Lic: BSD License and BSD-like, GNU General Public License (GPL)
+=Src: kdelibs3 3.5.7 24 src
+=Tim: 1183399094
+=Loc: 1 kdelibs3-devel-3.5.7-24.i586.rpm
+=Siz: 1403143 6898685
++Aut:
+The KDE Team <kde@kde.org>
+-Aut:
+##----------------------------------------
+=Pkg: kdelibs3-doc 3.5.7 24 i586
+=Cks: SHA1 28714c6b0ab4dbed12039d511995d3085721ed4e
++Req:
+sgml-skel
+libxml2
+/usr/bin/sgml-register-catalog
+/usr/bin/xmlcatalog
+/usr/bin/edit-xml-catalog
+sed
+grep
+awk
+/bin/sh
+/bin/sh
+rpmlib(PayloadFilesHavePrefix) <= 4.0-1
+rpmlib(CompressedFileNames) <= 3.0.4-1
+libbz2.so.1
+libc.so.6
+libc.so.6(GLIBC_2.0)
+libc.so.6(GLIBC_2.1)
+libc.so.6(GLIBC_2.4)
+libkdecore.so.4
+libkio.so.4
+libqt-mt.so.3
+libstdc++.so.6
+libstdc++.so.6(CXXABI_1.3)
+libstdc++.so.6(GLIBCXX_3.4)
+libxml2.so.2
+libxslt.so.1
+rpmlib(PayloadIsBzip2) <= 3.0.5-1
+-Req:
++Prq:
+/usr/bin/sgml-register-catalog
+/usr/bin/xmlcatalog
+/usr/bin/edit-xml-catalog
+sed
+grep
+awk
+/bin/sh
+/bin/sh
+rpmlib(PayloadFilesHavePrefix) <= 4.0-1
+rpmlib(CompressedFileNames) <= 3.0.4-1
+rpmlib(PayloadIsBzip2) <= 3.0.5-1
+-Prq:
++Prv:
+kdelibs3:/opt/kde3/share/apps/ksgmltools2
+kdelibs3_doc
+kdelibs3-doc = 3.5.7-24
+-Prv:
+=Grp: System/GUI/KDE
+=Lic: BSD License and BSD-like, GNU General Public License (GPL)
+=Src: kdelibs3 3.5.7 24 src
+=Tim: 1183399094
+=Loc: 1 kdelibs3-doc-3.5.7-24.i586.rpm
+=Siz: 918394 5908265
++Aut:
+The KDE Team <kde@kde.org>
+-Aut:
+##----------------------------------------

@@ -53,6 +53,8 @@ namespace zypp
      *
      * \param  the xml reader object reading the file  
      * \return true to tell the reader to continue, false to tell it to stop
+     * \throws AbortRequestException if user request for aborting the parsing
+     *         has been received through progress reporting callback.
      *
      * \note Semantics of this method's return value also differs from other
      *       consume* methods. While this method's return value tells the the
@@ -113,6 +115,7 @@ namespace zypp
 
     if (reader_r->nodeType() == XML_READER_TYPE_ELEMENT)
     {
+      // xpath: /metadata
       if (reader_r->name() == "metadata")
       {
         unsigned total_packages;
@@ -122,6 +125,7 @@ namespace zypp
         return true;
       }
 
+      // xpath: /metdata/package (+)
       if (reader_r->name() == "package")
       {
         tag(tag_package);
@@ -134,6 +138,7 @@ namespace zypp
 
     else if ( reader_r->nodeType() == XML_READER_TYPE_END_ELEMENT )
     {
+      // xpath: /metdata/package (+)
       if (reader_r->name() == "package")
       {
         if (_package && _callback)
@@ -146,6 +151,7 @@ namespace zypp
         return true;
       }
 
+      // xpath: /metdata
       if (reader_r->name() == "metadata")
       {
         _ticks.toMax();

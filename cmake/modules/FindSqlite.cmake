@@ -12,7 +12,7 @@ FIND_PATH(SQLITE_INCLUDE_DIR sqlite3.h
 	/usr/local/include
 )
 
-FIND_LIBRARY(SQLITE_LIBRARY NAMES sqlitezmd3 sqlite3
+FIND_LIBRARY(SQLITE_LIBRARY NAMES sqlite3
 	PATHS
 	/usr/lib
 	/usr/local/lib

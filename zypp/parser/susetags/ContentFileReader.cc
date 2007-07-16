@@ -26,6 +26,8 @@
 #include "zypp/ZConfig.h"
 
 using std::endl;
+#undef  ZYPP_BASE_LOGGER_LOGGROUP
+#define ZYPP_BASE_LOGGER_LOGGROUP "parser::susetags"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -289,6 +291,12 @@ namespace zypp
 				     const ProgressData::ReceiverFnc & fnc_r )
       {
 	MIL << "Start parsing " << input_r << endl;
+	if ( ! input_r.stream() )
+	{
+	  std::ostringstream s;
+	  s << "Can't read bad stream: " << input_r;
+	  ZYPP_THROW( ParseException( s.str() ) );
+	}
 	beginParse();
 	_pimpl->_inputname = input_r.name();
 

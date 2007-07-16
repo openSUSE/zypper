@@ -128,7 +128,6 @@ namespace zypp
     ZYppImpl::ZYppImpl()
     : _textLocale( defaultTextLocale() )
     , _pool()
-    , _sourceFeed( _pool )
     , _target(0)
     , _resolver( new Resolver(_pool.accessor()) )
     , _architecture( defaultArchitecture() )

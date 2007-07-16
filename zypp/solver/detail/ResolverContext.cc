@@ -267,7 +267,7 @@ ResolverContext::install (PoolItem_Ref item, bool is_soft, int other_penalty)
 	misc_info->setOtherPoolItem (otherItem);
 	if (NVRA(item.resolvable()) == NVRA(otherItem.resolvable())
 	    && status.isBySolver() && statusOtherItem.isBySolver()) {
-	    // If there has already been selected another item by the solver (e.g. from another source)
+	    // If there has already been selected another item by the solver (e.g. from another repo)
 	    // we will take that.
 	    // Bug 224698
 	    addInfo( misc_info );
@@ -291,7 +291,7 @@ ResolverContext::install (PoolItem_Ref item, bool is_soft, int other_penalty)
 	Package::constPtr pkg = asKind<Package>(res);			// try to access it as a package
 	if (pkg) {							// if its !=NULL, get size information
 
-	    _download_size += pkg->archivesize();
+	    _download_size += pkg->downloadSize();
 	    _install_size += pkg->size();
 
 	}
@@ -302,7 +302,7 @@ ResolverContext::install (PoolItem_Ref item, bool is_soft, int other_penalty)
 	    priority = 0;
 	else {
 #endif
-	    priority = getSourcePriority (item->source());
+	    priority = getRepoPriority (item->repository());
 //	}
 
 	if (priority < _min_priority) _min_priority = priority;
@@ -350,7 +350,7 @@ ResolverContext::upgrade (PoolItem_Ref item, PoolItem_Ref old_item, bool is_soft
 	misc_info->setOtherPoolItem (otherItem);
 	if (NVRA(item.resolvable()) == NVRA(otherItem.resolvable())
 	    && status.isBySolver() && statusOtherItem.isBySolver()) {
-	    // If there has already been selected another item by the solver (e.g. from another source)
+	    // If there has already been selected another item by the solver (e.g. from another repo)
 	    // we will take that.
 	    // Bug 224698	    
 	    addInfo( misc_info );
@@ -393,7 +393,7 @@ ResolverContext::upgrade (PoolItem_Ref item, PoolItem_Ref old_item, bool is_soft
 	pkg = asKind<Package>(res);					// try to access it as a package
 	if (pkg) {							// if its !=NULL, get size information
 
-	    _download_size += pkg->archivesize();
+	    _download_size += pkg->downloadSize();
 	    _install_size += pkg->size();
 
 	}
@@ -404,7 +404,7 @@ ResolverContext::upgrade (PoolItem_Ref item, PoolItem_Ref old_item, bool is_soft
 	    priority = 0;
 	else {
 #endif
-	    priority = getSourcePriority (item->source());
+	    priority = getRepoPriority (item->repository());
 //	}
 
 	if (priority < _min_priority) _min_priority = priority;
@@ -1753,11 +1753,13 @@ ResolverContext::getParallelInstall (PoolItem_Ref item) const
 
 
 int
-ResolverContext::getSourcePriority (Source_Ref source) const
+ResolverContext::getRepoPriority (Repository repo) const
 {
-    if (source.subscribed())
-	return source.priority();
-    return source.priorityUnsubscribed();
+#warning fix repo priority
+  return 0;
+//     if (repo.subscribed())
+// 	return repo.priority();
+//     return repository.priorityUnsubscribed();
 }
 
 //---------------------------------------------------------------------------
@@ -1782,17 +1784,17 @@ churn_factor (ResolverContext_Ptr a)
 
 void
 ResolverContext::collectCompareInfo (int & cmpVersion,    // Version compare of ACCUMULATED items
-				     int & cmpSource,    // compare of Sources
+				     int & cmpRepo,    // compare of Repositories
 				     ResolverContext_Ptr compareContext)
 {
-    Source_Ref userSource;         // Source Id of items which have been selected by the user for installation
-                                   // It is empty, if there are different sources
-    bool differentUserSources = false;
-    Source_Ref userSourceCompare;  // Source Id of items which have been selected by the user for installation
-                                   // It is empty, if there are different sources
-    bool differentUserCompareSources = false;    
-    SourceCounter thisMap;         // Map of to be installed sources with an item counter
-    SourceCounter compareMap;      // Map of to be installed sources with an item counter
+    Repository userRepo;         // Repo Id of items which have been selected by the user for installation
+                                   // It is empty, if there are different repos
+    bool differentUserRepos = false;
+    Repository userRepoCompare;  // Repo Id of items which have been selected by the user for installation
+                                   // It is empty, if there are different repos
+    bool differentUserCompareRepos = false;    
+    RepositoryCounter thisMap;         // Map of to be installed repositorys with an item counter
+    RepositoryCounter compareMap;      // Map of to be installed repositorys with an item counter
     
     PoolItemList installList = getMarked(1);
     PoolItemList compareList = compareContext->getMarked(1);; // List of comparing items which has to be installed
@@ -1801,30 +1803,30 @@ ResolverContext::collectCompareInfo (int & cmpVersion,    // Version compare of 
     for ( PoolItemList::const_iterator thisIt = installList.begin();
 	  thisIt != installList.end(); thisIt++ )
     {
-	// evaluate, if the user selected packages (items) has the same source
+	// evaluate, if the user selected packages (items) has the same repository
 	ResStatus status = getStatus (*thisIt);
 	if (status.isByUser()
 	    || thisIt->status().isByUser())
 	{
-	    if (userSource == Source_Ref::noSource
-		&& !differentUserSources)
+	    if (userRepo == Repository::noRepository
+		&& !differentUserRepos)
 	    {
-		userSource = thisIt->resolvable()->source();
+		userRepo = thisIt->resolvable()->repository();
 	    }
-	    else if (userSource != thisIt->resolvable()->source())
+	    else if (userRepo != thisIt->resolvable()->repository())
 	    {
-		differentUserSources = true; // there are other items of other sources which have been set by the user
+		differentUserRepos = true; // there are other items of other repositorys which have been set by the user
 	    }
 	}
 
 	// collecting relationship between channels and installed items
-	if (thisMap.find (thisIt->resolvable()->source()) == thisMap.end()) {
-	    thisMap[thisIt->resolvable()->source()] = 1;
+	if (thisMap.find (thisIt->resolvable()->repository()) == thisMap.end()) {
+	    thisMap[thisIt->resolvable()->repository()] = 1;
 	}
 	else {
-	    thisMap[thisIt->resolvable()->source()] += 1;
+	    thisMap[thisIt->resolvable()->repository()] += 1;
 	}
-	_XDEBUG ("Count of left " << thisIt->resolvable()->source() << ": " << thisMap[thisIt->resolvable()->source()] << " : " << *(thisIt->resolvable()));	
+	_XDEBUG ("Count of left " << thisIt->resolvable()->repository() << ": " << thisMap[thisIt->resolvable()->repository()] << " : " << *(thisIt->resolvable()));	
 
 	// Comparing versions
 	while (itCompare != compareList.end() )
@@ -1836,29 +1838,29 @@ ResolverContext::collectCompareInfo (int & cmpVersion,    // Version compare of 
 		// Testcase: freshen-tests/exercise-7f-test
 		// Testcase: freshen-tests/exercise-7-test
 		cmpVersion += thisIt->resolvable()->edition().compare( itCompare->resolvable()->edition());
-		_XDEBUG ("Version: " << *(thisIt->resolvable()) << "[" << thisIt->resolvable()->source() << "]" << endl
+		_XDEBUG ("Version: " << *(thisIt->resolvable()) << "[" << thisIt->resolvable()->repository() << "]" << endl
 			 << " <--> " << endl 
-			 << "Version: " << *(itCompare->resolvable()) << "[" << itCompare->resolvable()->source() << "]"
+			 << "Version: " << *(itCompare->resolvable()) << "[" << itCompare->resolvable()->repository() << "]"
 			 << " --> cmpVersion : " << cmpVersion);    		
 
-		// evaluate if the user selected packages (items) has the same source
-		ResObject::constPtr sourceItem = itCompare->resolvable();
+		// evaluate if the user selected packages (items) has the same repository
+		ResObject::constPtr repositoryItem = itCompare->resolvable();
 		ResStatus compStatus = compareContext->getStatus(*itCompare);
 		if (compStatus.isByUser()
 		    || itCompare->status().isByUser())
 		{
-		    if (userSourceCompare == Source_Ref::noSource
-			&& !differentUserCompareSources)
-			userSourceCompare = sourceItem->source();
-		    else if (userSourceCompare != sourceItem->source())
-			differentUserCompareSources = true; // there are other items of other sources which have been set by the user
+		    if (userRepoCompare == Repository::noRepository
+			&& !differentUserCompareRepos)
+			userRepoCompare = repositoryItem->repository();
+		    else if (userRepoCompare != repositoryItem->repository())
+			differentUserCompareRepos = true; // there are other items of other repositorys which have been set by the user
 		}
 		// collecting relationship between channels and installed items
-		if (compareMap.find (sourceItem->source()) == compareMap.end()) 
-		    compareMap[sourceItem->source()] = 1;
+		if (compareMap.find (repositoryItem->repository()) == compareMap.end()) 
+		    compareMap[repositoryItem->repository()] = 1;
 		else
-		    compareMap[sourceItem->source()] += 1;
-		_XDEBUG ("Count of right " << sourceItem->source() << ": " << compareMap[sourceItem->source()] << " : " << *(itCompare->resolvable()));
+		    compareMap[repositoryItem->repository()] += 1;
+		_XDEBUG ("Count of right " << repositoryItem->repository() << ": " << compareMap[repositoryItem->repository()] << " : " << *(itCompare->resolvable()));
 		itCompare++;
 	    } else if (cmp > 0 )
 		itCompare++;
@@ -1869,66 +1871,66 @@ ResolverContext::collectCompareInfo (int & cmpVersion,    // Version compare of 
     // comparing the rest of the other install list
     while (itCompare != compareList.end() )
     {
-	// evaluate if the user selected packages (items) has the same source
-	ResObject::constPtr sourceItem = itCompare->resolvable();
+	// evaluate if the user selected packages (items) has the same repository
+	ResObject::constPtr repositoryItem = itCompare->resolvable();
 	ResStatus compStatus = compareContext->getStatus(*itCompare);
 	if (compStatus.isByUser()
 	    || itCompare->status().isByUser()) 
 	{
-	    if (userSourceCompare == Source_Ref::noSource
-		&& !differentUserCompareSources)
-		    userSourceCompare = sourceItem->source();		
-	    else if (userSourceCompare != sourceItem->source())
-		differentUserCompareSources = true; // there are other items of other sources which have been set by the user		
+	    if (userRepoCompare == Repository::noRepository
+		&& !differentUserCompareRepos)
+		    userRepoCompare = repositoryItem->repository();		
+	    else if (userRepoCompare != repositoryItem->repository())
+		differentUserCompareRepos = true; // there are other items of other repositorys which have been set by the user		
 	}
 
 	// collecting relationship between channels and installed items
-	if (compareMap.find (sourceItem->source()) == compareMap.end()) 
-	    compareMap[sourceItem->source()] = 1;
+	if (compareMap.find (repositoryItem->repository()) == compareMap.end()) 
+	    compareMap[repositoryItem->repository()] = 1;
 	else
-	    compareMap[sourceItem->source()] += 1;
-	_XDEBUG ("Count of right" << sourceItem->source() << ": " << compareMap[sourceItem->source()] << " : "
+	    compareMap[repositoryItem->repository()] += 1;
+	_XDEBUG ("Count of right" << repositoryItem->repository() << ": " << compareMap[repositoryItem->repository()] << " : "
 		 << *(itCompare->resolvable()));	
 	itCompare++;	
     }
 
-    // evaluate cmpSource
-    cmpSource = 0;
+    // evaluate cmpRepo
+    cmpRepo = 0;
     int cmpCompare = 0;
 
-    if (!differentUserSources)
+    if (!differentUserRepos)
     {
 	// user selected items which has to be installed has only one channel;
-	// cmpSource = number of items of that channel
-	cmpSource = thisMap[userSource];
+	// cmpRepo = number of items of that channel
+	cmpRepo = thisMap[userRepo];
     }
 	
-    if (!differentUserCompareSources) {
+    if (!differentUserCompareRepos) {
 	// user selected items which has to be installed has only one channel;	
 	// cmpCompare = number of items of that channel
-	cmpCompare = compareMap[userSourceCompare];
+	cmpCompare = compareMap[userRepoCompare];
     }
-    _XDEBUG ("cmpSource = " << cmpSource << " ; cmpCompare = " << cmpCompare << " ; sizeof compareMap:" <<  compareMap.size());
+    _XDEBUG ("cmpRepo = " << cmpRepo << " ; cmpCompare = " << cmpCompare << " ; sizeof compareMap:" <<  compareMap.size());
     if (compareMap.size() == 1
 	&& thisMap.size() == 1
-	&& userSource == userSourceCompare) {
-	// We have only one source from which all items will be instaled.
+	&& userRepo == userRepoCompare) {
+	// We have only one repository from which all items will be instaled.
 	// So we will regards the complete amount of installed/updated packages
 	// Testcase basic-exercises/exercise-14-test
-	cmpSource = 0;
+	cmpRepo = 0;
     } else {
 	// The solutions has different channels with user selected items.
 	// Take the solution with the greater account of items in this channel
 	// Testcase basic-exercises/exercise-solution-order-test
-	cmpSource = cmpSource - cmpCompare;	    
+	cmpRepo = cmpRepo - cmpCompare;	    
     }
 
-    if (cmpSource == 0)
+    if (cmpRepo == 0)
     {
 	// less amount of channels are better
-	cmpSource = compareMap.size() - thisMap.size();
+	cmpRepo = compareMap.size() - thisMap.size();
     }
-    _XDEBUG ("End comparing two solutions-------- Version compare: " << cmpVersion << " Source compare: "<< cmpSource);    
+    _XDEBUG ("End comparing two solutions-------- Version compare: " << cmpVersion << " Repo compare: "<< cmpRepo);    
 }
 
 int
@@ -1939,16 +1941,16 @@ ResolverContext::partialCompare (ResolverContext_Ptr context)
 
 	// collecting all data for comparing both resultion results
 	int  cmpVersion = 0; // Version compare of ACCUMULATED items
-	int  cmpSource = 0;  // compare of Sources
+	int  cmpRepo = 0;  // compare of Repos
 
-	collectCompareInfo (cmpVersion, cmpSource, context);
+	collectCompareInfo (cmpVersion, cmpRepo, context);
 	if (_preferHighestVersion) {
 	    // comparing versions
 	    cmp = cmpVersion;
 	    DBG << "Comparing versions returned :" << cmp << endl;
 	    if (cmp == 0) { 
 		// High numbers are good... we don't want solutions containing low-priority channels.
-		// Source priority which has been set externally
+		// Repo priority which has been set externally
 		cmp = num_cmp (_min_priority, context->_min_priority);
 		DBG << "Comparing priority returned :" << cmp << endl;
 		if (cmp == 0) {
@@ -1956,9 +1958,9 @@ ResolverContext::partialCompare (ResolverContext_Ptr context)
 		    cmp = rev_num_cmp (churn_factor (this), churn_factor (context));
 		    DBG << "Comparing churn_factor returned :" << cmp << endl;
 		    if (cmp == 0) {		
-			// Comparing sources regarding the items which has to be installed
-			cmp = cmpSource;
-			DBG << "Comparing sources returned :" << cmp << endl;		
+			// Comparing repositorys regarding the items which has to be installed
+			cmp = cmpRepo;
+			DBG << "Comparing repositorys returned :" << cmp << endl;		
 			if (cmp == 0) {
 			    // High numbers are bad.  Bigger #s means more penalties.
 			    cmp = rev_num_cmp (_other_penalties, context->_other_penalties);
@@ -1974,16 +1976,16 @@ ResolverContext::partialCompare (ResolverContext_Ptr context)
 	    DBG << "Comparing churn_factor returned :" << cmp << endl;	    
 	    if (cmp == 0) { 
 		// High numbers are good... we don't want solutions containing low-priority channels.
-		// Source priority which has been set externally
+		// Repo priority which has been set externally
 		cmp = num_cmp (_min_priority, context->_min_priority);
 		DBG << "Comparing priority returned :" << cmp << endl;
 		if (cmp == 0) {
 		    cmp = cmpVersion;
 		    DBG << "Comparing versions returned :" << cmp << endl;
 		    if (cmp == 0) {		
-			// Comparing sources regarding the items which has to be installed
-			cmp = cmpSource;
-			DBG << "Comparing sources returned :" << cmp << endl;		
+			// Comparing repositorys regarding the items which has to be installed
+			cmp = cmpRepo;
+			DBG << "Comparing repositorys returned :" << cmp << endl;		
 			if (cmp == 0) {
 			    // High numbers are bad.  Bigger #s means more penalties.
 			    cmp = rev_num_cmp (_other_penalties, context->_other_penalties);

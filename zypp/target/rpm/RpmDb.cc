@@ -1104,12 +1104,23 @@ const list<Package::Ptr> & RpmDb::getPackages()
   return empty_list;
 }
 
+inline static void insertCaps( CapSet &capset, capability::CapabilityImplPtrSet ptrset, CapFactory &factory )
+{
+  for ( capability::CapabilityImplPtrSet::const_iterator it = ptrset.begin();
+        it != ptrset.end();
+        ++it )
+  {
+    capset.insert( factory.fromImpl(*it) );
+  }
+}
 
 //
 // make Package::Ptr from RpmHeader
 // return NULL on error
 //
-Package::Ptr RpmDb::makePackageFromHeader( const RpmHeader::constPtr header, set<string> * filerequires, const Pathname & location, Source_Ref source )
+Package::Ptr RpmDb::makePackageFromHeader( const RpmHeader::constPtr header,
+                                           set<string> * filerequires,
+                                           const Pathname & location, Repository repo )
 {
   if ( ! header )
     return 0;
@@ -1127,9 +1138,9 @@ Package::Ptr RpmDb::makePackageFromHeader( const RpmHeader::constPtr header, set
   // create dataprovider
   detail::ResImplTraits<RPMPackageImpl>::Ptr impl( new RPMPackageImpl( header ) );
 
-  impl->setSource( source );
+  impl->setRepository( repo );
   if (!location.empty())
-    impl->setLocation( location );
+    impl->setLocation( OnMediaLocation().setFilename(location) );
 
   Edition edition;
   try
@@ -1166,9 +1177,9 @@ Package::Ptr RpmDb::makePackageFromHeader( const RpmHeader::constPtr header, set
                      arch );
 
   list<string> filenames = impl->filenames();
-  dataCollect[Dep::PROVIDES] = header->tag_provides ( filerequires );
   CapFactory capfactory;
-
+  insertCaps( dataCollect[Dep::PROVIDES], header->tag_provides( filerequires ), capfactory );
+  
   static str::smatch what;
   static const str::regex filenameRegex( "/(s?bin|lib(64)?|etc)/|^/usr/(games/|share/(dict/words|magic\\.mime)$)|^/opt/gnome/games/",
                                          str::regex::optimize|str::regex::nosubs );
@@ -1181,7 +1192,7 @@ Package::Ptr RpmDb::makePackageFromHeader( const RpmHeader::constPtr header, set
     {
       try
       {
-        dataCollect[Dep::PROVIDES].insert( capfactory.parse(ResTraits<Package>::kind, *filename) );
+        dataCollect[Dep::PROVIDES].insert(capfactory.fromImpl(capability::buildFile(ResTraits<Package>::kind, *filename) ));
       }
       catch (Exception & excpt_r)
       {
@@ -1191,12 +1202,12 @@ Package::Ptr RpmDb::makePackageFromHeader( const RpmHeader::constPtr header, set
     }
   }
 
-  dataCollect[Dep::REQUIRES]    = header->tag_requires( filerequires );
-  dataCollect[Dep::PREREQUIRES] = header->tag_prerequires( filerequires );
-  dataCollect[Dep::CONFLICTS]   = header->tag_conflicts( filerequires );
-  dataCollect[Dep::OBSOLETES]   = header->tag_obsoletes( filerequires );
-  dataCollect[Dep::ENHANCES]    = header->tag_enhances( filerequires );
-  dataCollect[Dep::SUPPLEMENTS] = header->tag_supplements( filerequires );
+  insertCaps( dataCollect[Dep::REQUIRES], header->tag_requires( filerequires ), capfactory );
+  insertCaps( dataCollect[Dep::PREREQUIRES], header->tag_prerequires( filerequires ), capfactory );
+  insertCaps( dataCollect[Dep::CONFLICTS], header->tag_conflicts( filerequires ), capfactory );
+  insertCaps( dataCollect[Dep::OBSOLETES], header->tag_obsoletes( filerequires ), capfactory );
+  insertCaps( dataCollect[Dep::ENHANCES], header->tag_enhances( filerequires ), capfactory );
+  insertCaps( dataCollect[Dep::SUPPLEMENTS], header->tag_supplements( filerequires ), capfactory );
 
   try
   {
@@ -1211,7 +1222,6 @@ Package::Ptr RpmDb::makePackageFromHeader( const RpmHeader::constPtr header, set
 
   return pptr;
 }
-
 
 const list<Package::Ptr> & RpmDb::doGetPackages(callback::SendReport<ScanDBReport> & report)
 {
@@ -1248,7 +1258,7 @@ const list<Package::Ptr> & RpmDb::doGetPackages(callback::SendReport<ScanDBRepor
       continue;
     }
 
-    Package::Ptr pptr = makePackageFromHeader( *iter, &_filerequires, location, Source_Ref() );
+    Package::Ptr pptr = makePackageFromHeader( *iter, &_filerequires, location, Repository() );
     if ( ! pptr )
     {
       WAR << "Failed to make package from database header '" << name << "'" << endl;

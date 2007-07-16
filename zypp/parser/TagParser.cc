@@ -199,6 +199,12 @@ namespace zypp
     void TagParser::parse( const InputStream & input_r, const ProgressData::ReceiverFnc & fnc_r )
     {
       MIL << "Start parsing " << input_r << endl;
+      if ( ! input_r.stream() )
+      {
+	std::ostringstream s;
+	s << "Can't read bad stream: " << input_r;
+	ZYPP_THROW( ParseException( s.str() ) );
+      }
       _inputname = input_r.name();
       beginParse();
 

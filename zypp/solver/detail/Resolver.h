@@ -150,7 +150,7 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
     ResolverContext_Ptr _establish_context;    
     bool _timed_out;
 
-    std::set<Source_Ref> _subscribed;
+    std::set<Repository> _subscribed;
 
     Arch _architecture;
 
@@ -206,7 +206,7 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
     ResPool pool (void) const;
     void setPool (const ResPool & pool) { _pool = pool; }
 
-    void addSubscribedSource (Source_Ref source);
+    void addSubscribedSource (Repository source);
 
     void addPoolItemToInstall (PoolItem_Ref item);
     void addPoolItemsToInstallFromList (PoolItemList & rl);

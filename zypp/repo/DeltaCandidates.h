@@ -11,7 +11,7 @@
 #define ZYPP_REPO_DELTACANDIDATES_H
 
 #include <iosfwd>
-#include <set>
+#include <list>
 
 #include "zypp/base/PtrTypes.h"
 #include "zypp/base/Function.h"
@@ -28,6 +28,10 @@ namespace zypp
 
     /**
      * \short Candidate delta and patches for a package
+     *
+     * Basically a container that given N repositories,
+     * gets all patches and deltas from them for a given
+     * package.
      */
     class DeltaCandidates
     {
@@ -43,7 +47,7 @@ namespace zypp
        * \param repos Set of repositories providing patch and delta packages
        * \param installed_callback Will be used to ask if a package is installed or not
        */
-      DeltaCandidates( const std::set<Repository> & repos );
+      DeltaCandidates( const std::list<Repository> & repos );
       /** Dtor */
       ~DeltaCandidates();
 

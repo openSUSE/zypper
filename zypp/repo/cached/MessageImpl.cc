@@ -12,6 +12,7 @@
 #include "zypp/base/Logger.h"
 #include "zypp/repo/RepositoryImpl.h"
 #include "MessageImpl.h"
+#include "zypp/cache/CacheAttributes.h"
 
 
 using namespace std;
@@ -46,67 +47,53 @@ MessageImpl::repository() const
 
 TranslatedText MessageImpl::summary() const
 {
-  return _repository->resolvableQuery().queryTranslatedStringAttribute( _id, "ResObject", "summary" );
+  return _repository->resolvableQuery().queryTranslatedStringAttribute( _id, cache::attrResObjectSummary() );
 }
 
 TranslatedText MessageImpl::description() const
 {
-  return _repository->resolvableQuery().queryTranslatedStringAttribute( _id, "ResObject", "description" );
+  return _repository->resolvableQuery().queryTranslatedStringAttribute( _id, cache::attrResObjectDescription() );
 }
 
 TranslatedText MessageImpl::insnotify() const
 {
-  return _repository->resolvableQuery().queryTranslatedStringAttribute( _id, "ResObject", "insnotify" );
+  return _repository->resolvableQuery().queryTranslatedStringAttribute( _id, cache::attrResObjectInsnotify() );
 }
 
 TranslatedText MessageImpl::delnotify() const
 {
-  return _repository->resolvableQuery().queryTranslatedStringAttribute( _id, "ResObject", "delnotify" );
+  return _repository->resolvableQuery().queryTranslatedStringAttribute( _id, cache::attrResObjectDelnotify() );
 }
 
 TranslatedText MessageImpl::licenseToConfirm() const
 {
-  return _repository->resolvableQuery().queryTranslatedStringAttribute( _id, "ResObject", "licenseToConfirm" );
+  return _repository->resolvableQuery().queryTranslatedStringAttribute( _id, cache::attrResObjectLicenseToConfirm() );
 }
 
 Vendor MessageImpl::vendor() const
 {
-  return _repository->resolvableQuery().queryStringAttribute( _id, "ResObject", "vendor" );
+  return _repository->resolvableQuery().queryStringAttribute( _id, cache::attrResObjectVendor() );
 }
 
 
 ByteCount MessageImpl::size() const
 {
-  return _repository->resolvableQuery().queryNumericAttribute( _id, "ResObject", "size" );
-}
-
-ByteCount MessageImpl::archivesize() const
-{
-  return _repository->resolvableQuery().queryNumericAttribute( _id, "ResObject", "archivesize" );
+  return _repository->resolvableQuery().queryNumericAttribute( _id, cache::attrResObjectInstalledSize() );
 }
 
 bool MessageImpl::installOnly() const
 {
-  return _repository->resolvableQuery().queryBooleanAttribute( _id, "ResObject", "installOnly" );
+  return _repository->resolvableQuery().queryBooleanAttribute( _id, cache::attrResObjectInstallOnly() );
 }
 
 Date MessageImpl::buildtime() const
 {
-  return _repository->resolvableQuery().queryNumericAttribute( _id, "ResObject", "buildtime" );
+  return _repository->resolvableQuery().queryNumericAttribute( _id, cache::attrResObjectBuildTime() );
 }
 
 Date MessageImpl::installtime() const
 {
   return Date();
-}
-
-//////////////////////////////////////////
-// DEPRECATED
-//////////////////////////////////////////
-
-Source_Ref MessageImpl::source() const
-{
-  return Source_Ref::noSource;
 }
 
 unsigned MessageImpl::mediaNr() const
@@ -120,14 +107,14 @@ unsigned MessageImpl::mediaNr() const
 
 TranslatedText MessageImpl::text() const
 {
-  return _repository->resolvableQuery().queryTranslatedStringAttribute( _id, "Message", "text" );
+  return _repository->resolvableQuery().queryTranslatedStringAttribute( _id, cache::attrMessageText() );
 }
 
 Patch::constPtr MessageImpl::patch() const
 {
   return 0;
 }
-    
+
 /////////////////////////////////////////////////////////////////
 } } } // namespace zypp::repo::cached
 ///////////////////////////////////////////////////////////////////

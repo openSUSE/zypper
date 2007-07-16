@@ -30,10 +30,8 @@ PatchImpl::PatchImpl ( repo::memory::RepoImpl::Ptr repo, data::Patch_Ptr ptr)
   _license_to_confirm(ptr->licenseToConfirm),
   _vendor(ptr->vendor),
   _size(ptr->installedSize),
-  //_archivesize(ptr->repositoryLocation.fileSize),
   _install_only(false),
   _buildtime(ptr->buildTime),
-  //_media_nr(ptr->repositoryLocation.mediaNr),
 
   _patch_id(ptr->id),
   _timestamp(ptr->timestamp),
@@ -87,11 +85,6 @@ ByteCount PatchImpl::size() const
   return _size;
 }
 
-ByteCount PatchImpl::archivesize() const
-{
-  return _archivesize;
-}
-
 bool PatchImpl::installOnly() const
 {
   return _install_only;
@@ -105,11 +98,6 @@ Date PatchImpl::buildtime() const
 Date PatchImpl::installtime() const
 {
   return _installtime;
-}
-
-unsigned PatchImpl::mediaNr() const
-{
-  return _media_nr;
 }
 
 //////////////////////////////////////////

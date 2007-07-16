@@ -169,10 +169,26 @@ namespace zypp
    /**
     * \short Create a repository object from the cache data
     *
+    * Creating from cache requires that the repository is
+    * refreshed (metadata downloaded) and cached
+    *
+    * \throws repo::RepoNoAliasException if can't figure an alias to look in cache
     * \throw RepoNotCachedException When the source is not cached.
     */
    Repository createFromCache( const RepoInfo &info,
                                const ProgressData::ReceiverFnc & progressrcv = ProgressData::ReceiverFnc() );
+
+   /**
+    * \short Create a repository object from raw metadata
+    *
+    * Creating from cache requires that the repository is
+    * refreshed (metadata downloaded)
+    *
+    * \throw Exception If there are errors parsing the
+    * raw metadata
+    */
+   Repository createFromMetadata( const RepoInfo &info,
+                                  const ProgressData::ReceiverFnc & progressrcv = ProgressData::ReceiverFnc() );
 
    /**
     * \short Probe repo metadata type.
@@ -216,6 +232,30 @@ namespace zypp
      */
     void removeRepository( const RepoInfo & info,
                            const ProgressData::ReceiverFnc & progressrcv = ProgressData::ReceiverFnc() );
+    
+    /**
+     * \short Modify repository attributes
+     *
+     * \throws RepoNotFoundException If no repo match
+     * \throws ParseException If the file parsing fails
+     * \throws Exception On other errors.
+     */
+    void modifyRepository( const std::string &alias,
+                           const RepoInfo & newinfo,
+                           const ProgressData::ReceiverFnc & progressrcv = ProgressData::ReceiverFnc() );
+
+    /**
+     * \short Find a matching repository info
+     *
+     * \note if multple repositories incorrectly share the
+     * same alias, the first one found will be returned.
+     *
+     * \throws RepoNotFoundException If no repo match
+     * \throws ParseException If the file parsing fails
+     * \throws Exception On other errors.
+     */
+    RepoInfo getRepositoryInfo( const std::string &alias,
+                                const ProgressData::ReceiverFnc & progressrcv = ProgressData::ReceiverFnc() );
     
   protected:
     RepoStatus rawMetadataStatus( const RepoInfo &info );

@@ -38,17 +38,15 @@ namespace cached
     virtual TranslatedText licenseToConfirm() const;
     virtual Vendor vendor() const;
     virtual ByteCount size() const;
-    virtual ByteCount archivesize() const;
     virtual bool installOnly() const;
     virtual Date buildtime() const;
     virtual Date installtime() const;
     
-    virtual Source_Ref source() const;
     virtual unsigned mediaNr() const;
 
     virtual Repository repository() const;
     
-  protected:
+  private:
     repo::cached::RepoImpl::Ptr _repository;
     data::RecordId _id;
   };

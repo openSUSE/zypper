@@ -38,16 +38,11 @@ namespace cached
     virtual TranslatedText licenseToConfirm() const;
     virtual Vendor vendor() const;
     virtual ByteCount size() const;
-    virtual ByteCount archivesize() const;
     virtual bool installOnly() const;
     virtual Date buildtime() const;
     virtual Date installtime() const;
     
-    virtual Source_Ref source() const;
-    virtual unsigned mediaNr() const;
-    
     // PACKAGE
-    virtual CheckSum checksum() const;
     virtual std::string buildhost() const;
     virtual std::string distribution() const;
     virtual Label license() const;
@@ -55,7 +50,6 @@ namespace cached
     virtual PackageGroup group() const;
     virtual Keywords keywords() const;
     virtual Changelog changelog() const;
-    virtual Pathname location() const;
     virtual std::string url() const;
     virtual std::string os() const;
     virtual Text prein() const;
@@ -66,15 +60,15 @@ namespace cached
     virtual DiskUsage diskusage() const;
     virtual std::list<std::string> authors() const;
     virtual std::list<std::string> filenames() const;
+    virtual OnMediaLocation location() const;
+    
     /*virtual std::list<DeltaRpm> deltaRpms() const;
     virtual std::list<PatchRpm> patchRpms() const;
-    */    
-    virtual unsigned repositoryMediaNr() const;
-   
+    */
     virtual Repository repository() const;
     
 
-  protected:
+  private:
     repo::cached::RepoImpl::Ptr _repository;
     data::RecordId _id;
   };

@@ -15,6 +15,7 @@
 #include "zypp/detail/SrcPackageImplIf.h"
 #include "zypp/DiskUsage.h"
 #include "zypp/data/ResolvableData.h"
+#include "zypp/repo/memory/RepoImpl.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -33,22 +34,38 @@ namespace zypp
       */
       struct SrcPackageImpl : public zypp::detail::SrcPackageImplIf
       {
-        SrcPackageImpl(data::SrcPackage_Ptr ptr);
+        SrcPackageImpl( memory::RepoImpl::Ptr repo, data::SrcPackage_Ptr ptr);
         virtual ~SrcPackageImpl();
 
-        /** */
-        virtual Pathname location() const;
-        /** */
-        virtual ByteCount archivesize() const;
-        /** */
+        virtual TranslatedText summary() const;
+        virtual TranslatedText description() const;
+        virtual TranslatedText insnotify() const;
+        virtual TranslatedText delnotify() const;
+        virtual TranslatedText licenseToConfirm() const;
+        virtual Vendor vendor() const;
+        virtual ByteCount size() const;
+        virtual bool installOnly() const;
+        virtual Date buildtime() const;
+        virtual Date installtime() const;
+        
         virtual DiskUsage diskusage() const;
-        /** */
-        virtual unsigned sourceMediaNr() const;
-
+        virtual OnMediaLocation location() const;
 private:
-        ByteCount _archivesize;
-        unsigned _media_number;
-        Pathname _location;
+        repo::memory::RepoImpl::Ptr _repository;
+        
+        //ResObject
+        TranslatedText _summary;
+        TranslatedText _description;
+        TranslatedText _insnotify;
+        TranslatedText _delnotify;
+        TranslatedText _license_to_confirm;
+        Vendor _vendor;
+        ByteCount _size;
+        bool _install_only;
+        Date _buildtime;
+        Date _installtime;
+        
+        OnMediaLocation _location;
         DiskUsage _diskusage;      
       };
       ///////////////////////////////////////////////////////////////////

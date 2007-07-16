@@ -10,6 +10,7 @@
 #include "zypp/PublicKey.h"
 #include "zypp/TmpPath.h"
 #include "zypp/ResStore.h"
+#include "zypp/PathInfo.h"
 
 #include "zypp/RepoManager.h"
 

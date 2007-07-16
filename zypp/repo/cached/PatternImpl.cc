@@ -15,6 +15,7 @@
 #include "zypp/base/Logger.h"
 #include "zypp/repo/RepositoryImpl.h"
 #include "PatternImpl.h"
+#include "zypp/cache/CacheAttributes.h"
 
 
 using namespace std;
@@ -49,53 +50,48 @@ PatternImpl::repository() const
 
 TranslatedText PatternImpl::summary() const
 {
-  return _repository->resolvableQuery().queryTranslatedStringAttribute( _id, "ResObject", "summary" );
+  return _repository->resolvableQuery().queryTranslatedStringAttribute( _id, cache::attrResObjectSummary() );
 }
 
 TranslatedText PatternImpl::description() const
 {
-  return _repository->resolvableQuery().queryTranslatedStringAttribute( _id, "ResObject", "description" );
+  return _repository->resolvableQuery().queryTranslatedStringAttribute( _id, cache::attrResObjectDescription() );
 }
 
 TranslatedText PatternImpl::insnotify() const
 {
-  return _repository->resolvableQuery().queryTranslatedStringAttribute( _id, "ResObject", "insnotify" );
+  return _repository->resolvableQuery().queryTranslatedStringAttribute( _id, cache::attrResObjectInsnotify() );
 }
 
 TranslatedText PatternImpl::delnotify() const
 {
-  return _repository->resolvableQuery().queryTranslatedStringAttribute( _id, "ResObject", "delnotify" );
+  return _repository->resolvableQuery().queryTranslatedStringAttribute( _id, cache::attrResObjectDelnotify() );
 }
 
 TranslatedText PatternImpl::licenseToConfirm() const
 {
-  return _repository->resolvableQuery().queryTranslatedStringAttribute( _id, "ResObject", "licenseToConfirm" );
+  return _repository->resolvableQuery().queryTranslatedStringAttribute( _id, cache::attrResObjectLicenseToConfirm() );
 }
 
 Vendor PatternImpl::vendor() const
 {
-  return _repository->resolvableQuery().queryStringAttribute( _id, "ResObject", "vendor" );
+  return _repository->resolvableQuery().queryStringAttribute( _id, cache::attrResObjectVendor() );
 }
 
 
 ByteCount PatternImpl::size() const
 {
-  return _repository->resolvableQuery().queryNumericAttribute( _id, "ResObject", "size" );
-}
-
-ByteCount PatternImpl::archivesize() const
-{
-  return _repository->resolvableQuery().queryNumericAttribute( _id, "ResObject", "archivesize" );
+  return _repository->resolvableQuery().queryNumericAttribute( _id, cache::attrResObjectInstalledSize() );
 }
 
 bool PatternImpl::installOnly() const
 {
-  return _repository->resolvableQuery().queryBooleanAttribute( _id, "ResObject", "installOnly" );
+  return _repository->resolvableQuery().queryBooleanAttribute( _id, cache::attrResObjectInstallOnly() );
 }
 
 Date PatternImpl::buildtime() const
 {
-  return _repository->resolvableQuery().queryNumericAttribute( _id, "ResObject", "buildtime" );
+  return _repository->resolvableQuery().queryNumericAttribute( _id, cache::attrResObjectBuildTime() );
 }
 
 Date PatternImpl::installtime() const
@@ -104,62 +100,50 @@ Date PatternImpl::installtime() const
 }
 
 //////////////////////////////////////////
-// DEPRECATED
-//////////////////////////////////////////
-
-Source_Ref PatternImpl::source() const
-{
-  return Source_Ref::noSource;
-}
-
-unsigned PatternImpl::mediaNr() const
-{
-  return 1;
-}
-
-//////////////////////////////////////////
 // PATTERN
 /////////////////////////////////////////
 
 bool PatternImpl::isDefault() const
 {
-  return _repository->resolvableQuery().queryBooleanAttribute( _id, "Pattern", "isDefault" );
+  return _repository->resolvableQuery().queryBooleanAttribute( _id, cache::attrPatternIsDefault() );
 }
 
 bool PatternImpl::userVisible() const
 {
-  return _repository->resolvableQuery().queryBooleanAttribute( _id, "Pattern", "userVisible" );
+  return _repository->resolvableQuery().queryBooleanAttribute( _id, cache::attrPatternUserVisible() );
 }
 
 TranslatedText PatternImpl::category() const
 {
-  return _repository->resolvableQuery().queryTranslatedStringAttribute( _id, "Pattern", "isDefault" );
+  return _repository->resolvableQuery().queryTranslatedStringAttribute( _id, cache::attrPatternCategory() );
 }
 
 Pathname PatternImpl::icon() const
 {
-  return _repository->resolvableQuery().queryStringAttribute( _id, "Pattern", "icon" );
+  return _repository->resolvableQuery().queryStringAttribute( _id, cache::attrPatternIcon() );
 }
 
 Pathname PatternImpl::script() const
 {
-  return _repository->resolvableQuery().queryStringAttribute( _id, "Pattern", "script" );
+#warning DUBIOUS ATTRIBUTE
+  return "";
+  //return _repository->resolvableQuery().queryStringAttribute( _id, cache::attrPatternScript() );
 }
 
 Label PatternImpl::order() const
 {
-  return _repository->resolvableQuery().queryStringAttribute( _id, "Pattern", "order" );
+  return _repository->resolvableQuery().queryStringAttribute( _id, cache::attrPatternOrder() );
 }
 
 //std::set<std::string> install_packages( const Locale & lang = Locale("") ) const;
 // const CapSet & PatternImpl::includes() const
 // {
-// 
+//
 // }
-// 
+//
 // const CapSet & PatternImpl::extends() const
 // {
-// 
+//
 // }
 
 /////////////////////////////////////////////////////////////////

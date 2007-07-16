@@ -15,7 +15,7 @@
 #include "zypp/base/Logger.h"
 #include "zypp/repo/RepositoryImpl.h"
 #include "PackageImpl.h"
-
+#include "zypp/cache/CacheAttributes.h"
 
 using namespace std;
 using namespace zypp::detail;
@@ -49,53 +49,47 @@ PackageImpl::repository() const
 
 TranslatedText PackageImpl::summary() const
 {
-  return _repository->resolvableQuery().queryTranslatedStringAttribute( _id, "ResObject", "summary" );
+  return _repository->resolvableQuery().queryTranslatedStringAttribute( _id, cache::attrResObjectSummary() );
 }
 
 TranslatedText PackageImpl::description() const
 {
-  return _repository->resolvableQuery().queryTranslatedStringAttribute( _id, "ResObject", "description" );
+  return _repository->resolvableQuery().queryTranslatedStringAttribute( _id, cache::attrResObjectDescription() );
 }
 
 TranslatedText PackageImpl::insnotify() const
 {
-  return _repository->resolvableQuery().queryTranslatedStringAttribute( _id, "ResObject", "insnotify" );
+  return _repository->resolvableQuery().queryTranslatedStringAttribute( _id, cache::attrResObjectInsnotify() );
 }
 
 TranslatedText PackageImpl::delnotify() const
 {
-  return _repository->resolvableQuery().queryTranslatedStringAttribute( _id, "ResObject", "delnotify" );
+  return _repository->resolvableQuery().queryTranslatedStringAttribute( _id, cache::attrResObjectDelnotify() );
 }
 
 TranslatedText PackageImpl::licenseToConfirm() const
 {
-  return _repository->resolvableQuery().queryTranslatedStringAttribute( _id, "ResObject", "licenseToConfirm" );
+  return _repository->resolvableQuery().queryTranslatedStringAttribute( _id, cache::attrResObjectLicenseToConfirm() );
 }
 
 Vendor PackageImpl::vendor() const
 {
-  return _repository->resolvableQuery().queryStringAttribute( _id, "ResObject", "vendor" );
+  return _repository->resolvableQuery().queryStringAttribute( _id, cache::attrResObjectVendor() );
 }
-
 
 ByteCount PackageImpl::size() const
 {
-  return _repository->resolvableQuery().queryNumericAttribute( _id, "ResObject", "size" );
-}
-
-ByteCount PackageImpl::archivesize() const
-{
-  return _repository->resolvableQuery().queryNumericAttribute( _id, "ResObject", "archivesize" );
+  return _repository->resolvableQuery().queryNumericAttribute( _id, cache::attrResObjectInstalledSize() );
 }
 
 bool PackageImpl::installOnly() const
 {
-  return _repository->resolvableQuery().queryBooleanAttribute( _id, "ResObject", "installOnly" );
+  return _repository->resolvableQuery().queryBooleanAttribute( _id, cache::attrResObjectInstallOnly() );
 }
 
 Date PackageImpl::buildtime() const
 {
-  return _repository->resolvableQuery().queryNumericAttribute( _id, "ResObject", "buildtime" );
+  return _repository->resolvableQuery().queryNumericAttribute( _id, cache::attrResObjectBuildTime() );
 }
 
 Date PackageImpl::installtime() const
@@ -103,59 +97,35 @@ Date PackageImpl::installtime() const
   return Date();
 }
 
-unsigned PackageImpl::repositoryMediaNr() const
-{
-  return _repository->resolvableQuery().queryNumericAttribute( _id, "ResObject", "repositoryMediaNr" );
-}
-
-//////////////////////////////////////////
-// DEPRECATED
-//////////////////////////////////////////
-
-Source_Ref PackageImpl::source() const
-{
-  return Source_Ref::noSource;
-}
-
-unsigned PackageImpl::mediaNr() const
-{
-  return 1;
-}
-
-CheckSum PackageImpl::checksum() const
-{
-  return CheckSum();
-}
-
 std::string PackageImpl::buildhost() const
 {
-  return _repository->resolvableQuery().queryStringAttribute( _id, "Package", "buildhost" );
+  return _repository->resolvableQuery().queryStringAttribute( _id, cache::attrPackageBuildhost() );
 }
 
 std::string PackageImpl::distribution() const
 {
-  return _repository->resolvableQuery().queryStringAttribute( _id, "Package", "distribution" );
+  return _repository->resolvableQuery().queryStringAttribute( _id, cache::attrPackageDistribution() );
 }
 
 Label PackageImpl::license() const
 {
-  return _repository->resolvableQuery().queryStringAttribute( _id, "Package", "license" );
+  return _repository->resolvableQuery().queryStringAttribute( _id, cache::attrPackageLicense() );
 }
 
 std::string PackageImpl::packager() const
 {
-  return _repository->resolvableQuery().queryStringAttribute( _id, "Package", "packager" );
+  return _repository->resolvableQuery().queryStringAttribute( _id, cache::attrPackagePackager() );
 }
 
 PackageGroup PackageImpl::group() const
 {
-  return _repository->resolvableQuery().queryStringAttribute( _id, "Package", "group" );
+  return _repository->resolvableQuery().queryStringAttribute( _id, cache::attrPackageGroup() );
 }
 
 PackageImpl::Keywords PackageImpl::keywords() const
 {
   PackageImpl::Keywords keywords;
-  _repository->resolvableQuery().queryStringContainerAttribute( _id, "Package", "keywords", std::inserter(keywords, keywords.begin()) );
+  _repository->resolvableQuery().queryStringContainerAttribute( _id, cache::attrPackageKeywords(), std::inserter(keywords, keywords.begin()) );
   return keywords;
 }
 
@@ -164,39 +134,55 @@ Changelog PackageImpl::changelog() const
   return Changelog();
 }
 
-Pathname PackageImpl::location() const
+OnMediaLocation PackageImpl::location() const
 {
-  return _repository->resolvableQuery().queryStringAttribute( _id, "Package", "location" );
+  OnMediaLocation loc;
+  string chktype = _repository->resolvableQuery().queryStringAttribute( _id, cache::attrPackageLocationChecksumType() );
+  string chkvalue = _repository->resolvableQuery().queryStringAttribute( _id, cache::attrPackageLocationChecksum() );
+  loc.setChecksum(CheckSum(chktype, chkvalue));
+  
+  loc.setFilename( _repository->resolvableQuery().queryStringAttribute( _id, cache::attrPackageLocationFilename() ) );
+  
+  loc.setDownloadSize( _repository->resolvableQuery().queryNumericAttribute( _id, cache::attrPackageLocationDownloadSize() ) );
+  loc.setOpenSize( _repository->resolvableQuery().queryNumericAttribute( _id, cache::attrPackageLocationOpenSize() ) );
+  
+  loc.setMedianr( _repository->resolvableQuery().queryNumericAttribute( _id, cache::attrPackageLocationMediaNr() ) );
+  
+  chktype = _repository->resolvableQuery().queryStringAttribute( _id, cache::attrPackageLocationOpenChecksumType() );
+  chkvalue = _repository->resolvableQuery().queryStringAttribute( _id, cache::attrPackageLocationOpenChecksum() );
+  loc.setOpenChecksum(CheckSum(chktype, chkvalue));
+  
+  return loc;
 }
 
 std::string PackageImpl::url() const
 {
-  return _repository->resolvableQuery().queryStringAttribute( _id, "Package", "url" );
+  return _repository->resolvableQuery().queryStringAttribute( _id, cache::attrPackageUrl() );
 }
 
 std::string PackageImpl::os() const
 {
-  return _repository->resolvableQuery().queryStringAttribute( _id, "Package", "operatingSystem" );
+  return _repository->resolvableQuery().queryStringAttribute( _id, cache::attrPackageOperatingSystem() );
 }
 
 Text PackageImpl::prein() const
 {
-  return _repository->resolvableQuery().queryStringAttribute( _id, "Package", "prein" );
+  return _repository->resolvableQuery().queryStringAttribute( _id, cache::attrPackagePrein() );
 }
 
 Text PackageImpl::postin() const
 {
-  return _repository->resolvableQuery().queryStringAttribute( _id, "Package", "postin" );
+  return _repository->resolvableQuery().queryStringAttribute( _id, cache::attrPackagePostin() );
 }
 
 Text PackageImpl::preun() const
 {
-  return _repository->resolvableQuery().queryStringAttribute( _id, "Package", "preun" );
+  return _repository->resolvableQuery().queryStringAttribute( _id, cache::attrPackagePreun() );
 }
 
 Text PackageImpl::postun() const
 {
-  return _repository->resolvableQuery().queryStringAttribute( _id, "Package", "postun" );
+  return _repository->resolvableQuery().queryStringAttribute( _id, cache::attrPackagePostun() );
 }
 
 ByteCount PackageImpl::sourcesize() const
@@ -212,7 +198,7 @@ DiskUsage PackageImpl::diskusage() const
 list<string> PackageImpl::authors() const
 {
   list<string> authors;
-  _repository->resolvableQuery().queryStringContainerAttribute( _id, "Package", "authors", back_inserter(authors) );
+  _repository->resolvableQuery().queryStringContainerAttribute( _id, cache::attrPackageAuthors(), back_inserter(authors) );
   return authors;
 }
 
@@ -225,7 +211,7 @@ std::list<std::string> PackageImpl::filenames() const
 // {
 // return std::list<DeltaRpm>();
 // }
-// 
+//
 // std::list<PatchRpm> PackageImpl::patchRpms() const
 // {
 //   return std::list<PatchRpm>();

@@ -13,7 +13,7 @@
 
 #include "zypp/ZConfig.h"
 #include "zypp/base/Logger.h"
-
+#include "zypp/PathInfo.h"
 #include "zypp/base/UserRequestException.h"
 #include "zypp/repo/yum/ResourceType.h"
 
@@ -41,16 +41,6 @@ namespace zypp
   {
     namespace yum
     {
-
-
-  /** \todo make this through ZYppCallbacks.h */ 
-  bool progress_function(ProgressData::value_type p)
-  {
-    cout << "Parsing $name_would_come_in_handy [" << p << "%]" << endl;
-//    cout << "\rParsing $name_would_come_in_handy [" << p << "%]" << flush;
-    return true;
-  }
-
 
   /**
    * Structure encapsulating YUM parser data type and filename.
@@ -192,7 +182,7 @@ namespace zypp
     :
       _repository_id(repository_id), _consumer(consumer), _options(options)
   {
-    _ticks.name("RepoParser");
+    _ticks.name("YUM RepoParser");
     _ticks.sendTo(progress);
   }
 
@@ -316,10 +306,18 @@ namespace zypp
         cache_dir + "/repodata/repomd.xml",
         bind(&RepoParser::Impl::repomd_CB, this, _1, _2));
 
+     long long totalsize = 0;
+     for(list<RepoParserJob>::const_iterator it = _jobs.begin();
+         it != _jobs.end(); ++it)
+     {
+       RepoParserJob job = *it;
+       totalsize += PathInfo(cache_dir + job.filename()).size();
+     }
 
-    _ticks.range(_jobs.size());
+     MIL << "Total files size: " << totalsize << endl;
+    _ticks.range(totalsize);
     _ticks.toMin();
-
+    
     doJobs(cache_dir);
 
     _ticks.toMax();
@@ -333,18 +331,22 @@ namespace zypp
         it != _jobs.end(); ++it)
     {
       RepoParserJob job = *it;
-
-      MIL << "going to parse " << job.type() << " file " << job.filename() << endl;
-
+      // FIXME better way to do progress here?
+      int jobsize = PathInfo(cache_dir + job.filename()).size();
+    
+      MIL << "going to parse " << job.type() << " file " 
+          << job.filename() << " (" << jobsize << " bytes)" << endl;
+      
       switch(job.type().toEnum())
       {
         // parse primary.xml.gz
         case ResourceType::PRIMARY_e:
         {
+          CombinedProgressData jobrcv( _ticks, jobsize );
           PrimaryFileReader(
             cache_dir + job.filename(),
             bind(&RepoParser::Impl::primary_CB, this, _1),
-            &progress_function);
+            jobrcv);
           break;
         }
 
@@ -355,7 +357,10 @@ namespace zypp
             bind(&RepoParser::Impl::patches_CB, this, _1, _2));
           // reset progress reporter max value (number of jobs changed if
           // there are patches to parse)
-          _ticks.range(_jobs.size());
+          _ticks.range( _ticks.max() + jobsize );
+          // increase in the total bytes of the file
+          if (!_ticks.incr( jobsize ))
+            ZYPP_THROW(AbortRequestException());
           break;
         }
 
@@ -364,6 +369,9 @@ namespace zypp
           PatchFileReader(
             cache_dir + job.filename(),
             bind(&RepoParser::Impl::patch_CB, this, _1));
+          // increase in the total bytes of the file
+          if (!_ticks.incr( jobsize ))
+            ZYPP_THROW(AbortRequestException());
           break;
         }
 
@@ -371,13 +379,19 @@ namespace zypp
         {
           if (!_options.skipOther)
           {
+            CombinedProgressData jobrcv( _ticks, jobsize );
             OtherFileReader(
               cache_dir + job.filename(),
               bind(&RepoParser::Impl::other_CB, this, _1, _2),
-              &progress_function);
+              jobrcv);
           }
           else
+          {
             MIL << "skipping other.xml.gz";
+            // increase in the total bytes of the file
+            if (!_ticks.incr( jobsize ))
+              ZYPP_THROW(AbortRequestException());
+          }
           break;
         }
 
@@ -385,14 +399,19 @@ namespace zypp
         {
           if (!_options.skipFilelists)
           {
+            CombinedProgressData jobrcv( _ticks, jobsize );
             FilelistsFileReader(
               cache_dir + job.filename(),
               bind(&RepoParser::Impl::filelist_CB, this, _1, _2),
-              &progress_function);
+              jobrcv);
           }
           else
+          {
             MIL << "skipping filelists.xml.gz";
-
+            // increase in the total bytes of the file
+          if (!_ticks.incr( jobsize ))
+            ZYPP_THROW(AbortRequestException());
+          }
           break;
         }
 
@@ -401,6 +420,9 @@ namespace zypp
           PatternFileReader(
             cache_dir + job.filename(),
             bind(&RepoParser::Impl::pattern_CB, this, _1));
+          // increase in the total bytes of the file
+          if (!_ticks.incr( jobsize ))
+            ZYPP_THROW(AbortRequestException());
           break;
         }
 
@@ -409,6 +431,9 @@ namespace zypp
           ProductFileReader(
             cache_dir + job.filename(),
             bind(&RepoParser::Impl::product_CB, this, _1));
+          // increase in the total bytes of the file
+          if (!_ticks.incr( jobsize ))
+            ZYPP_THROW(AbortRequestException());
           break;
         }
 
@@ -419,9 +444,6 @@ namespace zypp
               << job.filename() << endl;
         }
       }
-
-      if (!_ticks.incr())
-        ZYPP_THROW(AbortRequestException());
     }
   }
 

@@ -12,58 +12,55 @@
 #include "zypp/ZYppFactory.h"
 #include "zypp/ZYpp.h"
 
+// Boost.Test
+#include <boost/test/floating_point_comparison.hpp>
+#include <boost/test/unit_test.hpp>
+
+using boost::unit_test::test_suite;
+using boost::unit_test::test_case;
+using boost::test_tools::close_at_tolerance;
+
 using namespace std;
 using namespace zypp;
 
-int main( int argc, char * argv[] )
+void test_tt()
 {
   ZYpp::Ptr god;
   
-  try { 
-    god = getZYpp();
-  }
-  catch( const Exception &e )
-  {
-    return 99;
-  }
+  god = getZYpp();
   
   TranslatedText testTT;
   MIL << "Locale: en" << std::endl;
   god->setTextLocale(Locale("en"));
   testTT.setText("default");
-  if ( testTT.text() != "default" )
-    return 2;
+  MIL << "value: '" << testTT.text() << "'" << std::endl;
+  BOOST_CHECK_EQUAL( testTT.text(), "default" );
   
   testTT.setText("default english", Locale("en"));
-  if ( testTT.text() != "default english" )
-    return 3;
+  BOOST_CHECK_EQUAL( testTT.text(), "default english" );
   
   MIL << "Locale: es_ES" << std::endl;
   god->setTextLocale(Locale("es_ES"));
   
-  if ( testTT.text() != "default english" )
-  {
-    ERR << testTT.text() << std::endl;
-    return 4;
-  }
+  BOOST_CHECK_EQUAL( testTT.text(), "default english" );
     
   testTT.setText("hola esto es neutro", Locale("es"));
   testTT.setText("this is neutral", Locale("en"));
   
-  if ( testTT.text() != "hola esto es neutro" )
-    return 5;
+  BOOST_CHECK_EQUAL( testTT.text(), "hola esto es neutro" );
     
   testTT.setText("hola Spain", Locale("es_ES"));
-  if ( testTT.text() != "hola Spain" )
-    return 6;
+  BOOST_CHECK_EQUAL( testTT.text(), "hola Spain" );
   
   MIL << "Locale: null" << std::endl;
   god->setTextLocale(Locale());
-  if ( testTT.text() != "default" )
-  {
-    ERR << testTT.text() << std::endl;
-    return 7;
-  }
-  
-  return 0;
+  BOOST_CHECK_EQUAL( testTT.text(), "default" );
+}
+
+test_suite*
+init_unit_test_suite( int, char* [] )
+{
+    test_suite* test= BOOST_TEST_SUITE( "TranslatedText" );
+    test->add( BOOST_TEST_CASE( &test_tt ), 0 /* expected zero error */ );
+    return test;
 }

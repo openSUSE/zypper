@@ -165,28 +165,6 @@ PersistentStorage::hasFlag( const std::string &key, const std::string &flag ) co
   return d->backend->hasFlag(key, flag);
 }
 
-/////////////////////////////////////////////////////////
-// SOURCES API
-////////////////////////////////////////////////////////
-
-source::SourceInfoList
-PersistentStorage::storedSources() const
-{
-  return d->backend->storedSources();
-}
-
-void
-PersistentStorage::storeSource(const source::SourceInfo &data)
-{
-  d->backend->storeSource(data);
-}
-
-void
-PersistentStorage::deleteSource(const std::string &alias)
-{
-  d->backend->deleteSource(alias);
-}
-
 /******************************************************************
 **
 **	FUNCTION NAME : operator<<

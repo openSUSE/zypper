@@ -76,7 +76,7 @@ class  HelixResolvable : public base::ReferenceCounted, private base::NonCopyabl
 };
 
 DEFINE_PTR_TYPE(HelixResolvable);
-typedef std::map<Source_Ref, HelixResolvable_Ptr> SourceTable;
+typedef std::map<Repository, HelixResolvable_Ptr> RepositoryTable;
 
 ///////////////////////////////////////////////////////////////////
 //
@@ -93,7 +93,7 @@ class  HelixControl {
 
   public:
     HelixControl (const std::string & controlPath,
-		  const SourceTable & sourceTable,
+		  const RepositoryTable & sourceTable,
 		  const Arch & systemArchitecture,
 		  const std::string & systemPath = "solver-system.xml");
     HelixControl ();    

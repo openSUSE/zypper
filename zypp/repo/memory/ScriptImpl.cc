@@ -29,8 +29,8 @@ namespace zypp { namespace repo { namespace memory {
 
 /** Default ctor
 */
-ScriptImpl::ScriptImpl (const data::RecordId &id, memory::RepoImpl::Ptr repository_r)
-    : _repository (repository_r),
+ScriptImpl::ScriptImpl ( memory::RepoImpl::Ptr repo, data::Script_Ptr ptr)
+    : _repository (repo),
     _summary(ptr->summary),
     _description(ptr->description),
     _insnotify(ptr->insnotify),
@@ -38,10 +38,8 @@ ScriptImpl::ScriptImpl (const data::RecordId &id, memory::RepoImpl::Ptr reposito
     _license_to_confirm(ptr->licenseToConfirm),
     _vendor(ptr->vendor),
     _size(ptr->installedSize),
-    _archivesize(ptr->repositoryLocation.fileSize),
     _install_only(false),
-    _buildtime(ptr->buildTime),
-    _media_nr(ptr->repositoryLocation.mediaNr)
+    _buildtime(ptr->buildTime)
     //TODO script attrs
 {}
 
@@ -90,11 +88,6 @@ ByteCount ScriptImpl::size() const
   return _size;
 }
 
-ByteCount ScriptImpl::archivesize() const
-{
-  return _archivesize;
-}
-
 bool ScriptImpl::installOnly() const
 {
   return _install_only;
@@ -109,12 +102,6 @@ Date ScriptImpl::installtime() const
 {
   return _installtime;
 }
-
-unsigned ScriptImpl::mediaNr() const
-{
-  return _media_nr;
-}
-
 
 //////////////////////////////////////////
 // MESSAGE

@@ -10,7 +10,6 @@
  *
 */
 #include "zypp/ResObject.h"
-#include "zypp/source/SourceImpl.h"
 #include "zypp/Repository.h"
 #include "zypp/detail/ResObjectImplIf.h"
 
@@ -45,7 +44,7 @@ namespace zypp
   //
   std::ostream & ResObject::dumpOn( std::ostream & str ) const
   {
-    str << "[S" << source().numericId() << ":" << sourceMediaNr() << "]";
+    str << "[S" << repository().numericId() << ":" << mediaNr() << "]";
     return Resolvable::dumpOn( str );
   }
 
@@ -76,18 +75,12 @@ namespace zypp
   ByteCount ResObject::size() const
   { return pimpl().size(); }
 
-  ByteCount ResObject::archivesize() const
-  { return pimpl().archivesize(); }
-
-  Source_Ref ResObject::source() const
-  { return pimpl().source(); }
-
-  unsigned ResObject::sourceMediaNr() const
-  { return pimpl().sourceMediaNr(); }
-  
   Repository ResObject::repository() const
   { return pimpl().repository(); }
 
+  ByteCount ResObject::downloadSize() const
+  { return pimpl().downloadSize(); }
+  
   unsigned ResObject::mediaNr() const
   { return pimpl().mediaNr(); }
 
@@ -99,10 +92,7 @@ namespace zypp
 
   Date ResObject::installtime() const
   { return pimpl().installtime(); }
-
-  ZmdId ResObject::zmdid () const
-  { return pimpl().zmdid(); }
-
+  
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////

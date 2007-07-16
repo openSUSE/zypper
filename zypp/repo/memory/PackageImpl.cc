@@ -38,18 +38,15 @@ PackageImpl::PackageImpl( repo::memory::RepoImpl::Ptr repo, data::Package_Ptr pt
     _license_to_confirm(ptr->licenseToConfirm),
     _vendor(ptr->vendor),
     _size(ptr->installedSize),
-    _archivesize(ptr->repositoryLocation.fileSize),
     _install_only(false),
     _buildtime(ptr->buildTime),
-    _media_nr(ptr->repositoryLocation.mediaNr),
-
+   
     _group(ptr->group),
     _keywords(),
     _authors(ptr->authors),
     _license(ptr->license),
-    _location(ptr->repositoryLocation.filePath),
     _diskusage(),
-    _checksum(ptr->repositoryLocation.fileChecksum)
+    _location(ptr->repositoryLocation)
 {
 }
 
@@ -106,11 +103,6 @@ ByteCount PackageImpl::size() const
   return _size;
 }
 
-ByteCount PackageImpl::archivesize() const
-{
-  return _archivesize;
-}
-
 bool PackageImpl::installOnly() const
 {
   return _install_only;
@@ -126,18 +118,13 @@ Date PackageImpl::installtime() const
   return _installtime;
 }
 
-unsigned PackageImpl::mediaNr() const
+OnMediaLocation PackageImpl::location() const
 {
-  return _media_nr;
+  return _location;
 }
 
 ////////////////////////////////////////////////////
 
-
-CheckSum PackageImpl::checksum() const
-{
-  return _checksum;
-}
 
 string PackageImpl::buildhost() const
 {
@@ -172,11 +159,6 @@ PackageImpl::Keywords PackageImpl::keywords() const
 Changelog PackageImpl::changelog() const
 {
   return Changelog();
-}
-
-Pathname PackageImpl::location() const
-{
-  return _location;
 }
 
 string PackageImpl::url() const

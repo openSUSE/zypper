@@ -38,7 +38,6 @@ namespace zypp
   class ZYppFactory;
   class ResPool;
   class ResPoolProxy;
-  class SourceFeed_Ref;
   class ResStore;
   class Locale;
   class KeyRing;
@@ -71,9 +70,6 @@ namespace zypp
      * same kind and name.
     */
     ResPoolProxy poolProxy() const;
-
-    /**  */
-    //SourceFeed_Ref sourceFeed() const;
 
     void addResolvables (const ResStore& store, bool installed = false);
 

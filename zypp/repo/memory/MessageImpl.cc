@@ -29,9 +29,20 @@ namespace zypp { namespace repo { namespace memory {
 
 /** Default ctor
 */
-MessageImpl::MessageImpl (const data::RecordId &id, memory::RepoImpl::Ptr repository_r)
-    : _repository (repository_r),
-      _id(id)
+MessageImpl::MessageImpl ( memory::RepoImpl::Ptr repo, data::Message_Ptr ptr)
+    : _repository(repo),
+
+    _summary(ptr->summary),
+    _description(ptr->description),
+    _insnotify(ptr->insnotify),
+    _delnotify(ptr->delnotify),
+    _license_to_confirm(ptr->licenseToConfirm),
+    _vendor(ptr->vendor),
+    _size(ptr->installedSize),
+    _install_only(false),
+    _buildtime(ptr->buildTime),
+
+    _text(ptr->text)
 {}
 
 Repository
@@ -79,11 +90,6 @@ ByteCount MessageImpl::size() const
   return _size;
 }
 
-ByteCount MessageImpl::archivesize() const
-{
-  return _archivesize;
-}
-
 bool MessageImpl::installOnly() const
 {
   return _install_only;
@@ -99,33 +105,13 @@ Date MessageImpl::installtime() const
   return _installtime;
 }
 
-unsigned MessageImpl::mediaNr() const
-{
-  return _media_nr;
-}
-
-
-//////////////////////////////////////////
-// DEPRECATED
-//////////////////////////////////////////
-
-Source_Ref MessageImpl::source() const
-{
-  return Source_Ref::noSource;
-}
-
-unsigned MessageImpl::mediaNr() const
-{
-  return 1;
-}
-
 //////////////////////////////////////////
 // MESSAGE
 /////////////////////////////////////////
 
 TranslatedText MessageImpl::text() const
 {
-  return _repository->resolvableQuery().queryTranslatedStringAttribute( _id, "Message", "text" );
+  return _text;
 }
 
 Patch::constPtr MessageImpl::patch() const

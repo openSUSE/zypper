@@ -30,10 +30,8 @@ ProductImpl::ProductImpl( memory::RepoImpl::Ptr repo, data::Product_Ptr ptr)
   _license_to_confirm(ptr->licenseToConfirm),
   _vendor(ptr->vendor),
   _size(ptr->installedSize),
-  //_archivesize(ptr->repositoryLocation.fileSize),
   _install_only(false),
   _buildtime(ptr->buildTime)
-  //_media_nr(ptr->repositoryLocation.mediaNr)
   // TODO products attrs
 {}
 
@@ -85,11 +83,6 @@ ByteCount ProductImpl::size() const
   return _size;
 }
 
-ByteCount ProductImpl::archivesize() const
-{
-  return _archivesize;
-}
-
 bool ProductImpl::installOnly() const
 {
   return _install_only;
@@ -103,11 +96,6 @@ Date ProductImpl::buildtime() const
 Date ProductImpl::installtime() const
 {
   return _installtime;
-}
-
-unsigned ProductImpl::mediaNr() const
-{
-  return _media_nr;
 }
 
 ///////////////////////////////////////////

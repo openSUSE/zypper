@@ -88,10 +88,10 @@ void Downloader::download( const Pathname &dest_dir,
 
   _dest_dir = dest_dir;
   if ( _media.doesFileExist(keypath) )
-    _fetcher.enqueue( OnMediaLocation().filename(keypath) );
+    _fetcher.enqueue( OnMediaLocation().setFilename(keypath) );
 
   if ( _media.doesFileExist(sigpath) )
-     _fetcher.enqueue( OnMediaLocation().filename(sigpath) );
+     _fetcher.enqueue( OnMediaLocation().setFilename(sigpath) );
   
   _fetcher.start( dest_dir, _media );
   
@@ -106,7 +106,7 @@ void Downloader::download( const Pathname &dest_dir,
   if ( PathInfo( dest_dir + keypath ).isExist() )
     sigchecker.addPublicKey(dest_dir + keypath );
   
-  _fetcher.enqueue( OnMediaLocation().filename(repomdpath), sigchecker );
+  _fetcher.enqueue( OnMediaLocation().setFilename(repomdpath), sigchecker );
   _fetcher.start( dest_dir, _media);
   
   if ( ! progress.tick() )

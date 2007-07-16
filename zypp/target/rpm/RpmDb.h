@@ -24,7 +24,6 @@
 #include "zypp/ExternalProgram.h"
 
 #include "zypp/Package.h"
-#include "zypp/Source.h"
 #include "zypp/KeyRing.h"
 
 #include "zypp/target/rpm/RpmHeader.h"
@@ -340,7 +339,9 @@ public:
    * return NULL on error
    **/
 
-  static Package::Ptr makePackageFromHeader( const RpmHeader::constPtr header, std::set<std::string> * filerequires, const Pathname & location, Source_Ref source );
+  static Package::Ptr makePackageFromHeader( const RpmHeader::constPtr header,
+                                             std::set<std::string> * filerequires,
+                                             const Pathname & location, Repository repo );
 
   ///////////////////////////////////////////////////////////////////
   //

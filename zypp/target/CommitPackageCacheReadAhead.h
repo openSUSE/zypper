@@ -18,7 +18,7 @@
 #include "zypp/base/Exception.h"
 #include "zypp/base/DefaultIntegral.h"
 
-#include "zypp/Source.h"
+#include "zypp/Repository.h"
 #include "zypp/TmpPath.h"
 #include "zypp/target/CommitPackageCacheImpl.h"
 
@@ -41,29 +41,29 @@ namespace zypp
 
       explicit
       IMediaKey( const ResObject::constPtr & obj_r )
-      : _source( obj_r->source() )
-      , _mediaNr( obj_r->sourceMediaNr() )
+      : _repository( obj_r->repository() )
+      , _mediaNr( obj_r->mediaNr() )
       {}
 
-      IMediaKey( const Source_Ref & source_r, unsigned mediaNr_r )
-      : _source( source_r )
+      IMediaKey( const Repository & repo, unsigned mediaNr_r )
+      : _repository( repo )
       , _mediaNr( mediaNr_r )
       {}
 
       bool operator==( const IMediaKey & rhs ) const
-      { return( _source == rhs._source && _mediaNr == rhs._mediaNr ); }
+      { return( _repository == rhs._repository && _mediaNr == rhs._mediaNr ); }
 
       bool operator!=( const IMediaKey & rhs ) const
       { return ! operator==( rhs ); }
 
       bool operator<( const IMediaKey & rhs ) const
       {
-        return( _source.numericId() < rhs._source.numericId()
-                || ( _source.numericId() == rhs._source.numericId()
+        return( _repository.numericId() < rhs._repository.numericId()
+                || ( _repository.numericId() == rhs._repository.numericId()
                      && _mediaNr < rhs._mediaNr ) );
       }
 
-      Source_Ref                  _source;
+      Repository                  _repository;
       DefaultIntegral<unsigned,0> _mediaNr;
     };
     ///////////////////////////////////////////////////////////////////

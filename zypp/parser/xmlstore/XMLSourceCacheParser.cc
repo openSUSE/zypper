@@ -18,7 +18,7 @@
 #include <libxml/tree.h>
 #include <zypp/base/Logger.h>
 #include <zypp/parser/xmlstore/schemanames.h>
-
+#include "zypp/repo/RepoType.h"
 #include "XMLSourceCacheParser.h"
 
 using namespace std;
@@ -30,8 +30,8 @@ namespace xmlstore {
       XMLSourceCacheParser::XMLSourceCacheParser()
       { }
 
-      XMLSourceCacheParser::XMLSourceCacheParser(SourceInfo_Ptr &entry)
-        : zypp::parser::XMLNodeIterator<SourceInfo_Ptr>(entry)
+      XMLSourceCacheParser::XMLSourceCacheParser(RepoInfo_Ptr &entry)
+        : zypp::parser::XMLNodeIterator<RepoInfo_Ptr>(entry)
       { }
 
 
@@ -47,11 +47,11 @@ namespace xmlstore {
       }
 
       // do the actual processing
-      SourceInfo_Ptr
+      RepoInfo_Ptr
       XMLSourceCacheParser::process(const xmlTextReaderPtr reader)
       {
         assert(reader);
-        SourceInfo_Ptr dataPtr( new source::SourceInfo );
+        RepoInfo_Ptr dataPtr( new RepoInfo );
         xmlNodePtr dataNode = xmlTextReaderExpand(reader);
         assert(dataNode);
 
@@ -80,15 +80,7 @@ namespace xmlstore {
             }
             else if (name == "type")
             {
-              dataPtr->setType(_helper.content(child));
-            }
-            else if (name == "product-dir")
-            {
-              dataPtr->setPath(_helper.content(child));
-            }
-            else if (name == "cache-dir")
-            {
-              dataPtr->setCacheDir(_helper.content(child));
+              dataPtr->setType(repo::RepoType(_helper.content(child)));
             }
             else if (name == "alias")
             {
@@ -96,7 +88,7 @@ namespace xmlstore {
             }
             else if (name == "url")
             {
-              dataPtr->setUrl(_helper.content(child));
+              dataPtr->addBaseUrl(_helper.content(child));
             }
             else
             {
@@ -110,7 +102,7 @@ namespace xmlstore {
 
 
       XMLSourceCacheParser::XMLSourceCacheParser(std::istream &is, const std::string &baseUrl)
-        : zypp::parser::XMLNodeIterator<SourceInfo_Ptr>(is, baseUrl, SOURCESCHEMA)
+        : zypp::parser::XMLNodeIterator<RepoInfo_Ptr>(is, baseUrl, SOURCESCHEMA)
       {
         fetchNext();
       }

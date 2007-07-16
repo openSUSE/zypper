@@ -83,7 +83,7 @@ XMLResObjectParser::parseResObjectCommonData( XMLResObjectData_Ptr dataPtr, xmlN
         dataPtr->size = str::strtonum<ByteCount::SizeType>(_helper.content(child));
       }
       else if (name == "archive-size") {
-        dataPtr->archive_size = str::strtonum<ByteCount::SizeType>(_helper.content(child));
+        dataPtr->downloadSize = str::strtonum<ByteCount::SizeType>(_helper.content(child));
       }
       else if (name == "install-only") {
         dataPtr->install_only = (_helper.content(child) == "true") ? true : false;

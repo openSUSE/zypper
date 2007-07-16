@@ -14,6 +14,7 @@
 
 #include "zypp/base/Functional.h"
 #include "zypp/Capability.h"
+#include "zypp/ResObject.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

@@ -92,16 +92,43 @@ namespace zypp
        * Sets a \ref MediaVerifier verifier for given media number.
        */
       void setVerifier( unsigned media_nr, media::MediaVerifierRef verifier );
-      
+
       /**
        * Provides a file from a media location.
+       * 
+       * \param on_media_file location of the file on media
+       * \return local pathname of the requested file
+       * 
+       * \throws MediaException if a problem occurs,
+       *        see \ref media::MediaManager::provideFile()
        */
       Pathname provideFile( const OnMediaLocation & on_media_file );
 
       /**
-       * Provides \a file from media \a media_nr. 
+       * Provides \a file from media \a media_nr.
+       *  
+       * \param file path to the file relative to media URL
+       * \param media_nr the media number in the media set
+       * \return local pathname of the requested file
+       * 
+       * \throws MediaException if a problem occurs,
+       *        see \ref media::MediaManager::provideFile()
        */
       Pathname provideFile(const Pathname & file, unsigned media_nr = 1 );
+      
+      /**
+       * Provides direcotry \a dir from media number \a media_nr.
+       * 
+       * \param dir path to the directory relative to media URL
+       * \param recursive whether to provide the whole directory subtree
+       * \param media_nr the media number in the media set
+       * \return local pathname of the requested directory
+       *
+       * \throws MediaException if a problem occurs,
+       *        see \ref media::MediaManager::provideDir()
+       *        and \ref media::MediaManager::provideDirTree() 
+       */
+      Pathname provideDir(const Pathname & dir, bool recursive, unsigned media_nr = 1);
 
       /**
        * check if a file exists on the specified media
@@ -110,6 +137,13 @@ namespace zypp
        * \param media_nr Media number
        */
       bool doesFileExist(const Pathname & file, unsigned media_nr = 1 );
+
+      /**
+       * Release all attached media of this set.
+       *
+       * \throws MediaNotOpenException for invalid access IDs.
+       */
+      void release();
 
       /**
        * Replaces media number in specified url with given \a medianr.

@@ -87,15 +87,6 @@ namespace zypp
 
     ResObject::constPtr whoOwnsFile (const std::string & path_str) const;
 
-    /** JUST FOR TESTSUITE */
-    /** Sort according to prereqs and media numbers
-     * \todo provide it as standalone algorithm
-    */
-    void getResolvablesToInsDel ( const ResPool pool_r,
-                                  PoolItemList & dellist_r,
-                                  PoolItemList & instlist_r,
-                                  PoolItemList & srclist_r ) const;
-
 #ifndef STORAGE_DISABLED
     /** enables the storage target */
     bool isStorageEnabled() const;

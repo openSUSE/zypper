@@ -28,7 +28,7 @@ namespace zypp
 
     public:
       
-      Impl( const std::set<Repository> & repos )
+      Impl( const std::list<Repository> & repos )
         : repos(repos)
       {
       
@@ -39,7 +39,7 @@ namespace zypp
       Impl * clone() const
       { return new Impl( *this ); }
       
-      std::set<Repository> repos;
+      std::list<Repository> repos;
     };
     ///////////////////////////////////////////////////////////////////
 
@@ -49,7 +49,7 @@ namespace zypp
       return str << "DeltaCandidates::Impl";
     }
 
-    DeltaCandidates::DeltaCandidates(const std::set<Repository> & repos)
+    DeltaCandidates::DeltaCandidates(const std::list<Repository> & repos)
     : _pimpl( new Impl(repos) )
     {}
 
@@ -61,7 +61,7 @@ namespace zypp
       std::list<PatchRpm> candidates;
       
       // query all repos
-      for ( std::set<Repository>::const_iterator it = _pimpl->repos.begin();
+      for ( std::list<Repository>::const_iterator it = _pimpl->repos.begin();
             it != _pimpl->repos.end();
             ++it )
       {
@@ -83,7 +83,7 @@ namespace zypp
       std::list<DeltaRpm> candidates;
       
       // query all repos
-      for ( std::set<Repository>::const_iterator it = _pimpl->repos.begin();
+      for ( std::list<Repository>::const_iterator it = _pimpl->repos.begin();
             it != _pimpl->repos.end();
             ++it )
       {

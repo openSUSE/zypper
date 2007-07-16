@@ -208,7 +208,7 @@ namespace zypp
 
       for ( PoolItemList items = order.computeNextSet(); ! items.empty(); items = order.computeNextSet() )
         {
-          MIL << "order.computeNextSet: " << items.size() << " resolvables" << endl;
+          XXX << "order.computeNextSet: " << items.size() << " resolvables" << endl;
           ///////////////////////////////////////////////////////////////////
           // items contains all objects we could install now. Pick all objects
           // from current media, or best media if none for current. Alwayys pick
@@ -225,15 +225,15 @@ namespace zypp
               if (!cobj)
                 continue;
 
-              if ( ! cobj->sourceMediaNr() ) {
+              if ( ! cobj->mediaNr() ) {
                 XXX << "No media access required for " << *cit << endl;
                 order.setInstalled( *cit );
                 other_list.push_back( *cit );
                 continue;
               }
 
-              if ( cobj->source().numericId() == last_prio &&
-                   cobj->sourceMediaNr() == last_medianum ) {
+              if ( cobj->repository().numericId() == last_prio &&
+                   cobj->mediaNr() == last_medianum ) {
                 // prefer packages on current media.
                 XXX << "Stay with current media " << *cit << endl;
                 last_list.push_back( *cit );
@@ -247,12 +247,12 @@ namespace zypp
 
                   if ( order_r == ORDER_BY_MEDIANR )
                     {
-                      if ( cobj->sourceMediaNr() < best_medianum ) {
+                      if ( cobj->mediaNr() < best_medianum ) {
                         best_list.clear(); // new best
-                      } else if ( cobj->sourceMediaNr() == best_medianum ) {
-                        if ( cobj->source().numericId() < best_prio ) {
+                      } else if ( cobj->mediaNr() == best_medianum ) {
+                        if ( cobj->repository().numericId() < best_prio ) {
                           best_list.clear(); // new best
-                        } else if ( cobj->source().numericId() == best_prio ) {
+                        } else if ( cobj->repository().numericId() == best_prio ) {
                           XXX << "Add to best list " << *cit << endl;
                           best_list.push_back( *cit ); // same as best -> add
                           continue;
@@ -265,12 +265,12 @@ namespace zypp
                     }
                   else // default: ORDER_BY_SOURCE
                     {
-                      if ( cobj->source().numericId() < best_prio ) {
+                      if ( cobj->repository().numericId() < best_prio ) {
                         best_list.clear(); // new best
-                      } else if ( cobj->source().numericId() == best_prio ) {
-                        if ( cobj->sourceMediaNr() < best_medianum ) {
+                      } else if ( cobj->repository().numericId() == best_prio ) {
+                        if ( cobj->mediaNr() < best_medianum ) {
                           best_list.clear(); // new best
-                        } else if ( cobj->sourceMediaNr() == best_medianum ) {
+                        } else if ( cobj->mediaNr() == best_medianum ) {
                           XXX << "Add to best list " << *cit << endl;
                           best_list.push_back( *cit ); // same as best -> add
                           continue;
@@ -285,10 +285,10 @@ namespace zypp
 
                 if ( best_list.empty() )
                   {
-                    XXX << "NEW BEST LIST [S" << cobj->source().numericId() << ":" << cobj->sourceMediaNr()
+                    XXX << "NEW BEST LIST [S" << cobj->repository().numericId() << ":" << cobj->mediaNr()
                         << "] (last [S" << best_prio << ":" << best_medianum << "])" << endl;
-                    best_prio     = cobj->source().numericId();
-                    best_medianum = cobj->sourceMediaNr();
+                    best_prio     = cobj->repository().numericId();
+                    best_medianum = cobj->mediaNr();
                     // first package or new best
                     XXX << "Add to best list " << *cit << endl;
                     best_list.push_back( *cit );
@@ -311,7 +311,7 @@ namespace zypp
             }
           else
             {
-              MIL << "SET CONTINUE [S" << best_prio << ":" << best_medianum << "]" << endl;
+              XXX << "SET CONTINUE [S" << best_prio << ":" << best_medianum << "]" << endl;
             }
 
           for ( PoolItemList::iterator it = take_list.begin(); it != take_list.end(); ++it )
@@ -327,6 +327,7 @@ namespace zypp
         } // for all sets computed
 
 
+      MIL << "order done" << endl;
       if ( instbackup_r.size() != instlist_r.size() )
         {
           ERR << "***************** Lost packages in InstallOrder sort." << endl;

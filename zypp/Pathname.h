@@ -18,6 +18,9 @@
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
+
+  class Url;
+
   ///////////////////////////////////////////////////////////////////
   namespace filesystem
   { /////////////////////////////////////////////////////////////////
@@ -76,6 +79,9 @@ namespace zypp
       /** String representation. */
       const std::string & asString() const
       { return name_t; }
+
+      /** Url representation using \c dir schema. */
+      Url asUrl() const;
 
       /** String representation. */
       const char * c_str() const

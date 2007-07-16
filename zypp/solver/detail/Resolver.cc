@@ -301,9 +301,9 @@ void  Resolver::dumpTaskList(const PoolItemList &install, const PoolItemList &re
 //---------------------------------------------------------------------------
 
 void
-Resolver::addSubscribedSource (Source_Ref source)
+Resolver::addSubscribedSource (Repository repo)
 {
-    _subscribed.insert(source);
+    _subscribed.insert(repo);
 }
 
 void

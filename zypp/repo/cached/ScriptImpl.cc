@@ -12,6 +12,7 @@
 #include "zypp/base/Logger.h"
 #include "zypp/repo/RepositoryImpl.h"
 #include "ScriptImpl.h"
+#include "zypp/cache/CacheAttributes.h"
 
 
 using namespace std;
@@ -46,67 +47,53 @@ ScriptImpl::repository() const
 
 TranslatedText ScriptImpl::summary() const
 {
-  return _repository->resolvableQuery().queryTranslatedStringAttribute( _id, "ResObject", "summary" );
+  return _repository->resolvableQuery().queryTranslatedStringAttribute( _id, cache::attrResObjectSummary() );
 }
 
 TranslatedText ScriptImpl::description() const
 {
-  return _repository->resolvableQuery().queryTranslatedStringAttribute( _id, "ResObject", "description" );
+  return _repository->resolvableQuery().queryTranslatedStringAttribute( _id, cache::attrResObjectDescription() );
 }
 
 TranslatedText ScriptImpl::insnotify() const
 {
-  return _repository->resolvableQuery().queryTranslatedStringAttribute( _id, "ResObject", "insnotify" );
+  return _repository->resolvableQuery().queryTranslatedStringAttribute( _id, cache::attrResObjectInsnotify() );
 }
 
 TranslatedText ScriptImpl::delnotify() const
 {
-  return _repository->resolvableQuery().queryTranslatedStringAttribute( _id, "ResObject", "delnotify" );
+  return _repository->resolvableQuery().queryTranslatedStringAttribute( _id, cache::attrResObjectDelnotify() );
 }
 
 TranslatedText ScriptImpl::licenseToConfirm() const
 {
-  return _repository->resolvableQuery().queryTranslatedStringAttribute( _id, "ResObject", "licenseToConfirm" );
+  return _repository->resolvableQuery().queryTranslatedStringAttribute( _id, cache::attrResObjectLicenseToConfirm() );
 }
 
 Vendor ScriptImpl::vendor() const
 {
-  return _repository->resolvableQuery().queryStringAttribute( _id, "ResObject", "vendor" );
+  return _repository->resolvableQuery().queryStringAttribute( _id, cache::attrResObjectVendor() );
 }
 
 
 ByteCount ScriptImpl::size() const
 {
-  return _repository->resolvableQuery().queryNumericAttribute( _id, "ResObject", "size" );
-}
-
-ByteCount ScriptImpl::archivesize() const
-{
-  return _repository->resolvableQuery().queryNumericAttribute( _id, "ResObject", "archivesize" );
+  return _repository->resolvableQuery().queryNumericAttribute( _id, cache::attrResObjectInstalledSize() );
 }
 
 bool ScriptImpl::installOnly() const
 {
-  return _repository->resolvableQuery().queryBooleanAttribute( _id, "ResObject", "installOnly" );
+  return _repository->resolvableQuery().queryBooleanAttribute( _id, cache::attrResObjectInstallOnly() );
 }
 
 Date ScriptImpl::buildtime() const
 {
-  return _repository->resolvableQuery().queryNumericAttribute( _id, "ResObject", "buildtime" );
+  return _repository->resolvableQuery().queryNumericAttribute( _id, cache::attrResObjectBuildTime() );
 }
 
 Date ScriptImpl::installtime() const
 {
   return Date();
-}
-
-//////////////////////////////////////////
-// DEPRECATED
-//////////////////////////////////////////
-
-Source_Ref ScriptImpl::source() const
-{
-  return Source_Ref::noSource;
 }
 
 unsigned ScriptImpl::mediaNr() const
@@ -120,19 +107,21 @@ unsigned ScriptImpl::mediaNr() const
 
 Pathname ScriptImpl::do_script() const
 {
-  return _repository->resolvableQuery().queryStringAttribute( _id, "Script", "doScript" );
+  return _repository->resolvableQuery().queryStringAttribute( _id, cache::attrScriptDoScript() );
 }
 
 Pathname ScriptImpl::undo_script() const
 {
-  return _repository->resolvableQuery().queryStringAttribute( _id, "Script", "undoScript" );
+  return _repository->resolvableQuery().queryStringAttribute( _id, cache::attrScriptUndoScript() );
 }
 
 bool ScriptImpl::undo_available() const
 {
-  return _repository->resolvableQuery().queryBooleanAttribute( _id, "Script", "undoAvailable", false );
+#warning DUBIOUS ATTRIBUTE
+  return false;
+  //return _repository->resolvableQuery().queryBooleanAttribute( _id, cache::attrScriptUndoAvailable(), false );
 }
-    
+
 
 /////////////////////////////////////////////////////////////////
 } } } // namespace zypp::repo::cached

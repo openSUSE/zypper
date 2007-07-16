@@ -29,34 +29,36 @@ namespace zypp
     {
       friend std::ostream & operator<<( std::ostream & str, const RepositoryImpl & obj );
     public:
-      
+
       /**
        * \short Ctor.
        * \param info What is known about this source at construction time.
        *
        */
       RepositoryImpl( const RepoInfo &info = RepoInfo() );
-      
-      /**
-       * \short Information about this repository
-       * You can't change this information after creation.
-       * Use \ref RepoManager for that.
-       */
-      const RepoInfo info() const;
-      
+
       /**
        * \short Dtor
        */
       ~RepositoryImpl();
 
+      /**
+       * \short Information about this repository
+       * You can't change this information after creation.
+       * Use \ref RepoManager for that.
+       */
+      const RepoInfo & info() const;
+
       const ResStore & resolvables() const;
 
-      struct null {};
-      
       const std::list<packagedelta::PatchRpm> & patchRpms() const;
       const std::list<packagedelta::DeltaRpm> & deltaRpms() const;
-    
+
+      virtual void createResolvables();
+      virtual void createPatchAndDeltas();
     public:
+      struct null {};
+
       /** Offer default Impl. */
       static RepositoryImpl_Ptr nullimpl()
       {
@@ -68,13 +70,14 @@ namespace zypp
 
       Repository selfRepository()
       { return Repository( this ); }
+
     protected:
-      RepoInfo _info;
-      
       ResStore _store;
-      
       std::list<packagedelta::PatchRpm> _patchRpms;
       std::list<packagedelta::DeltaRpm> _deltaRpms;
+      bool _restore_lazy_initialized;
+    private:
+      RepoInfo _info;
     };
   }
 }

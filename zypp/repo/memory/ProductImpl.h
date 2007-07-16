@@ -17,7 +17,6 @@
 #include "zypp/CheckSum.h"
 #include "zypp/CapSet.h"
 #include "zypp/detail/ProductImplIf.h"
-#include "zypp/Source.h"
 #include "zypp/data/ResolvableData.h"
 #include "zypp/TranslatedText.h"
 
@@ -48,11 +47,9 @@ namespace zypp
         virtual TranslatedText licenseToConfirm() const;
         virtual Vendor vendor() const;
         virtual ByteCount size() const;
-        virtual ByteCount archivesize() const;
         virtual bool installOnly() const;
         virtual Date buildtime() const;
         virtual Date installtime() const;
-        virtual unsigned mediaNr() const;
 
         virtual std::string category() const;
         virtual Url releaseNotesUrl() const;
@@ -74,11 +71,9 @@ namespace zypp
         TranslatedText _license_to_confirm;
         Vendor _vendor;
         ByteCount _size;
-        ByteCount _archivesize;
         bool _install_only;
         Date _buildtime;
         Date _installtime;
-        unsigned _media_nr;
 
         std::string _category;
         std::string _dist_name;

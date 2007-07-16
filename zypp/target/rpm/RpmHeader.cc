@@ -26,6 +26,7 @@
 #include "zypp/base/Exception.h"
 
 using namespace std;
+using namespace zypp::capability;
 
 namespace zypp
 {
@@ -272,9 +273,9 @@ Date RpmHeader::tag_buildtime() const
 //
 //        DESCRIPTION :
 //
-CapSet RpmHeader::PkgRelList_val( tag tag_r, bool pre, set<string> * freq_r ) const
+CapabilityImplPtrSet RpmHeader::PkgRelList_val( tag tag_r, bool pre, set<string> * freq_r ) const
   {
-    CapSet ret;
+    CapabilityImplPtrSet ret;
 
     int_32  kindFlags   = 0;
     int_32  kindVersion = 0;
@@ -370,10 +371,9 @@ CapSet RpmHeader::PkgRelList_val( tag tag_r, bool pre, set<string> * freq_r ) co
       if ((pre && (f & RPMSENSE_PREREQ))
           || ((! pre) && !(f & RPMSENSE_PREREQ)))
       {
-        CapFactory _f;
         try
         {
-          Capability cap = _f.parse(
+          CapabilityImpl::Ptr cap = capability::buildVersioned(
                              ResTraits<Package>::kind,
                              n,
                              op,
@@ -397,11 +397,11 @@ CapSet RpmHeader::PkgRelList_val( tag tag_r, bool pre, set<string> * freq_r ) co
 //
 //
 //        METHOD NAME : RpmHeader::tag_provides
-//        METHOD TYPE : CapSet
+//        METHOD TYPE : CapabilityImplPtrSet
 //
 //        DESCRIPTION :
 //
-CapSet RpmHeader::tag_provides( set<string> * freq_r ) const
+CapabilityImplPtrSet RpmHeader::tag_provides( set<string> * freq_r ) const
   {
     return PkgRelList_val( RPMTAG_PROVIDENAME, false, freq_r );
   }
@@ -410,11 +410,11 @@ CapSet RpmHeader::tag_provides( set<string> * freq_r ) const
 //
 //
 //        METHOD NAME : RpmHeader::tag_requires
-//        METHOD TYPE : CapSet
+//        METHOD TYPE : CapabilityImplPtrSet
 //
 //        DESCRIPTION :
 //
-CapSet RpmHeader::tag_requires( set<string> * freq_r ) const
+CapabilityImplPtrSet RpmHeader::tag_requires( set<string> * freq_r ) const
   {
     return PkgRelList_val( RPMTAG_REQUIRENAME, false, freq_r );
   }
@@ -423,11 +423,11 @@ CapSet RpmHeader::tag_requires( set<string> * freq_r ) const
 //
 //
 //        METHOD NAME : RpmHeader::tag_requires
-//        METHOD TYPE : CapSet
+//        METHOD TYPE : CapabilityImplPtrSet
 //
 //        DESCRIPTION :
 //
-CapSet RpmHeader::tag_prerequires( set<string> * freq_r ) const
+CapabilityImplPtrSet RpmHeader::tag_prerequires( set<string> * freq_r ) const
   {
     return PkgRelList_val( RPMTAG_REQUIRENAME, true, freq_r );
   }
@@ -436,11 +436,11 @@ CapSet RpmHeader::tag_prerequires( set<string> * freq_r ) const
 //
 //
 //        METHOD NAME : RpmHeader::tag_conflicts
-//        METHOD TYPE : CapSet
+//        METHOD TYPE : CapabilityImplPtrSet
 //
 //        DESCRIPTION :
 //
-CapSet RpmHeader::tag_conflicts( set<string> * freq_r ) const
+CapabilityImplPtrSet RpmHeader::tag_conflicts( set<string> * freq_r ) const
   {
     return PkgRelList_val( RPMTAG_CONFLICTNAME, false, freq_r );
   }
@@ -449,11 +449,11 @@ CapSet RpmHeader::tag_conflicts( set<string> * freq_r ) const
 //
 //
 //        METHOD NAME : RpmHeader::tag_obsoletes
-//        METHOD TYPE : CapSet
+//        METHOD TYPE : CapabilityImplPtrSet
 //
 //        DESCRIPTION :
 //
-CapSet RpmHeader::tag_obsoletes( set<string> * freq_r ) const
+CapabilityImplPtrSet RpmHeader::tag_obsoletes( set<string> * freq_r ) const
   {
     return PkgRelList_val( RPMTAG_OBSOLETENAME, false, freq_r );
   }
@@ -462,16 +462,16 @@ CapSet RpmHeader::tag_obsoletes( set<string> * freq_r ) const
 //
 //
 //        METHOD NAME : RpmHeader::tag_enhances
-//        METHOD TYPE : CapSet
+//        METHOD TYPE : CapabilityImplPtrSet
 //
 //        DESCRIPTION :
 //
-CapSet RpmHeader::tag_enhances( set<string> * freq_r ) const
+CapabilityImplPtrSet RpmHeader::tag_enhances( set<string> * freq_r ) const
   {
 #ifdef HAVE_RPM_ENHANCES
     return PkgRelList_val( RPMTAG_ENHANCESNAME, false, freq_r );
 #else
-    return CapSet();
+    return CapabilityImplPtrSet();
 #endif
   }
 
@@ -479,13 +479,13 @@ CapSet RpmHeader::tag_enhances( set<string> * freq_r ) const
 //
 //
 //        METHOD NAME : RpmHeader::tag_supplements
-//        METHOD TYPE : CapSet
+//        METHOD TYPE : CapabilityImplPtrSet
 //
 //        DESCRIPTION :
 //
-CapSet RpmHeader::tag_supplements( set<string> * freq_r ) const
+CapabilityImplPtrSet RpmHeader::tag_supplements( set<string> * freq_r ) const
   {
-    return CapSet();
+    return CapabilityImplPtrSet();
 #warning NEEDS RPMTAG_SUPPLEMENTSNAME
 #if 0
     return PkgRelList_val( RPMTAG_SUPPLEMENTSNAME, false, freq_r );

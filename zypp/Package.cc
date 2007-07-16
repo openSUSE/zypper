@@ -10,7 +10,6 @@
  *
 */
 #include "zypp/Package.h"
-#include "zypp/source/SourceImpl.h"
 #include "zypp/base/Exception.h"
 
 using namespace std;
@@ -50,9 +49,6 @@ namespace zypp
   /** */
   std::string Package::buildhost() const
   { return pimpl().buildhost(); }
-
-  CheckSum Package::checksum() const
-  { return pimpl().checksum(); }
 
   /** */
   std::string Package::distribution() const
@@ -113,9 +109,9 @@ namespace zypp
   std::list<std::string> Package::filenames() const
   { return pimpl().filenames(); }
 
-  Pathname Package::location() const
+  OnMediaLocation Package::location() const
   { return pimpl().location(); }
-
+  
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////

@@ -96,12 +96,21 @@ namespace zypp
     _resources.clear();
     _caches.clear();
   }
-  
+
   void Fetcher::Impl::addCachePath( const Pathname &cache_dir )
   {
-    _caches.push_back(cache_dir);
+    PathInfo info(cache_dir);
+    if ( info.isDir() )
+    {
+      _caches.push_back(cache_dir);
+    }
+    else
+    {
+      // don't add bad cache directory, just log the error
+      ERR << "Not adding cache: '" << cache_dir << "'. Not a direcotry." << endl;
+    }
   }
-  
+
   void Fetcher::Impl::start( const Pathname &dest_dir,
                              MediaSetAccess &media,
                              const ProgressData::ReceiverFnc & progress_receiver )
@@ -114,54 +123,37 @@ namespace zypp
       bool got_from_cache = false;
       for ( list<Pathname>::const_iterator it_cache = _caches.begin(); it_cache != _caches.end(); ++it_cache )
       {
-        // Pathinfos could be cached to avoid too many stats?
-        PathInfo info(*it_cache);
-        if ( info.isDir() )
+        // does the current file exists in the current cache?
+        Pathname cached_file = *it_cache + (*it_res).location.filename();
+        if ( PathInfo( cached_file ).isExist() )
         {
-          // does the current file exists in the current cache?
-          Pathname cached_file = *it_cache + (*it_res).location.filename();
-          if ( PathInfo( cached_file ).isExist() )
+          // check the checksum
+          if ( is_checksum( cached_file, (*it_res).location.checksum() ) )
           {
-            // check the checksum
-            if ( is_checksum( cached_file, (*it_res).location.checksum() ) )
-            {
-              // cached
-              MIL << "file " << (*it_res).location.filename() << " found in previous cache. Using cached copy." << endl;
-              // checksum is already checked.
-              // we could later implement double failover and try to download if file copy fails.
-  
-              // replicate the complete path in the target directory
-              Pathname dest_full_path = dest_dir + (*it_res).location.filename();
-              if ( assert_dir( dest_full_path.dirname() ) != 0 )
-                ZYPP_THROW( Exception("Can't create " + dest_full_path.dirname().asString()));
-  
-              if ( filesystem::copy(cached_file, dest_full_path ) != 0 )
-              { //copy_file2dir
-                //ZYPP_THROW(SourceIOException("Can't copy " + cached_file.asString() + " to " + destination.asString()));
-                ERR << "Can't copy " << cached_file + " to " + dest_dir << endl;
-                // try next cache
-                continue;
-              }
-  
-              got_from_cache = true;
-              break;
+            // cached
+            MIL << "file " << (*it_res).location.filename() << " found in previous cache. Using cached copy." << endl;
+            // checksum is already checked.
+            // we could later implement double failover and try to download if file copy fails.
+
+            // replicate the complete path in the target directory
+            Pathname dest_full_path = dest_dir + (*it_res).location.filename();
+            if ( assert_dir( dest_full_path.dirname() ) != 0 )
+              ZYPP_THROW( Exception("Can't create " + dest_full_path.dirname().asString()));
+
+            if ( filesystem::copy(cached_file, dest_full_path ) != 0 )
+            { //copy_file2dir
+              //ZYPP_THROW(SourceIOException("Can't copy " + cached_file.asString() + " to " + destination.asString()));
+              ERR << "Can't copy " << cached_file + " to " + dest_dir << endl;
+              // try next cache
+              continue;
             }
+
+            got_from_cache = true;
+            break;
           }
-          else
-          {
-            // File exists in cache but with a different checksum
-            // so just try next cache
-            continue;
-          }
-        }
-        else
-        {
-          // skip bad cache directory and try with next one
-          ERR << "Skipping cache : " << *it_cache << endl;
-          continue;
         }
       }
-  
+
       if ( ! got_from_cache )
       {
         // try to get the file from the net
@@ -190,27 +182,27 @@ namespace zypp
         // continue with next file
         continue;
       }
-      
+    
       // no matter where did we got the file, try to validate it:
-       Pathname localfile = dest_dir + (*it_res).location.filename();
-       // call the checker function
-       try {
-         (*it_res).checkers(localfile);
-       }
-       catch ( const FileCheckException &e )
-       {
-          ZYPP_RETHROW(e);
-       }
-       catch ( const Exception &e )
-       {
-          ZYPP_RETHROW(e);
-       }
-       catch (...)
-       {
-          ZYPP_THROW(Exception("Unknown error while validating " + (*it_res).location.filename().asString()));
-       }
+      Pathname localfile = dest_dir + (*it_res).location.filename();
+      // call the checker function
+      try {
+       (*it_res).checkers(localfile);
+      }
+      catch ( const FileCheckException &e )
+      {
+        ZYPP_RETHROW(e);
+      }
+      catch ( const Exception &e )
+      {
+        ZYPP_RETHROW(e);
+      }
+      catch (...)
+      {
+        ZYPP_THROW(Exception("Unknown error while validating " + (*it_res).location.filename().asString()));
+      }
 
-       if ( ! progress.incr() )
+      if ( ! progress.incr() )
         ZYPP_THROW(AbortRequestException());
     } // for each job
   }

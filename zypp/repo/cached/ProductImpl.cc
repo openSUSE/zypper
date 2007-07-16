@@ -12,6 +12,7 @@
 #include "zypp/base/Logger.h"
 #include "zypp/repo/RepositoryImpl.h"
 #include "ProductImpl.h"
+#include "zypp/cache/CacheAttributes.h"
 
 
 using namespace std;
@@ -46,53 +47,48 @@ ProductImpl::repository() const
 
 TranslatedText ProductImpl::summary() const
 {
-  return _repository->resolvableQuery().queryTranslatedStringAttribute( _id, "ResObject", "summary" );
+  return _repository->resolvableQuery().queryTranslatedStringAttribute( _id, cache::attrResObjectSummary() );
 }
 
 TranslatedText ProductImpl::description() const
 {
-  return _repository->resolvableQuery().queryTranslatedStringAttribute( _id, "ResObject", "description" );
+  return _repository->resolvableQuery().queryTranslatedStringAttribute( _id, cache::attrResObjectDescription() );
 }
 
 TranslatedText ProductImpl::insnotify() const
 {
-  return _repository->resolvableQuery().queryTranslatedStringAttribute( _id, "ResObject", "insnotify" );
+  return _repository->resolvableQuery().queryTranslatedStringAttribute( _id, cache::attrResObjectInsnotify() );
 }
 
 TranslatedText ProductImpl::delnotify() const
 {
-  return _repository->resolvableQuery().queryTranslatedStringAttribute( _id, "ResObject", "delnotify" );
+  return _repository->resolvableQuery().queryTranslatedStringAttribute( _id, cache::attrResObjectDelnotify() );
 }
 
 TranslatedText ProductImpl::licenseToConfirm() const
 {
-  return _repository->resolvableQuery().queryTranslatedStringAttribute( _id, "ResObject", "licenseToConfirm" );
+  return _repository->resolvableQuery().queryTranslatedStringAttribute( _id, cache::attrResObjectLicenseToConfirm() );
 }
 
 Vendor ProductImpl::vendor() const
 {
-  return _repository->resolvableQuery().queryStringAttribute( _id, "ResObject", "vendor" );
+  return _repository->resolvableQuery().queryStringAttribute( _id, cache::attrResObjectVendor() );
 }
 
 
 ByteCount ProductImpl::size() const
 {
-  return _repository->resolvableQuery().queryNumericAttribute( _id, "ResObject", "size" );
-}
-
-ByteCount ProductImpl::archivesize() const
-{
-  return _repository->resolvableQuery().queryNumericAttribute( _id, "ResObject", "archivesize" );
+  return _repository->resolvableQuery().queryNumericAttribute( _id, cache::attrResObjectInstalledSize() );
 }
 
 bool ProductImpl::installOnly() const
 {
-  return _repository->resolvableQuery().queryBooleanAttribute( _id, "ResObject", "installOnly" );
+  return _repository->resolvableQuery().queryBooleanAttribute( _id, cache::attrResObjectInstallOnly() );
 }
 
 Date ProductImpl::buildtime() const
 {
-  return _repository->resolvableQuery().queryNumericAttribute( _id, "ResObject", "buildtime" );
+  return _repository->resolvableQuery().queryNumericAttribute( _id, cache::attrResObjectBuildTime() );
 }
 
 Date ProductImpl::installtime() const
@@ -101,74 +97,64 @@ Date ProductImpl::installtime() const
 }
 
 //////////////////////////////////////////
-// DEPRECATED
-//////////////////////////////////////////
-
-Source_Ref ProductImpl::source() const
-{
-  return Source_Ref::noSource;
-}
-
-unsigned ProductImpl::mediaNr() const
-{
-  return 1;
-}
-
-//////////////////////////////////////////
 // PRODUCT
 /////////////////////////////////////////
 
 std::string ProductImpl::category() const
 {
-  return _repository->resolvableQuery().queryStringAttribute( _id, "Product", "category" );
+#warning DUBIOUS ATTRIBUTE
+  return "";
+  //return _repository->resolvableQuery().queryStringAttribute( _id, cache::attrProductCategory() );
 }
 
 Url ProductImpl::releaseNotesUrl() const
 {
-  return _repository->resolvableQuery().queryStringAttribute( _id, "Product", "releaseNotesUrl" );
+#warning DUBIOUS ATTRIBUTE
+  return Url();
+  //return _repository->resolvableQuery().queryStringAttribute( _id, cache::attrProductReleaseNotesUrl() );
 }
 
 std::list<Url> ProductImpl::updateUrls() const
 {
   std::list<Url> urls;
-  _repository->resolvableQuery().queryStringContainerAttribute( _id, "Product", "updateUrls", back_inserter(urls) );
+  _repository->resolvableQuery().queryStringContainerAttribute( _id, cache::attrProductUpdateUrls(), back_inserter(urls) );
   return urls;
 }
 
 std::list<Url> ProductImpl::extraUrls() const
 {
   std::list<Url> urls;
-  _repository->resolvableQuery().queryStringContainerAttribute( _id, "Product", "extraUrls", back_inserter(urls) );
+  _repository->resolvableQuery().queryStringContainerAttribute( _id, cache::attrProductExtraUrls(), back_inserter(urls) );
   return urls;
 }
 
 std::list<Url> ProductImpl::optionalUrls() const
 {
   std::list<Url> urls;
-  _repository->resolvableQuery().queryStringContainerAttribute( _id, "Product", "optionalUrls", back_inserter(urls) );
+  _repository->resolvableQuery().queryStringContainerAttribute( _id, cache::attrProductOptionalUrls(), back_inserter(urls) );
   return urls;
 }
 
 list<string> ProductImpl::flags() const
 {
   list<string> flags;
-  _repository->resolvableQuery().queryStringContainerAttribute( _id, "Product", "flags", back_inserter(flags) );
+  _repository->resolvableQuery().queryStringContainerAttribute( _id, cache::attrProductFlags(), back_inserter(flags) );
   return flags;
 }
 
 TranslatedText ProductImpl::shortName() const
 {
-  return _repository->resolvableQuery().queryTranslatedStringAttribute( _id, "Product", "shortName" );
+  return _repository->resolvableQuery().queryTranslatedStringAttribute( _id, cache::attrProductShortName() );
 }
 
 std::string ProductImpl::distributionName() const
 {
-  return _repository->resolvableQuery().queryStringAttribute( _id, "Product", "distributionName" );
+  return _repository->resolvableQuery().queryStringAttribute( _id, cache::attrProductDistributionName() );
 }
 
 Edition ProductImpl::distributionEdition() const
 {
-  return _repository->resolvableQuery().queryStringAttribute( _id, "Product", "distributionEdition" );
+  return _repository->resolvableQuery().queryStringAttribute( _id, cache::attrProductDistributionEdition() );
 }
 
 /////////////////////////////////////////////////////////////////

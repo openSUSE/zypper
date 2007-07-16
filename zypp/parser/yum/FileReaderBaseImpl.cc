@@ -87,9 +87,9 @@ namespace zypp
       // xpath: //package/checksum
       if (reader_r->name() == "checksum")
       {
-        package_ptr->repositoryLocation.fileChecksum = CheckSum(
+        package_ptr->repositoryLocation.setChecksum(CheckSum(
                             reader_r->getAttribute("type").asString(),
-                            reader_r.nodeText().asString());
+                            reader_r.nodeText().asString()));
         // ignoring pkgid attribute
         return true;
       }
@@ -144,7 +144,7 @@ namespace zypp
         package_ptr->installedSize = str::strtonum<ByteCount::SizeType>( reader_r->getAttribute("installed").asString() );
 
         // rpm package size
-        package_ptr->repositoryLocation.fileSize = str::strtonum<ByteCount::SizeType>( reader_r->getAttribute("package").asString() );
+        package_ptr->repositoryLocation.setDownloadSize(str::strtonum<ByteCount::SizeType>( reader_r->getAttribute("package").asString() ));
 
         return true;
       }
@@ -152,7 +152,7 @@ namespace zypp
       // xpath: //package/location
       if (reader_r->name() == "location")
       {
-        package_ptr->repositoryLocation.filePath = reader_r->getAttribute("href").asString();
+        package_ptr->repositoryLocation.setFilename(reader_r->getAttribute("href").asString());
         return true;
       }
 

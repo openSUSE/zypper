@@ -296,7 +296,14 @@ InstallOrder::rdfsvisit (const PoolItem_Ref item)
 	    {
 		if (must_visit != item)
 		{
-		    WAR << "** dependency loop: " << ITEMNAME(item) << " -> " << ITEMNAME(must_visit) << endl;
+		  // log only the 1st occurrence.
+		  std::string lstr( ITEMNAME(item) );
+		  lstr += " -> ";
+		  lstr += ITEMNAME(must_visit);
+		  if ( _logset.insert( lstr ).second )
+		  {
+		    WAR << "** dependency loop: " << lstr << endl;
+		  }
 		}
 	    }
 	    else

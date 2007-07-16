@@ -61,15 +61,6 @@ namespace zypp
       typedef std::set<PoolItem_Ref> PoolItemSet;
 
     public:
-      /** JUST FOR TESTSUITE */
-      /** Sort according to prereqs and media numbers */
-      void getResolvablesToInsDel ( const ResPool pool_r,
-                                    PoolItemList & dellist_r,
-                                    PoolItemList & instlist_r,
-                                    PoolItemList & srclist_r ) const;
-
-
-    public:
       /** Ctor. */
       TargetImpl(const Pathname & root_r = "/");
       /** Dtor. */

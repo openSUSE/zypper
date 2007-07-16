@@ -10,6 +10,7 @@
 #include "zypp/cache/CacheInitializer.h"
 #include "zypp/cache/CacheStore.h"
 #include "zypp/cache/CacheException.h"
+#include "zypp/cache/CacheAttributes.h"
 
 using namespace std;
 using namespace zypp;
@@ -19,6 +20,22 @@ using zypp::data::RecordId;
 using namespace sqlite3x;
 
 using zypp::debug::Measure;
+
+/** Append OnMediaLocation attributes to resolvable with ID.
+ * Pass the OnMediaLocation attributes common prefix as 2nd arg. This macro
+ * assumes that the attribute names follow this schema:
+*/
+#define appendOnMediaLocation(ID,OMLATTRPREFIX,OML)                                          \
+do {                                                                                         \
+  appendNumericAttribute( ID, OMLATTRPREFIX##MediaNr(),        OML.medianr() );              \
+  appendStringAttribute ( ID, OMLATTRPREFIX##Filename(),       OML.filename().asString() );  \
+  appendNumericAttribute( ID, OMLATTRPREFIX##DownloadSize(),   OML.downloadSize() );         \
+  appendStringAttribute ( ID, OMLATTRPREFIX##ChecksumType(),   OML.checksum().type() );      \
+  appendStringAttribute ( ID, OMLATTRPREFIX##Checksum(),       OML.checksum().checksum() );  \
+  appendNumericAttribute( ID, OMLATTRPREFIX##OpenSize(), OML.openSize() );       \
+  appendStringAttribute ( ID, OMLATTRPREFIX##OpenChecksumType(), OML.openChecksum().type() );    \
+  appendStringAttribute ( ID, OMLATTRPREFIX##OpenChecksum(),     OML.openChecksum().checksum() );\
+} while(false)
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -90,7 +107,7 @@ struct CacheStore::Impl
 
     append_other_dependency_cmd.reset( new sqlite3_command( con, "insert into other_capabilities ( resolvable_id, dependency_type, refers_kind, value ) values ( :resolvable_id, :dependency_type, :refers_kind, :value );" ));
 
-    append_resolvable_cmd.reset( new sqlite3_command( con, "insert into resolvables ( name, version, release, epoch, arch, kind, repository_id ) values ( :name, :version, :release, :epoch, :arch, :kind, :repository_id );" ));
+    append_resolvable_cmd.reset( new sqlite3_command( con, "insert into resolvables ( name, version, release, epoch, arch, kind, shared_id, repository_id ) values ( :name, :version, :release, :epoch, :arch, :kind, :shared_id, :repository_id );" ));
 
     count_shared_cmd.reset( new sqlite3_command( con, "select count(id) from resolvables where shared_id=:rid;" ));
 
@@ -201,45 +218,52 @@ void CacheStore::commit()
 void CacheStore::appendResObjectAttributes( const data::RecordId &rid,
                                             const data::ResObject_Ptr & res )
 {
-  appendTranslatedStringAttribute( rid, "ResObject", "description", res->description );
-  appendTranslatedStringAttribute( rid, "ResObject", "summary", res->summary );
-  appendNumericAttribute( rid, "ResObject", "installedSize", res->installedSize );
-  appendNumericAttribute( rid, "ResObject", "buildTime", res->buildTime );
-  appendBooleanAttribute( rid, "ResObject", "installOnly", res->installOnly );
-  appendStringAttribute( rid, "ResObject", "vendor", res->vendor );
-  appendTranslatedStringAttribute( rid, "ResObject", "licenseToConfirm", res->licenseToConfirm );
-  appendTranslatedStringAttribute( rid, "ResObject", "insnotify", res->insnotify );
-  appendTranslatedStringAttribute( rid, "ResObject", "delnotify", res->delnotify );
+  appendTranslatedStringAttribute( rid, attrResObjectDescription(), res->description );
+  appendTranslatedStringAttribute( rid, attrResObjectSummary(), res->summary );
+  appendNumericAttribute( rid, attrResObjectInstalledSize(), res->installedSize );
+  appendNumericAttribute( rid, attrResObjectBuildTime(), res->buildTime );
+  appendBooleanAttribute( rid, attrResObjectInstallOnly(), res->installOnly );
+  appendStringAttribute( rid, attrResObjectVendor(), res->vendor );
+  appendTranslatedStringAttribute( rid, attrResObjectLicenseToConfirm(), res->licenseToConfirm );
+  appendTranslatedStringAttribute( rid, attrResObjectInsnotify(), res->insnotify );
+  appendTranslatedStringAttribute( rid, attrResObjectDelnotify(), res->delnotify );
 }
 
 
 void CacheStore::appendPackageBaseAttributes( const RecordId & pkgid,
                                               const data::Packagebase_Ptr & package )
 {
-  appendStringAttribute( pkgid, "Package", "checksum", package->repositoryLocation.fileChecksum.checksum() );
-  appendStringAttribute( pkgid, "Package", "checksumType", package->repositoryLocation.fileChecksum.type() );
-  appendStringAttribute( pkgid, "Package", "buildhost", package->buildhost );
-  appendStringAttribute( pkgid, "Package", "distribution", package->distribution );
-  appendStringAttribute( pkgid, "Package", "license", package->license );
-  appendStringAttribute( pkgid, "Package", "group", package->packager );
-  appendStringAttribute( pkgid, "Package", "url", package->url );
-  appendStringAttribute( pkgid, "Package", "operatingSystem", package->operatingSystem );
-  appendStringAttribute( pkgid, "Package", "prein", package->prein );
-  appendStringAttribute( pkgid, "Package", "postin", package->postin );
-  appendStringAttribute( pkgid, "Package", "preun", package->preun );
-  appendStringAttribute( pkgid, "Package", "postun", package->postun );
-  appendStringContainerAttribute( pkgid, "Package", "keywords", package->keywords.begin(), package->keywords.end() );
-  appendStringContainerAttribute( pkgid, "Package", "authors", package->authors.begin(), package->authors.end() );
-  appendStringAttribute( pkgid, "Package", "location", package->repositoryLocation.filePath.asString() );
+  appendStringAttribute( pkgid, attrPackageBuildhost(), package->buildhost );
+  appendStringAttribute( pkgid, attrPackageDistribution(), package->distribution );
+  appendStringAttribute( pkgid, attrPackageLicense(), package->license );
+  appendStringAttribute( pkgid, attrPackageGroup(), package->group );
+  appendStringAttribute( pkgid, attrPackagePackager(), package->packager );
+  appendStringAttribute( pkgid, attrPackageUrl(), package->url );
+  appendStringAttribute( pkgid, attrPackageOperatingSystem(), package->operatingSystem );
+  appendStringAttribute( pkgid, attrPackagePrein(), package->prein );
+  appendStringAttribute( pkgid, attrPackagePostin(), package->postin );
+  appendStringAttribute( pkgid, attrPackagePreun(), package->preun );
+  appendStringAttribute( pkgid, attrPackagePostun(), package->postun );
+  appendStringContainerAttribute( pkgid, attrPackageKeywords(), package->keywords.begin(), package->keywords.end() );
+  appendStringContainerAttribute( pkgid, attrPackageAuthors(), package->authors.begin(), package->authors.end() );
+
+  appendOnMediaLocation( pkgid, attrPackageLocation, package->repositoryLocation );
 }
 
 RecordId CacheStore::consumePackage( const RecordId & repository_id,
-                                 const data::Package_Ptr & package )
+				     const data::Package_Ptr & package )
 {
   RecordId id = appendResolvable( repository_id, ResTraits<Package>::kind,
       NVRA( package->name, package->edition, package->arch ), package->deps );
   appendResObjectAttributes( id, package );
   appendPackageBaseAttributes( id, package );
+
+  if ( ! package->srcPackageIdent.name.empty() )
+  {
+    appendStringAttribute( id, attrPackageSourcePkgName(),    package->srcPackageIdent.name );
+    appendStringAttribute( id, attrPackageSourcePkgEdition(), package->srcPackageIdent.edition.asString() );
+  }
+
   return id;
 }
 
@@ -249,8 +273,8 @@ RecordId CacheStore::consumeSourcePackage( const data::RecordId & repository_id,
   RecordId id = appendResolvable( repository_id, ResTraits<SrcPackage>::kind,
       NVRA( package->name, package->edition, package->arch ), package->deps );
   appendResObjectAttributes( id, package );
-  appendPackageBaseAttributes( id, package );
-#warning TBD WRONG IMPLEMENTATION
+
+  appendOnMediaLocation( id, attrSrcPackageLocation, package->repositoryLocation );
   return id;
 }
 
@@ -264,10 +288,10 @@ RecordId CacheStore::consumePatch( const data::RecordId & repository_id,
   appendResObjectAttributes( id, patch );
 
   // patch attributes
-  appendNumericAttribute( id, "Patch", "timestamp",         patch->timestamp );
-  appendStringAttribute(  id, "Patch", "category",          patch->category );
-  appendBooleanAttribute( id, "Patch", "rebootNeeded",      patch->rebootNeeded );
-  appendBooleanAttribute( id, "Patch", "affectsPkgManager", patch->affectsPkgManager );
+  appendNumericAttribute( id, attrPatchTimestamp(),         patch->timestamp );
+  appendStringAttribute(  id, attrPatchCategory(),          patch->category );
+  appendBooleanAttribute( id, attrPatchRebootNeeded(),      patch->rebootNeeded );
+  appendBooleanAttribute( id, attrPatchAffectsPkgManager(), patch->affectsPkgManager );
 
 
   DBG << "got patch " << patch->name << ", atoms: ";
@@ -333,7 +357,7 @@ RecordId CacheStore::consumeMessage( const data::RecordId & repository_id,
       NVRA( message->name, message->edition, message->arch ), message->deps );
   appendResObjectAttributes( id, message );
 
-  appendTranslatedStringAttribute( id, "Message", "text", message->text );
+  appendTranslatedStringAttribute( id, attrMessageText(), message->text );
   return id;
 }
 
@@ -344,14 +368,10 @@ RecordId CacheStore::consumeScript( const data::RecordId & repository_id,
       NVRA( script->name, script->edition, script->arch ), script->deps );
   appendResObjectAttributes( id, script );
 
-  appendStringAttribute( id, "Script", "doScript", script->doScript );
-  appendStringAttribute( id, "Script", "doScriptLocation", script->doScriptLocation.filePath.asString() );
-  appendStringAttribute( id, "Script", "doScriptChecksum", script->doScriptLocation.fileChecksum.checksum() );
-  appendStringAttribute( id, "Script", "doScriptChecksumType", script->doScriptLocation.fileChecksum.type() );
-  appendStringAttribute( id, "Script", "undoScript", script->undoScript );
-  appendStringAttribute( id, "Script", "undoScriptLocation", script->undoScriptLocation.filePath.asString() );
-  appendStringAttribute( id, "Script", "undoScriptChecksum", script->undoScriptLocation.fileChecksum.checksum() );
-  appendStringAttribute( id, "Script", "undoScriptChecksumType", script->undoScriptLocation.fileChecksum.type() );
+  appendStringAttribute( id, attrScriptDoScript(), script->doScript );
+  appendOnMediaLocation( id, attrScriptDoScriptLocation, script->doScriptLocation );
+  appendStringAttribute( id, attrScriptUndoScript(), script->undoScript );
+  appendOnMediaLocation( id, attrScriptUndoScriptLocation, script->undoScriptLocation );
   return id;
 }
 
@@ -362,11 +382,11 @@ RecordId CacheStore::consumePattern( const data::RecordId & repository_id,
       NVRA( pattern->name, pattern->edition, pattern->arch ), pattern->deps );
   appendResObjectAttributes( id, pattern );
 
-  appendBooleanAttribute( id, "Pattern", "isDefault", pattern->isDefault );
-  appendBooleanAttribute( id, "Pattern", "userVisible", pattern->userVisible );
-  appendTranslatedStringAttribute( id, "Pattern", "category", pattern->category );
-  appendStringAttribute( id, "Pattern", "icon", pattern->icon );
-  appendStringAttribute( id, "Pattern", "order", pattern->order );
+  appendBooleanAttribute( id, attrPatternIsDefault(), pattern->isDefault );
+  appendBooleanAttribute( id, attrPatternUserVisible(), pattern->userVisible );
+  appendTranslatedStringAttribute( id, attrPatternCategory(), pattern->category );
+  appendStringAttribute( id, attrPatternIcon(), pattern->icon );
+  appendStringAttribute( id, attrPatternOrder(), pattern->order );
   return id;
 }
 
@@ -377,15 +397,15 @@ RecordId CacheStore::consumeProduct( const data::RecordId & repository_id,
       NVRA( product->name, product->edition, product->arch ), product->deps );
   appendResObjectAttributes( id, product );
 
-  appendTranslatedStringAttribute( id, "Product", "shortName", product->shortName );
-  appendTranslatedStringAttribute( id, "Product", "longName", product->longName );
-  appendStringContainerAttribute( id, "Product", "flags", product->flags.begin(), product->flags.end() );
-  appendStringAttribute( id, "Product", "releasenotesUrl", product->releasenotesUrl.asString() );
-  appendStringContainerAttribute( id, "Product", "updateUrls", product->updateUrls );
-  appendStringContainerAttribute( id, "Product", "extraUrls", product->extraUrls );
-  appendStringContainerAttribute( id, "Product", "optionalUrls", product->optionalUrls );
-  appendStringAttribute( id, "Product", "distributionName", product->distributionName );
-  appendStringAttribute( id, "Product", "distributionEdition", product->distributionEdition.asString() );
+  appendTranslatedStringAttribute( id, attrProductShortName(), product->shortName );
+  appendTranslatedStringAttribute( id, attrProductLongName(), product->longName );
+  appendStringContainerAttribute( id, attrProductFlags(), product->flags.begin(), product->flags.end() );
+  appendStringAttribute( id, attrProductReleasenotesUrl(), product->releasenotesUrl.asString() );
+  appendStringContainerAttribute( id, attrProductUpdateUrls(), product->updateUrls );
+  appendStringContainerAttribute( id, attrProductExtraUrls(), product->extraUrls );
+  appendStringContainerAttribute( id, attrProductOptionalUrls(), product->optionalUrls );
+  appendStringAttribute( id, attrProductDistributionName(), product->distributionName );
+  appendStringAttribute( id, attrProductDistributionEdition(), product->distributionEdition.asString() );
   return id;
 }
 
@@ -407,10 +427,34 @@ RecordId CacheStore::consumeFilelist( const data::RecordId & repository_id,
   return data::noRecordId;
 }
 
+void CacheStore::updatePackageLang( const data::RecordId & resolvable_id,
+				    const data::Packagebase_Ptr & data_r )
+{
+  appendTranslatedStringAttribute( resolvable_id, attrResObjectSummary(),          data_r->summary );
+  appendTranslatedStringAttribute( resolvable_id, attrResObjectDescription(),      data_r->description );
+  appendTranslatedStringAttribute( resolvable_id, attrResObjectLicenseToConfirm(), data_r->licenseToConfirm );
+  appendTranslatedStringAttribute( resolvable_id, attrResObjectInsnotify(),        data_r->insnotify );
+  appendTranslatedStringAttribute( resolvable_id, attrResObjectDelnotify(),        data_r->delnotify );
+}
+
 RecordId CacheStore::appendResolvable( const RecordId &repository_id,
                                        const Resolvable::Kind &kind,
                                        const NVRA &nvra,
                                        const data::Dependencies &deps )
+{
+  return appendResolvable( repository_id,
+                           kind,
+                           nvra,
+                           deps,
+                           data::noRecordId );
+}
+
+data::RecordId
+    CacheStore::appendResolvable( const data::RecordId &repository_id,
+                                  const Resolvable::Kind &kind,
+                                  const NVRA &nvra,
+                                  const data::Dependencies &deps,
+                                  const data::RecordId &shared_id )
 {
   _pimpl->append_resolvable_cmd->bind( ":name", nvra.name );
   _pimpl->append_resolvable_cmd->bind( ":version", nvra.edition.version() );
@@ -419,6 +463,11 @@ RecordId CacheStore::appendResolvable( const RecordId &repository_id,
   _pimpl->append_resolvable_cmd->bind( ":arch", lookupOrAppendType("arch", nvra.arch.asString()) );
   _pimpl->append_resolvable_cmd->bind( ":kind", lookupOrAppendType("kind", kind.asString()) );
   _pimpl->append_resolvable_cmd->bind( ":repository_id", repository_id );
+
+  if ( shared_id == data::noRecordId )
+    _pimpl->append_resolvable_cmd->bind(":shared_id");
+  else
+    _pimpl->append_resolvable_cmd->bind( ":shared_id", shared_id );
 
   _pimpl->append_resolvable_cmd->executenonquery();
 
@@ -430,8 +479,7 @@ RecordId CacheStore::appendResolvable( const RecordId &repository_id,
   _pimpl->insert_resolvable_in_repository_cmd->bind(":resolvable_id", id);
   _pimpl->insert_resolvable_in_repository_cmd->executenonquery();*/
 
-  return static_cast<RecordId>(id);
-  return 1;
+  return id;
 }
 
 void CacheStore::appendDependencies( const RecordId &resolvable_id, const data::Dependencies &deps )
@@ -481,31 +529,6 @@ void CacheStore::appendDependency( const RecordId &resolvable_id, zypp::Dep dept
   }
 }
 
-// RecordId CacheStore::lookupOrAppendNamedDependencyEntry( const RecordId name_id, const Edition &edition, const zypp::Rel &rel )
-// {
-//   _pimpl->select_named_dependency_cmd->bind( ":name_id", name_id);
-//   _pimpl->select_named_dependency_cmd->bind( ":version", edition.version() );
-//   _pimpl->select_named_dependency_cmd->bind( ":release", edition.release() );
-//   _pimpl->select_named_dependency_cmd->bind( ":epoch", static_cast<int>( edition.epoch() ) );
-//   _pimpl->select_named_dependency_cmd->bind( ":relation", zypp_rel2db_rel( rel ) );
-//   long long id = 0;
-//   try {
-//     id = _pimpl->select_named_dependency_cmd->executeint64();
-//   }
-//   catch ( const sqlite3x::database_error &e )
-//   {
-//     // does not exist
-//     _pimpl->append_named_dependency_entry_cmd->bind( ":name_id", name_id);
-//     _pimpl->append_named_dependency_entry_cmd->bind( ":version", edition.version() );
-//     _pimpl->append_named_dependency_entry_cmd->bind( ":release", edition.release() );
-//     _pimpl->append_named_dependency_entry_cmd->bind( ":epoch", static_cast<int>( edition.epoch() ) );
-//     _pimpl->append_named_dependency_entry_cmd->bind( ":relation", zypp_rel2db_rel( rel ) );
-//     _pimpl->append_named_dependency_entry_cmd->executenonquery();
-//     id = _pimpl->con.insertid();
-//     return static_cast<RecordId>(id);
-//   }
-//   return static_cast<RecordId>(id);
-// }
 
 void CacheStore::appendNamedDependency( const RecordId &resolvable_id, zypp::Dep deptype, capability::NamedCap::Ptr cap )
 {
@@ -558,6 +581,9 @@ void CacheStore::appendHalDependency( const RecordId &resolvable_id,
   if ( !cap )
     ZYPP_THROW(Exception("Null HAL capability"));
 
+  MIL << "HAL cap [ rid: " << resolvable_id << " | deptype: " << deptype << " | cap: "
+    << cap << endl;
+
   _pimpl->append_hal_dependency_cmd->bind( ":resolvable_id", resolvable_id );
   _pimpl->append_hal_dependency_cmd->bind( ":dependency_type", lookupOrAppendType("deptype", deptype.asString()) );
   _pimpl->append_hal_dependency_cmd->bind( ":refers_kind", lookupOrAppendType("kind", cap->refers().asString()) );
@@ -603,7 +629,7 @@ void CacheStore::appendUnknownDependency( const RecordId &resolvable_id,
   _pimpl->append_other_dependency_cmd->bind( ":refers_kind", lookupOrAppendType("kind", cap->refers().asString()) );
   _pimpl->append_other_dependency_cmd->bind( ":value", cap->encode());
 
-  _pimpl->append_hal_dependency_cmd->executenonquery();
+  _pimpl->append_other_dependency_cmd->executenonquery();
   //delete cmd;
 }
 
@@ -615,10 +641,10 @@ RecordId CacheStore::appendPatchRpm(const zypp::data::RecordId &repository_id, c
 
   //! \todo what's this? _pimpl->insert_patchrpm_cmd->bind(":media_nr", ???);
   _pimpl->insert_patchrpm_cmd->bind(":repository_id", repository_id);
-  _pimpl->insert_patchrpm_cmd->bind(":location", prpm->location.filePath.asString());
-  _pimpl->insert_patchrpm_cmd->bind(":checksum", prpm->location.fileChecksum.checksum());
+  _pimpl->insert_patchrpm_cmd->bind(":location", prpm->location.filename().asString());
+  _pimpl->insert_patchrpm_cmd->bind(":checksum", prpm->location.checksum().checksum());
   //! \todo checksum type
-  _pimpl->insert_patchrpm_cmd->bind(":download_size", static_cast<ByteCount::SizeType>(prpm->location.fileSize));
+  _pimpl->insert_patchrpm_cmd->bind(":download_size", static_cast<ByteCount::SizeType>(prpm->location.downloadSize()));
   _pimpl->insert_patchrpm_cmd->bind(":build_time", prpm->buildTime.asSeconds());
   _pimpl->insert_patchrpm_cmd->executenonquery();
 
@@ -645,10 +671,10 @@ RecordId CacheStore::appendDeltaRpm(const zypp::data::RecordId &repository_id, c
 
   //! \todo what's this? _pimpl->insert_deltarpm_cmd->bind(":media_nr", ???);
   _pimpl->insert_deltarpm_cmd->bind(":repository_id", repository_id);
-  _pimpl->insert_deltarpm_cmd->bind(":location", drpm->location.filePath.asString());
-  _pimpl->insert_deltarpm_cmd->bind(":checksum", drpm->location.fileChecksum.checksum());
+  _pimpl->insert_deltarpm_cmd->bind(":location", drpm->location.filename().asString());
+  _pimpl->insert_deltarpm_cmd->bind(":checksum", drpm->location.checksum().checksum());
   //! \todo checksum type
-  _pimpl->insert_deltarpm_cmd->bind(":download_size", static_cast<ByteCount::SizeType>(drpm->location.fileSize));
+  _pimpl->insert_deltarpm_cmd->bind(":download_size", static_cast<ByteCount::SizeType>(drpm->location.downloadSize()));
   _pimpl->insert_deltarpm_cmd->bind(":build_time", drpm->buildTime.asSeconds());
 
   _pimpl->insert_deltarpm_cmd->bind(":baseversion_version", drpm->baseVersion.edition.version());
@@ -664,26 +690,6 @@ RecordId CacheStore::appendDeltaRpm(const zypp::data::RecordId &repository_id, c
   return id;
 }
 
-
-// RecordId CacheStore::appendDependencyEntry( const RecordId &resolvable_id, zypp::Dep deptype, const Resolvable::Kind &refers )
-// {
-//   //DBG << "rid: " << resolvable_id << " deptype: " << deptype << " " << "refers: " << refers << endl;
-//   _pimpl->insert_dependency_entry_cmd->bind( ":resolvable_id", resolvable_id );
-//
-//   db::DependencyType dt = zypp_deptype2db_deptype(deptype);
-//   if ( dt == db::DEP_TYPE_UNKNOWN )
-//   {
-//     ZYPP_THROW(Exception("Unknown depenency type"));
-//   }
-//
-//   _pimpl->insert_dependency_entry_cmd->bind( ":dependency_type", zypp_deptype2db_deptype(deptype) );
-//   _pimpl->insert_dependency_entry_cmd->bind( ":refers_kind", zypp_kind2db_kind(refers) );
-//
-//   _pimpl->insert_dependency_entry_cmd->executenonquery();
-//   //delete cmd;
-//   long long id = _pimpl->con.insertid();
-//   return static_cast<RecordId>(id);
-// }
 
 RecordId CacheStore::lookupOrAppendFile( const Pathname &path )
 {
@@ -1029,8 +1035,7 @@ void CacheStore::appendStringAttributeTranslation( const data::RecordId &resolva
   // don't bother with writing if the string is empty
   if (text.empty()) return;
 
-  RecordId lang_id = lookupOrAppendType("lang",
-      locale.code().empty() ? "none" : locale.code() );
+  RecordId lang_id = lookupOrAppendType("lang", locale.code() );
   RecordId type_id = lookupOrAppendType( klass, name );
   appendStringAttribute( resolvable_id, lang_id, type_id, text );
 }

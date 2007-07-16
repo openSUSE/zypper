@@ -52,12 +52,12 @@ RPMPackageImpl::RPMPackageImpl(
     _type("rpm"), // FIXME in the future
     _filenames(data->tag_filenames()),
 //	_disk_usage(data->diskusage),
-    _size(data->tag_size()),
-    _archivesize(data->tag_archivesize())
+    _size(data->tag_size())
 {
   // we know we are reading english.
   _description.setText(data->tag_description(), Locale("en"));
   data->tag_du(_disk_usage);
+  _location.setDownloadSize(data->tag_archivesize());
 }
 
 /** Package summary */
@@ -133,7 +133,7 @@ Changelog RPMPackageImpl::changelog() const
 }
 
 /** */
-Pathname RPMPackageImpl::location() const
+OnMediaLocation RPMPackageImpl::location() const
 {
   return _location;
 }
@@ -188,12 +188,6 @@ ByteCount RPMPackageImpl::sourcesize() const
 }
 
 /** */
-ByteCount RPMPackageImpl::archivesize() const
-{
-  return _archivesize;
-}
-
-/** */
 std::list<std::string> RPMPackageImpl::filenames() const
 {
   return _filenames;
@@ -212,9 +206,9 @@ DiskUsage RPMPackageImpl::diskUsage() const
 }
 
 /** */
-Source_Ref RPMPackageImpl::source() const
+Repository RPMPackageImpl::repository() const
 {
-  return _source;
+  return _repository;
 }
 
 } // namespace rpm

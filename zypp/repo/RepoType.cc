@@ -21,7 +21,8 @@ namespace repo
 
   const RepoType RepoType::RPMMD(RepoType::RPMMD_e);
   const RepoType RepoType::YAST2(RepoType::YAST2_e);
-  //const RepoType RepoType::NONE(RepoType::NONE_e);
+  const RepoType RepoType::RPMPLAINDIR(RepoType::RPMPLAINDIR_e);
+  const RepoType RepoType::NONE(RepoType::NONE_e);
 
   RepoType::RepoType(const std::string & strval_r)
     : _type(parse(strval_r))
@@ -39,6 +40,7 @@ namespace repo
       _table["susetags"] = RepoType::YAST2_e;
       _table["yast"] = RepoType::YAST2_e;
       _table["yast2"] = RepoType::YAST2_e;
+      _table["plaindir"] = RepoType::RPMPLAINDIR_e;
       _table["NONE"] = _table["none"] = RepoType::NONE_e;
     }
 
@@ -61,6 +63,7 @@ namespace repo
       // initialize it
       _table[RPMMD_e]   = "rpm-md";
       _table[YAST2_e]   = "yast2";
+      _table[RPMPLAINDIR_e]   = "plaindir";
       _table[NONE_e] = "NONE";
     }
     return _table[_type];

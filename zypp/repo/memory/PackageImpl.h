@@ -13,7 +13,6 @@
 #define ZYPP_SOURCE_MEMORYPACKAGEIMPL_H
 
 #include "zypp/detail/PackageImplIf.h"
-#include "zypp/Source.h"
 #include "zypp/data/ResolvableData.h"
 #include "zypp/DiskUsage.h"
 #include "zypp/CheckSum.h"
@@ -45,13 +44,10 @@ namespace zypp
         virtual TranslatedText licenseToConfirm() const;
         virtual Vendor vendor() const;
         virtual ByteCount size() const;
-        virtual ByteCount archivesize() const;
         virtual bool installOnly() const;
         virtual Date buildtime() const;
         virtual Date installtime() const;
-        virtual unsigned mediaNr() const;
-
-        virtual CheckSum checksum() const;
+        
         virtual std::string buildhost() const;
         virtual std::string distribution() const;
         virtual Label license() const;
@@ -59,7 +55,7 @@ namespace zypp
         virtual PackageGroup group() const;
         virtual Keywords keywords() const;
         virtual Changelog changelog() const;
-        virtual Pathname location() const;
+        virtual OnMediaLocation location() const;
         virtual std::string url() const;
         virtual std::string os() const;
         virtual Text prein() const;
@@ -81,19 +77,17 @@ namespace zypp
         TranslatedText _license_to_confirm;
         Vendor _vendor;
         ByteCount _size;
-        ByteCount _archivesize;
         bool _install_only;
         Date _buildtime;
         Date _installtime;
-        unsigned _media_nr;
+        
         
         PackageGroup _group;
         Keywords _keywords;
         std::list<std::string> _authors;
         Label _license;
-        Pathname _location;
         DiskUsage _diskusage;
-        CheckSum _checksum;
+        OnMediaLocation _location;
         private:
       };
       ///////////////////////////////////////////////////////////////////

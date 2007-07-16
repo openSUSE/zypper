@@ -26,7 +26,7 @@ namespace zypp
   //
   //	CLASS NAME : OnMediaLocation
   //
-  /** 
+  /**
     * Describes a path ona certain media amongs as the information
     * required to download it, like its media number, checksum and
     * size.
@@ -43,22 +43,27 @@ namespace zypp
     {}
 
   public:
-    unsigned          medianr()      const { return _medianr; }
-    const Pathname &  filename()     const { return _filename; }
-    const CheckSum &  checksum()     const { return _checksum; }
-    const ByteCount & downloadsize() const { return _downloadsize; }
+    unsigned          medianr()        const { return _medianr; }
+    const Pathname &  filename()       const { return _filename; }
+    const CheckSum &  checksum()       const { return _checksum; }
+    const ByteCount & downloadSize()   const { return _downloadsize; }
+    const ByteCount & openSize() const { return _opendownloadsize; }
+    const CheckSum &  openChecksum()     const { return _openchecksum; }
 
   public:
-    OnMediaLocation & medianr( unsigned val_r )               { _medianr = val_r; return *this; }
-    OnMediaLocation & filename( const Pathname & val_r )      { _filename = val_r; return *this; }
-    OnMediaLocation & checksum( const CheckSum & val_r )      { _checksum = val_r; return *this; }
-    OnMediaLocation & downloadsize( const ByteCount & val_r ) { _downloadsize = val_r; return *this; }
-
+    OnMediaLocation & setMedianr( unsigned val_r )                 { _medianr = val_r; return *this; }
+    OnMediaLocation & setFilename( const Pathname & val_r )        { _filename = val_r; return *this; }
+    OnMediaLocation & setChecksum( const CheckSum & val_r )        { _checksum = val_r; return *this; }
+    OnMediaLocation & setDownloadSize( const ByteCount & val_r )   { _downloadsize = val_r; return *this; }
+    OnMediaLocation & setOpenChecksum( const CheckSum & val_r )      { _openchecksum = val_r; return *this; }
+    OnMediaLocation & setOpenSize( const ByteCount & val_r ) { _opendownloadsize = val_r; return *this; }
   private:
     unsigned  _medianr;
     Pathname  _filename;
     CheckSum  _checksum;
     ByteCount _downloadsize;
+    ByteCount _opendownloadsize;
+    CheckSum _openchecksum;
   };
   ///////////////////////////////////////////////////////////////////
 

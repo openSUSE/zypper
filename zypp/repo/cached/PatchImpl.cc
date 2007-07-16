@@ -15,6 +15,7 @@
 #include "zypp/base/Logger.h"
 #include "zypp/repo/RepositoryImpl.h"
 #include "PatchImpl.h"
+#include "zypp/cache/CacheAttributes.h"
 
 
 using namespace std;
@@ -49,67 +50,53 @@ PatchImpl::repository() const
 
 TranslatedText PatchImpl::summary() const
 {
-  return _repository->resolvableQuery().queryTranslatedStringAttribute( _id, "ResObject", "summary" );
+  return _repository->resolvableQuery().queryTranslatedStringAttribute( _id, cache::attrResObjectSummary() );
 }
 
 TranslatedText PatchImpl::description() const
 {
-  return _repository->resolvableQuery().queryTranslatedStringAttribute( _id, "ResObject", "description" );
+  return _repository->resolvableQuery().queryTranslatedStringAttribute( _id, cache::attrResObjectDescription() );
 }
 
 TranslatedText PatchImpl::insnotify() const
 {
-  return _repository->resolvableQuery().queryTranslatedStringAttribute( _id, "ResObject", "insnotify" );
+  return _repository->resolvableQuery().queryTranslatedStringAttribute( _id, cache::attrResObjectInsnotify() );
 }
 
 TranslatedText PatchImpl::delnotify() const
 {
-  return _repository->resolvableQuery().queryTranslatedStringAttribute( _id, "ResObject", "delnotify" );
+  return _repository->resolvableQuery().queryTranslatedStringAttribute( _id, cache::attrResObjectDelnotify() );
 }
 
 TranslatedText PatchImpl::licenseToConfirm() const
 {
-  return _repository->resolvableQuery().queryTranslatedStringAttribute( _id, "ResObject", "licenseToConfirm" );
+  return _repository->resolvableQuery().queryTranslatedStringAttribute( _id, cache::attrResObjectLicenseToConfirm() );
 }
 
 Vendor PatchImpl::vendor() const
 {
-  return _repository->resolvableQuery().queryStringAttribute( _id, "ResObject", "vendor" );
+  return _repository->resolvableQuery().queryStringAttribute( _id, cache::attrResObjectVendor() );
 }
 
 
 ByteCount PatchImpl::size() const
 {
-  return _repository->resolvableQuery().queryNumericAttribute( _id, "ResObject", "size" );
-}
-
-ByteCount PatchImpl::archivesize() const
-{
-  return _repository->resolvableQuery().queryNumericAttribute( _id, "ResObject", "archivesize" );
+  return _repository->resolvableQuery().queryNumericAttribute( _id, cache::attrResObjectInstalledSize() );
 }
 
 bool PatchImpl::installOnly() const
 {
-  return _repository->resolvableQuery().queryBooleanAttribute( _id, "ResObject", "installOnly" );
+  return _repository->resolvableQuery().queryBooleanAttribute( _id, cache::attrResObjectInstallOnly() );
 }
 
 Date PatchImpl::buildtime() const
 {
-  return _repository->resolvableQuery().queryNumericAttribute( _id, "ResObject", "buildtime" );
+  return _repository->resolvableQuery().queryNumericAttribute( _id, cache::attrResObjectBuildTime() );
 }
 
 Date PatchImpl::installtime() const
 {
   return Date();
-}
-
-//////////////////////////////////////////
-// DEPRECATED
-//////////////////////////////////////////
-
-Source_Ref PatchImpl::source() const
-{
-  return Source_Ref::noSource;
 }
 
 unsigned PatchImpl::mediaNr() const
@@ -123,36 +110,41 @@ unsigned PatchImpl::mediaNr() const
 
 std::string PatchImpl::id() const
 {
-  return _repository->resolvableQuery().queryStringAttribute( _id, "Patch", "id" );
+#warning DUBIOUS ATTRIBUTE
+  return "";
+  //return _repository->resolvableQuery().queryStringAttribute( _id, cache::attrPatchId() );
 }
 
 Date PatchImpl::timestamp() const
 {
-  return _repository->resolvableQuery().queryNumericAttribute( _id, "Patch", "timestamp" );
+  return _repository->resolvableQuery().queryNumericAttribute( _id, cache::attrPatchTimestamp() );
 }
 
 std::string PatchImpl::category() const
 {
-  return _repository->resolvableQuery().queryStringAttribute( _id, "Patch", "category" );
+  return _repository->resolvableQuery().queryStringAttribute( _id, cache::attrPatchCategory() );
 }
 
 bool PatchImpl::reboot_needed() const
 {
-  return _repository->resolvableQuery().queryBooleanAttribute( _id, "Patch", "rebootNeeded" );
+  return _repository->resolvableQuery().queryBooleanAttribute( _id, cache::attrPatchRebootNeeded() );
 }
 
 bool PatchImpl::affects_pkg_manager() const
 {
-  return _repository->resolvableQuery().queryBooleanAttribute( _id, "Patch", "affectsPkgManager" );
+  return _repository->resolvableQuery().queryBooleanAttribute( _id, cache::attrPatchAffectsPkgManager() );
 }
 
 bool PatchImpl::interactive() const
 {
-  return _repository->resolvableQuery().queryBooleanAttribute( _id, "Patch", "interactive" );
+#warning DUBIOUS ATTRIBUTE
+  return false;
+  //return _repository->resolvableQuery().queryBooleanAttribute( _id, cache::attrPatchInteractive() );
 }
 
 PatchImpl::AtomList PatchImpl::all_atoms() const
 {
+#warning DUBIOUS ATTRIBUTE
   return PatchImpl::AtomList();
 }
 

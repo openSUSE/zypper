@@ -28,6 +28,7 @@
 #include "zypp/base/PtrTypes.h"
 #include "zypp/RepoStatus.h"
 #include "zypp/ProgressData.h"
+#include "zypp/cache/Attribute.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -72,8 +73,10 @@ namespace zypp
        */
       void commit();
 
+      /** \name Implementation of the \ref ResolvableDataConsumer interface. */
+      //@{
       /**
-       * Implementation of the \ref ResolvableConsumer interface
+       * Implementation of the \ref ResolvableDataConsumer interface
        *
        * Consume a package, inserting it in the cache, under
        * \param repository_id ownership.
@@ -83,7 +86,7 @@ namespace zypp
 					    const data::Package_Ptr & package);
 
       /**
-       * Implementation of the \ref ResolvableConsumer interface
+       * Implementation of the \ref ResolvableDataConsumer interface
        *
        * Consume a source package, inserting it in the cache, under
        * \param catalog_id ownership.
@@ -93,7 +96,7 @@ namespace zypp
 	                                           const data::SrcPackage_Ptr & srcpackage );
 
       /**
-       * Implementation of the \ref ResolvableConsumer interface
+       * Implementation of the \ref ResolvableDataConsumer interface
        *
        * Consume a patch, inserting it in the cache, under
        * \param repository_id ownership.
@@ -103,7 +106,7 @@ namespace zypp
 					   const data::Patch_Ptr & patch );
 
       /**
-       * Implementation of the \ref ResolvableConsumer interface.
+       * Implementation of the \ref ResolvableDataConsumer interface.
        *
        * Consume a package atom, inserting it in the cache, under
        * \a repository_id ownership.
@@ -118,7 +121,7 @@ namespace zypp
 	                                         const data::PackageAtom_Ptr & atom );
 
       /**
-       * Implementation of the \ref ResolvableConsumer interface
+       * Implementation of the \ref ResolvableDataConsumer interface
        *
        * Consume a message, inserting it in the cache, under
        * \param repository_id ownership.
@@ -128,7 +131,7 @@ namespace zypp
 					     const data::Message_Ptr & message);
 
       /**
-       * Implementation of the \ref ResolvableConsumer interface
+       * Implementation of the \ref ResolvableDataConsumer interface
        *
        * Consume a script, inserting it in the cache, under
        * \param repository_id ownership.
@@ -138,7 +141,7 @@ namespace zypp
 					    const data::Script_Ptr & script);
 
       /**
-       * Implementation of the \ref ResolvableConsumer interface
+       * Implementation of the \ref ResolvableDataConsumer interface
        *
        * Consume a pattern, inserting it in the cache, under
        * \param repository_id ownership.
@@ -148,7 +151,7 @@ namespace zypp
 					     const data::Pattern_Ptr & pattern );
 
       /**
-       * Implementation of the \ref ResolvableConsumer interface
+       * Implementation of the \ref ResolvableDataConsumer interface
        *
        * Consume a product, inserting it in the cache, under
        * \param repository_id ownership.
@@ -158,7 +161,7 @@ namespace zypp
 					     const data::Product_Ptr & product );
 
       /**
-       * Implementation of the \ref ResolvableConsumer interface
+       * Implementation of the \ref ResolvableDataConsumer interface
        *
        * Consume changelog of a resolvable, inserting it in the cache.
        * \param repository_id ownership.
@@ -171,7 +174,7 @@ namespace zypp
 					       const Changelog & changelog );
 
       /**
-       * Implementation of the \ref ResolvableConsumer interface
+       * Implementation of the \ref ResolvableDataConsumer interface
        *
        * Consume filelist of a resolvable, inserting it in the cache.
        * \param repository_id ownership.
@@ -183,6 +186,18 @@ namespace zypp
 					      const data::Resolvable_Ptr & resolvable,
 					      const data::Filenames & filenames );
 
+      /**
+       * Implementation of the \ref ResolvableDataConsumer interface
+       *
+       * Update a packages language specific data (summary, description,
+       * EULA, ins/delnotify).
+       * \param resolvable_id resolvable to be updated
+       * \param data_r        Package data
+       */
+      virtual void updatePackageLang( const data::RecordId & resolvable_id,
+				      const data::Packagebase_Ptr & data_r );
+      //@}
+      public:
       /**
        * Appends a resolvable to the store.
        *
@@ -212,6 +227,21 @@ namespace zypp
                                        const NVRA &nvra,
                                        const data::Dependencies &deps );
 
+      /**
+       * \short Appends a resolvable, and sets shared data with another one
+       *
+       * \see appendResolvable
+       * \param shared_id Resolvable that provides data in case
+       * this one does not provide an attribute
+       *
+       * \note Not all attributes can be shared. \ref shared_id is just
+       * a hint for the queries.
+       */
+      data::RecordId appendResolvable( const data::RecordId &repository_id,
+                                       const Resolvable::Kind &kind,
+                                       const NVRA &nvra,
+                                       const data::Dependencies &deps,
+                                       const data::RecordId &shared_id );
       /**
        * Adds dependencies to the store
        *
@@ -385,6 +415,9 @@ namespace zypp
        */
       data::RecordId lookupOrAppendType( const std::string &klass,
                                          const std::string &name );
+      /** \overload */
+      data::RecordId lookupOrAppendType( const Attribute &attr )
+      { return lookupOrAppendType( attr.klass, attr.name ); }
 
       /**
        * Returns the record id of a repository (Source)
@@ -426,6 +459,11 @@ namespace zypp
                                    const std::string &klass,
                                    const std::string &name,
                                    int value );
+      /** \overload */
+      void appendNumericAttribute( const data::RecordId &resolvable_id,
+                                   const Attribute& attr,
+                                   int value )
+      { appendNumericAttribute( resolvable_id, attr.klass, attr.name, value ); }
 
       /**
        * Append a translated string value to a resolvable
@@ -438,6 +476,11 @@ namespace zypp
                                             const std::string &klass,
                                             const std::string &name,
                                             const TranslatedText &text );
+      /** \overload */
+      void appendTranslatedStringAttribute( const data::RecordId &resolvable_id,
+                                            const Attribute& attr,
+                                            const TranslatedText &text )
+      { appendTranslatedStringAttribute( resolvable_id, attr.klass, attr.name, text ); }
 
       /**
        * Append a string value to a resolvable
@@ -452,6 +495,12 @@ namespace zypp
                                              const std::string &klass,
                                              const std::string &name,
                                              const std::string &text );
+      /** \overload */
+      void appendStringAttributeTranslation( const data::RecordId &resolvable_id,
+                                             const Locale &locale,
+                                             const Attribute& attr,
+                                             const std::string &text )
+      { appendStringAttributeTranslation( resolvable_id, locale, attr.klass, attr.name, text ); }
 
       /**
        * Append a string value to a resolvable
@@ -464,6 +513,11 @@ namespace zypp
                                   const std::string &klass,
                                   const std::string &name,
                                   const std::string &value );
+      /** \overload */
+      void appendStringAttribute( const data::RecordId &resolvable_id,
+                                  const Attribute& attr,
+                                  const std::string &value )
+      { appendStringAttribute( resolvable_id, attr.klass, attr.name, value ); }
 
       /**
        * Append a string value to a resolvable
@@ -474,7 +528,6 @@ namespace zypp
       void appendStringAttribute( const data::RecordId &resolvable_id,
                                   const data::RecordId &type_id,
                                   const std::string &value );
-
 
       /**
        * Append strings from _Iterator to a resolvable.
@@ -501,6 +554,13 @@ namespace zypp
         std::string value = str::join(begin, end, ZConfig().cacheDBSplitJoinSeparator());
         appendStringAttribute( resolvable_id, klass, name, value );
       }
+      /** \overload */
+      template <class _Iterator>
+      void appendStringContainerAttribute( const data::RecordId &resolvable_id,
+                                           const Attribute& attr,
+                                           _Iterator begin,
+                                           _Iterator end )
+      { appendStringContainerAttribute( resolvable_id, attr.klass, attr.name, begin, end ); }
 
       /**
        * Append strings from a _Container to a resolvable.
@@ -516,6 +576,12 @@ namespace zypp
                                            const std::string &name,
                                            const _Container & container )
       {	appendStringContainerAttribute( resolvable_id, klass, name, container.begin(), container.end() ); }
+      /** \overload */
+      template <class _Container>
+      void appendStringContainerAttribute( const data::RecordId &resolvable_id,
+                                           const Attribute& attr,
+                                           const _Container & container )
+      { appendStringContainerAttribute( resolvable_id, attr.klass, attr.name, container ); }
 
        /**
        * Update a known repository checksum and timestamp
@@ -676,6 +742,12 @@ namespace zypp
                                    const std::string & klass,
                                    const std::string & name,
                                    bool value);
+      /** \overload */
+      void appendBooleanAttribute( const data::RecordId & resolvable_id,
+                                   const Attribute& attr,
+                                   bool value)
+      { appendBooleanAttribute( resolvable_id, attr.klass, attr.name, value ); }
+
 
       /** \name Detail Attributes Inserters
        * These functions are used by ResolvableConsumer interface functions

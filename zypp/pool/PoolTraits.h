@@ -17,13 +17,16 @@
 
 #include "zypp/PoolItem.h"
 #include "zypp/Capability.h"
-#include "zypp/CapAndItem.h"
 #include "zypp/Dep.h"
 #include "zypp/ResStatus.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
+
+  class CapAndItem;
+  class Repository;
+
   ///////////////////////////////////////////////////////////////////
   namespace pool
   { /////////////////////////////////////////////////////////////////
@@ -77,7 +80,7 @@ namespace zypp
       typedef ItemContainerT::const_iterator            byName_iterator;
 
       // internal organization
-      typedef std::list<CapAndItem>			CapItemContainerT;	// (why,who) pairs
+      typedef std::list<zypp::CapAndItem>		CapItemContainerT;	// (why,who) pairs
       typedef std::map<std::string,CapItemContainerT>	CapItemStoreT;		// capability.index -> (why,who) pairs
       typedef std::map<Dep,CapItemStoreT>		DepCapItemContainerT;	// Dep -> (capability.index -> (why,who) pairs)
 
@@ -87,6 +90,10 @@ namespace zypp
       /** hashed by capability index */
       typedef const_capitemiterator                     byCapabilityIndex_iterator;
 
+      /* list of known Repositories */
+      typedef std::set<Repository>                      RepoContainerT;
+      typedef RepoContainerT::const_iterator		repository_iterator;
+
       typedef PoolImpl                   Impl;
       typedef shared_ptr<PoolImpl>       Impl_Ptr;
       typedef shared_ptr<const PoolImpl> Impl_constPtr;
@@ -95,7 +102,7 @@ namespace zypp
 
       /** Map of CapSet and "who" has set it*/
       typedef std::map<ResStatus::TransactByValue,CapSet>		AdditionalCapSet;
-	
+
     };
     ///////////////////////////////////////////////////////////////////
 

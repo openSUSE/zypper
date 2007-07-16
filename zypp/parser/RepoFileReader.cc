@@ -58,8 +58,20 @@ namespace zypp
             info.setEnabled( it->second == "1" );
           else if ( it->first == "baseurl" )
             info.addBaseUrl( Url(it->second) );
+          else if ( it->first == "path" )
+            info.setPath( Pathname(it->second) );
           else if ( it->first == "type" )
             info.setType(repo::RepoType(it->second));
+          else if ( it->first == "autorefresh" )
+            info.setAutorefresh( it->second == "1" );
+          else if ( it->first == "mirrorlist" )
+            info.setMirrorListUrl(Url(it->second));
+          else if ( it->first == "gpgkey" )
+            info.setGpgKeyUrl( Url(it->second) );
+          else if ( it->first == "gpgcheck" )
+            info.setGpgCheck( it->second == "1" );
+          else
+            ERR << "Unknown attribute " << it->second << " ignored" << endl;
         }
         MIL << "Linking repo info with file " << file << endl;
         info.setFilepath(file);

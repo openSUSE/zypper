@@ -65,7 +65,7 @@ namespace zypp
     class PackageProvider : private base::NonCopyable
     {
       typedef shared_ptr<void>                                       ScopedGuard;
-      typedef callback::SendReport<source::DownloadResolvableReport> Report;
+      typedef callback::SendReport<repo::DownloadResolvableReport> Report;
 
       typedef detail::ResImplTraits<Package::Impl>::constPtr PackageImpl_constPtr;
       typedef packagedelta::DeltaRpm                         DeltaRpm;

@@ -97,12 +97,6 @@ namespace zypp
   std::ostream & Target::dumpOn( std::ostream & str ) const
   { return _pimpl->dumpOn( str ); }
 
-  void Target::getResolvablesToInsDel ( const ResPool pool_r,
-				    PoolItemList & dellist_r,
-				    PoolItemList & instlist_r,
-				    PoolItemList & srclist_r ) const
-  { _pimpl->getResolvablesToInsDel( pool_r, dellist_r, instlist_r, srclist_r ); }
-
   bool Target::setInstallationLogfile(const Pathname & path_r)
   { return _pimpl->setInstallationLogfile(path_r); }
 

@@ -39,13 +39,14 @@ class sqlite3_connection : boost::noncopyable
 private:
   friend class sqlite3_command;
   friend class database_error;
-
   struct sqlite3 *db;
-
 public:
   sqlite3_connection();
   sqlite3_connection(const char *db);
   sqlite3_connection(const wchar_t *db);
+  
+  void setprogresshandler( int, int(*)(void *), void* );
+  
   ~sqlite3_connection();
 
   void open(const char *db);
@@ -56,7 +57,7 @@ public:
   void setbusytimeout(int ms);
 
   void execute(const std::string &sql);
-  
+
   void executenonquery(const char *sql);
   void executenonquery(const wchar_t *sql);
   void executenonquery(const std::string &sql);
@@ -99,6 +100,7 @@ class database_error : public zypp::Exception
 {
 public:
   database_error(const char *msg);
+  database_error(const std::string & msg);
   database_error(sqlite3_connection &con);
 };
 
@@ -174,7 +176,7 @@ public:
   void bind(int index, const void *data, int datalen);
   void bind(int index, const std::string &data);
   void bind(int index, const std::wstring &data);
-  
+
   void bind(const std::string &param);
   void bind(const std::string &param, int data);
   void bind(const std::string &param, long long data);

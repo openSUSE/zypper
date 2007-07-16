@@ -20,6 +20,7 @@
 #include "zypp/parser/susetags/FileReaderBase.h"
 #include "zypp/parser/ParseException.h"
 #include "zypp/data/ResolvableData.h"
+#include "zypp/PathInfo.h"
 
 using std::endl;
 
@@ -32,6 +33,21 @@ namespace zypp
     ///////////////////////////////////////////////////////////////////
     namespace susetags
     { /////////////////////////////////////////////////////////////////
+
+      inline std::string makeSharedIdent( ResolvableTraits::KindType kind_r,
+					  const std::string & name_r,
+					  const Edition & edition_r,
+					  const Arch & arch_r )
+      {
+	std::string ret( kind_r.asString() );
+	ret += ":";
+	ret += name_r;
+	ret += "-";
+	ret += edition_r.asString();
+	ret += ".";
+	ret += arch_r.asString();
+	return ret;
+      }
 
       ///////////////////////////////////////////////////////////////////
       //
@@ -48,7 +64,10 @@ namespace zypp
 	  {}
 
 	public:
-
+	  /** Parsing Capabilities from string is quite expensive. So we
+	   * maintain a little chache to check whether we already parsed some
+	   * raw string. If so, we can reuse the result.
+	   */
 	  struct CapImplCache
 	  {
 	    template<class _Res>

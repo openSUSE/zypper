@@ -39,6 +39,8 @@ namespace data
 
     virtual data::RecordId consumeChangelog    ( const data::RecordId & repository_id, const data::Resolvable_Ptr &, const Changelog & ) = 0;
     virtual data::RecordId consumeFilelist     ( const data::RecordId & repository_id, const data::Resolvable_Ptr &, const data::Filenames & ) = 0;
+
+    virtual void updatePackageLang( const data::RecordId & resolvable_id, const data::Packagebase_Ptr & data_r ) = 0;
   };
 
 } // namespace parser

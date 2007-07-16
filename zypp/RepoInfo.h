@@ -63,12 +63,14 @@ namespace zypp
   class RepoInfo
   {
     friend std::ostream & operator<<( std::ostream & str, const RepoInfo & obj );
-    
+
     public:
     RepoInfo();
     ~RepoInfo();
     //RepoInfo( const Url & url, const Pathname & path, const std::string & alias = "", boost::tribool autorefresh = boost::indeterminate );
-    
+
+    typedef unsigned long NumericId;
+
     /**
      * unique identifier for this source. If not specified
      * It should be generated from the base url.
@@ -77,52 +79,85 @@ namespace zypp
      * ( [somerepo] )
      */
     std::string alias() const;
-    
+
     /**
      * A Url under which the metadata are located, or a set of mirrors.
      *
      * This can't be empty in order the repository to be valid
      * unless the download of the mirror list succeeds and it
      * contains a valid url.
+     *
+     * \deprecated IMO superfluous as we provide begin/end iterator.
      */
     std::set<Url> baseUrls() const;
 
+    /**
+     * \short Repository path
+     *
+     * Pathname relative to the base Url where the product/repository
+     * is located
+     *
+     * For medias containing more than one product, or repositories not
+     * located at the root of the media it is important to
+     * know the path of the media root relative to the product directory
+     * so a media verifier can be set for that media.
+     *
+     * It is not mandatory, and the default is /
+     *
+     * \note As a repository can have multiple Urls, the path is unique and
+     * the same for all Urls, so it is assumed all the Urls have the
+     * same media layout.
+     *
+     */
+    Pathname path() const;
+      
     /**
      * Url of a file which contains a list of Urls
      * If empty, the base url will be used.
      */
     Url mirrorListUrl() const;
-    
+
     typedef std::set<Url>::const_iterator urls_const_iterator;
-    
+    typedef std::set<Url>::size_type      urls_size_type;
+
     /**
      * iterator that points at begin of repository urls
      */
     urls_const_iterator baseUrlsBegin() const;
-    
+
     /**
      * iterator that points at end of repository urls
      */
     urls_const_iterator baseUrlsEnd() const;
-    
+
     /**
+     * number of repository urls
+     */
+    urls_size_type baseUrlsSize() const;
+
+     /**
+      * whether repository urls are available
+      */
+    bool baseUrlsEmpty() const;
+
+   /**
      * If enabled is false, then this repository must be ignored as if does
      * not exists, except when checking for duplicate alias.
      */
     boost::tribool enabled() const;
-    
+
     /**
      * If true, the repostory must be refreshed before creating resolvables
      * from it
      */
     boost::tribool autorefresh() const;
-    
+
     /**
      * Type of repository,
-     * 
+     *
      */
     repo::RepoType type() const;
-    
+
     /**
      * \short Repository short label
      *
@@ -139,45 +174,77 @@ namespace zypp
      * infos created in memory.
      */
      Pathname filepath() const;
+      
+     /**
+     * \short Whether to check or not this repository with gpg
+     *
+     * \note This is a just a hint to the application and can
+     * be ignored.
+     *
+     */
+    boost::tribool gpgCheck() const;
+
+    /**
+     * \short Key to use for gpg checking of this repository
+     *
+     * \param url Url to the key in ASCII armored format
+     *
+     * \note This is a just a hint to the application and can
+     * be ignored.
+     *
+     */
+     Url gpgKeyUrl() const;
     
     /**
      * Add a base url. \see baseUrls
      * \param url The base url for the repository.
      *
-     * To edit or remove urls, create a new RepoInfo instead.
+     * To recreate the base URLs list, use \ref setBaseUrl(const Url &) followed
+     * by addBaseUrl().
      */
     RepoInfo & addBaseUrl( const Url &url );
+
+    /**
+     * Clears current base URL list and adds \a url.
+     */
+    RepoInfo & setBaseUrl( const Url &url );
+
+    /**
+     * set the product path. \see path()
+     * \param path the path to the product
+     */
+    RepoInfo & setPath( const Pathname &path );
     
     /**
      * Set mirror list url. \see mirrorListUrl
      * \param url The base url for the list
      */
     RepoInfo & setMirrorListUrl( const Url &url );
-    
+
     /**
      * enable or disable the repository \see enabled
      * \param enabled
      */
     RepoInfo & setEnabled( boost::tribool enabled );
-    
+
     /**
      * enable or disable autorefresh \see autorefresh
      * \param enabled
      */
     RepoInfo & setAutorefresh( boost::tribool autorefresh );
-    
+
     /**
      * set the repository alias \see alias
      * \param alias
      */
     RepoInfo & setAlias( const std::string &alias );
-    
+
     /**
      * set the repository type \see type
      * \param t
      */
     RepoInfo & setType( const repo::RepoType &t );
-    
+
     /**
      * set the repository name \see name
      * \param name
@@ -189,9 +256,38 @@ namespace zypp
      * \param path File path
      */
     RepoInfo & setFilepath( const Pathname &filename );
+
+    /**
+     * \short Whether to check or not this repository with gpg
+     *
+     * \param check true (check) or false (dont'check)
+     *
+     * \note This is a just a hint to the application and can
+     * be ignored.
+     *
+     */
+    RepoInfo & setGpgCheck( boost::tribool check );
     
+    /**
+     * \short Key to use for gpg checking of this repository
+     *
+     * \param url Url to the key in ASCII armored format
+     *
+     * \note This is a just a hint to the application and can
+     * be ignored.
+     *
+     */
+    RepoInfo & setGpgKeyUrl( const Url &gpgkey );
+    
+    /**
+     * Write a human-readable representation of this RepoInfo object
+     * into the \a str stream. Useful for logging.
+     */
     std::ostream & dumpOn( std::ostream & str ) const;
-    
+
+    /**
+     * Write this RepoInfo object into \a str in a <tr>.repo</tt> file format.
+     */
     std::ostream & dumpRepoOn( std::ostream & str ) const;
 
     class Impl;
@@ -205,7 +301,7 @@ namespace zypp
   std::ostream & operator<<( std::ostream & str, const RepoInfo & obj );
 
   typedef std::list<RepoInfo> RepoInfoList;
-  
+
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////

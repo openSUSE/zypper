@@ -33,18 +33,46 @@ RepoStatus Downloader::status()
 void Downloader::download( const Pathname &dest_dir,
                            const ProgressData::ReceiverFnc & progress )
 {
-  MediaSetAccess media(_url, _path);
+  MediaSetAccess media(_url);
   Fetcher fetcher;
-  fetcher.enqueue( OnMediaLocation().filename("/content") );
+  
+  fetcher.enqueue( OnMediaLocation().setFilename( "/media.1/media") );
+  fetcher.start( dest_dir, media );
+  fetcher.reset();
+  
+  
+  SignatureFileChecker sigchecker;
+  
+  Pathname sig = _path + "/content.asc";
+  if ( media.doesFileExist(sig) )
+  {
+    fetcher.enqueue( OnMediaLocation().setFilename(sig) );
+    fetcher.start( dest_dir, media );
+    fetcher.reset();
+    
+    sigchecker = SignatureFileChecker( dest_dir + sig );
+  }
+  
+  Pathname key = _path + "/content.key";
+  if ( media.doesFileExist(key) )
+  {
+    fetcher.enqueue( OnMediaLocation().setFilename(key) );
+    fetcher.start( dest_dir, media );
+    fetcher.reset();
+    sigchecker.addPublicKey(dest_dir + key);
+  }
+  
+  
+  fetcher.enqueue( OnMediaLocation().setFilename( _path + "/content"), sigchecker );
   fetcher.start( dest_dir, media );
   fetcher.reset();
 
-  std::ifstream file((dest_dir + "/content").asString().c_str());
+  std::ifstream file((dest_dir +  _path + "/content").asString().c_str());
   std::string buffer;
   Pathname descr_dir;
 
-  // Note this code assumes DESCR comes before as META
-
+  // FIXME Note this code assumes DESCR comes before as META
+  string value;
   while (file && !file.eof())
   {
     getline(file, buffer);
@@ -64,11 +92,23 @@ void Downloader::download( const Pathname &dest_dir,
       if ( str::split( buffer, std::back_inserter(words) ) != 4 )
       {
         // error
-        ZYPP_THROW(Exception("bad DESCR line"));
+        ZYPP_THROW(Exception("bad META line"));
       }
       OnMediaLocation location;
-      location.filename( descr_dir + words[3]).checksum( CheckSum( words[1], words[2] ) );
-      fetcher.enqueue(location);
+      location.setFilename( _path + descr_dir + words[3]).setChecksum( CheckSum( words[1], words[2] ) );
+      fetcher.enqueueDigested(location);
+    }
+    else if (buffer.substr( 0, 3 ) == "KEY")
+    {
+      std::vector<std::string> words;
+      if ( str::split( buffer, std::back_inserter(words) ) != 4 )
+      {
+        // error
+        ZYPP_THROW(Exception("bad KEY line"));
+      }
+      OnMediaLocation location;
+      location.setFilename( _path + words[3]).setChecksum( CheckSum( words[1], words[2] ) );
+      fetcher.enqueueDigested(location);
     }
   }
   file.close();

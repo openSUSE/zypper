@@ -6,15 +6,14 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file zmd/backend/dbsource/SrcPackageImpl.h
- *
+/** \file zypp/repo/cached/SrcPackageImpl.cc
 */
 
 #include "SrcPackageImpl.h"
-#include "zypp/source/SourceImpl.h"
 #include "zypp/TranslatedText.h"
 #include "zypp/base/String.h"
 #include "zypp/base/Logger.h"
+#include "zypp/cache/CacheAttributes.h"
 
 using namespace std;
 using namespace zypp::detail;
@@ -30,66 +29,84 @@ namespace zypp { namespace repo { namespace cached {
 
 /** Default ctor
 */
-SrcPackageImpl::SrcPackageImpl (Source_Ref source_r)
-    : _source (source_r)
-    , _install_only(false)
-    , _size_installed(0)
-    , _size_archive(0)
-    , _data_loaded(false)
+SrcPackageImpl::SrcPackageImpl ( const data::RecordId & id, repo::cached::RepoImpl::Ptr repository_r )
+  : _repository( repository_r )
+  , _id( id )
 {}
 
-Source_Ref
-SrcPackageImpl::source() const
+Repository SrcPackageImpl::repository() const
 {
-  return _source;
+  return _repository->selfRepository();
 }
 
-/** Package summary */
+///////////////////////////////////////////////////
+// ResObject Attributes
+///////////////////////////////////////////////////
+
 TranslatedText SrcPackageImpl::summary() const
 {
-  return _summary;
+  return _repository->resolvableQuery().queryTranslatedStringAttribute( _id, cache::attrResObjectSummary() );
 }
 
-/** Package description */
 TranslatedText SrcPackageImpl::description() const
 {
-  return _description;
+  return _repository->resolvableQuery().queryTranslatedStringAttribute( _id, cache::attrResObjectDescription() );
 }
 
-PackageGroup SrcPackageImpl::group() const
+TranslatedText SrcPackageImpl::insnotify() const
 {
-  return _group;
+  return _repository->resolvableQuery().queryTranslatedStringAttribute( _id, cache::attrResObjectInsnotify() );
 }
 
-Pathname SrcPackageImpl::location() const
+TranslatedText SrcPackageImpl::delnotify() const
 {
-  return _location;
+  return _repository->resolvableQuery().queryTranslatedStringAttribute( _id, cache::attrResObjectDelnotify() );
 }
 
-ByteCount SrcPackageImpl::size() const
+TranslatedText SrcPackageImpl::licenseToConfirm() const
 {
-  return _size_installed;
-}
-
-/** */
-ByteCount SrcPackageImpl::archivesize() const
-{
-  return _size_archive;
-}
-
-bool SrcPackageImpl::installOnly() const
-{
-  return _install_only;
-}
-
-unsigned SrcPackageImpl::mediaNr() const
-{
-  return _media_nr;
+  return _repository->resolvableQuery().queryTranslatedStringAttribute( _id, cache::attrResObjectLicenseToConfirm() );
 }
 
 Vendor SrcPackageImpl::vendor() const
 {
-  return "suse";
+  return _repository->resolvableQuery().queryStringAttribute( _id, cache::attrResObjectVendor() );
+}
+
+ByteCount SrcPackageImpl::size() const
+{
+  return _repository->resolvableQuery().queryNumericAttribute( _id, cache::attrResObjectInstalledSize() );
+}
+
+bool SrcPackageImpl::installOnly() const
+{
+  return _repository->resolvableQuery().queryBooleanAttribute( _id, cache::attrResObjectInstallOnly() );
+}
+
+Date SrcPackageImpl::buildtime() const
+{
+  return _repository->resolvableQuery().queryNumericAttribute( _id, cache::attrResObjectBuildTime() );
+}
+
+Date SrcPackageImpl::installtime() const
+{
+  return Date();
+}
+
+////////////////////////////////////////////////////////
+// SRC PACKAGE
+////////////////////////////////////////////////////////
+
+OnMediaLocation SrcPackageImpl::location() const
+{
+  OnMediaLocation loc;
+  string chktype = _repository->resolvableQuery().queryStringAttribute( _id, cache::attrSrcPackageLocationChecksumType() );
+  string chkvalue = _repository->resolvableQuery().queryStringAttribute( _id, cache::attrSrcPackageLocationChecksum() );
+  loc.setChecksum(CheckSum(chktype, chkvalue));
+  loc.setFilename( _repository->resolvableQuery().queryStringAttribute( _id, cache::attrSrcPackageLocationFilename() ) );
+  loc.setDownloadSize( _repository->resolvableQuery().queryNumericAttribute( _id, cache::attrSrcPackageLocationDownloadSize() ) );
+  loc.setMedianr( _repository->resolvableQuery().queryNumericAttribute( _id, cache::attrSrcPackageLocationMediaNr() ) );
+  return loc;
 }
 
 /////////////////////////////////////////////////////////////////

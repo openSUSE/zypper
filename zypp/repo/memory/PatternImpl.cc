@@ -29,10 +29,8 @@ PatternImpl::PatternImpl( repo::memory::RepoImpl::Ptr repo, data::Pattern_Ptr pt
   _license_to_confirm(ptr->licenseToConfirm),
   _vendor(ptr->vendor),
   _size(ptr->installedSize),
-  //_archivesize(ptr->repositoryLocation.fileSize),
   _install_only(false),
   _buildtime(ptr->buildTime)
-  //_media_nr(ptr->repositoryLocation.mediaNr)
   //TODO pattern attrs
 {
 
@@ -87,11 +85,6 @@ ByteCount PatternImpl::size() const
   return _size;
 }
 
-ByteCount PatternImpl::archivesize() const
-{
-  return _archivesize;
-}
-
 bool PatternImpl::installOnly() const
 {
   return _install_only;
@@ -106,12 +99,6 @@ Date PatternImpl::installtime() const
 {
   return _installtime;
 }
-
-unsigned PatternImpl::mediaNr() const
-{
-  return _media_nr;
-}
-
 
 ///////////////////////////////////////
 

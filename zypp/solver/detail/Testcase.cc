@@ -222,7 +222,7 @@ bool Testcase::createTestcase(Resolver & resolver)
     zypp::base::LogControl::instance().logfile( "/var/log/YaST2/y2log" );    
 
     ResPool pool 	= resolver.pool();
-    SourceTable		sourceTable;
+    RepositoryTable		repoTable;
     PoolItemList	items_to_install;
     PoolItemList 	items_to_remove;    
     HelixResolvable 	system (dumpPath + "/solver-system.xml");    
@@ -235,15 +235,15 @@ bool Testcase::createTestcase(Resolver & resolver)
 	    // system channel
 	    system.addResolvable (res);
 	} else {
-	    // source channels
-	    ResObject::constPtr sourceItem = it->resolvable();
-	    Source_Ref source  = sourceItem->source();
-	    if (sourceTable.find (source) == sourceTable.end()) {
-		sourceTable[source] = new HelixResolvable(dumpPath + "/"
-							  + numstring(source.numericId())
+	    // repo channels
+	    ResObject::constPtr repoItem = it->resolvable();
+	    Repository repo  = repoItem->repository();
+	    if (repoTable.find (repo) == repoTable.end()) {
+		repoTable[repo] = new HelixResolvable(dumpPath + "/"
+							  + numstring(repo.numericId())
 							  + "-package.xml");
 	    }
-	    sourceTable[source]->addResolvable (res);
+	    repoTable[repo]->addResolvable (res);
 	}
 	
 	if ( it->status().isToBeInstalled()
@@ -259,7 +259,7 @@ bool Testcase::createTestcase(Resolver & resolver)
     // writing control file "*-test.xml"
 
     HelixControl control (dumpPath + "/solver-test.xml",
-			  sourceTable,
+			  repoTable,
 			  resolver.architecture());
 
     for (PoolItemList::const_iterator iter = items_to_install.begin(); iter != items_to_install.end(); iter++) {
@@ -300,7 +300,7 @@ void HelixResolvable::addResolvable(const Resolvable::constPtr &resolvable)
 //---------------------------------------------------------------------------
 
 HelixControl::HelixControl(const std::string & controlPath,
-			   const SourceTable & sourceTable,
+			   const RepositoryTable & repoTable,
 			   const Arch & systemArchitecture,			   
 			   const std::string & systemPath)
     :dumpFile (controlPath) 
@@ -315,11 +315,11 @@ HelixControl::HelixControl(const std::string & controlPath,
 	  << "<test>" << endl
 	  << "<setup arch=\"" << systemArchitecture << "\">" << endl
 	  << TAB << "<system file=\"" << systemPath << "\"/>" << endl;
-    for ( SourceTable::const_iterator it = sourceTable.begin();
-	  it != sourceTable.end(); ++it ) {
-	Source_Ref source = it->first;
-	*file << TAB << "<channel file=\"" << numstring(source.numericId())
-	      << "-package.xml\" name=\"" << numstring(source.numericId())
+    for ( RepositoryTable::const_iterator it = repoTable.begin();
+	  it != repoTable.end(); ++it ) {
+	Repository repo = it->first;
+	*file << TAB << "<channel file=\"" << numstring(repo.numericId())
+	      << "-package.xml\" name=\"" << numstring(repo.numericId())
 	      << "\" />" << endl;
     }
     *file << "</setup>" << endl
@@ -343,8 +343,8 @@ HelixControl::~HelixControl()
 
 void HelixControl::installResolvable(const ResObject::constPtr &resObject)
 {
-    Source_Ref source  = resObject->source();
-    *file << "<install channel=\"" << numstring(source.numericId()) << "\" kind=\"" << toLower (resObject->kind().asString()) << "\""
+    Repository repo  = resObject->repository();
+    *file << "<install channel=\"" << numstring(repo.numericId()) << "\" kind=\"" << toLower (resObject->kind().asString()) << "\""
 	  << " name=\"" << resObject->name() << "\"" << " arch=\"" << resObject->arch().asString() << "\""
 	  << " version=\"" << resObject->edition().version() << "\"" << " release=\"" << resObject->edition().release() << "\"" 
 	  << " edition=\"" << resObject->edition().asString() << "\"" << "/>" << endl;
@@ -352,7 +352,7 @@ void HelixControl::installResolvable(const ResObject::constPtr &resObject)
     
 void HelixControl::deleteResolvable(const ResObject::constPtr &resObject)
 {
-    Source_Ref source  = resObject->source();    
+    Repository repo  = resObject->repository();    
     *file << "<uninstall " << " kind=\"" << toLower (resObject->kind().asString()) << "\""
 	  << " name=\"" << resObject->name() << "\"" << "/>" << endl;    
 }

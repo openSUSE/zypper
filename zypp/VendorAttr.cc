@@ -25,6 +25,7 @@
 #include "zypp/base/IOStream.h"
 #include "zypp/base/String.h"
 
+#include "zypp/PathInfo.h"
 #include "zypp/VendorAttr.h"
 #include "zypp/ZYppFactory.h"
 

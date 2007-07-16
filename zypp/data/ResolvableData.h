@@ -31,6 +31,7 @@
 #include "zypp/Url.h"
 #include "zypp/Date.h"
 #include "zypp/TranslatedText.h"
+#include "zypp/OnMediaLocation.h"
 
 namespace zypp
 {
@@ -44,28 +45,6 @@ namespace data
 
   /** List of files contained in a package (info for UI) */
   typedef std::list<std::string>                    Filenames;
-
-
-  /** Data to retrieve a file from some media. */
-  struct Location
-  {
-    Location()
-      : fileSize( -1 ), gzSize( -1 )
-    {}
-
-    /** Media number (0==no media access required). */
-    MediaNr     mediaNr;
-    /** Path on the media. */
-    Pathname    filePath;
-    /** The uncompressed files size. */
-    ByteCount   fileSize;
-    /** The uncompressed files checksum. */
-    CheckSum    fileChecksum;
-    /** The compressed (gz) files size. */
-    ByteCount   gzSize;
-    /** The compressed (gz) files checksum. */
-    CheckSum    gzChecksum;
-  };
 
   ///////////////////////////////////////////////////////////////////
 
@@ -99,6 +78,8 @@ namespace data
       ResObject()
       {}
 
+      /** Raw data to determine \ref shareDataWith */
+      std::string sharedDataTag;
       /** Share some data with another resolvable.*/
       RecordId shareDataWith;
 
@@ -129,7 +110,6 @@ namespace data
       // Repository related:
       /** Repository providing this resolvable. */
       RecordId  repository;
-
     protected:
       /** Overload to realize std::ostream & operator\<\<. */
       virtual std::ostream & dumpOn( std::ostream & str ) const;
@@ -161,12 +141,12 @@ namespace data
       /** Inlined doScript. */
       std::string doScript;
       /** Location of doScript on the repositories media. */
-      Location doScriptLocation;
+      OnMediaLocation doScriptLocation;
 
       /** Inlined undoScript. */
       std::string undoScript;
       /** Location of undoScript on the repositories media. */
-      Location undoScriptLocation;
+      OnMediaLocation undoScriptLocation;
   };
 
   ///////////////////////////////////////////////////////////////////
@@ -182,8 +162,6 @@ namespace data
 
       /** Inlined Text. */
       TranslatedText text;
-      /** Location od textfile on the repositories media. */
-      //Location  repositoryLoaction;
   };
 
   ///////////////////////////////////////////////////////////////////
@@ -203,7 +181,7 @@ namespace data
       Date timestamp;
       /** Patch category (recommended, security,...) */
       std::string category;
-  
+
       // Flags:
       /** Does the system need to reboot to finish the update process? */
       DefaultIntegral<bool,false> rebootNeeded;
@@ -306,9 +284,6 @@ namespace data
       virtual PackageType packageType() const = 0;
 
     public:
-      /** Location on the repositories media. */
-      Location repositoryLocation;
-
       /** Rpm group.*/
       std::string group;
       /** PackageDb keywors (tags). */
@@ -333,7 +308,7 @@ namespace data
 
       /** operating system **/
       std::string operatingSystem;
-      
+
       /** Pre install script. */
       std::string prein;
       /** Post install script. */
@@ -342,6 +317,8 @@ namespace data
       std::string preun;
       /** Post uninstall script. */
       std::string postun;
+
+      OnMediaLocation repositoryLocation;
   };
 
   DEFINE_PTR_TYPE(Package);
@@ -391,7 +368,7 @@ namespace data
 
     // Shared RPM data
 
-    Location location;
+    OnMediaLocation location;
     Date buildTime;
     Date fileTime;
     ByteCount archiveSize; // ??
@@ -415,13 +392,13 @@ namespace data
       std::string sequenceInfo;
     };
 
-    DeltaBaseVersion baseVersion; 
+    DeltaBaseVersion baseVersion;
   };
 
   DEFINE_PTR_TYPE(PackageAtom);
   /**
    * Data Object for YUM package atom.
-   * 
+   *
    * \see zypp/parser/yum/schema/patch.rng
    */
   struct PackageAtom : public Package

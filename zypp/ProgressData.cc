@@ -32,10 +32,6 @@ namespace zypp
   //
   bool ProgressData::report()
   {
-    // DISABLED to get DBG output from 'if ( doReport )'
-    //if ( ! _d->_receiver )
-    //  return true;
-
     bool goOn     = true;  // continue per default
     bool doReport = false;
 
@@ -75,13 +71,20 @@ namespace zypp
 
       if ( _d->_receiver )
       {
-	goOn = _d->_receiver( _d->_last_val );
+	goOn = _d->_receiver( *this );
       }
       else
       {
-	DBG << str::form( "{#%u|%s}(%lld%s)",
-			numericId(), name().c_str(),
-			_d->_last_val, ( hasRange() ? "%" : "!" ) ) << endl;
+	if ( _d->_state != END )
+	{
+	  DBG << str::form( "{#%u|%s}(%lld%s)",
+			    numericId(), name().c_str(),
+			    _d->_last_val, ( hasRange() ? "%" : "!" ) ) << endl;
+	}
+	else
+	{
+	  DBG << str::form( "{#%u|%s}END", numericId(), name().c_str() ) << endl;
+	}
       }
     }
 
@@ -126,6 +129,30 @@ namespace zypp
     if ( input_r.size() > 0 )
       ret.range( input_r.size() );
     return ret;
+  }
+
+  CombinedProgressData::CombinedProgressData( ProgressData &pd,
+                                              ProgressData::value_type weight )
+    : _weight(weight),
+      _last_value(0),
+      _pd(pd)
+  {
+
+  }
+
+  bool CombinedProgressData::operator()( const ProgressData &progress )
+  {
+    if ( progress.reportAlive() || ( _weight == 0 ) )
+      return _pd.tick();
+
+    // factor [0,1] of increase in subtask ( ie: before 0,2 now 0.5 )
+    float increment = ((float)(progress.val() - _last_value))/(progress.max() - progress.min());
+    // how much the subtask affects the parent task ie: 0,1
+    float parent_factor = (float)(_weight)/(_pd.max() - _pd.min());
+    // real increment of the parent task
+    float real_increment = parent_factor*increment;
+    _last_value = progress.val();
+    return _pd.incr( (int)( (_pd.max()-_pd.min()) * real_increment) );
   }
 
   /////////////////////////////////////////////////////////////////

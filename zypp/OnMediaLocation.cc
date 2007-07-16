@@ -28,7 +28,7 @@ namespace zypp
   std::ostream & operator<<( std::ostream & str, const OnMediaLocation & obj )
   {
     return str << "[" << obj.medianr() << "]" << obj.filename()
-              << "{" << obj.downloadsize() << "|" << obj.checksum() << "}";
+              << "{" << obj.downloadSize() << "|" << obj.checksum() << "}";
   }
 
 /////////////////////////////////////////////////////////////////

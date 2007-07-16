@@ -29,7 +29,7 @@ namespace memory
   {
   public:
 
-    ScriptImpl( const data::RecordId &id, repo::memory::RepoImpl::Ptr repository_r );
+    ScriptImpl( memory::RepoImpl::Ptr repo, data::Script_Ptr ptr);
     
     virtual TranslatedText summary() const;
     virtual TranslatedText description() const;
@@ -38,14 +38,10 @@ namespace memory
     virtual TranslatedText licenseToConfirm() const;
     virtual Vendor vendor() const;
     virtual ByteCount size() const;
-    virtual ByteCount archivesize() const;
     virtual bool installOnly() const;
     virtual Date buildtime() const;
     virtual Date installtime() const;
-    
-    virtual Source_Ref source() const;
-    virtual unsigned mediaNr() const;
-    
+        
     // SCRIPT
     virtual Pathname do_script() const;
     virtual Pathname undo_script() const;
@@ -64,11 +60,9 @@ namespace memory
     TranslatedText _license_to_confirm;
     Vendor _vendor;
     ByteCount _size;
-    ByteCount _archivesize;
     bool _install_only;
     Date _buildtime;
     Date _installtime;
-    unsigned _media_nr;
   };
   /////////////////////////////////////////////////////////////////
 } // namespace memory

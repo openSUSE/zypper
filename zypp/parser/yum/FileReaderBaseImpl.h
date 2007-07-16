@@ -97,6 +97,7 @@ namespace zypp
      *
      * \return true if the package node or current subnode has been consumed
      *         (no further processing is required), false otherwise.
+     * \throws ParseException if a serious error is encountered while parsing
      */
     bool consumePackageNode(xml::Reader & reader_r, data::Package_Ptr & package_ptr);
 
@@ -112,6 +113,7 @@ namespace zypp
      * Processes RPM dependency tags (rpm:entry, rpm:requires, ...).
      * 
      * \return true if a dependency tag has been encountered, false otherwise.
+     * \throws ParseException if a serious error is encountered while parsing
      */
     bool consumeDependency(xml::Reader & reader_r, data::Dependencies & deps_r);
 

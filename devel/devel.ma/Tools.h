@@ -17,8 +17,7 @@
 #include <zypp/ResObject.h>
 #include <zypp/pool/PoolStats.h>
 
-#include <zypp/SourceFactory.h>
-#include <zypp/source/susetags/SuseTagsImpl.h>
+#include <zypp/Repository.h>
 
 using namespace zypp;
 using zypp::debug::Measure;
@@ -91,9 +90,10 @@ template<class _Container>
   }
 
 ///////////////////////////////////////////////////////////////////
-inline Source_Ref createSource( const Url & url_r, const std::string & alias_r = std::string() )
+inline Repository createSource( const Url & url_r, const std::string & alias_r = std::string() )
 {
-  Source_Ref ret;
+  Repository ret;
+#if 0
   Measure x( "createSource: " + url_r.asString() );
   try
     {
@@ -109,7 +109,7 @@ inline Source_Ref createSource( const Url & url_r, const std::string & alias_r =
     }
   catch ( const Exception & )
     {
-      return Source_Ref::noSource;
+      return Repository::noSource;
     }
   x.start( "parseSource: " + url_r.asString() );
   {
@@ -120,10 +120,10 @@ inline Source_Ref createSource( const Url & url_r, const std::string & alias_r =
   MIL << "Content " << ret << "{" << endl;
   rstats( ret.resolvables() );
   MIL << "}" << endl;
-
+#endif
   return ret;
 }
-inline Source_Ref createSource( const std::string & url_r, const std::string & alias_r = std::string() )
+inline Repository createSource( const std::string & url_r, const std::string & alias_r = std::string() )
 {
   try
     {
@@ -131,7 +131,7 @@ inline Source_Ref createSource( const std::string & url_r, const std::string & a
     }
   catch ( const Exception & )
     {
-      return Source_Ref::noSource;
+      return Repository::noRepository;
     }
 }
 

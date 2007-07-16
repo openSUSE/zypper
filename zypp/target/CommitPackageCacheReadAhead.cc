@@ -13,7 +13,7 @@
 
 #include "zypp/base/Logger.h"
 #include "zypp/base/Exception.h"
-
+#include "zypp/PathInfo.h"
 #include "zypp/target/CommitPackageCacheReadAhead.h"
 
 using std::endl;
@@ -33,8 +33,8 @@ namespace zypp
 
     std::ostream & operator<<( std::ostream & str, const IMediaKey & obj )
     {
-      return str << "[S" << obj._source.numericId() << ":" << obj._mediaNr << "]"
-                 << " " << obj._source.alias();
+      return str << "[S" << obj._repository.numericId() << ":" << obj._mediaNr << "]"
+                 << " " << obj._repository.info().alias();
     }
 
     ///////////////////////////////////////////////////////////////////
@@ -64,10 +64,12 @@ namespace zypp
     //
     bool CommitPackageCacheReadAhead::onInteractiveMedia( const PoolItem & pi ) const
     {
-      if ( pi->sourceMediaNr() == 0 ) // no media access at all
+      if ( pi->mediaNr() == 0 ) // no media access at all
         return false;
-      std::string scheme( pi->source().url().getScheme() );
-      return ( scheme == "dvd" || scheme == "cd" );
+      //std::string scheme( pi->source().url().getScheme() );
+      //return ( scheme == "dvd" || scheme == "cd" );
+#warning "FIX CommitPackageCacheReadAhead::onInteractiveMedia"
+      return false;
     }
 
     ///////////////////////////////////////////////////////////////////
@@ -110,7 +112,7 @@ namespace zypp
               if ( _cacheMap.find( *it ) == _cacheMap.end() )
                 {
                   addToCache[*it];
-                  addSize += it->resolvable()->archivesize();
+                  addSize += it->resolvable()->downloadSize();
                 }
             }
         }
@@ -158,8 +160,8 @@ namespace zypp
 
           // copy it to the cachedir
           std::string destName( str::form( "S%lu_%u_%s",
-                                           it->first->source().numericId(),
-                                           it->first->sourceMediaNr(),
+                                           it->first->repository().numericId(),
+                                           it->first->mediaNr(),
                                            fromSource.value().basename().c_str() ) );
 
           ManagedFile fileInCache( _cacheDir->path() / destName,
