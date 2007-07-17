@@ -3,6 +3,7 @@ Tue Jul 17 15:57:03 CEST 2007 - ma@suse.de
 
 - Fixed OnMediLocation to use safe defaults. Added setLocaltion and
   additional ctor for convenience.
+- revision 6047
 
 -------------------------------------------------------------------
 Tue Jul 17 10:45:39 CEST 2007 - schubi@suse.de
