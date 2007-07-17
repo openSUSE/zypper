@@ -271,7 +271,8 @@ namespace zypp
 	      reader.setLocale( toParse );
 	      reader.setPkgConsumer( bind( &Impl::consumePkgLang, this, _1 ) );
 	      reader.setSrcPkgConsumer( bind( &Impl::consumeSrcPkgLang, this, _1 ) );
-	      reader.parse( inputfile );
+	      CombinedProgressData progress( _ticks, PathInfo(inputfile).size()  );
+	      reader.parse( inputfile, progress );
 	    }
 
             if ( ! _ticks.incr( PathInfo(inputfile).size() ) )
