@@ -66,7 +66,7 @@ ResolverInfoDependsOn::message( ) const
 
     // TranslatorExplanation: 1.%s name of package, 2.%s list of names
     // TranslatorExplanation: 1.%s is dependent on list of names
-    return str::form (_("%s dependend on %s"),
+    return str::form (_("%s depends on %s"),
 			affected_str.c_str(),
 			container_str.c_str());
 }
