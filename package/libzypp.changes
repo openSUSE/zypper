@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Jul 17 10:45:39 CEST 2007 - schubi@suse.de
+
+- Evalute update canditate:  
+  Take canditates only which are really installable. Bug 292077 
+
+-------------------------------------------------------------------
 Mon Jul 16 15:41:31 CEST 2007 - jkupec@suse.cz
 
 - fixed some tribool bugs in RepoInfo
