@@ -499,6 +499,7 @@ namespace zypp
           MIL << info.alias() << " cache rebuild is forced" << endl;
         }
       }
+      MIL << info.alias() << " cleaning cache..." << endl;
       store.cleanRepository(id);
     }
 
