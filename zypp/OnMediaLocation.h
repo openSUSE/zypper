@@ -45,7 +45,7 @@ namespace zypp
     {}
 
     /** Ctor taking a filename and media number (defaults to 1). */
-    OnMediaLocation( const Pathname & filename_r, unsigned medianr_r )
+    OnMediaLocation( const Pathname & filename_r, unsigned medianr_r = 1 )
     : _medianr( medianr_r )
     , _filename( filename_r )
     {}
@@ -65,7 +65,7 @@ namespace zypp
 
     /** Set filename and media number (defaults to \c 1). */
     OnMediaLocation & setLocation( const Pathname & val_r,
-                                   unsigned mediaNumber_r )
+                                   unsigned mediaNumber_r = 1 )
     { _filename = val_r; _medianr = mediaNumber_r; return *this; }
 
    /** Set the files size. */
