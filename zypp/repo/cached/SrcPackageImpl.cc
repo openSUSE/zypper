@@ -99,13 +99,14 @@ Date SrcPackageImpl::installtime() const
 
 OnMediaLocation SrcPackageImpl::location() const
 {
-  OnMediaLocation loc;
+  OnMediaLocation loc( _repository->resolvableQuery().queryStringAttribute( _id, cache::attrSrcPackageLocationFilename() ),
+                       _repository->resolvableQuery().queryNumericAttribute( _id, cache::attrSrcPackageLocationMediaNr() ) );
+
   string chktype = _repository->resolvableQuery().queryStringAttribute( _id, cache::attrSrcPackageLocationChecksumType() );
   string chkvalue = _repository->resolvableQuery().queryStringAttribute( _id, cache::attrSrcPackageLocationChecksum() );
   loc.setChecksum(CheckSum(chktype, chkvalue));
-  loc.setFilename( _repository->resolvableQuery().queryStringAttribute( _id, cache::attrSrcPackageLocationFilename() ) );
   loc.setDownloadSize( _repository->resolvableQuery().queryNumericAttribute( _id, cache::attrSrcPackageLocationDownloadSize() ) );
-  loc.setMedianr( _repository->resolvableQuery().queryNumericAttribute( _id, cache::attrSrcPackageLocationMediaNr() ) );
+#warning FIX REMAINING LOCATION ATTRS
   return loc;
 }
 

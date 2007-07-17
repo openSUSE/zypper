@@ -59,7 +59,7 @@ namespace zypp
     * Callback provided to the XML parser. Don't use it.
     */
     bool consumeNode( Reader & reader_r );
-    
+
   private:
     OnMediaLocation _location;
     Tag _tag;
@@ -103,7 +103,7 @@ namespace zypp
       if ( reader_r->name() == "location" )
       {
         _tag = tag_Location;
-        _location.setFilename( reader_r->getAttribute("href").asString() );
+        _location.setLocation( reader_r->getAttribute("href").asString(), 1 );
         return true;
       }
       if ( reader_r->name() == "checksum" )
@@ -141,7 +141,7 @@ namespace zypp
                                        const ProcessResource & callback)
     : _pimpl(new Impl(patches_file, callback))
   {}
-  
+
   PatchesFileReader::~PatchesFileReader()
   {}
 

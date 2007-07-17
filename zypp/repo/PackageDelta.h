@@ -18,7 +18,6 @@
 #include "zypp/OnMediaLocation.h"
 #include "zypp/Edition.h"
 #include "zypp/Date.h"
-//#include "zypp/Arch.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -41,19 +40,19 @@ namespace zypp
 
     public:
       const OnMediaLocation & location()     const { return _location; }
-      const BaseVersions &            baseversions() const { return _baseversions; }
-      const Date &                    buildtime()    const { return _buildtime;}
+      const BaseVersions &    baseversions() const { return _baseversions; }
+      const Date &            buildtime()    const { return _buildtime;}
 
     public:
       PatchRpm & setLocation( const OnMediaLocation & val_r ) { _location = val_r; return *this; }
-      PatchRpm & setBaseversions( const BaseVersions & val_r )        { _baseversions = val_r; return *this; }
-      PatchRpm & addBaseversion( const BaseVersion & val_r )          { _baseversions.push_back( val_r ); return *this; }
-      PatchRpm & setBuildtime( const Date & val_r )                   { _buildtime = val_r; return *this; }
+      PatchRpm & setBaseversions( const BaseVersions & val_r ){ _baseversions = val_r; return *this; }
+      PatchRpm & addBaseversion( const BaseVersion & val_r )  { _baseversions.push_back( val_r ); return *this; }
+      PatchRpm & setBuildtime( const Date & val_r )           { _buildtime = val_r; return *this; }
 
     private:
       OnMediaLocation _location;
-      BaseVersions            _baseversions;
-      Date                    _buildtime;
+      BaseVersions    _baseversions;
+      Date            _buildtime;
     };
 
     /** \relates PatchRpm Stream output. */
@@ -97,8 +96,8 @@ namespace zypp
 
     public:
       const OnMediaLocation & location()     const { return _location; }
-      const BaseVersion &             baseversion()  const { return _baseversion; }
-      const Date &                    buildtime()    const { return _buildtime;}
+      const BaseVersion &     baseversion()  const { return _baseversion; }
+      const Date &            buildtime()    const { return _buildtime;}
 
     public:
       DeltaRpm & setLocation( const OnMediaLocation & val_r ) { _location = val_r; return *this; }
@@ -107,8 +106,8 @@ namespace zypp
 
     private:
       OnMediaLocation _location;
-      BaseVersion             _baseversion;
-      Date                    _buildtime;
+      BaseVersion     _baseversion;
+      Date            _buildtime;
     };
 
     /** \relates DeltaRpm Stream output. */

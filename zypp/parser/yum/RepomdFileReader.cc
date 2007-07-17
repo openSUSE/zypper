@@ -59,7 +59,7 @@ namespace zypp
   public:
     /**
      * CTOR
-     * 
+     *
      * \see RepomdFileReader::RepomdFileReader(Pathname,ProcessResource)
      */
     Impl(const Pathname &repomd_file, const ProcessResource & callback);
@@ -85,7 +85,7 @@ namespace zypp
 
     /** Checksum of metadata file */
     CheckSum _checksum;
-    
+
     /** Type of checksum of metadata file */
     std::string _checksum_type;
 
@@ -97,7 +97,7 @@ namespace zypp
   RepomdFileReader::Impl::Impl(
       const Pathname &repomd_file, const ProcessResource & callback)
     :
-      _tag(tag_NONE), _type(ResourceType::NONE_e), _callback(callback) 
+      _tag(tag_NONE), _type(ResourceType::NONE_e), _callback(callback)
   {
     Reader reader( repomd_file );
     MIL << "Reading " << repomd_file << endl;
@@ -109,10 +109,10 @@ namespace zypp
   /*
    * xpath and multiplicity of processed nodes are included in the code
    * for convenience:
-   * 
+   *
    * // xpath: <xpath> (?|*|+)
-   * 
-   * if multiplicity is ommited, then the node has multiplicity 'one'. 
+   *
+   * if multiplicity is ommited, then the node has multiplicity 'one'.
    */
 
   // --------------------------------------------------------------------------
@@ -140,7 +140,7 @@ namespace zypp
       if ( reader_r->name() == "location" )
       {
         _tag = tag_Location;
-        _location.setFilename( reader_r->getAttribute("href").asString() );
+        _location.setLocation( reader_r->getAttribute("href").asString(), 1 );
         // ignoring attribute xml:base
         return true;
       }
@@ -190,7 +190,7 @@ namespace zypp
   RepomdFileReader::RepomdFileReader(
       const Pathname & repomd_file, const ProcessResource & callback)
     :
-      _pimpl(new Impl(repomd_file, callback)) 
+      _pimpl(new Impl(repomd_file, callback))
   {}
 
   RepomdFileReader::~RepomdFileReader()

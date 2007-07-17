@@ -136,22 +136,20 @@ Changelog PackageImpl::changelog() const
 
 OnMediaLocation PackageImpl::location() const
 {
-  OnMediaLocation loc;
+  OnMediaLocation loc( _repository->resolvableQuery().queryStringAttribute( _id, cache::attrPackageLocationFilename() ),
+                       _repository->resolvableQuery().queryNumericAttribute( _id, cache::attrPackageLocationMediaNr() ) );
+
   string chktype = _repository->resolvableQuery().queryStringAttribute( _id, cache::attrPackageLocationChecksumType() );
   string chkvalue = _repository->resolvableQuery().queryStringAttribute( _id, cache::attrPackageLocationChecksum() );
   loc.setChecksum(CheckSum(chktype, chkvalue));
-  
-  loc.setFilename( _repository->resolvableQuery().queryStringAttribute( _id, cache::attrPackageLocationFilename() ) );
-  
+
   loc.setDownloadSize( _repository->resolvableQuery().queryNumericAttribute( _id, cache::attrPackageLocationDownloadSize() ) );
   loc.setOpenSize( _repository->resolvableQuery().queryNumericAttribute( _id, cache::attrPackageLocationOpenSize() ) );
-  
-  loc.setMedianr( _repository->resolvableQuery().queryNumericAttribute( _id, cache::attrPackageLocationMediaNr() ) );
-  
+
   chktype = _repository->resolvableQuery().queryStringAttribute( _id, cache::attrPackageLocationOpenChecksumType() );
   chkvalue = _repository->resolvableQuery().queryStringAttribute( _id, cache::attrPackageLocationOpenChecksum() );
   loc.setOpenChecksum(CheckSum(chktype, chkvalue));
-  
+
   return loc;
 }
 

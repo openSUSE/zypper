@@ -159,13 +159,13 @@ namespace zypp
 	    switch ( str::split( tag_r->value, std::back_inserter(words) ) )
 	    {
 	      case 2: // [medianr filename]
-		_data->repositoryLocation.setMedianr( str::strtonum<unsigned>(words[0]) );
-		_data->repositoryLocation.setFilename( Pathname(_data->arch.asString()) / words[1] );
+		_data->repositoryLocation.setLocation( Pathname(_data->arch.asString()) / words[1],
+                                                       str::strtonum<unsigned>(words[0]) );
 		break;
 
 	      case 3: // [medianr filename dir]
-		_data->repositoryLocation.setMedianr( str::strtonum<unsigned>(words[0]) );
-		_data->repositoryLocation.setFilename( Pathname(words[2]) / words[1] );
+		_data->repositoryLocation.setLocation( Pathname(words[2]) / words[1],
+                                                       str::strtonum<unsigned>(words[0]) );
 		break;
 
 	      default:

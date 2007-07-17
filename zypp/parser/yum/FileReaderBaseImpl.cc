@@ -112,7 +112,7 @@ namespace zypp
         return true;
       }
 
-      // xpath: //package/packager 
+      // xpath: //package/packager
       if (reader_r->name() == "packager")
       {
         package_ptr->packager = reader_r.nodeText().asString();
@@ -152,7 +152,7 @@ namespace zypp
       // xpath: //package/location
       if (reader_r->name() == "location")
       {
-        package_ptr->repositoryLocation.setFilename(reader_r->getAttribute("href").asString());
+        package_ptr->repositoryLocation.setLocation(reader_r->getAttribute("href").asString(), 1);
         return true;
       }
 
@@ -186,7 +186,7 @@ namespace zypp
   {
     if (consumeDependency(reader_r, package_ptr->deps))
       // this node has been a dependency, which has been handled by
-      // consumeDependency(), so return right away. 
+      // consumeDependency(), so return right away.
       return true;
 
     // DBG << "format subtag: " << reader_r->name() << endl;
@@ -228,7 +228,7 @@ namespace zypp
         return true;
       }
 
-      //! \todo xpath: //format/rpm:header-range what is this? 
+      //! \todo xpath: //format/rpm:header-range what is this?
       if (reader_r->name() == "rpm:header-range")
       {
         //reader_r->getAttribute("start").asString(),
@@ -236,7 +236,7 @@ namespace zypp
         return true;
       }
 
-      //! \todo xpath: //format/file (*) figure out where to store this and what's it about (in regard to filelists.xml.gz) 
+      //! \todo xpath: //format/file (*) figure out where to store this and what's it about (in regard to filelists.xml.gz)
       if (reader_r->name() == "file")
       {
         // file = reader_r.nodeText().asString();
@@ -311,7 +311,7 @@ namespace zypp
         if (kind_str.empty())
            kind = ResTraits<Package>::kind;
         else
-          kind = Resolvable::Kind(kind_str); 
+          kind = Resolvable::Kind(kind_str);
 
         // Check whether this is actually a prerequires dependency.
         // If so, it will be stored in deps_r as Dep::PREREQUIRES

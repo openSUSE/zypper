@@ -74,7 +74,7 @@ static int global_progress_handler(void* ptr)
   RepoImpl *r = (RepoImpl *)(ptr);
   if ( r )
     return r->progress_handler(ptr);
-  
+
   return 1;
 }
 
@@ -100,14 +100,14 @@ void RepoImpl::createResolvables()
   _ticks = ProgressData();
   _ticks.sendTo(_options.readingResolvablesProgress);
   _ticks.name(str::form(_( "Reading '%s' repository cache"), info().alias().c_str()));
-      
+
   debug::Measure m("create resolvables");
   CapFactory capfactory;
   try
   {
     sqlite3_connection con((_options.dbdir + "zypp.db").asString().c_str());
     //con.setprogresshandler(100, global_progress_handler, (void*)this);
-    
+
     con.executenonquery("PRAGMA cache_size=8000;");
     con.executenonquery("BEGIN;");
 
@@ -115,7 +115,7 @@ void RepoImpl::createResolvables()
 //     sqlite3_command total_cmd("select count(id) from resolvables where repository_id=:repository_id;");
 //     total_cmd.bind(":repository_id", _repository_id);
 //     int total = total_cmd.executeint();
-    
+
     sqlite3_command cmd( con, "select id,name,version,release,epoch,arch,kind from resolvables where repository_id=:repository_id;");
     cmd.bind(":repository_id", _options.repository_id);
     map<data::RecordId, pair<Resolvable::Kind, NVRAD> > nvras;
@@ -134,13 +134,13 @@ void RepoImpl::createResolvables()
     }
 
     MIL << "Done reading resolvables nvra" << endl;
-    
+
     _ticks.tick();
-    
+
     read_capabilities( con, _options.repository_id, nvras );
 
     _ticks.tick();
-    
+
     for ( map<data::RecordId, pair<Resolvable::Kind, NVRAD> >::const_iterator it = nvras.begin(); it != nvras.end(); ++it )
     {
       if ( it->second.first == ResTraits<Package>::kind )
@@ -219,7 +219,7 @@ void RepoImpl::createPatchAndDeltas()
   _ticks = ProgressData();
   _ticks.sendTo(_options.readingPatchDeltasProgress );
   _ticks.name(str::form(_( "Reading patch and delta rpms from '%s' repository cache"), info().alias().c_str()));
-    
+
   try
   {
     sqlite3_connection con((_options.dbdir + "zypp.db").asString().c_str());
@@ -249,9 +249,7 @@ void RepoImpl::createPatchAndDeltas()
     sqlite3_reader reader = deltas_cmd.executereader();
     while ( reader.read() )
     {
-      zypp::OnMediaLocation on_media;
-      on_media.setMedianr(reader.getint(1));
-      on_media.setFilename(reader.getstring(2));
+      zypp::OnMediaLocation on_media( reader.getstring(2), reader.getint(1) );
 
       string checksum_string(reader.getstring(3));
       CheckSum checksum = encoded_string_to_checksum(checksum_string);
@@ -297,9 +295,7 @@ void RepoImpl::createPatchAndDeltas()
     {
       long long patch_package_id = reader.getint64(0);
 
-      zypp::OnMediaLocation on_media;
-      on_media.setMedianr( reader.getint(1) );
-      on_media.setFilename( reader.getstring(2) );
+      zypp::OnMediaLocation on_media( reader.getstring(2), reader.getint(1) );
 
       string checksum_string(reader.getstring(3));
       CheckSum checksum = encoded_string_to_checksum(checksum_string);
@@ -360,9 +356,9 @@ void RepoImpl::read_capabilities( sqlite3_connection &con,
 //     }
 //   }
   sqlite3_command select_named_cmd( con, "select v.refers_kind, n.name, v.version, v.release, v.epoch, v.relation, v.dependency_type, v.resolvable_id from named_capabilities v, names n, resolvables res where v.name_id=n.id and v.resolvable_id=res.id and res.repository_id=:repo_id;");
-  
+
   sqlite3_command select_file_cmd( con, "select fc.refers_kind, dn.name, fn.name, fc.dependency_type, fc.resolvable_id from file_capabilities fc, files f, dir_names dn, file_names fn, resolvables res where f.id=fc.file_id and f.dir_name_id=dn.id and f.file_name_id=fn.id and fc.resolvable_id=res.id and res.repository_id=:repo_id;");
-  
+
   sqlite3_command select_hal_cmd( con, "select hc.refers_kind, hc.name, hc.value, hc.relation, hc.dependency_type, hc.resolvable_id from hal_capabilities hc, resolvables res where hc.resolvable_id=res.id and res.repository_id=:repo_id;");
 
   sqlite3_command select_modalias_cmd( con, "select mc.refers_kind, mc.name, mc.value, mc.relation, mc.dependency_type, mc.resolvable_id from modalias_capabilities mc, resolvables res where mc.resolvable_id=res.id and res.repository_id=:repo_id;");
@@ -410,7 +406,7 @@ void RepoImpl::read_capabilities( sqlite3_connection &con,
       nvras[rid].second[deptype].insert( capfactory.fromImpl( capability::CapabilityImpl::Ptr(fcap) ) );
     }
   }
-  
+
   {
     debug::Measure mnf("read hal capabilities");
     select_hal_cmd.bind(":repo_id", repo_id);
@@ -420,7 +416,7 @@ void RepoImpl::read_capabilities( sqlite3_connection &con,
       //select hc.refers_kind, hc.name, hc.value, hc.relation, hc.dependency_type, hc.resolvable_id from hal_capabilities hc
 
       Resolvable::Kind refer = _type_cache.kindFor(reader.getint(0));
-      
+
       Rel rel = _type_cache.relationFor(reader.getint(3));
       capability::HalCap *hcap = new capability::HalCap( refer, reader.getstring(1), rel, reader.getstring(2) );
       zypp::Dep deptype = _type_cache.deptypeFor(reader.getint(4));
@@ -435,10 +431,10 @@ void RepoImpl::read_capabilities( sqlite3_connection &con,
     sqlite3_reader reader = select_modalias_cmd.executereader();
     while  ( reader.read() )
     {
-     
+
       //select mc.refers_kind, mc.name, mc.value, mc.relation, mc.dependency_type, mc.resolvable_id from modalias_capabilities mc;
       Resolvable::Kind refer = _type_cache.kindFor(reader.getint(0));
-      
+
       Rel rel = _type_cache.relationFor(reader.getint(3));
       capability::ModaliasCap *mcap = new capability::ModaliasCap( refer, reader.getstring(1), rel, reader.getstring(2) );
       zypp::Dep deptype = _type_cache.deptypeFor(reader.getint(4));
@@ -457,18 +453,18 @@ void RepoImpl::read_capabilities( sqlite3_connection &con,
 
       Resolvable::Kind refer = _type_cache.kindFor(reader.getint(0));
       capability::CapabilityImpl::Ptr cap = capability::parse( refer, reader.getstring(1));
-      
+
       if ( !cap )
       {
         ERR << "Invalid capability " <<  reader.getstring(1) << endl;
       }
-      
+
       zypp::Dep deptype = _type_cache.deptypeFor(reader.getint(2));
       data::RecordId rid = reader.getint64(3);
       nvras[rid].second[deptype].insert( capfactory.fromImpl(cap) );
     }
   }
-  
+
   MIL << nvras.size() << " capabilities" << endl;
 }
 

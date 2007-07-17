@@ -9,9 +9,10 @@
 /** \file	zypp/detail/SelectionImplIf.cc
  *
 */
+#include <iostream>
+
 #include "zypp/detail/SelectionImplIf.h"
 #include "zypp/ResTraits.h"
-#include <iostream>
 
 using namespace std;
 
@@ -50,7 +51,6 @@ namespace zypp
     const std::set<std::string> SelectionImplIf::install_packages( const Locale & lang) const
     {
 	 std::set<std::string> result;
-      #warning does not honor language packs
 	 copycaps( result, self()->dep( Dep::REQUIRES ) );
 	 copycaps( result, self()->dep( Dep::RECOMMENDS) );
 

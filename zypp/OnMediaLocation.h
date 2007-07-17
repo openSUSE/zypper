@@ -14,6 +14,7 @@
 
 #include <iosfwd>
 
+#include "zypp/base/Deprecated.h"
 #include "zypp/Pathname.h"
 #include "zypp/ByteCount.h"
 #include "zypp/CheckSum.h"
@@ -27,19 +28,26 @@ namespace zypp
   //	CLASS NAME : OnMediaLocation
   //
   /**
-    * Describes a path ona certain media amongs as the information
-    * required to download it, like its media number, checksum and
-    * size.
-    * it does not specifies the URI of the file.
+   * Describes a path on a certain media amongs as the information
+   * required to download it, like its media number, checksum and
+   * size. It does not specify the URI of the file.
+   *
+   * Media number \c 0 usually indicates no media access.
   */
   class OnMediaLocation
   {
     friend std::ostream & operator<<( std::ostream & str, const OnMediaLocation & obj );
 
   public:
-    /** Ctor */
+    /** Default ctor indicating no media access. */
     OnMediaLocation()
-    : _medianr( 1 )
+    : _medianr( 0 )
+    {}
+
+    /** Ctor taking a filename and media number (defaults to 1). */
+    OnMediaLocation( const Pathname & filename_r, unsigned medianr_r )
+    : _medianr( medianr_r )
+    , _filename( filename_r )
     {}
 
   public:
@@ -47,16 +55,55 @@ namespace zypp
     const Pathname &  filename()       const { return _filename; }
     const CheckSum &  checksum()       const { return _checksum; }
     const ByteCount & downloadSize()   const { return _downloadsize; }
-    const ByteCount & openSize() const { return _opendownloadsize; }
-    const CheckSum &  openChecksum()     const { return _openchecksum; }
+    const ByteCount & openSize()       const { return _opendownloadsize; }
+    const CheckSum &  openChecksum()   const { return _openchecksum; }
 
   public:
-    OnMediaLocation & setMedianr( unsigned val_r )                 { _medianr = val_r; return *this; }
-    OnMediaLocation & setFilename( const Pathname & val_r )        { _filename = val_r; return *this; }
-    OnMediaLocation & setChecksum( const CheckSum & val_r )        { _checksum = val_r; return *this; }
-    OnMediaLocation & setDownloadSize( const ByteCount & val_r )   { _downloadsize = val_r; return *this; }
-    OnMediaLocation & setOpenChecksum( const CheckSum & val_r )      { _openchecksum = val_r; return *this; }
-    OnMediaLocation & setOpenSize( const ByteCount & val_r ) { _opendownloadsize = val_r; return *this; }
+    /** Unset \c filename and set \c medianr to \c 0. */
+    OnMediaLocation & unsetLocation()
+    { _filename = Pathname(); _medianr = 0; return *this; }
+
+    /** Set filename and media number (defaults to \c 1). */
+    OnMediaLocation & setLocation( const Pathname & val_r,
+                                   unsigned mediaNumber_r )
+    { _filename = val_r; _medianr = mediaNumber_r; return *this; }
+
+   /** Set the files size. */
+    OnMediaLocation & setDownloadSize( const ByteCount & val_r )
+    { _downloadsize = val_r; return *this; }
+
+    /** Set the files checksum. */
+    OnMediaLocation & setChecksum( const CheckSum & val_r )
+    { _checksum = val_r; return *this; }
+
+    /** Set the files open (uncompressed) size. */
+    OnMediaLocation & setOpenSize( const ByteCount & val_r )
+    { _opendownloadsize = val_r; return *this; }
+
+    /** Set the files open (uncompressed) checksum. */
+    OnMediaLocation & setOpenChecksum( const CheckSum & val_r )
+    { _openchecksum = val_r; return *this; }
+
+  public:
+    /** \deprecated use \ref setLocation or \ref changeMedianr */
+    ZYPP_DEPRECATED OnMediaLocation & xsetMedianr( unsigned val_r )
+    { return changeMedianr( val_r ); }
+    /** \deprecated use \ref setLocation or \ref changeFilename */
+    ZYPP_DEPRECATED OnMediaLocation & xsetFilename( const Pathname & val_r )
+    {  return changeFilename( val_r ); }
+
+    /** Individual manipulation of \c medianr.
+     * Using \ref setLocation is prefered.
+    */
+    OnMediaLocation & changeMedianr( unsigned val_r )
+    { _medianr = val_r; return *this; }
+
+    /** Individual manipulation of \c filename.
+     * Using \ref setLocation is prefered.
+    */
+    OnMediaLocation & changeFilename( const Pathname & val_r )
+    { _filename = val_r; return *this; }
+
   private:
     unsigned  _medianr;
     Pathname  _filename;

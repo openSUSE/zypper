@@ -44,8 +44,8 @@ namespace zypp
 
     /**
      * Callback provided to the XML reader.
-     * 
-     * \param  the xml reader object reading the file  
+     *
+     * \param  the xml reader object reading the file
      * \return true to tell the reader to continue, false to tell it to stop
      *
      * \see PrimaryFileReader::consumeNode(xml::Reader)
@@ -54,10 +54,10 @@ namespace zypp
 
     /**
      * Process <tt>atoms</tt> node and all of its children.
-     * 
+     *
      * \param reader_r XML file reader reading the patch file.
      * \return true if current node has been completely processed, false
-     *         if additional processing is required outside of the method. 
+     *         if additional processing is required outside of the method.
      */
     bool consumeAtomsNode(xml::Reader & reader_r);
 
@@ -65,46 +65,46 @@ namespace zypp
      * Process <tt>package</tt> node and all of its children. This method
      * uses \ref FileReaderBase::consumePackageNode(xml::Reader,data::Package_Ptr)
      * method and adds <tt>pkgfiles</tt> element processing.
-     * 
+     *
      * \param reader_r XML file reader reading the patch file.
      * \return true if current node has been completely processed, false
-     *         if additional processing is required outside of the method. 
+     *         if additional processing is required outside of the method.
      */
     bool consumePackageNode(xml::Reader & reader_r);
 
     /**
      * Process <tt>patchrpm</tt> node and all of its children.
-     * 
+     *
      * \param reader_r XML file reader reading the patch file.
      * \return true if current node has been completely processed, false
-     *         if additional processing is required outside of the method. 
+     *         if additional processing is required outside of the method.
      */
     bool consumePatchrpmNode(xml::Reader & reader_r);
 
     /**
      * Process <tt>deltarpm</tt> node and all of its children.
-     * 
+     *
      * \param reader_r XML file reader reading the patch file.
      * \return true if current node has been completely processed, false
-     *         if additional processing is required outside of the method. 
+     *         if additional processing is required outside of the method.
      */
     bool consumeDeltarpmNode(xml::Reader & reader_r);
 
     /**
      * Process <tt>message</tt> node and all of its children.
-     * 
+     *
      * \param reader_r XML file reader reading the patch file.
      * \return true if current node has been completely processed, false
-     *         if additional processing is required outside of the method. 
+     *         if additional processing is required outside of the method.
      */
     bool consumeMessageNode(xml::Reader & reader_r);
 
     /**
      * Process <tt>script</tt> node and all of its children.
-     * 
+     *
      * \param reader_r XML file reader reading the patch file.
      * \return true if current node has been completely processed, false
-     *         if additional processing is required outside of the method. 
+     *         if additional processing is required outside of the method.
      */
     bool consumeScriptNode(xml::Reader & reader_r);
 
@@ -123,7 +123,7 @@ namespace zypp
     void saveAtomInPatch();
 
     /**
-     * 
+     *
      */
     void copyPackageAtomFromTmpObj(data::Atom_Ptr & atom_ptr) const;
 
@@ -171,10 +171,10 @@ namespace zypp
   /*
    * xpath and multiplicity of processed nodes are included in the code
    * for convenience:
-   * 
+   *
    * // xpath: <xpath> (?|*|+)
-   * 
-   * if multiplicity is ommited, then the node has multiplicity 'one'. 
+   *
+   * if multiplicity is ommited, then the node has multiplicity 'one'.
    */
 
   // --------------------------------------------------------------------------
@@ -242,7 +242,7 @@ namespace zypp
 
       // dependency block nodes
       if (consumeDependency(reader_r, _patch->deps))
-        return true; 
+        return true;
 
       // xpath: /patch/category
       if (reader_r->name() == "category")
@@ -288,7 +288,7 @@ namespace zypp
       if (reader_r->name() == "patch")
       {
         if (!_patch->atoms.size())
-          WAR << "No atoms found for patch " << _patch->name << " " << _patch->edition << endl; 
+          WAR << "No atoms found for patch " << _patch->name << " " << _patch->edition << endl;
 
       	if (_callback)
       	  _callback(handoutPatch());
@@ -359,7 +359,7 @@ namespace zypp
       // xpath: /patch/atoms/package
       if (reader_r->name() == "package")
       {
-        // DBG << "Atom " << _tmpResObj->name << " " << _tmpResObj->edition << " successfully read." << endl;  
+        // DBG << "Atom " << _tmpResObj->name << " " << _tmpResObj->edition << " successfully read." << endl;
 
         saveAtomInPatch();
         toParentTag(); // back to processing of previous tag (atoms)
@@ -510,7 +510,7 @@ namespace zypp
       // xpath: /patch/atoms/package/patchrpm/location
       if (reader_r->name() == "location")
       {
-        _patchrpm->location.setFilename(reader_r->getAttribute("href").asString());
+        _patchrpm->location.setLocation(reader_r->getAttribute("href").asString(), 1);
         // ignoring attribute 'base'
         return true;
       }
@@ -586,7 +586,7 @@ namespace zypp
       // xpath: /patch/atoms/package/deltarpm/location
       if (reader_r->name() == "location")
       {
-        _deltarpm->location.setFilename(reader_r->getAttribute("href").asString());
+        _deltarpm->location.setLocation(reader_r->getAttribute("href").asString(), 1);
         // ignoring attribute 'base'
         return true;
       }
@@ -763,7 +763,7 @@ namespace zypp
         // ignoring reader_r->getAttribute("xml:base").asString();
 
         // xsd:anyURI do script file path
-        script->doScriptLocation.setFilename(reader_r->getAttribute("href").asString());
+        script->doScriptLocation.setLocation(reader_r->getAttribute("href").asString(), 1);
         return true;
       }
 
@@ -783,7 +783,7 @@ namespace zypp
         // ignoring reader_r->getAttribute("xml:base").asString();
 
         // xsd:anyURI undo script file path
-        script->undoScriptLocation.setFilename(reader_r->getAttribute("href").asString());
+        script->undoScriptLocation.setLocation(reader_r->getAttribute("href").asString(), 1);
         return true;
       }
 

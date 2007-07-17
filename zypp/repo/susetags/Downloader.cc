@@ -16,11 +16,11 @@ namespace repo
 {
 namespace susetags
 {
-  
+
 Downloader::Downloader( const Url &url, const Pathname &path )
     : _url(url), _path(path)
 {
-  
+
 }
 
 RepoStatus Downloader::status()
@@ -35,35 +35,35 @@ void Downloader::download( const Pathname &dest_dir,
 {
   MediaSetAccess media(_url);
   Fetcher fetcher;
-  
-  fetcher.enqueue( OnMediaLocation().setFilename( "/media.1/media") );
+
+  fetcher.enqueue( OnMediaLocation( "media.1/media", 1 ) );
   fetcher.start( dest_dir, media );
   fetcher.reset();
-  
-  
+
+
   SignatureFileChecker sigchecker;
-  
+
   Pathname sig = _path + "/content.asc";
   if ( media.doesFileExist(sig) )
   {
-    fetcher.enqueue( OnMediaLocation().setFilename(sig) );
+    fetcher.enqueue( OnMediaLocation( sig, 1 ) );
     fetcher.start( dest_dir, media );
     fetcher.reset();
-    
+
     sigchecker = SignatureFileChecker( dest_dir + sig );
   }
-  
+
   Pathname key = _path + "/content.key";
   if ( media.doesFileExist(key) )
   {
-    fetcher.enqueue( OnMediaLocation().setFilename(key) );
+    fetcher.enqueue( OnMediaLocation( key, 1 ) );
     fetcher.start( dest_dir, media );
     fetcher.reset();
     sigchecker.addPublicKey(dest_dir + key);
   }
-  
-  
-  fetcher.enqueue( OnMediaLocation().setFilename( _path + "/content"), sigchecker );
+
+
+  fetcher.enqueue( OnMediaLocation( _path + "/content", 1 ), sigchecker );
   fetcher.start( dest_dir, media );
   fetcher.reset();
 
@@ -82,7 +82,7 @@ void Downloader::download( const Pathname &dest_dir,
       if ( str::split( buffer, std::back_inserter(words) ) != 2 )
       {
         // error
-        ZYPP_THROW(Exception("bad DESCR line")); 
+        ZYPP_THROW(Exception("bad DESCR line"));
       }
       descr_dir = words[1];
     }
@@ -94,8 +94,8 @@ void Downloader::download( const Pathname &dest_dir,
         // error
         ZYPP_THROW(Exception("bad META line"));
       }
-      OnMediaLocation location;
-      location.setFilename( _path + descr_dir + words[3]).setChecksum( CheckSum( words[1], words[2] ) );
+      OnMediaLocation location( _path + descr_dir + words[3], 1 );
+      location.setChecksum( CheckSum( words[1], words[2] ) );
       fetcher.enqueueDigested(location);
     }
     else if (buffer.substr( 0, 3 ) == "KEY")
@@ -106,8 +106,8 @@ void Downloader::download( const Pathname &dest_dir,
         // error
         ZYPP_THROW(Exception("bad KEY line"));
       }
-      OnMediaLocation location;
-      location.setFilename( _path + words[3]).setChecksum( CheckSum( words[1], words[2] ) );
+      OnMediaLocation location( _path + words[3], 1 );
+      location.setChecksum( CheckSum( words[1], words[2] ) );
       fetcher.enqueueDigested(location);
     }
   }
@@ -116,5 +116,5 @@ void Downloader::download( const Pathname &dest_dir,
 }
 
 }// ns susetags
-}// ns source 
+}// ns source
 } // ns zypp

@@ -52,18 +52,18 @@ bool Downloader::patches_Callback( const OnMediaLocation &loc, const string &id 
 bool Downloader::repomd_Callback( const OnMediaLocation &loc, const ResourceType &dtype )
 {
   MIL << dtype << " : " << loc << endl;
-  
+
   // skip other
   if ( dtype == ResourceType::OTHER )
   {
     MIL << "Skipping other.xml" << endl;
     return true;
   }
-  
+
   _fetcher.enqueueDigested(loc);
-  
+
   // We got a patches file we need to read, to add patches listed
-  // there, so we transfer what we have in the queue, and 
+  // there, so we transfer what we have in the queue, and
   // queue the patches in the patches callback
   if ( dtype == ResourceType::PATCHES )
   {
@@ -71,7 +71,7 @@ bool Downloader::repomd_Callback( const OnMediaLocation &loc, const ResourceType
     // now the patches.xml file must exists
     PatchesFileReader( _dest_dir + loc.filename(), bind( &Downloader::patches_Callback, this, _1, _2));
   }
-    
+
   return true;
 }
 
@@ -81,34 +81,34 @@ void Downloader::download( const Pathname &dest_dir,
   Pathname repomdpath =  "/repodata/repomd.xml";
   Pathname keypath =  "/repodata/repomd.xml.key";
   Pathname sigpath =  "/repodata/repomd.xml.asc";
-  
+
   ProgressData progress;
   progress.sendTo(progressrcv);
   progress.toMin();
 
   _dest_dir = dest_dir;
   if ( _media.doesFileExist(keypath) )
-    _fetcher.enqueue( OnMediaLocation().setFilename(keypath) );
+    _fetcher.enqueue( OnMediaLocation(keypath,1) );
 
   if ( _media.doesFileExist(sigpath) )
-     _fetcher.enqueue( OnMediaLocation().setFilename(sigpath) );
-  
+     _fetcher.enqueue( OnMediaLocation(sigpath,1) );
+
   _fetcher.start( dest_dir, _media );
-  
+
   if ( ! progress.tick() )
     ZYPP_THROW(AbortRequestException());
 
   SignatureFileChecker sigchecker;
-  
+
   if ( PathInfo( dest_dir + sigpath ).isExist() )
     sigchecker = SignatureFileChecker(dest_dir + sigpath);
-  
+
   if ( PathInfo( dest_dir + keypath ).isExist() )
     sigchecker.addPublicKey(dest_dir + keypath );
-  
-  _fetcher.enqueue( OnMediaLocation().setFilename(repomdpath), sigchecker );
+
+  _fetcher.enqueue( OnMediaLocation(repomdpath,1), sigchecker );
   _fetcher.start( dest_dir, _media);
-  
+
   if ( ! progress.tick() )
         ZYPP_THROW(AbortRequestException());
 
@@ -123,7 +123,7 @@ void Downloader::download( const Pathname &dest_dir,
 }
 
 }// ns yum
-}// ns source 
+}// ns source
 } // ns zypp
 
 

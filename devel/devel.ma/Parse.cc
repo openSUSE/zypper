@@ -291,7 +291,7 @@ int main( int argc, char * argv[] )
   {
     RepoInfo & nrepo( *it );
 
-    if ( 0 )
+    if ( 1 )
     {
       if ( repoManager.isCached( nrepo ) )
       {

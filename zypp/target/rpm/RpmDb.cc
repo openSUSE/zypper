@@ -968,7 +968,7 @@ void RpmDb::importPubkey( const PublicKey & pubkey_r )
     }
   }
   // key does not exists, lets import it
-  
+
   RpmArgVec opts;
   opts.push_back ( "--import" );
   opts.push_back ( "--" );
@@ -1140,7 +1140,7 @@ Package::Ptr RpmDb::makePackageFromHeader( const RpmHeader::constPtr header,
 
   impl->setRepository( repo );
   if (!location.empty())
-    impl->setLocation( OnMediaLocation().setFilename(location) );
+    impl->setLocation( OnMediaLocation(location,1) );
 
   Edition edition;
   try
@@ -1179,7 +1179,7 @@ Package::Ptr RpmDb::makePackageFromHeader( const RpmHeader::constPtr header,
   list<string> filenames = impl->filenames();
   CapFactory capfactory;
   insertCaps( dataCollect[Dep::PROVIDES], header->tag_provides( filerequires ), capfactory );
-  
+
   static str::smatch what;
   static const str::regex filenameRegex( "/(s?bin|lib(64)?|etc)/|^/usr/(games/|share/(dict/words|magic\\.mime)$)|^/opt/gnome/games/",
                                          str::regex::optimize|str::regex::nosubs );

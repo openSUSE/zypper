@@ -169,7 +169,7 @@ namespace zypp
 	  void fixLocationPath( const data::Packagebase_Ptr & data_r )
 	  {
 	    Pathname tofix( data_r->repositoryLocation.filename() );
-	    data_r->repositoryLocation.setFilename( _datadir / tofix );
+	    data_r->repositoryLocation.changeFilename( _datadir / tofix );
 	  }
 
 	  /** Resolve shared data tag. */
