@@ -911,6 +911,31 @@ namespace zypp
 
   ////////////////////////////////////////////////////////////////////////////
 
+  RepoInfo RepoManager::getRepositoryInfo( const Url & url,
+                                           const url::ViewOption & urlview,
+                                           const ProgressData::ReceiverFnc & progressrcv )
+  {
+    std::list<RepoInfo> repos = knownRepositories();
+    for ( std::list<RepoInfo>::const_iterator it = repos.begin();
+          it != repos.end();
+          ++it )
+    {
+      for(RepoInfo::urls_const_iterator urlit = (*it).baseUrlsBegin();
+          urlit != (*it).baseUrlsEnd();
+          ++urlit)
+      {
+        if ((*urlit).asString(urlview) == url.asString(urlview))
+          return *it;
+      }
+    }
+    RepoInfo info;
+    info.setAlias(info.alias());
+    info.setBaseUrl(url);
+    ZYPP_THROW(RepoNotFoundException(info));
+  }
+
+  ////////////////////////////////////////////////////////////////////////////
+
   std::ostream & operator<<( std::ostream & str, const RepoManager & obj )
   {
     return str << *obj._pimpl;

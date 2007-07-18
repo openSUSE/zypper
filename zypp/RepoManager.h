@@ -90,7 +90,7 @@ namespace zypp
     {
       
     };
-    
+
    /**
     * \short List known repositories.
     *
@@ -257,6 +257,28 @@ namespace zypp
     RepoInfo getRepositoryInfo( const std::string &alias,
                                 const ProgressData::ReceiverFnc & progressrcv = ProgressData::ReceiverFnc() );
     
+    /**
+     * \short Find repository info by URL.
+     *
+     * \param url URL to find.
+     * \param urlview url::ViewOption to influence URL matching.
+     * \param progressrcv Progress receiver function.
+     *
+     * \note if multple repositories incorrectly share the
+     * same URL, the first one found will be returned.
+     *
+     * \note the string representation of the URLs are compared.
+     *       The \a urlview can be used to influence which
+             parts of the URL are to be compared.
+     *
+     * \throws RepoNotFoundException If no repo match
+     * \throws ParseException If the file parsing fails
+     * \throws Exception On other errors.
+     */
+    RepoInfo getRepositoryInfo( const Url & url,
+                                const url::ViewOption & urlview = url::ViewOption::DEFAULTS,
+                                const ProgressData::ReceiverFnc & progressrcv = ProgressData::ReceiverFnc() );
+
   protected:
     RepoStatus rawMetadataStatus( const RepoInfo &info );
     RepoStatus cacheStatus( const RepoInfo &info );
