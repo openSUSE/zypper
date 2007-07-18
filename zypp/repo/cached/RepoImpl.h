@@ -45,15 +45,15 @@ namespace zypp
           , dbdir(dbdir_)
           , repository_id(repository_id_)
         {}
-        
-        
+
+
         ProgressData::ReceiverFnc readingResolvablesProgress;
         ProgressData::ReceiverFnc readingPatchDeltasProgress;
         RepoInfo repoinfo;
         Pathname dbdir;
         data::RecordId repository_id;
       };
-      
+
       /**
        * \short Cached repository implementation
        *
@@ -70,18 +70,18 @@ namespace zypp
         RepoImpl( const RepoOptions &opts );
         /** Dtor */
         ~RepoImpl();
-        void factoryInit();
+
       public:
         virtual void createResolvables();
         virtual void createPatchAndDeltas();
-        
+
         cache::ResolvableQuery resolvableQuery();
       private:
         void read_capabilities( sqlite3x::sqlite3_connection &con,
                                 data::RecordId repo_id,
                                 std::map<data::RecordId,
                                 std::pair<Resolvable::Kind, NVRAD> > &nvras );
-        cache::CacheTypes _type_cache; 
+        cache::CacheTypes _type_cache;
         cache::ResolvableQuery _rquery;
         RepoOptions _options;
         ProgressData _ticks;

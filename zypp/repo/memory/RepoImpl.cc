@@ -49,18 +49,10 @@ namespace memory
 RepoImpl::RepoImpl( const RepoInfo &repoinfo )
   : RepositoryImpl(repoinfo)
 {
-
 }
 
 RepoImpl::~RepoImpl()
 {
-
-}
-
-
-void RepoImpl::factoryInit()
-{
-  MIL << "in-memory repository initialized." << std::endl;
 }
 
 void RepoImpl::createResolvables()

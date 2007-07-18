@@ -45,9 +45,9 @@ namespace zypp
         RepoImpl( const RepoInfo &repoinfo);
         /** Dtor */
         ~RepoImpl();
-        void factoryInit();
+
       public:
-        
+
         void createResolvables();
         void createPatchAndDeltas();
       protected:

@@ -78,11 +78,6 @@ static int global_progress_handler(void* ptr)
   return 1;
 }
 
-void RepoImpl::factoryInit()
-{
-  MIL << "Plaindir repository initialized." << std::endl;
-}
-
 void read_capabilities( sqlite3_connection &con,
                         map<data::RecordId, NVRAD> &nvras,
                         ProgressData &progress );

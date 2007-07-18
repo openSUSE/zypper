@@ -75,8 +75,8 @@ namespace zypp
       ResStore _store;
       std::list<packagedelta::PatchRpm> _patchRpms;
       std::list<packagedelta::DeltaRpm> _deltaRpms;
-      bool _restore_lazy_initialized;
     private:
+      bool _restore_lazy_initialized;
       RepoInfo _info;
     };
   }
