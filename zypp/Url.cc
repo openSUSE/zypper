@@ -790,12 +790,12 @@ namespace zypp
 
   bool operator==( const Url &lhs, const Url &rhs )
   {
-    return (lhs.asCompleteString() == asCompleteString());
+    return (lhs.asCompleteString() == rhs.asCompleteString());
   }
   
   bool operator!=( const Url &lhs, const Url &rhs )
   {
-    return (lhs.asCompleteString() != asCompleteString());
+    return (lhs.asCompleteString() != rhs.asCompleteString());
   }
   
   ////////////////////////////////////////////////////////////////////
