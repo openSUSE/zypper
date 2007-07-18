@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Wed Jul 18 12:38:55 CEST 2007 - ma@suse.de
+
+- Fixed repo::provideFile to throw on error.
+- Fixed ResolvableQuery to use 0 as default for non existing
+  numerical values.
+- revision 6058
+
+-------------------------------------------------------------------
 Tue Jul 17 15:57:03 CEST 2007 - ma@suse.de
 
 - Fixed OnMediLocation to use safe defaults. Added setLocaltion and
