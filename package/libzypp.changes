@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Jul 18 14:43:04 CEST 2007 - ma@suse.de
+
+- Fixed IniParser to allow '=' in vaues (#292669)
+- revision 6063
+
+-------------------------------------------------------------------
 Wed Jul 18 12:38:55 CEST 2007 - ma@suse.de
 
 - Fixed repo::provideFile to throw on error.
@@ -9,7 +15,7 @@ Wed Jul 18 12:38:55 CEST 2007 - ma@suse.de
 -------------------------------------------------------------------
 Wed Jul 18 14:16:59 CEST 2007 - duncan@suse.de
 
-- allow / in alias (#292628) 
+- allow / in alias (#292628)
 
 -------------------------------------------------------------------
 Tue Jul 17 15:57:03 CEST 2007 - ma@suse.de
