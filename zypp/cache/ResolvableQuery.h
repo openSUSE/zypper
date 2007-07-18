@@ -9,6 +9,7 @@
 #include "zypp/data/ResolvableData.h"
 #include "zypp/data/RecordId.h"
 #include "zypp/cache/Attribute.h"
+#include "zypp/ZConfig.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -183,7 +184,7 @@ namespace zypp
 
         std::string all = queryStringAttribute( record_id, klass, name);
         //FIXME use zypp separator
-        str::split( all, result );
+        str::split( all, result, ZConfig().cacheDBSplitJoinSeparator() );
       }
       /** \overload */
       template<class _OutputIterator>

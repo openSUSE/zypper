@@ -112,6 +112,32 @@ void check_factory_product( Product::Ptr p )
   BOOST_CHECK_EQUAL( p->distributionName(), "SuSE-Linux-STABLE-X86" );
   BOOST_CHECK_EQUAL( p->distributionEdition(), Edition("10.2.42-factory") );
   BOOST_CHECK_EQUAL( p->summary(), "openSUSE FACTORY 10.3" );
+  
+  list<Url>::const_iterator it;
+  list<Url> urls;
+  
+  BOOST_CHECK_EQUAL( urls.size(), 0 );
+  
+  urls = p->extraUrls();
+  it = find( urls.begin(), urls.end(), Url("http://download.opensuse.org/distribution/10.2/repo/oss/"));
+  BOOST_CHECK_EQUAL( p->extraUrls().size(), 1 );
+  BOOST_CHECK( it != urls.end() );
+  
+  urls = p->optionalUrls();
+  BOOST_CHECK_EQUAL( urls.size(), 2 );
+  
+  it = find( urls.begin(), urls.end(), Url("http://download.opensuse.org/distribution/10.2/repo/non-oss/"));
+  BOOST_CHECK( it != urls.end() );
+  it = find( urls.begin(), urls.end(), Url("http://download.opensuse.org/distribution/10.2/repo/debug/"));
+  BOOST_CHECK( it != urls.end() );
+  
+  for ( it = urls.begin();
+        it != urls.end();
+        ++it )
+  {
+    MIL << *it << endl;
+  }
+
 //  BOOST_CHECK_EQUAL( p->description().substr(0, 16), "NO DESC?");
 //  BOOST_CHECK_EQUAL( p->category(), "Graphical Environments");
 //  BOOST_CHECK_EQUAL( p->userVisible(), true);

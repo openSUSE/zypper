@@ -17,6 +17,8 @@ LINGUAS cs da de en en_GB es fi fr hu it ja km nl nb pl pt_BR zh_CN zh_TW
 SHORTLABEL FACTORY
 LABEL openSUSE FACTORY 10.3
 LABEL.de openSUSE FACTORY 10.3
+EXTRAURLS http://download.opensuse.org/distribution/10.2/repo/oss/
+OPTIONALURLS http://download.opensuse.org/distribution/10.2/repo/non-oss/ http://download.opensuse.org/distribution/10.2/repo/debug/
 DESCRDIR suse/setup/descr
 DATADIR suse
 FLAGS update

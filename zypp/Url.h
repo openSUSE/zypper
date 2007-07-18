@@ -777,6 +777,11 @@ namespace zypp
    */
   bool operator<( const Url &lhs, const Url &rhs );
   
+  /**
+   * needed for find
+   */
+  bool operator==( const Url &lhs, const Url &rhs );
+  
   ////////////////////////////////////////////////////////////////////
 } // namespace zypp
 //////////////////////////////////////////////////////////////////////
