@@ -9,6 +9,7 @@
 #include <zypp/RepoManager.h>
 #include <zypp/RepoInfo.h>
 #include <zypp/repo/RepoException.h>
+#include <zypp/target/store/xml_escape_parser.hpp>
 
 #include "zypper.h"
 #include "zypper-misc.h"
@@ -116,6 +117,13 @@ bool ProvideProcess::operator()( const PoolItem& provider )
 
   return true;
 }
+
+static std::string xml_escape( const std::string &text )
+{
+	iobind::parser::xml_escape_parser parser;
+	return parser.escape(text);
+}
+
 
 
 // this does only resolvables with this _name_.
@@ -565,6 +573,45 @@ void show_patches()
 
 // ----------------------------------------------------------------------------
 
+void xml_list_patches ()
+{
+	const zypp::ResPool& pool = God->pool();
+  ResPool::byKind_iterator
+    it = pool.byKindBegin<Patch> (),
+    e  = pool.byKindEnd<Patch> ();
+
+  for (; it != e; ++it )
+  {
+    ResObject::constPtr res = it->resolvable();
+    if ( it->status().isNeeded() ) {
+      Patch::constPtr patch = asKind<Patch>(res);
+
+			cout << " <update ";
+			cout << "name=\"" << res->name () << "\" " ;
+			cout << "edition=\""  << res->edition ().asString() << "\" ";
+			cout << "category=\"" <<  patch->category() << "\" ";
+			cout << "pkgmanager=\"" << ((patch->affects_pkg_manager()) ? "true" : "false") << "\" ";
+			cout << "restart=\"" << ((patch->reboot_needed()) ? "true" : "false") << "\" ";
+			cout << "interactive=\"" << ((patch->interactive()) ? "true" : "false") << "\" ";
+			cout << "resolvabletype=\"" << "patch" << "\" ";
+			cout << ">" << endl;
+			cout << "  <summary>" << xml_escape(patch->summary()) << "  </summary>" << endl;
+			cout << "  <description>" << xml_escape(patch->description()) << "</description>" << endl;
+
+			if ( patch->repository() != Repository::noRepository )
+			{
+				cout << "  <source url=\"" << *(patch->repository().info().baseUrlsBegin());
+				cout << "\" alias=\"" << patch->repository().info().alias() << "\"/>" << endl;
+			}
+
+      cout << " </update>" << endl;
+    }
+  }
+}
+
+
+// ----------------------------------------------------------------------------
+
 void list_patch_updates ()
 {
   Table tbl;
@@ -751,6 +798,37 @@ bool mark_item_install (const PoolItem& pi) {
   }
   return result;
 }
+
+// ----------------------------------------------------------------------------
+
+void xml_list_updates()
+{
+    Candidates candidates;
+    find_updates (ResTraits<Package>::kind, candidates);
+
+    Candidates::iterator cb = candidates.begin (), ce = candidates.end (), ci;
+    for (ci = cb; ci != ce; ++ci) {
+      ResObject::constPtr res = ci->resolvable();
+
+			cout << " <update ";
+			cout << "name=\"" << res->name () << "\" " ;
+			cout << "edition=\""  << res->edition ().asString() << "\" ";
+			cout << "resolvabletype=\"" << "package" << "\" ";
+			cout << ">" << endl;
+			cout << "  <summary>" << xml_escape(res->summary()) << "  </summary>" << endl;
+			cout << "  <description>" << xml_escape(res->description()) << "</description>" << endl;
+
+			if ( res->repository() != Repository::noRepository )
+			{
+				cout << "  <source url=\"" << *(res->repository().info().baseUrlsBegin());
+				cout << "\" alias=\"" << res->repository().info().alias() << "\"/>" << endl;
+			}
+
+      cout << " </update>" << endl;
+    }
+}
+
+
 
 // ----------------------------------------------------------------------------
 

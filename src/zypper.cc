@@ -103,6 +103,7 @@ string help_commands = _(
   "\tpatch-check, pchk\tCheck for patches\n"
   "\tpatches, pch\t\tList patches\n"
   "\tlist-updates, lu\tList updates\n"
+  "\txml-updates-patches, x\tList updates and patches in xml format\n"
   "\tupdate, up\t\tUpdate installed resolvables with newer versions.\n"
   "\tinfo, if\t\tShow full information for packages\n"
   "\tpatch-info\t\tShow full information for patches\n"
@@ -1057,6 +1058,26 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
 
     return ZYPPER_EXIT_OK;
   }
+
+
+  // -----------------( xml list updates and patches )------------------------
+
+  else if (command == ZypperCommand::XML_LIST_UPDATES_PATCHES) {
+    cond_init_target ();
+    init_repos ();
+    cond_load_resolvables();
+    establish ();
+	
+		cout << "<?xml version='1.0'?>" << endl;
+		cout << "<update-status version=\"0.4\">" << endl;
+		cout << "<update-list>" << endl;
+		xml_list_patches ();
+		xml_list_updates ();
+		cout << "</update-list>" << endl;
+		cout << "</update-status>" << endl;
+
+    return ZYPPER_EXIT_OK;
+	}
 
   // -----------------------------( update )----------------------------------
 
