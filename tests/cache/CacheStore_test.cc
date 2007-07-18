@@ -40,7 +40,7 @@ using namespace sqlite3x;
 
 /**
  * \short Asserts a package against a fixed package
- * 
+ *
  * kdelibs3 357-24 i586
  */
 void check_kdelibs3_package( Package::Ptr p )
@@ -50,7 +50,7 @@ void check_kdelibs3_package( Package::Ptr p )
 //   +Aut:
 //   The KDE Team <kde@kde.org>
 //   -Aut:
-//   
+//
   BOOST_CHECK_EQUAL( p->name(), "kdelibs3");
   BOOST_CHECK_EQUAL( p->edition(), Edition("3.5.7", "24") );
   BOOST_CHECK_EQUAL( p->arch(), Arch("i586") );
@@ -71,7 +71,7 @@ void check_kdelibs3_package( Package::Ptr p )
 
 /**
  * \short Asserts a pattern against a fixed pattern
- * 
+ *
  * kde-10.3-71.i586.pat
  */
 void check_kde_pattern( Pattern::Ptr p )
@@ -79,10 +79,10 @@ void check_kde_pattern( Pattern::Ptr p )
   BOOST_CHECK_EQUAL( p->name(), "kde");
   BOOST_CHECK_EQUAL( p->edition(), Edition("10.3", "71") );
   BOOST_CHECK_EQUAL( p->arch(), Arch("i586") );
-  
+
 //   detail::ResImplTraits<ResObject::Impl>::constPtr pipp( detail::ImplConnect::resimpl( p ) );
 //   TranslatedText got = pipp->summary();
-//   
+//
   //DBG<< pipp->summary() << endl;
 //   for ( set<Locale>::const_iterator it = got.locales().begin();
 //         it != got.locales().end();
@@ -100,7 +100,7 @@ void check_kde_pattern( Pattern::Ptr p )
 
 /**
  * \short Asserts a product against a fixed product
- * 
+ *
  * openSUSE-factory
  */
 void check_factory_product( Product::Ptr p )
@@ -108,20 +108,20 @@ void check_factory_product( Product::Ptr p )
   BOOST_CHECK_EQUAL( p->name(), "openSUSE-factory");
   BOOST_CHECK_EQUAL( p->edition(), Edition("10.3") );
   BOOST_CHECK_EQUAL( p->arch(), Arch("i686") );
-  
+
   BOOST_CHECK_EQUAL( p->distributionName(), "SuSE-Linux-STABLE-X86" );
   BOOST_CHECK_EQUAL( p->distributionEdition(), Edition("10.2.42-factory") );
   BOOST_CHECK_EQUAL( p->summary(), "openSUSE FACTORY 10.3" );
-  BOOST_CHECK_EQUAL( p->description().substr(0, 16), "NO DESC?");
-//   BOOST_CHECK_EQUAL( p->category(), "Graphical Environments");
-//   BOOST_CHECK_EQUAL( p->userVisible(), true);
+//  BOOST_CHECK_EQUAL( p->description().substr(0, 16), "NO DESC?");
+//  BOOST_CHECK_EQUAL( p->category(), "Graphical Environments");
+//  BOOST_CHECK_EQUAL( p->userVisible(), true);
   //1520
 }
 
 
 /**
  * \short Asserts a package against a fixed package
- * 
+ *
  * glabels 2.0.4-30.2-0 i586
  */
 void check_glabels_package( Package::Ptr p )
@@ -157,7 +157,7 @@ void check_tables_clean( filesystem::TmpDir tmpdir )
   data::RecordId repository_id = store.lookupOrAppendRepository("novell.com");
   store.cleanRepository(repository_id);
   store.commit();
-  
+
   sqlite3_connection con((tmpdir.path() + "zypp.db").c_str());
   int count;
 
@@ -181,7 +181,7 @@ void check_tables_clean( filesystem::TmpDir tmpdir )
     tables.push_back(tablename);
   }
   reader.close();
-      
+
   for ( list<string>::const_iterator it = tables.begin();
         it != tables.end();
         ++it )
@@ -205,7 +205,7 @@ void write_yum_repo( const string &alias,
   data::RecordId repository_id;
   cache::CacheStore store(tmpdir.path());
   repository_id = store.lookupOrAppendRepository(alias);
-    
+
   zypp::debug::Measure repo_write_timer("store resolvables");
 
   yum::RepoParser parser( repository_id, store);
@@ -223,7 +223,7 @@ void write_susetags_repo( const string &alias,
   data::RecordId repository_id;
   cache::CacheStore store(tmpdir.path());
   repository_id = store.lookupOrAppendRepository(alias);
-    
+
   zypp::debug::Measure repo_write_timer("store resolvables");
 
   susetags::RepoParser parser( repository_id, store);
@@ -238,7 +238,7 @@ ResStore get_resolvables( const string &alias,
                           filesystem::TmpDir tmpdir )
 {
   MIL << "now read resolvables" << endl;
-  
+
   data::RecordId repository_id;
   {
     cache::CacheStore store(tmpdir.path());
@@ -261,12 +261,12 @@ void cache_write_yum_test(const string &dir)
   filesystem::TmpDir tmpdir;
   string alias = "novell.com";
   write_yum_repo( alias, repodir, tmpdir );
-  
+
   ResStore dbres = get_resolvables( alias, tmpdir);;;
   //read_resolvables( alias, tmpdir, std::inserter(dbres, dbres.end()));
   MIL << dbres.size() << " resolvables" << endl;
   BOOST_CHECK_EQUAL( dbres.size(), 48);
-  
+
   bool found_glabels_i586 = false;
   for ( ResStore::const_iterator it = dbres.begin();
         it != dbres.end();
@@ -283,7 +283,7 @@ void cache_write_yum_test(const string &dir)
     }
   }
   BOOST_CHECK_MESSAGE( found_glabels_i586, "Package glabels i586 should be in cache");
-  
+
   check_tables_clean(tmpdir);
 }
 
@@ -297,11 +297,11 @@ void cache_write_susetags_test(const string &dir)
   filesystem::TmpDir tmpdir;
   string alias = "novell.com";
   write_susetags_repo( alias, repodir, tmpdir );
-  
+
   ResStore dbres = get_resolvables( alias, tmpdir);;
   //read_resolvables( alias, tmpdir, std::inserter(dbres, dbres.end()));
   MIL << dbres.size() << " resolvables" << endl;
-  
+
   // packages and a patterns
   BOOST_CHECK_EQUAL( dbres.size(), 7);
   bool found_kdelibs3_i586 = false;
@@ -359,15 +359,15 @@ init_unit_test_suite( int argc, char *argv[] )
     cout << "CacheStore_test:"
       " path to directory with test data required as parameter. Using " << datadir  << endl;
     //return (test_suite *)0;
-    
+
   }
   else
   {
     datadir = argv[1];
   }
-  
+
   test_suite* test= BOOST_TEST_SUITE("CacheStore");
-  
+
   std::string const params[] = { datadir };
   test->add(BOOST_PARAM_TEST_CASE(&cache_write_yum_test,
                                  (std::string const*)params, params+1));
