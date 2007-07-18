@@ -1,4 +1,20 @@
 -------------------------------------------------------------------
+Wed Jul 18 16:15:50 CEST 2007 - jkupec@suse.cz
+
+- man page update, COMPATIBILITY WITH RUG section added
+- renamed command 'listrepos' to just 'repos'
+- s/service/repository
+- remove repository by URL reimplemented
+- --loose-auth and --loose-query added for removerepo command
+  (#292362)
+- keyring callbacks improved and prepared for non-interactive and
+  no-gpg-checks mode
+- no-gpg-checks global option added
+- show repo in the repo list as disabled only if enabled() == false
+  (tribool bug)
+- r6066
+
+-------------------------------------------------------------------
 Thu Jul 12 13:01:56 CEST 2007 - jkupec@suse.cz
 
 - s/source/repository in zypper texts, help page will follow
