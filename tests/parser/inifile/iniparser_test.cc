@@ -49,6 +49,20 @@ class WithSpacesTest : public IniParser
       if ( key == "name" )
         BOOST_CHECK_EQUAL( value, "foo" );
     }
+    else if ( section == "equal" )
+    {
+      if ( key == "name1" )
+        BOOST_CHECK_EQUAL( value, "=foo" );
+      else if ( key == "name2" )
+        BOOST_CHECK_EQUAL( value, "f=oo" );
+      else if ( key == "name3" )
+        BOOST_CHECK_EQUAL( value, "foo=" );
+      else
+      {
+        cout << "'" << section << "'" << " | " << "'" << key << "'" << " | " << "'" << value << "'" << endl;
+        BOOST_CHECK_MESSAGE( false, "Unhandled key" );
+      }
+    }
   }
 };
 
@@ -82,9 +96,9 @@ init_unit_test_suite( int argc, char *argv[] )
   {
     datadir = argv[1];
   }
-  
+
   test_suite* test= BOOST_TEST_SUITE("ini_file");
-  
+
   std::string const params[] = { datadir };
   test->add(BOOST_PARAM_TEST_CASE(&ini_read_test,
                                  (std::string const*)params, params+1));
