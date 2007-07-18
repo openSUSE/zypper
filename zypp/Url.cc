@@ -785,17 +785,17 @@ namespace zypp
 
   bool operator<( const Url &lhs, const Url &rhs )
   {
-    return (lhs.asString() < rhs.asString());
+    return (lhs.asCompleteString() < rhs.asCompleteString());
   }
 
   bool operator==( const Url &lhs, const Url &rhs )
   {
-    return (lhs.asString() == rhs.asString());
+    return (lhs.asCompleteString() == asCompleteString());
   }
   
   bool operator!=( const Url &lhs, const Url &rhs )
   {
-    return (lhs.asString() != rhs.asString());
+    return (lhs.asCompleteString() != asCompleteString());
   }
   
   ////////////////////////////////////////////////////////////////////
