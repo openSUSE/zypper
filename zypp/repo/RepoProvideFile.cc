@@ -13,8 +13,8 @@
 #include <fstream>
 #include <sstream>
 #include <set>
-#include "zypp/base/Logger.h"
 
+#include "zypp/base/Logger.h"
 #include "zypp/repo/RepoProvideFile.h"
 #include "zypp/ZYppCallbacks.h"
 #include "zypp/MediaSetAccess.h"
@@ -82,7 +82,7 @@ namespace zypp
                              const OnMediaLocation & loc_r,
                              const ProvideFilePolicy & policy_r )
     {
-      MIL << "sourceProvideFile " << loc_r << endl;
+      MIL << "provideFile " << loc_r << endl;
       // Arrange DownloadFileReportHack to recieve the source::DownloadFileReport
       // and redirect download progress triggers to call the ProvideFilePolicy
       // callback.
@@ -95,8 +95,8 @@ namespace zypp
       RepoInfo info = repo_r.info();
       set<Url> urls = info.baseUrls();
       if ( urls.empty() )
-        ZYPP_THROW(Exception("No url in repository."));
-      
+        ZYPP_THROW(Exception(_("No url in repository.")));
+
       for ( RepoInfo::urls_const_iterator it = urls.begin();
             it != urls.end();
             ++it )
@@ -104,12 +104,12 @@ namespace zypp
         url = *it;
         try
         {
-        
+
           MediaSetAccess access(url);
-          
+
           ManagedFile ret( access.provideFile(loc_r),
                           RepoReleaseFile( repo_r, loc_r.filename(), loc_r.medianr() ) );
-    
+
           if ( loc_r.checksum().empty() )
           {
             // no checksum in metadata
@@ -120,7 +120,7 @@ namespace zypp
             std::ifstream input( ret->asString().c_str() );
             CheckSum retChecksum( loc_r.checksum().type(), input );
             input.close();
-  
+
             if ( loc_r.checksum() != retChecksum )
             {
               // failed integity check
@@ -138,16 +138,20 @@ namespace zypp
                 WAR << "NO failOnChecksumError: " << err.str() << endl;
             }
           }
-    
-          MIL << "sourceProvideFile at " << ret << endl;
+
+          MIL << "provideFile at " << ret << endl;
           return ret;
         }
         catch ( const Exception &e )
         {
-          ERR << "Trying next url" << endl;
+          ZYPP_CAUGHT( e );
+          WAR << "Trying next url" << endl;
           continue;
         }
       } // iteration over urls
+
+      ZYPP_THROW(Exception(_("No more urls in repository.")));
+      return ManagedFile(); // not reached
     }
 
     /////////////////////////////////////////////////////////////////

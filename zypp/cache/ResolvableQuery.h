@@ -38,7 +38,7 @@ namespace zypp
        * \param dbdir Cache location path
        */
       ResolvableQuery( const Pathname &dbdir );
-      
+
       ~ResolvableQuery();
 
       /**
@@ -64,17 +64,16 @@ namespace zypp
        * \param klass Attribute Class
        * \param name Attribute Name
        *
-       * \return The attribute or -1 if
-       * no record is found.
+       * \return The attribute or \c 0 if no record is found.
        */
       int queryNumericAttribute( const data::RecordId &record_id,
                                  const std::string &klass,
                                  const std::string &name,
-                                 int default_value = -1 );
+                                 int default_value = 0 );
       /** \overload */
       int queryNumericAttribute( const data::RecordId &record_id,
                                  const Attribute& attr,
-                                 int default_value = -1 )
+                                 int default_value = 0 )
       { return queryNumericAttribute( record_id, attr.klass, attr.name, default_value ); }
 
 
