@@ -49,9 +49,8 @@ void display_done () {
 //template<typename Action>
 //Action ...
 int read_action_ari (int default_action) {
-  if (gSettings.verbosity >= 0 || !gSettings.non_interactive)
-    // TranslatorExplanation don't translate letters in parentheses!!
-    cout << _("(A)bort, (R)etry, (I)gnore?") << " "; 
+  // TranslatorExplanation don't translate letters in parentheses!!
+  cout << _("(A)bort, (R)etry, (I)gnore?") << " "; 
 
   // choose abort if no default has been specified
   if (default_action == -1) {
@@ -68,8 +67,8 @@ int read_action_ari (int default_action) {
 	  default: c = '?';
       }
       // print the answer for conveniecne
-      cout_n << c << endl;
-
+      cout << c << endl;
+      MIL << "answer: " << c << endl;
       return default_action;
   }
 
@@ -78,6 +77,7 @@ int read_action_ari (int default_action) {
     char c;
     cin >> c;
     c = tolower (c);
+    MIL << "answer: " << c << endl;
     if (c == 'a')
       return 0;
     else if (c == 'r')
@@ -85,6 +85,7 @@ int read_action_ari (int default_action) {
     else if (c == 'i')
       return 2;
     cerr << _("Invalid answer. Choose letter a, r, or i.") << endl;
+    DBG << "invalid answer" << endl;
   }
 
   return default_action;
@@ -92,30 +93,36 @@ int read_action_ari (int default_action) {
 
 // ----------------------------------------------------------------------------
 
-// return the default value on input failure
-// TODO make this locale dependent?
-bool read_bool_with_default (bool defval) {
+// Read an answer (ynYN)
+bool read_bool_answer(const string & question, bool default_answer)
+{
+  cout << CLEARLN << question << " [y/n]: " << flush;
+
+  // non-interactive mode: print the answer for convenience and return default
+  if (gSettings.non_interactive)
+  {
+    cout << (default_answer ? 'y' : 'n') << endl;
+    MIL << "answer (default): " << (default_answer ? 'y' : 'n') << endl;
+    return default_answer;
+  }
+
   istream & stm = cin;
 
   string c = "";
   while (stm.good () && c != "y" && c != "Y" && c != "N" && c != "n")
     c = zypp::str::getline (stm, zypp::str::TRIM);
-      
+
+  MIL << "answer: " << c << endl;
   if (c == "y" || c == "Y")
     return true;
   else if (c == "n" || c == "N")
     return false;
   else
-    return defval;
-}
-
-// ----------------------------------------------------------------------------
-
-// Read an answer (ynYN)
-// Defaults to 'false'
-bool readBoolAnswer()
-{
-  return read_bool_with_default (false);
+  {
+    WAR << "could not read answer, returning default: "
+        << (default_answer ? 'y' : 'n') << endl;
+    return default_answer;
+  }
 }
 
 // ----------------------------------------------------------------------------

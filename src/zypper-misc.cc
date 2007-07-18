@@ -833,8 +833,7 @@ int solve_and_commit (bool non_interactive) {
   int retv = show_summary();
 
   if (retv >= 0) { // there are resolvables to install/uninstall
-    cerr << _("Continue?") << " [y/n] " << (non_interactive ? "y\n" : "");
-    if (non_interactive || readBoolAnswer()) {
+    if (read_bool_answer(_("Continue?"), non_interactive)) {
 
       if (!confirm_licenses(non_interactive)) return ZYPPER_EXIT_OK;
 
@@ -884,7 +883,7 @@ int solve_and_commit (bool non_interactive) {
   return retv;
 }
 
-// TODO
+// TODO confirm licenses
 // - make this more user-friendly e.g. show only license name and
 //  ask for [y/n/r] with 'r' for read the license text
 //  (opened throu more or less, etc...)
@@ -903,11 +902,10 @@ bool confirm_licenses(bool non_interactive)
         " " << _("license") << ": " <<
         it->resolvable()->licenseToConfirm() << endl;
 
-      cout << _("In order to install this package, you must agree"
-        " to terms of the above licencse. Continue?") << " [y/n] " <<
-        (non_interactive ? "n\n" : "");
+      string question = _("In order to install this package, you must agree"
+        " to terms of the above licencse. Continue?");
 
-      if (non_interactive || !readBoolAnswer())
+      if (non_interactive || !read_bool_answer(question, false))
       {
         confirmed = false;
         

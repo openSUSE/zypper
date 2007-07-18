@@ -49,6 +49,7 @@ struct Settings
   disable_system_resolvables(false),
   is_rug_compatible(false),
   non_interactive(false),
+  no_gpg_checks(false),
   root_dir("/")
   {}
 
@@ -72,6 +73,7 @@ struct Settings
   bool disable_system_resolvables;
   bool is_rug_compatible;
   bool non_interactive;
+  bool no_gpg_checks;
   std::string root_dir;
 };
 

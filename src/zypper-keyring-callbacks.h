@@ -12,6 +12,7 @@
 
 #include <stdlib.h>
 #include <iostream>
+#include <boost/format.hpp>
 
 #include <zypp/base/Logger.h>
 #include <zypp/ZYppCallbacks.h>
@@ -33,64 +34,131 @@ namespace zypp {
     {
       virtual bool askUserToAcceptUnsignedFile( const std::string &file )
       {
-        cout << CLEARLN << file << _(" is unsigned, continue?") << " [y/n]: " << flush;
-        return readBoolAnswer();
+        if (gSettings.no_gpg_checks)
+        {
+          MIL << "Accepting unsigned file (" << file << ")" << endl;
+          cout_v << boost::format(_("Warning: Accepting an unsigned file %s.")) % file;
+          return true;
+        }
+
+        // TranslatorExplanation: speaking of a file
+        std::string question = boost::str(boost::format(
+            _("%s is unsigned, continue?")) % file);
+        return read_bool_answer(question, false);
       }
-      
+
       virtual bool askUserToImportKey( const PublicKey &key )
       {
         if ( geteuid() != 0 )
           return false;
-        
-        cout << CLEARLN << _("Import key ") << key.id() << _(" to trusted keyring?") << "  [y/n]: " << flush;
-        return readBoolAnswer();
-      } 
+
+        std::string question = boost::str(boost::format(
+            _("Import key %s to trusted keyring?")) % key.id());
+        return read_bool_answer(question, false);
+      }
 
       virtual bool askUserToAcceptUnknownKey( const std::string &file, const std::string &id )
       {
-        cout << CLEARLN << file << _(" is signed with an unknown key id: ") << id << ", " << _("continue?") << " [y/n]: " << flush;
-        return readBoolAnswer();
+        if (gSettings.no_gpg_checks)
+        {
+          MIL << "Accepting file signed with an unknown key (" << file << "," << id << ")" << endl;
+          cout_n << boost::format(
+              _("Warnging: Accepting file %s signed with an unknown key %s."))
+              % file % id;
+          return true;
+        }
+
+        // TranslatorExplanation: speaking of a file
+        std::string question = boost::str(boost::format(
+            _("%s is signed with an unknown key %s. Continue?")) % file % id);
+        return read_bool_answer(question, false);
       }
 
       virtual bool askUserToTrustKey( const PublicKey &key )
       {
 	const std::string& keyid = key.id(), keyname = key.name(),
 	  fingerprint = key.fingerprint();
-        cout  << CLEARLN << _("Do you want to trust key id ") << keyid << " " << keyname << _(" fingerprint:") << fingerprint << " ? [y/n]: "  << flush;
-        return readBoolAnswer();
+
+        if (gSettings.no_gpg_checks)
+        {
+          MIL << boost::format("Automatically trusting key id %s, %s, fingerprint %s")
+              % keyid % keyname % fingerprint << endl;
+          cout_n << boost::format(
+              _("Automatically trusting key id %s, %s, fingerprint %s"))
+              % keyid % keyname % fingerprint << endl;
+          return true;
+        }
+
+        std::string question = boost::str(boost::format(
+	    _("Do you want to trust key id %s, %s, fingerprint %s"))
+	    % keyid % keyname % fingerprint);
+        return read_bool_answer(question, false);
       }
 
       virtual bool askUserToAcceptVerificationFailed( const std::string &file,const PublicKey &key )
       {
 	const std::string& keyid = key.id(), keyname = key.name(),
 	  fingerprint = key.fingerprint();
-        cout << file << _("Signature verification for ") << file
-	     << _(" with public key id ") << keyid << " " << keyname << _(" fingerprint:") << fingerprint << _(" failed, THIS IS RISKY!") << ". " << _("continue?") << " [y/n]: " << endl;
-        return readBoolAnswer(); // TODO do this with format()
+
+        if (gSettings.no_gpg_checks)
+        {
+          MIL << boost::format(
+              "Ignoring failed signature verification for %s"
+              " with public key id %s, %s, fingerprint %s")
+              % file % keyid % keyname % fingerprint << endl;
+          cerr << boost::format(
+              _("Warning: Ignoring failed signature verification for %s"
+                " with public key id %s, %s, fingerprint %s!"
+                " Double-check this is not caused by some malicious"
+                " changes in the file!"))
+              %file % keyid % keyname % fingerprint << endl;
+          return true;
+        }
+
+        std::string question = boost::str(boost::format(
+            _("Signature verification failed for %s"
+              " with public key id %s, %s, fingerprint %s."
+              " Warning: this might be caused by a malicious change in the file!"
+              " Continuing is risky! Continue anyway?"))
+            % file % keyid % keyname % fingerprint);
+        return read_bool_answer(question, false);
       }
     };
-
 
     struct DigestReceive : public zypp::callback::ReceiveReport<zypp::DigestReport>
     {
       virtual bool askUserToAcceptNoDigest( const zypp::Pathname &file )
       {
-	cout << CLEARLN << _("No digest for ") << file
-	     << ", " << _("continue?") << " [y/n]" << flush;
-        return readBoolAnswer();
+	std::string question = boost::str(boost::format(
+	    _("No digest for file %s.")) % file) + " " + _("Continue?");
+        return read_bool_answer(question, gSettings.no_gpg_checks);
       }
+
       virtual bool askUserToAccepUnknownDigest( const Pathname &file, const std::string &name )
       {
-	cout << CLEARLN << _("Unknown digest ") << name << _(" for ") << file
-	     << ", " << _("continue?") << " [y/n]" << flush;
-        return readBoolAnswer();
+        std::string question = boost::str(boost::format(
+            _("Unknown digest %s for file %s.")) %name % file) + " " +
+            _("Continue?");
+        return read_bool_answer(question, gSettings.no_gpg_checks);
       }
+
       virtual bool askUserToAcceptWrongDigest( const Pathname &file, const std::string &requested, const std::string &found )
       {
-	cout << CLEARLN << _("Digest verification failed for ") << file
-	     << _(", expected ") << requested << _(" found ") << found
-	     << ", " << _("continue?") << " [y/n]" << flush;
-        return readBoolAnswer();
+        if (gSettings.no_gpg_checks)
+        {
+          WAR << boost::format(
+              "Ignoring failed digest verification for %s (expected %s, found %s).")
+              % file % requested % found << endl;
+          cerr << boost::format(
+              _("Ignoring failed digest verification for %s (expected %s, found %s)."))
+              % file % requested % found << endl;
+          return true;
+        }
+
+	std::string question = boost::str(boost::format(
+	    _("Digest verification failed for %s. Expected %s, found %s."))
+	    % file % requested % found) + " " + _("Continue?");
+        return read_bool_answer(question, false);
       }
     };
 

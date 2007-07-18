@@ -55,16 +55,17 @@ KeyRingCallbacks keyring_callbacks;
 DigestCallbacks digest_callbacks;
 
 static struct option global_options[] = {
-  {"help",	no_argument, 0, 'h'},
-  {"verbose",	no_argument, 0, 'v'},
-  {"quiet",	no_argument, 0, 'q'},
-  {"version",	no_argument, 0, 'V'},
-  {"terse",	no_argument, 0, 't'},
-  {"table-style", required_argument, 0, 's'},
-  {"rug-compatible", no_argument, 0, 'r'},
-  {"non-interactive", no_argument, 0, 0},
-  {"root",	required_argument, 0, 'R'},
-  {"opt",	optional_argument, 0, 'o'},
+  {"help",            no_argument,       0, 'h'},
+  {"verbose",         no_argument,       0, 'v'},
+  {"quiet",           no_argument,       0, 'q'},
+  {"version",         no_argument,       0, 'V'},
+  {"terse",           no_argument,       0, 't'},
+  {"table-style",     required_argument, 0, 's'},
+  {"rug-compatible",  no_argument,       0, 'r'},
+  {"non-interactive", no_argument,       0, 0},
+  {"no-gpg-checks",   no_argument,       0, 0},
+  {"root",            required_argument, 0, 'R'},
+  {"opt",             optional_argument, 0, 'o'},
   {0, 0, 0, 0}
 };
 
@@ -156,17 +157,17 @@ ZypperCommand process_globals(int argc, char **argv)
   if (gopts.count("verbose")) {
     gSettings.verbosity += gopts["verbose"].size();
     cout << _("Verbosity ") << gSettings.verbosity << endl;
-    DBG << _("Verbosity ") << gSettings.verbosity << endl;
+    DBG << "Verbosity " << gSettings.verbosity << endl;
   }
 
   if (gopts.count("non-interactive")) {
-  	gSettings.non_interactive = true;
-  	cout_n << "Entering non-interactive mode.\n"
-  		"WARNING: global non-interactive mode is still under development, use "
-  		"with caution. This mode has been implemented and tested for install, "
-  		"remove, and update commands so far. In case of problems related to "
-  		"non-interactive mode, please file a bugreport following instructions at "
-  		"http://en.opensuse.org/Zypper#Troubleshooting" << endl;
+    gSettings.non_interactive = true;
+    MIL << "Entering non-interactive mode" << endl;
+  }
+
+  if (gopts.count("no-gpg-checks")) {
+    gSettings.no_gpg_checks = true;
+    MIL << "Entering no-gpg-checks mode" << endl;
   }
 
   if (gopts.count("table-style")) {
