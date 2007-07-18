@@ -275,7 +275,7 @@ struct RepoReportReceiver  : public zypp::callback::ReceiveReport<zypp::repo::Re
   {
     display_done ();
     display_error (error, description);
-    return (Action) read_action_ari ();
+    return (Action) read_action_ari (ABORT);
   }
 
   virtual void finish( zypp::Repository /*repo*/, const std::string & task, Error error, const std::string & reason )

@@ -257,10 +257,11 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
   }
   else if (command == ZypperCommand::INSTALL) {
     static struct option install_options[] = {
-      {"catalog",	   required_argument, 0, 'c'},
-      {"type",	     required_argument, 0, 't'},
-      {"no-confirm", no_argument,       0, 'y'},
-      {"help",       no_argument,       0, 'h'},
+      {"catalog",	            required_argument, 0, 'c'},
+      {"type",	                    required_argument, 0, 't'},
+      {"no-confirm",                no_argument,       0, 'y'},
+      {"auto-agree-with-licenses",  no_argument,       0, 'l'},
+      {"help",                      no_argument,       0, 'h'},
       {0, 0, 0, 0}
     };
     specific_options = install_options;
@@ -272,7 +273,9 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
       "  Command options:\n"
       "\t--catalog,-c\t\t\tOnly from this catalog (under development)\n"
       "\t--type,-t <resolvable_type>\tType of resolvable (default: package)\n"
-      "\t--no-confirm,-y\t\t\tDo not require user confirmation\n"
+      "\t--no-confirm,-y\t\t\tDo not require user confirmation to proceed with installation\n"
+      "\t--auto-agree-with-licenses,-l\tAutomatically say 'yes' to third party license confirmation prompt.\n"
+      "\t\t\t\t\tSee man zypper for more details.\n"
       );
   }
   else if (command == ZypperCommand::REMOVE) {
@@ -415,9 +418,10 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
   }
   else if (command == ZypperCommand::UPDATE) {
     static struct option update_options[] = {
-      {"type",		   required_argument, 0, 't'},
-      {"no-confirm", no_argument,       0, 'y'},
-      {"skip-interactive", no_argument, 0, 0},
+      {"type",		            required_argument, 0, 't'},
+      {"no-confirm",                no_argument,       0, 'y'},
+      {"skip-interactive",          no_argument,       0, 0},
+      {"auto-agree-with-licenses",  no_argument,       0, 'l'},
       {"help", no_argument, 0, 'h'},
       {0, 0, 0, 0}
     };
@@ -430,6 +434,8 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
       "\t--type,-t <resolvable_type>\tType of resolvable (default: patch)\n"
       "\t--no-confirm,-y\t\t\tDo not require user confirmation\n"
       "\t--skip-interactive\t\tSkip interactive updates\n"
+      "\t--auto-agree-with-licenses,-l\tAutomatically say 'yes' to third party license confirmation prompt.\n"
+      "\t\t\t\t\tSee man zypper for more details.\n"
       );
   }
   else if (command == ZypperCommand::SEARCH) {
@@ -873,6 +879,9 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
       }
 
       gData.packages_to_install = arguments;
+
+      if (copts.count("auto-agree-with-licenses"))
+        gSettings.license_auto_agree = true;
     }
 
     if (command == ZypperCommand::REMOVE) {
@@ -1090,6 +1099,9 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
       cerr << _("Root privileges are required for updating packages.") << endl;
       return ZYPPER_EXIT_ERR_PRIVILEGES;
     }
+
+    if (copts.count("auto-agree-with-licenses"))
+      gSettings.license_auto_agree = true;
 
     string skind = copts.count("type")?  copts["type"].front() :
       gSettings.is_rug_compatible? "package" : "patch";

@@ -58,8 +58,11 @@ Only from this catalog (FIXME not implemented yet)
 \fI\-t, \-\-type\fR <resolvable_type>
 Type of resolvable (default: package)
 .TP
-.I \-y, \-\-no-confirm
-Don't require user confirmation.
+.I \-y, \-\-no\-confirm
+Don't require user confirmation to proceed with installation.
+.TP
+.I \-l, \-\-auto\-agree\-with\-licenses
+Automatically say 'yes' to third party license confirmation prompt. By using this option, you choose to agree with licenses of all third-party software this command will install. This option is particularly useful for administators installing the same set of packages on multiple machines (by an automated process) and have the licenses confirmed before.
 
 .TP
 .B list-updates (lu) [options]
@@ -91,10 +94,13 @@ Type of resolvable (default: patch)
 .I \-y, \-\-no-confirm
 Don't require user confirmation.
 .TP
-.I \-\-skip\-interactive
-This will skip interactive patches, that is those that need a reboot,
+.I     \-\-skip\-interactive
+This will skip interactive patches, that is, those that need reboot,
 contain a message, or update a package whose license needs to be
 confirmed.
+.TP
+.I \-l, \-\-auto\-agree\-with\-licenses
+Automatically say 'yes' to third party license confirmation prompt. By using this option, you choose to agree with licenses of all third-party software this command will install. This option is particularly useful for administators installing the same set of packages on multiple machines (by an automated process) and have the licenses confirmed before.
 
 .B NOTE:
 Zypper prefers to update only those packages for which a patch
@@ -191,6 +197,8 @@ Add the repository as disabled.
 .TP
 \fI\-n, \-\-no\-refresh\fR 
 Add the repository with auto-refresh disabled.
+.TP
+NOTE: This command does not automatically refresh the newly added repositories. You have to use the \fBrefresh\fR command after finishing your modifications to repositories with \fB*repo\fR commands.
 
 .TP
 .B removerepo (rr) [options] <alias|URI>
@@ -234,7 +242,7 @@ Disable auto-refresh for the repository.
 .B refresh (ref)
 Refresh all installation sources found in system.
 .IP
-This means downloading resolvables' metadata from source media and storing it in local cache, typically under /var/lib/zypp/cache.
+This means downloading resolvables' metadata from source media (if needed), storing it in local cache (typically under /var/lib/zypp/cache/raw directory) and preparsing the metadata into an sqlite database (/var/lib/zypp/cache/zypp.db).
 
 .SH "GLOBAL OPTIONS"
 .TP 
@@ -248,7 +256,7 @@ Print zypper version number and exit.
 Increase verbosity. For debugging output specify this option twice.
 .TP
 .I \-q, \-\-quiet
-Suppress normal output. Brief error messages will still be printed on standard error output. If used together with conflicting --verbose option, the --verbose option takes preference.
+Suppress normal output. Brief messages will still be printed though. If used together with conflicting --verbose option, the --verbose option takes preference.
 .TP
 .I \-t, \-\-terse
 Terse output for machine consumption.
@@ -260,7 +268,7 @@ Specifies table style to use. Table style is identified by an integer number. TO
 Turns on rug compatibility. See compatibility notes next to affected commands.
 .TP
 .I      \-\-non\-interactive
-Switches to non-interactive mode. In this mode zypper doesn't ask user to type answers to various prompts, but uses default answers automatically. (Under development, use only with install, update, and remove commands for other than debugging purposes)
+Switches to non-interactive mode. In this mode zypper doesn't ask user to type answers to various prompts, but uses default answers automatically.
 .TP
 .I      \-\-no\-gpg\-checks
 Ignore gpg check failures and continue.
@@ -270,8 +278,14 @@ Operates on a different root directory.
 
 .SH "FILES"
 .TP
-.B /var/lib/zypp/cache
-Directory for storing metadata contained in installation sources.
+.B /etc/zypp/repos.d
+Directory containing repository configuration (*.repo) files. You can use the \fBrepo\fR commands to manipulate these files, or you can edit them yourself. In either case, after doing the modifications, executing \fBzypper refresh\fR is strongly recommended.
+.TP
+.B /var/lib/zypp/cache/raw
+Directory for storing raw metadata contained in repositories.
+.TP
+.B /var/lib/zypp/cache/zypp.db
+Sqlite database file containing pre-parsed metadata of all repositories.
 .TP
 .B ~/.zypper_history
 Command history for the shell.

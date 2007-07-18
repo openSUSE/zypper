@@ -50,6 +50,7 @@ struct Settings
   is_rug_compatible(false),
   non_interactive(false),
   no_gpg_checks(false),
+  license_auto_agree(false),
   root_dir("/")
   {}
 
@@ -74,6 +75,7 @@ struct Settings
   bool is_rug_compatible;
   bool non_interactive;
   bool no_gpg_checks;
+  bool license_auto_agree;
   std::string root_dir;
 };
 
