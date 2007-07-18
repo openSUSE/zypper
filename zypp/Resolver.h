@@ -238,6 +238,18 @@ namespace zypp
     void transactReset( ResStatus::TransactByValue causer );
 
     /**
+     * Adding additional requirement
+     *
+     */
+    void addRequire (const Capability & capability);
+
+    /**
+     * Adding additional conflict
+     *
+     */
+    void addConflict (const Capability & capability);      
+      
+    /**
      * Setting solver timeout
      *
      * Stop solving after a given timeframe (seconds) 

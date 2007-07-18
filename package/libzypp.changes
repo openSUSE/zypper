@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Wed Jul 18 16:09:04 CEST 2007 - schubi@suse.de
+
+- added new calls in Resolver.h: addRequire,addConflict 
+
+-------------------------------------------------------------------
 Wed Jul 18 14:43:04 CEST 2007 - ma@suse.de
 
 - Fixed IniParser to allow '=' in vaues (#292669)

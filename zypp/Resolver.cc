@@ -98,6 +98,10 @@ namespace zypp
   { return _pimpl->transactResKind( kind ); }
   void Resolver::transactReset( ResStatus::TransactByValue causer )
   { _pimpl->transactReset( causer ); }
+  void Resolver::addRequire (const Capability & capability)
+  { _pimpl->addExtraCapability( capability ); }
+  void Resolver::addConflict (const Capability & capability)
+  { _pimpl->addExtraConflict( capability ); }          
   std::list<PoolItem_Ref> Resolver::problematicUpdateItems( void ) const
   { return _pimpl->problematicUpdateItems(); }
   void Resolver::setTimeout( int seconds )
