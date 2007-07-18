@@ -56,6 +56,14 @@ namespace zypp
     Date timestamp() const;
     
     /**
+     * \short Is the status empty?
+     *
+     * An empty status means that the status
+     * was not calculated.
+     */
+    bool empty() const;
+
+    /**
      * set the repository checksum \see checksum
      * \param checksum
      */
@@ -79,6 +87,9 @@ namespace zypp
      * As most repository state is represented
      * by the status of the index file, you can
      * construct the status from a file.
+     *
+     * \note construct from a non existing
+     * file will result in an empty status
      */
     RepoStatus( const Pathname &file );
     

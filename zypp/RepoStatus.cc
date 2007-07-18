@@ -80,9 +80,19 @@ namespace zypp
   RepoStatus::RepoStatus( const Pathname &path )
     : _pimpl( new Impl() )
   {
-     _pimpl->checksum = filesystem::sha1sum(path);
+      PathInfo info(path);
+      if ( info.isExist() )
+      {
+        _pimpl->checksum = filesystem::sha1sum(path);
+        _pimpl->timestamp = Date(info.mtime());
+      }
   }
   
+  bool RepoStatus::empty() const
+  {
+    return _pimpl->checksum.empty();
+  }
+
   RepoStatus & RepoStatus::setChecksum( const string &checksum )
   {
     _pimpl->checksum = checksum;

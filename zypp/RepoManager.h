@@ -139,7 +139,12 @@ namespace zypp
     *
     * \note the local metadata must be valid.
     *
-    * \throws repo::RepoNoAliasException if can't figure an alias to look in cache
+    * \throws repo::RepoNoAliasException if can't figure 
+    * an alias to look in cache
+    *
+    * \throws repo::RepoMetadataException if the metadata
+    * is not enough to build a cache (empty, incorrect, or
+    * refresh needed)
     * \throws Exception on unknown error.
     */
    void buildCache( const RepoInfo &info,

@@ -85,20 +85,29 @@ void repomanager_test( const string &dir )
   return;
   
   RepoInfo repo(repos.front());
+
+  // we have no metadata yet so this should throw
+  BOOST_CHECK_THROW( manager.buildCache(repo),
+                     RepoMetadataException );
+
   manager.refreshMetadata(repo);
   
+  BOOST_CHECK_MESSAGE( ! manager.isCached(repo),
+                       "Repo is not yet cached" );
+
   Repository repository;
-  try {
-    repository = manager.createFromCache(repo);
-  }
-  catch ( const RepoNotCachedException &e )
-  {
-    ZYPP_CAUGHT(e);
-    MIL << "repo " << repo.alias() << " not cached yet. Caching..." << endl;
-    manager.buildCache(repo);
-    repository = manager.createFromCache(repo);
-  }
+
+  // it is not cached, this should throw
+  BOOST_CHECK_THROW( manager.createFromCache(repo),
+                     RepoNotCachedException );
+
+  MIL << "repo " << repo.alias() << " not cached yet. Caching..." << endl;
+  manager.buildCache(repo);
+  repository = manager.createFromCache(repo);
   
+   BOOST_CHECK_MESSAGE( manager.isCached(repo),
+                       "Repo is cached" );
+
   ResStore store = repository.resolvables();
   MIL << store.size() << " resolvables" << endl;
   

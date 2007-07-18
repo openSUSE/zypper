@@ -482,6 +482,11 @@ namespace zypp
     cache::CacheStore store(_pimpl->options.repoCachePath);
 
     RepoStatus raw_metadata_status = rawMetadataStatus(info);
+    if ( raw_metadata_status.empty() )
+    {
+      ZYPP_THROW(RepoMetadataException(info));
+    }
+
     if ( store.isCached( info.alias() ) )
     {
       MIL << info.alias() << " is already cached." << endl;

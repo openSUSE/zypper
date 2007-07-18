@@ -133,6 +133,29 @@ namespace zypp
       ~RepoUnknownTypeException() throw()
       {}
     };
+
+    /**
+     * thrown when it was impossible to
+     * use the raw metadata for this repo.
+     */
+    class RepoMetadataException : public RepoException
+    {
+    public:
+      RepoMetadataException( const RepoInfo &info)
+        : _info(info)
+      {}
+
+      RepoMetadataException()
+      {}
+
+      ~RepoMetadataException() throw()
+      {}
+
+      RepoInfo info()
+      { return _info; }
+    private:
+      RepoInfo _info;
+    };
     
     /////////////////////////////////////////////////////////////////
   } // namespace parser
