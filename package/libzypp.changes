@@ -3,6 +3,7 @@ Wed Jul 18 14:43:04 CEST 2007 - ma@suse.de
 
 - Fixed IniParser to allow '=' in vaues (#292669)
 - revision 6063
+- version 3.11.9
 
 -------------------------------------------------------------------
 Wed Jul 18 12:38:55 CEST 2007 - ma@suse.de
