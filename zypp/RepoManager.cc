@@ -682,6 +682,33 @@ namespace zypp
 
   ////////////////////////////////////////////////////////////////////////////
 
+  /**
+   * \short Generate a related filename from a repo info
+   *
+   * From a repo info, it will try to use the alias as a filename
+   * escaping it if necessary. Other fallbacks can be added to
+   * this function in case there is no way to use the alias
+   */
+  static std::string generate_filename( const RepoInfo &info )
+  {
+    std::string fnd="/";
+    std::string rep="_";
+    std::string filename = info.alias();
+    // replace slashes with underscores
+    size_t pos = filename.find(fnd);
+    while(pos!=string::npos)
+    {
+      filename.replace(pos,fnd.length(),rep);
+      pos = filename.find(fnd,pos+rep.length());
+    }
+    filename = Pathname(filename).extend(".repo").asString();
+    MIL << "generating filename for repo [" << info.alias() << "] : '" << filename << "'" << endl;
+    return filename;
+  }
+
+
+  ////////////////////////////////////////////////////////////////////////////
+
   void RepoManager::addRepository( const RepoInfo &info,
                                    const ProgressData::ReceiverFnc & progressrcv )
   {
@@ -708,7 +735,7 @@ namespace zypp
     filesystem::assert_dir(_pimpl->options.knownReposPath);
     
     Pathname repofile = generate_non_existing_name(_pimpl->options.knownReposPath,
-                                                    Pathname(info.alias()).extend(".repo").asString());
+                                                    generate_filename(info));
     // now we have a filename that does not exists
     MIL << "Saving repo in " << repofile << endl;
 

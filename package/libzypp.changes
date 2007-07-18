@@ -7,6 +7,11 @@ Wed Jul 18 12:38:55 CEST 2007 - ma@suse.de
 - revision 6058
 
 -------------------------------------------------------------------
+Wed Jul 18 14:16:59 CEST 2007 - duncan@suse.de
+
+- allow / in alias (#292628) 
+
+-------------------------------------------------------------------
 Tue Jul 17 15:57:03 CEST 2007 - ma@suse.de
 
 - Fixed OnMediLocation to use safe defaults. Added setLocaltion and

@@ -62,6 +62,10 @@ void repomanager_test( const string &dir )
   repos = manager.knownRepositories();
   BOOST_CHECK_EQUAL(repos.size(), (unsigned) 6);
   
+  RepoInfo office_dup;
+  office_dup.setAlias("office");
+  BOOST_CHECK_THROW(manager.addRepository(office_dup), RepoAlreadyExistsException);
+
   // delete the office repo inside the propietary_1.repo
   RepoInfo office;
   office.setAlias("office");
