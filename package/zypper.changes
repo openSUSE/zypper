@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Jul 18 20:35:50 CEST 2007 - jkupec@suse.cz
+
+- --auto-agree-with-licenses option added
+- r6080
+
+-------------------------------------------------------------------
 Wed Jul 18 16:15:50 CEST 2007 - jkupec@suse.cz
 
 - man page update, COMPATIBILITY WITH RUG section added
