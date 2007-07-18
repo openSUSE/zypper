@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Jul 18 16:40:35 CEST 2007 - dmacvicar@suse.de
+
+- fix retrieval of container attributes in cache
+  (#292698)
+
+-------------------------------------------------------------------
 Wed Jul 18 16:12:06 CEST 2007 - ma@suse.de
 
 - Port zypp-query-pool (#292404)
