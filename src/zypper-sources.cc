@@ -405,14 +405,51 @@ bool looks_like_url (const string& s) {
   return false;
 }
 
+static bool do_remove_repo(const RepoInfo & repoinfo)
+{
+  RepoManager manager;
+  bool found = true;
+  try
+  {
+    manager.removeRepository(repoinfo);
+    cout << format(_("Repository %s has been removed.")) % repoinfo.alias() << endl;
+    MIL << format("Repository %s has been removed.") % repoinfo.alias() << endl;
+  }
+  catch (const repo::RepoNotFoundException & ex)
+  {
+    found = false;
+  }
+
+  return found;
+}
+
+
 // ----------------------------------------------------------------------------
 
-void remove_repo( const std::string &alias )
+bool remove_repo( const std::string &alias )
 {
   RepoManager manager;
   RepoInfo info;
   info.setAlias(alias);
-  manager.removeRepository(info);
+
+  return do_remove_repo(info);
+}
+
+bool remove_repo(const Url & url, const url::ViewOption & urlview)
+{
+  RepoManager manager;
+  bool found = true;
+  try
+  {
+    RepoInfo info = manager.getRepositoryInfo(url, urlview);
+    found = do_remove_repo(info);
+  }
+  catch (const repo::RepoNotFoundException & ex)
+  {
+    found = false;
+  }
+
+  return found;
 }
 
 // ----------------------------------------------------------------------------
@@ -427,7 +464,7 @@ void rename_repo(const std::string & alias, const std::string & newalias)
     repo.setAlias(newalias);
     manager.modifyRepository(alias, repo);
 
-    cout_n << format(_("Repository %s renamed to %s")) % alias % repo.alias() << endl;
+    cout << format(_("Repository %s renamed to %s")) % alias % repo.alias() << endl;
     MIL << format("Repository %s renamed to %s") % alias % repo.alias() << endl;
   }
   catch (const RepoNotFoundException & ex)

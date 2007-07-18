@@ -62,8 +62,9 @@ void warn_if_zmd();
 /**
  * Delte repository specified by \a alias.
  */
-void remove_repo( const std::string &alias );
+bool remove_repo( const std::string &alias );
 
+bool remove_repo( const zypp::Url & url, const zypp::url::ViewOption & urlview );
 
 /**
  * Rename repository specified by \a alias to \a newalias.

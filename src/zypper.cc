@@ -22,6 +22,7 @@
 
 #include <zypp/base/Logger.h>
 #include <zypp/zypp_detail/ZYppReadOnlyHack.h>
+#include <zypp/repo/RepoException.h>
 
 #include "zypper.h"
 #include "zypper-sources.h"
@@ -80,7 +81,7 @@ Url make_url (const string & url_s) {
   }
   catch ( const Exception & excpt_r ) {
     ZYPP_CAUGHT( excpt_r );
-    cerr << _("URL is invalid.") << endl;
+    cerr << _("Given URL is invalid.") << endl;
     cerr << excpt_r.asUserString() << endl;
   }
   return u;
@@ -331,15 +332,19 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
   else if (command == ZypperCommand::REMOVE_REPO) {
     static struct option service_delete_options[] = {
       {"help", no_argument, 0, 'h'},
+      {"loose-auth", no_argument, 0, 0},
+      {"loose-query", no_argument, 0, 0},
       {0, 0, 0, 0}
     };
     specific_options = service_delete_options;
     specific_help = _(
-      "service-delete [options] <alias>\n"
+      "removerepo (rr) [options] <alias|URL>\n"
       "\n"
-      "Remove service (installation source) from the system."
+      "Remove repository specified by alias or URL."
       "\n"
-      "This command has no additional options.\n"
+      "  Command options:\n"
+      "\t--loose-auth\tIgnore user authentication data in the URL\n"
+      "\t--loose-query\tIgnore query string in the URL\n"
       );
   }
   else if (command == ZypperCommand::RENAME_REPO) {
@@ -722,15 +727,46 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
     }
 
     warn_if_zmd ();
-    try {
-      // also stores it
-      remove_repo(arguments[0]);
-    }
+
+    bool found = remove_repo(arguments[0]);
+    if (found)
+      return ZYPPER_EXIT_OK;
+
+    MIL << "Repository not found by alias, trying delete by URL" << endl;
+    cout_v << _("Repository not found by alias, trying delete by URL...") << endl;
+
+    Url url;
+    try { url = Url (arguments[0]); }
     catch ( const Exception & excpt_r )
     {
-      ZYPP_CAUGHT (excpt_r);
-      cerr << excpt_r.asUserString() << endl;
-      return ZYPPER_EXIT_ERR_ZYPP;
+      ZYPP_CAUGHT( excpt_r );
+      cerr_v << _("Given URL is invalid.") << endl;
+      cerr_v << excpt_r.asUserString() << endl;
+    }
+
+    if (url.isValid())
+    {
+      url::ViewOption urlview = url::ViewOption::DEFAULTS + url::ViewOption::WITH_PASSWORD;
+
+      if (copts.count("loose-auth"))
+      {
+        urlview = urlview
+          - url::ViewOptions::WITH_PASSWORD
+          - url::ViewOptions::WITH_USERNAME;
+      }
+
+      if (copts.count("loose-query"))
+        urlview = urlview - url::ViewOptions::WITH_QUERY_STR;
+
+      found = remove_repo(url, urlview);
+    }
+    else
+      found = false;
+
+    if (!found)
+    {
+      MIL << "Repository not found by given alias or URL." << endl;
+      cerr << _("Repository not found by given alias or URL.") << endl;
     }
 
     return ZYPPER_EXIT_OK;
