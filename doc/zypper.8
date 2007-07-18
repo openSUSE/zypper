@@ -1,18 +1,16 @@
 .TH "zypper" "8" "0.7.0" "zypper" "System Tools"
 .SH "SYNTAX"
 .LP
-zypper [\fI\-\-global\-options\fR] [\fBcommand\fR] [\fI\-\-command\-options\fR] [\fBcommand-arguments\fR]
+zypper [\fI\-\-global\-options\fR] <\fBcommand\fR> [\fI\-\-command\-options\fR] [\fBcommand-arguments\fR]
 
 zypper \fI\-\-help\fR
 .SH "DESCRIPTION"
 .LP
-zypper is a command\-line interface to ZYPP system management library. It can be used to install, update, remove software, manage installation sources, perform various searches, and more.
-
-zypper is designed to be compatible with rug, which is a command\-line interface to the ZENworks Linux Management (ZLM) agent. Compared to rug, zypper does not need the ZLM daemon to run, and is intented to provide more and improved functionality.
+zypper is a command\-line interface to ZYPP system management library. It can be used to install, update, remove software, manage repositories, perform various searches, and more.
 
 .SH "COMMANDS"
 .LP
-zypper provides a number of \fBcommands\fR. Each command accepts the option flags listed in the GLOBAL OPTIONS section. In addition, many commands have specific option flags, which are listed in this section.
+zypper provides a number of \fBcommands\fR. Each command accepts the options listed in the GLOBAL OPTIONS section. In addition, many commands have specific options, which are listed in this section.
 
 .LP
 .B General Commands
@@ -171,67 +169,66 @@ installed and not applicable ones.
 Displays full info for the specified patches.
 
 .LP 
-.B Installation Source Management
+.B Repository Management
 
 .LP
-zypper is able to work with YaST installation sources, aptrpm
+zypper is able to work with YaST, YUM, and aptrpm
 repositories, ZENworks 7 Linux Management, ZENworks 6.6.x Linux
-Management servers, as well as local files. Currently, an Installation
-Source in zypper is a synonym for both Service and Catalog in ZLM.
-
-TERMS: ZENworks distinguishes services and catalogs. A service is
-added by URI and contains one or more catalogs. Libzypp does not have
-this distinction (yet) but for compatibility it uses the same command
-and option names (service-add, --catalog) as rug. In libzypp, an
-installation source is a repository is a service is a catalog.
+Management servers, as well as local files.
 
 .TP
-.B service-add (sa) <URI> <alias>
-Add a new service (installation source).
+.B addrepo (ar) [options] <URI> <alias>
+Add a new repository specified by URI and assign specified alias to it.
 .TP
 \fI\-r, \-\-repo\fR <FILE.repo>
-Read URI and alias from a file
+Read URI and alias from specified .repo file
 .TP
 \fI\-t, \-\-type\fR <TYPE>
 Type of repository (YaST, YUM, or Plaindir).
 .TP
 \fI\-d, \-\-disabled\fR
-Add the service as disabled.
+Add the repository as disabled.
 .TP
-\fI\-n, \-\-no\-refresh\fR
-Do not automatically refresh the metadata.
+\fI\-n, \-\-no\-refresh\fR 
+Add the repository with auto-refresh disabled.
 
 .TP
-.B service-delete (sd) <alias>
-Delete a service (installation source).
+.B removerepo (rr) [options] <alias|URI>
+Delete repository specified by alias or URI.
+.TP
+\fI    --loose-auth\fR
+Ignore user authentication data in the URI
+.TP
+\fI    --loose-query\fR
+Ignore query string in the URI
 
 .TP
-.B service-list (sl)
-List services (installation sources).
+.B repos (lr)
+List all defined repositories.
 .IP
 Following data are printed for each source found: Enabled (whether the source is enabled), Refresh (whether autorefresh is enabled for the source), Type (YaST, YUM, ...), Name, and URI.
 .IP
 rug compatibility mode: if \fI-r\fR global option is set, zypper doesn't include 'Enabled' and 'Refresh' columns and prints rug's 'Status' column with values "Active" or "Disabled" instead.
 
 .TP
-.B service-rename (sr) <alias> <new-alias>
-Rename a service (installation source).
+.B renamerepo (nr) <alias> <new-alias>
+Assign new alias to the repository specified by alias.
 
 .TP
-.B service-modify (sm) <options> <alias>
-Modify a service (installation source).
+.B modifyrepo (mr) <options> <alias>
+Modify properties of the repository specified by alias.
 .TP
 \fI\-e, \-\-enable\fR
-Enable the service.
+Enable the repository.
 .TP
 \fI\-d, \-\-disable\fR
-Disable the service.
+Disable the repository.
 .TP
 \fI\-a, \-\-enable-autorefresh\fR
-Enable auto-refresh for the service.
+Enable auto-refresh for the repository.
 .TP
 \fI    \-\-disable\-autorefresh\fR
-Disable auto-refresh for the service.
+Disable auto-refresh for the repository.
 
 .TP
 .B refresh (ref)
@@ -265,6 +262,9 @@ Turns on rug compatibility. See compatibility notes next to affected commands.
 .I      \-\-non\-interactive
 Switches to non-interactive mode. In this mode zypper doesn't ask user to type answers to various prompts, but uses default answers automatically. (Under development, use only with install, update, and remove commands for other than debugging purposes)
 .TP
+.I      \-\-no\-gpg\-checks
+Ignore gpg check failures and continue.
+.TP
 .I \-R, \-\-root <dir>
 Operates on a different root directory.
 
@@ -290,7 +290,7 @@ Unexpected situation occured, probably caused by a bug.
 zypper was invoked with an invalid command or option, or a bad syntax.
 .TP
 3 - ZYPPER_EXIT_ERR_INVALID_ARGS
-Some of provided arguments were invalid. E.g. an invalid URI was provided to the service-add command.
+Some of provided arguments were invalid. E.g. an invalid URI was provided to the addrepo command.
 .TP
 4 - ZYPPER_EXIT_ERR_ZYPP
 A problem reported by ZYPP library. E.g. another instance of ZYPP is running.
@@ -309,6 +309,32 @@ Returned after a successfull installation of a patch which requires reboot of co
 .TP
 103 - ZYPPER_EXIT_INF_RESTART_NEEDED
 Returned after a successfull installation of a patch which requires restart of the package manager itself. This means that one of patches to be installed affects the package manager itself and the command used (e.g. zypper update) needs to be executed once again to install any remaining patches.
+
+
+.SH "COMPATIBILITY WITH RUG"
+.LP
+zypper is designed to be compatible with rug, which is a command\-line interface to the ZENworks Linux Management (ZLM) agent. Compared to rug, zypper does not need the ZLM daemon to run, and is intented to provide more and improved functionality. Following is a list of zypper-rug command aliases and compatibility notes. See also compatibility notes in descriptions of zypper commands.
+
+.LP 
+.B Service Management Commands
+.LP
+ZENworks distinguishes services and catalogs. A service is
+added by URI and contains one or more catalogs. Libzypp does not have
+this distinction (yet) but for compatibility it is able to use the same command
+and option names (service-add, --catalog) as rug.
+.LP
+Currently, a Repository in zypper is a synonym for both Service and Catalog in ZLM.
+.TP
+.I rug service-add (sa)
+zypper addrepo (ar)
+
+.TP
+.I rug service-delte (sd)
+zypper removerepo (rr)
+
+.TP
+.I rug service-list (sl)
+zypper repos (lr)
 
 
 .SH "NOTE"

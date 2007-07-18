@@ -56,7 +56,7 @@ ZypperCommand::Command ZypperCommand::parse(const std::string & strval_r)
     _table["removerepo"] = _table["rr"] = _table["service-delete"] = _table["sd"] = ZypperCommand::REMOVE_REPO_e;
     _table["renamerepo"]= _table["nr"] = _table["service-rename"] = _table["sr"] = ZypperCommand::RENAME_REPO_e;    
     _table["modifyrepo"]= _table["mr"] = _table["service-modify"] = _table["sm"] = ZypperCommand::MODIFY_REPO_e;    
-    _table["listrepos"] = _table["lr"] = _table["service-list"] = _table["sl"] = ZypperCommand::LIST_REPOS_e;
+    _table["repos"] = _table["lr"] = _table["service-list"] = _table["sl"] = ZypperCommand::LIST_REPOS_e;
     _table["refresh"] = _table["ref"] = ZypperCommand::REFRESH_e;
 
     _table["install"] = _table["in"] = ZypperCommand::INSTALL_e;

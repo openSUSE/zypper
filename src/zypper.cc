@@ -94,12 +94,12 @@ string help_commands = _(
   "\tinstall, in\t\tInstall packages or resolvables\n"
   "\tremove, rm\t\tRemove packages or resolvables\n"
   "\tsearch, se\t\tSearch for packages matching a pattern\n"
-  "\tservice-list, sl\tList services, also called installation sources\n"
-  "\tservice-add, sa\t\tAdd a new service\n"
-  "\tservice-delete, sd\tDelete a service\n"
-  "\tservice-rename, sr\tRename a service\n"
-  "\tservice-modify, sm\tModify a service\n"
-  "\trefresh, ref\t\tRefresh all installation sources\n"
+  "\trepos, lr\tList all defined repositories.\n"
+  "\taddrepo, ar\t\tAdd a new repository\n"
+  "\tremoverepo, rr\tRemove specified repository\n"
+  "\trenamerepo, nr\tRename specified repository\n"
+  "\tmodifyrepo, mr\tModify specified repository\n"
+  "\trefresh, ref\t\tRefresh all repositories\n"
   "\tpatch-check, pchk\tCheck for patches\n"
   "\tpatches, pch\t\tList patches\n"
   "\tlist-updates, lu\tList updates\n"
@@ -303,16 +303,16 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
     };
     specific_options = service_add_options;
     specific_help = _(
-      "service-add [options] <URI> <alias>\n"
+      "addrepo (ar) [options] <URI> <alias>\n"
       "\n"
-      "Add a service (installation source) to the system."
+      "Add repository specified by URI to the system and assing specified alias to it."
       "\n"
       "  Command options:\n"
       "\t--repo,-r <FILE.repo>\tRead the URL and alias from a file\n"
       "\t\t\t\t(even remote)\n"
       "\t--type,-t <TYPE>\tType of repository (YaST, YUM, or Plaindir)\n"
-      "\t--disabled,-d\t\tAdd the service as disabled\n"
-      "\t--no-refresh,-n\t\tDo not automatically refresh the metadata\n"
+      "\t--disabled,-d\t\tAdd the repository as disabled\n"
+      "\t--no-refresh,-n\t\tAdd the repository with auto-refresh disabled\n"
       );
   }
   else if (command == ZypperCommand::LIST_REPOS) {
@@ -322,9 +322,9 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
     };
     specific_options = service_list_options;
     specific_help = _(
-      "service-list\n"
+      "repos (lr)\n"
       "\n"
-      "List all defined system services (installation sources)."
+      "List all defined repositories."
       "\n"
       "This command has no additional options.\n"
       );
@@ -354,9 +354,9 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
     };
     specific_options = service_rename_options;
     specific_help = _(
-      "service-rename [options] <alias> <new-alias>\n"
+      "renamerepo [options] <alias> <new-alias>\n"
       "\n"
-      "Assign new alias to the service specified by alias."
+      "Assign new alias to the repository specified by alias."
       "\n"
       "This command has no additional options.\n"
       );
@@ -372,14 +372,14 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
     };
     specific_options = service_modify_options;
     specific_help = _(
-      "service-modify (sm) <options> <alias>\n"
+      "modifyrepo (mr) <options> <alias>\n"
       "\n"
-      "Modify properties of a service specified by alias."
+      "Modify properties of the repository specified by alias."
       "\n"
-      "\t--disable,-d\t\tDisable the service (but don't remove it)\n"
-      "\t--enable,-e\t\tEnable a disabled service\n"
-      "\t--enable-autorefresh,-a\tEnable auto-refresh of the service\n"
-      "\t--disable-autorefresh\tDisable auto-refresh of the service\n"
+      "\t--disable,-d\t\tDisable the repository (but don't remove it)\n"
+      "\t--enable,-e\t\tEnable a disabled repository\n"
+      "\t--enable-autorefresh,-a\tEnable auto-refresh of the repository\n"
+      "\t--disable-autorefresh\tDisable auto-refresh of the repository\n"
     );
   }
   else if (command == ZypperCommand::REFRESH) {
@@ -625,7 +625,7 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
     return ZYPPER_EXIT_OK;
   }
 
-  // --------------------------( service list )-------------------------------
+  // --------------------------( repo list )----------------------------------
   
   else if (command == ZypperCommand::LIST_REPOS)
   {
@@ -636,7 +636,7 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
     return ZYPPER_EXIT_OK;
   }
 
-  // --------------------------( service add )--------------------------------
+  // --------------------------( addrepo )------------------------------------
   
   else if (command == ZypperCommand::ADD_REPO)
   {
@@ -701,7 +701,7 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
     return add_repo_by_url(url, alias, type, enabled, refresh);
   }
 
-  // --------------------------( service delete )-----------------------------
+  // --------------------------( delete repo )--------------------------------
 
   else if (command == ZypperCommand::REMOVE_REPO)
   {
@@ -772,7 +772,7 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
     return ZYPPER_EXIT_OK;
   }
 
-  // --------------------------( service rename )-----------------------------
+  // --------------------------( rename repo )--------------------------------
 
   else if (command == ZypperCommand::RENAME_REPO)
   {
@@ -812,7 +812,7 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
     return ZYPPER_EXIT_OK;
   }
 
-  // --------------------------( service modify )-----------------------------
+  // --------------------------( modify repo )--------------------------------
 
   else if (command == ZypperCommand::MODIFY_REPO)
   {
