@@ -107,7 +107,7 @@ cd ..
 
 %files -f zypp.lang
 %defattr(-,root,root)
-#%{prefix}/lib/zypp
+%{prefix}/lib/zypp
 %{prefix}/share/zypp
 %{_libdir}/libzypp*so.*
 %{prefix}/share/applications/package-manager.desktop

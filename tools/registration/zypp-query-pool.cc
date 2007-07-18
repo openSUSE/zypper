@@ -33,7 +33,7 @@ public:
   bool operator()( PoolItem_Ref item )
   {
     if (_repository.empty()
-        || _repository == item->source().alias())
+        || _repository == item->repository().info().alias())
     {
       cout << (item.status().isInstalled() ? "i" : " ");
       cout << "|" << item->kind();
@@ -59,18 +59,19 @@ public:
 
 
 static void
-query_pool( ZYpp::Ptr Z, const string & filter, const string & repository)
+query_pool( ZYpp::Ptr Z, string filter, const string & repository)
 {
   Resolvable::Kind kind;
 
 #define FILTER_ALL "all"
+  if ( filter.empty() ) filter = FILTER_ALL;
 
   if (filter == "packages") kind = ResTraits<zypp::Package>::kind;
   else if (filter == "patches") kind = ResTraits<zypp::Patch>::kind;
   else if (filter == "patterns") kind = ResTraits<zypp::Pattern>::kind;
   else if (filter == "selections") kind = ResTraits<zypp::Selection>::kind;
   else if (filter == "products") kind = ResTraits<zypp::Product>::kind;
-  else if (!filter.empty() && filter != FILTER_ALL)
+  else if (filter != FILTER_ALL)
   {
     std::cerr << "usage: zypp-query-pool [packages|patches|patterns|products] [<alias>]" << endl;
     exit( 1 );
@@ -80,13 +81,29 @@ query_pool( ZYpp::Ptr Z, const string & filter, const string & repository)
 
   MIL << "query_pool kind '" << kind << "', repository '" << repository << "'" << endl;
 
-  RepoManager manager;
-
   if (!system)
   {
     try
     {
-      manager->restore( "/" );
+      MIL << "Load enabled repositories..." << endl;
+      RepoManager  repoManager;
+      RepoInfoList repos = repoManager.knownRepositories();
+      for ( RepoInfoList::iterator it = repos.begin(); it != repos.end(); ++it )
+      {
+        RepoInfo & repo( *it );
+
+        if ( ! repo.enabled() )
+          continue;
+
+        MIL << "Loading " << repo << endl;
+        if ( ! repoManager.isCached( repo ) )
+        {
+          MIL << "Must build cache..." << repo << endl;
+          repoManager.buildCache( repo );
+        }
+        Z->addResolvables( repoManager.createFromCache( repo ).resolvables() );
+      }
+      MIL << "Loaded enabled repositories." << endl;
     }
     catch (Exception & excpt_r)
     {
@@ -99,9 +116,11 @@ query_pool( ZYpp::Ptr Z, const string & filter, const string & repository)
   // add resolvables from the system
   if ( filter != FILTER_ALL )
   {
+    MIL << "Loading target (" << kind << ")..." << endl;
     ResStore items;
     for (ResStore::resfilter_const_iterator it = Z->target()->byKindBegin(kind); it != Z->target()->byKindEnd(kind); ++it)
     {
+      SEC << *it << endl;
       items.insert(*it);
     }
     Z->addResolvables( items, true );
@@ -109,25 +128,14 @@ query_pool( ZYpp::Ptr Z, const string & filter, const string & repository)
   else
   {
     // no filter, just add themm all
+    MIL << "Loading target..." << endl;
     Z->addResolvables( Z->target()->resolvables(), true );
   }
+  MIL << "Loaded target." << endl;
 
-  // add all non-installed (cached sources) resolvables to the pool
-  // remark: If only the systems resolvables should be shown (repository == "@system")
-  //         then the SourceManager is not initialized (see approx. 20 lines above)
-  //         and the following loop is not run at all.
-
-  for (SourceManager::Source_const_iterator it = manager->Source_begin(); it !=  manager->Source_end(); ++it)
-  {
-    zypp::ResStore store = it->resolvables();
-    MIL << "Repository " << it->id() << " contributing " << store.size() << " resolvables" << endl;
-    Z->addResolvables( store, false );
-  }
 
   MIL << "Pool has " << Z->pool().size() << " entries" << endl;
-
-  if (filter.empty()
-      || filter == FILTER_ALL)
+  if ( filter == FILTER_ALL)
   {
     PrintItem printitem( system ? "" : repository );
     if (system)
