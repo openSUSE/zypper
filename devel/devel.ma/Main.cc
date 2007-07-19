@@ -4,12 +4,23 @@
 #include "zypp/base/LogTools.h"
 #include "zypp/base/InputStream.h"
 
-#include "zypp/parser/IniDict.h"
+#include "zypp/RepoManager.h"
 
 using std::endl;
 using namespace zypp;
 
 ///////////////////////////////////////////////////////////////////
+
+RepoManager makeRepoManager( const Pathname & mgrdir_r )
+{
+  RepoManagerOptions mgropt;
+
+  mgropt.repoCachePath    = mgrdir_r/"cache";
+  mgropt.repoRawCachePath = mgrdir_r/"raw_cache";
+  mgropt.knownReposPath   = mgrdir_r/"repos";
+
+  return RepoManager( mgropt );
+}
 
 /******************************************************************
 **
@@ -20,23 +31,31 @@ int main( int argc, char * argv[] )
 {
   INT << "===[START]==========================================" << endl;
 
-  Pathname file( "test.ini" );
-  InputStream is( file );
-  parser::IniDict dict( is );
+  RepoManager repoManager( makeRepoManager( "/tmp/myrepos" ) );
+  RepoInfoList repos = repoManager.knownRepositories();
+  SEC << repos << endl;
 
-  SEC << endl;
-  for_( it, dict.sectionsBegin(), dict.sectionsEnd() )
+  if ( repos.empty() )
   {
-    MIL << (*it) << endl;
+    RepoInfo nrepo;
+    nrepo
+	.setAlias( "factorytest" )
+	.setName( "Test Repo for factory." )
+	.setEnabled( true )
+	.setAutorefresh( false )
+	.addBaseUrl( Url("ftp://dist.suse.de/install/stable-x86/") );
 
-    for_( ent, dict.entriesBegin(*it), dict.entriesEnd(*it) )
-    {
-      DBG << "'" << (*ent).first << "'='" << (*ent).second << "'" << endl;
-    }
+    repoManager.addRepository( nrepo );
+    repos = repoManager.knownRepositories();
+    SEC << repos << endl;
+
+//    SEC << "refreshMetadat" << endl;
+//    repoManager.refreshMetadata( nrepo );
+//    SEC << "buildCache" << endl;
+//    repoManager.buildCache( nrepo );
+//    SEC << "------" << endl;
   }
-  SEC << endl;
 
   INT << "===[END]============================================" << endl << endl;
   return 0;
 }
-

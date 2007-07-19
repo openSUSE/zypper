@@ -54,26 +54,6 @@ namespace zypp
         function<bool ( int )> _redirect;
       };
 
-      /** ManagedFile Dispose functor.
-       * The Pathname argument is ignored, as Repository::releaseFile expects the filename
-       * relative to the medias root (i.e. same args as to provideFile).
-      */
-      struct RepoReleaseFile
-      {
-	RepoReleaseFile( Repository repo_r, const Pathname & location_r, unsigned mediaNr_r )
-	  : _repo( repo_r ), _location( location_r ), _medianr( mediaNr_r )
-	{}
-
-	void operator()( const Pathname & /*UNUSED*/ )
-	{
-	  //_repo.releaseFile( _location, _medianr );
-	}
-
-	Repository _repo;
-	Pathname   _location;
-	unsigned   _medianr;
-      };
-
       /////////////////////////////////////////////////////////////////
     } // namespace
     ///////////////////////////////////////////////////////////////////
@@ -107,8 +87,13 @@ namespace zypp
 
           MediaSetAccess access(url);
 
-          ManagedFile ret( access.provideFile(loc_r),
-                          RepoReleaseFile( repo_r, loc_r.filename(), loc_r.medianr() ) );
+          ManagedFile ret( access.provideFile(loc_r) );
+
+          std::string scheme( url.getScheme() );
+          if ( scheme == "http" || scheme == "https" || scheme == "ftp" )
+          {
+            ret.setDispose( filesystem::unlink );
+          }
 
           if ( loc_r.checksum().empty() )
           {
