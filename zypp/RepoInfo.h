@@ -252,7 +252,11 @@ namespace zypp
     RepoInfo & setName( const std::string &name );
 
     /**
-     * \short set the repository filepath
+     * \short set the path to the .repo file
+     *
+     * The path to the .repo file where this repository
+     * was defined, or empty if nowhere.
+     *
      * \param path File path
      */
     RepoInfo & setFilepath( const Pathname &filename );
