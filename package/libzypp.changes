@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Thu Jul 19 12:58:12 CEST 2007 - ma@suse.de
+
+- Query ByRepository now takes as well an alias.
+
+-------------------------------------------------------------------
 Wed Jul 18 16:40:35 CEST 2007 - dmacvicar@suse.de
 
 - fix retrieval of container attributes in cache

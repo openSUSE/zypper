@@ -188,19 +188,23 @@ namespace zypp
     };
 
 
-    /** Select ResObject by repository. */
+    /** Select ResObject by repository or repository alias. */
     struct ByRepository : public ResObjectFilterFunctor
     {
       ByRepository( Repository repository_r )
-      : _repository( repository_r )
+      : _alias( repository_r.info().alias() )
+      {}
+
+      ByRepository( const std::string & alias_r )
+      : _alias( alias_r )
       {}
 
       bool operator()( ResObject::constPtr p ) const
       {
-       return p->repository() == _repository;
+       return p->repository().info().alias() == _alias;
       }
 
-      Repository _repository;
+      std::string _alias;
     };
 
 
