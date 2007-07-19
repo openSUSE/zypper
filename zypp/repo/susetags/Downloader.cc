@@ -36,9 +36,8 @@ void Downloader::download( const Pathname &dest_dir,
 {
   MediaSetAccess media(_url);
   Fetcher fetcher;
-  
   downloadMediaInfo( dest_dir, media );
-
+  
   SignatureFileChecker sigchecker;
 
   Pathname sig = _path + "/content.asc";
