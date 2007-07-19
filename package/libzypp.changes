@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Thu Jul 19 15:52:03 CEST 2007 - ma@suse.de
+
+- Fixed repo::provideFile to set a deleter for downloaded files
+  (#293004).
+- revision 6094
+- version 3.11.10
+
+-------------------------------------------------------------------
 Thu Jul 19 12:58:12 CEST 2007 - ma@suse.de
 
 - Query ByRepository now takes as well an alias.
