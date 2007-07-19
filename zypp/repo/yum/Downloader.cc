@@ -19,6 +19,7 @@
 #include "Downloader.h"
 #include "zypp/repo/MediaInfoDownloader.h"
 #include "zypp/base/UserRequestException.h"
+#include "zypp/parser/xml/Reader.h"
 
 using namespace std;
 using namespace zypp::xml;
@@ -31,26 +32,28 @@ namespace repo
 namespace yum
 {
 
-Downloader::Downloader( const Url &url, const Pathname &path )
-  : _url(url), _path(path), _media(url, path)
+Downloader::Downloader( const Pathname &path )
+  : _path(path), _media_ptr(0L)
 {
 }
 
-RepoStatus Downloader::status()
+RepoStatus Downloader::status( MediaSetAccess &media )
 {
-  Pathname repomd = _media.provideFile("/repodata/repomd.xml");
+  Pathname repomd = media.provideFile( _path + "/repodata/repomd.xml");
   return RepoStatus(repomd);
 }
 
-bool Downloader::patches_Callback( const OnMediaLocation &loc, const string &id )
+bool Downloader::patches_Callback( const OnMediaLocation &loc,
+                                   const string &id )
 {
   MIL << id << " : " << loc << endl;
-  _fetcher.enqueueDigested(loc);
+  this->enqueueDigested(loc);
   return true;
 }
 
 
-bool Downloader::repomd_Callback( const OnMediaLocation &loc, const ResourceType &dtype )
+bool Downloader::repomd_Callback( const OnMediaLocation &loc,
+                                  const ResourceType &dtype )
 {
   MIL << dtype << " : " << loc << endl;
 
@@ -61,28 +64,32 @@ bool Downloader::repomd_Callback( const OnMediaLocation &loc, const ResourceType
     return true;
   }
 
-  _fetcher.enqueueDigested(loc);
+  this->enqueueDigested(loc);
 
   // We got a patches file we need to read, to add patches listed
   // there, so we transfer what we have in the queue, and
   // queue the patches in the patches callback
   if ( dtype == ResourceType::PATCHES )
   {
-    _fetcher.start( _dest_dir, _media);
+    this->start( _dest_dir, *_media_ptr );
     // now the patches.xml file must exists
-    PatchesFileReader( _dest_dir + loc.filename(), bind( &Downloader::patches_Callback, this, _1, _2));
+    PatchesFileReader( _dest_dir + _path + loc.filename(),
+                       bind( &Downloader::patches_Callback, this, _1, _2));
   }
 
   return true;
 }
 
-void Downloader::download( const Pathname &dest_dir,
+void Downloader::download( MediaSetAccess &media,
+                           const Pathname &dest_dir,
                            const ProgressData::ReceiverFnc & progressrcv )
 {
-  Pathname repomdpath =  "/repodata/repomd.xml";
-  Pathname keypath =  "/repodata/repomd.xml.key";
-  Pathname sigpath =  "/repodata/repomd.xml.asc";
+  Pathname repomdpath =  _path + "/repodata/repomd.xml";
+  Pathname keypath =  _path + "/repodata/repomd.xml.key";
+  Pathname sigpath =  _path + "/repodata/repomd.xml.asc";
 
+  _media_ptr = (&media);
+  
   ProgressData progress;
   progress.sendTo(progressrcv);
   progress.toMin();
@@ -90,13 +97,13 @@ void Downloader::download( const Pathname &dest_dir,
   //downloadMediaInfo( dest_dir, _media );
   
   _dest_dir = dest_dir;
-  if ( _media.doesFileExist(keypath) )
-    _fetcher.enqueue( OnMediaLocation(keypath,1) );
+  if ( _media_ptr->doesFileExist(keypath) )
+    this->enqueue( OnMediaLocation(keypath,1) );
 
-  if ( _media.doesFileExist(sigpath) )
-     _fetcher.enqueue( OnMediaLocation(sigpath,1) );
+  if ( _media_ptr->doesFileExist(sigpath) )
+     this->enqueue( OnMediaLocation(sigpath,1) );
 
-  _fetcher.start( dest_dir, _media );
+  this->start( dest_dir, *_media_ptr );
 
   if ( ! progress.tick() )
     ZYPP_THROW(AbortRequestException());
@@ -109,19 +116,19 @@ void Downloader::download( const Pathname &dest_dir,
   if ( PathInfo( dest_dir + keypath ).isExist() )
     sigchecker.addPublicKey(dest_dir + keypath );
 
-  _fetcher.enqueue( OnMediaLocation(repomdpath,1), sigchecker );
-  _fetcher.start( dest_dir, _media);
+  this->enqueue( OnMediaLocation(repomdpath,1), sigchecker );
+  this->start( dest_dir, *_media_ptr);
 
   if ( ! progress.tick() )
         ZYPP_THROW(AbortRequestException());
 
-  _fetcher.reset();
+  this->reset();
 
-  Reader reader( dest_dir + "/repodata/repomd.xml" );
-  RepomdFileReader( dest_dir + "/repodata/repomd.xml", bind( &Downloader::repomd_Callback, this, _1, _2));
+  Reader reader( dest_dir + _path + "/repodata/repomd.xml" );
+  RepomdFileReader( dest_dir + _path + "/repodata/repomd.xml", bind( &Downloader::repomd_Callback, this, _1, _2));
 
   // ready, go!
-  _fetcher.start( dest_dir, _media);
+  this->start( dest_dir, *_media_ptr);
   progress.toMax();
 }
 

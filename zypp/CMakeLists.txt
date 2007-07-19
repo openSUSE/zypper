@@ -926,6 +926,7 @@ SET( zypp_repo_SRCS
   repo/PackageDelta.cc
   repo/SUSEMediaVerifier.cc
   repo/MediaInfoDownloader.cc
+  repo/Downloader.cc
 )
 
 SET( zypp_repo_HEADERS
@@ -939,6 +940,7 @@ SET( zypp_repo_HEADERS
   repo/PackageDelta.h
   repo/SUSEMediaVerifier.h
   repo/MediaInfoDownloader.h
+  repo/Downloader.h
 )
 
 INSTALL( FILES

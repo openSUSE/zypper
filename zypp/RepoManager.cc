@@ -347,9 +347,10 @@ namespace zypp
         {
           case RepoType::RPMMD_e :
           {
-            yum::Downloader downloader( url, "/" );
+            MediaSetAccess media(url);
+            yum::Downloader downloader(info.path());
 
-            RepoStatus newstatus = downloader.status();
+            RepoStatus newstatus = downloader.status(media);
             bool refresh = false;
             if ( oldstatus.checksum() == newstatus.checksum() )
             {
@@ -366,7 +367,7 @@ namespace zypp
             }
 
             if ( refresh )
-              downloader.download(tmpdir.path());
+              downloader.download( media, tmpdir.path());
             else
               return;
             // no error
@@ -374,9 +375,10 @@ namespace zypp
           break;
           case RepoType::YAST2_e :
           {
-            susetags::Downloader downloader( url, "/" );
+            MediaSetAccess media(url);
+            susetags::Downloader downloader(info.path());
 
-            RepoStatus newstatus = downloader.status();
+            RepoStatus newstatus = downloader.status(media);
             bool refresh = false;
             if ( oldstatus.checksum() == newstatus.checksum() )
             {
@@ -393,7 +395,7 @@ namespace zypp
             }
 
             if ( refresh )
-              downloader.download(tmpdir.path());
+              downloader.download(media, tmpdir.path());
             else
               return;
             // no error

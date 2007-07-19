@@ -63,7 +63,8 @@ namespace zypp
   */
   class Fetcher
   {
-    friend std::ostream & operator<<( std::ostream & str, const Fetcher & obj );
+    friend std::ostream & operator<<( std::ostream & str,
+                                      const Fetcher & obj );
 
   public:
     /** Implementation  */
@@ -72,7 +73,7 @@ namespace zypp
     /** Default ctor */
     Fetcher();
     /** Dtor */
-    ~Fetcher();
+    virtual ~Fetcher();
 
   public:
    /**
@@ -80,7 +81,8 @@ namespace zypp
     * be transfered until \ref start() is called
     *
     */
-    void enqueue( const OnMediaLocation &resource, const FileChecker &checker = NullFileChecker() );
+    void enqueue( const OnMediaLocation &resource,
+                  const FileChecker &checker = NullFileChecker() );
     
     /**
     * Enqueue a object for transferal, they will not
@@ -93,17 +95,20 @@ namespace zypp
     *
     * \todo FIXME implement checker == operator to avoid this.
     */
-    void enqueueDigested( const OnMediaLocation &resource, const FileChecker &checker = NullFileChecker() );
+    void enqueueDigested( const OnMediaLocation &resource,
+                          const FileChecker &checker = NullFileChecker() );
     
     /**
     * adds a directory to the list of directories
     * where to look for cached files
     */
     void addCachePath( const Pathname &cache_dir );
+    
     /**
     * Reset the transfer list and cache list
     */
     void reset();
+    
     /**
     * start the transfer to a destination directory
     * \a dest_dir

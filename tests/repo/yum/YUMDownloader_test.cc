@@ -25,12 +25,13 @@ void yum_download_test(const string &dir)
 {
   Pathname p = dir + "/10.2-updates-subset";
   Url url("dir:" + p.asString());
-  yum::Downloader yum(url, "/");
+  MediaSetAccess media(url);
+  yum::Downloader yum("/");
   filesystem::TmpDir tmp;
   
   Pathname localdir(tmp.path());
   
-  yum.download(localdir);
+  yum.download(media, localdir);
   
   const char* files[] =
   {

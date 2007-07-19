@@ -18,24 +18,22 @@ namespace repo
 namespace susetags
 {
 
-Downloader::Downloader( const Url &url, const Pathname &path )
-    : _url(url), _path(path)
+Downloader::Downloader(const Pathname &path )
+    : _path(path)
 {
 
 }
 
-RepoStatus Downloader::status()
+RepoStatus Downloader::status( MediaSetAccess &media )
 {
-  MediaSetAccess media(_url, _path);
-  Pathname content = media.provideFile("/content");
+  Pathname content = media.provideFile( _path + "/content");
   return RepoStatus(content);
 }
 
-void Downloader::download( const Pathname &dest_dir,
+void Downloader::download( MediaSetAccess &media,
+                           const Pathname &dest_dir,
                            const ProgressData::ReceiverFnc & progress )
 {
-  MediaSetAccess media(_url);
-  Fetcher fetcher;
   downloadMediaInfo( dest_dir, media );
   
   SignatureFileChecker sigchecker;
@@ -43,9 +41,9 @@ void Downloader::download( const Pathname &dest_dir,
   Pathname sig = _path + "/content.asc";
   if ( media.doesFileExist(sig) )
   {
-    fetcher.enqueue( OnMediaLocation( sig, 1 ) );
-    fetcher.start( dest_dir, media );
-    fetcher.reset();
+    this->enqueue( OnMediaLocation( sig, 1 ) );
+    this->start( dest_dir, media );
+    this->reset();
 
     sigchecker = SignatureFileChecker( dest_dir + sig );
   }
@@ -53,16 +51,16 @@ void Downloader::download( const Pathname &dest_dir,
   Pathname key = _path + "/content.key";
   if ( media.doesFileExist(key) )
   {
-    fetcher.enqueue( OnMediaLocation( key, 1 ) );
-    fetcher.start( dest_dir, media );
-    fetcher.reset();
+    this->enqueue( OnMediaLocation( key, 1 ) );
+    this->start( dest_dir, media );
+    this->reset();
     sigchecker.addPublicKey(dest_dir + key);
   }
 
 
-  fetcher.enqueue( OnMediaLocation( _path + "/content", 1 ), sigchecker );
-  fetcher.start( dest_dir, media );
-  fetcher.reset();
+  this->enqueue( OnMediaLocation( _path + "/content", 1 ), sigchecker );
+  this->start( dest_dir, media );
+  this->reset();
 
   std::ifstream file((dest_dir +  _path + "/content").asString().c_str());
   std::string buffer;
@@ -93,7 +91,7 @@ void Downloader::download( const Pathname &dest_dir,
       }
       OnMediaLocation location( _path + descr_dir + words[3], 1 );
       location.setChecksum( CheckSum( words[1], words[2] ) );
-      fetcher.enqueueDigested(location);
+      this->enqueueDigested(location);
     }
     else if (buffer.substr( 0, 3 ) == "KEY")
     {
@@ -105,11 +103,11 @@ void Downloader::download( const Pathname &dest_dir,
       }
       OnMediaLocation location( _path + words[3], 1 );
       location.setChecksum( CheckSum( words[1], words[2] ) );
-      fetcher.enqueueDigested(location);
+      this->enqueueDigested(location);
     }
   }
   file.close();
-  fetcher.start( dest_dir, media );
+  this->start( dest_dir, media );
 }
 
 }// ns susetags

@@ -15,10 +15,10 @@
 #include "zypp/Fetcher.h"
 #include "zypp/OnMediaLocation.h"
 #include "zypp/MediaSetAccess.h"
-#include "zypp/parser/xml/Reader.h"
-#include "zypp/repo/yum/ResourceType.h"
 #include "zypp/ProgressData.h"
 #include "zypp/RepoStatus.h"
+#include "zypp/repo/Downloader.h"
+#include "zypp/repo/yum/ResourceType.h"
 
 namespace zypp
 {
@@ -26,44 +26,54 @@ namespace zypp
   {
     namespace yum
     {
-      /**
-      * This class allows to retrieve a YUM repository
-      * to a local directory
+     /**
+      * \short Downloader for YUM (rpm-nmd) repositories
+      * Encapsulates all the knowledge of which files have
+      * to be downloaded to the local disk.
       *
       * \code
-      * Downloader yum(url, path);
-      * yum.download("localdir");
+      * MediaSetAccess media(url);
+      * Downloader yum(path);
+      * yum.download( media, "localdir");
       * \endcode
       */
-      class Downloader
+      class Downloader : public repo::Downloader
       {
        public:
+         
        /**
-        * Create the download object for a repository
-        * located in \a url with path \a path
-        */
-        Downloader( const Url &url, const Pathname &path );
+         * \short Constructor
+         *
+         * \param path Path to the repostory from the media
+         */
+        Downloader( const Pathname &path );
+        
        /**
-        * starts the download to local directory \a dest_dir
-        */
-        void download( const Pathname &dest_dir,
+         * \short Download metadata to a local directory
+         *
+         * \param media Media access to the repository url
+         * \param dest_dir Local destination directory
+         * \param progress progress receiver
+         */
+        void download( MediaSetAccess &media,
+                       const Pathname &dest_dir,
                        const ProgressData::ReceiverFnc & progress = ProgressData::ReceiverFnc() );
         
         /**
          * \short Status of the remote repository
          */
-        RepoStatus status();
+        RepoStatus status( MediaSetAccess &media );
         
        protected:
         bool repomd_Callback( const OnMediaLocation &loc, const ResourceType &dtype );
         bool patches_Callback( const OnMediaLocation &loc, const std::string &id );
        private:
-        Url _url;
         Pathname _path;
         Fetcher _fetcher;
         Pathname _dest_dir;
         std::list<OnMediaLocation> _patches_files;
-        MediaSetAccess _media;
+        
+        MediaSetAccess *_media_ptr;
       };
 
     } // ns yum

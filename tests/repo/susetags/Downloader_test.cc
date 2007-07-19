@@ -25,12 +25,13 @@ void susetags_download_test(const string &dir)
 {
   Pathname p = dir + "/stable-x86-subset";
   Url url("dir:" + p.asString());
-  susetags::Downloader downloader(url, "/");
+  MediaSetAccess media(url);
+  susetags::Downloader downloader("/");
   filesystem::TmpDir tmp;
   
   Pathname localdir(tmp.path());
   
-  downloader.download(localdir);
+  downloader.download(media,localdir);
   
   const char* files[] =
   {
