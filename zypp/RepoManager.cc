@@ -308,8 +308,7 @@ namespace zypp
     }
     return status;
   }
-
-
+  
   void RepoManager::refreshMetadata( const RepoInfo &info,
                                      RawMetadataRefreshPolicy policy,
                                      const ProgressData::ReceiverFnc & progress )
@@ -343,103 +342,90 @@ namespace zypp
         Pathname rawpath = rawcache_path_for_repoinfo( _pimpl->options, info );
         oldstatus = rawMetadataStatus(info);
 
-        switch ( repokind.toEnum() )
+        if ( ( repokind.toEnum() == RepoType::RPMMD_e ) ||
+             ( repokind.toEnum() == RepoType::YAST2_e ) )
         {
-          case RepoType::RPMMD_e :
-          {
-            MediaSetAccess media(url);
-            yum::Downloader downloader(info.path());
-
-            RepoStatus newstatus = downloader.status(media);
-            bool refresh = false;
-            if ( oldstatus.checksum() == newstatus.checksum() )
-            {
-              MIL << "repo has not changed" << endl;
-              if ( policy == RefreshForced )
-              {
-                MIL << "refresh set to forced" << endl;
-                refresh = true;
-              }
-            }
-            else
-            {
-              refresh = true;
-            }
-
-            if ( refresh )
-              downloader.download( media, tmpdir.path());
-            else
-              return;
-            // no error
-          }
-          break;
-          case RepoType::YAST2_e :
-          {
-            MediaSetAccess media(url);
-            susetags::Downloader downloader(info.path());
-
-            RepoStatus newstatus = downloader.status(media);
-            bool refresh = false;
-            if ( oldstatus.checksum() == newstatus.checksum() )
-            {
-              MIL << "repo has not changed" << endl;
-              if ( policy == RefreshForced )
-              {
-                MIL << "refresh set to forced" << endl;
-                refresh = true;
-              }
-            }
-            else
-            {
-              refresh = true;
-            }
-
-            if ( refresh )
-              downloader.download(media, tmpdir.path());
-            else
-              return;
-            // no error
-          }
-          break;
+          MediaSetAccess media(url);
+          shared_ptr<repo::Downloader> downloader_ptr;
           
-          case RepoType::RPMPLAINDIR_e :
+          if ( repokind.toEnum() == RepoType::RPMMD_e )
+            downloader_ptr.reset(new yum::Downloader(info.path()));
+          else
+            downloader_ptr.reset( new susetags::Downloader(info.path()));
+        
+          /**
+           * Given a downloader, sets the other repos raw metadata
+           * path as cache paths for the fetcher, so if another
+           * repo has the same file, it will not download it
+           * but copy it from the other repository
+           */
+          std::list<RepoInfo> repos = knownRepositories();
+          for ( std::list<RepoInfo>::const_iterator it = repos.begin();
+                it != repos.end();
+                ++it )
           {
-            RepoStatus newstatus = parser::plaindir::dirStatus(url.getPathName());
-            bool refresh = false;
-            if ( oldstatus.checksum() == newstatus.checksum() )
+            downloader_ptr->addCachePath(rawcache_path_for_repoinfo( _pimpl->options, *it ));
+          }
+          
+          RepoStatus newstatus = downloader_ptr->status(media);
+          bool refresh = false;
+          if ( oldstatus.checksum() == newstatus.checksum() )
+          {
+            MIL << "repo has not changed" << endl;
+            if ( policy == RefreshForced )
             {
-              MIL << "repo has not changed" << endl;
-              if ( policy == RefreshForced )
-              {
-                MIL << "refresh set to forced" << endl;
-                refresh = true;
-              }
-            }
-            else
-            {
+              MIL << "refresh set to forced" << endl;
               refresh = true;
             }
-
-            if ( refresh )
-            {
-              std::ofstream file(( tmpdir.path() + "/cookie").c_str());
-              if (!file) {
-                ZYPP_THROW (Exception( "Can't open " + tmpdir.path().asString() + "/cookie" ) );
-              }
-              file << url << endl;
-              file << newstatus.checksum() << endl;
-
-              file.close();
-            }
-            else
-              return;
-            // no error
           }
-          break;
-          default:
-            ZYPP_THROW(RepoUnknownTypeException());
+          else
+          {
+            refresh = true;
+          }
+          if ( refresh )
+            downloader_ptr->download( media, tmpdir.path());
+          else
+            return;
+          // no error
         }
+        else if ( repokind.toEnum() == RepoType::RPMPLAINDIR_e )
+        {
+          RepoStatus newstatus = parser::plaindir::dirStatus(url.getPathName());
+          bool refresh = false;
+          if ( oldstatus.checksum() == newstatus.checksum() )
+          {
+            MIL << "repo has not changed" << endl;
+            if ( policy == RefreshForced )
+            {
+              MIL << "refresh set to forced" << endl;
+              refresh = true;
+            }
+          }
+          else
+          {
+            refresh = true;
+          }
 
+          if ( refresh )
+          {
+            std::ofstream file(( tmpdir.path() + "/cookie").c_str());
+            if (!file) {
+              ZYPP_THROW (Exception( "Can't open " + tmpdir.path().asString() + "/cookie" ) );
+            }
+            file << url << endl;
+            file << newstatus.checksum() << endl;
+
+            file.close();
+          }
+          else
+            return;
+          // no error
+        }
+        else
+        {
+          ZYPP_THROW(RepoUnknownTypeException());
+        }
+     
         // ok we have the metadata, now exchange
         // the contents
         TmpDir oldmetadata;
