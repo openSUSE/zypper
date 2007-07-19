@@ -103,7 +103,7 @@ string help_commands = _(
   "\tpatch-check, pchk\tCheck for patches\n"
   "\tpatches, pch\t\tList patches\n"
   "\tlist-updates, lu\tList updates\n"
-  "\txml-updates-patches, x\tList updates and patches in xml format\n"
+  "\txml-updates, xu\tList updates and patches in xml format\n"
   "\tupdate, up\t\tUpdate installed resolvables with newer versions.\n"
   "\tinfo, if\t\tShow full information for packages\n"
   "\tpatch-info\t\tShow full information for patches\n"

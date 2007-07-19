@@ -69,7 +69,7 @@ ZypperCommand::Command ZypperCommand::parse(const std::string & strval_r)
     _table["list-updates"] = _table["lu"] = ZypperCommand::LIST_UPDATES_e;
     _table["patch-check"] = _table["pchk"] = ZypperCommand::PATCH_CHECK_e;
     _table["patches"] = _table["pch"] = ZypperCommand::SHOW_PATCHES_e;
-    _table["xml-updates-patches"] = _table["x"] = ZypperCommand::XML_LIST_UPDATES_PATCHES_e;
+    _table["xml-updates"] = _table["xu"] = ZypperCommand::XML_LIST_UPDATES_PATCHES_e;
 
     _table["help"] = ZypperCommand::HELP_e;
     _table["shell"] = _table["sh"] = ZypperCommand::SHELL_e;

@@ -597,6 +597,9 @@ void xml_list_patches ()
 			cout << ">" << endl;
 			cout << "  <summary>" << xml_escape(patch->summary()) << "  </summary>" << endl;
 			cout << "  <description>" << xml_escape(patch->description()) << "</description>" << endl;
+			cout << "  <license>" << xml_escape(patch->licenseToConfirm()) << "</license>" << endl;
+
+
 
 			if ( patch->repository() != Repository::noRepository )
 			{
@@ -817,6 +820,7 @@ void xml_list_updates()
 			cout << ">" << endl;
 			cout << "  <summary>" << xml_escape(res->summary()) << "  </summary>" << endl;
 			cout << "  <description>" << xml_escape(res->description()) << "</description>" << endl;
+			cout << "  <license>" << xml_escape(res->licenseToConfirm()) << "</license>" << endl;
 
 			if ( res->repository() != Repository::noRepository )
 			{
