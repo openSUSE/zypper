@@ -2,7 +2,8 @@
 Thu Jul 19 14:48:04 CEST 2007 - jkupec@suse.cz
 
 - some texts clean-up for first translation round
-- r6089
+- updated libzypp build-dep version
+- r6091
 - 0.8.3
 
 -------------------------------------------------------------------

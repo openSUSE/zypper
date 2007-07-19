@@ -11,7 +11,7 @@
 # norootforbuild
 
 Name:           @PACKAGE@
-BuildRequires:  libzypp-devel >= 3.10.0
+BuildRequires:  libzypp-devel >= 3.11.9
 BuildRequires:  gcc-c++ pkg-config boost-devel gettext-devel
 BuildRequires:  readline-devel
 Requires:	procps
