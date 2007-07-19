@@ -1,8 +1,22 @@
 -------------------------------------------------------------------
+Thu Jul 19 12:08:51 CEST 2007 - tgoettlicher@suse.de
+
+- renamed command "xml-updates-patches" to "xml-updates"
+- added license information to xml output
+- r6085
+
+-------------------------------------------------------------------
 Wed Jul 18 20:35:50 CEST 2007 - jkupec@suse.cz
 
 - --auto-agree-with-licenses option added
 - r6080
+
+-------------------------------------------------------------------
+Wed Jul 18 17:52:27 CEST 2007 - tgoettlicher@suse.de
+
+- add "xml-updates-patches" command to zypper that creates
+  output like zypp-checkpatches
+- r6078
 
 -------------------------------------------------------------------
 Wed Jul 18 16:15:50 CEST 2007 - jkupec@suse.cz
