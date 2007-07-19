@@ -4,6 +4,7 @@
 #include "zypp/OnMediaLocation.h"
 #include "zypp/MediaSetAccess.h"
 #include "zypp/Fetcher.h"
+#include "zypp/repo/MediaInfoDownloader.h"
 
 #include "zypp/repo/susetags/Downloader.h"
 #include "zypp/base/UserRequestException.h"
@@ -35,11 +36,8 @@ void Downloader::download( const Pathname &dest_dir,
 {
   MediaSetAccess media(_url);
   Fetcher fetcher;
-
-  fetcher.enqueue( OnMediaLocation( "media.1/media", 1 ) );
-  fetcher.start( dest_dir, media );
-  fetcher.reset();
-
+  
+  downloadMediaInfo( dest_dir, media );
 
   SignatureFileChecker sigchecker;
 

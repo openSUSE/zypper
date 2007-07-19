@@ -17,6 +17,7 @@
 #include "zypp/parser/yum/RepomdFileReader.h"
 #include "zypp/parser/yum/PatchesFileReader.h"
 #include "Downloader.h"
+#include "zypp/repo/MediaInfoDownloader.h"
 #include "zypp/base/UserRequestException.h"
 
 using namespace std;
@@ -86,6 +87,8 @@ void Downloader::download( const Pathname &dest_dir,
   progress.sendTo(progressrcv);
   progress.toMin();
 
+  //downloadMediaInfo( dest_dir, _media );
+  
   _dest_dir = dest_dir;
   if ( _media.doesFileExist(keypath) )
     _fetcher.enqueue( OnMediaLocation(keypath,1) );
