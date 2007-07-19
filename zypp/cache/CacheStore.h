@@ -551,7 +551,7 @@ namespace zypp
                                            _Iterator begin,
                                            _Iterator end )
       {
-        std::string value = str::join(begin, end, ZConfig().cacheDBSplitJoinSeparator());
+        std::string value = str::join(begin, end, ZConfig::instance().cacheDBSplitJoinSeparator());
         appendStringAttribute( resolvable_id, klass, name, value );
       }
       /** \overload */

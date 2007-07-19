@@ -184,7 +184,7 @@ namespace zypp
 
         std::string all = queryStringAttribute( record_id, klass, name);
         //FIXME use zypp separator
-        str::split( all, result, ZConfig().cacheDBSplitJoinSeparator() );
+        str::split( all, result, ZConfig::instance().cacheDBSplitJoinSeparator() );
       }
       /** \overload */
       template<class _OutputIterator>

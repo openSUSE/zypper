@@ -396,7 +396,7 @@ namespace zypp
 	parseLocaleIf( Locale("en") );
 	// For each wanted locale at least
 	// some fallback, if locale is not present.
-	parseLocaleIf( ZConfig().defaultTextLocale() );
+	parseLocaleIf( ZConfig::instance().defaultTextLocale() );
 
         // Now process the rest of RepoIndex
 	for ( RepoIndex::FileChecksumMap::const_iterator it = _repoIndex->metaFileChecksums.begin();

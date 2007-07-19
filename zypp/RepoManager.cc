@@ -57,10 +57,9 @@ namespace zypp
 
   RepoManagerOptions::RepoManagerOptions()
   {
-    ZConfig globalConfig;
-    repoCachePath = globalConfig.defaultRepoCachePath();
-    repoRawCachePath = globalConfig.defaultRepoRawCachePath();
-    knownReposPath = globalConfig.defaultKnownReposPath();
+    repoCachePath    = ZConfig::instance().defaultRepoCachePath();
+    repoRawCachePath = ZConfig::instance().defaultRepoRawCachePath();
+    knownReposPath   = ZConfig::instance().defaultKnownReposPath();
   }
 
   ////////////////////////////////////////////////////////////////////////////
@@ -252,7 +251,7 @@ namespace zypp
   std::list<RepoInfo> RepoManager::knownRepositories() const
   {
     MIL << endl;
-    
+
     if ( PathInfo(_pimpl->options.knownReposPath).isExist() )
       return repositories_in_dir(_pimpl->options.knownReposPath);
     else
@@ -292,7 +291,7 @@ namespace zypp
         status = RepoStatus( rawpath + "/content");
       }
       break;
-      
+
       case RepoType::RPMPLAINDIR_e :
       {
         if ( PathInfo(Pathname(rawpath + "/cookie")).isExist() )
@@ -308,7 +307,7 @@ namespace zypp
     }
     return status;
   }
-  
+
   void RepoManager::refreshMetadata( const RepoInfo &info,
                                      RawMetadataRefreshPolicy policy,
                                      const ProgressData::ReceiverFnc & progress )
@@ -347,12 +346,12 @@ namespace zypp
         {
           MediaSetAccess media(url);
           shared_ptr<repo::Downloader> downloader_ptr;
-          
+
           if ( repokind.toEnum() == RepoType::RPMMD_e )
             downloader_ptr.reset(new yum::Downloader(info.path()));
           else
             downloader_ptr.reset( new susetags::Downloader(info.path()));
-        
+
           /**
            * Given a downloader, sets the other repos raw metadata
            * path as cache paths for the fetcher, so if another
@@ -366,7 +365,7 @@ namespace zypp
           {
             downloader_ptr->addCachePath(rawcache_path_for_repoinfo( _pimpl->options, *it ));
           }
-          
+
           RepoStatus newstatus = downloader_ptr->status(media);
           bool refresh = false;
           if ( oldstatus.checksum() == newstatus.checksum() )
@@ -425,7 +424,7 @@ namespace zypp
         {
           ZYPP_THROW(RepoUnknownTypeException());
         }
-     
+
         // ok we have the metadata, now exchange
         // the contents
         TmpDir oldmetadata;
@@ -463,7 +462,7 @@ namespace zypp
     progress.sendTo( ProgressReportAdaptor( progressrcv, report ) );
     progress.name(str::form(_("Building repository '%s' cache"), info.alias().c_str()));
     progress.toMin();
-    
+
     assert_alias(info);
     Pathname rawpath = rawcache_path_for_repoinfo(_pimpl->options, info);
 
@@ -513,7 +512,7 @@ namespace zypp
     }
 
     CombinedProgressData subprogrcv( progress, 100);
-    
+
     switch ( repokind.toEnum() )
     {
       case RepoType::RPMMD_e :
@@ -593,7 +592,7 @@ namespace zypp
     progress.sendTo( ProgressReportAdaptor( progressrcv, report ) );
     progress.name(str::form(_("Cleaning repository '%s' cache"), info.alias().c_str()));
     progress.toMin();
-    
+
     cache::CacheStore store(_pimpl->options.repoCachePath);
 
     data::RecordId id = store.lookupRepository(info.alias());
@@ -618,7 +617,7 @@ namespace zypp
     progress.sendTo( progressrcv );
     progress.name(str::form(_("Reading repository '%s' cache"), info.alias().c_str()));
     progress.toMin();
-    
+
     cache::CacheStore store(_pimpl->options.repoCachePath);
 
     if ( ! store.isCached( info.alias() ) )
@@ -627,12 +626,12 @@ namespace zypp
     MIL << "Repository " << info.alias() << " is cached" << endl;
 
     data::RecordId id = store.lookupRepository(info.alias());
-    
+
     repo::cached::RepoOptions opts( info, _pimpl->options.repoCachePath, id );
     opts.readingResolvablesProgress = progressrcv;
     repo::cached::RepoImpl::Ptr repoimpl =
         new repo::cached::RepoImpl( opts );
-    
+
     repoimpl->resolvables();
     // read the resolvables from cache
     return Repository(repoimpl);
@@ -707,7 +706,7 @@ namespace zypp
     progress.sendTo( ProgressReportAdaptor( progressrcv, report ) );
     progress.name(str::form(_("Adding repository '%s'"), info.alias().c_str()));
     progress.toMin();
-    
+
     std::list<RepoInfo> repos = knownRepositories();
     for ( std::list<RepoInfo>::const_iterator it = repos.begin();
           it != repos.end();
@@ -718,10 +717,10 @@ namespace zypp
     }
 
     progress.set(50);
-    
+
     // assert the directory exists
     filesystem::assert_dir(_pimpl->options.knownReposPath);
-    
+
     Pathname repofile = generate_non_existing_name(_pimpl->options.knownReposPath,
                                                     generate_filename(info));
     // now we have a filename that does not exists
@@ -766,7 +765,7 @@ namespace zypp
 
     // assert the directory exists
     filesystem::assert_dir(_pimpl->options.knownReposPath);
-    
+
     Pathname repofile = generate_non_existing_name(_pimpl->options.knownReposPath, filename);
     // now we have a filename that does not exists
     MIL << "Saving " << repos.size() << " repo" << ( repos.size() ? "s" : "" ) << " in " << repofile << endl;
@@ -833,10 +832,10 @@ namespace zypp
           // write them back except the deleted one.
           //TmpFile tmp;
           //std::ofstream file(tmp.path().c_str());
-          
+
           // assert the directory exists
           filesystem::assert_dir(todelete.filepath().dirname());
-          
+
           std::ofstream file(todelete.filepath().c_str());
           if (!file) {
             //ZYPP_THROW (Exception( "Can't open " + tmp.path().asString() ) );
@@ -888,10 +887,10 @@ namespace zypp
       // write them back except the deleted one.
       //TmpFile tmp;
       //std::ofstream file(tmp.path().c_str());
-      
+
       // assert the directory exists
       filesystem::assert_dir(toedit.filepath().dirname());
-      
+
       std::ofstream file(toedit.filepath().c_str());
       if (!file) {
         //ZYPP_THROW (Exception( "Can't open " + tmp.path().asString() ) );

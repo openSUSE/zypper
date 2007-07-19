@@ -14,6 +14,9 @@
 
 #include <iosfwd>
 
+#include "zypp/base/NonCopyable.h"
+#include "zypp/base/PtrTypes.h"
+
 #include "zypp/Arch.h"
 #include "zypp/Locale.h"
 #include "zypp/Pathname.h"
@@ -29,9 +32,15 @@ namespace zypp
   /** Interim helper class to collect global options and settings.
    * Use it to avoid hardcoded values and calls to getZypp() just
    * to retrieve some value like architecture, languages or tmppath.
+   *
+   * \ingroup Singleton
   */
-  class ZConfig
+  class ZConfig : private base::NonCopyable
   {
+    public:
+      /** Singleton ctor */
+      static ZConfig & instance();
+
     public:
       /** The system architecture. */
       Arch systemArchitecture() const;
@@ -40,29 +49,39 @@ namespace zypp
        *  descriptions, etc. passed to the UI.
        */
       Locale defaultTextLocale() const;
-      
+
       /**
        * Path where the repo metadata is downloaded and kept.
        */
       Pathname defaultRepoRawCachePath() const;
-      
+
       /**
        * Path where the processed cache is kept
        * (this is where zypp.db is located.
        */
       Pathname defaultRepoCachePath() const;
-      
+
       /**
        * Path where the known repositories
        * .repo files are kept
        */
       Pathname defaultKnownReposPath() const;
-      
+
       /**
        * Separator string for storing/reading sets of strings to/from
        * metadata cache DB.
        */
       const std::string & cacheDBSplitJoinSeparator() const;
+
+    public:
+      class Impl;
+      /** Dtor */
+      ~ZConfig();
+    private:
+      /** Default ctor. */
+      ZConfig();
+      /** Pointer to implementation */
+      RW_pointer<Impl, rw_pointer::Scoped<Impl> > _pimpl;
   };
   ///////////////////////////////////////////////////////////////////
 

@@ -305,7 +305,7 @@ namespace zypp
 	if ( ! ticks.toMin() )
 	  userRequestedAbort( 0 );
 
-	Arch sysarch( ZConfig().systemArchitecture() );
+	Arch sysarch( ZConfig::instance().systemArchitecture() );
 
 	iostr::EachLine line( input_r );
 	for( ; line; line.next() )
@@ -378,7 +378,7 @@ namespace zypp
 		 pos != std::string::npos;
 		 pos = value.find("%a") )
 	    {
-	      value.replace( pos, 2, ZConfig().systemArchitecture().asString() );
+	      value.replace( pos, 2, ZConfig::instance().systemArchitecture().asString() );
 	    }
 	    try
 	    {
