@@ -1,3 +1,11 @@
+/*---------------------------------------------------------------------\
+|                          ____ _   __ __ ___                          |
+|                         |__  / \ / / . \ . \                         |
+|                           / / \ V /|  _/  _/                         |
+|                          / /__ | | | | | |                           |
+|                         /_____||_| |_| |_|                           |
+|                                                                      |
+\---------------------------------------------------------------------*/
 
 #include <fstream>
 #include "zypp/repo/SUSEMediaVerifier.h"
@@ -9,11 +17,31 @@ namespace zypp
 namespace repo
 {
 
-SUSEMediaVerifier::SUSEMediaVerifier(const std::string & vendor_r, const std::string & id_r, const media::MediaNr media_nr)
+SUSEMediaVerifier::SUSEMediaVerifier(const std::string & vendor_r,
+                                     const std::string & id_r,
+                                     const media::MediaNr media_nr)
    : _media_vendor(vendor_r)
     , _media_id(id_r)
     , _media_nr(media_nr)
 {}
+
+SUSEMediaVerifier::SUSEMediaVerifier( const Pathname &path_r )
+{
+  std::ifstream str(path_r.asString().c_str());
+  std::string vendor;
+  std::string id;
+  
+  if ( str )
+  {
+    getline(str, _media_vendor);
+    getline(str, _media_id);
+  }
+  else
+  {
+    ZYPP_THROW(Exception("Can't setup media verifier using file: '"
+        + path_r.asString() + "'"));
+  }
+}
 
 bool SUSEMediaVerifier::isDesiredMedia(const media::MediaAccessRef &ref)
 {
