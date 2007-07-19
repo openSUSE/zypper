@@ -18,10 +18,12 @@
 #include "zypp/NameKindProxy.h"
 #include "zypp/RepoManager.h"
 #include "zypp/RepoInfo.h"
+#include "zypp/TmpPath.h"
 
 
 using namespace std;
 using namespace zypp;
+using namespace zypp::filesystem;
 
 
 int
@@ -29,33 +31,37 @@ main (int argc, char* argv[])
 {
     MIL << "===[START]==========================================" << endl;
 
-    // TODO: tell RepoManager and SQLite to use different path
+    TmpDir tmpCachePath;
+    TmpDir tmpRawCachePath;
+    TmpDir tmpKnownReposPath;
 
-    RepoManager repoManager;
+    RepoManagerOptions opts;
+    opts.repoCachePath = tmpCachePath.path();
+    opts.repoRawCachePath = tmpRawCachePath.path();
+    opts.knownReposPath = tmpKnownReposPath.path();
+
+    RepoManager repoManager (opts);
+
     RepoInfoList repos = repoManager.knownRepositories();
+    if ( !repos.empty() )
+	ERR << "repos not empty" << endl;
 
-#if 1
-    if ( repos.empty() )
-    {
-	RepoInfo nrepo;
-	nrepo
-	    .setAlias( "factorytest" )
-	    .setName( "Test Repo for factory." )
-	    .setEnabled( true )
-	    .setAutorefresh( false )
-	    .addBaseUrl(Url("ftp://dist.suse.de/install/stable-x86/"));
-	    // .addBaseUrl(Url("http://software.opensuse.org/download/home:/Arvin42/openSUSE_Factory/"));
-	    // .addBaseUrl(Url("file:///ARVIN/zypp/trunk/repotools/"));
+    RepoInfo nrepo;
+    nrepo.setAlias( "factorytest" )
+	.setName( "Test Repo for factory." )
+	.setEnabled( true )
+	.setAutorefresh( false )
+	.addBaseUrl(Url("ftp://dist.suse.de/install/stable-x86/"));
+	// .addBaseUrl(Url("http://software.opensuse.org/download/home:/Arvin42/openSUSE_Factory/"));
+	// .addBaseUrl(Url("file:///ARVIN/zypp/trunk/repotools/"));
 
-	repoManager.addRepository( nrepo );
-	repos = repoManager.knownRepositories();
+    repoManager.addRepository( nrepo );
+    repos = repoManager.knownRepositories();
 
-	SEC << "refreshMetadata" << endl;
-	repoManager.refreshMetadata( nrepo );
-	SEC << "buildCache" << endl;
-	repoManager.buildCache( nrepo );
-    }
-#endif
+    SEC << "refreshMetadata" << endl;
+    repoManager.refreshMetadata( nrepo );
+    SEC << "buildCache" << endl;
+    repoManager.buildCache( nrepo );
 
     ResPool pool( getZYpp()->pool() );
 
@@ -65,21 +71,17 @@ main (int argc, char* argv[])
     {
 	RepoInfo& nrepo( *it );
 
-#if 1
 	SEC << "refreshMetadata" << endl;
 	repoManager.refreshMetadata( nrepo );
 	SEC << "buildCache" << endl;
 	repoManager.buildCache( nrepo );
-#endif
 
 	// here SQLite is upto-date
 
-#if 1
 	SEC << nrepo << endl;
 	Repository nrep( repoManager.createFromCache( nrepo ) );
 	const zypp::ResStore& store( nrep.resolvables() );
 	getZYpp()->addResolvables( store );
-#endif
     }
 
     USR << "pool: " << pool << endl;
