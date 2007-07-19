@@ -238,7 +238,8 @@ tribool show_problem (bool non_interactive, const ResolverProblem & prob, Proble
     ee = solutions.end (),
     ii;
   for (n = 1, ii = bb; ii != ee; ++n, ++ii) {
-    stm << format (_(" Solution %s: ")) % n << (*ii)->description () << endl;
+    // TranslatorExplanation %d is the solution number
+    stm << format (_(" Solution %d: ")) % n << (*ii)->description () << endl;
     det = (*ii)->details ();
     if (!det.empty ())
       stm << "  " << det << endl;
@@ -539,7 +540,8 @@ void show_patches()
 
   Table tbl;
   TableHeader th;
-  th << _("Catalog") << _("Name") << _("Version") << _("Category") << _("Status");
+  th << (gSettings.is_rug_compatible ? _("Catalog: ") : _("Repository: "))
+     << _("Name") << _("Version") << _("Category") << _("Status");
   tbl << th;
 
   ResPool::byKind_iterator
@@ -575,7 +577,7 @@ void show_patches()
 
 void xml_list_patches ()
 {
-	const zypp::ResPool& pool = God->pool();
+  const zypp::ResPool& pool = God->pool();
   ResPool::byKind_iterator
     it = pool.byKindBegin<Patch> (),
     e  = pool.byKindEnd<Patch> ();
@@ -583,29 +585,29 @@ void xml_list_patches ()
   for (; it != e; ++it )
   {
     ResObject::constPtr res = it->resolvable();
-    if ( it->status().isNeeded() ) {
+    if ( it->status().isNeeded() )
+    {
       Patch::constPtr patch = asKind<Patch>(res);
 
-			cout << " <update ";
-			cout << "name=\"" << res->name () << "\" " ;
-			cout << "edition=\""  << res->edition ().asString() << "\" ";
-			cout << "category=\"" <<  patch->category() << "\" ";
-			cout << "pkgmanager=\"" << ((patch->affects_pkg_manager()) ? "true" : "false") << "\" ";
-			cout << "restart=\"" << ((patch->reboot_needed()) ? "true" : "false") << "\" ";
-			cout << "interactive=\"" << ((patch->interactive()) ? "true" : "false") << "\" ";
-			cout << "resolvabletype=\"" << "patch" << "\" ";
-			cout << ">" << endl;
-			cout << "  <summary>" << xml_escape(patch->summary()) << "  </summary>" << endl;
-			cout << "  <description>" << xml_escape(patch->description()) << "</description>" << endl;
-			cout << "  <license>" << xml_escape(patch->licenseToConfirm()) << "</license>" << endl;
+      cout << " <update ";
+      cout << "name=\"" << res->name () << "\" " ;
+      cout << "edition=\""  << res->edition ().asString() << "\" ";
+      cout << "category=\"" <<  patch->category() << "\" ";
+      cout << "pkgmanager=\"" << ((patch->affects_pkg_manager()) ? "true" : "false") << "\" ";
+      cout << "restart=\"" << ((patch->reboot_needed()) ? "true" : "false") << "\" ";
+      cout << "interactive=\"" << ((patch->interactive()) ? "true" : "false") << "\" ";
+      cout << "resolvabletype=\"" << "patch" << "\" ";
+      cout << ">" << endl;
+      cout << "  <summary>" << xml_escape(patch->summary()) << "  </summary>" << endl;
+      cout << "  <description>" << xml_escape(patch->description()) << "</description>" << endl;
+      cout << "  <license>" << xml_escape(patch->licenseToConfirm()) << "</license>" << endl;
 
 
-
-			if ( patch->repository() != Repository::noRepository )
-			{
-				cout << "  <source url=\"" << *(patch->repository().info().baseUrlsBegin());
-				cout << "\" alias=\"" << patch->repository().info().alias() << "\"/>" << endl;
-			}
+      if ( patch->repository() != Repository::noRepository )
+      {
+        cout << "  <source url=\"" << *(patch->repository().info().baseUrlsBegin());
+        cout << "\" alias=\"" << patch->repository().info().alias() << "\"/>" << endl;
+      }
 
       cout << " </update>" << endl;
     }
@@ -622,7 +624,8 @@ void list_patch_updates ()
   TableHeader th;
   unsigned cols;
 
-  th << _("Catalog") << _("Name") << _("Version") << _("Category") << _("Status");
+  th << (gSettings.is_rug_compatible ? _("Catalog: ") : _("Repository: "))
+     << _("Name") << _("Version") << _("Category") << _("Status");
   cols = 5;
   tbl << th;
   pm_tbl << th;
@@ -759,9 +762,11 @@ void list_updates( const ResObject::Kind &kind )
     // header
     TableHeader th;
     unsigned cols = 5;
-    th << _("S") << _("Catalog"); // for translators: S stands for Status
+    // TranslatorExplanation S stands for Status
+    th << _("S");
+    th << (gSettings.is_rug_compatible ? _("Catalog: ") : _("Repository: ")); 
     if (gSettings.is_rug_compatible) {
-      th << "Bundle";
+      th << _("Bundle");
       ++cols;
     }
     th << _("Name") << _("Version") << _("Arch");
@@ -806,32 +811,31 @@ bool mark_item_install (const PoolItem& pi) {
 
 void xml_list_updates()
 {
-    Candidates candidates;
-    find_updates (ResTraits<Package>::kind, candidates);
+  Candidates candidates;
+  find_updates (ResTraits<Package>::kind, candidates);
 
-    Candidates::iterator cb = candidates.begin (), ce = candidates.end (), ci;
-    for (ci = cb; ci != ce; ++ci) {
-      ResObject::constPtr res = ci->resolvable();
+  Candidates::iterator cb = candidates.begin (), ce = candidates.end (), ci;
+  for (ci = cb; ci != ce; ++ci) {
+    ResObject::constPtr res = ci->resolvable();
 
-			cout << " <update ";
-			cout << "name=\"" << res->name () << "\" " ;
-			cout << "edition=\""  << res->edition ().asString() << "\" ";
-			cout << "resolvabletype=\"" << "package" << "\" ";
-			cout << ">" << endl;
-			cout << "  <summary>" << xml_escape(res->summary()) << "  </summary>" << endl;
-			cout << "  <description>" << xml_escape(res->description()) << "</description>" << endl;
-			cout << "  <license>" << xml_escape(res->licenseToConfirm()) << "</license>" << endl;
-
-			if ( res->repository() != Repository::noRepository )
-			{
-				cout << "  <source url=\"" << *(res->repository().info().baseUrlsBegin());
-				cout << "\" alias=\"" << res->repository().info().alias() << "\"/>" << endl;
-			}
-
-      cout << " </update>" << endl;
+    cout << " <update ";
+    cout << "name=\"" << res->name () << "\" " ;
+    cout << "edition=\""  << res->edition ().asString() << "\" ";
+    cout << "resolvabletype=\"" << "package" << "\" ";
+    cout << ">" << endl;
+    cout << "  <summary>" << xml_escape(res->summary()) << "  </summary>" << endl;
+    cout << "  <description>" << xml_escape(res->description()) << "</description>" << endl;
+    cout << "  <license>" << xml_escape(res->licenseToConfirm()) << "</license>" << endl;
+    
+    if ( res->repository() != Repository::noRepository )
+    {
+    	cout << "  <source url=\"" << *(res->repository().info().baseUrlsBegin());
+    	cout << "\" alias=\"" << res->repository().info().alias() << "\"/>" << endl;
     }
-}
 
+    cout << " </update>" << endl;
+  }
+}
 
 
 // ----------------------------------------------------------------------------

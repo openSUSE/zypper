@@ -190,7 +190,7 @@ struct InstallResolvableReportReceiver : public zypp::callback::ReceiveReport<zy
     cerr << level;
     display_error (error, "");
     if (level < RPM_NODEPS_FORCE) {
-      cerr_v << "Will retry more aggressively" << endl;
+      cerr_v << _("Will retry more aggressively.") << endl;
       return ABORT;
     }
     return (Action) read_action_ari (ABORT);

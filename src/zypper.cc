@@ -94,16 +94,16 @@ string help_commands = _(
   "\tinstall, in\t\tInstall packages or resolvables\n"
   "\tremove, rm\t\tRemove packages or resolvables\n"
   "\tsearch, se\t\tSearch for packages matching a pattern\n"
-  "\trepos, lr\tList all defined repositories.\n"
+  "\trepos, lr\t\tList all defined repositories.\n"
   "\taddrepo, ar\t\tAdd a new repository\n"
-  "\tremoverepo, rr\tRemove specified repository\n"
-  "\trenamerepo, nr\tRename specified repository\n"
-  "\tmodifyrepo, mr\tModify specified repository\n"
+  "\tremoverepo, rr\t\tRemove specified repository\n"
+  "\trenamerepo, nr\t\tRename specified repository\n"
+  "\tmodifyrepo, mr\t\tModify specified repository\n"
   "\trefresh, ref\t\tRefresh all repositories\n"
   "\tpatch-check, pchk\tCheck for patches\n"
   "\tpatches, pch\t\tList patches\n"
   "\tlist-updates, lu\tList updates\n"
-  "\txml-updates, xu\tList updates and patches in xml format\n"
+  "\txml-updates, xu\t\tList updates and patches in xml format\n"
   "\tupdate, up\t\tUpdate installed resolvables with newer versions.\n"
   "\tinfo, if\t\tShow full information for packages\n"
   "\tpatch-info\t\tShow full information for patches\n"
@@ -147,7 +147,8 @@ ZypperCommand process_globals(int argc, char **argv)
     "\t--terse, -t\t\tTerse output for machine consumption.\n"
     "\t--table-style, -s\tTable style (integer).\n"
     "\t--rug-compatible, -r\tTurn on rug compatibility.\n"
-    "\t--non-interactive\tDon't ask anything, use default answers automatically. (under development).\n"
+    "\t--non-interactive\tDon't ask anything, use default answers automatically.\n"
+    "\t--no-gpg-checks\t\tIgnore GPG check failures and continue.\n"
     "\t--root, -R <dir>\tOperate on a different root directory.\n");
     ;
   
@@ -158,17 +159,19 @@ ZypperCommand process_globals(int argc, char **argv)
 
   if (gopts.count("verbose")) {
     gSettings.verbosity += gopts["verbose"].size();
-    cout << _("Verbosity ") << gSettings.verbosity << endl;
+    cout << format(_("Verbosity: %d")) % gSettings.verbosity << endl;
     DBG << "Verbosity " << gSettings.verbosity << endl;
   }
 
   if (gopts.count("non-interactive")) {
     gSettings.non_interactive = true;
+    cout_n << _("Entering non-interactive mode.");
     MIL << "Entering non-interactive mode" << endl;
   }
 
   if (gopts.count("no-gpg-checks")) {
     gSettings.no_gpg_checks = true;
+    cout_n << _("Entering no-gpg-checks mode.");
     MIL << "Entering no-gpg-checks mode" << endl;
   }
 
@@ -225,7 +228,7 @@ ZypperCommand process_globals(int argc, char **argv)
     else if (gopts.count("version"))
       cout << PACKAGE << endl;
     else
-      cerr << _("Try -h for help") << endl;
+      cerr << _("Try -h for help.") << endl;
   }
 
   //cerr_vv << "COMMAND: " << command << endl;
@@ -242,10 +245,12 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
   string specific_help;
 
   string help_global_source_options = _(
-      "  Source options:\n"
-      "\t--disable-system-sources, -D\t\tDo not read the system sources\n"
-      "\t--source, -S\t\tRead additional source\n"
+      "  Repository options:\n"
+      "\t--disable-repositories, -D\t\tDo not read data from defined repositories.\n"
+      "\t--repo <URI|.repo>\t\tRead additional repository\n"
       );
+//! \todo preserve for rug comp.  "\t--disable-system-sources, -D\t\tDo not read the system sources\n"
+//! \todo preserve for rug comp.  "\t--source, -S\t\tRead additional source\n"
 
   string help_global_target_options = _("  Target options:\n"
       "\t--disable-system-resolvables, -T\t\tDo not read system installed resolvables\n"
@@ -575,9 +580,13 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
       WAR << "Ignoring --terse (provided only for rug compatibility)" << endl;
   }
 
-  if (gopts.count("disable-system-sources"))
+  if (gopts.count("disable-repositories") ||
+      gopts.count("disable-system-sources"))
   {
-    MIL << "System sources disabled" << endl;
+    MIL << "Repositories disabled, using target only." << endl;
+    cout_n <<
+        _("Repositories disabled, using database of installed packages only.")
+        << endl;
     gSettings.disable_system_sources = true;
   }
   else
@@ -602,7 +611,7 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
       gSettings.additional_sources.push_back(url); 
     }
   }
-  
+
   // here come commands that need the lock
   try {
     if (command == ZypperCommand::LIST_REPOS)
@@ -613,7 +622,10 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
   catch (Exception & excpt_r) {
     ZYPP_CAUGHT (excpt_r);
     ERR  << "A ZYpp transaction is already in progress." << endl;
-    cerr << _("A ZYpp transaction is already in progress.") << endl;
+    cerr << _("A ZYpp transaction is already in progress."
+        "This means, there is another application using libzypp library for"
+        "package management running. All such applications must be closed before"
+        "using this command.") << endl;
     return ZYPPER_EXIT_ERR_ZYPP;
   }
 
@@ -628,7 +640,8 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
   {
     if (ghelp) { cout << specific_help << endl; return !ghelp; }
 
-    cout_n << "   \\\\\\\\\\\n  \\\\\\\\\\\\\\__o\n__\\\\\\\\\\\\\\'/_" << endl;
+    // TranslatorExplanation this is a hedgehog, paint another animal, if you want
+    cout_n << _("   \\\\\\\\\\\n  \\\\\\\\\\\\\\__o\n__\\\\\\\\\\\\\\'/_") << endl;
     return ZYPPER_EXIT_OK;
   }
 
@@ -904,7 +917,7 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
     string skind = copts.count("type")?  copts["type"].front() : "package";
     kind = string_to_kind (skind);
     if (kind == ResObject::Kind ()) {
-      cerr << _("Unknown resolvable type ") << skind << endl;
+      cerr << format(_("Unknown resolvable type: %s")) % skind << endl;
       return ZYPPER_EXIT_ERR_INVALID_ARGS;
     }
 
@@ -987,7 +1000,7 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
     search.doSearch(FillTable(t, search.installedCache()));
 
     if (t.empty())
-      cout_n << "No packages found." << endl;
+      cout_n << _("No resolvables found.") << endl;
     else {
       if (copts.count("sort-by-catalog")) t.sort(1);
       else t.sort(3); // sort by name
@@ -1054,7 +1067,7 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
       gSettings.is_rug_compatible? "package" : "patch";
     kind = string_to_kind (skind);
     if (kind == ResObject::Kind ()) {
-	cerr << _("Unknown resolvable type ") << skind << endl;
+	cerr << format(_("Unknown resolvable type: %s")) % skind << endl;
 	return ZYPPER_EXIT_ERR_INVALID_ARGS;
     }
 
@@ -1076,17 +1089,17 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
     init_repos ();
     cond_load_resolvables();
     establish ();
-	
-		cout << "<?xml version='1.0'?>" << endl;
-		cout << "<update-status version=\"0.4\">" << endl;
-		cout << "<update-list>" << endl;
-		xml_list_patches ();
-		xml_list_updates ();
-		cout << "</update-list>" << endl;
-		cout << "</update-status>" << endl;
+
+    cout << "<?xml version='1.0'?>" << endl;
+    cout << "<update-status version=\"0.4\">" << endl;
+    cout << "<update-list>" << endl;
+    xml_list_patches ();
+    xml_list_updates ();
+    cout << "</update-list>" << endl;
+    cout << "</update-status>" << endl;
 
     return ZYPPER_EXIT_OK;
-	}
+  }
 
   // -----------------------------( update )----------------------------------
 
@@ -1107,7 +1120,7 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
       gSettings.is_rug_compatible? "package" : "patch";
     kind = string_to_kind (skind);
     if (kind == ResObject::Kind ()) {
-	cerr << _("Unknown resolvable type ") << skind << endl;
+	cerr << format(_("Unknown resolvable type: %s")) % skind << endl;
 	return ZYPPER_EXIT_ERR_INVALID_ARGS;
     }
 

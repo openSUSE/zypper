@@ -49,7 +49,7 @@ void display_done () {
 //template<typename Action>
 //Action ...
 int read_action_ari (int default_action) {
-  // TranslatorExplanation don't translate letters in parentheses!!
+  // TranslatorExplanation don't translate letters in parentheses!! (yet)
   cout << _("(A)bort, (R)etry, (I)gnore?") << " "; 
 
   // choose abort if no default has been specified

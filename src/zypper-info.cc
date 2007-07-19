@@ -2,6 +2,8 @@
 
 #include <iostream>
 
+#include <boost/format.hpp>
+
 #include <zypp/ZYpp.h>
 #include <zypp/base/Algorithm.h>
 #include <zypp/Patch.h>
@@ -11,6 +13,7 @@
 
 using namespace std;
 using namespace zypp;
+using boost::format;
 
 extern ZYpp::Ptr God;
 extern Settings gSettings;
@@ -45,11 +48,16 @@ void printInfo(const ZypperCommand & command, const vector<string> & arguments) 
       );
 
     if (!installer.item) {
-      cout << "\n" << kind.asString() << " " << *nameit << _(" not found.") << endl;
+      // TranslatorExplanation E.g. "package zypper not found."
+      cout << "\n" << format(_("%s %s not found.")) % kind.asString() % *nameit
+          << endl;
     }
     else {
       // print info
-      cout << endl << _("Information for ") << kind.asString() << " " << *nameit << ":\n\n";
+      // TranslatorExplanation E.g. "Information for package zypper:"
+      cout << endl << format(_("Information for %s %s:")) % kind.asString() % *nameit;
+
+      cout << endl << endl;
 
       if (command == ZypperCommand::INFO)
         printPkgInfo(installer.item,installed);
@@ -130,43 +138,44 @@ atom: xv = 3.10a-1091.2
  * 
  */
 void printPatchInfo(const PoolItem & pool_item, const PoolItem & ins_pool_item) {
-  cout << "Name: " << pool_item.resolvable()->name() << endl;
-  cout << "Version: " << pool_item.resolvable()->edition().asString() << endl;
-  cout << "Arch: " << pool_item.resolvable()->arch().asString() << endl;
+  cout << _("Name: ") << pool_item.resolvable()->name() << endl;
+  cout << _("Version: ") << pool_item.resolvable()->edition().asString() << endl;
+  cout << _("Arch: ") << pool_item.resolvable()->arch().asString() << endl;
   
-  cout << "Status: "; // TODO debug
+  cout << _("Status: "); // TODO debug
   bool i = ins_pool_item ? true : false;
   if (pool_item.status().isUndetermined ())
-    cout << (i ? "Installed": "Uninstalled");
+    cout << (i ? _("Installed"): _("Uninstalled"));
   else if (pool_item.status().isEstablishedUneeded ())
-    cout << (i ? "No Longer Applicable": "Not Applicable");
+    cout << (i ? _("No Longer Applicable"): _("Not Applicable"));
   else if (pool_item.status().isEstablishedSatisfied ())
-    cout << (i ? "Applied": "Not Needed");
+    cout << (i ? _("Applied"): _("Not Needed"));
   else if (pool_item.status().isEstablishedIncomplete ())
-    cout << (i ? "Broken": "Needed");
+    cout << (i ? _("Broken"): _("Needed"));
   cout << endl;
 
   Patch::constPtr patch = asKind<Patch>(pool_item.resolvable());
-  cout << "Category: " << patch->category() << endl;
-  cout << "Created On: " << patch->timestamp().asString() << endl;
-  cout << "Reboot Required: " << (patch->reboot_needed() ? "Yes" : "No") << endl;
-  
-  if (!gSettings.is_rug_compatible)
-    cout << "Package Manager ";
-  cout << "Restart Required: ";
-  cout << (patch->affects_pkg_manager() ? "Yes" : "No") << endl;
-  
-  cout << "Interactive: " << (patch->interactive() ? "Yes" : "No") << endl;
-  cout << "Summary: " << pool_item.resolvable()->summary() << endl;
-  cout << "Description: " << pool_item.resolvable()->description() << endl;
+  cout << _("Category: ") << patch->category() << endl;
+  cout << _("Created On: ") << patch->timestamp().asString() << endl;
+  cout << _("Reboot Required: ") << (patch->reboot_needed() ? _("Yes") : _("No")) << endl;
 
-  cout << "Provides:" << endl;
+  if (!gSettings.is_rug_compatible)
+    cout << _("Package Manager Restart Required");
+  else
+    cout << _("Restart Required: ");
+  cout << (patch->affects_pkg_manager() ? _("Yes") : _("No")) << endl;
+
+  cout << _("Interactive: ") << (patch->interactive() ? _("Yes") : _("No")) << endl;
+  cout << _("Summary: ") << pool_item.resolvable()->summary() << endl;
+  cout << _("Description: ") << pool_item.resolvable()->description() << endl;
+
+  cout << _("Provides:") << endl;
   CapSet capSet = pool_item.resolvable()->dep(zypp::Dep::PROVIDES);
   for (CapSet::const_iterator it = capSet.begin(); it != capSet.end(); ++it) {
     cout << it->refers().asString() << ": " << it->asString() << endl;
   }
 
-  cout << endl << "Requires:" << endl;
+  cout << endl << _("Requires:") << endl;
   capSet = pool_item.resolvable()->dep(zypp::Dep::REQUIRES);
   for (CapSet::const_iterator it = capSet.begin(); it != capSet.end(); ++it) {
     cout << it->refers().asString() << ": " << it->asString() << endl;

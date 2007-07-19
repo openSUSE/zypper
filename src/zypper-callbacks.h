@@ -13,6 +13,8 @@
 #include <string>
 #include <zypp/Resolvable.h>
 
+#include "zypper.h"
+
 /*
 enum Error {
     NO_ERROR,
@@ -31,7 +33,8 @@ template<typename Error>
 void display_error (Error error, const std::string& reason) {
   if (error != 0 /*NO_ERROR*/) {
     static const char * error_s[] = {
-      "", "Not found", "I/O error", "Invalid object"
+      // TranslatorExplanation These are reasons for various failures.
+      "", _("Not found"), _("I/O error"), _("Invalid object")
     };
     ostream& stm = std::cerr;
     stm << error_s[error];

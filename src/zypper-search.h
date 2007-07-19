@@ -230,14 +230,21 @@ struct FillTable
     _table(&table), _icache(&icache) {
     TableHeader header;
 
-    header << "S" << "Catalog";
+    // TranslatorExplanation S as Status
+    header << _("S");
 
     if (gSettings.is_rug_compatible)
-      header << "Bundle";
+      header << _("Catalog");
     else
-      header << "Type";
+      header << _("Repository");
 
-    header << "Name" << "Version" << "Arch";
+    if (gSettings.is_rug_compatible)
+      // TranslatorExplanation This is Bundle in as used in rug.
+      header << _("Bundle");
+    else
+      header << _("Type");
+
+    header << _("Name") << _("Version") << _("Arch");
 
     *_table << header;
   }
