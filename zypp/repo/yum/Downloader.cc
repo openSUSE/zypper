@@ -97,6 +97,7 @@ void Downloader::download( MediaSetAccess &media,
   //downloadMediaInfo( dest_dir, _media );
   
   _dest_dir = dest_dir;
+  
   if ( _media_ptr->doesFileExist(keypath) )
     this->enqueue( OnMediaLocation(keypath,1) );
 

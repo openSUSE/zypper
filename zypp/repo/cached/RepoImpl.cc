@@ -74,7 +74,6 @@ static int global_progress_handler(void* ptr)
   RepoImpl *r = (RepoImpl *)(ptr);
   if ( r )
     return r->progress_handler(ptr);
-
   return 1;
 }
 
