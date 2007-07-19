@@ -35,7 +35,7 @@ void Downloader::download( MediaSetAccess &media,
                            const ProgressData::ReceiverFnc & progress )
 {
   downloadMediaInfo( dest_dir, media );
-  
+
   SignatureFileChecker sigchecker;
 
   Pathname sig = _path + "/content.asc";
