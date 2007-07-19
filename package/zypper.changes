@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Jul 19 14:48:04 CEST 2007 - jkupec@suse.cz
+
+- some texts clean-up for first translation round
+- r6089
+- 0.8.3
+
+-------------------------------------------------------------------
 Thu Jul 19 12:08:51 CEST 2007 - tgoettlicher@suse.de
 
 - renamed command "xml-updates-patches" to "xml-updates"
@@ -8,7 +15,7 @@ Thu Jul 19 12:08:51 CEST 2007 - tgoettlicher@suse.de
 -------------------------------------------------------------------
 Wed Jul 18 20:35:50 CEST 2007 - jkupec@suse.cz
 
-- --auto-agree-with-licenses option added
+- --auto-agree-with-licenses option added (#216649)
 - r6080
 
 -------------------------------------------------------------------
@@ -28,8 +35,8 @@ Wed Jul 18 16:15:50 CEST 2007 - jkupec@suse.cz
 - --loose-auth and --loose-query added for removerepo command
   (#292362)
 - keyring callbacks improved and prepared for non-interactive and
-  no-gpg-checks mode
-- no-gpg-checks global option added
+  no-gpg-checks mode (#216649)
+- no-gpg-checks global option added. (FATE #301998)
 - show repo in the repo list as disabled only if enabled() == false
   (tribool bug)
 - r6066
