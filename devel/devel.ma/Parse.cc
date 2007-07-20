@@ -259,7 +259,7 @@ int main( int argc, char * argv[] )
   //zypp::base::LogControl::instance().logfile( "log.restrict" );
   INT << "===[START]==========================================" << endl;
 
-  RepoManager  repoManager;
+  RepoManager repoManager( makeRepoManager( "/ROOT" ) );
   RepoInfoList repos = repoManager.knownRepositories();
   SEC << repos << endl;
 
@@ -274,12 +274,12 @@ int main( int argc, char * argv[] )
 	.addBaseUrl( Url("ftp://dist.suse.de/install/stable-x86/") );
 
     repoManager.addRepository( nrepo );
-    repos = repoManager.knownRepositories();
     SEC << "refreshMetadat" << endl;
     repoManager.refreshMetadata( nrepo );
     SEC << "buildCache" << endl;
     repoManager.buildCache( nrepo );
     SEC << "------" << endl;
+    repos = repoManager.knownRepositories();
   }
 
   ResPool pool( getZYpp()->pool() );
@@ -301,9 +301,12 @@ int main( int argc, char * argv[] )
       SEC << "buildCache" << endl;
       repoManager.buildCache( nrepo );
     }
+
     SEC << nrepo << endl;
+
     Repository nrep( repoManager.createFromCache( nrepo ) );
     const zypp::ResStore & store( nrep.resolvables() );
+
     dumpPoolStats( SEC << "Store: " << endl,
 		   store.begin(), store.end() ) << endl;
     getZYpp()->addResolvables( store );

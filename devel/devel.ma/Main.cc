@@ -4,6 +4,7 @@
 #include "zypp/base/LogTools.h"
 #include "zypp/base/InputStream.h"
 
+#include "zypp/TmpPath.h"
 #include "zypp/RepoManager.h"
 
 using std::endl;
@@ -13,8 +14,8 @@ using namespace zypp;
 
 RepoManager makeRepoManager( const Pathname & mgrdir_r )
 {
-  RepoManagerOptions mgropt;
 
+  RepoManagerOptions mgropt;
   mgropt.repoCachePath    = mgrdir_r/"cache";
   mgropt.repoRawCachePath = mgrdir_r/"raw_cache";
   mgropt.knownReposPath   = mgrdir_r/"repos";
@@ -31,7 +32,7 @@ int main( int argc, char * argv[] )
 {
   INT << "===[START]==========================================" << endl;
 
-  RepoManager repoManager( makeRepoManager( "/tmp/myrepos" ) );
+  RepoManager repoManager( makeRepoManager( "/ROOT" ) );
   RepoInfoList repos = repoManager.knownRepositories();
   SEC << repos << endl;
 

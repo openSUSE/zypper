@@ -18,6 +18,7 @@
 #include <zypp/pool/PoolStats.h>
 
 #include <zypp/Repository.h>
+#include <zypp/RepoManager.h>
 
 using namespace zypp;
 using zypp::debug::Measure;
@@ -90,6 +91,20 @@ template<class _Container>
   }
 
 ///////////////////////////////////////////////////////////////////
+
+inline RepoManager makeRepoManager( const Pathname & mgrdir_r )
+{
+
+  RepoManagerOptions mgropt;
+  mgropt.repoCachePath    = mgrdir_r/"cache";
+  mgropt.repoRawCachePath = mgrdir_r/"raw_cache";
+  mgropt.knownReposPath   = mgrdir_r/"repos";
+
+  return RepoManager( mgropt );
+}
+
+///////////////////////////////////////////////////////////////////
+
 inline Repository createSource( const Url & url_r, const std::string & alias_r = std::string() )
 {
   Repository ret;
