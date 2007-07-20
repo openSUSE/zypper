@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri Jul 20 16:10:59 CEST 2007 - ma@suse.de
+
+- Fixed malicious gattext include.
+- Make ZConfig a singleton.
+- revision 6123
+
+-------------------------------------------------------------------
 Thu Jul 19 15:52:03 CEST 2007 - ma@suse.de
 
 - Fixed repo::provideFile to set a deleter for downloaded files
