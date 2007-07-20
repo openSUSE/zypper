@@ -1,7 +1,7 @@
 -------------------------------------------------------------------
 Fri Jul 20 16:10:59 CEST 2007 - ma@suse.de
 
-- Fixed malicious gattext include.
+- Fixed malicious gettext include.
 - Make ZConfig a singleton.
 - revision 6123
 
