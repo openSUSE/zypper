@@ -262,7 +262,7 @@ namespace zypp
 
   ////////////////////////////////////////////////////////////////////////////
 
-  RepoStatus RepoManager::rawMetadataStatus( const RepoInfo &info )
+  RepoStatus RepoManager::metadataStatus( const RepoInfo &info ) const
   {
     Pathname rawpath = rawcache_path_for_repoinfo( _pimpl->options, info );
     RepoType repokind = info.type();
@@ -339,7 +339,7 @@ namespace zypp
         }
 
         Pathname rawpath = rawcache_path_for_repoinfo( _pimpl->options, info );
-        oldstatus = rawMetadataStatus(info);
+        oldstatus = metadataStatus(info);
 
         if ( ( repokind.toEnum() == RepoType::RPMMD_e ) ||
              ( repokind.toEnum() == RepoType::YAST2_e ) )
@@ -468,7 +468,7 @@ namespace zypp
 
     cache::CacheStore store(_pimpl->options.repoCachePath);
 
-    RepoStatus raw_metadata_status = rawMetadataStatus(info);
+    RepoStatus raw_metadata_status = metadataStatus(info);
     if ( raw_metadata_status.empty() )
     {
       ZYPP_THROW(RepoMetadataException(info));
@@ -553,7 +553,7 @@ namespace zypp
 
   ////////////////////////////////////////////////////////////////////////////
 
-  repo::RepoType RepoManager::probe( const Url &url )
+  repo::RepoType RepoManager::probe( const Url &url ) const
   {
     if ( url.getScheme() == "dir" && ! PathInfo( url.getPathName() ).isDir() )
     {
@@ -606,6 +606,14 @@ namespace zypp
   {
     cache::CacheStore store(_pimpl->options.repoCachePath);
     return store.isCached(info.alias());
+  }
+
+  RepoStatus RepoManager::cacheStatus( const RepoInfo &info ) const
+  {
+    cache::CacheStore store(_pimpl->options.repoCachePath);
+    data::RecordId id = store.lookupRepository(info.alias());
+    RepoStatus cache_status = store.repositoryStatus(id);
+    return cache_status;
   }
 
   Repository RepoManager::createFromCache( const RepoInfo &info,

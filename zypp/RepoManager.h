@@ -102,6 +102,11 @@ namespace zypp
    std::list<RepoInfo> knownRepositories() const;
 
    /**
+    * \short Status of local metadata
+    */
+    RepoStatus metadataStatus( const RepoInfo &info ) const;
+
+   /**
     * \short Refresh local raw cache
     *
     * Will try to download the metadata
@@ -128,6 +133,11 @@ namespace zypp
     */
    void cleanMetadata( const RepoInfo &info,
                        const ProgressData::ReceiverFnc & progressrcv = ProgressData::ReceiverFnc() );
+
+   /**
+    * \short Status of metadata cache
+    */
+    RepoStatus cacheStatus( const RepoInfo &info ) const;
    
    /**
     * \short Refresh local cache
@@ -200,7 +210,7 @@ namespace zypp
     *
     * \todo FIXME Should this be private?
     */
-   repo::RepoType probe( const Url &url );
+   repo::RepoType probe( const Url &url ) const;
    
    
    /**
