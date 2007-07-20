@@ -40,7 +40,7 @@ namespace zypp
       /**
        * \short Dtor
        */
-      ~RepositoryImpl();
+      virtual ~RepositoryImpl();
 
       /**
        * \short Information about this repository
