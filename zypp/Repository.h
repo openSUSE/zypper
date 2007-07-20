@@ -35,6 +35,14 @@ namespace zypp
     */
     Repository();
 
+    /** \short Factory ctor taking a RepositoryImpl.
+     * This is quite lowevel. You usually want to use RepoManager to
+     * manage the repositories.
+     * \see RepoManager
+    */
+    explicit
+    Repository( const Impl_Ptr & impl_r );
+
     /**
      * A dummy Repository (Id \c 0) providing nothing, doing nothing.
     */
@@ -76,16 +84,6 @@ namespace zypp
     /** \ref SafeBool test. */
     bool boolTest() const
     { return _pimpl != noRepository._pimpl; }
-
-  private:
-    /** Factory */
-    friend class RepoManager;
-    friend class repo::RepositoryImpl;
-
-  private:
-    /** Factory ctor */
-    explicit
-    Repository( const Impl_Ptr & impl_r );
 
   private:
     /** Pointer to implementation */
