@@ -417,6 +417,14 @@ void load_repo_resolvables()
 
     try 
     {
+      // if there is no metadata locally
+      if ( manager.metadataStatus(repo).empty() )
+      {
+        cout_v << format(_("Retrieving repository '%s' information..."))
+                         % repo.alias() << endl;
+        manager.refreshMetadata(repo);
+      }
+
       if (!manager.isCached(repo))
       {
         cout_v << format(_("Repository '%s' not cached. Caching..."))
