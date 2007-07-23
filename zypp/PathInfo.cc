@@ -292,8 +292,9 @@ namespace zypp
     inline int _Log_Result( const int res, const char * rclass = "errno" )
     {
       if ( res )
-        DBG << " FAILED: " << rclass << " " << res;
-      DBG << std::endl;
+        WAR << " FAILED: " << rclass << " " << res << std::endl;
+      else
+        DBG << std::endl;
       return res;
     }
 
@@ -390,7 +391,7 @@ namespace zypp
         }
       catch ( boost::filesystem::filesystem_error & excpt )
         {
-          DBG << " FAILED: " << excpt.what() << std::endl;
+          WAR << " FAILED: " << excpt.what() << std::endl;
           return -1;
         }
 
