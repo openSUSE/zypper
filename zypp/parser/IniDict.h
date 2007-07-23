@@ -109,6 +109,22 @@ namespace zypp
        */
       void deleteSection( const std::string &section );
 
+      /**
+       * \short True if there is a section with that name
+       * \param section Section Name
+       */
+      bool hasSection( const std::string &section ) const;
+
+      /**
+       * \short True if an entry exists in the section
+       * \param section Section name
+       * \param entry entry name
+       *
+       * \note If the given section does not exist, this will
+       * of course return false.
+       */
+      bool hasEntry( const std::string &section,
+                     const std::string &entry ) const;
     public:
 
       /** Called when a section is found. */

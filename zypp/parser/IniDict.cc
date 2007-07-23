@@ -104,6 +104,28 @@ namespace zypp
       _dict.erase(section);
     }
     
+    bool IniDict::hasSection( const std::string &section ) const
+    {
+      SectionSet::const_iterator secit = _dict.find(section);
+      if ( secit == _dict.end() )
+        return false;
+      return true;
+    }
+
+    bool IniDict::hasEntry( const std::string &section,
+                            const std::string &entry ) const
+    {
+      SectionSet::const_iterator secit = _dict.find(section);
+      if ( secit == _dict.end() )
+        return false;
+      
+      EntrySet::const_iterator entryit = (secit->second).find(entry);
+      if ( entryit == (secit->second).end() )
+        return false;
+
+      return true;
+    }
+
     /******************************************************************
     **
     **	FUNCTION NAME : operator<<

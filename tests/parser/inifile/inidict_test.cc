@@ -38,6 +38,11 @@ void ini_read_test(const string &dir)
       MIL << "  - " << (*it2).first << " | " << (*it2).second << endl;
     }
   }
+
+  BOOST_CHECK( dict.hasSection("addons") );
+  BOOST_CHECK( !dict.hasSection("uhlala") );
+  BOOST_CHECK( dict.hasEntry("contrib", "name") );
+  BOOST_CHECK( !dict.hasEntry("foo", "bar") );
 }
 
 void ini_read_test2(const string &dir)
