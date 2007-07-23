@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Jul 23 18:17:00 CEST 2007 - tgoettlicher@suse.de
+
+- Added --machine-readable to install command
+- r6160
+
+-------------------------------------------------------------------
 Thu Jul 23 15:57:00 CEST 2007 - tgoettlicher@suse.de
 
 - Adapted zypp-checkpatches-wrapper for use with "zypper -q xu"
