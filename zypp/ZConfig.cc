@@ -94,7 +94,7 @@ namespace zypp
     return getZYpp()->getTextLocale();
   }
 
-  Pathname ZConfig::defaultRepoRawCachePath() const
+  Pathname ZConfig::defaultRepoMetadataPath() const
   {
     return Pathname("/var/lib/zypp/cache/raw");
   }

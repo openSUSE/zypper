@@ -58,7 +58,7 @@ namespace zypp
   RepoManagerOptions::RepoManagerOptions()
   {
     repoCachePath    = ZConfig::instance().defaultRepoCachePath();
-    repoRawCachePath = ZConfig::instance().defaultRepoRawCachePath();
+    repoRawCachePath = ZConfig::instance().defaultRepoMetadataPath();
     knownReposPath   = ZConfig::instance().defaultKnownReposPath();
   }
 

@@ -53,7 +53,7 @@ namespace zypp
       /**
        * Path where the repo metadata is downloaded and kept.
        */
-      Pathname defaultRepoRawCachePath() const;
+      Pathname defaultRepoMetadataPath() const;
 
       /**
        * Path where the processed cache is kept
