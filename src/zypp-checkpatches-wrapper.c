@@ -1,4 +1,4 @@
-/* A setuid-root wrapper for zypp-checkpatches */
+/* A setuid-root wrapper for zypper refresh repositories */
 
 /* clearenv */
 #include <stdlib.h>
@@ -9,7 +9,9 @@
 
 #define WRAPPER_ERROR 101
 
-const char *app = "/usr/sbin/zypp-checkpatches";
+const char *app = "/usr/bin/zypper";
+const char *arg1 = "-q";
+const char *arg2 = "xu";
 
 int main (void) {
     /* cd / to avoid NFS problems */
@@ -32,7 +34,7 @@ int main (void) {
     }
  
     /* execute the real application */
-    execl (app, app, (char *) NULL);
+    execl (app, app, arg1, arg2, (char *) NULL);
 
     /* if we are still here, it has failed */
     perror ("exec");
