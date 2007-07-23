@@ -553,6 +553,20 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
       "This command has no additional options.\n"
       );
   }
+  else if (command == ZypperCommand::XML_LIST_UPDATES_PATCHES) {
+    static struct option xml_updates_options[] = {
+      {"help", no_argument, 0, 'h'},
+      {0, 0, 0, 0}
+    };
+    specific_options = xml_updates_options;
+    specific_help = _(
+      "xml-updates\n"
+      "\n"
+      "'xml-updates' - Show updates and patches in xml format\n"
+      "\n"
+      "This command has no additional options.\n"
+      );
+	}
 
   parsed_opts copts = parse_options (argc, argv, specific_options);
   if (copts.count("_unknown"))
@@ -1085,6 +1099,9 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
   // -----------------( xml list updates and patches )------------------------
 
   else if (command == ZypperCommand::XML_LIST_UPDATES_PATCHES) {
+
+    if (ghelp) { cout << specific_help << endl; return !ghelp; }
+
     cond_init_target ();
     init_repos ();
     cond_load_resolvables();
