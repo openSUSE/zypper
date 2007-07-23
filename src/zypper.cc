@@ -266,6 +266,7 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
       {"type",	                    required_argument, 0, 't'},
       {"no-confirm",                no_argument,       0, 'y'},
       {"auto-agree-with-licenses",  no_argument,       0, 'l'},
+      {"machine-readable",					no_argument,       0, 'm'},
       {"help",                      no_argument,       0, 'h'},
       {0, 0, 0, 0}
     };
@@ -279,6 +280,7 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
       "\t--catalog,-c\t\t\tOnly from this catalog (under development)\n"
       "\t--type,-t <resolvable_type>\tType of resolvable (default: package)\n"
       "\t--no-confirm,-y\t\t\tDo not require user confirmation to proceed with installation\n"
+      "\t--machine-readable,-m\t\t\tGenerate machine readable output\n"
       "\t--auto-agree-with-licenses,-l\tAutomatically say 'yes' to third party license confirmation prompt.\n"
       "\t\t\t\t\tSee man zypper for more details.\n"
       );
@@ -909,6 +911,10 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
 
       if (copts.count("auto-agree-with-licenses"))
         gSettings.license_auto_agree = true;
+
+      if (copts.count("machine-readable"))
+        gSettings.machine_readable = true;
+
     }
 
     if (command == ZypperCommand::REMOVE) {

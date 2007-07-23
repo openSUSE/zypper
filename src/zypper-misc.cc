@@ -320,7 +320,8 @@ int show_summary()
 {
   int retv = -1; // nothing to do;
 
-  cerr << _("Summary:") << endl;
+	if (!gSettings.machine_readable)
+	  cerr << _("Summary:") << endl;
 
   MIL << "Pool contains " << God->pool().size() << " items." << std::endl;
   for ( ResPool::const_iterator it = God->pool().begin(); it != God->pool().end(); ++it )
@@ -342,11 +343,14 @@ int show_summary()
           retv = ZYPPER_EXIT_INF_RESTART_NEEDED;
       }
 
-      if ( it->status().isToBeInstalled() )
-        cerr << _("<install>   ");
-      if ( it->status().isToBeUninstalled() )
-        cerr << _("<uninstall> ");
-      cerr << *res << endl;
+			if (!gSettings.machine_readable)
+			{
+	      if ( it->status().isToBeInstalled() )
+	        cerr << _("<install>   ");
+	      if ( it->status().isToBeUninstalled() )
+	        cerr << _("<uninstall> ");
+	      cerr << *res << endl;
+			}
     }
   }
   if (retv == -1)

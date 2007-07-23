@@ -96,12 +96,14 @@ int read_action_ari (int default_action) {
 // Read an answer (ynYN)
 bool read_bool_answer(const string & question, bool default_answer)
 {
-  cout << CLEARLN << question << " [y/n]: " << flush;
+  if (!gSettings.machine_readable)
+  	cout << CLEARLN << question << " [y/n]: " << flush;
 
   // non-interactive mode: print the answer for convenience and return default
   if (gSettings.non_interactive)
   {
-    cout << (default_answer ? 'y' : 'n') << endl;
+  	if (!gSettings.machine_readable)
+	    cout << (default_answer ? 'y' : 'n') << endl;
     MIL << "answer (default): " << (default_answer ? 'y' : 'n') << endl;
     return default_answer;
   }

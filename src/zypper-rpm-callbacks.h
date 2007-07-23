@@ -175,7 +175,10 @@ struct InstallResolvableReportReceiver : public zypp::callback::ReceiveReport<zy
   virtual void start( zypp::Resolvable::constPtr resolvable )
   {
     _resolvable = resolvable;
-    cerr << "Installing: " + to_string (resolvable) << endl;
+	  if (gSettings.machine_readable)
+			cout << "Installing: " + to_string (resolvable) << endl;
+		else
+	    cerr << "Installing: " + to_string (resolvable) << endl;
   }
 
   virtual bool progress(int value, zypp::Resolvable::constPtr resolvable)
