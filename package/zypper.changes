@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Jul 23 15:57:00 CEST 2007 - tgoettlicher@suse.de
+
+- Adapted zypp-checkpatches-wrapper for use with "zypper -q xu"
+- r6158.
+
+-------------------------------------------------------------------
 Thu Jul 23 14:26:00 CEST 2007 - tgoettlicher@suse.de
 
 - Added "xml-updates" to help command
