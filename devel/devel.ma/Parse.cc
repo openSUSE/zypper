@@ -259,7 +259,7 @@ int main( int argc, char * argv[] )
   //zypp::base::LogControl::instance().logfile( "log.restrict" );
   INT << "===[START]==========================================" << endl;
 
-  RepoManager repoManager( makeRepoManager( "/ROOT" ) );
+  RepoManager repoManager( makeRepoManager( "/Local/ROOT" ) );
   RepoInfoList repos = repoManager.knownRepositories();
   SEC << repos << endl;
 
@@ -291,7 +291,7 @@ int main( int argc, char * argv[] )
   {
     RepoInfo & nrepo( *it );
 
-    if ( 1 )
+    if ( ! repoManager.isCached( nrepo ) || 0 )
     {
       if ( repoManager.isCached( nrepo ) )
       {
@@ -310,6 +310,8 @@ int main( int argc, char * argv[] )
     dumpPoolStats( SEC << "Store: " << endl,
 		   store.begin(), store.end() ) << endl;
     getZYpp()->addResolvables( store );
+
+    USR << (nrep?1:0) << endl;
   }
 
   USR << "pool: " << pool << endl;
