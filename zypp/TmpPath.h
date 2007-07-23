@@ -42,37 +42,37 @@ namespace zypp {
          * Default Ctor. An empty Pathname.
          **/
         TmpPath();
-    
+
         /**
          * Ctor. Takes a Pathname.
          **/
         explicit
         TmpPath( const Pathname & tmpPath_r );
-    
+
         /**
          * Dtor.
          **/
         virtual
         ~TmpPath();
-    
+
         /**
          * Test whether the Pathname is valid (i.e. not empty. NOT whether
          * it realy denotes an existing file or directory).
          **/
         operator const void *const() const;
-    
+
         /**
          * @return The Pathname.
          **/
         Pathname
         path() const;
-    
+
         /**
          * Type conversion to Pathname.
          **/
         operator Pathname() const
         { return path(); }
-    
+
       public:
         /**
          * @return The default directory where temporary
@@ -84,19 +84,19 @@ namespace zypp {
       protected:
         class Impl;
         RW_pointer<Impl> _impl;
-    
+
     };
     ///////////////////////////////////////////////////////////////////
-    
+
     /**
      * Stream output as pathname.
      **/
     inline std::ostream &
     operator<<( std::ostream & str, const TmpPath & obj )
     { return str << static_cast<Pathname>(obj); }
-    
+
     ///////////////////////////////////////////////////////////////////
-    
+
     ///////////////////////////////////////////////////////////////////
     //
     //	CLASS NAME : TmpFile
@@ -122,17 +122,25 @@ namespace zypp {
         explicit
         TmpFile( const Pathname & inParentDir_r = defaultLocation(),
                  const std::string & prefix_r = defaultPrefix() );
-    
+
+        /** Provide a new empty temporary directory as sibling.
+         * \code
+         *   TmpFile s = makeSibling( "/var/lib/myfile" );
+         *   // returns: /var/lib/myfile.XXXXXX
+         * \endcode
+         */
+        static TmpFile makeSibling( const Pathname & sibling_r );
+
       public:
         /**
          * @return The default prefix for temporary files (TmpFile.)
          **/
         static const std::string &
         defaultPrefix();
-    
+
     };
     ///////////////////////////////////////////////////////////////////
-    
+
     ///////////////////////////////////////////////////////////////////
     //
     //	CLASS NAME : TmpDir
@@ -158,7 +166,15 @@ namespace zypp {
         explicit
         TmpDir( const Pathname & inParentDir_r = defaultLocation(),
                 const std::string & prefix_r = defaultPrefix() );
-    
+
+        /** Provide a new empty temporary directory as sibling.
+         * \code
+         *   TmpDir s = makeSibling( "/var/lib/mydir" );
+         *   // returns: /var/lib/mydir.XXXXXX
+         * \endcode
+         */
+        static TmpDir makeSibling( const Pathname & sibling_r );
+
       public:
         /**
          * @return The default prefix for temporary directories (TmpDir.)

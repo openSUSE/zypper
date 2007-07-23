@@ -36,7 +36,7 @@ namespace zypp {
     class TmpPath::Impl : public base::ReferenceCounted, private base::NonCopyable
     {
       public:
-    
+
         enum Flags
           {
             NoOp         = 0,
@@ -45,22 +45,22 @@ namespace zypp {
             //
             CtorDefault  = Autodelete
           };
-    
+
       public:
-    
+
         Impl( const Pathname & path_r, Flags flags_r = CtorDefault )
         : _path( path_r ), _flags( flags_r )
         {}
-    
+
         ~Impl()
         {
           if ( ! (_flags & Autodelete) || _path.empty() )
             return;
-    
+
           PathInfo p( _path, PathInfo::LSTAT );
           if ( ! p.isExist() )
             return;
-    
+
           int res = 0;
           if ( p.isDir() )
             {
@@ -71,29 +71,29 @@ namespace zypp {
             }
           else
             res = unlink( _path );
-    
+
           if ( res )
             INT << "TmpPath cleanup error (" << res << ") " << p << endl;
           else
             DBG << "TmpPath cleaned up " << p << endl;
         }
-    
+
         const Pathname &
         path() const
         { return _path; }
-    
+
       private:
         Pathname _path;
         Flags    _flags;
     };
     ///////////////////////////////////////////////////////////////////
-    
+
     ///////////////////////////////////////////////////////////////////
     //
     //	CLASS NAME : TmpPath
     //
     ///////////////////////////////////////////////////////////////////
-    
+
     ///////////////////////////////////////////////////////////////////
     //
     //	METHOD NAME : TmpPath::TmpPath
@@ -103,7 +103,7 @@ namespace zypp {
     :_impl( 0 ) // empty Pathname
     {
     }
-    
+
     ///////////////////////////////////////////////////////////////////
     //
     //	METHOD NAME : TmpPath::TmpPath
@@ -113,7 +113,7 @@ namespace zypp {
     :_impl( tmpPath_r.empty() ? 0 : new Impl( tmpPath_r ) )
     {
     }
-    
+
     ///////////////////////////////////////////////////////////////////
     //
     //	METHOD NAME : TmpPath::~TmpPath
@@ -123,7 +123,7 @@ namespace zypp {
     {
       // virtual not inlined dtor.
     }
-   
+
     ///////////////////////////////////////////////////////////////////
     //
     //      METHOD NAME : TmpPath::operator const void *const
@@ -133,7 +133,7 @@ namespace zypp {
     {
       return _impl.get();
     }
- 
+
     ///////////////////////////////////////////////////////////////////
     //
     //	METHOD NAME : TmpPath::path
@@ -144,7 +144,7 @@ namespace zypp {
     {
       return _impl.get() ? _impl->path() : Pathname();
     }
-    
+
     ///////////////////////////////////////////////////////////////////
     //
     //	METHOD NAME : TmpPath::defaultLocation
@@ -161,8 +161,8 @@ namespace zypp {
     //	CLASS NAME : TmpFile
     //
     ///////////////////////////////////////////////////////////////////
-    
-    
+
+
     ///////////////////////////////////////////////////////////////////
     //
     //	METHOD NAME : TmpFile::TmpFile
@@ -178,7 +178,7 @@ namespace zypp {
           ERR << "Parent directory does not exist: " << p << endl;
           return;
         }
-    
+
       // create the temp file
       Pathname tmpPath = (inParentDir_r + prefix_r).extend( "XXXXXX");
       char * buf = ::strdup( tmpPath.asString().c_str() );
@@ -187,7 +187,7 @@ namespace zypp {
           ERR << "Out of memory" << endl;
           return;
         }
-    
+
       int tmpFd = ::mkstemp( buf );
       if ( tmpFd != -1 )
         {
@@ -197,10 +197,20 @@ namespace zypp {
         }
       else
         ERR << "Cant create '" << buf << "' " << ::strerror( errno ) << endl;
-    
+
       ::free( buf );
     }
-    
+
+    ///////////////////////////////////////////////////////////////////
+    //
+    //	METHOD NAME : TmpFile::makeSibling
+    //	METHOD TYPE : TmpFile
+    //
+    TmpFile TmpFile::makeSibling( const Pathname & sibling_r )
+    {
+      return TmpFile( sibling_r.dirname(), sibling_r.basename() );
+    }
+
     ///////////////////////////////////////////////////////////////////
     //
     //	METHOD NAME : TmpFile::defaultPrefix
@@ -212,13 +222,13 @@ namespace zypp {
       static string p( "TmpFile." );
       return p;
     }
-    
+
     ///////////////////////////////////////////////////////////////////
     //
     //	CLASS NAME : TmpDir
     //
     ///////////////////////////////////////////////////////////////////
-    
+
     ///////////////////////////////////////////////////////////////////
     //
     //	METHOD NAME : TmpDir::TmpDir
@@ -234,7 +244,7 @@ namespace zypp {
           ERR << "Parent directory does not exist: " << p << endl;
           return;
         }
-    
+
       // create the temp dir
       Pathname tmpPath = (inParentDir_r + prefix_r).extend( "XXXXXX");
       char * buf = ::strdup( tmpPath.asString().c_str() );
@@ -243,17 +253,27 @@ namespace zypp {
           ERR << "Out of memory" << endl;
           return;
         }
-    
+
       char * tmp = ::mkdtemp( buf );
       if ( tmp )
         // success; create _impl
         _impl = RW_pointer<Impl>( new Impl( tmp ) );
       else
         ERR << "Cant create '" << tmpPath << "' " << ::strerror( errno ) << endl;
-    
+
       ::free( buf );
     }
-    
+
+    ///////////////////////////////////////////////////////////////////
+    //
+    //	METHOD NAME : TmpDir::makeSibling
+    //	METHOD TYPE : TmpDir
+    //
+    TmpDir TmpDir::makeSibling( const Pathname & sibling_r )
+    {
+      return TmpDir( sibling_r.dirname(), sibling_r.basename() );
+    }
+
     ///////////////////////////////////////////////////////////////////
     //
     //	METHOD NAME : TmpDir::defaultPrefix
