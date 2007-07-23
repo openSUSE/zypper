@@ -323,7 +323,6 @@ namespace zypp
       try
       {
         Url url(*it);
-        filesystem::TmpDir tmpdir;
 
         repo::RepoType repokind = info.type();
 
@@ -341,6 +340,9 @@ namespace zypp
         Pathname rawpath = rawcache_path_for_repoinfo( _pimpl->options, info );
         filesystem::assert_dir(rawpath);
         oldstatus = metadataStatus(info);
+
+        // create temp dir as sibling of rawpath
+        filesystem::TmpDir tmpdir( filesystem::TmpDir::makeSibling( rawpath ) );
 
         if ( ( repokind.toEnum() == RepoType::RPMMD_e ) ||
              ( repokind.toEnum() == RepoType::YAST2_e ) )
@@ -428,7 +430,7 @@ namespace zypp
 
         // ok we have the metadata, now exchange
         // the contents
-        TmpDir oldmetadata;
+        TmpDir oldmetadata( TmpDir::makeSibling( rawpath ) );
         filesystem::rename( rawpath, oldmetadata.path() );
         // move the just downloaded there
         filesystem::rename( tmpdir.path(), rawpath );
