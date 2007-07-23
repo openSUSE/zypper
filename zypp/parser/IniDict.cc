@@ -33,7 +33,18 @@ namespace zypp
     //	METHOD NAME : IniDict::IniDict
     //	METHOD TYPE : Ctor
     //
-    IniDict::IniDict( const InputStream &is, const ProgressData::ReceiverFnc & progress )
+    IniDict::IniDict( const InputStream &is,
+                      const ProgressData::ReceiverFnc & progress )
+    {
+      read(is, progress );
+    }
+
+    IniDict::IniDict()
+    {
+    }
+
+    void IniDict::read( const InputStream &is,
+                        const ProgressData::ReceiverFnc & progress )
     {
       parse(is, progress );
     }

@@ -87,9 +87,21 @@ namespace zypp
        */
       IniDict( const InputStream &is,
                const ProgressData::ReceiverFnc & progress = ProgressData::ReceiverFnc() );
+
+      /**
+       * Creates a mepty dictionary
+       */
+      IniDict();
       
       /** Dtor */
       ~IniDict();
+
+      /**
+       * Fill a dictionary from a InputStream
+       * containing a ini structured file
+       */
+      void read( const InputStream &is,
+                 const ProgressData::ReceiverFnc & progress = ProgressData::ReceiverFnc() );
 
       /**
        * \short add an entry
