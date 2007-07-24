@@ -226,7 +226,7 @@ ZypperCommand process_globals(int argc, char **argv)
     if (ghelp)
       cout << help_global_options << endl << help_commands;
     else if (gopts.count("version"))
-      cout << PACKAGE << endl;
+      cout << PACKAGE " " VERSION << endl;
     else
       cerr << _("Try -h for help.") << endl;
   }

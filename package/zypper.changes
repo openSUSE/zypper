@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Tue Jul 24 18:33:41 CEST 2007 - mvidner@suse.cz
+
+- Fixed zypper --version (broken when switching to cmake).
+
+-------------------------------------------------------------------
 Thu Jul 23 18:17:00 CEST 2007 - tgoettlicher@suse.de
 
 - Added --machine-readable to install command
