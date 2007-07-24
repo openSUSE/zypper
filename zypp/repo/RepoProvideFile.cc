@@ -21,6 +21,8 @@
 #include "zypp/ZYppCallbacks.h"
 #include "zypp/MediaSetAccess.h"
 #include "zypp/ZConfig.h"
+#include "zypp/repo/SUSEMediaVerifier.h"
+#include "zypp/repo/RepoException.h"
 
 #include "zypp/repo/SUSEMediaVerifier.h"
 #include "zypp/repo/RepoException.h"
