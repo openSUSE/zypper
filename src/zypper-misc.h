@@ -16,6 +16,8 @@
 #include "zypp/PoolItem.h"
 #include "zypper-tabulator.h"
 
+bool readBoolAnswer();
+
 /**
  * Initialize rpm database on target, if not already initialized. 
  */

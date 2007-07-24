@@ -19,6 +19,7 @@
 #include <zypp/ZYppCallbacks.h>
 #include <zypp/Pathname.h>
 #include <zypp/KeyRing.h>
+#include <zypp/Repository.h>
 #include <zypp/Digest.h>
 #include <zypp/Url.h>
 
@@ -26,23 +27,25 @@
 
 using zypp::media::MediaChangeReport;
 using zypp::media::DownloadProgressReport;
+using zypp::Repository;
 
 ///////////////////////////////////////////////////////////////////
 namespace ZmartRecipients
 {
 
   struct MediaChangeReportReceiver : public zypp::callback::ReceiveReport<MediaChangeReport>
-  {/*
-    virtual MediaChangeReport::Action requestMedia( zypp::Source_Ref source, unsigned mediumNr, MediaChangeReport::Error error, const std::string & description )
-    { 
+  {
+    virtual MediaChangeReport::Action requestMedia( Repository repo,
+                                                    unsigned mediumNr,
+                                                    MediaChangeReport::Error error,
+                                                    const std::string & description )
+    {
       cout << "Please insert media [" << description << "] # " << mediumNr << ". Retry [y/n]: " << endl;
       if (readBoolAnswer())
         return MediaChangeReport::RETRY; 
       else
         return MediaChangeReport::ABORT; 
-    
     }
-    */
   };
 
     // progress for downloading a file
@@ -87,6 +90,7 @@ class MediaCallbacks {
   public:
     MediaCallbacks()
     {
+      MIL << "Set media callbacks.." << endl;
       _mediaChangeReport.connect();
       _mediaDownloadReport.connect();
     }

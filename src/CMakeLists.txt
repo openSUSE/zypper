@@ -3,19 +3,6 @@ ADD_DEFINITIONS (
   -DLOCALEDIR=\\\"${CMAKE_INSTALL_PREFIX}/share/locale\\\"
 )
 
-SET( zypper_SRCS
-  zypper.cc
-  zypper-command.cc
-  zypper-getopt.cc
-  zypper-sources.cc
-  zypper-misc.cc
-  zypper-utils.cc
-  zypper-search.cc
-  zypper-info.cc
-  zypper-tabulator.cc
-  zypper-callbacks.cc
-)
-
 SET (zypper_HEADERS
   zypper.h
   zypper-command.h
@@ -32,6 +19,22 @@ SET (zypper_HEADERS
   zypper-rpm-callbacks.h
   zypper-source-callbacks.h
 )
+
+SET( zypper_SRCS
+  zypper.cc
+  zypper-command.cc
+  zypper-getopt.cc
+  zypper-sources.cc
+  zypper-misc.cc
+  zypper-utils.cc
+  zypper-search.cc
+  zypper-info.cc
+  zypper-tabulator.cc
+  zypper-callbacks.cc
+  ${zypper_HEADERS}
+)
+
+
 
 ADD_EXECUTABLE( zypper ${zypper_SRCS} )
 TARGET_LINK_LIBRARIES( zypper ${ZYPP_LIBRARY} ${READLINE_LIBRARY} )
