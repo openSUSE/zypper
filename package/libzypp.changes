@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Jul 23 13:05:53 CEST 2007 - ma@suse.de
+
+- Fix failing rename of metadata download directories across
+  filesystem boundaries.
+
+-------------------------------------------------------------------
 Fri Jul 20 16:10:59 CEST 2007 - ma@suse.de
 
 - Fixed malicious gettext include.
