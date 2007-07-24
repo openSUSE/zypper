@@ -41,8 +41,7 @@ IMPL_PTR_TYPE(MediaSetAccess);
 
   MediaSetAccess::~MediaSetAccess()
   {
-#warning TODO call release() here once MediaSetAccess is passed as param in PackageProvider. MediaSetAccess will become like a ManagedFile object.
-    //! \todo call release() here once MediaSetAccess is passed as param in PackageProvider. MediaSetAccess will become like a ManagedFile object.
+    release();
   }
 
 
@@ -228,17 +227,6 @@ IMPL_PTR_TYPE(MediaSetAccess);
               ZYPP_CAUGHT(excpt_r);
               MIL << "Failed to release media " << media << endl;
           }
-
-          /*MIL << "Releasing all _medias of all sources" << endl;
-          try
-          {
-            //zypp::SourceManager::sourceManager()->releaseAllSources();
-          }
-          catch (const zypp::Exception& excpt_r)
-          {
-              ZYPP_CAUGHT(excpt_r);
-              ERR << "Failed to release all sources" << endl;
-          }*/
 
           // set up the reason
           media::MediaChangeReport::Error reason = media::MediaChangeReport::INVALID;
