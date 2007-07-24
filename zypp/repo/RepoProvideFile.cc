@@ -174,15 +174,12 @@ namespace zypp
     RepoMediaAccess::RepoMediaAccess()
       : _impl( new Impl() )
     {
-      
     }
     
     RepoMediaAccess::~RepoMediaAccess()
     {
     
     }
-    
-    
     
     ManagedFile RepoMediaAccess::provideFile( Repository repo_r,
                                               const OnMediaLocation & loc_r,
