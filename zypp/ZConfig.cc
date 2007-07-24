@@ -11,11 +11,16 @@
 */
 #include <iostream>
 #include "zypp/base/Logger.h"
+#include "zypp/base/InputStream.h"
 
 #include "zypp/ZConfig.h"
 #include "zypp/ZYppFactory.h"
+#include "zypp/PathInfo.h"
+#include "zypp/parser/IniDict.h"
 
-using std::endl;
+using namespace std;
+using namespace zypp::filesystem;
+using namespace zypp::parser;
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -31,13 +36,69 @@ namespace zypp
   {
     public:
       Impl()
-      {}
+      {
+        MIL << "ZConfig singleton created." << endl;
+        Pathname confpath("/etc/zypp/zypp.conf");
+        if ( PathInfo(confpath).isExist())
+        {
+          InputStream is(confpath);
+          dict.read(is);
+        }
+        else
+        {
+          MIL << "No /etc/zypp/zypp.conf" << endl;
+        }
+        
+        for ( IniDict::section_const_iterator sit = dict.sectionsBegin(); 
+              sit != dict.sectionsEnd();
+              ++sit )
+        {
+          string section(*sit);
+          //MIL << section << endl;
+          for ( IniDict::entry_const_iterator it = dict.entriesBegin(*sit); 
+                it != dict.entriesEnd(*sit);
+                ++it )
+          {
+            string entry(it->first);
+            string value(it->second);
+            //MIL << (*it).first << endl;
+            if ( section == "main" )
+            {
+              if ( entry == "arch" )
+              {
+                cfg_arch = Arch(value);
+              }
+              else if ( entry == "metadata-path" )
+              {
+                cfg_metadata_path = Pathname(value);
+              }
+              else if ( entry == "known-repos-path" )
+              {
+                cfg_known_repos_path = Pathname(value);
+              }
+              else if ( entry == "cache-path" )
+              {
+                cfg_cache_path = Pathname(value);
+              }
+            }
+            
+          }
+        }
+      
+      }
 
       ~Impl()
       {}
-
+      
     public:
-
+    parser::IniDict dict;
+    
+    Arch cfg_arch;
+    
+    Pathname cfg_metadata_path;
+    Pathname cfg_cache_path;
+    Pathname cfg_known_repos_path;
+    
   };
   ///////////////////////////////////////////////////////////////////
 
@@ -60,7 +121,7 @@ namespace zypp
   ZConfig::ZConfig()
   : _pimpl( new Impl )
   {
-    MIL << "ZConfig singleton created." << endl;
+    
   }
 
   ///////////////////////////////////////////////////////////////////
@@ -81,7 +142,8 @@ namespace zypp
   //
   Arch ZConfig::systemArchitecture() const
   {
-    return getZYpp()->architecture();
+    return ( (_pimpl->cfg_arch == Arch()) ?
+        getZYpp()->architecture() : _pimpl->cfg_arch );
   }
 
   ///////////////////////////////////////////////////////////////////
@@ -96,17 +158,20 @@ namespace zypp
 
   Pathname ZConfig::defaultRepoMetadataPath() const
   {
-    return Pathname("/var/lib/zypp/cache/raw");
+    return ( _pimpl->cfg_metadata_path.empty() 
+        ? Pathname("/var/lib/zypp/cache/raw") : _pimpl->cfg_metadata_path );
   }
 
   Pathname ZConfig::defaultRepoCachePath() const
   {
-    return Pathname("/var/lib/zypp/cache");
+    return ( _pimpl->cfg_cache_path.empty() 
+        ? Pathname("/var/lib/zypp/cache") : _pimpl->cfg_cache_path );
   }
 
   Pathname ZConfig::defaultKnownReposPath() const
   {
-    return Pathname("/etc/zypp/repos.d");
+    return ( _pimpl->cfg_known_repos_path.empty() 
+        ? Pathname("/etc/zypp/repos.d") : _pimpl->cfg_known_repos_path );
   }
 
   const std::string & ZConfig::cacheDBSplitJoinSeparator() const
