@@ -327,6 +327,22 @@ namespace zypp
         return str << std::string("NULL");
       }
 
+    /** \relates RW_pointer */
+    template<class _D, class _Ptr>
+      inline bool
+      operator==( const RW_pointer<_D, _Ptr> & lhs, const RW_pointer<_D, _Ptr> & rhs )
+      {
+        return( lhs.get() == rhs.get() );
+      }
+
+    /** \relates RW_pointer */
+    template<class _D, class _Ptr>
+      inline bool
+      operator!=( const RW_pointer<_D, _Ptr> & lhs, const RW_pointer<_D, _Ptr> & rhs )
+      {
+        return ! ( lhs == rhs );
+      }
+
     ///////////////////////////////////////////////////////////////////
 
     ///////////////////////////////////////////////////////////////////
@@ -439,6 +455,22 @@ namespace zypp
         if ( obj.get() )
           return str << *obj.get();
         return str << std::string("NULL");
+      }
+
+    /** \relates RWCOW_pointer */
+    template<class _D, class _Ptr>
+      inline bool
+      operator==( const RWCOW_pointer<_D, _Ptr> & lhs, const RWCOW_pointer<_D, _Ptr> & rhs )
+      {
+        return( lhs.get() == rhs.get() );
+      }
+
+    /** \relates RWCOW_pointer */
+    template<class _D, class _Ptr>
+      inline bool
+      operator!=( const RWCOW_pointer<_D, _Ptr> & lhs, const RWCOW_pointer<_D, _Ptr> & rhs )
+      {
+        return ! ( lhs == rhs );
       }
 
     ///////////////////////////////////////////////////////////////////

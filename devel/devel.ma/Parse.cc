@@ -246,6 +246,11 @@ namespace zypp
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
+bool repolst( const Repository & r )
+{
+  USR << (r?"Y":"N") << ": " << r << endl;
+  return true;
+}
 
 using namespace zypp;
 
@@ -287,6 +292,9 @@ int main( int argc, char * argv[] )
 		  pool.begin(),
 		  pool.end() ) << endl;
 
+
+  repolst( Repository::noRepository );
+
   for ( RepoInfoList::iterator it = repos.begin(); it != repos.end(); ++it )
   {
     RepoInfo & nrepo( *it );
@@ -311,7 +319,7 @@ int main( int argc, char * argv[] )
 		   store.begin(), store.end() ) << endl;
     getZYpp()->addResolvables( store );
 
-    USR << (nrep?1:0) << endl;
+    repolst( nrep );
   }
 
   USR << "pool: " << pool << endl;

@@ -52,6 +52,8 @@ namespace zypp
 #define T_NOT_NULL   assert( ptr )
 #define T_UNIQUE     assert( ptr.unique() ); assert( ptr.use_count() < 2 )
 #define T_NOT_UNIQUE assert( !ptr.unique() ); assert( ptr.use_count() >= 2 )
+#define T_EQ(a,b)   assert( a == b )
+#define T_NE(a,b)   assert( a != b )
 
 template<class _RW>
   void test()
@@ -66,20 +68,27 @@ template<class _RW>
     _RW ptr;
     T_NULL;
     T_UNIQUE;
+    T_EQ(ptr,ptr);
     // assign
     ptr = _RW( new _Ptr_element_type );
     T_NOT_NULL;
     T_UNIQUE;
+    T_EQ(ptr,ptr);
     {
       // share
       _RW ptr2( ptr );
       T_NOT_NULL;
       T_NOT_UNIQUE;
+      T_EQ(ptr,ptr2);
       // unshare
       ptr2.reset();
       T_NOT_NULL;
       T_UNIQUE;
-    }
+      T_NE(ptr,ptr2);
+      // different impl
+      ptr2.reset( new _Ptr_element_type );
+      T_NE(ptr,ptr2);
+   }
     // assign
     ptr.reset( 0 );
     T_NULL;

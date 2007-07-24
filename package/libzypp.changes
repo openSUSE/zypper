@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Tue Jul 24 17:55:49 CEST 2007 - ma@suse.de
+
+- Fixed bug in smart pointer comparison.
+
+-------------------------------------------------------------------
 Mon Jul 23 13:05:53 CEST 2007 - ma@suse.de
 
 - Fix failing rename of metadata download directories across
