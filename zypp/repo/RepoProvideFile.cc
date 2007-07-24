@@ -138,8 +138,6 @@ namespace zypp
         }
       } // iteration over urls
 
-      stringstream ss;
-      ss << 
       ZYPP_THROW(Exception(str::form(_("Can't provide file %s from repository %s",
                                        loc_r.filename().c_str(),
                                        info.alias().c_str() ) ) ) );
