@@ -174,6 +174,14 @@ namespace zypp
      * infos created in memory.
      */
      Pathname filepath() const;
+     
+     /**
+     * \short Path where this repo metadata was read from
+     *
+     * \note could be an empty pathname for repo
+     * infos created in memory.
+     */
+     Pathname metadataPath() const;
       
      /**
      * \short Whether to check or not this repository with gpg
@@ -260,6 +268,16 @@ namespace zypp
      * \param path File path
      */
     RepoInfo & setFilepath( const Pathname &filename );
+    
+    /**
+     * \short set the path where the local metadata is stored
+     *
+     * The path to the metadata of this repository
+     * was defined, or empty if nowhere.
+     *
+     * \param path directory path
+     */
+    RepoInfo & setMetadataPath( const Pathname &path );
 
     /**
      * \short Whether to check or not this repository with gpg

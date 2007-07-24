@@ -71,13 +71,15 @@ namespace zypp
       /////////////////////////////////////////////////////////////////
     } // namespace source
     ///////////////////////////////////////////////////////////////////
-    PackageProvider::PackageProvider( const Package::constPtr & package,
+    PackageProvider::PackageProvider(  RepoMediaAccess &access,
+                                      const Package::constPtr & package,
                                       const DeltaCandidates & deltas,
                                       const PackageProviderPolicy & policy_r )
     : _policy( policy_r )
     , _package( package )
     , _implPtr( detail::ImplConnect::resimpl( _package ) )
     , _deltas(deltas)
+    , _access(access)
     {}
 
     PackageProvider::~PackageProvider()
@@ -186,8 +188,7 @@ namespace zypp
       ProvideFilePolicy policy;
       policy.progressCB( bind( &PackageProvider::progressPackageDownload, this, _1 ) );
       policy.failOnChecksumErrorCB( bind( &PackageProvider::failOnChecksumError, this ) );
-
-      return repo::provideFile( _package->repository(), loc, policy );
+      return _access.provideFile( _package->repository(), loc, policy );
     }
 
     ManagedFile PackageProvider::tryDelta( const DeltaRpm & delta_r ) const
@@ -206,7 +207,7 @@ namespace zypp
         {
           ProvideFilePolicy policy;
           policy.progressCB( bind( &PackageProvider::progressDeltaDownload, this, _1 ) );
-          delta = repo::provideFile( _package->repository(), delta_r.location(), policy );
+          delta = _access.provideFile( _package->repository(), delta_r.location(), policy );
         }
       catch ( const Exception & excpt )
         {
@@ -257,7 +258,7 @@ namespace zypp
         {
           ProvideFilePolicy policy;
           policy.progressCB( bind( &PackageProvider::progressPatchDownload, this, _1 ) );
-          patch = repo::provideFile( _package->repository(), patch_r.location(), policy );
+          patch = _access.provideFile( _package->repository(), patch_r.location(), policy );
         }
       catch ( const Exception & excpt )
         {

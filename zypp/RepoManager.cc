@@ -253,7 +253,18 @@ namespace zypp
     MIL << endl;
 
     if ( PathInfo(_pimpl->options.knownReposPath).isExist() )
-      return repositories_in_dir(_pimpl->options.knownReposPath);
+    {
+      RepoInfoList repos = repositories_in_dir(_pimpl->options.knownReposPath);
+      for ( RepoInfoList::iterator it = repos.begin();
+            it != repos.end();
+            ++it )
+      {
+        // set the metadata path for the repo
+        Pathname metadata_path = rawcache_path_for_repoinfo(_pimpl->options, (*it));
+        (*it).setMetadataPath(metadata_path);
+      }
+      return repos;
+    }
     else
       return std::list<RepoInfo>();
 
@@ -833,8 +844,7 @@ namespace zypp
           {
             ZYPP_THROW(RepoException("Can't delete " + todelete.filepath().asString()));
           }
-	  MIL << todelete.alias() << " sucessfully deleted." << endl;
-          return;
+          MIL << todelete.alias() << " sucessfully deleted." << endl;
         }
         else
         {
@@ -858,17 +868,19 @@ namespace zypp
             if ( (*fit).alias() != todelete.alias() )
               (*fit).dumpRepoOn(file);
           }
-
-          cache::CacheStore store(_pimpl->options.repoCachePath);
-
-          if ( store.isCached( todelete.alias() ) ) {
-            MIL << "repository was cached. cleaning cache" << endl;
-            store.cleanRepository(todelete.alias());
-          }
-
-	  MIL << todelete.alias() << " sucessfully deleted." << endl;
-          return;
         }
+
+        // now delete it from cache
+        cache::CacheStore store(_pimpl->options.repoCachePath);
+
+        if ( store.isCached( todelete.alias() ) ) {
+          MIL << "repository was cached. cleaning cache" << endl;
+          store.cleanRepository(todelete.alias());
+          store.commit();
+        }
+
+        MIL << todelete.alias() << " sucessfully deleted." << endl;
+        return;
       } // else filepath is empty
 
     }

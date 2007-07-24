@@ -20,7 +20,7 @@
 #include "zypp/Repository.h"
 #include "zypp/Package.h"
 #include "zypp/ManagedFile.h"
-
+#include "zypp/repo/RepoProvideFile.h"
 #include "zypp/repo/DeltaCandidates.h"
 
 ///////////////////////////////////////////////////////////////////
@@ -74,7 +74,8 @@ namespace zypp
 
     public:
       /** Ctor taking the Package to provide. */
-      PackageProvider( const Package::constPtr & package,
+      PackageProvider( RepoMediaAccess &access,
+                       const Package::constPtr & package,
                        const DeltaCandidates & deltas,
                        const PackageProviderPolicy & policy_r = PackageProviderPolicy() );
       ~PackageProvider();
@@ -107,6 +108,7 @@ namespace zypp
       mutable bool               _retry;
       mutable shared_ptr<Report> _report;
       DeltaCandidates _deltas;
+      RepoMediaAccess &_access;
     };
     ///////////////////////////////////////////////////////////////////
 

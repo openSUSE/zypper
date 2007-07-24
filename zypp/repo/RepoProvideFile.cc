@@ -16,10 +16,14 @@
 
 #include "zypp/base/Gettext.h"
 #include "zypp/base/Logger.h"
+#include "zypp/base/String.h"
 #include "zypp/repo/RepoProvideFile.h"
 #include "zypp/ZYppCallbacks.h"
 #include "zypp/MediaSetAccess.h"
 #include "zypp/ZConfig.h"
+
+#include "zypp/repo/SUSEMediaVerifier.h"
+#include "zypp/repo/RepoException.h"
 
 using std::endl;
 using std::set;
@@ -47,10 +51,10 @@ namespace zypp
       */
       struct DownloadFileReportHack : public callback::ReceiveReport<repo::RepoReport>
       {
-        virtual bool progress( int value )
+        virtual bool progress( const ProgressData &progress )
         {
           if ( _redirect )
-            return _redirect( value );
+            return _redirect( progress.val() );
           return true;
         }
         function<bool ( int )> _redirect;
@@ -63,6 +67,126 @@ namespace zypp
     ManagedFile provideFile( Repository repo_r,
                              const OnMediaLocation & loc_r,
                              const ProvideFilePolicy & policy_r )
+    {
+      RepoMediaAccess access;
+      return access.provideFile(repo_r, loc_r, policy_r );
+    }
+    
+    class RepoMediaAccess::Impl
+    {
+    public:
+      Impl()
+      {}
+      
+      ~Impl()
+      {
+        std::map<Url, shared_ptr<MediaSetAccess> >::iterator it;
+        for ( it = _medias.begin();
+              it != _medias.end();
+              ++it )
+        {
+          it->second->release();
+        }
+      }
+      
+      shared_ptr<MediaSetAccess> mediaAccessForUrl( const Url &url )
+      {
+        std::map<Url, shared_ptr<MediaSetAccess> >::const_iterator it;
+        it = _medias.find(url);
+        shared_ptr<MediaSetAccess> media;
+        if ( it != _medias.end() )
+        {
+          media = it->second;
+        }
+        else
+        {
+          media.reset( new MediaSetAccess(url) );
+          _medias[url] = media;
+        }
+        return media;
+      }
+      
+      void setVerifierForRepo( Repository repo, shared_ptr<MediaSetAccess> media )
+      {
+        RepoInfo info = repo.info();
+        // set a verifier if the repository has it
+        Pathname mediafile = info.metadataPath() + "/media.1/media";
+        if ( ! mediafile.empty() )
+        {
+          if ( PathInfo(mediafile).isExist() )
+          {
+            std::map<shared_ptr<MediaSetAccess>, Repository>::const_iterator it;
+            it = _verifier.find(media);
+            if ( it != _verifier.end() )
+            {
+              if ( it->second == repo )
+              {
+                // this media is already using this repo verifier
+                return;
+              }
+            }
+
+            std::ifstream str(mediafile.asString().c_str());
+            std::string vendor;
+            std::string mediaid;
+            std::string buffer;
+            if ( str )
+            {
+              getline(str, vendor);
+              getline(str, mediaid);
+              getline(str, buffer);
+              
+              unsigned media_nr = str::strtonum<unsigned>(buffer);
+              MIL << "Repository '" << info.alias() << "' has " << media_nr << " medias"<< endl;
+              
+              for ( int i=1; i <= media_nr; ++i )
+              {
+                media::MediaVerifierRef verifier( new repo::SUSEMediaVerifier(vendor,
+                                           mediaid,
+                                           i));
+                
+                media->setVerifier( i, verifier);
+              }
+              _verifier[media] = repo;
+            }
+            else
+            {
+              ZYPP_THROW(RepoMetadataException(info));
+            }
+          }
+          else
+          {
+            WAR << "No media verifier for repo '" << info.alias() << endl;
+          }
+        }
+        else
+        {
+          MIL << "Unknown metadata path for repo '" << info.alias() << "'. Can't set media verifier."<< endl;
+        }
+      }
+      
+      std::map<shared_ptr<MediaSetAccess>, Repository> _verifier;
+      std::map<Url, shared_ptr<MediaSetAccess> > _medias;
+    };
+    
+    
+    
+    RepoMediaAccess::RepoMediaAccess()
+      : _impl( new Impl() )
+    {
+      
+    }
+    
+    RepoMediaAccess::~RepoMediaAccess()
+    {
+    
+    }
+    
+    
+    
+    ManagedFile RepoMediaAccess::provideFile( Repository repo_r,
+                                              const OnMediaLocation & loc_r,
+                                              const ProvideFilePolicy & policy_r )
     {
       MIL << "provideFile " << loc_r << endl;
       // Arrange DownloadFileReportHack to recieve the source::DownloadFileReport
@@ -78,7 +202,7 @@ namespace zypp
       set<Url> urls = info.baseUrls();
       if ( urls.empty() )
         ZYPP_THROW(Exception(_("No url in repository.")));
-
+      
       for ( RepoInfo::urls_const_iterator it = urls.begin();
             it != urls.end();
             ++it )
@@ -88,9 +212,10 @@ namespace zypp
         {
           MIL << "Providing file of repo '" << info.alias() 
               << "' from " << url << endl;
-          MediaSetAccess access(url);
+          shared_ptr<MediaSetAccess> access = _impl->mediaAccessForUrl(url);
+          _impl->setVerifierForRepo(repo_r, access);
 
-          ManagedFile ret( access.provideFile(loc_r) );
+          ManagedFile ret( access->provideFile(loc_r) );
 
           std::string scheme( url.getScheme() );
           if ( scheme == "http" || scheme == "https" || scheme == "ftp" )

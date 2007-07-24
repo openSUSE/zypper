@@ -14,6 +14,7 @@
 
 #include <iosfwd>
 
+#include "zypp/base/PtrTypes.h"
 #include "zypp/base/Function.h"
 #include "zypp/base/Functional.h"
 #include "zypp/Repository.h"
@@ -46,6 +47,39 @@ namespace zypp
                              const OnMediaLocation & loc_r,
                              const ProvideFilePolicy & policy_r = ProvideFilePolicy() );
 
+    /**
+     * \short Provides files from different repos
+     *
+     * Class that allows to get files from repositories
+     * It handles automatically setting media verifiers if the
+     * repo is cached, and reuses media set access opened for
+     * repositories during its scope, so you can provide
+     * files from different repositories in different order
+     * without opening and closing medias all the time
+     */
+    class RepoMediaAccess
+    {
+    public:
+      RepoMediaAccess();
+      ~RepoMediaAccess();
+      
+      /** Provide a file from a Repository.
+      * Let \a source_r provide the file described by \a loc_r. In case
+      * \a loc_r contains a checksum, the file is verified. \a policy_r
+      * provides callback hooks for download progress reporting and behaviour
+      * on failed checksum verification.
+      *
+      * \throws Exception
+      */
+      ManagedFile provideFile( Repository repo_r,
+                               const OnMediaLocation & loc_r,
+                               const ProvideFilePolicy & policy_r = ProvideFilePolicy() );
+    private:
+      class Impl;
+       RW_pointer<Impl> _impl;
+      
+    };
+    
     /////////////////////////////////////////////////////////////////
   } // namespace repo
   ///////////////////////////////////////////////////////////////////

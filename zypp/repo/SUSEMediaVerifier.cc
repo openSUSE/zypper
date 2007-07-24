@@ -25,7 +25,8 @@ SUSEMediaVerifier::SUSEMediaVerifier(const std::string & vendor_r,
     , _media_nr(media_nr)
 {}
 
-SUSEMediaVerifier::SUSEMediaVerifier( const Pathname &path_r )
+SUSEMediaVerifier::SUSEMediaVerifier( int media_nr, const Pathname &path_r )
+  : _media_nr(media_nr)
 {
   std::ifstream str(path_r.asString().c_str());
   std::string vendor;

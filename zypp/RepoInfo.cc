@@ -54,6 +54,7 @@ namespace zypp
     std::string alias;
     std::string name;
     Pathname filepath;
+    Pathname metadatapath;
   public:
 
   private:
@@ -167,6 +168,12 @@ namespace zypp
     _pimpl->filepath = filepath;
     return *this;
   }
+  
+  RepoInfo & RepoInfo::setMetadataPath( const Pathname &path )
+  {
+    _pimpl->metadatapath = path;
+    return *this;
+  }
 
   tribool RepoInfo::enabled() const
   { return _pimpl->enabled; }
@@ -186,6 +193,9 @@ namespace zypp
   Pathname RepoInfo::filepath() const
   { return _pimpl->filepath; }
 
+  Pathname RepoInfo::metadataPath() const
+  { return _pimpl->metadatapath; }
+  
   repo::RepoType RepoInfo::type() const
   { return _pimpl->type; }
 

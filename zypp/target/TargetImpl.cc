@@ -229,8 +229,10 @@ namespace zypp
     struct RepoProvidePackage
     {
       ResPool _pool;
-      RepoProvidePackage( ResPool pool_r )
-        : _pool(pool_r)
+      repo::RepoMediaAccess &_access;
+
+      RepoProvidePackage( repo::RepoMediaAccess &access, ResPool pool_r )
+        : _pool(pool_r), _access(access)
       {
       
       }
@@ -256,7 +258,7 @@ namespace zypp
         }
   
         repo::DeltaCandidates deltas(repos);
-        repo::PackageProvider pkgProvider( p, deltas, packageProviderPolicy );
+        repo::PackageProvider pkgProvider( _access, p, deltas, packageProviderPolicy );
         return pkgProvider.providePackage();
       }
     };
@@ -487,7 +489,7 @@ namespace zypp
                         const ResPool & pool_r )
     {
       TargetImpl::PoolItemList remaining;
-
+      repo::RepoMediaAccess access;
       MIL << "TargetImpl::commit(<list>" << policy_r << ")" << endl;
 
       bool abort = false;
@@ -495,7 +497,7 @@ namespace zypp
       // remember the last used source (if any)
       Repository lastUsedRepo;
 
-      RepoProvidePackage repoProvidePackage(pool_r);
+      RepoProvidePackage repoProvidePackage( access, pool_r);
       // prepare the package cache.
       CommitPackageCache packageCache( items_r.begin(), items_r.end(),
                                        root() / "tmp", repoProvidePackage );

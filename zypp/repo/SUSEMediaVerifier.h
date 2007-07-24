@@ -40,8 +40,10 @@ namespace zypp
       
       /**
        * \short creates a verifier from a media file
+       *
+       * \param path_r Path to media.1/media kind file
        */
-      SUSEMediaVerifier( const Pathname &path_r );
+      SUSEMediaVerifier( int media_nr, const Pathname &path_r );
       
       /**
         * \short Check if it is the desider media
