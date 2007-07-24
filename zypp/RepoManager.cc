@@ -255,7 +255,6 @@ namespace zypp
     if ( PathInfo(_pimpl->options.knownReposPath).isExist() )
     {
       RepoInfoList repos = repositories_in_dir(_pimpl->options.knownReposPath);
-      
       for ( RepoInfoList::iterator it = repos.begin();
             it != repos.end();
             ++it )
