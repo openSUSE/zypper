@@ -86,12 +86,22 @@ main (int argc, char* argv[])
 
     USR << "pool: " << pool << endl;
 
-    for (ResPool::const_iterator it = pool.begin(); it != pool.end(); it++)
+    for (ResPool::const_iterator itRes = pool.begin(); itRes != pool.end(); itRes++)
     {
-	USR << (*it)->name() << ' '
-	    << (*it)->kind() << ' '
-	    << (*it)->arch() << ' '
-	    << (*it)->edition() << endl;
+	USR << (*itRes)->name() << ' '
+	    << (*itRes)->kind() << ' '
+	    << (*itRes)->arch() << ' '
+	    << (*itRes)->edition() << endl;
+
+	CapSet caps;
+
+	caps = (*itRes)->dep(Dep::PROVIDES);
+	for (CapSet::const_iterator itCap = caps.begin(); itCap != caps.end(); itCap++)
+	    USR << "  Provides: " << itCap->asString() << std::endl;
+
+	caps = (*itRes)->dep(Dep::REQUIRES);
+	for (CapSet::const_iterator itCap = caps.begin(); itCap != caps.end(); itCap++)
+	    USR << "  Requires: " << itCap->asString() << std::endl;
     }
 
     INT << "===[END]============================================" << endl;
