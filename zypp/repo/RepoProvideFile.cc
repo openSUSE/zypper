@@ -19,6 +19,7 @@
 #include "zypp/repo/RepoProvideFile.h"
 #include "zypp/ZYppCallbacks.h"
 #include "zypp/MediaSetAccess.h"
+#include "zypp/ZConfig.h"
 
 using std::endl;
 using std::set;
@@ -85,7 +86,8 @@ namespace zypp
         url = *it;
         try
         {
-
+          MIL << "Providing file of repo '" << info.alias() 
+              << "' from " << url << endl;
           MediaSetAccess access(url);
 
           ManagedFile ret( access.provideFile(loc_r) );
@@ -136,7 +138,12 @@ namespace zypp
         }
       } // iteration over urls
 
-      ZYPP_THROW(Exception(_("No more urls in repository.")));
+      stringstream ss;
+      ss << 
+      ZYPP_THROW(Exception(str::form(_("Can't provide file %s from repository %s",
+                                       loc_r.filename().c_str(),
+                                       info.alias().c_str() ) ) ) );
+      
       return ManagedFile(); // not reached
     }
 
