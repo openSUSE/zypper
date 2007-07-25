@@ -15,6 +15,7 @@
 #include <cstdio>
 #include <unistd.h>
 
+#include "zypp/TmpPath.h"
 #include "zypp/ZYppFactory.h"
 #include "zypp/ZYpp.h"
 
@@ -136,7 +137,7 @@ namespace zypp
     /** Offer default Impl. */
     static shared_ptr<Impl> nullimpl()
     {
-      static shared_ptr<Impl> _nullimpl( new Impl( Pathname("/var/tmp") ) );
+      static shared_ptr<Impl> _nullimpl( new Impl( TmpPath::defaultLocation() ) );
       return _nullimpl;
     }
 

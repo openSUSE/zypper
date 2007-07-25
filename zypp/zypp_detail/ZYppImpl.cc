@@ -14,6 +14,7 @@
 #include <unistd.h>
 #include <iostream>
 #include <fstream>
+#include "zypp/TmpPath.h"
 #include "zypp/base/Logger.h"
 #include "zypp/base/String.h"
 
@@ -388,7 +389,7 @@ namespace zypp
 
     Pathname ZYppImpl::tmpPath() const
     {
-      static TmpDir zypp_tmp_dir("/var/tmp", "zypp.");
+      static TmpDir zypp_tmp_dir( TmpPath::defaultLocation(), "zypp." );
       return zypp_tmp_dir.path();
     }
 

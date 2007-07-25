@@ -153,7 +153,7 @@ namespace zypp {
     const Pathname &
     TmpPath::defaultLocation()
     {
-      static Pathname p( "/var/tmp" );
+      static Pathname p( getenv("ZYPPTMPDIR") ? getenv("ZYPPTMPDIR") : "/var/tmp" );
       return p;
     }
     ///////////////////////////////////////////////////////////////////

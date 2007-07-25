@@ -14,6 +14,7 @@
 #include <fstream>
 #include <sstream>
 
+#include "zypp/TmpPath.h"
 #include "zypp/base/Logger.h"
 #include "zypp/base/String.h"
 #include "zypp/media/MediaHandler.h"
@@ -342,7 +343,7 @@ MediaHandler::createAttachPoint() const
   // provide a default (temporary) attachpoint
   /////////////////////////////////////////////////////////////////
   const char * defmounts[] = {
-      "/var/adm/mount", "/var/tmp", /**/NULL/**/
+      "/var/adm/mount", filesystem::TmpPath::defaultLocation().c_str(), /**/NULL/**/
   };
 
   Pathname apoint;
