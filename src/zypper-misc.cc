@@ -1022,9 +1022,10 @@ bool confirm_licenses(bool non_interactive)
       if (gSettings.license_auto_agree)
       {
         // TranslatorExplanation The first %s is name of the resolvable, the second is its kind (e.g. 'zypper package')
-        cout << format(_("Automatically agreeing with %s %s license."))
-            % it->resolvable()->name() % it->resolvable()->kind().asString()
-            << endl;
+			  if (!gSettings.machine_readable)
+        	cout << format(_("Automatically agreeing with %s %s license."))
+	            % it->resolvable()->name() % it->resolvable()->kind().asString()
+	            << endl;
 
         MIL << format("Automatically agreeing with %s %s license.")
             % it->resolvable()->name() % it->resolvable()->kind().asString()

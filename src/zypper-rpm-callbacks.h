@@ -176,7 +176,7 @@ struct InstallResolvableReportReceiver : public zypp::callback::ReceiveReport<zy
   {
     _resolvable = resolvable;
 	  if (gSettings.machine_readable)
-			cout << "Installing: " + to_string (resolvable) << endl;
+			cout << "Installing: " + resolvable->name() << endl;
 		else
 	    cerr << "Installing: " + to_string (resolvable) << endl;
   }
