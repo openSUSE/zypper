@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Jul 25 13:33:00 CEST 2007 - tgoettlicher@suse.de
+
+- r6201.
+- minor changes in machine_readable option
+
+-------------------------------------------------------------------
 Tue Jul 24 18:33:41 CEST 2007 - mvidner@suse.cz
 
 - Fixed zypper --version (broken when switching to cmake).
