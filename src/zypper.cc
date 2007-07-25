@@ -1102,6 +1102,12 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
     string srepo = copts.count( "from-repo" ) ? copts["from-repo"].front() : "";
     bool best_effort = copts.count( "best-effort" ); 
 
+    if (gSettings.is_rug_compatible && best_effort) {
+	best_effort = false;
+	// 'rug' is the name of a program and must not be translated
+	// 'best-effort' is a program parameter and can not be translated
+	cerr << _("Running as 'rug', can't do 'best-effort' approach to update.") << endl;
+    }
     cond_init_target ();
     init_repos ();
     cond_load_resolvables();
@@ -1161,6 +1167,12 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
     string srepo = copts.count( "from-repo" ) ? copts["from-repo"].front() : "";
     bool best_effort = copts.count( "best-effort" ); 
 
+    if (gSettings.is_rug_compatible && best_effort) {
+	best_effort = false;
+	// 'rug' is the name of a program and must not be translated
+	// 'best-effort' is a program parameter and can not be translated
+	cerr << _("Running as 'rug', can't do 'best-effort' approach to update.") << endl;
+    }
     cond_init_target ();
     init_repos ();
     cond_load_resolvables ();

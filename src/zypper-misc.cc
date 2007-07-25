@@ -803,19 +803,30 @@ void list_updates( const ResObject::Kind &kind, const string &repo_alias, bool b
     list_patch_updates( repo_alias, best_effort );
   else {
     Table tbl;
-    
+
+    // show repo only if not best effort or --from-repo set
+    //   on best_effort, the solver will determine the repo if we don't limit it to a specific one
+    bool hide_repo = best_effort && repo_alias.empty();
+
     // header
     TableHeader th;
-    unsigned cols = 5;
+    unsigned int name_col;
     // TranslatorExplanation S stands for Status
     th << _("S");
-    th << (gSettings.is_rug_compatible ? _("Catalog: ") : _("Repository: ")); 
+    if (!hide_repo) {
+      th << (gSettings.is_rug_compatible ? _("Catalog: ") : _("Repository: ")); 
+    }
     if (gSettings.is_rug_compatible) {
       th << _("Bundle");
-      ++cols;
     }
-    th << _("Name") << _("Version") << _("Arch");
+    name_col = th.cols();
+    th << _("Name");
+    if (!best_effort) {		// best_effort does not know version or arch yet
+      th << _("Version") << _("Arch");
+    }
     tbl << th;
+
+    unsigned int cols = th.cols();
 
     Candidates candidates;
     find_updates( kind, repo_alias, candidates );	// best_effort could be passed here ...
@@ -826,15 +837,23 @@ void list_updates( const ResObject::Kind &kind, const string &repo_alias, bool b
 //      candstat.setToBeInstalled (ResStatus::USER);
       ResObject::constPtr res = ci->resolvable();
       TableRow tr (cols);
-      tr << "v" << res->repository().info().alias();
+      tr << "v";
+      if (!hide_repo) {
+	tr << res->repository().info().alias();
+      }
       if (gSettings.is_rug_compatible)
 	tr << "";		// Bundle
-      tr << res->name ()
-	 << res->edition ().asString ()
-	 << res->arch ().asString ();
+      tr << res->name ();
+
+      // strictly speaking, we could show version and arch even in best_effort
+      //  iff there is only one candidate. But we don't know the number of candidates here.
+      if (!best_effort) {
+	 tr << res->edition ().asString ()
+	    << res->arch ().asString ();
+      }
       tbl << tr;
     }
-    tbl.sort (gSettings.is_rug_compatible? 3: 2); // Name
+    tbl.sort( name_col );
 
     if (tbl.empty())
       cout_n << _("No updates found.") << endl;

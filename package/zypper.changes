@@ -1,11 +1,21 @@
 -------------------------------------------------------------------
+Wed Jul 25 17:05:00 CEST 2007 - kkaempf@suse.de
+
+- implement '--best-effort' for "list updates"
+  adapt output columns appropriately (in best-effort mode, zypper
+  does not know the repository, version, or architecture since the
+  dependency solver will determine it later.)
+- make "list update" output handling more robust
+- r6216
+
+-------------------------------------------------------------------
 Wed Jul 25 16:20:38 CEST 2007 - kkaempf@suse.de
 
 - add "--from-repo" option to "list updates" and "update" to limit
   updates to a specific repository.
 - improve help of (-t <resolvable type>) by explicitly listing
   possible types.
-- r6212
+- r6213
 
 -------------------------------------------------------------------
 Thu Jul 25 15:57:00 CEST 2007 - tgoettlicher@suse.de
