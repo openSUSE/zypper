@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Wed Jul 25 16:20:38 CEST 2007 - kkaempf@suse.de
+
+- add "--from-repo" option to "list updates" and "update" to limit
+  updates to a specific repository.
+- improve help of (-t <resolvable type>) by explicitly listing
+  possible types.
+- r6212
+
+-------------------------------------------------------------------
 Thu Jul 25 15:57:00 CEST 2007 - tgoettlicher@suse.de
 
 - minor changes in machine_readable option

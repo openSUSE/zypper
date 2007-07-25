@@ -62,11 +62,12 @@ void patch_check();
 
 /**
  * Lists available updates of installed resolvables of specified \a kind.
+ * if repo_alias != "", restrict updates to this repository.
+ * if best_effort == true, any version greater than the installed one will do.
  * Prints the table of updates to stdout.
  */
-void list_updates( const zypp::ResObject::Kind &kind );
-
-void mark_updates( const zypp::ResObject::Kind &kind, bool skip_interactive );
+void list_updates( const zypp::ResObject::Kind &kind, const std::string &repo_alias, bool best_effort );
+void mark_updates( const zypp::ResObject::Kind &kind, const std::string &repo_alias, bool skip_interactive, bool best_effort );
 void usage(int argc, char **argv);
 int solve_and_commit (bool non_interactive = false);
 bool confirm_licenses(bool non_interactive = false);

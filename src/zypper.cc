@@ -266,7 +266,7 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
       {"type",	                    required_argument, 0, 't'},
       {"no-confirm",                no_argument,       0, 'y'},
       {"auto-agree-with-licenses",  no_argument,       0, 'l'},
-      {"machine-readable",					no_argument,       0, 'm'},
+      {"machine-readable",          no_argument,       0, 'm'},
       {"help",                      no_argument,       0, 'h'},
       {0, 0, 0, 0}
     };
@@ -278,7 +278,7 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
       "\n"
       "  Command options:\n"
       "\t--catalog,-c\t\t\tOnly from this catalog (under development)\n"
-      "\t--type,-t <resolvable_type>\tType of resolvable (default: package)\n"
+      "\t--type,-t <resolvable_type>\tType of resolvable (package, patch, pattern, product) (default: package)\n"
       "\t--no-confirm,-y\t\t\tDo not require user confirmation to proceed with installation\n"
       "\t--machine-readable,-m\t\t\tGenerate machine readable output\n"
       "\t--auto-agree-with-licenses,-l\tAutomatically say 'yes' to third party license confirmation prompt.\n"
@@ -299,7 +299,7 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
       "'remove' - Remove resolvabe(s) with specified name(s).\n"
       "\n"
       "  Command options:\n"
-      "\t--type,-t <resolvable_type>\tType of resolvable (default: package)\n"
+      "\t--type,-t <resolvable_type>\tType of resolvable (package, patch, pattern, product) (default: package)\n"
       "\t--no-confirm,-y\t\t\tDo not require user confirmation\n"
       );
   }
@@ -410,6 +410,8 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
   else if (command == ZypperCommand::LIST_UPDATES) {
     static struct option list_updates_options[] = {
       {"type",		required_argument, 0, 't'},
+      { "from-repo",    required_argument, 0, 0 },
+      { "best-effort",  no_argument, 0, 0 },
       {"help", no_argument, 0, 'h'},
       {0, 0, 0, 0}
     };
@@ -420,7 +422,9 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
       "List all available updates\n"
       "\n"
       "  Command options:\n"
-      "\t--type,-t <resolvable_type>\tType of resolvable (default: patch)\n"
+      "\t--type,-t <resolvable_type>\tType of resolvable (package, patch, pattern, product) (default: patch)\n"
+      "\t--from-repo <repository_alias>\tRestrict updates to named repository (default: get updates from all repositories)\n"
+      "\t--best-effort\tDo a 'best effort' approach to update, updates to a lower than latest-and-greatest version are also acceptable\n"
       );
   }
   else if (command == ZypperCommand::UPDATE) {
@@ -429,6 +433,8 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
       {"no-confirm",                no_argument,       0, 'y'},
       {"skip-interactive",          no_argument,       0, 0},
       {"auto-agree-with-licenses",  no_argument,       0, 'l'},
+      { "from-repo",                required_argument, 0, 0 },
+      { "best-effort",              no_argument,       0, 0 },
       {"help", no_argument, 0, 'h'},
       {0, 0, 0, 0}
     };
@@ -438,10 +444,12 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
       "\n"
       "  Command options:\n"
       "\n"
-      "\t--type,-t <resolvable_type>\tType of resolvable (default: patch)\n"
+      "\t--type,-t <resolvable_type>\tType of resolvable (package, patch, pattern, product) (default: patch)\n"
       "\t--no-confirm,-y\t\t\tDo not require user confirmation\n"
       "\t--skip-interactive\t\tSkip interactive updates\n"
       "\t--auto-agree-with-licenses,-l\tAutomatically say 'yes' to third party license confirmation prompt.\n"
+      "\t--from-repo <repository_alias>\tRestrict updates to named repository (default: get updates from all repositories)\n"
+      "\t--best-effort\t\t\tDo a 'best effort' approach to update, updates to a lower than latest-and-greatest version are also acceptable\n"
       "\t\t\t\t\tSee man zypper for more details.\n"
       );
   }
@@ -1091,12 +1099,15 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
 	return ZYPPER_EXIT_ERR_INVALID_ARGS;
     }
 
+    string srepo = copts.count( "from-repo" ) ? copts["from-repo"].front() : "";
+    bool best_effort = copts.count( "best-effort" ); 
+
     cond_init_target ();
     init_repos ();
     cond_load_resolvables();
     establish ();
 
-    list_updates (kind);
+    list_updates( kind, srepo, best_effort );
 
     return ZYPPER_EXIT_OK;
   }
@@ -1147,13 +1158,16 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
 	return ZYPPER_EXIT_ERR_INVALID_ARGS;
     }
 
+    string srepo = copts.count( "from-repo" ) ? copts["from-repo"].front() : "";
+    bool best_effort = copts.count( "best-effort" ); 
+
     cond_init_target ();
     init_repos ();
     cond_load_resolvables ();
     establish ();
 
     bool skip_interactive = copts.count("skip-interactive") || gSettings.non_interactive;
-    mark_updates (kind, skip_interactive);
+    mark_updates( kind, srepo, skip_interactive, best_effort );
 
     // commit
     // returns ZYPPER_EXIT_OK, ZYPPER_EXIT_ERR_ZYPP,

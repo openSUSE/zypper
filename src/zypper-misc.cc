@@ -653,7 +653,7 @@ void xml_list_patches ()
 
 // ----------------------------------------------------------------------------
 
-void list_patch_updates ()
+void list_patch_updates( const string &repo_alias, bool best_effort )
 {
   Table tbl;
   Table pm_tbl;	// only those that affect packagemanager: they have priority
@@ -717,13 +717,21 @@ class LookForArchUpdate : public zypp::resfilter::PoolItemFilterFunctor
 {
 public:
   PoolItem_Ref uninstalled;
+  string _repo_alias;
+
+  LookForArchUpdate( const string &repo_alias = "" )
+  {
+    _repo_alias = repo_alias;
+  }
 
   bool operator()( PoolItem_Ref provider )
     {
       if (!provider.status().isLocked()	// is not locked (taboo)
 	  && (!uninstalled		// first match
 	      // or a better edition than candidate
-	      || uninstalled->edition().compare( provider->edition() ) < 0))
+	      || uninstalled->edition().compare( provider->edition() ) < 0)
+	  && (_repo_alias.empty()
+	      || provider->repository().info().alias() == _repo_alias) )
       {
 	uninstalled = provider;	// store 
       }
@@ -739,9 +747,9 @@ public:
 // but that allows changing the arch (#222140).
 static
 PoolItem_Ref
-findArchUpdateItem (const ResPool & pool, PoolItem_Ref item)
+findArchUpdateItem( const ResPool & pool, PoolItem_Ref item, const string &repo_alias )
 {
-  LookForArchUpdate info;
+  LookForArchUpdate info( repo_alias );
 
   invokeOnEach( pool.byNameBegin( item->name() ),
 		pool.byNameEnd( item->name() ),
@@ -763,7 +771,8 @@ findArchUpdateItem (const ResPool & pool, PoolItem_Ref item)
 
 typedef set<PoolItem_Ref> Candidates;
 
-void find_updates( const ResObject::Kind &kind, Candidates &candidates )
+static void
+find_updates( const ResObject::Kind &kind, const string &repo_alias, Candidates &candidates )
 {
   const zypp::ResPool& pool = God->pool();
   ResPool::byKind_iterator
@@ -775,7 +784,7 @@ void find_updates( const ResObject::Kind &kind, Candidates &candidates )
     if (it->status().isUninstalled())
       continue;
     // (actually similar to ProvideProcess?)
-    PoolItem_Ref candidate = findArchUpdateItem (pool, *it);
+    PoolItem_Ref candidate = findArchUpdateItem( pool, *it, repo_alias );
     if (!candidate.resolvable())
       continue;
 
@@ -787,11 +796,11 @@ void find_updates( const ResObject::Kind &kind, Candidates &candidates )
 
 // ----------------------------------------------------------------------------
 
-void list_updates( const ResObject::Kind &kind )
+void list_updates( const ResObject::Kind &kind, const string &repo_alias, bool best_effort )
 {
   bool k_is_patch = kind == ResTraits<Patch>::kind;
   if (k_is_patch)
-    list_patch_updates ();
+    list_patch_updates( repo_alias, best_effort );
   else {
     Table tbl;
     
@@ -809,7 +818,7 @@ void list_updates( const ResObject::Kind &kind )
     tbl << th;
 
     Candidates candidates;
-    find_updates (kind, candidates);
+    find_updates( kind, repo_alias, candidates );	// best_effort could be passed here ...
 
     Candidates::iterator cb = candidates.begin (), ce = candidates.end (), ci;
     for (ci = cb; ci != ce; ++ci) {
@@ -848,7 +857,8 @@ bool mark_item_install (const PoolItem& pi) {
 void xml_list_updates()
 {
   Candidates candidates;
-  find_updates (ResTraits<Package>::kind, candidates);
+  string repo_alias;
+  find_updates (ResTraits<Package>::kind, repo_alias, candidates);
 
   Candidates::iterator cb = candidates.begin (), ce = candidates.end (), ci;
   for (ci = cb; ci != ce; ++ci) {
@@ -877,7 +887,7 @@ void xml_list_updates()
 // ----------------------------------------------------------------------------
 
 static
-void mark_patch_updates (bool skip_interactive)
+void mark_patch_updates( const std::string &repo_alias, bool skip_interactive )
 {
   if (true) {
     // search twice: if there are none with affects_pkg_manager, retry on all
@@ -915,16 +925,16 @@ void mark_patch_updates (bool skip_interactive)
 
 // ----------------------------------------------------------------------------
 
-void mark_updates( const ResObject::Kind &kind, bool skip_interactive )
+void mark_updates( const ResObject::Kind &kind, const std::string &repo_alias, bool skip_interactive, bool best_effort )
 {
   bool k_is_patch = kind == ResTraits<Patch>::kind;
 
   if (k_is_patch) {
-    mark_patch_updates (skip_interactive);
+    mark_patch_updates( repo_alias, skip_interactive );
   }
   else {
     Candidates candidates;
-    find_updates (kind, candidates);
+    find_updates (kind, repo_alias, candidates);	// best_effort could be passed here ...
     invokeOnEach (candidates.begin(), candidates.end(), mark_item_install);
   }
 }
