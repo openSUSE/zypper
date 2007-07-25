@@ -43,6 +43,9 @@ public:
 
   void add (const string& s);
 
+  // return number of columns
+  unsigned int cols( void ) const;
+
   //! tab separated output
   void dumbDumpTo (ostream &stream) const;
   //! output with field widths
@@ -89,7 +92,7 @@ public:
   typedef list<TableRow> container;
 
   void style (TableStyle st);
-  void sort (unsigned by_column);
+  void sort (unsigned by_column);	// columns start with 0...
 
   Table () :
     _has_header (false),

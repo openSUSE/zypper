@@ -23,6 +23,10 @@ void TableRow::add (const string& s) {
   _columns.push_back (s);
 }
 
+unsigned int TableRow::cols( void ) const {
+  return _columns.size();
+}
+
 // 1st implementation: no width calculation, just tabs
 void TableRow::dumbDumpTo (ostream &stream) const {
   bool seen_first = false;
@@ -130,6 +134,11 @@ void Table::style (TableStyle st) {
 }
 
 void Table::sort (unsigned by_column) {
+  if (by_column >= _max_col) {
+#warning Provide proper error handling here
+    return;
+  }
+
   TableRow::Less comp (by_column);
   _rows.sort (comp);
 }
