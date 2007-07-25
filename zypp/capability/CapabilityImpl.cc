@@ -89,7 +89,7 @@ namespace zypp
 	  break;
 	}
       // SHOULD NOT GET HERE
-      ZYPP_THROW( Exception("Unknow Operator NONE is not allowed in Capability") );
+      ZYPP_THROW( Exception("Unknown Operator NONE is not allowed in Capability") );
       return false; // not reached
     }
 

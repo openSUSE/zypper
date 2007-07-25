@@ -73,7 +73,7 @@ namespace zypp
       typedef CapabilityTraits::KindType  Kind;
 
     public:
-      /** Kind of capabiliy.  */
+      /** Kind of capability.  */
       virtual const Kind & kind() const = 0;
 
       /** Kind of Resolvable \c this refers to. */
@@ -310,7 +310,7 @@ namespace zypp
     };
 
     typedef std::set<CapabilityImpl::Ptr> CapabilityImplPtrSet;
-    
+
     /////////////////////////////////////////////////////////////////
   } // namespace capability
   ///////////////////////////////////////////////////////////////////

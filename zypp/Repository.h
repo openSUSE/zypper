@@ -36,7 +36,7 @@ namespace zypp
     Repository();
 
     /** \short Factory ctor taking a RepositoryImpl.
-     * This is quite lowevel. You usually want to use RepoManager to
+     * This is quite low level. You usually want to use RepoManager to
      * manage the repositories.
      * \see RepoManager
     */

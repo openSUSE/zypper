@@ -30,7 +30,7 @@ namespace zypp
   //	CLASS NAME : ZConfig
   //
   /** Interim helper class to collect global options and settings.
-   * Use it to avoid hardcoded values and calls to getZypp() just
+   * Use it to avoid hardcoded values and calls to getZYpp() just
    * to retrieve some value like architecture, languages or tmppath.
    *
    * \ingroup Singleton
