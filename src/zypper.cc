@@ -1208,17 +1208,9 @@ int safe_one_command(const ZypperCommand & command, int argc, char **argv)
   catch (const Exception & ex) {
     ZYPP_CAUGHT(ex);
 
-		if (gSettings.machine_readable)
-		{
-	   	cerr << "ERROR:" << _("Unexpected exception.") << endl;
-	    cerr << "ERROR:" << ex.asUserString() << endl;
-		}
-		else
-		{
-	   	cerr << _("Unexpected exception.") << endl;
-	    cerr << ex.asUserString() << endl;
-    	report_a_bug(cerr);
-		}
+   	cerr << _("Unexpected exception.") << endl;
+    cerr << ex.asUserString() << endl;
+   	report_a_bug(cerr);
   }
   return ret;
 }
