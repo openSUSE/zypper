@@ -1,3 +1,9 @@
+------------------------------------------------------------------------
+Thu Jul 26 12:36:00 CEST 2007 - tgoettlicher@suse.de
+
+- moved --machine-readable option to --terse
+- r6221
+
 -------------------------------------------------------------------
 Thu Jul 26 12:20:47 CEST 2007 - jkupec@suse.cz
 
@@ -24,13 +30,13 @@ Wed Jul 25 16:20:38 CEST 2007 - kkaempf@suse.de
 - r6213
 
 -------------------------------------------------------------------
-Thu Jul 25 15:57:00 CEST 2007 - tgoettlicher@suse.de
+Wed Jul 25 15:57:00 CEST 2007 - tgoettlicher@suse.de
 
 - minor changes in machine_readable option
 - r6208
 
 -------------------------------------------------------------------
-Thu Jul 25 13:33:00 CEST 2007 - tgoettlicher@suse.de
+Wed Jul 25 13:33:00 CEST 2007 - tgoettlicher@suse.de
 
 - minor changes in machine_readable option
 - r6201.
