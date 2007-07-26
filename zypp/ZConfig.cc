@@ -68,15 +68,15 @@ namespace zypp
               {
                 cfg_arch = Arch(value);
               }
-              else if ( entry == "metadata-path" )
+              else if ( entry == "metadatadir" )
               {
                 cfg_metadata_path = Pathname(value);
               }
-              else if ( entry == "known-repos-path" )
+              else if ( entry == "reposdir" )
               {
                 cfg_known_repos_path = Pathname(value);
               }
-              else if ( entry == "cache-path" )
+              else if ( entry == "cachedir" )
               {
                 cfg_cache_path = Pathname(value);
               }
