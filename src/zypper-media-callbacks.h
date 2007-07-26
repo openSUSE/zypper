@@ -23,6 +23,7 @@
 #include <zypp/Digest.h>
 #include <zypp/Url.h>
 
+#include "zypper-callbacks.h"
 #include "AliveCursor.h"
 
 using zypp::media::MediaChangeReport;
@@ -40,8 +41,11 @@ namespace ZmartRecipients
                                                     MediaChangeReport::Error error,
                                                     const std::string & description )
     {
-      cout << "Please insert media [" << description << "] # " << mediumNr << ". Retry [y/n]: " << endl;
-      if (readBoolAnswer())
+      // TranslatorExplanation don't translate letters 'y' and 'n' for now
+      std::string request = boost::str(boost::format(
+          _("Please insert media [%s] # %d and type 'y' to continue or 'n' to cancel the operation."))
+          % description % mediumNr);
+      if (read_bool_answer(request, false))
         return MediaChangeReport::RETRY; 
       else
         return MediaChangeReport::ABORT; 
