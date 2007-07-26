@@ -63,7 +63,7 @@ namespace zypp {
         {
           MIL << "Accepting file signed with an unknown key (" << file << "," << id << ")" << endl;
           cout_n << boost::format(
-              _("Warnging: Accepting file %s signed with an unknown key %s."))
+              _("Warning: Accepting file %s signed with an unknown key %s."))
               % file % id;
           return true;
         }
