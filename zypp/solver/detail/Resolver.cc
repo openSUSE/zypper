@@ -137,7 +137,7 @@ Resolver::pool (void) const
 }
 
 void
-Resolver::reset (const bool resetValidResults)
+Resolver::reset (bool resetValidResults, bool keepExtras )
 {
     _verifying = false;
 
@@ -148,8 +148,10 @@ Resolver::reset (const bool resetValidResults)
     _items_to_verify.clear();
     _items_to_establish.clear();
 
-    _extra_caps.clear();
-    _extra_conflicts.clear();
+    if (!keepExtras) {
+      _extra_caps.clear();
+      _extra_conflicts.clear();
+    }
 
     _pending_queues.clear();
     _pruned_queues.clear();
@@ -1214,13 +1216,13 @@ show_pool( ResPool pool )
 
 
 bool
-Resolver::resolvePool( bool tryAllPossibilities )
+Resolver::resolvePool( bool tryAllPossibilities, bool keepExtras )
 {
     ResolverContext_Ptr saveContext = _best_context;
     CollectTransact info (*this);
 
     // cleanup before next run
-    reset();
+    reset( false, keepExtras );
 
     bool saveTryAllPossibilities = _tryAllPossibilities;
 

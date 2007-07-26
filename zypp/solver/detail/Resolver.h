@@ -247,7 +247,7 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
     void freshenState( ResolverContext_Ptr context = NULL, bool resetAfterSolve = true );
     bool freshenPool( bool resetAfterSolve = true );
     bool resolveDependencies (const ResolverContext_Ptr context = NULL);
-    bool resolvePool( bool tryAllPossibilities = false );
+    bool resolvePool( bool tryAllPossibilities = false, bool keepExtras = false );
 
     bool transactResObject( ResObject::constPtr robj,
 			    bool install = true,
@@ -273,8 +273,7 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
     const ItemCapKindList isInstalledBy (const PoolItem_Ref item);
     const ItemCapKindList installs (const PoolItem_Ref item);
 
-    // only for testsuite
-    void reset (const bool resetValidResults = false);
+    void reset (bool resetValidResults = false, bool keepExtras = false );
 
     Arch architecture() const { return _architecture; }
     void setArchitecture( const Arch & arch) { _architecture = arch; }

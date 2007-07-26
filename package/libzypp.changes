@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Thu Jul 26 16:41:30 CEST 2007 - kkaempf@suse.de
+
+- Make clearing of extra dependencies/conflicts configurable when
+  resolvePool(). Leave the default as before (clear extras).
+  Bug # 294727
+- revision 6233
+- version 3.12.0
+
+-------------------------------------------------------------------
 Wed Jul 25 13:50:06 CEST 2007 - ma@suse.de
 
 - Make temp directory configurable  via environment

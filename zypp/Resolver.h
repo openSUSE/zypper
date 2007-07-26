@@ -127,8 +127,9 @@ namespace zypp
      * the latter case, use problems() and later applySolutions()
      * below.
      **/
-    bool resolvePool (bool tryAllPossibilities);
+    bool resolvePool (bool tryAllPossibilities, bool keepExtras = false );
       
+    bool resolveDependencies( void );
 
     /*
      * Undo solver changes done in resolvePool()
