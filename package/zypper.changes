@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Jul 26 12:20:47 CEST 2007 - jkupec@suse.cz
+
+- fixed non-interactive mode for media change request (#294685)
+- r6220
+
+-------------------------------------------------------------------
 Wed Jul 25 17:05:00 CEST 2007 - kkaempf@suse.de
 
 - implement '--best-effort' for "list updates"
