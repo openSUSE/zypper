@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Jul 26 17:15:52 CEST 2007 - kkaempf@suse.de
+
+- implement '--best-effort' for upgrade (experimental)
+- r6235
+
+-------------------------------------------------------------------
 Thu Jul 26 15:41:09 CEST 2007 - jkupec@suse.cz
 
 - cmake added to build dependencies
