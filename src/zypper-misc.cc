@@ -9,6 +9,9 @@
 #include <zypp/RepoManager.h>
 #include <zypp/RepoInfo.h>
 #include <zypp/repo/RepoException.h>
+
+#include <zypp/CapFactory.h>
+
 #include <zypp/target/store/xml_escape_parser.hpp>
 
 #include "zypper.h"
@@ -499,10 +502,13 @@ void establish ()
   dump_pool ();
 }
 
-bool resolve()
+bool resolve( bool have_extra_deps )
 {
   establish ();
   cerr_v << _("Resolving dependencies...") << endl;
+  if (have_extra_deps)
+    return God->resolver()->resolvePool( true, true );
+
   return God->resolver()->resolvePool();
 }
 
@@ -709,11 +715,14 @@ void list_patch_updates( const string &repo_alias, bool best_effort )
 
 // ----------------------------------------------------------------------------
 
-// collect items, select best edition.
+// collect items, select best edition
+//   this is used to find best available or installed.
+// The name of the class is a bit misleading though ...
+
 class LookForArchUpdate : public zypp::resfilter::PoolItemFilterFunctor
 {
 public:
-  PoolItem_Ref uninstalled;
+  PoolItem_Ref best;
   string _repo_alias;
 
   LookForArchUpdate( const string &repo_alias = "" )
@@ -724,13 +733,13 @@ public:
   bool operator()( PoolItem_Ref provider )
     {
       if (!provider.status().isLocked()	// is not locked (taboo)
-	  && (!uninstalled		// first match
+	  && (!best 			// first match
 	      // or a better edition than candidate
-	      || uninstalled->edition().compare( provider->edition() ) < 0)
+	      || best->edition().compare( provider->edition() ) < 0)
 	  && (_repo_alias.empty()
 	      || provider->repository().info().alias() == _repo_alias) )
       {
-	uninstalled = provider;	// store 
+	best = provider;	// store 
       }
       return true;		// keep going
     }
@@ -760,8 +769,8 @@ findArchUpdateItem( const ResPool & pool, PoolItem_Ref item, const string &repo_
 		  resfilter::byEdition<CompareByGT<Edition> >( item->edition() )),
 		functor::functorRef<bool,PoolItem> (info) );
 
-  _XDEBUG("findArchUpdateItem(" << item << ") => " << info.uninstalled);
-  return info.uninstalled;
+  _XDEBUG("findArchUpdateItem(" << item << ") => " << info.best);
+  return info.best;
 }
 
 // ----------------------------------------------------------------------------
@@ -826,7 +835,7 @@ void list_updates( const ResObject::Kind &kind, const string &repo_alias, bool b
     unsigned int cols = th.cols();
 
     Candidates candidates;
-    find_updates( kind, repo_alias, candidates );	// best_effort could be passed here ...
+    find_updates( kind, repo_alias, candidates );
 
     Candidates::iterator cb = candidates.begin (), ce = candidates.end (), ci;
     for (ci = cb; ci != ce; ++ci) {
@@ -866,6 +875,59 @@ bool mark_item_install (const PoolItem& pi) {
     cerr_vv << "Marking " << pi << "for installation failed" << endl;
   }
   return result;
+}
+
+
+// ----------------------------------------------------------------------------
+// best-effort update
+
+
+// find installed item matching passed one
+//   use LookForArchUpdate as callback handler in order to cope with
+//   multiple installed resolvables of the same name.
+//   LookForArchUpdate will return the one with the highest edition.
+
+PoolItem_Ref
+findInstalledItem( PoolItem_Ref item )
+{
+  const zypp::ResPool& pool = God->pool();
+  LookForArchUpdate info;
+
+  invokeOnEach( pool.byNameBegin( item->name() ),
+		pool.byNameEnd( item->name() ),
+		// get installed, equal kind 
+		functor::chain (
+		  resfilter::ByInstalled (),
+		  resfilter::ByKind( item->kind() ) ),
+		functor::functorRef<bool,PoolItem> (info) );
+
+  _XDEBUG("findInstalledItem(" << item << ") => " << info.best);
+  return info.best;
+}
+
+
+// require update of installed item
+//   The PoolItem passed to require_item_update() is the installed resolvable
+//   to which an update candidate is guaranteed to exist.
+//
+// may be useful as a functor
+bool require_item_update (const PoolItem& pi) {
+  Resolver_Ptr resolver = zypp::getZYpp()->resolver();
+
+  PoolItem_Ref installed = findInstalledItem( pi );
+
+  // require anything greater than the installed version
+  try {
+    Capability cap;
+    cap = CapFactory().parse( installed->kind(), installed->name(), Rel::GT, installed->edition() );
+    resolver->addRequire( cap );
+  }
+  catch (const Exception& e) {
+    ZYPP_CAUGHT(e);
+    cerr << "Cannot parse '" << installed->name() << " < " << installed->edition() << "'" << endl;
+  }
+
+  return true;
 }
 
 // ----------------------------------------------------------------------------
@@ -950,8 +1012,11 @@ void mark_updates( const ResObject::Kind &kind, const std::string &repo_alias, b
   }
   else {
     Candidates candidates;
-    find_updates (kind, repo_alias, candidates);	// best_effort could be passed here ...
-    invokeOnEach (candidates.begin(), candidates.end(), mark_item_install);
+    find_updates (kind, repo_alias, candidates);
+    if (best_effort)
+      invokeOnEach (candidates.begin(), candidates.end(), require_item_update);
+    else
+      invokeOnEach (candidates.begin(), candidates.end(), mark_item_install);
   }
 }
 
@@ -963,9 +1028,9 @@ void mark_updates( const ResObject::Kind &kind, const std::string &repo_alias, b
  *  ZYPPER_EXIT_INF_REBOOT_NEEDED - if one of patches to be installed needs machine reboot,
  *  ZYPPER_EXIT_INF_RESTART_NEEDED - if one of patches to be installed needs package manager restart
  */
-int solve_and_commit (bool non_interactive) {
+int solve_and_commit (bool non_interactive, bool have_extra_deps ) {
   while (true) {
-    bool success = resolve();
+    bool success = resolve( have_extra_deps );
     if (success)
       break;
 

@@ -1178,7 +1178,7 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
     // commit
     // returns ZYPPER_EXIT_OK, ZYPPER_EXIT_ERR_ZYPP,
     // ZYPPER_EXIT_INF_REBOOT_NEEDED, or ZYPPER_EXIT_INF_RESTART_NEEDED
-    return solve_and_commit (copts.count("no-confirm") || gSettings.non_interactive);
+    return solve_and_commit( copts.count("no-confirm") || gSettings.non_interactive, best_effort );
   }
 
   // -----------------------------( info )------------------------------------

@@ -46,7 +46,7 @@ void load_target_resolvables();
 void load_repo_resolvables();
 
 void establish ();
-bool resolve();
+bool resolve( bool have_extra_deps = false );
 void dump_pool ();
 void show_patches();
 void xml_list_patches();
@@ -67,7 +67,7 @@ void patch_check();
 void list_updates( const zypp::ResObject::Kind &kind, const std::string &repo_alias, bool best_effort );
 void mark_updates( const zypp::ResObject::Kind &kind, const std::string &repo_alias, bool skip_interactive, bool best_effort );
 void usage(int argc, char **argv);
-int solve_and_commit (bool non_interactive = false);
+int solve_and_commit (bool non_interactive = false, bool have_extra_deps = false );
 bool confirm_licenses(bool non_interactive = false);
 
 // copied from yast2-pkg-bindings:PkgModuleFunctions::DoProvideNameKind
