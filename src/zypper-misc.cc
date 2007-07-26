@@ -132,6 +132,27 @@ static std::string xml_escape( const std::string &text )
 void mark_for_install( const ResObject::Kind &kind,
 		       const std::string &name )
 {
+  if (name.find_first_of ("=<>") != string::npos) {
+    // use resolver. (or use it always?)
+    // Resolver.h
+    Capability cap;
+    try {
+      cap = CapFactory().parse (kind, name);
+    }
+    catch (const Exception& e) {
+      ZYPP_CAUGHT(e);
+      cerr << "Cannot parse requirement: '" << name << "'" << endl;
+    }
+
+    if (cap != Capability::noCap) {
+      Resolver_Ptr resolver = zypp::getZYpp()->resolver();
+      cerr_vv << "Adding requirement " << cap << endl;
+      resolver->addRequire (cap);
+    }
+
+    return;
+  }
+
   const ResPool &pool = God->pool();
   // name and kind match:
 
