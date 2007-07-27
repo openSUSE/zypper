@@ -24,8 +24,8 @@ void display_progress (const string& s, int percent) {
 
 void display_tick (const string& s) {
   static AliveCursor cursor;
-
-  cout_v << CLEARLN << cursor++ << " " << s;
+  cursor++;
+  cout_v << CLEARLN << cursor << " " << s;
   cout_v << flush;
 }
 

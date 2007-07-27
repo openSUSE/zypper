@@ -215,6 +215,7 @@ struct ProgressReportReceiver  : public zypp::callback::ReceiveReport<zypp::Prog
 {
   void tick( const zypp::ProgressData &data )
   {
+    //std::cout << "TICK!" << std::endl;
     if ( data.reportAlive() )
     {
       display_tick ( data.name() );
@@ -228,7 +229,9 @@ struct ProgressReportReceiver  : public zypp::callback::ReceiveReport<zypp::Prog
   }
   
   virtual void start( const zypp::ProgressData &data )
-  { tick(data); }
+  {
+    tick(data);
+  }
   
   virtual bool progress( const zypp::ProgressData &data )
   {

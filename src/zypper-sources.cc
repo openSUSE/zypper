@@ -180,7 +180,7 @@ void refresh_repos()
       cout_v << _("Creating repository cache...") << endl;
       manager.buildCache(repo);
 
-      cout_n << _("DONE") << endl << endl;
+      //cout_n << _("DONE") << endl << endl;
     }
     catch ( const Exception &e )
     {

@@ -460,7 +460,7 @@ void load_repo_resolvables()
         manager.buildCache(repo);
       }
       // TranslatorExplanation speaking of a repository
-      cout_n << format(_("Reading repository %s...")) % repo.alias() << flush;
+      //cout_n << format(_("Reading repository %s...")) % repo.alias() << flush;
       repository = manager.createFromCache(repo);
 
       ResStore store = repository.resolvables();
