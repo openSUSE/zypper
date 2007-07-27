@@ -69,12 +69,11 @@ RepoImpl::~RepoImpl()
 
 static int global_progress_handler(void* ptr)
 {
-  MIL << "BOOOOOOOOOH" << std::endl;
   //RepoImpl *r = dynamic_cast<RepoImpl *>(ptr);
   RepoImpl *r = (RepoImpl *)(ptr);
   if ( r )
     return r->progress_handler(ptr);
-  return 1;
+  return 0;
 }
 
 void read_capabilities( sqlite3_connection &con,
@@ -85,7 +84,7 @@ void read_capabilities( sqlite3_connection &con,
 int RepoImpl::progress_handler(void* ptr)
 {
   if ( _ticks.tick() )
-    return 1;
+    return 0;
   return 1;
 }
 
@@ -100,7 +99,7 @@ void RepoImpl::createResolvables()
   try
   {
     sqlite3_connection con((_options.dbdir + "zypp.db").asString().c_str());
-    //con.setprogresshandler(100, global_progress_handler, (void*)this);
+    con.setprogresshandler(100, global_progress_handler, (void*)this);
 
     con.executenonquery("PRAGMA cache_size=8000;");
     con.executenonquery("BEGIN;");
@@ -115,6 +114,7 @@ void RepoImpl::createResolvables()
     map<data::RecordId, pair<Resolvable::Kind, NVRAD> > nvras;
 
     sqlite3_reader reader = cmd.executereader();
+    
     while(reader.read())
     {
       long long id = reader.getint64(0);
@@ -364,9 +364,13 @@ void RepoImpl::read_capabilities( sqlite3_connection &con,
     debug::Measure mnc("read named capabilities");
     select_named_cmd.bind(":repo_id", repo_id);
     sqlite3_reader reader = select_named_cmd.executereader();
+    
+    // FIXME Move this logic to tick()?
+    Date start(Date::now());
     while  ( reader.read() )
     {
-
+      _ticks.tick();
+      
       Resolvable::Kind refer = _type_cache.kindFor(reader.getint(0));
       Rel rel = _type_cache.relationFor(reader.getint(5));
 
@@ -393,6 +397,7 @@ void RepoImpl::read_capabilities( sqlite3_connection &con,
     sqlite3_reader reader = select_file_cmd.executereader();
     while  ( reader.read() )
     {
+      _ticks.tick();
       Resolvable::Kind refer = _type_cache.kindFor(reader.getint(0));
       capability::FileCap *fcap = new capability::FileCap( refer, reader.getstring(1) + "/" + reader.getstring(2) );
       zypp::Dep deptype = _type_cache.deptypeFor(reader.getint(3));
@@ -407,6 +412,7 @@ void RepoImpl::read_capabilities( sqlite3_connection &con,
     sqlite3_reader reader = select_hal_cmd.executereader();
     while  ( reader.read() )
     {
+      _ticks.tick();
       //select hc.refers_kind, hc.name, hc.value, hc.relation, hc.dependency_type, hc.resolvable_id from hal_capabilities hc
 
       Resolvable::Kind refer = _type_cache.kindFor(reader.getint(0));
@@ -425,7 +431,7 @@ void RepoImpl::read_capabilities( sqlite3_connection &con,
     sqlite3_reader reader = select_modalias_cmd.executereader();
     while  ( reader.read() )
     {
-
+      _ticks.tick();
       //select mc.refers_kind, mc.name, mc.value, mc.relation, mc.dependency_type, mc.resolvable_id from modalias_capabilities mc;
       Resolvable::Kind refer = _type_cache.kindFor(reader.getint(0));
 
@@ -443,6 +449,7 @@ void RepoImpl::read_capabilities( sqlite3_connection &con,
     sqlite3_reader reader = select_other_cmd.executereader();
     while  ( reader.read() )
     {
+      _ticks.tick();
       //select oc.refers_kind, oc.value, oc.dependency_type, oc.resolvable_id from other_capabilities oc;
 
       Resolvable::Kind refer = _type_cache.kindFor(reader.getint(0));
