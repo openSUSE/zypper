@@ -70,6 +70,9 @@ List available updates.
 .TP
 \fI\-t, --type\fR <resolvable_type>
 Type of resolvable (default: patch)
+.TP
+\fI\--from-repo\fR <repository_alias>
+Limit view to updates available from named repository
 
 See also the NOTE at
 .BR update .
@@ -91,6 +94,9 @@ Update all installed resolvables with newer versions, where applicable.
 \fI\-t, -\-type\fR <resolvable_type>
 Type of resolvable (default: patch)
 .TP
+\fI\--from-repo\fR <repository_alias>
+Limit to updates available from named repository
+.TP
 .I \-y, \-\-no-confirm
 Don't require user confirmation.
 .TP
@@ -107,6 +113,9 @@ Zypper prefers to update only those packages for which a patch
 description exists, like on the SUSE update servers. To operate on all
 packages for which there is a better version instead, select \fI--type
 package\fR which is also the default in rug compatibility mode.
+
+By using \fI--from-repo\fR one can follow a specific repository only
+with updates.
 
 .TP
 \fBsearch\fR (\fBse\fR) [\fIoptions\fR] [\fBquerystring\fR] ...
