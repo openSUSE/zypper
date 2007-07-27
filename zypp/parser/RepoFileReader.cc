@@ -50,13 +50,12 @@ namespace zypp
               it != dict.entriesEnd(*its);
               ++it )
         {
-          
           //MIL << (*it).first << endl;
           if (it->first == "name" )
             info.setName(it-> second);
           else if ( it->first == "enabled" )
             info.setEnabled( it->second == "1" );
-          else if ( it->first == "baseurl" )
+          else if ( it->first == "baseurl" && !it->second.empty())
             info.addBaseUrl( Url(it->second) );
           else if ( it->first == "path" )
             info.setPath( Pathname(it->second) );
@@ -64,9 +63,9 @@ namespace zypp
             info.setType(repo::RepoType(it->second));
           else if ( it->first == "autorefresh" )
             info.setAutorefresh( it->second == "1" );
-          else if ( it->first == "mirrorlist" )
+          else if ( it->first == "mirrorlist" && !it->second.empty())
             info.setMirrorListUrl(Url(it->second));
-          else if ( it->first == "gpgkey" )
+          else if ( it->first == "gpgkey" && !it->second.empty())
             info.setGpgKeyUrl( Url(it->second) );
           else if ( it->first == "gpgcheck" )
             info.setGpgCheck( it->second == "1" );

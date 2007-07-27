@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri Jul 27 16:31:38 CEST 2007 - jkupec@suse.cz
+
+- RepoFileReader - ignore empty url keys (baseurl, mirrorlist,
+  gpgkey) instead of throwing bad url exception
+- revision 6257
+
+-------------------------------------------------------------------
 Thu Jul 26 16:41:30 CEST 2007 - kkaempf@suse.de
 
 - Make clearing of extra dependencies/conflicts configurable when
