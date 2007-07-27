@@ -667,6 +667,20 @@ namespace zypp
                      const MediaVerifierRef &verifier) const;
 
       /**
+       * Simple check, based on media's URL scheme, telling whether the
+       * it is possible to physically change the media inside its drive, like
+       * CDs or DVDs. Useful to decide whether to request media change from
+       * user or not. 
+       * 
+       * \param accessId The media access id.
+       * \return <tt>false</tt> if the media is not changeable,
+       *         <tt>true</tt> otherwise.
+       * \throws MediaNotOpenException for invalid access id.
+       */
+      bool
+      isChangeable(MediaAccessId accessId);
+
+      /**
        * Return the local directory that corresponds to medias url,
        * no matter if media isAttached or not. Files requested will
        * be available at 'localRoot() + filename' or even better

@@ -776,6 +776,13 @@ namespace zypp
     }
 
     // ---------------------------------------------------------------
+    bool
+    MediaManager::isChangeable(MediaAccessId accessId)
+    {
+      return url(accessId).getScheme() == "cd" || url(accessId).getScheme() == "dvd";
+    }
+
+    // ---------------------------------------------------------------
     Pathname
     MediaManager::localRoot(MediaAccessId accessId) const
     {
