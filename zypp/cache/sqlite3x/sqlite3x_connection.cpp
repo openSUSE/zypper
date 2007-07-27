@@ -73,14 +73,19 @@ sqlite3_connection::~sqlite3_connection()
   if (this->db) sqlite3_close(this->db);
 }
 
-void sqlite3_connection::setprogresshandler( int n,
-                                             const zypp::ProgressData::ReceiverFnc &fnc )
+void sqlite3_connection::setprogresshandler( const zypp::ProgressData::ReceiverFnc &fnc,
+                                             int n)
 {
   _ticks.sendTo(fnc);
   if ( fnc )
     sqlite3_progress_handler(db, n, global_progress_handler, (void*)this);
   else
     sqlite3_progress_handler(db, n, NULL, (void*)this);
+}
+
+void sqlite3_connection::resetprogresshandler()
+{
+  sqlite3_progress_handler(db, 0, NULL, (void*)this);
 }
 
 void sqlite3_connection::open(const char *db)

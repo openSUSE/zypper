@@ -47,8 +47,17 @@ public:
   sqlite3_connection(const char *db);
   sqlite3_connection(const wchar_t *db);
   
-  void setprogresshandler( int,
-                           const zypp::ProgressData::ReceiverFnc & );
+  /**
+   * \short Sets a tick progress callback
+   * \param fnc callback
+   * \param n number of sqlite vm opcodes per tick
+   */
+  void setprogresshandler( const zypp::ProgressData::ReceiverFnc &fnc,
+                           int n = 100 );
+  /**
+   * \short Disables tick progress callback
+   */
+  void resetprogresshandler();
   
   ~sqlite3_connection();
 

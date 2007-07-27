@@ -767,6 +767,7 @@ void CacheStore::cleanRepository( const data::RecordId &id,
                                   const ProgressData::ReceiverFnc & progressrcv )
 {
   sqlite3_command cmd( _pimpl->con, "delete from repositories where id=:id");
+  _pimpl->con.setprogresshandler(progressrcv);
   cmd.bind(":id", id);
 
   try
@@ -775,8 +776,10 @@ void CacheStore::cleanRepository( const data::RecordId &id,
   }
   catch ( const sqlite3x::database_error &e )
   {
+    _pimpl->con.resetprogresshandler();
     ZYPP_THROW(CacheRecordNotFoundException());
   }
+  _pimpl->con.resetprogresshandler();
 }
 
 void CacheStore::cleanRepository( const std::string &alias,

@@ -83,7 +83,7 @@ void RepoImpl::createResolvables()
   try
   {
     sqlite3_connection con((_options.dbdir + "zypp.db").asString().c_str());
-    con.setprogresshandler(100, subprogrcv);
+    con.setprogresshandler(subprogrcv, 100);
 
     con.executenonquery("PRAGMA cache_size=8000;");
     con.executenonquery("BEGIN;");
@@ -171,7 +171,7 @@ void RepoImpl::createResolvables()
       }
     }
     con.executenonquery("COMMIT;");
-    con.setprogresshandler(00, ProgressData::ReceiverFnc());
+    con.resetprogresshandler();
   }
   catch(exception &ex) {
       cerr << "Exception Occured: " << ex.what() << endl;
@@ -201,7 +201,7 @@ void RepoImpl::createPatchAndDeltas()
   try
   {
     sqlite3_connection con((_options.dbdir + "zypp.db").asString().c_str());
-    //con.setprogresshandler(500, global_progress_handler, (void*)this);
+    con.setprogresshandler(subprogrcv);
     con.executenonquery("PRAGMA cache_size=8000;");
     con.executenonquery("BEGIN;");
 
@@ -300,7 +300,7 @@ void RepoImpl::createPatchAndDeltas()
 
       _patchRpms.push_back(patch);
     }
-    con.setprogresshandler(0, ProgressData::ReceiverFnc());
+    con.resetprogresshandler();
   }
   catch(exception &ex) {
       cerr << "Exception Occured: " << ex.what() << endl;

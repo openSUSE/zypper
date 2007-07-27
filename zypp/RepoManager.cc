@@ -604,11 +604,13 @@ namespace zypp
     callback::SendReport<ProgressReport> report;
     progress.sendTo( ProgressReportAdaptor( progressrcv, report ) );
     progress.name(str::form(_("Cleaning repository '%s' cache"), info.alias().c_str()));
-    progress.toMin();
-
+    
     cache::CacheStore store(_pimpl->options.repoCachePath);
 
     data::RecordId id = store.lookupRepository(info.alias());
+    
+    CombinedProgressData subprogrcv(progress);
+    
     store.cleanRepository(id);
     store.commit();
   }
