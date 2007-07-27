@@ -504,8 +504,8 @@ namespace zypp
           MIL << info.alias() << " cache rebuild is forced" << endl;
         }
       }
-      MIL << info.alias() << " cleaning cache..." << endl;
-      store.cleanRepository(id);
+      
+      cleanCache(info);
     }
 
     MIL << info.alias() << " building cache..." << endl;
@@ -600,18 +600,22 @@ namespace zypp
   void RepoManager::cleanCache( const RepoInfo &info,
                                 const ProgressData::ReceiverFnc & progressrcv )
   {
-    ProgressData progress(100);
+    ProgressData progress;
     callback::SendReport<ProgressReport> report;
     progress.sendTo( ProgressReportAdaptor( progressrcv, report ) );
     progress.name(str::form(_("Cleaning repository '%s' cache"), info.alias().c_str()));
     
     cache::CacheStore store(_pimpl->options.repoCachePath);
-
+    
+    if ( !store.isCached(info.alias()) )
+      return;
+   
+    MIL << info.alias() << " cleaning cache..." << endl;
     data::RecordId id = store.lookupRepository(info.alias());
     
     CombinedProgressData subprogrcv(progress);
     
-    store.cleanRepository(id);
+    store.cleanRepository(id, subprogrcv);
     store.commit();
   }
 
@@ -814,6 +818,11 @@ namespace zypp
   void RepoManager::removeRepository( const RepoInfo & info,
                                       const ProgressData::ReceiverFnc & progressrcv)
   {
+    ProgressData progress;
+    callback::SendReport<ProgressReport> report;
+    progress.sendTo( ProgressReportAdaptor( progressrcv, report ) );
+    progress.name(str::form(_("Removing repository '%s'"), info.alias().c_str()));
+    
     MIL << "Going to delete repo " << info.alias() << endl;
 
     std::list<RepoInfo> repos = knownRepositories();
@@ -873,14 +882,10 @@ namespace zypp
           }
         }
 
+        CombinedProgressData subprogrcv(progress);
+        
         // now delete it from cache
-        cache::CacheStore store(_pimpl->options.repoCachePath);
-
-        if ( store.isCached( todelete.alias() ) ) {
-          MIL << "repository was cached. cleaning cache" << endl;
-          store.cleanRepository(todelete.alias());
-          store.commit();
-        }
+        cleanCache(todelete, subprogrcv);
 
         MIL << todelete.alias() << " sucessfully deleted." << endl;
         return;
