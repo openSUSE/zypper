@@ -73,13 +73,13 @@ namespace zypp
       RepoMediaAccess access;
       return access.provideFile(repo_r, loc_r, policy_r );
     }
-    
+
     class RepoMediaAccess::Impl
     {
     public:
       Impl()
       {}
-      
+
       ~Impl()
       {
         std::map<Url, shared_ptr<MediaSetAccess> >::iterator it;
@@ -90,7 +90,7 @@ namespace zypp
           it->second->release();
         }
       }
-      
+
       shared_ptr<MediaSetAccess> mediaAccessForUrl( const Url &url )
       {
         std::map<Url, shared_ptr<MediaSetAccess> >::const_iterator it;
@@ -107,7 +107,7 @@ namespace zypp
         }
         return media;
       }
-      
+
       void setVerifierForRepo( Repository repo, shared_ptr<MediaSetAccess> media )
       {
         RepoInfo info = repo.info();
@@ -137,16 +137,14 @@ namespace zypp
               getline(str, vendor);
               getline(str, mediaid);
               getline(str, buffer);
-              
+
               unsigned media_nr = str::strtonum<unsigned>(buffer);
               MIL << "Repository '" << info.alias() << "' has " << media_nr << " medias"<< endl;
-              
-              for ( int i=1; i <= media_nr; ++i )
+
+              for ( unsigned i=1; i <= media_nr; ++i )
               {
-                media::MediaVerifierRef verifier( new repo::SUSEMediaVerifier(vendor,
-                                           mediaid,
-                                           i));
-                
+                media::MediaVerifierRef verifier( new repo::SUSEMediaVerifier( vendor, mediaid, i ) );
+
                 media->setVerifier( i, verifier);
               }
               _verifier[media] = repo;
@@ -166,23 +164,23 @@ namespace zypp
           MIL << "Unknown metadata path for repo '" << info.alias() << "'. Can't set media verifier."<< endl;
         }
       }
-      
+
       std::map<shared_ptr<MediaSetAccess>, Repository> _verifier;
       std::map<Url, shared_ptr<MediaSetAccess> > _medias;
     };
-    
-    
-    
+
+
+
     RepoMediaAccess::RepoMediaAccess()
       : _impl( new Impl() )
     {
     }
-    
+
     RepoMediaAccess::~RepoMediaAccess()
     {
-    
+
     }
-    
+
     ManagedFile RepoMediaAccess::provideFile( Repository repo_r,
                                               const OnMediaLocation & loc_r,
                                               const ProvideFilePolicy & policy_r )
@@ -201,7 +199,7 @@ namespace zypp
       set<Url> urls = info.baseUrls();
       if ( urls.empty() )
         ZYPP_THROW(Exception(_("No url in repository.")));
-      
+
       for ( RepoInfo::urls_const_iterator it = urls.begin();
             it != urls.end();
             ++it )
@@ -209,7 +207,7 @@ namespace zypp
         url = *it;
         try
         {
-          MIL << "Providing file of repo '" << info.alias() 
+          MIL << "Providing file of repo '" << info.alias()
               << "' from " << url << endl;
           shared_ptr<MediaSetAccess> access = _impl->mediaAccessForUrl(url);
           _impl->setVerifierForRepo(repo_r, access);
@@ -265,7 +263,7 @@ namespace zypp
       ZYPP_THROW(Exception(str::form(_("Can't provide file %s from repository %s"),
                                        loc_r.filename().c_str(),
                                        info.alias().c_str() ) ) );
-      
+
       return ManagedFile(); // not reached
     }
 
