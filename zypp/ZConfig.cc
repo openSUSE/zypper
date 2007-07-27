@@ -151,24 +151,24 @@ namespace zypp
   //	METHOD NAME : ZConfig::defaultTextLocale
   //	METHOD TYPE : Locale
   //
-  Locale ZConfig::defaultTextLocale() const
+  Locale ZConfig::textLocale() const
   {
     return getZYpp()->getTextLocale();
   }
 
-  Pathname ZConfig::defaultRepoMetadataPath() const
+  Pathname ZConfig::repoMetadataPath() const
   {
     return ( _pimpl->cfg_metadata_path.empty() 
         ? Pathname("/var/cache/zypp/raw") : _pimpl->cfg_metadata_path );
   }
 
-  Pathname ZConfig::defaultRepoCachePath() const
+  Pathname ZConfig::repoCachePath() const
   {
     return ( _pimpl->cfg_cache_path.empty() 
         ? Pathname("/var/cache/zypp") : _pimpl->cfg_cache_path );
   }
 
-  Pathname ZConfig::defaultKnownReposPath() const
+  Pathname ZConfig::knownReposPath() const
   {
     return ( _pimpl->cfg_known_repos_path.empty() 
         ? Pathname("/etc/zypp/repos.d") : _pimpl->cfg_known_repos_path );

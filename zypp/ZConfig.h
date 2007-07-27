@@ -48,24 +48,24 @@ namespace zypp
       /** The prefered locale for translated labels, descriptions,
        *  descriptions, etc. passed to the UI.
        */
-      Locale defaultTextLocale() const;
+      Locale textLocale() const;
 
       /**
        * Path where the repo metadata is downloaded and kept.
        */
-      Pathname defaultRepoMetadataPath() const;
+      Pathname repoMetadataPath() const;
 
       /**
        * Path where the processed cache is kept
        * (this is where zypp.db is located.
        */
-      Pathname defaultRepoCachePath() const;
+      Pathname repoCachePath() const;
 
       /**
        * Path where the known repositories
        * .repo files are kept
        */
-      Pathname defaultKnownReposPath() const;
+      Pathname knownReposPath() const;
 
       /**
        * Separator string for storing/reading sets of strings to/from

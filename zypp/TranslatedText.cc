@@ -52,7 +52,7 @@ namespace zypp
       Locale toReturn( lang );
       if ( lang == Locale::noCode )
       {
-        toReturn = ZConfig::instance().defaultTextLocale();
+        toReturn = ZConfig::instance().textLocale();
       }
 
       do
