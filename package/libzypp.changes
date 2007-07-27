@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Fri Jul 27 17:40:44 CEST 2007 - dmacvicar@suse.de
+
+- progress ticks for clean cache
+- ZConfig: remove default from names.
+- re enable reading cache callbacks
+- ini parser without boost::regexp
+  patch by dmueller (#152447)
+
+-------------------------------------------------------------------
 Fri Jul 27 17:16:27 CEST 2007 - ma@suse.de
 
 - Fixed package to provide the location media number. (#294496)
