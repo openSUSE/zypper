@@ -82,6 +82,16 @@ namespace zypp
     _history.push_front( msg_r );
   }
 
+  std::string Exception::historyAsString() const
+  {
+    // TranslatorExplanation followed by the list of error messages that lead to this exception
+    std::string history( _("History:") );
+    ostringstream ret;
+    dumpRange( ret, err.historyBegin(), err.historyEnd(),
+               "", history+"\n - ", "\n - ", "\n", "" );
+    return ret.str();
+  }
+
   std::ostream & Exception::dumpOn( std::ostream & str ) const
   { return str << _msg; }
 

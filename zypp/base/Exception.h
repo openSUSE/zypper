@@ -173,21 +173,33 @@ namespace zypp
     /** Add some message text to the history. */
     void addHistory( const std::string & msg_r );
 
-    /** */
+    /** Iterator pointing to the most recent message. */
     HistoryIterator historyBegin() const
     { return _history.begin(); }
 
-    /** */
+    /** Iterator pointing behind the last message. */
     HistoryIterator historyEnd() const
     { return _history.end(); }
 
-    /** */
+    /** Whether the history list is empty. */
     bool historyEmpty() const
     { return _history.empty(); }
 
-    /** */
+    /** The size of the history list. */
     HistorySize historySize() const
     { return _history.size(); }
+
+    /** The history as string. Empty if \ref historyEmpty.
+     * Otherwise:
+     * \code
+     * History:
+     *  - most recent message
+     *  - 2nd message
+     * ...
+     *  - oldest message
+     * \endcode
+    */
+    std::string historyAsString() const;
 
     //@}
 
