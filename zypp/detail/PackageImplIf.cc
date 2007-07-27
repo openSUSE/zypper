@@ -22,7 +22,7 @@ namespace zypp
   { /////////////////////////////////////////////////////////////////
 
     unsigned PackageImplIf::mediaNr() const
-    { return location.medianr(); }
+    { return location().medianr(); }
 
     /////////////////////////////////////////////////////////////////
     // Default implementation of PackageImplIf attributes,
