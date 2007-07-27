@@ -68,7 +68,8 @@ namespace zypp
       if ( _fnc )
         value = _fnc(progress);
       
-      if ( progress.val() == progress.max() )
+      
+      if ( progress.finalReport() )
       {
         _report->finish(progress);
       }
