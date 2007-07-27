@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Jul 27 17:16:27 CEST 2007 - ma@suse.de
+
+- Fixed package to provide the location media number. (#294496)
+- revision 6263
+
+-------------------------------------------------------------------
 Fri Jul 27 16:31:38 CEST 2007 - jkupec@suse.cz
 
 - RepoFileReader - ignore empty url keys (baseurl, mirrorlist,
