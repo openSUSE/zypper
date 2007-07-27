@@ -30,6 +30,8 @@ class IniTest : public IniParser
   virtual void consume( const std::string &section, const std::string &key, const std::string &value )
   {
     MIL << "'" << section << "'" << " | " << "'" << key << "'" << " | " << "'" << value << "'" << endl;
+    if (section == "base" && key == "gpgcheck")
+      BOOST_CHECK_EQUAL(value, "1");
   }
 };
 
@@ -39,6 +41,7 @@ class WithSpacesTest : public IniParser
   virtual void consume( const std::string &section )
   {
     MIL << section << endl;
+    BOOST_CHECK(section == "base" || section == "equal");
   }
 
   virtual void consume( const std::string &section, const std::string &key, const std::string &value )

@@ -12,8 +12,6 @@
 #include <iostream>
 #include <sstream>
 
-#include <boost/regex.hpp>
-
 #include "zypp/base/Logger.h"
 #include "zypp/base/String.h"
 #include "zypp/base/IOStream.h"
@@ -68,9 +66,6 @@ void IniParser::endParse()
 //
 void IniParser::parse( const InputStream & input_r, const ProgressData::ReceiverFnc & progress )
 {
-  boost::regex rxSection("^\\[(.+)\\]$");
-  boost::regex rxKeyValue("^([^=]*[^=[:space:]])[[:space:]]*=[[:space:]]*(.+)$");
-
   MIL << "Start parsing " << input_r << endl;
   _inputname = input_r.name();
   beginParse();
@@ -83,31 +78,25 @@ void IniParser::parse( const InputStream & input_r, const ProgressData::Receiver
   for ( ; line; line.next() )
   {
     std::string trimmed = str::trim(*line);
-    const char *where = trimmed.c_str(); /* Skip leading spaces */
-    if (*where==';' || *where=='#' || *where==0)
+
+    if (trimmed.empty() || trimmed[0] == ';' || trimmed[0] == '#')
       continue ; /* Comment lines */
-    else
+
+    if (trimmed[0] == '[')
     {
-      if (*where=='[' )
-      {
-        boost::smatch what;
-        if(boost::regex_match(trimmed, what, rxSection, boost::match_extra))
-        {
-          //DBG << what << endl;
-          std::string section = what[1];
-          consume(section);
-          section.swap(_current_section);
-        }
-      }
-      else
-      {
-        boost::smatch what;
-        if(boost::regex_match(trimmed, what, rxKeyValue, boost::match_extra))
-        {
-          //DBG << what << endl;
-          consume( _current_section, what[1], what[2] );
-        }
-      }
+      std::string section = trimmed.substr(1, trimmed.find(']')-1);
+      consume(section);
+      section.swap(_current_section);
+      continue;
+    }
+
+    std::string::size_type pos = trimmed.find('=');
+
+    if (pos != std::string::npos)
+    {
+      std::string key = str::rtrim(trimmed.substr(0, pos));
+      std::string value = str::ltrim(trimmed.substr(pos+1));
+      consume( _current_section, key, value);
     }
 
     // set progress and allow cancel
