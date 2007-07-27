@@ -136,13 +136,14 @@ struct RemoveResolvableReportReceiver : public zypp::callback::ReceiveReport<zyp
 
   virtual bool progress(int value, zypp::Resolvable::constPtr resolvable)
   {
-    display_progress ("Removing " + to_string (resolvable), value);
+    // TranslatorExplanation This text is a progress display label e.g. "Removing [42%]"
+    display_progress (_("Removing ") + to_string (resolvable), value);
     return true;
   }
 
   virtual Action problem( zypp::Resolvable::constPtr resolvable, Error error, const std::string & description )
   {
-    cerr << resolvable << endl;
+    cerr << boost::format(_("Removal of %s failed:")) % resolvable << std::endl;
     display_error (error, description);
     return (Action) read_action_ari (ABORT);
   }
@@ -156,7 +157,8 @@ struct RemoveResolvableReportReceiver : public zypp::callback::ReceiveReport<zyp
 
 ostream& operator << (ostream& stm, zypp::target::rpm::InstallResolvableReport::RpmLevel level) {
   static const char * level_s[] = {
-    "", "(with nodeps)", "(with nodeps+force)"
+    // TranslatorExplanation --nodeps and --force are options of the rpm command, don't translate 
+    "", _("(with --nodeps)"), _("(with --nodeps --force)")
   };
   return stm << level_s[level];
 }
@@ -169,16 +171,18 @@ struct InstallResolvableReportReceiver : public zypp::callback::ReceiveReport<zy
   
   void display_step( zypp::Resolvable::constPtr /*resolvable*/, int value )
   {
-    display_progress ("Installing " /* + to_string (resolvable) */,  value);
+    // TranslatorExplanation This text is a progress display label e.g. "Installing [42%]"
+    display_progress (_("Installing ") /* + to_string (resolvable) */,  value);
   }
-  
+
   virtual void start( zypp::Resolvable::constPtr resolvable )
   {
     _resolvable = resolvable;
-	  if (gSettings.machine_readable)
-			cout << "Installing: " + resolvable->name() << endl;
-		else
-	    cerr << "Installing: " + to_string (resolvable) << endl;
+    if (gSettings.machine_readable)
+      cout << "Installing: " + resolvable->name() << endl;
+    else
+      cout << boost::format(_("Installing: %s-%s"))
+        % resolvable->name() % resolvable->edition() << endl;
   }
 
   virtual bool progress(int value, zypp::Resolvable::constPtr resolvable)
@@ -189,13 +193,18 @@ struct InstallResolvableReportReceiver : public zypp::callback::ReceiveReport<zy
 
   virtual Action problem( zypp::Resolvable::constPtr resolvable, Error error, const std::string & description, RpmLevel level )
   {
-    cerr << resolvable << " " << description << std::endl;
-    cerr << level;
-    display_error (error, "");
-    if (level < RPM_NODEPS_FORCE) {
-      cerr_v << _("Will retry more aggressively.") << endl;
+    if (level < RPM_NODEPS_FORCE)
+    {
+      std::string msg = "Install failed, will retry more aggressively (with --no-deps, --force).";
+      cerr_vv << msg << std::endl;
+      DBG << msg << std::endl;
       return ABORT;
     }
+
+    cerr << boost::format(_("Installation of %s failed:")) % resolvable
+        << std::endl;
+    cerr << level << " "; display_error (error, description);
+
     return (Action) read_action_ari (ABORT);
   }
 
@@ -218,9 +227,7 @@ class RpmCallbacks {
 
   private:
     ZmartRecipients::MessageResolvableReportReceiver _messageReceiver;
-#ifndef LIBZYPP_1xx
     ZmartRecipients::ScriptResolvableReportReceiver _scriptReceiver;
-#endif
     ZmartRecipients::ScanRpmDbReceive _readReceiver;
     ZmartRecipients::RemoveResolvableReportReceiver _installReceiver;
     ZmartRecipients::InstallResolvableReportReceiver _removeReceiver;
@@ -233,9 +240,7 @@ class RpmCallbacks {
 	, _step_counter( 0 )
     {
       _messageReceiver.connect();
-#ifndef LIBZYPP_1xx
       _scriptReceiver.connect();
-#endif
       _installReceiver.connect();
       _removeReceiver.connect();
       _readReceiver.connect();
@@ -244,9 +249,7 @@ class RpmCallbacks {
     ~RpmCallbacks()
     {
       _messageReceiver.disconnect();
-#ifndef LIBZYPP_1xx
       _scriptReceiver.disconnect();
-#endif
       _installReceiver.disconnect();
       _removeReceiver.disconnect();
       _readReceiver.connect();
