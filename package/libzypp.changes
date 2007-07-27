@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Fri Jul 27 18:08:42 CEST 2007 - jkupec@suse.cz
+
+- don't request media chage if the media is not changeable (like
+  e.g. http)
+- revision 6271
+- version 3.12.1
+
+-------------------------------------------------------------------
 Fri Jul 27 17:40:44 CEST 2007 - dmacvicar@suse.de
 
 - progress ticks for clean cache
