@@ -635,10 +635,9 @@ namespace zypp
     callback::SendReport<ProgressReport> report;
     ProgressData progress;
     progress.sendTo(ProgressReportAdaptor( progressrcv, report ));
-    progress.sendTo( progressrcv );
+    //progress.sendTo( progressrcv );
     progress.name(str::form(_("Reading repository '%s' cache"), info.alias().c_str()));
-    progress.toMin();
-
+    
     cache::CacheStore store(_pimpl->options.repoCachePath);
 
     if ( ! store.isCached( info.alias() ) )
