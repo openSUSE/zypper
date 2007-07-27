@@ -128,6 +128,18 @@ static std::string xml_escape( const std::string &text )
 }
 
 
+// on error print a message and return noCap
+Capability safe_parse_cap (const ResObject::Kind &kind, const string & capstr) {
+  Capability cap;
+  try {
+    cap = CapFactory().parse (kind, capstr);
+  }
+  catch (const Exception& e) {
+    ZYPP_CAUGHT(e);
+    cerr << format (_("Cannot parse capability '%s'.")) % capstr << endl;
+  }
+  return cap;
+}
 
 // this does only resolvables with this _name_.
 // we could also act on _provides_
@@ -135,27 +147,6 @@ static std::string xml_escape( const std::string &text )
 void mark_for_install( const ResObject::Kind &kind,
 		       const std::string &name )
 {
-  if (name.find_first_of ("=<>") != string::npos) {
-    // use resolver. (or use it always?)
-    // Resolver.h
-    Capability cap;
-    try {
-      cap = CapFactory().parse (kind, name);
-    }
-    catch (const Exception& e) {
-      ZYPP_CAUGHT(e);
-      cerr << "Cannot parse requirement: '" << name << "'" << endl;
-    }
-
-    if (cap != Capability::noCap) {
-      Resolver_Ptr resolver = zypp::getZYpp()->resolver();
-      cerr_vv << "Adding requirement " << cap << endl;
-      resolver->addRequire (cap);
-    }
-
-    return;
-  }
-
   const ResPool &pool = God->pool();
   // name and kind match:
 
@@ -234,6 +225,50 @@ void mark_for_uninstall( const ResObject::Kind &kind,
     return; //error?
   }
 }
+
+void mark_by_name (bool install_not_delete,
+		   const ResObject::Kind &kind,
+		   const string &name )
+{
+  if (install_not_delete)
+    mark_for_install(kind, name);
+  else
+    mark_for_uninstall(kind, name);
+}
+
+// don't try NAME-EDITION yet, could be confused by
+// dbus-1-x11, java-1_4_2-gcj-compat, ...
+/*
+bool mark_by_name_edition (...)
+  static const regex rx_name_edition("(.*?)-([0-9].*)");
+
+  smatch m;
+  if (! is_cap && regex_match (capstr, m, rx_name_edition)) {
+    capstr = m.str(1) + " = " + m.str(2);
+    is_cap = true;
+  }
+
+*/
+
+void mark_by_capability (bool install_not_delete,
+			 const ResObject::Kind &kind,
+			 const string &capstr )
+{
+  Capability cap = safe_parse_cap (kind, capstr);
+
+  if (cap != Capability::noCap) {
+    Resolver_Ptr resolver = zypp::getZYpp()->resolver();
+    if (install_not_delete) {
+      cerr_vv << "Adding requirement " << cap << endl;
+      resolver->addRequire (cap);
+    }
+    else {
+      cerr_vv << "Adding conflict " << cap << endl;
+      resolver->addConflict (cap);
+    }
+  }
+}
+
 
 // debugging
 static

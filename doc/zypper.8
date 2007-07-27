@@ -49,14 +49,25 @@ A resolvable is a package, patch, pattern, language, or a product.
 Displays full info for the specified packages.
 
 .TP
-.B install (in) <name> ...
+.B install (in) <capability> ...
 Install resolvables.
+
+Capability is: NAME, or "NAME OP EDITION", where OP is < <= = >= > and
+EDITION is VERSION[-RELEASE].
+
+Names are not only package names but any symbols provided by packages:
+/bin/vi, libcurl.so.3, perl(Time::ParseDate). Just remember to quote to protect the
+special characters from the shell.
+
 .TP
 \fI\-c, \-\-catalog\fR <catalog>
 Only from this catalog (FIXME not implemented yet)
 .TP
 \fI\-t, \-\-type\fR <resolvable_type>
 Type of resolvable (default: package)
+.TP
+.I \-n, \-\-name
+Select resolvables by older method, considering just names, not capabilities.
 .TP
 .I \-y, \-\-no\-confirm
 Don't require user confirmation to proceed with installation.
@@ -78,14 +89,20 @@ See also the NOTE at
 .BR update .
 
 .TP
-.B remove (rm) <name> ...
+.B remove (rm) <capability> ...
 Remove resolvables.
 .TP
 \fI\-t, -\-type\fR <resolvable_type>
 Type of resolvable (default: package)
 .TP
+.I \-n, \-\-name
+Select resolvables by older method, considering just names, not capabilities.
+.TP
 .I \-y, \-\-no-confirm
 Don't require user confirmation.
+
+Capability is usually a plain name, for details see the install
+command.
 
 .TP
 .B update (up) [options]

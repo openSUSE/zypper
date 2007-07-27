@@ -21,11 +21,23 @@
  */
 void cond_init_target();
 
+/// Parse a capability string. On error print a message and return noCap
+zypp::Capability safe_parse_cap (const zypp::ResObject::Kind &kind,
+				 const std::string &capstr);
+
 zypp::ResObject::Kind string_to_kind (const std::string &skind);
 void mark_for_install( const zypp::ResObject::Kind &kind,
 		       const std::string &name );
 void mark_for_uninstall( const zypp::ResObject::Kind &kind,
 			 const std::string &name );
+
+void mark_by_name (bool install_not_delete,
+		   const zypp::ResObject::Kind &kind,
+		   const std::string &name );
+void mark_by_capability (bool install_not_delete,
+			 const zypp::ResObject::Kind &kind,
+			 const std::string &capstr );
+
 int show_summary();
 //std::string calculate_token();
 

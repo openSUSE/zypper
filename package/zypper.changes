@@ -1,4 +1,14 @@
 -------------------------------------------------------------------
+Fri Jul 27 19:06:58 CEST 2007 - mvidner@suse.cz
+
+- Implemented capabilities for installing and removing, allowing to
+  install by provided tags and files (F#301956) or a specific
+  version (F#302186): zypper in 'clamav = 0.90-0.1'; zypper rm
+  /bin/vi; zypper in libcurl.so.3; zypper in 'perl(Time::ParseDate)'
+- Added --name,-n to install and remove to use the old selection
+  method in case the new one does not work.
+
+-------------------------------------------------------------------
 Thu Jul 26 17:19:59 CEST 2007 - jkupec@suse.cz
 
 - output clean-up (#216042)

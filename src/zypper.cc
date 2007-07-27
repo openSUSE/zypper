@@ -264,6 +264,7 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
     static struct option install_options[] = {
       {"catalog",	            required_argument, 0, 'c'},
       {"type",	                    required_argument, 0, 't'},
+      {"name",			    no_argument,       0, 'n'},
       {"no-confirm",                no_argument,       0, 'y'},
       {"auto-agree-with-licenses",  no_argument,       0, 'l'},
       {"help",                      no_argument,       0, 'h'},
@@ -278,6 +279,7 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
       "  Command options:\n"
       "\t--catalog,-c\t\t\tOnly from this catalog (under development)\n"
       "\t--type,-t <resolvable_type>\tType of resolvable (package, patch, pattern, product) (default: package)\n"
+      "\t--name,-n\t\t\tSelect resolvables by plain name, not by capability\n"
       "\t--no-confirm,-y\t\t\tDo not require user confirmation to proceed with installation\n"
       "\t--auto-agree-with-licenses,-l\tAutomatically say 'yes' to third party license confirmation prompt.\n"
       "\t\t\t\t\tSee man zypper for more details.\n"
@@ -286,6 +288,7 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
   else if (command == ZypperCommand::REMOVE) {
     static struct option remove_options[] = {
       {"type",       required_argument, 0, 't'},
+      {"name",	     no_argument,       0, 'n'},
       {"no-confirm", no_argument,       0, 'y'},
       {"help",       no_argument,       0, 'h'},
       {0, 0, 0, 0}
@@ -298,6 +301,7 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
       "\n"
       "  Command options:\n"
       "\t--type,-t <resolvable_type>\tType of resolvable (package, patch, pattern, product) (default: package)\n"
+      "\t--name,-n\t\t\tSelect resolvables by plain name, not by capability\n"
       "\t--no-confirm,-y\t\t\tDo not require user confirmation\n"
       );
   }
@@ -963,16 +967,16 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
     cond_init_target ();
     cond_load_resolvables();
 
+    bool install_not_remove = command == ZypperCommand::INSTALL;
+    bool just_name = copts.count("name"); // compatibility method
     for ( vector<string>::const_iterator it = arguments.begin(); it != arguments.end(); ++it ) {
-      if (command == ZypperCommand::INSTALL) {
-        mark_for_install(kind, *it);
-      }
-      else {
-        mark_for_uninstall(kind, *it);
-      }
+      if (just_name)
+	mark_by_name (install_not_remove, kind, *it);
+      else
+	mark_by_capability (install_not_remove, kind, *it);
     }
 
-    solve_and_commit (copts.count("no-confirm") || gSettings.non_interactive);
+    solve_and_commit (copts.count("no-confirm") || gSettings.non_interactive, !just_name);
     return ZYPPER_EXIT_OK;
   }
 
