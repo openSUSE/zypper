@@ -129,3 +129,9 @@ ADD_CUSTOM_TARGET( srcpackage
   ${PACKAGE_COMMAND}
 )
 
+# documentation too important to be hidden in doc:
+INSTALL(
+  FILES COPYING HACKING
+  DESTINATION ${INSTALL_PREFIX}/share/doc/packages/${PACKAGE}
+)
+
