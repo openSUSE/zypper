@@ -58,7 +58,13 @@ namespace zypp
 
   /** Offer a License text and methods to remember confirmation. */
   typedef std::string License;
-
+  
+  /** An rpm package group value. Also provide access to a
+   * (singleton) tree like group hierarchy which contains
+   * all existing groups. No more need to fiddle with YStringTreeItem
+   * classes and forgetting to add parsed groups there for use in the UI.
+   * PackageGroup can be selforganizing.
+  */
   typedef std::string PackageGroup;
 
   /** Candidate for string unification? */
