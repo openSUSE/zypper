@@ -21,6 +21,9 @@ namespace zypp
   namespace detail
   { /////////////////////////////////////////////////////////////////
 
+    unsigned PackageImplIf::mediaNr() const
+    { return location.medianr(); }
+
     /////////////////////////////////////////////////////////////////
     // Default implementation of PackageImplIf attributes,
     // as far as resonable.
@@ -67,13 +70,13 @@ namespace zypp
 
       ByteCount PackageImplIf::sourcesize() const
       { return ByteCount(); }
-      
+
       ByteCount PackageImplIf::downloadSize() const
       { return location().downloadSize(); }
 
       OnMediaLocation PackageImplIf::location() const
       { return OnMediaLocation(); }
-      
+
       DiskUsage PackageImplIf::diskusage() const
       { return DiskUsage(); }
 
