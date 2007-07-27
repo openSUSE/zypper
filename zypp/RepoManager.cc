@@ -646,9 +646,11 @@ namespace zypp
     MIL << "Repository " << info.alias() << " is cached" << endl;
 
     data::RecordId id = store.lookupRepository(info.alias());
-
+    
+    CombinedProgressData subprogrcv(progress);
+    
     repo::cached::RepoOptions opts( info, _pimpl->options.repoCachePath, id );
-    opts.readingResolvablesProgress = progressrcv;
+    opts.readingResolvablesProgress = subprogrcv;
     repo::cached::RepoImpl::Ptr repoimpl =
         new repo::cached::RepoImpl( opts );
 

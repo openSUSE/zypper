@@ -67,39 +67,23 @@ RepoImpl::~RepoImpl()
   MIL << "Destroying repo '" << info().alias() << "'" << endl;
 }
 
-static int global_progress_handler(void* ptr)
-{
-  //RepoImpl *r = dynamic_cast<RepoImpl *>(ptr);
-  RepoImpl *r = (RepoImpl *)(ptr);
-  if ( r )
-    return r->progress_handler(ptr);
-  return 0;
-}
-
 void read_capabilities( sqlite3_connection &con,
                         map<data::RecordId, NVRAD> &nvras,
                         ProgressData &progress );
-
-
-int RepoImpl::progress_handler(void* ptr)
-{
-  if ( _ticks.tick() )
-    return 0;
-  return 1;
-}
 
 void RepoImpl::createResolvables()
 {
   _ticks = ProgressData();
   _ticks.sendTo(_options.readingResolvablesProgress);
   _ticks.name(str::form(_( "Reading '%s' repository cache"), info().alias().c_str()));
-
+  CombinedProgressData subprogrcv(_ticks);
+  
   debug::Measure m("create resolvables");
   CapFactory capfactory;
   try
   {
     sqlite3_connection con((_options.dbdir + "zypp.db").asString().c_str());
-    con.setprogresshandler(100, global_progress_handler, (void*)this);
+    con.setprogresshandler(100, subprogrcv);
 
     con.executenonquery("PRAGMA cache_size=8000;");
     con.executenonquery("BEGIN;");
@@ -187,7 +171,7 @@ void RepoImpl::createResolvables()
       }
     }
     con.executenonquery("COMMIT;");
-    con.setprogresshandler(00, NULL, NULL);
+    con.setprogresshandler(00, ProgressData::ReceiverFnc());
   }
   catch(exception &ex) {
       cerr << "Exception Occured: " << ex.what() << endl;
@@ -213,7 +197,7 @@ void RepoImpl::createPatchAndDeltas()
   _ticks = ProgressData();
   _ticks.sendTo(_options.readingPatchDeltasProgress );
   _ticks.name(str::form(_( "Reading patch and delta rpms from '%s' repository cache"), info().alias().c_str()));
-
+  CombinedProgressData subprogrcv(_ticks);
   try
   {
     sqlite3_connection con((_options.dbdir + "zypp.db").asString().c_str());
@@ -316,7 +300,7 @@ void RepoImpl::createPatchAndDeltas()
 
       _patchRpms.push_back(patch);
     }
-    con.setprogresshandler(0, NULL, NULL);
+    con.setprogresshandler(0, ProgressData::ReceiverFnc());
   }
   catch(exception &ex) {
       cerr << "Exception Occured: " << ex.what() << endl;

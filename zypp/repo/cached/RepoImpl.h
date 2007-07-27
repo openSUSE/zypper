@@ -86,7 +86,6 @@ namespace zypp
         RepoOptions _options;
         ProgressData _ticks;
       public:
-        int progress_handler(void*);
       };
       ///////////////////////////////////////////////////////////////////
 

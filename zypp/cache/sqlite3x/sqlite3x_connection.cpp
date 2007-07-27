@@ -36,9 +36,25 @@
 #include <sqlite3.h>
 #include "sqlite3x.hpp"
 
+static int global_progress_handler(void* ptr)
+{
+  //RepoImpl *r = dynamic_cast<RepoImpl *>(ptr);
+  sqlite3x::sqlite3_connection *r = (sqlite3x::sqlite3_connection *)(ptr);
+  if ( r )
+    return r->_progress_handler_accessor(ptr);
+  return 0;
+}
+
 namespace sqlite3x
 {
 
+int sqlite3_connection::_progress_handler_accessor(void* ptr)
+{
+  if ( _ticks.tick() )
+    return 0;
+  return 1;
+}
+ 
 sqlite3_connection::sqlite3_connection() : db(NULL)
 {}
 
@@ -57,9 +73,14 @@ sqlite3_connection::~sqlite3_connection()
   if (this->db) sqlite3_close(this->db);
 }
 
-void sqlite3_connection::setprogresshandler( int n, int(*fnc)(void*), void* ptr )
+void sqlite3_connection::setprogresshandler( int n,
+                                             const zypp::ProgressData::ReceiverFnc &fnc )
 {
-  sqlite3_progress_handler(db, n, fnc, ptr);
+  _ticks.sendTo(fnc);
+  if ( fnc )
+    sqlite3_progress_handler(db, n, global_progress_handler, (void*)this);
+  else
+    sqlite3_progress_handler(db, n, NULL, (void*)this);
 }
 
 void sqlite3_connection::open(const char *db)

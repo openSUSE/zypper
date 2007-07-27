@@ -28,6 +28,7 @@
 
 #include <string>
 #include "zypp/base/Exception.h"
+#include "zypp/ProgressData.h"
 #include <boost/utility.hpp>
 
 #define SQLITE3X_THROW zypp::ZYPP_THROW
@@ -40,12 +41,14 @@ private:
   friend class sqlite3_command;
   friend class database_error;
   struct sqlite3 *db;
+  zypp::ProgressData _ticks;
 public:
   sqlite3_connection();
   sqlite3_connection(const char *db);
   sqlite3_connection(const wchar_t *db);
   
-  void setprogresshandler( int, int(*)(void *), void* );
+  void setprogresshandler( int,
+                           const zypp::ProgressData::ReceiverFnc & );
   
   ~sqlite3_connection();
 
@@ -92,6 +95,8 @@ public:
   std::string executeblob(const wchar_t *sql);
   std::string executeblob(const std::string &sql);
   std::string executeblob(const std::wstring &sql);
+  
+  int _progress_handler_accessor(void* ptr);
 };
 
 class sqlite3_command;
