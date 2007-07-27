@@ -12,6 +12,8 @@ Thu Jul 26 10:58:27 CEST 2007 - dmacvicar@suse.de
 
 - /var/lib/zypp/cache -> /var/cache/zypp
   (#292419)
+- ini parser without boost::regexp, patch by dmueller
+  (#152447)
 
 -------------------------------------------------------------------
 Wed Jul 25 13:50:06 CEST 2007 - ma@suse.de
