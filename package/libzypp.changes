@@ -8,6 +8,12 @@ Thu Jul 26 16:41:30 CEST 2007 - kkaempf@suse.de
 - version 3.12.0
 
 -------------------------------------------------------------------
+Thu Jul 26 10:58:27 CEST 2007 - dmacvicar@suse.de
+
+- /var/lib/zypp/cache -> /var/cache/zypp
+  (#292419)
+
+-------------------------------------------------------------------
 Wed Jul 25 13:50:06 CEST 2007 - ma@suse.de
 
 - Make temp directory configurable  via environment

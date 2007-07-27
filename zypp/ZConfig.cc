@@ -159,13 +159,13 @@ namespace zypp
   Pathname ZConfig::defaultRepoMetadataPath() const
   {
     return ( _pimpl->cfg_metadata_path.empty() 
-        ? Pathname("/var/lib/zypp/cache/raw") : _pimpl->cfg_metadata_path );
+        ? Pathname("/var/cache/zypp/raw") : _pimpl->cfg_metadata_path );
   }
 
   Pathname ZConfig::defaultRepoCachePath() const
   {
     return ( _pimpl->cfg_cache_path.empty() 
-        ? Pathname("/var/lib/zypp/cache") : _pimpl->cfg_cache_path );
+        ? Pathname("/var/cache/zypp") : _pimpl->cfg_cache_path );
   }
 
   Pathname ZConfig::defaultKnownReposPath() const
