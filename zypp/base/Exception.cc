@@ -13,6 +13,7 @@
 #include <sstream>
 
 #include "zypp/base/Logger.h"
+#include "zypp/base/LogTools.h"
 #include "zypp/base/Gettext.h"
 #include "zypp/base/String.h"
 #include "zypp/base/Exception.h"
@@ -86,8 +87,8 @@ namespace zypp
   {
     // TranslatorExplanation followed by the list of error messages that lead to this exception
     std::string history( _("History:") );
-    ostringstream ret;
-    dumpRange( ret, err.historyBegin(), err.historyEnd(),
+    std::ostringstream ret;
+    dumpRange( ret, historyBegin(), historyEnd(),
                "", history+"\n - ", "\n - ", "\n", "" );
     return ret.str();
   }
