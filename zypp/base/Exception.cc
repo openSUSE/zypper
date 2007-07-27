@@ -67,6 +67,20 @@ namespace zypp
     return _(str.str().c_str());
   }
 
+  void Exception::remember( const Exception & old_r )
+  {
+    if ( &old_r != this ) // no self-remember
+    {
+      History newh( old_r._history.begin(), old_r._history.end() );
+      newh.push_front( old_r.asUserString() );
+      _history.swap( newh );
+    }
+  }
+
+  void Exception::addHistory( const std::string & msg_r )
+  {
+    _history.push_front( msg_r );
+  }
 
   std::ostream & Exception::dumpOn( std::ostream & str ) const
   { return str << _msg; }

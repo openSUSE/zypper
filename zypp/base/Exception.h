@@ -14,6 +14,7 @@
 
 #include <cerrno>
 #include <iosfwd>
+#include <list>
 #include <stdexcept>
 
 ///////////////////////////////////////////////////////////////////
@@ -118,6 +119,9 @@ namespace zypp
 
   public:
     typedef exception_detail::CodeLocation CodeLocation;
+    typedef std::list<std::string>         History;
+    typedef History::const_iterator        HistoryIterator;
+    typedef History::size_type             HistorySize;
 
     /** Default ctor.
      * Use \ref ZYPP_THROW to throw exceptions.
@@ -154,6 +158,39 @@ namespace zypp
     /** Translated error message as string suitable for the user. */
     std::string asUserString() const;
 
+  public:
+    /** \name History list of message strings.
+     * Maintain a simple list of individual error messages, that lead
+     * to this Exception. The Exceptions message itself is not included
+     * in the history. The History list stores the most recent message
+     * fist.
+     */
+    //@{
+
+    /** Store an other Exception as history. */
+    void remember( const Exception & old_r );
+
+    /** Add some message text to the history. */
+    void addHistory( const std::string & msg_r );
+
+    /** */
+    HistoryIterator historyBegin() const
+    { return _history.begin(); }
+
+    /** */
+    HistoryIterator historyEnd() const
+    { return _history.end(); }
+
+    /** */
+    bool historyEmpty() const
+    { return _history.empty(); }
+
+    /** */
+    HistorySize historySize() const
+    { return _history.size(); }
+
+    //@}
+
   protected:
 
     /** Overload this to print a proper error message. */
@@ -174,7 +211,8 @@ namespace zypp
 
   private:
     mutable CodeLocation _where;
-    std::string _msg;
+    std::string          _msg;
+    History              _history;
 
     /** Return message string. */
     virtual const char * what() const throw()
