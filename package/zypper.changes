@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Jul 26 17:19:59 CEST 2007 - jkupec@suse.cz
+
+- output clean-up (#216042)
+- fixed typo (#293797)
+- r6256
+
+-------------------------------------------------------------------
 Thu Jul 26 17:15:52 CEST 2007 - kkaempf@suse.de
 
 - implement '--best-effort' for upgrade (experimental)
