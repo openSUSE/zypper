@@ -7,6 +7,8 @@ Fri Jul 27 19:06:58 CEST 2007 - mvidner@suse.cz
   /bin/vi; zypper in libcurl.so.3; zypper in 'perl(Time::ParseDate)'
 - Added --name,-n to install and remove to use the old selection
   method in case the new one does not work.
+- r6274
+- 0.8.4
 
 -------------------------------------------------------------------
 Thu Jul 26 17:19:59 CEST 2007 - jkupec@suse.cz
