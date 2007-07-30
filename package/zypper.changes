@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Jul 30 17:03:42 CEST 2007 - jkupec@suse.cz
+
+- fixed proper error message if a repo is invalid (#294483,#294488)
+- r6298
+
+-------------------------------------------------------------------
 Mon Jul 30 14:27:25 CEST 2007 - jkupec@suse.cz
 
 - output functions for progress reporting now take ostream as argument
