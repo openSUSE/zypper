@@ -1,6 +1,7 @@
 #include <fstream>
 #include <sstream>
 #include <boost/format.hpp>
+#include <boost/logic/tribool_io.hpp>
 
 #include <zypp/Patch.h>
 #include <zypp/base/Algorithm.h>

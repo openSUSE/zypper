@@ -116,8 +116,7 @@ static void print_repo_list( const std::list<zypp::RepoInfo> &repos )
     // zypper status (enabled, autorefresh)
     else
     {
-      tr << (repo.enabled() || indeterminate(repo.enabled()) ?
-          _("Yes") : _("No"));
+      tr << (repo.enabled() ? _("Yes") : _("No"));
       tr << (repo.autorefresh() ? _("Yes") : _("No"));
     }
 
@@ -366,16 +365,14 @@ int add_repo_from_file(const std::string & repo_file_url,
   {
     RepoInfo repo = *it;
 
+    // by default set enabled and autorefresh to true
+    repo.setEnabled(true);
+    repo.setAutorefresh(true);
+
     if (!indeterminate(enabled))
       repo.setEnabled(enabled);
     if (!indeterminate(autorefresh))
       repo.setAutorefresh(autorefresh);
-
-    // by default set enabled and autorefresh to true
-    if (indeterminate(repo.enabled()))
-      repo.setEnabled(true);
-    if (indeterminate(repo.autorefresh()))
-      repo.setAutorefresh(true);
 
     add_repo(repo);
   }

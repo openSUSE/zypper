@@ -696,7 +696,8 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
       return ZYPPER_EXIT_ERR_PRIVILEGES;
     }
 
-    tribool enabled(indeterminate);
+    // indeterminate indicates the user has not specified the values
+    tribool enabled(indeterminate); 
     tribool refresh(indeterminate);
 
     if (copts.count("disabled"))
@@ -729,10 +730,11 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
     string alias;
     if (arguments.size() > 1)
       alias = arguments[1];
-    //! \todo use timestamp as alias, if no alias was given
+    //! \todo use timestamp as alias, if no alias was given?
     if (alias.empty ())
       alias = url.asString();
 
+    // by default, enable the repo and set autorefresh
     if (indeterminate(enabled)) enabled = true;
     if (indeterminate(refresh)) refresh = true;
 
