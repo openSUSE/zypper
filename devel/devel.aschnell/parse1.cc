@@ -42,10 +42,6 @@ main (int argc, char* argv[])
 
     RepoManager repoManager (opts);
 
-    RepoInfoList repos = repoManager.knownRepositories();
-    if ( !repos.empty() )
-	ERR << "repos not empty" << endl;
-
     RepoInfo nrepo;
     nrepo.setAlias( "factorytest" )
 	.setName( "Test Repo for factory." )
@@ -56,17 +52,12 @@ main (int argc, char* argv[])
 	// .addBaseUrl(Url("file:///ARVIN/zypp/trunk/repotools/"));
 
     repoManager.addRepository( nrepo );
-    repos = repoManager.knownRepositories();
-
-    SEC << "refreshMetadata" << endl;
-    repoManager.refreshMetadata( nrepo );
-    SEC << "buildCache" << endl;
-    repoManager.buildCache( nrepo );
 
     ResPool pool( getZYpp()->pool() );
 
     USR << "pool: " << pool << endl;
 
+    RepoInfoList repos = repoManager.knownRepositories();
     for ( RepoInfoList::iterator it = repos.begin(); it != repos.end(); it++ )
     {
 	RepoInfo& nrepo( *it );
@@ -79,7 +70,7 @@ main (int argc, char* argv[])
 	// here SQLite is upto-date
 
 	SEC << nrepo << endl;
-	Repository nrep( repoManager.createFromCache( nrepo ) );
+	Repository nrep = repoManager.createFromCache( nrepo );
 	const zypp::ResStore& store( nrep.resolvables() );
 	getZYpp()->addResolvables( store );
     }
