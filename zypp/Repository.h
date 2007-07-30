@@ -62,7 +62,7 @@ namespace zypp
     /**
      * \short Get the resolvables for repo
      */
-    const zypp::ResStore & resolvables() const;
+    const ResStore & resolvables() const;
 
     /**
      * \short Repository info used to create this repository
