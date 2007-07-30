@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Mon Jul 30 14:27:25 CEST 2007 - jkupec@suse.cz
+
+- output functions for progress reporting now take ostream as argument
+- made some progress displayed by default. This will need more tuning.
+- missing files added to .spec file 
+- r6285
+- 0.8.5
+
+-------------------------------------------------------------------
 Mon Jul 30 13:36:10 CEST 2007 - jkupec@suse.cz
 
 - Rug's --no-confirm option changed to work as --non-interactive
