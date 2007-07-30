@@ -1,4 +1,16 @@
 -------------------------------------------------------------------
+Mon Jul 30 18:48:25 CEST 2007 - jkupec@suse.czi
+
+- new translations added
+- r6307
+
+-------------------------------------------------------------------
+Mon Jul 30 18:02:38 CEST 2007 - jkupec@suse.cz
+
+- Cleaned up RepoInfo tribools (adapted to libzypp 3.13.1)
+- r6306
+
+-------------------------------------------------------------------
 Mon Jul 30 17:03:42 CEST 2007 - jkupec@suse.cz
 
 - fixed proper error message if a repo is invalid (#294483,#294488)
