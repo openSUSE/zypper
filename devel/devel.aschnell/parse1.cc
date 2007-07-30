@@ -71,7 +71,7 @@ main (int argc, char* argv[])
 
 	SEC << nrepo << endl;
 	Repository nrep = repoManager.createFromCache( nrepo );
-	const zypp::ResStore& store( nrep.resolvables() );
+	const ResStore& store( nrep.resolvables() );
 	getZYpp()->addResolvables( store );
     }
 
