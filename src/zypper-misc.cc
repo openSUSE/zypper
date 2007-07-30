@@ -281,7 +281,7 @@ ostream& operator << (ostream & stm, ios::iostate state)
 }
 
 //! @return true to retry solving now, false to cancel, indeterminate to continue
-tribool show_problem (bool non_interactive, const ResolverProblem & prob, ProblemSolutionList & todo)
+tribool show_problem (const ResolverProblem & prob, ProblemSolutionList & todo)
 {
   ostream& stm = cerr;
   string det;
@@ -304,7 +304,7 @@ tribool show_problem (bool non_interactive, const ResolverProblem & prob, Proble
       stm << "  " << det << endl;
   }
 
-  if (non_interactive)
+  if (gSettings.non_interactive)
     return false;
 
   int reply;
@@ -337,7 +337,7 @@ tribool show_problem (bool non_interactive, const ResolverProblem & prob, Proble
 }
 
 // return true to retry solving, false to cancel transaction
-bool show_problems (bool non_interactive)
+bool show_problems ()
 {
   bool retry = true;
   ostream& stm = cerr;
@@ -357,7 +357,7 @@ bool show_problems (bool non_interactive)
   }
   for (i = b; i != e; ++i) {
     stm << endl;
-    tribool stopnow = show_problem (non_interactive, *(*i), todo);
+    tribool stopnow = show_problem (*(*i), todo);
     if (! indeterminate (stopnow)) {
       retry = stopnow == true;
       break;
@@ -1063,13 +1063,13 @@ void mark_updates( const ResObject::Kind &kind, const std::string &repo_alias, b
  *  ZYPPER_EXIT_INF_REBOOT_NEEDED - if one of patches to be installed needs machine reboot,
  *  ZYPPER_EXIT_INF_RESTART_NEEDED - if one of patches to be installed needs package manager restart
  */
-int solve_and_commit (bool non_interactive, bool have_extra_deps ) {
+int solve_and_commit (bool have_extra_deps ) {
   while (true) {
     bool success = resolve( have_extra_deps );
     if (success)
       break;
 
-    success = show_problems (non_interactive);
+    success = show_problems ();
     if (! success) {
       // TODO cancel transaction?
       return ZYPPER_EXIT_ERR_ZYPP; // #242736
@@ -1081,9 +1081,9 @@ int solve_and_commit (bool non_interactive, bool have_extra_deps ) {
   int retv = show_summary();
 
   if (retv >= 0) { // there are resolvables to install/uninstall
-    if (read_bool_answer(_("Continue?"), non_interactive)) {
+    if (read_bool_answer(_("Continue?"), true)) {
 
-      if (!confirm_licenses(non_interactive)) return ZYPPER_EXIT_OK;
+      if (!confirm_licenses()) return ZYPPER_EXIT_OK;
 
       cerr_v << _("committing") << endl;
       
@@ -1136,7 +1136,7 @@ int solve_and_commit (bool non_interactive, bool have_extra_deps ) {
 //  ask for [y/n/r] with 'r' for read the license text
 //  (opened throu more or less, etc...)
 // - after negative answer, call solve_and_commit() again 
-bool confirm_licenses(bool non_interactive)
+bool confirm_licenses()
 {
   bool confirmed = true;
 
@@ -1160,34 +1160,39 @@ bool confirm_licenses(bool non_interactive)
         continue;
       }
 
-      cout << it->resolvable()->name() << " " <<
-        it->resolvable()->kind().asString() <<
-        " " << _("license") << ": " <<
-        it->resolvable()->licenseToConfirm() << endl;
+      cout << format(_("%s %s license:"))
+          % it->resolvable()->name() % it->resolvable()->kind().asString()
+        << it->resolvable()->licenseToConfirm() << endl;
 
       string question = _("In order to install this package, you must agree"
         " to terms of the above licencse. Continue?");
 
-      if (non_interactive || !read_bool_answer(question, false))
+      if (!read_bool_answer(question, gSettings.license_auto_agree))
       {
         confirmed = false;
-        
-        if (non_interactive)
+
+        if (gSettings.non_interactive)
         {
           cout << endl <<
              _("Aborting installation due to the need of"
-            " license(s) confirmation.") <<
-            " " << _("Please, restart the operation in interactive"
-            " mode and confirm agreement with required license(s).")
+              " license(s) confirmation.") << " ";
+          // TranslatorExplanation Don't translate the '--auto-agree-with-licenses',
+          // it is a command line option
+          cout << _("Please, restart the operation in interactive"
+              " mode and confirm agreement with required license(s),"
+              " or use the --auto-agree-with-licenses option.")
             << endl;
+          MIL << "License(s) NOT confirmed (non-interactive without auto confirmation)" << endl;
         }
         else
         {
-          cout << endl <<
-            _("Aborting installation due to user disagreement"
-            " with ") << it->resolvable()->name() << " " <<
-            it->resolvable()->kind().asString() <<
-            " " << _("license") << "." << endl;
+          cout << endl;
+            // TranslatorExplanation e.g. "... with flash package license."
+          cout << format(
+              _("Aborting installation due to user disagreement with %s %s license."))
+                % it->resolvable()->name() % it->resolvable()->kind().asString()
+              << endl;
+            MIL << "License(s) NOT confirmed (interactive)" << endl;
         }
 
         break;

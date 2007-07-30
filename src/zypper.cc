@@ -265,8 +265,11 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
       {"catalog",	            required_argument, 0, 'c'},
       {"type",	                    required_argument, 0, 't'},
       {"name",			    no_argument,       0, 'n'},
-      {"no-confirm",                no_argument,       0, 'y'},
+      // rug compatibility, we have global --non-interactive
+      {"no-confirm",                no_argument,       0, 'y'}, 
       {"auto-agree-with-licenses",  no_argument,       0, 'l'},
+      // rug compatibility, we have --auto-agree-with-licenses
+      {"agree-to-third-party-licenses",  no_argument,  0, 0},
       {"help",                      no_argument,       0, 'h'},
       {0, 0, 0, 0}
     };
@@ -280,10 +283,9 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
       "\t--catalog,-c\t\t\tOnly from this catalog (under development)\n"
       "\t--type,-t <resolvable_type>\tType of resolvable (package, patch, pattern, product) (default: package)\n"
       "\t--name,-n\t\t\tSelect resolvables by plain name, not by capability\n"
-      "\t--no-confirm,-y\t\t\tDo not require user confirmation to proceed with installation\n"
       "\t--auto-agree-with-licenses,-l\tAutomatically say 'yes' to third party license confirmation prompt.\n"
       "\t\t\t\t\tSee man zypper for more details.\n"
-      );
+    );
   }
   else if (command == ZypperCommand::REMOVE) {
     static struct option remove_options[] = {
@@ -302,7 +304,6 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
       "  Command options:\n"
       "\t--type,-t <resolvable_type>\tType of resolvable (package, patch, pattern, product) (default: package)\n"
       "\t--name,-n\t\t\tSelect resolvables by plain name, not by capability\n"
-      "\t--no-confirm,-y\t\t\tDo not require user confirmation\n"
       );
   }
   else if (command == ZypperCommand::ADD_REPO) {
@@ -432,7 +433,6 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
   else if (command == ZypperCommand::UPDATE) {
     static struct option update_options[] = {
       {"type",		            required_argument, 0, 't'},
-      {"no-confirm",                no_argument,       0, 'y'},
       {"skip-interactive",          no_argument,       0, 0},
       {"auto-agree-with-licenses",  no_argument,       0, 'l'},
       { "from-repo",                required_argument, 0, 0 },
@@ -447,12 +447,11 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
       "  Command options:\n"
       "\n"
       "\t--type,-t <resolvable_type>\tType of resolvable (package, patch, pattern, product) (default: patch)\n"
-      "\t--no-confirm,-y\t\t\tDo not require user confirmation\n"
       "\t--skip-interactive\t\tSkip interactive updates\n"
       "\t--auto-agree-with-licenses,-l\tAutomatically say 'yes' to third party license confirmation prompt.\n"
+      "\t\t\t\t\tSee man zypper for more details.\n"
       "\t--from-repo <repository_alias>\tRestrict updates to named repository (default: get updates from all repositories)\n"
       "\t--best-effort\t\t\tDo a 'best effort' approach to update, updates to a lower than latest-and-greatest version are also acceptable\n"
-      "\t\t\t\t\tSee man zypper for more details.\n"
       );
   }
   else if (command == ZypperCommand::SEARCH) {
@@ -919,8 +918,6 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
 
       if (copts.count("auto-agree-with-licenses"))
         gSettings.license_auto_agree = true;
-
-
     }
 
     if (command == ZypperCommand::REMOVE) {
@@ -938,6 +935,12 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
       cerr << _("Root privileges are required for installing or uninstalling packages.") << endl;
       return ZYPPER_EXIT_ERR_PRIVILEGES;
     }
+
+    // rug compatibility code
+    // switch on non-interactive mode if no-confirm specified
+    if (copts.count("no-confirm"))
+      gSettings.non_interactive == true;
+
 
     // read resolvable type
     string skind = copts.count("type")?  copts["type"].front() : "package";
@@ -975,8 +978,8 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
       else
 	mark_by_capability (install_not_remove, kind, *it);
     }
-
-    solve_and_commit (copts.count("no-confirm") || gSettings.non_interactive, !just_name);
+    
+    solve_and_commit (!just_name);
     return ZYPPER_EXIT_OK;
   }
 
@@ -1151,6 +1154,11 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
       return ZYPPER_EXIT_ERR_PRIVILEGES;
     }
 
+    // rug compatibility code
+    // switch on non-interactive mode if no-confirm specified
+    if (copts.count("no-confirm"))
+      gSettings.non_interactive == true;
+
     if (copts.count("auto-agree-with-licenses"))
       gSettings.license_auto_agree = true;
 
@@ -1182,7 +1190,7 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
     // commit
     // returns ZYPPER_EXIT_OK, ZYPPER_EXIT_ERR_ZYPP,
     // ZYPPER_EXIT_INF_REBOOT_NEEDED, or ZYPPER_EXIT_INF_RESTART_NEEDED
-    return solve_and_commit( copts.count("no-confirm") || gSettings.non_interactive, best_effort );
+    return solve_and_commit(best_effort);
   }
 
   // -----------------------------( info )------------------------------------

@@ -79,8 +79,26 @@ void patch_check();
 void list_updates( const zypp::ResObject::Kind &kind, const std::string &repo_alias, bool best_effort );
 void mark_updates( const zypp::ResObject::Kind &kind, const std::string &repo_alias, bool skip_interactive, bool best_effort );
 void usage(int argc, char **argv);
-int solve_and_commit (bool non_interactive = false, bool have_extra_deps = false );
-bool confirm_licenses(bool non_interactive = false);
+
+/**
+ * Runs solver on the pool, asks to choose solution of eventual problems
+ * (when run interactively) and commits the result.
+ * 
+ * \param have_extra_deps ?
+ * \return ZYPPER_EXIT_INF_REBOOT_NEEDED, ZYPPER_EXIT_INF_RESTART_NEEDED,
+ *         or ZYPPER_EXIT_OK or ZYPPER_EXIT_ERR_ZYPP on zypp erorr. 
+ *  
+ */
+int solve_and_commit (bool have_extra_deps = false);
+
+/**
+ * Loops through resolvables, checking if there is license to confirm. When
+ * run interactively, it displays a dialog, otherwise it answers automatically
+ * according to --auto-agree-with-licenses present or not present.
+ * 
+ * \returns true if all licenses have been confirmed, false otherwise.  
+ */
+bool confirm_licenses();
 
 // copied from yast2-pkg-bindings:PkgModuleFunctions::DoProvideNameKind
 struct ProvideProcess
