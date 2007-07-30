@@ -455,7 +455,7 @@ namespace zypp
       }
     } // for every url
     ERR << "No more urls..." << endl;
-    ZYPP_THROW(RepoException("Cant refresh metadata"));
+    ZYPP_THROW(RepoException(_("Valid metadata not found at specified URL(s)")));
   }
 
   ////////////////////////////////////////////////////////////////////////////

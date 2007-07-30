@@ -117,6 +117,8 @@ namespace zypp
     * \throws repo::RepoNoUrlException if no urls are available.
     * \throws repo::RepoNoAliasException if can't figure an alias
     * \throws repo::RepoUnknownTypeException if the metadata is unknown
+    * \throws repo::RepoException if the repository is invalid
+    *         (no valid metadata found at any of baseurls) 
     * \throws Exception on unknown error.
     */
    void refreshMetadata( const RepoInfo &info,
