@@ -1,9 +1,13 @@
 -------------------------------------------------------------------
-Mon Jul 30 14:13:26 CEST 2007 - schubi@suse.de
+Mon Jul 30 13:59:33 CEST 2007 - ma@suse.de
 
-- Not using pool for retrieving additional dependencies which has to be
-  regarded by the solver.
-- revision 6280 
+- Fixed wrong media number reported by script, message and patch.
+- Fixed script API to provide the scripts location on media (if not
+  inlined).
+- Introduced ScripProvider to make a script available on the local
+  disk.
+- revision 6288
+- version 3.13.0
 
 -------------------------------------------------------------------
 Fri Jul 27 18:08:42 CEST 2007 - jkupec@suse.cz
