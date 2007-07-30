@@ -1,0 +1,1286 @@
+# translation of zypper.po to
+# @TITLE@
+# Copyright (C) 2006, SUSE Linux GmbH, Nuremberg
+#
+# This file is distributed under the same license as @PACKAGE@ package. FIRST
+#
+# Aleksey Osipov <aliks-os@yandex.ru>, 2007.
+# Nikolay Derkach <nderkach@gmail.com>, 2007.
+msgid ""
+msgstr ""
+"Project-Id-Version: zypper\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2007-07-19 15:00+0200\n"
+"PO-Revision-Date: 2007-07-21 15:44+0400\n"
+"Last-Translator: Nikolay Derkach <nderkach@gmail.com>\n"
+"Language-Team:  <ru@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: KBabel 1.11.4\n"
+
+#: ../src/zypper-keyring-callbacks.h:40
+#, c-format
+msgid "Warning: Accepting an unsigned file %s."
+msgstr "Внимание: прием не подписанного файла %s."
+
+#: ../src/zypper-keyring-callbacks.h:46
+#, c-format
+msgid "%s is unsigned, continue?"
+msgstr "%s не подписан, продолжить?"
+
+#: ../src/zypper-keyring-callbacks.h:56
+#, c-format
+msgid "Import key %s to trusted keyring?"
+msgstr "Импортировать ключ %s в хранилище доверенных ключей?"
+
+#: ../src/zypper-keyring-callbacks.h:66
+#, c-format
+msgid "Warnging: Accepting file %s signed with an unknown key %s."
+msgstr "Внимание: прием файла %s, подписанного неизвестным ключом %s."
+
+#: ../src/zypper-keyring-callbacks.h:73
+#, c-format
+msgid "%s is signed with an unknown key %s. Continue?"
+msgstr "%s подписан неизвестным ключом %s. Продолжить?"
+
+#: ../src/zypper-keyring-callbacks.h:87
+#, c-format
+msgid "Automatically trusting key id %s, %s, fingerprint %s"
+msgstr "Автоматическое доверие ключу с идентификатором %s, %s, отпечатком %s"
+
+#: ../src/zypper-keyring-callbacks.h:93
+#, c-format
+msgid "Do you want to trust key id %s, %s, fingerprint %s"
+msgstr "Следует ли доверять ключу с идентификатором %s, %s, отпечатком %s"
+
+#: ../src/zypper-keyring-callbacks.h:110
+#, c-format
+msgid "Warning: Ignoring failed signature verification for %s with public key id %s, %s, fingerprint %s! Double-check this is not caused by some malicious changes in the file!"
+msgstr "Внимание: игнорирование неудачной проверки подлинности для %s с идентификатором открытого ключа %s, %s, отпечатком %s! Проверьте, не вызвано ли это какими-либо злоумышленными изменениями в файле!"
+
+#: ../src/zypper-keyring-callbacks.h:119
+#, c-format
+msgid "Signature verification failed for %s with public key id %s, %s, fingerprint %s. Warning: this might be caused by a malicious change in the file! Continuing is risky! Continue anyway?"
+msgstr "Проверка подлинности подписи для %s с идентификатором открытого ключа %s, %s, отпечатком %s. Внимание: это может быть вызвано какими-либо злоумышленными изменениями в файле! Продолжать рисковано! Все равно продолжить?"
+
+#: ../src/zypper-keyring-callbacks.h:133
+#, c-format
+msgid "No digest for file %s."
+msgstr "Нет дайджеста для файла %s"
+
+# continue button label
+#. there are resolvables to install/uninstall
+#: ../src/zypper-keyring-callbacks.h:133 ../src/zypper-keyring-callbacks.h:141
+#: ../src/zypper-keyring-callbacks.h:160 ../src/zypper-misc.cc:922
+msgid "Continue?"
+msgstr "Продолжить?"
+
+#: ../src/zypper-keyring-callbacks.h:140
+#, c-format
+msgid "Unknown digest %s for file %s."
+msgstr "Неизвестный дайджест %s для файла %s."
+
+#: ../src/zypper-keyring-callbacks.h:153
+#, c-format
+msgid "Ignoring failed digest verification for %s (expected %s, found %s)."
+msgstr "Игнорирование неудачной проверки подлинности дайджеста для %s (ожидалось %s, обнаружено %s)."
+
+#: ../src/zypper-keyring-callbacks.h:159
+#, c-format
+msgid "Digest verification failed for %s. Expected %s, found %s."
+msgstr "Проверка подлинности для %s завершилась неудачей. Ожидалось %s, найдено %s."
+
+#: ../src/zypper-misc.cc:33
+msgid "Initializing Target"
+msgstr "Инициализация цели"
+
+#. TranslatorExplanation e.g. "package 'pornview' not found"
+#: ../src/zypper-misc.cc:148
+#, c-format
+msgid "%s '%s' not found"
+msgstr "%s '%s' не найдено"
+
+#  text for a progress bar label
+#: ../src/zypper-misc.cc:157
+#, c-format
+msgid "skipping %s '%s' (already installed)"
+msgstr "Пропуск %s '%s' (уже установлен)"
+
+#: ../src/zypper-misc.cc:163
+#, c-format
+msgid "Failed to add '%s' to the list of packages to be installed."
+msgstr "Не удалось добавить '%s' в список пакетов для установки."
+
+#: ../src/zypper-misc.cc:183
+#, c-format
+msgid "Failed to add '%s' to the list of packages to be removed."
+msgstr "Не удалось добавить '%s' в список пакетов для удаления."
+
+#. TranslatorExplanation These are reasons for various failures.
+#: ../src/zypper-misc.cc:209 ../src/zypper-callbacks.h:37
+msgid "Not found"
+msgstr "Не найден"
+
+#: ../src/zypper-misc.cc:229 ../src/zypper-misc.cc:297
+msgid "Problem: "
+msgstr "Проблема:"
+
+#. TranslatorExplanation %d is the solution number
+#: ../src/zypper-misc.cc:242
+#, c-format
+msgid " Solution %d: "
+msgstr " Решение %d: "
+
+#. input prompt
+#: ../src/zypper-misc.cc:254
+msgid "number, (r)etry or (c)ancel> "
+msgstr "номер, (r)повтор или (c)отмена>"
+
+#. translators: corresponds to (r)etry
+#: ../src/zypper-misc.cc:262
+msgid "r"
+msgstr "r"
+
+#. translators: corresponds to (c)ancel
+#: ../src/zypper-misc.cc:265
+msgid "c"
+msgstr "c"
+
+#: ../src/zypper-misc.cc:271
+#, c-format
+msgid "Applying solution %s"
+msgstr "Применяемое решение %s"
+
+#: ../src/zypper-misc.cc:294
+#, c-format
+msgid "%s Problems:"
+msgstr "%s Проблемы:"
+
+#. nothing to do;
+#: ../src/zypper-misc.cc:323
+msgid "Summary:"
+msgstr "Резюме:"
+
+#: ../src/zypper-misc.cc:346
+msgid "<install>   "
+msgstr "<install>"
+
+#: ../src/zypper-misc.cc:348
+msgid "<uninstall> "
+msgstr "<uninstall>"
+
+#: ../src/zypper-misc.cc:353
+msgid "Nothing to do."
+msgstr "Нечего выполнять."
+
+#: ../src/zypper-misc.cc:422
+#, c-format
+msgid "Repository '%s' not cached. Caching..."
+msgstr "Репозитарий '%s' не кэширован. Кэширование..."
+
+#. TranslatorExplanation speaking of a repository
+#: ../src/zypper-misc.cc:427
+#, c-format
+msgid "Reading repository %s..."
+msgstr "Чтение репозитария %s..."
+
+#: ../src/zypper-misc.cc:431
+#, c-format
+msgid "(%d resolvables found)"
+msgstr "(найдено %d объектов разрешения зависимостей)"
+
+#: ../src/zypper-misc.cc:439
+#, c-format
+msgid "Problem loading data from '%s'"
+msgstr "Проблема загрузки данных из '%s'"
+
+#: ../src/zypper-misc.cc:442
+#, c-format
+msgid "Resolvables from '%s' not loaded because of error."
+msgstr "Объекты разрешения зависимостей из '%s' не были загружены из-за ошибки."
+
+#: ../src/zypper-misc.cc:450
+msgid "Reading RPM database..."
+msgstr "Чтение базы данных RPM…"
+
+#: ../src/zypper-misc.cc:455
+#, c-format
+msgid "(%s resolvables)"
+msgstr "(объекты разрешения зависимостей %s)"
+
+#: ../src/zypper-misc.cc:464
+msgid "Establishing status of aggregates"
+msgstr "Установка состояния агрегатов"
+
+#: ../src/zypper-misc.cc:472
+msgid "Resolving dependencies..."
+msgstr "Разрешение зависимостей..."
+
+#: ../src/zypper-misc.cc:497
+#, c-format
+msgid "%d patches needed (%d security patches)"
+msgstr "необходимо %d исправлений (%d исправлений безопасности)"
+
+#: ../src/zypper-misc.cc:506 ../src/zypper-info.cc:148
+msgid "Installed"
+msgstr "Установлено"
+
+#: ../src/zypper-misc.cc:506 ../src/zypper-info.cc:148
+msgid "Uninstalled"
+msgstr "Не установлен"
+
+#: ../src/zypper-misc.cc:508 ../src/zypper-info.cc:150
+msgid "No Longer Applicable"
+msgstr "Более неприменимо"
+
+#: ../src/zypper-misc.cc:508 ../src/zypper-info.cc:150
+msgid "Not Applicable"
+msgstr "Неприменимо"
+
+#: ../src/zypper-misc.cc:510 ../src/zypper-info.cc:152
+msgid "Applied"
+msgstr "Применимо"
+
+#: ../src/zypper-misc.cc:510 ../src/zypper-info.cc:152
+msgid "Not Needed"
+msgstr "Не нужен"
+
+#: ../src/zypper-misc.cc:512 ../src/zypper-info.cc:154
+msgid "Broken"
+msgstr "Сломан"
+
+#: ../src/zypper-misc.cc:512 ../src/zypper-info.cc:154
+msgid "Needed"
+msgstr "Необходимо"
+
+#. if ResStatus interface changes
+#: ../src/zypper-misc.cc:514
+msgid "error"
+msgstr "ошибка"
+
+#: ../src/zypper-misc.cc:543 ../src/zypper-misc.cc:627
+#: ../src/zypper-misc.cc:767 ../src/zypper-info.cc:92
+msgid "Catalog: "
+msgstr "Каталог:"
+
+#: ../src/zypper-misc.cc:543 ../src/zypper-misc.cc:627
+#: ../src/zypper-misc.cc:767 ../src/zypper-info.cc:92
+msgid "Repository: "
+msgstr "Репозитарий: "
+
+#: ../src/zypper-misc.cc:544 ../src/zypper-misc.cc:628
+#: ../src/zypper-misc.cc:772 ../src/zypper-sources.cc:81
+#: ../src/zypper-search.h:247
+msgid "Name"
+msgstr "Имя"
+
+#: ../src/zypper-misc.cc:544 ../src/zypper-misc.cc:628
+#: ../src/zypper-misc.cc:772 ../src/zypper-search.h:247
+msgid "Version"
+msgstr "Версия"
+
+#  frame label, around checkbuttons
+#: ../src/zypper-misc.cc:544 ../src/zypper-misc.cc:628
+msgid "Category"
+msgstr "Категория"
+
+#  table header: module status
+#: ../src/zypper-misc.cc:544 ../src/zypper-misc.cc:628
+#: ../src/zypper-sources.cc:79
+msgid "Status"
+msgstr "Состояние"
+
+#: ../src/zypper-misc.cc:570
+msgid "No needed patches found."
+msgstr "Не найдено необходимых исправлений."
+
+#: ../src/zypper-misc.cc:662
+msgid ""
+"WARNING: These are only the updates affecting the updater itself.\n"
+"There are others available too.\n"
+msgstr ""
+"ВНИМАНИЕ: эти обновления относятся только к самому средству обновления.\n"
+"Имеются и другие.\n"
+
+#: ../src/zypper-misc.cc:672 ../src/zypper-misc.cc:795
+msgid "No updates found."
+msgstr "Не найдено обновлений."
+
+#. TranslatorExplanation S stands for Status
+#. TranslatorExplanation S as Status
+#: ../src/zypper-misc.cc:766 ../src/zypper-search.h:234
+msgid "S"
+msgstr "S"
+
+#. TranslatorExplanation This is Bundle in as used in rug.
+#: ../src/zypper-misc.cc:769 ../src/zypper-search.h:243
+msgid "Bundle"
+msgstr "Сборка"
+
+#: ../src/zypper-misc.cc:772 ../src/zypper-search.h:247
+msgid "Arch"
+msgstr "Арх."
+
+#. Skipping a patch because it is interactive and
+#. --skip-interactive is requested. %s is a name of a
+#. patch
+#: ../src/zypper-misc.cc:866
+#, c-format
+msgid "WARNING: %s is interactive, skipped."
+msgstr "ВНИМАНИЕ: %s интерактивен, пропущен."
+
+#: ../src/zypper-misc.cc:926
+msgid "committing"
+msgstr "фиксирование"
+
+#: ../src/zypper-misc.cc:944
+msgid ""
+"Package integrity check failed. This may be a problem with repository or media. Try one of the following:\n"
+"\n"
+"- just retry previous command\n"
+"- refresh repositories using 'zypper refresh'\n"
+"- use another installation media (if e.g. damaged)\n"
+"- use another repository"
+msgstr ""
+"Не удалось проверить целостность пакета. Возможна проблема с репозитарием или носителями. Попробуйте одно из следующих действий: \n"
+"\n"
+" - просто повторите предыдущую команду\n"
+" - обновите репозитарии при помощи 'zypper refresh'\n"
+" - используйте для установки другие носители (например, из-за повреждения)\n"
+" - используйте другой репозитарий"
+
+#: ../src/zypper-misc.cc:962
+msgid "WARNING: One of installed patches requires reboot of your machine. Please, do it as soon as possible."
+msgstr "ВНИМАНИЕ: для одного из установленных исправлений требуется перезагрузка компьютера. Выполните ее как можно быстрее."
+
+#: ../src/zypper-misc.cc:965
+msgid "WARNING: One of installed patches affects the package manager itself, thus it requires restart before executing next operations."
+msgstr "ВНИМАНИЕ: одно из установленных исправлений затрагивает сам менеджер пакетов, поэтому для продолжения выполнения операций требуется перезагрузка."
+
+#. TranslatorExplanation The first %s is name of the resolvable, the second is its kind (e.g. 'zypper package')
+#: ../src/zypper-misc.cc:989
+#, c-format
+msgid "Automatically agreeing with %s %s license."
+msgstr "Автоматическое соглашение с лицензией %s %s."
+
+#: ../src/zypper-misc.cc:1002 ../src/zypper-misc.cc:1027
+msgid "license"
+msgstr "лицензия"
+
+#: ../src/zypper-misc.cc:1005
+msgid "In order to install this package, you must agree to terms of the above licencse. Continue?"
+msgstr "Чтобы установить этот пакет, вы должны согласиться с условиями вышеприведенной лицензии. Продолжить?"
+
+#: ../src/zypper-misc.cc:1015
+msgid "Aborting installation due to the need of license(s) confirmation."
+msgstr "Установка прервана в связи с необходимостью подтверждения лицензий."
+
+#: ../src/zypper-misc.cc:1017
+msgid "Please, restart the operation in interactive mode and confirm agreement with required license(s)."
+msgstr "Выполните операцию повторно в интерактивном режиме и подтвердите согласие с требуемыми лицензиями."
+
+#: ../src/zypper-misc.cc:1024
+msgid "Aborting installation due to user disagreement with "
+msgstr "Установка прервана из-за несогласия пользователя с "
+
+#: ../src/zypper-sources.cc:48
+#, c-format
+msgid "Checking whether to refresh metadata for %s."
+msgstr "Проверка, обновлять ли метаданные для %s."
+
+#: ../src/zypper-sources.cc:80
+msgid "Enabled"
+msgstr "включено"
+
+#: ../src/zypper-sources.cc:80
+msgid "Refresh"
+msgstr "Обновление"
+
+#: ../src/zypper-sources.cc:81 ../src/zypper-search.h:245
+msgid "Type"
+msgstr "Тип"
+
+#: ../src/zypper-sources.cc:97
+msgid "Active"
+msgstr "Активный"
+
+#: ../src/zypper-sources.cc:97
+msgid "Disabled"
+msgstr "Отключен"
+
+#: ../src/zypper-sources.cc:103 ../src/zypper-sources.cc:104
+#: ../src/zypper-info.cc:160 ../src/zypper-info.cc:166
+#: ../src/zypper-info.cc:168
+msgid "Yes"
+msgstr "Да"
+
+#: ../src/zypper-sources.cc:103 ../src/zypper-sources.cc:104
+#: ../src/zypper-info.cc:160 ../src/zypper-info.cc:166
+#: ../src/zypper-info.cc:168
+msgid "No"
+msgstr "Нет"
+
+#: ../src/zypper-sources.cc:123
+msgid "No repositories defined. Use 'zypper addrepo' command to add one or more repositories."
+msgstr "Не определено никаких репозитариев. Используйте команду 'zypper addrepo' для добавления одного или более репозитариев."
+
+#: ../src/zypper-sources.cc:144
+msgid "Error reading repositories:"
+msgstr "Ошибка чтения репозитариев:"
+
+#: ../src/zypper-sources.cc:169
+#, c-format
+msgid "Skipping disabled repository '%s'"
+msgstr "Пропускается отключенный репозитарий '%s'"
+
+#: ../src/zypper-sources.cc:177
+msgid "Refreshing "
+msgstr "Обновление"
+
+#. ! \todo progress reporting
+#: ../src/zypper-sources.cc:180
+msgid "Creating repository cache..."
+msgstr "Создание кэша репозитария..."
+
+#: ../src/zypper-sources.cc:183
+msgid "DONE"
+msgstr "ГОТОВО"
+
+#: ../src/zypper-sources.cc:187
+#, c-format
+msgid "Error reading repository '%s':"
+msgstr "Ошибка чтения репозитария '%s':"
+
+#: ../src/zypper-sources.cc:189
+#, c-format
+msgid "Skipping repository '%s' because of the above error."
+msgstr "Пропуск репозитария '%s' из-за указанной выше ошибки."
+
+#: ../src/zypper-sources.cc:201
+msgid "Could not refresh the repositories because of errors."
+msgstr "Невозможно обновить репозитарии из-за ошибок."
+
+#: ../src/zypper-sources.cc:203
+msgid "Some of the repositories have not been refreshed because of error."
+msgstr "Некоторые репозитарии не были обновлены из-за ошибки."
+
+#: ../src/zypper-sources.cc:205
+msgid "All repositories have been refreshed."
+msgstr "Все репозитарии обновлены."
+
+#: ../src/zypper-sources.cc:235
+#, c-format
+msgid "Adding repository '%s'."
+msgstr "Добавляется репозитарий '%s'."
+
+#: ../src/zypper-sources.cc:244
+msgid "Problem transfering repository data from specified URL."
+msgstr "Проблема передачи данных репозитария с указанного URL-адреса."
+
+#: ../src/zypper-sources.cc:250
+msgid "Problem parsing repository data."
+msgstr "Проблема анализа данных репозитария."
+
+#: ../src/zypper-sources.cc:267
+#, c-format
+msgid "Repository '%s' successfully added:"
+msgstr "Репозитарий '%s' успешно добавлен:"
+
+#: ../src/zypper-sources.cc:297
+msgid "Zypper happy! Detected repository type matches the one specified in the --type option."
+msgstr "Обнаруженный тип репозитария соответствует указаннуму в переметре --type."
+
+#: ../src/zypper-sources.cc:303
+#, c-format
+msgid "Warning! Overriding detected repository type '%s' with manually specified '%s'."
+msgstr "Внимание! Перекрытие обнаруженного типа репозитария '%s' вручную введенным '%s'."
+
+#: ../src/zypper-sources.cc:315
+#, c-format
+msgid "Unknown repository type '%s'. Using detected type '%s' instead."
+msgstr "Неизвестный тип репозитария '%s'. Вместо него будет использован обнаруженный тип '%s'."
+
+#: ../src/zypper-sources.cc:415
+#, c-format
+msgid "Repository %s has been removed."
+msgstr "Репозитарий %s удален."
+
+#: ../src/zypper-sources.cc:467
+#, c-format
+msgid "Repository %s renamed to %s"
+msgstr "Репозитарий %s переименован на %s"
+
+#: ../src/zypper-sources.cc:472 ../src/zypper-sources.cc:549
+#, c-format
+msgid "Repository %s not found."
+msgstr "Репозитарий %s не найден."
+
+#: ../src/zypper-sources.cc:477 ../src/zypper-sources.cc:554
+msgid "Error while modifying the repository:"
+msgstr "Ошибка при изменении репозитария:"
+
+#: ../src/zypper-sources.cc:479 ../src/zypper-sources.cc:556
+#, c-format
+msgid "Leaving repository %s unchanged."
+msgstr "Репозитарий %s оставлен без изменений."
+
+#: ../src/zypper-sources.cc:493
+#, c-format
+msgid "%s used together with %s, which contradict each other. This property will be left unchanged."
+msgstr "%s используется вместе с %s, которые противоречат друг другу. Это свойство останется без изменения."
+
+#: ../src/zypper-sources.cc:544
+#, c-format
+msgid "Repository %s has been sucessfully modified."
+msgstr "Репозитарий %s успешно изменен."
+
+#. list name, exact match
+#: ../src/zypper-sources.cc:637
+msgid ""
+"ZENworks Management Daemon is running.\n"
+"WARNING: this command will not synchronize changes.\n"
+"Use rug or yast2 for that.\n"
+msgstr ""
+"ZENworks Management демон запущен.\n"
+"ВНИМАНИЕ: эта команда не будет синхронизировать изменения.\n"
+"Используйте rug или yast2 для этого.\n"
+
+#: ../src/zypp-checkpatches.cc:125
+msgid "The updater could not access the package manager engine. This usually happens when you have another application (like YaST) using it at the same time. Please close other applications and check again for updates."
+msgstr "Средству обновлений не удалось получить доступ к машине менеджера пакетов. Обычно так происходит, если в это же время ее использует другое приложение (например, YaST). Закройте другие приложения и еще раз проверьте наличие обновлений."
+
+#: ../src/zypp-checkpatches.cc:185
+#, c-format
+msgid ""
+"Couldn't restore repository.\n"
+"Detail: %s"
+msgstr ""
+"Не удается восстановить репозитарий.\n"
+"Подробности: %s"
+
+#: ../src/zypp-checkpatches.cc:235
+msgid "There are no update repositories defined. Please add one or more update repositories in order to be notified of updates."
+msgstr "Репозитарии обновления не определены. Чтобы получать уведомления об обновлениях, добавьте один или несколько репозитариев обновления."
+
+#. TranslatorExplanation don't translate letters in parentheses!! (yet)
+#: ../src/zypper-callbacks.cc:53
+msgid "(A)bort, (R)etry, (I)gnore?"
+msgstr "Прервать (A), Повторить (R), Игнорировать (I)?"
+
+#: ../src/zypper-callbacks.cc:87
+msgid "Invalid answer. Choose letter a, r, or i."
+msgstr "Недопустимый ответ. Выберите букву a, r или i."
+
+#: ../src/zypper-getopt.cc:56
+msgid "Unknown option "
+msgstr "Неизвестный параметр"
+
+#: ../src/zypper-getopt.cc:59
+msgid "Missing argument for "
+msgstr "Отсутствует аргумент для"
+
+#. TranslatorExplanation E.g. "package zypper not found."
+#: ../src/zypper-info.cc:52
+#, c-format
+msgid "%s %s not found."
+msgstr "%s %s не найден."
+
+#. print info
+#. TranslatorExplanation E.g. "Information for package zypper:"
+#: ../src/zypper-info.cc:58
+#, c-format
+msgid "Information for %s %s:"
+msgstr "Сведения для %s %s:"
+
+#: ../src/zypper-info.cc:94 ../src/zypper-info.cc:141
+msgid "Name: "
+msgstr "Название:"
+
+#: ../src/zypper-info.cc:95 ../src/zypper-info.cc:142
+msgid "Version: "
+msgstr "Версия:"
+
+#: ../src/zypper-info.cc:96 ../src/zypper-info.cc:143
+msgid "Arch: "
+msgstr "Арх.:"
+
+#: ../src/zypper-info.cc:97
+msgid "Installed: "
+msgstr "Установлен:"
+
+#  table header: module status
+#: ../src/zypper-info.cc:99 ../src/zypper-info.cc:145
+msgid "Status: "
+msgstr "Состояние:"
+
+#: ../src/zypper-info.cc:102
+msgid "up-to-date"
+msgstr "актуальный"
+
+#: ../src/zypper-info.cc:104
+msgid "out-of-date (version "
+msgstr "устаревший (версия"
+
+#: ../src/zypper-info.cc:105
+msgid " installed) "
+msgstr "установлена)"
+
+#: ../src/zypper-info.cc:108
+msgid "not installed"
+msgstr "не установлена"
+
+#: ../src/zypper-info.cc:110
+msgid "Installed Size: "
+msgstr "Размер установки:"
+
+#: ../src/zypper-info.cc:111 ../src/zypper-info.cc:169
+msgid "Summary: "
+msgstr "Резюме: "
+
+#: ../src/zypper-info.cc:112 ../src/zypper-info.cc:170
+msgid "Description: "
+msgstr "Описание: "
+
+#  text entry
+#: ../src/zypper-info.cc:158
+msgid "Category: "
+msgstr "Категория:"
+
+#: ../src/zypper-info.cc:159
+msgid "Created On: "
+msgstr "Создан:"
+
+#  translators: table entry text for SSL being required for each request
+#: ../src/zypper-info.cc:160
+msgid "Reboot Required: "
+msgstr "Требуется перезагрузка: "
+
+#: ../src/zypper-info.cc:163
+msgid "Package Manager Restart Required"
+msgstr "Требуется перезапуск менеджера пакетов"
+
+#: ../src/zypper-info.cc:165
+msgid "Restart Required: "
+msgstr "Требуется перезапуск: "
+
+#: ../src/zypper-info.cc:168
+msgid "Interactive: "
+msgstr "Интеравктивно: "
+
+#: ../src/zypper-info.cc:172
+msgid "Provides:"
+msgstr "Предоставляет:"
+
+#: ../src/zypper-info.cc:178
+msgid "Requires:"
+msgstr "Требует:"
+
+#: ../src/zypper-search.cc:45
+msgid "No repositories configured. Please, add at least one repository using 'zypper addrepo' command before using search."
+msgstr "Не настроено никаких репозитариев. Добавьте по крайней мере один репозитарий при помощи команды 'zypper addrepo' перед использованием поиска."
+
+#: ../src/zypper-search.cc:108
+msgid "Pre-caching installed resolvables matching given search criteria... "
+msgstr "Предварительное кэширование установленных объектов разрешения зависимостей, отвечающих заданным критериям поиска…"
+
+#: ../src/zypper-search.cc:117
+msgid " out of ("
+msgstr "из ("
+
+#: ../src/zypper-search.cc:118
+msgid "cached."
+msgstr "кэшировано."
+
+#: ../src/zypper-search.cc:217
+msgid " is not a valid regular expression: \""
+msgstr "- неверное регулярное выражение: \""
+
+#: ../src/zypper-search.cc:219
+msgid "This is a bug, please file a bug report against zypper."
+msgstr "Это ошибка, сообщите о ней в отчете, касающемся zypper."
+
+#: ../src/zypper.cc:84 ../src/zypper.cc:763
+msgid "Given URL is invalid."
+msgstr "Данный URL-адрес не верен."
+
+#: ../src/zypper.cc:91
+msgid ""
+"  Commands:\n"
+"\thelp\t\t\tHelp\n"
+"\tshell, sh\t\tAccept multiple commands at once\n"
+"\tinstall, in\t\tInstall packages or resolvables\n"
+"\tremove, rm\t\tRemove packages or resolvables\n"
+"\tsearch, se\t\tSearch for packages matching a pattern\n"
+"\trepos, lr\t\tList all defined repositories.\n"
+"\taddrepo, ar\t\tAdd a new repository\n"
+"\tremoverepo, rr\t\tRemove specified repository\n"
+"\trenamerepo, nr\t\tRename specified repository\n"
+"\tmodifyrepo, mr\t\tModify specified repository\n"
+"\trefresh, ref\t\tRefresh all repositories\n"
+"\tpatch-check, pchk\tCheck for patches\n"
+"\tpatches, pch\t\tList patches\n"
+"\tlist-updates, lu\tList updates\n"
+"\txml-updates, xu\t\tList updates and patches in xml format\n"
+"\tupdate, up\t\tUpdate installed resolvables with newer versions.\n"
+"\tinfo, if\t\tShow full information for packages\n"
+"\tpatch-info\t\tShow full information for patches\n"
+msgstr ""
+"  Команды:\n"
+"\thelp\t\t\tСправка\n"
+"\tshell, sh\t\tПрием нескольких команд сразу\n"
+"\tinstall, in\t\tУстановка пакетов или объектов разрешения зависимостей\n"
+"\tremove, rm\t\tУдаление пакетов или объектов разрешения зависимостей\n"
+"\tsearch, se\t\tПоиск пакетов, соответствующих шаблону\n"
+"\trepos, lr\t\tВывод списка всех определенных репозитариев\n"
+"\taddrepo, ar\t\tДобавление нового репозитария\n"
+"\tremoverepo, rr\t\tУдаление указанного репозитария\n"
+"\trenamerepo, nr\t\tПереименование указанного репозитария\n"
+"\tmodifyrepo, mr\t\tИзменение указанного репозитария\n"
+"\trefresh, ref\t\tОбновление всех репозитариев\n"
+"\tpatch-check, pchk\tПроверка наличия исправлений\n"
+"\tpatches, pch\t\tВывод списка исправлений\n"
+"\tlist-updates, lu\tВывод списка обновлений\n"
+"\txml-updates, xu\t\tВывод списка обновлений в формате xml\n"
+"\tupdate, up\t\tОбновление всех объектов разрешения зависимостей новыми версиями.\n"
+"\tinfo, if\t\tОтображение полной информации о пакетах\n"
+"\tpatch-info\t\tОтображение полной информации об исправлениях\n"
+
+#: ../src/zypper.cc:142
+msgid ""
+"  Options:\n"
+"\t--help, -h\t\tHelp.\n"
+"\t--version, -V\t\tOutput the version number.\n"
+"\t--quiet, -q\t\tSuppress normal output, print only error messages.\n"
+"\t--verbose, -v\t\tIncrease verbosity.\n"
+"\t--terse, -t\t\tTerse output for machine consumption.\n"
+"\t--table-style, -s\tTable style (integer).\n"
+"\t--rug-compatible, -r\tTurn on rug compatibility.\n"
+"\t--non-interactive\tDon't ask anything, use default answers automatically.\n"
+"\t--no-gpg-checks\t\tIgnore GPG check failures and continue.\n"
+"\t--root, -R <dir>\tOperate on a different root directory.\n"
+msgstr ""
+"  Параметры:\n"
+"\t--help, -h\t\tСправка\n"
+"\t--version, -V\t\tВывод номера версии\n"
+"\t--quiet, -q\t\tСкрытие обычного вывода, печатаются только сообщений об ошибках.\n"
+"\t--verbose, -v\t\tБолее подробные сообщения\n"
+"\t--terse, -t\t\tСжатый вывод для использования компьютером\n"
+"\t--table-style, -s\tСтиль таблицы (целое число)\n"
+"\t--rug-compatible, -r\tВключение режима совместимости с rug\n"
+"\t--non-interactive\tНе задавать вопросы, использовать автоматически ответы по умолчанию\n"
+"\t--no-gpg-checks\t\tИгнорировать неудачные проверки GPG и продолжать.\n"
+"\t--root, -R <dir>\tИспользовать другой корневой каталог\n"
+
+#: ../src/zypper.cc:162
+#, c-format
+msgid "Verbosity: %d"
+msgstr "Уровень детализации: %d"
+
+#: ../src/zypper.cc:168
+msgid "Entering non-interactive mode."
+msgstr "Переход в режим non-interactive."
+
+#: ../src/zypper.cc:174
+msgid "Entering no-gpg-checks mode."
+msgstr "Переход в режим no-gpg-checks."
+
+#: ../src/zypper.cc:184
+msgid "Invalid table style "
+msgstr "Неверный стиль таблицы"
+
+#: ../src/zypper.cc:231
+msgid "Try -h for help."
+msgstr "Для вызова справки укажите -h."
+
+#: ../src/zypper.cc:248
+msgid ""
+"  Repository options:\n"
+"\t--disable-repositories, -D\t\tDo not read data from defined repositories.\n"
+"\t--repo <URI|.repo>\t\tRead additional repository\n"
+msgstr ""
+"  Параметры репозитария:\n"
+"\t--disable-repositories, -D\t\tНе читать данные с определенных репозитариев.\n"
+"\t--repo <URI|.repo>\t\tЧтение дополнительного репозитария\n"
+
+#. ! \todo preserve for rug comp.  "\t--disable-system-sources, -D\t\tDo not read the system sources\n"
+#. ! \todo preserve for rug comp.  "\t--source, -S\t\tRead additional source\n"
+#: ../src/zypper.cc:255
+msgid ""
+"  Target options:\n"
+"\t--disable-system-resolvables, -T\t\tDo not read system installed resolvables\n"
+msgstr ""
+"  Параметры цели:\n"
+"\t--disable-system-resolvables, -T\t\tНе читать установленные в системе объекты разрешения зависимостей\n"
+
+#: ../src/zypper.cc:274
+msgid ""
+"install [options] <name> ...\n"
+"\n"
+"'install' - Install resolvabe(s) with specified name(s).\n"
+"\n"
+"  Command options:\n"
+"\t--catalog,-c\t\t\tOnly from this catalog (under development)\n"
+"\t--type,-t <resolvable_type>\tType of resolvable (default: package)\n"
+"\t--no-confirm,-y\t\t\tDo not require user confirmation to proceed with installation\n"
+"\t--auto-agree-with-licenses,-l\tAutomatically say 'yes' to third party license confirmation prompt.\n"
+"\t\t\t\t\tSee man zypper for more details.\n"
+msgstr ""
+"install [параметры] <имя> ...\n"
+"\n"
+"'install' - установка объектов разрешение зависимостей с указанными именами.\n"
+"\n"
+"  Параметры команды:\n"
+"\t--catalog,-c\t\t\tТолько из этого каталога (в разработке)\n"
+"\t--type,-t <тип_объекта>\tТип объекта разрешения зависимостей (по умолчанию: пакет)\n"
+"\t--no-confirm,-y\t\t\tНе требовать подтверждения пользователем для продолжения установки\n"
+"\t--auto-agree-with-licenses,-l\tАвтоматически отвечать 'yes' на запросы подтверждения лицензий третьих сторон.\n"
+"\t\t\t\t\tПодробную информацию смотрите в man zypper.\n"
+
+#: ../src/zypper.cc:295
+msgid ""
+"remove [options] <name> ...\n"
+"\n"
+"'remove' - Remove resolvabe(s) with specified name(s).\n"
+"\n"
+"  Command options:\n"
+"\t--type,-t <resolvable_type>\tType of resolvable (default: package)\n"
+"\t--no-confirm,-y\t\t\tDo not require user confirmation\n"
+msgstr ""
+"remove [параметры] <имя> ...\n"
+"\n"
+"'remove' - Удаление объектов разрешения зависимостей с указанными именами.\n"
+"\n"
+"  Параметры команды:\n"
+"\t--type,-t <тип_объекта>\tТип объекта разрешения зависимостей (по умолчанию: пакет)\n"
+"\t--no-confirm,-y\t\t\tНе требовать подтверждения пользователем\n"
+
+#: ../src/zypper.cc:315
+msgid ""
+"addrepo (ar) [options] <URI> <alias>\n"
+"\n"
+"Add repository specified by URI to the system and assing specified alias to it.\n"
+"  Command options:\n"
+"\t--repo,-r <FILE.repo>\tRead the URL and alias from a file\n"
+"\t\t\t\t(even remote)\n"
+"\t--type,-t <TYPE>\tType of repository (YaST, YUM, or Plaindir)\n"
+"\t--disabled,-d\t\tAdd the repository as disabled\n"
+"\t--no-refresh,-n\t\tAdd the repository with auto-refresh disabled\n"
+msgstr ""
+"addrepo (ar) [параметры] URI [псевдоним]\n"
+"\n"
+"Добавление в систему репозитария, указанного в URl, и назначения ему псевдонима.\n"
+"   Параметры команды:\n"
+" \t--repo,-r <FILE.repo>\tСчитывание URL-адреса и псевдонима из файла\n"
+" \t\t\t\t(даже удаленного)\n"
+" \t--type,-t <TYPE>\tТип репозитария (YaST, YUM или Plaindir)\n"
+" \t--disabled,-d\t\tДобавление репозитария отключенным\n"
+" \t--no-refresh,-n\t\tДобавление репозитария с отключенным автоматическим обновлением\n"
+
+#: ../src/zypper.cc:334
+msgid ""
+"repos (lr)\n"
+"\n"
+"List all defined repositories.\n"
+"This command has no additional options.\n"
+msgstr ""
+"repos (lr)\n"
+"\n"
+"Вывод списка всех определенных репозитариев.\n"
+"Эта команда не имеет дополнительных параметров.\n"
+
+#: ../src/zypper.cc:350
+msgid ""
+"removerepo (rr) [options] <alias|URL>\n"
+"\n"
+"Remove repository specified by alias or URL.\n"
+"  Command options:\n"
+"\t--loose-auth\tIgnore user authentication data in the URL\n"
+"\t--loose-query\tIgnore query string in the URL\n"
+msgstr ""
+"removerepo (rr) [параметры] <псевдоним|URL>\n"
+"\n"
+"Удаление репозитария, указанного при помощи псевдонима или URL.\n"
+"  Параметры команды:\n"
+"\t--loose-auth\tИгнорировать данные аутентификации пользователя в URL-адресе\n"
+"\t--loose-query\tИгнорировать строку запроса в URL-адресе\n"
+
+#: ../src/zypper.cc:366
+msgid ""
+"renamerepo [options] <alias> <new-alias>\n"
+"\n"
+"Assign new alias to the repository specified by alias.\n"
+"This command has no additional options.\n"
+msgstr ""
+"renamerepo [параметры] <псевдоним> <новый-псевдоним>\n"
+"\n"
+"Присвоение нового псевдонима службе, указанной псевдонимом.\n"
+"Эта команда не имеет дополнительных параметров.\n"
+
+#: ../src/zypper.cc:384
+msgid ""
+"modifyrepo (mr) <options> <alias>\n"
+"\n"
+"Modify properties of the repository specified by alias.\n"
+"\t--disable,-d\t\tDisable the repository (but don't remove it)\n"
+"\t--enable,-e\t\tEnable a disabled repository\n"
+"\t--enable-autorefresh,-a\tEnable auto-refresh of the repository\n"
+"\t--disable-autorefresh\tDisable auto-refresh of the repository\n"
+msgstr ""
+"modifyrepo (mr) <параметры> <псевдоним>\n"
+"\n"
+"Изменение свойств репозитария, указанном псевдонимом.\n"
+"\t--disable,-d\t\tОтключить репозитарий (но не удалять его)\n"
+"\t--enable,-e\t\tВключить отключенный репозитарий\n"
+"\t--enable-autorefresh,-a\tВключить автоматическое обновление репозитария\n"
+"\t--disable-autorefresh\tОтключить автоматическое обновление репозитария\n"
+
+#: ../src/zypper.cc:401
+msgid ""
+"refresh\n"
+"\n"
+"Refresh all installation sources found in the system.\n"
+"\n"
+"This command has no additional options.\n"
+msgstr ""
+"refresh\n"
+"\n"
+"Обновление всех найденных в системе репозитариев.\n"
+"\n"
+"Эта команда не имеет дополнительных параметров.\n"
+
+#: ../src/zypper.cc:416
+msgid ""
+"list-updates [options]\n"
+"\n"
+"List all available updates\n"
+"\n"
+"  Command options:\n"
+"\t--type,-t <resolvable_type>\tType of resolvable (default: patch)\n"
+msgstr ""
+"list-updates [параметры]\n"
+"\n"
+"Вывод списка всех доступных обновлений\n"
+"\n"
+"  Параметры команды:\n"
+"\t--type,-t <тип_объекта>\tТип объекта разрешения зависимостей (по умолчанию: исправление)\n"
+
+#: ../src/zypper.cc:435
+msgid ""
+"'update' - Update all installed resolvables with newer versions, where applicable.\n"
+"\n"
+"  Command options:\n"
+"\n"
+"\t--type,-t <resolvable_type>\tType of resolvable (default: patch)\n"
+"\t--no-confirm,-y\t\t\tDo not require user confirmation\n"
+"\t--skip-interactive\t\tSkip interactive updates\n"
+"\t--auto-agree-with-licenses,-l\tAutomatically say 'yes' to third party license confirmation prompt.\n"
+"\t\t\t\t\tSee man zypper for more details.\n"
+msgstr ""
+"'update' - Обновить все установленные объекты разрешения зависимостей новыми версиями, если возможно.\n"
+"\n"
+"  Параметры команды:\n"
+"\n"
+"\t--type,-t <тип_объекта>\tТип объекта разрешения зависимостей (по умолчанию: исправление)\n"
+"\t--no-confirm,-y\t\t\tНе требовать подтверждение пользователем\n"
+"\t--skip-interactive\t\tПропустить интерактивные обновления\n"
+"\t--auto-agree-with-licenses,-l\tАвтоматически отвечать 'yes' на запросы подтверждения лицензий третьих сторон.\n"
+"\t\t\t\t\tПодробную информацию смотрите в man zypper.\n"
+
+#: ../src/zypper.cc:465
+msgid ""
+"search [options] [querystring...]\n"
+"\n"
+"'search' - Search for packages matching given search strings\n"
+"\n"
+"  Command options:\n"
+"    --match-all            Search for a match to all search strings (default)\n"
+"    --match-any            Search for a match to any of the search strings\n"
+"    --match-substrings     Matches for search strings may be partial words (default)\n"
+"    --match-words          Matches for search strings may only be whole words\n"
+"    --match-exact          Searches for an exact package name\n"
+"-d, --search-descriptions  Search also in package summaries and descriptions.\n"
+"-c, --case-sensitive       Perform case-sensitive search.\n"
+"-i, --installed-only       Show only packages that are already installed.\n"
+"-u, --uninstalled-only     Show only packages that are not currently installed.\n"
+"-t, --type                 Search only for packages of the specified type.\n"
+"    --sort-by-name         Sort packages by name (default).\n"
+"    --sort-by-catalog      Sort packages by catalog (source).\n"
+"\n"
+"* and ? wildcards can also be used within search strings.\n"
+msgstr ""
+"search [параметры] [строка запроса...]\n"
+"\n"
+"'search' - поиск пакетов, соответствующих заданным строкам поиска\n"
+"\n"
+"  Параметры команды:\n"
+"    --match-all            Искать соответствие всем строкам поиска (по умолчанию)\n"
+"    --match-any            Искать соответствие любой строке поиска\n"
+"    --match-substrings     Соответствия строкам поиска могут быть частями слов (по умолчанию)\n"
+"    --match-words          Соответствия строкам поиска могут быть только целыми словами\n"
+"    --match-exact          Поиск точного имени пакета\n"
+"-d, --search-descriptions  Искать также в резюме и описаниях пакетов.\n"
+"-c, --case-sensitive       Выполнить поиск с учетом регистра.\n"
+"-i, --installed-only       Отобразить только уже установленные пакеты.\n"
+"-u, --uninstalled-only     Отобразить только пакеты, на данный момент не установленные.\n"
+"-t, --type                 Поиск пакетов только указанного типа.\n"
+"    --sort-by-name         Сортировка пакетов по имени (по умолчанию).\n"
+"    --sort-by-catalog      Сортировка пакетов по каталогу (источнику).\n"
+" \n"
+"* и ? -- универсальные символы, которые можно использовать и в строках поиска.\n"
+
+#: ../src/zypper.cc:493
+msgid ""
+"patch-check\n"
+"\n"
+"Check for available patches\n"
+"\n"
+"This command has no additional options.\n"
+msgstr ""
+"patch-check\n"
+"\n"
+"Проверка на наличие доступных исправлений\n"
+"\n"
+"Эта команда не имеет дополнительных параметров.\n"
+
+#: ../src/zypper.cc:507
+msgid ""
+"patches\n"
+"\n"
+"List all available patches\n"
+"\n"
+"This command has no additional options.\n"
+msgstr ""
+"patches\n"
+"\n"
+"Вывод списка всех доступных исправлений\n"
+"\n"
+"Эта команда не имеет дополнительных параметров.\n"
+
+#: ../src/zypper.cc:521
+msgid ""
+"info <name> ...\n"
+"\n"
+"'info' -- Show full information for packages\n"
+"\n"
+"This command has no additional options.\n"
+msgstr ""
+"info <имя> ...\n"
+"\n"
+" 'info' -- Показать полную информацию о пакетах\n"
+"\n"
+"Эта команда не имеет дополнительных параметров.\n"
+
+#: ../src/zypper.cc:535
+msgid ""
+"patch-info <patchname> ...\n"
+"\n"
+"'patch-info' -- Show detailed information for patches\n"
+"\n"
+"This command has no additional options.\n"
+msgstr ""
+"patch-info <имя_исправления> ...\n"
+"\n"
+"'patch-info' -- Показать подробную информацию об исправлениях\n"
+"\n"
+"Эта команда не имеет дополнительных параметров.\n"
+
+#: ../src/zypper.cc:549
+msgid ""
+"moo\n"
+"\n"
+"'moo' - Show an animal\n"
+"\n"
+"This command has no additional options.\n"
+msgstr ""
+"moo\n"
+"\n"
+"'moo' - Показать животное\n"
+"\n"
+"Эта команда не имеет дополнительных параметров.\n"
+
+#: ../src/zypper.cc:567
+msgid "Non-option program arguments: "
+msgstr "Аргументы программы, не являющиеся параметрами:"
+
+#: ../src/zypper.cc:579
+msgid "Ignoring --terse (provided only for rug compatibility)"
+msgstr "Игнорирование --terse (предоставляется только для совместимости с rug)"
+
+#: ../src/zypper.cc:588
+msgid "Repositories disabled, using database of installed packages only."
+msgstr "Репозитарии отключены, используется только база данных установленных пакетов."
+
+#: ../src/zypper.cc:600
+msgid "Ignoring installed resolvables..."
+msgstr "Игнорировать установленные объекты разрешения зависимостей..."
+
+#: ../src/zypper.cc:625
+msgid "A ZYpp transaction is already in progress.This means, there is another application using libzypp library forpackage management running. All such applications must be closed beforeusing this command."
+msgstr "Обработка запроса ZYpp уже выполняется. Это значит, выполняется другое приложение, использующее библиотеку libzypp для управления пакетами. Все такие приложения должны быть закрыты перед использованием этой команды."
+
+#. TranslatorExplanation this is a hedgehog, paint another animal, if you want
+#: ../src/zypper.cc:644
+msgid ""
+"   \\\\\\\\\\\n"
+"  \\\\\\\\\\\\\\__o\n"
+"__\\\\\\\\\\\\\\'/_"
+msgstr ""
+"   \\\\\\\\\\\n"
+"  \\\\\\\\\\\\\\__o\n"
+"__\\\\\\\\\\\\\\'/_"
+
+#: ../src/zypper.cc:672 ../src/zypper.cc:737 ../src/zypper.cc:808
+#: ../src/zypper.cc:848
+msgid "Root privileges are required for modifying system repositories."
+msgstr "Для просмотра системных репозитариев требуются привилегии суперпользователя."
+
+#: ../src/zypper.cc:696 ../src/zypper.cc:814
+msgid "Too few arguments. At least URL and alias are required."
+msgstr "Слишком мало аргументов. По крайней мере требуются URL-адрес и псевдоним."
+
+#: ../src/zypper.cc:743
+msgid "Required argument missing."
+msgstr "Требуемый аргумент отсутствует."
+
+#: ../src/zypper.cc:756
+msgid "Repository not found by alias, trying delete by URL..."
+msgstr "Репозитарий не был найден по псевдониму, попытка удалить по URL-адресу..."
+
+#: ../src/zypper.cc:789
+msgid "Repository not found by given alias or URL."
+msgstr "Репозитарий не был найден по данному псевдониму или URL-адресу."
+
+#: ../src/zypper.cc:854
+msgid "Alias is a required argument."
+msgstr "Псевдоним является требуемым аргументом."
+
+#: ../src/zypper.cc:876
+msgid "Root privileges are required for refreshing system repositories."
+msgstr "Для обновления системных репозитариев требуются привилегии суперпользователя."
+
+#: ../src/zypper.cc:912
+msgid "Root privileges are required for installing or uninstalling packages."
+msgstr "Для установки или удаления пакетов требуются привилегии суперпользователя."
+
+#: ../src/zypper.cc:920 ../src/zypper.cc:1070 ../src/zypper.cc:1123
+#, c-format
+msgid "Unknown resolvable type: %s"
+msgstr "Неизвестный тип объекта разрешения зависимостей: %s"
+
+#: ../src/zypper.cc:936
+msgid "Warning: No repositories defined. Operating only with the installed resolvables. Nothing can be installed."
+msgstr "Предупреждение: не определено никаких репозитариев. Работа ведется только с установленными объектами разрешения зависимостей. Нельзя ничего установливать."
+
+#: ../src/zypper.cc:984
+msgid "Unknown resolvable type "
+msgstr "Неизвестный тип объекта разрешения зависимостей"
+
+#: ../src/zypper.cc:1003
+msgid "No resolvables found."
+msgstr "Не найдено никаких объектов разрешения зависимостей."
+
+#: ../src/zypper.cc:1112
+msgid "Root privileges are required for updating packages."
+msgstr "Для обновления пакетов требуются привилегии суперпользователя."
+
+#: ../src/zypper.cc:1169
+msgid "Please file a bug report about this."
+msgstr "Сообщите об этом в отчете об ошибках."
+
+#. remember not to translate the URL
+#. unless you translate the actual page :)
+#: ../src/zypper.cc:1172
+msgid "See http://en.opensuse.org/Zypper#Troubleshooting for instructions."
+msgstr "См. http://en.opensuse.org/Zypper#Troubleshooting for instructions."
+
+#: ../src/zypper.cc:1187
+msgid "Unexpected exception."
+msgstr "Неожиданное исключение."
+
+#: ../src/zypper.cc:1269
+msgid "You already are running zypper's shell."
+msgstr "У вас уже запущена оболочка zypper."
+
+#: ../src/zypper-command.cc:90
+#, c-format
+msgid "Unknown command '%s'"
+msgstr "Неизвестная команда '%s'"
+
+# error box title
+#: ../src/zypper-callbacks.h:37
+msgid "I/O error"
+msgstr "Ошибка ввода/вывода"
+
+#: ../src/zypper-callbacks.h:37
+msgid "Invalid object"
+msgstr "Недопустимый объект"
+
+#: ../src/zypper-media-callbacks.h:53
+msgid "Downloading: "
+msgstr "Загружается: "
+
+#. TranslatorExplanation This text is a progress display label e.g. "Downloading delta [42%]"
+#: ../src/zypper-source-callbacks.h:95 ../src/zypper-source-callbacks.h:102
+msgid "Downloading delta"
+msgstr "Загружается дельта"
+
+#. TranslatorExplanation This text is a progress display label e.g. "Applying delta [42%]"
+#: ../src/zypper-source-callbacks.h:123 ../src/zypper-source-callbacks.h:129
+msgid "Applying delta"
+msgstr "Применяется дельта"
+
+#: ../src/zypper-source-callbacks.h:150
+msgid "Downloading patch rpm"
+msgstr "Загружается rpm исправления"
+
+#. TranslatorExplanation This text is a progress display label e.g. "Applying patch rpm [42%]"
+#: ../src/zypper-source-callbacks.h:157
+msgid "Applying patch rpm"
+msgstr "Применяется rpm исправления"
+
+#: ../src/zypper-source-callbacks.h:177
+#, c-format
+msgid "Downloading %s %s-%s.%s"
+msgstr "Загружается %s %s-%s.%s"
+
+#. TranslatorExplanation %s is package size like "5.6 M"
+#: ../src/zypper-source-callbacks.h:188
+#, c-format
+msgid "(%s unpacked)"
+msgstr "(%s нераспакованный)"
+
+#. TranslatorExplanation This text is a progress display label e.g. "Downloading [42%]"
+#: ../src/zypper-source-callbacks.h:197
+msgid "Downloading"
+msgstr "Загрузка"
+
+#. TranslatorExplanation speaking of a script
+#: ../src/zypper-rpm-callbacks.h:56
+#, c-format
+msgid "Running: %s  (%s, %s)"
+msgstr "Выполняется: %s  (%s, %s)"
+
+#  summary information texts
+#: ../src/zypper-rpm-callbacks.h:110
+msgid "Reading installed packages"
+msgstr "Чтение установленных пакетов"
+
+#: ../src/zypper-rpm-callbacks.h:133
+#, c-format
+msgid "Removing: %s-%s"
+msgstr "Удаление: %s-%s"
+
+#: ../src/zypper-rpm-callbacks.h:193
+msgid "Will retry more aggressively."
+msgstr "Новая, более агрессивная попытка."
+
+#: ../src/zypper-search.h:237
+msgid "Catalog"
+msgstr "Каталог"
+
+#: ../src/zypper-search.h:239
+msgid "Repository"
+msgstr "Репозитарий"
+
