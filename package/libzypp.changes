@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Mon Jul 30 14:13:26 CEST 2007 - schubi@suse.de
+
+- Not using pool for retrieving additional dependencies which has to be
+  regarded by the solver.
+- revision 6280 
+
+-------------------------------------------------------------------
 Fri Jul 27 18:08:42 CEST 2007 - jkupec@suse.cz
 
 - don't request media chage if the media is not changeable (like
