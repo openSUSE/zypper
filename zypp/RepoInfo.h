@@ -17,11 +17,9 @@
 #include <set>
 #include "zypp/base/PtrTypes.h"
 
-#include <boost/logic/tribool.hpp>
 #include "zypp/Pathname.h"
 #include "zypp/Url.h"
 #include "zypp/repo/RepoType.h"
-
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -67,7 +65,6 @@ namespace zypp
     public:
     RepoInfo();
     ~RepoInfo();
-    //RepoInfo( const Url & url, const Pathname & path, const std::string & alias = "", boost::tribool autorefresh = boost::indeterminate );
 
     typedef unsigned long NumericId;
 
@@ -110,7 +107,7 @@ namespace zypp
      *
      */
     Pathname path() const;
-      
+
     /**
      * Url of a file which contains a list of Urls
      * If empty, the base url will be used.
@@ -144,13 +141,13 @@ namespace zypp
      * If enabled is false, then this repository must be ignored as if does
      * not exists, except when checking for duplicate alias.
      */
-    boost::tribool enabled() const;
+    bool enabled() const;
 
     /**
      * If true, the repostory must be refreshed before creating resolvables
      * from it
      */
-    boost::tribool autorefresh() const;
+    bool autorefresh() const;
 
     /**
      * Type of repository,
@@ -174,7 +171,7 @@ namespace zypp
      * infos created in memory.
      */
      Pathname filepath() const;
-     
+
      /**
      * \short Path where this repo metadata was read from
      *
@@ -182,7 +179,7 @@ namespace zypp
      * infos created in memory.
      */
      Pathname metadataPath() const;
-      
+
      /**
      * \short Whether to check or not this repository with gpg
      *
@@ -190,7 +187,7 @@ namespace zypp
      * be ignored.
      *
      */
-    boost::tribool gpgCheck() const;
+    bool gpgCheck() const;
 
     /**
      * \short Key to use for gpg checking of this repository
@@ -202,7 +199,7 @@ namespace zypp
      *
      */
      Url gpgKeyUrl() const;
-    
+
     /**
      * Add a base url. \see baseUrls
      * \param url The base url for the repository.
@@ -222,7 +219,7 @@ namespace zypp
      * \param path the path to the product
      */
     RepoInfo & setPath( const Pathname &path );
-    
+
     /**
      * Set mirror list url. \see mirrorListUrl
      * \param url The base url for the list
@@ -233,13 +230,13 @@ namespace zypp
      * enable or disable the repository \see enabled
      * \param enabled
      */
-    RepoInfo & setEnabled( boost::tribool enabled );
+    RepoInfo & setEnabled( bool enabled );
 
     /**
      * enable or disable autorefresh \see autorefresh
      * \param enabled
      */
-    RepoInfo & setAutorefresh( boost::tribool autorefresh );
+    RepoInfo & setAutorefresh( bool autorefresh );
 
     /**
      * set the repository alias \see alias
@@ -268,7 +265,7 @@ namespace zypp
      * \param path File path
      */
     RepoInfo & setFilepath( const Pathname &filename );
-    
+
     /**
      * \short set the path where the local metadata is stored
      *
@@ -288,8 +285,8 @@ namespace zypp
      * be ignored.
      *
      */
-    RepoInfo & setGpgCheck( boost::tribool check );
-    
+    RepoInfo & setGpgCheck( bool check );
+
     /**
      * \short Key to use for gpg checking of this repository
      *
@@ -300,7 +297,7 @@ namespace zypp
      *
      */
     RepoInfo & setGpgKeyUrl( const Url &gpgkey );
-    
+
     /**
      * Write a human-readable representation of this RepoInfo object
      * into the \a str stream. Useful for logging.

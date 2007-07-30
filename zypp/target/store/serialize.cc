@@ -15,6 +15,8 @@
 #include <sstream>
 #include <streambuf>
 
+#include <boost/logic/tribool.hpp>
+
 #include "zypp/base/Logger.h"
 #include "zypp/CapFactory.h"
 #include "zypp/Url.h"

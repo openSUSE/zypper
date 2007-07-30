@@ -14,7 +14,9 @@
 
 #include <iosfwd>
 
+#include "zypp/base/NonCopyable.h"
 #include "zypp/base/PtrTypes.h"
+
 #include "zypp/repo/RepoProvideFile.h"
 #include "zypp/ManagedFile.h"
 #include "zypp/Script.h"
@@ -33,12 +35,8 @@ namespace zypp
     //	CLASS NAME : ScriptProvider
     //
     /** */
-    class ScriptProvider
+    class ScriptProvider : private base::NonCopyable
     {
-    public:
-      /** Implementation  */
-      class Impl;
-
     public:
       /** Ctor */
       ScriptProvider( repo::RepoMediaAccess & access_r,
@@ -62,8 +60,8 @@ namespace zypp
       ManagedFile provideUndoScript() const;
 
     private:
-      /** Pointer to implementation */
-      RW_pointer<Impl> _pimpl;
+      RepoMediaAccess & _access;
+      Script::constPtr _script;
     };
     ///////////////////////////////////////////////////////////////////
 

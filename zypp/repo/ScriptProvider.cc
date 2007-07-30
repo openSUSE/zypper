@@ -15,7 +15,7 @@
 #include "zypp/repo/ScriptProvider.h"
 
 using std::endl;
-#warning IMPLEMENT IT
+
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
@@ -24,19 +24,23 @@ namespace zypp
   { /////////////////////////////////////////////////////////////////
 
     ///////////////////////////////////////////////////////////////////
-    //
-    //	CLASS NAME : ScriptProvider::Impl
-    //
-    /** ScriptProvider implementation. */
-    struct ScriptProvider::Impl
-    {
-    };
-    ///////////////////////////////////////////////////////////////////
+    namespace
+    { /////////////////////////////////////////////////////////////////
 
-    ///////////////////////////////////////////////////////////////////
-    //
-    //	CLASS NAME : ScriptProvider
-    //
+      typedef std::string     (Script::*inlined)() const;
+      typedef OnMediaLocation (Script::*location)() const;
+
+      /** Provide a Script in a local file. */
+      ManagedFile doProvideScript( repo::RepoMediaAccess & access_r,
+                                   const Script & script_r,
+                                   inlined inlined_r, location location_r )
+      {
+        ManagedFile ret;
+        return ret;
+      }
+
+      /////////////////////////////////////////////////////////////////
+    } // namespace
     ///////////////////////////////////////////////////////////////////
 
     ///////////////////////////////////////////////////////////////////
@@ -46,7 +50,8 @@ namespace zypp
     //
     ScriptProvider::ScriptProvider( repo::RepoMediaAccess & access_r,
                                     const Script::constPtr & script_r )
-    //: _pimpl(  )
+      : _access( access_r )
+      , _script( script_r )
     {
       //       ManagedFile provideFile( Repository repo_r,
       //                                const OnMediaLocation & loc_r,
@@ -63,12 +68,26 @@ namespace zypp
 
     ManagedFile ScriptProvider::provideDoScript() const
     {
-      return ManagedFile();
+      ManagedFile ret;
+      if ( _script )
+      {
+        return doProvideScript( _access, *_script,
+                                &Script::doScriptInlined,
+                                &Script::doScriptLocation );
+      }
+      return ret;
     }
 
     ManagedFile ScriptProvider::provideUndoScript() const
     {
-      return ManagedFile();
+      ManagedFile ret;
+      if ( _script )
+      {
+        return doProvideScript( _access, *_script,
+                                &Script::undoScriptInlined,
+                                &Script::undoScriptLocation );
+      }
+      return ret;
     }
 
     /////////////////////////////////////////////////////////////////
