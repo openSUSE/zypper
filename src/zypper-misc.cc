@@ -472,6 +472,7 @@ void load_repo_resolvables()
        it !=  gData.repos.end(); ++it)
   {
     RepoInfo repo(*it);
+    MIL << "Loading " << repo.alias() << " resolvables." << endl;
 
     if (! it->enabled())
       continue;     // #217297
@@ -499,9 +500,13 @@ void load_repo_resolvables()
       repository = manager.createFromCache(repo);
 
       ResStore store = repository.resolvables();
-      cout_v << " " << format(_("(%d resolvables found)")) % store.size();
+      cout_v << " " << format(_("(%d resolvables found)")) % store.size() << endl;
 
       God->addResolvables(store);
+    }
+    catch (const repo::RepoMetadataException & ex)
+    {
+      cerr << _("asdf") << endl;
     }
     catch (const Exception & e)
     {

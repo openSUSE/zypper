@@ -37,17 +37,34 @@ static void do_init_repos()
        it !=  gData.repos.end(); ++it)
   {
     RepoInfo repo(*it);
+    MIL << "initializing " << repo.alias() << endl; 
 
     //! \todo honor command line options/commands
     bool do_refresh = repo.enabled() && repo.autorefresh(); 
 
     if (do_refresh)
     {
-      //! \todo progress reporting
       cout_v << format(
           _("Checking whether to refresh metadata for %s.")) % repo.alias()
           << endl;
-      manager.refreshMetadata(repo);
+      MIL << "calling refresh for " << repo.alias() << endl;
+
+      try { manager.refreshMetadata(repo); }
+      catch (const RepoException & ex)
+      {
+        cerr << format(_("Repository %s is invalid.")) % repo.alias() << endl;
+        cerr_v << _("Reason: ") << ex.asUserString() << endl;
+        ERR << repo.alias() << " is invalid, disabling it" << endl;
+        it->setEnabled(false);
+      }
+      catch (const Exception & ex)
+      {
+        cerr << format(_("Error while refreshing repository %s:")) % repo.alias()
+          << endl;
+        cerr << ex.asUserString() << endl;
+        ERR << "Error while refreshing " << repo.alias() << ", disabling it" << endl;
+        it->setEnabled(false);
+      }
     }
   }
 }
