@@ -111,7 +111,7 @@ namespace zypp {
       public:
         XMLProductData() {};
         ~XMLProductData() {};
-        
+
         std::string parser_version;
         std::string type;
         TranslatedText short_name;
@@ -137,8 +137,8 @@ namespace zypp {
         public:
           XMLPatchScriptData() {};
           virtual AtomType atomType() { return Script; };
-          std::string do_script;
-          std::string undo_script;
+          std::string doScript;
+          std::string undoScript;
       };
 
       class XMLPatchMessageData : public XMLPatchAtomData

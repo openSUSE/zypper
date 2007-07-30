@@ -136,20 +136,8 @@ Changelog PackageImpl::changelog() const
 
 OnMediaLocation PackageImpl::location() const
 {
-  OnMediaLocation loc( _repository->resolvableQuery().queryStringAttribute( _id, cache::attrPackageLocationFilename() ),
-                       _repository->resolvableQuery().queryNumericAttribute( _id, cache::attrPackageLocationMediaNr() ) );
-
-  string chktype = _repository->resolvableQuery().queryStringAttribute( _id, cache::attrPackageLocationChecksumType() );
-  string chkvalue = _repository->resolvableQuery().queryStringAttribute( _id, cache::attrPackageLocationChecksum() );
-  loc.setChecksum(CheckSum(chktype, chkvalue));
-
-  loc.setDownloadSize( _repository->resolvableQuery().queryNumericAttribute( _id, cache::attrPackageLocationDownloadSize() ) );
-  loc.setOpenSize( _repository->resolvableQuery().queryNumericAttribute( _id, cache::attrPackageLocationOpenSize() ) );
-
-  chktype = _repository->resolvableQuery().queryStringAttribute( _id, cache::attrPackageLocationOpenChecksumType() );
-  chkvalue = _repository->resolvableQuery().queryStringAttribute( _id, cache::attrPackageLocationOpenChecksum() );
-  loc.setOpenChecksum(CheckSum(chktype, chkvalue));
-
+  OnMediaLocation loc;
+  queryOnMediaLocation( _repository->resolvableQuery(), _id, cache::attrPackageLocation, loc );
   return loc;
 }
 
@@ -204,16 +192,6 @@ std::list<std::string> PackageImpl::filenames() const
 {
   return std::list<std::string>();
 }
-
-// std::list<DeltaRpm> PackageImpl::deltaRpms() const
-// {
-// return std::list<DeltaRpm>();
-// }
-//
-// std::list<PatchRpm> PackageImpl::patchRpms() const
-// {
-//   return std::list<PatchRpm>();
-// }
 
 /////////////////////////////////////////////////////////////////
 } } } // namespace zypp::repo::cached

@@ -11,6 +11,26 @@
 #include "zypp/cache/Attribute.h"
 #include "zypp/ZConfig.h"
 
+/** Query OnMediaLocation attributes for resolvable with ID.
+ * \code
+ * queryOnMediaLocation( _repository->resolvableQuery(), pkgid, attrPackageLocation, _location );
+ * \endcode
+ * Passt the ResolvableQuery as 1st arg, the resolvable id as 2nd, the OnMediaLocation attributes
+ * common prefix as 3nd arg, the OnMediaLocation object as 4th arg.
+ */
+#define queryOnMediaLocation(RESQUERY,ID,OMLATTRPREFIX,OML)                                              \
+do {                                                                                                     \
+  OML.setLocation( RESQUERY.queryStringAttribute( ID, OMLATTRPREFIX##Filename() ),                       \
+                   RESQUERY.queryNumericAttribute( ID, OMLATTRPREFIX##MediaNr() ) );                     \
+  OML.setChecksum( CheckSum( RESQUERY.queryStringAttribute( ID, OMLATTRPREFIX##ChecksumType() ),         \
+                             RESQUERY.queryStringAttribute( ID, OMLATTRPREFIX##Checksum() ) ) );         \
+  OML.setDownloadSize( RESQUERY.queryNumericAttribute( ID, OMLATTRPREFIX##DownloadSize() ) );            \
+  OML.setOpenChecksum( CheckSum( RESQUERY.queryStringAttribute( ID, OMLATTRPREFIX##OpenChecksumType() ), \
+                                 RESQUERY.queryStringAttribute( ID, OMLATTRPREFIX##OpenChecksum() ) ) ); \
+  OML.setOpenSize( RESQUERY.queryNumericAttribute( ID, OMLATTRPREFIX##OpenSize() ) );                    \
+} while(false)
+
+
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////

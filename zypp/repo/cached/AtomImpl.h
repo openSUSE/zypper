@@ -30,7 +30,7 @@ namespace cached
   public:
 
     AtomImpl( const data::RecordId &id, repo::cached::RepoImpl::Ptr repository_r );
-    
+
     virtual TranslatedText summary() const;
     virtual TranslatedText description() const;
     virtual TranslatedText insnotify() const;
@@ -41,11 +41,9 @@ namespace cached
     virtual bool installOnly() const;
     virtual Date buildtime() const;
     virtual Date installtime() const;
-    
-    virtual unsigned mediaNr() const;
 
     virtual Repository repository() const;
-    
+
   private:
     repo::cached::RepoImpl::Ptr _repository;
     data::RecordId _id;

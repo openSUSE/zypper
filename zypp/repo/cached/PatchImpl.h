@@ -30,7 +30,7 @@ namespace cached
   public:
 
     PatchImpl( const data::RecordId &id, repo::cached::RepoImpl::Ptr repository_r );
-    
+
     virtual TranslatedText summary() const;
     virtual TranslatedText description() const;
     virtual TranslatedText insnotify() const;
@@ -41,9 +41,7 @@ namespace cached
     virtual bool installOnly() const;
     virtual Date buildtime() const;
     virtual Date installtime() const;
-    
-    virtual unsigned mediaNr() const;
-    
+
     // PATCH
     virtual std::string id() const;
     virtual Date timestamp() const;
@@ -52,9 +50,9 @@ namespace cached
     virtual bool affects_pkg_manager() const;
     virtual bool interactive() const;
     virtual AtomList all_atoms() const;
-       
+
     virtual Repository repository() const;
-    
+
   private:
     repo::cached::RepoImpl::Ptr _repository;
     data::RecordId _id;

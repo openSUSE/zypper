@@ -23,14 +23,28 @@ namespace zypp
     // as far as resonable.
     /////////////////////////////////////////////////////////////////
 
-      Pathname ScriptImplIf::do_script() const
-      { return Pathname(); }
+    bool ScriptImplIf::doAvailable() const
+    { return ! ( doScriptInlined().empty()
+                 && doScriptLocation().filename().empty() ); }
 
-      Pathname ScriptImplIf::undo_script() const
-      { return Pathname(); }
+    unsigned ScriptImplIf::mediaNr() const
+    { return( doScriptInlined().empty() ? doScriptLocation().medianr() : 0 ); }
 
-      bool ScriptImplIf::undo_available() const
-      { return false; }
+    std::string ScriptImplIf::doScriptInlined() const
+    { return std::string(); }
+
+    OnMediaLocation ScriptImplIf::doScriptLocation() const
+    { return OnMediaLocation(); }
+
+    bool ScriptImplIf::undoAvailable() const
+    { return ! ( undoScriptInlined().empty()
+                 && undoScriptLocation().filename().empty() ); }
+
+    std::string ScriptImplIf::undoScriptInlined() const
+    { return std::string(); }
+
+    OnMediaLocation ScriptImplIf::undoScriptLocation() const
+    { return OnMediaLocation(); }
 
     /////////////////////////////////////////////////////////////////
   } // namespace detail

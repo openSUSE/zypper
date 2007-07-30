@@ -62,7 +62,7 @@ namespace zypp
     public:
       RepoMediaAccess();
       ~RepoMediaAccess();
-      
+
       /** Provide a file from a Repository.
       * Let \a source_r provide the file described by \a loc_r. In case
       * \a loc_r contains a checksum, the file is verified. \a policy_r
@@ -70,6 +70,7 @@ namespace zypp
       * on failed checksum verification.
       *
       * \throws Exception
+      * \todo Investigate why this needs a non-const Repository as arg.
       */
       ManagedFile provideFile( Repository repo_r,
                                const OnMediaLocation & loc_r,
@@ -77,9 +78,9 @@ namespace zypp
     private:
       class Impl;
        RW_pointer<Impl> _impl;
-      
+
     };
-    
+
     /////////////////////////////////////////////////////////////////
   } // namespace repo
   ///////////////////////////////////////////////////////////////////

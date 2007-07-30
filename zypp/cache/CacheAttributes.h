@@ -14,8 +14,12 @@
 
 #include "zypp/cache/Attribute.h"
 
-/** Define OnMediaLocation attributes using a common prefix for all attributes. */
-#define defineOnMediaLocationAttr(OMLATTRPREFIX,KLASS,ATTRNAMEPREFIX )                                                             \
+/** Define OnMediaLocation attributes using a common prefix for all attributes.
+ * \code
+ * defineOnMediaLocationAttr( attrPackageLocation, "Package", "location" )
+ * \endcode
+*/
+#define defineOnMediaLocationAttr(OMLATTRPREFIX,KLASS,ATTRNAMEPREFIX )                                                                    \
     inline const Attribute & OMLATTRPREFIX##MediaNr()          { static Attribute a(KLASS,#ATTRNAMEPREFIX"MediaNr");          return a; } \
     inline const Attribute & OMLATTRPREFIX##Filename()         { static Attribute a(KLASS,#ATTRNAMEPREFIX"Filename");         return a; } \
     inline const Attribute & OMLATTRPREFIX##DownloadSize()     { static Attribute a(KLASS,#ATTRNAMEPREFIX"DownloadSize");     return a; } \

@@ -35,17 +35,21 @@ namespace zypp
       ~ScriptImpl();
 
     public:
-      /** Get the script to perform the change */
-      Pathname do_script() const;
-      /** Get the script to undo the change */
-      Pathname undo_script() const;
-      /** Check whether script to undo the change is available */
-      virtual bool undo_available() const;
+      /** Return an inlined script if available.
+       * Otherwise it is available at \ref doScriptLocation.
+       */
+      virtual std::string doScriptInlined() const;
+
+      /** Return an inlined undo script if available.
+       * Otherwise it is available at \ref undoScriptLocation.
+       */
+      virtual std::string undoScriptInlined() const;
+
     protected:
       /** The script to perform the change */
-      std::string _do_script;
+      std::string _doScript;
       /** The script to undo the change */
-      std::string _undo_script;
+      std::string _undoScript;
     };
     ///////////////////////////////////////////////////////////////////
 

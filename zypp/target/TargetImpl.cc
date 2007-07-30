@@ -44,6 +44,7 @@
 
 #include "zypp/repo/DeltaCandidates.h"
 #include "zypp/repo/PackageProvider.h"
+#include "zypp/repo/ScriptProvider.h"
 
 using namespace std;
 using namespace zypp;
@@ -60,7 +61,9 @@ namespace zypp
     ///////////////////////////////////////////////////////////////////
     namespace
     { /////////////////////////////////////////////////////////////////
-      void ExecuteScriptHelper( Script::constPtr script_r, bool do_r )
+      void ExecuteScriptHelper( repo::RepoMediaAccess & access_r,
+                                Script::constPtr script_r,
+                                bool do_r )
       {
         MIL << "Execute script " << script_r << endl;
         if ( ! script_r )
@@ -69,41 +72,32 @@ namespace zypp
           return;
         }
 
-        Pathname path;
-        if ( do_r )
+        repo::ScriptProvider prov( access_r, script_r );
+        ManagedFile localfile = prov.provideScript( do_r );
+
+        if ( localfile->empty() )
         {
-          path = script_r->do_script();
-        }
-        else
-        {
-          if ( script_r->undo_available() )
-          {
-            path = script_r->undo_script();
-          }
-          else
-          {
-            DBG << "No undo script for " << script_r << endl;
-            return; // success
-          }
+          DBG << "No " << (do_r?"do":"undo") << " script for " << script_r << endl;
+          return; // success
         }
 
         // Go...
         callback::SendReport<ScriptResolvableReport> report;
-        report->start( script_r, path,
+        report->start( script_r, localfile,
                        (do_r ? ScriptResolvableReport::DO
                         : ScriptResolvableReport::UNDO ) );
 
-        PathInfo pi( path );
+        PathInfo pi( localfile );
         if ( ! pi.isFile() )
         {
           std::ostringstream err;
-          err << "Script is not a file: " << pi.fileType() << " " << path;
+          err << "Script is not a file: " << pi.fileType() << " " << localfile;
           report->problem( err.str() );
           ZYPP_THROW(Exception(err.str()));
         }
 
-        filesystem::chmod( path, S_IRUSR|S_IXUSR );	// "r-x------"
-        ExternalProgram prog( path.asString(), ExternalProgram::Stderr_To_Stdout, false, -1, true );
+        filesystem::chmod( localfile, S_IRUSR|S_IXUSR );	// "r-x------"
+        ExternalProgram prog( localfile->asString(), ExternalProgram::Stderr_To_Stdout, false, -1, true );
         for ( std::string output = prog.receiveLine(); output.length(); output = prog.receiveLine() )
         {
           if ( ! report->progress( ScriptResolvableReport::OUTPUT, output ) )
@@ -126,14 +120,14 @@ namespace zypp
         return;
       }
 
-      inline void ExecuteDoScript( const Script::constPtr & script_r )
+      inline void ExecuteDoScript( repo::RepoMediaAccess & access_r, const Script::constPtr & script_r )
       {
-        ExecuteScriptHelper( script_r, true );
+        ExecuteScriptHelper( access_r, script_r, true );
       }
 
-      inline void ExecuteUndoScript( const Script::constPtr & script_r )
+      inline void ExecuteUndoScript( repo::RepoMediaAccess & access_r, const Script::constPtr & script_r )
       {
-        ExecuteScriptHelper( script_r, false );
+        ExecuteScriptHelper( access_r, script_r, false );
       }
       /////////////////////////////////////////////////////////////////
     } // namespace
@@ -221,7 +215,7 @@ namespace zypp
       }
     };
 
-    /** 
+    /**
      * \short Let the Source provide the package.
      * \p pool_r \ref ResPool used to get candidates
      * \p pi item to be commited
@@ -234,29 +228,22 @@ namespace zypp
       RepoProvidePackage( repo::RepoMediaAccess &access, ResPool pool_r )
         : _pool(pool_r), _access(access)
       {
-      
+
       }
-      
+
       ManagedFile operator()( const PoolItem & pi )
       {
         // Redirect PackageProvider queries for installed editions
         // (in case of patch/delta rpm processing) to rpmDb.
         repo::PackageProviderPolicy packageProviderPolicy;
         packageProviderPolicy.queryInstalledCB( QueryInstalledEditionHelper() );
-  
+
         Package::constPtr p = asKind<Package>(pi.resolvable());
-        
-        
+
+
         // Build a repository list for repos
         // contributing to the pool
-        std::list<Repository> repos;
-        for ( ResPool::repository_iterator it = _pool.knownRepositoriesBegin();
-              it != _pool.knownRepositoriesEnd();
-              ++it )
-        {
-          repos.push_back(*it);
-        }
-  
+        std::list<Repository> repos( _pool.knownRepositoriesBegin(), _pool.knownRepositoriesEnd() );
         repo::DeltaCandidates deltas(repos);
         repo::PackageProvider pkgProvider( _access, p, deltas, packageProviderPolicy );
         return pkgProvider.providePackage();
@@ -657,7 +644,7 @@ namespace zypp
                 }
                 else if (isKind<Script>(it->resolvable()))
                 {
-                  ExecuteDoScript( asKind<Script>(it->resolvable()) );
+                  ExecuteDoScript( access, asKind<Script>(it->resolvable()) );
                 }
                 else if (!isKind<Atom>(it->resolvable()))	// atoms are re-created from the patch data, no need to save them
                 {
@@ -700,7 +687,7 @@ namespace zypp
                 }
                 else if (isKind<Script>(it->resolvable()))
                 {
-                  ExecuteUndoScript( asKind<Script>(it->resolvable()) );
+                  ExecuteUndoScript( access, asKind<Script>(it->resolvable()) );
                 }
                 else
                 {

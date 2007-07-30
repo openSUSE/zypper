@@ -35,12 +35,31 @@ namespace zypp
     typedef TraitsType::constPtrType constPtr;
 
   public:
-    /** Get the script to perform the change */
-    Pathname do_script() const;
-    /** Get the script to undo the change */
-    Pathname undo_script() const ;
-    /** Check whether script to undo the change is available */
-    bool undo_available() const;
+     /** Check whether a script is available. */
+    bool doAvailable() const;
+
+   /** Return an inlined script if available.
+     * Otherwise it is available at \ref doScriptLocation.
+     */
+    std::string doScriptInlined() const;
+
+    /** Location of the script, unless it is available inlined.
+     * \see \ref doScriptInlined
+     */
+    OnMediaLocation doScriptLocation() const;
+
+    /** Check whether a script to undo the change is available. */
+    bool undoAvailable() const;
+
+    /** Return an inlined undo script if available.
+     * Otherwise it is available at \ref undoScriptLocation.
+     */
+    std::string undoScriptInlined() const;
+
+    /** Location of the undo script, unless it is available inlined.
+     * \see \ref undoScriptInlined
+     */
+    OnMediaLocation undoScriptLocation() const;
 
   protected:
     /** Ctor */

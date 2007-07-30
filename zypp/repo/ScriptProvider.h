@@ -6,44 +6,71 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file zypp/target/store/xml/XMLScriptImpl.cc
+/** \file	zypp/repo/ScriptProvider.h
  *
 */
+#ifndef ZYPP_REPO_SCRIPTPROVIDER_H
+#define ZYPP_REPO_SCRIPTPROVIDER_H
 
-#include "zypp/target/store/xml/XMLScriptImpl.h"
+#include <iosfwd>
 
-using namespace std;
+#include "zypp/base/PtrTypes.h"
+#include "zypp/repo/RepoProvideFile.h"
+#include "zypp/ManagedFile.h"
+#include "zypp/Script.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////
-  namespace storage
+  namespace repo
   { /////////////////////////////////////////////////////////////////
 
+    class RepoMediaAccess;
+
     ///////////////////////////////////////////////////////////////////
     //
-    //	CLASS NAME : XMLScriptImpl
+    //	CLASS NAME : ScriptProvider
     //
+    /** */
+    class ScriptProvider
+    {
+    public:
+      /** Implementation  */
+      class Impl;
+
+    public:
+      /** Ctor */
+      ScriptProvider( repo::RepoMediaAccess & access_r,
+                      const Script::constPtr & script_r );
+      /** Dtor */
+      ~ScriptProvider();
+
+    public:
+      /** Provide a script in a local file.*/
+      ManagedFile provideScript( bool do_r ) const
+      { return( do_r ? provideDoScript() : provideUndoScript() ); }
+
+      /** Provide the do-script in a local file.
+       * Returns an empty path if no script is available.
+      */
+      ManagedFile provideDoScript() const;
+
+      /** Provide the do-script in a local file.
+       * Returns an empty path if no script is available.
+      */
+      ManagedFile provideUndoScript() const;
+
+    private:
+      /** Pointer to implementation */
+      RW_pointer<Impl> _pimpl;
+    };
     ///////////////////////////////////////////////////////////////////
-
-    /** Default ctor */
-    XMLScriptImpl::XMLScriptImpl()
-    {}
-
-    /** Dtor */
-    XMLScriptImpl::~XMLScriptImpl()
-    {}
-
-    std::string XMLScriptImpl::doScriptInlined() const
-    { return _doScript; }
-
-    std::string XMLScriptImpl::undoScriptInlined() const
-    { return _undoScript; }
 
     /////////////////////////////////////////////////////////////////
-  } // namespace detail
+  } // namespace repo
   ///////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
+#endif // ZYPP_REPO_SCRIPTPROVIDER_H

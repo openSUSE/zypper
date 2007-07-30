@@ -104,24 +104,10 @@ Date ScriptImpl::installtime() const
 }
 
 //////////////////////////////////////////
-// MESSAGE
+// SCRIPT
 /////////////////////////////////////////
 
-Pathname ScriptImpl::do_script() const
-{
-  return Pathname();
-}
 
-Pathname ScriptImpl::undo_script() const
-{
-  return Pathname();
-}
-
-bool ScriptImpl::undo_available() const
-{
-  return false;
-}
-    
 
 /////////////////////////////////////////////////////////////////
 } } } // namespace zypp::repo::memory

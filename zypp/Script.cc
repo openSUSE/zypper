@@ -40,14 +40,23 @@ namespace zypp
   //
   ///////////////////////////////////////////////////////////////////
 
-  Pathname Script::do_script() const
-  { return pimpl().do_script(); }
+  bool Script::doAvailable() const
+  { return pimpl().doAvailable(); }
 
-  Pathname Script::undo_script() const
-  { return pimpl().undo_script(); }
+  std::string Script::doScriptInlined() const
+  { return pimpl().doScriptInlined(); }
 
-  bool Script::undo_available() const
-  { return pimpl().undo_available(); }
+  OnMediaLocation Script::doScriptLocation() const
+  { return pimpl().doScriptLocation(); }
+
+  bool Script::undoAvailable() const
+  { return pimpl().undoAvailable(); }
+
+  std::string Script::undoScriptInlined() const
+  { return pimpl().undoScriptInlined(); }
+
+  OnMediaLocation Script::undoScriptLocation() const
+  { return pimpl().undoScriptLocation(); }
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

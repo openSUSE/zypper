@@ -96,11 +96,6 @@ Date MessageImpl::installtime() const
   return Date();
 }
 
-unsigned MessageImpl::mediaNr() const
-{
-  return 1;
-}
-
 //////////////////////////////////////////
 // MESSAGE
 /////////////////////////////////////////

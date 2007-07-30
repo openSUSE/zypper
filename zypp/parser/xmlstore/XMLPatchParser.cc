@@ -148,11 +148,11 @@ namespace zypp {
           {
             string name = _helper.name(child);
             if (name == "do") {
-              script->do_script = _helper.content(child);
+              script->doScript = _helper.content(child);
             }
             else if (name == "undo")
             {
-              script->undo_script = _helper.content(child);
+              script->undoScript = _helper.content(child);
             }
           }
         }

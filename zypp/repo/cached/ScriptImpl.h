@@ -30,7 +30,7 @@ namespace cached
   public:
 
     ScriptImpl( const data::RecordId &id, repo::cached::RepoImpl::Ptr repository_r );
-    
+
     virtual TranslatedText summary() const;
     virtual TranslatedText description() const;
     virtual TranslatedText insnotify() const;
@@ -41,16 +41,15 @@ namespace cached
     virtual bool installOnly() const;
     virtual Date buildtime() const;
     virtual Date installtime() const;
-    
-    virtual unsigned mediaNr() const;
-    
+
     // SCRIPT
-    virtual Pathname do_script() const;
-    virtual Pathname undo_script() const;
-    virtual bool undo_available() const;
-      
+    virtual std::string doScriptInlined() const;
+    virtual OnMediaLocation doScriptLocation() const;
+    virtual std::string undoScriptInlined() const;
+    virtual OnMediaLocation undoScriptLocation() const;
+
     virtual Repository repository() const;
-    
+
   private:
     repo::cached::RepoImpl::Ptr _repository;
     data::RecordId _id;

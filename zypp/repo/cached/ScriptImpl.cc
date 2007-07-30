@@ -96,32 +96,33 @@ Date ScriptImpl::installtime() const
   return Date();
 }
 
-unsigned ScriptImpl::mediaNr() const
-{
-  return 1;
-}
-
 //////////////////////////////////////////
-// MESSAGE
+// SCRIPT
 /////////////////////////////////////////
 
-Pathname ScriptImpl::do_script() const
+std::string ScriptImpl::doScriptInlined() const
 {
   return _repository->resolvableQuery().queryStringAttribute( _id, cache::attrScriptDoScript() );
 }
 
-Pathname ScriptImpl::undo_script() const
+OnMediaLocation ScriptImpl::doScriptLocation() const
+{
+  OnMediaLocation loc;
+  queryOnMediaLocation( _repository->resolvableQuery(), _id, cache::attrScriptDoScriptLocation, loc );
+  return loc;
+}
+
+std::string ScriptImpl::undoScriptInlined() const
 {
   return _repository->resolvableQuery().queryStringAttribute( _id, cache::attrScriptUndoScript() );
 }
 
-bool ScriptImpl::undo_available() const
+OnMediaLocation ScriptImpl::undoScriptLocation() const
 {
-#warning DUBIOUS ATTRIBUTE
-  return false;
-  //return _repository->resolvableQuery().queryBooleanAttribute( _id, cache::attrScriptUndoAvailable(), false );
+  OnMediaLocation loc;
+  queryOnMediaLocation( _repository->resolvableQuery(), _id, cache::attrScriptUndoScriptLocation, loc );
+  return loc;
 }
-
 
 /////////////////////////////////////////////////////////////////
 } } } // namespace zypp::repo::cached

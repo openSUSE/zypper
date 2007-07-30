@@ -23,8 +23,10 @@
 #include "zypp/detail/ImplConnect.h"
 #include "zypp/detail/ResObjectImplIf.h"
 #include "zypp/detail/SelectionImplIf.h"
+#include "zypp/repo/ScriptProvider.h"
 
 #include "serialize.h"
+
 #include "xml_escape_parser.hpp"
 
 using namespace std;
@@ -33,6 +35,18 @@ namespace zypp
 { /////////////////////////////////////////////////////////////////
 namespace storage
 { /////////////////////////////////////////////////////////////////
+
+static void copyFileToStream( const Pathname & file_r, std::ostream & out_r )
+{
+  std::ifstream infile( file_r.c_str() );
+  while (infile.good())
+  {
+    char c = (char)infile.get();
+    if (! infile.eof())
+      out_r << c;
+  }
+  infile.close();
+}
 
 static string xml_escape( const string &text )
 {
@@ -89,7 +103,7 @@ static string translatedTextToXML(const TranslatedText &text, const string &tagn
 template<class T>
 string toXML( const T &obj ); //undefined
 
-template<> 
+template<>
 string toXML( const Edition &edition )
 {
   stringstream out;
@@ -98,7 +112,7 @@ string toXML( const Edition &edition )
   return out.str();
 }
 
-template<> 
+template<>
 string toXML( const Arch &arch )
 {
   stringstream out;
@@ -106,7 +120,7 @@ string toXML( const Arch &arch )
   return out.str();
 }
 
-template<> 
+template<>
 string toXML( const Capability &cap )
 {
   stringstream out;
@@ -116,7 +130,7 @@ string toXML( const Capability &cap )
   return out.str();
 }
 
-template<> 
+template<>
 string toXML( const CapSet &caps )
 {
   stringstream out;
@@ -128,7 +142,7 @@ string toXML( const CapSet &caps )
   return out.str();
 }
 
-template<> 
+template<>
 string toXML( const Dependencies &dep )
 {
   stringstream out;
@@ -144,7 +158,7 @@ string toXML( const Dependencies &dep )
   if ( dep[Dep::FRESHENS].size() > 0 )
     out << "    " << xml_tag_enclose(toXML(dep[Dep::FRESHENS]), "freshens") << endl;
   if ( dep[Dep::REQUIRES].size() > 0 )
-    out << "    " << xml_tag_enclose(toXML(dep[Dep::REQUIRES]), "requires") << endl;  
+    out << "    " << xml_tag_enclose(toXML(dep[Dep::REQUIRES]), "requires") << endl;
   if ( dep[Dep::RECOMMENDS].size() > 0 )
     out << "    " << xml_tag_enclose(toXML(dep[Dep::RECOMMENDS]), "recommends") << endl;
   if ( dep[Dep::ENHANCES].size() > 0 )
@@ -157,7 +171,7 @@ string toXML( const Dependencies &dep )
 
 }
 
-template<> 
+template<>
 string toXML( const Resolvable::constPtr &obj )
 {
   stringstream out;
@@ -170,7 +184,7 @@ string toXML( const Resolvable::constPtr &obj )
   return out.str();
 }
 
-template<> 
+template<>
 string toXML( const ResObject::constPtr &obj )
 {
   stringstream out;
@@ -179,7 +193,7 @@ string toXML( const ResObject::constPtr &obj )
   detail::ResImplTraits<ResObject::Impl>::constPtr pipp( detail::ImplConnect::resimpl( obj ) );
   out << translatedTextToXML(pipp->summary(), "summary");
   out << translatedTextToXML(pipp->description(), "description");
-  
+
   out << translatedTextToXML(pipp->insnotify(), "install-notify");
   out << translatedTextToXML(pipp->delnotify(), "delete-notify");
   //out << "  <license-to-confirm>" << xml_escape(obj->licenseToConfirm()) << "</license-to-confirm>" << endl;
@@ -191,11 +205,11 @@ string toXML( const ResObject::constPtr &obj )
   out << "  <build-time>" << obj->buildtime().asSeconds()  << "</build-time>" << endl;
   // we assume we serialize on storeObject, set install time to NOW
   out << "  <install-time>" << Date::now().asSeconds() << "</install-time>" << endl;
-  
+
   return out.str();
 }
 
-template<> 
+template<>
 string toXML( const Package::constPtr &obj )
 {
   stringstream out;
@@ -203,14 +217,11 @@ string toXML( const Package::constPtr &obj )
   // reuse Resolvable information serialize function
   out << toXML(static_cast<Resolvable::constPtr>(obj));
   out << toXML(static_cast<ResObject::constPtr>(obj));
-  //out << "  <do>" << endl;
-  //out << "      " << obj->do_script() << endl;
-  //out << "  </do>" << endl;
   out << "</package>" << endl;
   return out.str();
 }
 
-template<> 
+template<>
 string toXML( const Script::constPtr &obj )
 {
   stringstream out;
@@ -218,38 +229,21 @@ string toXML( const Script::constPtr &obj )
   // reuse Resolvable information serialize function
   out << toXML(static_cast<Resolvable::constPtr>(obj));
   out << toXML(static_cast<ResObject::constPtr>(obj));
+
+  repo::RepoMediaAccess access;
+  repo::ScriptProvider prov( access, obj );
+
   out << "  <do>" << endl;
   out << "  <![CDATA[" << endl;
-  
-  // read script
-  ifstream infile;
-  infile.open(obj->do_script().asString().c_str());
-  while (infile.good())
-  {
-    char c = (char)infile.get();
-    if (! infile.eof())
-      out << c;
-  }
-  infile.close();
-  
+  copyFileToStream( prov.provideDoScript(), out );
   out << "  ]]>" << endl;
   out << "  </do>" << endl;
 
-  if ( obj->undo_available() )
+  if ( obj->undoAvailable() )
   {
     out << "  <undo>" << endl;
     out << "  <![CDATA[" << endl;
-  
-  // read script
-    infile.open(obj->undo_script().asString().c_str());
-    while (infile.good())
-    {
-      char c = (char)infile.get();
-      if (! infile.eof())
-	out << c;
-    }
-    infile.close();
-  
+    copyFileToStream( prov.provideUndoScript(), out );
     out << "  ]]>" << endl;
     out << "  </undo>" << endl;
 
@@ -258,7 +252,7 @@ string toXML( const Script::constPtr &obj )
   return out.str();
 }
 
-template<> 
+template<>
 string toXML( const Message::constPtr &obj )
 {
   stringstream out;
@@ -271,7 +265,7 @@ string toXML( const Message::constPtr &obj )
   return out.str();
 }
 
-template<> 
+template<>
 string toXML( const Language::constPtr &obj )
 {
   stringstream out;
@@ -284,16 +278,16 @@ string toXML( const Language::constPtr &obj )
 }
 
 
-template<> 
+template<>
 string toXML( const Selection::constPtr &obj )
 {
   stringstream out;
   out << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" << endl;
   out << "<pattern version=\"" << SERIALIZER_VERSION << "\" xmlns=\"http://www.novell.com/metadata/zypp/xml-store\">" << endl;
-  
+
   out << toXML(static_cast<Resolvable::constPtr>(obj)) << endl;
   out << toXML(static_cast<ResObject::constPtr>(obj));
-  
+
   //out << "  <default>" << (obj->isDefault() ? "true" : "false" ) << "</default>" << endl;
   out << "  <uservisible>" << (obj->visible() ? "true" : "false" ) << "</uservisible>" << endl;
   out << "  <category>" << xml_escape(obj->category()) << "</category>" << endl;
@@ -302,7 +296,7 @@ string toXML( const Selection::constPtr &obj )
   return out.str();
 }
 
-template<> 
+template<>
 string toXML( const Atom::constPtr &obj )
 {
   stringstream out;
@@ -313,7 +307,7 @@ string toXML( const Atom::constPtr &obj )
   return out.str();
 }
 
-template<> 
+template<>
 string toXML( const Pattern::constPtr &obj )
 {
   stringstream out;
@@ -322,7 +316,7 @@ string toXML( const Pattern::constPtr &obj )
 
   out << toXML(static_cast<Resolvable::constPtr>(obj)) << endl;
   out << toXML(static_cast<ResObject::constPtr>(obj));
-  
+
   out << "  <default>" << (obj->isDefault() ? "true" : "false" ) << "</default>" << endl;
   out << "  <uservisible>" << (obj->userVisible() ? "true" : "false" ) << "</uservisible>" << endl;
   out << "  <category>" << xml_escape(obj->category()) << "</category>" << endl;
@@ -332,7 +326,7 @@ string toXML( const Pattern::constPtr &obj )
   return out.str();
 }
 
-template<> 
+template<>
 string toXML( const Product::constPtr &obj )
 {
   stringstream out;
@@ -340,50 +334,50 @@ string toXML( const Product::constPtr &obj )
   out << "<product version=\"" << SERIALIZER_VERSION << "\" xmlns=\"http://www.novell.com/metadata/zypp/xml-store\" type=\"" << xml_escape(obj->category()) << "\">" << endl;
   out << toXML(static_cast<Resolvable::constPtr>(obj)) << endl;
   #warning "FIXME description and displayname of products"
-  
+
   out << toXML(static_cast<ResObject::constPtr>(obj));
-  
+
   // access implementation
   detail::ResImplTraits<Product::Impl>::constPtr pipp( detail::ImplConnect::resimpl( obj ) );
   out << translatedTextToXML(pipp->shortName(), "shortname");
-  
+
   out << "  <distribution-name>" << xml_escape(obj->distributionName()) << "</distribution-name>" << endl;
   out << "  <distribution-edition>" << xml_escape(obj->distributionEdition().asString()) << "</distribution-edition>" << endl;
-  out << "  <source>" << xml_escape(obj->repository().info().alias()) << "</source>" << endl;  
+  out << "  <source>" << xml_escape(obj->repository().info().alias()) << "</source>" << endl;
   out << "  <release-notes-url>" << xml_escape(obj->releaseNotesUrl().asString()) << "</release-notes-url>" << endl;
-  
+
   out << "  <update-urls>" << endl;
   list<Url> updateUrls = obj->updateUrls();
   for ( list<Url>::const_iterator it = updateUrls.begin(); it != updateUrls.end(); ++it)
   {
-    out << "    <update-url>" << xml_escape(it->asString()) << "</update-url>" << endl; 
+    out << "    <update-url>" << xml_escape(it->asString()) << "</update-url>" << endl;
   }
   out << "  </update-urls>" << endl;
-  
+
   out << "  <extra-urls>" << endl;
   list<Url> extraUrls = obj->extraUrls();
   for ( list<Url>::const_iterator it = extraUrls.begin(); it != extraUrls.end(); ++it)
   {
-    out << "    <extra-url>" << xml_escape(it->asString()) << "</extra-url>" << endl; 
+    out << "    <extra-url>" << xml_escape(it->asString()) << "</extra-url>" << endl;
   }
   out << "  </extra-urls>" << endl;
-  
+
   out << "  <optional-urls>" << endl;
   list<Url> optionalUrls = obj->optionalUrls();
   for ( list<Url>::const_iterator it = optionalUrls.begin(); it != optionalUrls.end(); ++it)
   {
-    out << "    <optional-url>" << xml_escape(it->asString()) << "</optional-url>" << endl; 
+    out << "    <optional-url>" << xml_escape(it->asString()) << "</optional-url>" << endl;
   }
   out << "  </optional-urls>" << endl;
-  
+
   out << "  <product-flags>" << endl;
   list<string> flags = obj->flags();
   for ( list<string>::const_iterator it = flags.begin(); it != flags.end(); ++it)
   {
-    out << "    <product-flag>" << xml_escape(*it) << "</product-flag>" << endl; 
+    out << "    <product-flag>" << xml_escape(*it) << "</product-flag>" << endl;
   }
   out << "  </product-flags>" << endl;
-  
+
   out << "</product>" << endl;
 
   return out.str();
@@ -428,24 +422,24 @@ string resolvableKindToString( const Resolvable::Kind &kind, bool plural)
     return k + (plural?"s":"");
 }
 
-template<> 
+template<>
 string toXML( const Patch::constPtr &obj )
 {
   stringstream out;
   out << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" << endl;
-  out << "<patch version=\"" << SERIALIZER_VERSION << "\" xmlns=\"http://www.novell.com/metadata/zypp/xml-store\">" << endl; 
-  
+  out << "<patch version=\"" << SERIALIZER_VERSION << "\" xmlns=\"http://www.novell.com/metadata/zypp/xml-store\">" << endl;
+
   // reuse Resolvable information serialize function
   out << toXML(static_cast<Resolvable::constPtr>(obj));
   out << toXML(static_cast<ResObject::constPtr>(obj));
-  
+
   out << "<id>" << xml_escape(obj->id()) << "</id>" << endl;
   out << "<timestamp>" << obj->timestamp().asSeconds() << "</timestamp>" << endl;
-  
+
   out << "<category>" << obj->category() << "</category>" << endl;
   out << "<affects-package-manager>" << ( obj->affects_pkg_manager() ? "true" : "false" ) << "</affects-package-manager>" << endl;
   out << "<reboot-needed>" << ( obj->reboot_needed() ? "true" : "false" ) << "</reboot-needed>" << endl;
-  
+
   Patch::AtomList at = obj->atoms();
   out << "  <atoms>" << endl;
   for (Patch::AtomList::iterator it = at.begin(); it != at.end(); it++)

@@ -920,6 +920,7 @@ SET( zypp_repo_SRCS
   repo/RepoException.cc
   repo/RepoType.cc
   repo/PackageProvider.cc
+  repo/ScriptProvider.cc
   repo/RepoProvideFile.cc
   repo/DeltaCandidates.cc
   repo/Applydeltarpm.cc
@@ -934,6 +935,7 @@ SET( zypp_repo_HEADERS
   repo/RepoException.h
   repo/RepoType.h
   repo/PackageProvider.h
+  repo/ScriptProvider.h
   repo/RepoProvideFile.h
   repo/DeltaCandidates.h
   repo/Applydeltarpm.h

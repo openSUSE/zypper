@@ -99,11 +99,6 @@ Date PatchImpl::installtime() const
   return Date();
 }
 
-unsigned PatchImpl::mediaNr() const
-{
-  return 1;
-}
-
 //////////////////////////////////////////
 // PATCH
 /////////////////////////////////////////

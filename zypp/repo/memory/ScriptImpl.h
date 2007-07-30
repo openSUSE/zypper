@@ -30,7 +30,7 @@ namespace memory
   public:
 
     ScriptImpl( memory::RepoImpl::Ptr repo, data::Script_Ptr ptr);
-    
+
     virtual TranslatedText summary() const;
     virtual TranslatedText description() const;
     virtual TranslatedText insnotify() const;
@@ -41,17 +41,14 @@ namespace memory
     virtual bool installOnly() const;
     virtual Date buildtime() const;
     virtual Date installtime() const;
-        
-    // SCRIPT
-    virtual Pathname do_script() const;
-    virtual Pathname undo_script() const;
-    virtual bool undo_available() const;
-      
+
+    // SCRIPT: TODO script attr
+
     virtual Repository repository() const;
-    
+
   protected:
     repo::memory::RepoImpl::Ptr _repository;
-    
+
     //ResObject
     TranslatedText _summary;
     TranslatedText _description;

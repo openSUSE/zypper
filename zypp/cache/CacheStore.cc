@@ -22,17 +22,20 @@ using namespace sqlite3x;
 using zypp::debug::Measure;
 
 /** Append OnMediaLocation attributes to resolvable with ID.
- * Pass the OnMediaLocation attributes common prefix as 2nd arg. This macro
- * assumes that the attribute names follow this schema:
+ * \code
+ * appendOnMediaLocation( pkgid, attrPackageLocation, package->repositoryLocation );
+ * \endcode
+ * Pass the OnMediaLocation attributes common prefix as 2nd arg, the OnMediaLocation
+ * object as third arg. This macro assumes that the attribute names follow this schema:
 */
-#define appendOnMediaLocation(ID,OMLATTRPREFIX,OML)                                          \
-do {                                                                                         \
-  appendNumericAttribute( ID, OMLATTRPREFIX##MediaNr(),        OML.medianr() );              \
-  appendStringAttribute ( ID, OMLATTRPREFIX##Filename(),       OML.filename().asString() );  \
-  appendNumericAttribute( ID, OMLATTRPREFIX##DownloadSize(),   OML.downloadSize() );         \
-  appendStringAttribute ( ID, OMLATTRPREFIX##ChecksumType(),   OML.checksum().type() );      \
-  appendStringAttribute ( ID, OMLATTRPREFIX##Checksum(),       OML.checksum().checksum() );  \
-  appendNumericAttribute( ID, OMLATTRPREFIX##OpenSize(), OML.openSize() );       \
+#define appendOnMediaLocation(ID,OMLATTRPREFIX,OML)                                              \
+do {                                                                                             \
+  appendNumericAttribute( ID, OMLATTRPREFIX##MediaNr(),          OML.medianr() );                \
+  appendStringAttribute ( ID, OMLATTRPREFIX##Filename(),         OML.filename().asString() );    \
+  appendNumericAttribute( ID, OMLATTRPREFIX##DownloadSize(),     OML.downloadSize() );           \
+  appendStringAttribute ( ID, OMLATTRPREFIX##ChecksumType(),     OML.checksum().type() );        \
+  appendStringAttribute ( ID, OMLATTRPREFIX##Checksum(),         OML.checksum().checksum() );    \
+  appendNumericAttribute( ID, OMLATTRPREFIX##OpenSize(),         OML.openSize() );               \
   appendStringAttribute ( ID, OMLATTRPREFIX##OpenChecksumType(), OML.openChecksum().type() );    \
   appendStringAttribute ( ID, OMLATTRPREFIX##OpenChecksum(),     OML.openChecksum().checksum() );\
 } while(false)
