@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Mon Jul 30 17:23:19 CEST 2007 - ma@suse.de
+
+- Remove tribool from RepoInfo's interface.
+- revision 6301
+- version 3.13.1
+
+-------------------------------------------------------------------
 Mon Jul 30 13:59:33 CEST 2007 - ma@suse.de
 
 - Fixed wrong media number reported by script, message and patch.
