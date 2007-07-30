@@ -210,10 +210,18 @@ namespace zypp
   { return _pimpl->path; }
 
   RepoInfo::urls_const_iterator RepoInfo::baseUrlsBegin() const
-  { return _pimpl->baseUrls.begin(); }
+  {
+    return make_transform_iterator( _pimpl->baseUrls.begin(),
+                                    repo::RepoVariablesUrlReplacer() );
+    //return _pimpl->baseUrls.begin();
+  }
 
   RepoInfo::urls_const_iterator RepoInfo::baseUrlsEnd() const
-  { return _pimpl->baseUrls.end(); }
+  {
+    //return _pimpl->baseUrls.end();
+    return make_transform_iterator( _pimpl->baseUrls.end(),
+                                    repo::RepoVariablesUrlReplacer() );
+  }
 
   RepoInfo::urls_size_type RepoInfo::baseUrlsSize() const
   { return _pimpl->baseUrls.size(); }

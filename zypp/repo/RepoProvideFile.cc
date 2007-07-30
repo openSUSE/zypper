@@ -196,12 +196,11 @@ namespace zypp
 
       Url url;
       RepoInfo info = repo_r.info();
-      set<Url> urls = info.baseUrls();
-      if ( urls.empty() )
+      if ( info.baseUrlsEmpty() )
         ZYPP_THROW(Exception(_("No url in repository.")));
 
-      for ( RepoInfo::urls_const_iterator it = urls.begin();
-            it != urls.end();
+      for ( RepoInfo::urls_const_iterator it = info.baseUrlsBegin();
+            it != info.baseUrlsEnd();
             ++it )
       {
         url = *it;

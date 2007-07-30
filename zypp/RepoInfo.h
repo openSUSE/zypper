@@ -16,10 +16,12 @@
 #include <list>
 #include <set>
 #include "zypp/base/PtrTypes.h"
+#include "zypp/base/Iterator.h"
 
 #include "zypp/Pathname.h"
 #include "zypp/Url.h"
 #include "zypp/repo/RepoType.h"
+#include "zypp/repo/RepoVariables.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -113,10 +115,12 @@ namespace zypp
      * If empty, the base url will be used.
      */
     Url mirrorListUrl() const;
-
-    typedef std::set<Url>::const_iterator urls_const_iterator;
-    typedef std::set<Url>::size_type      urls_size_type;
-
+    
+    typedef std::set<Url> url_set;
+    //typedef url_set::const_iterator urls_const_iterator;
+    typedef url_set::size_type      urls_size_type;
+    typedef transform_iterator<repo::RepoVariablesUrlReplacer, url_set::const_iterator> urls_const_iterator;
+    
     /**
      * iterator that points at begin of repository urls
      */

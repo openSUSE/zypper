@@ -928,6 +928,7 @@ SET( zypp_repo_SRCS
   repo/SUSEMediaVerifier.cc
   repo/MediaInfoDownloader.cc
   repo/Downloader.cc
+  repo/RepoVariables.cc
 )
 
 SET( zypp_repo_HEADERS
@@ -943,6 +944,7 @@ SET( zypp_repo_HEADERS
   repo/SUSEMediaVerifier.h
   repo/MediaInfoDownloader.h
   repo/Downloader.h
+  repo/RepoVariables.h
 )
 
 INSTALL( FILES
