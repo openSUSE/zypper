@@ -882,9 +882,20 @@ Resolver::resolveDependencies (const ResolverContext_Ptr context)
 
     ResolverQueue_Ptr initial_queue = new ResolverQueue(_pool, _architecture, context);
 
+    // adding "external" provides, the the requirements will be ignored
+    IgnoreMap ignoreRequires = _ignoreRequires;
+    ResPool::AdditionalCapSet additionalCapSet = pool().additionaProvide();
+    for (ResPool::AdditionalCapSet::const_iterator it = additionalCapSet.begin();
+	 it != additionalCapSet.end(); it++) {
+	CapSet cset = it->second;
+	for (CapSet::const_iterator cit = cset.begin(); cit != cset.end(); ++cit) {
+	    ignoreRequires.insert(make_pair(PoolItem_Ref(), *cit));
+	}
+    }
+    
     // Initialize all ignoring dependencies
     initial_queue->context()->setIgnoreCababilities (_ignoreConflicts,
-						     _ignoreRequires,
+						     ignoreRequires,
 						     _ignoreObsoletes,
 						     _ignoreInstalledItem,
 						     _ignoreArchitectureItem);
@@ -944,8 +955,28 @@ Resolver::resolveDependencies (const ResolverContext_Ptr context)
 	initial_queue->addExtraCapability (*iter);
     }
     
+    // adding "external" requires
+    additionalCapSet = pool().additionalRequire();
+    for (ResPool::AdditionalCapSet::const_iterator it = additionalCapSet.begin();
+	 it != additionalCapSet.end(); it++) {
+	CapSet cset = it->second;
+	for (CapSet::const_iterator cit = cset.begin(); cit != cset.end(); ++cit) {
+	    initial_queue->addExtraCapability (*cit);	    
+	}
+    }
+
     for (CapSet::const_iterator iter = _extra_conflicts.begin(); iter != _extra_conflicts.end(); iter++) {
 	initial_queue->addExtraConflict (*iter);
+    }
+
+    // adding "external" conflicts
+    additionalCapSet = pool().additionaConflict();
+    for (ResPool::AdditionalCapSet::const_iterator it = additionalCapSet.begin();
+	 it != additionalCapSet.end(); it++) {
+	CapSet cset = it->second;
+	for (CapSet::const_iterator cit = cset.begin(); cit != cset.end(); ++cit) {
+	    initial_queue->addExtraConflict (*cit);	    
+	}
     }
 
     // Adding System resolvable
@@ -1192,6 +1223,7 @@ Resolver::resolvePool( bool tryAllPossibilities, bool keepExtras )
 
     // cleanup before next run
     reset( false, keepExtras );
+
     bool saveTryAllPossibilities = _tryAllPossibilities;
 
     if (tryAllPossibilities) {
