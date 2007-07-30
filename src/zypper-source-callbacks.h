@@ -25,6 +25,7 @@
 #include "zypper.h"
 #include "zypper-callbacks.h"
 
+
 ///////////////////////////////////////////////////////////////////
 namespace ZmartRecipients
 {
@@ -80,7 +81,7 @@ struct DownloadResolvableReportReceiver : public zypp::callback::ReceiveReport<z
   
   void display_step( const std::string &what, int value )
   {
-    display_progress (what, value);
+    display_progress (cout_v, what, value);
   }
   
   // Dowmload delta rpm:
@@ -110,7 +111,7 @@ struct DownloadResolvableReportReceiver : public zypp::callback::ReceiveReport<z
   
   virtual void finishDeltaDownload()
   {
-    display_done ();
+    display_done (cout_v);
   }
 
   // Apply delta rpm:
@@ -136,7 +137,7 @@ struct DownloadResolvableReportReceiver : public zypp::callback::ReceiveReport<z
 
   virtual void finishDeltaApply()
   {
-    display_done ();
+    display_done (cout_v);
   }
 
   // Dowmload patch rpm:
@@ -165,7 +166,7 @@ struct DownloadResolvableReportReceiver : public zypp::callback::ReceiveReport<z
   
   virtual void finishPatchDownload()
   {
-    display_done ();
+    display_done (cout_v);
   }
   
   
@@ -206,7 +207,7 @@ struct DownloadResolvableReportReceiver : public zypp::callback::ReceiveReport<z
 
   virtual void finish( zypp::Resolvable::constPtr /*resolvable_ptr*/, Error error, const std::string & reason )
   {
-    display_done ();
+    display_done (cout_v);
     display_error (error, reason);
   }
 };
@@ -218,11 +219,11 @@ struct ProgressReportReceiver  : public zypp::callback::ReceiveReport<zypp::Prog
     //std::cout << "TICK!" << std::endl;
     if ( data.reportAlive() )
     {
-      display_tick ( data.name() );
+      display_tick (cout, data.name() );
     }
     else
     {
-      display_progress ( data.name() , data.val() );
+      display_progress (cout, data.name() , data.val() );
     }
     
     
@@ -248,7 +249,7 @@ struct ProgressReportReceiver  : public zypp::callback::ReceiveReport<zypp::Prog
 
   virtual void finish( const zypp::ProgressData &data )
   {
-    display_done( data.name() );
+    display_done(cout, data.name() );
   }
 };
 
@@ -262,12 +263,12 @@ struct RepoReportReceiver  : public zypp::callback::ReceiveReport<zypp::repo::Re
     
     display_step(0);
   }
-  
+
   void display_step( int value )
   {
-    display_progress ("(" + _repo.info().alias() + ") " + _task , value);
+    display_progress (cout, "(" + _repo.info().alias() + ") " + _task , value);
   }
-  
+
   virtual bool progress( int value )
   {
     display_step(value);
@@ -276,7 +277,7 @@ struct RepoReportReceiver  : public zypp::callback::ReceiveReport<zypp::repo::Re
   
   virtual Action problem( zypp::Repository /*repo*/, Error error, const std::string & description )
   {
-    display_done ();
+    display_done (cout);
     display_error (error, description);
     return (Action) read_action_ari (ABORT);
   }
@@ -286,12 +287,12 @@ struct RepoReportReceiver  : public zypp::callback::ReceiveReport<zypp::repo::Re
     display_step(100);
     // many of these, avoid newline
     if (boost::algorithm::starts_with (task, "Reading patch"))
-      cerr_v << '\r' << flush;
+      cout << '\r' << flush;
     else
-      display_done ();
+      display_done (cout);
     display_error (error, reason);
   }
-  
+
   std::string _task;
   zypp::Repository _repo;
 };

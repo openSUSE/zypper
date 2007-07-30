@@ -502,7 +502,6 @@ void load_repo_resolvables()
       cout_v << " " << format(_("(%d resolvables found)")) % store.size();
 
       God->addResolvables(store);
-      cout_n << endl;
     }
     catch (const Exception & e)
     {

@@ -10,7 +10,9 @@
 #ifndef ZYPPER_CALLBACKS_H
 #define ZYPPER_CALLBACKS_H
 
+#include <iostream>
 #include <string>
+
 #include <zypp/Resolvable.h>
 
 #include "zypper.h"
@@ -23,11 +25,11 @@ enum Error {
     INVALID,
 };
 */
-void display_progress (const std::string& s, int percent);
-void display_tick (const std::string& s);
-void display_done (const std::string& s);
+void display_progress (std::ostream & out, const std::string& s, int percent);
+void display_tick (std::ostream & out, const std::string& s);
+void display_done (ostream & out, const std::string& s);
 // newline if normal progress is on single line
-void display_done ();
+void display_done (ostream & out);
 
 template<typename Error>
 void display_error (Error error, const std::string& reason) {

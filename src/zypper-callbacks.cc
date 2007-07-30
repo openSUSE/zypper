@@ -2,46 +2,46 @@
 #include "zypper.h"
 
 #include <ctype.h>
-#include <iostream>
 #include <sstream>
 
 using namespace std;
 
-void display_progress (const string& s, int percent) {
+void display_progress (ostream & out, const string& s, int percent) {
   static AliveCursor cursor;
 
   if ( percent == 100 )
-    cout_v << CLEARLN << cursor.done() << " " << s;
+    out << CLEARLN << cursor.done() << " " << s;
   else
-    cout_v << CLEARLN << cursor++ << " " << s;
+    out << CLEARLN << cursor++ << " " << s;
   // dont display percents if invalid
   if (percent >= 0 && percent <= 100)
-    cout_v << " [" << percent << "%]";
-  cout_v << flush;
+    out << " [" << percent << "%]";
+  out << flush;
 }
 
 // ----------------------------------------------------------------------------
 
-void display_tick (const string& s) {
+void display_tick (ostream & out, const string& s) {
   static AliveCursor cursor;
   cursor++;
-  cout_v << CLEARLN << cursor << " " << s;
-  cout_v << flush;
+  out << CLEARLN << cursor << " " << s;
+  out << flush;
 }
 
 // ----------------------------------------------------------------------------
 
-void display_done (const string& s) {
+void display_done (ostream & out, const string& s) {
   static AliveCursor cursor;
 
-  cout_v << CLEARLN << cursor.done() << " " << s;
-  cout_v << flush;
+  out << CLEARLN << cursor.done() << " " << s;
+  out << flush;
+  out << endl;
 }
 
 // ----------------------------------------------------------------------------
 
-void display_done () {
-  cout_v << endl;
+void display_done (ostream & out) {
+  out << endl;
 }
 
 // ----------------------------------------------------------------------------

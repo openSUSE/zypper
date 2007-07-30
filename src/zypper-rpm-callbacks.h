@@ -74,13 +74,13 @@ struct ScriptResolvableReportReceiver : public zypp::callback::ReceiveReport<zyp
   }
   /** Report error. */
   virtual void problem( const std::string & description ) {
-    display_done ();
+    display_done (cout_n);
     cerr << description << endl;
   }
 
   /** Report success. */
   virtual void finish() {
-    display_done ();
+    display_done (cout_n);
   }
 
 };
@@ -107,7 +107,7 @@ struct ScanRpmDbReceive : public zypp::callback::ReceiveReport<zypp::target::rpm
     // this is called too often. relax a bit.
     static int last = -1;
     if (last != value)
-      display_progress (_("Reading installed packages"), value);
+      display_progress (cout, _("Reading installed packages"), value);
     last = value;
     return true;
   }
@@ -119,7 +119,7 @@ struct ScanRpmDbReceive : public zypp::callback::ReceiveReport<zypp::target::rpm
 
   virtual void finish( Error error, const std::string & reason )
   {
-    display_done ();
+    display_done (cout);
     display_error (error, reason);
   }
 };
@@ -137,7 +137,7 @@ struct RemoveResolvableReportReceiver : public zypp::callback::ReceiveReport<zyp
   virtual bool progress(int value, zypp::Resolvable::constPtr resolvable)
   {
     // TranslatorExplanation This text is a progress display label e.g. "Removing [42%]"
-    display_progress (_("Removing ") + to_string (resolvable), value);
+    display_progress (cout, _("Removing ") + to_string (resolvable), value);
     return true;
   }
 
@@ -150,7 +150,7 @@ struct RemoveResolvableReportReceiver : public zypp::callback::ReceiveReport<zyp
 
   virtual void finish( zypp::Resolvable::constPtr /*resolvable*/, Error error, const std::string & reason )
   {
-    display_done ();
+    display_done (cout);
     display_error (error, reason);
   }
 };
@@ -172,7 +172,7 @@ struct InstallResolvableReportReceiver : public zypp::callback::ReceiveReport<zy
   void display_step( zypp::Resolvable::constPtr /*resolvable*/, int value )
   {
     // TranslatorExplanation This text is a progress display label e.g. "Installing [42%]"
-    display_progress (_("Installing ") /* + to_string (resolvable) */,  value);
+    display_progress (cout, _("Installing ") /* + to_string (resolvable) */,  value);
   }
 
   virtual void start( zypp::Resolvable::constPtr resolvable )
@@ -210,7 +210,7 @@ struct InstallResolvableReportReceiver : public zypp::callback::ReceiveReport<zy
 
   virtual void finish( zypp::Resolvable::constPtr /*resolvable*/, Error error, const std::string & reason, RpmLevel level )
   {
-    display_done ();
+    display_done (cout);
     if (error != NO_ERROR) {
       cerr << level;
     }
