@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Mon Jul 30 13:36:10 CEST 2007 - jkupec@suse.cz
+
+- Rug's --no-confirm option changed to work as --non-interactive
+- moved --no-confirm from help texts and man page to COMPATIBILITY
+  WITH RUG section of the man page
+- r6278
+
+-------------------------------------------------------------------
 Fri Jul 27 19:06:58 CEST 2007 - mvidner@suse.cz
 
 - Implemented capabilities for installing and removing, allowing to
