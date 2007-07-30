@@ -123,10 +123,8 @@ static void print_repo_list( const std::list<zypp::RepoInfo> &repos )
     tr << repo.type().asString();
     tr << repo.alias();
     
-    std::set<Url> urls;
-    urls = repo.baseUrls();
-    for ( RepoInfo::urls_const_iterator uit = urls.begin();
-          uit != urls.end();
+    for ( RepoInfo::urls_const_iterator uit = repo.baseUrlsBegin();
+          uit != repo.baseUrlsEnd();
           ++uit )
     {
       tr << (*uit).asString();
