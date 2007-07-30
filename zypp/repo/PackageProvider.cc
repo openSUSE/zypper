@@ -90,10 +90,10 @@ namespace zypp
       Url url;
       RepoInfo info = _package->repository().info();
       // FIXME we only support the first url for now.
-      if ( info.baseUrls().empty() )
+      if ( info.baseUrlsEmpty() )
         ZYPP_THROW(Exception("No url in repository."));
       else
-        url = * info.baseUrls().begin();
+        url = * info.baseUrlsBegin();
 
       MIL << "provide Package " << _package << endl;
       ScopedGuard guardReport( newReport() );
@@ -125,10 +125,10 @@ namespace zypp
       Url url;
       RepoInfo info = _package->repository().info();
       // FIXME we only support the first url for now.
-      if ( info.baseUrls().empty() )
+      if ( info.baseUrlsEmpty() )
         ZYPP_THROW(Exception("No url in repository."));
       else
-        url = * info.baseUrls().begin();
+        url = * info.baseUrlsBegin();
 
       // check whether to process patch/delta rpms
       if ( MediaManager::downloads(url) )

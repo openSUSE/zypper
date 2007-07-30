@@ -170,7 +170,7 @@ namespace zypp
 
   static void assert_urls( const RepoInfo &info )
   {
-    if (info.baseUrls().empty())
+    if (info.baseUrlsEmpty())
         ZYPP_THROW(RepoNoUrlException());
   }
 

@@ -186,7 +186,10 @@ namespace zypp
   { return _pimpl->alias; }
 
   std::string RepoInfo::name() const
-  { return _pimpl->name; }
+  {
+    repo::RepoVariablesStringReplacer replacer;
+    return replacer(_pimpl->name);
+  }
 
   Pathname RepoInfo::filepath() const
   { return _pimpl->filepath; }
@@ -204,7 +207,19 @@ namespace zypp
   { return _pimpl->gpgkey_url; }
 
   std::set<Url> RepoInfo::baseUrls() const
-  { return _pimpl->baseUrls; }
+  {
+    RepoInfo::url_set replaced_urls;
+    repo::RepoVariablesUrlReplacer replacer;
+    for ( url_set::const_iterator it = _pimpl->baseUrls.begin();
+          it != _pimpl->baseUrls.end();
+          ++it )
+    {
+      replaced_urls.insert(replacer(*it));
+    }
+    return replaced_urls;
+
+    return _pimpl->baseUrls;
+  }
 
   Pathname RepoInfo::path() const
   { return _pimpl->path; }
@@ -233,9 +248,8 @@ namespace zypp
   {
     str << "--------------------------------------" << std::endl;
     str << "- alias       : " << alias() << std::endl;
-    std::set<Url> url_set(baseUrls());
-    for ( std::set<Url>::const_iterator it = url_set.begin();
-          it != url_set.end();
+    for ( urls_const_iterator it = baseUrlsBegin();
+          it != baseUrlsEnd();
           ++it )
     {
       str << "- url         : " << *it << std::endl;
@@ -253,23 +267,24 @@ namespace zypp
 
   std::ostream & RepoInfo::dumpRepoOn( std::ostream & str ) const
   {
+    // we save the original data without variable replacement
     str << "[" << alias() << "]" << endl;
-    str << "name=" << name() << endl;
+    str << "name=" << _pimpl->name << endl;
 
-    if ( ! baseUrls().empty() )
+    if ( ! _pimpl->baseUrls.empty() )
       str << "baseurl=";
-    for ( urls_const_iterator it = baseUrlsBegin();
-          it != baseUrlsEnd();
+    for ( url_set::const_iterator it = _pimpl->baseUrls.begin();
+          it != _pimpl->baseUrls.end();
           ++it )
     {
       str << *it << endl;
     }
 
-    if ( ! path().empty() )
+    if ( ! _pimpl->path.empty() )
       str << "path="<< path() << endl;
 
-    if ( ! (mirrorListUrl().asString().empty()) )
-      str << "mirrorlist=" << mirrorListUrl() << endl;
+    if ( ! (_pimpl->mirrorlist_url.asString().empty()) )
+      str << "mirrorlist=" << _pimpl->mirrorlist_url << endl;
 
     str << "type=" << type().asString() << endl;
     str << "enabled=" << (enabled() ? "1" : "0") << endl;

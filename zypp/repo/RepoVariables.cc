@@ -62,9 +62,22 @@ std::string RepoVariablesStringReplacer::operator()( const std::string &value ) 
                    "$arch",
                    ZConfig::instance().systemArchitecture().asString() );
   // $basearch
-  ZConfig::instance().systemArchitecture();
   
-  ZConfig::instance();
+  Arch::CompatSet cset( Arch::compatSet( ZConfig::instance().systemArchitecture() ) );
+  Arch::CompatSet::const_iterator it = cset.end();
+  --it;
+  // now at noarch
+  --it;
+  
+  Arch basearch = *it;
+  if ( basearch == Arch_noarch )
+  {
+    basearch = ZConfig::instance().systemArchitecture();
+  }
+
+  newvalue = gsub( newvalue,
+                   "$basearch",
+                   basearch.asString() );
   return newvalue;
 }
 

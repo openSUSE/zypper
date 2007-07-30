@@ -7,12 +7,12 @@
 #include <boost/test/parameterized_test.hpp>
 #include <boost/test/unit_test_log.hpp>
 
+#include "zypp/ZYppFactory.h"
 #include "zypp/Url.h"
 #include "zypp/PathInfo.h"
 #include "zypp/TmpPath.h"
 #include "zypp/ZConfig.h"
 #include "zypp/repo/RepoVariables.h"
-
 
 using std::cout;
 using std::endl;
@@ -28,6 +28,10 @@ void replace_test(const string &dir)
   
   BOOST_CHECK_EQUAL(replacer("http://foo/$arch/bar"),
                     "http://foo/"+ ZConfig::instance().systemArchitecture().asString() + "/bar");
+
+  getZYpp()->setArchitecture(Arch("i686"));
+  BOOST_CHECK_EQUAL(replacer("http://foo/$arch/bar/$basearch"),
+                    "http://foo/i686/bar/i386");
 }
 
 test_suite*

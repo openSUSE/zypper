@@ -17,6 +17,7 @@
 #include <set>
 #include "zypp/base/PtrTypes.h"
 #include "zypp/base/Iterator.h"
+#include "zypp/base/Deprecated.h"
 
 #include "zypp/Pathname.h"
 #include "zypp/Url.h"
@@ -88,7 +89,7 @@ namespace zypp
      *
      * \deprecated IMO superfluous as we provide begin/end iterator.
      */
-    std::set<Url> baseUrls() const;
+    ZYPP_DEPRECATED std::set<Url> baseUrls() const;
 
     /**
      * \short Repository path
