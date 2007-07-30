@@ -7,8 +7,8 @@ CFLAGS        = -pipe -O2 -Wall -W -D_REENTRANT  $(DEFINES)
 CXXFLAGS      = -pipe -O2 -Wall -W -D_REENTRANT  $(DEFINES)
 INCPATH       = -I/usr/include -I. -I. -I.
 LINK          = g++
-LFLAGS        = -lmysqlclient
-LIBS          = $(SUBLIBS)  -L/usr/lib
+LFLAGS        = -lpdbtozypp
+LIBS          = $(SUBLIBS)  -L/usr/local/lib
 
 ####### Output directory
 
@@ -16,9 +16,9 @@ OBJECTS_DIR   = ./
 
 ####### Files
 
-SOURCES       = db.cc resolvable.h dbmain.cc 
-OBJECTS       = db.o dbmain.o resolvable.o
-OBJCOMP		  = /usr/lib/libzypp.so 
+SOURCES       = main.cc 
+OBJECTS       = main.o
+OBJCOMP		  =  
 DESTDIR       = 
 TARGET        = dbread
 
