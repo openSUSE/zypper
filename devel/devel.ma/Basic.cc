@@ -1,4 +1,5 @@
 #include "Tools.h"
+#include "Tools.h"
 
 #include <iostream>
 
@@ -9,26 +10,11 @@
 using namespace std;
 using namespace zypp;
 
-struct BuildRes
+void chk( ResObject::constPtr p )
 {
-  BuildRes()
-  {
-  }
-
-  void operator()( const char *const & line_r ) const
-  { operator()( string( line_r ) ); }
-
-  void operator()( const string & line_r ) const
-  {
-    vector<string> words;
-    switch ( str::split( line_r, back_inserter(words) ) )
-      {
-      default:
-        DBG << words << endl;
-      }
-  }
-
-};
+  MIL << p << endl;
+  DBG << p->deps() << endl;
+}
 
 
 /******************************************************************
@@ -40,17 +26,24 @@ int main( int argc, char * argv[] )
 {
   INT << "===[START]==========================================" << endl;
 
-  //ResPool pool( getZYpp()->pool() );
+  ResPool pool( getZYpp()->pool() );
 
   const char *const lines[] = {
-    "I Product prod 1 1 x86_64"
-    "A Product prod2 1 1 x86_64"
+    "@ package",
+    "@ installed",
+    "- foo 1 1 i686",
+    "@ provides",
+    "modalias(kernel-bigsmp:pci:*provided*)",
+    "@ suplements",
+    "modalias(kernel-bigsmp:pci:*suplements*)",
+    "@ fin"
   };
 
-  BuildRes a;
+  //debug::addPool( lines, lines+(sizeof(lines)/sizeof(const char *const)) );
+  debug::addPool( "/tmp/a" );
+  USR << pool << endl;
 
-  for_each( lines, lines+(sizeof(lines)/sizeof(const char *const)),
-            a );
+  for_each( pool.begin(), pool.end(), chk );
 
   INT << "===[END]============================================" << endl
       << endl;

@@ -39,7 +39,7 @@ FOREACH( loop_var ScanSource Iorder Xml Main)
 ENDFOREACH( loop_var )
 
 
-FOREACH( loop_var AOUT Parse Test)
+FOREACH( loop_var AOUT Parse Test Basic)
    ADD_EXECUTABLE( ${loop_var}
       ${loop_var}.cc
    )

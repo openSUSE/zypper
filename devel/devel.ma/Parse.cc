@@ -264,6 +264,25 @@ int main( int argc, char * argv[] )
   //zypp::base::LogControl::instance().logfile( "log.restrict" );
   INT << "===[START]==========================================" << endl;
 
+  Capability c( CapFactory().parse( ResTraits<Package>::kind,
+                                    "modalias(kernel-bigsmp:pci:kfghkskd***k)" ) );
+
+  capability::ModaliasCap::constPtr mc( capability::asKind<capability::ModaliasCap>(c) );
+
+  DBG << c << endl;
+  DBG << c.index() << endl;
+
+  MIL << mc << endl;
+  MIL << mc->name() << endl;
+  MIL << mc->pkgname() << endl;
+
+
+
+  ///////////////////////////////////////////////////////////////////
+  INT << "===[END]============================================" << endl << endl;
+  zypp::base::LogControl::instance().logNothing();
+  return 0;
+
   RepoManager repoManager( makeRepoManager( "/Local/ROOT" ) );
   RepoInfoList repos = repoManager.knownRepositories();
   SEC << repos << endl;
