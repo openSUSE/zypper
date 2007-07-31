@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Jul 31 11:04:35 CEST 2007 - jkupec@suse.cz
+
+- --debug-solver added for generating solver test case
+- r6319
+
+-------------------------------------------------------------------
 Mon Jul 30 18:48:25 CEST 2007 - jkupec@suse.czi
 
 - new translations added
