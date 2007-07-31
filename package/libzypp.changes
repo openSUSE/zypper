@@ -1,4 +1,14 @@
 -------------------------------------------------------------------
+Tue Jul 31 22:01:08 CEST 2007 - ma@suse.de
+
+- Added package attributes Package::sourcePkgName and
+  Package::sourcePkgEdition. Name and edition of the source
+  rpm this package was built from.
+- Added ZYpp::installSrcPackage to install a single source package.
+- revision 6353
+- version 3.13.4
+
+-------------------------------------------------------------------
 Tue Jul 31 19:06:54 CEST 2007 - ma@suse.de
 
 - Temorary files and directories created by makeSibling use the
