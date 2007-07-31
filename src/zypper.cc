@@ -58,21 +58,6 @@ KeyRingCallbacks keyring_callbacks;
 DigestCallbacks digest_callbacks;
 
 
-static struct option global_options[] = {
-  {"help",            no_argument,       0, 'h'},
-  {"verbose",         no_argument,       0, 'v'},
-  {"quiet",           no_argument,       0, 'q'},
-  {"version",         no_argument,       0, 'V'},
-  {"terse",           no_argument,       0, 't'},
-  {"table-style",     required_argument, 0, 's'},
-  {"rug-compatible",  no_argument,       0, 'r'},
-  {"non-interactive", no_argument,       0, 0},
-  {"no-gpg-checks",   no_argument,       0, 0},
-  {"root",            required_argument, 0, 'R'},
-  {"opt",             optional_argument, 0, 'o'},
-  {0, 0, 0, 0}
-};
-
 /**
  * Constructor wrapper catching exceptions,
  * returning an empty one on error.
@@ -90,28 +75,6 @@ Url make_url (const string & url_s) {
   return u;
 }
 
-string help_commands = _(
-  "  Commands:\n"
-  "\thelp\t\t\tHelp\n"
-  "\tshell, sh\t\tAccept multiple commands at once\n"
-  "\tinstall, in\t\tInstall packages or resolvables\n"
-  "\tremove, rm\t\tRemove packages or resolvables\n"
-  "\tsearch, se\t\tSearch for packages matching a pattern\n"
-  "\trepos, lr\t\tList all defined repositories.\n"
-  "\taddrepo, ar\t\tAdd a new repository\n"
-  "\tremoverepo, rr\t\tRemove specified repository\n"
-  "\trenamerepo, nr\t\tRename specified repository\n"
-  "\tmodifyrepo, mr\t\tModify specified repository\n"
-  "\trefresh, ref\t\tRefresh all repositories\n"
-  "\tpatch-check, pchk\tCheck for patches\n"
-  "\tpatches, pch\t\tList patches\n"
-  "\tlist-updates, lu\tList updates\n"
-  "\txml-updates, xu\t\tList updates and patches in xml format\n"
-  "\tupdate, up\t\tUpdate installed resolvables with newer versions.\n"
-  "\tinfo, if\t\tShow full information for packages\n"
-  "\tpatch-info\t\tShow full information for patches\n"
-  "");
-
 bool ghelp = false;
 
 /*
@@ -122,11 +85,60 @@ bool ghelp = false;
  */
 ZypperCommand process_globals(int argc, char **argv)
 {
-  // global options
+  static struct option global_options[] = {
+    {"help",            no_argument,       0, 'h'},
+    {"verbose",         no_argument,       0, 'v'},
+    {"quiet",           no_argument,       0, 'q'},
+    {"version",         no_argument,       0, 'V'},
+    {"terse",           no_argument,       0, 't'},
+    {"table-style",     required_argument, 0, 's'},
+    {"rug-compatible",  no_argument,       0, 'r'},
+    {"non-interactive", no_argument,       0, 0},
+    {"no-gpg-checks",   no_argument,       0, 0},
+    {"root",            required_argument, 0, 'R'},
+    {"opt",             optional_argument, 0, 'o'},
+    {"disable-system-resolvables", optional_argument, 0, 'o'},
+    {0, 0, 0, 0}
+  };
+
+  // parse global options
   gopts = parse_options (argc, argv, global_options);
   if (gopts.count("_unknown"))
     return ZypperCommand::NONE;
-    //return "_unknown";
+
+  static string help_global_options = _("  Options:\n"
+    "\t--help, -h\t\tHelp.\n"
+    "\t--version, -V\t\tOutput the version number.\n"
+    "\t--quiet, -q\t\tSuppress normal output, print only error messages.\n"
+    "\t--verbose, -v\t\tIncrease verbosity.\n"
+    "\t--terse, -t\t\tTerse output for machine consumption.\n"
+    "\t--table-style, -s\tTable style (integer).\n"
+    "\t--rug-compatible, -r\tTurn on rug compatibility.\n"
+    "\t--non-interactive\tDon't ask anything, use default answers automatically.\n"
+    "\t--no-gpg-checks\t\tIgnore GPG check failures and continue.\n"
+    "\t--root, -R <dir>\tOperate on a different root directory.\n");
+  
+  static string help_commands = _(
+    "  Commands:\n"
+    "\thelp\t\t\tHelp\n"
+    "\tshell, sh\t\tAccept multiple commands at once\n"
+    "\tinstall, in\t\tInstall packages or resolvables\n"
+    "\tremove, rm\t\tRemove packages or resolvables\n"
+    "\tsearch, se\t\tSearch for packages matching a pattern\n"
+    "\trepos, lr\t\tList all defined repositories.\n"
+    "\taddrepo, ar\t\tAdd a new repository\n"
+    "\tremoverepo, rr\t\tRemove specified repository\n"
+    "\trenamerepo, nr\t\tRename specified repository\n"
+    "\tmodifyrepo, mr\t\tModify specified repository\n"
+    "\trefresh, ref\t\tRefresh all repositories\n"
+    "\tpatch-check, pchk\tCheck for patches\n"
+    "\tpatches, pch\t\tList patches\n"
+    "\tlist-updates, lu\tList updates\n"
+    "\txml-updates, xu\t\tList updates and patches in xml format\n"
+    "\tupdate, up\t\tUpdate installed resolvables with newer versions.\n"
+    "\tinfo, if\t\tShow full information for packages\n"
+    "\tpatch-info\t\tShow full information for patches\n"
+    "");
 
   if (gopts.count("rug-compatible"))
     gSettings.is_rug_compatible = true;
@@ -140,19 +152,6 @@ ZypperCommand process_globals(int argc, char **argv)
   if (gopts.count("help"))
     ghelp = true;
 
-  string help_global_options = _("  Options:\n"
-    "\t--help, -h\t\tHelp.\n"
-    "\t--version, -V\t\tOutput the version number.\n"
-    "\t--quiet, -q\t\tSuppress normal output, print only error messages.\n"
-    "\t--verbose, -v\t\tIncrease verbosity.\n"
-    "\t--terse, -t\t\tTerse output for machine consumption.\n"
-    "\t--table-style, -s\tTable style (integer).\n"
-    "\t--rug-compatible, -r\tTurn on rug compatibility.\n"
-    "\t--non-interactive\tDon't ask anything, use default answers automatically.\n"
-    "\t--no-gpg-checks\t\tIgnore GPG check failures and continue.\n"
-    "\t--root, -R <dir>\tOperate on a different root directory.\n");
-    ;
-  
   if (gopts.count("quiet")) {
     gSettings.verbosity = -1;
     DBG << "Verbosity " << gSettings.verbosity << endl;
@@ -188,7 +187,6 @@ ZypperCommand process_globals(int argc, char **argv)
   if (gopts.count("root")) {
     gSettings.root_dir = gopts["root"].front();
   }
-
 
   // testing option
   if (gopts.count("opt")) {
@@ -333,18 +331,19 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
       {0, 0, 0, 0}
     };
     specific_options = service_add_options;
+    // TranslatorExplanation don't translate the repo types (well, the plaindir)
+    // since they must be used in their original shape
     specific_help = _(
       "addrepo (ar) [options] <URI> <alias>\n"
       "\n"
-      "Add repository specified by URI to the system and assing specified alias to it."
+      "Add repository specified by URI to the system and assing specified alias to it.\n"
       "\n"
       "  Command options:\n"
-      "\t--repo,-r <FILE.repo>\tRead the URL and alias from a file\n"
-      "\t\t\t\t(even remote)\n"
-      "\t--type,-t <TYPE>\tType of repository (YaST, YUM, or plaindir)\n"
-      "\t--disabled,-d\t\tAdd the repository as disabled\n"
-      "\t--no-refresh,-n\t\tAdd the repository with auto-refresh disabled\n"
-      );
+      "-r, --repo <FILE.repo>  Read the URL and alias from a file (even remote)\n"
+      "-t, --type <TYPE>       Type of repository (YaST, YUM, or plaindir)\n"
+      "-d, --disabled          Add the repository as disabled\n"
+      "-n, --no-refresh        Add the repository with auto-refresh disabled\n"
+    );
   }
   else if (command == ZypperCommand::LIST_REPOS) {
     static struct option service_list_options[] = {
@@ -355,10 +354,10 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
     specific_help = _(
       "repos (lr)\n"
       "\n"
-      "List all defined repositories."
+      "List all defined repositories.\n"
       "\n"
       "This command has no additional options.\n"
-      );
+    );
   }
   else if (command == ZypperCommand::REMOVE_REPO) {
     static struct option service_delete_options[] = {
@@ -371,12 +370,12 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
     specific_help = _(
       "removerepo (rr) [options] <alias|URL>\n"
       "\n"
-      "Remove repository specified by alias or URL."
+      "Remove repository specified by alias or URL.\n"
       "\n"
       "  Command options:\n"
-      "\t--loose-auth\tIgnore user authentication data in the URL\n"
-      "\t--loose-query\tIgnore query string in the URL\n"
-      );
+      "    --loose-auth\tIgnore user authentication data in the URL\n"
+      "    --loose-query\tIgnore query string in the URL\n"
+    );
   }
   else if (command == ZypperCommand::RENAME_REPO) {
     static struct option service_rename_options[] = {
@@ -387,10 +386,10 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
     specific_help = _(
       "renamerepo [options] <alias> <new-alias>\n"
       "\n"
-      "Assign new alias to the repository specified by alias."
+      "Assign new alias to the repository specified by alias.\n"
       "\n"
       "This command has no additional options.\n"
-      );
+    );
   }
   else if (command == ZypperCommand::MODIFY_REPO) {
     static struct option service_modify_options[] = {
@@ -405,12 +404,13 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
     specific_help = _(
       "modifyrepo (mr) <options> <alias>\n"
       "\n"
-      "Modify properties of the repository specified by alias."
+      "Modify properties of the repository specified by alias.\n"
       "\n"
-      "\t--disable,-d\t\tDisable the repository (but don't remove it)\n"
-      "\t--enable,-e\t\tEnable a disabled repository\n"
-      "\t--enable-autorefresh,-a\tEnable auto-refresh of the repository\n"
-      "\t--disable-autorefresh\tDisable auto-refresh of the repository\n"
+      "  Command options:\n"
+      "-d, --disable             Disable the repository (but don't remove it)\n"
+      "-e, --enable              Enable a disabled repository\n"
+      "-a, --enable-autorefresh  Enable auto-refresh of the repository\n"
+      "    --disable-autorefresh Disable auto-refresh of the repository\n"
     );
   }
   else if (command == ZypperCommand::REFRESH) {
@@ -422,10 +422,10 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
     specific_help = _(
       "refresh\n"
       "\n"
-      "Refresh all installation sources found in the system.\n"
+      "Refresh all defined and enabled repositories.\n"
       "\n"
       "This command has no additional options.\n"
-      );
+    );
   }
   else if (command == ZypperCommand::LIST_UPDATES) {
     static struct option list_updates_options[] = {
@@ -447,7 +447,7 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
       "-t, --type <type>   Type of resolvable (package, patch, pattern, product) (default: patch)\n"
       "-r, --repo <alias>  Work only with updates from repository specified by alias.\n"
       "    --best-effort   Do a 'best effort' approach to update, updates to a lower than latest-and-greatest version are also acceptable.\n"
-      );
+    );
   }
   else if (command == ZypperCommand::UPDATE) {
     static struct option update_options[] = {
@@ -521,7 +521,7 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
       "    --sort-by-repo         Sort packages by repository.\n"
       "\n"
       "* and ? wildcards can also be used within search strings.\n"
-      );
+    );
   }
   else if (command == ZypperCommand::PATCH_CHECK) {
     static struct option patch_check_options[] = {
