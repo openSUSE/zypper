@@ -46,6 +46,8 @@ using namespace boost;
 ZYpp::Ptr God = NULL;
 RuntimeData gData;
 Settings gSettings;
+parsed_opts gopts; // global options
+parsed_opts copts; // command options
 
 ostream no_stream(NULL);
 
@@ -54,6 +56,7 @@ SourceCallbacks source_callbacks;
 MediaCallbacks media_callbacks;
 KeyRingCallbacks keyring_callbacks;
 DigestCallbacks digest_callbacks;
+
 
 static struct option global_options[] = {
   {"help",            no_argument,       0, 'h'},
@@ -109,8 +112,6 @@ string help_commands = _(
   "\tpatch-info\t\tShow full information for patches\n"
   "");
 
-// global options
-parsed_opts gopts;
 bool ghelp = false;
 
 /*
@@ -247,7 +248,7 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
   string help_global_source_options = _(
       "  Repository options:\n"
       "\t--disable-repositories, -D\t\tDo not read data from defined repositories.\n"
-      "\t--repo <URI|.repo>\t\tRead additional repository\n"
+      "\t--plus-repo <URI|.repo>\t\tRead additional repository\n" //! \todo additional repo
       );
 //! \todo preserve for rug comp.  "\t--disable-system-sources, -D\t\tDo not read the system sources\n"
 //! \todo preserve for rug comp.  "\t--source, -S\t\tRead additional source\n"
@@ -262,7 +263,9 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
   }
   else if (command == ZypperCommand::INSTALL) {
     static struct option install_options[] = {
-      {"catalog",	            required_argument, 0, 'c'},
+      {"repo",                      required_argument, 0, 'r'},
+      // rug compatibility option, we have --repo
+      {"catalog",                   required_argument, 0, 'c'},
       {"type",	                    required_argument, 0, 't'},
       {"name",			    no_argument,       0, 'n'},
       // rug compatibility, we have global --non-interactive
@@ -275,6 +278,9 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
       {0, 0, 0, 0}
     };
     specific_options = install_options;
+    // TranslatorExplanation don't translate the resolvable types
+    // (package, patch, pattern, product) or at least leave also their
+    // originals, since they are expected untranslated on the command line
     specific_help = _(
       "install [options] <capability> ...\n"
       "\n"
@@ -282,16 +288,19 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
       "            NAME[ OP <VERSION>], where OP is one of <, <=, =, >=, >.\n"
       "\n"
       "  Command options:\n"
-      "\t--catalog,-c\t\t\tOnly from this catalog (under development)\n"
-      "\t--type,-t <resolvable_type>\tType of resolvable (package, patch, pattern, product) (default: package)\n"
-      "\t--name,-n\t\t\tSelect resolvables by plain name, not by capability\n"
-      "\t--auto-agree-with-licenses,-l\tAutomatically say 'yes' to third party license confirmation prompt.\n"
-      "\t\t\t\t\tSee man zypper for more details.\n"
-      "\t--debug-solver\t\t\tCreate solver test case for debugging\n"  
+      "-r, --repo <alias>              Install resolvables only from repository specified by alias.\n"
+      "-t, --type <type>               Type of resolvable (package, patch, pattern, product) (default: package)\n"
+      "-n, --name                      Select resolvables by plain name, not by capability\n"
+      "-l, --auto-agree-with-licenses  Automatically say 'yes' to third party license confirmation prompt.\n"
+      "                                See 'man zypper' for more details.\n"
+      "    --debug-solver              Create solver test case for debugging\n"
     );
   }
   else if (command == ZypperCommand::REMOVE) {
     static struct option remove_options[] = {
+      {"repo",       required_argument, 0, 'r'},
+      // rug compatibility option, we have --repo
+      {"catalog",    required_argument, 0, 'c'},
       {"type",       required_argument, 0, 't'},
       {"name",	     no_argument,       0, 'n'},
       // rug compatibility, we have global --non-interactive
@@ -308,10 +317,11 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
       "            NAME[ OP <VERSION>], where OP is one of <, <=, =, >=, >.\n"
       "\n"
       "  Command options:\n"
-      "\t--type,-t <resolvable_type>\tType of resolvable (package, patch, pattern, product) (default: package)\n"
-      "\t--name,-n\t\t\tSelect resolvables by plain name, not by capability\n"
-      "\t--debug-solver\t\t\tCreate solver test case for debugging\n"  
-      );
+      "-r, --repo <alias> Operate only with resolvables from repository specified by alias.\n"
+      "-t, --type <type>  Type of resolvable (package, patch, pattern, product) (default: package)\n"
+      "-n, --name         Select resolvables by plain name, not by capability\n"
+      "    --debug-solver Create solver test case for debugging\n"  
+    );
   }
   else if (command == ZypperCommand::ADD_REPO) {
     static struct option service_add_options[] = {
@@ -419,9 +429,11 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
   }
   else if (command == ZypperCommand::LIST_UPDATES) {
     static struct option list_updates_options[] = {
-      {"type",		required_argument, 0, 't'},
-      { "from-repo",    required_argument, 0, 0 },
-      { "best-effort",  no_argument, 0, 0 },
+      {"repo",        required_argument, 0, 'r'},
+      // rug compatibility option, we have --repo
+      {"catalog",     required_argument, 0, 'c'},
+      {"type",        required_argument, 0, 't'},
+      {"best-effort", no_argument, 0, 0 },
       {"help", no_argument, 0, 'h'},
       {0, 0, 0, 0}
     };
@@ -432,17 +444,19 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
       "List all available updates\n"
       "\n"
       "  Command options:\n"
-      "\t--type,-t <resolvable_type>\tType of resolvable (package, patch, pattern, product) (default: patch)\n"
-      "\t--from-repo <repository_alias>\tRestrict updates to named repository (default: get updates from all repositories)\n"
-      "\t--best-effort\tDo a 'best effort' approach to update, updates to a lower than latest-and-greatest version are also acceptable\n"
+      "-t, --type <type>   Type of resolvable (package, patch, pattern, product) (default: patch)\n"
+      "-r, --repo <alias>  Work only with updates from repository specified by alias.\n"
+      "    --best-effort   Do a 'best effort' approach to update, updates to a lower than latest-and-greatest version are also acceptable.\n"
       );
   }
   else if (command == ZypperCommand::UPDATE) {
     static struct option update_options[] = {
+      {"repo",                      required_argument, 0, 'r'},
+      // rug compatibility option, we have --repo
+      {"catalog",                   required_argument, 0, 'c'},
       {"type",		            required_argument, 0, 't'},
       {"skip-interactive",          no_argument,       0, 0},
       {"auto-agree-with-licenses",  no_argument,       0, 'l'},
-      {"from-repo",                 required_argument, 0, 0},
       {"best-effort",               no_argument,       0, 0},
       {"debug-solver",              no_argument,       0, 0},
       {"help", no_argument, 0, 'h'},
@@ -454,13 +468,13 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
       "\n"
       "  Command options:\n"
       "\n"
-      "\t--type,-t <resolvable_type>\tType of resolvable (package, patch, pattern, product) (default: patch)\n"
-      "\t--skip-interactive\t\tSkip interactive updates\n"
-      "\t--auto-agree-with-licenses,-l\tAutomatically say 'yes' to third party license confirmation prompt.\n"
-      "\t\t\t\t\tSee man zypper for more details.\n"
-      "\t--from-repo <repository_alias>\tRestrict updates to named repository (default: get updates from all repositories)\n"
-      "\t--best-effort\t\t\tDo a 'best effort' approach to update, updates to a lower than latest-and-greatest version are also acceptable\n"
-      "\t--debug-solver\t\t\tCreate solver test case for debugging\n"  
+      "-t, --type <type>               Type of resolvable (package, patch, pattern, product) (default: patch)\n"
+      "-r, --repo <alias>              Work only with updates from repository specified by alias.\n"
+      "    --skip-interactive          Skip interactive updates\n"
+      "-l, --auto-agree-with-licenses  Automatically say 'yes' to third party license confirmation prompt.\n"
+      "                                See man zypper for more details.\n"
+      "    --best-effort               Do a 'best effort' approach to update, updates to a lower than latest-and-greatest version are also acceptable\n"
+      "    --debug-solver              Create solver test case for debugging\n"  
     );
   }
   else if (command == ZypperCommand::SEARCH) {
@@ -476,7 +490,12 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
       {"case-sensitive", no_argument, 0, 'c'},
       {"type",    required_argument, 0, 't'},
       {"sort-by-name", no_argument, 0, 0},
+      // rug compatibility option, we have --sort-by-repo
       {"sort-by-catalog", no_argument, 0, 0},
+      {"sort-by-repo", no_argument, 0, 0},
+      // rug compatibility option, we have --repo
+      {"catalog", required_argument, 0, 'c'}, //! \todo fix conflicting 'c' short option
+      {"repo", required_argument, 0, 'r'},
       {"help", no_argument, 0, 'h'},
       {0, 0, 0, 0}
     };
@@ -497,14 +516,18 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
       "-i, --installed-only       Show only packages that are already installed.\n"
       "-u, --uninstalled-only     Show only packages that are not currently installed.\n"
       "-t, --type                 Search only for packages of the specified type.\n"
+      "-r, --repo <alias>         Search only in repository specified by alias.\n"
       "    --sort-by-name         Sort packages by name (default).\n"
-      "    --sort-by-catalog      Sort packages by catalog (source).\n"
+      "    --sort-by-repo         Sort packages by repository.\n"
       "\n"
       "* and ? wildcards can also be used within search strings.\n"
       );
   }
   else if (command == ZypperCommand::PATCH_CHECK) {
     static struct option patch_check_options[] = {
+      {"repo", required_argument, 0, 'r'},
+      // rug compatibility option, we have --repo
+      {"catalog", required_argument, 0, 'c'},
       {"help", no_argument, 0, 'h'},
       {0, 0, 0, 0}
     };
@@ -514,11 +537,16 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
       "\n"
       "Check for available patches\n"
       "\n"
-      "This command has no additional options.\n"
-      );
+      "  Command options:\n"
+      "\n"
+      "-r, --repo <alias>  Check for patches only in repository specified by alias.\n"
+    );
   }
   else if (command == ZypperCommand::SHOW_PATCHES) {
     static struct option patches_options[] = {
+      {"repo", required_argument, 0, 'r'},
+      // rug compatibility option, we have --repo
+      {"catalog", required_argument, 0, 'c'},
       {"help", no_argument, 0, 'h'},
       {0, 0, 0, 0}
     };
@@ -528,11 +556,16 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
       "\n"
       "List all available patches\n"
       "\n"
-      "This command has no additional options.\n"
-      );
+      "  Command options:\n"
+      "\n"
+      "-r, --repo <alias>  Check for patches only in repository specified by alias.\n"
+    );
   }
   else if (command == ZypperCommand::INFO) {
     static struct option info_options[] = {
+      {"repo", required_argument, 0, 'r'},
+      // rug compatibility option, we have --repo
+      {"catalog", required_argument, 0, 'c'},
       {"help", no_argument, 0, 'h'},
       {0, 0, 0, 0}
     };
@@ -542,11 +575,15 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
       "\n"
       "'info' -- Show full information for packages\n"
       "\n"
-      "This command has no additional options.\n"
-      );
+      "  Command options:\n"
+      "\n"
+      "-r, --repo <alias>  Work only with the repository specified by alias.\n"
+    );
   }
+  // rug compatibility command, we have zypper info [-t <res_type>]
   else if (command == ZypperCommand::RUG_PATCH_INFO) {
     static struct option patch_info_options[] = {
+      {"catalog", required_argument, 0, 'c'},
       {"help", no_argument, 0, 'h'},
       {0, 0, 0, 0}
     };
@@ -556,8 +593,8 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
       "\n"
       "'patch-info' -- Show detailed information for patches\n"
       "\n"
-      "This command has no additional options.\n"
-      );
+      "This is a rug compatibility alias for 'zypper info -t patch'\n"
+    );
   }
   else if (command == ZypperCommand::MOO) {
     static struct option moo_options[] = {
@@ -575,6 +612,7 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
   }
   else if (command == ZypperCommand::XML_LIST_UPDATES_PATCHES) {
     static struct option xml_updates_options[] = {
+      {"repo", required_argument, 0, 'r'},
       {"help", no_argument, 0, 'h'},
       {0, 0, 0, 0}
     };
@@ -584,11 +622,13 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
       "\n"
       "'xml-updates' - Show updates and patches in xml format\n"
       "\n"
-      "This command has no additional options.\n"
+      "  Command options:\n"
+      "-r, --repo <alias>  Work only with updates from repository specified by alias.\n"
     );
   }
 
-  parsed_opts copts = parse_options (argc, argv, specific_options);
+  // parse command options
+  copts = parse_options (argc, argv, specific_options);
   if (copts.count("_unknown"))
     return ZYPPER_EXIT_ERR_SYNTAX;
 
@@ -891,7 +931,7 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
       return ZYPPER_EXIT_ERR_INVALID_ARGS;
     }
 
-    modify_repo(arguments[0], copts);
+    modify_repo(arguments[0]);
   }
 
   // --------------------------( refresh )------------------------------------
@@ -961,7 +1001,9 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
       return ZYPPER_EXIT_ERR_INVALID_ARGS;
     }
 
-    init_repos();
+    int initret = init_repos();
+    if (initret != ZYPPER_EXIT_OK)
+      return initret;
 
     //! \todo support temporary additional repos
     /*
@@ -1047,6 +1089,11 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
 
     options.resolveConflicts();
 
+    int initret = init_repos();
+    if (initret != ZYPPER_EXIT_OK)
+      return initret;
+    cond_init_target();         // calls ZYpp::initializeTarget("/");
+
     Table t;
     t.style(Ascii);
 
@@ -1054,8 +1101,9 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
     search.doSearch(FillTable(t, search.installedCache()));
 
     if (t.empty())
-      cout_n << _("No resolvables found.") << endl;
+      cout << _("No resolvables found.") << endl;
     else {
+      cout << endl;
       if (copts.count("sort-by-catalog")) t.sort(1);
       else t.sort(3); // sort by name
       cout << t;
@@ -1074,7 +1122,11 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
     }
 
     cond_init_target ();
-    init_repos ();
+
+    int initret = init_repos();
+    if (initret != ZYPPER_EXIT_OK)
+      return initret;
+
     // TODO additional_sources
     // TODO warn_no_sources
     // TODO calc token?
@@ -1101,7 +1153,9 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
     }
 
     cond_init_target ();
-    init_repos ();
+    int initret = init_repos();
+    if (initret != ZYPPER_EXIT_OK)
+      return initret;
     cond_load_resolvables();
     establish ();
     show_patches ();
@@ -1125,7 +1179,6 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
 	return ZYPPER_EXIT_ERR_INVALID_ARGS;
     }
 
-    string srepo = copts.count( "from-repo" ) ? copts["from-repo"].front() : "";
     bool best_effort = copts.count( "best-effort" ); 
 
     if (gSettings.is_rug_compatible && best_effort) {
@@ -1135,11 +1188,13 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
 	cerr << _("Running as 'rug', can't do 'best-effort' approach to update.") << endl;
     }
     cond_init_target ();
-    init_repos ();
+    int initret = init_repos();
+    if (initret != ZYPPER_EXIT_OK)
+      return initret;
     cond_load_resolvables();
     establish ();
 
-    list_updates( kind, srepo, best_effort );
+    list_updates( kind, best_effort );
 
     return ZYPPER_EXIT_OK;
   }
@@ -1152,7 +1207,9 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
     if (ghelp) { cout << specific_help << endl; return !ghelp; }
 
     cond_init_target ();
-    init_repos ();
+    int initret = init_repos();
+    if (initret != ZYPPER_EXIT_OK)
+      return initret;
     cond_load_resolvables();
     establish ();
 
@@ -1195,7 +1252,6 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
 	return ZYPPER_EXIT_ERR_INVALID_ARGS;
     }
 
-    string srepo = copts.count( "from-repo" ) ? copts["from-repo"].front() : "";
     bool best_effort = copts.count( "best-effort" ); 
 
     if (gSettings.is_rug_compatible && best_effort) {
@@ -1205,12 +1261,14 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
 	cerr << _("Running as 'rug', can't do 'best-effort' approach to update.") << endl;
     }
     cond_init_target ();
-    init_repos ();
+    int initret = init_repos();
+    if (initret != ZYPPER_EXIT_OK)
+      return initret;
     cond_load_resolvables ();
     establish ();
 
     bool skip_interactive = copts.count("skip-interactive") || gSettings.non_interactive;
-    mark_updates( kind, srepo, skip_interactive, best_effort );
+    mark_updates( kind, skip_interactive, best_effort );
 
 
     if (copts.count("debug-solver"))
@@ -1240,7 +1298,9 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
     }
 
     cond_init_target ();
-    init_repos ();
+    int initret = init_repos();
+    if (initret != ZYPPER_EXIT_OK)
+      return initret;
     cond_load_resolvables ();
     establish ();
 

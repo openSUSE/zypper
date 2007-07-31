@@ -37,9 +37,6 @@ ZyppSearch::ZyppSearch (
     ) :
     _zypp(zypp), _options(options), _qstrings(qstrings) {
 
-  cond_init_target();         // calls ZYpp::initializeTarget("/");
-  init_repos();
-
   // no repos warning
   if (gData.repos.empty()) {
     cerr << _("No repositories configured. Please, add at least one"

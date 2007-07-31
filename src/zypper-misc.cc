@@ -16,6 +16,7 @@
 #include <zypp/target/store/xml_escape_parser.hpp>
 
 #include "zypper.h"
+#include "zypper-getopt.h"
 #include "zypper-misc.h"
 #include "zypper-callbacks.h"
 
@@ -693,7 +694,7 @@ void xml_list_patches ()
 
 // ----------------------------------------------------------------------------
 
-void list_patch_updates( const string &repo_alias, bool best_effort )
+void list_patch_updates(bool best_effort)
 {
   Table tbl;
   Table pm_tbl;	// only those that affect packagemanager: they have priority
@@ -760,21 +761,13 @@ class LookForArchUpdate : public zypp::resfilter::PoolItemFilterFunctor
 {
 public:
   PoolItem_Ref best;
-  string _repo_alias;
-
-  LookForArchUpdate( const string &repo_alias = "" )
-  {
-    _repo_alias = repo_alias;
-  }
 
   bool operator()( PoolItem_Ref provider )
     {
       if (!provider.status().isLocked()	// is not locked (taboo)
 	  && (!best 			// first match
 	      // or a better edition than candidate
-	      || best->edition().compare( provider->edition() ) < 0)
-	  && (_repo_alias.empty()
-	      || provider->repository().info().alias() == _repo_alias) )
+	      || best->edition().compare( provider->edition() ) < 0))
       {
 	best = provider;	// store 
       }
@@ -790,9 +783,9 @@ public:
 // but that allows changing the arch (#222140).
 static
 PoolItem_Ref
-findArchUpdateItem( const ResPool & pool, PoolItem_Ref item, const string &repo_alias )
+findArchUpdateItem( const ResPool & pool, PoolItem_Ref item )
 {
-  LookForArchUpdate info( repo_alias );
+  LookForArchUpdate info;
 
   invokeOnEach( pool.byNameBegin( item->name() ),
 		pool.byNameEnd( item->name() ),
@@ -815,7 +808,7 @@ findArchUpdateItem( const ResPool & pool, PoolItem_Ref item, const string &repo_
 typedef set<PoolItem_Ref> Candidates;
 
 static void
-find_updates( const ResObject::Kind &kind, const string &repo_alias, Candidates &candidates )
+find_updates( const ResObject::Kind &kind, Candidates &candidates )
 {
   const zypp::ResPool& pool = God->pool();
   ResPool::byKind_iterator
@@ -827,7 +820,7 @@ find_updates( const ResObject::Kind &kind, const string &repo_alias, Candidates 
     if (it->status().isUninstalled())
       continue;
     // (actually similar to ProvideProcess?)
-    PoolItem_Ref candidate = findArchUpdateItem( pool, *it, repo_alias );
+    PoolItem_Ref candidate = findArchUpdateItem( pool, *it );
     if (!candidate.resolvable())
       continue;
 
@@ -839,17 +832,17 @@ find_updates( const ResObject::Kind &kind, const string &repo_alias, Candidates 
 
 // ----------------------------------------------------------------------------
 
-void list_updates( const ResObject::Kind &kind, const string &repo_alias, bool best_effort )
+void list_updates( const ResObject::Kind &kind, bool best_effort )
 {
   bool k_is_patch = kind == ResTraits<Patch>::kind;
   if (k_is_patch)
-    list_patch_updates( repo_alias, best_effort );
+    list_patch_updates( best_effort );
   else {
     Table tbl;
 
     // show repo only if not best effort or --from-repo set
-    //   on best_effort, the solver will determine the repo if we don't limit it to a specific one
-    bool hide_repo = best_effort && repo_alias.empty();
+    // on best_effort, the solver will determine the repo if we don't limit it to a specific one
+    bool hide_repo = best_effort || copts.count("repo");
 
     // header
     TableHeader th;
@@ -872,7 +865,7 @@ void list_updates( const ResObject::Kind &kind, const string &repo_alias, bool b
     unsigned int cols = th.cols();
 
     Candidates candidates;
-    find_updates( kind, repo_alias, candidates );
+    find_updates( kind, candidates );
 
     Candidates::iterator cb = candidates.begin (), ce = candidates.end (), ci;
     for (ci = cb; ci != ce; ++ci) {
@@ -972,8 +965,7 @@ bool require_item_update (const PoolItem& pi) {
 void xml_list_updates()
 {
   Candidates candidates;
-  string repo_alias;
-  find_updates (ResTraits<Package>::kind, repo_alias, candidates);
+  find_updates (ResTraits<Package>::kind, candidates);
 
   Candidates::iterator cb = candidates.begin (), ce = candidates.end (), ci;
   for (ci = cb; ci != ce; ++ci) {
@@ -1002,7 +994,7 @@ void xml_list_updates()
 // ----------------------------------------------------------------------------
 
 static
-void mark_patch_updates( const std::string &repo_alias, bool skip_interactive )
+void mark_patch_updates( bool skip_interactive )
 {
   if (true) {
     // search twice: if there are none with affects_pkg_manager, retry on all
@@ -1040,16 +1032,16 @@ void mark_patch_updates( const std::string &repo_alias, bool skip_interactive )
 
 // ----------------------------------------------------------------------------
 
-void mark_updates( const ResObject::Kind &kind, const std::string &repo_alias, bool skip_interactive, bool best_effort )
+void mark_updates( const ResObject::Kind &kind, bool skip_interactive, bool best_effort )
 {
   bool k_is_patch = kind == ResTraits<Patch>::kind;
 
   if (k_is_patch) {
-    mark_patch_updates( repo_alias, skip_interactive );
+    mark_patch_updates(skip_interactive);
   }
   else {
     Candidates candidates;
-    find_updates (kind, repo_alias, candidates);
+    find_updates (kind, candidates);
     if (best_effort)
       invokeOnEach (candidates.begin(), candidates.end(), require_item_update);
     else

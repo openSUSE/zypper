@@ -1,8 +1,6 @@
 #ifndef ZMART_SOURCES_H
 #define ZMART_SOURCES_H
 
-#include <boost/logic/tribool.hpp>
-
 #include "zypp/Url.h"
 
 #include "zypper-getopt.h"
@@ -10,8 +8,11 @@
 /**
  * Reads known enabled repositories and stores them in gData.
  * This command also refreshes repos with auto-refresh enabled.
+ * 
+ * \return ZYPPER_EXIT_ERR_INVALID_ARGS if --repo does not specify a valid repository,
+ *         ZYPPER_EXIT_ERR_ZYPP on error, ZYPPER_EXIT_OK otherwise.
  */
-void init_repos();
+int init_repos();
 
 /**
  * List defined repositories.
@@ -30,8 +31,8 @@ void refresh_repos();
  * \param url Valid URL of the repository.
  * \param alias
  * \param type
- * \param enabled
- * \param autorefresh
+ * \param enabled     Whether the repo should be enabled   
+ * \param autorefresh Whether the repo should have autorefresh turned on
  * \return ZYPPER_EXIT_ERR_ZYPP on unexpected zypp exception,
  *         ZYPPER_EXIT_OK otherwise
  */
@@ -41,16 +42,18 @@ int add_repo_by_url( const zypp::Url & url,
                       bool enabled = true, bool autorefresh = true );
 
 /**
- * Add repository specified in given repo file on \a repo_file_url.
+ * Add repository specified in given repo file on \a repo_file_url. All repos
+ * will be added enabled and with autorefresh turned on. The enabled and
+ * autorefresh values provided in the files will be ignored.
  * 
  * \param repo_file_url Valid URL of the repo file.
- * \param enabled       If determined, overrides repo file's enabled setting.
- * \param autorefresh   If determined, overrides repo file's autorefresh setting.
+ * \param enabled     Whether the repo should be enabled   
+ * \param autorefresh Whether the repo should have autorefresh turned on
  * \return ZYPPER_EXIT_ERR_ZYPP on unexpected zypp exception,
  *         ZYPPER_EXIT_OK otherwise
  */
 int add_repo_from_file(const std::string & repo_file_url,
-                        boost::tribool enabled = true, boost::tribool autorefresh = true);
+                        bool enabled = true, bool autorefresh = true);
 
 /**
  * If ZMD process found, notify user that ZMD is running and that changes
@@ -76,9 +79,8 @@ void rename_repo(const std::string & alias, const std::string & newalias);
  * Modify repository properties.
  * 
  * \param alias repository alias
- * \param copts pre-parsed command line options
  */
-void modify_repo(const std::string & alias, const parsed_opts & copts);
+void modify_repo(const std::string & alias);
 
 #endif
 // Local Variables:

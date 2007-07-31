@@ -5,6 +5,7 @@
 
 #include <fstream>
 #include <boost/format.hpp>
+#include <boost/logic/tribool.hpp>
 #include <boost/lexical_cast.hpp>
 
 #include <zypp/target/store/PersistentStorage.h>
@@ -28,16 +29,39 @@ extern RuntimeData gData;
 extern Settings gSettings;
 
 
-static void do_init_repos()
+static int do_init_repos()
 {
   RepoManager manager;
-  gData.repos = manager.knownRepositories();
+
+  string specific_repo = copts.count( "repo" ) ? copts["repo"].front() : "";
+  if (!specific_repo.empty())
+  {
+    MIL << "--repo set to '" << specific_repo
+        << "'. Going to operate on this repo only." << endl;
+    try { gData.repos.push_back(manager.getRepositoryInfo(specific_repo)); }
+    catch (const repo::RepoNotFoundException & ex)
+    {
+      cerr << format(_("Repository '%s' not found.")) % specific_repo << endl;
+      ERR << specific_repo << " not found";
+      return ZYPPER_EXIT_ERR_INVALID_ARGS;
+    }
+    catch (const Exception & ex)
+    {
+      cerr << format(_("Error reading repository description file for '%s'."))
+          % specific_repo << endl;
+      cerr_v << _("Reason: ") << ex.asUserString() << endl;
+      ZYPP_CAUGHT(ex);
+      return ZYPPER_EXIT_ERR_ZYPP;
+    }
+  }
+  else
+    gData.repos = manager.knownRepositories();
 
   for (std::list<RepoInfo>::iterator it = gData.repos.begin();
        it !=  gData.repos.end(); ++it)
   {
     RepoInfo repo(*it);
-    MIL << "initializing " << repo.alias() << endl; 
+    MIL << "initializing " << repo.alias() << endl;
 
     //! \todo honor command line options/commands
     bool do_refresh = repo.enabled() && repo.autorefresh(); 
@@ -67,20 +91,22 @@ static void do_init_repos()
       }
     }
   }
+
+  return ZYPPER_EXIT_OK;
 }
 
 // ----------------------------------------------------------------------------
 
-void init_repos()
+int init_repos()
 {
   static bool done = false;
   //! \todo this has to be done so that it works in zypper shell 
   if (done)
-    return;
+    return ZYPPER_EXIT_OK;
 
   if ( !gSettings.disable_system_sources )
   {
-    do_init_repos();
+    return do_init_repos();
   }
 
   done = true;
@@ -343,7 +369,7 @@ int add_repo_by_url( const zypp::Url & url, const string & alias,
   repo.addBaseUrl(url);
   repo.setEnabled(enabled);
   repo.setAutorefresh(refresh);
-  
+
   return add_repo(repo);
 }
 
@@ -351,7 +377,7 @@ int add_repo_by_url( const zypp::Url & url, const string & alias,
 
 //! \todo handle zypp exceptions
 int add_repo_from_file(const std::string & repo_file_url,
-                       const tribool enabled, const tribool autorefresh)
+                       bool enabled, bool autorefresh)
 {
   //! \todo handle local .repo files, validate the URL
   Url url(repo_file_url);
@@ -363,14 +389,8 @@ int add_repo_from_file(const std::string & repo_file_url,
   {
     RepoInfo repo = *it;
 
-    // by default set enabled and autorefresh to true
-    repo.setEnabled(true);
-    repo.setAutorefresh(true);
-
-    if (!indeterminate(enabled))
-      repo.setEnabled(enabled);
-    if (!indeterminate(autorefresh))
-      repo.setAutorefresh(autorefresh);
+    repo.setEnabled(enabled);
+    repo.setAutorefresh(autorefresh);
 
     add_repo(repo);
   }
@@ -496,7 +516,7 @@ void rename_repo(const std::string & alias, const std::string & newalias)
 
 // ----------------------------------------------------------------------------
 
-void modify_repo(const string & alias, const parsed_opts & copts)
+void modify_repo(const string & alias)
 {
   // tell whether currenlty processed options are contradicting each other
   bool contradiction = false;
@@ -553,7 +573,7 @@ void modify_repo(const string & alias, const parsed_opts & copts)
 
     manager.modifyRepository(alias, repo);
 
-    cout_n << format(_("Repository %s has been sucessfully modified.")) % alias << endl;
+    cout << format(_("Repository %s has been sucessfully modified.")) % alias << endl;
     MIL << format("Repository %s modified:") % alias << repo << endl;
   }
   catch (const RepoNotFoundException & ex)
