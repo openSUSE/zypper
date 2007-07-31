@@ -23,6 +23,7 @@
 #include <sstream>
 
 #include "zypp/solver/detail/ResolverInfoContainer.h"
+#include "zypp/base/Logger.h"
 #include "zypp/solver/detail/Helper.h"
 
 /////////////////////////////////////////////////////////////////////////
@@ -171,6 +172,7 @@ ResolverInfoContainer::mentions (PoolItem_Ref item) const
     // Search item_list for any mention of the item.
 
     for (PoolItemList::const_iterator iter = _item_list.begin(); iter != _item_list.end(); iter++) {
+	MIL << "yyyyyyxx " << item <<  " xx " << *iter << endl;	
 	if ((*iter)->name() == item->name()) {
 	    return true;
 	}
@@ -183,7 +185,7 @@ ResolverInfoContainer::mentions (PoolItem_Ref item) const
 void
 ResolverInfoContainer::addRelatedPoolItem (PoolItem_Ref item)
 {
-    if (!mentions(item)) {
+    if (item && !mentions(item)) {
 	_item_list.push_front (item);
     }
 }
