@@ -641,6 +641,22 @@ namespace zypp
      * @return Free disk space or -1 on error.
      **/
     ByteCount df( const Pathname & path );
+
+    /**
+     * Get the current umask (file mode creation mask)
+     *
+     * @return The current umask
+     **/
+    mode_t getUmask();
+
+     /**
+     * Modify \c mode_r according to the current umask
+     * <tt>( mode_r & ~getUmask() )</tt>.
+     * \see \ref getUmask.
+     * @return The resulting permissions.
+     **/
+    inline mode_t applyUmaskTo( mode_t mode_r )
+    { return mode_r & ~getUmask(); }
     //@}
 
     /////////////////////////////////////////////////////////////////

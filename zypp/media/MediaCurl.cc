@@ -456,7 +456,7 @@ void MediaCurl::attachTo (bool next)
         {
           DBG << "Enabling HTTP authentication methods: " << use_auth
               << " (CURLOPT_HTTPAUTH=" << auth << ")" << std::endl;
-  
+
           ret = curl_easy_setopt( _curl, CURLOPT_HTTPAUTH, auth);
           if ( ret != 0 ) {
             disconnectFrom();
@@ -706,16 +706,16 @@ void MediaCurl::getFileCopy( const Pathname & filename , const Pathname & target
     catch (MediaUnauthorizedException & ex_r)
     {
       callback::SendReport<AuthenticationReport> auth_report;
-      
+
       if (!_url.getUsername().empty() && !retry)
         auth_data.setUserName(_url.getUsername());
-      
+
       string prompt_msg;
       if (retry || !_url.getUsername().empty())
         prompt_msg = _("Invalid user name or password.");
       else // first prompt
         prompt_msg = boost::str(boost::format(
-          _("Authentication required for '%s'")) % _url.asString()); 
+          _("Authentication required for '%s'")) % _url.asString());
 
       // set available authentication types from the exception
       auth_data.setAuthType(ex_r.hint());
@@ -726,12 +726,12 @@ void MediaCurl::getFileCopy( const Pathname & filename , const Pathname & target
             << "CurlAuthData: " << auth_data << endl;
 
         if (auth_data.valid()) {
-          _userpwd = auth_data.getUserPwd();  
+          _userpwd = auth_data.getUserPwd();
 
           // set username and password
           CURLcode ret = curl_easy_setopt(_curl, CURLOPT_USERPWD, _userpwd.c_str());
           if ( ret != 0 ) ZYPP_THROW(MediaCurlSetOptException(_url, _curlError));
-          
+
           // set auth type
           ret = curl_easy_setopt(_curl, CURLOPT_HTTPAUTH, auth_data.authType());
           if ( ret != 0 ) ZYPP_THROW(MediaCurlSetOptException(_url, _curlError));
@@ -775,16 +775,16 @@ bool MediaCurl::getDoesFileExist( const Pathname & filename ) const
     catch (MediaUnauthorizedException & ex_r)
     {
       callback::SendReport<AuthenticationReport> auth_report;
-      
+
       if (!_url.getUsername().empty() && !retry)
         auth_data.setUserName(_url.getUsername());
-      
+
       string prompt_msg;
       if (retry || !_url.getUsername().empty())
         prompt_msg = _("Invalid user name or password.");
       else // first prompt
         prompt_msg = boost::str(boost::format(
-          _("Authentication required for '%s'")) % _url.asString()); 
+          _("Authentication required for '%s'")) % _url.asString());
 
       // set available authentication types from the exception
       auth_data.setAuthType(ex_r.hint());
@@ -795,12 +795,12 @@ bool MediaCurl::getDoesFileExist( const Pathname & filename ) const
             << "CurlAuthData: " << auth_data << endl;
 
         if (auth_data.valid()) {
-          _userpwd = auth_data.getUserPwd();  
+          _userpwd = auth_data.getUserPwd();
 
           // set username and password
           CURLcode ret = curl_easy_setopt(_curl, CURLOPT_USERPWD, _userpwd.c_str());
           if ( ret != 0 ) ZYPP_THROW(MediaCurlSetOptException(_url, _curlError));
-          
+
           // set auth type
           ret = curl_easy_setopt(_curl, CURLOPT_HTTPAUTH, auth_data.authType());
           if ( ret != 0 ) ZYPP_THROW(MediaCurlSetOptException(_url, _curlError));
@@ -821,7 +821,7 @@ bool MediaCurl::getDoesFileExist( const Pathname & filename ) const
     }
   }
   while (retry);
-  
+
   return false;
 }
 
@@ -834,7 +834,7 @@ bool MediaCurl::doGetDoesFileExist( const Pathname & filename ) const
 
   if(_url.getHost().empty())
     ZYPP_THROW(MediaBadUrlEmptyHostException(_url));
-  
+
   string path = _url.getPathName();
   if ( !path.empty() && path != "/" && *path.rbegin() == '/' &&
         filename.absolute() ) {
@@ -866,7 +866,7 @@ bool MediaCurl::doGetDoesFileExist( const Pathname & filename ) const
   curlUrl.setPathParams( "" );
   curlUrl.setQueryString( "" );
   curlUrl.setFragment( "" );
-  
+
   //
     // See also Bug #154197 and ftp url definition in RFC 1738:
     // The url "ftp://user@host/foo/bar/file" contains a path,
@@ -881,22 +881,22 @@ bool MediaCurl::doGetDoesFileExist( const Pathname & filename ) const
   if ( ret != 0 ) {
     ZYPP_THROW(MediaCurlSetOptException(url, _curlError));
   }
-  
+
   // set no data, because we only want to check if the file exists
   //ret = curl_easy_setopt( _curl, CURLOPT_NOBODY, 1 );
   //if ( ret != 0 ) {
   //    ZYPP_THROW(MediaCurlSetOptException(url, _curlError));
-  //}    
-  
-  // instead of returning no data with NOBODY, we return 
+  //}
+
+  // instead of returning no data with NOBODY, we return
   // little data, that works with broken servers, and
   // works for ftp as well, because retrieving only headers
   // ftp will return always OK code ?
   ret = curl_easy_setopt( _curl, CURLOPT_RANGE, "0-1" );
   if ( ret != 0 ) {
       ZYPP_THROW(MediaCurlSetOptException(url, _curlError));
-  }    
-  
+  }
+
   FILE *file = ::fopen( "/dev/null", "w" );
   if ( !file ) {
       ::fclose(file);
@@ -934,11 +934,11 @@ bool MediaCurl::doGetDoesFileExist( const Pathname & filename ) const
   {
     ZYPP_THROW(MediaCurlSetOptException(url, _curlError));
   }
-  
+
   if ( ok != 0 )
   {
     ::fclose( file );
-    
+
     std::string err;
     try
     {
@@ -946,7 +946,7 @@ bool MediaCurl::doGetDoesFileExist( const Pathname & filename ) const
       switch ( ok )
       {
       case CURLE_FTP_COULDNT_RETR_FILE:
-      case CURLE_FTP_ACCESS_DENIED: 
+      case CURLE_FTP_ACCESS_DENIED:
         err_file_not_found = true;
         break;
       case CURLE_HTTP_RETURNED_ERROR:
@@ -961,7 +961,7 @@ bool MediaCurl::doGetDoesFileExist( const Pathname & filename ) const
                           str::numstring( httpReturnCode );
             if ( httpReturnCode == 401 )
             {
-              std::string auth_hint = getAuthHint(); 
+              std::string auth_hint = getAuthHint();
 
               DBG << msg << " Login failed (URL: " << url.asString() << ")" << std::endl;
               DBG << "MediaUnauthorizedException auth hint: '" << auth_hint << "'" << std::endl;
@@ -1008,7 +1008,7 @@ bool MediaCurl::doGetDoesFileExist( const Pathname & filename ) const
           err = "Unrecognized error";
         break;
       }
-      
+
       if( err_file_not_found)
       {
         // file does not exists
@@ -1024,14 +1024,14 @@ bool MediaCurl::doGetDoesFileExist( const Pathname & filename ) const
     {
       ZYPP_RETHROW(excpt_r);
     }
-  } 
-  
+  }
+
   // exists
   return ( ok == CURLE_OK );
   //if ( curl_easy_setopt( _curl, CURLOPT_PROGRESSDATA, NULL ) != 0 ) {
   //  WAR << "Can't unset CURLOPT_PROGRESSDATA: " << _curlError << endl;;
   //}
-}    
+}
 
 void MediaCurl::doGetFileCopy( const Pathname & filename , const Pathname & target, callback::SendReport<DownloadProgressReport> & report) const
 {
@@ -1176,7 +1176,7 @@ void MediaCurl::doGetFileCopy( const Pathname & filename , const Pathname & targ
                            str::numstring( httpReturnCode );
               if ( httpReturnCode == 401 )
               {
-                std::string auth_hint = getAuthHint(); 
+                std::string auth_hint = getAuthHint();
 
                 DBG << msg << " Login failed (URL: " << url.asString() << ")" << std::endl;
                 DBG << "MediaUnauthorizedException auth hint: '" << auth_hint << "'" << std::endl;
@@ -1297,11 +1297,7 @@ void MediaCurl::doGetFileCopy( const Pathname & filename , const Pathname & targ
     }
 #endif // DETECT_DIR_INDEX
 
-    mode_t mask;
-    // getumask() would be fine, but does not exist
-    // [ the linker can't find it in glibc :-( ].
-    mask = ::umask(0022); ::umask(mask);
-    if ( ::fchmod( ::fileno(file), 0644 & ~mask))
+    if ( ::fchmod( ::fileno(file), filesystem::applyUmaskTo( 0644 ) ) )
     {
       ERR << "Failed to chmod file " << destNew << endl;
     }
@@ -1461,4 +1457,4 @@ string MediaCurl::getAuthHint() const
 
   } // namespace media
 } // namespace zypp
-// 
+//
