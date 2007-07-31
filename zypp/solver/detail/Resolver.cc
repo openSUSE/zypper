@@ -668,8 +668,7 @@ Resolver::establishState( ResolverContext_Ptr context )
 
 	// process the queue
 	resolveDependencies( context );
-
-	reset();
+	reset( false, true ); //resetValidResults,keepExtras
     }
 
     context->setEstablishing (false);
@@ -797,7 +796,7 @@ Resolver::freshenState( ResolverContext_Ptr context,
     resolveDependencies( context );
     
     if (resetAfterSolve) {
-	reset();
+	reset( false, true ); //resetValidResults,keepExtras	
 	context->setEstablishing( false );
 	_best_context = context;
     }
@@ -1216,14 +1215,13 @@ show_pool( ResPool pool )
 
 
 bool
-Resolver::resolvePool( bool tryAllPossibilities, bool keepExtras )
+Resolver::resolvePool( bool tryAllPossibilities )
 {
     ResolverContext_Ptr saveContext = _best_context;
     CollectTransact info (*this);
 
     // cleanup before next run
-    reset( false, keepExtras );
-
+    reset( false, true ); //resetValidResults,keepExtras
     bool saveTryAllPossibilities = _tryAllPossibilities;
 
     if (tryAllPossibilities) {

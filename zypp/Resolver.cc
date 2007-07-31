@@ -66,8 +66,8 @@ namespace zypp
   { return _pimpl->freshenPool(); }
   bool Resolver::resolvePool ()
   { return _pimpl->resolvePool( false ); }// do not try all possibilities 
-  bool Resolver::resolvePool( bool tryAllPossibilities, bool keepExtras )
-  { return _pimpl->resolvePool( tryAllPossibilities, keepExtras ); }
+  bool Resolver::resolvePool( bool tryAllPossibilities)
+  { return _pimpl->resolvePool( tryAllPossibilities); }
   bool Resolver::resolveDependencies( void )
   { return _pimpl->resolveDependencies( ); }
   void Resolver::undo()
