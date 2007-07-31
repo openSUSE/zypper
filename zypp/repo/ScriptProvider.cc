@@ -10,9 +10,11 @@
  *
 */
 #include <iostream>
-//#include "zypp/base/Logger.h"
+#include <fstream>
 
 #include "zypp/repo/ScriptProvider.h"
+#include "zypp/PathInfo.h"
+#include "zypp/TmpPath.h"
 
 using std::endl;
 
@@ -36,6 +38,36 @@ namespace zypp
                                    inlined inlined_r, location location_r )
       {
         ManagedFile ret;
+
+        // 1st try inlined
+        std::string inlined( (script_r.*inlined_r)() );
+        if ( ! inlined.empty() )
+        {
+          // Take care the TmpFile goes out of scope BEFORE the
+          // ofstream opens the file again.
+          ret = ManagedFile( filesystem::TmpFile( filesystem::TmpPath::defaultLocation(),
+                                                  "zypp-script-"+script_r.name() ),
+                             filesystem::unlink );
+          std::ofstream str( ret.value().c_str() );
+          str << inlined << endl;
+        }
+        else
+        {
+          // otherwise try download
+          OnMediaLocation location( (script_r.*location_r)() );
+          if ( ! location.filename().empty() )
+          {
+            ret = access_r.provideFile( script_r.repository(), location );
+          }
+          else
+          {
+            // no script
+            return ManagedFile();
+          }
+        }
+
+        // HERE: got the script
+        filesystem::chmod( ret, 0700 );
         return ret;
       }
 
@@ -52,11 +84,7 @@ namespace zypp
                                     const Script::constPtr & script_r )
       : _access( access_r )
       , _script( script_r )
-    {
-      //       ManagedFile provideFile( Repository repo_r,
-      //                                const OnMediaLocation & loc_r,
-      //                                const ProvideFilePolicy & policy_r = ProvideFilePolicy() );
-    }
+    {}
 
     ///////////////////////////////////////////////////////////////////
     //
