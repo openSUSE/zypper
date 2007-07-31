@@ -331,7 +331,7 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
       "  Command options:\n"
       "\t--repo,-r <FILE.repo>\tRead the URL and alias from a file\n"
       "\t\t\t\t(even remote)\n"
-      "\t--type,-t <TYPE>\tType of repository (YaST, YUM, or Plaindir)\n"
+      "\t--type,-t <TYPE>\tType of repository (YaST, YUM, or plaindir)\n"
       "\t--disabled,-d\t\tAdd the repository as disabled\n"
       "\t--no-refresh,-n\t\tAdd the repository with auto-refresh disabled\n"
       );
