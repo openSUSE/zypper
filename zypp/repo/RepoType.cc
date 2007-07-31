@@ -37,8 +37,13 @@ namespace repo
       _table["rpmmd"] = RepoType::RPMMD_e;
       _table["rpm-md"] = RepoType::RPMMD_e;
       _table["yum"] = RepoType::RPMMD_e;
+      _table["YUM"] = RepoType::RPMMD_e;
       _table["susetags"] = RepoType::YAST2_e;
       _table["yast"] = RepoType::YAST2_e;
+      _table["YaST"] = RepoType::YAST2_e;
+      _table["YaST2"] = RepoType::YAST2_e;
+      _table["YAST"] = RepoType::YAST2_e;
+      _table["YAST2"] = RepoType::YAST2_e;
       _table["yast2"] = RepoType::YAST2_e;
       _table["plaindir"] = RepoType::RPMPLAINDIR_e;
       _table["NONE"] = _table["none"] = RepoType::NONE_e;
