@@ -208,7 +208,14 @@ namespace zypp {
     //
     TmpFile TmpFile::makeSibling( const Pathname & sibling_r )
     {
-      return TmpFile( sibling_r.dirname(), sibling_r.basename() );
+      TmpFile ret( sibling_r.dirname(), sibling_r.basename() );
+      // clone mode if sibling_r exists
+      PathInfo p( sibling_r );
+      if ( p.isExist() )
+      {
+        chmod( ret.path(), p.st_mode() );
+      }
+      return ret;
     }
 
     ///////////////////////////////////////////////////////////////////
@@ -271,7 +278,14 @@ namespace zypp {
     //
     TmpDir TmpDir::makeSibling( const Pathname & sibling_r )
     {
-      return TmpDir( sibling_r.dirname(), sibling_r.basename() );
+      TmpDir ret( sibling_r.dirname(), sibling_r.basename() );
+      // clone mode if sibling_r exists
+      PathInfo p( sibling_r );
+      if ( p.isExist() )
+      {
+        chmod( ret.path(), p.st_mode() );
+      }
+      return ret;
     }
 
     ///////////////////////////////////////////////////////////////////

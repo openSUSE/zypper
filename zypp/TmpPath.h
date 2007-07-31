@@ -128,6 +128,7 @@ namespace zypp {
          *   TmpFile s = makeSibling( "/var/lib/myfile" );
          *   // returns: /var/lib/myfile.XXXXXX
          * \endcode
+         * If \c sibling_r exists, sibling is created using the same mode.
          */
         static TmpFile makeSibling( const Pathname & sibling_r );
 
@@ -172,6 +173,7 @@ namespace zypp {
          *   TmpDir s = makeSibling( "/var/lib/mydir" );
          *   // returns: /var/lib/mydir.XXXXXX
          * \endcode
+         * If \c sibling_r exists, sibling is created using the same mode.
          */
         static TmpDir makeSibling( const Pathname & sibling_r );
 

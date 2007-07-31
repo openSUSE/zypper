@@ -6,6 +6,8 @@
 #include <zypp/base/LogControl.h>
 #include <zypp/base/LogTools.h>
 #include <zypp/base/String.h>
+#include <zypp/PathInfo.h>
+#include <zypp/TmpPath.h>
 
 using namespace std;
 using namespace zypp;
@@ -25,6 +27,15 @@ void chk( ResObject::constPtr p )
 int main( int argc, char * argv[] )
 {
   INT << "===[START]==========================================" << endl;
+
+  filesystem::TmpFile a( filesystem::TmpFile::makeSibling( "/tmp/madirCBzAje" ) );
+  filesystem::TmpDir  b( filesystem::TmpDir::makeSibling( "/tmp/matest" ) );
+
+  int i;
+  cin >> i;
+
+  filesystem::assert_dir( "/tmp/matest/foo/ba" );
+  mode_t mask = ::umask(0022); ::umask(mask);
 
   ResPool pool( getZYpp()->pool() );
 
