@@ -28,15 +28,6 @@ int main( int argc, char * argv[] )
 {
   INT << "===[START]==========================================" << endl;
 
-  filesystem::TmpFile a( filesystem::TmpFile::makeSibling( "/tmp/madirCBzAje" ) );
-  filesystem::TmpDir  b( filesystem::TmpDir::makeSibling( "/tmp/matest" ) );
-
-  int i;
-  cin >> i;
-
-  filesystem::assert_dir( "/tmp/matest/foo/ba" );
-  mode_t mask = ::umask(0022); ::umask(mask);
-
   ResPool pool( getZYpp()->pool() );
 
   const char *const lines[] = {
