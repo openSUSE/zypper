@@ -67,7 +67,7 @@ namespace zypp
             // in case cap provides a packagename, inject a SUPPLEMENTS.
 	    // if modalias does not provide a packagename, default to "kernel" (#184840)
 
-            intrusive_ptr<const capability::ModaliasCap> cap( capability::asKind<capability::ModaliasCap>(cap_r) );
+            capability::ModaliasCap::constPtr cap( capability::asKind<capability::ModaliasCap>(cap_r) );
             if ( cap ) {
 	      std::string pkgname( cap->pkgname() );
 	      if ( pkgname.empty() ) {
@@ -92,14 +92,14 @@ namespace zypp
            // Required kmp packges FOR EACH installed/to_be_installed kernel will be installed.
            // Bug 255011
            if (capString[capString.size()-1] == ')') {                 // trailing ")" given ?
-               CapFactory f;       
+               CapFactory f;
                std::string andDep( capString, 11 );                    // strip "packageand("
                std::string::size_type pos = andDep.find( ":" );        // colon given ?
                if (pos != std::string::npos) {
                    deps[Dep::SUPPLEMENTS].insert( f.parse( ResTraits<Package>::kind, std::string( andDep, 0, pos ) ) );
                    pos++; // skip ":"
                    std::string depString( andDep, pos, andDep.size()-pos-1 );
-                   deps[Dep::FRESHENS].insert( f.parse( ResTraits<Package>::kind, depString ) );                   
+                   deps[Dep::FRESHENS].insert( f.parse( ResTraits<Package>::kind, depString ) );
                } else {
                    ERR << "wrong dependency (missing \":\") : " << capString <<endl;
                }
