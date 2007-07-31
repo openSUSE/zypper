@@ -264,10 +264,13 @@ namespace zypp
     /**
      * \short Find a matching repository info
      *
-     * \note if multple repositories incorrectly share the
+     * \note if multiple repositories incorrectly share the
      * same alias, the first one found will be returned.
      *
-     * \throws RepoNotFoundException If no repo match
+     * \param alias Repository alias
+     * \param progressrcv Progress reporting function
+     * \return RepoInfo of the found repository
+     * \throws RepoNotFoundException If no repo match the alias
      * \throws ParseException If the file parsing fails
      * \throws Exception On other errors.
      */
@@ -280,8 +283,9 @@ namespace zypp
      * \param url URL to find.
      * \param urlview url::ViewOption to influence URL matching.
      * \param progressrcv Progress receiver function.
+     * \return RepoInfo of the found repository.
      *
-     * \note if multple repositories incorrectly share the
+     * \note if multpile repositories incorrectly share the
      * same URL, the first one found will be returned.
      *
      * \note the string representation of the URLs are compared.
