@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Tue Jul 31 10:37:13 CEST 2007 - schubi@suse.de
+
+- Removed keepExtras from resolvePool. This will be handled 
+  in the solver internally now. #294727
+- Checking if item really exists (#295544; ResolverInfoContainer.cc)
+- revision 6317
+- version 3.13.2
+
+-------------------------------------------------------------------
 Mon Jul 30 17:23:19 CEST 2007 - ma@suse.de
 
 - Remove tribool from RepoInfo's interface.
