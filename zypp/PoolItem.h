@@ -27,14 +27,14 @@ namespace zypp
   //
   //	CLASS NAME : PoolItem_Ref
   //
-  /** Reference to a PoolItem conecting ResObject and ResStatus.
+  /** Reference to a PoolItem connecting ResObject and ResStatus.
    *
    * The "real" PoolItem is usg. somewhere in the ResPool. This is
    * a reference to it. All copies made will reference (and modify)
    * the same PoolItem. All changes via a PoolItem_Ref are immediately
    * visible in all copies (now COW).
    *
-   * \note Constnes: Like pointer types, a <tt>const PoolItem_Ref</tt>
+   * \note Constness: Like pointer types, a <tt>const PoolItem_Ref</tt>
    * does \b not refer to a <tt>const PoolItem</tt>. The reference is
    * \c const, i.e. you can't change the refered PoolItem. The PoolItem
    * (i.e. the status) is always mutable.
