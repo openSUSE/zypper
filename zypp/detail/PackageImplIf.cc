@@ -21,6 +21,9 @@ namespace zypp
   namespace detail
   { /////////////////////////////////////////////////////////////////
 
+    ByteCount PackageImplIf::downloadSize() const
+    { return location().downloadSize(); }
+
     unsigned PackageImplIf::mediaNr() const
     { return location().medianr(); }
 
@@ -71,9 +74,6 @@ namespace zypp
       ByteCount PackageImplIf::sourcesize() const
       { return ByteCount(); }
 
-      ByteCount PackageImplIf::downloadSize() const
-      { return location().downloadSize(); }
-
       OnMediaLocation PackageImplIf::location() const
       { return OnMediaLocation(); }
 
@@ -91,6 +91,12 @@ namespace zypp
 
       std::list<PackageImplIf::PatchRpm> PackageImplIf::patchRpms() const
       { return std::list<PatchRpm>(); }
+
+      std::string PackageImplIf::sourcePkgName() const
+      { return std::string(); }
+
+      Edition PackageImplIf::sourcePkgEdition() const
+      { return Edition(); }
 
     /////////////////////////////////////////////////////////////////
   } // namespace detail

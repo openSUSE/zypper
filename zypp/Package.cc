@@ -111,7 +111,13 @@ namespace zypp
 
   OnMediaLocation Package::location() const
   { return pimpl().location(); }
-  
+
+  std::string Package::sourcePkgName() const
+  { return pimpl().sourcePkgName(); }
+
+  Edition Package::sourcePkgEdition() const
+  { return pimpl().sourcePkgEdition(); }
+
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////

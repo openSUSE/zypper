@@ -48,8 +48,11 @@ struct Xprint
 {
   bool operator()( const PoolItem & obj_r )
   {
-    MIL << obj_r << " " << obj_r->summary() << endl;
-    MIL << obj_r << " " << obj_r->description() << endl;
+    Package::constPtr p( asKind<Package>(obj_r) );
+    if ( p )
+    {
+      MIL << p << " \t" << p->sourcePkgName() << '-' << p->sourcePkgEdition() << endl;
+    }
     return true;
   }
 
@@ -264,25 +267,6 @@ int main( int argc, char * argv[] )
   //zypp::base::LogControl::instance().logfile( "log.restrict" );
   INT << "===[START]==========================================" << endl;
 
-  Capability c( CapFactory().parse( ResTraits<Package>::kind,
-                                    "modalias(kernel-bigsmp:pci:kfghkskd***k)" ) );
-
-  capability::ModaliasCap::constPtr mc( capability::asKind<capability::ModaliasCap>(c) );
-
-  DBG << c << endl;
-  DBG << c.index() << endl;
-
-  MIL << mc << endl;
-  MIL << mc->name() << endl;
-  MIL << mc->pkgname() << endl;
-
-
-
-  ///////////////////////////////////////////////////////////////////
-  INT << "===[END]============================================" << endl << endl;
-  zypp::base::LogControl::instance().logNothing();
-  return 0;
-
   RepoManager repoManager( makeRepoManager( "/Local/ROOT" ) );
   RepoInfoList repos = repoManager.knownRepositories();
   SEC << repos << endl;
@@ -346,7 +330,7 @@ int main( int argc, char * argv[] )
   SEC << pool.knownRepositoriesSize() << endl;
   std::for_each( pool.knownRepositoriesBegin(), pool.knownRepositoriesEnd(), Print() );
 
-  std::for_each( pool.byNameBegin("glibc"), pool.byNameEnd("glibc"), Xprint() );
+  std::for_each( pool.begin(), pool.end(), Xprint() );
 
   ///////////////////////////////////////////////////////////////////
   INT << "===[END]============================================" << endl << endl;

@@ -21,19 +21,22 @@ namespace zypp
   namespace detail
   { /////////////////////////////////////////////////////////////////
 
+    ByteCount SrcPackageImplIf::downloadSize() const
+    { return location().downloadSize(); }
+
+    unsigned SrcPackageImplIf::mediaNr() const
+    { return location().medianr(); }
+
     /////////////////////////////////////////////////////////////////
     // Default implementation of SrcPackageImplIf attributes,
     // as far as resonable.
     /////////////////////////////////////////////////////////////////
 
-      OnMediaLocation SrcPackageImplIf::location() const
-      { return OnMediaLocation(); }
-    
-      ByteCount SrcPackageImplIf::downloadSize() const
-      { return location().downloadSize(); }
+    OnMediaLocation SrcPackageImplIf::location() const
+    { return OnMediaLocation(); }
 
-      DiskUsage SrcPackageImplIf::diskusage() const
-      { return DiskUsage(); }
+    DiskUsage SrcPackageImplIf::diskusage() const
+    { return DiskUsage(); }
 
     /////////////////////////////////////////////////////////////////
   } // namespace detail

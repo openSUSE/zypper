@@ -40,12 +40,22 @@ namespace zypp
       typedef SrcPackage ResType;
 
     public:
+      /** Overloaded ResObjectImpl attribute.
+       * \return The \ref location media number.
+       */
+      virtual unsigned mediaNr() const;
+
+      /** Overloaded ResObjectImpl attribute.
+       * \return The \ref location downloadSize.
+       */
+      virtual ByteCount downloadSize() const;
+
+    public:
+      /** */
       virtual OnMediaLocation location() const PURE_VIRTUAL;
       /** */
-      virtual ByteCount downloadSize() const PURE_VIRTUAL;
-      /** */
       virtual DiskUsage diskusage() const PURE_VIRTUAL;
-      
+
     };
     ///////////////////////////////////////////////////////////////////
 

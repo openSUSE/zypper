@@ -30,7 +30,7 @@ namespace cached
   public:
 
     PackageImpl( const data::RecordId &id, repo::cached::RepoImpl::Ptr repository_r );
-    
+
     virtual TranslatedText summary() const;
     virtual TranslatedText description() const;
     virtual TranslatedText insnotify() const;
@@ -41,7 +41,7 @@ namespace cached
     virtual bool installOnly() const;
     virtual Date buildtime() const;
     virtual Date installtime() const;
-    
+
     // PACKAGE
     virtual std::string buildhost() const;
     virtual std::string distribution() const;
@@ -61,12 +61,11 @@ namespace cached
     virtual std::list<std::string> authors() const;
     virtual std::list<std::string> filenames() const;
     virtual OnMediaLocation location() const;
-    
-    /*virtual std::list<DeltaRpm> deltaRpms() const;
-    virtual std::list<PatchRpm> patchRpms() const;
-    */
+    virtual std::string sourcePkgName() const;
+    virtual Edition sourcePkgEdition() const;
+
     virtual Repository repository() const;
-    
+
 
   private:
     repo::cached::RepoImpl::Ptr _repository;

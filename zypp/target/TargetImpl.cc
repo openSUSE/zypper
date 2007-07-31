@@ -25,6 +25,7 @@
 #include "zypp/Resolvable.h"
 #include "zypp/ResObject.h"
 #include "zypp/Package.h"
+#include "zypp/SrcPackage.h"
 #include "zypp/Pattern.h"
 #include "zypp/Selection.h"
 #include "zypp/Script.h"
@@ -792,6 +793,15 @@ namespace zypp
           return Date::now();
       }
     }
+
+    void TargetImpl::installSrcPackage( const SrcPackage::constPtr & srcPackage_r )
+    {
+      ZYPP_THROW( Exception("srcPackage install not yet implemented") );
+#warning IMPLEMENT IT
+      // Provide srcPackage_r on the local disk and install it using
+      // _rpm.installPackage( localfile );
+    }
+
 
     /////////////////////////////////////////////////////////////////
   } // namespace target

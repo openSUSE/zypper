@@ -49,13 +49,18 @@ namespace zypp
       typedef packagedelta::PatchRpm    PatchRpm;
       typedef std::set<PackageKeyword>  Keywords;
 
-      public:
-       /** Overloaded ResObjectImpl attribute.
+    public:
+      /** Overloaded ResObjectImpl attribute.
        * \return The \ref location media number.
        */
       virtual unsigned mediaNr() const;
 
-   public:
+      /** Overloaded ResObjectImpl attribute.
+       * \return The \ref location downloadSize.
+       */
+      virtual ByteCount downloadSize() const;
+
+    public:
       /** \name Rpm Package Attributes. */
       //@{
 
@@ -99,9 +104,17 @@ namespace zypp
       /** */
       virtual std::list<PatchRpm> patchRpms() const PURE_VIRTUAL;
 
-      virtual ByteCount downloadSize() const PURE_VIRTUAL;
-
       virtual OnMediaLocation location() const PURE_VIRTUAL;
+
+      /** Name of the source rpm this package was built from.
+       * Empty if unknown.
+       */
+      virtual std::string sourcePkgName() const PURE_VIRTUAL;
+
+      /** Edition of the source rpm this package was built from.
+       * Empty if unknown.
+       */
+      virtual Edition sourcePkgEdition() const PURE_VIRTUAL;
 
       //@}
 

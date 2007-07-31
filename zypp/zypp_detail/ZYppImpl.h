@@ -21,6 +21,7 @@
 #include "zypp/Locale.h"
 #include "zypp/KeyRing.h"
 #include "zypp/ZYppCommit.h"
+#include "zypp/ResTraits.h"
 #include "zypp/DiskUsageCounter.h"
 
 using namespace zypp::filesystem;
@@ -82,13 +83,13 @@ namespace zypp
        * true, just init the target, dont populate store or pool
        */
       void initializeTarget(const Pathname & root);
-      
+
       /**
        * \throws Exception
        * if commit_only == true, just init the target, dont populate store or pool
        */
       ZYPP_DEPRECATED void initTarget(const Pathname & root, bool commit_only);
-      
+
       /**
        * \throws Exception
        */
@@ -96,6 +97,9 @@ namespace zypp
 
       /** Commit changes and transactions. */
       ZYppCommitResult commit( const ZYppCommitPolicy & policy_r );
+
+      /** Install a source package on the Target. */
+      void installSrcPackage( const ResTraits<SrcPackage>::constPtrType & srcPackage_r );
 
     public:
       /** \todo Signal locale change. */
@@ -130,10 +134,10 @@ namespace zypp
 
       /** Get the path where zypp related plugins store persistent data and caches   */
       Pathname homePath() const;
-      
+
       /** Get the path where zypp related plugins store tmp data   */
       Pathname tmpPath() const;
-      
+
       /** set the home, if you need to change it */
       void setHomePath( const Pathname & path );
 

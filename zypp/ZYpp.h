@@ -20,6 +20,7 @@
 
 #include "zypp/base/Deprecated.h"
 #include "zypp/ZYppCommit.h"
+#include "zypp/ResTraits.h"
 
 #include "zypp/Target.h"
 #include "zypp/Resolver.h"
@@ -59,7 +60,7 @@ namespace zypp
 
   public:
 
-    /** 
+    /**
      * Access to the main resolvable pool
      * \ref zypp::ResPool
      */
@@ -78,7 +79,7 @@ namespace zypp
     DiskUsageCounter::MountPointSet diskUsage();
 
     void setPartitions(const DiskUsageCounter::MountPointSet &mp);
-    
+
     DiskUsageCounter::MountPointSet getPartitions() const;
 
   public:
@@ -97,8 +98,8 @@ namespace zypp
      * \throws Exception
      * if commit_only == true, just init the target, dont populate store or pool
      */
-    ZYPP_DEPRECATED void initTarget(const Pathname & root, bool commit_only = false);  
-    
+    ZYPP_DEPRECATED void initTarget(const Pathname & root, bool commit_only = false);
+
     /**
      * \throws Exception
      */
@@ -114,6 +115,11 @@ namespace zypp
      * \throws Exception
     */
     ZYppCommitResult commit( const ZYppCommitPolicy & policy_r );
+
+    /** Install a source package on the Target.
+     * \throws Exception
+     */
+    void installSrcPackage( const ResTraits<SrcPackage>::constPtrType & srcPackage_r );
 
   public:
     /** */
@@ -154,10 +160,10 @@ namespace zypp
   public:
     /** Get the path where zypp related plugins store persistent data and caches   */
     Pathname homePath() const;
-    
+
     /** Get the path where zypp related plugins store temp data   */
     Pathname tmpPath() const;
-    
+
     /** set the home, if you need to change it */
     void setHomePath( const Pathname & path );
 

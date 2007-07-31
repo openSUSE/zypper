@@ -193,6 +193,16 @@ std::list<std::string> PackageImpl::filenames() const
   return std::list<std::string>();
 }
 
+std::string PackageImpl::sourcePkgName() const
+{
+  return _repository->resolvableQuery().queryStringAttribute( _id, cache::attrPackageSourcePkgName() );
+}
+
+Edition PackageImpl::sourcePkgEdition() const
+{
+  return _repository->resolvableQuery().queryStringAttribute( _id, cache::attrPackageSourcePkgEdition() );
+}
+
 /////////////////////////////////////////////////////////////////
 } } } // namespace zypp::repo::cached
 ///////////////////////////////////////////////////////////////////

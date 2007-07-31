@@ -98,7 +98,7 @@ namespace zypp
 
   void ZYpp::initTarget(const Pathname & root, bool commit_only )
   { _pimpl->initTarget(root, commit_only); }
-  
+
   void ZYpp::initializeTarget(const Pathname & root)
   { _pimpl->initializeTarget(root); }
 
@@ -107,6 +107,9 @@ namespace zypp
 
   ZYppCommitResult ZYpp::commit( const ZYppCommitPolicy & policy_r )
   { return _pimpl->commit( policy_r ); }
+
+  void ZYpp::installSrcPackage( const ResTraits<SrcPackage>::constPtrType & srcPackage_r )
+  { _pimpl->installSrcPackage( srcPackage_r ); }
 
   ///////////////////////////////////////////////////////////////////
 
@@ -139,7 +142,7 @@ namespace zypp
 
   Pathname ZYpp::tmpPath() const
   { return _pimpl->tmpPath(); }
-  
+
   void ZYpp::setHomePath( const Pathname & path )
   { _pimpl->setHomePath(path); }
 

@@ -40,7 +40,7 @@ namespace zypp
     typedef std::set<PackageKeyword> Keywords;
 
   public:
-    
+
     /** Get the package change log */
     Changelog changelog() const;
     /** */
@@ -77,19 +77,29 @@ namespace zypp
 
     /** Disk usage per directory */
     DiskUsage diskusage() const;
-    
+
+    /** Name of the source rpm this package was built from.
+     * Empty if unknown.
+     */
+    std::string sourcePkgName() const;
+
+    /** Edition of the source rpm this package was built from.
+     * Empty if unknown.
+     */
+    Edition sourcePkgEdition() const;
+
     /**
      * Checksum the source says this package should have
      * \deprecated Use location().checksum()
      */
     ZYPP_DEPRECATED CheckSum checksum() const
     { return location().checksum(); }
-    
+
     /**
      * \short Location of the resolvable in the repository
      */
     OnMediaLocation location() const;
-    
+
   protected:
     Package( const NVRAD & nvrad_r );
     /** Dtor */

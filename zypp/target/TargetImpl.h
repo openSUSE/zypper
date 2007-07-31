@@ -113,6 +113,9 @@ namespace zypp
        */
       PoolItemList commit( const PoolItemList & items_r, const ZYppCommitPolicy & policy_r, const ResPool & pool_r );
 
+      /** Install a source package on the Target. */
+      void installSrcPackage( const ResTraits<SrcPackage>::constPtrType & srcPackage_r );
+
       /** Overload to realize stream output. */
       virtual std::ostream & dumpOn( std::ostream & str ) const
       {
@@ -135,12 +138,12 @@ namespace zypp
 
       /** return the last modification date of the target */
       Date timestamp() const;
-      
-     /** 
+
+     /**
       * reload the target in future calls if
       * needed.
       * note the loading can actually be delayed, but
-      * the next call to resolvables must reflect the 
+      * the next call to resolvables must reflect the
       * status of the system.
      */
      void reset();
