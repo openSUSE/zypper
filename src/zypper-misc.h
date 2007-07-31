@@ -58,7 +58,7 @@ void load_target_resolvables();
 void load_repo_resolvables();
 
 void establish ();
-bool resolve( bool have_extra_deps = false );
+bool resolve();
 void dump_pool ();
 void show_patches();
 void xml_list_patches();
@@ -89,7 +89,7 @@ void usage(int argc, char **argv);
  *         or ZYPPER_EXIT_OK or ZYPPER_EXIT_ERR_ZYPP on zypp erorr. 
  *  
  */
-int solve_and_commit (bool have_extra_deps = false);
+int solve_and_commit ();
 
 /**
  * Loops through resolvables, checking if there is license to confirm. When

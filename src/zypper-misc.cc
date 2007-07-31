@@ -542,13 +542,10 @@ void establish ()
   dump_pool ();
 }
 
-bool resolve( bool have_extra_deps )
+bool resolve()
 {
   establish ();
   cout_v << _("Resolving dependencies...") << endl;
-  if (have_extra_deps)
-    return God->resolver()->resolvePool( true, true );
-
   return God->resolver()->resolvePool();
 }
 
@@ -1068,9 +1065,9 @@ void mark_updates( const ResObject::Kind &kind, const std::string &repo_alias, b
  *  ZYPPER_EXIT_INF_REBOOT_NEEDED - if one of patches to be installed needs machine reboot,
  *  ZYPPER_EXIT_INF_RESTART_NEEDED - if one of patches to be installed needs package manager restart
  */
-int solve_and_commit (bool have_extra_deps ) {
+int solve_and_commit () {
   while (true) {
-    bool success = resolve( have_extra_deps );
+    bool success = resolve();
     if (success)
       break;
 

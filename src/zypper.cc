@@ -1003,7 +1003,7 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
       }
     }
     else
-      return solve_and_commit (!just_name);
+      return solve_and_commit ();
 
     return ZYPPER_EXIT_OK;
   }
@@ -1225,7 +1225,7 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
     // returns ZYPPER_EXIT_OK, ZYPPER_EXIT_ERR_ZYPP,
     // ZYPPER_EXIT_INF_REBOOT_NEEDED, or ZYPPER_EXIT_INF_RESTART_NEEDED
     else
-      return solve_and_commit(best_effort);
+      return solve_and_commit();
 
     return ZYPPER_EXIT_OK; 
   }
