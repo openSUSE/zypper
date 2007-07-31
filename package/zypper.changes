@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Jul 31 11:15:46 CEST 2007 - schubi@suse.de
+
+- Removed keepExtra parameter in resolvePool; Bug 294727 
+- r6232
+
+-------------------------------------------------------------------
 Tue Jul 31 11:04:35 CEST 2007 - jkupec@suse.cz
 
 - --debug-solver added for generating solver test case
