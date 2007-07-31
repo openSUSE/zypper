@@ -1,7 +1,15 @@
 -------------------------------------------------------------------
+Tue Jul 31 19:06:54 CEST 2007 - ma@suse.de
+
+- Temorary files and directories created by makeSibling use the
+  same protection as the original.
+- revision 6317
+- version 3.13.3
+
+-------------------------------------------------------------------
 Tue Jul 31 10:37:13 CEST 2007 - schubi@suse.de
 
-- Removed keepExtras from resolvePool. This will be handled 
+- Removed keepExtras from resolvePool. This will be handled
   in the solver internally now. #294727
 - Checking if item really exists (#295544; ResolverInfoContainer.cc)
 - revision 6317
