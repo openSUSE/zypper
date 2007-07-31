@@ -270,14 +270,16 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
       {"auto-agree-with-licenses",  no_argument,       0, 'l'},
       // rug compatibility, we have --auto-agree-with-licenses
       {"agree-to-third-party-licenses",  no_argument,  0, 0},
+      {"debug-solver",              no_argument,       0, 0},
       {"help",                      no_argument,       0, 'h'},
       {0, 0, 0, 0}
     };
     specific_options = install_options;
     specific_help = _(
-      "install [options] <name> ...\n"
+      "install [options] <capability> ...\n"
       "\n"
-      "'install' - Install resolvabe(s) with specified name(s).\n"
+      "'install' - Install resolvables with specified capabilities. A capability is\n"
+      "            NAME[ OP <VERSION>], where OP is one of <, <=, =, >=, >.\n"
       "\n"
       "  Command options:\n"
       "\t--catalog,-c\t\t\tOnly from this catalog (under development)\n"
@@ -285,25 +287,30 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
       "\t--name,-n\t\t\tSelect resolvables by plain name, not by capability\n"
       "\t--auto-agree-with-licenses,-l\tAutomatically say 'yes' to third party license confirmation prompt.\n"
       "\t\t\t\t\tSee man zypper for more details.\n"
+      "\t--debug-solver\t\t\tCreate solver test case for debugging\n"  
     );
   }
   else if (command == ZypperCommand::REMOVE) {
     static struct option remove_options[] = {
       {"type",       required_argument, 0, 't'},
       {"name",	     no_argument,       0, 'n'},
+      // rug compatibility, we have global --non-interactive
       {"no-confirm", no_argument,       0, 'y'},
+      {"debug-solver", no_argument,     0, 0},
       {"help",       no_argument,       0, 'h'},
       {0, 0, 0, 0}
     };
     specific_options = remove_options;
     specific_help = _(
-      "remove [options] <name> ...\n"
+      "remove [options] <capability> ...\n"
       "\n"
-      "'remove' - Remove resolvabe(s) with specified name(s).\n"
+      "'remove' - Remove resolvables with specified capabilities. A capability is\n"
+      "            NAME[ OP <VERSION>], where OP is one of <, <=, =, >=, >.\n"
       "\n"
       "  Command options:\n"
       "\t--type,-t <resolvable_type>\tType of resolvable (package, patch, pattern, product) (default: package)\n"
       "\t--name,-n\t\t\tSelect resolvables by plain name, not by capability\n"
+      "\t--debug-solver\t\t\tCreate solver test case for debugging\n"  
       );
   }
   else if (command == ZypperCommand::ADD_REPO) {
@@ -435,8 +442,9 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
       {"type",		            required_argument, 0, 't'},
       {"skip-interactive",          no_argument,       0, 0},
       {"auto-agree-with-licenses",  no_argument,       0, 'l'},
-      { "from-repo",                required_argument, 0, 0 },
-      { "best-effort",              no_argument,       0, 0 },
+      {"from-repo",                 required_argument, 0, 0},
+      {"best-effort",               no_argument,       0, 0},
+      {"debug-solver",              no_argument,       0, 0},
       {"help", no_argument, 0, 'h'},
       {0, 0, 0, 0}
     };
@@ -452,7 +460,8 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
       "\t\t\t\t\tSee man zypper for more details.\n"
       "\t--from-repo <repository_alias>\tRestrict updates to named repository (default: get updates from all repositories)\n"
       "\t--best-effort\t\t\tDo a 'best effort' approach to update, updates to a lower than latest-and-greatest version are also acceptable\n"
-      );
+      "\t--debug-solver\t\t\tCreate solver test case for debugging\n"  
+    );
   }
   else if (command == ZypperCommand::SEARCH) {
     static struct option search_options[] = {
@@ -980,8 +989,22 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
       else
 	mark_by_capability (install_not_remove, kind, *it);
     }
-    
-    solve_and_commit (!just_name);
+
+    if (copts.count("debug-solver"))
+    {
+      establish();
+      cout_n << _("Generating solver test case...") << endl;
+      if (God->resolver()->createSolverTestcase("/var/log/zypper.solverTestCase"))
+        cout_n << _("Solver test case generated successfully.") << endl;
+      else
+      {
+        cerr << _("Error creating the solver test case.") << endl;
+        return ZYPPER_EXIT_ERR_ZYPP;
+      }
+    }
+    else
+      return solve_and_commit (!just_name);
+
     return ZYPPER_EXIT_OK;
   }
 
@@ -1189,10 +1212,22 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
     bool skip_interactive = copts.count("skip-interactive") || gSettings.non_interactive;
     mark_updates( kind, srepo, skip_interactive, best_effort );
 
+
+    if (copts.count("debug-solver"))
+    {
+      cout_n << _("Generating solver test case...") << endl;
+      if (God->resolver()->createSolverTestcase("/var/log/zypper.solverTestCase"))
+        cout_n << _("Solver test case generated successfully.") << endl;
+      else
+        cerr << _("Error creating the solver test case.") << endl;
+    }
     // commit
     // returns ZYPPER_EXIT_OK, ZYPPER_EXIT_ERR_ZYPP,
     // ZYPPER_EXIT_INF_REBOOT_NEEDED, or ZYPPER_EXIT_INF_RESTART_NEEDED
-    return solve_and_commit(best_effort);
+    else
+      return solve_and_commit(best_effort);
+
+    return ZYPPER_EXIT_OK; 
   }
 
   // -----------------------------( info )------------------------------------

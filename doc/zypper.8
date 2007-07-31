@@ -69,6 +69,12 @@ Select resolvables by older method, considering just names, not capabilities.
 .TP
 .I \-l, \-\-auto\-agree\-with\-licenses
 Automatically say 'yes' to third party license confirmation prompt. By using this option, you choose to agree with licenses of all third-party software this command will install. This option is particularly useful for administators installing the same set of packages on multiple machines (by an automated process) and have the licenses confirmed before.
+.TP
+.I      \-\-debug\-solver
+Create solver test case for debugging. Use this option, if you think the
+dependencies were not solved all right and attach the resulting /var/log/zypper.solverTestCase
+directory to your bug report. To use this option, simply add it to the problematic
+install or remove command. 
 
 .TP
 .B list-updates (lu) [options]
@@ -86,14 +92,17 @@ See also the NOTE at
 .TP
 .B remove (rm) <capability> ...
 Remove resolvables.
+.PP
+Capability is usually a plain name, for details see the install command.
 .TP
 \fI\-t, -\-type\fR <resolvable_type>
 Type of resolvable (default: package)
 .TP
 .I \-n, \-\-name
 Select resolvables by older method, considering just names, not capabilities.
-
-Capability is usually a plain name, for details see the install command.
+.TP
+.I      \-\-debug\-solver
+Create solver test case for debugging. See the install command for details.
 
 .TP
 .B update (up) [options]

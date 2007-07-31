@@ -537,7 +537,7 @@ void load_target_resolvables()
 
 void establish ()
 {
-  cerr_v << _("Establishing status of aggregates") << endl;
+  cout_v << _("Establishing status of aggregates") << endl;
   God->resolver()->establishPool();
   dump_pool ();
 }
@@ -545,7 +545,7 @@ void establish ()
 bool resolve( bool have_extra_deps )
 {
   establish ();
-  cerr_v << _("Resolving dependencies...") << endl;
+  cout_v << _("Resolving dependencies...") << endl;
   if (have_extra_deps)
     return God->resolver()->resolvePool( true, true );
 
