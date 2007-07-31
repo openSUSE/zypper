@@ -8,6 +8,7 @@
 #include "zypp/zypp_detail/ZYppReadOnlyHack.h"
 #include "zypp/ZYppFactory.h"
 #include "zypp/PathInfo.h"
+#include "zypp/RepoManager.h"
 #include "zypp/cache/CacheFSCK.h"
 
 #include "zypp/parser/xmlstore/XMLSourceCacheParser.h"
@@ -21,6 +22,8 @@ using namespace zypp;
 
 static void migrate_sources( const Pathname &root, const Pathname &dir )
 {
+  RepoManager manager;
+  
   Pathname source_p = root + dir;
   
   RepoInfoList sources;
@@ -30,24 +33,41 @@ static void migrate_sources( const Pathname &root, const Pathname &dir )
   if ( filesystem::readdir( entries, source_p, false ) != 0 )
       ZYPP_THROW(Exception("failed to read directory"));
 
+  int i=0;
   for ( list<Pathname>::const_iterator it = entries.begin(); it != entries.end(); ++it )
   {
+    
     MIL << "Processing " << *it << endl;
     
     std::ifstream anIstream((*it).c_str());
     zypp::parser::xmlstore::XMLSourceCacheParser iter(anIstream, "");
     for (; ! iter.atEnd(); ++iter) {
       RepoInfo data = **iter;
-      cout << data << endl << endl << endl;
+      string alias = "migrated_" + str::numstring(i);
+      try {
+        cout << "Migrating repo: " << endl << data << endl;
+        data.setAlias(alias);
+        data.setEnabled(false);
+        manager.addRepository(data);
+        cout << "saved as " << alias << endl;
+        ++i;
+      }
+      catch ( const Exception &e )
+      {
+        cout << "Error adding repository: " << e.msg() << endl << data << endl;
+      }
+      
     }
 
   }
+  cout << i << " sources migrated."<< endl;
 }
 
-void usage()
+void usage(int argc, char **argv)
 {
-  cout << "Commands:" << endl;
-  cout << "migrate-sources root-path" << endl;
+  cout << argv[0] << ". Migrates old sources to 10.3 repositories." << endl;
+  cout << "Usage:" << endl;
+  cout << argv[0] << " root-path" << endl;
 }
 
 //-----------------------------------------------------------------------------
@@ -63,8 +83,9 @@ main (int argc, char **argv)
   }
   else
   {
-    usage();
+    usage(argc, argv);
   }
 
   return 0;
 }
+
