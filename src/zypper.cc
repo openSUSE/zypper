@@ -585,8 +585,8 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
       "'xml-updates' - Show updates and patches in xml format\n"
       "\n"
       "This command has no additional options.\n"
-      );
-	}
+    );
+  }
 
   parsed_opts copts = parse_options (argc, argv, specific_options);
   if (copts.count("_unknown"))
