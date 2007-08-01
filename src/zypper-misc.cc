@@ -459,7 +459,6 @@ std::string calculate_token()
 void cond_load_resolvables()
 {	
   load_repo_resolvables();
-
   if ( ! gSettings.disable_system_resolvables ) {
     load_target_resolvables();
   }
@@ -524,13 +523,17 @@ void load_repo_resolvables()
 
 void load_target_resolvables()
 {
-  cout_n << _("Reading RPM database...");
+  if (!gSettings.machine_readable)
+    cout_n << _("Reading RPM database...");
   MIL << "Going to read RPM database" << endl;
 
-  ResStore tgt_resolvables(God->target()->resolvables());
+  ResStore tgt_resolvables(God->target()->resolvables());  
 
-  cout_v << "   " <<  format(_("(%s resolvables)")) % tgt_resolvables.size();
-  cout_n << endl;
+  if (!gSettings.machine_readable)
+  {
+    cout_v << "   " <<  format(_("(%s resolvables)")) % tgt_resolvables.size();
+    cout_n << endl;
+  }
   DBG << tgt_resolvables.size() << " resolvables read";
 
   God->addResolvables(tgt_resolvables, true /*installed*/);

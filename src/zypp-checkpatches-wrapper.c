@@ -10,8 +10,10 @@
 #define WRAPPER_ERROR 101
 
 const char *app = "/usr/bin/zypper";
-const char *arg1 = "-q";
-const char *arg2 = "xu";
+const char *arg1 = "--non-interactive";
+const char *arg2 = "--terse";
+const char *arg3 = "-q";
+const char *arg4 = "xu";
 
 int main (void) {
     /* cd / to avoid NFS problems */
@@ -34,7 +36,7 @@ int main (void) {
     }
  
     /* execute the real application */
-    execl (app, app, arg1, arg2, (char *) NULL);
+    execl (app, app, arg1, arg2, arg3, arg4, (char *) NULL);
 
     /* if we are still here, it has failed */
     perror ("exec");

@@ -9,6 +9,9 @@ using namespace std;
 void display_progress (ostream & out, const string& s, int percent) {
   static AliveCursor cursor;
 
+  if (gSettings.machine_readable)
+    return;
+
   if ( percent == 100 )
     out << CLEARLN << cursor.done() << " " << s;
   else
@@ -23,6 +26,10 @@ void display_progress (ostream & out, const string& s, int percent) {
 
 void display_tick (ostream & out, const string& s) {
   static AliveCursor cursor;
+
+  if (gSettings.machine_readable)
+    return;
+
   cursor++;
   out << CLEARLN << cursor << " " << s;
   out << flush;
@@ -33,6 +40,9 @@ void display_tick (ostream & out, const string& s) {
 void display_done (ostream & out, const string& s) {
   static AliveCursor cursor;
 
+  if (gSettings.machine_readable)
+    return;
+
   out << CLEARLN << cursor.done() << " " << s;
   out << flush;
   out << endl;
@@ -41,6 +51,10 @@ void display_done (ostream & out, const string& s) {
 // ----------------------------------------------------------------------------
 
 void display_done (ostream & out) {
+
+  if (gSettings.machine_readable)
+    return;
+
   out << endl;
 }
 
