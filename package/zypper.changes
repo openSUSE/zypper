@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Wed Aug 1 11:18:00 CEST 2007 - tgoettlicher@suse.de
+
+- option xu only shows affect-package-manager patches when available
+   because they have top priority
+- added installnotify message to xml
+- r6356 
+
+-------------------------------------------------------------------
 Tue Jul 31 13:42:25 CEST 2007 - jkupec@suse.cz
 
 - fixed typo in the help (#295980)
