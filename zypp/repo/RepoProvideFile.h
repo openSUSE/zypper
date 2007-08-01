@@ -60,7 +60,8 @@ namespace zypp
     class RepoMediaAccess
     {
     public:
-      RepoMediaAccess();
+      /** Ctor taking the default \ref ProvideFilePolicy. */
+      RepoMediaAccess( const ProvideFilePolicy & defaultPolicy_r = ProvideFilePolicy() );
       ~RepoMediaAccess();
 
       /** Provide a file from a Repository.
@@ -74,11 +75,22 @@ namespace zypp
       */
       ManagedFile provideFile( Repository repo_r,
                                const OnMediaLocation & loc_r,
-                               const ProvideFilePolicy & policy_r = ProvideFilePolicy() );
-    private:
+                               const ProvideFilePolicy & policy_r );
+
+      /** \overload Using the current default \ref ProvideFilePolicy. */
+      ManagedFile provideFile( Repository repo_r, const OnMediaLocation & loc_r )
+      { return provideFile( repo_r, loc_r, defaultPolicy() ); }
+
+    public:
+      /** Set a new default \ref ProvideFilePolicy. */
+      void setDefaultPolicy( const ProvideFilePolicy & policy_r );
+
+      /** Get the current default \ref ProvideFilePolicy. */
+      const ProvideFilePolicy & defaultPolicy() const;
+
+   private:
       class Impl;
        RW_pointer<Impl> _impl;
-
     };
 
     /////////////////////////////////////////////////////////////////

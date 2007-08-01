@@ -77,7 +77,8 @@ namespace zypp
     class RepoMediaAccess::Impl
     {
     public:
-      Impl()
+      Impl( const ProvideFilePolicy & defaultPolicy_r )
+        : _defaultPolicy( defaultPolicy_r )
       {}
 
       ~Impl()
@@ -167,19 +168,23 @@ namespace zypp
 
       std::map<shared_ptr<MediaSetAccess>, Repository> _verifier;
       std::map<Url, shared_ptr<MediaSetAccess> > _medias;
+      ProvideFilePolicy _defaultPolicy;
     };
 
 
 
-    RepoMediaAccess::RepoMediaAccess()
-      : _impl( new Impl() )
-    {
-    }
+    RepoMediaAccess::RepoMediaAccess( const ProvideFilePolicy & defaultPolicy_r )
+      : _impl( new Impl( defaultPolicy_r ) )
+    {}
 
     RepoMediaAccess::~RepoMediaAccess()
-    {
+    {}
 
-    }
+    void RepoMediaAccess::setDefaultPolicy( const ProvideFilePolicy & policy_r )
+    { _impl->_defaultPolicy = policy_r; }
+
+    const ProvideFilePolicy & RepoMediaAccess::defaultPolicy() const
+    { return _impl->_defaultPolicy; }
 
     ManagedFile RepoMediaAccess::provideFile( Repository repo_r,
                                               const OnMediaLocation & loc_r,
