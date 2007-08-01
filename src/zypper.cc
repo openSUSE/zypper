@@ -1216,8 +1216,8 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
     cout << "<?xml version='1.0'?>" << endl;
     cout << "<update-status version=\"0.4\">" << endl;
     cout << "<update-list>" << endl;
-    xml_list_patches ();
-    xml_list_updates ();
+    if (!xml_list_patches ())	// Only list updates if no
+      xml_list_updates ();	// affects-pkg-mgr patches are available
     cout << "</update-list>" << endl;
     cout << "</update-status>" << endl;
 

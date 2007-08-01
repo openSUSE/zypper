@@ -652,12 +652,18 @@ void show_patches()
 
 // ----------------------------------------------------------------------------
 
-void xml_list_patches ()
+bool xml_list_patches ()
 {
+  // returns true if affects_pkg_manager patches are availble
+  
+  bool pkg_mgr_available = false;
+
+
   const zypp::ResPool& pool = God->pool();
   ResPool::byKind_iterator
     it = pool.byKindBegin<Patch> (),
     e  = pool.byKindEnd<Patch> ();
+
 
   for (; it != e; ++it )
   {
@@ -666,29 +672,51 @@ void xml_list_patches ()
     {
       Patch::constPtr patch = asKind<Patch>(res);
 
-      cout << " <update ";
-      cout << "name=\"" << res->name () << "\" " ;
-      cout << "edition=\""  << res->edition ().asString() << "\" ";
-      cout << "category=\"" <<  patch->category() << "\" ";
-      cout << "pkgmanager=\"" << ((patch->affects_pkg_manager()) ? "true" : "false") << "\" ";
-      cout << "restart=\"" << ((patch->reboot_needed()) ? "true" : "false") << "\" ";
-      cout << "interactive=\"" << ((patch->interactive()) ? "true" : "false") << "\" ";
-      cout << "resolvabletype=\"" << "patch" << "\" ";
-      cout << ">" << endl;
-      cout << "  <summary>" << xml_escape(patch->summary()) << "  </summary>" << endl;
-      cout << "  <description>" << xml_escape(patch->description()) << "</description>" << endl;
-      cout << "  <license>" << xml_escape(patch->licenseToConfirm()) << "</license>" << endl;
-
-
-      if ( patch->repository() != Repository::noRepository )
-      {
-        cout << "  <source url=\"" << *(patch->repository().info().baseUrlsBegin());
-        cout << "\" alias=\"" << patch->repository().info().alias() << "\"/>" << endl;
-      }
-
-      cout << " </update>" << endl;
+      if (patch->affects_pkg_manager())
+	pkg_mgr_available = true;
     }
   }
+
+
+  it = pool.byKindBegin<Patch> ();
+
+  for (; it != e; ++it )
+  {
+    ResObject::constPtr res = it->resolvable();
+    if ( it->status().isNeeded()) 
+    {
+      Patch::constPtr patch = asKind<Patch>(res);
+      if (pkg_mgr_available && patch->affects_pkg_manager()  ||
+	!pkg_mgr_available )
+      {
+        cout << " <update ";
+        cout << "name=\"" << res->name () << "\" " ;
+        cout << "edition=\""  << res->edition ().asString() << "\" ";
+        cout << "category=\"" <<  patch->category() << "\" ";
+        cout << "pkgmanager=\"" << ((patch->affects_pkg_manager()) ? "true" : "false") << "\" ";
+        cout << "restart=\"" << ((patch->reboot_needed()) ? "true" : "false") << "\" ";
+        cout << "interactive=\"" << ((patch->interactive()) ? "true" : "false") << "\" ";
+        cout << "resolvabletype=\"" << "patch" << "\" ";
+        cout << ">" << endl;
+        cout << "  <summary>" << xml_escape(patch->summary()) << "  </summary>" << endl;
+        cout << "  <description>" << xml_escape(patch->description()) << "</description>" << endl;
+        cout << "  <license>" << xml_escape(patch->licenseToConfirm()) << "</license>" << endl;
+        cout << "  <installnotify>" << xml_escape(patch->insnotify()) << "</installnotify>" << endl;
+  
+
+        if ( patch->repository() != Repository::noRepository )
+        {
+          cout << "  <source url=\"" << *(patch->repository().info().baseUrlsBegin());
+          cout << "\" alias=\"" << patch->repository().info().alias() << "\"/>" << endl;
+        }
+  
+        cout << " </update>" << endl;
+      }
+    }
+  }
+
+  return pkg_mgr_available;
+
 }
 
 

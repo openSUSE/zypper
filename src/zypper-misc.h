@@ -61,7 +61,7 @@ void establish ();
 bool resolve();
 void dump_pool ();
 void show_patches();
-void xml_list_patches();
+bool xml_list_patches();
 void xml_list_updates();
 
 
