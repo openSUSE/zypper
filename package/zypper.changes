@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Wed Aug  1 15:31:24 CEST 2007 - jkupec@suse.cz
+
+- --repo re-implemented to restrict operation to the specified
+  repository (FATE #302160, #302158)
+- r6365
+
+-------------------------------------------------------------------
 Wed Aug 1 14:09:00 CEST 2007 - tgoettlicher@suse.de
 
 - added --non-interactive --terse to zypp-checkpatches-wrapper
