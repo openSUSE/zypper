@@ -14,8 +14,9 @@
 
 #include <iosfwd>
 
-#include <zypp/ResPool.h>
-#include <zypp/ResPoolProxy.h>
+#include "zypp/ResPool.h"
+#include "zypp/ResPoolProxy.h"
+#include "zypp/ResStore.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -54,6 +55,9 @@ namespace zypp
     /**  */
     void insert( ResObject::constPtr ptr_r, bool installed = false )
     { inserter(installed)( ptr_r ); }
+
+    void insert( const ResStore & store_r, bool installed = false )
+    { insert( store_r.begin(), store_r.end(), installed ); }
 
     /**  */
     template <class _InputIterator>
