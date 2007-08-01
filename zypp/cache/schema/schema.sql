@@ -258,7 +258,34 @@ CREATE TABLE split_capabilities (
 );
 CREATE INDEX split_capabilities_resolvable ON split_capabilities(resolvable_id);
 
--- Auto clean capabilities
+------------------------------------------------
+-- File list
+------------------------------------------------
+
+CREATE TABLE resolvable_files (
+    resolvable_id INTEGER REFERENCES resolvables (id)
+  , file_id INTEGER REFERENCES files (id)
+  , PRIMARY KEY ( resolvable_id, file_id )
+);
+
+------------------------------------------------
+-- Disk usage
+------------------------------------------------
+
+CREATE TABLE resolvable_disk_usage (
+    resolvable_id INTEGER REFERENCES resolvables (id)
+  , dir_name_id INTEGER REFERENCES dir_name (id)
+  , files INTEGER
+  , size INTEGER
+  , PRIMARY KEY ( resolvable_id, dir_name_id )
+);
+CREATE INDEX disk_usage_resolvable_id ON resolvable_disk_usage(resolvable_id);
+CREATE INDEX disk_usage_dir_name_id ON resolvable_disk_usage(dir_name_id);
+
+------------------------------------------------
+-- Cleanup
+------------------------------------------------
+
 CREATE TRIGGER remove_resolvables
   AFTER DELETE ON resolvables
   BEGIN
@@ -271,7 +298,12 @@ CREATE TRIGGER remove_resolvables
     
     DELETE FROM text_attributes  WHERE weak_resolvable_id = old.id;
     DELETE FROM numeric_attributes  WHERE weak_resolvable_id = old.id;
+    DELETE FROM resolvable_disk_usage WHERE resolvable_id = old.id;
+    DELETE FROM resolvable_files WHERE resolvable_id = old.id;
   END;
+
+
+
 
 ------------------------------------------------
 -- Associate resolvables and repositories

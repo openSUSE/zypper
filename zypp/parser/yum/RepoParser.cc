@@ -246,7 +246,7 @@ namespace zypp
   bool RepoParser::Impl::other_CB(
     const data::Resolvable_Ptr & res_ptr, const Changelog & changelog)
   {
-    _consumer.consumeChangelog(_repository_id, res_ptr, changelog);
+    //_consumer.consumeChangelog(_repository_id, res_ptr, changelog);
 /*
     DBG << "got changelog for "
       << res_ptr->name << res_ptr->edition << " "
@@ -263,7 +263,7 @@ namespace zypp
   bool RepoParser::Impl::filelist_CB(
     const data::Resolvable_Ptr & res_ptr, const data::Filenames & filenames)
   {
-    _consumer.consumeFilelist(_repository_id, res_ptr, filenames);
+    //_consumer.consumeFilelist(_repository_id, res_ptr, filenames);
 /*
     DBG << "got filelist for "
       << res_ptr->name << res_ptr->edition << " "

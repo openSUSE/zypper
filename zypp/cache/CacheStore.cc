@@ -128,7 +128,11 @@ struct CacheStore::Impl
       "insert into patch_packages_baseversions (patch_package_id, version, release, epoch) "
       "values (:patch_package_id, :version, :release, :epoch)" ));
 
-
+    update_disk_usage_cmd.reset( new sqlite3_command (con,
+      "insert or replace into resolvable_disk_usage (resolvable_id, dir_name_id, files, size) "
+      "values (:resolvable_id, :dir_name_id, :files, :size)" ));
+    
+    
     // disable autocommit
     con.executenonquery("BEGIN;");
   }
@@ -190,6 +194,8 @@ struct CacheStore::Impl
   sqlite3_command_ptr insert_deltarpm_cmd;
   sqlite3_command_ptr append_patch_baseversion_cmd;
 
+  sqlite3_command_ptr update_disk_usage_cmd;
+  
   map<string, RecordId> name_cache;
   map< pair<string,string>, RecordId> type_cache;
   int name_cache_hits;
@@ -412,8 +418,7 @@ RecordId CacheStore::consumeProduct( const data::RecordId & repository_id,
   return id;
 }
 
-RecordId CacheStore::consumeChangelog( const data::RecordId & repository_id,
-                                   const data::Resolvable_Ptr & resolvable,
+RecordId CacheStore::consumeChangelog( const data::RecordId &resolvable_id,
                                    const Changelog & changelog )
 {
   //! \todo maybe appendChangelog(const data::RecordId & resolvable_id, Changelog changelog) will be needed
@@ -422,12 +427,35 @@ RecordId CacheStore::consumeChangelog( const data::RecordId & repository_id,
   return data::noRecordId;
 }
 
-RecordId CacheStore::consumeFilelist( const data::RecordId & repository_id,
-                                  const data::Resolvable_Ptr & resolvable,
+RecordId CacheStore::consumeFilelist( const data::RecordId &resolvable_id,
                                   const data::Filenames & filenames )
 {
   //! \todo maybe consumeFilelist(const data::RecordId & resolvable_id, data::Filenames &) will be needed
   return data::noRecordId;
+}
+
+void CacheStore::consumeDiskUsage( const data::RecordId &resolvable_id,
+                                  const DiskUsage &disk )
+{
+  // iterate over entries
+  for ( DiskUsage::const_iterator it = disk.begin();
+        it != disk.end();
+        ++it )
+  {
+    data::RecordId dirid = lookupOrAppendDirName( (*it).path );
+    try
+    {
+      _pimpl->update_disk_usage_cmd->bind(":resolvable_id", resolvable_id);
+      _pimpl->update_disk_usage_cmd->bind(":dir_name_id", dirid);
+      _pimpl->update_disk_usage_cmd->bind(":files", (int)(*it)._files );
+      _pimpl->update_disk_usage_cmd->bind(":size", (int)(*it)._size );
+      _pimpl->update_disk_usage_cmd->executenonquery();
+    }
+    catch ( const sqlite3x::database_error &e )
+    {
+      ZYPP_RETHROW(e);
+    }
+  }
 }
 
 void CacheStore::updatePackageLang( const data::RecordId & resolvable_id,

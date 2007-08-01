@@ -169,8 +169,7 @@ namespace zypp
        * \param changelog  the changelog
        * \todo see implementation
        */
-      virtual data::RecordId consumeChangelog( const data::RecordId & repository_id,
-					       const data::Resolvable_Ptr & resolvable,
+      virtual data::RecordId consumeChangelog( const data::RecordId & resolvable_id,
 					       const Changelog & changelog );
 
       /**
@@ -182,9 +181,24 @@ namespace zypp
        * \param filenames  list of filenames the resolvable contains
        * \todo see implementation
        */
-      virtual data::RecordId consumeFilelist( const data::RecordId &repository_id,
-					      const data::Resolvable_Ptr & resolvable,
+      virtual data::RecordId consumeFilelist( const data::RecordId & resolvable_id,
 					      const data::Filenames & filenames );
+      
+      /**
+       * Implementation of the \ref ResolvableDataConsumer interface
+       *
+       * Consume disk usage of a resolvable, inserting it in the cache.
+       *
+       * Repeated entries are updated (replaced)
+       *
+       * \param repository_id ownership.
+       * \param resolvable resolvable for which the filelist is to be saved
+       * \param disk  Disk usage object
+       * \todo see implementation
+       */
+       virtual void consumeDiskUsage( const data::RecordId &resolvable_id,
+                                      const DiskUsage &disk );
+
 
       /**
        * Implementation of the \ref ResolvableDataConsumer interface
