@@ -19,21 +19,49 @@
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
-  class Resolvable;
-  class ResObject;
+  /** \defgroup ZYPP_RESOLVABLE_SMART_POINTER_TYPES
+   * Resolvable smart pointer types.
+   *
+   * Forward declaration of all Resolvable smart pointer
+   * types provided in \c ResTraits.h (recommended in header files):
+   * \code
+   * #include<zypp/ResTraits.h>
+   *
+   * Resolvable_Ptr                      // Resolvable *
+   * ResTraits<Resolvable>::PtrType      // same as above
+   *
+   * Resolvable_constPtr                 // const Resolvable *
+   * ResTraits<Resolvable>::constPtrType // same as above
+   * \endcode
+   *
+   * Synonym, but requires \c Resolvable.h being included:
+   * \code
+   * #include<zypp/Resolvable.h>
+   *
+   * Resolvable::Ptr        // same as Resolvable_Ptr but requires Resolvable.h
+   * Resolvable::constPtr   // same as Resolvable_constPtr but requires Resolvable.h
+   * \endcode
+   *
+   * \note When adding a \c NewResolvable type here, dont forgett to
+   * put <tt>IMPL_PTR_TYPE(NewResolvable);</tt> into the \c NewResolvable.cc.
+   */
+  //@{
+  DEFINE_PTR_TYPE( Resolvable );
+  DEFINE_PTR_TYPE( ResObject );
 
-  class Atom;
-  class Package;
-  class SrcPackage;
-  class Selection;
-  class Pattern;
-  class Product;
-  class Patch;
-  class Script;
-  class Message;
-  class Language;
+  DEFINE_PTR_TYPE( Atom );
+  DEFINE_PTR_TYPE( Package );
+  DEFINE_PTR_TYPE( SrcPackage );
+  DEFINE_PTR_TYPE( Selection );
+  DEFINE_PTR_TYPE( Pattern );
+  DEFINE_PTR_TYPE( Product );
+  DEFINE_PTR_TYPE( Patch );
+  DEFINE_PTR_TYPE( Script );
+  DEFINE_PTR_TYPE( Message );
+  DEFINE_PTR_TYPE( Language );
 
-  class SystemResObject;
+  DEFINE_PTR_TYPE( SystemResObject );
+  //@}
 
   /** Base of ResTraits. Defines the Resolvable::Kind type. */
   struct ResolvableTraits

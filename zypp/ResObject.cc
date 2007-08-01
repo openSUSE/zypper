@@ -19,6 +19,8 @@ using namespace std;
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
+  IMPL_PTR_TYPE(ResObject);
+
   ///////////////////////////////////////////////////////////////////
   //
   //	METHOD NAME : ResObject::ResObject
@@ -80,7 +82,7 @@ namespace zypp
 
   ByteCount ResObject::downloadSize() const
   { return pimpl().downloadSize(); }
-  
+
   unsigned ResObject::mediaNr() const
   { return pimpl().mediaNr(); }
 
@@ -92,7 +94,7 @@ namespace zypp
 
   Date ResObject::installtime() const
   { return pimpl().installtime(); }
-  
+
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
