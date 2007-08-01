@@ -48,18 +48,31 @@ struct Xprint
 {
   bool operator()( const PoolItem & obj_r )
   {
-    Package::constPtr p( asKind<Package>(obj_r) );
+    return true;
+  }
+
+  bool operator()( const ResObject_Ptr & obj_r )
+  {
+    SrcPackage_constPtr p( asKind<SrcPackage>( obj_r ) );
     if ( p )
     {
-      MIL << p << " \t" << p->sourcePkgName() << '-' << p->sourcePkgEdition() << endl;
+      getZYpp()->installSrcPackage( p );
+      SEC << p << endl;
     }
     return true;
   }
 
+  bool operator()( const Repository & repo_r )
+  {
+    USR << repo_r.resolvables() << endl;
+    std::for_each( repo_r.resolvables().begin(), repo_r.resolvables().end(), Xprint() );
+    return true;
+  }
+
+
   template<class _C>
   bool operator()( const _C & obj_r )
   {
-    USR << obj_r << endl;
     return true;
   }
 };
@@ -301,6 +314,8 @@ int main( int argc, char * argv[] )
   for ( RepoInfoList::iterator it = repos.begin(); it != repos.end(); ++it )
   {
     RepoInfo & nrepo( *it );
+    if ( ! nrepo.enabled() )
+      continue;
 
     if ( ! repoManager.isCached( nrepo ) || 0 )
     {
@@ -309,6 +324,8 @@ int main( int argc, char * argv[] )
 	SEC << "cleanCache" << endl;
 	repoManager.cleanCache( nrepo );
       }
+      SEC << "refreshMetadat" << endl;
+      repoManager.refreshMetadata( nrepo );
       SEC << "buildCache" << endl;
       repoManager.buildCache( nrepo );
     }
@@ -326,11 +343,16 @@ int main( int argc, char * argv[] )
   }
 
   USR << "pool: " << pool << endl;
-
   SEC << pool.knownRepositoriesSize() << endl;
-  std::for_each( pool.knownRepositoriesBegin(), pool.knownRepositoriesEnd(), Print() );
 
-  std::for_each( pool.begin(), pool.end(), Xprint() );
+  if ( 1 )
+  {
+    zypp::base::LogControl::TmpLineWriter shutUp;
+    getZYpp()->initTarget( sysRoot );
+  }
+  MIL << "Added target: " << pool << endl;
+
+  std::for_each( pool.knownRepositoriesBegin(), pool.knownRepositoriesEnd(), Xprint() );
 
   ///////////////////////////////////////////////////////////////////
   INT << "===[END]============================================" << endl << endl;

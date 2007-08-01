@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Wed Aug  1 18:51:12 CEST 2007 - ma@suse.de
+
+- Added interface to install source packages via zypper.
+- revision 6373
+- version 3.13.5
+
+-------------------------------------------------------------------
 Tue Jul 31 22:01:08 CEST 2007 - ma@suse.de
 
 - Added package attributes Package::sourcePkgName and
