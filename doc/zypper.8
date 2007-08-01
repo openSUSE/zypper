@@ -58,8 +58,8 @@ Names are not only package names but any symbols provided by packages:
 special characters from the shell.
 
 .TP
-\fI\-c, \-\-catalog\fR <catalog>
-Only from this catalog (FIXME not implemented yet)
+\fI\-r, \-\-repo\fR <alias>
+Install resolvables only from the repository specified by the alias.
 .TP
 \fI\-t, \-\-type\fR <resolvable_type>
 Type of resolvable (default: package)
@@ -83,8 +83,8 @@ List available updates.
 \fI\-t, --type\fR <resolvable_type>
 Type of resolvable (default: patch)
 .TP
-\fI\--from-repo\fR <repository_alias>
-Limit view to updates available from named repository
+\fI\-r, \-\-repo\fR <alias>
+List only updates from the repository specified by the alias.
 
 See also the NOTE at
 .BR update .
@@ -94,6 +94,9 @@ See also the NOTE at
 Remove resolvables.
 .PP
 Capability is usually a plain name, for details see the install command.
+.TP
+\fI\-r, \-\-repo\fR <alias>
+Operate only with resolvables from repository specified by alias.
 .TP
 \fI\-t, -\-type\fR <resolvable_type>
 Type of resolvable (default: package)
@@ -111,8 +114,8 @@ Update all installed resolvables with newer versions, where applicable.
 \fI\-t, -\-type\fR <resolvable_type>
 Type of resolvable (default: patch)
 .TP
-\fI\--from-repo\fR <repository_alias>
-Limit to updates available from named repository
+\fI\-r, \-\-repo\fR <alias>
+Limit updates to repository specified by alias.
 .TP
 .I     \-\-skip\-interactive
 This will skip interactive patches, that is, those that need reboot,
@@ -127,9 +130,6 @@ Zypper prefers to update only those packages for which a patch
 description exists, like on the SUSE update servers. To operate on all
 packages for which there is a better version instead, select \fI--type
 package\fR which is also the default in rug compatibility mode.
-
-By using \fI--from-repo\fR one can follow a specific repository only
-with updates.
 
 .TP
 \fBsearch\fR (\fBse\fR) [\fIoptions\fR] [\fBquerystring\fR] ...
@@ -166,16 +166,16 @@ Show only resolvables that are already installed.
 .I \-u, \-\-uninstalled\-only
 Show only resolvables that are not currently installed.
 .TP
-\fI\-t, -\-type\fR [resolvable]
-Search only for resolvables of specified type.
+.I \-t, -\-type <type>
+Search only for resolvables of specified type. See the beginning of the subsection for the list of available resolvable types.
 .TP
-.I \-c, \-\-catalog
-Show only the resolvables from the catalog you specify. (not implemented yet)
+.I \-r, \-\-repo <alias>
+Search only in the repository specified by the alias.
 .TP
 \fI    \-\-sort\-by\-name\fR
 Sort resolvables by name (default).
 .TP
-\fI    \-\-sort\-by\-catalog\fR
+\fI    \-\-sort\-by\-repo\fR
 Sort resolvables by catalog, not by name.
 
 .SS Patch Management
@@ -184,21 +184,31 @@ Sort resolvables by catalog, not by name.
 .B patch-check (pchk)
 Check for patches. Displays a count of applicable patches and how many
 of them have the security category.
-
-Exit status: 0 - no patches, 1 - non-security patches, 2 - security patches.
+.PP
+See also the EXIT CODES section for details on exit status of 0, 100, and 101
+returned by this command.
+.TP
+.I \-r, \-\-repo <alias>
+Check for patches only in the repository specified by the alias.
 
 .TP
 .B patches (pch)
 List patches. Lists all patches that are available, including
 installed and not applicable ones.
+.TP
+.I \-r, \-\-repo <alias>
+Check for patches only in the repository specified by the alias.
 
 .TP
 .B patch-info <name> ...
 Displays full info for the specified patches.
+.TP
+.I \-r, \-\-repo <alias>
+Work only with the repository specified by the alias.
  
 .SS Repository Management
 
-.LP
+.PP
 zypper is able to work with YaST, YUM, and aptrpm
 repositories, ZENworks 7 Linux Management, ZENworks 6.6.x Linux
 Management servers, as well as local files.
@@ -218,7 +228,7 @@ Add the repository as disabled.
 .TP
 \fI\-n, \-\-no\-refresh\fR 
 Add the repository with auto-refresh disabled.
-.TP
+.PP
 NOTE: This command does not automatically refresh the newly added repositories. You have to use the \fBrefresh\fR command after finishing your modifications to repositories with \fB*repo\fR commands.
 
 .TP
@@ -356,7 +366,7 @@ zypper is designed to be compatible with rug, which is a command\-line interface
 ZENworks distinguishes services and catalogs. A service is
 added by URI and contains one or more catalogs. Libzypp does not have
 this distinction (yet) but for compatibility it is able to use the same command
-and option names (service-add, --catalog) as rug.
+and option names (service-add, \-\-catalog) as rug.
 .LP
 Currently, a Repository in zypper is a synonym for both Service and Catalog in ZLM.
 .TP
@@ -371,7 +381,6 @@ zypper removerepo (rr)
 .I rug service-list (sl)
 zypper repos (lr)
 
-.LP 
 .SS Package Management Commands
 
 .TP
@@ -383,7 +392,7 @@ zypper install (in)
 Don't require user interaction. This option is implemented using zypper's non-interactive mode.
 .TP
 .I      \-\-agree\-to\-third\-party\-licenses
-This option is an alias to zypper's --auto-agree-with-licenses option.
+This option is an alias to zypper's \-\-auto-agree\-with\-licenses option.
 .RE
 
 .TP
@@ -402,9 +411,27 @@ zypper update (up)
 .TP
 .I \-y, \-\-no\-confirm
 Don't require user interaction. This option is implemented using zypper's non-interactive mode.
-.I    , \-\-agree\-to\-third\-party\-licenses
-This option is an alias to zypper's --auto-agree-with-licenses option.
+.TP
+.I      \-\-agree\-to\-third\-party\-licenses
+This option is an alias to zypper's \-\-auto-agree\-with\-licenses option.
 .RE
+
+.TP
+.I rug search (se)
+zypper search (se)
+.TP
+\fI    \-\-sort\-by\-catalog\fR
+Sort resolvables by catalog, not by name. This option is an alias to zypper's
+\-\-sort\-by\-repo option.
+
+.SS Other Compatibility Notes
+
+.TP
+\fI\-c, \-\-catalog\fR <catalog>
+This option is an alias to zypper's \-\-repo <alias> and it will restrict
+the operation of commands like search, install, etc to the repository specified
+by the alias.
+
 
 .SH "NOTE"
 .LP

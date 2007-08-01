@@ -445,7 +445,7 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
       "\n"
       "  Command options:\n"
       "-t, --type <type>   Type of resolvable (package, patch, pattern, product) (default: patch)\n"
-      "-r, --repo <alias>  Work only with updates from repository specified by alias.\n"
+      "-r, --repo <alias>  List only updates from the repository specified by the alias.\n"
       "    --best-effort   Do a 'best effort' approach to update, updates to a lower than latest-and-greatest version are also acceptable.\n"
     );
   }
@@ -469,7 +469,7 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
       "  Command options:\n"
       "\n"
       "-t, --type <type>               Type of resolvable (package, patch, pattern, product) (default: patch)\n"
-      "-r, --repo <alias>              Work only with updates from repository specified by alias.\n"
+      "-r, --repo <alias>              Limit updates to the repository specified by the alias.\n"
       "    --skip-interactive          Skip interactive updates\n"
       "-l, --auto-agree-with-licenses  Automatically say 'yes' to third party license confirmation prompt.\n"
       "                                See man zypper for more details.\n"
@@ -515,8 +515,8 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
       "-c, --case-sensitive       Perform case-sensitive search.\n"
       "-i, --installed-only       Show only packages that are already installed.\n"
       "-u, --uninstalled-only     Show only packages that are not currently installed.\n"
-      "-t, --type                 Search only for packages of the specified type.\n"
-      "-r, --repo <alias>         Search only in repository specified by alias.\n"
+      "-t, --type <type>          Search only for packages of the specified type.\n"
+      "-r, --repo <alias>         Search only in the repository specified by the alias.\n"
       "    --sort-by-name         Sort packages by name (default).\n"
       "    --sort-by-repo         Sort packages by repository.\n"
       "\n"
@@ -539,7 +539,7 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
       "\n"
       "  Command options:\n"
       "\n"
-      "-r, --repo <alias>  Check for patches only in repository specified by alias.\n"
+      "-r, --repo <alias>  Check for patches only in the repository specified by the alias.\n"
     );
   }
   else if (command == ZypperCommand::SHOW_PATCHES) {
@@ -558,7 +558,7 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
       "\n"
       "  Command options:\n"
       "\n"
-      "-r, --repo <alias>  Check for patches only in repository specified by alias.\n"
+      "-r, --repo <alias>  Check for patches only in the repository specified by the alias.\n"
     );
   }
   else if (command == ZypperCommand::INFO) {
@@ -577,7 +577,7 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
       "\n"
       "  Command options:\n"
       "\n"
-      "-r, --repo <alias>  Work only with the repository specified by alias.\n"
+      "-r, --repo <alias>  Work only with the repository specified by the alias.\n"
     );
   }
   // rug compatibility command, we have zypper info [-t <res_type>]
@@ -1104,8 +1104,10 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
       cout << _("No resolvables found.") << endl;
     else {
       cout << endl;
-      if (copts.count("sort-by-catalog")) t.sort(1);
-      else t.sort(3); // sort by name
+      if (copts.count("sort-by-catalog") || copts.count("sort-by-repo"))
+        t.sort(1);
+      else
+        t.sort(3); // sort by name
       cout << t;
     }
 
