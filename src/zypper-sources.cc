@@ -57,11 +57,12 @@ static int do_init_repos()
   else
     gData.repos = manager.knownRepositories();
 
+
   for (std::list<RepoInfo>::iterator it = gData.repos.begin();
        it !=  gData.repos.end(); ++it)
   {
     RepoInfo repo(*it);
-    MIL << "initializing " << repo.alias() << endl;
+    MIL << "checking if to refresh " << repo.alias() << endl;
 
     //! \todo honor command line options/commands
     bool do_refresh = repo.enabled() && repo.autorefresh(); 
@@ -73,21 +74,46 @@ static int do_init_repos()
           << endl;
       MIL << "calling refresh for " << repo.alias() << endl;
 
-      try { manager.refreshMetadata(repo); }
-      catch (const RepoException & ex)
+      // handle root user differently
+      if (geteuid() == 0)
       {
-        cerr << format(_("Repository %s is invalid.")) % repo.alias() << endl;
-        cerr_v << _("Reason: ") << ex.asUserString() << endl;
-        ERR << repo.alias() << " is invalid, disabling it" << endl;
-        it->setEnabled(false);
+        try { manager.refreshMetadata(repo, RepoManager::RefreshIfNeeded); }
+        //! \todo handle the rest of special exceptions
+        catch (const RepoException & ex)
+        {
+          cerr << format(_("Repository '%s' is invalid.")) % repo.alias() << endl;
+          cerr_v << _("Reason: ") << ex.asUserString() << endl;
+          ERR << repo.alias() << " is invalid, disabling it" << endl;
+          it->setEnabled(false);
+        }
+        catch (const Exception & ex)
+        {
+          cerr << format(_("Error while refreshing repository %s:")) % repo.alias()
+            << endl;
+          cerr << ex.asUserString() << endl;
+          ERR << "Error while refreshing " << repo.alias() << ", disabling it" << endl;
+          it->setEnabled(false);
+        }
       }
-      catch (const Exception & ex)
+      // non-root user
+      else
       {
-        cerr << format(_("Error while refreshing repository %s:")) % repo.alias()
-          << endl;
-        cerr << ex.asUserString() << endl;
-        ERR << "Error while refreshing " << repo.alias() << ", disabling it" << endl;
-        it->setEnabled(false);
+        try { manager.refreshMetadata(repo, RepoManager::RefreshIfNeeded); }
+        // any exception thrown means zypp attempted to refresh the repo
+        // i.e. it is out-of-date. Thus, just display refresh hint for non-root
+        // user 
+        catch (const Exception & ex)
+        {
+          cout << format(_(
+              "Repository '%s' is out-of-date. You can run 'zypper refresh'"
+              " as root to update it.")) % repo.alias()
+            << endl;
+
+          string nonroot =
+            "We're running as non-root, skipping refresh of " + repo.alias(); 
+          MIL << nonroot << endl;
+          cout_vv << nonroot << endl;
+        }
       }
     }
   }
