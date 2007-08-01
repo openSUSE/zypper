@@ -267,6 +267,8 @@ CREATE TABLE resolvable_files (
   , file_id INTEGER REFERENCES files (id)
   , PRIMARY KEY ( resolvable_id, file_id )
 );
+CREATE INDEX resolvable_files_resolvable_id ON resolvable_files(resolvable_id);
+CREATE INDEX resolvable_files_file_id ON resolvable_files(file_id);
 
 ------------------------------------------------
 -- Disk usage
