@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Wed Aug 1 14:09:00 CEST 2007 - tgoettlicher@suse.de
+
+- added --non-interactive --terse to zypp-checkpatches-wrapper
+- added to machine_readable to zypper-callbacks
+- r6359 
+
+-------------------------------------------------------------------
 Wed Aug 1 11:18:00 CEST 2007 - tgoettlicher@suse.de
 
 - option xu only shows affect-package-manager patches when available
