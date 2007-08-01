@@ -1,5 +1,5 @@
 
-// g++ parse1.cc -o parse1 -O2 -Wall -lzypp
+// g++ parse2.cc -o parse2 -O2 -Wall -lzypp
 
 
 #include "zypp/base/Logger.h"
@@ -9,6 +9,7 @@
 #include "zypp/ZYppCallbacks.h"
 #include "zypp/ResPoolProxy.h"
 #include "zypp/ResPool.h"
+#include "zypp/ResPoolManager.h"
 #include "zypp/ResFilters.h"
 #include "zypp/CapFilters.h"
 #include "zypp/Package.h"
@@ -51,9 +52,7 @@ main (int argc, char* argv[])
 
     repoManager.addRepository( nrepo );
 
-    ResPool pool( getZYpp()->pool() );
-
-    USR << "pool: " << pool << endl;
+    ResPoolManager resPoolManager;
 
     RepoInfoList repos = repoManager.knownRepositories();
     for ( RepoInfoList::iterator it = repos.begin(); it != repos.end(); it++ )
@@ -69,8 +68,13 @@ main (int argc, char* argv[])
 
 	SEC << nrepo << endl;
 	Repository nrep = repoManager.createFromCache( nrepo );
-	getZYpp()->addResolvables(nrep.resolvables());
+
+	const ResStore& resolvables = nrep.resolvables();
+	for (ResStore::const_iterator it = resolvables.begin(); it != resolvables.end(); it++)
+	    resPoolManager.insert(*it);
     }
+
+    ResPool pool(resPoolManager.accessor());
 
     USR << "pool: " << pool << endl;
 
