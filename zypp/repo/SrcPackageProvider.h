@@ -6,11 +6,11 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file	zypp/repo/ScriptProvider.h
+/** \file	zypp/repo/SrcPackageProvider.h
  *
 */
-#ifndef ZYPP_REPO_SCRIPTPROVIDER_H
-#define ZYPP_REPO_SCRIPTPROVIDER_H
+#ifndef ZYPP_REPO_SRCPACKAGEPROVIDER_H
+#define ZYPP_REPO_SRCPACKAGEPROVIDER_H
 
 #include <iosfwd>
 
@@ -32,31 +32,20 @@ namespace zypp
 
     ///////////////////////////////////////////////////////////////////
     //
-    //	CLASS NAME : ScriptProvider
+    //	CLASS NAME : SrcPackageProvider
     //
     /** */
-    class ScriptProvider : private base::NonCopyable
+    class SrcPackageProvider : private base::NonCopyable
     {
     public:
       /** Ctor */
-      ScriptProvider( repo::RepoMediaAccess & access_r );
+      SrcPackageProvider( repo::RepoMediaAccess & access_r );
       /** Dtor */
-      ~ScriptProvider();
+      ~SrcPackageProvider();
 
     public:
-      /** Provide a script in a local file.*/
-      ManagedFile provideScript( const Script_constPtr & script_r, bool do_r ) const
-      { return( do_r ? provideDoScript( script_r ) : provideUndoScript( script_r ) ); }
-
-      /** Provide the do-script in a local file.
-       * Returns an empty path if no script is available.
-      */
-      ManagedFile provideDoScript( const Script_constPtr & script_r ) const;
-
-      /** Provide the do-script in a local file.
-       * Returns an empty path if no script is available.
-      */
-      ManagedFile provideUndoScript( const Script_constPtr & script_r ) const;
+      /** Provide SrcPackage in a local file. */
+      ManagedFile provideSrcPackage( const SrcPackage_constPtr & srcPackage_r ) const;
 
     private:
       RepoMediaAccess & _access;
@@ -69,4 +58,4 @@ namespace zypp
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
-#endif // ZYPP_REPO_SCRIPTPROVIDER_H
+#endif // ZYPP_REPO_SRCPACKAGEPROVIDER_H

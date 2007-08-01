@@ -119,7 +119,7 @@ namespace zypp
     /** Install a source package on the Target.
      * \throws Exception
      */
-    void installSrcPackage( const ResTraits<SrcPackage>::constPtrType & srcPackage_r );
+    void installSrcPackage( const SrcPackage_constPtr & srcPackage_r );
 
   public:
     /** */

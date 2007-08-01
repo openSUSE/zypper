@@ -108,7 +108,7 @@ namespace zypp
   ZYppCommitResult ZYpp::commit( const ZYppCommitPolicy & policy_r )
   { return _pimpl->commit( policy_r ); }
 
-  void ZYpp::installSrcPackage( const ResTraits<SrcPackage>::constPtrType & srcPackage_r )
+  void ZYpp::installSrcPackage( const SrcPackage_constPtr & srcPackage_r )
   { _pimpl->installSrcPackage( srcPackage_r ); }
 
   ///////////////////////////////////////////////////////////////////

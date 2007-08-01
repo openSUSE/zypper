@@ -99,7 +99,7 @@ namespace zypp
       ZYppCommitResult commit( const ZYppCommitPolicy & policy_r );
 
       /** Install a source package on the Target. */
-      void installSrcPackage( const ResTraits<SrcPackage>::constPtrType & srcPackage_r );
+      void installSrcPackage( const SrcPackage_constPtr & srcPackage_r );
 
     public:
       /** \todo Signal locale change. */

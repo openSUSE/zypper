@@ -46,6 +46,7 @@
 #include "zypp/repo/DeltaCandidates.h"
 #include "zypp/repo/PackageProvider.h"
 #include "zypp/repo/ScriptProvider.h"
+#include "zypp/repo/SrcPackageProvider.h"
 
 using namespace std;
 using namespace zypp;
@@ -73,8 +74,8 @@ namespace zypp
           return;
         }
 
-        repo::ScriptProvider prov( access_r, script_r );
-        ManagedFile localfile = prov.provideScript( do_r );
+        repo::ScriptProvider prov( access_r );
+        ManagedFile localfile = prov.provideScript( script_r, do_r );
 
         if ( localfile->empty() )
         {
@@ -794,14 +795,15 @@ namespace zypp
       }
     }
 
-    void TargetImpl::installSrcPackage( const SrcPackage::constPtr & srcPackage_r )
+    void TargetImpl::installSrcPackage( const SrcPackage_constPtr & srcPackage_r )
     {
-      ZYPP_THROW( Exception("srcPackage install not yet implemented") );
-#warning IMPLEMENT IT
-      // Provide srcPackage_r on the local disk and install it using
-      // _rpm.installPackage( localfile );
+      // provide on local disk
+      repo::RepoMediaAccess access_r;
+      repo::SrcPackageProvider prov( access_r );
+      ManagedFile localfile = prov.provideSrcPackage( srcPackage_r );
+      // install it
+      rpm().installPackage ( localfile );
     }
-
 
     /////////////////////////////////////////////////////////////////
   } // namespace target

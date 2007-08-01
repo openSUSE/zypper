@@ -233,11 +233,11 @@ string toXML( const Script::constPtr &obj )
   out << toXML(static_cast<ResObject::constPtr>(obj));
 
   repo::RepoMediaAccess access;
-  repo::ScriptProvider prov( access, obj );
+  repo::ScriptProvider prov( access );
 
   out << "  <do>" << endl;
   out << "  <![CDATA[" << endl;
-  copyFileToStream( prov.provideDoScript(), out );
+  copyFileToStream( prov.provideDoScript( obj ), out );
   out << "  ]]>" << endl;
   out << "  </do>" << endl;
 
@@ -245,7 +245,7 @@ string toXML( const Script::constPtr &obj )
   {
     out << "  <undo>" << endl;
     out << "  <![CDATA[" << endl;
-    copyFileToStream( prov.provideUndoScript(), out );
+    copyFileToStream( prov.provideUndoScript( obj ), out );
     out << "  ]]>" << endl;
     out << "  </undo>" << endl;
 

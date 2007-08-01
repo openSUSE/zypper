@@ -114,7 +114,7 @@ namespace zypp
       PoolItemList commit( const PoolItemList & items_r, const ZYppCommitPolicy & policy_r, const ResPool & pool_r );
 
       /** Install a source package on the Target. */
-      void installSrcPackage( const ResTraits<SrcPackage>::constPtrType & srcPackage_r );
+      void installSrcPackage( const SrcPackage_constPtr & srcPackage_r );
 
       /** Overload to realize stream output. */
       virtual std::ostream & dumpOn( std::ostream & str ) const

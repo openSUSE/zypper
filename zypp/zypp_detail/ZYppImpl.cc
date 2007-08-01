@@ -273,7 +273,7 @@ namespace zypp
       return res;
     }
 
-    void ZYppImpl::installSrcPackage( const ResTraits<SrcPackage>::constPtrType & srcPackage_r )
+    void ZYppImpl::installSrcPackage( const SrcPackage_constPtr & srcPackage_r )
     {
       if (! _target)
         ZYPP_THROW( Exception("Target not initialized.") );

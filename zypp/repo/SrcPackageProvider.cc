@@ -6,16 +6,16 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file	zypp/repo/ScriptProvider.cc
+/** \file	zypp/repo/SrcPackageProvider.cc
  *
 */
 #include <iostream>
 #include <fstream>
 
-#include "zypp/repo/ScriptProvider.h"
+#include "zypp/repo/SrcPackageProvider.h"
 #include "zypp/PathInfo.h"
 #include "zypp/TmpPath.h"
-#include "zypp/Script.h"
+#include "zypp/SrcPackage.h"
 
 using std::endl;
 
@@ -30,12 +30,12 @@ namespace zypp
     namespace
     { /////////////////////////////////////////////////////////////////
 
-      typedef std::string     (Script::*inlined)() const;
-      typedef OnMediaLocation (Script::*location)() const;
+      typedef std::string     (SrcPackage::*inlined)() const;
+      typedef OnMediaLocation (SrcPackage::*location)() const;
 
-      /** Provide a Script in a local file. */
-      ManagedFile doProvideScript( repo::RepoMediaAccess & access_r,
-                                   const Script & script_r,
+      /** Provide a SrcPackage in a local file. */
+      ManagedFile doProvideSrcPackage( repo::RepoMediaAccess & access_r,
+                                   const SrcPackage & script_r,
                                    inlined inlined_r, location location_r )
       {
         ManagedFile ret;
@@ -78,43 +78,24 @@ namespace zypp
 
     ///////////////////////////////////////////////////////////////////
     //
-    //	METHOD NAME : ScriptProvider::ScriptProvider
+    //	METHOD NAME : SrcPackageProvider::SrcPackageProvider
     //	METHOD TYPE : Ctor
     //
-    ScriptProvider::ScriptProvider( repo::RepoMediaAccess & access_r )
+    SrcPackageProvider::SrcPackageProvider( repo::RepoMediaAccess & access_r )
       : _access( access_r )
     {}
 
     ///////////////////////////////////////////////////////////////////
     //
-    //	METHOD NAME : ScriptProvider::~ScriptProvider
+    //	METHOD NAME : SrcPackageProvider::~SrcPackageProvider
     //	METHOD TYPE : Dtor
     //
-    ScriptProvider::~ScriptProvider()
+    SrcPackageProvider::~SrcPackageProvider()
     {}
 
-    ManagedFile ScriptProvider::provideDoScript( const Script_constPtr & script_r ) const
+    ManagedFile SrcPackageProvider::provideSrcPackage( const SrcPackage_constPtr & srcPackage_r ) const
     {
-      ManagedFile ret;
-      if ( script_r )
-      {
-        return doProvideScript( _access, *script_r,
-                                &Script::doScriptInlined,
-                                &Script::doScriptLocation );
-      }
-      return ret;
-    }
-
-    ManagedFile ScriptProvider::provideUndoScript( const Script_constPtr & script_r ) const
-    {
-      ManagedFile ret;
-      if ( script_r )
-      {
-        return doProvideScript( _access, *script_r,
-                                &Script::undoScriptInlined,
-                                &Script::undoScriptLocation );
-      }
-      return ret;
+      return _access.provideFile( srcPackage_r->repository(), srcPackage_r->location() );
     }
 
     /////////////////////////////////////////////////////////////////
