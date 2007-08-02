@@ -70,6 +70,7 @@ typedef multimap<PoolItem_Ref, Capability> ItemCapabilityMap;
 typedef multimap<PoolItem_Ref, PoolItem_Ref> ConflictMap;
 
 #define MAXPROBLEMS 20
+#define TAB "    "
 
 // match template over ItemCapabilityMap
 template <class K, class V>
@@ -231,38 +232,36 @@ struct AllRequires
 
 std::string logAdditionalInfo ( const ProblemMap &additionalInfo, const PoolItem_Ref item)
 {
-    string infoStr = "\n";
+    string infoStr = "";
     for (ProblemMap::const_iterator iter = additionalInfo.find(item); iter != additionalInfo.end();) {
 	ResolverInfo_Ptr info = iter->second;
 	PoolItem_Ref iterItem = iter->first;
 	
 	if (iter == additionalInfo.find(item)) {
 	    string who = ResolverInfo::toString( item );
-	    infoStr = "\n\n" + who + "\n";
-	    for (unsigned int i = 1; i <= who.length(); i++) infoStr += "=";
-	    infoStr += "\n\n";
+	    infoStr = "=== " + who + " ===\n";
 	    
 	    ResStatus status = iterItem.status();
 	    if (status.isToBeUninstalled()) {
 		if (status.isByUser())
 		    // Translator: all.%s = name of package,patch,...
-		    infoStr += str::form (_("%s will be deleted by the user.\n"),
+		    infoStr += TAB + str::form (_("%s will be deleted by the user.\n"),
 					  who.c_str());
 		if (status.isByApplHigh()
 		    || status.isByApplLow())
 		    // Translator: all.%s = name of package,patch,...
-		    infoStr += str::form (_("%s will be deleted by another application. (ApplLow/ApplHigh)\n"),
+		    infoStr += TAB + str::form (_("%s will be deleted by another application. (ApplLow/ApplHigh)\n"),
 					  who.c_str());
 	    }
 	    if (status.isToBeInstalled()) {
 		if (status.isByUser())
 		    // Translator: all.%s = name of package,patch,...
-		    infoStr += str::form (_("%s will be installed by the user.\n"),
+		    infoStr += TAB + str::form (_("%s will be installed by the user.\n"),
 					  who.c_str());
 		if (status.isByApplHigh()
 		    || status.isByApplLow())
 		    // Translator: all.%s = name of package,patch,...
-		    infoStr += str::form (_("%s will be installed by another application. (ApplLow/ApplHigh)\n"),
+		    infoStr += TAB + str::form (_("%s will be installed by another application. (ApplLow/ApplHigh)\n"),
 					  who.c_str());
 	    }
 	}
@@ -274,7 +273,7 @@ std::string logAdditionalInfo ( const ProblemMap &additionalInfo, const PoolItem
 		&& info->type() != RESOLVER_INFO_TYPE_SKIPPING
 		&& info->type() != RESOLVER_INFO_TYPE_UNINSTALLABLE
 		&& info->type() != RESOLVER_INFO_TYPE_CONFLICT_UNINSTALLABLE) {
-		infoStr += info->message();
+		infoStr += TAB +info->message();
 		infoStr += "\n";
 	    }
 	    iter++;
@@ -371,7 +370,7 @@ Resolver::problems (const bool ignoreValidSolution) const
 		    // TranslatorExplanation %s = name of package, patch, selection ...		
 		    what = str::form (_("%s conflicts with %s"), who.c_str(), conflicts_with->itemsToString(true).c_str());
 		
-		details = str::form (_("%s conflicts with:\n%s"), who.c_str(), conflicts_with->itemsToString(false).c_str());
+		details = str::form (_("%s conflicts with:\n%s"), who.c_str(), conflicts_with->itemsToString(false).c_str()) + "\n";
 		details += logAdditionalInfo(collector.additionalInfo, item);
 		PoolItemList item_list = conflicts_with->items();
 		for (PoolItemList::const_iterator it = item_list.begin(); it != item_list.end(); ++it) {
@@ -407,7 +406,7 @@ Resolver::problems (const bool ignoreValidSolution) const
 		// TranslatorExplanation %s = name of package, patch, selection ...				
 		details = str::form (_("%s obsoletes:%s"), who.c_str(), obsoletes->itemsToString(false).c_str());
 		details += _("\nThese resolvables will be deleted from the system.");
-		details += logAdditionalInfo(collector.additionalInfo, item);		
+		details += "\n" + logAdditionalInfo(collector.additionalInfo, item);		
 	    }
 	    break;
 	    case RESOLVER_INFO_TYPE_DEPENDS_ON: { // no solution; it is only a info
@@ -457,7 +456,7 @@ Resolver::problems (const bool ignoreValidSolution) const
 		    if (it->first == item) {
 			what = str::form (_("Cannot install %s because it is conflicting with %s"),
 					  who.c_str(),
-					  it->second->name().c_str());
+					  it->second->name().c_str()) + "\n";
 			details = logAdditionalInfo(collector.additionalInfo, item);
 			details += logAdditionalInfo(collector.additionalInfo, it->second);			
 			ResolverProblem_Ptr problem = new ResolverProblem (what, details);		
@@ -473,7 +472,7 @@ Resolver::problems (const bool ignoreValidSolution) const
 		    // default 
 		    what = misc_info->message();
 		    // TranslatorExplanation %s = name of package,patch,...		
-		    details = str::form (_("%s is not installed and has been marked as uninstallable"), who.c_str());
+		    details = str::form (_("%s is not installed and has been marked as uninstallable"), who.c_str()) + "\n";
 		    details += logAdditionalInfo(collector.additionalInfo, item);		    
 		    ResolverProblem_Ptr problem = new ResolverProblem (what, details);
 		    problem->addSolution (new ProblemSolutionInstall (problem, item)); // Install resolvable again
@@ -486,7 +485,7 @@ Resolver::problems (const bool ignoreValidSolution) const
 		ResolverInfoMisc_constPtr misc_info = dynamic_pointer_cast<const ResolverInfoMisc>(info);
 		// TranslatorExplanation %s = name of package,patch,...				
 		what = str::form (_("Cannot install %s due to dependency problems"), who.c_str());
-		details = misc_info->message();
+		details = misc_info->message() + "\n";
 		details += logAdditionalInfo(collector.additionalInfo, item);		
 		ResolverProblem_Ptr problem = new ResolverProblem (what, details);
 		// Uninstall it; 
@@ -499,7 +498,7 @@ Resolver::problems (const bool ignoreValidSolution) const
 	    case RESOLVER_INFO_TYPE_INSTALL_TO_BE_UNINSTALLED: {	// Can't install p since it is already marked as needing to be uninstalled
 		ResolverInfoMisc_constPtr misc_info = dynamic_pointer_cast<const ResolverInfoMisc>(info);
 		// TranslatorExplanation %s = name of package,patch,...				
-		what = misc_info->message();
+		what = misc_info->message() + "\n";
 		details = logAdditionalInfo(collector.additionalInfo, item);		
 		ResolverProblem_Ptr problem = new ResolverProblem (what, details);
 		problem->addSolution (new ProblemSolutionInstall (problem, item)); // Install resolvable again
@@ -518,7 +517,7 @@ Resolver::problems (const bool ignoreValidSolution) const
 		ResolverInfoMisc_constPtr misc_info = dynamic_pointer_cast<const ResolverInfoMisc>(info);
 		// TranslatorExplanation %s = name of package,patch,...				
 		what = str::form (_("Cannot install %s"), who.c_str());
-		details = misc_info->message();
+		details = misc_info->message() + "\n";
 		details += logAdditionalInfo(collector.additionalInfo, item);
 		details += logAdditionalInfo(collector.additionalInfo, misc_info->other());				
 		ResolverProblem_Ptr problem = new ResolverProblem (what, details);
@@ -553,7 +552,7 @@ Resolver::problems (const bool ignoreValidSolution) const
 		ResolverInfoMisc_constPtr misc_info = dynamic_pointer_cast<const ResolverInfoMisc>(info);
 		what = misc_info->message();
 		// TranslatorExplanation %s = name of package, patch, selection ...				
-		details = str::form (_("%s has unfulfilled requirements"), who.c_str());
+		details = str::form (_("%s has unfulfilled requirements"), who.c_str())+ "\n";
 		details += logAdditionalInfo(collector.additionalInfo, item);		
 		ResolverProblem_Ptr problem = new ResolverProblem (what, details);
 		// Uninstall 
@@ -593,7 +592,7 @@ Resolver::problems (const bool ignoreValidSolution) const
 		ResolverInfoMisc_constPtr misc_info = dynamic_pointer_cast<const ResolverInfoMisc>(info);
 		// TranslatorExplanation %s = name of package, patch, selection ...				
 		what = str::form (_("%s has missing dependencies"), who.c_str());
-		details = misc_info->message();
+		details = misc_info->message() + "\n";
 		details += logAdditionalInfo(collector.additionalInfo, item);				
 		ResolverProblem_Ptr problem = new ResolverProblem (what, details);
 
@@ -641,7 +640,7 @@ Resolver::problems (const bool ignoreValidSolution) const
 		ResolverInfoMisc_constPtr misc_info = dynamic_pointer_cast<const ResolverInfoMisc>(info);
 		// TranslatorExplanation %s = name of package, patch, selection ...				
 		what = str::form (_("%s cannot be installed due to missing dependencies"), who.c_str());		
-		details = misc_info->message();
+		details = misc_info->message() + "\n";
 		details += logAdditionalInfo(collector.additionalInfo, item);				
 		ResolverProblem_Ptr problem = new ResolverProblem (what, details);
 		
@@ -741,7 +740,7 @@ Resolver::problems (const bool ignoreValidSolution) const
 	    break;
 	    case RESOLVER_INFO_TYPE_CANT_SATISFY: {			// Can't satisfy requirement c
 		ResolverInfoMisc_constPtr misc_info = dynamic_pointer_cast<const ResolverInfoMisc>(info);
-		what = misc_info->message();
+		what = misc_info->message() + "\n";
 		details = logAdditionalInfo(collector.additionalInfo, item);				
 		ResolverProblem_Ptr problem = new ResolverProblem (what, details);
 		// uninstall
@@ -779,7 +778,7 @@ Resolver::problems (const bool ignoreValidSolution) const
 		ResolverInfoMisc_constPtr misc_info = dynamic_pointer_cast<const ResolverInfoMisc>(info);
 		// TranslatorExplanation %s = name of package, patch, selection ...				
 		what = str::form (_("%s will not be uninstalled cause it is still required"), who.c_str());		
-		details = misc_info->message();
+		details = misc_info->message() + "\n";
 		details += logAdditionalInfo(collector.additionalInfo, item);						
 
                 ResolverProblem_Ptr problem = new ResolverProblem (what, details);
@@ -803,7 +802,7 @@ Resolver::problems (const bool ignoreValidSolution) const
 		    // TranslatorExplanation %s = name of package, patch, selection ...						    
 		    details = str::form (_("%s obsoletes %s. But %s cannot be deleted because it is locked."),
 					 misc_info->other()->name().c_str(),
-					 who.c_str(), who.c_str());
+					 who.c_str(), who.c_str()) + "\n";
 		    details += logAdditionalInfo(collector.additionalInfo, item);						    
 		}
 		
@@ -835,7 +834,7 @@ Resolver::problems (const bool ignoreValidSolution) const
 		else
 		    what = str::form (_("Cannot install %s because it is conflicting"),
 				      who.c_str());
-		details = misc_info->message();
+		details = misc_info->message() + "\n";
 		details += logAdditionalInfo(collector.additionalInfo, item);
 		if (misc_info->other())		
 		    details += logAdditionalInfo(collector.additionalInfo, misc_info->other());
