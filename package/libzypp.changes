@@ -1,10 +1,17 @@
 -------------------------------------------------------------------
+Thu Aug  2 16:37:06 CEST 2007 - ma@suse.de
+
+- Indicate changed pool content to the resolver. (required for #271912)
+- revision 6398
+- version 3.13.7
+
+-------------------------------------------------------------------
 Thu Aug  2 10:16:16 CEST 2007 - schubi@suse.de
 
 - speedup error handling. Do not log ResolveInfo anymore. Set limit of 20
   problems. Bug 280387
 - r 6378
-- version 3.13.6 
+- version 3.13.6
 
 -------------------------------------------------------------------
 Wed Aug  1 18:51:12 CEST 2007 - ma@suse.de
