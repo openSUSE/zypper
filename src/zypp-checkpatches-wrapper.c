@@ -32,6 +32,12 @@ int main (void) {
     if (setuid (0)) {
 	perror ("setuid");
 	fprintf (stderr, "Forgot to chmod this program?\n");
+	fprintf (stdout, "<?xml version='1.0'?>\n");
+	fprintf (stdout, "<update-status version=\"0.5\">\n");
+	fprintf (stdout, " <errors>");
+	fprintf (stdout, "  <error>Unable to check for patches and updates because /usr/sbin/zypp-checkpatches-wrapper helper programm is not set SUID root.\nThis problem might be solved by setting \"File Permissons\" in YaST \"Local Security\" tab to \"easy\" or by modifying /etc/permissions.local</error>");
+	fprintf (stdout, " </errors>");
+	fprintf (stdout, " </update-status>");
 	return WRAPPER_ERROR;
     }
  
