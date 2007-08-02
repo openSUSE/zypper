@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Thu Aug  2 18:14:12 CEST 2007 - ma@suse.de
+
+- Indicate changed pool content if /etc/sysconfig/storage USED_FS_LIST
+  has changed. Resolver must discard any cached filesystem dependencies.
+  (required for #271912)
+- revision 6404
+
+-------------------------------------------------------------------
 Thu Aug  2 16:37:06 CEST 2007 - ma@suse.de
 
 - Indicate changed pool content to the resolver. (required for #271912)
