@@ -116,6 +116,7 @@ ZypperCommand process_globals(int argc, char **argv)
     "\t--rug-compatible, -r\tTurn on rug compatibility.\n"
     "\t--non-interactive\tDon't ask anything, use default answers automatically.\n"
     "\t--no-gpg-checks\t\tIgnore GPG check failures and continue.\n"
+    "\t--debug-solver\t\tGenerates testcase for the solver.\n"				
     "\t--root, -R <dir>\tOperate on a different root directory.\n");
   
   static string help_commands = _(
