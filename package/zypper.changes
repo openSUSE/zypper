@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Aug  2 16:10:56 CEST 2007 - tgoettlicher@suse.de
+
+- added xml error message to zypp-checkpatches-wrapper 
+- r6395
+
+-------------------------------------------------------------------
 Wed Aug  1 15:31:24 CEST 2007 - jkupec@suse.cz
 
 - --repo re-implemented to restrict operation to the specified
