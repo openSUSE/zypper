@@ -14,6 +14,7 @@
 #include "zypp/base/Logger.h"
 #include "zypp/base/WatchFile.h"
 #include "zypp/base/Sysconfig.h"
+#include "zypp/base/SerialNumber.h"
 
 #include "zypp/capability/FilesystemCap.h"
 
@@ -26,8 +27,17 @@ namespace zypp
   namespace capability
   { /////////////////////////////////////////////////////////////////
 
+    namespace
+    {
+      const Pathname & sysconfigStoragePath()
+      {
+        static Pathname _p( "/etc/sysconfig/storage" );
+        return _p;
+      }
+    }
+
     IMPL_PTR_TYPE(FilesystemCap)
-    
+
     /** Ctor */
     FilesystemCap::FilesystemCap( const Resolvable::Kind & refers_r,
 				  const std::string & name_r )
@@ -67,20 +77,34 @@ namespace zypp
     bool FilesystemCap::isEvalCmd() const
     { return _name.empty(); }
 
+
+
     bool FilesystemCap::evaluate() const
     {
-      static WatchFile sysconfigFile( "/etc/sysconfig/storage", WatchFile::NO_INIT );
+      static SerialNumberWatcher sysconfigStorage;
       static std::set<std::string> fs;
 
-      if ( sysconfigFile.hasChanged() )
+      if ( sysconfigStorage.remember( sysconfigStorageSerial() ) )
       {
 	std::set<std::string> newfs;
-	str::split( base::sysconfig::read( sysconfigFile.path() )["USED_FS_LIST"],
+	str::split( base::sysconfig::read( sysconfigStoragePath() )["USED_FS_LIST"],
 		    std::inserter( newfs, newfs.end() ) );
 	fs.swap( newfs );
       }
 
       return( fs.find( _name ) != fs.end() );
+    }
+
+    const SerialNumber & FilesystemCap::sysconfigStorageSerial()
+    {
+      static WatchFile    _sysconfigFile( sysconfigStoragePath(), WatchFile::NO_INIT );
+      static SerialNumber _serial;
+
+      if ( _sysconfigFile.hasChanged() )
+      {
+        _serial.setDirty();
+      }
+      return _serial;
     }
 
     /////////////////////////////////////////////////////////////////

@@ -19,7 +19,17 @@ void chk( ResObject::constPtr p )
   DBG << p->deps() << endl;
 }
 
-
+namespace zypp {
+namespace filesystem {
+  void touch( const char * p )
+  {
+    static std::string w;
+    ofstream s(p);
+    s<<w<<endl;
+    w+="a";
+  }
+}
+}
 /******************************************************************
 **
 **      FUNCTION NAME : main
@@ -30,14 +40,7 @@ int main( int argc, char * argv[] )
   INT << "===[START]==========================================" << endl;
 
   ResPool pool( getZYpp()->pool() );
-  SerialNumberWatcher poolchanged( pool.serial() );
   USR << pool << endl;
-  USR << poolchanged << endl;
-
-  if ( poolchanged.remember( pool.serial() ) )
-  {
-    SEC << "CHANGED" << endl;
-  }
 
   const char *const lines[] = {
     "@ package",
@@ -50,29 +53,24 @@ int main( int argc, char * argv[] )
     "@ fin"
   };
 
-  debug::addPool( lines, lines+(sizeof(lines)/sizeof(const char *const)) );
+  //debug::addPool( lines, lines+(sizeof(lines)/sizeof(const char *const)) );
   //debug::addPool( "/tmp/a" );
   USR << pool << endl;
-  if ( poolchanged.remember( pool.serial() ) )
-  {
-    SEC << "CHANGED" << endl;
-  }
-  USR << pool << endl;
-
   for_each( pool.begin(), pool.end(), chk );
-  if ( poolchanged.remember( pool.serial() ) )
-  {
-    SEC << "CHANGED" << endl;
-  }
-  if ( poolchanged.remember( pool.serial() ) )
-  {
-    SEC << "CHANGED" << endl;
-  }
-  if ( poolchanged.remember( pool.serial() ) )
-  {
-    SEC << "CHANGED" << endl;
-  }
 
+  SEC << pool.serial().serial() << endl;
+  SEC << pool.serial().serial() << endl;
+  filesystem::touch( "/etc/sysconfig/storage" );
+  SEC << pool.serial().serial() << endl;
+  SEC << pool.serial().serial() << endl;
+  SEC << pool.serial().serial() << endl;
+  filesystem::touch( "/etc/sysconfig/storage" );
+  SEC << pool.serial().serial() << endl;
+  SEC << pool.serial().serial() << endl;
+  filesystem::touch( "/etc/sysconfig/storage" );
+  SEC << pool.serial().serial() << endl;
+  SEC << pool.serial().serial() << endl;
+  SEC << pool.serial().serial() << endl;
 
   INT << "===[END]============================================" << endl
       << endl;

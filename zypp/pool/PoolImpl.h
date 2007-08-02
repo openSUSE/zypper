@@ -329,7 +329,9 @@ namespace zypp
 
     private:
       /** Serial number. */
-      SerialNumber _serial;
+      SerialNumber        _serial;
+      /** Watch for changes in /etc/sysconfig/storage. */
+      SerialNumberWatcher _watchFilesystemSysconfigStorage;
 
     public:
       ContainerT   _store;

@@ -17,12 +17,15 @@
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
+
+  class SerialNumber;
+
   ///////////////////////////////////////////////////////////////////
   namespace capability
   { /////////////////////////////////////////////////////////////////
 
     DEFINE_PTR_TYPE(FilesystemCap)
-    
+
     ///////////////////////////////////////////////////////////////////
     //
     //	CLASS NAME : FilesystemCap
@@ -46,7 +49,7 @@ namespace zypp
       typedef FilesystemCap Self;
       typedef FilesystemCap_Ptr Ptr;
       typedef FilesystemCap_constPtr constPtr;
-      
+
     public:
       /** Ctor */
       FilesystemCap( const Resolvable::Kind & refers_r, const std::string & name_r );
@@ -78,6 +81,10 @@ namespace zypp
     private:
       /**  */
       std::string _name;
+
+    public:
+      /** Serial number indicating a change in /etc/sysconfig/storage */
+      static const SerialNumber & sysconfigStorageSerial();
     };
     ///////////////////////////////////////////////////////////////////
 

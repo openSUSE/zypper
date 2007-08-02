@@ -108,7 +108,12 @@ namespace zypp
    *
    * int main()
    * {
+   *   check();          // This call would trigger, if check used a
+   *                     // default constructed SerialNumberWatcher.
+   *
    *   check();          //
+   *   sno.dirty();
+   *   check();          // "Serial number changed."
    *   check();          //
    *   sno.dirty();
    *   check();          // "Serial number changed."
@@ -119,8 +124,17 @@ namespace zypp
     friend std::ostream & operator<<( std::ostream & str, const SerialNumberWatcher & obj );
 
     public:
-      /** Ctor taking an initial \c serial value. */
-      SerialNumberWatcher( unsigned serial_r = 0 );
+      /** Ctor taking an initial \c serial value.
+       *
+       * A default constructed SerialNumberWatcher remembers the serial
+       * number <tt>(unsigned)-1</tt>. So it is most likely the the 1st
+       * call to \ref remember returns \ref isDirty.
+       *
+       * Vice versa, initializing the SerialNumberWatcher with the current
+       * SerialNumber, most likely prevents the 1st to \ref remember to
+       * return \ref isDirty.
+      */
+      SerialNumberWatcher( unsigned serial_r = (unsigned)-1 );
       /** Ctor taking an initial \c serial value. */
       SerialNumberWatcher( const SerialNumber & serial_r );
       /** Dtor */

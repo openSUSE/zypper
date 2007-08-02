@@ -11,6 +11,7 @@
 */
 #include <iostream>
 #include "zypp/base/Logger.h"
+#include "zypp/capability/FilesystemCap.h"
 
 #include "zypp/pool/PoolImpl.h"
 #include "zypp/pool/PoolStats.h"
@@ -194,6 +195,7 @@ namespace zypp
     //	METHOD TYPE : Ctor
     //
     PoolImpl::PoolImpl()
+      : _watchFilesystemSysconfigStorage( capability::FilesystemCap::sysconfigStorageSerial() )
     {}
 
     ///////////////////////////////////////////////////////////////////
@@ -211,7 +213,10 @@ namespace zypp
     //
     const SerialNumber & PoolImpl::serial() const
     {
-#warning INCLUDE CHECK FOR CHANGED DEPENDENCIES
+      if ( _watchFilesystemSysconfigStorage.remember( capability::FilesystemCap::sysconfigStorageSerial() ) )
+      {
+        const_cast<PoolImpl*>(this)->_serial.setDirty(); // propagate changed /etc/sysconfig/storage
+      }
       return _serial;
     }
 
