@@ -16,6 +16,7 @@
 #include <map>
 
 #include "zypp/base/Easy.h"
+#include "zypp/base/SerialNumber.h"
 #include "zypp/pool/PoolTraits.h"
 #include "zypp/ResPoolProxy.h"
 #include "zypp/ZYppFactory.h"
@@ -277,7 +278,8 @@ namespace zypp
 
       /** */
       void clear()
-      { _store.clear();
+      {
+        _store.clear();
 	_caphash.clear();
 	_namehash.clear();
         _additionalRequire.clear();
@@ -321,10 +323,18 @@ namespace zypp
       //@}
 
     public:
-      /** */
-      ContainerT _store;
-      NameHash _namehash;
-      CapHash _caphash;
+      /** Serial number changing whenever the content
+       * (Resolvables or Dependencies) changes. */
+      const SerialNumber & serial() const;
+
+    private:
+      /** Serial number. */
+      SerialNumber _serial;
+
+    public:
+      ContainerT   _store;
+      NameHash     _namehash;
+      CapHash      _caphash;
       mutable AdditionalCapSet _additionalRequire;
       mutable AdditionalCapSet _additionaConflict;
       mutable AdditionalCapSet _additionaProvide;
@@ -336,19 +346,24 @@ namespace zypp
           _poolProxy.reset( new ResPoolProxy( self ) );
         return *_poolProxy;
       }
+
+      /** Invalidate all data we build on demand.
+       * To be called whenever the pools content changes
+       */
       void invalidateProxy()
       {
+        _serial.setDirty();
 	_poolProxy.reset();
 	_knownRepositoriesPtr.reset();
       }
 
       mutable shared_ptr<ResPoolProxy> _poolProxy;
 
-      private:
-	/** Set of known repositories built on demand.
-	 * Invalidated on any Pool content change. Rebuilt on next access.
-	*/
-	mutable scoped_ptr<KnownRepositories> _knownRepositoriesPtr;
+    private:
+      /** Set of known repositories built on demand.
+       * Invalidated on any Pool content change. Rebuilt on next access.
+       */
+      mutable scoped_ptr<KnownRepositories> _knownRepositoriesPtr;
     };
     ///////////////////////////////////////////////////////////////////
 

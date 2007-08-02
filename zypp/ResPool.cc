@@ -14,6 +14,7 @@
 
 #include "zypp/ResPool.h"
 #include "zypp/pool/PoolImpl.h"
+#include "zypp/base/SerialNumber.h"
 
 using std::endl;
 
@@ -111,6 +112,8 @@ namespace zypp
   ResPool::AdditionalCapSet & ResPool::additionaProvide() const
   { return _pimpl->additionaProvide(); }
 
+  const SerialNumber & ResPool::serial() const
+  { return _pimpl->serial(); }
 
   /******************************************************************
   **

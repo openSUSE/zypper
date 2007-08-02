@@ -22,6 +22,8 @@
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
+  class SerialNumber;
+
   ///////////////////////////////////////////////////////////////////
   //
   //	CLASS NAME : ResPool
@@ -55,6 +57,12 @@ namespace zypp
     ~ResPool();
 
   public:
+    /** The pools serial number. Changing whenever the
+     * whenever the content changes. (Resolvables or
+     * Dependencies).
+    */
+    const SerialNumber & serial() const;
+
     /**  */
     bool empty() const;
     /**  */

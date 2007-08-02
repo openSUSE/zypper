@@ -59,7 +59,7 @@ using namespace std;
 IMPL_PTR_TYPE(Resolver);
 
 static const unsigned MAX_SECOND_RUNS( 3 );
-static const unsigned MAX_VALID_SOLUTIONS( 50 );	
+static const unsigned MAX_VALID_SOLUTIONS( 50 );
 static const unsigned TIMOUT_SECOND_RUN( 30 );
 
 static PoolItemSet triggeredSolution;   // only the latest state of an item is interesting
@@ -74,7 +74,7 @@ public:
         { return compareByNVRA(p1.resolvable(),p2.resolvable()) < 0; }
 };
 
-	
+
 std::ostream &
 Resolver::dumpOn( std::ostream & os ) const
 {
@@ -107,6 +107,7 @@ void assertSystemResObjectInPool()
 
 Resolver::Resolver (const ResPool & pool)
     : _pool (pool)
+    , _poolchanged( _pool.serial() )
     , _timeout_seconds (0)
     , _maxSolverPasses (0)
     , _verifying (false)
@@ -120,8 +121,13 @@ Resolver::Resolver (const ResPool & pool)
     , _forceResolve (false)
     , _upgradeMode (false)
     , _preferHighestVersion (true)
-      
-{}
+
+{
+  //if ( _poolchanged.remember( _pool.serial() ) )
+  //{
+  //  SEC << "CHANGED" << endl;
+  //}
+}
 
 
 Resolver::~Resolver()
@@ -169,7 +175,7 @@ Resolver::reset (bool resetValidResults, bool keepExtras )
 
     if (resetValidResults)
 	contextPool.reset();
-    
+
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -190,7 +196,7 @@ collector_cb_needed (ResolverInfo_Ptr info, void *data)
 	if (needed_by->items().size() >= 1) {
 	    PoolItem_Ref item = info->affected();
 	    PoolItemList itemList = needed_by->items();
-	    
+
 	    for (PoolItemList::const_iterator iter = itemList.begin();
 		 iter != itemList.end(); iter++) {
 		bool found = false;
@@ -213,19 +219,19 @@ collector_cb_needed (ResolverInfo_Ptr info, void *data)
 		       && !found) {
 			   ItemCapKind capKind = pos->second;
 			   if (capKind.item == item) found = true;
-			   pos++;			   
-		       }		
+			   pos++;
+		       }
 		if (!found) {
 		    ItemCapKind capKindReverse( item, needed_by->capability(), needed_by->capKind(), needed_by->initialInstallation() );
 		    collector->installs.insert (make_pair( *iter, capKindReverse));
 		}
 	    }
-	    
+
 	}
     }
 }
-	
-void 
+
+void
 Resolver::collectResolverInfo(void)
 {
     ResolverContext_Ptr collectContext = context(); // best context or failed context
@@ -243,7 +249,7 @@ Resolver::collectResolverInfo(void)
 const ItemCapKindList Resolver::isInstalledBy (const PoolItem_Ref item) {
     ItemCapKindList ret;
     collectResolverInfo();
-     
+
     for (ItemCapKindMap::const_iterator iter = _isInstalledBy.find(item); iter != _isInstalledBy.end();) {
 	ItemCapKind info = iter->second;
 	PoolItem_Ref iterItem = iter->first;
@@ -253,7 +259,7 @@ const ItemCapKindList Resolver::isInstalledBy (const PoolItem_Ref item) {
 	} else {
 	    // exit
 	    iter = _isInstalledBy.end();
-	}	
+	}
     }
     return ret;
 }
@@ -261,7 +267,7 @@ const ItemCapKindList Resolver::isInstalledBy (const PoolItem_Ref item) {
 const ItemCapKindList Resolver::installs (const PoolItem_Ref item) {
     ItemCapKindList ret;
     collectResolverInfo();
-    
+
     for (ItemCapKindMap::const_iterator iter = _installs.find(item); iter != _installs.end();) {
 	ItemCapKind info = iter->second;
 	PoolItem_Ref iterItem = iter->first;
@@ -271,9 +277,9 @@ const ItemCapKindList Resolver::installs (const PoolItem_Ref item) {
 	} else {
 	    // exit
 	    iter = _installs.end();
-	}	
+	}
     }
-    return ret;    
+    return ret;
 }
 
 
@@ -350,7 +356,7 @@ Resolver::addPoolItemToRemove (PoolItem_Ref item)
     }
     if (!found) {
 	_items_to_remove.push_back (item);
-	_items_to_remove.unique ();	
+	_items_to_remove.unique ();
     }
 }
 
@@ -512,7 +518,7 @@ bool
 Resolver::verifySystem (bool considerNewHardware)
 {
     UndoTransact resetting (ResStatus::APPL_HIGH);
-    
+
     _DEBUG ("Resolver::verifySystem() " << (considerNewHardware ? "consider new hardware":""));
 
     invokeOnEach ( _pool.begin(), _pool.end(),
@@ -529,7 +535,7 @@ Resolver::verifySystem (bool considerNewHardware)
     invokeOnEach( pool().byKindBegin( ResTraits<Pattern>::kind ),
 		  pool().byKindEnd( ResTraits<Pattern>::kind ),
 		  resfilter::ByInstalled ( ),
-		  functor::functorRef<bool,PoolItem>(info) );    
+		  functor::functorRef<bool,PoolItem>(info) );
 
 
     _verifying = true;
@@ -547,9 +553,9 @@ Resolver::verifySystem (bool considerNewHardware)
     DoTransact setting (ResStatus::APPL_HIGH);
 
     invokeOnEach ( _pool.begin(), _pool.end(),
-		   resfilter::ByTransact( ),			
-		   functor::functorRef<bool,PoolItem>(setting) );    
-    
+		   resfilter::ByTransact( ),
+		   functor::functorRef<bool,PoolItem>(setting) );
+
     return success;
 }
 
@@ -571,7 +577,7 @@ solution_to_pool (PoolItem_Ref item, const ResStatus & status, void *data)
 
     // resetting transaction only
     item.status().resetTransact((data != NULL) ? ResStatus::APPL_LOW : ResStatus::SOLVER );
-    
+
     bool r;
 
     if (status.isToBeInstalled()) {
@@ -649,7 +655,7 @@ Resolver::establishState( ResolverContext_Ptr context )
 				    _ignoreInstalledItem,
 				    _ignoreArchitectureItem);
     context->setForceResolve( _forceResolve );
-    context->setEstablishContext( _establish_context );    
+    context->setEstablishContext( _establish_context );
     context->setPreferHighestVersion ( _preferHighestVersion );
     context->setUpgradeMode( _upgradeMode );
 
@@ -689,7 +695,7 @@ Resolver::establishPool ()
     ResolverContext_Ptr solution = bestContext();
 
     if (solution) {						// copy solution back to pool
-	triggeredSolution.clear();	
+	triggeredSolution.clear();
 	solution->foreachMarked (solution_to_pool, (void *)1);	// as APPL_LOW
     }
     else {
@@ -774,7 +780,7 @@ Resolver::freshenState( ResolverContext_Ptr context,
 				    _ignoreInstalledItem,
 				    _ignoreArchitectureItem );
     context->setForceResolve( _forceResolve );
-    context->setEstablishContext( _establish_context );        
+    context->setEstablishContext( _establish_context );
     context->setPreferHighestVersion( _preferHighestVersion );
     context->setUpgradeMode( _upgradeMode );
 
@@ -794,9 +800,9 @@ Resolver::freshenState( ResolverContext_Ptr context,
 
     // process the queue
     resolveDependencies( context );
-    
+
     if (resetAfterSolve) {
-	reset( false, true ); //resetValidResults,keepExtras	
+	reset( false, true ); //resetValidResults,keepExtras
 	context->setEstablishing( false );
 	_best_context = context;
     }
@@ -891,7 +897,7 @@ Resolver::resolveDependencies (const ResolverContext_Ptr context)
 	    ignoreRequires.insert(make_pair(PoolItem_Ref(), *cit));
 	}
     }
-    
+
     // Initialize all ignoring dependencies
     initial_queue->context()->setIgnoreCababilities (_ignoreConflicts,
 						     ignoreRequires,
@@ -899,7 +905,7 @@ Resolver::resolveDependencies (const ResolverContext_Ptr context)
 						     _ignoreInstalledItem,
 						     _ignoreArchitectureItem);
     initial_queue->context()->setForceResolve( _forceResolve );
-    initial_queue->context()->setEstablishContext( _establish_context );       
+    initial_queue->context()->setEstablishContext( _establish_context );
     initial_queue->context()->setPreferHighestVersion( _preferHighestVersion );
     initial_queue->context()->setUpgradeMode( _upgradeMode );
     initial_queue->context()->setTryAllPossibilities( _tryAllPossibilities );
@@ -953,14 +959,14 @@ Resolver::resolveDependencies (const ResolverContext_Ptr context)
     for (CapSet::const_iterator iter = _extra_caps.begin(); iter != _extra_caps.end(); iter++) {
 	initial_queue->addExtraCapability (*iter);
     }
-    
+
     // adding "external" requires
     additionalCapSet = pool().additionalRequire();
     for (ResPool::AdditionalCapSet::const_iterator it = additionalCapSet.begin();
 	 it != additionalCapSet.end(); it++) {
 	CapSet cset = it->second;
 	for (CapSet::const_iterator cit = cset.begin(); cit != cset.end(); ++cit) {
-	    initial_queue->addExtraCapability (*cit);	    
+	    initial_queue->addExtraCapability (*cit);
 	}
     }
 
@@ -974,7 +980,7 @@ Resolver::resolveDependencies (const ResolverContext_Ptr context)
 	 it != additionalCapSet.end(); it++) {
 	CapSet cset = it->second;
 	for (CapSet::const_iterator cit = cset.begin(); cit != cset.end(); ++cit) {
-	    initial_queue->addExtraConflict (*cit);	    
+	    initial_queue->addExtraConflict (*cit);
 	}
     }
 
@@ -1030,7 +1036,7 @@ Resolver::resolveDependencies (const ResolverContext_Ptr context)
 		    << " ) reached -> exit" << endl;
 		break;
 	}
-	      
+
 	ResolverQueue_Ptr queue = _pending_queues.front();
 	_pending_queues.pop_front();
 	ResolverContext_Ptr context = queue->context();
@@ -1093,7 +1099,7 @@ Resolver::resolveDependencies (const ResolverContext_Ptr context)
 	   << " / Prun " << (long) _pruned_queues.size()
 	   << " / Defr " << (long) _deferred_queues.size()
 	   << " / Invl " << (long) _invalid_queues.size() );
-    
+
     return _best_context && _best_context->isValid();
 }
 
@@ -1165,14 +1171,14 @@ struct CollectTransact : public resfilter::PoolItemFilterFunctor
 		WAR << "Can't find " << item << " for re-installation" << endl;
 	    }
 	}
-	
+
         if (status.isLocked()
             && status.isUninstalled()) {
             // This item could be selected by solver in a former run. Now it
             // is locked. So we will have to evaluate a new solver run.
             resolver.addPoolItemToLockUninstalled (item);
         }
-	
+
 	return true;
     }
 };
@@ -1233,11 +1239,11 @@ Resolver::resolvePool( bool tryAllPossibilities )
 	    << endl;
 	MIL << "Solver run with ALL possibilities"
 	    << endl;
-	if (_maxSolverPasses <= 0) 
-	    _maxSolverPasses = MAX_SECOND_RUNS;         
-	if (_timeout_seconds <= 0) 
+	if (_maxSolverPasses <= 0)
+	    _maxSolverPasses = MAX_SECOND_RUNS;
+	if (_timeout_seconds <= 0)
 	    _timeout_seconds = TIMOUT_SECOND_RUN;
-	
+
 	MIL << "But no longer than " << MAX_SECOND_RUNS << " runs or "
 	    << TIMOUT_SECOND_RUN << " seconds" << endl;
 	MIL << "================================================================" << endl;
@@ -1261,18 +1267,18 @@ Resolver::resolvePool( bool tryAllPossibilities )
     PoolItemList _completeItems_to_install = _items_to_install;
     PoolItemList _completeItems_to_remove = _items_to_remove;
     PoolItemList _completeItems_to_lockUninstalled = _items_to_lockUninstalled;
-    
+
     // We have to find a valid context in order to recycle it.
     saveContext = contextPool.findContext (_items_to_install, _items_to_remove, _items_to_lockUninstalled);
     // _items_to_install, _items_to_remove contains addition items which has been selected but are
-    // not solved with that context. They will be solved now. 
+    // not solved with that context. They will be solved now.
     // If we have not found any former fitting context, saveContext is NULL. So the solver
     // make a complete run
 
     if (saveContext != NULL) {
         // create a new context in order not overwriting the old
         saveContext = new ResolverContext (saveContext->pool(), saveContext->architecture(), saveContext);
-	saveContext->setTryAllPossibilities( true );	
+	saveContext->setTryAllPossibilities( true );
     }
 
     bool have_solution = resolveDependencies (saveContext);             // resolve !
@@ -1280,7 +1286,7 @@ Resolver::resolvePool( bool tryAllPossibilities )
     if (have_solution) {					// copy solution back to pool
 	MIL << "Have solution, copying back to pool" << endl;
 	ResolverContext_Ptr solution = bestContext();
-	triggeredSolution.clear();	
+	triggeredSolution.clear();
 	solution->foreachMarked (solution_to_pool, NULL);
 #if 1
 	_XDEBUG( "Pool after resolve" );
@@ -1288,7 +1294,7 @@ Resolver::resolvePool( bool tryAllPossibilities )
 #endif
         // insert best_context in ContextPool for further solver runs
         contextPool.addContext( solution,_completeItems_to_install, _completeItems_to_remove, _completeItems_to_lockUninstalled);
-	
+
     }
     else {
 	MIL << "!!! Have NO solution !!! Additional solver information:" << endl;
@@ -1298,17 +1304,17 @@ Resolver::resolvePool( bool tryAllPossibilities )
 	    counter++;
 	    MIL << "-----------------------------------------------------------------" << endl;
 	    MIL << counter++ << ". failed queue:" << endl;
-	    ResolverQueue_Ptr invalid =	*iter;    
+	    ResolverQueue_Ptr invalid =	*iter;
 //	    invalid->context()->spewInfo (); No additional information needed here
 	    MIL << *invalid->context() << endl;
-	    MIL << "-----------------------------------------------------------------" << endl;		
+	    MIL << "-----------------------------------------------------------------" << endl;
 	}
     }
 
     if (tryAllPossibilities) {
 	_tryAllPossibilities = saveTryAllPossibilities; // reset to old value
     }
-	
+
     return have_solution;
 }
 
@@ -1343,7 +1349,7 @@ Resolver::transactResObject( ResObject::constPtr robj, bool install,
 {
     MIL << "transactResObject()" << endl;
     MIL << "is obsolete; use resolvePool() instead" << endl;
-    
+
     return true;
 }
 
@@ -1352,7 +1358,7 @@ bool
 Resolver::transactResKind( Resolvable::Kind kind )
 {
     MIL << "transactResKind(" << kind << ")" << endl;
-    MIL << "is obsolete; use resolvePool() instead" << endl;    
+    MIL << "is obsolete; use resolvePool() instead" << endl;
 
     return true;
 }

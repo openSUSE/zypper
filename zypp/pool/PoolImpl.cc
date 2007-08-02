@@ -204,6 +204,17 @@ namespace zypp
     PoolImpl::~PoolImpl()
     {}
 
+    ///////////////////////////////////////////////////////////////////
+    //
+    //	METHOD NAME : PoolImpl::serial
+    //	METHOD TYPE : SerialNumber
+    //
+    const SerialNumber & PoolImpl::serial() const
+    {
+#warning INCLUDE CHECK FOR CHANGED DEPENDENCIES
+      return _serial;
+    }
+
     /******************************************************************
     **
     **	FUNCTION NAME : operator<<
@@ -282,7 +293,6 @@ namespace zypp
       // don't miss to invalidate ResPoolProxy
       _poolImpl.invalidateProxy();
     }
-
 
     /////////////////////////////////////////////////////////////////
   } // namespace pool

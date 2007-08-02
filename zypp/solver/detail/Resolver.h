@@ -31,6 +31,7 @@
 #include "zypp/base/PtrTypes.h"
 
 #include "zypp/ResPool.h"
+#include "zypp/base/SerialNumber.h"
 
 #include "zypp/solver/detail/Types.h"
 #include "zypp/solver/detail/ResolverQueue.h"
@@ -54,7 +55,7 @@ namespace zypp
     /////////////////////////////////////////////////////////////////////
     namespace detail
     { ///////////////////////////////////////////////////////////////////
-	
+
     ///////////////////////////////////////////////////////////////////
     //
     //	CLASS NAME : ItemCapKind
@@ -77,7 +78,7 @@ namespace zypp
 	    { }
     };
     typedef std::multimap<PoolItem_Ref,ItemCapKind> ItemCapKindMap;
-    typedef std::list<ItemCapKind> ItemCapKindList;	
+    typedef std::list<ItemCapKind> ItemCapKindList;
 
 ///////////////////////////////////////////////////////////////////
 //
@@ -87,12 +88,13 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
 
   private:
     ResPool _pool;
+    SerialNumberWatcher _poolchanged;
 
     unsigned _timeout_seconds;
     unsigned _maxSolverPasses;
     bool _verifying;
     bool _testing;
-    
+
     // In order reducing solver time we are reducing the branches
     // by skipping resolvables which have worse architecture,edition
     // than a resolvable which provides the same cababilities.
@@ -106,8 +108,8 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
     PoolItemList _items_to_establish;
     PoolItemList _items_to_remove;
     PoolItemList _items_to_verify;
-    PoolItemList _items_to_lockUninstalled;    
-  
+    PoolItemList _items_to_lockUninstalled;
+
     // pool of valid contexts which are "recycled" in order to fasten the solver
     ContextPool contextPool;
 
@@ -117,7 +119,7 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
     // Additional information about the solverrun
     ItemCapKindMap _isInstalledBy;
     ItemCapKindMap _installs;
-    
+
     CapSet _extra_caps;
     CapSet _extra_conflicts;
 
@@ -125,17 +127,17 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
 
     // These conflict should be ignored of the concering item
     IgnoreMap _ignoreConflicts;
-    // These requires should be ignored of the concering item    
+    // These requires should be ignored of the concering item
     IgnoreMap _ignoreRequires;
-    // These obsoletes should be ignored of the concering item    
-    IgnoreMap _ignoreObsoletes;    
+    // These obsoletes should be ignored of the concering item
+    IgnoreMap _ignoreObsoletes;
     // Ignore architecture of the item
     PoolItemList _ignoreArchitecture;
     // Ignore the status "installed" of the item
     PoolItemList _ignoreInstalledItem;
     // Ignore the architecture of the item
-    PoolItemList _ignoreArchitectureItem;    
-    
+    PoolItemList _ignoreArchitectureItem;
+
 
     ResolverQueueList _pending_queues;
     ResolverQueueList _pruned_queues;
@@ -147,7 +149,7 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
 
     ResolverContext_Ptr _best_context;
     // Context of the last establishing call ( without any transaction )
-    ResolverContext_Ptr _establish_context;    
+    ResolverContext_Ptr _establish_context;
     bool _timed_out;
 
     std::set<Repository> _subscribed;
@@ -159,14 +161,14 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
                         // This behaviour is favourited by ZMD
     bool _upgradeMode;  // Resolver has been called with doUpgrade
     bool _preferHighestVersion; // Prefer the result with the newest version
-                                //if there are more solver results. 
+                                //if there are more solver results.
 
     // helpers
     bool doesObsoleteCapability (PoolItem_Ref candidate, const Capability & cap);
     bool doesObsoleteItem (PoolItem_Ref candidate, PoolItem_Ref installed);
 
     void collectResolverInfo (void);
-    
+
 
   public:
 
@@ -179,7 +181,7 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
     friend std::ostream& operator<<(std::ostream& str, const Resolver & obj)
     { return obj.dumpOn (str); }
     void dumpTaskList(const PoolItemList &install, const PoolItemList &remove );
-    
+
     // ---------------------------------- accessors
 
     QueueItemList initialItems () const { return _initial_items; }
@@ -231,7 +233,7 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
     void addIgnoreObsoletes (const PoolItem_Ref item,
 			     const Capability & capability);
     void addIgnoreInstalledItem (const PoolItem_Ref item);
-    void addIgnoreArchitectureItem (const PoolItem_Ref item);    
+    void addIgnoreArchitectureItem (const PoolItem_Ref item);
 
     void setForceResolve (const bool force) { _forceResolve = force; }
     const bool forceResolve() { return _forceResolve; }
@@ -240,7 +242,7 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
 
     void setTryAllPossibilities (const bool tryAllPossibilities) { _tryAllPossibilities = tryAllPossibilities; }
     const bool tryAllPossibilities () { return _tryAllPossibilities; };
-    
+
     bool verifySystem (bool considerNewHardware = false);
     void establishState (ResolverContext_Ptr context = NULL);
     bool establishPool (void);
@@ -269,7 +271,7 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
 
     // Get more information about the solverrun
     // Which item will be installed by another item or triggers an item for
-    // installation    
+    // installation
     const ItemCapKindList isInstalledBy (const PoolItem_Ref item);
     const ItemCapKindList installs (const PoolItem_Ref item);
 

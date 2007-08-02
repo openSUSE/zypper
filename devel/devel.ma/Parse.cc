@@ -345,7 +345,7 @@ int main( int argc, char * argv[] )
   USR << "pool: " << pool << endl;
   SEC << pool.knownRepositoriesSize() << endl;
 
-  if ( 1 )
+  if ( 0 )
   {
     zypp::base::LogControl::TmpLineWriter shutUp;
     getZYpp()->initTarget( sysRoot );
