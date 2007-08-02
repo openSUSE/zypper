@@ -143,7 +143,7 @@ namespace zypp
 
     public:
       /** Return \ref isDirty, storing \c serial_r as new value. */
-      bool remember( unsigned serial_r )
+      bool remember( unsigned serial_r ) const
       {
         if ( isDirty( serial_r ) )
         {
@@ -153,11 +153,11 @@ namespace zypp
         return false;
       }
       /** \overload */
-      bool remember( const SerialNumber & serial_r )
+      bool remember( const SerialNumber & serial_r ) const
       { return remember( serial_r.serial() ); }
 
     private:
-      unsigned _serial;
+      mutable unsigned _serial;
   };
   ///////////////////////////////////////////////////////////////////
 
