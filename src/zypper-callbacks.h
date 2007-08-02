@@ -25,15 +25,16 @@ enum Error {
     INVALID,
 };
 */
-void display_progress (std::ostream & out, const std::string& s, int percent);
-void display_tick (std::ostream & out, const std::string& s);
-void display_done (ostream & out, const std::string& s);
+void display_progress ( const std::string &id, std::ostream & out, const std::string& s, int percent);
+void display_tick ( const std::string &id, std::ostream & out, const std::string& s);
+void display_done ( const std::string &id, ostream & out, const std::string& s);
 // newline if normal progress is on single line
-void display_done (ostream & out);
+void display_done ( const std::string &id, ostream & out);
 
 template<typename Error>
 void display_error (Error error, const std::string& reason) {
-  if (error != 0 /*NO_ERROR*/) {
+  if (error != 0 /*NO_ERROR*/)
+  {
     static const char * error_s[] = {
       // TranslatorExplanation These are reasons for various failures.
       "", _("Not found"), _("I/O error"), _("Invalid object")

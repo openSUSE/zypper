@@ -6,11 +6,14 @@
 
 using namespace std;
 
-void display_progress (ostream & out, const string& s, int percent) {
+void display_progress ( const std::string &id, ostream & out, const string& s, int percent) {
   static AliveCursor cursor;
 
   if (gSettings.machine_readable)
+  {
+    cout << "<progress id=\"" << id << "\" type=\"percentage\" value=\"" << percent << "\" name=\"" << s << "\"/>" << endl;
     return;
+  }
 
   if ( percent == 100 )
     out << CLEARLN << cursor.done() << " " << s;
@@ -24,11 +27,14 @@ void display_progress (ostream & out, const string& s, int percent) {
 
 // ----------------------------------------------------------------------------
 
-void display_tick (ostream & out, const string& s) {
+void display_tick ( const std::string &id, ostream & out, const string& s) {
   static AliveCursor cursor;
 
   if (gSettings.machine_readable)
+  {
+    cout << "<progress id=\"" << id << "\" type=\"tick\" value=\"" << -1 << "\" name=\"" << s << "\"/>" << endl;
     return;
+  }
 
   cursor++;
   out << CLEARLN << cursor << " " << s;
@@ -37,11 +43,14 @@ void display_tick (ostream & out, const string& s) {
 
 // ----------------------------------------------------------------------------
 
-void display_done (ostream & out, const string& s) {
+void display_done ( const std::string &id, ostream & out, const string& s) {
   static AliveCursor cursor;
 
   if (gSettings.machine_readable)
+  {
+    cout << "<progress id=\"" << id << "\" type=\"done\" name=\"" << s << "\"/>" << endl;
     return;
+  }
 
   out << CLEARLN << cursor.done() << " " << s;
   out << flush;
@@ -50,10 +59,14 @@ void display_done (ostream & out, const string& s) {
 
 // ----------------------------------------------------------------------------
 
-void display_done (ostream & out) {
+void display_done (const std::string &id, ostream & out) {
 
   if (gSettings.machine_readable)
+  {
+    display_done( id, cout, "");
     return;
+  }
+
 
   out << endl;
 }

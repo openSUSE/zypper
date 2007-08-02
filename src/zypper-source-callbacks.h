@@ -16,6 +16,7 @@
 #include <boost/format.hpp>
 
 #include <zypp/base/Logger.h>
+#include <zypp/base/String.h>
 #include <zypp/ZYppCallbacks.h>
 #include <zypp/Pathname.h>
 #include <zypp/KeyRing.h>
@@ -79,9 +80,9 @@ struct DownloadResolvableReportReceiver : public zypp::callback::ReceiveReport<z
   zypp::Pathname _patch;
   zypp::ByteCount _patch_size;
   
-  void display_step( const std::string &what, int value )
+  void display_step( const std::string &id, const std::string &what, int value )
   {
-    display_progress (cout_v, what, value);
+    display_progress ("download-resolvable", cout_v, what, value);
   }
   
   // Dowmload delta rpm:
@@ -100,7 +101,7 @@ struct DownloadResolvableReportReceiver : public zypp::callback::ReceiveReport<z
   virtual bool progressDeltaDownload( int value )
   {
     // TranslatorExplanation This text is a progress display label e.g. "Downloading delta [42%]"
-    display_step( _("Downloading delta") /*+ _delta.asString()*/, value );
+    display_step( "apply-delta", _("Downloading delta") /*+ _delta.asString()*/, value );
     return true;
   }
 
@@ -111,7 +112,7 @@ struct DownloadResolvableReportReceiver : public zypp::callback::ReceiveReport<z
   
   virtual void finishDeltaDownload()
   {
-    display_done (cout_v);
+    display_done ("download-resolvable", cout_v);
   }
 
   // Apply delta rpm:
@@ -127,7 +128,7 @@ struct DownloadResolvableReportReceiver : public zypp::callback::ReceiveReport<z
   virtual void progressDeltaApply( int value )
   {
     // TranslatorExplanation This text is a progress display label e.g. "Applying delta [42%]"
-    display_step( _("Applying delta") /* + _delta.asString()*/, value );
+    display_step( "apply-delta", _("Applying delta") /* + _delta.asString()*/, value );
   }
 
   virtual void problemDeltaApply( const std::string & description )
@@ -137,7 +138,7 @@ struct DownloadResolvableReportReceiver : public zypp::callback::ReceiveReport<z
 
   virtual void finishDeltaApply()
   {
-    display_done (cout_v);
+    display_done ("apply-delta", cout_v);
   }
 
   // Dowmload patch rpm:
@@ -155,7 +156,7 @@ struct DownloadResolvableReportReceiver : public zypp::callback::ReceiveReport<z
   virtual bool progressPatchDownload( int value )
   {
     // TranslatorExplanation This text is a progress display label e.g. "Applying patch rpm [42%]"
-    display_step( _("Applying patch rpm") /* + _patch.asString() */, value );
+    display_step( "apply-delta", _("Applying patch rpm") /* + _patch.asString() */, value );
     return true;
   }
   
@@ -166,7 +167,7 @@ struct DownloadResolvableReportReceiver : public zypp::callback::ReceiveReport<z
   
   virtual void finishPatchDownload()
   {
-    display_done (cout_v);
+    display_done ("apply-delta", cout_v);
   }
   
   
@@ -195,7 +196,7 @@ struct DownloadResolvableReportReceiver : public zypp::callback::ReceiveReport<z
   virtual bool progress(int value, zypp::Resolvable::constPtr /*resolvable_ptr*/)
   {
     // TranslatorExplanation This text is a progress display label e.g. "Downloading [42%]"
-    display_step( _("Downloading") /* + resolvable_ptr->name() */, value );
+    display_step( "download-resolvable", _("Downloading") /* + resolvable_ptr->name() */, value );
     return true;
   }
 
@@ -207,7 +208,7 @@ struct DownloadResolvableReportReceiver : public zypp::callback::ReceiveReport<z
 
   virtual void finish( zypp::Resolvable::constPtr /*resolvable_ptr*/, Error error, const std::string & reason )
   {
-    display_done (cout_v);
+    display_done ("download-resolvable", cout_v);
     display_error (error, reason);
   }
 };
@@ -219,11 +220,11 @@ struct ProgressReportReceiver  : public zypp::callback::ReceiveReport<zypp::Prog
     //std::cout << "TICK!" << std::endl;
     if ( data.reportAlive() )
     {
-      display_tick (cout, data.name() );
+      display_tick (zypp::str::numstring(data.numericId()), cout, data.name() );
     }
     else
     {
-      display_progress (cout, data.name() , data.val() );
+      display_progress ( zypp::str::numstring(data.numericId()), cout, data.name() , data.val() );
     }
     
     
@@ -249,7 +250,7 @@ struct ProgressReportReceiver  : public zypp::callback::ReceiveReport<zypp::Prog
 
   virtual void finish( const zypp::ProgressData &data )
   {
-    display_done(cout, data.name() );
+    display_done(zypp::str::numstring(data.numericId()), cout, data.name() );
   }
 };
 
@@ -266,7 +267,7 @@ struct RepoReportReceiver  : public zypp::callback::ReceiveReport<zypp::repo::Re
 
   void display_step( int value )
   {
-    display_progress (cout, "(" + _repo.info().alias() + ") " + _task , value);
+    display_progress ( "repo", cout, "(" + _repo.info().alias() + ") " + _task , value);
   }
 
   virtual bool progress( int value )
@@ -277,7 +278,7 @@ struct RepoReportReceiver  : public zypp::callback::ReceiveReport<zypp::repo::Re
   
   virtual Action problem( zypp::Repository /*repo*/, Error error, const std::string & description )
   {
-    display_done (cout);
+    display_done ("repo", cout);
     display_error (error, description);
     return (Action) read_action_ari (ABORT);
   }
@@ -289,7 +290,7 @@ struct RepoReportReceiver  : public zypp::callback::ReceiveReport<zypp::repo::Re
     if (boost::algorithm::starts_with (task, "Reading patch"))
       cout << '\r' << flush;
     else
-      display_done (cout);
+      display_done ("repo", cout);
     display_error (error, reason);
   }
 

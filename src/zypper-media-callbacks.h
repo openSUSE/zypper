@@ -64,20 +64,20 @@ namespace ZmartRecipients
 
     virtual bool progress(int value, const zypp::Url & /*file*/)
     {
-      display_progress (cout_v, "Downloading", value);
+      display_progress ("download", cout_v, "Downloading", value);
       return true;
     }
 
     virtual DownloadProgressReport::Action problem( const zypp::Url & /*file*/, DownloadProgressReport::Error error, const std::string & description )
     {
-      display_done (cout_v);
+      display_done ("download", cout_v);
       display_error (error, description);
       return DownloadProgressReport::ABORT;
     }
 
     virtual void finish( const zypp::Url & /*file*/, Error error, const std::string & konreason )
     {
-      display_done (cout_v);
+      display_done ("download", cout_v);
       display_error (error, konreason);
     }
   };

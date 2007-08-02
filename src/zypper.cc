@@ -651,7 +651,11 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
   // === process options ===
 
   if (gopts.count("terse")) 
+  {
     gSettings.machine_readable = true;
+    cout << "<?xml version='1.0'?>" << endl;
+    cout << "<stream>" << endl;
+  }
 
   if (gopts.count("disable-repositories") ||
       gopts.count("disable-system-sources"))
@@ -1216,7 +1220,6 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
     cond_load_resolvables();
     establish ();
 
-    cout << "<?xml version='1.0'?>" << endl;
     cout << "<update-status version=\"0.4\">" << endl;
     cout << "<update-list>" << endl;
     if (!xml_list_patches ())	// Only list updates if no
@@ -1447,6 +1450,9 @@ int main(int argc, char **argv)
     }
   } say_goodbye __attribute__ ((__unused__));
 
+  if ( gSettings.machine_readable )
+    cout << "</stream>" << endl;
+  
 	// set locale
   setlocale (LC_ALL, "");
   bindtextdomain (PACKAGE, LOCALEDIR);

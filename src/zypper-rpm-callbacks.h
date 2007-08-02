@@ -35,8 +35,15 @@ struct MessageResolvableReportReceiver : public zypp::callback::ReceiveReport<zy
 {
   virtual void show( zypp::Message::constPtr message )
   {
-    cout_v << message << endl; // [message]important-msg-1.0-1
-    cout_n << message->text() << endl;
+    if ( !gSettings.machine_readable )
+    {
+      cout_v << message << endl; // [message]important-msg-1.0-1
+      cout_n << message->text() << endl;
+      return;
+    }
+    
+    cout << "<message>" << message->text() << "</message>" << endl;
+    
     //! \todo in interactive mode, wait for ENTER?
   }
 };
@@ -74,13 +81,13 @@ struct ScriptResolvableReportReceiver : public zypp::callback::ReceiveReport<zyp
   }
   /** Report error. */
   virtual void problem( const std::string & description ) {
-    display_done (cout_n);
+    display_done ( "run-script", cout_n);
     cerr << description << endl;
   }
 
   /** Report success. */
   virtual void finish() {
-    display_done (cout_n);
+    display_done ("run-script", cout_n);
   }
 
 };
@@ -107,7 +114,7 @@ struct ScanRpmDbReceive : public zypp::callback::ReceiveReport<zypp::target::rpm
     // this is called too often. relax a bit.
     static int last = -1;
     if (last != value)
-      display_progress (cout, _("Reading installed packages"), value);
+      display_progress ( "read-installed-packages", cout, _("Reading installed packages"), value);
     last = value;
     return true;
   }
@@ -119,7 +126,7 @@ struct ScanRpmDbReceive : public zypp::callback::ReceiveReport<zypp::target::rpm
 
   virtual void finish( Error error, const std::string & reason )
   {
-    display_done (cout);
+    display_done ("read-installed-packages", cout);
     display_error (error, reason);
   }
 };
@@ -130,14 +137,13 @@ struct RemoveResolvableReportReceiver : public zypp::callback::ReceiveReport<zyp
 {
   virtual void start( zypp::Resolvable::constPtr resolvable )
   {
-    cout << boost::format(_("Removing: %s-%s"))
-        % resolvable->name() % resolvable->edition() << endl;
+    display_progress ( "remove-resolvable", cout, _("Removing ") + to_string (resolvable), 0);
   }
 
   virtual bool progress(int value, zypp::Resolvable::constPtr resolvable)
   {
     // TranslatorExplanation This text is a progress display label e.g. "Removing [42%]"
-    display_progress (cout, _("Removing ") + to_string (resolvable), value);
+    display_progress ( "remove-resolvable", cout, _("Removing ") + to_string (resolvable), value);
     return true;
   }
 
@@ -150,7 +156,7 @@ struct RemoveResolvableReportReceiver : public zypp::callback::ReceiveReport<zyp
 
   virtual void finish( zypp::Resolvable::constPtr /*resolvable*/, Error error, const std::string & reason )
   {
-    display_done (cout);
+    display_done ( "remove-resolvable", cout);
     display_error (error, reason);
   }
 };
@@ -169,20 +175,23 @@ struct InstallResolvableReportReceiver : public zypp::callback::ReceiveReport<zy
 {
   zypp::Resolvable::constPtr _resolvable;
   
-  void display_step( zypp::Resolvable::constPtr /*resolvable*/, int value )
+  void display_step( zypp::Resolvable::constPtr resolvable, int value )
   {
     // TranslatorExplanation This text is a progress display label e.g. "Installing [42%]"
-    display_progress (cout, _("Installing ") /* + to_string (resolvable) */,  value);
+    stringstream s;
+    s << (boost::format(_("Installing: %s-%s"))
+        % resolvable->name() % resolvable->edition());
+    display_progress ( "install-resolvable", cout, s.str(),  value);
   }
 
   virtual void start( zypp::Resolvable::constPtr resolvable )
   {
     _resolvable = resolvable;
-    if (gSettings.machine_readable)
-      cout << "Installing: " + resolvable->name() << endl;
-    else
-      cout << boost::format(_("Installing: %s-%s"))
-        % resolvable->name() % resolvable->edition() << endl;
+    
+    stringstream s;
+    s << (boost::format(_("Installing: %s-%s"))
+        % resolvable->name() % resolvable->edition());
+    display_progress ( "install-resolvable", cout, s.str(),  0);
   }
 
   virtual bool progress(int value, zypp::Resolvable::constPtr resolvable)
@@ -210,7 +219,7 @@ struct InstallResolvableReportReceiver : public zypp::callback::ReceiveReport<zy
 
   virtual void finish( zypp::Resolvable::constPtr /*resolvable*/, Error error, const std::string & reason, RpmLevel level )
   {
-    display_done (cout);
+    display_done ( "install-resolvable", cout);
     if (error != NO_ERROR) {
       cerr << level;
     }
