@@ -68,10 +68,7 @@ main (int argc, char* argv[])
 
 	SEC << nrepo << endl;
 	Repository nrep = repoManager.createFromCache( nrepo );
-
-	const ResStore& resolvables = nrep.resolvables();
-	for (ResStore::const_iterator it = resolvables.begin(); it != resolvables.end(); it++)
-	    resPoolManager.insert(*it);
+	resPoolManager.insert(nrep.resolvables());
     }
 
     ResPool pool(resPoolManager.accessor());
