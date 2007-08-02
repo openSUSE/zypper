@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Aug  2 18:44:07 CEST 2007 - dmacvicar@suse.de
+
+- added xml output in terse mode
+- r6406 
+
+-------------------------------------------------------------------
 Thu Aug  2 16:10:56 CEST 2007 - tgoettlicher@suse.de
 
 - added xml error message to zypp-checkpatches-wrapper 
