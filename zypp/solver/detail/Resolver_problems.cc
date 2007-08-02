@@ -67,7 +67,9 @@ using namespace std;
 	
 typedef multimap<PoolItem_Ref, ResolverInfo_Ptr> ProblemMap;	
 typedef multimap<PoolItem_Ref, Capability> ItemCapabilityMap;
-typedef multimap<PoolItem_Ref, PoolItem_Ref> ConflictMap;	
+typedef multimap<PoolItem_Ref, PoolItem_Ref> ConflictMap;
+
+#define MAXPROBLEMS 20
 
 // match template over ItemCapabilityMap
 template <class K, class V>
@@ -220,7 +222,7 @@ struct AllRequires
 
     bool operator()( const CapAndItem & cai )
     {
-	DBG << cai.item << " requires " << cai.cap << endl;
+	_XDEBUG (cai.item << " requires " << cai.cap);
 	requirers.push_back( cai.item );
 
 	return true;
@@ -864,6 +866,11 @@ Resolver::problems (const bool ignoreValidSolution) const
 	if (!problem_created) {
 	    ResolverProblem_Ptr problem = new ResolverProblem (what, details);
 	    problems.push_back (problem);
+	}
+
+	if (problems.size() >= MAXPROBLEMS) {
+	    MIL << "Max problems reached: " << MAXPROBLEMS << ". Do not regarding the rest." << endl;
+	    break;
 	}
     }
     if (problems.empty()) {

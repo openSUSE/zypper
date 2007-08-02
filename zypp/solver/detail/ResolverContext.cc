@@ -1355,7 +1355,7 @@ mark_important_info (const ResolverInfoList & il)
 
 void
 ResolverContext::foreachInfo (PoolItem_Ref item, int priority, ResolverInfoFn fn, void *data,
-			      const bool merge) const
+			      const bool merge, const bool findImportant) const
 {
     ResolverInfoList info_list;
 
@@ -1372,6 +1372,12 @@ ResolverContext::foreachInfo (PoolItem_Ref item, int priority, ResolverInfoFn fn
 		&& info->priority() >= priority)
 	    {
 		info_list.push_back( info );
+
+		if (!merge
+		    && !findImportant) {
+		    // invoke our callback in order to avoid an additional run over the complete list
+		    fn( info, data );		    
+		}
 	    }
 	}
 	context = context->_parent;
@@ -1396,13 +1402,16 @@ ResolverContext::foreachInfo (PoolItem_Ref item, int priority, ResolverInfoFn fn
 	}
     }
 
-    mark_important_info( info_list );
+    if (findImportant) mark_important_info( info_list );
 
-    // Walk across the list of info objects and invoke our callback
+    if (merge
+	|| findImportant) {    
+	// Walk across the list of info objects and invoke our callback
 
-    for (ResolverInfoList::iterator iter = info_list.begin(); iter != info_list.end(); ++iter) {
-	if (*iter != NULL) {
-	    fn( *iter, data );
+	for (ResolverInfoList::iterator iter = info_list.begin(); iter != info_list.end(); ++iter) {
+	    if (*iter != NULL) {
+		fn( *iter, data );
+	    }
 	}
     }
 }
@@ -1479,7 +1488,7 @@ void
 ResolverContext::spewInfo (void) const
 {
     _XDEBUG( "ResolverContext[" << this << "]::spewInfo" );
-    foreachInfo (PoolItem_Ref(), -1, spew_info_cb, NULL);
+    foreachInfo (PoolItem_Ref(), -1, spew_info_cb, NULL, false, false);
 }
 
 //---------------------------------------------------------------------------

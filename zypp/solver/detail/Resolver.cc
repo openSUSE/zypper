@@ -1299,7 +1299,7 @@ Resolver::resolvePool( bool tryAllPossibilities )
 	    MIL << "-----------------------------------------------------------------" << endl;
 	    MIL << counter++ << ". failed queue:" << endl;
 	    ResolverQueue_Ptr invalid =	*iter;    
-	    invalid->context()->spewInfo ();
+//	    invalid->context()->spewInfo (); No additional information needed here
 	    MIL << *invalid->context() << endl;
 	    MIL << "-----------------------------------------------------------------" << endl;		
 	}
