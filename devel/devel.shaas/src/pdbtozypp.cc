@@ -8,8 +8,8 @@ PdbToZypp::PdbToZypp(){
 
    store = new ResStore;
 
-	database *dbDeps = new database("lorien.suse.de", "rpmread", "Salahm1", "rpm");
-	database *dbPackages = new database("lorien.suse.de", "rpmread", "Salahm1", "package");
+	database *dbDeps = new database("lorien.suse.de", "rpmread", "***", "rpm");
+	database *dbPackages = new database("lorien.suse.de", "rpmread", "***", "package");
 
 	if(dbPackages->connect() != 1){
 		//std::cout << "NO DB CONNECTION!!!\n";
