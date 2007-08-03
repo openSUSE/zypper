@@ -298,7 +298,7 @@ int add_repo(const RepoInfo & repo)
 {
   RepoManager manager;
 
-  cout_v << format(_("Adding repository '%s'.")) % repo.alias() << endl;
+  //cout_v << format(_("Adding repository '%s'.")) % repo.alias() << endl;
   MIL << "Going to add repository: " << repo << endl;
 
   try
@@ -354,7 +354,8 @@ int add_repo(const RepoInfo & repo)
 // ----------------------------------------------------------------------------
 
 int add_repo_by_url( const zypp::Url & url, const string & alias,
-                     const string & type, bool enabled, bool refresh )
+                     const string & type,
+                     tribool enabled, tribool autorefresh)
 {
   RepoManager manager;
   RepoInfo repo;
@@ -364,9 +365,12 @@ int add_repo_by_url( const zypp::Url & url, const string & alias,
   
   repo.setAlias(alias.empty() ? timestamp() : alias);
   repo.addBaseUrl(url);
-  repo.setEnabled(enabled);
-  repo.setAutorefresh(refresh);
-
+  
+  if ( enabled != indeterminate )
+    repo.setEnabled(enabled);
+  if ( autorefresh != indeterminate )
+    repo.setAutorefresh(autorefresh);
+    
   return add_repo(repo);
 }
 
@@ -374,21 +378,24 @@ int add_repo_by_url( const zypp::Url & url, const string & alias,
 
 //! \todo handle zypp exceptions
 int add_repo_from_file(const std::string & repo_file_url,
-                       bool enabled, bool autorefresh)
+                       tribool enabled, tribool autorefresh)
 {
   //! \todo handle local .repo files, validate the URL
   Url url(repo_file_url);
   RepoManager manager;
   list<RepoInfo> repos = readRepoFile(url);
 
-  for (list<RepoInfo>::iterator it = repos.begin();
+  for (list<RepoInfo>::const_iterator it = repos.begin();
        it !=  repos.end(); ++it)
   {
     RepoInfo repo = *it;
 
-    repo.setEnabled(enabled);
-    repo.setAutorefresh(autorefresh);
-
+    MIL << "enabled: " << enabled << " autorefresh: " << autorefresh << endl;
+    if ( !indeterminate(enabled) )
+      repo.setEnabled((enabled == true));
+    if ( !indeterminate(autorefresh) )
+      repo.setAutorefresh((autorefresh == true));
+    MIL << "enabled: " << repo.enabled() << " autorefresh: " << repo.autorefresh() << endl;
     add_repo(repo);
   }
 

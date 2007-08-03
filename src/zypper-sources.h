@@ -2,7 +2,7 @@
 #define ZMART_SOURCES_H
 
 #include "zypp/Url.h"
-
+#include <boost/logic/tribool.hpp>
 #include "zypper-getopt.h"
 
 /**
@@ -39,7 +39,7 @@ void refresh_repos();
 int add_repo_by_url( const zypp::Url & url,
                       const std::string & alias,
                       const std::string & type = "",
-                      bool enabled = true, bool autorefresh = true );
+                      boost::tribool enabled = boost::indeterminate, boost::tribool autorefresh = boost::indeterminate);
 
 /**
  * Add repository specified in given repo file on \a repo_file_url. All repos
@@ -53,7 +53,7 @@ int add_repo_by_url( const zypp::Url & url,
  *         ZYPPER_EXIT_OK otherwise
  */
 int add_repo_from_file(const std::string & repo_file_url,
-                        bool enabled = true, bool autorefresh = true);
+                       boost::tribool enabled = boost::indeterminate, boost::tribool autorefresh = boost::indeterminate);
 
 /**
  * If ZMD process found, notify user that ZMD is running and that changes
