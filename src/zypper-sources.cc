@@ -366,10 +366,10 @@ int add_repo_by_url( const zypp::Url & url, const string & alias,
   repo.setAlias(alias.empty() ? timestamp() : alias);
   repo.addBaseUrl(url);
   
-  if ( enabled != indeterminate )
-    repo.setEnabled(enabled);
-  if ( autorefresh != indeterminate )
-    repo.setAutorefresh(autorefresh);
+  if ( !indeterminate(enabled) )
+    repo.setEnabled((enabled == true));
+  if ( !indeterminate(autorefresh) )
+    repo.setAutorefresh((autorefresh == true));
     
   return add_repo(repo);
 }
