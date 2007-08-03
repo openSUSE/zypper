@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Aug  3 16:07:46 CEST 2007 - schubi@suse.de
+
+- Fixed detection of renamed packages while update.
+- rev 6445 
+
+-------------------------------------------------------------------
 Fri Aug  3 15:02:28 CEST 2007 - ma@suse.de
 
 - Speed up retrieving MediaNr attribute, as it slows down install
