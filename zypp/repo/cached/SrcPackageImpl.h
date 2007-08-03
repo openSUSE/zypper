@@ -56,9 +56,12 @@ namespace cached
     virtual Date installtime() const;
 
     virtual OnMediaLocation location() const;
+
   private:
     repo::cached::RepoImpl::Ptr _repository;
     data::RecordId              _id;
+
+    mutable DefaultIntegral<unsigned,(unsigned)-1> _mnr;
   };
   /////////////////////////////////////////////////////////////////
 } // ns cached

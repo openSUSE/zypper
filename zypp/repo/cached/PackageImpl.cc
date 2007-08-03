@@ -136,7 +136,11 @@ Changelog PackageImpl::changelog() const
 
 unsigned PackageImpl::mediaNr() const
 {
-  return _repository->resolvableQuery().queryNumericAttribute( _id, cache::attrPackageLocationMediaNr() );
+  if ( _mnr == (unsigned)-1 )
+  {
+    _mnr = _repository->resolvableQuery().queryNumericAttribute( _id, cache::attrPackageLocationMediaNr() );
+  }
+  return _mnr;
 }
 
 ByteCount PackageImpl::downloadSize() const

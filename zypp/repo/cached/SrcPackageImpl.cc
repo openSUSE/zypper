@@ -99,7 +99,11 @@ Date SrcPackageImpl::installtime() const
 
 unsigned SrcPackageImpl::mediaNr() const
 {
-  return _repository->resolvableQuery().queryNumericAttribute( _id, cache::attrSrcPackageLocationMediaNr() );
+  if ( _mnr == (unsigned)-1 )
+  {
+    _mnr = _repository->resolvableQuery().queryNumericAttribute( _id, cache::attrSrcPackageLocationMediaNr() );
+  }
+  return _mnr;
 }
 
 ByteCount SrcPackageImpl::downloadSize() const
