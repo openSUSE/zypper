@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Sat Aug  4 01:03:19 CEST 2007 - ma@suse.de
+
+- Don't download unwanted translation files (#293740).
+- revision 6470
+
+-------------------------------------------------------------------
 Fri Aug  3 23:52:18 CEST 2007 - ma@suse.de
 
 - Fix susetags repo to parse dikusage data (#293039)
