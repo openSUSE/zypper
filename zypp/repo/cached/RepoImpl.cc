@@ -341,6 +341,10 @@ void RepoImpl::read_capabilities( sqlite3_connection &con,
 
   sqlite3_command select_modalias_cmd( con, "select mc.refers_kind, mc.name, mc.pkgname, mc.value, mc.relation, mc.dependency_type, mc.resolvable_id from modalias_capabilities mc, resolvables res where mc.resolvable_id=res.id and res.repository_id=:repo_id;");
 
+  sqlite3_command select_filesystem_cmd( con, "select v.refers_kind, n.name, v.dependency_type, v.resolvable_id from filesystem_capabilities v, names n, resolvables res where v.name_id=n.id and v.resolvable_id=res.id and res.repository_id=:repo_id;");
+  
+  sqlite3_command select_split_cmd( con, "select v.refers_kind, n.name, dn.name, fn.name, v.dependency_type, v.resolvable_id from split_capabilities v, names n, resolvables res, files f, dir_names dn, file_names fn where v.name_id=n.id and v.resolvable_id=res.id and f.id=v.file_id and f.dir_name_id=dn.id and f.file_name_id=fn.id and res.repository_id=:repo_id;");
+  
   sqlite3_command select_other_cmd( con, "select oc.refers_kind, oc.value, oc.dependency_type, oc.resolvable_id from other_capabilities oc, resolvables res where oc.resolvable_id=res.id and res.repository_id=:repo_id;");
 
 
@@ -426,7 +430,40 @@ void RepoImpl::read_capabilities( sqlite3_connection &con,
       nvras[rid].second[deptype].insert( capfactory.fromImpl( capability::CapabilityImpl::Ptr(mcap) ) );
     }
   }
+  
+  {
+    debug::Measure mnf("read filesystem capabilities");
+    select_filesystem_cmd.bind(":repo_id", repo_id);
+    sqlite3_reader reader = select_filesystem_cmd.executereader();
+    while  ( reader.read() )
+    {
+      _ticks.tick();
+      Resolvable::Kind refer = _type_cache.kindFor(reader.getint(0));
 
+      capability::FilesystemCap *fscap = new capability::FilesystemCap( refer, reader.getstring(1) );
+      zypp::Dep deptype = _type_cache.deptypeFor(reader.getint(2));
+      data::RecordId rid = reader.getint64(3);
+      nvras[rid].second[deptype].insert( capfactory.fromImpl( capability::CapabilityImpl::Ptr(fscap) ) );
+    }
+  }
+
+  {
+    debug::Measure mnf("read split capabilities");
+    select_split_cmd.bind(":repo_id", repo_id);
+    sqlite3_reader reader = select_split_cmd.executereader();
+    while  ( reader.read() )
+    {
+      _ticks.tick();
+      Resolvable::Kind refer = _type_cache.kindFor(reader.getint(0));
+
+      capability::SplitCap *scap = new capability::SplitCap( refer, reader.getstring(1),
+                                                             reader.getstring(2) + "/" + reader.getstring(3) );
+      zypp::Dep deptype = _type_cache.deptypeFor(reader.getint(4));
+      data::RecordId rid = reader.getint64(5);
+      nvras[rid].second[deptype].insert( capfactory.fromImpl( capability::CapabilityImpl::Ptr(scap) ) );
+    }
+  }
+  
   {
     debug::Measure mnf("read other capabilities");
     select_other_cmd.bind(":repo_id", repo_id);
