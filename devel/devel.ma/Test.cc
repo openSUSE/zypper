@@ -154,7 +154,7 @@ struct DummyConsumer : public zypp::data::ResolvableDataConsumer
   virtual void consumeDiskUsage    ( const data::RecordId & repository_id, const DiskUsage & du )
   {
     ERR << lookup( repository_id ) << endl;
-    WAR << du << endl;
+    //WAR << du << endl;
     return;
   }
 
@@ -184,6 +184,7 @@ int main( int argc, char * argv[] )
 {
   INT << "===[START]==========================================" << endl;
 
+  Measure x("Parse");
   DummyConsumer dummy;
   RepoParser parser( data::RecordId(), dummy );
 
