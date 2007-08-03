@@ -9,6 +9,7 @@ Fri Aug  3 16:35:36 CEST 2007 - dmacvicar@suse.de
 Fri Aug  3 16:07:46 CEST 2007 - schubi@suse.de
 
 - Fixed detection of renamed packages while update.
+- Added new translations
 - rev 6445
 
 -------------------------------------------------------------------
