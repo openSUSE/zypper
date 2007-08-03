@@ -1146,12 +1146,25 @@ int solve_and_commit () {
   if (retv < 0)
     retv = ZYPPER_EXIT_OK;
   else if (retv == ZYPPER_EXIT_INF_REBOOT_NEEDED)
-    cout << _("WARNING: One of installed patches requires reboot of"
-      " your machine. Please, do it as soon as possible.") << endl;
+	{
+		if (gSettings.machine_readable)
+	    cout << "<message type=\"warning\" text=\"" << _("One of installed patches requires reboot of"
+	      " your machine. Please, do it as soon as possible.") << "\">" << endl;
+		else
+	    cout << _("WARNING: One of installed patches requires reboot of"
+	      " your machine. Please, do it as soon as possible.") << endl;
+	}
   else if (retv == ZYPPER_EXIT_INF_RESTART_NEEDED)
-    cout << _("WARNING: One of installed patches affects the package"
+	{
+		if (gSettings.machine_readable)
+	    cout <<  "<message type=\"warning\" text=\"" << _("One of installed patches affects the package"
+      " manager itself, thus it requires restart before executing"
+      " next operations.") << "\">" << endl;
+		else	
+			cout << _("WARNING: One of installed patches affects the package"
       " manager itself, thus it requires restart before executing"
       " next operations.") << endl;
+	}
 
   return retv;
 }
