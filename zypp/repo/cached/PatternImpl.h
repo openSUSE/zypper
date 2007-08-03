@@ -6,6 +6,9 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
+/** \file	zypp/repo/cached/PatternImpl.h
+ *
+*/
 
 #ifndef zypp_repo_cached_PatternImpl_H
 #define zypp_repo_cached_PatternImpl_H
@@ -16,6 +19,13 @@
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////
+  namespace cache
+  { /////////////////////////////////////////////////////////////////
+    class Attribute;
+    /////////////////////////////////////////////////////////////////
+  } // namespace cache
+  ///////////////////////////////////////////////////////////////////
 namespace repo
 { /////////////////////////////////////////////////////////////////
 namespace cached
@@ -49,16 +59,20 @@ namespace cached
     virtual Pathname icon() const;
     virtual Pathname script() const;
     virtual Label order() const;
-    //virtual std::set<std::string> install_packages( const Locale & lang = Locale("") ) const;
-//     virtual const CapSet & includes() const;
-//     virtual const CapSet & extends() const;
-
+    virtual const CapSet & includes() const;
+    virtual const CapSet & extends() const;
 
     virtual Repository repository() const;
 
   private:
+    /** Lazy init _includes and _extends which are stored as plain stringlist. */
+    void initUiCapSetFromAttr( CapSet & caps_r, const cache::Attribute & attr_r ) const;
+
+  private:
     repo::cached::RepoImpl::Ptr _repository;
-    data::RecordId _id;
+    data::RecordId              _id;
+    mutable scoped_ptr<CapSet>  _includes;
+    mutable scoped_ptr<CapSet>  _extends;
   };
   /////////////////////////////////////////////////////////////////
 } // namespace cached

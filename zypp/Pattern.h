@@ -51,11 +51,12 @@ namespace zypp
     /** */
     Label order() const;
 
-    std::set<std::string> install_packages( const Locale & lang = Locale("") ) const;
+    /** \deprecated AFAIK unused old Selection interface method. */
+    std::set<std::string> install_packages( const Locale & lang = Locale("") ) const ZYPP_DEPRECATED;
 
-    /** */
+    /** Ui hint. */
     const CapSet & includes() const;
-    /** */
+    /** Ui hint. */
     const CapSet & extends() const;
 
   protected:

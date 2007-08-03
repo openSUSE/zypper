@@ -6,21 +6,24 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file zmd/backend/dbrepository/PatternImpl.h
+/** \file	zypp/repo/cached/PatternImpl.cc
  *
 */
+#include <iostream>
 
-#include "zypp/TranslatedText.h"
-#include "zypp/base/String.h"
+#include "zypp/base/Easy.h"
 #include "zypp/base/Logger.h"
+#include "zypp/base/LogTools.h"
+#include "zypp/base/String.h"
+
+#include "zypp/CapFactory.h"
+#include "zypp/TranslatedText.h"
 #include "zypp/repo/RepositoryImpl.h"
-#include "PatternImpl.h"
+#include "zypp/repo/cached/PatternImpl.h"
 #include "zypp/cache/CacheAttributes.h"
 
 
 using namespace std;
-using namespace zypp::detail;
-using namespace::zypp::repo;
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp { namespace repo { namespace cached {
@@ -135,16 +138,38 @@ Label PatternImpl::order() const
   return _repository->resolvableQuery().queryStringAttribute( _id, cache::attrPatternOrder() );
 }
 
-//std::set<std::string> install_packages( const Locale & lang = Locale("") ) const;
-// const CapSet & PatternImpl::includes() const
-// {
-//
-// }
-//
-// const CapSet & PatternImpl::extends() const
-// {
-//
-// }
+
+void PatternImpl::initUiCapSetFromAttr( CapSet & caps_r, const cache::Attribute & attr_r ) const
+{
+  std::list<std::string> capstr;
+  _repository->resolvableQuery().queryStringContainerAttribute( _id, attr_r, std::back_inserter(capstr) );
+  for_( it, capstr.begin(), capstr.end() )
+  {
+    caps_r.insert( CapFactory().parse<ResType>( *it ) );
+  }
+}
+
+const CapSet & PatternImpl::includes() const
+{
+  if ( ! _includes )
+  {
+    // lazy init
+    _includes.reset( new CapSet );
+    initUiCapSetFromAttr( *_includes, cache::attrPatternUiIncludes() );
+  }
+  return *_includes;
+}
+
+const CapSet & PatternImpl::extends() const
+{
+  if ( ! _extends )
+  {
+    // lazy init
+    _extends.reset( new CapSet );
+    initUiCapSetFromAttr( *_extends, cache::attrPatternUiExtends() );
+  }
+  return *_extends;
+}
 
 /////////////////////////////////////////////////////////////////
 } } } // namespace zypp::repo::cached

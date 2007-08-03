@@ -2,7 +2,8 @@
 #include <map>
 #include "zypp/cache/sqlite3x/sqlite3x.hpp"
 
-#include "zypp/base/Logger.h"
+#include "zypp/base/Easy.h"
+#include "zypp/base/LogTools.h"
 #include "zypp/base/Measure.h"
 #include "zypp/ZYppFactory.h"
 #include "zypp/ZYpp.h"
@@ -136,8 +137,8 @@ struct CacheStore::Impl
     update_disk_usage_cmd.reset( new sqlite3_command (con,
       "insert or replace into resolvable_disk_usage (resolvable_id, dir_name_id, files, size) "
       "values (:resolvable_id, :dir_name_id, :files, :size)" ));
-    
-    
+
+
     // disable autocommit
     con.executenonquery("BEGIN;");
   }
@@ -202,7 +203,7 @@ struct CacheStore::Impl
   sqlite3_command_ptr append_patch_baseversion_cmd;
 
   sqlite3_command_ptr update_disk_usage_cmd;
-  
+
   map<string, RecordId> name_cache;
   map< pair<string,string>, RecordId> type_cache;
   int name_cache_hits;
@@ -392,7 +393,7 @@ RecordId CacheStore::consumeScript( const data::RecordId & repository_id,
 }
 
 RecordId CacheStore::consumePattern( const data::RecordId & repository_id,
-                                 const data::Pattern_Ptr & pattern )
+                                     const data::Pattern_Ptr & pattern )
 {
   RecordId id = appendResolvable( repository_id, ResTraits<Pattern>::kind,
       NVRA( pattern->name, pattern->edition, pattern->arch ), pattern->deps );
@@ -403,6 +404,12 @@ RecordId CacheStore::consumePattern( const data::RecordId & repository_id,
   appendTranslatedStringAttribute( id, attrPatternCategory(), pattern->category );
   appendStringAttribute( id, attrPatternIcon(), pattern->icon );
   appendStringAttribute( id, attrPatternOrder(), pattern->order );
+
+  // We store them as string. They are
+  // (sometimes) evaluated by the YaST UI.
+  appendStringContainerAttribute( id, attrPatternUiIncludes(), pattern->includes.begin(), pattern->includes.end() );
+  appendStringContainerAttribute( id, attrPatternUiExtends(),  pattern->extends.begin(),  pattern->extends.end() );
+
   return id;
 }
 

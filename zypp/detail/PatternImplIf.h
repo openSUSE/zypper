@@ -53,9 +53,9 @@ namespace zypp
       /** ui helper */
       virtual std::set<std::string> install_packages( const Locale & lang = Locale("") ) const;
 
-      virtual const CapSet & includes() const;
+      virtual const CapSet & includes() const PURE_VIRTUAL;
 
-      virtual const CapSet & extends() const;
+      virtual const CapSet & extends() const PURE_VIRTUAL;
     };
     ///////////////////////////////////////////////////////////////////
 

@@ -48,27 +48,19 @@ struct Xprint
 {
   bool operator()( const PoolItem & obj_r )
   {
+    handle( asKind<Pattern>( obj_r ) );
     return true;
   }
 
-  bool operator()( const ResObject_Ptr & obj_r )
+  void handle( const Pattern_constPtr & p )
   {
-    SrcPackage_constPtr p( asKind<SrcPackage>( obj_r ) );
-    if ( p )
-    {
-      getZYpp()->installSrcPackage( p );
-      SEC << p << endl;
-    }
-    return true;
-  }
+    if ( !p )
+      return;
 
-  bool operator()( const Repository & repo_r )
-  {
-    USR << repo_r.resolvables() << endl;
-    std::for_each( repo_r.resolvables().begin(), repo_r.resolvables().end(), Xprint() );
-    return true;
+    MIL << p << endl;
+    if ( ! p->includes().empty() ) DBG << p->includes() << endl;
+    if ( ! p->extends().empty() ) DBG << p->extends() << endl;
   }
-
 
   template<class _C>
   bool operator()( const _C & obj_r )
@@ -262,11 +254,6 @@ namespace zypp
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
-bool repolst( const Repository & r )
-{
-  USR << (r?"Y":"N") << ": " << r << endl;
-  return true;
-}
 
 using namespace zypp;
 
@@ -308,9 +295,6 @@ int main( int argc, char * argv[] )
 		  pool.begin(),
 		  pool.end() ) << endl;
 
-
-  repolst( Repository::noRepository );
-
   for ( RepoInfoList::iterator it = repos.begin(); it != repos.end(); ++it )
   {
     RepoInfo & nrepo( *it );
@@ -331,15 +315,12 @@ int main( int argc, char * argv[] )
     }
 
     SEC << nrepo << endl;
-
     Repository nrep( repoManager.createFromCache( nrepo ) );
     const zypp::ResStore & store( nrep.resolvables() );
 
     dumpPoolStats( SEC << "Store: " << endl,
 		   store.begin(), store.end() ) << endl;
     getZYpp()->addResolvables( store );
-
-    repolst( nrep );
   }
 
   USR << "pool: " << pool << endl;
@@ -347,12 +328,14 @@ int main( int argc, char * argv[] )
 
   if ( 0 )
   {
-    zypp::base::LogControl::TmpLineWriter shutUp;
-    getZYpp()->initTarget( sysRoot );
+    {
+      zypp::base::LogControl::TmpLineWriter shutUp;
+      getZYpp()->initTarget( sysRoot );
+    }
+    MIL << "Added target: " << pool << endl;
   }
-  MIL << "Added target: " << pool << endl;
 
-  std::for_each( pool.knownRepositoriesBegin(), pool.knownRepositoriesEnd(), Xprint() );
+  std::for_each( pool.begin(), pool.end(), Xprint() );
 
   ///////////////////////////////////////////////////////////////////
   INT << "===[END]============================================" << endl << endl;
