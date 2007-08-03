@@ -522,7 +522,7 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
 
       Dep dep (Dep::PROVIDES);
       CapFactory factory;
-      Capability installedCap = factory.parse( installed->kind(), installed->name(), Rel::EQ, installed->edition() );
+      Capability installedCap = factory.parse( installed->kind(), installed->name(), Rel::GE, installed->edition() );
 
       FindProviders info;
 
