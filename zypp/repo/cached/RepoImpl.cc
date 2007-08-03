@@ -339,7 +339,7 @@ void RepoImpl::read_capabilities( sqlite3_connection &con,
 
   sqlite3_command select_hal_cmd( con, "select hc.refers_kind, hc.name, hc.value, hc.relation, hc.dependency_type, hc.resolvable_id from hal_capabilities hc, resolvables res where hc.resolvable_id=res.id and res.repository_id=:repo_id;");
 
-  sqlite3_command select_modalias_cmd( con, "select mc.refers_kind, mc.name, mc.value, mc.relation, mc.dependency_type, mc.resolvable_id from modalias_capabilities mc, resolvables res where mc.resolvable_id=res.id and res.repository_id=:repo_id;");
+  sqlite3_command select_modalias_cmd( con, "select mc.refers_kind, mc.name, mc.pkgname, mc.value, mc.relation, mc.dependency_type, mc.resolvable_id from modalias_capabilities mc, resolvables res where mc.resolvable_id=res.id and res.repository_id=:repo_id;");
 
   sqlite3_command select_other_cmd( con, "select oc.refers_kind, oc.value, oc.dependency_type, oc.resolvable_id from other_capabilities oc, resolvables res where oc.resolvable_id=res.id and res.repository_id=:repo_id;");
 
@@ -416,13 +416,13 @@ void RepoImpl::read_capabilities( sqlite3_connection &con,
     while  ( reader.read() )
     {
       _ticks.tick();
-      //select mc.refers_kind, mc.name, mc.value, mc.relation, mc.dependency_type, mc.resolvable_id from modalias_capabilities mc;
       Resolvable::Kind refer = _type_cache.kindFor(reader.getint(0));
 
       Rel rel = _type_cache.relationFor(reader.getint(3));
-      capability::ModaliasCap *mcap = new capability::ModaliasCap( refer, reader.getstring(1), rel, reader.getstring(2) );
-      zypp::Dep deptype = _type_cache.deptypeFor(reader.getint(4));
-      data::RecordId rid = reader.getint64(5);
+      capability::ModaliasCap *mcap = new capability::ModaliasCap( refer, reader.getstring(1), rel, reader.getstring(3) );
+      mcap->setPkgname(reader.getstring(2));
+      zypp::Dep deptype = _type_cache.deptypeFor(reader.getint(5));
+      data::RecordId rid = reader.getint64(6);
       nvras[rid].second[deptype].insert( capfactory.fromImpl( capability::CapabilityImpl::Ptr(mcap) ) );
     }
   }

@@ -215,6 +215,7 @@ CREATE TABLE modalias_capabilities (
   , dependency_type INTEGER
   , refers_kind INTEGER
   , name TEXT
+  , pkgname TEXT
   , value TEXT
   , relation INTEGER
 );

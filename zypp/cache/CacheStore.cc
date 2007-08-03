@@ -104,7 +104,7 @@ struct CacheStore::Impl
     append_file_dependency_cmd.reset( new sqlite3_command( con, "insert into file_capabilities ( resolvable_id, dependency_type, refers_kind, file_id ) values ( :resolvable_id, :dependency_type, :refers_kind, :file_id );" ));
     append_named_dependency_cmd.reset( new sqlite3_command( con, "insert into named_capabilities ( resolvable_id, dependency_type, refers_kind, name_id, version, release, epoch, relation ) values ( :resolvable_id, :dependency_type, :refers_kind, :name_id, :version, :release, :epoch, :relation );" ));
 
-    append_modalias_dependency_cmd.reset( new sqlite3_command( con, "insert into modalias_capabilities ( resolvable_id, dependency_type, refers_kind, name, value, relation ) values ( :resolvable_id, :dependency_type, :refers_kind, :name, :value, :relation );" ));
+    append_modalias_dependency_cmd.reset( new sqlite3_command( con, "insert into modalias_capabilities ( resolvable_id, dependency_type, refers_kind, name, pkgname, value, relation ) values ( :resolvable_id, :dependency_type, :refers_kind, :name, :pkgname, :value, :relation );" ));
 
     append_hal_dependency_cmd.reset( new sqlite3_command( con, "insert into hal_capabilities ( resolvable_id, dependency_type, refers_kind, name, value, relation ) values ( :resolvable_id, :dependency_type, :refers_kind, :name, :value, :relation );" ));
 
@@ -598,6 +598,7 @@ void CacheStore::appendModaliasDependency( const RecordId &resolvable_id,
 
   //_pimpl->append_modalias_dependency_cmd->bind( ":capability_id", capability_id);
   _pimpl->append_modalias_dependency_cmd->bind( ":name", cap->name());
+  _pimpl->append_modalias_dependency_cmd->bind( ":pkgname", cap->pkgname());
   _pimpl->append_modalias_dependency_cmd->bind( ":value", cap->value());
   _pimpl->append_modalias_dependency_cmd->bind( ":relation", lookupOrAppendType("rel", cap->op().asString()) );
 

@@ -75,6 +75,9 @@ namespace zypp
       const std::string & pkgname() const
       { return _pkgname; }
 
+      void setPkgname( const std::string &pn )
+      { _pkgname = pn; }
+      
       ZYPP_DEPRECATED const std::string & querystring() const
       { return _name; }
 
