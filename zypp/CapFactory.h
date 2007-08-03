@@ -60,7 +60,10 @@ namespace zypp
     */
     Capability parse( const Resolvable::Kind & refers_r,
                       const std::string & strval_r ) const;
-
+    /** \overload Templating the \c Resolvable::Kind. */
+    template<class _Res>
+    Capability parse( const std::string & strval_r ) const
+    { return parse( ResTraits<_Res>::kind, strval_r ); }
 
     /** Parse Capability providing Resolvable::Kind, name, Rel and Edition as strings.
      * \throw EXCEPTION on parse error.
