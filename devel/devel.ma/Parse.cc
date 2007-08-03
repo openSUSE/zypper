@@ -318,15 +318,15 @@ int main( int argc, char * argv[] )
     if ( ! nrepo.enabled() )
       continue;
 
-    if ( ! repoManager.isCached( nrepo ) || 0 )
+    if ( ! repoManager.isCached( nrepo ) || 1 )
     {
       if ( repoManager.isCached( nrepo ) )
       {
 	SEC << "cleanCache" << endl;
 	repoManager.cleanCache( nrepo );
       }
-      //SEC << "refreshMetadat" << endl;
-      //repoManager.refreshMetadata( nrepo );
+      SEC << "refreshMetadata" << endl;
+      repoManager.refreshMetadata( nrepo );
       SEC << "buildCache" << endl;
       repoManager.buildCache( nrepo );
     }

@@ -1,9 +1,14 @@
 
+#include <iostream>
 #include <fstream>
+
+#include "zypp/base/Logger.h"
 #include "zypp/base/String.h"
 #include "zypp/OnMediaLocation.h"
 #include "zypp/MediaSetAccess.h"
 #include "zypp/Fetcher.h"
+#include "zypp/Locale.h"
+#include "zypp/ZConfig.h"
 #include "zypp/repo/MediaInfoDownloader.h"
 
 #include "zypp/repo/susetags/Downloader.h"
@@ -88,6 +93,29 @@ void Downloader::download( MediaSetAccess &media,
       {
         // error
         ZYPP_THROW(Exception("bad META line"));
+      }
+      // omit unwanted translations
+      if ( str::hasPrefix( words[3], "packages" ) )
+      {
+        std::string rest( str::stripPrefix( words[3], "packages" ) );
+        if ( ! (   rest.empty()
+                || rest == ".DU"
+                || rest == ".en" ) )
+        {
+          // Not 100% correct as we take each fallback of textLocale
+          Locale toParse( ZConfig::instance().textLocale() );
+          while ( toParse != Locale::noCode )
+          {
+            if ( rest == ("."+toParse.code()) )
+              break;
+            toParse = toParse.fallback();
+          }
+          if ( toParse == Locale::noCode )
+          {
+            // discard
+            continue;
+          }
+        }
       }
       OnMediaLocation location( _path + descr_dir + words[3], 1 );
       location.setChecksum( CheckSum( words[1], words[2] ) );
