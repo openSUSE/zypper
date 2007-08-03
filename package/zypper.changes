@@ -1,4 +1,14 @@
 -------------------------------------------------------------------
+Fri Aug  3 17:17:20 CEST 2007 - dmacvicar@suse.de
+
+- zypper uses tribool internally. So autorefresh and enabled now
+  have this order of preference:
+  cmd line value
+  .repo file
+  zypp default
+- 0.8.7
+
+-------------------------------------------------------------------
 Fri Aug  3 13:56:19 CEST 2007 - tgoettlicher@suse.de
 
 - removed installnotify from xml output
@@ -27,7 +37,6 @@ Fri Aug  3 16:33:09 CEST 2007 - dmacvicar@suse.de
 
 - better error handling. remove duplicated libzypp code.
   Let libzypp probe the urls for us.
-- 0.8.7
 
 -------------------------------------------------------------------
 Thu Aug  2 16:10:56 CEST 2007 - tgoettlicher@suse.de
