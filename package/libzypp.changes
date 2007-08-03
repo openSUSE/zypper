@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Fri Aug  3 12:33:41 CEST 2007 - schubi@suse.de
+
+- API for retrieving additional dependencies" solver/detail/Resolver.h
+- Handle additional dependencies in the testcases
+- Handle system and language dependencies in the testcases correctly.
+- r 6418  
+
+-------------------------------------------------------------------
 Thu Aug  2 18:14:12 CEST 2007 - ma@suse.de
 
 - Indicate changed pool content if /etc/sysconfig/storage USED_FS_LIST
