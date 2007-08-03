@@ -89,6 +89,7 @@ CacheInitializer::CacheInitializer( const Pathname &root_r, const Pathname &db_f
         createTables();
         _pimpl->just_reinitialized = true;
         MIL << "Repository cache re-initialized" << std::endl;
+        _pimpl->con->executenonquery("commit;");
         return;
       }
       
