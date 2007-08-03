@@ -97,16 +97,20 @@ Date SrcPackageImpl::installtime() const
 // SRC PACKAGE
 ////////////////////////////////////////////////////////
 
+unsigned SrcPackageImpl::mediaNr() const
+{
+  return _repository->resolvableQuery().queryNumericAttribute( _id, cache::attrSrcPackageLocationMediaNr() );
+}
+
+ByteCount SrcPackageImpl::downloadSize() const
+{
+  return _repository->resolvableQuery().queryNumericAttribute( _id, cache::attrSrcPackageLocationDownloadSize() );
+}
+
 OnMediaLocation SrcPackageImpl::location() const
 {
-  OnMediaLocation loc( _repository->resolvableQuery().queryStringAttribute( _id, cache::attrSrcPackageLocationFilename() ),
-                       _repository->resolvableQuery().queryNumericAttribute( _id, cache::attrSrcPackageLocationMediaNr() ) );
-
-  string chktype = _repository->resolvableQuery().queryStringAttribute( _id, cache::attrSrcPackageLocationChecksumType() );
-  string chkvalue = _repository->resolvableQuery().queryStringAttribute( _id, cache::attrSrcPackageLocationChecksum() );
-  loc.setChecksum(CheckSum(chktype, chkvalue));
-  loc.setDownloadSize( _repository->resolvableQuery().queryNumericAttribute( _id, cache::attrSrcPackageLocationDownloadSize() ) );
-#warning FIX REMAINING LOCATION ATTRS
+  OnMediaLocation loc;
+  queryOnMediaLocation( _repository->resolvableQuery(), _id, cache::attrSrcPackageLocation, loc );
   return loc;
 }
 

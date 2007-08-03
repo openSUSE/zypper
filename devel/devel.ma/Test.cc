@@ -188,10 +188,7 @@ int main( int argc, char * argv[] )
 {
   INT << "===[START]==========================================" << endl;
 
-  DummyConsumer dummy;
-  RepoParser parser( data::RecordId(), dummy );
 
-  parser.parse( "REPO" );
 
   INT << "===[END]============================================" << endl << endl;
   return 0;

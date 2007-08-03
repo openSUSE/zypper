@@ -30,8 +30,20 @@ namespace cached
 
     SrcPackageImpl( const data::RecordId &id, repo::cached::RepoImpl::Ptr repository_r );
 
+   public:
+     /** Overloaded ResObjectImpl attribute.
+      * \return The \ref location media number.
+      */
+     virtual unsigned mediaNr() const;
+
+     /** Overloaded ResObjectImpl attribute.
+      * \return The \ref location downloadSize.
+      */
+     virtual ByteCount downloadSize() const;
+
+   public:
     virtual Repository repository() const;
-    
+
     virtual TranslatedText summary() const;
     virtual TranslatedText description() const;
     virtual TranslatedText insnotify() const;
@@ -42,7 +54,7 @@ namespace cached
     virtual bool installOnly() const;
     virtual Date buildtime() const;
     virtual Date installtime() const;
-    
+
     virtual OnMediaLocation location() const;
   private:
     repo::cached::RepoImpl::Ptr _repository;

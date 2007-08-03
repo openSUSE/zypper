@@ -75,7 +75,6 @@ namespace zypp
     inline const Attribute & attrPatternUserVisible()          { static Attribute a("Pattern","userVisible");          return a; }
     inline const Attribute & attrPatternUiIncludes()           { static Attribute a("Pattern","uiIncludes");           return a; }
     inline const Attribute & attrPatternUiExtends()            { static Attribute a("Pattern","uiExtends");            return a; }
-
     ///////////////////////////////////////////////////////////////////
     inline const Attribute & attrProductDistributionEdition()  { static Attribute a("Product","distributionEdition");  return a; }
     inline const Attribute & attrProductDistributionName()     { static Attribute a("Product","distributionName");     return a; }

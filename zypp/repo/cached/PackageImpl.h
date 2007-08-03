@@ -31,6 +31,18 @@ namespace cached
 
     PackageImpl( const data::RecordId &id, repo::cached::RepoImpl::Ptr repository_r );
 
+  public:
+      /** Overloaded ResObjectImpl attribute.
+       * \return The \ref location media number.
+       */
+      virtual unsigned mediaNr() const;
+
+      /** Overloaded ResObjectImpl attribute.
+       * \return The \ref location downloadSize.
+       */
+      virtual ByteCount downloadSize() const;
+
+  public:
     virtual TranslatedText summary() const;
     virtual TranslatedText description() const;
     virtual TranslatedText insnotify() const;

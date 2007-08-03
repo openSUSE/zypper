@@ -134,6 +134,16 @@ Changelog PackageImpl::changelog() const
   return Changelog();
 }
 
+unsigned PackageImpl::mediaNr() const
+{
+  return _repository->resolvableQuery().queryNumericAttribute( _id, cache::attrPackageLocationMediaNr() );
+}
+
+ByteCount PackageImpl::downloadSize() const
+{
+  return _repository->resolvableQuery().queryNumericAttribute( _id, cache::attrPackageLocationDownloadSize() );
+}
+
 OnMediaLocation PackageImpl::location() const
 {
   OnMediaLocation loc;
