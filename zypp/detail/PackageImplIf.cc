@@ -77,9 +77,6 @@ namespace zypp
       OnMediaLocation PackageImplIf::location() const
       { return OnMediaLocation(); }
 
-      DiskUsage PackageImplIf::diskusage() const
-      { return DiskUsage(); }
-
       std::list<std::string> PackageImplIf::authors() const
       { return std::list<std::string>(); }
 

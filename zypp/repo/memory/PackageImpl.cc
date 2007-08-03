@@ -40,7 +40,7 @@ PackageImpl::PackageImpl( repo::memory::RepoImpl::Ptr repo, data::Package_Ptr pt
     _size(ptr->installedSize),
     _install_only(false),
     _buildtime(ptr->buildTime),
-   
+
     _group(ptr->group),
     _keywords(),
     _authors(ptr->authors),
@@ -197,7 +197,7 @@ ByteCount PackageImpl::sourcesize() const
   return 0;
 }
 
-DiskUsage PackageImpl::diskusage() const
+const DiskUsage & PackageImpl::diskusage() const
 {
   return _diskusage;
 }

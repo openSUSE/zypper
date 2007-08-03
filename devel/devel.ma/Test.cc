@@ -20,6 +20,7 @@
 #include <zypp/Date.h>
 
 #include "zypp/cache/CacheStore.h"
+#include <zypp/DiskUsage.h>
 
 using namespace std;
 using namespace zypp;
@@ -36,6 +37,8 @@ int main( int argc, char * argv[] )
 {
   INT << "===[START]==========================================" << endl;
 
+  DiskUsage a;
+  MIL << a << endl;
 
 
   INT << "===[END]============================================" << endl << endl;

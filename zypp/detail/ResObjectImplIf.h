@@ -35,6 +35,7 @@ namespace zypp
 
   class Resolvable;
   class Repository;
+  class DiskUsage;
 
   ///////////////////////////////////////////////////////////////////
   namespace detail
@@ -91,7 +92,7 @@ namespace zypp
        *  is required.
       */
       virtual unsigned mediaNr() const PURE_VIRTUAL;
-      
+
       /** */
       virtual bool installOnly() const PURE_VIRTUAL;
 
@@ -100,7 +101,13 @@ namespace zypp
 
       /** Time of installation, or \c 0 */
       virtual Date installtime() const;
-      
+
+      /** Disk usage per directory
+       * A common attribute, although mostly packages require
+       * noticeable disk space. An e.g product could try to reserve
+       * a certain ammount of diskspace by providing DiskUsage data.
+       */
+      virtual const DiskUsage & diskusage() const;
       //@}
 
     public:

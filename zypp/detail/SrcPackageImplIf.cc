@@ -35,9 +35,6 @@ namespace zypp
     OnMediaLocation SrcPackageImplIf::location() const
     { return OnMediaLocation(); }
 
-    DiskUsage SrcPackageImplIf::diskusage() const
-    { return DiskUsage(); }
-
     /////////////////////////////////////////////////////////////////
   } // namespace detail
   ///////////////////////////////////////////////////////////////////

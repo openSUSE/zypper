@@ -114,7 +114,7 @@ namespace zypp
     /**
      * Media number where the resolvable is located
      * 0 if no media access is required.
-    */
+     */
     unsigned mediaNr() const;
 
     /**
@@ -132,6 +132,14 @@ namespace zypp
      * 0 if the resolvable is not installed.
      */
     Date installtime() const;
+
+    /**
+     * \short Disk usage per directory
+     * A common attribute, although mostly packages require
+     * noticeable disk space. An e.g product could try to reserve
+     * a certain ammount of diskspace by providing DiskUsage data.
+     */
+    const DiskUsage & diskusage() const;
 
   protected:
     /** Ctor */

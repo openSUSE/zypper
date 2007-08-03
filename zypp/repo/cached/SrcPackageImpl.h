@@ -51,6 +51,7 @@ namespace cached
     virtual TranslatedText licenseToConfirm() const;
     virtual Vendor vendor() const;
     virtual ByteCount size() const;
+    virtual const DiskUsage & diskusage() const;
     virtual bool installOnly() const;
     virtual Date buildtime() const;
     virtual Date installtime() const;
@@ -62,6 +63,7 @@ namespace cached
     data::RecordId              _id;
 
     mutable DefaultIntegral<unsigned,(unsigned)-1> _mnr;
+    mutable scoped_ptr<DiskUsage> _diskusage;
   };
   /////////////////////////////////////////////////////////////////
 } // ns cached

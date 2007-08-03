@@ -94,8 +94,6 @@ namespace zypp
       /** */
       virtual ByteCount sourcesize() const PURE_VIRTUAL;
       /** */
-      virtual DiskUsage diskusage() const PURE_VIRTUAL;
-      /** */
       virtual std::list<std::string> authors() const PURE_VIRTUAL;
       /** */
       virtual std::list<std::string> filenames() const PURE_VIRTUAL;

@@ -38,12 +38,9 @@ namespace zypp
     typedef TraitsType::constPtrType constPtr;
 
   public:
-    /** Disk usage per directory */
-    DiskUsage diskusage() const;
-    
     /** location of resolvable in repo */
     OnMediaLocation location() const;
-      
+
   protected:
     SrcPackage( const NVRAD & nvrad_r );
     /** Dtor */

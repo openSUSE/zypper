@@ -47,12 +47,12 @@ namespace zypp
         virtual bool installOnly() const;
         virtual Date buildtime() const;
         virtual Date installtime() const;
-        
-        virtual DiskUsage diskusage() const;
+
+        virtual const DiskUsage & diskusage() const;
         virtual OnMediaLocation location() const;
 private:
         repo::memory::RepoImpl::Ptr _repository;
-        
+
         //ResObject
         TranslatedText _summary;
         TranslatedText _description;
@@ -64,9 +64,9 @@ private:
         bool _install_only;
         Date _buildtime;
         Date _installtime;
-        
+
         OnMediaLocation _location;
-        DiskUsage _diskusage;      
+        DiskUsage _diskusage;
       };
       ///////////////////////////////////////////////////////////////////
       /////////////////////////////////////////////////////////////////

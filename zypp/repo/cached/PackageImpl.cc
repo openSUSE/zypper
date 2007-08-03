@@ -190,9 +190,15 @@ ByteCount PackageImpl::sourcesize() const
   return ByteCount();
 }
 
-DiskUsage PackageImpl::diskusage() const
+const DiskUsage & PackageImpl::diskusage() const
 {
-  return DiskUsage();
+  if ( ! _diskusage )
+  {
+    // lazy init
+    _diskusage.reset( new DiskUsage );
+#warning FILL DU DATA FROM DB
+  }
+  return *_diskusage;
 }
 
 list<string> PackageImpl::authors() const

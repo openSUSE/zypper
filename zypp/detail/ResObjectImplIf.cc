@@ -11,6 +11,7 @@
 */
 #include "zypp/detail/ResObjectImplIf.h"
 #include "zypp/Repository.h"
+#include "zypp/DiskUsage.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -53,16 +54,21 @@ namespace zypp
 
       Date ResObjectImplIf::installtime() const
       { return Date(); }
-      
+
       unsigned ResObjectImplIf::mediaNr() const
       { return 0; }
-      
+
       ByteCount ResObjectImplIf::size() const
       { return ByteCount(); }
 
       ByteCount ResObjectImplIf::downloadSize() const
       { return ByteCount(); }
-      
+
+      const DiskUsage & ResObjectImplIf::diskusage() const
+      {
+        static DiskUsage _du;
+        return _du;
+      }
     /////////////////////////////////////////////////////////////////
   } // namespace detail
   ///////////////////////////////////////////////////////////////////

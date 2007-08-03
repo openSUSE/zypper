@@ -36,7 +36,7 @@ namespace zypp
         virtual ~PackageImpl();
 
         virtual Repository repository() const;
-        
+
         virtual TranslatedText summary() const;
         virtual TranslatedText description() const;
         virtual TranslatedText insnotify() const;
@@ -47,7 +47,7 @@ namespace zypp
         virtual bool installOnly() const;
         virtual Date buildtime() const;
         virtual Date installtime() const;
-        
+
         virtual std::string buildhost() const;
         virtual std::string distribution() const;
         virtual Label license() const;
@@ -63,12 +63,12 @@ namespace zypp
         virtual Text preun() const;
         virtual Text postun() const;
         virtual ByteCount sourcesize() const;
-        virtual DiskUsage diskusage() const;
+        virtual const DiskUsage & diskusage() const;
         virtual std::list<std::string> authors() const;
         virtual std::list<std::string> filenames() const;
-        
+
         repo::memory::RepoImpl::Ptr _repository;
-        
+
         //ResObject
         TranslatedText _summary;
         TranslatedText _description;
@@ -80,8 +80,8 @@ namespace zypp
         bool _install_only;
         Date _buildtime;
         Date _installtime;
-        
-        
+
+
         PackageGroup _group;
         Keywords _keywords;
         std::list<std::string> _authors;

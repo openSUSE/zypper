@@ -95,6 +95,9 @@ namespace zypp
   Date ResObject::installtime() const
   { return pimpl().installtime(); }
 
+  const DiskUsage & ResObject::diskusage() const
+  { return pimpl().diskusage(); }
+
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////

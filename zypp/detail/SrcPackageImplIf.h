@@ -53,9 +53,6 @@ namespace zypp
     public:
       /** */
       virtual OnMediaLocation location() const PURE_VIRTUAL;
-      /** */
-      virtual DiskUsage diskusage() const PURE_VIRTUAL;
-
     };
     ///////////////////////////////////////////////////////////////////
 

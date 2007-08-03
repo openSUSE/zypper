@@ -75,9 +75,6 @@ namespace zypp
     /** */
     std::list<std::string> filenames() const;
 
-    /** Disk usage per directory */
-    DiskUsage diskusage() const;
-
     /** Name of the source rpm this package was built from.
      * Empty if unknown.
      */

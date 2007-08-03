@@ -111,6 +111,17 @@ ByteCount SrcPackageImpl::downloadSize() const
   return _repository->resolvableQuery().queryNumericAttribute( _id, cache::attrSrcPackageLocationDownloadSize() );
 }
 
+const DiskUsage & SrcPackageImpl::diskusage() const
+{
+  if ( ! _diskusage )
+  {
+    // lazy init
+    _diskusage.reset( new DiskUsage );
+#warning FILL DU DATA FROM DB
+  }
+  return *_diskusage;
+}
+
 OnMediaLocation SrcPackageImpl::location() const
 {
   OnMediaLocation loc;

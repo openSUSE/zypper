@@ -39,7 +39,7 @@ SrcPackageImpl::SrcPackageImpl( memory::RepoImpl::Ptr repo, data::SrcPackage_Ptr
     _size(ptr->installedSize),
     _install_only(false),
     _buildtime(ptr->buildTime),
-               
+
     _location(ptr->repositoryLocation)
 {}
 
@@ -105,8 +105,8 @@ Date SrcPackageImpl::installtime() const
   return _installtime;
 }
 
-    
-DiskUsage SrcPackageImpl::diskusage() const
+
+const DiskUsage & SrcPackageImpl::diskusage() const
 {
   return _diskusage;
 }

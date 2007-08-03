@@ -51,7 +51,6 @@ RPMPackageImpl::RPMPackageImpl(
     _changelog(data->tag_changelog()),
     _type("rpm"), // FIXME in the future
     _filenames(data->tag_filenames()),
-//	_disk_usage(data->diskusage),
     _size(data->tag_size())
 {
   // we know we are reading english.
@@ -200,7 +199,7 @@ std::string RPMPackageImpl::type() const
 }
 
 /** */
-DiskUsage RPMPackageImpl::diskUsage() const
+const DiskUsage & RPMPackageImpl::diskUsage() const
 {
   return _disk_usage;
 }

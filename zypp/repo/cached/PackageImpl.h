@@ -69,7 +69,7 @@ namespace cached
     virtual Text preun() const;
     virtual Text postun() const;
     virtual ByteCount sourcesize() const;
-    virtual DiskUsage diskusage() const;
+    virtual const DiskUsage & diskusage() const;
     virtual std::list<std::string> authors() const;
     virtual std::list<std::string> filenames() const;
     virtual OnMediaLocation location() const;
@@ -84,6 +84,7 @@ namespace cached
     data::RecordId _id;
 
     mutable DefaultIntegral<unsigned,(unsigned)-1> _mnr;
+    mutable scoped_ptr<DiskUsage> _diskusage;
   };
   /////////////////////////////////////////////////////////////////
 } // namespace cached
