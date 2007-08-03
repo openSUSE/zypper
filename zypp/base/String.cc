@@ -22,12 +22,7 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
   namespace str
   { /////////////////////////////////////////////////////////////////
-    template<>
-    std::string asString( const std::string &t )
-    {
-      return t;
-    }
-    
+
     /******************************************************************
      **
      **      FUNCTION NAME : form
@@ -136,13 +131,13 @@ namespace zypp
     {
       if ( ltrim_first )
         line = ltrim( line );
-    
+
       if ( line.empty() )
         return line;
-    
+
       std::string ret;
       std::string::size_type p = line.find_first_of( " \t" );
-    
+
       if ( p == std::string::npos ) {
         // no ws on line
         ret = line;
@@ -179,15 +174,15 @@ namespace zypp
         str.getline( tmpBuff, tmpBuffLen ); // always writes '\0' terminated
         ret += tmpBuff;
       } while( str.rdstate() == std::ios::failbit );
-    
+
       return trim( ret, trim_r );
     }
-    
+
     std::string getline( std::istream & str, const Trim trim_r )
     {
       return _getline(str, trim_r);
     }
-    
+
     std::string getline( std::istream & str, bool trim )
     {
       return _getline(str, trim?TRIM:NO_TRIM);
@@ -199,7 +194,7 @@ namespace zypp
       {
         str << "[match "<< k << "] [" << what[k] << "]" << std::endl;
       }
-      
+
       return str;
     }
     /////////////////////////////////////////////////////////////////

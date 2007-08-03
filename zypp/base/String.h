@@ -16,6 +16,8 @@
 #include <string>
 #include <boost/regex.hpp>
 
+#include "zypp/base/PtrTypes.h"
+
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
@@ -31,14 +33,21 @@ namespace zypp
      * Global asString() that works with std::string too
      */
     template<class _T>
-    std::string asString( const _T &t )
-    {
-      return t.asString();
-    }
+        inline std::string asString( const _T &t )
+        { return t.asString(); }
+
+    template<class _T>
+        inline std::string asString( const intrusive_ptr<_T> &p )
+        { return p->asString(); }
+
+    template<class _T>
+        inline std::string asString( const weak_ptr<_T> &p )
+        { return p->asString(); }
 
     template<>
-    std::string asString( const std::string &t );
-    
+        inline std::string asString( const std::string &t )
+        { return t; }
+
     ///////////////////////////////////////////////////////////////////
     /** Printf style construction of std::string. */
     std::string form( const char * format, ... )
