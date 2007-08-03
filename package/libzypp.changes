@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Aug  3 17:29:56 CEST 2007 - dmacvicar@suse.de
+
+- fix modalias rel column number
+- version 3.13.10
+
+-------------------------------------------------------------------
 Fri Aug  3 16:35:36 CEST 2007 - dmacvicar@suse.de
 
 - Implemented option repo.add.probe to allow probing
