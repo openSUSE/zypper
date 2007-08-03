@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Fri Aug  3 18:56:47 CEST 2007 - ma@suse.de
+
+- Add product attribute 'type' (aka 'category' which is now
+  deprecated). Adapted sustags and yum parsers to parse and
+  provide this value.
+- revision 6464
+- version 3.13.11
+
+-------------------------------------------------------------------
 Fri Aug  3 17:29:56 CEST 2007 - dmacvicar@suse.de
 
 - fix modalias rel column number
