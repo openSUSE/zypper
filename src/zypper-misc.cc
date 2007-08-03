@@ -704,8 +704,6 @@ bool xml_list_patches ()
         cout << "  <summary>" << xml_escape(patch->summary()) << "  </summary>" << endl;
         cout << "  <description>" << xml_escape(patch->description()) << "</description>" << endl;
         cout << "  <license>" << xml_escape(patch->licenseToConfirm()) << "</license>" << endl;
-        cout << "  <installnotify>" << xml_escape(patch->insnotify()) << "</installnotify>" << endl;
-  
 
         if ( patch->repository() != Repository::noRepository )
         {
