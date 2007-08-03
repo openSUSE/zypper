@@ -448,6 +448,7 @@ SET( zypp_parser_susetags_SRCS
   parser/susetags/ContentFileReader.cc
   parser/susetags/PackagesFileReader.cc
   parser/susetags/PackagesLangFileReader.cc
+  parser/susetags/PackagesDuFileReader.cc
   parser/susetags/PatternFileReader.cc
   parser/susetags/RepoParser.cc
 )
@@ -459,6 +460,7 @@ SET( zypp_parser_susetags_HEADERS
   parser/susetags/FileReaderBaseImpl.h
   parser/susetags/PackagesFileReader.h
   parser/susetags/PackagesLangFileReader.h
+  parser/susetags/PackagesDuFileReader.h
   parser/susetags/PatternFileReader.h
   parser/susetags/RepoParser.h
 )

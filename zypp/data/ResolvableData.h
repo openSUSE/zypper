@@ -32,6 +32,7 @@
 #include "zypp/Date.h"
 #include "zypp/TranslatedText.h"
 #include "zypp/OnMediaLocation.h"
+#include "zypp/DiskUsage.h"
 
 namespace zypp
 {
@@ -322,6 +323,7 @@ namespace data
       std::string postun;
 
       OnMediaLocation repositoryLocation;
+      DiskUsage       diskusage;
   };
 
   DEFINE_PTR_TYPE(Package);

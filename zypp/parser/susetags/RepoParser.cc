@@ -22,6 +22,7 @@
 #include "zypp/parser/susetags/ContentFileReader.h"
 #include "zypp/parser/susetags/PackagesFileReader.h"
 #include "zypp/parser/susetags/PackagesLangFileReader.h"
+#include "zypp/parser/susetags/PackagesDuFileReader.h"
 #include "zypp/parser/susetags/PatternFileReader.h"
 #include "zypp/parser/susetags/RepoIndex.h"
 #include "zypp/parser/ParseException.h"
@@ -142,6 +143,32 @@ namespace zypp
 	    if ( id != data::noRecordId )
 	    {
 	      _consumer.updatePackageLang( id, data_r );
+	    }
+	  }
+
+	  ///////////////////////////////////////////////////////////////////
+ 	  void consumePkgDu( const data::Package_Ptr & data_r )
+          {
+	    data::RecordId id = idMapGet( makeSharedIdent( ResTraits<Package>::kind,
+							   data_r->name,
+							   data_r->edition,
+							   data_r->arch ) );
+	    if ( id != data::noRecordId )
+	    {
+	      _consumer.consumeDiskUsage( id, data_r->diskusage );
+	    }
+	  }
+
+	  ///////////////////////////////////////////////////////////////////
+          void consumeSrcPkgDu( const data::SrcPackage_Ptr & data_r )
+          {
+	    data::RecordId id = idMapGet( makeSharedIdent( ResTraits<SrcPackage>::kind,
+							   data_r->name,
+							   data_r->edition,
+							   data_r->arch ) );
+	    if ( id != data::noRecordId )
+	    {
+	      _consumer.consumeDiskUsage( id, data_r->diskusage );
 	    }
 	  }
 
@@ -385,8 +412,8 @@ namespace zypp
           reader.setPkgConsumer( bind( &Impl::consumePkg, this, _1 ) );
           reader.setSrcPkgConsumer( bind( &Impl::consumeSrcPkg, this, _1 ) );
 
-          CombinedProgressData packageprogress( _ticks, PathInfo(inputfile).size() );
-          reader.parse( inputfile, packageprogress );
+          CombinedProgressData progress( _ticks, PathInfo(inputfile).size() );
+          reader.parse( inputfile, progress );
         }
 
         // Now process packages.lang. Always parse 'en'.
@@ -397,6 +424,17 @@ namespace zypp
 	// For each wanted locale at least
 	// some fallback, if locale is not present.
 	parseLocaleIf( ZConfig::instance().textLocale() );
+
+        // Now process packages.DU.
+        {
+          Pathname inputfile( getOptionalFile( _descrdir / "packages.DU" ) );
+          PackagesDuFileReader reader;
+          reader.setPkgConsumer( bind( &Impl::consumePkgDu, this, _1 ) );
+          reader.setSrcPkgConsumer( bind( &Impl::consumeSrcPkgDu, this, _1 ) );
+
+          CombinedProgressData progress( _ticks, PathInfo(inputfile).size() );
+          reader.parse( inputfile, progress );
+        }
 
         // Now process the rest of RepoIndex
 	for ( RepoIndex::FileChecksumMap::const_iterator it = _repoIndex->metaFileChecksums.begin();
@@ -409,8 +447,8 @@ namespace zypp
 	    {
 	      PatternFileReader reader;
 	      reader.setConsumer( bind( &Impl::consumePat, this, _1 ) );
-              CombinedProgressData patternprogress( _ticks, PathInfo(inputfile).size()  );
-	      reader.parse( inputfile, patternprogress );
+              CombinedProgressData progress( _ticks, PathInfo(inputfile).size()  );
+	      reader.parse( inputfile, progress );
 	    }
           }
         }
