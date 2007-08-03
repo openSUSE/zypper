@@ -323,6 +323,17 @@ int add_repo(const RepoInfo & repo)
     ERR << "Repository named '%s' already exists." << endl;
     return ZYPPER_EXIT_ERR_ZYPP;
   }
+  catch (const RepoUnknownTypeException & e)
+  {
+    cerr << format(_("Can't find a valid repository at given location")) << endl;
+    ERR << "Problem parsing repository data." << endl;
+    return ZYPPER_EXIT_ERR_ZYPP;
+  }
+  catch (const RepoException & e)
+  {
+    cerr << e.msg() << endl;
+    return ZYPPER_EXIT_ERR_ZYPP;
+  }
   catch (const Exception & e)
   {
     ZYPP_CAUGHT(e);
@@ -346,52 +357,12 @@ int add_repo_by_url( const zypp::Url & url, const string & alias,
                      const string & type, bool enabled, bool refresh )
 {
   RepoManager manager;
-
-  // determine repository type
-  RepoType repotype_probed = manager.probe(url);
-  RepoType repotype = RepoType::RPMMD;
-  if (type.empty())
-    repotype = repotype_probed;
-  else
-  {
-    try
-    {
-      repotype = RepoType(type);
-
-      if (repotype == repotype_probed)
-      {
-        cout_v << _("Zypper happy! Detected repository type matches the one"
-                     " specified in the --type option.");
-      }
-      else
-      {
-        cerr << format(_(
-            "Warning! Overriding detected repository type '%s' with "
-            "manually specified '%s'.")) % repotype_probed % repotype
-            << endl;
-        WAR << format(
-            "Overriding detected repository type '%s' with "
-            "manually specified '%s'.") % repotype_probed % repotype
-            << endl;
-      }
-    }
-    catch (RepoUnknownTypeException & e)
-    {
-      string message = _(
-        "Unknown repository type '%s'."
-        " Using detected type '%s' instead.");
-      cerr << format(message) % type % repotype_probed << endl;
-
-      WAR << format("Unknown repository type '%s'."
-        " Using detected type '%s' instead.") % type % repotype_probed << endl;
-
-      repotype = repotype_probed;
-    }
-  }
-
   RepoInfo repo;
+  
+  if ( ! type.empty() )
+    repo.setType(RepoType(type));
+  
   repo.setAlias(alias.empty() ? timestamp() : alias);
-  repo.setType(repotype);
   repo.addBaseUrl(url);
   repo.setEnabled(enabled);
   repo.setAutorefresh(refresh);
