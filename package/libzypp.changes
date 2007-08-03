@@ -1,9 +1,9 @@
 -------------------------------------------------------------------
-Fri Aug  3 13:35:32 CEST 2007 - dmacvicar@suse.de
+Fri Aug  3 13:38:17 CEST 2007 - ma@suse.de
 
-- support for filesystem and split caps in cache
-- add missing attributes to yum repos
-  (feature #302484)
+- Fixed pattern includes and extends attributes.
+- revision 6431
+- version 3.13.8
 
 -------------------------------------------------------------------
 Fri Aug  3 12:33:41 CEST 2007 - schubi@suse.de
@@ -11,7 +11,7 @@ Fri Aug  3 12:33:41 CEST 2007 - schubi@suse.de
 - API for retrieving additional dependencies" solver/detail/Resolver.h
 - Handle additional dependencies in the testcases
 - Handle system and language dependencies in the testcases correctly.
-- r 6418  
+- r 6418
 
 -------------------------------------------------------------------
 Thu Aug  2 18:14:12 CEST 2007 - ma@suse.de
@@ -27,12 +27,6 @@ Thu Aug  2 16:37:06 CEST 2007 - ma@suse.de
 - Indicate changed pool content to the resolver. (required for #271912)
 - revision 6398
 - version 3.13.7
-
--------------------------------------------------------------------
-Thu Aug  2 15:45:02 CEST 2007 - dmacvicar@suse.de
-
-- add pkgname to modalias capabilities
-  (#295473)
 
 -------------------------------------------------------------------
 Thu Aug  2 10:16:16 CEST 2007 - schubi@suse.de
