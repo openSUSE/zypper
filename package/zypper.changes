@@ -1,5 +1,11 @@
 -------------------------------------------------------------------
-Fri Aug  3 10:22:06 CEST 2007 - tester@suse.de
+Fri Aug  3 10:57:36 CEST 2007 - tgoettlicher@suse.de
+
+- renamed resolvabletype to kind in xml output
+- r6413 
+
+-------------------------------------------------------------------
+Fri Aug  3 10:22:06 CEST 2007 - tgoettlicher@suse.de
 
 - added xml output for some messages
 - 6411
