@@ -10,6 +10,7 @@
 #include "zypp/base/Logger.h"
 #include "zypp/parser/xml/Reader.h"
 #include "zypp/data/ResolvableData.h"
+#include "zypp/ZConfig.h"
 
 #include "zypp/parser/yum/FileReaderBaseImpl.h"
 #include "zypp/parser/yum/ProductFileReader.h"
@@ -153,6 +154,90 @@ namespace zypp
       {
         Locale locale(reader_r->getAttribute("lang").asString());
         _product->description.setText(reader_r.nodeText().asString(), locale);
+        return true;
+      }
+      
+      // xpath: /products/product/distribution-name (+)
+      if (reader_r->name() == "distribution-name")
+      {
+        _product->distributionName = reader_r.nodeText().asString();
+        return true;
+      }
+      
+      // xpath: /products/product/distribution-edition (+)
+      if (reader_r->name() == "distribution-edition")
+      {
+        _product->distributionEdition = reader_r.nodeText().asString();
+        return true;
+      }
+      
+      // xpath: /products/product/release-notes-url (+)
+      if (reader_r->name() == "release-notes-url")
+      {
+        string value = reader_r.nodeText().asString();
+        
+        for( std::string::size_type pos = value.find("%a");
+            pos != std::string::npos;
+            pos = value.find("%a") )
+        {
+          value.replace( pos, 2, ZConfig::instance().systemArchitecture().asString() );
+        }
+        try
+        {
+          _product->releasenotesUrl = value;
+        }
+        catch( const Exception & excpt_r )
+        {
+          WAR << "Malformed url ignored: '" << value << "' " << excpt_r.asString() << endl;
+        }
+        return true;
+      }
+
+      // xpath: /products/product/update-url (*)
+      if (reader_r->name() == "update-url")
+      {
+        string value = reader_r.nodeText().asString();
+        
+        try
+        {
+          _product->updateUrls.push_back(Url(value));
+        }
+        catch( const Exception & excpt_r )
+        {
+          WAR << "Malformed url ignored: '" << value << "' " << excpt_r.asString() << endl;
+        }
+        return true;
+      }
+    
+      // xpath: /products/product/extra-url (*)
+      if (reader_r->name() == "extra-url")
+      {
+        string value = reader_r.nodeText().asString();
+        
+        try
+        {
+          _product->extraUrls.push_back(Url(value));
+        }
+        catch( const Exception & excpt_r )
+        {
+          WAR << "Malformed url ignored: '" << value << "' " << excpt_r.asString() << endl;
+        }
+        return true;
+      }
+          
+      // xpath: /products/product/optional-url (*)
+      if (reader_r->name() == "optional-url")
+      {
+        string value = reader_r.nodeText().asString();
+        
+        try
+        {
+          _product->optionalUrls.push_back(Url(value));
+        }
+        catch( const Exception & excpt_r )
+        {
+          WAR << "Malformed url ignored: '" << value << "' " << excpt_r.asString() << endl;
+        }
         return true;
       }
     }

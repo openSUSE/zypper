@@ -17,7 +17,13 @@ products = element ns1:products {
     },
     element ns1:displayname { localized-string }+,
     element ns1:shortname { localized-string }*,
+    element ns1:distribution-name { text },
+    element ns1:distribution-edition { text },
     element ns1:description { localized-string }+,
+    element ns1:release-notes-url { text }?,
+    element ns1:update-url { text }*,
+    element ns1:optional-url { text }*,
+    element ns1:extra-url { text }*,
     dependencies
   }+
 }
