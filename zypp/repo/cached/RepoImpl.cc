@@ -422,7 +422,7 @@ void RepoImpl::read_capabilities( sqlite3_connection &con,
       _ticks.tick();
       Resolvable::Kind refer = _type_cache.kindFor(reader.getint(0));
 
-      Rel rel = _type_cache.relationFor(reader.getint(3));
+      Rel rel = _type_cache.relationFor(reader.getint(4));
       capability::ModaliasCap *mcap = new capability::ModaliasCap( refer, reader.getstring(1), rel, reader.getstring(3) );
       mcap->setPkgname(reader.getstring(2));
       zypp::Dep deptype = _type_cache.deptypeFor(reader.getint(5));
