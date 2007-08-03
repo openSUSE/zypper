@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri Aug  3 13:35:32 CEST 2007 - dmacvicar@suse.de
+
+- support for filesystem and split caps in cache
+- add missing attributes to yum repos
+  (feature #302484)
+
+-------------------------------------------------------------------
 Fri Aug  3 12:33:41 CEST 2007 - schubi@suse.de
 
 - API for retrieving additional dependencies" solver/detail/Resolver.h
