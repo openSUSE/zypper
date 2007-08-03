@@ -1,7 +1,14 @@
 -------------------------------------------------------------------
+Fri Aug  3 15:02:28 CEST 2007 - ma@suse.de
+
+- Speed up retrieving MediaNr attribute, as it slows down install
+  order calculation. (#297173)
+- revision 6442
+
+-------------------------------------------------------------------
 Fri Aug  3 14:13:36 CEST 2007 - dmacvicar@suse.de
 
-- Fixed cache schema upgrade 
+- Fixed cache schema upgrade
 
 -------------------------------------------------------------------
 Fri Aug  3 13:38:17 CEST 2007 - ma@suse.de
