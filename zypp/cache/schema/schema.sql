@@ -240,14 +240,14 @@ CREATE TABLE file_capabilities (
 );
 CREATE INDEX file_capabilities_resolvable ON file_capabilities(resolvable_id);
 
-CREATE TABLE other_capabilities (
+CREATE TABLE filesystem_capabilities (
    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL
   , resolvable_id INTEGER REFERENCES resolvables(id)
   , dependency_type INTEGER
   , refers_kind INTEGER
-  , value TEXT
+  , name_id INTEGER REFERENCES names(id)
 );
-CREATE INDEX other_capabilities_resolvable ON other_capabilities(resolvable_id);
+CREATE INDEX filesystem_capabilities_resolvable ON filesystem_capabilities(resolvable_id);
 
 CREATE TABLE split_capabilities (
    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL
@@ -258,6 +258,15 @@ CREATE TABLE split_capabilities (
   , file_id INTEGER REFERENCES files(id)
 );
 CREATE INDEX split_capabilities_resolvable ON split_capabilities(resolvable_id);
+
+CREATE TABLE other_capabilities (
+   id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL
+  , resolvable_id INTEGER REFERENCES resolvables(id)
+  , dependency_type INTEGER
+  , refers_kind INTEGER
+  , value TEXT
+);
+CREATE INDEX other_capabilities_resolvable ON other_capabilities(resolvable_id);
 
 ------------------------------------------------
 -- File list

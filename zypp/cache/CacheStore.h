@@ -377,6 +377,44 @@ namespace zypp
                                       capability::HalCap::Ptr cap );
 
       /**
+       * Adds a Filesystem dependency to the store.
+       *
+       * A \ref FilesystemCap::Ptr \a cap to be specified. Among
+       * which type of dependency \ref zypp::Dep it is as
+       * the \a deptype argument.
+       *
+       * \a resolvable_id is the resolvable Id in the CacheStore
+       * that will own the capability
+       *
+       * You can create the filesystem capability using either
+       * \ref capability::parse or \ref capability::buildFilesystem
+       *
+       * FIXME should it \throw if the resolvable does not exist?
+       */
+      void appendFilesystemDependency( const data::RecordId &resolvable_id,
+                                       zypp::Dep deptype,
+                                       capability::FilesystemCap::Ptr cap );
+      
+      /**
+       * Adds a split dependency to the store.
+       *
+       * A \ref SplitCap::Ptr \a cap to be specified. Among
+       * which type of dependency \ref zypp::Dep it is as
+       * the \a deptype argument.
+       *
+       * \a resolvable_id is the resolvable Id in the CacheStore
+       * that will own the capability
+       *
+       * You can create the filesystem capability using either
+       * \ref capability::parse or \ref capability::buildSplit
+       *
+       * FIXME should it \throw if the resolvable does not exist?
+       */
+      void appendSplitDependency( const data::RecordId &resolvable_id,
+                                  zypp::Dep deptype,
+                                  capability::SplitCap::Ptr cap );
+      
+      /**
        * Adds a unknown dependency to the store.
        *
        * A \ref Capability::Ptr \a cap to be specified. Among
