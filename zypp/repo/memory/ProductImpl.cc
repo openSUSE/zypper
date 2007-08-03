@@ -100,9 +100,9 @@ Date ProductImpl::installtime() const
 
 ///////////////////////////////////////////
 
-std::string ProductImpl::category() const
+std::string ProductImpl::type() const
 {
-  return _category;
+  return _type;
 }
 
 Url ProductImpl::releaseNotesUrl() const

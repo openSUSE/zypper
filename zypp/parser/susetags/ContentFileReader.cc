@@ -372,6 +372,10 @@ namespace zypp
 	  {
 	    _pimpl->product().shortName.setText( value, Locale(modifier) );
 	  }
+	  else if ( key == "TYPE" )
+	  {
+	    _pimpl->product().type = value;
+	  }
 	  else if ( key == "RELNOTESURL" )
 	  {
 	    for( std::string::size_type pos = value.find("%a");

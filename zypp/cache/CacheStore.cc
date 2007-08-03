@@ -63,7 +63,7 @@ struct CacheStore::Impl
         MIL << "database " << (dbdir + "zypp.db") << " was just created" << endl;
       }
     }
-    
+
     try
     {
       con.open( (dbdir + "zypp.db").asString().c_str());
@@ -111,9 +111,9 @@ struct CacheStore::Impl
     append_hal_dependency_cmd.reset( new sqlite3_command( con, "insert into hal_capabilities ( resolvable_id, dependency_type, refers_kind, name, value, relation ) values ( :resolvable_id, :dependency_type, :refers_kind, :name, :value, :relation );" ));
 
     append_filesystem_dependency_cmd.reset( new sqlite3_command( con, "insert into filesystem_capabilities ( resolvable_id, dependency_type, refers_kind, name_id ) values ( :resolvable_id, :dependency_type, :refers_kind, :name_id );" ));
-    
+
     append_split_dependency_cmd.reset( new sqlite3_command( con, "insert into split_capabilities ( resolvable_id, dependency_type, refers_kind, name_id, file_id ) values ( :resolvable_id, :dependency_type, :refers_kind, :name_id, :file_id );" ));
-    
+
     append_other_dependency_cmd.reset( new sqlite3_command( con, "insert into other_capabilities ( resolvable_id, dependency_type, refers_kind, value ) values ( :resolvable_id, :dependency_type, :refers_kind, :value );" ));
 
     append_resolvable_cmd.reset( new sqlite3_command( con, "insert into resolvables ( name, version, release, epoch, arch, kind, shared_id, repository_id ) values ( :name, :version, :release, :epoch, :arch, :kind, :shared_id, :repository_id );" ));
@@ -420,6 +420,7 @@ RecordId CacheStore::consumeProduct( const data::RecordId & repository_id,
       NVRA( product->name, product->edition, product->arch ), product->deps );
   appendResObjectAttributes( id, product );
 
+  appendStringAttribute( id, attrProductType(), product->type );
   appendTranslatedStringAttribute( id, attrProductShortName(), product->shortName );
   appendTranslatedStringAttribute( id, attrProductLongName(), product->longName );
   appendStringContainerAttribute( id, attrProductFlags(), product->flags.begin(), product->flags.end() );
@@ -703,7 +704,7 @@ void CacheStore::appendSplitDependency( const data::RecordId &resolvable_id,
   //RecordId capability_id = appendDependencyEntry( resolvable_id, deptype, cap->refers() );
   RecordId name_id = lookupOrAppendName(cap->name());
   RecordId file_id = lookupOrAppendFile(cap->path());
-   
+
   _pimpl->append_split_dependency_cmd->bind( ":resolvable_id", resolvable_id );
   _pimpl->append_split_dependency_cmd->bind( ":dependency_type", lookupOrAppendType("deptype", deptype.asString()) );
   _pimpl->append_split_dependency_cmd->bind( ":refers_kind", lookupOrAppendType("kind", cap->refers().asString()) );

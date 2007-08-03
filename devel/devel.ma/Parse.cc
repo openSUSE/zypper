@@ -48,8 +48,18 @@ struct Xprint
 {
   bool operator()( const PoolItem & obj_r )
   {
-    handle( asKind<Pattern>( obj_r ) );
+    //handle( asKind<Package>( obj_r ) );
+    //handle( asKind<Pattern>( obj_r ) );
+    handle( asKind<Product>( obj_r ) );
     return true;
+  }
+
+  void handle( const Package_constPtr & p )
+  {
+    if ( !p )
+      return;
+
+    MIL << p->mediaNr() << endl;
   }
 
   void handle( const Pattern_constPtr & p )
@@ -58,8 +68,15 @@ struct Xprint
       return;
 
     MIL << p << endl;
-    if ( ! p->includes().empty() ) DBG << p->includes() << endl;
-    if ( ! p->extends().empty() ) DBG << p->extends() << endl;
+  }
+
+  void handle( const Product_constPtr & p )
+  {
+    if ( !p )
+      return;
+
+    ERR << p << endl;
+    ERR << p->type() << endl;
   }
 
   template<class _C>
@@ -308,8 +325,8 @@ int main( int argc, char * argv[] )
 	SEC << "cleanCache" << endl;
 	repoManager.cleanCache( nrepo );
       }
-      SEC << "refreshMetadat" << endl;
-      repoManager.refreshMetadata( nrepo );
+      //SEC << "refreshMetadat" << endl;
+      //repoManager.refreshMetadata( nrepo );
       SEC << "buildCache" << endl;
       repoManager.buildCache( nrepo );
     }
@@ -334,6 +351,15 @@ int main( int argc, char * argv[] )
     }
     MIL << "Added target: " << pool << endl;
   }
+
+  Capability _cap( CapFactory().parse<Language>( "de" ) );
+  SEC << "F" << endl;
+  forEachMatchIn( pool, Dep::FRESHENS, _cap, Print() );
+  SEC << "S" << endl;
+  forEachMatchIn( pool, Dep::SUPPLEMENTS, _cap, Print() );
+  SEC << "P" << endl;
+  forEachMatchIn( pool, Dep::PROVIDES, _cap, Print() );
+  SEC << endl;
 
   std::for_each( pool.begin(), pool.end(), Xprint() );
 

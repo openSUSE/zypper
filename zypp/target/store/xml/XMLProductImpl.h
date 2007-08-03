@@ -48,8 +48,6 @@ namespace zypp
       { return _size; }
       virtual ByteCount downloadSize() const
       { return _downloadSize; }
-      virtual unsigned sourceMediaNr() const
-      { return 0; }
       virtual bool installOnly() const
       { return _install_only; }
       virtual Date buildtime() const
@@ -57,25 +55,25 @@ namespace zypp
       virtual Date installtime() const
       { return _install_time; }
 
-      virtual std::string category() const;
+      virtual std::string type() const;
       virtual TranslatedText shortName() const;
       virtual Url releaseNotesUrl() const;
-      
+
       virtual std::list<Url> updateUrls() const;
       virtual std::list<Url> extraUrls() const;
       virtual std::list<Url> optionalUrls() const;
-      
+
       virtual std::list<std::string> flags() const;
       virtual std::string distributionName() const;
       virtual Edition distributionEdition() const;
 
-      std::string _category;
+      std::string _type;
       Url _release_notes_url;
-      
+
       std::list<Url> _update_urls;
       std::list<Url> _extra_urls;
       std::list<Url> _optional_urls;
-      
+
       std::list<std::string> _flags;
 
       TranslatedText _summary;

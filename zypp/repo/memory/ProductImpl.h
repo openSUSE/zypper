@@ -51,7 +51,7 @@ namespace zypp
         virtual Date buildtime() const;
         virtual Date installtime() const;
 
-        virtual std::string category() const;
+        virtual std::string type() const;
         virtual Url releaseNotesUrl() const;
         virtual std::list<Url> updateUrls() const;
         virtual std::list<Url> extraUrls() const;
@@ -75,7 +75,7 @@ namespace zypp
         Date _buildtime;
         Date _installtime;
 
-        std::string _category;
+        std::string _type;
         std::string _dist_name;
         Edition     _dist_version;
         std::string _base_product;
@@ -83,11 +83,11 @@ namespace zypp
         std::string _you_type;
         std::string _shortlabel;
         Url _release_notes_url;
-        
+
         std::list<Url> _update_urls;
         std::list<Url> _extra_urls;
         std::list<Url> _optional_urls;
-        
+
         std::string _default_base;
         std::list<std::string> _flags;
       };

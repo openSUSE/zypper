@@ -44,8 +44,8 @@ namespace zypp
   //
   ///////////////////////////////////////////////////////////////////
 
-  std::string Product::category() const
-  { return pimpl().category(); }
+  std::string Product::type() const
+  { return pimpl().type(); }
 
   Label Product::vendor() const
   { return pimpl().vendor(); }
@@ -55,10 +55,10 @@ namespace zypp
 
   std::list<Url> Product::updateUrls() const
   { return pimpl().updateUrls(); }
-  
+
   std::list<Url> Product::extraUrls() const
   { return pimpl().extraUrls(); }
-  
+
   std::list<Url> Product::optionalUrls() const
   { return pimpl().optionalUrls(); }
 

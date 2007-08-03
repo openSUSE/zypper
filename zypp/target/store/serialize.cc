@@ -333,7 +333,7 @@ string toXML( const Product::constPtr &obj )
 {
   stringstream out;
   out << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" << endl;
-  out << "<product version=\"" << SERIALIZER_VERSION << "\" xmlns=\"http://www.novell.com/metadata/zypp/xml-store\" type=\"" << xml_escape(obj->category()) << "\">" << endl;
+  out << "<product version=\"" << SERIALIZER_VERSION << "\" xmlns=\"http://www.novell.com/metadata/zypp/xml-store\" type=\"" << xml_escape(obj->type()) << "\">" << endl;
   out << toXML(static_cast<Resolvable::constPtr>(obj)) << endl;
   #warning "FIXME description and displayname of products"
 

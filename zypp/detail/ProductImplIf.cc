@@ -20,8 +20,7 @@ namespace zypp
   namespace detail
   { /////////////////////////////////////////////////////////////////
 
-      /** Get the category of the product - addon or base*/
-      std::string ProductImplIf::category() const
+      std::string ProductImplIf::type() const
       { return std::string(); }
 
       Url ProductImplIf::releaseNotesUrl() const
@@ -29,10 +28,10 @@ namespace zypp
 
       std::list<Url> ProductImplIf::updateUrls() const
       { return std::list<Url>(); }
-      
+
       std::list<Url>  ProductImplIf::extraUrls() const
       { return std::list<Url>(); }
-      
+
       std::list<Url>  ProductImplIf::optionalUrls() const
       { return std::list<Url>(); }
 

@@ -40,8 +40,11 @@ namespace zypp
     typedef TraitsType::constPtrType constPtr;
 
   public:
-    /** Get the product categoty (base, add-on) */
-    std::string category() const;
+    /** Get the product type (base, add-on) */
+    std::string type() const;
+    /** \deprecated Use \ref type. */
+    std::string category() const ZYPP_DEPRECATED
+    { return type(); }
 
     /** Get the vendor of the product */
     Label vendor() const;
@@ -49,25 +52,25 @@ namespace zypp
     /** The URL to download the release notes for this product */
     Url releaseNotesUrl() const;
 
-    /** 
+    /**
      * Online updates for the product.
-     * They are complementary, not alternatives. #163192 
+     * They are complementary, not alternatives. #163192
      */
     std::list<Url> updateUrls() const;
 
-    /** 
+    /**
      * Additional software for the product
      * They are complementary, not alternatives.
      */
     std::list<Url> extraUrls() const;
-    
-    /** 
+
+    /**
      * Optional software for the product
      * (for example. Non OSS repositories)
      * They are complementary, not alternatives.
      */
     std::list<Url> optionalUrls() const;
-    
+
     /** The product flags */
     std::list<std::string> flags() const;
 

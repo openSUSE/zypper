@@ -41,8 +41,8 @@ namespace zypp
 
     /**
      * Callback provided to the XML reader.
-     * 
-     * \param  the xml reader object reading the file  
+     *
+     * \param  the xml reader object reading the file
      * \return true to tell the reader to continue, false to tell it to stop
      *
      * \see PrimaryFileReader::consumeNode(xml::Reader)
@@ -86,10 +86,10 @@ namespace zypp
   /*
    * xpath and multiplicity of processed nodes are included in the code
    * for convenience:
-   * 
+   *
    * // xpath: <xpath> (?|*|+)
-   * 
-   * if multiplicity is ommited, then the node has multiplicity 'one'. 
+   *
+   * if multiplicity is ommited, then the node has multiplicity 'one'.
    */
 
   // --------------------------------------------------------------------------
@@ -114,8 +114,8 @@ namespace zypp
       if (reader_r->name() == "name")
       {
         _product->name = reader_r.nodeText().asString();
-        // TODO what's this?
-        // _product->? = reader_r->getAttribute("type").asString();
+        // product type (base, add-on)
+        _product->type = reader_r->getAttribute("type").asString();
         return true;
       }
 
@@ -156,26 +156,26 @@ namespace zypp
         _product->description.setText(reader_r.nodeText().asString(), locale);
         return true;
       }
-      
+
       // xpath: /products/product/distribution-name (+)
       if (reader_r->name() == "distribution-name")
       {
         _product->distributionName = reader_r.nodeText().asString();
         return true;
       }
-      
+
       // xpath: /products/product/distribution-edition (+)
       if (reader_r->name() == "distribution-edition")
       {
         _product->distributionEdition = reader_r.nodeText().asString();
         return true;
       }
-      
+
       // xpath: /products/product/release-notes-url (+)
       if (reader_r->name() == "release-notes-url")
       {
         string value = reader_r.nodeText().asString();
-        
+
         for( std::string::size_type pos = value.find("%a");
             pos != std::string::npos;
             pos = value.find("%a") )
@@ -197,7 +197,7 @@ namespace zypp
       if (reader_r->name() == "update-url")
       {
         string value = reader_r.nodeText().asString();
-        
+
         try
         {
           _product->updateUrls.push_back(Url(value));
@@ -208,12 +208,12 @@ namespace zypp
         }
         return true;
       }
-    
+
       // xpath: /products/product/extra-url (*)
       if (reader_r->name() == "extra-url")
       {
         string value = reader_r.nodeText().asString();
-        
+
         try
         {
           _product->extraUrls.push_back(Url(value));
@@ -224,12 +224,12 @@ namespace zypp
         }
         return true;
       }
-          
+
       // xpath: /products/product/optional-url (*)
       if (reader_r->name() == "optional-url")
       {
         string value = reader_r.nodeText().asString();
-        
+
         try
         {
           _product->optionalUrls.push_back(Url(value));

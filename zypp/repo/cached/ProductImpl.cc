@@ -100,18 +100,14 @@ Date ProductImpl::installtime() const
 // PRODUCT
 /////////////////////////////////////////
 
-std::string ProductImpl::category() const
+std::string ProductImpl::type() const
 {
-#warning DUBIOUS ATTRIBUTE
-  return "";
-  //return _repository->resolvableQuery().queryStringAttribute( _id, cache::attrProductCategory() );
+  return _repository->resolvableQuery().queryStringAttribute( _id, cache::attrProductType() );
 }
 
 Url ProductImpl::releaseNotesUrl() const
 {
-#warning DUBIOUS ATTRIBUTE
-  return Url();
-  //return _repository->resolvableQuery().queryStringAttribute( _id, cache::attrProductReleaseNotesUrl() );
+  return _repository->resolvableQuery().queryStringAttribute( _id, cache::attrProductReleasenotesUrl() );
 }
 
 std::list<Url> ProductImpl::updateUrls() const

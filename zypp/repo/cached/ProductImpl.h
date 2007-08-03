@@ -30,7 +30,7 @@ namespace cached
   public:
 
     ProductImpl( const data::RecordId &id, repo::cached::RepoImpl::Ptr repository_r );
-    
+
     virtual TranslatedText summary() const;
     virtual TranslatedText description() const;
     virtual TranslatedText insnotify() const;
@@ -41,9 +41,9 @@ namespace cached
     virtual bool installOnly() const;
     virtual Date buildtime() const;
     virtual Date installtime() const;
-        
+
     // PRODUCT
-    virtual std::string category() const;
+    virtual std::string type() const;
     virtual Url releaseNotesUrl() const;
     virtual std::list<Url> updateUrls() const;
     virtual std::list<Url> extraUrls() const ;
@@ -51,9 +51,9 @@ namespace cached
     virtual std::list<std::string> flags() const;
     virtual TranslatedText shortName() const;
     virtual std::string distributionName() const;
-    virtual Edition distributionEdition() const;   
+    virtual Edition distributionEdition() const;
     virtual Repository repository() const;
-    
+
   private:
     repo::cached::RepoImpl::Ptr _repository;
     data::RecordId _id;

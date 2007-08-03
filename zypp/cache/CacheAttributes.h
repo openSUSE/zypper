@@ -84,6 +84,7 @@ namespace zypp
     inline const Attribute & attrProductOptionalUrls()         { static Attribute a("Product","optionalUrls");         return a; }
     inline const Attribute & attrProductReleasenotesUrl()      { static Attribute a("Product","releasenotesUrl");      return a; }
     inline const Attribute & attrProductShortName()            { static Attribute a("Product","shortName");            return a; }
+    inline const Attribute & attrProductType()                 { static Attribute a("Product","type");                 return a; }
     inline const Attribute & attrProductUpdateUrls()           { static Attribute a("Product","updateUrls");           return a; }
     ///////////////////////////////////////////////////////////////////
     inline const Attribute & attrResObjectBuildTime()          { static Attribute a("ResObject","buildTime");                              return a; }

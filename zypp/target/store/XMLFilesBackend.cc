@@ -1032,7 +1032,7 @@ XMLFilesBackend::createProduct( const zypp::parser::xmlstore::XMLProductData & p
     impl->_build_time = parsed.build_time;
     impl->_install_time = parsed.install_time;
 
-    impl->_category = parsed.type;
+    impl->_type = parsed.type;
     impl->_short_name = parsed.short_name;
     impl->_dist_name = parsed.dist_name;
     impl->_dist_version = parsed.dist_version;

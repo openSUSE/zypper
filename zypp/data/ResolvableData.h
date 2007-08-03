@@ -242,6 +242,9 @@ namespace data
       Product()
       {};
 
+      /** The product type (base, add-on) */
+      std::string type;
+
       /** Abbreviation like \c SLES10 */
       TranslatedText shortName;
       /** More verbose Name like <tt>Suse Linux Enterprise Server 10</tt>*/
