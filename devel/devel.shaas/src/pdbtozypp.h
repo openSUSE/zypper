@@ -6,13 +6,14 @@
 #include <zypp/ZYppFactory.h>
 #include <zypp/ResStore.h>
 #include <zypp/Package.h>
-#include <zypp/Source.h>
+//#include <zypp/Source.h>
 #include <zypp/CapFactory.h>
 
 class PdbToZypp{
-	private:
-		zypp::ResStore store;
 	public:
+      typedef zypp::ResStore ResStore;
 		PdbToZypp();
-		zypp::ResStore getStore();
+		ResStore& getStore();
+   private:
+      ResStore *store;
 };

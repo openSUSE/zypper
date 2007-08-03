@@ -6,6 +6,8 @@ using namespace zypp;
 //Constructor
 PdbToZypp::PdbToZypp(){
 
+   store = new ResStore;
+
 	database *dbDeps = new database("lorien.suse.de", "rpmread", "Salahm1", "rpm");
 	database *dbPackages = new database("lorien.suse.de", "rpmread", "Salahm1", "package");
 
@@ -166,7 +168,7 @@ PdbToZypp::PdbToZypp(){
 			}
 		}*/
 
-		store.insert(p);
+		store->insert(p);
 	}
 
 	dbDeps->close();
@@ -174,6 +176,6 @@ PdbToZypp::PdbToZypp(){
 
 }
 
-ResStore PdbToZypp::getStore(){
-	return store;
+ResStore& PdbToZypp::getStore(){
+	return *store;
 }
