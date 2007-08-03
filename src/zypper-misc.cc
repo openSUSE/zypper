@@ -699,7 +699,7 @@ bool xml_list_patches ()
         cout << "pkgmanager=\"" << ((patch->affects_pkg_manager()) ? "true" : "false") << "\" ";
         cout << "restart=\"" << ((patch->reboot_needed()) ? "true" : "false") << "\" ";
         cout << "interactive=\"" << ((patch->interactive()) ? "true" : "false") << "\" ";
-        cout << "resolvabletype=\"" << "patch" << "\" ";
+        cout << "kind=\"" << "patch" << "\" ";
         cout << ">" << endl;
         cout << "  <summary>" << xml_escape(patch->summary()) << "  </summary>" << endl;
         cout << "  <description>" << xml_escape(patch->description()) << "</description>" << endl;
@@ -1005,7 +1005,7 @@ void xml_list_updates()
     cout << " <update ";
     cout << "name=\"" << res->name () << "\" " ;
     cout << "edition=\""  << res->edition ().asString() << "\" ";
-    cout << "resolvabletype=\"" << "package" << "\" ";
+    cout << "kind=\"" << "package" << "\" ";
     cout << ">" << endl;
     cout << "  <summary>" << xml_escape(res->summary()) << "  </summary>" << endl;
     cout << "  <description>" << xml_escape(res->description()) << "</description>" << endl;
