@@ -19,7 +19,7 @@
 #include "zypp/base/NonCopyable.h"
 #include "zypp/base/PtrTypes.h"
 #include "zypp/solver/detail/Resolver.h"
-
+#include "zypp/CapSet.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp
@@ -95,12 +95,14 @@ class  HelixControl {
     HelixControl (const std::string & controlPath,
 		  const RepositoryTable & sourceTable,
 		  const Arch & systemArchitecture,
+		  const PoolItemList &languages,		  
 		  const std::string & systemPath = "solver-system.xml");
     HelixControl ();    
     ~HelixControl ();
 
     void installResolvable (const ResObject::constPtr &resObject);
     void deleteResolvable (const ResObject::constPtr &resObject);
+    void addDependencies (const CapSet &capRequire, const CapSet &capConflict);
     std::string filename () { return dumpFile; }
 };
 	
