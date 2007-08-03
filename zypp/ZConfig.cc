@@ -36,6 +36,7 @@ namespace zypp
   {
     public:
       Impl()
+        : repo_add_probe(false)
       {
         MIL << "ZConfig singleton created." << endl;
         Pathname confpath("/etc/zypp/zypp.conf");
@@ -80,6 +81,10 @@ namespace zypp
               {
                 cfg_cache_path = Pathname(value);
               }
+              else if ( entry == "repo.add.probe" )
+              {
+                repo_add_probe = (value == "1");
+              }
             }
             
           }
@@ -98,6 +103,8 @@ namespace zypp
     Pathname cfg_metadata_path;
     Pathname cfg_cache_path;
     Pathname cfg_known_repos_path;
+    
+    bool repo_add_probe;
     
   };
   ///////////////////////////////////////////////////////////////////
@@ -180,6 +187,11 @@ namespace zypp
     return s;
   }
 
+  bool ZConfig::repo_add_probe() const
+  {
+    return _pimpl->repo_add_probe;
+  }
+  
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////

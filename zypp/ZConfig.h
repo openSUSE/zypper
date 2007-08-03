@@ -73,6 +73,13 @@ namespace zypp
        */
       const std::string & cacheDBSplitJoinSeparator() const;
 
+      /**
+       * Whether repository urls should be probed.
+       / config option
+       * repo.add.probe
+       */
+      bool repo_add_probe() const;
+      
     public:
       class Impl;
       /** Dtor */

@@ -575,23 +575,34 @@ namespace zypp
       return repo::RepoType::NONE;
     }
 
-    MediaSetAccess access(url);
-    if ( access.doesFileExist("/repodata/repomd.xml") )
-      return repo::RepoType::RPMMD;
-    if ( access.doesFileExist("/content") )
-      return repo::RepoType::YAST2;
-
-    // if it is a local url of type dir
-    if ( (! media::MediaManager::downloads(url)) && ( url.getScheme() == "dir" ) )
+    try
     {
-      Pathname path = Pathname(url.getPathName());
-      if ( PathInfo(path).isDir() )
+      MediaSetAccess access(url);
+      if ( access.doesFileExist("/repodata/repomd.xml") )
+        return repo::RepoType::RPMMD;
+      if ( access.doesFileExist("/content") )
+        return repo::RepoType::YAST2;
+  
+      // if it is a local url of type dir
+      if ( (! media::MediaManager::downloads(url)) && ( url.getScheme() == "dir" ) )
       {
-        // allow empty dirs for now
-        return repo::RepoType::RPMPLAINDIR;
+        Pathname path = Pathname(url.getPathName());
+        if ( PathInfo(path).isDir() )
+        {
+          // allow empty dirs for now
+          return repo::RepoType::RPMPLAINDIR;
+        }
       }
     }
-
+    catch ( const media::MediaException &e )
+    {
+      ZYPP_THROW(RepoException("Error trying to read from " + url.asString()));
+    }
+    catch ( const Exception &e )
+    {
+      ZYPP_THROW(Exception("Unknown error reading from " + url.asString()));
+    }
+    
     return repo::RepoType::NONE;
   }
 
@@ -744,13 +755,29 @@ namespace zypp
         ZYPP_THROW(RepoAlreadyExistsException(info.alias()));
     }
 
+    RepoInfo tosave = info;
+    
+    // check the first url for now
+    if ( ZConfig::instance().repo_add_probe() || ( tosave.type() == RepoType::NONE ) )
+    {
+      RepoType probedtype;
+      probedtype = probe(*tosave.baseUrlsBegin());
+      if ( tosave.baseUrlsSize() > 0 )
+      {
+        if ( probedtype == RepoType::NONE )
+          ZYPP_THROW(RepoUnknownTypeException());
+        else
+          tosave.setType(probedtype);
+      }
+    }
+    
     progress.set(50);
 
     // assert the directory exists
     filesystem::assert_dir(_pimpl->options.knownReposPath);
 
     Pathname repofile = generate_non_existing_name(_pimpl->options.knownReposPath,
-                                                    generate_filename(info));
+                                                    generate_filename(tosave));
     // now we have a filename that does not exists
     MIL << "Saving repo in " << repofile << endl;
 
@@ -759,7 +786,7 @@ namespace zypp
       ZYPP_THROW (Exception( "Can't open " + repofile.asString() ) );
     }
 
-    info.dumpRepoOn(file);
+    tosave.dumpRepoOn(file);
     progress.toMax();
     MIL << "done" << endl;
   }

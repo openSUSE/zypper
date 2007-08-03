@@ -222,8 +222,11 @@ namespace zypp
     *
     * \throws repo::RepoAlreadyExistsException If the repo clash some 
     * unique attribute like alias
-    *
-    * \throws RepoAlreadyExistsException
+    * \throws MediaException If the access to the url fails
+    * \throws ParseException If the file parsing fails
+    * \throws RepoUnknownType If repository type can't be determined
+    * \throws RepoException ON other repository related errors
+    * \throws Exception On other errors.
     */
    void addRepository( const RepoInfo &info,
                        const ProgressData::ReceiverFnc & progressrcv = ProgressData::ReceiverFnc() );
@@ -238,6 +241,8 @@ namespace zypp
     * \throws RepoAlreadyExistsException
     * \throws MediaException If the access to the url fails
     * \throws ParseException If the file parsing fails
+    * \throws RepoUnknownType If repository type can't be determined
+    * \throws RepoException ON other repository related errors
     * \throws Exception On other errors.
     */
     void addRepositories( const Url &url,

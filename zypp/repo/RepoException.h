@@ -118,7 +118,7 @@ namespace zypp
     
     /**
      * thrown when it was impossible to
-     * determine an alias for this repo.
+     * determine this repo type.
      */
     class RepoUnknownTypeException : public RepoException
     {
