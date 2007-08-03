@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Aug  3 13:56:19 CEST 2007 - tgoettlicher@suse.de
+
+- removed installnotify from xml output
+- r6433 
+
+-------------------------------------------------------------------
 Fri Aug  3 10:57:36 CEST 2007 - tgoettlicher@suse.de
 
 - renamed resolvabletype to kind in xml output
