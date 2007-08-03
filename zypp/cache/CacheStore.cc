@@ -561,6 +561,14 @@ void CacheStore::appendDependency( const RecordId &resolvable_id, zypp::Dep dept
   {
       appendHalDependency( resolvable_id, deptype, capability::asKind<HalCap>(cap) );
   }
+  else if ( capability::isKind<FilesystemCap>(cap) )
+  {
+      appendFilesystemDependency( resolvable_id, deptype, capability::asKind<FilesystemCap>(cap) );
+  }
+  else if ( capability::isKind<SplitCap>(cap) )
+  {
+      appendSplitDependency( resolvable_id, deptype, capability::asKind<SplitCap>(cap) );
+  }
   else
   {
       appendUnknownDependency( resolvable_id, deptype, cap );
