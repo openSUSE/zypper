@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri Aug  3 23:52:18 CEST 2007 - ma@suse.de
+
+- Fix susetags repo to parse dikusage data (#293039)
+- revision
+- version 3.13.12
+
+-------------------------------------------------------------------
 Fri Aug  3 18:56:47 CEST 2007 - ma@suse.de
 
 - Add product attribute 'type' (aka 'category' which is now
