@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Sat Aug  4 23:40:10 CEST 2007 - jkupec@suse.cz
+
+- new refresh options added: --force, --force-build, --force-download,
+  --build-only, --download-only
+- r6476
+
+-------------------------------------------------------------------
 Sat Aug  4 19:03:28 CEST 2007 - jkupec@suse.cz
 
 - zypper refresh now takes aliases or repo numbers that should be
