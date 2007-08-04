@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Sat Aug  4 19:03:28 CEST 2007 - jkupec@suse.cz
+
+- zypper refresh now takes aliases or repo numbers that should be
+  refreshed as arguments.
+- zypper repos output fixed to show proper repo numbers (#296779)
+- r6473
+
+-------------------------------------------------------------------
 Fri Aug  3 17:17:20 CEST 2007 - dmacvicar@suse.de
 
 - zypper uses tribool internally. So autorefresh and enabled now
