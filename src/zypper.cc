@@ -421,9 +421,10 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
     };
     specific_options = refresh_options;
     specific_help = _(
-      "refresh\n"
+      "refresh (ref) [alias|#] ...\n"
       "\n"
-      "Refresh all defined and enabled repositories.\n"
+      "Refresh repositories specified by their alias or number."
+      " If none are specified, all enabled repositories will be refreshed.\n"
       "\n"
       "This command has no additional options.\n"
     );
@@ -964,7 +965,7 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
       return ZYPPER_EXIT_ERR_PRIVILEGES;
     }
 
-    refresh_repos();
+    refresh_repos(arguments);
   }
 
   // --------------------------( remove/install )-----------------------------

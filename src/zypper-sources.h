@@ -22,7 +22,7 @@ void list_repos();
 /**
  * Refresh all enabled repositories.
  */
-void refresh_repos();
+int refresh_repos(std::vector<std::string> & arguments);
 
 
 /**

@@ -3,6 +3,7 @@
 #include "zypper-sources.h"
 #include "zypper-tabulator.h"
 
+#include <iostream>
 #include <fstream>
 #include <boost/format.hpp>
 #include <boost/logic/tribool.hpp>
@@ -151,7 +152,7 @@ static void print_repo_list( const std::list<zypp::RepoInfo> &repos )
   tbl << th;
 
   int i = 1;
-  
+
   for (std::list<RepoInfo>::const_iterator it = repos.begin();
        it !=  repos.end(); ++it)
   {
@@ -183,6 +184,7 @@ static void print_repo_list( const std::list<zypp::RepoInfo> &repos )
     }
     
     tbl << tr;
+    i++;
   }
 
   if (tbl.empty())
@@ -217,34 +219,104 @@ void list_repos()
 
 // ----------------------------------------------------------------------------
 
-void refresh_repos()
+template <typename Target, typename Source>
+void safe_lexical_cast (Source s, Target &tr) {
+  try {
+    tr = boost::lexical_cast<Target> (s);
+  }
+  catch (boost::bad_lexical_cast &) {
+  }
+}
+
+// ----------------------------------------------------------------------------
+
+int refresh_repos(vector<string> & arguments)
 {
   RepoManager manager;
-  gData.repos = manager.knownRepositories();
+  list<RepoInfo> repos;
+  try
+  {
+    repos = manager.knownRepositories();
+  }
+  catch ( const Exception &e )
+  {
+    ZYPP_CAUGHT(e);
+    cerr << _("Error reading repositories:") << endl
+         << e.asUserString() << endl;
+    return ZYPPER_EXIT_ERR_ZYPP;
+  }
 
-  int error_count = 0;
-  int enabled_repo_count = gData.repos.size();
-  for (std::list<RepoInfo>::iterator it = gData.repos.begin();
-       it !=  gData.repos.end(); ++it)
+  unsigned error_count = 0;
+  unsigned enabled_repo_count = repos.size();
+  unsigned repo_number = 0;
+  unsigned argc = arguments.size();
+  for (std::list<RepoInfo>::iterator it = repos.begin();
+       it !=  repos.end(); ++it)
   {
     RepoInfo repo(*it);
+    repo_number++;
+
+    if (argc)
+    {
+      bool specified_found = false;
+      
+      // search for the repo alias among arguments
+      for (vector<string>::iterator it = arguments.begin();
+          it != arguments.end(); ++it)
+        if ((*it) == repo.alias())
+        {
+          specified_found = true;
+          arguments.erase(it);
+          break;
+        }
+      
+      // search for the repo number among arguments
+      if (!specified_found)
+        for (vector<string>::iterator it = arguments.begin();
+            it != arguments.end(); ++it)
+        {
+          unsigned tmp = 0;
+          safe_lexical_cast (*it, tmp);
+          if (tmp == repo_number) 
+          {
+            specified_found = true;
+            arguments.erase(it);
+            break;
+          }
+        }
+
+      if (!specified_found)
+      {
+        DBG << repo.alias() << "(#" << repo_number << ") not specified,"
+            << " skipping." << endl;
+        enabled_repo_count--;
+        continue;
+      }
+    }
 
     // skip disabled repos
     if (!repo.enabled())
     {
-      cout_v << format(_("Skipping disabled repository '%s'")) % repo.alias()
-             << endl;
+      string msg = boost::str(
+        format(_("Skipping disabled repository '%s'")) % repo.alias());
+
+      if (argc)
+        cerr << msg << endl;
+      else
+        cout_v << msg << endl;
+
       enabled_repo_count--;
       continue;
     }
 
+    // do the refresh
     try
     {
-      cout_n << _("Refreshing ") << it->alias() << endl;
-      manager.refreshMetadata(repo); //! \todo progress reporting
+      cout_n << format(_("Refreshing '%s'")) % it->alias() << endl;
+      manager.refreshMetadata(repo, RepoManager::RefreshIfNeeded); 
 
       cout_v << _("Creating repository cache...") << endl;
-      manager.buildCache(repo);
+      manager.buildCache(repo, RepoManager::BuildIfNeeded);
 
       //cout_n << _("DONE") << endl << endl;
     }
@@ -261,14 +333,42 @@ void refresh_repos()
         % repo.alias() << endl;
       error_count++;
     }
+
   }
 
-  if (error_count == enabled_repo_count)
+  // the rest of arguments are those not found, complain to the user
+  bool show_hint = arguments.size();
+  for (vector<string>::iterator it = arguments.begin();
+      it != arguments.end();)
+  {
+    cerr << format(_("Repository '%s' not found by its alias or number.")) % *it
+      << endl;
+    it = arguments.erase(it);
+  }
+  if (show_hint)
+    cout_n << _("Use 'zypper repos' to get the list of defined repositories.")
+      << endl;
+
+  // print the result message
+  if (enabled_repo_count == 0)
+  {
+    if (argc)
+      cerr << _("Specified repositories are not enabled or defined.");
+    else
+      cerr << _("There are no enabled repositories defined.");
+
+    cout_n << endl
+      << _("Use 'zypper addrepo' or 'zypper modifyrepo' commands to add or enable repositories.")
+      << endl;
+  }
+  else if (error_count == enabled_repo_count)
     cerr << _("Could not refresh the repositories because of errors.") << endl;
   else if (error_count)
     cerr << _("Some of the repositories have not been refreshed because of error.") << endl;
+  else if (argc)
+    cout << _("Specified repositories have been refreshed.") << endl;
   else
-    cout_n << _("All repositories have been refreshed.") << endl;
+    cout << _("All repositories have been refreshed.") << endl;
 }
 
 // ----------------------------------------------------------------------------
@@ -408,17 +508,6 @@ template<typename T>
 ostream& operator << (ostream& s, const vector<T>& v) {
   std::copy (v.begin(), v.end(), ostream_iterator<T> (s, ", "));
   return s;
-}
-
-// ----------------------------------------------------------------------------
-
-template <typename Target, typename Source>
-void safe_lexical_cast (Source s, Target &tr) {
-  try {
-    tr = boost::lexical_cast<Target> (s);
-  }
-  catch (boost::bad_lexical_cast &) {
-  }
 }
 
 // ----------------------------------------------------------------------------

@@ -270,10 +270,10 @@ Enable auto-refresh for the repository.
 Disable auto-refresh for the repository.
 
 .TP
-.B refresh (ref)
-Refresh all installation sources found in system.
+.B refresh (ref) [alias|#] ...
+Refresh repositories specified by their alias or number. If no repositories are specified, all enabled repositories will be refreshed.
 .IP
-This means downloading resolvables' metadata from source media (if needed), storing it in local cache (typically under /var/lib/zypp/cache/raw directory) and preparsing the metadata into an sqlite database (/var/lib/zypp/cache/zypp.db).
+Refreshing a repository means downloading metadata of resolvables from media (if needed), storing it in local cache (typically under /var/cache/zypp/raw/<alias> directory) and preparsing the metadata into an sqlite database (/var/cache/zypp/zypp.db).
 
 .SH "GLOBAL OPTIONS"
 .TP 
