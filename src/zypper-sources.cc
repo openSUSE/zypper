@@ -312,11 +312,38 @@ int refresh_repos(vector<string> & arguments)
     // do the refresh
     try
     {
-      cout_n << format(_("Refreshing '%s'")) % it->alias() << endl;
-      manager.refreshMetadata(repo, RepoManager::RefreshIfNeeded); 
+      if (!copts.count("build-only"))
+      {
+        bool force_download =
+          copts.count("force") || copts.count("force-download");
 
-      cout_v << _("Creating repository cache...") << endl;
-      manager.buildCache(repo, RepoManager::BuildIfNeeded);
+        cout_n << format(_("Refreshing '%s'")) % it->alias();
+        if (force_download)
+          cout_n << " " << _("(forced)");
+        cout_n << endl;
+
+        MIL << "calling refreshMetadata" << (force_download ? ", forced" : "")
+            << endl;
+
+        manager.refreshMetadata(repo, force_download ?
+          RepoManager::RefreshForced : RepoManager::RefreshIfNeeded);
+      }
+
+      if (!copts.count("download-only"))
+      {
+        bool force_build = 
+          copts.count("force") || copts.count("force-build");
+
+        cout_v << _("Creating repository cache");
+        if (force_build)
+          cout_v << " " << _("(forced)");
+        cout_v << endl;
+
+        MIL << "calling buildCache" << (force_build ? ", forced" : "") << endl;
+
+        manager.buildCache(repo, force_build ?
+          RepoManager::BuildForced : RepoManager::BuildIfNeeded);
+      }
 
       //cout_n << _("DONE") << endl << endl;
     }

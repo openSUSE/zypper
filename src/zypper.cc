@@ -415,6 +415,11 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
   }
   else if (command == ZypperCommand::REFRESH) {
     static struct option refresh_options[] = {
+      {"force", no_argument, 0, 'f'},
+      {"force-build", no_argument, 0, 'b'},
+      {"force-download", no_argument, 0, 'd'},
+      {"build-only", no_argument, 0, 'B'},
+      {"download-only", no_argument, 0, 'D'},
       {"help", no_argument, 0, 'h'},
       {0, 0, 0, 0}
     };
@@ -425,7 +430,12 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
       "Refresh repositories specified by their alias or number."
       " If none are specified, all enabled repositories will be refreshed.\n"
       "\n"
-      "This command has no additional options.\n"
+      "  Command options:\n"
+      "-f, --force             Force a complete refresh\n"
+      "-b, --force-build       Force rebuild of the database\n"
+      "-d, --force-download    Force download of raw metadata\n"
+      "-B, --build-only        Only build the database, don't download metadata.\n"
+      "-D, --download-only     Only download raw metadata, don't build the database\n"
     );
   }
   else if (command == ZypperCommand::LIST_UPDATES) {

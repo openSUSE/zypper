@@ -274,8 +274,24 @@ Disable auto-refresh for the repository.
 Refresh repositories specified by their alias or number. If no repositories are specified, all enabled repositories will be refreshed.
 .IP
 Refreshing a repository means downloading metadata of resolvables from media (if needed), storing it in local cache (typically under /var/cache/zypp/raw/<alias> directory) and preparsing the metadata into an sqlite database (/var/cache/zypp/zypp.db).
+.TP
+.I \-f, \-\-force
+Force a complete refresh of specified repositories. This option will cause both the download of raw metadata and parsing of the metadata to be forced even if everything indicates a refresh is not needed.
+.TP
+.I \-b, \-\-force\-build
+Force only reparsing of cached metadata and rebuilding of the database. Raw metadata download will not be forced.
+.TP
+.I \-d, \-\-force\-download
+Force only download of current copy of repository metadata. Parsing and rebuild of the database will not be forced.
+.TP
+.I \-B, \-\-build\-only
+Only parse the metadata and build the database, don't download raw metadata into the cache. This will enable you to repair damaged database from cached data without accessing network at all.
+.TP
+.I \-D, \-\-download\-only
+Only download the raw metadata, don't parse it or build the database.
 
 .SH "GLOBAL OPTIONS"
+
 .TP 
 .I \-h, \-\-help
 Help. If a \fBcommand\fR is specified together with --help option, command specific help is displayed.
