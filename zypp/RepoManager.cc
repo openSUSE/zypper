@@ -335,6 +335,8 @@ namespace zypp
       {
         Url url(*it);
 
+        MIL << "Going to try to check and refresh metadata from " << url << endl;
+
         repo::RepoType repokind = info.type();
 
         // if the type is unknown, try probing.
@@ -393,6 +395,7 @@ namespace zypp
           }
           else
           {
+            MIL << "repo has changed, going to refresh" << endl;
             refresh = true;
           }
           if ( refresh )
@@ -416,6 +419,7 @@ namespace zypp
           }
           else
           {
+            MIL << "repo has changed, going to refresh" << endl;
             refresh = true;
           }
 
