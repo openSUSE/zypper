@@ -1,58 +1,58 @@
-# translation of zypper.sk.po to
-# Slovak language translation of zypper messages.
-#
+# translation of zypper.pa.po to Panjabi
+# @TITLE@
 # Copyright (C) 2006, SUSE Linux GmbH, Nuremberg
-# Ján Kupec <jkupec@suse.cz>, 2007.
 #
+# This file is distributed under the same license as @PACKAGE@ package. FIRST
+#
+# A S Alam <aalam@users.sf.net>, 2007.
 msgid ""
 msgstr ""
-"Project-Id-Version: zypper.sk\n"
+"Project-Id-Version: zypper.pa\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-07-19 15:00+0200\n"
-"PO-Revision-Date: 2007-02-27 10:22+0100\n"
-"Last-Translator: Jan Kupec <jkupec@suse.cz>\n"
-"Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
+"PO-Revision-Date: 2007-08-02 23:22+0530\n"
+"Last-Translator: A S Alam <aalam@users.sf.net>\n"
+"Language-Team: Panjabi <punjabi-l10n@lists.sf.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
-"Plural-Forms: nplurals=3; plural=(n==1) ? 1 : (n>=2 && n<=4) ? 2 : 0;\n"
+"Plural-Forms: nplurals=2; plural=n != 1\n"
 
 #: ../src/zypper-keyring-callbacks.h:40
 #, c-format
 msgid "Warning: Accepting an unsigned file %s."
-msgstr ""
+msgstr "ਚੇਤਾਵਨੀ: ਇੱਕ ਨਾ-ਸਾਇਨ ਕੀਤੀ ਫਾਇਲ %s ਮਨਜ਼ੂਰ ਕੀਤੀ ਜਾ ਰਹੀ ਹੈ।"
 
 #: ../src/zypper-keyring-callbacks.h:46
-#, fuzzy, c-format
+#, c-format
 msgid "%s is unsigned, continue?"
-msgstr " nie je podpísaný. Pokračovať?"
+msgstr "%s ਬਿਨ-ਸਾਇਨ ਹੈ, ਜਾਰੀ ਰੱਖਣਾ ਹੈ?"
 
 #: ../src/zypper-keyring-callbacks.h:56
-#, fuzzy, c-format
+#, c-format
 msgid "Import key %s to trusted keyring?"
-msgstr " do dôveryhodného zväzku?"
+msgstr "ਕੀ ਕੁੰਜੀ %s ਭਰੋਸੇਯੋਗ ਕੀ-ਰਿੰਗ 'ਚ ਲਿਆਉਣੀ ਹੈ?"
 
 #: ../src/zypper-keyring-callbacks.h:66
-#, fuzzy, c-format
+#, c-format
 msgid "Warnging: Accepting file %s signed with an unknown key %s."
-msgstr " je podpísaný neznámym ID kľúča: "
+msgstr "ਚੇਤਾਵਨੀ: ਫਾਇਲ %s ਨੂੰ ਅਣਜਾਣ ਕੁੰਜੀ %s ਨਾਲ ਸਾਇਨ ਹੋਣ ਉੱਤੇ ਮਨਜ਼ੂਰ ਕਰਨਾ।"
 
 #: ../src/zypper-keyring-callbacks.h:73
-#, fuzzy, c-format
+#, c-format
 msgid "%s is signed with an unknown key %s. Continue?"
-msgstr " je podpísaný neznámym ID kľúča: "
+msgstr "%s ਨੂੰ ਇੱਕ ਅਣਜਾਣ ਕੁੰਜੀ %s ਨਾਲ ਸਾਇਨ ਕੀਤਾ ਗਿਆ ਹੈ। ਜਾਰੀ ਰੱਖਣਾ ਹੈ?"
 
 #: ../src/zypper-keyring-callbacks.h:87
 #, c-format
 msgid "Automatically trusting key id %s, %s, fingerprint %s"
-msgstr ""
+msgstr "ਕੁੰਜੀ id %s, %s, ਫਿੰਗਰਪਰਿੰਟ %s ਉੱਤੇ ਆਟੋਮੈਟਿਕ ਹੀ ਭਰੋਸਾ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ"
 
-# power-off message
 #: ../src/zypper-keyring-callbacks.h:93
-#, fuzzy, c-format
+#, c-format
 msgid "Do you want to trust key id %s, %s, fingerprint %s"
-msgstr "Dôverovať kľúču s ID "
+msgstr "ਕੀ ਤੁਸੀਂ ਕੁੰਜੀ id %s, %s, ਫਿੰਗਰਪਰਿੰਟ %s ਉੱਤੇ ਭਰੋਸਾ ਕਰਦੇ ਹੋ"
 
 #: ../src/zypper-keyring-callbacks.h:110
 #, c-format
@@ -65,72 +65,70 @@ msgid "Signature verification failed for %s with public key id %s, %s, fingerpri
 msgstr ""
 
 #: ../src/zypper-keyring-callbacks.h:133
-#, fuzzy, c-format
+#, c-format
 msgid "No digest for file %s."
-msgstr "Žiadny výťah (digest) pre "
+msgstr "ਫਾਇਲ %s ਲਈ ਕੋਈ ਡਿਜ਼ਟ ਨਹੀਂ ਹੈ।"
 
-# internal key used: Ok
 #. there are resolvables to install/uninstall
 #: ../src/zypper-keyring-callbacks.h:133 ../src/zypper-keyring-callbacks.h:141
 #: ../src/zypper-keyring-callbacks.h:160 ../src/zypper-misc.cc:922
 msgid "Continue?"
-msgstr "Pokračovať?"
+msgstr "ਜਾਰੀ ਰੱਖਣਾ ਹੈ?"
 
 #: ../src/zypper-keyring-callbacks.h:140
-#, fuzzy, c-format
+#, c-format
 msgid "Unknown digest %s for file %s."
-msgstr "Neznámy výťah (digest) "
+msgstr "ਫਾਇਲ %2$s ਲਈ ਅਣਜਾਣ ਡਿਜ਼ਟ %1$s"
 
 #: ../src/zypper-keyring-callbacks.h:153
 #, c-format
 msgid "Ignoring failed digest verification for %s (expected %s, found %s)."
-msgstr ""
+msgstr "%s ਦੀ ਫੇਲ੍ਹ ਡਿਜ਼ਟ ਵੈਧਤਾ ਅਣਡਿੱਠੀ ਕੀਤੀ ਜਾ ਰਹੀ ਹੈ (%s ਦੀ ਲੋੜੀ ਸੀ, %s ਮਿਲਿਆ)।"
 
 #: ../src/zypper-keyring-callbacks.h:159
-#, fuzzy, c-format
+#, c-format
 msgid "Digest verification failed for %s. Expected %s, found %s."
-msgstr "Overovanie výťahu (digest) zlyhalo pre "
+msgstr "%s ਲਈ ਡਿਜ਼ਟ ਵੈਧਤਾ ਫੇਲ੍ਹ। %s ਦੀ ਲੋੜ ਸੀ, %s ਮਿਲਿਆ।"
 
 #: ../src/zypper-misc.cc:33
 msgid "Initializing Target"
-msgstr "Inicializujem cieľovú databázu"
+msgstr "ਟਾਰਗੇਟ ਸ਼ੁਰੂ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ"
 
 #. TranslatorExplanation e.g. "package 'pornview' not found"
 #: ../src/zypper-misc.cc:148
-#, fuzzy, c-format
+#, c-format
 msgid "%s '%s' not found"
-msgstr "Hostiteľ %s nebol nájdený."
+msgstr "%s '%s' ਨਹੀਂ ਲੱਭੀ"
 
 #: ../src/zypper-misc.cc:157
-#, fuzzy, c-format
+#, c-format
 msgid "skipping %s '%s' (already installed)"
-msgstr "Preskakujem %s: balíček je už nainštalovaný"
+msgstr "%s '%s' ਛੱਡੀ ਜਾ ਰਹੀ ਹੈ (ਪਹਿਲਾਂ ਹੀ ਇੰਸਟਾਲ ਹੈ)"
 
 #: ../src/zypper-misc.cc:163
 #, c-format
 msgid "Failed to add '%s' to the list of packages to be installed."
-msgstr "Balíček '%s' nebolo možné pridať do zoznamu balíčkov, ktoré sa majú nainštalovať."
+msgstr "'%s' ਨੂੰ ਇੰਸਟਾਲ ਹੋਣ ਵਾਲੇ ਪੈਕੇਜਾਂ ਦੀ ਲਿਸਟ 'ਚ ਜੋੜਨ ਲਈ ਫੇਲ੍ਹ ਹੈ।"
 
 #: ../src/zypper-misc.cc:183
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to add '%s' to the list of packages to be removed."
-msgstr "Balíček '%s' nebolo možné pridať do zoznamu balíčkov, ktoré sa majú nainštalovať."
+msgstr "'%s' ਨੂੰ ਹਟਾਉਣ ਵਾਲੇ ਪੈਕੇਜਾਂ ਦੀ ਲਿਸਟ 'ਚ ਜੋੜਨ ਲਈ ਫੇਲ੍ਹ ਹੈ।"
 
 #. TranslatorExplanation These are reasons for various failures.
 #: ../src/zypper-misc.cc:209 ../src/zypper-callbacks.h:37
 msgid "Not found"
-msgstr "Nenájdený"
+msgstr "ਨਹੀਂ ਲੱਭਿਆ"
 
 #: ../src/zypper-misc.cc:229 ../src/zypper-misc.cc:297
-#, fuzzy
 msgid "Problem: "
-msgstr "Problémy:"
+msgstr "ਸਮੱਸਿਆ: "
 
 #. TranslatorExplanation %d is the solution number
 #: ../src/zypper-misc.cc:242
 #, c-format
 msgid " Solution %d: "
-msgstr ""
+msgstr " ਹੱਲ %d: "
 
 #. input prompt
 #: ../src/zypper-misc.cc:254
@@ -140,172 +138,170 @@ msgstr ""
 #. translators: corresponds to (r)etry
 #: ../src/zypper-misc.cc:262
 msgid "r"
-msgstr ""
+msgstr "r"
 
 #. translators: corresponds to (c)ancel
 #: ../src/zypper-misc.cc:265
 msgid "c"
-msgstr ""
+msgstr "c"
 
 #: ../src/zypper-misc.cc:271
 #, c-format
 msgid "Applying solution %s"
-msgstr ""
+msgstr "ਹੱਲ਼ %s ਲਾਗੂ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ"
 
 #: ../src/zypper-misc.cc:294
-#, fuzzy, c-format
+#, c-format
 msgid "%s Problems:"
-msgstr "Problémy:"
+msgstr "%s ਸਮੱਸਿਆਵਾਂ:"
 
 #. nothing to do;
 #: ../src/zypper-misc.cc:323
 msgid "Summary:"
-msgstr "Zhrnutie:"
+msgstr "ਸੰਖੇਪ:"
 
 #: ../src/zypper-misc.cc:346
 msgid "<install>   "
-msgstr "<inštalovať>"
+msgstr "<ਇੰਸਟਾਲ>   "
 
 #: ../src/zypper-misc.cc:348
 msgid "<uninstall> "
-msgstr "<odinštalovať>"
+msgstr "<ਅਣਇੰਸਟਾਲ> "
 
 #: ../src/zypper-misc.cc:353
 msgid "Nothing to do."
-msgstr "Nie je čo robiť."
+msgstr "ਕੁਝ ਵੀ ਨਹੀਂ ਹੈ।"
 
 #: ../src/zypper-misc.cc:422
 #, c-format
 msgid "Repository '%s' not cached. Caching..."
-msgstr ""
+msgstr "ਰਿਪੋਜ਼ਟਰੀ '%s' ਕੈਚੇ ਨਹੀਂ ਹੈ। ਕੈਚੇ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ..."
 
 #. TranslatorExplanation speaking of a repository
 #: ../src/zypper-misc.cc:427
-#, fuzzy, c-format
+#, c-format
 msgid "Reading repository %s..."
-msgstr "Pridávam zdroje"
+msgstr "ਰਿਪੋਜ਼ਟਰੀ '%s' ਪੜ੍ਹੀ ਜਾ ਰਹੀ ਹੈ..."
 
 #: ../src/zypper-misc.cc:431
-#, fuzzy, c-format
+#, c-format
 msgid "(%d resolvables found)"
-msgstr " balíčkov."
+msgstr "(%d ਹੱਲ ਲੱਭੇ)"
 
 #: ../src/zypper-misc.cc:439
-#, fuzzy, c-format
+#, c-format
 msgid "Problem loading data from '%s'"
-msgstr "Načítavam produkt z %s"
+msgstr "'%s' ਤੋਂ ਡਾਟਾ ਲੋਡ ਕਰਨ ਦੌਰਾਨ ਸਮੱਸਿਆ"
 
 #: ../src/zypper-misc.cc:442
 #, c-format
 msgid "Resolvables from '%s' not loaded because of error."
-msgstr ""
+msgstr "'%s' ਤੋਂ ਹੱਲਕਰਤਾ ਗਲਤੀ ਕਰਕੇ ਲੋਡ ਨਹੀਂ ਕੀਤੇ ਜਾ ਸਕੇ।"
 
 #: ../src/zypper-misc.cc:450
-#, fuzzy
 msgid "Reading RPM database..."
-msgstr "Čítam RPM databázu..."
+msgstr "RPM ਡਾਟਾਬੇਸ ਪੜ੍ਹਿਆ ਜਾ ਰਿਹਾ ਹੈ..."
 
 #: ../src/zypper-misc.cc:455
-#, fuzzy, c-format
+#, c-format
 msgid "(%s resolvables)"
-msgstr " balíčkov."
+msgstr "(%s ਹੱਲ) "
 
 #: ../src/zypper-misc.cc:464
 msgid "Establishing status of aggregates"
-msgstr "Nastavujem stav agregátov"
+msgstr ""
 
 #: ../src/zypper-misc.cc:472
 msgid "Resolving dependencies..."
-msgstr "Riešim závislosti..."
+msgstr "ਨਿਰਭਰਤਾ ਹੱਲ਼ ਕੀਤੀ ਜਾ ਰਹੀ ਹੈ..."
 
 #: ../src/zypper-misc.cc:497
-#, fuzzy, c-format
+#, c-format
 msgid "%d patches needed (%d security patches)"
-msgstr " bezpečnostných záplat"
+msgstr "%d ਪੈਂਚ ਲੋੜੀਦੇ (%d ਸੁਰੱਖਿਆ ਪੈਂਚ)"
 
 #: ../src/zypper-misc.cc:506 ../src/zypper-info.cc:148
 msgid "Installed"
-msgstr "Nainštalovaný"
+msgstr "ਇੰਸਟਾਲ ਕੀਤਾ"
 
 #: ../src/zypper-misc.cc:506 ../src/zypper-info.cc:148
 msgid "Uninstalled"
-msgstr "Nenainštalovaný"
+msgstr "ਅਣ-ਇੰਸਟਾਲ ਕੀਤਾ"
 
 #: ../src/zypper-misc.cc:508 ../src/zypper-info.cc:150
 msgid "No Longer Applicable"
-msgstr "Už neaplikovateľná"
+msgstr "ਹੁਣ ਢੁੱਕਵਾਂ ਨਹੀਂ"
 
 #: ../src/zypper-misc.cc:508 ../src/zypper-info.cc:150
 msgid "Not Applicable"
-msgstr "Neaplikovateľná"
+msgstr "ਢੁੱਕਵਾਂ ਨਹੀਂ"
 
 #: ../src/zypper-misc.cc:510 ../src/zypper-info.cc:152
 msgid "Applied"
-msgstr "Použité"
+msgstr "ਲਾਗੂ ਕੀਤਾ"
 
 #: ../src/zypper-misc.cc:510 ../src/zypper-info.cc:152
 msgid "Not Needed"
-msgstr "Nepotrebná "
+msgstr "ਲੋੜ ਨਹੀਂ"
 
 #: ../src/zypper-misc.cc:512 ../src/zypper-info.cc:154
 msgid "Broken"
-msgstr "Poškodená"
+msgstr "ਨਿਕਾਰਾ"
 
 #: ../src/zypper-misc.cc:512 ../src/zypper-info.cc:154
 msgid "Needed"
-msgstr "Potrebná"
+msgstr "ਲੋੜ ਹੈ"
 
 #. if ResStatus interface changes
 #: ../src/zypper-misc.cc:514
 msgid "error"
-msgstr "chyba"
+msgstr "ਗਲਤੀ"
 
 #: ../src/zypper-misc.cc:543 ../src/zypper-misc.cc:627
 #: ../src/zypper-misc.cc:767 ../src/zypper-info.cc:92
 msgid "Catalog: "
-msgstr "Katalóg: "
+msgstr "ਕੈਟਾਲਾਗ: "
 
 #: ../src/zypper-misc.cc:543 ../src/zypper-misc.cc:627
 #: ../src/zypper-misc.cc:767 ../src/zypper-info.cc:92
-#, fuzzy
 msgid "Repository: "
-msgstr "Úroveň podrobnosti výstupu "
+msgstr "ਰਿਪੋਜ਼ਟਰੀ: "
 
 #: ../src/zypper-misc.cc:544 ../src/zypper-misc.cc:628
 #: ../src/zypper-misc.cc:772 ../src/zypper-sources.cc:81
 #: ../src/zypper-search.h:247
 msgid "Name"
-msgstr "Názov"
+msgstr "ਨਾਂ"
 
 #: ../src/zypper-misc.cc:544 ../src/zypper-misc.cc:628
 #: ../src/zypper-misc.cc:772 ../src/zypper-search.h:247
 msgid "Version"
-msgstr "Verzia"
+msgstr "ਵਰਜਨ"
 
 #: ../src/zypper-misc.cc:544 ../src/zypper-misc.cc:628
 msgid "Category"
-msgstr "Kategória"
+msgstr "ਕੈਟਾਗਰੀ"
 
 #: ../src/zypper-misc.cc:544 ../src/zypper-misc.cc:628
 #: ../src/zypper-sources.cc:79
 msgid "Status"
-msgstr "Stav"
+msgstr "ਹਾਲਤ"
 
 #: ../src/zypper-misc.cc:570
-#, fuzzy
 msgid "No needed patches found."
-msgstr "Neboli nájdené žiadne aktualizované ovládače"
+msgstr "ਕੋਈ ਲੋੜੀਦਾ ਪੈਂਚ ਨਹੀਂ ਮਿਲਿਆ।"
 
 #: ../src/zypper-misc.cc:662
 msgid ""
 "WARNING: These are only the updates affecting the updater itself.\n"
 "There are others available too.\n"
-msgstr "POZOR: Toto sú len aktualizácie aktualizátora, k dispozícii sú aj ďalšie aktualizácie.\n"
+msgstr ""
+"ਚੇਤਾਵਨੀ: ਕੇਵਲ ਅੱਪਡੇਟਰ ਨੂੰ ਪਰਭਾਵਿਤ ਕਰਨ ਲਈ ਹੀ ਅੱਪਡੇਟ ਉਪਲੱਬਧ ਹਨ।\n"
+"ਹੋਰ ਵੀ ਉਪਲੱਬਧ ਹਨ।\n"
 
 #: ../src/zypper-misc.cc:672 ../src/zypper-misc.cc:795
-#, fuzzy
 msgid "No updates found."
-msgstr "Žiadne chyby."
+msgstr "ਕੋਈ ਅੱਪਡੇਟ ਨਹੀਂ ਲੱਭਿਆ।"
 
 #. TranslatorExplanation S stands for Status
 #. TranslatorExplanation S as Status
@@ -316,11 +312,11 @@ msgstr "S"
 #. TranslatorExplanation This is Bundle in as used in rug.
 #: ../src/zypper-misc.cc:769 ../src/zypper-search.h:243
 msgid "Bundle"
-msgstr ""
+msgstr "ਬੰਡਲ"
 
 #: ../src/zypper-misc.cc:772 ../src/zypper-search.h:247
 msgid "Arch"
-msgstr "Arch"
+msgstr "ਢਾਂਚਾ"
 
 #. Skipping a patch because it is interactive and
 #. --skip-interactive is requested. %s is a name of a
@@ -328,14 +324,13 @@ msgstr "Arch"
 #: ../src/zypper-misc.cc:866
 #, c-format
 msgid "WARNING: %s is interactive, skipped."
-msgstr "POZOR: vynechávam interaktívnu záplatu %s."
+msgstr "ਚੇਤਾਵਨੀ: %s ਇੰਟਰਐਕਟਿਵ ਹੈ, ਛੱਡਿਆ ਜਾ ਰਿਹਾ ਹੈ।"
 
 #: ../src/zypper-misc.cc:926
 msgid "committing"
-msgstr "odovzdávam"
+msgstr "ਕਮਿਟ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ"
 
 #: ../src/zypper-misc.cc:944
-#, fuzzy
 msgid ""
 "Package integrity check failed. This may be a problem with repository or media. Try one of the following:\n"
 "\n"
@@ -344,381 +339,367 @@ msgid ""
 "- use another installation media (if e.g. damaged)\n"
 "- use another repository"
 msgstr ""
-"Kontrola integrity balíčka zlyhala. Môže to byť problém inštalačného zdroja alebo média. Vyskúšajte jednu z nasledujúcich možností:\n"
+"ਪੈਕੇਜ ਐਂਟੀਗਰੇਟੀ ਜਾਂਚ ਫੇਲ੍ਹ ਹੋਈ। ਇਹ ਰਿਪੋਜ਼ਟਰੀ ਜਾਂ ਮੀਡਿਆ ਨਾਲ ਸਮੱਸਿਆ ਕਰਕੇ ਹੋ ਸਕਦਾ ਹੈ। ਹੇਠ ਦਿੱਤੇ ਵਰਤ ਕੇ ਵੇਖੋ:\n"
 "\n"
-"- jednoducho skúste znova spustiť predchádzajúci príkaz\n"
-"- obnovte inštalačné zdroje pomocou 'zypper refresh'\n"
-"- použite iné inštalačné médium (ak je napr. toto poškodené)\n"
-"- použite iný inštalačný zdroj"
+"- ਪਿਛਲੀ ਕਮਾਂਡ ਮੁੜ ਵਰਤੋਂ\n"
+"- 'zypper refresh' ਨਾਲ ਰਿਪੋਜ਼ਟਰੀਆਂ ਤਾਜ਼ਾ ਕਰੋ\n"
+"- ਕੋਈ ਹੋਰ ਇੰਸਟਾਲੇਸ਼ਨ ਮੀਡਿਆ (ਜੇ ਇਹ ਖਰਾਬ ਹੋਵੇ)\n"
+" - ਹੋਰ ਰਿਪੋਜ਼ਟਰੀ ਸ਼ਾਮਲ ਕਰੋ"
 
 #: ../src/zypper-misc.cc:962
 msgid "WARNING: One of installed patches requires reboot of your machine. Please, do it as soon as possible."
-msgstr "POZOR: jedna z nainštalovaných záplat vyžaduje reštart vášho počítača. Prosím, reštartujte čo najkôr."
+msgstr "ਚੇਤਾਵਨੀ: ਇੰਸਟਾਲ ਹੋਏ ਪੈਂਚਾਂ ਵਿੱਚ ਇੱਕ ਲਈ ਤੁਹਾਨੂੰ ਆਪਣੀ ਮਸ਼ੀਨ ਨੂੰ ਮੁੜ-ਚਾਲੂ ਕਰਨਾ ਪਵੇਗਾ। ਜਿੰਨ੍ਹਾਂ ਛੇਤੀ ਹੋ ਸਕੇ ਕਰੋ।"
 
 #: ../src/zypper-misc.cc:965
 msgid "WARNING: One of installed patches affects the package manager itself, thus it requires restart before executing next operations."
-msgstr "POZOR: Jedna z nainštalovaných záplat ovplyvňuje samotného správcu balíčkov. Pred jeho ďalším použitím je teda potrebné ho zavrieť a znovu spustiť."
+msgstr ""
+"ਚੇਤਾਵਨੀ: ਇੰਸਟਾਲ ਹੋਏ ਪੈਂਚਾਂ ਵਿੱਚ ਇੱਕ ਪੈਕੇਜ ਮੈਨੇਜਰ ਨੂੰ ਪਰਭਾਵਿਤ ਕਰ ਰਿਹਾ ਹੈ, ਇਸਕਰਕੇ ਅਗਲੀ ਕਾਰਵਾਈ ਕਰਨ ਲਈ ਇਸ "
+"ਨੂੰ ਮੁੜ-ਚਾਲੂ ਕਰਨਾ ਲਾਜ਼ਮੀ ਹੈ।"
 
 #. TranslatorExplanation The first %s is name of the resolvable, the second is its kind (e.g. 'zypper package')
 #: ../src/zypper-misc.cc:989
-#, fuzzy, c-format
+#, c-format
 msgid "Automatically agreeing with %s %s license."
-msgstr "Automaticky spustiť applet po prihlásení."
+msgstr "%s %s ਲਾਇਸੈਂਸ ਨਾਲ ਆਟੋਮੈਟਿਕ ਹੀ ਸਹਿਮਤ।"
 
 #: ../src/zypper-misc.cc:1002 ../src/zypper-misc.cc:1027
 msgid "license"
-msgstr "licencia"
+msgstr "ਲਾਇਸੈਂਸ"
 
 #: ../src/zypper-misc.cc:1005
 msgid "In order to install this package, you must agree to terms of the above licencse. Continue?"
-msgstr "Pred nainštalovaním tohoto balíčka musíte súhlasiť so znením jeho vyššie uvedenej licencie. Pokračovať?"
+msgstr "ਇਹ ਪੈਕੇਜ ਇੰਸਟਾਲ ਕਰਨ ਲਈ ਤੁਹਾਨੂੰ ਉੱਤੇ ਦਿੱਤੇ ਲਾਇਸੈਂਸ ਦੀਆਂ ਸ਼ਰਤਾਂ ਨਾਲ ਸਹਿਮਤ ਹੋਣਾ ਪਵੇਗਾ। ਕੀ ਜਾਰੀ ਰੱਖਣਾ ਹੈ?"
 
 #: ../src/zypper-misc.cc:1015
 msgid "Aborting installation due to the need of license(s) confirmation."
-msgstr "Končím inštaláciu kvôli potrebe potvrdenia súhlasu s liceniou/licenciami."
+msgstr "ਲੋੜੀਦੀ ਲਾਇਸੈਂਸ ਪੁਸ਼ਟੀ ਦੀ ਲੋੜ ਹੋਣ ਕਰਕੇ ਇੰਸਟਾਲੇਸ਼ਨ ਅਧੂਰੀ ਛੱਡੀ ਜਾ ਰਹੀ ਹੈ।"
 
 #: ../src/zypper-misc.cc:1017
 msgid "Please, restart the operation in interactive mode and confirm agreement with required license(s)."
-msgstr "Prosím, reštartujte túto operáciu v interaktívnom režime a potvrďte súhlas s požadovanými licenciami."
+msgstr "ਕਾਰਵਾਈ ਨੂੰ ਇੰਟਰਐਕਟਿਵ ਮੋਡ ਵਿੱਚ ਮੁੜ ਚਾਲੂ ਕਰੋ ਜੀ ਅਤੇ ਲੋੜੀਦੇ ਲਾਇਸੈਂਸ ਨਾਲ ਸਹਿਮਤੀ ਦਿਓ।"
 
 #: ../src/zypper-misc.cc:1024
 msgid "Aborting installation due to user disagreement with "
-msgstr "Končím inštaláciu kvôli nesúhlasu s "
+msgstr "ਯੂਜ਼ਰ ਨਾ-ਸਹਿਮਤੀ ਕਰਕੇ ਇੰਸਟਾਲੇਸ਼ਨ ਅਧੂਰੀ ਛੱਡੀ ਜਾ ਰਹੀ ਹੈ"
 
 #: ../src/zypper-sources.cc:48
 #, c-format
 msgid "Checking whether to refresh metadata for %s."
-msgstr ""
+msgstr "%s ਲਈ ਮੇਟਾਡਾਟਾ ਤਾਜ਼ਾ ਕਰਨ ਲਈ ਜਾਂਚ ਜਾਰੀ।"
 
 #: ../src/zypper-sources.cc:80
 msgid "Enabled"
-msgstr "Zapnutý"
+msgstr "ਯੋਗ"
 
 #: ../src/zypper-sources.cc:80
 msgid "Refresh"
-msgstr "Obnoviť"
+msgstr "ਤਾਜ਼ਾ"
 
 #: ../src/zypper-sources.cc:81 ../src/zypper-search.h:245
 msgid "Type"
-msgstr "Typ"
+msgstr "ਕਿਸਮ"
 
-#  Table header 5/5
-#  Table header 4/6
 #: ../src/zypper-sources.cc:97
 msgid "Active"
-msgstr "Aktívny"
+msgstr "ਸਰਗਰਮ"
 
 #: ../src/zypper-sources.cc:97
 msgid "Disabled"
-msgstr "Vypnutý"
+msgstr "ਆਯੋਗ"
 
 #: ../src/zypper-sources.cc:103 ../src/zypper-sources.cc:104
 #: ../src/zypper-info.cc:160 ../src/zypper-info.cc:166
 #: ../src/zypper-info.cc:168
 msgid "Yes"
-msgstr "Áno"
+msgstr "ਹਾਂ"
 
 #: ../src/zypper-sources.cc:103 ../src/zypper-sources.cc:104
 #: ../src/zypper-info.cc:160 ../src/zypper-info.cc:166
 #: ../src/zypper-info.cc:168
 msgid "No"
-msgstr "Nie"
+msgstr "ਨਹੀਂ"
 
 #: ../src/zypper-sources.cc:123
 msgid "No repositories defined. Use 'zypper addrepo' command to add one or more repositories."
-msgstr ""
+msgstr "ਕੋਈ ਰਿਪੋਜ਼ਟਰੀ ਨਹੀਂ ਦਿੱਤੀ ਗਈ ਹੈ। ਇੱਕ ਜਾਂ ਵੱਧ ਰਿਪੋਜ਼ਟਰੀਆਂ ਸ਼ਾਮਲ ਕਰਨ ਲਈ 'zypper addrepo' ਵਰਤੋਂ।"
 
 #: ../src/zypper-sources.cc:144
-#, fuzzy
 msgid "Error reading repositories:"
-msgstr "Chyba pri čítaní sektoru %u."
+msgstr "ਰਿਪੋਜ਼ਟਰੀ ਤੋਂ ਪੜ੍ਹਨ ਦੌਰਾਨ ਗਲਤੀ:"
 
 #: ../src/zypper-sources.cc:169
 #, c-format
 msgid "Skipping disabled repository '%s'"
-msgstr ""
+msgstr "ਆਯੋਗ ਕੀਤੀ ਰਿਪੋਜ਼ਟਰੀ '%s' ਛੱਡੀ ਜਾ ਰਹੀ ਹੈ"
 
 #: ../src/zypper-sources.cc:177
 msgid "Refreshing "
-msgstr "Obnovujem "
+msgstr "ਤਾਜ਼ਾ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ "
 
 #. ! \todo progress reporting
 #: ../src/zypper-sources.cc:180
-#, fuzzy
 msgid "Creating repository cache..."
-msgstr "Čítam metadáta z "
+msgstr "ਰਿਪੋਜ਼ਟਰੀ ਕੈਚੇ ਬਣਾਈ ਜਾ ਰਹੀ ਹੈ..."
 
 #: ../src/zypper-sources.cc:183
 msgid "DONE"
-msgstr "HOTOVO"
+msgstr "ਮੁਕੰਮਲ"
 
 #: ../src/zypper-sources.cc:187
-#, fuzzy, c-format
+#, c-format
 msgid "Error reading repository '%s':"
-msgstr "Chyba pri čítaní sektoru %u."
+msgstr "ਰਿਪੋਜ਼ਟਰੀ '%s' ਤੋਂ ਪੜ੍ਹਨ ਦੌਰਾਨ ਗਲਤੀ:"
 
 #: ../src/zypper-sources.cc:189
 #, c-format
 msgid "Skipping repository '%s' because of the above error."
-msgstr ""
+msgstr "ਰਿਪੋਜ਼ਟਰੀ '%s' ਉੱਤੇ ਦਿੱਤੀ ਗਲਤੀ ਕਰਕੇ ਛੱਡੀ ਜਾ ਰਹੀ ਹੈ।"
 
 #: ../src/zypper-sources.cc:201
 msgid "Could not refresh the repositories because of errors."
-msgstr ""
+msgstr "ਗਲਤੀਆਂ ਕਰਕੇ ਰਿਪੋਜ਼ਟਰੀਆਂ ਤਾਜ਼ਾ ਨਹੀਂ ਕੀਤੀਆਂ ਜਾ ਸਕੀਆਂ।"
 
 #: ../src/zypper-sources.cc:203
 msgid "Some of the repositories have not been refreshed because of error."
-msgstr ""
+msgstr "ਕੁਝ ਰਿਪੋਜ਼ਟਰੀਆਂ ਤਾਜ਼ਾ ਨਹੀਂ ਕੀਤੀਆਂ ਜਾ ਸਕੀਆਂ, ਕਿਉਂਕਿ ਗਲਤੀ ਸੀ।"
 
 #: ../src/zypper-sources.cc:205
-#, fuzzy
 msgid "All repositories have been refreshed."
-msgstr "Všetky systémové zdroje boli obnovené."
+msgstr "ਸਭ ਰਿਪੋਜ਼ਟਰੀਆਂ ਤਾਜ਼ਾ ਕੀਤੀਆਂ ਗਈਆਂ।"
 
 #: ../src/zypper-sources.cc:235
-#, fuzzy, c-format
+#, c-format
 msgid "Adding repository '%s'."
-msgstr "Pridávam zdroje"
+msgstr "ਰਿਪੋਜ਼ਟਰੀ '%s' ਸ਼ਾਮਲ ਕੀਤੀ ਜਾ ਰਹੀ ਹੈ।"
 
 #: ../src/zypper-sources.cc:244
 msgid "Problem transfering repository data from specified URL."
-msgstr ""
+msgstr "ਦਿੱਤੇ URL ਤੋਂ ਰਿਪੋਜ਼ਟਰੀ ਡਾਟਾ ਟਰਾਂਸਫਰ ਕਰਨ ਦੌਰਾਨ ਸਮੱਸਿਆ।"
 
 #: ../src/zypper-sources.cc:250
-#, fuzzy
 msgid "Problem parsing repository data."
-msgstr "Čítam metadáta z "
+msgstr "ਰਿਪੋਜ਼ਟਰੀ ਡਾਟਾ ਪਾਰਸ ਕਰਨ ਦੌਰਾਨ ਸਮੱਸਿਆ।"
 
 #: ../src/zypper-sources.cc:267
 #, c-format
 msgid "Repository '%s' successfully added:"
-msgstr ""
+msgstr "ਰਿਪੋਜ਼ਟਰੀ '%s' ਸਫ਼ਲਤਾਪੂਰਕ ਸ਼ਾਮਲ ਕੀਤੀ ਗਈ ਹੈ:"
 
 #: ../src/zypper-sources.cc:297
 msgid "Zypper happy! Detected repository type matches the one specified in the --type option."
-msgstr ""
+msgstr "Zypper ਖੁਸ਼! ਖੋਜੀ ਰਿਪੋਜ਼ਟਰੀ ਕਿਸਮ --type ਚੋਣ ਨਾਲ ਦਿੱਤੀ ਕਿਸਮ ਨਾਲ ਮਿਲ ਗਈ ਹੈ।"
 
 #: ../src/zypper-sources.cc:303
 #, c-format
 msgid "Warning! Overriding detected repository type '%s' with manually specified '%s'."
-msgstr ""
+msgstr "ਚੇਤਾਵਨੀ!  ਖੋਜੀ ਰਿਪੋਜ਼ਟਰੀ ਕਿਸਮ '%s' ਨੂੰ ਖੁਦ ਦਿੱਤੀ '%s' ਨਾਲ ਅਣਡਿੱਠਾ ਕਰ ਦਿੱਤਾ ਜਾਵੇਗਾ।"
 
 #: ../src/zypper-sources.cc:315
 #, c-format
 msgid "Unknown repository type '%s'. Using detected type '%s' instead."
-msgstr ""
+msgstr "ਅਣਜਾਣ ਰਿਪੋਜ਼ਟਰੀ ਕਿਸਮ '%s'। ਇਸ ਦੀ ਬਜਾਏ ਖੋਜੀ ਕਿਸਮ '%s' ਵਰਤੀ ਜਾਵੇਗੀ।"
 
 #: ../src/zypper-sources.cc:415
 #, c-format
 msgid "Repository %s has been removed."
-msgstr ""
+msgstr "ਰਿਪੋਜ਼ਟਰੀ %s ਨੂੰ ਹਟਾਇਆ।"
 
 #: ../src/zypper-sources.cc:467
 #, c-format
 msgid "Repository %s renamed to %s"
-msgstr ""
+msgstr "ਰਿਪੋਜ਼ਟਰੀ %s ਦਾ ਨਾਂ %s ਬਦਲਿਆ"
 
 #: ../src/zypper-sources.cc:472 ../src/zypper-sources.cc:549
-#, fuzzy, c-format
+#, c-format
 msgid "Repository %s not found."
-msgstr "Hostiteľ %s nebol nájdený."
+msgstr "ਰਿਪੋਜ਼ਟਰੀ %s ਨਹੀਂ ਲੱਭੀ।"
 
 #: ../src/zypper-sources.cc:477 ../src/zypper-sources.cc:554
-#, fuzzy
 msgid "Error while modifying the repository:"
-msgstr "Chyba pri obnovovaní zdroja: "
+msgstr "ਰਿਪੋਜ਼ਟਰੀਆਂ ਨੂੰ ਸੋਧਣ ਦੌਰਾਨ ਗਲਤੀ:"
 
 #: ../src/zypper-sources.cc:479 ../src/zypper-sources.cc:556
-#, fuzzy, c-format
+#, c-format
 msgid "Leaving repository %s unchanged."
-msgstr "Pridávam zdroje"
+msgstr "ਰਿਪੋਜ਼ਟਰੀ %s ਅਣ-ਬਦਲੀ ਹੀ ਛੱਡੀ ਜਾ ਰਹੀ ਹੈ"
 
 #: ../src/zypper-sources.cc:493
 #, c-format
 msgid "%s used together with %s, which contradict each other. This property will be left unchanged."
-msgstr ""
+msgstr "%s ਨੂੰ %s ਨਾਲ ਵਰਤਿਆ ਗਿਆ ਹੈ, ਜੋ ਕਿ ਇੱਕ ਦੂਜੇ ਦੇ ਵਿਰੋਧੀ ਹਨ। ਇਹ ਵਿਸ਼ੇਸ਼ਤਾ ਅਣ-ਬਦਲੀ ਛੱਡੀ ਜਾਵੇਗੀ।"
 
 #: ../src/zypper-sources.cc:544
 #, c-format
 msgid "Repository %s has been sucessfully modified."
-msgstr ""
+msgstr "ਰਿਪੋਜ਼ਟਰੀ %s ਠੀਕ ਤਰ੍ਹਾਂ ਸੋਧੀ ਗਈ ਹੈ।"
 
 #. list name, exact match
 #: ../src/zypper-sources.cc:637
-#, fuzzy
 msgid ""
 "ZENworks Management Daemon is running.\n"
 "WARNING: this command will not synchronize changes.\n"
 "Use rug or yast2 for that.\n"
-msgstr "POZOR: tento príkaz nesynchronizuje zmeny so ZENworks."
+msgstr ""
+"ZENworks Management Daemon ਚੱਲ ਰਹੀ ਹੈ।\n"
+"ਚੇਤਾਵਨੀ: ਇਹ ਕਮਾਂਡ ਬਦਲਾਅ ਨਾਲ ਸਮਕਾਲੀ ਨਹੀਂ ਹੋਵੇਗੀ।\n"
+"ਉਸ ਵਾਸਤੇ rug ਜਾਂ yast2 ਚਲਾਓ ਜੀ।\n"
 
 #: ../src/zypp-checkpatches.cc:125
 msgid "The updater could not access the package manager engine. This usually happens when you have another application (like YaST) using it at the same time. Please close other applications and check again for updates."
-msgstr "Program nemá prístup ku knižnici pre správu balíčkov. Toto sa zvyčajne stáva ak už máte spustenú iný aplikáciu, ktorá túto knižnicu používa. Prosím, zavrite ostatné aplikácie a skúste znova."
+msgstr "ਅੱਪਡੇਟਰ ਪੈਕੇਜ ਮੈਨੇਜਰ ਇੰਜਣ ਦੀ ਵਰਤੋਂ ਨਹੀਂ ਕਰ ਸਕਿਆ ਹੈ। ਇਹ ਆਮ ਤੌਰ ਉੱਤੇ ਉਦੋਂ ਹੁੰਦਾ ਹੈ, ਜਦੋਂ ਹੋਰ ਕਾਰਜ (ਜਿਵੇਂ ਕਿ ਯਾਸਟ (YaST) ਉਸ ਸਮੇਂ ਇਸ ਦੀ ਵਰਤੋਂ ਕਰਦਾ ਹੋਵੇ। ਹੋਰ ਕਾਰਜ ਬੰਦ ਕਰਕੇ ਅੱਪਡੇਟ ਲਈ ਫੇਰ ਜਾਂਚ ਕਰੋ।"
 
 #: ../src/zypp-checkpatches.cc:185
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Couldn't restore repository.\n"
 "Detail: %s"
 msgstr ""
-"Nie je možné načítať zdroj \n"
-"Podrobnosti: %s"
+"ਰਿਪੋਜ਼ਟਰੀ ਰੀ-ਸਟੋਰ ਨਹੀਂ ਕੀਤੀ ਜਾ ਸਕੀ।\n"
+"ਵੇਰਵਾ: %s"
 
 #: ../src/zypp-checkpatches.cc:235
-#, fuzzy
 msgid "There are no update repositories defined. Please add one or more update repositories in order to be notified of updates."
-msgstr "Nie sú definované žiadne aktualizačné zdroje. Prosím, pridajte jeden alebo viacero zdrojov, ak chcete byť upozorňovaní na aktualizácie."
+msgstr "ਕੋਈ ਅੱਪਡੇਟ ਰਿਪੋਜ਼ਟਰੀ ਨਹੀਂ ਦਿੱਤੀ ਗਈ ਹੈ। ਅੱਪਡੇਟ ਬਾਰੇ ਜਾਣਕਾਰੀ ਲੈਣ ਲਈ ਇੱਕ ਜਾਂ ਵੱਧ ਰਿਪੋਜ਼ਟਰੀਆਂ ਸ਼ਾਮਲ ਕਰੋ ਜੀ।"
 
 #. TranslatorExplanation don't translate letters in parentheses!! (yet)
 #: ../src/zypper-callbacks.cc:53
 msgid "(A)bort, (R)etry, (I)gnore?"
-msgstr "koniec, znova, ignorovať? [a/r/i]"
+msgstr ""
 
 #: ../src/zypper-callbacks.cc:87
 msgid "Invalid answer. Choose letter a, r, or i."
-msgstr ""
+msgstr "ਗਲਤ ਜਵਾਬ। ਅੱਖਰ a, r ਜਾਂ i ਹੀ ਚੁਣੋ।"
 
 #: ../src/zypper-getopt.cc:56
 msgid "Unknown option "
-msgstr "Neznáma voľba "
+msgstr "ਅਣਜਾਣ ਚੋਣ "
 
 #: ../src/zypper-getopt.cc:59
 msgid "Missing argument for "
-msgstr "Chýbajúci argument pre "
+msgstr "ਗੁੰਮ ਆਰਗੂਮਿੰਟ"
 
 #. TranslatorExplanation E.g. "package zypper not found."
 #: ../src/zypper-info.cc:52
-#, fuzzy, c-format
+#, c-format
 msgid "%s %s not found."
-msgstr " nebol nájdený."
+msgstr "%s %s ਨਹੀਂ ਲੱਭੀ"
 
 #. print info
 #. TranslatorExplanation E.g. "Information for package zypper:"
 #: ../src/zypper-info.cc:58
-#, fuzzy, c-format
+#, c-format
 msgid "Information for %s %s:"
-msgstr "Informácie pre "
+msgstr "%s %s ਲਈ ਜਾਣਕਾਰੀ:"
 
 #: ../src/zypper-info.cc:94 ../src/zypper-info.cc:141
 msgid "Name: "
-msgstr "Názov: "
+msgstr "ਨਾਂ: "
 
 #: ../src/zypper-info.cc:95 ../src/zypper-info.cc:142
 msgid "Version: "
-msgstr "Verzia: "
+msgstr "ਵਰਜਨ: "
 
 #: ../src/zypper-info.cc:96 ../src/zypper-info.cc:143
 msgid "Arch: "
-msgstr "Arch: "
+msgstr "ਢਾਂਚਾ: "
 
 #: ../src/zypper-info.cc:97
 msgid "Installed: "
-msgstr "Nainštalovaný: "
+msgstr "ਇੰਸਟਾਲ ਹੋਏ: "
 
 #: ../src/zypper-info.cc:99 ../src/zypper-info.cc:145
 msgid "Status: "
-msgstr "Stav: "
+msgstr "ਹਾਲਤ: "
 
 #: ../src/zypper-info.cc:102
 msgid "up-to-date"
-msgstr "aktuálny"
+msgstr "ਅੱਪਡੇਟ "
 
 #: ../src/zypper-info.cc:104
 msgid "out-of-date (version "
-msgstr "zastaralý (nainštalovaná verzia "
+msgstr "ਪੁਰਾਣਾ (ਵਰਜਨ "
 
 #: ../src/zypper-info.cc:105
 msgid " installed) "
-msgstr ")"
+msgstr " ਇੰਸਟਾਲ ਹਨ) "
 
 #: ../src/zypper-info.cc:108
 msgid "not installed"
-msgstr "nenainštalovaný"
+msgstr "ਇੰਸਟਾਲ ਨਹੀਂ ਹਨ"
 
 #: ../src/zypper-info.cc:110
 msgid "Installed Size: "
-msgstr "Veľkost inštalácie: "
+msgstr "ਇੰਸਟਾਲ ਆਕਾਰ: "
 
 #: ../src/zypper-info.cc:111 ../src/zypper-info.cc:169
 msgid "Summary: "
-msgstr "Stručný popis: "
+msgstr "ਸੰਖੇਪ: "
 
 #: ../src/zypper-info.cc:112 ../src/zypper-info.cc:170
 msgid "Description: "
-msgstr "Popis:"
+msgstr "ਵੇਰਵਾ: "
 
 #: ../src/zypper-info.cc:158
-#, fuzzy
 msgid "Category: "
-msgstr "Kategória"
+msgstr "ਕੈਟਾਗਰੀ: "
 
 #: ../src/zypper-info.cc:159
-#, fuzzy
 msgid "Created On: "
-msgstr "Vytváram %s"
+msgstr "ਬਣਾਇਆ ਗਿਆ: "
 
 #: ../src/zypper-info.cc:160
-#, fuzzy
 msgid "Reboot Required: "
-msgstr "Vyžaduje sa reštart"
+msgstr "ਮੁੜ-ਚਾਲੂ ਕਰਨਾ ਪਵੇਗਾ: "
 
 #: ../src/zypper-info.cc:163
-#, fuzzy
 msgid "Package Manager Restart Required"
-msgstr "Vyžaduje sa reštart"
+msgstr "ਪੈਕੇਜ ਮੈਨੇਜਰ ਲਈ ਮੁੜ-ਚਾਲੂ ਕਰਨਾ ਪਵੇਗਾ"
 
 #: ../src/zypper-info.cc:165
-#, fuzzy
 msgid "Restart Required: "
-msgstr "Vyžaduje sa reštart"
+msgstr "ਮੁੜ-ਚਾਲੂ ਕਰਨਾ ਪਵੇਗਾ: "
 
 #: ../src/zypper-info.cc:168
-#, fuzzy
 msgid "Interactive: "
-msgstr "Rozhranie"
+msgstr "ਇੰਟਰਐਕਟਿਵ: "
 
 #: ../src/zypper-info.cc:172
 msgid "Provides:"
-msgstr "Poskytuje:"
+msgstr "ਉਪਲੱਬਧ:"
 
 #: ../src/zypper-info.cc:178
 msgid "Requires:"
-msgstr "Vyžaduje:"
+msgstr "ਲੋੜੀਂਦਾ:"
 
 #: ../src/zypper-search.cc:45
 msgid "No repositories configured. Please, add at least one repository using 'zypper addrepo' command before using search."
-msgstr ""
+msgstr "ਕੋਈ ਰਿਪੋਜ਼ਟਰੀ ਸੰਰਚਿਤ ਨਹੀਂ ਹੈ। ਖੋਜ ਕਰਨ ਤੋਂ ਪਹਿਲਾਂ 'zypper addrepo' ਕਮਾਂਡ ਵਰਤ ਕੇ ਘੱਟੋ-ਘੱਟ ਇੱਕ ਰਿਪੋਜ਼ਟਰੀ ਸ਼ਾਮਲ ਕਰੋ।"
 
 #: ../src/zypper-search.cc:108
 msgid "Pre-caching installed resolvables matching given search criteria... "
-msgstr "Prednačítavam nainštalované balíčky vyhovujúce kritériam vyhľadávania... "
+msgstr ""
 
 #: ../src/zypper-search.cc:117
 msgid " out of ("
-msgstr " z ("
+msgstr ""
 
-#  tree node string
-#  tree node string - CPU information
 #: ../src/zypper-search.cc:118
 msgid "cached."
-msgstr "načítaných."
+msgstr "ਕੈਂਚੇ ਕੀਤੇ।"
 
 #: ../src/zypper-search.cc:217
 msgid " is not a valid regular expression: \""
-msgstr " nie je platný regulárny výraz: \""
+msgstr " ਇੱਕ ਢੁੱਕਵਾਂ ਨਿਯਮਤ ਸਮੀਕਰਨ ਨਹੀਂ ਹੈ: \""
 
 #: ../src/zypper-search.cc:219
 msgid "This is a bug, please file a bug report against zypper."
-msgstr "Toto je chyba, prosím, náhlaste ju ako chybu programu zypper."
+msgstr "ਇਹ ਬੱਗ ਹੈ, zypper ਲਈ ਇੱਕ ਬੱਗ ਜਾਣਕਾਰੀ ਦਿਓ ਜੀ।"
 
 #: ../src/zypper.cc:84 ../src/zypper.cc:763
-#, fuzzy
 msgid "Given URL is invalid."
-msgstr "Chybná URL adresa."
+msgstr "ਦਿੱਤਾ URL ਗਲਤ ਹੈ।"
 
 #: ../src/zypper.cc:91
-#, fuzzy
 msgid ""
 "  Commands:\n"
 "\thelp\t\t\tHelp\n"
@@ -740,26 +721,27 @@ msgid ""
 "\tinfo, if\t\tShow full information for packages\n"
 "\tpatch-info\t\tShow full information for patches\n"
 msgstr ""
-"  Príkazy:\n"
-"\thelp\t\t\tPomoc\n"
-"\tshell, sh\t\tUmožňuje zadať viacero príkazov počas jedného sedenia.\n"
-"\tinstall, in\t\tInštalácia balíčkov.\n"
-"\tremove, rm\t\tOdstránenie balíčkov\n"
-"\tsearch, se\t\tVyhľadávanie balíčkov podľa zadaného vzoru.\n"
-"\tservice-list, sl\tZoznam inštalačných zdrojov.\n"
-"\tservice-add, sa\t\tPridanie nového inštalačného zdroja\n"
-"\tservice-delete, sd\tOdstránenie inštalačného zdroja\n"
-"\tservice-rename, sr\tPremenovanie inštalačného zdroja\n"
-"\trefresh, ref\t\tObnovenie/aktualizácia inštalačného zdroja.\n"
-"\tpatch-check, pchk\tZistenie dostupnosti softvérových záplat.\n"
-"\tpatches, pch\t\tZoznam dostupných záplat\n"
-"\tlist-updates, lu\tZoznam dostupných aktualizácií.\n"
-"\tupdate, up\t\tAktualizácia balíčkov.\n"
-"\tinfo, if\t\tPodrobné informácie o balíčkoch.\n"
-"\tpatch-info\t\tPodrobné informácie o záplatách.\n"
+"  ਕਮਾਂਡਾਂ:\n"
+"\thelp\t\t\tHelp\n"
+"\tshell, sh\t\tAccept multiple commands at once\n"
+"\tinstall, in\t\tInstall packages or resolvables\n"
+"\tremove, rm\t\tRemove packages or resolvables\n"
+"\tsearch, se\t\tSearch for packages matching a pattern\n"
+"\trepos, lr\t\tList all defined repositories.\n"
+"\taddrepo, ar\t\tAdd a new repository\n"
+"\tremoverepo, rr\t\tRemove specified repository\n"
+"\trenamerepo, nr\t\tRename specified repository\n"
+"\tmodifyrepo, mr\t\tModify specified repository\n"
+"\trefresh, ref\t\tRefresh all repositories\n"
+"\tpatch-check, pchk\tCheck for patches\n"
+"\tpatches, pch\t\tList patches\n"
+"\tlist-updates, lu\tList updates\n"
+"\txml-updates, xu\t\tList updates and patches in xml format\n"
+"\tupdate, up\t\tUpdate installed resolvables with newer versions.\n"
+"\tinfo, if\t\tShow full information for packages\n"
+"\tpatch-info\t\tShow full information for patches\n"
 
 #: ../src/zypper.cc:142
-#, fuzzy
 msgid ""
 "  Options:\n"
 "\t--help, -h\t\tHelp.\n"
@@ -773,47 +755,48 @@ msgid ""
 "\t--no-gpg-checks\t\tIgnore GPG check failures and continue.\n"
 "\t--root, -R <dir>\tOperate on a different root directory.\n"
 msgstr ""
-"  Možnosti:\n"
-"\t--help, -h\t\tPomoc\n"
-"\t--version, -V\t\tVýpis čísla verzie\n"
-"\t--verbose, -v\t\tZvýšenie podrobnosti výstupu\n"
-"\t--terse, -t\t\tVýstup pre spracovanie iným programom\n"
-"\t--table-style, -s\tŠtýl výstupnej tabuľky (celé číslo)\n"
-"\t--rug-compatible, -r\tZapnutie kompatibility s programom rug\n"
-"\t--non-interactive\tNa nič sa nepýtaj, automaticky použi prednastavené odpovede. (vo vývoji)\n"
+"  ਕਮਾਡਾਂ:\n"
+"\t--help, -h\t\tHelp.\n"
+"\t--version, -V\t\tOutput the version number.\n"
+"\t--quiet, -q\t\tSuppress normal output, print only error messages.\n"
+"\t--verbose, -v\t\tIncrease verbosity.\n"
+"\t--terse, -t\t\tTerse output for machine consumption.\n"
+"\t--table-style, -s\tTable style (integer).\n"
+"\t--rug-compatible, -r\tTurn on rug compatibility.\n"
+"\t--non-interactive\tDon't ask anything, use default answers automatically.\n"
+"\t--no-gpg-checks\t\tIgnore GPG check failures and continue.\n"
+"\t--root, -R <dir>\tOperate on a different root directory.\n"
 
 #: ../src/zypper.cc:162
-#, fuzzy, c-format
+#, c-format
 msgid "Verbosity: %d"
-msgstr "Úroveň podrobnosti výstupu "
+msgstr "ਵੇਰਵਾ: %d"
 
 #: ../src/zypper.cc:168
 msgid "Entering non-interactive mode."
-msgstr ""
+msgstr "non-interactive ਮੋਡ ਚਾਲੂ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ।"
 
 #: ../src/zypper.cc:174
 msgid "Entering no-gpg-checks mode."
-msgstr ""
+msgstr "no-gpg-checks ਮੋਡ ਚਾਲੂ ਕੀਤਾ ਜਾਂਦਾ ਹੈ।"
 
 #: ../src/zypper.cc:184
 msgid "Invalid table style "
-msgstr "Nesprávny typ tabuľky "
+msgstr "ਗਲਤ ਟੇਬਲ ਸਟਾਇਲ "
 
 #: ../src/zypper.cc:231
-#, fuzzy
 msgid "Try -h for help."
-msgstr "Skús -h pre zobrazenie nápovede. Pri použití voľby -h za konkrétnym príkazom sa zobrazí nápoveda k tomuto príkazu."
+msgstr "Try -h for help."
 
 #: ../src/zypper.cc:248
-#, fuzzy
 msgid ""
 "  Repository options:\n"
 "\t--disable-repositories, -D\t\tDo not read data from defined repositories.\n"
 "\t--repo <URI|.repo>\t\tRead additional repository\n"
 msgstr ""
-"  Možnosti inštalačného zdroja:\n"
-"\t--disable-system-sources, -D\t\tIgnoruj systémové zdroje (RPM databáza nainštalovaných balíčkov)\n"
-"\t--source, -S\t\tNačítaj prídavný inštalačný zdroj\n"
+"  Repository options:\n"
+"\t--disable-repositories, -D\t\tDo not read data from defined repositories.\n"
+"\t--repo <URI|.repo>\t\tRead additional repository\n"
 
 #. ! \todo preserve for rug comp.  "\t--disable-system-sources, -D\t\tDo not read the system sources\n"
 #. ! \todo preserve for rug comp.  "\t--source, -S\t\tRead additional source\n"
@@ -822,8 +805,8 @@ msgid ""
 "  Target options:\n"
 "\t--disable-system-resolvables, -T\t\tDo not read system installed resolvables\n"
 msgstr ""
-"  Možnosti cieľa inštalácie:\n"
-"\t--disable-system-resolvables, -T\t\tIgnoruj systémové balíčky (RPM databáza nainštalovaných balíčkov)\n"
+"  Target options:\n"
+"\t--disable-system-resolvables, -T\t\tDo not read system installed resolvables\n"
 
 #: ../src/zypper.cc:274
 msgid ""
@@ -838,9 +821,18 @@ msgid ""
 "\t--auto-agree-with-licenses,-l\tAutomatically say 'yes' to third party license confirmation prompt.\n"
 "\t\t\t\t\tSee man zypper for more details.\n"
 msgstr ""
+"install [options] <name> ...\n"
+"\n"
+"'install' - Install resolvabe(s) with specified name(s).\n"
+"\n"
+"  Command options:\n"
+"\t--catalog,-c\t\t\tOnly from this catalog (under development)\n"
+"\t--type,-t <resolvable_type>\tType of resolvable (default: package)\n"
+"\t--no-confirm,-y\t\t\tDo not require user confirmation to proceed with installation\n"
+"\t--auto-agree-with-licenses,-l\tAutomatically say 'yes' to third party license confirmation prompt.\n"
+"\t\t\t\t\tSee man zypper for more details.\n"
 
 #: ../src/zypper.cc:295
-#, fuzzy
 msgid ""
 "remove [options] <name> ...\n"
 "\n"
@@ -850,12 +842,15 @@ msgid ""
 "\t--type,-t <resolvable_type>\tType of resolvable (default: package)\n"
 "\t--no-confirm,-y\t\t\tDo not require user confirmation\n"
 msgstr ""
-"  Možnosti príkazu:\n"
-"\t--type,-t\t\tTyp balíčka (prednastavená hodnota: package [balíček])\n"
-"\t--no-confirm,-y\tNevyžaduj potvrdenie\n"
+"remove [options] <name> ...\n"
+"\n"
+"'remove' - Remove resolvabe(s) with specified name(s).\n"
+"\n"
+"  Command options:\n"
+"\t--type,-t <resolvable_type>\tType of resolvable (default: package)\n"
+"\t--no-confirm,-y\t\t\tDo not require user confirmation\n"
 
 #: ../src/zypper.cc:315
-#, fuzzy
 msgid ""
 "addrepo (ar) [options] <URI> <alias>\n"
 "\n"
@@ -867,27 +862,27 @@ msgid ""
 "\t--disabled,-d\t\tAdd the repository as disabled\n"
 "\t--no-refresh,-n\t\tAdd the repository with auto-refresh disabled\n"
 msgstr ""
-"service-add [možnosti] URI [alias]\n"
+"addrepo (ar) [options] <URI> <alias>\n"
 "\n"
-"Pridaj inštalačný zdroj do systému.\n"
-"  Možnosti príkazu:\n"
-"\t--repo,-r <SÚBOR.repo>\tNačítaj URL adresu a alias zo zadaného súboru (aj vzdialeného)\n"
-"\t--type,-t <TYPE>\tTyp inštalačného zdroja (YaST, YUM, alebo Plaindir)\n"
-"\t--disabled,-d\t\tPridať inštalačný zdroj ako vypnutý\n"
-"\t--no-refresh,-n\t\tVypnúť automatické obnovovanie/aktualizáciu zdroja\n"
+"Add repository specified by URI to the system and assing specified alias to it.\n"
+"  Command options:\n"
+"\t--repo,-r <FILE.repo>\tRead the URL and alias from a file\n"
+"\t\t\t\t(even remote)\n"
+"\t--type,-t <TYPE>\tType of repository (YaST, YUM, or Plaindir)\n"
+"\t--disabled,-d\t\tAdd the repository as disabled\n"
+"\t--no-refresh,-n\t\tAdd the repository with auto-refresh disabled\n"
 
 #: ../src/zypper.cc:334
-#, fuzzy
 msgid ""
 "repos (lr)\n"
 "\n"
 "List all defined repositories.\n"
 "This command has no additional options.\n"
 msgstr ""
-"service-list\n"
+"repos (lr)\n"
 "\n"
-"Zobraz zoznam všetkých definovaných inštalačných zdrojov.\n"
-"Tento príkaz nemá žiadne ďalšie možnosti.\n"
+"List all defined repositories.\n"
+"This command has no additional options.\n"
 
 #: ../src/zypper.cc:350
 msgid ""
@@ -898,20 +893,24 @@ msgid ""
 "\t--loose-auth\tIgnore user authentication data in the URL\n"
 "\t--loose-query\tIgnore query string in the URL\n"
 msgstr ""
+"removerepo (rr) [options] <alias|URL>\n"
+"\n"
+"Remove repository specified by alias or URL.\n"
+"  Command options:\n"
+"\t--loose-auth\tIgnore user authentication data in the URL\n"
+"\t--loose-query\tIgnore query string in the URL\n"
 
 #: ../src/zypper.cc:366
-#, fuzzy
 msgid ""
 "renamerepo [options] <alias> <new-alias>\n"
 "\n"
 "Assign new alias to the repository specified by alias.\n"
 "This command has no additional options.\n"
 msgstr ""
-"service-rename <URI|alias> <nový-alias>\n"
+"renamerepo [options] <alias> <new-alias>\n"
 "\n"
-"Premenovanie zdroja. Priradí existujúcemu zdroju so zadanou URI adresou alebo aliasom nový alias.\n"
-"\n"
-"Tento príkaz nemá žiadne ďalšie možnosti.\n"
+"Assign new alias to the repository specified by alias.\n"
+"This command has no additional options.\n"
 
 #: ../src/zypper.cc:384
 msgid ""
@@ -923,9 +922,15 @@ msgid ""
 "\t--enable-autorefresh,-a\tEnable auto-refresh of the repository\n"
 "\t--disable-autorefresh\tDisable auto-refresh of the repository\n"
 msgstr ""
+"modifyrepo (mr) <options> <alias>\n"
+"\n"
+"Modify properties of the repository specified by alias.\n"
+"\t--disable,-d\t\tDisable the repository (but don't remove it)\n"
+"\t--enable,-e\t\tEnable a disabled repository\n"
+"\t--enable-autorefresh,-a\tEnable auto-refresh of the repository\n"
+"\t--disable-autorefresh\tDisable auto-refresh of the repository\n"
 
 #: ../src/zypper.cc:401
-#, fuzzy
 msgid ""
 "refresh\n"
 "\n"
@@ -933,12 +938,13 @@ msgid ""
 "\n"
 "This command has no additional options.\n"
 msgstr ""
-"zypper refresh\n"
+"refresh\n"
 "\n"
-"Obnov/aktualizuj všetky inštalačné zdroje v systéme.\n"
+"Refresh all installation sources found in the system.\n"
+"\n"
+"This command has no additional options.\n"
 
 #: ../src/zypper.cc:416
-#, fuzzy
 msgid ""
 "list-updates [options]\n"
 "\n"
@@ -949,10 +955,10 @@ msgid ""
 msgstr ""
 "list-updates [options]\n"
 "\n"
-"Zobraz zoznam všetkých dostupných aktualizácií.\n"
+"List all available updates\n"
 "\n"
-"  Možnosti príkazu:\n"
-"\t--type,-t\t\tTyp balíčka (prednastavená hodnota: patch [záplata])\n"
+"  Command options:\n"
+"\t--type,-t <resolvable_type>\tType of resolvable (default: patch)\n"
 
 #: ../src/zypper.cc:435
 msgid ""
@@ -966,9 +972,17 @@ msgid ""
 "\t--auto-agree-with-licenses,-l\tAutomatically say 'yes' to third party license confirmation prompt.\n"
 "\t\t\t\t\tSee man zypper for more details.\n"
 msgstr ""
+"'update' - Update all installed resolvables with newer versions, where applicable.\n"
+"\n"
+"  Command options:\n"
+"\n"
+"\t--type,-t <resolvable_type>\tType of resolvable (default: patch)\n"
+"\t--no-confirm,-y\t\t\tDo not require user confirmation\n"
+"\t--skip-interactive\t\tSkip interactive updates\n"
+"\t--auto-agree-with-licenses,-l\tAutomatically say 'yes' to third party license confirmation prompt.\n"
+"\t\t\t\t\tSee man zypper for more details.\n"
 
 #: ../src/zypper.cc:465
-#, fuzzy
 msgid ""
 "search [options] [querystring...]\n"
 "\n"
@@ -990,28 +1004,27 @@ msgid ""
 "\n"
 "* and ? wildcards can also be used within search strings.\n"
 msgstr ""
-"zypper [globálne-možnosti] search [špecifické-možnosti] [hľadaný-výraz...]\n"
+"search [options] [querystring...]\n"
 "\n"
-"'search' - Hľadaj balíčky podľa zadaného výrazu\n"
+"'search' - Search for packages matching given search strings\n"
 "\n"
-"  Možnosti príkazu:\n"
-"    --match-all            Nájdi balíčky, ktoré obsahujú všetky hľadané výrazy (predvolené)\n"
-"    --match-any            Nájdi balíčky, ktoré obsahujú ktorýkoľvek z hľadaných výrazov\n"
-"    --match-substrings     Hľadané výrazy môžu predstavovať časti slov (predvolené)\n"
-"    --match-words          Hľadané výrazy predstavujú celé slová\n"
-"    --match-exact          Hľadaný výraz sa musí presne zhodovať s názvom balíčka\n"
-"-d, --search-descriptions  Hľadaj aj v popisoch balíčkov\n"
-"-c, --case-sensitive       Rozlišuj veľké a malé písmená\n"
-"-i, --installed-only       Hľadaj iba medzi nainštalovanými balíčkami\n"
-"-u, --uninstalled-only     Hľadaj iba medzi nenainštalovanými balíčkami\n"
-"-t, --type                 Hľadaj iba balíčky určeného typu\n"
-"    --sort-by-name         Zotrieď nájdené balíčky podľa mena (predvolené)\n"
-"    --sort-by-catalog      Zotrieď balíčky podľa inštalačného zdroja\n"
+"  Command options:\n"
+"    --match-all            Search for a match to all search strings (default)\n"
+"    --match-any            Search for a match to any of the search strings\n"
+"    --match-substrings     Matches for search strings may be partial words (default)\n"
+"    --match-words          Matches for search strings may only be whole words\n"
+"    --match-exact          Searches for an exact package name\n"
+"-d, --search-descriptions  Search also in package summaries and descriptions.\n"
+"-c, --case-sensitive       Perform case-sensitive search.\n"
+"-i, --installed-only       Show only packages that are already installed.\n"
+"-u, --uninstalled-only     Show only packages that are not currently installed.\n"
+"-t, --type                 Search only for packages of the specified type.\n"
+"    --sort-by-name         Sort packages by name (default).\n"
+"    --sort-by-catalog      Sort packages by catalog (source).\n"
 "\n"
-"Znaky * a ? môžu byt v hľadaných výrazoch použité ako náhrada ľubovoľného reťazca alebo znaku.\n"
+"* and ? wildcards can also be used within search strings.\n"
 
 #: ../src/zypper.cc:493
-#, fuzzy
 msgid ""
 "patch-check\n"
 "\n"
@@ -1021,12 +1034,11 @@ msgid ""
 msgstr ""
 "patch-check\n"
 "\n"
-"Zisti dostupnosť záplat.\n"
+"Check for available patches\n"
 "\n"
-"Tento príkaz nemá žiadne ďalšie možnosti.\n"
+"This command has no additional options.\n"
 
 #: ../src/zypper.cc:507
-#, fuzzy
 msgid ""
 "patches\n"
 "\n"
@@ -1036,12 +1048,11 @@ msgid ""
 msgstr ""
 "patches\n"
 "\n"
-"Zobraz zoznam všetkých dostupných záplat.\n"
+"List all available patches\n"
 "\n"
-"Tento príkaz nemá žiadne ďalšie možnosti.\n"
+"This command has no additional options.\n"
 
 #: ../src/zypper.cc:521
-#, fuzzy
 msgid ""
 "info <name> ...\n"
 "\n"
@@ -1049,14 +1060,13 @@ msgid ""
 "\n"
 "This command has no additional options.\n"
 msgstr ""
-"zypper [globálne-možnosti] info [názov...]\n"
+"info <name> ...\n"
 "\n"
-"'info' -- Zobraz podrobné informácie o zadaných balíčkoch.\n"
+"'info' -- Show full information for packages\n"
 "\n"
-"Tento príkaz nemá žiadne ďalšie možnosti.\n"
+"This command has no additional options.\n"
 
 #: ../src/zypper.cc:535
-#, fuzzy
 msgid ""
 "patch-info <patchname> ...\n"
 "\n"
@@ -1064,11 +1074,11 @@ msgid ""
 "\n"
 "This command has no additional options.\n"
 msgstr ""
-"zypper [globálne-možnosti] patch-info [názov-záplaty...]\n"
+"patch-info <patchname> ...\n"
 "\n"
-"'patch-info' -- Zobraz podrobné informácie o zadaných záplatách.\n"
+"'patch-info' -- Show detailed information for patches\n"
 "\n"
-"Tento príkaz nemá žiadne ďalšie možnosti.\n"
+"This command has no additional options.\n"
 
 #: ../src/zypper.cc:549
 msgid ""
@@ -1078,27 +1088,33 @@ msgid ""
 "\n"
 "This command has no additional options.\n"
 msgstr ""
+"moo\n"
+"\n"
+"'moo' - Show an animal\n"
+"\n"
+"This command has no additional options.\n"
 
 #: ../src/zypper.cc:567
-#, fuzzy
 msgid "Non-option program arguments: "
-msgstr "Argumenty programu (okrem volieb): "
+msgstr "ਨਾ-ਚੋਣ ਪਰੋਗਰਾਮ ਆਰਗੂਮਿੰਟ: "
 
 #: ../src/zypper.cc:579
 msgid "Ignoring --terse (provided only for rug compatibility)"
-msgstr "Ignorujem voľbu --terse (voľba je súčasne k dispozícii len kvôli kompatibilite s programom rug)"
+msgstr ""
 
 #: ../src/zypper.cc:588
 msgid "Repositories disabled, using database of installed packages only."
-msgstr ""
+msgstr "ਰਿਪੋਜ਼ਟਰੀਆਂ ਆਯੋਗ ਹਨ, ਇੰਸਟਾਲ ਹੋਏ ਪੈਕੇਜਾਂ ਲਈ ਡਾਟਾਬੇਸ ਨਾਲ ਹੀ।"
 
 #: ../src/zypper.cc:600
 msgid "Ignoring installed resolvables..."
-msgstr "Ignorujem nainštalované balíčky..."
+msgstr "ਇੰਸਟਾਲ ਹੋਏ ਹੱਲਯੋਗ ਅਣਡਿੱਠ ਕੀਤੇ ਜਾ ਰਹੇ ਹਨ..."
 
 #: ../src/zypper.cc:625
 msgid "A ZYpp transaction is already in progress.This means, there is another application using libzypp library forpackage management running. All such applications must be closed beforeusing this command."
 msgstr ""
+" ZYpp ਟਰਾਂਸੈਕਸ਼ਨ ਪਹਿਲਾਂ ਹੀ ਜਾਰੀ ਹੈ। ਮਤਲਬ ਕਿ ਕੋਈ ਹੋਰ ਕਾਰਜ libzypp ਲਾਇਬਰੇਰੀ ਨੂੰ ਪੈਕੇਜ ਪਰਬੰਧ ਲਈ ਵਰਤ ਰਿਹਾ ਹੈ। "
+"ਇਹ ਕਮਾਂਡ ਵਰਤਣ ਤੋਂ ਪਹਿਲਾਂ ਉਹ ਸਭ ਕਾਰਜ ਬੰਦ ਕੀਤੇ ਹੋਣੇ ਚਾਹੀਦੇ ਹਨ।"
 
 #. TranslatorExplanation this is a hedgehog, paint another animal, if you want
 #: ../src/zypper.cc:644
@@ -1107,169 +1123,159 @@ msgid ""
 "  \\\\\\\\\\\\\\__o\n"
 "__\\\\\\\\\\\\\\'/_"
 msgstr ""
+"   \\\\\\\\\\\n"
+"  \\\\\\\\\\\\\\__o\n"
+"__\\\\\\\\\\\\\\'/_"
 
 #: ../src/zypper.cc:672 ../src/zypper.cc:737 ../src/zypper.cc:808
 #: ../src/zypper.cc:848
-#, fuzzy
 msgid "Root privileges are required for modifying system repositories."
-msgstr "Pre prácu so systémovými zdrojmi sú potrebné práva správcu systému (root)."
+msgstr "ਸਿਸਟਮ ਰਿਪੋਜ਼ਟਰੀਆਂ ਸੋਧਣ ਲਈ root ਅਧਿਕਾਰ ਚਾਹੀਦੇ ਹਨ।"
 
 #: ../src/zypper.cc:696 ../src/zypper.cc:814
 msgid "Too few arguments. At least URL and alias are required."
-msgstr ""
+msgstr "ਬਹੁਤ ਥੋੜੇ ਆਰਗੂਮਿੰਟ ਹਨ। ਘੱਟੋ-ਘੱਟ URL ਅਤੇ ਉਪ-ਨਾਂ ਲੋੜੀਦਾ ਹੈ।"
 
 #: ../src/zypper.cc:743
 msgid "Required argument missing."
-msgstr ""
+msgstr "ਲੋੜੀਦਾ ਆਰਗੂਮਿੰਟ ਲੋੜੀਦਾ ਹੈ।"
 
 #: ../src/zypper.cc:756
 msgid "Repository not found by alias, trying delete by URL..."
-msgstr ""
+msgstr "ਉਪ-ਨਾਂ ਨਾਲ ਰਿਪੋਜ਼ਟਰੀ ਨਹੀਂ ਮਿਲੀ, URL ਨਾਲ ਹਟਾਉਣ ਦੀ ਕੋਸ਼ਿਸ਼ ਜਾਰੀ..."
 
 #: ../src/zypper.cc:789
 msgid "Repository not found by given alias or URL."
-msgstr ""
+msgstr "ਦਿੱਤੇ ਉਪ-ਨਾਂ ਜਾਂ URL ਨਾਲ ਰਿਪੋਜ਼ਟਰੀ ਨਹੀਂ ਮਿਲੀ ਹੈ।"
 
 #: ../src/zypper.cc:854
-#, fuzzy
 msgid "Alias is a required argument."
-msgstr "Schéma URL je povinná"
+msgstr "ਉਪ-ਨਾਂ ਲੋੜੀਦਾ ਆਰਗੂਮਿੰਟ ਹੈ।"
 
 #: ../src/zypper.cc:876
-#, fuzzy
 msgid "Root privileges are required for refreshing system repositories."
-msgstr "Pre prácu so systémovými zdrojmi sú potrebné práva správcu systému (root)."
+msgstr "ਸਿਸਟਮ ਰਿਪੋਜ਼ਟਰੀਆਂ ਤਾਜ਼ਾ ਕਰਨ ਲਈ root ਅਧਿਕਾਰ ਲੋੜੀਦੇ ਹਨ।"
 
 #: ../src/zypper.cc:912
-#, fuzzy
 msgid "Root privileges are required for installing or uninstalling packages."
-msgstr "Pre prácu so systémovými zdrojmi sú potrebné práva správcu systému (root)."
+msgstr "ਪੈਕੇਜ ਇੰਸਟਾਲ ਅਤੇ ਅਣ-ਇੰਸਟਾਲ ਕਰਨ ਲਈ root ਅਧਿਕਾਰ ਲੋੜੀਦੇ ਹਨ।"
 
 #: ../src/zypper.cc:920 ../src/zypper.cc:1070 ../src/zypper.cc:1123
-#, fuzzy, c-format
+#, c-format
 msgid "Unknown resolvable type: %s"
-msgstr "Neznámy typ balíčka "
+msgstr "ਅਣਜਾਣ ਹੱਲ ਕਿਸਮ: %s"
 
 #: ../src/zypper.cc:936
-#, fuzzy
 msgid "Warning: No repositories defined. Operating only with the installed resolvables. Nothing can be installed."
-msgstr "Pozor: Nie sú dostupné žiadne inštalačné zdroje. Pracujem len s nainštalovanými balíčkami. Nové balíčky nebude možné inštalovať."
+msgstr "ਚੇਤਾਵਨੀ: ਰਿਪੋਜ਼ਟਰੀਆਂ ਦਿੱਤੀਆਂ ਨਹੀਂ ਹਨ। ਇੰਸਟਾਲ ਹੱਲ਼ਯੋਗ ਨਾਲ ਹੀ ਕਾਰਵਾਈ ਹੋਵੇਗੀ। ਕੁਝ ਵੀ ਇੰਸਟਾਲ ਨਹੀਂ ਹੋਵੇਗਾ।"
 
 #: ../src/zypper.cc:984
 msgid "Unknown resolvable type "
-msgstr "Neznámy typ balíčka "
+msgstr "ਅਣਜਾਣ ਹੱਲਯੋਗ ਕਿਸਮ "
 
 #: ../src/zypper.cc:1003
-#, fuzzy
 msgid "No resolvables found."
-msgstr " balíčkov."
+msgstr "ਕੋਈ ਹੱਲ਼ ਨਹੀਂ ਲੱਭਿਆ "
 
 #: ../src/zypper.cc:1112
-#, fuzzy
 msgid "Root privileges are required for updating packages."
-msgstr "Pre prácu so systémovými zdrojmi sú potrebné práva správcu systému (root)."
+msgstr "ਪੈਕੇਜ ਅੱਪਡੇਟ ਕਰਨ ਲਈ root ਅਧਿਕਾਰ ਲੋੜੀਦੇ ਹਨ।"
 
 #: ../src/zypper.cc:1169
 msgid "Please file a bug report about this."
-msgstr "Prosím, pošlite správu o tejto chybe."
+msgstr "ਇਸ ਬਾਰੇ ਬੱਗ ਰਿਪੋਰਟ ਕਰੋ ਜੀ।"
 
 #. remember not to translate the URL
 #. unless you translate the actual page :)
 #: ../src/zypper.cc:1172
 msgid "See http://en.opensuse.org/Zypper#Troubleshooting for instructions."
-msgstr "Na adrese http://en.opensuse.org/Zypper#Troubleshooting nájdete návod ako na to."
+msgstr "ਸਮੱਸਿਆ ਹੱਲ਼ ਵਾਸਤੇ ਹਦਾਇਤਾਂ ਲਈ http://en.opensuse.org/Zypper ਵੇਖੋ।"
 
 #: ../src/zypper.cc:1187
 msgid "Unexpected exception."
-msgstr "Neočakávaná výnimka. "
+msgstr "ਅਚਾਨਕ ਅਪਵਾਦ ਆਇਆ ਹੈ।"
 
 #: ../src/zypper.cc:1269
 msgid "You already are running zypper's shell."
-msgstr ""
+msgstr "ਤੁਸੀਂ zypper ਦੀ ਸ਼ੈਲ ਪਹਿਲਾਂ ਹੀ ਚਲਾ ਰਹੇ ਹੋ।"
 
 #: ../src/zypper-command.cc:90
-#, fuzzy, c-format
+#, c-format
 msgid "Unknown command '%s'"
-msgstr "Neznámy príkaz "
+msgstr "ਅਣਜਾਣ ਕਮਾਂਡ '%s'"
 
 # error box title
 #: ../src/zypper-callbacks.h:37
 msgid "I/O error"
-msgstr "Chyba V/V"
+msgstr "I/O ਗਲਤੀ"
 
 #: ../src/zypper-callbacks.h:37
-#, fuzzy
 msgid "Invalid object"
-msgstr "Nesprávny typ tabuľky "
+msgstr "ਗਲਤ ਆਬਜੈਕਟ"
 
 #: ../src/zypper-media-callbacks.h:53
-#, fuzzy
 msgid "Downloading: "
-msgstr "Sťahujem %s"
+msgstr "ਡਾਊਨਲੋਡ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ: "
 
 #. TranslatorExplanation This text is a progress display label e.g. "Downloading delta [42%]"
 #: ../src/zypper-source-callbacks.h:95 ../src/zypper-source-callbacks.h:102
-#, fuzzy
 msgid "Downloading delta"
-msgstr "Sťahujem %s"
+msgstr "ਡੈਲਟਾ ਡਾਊਨਲੋਡ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ"
 
 #. TranslatorExplanation This text is a progress display label e.g. "Applying delta [42%]"
 #: ../src/zypper-source-callbacks.h:123 ../src/zypper-source-callbacks.h:129
 msgid "Applying delta"
-msgstr ""
+msgstr "ਡੈਲਟਾ ਲਾਗੂ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ"
 
 #: ../src/zypper-source-callbacks.h:150
-#, fuzzy
 msgid "Downloading patch rpm"
-msgstr "Sťahujem %s"
+msgstr "ਪੈਂਚ rpm ਡਾਊਨਲੋਡ ਕੀਤਾ ਰਿਹਾ ਹੈ"
 
 #. TranslatorExplanation This text is a progress display label e.g. "Applying patch rpm [42%]"
 #: ../src/zypper-source-callbacks.h:157
 msgid "Applying patch rpm"
-msgstr ""
+msgstr "ਪੈਂਚ rpm ਲਾਗੂ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ"
 
 #: ../src/zypper-source-callbacks.h:177
-#, fuzzy, c-format
+#, c-format
 msgid "Downloading %s %s-%s.%s"
-msgstr "Sťahujem %s"
+msgstr "%s %s-%s.%s ਡਾਊਨਲੋਡ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ"
 
 #. TranslatorExplanation %s is package size like "5.6 M"
 #: ../src/zypper-source-callbacks.h:188
 #, c-format
 msgid "(%s unpacked)"
-msgstr ""
+msgstr "(%s ਅਣ-ਪੈਕ)"
 
 #. TranslatorExplanation This text is a progress display label e.g. "Downloading [42%]"
 #: ../src/zypper-source-callbacks.h:197
-#, fuzzy
 msgid "Downloading"
-msgstr "Sťahujem %s"
+msgstr "ਡਾਊਨਲੋਡ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ"
 
 #. TranslatorExplanation speaking of a script
 #: ../src/zypper-rpm-callbacks.h:56
 #, c-format
 msgid "Running: %s  (%s, %s)"
-msgstr ""
+msgstr "ਚੱਲ ਰਿਹਾ ਹੈ: %s  (%s, %s)"
 
 #: ../src/zypper-rpm-callbacks.h:110
-#, fuzzy
 msgid "Reading installed packages"
-msgstr "Inštalovať balíky"
+msgstr "ਇੰਸਟਾਲ ਪੈਕੇਜ ਪੜ੍ਹੇ ਜਾ ਰਹੇ ਹਨ"
 
 #: ../src/zypper-rpm-callbacks.h:133
-#, fuzzy, c-format
+#, c-format
 msgid "Removing: %s-%s"
-msgstr "Zlyhalo odstraňovanie %s"
+msgstr "ਹਟਾਇਆ ਜਾ ਰਿਹਾ ਹੈ: %s-%s"
 
 #: ../src/zypper-rpm-callbacks.h:193
 msgid "Will retry more aggressively."
-msgstr ""
+msgstr "ਹੁਣ ਡੂੰਘਾਈ ਨਾਲ ਕੋਸ਼ਿਸ਼ ਕੀਤੀ ਜਾਵੇਗੀ।"
 
 #: ../src/zypper-search.h:237
 msgid "Catalog"
-msgstr "Katalóg"
+msgstr "ਕੈਟਾਲਾਗ"
 
 #: ../src/zypper-search.h:239
-#, fuzzy
 msgid "Repository"
-msgstr "Úroveň podrobnosti výstupu "
+msgstr "ਰਿਪੋਜ਼ਟਰੀ"
+

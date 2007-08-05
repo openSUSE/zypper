@@ -1,311 +1,306 @@
-# translation of zypper.sk.po to
-# Slovak language translation of zypper messages.
-#
+# @TITLE@
 # Copyright (C) 2006, SUSE Linux GmbH, Nuremberg
-# Ján Kupec <jkupec@suse.cz>, 2007.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+# This file is distributed under the same license as @PACKAGE@ package. FIRST
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: zypper.sk\n"
+"Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-07-19 15:00+0200\n"
-"PO-Revision-Date: 2007-02-27 10:22+0100\n"
-"Last-Translator: Jan Kupec <jkupec@suse.cz>\n"
-"Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
+"PO-Revision-Date: 2007-07-29 21:18+0100\n"
+"Last-Translator: wadim dziedzic <wdziedzi@aviary.pl>\n"
+"Language-Team:  <pl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.11.4\n"
-"Plural-Forms: nplurals=3; plural=(n==1) ? 1 : (n>=2 && n<=4) ? 2 : 0;\n"
+"X-Generator: KBabel 1.9.1\n"
+"Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 
 #: ../src/zypper-keyring-callbacks.h:40
 #, c-format
 msgid "Warning: Accepting an unsigned file %s."
-msgstr ""
+msgstr "Uwaga: zaakceptowano niepodpisany plik %s."
 
 #: ../src/zypper-keyring-callbacks.h:46
-#, fuzzy, c-format
+#, c-format
 msgid "%s is unsigned, continue?"
-msgstr " nie je podpísaný. Pokračovať?"
+msgstr "%s jest niepodpisany. Kontynuować?"
 
 #: ../src/zypper-keyring-callbacks.h:56
-#, fuzzy, c-format
+#, c-format
 msgid "Import key %s to trusted keyring?"
-msgstr " do dôveryhodného zväzku?"
+msgstr "Dodać klucz %s do zaufanej bazy kluczy?"
 
 #: ../src/zypper-keyring-callbacks.h:66
-#, fuzzy, c-format
+#, c-format
 msgid "Warnging: Accepting file %s signed with an unknown key %s."
-msgstr " je podpísaný neznámym ID kľúča: "
+msgstr "Uwaga: zaakceptowano plik %s podpisany nieznanym kluczem %s:  "
 
 #: ../src/zypper-keyring-callbacks.h:73
-#, fuzzy, c-format
+#, c-format
 msgid "%s is signed with an unknown key %s. Continue?"
-msgstr " je podpísaný neznámym ID kľúča: "
+msgstr "%s jest podpisany nieznanym kluczem %s. Kontynuować?  "
 
 #: ../src/zypper-keyring-callbacks.h:87
 #, c-format
 msgid "Automatically trusting key id %s, %s, fingerprint %s"
-msgstr ""
+msgstr "ID Klucza: %s, %s, odcisk: %s - automatyczne zaufanie"
 
-# power-off message
 #: ../src/zypper-keyring-callbacks.h:93
-#, fuzzy, c-format
+#, c-format
 msgid "Do you want to trust key id %s, %s, fingerprint %s"
-msgstr "Dôverovať kľúču s ID "
+msgstr "Czy ufać kluczowi: id: %s, %s, odcisk: %s"
 
 #: ../src/zypper-keyring-callbacks.h:110
 #, c-format
 msgid "Warning: Ignoring failed signature verification for %s with public key id %s, %s, fingerprint %s! Double-check this is not caused by some malicious changes in the file!"
-msgstr ""
+msgstr "Uwaga: zignorowano nieudaną weryfikację sygnatury dla %s. ID klucza: %s, %s odcisk: %s. Proszę jeszcze raz skontrolować czy nie jest to spowodowane przez niebezpieczne zmiany w pliku."
 
 #: ../src/zypper-keyring-callbacks.h:119
 #, c-format
 msgid "Signature verification failed for %s with public key id %s, %s, fingerprint %s. Warning: this might be caused by a malicious change in the file! Continuing is risky! Continue anyway?"
-msgstr ""
+msgstr "Nieudana weryfikacja sygnatury dla %s. ID klucza: %s, %s, odcisk: %s. Uwaga: to może być spowodowane przez niebezpieczne zmiany w pliku. Kontynuacja wiąże się z ryzykiem. Kontynuować?"
 
 #: ../src/zypper-keyring-callbacks.h:133
-#, fuzzy, c-format
+#, c-format
 msgid "No digest for file %s."
-msgstr "Žiadny výťah (digest) pre "
+msgstr "Brak podsumowania dla pliku %s."
 
-# internal key used: Ok
 #. there are resolvables to install/uninstall
 #: ../src/zypper-keyring-callbacks.h:133 ../src/zypper-keyring-callbacks.h:141
 #: ../src/zypper-keyring-callbacks.h:160 ../src/zypper-misc.cc:922
 msgid "Continue?"
-msgstr "Pokračovať?"
+msgstr "Czy kontynuować?"
 
 #: ../src/zypper-keyring-callbacks.h:140
-#, fuzzy, c-format
+#, c-format
 msgid "Unknown digest %s for file %s."
-msgstr "Neznámy výťah (digest) "
+msgstr "Nieznane podsumowanie %s dla pliku %s."
 
 #: ../src/zypper-keyring-callbacks.h:153
 #, c-format
 msgid "Ignoring failed digest verification for %s (expected %s, found %s)."
-msgstr ""
+msgstr "Zignorowano nieudaną weryfikację podsumowania dla %s (oczekiwano %s, napotkano %s)"
 
 #: ../src/zypper-keyring-callbacks.h:159
-#, fuzzy, c-format
+#, c-format
 msgid "Digest verification failed for %s. Expected %s, found %s."
-msgstr "Overovanie výťahu (digest) zlyhalo pre "
+msgstr "Weryfikacja podsumowania dla %s nie powiodła się. Oczekiwano %s, napotkano %s."
 
 #: ../src/zypper-misc.cc:33
 msgid "Initializing Target"
-msgstr "Inicializujem cieľovú databázu"
+msgstr "Inicjalizacja celu"
 
 #. TranslatorExplanation e.g. "package 'pornview' not found"
 #: ../src/zypper-misc.cc:148
-#, fuzzy, c-format
+#, c-format
 msgid "%s '%s' not found"
-msgstr "Hostiteľ %s nebol nájdený."
+msgstr "Nie znaleziono: %s %s"
 
 #: ../src/zypper-misc.cc:157
-#, fuzzy, c-format
+#, c-format
 msgid "skipping %s '%s' (already installed)"
-msgstr "Preskakujem %s: balíček je už nainštalovaný"
+msgstr "Pominięto: %s %s (już zainstalowane)"
 
 #: ../src/zypper-misc.cc:163
 #, c-format
 msgid "Failed to add '%s' to the list of packages to be installed."
-msgstr "Balíček '%s' nebolo možné pridať do zoznamu balíčkov, ktoré sa majú nainštalovať."
+msgstr "Dodanie \"%s\" do listy pakietów przeznaczonych do instalacji nie powiodło się."
 
 #: ../src/zypper-misc.cc:183
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to add '%s' to the list of packages to be removed."
-msgstr "Balíček '%s' nebolo možné pridať do zoznamu balíčkov, ktoré sa majú nainštalovať."
+msgstr "Dodanie \"%s\" do listy pakietów przeznaczonych do usunięcia nie powiodło się."
 
 #. TranslatorExplanation These are reasons for various failures.
 #: ../src/zypper-misc.cc:209 ../src/zypper-callbacks.h:37
 msgid "Not found"
-msgstr "Nenájdený"
+msgstr "Nie znaleziono"
 
 #: ../src/zypper-misc.cc:229 ../src/zypper-misc.cc:297
-#, fuzzy
 msgid "Problem: "
-msgstr "Problémy:"
+msgstr "Problem:"
 
 #. TranslatorExplanation %d is the solution number
 #: ../src/zypper-misc.cc:242
 #, c-format
 msgid " Solution %d: "
-msgstr ""
+msgstr " Rozwiązanie %d: "
 
 #. input prompt
 #: ../src/zypper-misc.cc:254
 msgid "number, (r)etry or (c)ancel> "
-msgstr ""
+msgstr "liczba, (p)onów lub (a)nuluj"
 
 #. translators: corresponds to (r)etry
 #: ../src/zypper-misc.cc:262
 msgid "r"
-msgstr ""
+msgstr "p"
 
 #. translators: corresponds to (c)ancel
 #: ../src/zypper-misc.cc:265
 msgid "c"
-msgstr ""
+msgstr "a"
 
 #: ../src/zypper-misc.cc:271
 #, c-format
 msgid "Applying solution %s"
-msgstr ""
+msgstr "Zastosowanie rozwiązania %s"
 
 #: ../src/zypper-misc.cc:294
-#, fuzzy, c-format
+#, c-format
 msgid "%s Problems:"
-msgstr "Problémy:"
+msgstr "Problemy (%s): "
 
 #. nothing to do;
 #: ../src/zypper-misc.cc:323
 msgid "Summary:"
-msgstr "Zhrnutie:"
+msgstr "Podsumowanie:"
 
 #: ../src/zypper-misc.cc:346
 msgid "<install>   "
-msgstr "<inštalovať>"
+msgstr "<zainstaluj>   "
 
 #: ../src/zypper-misc.cc:348
 msgid "<uninstall> "
-msgstr "<odinštalovať>"
+msgstr "<usuń>"
 
 #: ../src/zypper-misc.cc:353
 msgid "Nothing to do."
-msgstr "Nie je čo robiť."
+msgstr "Brak zadań."
 
 #: ../src/zypper-misc.cc:422
 #, c-format
 msgid "Repository '%s' not cached. Caching..."
-msgstr ""
+msgstr "Brak pamięci podręcznej dla repozytorium \"%s\". Tworzenie..."
 
 #. TranslatorExplanation speaking of a repository
 #: ../src/zypper-misc.cc:427
-#, fuzzy, c-format
+#, c-format
 msgid "Reading repository %s..."
-msgstr "Pridávam zdroje"
+msgstr "Odczytywanie repozytorium \"%s\""
 
 #: ../src/zypper-misc.cc:431
-#, fuzzy, c-format
+#, c-format
 msgid "(%d resolvables found)"
-msgstr " balíčkov."
+msgstr "(znalezionych pakietów: %d)"
 
 #: ../src/zypper-misc.cc:439
-#, fuzzy, c-format
+#, c-format
 msgid "Problem loading data from '%s'"
-msgstr "Načítavam produkt z %s"
+msgstr "Problem przy wczytywaniu danych z \"%s\""
 
 #: ../src/zypper-misc.cc:442
 #, c-format
 msgid "Resolvables from '%s' not loaded because of error."
-msgstr ""
+msgstr "Pakiety z \"%s\" nie zostały wczytane z powodu błędu."
 
 #: ../src/zypper-misc.cc:450
-#, fuzzy
 msgid "Reading RPM database..."
-msgstr "Čítam RPM databázu..."
+msgstr "Odczytywanie bazy danych RPM..."
 
 #: ../src/zypper-misc.cc:455
-#, fuzzy, c-format
+#, c-format
 msgid "(%s resolvables)"
-msgstr " balíčkov."
+msgstr "(pakietów: %s)"
 
 #: ../src/zypper-misc.cc:464
 msgid "Establishing status of aggregates"
-msgstr "Nastavujem stav agregátov"
+msgstr "Ustalanie statusu agregatów"
 
 #: ../src/zypper-misc.cc:472
 msgid "Resolving dependencies..."
-msgstr "Riešim závislosti..."
+msgstr "Rozwiązywanie zależności..."
 
 #: ../src/zypper-misc.cc:497
-#, fuzzy, c-format
+#, c-format
 msgid "%d patches needed (%d security patches)"
-msgstr " bezpečnostných záplat"
+msgstr "potrzebnych poprawek: %d (poprawki bezpieczeństwa: %d)"
 
 #: ../src/zypper-misc.cc:506 ../src/zypper-info.cc:148
 msgid "Installed"
-msgstr "Nainštalovaný"
+msgstr "Zainstalowano"
 
 #: ../src/zypper-misc.cc:506 ../src/zypper-info.cc:148
 msgid "Uninstalled"
-msgstr "Nenainštalovaný"
+msgstr "Usunięto"
 
 #: ../src/zypper-misc.cc:508 ../src/zypper-info.cc:150
 msgid "No Longer Applicable"
-msgstr "Už neaplikovateľná"
+msgstr "Już nieodpowiednia"
 
 #: ../src/zypper-misc.cc:508 ../src/zypper-info.cc:150
 msgid "Not Applicable"
-msgstr "Neaplikovateľná"
+msgstr "Nieodpowiednia"
 
 #: ../src/zypper-misc.cc:510 ../src/zypper-info.cc:152
 msgid "Applied"
-msgstr "Použité"
+msgstr "Zastosowana"
 
 #: ../src/zypper-misc.cc:510 ../src/zypper-info.cc:152
 msgid "Not Needed"
-msgstr "Nepotrebná "
+msgstr "Niepotrzebna"
 
 #: ../src/zypper-misc.cc:512 ../src/zypper-info.cc:154
 msgid "Broken"
-msgstr "Poškodená"
+msgstr "Uszkodzona"
 
 #: ../src/zypper-misc.cc:512 ../src/zypper-info.cc:154
 msgid "Needed"
-msgstr "Potrebná"
+msgstr "Potrzebna"
 
 #. if ResStatus interface changes
 #: ../src/zypper-misc.cc:514
 msgid "error"
-msgstr "chyba"
+msgstr "błąd"
 
 #: ../src/zypper-misc.cc:543 ../src/zypper-misc.cc:627
 #: ../src/zypper-misc.cc:767 ../src/zypper-info.cc:92
 msgid "Catalog: "
-msgstr "Katalóg: "
+msgstr "Katalog: "
 
 #: ../src/zypper-misc.cc:543 ../src/zypper-misc.cc:627
 #: ../src/zypper-misc.cc:767 ../src/zypper-info.cc:92
-#, fuzzy
 msgid "Repository: "
-msgstr "Úroveň podrobnosti výstupu "
+msgstr "Repozytorium:"
 
 #: ../src/zypper-misc.cc:544 ../src/zypper-misc.cc:628
 #: ../src/zypper-misc.cc:772 ../src/zypper-sources.cc:81
 #: ../src/zypper-search.h:247
 msgid "Name"
-msgstr "Názov"
+msgstr "Nazwa"
 
 #: ../src/zypper-misc.cc:544 ../src/zypper-misc.cc:628
 #: ../src/zypper-misc.cc:772 ../src/zypper-search.h:247
 msgid "Version"
-msgstr "Verzia"
+msgstr "Wersja"
 
 #: ../src/zypper-misc.cc:544 ../src/zypper-misc.cc:628
 msgid "Category"
-msgstr "Kategória"
+msgstr "Kategoria"
 
 #: ../src/zypper-misc.cc:544 ../src/zypper-misc.cc:628
 #: ../src/zypper-sources.cc:79
 msgid "Status"
-msgstr "Stav"
+msgstr "Status"
 
 #: ../src/zypper-misc.cc:570
-#, fuzzy
 msgid "No needed patches found."
-msgstr "Neboli nájdené žiadne aktualizované ovládače"
+msgstr "Nie znaleziono potrzebnych poprawek."
 
 #: ../src/zypper-misc.cc:662
 msgid ""
 "WARNING: These are only the updates affecting the updater itself.\n"
 "There are others available too.\n"
-msgstr "POZOR: Toto sú len aktualizácie aktualizátora, k dispozícii sú aj ďalšie aktualizácie.\n"
+msgstr ""
+"UWAGA: Te uaktualnienia dotyczą samego programu uaktualniającego.\n"
+"Dostępne są także inne uaktualnienia.\n"
 
 #: ../src/zypper-misc.cc:672 ../src/zypper-misc.cc:795
-#, fuzzy
 msgid "No updates found."
-msgstr "Žiadne chyby."
+msgstr "Nie znaleziono aktualizacji."
 
 #. TranslatorExplanation S stands for Status
 #. TranslatorExplanation S as Status
@@ -316,7 +311,7 @@ msgstr "S"
 #. TranslatorExplanation This is Bundle in as used in rug.
 #: ../src/zypper-misc.cc:769 ../src/zypper-search.h:243
 msgid "Bundle"
-msgstr ""
+msgstr "Zestaw"
 
 #: ../src/zypper-misc.cc:772 ../src/zypper-search.h:247
 msgid "Arch"
@@ -328,14 +323,13 @@ msgstr "Arch"
 #: ../src/zypper-misc.cc:866
 #, c-format
 msgid "WARNING: %s is interactive, skipped."
-msgstr "POZOR: vynechávam interaktívnu záplatu %s."
+msgstr "UWAGA: %s jest interaktywna, pominięto."
 
 #: ../src/zypper-misc.cc:926
 msgid "committing"
-msgstr "odovzdávam"
+msgstr "zatwierdzanie"
 
 #: ../src/zypper-misc.cc:944
-#, fuzzy
 msgid ""
 "Package integrity check failed. This may be a problem with repository or media. Try one of the following:\n"
 "\n"
@@ -344,79 +338,78 @@ msgid ""
 "- use another installation media (if e.g. damaged)\n"
 "- use another repository"
 msgstr ""
-"Kontrola integrity balíčka zlyhala. Môže to byť problém inštalačného zdroja alebo média. Vyskúšajte jednu z nasledujúcich možností:\n"
+"Kontrola integralności pakietu zakończona niepowodzeniem. Może to oznaczać\n"
+"problem ze źródłem lub nośnikiem. Możliwe rozwiązania:\n"
 "\n"
-"- jednoducho skúste znova spustiť predchádzajúci príkaz\n"
-"- obnovte inštalačné zdroje pomocou 'zypper refresh'\n"
-"- použite iné inštalačné médium (ak je napr. toto poškodené)\n"
-"- použite iný inštalačný zdroj"
+"- ponowienie poprzedniego polecenia,\n"
+"- odświeżenie źródeł instalacji za pomocą polecenia \"zypper refresh\",\n"
+"- użycie innego nośnika instalacyjnego,\n"
+"- użycie innego repozytorium."
 
 #: ../src/zypper-misc.cc:962
 msgid "WARNING: One of installed patches requires reboot of your machine. Please, do it as soon as possible."
-msgstr "POZOR: jedna z nainštalovaných záplat vyžaduje reštart vášho počítača. Prosím, reštartujte čo najkôr."
+msgstr "UWAGA: Jedna z zainstalowanych poprawek wymaga ponownego uruchomienia komputera. Proszę wykonać to jak najszybciej."
 
 #: ../src/zypper-misc.cc:965
 msgid "WARNING: One of installed patches affects the package manager itself, thus it requires restart before executing next operations."
-msgstr "POZOR: Jedna z nainštalovaných záplat ovplyvňuje samotného správcu balíčkov. Pred jeho ďalším použitím je teda potrebné ho zavrieť a znovu spustiť."
+msgstr "UWAGA: Jedna z zainstalowanych poprawek dotyczy menedżera pakietów. Należy uruchomić go ponownie przed dalszym użyciem."
 
 #. TranslatorExplanation The first %s is name of the resolvable, the second is its kind (e.g. 'zypper package')
 #: ../src/zypper-misc.cc:989
-#, fuzzy, c-format
+#, c-format
 msgid "Automatically agreeing with %s %s license."
-msgstr "Automaticky spustiť applet po prihlásení."
+msgstr "Automatycznie zaakceptowano licencję obiektu \"%s\" typu \"%s\""
 
 #: ../src/zypper-misc.cc:1002 ../src/zypper-misc.cc:1027
 msgid "license"
-msgstr "licencia"
+msgstr "licencję"
 
 #: ../src/zypper-misc.cc:1005
 msgid "In order to install this package, you must agree to terms of the above licencse. Continue?"
-msgstr "Pred nainštalovaním tohoto balíčka musíte súhlasiť so znením jeho vyššie uvedenej licencie. Pokračovať?"
+msgstr "Aby zainstalować ten pakiet, należy zaakceptować warunki powyższej licencji. Kontynuować?"
 
 #: ../src/zypper-misc.cc:1015
 msgid "Aborting installation due to the need of license(s) confirmation."
-msgstr "Končím inštaláciu kvôli potrebe potvrdenia súhlasu s liceniou/licenciami."
+msgstr "Przerwanie instalacji z powodu braku potwierdzenia licencji."
 
 #: ../src/zypper-misc.cc:1017
 msgid "Please, restart the operation in interactive mode and confirm agreement with required license(s)."
-msgstr "Prosím, reštartujte túto operáciu v interaktívnom režime a potvrďte súhlas s požadovanými licenciami."
+msgstr "Proszę wykonać operację w trybie interaktywnym i zgodzić się z warunkami licencji."
 
 #: ../src/zypper-misc.cc:1024
 msgid "Aborting installation due to user disagreement with "
-msgstr "Končím inštaláciu kvôli nesúhlasu s "
+msgstr "Przerwanie instalacji z powodu braku zgody na "
 
 #: ../src/zypper-sources.cc:48
 #, c-format
 msgid "Checking whether to refresh metadata for %s."
-msgstr ""
+msgstr "Sprawdzanie czy trzeba odświeżyć metadane dla %s."
 
 #: ../src/zypper-sources.cc:80
 msgid "Enabled"
-msgstr "Zapnutý"
+msgstr "Włączono"
 
 #: ../src/zypper-sources.cc:80
 msgid "Refresh"
-msgstr "Obnoviť"
+msgstr "Odśwież"
 
 #: ../src/zypper-sources.cc:81 ../src/zypper-search.h:245
 msgid "Type"
 msgstr "Typ"
 
-#  Table header 5/5
-#  Table header 4/6
 #: ../src/zypper-sources.cc:97
 msgid "Active"
-msgstr "Aktívny"
+msgstr "Aktywny"
 
 #: ../src/zypper-sources.cc:97
 msgid "Disabled"
-msgstr "Vypnutý"
+msgstr "Wyłączono"
 
 #: ../src/zypper-sources.cc:103 ../src/zypper-sources.cc:104
 #: ../src/zypper-info.cc:160 ../src/zypper-info.cc:166
 #: ../src/zypper-info.cc:168
 msgid "Yes"
-msgstr "Áno"
+msgstr "Tak"
 
 #: ../src/zypper-sources.cc:103 ../src/zypper-sources.cc:104
 #: ../src/zypper-info.cc:160 ../src/zypper-info.cc:166
@@ -426,187 +419,183 @@ msgstr "Nie"
 
 #: ../src/zypper-sources.cc:123
 msgid "No repositories defined. Use 'zypper addrepo' command to add one or more repositories."
-msgstr ""
+msgstr "Nie zdefiniowano żadnych repozytoriów. Aby je dodać, należy skorzystać z polecenia \"zypper addrepo\"."
 
 #: ../src/zypper-sources.cc:144
-#, fuzzy
 msgid "Error reading repositories:"
-msgstr "Chyba pri čítaní sektoru %u."
+msgstr "Błąd odczytu repozytoriów:"
 
 #: ../src/zypper-sources.cc:169
 #, c-format
 msgid "Skipping disabled repository '%s'"
-msgstr ""
+msgstr "Pominięto wyłączone repozytorium \"%s\""
 
 #: ../src/zypper-sources.cc:177
 msgid "Refreshing "
-msgstr "Obnovujem "
+msgstr "Odświeżanie"
 
 #. ! \todo progress reporting
 #: ../src/zypper-sources.cc:180
-#, fuzzy
 msgid "Creating repository cache..."
-msgstr "Čítam metadáta z "
+msgstr "Tworzenie pamięci podręcznej repozytorium..."
 
 #: ../src/zypper-sources.cc:183
 msgid "DONE"
-msgstr "HOTOVO"
+msgstr "ZAKOŃCZONO"
 
 #: ../src/zypper-sources.cc:187
-#, fuzzy, c-format
+#, c-format
 msgid "Error reading repository '%s':"
-msgstr "Chyba pri čítaní sektoru %u."
+msgstr "Błąd odczytu repozytorium \"%s\""
 
 #: ../src/zypper-sources.cc:189
 #, c-format
 msgid "Skipping repository '%s' because of the above error."
-msgstr ""
+msgstr "Pominięto wyłączone repozytorium \"%s\" z powodu powyższego błędu."
 
 #: ../src/zypper-sources.cc:201
 msgid "Could not refresh the repositories because of errors."
-msgstr ""
+msgstr "Nie można odświeżyć repozytoriów z powodu błędów."
 
 #: ../src/zypper-sources.cc:203
 msgid "Some of the repositories have not been refreshed because of error."
-msgstr ""
+msgstr "Część repozytoriów nie została odświeżona z powodu błędów."
 
 #: ../src/zypper-sources.cc:205
-#, fuzzy
 msgid "All repositories have been refreshed."
-msgstr "Všetky systémové zdroje boli obnovené."
+msgstr "Odświeżono wszystkie repozytoria."
 
 #: ../src/zypper-sources.cc:235
-#, fuzzy, c-format
+#, c-format
 msgid "Adding repository '%s'."
-msgstr "Pridávam zdroje"
+msgstr "Dodawanie repozytorium \"%s\"."
 
 #: ../src/zypper-sources.cc:244
 msgid "Problem transfering repository data from specified URL."
-msgstr ""
+msgstr "Problem podczas przesyłania danych repozytorum spod podanego adresu URL."
 
 #: ../src/zypper-sources.cc:250
-#, fuzzy
 msgid "Problem parsing repository data."
-msgstr "Čítam metadáta z "
+msgstr "Problem podczas analizy danych repozytorium."
 
 #: ../src/zypper-sources.cc:267
 #, c-format
 msgid "Repository '%s' successfully added:"
-msgstr ""
+msgstr "Dodawanie repozytorium \"%s\" zakończone powodzeniem:"
 
 #: ../src/zypper-sources.cc:297
 msgid "Zypper happy! Detected repository type matches the one specified in the --type option."
-msgstr ""
+msgstr "OK! Typ wykrytego repozytorium odpowiada podanemu w opcji --type."
 
 #: ../src/zypper-sources.cc:303
 #, c-format
 msgid "Warning! Overriding detected repository type '%s' with manually specified '%s'."
-msgstr ""
+msgstr "Uwaga! Wykryto typ \"%s\", ale zastosowano podany typ \"%s\"."
 
 #: ../src/zypper-sources.cc:315
 #, c-format
 msgid "Unknown repository type '%s'. Using detected type '%s' instead."
-msgstr ""
+msgstr "Nieznany typ repozytorium \"%s\". Użyto wykrytego typu \"%s\"."
 
 #: ../src/zypper-sources.cc:415
 #, c-format
 msgid "Repository %s has been removed."
-msgstr ""
+msgstr "Repozytorium \"%s\" zostało usunięte."
 
 #: ../src/zypper-sources.cc:467
 #, c-format
 msgid "Repository %s renamed to %s"
-msgstr ""
+msgstr "Zmieniono nazwę repozytorium %s na %s"
 
 #: ../src/zypper-sources.cc:472 ../src/zypper-sources.cc:549
-#, fuzzy, c-format
+#, c-format
 msgid "Repository %s not found."
-msgstr "Hostiteľ %s nebol nájdený."
+msgstr "Repozytorium \"%s\" nie zostało znalezione"
 
 #: ../src/zypper-sources.cc:477 ../src/zypper-sources.cc:554
-#, fuzzy
 msgid "Error while modifying the repository:"
-msgstr "Chyba pri obnovovaní zdroja: "
+msgstr "Wystąpił błąd podczas modyfikacji repozytorium."
 
 #: ../src/zypper-sources.cc:479 ../src/zypper-sources.cc:556
-#, fuzzy, c-format
+#, c-format
 msgid "Leaving repository %s unchanged."
-msgstr "Pridávam zdroje"
+msgstr "Nie zmieniono repozytorium \"%s\"."
 
 #: ../src/zypper-sources.cc:493
 #, c-format
 msgid "%s used together with %s, which contradict each other. This property will be left unchanged."
-msgstr ""
+msgstr "Użyto %s razem z %s, które się wykluczają. Własność ta pozostanie niezmieniona."
 
 #: ../src/zypper-sources.cc:544
 #, c-format
 msgid "Repository %s has been sucessfully modified."
-msgstr ""
+msgstr "Modyfikacja repozytorium \"%s\" zakończona powodzeniem."
 
 #. list name, exact match
 #: ../src/zypper-sources.cc:637
-#, fuzzy
 msgid ""
 "ZENworks Management Daemon is running.\n"
 "WARNING: this command will not synchronize changes.\n"
 "Use rug or yast2 for that.\n"
-msgstr "POZOR: tento príkaz nesynchronizuje zmeny so ZENworks."
+msgstr ""
+"Demon ZENworks Management Daemon jest uruchomiony.\n"
+"UWAGA: to polecenie nie zsynchronizuje zmian.\n"
+"Aby to uczynić, proszę użyć programu rug lub yast2.\n"
 
 #: ../src/zypp-checkpatches.cc:125
 msgid "The updater could not access the package manager engine. This usually happens when you have another application (like YaST) using it at the same time. Please close other applications and check again for updates."
-msgstr "Program nemá prístup ku knižnici pre správu balíčkov. Toto sa zvyčajne stáva ak už máte spustenú iný aplikáciu, ktorá túto knižnicu používa. Prosím, zavrite ostatné aplikácie a skúste znova."
+msgstr "Program aktualizacji nie może użyć mechanizmu menedżera pakietów. Zwykle powodem tego jest inna aplikacji korzystająca z mechanizmu (YaST). Proszę zamknąć inne aplikacje i spróbować ponownie."
 
 #: ../src/zypp-checkpatches.cc:185
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Couldn't restore repository.\n"
 "Detail: %s"
 msgstr ""
-"Nie je možné načítať zdroj \n"
-"Podrobnosti: %s"
+"Nie można przywrócić repozytorium.\n"
+"Szczegóły: %s"
 
 #: ../src/zypp-checkpatches.cc:235
-#, fuzzy
 msgid "There are no update repositories defined. Please add one or more update repositories in order to be notified of updates."
-msgstr "Nie sú definované žiadne aktualizačné zdroje. Prosím, pridajte jeden alebo viacero zdrojov, ak chcete byť upozorňovaní na aktualizácie."
+msgstr "Brak zdefiniowanych repozytoriów aktualizacji. Proszę dodać conajmniej jedno repozytorium, aby być powiadamianym o aktualizacjach."
 
 #. TranslatorExplanation don't translate letters in parentheses!! (yet)
 #: ../src/zypper-callbacks.cc:53
 msgid "(A)bort, (R)etry, (I)gnore?"
-msgstr "koniec, znova, ignorovať? [a/r/i]"
+msgstr "Przerwij (a), ponów (r), ignoruj (i)?"
 
 #: ../src/zypper-callbacks.cc:87
 msgid "Invalid answer. Choose letter a, r, or i."
-msgstr ""
+msgstr "Niepoprawna odpowiedź. Proszę podać literę p, a lub i."
 
 #: ../src/zypper-getopt.cc:56
 msgid "Unknown option "
-msgstr "Neznáma voľba "
+msgstr "Nieznana opcja"
 
 #: ../src/zypper-getopt.cc:59
 msgid "Missing argument for "
-msgstr "Chýbajúci argument pre "
+msgstr "Brakujący parametr dla "
 
 #. TranslatorExplanation E.g. "package zypper not found."
 #: ../src/zypper-info.cc:52
-#, fuzzy, c-format
+#, c-format
 msgid "%s %s not found."
-msgstr " nebol nájdený."
+msgstr "%s %s: nie znaleziono."
 
 #. print info
 #. TranslatorExplanation E.g. "Information for package zypper:"
 #: ../src/zypper-info.cc:58
-#, fuzzy, c-format
+#, c-format
 msgid "Information for %s %s:"
-msgstr "Informácie pre "
+msgstr "%s %s -- informacje:"
 
 #: ../src/zypper-info.cc:94 ../src/zypper-info.cc:141
 msgid "Name: "
-msgstr "Názov: "
+msgstr "Nazwa: "
 
 #: ../src/zypper-info.cc:95 ../src/zypper-info.cc:142
 msgid "Version: "
-msgstr "Verzia: "
+msgstr "Wersja: "
 
 #: ../src/zypper-info.cc:96 ../src/zypper-info.cc:143
 msgid "Arch: "
@@ -614,19 +603,19 @@ msgstr "Arch: "
 
 #: ../src/zypper-info.cc:97
 msgid "Installed: "
-msgstr "Nainštalovaný: "
+msgstr "Zainstalowano: "
 
 #: ../src/zypper-info.cc:99 ../src/zypper-info.cc:145
 msgid "Status: "
-msgstr "Stav: "
+msgstr "Status: "
 
 #: ../src/zypper-info.cc:102
 msgid "up-to-date"
-msgstr "aktuálny"
+msgstr "aktualny"
 
 #: ../src/zypper-info.cc:104
 msgid "out-of-date (version "
-msgstr "zastaralý (nainštalovaná verzia "
+msgstr "przestarzały (zainstalowana wersja "
 
 #: ../src/zypper-info.cc:105
 msgid " installed) "
@@ -634,91 +623,81 @@ msgstr ")"
 
 #: ../src/zypper-info.cc:108
 msgid "not installed"
-msgstr "nenainštalovaný"
+msgstr "niezainstalowany"
 
 #: ../src/zypper-info.cc:110
 msgid "Installed Size: "
-msgstr "Veľkost inštalácie: "
+msgstr "Rozmiar po zainstalowaniu: "
 
 #: ../src/zypper-info.cc:111 ../src/zypper-info.cc:169
 msgid "Summary: "
-msgstr "Stručný popis: "
+msgstr "Podsumowanie: "
 
 #: ../src/zypper-info.cc:112 ../src/zypper-info.cc:170
 msgid "Description: "
-msgstr "Popis:"
+msgstr "Opis: "
 
 #: ../src/zypper-info.cc:158
-#, fuzzy
 msgid "Category: "
-msgstr "Kategória"
+msgstr "Kategoria:"
 
 #: ../src/zypper-info.cc:159
-#, fuzzy
 msgid "Created On: "
-msgstr "Vytváram %s"
+msgstr "Utworzono:"
 
 #: ../src/zypper-info.cc:160
-#, fuzzy
 msgid "Reboot Required: "
-msgstr "Vyžaduje sa reštart"
+msgstr "Ponowne uruchomienie:"
 
 #: ../src/zypper-info.cc:163
-#, fuzzy
 msgid "Package Manager Restart Required"
-msgstr "Vyžaduje sa reštart"
+msgstr "Wymagane ponowne uruchomienie menedżera pakietów"
 
 #: ../src/zypper-info.cc:165
-#, fuzzy
 msgid "Restart Required: "
-msgstr "Vyžaduje sa reštart"
+msgstr "Ponowne uruchomienie:"
 
 #: ../src/zypper-info.cc:168
-#, fuzzy
 msgid "Interactive: "
-msgstr "Rozhranie"
+msgstr "Interktywny:"
 
 #: ../src/zypper-info.cc:172
 msgid "Provides:"
-msgstr "Poskytuje:"
+msgstr "Dostarcza:"
 
 #: ../src/zypper-info.cc:178
 msgid "Requires:"
-msgstr "Vyžaduje:"
+msgstr "Wymaga:"
 
 #: ../src/zypper-search.cc:45
 msgid "No repositories configured. Please, add at least one repository using 'zypper addrepo' command before using search."
-msgstr ""
+msgstr "Nie skonfigurowano żadnego repozytorium. Proszę dodać conajmniej jedno (polecenie \"zypped addrepo\") przed użyciem wyszukiwania."
 
 #: ../src/zypper-search.cc:108
 msgid "Pre-caching installed resolvables matching given search criteria... "
-msgstr "Prednačítavam nainštalované balíčky vyhovujúce kritériam vyhľadávania... "
+msgstr "Wstępne wczytywanie do pamięci podręcznej zainstalowanych pakietów spełniających podane kryteria wyszukiwania..."
 
 #: ../src/zypper-search.cc:117
 msgid " out of ("
 msgstr " z ("
 
-#  tree node string
-#  tree node string - CPU information
 #: ../src/zypper-search.cc:118
 msgid "cached."
-msgstr "načítaných."
+msgstr "w pamięci podręcznej."
 
 #: ../src/zypper-search.cc:217
 msgid " is not a valid regular expression: \""
-msgstr " nie je platný regulárny výraz: \""
+msgstr " nie jest prawidłowym wyrażeniem regularnym: \""
 
 #: ../src/zypper-search.cc:219
 msgid "This is a bug, please file a bug report against zypper."
-msgstr "Toto je chyba, prosím, náhlaste ju ako chybu programu zypper."
+msgstr "Jest to błąd, proszę wypełnić raport błędu w tej sprawie."
 
 #: ../src/zypper.cc:84 ../src/zypper.cc:763
-#, fuzzy
 msgid "Given URL is invalid."
-msgstr "Chybná URL adresa."
+msgstr "Podany adres URL jest nieprawidlowy."
 
 #: ../src/zypper.cc:91
-#, fuzzy
 msgid ""
 "  Commands:\n"
 "\thelp\t\t\tHelp\n"
@@ -740,26 +719,27 @@ msgid ""
 "\tinfo, if\t\tShow full information for packages\n"
 "\tpatch-info\t\tShow full information for patches\n"
 msgstr ""
-"  Príkazy:\n"
+"  Polecenia:\n"
 "\thelp\t\t\tPomoc\n"
-"\tshell, sh\t\tUmožňuje zadať viacero príkazov počas jedného sedenia.\n"
-"\tinstall, in\t\tInštalácia balíčkov.\n"
-"\tremove, rm\t\tOdstránenie balíčkov\n"
-"\tsearch, se\t\tVyhľadávanie balíčkov podľa zadaného vzoru.\n"
-"\tservice-list, sl\tZoznam inštalačných zdrojov.\n"
-"\tservice-add, sa\t\tPridanie nového inštalačného zdroja\n"
-"\tservice-delete, sd\tOdstránenie inštalačného zdroja\n"
-"\tservice-rename, sr\tPremenovanie inštalačného zdroja\n"
-"\trefresh, ref\t\tObnovenie/aktualizácia inštalačného zdroja.\n"
-"\tpatch-check, pchk\tZistenie dostupnosti softvérových záplat.\n"
-"\tpatches, pch\t\tZoznam dostupných záplat\n"
-"\tlist-updates, lu\tZoznam dostupných aktualizácií.\n"
-"\tupdate, up\t\tAktualizácia balíčkov.\n"
-"\tinfo, if\t\tPodrobné informácie o balíčkoch.\n"
-"\tpatch-info\t\tPodrobné informácie o záplatách.\n"
+"\tshell, sh\t\tAkceptuje wiele poleceń na raz\n"
+"\tinstall, in\t\tInstaluje pakiety\n"
+"\tremove, rm\t\tUsuwa pakiety\n"
+"\tsearch, se\t\tSzuka pakietów pasujących do wzorca\n"
+"\trepos, lr\t\tWyświetla listę zadefiniowanych repozytoriów.\n"
+"\taddrepo, ar\t\tDodaje nowe repozytorium\n"
+"\tremoverepo, rr\t\tUsuwa podane repozytorium\n"
+"\trenamerepo, nr\t\tZmienia nazwę podanego repozytorium\n"
+"\tmodifyrepo, mr\t\tModyfikuje podane repozytorium\n"
+"\trefresh, ref\t\tOdświeża źródła instalacji\n"
+"\tpatch-check, pchk\tSprawdza czy pojawiły się poprawki\n"
+"\tpatches, pch\t\tWyświetla poprawki\n"
+"\tlist-updates, lu\tWyświetla aktualizacje\n"
+"\txml-updates, xu\t\tWyświetla aktualizacje i poprawki w formacie XML\n"
+"\tupdate, up\t\tAktualizuje pakiety do nowszych wersji\n"
+"\tinfo, if\t\tWyświetla pełne informacje na temat pakietów\n"
+"\tpatch-info\t\tWyświetla pełne informacje na temat poprawek\n"
 
 #: ../src/zypper.cc:142
-#, fuzzy
 msgid ""
 "  Options:\n"
 "\t--help, -h\t\tHelp.\n"
@@ -773,47 +753,48 @@ msgid ""
 "\t--no-gpg-checks\t\tIgnore GPG check failures and continue.\n"
 "\t--root, -R <dir>\tOperate on a different root directory.\n"
 msgstr ""
-"  Možnosti:\n"
+"  Opcje:\n"
 "\t--help, -h\t\tPomoc\n"
-"\t--version, -V\t\tVýpis čísla verzie\n"
-"\t--verbose, -v\t\tZvýšenie podrobnosti výstupu\n"
-"\t--terse, -t\t\tVýstup pre spracovanie iným programom\n"
-"\t--table-style, -s\tŠtýl výstupnej tabuľky (celé číslo)\n"
-"\t--rug-compatible, -r\tZapnutie kompatibility s programom rug\n"
-"\t--non-interactive\tNa nič sa nepýtaj, automaticky použi prednastavené odpovede. (vo vývoji)\n"
+"\t--version, -V\t\tWyświetla informacje o wersji\n"
+"\t--quiet, -q\t\tTryb cichy, wyświetla tylko informacje o błędach.\n"
+"\t--verbose, -v\t\tWyświetla dodatkowe informacje\n"
+"\t--terse, -t\t\tUżywa formy zwięzłej, odpowiedniej do dalszego przetwarzania maszynowego\n"
+"\t--table-style, -s\tStyl tablicowy (liczbowy)\n"
+"\t--rug-compatible, -r\tWłącza tryb kompatybilności z rug\n"
+"\t--non-interactive\tBez zadawania pytań; automatycznie stosuje domyślne ustawienia\n"
+"\t--no-gpg-checks\t\tIgnoruje błędy kontroli GPG\n"
+"\t--root, -R <dir>\tPracuje na innym drzewie katalogów.\n"
 
 #: ../src/zypper.cc:162
-#, fuzzy, c-format
+#, c-format
 msgid "Verbosity: %d"
-msgstr "Úroveň podrobnosti výstupu "
+msgstr "Szczegółowość: %d"
 
 #: ../src/zypper.cc:168
 msgid "Entering non-interactive mode."
-msgstr ""
+msgstr "Rozpoczęto tryb wsadowy."
 
 #: ../src/zypper.cc:174
 msgid "Entering no-gpg-checks mode."
-msgstr ""
+msgstr "Rozpoczęto tryb bez sprawdzeń gpg"
 
 #: ../src/zypper.cc:184
 msgid "Invalid table style "
-msgstr "Nesprávny typ tabuľky "
+msgstr "Nieprawidłowy styl tabeli"
 
 #: ../src/zypper.cc:231
-#, fuzzy
 msgid "Try -h for help."
-msgstr "Skús -h pre zobrazenie nápovede. Pri použití voľby -h za konkrétnym príkazom sa zobrazí nápoveda k tomuto príkazu."
+msgstr "Opcja -h wyświetla pomoc"
 
 #: ../src/zypper.cc:248
-#, fuzzy
 msgid ""
 "  Repository options:\n"
 "\t--disable-repositories, -D\t\tDo not read data from defined repositories.\n"
 "\t--repo <URI|.repo>\t\tRead additional repository\n"
 msgstr ""
-"  Možnosti inštalačného zdroja:\n"
-"\t--disable-system-sources, -D\t\tIgnoruj systémové zdroje (RPM databáza nainštalovaných balíčkov)\n"
-"\t--source, -S\t\tNačítaj prídavný inštalačný zdroj\n"
+"  Opcje repozytoriów:\n"
+"\t--disable-repositories, -D\t\tNie czyta danych z podanych repozytoriów\n"
+"\t--repo <URI|.repo>\t\tWczytuje dodatkowe repozytorium\n"
 
 #. ! \todo preserve for rug comp.  "\t--disable-system-sources, -D\t\tDo not read the system sources\n"
 #. ! \todo preserve for rug comp.  "\t--source, -S\t\tRead additional source\n"
@@ -822,8 +803,8 @@ msgid ""
 "  Target options:\n"
 "\t--disable-system-resolvables, -T\t\tDo not read system installed resolvables\n"
 msgstr ""
-"  Možnosti cieľa inštalácie:\n"
-"\t--disable-system-resolvables, -T\t\tIgnoruj systémové balíčky (RPM databáza nainštalovaných balíčkov)\n"
+"  Opcje celu:\n"
+"\t--disable-system-resolvables, -T\t\tNie pobieraj systemowych pakietów rozwiązywalnych\n"
 
 #: ../src/zypper.cc:274
 msgid ""
@@ -838,9 +819,18 @@ msgid ""
 "\t--auto-agree-with-licenses,-l\tAutomatically say 'yes' to third party license confirmation prompt.\n"
 "\t\t\t\t\tSee man zypper for more details.\n"
 msgstr ""
+"install [opcje] <nazwa> ...\n"
+"\n"
+"'install' - instaluje pakiet(y) o podanych nazwach.\n"
+"\n"
+"  Opcje polecenia:\n"
+"\t--catalog,-c\t\t\tTylko z tego katalogu (opcja w budowie)\n"
+"\t--type,-t <typ>\tTyp (domyślnie: pakiet)\n"
+"\t--no-confirm,-y\t\t\tNie prosi o potwierdzenie użytkownika przed instalacją\n"
+"\t--auto-agree-with-licenses,-l\tAutomatycznie zgadza się na licencje innych firm/osób.\n"
+"\t\t\t\t\tWięcej szczegółów w podręczniku systemowym programu zypper.\n"
 
 #: ../src/zypper.cc:295
-#, fuzzy
 msgid ""
 "remove [options] <name> ...\n"
 "\n"
@@ -850,12 +840,15 @@ msgid ""
 "\t--type,-t <resolvable_type>\tType of resolvable (default: package)\n"
 "\t--no-confirm,-y\t\t\tDo not require user confirmation\n"
 msgstr ""
-"  Možnosti príkazu:\n"
-"\t--type,-t\t\tTyp balíčka (prednastavená hodnota: package [balíček])\n"
-"\t--no-confirm,-y\tNevyžaduj potvrdenie\n"
+"remove [opcje] <nazwa> ...\n"
+"\n"
+"'remove' - usuwa pakiet(y) o podanych nazwach.\n"
+"\n"
+"  Opcje polecenia:\n"
+"\t--type,-t\t\tTyp pakietu rozwiązywalnego (domyślnie: package)\n"
+"\t--no-confirm,-y\tNie żąda potwierdzenia od użytkownika\n"
 
 #: ../src/zypper.cc:315
-#, fuzzy
 msgid ""
 "addrepo (ar) [options] <URI> <alias>\n"
 "\n"
@@ -867,27 +860,27 @@ msgid ""
 "\t--disabled,-d\t\tAdd the repository as disabled\n"
 "\t--no-refresh,-n\t\tAdd the repository with auto-refresh disabled\n"
 msgstr ""
-"service-add [možnosti] URI [alias]\n"
+"addrepo (ar) [opcje] <URI> <alias>\n"
 "\n"
-"Pridaj inštalačný zdroj do systému.\n"
-"  Možnosti príkazu:\n"
-"\t--repo,-r <SÚBOR.repo>\tNačítaj URL adresu a alias zo zadaného súboru (aj vzdialeného)\n"
-"\t--type,-t <TYPE>\tTyp inštalačného zdroja (YaST, YUM, alebo Plaindir)\n"
-"\t--disabled,-d\t\tPridať inštalačný zdroj ako vypnutý\n"
-"\t--no-refresh,-n\t\tVypnúť automatické obnovovanie/aktualizáciu zdroja\n"
+"Dodaje repozytorium określone przez URI i przypisuje mu alias.\n"
+"  Opcje polecenia:\n"
+"\t--repo,-r <FILE.repo>\tOdczytuje adres URL oraz alias z pliku\n"
+"\t\t\t\t(nawet zdalnie)\n"
+"\t--type,-t <TYPE>\tTyp repozytorium (YaST, YUM, lub Plaindir)\n"
+"\t--disabled,-d\t\tDodaje źródło jako nieaktywne\n"
+"\t--no-refresh,-n\t\tNie odświeża automatycznie metadanych\n"
 
 #: ../src/zypper.cc:334
-#, fuzzy
 msgid ""
 "repos (lr)\n"
 "\n"
 "List all defined repositories.\n"
 "This command has no additional options.\n"
 msgstr ""
-"service-list\n"
+"repos (lr)\n"
 "\n"
-"Zobraz zoznam všetkých definovaných inštalačných zdrojov.\n"
-"Tento príkaz nemá žiadne ďalšie možnosti.\n"
+"Wyświetla wszystkie zdefiniowane repozytoria.\n"
+"To polecenie nie posiada żadnych opcji.\n"
 
 #: ../src/zypper.cc:350
 msgid ""
@@ -898,20 +891,24 @@ msgid ""
 "\t--loose-auth\tIgnore user authentication data in the URL\n"
 "\t--loose-query\tIgnore query string in the URL\n"
 msgstr ""
+"removerepo (rr) [opcje] <alias|URL>\n"
+"\n"
+"Usuwa repozytorium określone przez alias lub adres URL.\n"
+"  Opcje polecenia:\n"
+"\t--loose-auth\tIgnoruje dane uwoerzytelniania w adresie URL\n"
+"\t--loose-query\tIgnoruje ciąg zapytania w adresie URL\n"
 
 #: ../src/zypper.cc:366
-#, fuzzy
 msgid ""
 "renamerepo [options] <alias> <new-alias>\n"
 "\n"
 "Assign new alias to the repository specified by alias.\n"
 "This command has no additional options.\n"
 msgstr ""
-"service-rename <URI|alias> <nový-alias>\n"
+"renamerepo [options] <alias> <nowy-alias>\n"
 "\n"
-"Premenovanie zdroja. Priradí existujúcemu zdroju so zadanou URI adresou alebo aliasom nový alias.\n"
-"\n"
-"Tento príkaz nemá žiadne ďalšie možnosti.\n"
+"Przypisuje nowy alias do repozytorium określonego przez alias.\n"
+"To polecenie nie posiada żadnych dodatkowych opcji.\n"
 
 #: ../src/zypper.cc:384
 msgid ""
@@ -923,9 +920,15 @@ msgid ""
 "\t--enable-autorefresh,-a\tEnable auto-refresh of the repository\n"
 "\t--disable-autorefresh\tDisable auto-refresh of the repository\n"
 msgstr ""
+"modifyrepo (mr) <opcje> <alias>\n"
+"\n"
+"Modyfikuje własności repozytorium określonego przez alias.\n"
+"\t--disable,-d\t\tWyłącza repozytorium (rep. nie jest usuwane)\n"
+"\t--enable,-e\t\tWłącza wyłączone repozytorium\n"
+"\t--enable-autorefresh,-a\tWłącza autoodświeżanie repozytorium\n"
+"\t--disable-autorefresh\tWyłącza autoodświeżanie repozytorium\n"
 
 #: ../src/zypper.cc:401
-#, fuzzy
 msgid ""
 "refresh\n"
 "\n"
@@ -933,12 +936,13 @@ msgid ""
 "\n"
 "This command has no additional options.\n"
 msgstr ""
-"zypper refresh\n"
+"refresh\n"
 "\n"
-"Obnov/aktualizuj všetky inštalačné zdroje v systéme.\n"
+"Odświeża wszystkie źródła instalacji znalezione w systemie.\n"
+"\n"
+"To polecenie nie posiada żadnych opcji.\n"
 
 #: ../src/zypper.cc:416
-#, fuzzy
 msgid ""
 "list-updates [options]\n"
 "\n"
@@ -947,12 +951,12 @@ msgid ""
 "  Command options:\n"
 "\t--type,-t <resolvable_type>\tType of resolvable (default: patch)\n"
 msgstr ""
-"list-updates [options]\n"
+"list-updates [opcje]\n"
 "\n"
-"Zobraz zoznam všetkých dostupných aktualizácií.\n"
+"Wyświetla wszystkie dostępne aktualizacje\n"
 "\n"
-"  Možnosti príkazu:\n"
-"\t--type,-t\t\tTyp balíčka (prednastavená hodnota: patch [záplata])\n"
+"  Opcje polecenia:\n"
+"\t--type,-t\t\tTyp pakietu rozwiązywalnego (domyślnie: poprawka)\n"
 
 #: ../src/zypper.cc:435
 msgid ""
@@ -966,9 +970,17 @@ msgid ""
 "\t--auto-agree-with-licenses,-l\tAutomatically say 'yes' to third party license confirmation prompt.\n"
 "\t\t\t\t\tSee man zypper for more details.\n"
 msgstr ""
+"'update' - aktualizuje wszystkie zainstalowane pakiety jeśli dostępne sa nowe wersje.\n"
+"\n"
+"  Opcje polecenia:\n"
+"\n"
+"\t--type,-t <type>\tTyp obiektu (domyślnie: poprawka)\n"
+"\t--no-confirm,-y\t\t\tWyłącza pytanie o potwierdzenie\n"
+"\t--skip-interactive\t\tPomija uaktualnienia interaktywne\n"
+"\t--auto-agree-with-licenses,-l\tAutomatycznie zgadza się na licencje innych firm/osób.\n"
+"\t\t\t\t\tWięcej szczegółów w podręczniku systemowym programu zypper.\n"
 
 #: ../src/zypper.cc:465
-#, fuzzy
 msgid ""
 "search [options] [querystring...]\n"
 "\n"
@@ -990,28 +1002,27 @@ msgid ""
 "\n"
 "* and ? wildcards can also be used within search strings.\n"
 msgstr ""
-"zypper [globálne-možnosti] search [špecifické-možnosti] [hľadaný-výraz...]\n"
+"search [opcje] [zapytanie...]\n"
 "\n"
-"'search' - Hľadaj balíčky podľa zadaného výrazu\n"
+"'search' - Szuka pakietów pasujących do podanych fraz\n"
 "\n"
-"  Možnosti príkazu:\n"
-"    --match-all            Nájdi balíčky, ktoré obsahujú všetky hľadané výrazy (predvolené)\n"
-"    --match-any            Nájdi balíčky, ktoré obsahujú ktorýkoľvek z hľadaných výrazov\n"
-"    --match-substrings     Hľadané výrazy môžu predstavovať časti slov (predvolené)\n"
-"    --match-words          Hľadané výrazy predstavujú celé slová\n"
-"    --match-exact          Hľadaný výraz sa musí presne zhodovať s názvom balíčka\n"
-"-d, --search-descriptions  Hľadaj aj v popisoch balíčkov\n"
-"-c, --case-sensitive       Rozlišuj veľké a malé písmená\n"
-"-i, --installed-only       Hľadaj iba medzi nainštalovanými balíčkami\n"
-"-u, --uninstalled-only     Hľadaj iba medzi nenainštalovanými balíčkami\n"
-"-t, --type                 Hľadaj iba balíčky určeného typu\n"
-"    --sort-by-name         Zotrieď nájdené balíčky podľa mena (predvolené)\n"
-"    --sort-by-catalog      Zotrieď balíčky podľa inštalačného zdroja\n"
+"  Opcje polecenia:\n"
+"    --match-all            Szuka pasujących do wszystkich fraz (domyślne)\n"
+"    --match-any            Szuka pasujących do dowolnej z podanych fraz\n"
+"    --match-substrings     Pasujące frazy mogą być fragmentami słów (domyślnie)\n"
+"    --match-words          Pasujące frazy muszą być pełnymi słowami\n"
+"    --match-exact          Szuka pakietu o dokładnie takiej nazwie jak podana fraza\n"
+"-d, --search-descriptions  Szuka także w podsumowaniu i opisach pakietów.\n"
+"-c, --case-sensitive       Rozróżnianie wielkości liter.\n"
+"-i, --installed-only       Wyświetla tylko pakiety, które są już zainstalowane.\n"
+"-u, --uninstalled-only     Wyświetla tylko pakiety, które nie są aktualnie zainstalowane.\n"
+"-t, --type                 Szuka tylko pakietów określonego typu.\n"
+"    --sort-by-name         Sortuje pakiety po nazwie (domyślnie).\n"
+"    --sort-by-catalog      Sortuje pakiety po katalogu (źródle).\n"
 "\n"
-"Znaky * a ? môžu byt v hľadaných výrazoch použité ako náhrada ľubovoľného reťazca alebo znaku.\n"
+"Znaki specjalne * oraz ? mogą być używane wewnątrz fraz wyszukiwania.\n"
 
 #: ../src/zypper.cc:493
-#, fuzzy
 msgid ""
 "patch-check\n"
 "\n"
@@ -1021,12 +1032,11 @@ msgid ""
 msgstr ""
 "patch-check\n"
 "\n"
-"Zisti dostupnosť záplat.\n"
+"Sprawdza dostępność poprawek\n"
 "\n"
-"Tento príkaz nemá žiadne ďalšie možnosti.\n"
+"To polecenie nie posiada opcji.\n"
 
 #: ../src/zypper.cc:507
-#, fuzzy
 msgid ""
 "patches\n"
 "\n"
@@ -1036,12 +1046,11 @@ msgid ""
 msgstr ""
 "patches\n"
 "\n"
-"Zobraz zoznam všetkých dostupných záplat.\n"
+"Wyświetla dostępne poprawki\n"
 "\n"
-"Tento príkaz nemá žiadne ďalšie možnosti.\n"
+"To polecenie nie posiada opcji.\n"
 
 #: ../src/zypper.cc:521
-#, fuzzy
 msgid ""
 "info <name> ...\n"
 "\n"
@@ -1049,14 +1058,13 @@ msgid ""
 "\n"
 "This command has no additional options.\n"
 msgstr ""
-"zypper [globálne-možnosti] info [názov...]\n"
+"info <nazwa> ...\n"
 "\n"
-"'info' -- Zobraz podrobné informácie o zadaných balíčkoch.\n"
+"'info' -- Wyświetla pełną informację dla pakietów\n"
 "\n"
-"Tento príkaz nemá žiadne ďalšie možnosti.\n"
+"To polecenie nie posiada opcji.\n"
 
 #: ../src/zypper.cc:535
-#, fuzzy
 msgid ""
 "patch-info <patchname> ...\n"
 "\n"
@@ -1064,11 +1072,11 @@ msgid ""
 "\n"
 "This command has no additional options.\n"
 msgstr ""
-"zypper [globálne-možnosti] patch-info [názov-záplaty...]\n"
+"patch-info <nazwa_poprawki> ...\n"
 "\n"
-"'patch-info' -- Zobraz podrobné informácie o zadaných záplatách.\n"
+"'patch-info' -- Wyświetla szczegółowe informacje na temat poprawek\n"
 "\n"
-"Tento príkaz nemá žiadne ďalšie možnosti.\n"
+"To polecenie nie posiada opcji.\n"
 
 #: ../src/zypper.cc:549
 msgid ""
@@ -1078,27 +1086,31 @@ msgid ""
 "\n"
 "This command has no additional options.\n"
 msgstr ""
+"moo\n"
+"\n"
+"'moo' - wyświetla zwierzę\n"
+"\n"
+"To polecenie nie ma dodatkowych opcji.\n"
 
 #: ../src/zypper.cc:567
-#, fuzzy
 msgid "Non-option program arguments: "
-msgstr "Argumenty programu (okrem volieb): "
+msgstr "Parametry programu nie będące opcjami: "
 
 #: ../src/zypper.cc:579
 msgid "Ignoring --terse (provided only for rug compatibility)"
-msgstr "Ignorujem voľbu --terse (voľba je súčasne k dispozícii len kvôli kompatibilite s programom rug)"
+msgstr "zignorowano --terse (używany tylko do kompatybilności z programem rug)"
 
 #: ../src/zypper.cc:588
 msgid "Repositories disabled, using database of installed packages only."
-msgstr ""
+msgstr "Repozytoria wyłączone, użyto tylko bazy zainstalowanych pakietów."
 
 #: ../src/zypper.cc:600
 msgid "Ignoring installed resolvables..."
-msgstr "Ignorujem nainštalované balíčky..."
+msgstr "Zainstalowane pakiety rozwiązywalne zostaną zignorowane"
 
 #: ../src/zypper.cc:625
 msgid "A ZYpp transaction is already in progress.This means, there is another application using libzypp library forpackage management running. All such applications must be closed beforeusing this command."
-msgstr ""
+msgstr "Transakcja Zypp jest w trakcie wykonania. Oznacza to, że uruchomiona jest inna aplikacja zarządzająca pakietami korzystają z biblioteki libzypp. Należy ją zamknąć przed użyciem tego polecenia."
 
 #. TranslatorExplanation this is a hedgehog, paint another animal, if you want
 #: ../src/zypper.cc:644
@@ -1107,169 +1119,315 @@ msgid ""
 "  \\\\\\\\\\\\\\__o\n"
 "__\\\\\\\\\\\\\\'/_"
 msgstr ""
+"   \\\\\\\\\\\n"
+"  \\\\\\\\\\\\\\__o\n"
+"__\\\\\\\\\\\\\\'/_"
 
 #: ../src/zypper.cc:672 ../src/zypper.cc:737 ../src/zypper.cc:808
 #: ../src/zypper.cc:848
-#, fuzzy
 msgid "Root privileges are required for modifying system repositories."
-msgstr "Pre prácu so systémovými zdrojmi sú potrebné práva správcu systému (root)."
+msgstr "Do modyfikacji repozytoriów konieczne są uprawnienia administratora."
 
 #: ../src/zypper.cc:696 ../src/zypper.cc:814
 msgid "Too few arguments. At least URL and alias are required."
-msgstr ""
+msgstr "Zbyt mało parametrów. Wymagany jest conajmniej alias i adres URL."
 
 #: ../src/zypper.cc:743
 msgid "Required argument missing."
-msgstr ""
+msgstr "Brak wymaganego parametru."
 
 #: ../src/zypper.cc:756
 msgid "Repository not found by alias, trying delete by URL..."
-msgstr ""
+msgstr "Nie znaleziono repozytorium wg aliasu. Próba usunięcia wg adresu URL..."
 
 #: ../src/zypper.cc:789
 msgid "Repository not found by given alias or URL."
-msgstr ""
+msgstr "Nie znaleziono repozytorium o danym aliasie i/lub adresie URL."
 
 #: ../src/zypper.cc:854
-#, fuzzy
 msgid "Alias is a required argument."
-msgstr "Schéma URL je povinná"
+msgstr "Alias jest wymaganym parametrem"
 
 #: ../src/zypper.cc:876
-#, fuzzy
 msgid "Root privileges are required for refreshing system repositories."
-msgstr "Pre prácu so systémovými zdrojmi sú potrebné práva správcu systému (root)."
+msgstr "Do odświeżania repozytoriów konieczne są uprawnienia administratora."
 
 #: ../src/zypper.cc:912
-#, fuzzy
 msgid "Root privileges are required for installing or uninstalling packages."
-msgstr "Pre prácu so systémovými zdrojmi sú potrebné práva správcu systému (root)."
+msgstr "Do instalacji/usuwania pakietów konieczne są uprawnienia administratora."
 
 #: ../src/zypper.cc:920 ../src/zypper.cc:1070 ../src/zypper.cc:1123
-#, fuzzy, c-format
+#, c-format
 msgid "Unknown resolvable type: %s"
-msgstr "Neznámy typ balíčka "
+msgstr "Nieznany typ pakietu: %s"
 
 #: ../src/zypper.cc:936
-#, fuzzy
 msgid "Warning: No repositories defined. Operating only with the installed resolvables. Nothing can be installed."
-msgstr "Pozor: Nie sú dostupné žiadne inštalačné zdroje. Pracujem len s nainštalovanými balíčkami. Nové balíčky nebude možné inštalovať."
+msgstr "Ostrzeżenie: Brak repozytorów. Operacja obejmie tylko zainstalowane pakiety. Nic nowego nie może zostać zainstalowane."
 
 #: ../src/zypper.cc:984
 msgid "Unknown resolvable type "
-msgstr "Neznámy typ balíčka "
+msgstr "Nieznany typ pakietu rozwiązywalnego"
 
 #: ../src/zypper.cc:1003
-#, fuzzy
 msgid "No resolvables found."
-msgstr " balíčkov."
+msgstr "Nie znaleziono pakietów."
 
 #: ../src/zypper.cc:1112
-#, fuzzy
 msgid "Root privileges are required for updating packages."
-msgstr "Pre prácu so systémovými zdrojmi sú potrebné práva správcu systému (root)."
+msgstr "Do aktualizacji pakietów konieczne są uprawnienia administratora."
 
 #: ../src/zypper.cc:1169
 msgid "Please file a bug report about this."
-msgstr "Prosím, pošlite správu o tejto chybe."
+msgstr "Proszę wypełnić raport błędu w tej sprawie."
 
 #. remember not to translate the URL
 #. unless you translate the actual page :)
 #: ../src/zypper.cc:1172
 msgid "See http://en.opensuse.org/Zypper#Troubleshooting for instructions."
-msgstr "Na adrese http://en.opensuse.org/Zypper#Troubleshooting nájdete návod ako na to."
+msgstr "W celu uzyskania dodatkowych informacji, zajrzyj na http://en.opensuse.org/Zypper#Troubleshooting ."
 
 #: ../src/zypper.cc:1187
 msgid "Unexpected exception."
-msgstr "Neočakávaná výnimka. "
+msgstr "Niespodziewany wyjątek."
 
 #: ../src/zypper.cc:1269
 msgid "You already are running zypper's shell."
-msgstr ""
+msgstr "Powłoka zyppera jest już uruchomiona."
 
 #: ../src/zypper-command.cc:90
-#, fuzzy, c-format
+#, c-format
 msgid "Unknown command '%s'"
-msgstr "Neznámy príkaz "
+msgstr "Nieznane polecenie \"%s\""
 
 # error box title
 #: ../src/zypper-callbacks.h:37
 msgid "I/O error"
-msgstr "Chyba V/V"
+msgstr "Błąd wejścia/wyjścia"
 
 #: ../src/zypper-callbacks.h:37
-#, fuzzy
 msgid "Invalid object"
-msgstr "Nesprávny typ tabuľky "
+msgstr "Nieprawidłowy obiekt"
 
 #: ../src/zypper-media-callbacks.h:53
-#, fuzzy
 msgid "Downloading: "
-msgstr "Sťahujem %s"
+msgstr "Pobieranie:"
 
 #. TranslatorExplanation This text is a progress display label e.g. "Downloading delta [42%]"
 #: ../src/zypper-source-callbacks.h:95 ../src/zypper-source-callbacks.h:102
-#, fuzzy
 msgid "Downloading delta"
-msgstr "Sťahujem %s"
+msgstr "Pobieranie pakietu różnicowego"
 
 #. TranslatorExplanation This text is a progress display label e.g. "Applying delta [42%]"
 #: ../src/zypper-source-callbacks.h:123 ../src/zypper-source-callbacks.h:129
 msgid "Applying delta"
-msgstr ""
+msgstr "Nanoszenie różnicy"
 
 #: ../src/zypper-source-callbacks.h:150
-#, fuzzy
 msgid "Downloading patch rpm"
-msgstr "Sťahujem %s"
+msgstr "Pobieranie poprawki"
 
 #. TranslatorExplanation This text is a progress display label e.g. "Applying patch rpm [42%]"
 #: ../src/zypper-source-callbacks.h:157
 msgid "Applying patch rpm"
-msgstr ""
+msgstr "Nanoszenie poprawki rpm"
 
 #: ../src/zypper-source-callbacks.h:177
-#, fuzzy, c-format
+#, c-format
 msgid "Downloading %s %s-%s.%s"
-msgstr "Sťahujem %s"
+msgstr "Pobieranie %s %s-%s.%s"
 
 #. TranslatorExplanation %s is package size like "5.6 M"
 #: ../src/zypper-source-callbacks.h:188
 #, c-format
 msgid "(%s unpacked)"
-msgstr ""
+msgstr "(%s po zainstalowaniu)"
 
 #. TranslatorExplanation This text is a progress display label e.g. "Downloading [42%]"
 #: ../src/zypper-source-callbacks.h:197
-#, fuzzy
 msgid "Downloading"
-msgstr "Sťahujem %s"
+msgstr "Pobieranie"
 
 #. TranslatorExplanation speaking of a script
 #: ../src/zypper-rpm-callbacks.h:56
 #, c-format
 msgid "Running: %s  (%s, %s)"
-msgstr ""
+msgstr "Uruchomiono: %s  (%s, %s)"
 
 #: ../src/zypper-rpm-callbacks.h:110
-#, fuzzy
 msgid "Reading installed packages"
-msgstr "Inštalovať balíky"
+msgstr "Odczytywanie zainstalowanych pakietów"
 
 #: ../src/zypper-rpm-callbacks.h:133
-#, fuzzy, c-format
+#, c-format
 msgid "Removing: %s-%s"
-msgstr "Zlyhalo odstraňovanie %s"
+msgstr "Usuwanie: %s-%s"
 
 #: ../src/zypper-rpm-callbacks.h:193
 msgid "Will retry more aggressively."
-msgstr ""
+msgstr "Ponowna, bardziej agresywna próba."
 
 #: ../src/zypper-search.h:237
 msgid "Catalog"
-msgstr "Katalóg"
+msgstr "Katalog"
 
 #: ../src/zypper-search.h:239
-#, fuzzy
 msgid "Repository"
-msgstr "Úroveň podrobnosti výstupu "
+msgstr "Repozytorium"
+
+#~ msgid "Import key "
+#~ msgstr "Zaimportuj klucz"
+
+#~ msgid "continue?"
+#~ msgstr "czy kontynuować?"
+
+#~ msgid " fingerprint:"
+#~ msgstr " odcisk klucza:"
+
+#~ msgid "Signature verification for "
+#~ msgstr "Weryfikacja podpisu dla "
+
+#~ msgid " with public key id "
+#~ msgstr " o identyfikatorze klucza publicznego "
+
+#~ msgid " failed, THIS IS RISKY!"
+#~ msgstr " nie powiodło się. OPERACJA JEST RYZYKOWNA."
+
+#~ msgid " for "
+#~ msgstr " dla "
+
+#~ msgid ", expected "
+#~ msgstr ", oczekiwano "
+
+#~ msgid " found "
+#~ msgstr " znaleziono "
+
+#~ msgid "not found"
+#~ msgstr "nie znaleziono"
+
+#~ msgid "skipping "
+#~ msgstr "pomijanie "
+
+#~ msgid "(already installed)"
+#~ msgstr "(już zainstalowane)"
+
+#~ msgid "Failed"
+#~ msgstr "Niepowodzenie"
+
+#~ msgid "Parsing metadata for "
+#~ msgstr "Przetwarzanie metadanych dla "
+
+#~ msgid " patches needed"
+#~ msgstr " wymagane poprawki"
+
+#~ msgid "Error reading system sources: "
+#~ msgstr "Błąd podczas odczytu źródeł systemowych:"
+
+#, fuzzy
+#~ msgid "Cleaning cache..."
+#~ msgstr "Inicjalizacja cache..."
+
+#~ msgid "Continuing anyway"
+#~ msgstr "Kontynuacja mimo wszystko"
+
+#~ msgid "removing source "
+#~ msgstr "usuwanie źródła "
+
+#~ msgid "Source %s not found."
+#~ msgstr "Źródło %s nie zostało znalezione."
+
+#~ msgid "URL is invalid: "
+#~ msgstr "Nieprawidłowy adres URL: "
+
+#~ msgid "Sorry, you need root privileges to use system sources, disabling them..."
+#~ msgstr "Wyłączanie źródeł systemowych. Do ich użycia wymagane są uprawnienia administratora..."
+
+#~ msgid "Restoring system sources..."
+#~ msgstr "Przywracanie źródeł systemowych..."
+
+#~ msgid "Failed to restore sources"
+#~ msgstr "Przywracanie źródeł systemowych zakończone niepowodzeniem"
+
+#~ msgid "Can't access repository"
+#~ msgstr "Brak dostępu do repozytorium"
+
+#~ msgid "No sources. Zypper currently searches within installationsources only."
+#~ msgstr "Brak źródeł. Zypper wyszukuje obecnie jedynie wśród źródeł instalacyjnych."
+
+#~ msgid ""
+#~ "  Command options:\n"
+#~ "\t--catalog,-c\t\tOnly from this catalog (under development)\n"
+#~ "\t--type,-t\t\tType of resolvable (default: package)\n"
+#~ "\t--no-confirm,-y\tDo not require user confirmation\n"
+#~ msgstr ""
+#~ "  Opcje polecenia:\n"
+#~ "\t--catalog,-c\t\tTylko z tego katalogu (opcja w trakcie rozwijania)\n"
+#~ "\t--type,-t\t\tTyp pakietu rozwiązywalnego (domyślnie: package)\n"
+#~ "\t--no-confirm,-y\tNie żądaj potwierdzenia od użytkownika\n"
+
+#~ msgid ""
+#~ "service-delete [options] <URI|alias>\n"
+#~ "\n"
+#~ "Remove service (installation source) from the system.\n"
+#~ "This command has no options.\n"
+#~ msgstr ""
+#~ "service-delete [options] <URI|alias>\n"
+#~ "\n"
+#~ "Usuń źródło instalacji z systemu.\n"
+#~ "To polecenie nie posiada żadnych opcji.\n"
+
+#~ msgid ""
+#~ "  Command options:\n"
+#~ "\t--type,-t\t\tType of resolvable (default: patch)\n"
+#~ "\t--no-confirm,-y\t\tDo not require user confirmation\n"
+#~ "\t--skip-interactive\t\tSkip interactive updates\n"
+#~ msgstr ""
+#~ "  Opcje polecenia:\n"
+#~ "\t--type,-t\t\tTyp pakietu rozwiązywalnego (domyślnie: patch)\n"
+#~ "\t--no-confirm,-y\t\tNie żądaj potwierdzenia od użytkownika\n"
+#~ "\t--skip-interactive\t\tPomiń aktualizacje wymagające interakcji\n"
+
+#~ msgid ""
+#~ "zypper [global-options] moo\n"
+#~ "\n"
+#~ "'moo' - Show an animal\n"
+#~ msgstr ""
+#~ "zypper [opcje-globalne] moo\n"
+#~ "\n"
+#~ "'moo' - Wyświetla szczegółowe zwierzątko\n"
+
+#~ msgid "Unknown command"
+#~ msgstr "Nieznane polecenie"
+
+#~ msgid "A ZYpp transaction is already in progress."
+#~ msgstr "Transakcja ZYpp jest już w trakcie wykonania."
+
+#~ msgid " (old way)"
+#~ msgstr " (stary sposób)"
+
+#~ msgid "Unknown repository type "
+#~ msgstr "Nieznany typ repozytorium "
+
+#~ msgid "Name not found"
+#~ msgstr "Nazwa nie została znaleziona"
+
+#~ msgid "baseurl not found"
+#~ msgstr "nie znaleziono bazowego URL"
+
+#~ msgid "Sorry, not implemented yet for libzypp-1.x.x"
+#~ msgstr "Przykro nam, opcja jeszcze niezaimplementowana w libzypp-1.x.x."
+
+#~ msgid "Error while refreshing the source: "
+#~ msgstr "Podczas odświeżania źródła wystąpił błąd: "
+
+#~ msgid "Error while fetching "
+#~ msgstr "Błąd podczas pobierania"
+
+#~ msgid "ZENworks Management Daemon is running."
+#~ msgstr "Demon ZENworks Management jest uruchomiony."
+
+#~ msgid "Use rug or yast2 for that."
+#~ msgstr "W tym celu proszę użyć programów rug lub yast2."
+
+#~ msgid "Warning: Unknown metadata type "
+#~ msgstr "Ostrzeżenie: Nieznany typ metadanych "
