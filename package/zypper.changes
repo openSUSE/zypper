@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Sun Aug  5 10:28:49 CEST 2007 - jkupec@suse.cz
+
+- translations added/updated
+- r6478
+
+-------------------------------------------------------------------
 Sat Aug  4 23:40:10 CEST 2007 - jkupec@suse.cz
 
 - new refresh options added: --force, --force-build, --force-download,
