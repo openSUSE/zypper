@@ -42,20 +42,34 @@ int show_summary();
 //std::string calculate_token();
 
 /**
- * Load both repository and target resolvables into the pool respecting
- * user defined conditions.
+ * Load both repository and target resolvables.
+ * 
+ * \param to_pool If <tt>true</tt>, the resolvables are added to the pool, if
+ *        <tt>false</tt> they will be stored in \ref gData.repo_resolvalbes
+ *        and \ref gData.target_resolvables (global ResStore vector).
+ * 
+ * \see load_repo_resolvables(bool)
+ * \see load_target_resolvables(bool)
  */
-void cond_load_resolvables ();
+void cond_load_resolvables(bool to_pool = true);
 
 /**
- * Load resolvables from all repositories into the pool. 
+ * Reads resolvables from the RPM database (installed resolvables) into the pool.
+ * 
+ * \param to_pool If <tt>true</tt>, the resolvables are added to the pool, if
+ *        <tt>false</tt> they will be stored \ref gData.target_resolvables
+ *        (global ResStore variable).
  */
-void load_target_resolvables();
+void load_target_resolvables(bool to_pool = true);
 
 /**
- * Load installed resolvables from target into the pool.
+ * Reads resolvables from the repository sqlite cache. 
+ * 
+ * \param to_pool If <tt>true</tt>, the resolvables are added to the pool, if
+ *        <tt>false</tt> they will be stored in \ref gData.repo_resolvables
+ *        (global ResStore vector).
  */
-void load_repo_resolvables();
+void load_repo_resolvables(bool to_pool = true);
 
 void establish ();
 bool resolve();
@@ -130,5 +144,10 @@ struct ProvideProcess
 
   bool operator()( const zypp::PoolItem& provider );
 };
+
+/**
+ * Installs source packages specified by name.
+ */
+int source_install(std::vector<std::string> & arguments);
 
 #endif

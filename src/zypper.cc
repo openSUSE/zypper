@@ -138,6 +138,7 @@ ZypperCommand process_globals(int argc, char **argv)
     "\tupdate, up\t\tUpdate installed resolvables with newer versions.\n"
     "\tinfo, if\t\tShow full information for packages\n"
     "\tpatch-info\t\tShow full information for patches\n"
+    "\tsource-install, si\tInstall a source package\n"
     "");
 
   if (gopts.count("rug-compatible"))
@@ -280,10 +281,10 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
     // (package, patch, pattern, product) or at least leave also their
     // originals, since they are expected untranslated on the command line
     specific_help = _(
-      "install [options] <capability> ...\n"
+      "install (in) [options] <capability> ...\n"
       "\n"
-      "'install' - Install resolvables with specified capabilities. A capability is\n"
-      "            NAME[ OP <VERSION>], where OP is one of <, <=, =, >=, >.\n"
+      "Install resolvables with specified capabilities. A capability is"
+      " NAME[ OP <VERSION>], where OP is one of <, <=, =, >=, >.\n"
       "\n"
       "  Command options:\n"
       "-r, --repo <alias>              Install resolvables only from repository specified by alias.\n"
@@ -309,16 +310,30 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
     };
     specific_options = remove_options;
     specific_help = _(
-      "remove [options] <capability> ...\n"
+      "remove (rm) [options] <capability> ...\n"
       "\n"
-      "'remove' - Remove resolvables with specified capabilities. A capability is\n"
-      "            NAME[ OP <VERSION>], where OP is one of <, <=, =, >=, >.\n"
+      "Remove resolvables with specified capabilities. A capability is"
+      " NAME[ OP <VERSION>], where OP is one of <, <=, =, >=, >.\n"
       "\n"
       "  Command options:\n"
       "-r, --repo <alias> Operate only with resolvables from repository specified by alias.\n"
       "-t, --type <type>  Type of resolvable (package, patch, pattern, product) (default: package)\n"
       "-n, --name         Select resolvables by plain name, not by capability\n"
       "    --debug-solver Create solver test case for debugging\n"  
+    );
+  }
+  else if (command == ZypperCommand::SRC_INSTALL) {
+    static struct option src_install_options[] = {
+      {"help", no_argument, 0, 'h'},
+      {0, 0, 0, 0}
+    };
+    specific_options = src_install_options;
+    specific_help = _(
+      "source-install (si) <name>\n"
+      "\n"
+      "Install a source package specified by its name.\n"
+      "\n"
+      "This command has no additional options.\n"
     );
   }
   else if (command == ZypperCommand::ADD_REPO) {
@@ -652,7 +667,7 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
     cout_v << _("Non-option program arguments: ");
     while (optind < argc) {
       string argument = argv[optind++];
-      cout_v << argument << ' ';
+      cout_v << "'" << argument << "' ";
       arguments.push_back (argument);
     }
     cout_v << endl;
@@ -1071,6 +1086,32 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
       return solve_and_commit ();
 
     return ZYPPER_EXIT_OK;
+  }
+
+  // -------------------( source install )------------------------------------
+
+  else if (command == ZypperCommand::SRC_INSTALL)
+  {
+    if (ghelp)
+    {
+      cout << specific_help;
+      return ZYPPER_EXIT_OK;
+    }
+
+    if (arguments.size() < 1)
+    {
+      cerr << _("Source package name is a required argument.") << endl;
+      return ZYPPER_EXIT_ERR_INVALID_ARGS;
+    }
+
+    int initret = init_repos();
+    if (initret != ZYPPER_EXIT_OK)
+      return initret;
+    cond_init_target();
+    // load only repo resolvables, we don't need the installed ones
+    load_repo_resolvables(false /* don't load to pool */);
+
+    return source_install(arguments);
   }
 
   // --------------------------( search )-------------------------------------

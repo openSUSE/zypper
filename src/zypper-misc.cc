@@ -4,6 +4,8 @@
 #include <boost/logic/tribool_io.hpp>
 
 #include <zypp/Patch.h>
+#include <zypp/Package.h>
+#include <zypp/SrcPackage.h>
 #include <zypp/base/Algorithm.h>
 #include <zypp/solver/detail/Helper.h>
 
@@ -456,16 +458,15 @@ std::string calculate_token()
 }
 */
 
-void cond_load_resolvables()
+void cond_load_resolvables(bool to_pool)
 {	
-  load_repo_resolvables();
-  if ( ! gSettings.disable_system_resolvables ) {
+  load_repo_resolvables(to_pool);
+  if (!gSettings.disable_system_resolvables && to_pool)
     load_target_resolvables();
-  }
 }
 
 /** read repository resolvables */
-void load_repo_resolvables()
+void load_repo_resolvables(bool to_pool)
 {
   RepoManager manager;
 
@@ -503,7 +504,10 @@ void load_repo_resolvables()
       ResStore store = repository.resolvables();
       cout_v << " " << format(_("(%d resolvables found)")) % store.size() << endl;
 
-      God->addResolvables(store);
+      if (to_pool)
+        God->addResolvables(store);
+      else
+        gData.repo_resolvables.insert(store.begin(), store.end());
     }
     catch (const repo::RepoMetadataException & ex)
     {
@@ -521,7 +525,7 @@ void load_repo_resolvables()
   }
 }
 
-void load_target_resolvables()
+void load_target_resolvables(bool to_pool)
 {
   if (!gSettings.machine_readable)
     cout_n << _("Reading RPM database...");
@@ -536,7 +540,10 @@ void load_target_resolvables()
   }
   DBG << tgt_resolvables.size() << " resolvables read";
 
-  God->addResolvables(tgt_resolvables, true /*installed*/);
+  if (to_pool)
+    God->addResolvables(tgt_resolvables, true /*installed*/);
+  else
+    gData.target_resolvables = tgt_resolvables;
 }
 
 void establish ()
@@ -1237,6 +1244,86 @@ bool confirm_licenses()
   }
 
   return confirmed;
+}
+
+
+struct FindSrcPackage
+{
+  FindSrcPackage(SrcPackage::Ptr & srcpkg) : _srcpkg(srcpkg) {}
+
+  bool operator() (ResObject::Ptr res)
+  {
+    SrcPackage::Ptr srcpkg = asKind<SrcPackage>(res);
+    cout_vv << "Considering srcpakcage " << srcpkg->name() << "-" << srcpkg->edition() << ": ";
+    if (_srcpkg)
+    {
+      if (_srcpkg->edition() < srcpkg->edition())
+        cout_vv << "newer edition (" << srcpkg->edition() << " > " << _srcpkg->edition() << ")" << endl;
+      else
+        cout_vv << "is older than the current candidate";
+    }
+    else
+      cout_vv << "first candindate";
+
+    cout_vv << endl;
+
+    _srcpkg.swap(srcpkg);
+
+    return true;
+  }
+
+  SrcPackage::Ptr & _srcpkg;
+};
+
+
+int source_install(std::vector<std::string> & arguments)
+{
+  /*
+   * Workflow:
+   * 
+   * 1. load repo resolvables (to gData.repo_resolvables) 
+   * 2. interate all SrcPackage resolvables with specified name
+   * 3. find the latest version or version satisfying specification.
+   * 4. install the source package with ZYpp->installSrcPackage(SrcPackage::constPtr);
+   */
+
+  SrcPackage::Ptr srcpkg;
+
+  gData.repo_resolvables.forEach(
+    functor::chain(
+      resfilter::ByName(arguments[0]),
+      resfilter::ByKind(ResTraits<SrcPackage>::kind)),
+      FindSrcPackage(srcpkg));
+
+  if (srcpkg)
+  {
+    cout << format(_("Installing source package %s-%s"))
+        % srcpkg->name() % srcpkg->edition() << endl;
+    MIL << "Going to install srcpackage: " << srcpkg << endl;
+
+    try
+    {
+      God->installSrcPackage(srcpkg);
+      
+      cout << format(_("Source package %s-%s successfully installed."))
+          % srcpkg->name() % srcpkg->edition() << endl;
+
+      return ZYPPER_EXIT_OK;  
+    }
+    catch (const Exception & ex)
+    {
+      ZYPP_CAUGHT(ex);
+      cerr << format(_("Problem installing source package %s-%s:"))
+          % srcpkg->name() % srcpkg->edition() << endl;
+      cerr << ex.asUserString() << endl;
+
+      return ZYPPER_EXIT_ERR_ZYPP;
+    }
+  }
+  else
+    cerr << format(_("Source package '%s' not found.")) % arguments[0] << endl;
+
+  return ZYPPER_EXIT_OK;
 }
 
 // Local Variables:

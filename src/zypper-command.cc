@@ -26,6 +26,7 @@ const ZypperCommand ZypperCommand::REFRESH(ZypperCommand::REFRESH_e);
 const ZypperCommand ZypperCommand::INSTALL(ZypperCommand::INSTALL_e);
 const ZypperCommand ZypperCommand::REMOVE(ZypperCommand::REMOVE_e);
 const ZypperCommand ZypperCommand::UPDATE(ZypperCommand::UPDATE_e);
+const ZypperCommand ZypperCommand::SRC_INSTALL(ZypperCommand::SRC_INSTALL_e);
 
 const ZypperCommand ZypperCommand::SEARCH(ZypperCommand::SEARCH_e);
 const ZypperCommand ZypperCommand::INFO(ZypperCommand::INFO_e);
@@ -63,6 +64,7 @@ ZypperCommand::Command ZypperCommand::parse(const std::string & strval_r)
     _table["install"] = _table["in"] = ZypperCommand::INSTALL_e;
     _table["remove"] = _table["rm"] = ZypperCommand::REMOVE_e;
     _table["update"] = _table["up"] = ZypperCommand::UPDATE_e;
+    _table["source-install"] = _table["si"] = ZypperCommand::SRC_INSTALL_e;
 
     _table["search"] = _table["se"] = ZypperCommand::SEARCH_e;
     _table["info"] = _table["if"] = ZypperCommand::INFO_e;
