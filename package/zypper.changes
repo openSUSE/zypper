@@ -1,4 +1,19 @@
 -------------------------------------------------------------------
+Mon Aug  6 16:29:04 CEST 2007 - jkupec@suse.cz
+
+- removed provides/obsoletes rug (#294224)
+- r6491
+- 0.8.8
+
+-------------------------------------------------------------------
+Mon Aug  6 16:15:32 CEST 2007 - jkupec@suse.cz
+
+- preliminary support for installation of source packages
+  (FATE #301171), without possibility to specify version to install
+  and to install its dependencies along
+- r6489
+
+-------------------------------------------------------------------
 Sun Aug  5 10:28:49 CEST 2007 - jkupec@suse.cz
 
 - translations added/updated
