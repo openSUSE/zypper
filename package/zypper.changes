@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Mon Aug  6 18:17:31 CEST 2007 - jkupec@suse.cz
+
+- changed zypper source-install to take more arguments at once
+- changed the versioned capability to be expected as
+  NAME[OP<EDITION>] (without spaces) for in/rm commands
+- r6498
+- 0.8.9
+
+-------------------------------------------------------------------
 Mon Aug  6 16:29:04 CEST 2007 - jkupec@suse.cz
 
 - removed provides/obsoletes rug (#294224)
