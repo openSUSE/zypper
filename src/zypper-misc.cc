@@ -1304,43 +1304,47 @@ int source_install(std::vector<std::string> & arguments)
    * 4. install the source package with ZYpp->installSrcPackage(SrcPackage::constPtr);
    */
 
-  SrcPackage::Ptr srcpkg;
-
-  gData.repo_resolvables.forEach(
-    functor::chain(
-      resfilter::ByName(arguments[0]),
-      resfilter::ByKind(ResTraits<SrcPackage>::kind)),
-      FindSrcPackage(srcpkg));
-
-  if (srcpkg)
+  int ret = ZYPPER_EXIT_OK;
+  
+  for (vector<string>::const_iterator it = arguments.begin();
+       it != arguments.end(); ++it)
   {
-    cout << format(_("Installing source package %s-%s"))
-        % srcpkg->name() % srcpkg->edition() << endl;
-    MIL << "Going to install srcpackage: " << srcpkg << endl;
+    SrcPackage::Ptr srcpkg;
 
-    try
+    gData.repo_resolvables.forEach(
+      functor::chain(
+        resfilter::ByName(*it),
+        resfilter::ByKind(ResTraits<SrcPackage>::kind)),
+        FindSrcPackage(srcpkg));
+  
+    if (srcpkg)
     {
-      God->installSrcPackage(srcpkg);
-      
-      cout << format(_("Source package %s-%s successfully installed."))
+      cout << format(_("Installing source package %s-%s"))
           % srcpkg->name() % srcpkg->edition() << endl;
-
-      return ZYPPER_EXIT_OK;  
+      MIL << "Going to install srcpackage: " << srcpkg << endl;
+  
+      try
+      {
+        God->installSrcPackage(srcpkg);
+        
+        cout << format(_("Source package %s-%s successfully installed."))
+            % srcpkg->name() % srcpkg->edition() << endl;
+      }
+      catch (const Exception & ex)
+      {
+        ZYPP_CAUGHT(ex);
+        cerr << format(_("Problem installing source package %s-%s:"))
+            % srcpkg->name() % srcpkg->edition() << endl;
+        cerr << ex.asUserString() << endl;
+  
+        ret = ZYPPER_EXIT_ERR_ZYPP;
+      }
     }
-    catch (const Exception & ex)
-    {
-      ZYPP_CAUGHT(ex);
-      cerr << format(_("Problem installing source package %s-%s:"))
-          % srcpkg->name() % srcpkg->edition() << endl;
-      cerr << ex.asUserString() << endl;
-
-      return ZYPPER_EXIT_ERR_ZYPP;
-    }
+    else
+      cerr << format(_("Source package '%s' not found.")) % (*it) << endl;
   }
-  else
-    cerr << format(_("Source package '%s' not found.")) % arguments[0] << endl;
 
-  return ZYPPER_EXIT_OK;
+  return ret;
 }
 
 // Local Variables:

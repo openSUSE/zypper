@@ -329,9 +329,9 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
     };
     specific_options = src_install_options;
     specific_help = _(
-      "source-install (si) <name>\n"
+      "source-install (si) <name> ...\n"
       "\n"
-      "Install a source package specified by its name.\n"
+      "Install source packages specified by their names.\n"
       "\n"
       "This command has no additional options.\n"
     );
