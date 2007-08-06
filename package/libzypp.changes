@@ -5,6 +5,7 @@ Mon Aug  6 10:19:12 CEST 2007 - jkupec@suse.cz
 - disabled reading of filelists.xml.gz by default (the data are
   currently not stored anyway)
 - revision 6481
+- version 3.13.13
 
 -------------------------------------------------------------------
 Sat Aug  4 01:03:19 CEST 2007 - ma@suse.de
