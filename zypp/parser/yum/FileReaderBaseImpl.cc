@@ -49,7 +49,7 @@ namespace zypp
 
   // --------------------------------------------------------------------------
 
-  bool FileReaderBase::BaseImpl::consumePackageNode(xml::Reader & reader_r, data::Package_Ptr & package_ptr)
+  bool FileReaderBase::BaseImpl::consumePackageNode(xml::Reader & reader_r, data::Packagebase_Ptr & package_ptr)
   {
     // DBG << "**node: " << reader_r->name() << " (" << reader_r->nodeType() << ") tagpath = " << _tagpath << endl;
     if (!isBeingProcessed(tag_package))
@@ -70,8 +70,18 @@ namespace zypp
       // xpath: //package/arch
       if (reader_r->name() == "arch")
       {
-        //if (arch == "src" || arch == "nosrc") arch = "noarch";
-        package_ptr->arch = Arch(reader_r.nodeText().asString());
+        string arch = reader_r.nodeText().asString();
+        // create SrcPackage instead of Package for source packages
+        if (arch == "src" || arch == "nosrc")
+        {
+          arch = "noarch";
+          data::Packagebase_Ptr srcpkg = new data::SrcPackage;
+          // we have read name only so far, copying only the name
+          srcpkg->name = package_ptr->name;
+          // package_ptr will point to a SrcPackage from now on
+          package_ptr.swap(srcpkg);
+        }
+        package_ptr->arch = Arch(arch);
         return true;
       }
 
@@ -182,7 +192,7 @@ namespace zypp
   // --------------( consume <format> tag )------------------------------------
 
   bool FileReaderBase::BaseImpl::consumeFormatNode(
-    xml::Reader & reader_r, data::Package_Ptr & package_ptr)
+    xml::Reader & reader_r, data::Packagebase_Ptr & package_ptr)
   {
     if (consumeDependency(reader_r, package_ptr->deps))
       // this node has been a dependency, which has been handled by

@@ -21,8 +21,8 @@ namespace zypp
 
   namespace data
   {
-    class Package;
-    DEFINE_PTR_TYPE(Package);
+    class Packagebase;
+    DEFINE_PTR_TYPE(Packagebase);
   } // ns data
 
 
@@ -51,7 +51,7 @@ namespace zypp
     /**
      * Callback definition.
      */
-    typedef function<bool(const data::Package_Ptr &)> ProcessPackage;
+    typedef function<bool(const data::Packagebase_Ptr &)> ProcessPackage;
 
     /**
      * CTOR. Creates also \ref xml::Reader and starts reading.

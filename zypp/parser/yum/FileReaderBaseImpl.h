@@ -95,11 +95,13 @@ namespace zypp
      * Process package node and its subtree.
      * This method can be extended for specific implementations.
      *
+     * \param reader_r
+     * \param package_ptr This can be either data::Package or data::SrcPackage.
      * \return true if the package node or current subnode has been consumed
      *         (no further processing is required), false otherwise.
      * \throws ParseException if a serious error is encountered while parsing
      */
-    bool consumePackageNode(xml::Reader & reader_r, data::Package_Ptr & package_ptr);
+    bool consumePackageNode(xml::Reader & reader_r, data::Packagebase_Ptr & package_ptr);
 
     /**
      * Function for processing all <code>format</code> tag subtree nodes.
@@ -107,7 +109,7 @@ namespace zypp
      * \return true if the package node or current subnode has been consumed
      *         (no further processing is required), false otherwise.
      */
-    bool consumeFormatNode(xml::Reader & reader_r, data::Package_Ptr & package_ptr);
+    bool consumeFormatNode(xml::Reader & reader_r, data::Packagebase_Ptr & package_ptr);
 
     /**
      * Processes RPM dependency tags (rpm:entry, rpm:requires, ...).

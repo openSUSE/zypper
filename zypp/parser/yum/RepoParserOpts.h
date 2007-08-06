@@ -18,7 +18,7 @@ namespace zypp
     DefaultIntegral<bool,true> skipOther;
 
     /** Skip parsing of filelists.xml.gz */
-    DefaultIntegral<bool,false> skipFilelists;
+    DefaultIntegral<bool,true> skipFilelists;
   };
 
 

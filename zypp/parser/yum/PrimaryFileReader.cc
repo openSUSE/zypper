@@ -69,7 +69,7 @@ namespace zypp
      * _package and returns it. Used to hand-out the data object to its consumer
      * (a \ref ProcessPackage function) after it has been read.
      */
-    data::Package_Ptr handoutPackage();
+    data::Packagebase_Ptr handoutPackage();
 
   private:
     /**
@@ -78,9 +78,10 @@ namespace zypp
     ProcessPackage _callback;
 
     /**
-     * \ref zypp::data::Package object for storing the package metada
+     * \ref zypp::data::Packagebase object for storing the package metada.
+     * This can be either a data::Package or data::SrcPackage
      */
-    data::Package_Ptr _package;
+    data::Packagebase_Ptr _package;
 
     /**
      * Progress reporting object.
@@ -164,9 +165,9 @@ namespace zypp
 
   // --------------------------------------------------------------------------
 
-  data::Package_Ptr PrimaryFileReader::Impl::handoutPackage()
+  data::Packagebase_Ptr PrimaryFileReader::Impl::handoutPackage()
   {
-    data::Package_Ptr ret;
+    data::Packagebase_Ptr ret;
     ret.swap(_package);
     return ret;
   }

@@ -16,6 +16,7 @@
 #include "zypp/PathInfo.h"
 #include "zypp/base/UserRequestException.h"
 #include "zypp/repo/yum/ResourceType.h"
+#include "zypp/data/ResolvableData.h"
 
 #include "zypp/parser/yum/RepomdFileReader.h"
 #include "zypp/parser/yum/PrimaryFileReader.h"
@@ -102,7 +103,7 @@ namespace zypp
      *
      * \param package_r pointer to package data
      */
-    bool primary_CB(const data::Package_Ptr & package_r); 
+    bool primary_CB(const data::Packagebase_Ptr & package_r); 
 
     /**
      * Callback for processing data returned from \ref PatchesFileReader.
@@ -201,9 +202,13 @@ namespace zypp
 
   // -------------------------------------------------------------------------
 
-  bool RepoParser::Impl::primary_CB(const data::Package_Ptr & package_r)
+  bool RepoParser::Impl::primary_CB(const data::Packagebase_Ptr & package_r)
   {
-    _consumer.consumePackage( _repository_id, package_r );
+    data::Package_Ptr pkg = dynamic_pointer_cast<data::Package>(package_r);
+    if (pkg)
+      _consumer.consumePackage(_repository_id, pkg);
+    else
+      _consumer.consumeSourcePackage(_repository_id, dynamic_pointer_cast<data::SrcPackage>(package_r));
 
 /*    MIL << "got package "
       << package.name << package.edition << " "
@@ -387,7 +392,7 @@ namespace zypp
           }
           else
           {
-            MIL << "skipping other.xml.gz";
+            MIL << "skipping other.xml.gz" << endl;
             // increase in the total bytes of the file
             if (!_ticks.incr( jobsize ))
               ZYPP_THROW(AbortRequestException());

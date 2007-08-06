@@ -486,7 +486,7 @@ namespace zypp
 
     // FileReaderBase::consumePackageNode() call here, otherwise the pkgfiles
     // would not be read.
-    data::Package_Ptr package_ptr = zypp::dynamic_pointer_cast<data::Package>(_tmpResObj);
+    data::Packagebase_Ptr package_ptr = zypp::dynamic_pointer_cast<data::Packagebase>(_tmpResObj);
     if (package_ptr)
     {
       // xpath: /patch/atoms/package/* (except pkgfiles/* and license-to-confirm) (*)
