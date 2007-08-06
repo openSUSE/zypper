@@ -136,7 +136,24 @@ static std::string xml_escape( const std::string &text )
 Capability safe_parse_cap (const ResObject::Kind &kind, const string & capstr) {
   Capability cap;
   try {
-    cap = CapFactory().parse (kind, capstr);
+    // expect named caps as NAME[OP<EDITION>]
+    // transform to NAME[ OP <EDITION>] (add spaces)
+    string new_capstr = capstr;
+    cout_vv << "capstr: " << capstr << endl;
+    int op_pos = capstr.find_first_of("<>=");
+    if (op_pos != string::npos)
+    {
+      new_capstr.insert(op_pos, " ");
+      cout_vv << "new capstr: " << new_capstr << endl;
+      op_pos = new_capstr.find_first_not_of("<>=", op_pos + 1);
+      if (op_pos != string::npos && new_capstr.size() > op_pos)
+      {
+        new_capstr.insert(op_pos, " ");
+        cout_vv << "new capstr: " << new_capstr << endl;
+      }
+    }
+
+    cap = CapFactory().parse (kind, new_capstr);
   }
   catch (const Exception& e) {
     ZYPP_CAUGHT(e);
