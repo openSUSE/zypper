@@ -20,11 +20,30 @@
 using namespace std;
 using namespace zypp;
 
-static void migrate_sources( const Pathname &root, const Pathname &dir )
+struct Options
+{
+  Options()
+  : fake(false)
+  , root(Pathname("/"))
+  , sources_dir(Pathname("/var/lib/zypp/db/sources"))
+  {}
+  
+  bool fake;
+  Pathname root;
+  Pathname sources_dir;
+};
+
+static void migrate_sources( const Options &opt )
 {
   RepoManager manager;
   
-  Pathname source_p = root + dir;
+  Pathname source_p = opt.root + opt.sources_dir;
+  
+  if ( ! PathInfo(source_p).isExist() )
+  {
+    cout << "No sources to migrate." << endl;
+    return;
+  }
   
   RepoInfoList sources;
   DBG << "Reading source cache in " << source_p << std::endl;
@@ -45,10 +64,20 @@ static void migrate_sources( const Pathname &root, const Pathname &dir )
       RepoInfo data = **iter;
       string alias = "migrated_" + str::numstring(i);
       try {
-        cout << "Migrating repo: " << endl << data << endl;
         data.setAlias(alias);
         data.setEnabled(false);
-        manager.addRepository(data);
+        cout << "Migrating repo: " << endl << data << endl;
+        if ( ! opt.fake )
+        {
+          manager.addRepository(data);
+        }
+        cout << "Deleting old source: " << *it << endl;
+        if ( ! opt.fake )
+        {
+          if ( filesystem::unlink(*it) != 0 )
+            ERR << "Error removing source " << *it << endl;
+          // delete old file
+        }
         cout << "saved as " << alias << endl;
         ++i;
       }
@@ -61,13 +90,30 @@ static void migrate_sources( const Pathname &root, const Pathname &dir )
 
   }
   cout << i << " sources migrated."<< endl;
+  
+  // reread entries
+  if ( filesystem::readdir( entries, source_p, false ) != 0 )
+      ZYPP_THROW(Exception("failed to read directory"));
+  if ( entries.size() == 0 )
+  {
+    cout << "all sources migrated. deleting old source directory"<< endl;
+    if ( ! opt.fake )
+    {
+      if ( filesystem::recursive_rmdir(source_p) != 0 )
+        ERR << "Error removing source directory" << source_p << endl;
+    }
+  }
+  else
+  {
+    cout << "Not all sources migrated. leaving old source directory"<< endl;
+  }
 }
 
 void usage(int argc, char **argv)
 {
   cout << argv[0] << ". Migrates old sources to 10.3 repositories." << endl;
   cout << "Usage:" << endl;
-  cout << argv[0] << " root-path" << endl;
+  cout << argv[0] << " [--root root-path] [--fake] [--sp sources-path]" << endl;
 }
 
 //-----------------------------------------------------------------------------
@@ -76,16 +122,25 @@ int
 main (int argc, char **argv)
 {
   MIL << "-------------------------------------" << endl;
+  Options opt;
+  int i;
+  for ( i=1; i < argc; ++i )
+  {
+    
+    if ( string(argv[i]) == "--help" )
+    {
+      usage(argc, argv);
+      return 0;
+    }
+    if ( string(argv[i]) == "--fake" )
+      opt.fake = true;
+    if ( string(argv[i]) == "--root" )
+      opt.root = argv[++i];
+    if ( string(argv[i]) == "--sp" )
+      opt.sources_dir = argv[++i];
+  }
+  migrate_sources(opt);
   
-  if (argc > 1)
-  {
-      migrate_sources(argv[1], "/var/lib/zypp/db/sources");
-  }
-  else
-  {
-    usage(argc, argv);
-  }
-
   return 0;
 }
 
