@@ -11,7 +11,7 @@
 # norootforbuild
 
 Name:           @PACKAGE@
-BuildRequires:  libzypp-devel >= 3.12.1 boost-devel >= 1.33.1 gettext-devel >= 0.15 readline-devel >= 5.1
+BuildRequires:  libzypp-devel >= 3.13.13 boost-devel >= 1.33.1 gettext-devel >= 0.15 readline-devel >= 5.1
 BuildRequires:  gcc-c++ >= 4.2 cmake >= 2.4.6 pkg-config >= 0.20
 Requires:	procps
 License:        GPL
@@ -25,8 +25,8 @@ Release:        0
 Source:         @PACKAGE@-@VERSION@.tar.bz2
 Prefix:         /usr
 Url:            http://en.opensuse.org/Zypper
-Provides:       y2pmsh rug
-Obsoletes:      y2pmsh rug
+Provides:       y2pmsh 
+Obsoletes:      y2pmsh 
 
 %description
 Command line package management tool using libzypp.
