@@ -128,7 +128,7 @@ namespace zypp
         if ( PathInfo( cached_file ).isExist() )
         {
           // check the checksum
-          if ( is_checksum( cached_file, (*it_res).location.checksum() ) )
+          if ( is_checksum( cached_file, (*it_res).location.checksum() ) && (! (*it_res).location.checksum().empty() ) )
           {
             // cached
             MIL << "file " << (*it_res).location.filename() << " found in previous cache. Using cached copy." << endl;
