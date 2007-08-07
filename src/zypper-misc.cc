@@ -705,11 +705,16 @@ bool xml_list_patches ()
   }
 
 
+  unsigned int patchcount=0;
+
   it = pool.byKindBegin<Patch> ();
 
   for (; it != e; ++it )
   {
     ResObject::constPtr res = it->resolvable();
+		
+    patchcount++;
+
     if ( it->status().isNeeded()) 
     {
       Patch::constPtr patch = asKind<Patch>(res);
@@ -738,6 +743,11 @@ bool xml_list_patches ()
         cout << " </update>" << endl;
       }
     }
+  }
+
+  if (patchcount == 0)
+  {
+    cout << "<appletinfo status=\"no-update-repositories\"/>" << endl;
   }
 
   return pkg_mgr_available;
