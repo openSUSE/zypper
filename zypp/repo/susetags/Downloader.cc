@@ -100,13 +100,16 @@ void Downloader::download( MediaSetAccess &media,
         std::string rest( str::stripPrefix( words[3], "packages" ) );
         if ( ! (   rest.empty()
                 || rest == ".DU"
-                || rest == ".en" ) )
+                || rest == ".en"
+                || rest == ".gz"
+                || rest == ".DU.gz"
+                || rest == ".en.gz" ) )
         {
           // Not 100% correct as we take each fallback of textLocale
           Locale toParse( ZConfig::instance().textLocale() );
           while ( toParse != Locale::noCode )
           {
-            if ( rest == ("."+toParse.code()) )
+            if ( rest == ("."+toParse.code()) || (rest == ("."+toParse.code()+".gz")) )
               break;
             toParse = toParse.fallback();
           }
