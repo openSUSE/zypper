@@ -6,6 +6,13 @@ Tue Aug  7 16:26:32 CEST 2007 - tgoettlicher@suse.de
 - r6510
 
 -------------------------------------------------------------------
+Tue Aug  7 16:04:45 CEST 2007 - jkupec@suse.cz
+
+- fixed zypper to complain when given an invalid answer in y/n prompt
+  (#232250) plus made the answer translatable.
+- r6507 
+
+-------------------------------------------------------------------
 Mon Aug  6 18:17:31 CEST 2007 - jkupec@suse.cz
 
 - changed zypper source-install to take more arguments at once
