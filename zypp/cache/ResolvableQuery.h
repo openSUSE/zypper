@@ -215,6 +215,11 @@ namespace zypp
 
 
 
+      /**
+       * \short Query disk usage for a resolvable
+       */
+      void queryDiskUsage( const data::RecordId &record_id,
+                           DiskUsage &du );
     private:
       /** Implementation. */
       class Impl;

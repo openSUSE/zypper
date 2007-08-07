@@ -466,7 +466,7 @@ namespace zypp
 	parseLocaleIf( ZConfig::instance().textLocale() );
 
         // Now process packages.DU.
-        if ( 0 ) // remove the if to enable, but leave the {} around.
+        //if ( 0 ) // remove the if to enable, but leave the {} around.
         {
           Pathname inputfile( getOptionalFile( _descrdir / "packages.DU" ) );
           PackagesDuFileReader reader;

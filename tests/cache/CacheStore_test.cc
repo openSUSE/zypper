@@ -28,6 +28,8 @@
 #include "zypp/Product.h"
 #include "zypp/Patch.h"
 
+#include "zypp/ZYppFactory.h"
+
 #include "zypp/detail/ImplConnect.h"
 
 using namespace std;
@@ -67,6 +69,8 @@ void check_kdelibs3_package( Package::Ptr p )
   BOOST_CHECK_EQUAL( p->location().medianr(), 1);
   BOOST_CHECK_EQUAL( p->size(), 38850584);
   BOOST_CHECK_EQUAL( p->location().downloadSize(), 16356019);
+  
+  BOOST_CHECK_EQUAL( p->diskusage().size(), 3);
 }
 
 /**
@@ -409,7 +413,14 @@ init_unit_test_suite( int argc, char *argv[] )
   test->add(BOOST_PARAM_TEST_CASE(&cache_write_yum_test,
                                  (std::string const*)params, params+1));
 
-
+  DiskUsageCounter::MountPointSet mounts;
+  mounts.insert( DiskUsageCounter::MountPoint("/") );
+  mounts.insert( DiskUsageCounter::MountPoint("/etc") );
+  mounts.insert( DiskUsageCounter::MountPoint("/opt/kde3/share/mimelnk/video") );
+  mounts.insert( DiskUsageCounter::MountPoint("/foo") );
+  mounts.insert( DiskUsageCounter::MountPoint("/bar") );
+  getZYpp()->setPartitions(mounts);
+  
   test->add(BOOST_PARAM_TEST_CASE(&cache_write_susetags_normal_test,
                                  (std::string const*)params, params+1));
   test->add(BOOST_PARAM_TEST_CASE(&cache_write_susetags_gz_test,

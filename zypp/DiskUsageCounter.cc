@@ -299,5 +299,11 @@ namespace zypp
     return ret;
   }
 
+  std::ostream & operator<<( std::ostream & str, const DiskUsageCounter::MountPoint & obj )
+  {
+    str << "dir:[" << obj.dir << "] [ bs: " << obj.block_size << " ts: " << obj.total_size << "]" << std::endl;
+    return str;
+  }
+  
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////

@@ -12,6 +12,7 @@
 #include <iostream>
 #include "zypp/base/Easy.h"
 #include "zypp/base/Logger.h"
+#include "zypp/ZYppFactory.h"
 
 #include "zypp/parser/susetags/PackagesDuFileReader.h"
 #include "zypp/parser/susetags/FileReaderBaseImpl.h"
@@ -40,10 +41,27 @@ namespace zypp
 	public:
 	  Impl( const PackagesDuFileReader & parent_r )
 	  : BaseImpl( parent_r )
-	  {}
+          , _counted_entries(0)
+          , _discarded_entries(0)
+	  {
+            _mounts = getZYpp()->getPartitions();
+            if (_mounts.empty() )
+              _mounts =  DiskUsageCounter::detectMountPoints();
+            
+            for ( DiskUsageCounter::MountPointSet::const_iterator it = _mounts.begin();
+                  it != _mounts.end();
+                  ++ it )
+            {
+              MIL << "Partition " << *it << endl;
+            }
+          
+          }
 
 	  virtual ~Impl()
-	  {}
+	  {
+            MIL << "DiskUsage: consumed:[ " << _counted_entries
+                << " ] discarded:[ " << _discarded_entries << " ]" << endl;
+          }
 
 	  bool hasPackage() const
 	  { return _pkgData; }
@@ -115,9 +133,51 @@ namespace zypp
             {
               if ( str::regex_match( *it, what, sizeEntryRX, str::match_extra ) )
               {
-                _data->diskusage.add( what[1],
-                                      str::strtonum<unsigned>(what[2]) + str::strtonum<unsigned>(what[3]),
-                                      str::strtonum<unsigned>(what[4]) + str::strtonum<unsigned>(what[5]) );
+                bool skip = true;
+                
+                // add slash if it's missing
+                std::string dd(what[1]);
+                if (dd.size() > 1 && dd[0] != '/')
+                {
+                 dd.insert(dd.begin(), '/');
+                }
+                
+                DiskUsage::Entry entry(dd,
+                                       str::strtonum<unsigned>(what[2]) + str::strtonum<unsigned>(what[3]),
+                                       str::strtonum<unsigned>(what[4]) + str::strtonum<unsigned>(what[5]) );
+                
+                // iterate over important mounts in reverse order, from the leaves to
+                // the root
+                for ( DiskUsageCounter::MountPointSet::reverse_iterator mit = _mounts.rbegin();
+                  mit != _mounts.rend();
+                  ++ mit )
+                {
+                  // if the directory we are adding is below one of the mount points
+                  // just add the mount point so it gets summed.
+                  //MIL << "is '" << entry.path << "' == '" << (*mit).dir << "' ?" << endl;
+                  // FIXME make this more clear
+                  if ( entry.path == ( ((*mit).dir[(*mit).dir.size()-1] == '/') ? (*mit).dir : ((*mit).dir + '/' ) ) )
+                  {
+                    // entry is a mountpoint, so we need to keep it
+                    //MIL << "yes" << endl;
+                    // just discard it
+                    _discarded_entries++;
+                    skip = false;
+                    break;
+                  }
+                  else
+                  {
+                    //MIL << "no" << endl;
+                  }
+                }
+                
+                // try next entry
+                if ( skip )
+                  continue;
+                
+                MIL << "adding entry for " << entry.path << endl;
+                _data->diskusage.add(entry);
+                _counted_entries++;
               }
               else
               {
@@ -134,6 +194,9 @@ namespace zypp
 	  data::Packagebase_Ptr   _data;
 	  data::Package_Ptr       _pkgData;
 	  data::SrcPackage_Ptr    _srcpkgData;
+          DiskUsageCounter::MountPointSet _mounts;
+          int _counted_entries;
+          int _discarded_entries;
       };
       ///////////////////////////////////////////////////////////////////
 

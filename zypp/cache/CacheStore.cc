@@ -54,6 +54,7 @@ struct CacheStore::Impl
 {
   Impl( const Pathname &dbdir )
   : name_cache_hits(0)
+  , dir_cache_hits(0)
   {
     // let the initializer go out of scope after it executes
     {
@@ -206,7 +207,9 @@ struct CacheStore::Impl
 
   map<string, RecordId> name_cache;
   map< pair<string,string>, RecordId> type_cache;
+  map<string, RecordId> dir_cache;
   int name_cache_hits;
+  int dir_cache_hits;
 };
 
 
@@ -471,6 +474,7 @@ void CacheStore::consumeDiskUsage( const data::RecordId &resolvable_id,
       ZYPP_RETHROW(e);
     }
   }
+  //MIL << "disk usage for " << resolvable_id << " consumed" << endl;
 }
 
 void CacheStore::updatePackageLang( const data::RecordId & resolvable_id,
@@ -1023,6 +1027,11 @@ RecordId CacheStore::lookupOrAppendName( const string &name )
 
 RecordId CacheStore::lookupOrAppendDirName( const string &name )
 {
+  if ( _pimpl->dir_cache.find(name) != _pimpl->dir_cache.end() )
+  {
+    _pimpl->dir_cache_hits++;
+    return _pimpl->dir_cache[name];
+  }
   long long id = 0;
   try
   {
@@ -1034,6 +1043,7 @@ RecordId CacheStore::lookupOrAppendDirName( const string &name )
       _pimpl->insert_dirname_cmd->bind(":name", name);
       _pimpl->insert_dirname_cmd->executenonquery();
       id = _pimpl->con.insertid();
+      _pimpl->dir_cache[name] = id;
       return id;
    }
    return reader.getint64(0);

@@ -24,6 +24,7 @@ struct ResolvableQuery::Impl
   sqlite3_command_ptr _cmd_attr_str;
   sqlite3_command_ptr _cmd_attr_tstr;
   sqlite3_command_ptr _cmd_attr_num;
+  sqlite3_command_ptr _cmd_disk_usage;
 
   Impl( const Pathname &dbdir)
   : _dbdir(dbdir)
@@ -37,9 +38,10 @@ struct ResolvableQuery::Impl
 
     _cmd_attr_str.reset( new sqlite3_command( _con, "select a.text from text_attributes a,types l,types t where a.weak_resolvable_id=:rid and a.lang_id=l.id and a.attr_id=t.id and l.class=:lclass and l.name=:lname and t.class=:tclass and t.name=:tname;"));
 
-
     _cmd_attr_num.reset( new sqlite3_command( _con, "select a.value from numeric_attributes a,types t where a.weak_resolvable_id=:rid and a.attr_id=t.id and t.class=:tclass and t.name=:tname;"));
 
+    _cmd_disk_usage.reset( new sqlite3_command( _con, "select d.name,du.size,du.files from resolvable_disk_usage du,dir_names d where du.resolvable_id=:rid and du.dir_name_id=d.id;"));
+    
     MIL << "Creating Resolvable query impl" << endl;
     _fields = "id, name, version, release, epoch, arch, kind, installed_size, archive_size, install_only, build_time, install_time, repository_id";
   }
@@ -143,6 +145,20 @@ struct ResolvableQuery::Impl
     return queryNumericAttributeInternal( _con, record_id, klass, name, default_value);
   }
 
+  void queryDiskUsage( const data::RecordId &record_id, DiskUsage &du )
+  {
+    _cmd_disk_usage->bind(":rid", record_id);
+    sqlite3_reader reader = _cmd_disk_usage->executereader();
+
+    while ( reader.read() )
+    {
+      DiskUsage::Entry entry(reader.getstring(0),
+                             reader.getint(1),
+                             reader.getint(2) );
+      du.add(entry);
+    }
+  }
+  
 private:
 
   int queryNumericAttributeInternal( sqlite3_connection &con,
@@ -306,6 +322,11 @@ TranslatedText ResolvableQuery::queryTranslatedStringAttribute( const data::Reco
                                                                 const TranslatedText &default_value )
 {
   return _pimpl->queryTranslatedStringAttribute(record_id, klass, name, default_value );
+}
+
+void ResolvableQuery::queryDiskUsage( const data::RecordId &record_id, DiskUsage &du )
+{
+  _pimpl->queryDiskUsage(record_id, du);
 }
 
 //////////////////////////////////////////////////////////////////////////////

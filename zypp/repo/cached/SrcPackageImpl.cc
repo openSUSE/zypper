@@ -117,7 +117,7 @@ const DiskUsage & SrcPackageImpl::diskusage() const
   {
     // lazy init
     _diskusage.reset( new DiskUsage );
-#warning FILL DU DATA FROM DB
+    _repository->resolvableQuery().queryDiskUsage( _id, *_diskusage );
   }
   return *_diskusage;
 }

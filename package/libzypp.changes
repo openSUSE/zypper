@@ -1,4 +1,15 @@
 -------------------------------------------------------------------
+Tue Aug  7 17:04:47 CEST 2007 - dmacvicar@suse.de
+
+- implement susetags support for compressed metadata
+  and testcases. (feature #301916)
+- implement disk usage in cache. For installation requires
+  some changes in YaST to setup the ZYpp getPartitions()
+  before repos are cached. (bug #293039)
+- added testcases for diskusage
+- 3.13.14
+
+-------------------------------------------------------------------
 Mon Aug  6 10:19:12 CEST 2007 - jkupec@suse.cz
 
 - fixed YUM parser to properly create source packages
