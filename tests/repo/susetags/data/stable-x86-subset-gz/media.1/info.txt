@@ -1,0 +1,38 @@
+
+   openSUSE FACTORY 10.3-factory
+ 
+   Attention! You are accessing our BETA Distribution.  If you install
+   any package, note that we can NOT GIVE ANY SUPPORT for your system - 
+   no matter if you update from a previous system or do a complete 
+   new installation.
+
+   Use this BETA distribution at your own risk! We recommend it for
+   testing, porting and evaluation purposes but not for any critical
+   production systems.
+
+   If you are curious and would like to help us to find the bugs, you're
+   very welcome.  Please enter bug reports following the instructions
+   given at http://bugs.opensuse.org .
+   If you want to talk about this distribution with others, you can
+   discuss on the mailing list opensuse-factory@opensuse.org.
+
+   Sources for development releases are not distributed via mirrors to
+   reduce the bandwidth and storage on these mirrors.
+
+   You can always find the latest source at
+   http://download.opensuse.org/distribution/SL-OSS-factory/
+
+   In case you need the exact source of this development release you can
+   find it on:
+   http://www.novell.com/products/opensuse/source_code.html
+
+   Alternatively, see
+   http://www.novell.com/products/opensuse/source_code.html or send e-mail
+   to sourcedvd@suse.de to request the source
+   for a specific release of openSUSE on DVD. Please note that we will
+   charge $15 or 15 Euros to cover our costs of distribution.
+
+   Use this distribution at your own risk - and remember to have a
+   lot of fun! :)
+
+                Your openSUSE Team.

@@ -1,0 +1,38 @@
+PRODUCT openSUSE-factory
+VERSION 10.3
+DISTPRODUCT SuSE-Linux-STABLE-X86
+DISTVERSION 10.2.42-factory
+VENDOR SUSE LINUX Products GmbH, Nuernberg, Germany
+RELNOTESURL http://www.suse.com/relnotes/i386/openSUSE/FACTORY/release-notes.rpm
+ARCH.x86_64 x86_64 i686 i586 i486 i386 noarch
+ARCH.i686 i686 i586 i486 i386 noarch
+ARCH.i586 i586 i486 i386 noarch
+ARCH.i486 i486 i386 noarch
+ARCH.i386 i386 noarch
+DEFAULTBASE i586
+REQUIRES openSUSE-release = 10.3 pattern:basesystem
+PROVIDES product:openSUSE = 10.2.42
+OBSOLETES product:SUSE_LINUX product:openSUSE <= 10.2
+LINGUAS cs da de en en_GB es fi fr hu it ja km nl nb pl pt_BR zh_CN zh_TW
+SHORTLABEL FACTORY
+LABEL openSUSE FACTORY 10.3
+LABEL.de openSUSE FACTORY 10.3
+EXTRAURLS http://download.opensuse.org/distribution/10.2/repo/oss/
+OPTIONALURLS http://download.opensuse.org/distribution/10.2/repo/non-oss/ http://download.opensuse.org/distribution/10.2/repo/debug/
+DESCRDIR suse/setup/descr
+DATADIR suse
+FLAGS update
+LANGUAGE en_US
+META SHA1 ef17fbde6dfe24bf2e7389db35c8e0c23867ceb4  kde-10.3-71.i586.pat
+META SHA1 2720fb78cacea1b385e928f342eba806fe9bbc6f  packages
+META SHA1 f2fa8bdea181f286f56a7e69c702f1d05af9d7a3  packages.DU
+META SHA1 ab34de485eca07c6ddb7913c274e8348610b9a3b  packages.en
+META SHA1 2ad7aaabc7b020f20cb9f345db4d196f2b615fcc  packages.es
+META SHA1 8914b6ea8d8be98be3215f7497376a4e2add57bc  patterns
+KEY SHA1 c0354069c10819674da8706822e1d4bd0c1797e9  gpg-pubkey-0dfb3188-41ed929b.asc
+KEY SHA1 2e38e503c436c5d002bdc31755c82188044d9d21  gpg-pubkey-307e3d54-44201d5d.asc
+KEY SHA1 7025932e6866932f489421990075f3ed312023ea  gpg-pubkey-3d25d3d9-36e12d04.asc
+KEY SHA1 fd6146cac8c1473c5b52548936de773d5bbd5610  gpg-pubkey-7e2e3b05-44748aba.asc
+KEY SHA1 cd7adceba1fe5d7ba27b5749718743192d82f802  gpg-pubkey-9c800aca-40d8063e.asc
+KEY SHA1 7535d79e31ef7b4232e5593bb49d9142978b2e95  gpg-pubkey-a1912208-446a0899.asc
+

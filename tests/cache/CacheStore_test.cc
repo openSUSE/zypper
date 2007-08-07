@@ -316,10 +316,9 @@ void cache_write_yum_test(const string &dir)
 /**
  * \short Test that a susetags repo is cached and restored
  */
-void cache_write_susetags_test(const string &dir)
+void cache_write_susetags(const Pathname &repodir)
 {
   data::RecordId repository_id;
-  Pathname repodir = Pathname(dir) + "/repo/susetags/data/stable-x86-subset";
   filesystem::TmpDir tmpdir;
   string alias = "novell.com";
   write_susetags_repo( alias, repodir, tmpdir );
@@ -375,6 +374,24 @@ void cache_write_susetags_test(const string &dir)
   check_tables_clean(tmpdir);
 }
 
+void cache_write_susetags_normal_test(const std::string &dir)
+{
+  Pathname repodir = Pathname(dir) + "/repo/susetags/data/stable-x86-subset";
+  cache_write_susetags(repodir);
+}
+
+void cache_write_susetags_gz_test(const std::string &dir)
+{
+  Pathname repodir = Pathname(dir) + "/repo/susetags/data/stable-x86-subset-gz";
+  cache_write_susetags(repodir);
+}
+
+void cache_write_susetags_compressed_test(const std::string &dir)
+{
+  Pathname repodir = Pathname(dir) + "/repo/susetags/data/stable-x86-subset-compressed";
+  cache_write_susetags(repodir);
+}
+
 test_suite*
 init_unit_test_suite( int argc, char *argv[] )
 {
@@ -397,7 +414,13 @@ init_unit_test_suite( int argc, char *argv[] )
   std::string const params[] = { datadir };
   test->add(BOOST_PARAM_TEST_CASE(&cache_write_yum_test,
                                  (std::string const*)params, params+1));
-  test->add(BOOST_PARAM_TEST_CASE(&cache_write_susetags_test,
+
+
+  test->add(BOOST_PARAM_TEST_CASE(&cache_write_susetags_normal_test,
+                                 (std::string const*)params, params+1));
+  //test->add(BOOST_PARAM_TEST_CASE(&cache_write_susetags_gz_test,
+  //                               (std::string const*)params, params+1));
+  test->add(BOOST_PARAM_TEST_CASE(&cache_write_susetags_compressed_test,
                                  (std::string const*)params, params+1));
   //test->add(BOOST_PARAM_TEST_CASE(&cache_write_test2,
   //                               (std::string const*)params, params+1));
