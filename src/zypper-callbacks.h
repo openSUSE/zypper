@@ -56,13 +56,11 @@ void display_error (Error error, const std::string& reason) {
 int read_action_ari (int default_action = -1);
 
 /**
- * Prompt for Yes/No answer from stdin.
+ * Prompt for y/n answer (localized) from stdin.
  *
  * \param question Question to be printed on prompt.
  * \param default_answer Value to be returned in non-interactive mode or on
  *      input failure.
- *
- * \todo make this localized
  */
 bool read_bool_answer(const string & question, bool default_answer);
 

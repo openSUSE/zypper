@@ -1,10 +1,13 @@
-#include "AliveCursor.h"
-#include "zypper.h"
-
 #include <ctype.h>
 #include <sstream>
 
+#include <boost/format.hpp>
+
+#include "AliveCursor.h"
+#include "zypper.h"
+
 using namespace std;
+using namespace boost;
 
 void display_progress ( const std::string &id, ostream & out, const string& s, int percent) {
   static AliveCursor cursor;
@@ -120,7 +123,6 @@ int read_action_ari (int default_action) {
 
 // ----------------------------------------------------------------------------
 
-// Read an answer (ynYN)
 bool read_bool_answer(const string & question, bool default_answer)
 {
   if (!gSettings.machine_readable)
@@ -138,13 +140,37 @@ bool read_bool_answer(const string & question, bool default_answer)
   istream & stm = cin;
 
   string c = "";
-  while (stm.good () && c != "y" && c != "Y" && c != "N" && c != "n")
+  bool been_here_before = false;
+  while (stm.good ()
+    // TranslatorExplanation This is a Lowercase 'y' for "yes" used as an
+    // answer in y/n prompts. Translate to the same letter as you translated
+    // it in the "[y/n]" string!.
+    && c != _("y")
+    // TranslatorExplanation Uppercase 'Y' for "yes" used as an
+    // answer in y/n prompts. Translate to the same letter as you translated
+    // it in the "[y/n]" string!.
+    && c != _("Y")
+    // TranslatorExplanation Lowercase 'n' for "no" used as an
+    // answer in y/n prompts. Translate to the same letter as you translated
+    // it in the "[y/n]" string!.
+    && c != _("n")
+    // TranslatorExplanation Uppercase 'N' for "no" used as an
+    // answer in y/n prompts. Translate to the same letter as you translated
+    // it in the "[y/n]" string!.
+    && c != _("N"))
+  {
+    if (been_here_before)
+      // TranslatorExplanation Example: Invalid answer 'x', enter 'y' or 'n':
+      cerr << format(_("Invalid answer '%s', enter '%s' or '%s':"))
+          % c % _("y") % _("n") << " ";
     c = zypp::str::getline (stm, zypp::str::TRIM);
+    been_here_before = true;
+  }
 
   MIL << "answer: " << c << endl;
-  if (c == "y" || c == "Y")
+  if (c == _("y") || c == _("Y"))
     return true;
-  else if (c == "n" || c == "N")
+  else if (c == _("n") || c == _("N"))
     return false;
   else
   {
