@@ -212,8 +212,20 @@ namespace zypp
 	  /** Throw \ref ParseException if a required file is not
 	   * available below \ref _reporoot on disk.
 	  */
-	  Pathname assertMandatoryFile( const Pathname & file_r ) const
+	  Pathname assertMandatoryFile( const Pathname & file_r, bool lookgz = true ) const
 	  {
+      if ( lookgz )
+      {
+        PathInfo gzinputfile( _reporoot / (file_r.extend(".gz")) );
+        if ( !gzinputfile.isFile() )
+        {
+          WAR << _reporoot << ": Skip gz required file (will look for non-gz): " <<  file_r.extend(".gz").asString() << endl;
+        }
+        else
+        {
+          return gzinputfile.path();
+        }
+      }
 	    PathInfo inputfile( _reporoot / file_r );
 	    if ( ! inputfile.isFile() )
 	    {
@@ -225,8 +237,20 @@ namespace zypp
 	  /** Print a warning if an optional file is not
 	   * available below \ref _reporoot on disk.
 	  */
- 	  Pathname getOptionalFile( const Pathname & file_r ) const
+ 	  Pathname getOptionalFile( const Pathname & file_r, bool lookgz = true  ) const
 	  {
+      if ( lookgz )
+      {
+        PathInfo gzinputfile( _reporoot / (file_r.extend(".gz")) );
+        if ( !gzinputfile.isFile() )
+        {
+          WAR << _reporoot << ": Skip optional file: " <<  file_r.extend(".gz").asString() << endl;
+        }
+        else
+        {
+          return gzinputfile.path();
+        }
+      }
 	    PathInfo inputfile( _reporoot / file_r );
 	    if ( ! inputfile.isFile() )
 	    {
@@ -238,7 +262,10 @@ namespace zypp
 
 	  bool isPatternFile( const std::string & name_r ) const
           {
-            return( name_r.size() > 4 && name_r.substr( name_r.size() - 4 ) == ".pat" );
+            return(
+                (name_r.size() > 4 && name_r.substr( name_r.size() - 4 ) == ".pat" )
+             || (name_r.size() > 7 && name_r.substr( name_r.size() - 7 ) == ".pat.gz" )
+            );
           }
 
           /** Test for \c packages.lang in \ref _repoIndex.*/
@@ -259,7 +286,19 @@ namespace zypp
 		else
 		  return true; // got it
 	      }
-	    }
+
+        if ( it->first == (searchFor+".gz") )
+        {
+          // got it
+          PathInfo inputfile( _reporoot / _descrdir / (searchFor+".gz") );
+          if ( ! inputfile.isFile() )
+          {
+            WAR << "Known and desired file is not on disk: " << inputfile << endl;
+          }
+          else
+            return true; // got it
+        }
+      }
 	    return false; // not found
 	  }
 
@@ -395,7 +434,8 @@ namespace zypp
         for ( RepoIndex::FileChecksumMap::const_iterator it = _repoIndex->metaFileChecksums.begin();
 	      it != _repoIndex->metaFileChecksums.end(); ++it )
         {
-          jobssize += PathInfo(getOptionalFile(_descrdir / it->first)).size();
+          // here the paths already contain the gz extension
+          jobssize += PathInfo(getOptionalFile(_descrdir / it->first, false)).size();
 
         }
         MIL << "Total job size: " << jobssize << endl;
@@ -443,7 +483,7 @@ namespace zypp
         {
           if ( isPatternFile( it->first ) )
           {
-	    Pathname inputfile( getOptionalFile( _descrdir / it->first) );
+	    Pathname inputfile( getOptionalFile( _descrdir / it->first, false /*filename already contains .gz */ ) );
 	    if ( ! inputfile.empty() )
 	    {
 	      PatternFileReader reader;

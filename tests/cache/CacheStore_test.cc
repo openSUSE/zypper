@@ -386,12 +386,6 @@ void cache_write_susetags_gz_test(const std::string &dir)
   cache_write_susetags(repodir);
 }
 
-void cache_write_susetags_compressed_test(const std::string &dir)
-{
-  Pathname repodir = Pathname(dir) + "/repo/susetags/data/stable-x86-subset-compressed";
-  cache_write_susetags(repodir);
-}
-
 test_suite*
 init_unit_test_suite( int argc, char *argv[] )
 {
@@ -418,9 +412,7 @@ init_unit_test_suite( int argc, char *argv[] )
 
   test->add(BOOST_PARAM_TEST_CASE(&cache_write_susetags_normal_test,
                                  (std::string const*)params, params+1));
-  //test->add(BOOST_PARAM_TEST_CASE(&cache_write_susetags_gz_test,
-  //                               (std::string const*)params, params+1));
-  test->add(BOOST_PARAM_TEST_CASE(&cache_write_susetags_compressed_test,
+  test->add(BOOST_PARAM_TEST_CASE(&cache_write_susetags_gz_test,
                                  (std::string const*)params, params+1));
   //test->add(BOOST_PARAM_TEST_CASE(&cache_write_test2,
   //                               (std::string const*)params, params+1));
