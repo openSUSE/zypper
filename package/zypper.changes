@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue Aug  7 16:26:32 CEST 2007 - tgoettlicher@suse.de
+
+- added status "no-update-repositories" to xml output when no update
+  repos are defined (#fate 300635)
+- r6510
+
+-------------------------------------------------------------------
 Mon Aug  6 18:17:31 CEST 2007 - jkupec@suse.cz
 
 - changed zypper source-install to take more arguments at once
