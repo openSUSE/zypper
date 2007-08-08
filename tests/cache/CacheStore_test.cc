@@ -117,6 +117,8 @@ void check_factory_product( Product::Ptr p )
   BOOST_CHECK_EQUAL( p->distributionEdition(), Edition("10.2.42-factory") );
   BOOST_CHECK_EQUAL( p->summary(), "openSUSE FACTORY 10.3" );
   
+  BOOST_CHECK_EQUAL( p->releaseNotesUrl(), Url("http://www.suse.com/relnotes/i386/openSUSE/FACTORY/release-notes.rpm") );
+  
   list<Url>::const_iterator it;
   list<Url> urls;
   
