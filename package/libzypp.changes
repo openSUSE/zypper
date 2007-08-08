@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Aug  8 16:04:07 CEST 2007 - dmacvicar@suse.de
+
+- add migrate-sources to %post (#292986)
+- 3.13.15
+
+-------------------------------------------------------------------
 Wed Aug  8 13:32:52 CEST 2007 - jkupec@suse.cz
 
 - fixed bug with using wrong files from raw metadata cache
