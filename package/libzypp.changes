@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Wed Aug  8 12:42:39 CEST 2007 - schubi@suse.de
+
+- fix in "ignore conflicts" if the conflict has been caused by an obsolete
+  Bug# 297795
+- r 6517 
+
+-------------------------------------------------------------------
 Tue Aug  7 17:04:47 CEST 2007 - dmacvicar@suse.de
 
 - implement susetags support for compressed metadata
