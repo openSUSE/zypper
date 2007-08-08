@@ -283,6 +283,19 @@ QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 
     _XDEBUG( "QueueItemInstall::process(" << *this << "):" << status);
 
+    /* Log which item need this install */
+
+    if (_needed_by) {
+
+	ResolverInfoNeededBy_Ptr info;
+
+	info = new ResolverInfoNeededBy (_item);
+	info->addRelatedPoolItem (_needed_by);
+	info->setCapability (_dep_satisfied_by_this_install, _soft?Dep::RECOMMENDS:Dep::REQUIRES);
+	info->setInitialInstallation (true);
+	context->addInfo (info);
+    }
+
     /* If we are trying to upgrade item A with item B and they both have the
 	same version number, do nothing.  This shouldn't happen in general with
 	zypp, but can come up with the installer & autopull. */
@@ -375,18 +388,6 @@ QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 
     }
 
-    /* Log which item need this install */
-
-    if (_needed_by) {
-
-	ResolverInfoNeededBy_Ptr info;
-
-	info = new ResolverInfoNeededBy (_item);
-	info->addRelatedPoolItem (_needed_by);
-	info->setCapability (_dep_satisfied_by_this_install, _soft?Dep::RECOMMENDS:Dep::REQUIRES);
-	info->setInitialInstallation (true);
-	context->addInfo (info);
-    }
 
     // we're done if this isn't currently uninstalled or incomplete
 
