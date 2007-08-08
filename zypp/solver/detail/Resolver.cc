@@ -59,7 +59,7 @@ using namespace std;
 IMPL_PTR_TYPE(Resolver);
 
 static const unsigned MAX_SECOND_RUNS( 3 );
-static const unsigned MAX_VALID_SOLUTIONS( 50 );
+static const unsigned MAX_VALID_SOLUTIONS( 10 );
 static const unsigned TIMOUT_SECOND_RUN( 30 );
 
 static PoolItemSet triggeredSolution;   // only the latest state of an item is interesting
