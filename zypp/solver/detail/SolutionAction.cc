@@ -178,7 +178,7 @@ InjectSolutionAction::execute(Resolver & resolver) const
         case CONFLICTS:
 	    // removing conflict in both resolvables
 	    for (CapSet::const_iterator iter = depList.begin(); iter != depList.end(); iter++) {
-		if (iter->matches (_capability) != CapMatch::yes )
+		if (iter->matches (_capability) == CapMatch::yes )
 		{
 		    resolver.addIgnoreConflict (_item, _capability);
 		}
@@ -186,7 +186,7 @@ InjectSolutionAction::execute(Resolver & resolver) const
 	    // Obsoletes are conflicts too
 	    depList = dependencies[Dep::OBSOLETES];
 	    for (CapSet::const_iterator iter = depList.begin(); iter != depList.end(); iter++) {
-		if (iter->matches (_capability) != CapMatch::yes )
+		if (iter->matches (_capability) == CapMatch::yes )
 		{
 		    resolver.addIgnoreConflict (_otherItem, _capability);
 		}
@@ -195,7 +195,7 @@ InjectSolutionAction::execute(Resolver & resolver) const
 	    dependencies = _otherItem.resolvable()->deps();
 	    depList = dependencies[Dep::CONFLICTS];
 	    for (CapSet::const_iterator iter = depList.begin(); iter != depList.end(); iter++) {
-		if (iter->matches (_capability) != CapMatch::yes )
+		if (iter->matches (_capability) == CapMatch::yes )
 		{
 		    resolver.addIgnoreConflict (_otherItem, _capability);
 		}
@@ -203,7 +203,7 @@ InjectSolutionAction::execute(Resolver & resolver) const
 	    // Obsoletes are conflicts too	    
 	    depList = dependencies[Dep::OBSOLETES];
 	    for (CapSet::const_iterator iter = depList.begin(); iter != depList.end(); iter++) {
-		if (iter->matches (_capability) != CapMatch::yes )
+		if (iter->matches (_capability) == CapMatch::yes )
 		{
 		    resolver.addIgnoreConflict (_otherItem, _capability);
 		}
