@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Aug  8 13:32:52 CEST 2007 - jkupec@suse.cz
+
+- fixed bug with using wrong files from raw metadata cache
+  (bug #297611) (duncanmv) (r6501, already released in 3.13.14)
+
+-------------------------------------------------------------------
 Wed Aug  8 12:42:39 CEST 2007 - schubi@suse.de
 
 - fix in "ignore conflicts" if the conflict has been caused by an obsolete
