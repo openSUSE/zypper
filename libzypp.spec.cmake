@@ -19,7 +19,7 @@ Summary:        Package, Patch, Pattern, and Product Management
 Version:        @VERSION@
 Release:        0
 Source:         @PACKAGE@-@VERSION@.tar.bz2
-Source1:        @PACKAGE@-@VERSION@-rpmlintrc
+Source1:        @PACKAGE@-rpmlintrc
 Prefix:         /usr
 Provides:       yast2-packagemanager
 Obsoletes:      yast2-packagemanager
@@ -99,6 +99,7 @@ cd ..
 
 %post
 %run_ldconfig
+%{prefix}/lib/zypp/zypp-migrate-sources
 
 %postun
 %run_ldconfig
