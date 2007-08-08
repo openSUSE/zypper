@@ -1028,7 +1028,7 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
     // rug compatibility code
     // switch on non-interactive mode if no-confirm specified
     if (copts.count("no-confirm"))
-      gSettings.non_interactive == true;
+      gSettings.non_interactive = true;
 
 
     // read resolvable type
@@ -1304,7 +1304,7 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
     // rug compatibility code
     // switch on non-interactive mode if no-confirm specified
     if (copts.count("no-confirm"))
-      gSettings.non_interactive == true;
+      gSettings.non_interactive = true;
 
     if (copts.count("auto-agree-with-licenses"))
       gSettings.license_auto_agree = true;
