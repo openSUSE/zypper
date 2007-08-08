@@ -47,7 +47,7 @@ main (int argc, char* argv[])
 	.setAutorefresh( false )
 	// .addBaseUrl(Url("ftp://dist.suse.de/install/stable-x86/"));
 	// .addBaseUrl(Url("http://software.opensuse.org/download/home:/Arvin42/openSUSE_Factory/"));
-	.addBaseUrl(Url("file:///ARVIN/zypp/trunk/repotools/"));
+	.addBaseUrl(Url("file:///ARVIN/zypp/trunk/repotools/tmp"));
 
     repoManager.addRepository( nrepo );
 
@@ -76,20 +76,22 @@ main (int argc, char* argv[])
 
     for (ResPool::const_iterator itRes = pool.begin(); itRes != pool.end(); itRes++)
     {
-	USR << (*itRes)->name() << ' '
-	    << (*itRes)->kind() << ' '
-	    << (*itRes)->arch() << ' '
-	    << (*itRes)->edition() << endl;
+	cout << (*itRes)->name() << ' '
+	     << (*itRes)->kind() << ' '
+	     << (*itRes)->arch() << ' '
+	     << (*itRes)->edition() << endl;
 
 	CapSet caps;
 
 	caps = (*itRes)->dep(Dep::PROVIDES);
 	for (CapSet::const_iterator itCap = caps.begin(); itCap != caps.end(); itCap++)
-	    USR << "  Provides: " << itCap->asString() << std::endl;
+	    cout << "  Provides: " << itCap->asString() << std::endl;
 
 	caps = (*itRes)->dep(Dep::REQUIRES);
 	for (CapSet::const_iterator itCap = caps.begin(); itCap != caps.end(); itCap++)
-	    USR << "  Requires: " << itCap->asString() << std::endl;
+	    cout << "  Requires: " << itCap->asString() << std::endl;
+
+	cout << std::endl;
     }
 
     return 0;
