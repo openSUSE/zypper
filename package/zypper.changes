@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Aug  9 10:25:37 CEST 2007 - jkupec@suse.cz
+
+- Logging of zypper version added.
+- '-n' shorthand added for --non-interactive
+- r6539
+
+-------------------------------------------------------------------
 Wed Aug  8 13:50:22 CEST 2007 - jkupec@suse.cz
 
 - fixed -y option support (did not switch to non-interactive mode)
