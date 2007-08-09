@@ -220,6 +220,7 @@ struct RequireProcess
 	    && ! _context->isParallelInstall( provider )
 	    && _context->itemIsPossible( provider )
 	    && ! provider.status().isLocked()
+            && ( (!provider || !upgrades) || (provider->vendor() == upgrades->vendor()) )
 	    && ! (provider.status().isKept()
 		  &&provider.status().isByUser())
 	    ) {

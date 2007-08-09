@@ -80,6 +80,13 @@ namespace zypp
        */
       bool repo_add_probe() const;
       
+      /**
+       * Whether untrusted vendor should be autolocked
+       / config option
+       * repo.add.probe
+       */
+      bool autolock_untrustedvendor() const;
+      
     public:
       class Impl;
       /** Dtor */

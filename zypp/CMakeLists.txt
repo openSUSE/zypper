@@ -87,6 +87,7 @@ SET( zypp_SRCS
   RepoStatus.cc
   RepoManager.cc
   MediaProducts.cc
+  Locks.cc
 )
 
 SET( zypp_HEADERS
@@ -184,6 +185,7 @@ SET( zypp_HEADERS
   RepoStatus.h
   RepoManager.h
   MediaProducts.h
+  Locks.h
 )
 
 INSTALL(  FILES ${zypp_HEADERS} DESTINATION "${CMAKE_INSTALL_PREFIX}/include/zypp" )

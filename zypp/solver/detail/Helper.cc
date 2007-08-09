@@ -124,10 +124,30 @@ class LookForUpdate : public resfilter::PoolItemFilterFunctor
 
     bool operator()( PoolItem_Ref provider )
     {
+        MIL << "comparing: " << endl << provider << endl << uninstalled << endl;
+        
+        // is valid
+        if ( ! provider.resolvable() )
+        {
+          MIL << "Warning: '" << provider << "' not valid" << endl;
+          return true;
+        }
+        
+        if ( uninstalled.resolvable() )
+        {
+          if ( uninstalled->vendor() != provider->vendor() )
+          {
+            MIL << "Discarding '" << provider << "' from vendor '"
+                << provider->vendor() << "' different to uninstalled '"
+                << uninstalled->vendor() << "' vendor." << endl;
+            return true;
+          }
+        }
+        
 	if ((!uninstalled							// none yet
 	    || (uninstalled->edition().compare( provider->edition() ) < 0)	// or a better edition
-	    || (uninstalled->arch().compare( provider->arch() ) < 0) ) 		// or a better architecture
-	    && !provider.status().isLocked())					// is not locked
+	    || (uninstalled->arch().compare( provider->arch() ) < 0) ) // or a better architecture
+	    && !provider.status().isLocked() )                                  // is not locked
 	{
 	    uninstalled = provider;						// store 
 	}

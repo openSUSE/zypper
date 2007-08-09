@@ -29,6 +29,8 @@
 #include "zypp/VendorAttr.h"
 #include "zypp/ZYppFactory.h"
 
+#include "zypp/ZConfig.h"
+
 using namespace std;
 
 #undef  ZYPP_BASE_LOGGER_LOGGROUP
@@ -80,9 +82,6 @@ namespace zypp
         }
       return res.first->second;
     }
-
-    bool applyAutoProtection = true;
-
     /////////////////////////////////////////////////////////////////
   } // namespace
   ///////////////////////////////////////////////////////////////////
@@ -107,7 +106,7 @@ namespace zypp
     };
     _trustedVendors.insert( vendors, vendors+(sizeof(vendors)/sizeof(const char *)) );
 
-    Pathname vendorrcPath( getZYpp()->homePath() / "db/trustedVendors" );
+    Pathname vendorrcPath( "/etc/zypp/trustedVendors" );
     try
       {
         Target_Ptr trg( getZYpp()->target() );
@@ -131,14 +130,14 @@ namespace zypp
 
   void VendorAttr::enableAutoProtect()
   {
-    MIL << "Foreign vendor auto protection enabled." << endl;
-    applyAutoProtection = true;
+    MIL << "FIXME: Not implemented." << endl;
+    // FIXME use ZConfig
   }
 
   void VendorAttr::disableAutoProtect()
   {
-    MIL << "Foreign vendor auto protection disabled." << endl;
-    applyAutoProtection = false;
+    MIL << "FIXME: Not implemented." << endl;
+    // FIXME use ZConfig
   }
 
   bool VendorAttr::isKnown( const Vendor & vendor_r ) const
@@ -146,7 +145,7 @@ namespace zypp
 
 
   bool VendorAttr::autoProtect( const Vendor & vendor_r ) const
-  { return( applyAutoProtection && ! trusted( vendor_r ) ); }
+  { return( ZConfig::instance().autolock_untrustedvendor() && ! trusted( vendor_r ) ); }
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

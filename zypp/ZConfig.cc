@@ -37,6 +37,7 @@ namespace zypp
     public:
       Impl()
         : repo_add_probe(false)
+        , autolock_untrustedvendor(false)
       {
         MIL << "ZConfig singleton created." << endl;
         Pathname confpath("/etc/zypp/zypp.conf");
@@ -86,6 +87,10 @@ namespace zypp
                 repo_add_probe = (value == "1");
               }
             }
+            else if ( section == "locking" )
+            {
+              autolock_untrustedvendor = ( value == "1" );
+            }
             
           }
         }
@@ -105,6 +110,9 @@ namespace zypp
     Pathname cfg_known_repos_path;
     
     bool repo_add_probe;
+    
+    // [locking]
+    bool autolock_untrustedvendor;
     
   };
   ///////////////////////////////////////////////////////////////////
@@ -190,6 +198,11 @@ namespace zypp
   bool ZConfig::repo_add_probe() const
   {
     return _pimpl->repo_add_probe;
+  }
+  
+  bool ZConfig::autolock_untrustedvendor() const
+  {
+    return _pimpl->autolock_untrustedvendor;
   }
   
   /////////////////////////////////////////////////////////////////

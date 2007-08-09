@@ -357,7 +357,8 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
 	if (cand_it == candidatemap.end()						// not in map yet
 	    || (cand_it->second->arch().compare( candidate->arch() ) < 0)		// or the new has better architecture
 	    || ((cand_it->second->arch().compare( candidate->arch() ) == 0)		// or the new has the same architecture
-		&& (cand_it->second->edition().compare( candidate->edition() ) < 0) ) )	//   and a better edition (-> 157501)
+		&& (cand_it->second->edition().compare( candidate->edition() ) < 0) 	//   and a better edition (-> 157501)
+                && (cand_it->second->vendor() == candidate->vendor() ) ) )//   and same vendor
 	{
 	    candidatemap[installed] = candidate;				// put it in !
 	}
