@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Aug  9 15:04:21 CEST 2007 - jkupec@suse.cz
+
+- fixed some RepoManager::addRepository() exception docs & history
+- r6550
+
+-------------------------------------------------------------------
 Thu Aug  9 13:33:59 CEST 2007 - dmacvicar@suse.de
 
 - feature #302135: Graceful update of 3rd party packages
