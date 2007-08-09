@@ -1,4 +1,15 @@
 -------------------------------------------------------------------
+Thu Aug  9 13:33:59 CEST 2007 - dmacvicar@suse.de
+
+- feature #302135: Graceful update of 3rd party packages
+  Automatic upgrading only sees packages from same vendor
+  This allows not needed to have those locked.
+- Add persistent locks file which allow wildcards. Users
+  can lock certain packages adding lines like "kde* < 3.5"
+- add applyLocks() to apply persistent locks before solving
+- 3.14.0
+
+-------------------------------------------------------------------
 Thu Aug  9 13:28:20 CEST 2007 - schubi@suse.de
 
 -  recognize changes in the pool (e.g. changing /etc/sysconfig/storage
