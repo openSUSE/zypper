@@ -600,13 +600,19 @@ namespace zypp
     }
     catch ( const media::MediaException &e )
     {
-      ZYPP_THROW(RepoException("Error trying to read from " + url.asString()));
+      ZYPP_CAUGHT(e);
+      RepoException enew("Error trying to read from " + url.asString());
+      enew.remember(e);
+      ZYPP_THROW(enew);
     }
     catch ( const Exception &e )
     {
-      ZYPP_THROW(Exception("Unknown error reading from " + url.asString()));
+      ZYPP_CAUGHT(e);
+      Exception enew("Unknown error reading from " + url.asString());
+      enew.remember(e);
+      ZYPP_THROW(enew);
     }
-    
+
     return repo::RepoType::NONE;
   }
 

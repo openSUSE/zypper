@@ -221,11 +221,9 @@ namespace zypp
     * 
     *
     * \throws repo::RepoAlreadyExistsException If the repo clash some 
-    * unique attribute like alias
-    * \throws MediaException If the access to the url fails
-    * \throws ParseException If the file parsing fails
+    *         unique attribute like alias
     * \throws RepoUnknownType If repository type can't be determined
-    * \throws RepoException ON other repository related errors
+    * \throws RepoException If the access to the url fails (while probing).
     * \throws Exception On other errors.
     */
    void addRepository( const RepoInfo &info,
