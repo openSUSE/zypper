@@ -129,8 +129,10 @@ struct AddLockToPool
     
     std::string line( str::trim( str_r ) );
     
-    if ( line.empty() || line[0] != '#')
+    if ( line.empty() || line[0] == '#')
       return true;
+    
+    MIL << "Applying locks from pattern '" << str_r << "'" << endl;
     
     // zypp does not provide wildcard or regex support in the Capability matching helpers
     // but it still parses the index if it contains wildcards.
