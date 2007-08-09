@@ -93,7 +93,7 @@ ZypperCommand process_globals(int argc, char **argv)
     {"terse",           no_argument,       0, 't'},
     {"table-style",     required_argument, 0, 's'},
     {"rug-compatible",  no_argument,       0, 'r'},
-    {"non-interactive", no_argument,       0, 0},
+    {"non-interactive", no_argument,       0, 'n'},
     {"no-gpg-checks",   no_argument,       0, 0},
     {"root",            required_argument, 0, 'R'},
     {"opt",             optional_argument, 0, 'o'},
@@ -114,10 +114,10 @@ ZypperCommand process_globals(int argc, char **argv)
     "\t--terse, -t\t\tTerse output for machine consumption.\n"
     "\t--table-style, -s\tTable style (integer).\n"
     "\t--rug-compatible, -r\tTurn on rug compatibility.\n"
-    "\t--non-interactive\tDon't ask anything, use default answers automatically.\n"
+    "\t--non-interactive, -n\tDon't ask anything, use default answers automatically.\n"
     "\t--no-gpg-checks\t\tIgnore GPG check failures and continue.\n"
     "\t--root, -R <dir>\tOperate on a different root directory.\n");
-  
+
   static string help_commands = _(
     "  Commands:\n"
     "\thelp\t\t\tHelp\n"

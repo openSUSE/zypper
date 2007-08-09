@@ -309,7 +309,7 @@ Print zypper version number and exit.
 Increase verbosity. For debugging output specify this option twice.
 .TP
 .I \-q, \-\-quiet
-Suppress normal output. Brief messages will still be printed though. If used together with conflicting --verbose option, the --verbose option takes preference.
+Suppress normal output. Brief (esp. result notification) messages and error messages will still be printed, though. If used together with conflicting --verbose option, the --verbose option takes preference.
 .TP
 .I \-t, \-\-terse
 Terse output for machine consumption.
@@ -320,8 +320,8 @@ Specifies table style to use. Table style is identified by an integer number. TO
 .I \-r, \-\-rug\-compatible
 Turns on rug compatibility. See compatibility notes next to affected commands.
 .TP
-.I      \-\-non\-interactive
-Switches to non-interactive mode. In this mode zypper doesn't ask user to type answers to various prompts, but uses default answers automatically.
+.I \-n, \-\-non\-interactive
+Switches to non-interactive mode. In this mode zypper doesn't ask user to type answers to various prompts, but uses default answers automatically. The behaviour of this option is somewhat different than that of options like '--yes', since zypper can answer different answers to different questions. The answers also depend on other options like '--no-gpg-checks'.
 .TP
 .I      \-\-no\-gpg\-checks
 Ignore GPG check failures and continue. If a GPG issue occurs when using this option zypper prints and logs a warning and automatically continues without interrupting the operation. Use this option with causion, as you can easily overlook security problems by using it.
