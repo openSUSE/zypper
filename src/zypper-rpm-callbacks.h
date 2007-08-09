@@ -174,24 +174,23 @@ ostream& operator << (ostream& stm, zypp::target::rpm::InstallResolvableReport::
 struct InstallResolvableReportReceiver : public zypp::callback::ReceiveReport<zypp::target::rpm::InstallResolvableReport>
 {
   zypp::Resolvable::constPtr _resolvable;
-  
+
   void display_step( zypp::Resolvable::constPtr resolvable, int value )
   {
     // TranslatorExplanation This text is a progress display label e.g. "Installing [42%]"
-    stringstream s;
-    s << (boost::format(_("Installing: %s-%s"))
+    string s = boost::str(boost::format(_("Installing: %s-%s"))
         % resolvable->name() % resolvable->edition());
-    display_progress ( "install-resolvable", cout, s.str(),  value);
+    display_progress ( "install-resolvable", cout, s,  value);
   }
 
   virtual void start( zypp::Resolvable::constPtr resolvable )
   {
     _resolvable = resolvable;
     
-    stringstream s;
-    s << (boost::format(_("Installing: %s-%s"))
+    string s =
+      boost::str(boost::format(_("Installing: %s-%s"))
         % resolvable->name() % resolvable->edition());
-    display_progress ( "install-resolvable", cout, s.str(),  0);
+    display_progress ( "install-resolvable", cout, s,  0);
   }
 
   virtual bool progress(int value, zypp::Resolvable::constPtr resolvable)
@@ -219,11 +218,20 @@ struct InstallResolvableReportReceiver : public zypp::callback::ReceiveReport<zy
 
   virtual void finish( zypp::Resolvable::constPtr /*resolvable*/, Error error, const std::string & reason, RpmLevel level )
   {
-    display_done ( "install-resolvable", cout);
-    if (error != NO_ERROR) {
-      cerr << level;
+    if (error != NO_ERROR && level < RPM_NODEPS_FORCE)
+    {
+      DBG << "level < RPM_NODEPS_FORCE: aborting without displaying an error"
+          << endl;
+      return;
     }
-    display_error (error, reason);
+
+    display_done ("install-resolvable", cout);
+
+    if (error != NO_ERROR)
+    {
+      cerr << level << " ";
+      display_error (error, reason);
+    }
   }
 };
 
