@@ -188,6 +188,39 @@ string to_string (zypp::Resolvable::constPtr resolvable) {
   return ss.str ();
 }
 
+// ----------------------------------------------------------------------------
+
+void report_zypp_exception(const zypp::Exception & e)
+{
+  if (e.historySize())
+  {
+    if (gSettings.verbosity > 2)
+      // print the whole history 
+      cerr << e.historyAsString();
+    else
+      // print the root cause
+      cerr << *e.historyEnd();
+  }
+  else
+    cerr << e.asUserString();
+  cerr << endl;
+}
+
+void report_problem(const zypp::Exception & e,
+                    const string & problem_desc,
+                    const string & hint)
+{
+  // problem
+  cerr << problem_desc << endl;
+
+  // cause
+  report_zypp_exception(e);
+
+  // hint
+  if (!hint.empty())
+    cerr << hint << endl;
+}
+
 // Local Variables:
 // c-basic-offset: 2
 // End:

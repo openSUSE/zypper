@@ -1,8 +1,3 @@
-
-#include "zypper.h"
-#include "zypper-sources.h"
-#include "zypper-tabulator.h"
-
 #include <iostream>
 #include <fstream>
 #include <boost/format.hpp>
@@ -17,6 +12,11 @@
 #include <zypp/repo/RepoException.h>
 #include <zypp/parser/ParseException.h>
 #include <zypp/media/MediaException.h>
+
+#include "zypper.h"
+#include "zypper-tabulator.h"
+#include "zypper-callbacks.h"
+#include "zypper-sources.h"
 
 using namespace std;
 using namespace zypp;
@@ -432,42 +432,42 @@ int add_repo(const RepoInfo & repo)
   {
     manager.addRepository(repo);
   }
-  catch (const MediaException & e)
-  {
-    cerr << _("Problem transfering repository data from specified URL.") << endl;
-    ERR << "Problem transfering repository data from specified URL." << endl;
-    return ZYPPER_EXIT_ERR_ZYPP;
-  }
-  catch (const ParseException & e)
-  {
-    cerr << _("Problem parsing repository data.") << endl;
-    ERR << "Problem parsing repository data." << endl;
-    return ZYPPER_EXIT_ERR_ZYPP;
-  }
   catch (const RepoAlreadyExistsException & e)
   {
-    cerr << format("Repository named '%s' already exists.") % repo.alias() << endl;
+    ZYPP_CAUGHT(e);
+    cerr << format(_("Repository named '%s' already exists. Please, use another alias."))
+        % repo.alias() << endl;
     ERR << "Repository named '%s' already exists." << endl;
     return ZYPPER_EXIT_ERR_ZYPP;
   }
   catch (const RepoUnknownTypeException & e)
   {
-    cerr << format(_("Can't find a valid repository at given location")) << endl;
-    ERR << "Problem parsing repository data." << endl;
+    ZYPP_CAUGHT(e);
+    cerr << _("Can't find a valid repository at given location:") << endl;
+    cerr << _("Could not determine the type of the repository."
+        " Please, check if the defined URLs (see below) point to a valid repository:");
+    for(RepoInfo::urls_const_iterator uit = repo.baseUrlsBegin();
+        uit != repo.baseUrlsEnd(); ++uit)
+      cerr << (*uit) << endl;
     return ZYPPER_EXIT_ERR_ZYPP;
   }
   catch (const RepoException & e)
   {
-    cerr << e.msg() << endl;
+    ZYPP_CAUGHT(e);
+    report_problem(e,
+        _("Problem transfering repository data from specified URL:"),
+        _("Please, check whether the specified URL is accessible."));
+    ERR << "Problem transfering repository data from specified URL" << endl;
     return ZYPPER_EXIT_ERR_ZYPP;
   }
   catch (const Exception & e)
   {
     ZYPP_CAUGHT(e);
-    cerr << e.asUserString() << endl;
+    report_problem(e, _("Unknown problem when adding repository:"));
     return ZYPPER_EXIT_ERR_BUG;
   }
 
+  //! \todo different output for -r and for zypper.
   cout_n << format(_("Repository '%s' successfully added:")) % repo.alias() << endl;
   cout_n << ( repo.enabled() ? "[x]" : "[ ]" );
   cout_n << ( repo.autorefresh() ? "* " : "  " );

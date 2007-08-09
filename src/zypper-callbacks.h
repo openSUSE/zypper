@@ -14,6 +14,7 @@
 #include <string>
 
 #include <zypp/Resolvable.h>
+#include <zypp/base/Exception.h>
 
 #include "zypper.h"
 
@@ -64,5 +65,29 @@ int read_action_ari (int default_action = -1);
  */
 bool read_bool_answer(const string & question, bool default_answer);
 
+/**
+ * Returns string representation of a resolvable.
+ */
 std::string to_string (zypp::Resolvable::constPtr resolvable);
+
+/**
+ * Prints exception message. If there is exception history available for the
+ * exception, this method prints the root cause or the whole history (if
+ * verbosity level is >2). Otherwise it just prist the e.asUserString() of the
+ * exception passed.
+ */
+void report_zypp_exception(const zypp::Exception & e);
+
+/**
+ * Prints the problem description caused by an exception, its cause and,
+ * optionaly, a hint for the user.
+ * 
+ * \param e Exception which caused the problem.
+ * \param Problem description for the user.
+ * \param Hint for the user how to cope with the problem.
+ */
+void report_problem(const zypp::Exception & e,
+                    const string & problem_desc,
+                    const string & hint = "");
+
 #endif
