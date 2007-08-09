@@ -878,8 +878,11 @@ void CacheStore::cleanRepository( const data::RecordId &id,
   }
   catch ( const sqlite3x::database_error &e )
   {
+    ZYPP_CAUGHT(e);
+    CacheRecordNotFoundException enew;
+    enew.remember(e);
     _pimpl->con.resetprogresshandler();
-    ZYPP_THROW(CacheRecordNotFoundException());
+    ZYPP_THROW(enew);
   }
   _pimpl->con.resetprogresshandler();
 }

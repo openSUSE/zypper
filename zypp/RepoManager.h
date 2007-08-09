@@ -140,29 +140,29 @@ namespace zypp
     * \short Status of metadata cache
     */
     RepoStatus cacheStatus( const RepoInfo &info ) const;
-   
+
    /**
     * \short Refresh local cache
     *
-    * Will try to build the cache from
-    * local metadata.
+    * Will try to build the cache from local metadata.
     *
     * If the cache exists it will be overwriten.
     *
     * \note the local metadata must be valid.
     *
     * \throws repo::RepoNoAliasException if can't figure 
-    * an alias to look in cache
-    *
+    *     an alias to look in cache
     * \throws repo::RepoMetadataException if the metadata
-    * is not enough to build a cache (empty, incorrect, or
-    * refresh needed)
+    *     is not enough to build a cache (empty, incorrect, or
+    *     refresh needed)
+    * \throws repo::RepoUnknownTypeException
+    * \throws parser::ParseException if parser encounters an error.
     * \throws Exception on unknown error.
     */
    void buildCache( const RepoInfo &info,
                     CacheBuildPolicy policy = BuildIfNeeded,
                     const ProgressData::ReceiverFnc & progressrcv = ProgressData::ReceiverFnc() );
-   
+
    /**
     * \short clean local cache
     *
@@ -171,6 +171,8 @@ namespace zypp
     * \note the local metadata must be valid.
     *
     * \throws repo::RepoNoAliasException if can't figure an alias to look in cache
+    * \throws cache::CacheRecordNotFoundException if the cache could not be
+    *     cleaned because of repository record not found.
     * \throws Exception on unknown error.
     */
    void cleanCache( const RepoInfo &info,

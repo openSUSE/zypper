@@ -45,9 +45,11 @@ namespace zypp
      */
     class CacheRecordNotFoundException : public CacheException
     {
-    
+    public:
+      /** Default ctor */
+      CacheRecordNotFoundException();
     };
-    
+
     /////////////////////////////////////////////////////////////////
   } // namespace cache
   ///////////////////////////////////////////////////////////////////
