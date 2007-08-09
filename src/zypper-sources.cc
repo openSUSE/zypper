@@ -30,6 +30,90 @@ extern RuntimeData gData;
 extern Settings gSettings;
 
 
+static bool refresh_raw_metadata(const RepoInfo & repo, bool force_download)
+{
+  try
+  {
+    RepoManager manager;
+    manager.refreshMetadata(repo, force_download ?
+      RepoManager::RefreshForced : RepoManager::RefreshIfNeeded);
+  }
+  catch (const RepoNoUrlException & e)
+  {
+    cerr << format(_("No URLs defined for '%s'.")) % repo.alias() << endl;
+    if (!repo.filepath().empty())
+      cerr << format(
+          _("Please, add one or more base URL (baseurl=URL) entries to %s for repository '%s'."))
+          % repo.filepath() % repo.alias() << endl;
+    ERR << repo.alias() << " is invalid, disabling it" << endl;
+
+    return true; // error
+  }
+  catch (const RepoException & e)
+  {
+    report_problem(e,
+        boost::str(format(_("Repository '%s' is invalid.")) % repo.alias()));
+    ERR << repo.alias() << " is invalid, disabling it" << endl;
+
+    return true; // error
+  }
+  catch (const Exception &e)
+  {
+    ZYPP_CAUGHT(e);
+    report_problem(e,
+        boost::str(format(_("Error downloading metadata for '%s':")) % repo.alias()));
+    // log untranslated message
+    ERR << format("Error reading repository '%s':") % repo.alias() << endl;
+
+    return true; // error
+  }
+
+  return false; // no error 
+}
+
+// ---------------------------------------------------------------------------
+
+static bool build_cache(const RepoInfo &repo, bool force_build)
+{
+  try
+  {
+    RepoManager manager;
+    manager.buildCache(repo, force_build ?
+      RepoManager::BuildForced : RepoManager::BuildIfNeeded);
+  }
+  catch (const parser::ParseException & e)
+  {
+    ZYPP_CAUGHT(e);
+
+    report_problem(e,
+        boost::str(format(_("Error parsing metadata for '%s':")) % repo.alias()),
+        // TranslatorExplanation Don't translate the URL unless it is translated, too
+        _("This may be caused by invalid metadata in the repository,"
+          " or by a bug in the metadata parser. In the latter case,"
+          " or if in doubt, please, file a bug report by folowing"
+          " instructions at http://en.opensuse.org/Zypper#Troubleshooting"));
+
+    // log untranslated message
+    ERR << format("Error parsing metadata for '%s':") % repo.alias() << endl;
+
+    return true; // error
+  }
+  catch (const Exception &e)
+  {
+    ZYPP_CAUGHT(e);
+    report_problem(e,
+        _("Error building the cache database:"));
+    // log untranslated message
+    ERR << "Error writing to cache db" << endl;
+
+    return true; // error
+  }
+  
+  return false; // no error
+}
+
+// ---------------------------------------------------------------------------
+
 static int do_init_repos()
 {
   RepoManager manager;
@@ -78,21 +162,13 @@ static int do_init_repos()
       // handle root user differently
       if (geteuid() == 0)
       {
-        try { manager.refreshMetadata(repo, RepoManager::RefreshIfNeeded); }
-        //! \todo handle the rest of special exceptions
-        catch (const RepoException & ex)
+        if (refresh_raw_metadata(repo, false) || build_cache(repo, false))
         {
-          cerr << format(_("Repository '%s' is invalid.")) % repo.alias() << endl;
-          cerr_v << _("Reason: ") << ex.asUserString() << endl;
-          ERR << repo.alias() << " is invalid, disabling it" << endl;
-          it->setEnabled(false);
-        }
-        catch (const Exception & ex)
-        {
-          cerr << format(_("Error while refreshing repository %s:")) % repo.alias()
-            << endl;
-          cerr << ex.asUserString() << endl;
-          ERR << "Error while refreshing " << repo.alias() << ", disabling it" << endl;
+          cerr << format(_("Disabling repository '%s' because of the above error."))
+              % repo.alias() << endl;
+          ERR << format("Disabling repository '%s' because of the above error.")
+              % repo.alias() << endl;
+
           it->setEnabled(false);
         }
       }
@@ -241,8 +317,8 @@ int refresh_repos(vector<string> & arguments)
   catch ( const Exception &e )
   {
     ZYPP_CAUGHT(e);
-    cerr << _("Error reading repositories:") << endl
-         << e.asUserString() << endl;
+    report_problem(e,
+        _("Error reading repositories:"));
     return ZYPPER_EXIT_ERR_ZYPP;
   }
 
@@ -309,58 +385,47 @@ int refresh_repos(vector<string> & arguments)
       continue;
     }
 
+    cout_n << format(_("Refreshing '%s'")) % it->alias() << endl;
+
     // do the refresh
-    try
+    bool error = false;
+    if (!copts.count("build-only"))
     {
-      if (!copts.count("build-only"))
-      {
-        bool force_download =
-          copts.count("force") || copts.count("force-download");
+      bool force_download =
+        copts.count("force") || copts.count("force-download");
 
-        cout_n << format(_("Refreshing '%s'")) % it->alias();
-        if (force_download)
-          cout_n << " " << _("(forced)");
-        cout_n << endl;
+      if (force_download)
+        cout_v << _("Forcing raw metadata refresh");
 
-        MIL << "calling refreshMetadata" << (force_download ? ", forced" : "")
-            << endl;
+      MIL << "calling refreshMetadata" << (force_download ? ", forced" : "")
+          << endl;
 
-        manager.refreshMetadata(repo, force_download ?
-          RepoManager::RefreshForced : RepoManager::RefreshIfNeeded);
-      }
-
-      if (!copts.count("download-only"))
-      {
-        bool force_build = 
-          copts.count("force") || copts.count("force-build");
-
-        cout_v << _("Creating repository cache");
-        if (force_build)
-          cout_v << " " << _("(forced)");
-        cout_v << endl;
-
-        MIL << "calling buildCache" << (force_build ? ", forced" : "") << endl;
-
-        manager.buildCache(repo, force_build ?
-          RepoManager::BuildForced : RepoManager::BuildIfNeeded);
-      }
-
-      //cout_n << _("DONE") << endl << endl;
+      error = refresh_raw_metadata(repo, force_download);
     }
-    catch ( const Exception &e )
+
+    if (!(error || copts.count("download-only")))
     {
-      cerr << format(_("Error reading repository '%s':")) % repo.alias()
-        << endl << e.asUserString() << endl;
+      bool force_build = 
+        copts.count("force") || copts.count("force-build");
+
+      cout_v << _("Creating repository cache");
+      if (force_build)
+        cout_v << " " << _("(forced)");
+      cout_v << endl;
+
+      MIL << "calling buildCache" << (force_build ? ", forced" : "") << endl;
+
+      error = build_cache(repo, force_build);
+    }
+
+    if (error)
+    {
       cerr << format(_("Skipping repository '%s' because of the above error."))
-        % repo.alias() << endl;
-      // log untranslated message
-      ERR << format("Error reading repository '%s':") % repo.alias()
-        << endl << e.msg() << endl;
+          % repo.alias() << endl;
       ERR << format("Skipping repository '%s' because of the above error.")
-        % repo.alias() << endl;
+          % repo.alias() << endl;
       error_count++;
     }
-
   }
 
   // the rest of arguments are those not found, complain to the user
