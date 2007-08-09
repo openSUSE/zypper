@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Aug  8 13:50:22 CEST 2007 - jkupec@suse.cz
+
+- fixed -y option support (did not switch to non-interactive mode)
+- r6521
+
+-------------------------------------------------------------------
 Tue Aug  7 16:26:32 CEST 2007 - tgoettlicher@suse.de
 
 - added status "no-update-repositories" to xml output when no update
