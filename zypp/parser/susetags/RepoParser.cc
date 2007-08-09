@@ -469,13 +469,16 @@ namespace zypp
         //if ( 0 ) // remove the if to enable, but leave the {} around.
         {
           Pathname inputfile( getOptionalFile( _descrdir / "packages.DU" ) );
-          PackagesDuFileReader reader;
-          reader.setPkgConsumer( bind( &Impl::consumePkgDu, this, _1 ) );
-          reader.setSrcPkgConsumer( bind( &Impl::consumeSrcPkgDu, this, _1 ) );
+	  if ( ! inputfile.empty() )
+	  {
+	    PackagesDuFileReader reader;
+	    reader.setPkgConsumer( bind( &Impl::consumePkgDu, this, _1 ) );
+	    reader.setSrcPkgConsumer( bind( &Impl::consumeSrcPkgDu, this, _1 ) );
 
-          CombinedProgressData progress( _ticks, PathInfo(inputfile).size() );
-          reader.parse( inputfile, progress );
-        }
+	    CombinedProgressData progress( _ticks, PathInfo(inputfile).size() );
+	    reader.parse( inputfile, progress );
+	  }
+	}
 
         // Now process the rest of RepoIndex
 	for ( RepoIndex::FileChecksumMap::const_iterator it = _repoIndex->metaFileChecksums.begin();
