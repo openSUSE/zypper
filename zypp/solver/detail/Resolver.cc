@@ -123,10 +123,7 @@ Resolver::Resolver (const ResPool & pool)
     , _preferHighestVersion (true)
 
 {
-  //if ( _poolchanged.remember( _pool.serial() ) )
-  //{
-  //  SEC << "CHANGED" << endl;
-  //}
+
 }
 
 
@@ -1227,7 +1224,14 @@ Resolver::resolvePool( bool tryAllPossibilities )
     CollectTransact info (*this);
 
     // cleanup before next run
-    reset( false, true ); //resetValidResults,keepExtras
+    if ( _poolchanged.remember( _pool.serial() ) )
+    {
+	MIL << "pool has been CHANGED --> resetting solverresults" << endl;
+	reset( true, true ); //resetValidResults,keepExtras	
+    } else {
+	reset( false, true ); //resetValidResults,keepExtras
+    }
+    
     bool saveTryAllPossibilities = _tryAllPossibilities;
 
     if (tryAllPossibilities) {
