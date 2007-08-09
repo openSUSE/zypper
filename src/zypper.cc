@@ -1523,6 +1523,8 @@ int main(int argc, char **argv)
     logfile = ZYPP_CHECKPATCHES_LOG;
   zypp::base::LogControl::instance().logfile( logfile );
 
+  MIL << "Hi, me zypper " VERSION " built " << __DATE__ << " " <<  __TIME__ << endl;
+
   // parse global options and the command
   ZypperCommand command = process_globals (argc, argv);
   switch(command.toEnum())
