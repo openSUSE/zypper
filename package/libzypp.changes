@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Thu Aug  9 13:28:20 CEST 2007 - schubi@suse.de
+
+-  recognize changes in the pool (e.g. changing /etc/sysconfig/storage
+  #271912 wq
+- Added locking resolvables in the testcases
+- rev 6544
+
+-------------------------------------------------------------------
 Wed Aug  8 16:04:07 CEST 2007 - dmacvicar@suse.de
 
 - add migrate-sources to %post (#292986)
