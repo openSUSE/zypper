@@ -27,6 +27,7 @@
 #include "zypp/Language.h"
 #include "zypp/DiskUsageCounter.h"
 #include "zypp/NameKindProxy.h"
+#include "zypp/Locks.h"
 
 using std::endl;
 
@@ -399,6 +400,34 @@ namespace zypp
       return zypp_tmp_dir.path();
     }
 
+    int ZYppImpl::applyLocks()
+    {
+      Pathname locksrcPath( "/etc/zypp/locks" );
+      try
+      {
+        Target_Ptr trg( target() );
+        if ( trg )
+          locksrcPath = trg->root() / locksrcPath;
+      }
+      catch ( ... )
+      {
+        // noop: Someone decided to let target() throw if the ptr is NULL ;(
+      }
+      
+      int num=0;
+      PathInfo locksrc( locksrcPath );
+      if ( locksrc.isFile() )
+      {
+        MIL << "Reading locks from '" << locksrcPath << "'" << endl;
+        num = zypp::locks::readLocks( pool(), locksrcPath );
+        MIL << num << " items locked." << endl;
+      }
+      else
+      {
+        MIL << "No file '" << locksrcPath << "' to read locks from" << endl;
+      }
+      return num;
+    }
     /******************************************************************
      **
      **	FUNCTION NAME : operator<<

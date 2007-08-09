@@ -146,6 +146,8 @@ namespace zypp
   void ZYpp::setHomePath( const Pathname & path )
   { _pimpl->setHomePath(path); }
 
+  int ZYpp::applyLocks()
+  { return _pimpl->applyLocks(); }
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////

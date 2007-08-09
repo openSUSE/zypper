@@ -174,6 +174,16 @@ namespace zypp
 	won't be able to install incompatible packages ;-)   */
     void setArchitecture( const Arch & arch );
 
+  public:
+    
+   /** 
+    * \short Apply persistant locks to current pool.
+    * Call this before solving
+    *
+    * \returns Number of items locked
+    */
+   int applyLocks();
+      
   protected:
     /** Dtor */
     virtual ~ZYpp();
