@@ -101,6 +101,7 @@ class  HelixControl {
     ~HelixControl ();
 
     void installResolvable (const ResObject::constPtr &resObject);
+    void lockResolvable (const ResObject::constPtr &resObject);    
     void deleteResolvable (const ResObject::constPtr &resObject);
     void addDependencies (const CapSet &capRequire, const CapSet &capConflict);
     std::string filename () { return dumpFile; }

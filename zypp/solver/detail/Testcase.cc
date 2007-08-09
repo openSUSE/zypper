@@ -232,6 +232,7 @@ bool Testcase::createTestcase(Resolver & resolver)
     RepositoryTable		repoTable;
     PoolItemList	items_to_install;
     PoolItemList 	items_to_remove;
+    PoolItemList 	items_locked;    
     PoolItemList	language;
     HelixResolvable 	system (dumpPath + "/solver-system.xml");    
 
@@ -268,6 +269,12 @@ bool Testcase::createTestcase(Resolver & resolver)
 		 && !(it->status().isBySolver())) {
 		items_to_remove.push_back (*it);
 	    }
+	    if ( it->status().isLocked()
+		 && !(it->status().isBySolver())
+		 && !isKind<SystemResObject>(res)) {
+		items_locked.push_back (*it);
+	    }
+	    
 	}
     }
 
@@ -281,6 +288,11 @@ bool Testcase::createTestcase(Resolver & resolver)
     for (PoolItemList::const_iterator iter = items_to_install.begin(); iter != items_to_install.end(); iter++) {
 	control.installResolvable (iter->resolvable());	
     }
+
+    for (PoolItemList::const_iterator iter = items_locked.begin(); iter != items_locked.end(); iter++) {
+	control.lockResolvable (iter->resolvable());	
+    }
+    
 
     for (PoolItemList::const_iterator iter = items_to_remove.begin(); iter != items_to_remove.end(); iter++) {
 	control.deleteResolvable (iter->resolvable());	
@@ -368,6 +380,15 @@ void HelixControl::installResolvable(const ResObject::constPtr &resObject)
 {
     Repository repo  = resObject->repository();
     *file << "<install channel=\"" << numstring(repo.numericId()) << "\" kind=\"" << toLower (resObject->kind().asString()) << "\""
+	  << " name=\"" << resObject->name() << "\"" << " arch=\"" << resObject->arch().asString() << "\""
+	  << " version=\"" << resObject->edition().version() << "\"" << " release=\"" << resObject->edition().release() << "\"" 
+	  << "/>" << endl;
+}
+
+void HelixControl::lockResolvable(const ResObject::constPtr &resObject)
+{
+    Repository repo  = resObject->repository();
+    *file << "<lock channel=\"" << numstring(repo.numericId()) << "\" kind=\"" << toLower (resObject->kind().asString()) << "\""
 	  << " name=\"" << resObject->name() << "\"" << " arch=\"" << resObject->arch().asString() << "\""
 	  << " version=\"" << resObject->edition().version() << "\"" << " release=\"" << resObject->edition().release() << "\"" 
 	  << "/>" << endl;
