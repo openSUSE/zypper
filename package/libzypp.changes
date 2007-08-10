@@ -1,10 +1,16 @@
 -------------------------------------------------------------------
+Fri Aug 10 20:49:20 CEST 2007 - jkupec@suse.cz
+
+- support also "Plaindir" as valid repo type name (#298622)
+- revision 6616
+- version 3.14.0
+
+-------------------------------------------------------------------
 Fri Aug 10 18:03:06 CEST 2007 - dmacvicar@suse.de
 
 - fix segfault in Progress reporting
 - progress report use name instead of alias (#298035)
 - repoinfo returns alias if name is empty
-- 3.14.0
 
 -------------------------------------------------------------------
 Fri Aug 10 16:04:42 CEST 2007 - dmacvicar@suse.de
