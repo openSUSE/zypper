@@ -52,6 +52,7 @@ struct Settings
   disable_system_sources(false),
   disable_system_resolvables(false),
   is_rug_compatible(false),
+  root_dir("/"),
   non_interactive(false)
   {}
 
@@ -63,6 +64,7 @@ struct Settings
   bool disable_system_sources;
   bool disable_system_resolvables;
   bool is_rug_compatible;
+  std::string root_dir;
   bool non_interactive;
 };
 
@@ -107,4 +109,7 @@ extern std::ostream no_stream;
 // define new _ macro
 #define _(MSG) ::gettext(MSG)
 
+// Local Variables:
+// c-basic-offset: 2
+// End:
 #endif
