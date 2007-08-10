@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Aug 10 10:25:45 CEST 2007 - jkupec@suse.cz
+
+- improved error reporting of repository operations (#298506)
+- r6564
+
+-------------------------------------------------------------------
 Thu Aug  9 10:25:37 CEST 2007 - jkupec@suse.cz
 
 - Logging of zypper version added.
