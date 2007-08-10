@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Aug 10 16:04:42 CEST 2007 - dmacvicar@suse.de
+
+- merge patch by dmueller to get rid of boost-regex
+- 3.14.0
+
+-------------------------------------------------------------------
 Fri Aug 10 13:50:40 CEST 2007 - dmacvicar@suse.de
 
 - dont create a second CacheStore in the same scope, will lock...
@@ -19,7 +25,6 @@ Thu Aug  9 13:33:59 CEST 2007 - dmacvicar@suse.de
 - Add persistent locks file which allow wildcards. Users
   can lock certain packages adding lines like "kde* < 3.5"
 - add applyLocks() to apply persistent locks before solving
-- 3.14.0
 
 -------------------------------------------------------------------
 Thu Aug  9 13:28:20 CEST 2007 - schubi@suse.de
