@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Aug 10 16:22:24 CEST 2007 - dmacvicar@suse.de
+
+- apply persistant locks on establish
+- require libzypp 3.14.0
+
+-------------------------------------------------------------------
 Fri Aug 10 10:25:45 CEST 2007 - jkupec@suse.cz
 
 - improved error reporting of repository operations (#298506)
