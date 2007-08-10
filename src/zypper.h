@@ -162,13 +162,17 @@ extern std::ostream no_stream;
 #define cerr_vv COND_STREAM(cerr, VERBOSITY_HIGH)
 //!@}
 
-// undefine _ macro from libzypp
+// undefine _ and _PL macros from libzypp
 #ifdef _
 #undef _
 #endif
+#ifdef _PL
+#undef _PL
+#endif
 
-// define new _ macro
+// define new macros
 #define _(MSG) ::gettext(MSG)
+#define _PL(MSG1,MSG2,N) ::ngettext(MSG1,MSG2,N)
 
 #endif /*ZYPPER_H*/
 
