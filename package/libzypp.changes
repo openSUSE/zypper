@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Aug 10 13:50:40 CEST 2007 - dmacvicar@suse.de
+
+- dont create a second CacheStore in the same scope, will lock...
+  #297627
+
+-------------------------------------------------------------------
 Thu Aug  9 15:04:21 CEST 2007 - jkupec@suse.cz
 
 - fixed some RepoManager exception docs & history
