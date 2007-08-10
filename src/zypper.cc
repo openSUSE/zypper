@@ -1157,7 +1157,9 @@ int one_command(const ZypperCommand & command, int argc, char **argv)
     if (initret != ZYPPER_EXIT_OK)
       return initret;
     cond_init_target();         // calls ZYpp::initializeTarget("/");
-
+    
+    establish();
+    
     Table t;
     t.style(Ascii);
 

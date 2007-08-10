@@ -565,6 +565,8 @@ void load_target_resolvables(bool to_pool)
 
 void establish ()
 {
+  int locks = God->applyLocks();
+  cout_v <<  format(_("(%s items locked")) % locks << endl;
   cout_v << _("Establishing status of aggregates") << endl;
   God->resolver()->establishPool();
   dump_pool ();
