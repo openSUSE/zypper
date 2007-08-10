@@ -10,6 +10,7 @@
  *
 */
 #include <map>
+#include <iostream>
 
 #include "zypp/base/Exception.h"
 #include "zypp/base/String.h"
