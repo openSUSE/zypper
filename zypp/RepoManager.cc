@@ -112,7 +112,7 @@ namespace zypp
     ProgressData progress;
     callback::SendReport<ProgressReport> report;
     progress.sendTo( ProgressReportAdaptor( progressrcv, report ) );
-    progress.name(str::form(_("Cleaning repository '%s' cache"), info.alias().c_str()));
+    progress.name(str::form(_("Cleaning repository '%s' cache"), info.name().c_str()));
 
     if ( !store.isCached(info.alias()) )
       return;
@@ -505,7 +505,7 @@ namespace zypp
     ProgressData progress(100);
     callback::SendReport<ProgressReport> report;
     progress.sendTo( ProgressReportAdaptor( progressrcv, report ) );
-    progress.name(str::form(_("Building repository '%s' cache"), info.alias().c_str()));
+    progress.name(str::form(_("Building repository '%s' cache"), info.name().c_str()));
     progress.toMin();
 
     assert_alias(info);
@@ -556,12 +556,12 @@ namespace zypp
       break;
     }
 
-    CombinedProgressData subprogrcv( progress, 100);
-
+    
     switch ( repokind.toEnum() )
     {
       case RepoType::RPMMD_e :
       {
+        CombinedProgressData subprogrcv( progress, 100);
         parser::yum::RepoParser parser(id, store, parser::yum::RepoParserOpts(), subprogrcv);
         parser.parse(rawpath);
           // no error
@@ -569,6 +569,7 @@ namespace zypp
       break;
       case RepoType::YAST2_e :
       {
+        CombinedProgressData subprogrcv( progress, 100);
         parser::susetags::RepoParser parser(id, store, subprogrcv);
         parser.parse(rawpath);
         // no error
@@ -576,6 +577,7 @@ namespace zypp
       break;
       case RepoType::RPMPLAINDIR_e :
       {
+        CombinedProgressData subprogrcv( progress, 100);
         InputStream is(rawpath + "cookie");
         string buffer;
         getline( is.stream(), buffer);
@@ -593,7 +595,7 @@ namespace zypp
 
     MIL << "Commit cache.." << endl;
     store.commit();
-    progress.toMax();
+    //progress.toMax();
   }
 
   ////////////////////////////////////////////////////////////////////////////
@@ -677,7 +679,7 @@ namespace zypp
     ProgressData progress;
     progress.sendTo(ProgressReportAdaptor( progressrcv, report ));
     //progress.sendTo( progressrcv );
-    progress.name(str::form(_("Reading repository '%s' cache"), info.alias().c_str()));
+    progress.name(str::form(_("Reading repository '%s' cache"), info.name().c_str()));
     
     cache::CacheStore store(_pimpl->options.repoCachePath);
 
@@ -767,7 +769,7 @@ namespace zypp
     ProgressData progress(100);
     callback::SendReport<ProgressReport> report;
     progress.sendTo( ProgressReportAdaptor( progressrcv, report ) );
-    progress.name(str::form(_("Adding repository '%s'"), info.alias().c_str()));
+    progress.name(str::form(_("Adding repository '%s'"), info.name().c_str()));
     progress.toMin();
 
     std::list<RepoInfo> repos = knownRepositories();
@@ -872,7 +874,7 @@ namespace zypp
     ProgressData progress;
     callback::SendReport<ProgressReport> report;
     progress.sendTo( ProgressReportAdaptor( progressrcv, report ) );
-    progress.name(str::form(_("Removing repository '%s'"), info.alias().c_str()));
+    progress.name(str::form(_("Removing repository '%s'"), info.name().c_str()));
     
     MIL << "Going to delete repo " << info.alias() << endl;
 

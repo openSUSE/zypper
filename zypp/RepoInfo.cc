@@ -187,6 +187,11 @@ namespace zypp
 
   std::string RepoInfo::name() const
   {
+    if ( _pimpl->name.empty() )
+    {
+      return alias();
+    }
+    
     repo::RepoVariablesStringReplacer replacer;
     return replacer(_pimpl->name);
   }

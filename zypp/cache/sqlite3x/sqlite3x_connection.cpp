@@ -70,6 +70,8 @@ sqlite3_connection::sqlite3_connection(const wchar_t *db) : db(NULL)
 
 sqlite3_connection::~sqlite3_connection()
 {
+  _ticks = zypp::ProgressData();
+  resetprogresshandler();
   if (this->db) sqlite3_close(this->db);
 }
 
@@ -85,6 +87,7 @@ void sqlite3_connection::setprogresshandler( const zypp::ProgressData::ReceiverF
 
 void sqlite3_connection::resetprogresshandler()
 {
+  _ticks = zypp::ProgressData();
   sqlite3_progress_handler(db, 0, NULL, (void*)this);
 }
 

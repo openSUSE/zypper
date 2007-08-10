@@ -53,6 +53,22 @@ SET (CPACK_SOURCE_IGNORE_FILES
 /CVS/;/\\\\.svn/;/\\\\.libs/;/\\\\.deps/;\\\\.swp$;/build/;\\\\.o$;\\\\.lo$;\\\\.la$;~$
 )
 
+SET (CPACK_SOURCE_IGNORE_FILES ${CPACK_SOURCE_IGNORE_FILES}
+"/CVS/;/.libs/;/.deps/;/.git/;.swp$;.#;/#;/build/"
+"~$"
+"\\\\.cvsignore$"
+"/package"
+"Makefile\\\\.in$"
+)
+
+SET (CPACK_SOURCE_IGNORE_FILES ${CPACK_SOURCE_IGNORE_FILES}
+"/CVS/;/.libs/;/.deps/;/.git/;.swp$;.#;/#;/build/"
+"~$"
+"\\\\.cvsignore$"
+"/package"
+"Makefile\\\\.in$"
+)
+
 INCLUDE(CPack)
 
 ####################################################################
