@@ -16,6 +16,7 @@
 #include "zypper.h"
 #include "zypper-tabulator.h"
 #include "zypper-callbacks.h"
+//#include "AliveCursor.h"
 #include "zypper-sources.h"
 
 using namespace std;
@@ -72,7 +73,19 @@ static bool refresh_raw_metadata(const RepoInfo & repo, bool force_download)
 }
 
 // ---------------------------------------------------------------------------
-
+/*
+bool build_cache_callback(const ProgressData & pd)
+{
+  static AliveCursor cursor;
+  if ( pd.val() == 100 )
+    cout << CLEARLN << cursor.done() << " " << pd.name();
+  else
+    cout << CLEARLN << cursor++ << " " << pd.name();
+  cout << " [" << pd.val() << "%] :O)";
+  cout << flush;
+  return true;
+}
+*/
 static bool build_cache(const RepoInfo &repo, bool force_build)
 {
   try
@@ -162,6 +175,8 @@ static int do_init_repos()
       // handle root user differently
       if (geteuid() == 0)
       {
+        // limit progress reporting only to verbosity level MEDIUM
+        gData.limit_to_verbosity = VERBOSITY_MEDIUM;
         if (refresh_raw_metadata(repo, false) || build_cache(repo, false))
         {
           cerr << format(_("Disabling repository '%s' because of the above error."))
@@ -171,6 +186,8 @@ static int do_init_repos()
 
           it->setEnabled(false);
         }
+        // restore verbosity limit
+        gData.limit_to_verbosity = VERBOSITY_NORMAL;
       }
       // non-root user
       else

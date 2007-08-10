@@ -92,8 +92,7 @@ struct Error
 struct RuntimeData
 {
   RuntimeData()
-  : patches_count(0),
-  security_patches_count(0)
+    : patches_count(0), security_patches_count(0), limit_to_verbosity(0)
   {}
 
   std::list<Error> errors;
@@ -104,11 +103,36 @@ struct RuntimeData
   std::vector<std::string> packages_to_uninstall; 
   zypp::ResStore repo_resolvables;
   zypp::ResStore target_resolvables;
+
+  /**
+   * Limit output to and above specified verbosity level.
+   * 
+   * Use this variable to control whether to print the output or not,
+   * wherever the desired verbosity level is variable. Then set the limit
+   * before the code where the output is generated and reset it afterwards:
+   * 
+   * <code>
+   * 
+   * // set verbosity limit
+   * gData.limit_to_verbosity = VERBOSITY_MEDIUM;
+   * 
+   * ... code generating the output but respecting the verbosity limit goes here ...
+   * 
+   * // restore verbosity limit
+   * gData.limit_to_verbosity = VERBOSITY_NORMAL;
+   * 
+   * </code> 
+   */
+  int limit_to_verbosity;
 };
 
 extern RuntimeData gData;
 extern Settings gSettings;
 extern std::ostream no_stream;
+
+#define VERBOSITY_NORMAL 0
+#define VERBOSITY_MEDIUM 1
+#define VERBOSITY_HIGH 2
 
 /**
  * Macro to filter output above the current verbosity level.
@@ -127,15 +151,15 @@ extern std::ostream no_stream;
  */
 //!@{
 //! normal output
-#define cout_n COND_STREAM(cout, 0)
+#define cout_n COND_STREAM(cout, VERBOSITY_NORMAL)
 //! verbose output
-#define cout_v COND_STREAM(cout, 1)
+#define cout_v COND_STREAM(cout, VERBOSITY_MEDIUM)
 //! verbose error output
-#define cerr_v COND_STREAM(cerr, 1)
+#define cerr_v COND_STREAM(cerr, VERBOSITY_MEDIUM)
 //! debug info output
-#define cout_vv COND_STREAM(cout, 2)
+#define cout_vv COND_STREAM(cout, VERBOSITY_HIGH)
 //! debug error output (details)
-#define cerr_vv COND_STREAM(cerr, 2)
+#define cerr_vv COND_STREAM(cerr, VERBOSITY_HIGH)
 //!@}
 
 // undefine _ macro from libzypp
