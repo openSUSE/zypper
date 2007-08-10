@@ -31,6 +31,8 @@
 */
 #define RX_VALID_SCHEME    "^[a-zA-Z][a-zA-Z0-9\\.+-]*$"
 
+#define RX_VALID_PORT      "^[0-9]{1,5}$"
+
 #define RX_VALID_HOSTNAME  "^[[:alnum:]]+([\\.-][[:alnum:]]+)*$"
 
 #define RX_VALID_HOSTIPV4  \
@@ -1336,11 +1338,17 @@ namespace zypp
     bool
     UrlBase::isValidPort(const std::string &port) const
     {
-        char* endptr;
-        long pnum = strtol(port.c_str(), &endptr, 10);
-        return ( !port.empty() && !*endptr
-                 && pnum >= 1 && pnum <= USHRT_MAX);
-
+      try
+      {
+        str::regex regx(RX_VALID_PORT);
+        if( str::regex_match(port, regx))
+        {
+          long pnum = str::strtonum<long>(port);
+          return ( pnum >= 1 && pnum <= USHRT_MAX);
+        }
+      }
+      catch( ... )
+      {}
       return false;
     }
 
