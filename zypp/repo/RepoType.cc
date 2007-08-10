@@ -45,7 +45,7 @@ namespace repo
       _table["YAST"] = RepoType::YAST2_e;
       _table["YAST2"] = RepoType::YAST2_e;
       _table["yast2"] = RepoType::YAST2_e;
-      _table["plaindir"] = RepoType::RPMPLAINDIR_e;
+      _table["plaindir"] = _table["Plaindir"] = RepoType::RPMPLAINDIR_e;
       _table["NONE"] = _table["none"] = RepoType::NONE_e;
     }
 
