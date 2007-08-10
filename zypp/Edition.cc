@@ -156,11 +156,11 @@ namespace zypp
 
       std::cout << "size: " << what.size() << std::endl;
 
-      for (int i = 1; i < what.size(); ++i)
+      for (int i = 1; i < 4; ++i)
           std::cout << i << ": " << what[i] << std::endl;
 
 
-      if( str::regex_match( edition_r, what, _rxEdition ) && what.size() >= 3)
+      if( str::regex_match( edition_r, what, _rxEdition ))
         {
           if ( what[1].size() > 1 )
             _epoch = strtoul( what[1].c_str(), NULL, 10 );
@@ -168,6 +168,9 @@ namespace zypp
             _version = what[2];
           if ( what[3].size() ) 
             _release = what[3];
+
+          std::cout << "successful epoch *" << _epoch << "* version *" << _version << " release *"
+              << _release << std::endl;
         }
       else
         {
