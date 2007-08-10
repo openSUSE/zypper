@@ -21,7 +21,7 @@ using namespace zypp::str;
 regex::regex(const std::string& str, int flags)
 {
     m_valid = true;
-    if (regcomp(&m_preg, str.c_str(), REG_EXTENDED))
+    if (regcomp(&m_preg, str.c_str(), REG_EXTENDED | flags))
         m_valid = false;
 }
 
