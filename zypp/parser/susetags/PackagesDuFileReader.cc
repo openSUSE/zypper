@@ -175,7 +175,7 @@ namespace zypp
                 if ( skip )
                   continue;
                 
-                MIL << "adding entry for " << entry.path << endl;
+                //MIL << "adding entry for " << entry.path << endl;
                 _data->diskusage.add(entry);
                 _counted_entries++;
               }
