@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Fri Aug 10 14:47:56 CEST 2007 - jkupec@suse.cz
+
+- Added global option --root to operate on a different directory
+  (#238165, F#301963) (backport from trunk)
+- r6580
+- 0.6.18
+
+-------------------------------------------------------------------
 Wed Jun 20 16:55:39 CEST 2007 - jkupec@suse.cz
 
 - fixed sticky -h in shell (#281710)
