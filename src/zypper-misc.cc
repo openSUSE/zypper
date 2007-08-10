@@ -75,6 +75,35 @@ ResObject::Kind string_to_kind (const string &skind)
   return empty;
 }
 
+string kind_to_string_localized(const KindOf<Resolvable> & kind, unsigned long count)
+{
+  if (kind == ResTraits<Package>::kind.asString())
+    return _PL("package", "packages", count);
+  if (kind == ResTraits<Selection>::kind.asString())
+    return _PL("selection", "selections", count);
+  if (kind == ResTraits<Pattern>::kind.asString())
+    return _PL("pattern", "patterns", count);
+  if (kind == ResTraits<Product>::kind.asString())
+    return _PL("product", "product", count);
+  if (kind == ResTraits<Patch>::kind.asString())
+    return _PL("patch", "patches", count);
+  if (kind == ResTraits<Script>::kind.asString())
+    return _PL("script", "scripts", count);
+  if (kind == ResTraits<Message>::kind.asString())
+    return _PL("message", "messages", count);
+  if (kind == ResTraits<Language>::kind.asString())
+    return _PL("language", "languages", count);
+  if (kind == ResTraits<Atom>::kind.asString())
+    return _PL("atom", "atoms", count);
+  if (kind == ResTraits<SystemResObject>::kind.asString())
+    return _PL("system", "systems", count);
+  if (kind == ResTraits<SrcPackage>::kind.asString())
+    return _PL("srcpackage", "srcpackages", count);
+  // default
+  return _PL("resolvable", "resolvables", count);
+}
+
+
 // copied from yast2-pkg-bindings:PkgModuleFunctions::DoProvideNameKind
 bool ProvideProcess::operator()( const PoolItem& provider )
 {
@@ -390,6 +419,23 @@ bool show_problems ()
   return retry;
 }
 
+typedef map<KindOf<Resolvable>,set<string> > KindToStringSet;
+
+
+void show_summary_resolvable_list(const string & label,
+                                  KindToStringSet::const_iterator it)
+{
+  cout << endl << label << endl;
+
+  cout << " ";
+  for (set<string>::const_iterator nameit = it->second.begin();
+      nameit != it->second.end(); ++nameit)
+    cout << *nameit << " ";
+
+  cout << endl;
+}
+
+
 /**
  * @return (-1) - nothing to do,
  *  0 - there is at least 1 resolvable to be installed/uninstalled,
@@ -400,10 +446,15 @@ int show_summary()
 {
   int retv = -1; // nothing to do;
 
-  if (!gSettings.machine_readable)
-    cerr << _("Summary:") << endl;
-
   MIL << "Pool contains " << God->pool().size() << " items." << std::endl;
+  DBG << "Install summary:" << endl;
+
+  typedef map<KindOf<Resolvable>,set<ResObject::constPtr> > KindToResolvableSet;
+  
+  KindToResolvableSet to_be_installed;
+  KindToResolvableSet to_be_removed;
+
+  // collect resolvables to be installed/removed and set the return status
   for ( ResPool::const_iterator it = God->pool().begin(); it != God->pool().end(); ++it )
   {
     ResObject::constPtr res = it->resolvable();
@@ -411,7 +462,8 @@ int show_summary()
     {
       if (retv == -1) retv = 0;
 
-      if (it->resolvable()->kind() == ResTraits<Patch>::kind) {
+      if (it->resolvable()->kind() == ResTraits<Patch>::kind)
+      {
         Patch::constPtr patch = asKind<Patch>(it->resolvable());
         
         // set return value to 'reboot needed'
@@ -423,18 +475,126 @@ int show_summary()
           retv = ZYPPER_EXIT_INF_RESTART_NEEDED;
       }
 
-      if (!gSettings.machine_readable)
+      if ( it->status().isToBeInstalled() )
       {
-        if ( it->status().isToBeInstalled() )
-          cerr << _("<install>   ");
-        if ( it->status().isToBeUninstalled() )
-          cerr << _("<uninstall> ");
-        cerr << *res << endl;
+        DBG << "<install>   ";
+        to_be_installed[it->resolvable()->kind()].insert(it->resolvable());
       }
+      if ( it->status().isToBeUninstalled() )
+      {
+        DBG << "<uninstall> ";
+        to_be_removed[it->resolvable()->kind()].insert(it->resolvable());
+      }
+      DBG << *res << endl;
     }
   }
+
   if (retv == -1)
-    cerr << _("Nothing to do.") << endl;
+  {
+    if (gSettings.machine_readable)
+      cout << "<message type=\"warning\" text=\"" << _("Nothing to do.") << "\">" << endl;
+    else
+      cout << _("Nothing to do.") << endl;
+
+    return retv;
+  }
+
+  // no output for machines for now
+  if (gSettings.machine_readable)
+    return retv;
+
+  KindToStringSet toinstall;
+  KindToStringSet toupgrade;
+  KindToStringSet todowngrade;
+  KindToStringSet toremove;
+
+  for (KindToResolvableSet::const_iterator it = to_be_installed.begin();
+      it != to_be_installed.end(); ++it)
+  {
+    for (set<ResObject::constPtr>::const_iterator resit = it->second.begin();
+        resit != it->second.end(); ++resit)
+    {
+      ResObject::constPtr res(*resit);
+
+      // find in to_be_removed:
+      bool upgrade_downgrade = false;
+      for (set<ResObject::constPtr>::iterator rmit = to_be_removed[res->kind()].begin();
+          rmit != to_be_removed[res->kind()].end(); ++rmit)
+      {
+        if (res->name() == (*rmit)->name())
+        {
+          if (res->edition() > (*rmit)->edition())
+            toupgrade[res->kind()].insert(res->name());
+          else
+            todowngrade[res->kind()].insert(res->name());
+          
+          to_be_removed[res->kind()].erase(*rmit);
+          upgrade_downgrade = true;
+          break;
+        }
+      }
+      
+      if (!upgrade_downgrade)
+        toinstall[res->kind()].insert(res->name());
+    }
+  }
+
+  for (KindToResolvableSet::const_iterator it = to_be_removed.begin();
+      it != to_be_removed.end(); ++it)
+    for (set<ResObject::constPtr>::const_iterator resit = it->second.begin();
+        resit != it->second.end(); ++resit)
+      toremove[it->first].insert((*resit)->name());
+
+  // show summary
+  for (KindToStringSet::const_iterator it = toupgrade.begin();
+      it != toupgrade.end(); ++it)
+  {
+    string title = boost::str(format(_PL(
+        "The following %s is going to be upgraded:",
+        "The following %s are going to be upgraded:",
+        it->second.size()
+    )) % kind_to_string_localized(it->first, it->second.size()));
+
+    show_summary_resolvable_list(title, it);
+  }
+
+  for (KindToStringSet::const_iterator it = todowngrade.begin();
+      it != todowngrade.end(); ++it)
+  {
+    string title = boost::str(format(_PL(
+        "The following %s is going to be downgraded:",
+        "The following %s are going to be downgraded:",
+        it->second.size()
+    )) % kind_to_string_localized(it->first, it->second.size()));
+
+    show_summary_resolvable_list(title, it);
+  }
+
+  for (KindToStringSet::const_iterator it = toinstall.begin();
+      it != toinstall.end(); ++it)
+  {
+    string title = boost::str(format(_PL(
+        "The following NEW %s is going to be installed:",
+        "The following NEW %s are going to be installed:",
+        it->second.size()
+    )) % kind_to_string_localized(it->first, it->second.size()));
+
+    show_summary_resolvable_list(title, it);
+  }
+
+  for (KindToStringSet::const_iterator it = toremove.begin();
+      it != toremove.end(); ++it)
+  {
+    string title = boost::str(format(_PL(
+        "The following %s is going to be REMOVED:",
+        "The following %s are going to be REMOVED:",
+        it->second.size()
+    )) % kind_to_string_localized(it->first, it->second.size()));
+
+    show_summary_resolvable_list(title, it);
+  }
+
+  cout << endl;
 
   return retv;
 }
