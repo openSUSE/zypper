@@ -11,6 +11,7 @@
 */
 #include <iostream>
 #include "zypp/base/Easy.h"
+#include "zypp/base/Regex.h"
 #include "zypp/base/Logger.h"
 #include "zypp/ZYppFactory.h"
 
@@ -131,7 +132,7 @@ namespace zypp
 
             for_( it, tag_r->value.begin(), tag_r->value.end() )
             {
-              if ( str::regex_match( *it, what, sizeEntryRX, str::match_extra ) )
+              if ( str::regex_match( *it, what, sizeEntryRX ) )
               {
                 bool skip = true;
                 
