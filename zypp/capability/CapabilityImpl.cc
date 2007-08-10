@@ -10,9 +10,9 @@
  *
 */
 #include <iostream>
-#include <vector>
 
 #include "zypp/base/Logger.h"
+#include "zypp/base/Regex.h"
 #include "zypp/base/Exception.h"
 #include "zypp/capability/CapabilityImpl.h"
 #include "zypp/capability/Capabilities.h"
@@ -157,10 +157,11 @@ namespace zypp
       }
 
       //split:   name:/absolute/path
-      std::vector<std::string> what;
-      if (str::split( name_r, std::back_inserter(what), ":") >= 2)
+      static const str::regex  rx( "([^/]*):(/.*)" );
+      str::smatch what;
+      if( str::regex_match( name_r, what, rx ) )
       {
-        return new capability::SplitCap( refers_r, what[0], what[1] );
+        return new capability::SplitCap( refers_r, what[1], what[2] );
       }
 
       //name:    name
@@ -196,12 +197,13 @@ namespace zypp
 	}
 
       //split:   hal(name) [op string]
-      std::vector<std::string> what;
-      if (str::split( name_r, std::back_inserter(what), ")"))
+      static const str::regex  rx( "hal\\(([^)]*)\\)" );
+      str::smatch what;
+      if( str::regex_match( name_r, what, rx ) )
 	{
 	  // Hal always refers to 'System' kind of Resolvable.
 	  return new capability::HalCap( ResTraits<SystemResObject>::kind,
-				    what[0].substr(strlen("hal(")) );
+				    what[1] );
 	}
       // otherwise
       ZYPP_THROW( Exception("Unsupported kind of Hal Capability '" + name_r + "'") );
@@ -219,12 +221,13 @@ namespace zypp
 	}
 
       //split:   modalias(name) [op string]
-      std::vector<std::string> what;
-      if (str::split( name_r, std::back_inserter(what), ")"))
+      static const str::regex  rx( "modalias\\(([^)]*)\\)" );
+      str::smatch what;
+      if( str::regex_match( name_r, what, rx ) )
 	{
 	  // Modalias always refers to 'System' kind of Resolvable
 	  return new capability::ModaliasCap( ResTraits<SystemResObject>::kind,
-                                         what[0].substr(strlen("modalias(")));
+                                         what[1] );
 	}
       // otherwise
       ZYPP_THROW( Exception("Unsupported kind of Modalias Capability'" + name_r + "'") );
@@ -240,12 +243,13 @@ namespace zypp
 				       const std::string & name_r )
     {
       //split:   filesystem(name) [op string]
-      std::vector<std::string> what;
-      if (str::split( name_r, std::back_inserter(what), ")"))
+      static const str::regex  rx( "filesystem\\(([^)]*)\\)" );
+      str::smatch what;
+      if( str::regex_match( name_r, what, rx ) )
       {
 	// Filesystem always refers to 'System' kind of Resolvable
 	return new capability::FilesystemCap( ResTraits<SystemResObject>::kind,
-					      what[0].substr(strlen("filesystem(")) );
+					      what[1] );
       }
       // otherwise
       ZYPP_THROW( Exception("Unsupported kind of Filesystem Capability'" + name_r + "'") );
@@ -275,15 +279,17 @@ namespace zypp
         }
 
       // strval_r has at least two words which could make 'op edition'?
-      std::vector<std::string> what;
-      if (str::split( strval_r, std::back_inserter(what)) >= 2)
+      // improve regex!
+      static const str::regex  rx( "(.*[^ \t])([ \t]+)([^ \t]+)([ \t]+)([^ \t]+)" );
+      str::smatch what;
+      if( str::regex_match( strval_r,what, rx ) )
         {
           Rel op;
           Edition edition;
           try
             {
-              op = Rel(what[1]);
-              edition = Edition(what[2]);
+              op = Rel(what[3]);
+              edition = Edition(what[5]);
             }
           catch ( Exception & excpt )
             {
@@ -296,7 +302,7 @@ namespace zypp
 
           // Valid 'op edition'
           return buildVersioned( refers_r,
-                                 what[0], op, edition );
+                                 what[1], op, edition );
         }
       //else
       // not a VersionedCap
