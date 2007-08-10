@@ -14,7 +14,6 @@
 
 #include <iosfwd>
 #include <string>
-#include <boost/regex.hpp>
 
 #include "zypp/base/PtrTypes.h"
 
@@ -100,6 +99,7 @@ namespace zypp
 
     //@{
     /** regex */
+#if 0    
     using boost::regex;
     using boost::regex_match;
     using boost::regex_search;
@@ -116,6 +116,7 @@ namespace zypp
      * helper to debug regular expressions matches
      */
     std::ostream & dumpRegexpResult( const boost::smatch &what, std::ostream & str );
+#endif
 
     ///////////////////////////////////////////////////////////////////
     /** \name String representation of number.
@@ -263,7 +264,7 @@ namespace zypp
             // build string
             *result_r = std::string( beg, cur-beg );
             // skip sepchars
-            while ( sepchars_r.find( *cur ) != std::string::npos )
+            while ( cur != beg && sepchars_r.find( *cur ) != std::string::npos )
               ++cur;
           }
         return ret;
@@ -338,6 +339,9 @@ namespace zypp
 
     std::string getline( std::istream & str, const Trim trim_r );
 
+    inline bool startsWith(const std::string& s, const char* str) { return s.find(str) == 0; }
+    inline bool contains(const std::string& s, const char* str) { return s.find(str) != std::string::npos; }
+
     ///////////////////////////////////////////////////////////////////
 
     /** \name String prefix handling.
@@ -351,7 +355,6 @@ namespace zypp
     inline std::string stripPrefix( const std::string & str_r, const std::string & prefix_r )
     { return( hasPrefix( str_r, prefix_r ) ? str_r.substr( prefix_r.size() ) : str_r ); }
     //@}
-
     /////////////////////////////////////////////////////////////////
   } // namespace str
   ///////////////////////////////////////////////////////////////////

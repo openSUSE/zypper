@@ -26,6 +26,7 @@
 
 #include "zypp/base/Logger.h"
 #include "zypp/base/String.h"
+#include "zypp/base/Regex.h"
 
 #include "zypp/Date.h"
 #include "zypp/Pathname.h"
@@ -1188,7 +1189,7 @@ Package::Ptr RpmDb::makePackageFromHeader( const RpmHeader::constPtr header,
        filename != filenames.end();
        ++filename)
   {
-    if ( str::regex_search( filename->begin(), filename->end(), what, filenameRegex ) )
+    if ( str::regex_match( *filename, what, filenameRegex ) )
     {
       try
       {

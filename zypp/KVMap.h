@@ -22,6 +22,7 @@
 #define KVMap_h
 
 #include <iosfwd>
+#include <vector>
 #include <map>
 
 #include "zypp/base/String.h"

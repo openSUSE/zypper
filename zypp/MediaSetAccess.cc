@@ -11,6 +11,7 @@
 #include <fstream>
 
 #include "zypp/base/LogTools.h"
+#include "zypp/base/Regex.h"
 #include "zypp/base/UserRequestException.h"
 #include "zypp/ZYppCallbacks.h"
 #include "zypp/MediaSetAccess.h"
@@ -499,9 +500,10 @@ IMPL_PTR_TYPE(MediaSetAccess);
       // code has to be adapted together with the MediaISO change.
       // maybe some MediaISOURL interface should be used.
       std::string isofile = url_r.getQueryParam("iso");
-      boost::regex e("^(.*(cd|dvd))([0-9]+)(\\.iso)$", boost::regex::icase);
-      boost::smatch what;
-      if(boost::regex_match(isofile, what, e, boost::match_extra))
+      str::regex e("^(.*(cd|dvd))([0-9]+)(\\.iso)$", str::regex::icase);
+
+      str::smatch what;
+      if(str::regex_match(isofile, what, e))
       {
         Url url( url_r);
         isofile = what[1] + str::numstring(medianr) + what[4];
@@ -513,9 +515,9 @@ IMPL_PTR_TYPE(MediaSetAccess);
     else
     {
       std::string pathname = url_r.getPathName();
-      boost::regex e("^(.*(cd|dvd))([0-9]+)(/?)$", boost::regex::icase);
-      boost::smatch what;
-      if(boost::regex_match(pathname, what, e, boost::match_extra))
+      str::regex e("^(.*(cd|dvd))([0-9]+)(/?)$", str::regex::icase);
+      str::smatch what;
+      if(str::regex_match(pathname, what, e))
       {
         Url url( url_r);
         pathname = what[1] + str::numstring(medianr) + what[4];

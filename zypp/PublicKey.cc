@@ -13,6 +13,7 @@
 //#include "zypp/base/Logger.h"
 
 #include "zypp/base/String.h"
+#include "zypp/base/Regex.h"
 #include "zypp/PublicKey.h"
 #include "zypp/ExternalProgram.h"
 #include "zypp/TmpPath.h"
@@ -118,7 +119,7 @@ namespace zypp
         {
         //MIL << "[" << line << "]" << std::endl;
           str::smatch what;
-          if(str::regex_match(line, what, rxColons, str::match_extra))
+          if(str::regex_match(line, what, rxColons))
           {
             if ( what[1] == "pub" )
             {

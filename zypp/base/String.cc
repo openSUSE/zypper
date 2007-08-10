@@ -188,15 +188,6 @@ namespace zypp
       return _getline(str, trim?TRIM:NO_TRIM);
     }
 
-    std::ostream & dumpRegexpResult( const boost::smatch &what, std::ostream & str )
-    {
-      for ( unsigned int k=0; k < what.size(); k++)
-      {
-        str << "[match "<< k << "] [" << what[k] << "]" << std::endl;
-      }
-
-      return str;
-    }
     /////////////////////////////////////////////////////////////////
   } // namespace str
   ///////////////////////////////////////////////////////////////////

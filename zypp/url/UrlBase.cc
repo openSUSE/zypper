@@ -12,7 +12,8 @@
 #include <zypp/url/UrlBase.h>
 #include <zypp/base/String.h>
 #include <zypp/base/Gettext.h>
- 
+#include <zypp/base/Regex.h>
+
 #include <stdexcept>
 #include <climits>
 #include <errno.h>
@@ -20,6 +21,7 @@
 #include <sys/socket.h>
 #include <arpa/inet.h>
 
+#include <iostream>
 
 // ---------------------------------------------------------------
 /*
@@ -27,12 +29,7 @@
 **
 ** host      = hostname | IPv4 | "[" IPv6-IP "]" | "[v...]"
 */
-#define RX_SPLIT_AUTHORITY \
-        "^(([^:@]*)([:]([^@]*))?@)?(\\[[^]]+\\]|[^:]+)?([:](.*))?"
-
 #define RX_VALID_SCHEME    "^[a-zA-Z][a-zA-Z0-9\\.+-]*$"
-
-#define RX_VALID_PORT      "^[0-9]{1,5}$"
 
 #define RX_VALID_HOSTNAME  "^[[:alnum:]]+([\\.-][[:alnum:]]+)*$"
 
@@ -157,6 +154,7 @@ namespace zypp
           try
           {
             str::regex rex(regx);
+            std::cout << "testing *" << data << "* against *" << regx << "*" << std::endl;
             valid = str::regex_match(data, rex);
           }
           catch( ... )
@@ -441,6 +439,8 @@ namespace zypp
       std::string   url;
       UrlBaseData   tmp;
 
+      std::cout << "UrlBase:.asString()" << std::endl;
+
       if( opts.has(ViewOptions::WITH_SCHEME))
       {
         tmp.scheme = getScheme();
@@ -474,6 +474,8 @@ namespace zypp
                 }
               }
 
+              std::cout << "tmp.host: *" << tmp.host << "*" << std::endl;
+
               url += tmp.host;
 
               if( opts.has(ViewOptions::WITH_PORT))
@@ -500,6 +502,7 @@ namespace zypp
       if( opts.has(ViewOptions::WITH_PATH_NAME))
       {
         tmp.pathname = getPathName(zypp::url::E_ENCODED);
+        std::cout << "pathname: *" << tmp.pathname << "*" << std::endl;
         if( !tmp.pathname.empty())
         {
           if(url.find("/") != std::string::npos)
@@ -830,30 +833,34 @@ namespace zypp
     void
     UrlBase::setAuthority(const std::string &authority)
     {
-      str::smatch out;
-      bool        ret = false;
+      std::string s = authority;
+      std::string::size_type p,q;
 
-      try
+      std::string username, password, host, port;
+
+      std::cout << "authority: " << authority << "*" << std::endl;
+
+      if ((p=s.find('@')) != std::string::npos)
       {
-        str::regex  rex(RX_SPLIT_AUTHORITY);
-        ret = str::regex_match(authority, out, rex);
+        q = s.find(':');
+        if (q != std::string::npos && q < p)
+        {
+          setUsername(s.substr(0, q), zypp::url::E_ENCODED);
+          setPassword(s.substr(q+1, p-q-1), zypp::url::E_ENCODED);
+        }
+        else
+          setUsername(s.substr(0, p), zypp::url::E_ENCODED);
+        s = s.substr(p+1);
       }
-      catch( ... )
-      {}
-
-      if( ret && out.size() == 8)
+      q = s.rfind(']');
+      if ((p = s.rfind(':')) != std::string::npos && p > q+1)
       {
-        setUsername(out[2].str(), zypp::url::E_ENCODED);
-        setPassword(out[4].str(), zypp::url::E_ENCODED);
-        setHost(out[5].str());
-        setPort(out[7].str());
+
+        setHost(s.substr(0, p));
+        setPort(s.substr(p+1));
       }
       else
-      {
-        ZYPP_THROW(UrlParsingException(
-          _("Unable to parse Url authority")
-        ));
-      }
+        setHost(s);
     }
 
     // ---------------------------------------------------------------
@@ -1015,6 +1022,8 @@ namespace zypp
             _("Url scheme does not allow a host component")
           ));
         }
+
+        std::cout << "host: *" << host << "*" << std::endl;
 
         if( isValidHost(host))
         {
@@ -1337,17 +1346,10 @@ namespace zypp
     bool
     UrlBase::isValidPort(const std::string &port) const
     {
-      try
-      {
-        str::regex regx(RX_VALID_PORT);
-        if( str::regex_match(port, regx))
-        {
-          long pnum = str::strtonum<long>(port);
-          return ( pnum >= 1 && pnum <= USHRT_MAX);
-        }
-      }
-      catch( ... )
-      {}
+        char* endptr;
+        long pnum = strtol(port.c_str(), &endptr, 10);
+        return ( !port.empty() && !*endptr
+                 && pnum >= 1 && pnum <= USHRT_MAX);
 
       return false;
     }

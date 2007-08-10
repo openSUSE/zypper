@@ -13,6 +13,7 @@
 
 #include "zypp/base/Logger.h"
 #include "base/String.h"
+#include "base/Regex.h"
 #include "base/Exception.h"
 
 #include "zypp/Edition.h"
@@ -146,19 +147,27 @@ namespace zypp
     Impl( const std::string & edition_r )
     : _epoch( noepoch )
     {
+      //[0-9]+:)?([^-]*)(-([^-]*))?" );
       str::smatch what;
-      if( str::regex_match( edition_r.begin(), edition_r.end(),
-                            what, _rxEdition ) )
+
+      std::cout << "edition: " << edition_r << std::endl;
+
+      std::cout << str::regex_match( edition_r, what, _rxEdition )  << std::endl;
+
+      std::cout << "size: " << what.size() << std::endl;
+
+      for (int i = 1; i < what.size(); ++i)
+          std::cout << i << ": " << what[i] << std::endl;
+
+
+      if( str::regex_match( edition_r, what, _rxEdition ) && what.size() >= 3)
         {
-          // what[2] contains the epoch
-          // what[3] contains the version
-          // what[5] contains the release
-          if ( what[2].matched )
-            _epoch = strtoul( what[2].str().c_str(), NULL, 10 );
-          if ( what[3].matched )
-            _version = what[3].str();
-          if ( what[5].matched )
-            _release = what[5].str();
+          if ( what[1].size() > 1 )
+            _epoch = strtoul( what[1].c_str(), NULL, 10 );
+          if ( what[2].size() )
+            _version = what[2];
+          if ( what[3].size() ) 
+            _release = what[3];
         }
       else
         {
@@ -216,7 +225,7 @@ namespace zypp
   };
   ///////////////////////////////////////////////////////////////////
 
-  const str::regex Edition::Impl::_rxEdition( "(([0-9]+):)?([^-]*)(-([^-]*))?" );
+  const str::regex Edition::Impl::_rxEdition( "([0-9]+:)?([^-]*)(-[^-]*)?" );
 
   ///////////////////////////////////////////////////////////////////
 

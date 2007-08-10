@@ -22,6 +22,7 @@
 #include "zypp/base/Logger.h"
 #include "zypp/base/IOStream.h"
 #include "zypp/base/String.h"
+#include "zypp/base/Regex.h"
 #include "zypp/PathInfo.h"
 #include "zypp/KeyRing.h"
 #include "zypp/ExternalProgram.h"
@@ -424,7 +425,7 @@ namespace zypp
     {
       //MIL << line << endl;
       str::smatch what;
-      if(str::regex_match(line, what, rxColons, str::match_extra))
+      if(str::regex_match(line, what, rxColons))
       {
         string id;
         string fingerprint;
@@ -436,7 +437,7 @@ namespace zypp
           for(line2 = prog.receiveLine(); !line2.empty(); line2 = prog.receiveLine(), count++ )
           {
             str::smatch what2;
-            if (str::regex_match(line2, what2, rxColonsFpr, str::match_extra))
+            if (str::regex_match(line2, what2, rxColonsFpr))
             {
               if ( (what2[1] == "fpr") && (what2[1] != "pub") && (what2[1] !="sub"))
               {
@@ -567,7 +568,7 @@ namespace zypp
     {
       //MIL << "[" << line << "]" << endl;
       str::smatch what;
-      if(str::regex_match(line, what, rxNoKey, str::match_extra))
+      if(str::regex_search(line, what, rxNoKey))
       {
         if ( what.size() > 1 )
           id = what[1];

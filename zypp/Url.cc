@@ -12,7 +12,9 @@
 #include <zypp/Url.h>
 #include <zypp/base/Gettext.h>
 #include <zypp/base/String.h>
+#include <zypp/base/Regex.h>
 #include <stdexcept>
+#include <iostream>
 
 
 //////////////////////////////////////////////////////////////////////
@@ -27,11 +29,11 @@ namespace zypp
   /*
    * url       = [scheme:] [//authority] /path [?query] [#fragment]
    */
-  #define RX_SPLIT_URL                       "^(([^:/?#]+):)?" \
-                                             "(//([^/?#]*))?"  \
+  #define RX_SPLIT_URL                       "^([^:/?#]+:|)" \
+                                             "(//[^/?#]*|)"  \
                                              "([^?#]*)"        \
-                                             "([?]([^#]*))?"   \
-                                             "(#(.*))?"
+                                             "([?][^#]*|)"   \
+                                             "(#.*|)"
 
 
   ////////////////////////////////////////////////////////////////////
@@ -374,18 +376,33 @@ namespace zypp
     catch( ... )
     {}
 
-    if(ret && out.size() == 10)
+    if(ret && out.size() == 5)
     {
-      url = g_urlSchemeRepository().getUrlByScheme(out[2].str());
+      std::string scheme = out[1];
+      if (scheme.size() > 1)
+        scheme = scheme.substr(0, scheme.size()-1);
+      std::string authority = out[2];
+      if (authority.size() >= 2)
+        authority = authority.substr(2);
+      std::string query = out[4];
+      if (query.size() > 1)
+        query = query.substr(1);
+      std::string fragment = out[5];
+      if (fragment.size() > 1)
+        fragment = fragment.substr(1);
+
+      std::cout << "scheme: " << scheme << " authority: " << authority
+        << " query " << query << " fragment " << fragment << std::endl;
+
+      std::cout << "out[3] " << out[3] << std::endl;
+
+      url = g_urlSchemeRepository().getUrlByScheme(scheme);
       if( !url)
       {
         url.reset( new UrlBase());
       }
-      url->init(out[2].str(),
-                out[4].str(),
-                out[5].str(),
-                out[7].str(),
-                out[9].str());
+      url->init(scheme, authority, out[3],
+                query, fragment);
     }
     return url;
   }

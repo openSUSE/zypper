@@ -154,15 +154,17 @@ data::Package_Ptr makePackageDataFromHeader( const RpmHeader::constPtr header,
 
   list<string> filenames = header->tag_filenames();
   pkg->deps[Dep::PROVIDES] = header->tag_provides ( filerequires );
-  static str::smatch what;
-  static const str::regex filenameRegex( "/(s?bin|lib(64)?|etc)/|^/usr/(games/|share/(dict/words|magic\\.mime)$)|^/opt/gnome/games/",
-                                         str::regex::optimize|str::regex::nosubs );
-
   for (list<string>::const_iterator filename = filenames.begin();
        filename != filenames.end();
        ++filename)
   {
-    if ( str::regex_search( filename->begin(), filename->end(), what, filenameRegex ) ) 
+    if (str::contains(*filename, "/bin/")
+        || str::contains(*filename, "/sbin")
+        || str::contains(*filename, "/lib") || str::contains(*filename, "/lib64/")
+        || str::contains(*filename, "/etc/")
+        || str::startsWith(*filename, "/usr/games")
+        || str::startsWith(*filename, "/usr/share/dict/words")
+        || str::startsWith(*filename, "/opt/gnome/games/"))
     {
       try {
         pkg->deps[Dep::PROVIDES].insert(capability::buildFile( ResTraits<Package>::kind, *filename ));

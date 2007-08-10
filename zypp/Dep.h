@@ -12,7 +12,7 @@
 #ifndef ZYPP_DEP_H
 #define ZYPP_DEP_H
 
-#include <iosfwd>
+#include <iostream>
 #include <string>
 
 ///////////////////////////////////////////////////////////////////

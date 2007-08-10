@@ -201,6 +201,7 @@ SET( zypp_base_SRCS
   base/InputStream.cc
   base/ReferenceCounted.cc
   base/String.cc
+  base/Regex.cc
   base/Unit.cc
   base/ExternalDataSource.cc
   base/Exception.cc
@@ -245,6 +246,7 @@ SET( zypp_base_HEADERS
   base/ReferenceCounted.h
   base/SafeBool.h
   base/String.h
+  base/Regex.h
   base/Sysconfig.h
   base/UniqueString.h
   base/Unit.h
@@ -1141,7 +1143,7 @@ ADD_LIBRARY(zypp SHARED ${zypp_lib_SRCS})
 SET_TARGET_PROPERTIES( zypp PROPERTIES VERSION "${LIBZYPP_VERSION_INFO}" )
 ADD_DEPENDENCIES(zypp schema_header)
 # System libraries
-TARGET_LINK_LIBRARIES(zypp boost_filesystem boost_regex util )
+TARGET_LINK_LIBRARIES(zypp boost_filesystem util )
 TARGET_LINK_LIBRARIES(zypp ${DBUS_LIBRARY} )
 TARGET_LINK_LIBRARIES(zypp dbus-glib-1 )
 TARGET_LINK_LIBRARIES(zypp ${GLIB_LIBRARY} )
