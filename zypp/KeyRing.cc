@@ -568,7 +568,7 @@ namespace zypp
     {
       //MIL << "[" << line << "]" << endl;
       str::smatch what;
-      if(str::regex_search(line, what, rxNoKey))
+      if(str::regex_match(line, what, rxNoKey))
       {
         if ( what.size() >= 1 )
           id = what[1];

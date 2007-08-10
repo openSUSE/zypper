@@ -61,7 +61,6 @@ namespace zypp
 
     bool regex_match(const std::string& s, str::smatch& matches, const regex& regex);
     bool regex_match(const std::string& s,  const regex& regex);
-    bool regex_search(const std::string& s, str::smatch& matches, const regex& regex);
 
     /////////////////////////////////////////////////////////////////
   } // namespace str

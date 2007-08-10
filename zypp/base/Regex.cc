@@ -44,14 +44,6 @@ bool zypp::str::regex_match(const std::string& s,  const regex& regex)
   return !regexec(&regex.m_preg, s.c_str(), 0, NULL, 0);
 }
 
-bool zypp::str::regex_search(const std::string& s, smatch& matches, const regex& regex)
-{
-  bool r= regex.m_valid && !regexec(&regex.m_preg, s.c_str(), 12, &matches.pmatch[0], 0);
-  if (r)
-    matches.match_str = s;
-  return r;
-}
-
 smatch::smatch()
 {
   memset(&pmatch, -1, sizeof(pmatch));
