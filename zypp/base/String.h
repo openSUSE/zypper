@@ -322,6 +322,14 @@ namespace zypp
     inline bool endsWith(const std::string& s, const char* str) { return s.find(str) == s.size() - strlen(str)-1; }
     inline bool contains(const std::string& s, const char* str) { return s.find(str) != std::string::npos; }
 
+    /**
+     * \short Looks for text in a string and replaces it.
+     *
+     * \note It only perform substtution in one pass
+     */
+    std::string gsub( const std::string& sData, const std::string& sFrom, const std::string& sTo);
+
+    
     ///////////////////////////////////////////////////////////////////
 
     /** \name String prefix handling.

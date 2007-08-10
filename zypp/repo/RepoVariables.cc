@@ -10,6 +10,7 @@
 #include <iostream>
 #include <map>
 #include <algorithm>
+#include "zypp/base/String.h"
 #include "zypp/repo/RepoException.h"
 #include "zypp/ZConfig.h"
 #include "RepoVariables.h"
@@ -20,32 +21,6 @@ namespace zypp
 {
 namespace repo
 {
-
-static string
-gsub(const string& sData,
-     const string& sFrom,
-     const string& sTo)
-{
-  string sNew = sData;
-  
-  if (! sNew.empty())
-  {
-    string::size_type toLen = sTo.length();
-    string::size_type frLen = sFrom.length();
-    string::size_type loc = 0;
-    
-    while (string::npos != (loc = sNew.find(sFrom, loc)))
-    {
-      sNew.replace(loc, frLen, sTo);
-      loc += toLen;
-      
-      if (loc >= sNew.length())
-      break;
-    }
-  }
-
-  return sNew;
-}
   
 RepoVariablesStringReplacer::RepoVariablesStringReplacer()
 {}
@@ -58,9 +33,9 @@ std::string RepoVariablesStringReplacer::operator()( const std::string &value ) 
   string newvalue(value);
   
   // $arch
-  newvalue = gsub( newvalue,
-                   "$arch",
-                   ZConfig::instance().systemArchitecture().asString() );
+  newvalue = str::gsub( newvalue,
+                        "$arch",
+                        ZConfig::instance().systemArchitecture().asString() );
   // $basearch
   
   Arch::CompatSet cset( Arch::compatSet( ZConfig::instance().systemArchitecture() ) );
@@ -75,9 +50,9 @@ std::string RepoVariablesStringReplacer::operator()( const std::string &value ) 
     basearch = ZConfig::instance().systemArchitecture();
   }
 
-  newvalue = gsub( newvalue,
-                   "$basearch",
-                   basearch.asString() );
+  newvalue = str::gsub( newvalue,
+                        "$basearch",
+                        basearch.asString() );
   return newvalue;
 }
 

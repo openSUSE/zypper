@@ -9,9 +9,10 @@
 
 #include <set>
 #include <fstream>
-#include <boost/regex.hpp>
 #include <boost/function.hpp>
 
+#include <zypp/base/Regex.h>
+#include <zypp/base/String.h>
 #include "zypp/base/Logger.h"
 #include "zypp/base/IOStream.h"
 #include "zypp/PoolItem.h"
@@ -27,8 +28,7 @@
 
 using namespace std;
 using namespace zypp;
-using namespace boost;
-using boost::regex;
+using namespace zypp::str;
 
 namespace zypp
 {
@@ -76,18 +76,18 @@ wildcards2regex(const string & str)
 {
   string regexed;
 
-  regex all("\\*"); // regex to search for '*'
-  regex one("\\?"); // regex to search for '?'
+  string all("*"); // regex to search for '*'
+  string one("?"); // regex to search for '?'
   string r_all(".*"); // regex equivalent of '*'
   string r_one(".");  // regex equivalent of '?'
 
   // replace all "*" in input with ".*"
-  regexed = regex_replace(str, all, r_all);
+  regexed = str::gsub( str, all, r_all );
   MIL << "wildcards2regex: " << str << " -> " << regexed;
 
   // replace all "?" in input with "."
-  regexed = regex_replace(regexed, one, r_one);
-  MIL << " -> " << regexed << endl;
+   regexed = str::gsub(regexed, one, r_one);
+   MIL << " -> " << regexed << endl;
 
   return regexed;
 }
@@ -176,7 +176,7 @@ struct AddLockToPool
 
     // regex flags
     unsigned int flags = regex::normal;
-    flags |= regex_constants::icase;
+    flags |= regex::icase;
     regex reg;
 
     // create regex object
@@ -188,7 +188,7 @@ struct AddLockToPool
     }
     catch (regex_error & e)
     {
-      ERR << "locks: " << regstr << " is not a valid regular expression: \"" << e.what() << "\"" << endl;
+      ERR << "locks: " << regstr << " is not a valid regular expression: \"" << e.msg() << "\"" << endl;
       ERR << "This is a bug, please file a bug report against libzypp-zmd-backend" << endl;
       // ignore this lock and continue
       return true;;

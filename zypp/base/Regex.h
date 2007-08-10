@@ -17,6 +17,8 @@
 
 #include <regex.h>
 
+#include "zypp/base/Exception.h"
+
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
@@ -27,6 +29,14 @@ namespace zypp
   namespace str
   { /////////////////////////////////////////////////////////////////
 
+    typedef Exception regex_error;
+    
+    class smatch;
+    class regex;
+    
+    bool regex_match(const std::string& s, str::smatch& matches, const regex& regex);
+    bool regex_match(const std::string& s,  const regex& regex);
+    
     class regex {
     public:
 
@@ -35,17 +45,23 @@ namespace zypp
         match_extra = 0,
         icase = REG_ICASE,
         nosubs = REG_NOSUB,
-        match_extended = REG_EXTENDED
+        match_extended = REG_EXTENDED,
+        normal = 1<<16
       };
-
+  
+      regex();
       regex(const std::string& s,int flags = match_extended);
       ~regex() throw();
 
-    public:
+      void assign(const std::string& s,int flags = match_extended);
+      
+    private:
+      friend class smatch;
+      friend bool regex_match(const std::string& s, str::smatch& matches, const regex& regex);
+      friend bool regex_match(const std::string& s,  const regex& regex);
       regex_t m_preg;
       bool m_valid;
     };
-
 
     class smatch {
     public:
@@ -59,8 +75,7 @@ namespace zypp
       regmatch_t pmatch[12];
     };
 
-    bool regex_match(const std::string& s, str::smatch& matches, const regex& regex);
-    bool regex_match(const std::string& s,  const regex& regex);
+    
 
     /////////////////////////////////////////////////////////////////
   } // namespace str

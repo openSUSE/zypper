@@ -16,13 +16,35 @@
 
 #include "zypp/base/Regex.h"
 
+using namespace zypp;
 using namespace zypp::str;
+
+regex::regex()
+  : m_valid(false)
+{
+
+}
+
+void regex::assign(const std::string& str,int flags)
+{
+  m_valid = true;
+  int err;
+  char errbuff[100];
+  if (!(flags & normal)) {
+    flags |= match_extended;
+    flags &= ~(normal);
+  }
+  
+  if ((err = regcomp(&m_preg, str.c_str(), flags))) {
+    m_valid = false;
+    regerror(err, &m_preg, errbuff, sizeof(errbuff));
+    ZYPP_THROW(regex_error(std::string(errbuff)));
+  }
+}
 
 regex::regex(const std::string& str, int flags)
 {
-  m_valid = true;
-  if (regcomp(&m_preg, str.c_str(), REG_EXTENDED | flags))
-    m_valid = false;
+  assign(str, flags);
 }
 
 regex::~regex() throw()
@@ -51,7 +73,7 @@ smatch::smatch()
 
 std::string smatch::operator[](unsigned i) const 
 {
-  if (i < 12 && pmatch[i].rm_so != -1)
+  if (i < sizeof(pmatch)/sizeof(*pmatch) && pmatch[i].rm_so != -1)
     return match_str.substr(pmatch[i].rm_so, pmatch[i].rm_eo-pmatch[i].rm_so);
   return std::string();
 }
@@ -60,7 +82,7 @@ std::string smatch::operator[](unsigned i) const
 unsigned smatch::size() const
 {
   unsigned matches = 0;
-  while (matches < 12 && pmatch[matches+1].rm_so != -1) {
+  while (matches <  ((sizeof(pmatch)/sizeof(*pmatch))-1) && pmatch[matches+1].rm_so != -1) {
     //    std::cout << "match[" << matches << "]: *" << (*this)[matches
     //        +1] << "*" << std::endl;
     matches++;

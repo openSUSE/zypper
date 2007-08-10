@@ -16,6 +16,8 @@
 
 #include "zypp/base/String.h"
 
+using std::string;
+
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
@@ -155,6 +157,29 @@ namespace zypp
       return ret;
     }
 
+    string gsub(const string& sData, const string& sFrom, const string& sTo)
+    {
+      string sNew = sData;
+      
+      if (! sNew.empty())
+      {
+        string::size_type toLen = sTo.length();
+        string::size_type frLen = sFrom.length();
+        string::size_type loc = 0;
+        
+        while (string::npos != (loc = sNew.find(sFrom, loc)))
+        {
+          sNew.replace(loc, frLen, sTo);
+          loc += toLen;
+          
+          if (loc >= sNew.length())
+          break;
+        }
+      }
+    
+      return sNew;
+    }
+    
     /******************************************************************
     **
     **
