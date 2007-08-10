@@ -150,27 +150,15 @@ namespace zypp
       //[0-9]+:)?([^-]*)(-([^-]*))?" );
       str::smatch what;
 
-      std::cout << "edition: " << edition_r << std::endl;
-
-      std::cout << str::regex_match( edition_r, what, _rxEdition )  << std::endl;
-
-      std::cout << "size: " << what.size() << std::endl;
-
-      for (int i = 1; i < 4; ++i)
-          std::cout << i << ": " << what[i] << std::endl;
-
-
-      if( str::regex_match( edition_r, what, _rxEdition ))
+      if( str::regex_match( edition_r, what, _rxEdition )
+          && what[3].size() != 1)
         {
           if ( what[1].size() > 1 )
             _epoch = strtoul( what[1].c_str(), NULL, 10 );
           if ( what[2].size() )
             _version = what[2];
-          if ( what[3].size() ) 
-            _release = what[3];
-
-          std::cout << "successful epoch *" << _epoch << "* version *" << _version << " release *"
-              << _release << std::endl;
+          if (what[3].size() )
+            _release = what[3].substr(1);
         }
       else
         {
