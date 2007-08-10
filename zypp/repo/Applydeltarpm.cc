@@ -13,6 +13,7 @@
 
 #include "zypp/base/Logger.h"
 #include "zypp/base/String.h"
+#include "zypp/base/Regex.h"
 #include "zypp/repo/Applydeltarpm.h"
 #include "zypp/ExternalProgram.h"
 #include "zypp/AutoDispose.h"
@@ -32,6 +33,7 @@ namespace zypp
     { /////////////////////////////////////////////////////////////////
 
       const Pathname   applydeltarpm_prog( "/usr/bin/applydeltarpm" );
+      const str::regex applydeltarpm_tick ( "([0-9]+) percent finished" );
 
       /******************************************************************
        **
@@ -42,13 +44,16 @@ namespace zypp
                           const Progress & report_r  = Progress() )
       {
         ExternalProgram prog( argv_r, ExternalProgram::Stderr_To_Stdout );
+        str::smatch what;
         for ( std::string line = prog.receiveLine(); ! line.empty(); line = prog.receiveLine() )
           {
-            if ( report_r )
-              report_r( str::strtonum<unsigned>( line ));
+            if ( report_r && str::regex_match( line, what, applydeltarpm_tick ) )
+              {
+                report_r( str::strtonum<unsigned>( what[1] ) );
+              }
             else
               DBG << "Applydeltarpm : " << line;
-          }
+        }
         return( prog.close() == 0 );
       }
 
