@@ -154,7 +154,6 @@ namespace zypp
           try
           {
             str::regex rex(regx);
-            std::cout << "testing *" << data << "* against *" << regx << "*" << std::endl;
             valid = str::regex_match(data, rex);
           }
           catch( ... )
@@ -439,8 +438,6 @@ namespace zypp
       std::string   url;
       UrlBaseData   tmp;
 
-      std::cout << "UrlBase:.asString()" << std::endl;
-
       if( opts.has(ViewOptions::WITH_SCHEME))
       {
         tmp.scheme = getScheme();
@@ -474,8 +471,6 @@ namespace zypp
                 }
               }
 
-              std::cout << "tmp.host: *" << tmp.host << "*" << std::endl;
-
               url += tmp.host;
 
               if( opts.has(ViewOptions::WITH_PORT))
@@ -502,7 +497,6 @@ namespace zypp
       if( opts.has(ViewOptions::WITH_PATH_NAME))
       {
         tmp.pathname = getPathName(zypp::url::E_ENCODED);
-        std::cout << "pathname: *" << tmp.pathname << "*" << std::endl;
         if( !tmp.pathname.empty())
         {
           if(url.find("/") != std::string::npos)
@@ -838,8 +832,6 @@ namespace zypp
 
       std::string username, password, host, port;
 
-      std::cout << "authority: " << authority << "*" << std::endl;
-
       if ((p=s.find('@')) != std::string::npos)
       {
         q = s.find(':');
@@ -1022,8 +1014,6 @@ namespace zypp
             _("Url scheme does not allow a host component")
           ));
         }
-
-        std::cout << "host: *" << host << "*" << std::endl;
 
         if( isValidHost(host))
         {

@@ -391,11 +391,6 @@ namespace zypp
       if (fragment.size() > 1)
         fragment = fragment.substr(1);
 
-      std::cout << "scheme: " << scheme << " authority: " << authority
-        << " query " << query << " fragment " << fragment << std::endl;
-
-      std::cout << "out[3] " << out[3] << std::endl;
-
       url = g_urlSchemeRepository().getUrlByScheme(scheme);
       if( !url)
       {

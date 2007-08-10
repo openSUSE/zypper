@@ -97,27 +97,6 @@ namespace zypp
      * \li \c wsmatch
     */
 
-    //@{
-    /** regex */
-#if 0    
-    using boost::regex;
-    using boost::regex_match;
-    using boost::regex_search;
-    using boost::regex_replace;
-    using boost::match_results;
-    using boost::match_extra;
-    using boost::cmatch;
-    using boost::wcmatch;
-    using boost::smatch;
-    using boost::wsmatch;
-    //@}
-
-    /**
-     * helper to debug regular expressions matches
-     */
-    std::ostream & dumpRegexpResult( const boost::smatch &what, std::ostream & str );
-#endif
-
     ///////////////////////////////////////////////////////////////////
     /** \name String representation of number.
      *
