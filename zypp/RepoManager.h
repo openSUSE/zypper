@@ -308,6 +308,7 @@ namespace zypp
   protected:
     RepoStatus rawMetadataStatus( const RepoInfo &info );
     RepoStatus cacheStatus( const RepoInfo &info );
+
   public:
 
   private:

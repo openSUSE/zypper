@@ -99,6 +99,34 @@ namespace zypp
 
   ////////////////////////////////////////////////////////////////////////////
 
+   /**
+    * \short Internal version of clean cache
+    *
+    * Takes an extra CacheStore reference, so we avoid internally
+    * having 2 CacheStores writing to the same database.
+    */
+  static void cleanCacheInternal( cache::CacheStore &store,
+                                  const RepoInfo &info,
+                                  const ProgressData::ReceiverFnc & progressrcv = ProgressData::ReceiverFnc() )
+  {
+    ProgressData progress;
+    callback::SendReport<ProgressReport> report;
+    progress.sendTo( ProgressReportAdaptor( progressrcv, report ) );
+    progress.name(str::form(_("Cleaning repository '%s' cache"), info.alias().c_str()));
+
+    if ( !store.isCached(info.alias()) )
+      return;
+   
+    MIL << info.alias() << " cleaning cache..." << endl;
+    data::RecordId id = store.lookupRepository(info.alias());
+    
+    CombinedProgressData subprogrcv(progress);
+    
+    store.cleanRepository(id, subprogrcv);
+  }
+  
+  ////////////////////////////////////////////////////////////////////////////
+  
   /**
    * Reads RepoInfo's from a repo file.
    *
@@ -509,7 +537,7 @@ namespace zypp
         }
       }
       
-      cleanCache(info);
+      cleanCacheInternal( store, info);
     }
 
     MIL << info.alias() << " building cache..." << endl;
@@ -615,28 +643,14 @@ namespace zypp
 
     return repo::RepoType::NONE;
   }
-
+    
   ////////////////////////////////////////////////////////////////////////////
-
+  
   void RepoManager::cleanCache( const RepoInfo &info,
                                 const ProgressData::ReceiverFnc & progressrcv )
   {
-    ProgressData progress;
-    callback::SendReport<ProgressReport> report;
-    progress.sendTo( ProgressReportAdaptor( progressrcv, report ) );
-    progress.name(str::form(_("Cleaning repository '%s' cache"), info.alias().c_str()));
-    
     cache::CacheStore store(_pimpl->options.repoCachePath);
-    
-    if ( !store.isCached(info.alias()) )
-      return;
-   
-    MIL << info.alias() << " cleaning cache..." << endl;
-    data::RecordId id = store.lookupRepository(info.alias());
-    
-    CombinedProgressData subprogrcv(progress);
-    
-    store.cleanRepository(id, subprogrcv);
+    cleanCacheInternal( store, info, progressrcv );
     store.commit();
   }
 
@@ -922,7 +936,7 @@ namespace zypp
         CombinedProgressData subprogrcv(progress);
         
         // now delete it from cache
-        cleanCache(todelete, subprogrcv);
+        cleanCache( todelete, subprogrcv);
 
         MIL << todelete.alias() << " sucessfully deleted." << endl;
         return;
