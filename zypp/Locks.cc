@@ -189,7 +189,7 @@ struct AddLockToPool
     catch (regex_error & e)
     {
       ERR << "locks: " << regstr << " is not a valid regular expression: \"" << e.msg() << "\"" << endl;
-      ERR << "This is a bug, please file a bug report against libzypp-zmd-backend" << endl;
+      ERR << "This is a bug, please file a bug report against libzypp" << endl;
       // ignore this lock and continue
       return true;;
     }
