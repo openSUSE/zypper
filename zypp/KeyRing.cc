@@ -570,7 +570,7 @@ namespace zypp
       str::smatch what;
       if(str::regex_search(line, what, rxNoKey))
       {
-        if ( what.size() > 1 )
+        if ( what.size() >= 1 )
           id = what[1];
         //dumpRegexpResults(what);
       }
