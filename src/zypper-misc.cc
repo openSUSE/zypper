@@ -305,8 +305,10 @@ void mark_by_capability (bool install_not_delete,
 			 const string &capstr )
 {
   Capability cap = safe_parse_cap (kind, capstr);
-
+  
   if (cap != Capability::noCap) {
+    cout_vv << "Capability: " << cap << endl;
+
     Resolver_Ptr resolver = zypp::getZYpp()->resolver();
     if (install_not_delete) {
       cerr_vv << "Adding requirement " << cap << endl;
@@ -402,6 +404,10 @@ bool show_problems ()
   if (!no_problem) {
     stm << format (_("%s Problems:")) % rproblems.size() << endl;
   }
+  else {
+    stm << _("Specified capability not found") << endl;
+    return false;
+  }
   for (i = b; i != e; ++i) {
     stm << _("Problem: ") << (*i)->description () << endl;
   }
@@ -419,20 +425,59 @@ bool show_problems ()
   return retry;
 }
 
-typedef map<KindOf<Resolvable>,set<string> > KindToStringSet;
-
+typedef map<KindOf<Resolvable>,set<ResObject::constPtr> > KindToResObjectSet;
 
 void show_summary_resolvable_list(const string & label,
-                                  KindToStringSet::const_iterator it)
+                                  KindToResObjectSet::const_iterator it)
 {
   cout << endl << label << endl;
 
-  cout << " ";
-  for (set<string>::const_iterator nameit = it->second.begin();
-      nameit != it->second.end(); ++nameit)
-    cout << *nameit << " ";
+  // get terminal width from COLUMNS env. var.
+  unsigned cols = 0, cols_written = 0;
+  const char *cols_s = getenv("COLUMNS");
+  string cols_str("80");
+  if (cols_s != NULL)
+    cols_str = cols_s;
+  str::strtonum (cols_str, cols);
+  if (cols == 0)
+    cols = 77;
 
-  cout << endl;
+#define INDENT "  "
+
+  for (set<ResObject::constPtr>::const_iterator resit = it->second.begin();
+      resit != it->second.end(); ++resit)
+  {
+    ResObject::constPtr res(*resit);
+
+    if (gSettings.verbosity == 0)
+    {
+      // watch the terminal widht
+      if (cols_written + res->name().size() + 1  > cols)
+      {
+        cout << endl;
+        cols_written = 0;
+      }
+      if (cols_written = 0)
+        cout << INDENT;
+
+      cols_written += res->name().size();
+    }
+    else
+      cout << INDENT;
+
+    // resolvable name
+    cout << res->name() << (gSettings.verbosity ? "" : " ");
+    // plus edition and architecture for verbose output
+    cout_v << "-" << res->edition() << "." << res->arch();
+    // plus repo providing this package
+    if (res->repository() != Repository::noRepository)
+      cout_v << "  (" << res->repository().info().alias() << ")";
+    // new line after each package in the verbose mode
+    cout_v << endl;
+  }
+
+  if (gSettings.verbosity == 0)
+    cout << endl;
 }
 
 
@@ -449,10 +494,9 @@ int show_summary()
   MIL << "Pool contains " << God->pool().size() << " items." << std::endl;
   DBG << "Install summary:" << endl;
 
-  typedef map<KindOf<Resolvable>,set<ResObject::constPtr> > KindToResolvableSet;
   
-  KindToResolvableSet to_be_installed;
-  KindToResolvableSet to_be_removed;
+  KindToResObjectSet to_be_installed;
+  KindToResObjectSet to_be_removed;
 
   // collect resolvables to be installed/removed and set the return status
   for ( ResPool::const_iterator it = God->pool().begin(); it != God->pool().end(); ++it )
@@ -503,12 +547,12 @@ int show_summary()
   if (gSettings.machine_readable)
     return retv;
 
-  KindToStringSet toinstall;
-  KindToStringSet toupgrade;
-  KindToStringSet todowngrade;
-  KindToStringSet toremove;
+  KindToResObjectSet toinstall;
+  KindToResObjectSet toupgrade;
+  KindToResObjectSet todowngrade;
+  KindToResObjectSet toremove;
 
-  for (KindToResolvableSet::const_iterator it = to_be_installed.begin();
+  for (KindToResObjectSet::const_iterator it = to_be_installed.begin();
       it != to_be_installed.end(); ++it)
   {
     for (set<ResObject::constPtr>::const_iterator resit = it->second.begin();
@@ -524,9 +568,9 @@ int show_summary()
         if (res->name() == (*rmit)->name())
         {
           if (res->edition() > (*rmit)->edition())
-            toupgrade[res->kind()].insert(res->name());
+            toupgrade[res->kind()].insert(res);
           else
-            todowngrade[res->kind()].insert(res->name());
+            todowngrade[res->kind()].insert(res);
           
           to_be_removed[res->kind()].erase(*rmit);
           upgrade_downgrade = true;
@@ -535,18 +579,18 @@ int show_summary()
       }
       
       if (!upgrade_downgrade)
-        toinstall[res->kind()].insert(res->name());
+        toinstall[res->kind()].insert(res);
     }
   }
 
-  for (KindToResolvableSet::const_iterator it = to_be_removed.begin();
+  for (KindToResObjectSet::const_iterator it = to_be_removed.begin();
       it != to_be_removed.end(); ++it)
     for (set<ResObject::constPtr>::const_iterator resit = it->second.begin();
         resit != it->second.end(); ++resit)
-      toremove[it->first].insert((*resit)->name());
+      toremove[it->first].insert(*resit);
 
   // show summary
-  for (KindToStringSet::const_iterator it = toupgrade.begin();
+  for (KindToResObjectSet::const_iterator it = toupgrade.begin();
       it != toupgrade.end(); ++it)
   {
     string title = boost::str(format(_PL(
@@ -558,7 +602,7 @@ int show_summary()
     show_summary_resolvable_list(title, it);
   }
 
-  for (KindToStringSet::const_iterator it = todowngrade.begin();
+  for (KindToResObjectSet::const_iterator it = todowngrade.begin();
       it != todowngrade.end(); ++it)
   {
     string title = boost::str(format(_PL(
@@ -570,7 +614,7 @@ int show_summary()
     show_summary_resolvable_list(title, it);
   }
 
-  for (KindToStringSet::const_iterator it = toinstall.begin();
+  for (KindToResObjectSet::const_iterator it = toinstall.begin();
       it != toinstall.end(); ++it)
   {
     string title = boost::str(format(_PL(
@@ -582,7 +626,7 @@ int show_summary()
     show_summary_resolvable_list(title, it);
   }
 
-  for (KindToStringSet::const_iterator it = toremove.begin();
+  for (KindToResObjectSet::const_iterator it = toremove.begin();
       it != toremove.end(); ++it)
   {
     string title = boost::str(format(_PL(
@@ -656,8 +700,6 @@ void load_repo_resolvables(bool to_pool)
     if (! it->enabled())
       continue;     // #217297
 
-    Repository repository;
-
     try 
     {
       // if there is no metadata locally
@@ -674,10 +716,8 @@ void load_repo_resolvables(bool to_pool)
                          % repo.alias() << endl;
         manager.buildCache(repo);
       }
-      // TranslatorExplanation speaking of a repository
-      //cout_n << format(_("Reading repository %s...")) % repo.alias() << flush;
-      repository = manager.createFromCache(repo);
 
+      Repository repository(manager.createFromCache(repo));
       ResStore store = repository.resolvables();
       cout_v << " " << format(_("(%d resolvables found)")) % store.size() << endl;
 
