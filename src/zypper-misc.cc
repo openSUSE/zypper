@@ -552,6 +552,8 @@ int show_summary()
   KindToResObjectSet todowngrade;
   KindToResObjectSet toremove;
 
+  // iterate the to_be_installed to find installs/upgrades/downgrades + size info
+  ByteCount download_size, new_installed_size;
   for (KindToResObjectSet::const_iterator it = to_be_installed.begin();
       it != to_be_installed.end(); ++it)
   {
@@ -571,6 +573,8 @@ int show_summary()
             toupgrade[res->kind()].insert(res);
           else
             todowngrade[res->kind()].insert(res);
+
+          new_installed_size += res->size() - (*rmit)->size();
           
           to_be_removed[res->kind()].erase(*rmit);
           upgrade_downgrade = true;
@@ -579,7 +583,12 @@ int show_summary()
       }
       
       if (!upgrade_downgrade)
+      {
         toinstall[res->kind()].insert(res);
+        new_installed_size += res->size();
+      }
+
+      download_size += res->downloadSize();
     }
   }
 
@@ -587,7 +596,10 @@ int show_summary()
       it != to_be_removed.end(); ++it)
     for (set<ResObject::constPtr>::const_iterator resit = it->second.begin();
         resit != it->second.end(); ++resit)
+    {
       toremove[it->first].insert(*resit);
+      new_installed_size -= (*resit)->size();
+    }
 
   // show summary
   for (KindToResObjectSet::const_iterator it = toupgrade.begin();
@@ -639,6 +651,23 @@ int show_summary()
   }
 
   cout << endl;
+
+  cout_n << format(_("Overall download size: %s.")) % download_size;
+  cout_n << " ";
+  if (new_installed_size > 0)
+    // TrasnlatorExplanation %s will be substituted by a byte count e.g. 212 K
+    cout_n << format(_("After the operation, additional %s will be used."))
+        % new_installed_size.asString(0,1,1);
+  else
+  {
+    // get the absolute size
+    ByteCount abs;
+    abs = (-new_installed_size);
+    // TrasnlatorExplanation %s will be substituted by a byte count e.g. 212 K 
+    cout_n << format(_("After the operation, %s will be freed."))
+        % abs.asString(0,1,1);
+  }
+  cout_n << endl;
 
   return retv;
 }
