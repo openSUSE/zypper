@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Sun Aug 12 16:27:41 CEST 2007 - jkupec@suse.cz
+
+- user-friendly install summary (FATE #302152) - try also verbose
+  output (-v)
+- r6621
+- 0.8.10
+
+-------------------------------------------------------------------
 Fri Aug 10 16:22:24 CEST 2007 - dmacvicar@suse.de
 
 - apply persistant locks on establish
