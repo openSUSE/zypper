@@ -3,6 +3,7 @@
 #include <boost/format.hpp>
 #include <boost/logic/tribool_io.hpp>
 
+#include <zypp/Edition.h>
 #include <zypp/Patch.h>
 #include <zypp/Package.h>
 #include <zypp/SrcPackage.h>
@@ -160,6 +161,20 @@ static std::string xml_escape( const std::string &text )
 	return parser.escape(text);
 }
 
+struct VersionGetter
+{
+  Edition edition;
+  bool found;
+  
+  VersionGetter() : found(false) {}
+
+  bool operator()(const zypp::PoolItem& item)
+  {
+    edition = item.resolvable()->edition();
+    found = true;
+    return false; // don't iterate further
+  }
+};
 
 // on error print a message and return noCap
 Capability safe_parse_cap (const ResObject::Kind &kind, const string & capstr) {
@@ -179,6 +194,25 @@ Capability safe_parse_cap (const ResObject::Kind &kind, const string & capstr) {
       {
         new_capstr.insert(op_pos, " ");
         cout_vv << "new capstr: " << new_capstr << endl;
+      }
+    }
+    // if we are about to install stuff and
+    // if this is not a candidate for a version capability, take it like
+    // a package name and check if it is already installed
+    else if (command == ZypperCommand::INSTALL)
+    {
+      VersionGetter vg;
+      invokeOnEach(
+          God->pool().byNameBegin(capstr),
+          God->pool().byNameEnd(capstr),
+          resfilter::ByKind(kind),
+          functor::functorRef<bool,const zypp::PoolItem&> (vg)
+      );
+      if (vg.found)
+      {
+        new_capstr = capstr + ">" + vg.edition.asString();
+        cout_vv << "installed resolvable named " << capstr
+          << " found, changing capability to " << new_capstr << endl;
       }
     }
 
