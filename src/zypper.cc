@@ -721,17 +721,15 @@ int one_command(int argc, char **argv)
   catch (Exception & excpt_r) {
     ZYPP_CAUGHT (excpt_r);
     ERR  << "A ZYpp transaction is already in progress." << endl;
+    string msg = _("A ZYpp transaction is already in progress."
+        " This means, there is another application using libzypp library for"
+        " package management running. All such applications must be closed before"
+        " using this command.");
 
-		if ( gSettings.machine_readable )
-    cout << "<message type=\"error\" text=\"" <<  _("A ZYpp transaction is already in progress."
-  	      "This means, there is another application using libzypp library for"
-    	    "package management running. All such applications must be closed before"
-      	  "using this command.") << "\">" <<  endl;
-		else
-	    cerr << _("A ZYpp transaction is already in progress."
-  	      "This means, there is another application using libzypp library for"
-    	    "package management running. All such applications must be closed before"
-      	  "using this command.") << endl;
+    if ( gSettings.machine_readable )
+      cout << "<message type=\"error\" text=\"" << msg  << "\">" <<  endl;
+    else
+      cerr << msg << endl;
 
     return ZYPPER_EXIT_ERR_ZYPP;
   }
