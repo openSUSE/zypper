@@ -13,6 +13,7 @@
 #include <zypp/CapFactory.h>
 #include <zypp/RepoInfo.h>
 
+#include "zypper-command.h"
 
 #define ZYPP_CHECKPATCHES_LOG "/var/log/zypper.log"
 #undef  ZYPP_BASE_LOGGER_LOGGROUP
@@ -129,6 +130,7 @@ struct RuntimeData
 extern RuntimeData gData;
 extern Settings gSettings;
 extern std::ostream no_stream;
+extern ZypperCommand command;
 
 #define VERBOSITY_NORMAL 0
 #define VERBOSITY_MEDIUM 1

@@ -48,6 +48,7 @@ RuntimeData gData;
 Settings gSettings;
 parsed_opts gopts; // global options
 parsed_opts copts; // command options
+ZypperCommand command(ZypperCommand::NONE);
 
 ostream no_stream(NULL);
 
@@ -83,7 +84,7 @@ bool ghelp = false;
  * \returns ZypperCommand object representing the command or ZypperCommand::NONE
  *          if an unknown command has been given. 
  */
-ZypperCommand process_globals(int argc, char **argv)
+void process_globals(int argc, char **argv)
 {
   static struct option global_options[] = {
     {"help",            no_argument,       0, 'h'},
@@ -104,7 +105,7 @@ ZypperCommand process_globals(int argc, char **argv)
   // parse global options
   gopts = parse_options (argc, argv, global_options);
   if (gopts.count("_unknown"))
-    return ZypperCommand::NONE;
+    return;
 
   static string help_global_options = _("  Options:\n"
     "\t--help, -h\t\tHelp.\n"
@@ -199,7 +200,6 @@ ZypperCommand process_globals(int argc, char **argv)
 
   // get command
 
-  ZypperCommand command(ZypperCommand::NONE_e);
   try
   {
     if (optind < argc)
@@ -230,13 +230,10 @@ ZypperCommand process_globals(int argc, char **argv)
     else
       cerr << _("Try -h for help.") << endl;
   }
-
-  //cerr_vv << "COMMAND: " << command << endl;
-  return command;
 }
 
 /// process one command from the OS shell or the zypper shell
-int one_command(const ZypperCommand & command, int argc, char **argv)
+int one_command(int argc, char **argv)
 {
   // === command-specific options ===
 
@@ -1395,11 +1392,12 @@ ostream& report_a_bug (ostream& stm) {
 
 /// process one command from the OS shell or the zypper shell
 // catch unexpected exceptions and tell the user to report a bug (#224216)
-int safe_one_command(const ZypperCommand & command, int argc, char **argv)
+int safe_one_command(int argc, char **argv)
 {
   int ret = ZYPPER_EXIT_ERR_BUG;
   try {
-    ret = one_command (command, argc, argv);
+    ret = one_command (argc, argv);
+    command = ZypperCommand::NONE;
   }
   catch (const Exception & ex) {
     ZYPP_CAUGHT(ex);
@@ -1488,7 +1486,7 @@ void command_shell ()
         else if (command == ZypperCommand::SHELL)
           cout << _("You already are running zypper's shell.") << endl;
         else
-          safe_one_command (command, sh_argc, sh_argv);
+          safe_one_command (sh_argc, sh_argv);
       }
       catch (Exception & e)
       {
@@ -1528,7 +1526,7 @@ int main(int argc, char **argv)
   MIL << "Hi, me zypper " VERSION " built " << __DATE__ << " " <<  __TIME__ << endl;
 
   // parse global options and the command
-  ZypperCommand command = process_globals (argc, argv);
+  process_globals (argc, argv);
   switch(command.toEnum())
   {
   case ZypperCommand::SHELL_e:
@@ -1539,7 +1537,7 @@ int main(int argc, char **argv)
     return ZYPPER_EXIT_ERR_SYNTAX;
 
   default:
-    return safe_one_command(command, argc, argv);
+    return safe_one_command(argc, argv);
   }
 
   cerr_v << "This line should never be reached." << endl;
