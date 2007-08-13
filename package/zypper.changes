@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Aug 13 15:47:56 CEST 2007 - tgoettlicher@suse.de
+
+- removed restart message from xml (#298942)
+- r6626
+
+-------------------------------------------------------------------
 Sun Aug 12 16:27:41 CEST 2007 - jkupec@suse.cz
 
 - user-friendly install summary (FATE #302152) - try also verbose
