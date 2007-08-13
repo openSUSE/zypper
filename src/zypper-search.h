@@ -18,6 +18,7 @@
 #include <zypp/base/Hash.h>
 
 #include "zypper.h"
+#include "zypper-getopt.h"
 #include "zypper-tabulator.h"
 
 extern Settings gSettings;
@@ -322,7 +323,9 @@ struct DuplicateFilter {
   DuplicateFilter(IdCache & idcache) : _idcache(&idcache) {}
 
   bool operator()(const zypp::PoolItem & pi) const {
-    return !(pi.status().isInstalled() && _idcache->contains(pi));
+    //! \todo filter out those language resolvables
+    return !(pi.status().isInstalled()
+        && (_idcache->contains(pi) || copts.count("repo")));
   }
 };
 
