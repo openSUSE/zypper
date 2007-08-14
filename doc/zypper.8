@@ -251,9 +251,13 @@ Ignore query string in the URI
 .B repos (lr)
 List all defined repositories.
 .IP
-Following data are printed for each source found: Enabled (whether the source is enabled), Refresh (whether autorefresh is enabled for the source), Type (YaST, YUM, ...), Name, and URI.
-.IP
-rug compatibility mode: if \fI-r\fR global option is set, zypper doesn't include 'Enabled' and 'Refresh' columns and prints rug's 'Status' column with values "Active" or "Disabled" instead.
+Following data are printed for each repository found: Enabled (whether the repository is enabled), Refresh (whether autorefresh is enabled for the repository), Type (YaST, YUM, Plaindir), Name, and URI.
+.TP
+.I \-e, \-\-export <FILE|->
+This option causes zypper to write repository definition of all defined
+repositories into a single file in repo file format.
+If '\-' is specified instead of a file name,
+the repositories will be written to the standard output.   
 
 .TP
 .B renamerepo (nr) <alias> <new-alias>
@@ -318,7 +322,7 @@ Terse output for machine consumption.
 Specifies table style to use. Table style is identified by an integer number. TODO
 .TP
 .I \-r, \-\-rug\-compatible
-Turns on rug compatibility. See compatibility notes next to affected commands.
+Turns on rug compatibility. See section COMPATIBILITY WITH RUG for details.
 .TP
 .I \-n, \-\-non\-interactive
 Switches to non-interactive mode. In this mode zypper doesn't ask user to type answers to various prompts, but uses default answers automatically. The behaviour of this option is somewhat different than that of options like '--yes', since zypper can answer different answers to different questions. The answers also depend on other options like '--no-gpg-checks'.
@@ -381,8 +385,9 @@ Returned after a successfull installation of a patch which requires restart of t
 .SH "COMPATIBILITY WITH RUG"
 .LP
 zypper is designed to be compatible with rug, which is a command\-line interface to the ZENworks Linux Management (ZLM) agent. Compared to rug, zypper does not need the ZLM daemon to run, and is intented to provide more and improved functionality. Following is a list of zypper-rug command aliases, supported rug command line options, and compatibility notes. See also compatibility notes in descriptions of zypper commands. 
+.LP
+To enable rug compatible behaviour, use the \-r or \-\-rug\-compatible global option with each command.
 
-.LP 
 .SS Service Management Commands
 .LP
 ZENworks distinguishes services and catalogs. A service is
@@ -402,6 +407,10 @@ zypper removerepo (rr)
 .TP
 .I rug service-list (sl)
 zypper repos (lr)
+
+.IP
+ zypper doesn't include 'Enabled' and 'Refresh' columns and prints rug's 'Status' column with values "Active" or "Disabled" instead.
+
 
 .SS Package Management Commands
 

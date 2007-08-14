@@ -296,6 +296,18 @@ static void print_repo_list( const std::list<zypp::RepoInfo> &repos )
 
 // ----------------------------------------------------------------------------
 
+void print_repos_to(const std::list<zypp::RepoInfo> &repos, ostream & out)
+{
+  for (std::list<RepoInfo>::const_iterator it = repos.begin();
+       it !=  repos.end(); ++it)
+  {
+    it->dumpRepoOn(out);
+    out << endl;
+  }
+}
+
+// ----------------------------------------------------------------------------
+
 void list_repos()
 {
   RepoManager manager;
@@ -313,7 +325,40 @@ void list_repos()
     exit(ZYPPER_EXIT_ERR_ZYPP);
   }
 
-  print_repo_list(repos);
+  // export to file or stdout in repo file format
+  if (copts.count("export"))
+  {
+    string filename_str = copts["export"].front();
+    if (filename_str == "-")
+    {
+      print_repos_to(repos, cout);
+    }
+    else
+    {
+      if (filename_str.rfind(".repo") == string::npos)
+        filename_str += ".repo";
+
+      Pathname file(filename_str);
+      std::ofstream stream(file.c_str());
+      if (!stream)
+      {
+        cerr << format(_("Can't open %s for writing. Maybe you don't have write permissions?"))
+            % file.asString() << endl;
+        exit(ZYPPER_EXIT_ERR_INVALID_ARGS);
+      }
+      else
+      {
+        print_repos_to(repos, stream);
+        cout << format(
+            _("Repositories have been successfully exported to %s."))
+            % (file.absolute() ? file.asString() : file.asString().substr(2))
+          << endl;
+      }
+    }
+  }
+  // print repo list as table
+  else
+    print_repo_list(repos);
 }
 
 // ----------------------------------------------------------------------------

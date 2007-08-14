@@ -21,7 +21,6 @@
 #include <boost/logic/tribool.hpp>
 
 #include <zypp/base/Logger.h>
-#include <zypp/zypp_detail/ZYppReadOnlyHack.h>
 #include <zypp/repo/RepoException.h>
 
 #include "zypper.h"
@@ -359,6 +358,7 @@ int one_command(int argc, char **argv)
   }
   else if (command == ZypperCommand::LIST_REPOS) {
     static struct option service_list_options[] = {
+      {"export", required_argument, 0, 'e'},
       {"help", no_argument, 0, 'h'},
       {0, 0, 0, 0}
     };
@@ -368,7 +368,8 @@ int one_command(int argc, char **argv)
       "\n"
       "List all defined repositories.\n"
       "\n"
-      "This command has no additional options.\n"
+      "  Command options:\n"
+      "-e, --export <FILE.repo>  Export all defined repositories as a single local .repo file\n"
     );
   }
   else if (command == ZypperCommand::REMOVE_REPO) {
@@ -713,8 +714,8 @@ int one_command(int argc, char **argv)
 
   // here come commands that need the lock
   try {
-    if (command == ZypperCommand::LIST_REPOS)
-      zypp_readonly_hack::IWantIt (); // #247001
+//    if (command == ZypperCommand::LIST_REPOS)
+//      zypp_readonly_hack::IWantIt (); // #247001
 
     God = zypp::getZYpp();
   }
