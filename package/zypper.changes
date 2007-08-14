@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Tue Aug 14 17:45:12 CEST 2007 - jkupec@suse.cz
+
+- forgotten --catalog alias for --repo option added for rug
+  compatibility (support fo repo numbers as --repo argument still
+  pending)
+- r6645
+
+-------------------------------------------------------------------
 Tue Aug 14 13:28:58 CEST 2007 - tgoettlicher@suse.de
 
 - fixed missing </stream> tag in xml output
