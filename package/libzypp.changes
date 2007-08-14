@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Tue Aug 14 15:54:15 CEST 2007 - schubi@suse.de
+
+- Prioritized delete request by the user BEFORE delete requests due
+  missing dependencies or conflicting dependencies. Bug 298322 
+- rev 6640
+- version 3.15.0
+
+-------------------------------------------------------------------
 Fri Aug 10 20:49:20 CEST 2007 - jkupec@suse.cz
 
 - support also "Plaindir" as valid repo type name (#298622)
