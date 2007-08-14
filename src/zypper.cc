@@ -1404,6 +1404,10 @@ int safe_one_command(int argc, char **argv)
     cerr << ex.asUserString() << endl;
    	report_a_bug(cerr);
   }
+
+	if ( gSettings.machine_readable )
+  	cout << "</stream>" << endl;
+
   return ret;
 }
 
@@ -1507,9 +1511,6 @@ int main(int argc, char **argv)
     }
   } say_goodbye __attribute__ ((__unused__));
 
-  if ( gSettings.machine_readable )
-    cout << "</stream>" << endl;
-  
 	// set locale
   setlocale (LC_ALL, "");
   bindtextdomain (PACKAGE, LOCALEDIR);
