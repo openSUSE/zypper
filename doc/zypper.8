@@ -47,7 +47,7 @@ A resolvable is a package, patch, pattern, language, or a product.
 Displays full info for the specified packages.
 
 .TP
-.B install (in) <capability> ...
+.B install (in) [options] <capability> ...
 Install or update resolvables.
 
 Capability is: NAME, or "NAME[OP<EDITION>]", where OP is < <= = >= > and
@@ -119,7 +119,10 @@ Create solver test case for debugging. See the install command for details.
 
 .TP
 .B update (up) [options]
-Update all installed resolvables with newer versions, where applicable.
+Update all installed resolvables with newer versions, where applicable. To
+update individual packages, use zypper install <name> (see documentation of
+the install command for details).
+
 .TP
 \fI\-t, -\-type\fR <resolvable_type>
 Type of resolvable (default: patch)
