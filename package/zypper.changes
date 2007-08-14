@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Tue Aug 14 19:33:57 CEST 2007 - jkupec@suse.cz
+
+- zypper repos --export <FILE|-> added for exporting definitions of
+  repositories into a single repo file (FATE #301744)
+- improved zypper install command description in the man (#284725)
+- r6650
+
+-------------------------------------------------------------------
 Tue Aug 14 17:45:12 CEST 2007 - jkupec@suse.cz
 
 - forgotten --catalog alias for --repo option added for rug
