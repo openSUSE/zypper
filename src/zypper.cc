@@ -1111,8 +1111,6 @@ int one_command(int argc, char **argv)
 
   // --------------------------( search )-------------------------------------
 
-  // TODO -c, --catalog option
-
   else if (command == ZypperCommand::SEARCH)
   {
     ZyppSearchOptions options;

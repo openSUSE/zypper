@@ -131,7 +131,13 @@ static int do_init_repos()
 {
   RepoManager manager;
 
-  string specific_repo = copts.count( "repo" ) ? copts["repo"].front() : "";
+  string specific_repo = copts.count("repo") ? copts["repo"].front() : "";
+  
+  // rug compatibility
+  //! \todo support repo #
+  if (specific_repo.empty())
+    specific_repo = copts.count("catalog") ? copts["catalog"].front() : "";
+
   if (!specific_repo.empty())
   {
     MIL << "--repo set to '" << specific_repo
