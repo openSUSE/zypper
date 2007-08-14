@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Aug 14 13:28:58 CEST 2007 - tgoettlicher@suse.de
+
+- fixed missing </stream> tag in xml output
+- r6635
+
+-------------------------------------------------------------------
 Mon Aug 13 18:07:38 CEST 2007 - jkupec@suse.cz
 
 - providing correct capability for installing a resolvable(#298322)
