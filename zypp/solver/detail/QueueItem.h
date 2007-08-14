@@ -61,6 +61,7 @@ typedef enum {
 typedef std::list<QueueItem_Ptr> QueueItemList;
 
 #define CMP(a,b) (((a) < (b)) - ((b) < (a)))
+#define DEFAULTPRIO 10
 
 ///////////////////////////////////////////////////////////////////
 //

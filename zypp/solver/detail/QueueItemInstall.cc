@@ -265,6 +265,8 @@ struct UninstallConflicting
 
 	QueueItemUninstall_Ptr uninstall_qitem = new QueueItemUninstall (_context->pool(), conflicting_item, QueueItemUninstall::CONFLICT);
 	uninstall_qitem->setDueToConflict ();
+	uninstall_qitem->setPriority(0); // evaluate explizit uninstall first (greater priority) in order
+	                                  // to be sure, that this item still exist after the solver run would be finished. Bug 273918
 	log_info = new ResolverInfoConflictsWith (conflicting_item, _install_item,
 						  conflicting_cap);
 	uninstall_qitem->addInfo (log_info);

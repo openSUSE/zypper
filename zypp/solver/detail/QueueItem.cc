@@ -75,7 +75,7 @@ operator<<( ostream & os, const QueueItemList & itemlist )
 QueueItem::QueueItem (QueueItemType type, const ResPool & pool)
     : _type (type)
     , _pool (pool)
-    , _priority (0)
+    , _priority (DEFAULTPRIO)
     , _size (0)
 {
 }

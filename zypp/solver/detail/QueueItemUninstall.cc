@@ -123,7 +123,7 @@ QueueItemUninstall::setUnlink ()
     /* Reduce the priority so that unlink items will tend to get
        processed later.  We want to process unlinks as late as possible...
        this will make our "is this item in use" check more accurate. */
-    setPriority (0);
+    setPriority (1); // Should be one more then Uninstall due dependency errors (Conflict/Unfulfilled)
 
     return;
 }

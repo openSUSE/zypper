@@ -842,6 +842,8 @@ provider_done:;
 	if (explore_uninstall_branch && _requiring_item) {
 	    ResolverInfo_Ptr log_info;
 	    uninstall_item = new QueueItemUninstall (pool(), _requiring_item, QueueItemUninstall::UNSATISFIED);
+	    uninstall_item->setPriority(0); // evaluate explizit uninstall first (greater priority) in order
+	                                     // to be sure, that this item still exist after the solver run would be finished. Bug 273918	    
 	    uninstall_item->setCapability (_capability);
 
 	    if (_lost_item) {
