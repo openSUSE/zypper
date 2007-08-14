@@ -205,7 +205,7 @@ Capability safe_parse_cap (const ResObject::Kind &kind, const string & capstr) {
       invokeOnEach(
           God->pool().byNameBegin(capstr),
           God->pool().byNameEnd(capstr),
-          resfilter::ByKind(kind),
+          functor::chain(resfilter::ByKind(kind),resfilter::ByInstalled()),
           functor::functorRef<bool,const zypp::PoolItem&> (vg)
       );
       if (vg.found)
