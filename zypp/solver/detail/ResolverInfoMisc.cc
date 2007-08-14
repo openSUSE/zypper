@@ -156,7 +156,7 @@ ResolverInfoMisc::message (void) const
 	case RESOLVER_INFO_TYPE_REJECT_INSTALL: {
 	    // Translator: %s = name of packages,patch,...
 	    // TranslatorExplanation: Additional information to dependency solver result.
-	    msg = str::form (_("%s is scheduled to be installed, but this is not possible because of dependency problems."),
+	    msg = str::form (_("%s is scheduled to be installed, but this is impossible due to dependency problems."),
 			affected_str.c_str());
 	}
 	break;
@@ -164,7 +164,7 @@ ResolverInfoMisc::message (void) const
 	case RESOLVER_INFO_TYPE_INSTALL_TO_BE_UNINSTALLED: {
 	    // Translator: %s = name of package,patch,...
 	    // TranslatorExplanation: Additional information to dependency solver result.
-	    msg = str::form (_("Can't install %s since it is already marked as needing to be uninstalled"),
+	    msg = str::form (_("Can't install %s since it is already marked as needed to be uninstalled"),
 			 affected_str.c_str());
 	}
 	break;
@@ -176,7 +176,7 @@ ResolverInfoMisc::message (void) const
 	    // TranslatorExplanation: do only apply if the package to-be-fixed is actually installed.
 	    // TranslatorExplanation: Here a patch was selected for installation but the to-be-fixed
 	    // TranslatorExplanation: package is not installed.
-	    msg = str::form (_("Can't install %s since it is does not apply to this system."),
+	    msg = str::form (_("Can't install %s, because it does not apply to this system."),
 			affected_str.c_str());
 	}
 	break;
@@ -187,7 +187,7 @@ ResolverInfoMisc::message (void) const
 	    // other() = item 2 which has to be installed
 	    // other_capability() =
 	    // Translator: %s = name of package,patch,...
-	    msg = str::form (_("Can't install %s, since %s is already marked as needing to be installed"),
+	    msg = str::form (_("Can't install %s, because %s is already marked as needed to for installation"),
 			     affected_str.c_str(),
 			     toString (other()).c_str());
 	}
@@ -289,7 +289,7 @@ ResolverInfoMisc::message (void) const
 	    // TranslatorExplanation: We just found out that 'foo' is not provided by anything else (an alternative)
 	    // TranslatorExplanation: removal of this resolvable would therefore break dependency
 	    // TranslatorExplanation: This is an error message explaining that the resolvable cannot be uninstalled
-	    msg = str::form (_("There are no alternative installed providers of %s"), ResolverInfo::toString (_capability).c_str());
+	    msg = str::form (_("There are no alternative providers of %s installed"), ResolverInfo::toString (_capability).c_str());
 	    if (affected()) {
 		msg += " ";
 		// Translator: 1.%s = name of package,patch....
@@ -338,7 +338,7 @@ ResolverInfoMisc::message (void) const
 	    // Translator: 1.%s = name of package,patch,..., 2.%s = name of package,patch,...
 	    // TranslatorExample: Upgrade to foo to avoid removing bar is not possible
 	    // TranslatorExplanation: bar requires something from foo
-	    msg = str::form (_("Upgrade to %s to avoid removing %s is not possible."),
+	    msg = str::form (_("Upgrading to %s to avoid removing %s is not possible."),
 				    other_str.c_str(),
 				    affected_str.c_str());
 	}
@@ -487,7 +487,7 @@ ResolverInfoMisc::message (void) const
 	    // Translator: %s = name of package,patch,...
 	    // TranslatorExample: foo is required by other to-be-installed resolvable, so it won't be unlinked.
 	    // TranslatorExplanation: Cant uninstall foo since it is required by an to-be-installed resolvable
-	    msg = str::form (_("%s is required by other to-be-installed resolvable, so it won't be unlinked."),
+	    msg = str::form (_("%s is required by another resolvable selected for installation, so it won't be unlinked."),
 			     affected_str.c_str());
 	}
 	break;
@@ -504,7 +504,7 @@ ResolverInfoMisc::message (void) const
 	    // Translator: %s = name of package,patch,...
 	    // TranslatorExample: foo is required by other installed resolvable, so it won't be unlinked.
 	    // TranslatorExplanation: Cant uninstall foo since it is required by an installed resolvable
-	    msg = str::form (_("%s is required by other installed resolvable, so it won't be unlinked."),
+	    msg = str::form (_("%s is required by another installed resolvable, so it won't be unlinked."),
 			     affected_str.c_str());
 	}
 	break;
@@ -540,7 +540,7 @@ ResolverInfoMisc::message (void) const
 
 	    // Translator: 1.%s and 2.%s = Dependency; 4.%s = name of package,patch,...
 	    // TranslatorExample: A conflict over foo (bar) requires the removal of to-be-installed xyz
-	    msg = str::form(_("A conflict over %s (%s) requires the removal of to-be-installed %s"),
+	    msg = str::form(_("A conflict over %s (%s) requires the removal of %s which is scheduled for installation"),
 			    ResolverInfo::toString (_capability).c_str(),
 			    ResolverInfo::toString (_other_capability).c_str(),
 			    affected_str.c_str());

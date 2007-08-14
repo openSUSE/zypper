@@ -61,7 +61,7 @@ ResolverInfoMissingReq::message( ) const
     string affected_str = ResolverInfo::toString(affected());
 
     // Translator: 1.%s = name of package,patch,...; 2.%s = dependency
-    return str::form (_("%s is missing the requirement %s"),
+    return str::form (_("%s is lacking the requirement %s"),
 			    affected_str.c_str(),
 			    _missing.asString().c_str());
 }

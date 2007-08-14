@@ -60,7 +60,7 @@ ProblemSolutionIgnoreRequires::ProblemSolutionIgnoreRequires( ResolverProblem_Pt
 							      const Capability & capability)
     : ProblemSolution (parent, "", "")
 {
-	_description = _("Ignore this requirement generally");
+	_description = _("Generally ignore this requirement");
 	for (PoolItemList::const_iterator iter = itemList.begin();
 	     iter != itemList.end(); iter++) {
 	    addAction ( new InjectSolutionAction (*iter, capability, REQUIRES));
@@ -75,7 +75,7 @@ ProblemSolutionIgnoreArchitecture::ProblemSolutionIgnoreArchitecture( ResolverPr
 	_description = str::form(_("Install %s although it would change the architecture"),
 				 item->name().c_str());
 	// TranslatorExplanation %s = name of package, patch, selection ...	
-	_details = str::form(_("%s provides this dependency but would changed the architecture of the installed item"),
+	_details = str::form(_("%s provides this dependency, but would change the architecture of the installed item"),
 			    ResolverInfo::toString (item).c_str());
 	addAction ( new InjectSolutionAction (item, ARCHITECTURE));
 }

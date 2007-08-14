@@ -78,7 +78,7 @@ ProblemSolutionUninstall::ProblemSolutionUninstall( ResolverProblem_Ptr parent,
 						    PoolItemList & itemlist)
     : ProblemSolution (parent, "", "")
 {
-    _description = _("Do not install or delete concerning resolvables");
+    _description = _("Do not install or delete the resolvables concerned");
 
     for (PoolItemList::iterator iter = itemlist.begin();
 	 iter != itemlist.end(); iter++) {

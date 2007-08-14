@@ -48,7 +48,7 @@ ProblemSolutionAllBranches::ProblemSolutionAllBranches( ResolverProblem_Ptr pare
     : ProblemSolution (parent, "", "")
 {
     _description = _("Make a solver run with ALL possibilities.");
-    _details = _("Regarding all resolvables with compatible architecture.");
+    _details = _("Regarding all resolvables with a compatible architecture.");
 
     addAction ( new TransactionSolutionAction (ALLBRANCHES));
 }

@@ -1910,12 +1910,12 @@ void RpmDb::doInstallPackage( const Pathname & filename, unsigned flags, callbac
   {
     processConfigFiles(*it, Pathname::basename(filename), " saved as ",
                        // %s = filenames
-                       _("rpm saved %s as %s but it was impossible to determine the difference"),
+                       _("rpm saved %s as %s, but it was impossible to determine the difference"),
                        // %s = filenames
                        _("rpm saved %s as %s.\nHere are the first 25 lines of difference:\n"));
     processConfigFiles(*it, Pathname::basename(filename), " created as ",
                        // %s = filenames
-                       _("rpm created %s as %s but it was impossible to determine the difference"),
+                       _("rpm created %s as %s, but it was impossible to determine the difference"),
                        // %s = filenames
                        _("rpm created %s as %s.\nHere are the first 25 lines of difference:\n"));
   }

@@ -321,9 +321,9 @@ Resolver::problems (const bool ignoreValidSolution) const
     if (!_tryAllPossibilities       // a second run with ALL possibilities has not been tried 
 	&& skippedPossibilities) { // possible other solutions skipped
 	// give the user an additional solution for trying all branches
-	string what = _("No valid solution found with only resolvables of best architecture.");
-	string details = _("With this run only resolvables with the best architecture has been regarded.\n");
-	details = details + _("Regarding all possible resolvables takes time but can come to a valid result.");
+	string what = _("No valid solution found with just resolvables of best architecture.");
+	string details = _("With this run only resolvables with the best architecture have been regarded.\n");
+	details = details + _("Regarding all possible resolvables takes time, but can come to a valid result.");
 	ResolverProblem_Ptr problem = new ResolverProblem (what, details);		
 	problem->addSolution (new ProblemSolutionAllBranches (problem));
 	problems.push_back (problem);
@@ -435,7 +435,7 @@ Resolver::problems (const bool ignoreValidSolution) const
 		what = str::form (_("Cannot install %s"), who.c_str());
 		// TranslatorExplanation %s = capability		
 		details = str::form (_("None provides %s"), missing_req->capability().asString().c_str());
-		details += _("\nThere is no resource available which support this requirement.");
+		details += _("\nThere is no resource available which supports this requirement.");
 	    }
 	    break;
 
@@ -443,7 +443,7 @@ Resolver::problems (const bool ignoreValidSolution) const
 	    case RESOLVER_INFO_TYPE_INVALID_SOLUTION: {			// Marking this resolution attempt as invalid.
 		ResolverInfoMisc_constPtr misc_info = dynamic_pointer_cast<const ResolverInfoMisc>(info);
 		what = misc_info->message();
-		details = _("Due problems which are described above/below this resolution will not solve all dependencies");
+		details = _("Due to the problems described above/below, this resolution will not solve all dependencies");
 		// no solution available
 	    }
 	    break;
@@ -454,7 +454,7 @@ Resolver::problems (const bool ignoreValidSolution) const
 		for (ConflictMap::const_iterator it = collector.conflictMap.begin();
 		     it != collector.conflictMap.end(); ++it) {
 		    if (it->first == item) {
-			what = str::form (_("Cannot install %s because it is conflicting with %s"),
+			what = str::form (_("Cannot install %s, because it is conflicting with %s"),
 					  who.c_str(),
 					  it->second->name().c_str()) + "\n";
 			details = logAdditionalInfo(collector.additionalInfo, item);
@@ -688,7 +688,7 @@ Resolver::problems (const bool ignoreValidSolution) const
 	    case RESOLVER_INFO_TYPE_UNINSTALL_PROVIDER: {		// p provides c but is scheduled to be uninstalled
 		ResolverInfoMisc_constPtr misc_info = dynamic_pointer_cast<const ResolverInfoMisc>(info);
 		// TranslatorExplanation %s = name of package, patch, selection ...				
-		what =str::form (_("%s fulfil dependencies of %s but will be uninstalled"),
+		what =str::form (_("%s fulfills dependencies of %s but will be uninstalled"),
 				 misc_info->other()->name().c_str(),
 				 who.c_str());
 		details = misc_info->message();
@@ -698,7 +698,7 @@ Resolver::problems (const bool ignoreValidSolution) const
 	    case RESOLVER_INFO_TYPE_KEEP_PROVIDER: {		// p provides c but is scheduled to be kept
 		ResolverInfoMisc_constPtr misc_info = dynamic_pointer_cast<const ResolverInfoMisc>(info);
 		// TranslatorExplanation %s = name of package, patch, selection ...				
-		what =str::form (_("%s fulfil dependencies of %s but will be kept on your system"),
+		what =str::form (_("%s fulfills dependencies of %s but will be kept on your system"),
 				 misc_info->other()->name().c_str(),
 				 who.c_str());
 		details = misc_info->message();
@@ -716,7 +716,7 @@ Resolver::problems (const bool ignoreValidSolution) const
 	    case RESOLVER_INFO_TYPE_NOT_INSTALLABLE_PROVIDER: {		// p provides c but is uninstallable
 		ResolverInfoMisc_constPtr misc_info = dynamic_pointer_cast<const ResolverInfoMisc>(info);
 		// TranslatorExplanation %s = name of package, patch, selection ...				
-		what = str::form (_("Cannot install %s to fulfil the dependencies of %s"),
+		what = str::form (_("Cannot install %s to fulfill the dependencies of %s"),
 				  misc_info->other()->name().c_str(),
 				  who.c_str());
 		details = misc_info->message();
@@ -769,7 +769,7 @@ Resolver::problems (const bool ignoreValidSolution) const
 	    case RESOLVER_INFO_TYPE_UNINSTALL_TO_BE_INSTALLED: {	// p is to-be-installed, so it won't be unlinked.
 		ResolverInfoMisc_constPtr misc_info = dynamic_pointer_cast<const ResolverInfoMisc>(info);
 		// TranslatorExplanation %s = name of package, patch, selection ...				
-		what = str::form (_("%s will not be uninstalled cause it is still required"), who.c_str());
+		what = str::form (_("%s will not be uninstalled, because it is still required"), who.c_str());
 		details = misc_info->message();
 		// It is only an info --> no solution is needed				
 	    }
@@ -777,7 +777,7 @@ Resolver::problems (const bool ignoreValidSolution) const
 	    case RESOLVER_INFO_TYPE_UNINSTALL_INSTALLED: {		// p is required by installed, so it won't be unlinked.
 		ResolverInfoMisc_constPtr misc_info = dynamic_pointer_cast<const ResolverInfoMisc>(info);
 		// TranslatorExplanation %s = name of package, patch, selection ...				
-		what = str::form (_("%s will not be uninstalled cause it is still required"), who.c_str());		
+		what = str::form (_("%s will not be uninstalled, because it is still required"), who.c_str());		
 		details = misc_info->message() + "\n";
 		details += logAdditionalInfo(collector.additionalInfo, item);						
 
@@ -800,7 +800,7 @@ Resolver::problems (const bool ignoreValidSolution) const
 		
 		if (misc_info->trigger() == ResolverInfoMisc::OBSOLETE) {
 		    // TranslatorExplanation %s = name of package, patch, selection ...						    
-		    details = str::form (_("%s obsoletes %s. But %s cannot be deleted because it is locked."),
+		    details = str::form (_("%s obsoletes %s. But %s cannot be deleted, because it is locked."),
 					 misc_info->other()->name().c_str(),
 					 who.c_str(), who.c_str()) + "\n";
 		    details += logAdditionalInfo(collector.additionalInfo, item);						    
@@ -828,11 +828,11 @@ Resolver::problems (const bool ignoreValidSolution) const
 		ResolverInfoMisc_constPtr misc_info = dynamic_pointer_cast<const ResolverInfoMisc>(info);
 		// TranslatorExplanation %s = name of package, patch, selection ...
 		if (misc_info->other())
-		    what = str::form (_("Cannot install %s because it is conflicting with %s"),
+		    what = str::form (_("Cannot install %s, because it is conflicting with %s"),
 				      who.c_str(),
 				      misc_info->other()->name().c_str());
 		else
-		    what = str::form (_("Cannot install %s because it is conflicting"),
+		    what = str::form (_("Cannot install %s, because it is conflicting"),
 				      who.c_str());
 		details = misc_info->message() + "\n";
 		details += logAdditionalInfo(collector.additionalInfo, item);
