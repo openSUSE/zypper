@@ -1,11 +1,16 @@
 -------------------------------------------------------------------
 Wed Aug 15 13:57:04 CEST 2007 - jkupec@suse.cz
 
-- repo.refresh.delay=<minutes> support added to delay next check
-  & refresh until the specified number of minutes has passed from
-  the last check or refresh (FATE #301991).
+- repo.refresh.delay=<minutes> (ZConfig, "main" section) support
+  added to delay next check & refresh until the specified number of
+  minutes has passed from the last check or refresh (FATE #301991).
   Revisions: 6654, 6656, 6666, and 6667.
+- filesystem::touch(Pathname) added (r6666)
+- RepoManager::touchIndexFile(RepoInfo) added
+- RepoManager::checkIfToRefreshMetadata(RepoInfo,Url,policy):
+  decision to do the refresh moved to this public method.
 - r6667
+- version 3.15.0
 
 -------------------------------------------------------------------
 Wed Aug 15 12:38:26 CEST 2007 - schubi@suse.de
@@ -20,7 +25,6 @@ Tue Aug 14 15:54:15 CEST 2007 - schubi@suse.de
 - Prioritized delete request by the user BEFORE delete requests due
   missing dependencies or conflicting dependencies. Bug 298322 
 - rev 6640
-- version 3.15.0
 
 -------------------------------------------------------------------
 Fri Aug 10 20:49:20 CEST 2007 - jkupec@suse.cz
