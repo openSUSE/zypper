@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Wed Aug 15 20:13:47 CEST 2007 - jkupec@suse.cz
+
+- providing correct capability for installing a resolvable(#298322)
+  fixed for real this time
+- r6686
+
+-------------------------------------------------------------------
 Tue Aug 14 19:33:57 CEST 2007 - jkupec@suse.cz
 
 - zypper repos --export <FILE|-> added for exporting definitions of
