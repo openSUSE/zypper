@@ -347,6 +347,105 @@ namespace zypp
     return status;
   }
 
+  bool RepoManager::checkIfToRefreshMetadata( const RepoInfo &info,
+                                              const Url &url,
+                                              RawMetadataRefreshPolicy policy )
+  {
+    assert_alias(info);
+
+    RepoStatus oldstatus;
+    RepoStatus newstatus;
+
+    try
+    {
+      MIL << "Going to try to check whether refresh is needed for " << url << endl;
+
+      repo::RepoType repokind = info.type();
+
+      // if the type is unknown, try probing.
+      switch ( repokind.toEnum() )
+      {
+        case RepoType::NONE_e:
+          // unknown, probe it
+          repokind = probe(url);
+        break;
+        default:
+        break;
+      }
+
+      Pathname rawpath = rawcache_path_for_repoinfo( _pimpl->options, info );
+      filesystem::assert_dir(rawpath);
+      oldstatus = metadataStatus(info);
+      
+      // create temp dir as sibling of rawpath
+      filesystem::TmpDir tmpdir( filesystem::TmpDir::makeSibling( rawpath ) );
+
+      if ( ( repokind.toEnum() == RepoType::RPMMD_e ) ||
+           ( repokind.toEnum() == RepoType::YAST2_e ) )
+      {
+        MediaSetAccess media(url);
+        shared_ptr<repo::Downloader> downloader_ptr;
+
+        if ( repokind.toEnum() == RepoType::RPMMD_e )
+          downloader_ptr.reset(new yum::Downloader(info.path()));
+        else
+          downloader_ptr.reset( new susetags::Downloader(info.path()));
+
+        RepoStatus newstatus = downloader_ptr->status(media);
+        bool refresh = false;
+        if ( oldstatus.checksum() == newstatus.checksum() )
+        {
+          MIL << "repo has not changed" << endl;
+          if ( policy == RefreshForced )
+          {
+            MIL << "refresh set to forced" << endl;
+            refresh = true;
+          }
+        }
+        else
+        {
+          MIL << "repo has changed, going to refresh" << endl;
+          refresh = true;
+        }
+
+        return refresh;
+      }
+      else if ( repokind.toEnum() == RepoType::RPMPLAINDIR_e )
+      {
+        RepoStatus newstatus = parser::plaindir::dirStatus(url.getPathName());
+        bool refresh = false;
+        if ( oldstatus.checksum() == newstatus.checksum() )
+        {
+          MIL << "repo has not changed" << endl;
+          if ( policy == RefreshForced )
+          {
+            MIL << "refresh set to forced" << endl;
+            refresh = true;
+          }
+        }
+        else
+        {
+          MIL << "repo has changed, going to refresh" << endl;
+          refresh = true;
+        }
+
+        return refresh;
+      }
+      else
+      {
+        ZYPP_THROW(RepoUnknownTypeException());
+      }
+    }
+    catch ( const Exception &e )
+    {
+      ZYPP_CAUGHT(e);
+      ERR << "refresh check failed for " << url << endl;
+      ZYPP_RETHROW(e);
+    }
+    
+    return true; // default
+  }
+
   void RepoManager::refreshMetadata( const RepoInfo &info,
                                      RawMetadataRefreshPolicy policy,
                                      const ProgressData::ReceiverFnc & progress )
@@ -354,8 +453,6 @@ namespace zypp
     assert_alias(info);
     assert_urls(info);
 
-    RepoStatus oldstatus;
-    RepoStatus newstatus;
     // try urls one by one
     for ( RepoInfo::urls_const_iterator it = info.baseUrlsBegin(); it != info.baseUrlsEnd(); ++it )
     {
@@ -363,7 +460,12 @@ namespace zypp
       {
         Url url(*it);
 
-        MIL << "Going to try to check and refresh metadata from " << url << endl;
+        // check whether to refresh metadata
+        // if the check fails for this url, it throws, so another url will be checked
+        if (!checkIfToRefreshMetadata(info, url, policy))
+          return;
+
+        MIL << "Going to refresh metadata from " << url << endl;
 
         repo::RepoType repokind = info.type();
 
@@ -380,7 +482,6 @@ namespace zypp
 
         Pathname rawpath = rawcache_path_for_repoinfo( _pimpl->options, info );
         filesystem::assert_dir(rawpath);
-        oldstatus = metadataStatus(info);
 
         // create temp dir as sibling of rawpath
         filesystem::TmpDir tmpdir( filesystem::TmpDir::makeSibling( rawpath ) );
@@ -410,61 +511,20 @@ namespace zypp
             downloader_ptr->addCachePath(rawcache_path_for_repoinfo( _pimpl->options, *it ));
           }
 
-          RepoStatus newstatus = downloader_ptr->status(media);
-          bool refresh = false;
-          if ( oldstatus.checksum() == newstatus.checksum() )
-          {
-            MIL << "repo has not changed" << endl;
-            if ( policy == RefreshForced )
-            {
-              MIL << "refresh set to forced" << endl;
-              refresh = true;
-            }
-          }
-          else
-          {
-            MIL << "repo has changed, going to refresh" << endl;
-            refresh = true;
-          }
-          if ( refresh )
-            downloader_ptr->download( media, tmpdir.path());
-          else
-            return;
-          // no error
+          downloader_ptr->download( media, tmpdir.path());
         }
         else if ( repokind.toEnum() == RepoType::RPMPLAINDIR_e )
         {
           RepoStatus newstatus = parser::plaindir::dirStatus(url.getPathName());
-          bool refresh = false;
-          if ( oldstatus.checksum() == newstatus.checksum() )
-          {
-            MIL << "repo has not changed" << endl;
-            if ( policy == RefreshForced )
-            {
-              MIL << "refresh set to forced" << endl;
-              refresh = true;
-            }
-          }
-          else
-          {
-            MIL << "repo has changed, going to refresh" << endl;
-            refresh = true;
-          }
 
-          if ( refresh )
-          {
-            std::ofstream file(( tmpdir.path() + "/cookie").c_str());
-            if (!file) {
-              ZYPP_THROW (Exception( "Can't open " + tmpdir.path().asString() + "/cookie" ) );
-            }
-            file << url << endl;
-            file << newstatus.checksum() << endl;
-
-            file.close();
+          std::ofstream file(( tmpdir.path() + "/cookie").c_str());
+          if (!file) {
+            ZYPP_THROW (Exception( "Can't open " + tmpdir.path().asString() + "/cookie" ) );
           }
-          else
-            return;
-          // no error
+          file << url << endl;
+          file << newstatus.checksum() << endl;
+
+          file.close();
         }
         else
         {
@@ -502,12 +562,6 @@ namespace zypp
                                 CacheBuildPolicy policy,
                                 const ProgressData::ReceiverFnc & progressrcv )
   {
-    ProgressData progress(100);
-    callback::SendReport<ProgressReport> report;
-    progress.sendTo( ProgressReportAdaptor( progressrcv, report ) );
-    progress.name(str::form(_("Building repository '%s' cache"), info.name().c_str()));
-    progress.toMin();
-
     assert_alias(info);
     Pathname rawpath = rawcache_path_for_repoinfo(_pimpl->options, info);
 
@@ -519,6 +573,7 @@ namespace zypp
       ZYPP_THROW(RepoMetadataException(info));
     }
 
+    bool needs_cleaning = false;
     if ( store.isCached( info.alias() ) )
     {
       MIL << info.alias() << " is already cached." << endl;
@@ -529,7 +584,6 @@ namespace zypp
       {
         MIL << info.alias() << " cache is up to date with metadata." << endl;
         if ( policy == BuildIfNeeded ) {
-          progress.toMax();
           return;
         }
         else {
@@ -537,8 +591,17 @@ namespace zypp
         }
       }
       
-      cleanCacheInternal( store, info);
+      needs_cleaning = true;
     }
+
+    ProgressData progress(100);
+    callback::SendReport<ProgressReport> report;
+    progress.sendTo( ProgressReportAdaptor( progressrcv, report ) );
+    progress.name(str::form(_("Building repository '%s' cache"), info.name().c_str()));
+    progress.toMin();
+
+    if (needs_cleaning)
+      cleanCacheInternal( store, info);
 
     MIL << info.alias() << " building cache..." << endl;
     data::RecordId id = store.lookupOrAppendRepository(info.alias());

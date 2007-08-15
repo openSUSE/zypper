@@ -106,6 +106,61 @@ namespace zypp
     */
     RepoStatus metadataStatus( const RepoInfo &info ) const;
 
+    /**
+     * Checks whether to refresh metadata for specified repository and url.
+     * <p>
+     * The need for refresh is evaluated according to the following conditions,
+     * in that order:
+     * <ul>
+     * <li>the refresh policy (refresh may be forced)
+     * <li>the repo.refresh.delay ZConfig value compared to the difference between
+     *   cached index file timestamp and actual time
+     * <li>the timestamp of cached repo index file compared to the remote
+     *   index file timestamp.
+     * </ul>
+     * <p>
+     * This method checks the status against the specified url only. If more
+     * baseurls are defined for in the RepoInfo, each one must be check
+     * individually. Example:
+     * 
+     * <code>
+     * 
+     * RepoInfo info;
+     * // try urls one by one
+     * for ( RepoInfo::urls_const_iterator it = info.baseUrlsBegin();
+     *       it != info.baseUrlsEnd(); ++it )
+     * {
+     *   try
+     *   {
+     *     // check whether to refresh metadata
+     *     // if the check fails for this url, it throws, so another url will be checked
+     *     if (!checkIfToRefreshMetadata(info, *it, policy))
+     *       return;
+     *     
+     *     // do the actual refresh
+     *   }
+     *   catch (const Exception & e)
+     *   {
+     *     ZYPP_CAUGHT(e);
+     *     ERR << *it << " doesn't look good. Trying another url." << endl;
+     *   }
+     * } // for all urls
+     * 
+     * handle("No more URLs.");
+     * 
+     * </code>
+     * 
+     * \param info
+     * \param url
+     * \param policy
+     * \throws RepoUnknownTypeException
+     * \throws repo::RepoNoAliasException if can't figure an alias
+     * \throws Exception on unknown error
+     *  
+     */
+    bool checkIfToRefreshMetadata( const RepoInfo &info,
+                                   const Url &url,
+                                   RawMetadataRefreshPolicy policy );
    /**
     * \short Refresh local raw cache
     *
@@ -119,7 +174,6 @@ namespace zypp
     * \throws repo::RepoUnknownTypeException if the metadata is unknown
     * \throws repo::RepoException if the repository is invalid
     *         (no valid metadata found at any of baseurls) 
-    * \throws Exception on unknown error.
     */
    void refreshMetadata( const RepoInfo &info,
                          RawMetadataRefreshPolicy policy = RefreshIfNeeded,
