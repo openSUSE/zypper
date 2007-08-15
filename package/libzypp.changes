@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Aug 15 15:32:36 CEST 2007 - schubi@suse.de
+
+- Bugfix while regarding correct vendor in update
+- r6677 
+
+-------------------------------------------------------------------
 Wed Aug 15 13:57:04 CEST 2007 - jkupec@suse.cz
 
 - repo.refresh.delay=<minutes> (ZConfig, "main" section) support
