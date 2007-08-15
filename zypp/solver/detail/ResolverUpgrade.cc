@@ -352,6 +352,14 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
 	  continue;
 	}
 
+	if ( installed->vendor() != candidate->vendor() )
+	{
+	    MIL << "Discarding '" << candidate << "' from vendor '"
+		<< candidate->vendor() << "' different to uninstalled '"
+		<< installed->vendor() << "' vendor." << endl;
+	    continue;
+	}
+
         MIL << "found installed " << installed << " for item " << candidate << endl;
 	CandidateMap::const_iterator cand_it = candidatemap.find( installed );
 	if (cand_it == candidatemap.end()						// not in map yet

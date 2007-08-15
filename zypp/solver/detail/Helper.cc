@@ -121,6 +121,7 @@ class LookForUpdate : public resfilter::PoolItemFilterFunctor
 {
   public:
     PoolItem_Ref uninstalled;
+    PoolItem_Ref installed;
 
     bool operator()( PoolItem_Ref provider )
     {
@@ -132,14 +133,14 @@ class LookForUpdate : public resfilter::PoolItemFilterFunctor
           MIL << "Warning: '" << provider << "' not valid" << endl;
           return true;
         }
-        
-        if ( uninstalled.resolvable() )
+
+        if ( installed.resolvable() )
         {
-          if ( uninstalled->vendor() != provider->vendor() )
+          if ( installed->vendor() != provider->vendor() )
           {
             MIL << "Discarding '" << provider << "' from vendor '"
                 << provider->vendor() << "' different to uninstalled '"
-                << uninstalled->vendor() << "' vendor." << endl;
+                << installed->vendor() << "' vendor." << endl;
             return true;
           }
         }
@@ -163,6 +164,7 @@ PoolItem_Ref
 Helper::findUpdateItem (const ResPool & pool, PoolItem_Ref item)
 {
     LookForUpdate info;
+    info.installed = item;
 
     invokeOnEach( pool.byNameBegin( item->name() ),
 		  pool.byNameEnd( item->name() ),
