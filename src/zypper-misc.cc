@@ -161,11 +161,16 @@ static std::string xml_escape( const std::string &text )
 	return parser.escape(text);
 }
 
+/**
+ * Stops iterations on first item and stores edition of the found item.
+ * 
+ * If no item has been found, the \ref found variable is set to false.
+ */
 struct VersionGetter
 {
   Edition edition;
   bool found;
-  
+
   VersionGetter() : found(false) {}
 
   bool operator()(const zypp::PoolItem& item)
@@ -173,6 +178,33 @@ struct VersionGetter
     edition = item.resolvable()->edition();
     found = true;
     return false; // don't iterate further
+  }
+};
+
+/**
+ * Stops iterations on first item having revision newer than edition passed in
+ * contructor. Stores the edition of the found item.
+ * 
+ * If no item has been found, the \ref found variable is set to false.
+ */
+struct NewerVersionGetter
+{
+  const Edition & old_edition;
+  Edition edition;
+  bool found;
+
+  NewerVersionGetter(const Edition & edition) : old_edition(edition), found(false) {}
+
+  bool operator()(const zypp::PoolItem& item)
+  {
+    if (item.resolvable()->edition() > old_edition)
+    {
+      edition = item.resolvable()->edition();
+      found = true;
+      return false; // don't iterate further
+    }
+
+    return true;
   }
 };
 
@@ -197,22 +229,37 @@ Capability safe_parse_cap (const ResObject::Kind &kind, const string & capstr) {
       }
     }
     // if we are about to install stuff and
-    // if this is not a candidate for a version capability, take it like
+    // if this is not a candidate for a versioned capability, take it like
     // a package name and check if it is already installed
     else if (command == ZypperCommand::INSTALL)
     {
+      using namespace zypp::functor;
+      using namespace zypp::resfilter;
+
+      // get the installed version
       VersionGetter vg;
       invokeOnEach(
           God->pool().byNameBegin(capstr),
           God->pool().byNameEnd(capstr),
-          functor::chain(resfilter::ByKind(kind),resfilter::ByInstalled()),
-          functor::functorRef<bool,const zypp::PoolItem&> (vg)
-      );
+          chain(ByKind(kind),ByInstalled()),
+          functorRef<bool,const zypp::PoolItem&> (vg));
+      // installed found
       if (vg.found)
       {
-        new_capstr = capstr + ">" + vg.edition.asString();
-        cout_vv << "installed resolvable named " << capstr
-          << " found, changing capability to " << new_capstr << endl;
+        // check for newer version of that resolvable
+        NewerVersionGetter nvg(vg.edition);
+        invokeOnEach(
+             God->pool().byNameBegin(capstr),
+             God->pool().byNameEnd(capstr),
+             chain(resfilter::ByKind(kind),not_c(ByInstalled())),
+             functorRef<bool,const zypp::PoolItem&> (nvg));
+        // newer version found
+        if (nvg.found)
+        {
+          cout_vv << "installed resolvable named " << capstr
+            << " found, changing capability to " << new_capstr << endl;
+          new_capstr = capstr + ">" + vg.edition.asString();
+        }
       }
     }
 
