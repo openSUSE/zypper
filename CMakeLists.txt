@@ -57,15 +57,6 @@ SET (CPACK_SOURCE_IGNORE_FILES ${CPACK_SOURCE_IGNORE_FILES}
 "/CVS/;/.libs/;/.deps/;/.git/;.swp$;.#;/#;/build/"
 "~$"
 "\\\\.cvsignore$"
-"/package"
-"Makefile\\\\.in$"
-)
-
-SET (CPACK_SOURCE_IGNORE_FILES ${CPACK_SOURCE_IGNORE_FILES}
-"/CVS/;/.libs/;/.deps/;/.git/;.swp$;.#;/#;/build/"
-"~$"
-"\\\\.cvsignore$"
-"/package"
 "Makefile\\\\.in$"
 )
 
