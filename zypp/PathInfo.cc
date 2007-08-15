@@ -11,6 +11,7 @@
 */
 
 #include <sys/types.h> // for ::minor, ::major macros
+#include <utime.h>     // for ::utime
 #include <sys/statvfs.h>
 
 #include <iostream>
@@ -876,6 +877,23 @@ namespace zypp
       mode_t mask = ::umask( 0022 );
       ::umask( mask );
       return mask;
+    }
+
+    ///////////////////////////////////////////////////////////////////
+    //
+    //  METHOD NAME : touch
+    //  METHOD TYPE : int
+    //
+    int touch (const Pathname & path)
+    {
+      DBG << "touch " << path << std::endl;
+      struct ::utimbuf times;
+      times.actime = ::time( 0 );
+      times.modtime = ::time( 0 );
+      if ( ::utime( path.asString().c_str(), &times ) == -1 ) {
+        return _Log_Result( errno );
+      }
+      return _Log_Result( 0 );
     }
 
     /////////////////////////////////////////////////////////////////

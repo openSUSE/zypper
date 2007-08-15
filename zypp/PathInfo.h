@@ -659,6 +659,14 @@ namespace zypp
     { return mode_r & ~getUmask(); }
     //@}
 
+    /**
+     * Change file's modification and access times.
+     *
+     * \return 0 on success, errno on failure
+     * \see man utime
+     */
+    int touch (const Pathname & path);
+
     /////////////////////////////////////////////////////////////////
   } // namespace filesystem
   ///////////////////////////////////////////////////////////////////
