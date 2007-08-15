@@ -160,7 +160,7 @@ void printPatchInfo(const PoolItem & pool_item, const PoolItem & ins_pool_item) 
   cout << _("Reboot Required: ") << (patch->reboot_needed() ? _("Yes") : _("No")) << endl;
 
   if (!gSettings.is_rug_compatible)
-    cout << _("Package Manager Restart Required");
+    cout << _("Package Manager Restart Required") << ": ";
   else
     cout << _("Restart Required: ");
   cout << (patch->affects_pkg_manager() ? _("Yes") : _("No")) << endl;
