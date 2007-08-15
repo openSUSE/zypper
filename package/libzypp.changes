@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Wed Aug 15 12:38:26 CEST 2007 - schubi@suse.de
+
+- generate a resolver problem if addRequires does not find a resovable
+  #299486 
+- rev 6660
+
+-------------------------------------------------------------------
 Tue Aug 14 15:54:15 CEST 2007 - schubi@suse.de
 
 - Prioritized delete request by the user BEFORE delete requests due
