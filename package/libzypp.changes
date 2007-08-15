@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Wed Aug 15 13:57:04 CEST 2007 - jkupec@suse.cz
+
+- repo.refresh.delay=<minutes> support added to delay next check
+  & refresh until the specified number of minutes has passed from
+  the last check or refresh (FATE #301991).
+  Revisions: 6654, 6656, 6666, and 6667.
+- r6667
+
+-------------------------------------------------------------------
 Wed Aug 15 12:38:26 CEST 2007 - schubi@suse.de
 
 - generate a resolver problem if addRequires does not find a resovable
