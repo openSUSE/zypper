@@ -46,10 +46,20 @@ SET(CPACK_SOURCE_PACKAGE_FILE_NAME "${PACKAGE}-${VERSION}")
 # in absolute path + filename to find files or directories to be excluded
 # from source tarball.
 SET (CPACK_SOURCE_IGNORE_FILES
-#\\\\.swp$;\\\\.o$;~$
-/\\\\.svn/;\\\\.swp$;/_build/;~$;\\\\.bak$
+# svn files
+"/\\\\.svn/"
+# temporary files
+"\\\\.swp$"
+# backup files
+"~$"
+"\\\\.bak$"
 # eclipse files
-\\\\.settings/;\\\\.cdtproject;\\\\.project
+"\\\\.settings/"
+"\\\\.cdtproject"
+"\\\\.project"
+"\\\\.cproject"
+# other
+"/_build/"
 )
 
 INCLUDE(CPack)
