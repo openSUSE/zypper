@@ -376,7 +376,29 @@ namespace zypp
       Pathname rawpath = rawcache_path_for_repoinfo( _pimpl->options, info );
       filesystem::assert_dir(rawpath);
       oldstatus = metadataStatus(info);
-      
+
+      // now we've got the old (cached) status, we can decide repo.refresh.delay
+      if (policy != RefreshForced)
+      {
+        // difference in seconds
+        double diff = difftime(
+          (Date::ValueType)Date::now(),
+          (Date::ValueType)oldstatus.timestamp()) / 60;
+
+        DBG << "oldstatus: " << (Date::ValueType)oldstatus.timestamp() << endl;
+        DBG << "current time: " << (Date::ValueType)Date::now() << endl;
+        DBG << "last refresh = " << diff << " minutes ago" << endl;
+
+        if (diff < ZConfig::instance().repo_refresh_delay())
+        {
+          MIL << "Repository '" << info.alias()
+              << "' has been refreshed less than repo.refresh.delay ("
+              << ZConfig::instance().repo_refresh_delay()
+              << ") minutes ago. Advising to skip refresh" << endl;
+          return false;
+        }
+      }
+
       // create temp dir as sibling of rawpath
       filesystem::TmpDir tmpdir( filesystem::TmpDir::makeSibling( rawpath ) );
 

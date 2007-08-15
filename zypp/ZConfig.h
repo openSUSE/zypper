@@ -79,7 +79,12 @@ namespace zypp
        * repo.add.probe
        */
       bool repo_add_probe() const;
-      
+
+      /**
+       * Amount of time in minutes that must pass before another refresh.
+       */
+      unsigned repo_refresh_delay() const;
+
       /**
        * Whether untrusted vendor should be autolocked
        / config option
