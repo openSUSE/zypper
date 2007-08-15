@@ -244,7 +244,7 @@ namespace zypp
       static shared_ptr<Impl> _nullimpl( new Impl );
       return _nullimpl;
     }
-
+    
   private:
     friend Impl * rwcowClone<Impl>( const Impl * rhs );
     /** clone for RWCOW_pointer */
@@ -347,6 +347,42 @@ namespace zypp
     return status;
   }
 
+  void RepoManager::touchIndexFile(const RepoInfo & info)
+  {
+    Pathname rawpath = rawcache_path_for_repoinfo( _pimpl->options, info );
+
+    RepoType repokind = info.type();
+    if ( repokind.toEnum() == RepoType::NONE_e )
+      // unknown, probe the local metadata
+      repokind = probe(rawpath.asUrl());
+    // if still unknown, just return
+    if (repokind == RepoType::NONE_e)
+      return;
+
+    Pathname p;
+    switch ( repokind.toEnum() )
+    {
+      case RepoType::RPMMD_e :
+        p = Pathname(rawpath + "/repodata/repomd.xml");
+        break;
+
+      case RepoType::YAST2_e :
+        p = Pathname(rawpath + "/content");
+        break;
+
+      case RepoType::RPMPLAINDIR_e :
+        p = Pathname(rawpath + "/cookie");
+        break;
+
+      case RepoType::NONE_e :
+      default:
+        break;
+    }
+
+    // touch the file, ignore error (they are logged anyway)
+    filesystem::touch(p);
+  }
+
   bool RepoManager::checkIfToRefreshMetadata( const RepoInfo &info,
                                               const Url &url,
                                               RawMetadataRefreshPolicy policy )
@@ -430,6 +466,9 @@ namespace zypp
           refresh = true;
         }
 
+        if (!refresh)
+          touchIndexFile(info);
+
         return refresh;
       }
       else if ( repokind.toEnum() == RepoType::RPMPLAINDIR_e )
@@ -450,6 +489,9 @@ namespace zypp
           MIL << "repo has changed, going to refresh" << endl;
           refresh = true;
         }
+
+        if (!refresh)
+          touchIndexFile(info);
 
         return refresh;
       }

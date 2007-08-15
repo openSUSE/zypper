@@ -362,6 +362,12 @@ namespace zypp
   protected:
     RepoStatus rawMetadataStatus( const RepoInfo &info );
     RepoStatus cacheStatus( const RepoInfo &info );
+    
+    /**
+     * Update timestamp of repository index file for the specified repository \a info.
+     * Used in \ref checkIfToRefreshMetadata() for repo.refresh.delay feature. 
+     */
+    void touchIndexFile(const RepoInfo & info);
 
   public:
 
