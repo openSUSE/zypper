@@ -129,13 +129,12 @@ collector_cb (ResolverInfo_Ptr info, void *data)
 {
     ResItemCollector *collector = (ResItemCollector *)data;
     PoolItem_Ref item = info->affected();
-    if (item) {
-	if (info->error()) {
-	    collector->problems.insert (make_pair( item, info));
-	} else {
-	    collector->additionalInfo.insert (make_pair( item, info));
-	}
+    if (info->error()) {
+	collector->problems.insert (make_pair( item, info));
+    } else {
+	collector->additionalInfo.insert (make_pair( item, info));
     }
+
     // Collicting items which are providing requirements but they
     // are set for uninstall
     if (info->type() == RESOLVER_INFO_TYPE_UNINSTALL_PROVIDER) {
@@ -297,7 +296,6 @@ Resolver::problems (const bool ignoreValidSolution) const
     }
 
     // collect all resolvables with error
-
     ResolverQueueList invalid = invalidQueues();
     MIL << invalid.size() << " invalid queues" << endl;
 
@@ -341,536 +339,557 @@ Resolver::problems (const bool ignoreValidSolution) const
 
 	DBG << "Problem: " << *info;
 	DBG << "; Evaluate solutions..." << endl;
-	
-	string who = ResolverInfo::toString( item );
 	string what;
 	string details;
-	switch (info->type()) {
-	    case RESOLVER_INFO_TYPE_INVALID: {
-		what = _("Invalid information");
-	    }
-	    break;
-	    case RESOLVER_INFO_TYPE_NEEDED_BY: { // no solution; it is only a info
-		ResolverInfoNeededBy_constPtr needed_by = dynamic_pointer_cast<const ResolverInfoNeededBy>(info);
-		if (needed_by->items().size() >= 1)
-		    // TranslatorExplanation %s = name of package, patch, selection ...
-		    what = str::form (_("%s is needed by other resolvables"), who.c_str());
-		else
-		    // TranslatorExplanation %s = name of package, patch, selection ...		    
-		    what = str::form (_("%s is needed by %s"), who.c_str(), needed_by->itemsToString(true).c_str());
-		details = str::form (_("%s is needed by:\n%s"), who.c_str(), needed_by->itemsToString(false).c_str());
-	    }
-	    break;
-	    case RESOLVER_INFO_TYPE_CONFLICTS_WITH: {
-		ResolverInfoConflictsWith_constPtr conflicts_with = dynamic_pointer_cast<const ResolverInfoConflictsWith>(info);
-		if (conflicts_with->items().size() >= 1)
-		    // TranslatorExplanation %s = name of package, patch, selection ...
-		    what = str::form (_("%s conflicts with other resolvables"), who.c_str() );
-		else
-		    // TranslatorExplanation %s = name of package, patch, selection ...		
-		    what = str::form (_("%s conflicts with %s"), who.c_str(), conflicts_with->itemsToString(true).c_str());
+
+	if (item) {
+	    string who = ResolverInfo::toString( item );
+	    switch (info->type()) {
+		case RESOLVER_INFO_TYPE_INVALID: {
+		    what = _("Invalid information");
+		}
+		    break;
+		case RESOLVER_INFO_TYPE_NEEDED_BY: { // no solution; it is only a info
+		    ResolverInfoNeededBy_constPtr needed_by = dynamic_pointer_cast<const ResolverInfoNeededBy>(info);
+		    if (needed_by->items().size() >= 1)
+			// TranslatorExplanation %s = name of package, patch, selection ...
+			what = str::form (_("%s is needed by other resolvables"), who.c_str());
+		    else
+			// TranslatorExplanation %s = name of package, patch, selection ...		    
+			what = str::form (_("%s is needed by %s"), who.c_str(), needed_by->itemsToString(true).c_str());
+		    details = str::form (_("%s is needed by:\n%s"), who.c_str(), needed_by->itemsToString(false).c_str());
+		}
+		    break;
+		case RESOLVER_INFO_TYPE_CONFLICTS_WITH: {
+		    ResolverInfoConflictsWith_constPtr conflicts_with = dynamic_pointer_cast<const ResolverInfoConflictsWith>(info);
+		    if (conflicts_with->items().size() >= 1)
+			// TranslatorExplanation %s = name of package, patch, selection ...
+			what = str::form (_("%s conflicts with other resolvables"), who.c_str() );
+		    else
+			// TranslatorExplanation %s = name of package, patch, selection ...		
+			what = str::form (_("%s conflicts with %s"), who.c_str(), conflicts_with->itemsToString(true).c_str());
 		
-		details = str::form (_("%s conflicts with:\n%s"), who.c_str(), conflicts_with->itemsToString(false).c_str()) + "\n";
-		details += logAdditionalInfo(collector.additionalInfo, item);
-		PoolItemList item_list = conflicts_with->items();
-		for (PoolItemList::const_iterator it = item_list.begin(); it != item_list.end(); ++it) {
-		    details += logAdditionalInfo(collector.additionalInfo, *it);
-		}
+		    details = str::form (_("%s conflicts with:\n%s"), who.c_str(), conflicts_with->itemsToString(false).c_str()) + "\n";
+		    details += logAdditionalInfo(collector.additionalInfo, item);
+		    PoolItemList item_list = conflicts_with->items();
+		    for (PoolItemList::const_iterator it = item_list.begin(); it != item_list.end(); ++it) {
+			details += logAdditionalInfo(collector.additionalInfo, *it);
+		    }
 		    
-		ResolverProblem_Ptr problem = new ResolverProblem (what, details);		
-		// Uninstall p
-		problem->addSolution (new ProblemSolutionUninstall (problem, item));
-		if (conflicts_with->items().size() == 1) {
-		    // Uninstall q
-		    problem->addSolution (new ProblemSolutionUninstall (problem, *(conflicts_with->items().begin())));
-		} else {
-		    // Uninstall all other
-		    PoolItemList conflict_items = conflicts_with->items();
-		    problem->addSolution (new ProblemSolutionUninstall (problem, conflict_items));
-		}
-		// Remove conflict in the resolvable which has to be installed
-		problem->addSolution (new ProblemSolutionIgnoreConflicts (problem, item, conflicts_with->capability(),
-									  conflicts_with->items())); 
-		problems.push_back (problem);
-		problem_created = true;
-	    }
-	    break;
-	    case RESOLVER_INFO_TYPE_OBSOLETES: { // no solution; it is only a info
-		ResolverInfoObsoletes_constPtr obsoletes = dynamic_pointer_cast<const ResolverInfoObsoletes>(info);
-		if (obsoletes->items().size() >= 1)
-		    // TranslatorExplanation %s = name of package, patch, selection ...
-		    what = str::form (_("%s obsoletes other resolvables"), who.c_str());
-		else
-		    // TranslatorExplanation %s = name of package, patch, selection ...		
-		    what = str::form (_("%s obsoletes %s"), who.c_str(), obsoletes->itemsToString(true).c_str());
-		// TranslatorExplanation %s = name of package, patch, selection ...				
-		details = str::form (_("%s obsoletes:%s"), who.c_str(), obsoletes->itemsToString(false).c_str());
-		details += _("\nThese resolvables will be deleted from the system.");
-		details += "\n" + logAdditionalInfo(collector.additionalInfo, item);		
-	    }
-	    break;
-	    case RESOLVER_INFO_TYPE_DEPENDS_ON: { // no solution; it is only a info
-		ResolverInfoDependsOn_constPtr depends_on = dynamic_pointer_cast<const ResolverInfoDependsOn>(info);
-		if (depends_on->items().size() >= 1)
-		    // TranslatorExplanation %s = name of package, patch, selection ...
-		    what = str::form (_("%s depends on other resolvables"), who.c_str(),
-				      depends_on->itemsToString(true).c_str());
-		else
-		    // TranslatorExplanation %s = name of package, patch, selection ...				
-		    what = str::form (_("%s depends on %s"), who.c_str(),
-				      depends_on->itemsToString(true).c_str());
-		// TranslatorExplanation %s = name of package, patch, selection ...				
-		details = str::form (_("%s depends on:%s"), who.c_str(), depends_on->itemsToString(false).c_str());		
-	    }
-	    break;
-	    case RESOLVER_INFO_TYPE_CHILD_OF: {				// unused
-		ResolverInfoChildOf_constPtr child_of = dynamic_pointer_cast<const ResolverInfoChildOf>(info);
-		// TranslatorExplanation: currently it is unused.
-		what = _("Child of");
-	    }
-	    break;
-	    case RESOLVER_INFO_TYPE_MISSING_REQ: { // no solution; it is only a info
-		ResolverInfoMissingReq_constPtr missing_req = dynamic_pointer_cast<const ResolverInfoMissingReq>(info);
-		// TranslatorExplanation %s = dependency
-		what = str::form (_("Cannot install %s"), who.c_str());
-		// TranslatorExplanation %s = capability		
-		details = str::form (_("None provides %s"), missing_req->capability().asString().c_str());
-		details += _("\nThere is no resource available which supports this requirement.");
-	    }
-	    break;
-
- 	// from ResolverContext
-	    case RESOLVER_INFO_TYPE_INVALID_SOLUTION: {			// Marking this resolution attempt as invalid.
-		ResolverInfoMisc_constPtr misc_info = dynamic_pointer_cast<const ResolverInfoMisc>(info);
-		what = misc_info->message();
-		details = _("Due to the problems described above/below, this resolution will not solve all dependencies");
-		// no solution available
-	    }
-	    break;
-	    case RESOLVER_INFO_TYPE_UNINSTALLABLE: {			// Marking p as uninstallable
-		ResolverInfoMisc_constPtr misc_info = dynamic_pointer_cast<const ResolverInfoMisc>(info);
-		// Trying to find a concerning conflict
-
-		for (ConflictMap::const_iterator it = collector.conflictMap.begin();
-		     it != collector.conflictMap.end(); ++it) {
-		    if (it->first == item) {
-			what = str::form (_("Cannot install %s, because it is conflicting with %s"),
-					  who.c_str(),
-					  it->second->name().c_str()) + "\n";
-			details = logAdditionalInfo(collector.additionalInfo, item);
-			details += logAdditionalInfo(collector.additionalInfo, it->second);			
-			ResolverProblem_Ptr problem = new ResolverProblem (what, details);		
-			// Uninstall p
-			problem->addSolution (new ProblemSolutionUninstall (problem, item));
+		    ResolverProblem_Ptr problem = new ResolverProblem (what, details);		
+		    // Uninstall p
+		    problem->addSolution (new ProblemSolutionUninstall (problem, item));
+		    if (conflicts_with->items().size() == 1) {
 			// Uninstall q
-			problem->addSolution (new ProblemSolutionUninstall (problem, it->second));
+			problem->addSolution (new ProblemSolutionUninstall (problem, *(conflicts_with->items().begin())));
+		    } else {
+			// Uninstall all other
+			PoolItemList conflict_items = conflicts_with->items();
+			problem->addSolution (new ProblemSolutionUninstall (problem, conflict_items));
+		    }
+		    // Remove conflict in the resolvable which has to be installed
+		    problem->addSolution (new ProblemSolutionIgnoreConflicts (problem, item, conflicts_with->capability(),
+									      conflicts_with->items())); 
+		    problems.push_back (problem);
+		    problem_created = true;
+		}
+		    break;
+		case RESOLVER_INFO_TYPE_OBSOLETES: { // no solution; it is only a info
+		    ResolverInfoObsoletes_constPtr obsoletes = dynamic_pointer_cast<const ResolverInfoObsoletes>(info);
+		    if (obsoletes->items().size() >= 1)
+			// TranslatorExplanation %s = name of package, patch, selection ...
+			what = str::form (_("%s obsoletes other resolvables"), who.c_str());
+		    else
+			// TranslatorExplanation %s = name of package, patch, selection ...		
+			what = str::form (_("%s obsoletes %s"), who.c_str(), obsoletes->itemsToString(true).c_str());
+		    // TranslatorExplanation %s = name of package, patch, selection ...				
+		    details = str::form (_("%s obsoletes:%s"), who.c_str(), obsoletes->itemsToString(false).c_str());
+		    details += _("\nThese resolvables will be deleted from the system.");
+		    details += "\n" + logAdditionalInfo(collector.additionalInfo, item);		
+		}
+		    break;
+		case RESOLVER_INFO_TYPE_DEPENDS_ON: { // no solution; it is only a info
+		    ResolverInfoDependsOn_constPtr depends_on = dynamic_pointer_cast<const ResolverInfoDependsOn>(info);
+		    if (depends_on->items().size() >= 1)
+			// TranslatorExplanation %s = name of package, patch, selection ...
+			what = str::form (_("%s depends on other resolvables"), who.c_str(),
+					  depends_on->itemsToString(true).c_str());
+		    else
+			// TranslatorExplanation %s = name of package, patch, selection ...				
+			what = str::form (_("%s depends on %s"), who.c_str(),
+					  depends_on->itemsToString(true).c_str());
+		    // TranslatorExplanation %s = name of package, patch, selection ...				
+		    details = str::form (_("%s depends on:%s"), who.c_str(), depends_on->itemsToString(false).c_str());		
+		}
+		    break;
+		case RESOLVER_INFO_TYPE_CHILD_OF: {				// unused
+		    ResolverInfoChildOf_constPtr child_of = dynamic_pointer_cast<const ResolverInfoChildOf>(info);
+		    // TranslatorExplanation: currently it is unused.
+		    what = _("Child of");
+		}
+		    break;
+		case RESOLVER_INFO_TYPE_MISSING_REQ: { // no solution; it is only a info
+		    ResolverInfoMissingReq_constPtr missing_req = dynamic_pointer_cast<const ResolverInfoMissingReq>(info);
+		    // TranslatorExplanation %s = dependency
+		    what = str::form (_("Cannot install %s"), who.c_str());
+		    // TranslatorExplanation %s = capability		
+		    details = str::form (_("None provides %s"), missing_req->capability().asString().c_str());
+		    details += _("\nThere is no resource available which supports this requirement.");
+		}
+		    break;
+
+		    // from ResolverContext
+		case RESOLVER_INFO_TYPE_INVALID_SOLUTION: {			// Marking this resolution attempt as invalid.
+		    ResolverInfoMisc_constPtr misc_info = dynamic_pointer_cast<const ResolverInfoMisc>(info);
+		    what = misc_info->message();
+		    details = _("Due to the problems described above/below, this resolution will not solve all dependencies");
+		    // no solution available
+		}
+		    break;
+		case RESOLVER_INFO_TYPE_UNINSTALLABLE: {			// Marking p as uninstallable
+		    ResolverInfoMisc_constPtr misc_info = dynamic_pointer_cast<const ResolverInfoMisc>(info);
+		    // Trying to find a concerning conflict
+
+		    for (ConflictMap::const_iterator it = collector.conflictMap.begin();
+			 it != collector.conflictMap.end(); ++it) {
+			if (it->first == item) {
+			    what = str::form (_("Cannot install %s, because it is conflicting with %s"),
+					      who.c_str(),
+					      it->second->name().c_str()) + "\n";
+			    details = logAdditionalInfo(collector.additionalInfo, item);
+			    details += logAdditionalInfo(collector.additionalInfo, it->second);			
+			    ResolverProblem_Ptr problem = new ResolverProblem (what, details);		
+			    // Uninstall p
+			    problem->addSolution (new ProblemSolutionUninstall (problem, item));
+			    // Uninstall q
+			    problem->addSolution (new ProblemSolutionUninstall (problem, it->second));
+			    problems.push_back (problem);
+			    problem_created = true;
+			}
+		    }
+		    if (!problem_created) {
+			// default 
+			what = misc_info->message();
+			// TranslatorExplanation %s = name of package,patch,...		
+			details = str::form (_("%s is not installed and has been marked as uninstallable"), who.c_str()) + "\n";
+			details += logAdditionalInfo(collector.additionalInfo, item);		    
+			ResolverProblem_Ptr problem = new ResolverProblem (what, details);
+			problem->addSolution (new ProblemSolutionInstall (problem, item)); // Install resolvable again
 			problems.push_back (problem);
 			problem_created = true;
 		    }
 		}
-		if (!problem_created) {
-		    // default 
-		    what = misc_info->message();
-		    // TranslatorExplanation %s = name of package,patch,...		
-		    details = str::form (_("%s is not installed and has been marked as uninstallable"), who.c_str()) + "\n";
-		    details += logAdditionalInfo(collector.additionalInfo, item);		    
+		    break;
+		case RESOLVER_INFO_TYPE_REJECT_INSTALL: {			// p is scheduled to be installed, but this is not possible because of dependency problems.
+		    ResolverInfoMisc_constPtr misc_info = dynamic_pointer_cast<const ResolverInfoMisc>(info);
+		    // TranslatorExplanation %s = name of package,patch,...				
+		    what = str::form (_("Cannot install %s due to dependency problems"), who.c_str());
+		    details = misc_info->message() + "\n";
+		    details += logAdditionalInfo(collector.additionalInfo, item);		
+		    ResolverProblem_Ptr problem = new ResolverProblem (what, details);
+		    // Uninstall it; 
+		    problem->addSolution (new ProblemSolutionUninstall (problem, item));
+		    // currently no solution concerning "ignore" is available		
+		    problems.push_back (problem);
+		    problem_created = true;
+		}
+		    break;
+		case RESOLVER_INFO_TYPE_INSTALL_TO_BE_UNINSTALLED: {	// Can't install p since it is already marked as needing to be uninstalled
+		    ResolverInfoMisc_constPtr misc_info = dynamic_pointer_cast<const ResolverInfoMisc>(info);
+		    // TranslatorExplanation %s = name of package,patch,...				
+		    what = misc_info->message() + "\n";
+		    details = logAdditionalInfo(collector.additionalInfo, item);		
 		    ResolverProblem_Ptr problem = new ResolverProblem (what, details);
 		    problem->addSolution (new ProblemSolutionInstall (problem, item)); // Install resolvable again
 		    problems.push_back (problem);
 		    problem_created = true;
 		}
-	    }
-	    break;
-	    case RESOLVER_INFO_TYPE_REJECT_INSTALL: {			// p is scheduled to be installed, but this is not possible because of dependency problems.
-		ResolverInfoMisc_constPtr misc_info = dynamic_pointer_cast<const ResolverInfoMisc>(info);
-		// TranslatorExplanation %s = name of package,patch,...				
-		what = str::form (_("Cannot install %s due to dependency problems"), who.c_str());
-		details = misc_info->message() + "\n";
-		details += logAdditionalInfo(collector.additionalInfo, item);		
-		ResolverProblem_Ptr problem = new ResolverProblem (what, details);
-		// Uninstall it; 
-		problem->addSolution (new ProblemSolutionUninstall (problem, item));
-		// currently no solution concerning "ignore" is available		
-		problems.push_back (problem);
-		problem_created = true;
-	    }
-	    break;
-	    case RESOLVER_INFO_TYPE_INSTALL_TO_BE_UNINSTALLED: {	// Can't install p since it is already marked as needing to be uninstalled
-		ResolverInfoMisc_constPtr misc_info = dynamic_pointer_cast<const ResolverInfoMisc>(info);
-		// TranslatorExplanation %s = name of package,patch,...				
-		what = misc_info->message() + "\n";
-		details = logAdditionalInfo(collector.additionalInfo, item);		
-		ResolverProblem_Ptr problem = new ResolverProblem (what, details);
-		problem->addSolution (new ProblemSolutionInstall (problem, item)); // Install resolvable again
-		problems.push_back (problem);
-		problem_created = true;
-	    }
-	    break;
-	    case RESOLVER_INFO_TYPE_INSTALL_UNNEEDED: {			// Can't install p since it is does not apply to this system.
-		ResolverInfoMisc_constPtr misc_info = dynamic_pointer_cast<const ResolverInfoMisc>(info);
-		// TranslatorExplanation %s = name of package,patch,...				
-		what = misc_info->message();
-		// no solution; it is only a info
-	    }
-	    break;
-	    case RESOLVER_INFO_TYPE_INSTALL_PARALLEL: {			// Can't install p, since a resolvable of the same name is already marked as needing to be installed.
-		ResolverInfoMisc_constPtr misc_info = dynamic_pointer_cast<const ResolverInfoMisc>(info);
-		// TranslatorExplanation %s = name of package,patch,...				
-		what = str::form (_("Cannot install %s"), who.c_str());
-		details = misc_info->message() + "\n";
-		details += logAdditionalInfo(collector.additionalInfo, item);
-		details += logAdditionalInfo(collector.additionalInfo, misc_info->other());				
-		ResolverProblem_Ptr problem = new ResolverProblem (what, details);
-		// Uninstall the item
-		ResStatus status = item.status();
-		string description = "";
-		if (status.isInstalled())
-		    // TranslatorExplanation %s = name of package, patch, selection ...
-		    description = str::form (_("delete %s"), ResolverInfo::toString (item).c_str());
-		else
-		    // TranslatorExplanation %s = name of package, patch, selection ...	
-		    description = str::form (_("do not install %s"), ResolverInfo::toString (item).c_str());
-		problem->addSolution (new ProblemSolutionUninstall (problem, item, description, ""));
-		
-		// Uninstall the other
-		status = misc_info->other().status();
-		if (status.isInstalled())
-		    // TranslatorExplanation %s = name of package, patch, selection ...
-		    description = str::form (_("delete %s"), ResolverInfo::toString (misc_info->other()).c_str());
-		else
-		    // TranslatorExplanation %s = name of package, patch, selection ...	
-		    description = str::form (_("do not install %s"), ResolverInfo::toString (misc_info->other()).c_str());		
-		problem->addSolution (new ProblemSolutionUninstall (problem, misc_info->other(), description, ""));
-		
-		// Ignore it
-		problem->addSolution (new ProblemSolutionIgnoreInstalled (problem, item, misc_info->other()));
-		problems.push_back (problem);
-		problem_created = true;		
-	    }
-	    break;
-	    case RESOLVER_INFO_TYPE_INCOMPLETES: {			// This would invalidate p
-		ResolverInfoMisc_constPtr misc_info = dynamic_pointer_cast<const ResolverInfoMisc>(info);
-		what = misc_info->message();
-		// TranslatorExplanation %s = name of package, patch, selection ...				
-		details = str::form (_("%s has unfulfilled requirements"), who.c_str())+ "\n";
-		details += logAdditionalInfo(collector.additionalInfo, item);		
-		ResolverProblem_Ptr problem = new ResolverProblem (what, details);
-		// Uninstall 
-		problem->addSolution (new ProblemSolutionUninstall (problem, item));
-		problems.push_back (problem);
-		problem_created = true;		
-	    }
-	    break;
-	// from QueueItemEstablish
-	    case RESOLVER_INFO_TYPE_ESTABLISHING: {			// Establishing p
-		ResolverInfoMisc_constPtr misc_info = dynamic_pointer_cast<const ResolverInfoMisc>(info);
-		what = misc_info->message();
-		// no solution is needed cause it is only a progress indicator
-	    }
-	    break;
-	// from QueueItemInstall
-	    case RESOLVER_INFO_TYPE_INSTALLING: {			// Installing p
-		ResolverInfoMisc_constPtr misc_info = dynamic_pointer_cast<const ResolverInfoMisc>(info);
-		what = misc_info->message();
-		// no solution is needed cause it is only a progress indicator		
-	    }
-	    break;
-	    case RESOLVER_INFO_TYPE_UPDATING: {				// Updating p
-		ResolverInfoMisc_constPtr misc_info = dynamic_pointer_cast<const ResolverInfoMisc>(info);
-		what = misc_info->message();
-		// no solution is needed cause it is only a progress indicator		
-	    }
-	    break;
-	    case RESOLVER_INFO_TYPE_SKIPPING: {				// Skipping p, already installed
-		ResolverInfoMisc_constPtr misc_info = dynamic_pointer_cast<const ResolverInfoMisc>(info);
-		what = misc_info->message();
-		// It is only an info and happens while upgrading
-	    }
-	    break;
-	// from QueueItemRequire
-	    case RESOLVER_INFO_TYPE_NO_OTHER_PROVIDER: {		// There are no alternative installed providers of c [for p]
-		ResolverInfoMisc_constPtr misc_info = dynamic_pointer_cast<const ResolverInfoMisc>(info);
-		// TranslatorExplanation %s = name of package, patch, selection ...				
-		what = str::form (_("%s has missing dependencies"), who.c_str());
-		details = misc_info->message() + "\n";
-		details += logAdditionalInfo(collector.additionalInfo, item);				
-		ResolverProblem_Ptr problem = new ResolverProblem (what, details);
-
-		// Searching for another item which provides this requires BUT has been set to uninstall
-		for (ItemCapabilityMap::const_iterator it = collector.provideAndDeleteMap.begin();
-		     it != collector.provideAndDeleteMap.end(); ++it) {
-		    if (it->second.matches (misc_info->capability()) == CapMatch::yes) {
-			// Do not delete
-			problem->addSolution (new ProblemSolutionKeep (problem, it->first));
-		    }
+		    break;
+		case RESOLVER_INFO_TYPE_INSTALL_UNNEEDED: {			// Can't install p since it is does not apply to this system.
+		    ResolverInfoMisc_constPtr misc_info = dynamic_pointer_cast<const ResolverInfoMisc>(info);
+		    // TranslatorExplanation %s = name of package,patch,...				
+		    what = misc_info->message();
+		    // no solution; it is only a info
 		}
+		    break;
+		case RESOLVER_INFO_TYPE_INSTALL_PARALLEL: {			// Can't install p, since a resolvable of the same name is already marked as needing to be installed.
+		    ResolverInfoMisc_constPtr misc_info = dynamic_pointer_cast<const ResolverInfoMisc>(info);
+		    // TranslatorExplanation %s = name of package,patch,...				
+		    what = str::form (_("Cannot install %s"), who.c_str());
+		    details = misc_info->message() + "\n";
+		    details += logAdditionalInfo(collector.additionalInfo, item);
+		    details += logAdditionalInfo(collector.additionalInfo, misc_info->other());				
+		    ResolverProblem_Ptr problem = new ResolverProblem (what, details);
+		    // Uninstall the item
+		    ResStatus status = item.status();
+		    string description = "";
+		    if (status.isInstalled())
+			// TranslatorExplanation %s = name of package, patch, selection ...
+			description = str::form (_("delete %s"), ResolverInfo::toString (item).c_str());
+		    else
+			// TranslatorExplanation %s = name of package, patch, selection ...	
+			description = str::form (_("do not install %s"), ResolverInfo::toString (item).c_str());
+		    problem->addSolution (new ProblemSolutionUninstall (problem, item, description, ""));
+		
+		    // Uninstall the other
+		    status = misc_info->other().status();
+		    if (status.isInstalled())
+			// TranslatorExplanation %s = name of package, patch, selection ...
+			description = str::form (_("delete %s"), ResolverInfo::toString (misc_info->other()).c_str());
+		    else
+			// TranslatorExplanation %s = name of package, patch, selection ...	
+			description = str::form (_("do not install %s"), ResolverInfo::toString (misc_info->other()).c_str());		
+		    problem->addSolution (new ProblemSolutionUninstall (problem, misc_info->other(), description, ""));
+		
+		    // Ignore it
+		    problem->addSolution (new ProblemSolutionIgnoreInstalled (problem, item, misc_info->other()));
+		    problems.push_back (problem);
+		    problem_created = true;		
+		}
+		    break;
+		case RESOLVER_INFO_TYPE_INCOMPLETES: {			// This would invalidate p
+		    ResolverInfoMisc_constPtr misc_info = dynamic_pointer_cast<const ResolverInfoMisc>(info);
+		    what = misc_info->message();
+		    // TranslatorExplanation %s = name of package, patch, selection ...				
+		    details = str::form (_("%s has unfulfilled requirements"), who.c_str())+ "\n";
+		    details += logAdditionalInfo(collector.additionalInfo, item);		
+		    ResolverProblem_Ptr problem = new ResolverProblem (what, details);
+		    // Uninstall 
+		    problem->addSolution (new ProblemSolutionUninstall (problem, item));
+		    problems.push_back (problem);
+		    problem_created = true;		
+		}
+		    break;
+		    // from QueueItemEstablish
+		case RESOLVER_INFO_TYPE_ESTABLISHING: {			// Establishing p
+		    ResolverInfoMisc_constPtr misc_info = dynamic_pointer_cast<const ResolverInfoMisc>(info);
+		    what = misc_info->message();
+		    // no solution is needed cause it is only a progress indicator
+		}
+		    break;
+		    // from QueueItemInstall
+		case RESOLVER_INFO_TYPE_INSTALLING: {			// Installing p
+		    ResolverInfoMisc_constPtr misc_info = dynamic_pointer_cast<const ResolverInfoMisc>(info);
+		    what = misc_info->message();
+		    // no solution is needed cause it is only a progress indicator		
+		}
+		    break;
+		case RESOLVER_INFO_TYPE_UPDATING: {				// Updating p
+		    ResolverInfoMisc_constPtr misc_info = dynamic_pointer_cast<const ResolverInfoMisc>(info);
+		    what = misc_info->message();
+		    // no solution is needed cause it is only a progress indicator		
+		}
+		    break;
+		case RESOLVER_INFO_TYPE_SKIPPING: {				// Skipping p, already installed
+		    ResolverInfoMisc_constPtr misc_info = dynamic_pointer_cast<const ResolverInfoMisc>(info);
+		    what = misc_info->message();
+		    // It is only an info and happens while upgrading
+		}
+		    break;
+		    // from QueueItemRequire
+		case RESOLVER_INFO_TYPE_NO_OTHER_PROVIDER: {		// There are no alternative installed providers of c [for p]
+		    ResolverInfoMisc_constPtr misc_info = dynamic_pointer_cast<const ResolverInfoMisc>(info);
+		    // TranslatorExplanation %s = name of package, patch, selection ...				
+		    what = str::form (_("%s has missing dependencies"), who.c_str());
+		    details = misc_info->message() + "\n";
+		    details += logAdditionalInfo(collector.additionalInfo, item);				
+		    ResolverProblem_Ptr problem = new ResolverProblem (what, details);
 
-		// Searching for another item which provides this requires BUT has been set to be kept
-		for (ItemCapabilityMap::const_iterator it = collector.provideAndKeptMap.begin();
-		     it != collector.provideAndKeptMap.end(); ++it) {
-		    if (it->second.matches (misc_info->capability()) == CapMatch::yes) {
-			// Do install
-			problem->addSolution (new ProblemSolutionInstall (problem, it->first));
+		    // Searching for another item which provides this requires BUT has been set to uninstall
+		    for (ItemCapabilityMap::const_iterator it = collector.provideAndDeleteMap.begin();
+			 it != collector.provideAndDeleteMap.end(); ++it) {
+			if (it->second.matches (misc_info->capability()) == CapMatch::yes) {
+			    // Do not delete
+			    problem->addSolution (new ProblemSolutionKeep (problem, it->first));
+			}
 		    }
+
+		    // Searching for another item which provides this requires BUT has been set to be kept
+		    for (ItemCapabilityMap::const_iterator it = collector.provideAndKeptMap.begin();
+			 it != collector.provideAndKeptMap.end(); ++it) {
+			if (it->second.matches (misc_info->capability()) == CapMatch::yes) {
+			    // Do install
+			    problem->addSolution (new ProblemSolutionInstall (problem, it->first));
+			}
+		    }		
+
+		    // uninstall
+		    problem->addSolution (new ProblemSolutionUninstall (problem, item));
+
+		    // Unflag require ONLY for this item
+		    problem->addSolution (new ProblemSolutionIgnoreRequires (problem, item, misc_info->capability()));		
+
+		    // Unflag ALL require
+		    // Evaluating all require Items
+		    AllRequires info;
+		    Dep dep( Dep::REQUIRES );
+
+		    invokeOnEach( _pool.byCapabilityIndexBegin( misc_info->capability().index(), dep ), // begin()
+				  _pool.byCapabilityIndexEnd( misc_info->capability().index(), dep ),   // end()
+				  resfilter::ByCapMatch( misc_info->capability() ),
+				  functor::functorRef<bool,CapAndItem>(info) );
+		    if (info.requirers.size() > 1)
+			problem->addSolution (new ProblemSolutionIgnoreRequires (problem, info.requirers, misc_info->capability()));
+
+		    problems.push_back (problem);
+		    problem_created = true;
+		}
+		    break;
+		case RESOLVER_INFO_TYPE_NO_PROVIDER: {			// There are no installable providers of c [for p]
+		    ResolverInfoMisc_constPtr misc_info = dynamic_pointer_cast<const ResolverInfoMisc>(info);
+		    // TranslatorExplanation %s = name of package, patch, selection ...				
+		    what = str::form (_("%s cannot be installed due to missing dependencies"), who.c_str());		
+		    details = misc_info->message() + "\n";
+		    details += logAdditionalInfo(collector.additionalInfo, item);				
+		    ResolverProblem_Ptr problem = new ResolverProblem (what, details);
+		
+		    // Searching for another item which provides this requires BUT has been locked
+		    for (ItemCapabilityMap::const_iterator it = collector.provideAndLockMap.begin();
+			 it != collector.provideAndLockMap.end(); ++it) {
+			if (it->second.matches (misc_info->capability()) == CapMatch::yes) {
+			    // unlock this item
+			    problem->addSolution (new ProblemSolutionUnlock (problem, it->first));
+			    // unlock ALL existing resolvables
+			    problem->addSolution (new ProblemSolutionUnlock (problem, pool()));			
+			}
+		    }
+		    // Searching for another item which provides this requires BUT has another architec
+		    for (ItemCapabilityMap::const_iterator it = collector.provideAndOtherArchMap.begin();
+			 it != collector.provideAndOtherArchMap.end(); ++it) {
+			if (it->second.matches (misc_info->capability()) == CapMatch::yes) {
+			    // ignoring architecture
+			    problem->addSolution (new ProblemSolutionIgnoreArchitecture (problem, it->first));
+			}
+		    }
+		    // Searching for another item which provides this requires BUT has been set to be kept
+		    for (ItemCapabilityMap::const_iterator it = collector.provideAndKeptMap.begin();
+			 it != collector.provideAndKeptMap.end(); ++it) {
+			if (it->second.matches (misc_info->capability()) == CapMatch::yes) {
+			    // Do install
+			    problem->addSolution (new ProblemSolutionInstall (problem, it->first));
+			}
+		    }		
+		
+		    // uninstall
+		    problem->addSolution (new ProblemSolutionUninstall (problem, item)); 
+		    // ignore requirement
+		    problem->addSolution (new ProblemSolutionIgnoreRequires (problem, item, misc_info->capability())); 
+		    problems.push_back (problem);
+		    problem_created = true;		
+		}
+		    break;
+		case RESOLVER_INFO_TYPE_NO_UPGRADE: {			// Upgrade to q to avoid removing p is not possible.
+		    ResolverInfoMisc_constPtr misc_info = dynamic_pointer_cast<const ResolverInfoMisc>(info);
+		    what = misc_info->message();
+		    // It is only an info --> no solution is needed		
+		}
+		    break;
+		case RESOLVER_INFO_TYPE_UNINSTALL_PROVIDER: {		// p provides c but is scheduled to be uninstalled
+		    ResolverInfoMisc_constPtr misc_info = dynamic_pointer_cast<const ResolverInfoMisc>(info);
+		    // TranslatorExplanation %s = name of package, patch, selection ...				
+		    what =str::form (_("%s fulfills dependencies of %s but will be uninstalled"),
+				     misc_info->other()->name().c_str(),
+				     who.c_str());
+		    details = misc_info->message();
+		    // It is only an info --> no solution is needed
+		}
+		    break;		
+		case RESOLVER_INFO_TYPE_KEEP_PROVIDER: {		// p provides c but is scheduled to be kept
+		    ResolverInfoMisc_constPtr misc_info = dynamic_pointer_cast<const ResolverInfoMisc>(info);
+		    // TranslatorExplanation %s = name of package, patch, selection ...				
+		    what =str::form (_("%s fulfills dependencies of %s but will be kept on your system"),
+				     misc_info->other()->name().c_str(),
+				     who.c_str());
+		    details = misc_info->message();
+		    // It is only an info --> no solution is needed
 		}		
-
-		// uninstall
-		problem->addSolution (new ProblemSolutionUninstall (problem, item));
-
-		// Unflag require ONLY for this item
-		problem->addSolution (new ProblemSolutionIgnoreRequires (problem, item, misc_info->capability()));		
-
-		// Unflag ALL require
-		// Evaluating all require Items
-		AllRequires info;
-		Dep dep( Dep::REQUIRES );
-
-		invokeOnEach( _pool.byCapabilityIndexBegin( misc_info->capability().index(), dep ), // begin()
-			      _pool.byCapabilityIndexEnd( misc_info->capability().index(), dep ),   // end()
-			      resfilter::ByCapMatch( misc_info->capability() ),
-			      functor::functorRef<bool,CapAndItem>(info) );
-		if (info.requirers.size() > 1)
-		    problem->addSolution (new ProblemSolutionIgnoreRequires (problem, info.requirers, misc_info->capability()));
-
-		problems.push_back (problem);
-		problem_created = true;
-	    }
-	    break;
-	    case RESOLVER_INFO_TYPE_NO_PROVIDER: {			// There are no installable providers of c [for p]
-		ResolverInfoMisc_constPtr misc_info = dynamic_pointer_cast<const ResolverInfoMisc>(info);
-		// TranslatorExplanation %s = name of package, patch, selection ...				
-		what = str::form (_("%s cannot be installed due to missing dependencies"), who.c_str());		
-		details = misc_info->message() + "\n";
-		details += logAdditionalInfo(collector.additionalInfo, item);				
-		ResolverProblem_Ptr problem = new ResolverProblem (what, details);
-		
-		// Searching for another item which provides this requires BUT has been locked
-		for (ItemCapabilityMap::const_iterator it = collector.provideAndLockMap.begin();
-		     it != collector.provideAndLockMap.end(); ++it) {
-		    if (it->second.matches (misc_info->capability()) == CapMatch::yes) {
-			// unlock this item
-			problem->addSolution (new ProblemSolutionUnlock (problem, it->first));
-			// unlock ALL existing resolvables
-			problem->addSolution (new ProblemSolutionUnlock (problem, pool()));			
-		    }
+		    break;
+		case RESOLVER_INFO_TYPE_PARALLEL_PROVIDER: {		// p provides c but another version is already installed
+		    ResolverInfoMisc_constPtr misc_info = dynamic_pointer_cast<const ResolverInfoMisc>(info);
+		    // TranslatorExplanation %s = name of package, patch, selection ...				
+		    what = str::form (_("No need to install %s"), misc_info->other()->name().c_str());
+		    details = misc_info->message();
+		    // It is only an info --> no solution is needed		
 		}
-		// Searching for another item which provides this requires BUT has another architec
-		for (ItemCapabilityMap::const_iterator it = collector.provideAndOtherArchMap.begin();
-		     it != collector.provideAndOtherArchMap.end(); ++it) {
-		    if (it->second.matches (misc_info->capability()) == CapMatch::yes) {
-			// ignoring architecture
-			problem->addSolution (new ProblemSolutionIgnoreArchitecture (problem, it->first));
-		    }
-		}
-		// Searching for another item which provides this requires BUT has been set to be kept
-		for (ItemCapabilityMap::const_iterator it = collector.provideAndKeptMap.begin();
-		     it != collector.provideAndKeptMap.end(); ++it) {
-		    if (it->second.matches (misc_info->capability()) == CapMatch::yes) {
-			// Do install
-			problem->addSolution (new ProblemSolutionInstall (problem, it->first));
-		    }
-		}		
-		
-		// uninstall
-		problem->addSolution (new ProblemSolutionUninstall (problem, item)); 
-		// ignore requirement
-		problem->addSolution (new ProblemSolutionIgnoreRequires (problem, item, misc_info->capability())); 
-		problems.push_back (problem);
-		problem_created = true;		
-	    }
-	    break;
-	    case RESOLVER_INFO_TYPE_NO_UPGRADE: {			// Upgrade to q to avoid removing p is not possible.
-		ResolverInfoMisc_constPtr misc_info = dynamic_pointer_cast<const ResolverInfoMisc>(info);
-		what = misc_info->message();
-		// It is only an info --> no solution is needed		
-	    }
-	    break;
-	    case RESOLVER_INFO_TYPE_UNINSTALL_PROVIDER: {		// p provides c but is scheduled to be uninstalled
-		ResolverInfoMisc_constPtr misc_info = dynamic_pointer_cast<const ResolverInfoMisc>(info);
-		// TranslatorExplanation %s = name of package, patch, selection ...				
-		what =str::form (_("%s fulfills dependencies of %s but will be uninstalled"),
-				 misc_info->other()->name().c_str(),
-				 who.c_str());
-		details = misc_info->message();
-		// It is only an info --> no solution is needed
-	    }
-	    break;		
-	    case RESOLVER_INFO_TYPE_KEEP_PROVIDER: {		// p provides c but is scheduled to be kept
-		ResolverInfoMisc_constPtr misc_info = dynamic_pointer_cast<const ResolverInfoMisc>(info);
-		// TranslatorExplanation %s = name of package, patch, selection ...				
-		what =str::form (_("%s fulfills dependencies of %s but will be kept on your system"),
-				 misc_info->other()->name().c_str(),
-				 who.c_str());
-		details = misc_info->message();
-		// It is only an info --> no solution is needed
-	    }		
-	    break;
-	    case RESOLVER_INFO_TYPE_PARALLEL_PROVIDER: {		// p provides c but another version is already installed
-		ResolverInfoMisc_constPtr misc_info = dynamic_pointer_cast<const ResolverInfoMisc>(info);
-		// TranslatorExplanation %s = name of package, patch, selection ...				
-		what = str::form (_("No need to install %s"), misc_info->other()->name().c_str());
-		details = misc_info->message();
-		// It is only an info --> no solution is needed		
-	    }
-	    break;
-	    case RESOLVER_INFO_TYPE_NOT_INSTALLABLE_PROVIDER: {		// p provides c but is uninstallable
-		ResolverInfoMisc_constPtr misc_info = dynamic_pointer_cast<const ResolverInfoMisc>(info);
-		// TranslatorExplanation %s = name of package, patch, selection ...				
-		what = str::form (_("Cannot install %s to fulfill the dependencies of %s"),
-				  misc_info->other()->name().c_str(),
-				  who.c_str());
-		details = misc_info->message();
-		// It is only an info --> no solution is needed		
-	    }
-	    case RESOLVER_INFO_TYPE_OTHER_ARCH_PROVIDER: {		// p provides c but has other architecture
-		ResolverInfoMisc_constPtr misc_info = dynamic_pointer_cast<const ResolverInfoMisc>(info);
-		what = misc_info->message();
-		// It is only an info --> no solution is needed		
-	    }		
-	    break;
-	    case RESOLVER_INFO_TYPE_LOCKED_PROVIDER: {			// p provides c but is locked
-		ResolverInfoMisc_constPtr misc_info = dynamic_pointer_cast<const ResolverInfoMisc>(info);
-		// TranslatorExplanation %s = name of package, patch, selection ...				
-		what = str::form (_("Cannot install %s to fulfil the dependencies of %s"),
-				  misc_info->other()->name().c_str(),
-				  who.c_str());				
-		what = misc_info->message();
-		// It is only an info --> no solution is needed		
-	    }
-	    break;
-	    case RESOLVER_INFO_TYPE_CANT_SATISFY: {			// Can't satisfy requirement c
-		ResolverInfoMisc_constPtr misc_info = dynamic_pointer_cast<const ResolverInfoMisc>(info);
-		what = misc_info->message() + "\n";
-		details = logAdditionalInfo(collector.additionalInfo, item);				
-		ResolverProblem_Ptr problem = new ResolverProblem (what, details);
-		// uninstall
-		problem->addSolution (new ProblemSolutionUninstall (problem, item)); 
-		
-		// Unflag requirement for this item
-		problem->addSolution (new ProblemSolutionIgnoreRequires (problem, item, misc_info->capability()));
-		
-		// Unflag ALL require
-		// Evaluating all require Items
-		AllRequires info;
-		Dep dep( Dep::REQUIRES );
-
-		invokeOnEach( _pool.byCapabilityIndexBegin( misc_info->capability().index(), dep ), // begin()
-			      _pool.byCapabilityIndexEnd( misc_info->capability().index(), dep ),   // end()
-			      resfilter::ByCapMatch( misc_info->capability() ),
-			      functor::functorRef<bool,CapAndItem>(info) );
-		if (info.requirers.size() > 1)
-		    problem->addSolution (new ProblemSolutionIgnoreRequires (problem, info.requirers, misc_info->capability()));
-		
-		problems.push_back (problem);
-		problem_created = true;		
-	    }
-	    break;
-	// from QueueItemUninstall
-	    case RESOLVER_INFO_TYPE_UNINSTALL_TO_BE_INSTALLED: {	// p is to-be-installed, so it won't be unlinked.
-		ResolverInfoMisc_constPtr misc_info = dynamic_pointer_cast<const ResolverInfoMisc>(info);
-		// TranslatorExplanation %s = name of package, patch, selection ...				
-		what = str::form (_("%s will not be uninstalled, because it is still required"), who.c_str());
-		details = misc_info->message();
-		// It is only an info --> no solution is needed				
-	    }
-	    break;
-	    case RESOLVER_INFO_TYPE_UNINSTALL_INSTALLED: {		// p is required by installed, so it won't be unlinked.
-		ResolverInfoMisc_constPtr misc_info = dynamic_pointer_cast<const ResolverInfoMisc>(info);
-		// TranslatorExplanation %s = name of package, patch, selection ...				
-		what = str::form (_("%s will not be uninstalled, because it is still required"), who.c_str());		
-		details = misc_info->message() + "\n";
-		details += logAdditionalInfo(collector.additionalInfo, item);						
-
-                ResolverProblem_Ptr problem = new ResolverProblem (what, details);
-                if (item.status().isInstalled()) {
-                    // keep installed
-                    problem->addSolution (new ProblemSolutionKeep (problem, item));
-                } else {
-                    // Do install
-                    problem->addSolution (new ProblemSolutionInstall (problem, item));
-                }
-                problems.push_back (problem);
-                problem_created = true;
-
-	    }
-	    break;
-	    case RESOLVER_INFO_TYPE_UNINSTALL_LOCKED: {			// cant uninstall, its locked
-		ResolverInfoMisc_constPtr misc_info = dynamic_pointer_cast<const ResolverInfoMisc>(info);
-		what = misc_info->message();
-		
-		if (misc_info->trigger() == ResolverInfoMisc::OBSOLETE) {
-		    // TranslatorExplanation %s = name of package, patch, selection ...						    
-		    details = str::form (_("%s obsoletes %s. But %s cannot be deleted, because it is locked."),
-					 misc_info->other()->name().c_str(),
-					 who.c_str(), who.c_str()) + "\n";
-		    details += logAdditionalInfo(collector.additionalInfo, item);						    
-		}
-		
-		ResolverProblem_Ptr problem = new ResolverProblem (what, details);
-		problem->addSolution (new ProblemSolutionUnlock (problem, item)); // Unlocking resItem
-		// unlock ALL existing resolvables
-		problem->addSolution (new ProblemSolutionUnlock (problem, pool()));					
-		if (misc_info->trigger() == ResolverInfoMisc::OBSOLETE) {
-		    // Ignore obsoletes
-		    problem->addSolution (new ProblemSolutionIgnoreObsoletes (problem, item, misc_info->capability(),
-									      misc_info->other())); 
-		} else {
-		    // This is an "default" soltution
-		    // keep installed
-		    problem->addSolution (new ProblemSolutionKeep (problem, item));
-		}
-		problems.push_back (problem);
-		problem_created = true;
-	    }
-	    break;
-	// from QueueItemConflict
-	    case RESOLVER_INFO_TYPE_CONFLICT_CANT_INSTALL: {		// to-be-installed p conflicts with q due to c
-		ResolverInfoMisc_constPtr misc_info = dynamic_pointer_cast<const ResolverInfoMisc>(info);
-		// TranslatorExplanation %s = name of package, patch, selection ...
-		if (misc_info->other())
-		    what = str::form (_("Cannot install %s, because it is conflicting with %s"),
-				      who.c_str(),
-				      misc_info->other()->name().c_str());
-		else
-		    what = str::form (_("Cannot install %s, because it is conflicting"),
+		    break;
+		case RESOLVER_INFO_TYPE_NOT_INSTALLABLE_PROVIDER: {		// p provides c but is uninstallable
+		    ResolverInfoMisc_constPtr misc_info = dynamic_pointer_cast<const ResolverInfoMisc>(info);
+		    // TranslatorExplanation %s = name of package, patch, selection ...				
+		    what = str::form (_("Cannot install %s to fulfill the dependencies of %s"),
+				      misc_info->other()->name().c_str(),
 				      who.c_str());
-		details = misc_info->message() + "\n";
-		details += logAdditionalInfo(collector.additionalInfo, item);
-		if (misc_info->other())		
-		    details += logAdditionalInfo(collector.additionalInfo, misc_info->other());
-		ResolverProblem_Ptr problem = new ResolverProblem (what, details);		
-		// Uninstall p
-		problem->addSolution (new ProblemSolutionUninstall (problem, item));
-		if (misc_info->other())
-		    // Uninstall q
-		    problem->addSolution (new ProblemSolutionUninstall (problem, misc_info->other()));
-		// Remove conflict in the resolvable which has to be installed
-		problem->addSolution (new ProblemSolutionIgnoreConflicts (problem, item, misc_info->other_capability(),
-									  misc_info->other()));
-		problems.push_back (problem);
-		problem_created = true;
+		    details = misc_info->message();
+		    // It is only an info --> no solution is needed		
+		}
+		case RESOLVER_INFO_TYPE_OTHER_ARCH_PROVIDER: {		// p provides c but has other architecture
+		    ResolverInfoMisc_constPtr misc_info = dynamic_pointer_cast<const ResolverInfoMisc>(info);
+		    what = misc_info->message();
+		    // It is only an info --> no solution is needed		
+		}		
+		    break;
+		case RESOLVER_INFO_TYPE_LOCKED_PROVIDER: {			// p provides c but is locked
+		    ResolverInfoMisc_constPtr misc_info = dynamic_pointer_cast<const ResolverInfoMisc>(info);
+		    // TranslatorExplanation %s = name of package, patch, selection ...				
+		    what = str::form (_("Cannot install %s to fulfil the dependencies of %s"),
+				      misc_info->other()->name().c_str(),
+				      who.c_str());				
+		    what = misc_info->message();
+		    // It is only an info --> no solution is needed		
+		}
+		    break;
+		case RESOLVER_INFO_TYPE_CANT_SATISFY: {			// Can't satisfy requirement c
+		    ResolverInfoMisc_constPtr misc_info = dynamic_pointer_cast<const ResolverInfoMisc>(info);
+		    what = misc_info->message() + "\n";
+		    details = logAdditionalInfo(collector.additionalInfo, item);				
+		    ResolverProblem_Ptr problem = new ResolverProblem (what, details);
+		    // uninstall
+		    problem->addSolution (new ProblemSolutionUninstall (problem, item)); 
+		
+		    // Unflag requirement for this item
+		    problem->addSolution (new ProblemSolutionIgnoreRequires (problem, item, misc_info->capability()));
+		
+		    // Unflag ALL require
+		    // Evaluating all require Items
+		    AllRequires info;
+		    Dep dep( Dep::REQUIRES );
+
+		    invokeOnEach( _pool.byCapabilityIndexBegin( misc_info->capability().index(), dep ), // begin()
+				  _pool.byCapabilityIndexEnd( misc_info->capability().index(), dep ),   // end()
+				  resfilter::ByCapMatch( misc_info->capability() ),
+				  functor::functorRef<bool,CapAndItem>(info) );
+		    if (info.requirers.size() > 1)
+			problem->addSolution (new ProblemSolutionIgnoreRequires (problem, info.requirers, misc_info->capability()));
+		
+		    problems.push_back (problem);
+		    problem_created = true;		
+		}
+		    break;
+		    // from QueueItemUninstall
+		case RESOLVER_INFO_TYPE_UNINSTALL_TO_BE_INSTALLED: {	// p is to-be-installed, so it won't be unlinked.
+		    ResolverInfoMisc_constPtr misc_info = dynamic_pointer_cast<const ResolverInfoMisc>(info);
+		    // TranslatorExplanation %s = name of package, patch, selection ...				
+		    what = str::form (_("%s will not be uninstalled, because it is still required"), who.c_str());
+		    details = misc_info->message();
+		    // It is only an info --> no solution is needed				
+		}
+		    break;
+		case RESOLVER_INFO_TYPE_UNINSTALL_INSTALLED: {		// p is required by installed, so it won't be unlinked.
+		    ResolverInfoMisc_constPtr misc_info = dynamic_pointer_cast<const ResolverInfoMisc>(info);
+		    // TranslatorExplanation %s = name of package, patch, selection ...				
+		    what = str::form (_("%s will not be uninstalled, because it is still required"), who.c_str());		
+		    details = misc_info->message() + "\n";
+		    details += logAdditionalInfo(collector.additionalInfo, item);						
+
+		    ResolverProblem_Ptr problem = new ResolverProblem (what, details);
+		    if (item.status().isInstalled()) {
+			// keep installed
+			problem->addSolution (new ProblemSolutionKeep (problem, item));
+		    } else {
+			// Do install
+			problem->addSolution (new ProblemSolutionInstall (problem, item));
+		    }
+		    problems.push_back (problem);
+		    problem_created = true;
+
+		}
+		    break;
+		case RESOLVER_INFO_TYPE_UNINSTALL_LOCKED: {			// cant uninstall, its locked
+		    ResolverInfoMisc_constPtr misc_info = dynamic_pointer_cast<const ResolverInfoMisc>(info);
+		    what = misc_info->message();
+		
+		    if (misc_info->trigger() == ResolverInfoMisc::OBSOLETE) {
+			// TranslatorExplanation %s = name of package, patch, selection ...						    
+			details = str::form (_("%s obsoletes %s. But %s cannot be deleted, because it is locked."),
+					     misc_info->other()->name().c_str(),
+					     who.c_str(), who.c_str()) + "\n";
+			details += logAdditionalInfo(collector.additionalInfo, item);						    
+		    }
+		
+		    ResolverProblem_Ptr problem = new ResolverProblem (what, details);
+		    problem->addSolution (new ProblemSolutionUnlock (problem, item)); // Unlocking resItem
+		    // unlock ALL existing resolvables
+		    problem->addSolution (new ProblemSolutionUnlock (problem, pool()));					
+		    if (misc_info->trigger() == ResolverInfoMisc::OBSOLETE) {
+			// Ignore obsoletes
+			problem->addSolution (new ProblemSolutionIgnoreObsoletes (problem, item, misc_info->capability(),
+										  misc_info->other())); 
+		    } else {
+			// This is an "default" soltution
+			// keep installed
+			problem->addSolution (new ProblemSolutionKeep (problem, item));
+		    }
+		    problems.push_back (problem);
+		    problem_created = true;
+		}
+		    break;
+		    // from QueueItemConflict
+		case RESOLVER_INFO_TYPE_CONFLICT_CANT_INSTALL: {		// to-be-installed p conflicts with q due to c
+		    ResolverInfoMisc_constPtr misc_info = dynamic_pointer_cast<const ResolverInfoMisc>(info);
+		    // TranslatorExplanation %s = name of package, patch, selection ...
+		    if (misc_info->other())
+			what = str::form (_("Cannot install %s, because it is conflicting with %s"),
+					  who.c_str(),
+					  misc_info->other()->name().c_str());
+		    else
+			what = str::form (_("Cannot install %s, because it is conflicting"),
+					  who.c_str());
+		    details = misc_info->message() + "\n";
+		    details += logAdditionalInfo(collector.additionalInfo, item);
+		    if (misc_info->other())		
+			details += logAdditionalInfo(collector.additionalInfo, misc_info->other());
+		    ResolverProblem_Ptr problem = new ResolverProblem (what, details);		
+		    // Uninstall p
+		    problem->addSolution (new ProblemSolutionUninstall (problem, item));
+		    if (misc_info->other())
+			// Uninstall q
+			problem->addSolution (new ProblemSolutionUninstall (problem, misc_info->other()));
+		    // Remove conflict in the resolvable which has to be installed
+		    problem->addSolution (new ProblemSolutionIgnoreConflicts (problem, item, misc_info->other_capability(),
+									      misc_info->other()));
+		    problems.push_back (problem);
+		    problem_created = true;
+		}
+		    break;
+		case RESOLVER_INFO_TYPE_CONFLICT_UNINSTALLABLE: {		// uninstalled p is marked uninstallable it conflicts [with q] due to c
+		    ResolverInfoMisc_constPtr misc_info = dynamic_pointer_cast<const ResolverInfoMisc>(info);
+		    // TranslatorExplanation %s = name of package, patch, selection ...				
+		    what = str::form (_("%s is uninstallable due to conflicts with %s"),
+				      who.c_str(),
+				      misc_info->other()->name().c_str());				
+		    details = misc_info->message();
+		    // It is only an info --> no solution is needed
+		}
+		    break;
 	    }
-	    break;
-	    case RESOLVER_INFO_TYPE_CONFLICT_UNINSTALLABLE: {		// uninstalled p is marked uninstallable it conflicts [with q] due to c
-		ResolverInfoMisc_constPtr misc_info = dynamic_pointer_cast<const ResolverInfoMisc>(info);
-		// TranslatorExplanation %s = name of package, patch, selection ...				
-		what = str::form (_("%s is uninstallable due to conflicts with %s"),
-				who.c_str(),
-				misc_info->other()->name().c_str());				
-		details = misc_info->message();
-		// It is only an info --> no solution is needed
+	} else {
+	    // No item available
+	    switch (info->type()) {
+		case RESOLVER_INFO_TYPE_NO_PROVIDER: {			// There are no installable providers of c [for p]
+		    ResolverInfoMisc_constPtr misc_info = dynamic_pointer_cast<const ResolverInfoMisc>(info);
+		    // TranslatorExplanation %s = name requirement ...				
+		    what = str::form (_("Requirememt %s cannot be fulfilled."), misc_info->capability().asString().c_str());		
+		    details = misc_info->message() + "\n";
+		    ResolverProblem_Ptr problem = new ResolverProblem (what, details);
+		    problems.push_back (problem);
+		    problem_created = true;		
+		}
+		    break;
+		default:
+		    ERR << "No item available for error:" << info << endl;
+		    // but do not generate a default problem
+		    problem_created = true;				    
 	    }
-	    break;
 	}
 	if (!problem_created) {
 	    ResolverProblem_Ptr problem = new ResolverProblem (what, details);
 	    problems.push_back (problem);
 	}
-
+	
 	if (problems.size() >= MAXPROBLEMS) {
 	    MIL << "Max problems reached: " << MAXPROBLEMS << ". Do not regarding the rest." << endl;
 	    break;
 	}
+	
     }
     if (problems.empty()) {
 	context->spewInfo();
