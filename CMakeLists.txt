@@ -58,6 +58,7 @@ SET (CPACK_SOURCE_IGNORE_FILES ${CPACK_SOURCE_IGNORE_FILES}
 "~$"
 "\\\\.cvsignore$"
 "Makefile\\\\.in$"
+"\\\\.cdtproject$;\\\\.cproject$;\\\\.project$;/\\\\.settings/"
 )
 
 INCLUDE(CPack)
