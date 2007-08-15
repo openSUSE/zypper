@@ -3,6 +3,7 @@ Wed Aug 15 15:32:36 CEST 2007 - schubi@suse.de
 
 - Bugfix while regarding correct vendor in update
 - r6677 
+- version 3.15.0
 
 -------------------------------------------------------------------
 Wed Aug 15 13:57:04 CEST 2007 - jkupec@suse.cz
@@ -16,7 +17,6 @@ Wed Aug 15 13:57:04 CEST 2007 - jkupec@suse.cz
 - RepoManager::checkIfToRefreshMetadata(RepoInfo,Url,policy):
   decision to do the refresh moved to this public method.
 - r6667
-- version 3.15.0
 
 -------------------------------------------------------------------
 Wed Aug 15 12:38:26 CEST 2007 - schubi@suse.de
