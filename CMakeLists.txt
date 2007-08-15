@@ -49,16 +49,31 @@ SET( CPACK_SOURCE_PACKAGE_FILE_NAME "${PACKAGE}-${VERSION}" )
 # in absolute path + filename to find files or directories to be excluded
 # from source tarball.
 SET (CPACK_SOURCE_IGNORE_FILES
-#/CVS/;/\\.svn/;/\\.libs/;/\\.deps/;\\.swp$;/build/;\\.o$;\\.lo$;\\.la$;~$;\\\\.cvsignore$;Makefile\\\\.in$;
-/CVS/;/\\\\.svn/;/\\\\.libs/;/\\\\.deps/;\\\\.swp$;/build/;\\\\.o$;\\\\.lo$;\\\\.la$;~$
-)
-
-SET (CPACK_SOURCE_IGNORE_FILES ${CPACK_SOURCE_IGNORE_FILES}
-"/CVS/;/.libs/;/.deps/;/.git/;.swp$;.#;/#;/build/"
-"~$"
+#svn files
+"\\\\.svn/"
 "\\\\.cvsignore$"
+# temporary files
+"\\\\.swp$"
+# backup files
+"~$"
+# eclipse files
+"\\\\.cdtproject$"
+"\\\\.cproject$"
+"\\\\.project$"
+"\\\\.settings/"
+# others
+"\\\\.#"
+"/#"
+"/build/"
+"/\\\\.git/"
+# used before
+"/CVS/"
+"/\\\\.libs/"
+"/\\\\.deps/"
+"\\\\.o$"
+"\\\\.lo$"
+"\\\\.la$"
 "Makefile\\\\.in$"
-"\\\\.cdtproject$;\\\\.cproject$;\\\\.project$;/\\\\.settings/"
 )
 
 INCLUDE(CPack)
