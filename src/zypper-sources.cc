@@ -17,6 +17,7 @@
 #include "zypper-getopt.h"
 #include "zypper-tabulator.h"
 #include "zypper-callbacks.h"
+#include "zypper-utils.h"
 #include "zypper-sources.h"
 
 
@@ -37,25 +38,63 @@ static bool refresh_raw_metadata(const RepoInfo & repo, bool force_download)
   try
   {
     RepoManager manager;
+
+    // check whether libzypp indicates a refresh is needed, and if so,
+    // print a message
+    cout_v << format(
+        _("Checking whether to refresh metadata for %s.")) % repo.alias()
+        << endl;
+    for(RepoInfo::urls_const_iterator it = repo.baseUrlsBegin();
+        it != repo.baseUrlsEnd(); ++it)
+    {
+      try
+      {
+        if (manager.checkIfToRefreshMetadata(repo, *it))
+          cout_n << format(_("Refreshing '%s'")) % repo.alias() << endl;
+      }
+      catch (const Exception & e)
+      {
+        ZYPP_CAUGHT(e);
+        ERR << *it << " doesn't look good. Trying another url." << endl;
+      }
+    }
+
     manager.refreshMetadata(repo, force_download ?
       RepoManager::RefreshForced : RepoManager::RefreshIfNeeded);
   }
+  catch (const MediaException & e)
+  {
+    report_problem(e,
+        boost::str(format(_("Problem downloading files from '%s'.")) % repo.alias()),
+        _("Please, see the above error message to for a hint."));
+
+    return true; // error
+  }
   catch (const RepoNoUrlException & e)
   {
+    ZYPP_CAUGHT(e);
     cerr << format(_("No URLs defined for '%s'.")) % repo.alias() << endl;
     if (!repo.filepath().empty())
       cerr << format(
+          // TranslatorExplanation the first %s is a .repo file path
           _("Please, add one or more base URL (baseurl=URL) entries to %s for repository '%s'."))
           % repo.filepath() % repo.alias() << endl;
-    ERR << repo.alias() << " is invalid, disabling it" << endl;
 
+    return true; // error
+  }
+  catch (const RepoNoAliasException & e)
+  {
+    ZYPP_CAUGHT(e);
+    cerr << format(_("No alias defined this repository.")) << endl;
+    report_a_bug(cerr);
     return true; // error
   }
   catch (const RepoException & e)
   {
+    ZYPP_CAUGHT(e);
     report_problem(e,
-        boost::str(format(_("Repository '%s' is invalid.")) % repo.alias()));
-    ERR << repo.alias() << " is invalid, disabling it" << endl;
+        boost::str(format(_("Repository '%s' is invalid.")) % repo.alias()),
+        _("Please, check if the URLs defined for this repository are pointing to a valid repository."));
 
     return true; // error
   }
@@ -112,6 +151,14 @@ static bool build_cache(const RepoInfo &repo, bool force_build)
 
     return true; // error
   }
+  catch (const repo::RepoMetadataException & e)
+  {
+    ZYPP_CAUGHT(e);
+    report_problem(e,
+        boost::str(format(_("Repository metadata for '%s' not found in local cache.")) % repo.alias()));
+    // this should not happend and is probably a bug, rethrowing
+    ZYPP_RETHROW(e);
+  }
   catch (const Exception &e)
   {
     ZYPP_CAUGHT(e);
@@ -122,7 +169,7 @@ static bool build_cache(const RepoInfo &repo, bool force_build)
 
     return true; // error
   }
-  
+
   return false; // no error
 }
 
@@ -174,16 +221,11 @@ static int do_init_repos()
 
     if (do_refresh)
     {
-      cout_v << format(
-          _("Checking whether to refresh metadata for %s.")) % repo.alias()
-          << endl;
       MIL << "calling refresh for " << repo.alias() << endl;
 
       // handle root user differently
       if (geteuid() == 0)
       {
-        // limit progress reporting only to verbosity level MEDIUM
-        gData.limit_to_verbosity = VERBOSITY_MEDIUM;
         if (refresh_raw_metadata(repo, false) || build_cache(repo, false))
         {
           cerr << format(_("Disabling repository '%s' because of the above error."))
@@ -193,8 +235,6 @@ static int do_init_repos()
 
           it->setEnabled(false);
         }
-        // restore verbosity limit
-        gData.limit_to_verbosity = VERBOSITY_NORMAL;
       }
       // non-root user
       else
@@ -871,19 +911,28 @@ void load_repo_resolvables(bool to_pool)
 
     try 
     {
+      bool error = false;
       // if there is no metadata locally
       if ( manager.metadataStatus(repo).empty() )
       {
-        cout_v << format(_("Retrieving repository '%s' information..."))
+        cout_v << format(_("Retrieving repository '%s' data..."))
                          % repo.alias() << endl;
-        manager.refreshMetadata(repo);
+        error = refresh_raw_metadata(repo, false);
       }
 
-      if (!manager.isCached(repo))
+      if (!error && !manager.isCached(repo))
       {
         cout_v << format(_("Repository '%s' not cached. Caching..."))
                          % repo.alias() << endl;
-        manager.buildCache(repo);
+        error = build_cache(repo, false);
+      }
+
+      if (error)
+      {
+        cerr << format(_("Problem loading data from '%s'")) % repo.alias() << endl;
+        cerr << format(_("Resolvables from '%s' not loaded because of error."))
+            % repo.alias() << endl;
+        continue;
       }
 
       Repository repository(manager.createFromCache(repo));
@@ -895,20 +944,12 @@ void load_repo_resolvables(bool to_pool)
       else
         gData.repo_resolvables.insert(store.begin(), store.end());
     }
-    catch (const repo::RepoMetadataException & e)
-    {
-      ZYPP_CAUGHT(e);
-      report_problem(e,
-          boost::str(format(_("Repository metadata for '%s' not found in local cache.")) % repo.alias()));
-      // this should not happend and is probably a bug, rethrowing
-      ZYPP_RETHROW(e);
-    }
     catch (const Exception & e)
     {
       ZYPP_CAUGHT(e);
-      cerr << format(_("Problem loading data from '%s'")) % repo.alias();
-      cerr_v << ":" << endl << e.msg();
-      cerr << endl;
+      report_problem(e,
+          boost::str(format(_("Problem loading data from '%s'")) % repo.alias()),
+          _("Try 'zypper refresh', or even remove /var/cache/zypp/zypp.db before doing so."));
       cerr << format(_("Resolvables from '%s' not loaded because of error."))
                       % repo.alias() << endl;
     }
