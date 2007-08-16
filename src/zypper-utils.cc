@@ -1,11 +1,5 @@
 #include <fstream>
-#include <sstream>
-#include <boost/format.hpp>
 #include "zypper.h"
-#include "zypper-misc.h"
-#include "zypper-tabulator.h"
-
-#include <zypp/Patch.h>
 
 using namespace zypp::detail;
 
@@ -29,6 +23,7 @@ string read_line_from_file( const Pathname &file )
   return token;
  }
 
+// ----------------------------------------------------------------------------
 
 void write_line_to_file( const Pathname &file, const std::string &line )
 {
@@ -38,4 +33,16 @@ void write_line_to_file( const Pathname &file, const std::string &line )
     os << line << endl;;
   }
   os.close();
+}
+
+// ----------------------------------------------------------------------------
+
+/// tell to report a bug, and how
+// (multiline, with endls)
+ostream& report_a_bug (ostream& stm)
+{
+  return stm << _("Please file a bug report about this.") << endl
+    // TranslatorExplanation remember not to translate the URL
+    // unless you translate the actual page :)
+             << _("See http://en.opensuse.org/Zypper#Troubleshooting for instructions.") << endl;
 }

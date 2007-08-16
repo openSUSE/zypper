@@ -36,6 +36,7 @@
 #include "zypper-info.h"
 #include "zypper-getopt.h"
 #include "zypper-command.h"
+#include "zypper-utils.h"
 
 using namespace std;
 using namespace zypp;
@@ -1372,17 +1373,6 @@ int one_command(int argc, char **argv)
 
   // if the program reaches this line, something went wrong
   return ZYPPER_EXIT_ERR_BUG;
-}
-
-// ----------------------------------------------------------------------------
-
-/// tell to report a bug, and how
-// (multiline, with endls)
-ostream& report_a_bug (ostream& stm) {
-  return stm << _("Please file a bug report about this.") << endl
-    // remember not to translate the URL
-    // unless you translate the actual page :)
-	     << _("See http://en.opensuse.org/Zypper#Troubleshooting for instructions.") << endl;
 }
 
 // ----------------------------------------------------------------------------

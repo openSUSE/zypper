@@ -1,21 +1,17 @@
-/*-----------------------------------------------------------*- c++ -*-\
-|                          ____ _   __ __ ___                          |
-|                         |__  / \ / / . \ . \                         |
-|                           / / \ V /|  _/  _/                         |
-|                          / /__ | | | | | |                           |
-|                         /_____||_| |_| |_|                           |
-|                                                                      |
-\---------------------------------------------------------------------*/
+#ifndef ZYPPER_UTILS_H
+#define ZYPPER_UTILS_H
 
-#ifndef ZMART_UTILS_H
-#define ZMART_UTILS_H
-
+#include <ostream>
 #include <string>
-#include "zypp/Url.h"
-#include "zypp/ResObject.h"
+
+#include <zypp/Pathname.h>
 
 std::string read_line_from_file( const zypp::Pathname &file );
 void write_line_to_file( const zypp::Pathname &file, const std::string &line );
 
-#endif
+/**
+ * Write a suggestion to report a bug to the specified stream.
+ */
+std::ostream & report_a_bug (std::ostream& stm);
 
+#endif /*ZYPPER_UTILS_H*/
