@@ -3,7 +3,7 @@ Thu Aug 16 23:43:50 CEST 2007 - kkaempf@suse.de
 
 - fix ResolvableQuery::query(), add ResolvableQuery::queryByName()
   install zypp/cache header files.
-- rev 6719
+- rev 6719, version 3.16.13
 
 -------------------------------------------------------------------
 Thu Aug 16 17:21:52 CEST 2007 - kkaempf@suse.de
