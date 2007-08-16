@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Thu Aug 16 17:08:58 CEST 2007 - kkaempf@suse.de
+
+- fix String::endsWith (#301038)
+
+-------------------------------------------------------------------
 Thu Aug 16 11:16:25 CEST 2007 - schubi@suse.de
 
 - added an _explicitly_requested in QueueItemConflict ( as already in

@@ -319,7 +319,7 @@ namespace zypp
     std::string getline( std::istream & str, const Trim trim_r );
 
     inline bool startsWith(const std::string& s, const char* str) { return s.find(str) == 0; }
-    inline bool endsWith(const std::string& s, const char* str) { return s.find(str) == s.size() - strlen(str)-1; }
+    inline bool endsWith(const std::string& s, const char* str) { return s.find(str) == s.size() - strlen(str); }
     inline bool contains(const std::string& s, const char* str) { return s.find(str) != std::string::npos; }
 
     /**
