@@ -89,8 +89,8 @@ struct ResolvableQuery::Impl
     sqlite3_connection con((_dbdir + "zypp.db").asString().c_str());
     //con.executenonquery("PRAGMA cache_size=8000;");
     con.executenonquery("BEGIN;");
-    sqlite3_command cmd( con, "select " + _fields + " from resolvables where name like '%:name%';");
-    cmd.bind(":name", s);
+    sqlite3_command cmd( con, "select " + _fields + " from resolvables where name like :name;");
+    cmd.bind(":name", string("%") + s + "%");
     sqlite3_reader reader = cmd.executereader();
     while(reader.read())
     {
