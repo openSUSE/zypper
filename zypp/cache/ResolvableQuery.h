@@ -38,13 +38,6 @@ namespace zypp
   namespace cache
   { /////////////////////////////////////////////////////////////////
 
-   /**
-    * The resolvable query class allows you to query for resolvable
-    * data and properties from the cache.
-    */
-    struct ResolvableQuery
-    {
-    public:
      /**
       * Callback definition
       * first parameter is the resolvable id.
@@ -53,6 +46,13 @@ namespace zypp
       typedef function<bool( const data::RecordId &,
                              data::ResObject_Ptr )> ProcessResolvable;
 
+   /**
+    * The resolvable query class allows you to query for resolvable
+    * data and properties from the cache.
+    */
+    struct ResolvableQuery
+    {
+    public:
       /**
        * Constructor
        *
