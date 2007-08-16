@@ -658,12 +658,25 @@ int add_repo(RepoInfo & repo)
     report_problem(e, _("Unknown problem when adding repository:"));
     return ZYPPER_EXIT_ERR_BUG;
   }
-  
-  //! \todo different output for -r and for zypper.
-  cout_n << format(_("Repository '%s' successfully added:")) % repo.alias() << endl;
-  cout_n << ( repo.enabled() ? "[x]" : "[ ]" );
-  cout_n << ( repo.autorefresh() ? "* " : "  " );
-  cout_n << repo.alias() << " (" << *repo.baseUrlsBegin() << ")" << endl;
+
+  cout << format(_("Repository '%s' successfully added")) % repo.alias();
+  cout_n << ":";
+  cout << endl;
+
+  if (gSettings.is_rug_compatible)
+  {
+    cout_n << ( repo.enabled() ? "[x]" : "[ ]" );
+    cout_n << ( repo.autorefresh() ? "* " : "  " );
+    cout_n << repo.alias() << " (" << *repo.baseUrlsBegin() << ")" << endl;
+  }
+  else
+  {
+    // TranslatorExplanation used as e.g. "Enabled: Yes"
+    cout_n << _("Enabled") << ": " << (repo.enabled() ? _("Yes") : _("No")) << endl; 
+    // TranslatorExplanation used as e.g. "Autorefresh: Yes"
+    cout_n << _("Autorefresh") << ": " << (repo.autorefresh() ? _("Yes") : _("No")) << endl;
+    cout_n << "URL: " << *repo.baseUrlsBegin() << endl;
+  }
 
   MIL << "Repository successfully added: " << repo << endl;
 
