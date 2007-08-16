@@ -142,7 +142,7 @@ struct RemoveResolvableReportReceiver : public zypp::callback::ReceiveReport<zyp
   {
     cerr << resolvable << endl;
     display_error (error, description);
-    return (Action) read_action_ari ();
+    return (Action) read_action_ari (ABORT);
   }
 
   virtual void finish( zypp::Resolvable::constPtr /*resolvable*/, Error error, cbstring reason )
@@ -191,7 +191,7 @@ struct InstallResolvableReportReceiver : public zypp::callback::ReceiveReport<zy
       cerr_v << "Will retry more aggressively" << endl;
       return ABORT;
     }
-    return (Action) read_action_ari ();
+    return (Action) read_action_ari (ABORT);
   }
 
   virtual void finish( zypp::Resolvable::constPtr /*resolvable*/, Error error, cbstring reason, RpmLevel level )

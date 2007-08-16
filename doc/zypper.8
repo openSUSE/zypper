@@ -62,6 +62,9 @@ Type of resolvable (default: package)
 .TP
 .I \-y, \-\-no-confirm
 Don't require user confirmation.
+.TP
+.I \-l, \-\-auto\-agree\-with\-licenses
+Automatically say 'yes' to third party license confirmation prompt. By using this option, you choose to agree with licenses of all third-party software this command will install. This option is particularly useful for administators installing the same set of packages on multiple machines (by an automated process) and have the licenses confirmed before.
 
 .TP
 .B list-updates (lu)
@@ -97,6 +100,9 @@ Don't require user confirmation.
 This will skip interactive patches, that is those that need a reboot,
 contain a message, or update a package whose license needs to be
 confirmed.
+.TP
+.I \-l, \-\-auto\-agree\-with\-licenses
+Automatically say 'yes' to third party license confirmation prompt. By using this option, you choose to agree with licenses of all third-party software this command will install. This option is particularly useful for administators installing the same set of packages on multiple machines (by an automated process) and have the licenses confirmed before.
 
 .B NOTE:
 Zypper prefers to update only those packages for which a patch
@@ -243,8 +249,11 @@ Specifies table style to use. Table style is identified by an integer number. TO
 .I \-r, \-\-rug\-compatible
 Turns on rug compatibility. See compatibility notes next to affected commands.
 .TP
-.I      \-\-non\-interactive
-Switches to non-interactive mode. In this mode zypper doesn't ask user to type answers to various prompts, but uses default answers automatically. (Under development, use only with install, update, and remove commands for other than debugging purposes)
+.I \-n, \-\-non\-interactive
+Switches to non-interactive mode. In this mode zypper doesn't ask user to type answers to various prompts, but uses default answers automatically.
+.TP
+.I      \-\-no\-gpg\-checks
+Ignore GPG check failures and continue. If a GPG issue occurs when using this option zypper prints and logs a warning and automatically continues without interrupting the operation. Use this option with causion, as you can easily overlook security problems by using it.
 
 .SH "FILES"
 .TP

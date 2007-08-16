@@ -229,7 +229,7 @@ struct SourceReportReceiver  : public zypp::callback::ReceiveReport<zypp::source
   {
     display_done ();
     display_error (error, description);
-    return (Action) read_action_ari ();
+    return (Action) read_action_ari (ABORT);
   }
 
   virtual void finish( zypp::Source_Ref /*source*/, cbstring task, Error error, cbstring reason )

@@ -250,8 +250,7 @@ int main(int argc, char **argv)
     
     show_summary();
       
-    std::cout << "Continue? [y/n] ";
-    if (readBoolAnswer())
+    if (read_bool_answer("Continue? [y/n] ", true))
     {
       ZYppCommitResult result = God->commit( ZYppCommitPolicy() );
       std::cout << result << std::endl; 

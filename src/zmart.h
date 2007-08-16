@@ -52,8 +52,10 @@ struct Settings
   disable_system_sources(false),
   disable_system_resolvables(false),
   is_rug_compatible(false),
-  root_dir("/"),
-  non_interactive(false)
+  non_interactive(false),
+  no_gpg_checks(false),
+  license_auto_agree(false),
+  root_dir("/")
   {}
 
   std::list<zypp::Url> additional_sources;
@@ -64,8 +66,10 @@ struct Settings
   bool disable_system_sources;
   bool disable_system_resolvables;
   bool is_rug_compatible;
-  std::string root_dir;
   bool non_interactive;
+  bool no_gpg_checks;
+  bool license_auto_agree;
+  std::string root_dir;
 };
 
 struct Error

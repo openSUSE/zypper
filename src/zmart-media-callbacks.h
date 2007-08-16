@@ -22,6 +22,7 @@
 #include <zypp/Source.h>
 
 #include "AliveCursor.h"
+#include "zypper-callbacks.h"
 
 using zypp::media::MediaChangeReport;
 using zypp::media::DownloadProgressReport;
@@ -33,13 +34,15 @@ namespace ZmartRecipients
   struct MediaChangeReportReceiver : public zypp::callback::ReceiveReport<MediaChangeReport>
   {
     virtual MediaChangeReport::Action requestMedia( zypp::Source_Ref source, unsigned mediumNr, MediaChangeReport::Error error, cbstring description )
-    { 
-      cout << "Please insert media [" << description << "] # " << mediumNr << ". Retry [y/n]: " << endl;
-      if (readBoolAnswer())
+    {
+      // TranslatorExplanation don't translate letters 'y' and 'n' for now
+      std::string request = boost::str(boost::format(
+          _("Please insert media [%s] # %d and type 'y' to continue or 'n' to cancel the operation."))
+          % description % mediumNr);
+      if (read_bool_answer(request, false))
         return MediaChangeReport::RETRY; 
       else
         return MediaChangeReport::ABORT; 
-    
     }
   };
 

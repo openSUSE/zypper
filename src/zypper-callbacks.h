@@ -48,12 +48,24 @@ void display_error (Error error, const std::string& reason) {
   }
 }
 
-/** 
+/**
  * Abort, Retry, Ignore stdin prompt.
  * \param default_action Answer to be returned in non-interactive mode. If none
- * 		is specified, 0 (ABORT) is returned. In interactive mode, this parameter
+ *    is specified, 0 (ABORT) is returned. In interactive mode, this parameter
  *    is ignored.
  */
 int read_action_ari (int default_action = -1);
+
+/**
+ * Prompt for Yes/No answer from stdin.
+ *
+ * \param question Question to be printed on prompt.
+ * \param default_answer Value to be returned in non-interactive mode or on
+ *      input failure.
+ *
+ * \todo make this localized
+ */
+bool read_bool_answer(const string & question, bool default_answer);
+
 std::string to_string (zypp::Resolvable::constPtr resolvable);
 #endif

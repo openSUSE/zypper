@@ -1,12 +1,14 @@
 #include <fstream>
 #include <sstream>
 #include <boost/format.hpp>
-#include "zmart.h"
-#include "zmart-misc.h"
 
 #include <zypp/Patch.h>
 #include <zypp/base/Algorithm.h>
 #include <zypp/solver/detail/Helper.h>
+
+#include "zmart.h"
+#include "zmart-misc.h"
+#include "zypper-callbacks.h"
 
 using namespace zypp::detail;
 
@@ -31,30 +33,6 @@ void cond_init_target () {
 #endif
     done = true;
   }
-}
-
-// return the default value on input failure
-// TODO make this locale dependent?
-bool read_bool_with_default (bool defval) {
-  istream & stm = cin;
-
-  string c = "";
-  while (stm.good () && c != "y" && c != "Y" && c != "N" && c != "n")
-    c = zypp::str::getline (stm, zypp::str::TRIM);
-      
-  if (c == "y" || c == "Y")
-    return true;
-  else if (c == "n" || c == "N")
-    return false;
-  else
-    return defval;
-}
-
-// Read an answer (ynYN)
-// Defaults to 'false'
-bool readBoolAnswer()
-{
-  return read_bool_with_default (false);
 }
 
 // converts a user-supplied kind to a zypp kind object
@@ -671,7 +649,7 @@ void list_updates( const ResObject::Kind &kind )
     th << _("S") << _("Catalog"); // for translators: S stands for Status
     if (gSettings.is_rug_compatible) {
       th << "Bundle";
-      ++cols;
++cols;
     }
     th << _("Name") << _("Version") << _("Arch");
     tbl << th;
@@ -783,9 +761,7 @@ int solve_and_commit (bool non_interactive) {
   int retv = show_summary();
 
   if (retv >= 0) { // there are resolvables to install/uninstall
-    cerr << _("Continue?") << " [y/n] " << (non_interactive ? "y\n" : "");
-    if (non_interactive || readBoolAnswer()) {
-
+	if (read_bool_answer(_("Continue?"), non_interactive)) {
       if (!confirm_licenses(non_interactive)) return ZYPPER_EXIT_OK;
 
       cerr_v << _("committing") << endl;
@@ -832,7 +808,7 @@ int solve_and_commit (bool non_interactive) {
   return retv;
 }
 
-// TODO
+// TODO confirm licenses
 // - make this more user-friendly e.g. show only license name and
 //  ask for [y/n/r] with 'r' for read the license text
 //  (opened throu more or less, etc...)
@@ -846,16 +822,29 @@ bool confirm_licenses(bool non_interactive)
     if (it->status().isToBeInstalled() &&
         !it->resolvable()->licenseToConfirm().empty())
     {
+      if (gSettings.license_auto_agree)
+      {
+        // TranslatorExplanation The first %s is name of the resolvable, the second is its kind (e.g. 'zypper package')
+        cout << format(_("Automatically agreeing with %s %s license."))
+            % it->resolvable()->name() % it->resolvable()->kind().asString()
+            << endl;
+
+        MIL << format("Automatically agreeing with %s %s license.")
+            % it->resolvable()->name() % it->resolvable()->kind().asString()
+            << endl;
+
+        continue;
+      }
+
       cout << it->resolvable()->name() << " " <<
         it->resolvable()->kind().asString() <<
         " " << _("license") << ": " <<
         it->resolvable()->licenseToConfirm() << endl;
 
-      cout << _("In order to install this package, you must agree"
-        " to terms of the above licencse. Continue?") << " [y/n] " <<
-        (non_interactive ? "n\n" : "");
+      string question = _("In order to install this package, you must agree"
+          " to terms of the above licencse. Continue?");
 
-      if (non_interactive || !readBoolAnswer())
+      if (non_interactive || !read_bool_answer(question, false))
       {
         confirmed = false;
         

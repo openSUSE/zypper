@@ -51,15 +51,16 @@ KeyRingCallbacks keyring_callbacks;
 DigestCallbacks digest_callbacks;
 
 static struct option global_options[] = {
-  {"help",	no_argument, 0, 'h'},
-  {"verbose",	no_argument, 0, 'v'},
-  {"version",	no_argument, 0, 'V'},
-  {"terse",	no_argument, 0, 't'},
-  {"table-style", required_argument, 0, 's'},
-  {"rug-compatible", no_argument, 0, 'r'},
-  {"root",    required_argument, 0, 'R'},
-  {"non-interactive", no_argument, 0, 0},
-  {"opt",	optional_argument, 0, 'o'},
+  {"help",            no_argument,       0, 'h'},
+  {"verbose",         no_argument,       0, 'v'},
+  {"version",         no_argument,       0, 'V'},
+  {"terse",           no_argument,       0, 't'},
+  {"table-style",     required_argument, 0, 's'},
+  {"rug-compatible",  no_argument,       0, 'r'},
+  {"non-interactive", no_argument,       0, 'n'},
+  {"no-gpg-checks",   no_argument,       0, 0},
+  {"root",            required_argument, 0, 'R'},
+  {"opt",             optional_argument, 0, 'o'},
   {0, 0, 0, 0}
 };
 
@@ -130,23 +131,26 @@ string process_globals(int argc, char **argv)
     "\t--terse, -t\t\tTerse output for machine consumption\n"
     "\t--table-style, -s\tTable style (integer)\n"
     "\t--rug-compatible, -r\tTurn on rug compatibility\n"
-    "\t--root, -R <dir>\tOperate on a different root directory\n"
-    "\t--non-interactive\tDon't ask anything, use default answers automatically. (under development)\n");
-    ;
+    "\t--non-interactive, -n\tDon't ask anything, use default answers automatically.\n"
+    "\t--no-gpg-checks\t\tIgnore GPG check failures and continue.\n"
+    "\t--root, -R <dir>\tOperate on a different root directory\n");
 
   if (gopts.count("verbose")) {
     gSettings.verbose += gopts["verbose"].size();
     cerr << _("Verbosity ") << gSettings.verbose << endl;
+    DBG << "Verbosity " << gSettings.verbose << endl;
   }
 
   if (gopts.count("non-interactive")) {
-  	gSettings.non_interactive = true;
-  	cout << "Entering non-interactive mode.\n"
-  		"WARNING: global non-interactive mode is still under development, use "
-  		"with caution. This mode has been implemented and tested for install, "
-  		"remove, and update commands so far. In case of problems related to "
-  		"non-interactive mode, please file a bugreport following instructions at "
-  		"http://en.opensuse.org/Zypper#Troubleshooting" << endl;
+    gSettings.non_interactive = true;
+    cout << _("Entering non-interactive mode.") << endl;
+    MIL << "Entering non-interactive mode" << endl;
+  }
+
+  if (gopts.count("no-gpg-checks")) {
+    gSettings.no_gpg_checks = true;
+    cout << _("Entering no-gpg-checks mode.") << endl;
+    MIL << "Entering no-gpg-checks mode" << endl;
   }
 
   if (gopts.count("table-style")) {
@@ -230,21 +234,29 @@ int one_command(const string& command, int argc, char **argv)
       {"catalog",	   required_argument, 0, 'c'},
       {"type",	     required_argument, 0, 't'},
       {"no-confirm", no_argument,       0, 'y'},
+      {"auto-agree-with-licenses",  no_argument,       0, 'l'},
+      // rug compatibility, we have --auto-agree-with-licenses
+      {"agree-to-third-party-licenses",  no_argument,  0, 0},
       {"help",       no_argument,       0, 'h'},
       {0, 0, 0, 0}
     };
     specific_options = install_options;
     specific_help = _(
       "  Command options:\n"
-      "\t--catalog,-c\t\tOnly from this catalog (under development)\n"
+      "\t--catalog,-c\t\t\tOnly from this catalog (under development)\n"
       "\t--type,-t\t\tType of resolvable (default: package)\n"
-      "\t--no-confirm,-y\tDo not require user confirmation\n"
+      "\t--no-confirm,-y\t\t\tDo not require user confirmation to proceed with installation\n"
+      "\t--auto-agree-with-licenses,-l\tAutomatically say 'yes' to third party license confirmation prompt.\n"
+      "\t\t\t\t\tSee man zypper for more details.\n"
       );
   }
   else if (command == "remove" || command == "rm") {
     static struct option remove_options[] = {
       {"type",       required_argument, 0, 't'},
       {"no-confirm", no_argument,       0, 'y'},
+      {"auto-agree-with-licenses",  no_argument,       0, 'l'},
+      // rug compatibility, we have --auto-agree-with-licenses
+      {"agree-to-third-party-licenses",  no_argument,  0, 0},
       {"help",       no_argument,       0, 'h'},
       {0, 0, 0, 0}
     };
@@ -253,6 +265,8 @@ int one_command(const string& command, int argc, char **argv)
       "  Command options:\n"
       "\t--type,-t\t\tType of resolvable (default: package)\n"
       "\t--no-confirm,-y\tDo not require user confirmation\n"
+      "\t--auto-agree-with-licenses,-l\tAutomatically say 'yes' to third party license confirmation prompt.\n"
+      "\t\t\t\t\tSee man zypper for more details.\n"
       );
   }
   else if (command == "service-add" || command == "sa") {
@@ -706,6 +720,10 @@ int one_command(const string& command, int argc, char **argv)
       gData.packages_to_install = arguments;
     }
 
+    if (copts.count("auto-agree-with-licenses")
+	|| copts.count("agree-to-third-party-licenses"))
+      gSettings.license_auto_agree = true;
+
     if (command == "remove" || command == "rm") {
       if (ghelp || arguments.size() < 1) {
         cerr << "remove [options] name...\n"
@@ -887,6 +905,10 @@ int one_command(const string& command, int argc, char **argv)
 	;
       return !ghelp;
     }
+
+    if (copts.count("auto-agree-with-licenses") ||
+        copts.count("agree-to-third-party-licenses"))
+      gSettings.license_auto_agree = true;
 
     string skind = copts.count("type")?  copts["type"].front() :
       gSettings.is_rug_compatible? "package" : "patch";
