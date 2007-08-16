@@ -1,4 +1,14 @@
 -------------------------------------------------------------------
+Thu Aug 16 13:10:44 CEST 2007 - jkupec@suse.cz
+
+- more comprehensive message after adding a repository
+- disabling autorefresh for CD and refreshing right after adding with
+  zypper addrepo (part of #292417)
+- install summary formatting bug (no new line and indent)
+- more improved error reporting
+- r6704
+
+-------------------------------------------------------------------
 Wed Aug 15 20:13:47 CEST 2007 - jkupec@suse.cz
 
 - providing correct capability for installing a resolvable(#298322)
