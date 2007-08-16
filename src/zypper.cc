@@ -173,7 +173,7 @@ void process_globals(int argc, char **argv)
 
   if (gopts.count("no-gpg-checks")) {
     gSettings.no_gpg_checks = true;
-    cout_n << _("Entering no-gpg-checks mode.");
+    cout_n << _("Entering no-gpg-checks mode.") << endl;
     MIL << "Entering no-gpg-checks mode" << endl;
   }
 
@@ -482,6 +482,8 @@ int one_command(int argc, char **argv)
       {"type",		            required_argument, 0, 't'},
       {"skip-interactive",          no_argument,       0, 0},
       {"auto-agree-with-licenses",  no_argument,       0, 'l'},
+      // rug compatibility, we have --auto-agree-with-licenses
+      {"agree-to-third-party-licenses",  no_argument,  0, 0},
       {"best-effort",               no_argument,       0, 0},
       {"debug-solver",              no_argument,       0, 0},
       {"help", no_argument, 0, 'h'},
@@ -1002,7 +1004,8 @@ int one_command(int argc, char **argv)
 
       gData.packages_to_install = arguments;
 
-      if (copts.count("auto-agree-with-licenses"))
+      if (copts.count("auto-agree-with-licenses")
+          || copts.count("agree-to-third-party-licenses"))
         gSettings.license_auto_agree = true;
     }
 
@@ -1303,7 +1306,8 @@ int one_command(int argc, char **argv)
     if (copts.count("no-confirm"))
       gSettings.non_interactive = true;
 
-    if (copts.count("auto-agree-with-licenses"))
+    if (copts.count("auto-agree-with-licenses")
+        || copts.count("agree-to-third-party-licenses"))
       gSettings.license_auto_agree = true;
 
     string skind = copts.count("type")?  copts["type"].front() :
