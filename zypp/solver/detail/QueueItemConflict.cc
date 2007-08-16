@@ -71,6 +71,7 @@ QueueItemConflict::dumpOn( std::ostream & os ) const
     os << ", Triggered by ";
     os << _conflicting_item;
     if (_actually_an_obsolete) os << ", Obsolete !";
+    if (_explicitly_requested) os << ", Explicit";    
     os << "]";
     return os;
 }
@@ -83,6 +84,7 @@ QueueItemConflict::QueueItemConflict (const ResPool & pool, const Capability & c
     , _conflicting_item (item)
     , _soft (soft)
     , _actually_an_obsolete (false)
+    , _explicitly_requested (false)    
 {
     _XDEBUG("QueueItemConflict::QueueItemConflict(" << cap << ", " << item << (soft?", soft":"") << ")");
 }
@@ -150,14 +152,17 @@ struct ConflictProcess
     ResolverContext_Ptr context;
     QueueItemList & new_items;
     bool actually_an_obsolete;
+    bool explicitly_requested;
 
-    ConflictProcess (const ResPool & pl, PoolItem_Ref ci, const Capability & cc, ResolverContext_Ptr ct, QueueItemList & ni, bool ao)
+    ConflictProcess (const ResPool & pl, PoolItem_Ref ci, const Capability & cc, ResolverContext_Ptr ct, QueueItemList & ni, bool ao,
+		     bool er)
 	: pool (pl)
 	, conflict_issuer (ci)
 	, conflict_capability (cc)
 	, context (ct)
 	, new_items (ni)
 	, actually_an_obsolete (ao)
+	, explicitly_requested (er)
     { }
 
     bool operator()( const CapAndItem & cai )
@@ -239,6 +244,8 @@ struct ConflictProcess
 
 	    QueueItemUninstall_Ptr uninstall = new QueueItemUninstall (pool, provider, actually_an_obsolete ? QueueItemUninstall::OBSOLETE : QueueItemUninstall::CONFLICT);
 	    uninstall->setCapability (conflict_capability);
+	    if (explicitly_requested)
+		uninstall->setExplicitlyRequested();
 
 	    if (actually_an_obsolete) {
 		uninstall->setDueToObsolete (conflict_issuer);
@@ -335,7 +342,7 @@ QueueItemConflict::process (ResolverContext_Ptr context, QueueItemList & new_ite
 	}
     }
 
-    ConflictProcess info (pool(), _conflicting_item, _capability, context, new_items, _actually_an_obsolete);
+    ConflictProcess info (pool(), _conflicting_item, _capability, context, new_items, _actually_an_obsolete, _explicitly_requested);
 
     // world()->foreachProvidingPoolItem (_capability, conflict_process_cb, (void *)&info);
 
@@ -358,6 +365,7 @@ QueueItemConflict::copy (void) const
     new_conflict->QueueItem::copy(this);
 
     // _actually_an_obsolete is not being copied !
+    new_conflict->_explicitly_requested      = _explicitly_requested;    
 
     return new_conflict;
 }

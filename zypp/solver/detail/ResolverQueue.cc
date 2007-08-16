@@ -163,6 +163,7 @@ void
 ResolverQueue::addExtraConflict (const Capability & dep)
 {
     QueueItemConflict_Ptr qitem = new QueueItemConflict (_context->pool(), dep, PoolItem_Ref());
+    qitem->setExplicitlyRequested();
     addItem (qitem);
 }
 

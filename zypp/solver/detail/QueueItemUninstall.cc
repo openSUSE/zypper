@@ -382,7 +382,7 @@ QueueItemUninstall::process (ResolverContext_Ptr context, QueueItemList & qil)
     
     this->logInfo (context);
     
-    context->uninstall (_item, _upgraded_to /*bool*/, _due_to_obsolete, _unlink);
+    context->uninstall (_item, _upgraded_to /*bool*/, _due_to_obsolete, _unlink||_explicitly_requested);
     if (status.staysInstalled()) {
 	if (! _explicitly_requested
 	    && _item.status().isLocked()) {

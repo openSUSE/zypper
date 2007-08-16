@@ -54,6 +54,7 @@ class QueueItemConflict : public QueueItem {
     bool _soft;
 
     bool _actually_an_obsolete;
+    bool _explicitly_requested;    
 
   public:
 
@@ -73,6 +74,7 @@ class QueueItemConflict : public QueueItem {
     bool isSoft (void) const { return _soft; }
     bool actuallyAnObsolete (void) const { return _actually_an_obsolete; }
     void setActuallyAnObsolete (void) { _actually_an_obsolete = true; }
+    void setExplicitlyRequested (void) { _explicitly_requested = true; }    
 
     // ---------------------------------- methods
 
