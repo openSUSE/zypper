@@ -37,7 +37,7 @@ namespace zypp
     public:
       Impl()
         : repo_add_probe(false),
-          repo_refresh_delay(0),
+          repo_refresh_delay(10),
           autolock_untrustedvendor(false)
       {
         MIL << "ZConfig singleton created." << endl;
