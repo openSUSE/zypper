@@ -486,6 +486,42 @@ namespace zypp
         {
           if ( isPatternFile( it->first ) )
           {
+            // *** see also zypp/repo/susetags/Downloader.cc ***
+
+            // omit unwanted patterns, see https://bugzilla.novell.com/show_bug.cgi?id=298716
+            // expect "<name>.<arch>.pat[.gz]", <name> might contain additional dots
+            // split at dots, take .pat or .pat.gz into account
+
+            // vector of splitted pattern filename elements
+            std::vector<std::string> patparts;
+
+            // this is the offset from the last element of patparts
+            unsigned archoff = 2;
+
+            unsigned count = str::split( it->first, std::back_inserter( patparts ), "." );
+
+            if ( patparts[count-1] == "gz" )
+              archoff++;
+
+            if ( count > archoff )
+            {
+              try				// might by an invalid architecture
+              {
+                Arch patarch( patparts[count-archoff] );
+                if ( !patarch.compatibleWith( ZConfig::instance().systemArchitecture() ) )
+                {
+                  // discard, if not compatible
+                  MIL << "Discarding pattern " << it->first << endl;
+                  continue;
+                }
+              }
+              catch ( const Exception & excpt )
+              {
+                WAR << "Pattern file name does not contain recognizable architecture: " << it->first << endl;
+                // keep .pat file if it doesn't contain an recognizable arch
+              }
+            }
+
 	    Pathname inputfile( getOptionalFile( _descrdir / it->first, false /*filename already contains .gz */ ) );
 	    if ( ! inputfile.empty() )
 	    {

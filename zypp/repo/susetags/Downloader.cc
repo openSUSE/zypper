@@ -120,6 +120,42 @@ void Downloader::download( MediaSetAccess &media,
           }
         }
       }
+      else if ( str::endsWith( words[3], ".pat" ) 
+		|| str::endsWith( words[3], ".pat.gz" ) )
+      {
+
+        // *** see also zypp/parser/susetags/RepoParser.cc ***
+
+        // omit unwanted patterns, see https://bugzilla.novell.com/show_bug.cgi?id=298716
+        // expect "<name>.<arch>.pat[.gz]", <name> might contain additional dots
+        // split at dots, take .pat or .pat.gz into account
+
+        std::vector<std::string> patparts;
+	unsigned archpos = 2;
+        // expect "<name>.<arch>.pat[.gz]", <name> might contain additional dots
+        unsigned count = str::split( buffer, std::back_inserter(patparts), "." );
+	if ( patparts[count-1] == "gz" )
+	    archpos++;
+
+        if ( count > archpos )
+        {
+          try				// might by an invalid architecture
+          {
+            Arch patarch( patparts[count-archpos] );
+            if ( !patarch.compatibleWith( ZConfig::instance().systemArchitecture() ) )
+            {
+              // discard, if not compatible
+              MIL << "Discarding pattern " << words[3] << endl;
+              continue;
+            }
+          }
+          catch ( const Exception & excpt )
+          {
+            WAR << "Pattern file name does not contain recognizable architecture: " << words[3] << endl;
+            // keep .pat file if it doesn't contain an recognizable arch
+          }
+        }
+      }
       OnMediaLocation location( _path + descr_dir + words[3], 1 );
       location.setChecksum( CheckSum( words[1], words[2] ) );
       this->enqueueDigested(location);

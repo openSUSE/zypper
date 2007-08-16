@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Aug 16 17:21:52 CEST 2007 - kkaempf@suse.de
+
+- discard pattern files with incompatbile architecture, both
+  for download and for parsing. (#298716)
+- rev 6711
+
+-------------------------------------------------------------------
 Thu Aug 16 17:12:45 CEST 2007 - kkaempf@suse.de
 
 - run sqlite asynchronously and add sql index files where
