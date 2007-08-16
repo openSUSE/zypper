@@ -160,7 +160,7 @@ namespace zypp
      */
     bool checkIfToRefreshMetadata( const RepoInfo &info,
                                    const Url &url,
-                                   RawMetadataRefreshPolicy policy );
+                                   RawMetadataRefreshPolicy policy = RefreshIfNeeded);
    /**
     * \short Refresh local raw cache
     *
