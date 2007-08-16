@@ -1157,12 +1157,14 @@ int one_command(int argc, char **argv)
     cond_init_target();         // calls ZYpp::initializeTarget("/");
     
     establish();
-    
+
     Table t;
     t.style(Ascii);
 
-    ZyppSearch search(God,options,arguments);
-    search.doSearch(FillTable(t, search.installedCache()));
+    ZyppSearch search( God, options,arguments );
+    FillTable callback( t, search.installedCache(), search.getQueryInstancePtr() );
+
+    search.doSearch( callback, callback );
 
     if (t.empty())
       cout << _("No resolvables found.") << endl;

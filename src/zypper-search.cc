@@ -35,8 +35,8 @@ ZyppSearch::ZyppSearch (
     const ZyppSearchOptions & options,
     const vector<string> qstrings
     ) :
-    _zypp(zypp), _options(options), _qstrings(qstrings) {
-
+    _zypp(zypp), _options(options), _qstrings(qstrings), _query( _manager_options.repoCachePath ) {
+#if 0
   // no repos warning
   if (gData.repos.empty()) {
     cerr << _("No repositories configured. Please, add at least one"
@@ -44,32 +44,57 @@ ZyppSearch::ZyppSearch (
          << endl;
     exit(ZYPPER_EXIT_NO_REPOS); // TODO #define zypper error codes?
   }
-
+#endif
   setupRegexp();
   cacheInstalled();
+#if 0
   load_repo_resolvables(); // populates ResPool with resolvables from repos
-
+#endif
   // cache identification strings of source resolvables (used to check for
   // duplicates of target resolvables in repos - DuplicateFilter)
-  invokeOnEachSearched(not_c(ByInstalled()), functorRef<bool,const zypp::PoolItem &>(_idcache));
+  invokeOnEachSearched(not_c(ByInstalled()), functorRef<bool,const zypp::PoolItem &>(_idcache), functorRef<bool, const data::RecordId &, data::ResObject_Ptr>(_idcache));
 }
 
 /**
  * Invokes zypp::invokeOnEach() on a subset of pool items restricted by
  * some search criteria (--type,--match-exact).
  */
-template <class _Filter, class _Function>
-int ZyppSearch::invokeOnEachSearched(_Filter filter_r, _Function fnc_r) {
+template <class _Filter, class _PoolCallback, class _CacheCallback>
+int
+ZyppSearch::invokeOnEachSearched(_Filter filter_r, _PoolCallback pool_cb, _CacheCallback cache_cb)
+{
+  // pool only contains _installed_ resolvables
   ResPool pool = _zypp->pool();
 
   // search for specific resolvable type only
   if (_options.kind() != Resolvable::Kind()) {
     cerr_vv << "invokeOnEachSearched(): search by type" << endl;
 
-    return invokeOnEach(
+    if (_options.installedFilter() != ZyppSearchOptions::UNINSTALLED_ONLY)
+    {
+      // search pool on ALL or INSTALLED
+      invokeOnEach(
         pool.byKindBegin(_options.kind()), pool.byKindEnd(_options.kind()),
-        filter_r, fnc_r);
+        filter_r, pool_cb);
+    }
+
+    if (_options.installedFilter() != ZyppSearchOptions::INSTALLED_ONLY)
+    {
+      try
+      {
+      // search cache on ALL or UNINSTALLED by TYPE
+
+      _query.query( "%libzypp%", cache_cb );
+      }
+      catch ( const Exception & excpt_r )
+      {
+        ZYPP_CAUGHT( excpt_r );
+        cerr << "cache::ResolvableQuery failed: " << excpt_r.asUserString() << endl;
+      }
+    }
+    return 0;
   }
+
   // search for exact package using byName_iterator
   // usable only if there is only one query string and if this string
   // doesn't contain wildcards
@@ -78,20 +103,60 @@ int ZyppSearch::invokeOnEachSearched(_Filter filter_r, _Function fnc_r) {
       _qstrings[0].find('?') == string::npos) {
     cerr_vv << "invokeOnEachSearched(): exact name match" << endl;
 
-    return invokeOnEach(
+    if (_options.installedFilter() != ZyppSearchOptions::UNINSTALLED_ONLY)
+    {
+      // search pool on ALL or INSTALLED
+      invokeOnEach(
         pool.byNameBegin(_qstrings[0]), pool.byNameEnd(_qstrings[0]),
-        filter_r, fnc_r);
+        filter_r, pool_cb);
+    }
+
+    if (_options.installedFilter() != ZyppSearchOptions::INSTALLED_ONLY)
+    {
+      try
+      {
+      // search cache on ALL or UNINSTALLED by EXACT NAME
+
+      _query.queryByName( _qstrings[0], 0, cache_cb );
+      }
+      catch ( const Exception & excpt_r )
+      {
+        ZYPP_CAUGHT( excpt_r );
+        cerr << "cache::ResolvableQuery failed: " << excpt_r.asUserString() << endl;
+      }
+    }
+    return 0;
   }
 
   // search among all resolvables
   else {
     cerr_vv << "invokeOnEachSearched(): search among all resolvables" << endl;
 
-    return invokeOnEach(pool.begin(), pool.end(), filter_r, fnc_r);
+    if (_options.installedFilter() != ZyppSearchOptions::UNINSTALLED_ONLY)
+    {
+      // search pool on ALL or INSTALLED
+      invokeOnEach(pool.begin(), pool.end(), filter_r, pool_cb);
+    }
+
+    if (_options.installedFilter() != ZyppSearchOptions::INSTALLED_ONLY)
+    {
+      try
+      {
+      // search cache on ALL or UNINSTALLED by WILD NAME
+
+      _query.queryByName( _qstrings[0], 3, cache_cb );
+      }
+      catch ( const Exception & excpt_r )
+      {
+        ZYPP_CAUGHT( excpt_r );
+        cerr << "cache::ResolvableQuery failed: " << excpt_r.asUserString() << endl;
+      }
+    }
   }
+  return 0;
 }
 
-/**
+/** PRIVATE
  * Cache installed packages matching given search criteria into a hash_map.
  * Assumption made: names of currently installed resolvables + kind
  * (+version???) are unique.
@@ -109,18 +174,20 @@ void ZyppSearch::cacheInstalled() {
   _zypp->addResolvables(tgt_resolvables, true /*installed*/);
 
   invokeOnEachSearched(Match(_reg,_options.searchDescriptions()),
-    functorRef<bool,const zypp::PoolItem &>(_icache));
+    functorRef<bool,const zypp::PoolItem &>(_icache), functorRef<bool, const data::RecordId &, data::ResObject_Ptr>(_icache));
 
   cout_v << _icache.size() << _(" out of (") <<  tgt_resolvables.size() << ")"  
     << _("cached.") << endl;
 }
 
-/**
+/** PUBLIC
  * Invokes functor f on each pool item matching search criteria. 
  */
-void ZyppSearch::doSearch(const boost::function<bool(const PoolItem &)> & f) {
+void
+ZyppSearch::doSearch(const boost::function<bool(const PoolItem &)> & f, const zypp::cache::ProcessResolvable & r)
+{
   boost::function<bool (const PoolItem &)> filter;
-
+cerr << "ZyppSearch::doSearch()" << endl;
   switch (_options.installedFilter()) {
     case ZyppSearchOptions::INSTALLED_ONLY:
       filter = chain(ByInstalledCache(_icache),Match(_reg,_options.searchDescriptions()));
@@ -135,7 +202,7 @@ void ZyppSearch::doSearch(const boost::function<bool(const PoolItem &)> & f) {
   
   filter = chain(filter,DuplicateFilter(_idcache));
 
-  invokeOnEachSearched(filter, f);
+  invokeOnEachSearched(filter, f, r);
 }
 
 //! macro for word boundary tags for regexes

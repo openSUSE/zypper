@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Aug 16 23:46:15 CEST 2007 - kkaempf@suse.de
+
+- initial implementation of cache search
+  requires libzypp >= 3.16.0
+- r6722, version 0.8.12
+
+-------------------------------------------------------------------
 Thu Aug 16 13:10:44 CEST 2007 - jkupec@suse.cz
 
 - more comprehensive message after adding a repository

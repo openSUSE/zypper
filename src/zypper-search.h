@@ -16,6 +16,8 @@
 #include <boost/function.hpp>
 #include <zypp/ZYpp.h>
 #include <zypp/base/Hash.h>
+#include <zypp/cache/ResolvableQuery.h>
+#include <zypp/RepoManager.h>
 
 #include "zypper.h"
 #include "zypper-getopt.h"
@@ -122,6 +124,14 @@ public:
     addItem(pi);
     return true;
   }
+
+  /** defined for use as a functor for filling the hashmap in a for_each */ 
+  // FIXME: should be cache::ProcessResolvable
+  bool operator()(const zypp::data::RecordId & id, const zypp::data::ResObject_Ptr res) {
+    // dummy
+    return true;
+  }
+
 };
 
 
@@ -154,6 +164,13 @@ public:
     return true;
   }
 
+  /** defined for use as a functor for filling the IdSet in a for_each */ 
+  // FIXME: should be cache::ProcessResolvable
+  bool operator()(const zypp::data::RecordId & id, const zypp::data::ResObject_Ptr res) {
+    // dummy
+    return true;
+  }
+
   int size() { return _items.size(); }
 };
 
@@ -166,12 +183,14 @@ public:
   ZyppSearch (zypp::ZYpp::Ptr & zypp, const ZyppSearchOptions & options,
       const std::vector<std::string> qstrings = std::vector<std::string>());
 
-  void doSearch(const boost::function<bool(const zypp::PoolItem &)> & f);
+  void doSearch(const boost::function<bool(const zypp::PoolItem &)> & f, const zypp::cache::ProcessResolvable & r);
 
   InstalledCache & installedCache() { return _icache; }
 
-  template <class _Filter, class _Function>
-  int invokeOnEachSearched(_Filter filter_r, _Function fnc_r);
+  template <class _Filter, class _PoolCallback, class _CacheCallback>
+    int invokeOnEachSearched(_Filter filter_r, _PoolCallback pool_cb, _CacheCallback cache_cb);
+
+  zypp::cache::ResolvableQuery *getQueryInstancePtr( void ) { return &_query; }
 
 private:
   zypp::ZYpp::Ptr & _zypp;
@@ -181,6 +200,10 @@ private:
 
   InstalledCache _icache;
   IdCache _idcache;
+
+  zypp::RepoManagerOptions _manager_options;
+
+  zypp::cache::ResolvableQuery _query;
 
   void setupRegexp();
   void cacheInstalled();
@@ -227,8 +250,9 @@ struct ByInstalledCache
  */
 struct FillTable
 {
-  FillTable(Table & table, InstalledCache & icache) :
-    _table(&table), _icache(&icache) {
+  FillTable(Table & table, InstalledCache & icache, zypp::cache::ResolvableQuery * query) :
+    _table(&table), _icache(&icache), _query(query)
+  {
     TableHeader header;
 
     // TranslatorExplanation S as Status
@@ -282,9 +306,45 @@ struct FillTable
     return true;
   }
 
+  bool operator()(const zypp::data::RecordId & id, const zypp::data::ResObject_Ptr res) {
+    TableRow row;
+
+    // add status to the result table
+    zypp::PoolItem inst_item; // = _icache->getItem(pool_item);
+    if (inst_item) {
+      // check whether the pool item is installed...
+      if (inst_item.resolvable()->edition() == res->edition &&
+          inst_item.resolvable()->arch() == res->arch)
+        row << "i";
+      // ... or there's just another version of it installed
+      else
+        row << "v";
+    }
+    // or it's not installed at all
+    else {
+      row << "";
+    }
+
+    string alias = _query->queryRepositoryAlias( res->repository );
+
+    // add other fields to the result table
+    row << alias
+        // TODO what about rug's Bundle?
+        << "kind" 		// FIXME: (gSettings.is_rug_compatible ? "" : res->kind().asString()) 
+        << res->name
+        << res->edition.asString()
+        << res->arch.asString();
+  
+    *_table << row;
+
+    return true;
+  }
+
   Table * _table;
 
   InstalledCache * _icache;
+
+  zypp::cache::ResolvableQuery * _query;
 };
 
 /**
