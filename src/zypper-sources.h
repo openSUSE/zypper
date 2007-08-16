@@ -1,9 +1,9 @@
 #ifndef ZMART_SOURCES_H
 #define ZMART_SOURCES_H
 
-#include "zypp/Url.h"
 #include <boost/logic/tribool.hpp>
-#include "zypper-getopt.h"
+
+#include <zypp/Url.h>
 
 /**
  * Reads known enabled repositories and stores them in gData.
@@ -56,13 +56,6 @@ int add_repo_from_file(const std::string & repo_file_url,
                        boost::tribool enabled = boost::indeterminate, boost::tribool autorefresh = boost::indeterminate);
 
 /**
- * If ZMD process found, notify user that ZMD is running and that changes
- * to repositories will not be synchronized with it. To be used with commands
- * manipulating repositories like <tt>addrepo</tt> or <tt>rmrepo</tt>. 
- */
-void warn_if_zmd();
-
-/**
  * Delte repository specified by \a alias.
  */
 bool remove_repo( const std::string &alias );
@@ -74,13 +67,51 @@ bool remove_repo( const zypp::Url & url, const zypp::url::ViewOption & urlview )
  */
 void rename_repo(const std::string & alias, const std::string & newalias);
 
-
 /**
  * Modify repository properties.
  * 
  * \param alias repository alias
  */
 void modify_repo(const std::string & alias);
+
+
+/**
+ * Load both repository and target resolvables.
+ * 
+ * \param to_pool If <tt>true</tt>, the resolvables are added to the pool, if
+ *        <tt>false</tt> they will be stored in \ref gData.repo_resolvalbes
+ *        and \ref gData.target_resolvables (global ResStore vector).
+ * 
+ * \see load_repo_resolvables(bool)
+ * \see load_target_resolvables(bool)
+ */
+void cond_load_resolvables(bool to_pool = true);
+
+/**
+ * Reads resolvables from the RPM database (installed resolvables) into the pool.
+ * 
+ * \param to_pool If <tt>true</tt>, the resolvables are added to the pool, if
+ *        <tt>false</tt> they will be stored \ref gData.target_resolvables
+ *        (global ResStore variable).
+ */
+void load_target_resolvables(bool to_pool = true);
+
+/**
+ * Reads resolvables from the repository sqlite cache. 
+ * 
+ * \param to_pool If <tt>true</tt>, the resolvables are added to the pool, if
+ *        <tt>false</tt> they will be stored in \ref gData.repo_resolvables
+ *        (global ResStore vector).
+ */
+void load_repo_resolvables(bool to_pool = true);
+
+
+/**
+ * If ZMD process found, notify user that ZMD is running and that changes
+ * to repositories will not be synchronized with it. To be used with commands
+ * manipulating repositories like <tt>addrepo</tt> or <tt>rmrepo</tt>. 
+ */
+void warn_if_zmd();
 
 #endif
 // Local Variables:

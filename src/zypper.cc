@@ -166,7 +166,7 @@ void process_globals(int argc, char **argv)
 
   if (gopts.count("non-interactive")) {
     gSettings.non_interactive = true;
-    cout_n << _("Entering non-interactive mode.");
+    cout_n << _("Entering non-interactive mode.") << endl;
     MIL << "Entering non-interactive mode" << endl;
   }
 

@@ -14,15 +14,16 @@
 #include <zypp/media/MediaException.h>
 
 #include "zypper.h"
+#include "zypper-getopt.h"
 #include "zypper-tabulator.h"
 #include "zypper-callbacks.h"
-//#include "AliveCursor.h"
 #include "zypper-sources.h"
 
+
 using namespace std;
+using namespace boost;
 using namespace zypp;
 using namespace zypp::repo;
-using namespace boost;
 using namespace zypp::media;
 using namespace zypp::parser;
 
@@ -844,6 +845,101 @@ void modify_repo(const string & alias)
   }
 }
 
+// ---------------------------------------------------------------------------
+
+void cond_load_resolvables(bool to_pool)
+{       
+  load_repo_resolvables(to_pool);
+  if (!gSettings.disable_system_resolvables && to_pool)
+    load_target_resolvables();
+}
+
+// ---------------------------------------------------------------------------
+
+void load_repo_resolvables(bool to_pool)
+{
+  RepoManager manager;
+
+  for (std::list<RepoInfo>::iterator it = gData.repos.begin();
+       it !=  gData.repos.end(); ++it)
+  {
+    RepoInfo repo(*it);
+    MIL << "Loading " << repo.alias() << " resolvables." << endl;
+
+    if (! it->enabled())
+      continue;     // #217297
+
+    try 
+    {
+      // if there is no metadata locally
+      if ( manager.metadataStatus(repo).empty() )
+      {
+        cout_v << format(_("Retrieving repository '%s' information..."))
+                         % repo.alias() << endl;
+        manager.refreshMetadata(repo);
+      }
+
+      if (!manager.isCached(repo))
+      {
+        cout_v << format(_("Repository '%s' not cached. Caching..."))
+                         % repo.alias() << endl;
+        manager.buildCache(repo);
+      }
+
+      Repository repository(manager.createFromCache(repo));
+      ResStore store = repository.resolvables();
+      cout_v << " " << format(_("(%d resolvables found)")) % store.size() << endl;
+
+      if (to_pool)
+        God->addResolvables(store);
+      else
+        gData.repo_resolvables.insert(store.begin(), store.end());
+    }
+    catch (const repo::RepoMetadataException & e)
+    {
+      ZYPP_CAUGHT(e);
+      report_problem(e,
+          boost::str(format(_("Repository metadata for '%s' not found in local cache.")) % repo.alias()));
+      // this should not happend and is probably a bug, rethrowing
+      ZYPP_RETHROW(e);
+    }
+    catch (const Exception & e)
+    {
+      ZYPP_CAUGHT(e);
+      cerr << format(_("Problem loading data from '%s'")) % repo.alias();
+      cerr_v << ":" << endl << e.msg();
+      cerr << endl;
+      cerr << format(_("Resolvables from '%s' not loaded because of error."))
+                      % repo.alias() << endl;
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------
+
+void load_target_resolvables(bool to_pool)
+{
+  if (!gSettings.machine_readable)
+    cout_n << _("Reading RPM database...");
+  MIL << "Going to read RPM database" << endl;
+
+  ResStore tgt_resolvables(God->target()->resolvables());  
+
+  if (!gSettings.machine_readable)
+  {
+    cout_v << "   " <<  format(_("(%s resolvables)")) % tgt_resolvables.size();
+    cout_n << endl;
+  }
+  DBG << tgt_resolvables.size() << " resolvables read";
+
+  if (to_pool)
+    God->addResolvables(tgt_resolvables, true /*installed*/);
+  else
+    gData.target_resolvables = tgt_resolvables;
+}
+
+// ---------------------------------------------------------------------------
+
 /*
 //! rename a source, identified in any way: alias, url, id
 void rename_source( const std::string& anystring, const std::string& newalias )
@@ -926,78 +1022,6 @@ void warn_if_zmd()
         " ZMD and libzypp out of sync.") << endl;
   }
 }
-
-// ----------------------------------------------------------------------------
-
-// OLD code
-/*
-void cond_init_system_sources ()
-{
-  static bool done = false;
-  if (done)
-    return;
-
-  if ( geteuid() != 0 ) {
-    cerr << _("Sorry, you need root privileges to use system sources, disabling them...") << endl;
-    gSettings.disable_system_sources = true;
-    MIL << "system sources disabled" << endl;
-  }
-
-  if ( ! gSettings.disable_system_sources ) {
-    init_system_sources();
-  }
-  done = true;
-} 
-*/
-// OLD
-/*
-void init_system_sources()
-{
-  SourceManager_Ptr manager;
-  manager = SourceManager::sourceManager();
-  try
-  {
-    cerr << _("Restoring system sources...") << endl;
-    manager->restore(gSettings.root_dir);
-  }
-//  catch (const SourcesAlreadyRestoredException& excpt) {
-//  }
-  catch (Exception & excpt_r)
-  {
-    ZYPP_CAUGHT (excpt_r);
-    ERR << "Couldn't restore sources" << endl;
-    cerr << _("Failed to restore sources") << endl;
-    exit(-1);
-  }
-    
-  for ( SourceManager::Source_const_iterator it = manager->Source_begin(); it !=  manager->Source_end(); ++it )
-  {
-    Source_Ref src = manager->findSource(it->alias());
-    gData.sources.push_back(src);
-  }
-}
-*/
-// OLD
-/*
-void include_source_by_url( const Url &url )
-{
-  try
-  {
-    //cout << "Creating source from " << url << endl;
-    Source_Ref src;
-    src = SourceFactory().createFrom(url, "/", url.asString(), "");
-    //cout << "Source created.. " << endl << src << endl;
-    gData.sources.push_back(src);
-  }
-  catch( const Exception & excpt_r )
-  {
-    cerr << _("Can't access repository") << endl;
-    ZYPP_CAUGHT( excpt_r );
-    exit(-1);
-  }
-
-}
-*/
 
 // Local Variables:
 // c-basic-offset: 2
