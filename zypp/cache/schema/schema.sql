@@ -10,20 +10,25 @@ DROP TABLE IF EXISTS types;
 DROP TABLE IF EXISTS text_attributes;
 DROP TABLE IF EXISTS split_capabilities;
 DROP TABLE IF EXISTS resolvables_repositories;
+DROP INDEX IF EXISTS resolvables_repository_id_index;
+DROP INDEX IF EXISTS resolvables_shared_id_index;
 DROP TABLE IF EXISTS resolvables;
 DROP TABLE IF EXISTS patch_packages_baseversions;
 DROP TABLE IF EXISTS patch_packages;
 DROP TABLE IF EXISTS other_capabilities;
 DROP TABLE IF EXISTS numeric_attributes;
 DROP TABLE IF EXISTS names;
+DROP INDEX IF EXISTS names_index;
 DROP TABLE IF EXISTS named_capabilities;
 DROP TABLE IF EXISTS modalias_capabilities;
 DROP TABLE IF EXISTS locks;
 DROP TABLE IF EXISTS hal_capabilities;
 DROP TABLE IF EXISTS files;
 DROP TABLE IF EXISTS file_names;
+DROP INDEX IF EXISTS file_names_index;
 DROP TABLE IF EXISTS file_capabilities;
 DROP TABLE IF EXISTS dir_names;
+DROP INDEX IF EXISTS dir_names_index;
 DROP TABLE IF EXISTS delta_packages;
 DROP TABLE IF EXISTS db_info;
 DROP TABLE IF EXISTS repositories;
@@ -72,6 +77,7 @@ CREATE TABLE names (
     id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL
   , name TEXT UNIQUE
 );
+CREATE INDEX names_index ON names(name);
 
 ------------------------------------------------
 -- File names table and normalized sub tables
@@ -81,11 +87,13 @@ CREATE TABLE file_names (
    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL
   , name TEXT
 );
+CREATE INDEX file_names_index ON file_names(name);
 
 CREATE TABLE dir_names (
    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL
   , name TEXT
 );
+CREATE INDEX dir_names_index ON dir_names(name);
 
 CREATE TABLE files (
    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL
@@ -135,6 +143,7 @@ CREATE TABLE resolvables (
   , shared_id INTEGER DEFAULT NULL
 );
 CREATE INDEX resolvable_repository_id ON resolvables(repository_id);
+CREATE INDEX resolvables_shared_id_index ON resolvables(shared_id);
 
 ------------------------------------------------
 -- Do we need those here?

@@ -52,6 +52,7 @@ CacheInitializer::CacheInitializer( const Pathname &root_r, const Pathname &db_f
   {
      assert_dir( _pimpl->root );
     _pimpl->con.reset( new sqlite3_connection( ( _pimpl->root + db_file).asString().c_str()) );
+    _pimpl->con->executenonquery("pragma synchronous = 0;");
     _pimpl->con->executenonquery("begin;");
     if( ! tablesCreated() )
     {

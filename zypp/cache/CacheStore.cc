@@ -141,6 +141,7 @@ struct CacheStore::Impl
 
 
     // disable autocommit
+    con.executenonquery("PRAGMA synchronous = 0;");
     con.executenonquery("BEGIN;");
   }
 

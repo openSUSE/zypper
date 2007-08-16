@@ -1,7 +1,17 @@
 -------------------------------------------------------------------
+Thu Aug 16 17:12:45 CEST 2007 - kkaempf@suse.de
+
+- run sqlite asynchronously and add sql index files where
+  appropriate, gives 6x performance on certain operations.
+  Bumping cache schema version to 1004.
+  (#300998)
+- rev 6710
+
+-------------------------------------------------------------------
 Thu Aug 16 17:08:58 CEST 2007 - kkaempf@suse.de
 
 - fix String::endsWith (#301038)
+- rev 6709
 
 -------------------------------------------------------------------
 Thu Aug 16 11:16:25 CEST 2007 - schubi@suse.de
