@@ -900,10 +900,10 @@ SET( zypp_cache_HEADERS
   cache/Utils.h
 )
 
-#INSTALL(  FILES
-#  ${zypp_cache_HEADERS}
-#  DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/cache
-#)
+INSTALL(  FILES
+  ${zypp_cache_HEADERS}
+  DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/cache
+)
 
 SET( zypp_cache_sqlite3x_SRCS
   cache/sqlite3x/sqlite3x_command.cpp

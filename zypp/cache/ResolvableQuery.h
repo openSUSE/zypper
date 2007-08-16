@@ -220,6 +220,21 @@ namespace zypp
        */
       void queryDiskUsage( const data::RecordId &record_id,
                            DiskUsage &du );
+
+      /**
+       * \short Query repo alias by id
+       */
+      std::string queryRepositoryAlias( const data::RecordId &repo_id );
+
+      /**
+      * Query by matching name
+      * \param name name to match
+      * \param wild 0 = no wild, 1 = trailing wild, 2 = leading wild, 3 = trailing & leading wild
+      * \param fnc callback to send the data to. (Will be called once per result)
+      */
+      void queryByName( const std::string &name, int wild,
+                  ProcessResolvable fnc  );
+
     private:
       /** Implementation. */
       class Impl;
