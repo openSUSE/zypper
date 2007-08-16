@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Thu Aug 16 11:16:25 CEST 2007 - schubi@suse.de
+
+- added an _explicitly_requested in QueueItemConflict ( as already in
+  QueueItemEstablish, QueueItemInstall, QueueItemUninstall ) in order to
+  remove the conflicting item without an error message. Bug 299819 
+- rev 6699
+
+-------------------------------------------------------------------
 Thu Aug 16 07:23:31 CEST 2007 - jkupec@suse.cz
 
 - forgot to set default refresh policy in checkIfToRefreshMetadata
