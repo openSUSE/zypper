@@ -1,8 +1,9 @@
 -------------------------------------------------------------------
 Thu Aug 16 07:23:31 CEST 2007 - jkupec@suse.cz
 
+- forgot to set default refresh policy in checkIfToRefreshMetadata
 - repo.refresh.delay default set to 10 minutes
-- 6691
+- 6693
 
 -------------------------------------------------------------------
 Wed Aug 15 15:32:36 CEST 2007 - schubi@suse.de
