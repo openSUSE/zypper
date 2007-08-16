@@ -530,16 +530,16 @@ void show_summary_resolvable_list(const string & label,
   {
     ResObject::constPtr res(*resit);
 
-    if (gSettings.verbosity == 0)
+    if (gSettings.verbosity == VERBOSITY_NORMAL)
     {
       // watch the terminal widht
-      if (cols_written + res->name().size() + 1  > cols)
+      if (cols_written == 0)
+        cout << INDENT;
+      else if (cols_written + res->name().size() + 1  > cols)
       {
         cout << endl;
         cols_written = 0;
       }
-      if (cols_written = 0)
-        cout << INDENT;
 
       cols_written += res->name().size();
     }
@@ -557,7 +557,7 @@ void show_summary_resolvable_list(const string & label,
     cout_v << endl;
   }
 
-  if (gSettings.verbosity == 0)
+  if (gSettings.verbosity == VERBOSITY_NORMAL)
     cout << endl;
 }
 
