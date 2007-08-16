@@ -6,6 +6,7 @@
 
 #include <zypp/target/store/PersistentStorage.h>
 #include <zypp/base/IOStream.h>
+#include <zypp/media/MediaManager.h>
 
 #include <zypp/RepoManager.h>
 #include <zypp/RepoInfo.h>
@@ -494,7 +495,9 @@ int refresh_repos(vector<string> & arguments)
       continue;
     }
 
-    cout_n << format(_("Refreshing '%s'")) % it->alias() << endl;
+    cout_n << format(_("Refreshing '%s'")) % it->alias()
+      << (copts.count("force") ? " " + string(_("(forced)")) : "")
+      << endl;
 
     // do the refresh
     bool error = false;
@@ -595,11 +598,26 @@ std::string timestamp ()
 
 //! \todo handle zypp exceptions
 static
-int add_repo(const RepoInfo & repo)
+int add_repo(RepoInfo & repo)
 {
   RepoManager manager;
+  
+  bool is_cd = true;
+  for(RepoInfo::urls_const_iterator it = repo.baseUrlsBegin();
+      it != repo.baseUrlsEnd(); ++it)
+  {
+    MediaManager mm; MediaAccessId id = mm.open(*it);
+    is_cd = mm.isChangeable(id);
+    mm.close(id);
+    if (!is_cd)
+      break;
+  }
+  if (is_cd)
+  {
+    cout_v << _("This is a changeable read-only media (CD/DVD), disabling autorefresh.") << endl; 
+    repo.setAutorefresh(false);
+  }
 
-  //cout_v << format(_("Adding repository '%s'.")) % repo.alias() << endl;
   MIL << "Going to add repository: " << repo << endl;
 
   try
@@ -640,7 +658,7 @@ int add_repo(const RepoInfo & repo)
     report_problem(e, _("Unknown problem when adding repository:"));
     return ZYPPER_EXIT_ERR_BUG;
   }
-
+  
   //! \todo different output for -r and for zypper.
   cout_n << format(_("Repository '%s' successfully added:")) % repo.alias() << endl;
   cout_n << ( repo.enabled() ? "[x]" : "[ ]" );
@@ -648,6 +666,20 @@ int add_repo(const RepoInfo & repo)
   cout_n << repo.alias() << " (" << *repo.baseUrlsBegin() << ")" << endl;
 
   MIL << "Repository successfully added: " << repo << endl;
+
+  if(is_cd)
+  {
+    cout_n << format(_("Reading data from '%s' media")) % repo.alias() << endl;
+    bool error = refresh_raw_metadata(repo, false);
+    if (!error)
+      error = build_cache(repo, false);
+    if (error)
+    {
+      cerr << format(_("Problem reading data from '%s' media")) % repo.alias() << endl;
+      cerr << _("Please, check if your installation media is valid and readable.") << endl;
+      return ZYPPER_EXIT_ERR_ZYPP;
+    }
+  }
 
   return ZYPPER_EXIT_OK;
 }
