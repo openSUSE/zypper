@@ -1,10 +1,18 @@
 -------------------------------------------------------------------
+Fri Aug 17 15:16:32 CEST 2007 - jkupec@suse.cz
+
+- text update from proof-reading
+- some output clean-up
+- r6746
+- 0.8.13
+
+-------------------------------------------------------------------
 Fri Aug 17 12:34:32 CEST 2007 - kkaempf@suse.de
 
 - implement --type and --match-exact options for cache search
 - fix repository and kind in output
   requires libzypp >= 3.17.0
-- r6737, version 0.8.13
+- r6737
 
 -------------------------------------------------------------------
 Thu Aug 16 23:46:15 CEST 2007 - kkaempf@suse.de
