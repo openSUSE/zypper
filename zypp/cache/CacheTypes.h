@@ -67,6 +67,15 @@ namespace zypp
       Rel relationFor( const data::RecordId &id );
       
       /**
+       * Cache record id for Relation
+       *
+       * \param rel relation
+       *
+       * \throws Exception if the Relation is not valid
+       */
+      data::RecordId idForRelation( const Rel &rel );
+      
+      /**
        * Kind for a cache record id.
        *
        * \param id The id you got in a cache query
@@ -74,6 +83,15 @@ namespace zypp
        * \throws Exception if the id is not a valid type
        */
       Resolvable::Kind kindFor( const data::RecordId &id );
+
+      /**
+       * Cache record id for Kind
+       *
+       * \param kind Kind
+       *
+       * \throws Exception if the Kind is not valid
+       */
+      data::RecordId idForKind( const Resolvable::Kind & kind );
       
       /**
        * Dependency type for a cache record id.
@@ -85,6 +103,15 @@ namespace zypp
       Dep deptypeFor( const data::RecordId &id );
       
       /**
+       * Cache record id for Dep type
+       *
+       * \param dep Dep
+       *
+       * \throws Exception if the Dep is not valid
+       */
+      data::RecordId idForDeptype( const Dep & dep );
+      
+      /**
        * Architecture for a cache record id.
        *
        * \param id The id you got in a cache query
@@ -92,6 +119,15 @@ namespace zypp
        * \throws Exception if the id is not a valid type
        */
       Arch archFor( const data::RecordId &id );
+      
+      /**
+       * Cache record id for Arch
+       *
+       * \param arch Arch
+       *
+       * \throws Exception if the Arch is not valid
+       */
+      data::RecordId idForArch( const Arch & arch );
       
     public:
 

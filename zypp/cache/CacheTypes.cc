@@ -93,6 +93,17 @@ namespace zypp
       return rel;
     
     }
+
+    data::RecordId CacheTypes::idForRelation( const Rel &rel )
+    {
+      std::map<data::RecordId, Rel>::const_iterator it;
+      for ( it = _rel_cache.begin(); it != _rel_cache.end(); ++it )
+      {
+        if ( rel == it->second )
+	  return it->first;
+      }
+      ZYPP_THROW(Exception("Inconsistent Rel"));   
+    }
     
     Resolvable::Kind CacheTypes::kindFor( const data::RecordId &id )
     {
@@ -105,6 +116,17 @@ namespace zypp
       
       return kind;
     }
+
+    data::RecordId CacheTypes::idForKind( const Resolvable::Kind & kind )
+    {
+      std::map<data::RecordId, Resolvable::Kind>::const_iterator it;
+      for ( it = _kind_cache.begin(); it != _kind_cache.end(); ++it )
+      {
+        if ( kind == it->second )
+	  return it->first;
+      }
+      ZYPP_THROW(Exception("Inconsistent Kind"));   
+    }
     
     Dep CacheTypes::deptypeFor( const data::RecordId &id )
     {
@@ -116,6 +138,17 @@ namespace zypp
         ERR << "deptype: " << id << endl;
         ZYPP_THROW(Exception("Inconsistent deptype"));
       }
+    }
+
+    data::RecordId CacheTypes::idForDeptype( const Dep & dep )
+    {
+      std::map<data::RecordId, string>::const_iterator it;
+      for ( it = _deptype_cache.begin(); it != _deptype_cache.end(); ++it )
+      {
+        if ( dep.asString() == it->second )
+	  return it->first;
+      }
+      ZYPP_THROW(Exception("Inconsistent deptype"));   
     }
     
     Arch CacheTypes::archFor( const data::RecordId &id )
@@ -130,6 +163,18 @@ namespace zypp
       
       return arch;
     }
+
+    data::RecordId CacheTypes::idForArch( const Arch & arch )
+    {
+      std::map<data::RecordId, Arch>::const_iterator it;
+      for ( it = _arch_cache.begin(); it != _arch_cache.end(); ++it )
+      {
+        if ( arch == it->second )
+	  return it->first;
+      }
+      ZYPP_THROW(Exception("Inconsistent Arch"));   
+    }
+
 
 
     ///////////////////////////////////////////////////////////////////

@@ -43,6 +43,7 @@ struct ResolvableQuery::Impl
     _cmd_disk_usage.reset( new sqlite3_command( _con, "select d.name,du.size,du.files from resolvable_disk_usage du,dir_names d where du.resolvable_id=:rid and du.dir_name_id=d.id;"));
     
     MIL << "Creating Resolvable query impl" << endl;
+    //         0   1     2        3        4      5     6     7               8             9             10          11            12
     _fields = "id, name, version, release, epoch, arch, kind, installed_size, archive_size, install_only, build_time, install_time, repository_id";
   }
 
@@ -51,13 +52,32 @@ struct ResolvableQuery::Impl
       MIL << "Destroying Resolvable query impl" << endl;
   }
 
+  //
+  // convert regex ? and * operators to sql _ and % respectively
+  //  example: regex2sql( "*foo?bar*" ) => "%foo_bar%"
+  std::string regex2sql( const std::string & s)
+  {
+    std::string sql( s );
+    string::iterator it;
+    for (it = sql.begin(); it != sql.end(); ++it)
+    {
+      if (*it == '*') *it = '%';
+      else if (*it == '?') *it = '_';
+    }
+    return sql;
+  }
+
   data::ResObject_Ptr fromRow( sqlite3_reader &reader )
   {
     data::ResObject_Ptr ptr (new data::ResObject);
 
+    // see _fields definition above for the getXXX() numbers
+
     ptr->name = reader.getstring(1);
     ptr->edition = Edition( reader.getstring(2), reader.getstring(3), reader.getint(4));
     ptr->arch = _type_cache.archFor(reader.getint(5));
+    ptr->kind = _type_cache.kindFor( reader.getint(6) );
+    ptr->repository = reader.getint( 12 );
 
     // TODO get the rest of the data
 
@@ -83,7 +103,7 @@ struct ResolvableQuery::Impl
   {  
     
     sqlite3_command cmd( _con, "select " + _fields + " from resolvables where name like :name;");
-    cmd.bind(":name", string("%") + s + "%");
+    cmd.bind( ":name", regex2sql( s ) );
     sqlite3_reader reader = cmd.executereader();
     while(reader.read())
     {
@@ -91,7 +111,7 @@ struct ResolvableQuery::Impl
     }
   }
 
-  void queryByName( const std::string &name, int wild, ProcessResolvable fnc  )
+  void iterateResolvablesByName( const std::string &name, int wild, ProcessResolvable fnc  )
   {
     std::string sqlcmd = "select " + _fields + " from resolvables where name ";
     std::string s( name );
@@ -102,6 +122,7 @@ struct ResolvableQuery::Impl
     else
     {
       sqlcmd += "like";
+      s = regex2sql( s );
     }
     sqlite3_command cmd( _con, sqlcmd + " :name;");
     if (wild & 1)
@@ -190,6 +211,20 @@ struct ResolvableQuery::Impl
     return alias;
   }
   
+  void iterateResolvablesByKind( zypp::Resolvable::Kind kind, ProcessResolvable fnc )
+  {
+    sqlite3_command cmd( _con, "select " + _fields + " from resolvables where kind=:kind;");
+    data::RecordId kind_id = _type_cache.idForKind( kind );
+    cmd.bind(":kind", kind_id);
+    sqlite3_reader reader = cmd.executereader();
+    while(reader.read())
+    {
+      fnc( reader.getint64(0), fromRow(reader) );
+    }
+  }
+  
+
+
 private:
 
   int queryNumericAttributeInternal( sqlite3_connection &con,
@@ -365,9 +400,14 @@ std::string ResolvableQuery::queryRepositoryAlias( const data::RecordId &repo_id
   return _pimpl->queryRepositoryAlias( repo_id );
 }
 
-void ResolvableQuery::queryByName( const std::string &name, int wild, ProcessResolvable fnc  )
+void ResolvableQuery::iterateResolvablesByKind( zypp::Resolvable::Kind kind, ProcessResolvable fnc )
 {
-  _pimpl->queryByName( name, wild, fnc );
+  return _pimpl->iterateResolvablesByKind( kind, fnc );
+}
+
+void ResolvableQuery::iterateResolvablesByName( const std::string &name, int wild, ProcessResolvable fnc  )
+{
+  _pimpl->iterateResolvablesByName( name, wild, fnc );
 }
 
 //////////////////////////////////////////////////////////////////////////////

@@ -72,7 +72,7 @@ namespace zypp
 
       /**
       * Query by matching text
-      * \param text text to match
+      * \param text text to match, wildcard operators like * and ? are allowed
       * \param fnc callback to send the data to. (Will be called once per result)
       */
       void query( const std::string &text,
@@ -228,12 +228,24 @@ namespace zypp
 
       /**
       * Query by matching name
-      * \param name name to match
-      * \param wild 0 = no wild, 1 = trailing wild, 2 = leading wild, 3 = trailing & leading wild
+      * \param name name to match, wildcard operators like * and ? are allowed if 'wild' param != 0
+      * \param wild append wildcard operators ?: 0 = no, 1 = trailing wild, 2 = leading wild, 3 = trailing & leading wild, 4 = name contains wildcards
       * \param fnc callback to send the data to. (Will be called once per result)
+      *
+      * Examples:
+      *   iterateByName( "kernel", 0, cb ) => look for resovables matching "kernel" exactly
+      *   iterateByName( "kernel", 1, cb ) => look for resovables starting with "kernel" (wildcard operator will be appendend)
+      *   iterateByName( "devel", 2, cb ) => look for resovables ending in "devel" (wildcard operator will be prependend)
+      *   iterateByName( "foo??", 1, cb ) => look for resovables starting with "foo" and at least 5 characters
+      *   iterateByName( "fo*o", 4, cb ) => look for resovables matching "fo*o"
       */
-      void queryByName( const std::string &name, int wild,
+      void iterateResolvablesByName( const std::string &name, int wild,
                   ProcessResolvable fnc  );
+
+      /**
+       * \short Iterate resolvables by Kind
+       */
+      void iterateResolvablesByKind( zypp::Resolvable::Kind kind, ProcessResolvable fnc );
 
     private:
       /** Implementation. */
