@@ -40,35 +40,40 @@ static bool refresh_raw_metadata(const RepoInfo & repo, bool force_download)
   {
     RepoManager manager;
 
-    // check whether libzypp indicates a refresh is needed, and if so,
-    // print a message
-    cout_v << format(
-        _("Checking whether to refresh metadata for %s")) % repo.alias()
-        << endl;
-    for(RepoInfo::urls_const_iterator it = repo.baseUrlsBegin();
-        it != repo.baseUrlsEnd(); ++it)
+    if (!force_download)
     {
-      try
+      // check whether libzypp indicates a refresh is needed, and if so,
+      // print a message
+      cout_v << format(
+          _("Checking whether to refresh metadata for %s")) % repo.alias()
+          << endl;
+      for(RepoInfo::urls_const_iterator it = repo.baseUrlsBegin();
+          it != repo.baseUrlsEnd(); ++it)
       {
-        if (manager.checkIfToRefreshMetadata(repo, *it))
+        try
         {
-          cout_n << format(_("Refreshing '%s'")) % repo.alias();
-          if (command == ZypperCommand::REFRESH && copts.count("force"))
-            cout_n << " " << _("(forced)");
-          cout_n << endl;
+          if (manager.checkIfToRefreshMetadata(repo, *it))
+          {
+            cout_n << format(_("Refreshing '%s'")) % repo.alias();
+            if (command == ZypperCommand::REFRESH && copts.count("force"))
+              cout_n << " " << _("(forced)");
+            cout_n << endl;
+          }
+          else if (command == ZypperCommand::REFRESH)
+          {
+            cout_n << format(_("Repository '%s' is up to date.")) % repo.alias() << endl;
+          }
+          break; // don't check all the urls, just the first succussfull.
         }
-        else if (command == ZypperCommand::REFRESH)
+        catch (const Exception & e)
         {
-          cout_n << format(_("Repository '%s' is up to date.")) % repo.alias() << endl;
+          ZYPP_CAUGHT(e);
+          ERR << *it << " doesn't look good. Trying another url." << endl;
         }
-        break; // don't check all the urls, just the first succussfull.
-      }
-      catch (const Exception & e)
-      {
-        ZYPP_CAUGHT(e);
-        ERR << *it << " doesn't look good. Trying another url." << endl;
       }
     }
+    else
+      cout << _("Forcing raw metadata refresh") << endl;
 
     manager.refreshMetadata(repo, force_download ?
       RepoManager::RefreshForced : RepoManager::RefreshIfNeeded);
@@ -139,6 +144,9 @@ bool build_cache_callback(const ProgressData & pd)
 */
 static bool build_cache(const RepoInfo &repo, bool force_build)
 {
+  if (force_build)
+    cout << _("Forcing building of repository cache") << endl;
+
   try
   {
     RepoManager manager;
@@ -512,9 +520,6 @@ int refresh_repos(vector<string> & arguments)
       bool force_download =
         copts.count("force") || copts.count("force-download");
 
-      if (force_download)
-        cout << _("Forcing raw metadata refresh") << endl;
-
       MIL << "calling refreshMetadata" << (force_download ? ", forced" : "")
           << endl;
 
@@ -525,9 +530,6 @@ int refresh_repos(vector<string> & arguments)
     {
       bool force_build = 
         copts.count("force") || copts.count("force-build");
-
-      if (force_build)
-        cout << _("Forcing building of repository cache") << endl;
 
       MIL << "calling buildCache" << (force_build ? ", forced" : "") << endl;
 
