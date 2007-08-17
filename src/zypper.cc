@@ -352,7 +352,7 @@ int one_command(int argc, char **argv)
       "\n"
       "  Command options:\n"
       "-r, --repo <FILE.repo>  Read the URL and alias from a file (even remote)\n"
-      "-t, --type <TYPE>       Type of repository (YaST, YUM, or plaindir)\n"
+      "-t, --type <TYPE>       Type of repository (yast2, rpm-md, or plaindir)\n"
       "-d, --disabled          Add the repository as disabled\n"
       "-n, --no-refresh        Add the repository with auto-refresh disabled\n"
     );
@@ -791,45 +791,56 @@ int one_command(int argc, char **argv)
     if (copts.count("no-refresh"))
       refresh = false;
 
-    // add repository specified in .repo file
-    if (copts.count("repo"))
+    try
     {
-      return add_repo_from_file(copts["repo"].front(), enabled, refresh);
+      // add repository specified in .repo file
+      if (copts.count("repo"))
+      {
+        return add_repo_from_file(copts["repo"].front(), enabled, refresh);
+      }
+  
+      // force specific repository type. Validation is done in add_repo_by_url()
+      string type = copts.count("type") ? copts["type"].front() : "";
+  
+      // display help message if insufficient info was given
+      if (arguments.size() < 2)
+      {
+        cerr << _("Too few arguments. At least URL and alias are required.") << endl;
+        ERR << "Too few arguments. At least URL and alias are required." << endl;
+        cout_n << specific_help;
+        return ZYPPER_EXIT_ERR_INVALID_ARGS;
+      }
+  
+      Url url = make_url (arguments[0]);
+      if (!url.isValid()) //! \todo error message
+        return ZYPPER_EXIT_ERR_INVALID_ARGS;
+  
+      string alias;
+      if (arguments.size() > 1)
+        alias = arguments[1];
+      //! \todo use timestamp as alias, if no alias was given?
+      if (alias.empty ())
+        alias = url.asString();
+  
+      // by default, enable the repo and set autorefresh
+      if (indeterminate(enabled)) enabled = true;
+      if (indeterminate(refresh)) refresh = true;
+  
+      warn_if_zmd();
+  
+      // load gpg keys
+      cond_init_target ();
+  
+      return add_repo_by_url(url, alias, type, enabled, refresh);
     }
-
-    // force specific repository type. Validation is done in add_repo_by_url()
-    string type = copts.count("type") ? copts["type"].front() : "";
-
-    // display help message if insufficient info was given
-    if (arguments.size() < 2)
+    catch (const repo::RepoUnknownTypeException & e)
     {
-      cerr << _("Too few arguments. At least URL and alias are required.") << endl;
-      ERR << "Too few arguments. At least URL and alias are required." << endl;
-      cout_n << specific_help;
+      ZYPP_CAUGHT(e);
+      report_problem(e,
+          _("Specified type is not a valid repository type:"),
+          _("See 'zypper -h addrepo' or man zypper to get a list of known repository types."));
       return ZYPPER_EXIT_ERR_INVALID_ARGS;
     }
-
-    Url url = make_url (arguments[0]);
-    if (!url.isValid()) //! \todo error message
-      return ZYPPER_EXIT_ERR_INVALID_ARGS;
-
-    string alias;
-    if (arguments.size() > 1)
-      alias = arguments[1];
-    //! \todo use timestamp as alias, if no alias was given?
-    if (alias.empty ())
-      alias = url.asString();
-
-    // by default, enable the repo and set autorefresh
-    if (indeterminate(enabled)) enabled = true;
-    if (indeterminate(refresh)) refresh = true;
-
-    warn_if_zmd();
-
-    // load gpg keys
-    cond_init_target ();
-
-    return add_repo_by_url(url, alias, type, enabled, refresh);
   }
 
   // --------------------------( delete repo )--------------------------------
