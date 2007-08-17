@@ -234,7 +234,11 @@ Add a new repository specified by URI and assign specified alias to it.
 Read URI and alias from specified .repo file
 .TP
 \fI\-t, \-\-type\fR <TYPE>
-Type of repository (YaST, YUM, or plaindir).
+Type of repository (yast2, rpm-md, or plaindir). There are several aliases
+defined for these types:
+\fByast2\fR - susetags, yast, YaST, YaST2, YAST;
+\fBrpm-md\fR - repomd, rpmmd, yum, YUM;
+\fBplaindir\fR - Plaindir.
 .TP
 \fI\-d, \-\-disabled\fR
 Add the repository as disabled.

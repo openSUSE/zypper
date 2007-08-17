@@ -241,17 +241,17 @@ int one_command(int argc, char **argv)
   struct option *specific_options = &no_options;
   string specific_help;
 
-  string help_global_source_options = _(
+/*  string help_global_source_options = _(
       "  Repository options:\n"
       "\t--disable-repositories, -D\t\tDo not read data from defined repositories.\n"
       "\t--plus-repo <URI|.repo>\t\tRead additional repository\n" //! \todo additional repo
-      );
+      );*/
 //! \todo preserve for rug comp.  "\t--disable-system-sources, -D\t\tDo not read the system sources\n"
 //! \todo preserve for rug comp.  "\t--source, -S\t\tRead additional source\n"
 
-  string help_global_target_options = _("  Target options:\n"
-      "\t--disable-system-resolvables, -T\t\tDo not read system installed resolvables\n"
-      );
+//  string help_global_target_options = _("  Target options:\n"
+//      "\t--disable-system-resolvables, -T\t\tDo not read system installed resolvables\n"
+//      );
 
   if (command == ZypperCommand::HELP)
   {
@@ -491,7 +491,9 @@ int one_command(int argc, char **argv)
     };
     specific_options = update_options;
     specific_help = _(
-      "'update' - Update all installed resolvables with newer versions, where applicable.\n"
+      "update (up) [options]\n"
+      "\n"
+      "Update all installed resolvables with newer versions, where applicable.\n"
       "\n"
       "  Command options:\n"
       "\n"
@@ -600,7 +602,7 @@ int one_command(int argc, char **argv)
     specific_help = _(
       "info <name> ...\n"
       "\n"
-      "'info' -- Show full information for packages\n"
+      "Show full information for packages\n"
       "\n"
       "  Command options:\n"
       "\n"
@@ -618,7 +620,7 @@ int one_command(int argc, char **argv)
     specific_help = _(
       "patch-info <patchname> ...\n"
       "\n"
-      "'patch-info' -- Show detailed information for patches\n"
+      "Show detailed information for patches\n"
       "\n"
       "This is a rug compatibility alias for 'zypper info -t patch'\n"
     );
@@ -632,7 +634,7 @@ int one_command(int argc, char **argv)
     specific_help = _(
       "moo\n"
       "\n"
-      "'moo' - Show an animal\n"
+      "Show an animal\n"
       "\n"
       "This command has no additional options.\n"
       );
@@ -647,7 +649,7 @@ int one_command(int argc, char **argv)
     specific_help = _(
       "xml-updates\n"
       "\n"
-      "'xml-updates' - Show updates and patches in xml format\n"
+      "Show updates and patches in xml format\n"
       "\n"
       "  Command options:\n"
       "-r, --repo <alias>  Work only with updates from repository specified by alias.\n"
