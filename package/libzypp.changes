@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Fri Aug 17 11:45:24 CEST 2007 - kkaempf@suse.de
+
+- rename ResolvableQuery::queryByName to iterateResolvablesByName
+- fix reading of kind and repository in ResolvableQuery
+- add reverse lookups in CacheTypes
+- add iterateResolvablesByKind
+- rev 6733
+
+-------------------------------------------------------------------
 Fri Aug 17 10:37:56 CEST 2007 - schubi@suse.de
 
 - shorten solver error messages Bug 259894
