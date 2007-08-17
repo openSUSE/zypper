@@ -1172,7 +1172,7 @@ int one_command(int argc, char **argv)
     Table t;
     t.style(Ascii);
 
-    ZyppSearch search( God, options,arguments );
+    ZyppSearch search( God, options, arguments );
     FillTable callback( t, search.installedCache(), search.getQueryInstancePtr() );
 
     search.doSearch( callback, callback );

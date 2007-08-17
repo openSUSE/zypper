@@ -67,7 +67,8 @@ ZyppSearch::invokeOnEachSearched(_Filter filter_r, _PoolCallback pool_cb, _Cache
   ResPool pool = _zypp->pool();
 
   // search for specific resolvable type only
-  if (_options.kind() != Resolvable::Kind()) {
+  if (_options.kind() != Resolvable::Kind())
+  {
     cerr_vv << "invokeOnEachSearched(): search by type" << endl;
 
     if (_options.installedFilter() != ZyppSearchOptions::UNINSTALLED_ONLY)
@@ -84,7 +85,14 @@ ZyppSearch::invokeOnEachSearched(_Filter filter_r, _PoolCallback pool_cb, _Cache
       {
         // search cache on ALL or UNINSTALLED by TYPE
 
-        _query.iterateResolvablesByKind( _options.kind(), cache_cb );
+	if (_qstrings.empty())
+	  _query.iterateResolvablesByKind( _options.kind(), cache_cb );
+	else
+        {
+          std::vector<zypp::Resolvable::Kind> kinds;
+	  kinds.push_back( _options.kind() );
+          _query.iterateResolvablesByKindsAndName( kinds, _qstrings[0], _options.matchExact() ? 0 : 3, cache_cb );
+        }
       }
       catch ( const Exception & excpt_r )
       {
@@ -115,9 +123,11 @@ ZyppSearch::invokeOnEachSearched(_Filter filter_r, _PoolCallback pool_cb, _Cache
     {
       try
       {
-      // search cache on ALL or UNINSTALLED by EXACT NAME
+      // search cache on ALL or UNINSTALLED by Kind AND Name
 
-        _query.iterateResolvablesByName( _qstrings[0], 0, cache_cb );
+        std::vector<zypp::Resolvable::Kind> kinds;
+	kinds.push_back( ResTraits<Package>::kind );
+        _query.iterateResolvablesByKindsAndName( kinds, _qstrings[0], 0, cache_cb );
       }
       catch ( const Exception & excpt_r )
       {
@@ -144,7 +154,9 @@ ZyppSearch::invokeOnEachSearched(_Filter filter_r, _PoolCallback pool_cb, _Cache
       {
       // search cache on ALL or UNINSTALLED by WILD NAME
 
-        _query.iterateResolvablesByName( _qstrings[0], 3, cache_cb );
+        std::vector<zypp::Resolvable::Kind> kinds;
+	kinds.push_back( ResTraits<Package>::kind );
+        _query.iterateResolvablesByKindsAndName( kinds, _qstrings[0], 3, cache_cb );
       }
       catch ( const Exception & excpt_r )
       {
@@ -187,7 +199,7 @@ void
 ZyppSearch::doSearch(const boost::function<bool(const PoolItem &)> & f, const zypp::cache::ProcessResolvable & r)
 {
   boost::function<bool (const PoolItem &)> filter;
-cerr << "ZyppSearch::doSearch()" << endl;
+
   switch (_options.installedFilter()) {
     case ZyppSearchOptions::INSTALLED_ONLY:
       filter = chain(ByInstalledCache(_icache),Match(_reg,_options.searchDescriptions()));
