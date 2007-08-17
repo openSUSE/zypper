@@ -43,7 +43,7 @@ static bool refresh_raw_metadata(const RepoInfo & repo, bool force_download)
     // check whether libzypp indicates a refresh is needed, and if so,
     // print a message
     cout_v << format(
-        _("Checking whether to refresh metadata for %s.")) % repo.alias()
+        _("Checking whether to refresh metadata for %s")) % repo.alias()
         << endl;
     for(RepoInfo::urls_const_iterator it = repo.baseUrlsBegin();
         it != repo.baseUrlsEnd(); ++it)
@@ -51,7 +51,17 @@ static bool refresh_raw_metadata(const RepoInfo & repo, bool force_download)
       try
       {
         if (manager.checkIfToRefreshMetadata(repo, *it))
-          cout_n << format(_("Refreshing '%s'")) % repo.alias() << endl;
+        {
+          cout_n << format(_("Refreshing '%s'")) % repo.alias();
+          if (command == ZypperCommand::REFRESH && copts.count("force"))
+            cout_n << " " << _("(forced)");
+          cout_n << endl;
+        }
+        else if (command == ZypperCommand::REFRESH)
+        {
+          cout_n << format(_("Repository '%s' is up to date.")) % repo.alias() << endl;
+        }
+        break; // don't check all the urls, just the first succussfull.
       }
       catch (const Exception & e)
       {
@@ -495,10 +505,6 @@ int refresh_repos(vector<string> & arguments)
       continue;
     }
 
-    cout_n << format(_("Refreshing '%s'")) % it->alias()
-      << (copts.count("force") ? " " + string(_("(forced)")) : "")
-      << endl;
-
     // do the refresh
     bool error = false;
     if (!copts.count("build-only"))
@@ -507,7 +513,7 @@ int refresh_repos(vector<string> & arguments)
         copts.count("force") || copts.count("force-download");
 
       if (force_download)
-        cout_v << _("Forcing raw metadata refresh");
+        cout << _("Forcing raw metadata refresh") << endl;
 
       MIL << "calling refreshMetadata" << (force_download ? ", forced" : "")
           << endl;
@@ -520,10 +526,8 @@ int refresh_repos(vector<string> & arguments)
       bool force_build = 
         copts.count("force") || copts.count("force-build");
 
-      cout_v << _("Creating repository cache");
       if (force_build)
-        cout_v << " " << _("(forced)");
-      cout_v << endl;
+        cout << _("Forcing building of repository cache") << endl;
 
       MIL << "calling buildCache" << (force_build ? ", forced" : "") << endl;
 
