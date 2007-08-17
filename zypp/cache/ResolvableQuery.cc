@@ -223,7 +223,45 @@ struct ResolvableQuery::Impl
     }
   }
   
+  void iterateResolvablesByKindsAndName( std::vector<zypp::Resolvable::Kind> kinds,
+                  const std::string &name, int wild, ProcessResolvable fnc )
+  {
+    std::string sqlcmd( "select " + _fields + " from resolvables where name " );
+    std::string s( name );
+    if (wild == 0)
+    {
+      sqlcmd += "=";
+    }
+    else
+    {
+      sqlcmd += "like";
+      s = regex2sql( s );
+    }
+    if (wild & 1)
+      s += "%";
+    if (wild & 2)
+      s = string("%") + s;
 
+    sqlcmd = sqlcmd + " :name AND kind IN (";
+
+    std::vector<zypp::Resolvable::Kind>::iterator it;
+    for (it = kinds.begin(); it != kinds.end(); it++)
+    {
+      if (it != kinds.begin())
+        sqlcmd += ", ";
+      char idbuf[16];
+      snprintf( idbuf, 15, "%d", (int)(_type_cache.idForKind( *it )) );
+      sqlcmd += idbuf;
+    }
+    sqlite3_command cmd( _con, sqlcmd + ")");
+    cmd.bind( ":name", s );
+
+    sqlite3_reader reader = cmd.executereader();
+    while(reader.read())
+    {
+      fnc( reader.getint64(0), fromRow(reader) );
+    }
+  }
 
 private:
 
@@ -410,6 +448,11 @@ void ResolvableQuery::iterateResolvablesByName( const std::string &name, int wil
   _pimpl->iterateResolvablesByName( name, wild, fnc );
 }
 
+void ResolvableQuery::iterateResolvablesByKindsAndName( std::vector<zypp::Resolvable::Kind> kinds,
+                  const std::string &name, int wild, ProcessResolvable fnc )
+{
+  _pimpl->iterateResolvablesByKindsAndName( kinds, name, wild, fnc );
+}
 //////////////////////////////////////////////////////////////////////////////
 
 } } // namespace zypp::cache

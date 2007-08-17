@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Aug 17 12:30:55 CEST 2007 - kkaempf@suse.de
+
+- add iterateResolvablesByKindsAndName
+- rev 6735, version 3.17.13
+
+-------------------------------------------------------------------
 Fri Aug 17 11:45:24 CEST 2007 - kkaempf@suse.de
 
 - rename ResolvableQuery::queryByName to iterateResolvablesByName

@@ -4,6 +4,7 @@
 
 #include <set>
 #include <list>
+#include <vector>
 #include "zypp/base/Function.h"
 #include "zypp/Pathname.h"
 #include "zypp/data/ResolvableData.h"
@@ -246,6 +247,12 @@ namespace zypp
        * \short Iterate resolvables by Kind
        */
       void iterateResolvablesByKind( zypp::Resolvable::Kind kind, ProcessResolvable fnc );
+
+      /**
+       * \short Iterate resolvables by Kinds and Name
+       */
+      void iterateResolvablesByKindsAndName( std::vector<zypp::Resolvable::Kind> kinds,
+                  const std::string &name, int wild, ProcessResolvable fnc );
 
     private:
       /** Implementation. */
