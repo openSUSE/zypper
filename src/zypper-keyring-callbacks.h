@@ -118,7 +118,7 @@ namespace zypp {
         std::string question = boost::str(boost::format(
             _("Signature verification failed for %s"
               " with public key id %s, %s, fingerprint %s."
-              " Warning: this might be caused by a malicious change in the file!"
+              " Warning: This might be caused by a malicious change in the file!"
               " Continuing is risky! Continue anyway?"))
             % file % keyid % keyname % fingerprint);
         return read_bool_answer(question, false);

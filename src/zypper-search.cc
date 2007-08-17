@@ -39,8 +39,8 @@ ZyppSearch::ZyppSearch (
 #if 0
   // no repos warning
   if (gData.repos.empty()) {
-    cerr << _("No repositories configured. Please, add at least one"
-              " repository using 'zypper addrepo' command before using search.")
+    cerr << _("No repositories configured. Please add at least one"
+              " repository using 'zypper addrepo' command before using the search.")
          << endl;
     exit(ZYPPER_EXIT_NO_REPOS); // TODO #define zypper error codes?
   }

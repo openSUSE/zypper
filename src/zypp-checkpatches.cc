@@ -122,7 +122,7 @@ int main(int argc, char **argv)
   catch ( const ZYppFactoryException & excpt_r )
   {
     ZYPP_CAUGHT (excpt_r);
-    string error_str( _("The updater could not access the package manager engine. This usually happens when you have another application (like YaST) using it at the same time. Please close other applications and check again for updates." ) );
+    string error_str( _("The updater could not access the package manager engine. This usually happens when you have another application (like YaST) using it at the same time. Please close the other applications and check again for updates." ) );
     return exit_with_error( error_str );
   }
   catch ( const Exception & excpt_r)

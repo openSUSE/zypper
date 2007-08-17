@@ -348,7 +348,7 @@ int one_command(int argc, char **argv)
     specific_help = _(
       "addrepo (ar) [options] <URI> <alias>\n"
       "\n"
-      "Add repository specified by URI to the system and assing specified alias to it.\n"
+      "Add repository specified by URI to the system and assing the specified alias to it.\n"
       "\n"
       "  Command options:\n"
       "-r, --repo <FILE.repo>  Read the URL and alias from a file (even remote)\n"
@@ -530,13 +530,13 @@ int one_command(int argc, char **argv)
     specific_help = _(
       "search [options] [querystring...]\n"
       "\n"
-      "'search' - Search for packages matching given search strings\n"
+      "Search for packages matching given search strings\n"
       "\n"
       "  Command options:\n"
-      "    --match-all            Search for a match to all search strings (default)\n"
-      "    --match-any            Search for a match to any of the search strings\n"
-      "    --match-substrings     Matches for search strings may be partial words (default)\n"
-      "    --match-words          Matches for search strings may only be whole words\n"
+      "    --match-all            Search for a match with all search strings (default)\n"
+      "    --match-any            Search for a match with any of the search strings\n"
+      "    --match-substrings     Matches with search strings may be partial words (default)\n"
+      "    --match-words          Matches with search strings may only be whole words\n"
       "    --match-exact          Searches for an exact package name\n"
       "-d, --search-descriptions  Search also in package summaries and descriptions.\n"
       "-c, --case-sensitive       Perform case-sensitive search.\n"
@@ -688,7 +688,7 @@ int one_command(int argc, char **argv)
   {
     MIL << "Repositories disabled, using target only." << endl;
     cout_n <<
-        _("Repositories disabled, using database of installed packages only.")
+        _("Repositories disabled, using the database of installed packages only.")
         << endl;
     gSettings.disable_system_sources = true;
   }
@@ -726,7 +726,7 @@ int one_command(int argc, char **argv)
     ZYPP_CAUGHT (excpt_r);
     ERR  << "A ZYpp transaction is already in progress." << endl;
     string msg = _("A ZYpp transaction is already in progress."
-        " This means, there is another application using libzypp library for"
+        " This means, there is another application using the libzypp library for"
         " package management running. All such applications must be closed before"
         " using this command.");
 

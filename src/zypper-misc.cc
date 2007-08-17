@@ -1388,12 +1388,12 @@ int solve_and_commit () {
         // special handling for failed integrity exception
         if (excpt_r.msg().find("fails integrity check") != string::npos) {
           cerr << endl
-            << _("Package integrity check failed. This may be a problem"
-            " with repository or media. Try one of the following:\n"
+            << _("The package integrity check failed. This may be a problem"
+            " with the repository or media. Try one of the following:\n"
             "\n"
             "- just retry previous command\n"
-            "- refresh repositories using 'zypper refresh'\n"
-            "- use another installation media (if e.g. damaged)\n"
+            "- refresh the repositories using 'zypper refresh'\n"
+            "- use another installation medium (if e.g. damaged)\n"
             "- use another repository") << endl;
           return ZYPPER_EXIT_ERR_ZYPP;
         }
@@ -1406,21 +1406,21 @@ int solve_and_commit () {
   if (retv < 0)
     retv = ZYPPER_EXIT_OK;
   else if (retv == ZYPPER_EXIT_INF_REBOOT_NEEDED)
-	{
-		if (gSettings.machine_readable)
-	    cout << "<message type=\"warning\" text=\"" << _("One of installed patches requires reboot of"
-	      " your machine. Please, do it as soon as possible.") << "\">" << endl;
-		else
-	    cout << _("WARNING: One of installed patches requires reboot of"
-	      " your machine. Please, do it as soon as possible.") << endl;
-	}
+  {
+    if (gSettings.machine_readable)
+      cout << "<message type=\"warning\" text=\"" << _("One of installed patches requires reboot of"
+          " your machine. Please, do it as soon as possible.") << "\">" << endl;
+    else
+      cout << _("WARNING: One of installed patches requires a reboot of"
+          " your machine. Please do it as soon as possible.") << endl;
+  }
   else if (retv == ZYPPER_EXIT_INF_RESTART_NEEDED)
-	{
-		if (!gSettings.machine_readable)
-			cout << _("WARNING: One of installed patches affects the package"
-      " manager itself, thus it requires restart before executing"
-      " next operations.") << endl;
-	}
+  {
+    if (!gSettings.machine_readable)
+      cout << _("WARNING: One of installed patches affects the package"
+          " manager itself, thus it requires its restart before executing"
+          " any further operations.") << endl;
+  }
 
   return retv;
 }
@@ -1467,13 +1467,14 @@ bool confirm_licenses()
 
         if (gSettings.non_interactive)
         {
+          //! \todo do this with _PL()
           cout << endl <<
-             _("Aborting installation due to the need of"
+             _("Aborting installation due to the need for"
               " license(s) confirmation.") << " ";
           // TranslatorExplanation Don't translate the '--auto-agree-with-licenses',
           // it is a command line option
           cout << _("Please, restart the operation in interactive"
-              " mode and confirm agreement with required license(s),"
+              " mode and confirm your agreement with required license(s),"
               " or use the --auto-agree-with-licenses option.")
             << endl;
           MIL << "License(s) NOT confirmed (non-interactive without auto confirmation)" << endl;

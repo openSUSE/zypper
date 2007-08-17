@@ -330,7 +330,7 @@ static void print_repo_list( const std::list<zypp::RepoInfo> &repos )
 
   if (tbl.empty())
     cout_n << _("No repositories defined."
-        " Use 'zypper addrepo' command to add one or more repositories.")
+        " Use the 'zypper addrepo' command to add one or more repositories.")
          << endl;
   else
     cout << tbl;
@@ -568,7 +568,7 @@ int refresh_repos(vector<string> & arguments)
   else if (error_count == enabled_repo_count)
     cerr << _("Could not refresh the repositories because of errors.") << endl;
   else if (error_count)
-    cerr << _("Some of the repositories have not been refreshed because of error.") << endl;
+    cerr << _("Some of the repositories have not been refreshed because of an error.") << endl;
   else if (argc)
     cout << _("Specified repositories have been refreshed.") << endl;
   else
@@ -647,9 +647,9 @@ int add_repo(RepoInfo & repo)
   {
     ZYPP_CAUGHT(e);
     report_problem(e,
-        _("Problem transfering repository data from specified URL:"),
+        _("Problem transferring repository data from specified URL:"),
         _("Please, check whether the specified URL is accessible."));
-    ERR << "Problem transfering repository data from specified URL" << endl;
+    ERR << "Problem transferring repository data from specified URL" << endl;
     return ZYPPER_EXIT_ERR_ZYPP;
   }
   catch (const Exception & e)
