@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Fri Aug 17 12:34:32 CEST 2007 - kkaempf@suse.de
+
+- implement --type and --match-exact options for cache search
+- fix repository and kind in output
+  requires libzypp >= 3.17.0
+- r6737, version 0.8.13
+
+-------------------------------------------------------------------
 Thu Aug 16 23:46:15 CEST 2007 - kkaempf@suse.de
 
 - initial implementation of cache search
