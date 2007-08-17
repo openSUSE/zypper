@@ -82,9 +82,9 @@ ZyppSearch::invokeOnEachSearched(_Filter filter_r, _PoolCallback pool_cb, _Cache
     {
       try
       {
-      // search cache on ALL or UNINSTALLED by TYPE
+        // search cache on ALL or UNINSTALLED by TYPE
 
-      _query.query( "%libzypp%", cache_cb );
+        _query.iterateResolvablesByKind( _options.kind(), cache_cb );
       }
       catch ( const Exception & excpt_r )
       {
@@ -117,7 +117,7 @@ ZyppSearch::invokeOnEachSearched(_Filter filter_r, _PoolCallback pool_cb, _Cache
       {
       // search cache on ALL or UNINSTALLED by EXACT NAME
 
-      _query.queryByName( _qstrings[0], 0, cache_cb );
+        _query.iterateResolvablesByName( _qstrings[0], 0, cache_cb );
       }
       catch ( const Exception & excpt_r )
       {
@@ -144,7 +144,7 @@ ZyppSearch::invokeOnEachSearched(_Filter filter_r, _PoolCallback pool_cb, _Cache
       {
       // search cache on ALL or UNINSTALLED by WILD NAME
 
-      _query.queryByName( _qstrings[0], 3, cache_cb );
+        _query.iterateResolvablesByName( _qstrings[0], 3, cache_cb );
       }
       catch ( const Exception & excpt_r )
       {

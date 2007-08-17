@@ -330,7 +330,7 @@ struct FillTable
     // add other fields to the result table
     row << alias
         // TODO what about rug's Bundle?
-        << "kind" 		// FIXME: (gSettings.is_rug_compatible ? "" : res->kind().asString()) 
+        << (gSettings.is_rug_compatible ? "" : res->kind.asString())
         << res->name
         << res->edition.asString()
         << res->arch.asString();
