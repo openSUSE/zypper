@@ -41,10 +41,11 @@ namespace ZmartRecipients
                                                     MediaChangeReport::Error error,
                                                     const std::string & description )
     {
-      // TranslatorExplanation don't translate letters 'y' and 'n' for now
+      cerr << description << endl; 
+      // TranslatorExplanation translate letters 'y' and 'n' the same as you translated the [y/n] prompt. 
       std::string request = boost::str(boost::format(
           _("Please insert media [%s] # %d and type 'y' to continue or 'n' to cancel the operation."))
-          % description % mediumNr);
+          % repo.info().alias() % mediumNr);
       if (read_bool_answer(request, false))
         return MediaChangeReport::RETRY; 
       else
@@ -57,9 +58,16 @@ namespace ZmartRecipients
   {
     virtual void start( const zypp::Url & file, zypp::Pathname localfile )
     {
-      cout_v  << CLEARLN << _("Downloading: ") << file;
-      cout_vv << " to " << localfile;
-      cout_v  << std::endl;
+      if (gSettings.verbosity == VERBOSITY_MEDIUM)
+      {
+        cout << CLEARLN << _("Downloading: ")
+          << zypp::Pathname(file.getPathName()).basename()
+          << std::endl;
+      }
+      else if (gSettings.verbosity >= VERBOSITY_HIGH)
+      {
+        cout  << CLEARLN << _("Downloading: ") << file << std::endl;
+      }
     }
 
     virtual bool progress(int value, const zypp::Url & /*file*/)
