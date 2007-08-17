@@ -22,6 +22,7 @@
 #include "zypp/data/RecordId.h"
 #include "zypp/capability/CapabilityImpl.h"
 #include "zypp/Pathname.h"
+#include "zypp/Resolvable.h"
 #include "zypp/NVR.h"
 #include "zypp/Edition.h"
 #include "zypp/ByteCount.h"
@@ -58,6 +59,8 @@ namespace data
       Resolvable()
       {};
 
+      /** Kind */
+      zypp::Resolvable::Kind kind;
       /** Name */
       std::string name;
       /** Edition */
