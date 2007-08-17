@@ -344,6 +344,7 @@ Resolver::problems (const bool ignoreValidSolution) const
 
 	if (item) {
 	    string who = ResolverInfo::toString( item );
+	    string whoShort = ResolverInfo::toString( item, true ); // short version
 	    switch (info->type()) {
 		case RESOLVER_INFO_TYPE_INVALID: {
 		    what = _("Invalid information");
@@ -353,10 +354,10 @@ Resolver::problems (const bool ignoreValidSolution) const
 		    ResolverInfoNeededBy_constPtr needed_by = dynamic_pointer_cast<const ResolverInfoNeededBy>(info);
 		    if (needed_by->items().size() >= 1)
 			// TranslatorExplanation %s = name of package, patch, selection ...
-			what = str::form (_("%s is needed by other resolvables"), who.c_str());
+			what = str::form (_("%s is needed by other resolvables"), whoShort.c_str());
 		    else
 			// TranslatorExplanation %s = name of package, patch, selection ...		    
-			what = str::form (_("%s is needed by %s"), who.c_str(), needed_by->itemsToString(true).c_str());
+			what = str::form (_("%s is needed by %s"), whoShort.c_str(), needed_by->itemsToString(true).c_str());
 		    details = str::form (_("%s is needed by:\n%s"), who.c_str(), needed_by->itemsToString(false).c_str());
 		}
 		    break;
@@ -364,10 +365,10 @@ Resolver::problems (const bool ignoreValidSolution) const
 		    ResolverInfoConflictsWith_constPtr conflicts_with = dynamic_pointer_cast<const ResolverInfoConflictsWith>(info);
 		    if (conflicts_with->items().size() >= 1)
 			// TranslatorExplanation %s = name of package, patch, selection ...
-			what = str::form (_("%s conflicts with other resolvables"), who.c_str() );
+			what = str::form (_("%s conflicts with other resolvables"), whoShort.c_str() );
 		    else
 			// TranslatorExplanation %s = name of package, patch, selection ...		
-			what = str::form (_("%s conflicts with %s"), who.c_str(), conflicts_with->itemsToString(true).c_str());
+			what = str::form (_("%s conflicts with %s"), whoShort.c_str(), conflicts_with->itemsToString(true).c_str());
 		
 		    details = str::form (_("%s conflicts with:\n%s"), who.c_str(), conflicts_with->itemsToString(false).c_str()) + "\n";
 		    details += logAdditionalInfo(collector.additionalInfo, item);
@@ -398,10 +399,10 @@ Resolver::problems (const bool ignoreValidSolution) const
 		    ResolverInfoObsoletes_constPtr obsoletes = dynamic_pointer_cast<const ResolverInfoObsoletes>(info);
 		    if (obsoletes->items().size() >= 1)
 			// TranslatorExplanation %s = name of package, patch, selection ...
-			what = str::form (_("%s obsoletes other resolvables"), who.c_str());
+			what = str::form (_("%s obsoletes other resolvables"), whoShort.c_str());
 		    else
 			// TranslatorExplanation %s = name of package, patch, selection ...		
-			what = str::form (_("%s obsoletes %s"), who.c_str(), obsoletes->itemsToString(true).c_str());
+			what = str::form (_("%s obsoletes %s"), whoShort.c_str(), obsoletes->itemsToString(true).c_str());
 		    // TranslatorExplanation %s = name of package, patch, selection ...				
 		    details = str::form (_("%s obsoletes:%s"), who.c_str(), obsoletes->itemsToString(false).c_str());
 		    details += _("\nThese resolvables will be deleted from the system.");
@@ -412,11 +413,11 @@ Resolver::problems (const bool ignoreValidSolution) const
 		    ResolverInfoDependsOn_constPtr depends_on = dynamic_pointer_cast<const ResolverInfoDependsOn>(info);
 		    if (depends_on->items().size() >= 1)
 			// TranslatorExplanation %s = name of package, patch, selection ...
-			what = str::form (_("%s depends on other resolvables"), who.c_str(),
+			what = str::form (_("%s depends on other resolvables"), whoShort.c_str(),
 					  depends_on->itemsToString(true).c_str());
 		    else
 			// TranslatorExplanation %s = name of package, patch, selection ...				
-			what = str::form (_("%s depends on %s"), who.c_str(),
+			what = str::form (_("%s depends on %s"), whoShort.c_str(),
 					  depends_on->itemsToString(true).c_str());
 		    // TranslatorExplanation %s = name of package, patch, selection ...				
 		    details = str::form (_("%s depends on:%s"), who.c_str(), depends_on->itemsToString(false).c_str());		
@@ -431,7 +432,7 @@ Resolver::problems (const bool ignoreValidSolution) const
 		case RESOLVER_INFO_TYPE_MISSING_REQ: { // no solution; it is only a info
 		    ResolverInfoMissingReq_constPtr missing_req = dynamic_pointer_cast<const ResolverInfoMissingReq>(info);
 		    // TranslatorExplanation %s = dependency
-		    what = str::form (_("Cannot install %s"), who.c_str());
+		    what = str::form (_("Cannot install %s"), whoShort.c_str());
 		    // TranslatorExplanation %s = capability		
 		    details = str::form (_("None provides %s"), missing_req->capability().asString().c_str());
 		    details += _("\nThere is no resource available which supports this requirement.");
@@ -454,7 +455,7 @@ Resolver::problems (const bool ignoreValidSolution) const
 			 it != collector.conflictMap.end(); ++it) {
 			if (it->first == item) {
 			    what = str::form (_("Cannot install %s, because it is conflicting with %s"),
-					      who.c_str(),
+					      whoShort.c_str(),
 					      it->second->name().c_str()) + "\n";
 			    details = logAdditionalInfo(collector.additionalInfo, item);
 			    details += logAdditionalInfo(collector.additionalInfo, it->second);			
@@ -483,7 +484,7 @@ Resolver::problems (const bool ignoreValidSolution) const
 		case RESOLVER_INFO_TYPE_REJECT_INSTALL: {			// p is scheduled to be installed, but this is not possible because of dependency problems.
 		    ResolverInfoMisc_constPtr misc_info = dynamic_pointer_cast<const ResolverInfoMisc>(info);
 		    // TranslatorExplanation %s = name of package,patch,...				
-		    what = str::form (_("Cannot install %s due to dependency problems"), who.c_str());
+		    what = str::form (_("Cannot install %s due to dependency problems"), whoShort.c_str());
 		    details = misc_info->message() + "\n";
 		    details += logAdditionalInfo(collector.additionalInfo, item);		
 		    ResolverProblem_Ptr problem = new ResolverProblem (what, details);
@@ -515,7 +516,7 @@ Resolver::problems (const bool ignoreValidSolution) const
 		case RESOLVER_INFO_TYPE_INSTALL_PARALLEL: {			// Can't install p, since a resolvable of the same name is already marked as needing to be installed.
 		    ResolverInfoMisc_constPtr misc_info = dynamic_pointer_cast<const ResolverInfoMisc>(info);
 		    // TranslatorExplanation %s = name of package,patch,...				
-		    what = str::form (_("Cannot install %s"), who.c_str());
+		    what = str::form (_("Cannot install %s"), whoShort.c_str());
 		    details = misc_info->message() + "\n";
 		    details += logAdditionalInfo(collector.additionalInfo, item);
 		    details += logAdditionalInfo(collector.additionalInfo, misc_info->other());				
@@ -590,7 +591,7 @@ Resolver::problems (const bool ignoreValidSolution) const
 		case RESOLVER_INFO_TYPE_NO_OTHER_PROVIDER: {		// There are no alternative installed providers of c [for p]
 		    ResolverInfoMisc_constPtr misc_info = dynamic_pointer_cast<const ResolverInfoMisc>(info);
 		    // TranslatorExplanation %s = name of package, patch, selection ...				
-		    what = str::form (_("%s has missing dependencies"), who.c_str());
+		    what = str::form (_("%s has missing dependencies"), whoShort.c_str());
 		    details = misc_info->message() + "\n";
 		    details += logAdditionalInfo(collector.additionalInfo, item);				
 		    ResolverProblem_Ptr problem = new ResolverProblem (what, details);
@@ -638,7 +639,7 @@ Resolver::problems (const bool ignoreValidSolution) const
 		case RESOLVER_INFO_TYPE_NO_PROVIDER: {			// There are no installable providers of c [for p]
 		    ResolverInfoMisc_constPtr misc_info = dynamic_pointer_cast<const ResolverInfoMisc>(info);
 		    // TranslatorExplanation %s = name of package, patch, selection ...				
-		    what = str::form (_("%s cannot be installed due to missing dependencies"), who.c_str());		
+		    what = str::form (_("%s cannot be installed due to missing dependencies"), whoShort.c_str());		
 		    details = misc_info->message() + "\n";
 		    details += logAdditionalInfo(collector.additionalInfo, item);				
 		    ResolverProblem_Ptr problem = new ResolverProblem (what, details);
@@ -689,7 +690,7 @@ Resolver::problems (const bool ignoreValidSolution) const
 		    // TranslatorExplanation %s = name of package, patch, selection ...				
 		    what =str::form (_("%s fulfills dependencies of %s but will be uninstalled"),
 				     misc_info->other()->name().c_str(),
-				     who.c_str());
+				     whoShort.c_str());
 		    details = misc_info->message();
 		    // It is only an info --> no solution is needed
 		}
@@ -699,7 +700,7 @@ Resolver::problems (const bool ignoreValidSolution) const
 		    // TranslatorExplanation %s = name of package, patch, selection ...				
 		    what =str::form (_("%s fulfills dependencies of %s but will be kept on your system"),
 				     misc_info->other()->name().c_str(),
-				     who.c_str());
+				     whoShort.c_str());
 		    details = misc_info->message();
 		    // It is only an info --> no solution is needed
 		}		
@@ -717,7 +718,7 @@ Resolver::problems (const bool ignoreValidSolution) const
 		    // TranslatorExplanation %s = name of package, patch, selection ...				
 		    what = str::form (_("Cannot install %s to fulfill the dependencies of %s"),
 				      misc_info->other()->name().c_str(),
-				      who.c_str());
+				      whoShort.c_str());
 		    details = misc_info->message();
 		    // It is only an info --> no solution is needed		
 		}
@@ -732,7 +733,7 @@ Resolver::problems (const bool ignoreValidSolution) const
 		    // TranslatorExplanation %s = name of package, patch, selection ...				
 		    what = str::form (_("Cannot install %s to fulfil the dependencies of %s"),
 				      misc_info->other()->name().c_str(),
-				      who.c_str());				
+				      whoShort.c_str());				
 		    what = misc_info->message();
 		    // It is only an info --> no solution is needed		
 		}
@@ -768,7 +769,7 @@ Resolver::problems (const bool ignoreValidSolution) const
 		case RESOLVER_INFO_TYPE_UNINSTALL_TO_BE_INSTALLED: {	// p is to-be-installed, so it won't be unlinked.
 		    ResolverInfoMisc_constPtr misc_info = dynamic_pointer_cast<const ResolverInfoMisc>(info);
 		    // TranslatorExplanation %s = name of package, patch, selection ...				
-		    what = str::form (_("%s will not be uninstalled, because it is still required"), who.c_str());
+		    what = str::form (_("%s will not be uninstalled, because it is still required"), whoShort.c_str());
 		    details = misc_info->message();
 		    // It is only an info --> no solution is needed				
 		}
@@ -776,7 +777,7 @@ Resolver::problems (const bool ignoreValidSolution) const
 		case RESOLVER_INFO_TYPE_UNINSTALL_INSTALLED: {		// p is required by installed, so it won't be unlinked.
 		    ResolverInfoMisc_constPtr misc_info = dynamic_pointer_cast<const ResolverInfoMisc>(info);
 		    // TranslatorExplanation %s = name of package, patch, selection ...				
-		    what = str::form (_("%s will not be uninstalled, because it is still required"), who.c_str());		
+		    what = str::form (_("%s will not be uninstalled, because it is still required"), whoShort.c_str());		
 		    details = misc_info->message() + "\n";
 		    details += logAdditionalInfo(collector.additionalInfo, item);						
 
@@ -828,11 +829,11 @@ Resolver::problems (const bool ignoreValidSolution) const
 		    // TranslatorExplanation %s = name of package, patch, selection ...
 		    if (misc_info->other())
 			what = str::form (_("Cannot install %s, because it is conflicting with %s"),
-					  who.c_str(),
+					  whoShort.c_str(),
 					  misc_info->other()->name().c_str());
 		    else
 			what = str::form (_("Cannot install %s, because it is conflicting"),
-					  who.c_str());
+					  whoShort.c_str());
 		    details = misc_info->message() + "\n";
 		    details += logAdditionalInfo(collector.additionalInfo, item);
 		    if (misc_info->other())		
@@ -854,7 +855,7 @@ Resolver::problems (const bool ignoreValidSolution) const
 		    ResolverInfoMisc_constPtr misc_info = dynamic_pointer_cast<const ResolverInfoMisc>(info);
 		    // TranslatorExplanation %s = name of package, patch, selection ...				
 		    what = str::form (_("%s is uninstallable due to conflicts with %s"),
-				      who.c_str(),
+				      whoShort.c_str(),
 				      misc_info->other()->name().c_str());				
 		    details = misc_info->message();
 		    // It is only an info --> no solution is needed

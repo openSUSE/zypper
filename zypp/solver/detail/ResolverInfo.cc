@@ -138,24 +138,27 @@ resolver_info_type_from_string (const char *str)
 }
 
 string
-ResolverInfo::toString (PoolItem_Ref item)
+ResolverInfo::toString (PoolItem_Ref item, bool shortVersion)
 {
     ostringstream os;
     if (!item) return "";
 
     if (item->kind() != ResTraits<zypp::Package>::kind)
 	os << item->kind() << ':';
-    os  << item->name() << '-' << item->edition();
-    if (item->arch() != "") {
-	os << '.' << item->arch();
-    }
-    Repository s = item->repository();
-    if (s) {
-	string alias = s.info().alias();
-	if (!alias.empty()
-	    && alias != "@system")
-	{
-	    os << '[' << s.info().alias() << ']';
+    os  << item->name();
+    if (!shortVersion) {
+	os << '-' << item->edition();
+	if (item->arch() != "") {
+	    os << '.' << item->arch();
+	}
+	Repository s = item->repository();
+	if (s) {
+	    string alias = s.info().alias();
+	    if (!alias.empty()
+		&& alias != "@system")
+	    {
+		os << '[' << s.info().alias() << ']';
+	    }
 	}
     }
     return os.str();
