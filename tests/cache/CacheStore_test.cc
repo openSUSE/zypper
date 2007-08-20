@@ -66,11 +66,11 @@ void check_kdelibs3_package( Package::Ptr p )
   BOOST_CHECK_EQUAL( p->license(), "BSD License and BSD-like, GNU General Public License (GPL)");
   BOOST_CHECK_EQUAL( p->location().checksum(), CheckSum("sha1", "05f0647241433d01636785fd282cc824a6527269"));
   BOOST_CHECK_EQUAL( p->location().filename(), Pathname("./suse/i586/kdelibs3-3.5.7-24.i586.rpm"));
-  BOOST_CHECK_EQUAL( p->location().medianr(), 1);
+  BOOST_CHECK_EQUAL( p->location().medianr(), (unsigned)1);
   BOOST_CHECK_EQUAL( p->size(), 38850584);
   BOOST_CHECK_EQUAL( p->location().downloadSize(), 16356019);
   
-  BOOST_CHECK_EQUAL( p->diskusage().size(), 3);
+  BOOST_CHECK_EQUAL( p->diskusage().size(), (unsigned)3);
 }
 
 /**
@@ -122,15 +122,15 @@ void check_factory_product( Product::Ptr p )
   list<Url>::const_iterator it;
   list<Url> urls;
   
-  BOOST_CHECK_EQUAL( urls.size(), 0 );
+  BOOST_CHECK_EQUAL( urls.size(), (unsigned)0 );
   
   urls = p->extraUrls();
   it = find( urls.begin(), urls.end(), Url("http://download.opensuse.org/distribution/10.2/repo/oss/"));
-  BOOST_CHECK_EQUAL( p->extraUrls().size(), 1 );
+  BOOST_CHECK_EQUAL( p->extraUrls().size(), (unsigned)1 );
   BOOST_CHECK( it != urls.end() );
   
   urls = p->optionalUrls();
-  BOOST_CHECK_EQUAL( urls.size(), 2 );
+  BOOST_CHECK_EQUAL( urls.size(), (unsigned)2 );
   
   it = find( urls.begin(), urls.end(), Url("http://download.opensuse.org/distribution/10.2/repo/non-oss/"));
   BOOST_CHECK( it != urls.end() );
@@ -171,7 +171,7 @@ void check_glabels_package( Package::Ptr p )
   BOOST_CHECK_EQUAL( p->license(), "GNU General Public License (GPL)");
   BOOST_CHECK_EQUAL( p->location().checksum(), CheckSum("sha1", "34adf06a0c4873b9d53b4634beb8bee458b45767"));
   BOOST_CHECK_EQUAL( p->location().filename(), Pathname("rpm/i586/glabels-2.0.4-30.2.i586.rpm"));
-  BOOST_CHECK_EQUAL( p->location().medianr(), 1 );
+  BOOST_CHECK_EQUAL( p->location().medianr(), (unsigned)1 );
   BOOST_CHECK_EQUAL( p->size(), 2257356);
   BOOST_CHECK_EQUAL( p->location().downloadSize(), 983124);
 }
@@ -297,7 +297,7 @@ void cache_write_yum_test(const string &dir)
   ResStore dbres = get_resolvables( alias, tmpdir);;;
   //read_resolvables( alias, tmpdir, std::inserter(dbres, dbres.end()));
   MIL << dbres.size() << " resolvables" << endl;
-  BOOST_CHECK_EQUAL( dbres.size(), 48);
+  BOOST_CHECK_EQUAL( dbres.size(), (unsigned)48);
 
   bool found_glabels_i586 = false;
   for ( ResStore::const_iterator it = dbres.begin();
@@ -334,7 +334,7 @@ void cache_write_susetags(const Pathname &repodir)
   MIL << dbres.size() << " resolvables" << endl;
 
   // packages and a patterns
-  BOOST_CHECK_EQUAL( dbres.size(), 7);
+  BOOST_CHECK_EQUAL( dbres.size(), (unsigned)7);
   bool found_kdelibs3_i586 = false;
   bool found_kde_pat = false;
   bool found_factory_product = false;
