@@ -55,6 +55,7 @@ struct ResolvableQuery::Impl
   //
   // convert regex ? and * operators to sql _ and % respectively
   //  example: regex2sql( "*foo?bar*" ) => "%foo_bar%"
+  // FIXME: take care of ".*" and "."
   std::string regex2sql( const std::string & s)
   {
     std::string sql( s );
