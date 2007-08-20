@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Mon Aug 20 13:21:34 CEST 2007 - kkaempf@suse.de
+
+- unify query API for kind and name, summary, description
+  (incomplete)
+- rev 6755, version 3.18.13
+
+-------------------------------------------------------------------
 Fri Aug 17 12:30:55 CEST 2007 - kkaempf@suse.de
 
 - add iterateResolvablesByKindsAndName

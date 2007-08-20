@@ -39,6 +39,21 @@ namespace zypp
   namespace cache
   { /////////////////////////////////////////////////////////////////
 
+   // match flag definitions for iterate*() functions
+
+   const int MATCH_EXACT =	0x00;		// match 'string' exactly
+   const int MATCH_LEADING =	0x01;		// match 'string*'
+   const int MATCH_TRAILING =	0x02;		// match '*string'
+   const int MATCH_SUBSTRING =  (MATCH_LEADING|MATCH_TRAILING);
+   const int MATCH_REGEXP =	0x04;		// match e.g. 's?t*r??ing*' (only ? and * are allowed)
+   const int MATCH_NAME =	0x08;		// match string in resolvable name, this is the default
+   const int MATCH_SUMMARY =	0x10;		// match string in resolvable summary
+   const int MATCH_DESCRIPTION= 0x20;		// match string in resolvable description
+
+
+   const int MATCH_WILDCARDS = (MATCH_SUBSTRING|MATCH_REGEXP);
+   const int MATCH_FIELDS = (MATCH_NAME|MATCH_SUMMARY|MATCH_DESCRIPTION);
+
      /**
       * Callback definition
       * first parameter is the resolvable id.
@@ -228,31 +243,20 @@ namespace zypp
       std::string queryRepositoryAlias( const data::RecordId &repo_id );
 
       /**
-      * Query by matching name
-      * \param name name to match, wildcard operators like * and ? are allowed if 'wild' param != 0
-      * \param wild append wildcard operators ?: 0 = no, 1 = trailing wild, 2 = leading wild, 3 = trailing & leading wild, 4 = name contains wildcards
-      * \param fnc callback to send the data to. (Will be called once per result)
-      *
-      * Examples:
-      *   iterateByName( "kernel", 0, cb ) => look for resovables matching "kernel" exactly
-      *   iterateByName( "kernel", 1, cb ) => look for resovables starting with "kernel" (wildcard operator will be appendend)
-      *   iterateByName( "devel", 2, cb ) => look for resovables ending in "devel" (wildcard operator will be prependend)
-      *   iterateByName( "foo??", 1, cb ) => look for resovables starting with "foo" and at least 5 characters
-      *   iterateByName( "fo*o", 4, cb ) => look for resovables matching "fo*o"
-      */
-      void iterateResolvablesByName( const std::string &name, int wild,
-                  ProcessResolvable fnc  );
-
-      /**
        * \short Iterate resolvables by Kind
        */
       void iterateResolvablesByKind( zypp::Resolvable::Kind kind, ProcessResolvable fnc );
 
       /**
-       * \short Iterate resolvables by Kinds and Name
+       * \short Iterate resolvables by Kinds and Strings
+       * \param kinds kinds to match, will be ORed
+       * \param names names to match, will be ORed
+       * \param flags  MATCH_xxx, see above
+       * \param fnc callback to send the data to. (Will be called once per result)
+       *
        */
-      void iterateResolvablesByKindsAndName( std::vector<zypp::Resolvable::Kind> kinds,
-                  const std::string &name, int wild, ProcessResolvable fnc );
+      void iterateResolvablesByKindsAndStrings( const std::vector<zypp::Resolvable::Kind> & kinds,
+                  const std::vector<std::string> &strings, int flags, ProcessResolvable fnc );
 
     private:
       /** Implementation. */
