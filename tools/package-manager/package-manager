@@ -60,7 +60,7 @@ do_update() {
     if [ $STACK = zlm ]; then
 	zen-updater --no-tray "$@"
     else
-	xsu yast2 --update "$@"
+	xsu /sbin/yast2 --update "$@"
     fi
 }
 
@@ -68,7 +68,7 @@ do_remove() {
     if [ $STACK = zlm ]; then
 	zen-remover "$@"
     else
-	xsu yast2 --remove "$@"
+	xsu /sbin/yast2 --remove "$@"
     fi
 }
 
@@ -76,7 +76,7 @@ do_install() {
     if [ $STACK = zlm ]; then
 	zen-installer "$@"
     else
-	xsu yast2 --install "$@"
+	xsu /sbin/yast2 --install "$@"
     fi
 }
 

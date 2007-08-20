@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Aug 20 15:35:46 CEST 2007 - mvidner@suse.cz
+
+- package-manager script: Call /sbin/yast2 with full path because of
+  gnomesu (#269873).
+
+-------------------------------------------------------------------
 Mon Aug 20 15:23:14 CEST 2007 - dmacvicar@suse.de
 
 - add support for the HASH key. (#300982)
