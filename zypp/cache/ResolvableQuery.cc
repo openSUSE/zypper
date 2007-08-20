@@ -208,7 +208,7 @@ struct ResolvableQuery::Impl
       std::string s( *it_s );
 
       if (it_s != strings.begin())
-        sqlcmd += "OR";
+        sqlcmd += "AND";
 
 //FIXME: Implement MATCH_RESSUMM and MATCH_RESDESC
 

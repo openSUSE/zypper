@@ -250,10 +250,11 @@ namespace zypp
       /**
        * \short Iterate resolvables by Kinds and Strings
        * \param kinds kinds to match, will be ORed
-       * \param names names to match, will be ORed
+       * \param names names to match, will be ANDed
        * \param flags  MATCH_xxx, see above
        * \param fnc callback to send the data to. (Will be called once per result)
        *
+       * Beware: Searching for multiple strings with MATCH_EXACT will _not_ find anything, except if all strings are identical ...
        */
       void iterateResolvablesByKindsAndStrings( const std::vector<zypp::Resolvable::Kind> & kinds,
                   const std::vector<std::string> &strings, int flags, ProcessResolvable fnc );
