@@ -473,7 +473,7 @@ namespace zypp
 	  {
 	    if ( _pimpl->setFileCheckSum( _pimpl->repoindex().signingKeys, value ) )
 	    {
-	      ZYPP_THROW( ParseException( errPrefix( line.lineNo(), "Expected [algorithm checksum filename]", *line ) ) );
+	      ZYPP_THROW( ParseException( errPrefix( line.lineNo(), "Expected [KEY algorithm checksum filename]", *line ) ) );
 	    }
 	  }
 	  else if ( key == "LANGUAGE" )
@@ -492,6 +492,13 @@ namespace zypp
 	  else if ( key == "META" )
 	  {
 	    if ( _pimpl->setFileCheckSum( _pimpl->repoindex().metaFileChecksums, value ) )
+	    {
+	      ZYPP_THROW( ParseException( errPrefix( line.lineNo(), "Expected [algorithm checksum filename]", *line ) ) );
+	    }
+	  }
+          else if ( key == "HASH" )
+	  {
+	    if ( _pimpl->setFileCheckSum( _pimpl->repoindex().mediaFileChecksums, value ) )
 	    {
 	      ZYPP_THROW( ParseException( errPrefix( line.lineNo(), "Expected [algorithm checksum filename]", *line ) ) );
 	    }

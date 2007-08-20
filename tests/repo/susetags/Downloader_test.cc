@@ -7,6 +7,7 @@
 #include <boost/test/parameterized_test.hpp>
 #include <boost/test/unit_test_log.hpp>
 
+#include "zypp/base/Logger.h"
 #include "zypp/Url.h"
 #include "zypp/PathInfo.h"
 #include "zypp/TmpPath.h"
@@ -32,6 +33,8 @@ void susetags_download_test(const string &dir)
   Pathname localdir(tmp.path());
   
   downloader.download(media,localdir);
+  
+  MIL << "All files downloaded" << endl;
   
   const char* files[] =
   {
@@ -102,8 +105,10 @@ void susetags_gz_download_test(const string &dir)
 //    "/media.1/products.key",
     "/media.1/media",
 //    "/media.1/products",
-//    "/media.1/info.txt",
-//    "/media.1/license.zip",
+    "/media.1/info.txt",
+    "/license.tar.gz",
+    "/control.xml",
+    "/installation.xml",
     "/gpg-pubkey-a1912208-446a0899.asc",
     "/gpg-pubkey-307e3d54-44201d5d.asc",
     "/gpg-pubkey-9c800aca-40d8063e.asc",

@@ -1,0 +1,109 @@
+<?xml version="1.0"?>
+<!DOCTYPE productDefines SYSTEM "/usr/share/YaST2/control/control.dtd">
+<productDefines xmlns="http://www.suse.com/1.0/yast2ns" xmlns:config="http://www.suse.com/1.0/configns">
+    <textdomain>control-ISSLE</textdomain>
+    <globals>
+        <enable_firewall config:type="boolean">false</enable_firewall>
+    </globals>
+    <software>
+        <selection_type config:type="symbol">auto</selection_type>
+    </software>
+    <network>
+        <force_static_ip config:type="boolean">true</force_static_ip>
+    </network>
+    <texts>
+        <congratulate>
+            <label>
+&lt;p&gt;
+You have successfully installed the Integrated Stack for SUSE Linux Enterprise.
+&lt;/p&gt;
+&lt;p&gt;
+The services you just installed might require additional
+setup before use. See the Integrated Stack for SUSE Linux Enterprise
+Installation guide for details.
+&lt;/p&gt;
+            </label>
+        </congratulate>
+    </texts>
+    <proposals config:type="list">
+        <proposal>
+            <label>ISSLE Configuration</label>
+            <name>product</name>
+            <stage>continue,normal</stage>
+            <mode>installation</mode>
+            <proposal_modules config:type="list">
+                <proposal_module>yast2-issleconfig</proposal_module>
+            </proposal_modules>
+        </proposal>
+    </proposals>
+    <workflows config:type="list">
+        <workflow>
+            <defaults>
+                <enable_back>no</enable_back>
+                <enable_next>no</enable_next>
+            </defaults>
+            <stage>normal</stage>
+            <mode>installation,normal</mode>
+            <modules config:type="list">
+                <module>
+                    <label>ISSLE Software Selection</label>
+                    <name>sw_single</name>
+                    <enable_back>yes</enable_back>
+                    <enable_next>yes</enable_next>
+                </module>
+                <module>
+                    <label>ISSLE Configuration</label>
+                    <name>issleconfig</name>
+                    <enable_back>yes</enable_back>
+                    <enable_next>yes</enable_next>
+                </module>
+                <module>
+                    <label>Release Notes</label>
+                    <name>inst_release_notes</name>
+                    <enable_back>yes</enable_back>
+                    <enable_next>yes</enable_next>
+                </module>
+                <module>
+                    <name>inst_congratulate</name>
+                    <enable_back>no</enable_back>
+                    <enable_next>yes</enable_next>
+                </module>
+            </modules>
+        </workflow>
+    </workflows>
+    <update>
+        <workflows config:type="list">
+            <workflow>
+                <defaults>
+                    <enable_back>no</enable_back>
+                    <enable_next>no</enable_next>
+                </defaults>
+                <stage>continue,normal</stage>
+                <mode>installation,normal,update</mode>
+                <remove_modules config:type="list">
+                    <remove_module>hostname</remove_module>
+                    <remove_module>root</remove_module>
+                    <remove_module>ca_mgm</remove_module>
+                </remove_modules>
+                <append_modules config:type="list">
+                    <module>
+                        <name>yast2-issleconfig</name>
+                    </module>
+                </append_modules>
+                <insert_modules config:type="list">
+                    <insert_module>
+                        <before>suseconfig</before>
+                        <modules config:type="list">
+                            <module>
+                                <label>ISSLE Configuration</label>
+                                <name>issleconfig</name>
+                                <enable_back>yes</enable_back>
+                                <enable_next>yes</enable_next>
+                            </module>
+                        </modules>
+                    </insert_module>
+                </insert_modules>
+            </workflow>
+        </workflows>
+    </update>
+</productDefines>

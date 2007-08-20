@@ -16,6 +16,7 @@
 #include "zypp/RepoStatus.h"
 #include "zypp/MediaSetAccess.h"
 #include "zypp/repo/Downloader.h"
+#include "zypp/parser/susetags/ContentFileReader.h"
 
 namespace zypp
 {
@@ -53,8 +54,15 @@ namespace zypp
          * \short Status of the remote repository
          */
         RepoStatus status( MediaSetAccess &media );
+        
+        /**
+         * Content file parser consumer
+         */
+        void consumeIndex( const parser::susetags::RepoIndex_Ptr & data_r );
+
        private:
         Pathname _path;
+        parser::susetags::RepoIndex_Ptr _repoindex;
       };
 
     } // ns susetags

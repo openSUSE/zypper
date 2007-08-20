@@ -10,11 +10,14 @@
 #include "zypp/Locale.h"
 #include "zypp/ZConfig.h"
 #include "zypp/repo/MediaInfoDownloader.h"
-
 #include "zypp/repo/susetags/Downloader.h"
+#include "zypp/parser/ParseException.h"
+#include "zypp/parser/susetags/RepoIndex.h"
 #include "zypp/base/UserRequestException.h"
 
 using namespace std;
+using namespace zypp::parser;
+using namespace zypp::parser::susetags;
 
 namespace zypp
 {
@@ -67,114 +70,123 @@ void Downloader::download( MediaSetAccess &media,
   this->start( dest_dir, media );
   this->reset();
 
-  std::ifstream file((dest_dir +  _path + "/content").asString().c_str());
-  std::string buffer;
   Pathname descr_dir;
 
-  // FIXME Note this code assumes DESCR comes before as META
-  string value;
-  while (file && !file.eof())
+  // Content file first to get the repoindex
   {
-    getline(file, buffer);
-    if ( buffer.substr( 0, 5 ) == "DESCR" )
+    Pathname inputfile( dest_dir +  _path + "/content" );
+    ContentFileReader content;
+    content.setRepoIndexConsumer( bind( &Downloader::consumeIndex, this, _1 ) );
+    content.parse( inputfile );
+  }
+  if ( ! _repoindex )
+  {
+    ZYPP_THROW( ParseException( (dest_dir+_path).asString() + ": " + "No reository index in content file." ) );
+  }
+  
+  // Prepare parsing
+  descr_dir = _repoindex->descrdir; // path below reporoot
+  //_datadir  = _repoIndex->datadir;  // path below reporoot
+  
+  for ( RepoIndex::FileChecksumMap::const_iterator it = _repoindex->metaFileChecksums.begin();
+        it != _repoindex->metaFileChecksums.end();
+        ++it )
+  {
+    // omit unwanted translations
+    if ( str::hasPrefix( it->first, "packages" ) )
     {
-      std::vector<std::string> words;
-      if ( str::split( buffer, std::back_inserter(words) ) != 2 )
+      std::string rest( str::stripPrefix( it->first, "packages" ) );
+      if ( ! (   rest.empty()
+              || rest == ".DU"
+              || rest == ".en"
+              || rest == ".gz"
+              || rest == ".DU.gz"
+              || rest == ".en.gz" ) )
       {
-        // error
-        ZYPP_THROW(Exception("bad DESCR line"));
-      }
-      descr_dir = words[1];
-    }
-    else if ( buffer.substr( 0, 4 ) == "META" )
-    {
-      std::vector<std::string> words;
-      if ( str::split( buffer, std::back_inserter(words) ) != 4 )
-      {
-        // error
-        ZYPP_THROW(Exception("bad META line"));
-      }
-      // omit unwanted translations
-      if ( str::hasPrefix( words[3], "packages" ) )
-      {
-        std::string rest( str::stripPrefix( words[3], "packages" ) );
-        if ( ! (   rest.empty()
-                || rest == ".DU"
-                || rest == ".en"
-                || rest == ".gz"
-                || rest == ".DU.gz"
-                || rest == ".en.gz" ) )
+        // Not 100% correct as we take each fallback of textLocale
+        Locale toParse( ZConfig::instance().textLocale() );
+        while ( toParse != Locale::noCode )
         {
-          // Not 100% correct as we take each fallback of textLocale
-          Locale toParse( ZConfig::instance().textLocale() );
-          while ( toParse != Locale::noCode )
+          if ( rest == ("."+toParse.code()) || (rest == ("."+toParse.code()+".gz")) )
+            break;
+          toParse = toParse.fallback();
+        }
+        if ( toParse == Locale::noCode )
+        {
+          // discard
+          continue;
+        }
+      }
+    }
+    else if ( str::endsWith( it->first, ".pat" ) 
+              || str::endsWith( it->first, ".pat.gz" ) )
+    {
+
+      // *** see also zypp/parser/susetags/RepoParser.cc ***
+
+      // omit unwanted patterns, see https://bugzilla.novell.com/show_bug.cgi?id=298716
+      // expect "<name>.<arch>.pat[.gz]", <name> might contain additional dots
+      // split at dots, take .pat or .pat.gz into account
+
+      std::vector<std::string> patparts;
+      unsigned archpos = 2;
+      // expect "<name>.<arch>.pat[.gz]", <name> might contain additional dots
+      unsigned count = str::split( it->first, std::back_inserter(patparts), "." );
+      if ( patparts[count-1] == "gz" )
+          archpos++;
+
+      if ( count > archpos )
+      {
+        try				// might by an invalid architecture
+        {
+          Arch patarch( patparts[count-archpos] );
+          if ( !patarch.compatibleWith( ZConfig::instance().systemArchitecture() ) )
           {
-            if ( rest == ("."+toParse.code()) || (rest == ("."+toParse.code()+".gz")) )
-              break;
-            toParse = toParse.fallback();
-          }
-          if ( toParse == Locale::noCode )
-          {
-            // discard
+            // discard, if not compatible
+            MIL << "Discarding pattern " << it->first << endl;
             continue;
           }
         }
-      }
-      else if ( str::endsWith( words[3], ".pat" ) 
-		|| str::endsWith( words[3], ".pat.gz" ) )
-      {
-
-        // *** see also zypp/parser/susetags/RepoParser.cc ***
-
-        // omit unwanted patterns, see https://bugzilla.novell.com/show_bug.cgi?id=298716
-        // expect "<name>.<arch>.pat[.gz]", <name> might contain additional dots
-        // split at dots, take .pat or .pat.gz into account
-
-        std::vector<std::string> patparts;
-	unsigned archpos = 2;
-        // expect "<name>.<arch>.pat[.gz]", <name> might contain additional dots
-        unsigned count = str::split( buffer, std::back_inserter(patparts), "." );
-	if ( patparts[count-1] == "gz" )
-	    archpos++;
-
-        if ( count > archpos )
+        catch ( const Exception & excpt )
         {
-          try				// might by an invalid architecture
-          {
-            Arch patarch( patparts[count-archpos] );
-            if ( !patarch.compatibleWith( ZConfig::instance().systemArchitecture() ) )
-            {
-              // discard, if not compatible
-              MIL << "Discarding pattern " << words[3] << endl;
-              continue;
-            }
-          }
-          catch ( const Exception & excpt )
-          {
-            WAR << "Pattern file name does not contain recognizable architecture: " << words[3] << endl;
-            // keep .pat file if it doesn't contain an recognizable arch
-          }
+          WAR << "Pattern file name does not contain recognizable architecture: " << it->first << endl;
+          // keep .pat file if it doesn't contain an recognizable arch
         }
       }
-      OnMediaLocation location( _path + descr_dir + words[3], 1 );
-      location.setChecksum( CheckSum( words[1], words[2] ) );
-      this->enqueueDigested(location);
     }
-    else if (buffer.substr( 0, 3 ) == "KEY")
-    {
-      std::vector<std::string> words;
-      if ( str::split( buffer, std::back_inserter(words) ) != 4 )
-      {
-        // error
-        ZYPP_THROW(Exception("bad KEY line"));
-      }
-      OnMediaLocation location( _path + words[3], 1 );
-      location.setChecksum( CheckSum( words[1], words[2] ) );
-      this->enqueueDigested(location);
-    }
+    MIL << "adding job " << it->first << endl;
+    OnMediaLocation location( _path + descr_dir + it->first, 1 );
+    location.setChecksum( it->second );
+    this->enqueueDigested(location);
   }
-  file.close();
+  
+  for ( RepoIndex::FileChecksumMap::const_iterator it = _repoindex->signingKeys.begin();
+        it != _repoindex->signingKeys.end();
+        ++it )
+  {
+    OnMediaLocation location( _path + it->first, 1 );
+    location.setChecksum( it->second );
+    this->enqueueDigested(location);
+  }
+  
+  // add hashed media files
+  
+  for ( RepoIndex::FileChecksumMap::const_iterator it = _repoindex->mediaFileChecksums.begin();
+        it != _repoindex->mediaFileChecksums.end();
+        ++it )
+  {
+    OnMediaLocation location( _path + it->first, 1 );
+    location.setChecksum( it->second );
+    this->enqueueDigested(location);
+  }
+
   this->start( dest_dir, media );
+}
+
+void Downloader::consumeIndex( const RepoIndex_Ptr & data_r )
+{
+  MIL << "Consuming repo index" << endl;
+  _repoindex = data_r;
 }
 
 }// ns susetags

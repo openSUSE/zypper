@@ -60,6 +60,7 @@ namespace zypp
 	  Pathname datadir;
 
 	  FileChecksumMap metaFileChecksums;
+          FileChecksumMap mediaFileChecksums;
 	  FileChecksumMap signingKeys;
 
 	protected:

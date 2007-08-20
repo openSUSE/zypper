@@ -1,0 +1,793 @@
+<?xml version="1.0"?>
+<productDefines  xmlns="http://www.suse.com/1.0/yast2ns"
+    xmlns:config="http://www.suse.com/1.0/configns">
+
+<!--
+Work around for the text domain
+textdomain="control"
+-->
+
+    <textdomain>control</textdomain>
+    <globals>
+	<additional_kernel_parameters></additional_kernel_parameters>
+        <enable_autologin config:type="boolean">true</enable_autologin>
+	<enable_firewall config:type="boolean">true</enable_firewall>
+	<firewall_enable_ssh config:type="boolean">false</firewall_enable_ssh>
+	<fam_local_only>never</fam_local_only>
+        <incomplete_translation_treshold>95</incomplete_translation_treshold>
+        <inform_about_suboptimal_distribution config:type="boolean">true</inform_about_suboptimal_distribution>
+        <skip_language_dialog config:type="boolean">true</skip_language_dialog>
+        <ui_mode>simple</ui_mode>
+        <enable_clone config:type="boolean">false</enable_clone>
+        <enable_register_hwdata   config:type="boolean">true</enable_register_hwdata>
+        <enable_register_optional config:type="boolean">true</enable_register_optional>
+        <display_register_forcereg config:type="boolean">true</display_register_forcereg>
+        <disable_register_w3m config:type="boolean">true</disable_register_w3m>
+        <register_monthly config:type="boolean">false</register_monthly>
+	<manual_online_update config:type="boolean">true</manual_online_update>
+	<root_password_ca_check config:type="boolean">false</root_password_ca_check>
+
+	<!-- FATE #301937, Save /root content from the installation system to the installed system -->
+	<save_instsys_content config:type="list">
+	    <save_instsys_item>
+		<instsys_directory>/root/</instsys_directory>
+		<system_directory>/root/inst-sys/</system_directory>
+	    </save_instsys_item>
+	</save_instsys_content>
+    </globals>
+
+    <software>
+        <delete_old_packages config:type="boolean">false</delete_old_packages>
+        <selection_type config:type="symbol">auto</selection_type>
+
+	<!-- FATE #300898, List of external sources accesible during the installation time -->
+	<external_sources_link>http://download.opensuse.org/YaST/Repos/openSUSE_103_Servers.xml</external_sources_link>
+    </software>
+
+    <partitioning>
+        <evms_config config:type="boolean">false</evms_config>
+        <try_separate_home config:type="boolean">true</try_separate_home>
+        <limit_try_home>7G</limit_try_home>
+        <root_space_percent>40</root_space_percent>
+        <root_base_size>5G</root_base_size>
+        <root_max_size>20G</root_max_size>
+	<proposal_lvm>false</proposal_lvm>
+	<proposal_evms>false</proposal_evms>
+	<vm_desired_size>15G</vm_desired_size>
+	<vm_home_max_size>25G</vm_home_max_size>
+	<boot_evms>false</boot_evms>
+    </partitioning>
+
+    <network>
+        <force_static_ip config:type="boolean">false</force_static_ip>
+        <network_manager>laptop</network_manager>
+	<startmode>ifplugd</startmode>
+    </network>
+
+    <clone_modules config:type="list">
+	<clone_module>language</clone_module>
+	<clone_module>keyboard</clone_module>
+	<clone_module>timezone</clone_module>
+	<clone_module>users</clone_module>
+	<clone_module>networking</clone_module>
+	<clone_module>firewall</clone_module>
+	<clone_module>host</clone_module>
+	<clone_module>routing</clone_module>
+	<clone_module>proxy</clone_module>
+	<clone_module>runlevel</clone_module>
+	<clone_module>x11</clone_module>
+	<clone_module>nis</clone_module>
+	<clone_module>ldap</clone_module>
+	<clone_module>printer</clone_module>
+	<clone_module>add-on</clone_module>
+    </clone_modules>
+
+    <texts>
+      <congratulate>
+	<label>
+&lt;p&gt;&lt;b&gt;Congratulations!&lt;/b&gt;&lt;/p&gt;
+&lt;p&gt;The installation of openSUSE on your machine is complete.
+After clicking &lt;b&gt;Finish&lt;/b&gt;, you can log in to the system.&lt;/p&gt;
+&lt;p&gt;Visit us at %1.&lt;/p&gt;
+&lt;p&gt;Have a lot of fun!&lt;br&gt;Your openSUSE Development Team&lt;/p&gt;
+	</label>
+      </congratulate>
+    </texts>
+
+    <proposals config:type="list">
+        <proposal>
+            <label>Installation Settings</label>
+            <mode>installation,demo,autoinstallation</mode>
+            <stage>initial</stage>
+            <name>initial</name>
+            <enable_skip>no</enable_skip>
+            <proposal_modules config:type="list">
+                <proposal_module>hwinfo</proposal_module>
+                <proposal_module>keyboard</proposal_module>
+                <proposal_module>mouse</proposal_module>
+                <proposal_module>partitions</proposal_module>
+                <proposal_module>software</proposal_module>
+                <proposal_module>bootloader</proposal_module>
+                <proposal_module>timezone</proposal_module>
+                <proposal_module>language</proposal_module>
+                <proposal_module>runlevel</proposal_module>
+            </proposal_modules>
+            <proposal_tabs config:type="list">
+                <proposal_tab>
+                    <label>Overview</label>
+                    <proposal_modules config:type="list">
+                        <proposal_module>partitions</proposal_module>
+                        <proposal_module>software_simple</proposal_module>
+			<proposal_module>country_simple</proposal_module>
+                    </proposal_modules>
+                </proposal_tab>
+                <proposal_tab>
+                    <label>Expert</label>
+                    <proposal_modules config:type="list">
+                        <proposal_module>hwinfo</proposal_module>
+                        <proposal_module>keyboard</proposal_module>
+                        <proposal_module>mouse</proposal_module>
+                        <proposal_module>partitions</proposal_module>
+                        <proposal_module>software</proposal_module>
+                        <proposal_module>bootloader</proposal_module>
+                        <proposal_module>timezone</proposal_module>
+                        <proposal_module>language</proposal_module>
+                        <proposal_module>runlevel</proposal_module>
+                    </proposal_modules>
+                </proposal_tab>
+            </proposal_tabs>
+        </proposal>
+
+        <proposal>
+            <label>Update Settings</label>
+            <mode>update</mode>
+            <name>initial</name>
+            <stage>normal</stage>
+            <enable_skip>no</enable_skip>
+            <proposal_modules config:type="list">
+                <proposal_module>update</proposal_module>
+                <proposal_module>packages</proposal_module>
+                <proposal_module>backup</proposal_module>
+                <proposal_module>language</proposal_module>
+            </proposal_modules>
+        </proposal>
+
+        <proposal>
+            <label>Installation Settings</label>
+            <mode>update</mode>
+            <stage>initial</stage>
+            <name>initial</name>
+            <enable_skip>no</enable_skip>
+            <proposal_modules config:type="list">
+		<proposal_module>hwinfo</proposal_module>
+		<proposal_module>media</proposal_module>
+<!-- disabled due to bug 165832
+                <proposal_module>rootpart</proposal_module>
+-->
+                <proposal_module>update</proposal_module>
+                <proposal_module>packages</proposal_module>
+                <proposal_module>backup</proposal_module>
+                <proposal_module>language</proposal_module>
+                <proposal_module>keyboard</proposal_module>
+            </proposal_modules>
+        </proposal>
+
+        <proposal>
+            <label>Network Configuration</label>
+            <name>network</name>
+            <stage>continue,normal</stage>
+            <enable_skip>yes</enable_skip>
+            <proposal_modules config:type="list">
+                <proposal_module>
+		    <name>lan</name>
+		    <presentation_order>20</presentation_order>
+		</proposal_module>
+                <proposal_module>
+		    <name>general</name>
+		    <presentation_order>5</presentation_order>
+		</proposal_module>
+		<proposal_module>
+		    <name>dsl</name>
+		    <presentation_order>30</presentation_order>
+		</proposal_module>
+                <proposal_module>
+		    <name>isdn</name>
+		    <presentation_order>40</presentation_order>
+		</proposal_module>
+                <proposal_module>
+		    <name>modem</name>
+		    <presentation_order>50</presentation_order>
+		</proposal_module>
+                <proposal_module>
+		    <name>remote</name>
+		    <presentation_order>60</presentation_order>
+		</proposal_module>
+                <proposal_module>
+		    <name>firewall</name>
+		    <presentation_order>10</presentation_order>
+		</proposal_module>
+                <proposal_module>
+		    <name>proxy</name>
+		    <presentation_order>70</presentation_order>
+		</proposal_module>
+            </proposal_modules>
+        </proposal>
+
+        <proposal>
+            <label>Hardware Configuration</label>
+            <name>hardware</name>
+            <stage>continue</stage>
+            <enable_skip>yes</enable_skip>
+            <proposal_modules config:type="list">
+                <proposal_module>x11</proposal_module>
+                <proposal_module>printer</proposal_module>
+                <proposal_module>sound</proposal_module>
+                <proposal_module>tv</proposal_module>
+                <proposal_module>bluetooth</proposal_module>
+            </proposal_modules>
+        </proposal>
+    </proposals>
+
+    <!-- Stage: Initial, Mode: Installation -->
+    <workflows config:type="list">
+        <workflow>
+            <defaults>
+                <archs>all</archs>
+		<enable_back>yes</enable_back>
+		<enable_next>yes</enable_next>
+            </defaults>
+	    <label>Preparation</label>
+            <mode>installation</mode>
+            <stage>initial</stage>
+            <modules  config:type="list">
+                <module>
+                    <name>language</name>
+	            <label>Language</label>
+                    <enable_back>no</enable_back>
+                    <enable_next>yes</enable_next>
+                    <arguments>
+                        <first_run>yes</first_run>
+                    </arguments>
+                    <retranslate config:type="boolean">true</retranslate>
+                </module>
+                <module>
+	            <label>Language</label>
+                    <name>checkmedia</name>
+                </module>
+                <module>
+	            <label>License Agreement</label>
+                    <name>license</name>
+                </module>
+		<module>
+	            <label>Disk Activation</label>
+                    <name>disks_activate</name>
+		</module>
+                <module>
+	            <label>System Analysis</label>
+                    <name>system_analysis</name>
+                </module>
+		<!-- Here, user selects whether to perform New Installation or Upgrade -->
+		<module>
+		    <label>Online Repositories</label>
+		    <name>productsources</name>
+		    <enable_back>yes</enable_back>
+		</module>
+		<module>
+		    <label>Add-On Products</label>
+		    <name>add-on</name>
+		    <enable_back>yes</enable_back>
+		</module>
+                <module>
+	            <label>Time Zone</label>
+                    <name>timezone</name>
+                    <arguments>
+                        <first_run>yes</first_run>
+                    </arguments>
+		    <enable_back>yes</enable_back>
+                </module>
+                <module>
+	            <label>Desktop Selection</label>
+                    <name>desktop</name>
+                </module>
+		<module>
+		    <heading>yes</heading>
+		    <label>Installation</label>
+		</module>
+                <module>
+	            <label>Installation Settings</label>
+                    <name>proposal</name>
+                    <proposal>initial</proposal>
+                </module>
+                <module>
+	            <label>Perform Installation</label>
+                    <name>do_resize</name>
+                    <update config:type="boolean">false</update>
+                    <archs>i386,x86_64,ia64</archs>
+                </module>
+                <module>
+	            <label>Perform Installation</label>
+                    <name>prepdisk</name>
+                </module>
+                <module>
+	            <label>Perform Installation</label>
+                    <name>kickoff</name>
+                </module>
+                <module>
+	            <label>Perform Installation</label>
+                    <name>rpmcopy</name>
+		    <enable_next>no</enable_next>
+		    <enable_back>no</enable_back>
+                </module>
+                <module>
+	            <label>Perform Installation</label>
+                    <name>finish</name>
+		    <enable_back>no</enable_back>
+                </module>
+            </modules>
+        </workflow>
+
+	<!-- Stage: Initial, Mode: Update -->
+        <workflow>
+            <defaults>
+                <archs>all</archs>
+		<enable_back>yes</enable_back>
+		<enable_next>yes</enable_next>
+            </defaults>
+	    <label>Preparation</label>
+            <mode>update</mode>
+            <stage>initial</stage>
+            <modules  config:type="list">
+                <module>
+                    <name>language</name>
+	            <label>Language</label>
+                    <enable_back>no</enable_back>
+                    <arguments>
+                        <first_run>yes</first_run>
+                    </arguments>
+                    <retranslate config:type="boolean">true</retranslate>
+                </module>
+                <module>
+	            <label>Language</label>
+                    <name>checkmedia</name>
+                </module>
+                <module>
+	            <label>License Agreement</label>
+                    <name>license</name>
+                </module>
+		<module>
+	            <label>Disk Activation</label>
+                    <name>disks_activate</name>
+		</module>
+                <module>
+	            <label>System Analysis</label>
+                    <name>system_analysis</name>
+                </module>
+                <module>
+	            <label>System for Update</label>
+                    <name>update_partition</name>
+                </module>
+		<module>
+		    <name>upgrade_urls</name>
+		</module>
+		<module>
+		    <label>Online Repositories</label>
+		    <name>productsources</name>
+		    <enable_back>yes</enable_back>
+		</module>
+		<module>
+		    <label>Add-On Products</label>
+		    <name>add-on</name>
+		    <enable_back>yes</enable_back>
+		</module>
+		<module>
+		    <heading>yes</heading>
+		    <label>Update</label>
+		</module>
+                <module>
+	            <label>Update Settings</label>
+                    <name>proposal</name>
+                    <proposal>initial</proposal>
+                </module>
+                <module>
+	            <label>Perform Update</label>
+                    <name>do_resize</name>
+                    <update config:type="boolean">false</update>
+                    <archs>i386,x86_64,ia64</archs>
+                </module>
+                <module>
+	            <label>Perform Update</label>
+                    <name>prepdisk</name>
+                </module>
+                <module>
+	            <label>Perform Update</label>
+                    <name>kickoff</name>
+                </module>
+                <module>
+	            <label>Perform Update</label>
+                    <name>rpmcopy</name>
+		    <enable_back>no</enable_back>
+		    <enable_next>no</enable_next>
+                </module>
+                <module>
+	            <label>Perform Update</label>
+                    <name>finish</name>
+		    <enable_back>no</enable_back>
+                </module>
+            </modules>
+        </workflow>
+        <workflow>
+            <defaults>
+                <archs>all</archs>
+            </defaults>
+            <stage>initial</stage>
+	    <label>Preparation</label>
+            <mode>repair</mode>
+            <modules  config:type="list">
+                <module>
+	            <label>System Information</label>
+                    <name>info</name>
+                </module>
+                <module>
+	            <label>Perform Repair</label>
+                    <name>repair</name>
+                </module>
+            </modules>
+        </workflow>
+
+	<!-- Stage: Initial, Mode: ScreenShot -->
+        <workflow>
+            <defaults>
+                <archs>all</archs>
+		<enable_back>yes</enable_back>
+		<enable_next>yes</enable_next>
+            </defaults>
+            <stage>initial</stage>
+	    <label>Base Installation</label>
+            <mode>screen_shot</mode>
+            <modules  config:type="list">
+                <module>
+                    <enable_back>no</enable_back>
+                    <enable_next>yes</enable_next>
+ 	            <label>Language</label>
+                    <name>language</name>
+                    <retranslate config:type="boolean">true</retranslate>
+                </module>
+                <module>
+	            <label>Installation Settings</label>
+                    <name>proposal</name>
+                    <proposal>initial</proposal>
+                </module>
+                <module>
+	            <label>Perform Installation</label>
+                    <name>do_resize</name>
+                    <update config:type="boolean">false</update>
+                    <archs>i386,x86_64,ia64</archs>
+                </module>
+                <module>
+	            <label>Perform Installation</label>
+                    <name>prepdisk</name>
+                </module>
+                <module>
+	            <label>Perform Installation</label>
+                    <name>kickoff</name>
+                </module>
+                <module>
+	            <label>Perform Installation</label>
+                    <name>rpmcopy</name>
+		    <enable_back>no</enable_back>
+		    <enable_next>yes</enable_next>
+                </module>
+            </modules>
+        </workflow>
+
+	<!-- Stage: Initial, Mode: Demo -->
+        <workflow>
+            <defaults>
+                <archs>all</archs>
+		<enable_back>yes</enable_back>
+		<enable_next>yes</enable_next>
+            </defaults>
+            <stage>initial</stage>
+	    <label>Base Installation</label>
+            <mode>demo</mode>
+            <modules  config:type="list">
+                <module>
+                    <enable_back>no</enable_back>
+	            <label>Language</label>
+                    <name>language</name>
+                    <retranslate config:type="boolean">true</retranslate>
+                </module>
+                <module>
+	            <label>Installation Settings</label>
+                    <name>proposal</name>
+                    <proposal>initial</proposal>
+                </module>
+                <module>
+	            <label>Perform Installation</label>
+                    <name>do_resize</name>
+                    <update config:type="boolean">false</update>
+                    <archs>i386,x86_64,ia64</archs>
+                </module>
+                <module>
+ 	            <label>Perform Installation</label>
+                   <name>prepdisk</name>
+                </module>
+                <module>
+	            <label>Perform Installation</label>
+                    <name>kickoff</name>
+                </module>
+                <module>
+	            <label>Perform Installation</label>
+                    <name>rpmcopy</name>
+		    <enable_back>no</enable_back>
+		    <enable_next>no</enable_next>
+                </module>
+            </modules>
+        </workflow>
+
+	<!-- Stage: Continue, Mode: Update -->
+        <workflow>
+            <stage>continue</stage>
+            <mode>update</mode>
+            <defaults>
+                <archs>all</archs>
+                <enable_back>yes</enable_back>
+                <enable_next>yes</enable_next>
+            </defaults>
+            <modules config:type="list">
+                <module>
+	            <label>Perform Update</label>
+                    <name>rpmcopy</name>
+		    <enable_back>no</enable_back>
+		    <enable_next>no</enable_next>
+                </module>
+		<module>
+		    <heading>yes</heading>
+		    <label>Configuration</label>
+		</module>
+                <module>
+	            <label>Network</label>
+                    <name>ask_net_test</name>
+		    <enable_back>no</enable_back>
+                </module>
+                <module>
+	            <label>Network</label>
+                    <name>do_net_test</name>
+                </module>
+                <module>
+                    <label>Registration</label>
+                    <name>addon_update_sources</name>
+                </module>
+                <module>
+                    <label>Registration</label>
+                    <name>suse_register</name>
+                </module>
+                <module>
+                    <label>Online Update</label>
+                    <name>ask_online_update</name>
+                </module>
+                <module>
+	            <label>Online Update</label>
+                    <name>you</name>
+                </module>
+		<module>
+		    <label>Online Update</label>
+		    <name>restore_settings</name>
+		</module>
+                <module>
+                    <name>suseconfig</name>
+		    <enable_back>no</enable_back>
+		    <enable_next>no</enable_next>
+                </module>
+                <module>
+	            <label>Release Notes</label>
+                    <name>release_notes</name>
+                </module>
+                <module>
+                    <name>congratulate</name>
+                </module>
+            </modules>
+        </workflow>
+
+	<!-- Stage: Continue, Mode: Installation -->
+        <workflow>
+            <stage>continue</stage>
+            <mode>installation</mode>
+            <defaults>
+                <enable_back>yes</enable_back>
+                <enable_next>yes</enable_next>
+                <archs>all</archs>
+            </defaults>
+            <modules  config:type="list">
+		<module>
+		    <heading>yes</heading>
+		    <label>Configuration</label>
+		</module>
+                <module>
+	            <label>root Password</label>
+                    <name>root</name>
+                    <enable_back>no</enable_back>
+                </module>
+                <module>
+	            <label>Check Installation</label>
+                    <name>initialization</name>
+                    <enable_back>no</enable_back>
+                    <enable_next>no</enable_next>
+                </module>
+                <module>
+	            <label>Check Installation</label>
+                    <name>netprobe</name>
+                    <enable_back>no</enable_back>
+                    <enable_next>no</enable_next>
+                </module>
+                <module>
+	            <label>Check Installation</label>
+                    <name>rpmcopy</name>
+                    <enable_back>no</enable_back>
+                    <enable_next>no</enable_next>
+                </module>
+                <module>
+	            <label>Hostname</label>
+                    <name>hostname</name>
+                </module>
+                <module>
+	            <label>Network</label>
+                    <name>proposal</name>
+                    <proposal>network</proposal>
+                </module>
+		<module>
+	            <label>Network</label>
+                    <name>fam</name>
+		</module>
+                <module>
+	            <label>Network</label>
+                    <name>ask_net_test</name>
+                </module>
+                <module>
+	            <label>Network</label>
+                    <name>do_net_test</name>
+                </module>
+                <module>
+                    <label>Registration</label>
+                    <name>addon_update_sources</name>
+                </module>
+                <module>
+                    <label>Registration</label>
+                    <name>suse_register</name>
+                </module>
+                <module>
+                    <label>Online Update</label>
+                    <name>ask_online_update</name>
+                </module>
+                <module>
+	            <label>Online Update</label>
+                    <name>you</name>
+                </module>
+                <module>
+                    <label>Online Update</label>
+                    <name>extrasources</name>
+                </module>
+		<module>
+		    <label>Online Update</label>
+		    <name>restore_settings</name>
+		</module>
+                <module>
+	            <label>Users</label>
+                    <name>auth</name>
+                </module>
+                <module>
+	            <label>Users</label>
+                    <name>user</name>
+                </module>
+                <module>
+                    <name>suseconfig</name>
+                    <enable_back>no</enable_back>
+                    <enable_next>no</enable_next>
+                </module>
+                <module>
+	            <label>Release Notes</label>
+                    <name>release_notes</name>
+                </module>
+                <module>
+	            <label>Hardware Configuration</label>
+                    <name>proposal</name>
+                    <proposal>hardware</proposal>
+                </module>
+                <module>
+	            <label>Hardware Configuration</label>
+		    <name>save_hardware_status</name>
+                </module>
+                <module>
+                    <name>congratulate</name>
+                </module>
+            </modules>
+        </workflow>
+
+	<!-- Stage: Initial, Mode: AutoInstallation -->
+        <workflow>
+            <stage>initial</stage>
+            <label>Base Installation</label>
+            <mode>autoinstallation</mode>
+            <defaults>
+                <archs>all</archs>
+                <enable_back>no</enable_back>
+                <enable_next>no</enable_next>
+            </defaults>
+            <modules  config:type="list">
+                <module>
+	            <label>AutoYaST Settings</label>
+                    <name>autoinit</name>
+                    <archs>all</archs>
+                    <retranslate config:type="boolean">true</retranslate>
+                </module>
+                <module>
+	            <label>AutoYaST Settings</label>
+                    <name>autosetup</name>
+                </module>
+                <module>
+	            <label>AutoYaST Settings</label>
+                    <name>proposal</name>
+                    <proposal>initial</proposal>
+                    <enable_back>no</enable_back>
+                    <enable_next>yes</enable_next>
+                </module>
+                <module>
+	            <label>Perform Installation</label>
+                    <name>prepdisk</name>
+                </module>
+                <module>
+	            <label>Perform Installation</label>
+                    <name>kickoff</name>
+                </module>
+                <module>
+	            <label>Perform Installation</label>
+                    <name>autoimage</name>
+                </module>
+                <module>
+	            <label>Perform Installation</label>
+                    <name>rpmcopy</name>
+                </module>
+                <module>
+	            <label>Perform Installation</label>
+                    <name>finish</name>
+                </module>
+            </modules>
+        </workflow>
+
+	<!-- Stage: Continue, Mode: AutoInstallation -->
+        <workflow>
+            <defaults>
+                <archs>all</archs>
+                <enable_back>no</enable_back>
+                <enable_next>no</enable_next>
+            </defaults>
+            <stage>continue</stage>
+            <mode>autoinstallation</mode>
+            <modules  config:type="list">
+                <module>
+	            <label>Perform Installation</label>
+                    <name>netprobe</name>
+                </module>
+                <module>
+	            <label>Perform Installation</label>
+                    <name>autopost</name>
+                </module>
+                <module>
+	            <label>Perform Installation</label>
+                    <name>rpmcopy</name>
+                </module>
+		<module>
+		    <heading>yes</heading>
+		    <label>Configuration</label>
+		</module>
+                <module>
+	            <label>System Configuration</label>
+                    <name>autoconfigure</name>
+                </module>
+                <module>
+                    <name>suseconfig</name>
+                </module>
+            </modules>
+        </workflow>
+    </workflows>
+</productDefines>
