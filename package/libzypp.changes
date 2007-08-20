@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Mon Aug 20 16:06:36 CEST 2007 - schubi@suse.de
+
+- Do not regard explicit request in order to recognize updated packages
+  correctly. Bug 301676
+- Updated translations 
+- r 6766
+- 3.18.2
+
+-------------------------------------------------------------------
 Mon Aug 20 15:35:46 CEST 2007 - mvidner@suse.cz
 
 - package-manager script: Call /sbin/yast2 with full path because of
