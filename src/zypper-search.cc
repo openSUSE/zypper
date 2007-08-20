@@ -91,7 +91,7 @@ ZyppSearch::invokeOnEachSearched(_Filter filter_r, _PoolCallback pool_cb, _Cache
         {
           std::vector<zypp::Resolvable::Kind> kinds;
 	  kinds.push_back( _options.kind() );
-          _query.iterateResolvablesByKindsAndName( kinds, _qstrings[0], _options.matchExact() ? 0 : 3, cache_cb );
+          _query.iterateResolvablesByKindsAndStrings( kinds, _qstrings, (_options.matchExact() ? cache::MATCH_EXACT : cache::MATCH_SUBSTRING)|cache::MATCH_NAME, cache_cb );
         }
       }
       catch ( const Exception & excpt_r )
@@ -127,7 +127,7 @@ ZyppSearch::invokeOnEachSearched(_Filter filter_r, _PoolCallback pool_cb, _Cache
 
         std::vector<zypp::Resolvable::Kind> kinds;
 	kinds.push_back( ResTraits<Package>::kind );
-        _query.iterateResolvablesByKindsAndName( kinds, _qstrings[0], 0, cache_cb );
+        _query.iterateResolvablesByKindsAndStrings( kinds, _qstrings, cache::MATCH_EXACT|cache::MATCH_NAME, cache_cb );
       }
       catch ( const Exception & excpt_r )
       {
@@ -156,7 +156,7 @@ ZyppSearch::invokeOnEachSearched(_Filter filter_r, _PoolCallback pool_cb, _Cache
 
         std::vector<zypp::Resolvable::Kind> kinds;
 	kinds.push_back( ResTraits<Package>::kind );
-        _query.iterateResolvablesByKindsAndName( kinds, _qstrings[0], 3, cache_cb );
+        _query.iterateResolvablesByKindsAndStrings( kinds, _qstrings, cache::MATCH_SUBSTRING|cache::MATCH_NAME, cache_cb );
       }
       catch ( const Exception & excpt_r )
       {

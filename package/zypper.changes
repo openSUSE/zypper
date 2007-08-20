@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Aug 20 13:55:53 CEST 2007 - kkaempf@suse.de
+
+- adapt to unified query API of libzypp-3.18.x
+- r6756
+
+-------------------------------------------------------------------
 Fri Aug 17 15:16:32 CEST 2007 - jkupec@suse.cz
 
 - text update from proof-reading
