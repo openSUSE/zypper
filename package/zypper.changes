@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Mon Aug 20 14:16:20 CEST 2007 - kkaempf@suse.de
+
+- fix first column (i/v) of 'search' output
+- r6759
+- 0.8.14
+
+-------------------------------------------------------------------
 Mon Aug 20 13:55:53 CEST 2007 - kkaempf@suse.de
 
 - adapt to unified query API of libzypp-3.18.x

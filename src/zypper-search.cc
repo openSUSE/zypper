@@ -36,7 +36,8 @@ ZyppSearch::ZyppSearch (
     const vector<string> qstrings
     ) :
     _zypp(zypp), _options(options), _qstrings(qstrings), _query( _manager_options.repoCachePath ) {
-#if 0
+
+#if 0	// we don't search the pool but iterate on the cache directly, hence no repos needed
   // no repos warning
   if (gData.repos.empty()) {
     cerr << _("No repositories configured. Please add at least one"
@@ -45,9 +46,10 @@ ZyppSearch::ZyppSearch (
     exit(ZYPPER_EXIT_NO_REPOS); // TODO #define zypper error codes?
   }
 #endif
+
   setupRegexp();
   cacheInstalled();
-#if 0
+#if 0	// we iterate directly on the cache, no ResPool populate needed
   load_repo_resolvables(); // populates ResPool with resolvables from repos
 #endif
   // cache identification strings of source resolvables (used to check for

@@ -109,10 +109,19 @@ public:
       (_incl_kind_in_key ? pi.resolvable()->kind().asString() : "");
   }
 
+  std::string getKey( const zypp::data::ResObject_Ptr res ) const {
+    return res->name +
+      (_incl_kind_in_key ? res->kind.asString() : "");
+  }
+
   void addItem(const zypp::PoolItem & pi) { _items[getKey(pi)] = pi; }
 
   zypp::PoolItem & getItem(const zypp::PoolItem & pi) {
     return _items[getKey(pi)];
+  }
+  
+  zypp::PoolItem & getItem( const zypp::data::ResObject_Ptr res ) {
+    return _items[getKey( res )];
   }
   
   unsigned int size() {
@@ -126,9 +135,8 @@ public:
   }
 
   /** defined for use as a functor for filling the hashmap in a for_each */ 
-  // FIXME: should be cache::ProcessResolvable
   bool operator()(const zypp::data::RecordId & id, const zypp::data::ResObject_Ptr res) {
-    // dummy
+    // dummy, since zypp::data::ResObject_Ptr is never 'installed'
     return true;
   }
 
@@ -152,10 +160,20 @@ public:
       pi.resolvable()->kind().asString() + pi.resolvable()->arch().asString();
   }
 
+  std::string getKey(const zypp::data::ResObject_Ptr res) const {
+    return res->name + res->edition.asString() +
+      res->kind.asString() + res->arch.asString();
+  }
+
   void addItem(const zypp::PoolItem & pi) { _items.insert(getKey(pi)); }
+  void addItem(const zypp::data::ResObject_Ptr res) { _items.insert(getKey(res)); }
 
   bool contains(const zypp::PoolItem & pi) {
     return _items.count(getKey(pi));
+  }
+
+  bool contains(const zypp::data::ResObject_Ptr res) {
+    return _items.count(getKey(res));
   }
 
   /** defined for use as a functor for filling the IdSet in a for_each */ 
@@ -165,9 +183,8 @@ public:
   }
 
   /** defined for use as a functor for filling the IdSet in a for_each */ 
-  // FIXME: should be cache::ProcessResolvable
   bool operator()(const zypp::data::RecordId & id, const zypp::data::ResObject_Ptr res) {
-    // dummy
+    addItem( res );
     return true;
   }
 
@@ -310,7 +327,7 @@ struct FillTable
     TableRow row;
 
     // add status to the result table
-    zypp::PoolItem inst_item; // = _icache->getItem(pool_item);
+    zypp::PoolItem inst_item = _icache->getItem( res );
     if (inst_item) {
       // check whether the pool item is installed...
       if (inst_item.resolvable()->edition() == res->edition &&
