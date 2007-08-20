@@ -1,9 +1,18 @@
 -------------------------------------------------------------------
+Mon Aug 20 15:23:14 CEST 2007 - dmacvicar@suse.de
+
+- add support for the HASH key. (#300982)
+- Use ContentFileParser in Downloader (instead of implementing
+  the parser again, it has a reason, Downloader was written first)
+- update testcases and data to cover the new HASH key
+- 3.18.1
+
+-------------------------------------------------------------------
 Mon Aug 20 13:21:34 CEST 2007 - kkaempf@suse.de
 
 - unify query API for kind and name, summary, description
   (incomplete)
-- rev 6761, version 3.18.13
+- rev 6761, version 3.18.0
 
 -------------------------------------------------------------------
 Fri Aug 17 12:30:55 CEST 2007 - kkaempf@suse.de
