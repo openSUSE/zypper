@@ -3,7 +3,7 @@ Tue Aug 21 13:06:44 CEST 2007 - dmacvicar@suse.de
 
 - If no mount information is available, parse all DU entries.
 - read only hack mode for migrate-sources. We actually do add
-  repositories with it, but no harm.
+  repositories with it, but no harm. (#292986)
 - 3.18.3
 
 -------------------------------------------------------------------
