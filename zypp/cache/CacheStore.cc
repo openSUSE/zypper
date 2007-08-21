@@ -987,10 +987,13 @@ RecordId CacheStore::lookupOrAppendType( const string &klass, const string &name
       _pimpl->insert_type_cmd->bind(":name", name);
       _pimpl->insert_type_cmd->executenonquery();
       id = _pimpl->con.insertid();
-      _pimpl->type_cache[thetype] = id;
-      return id;
    }
-   return reader.getint64(0);
+   else
+   {
+      id = reader.getint64(0);
+   }
+   _pimpl->type_cache[thetype] = id;
+   return id;
   }
   catch ( const sqlite3x::database_error &e )
   {
@@ -1017,10 +1020,13 @@ RecordId CacheStore::lookupOrAppendName( const string &name )
       _pimpl->insert_name_cmd->bind(":name", name);
       _pimpl->insert_name_cmd->executenonquery();
       id = _pimpl->con.insertid();
-      _pimpl->name_cache[name] = id;
-      return id;
-   }
-   return reader.getint64(0);
+    }
+    else
+    {
+      id = reader.getint64(0);
+    }
+    _pimpl->name_cache[name] = id;
+    return id;
   }
   catch ( const sqlite3x::database_error &e )
   {
@@ -1047,10 +1053,13 @@ RecordId CacheStore::lookupOrAppendDirName( const string &name )
       _pimpl->insert_dirname_cmd->bind(":name", name);
       _pimpl->insert_dirname_cmd->executenonquery();
       id = _pimpl->con.insertid();
-      _pimpl->dir_cache[name] = id;
-      return id;
-   }
-   return reader.getint64(0);
+    }
+    else
+    {
+      id = reader.getint64(0);
+    }
+    _pimpl->dir_cache[name] = id;
+    return id;
   }
   catch ( const sqlite3x::database_error &e )
   {
