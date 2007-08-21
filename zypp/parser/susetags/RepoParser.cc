@@ -419,7 +419,7 @@ namespace zypp
         }
 	if ( ! _repoIndex )
 	{
-	  ZYPP_THROW( ParseException( reporoot_r.asString() + ": " + "No reository index in content file." ) );
+	  ZYPP_THROW( ParseException( reporoot_r.asString() + ": " + "No repository index in content file." ) );
 	}
 	DBG << _repoIndex << endl;
 

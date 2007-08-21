@@ -81,7 +81,7 @@ void Downloader::download( MediaSetAccess &media,
   }
   if ( ! _repoindex )
   {
-    ZYPP_THROW( ParseException( (dest_dir+_path).asString() + ": " + "No reository index in content file." ) );
+    ZYPP_THROW( ParseException( (dest_dir+_path).asString() + ": " + "No repository index in content file." ) );
   }
   
   // Prepare parsing
