@@ -169,17 +169,6 @@ void Downloader::download( MediaSetAccess &media,
     this->enqueueDigested(location);
   }
   
-  // add hashed media files
-  
-  for ( RepoIndex::FileChecksumMap::const_iterator it = _repoindex->mediaFileChecksums.begin();
-        it != _repoindex->mediaFileChecksums.end();
-        ++it )
-  {
-    OnMediaLocation location( _path + it->first, 1 );
-    location.setChecksum( it->second );
-    this->enqueueDigested(location);
-  }
-
   this->start( dest_dir, media );
 }
 
