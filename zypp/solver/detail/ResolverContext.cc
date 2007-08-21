@@ -419,7 +419,7 @@ ResolverContext::upgrade (PoolItem_Ref item, PoolItem_Ref old_item, bool is_soft
 // change state to 'TO_BE_UNINSTALLED{, DUE_TO_OBSOLETE, DUE_TO_UNLINK}'
 
 bool
-ResolverContext::uninstall (PoolItem_Ref item, bool part_of_upgrade, bool due_to_obsolete, bool due_to_unlink)
+ResolverContext::uninstall (PoolItem_Ref item, bool part_of_upgrade, bool due_to_obsolete, bool due_to_unlink, bool explicitly_requested)
 {
     ResStatus status, new_status;
     std::string msg;
@@ -429,7 +429,9 @@ ResolverContext::uninstall (PoolItem_Ref item, bool part_of_upgrade, bool due_to
     _XDEBUG( "ResolverContext[" << this << "]::uninstall("
 		    << item << " " << (part_of_upgrade ? "part_of_upgrade" : "") << " "
 		    << (due_to_obsolete ? "due_to_obsolete": "") << " "
-	     << (due_to_unlink ? "due_to_unlink" : "") << ")" << "context-status:" << status);
+	     << (due_to_unlink ? "due_to_unlink" : "")
+	     << ( explicitly_requested ? "explicitly_requested" : "")
+	     << ")" << "context-status:" << status);
 
     assert (! (due_to_obsolete && due_to_unlink));
 
@@ -444,7 +446,8 @@ ResolverContext::uninstall (PoolItem_Ref item, bool part_of_upgrade, bool due_to
 	                                                                                         //   (And not by WEAK dependencies like supplements)
 	      && !part_of_upgrade
 	      && !due_to_obsolete
-	      && !due_to_unlink)) {
+	      && !due_to_unlink
+	      && !explicitly_requested)) {
 	// We have a resolvable which should be kept on the system or is set to be installed explicit.
 	// So we are not allowed deleting it. The reason WHY this resolvable has to be deleted here
 	// is not show. We go back to the ResolverInfo to evaluate the reason. This reason (marked as an info)

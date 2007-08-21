@@ -238,7 +238,7 @@ class ResolverContext : public base::ReferenceCounted, private base::NonCopyable
 
     /**
      *set \c item to \a to-be-uninstalled */
-    bool uninstall (PoolItem_Ref item, bool part_of_upgrade, bool due_to_obsolete, bool due_to_unlink);
+    bool uninstall (PoolItem_Ref item, bool part_of_upgrade, bool due_to_obsolete, bool due_to_unlink, bool explicitly_requested);
 
     // rough installed/uninstalled test for 'after transaction'
 
