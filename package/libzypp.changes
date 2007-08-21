@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Aug 21 10:46:26 CEST 2007 - dmacvicar@suse.de
+
+- If no mount information is available, parse all DU entries.
+- 3.18.3
+
+-------------------------------------------------------------------
 Mon Aug 20 16:06:36 CEST 2007 - schubi@suse.de
 
 - Do not regard explicit request in order to recognize updated packages
