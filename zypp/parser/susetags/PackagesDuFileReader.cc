@@ -46,6 +46,8 @@ namespace zypp
           , _discarded_entries(0)
 	  {
             _mounts = getZYpp()->getPartitions();
+            
+            // try to detect partitions if empty
             if (_mounts.empty() )
               _mounts =  DiskUsageCounter::detectMountPoints();
             
@@ -147,31 +149,39 @@ namespace zypp
                                        str::strtonum<unsigned>(what[2]) + str::strtonum<unsigned>(what[3]),
                                        str::strtonum<unsigned>(what[4]) + str::strtonum<unsigned>(what[5]) );
                 
-                // iterate over important mounts in reverse order, from the leaves to
-                // the root
-                for ( DiskUsageCounter::MountPointSet::reverse_iterator mit = _mounts.rbegin();
-                  mit != _mounts.rend();
-                  ++ mit )
+                if ( _mounts.empty() )
                 {
-                  // if the directory we are adding is below one of the mount points
-                  // just add the mount point so it gets summed.
-                  //MIL << "is '" << entry.path << "' == '" << (*mit).dir << "' ?" << endl;
-                  // FIXME make this more clear
-                  if ( entry.path == ( ((*mit).dir[(*mit).dir.size()-1] == '/') ? (*mit).dir : ((*mit).dir + '/' ) ) )
+                  // if no mount information, parse it all
+                  // FIXME at least detect levels?
+                  skip = false;
+                }
+                else
+                {
+                  // iterate over important mounts in reverse order, from the leaves to
+                  // the root
+                  for ( DiskUsageCounter::MountPointSet::reverse_iterator mit = _mounts.rbegin();
+                    mit != _mounts.rend();
+                    ++ mit )
                   {
-                    // entry is a mountpoint, so we need to keep it
-                    //MIL << "yes" << endl;
-                    // just discard it
-                    _discarded_entries++;
-                    skip = false;
-                    break;
-                  }
-                  else
-                  {
-                    //MIL << "no" << endl;
+                    // if the directory we are adding is below one of the mount points
+                    // just add the mount point so it gets summed.
+                    //MIL << "is '" << entry.path << "' == '" << (*mit).dir << "' ?" << endl;
+                    // FIXME make this more clear
+                    if ( entry.path == ( ((*mit).dir[(*mit).dir.size()-1] == '/') ? (*mit).dir : ((*mit).dir + '/' ) ) )
+                    {
+                      // entry is a mountpoint, so we need to keep it
+                      //MIL << "yes" << endl;
+                      // just discard it
+                      _discarded_entries++;
+                      skip = false;
+                      break;
+                    }
+                    else
+                    {
+                      //MIL << "no" << endl;
+                    }
                   }
                 }
-                
                 // try next entry
                 if ( skip )
                   continue;
