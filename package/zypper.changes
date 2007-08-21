@@ -1,8 +1,14 @@
 -------------------------------------------------------------------
+Tue Aug 21 15:17:15 CEST 2007 - mvidner@suse.cz
+
+- Require a bugfixed libzypp for --root (#301843).
+- 0.6.20
+
+-------------------------------------------------------------------
 Thu Aug 16 19:20:31 CEST 2007 - jkupec@suse.cz
 
 - backport of --non-interactive mode support from trunk (#298731)
-  includes --non-gpg-checks and --auto-agree-with-licenses
+  includes --no-gpg-checks and --auto-agree-with-licenses
   + some other necessary fixes
 - r6715
 - 0.6.19

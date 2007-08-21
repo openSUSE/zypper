@@ -16,6 +16,8 @@ BuildRequires:  libzypp-devel
 BuildRequires:  gcc-c++ pkg-config boost-devel gettext-devel
 BuildRequires:  readline-devel
 Requires:	procps
+# "zypper --root" needs a fix in libzypp
+Requires:	libzypp >= 2.16.1
 License:        GPL
 Group:          System/Packages
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
