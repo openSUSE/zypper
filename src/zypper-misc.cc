@@ -258,7 +258,7 @@ Capability safe_parse_cap (const ResObject::Kind &kind, const string & capstr) {
         {
           cout_vv << "installed resolvable named " << capstr
             << " found, changing capability to " << new_capstr << endl;
-          new_capstr = capstr + ">" + vg.edition.asString();
+          new_capstr = capstr + " > " + vg.edition.asString();
         }
       }
     }
