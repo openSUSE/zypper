@@ -42,7 +42,7 @@ struct MessageResolvableReportReceiver : public zypp::callback::ReceiveReport<zy
       return;
     }
     
-    cout << "<message>" << message->text() << "</message>" << endl;
+    cout << "<message type=\"info\">" << message->text() << "</message>" << endl;
     
     //! \todo in interactive mode, wait for ENTER?
   }

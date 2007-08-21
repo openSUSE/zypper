@@ -617,7 +617,7 @@ int show_summary()
   if (retv == -1)
   {
     if (gSettings.machine_readable)
-      cout << "<message type=\"warning\" text=\"" << _("Nothing to do.") << "\">" << endl;
+      cout << "<message type=\"warning\">" << _("Nothing to do.") << "</message>" << endl;
     else
       cout << _("Nothing to do.") << endl;
 
@@ -1408,8 +1408,8 @@ int solve_and_commit () {
   else if (retv == ZYPPER_EXIT_INF_REBOOT_NEEDED)
   {
     if (gSettings.machine_readable)
-      cout << "<message type=\"warning\" text=\"" << _("One of installed patches requires reboot of"
-          " your machine. Please, do it as soon as possible.") << "\">" << endl;
+      cout << "<message type=\"warning\">" << _("One of installed patches requires reboot of"
+          " your machine. Please, do it as soon as possible.") << "</message>" << endl;
     else
       cout << _("WARNING: One of installed patches requires a reboot of"
           " your machine. Please do it as soon as possible.") << endl;
