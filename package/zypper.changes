@@ -5,6 +5,12 @@ Tue Aug 21 13:47:09 CEST 2007 - tgoettlicher@suse.de
 - r6787 
 
 -------------------------------------------------------------------
+Tue Aug 21 15:07:29 CEST 2007 - duncan@suse.de
+
+- fix invalid capability creation (#301690)
+- 0.8.15 
+
+-------------------------------------------------------------------
 Mon Aug 20 14:16:20 CEST 2007 - kkaempf@suse.de
 
 - fix first column (i/v) of 'search' output
