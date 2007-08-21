@@ -35,6 +35,8 @@ struct Options
 
 static void migrate_sources( const Options &opt )
 {
+  zypp::zypp_readonly_hack::IWantIt();
+  ZYpp::Ptr Z = zypp::getZYpp();
   RepoManager manager;
   
   Pathname source_p = opt.root + opt.sources_dir;
