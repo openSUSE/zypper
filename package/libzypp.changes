@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue Aug 21 15:17:23 CEST 2007 - schubi@suse.de
+
+- Added explicitly_requested as parameter in ResolverContext::Uninstall
+  Bug 299819 
+- revision 6794
+
+-------------------------------------------------------------------
 Tue Aug 21 13:06:44 CEST 2007 - dmacvicar@suse.de
 
 - If no mount information is available, parse all DU entries.
