@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Aug 21 13:47:09 CEST 2007 - tgoettlicher@suse.de
+
+- unification and clean up of XML output
+- r6787 
+
+-------------------------------------------------------------------
 Mon Aug 20 14:16:20 CEST 2007 - kkaempf@suse.de
 
 - fix first column (i/v) of 'search' output
@@ -35,6 +41,7 @@ Thu Aug 16 23:46:15 CEST 2007 - kkaempf@suse.de
 - r6722, version 0.8.12
 
 -------------------------------------------------------------------
+>>>>>>> .r6787
 Thu Aug 16 13:10:44 CEST 2007 - jkupec@suse.cz
 
 - more comprehensive message after adding a repository
