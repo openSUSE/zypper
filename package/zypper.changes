@@ -2,7 +2,7 @@
 Tue Aug 21 15:17:15 CEST 2007 - mvidner@suse.cz
 
 - Require a bugfixed libzypp for --root (#301843).
-- 0.6.20
+- r6795
 
 -------------------------------------------------------------------
 Thu Aug 16 19:20:31 CEST 2007 - jkupec@suse.cz
