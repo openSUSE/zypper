@@ -1,4 +1,18 @@
 -------------------------------------------------------------------
+Wed Aug 22 16:52:09 CEST 2007 - schubi@suse.de
+
+- Bugfixes concerning vendor handling:
+- first bug:
+  Installed A-1.0(vendor SuSE)
+  Available A-2.0(other vendor)
+  A will not be regarded as "unmaintained". So it will not be deleted.
+- second bug:
+  A need B-2.0. B-1.0 is installed but has another vendor. Report a
+  proper errmessage.
+- Testcase : solution-tests/vendor-test.xml
+- r 6812 
+
+-------------------------------------------------------------------
 Tue Aug 21 15:59:48 CEST 2007 - duncan@suse.de
 
 - Don't download files listed in tag HASH (#300982) 
