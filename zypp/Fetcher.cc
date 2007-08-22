@@ -83,7 +83,7 @@ namespace zypp
     composite.add(checker);
     enqueue(resource, composite);
   }
-  
+
   void Fetcher::Impl::enqueue( const OnMediaLocation &resource, const FileChecker &checker )
   {
     FetcherJob job(resource);
@@ -167,13 +167,15 @@ namespace zypp
           {
             ZYPP_THROW( Exception("Can't copy " + tmp_file.asString() + " to " + dest_dir.asString()));
           }
-          
-          
+
+
         }
         catch (const Exception & excpt_r)
         {
-          ZYPP_CAUGHT(excpt_r);
-          ZYPP_THROW(Exception("Can't provide " + (*it_res).location.filename().asString() + " : " + excpt_r.msg() ));
+	  ZYPP_CAUGHT(excpt_r);
+	  Exception nexcpt("Can't provide " + (*it_res).location.filename().asString() + " : " + excpt_r.msg());
+	  nexcpt.remember(excpt_r);
+	  ZYPP_THROW(nexcpt);
         }
       }
       else
@@ -182,7 +184,7 @@ namespace zypp
         // continue with next file
         continue;
       }
-    
+
       // no matter where did we got the file, try to validate it:
       Pathname localfile = dest_dir + (*it_res).location.filename();
       // call the checker function
@@ -240,17 +242,17 @@ namespace zypp
   {
     _pimpl->enqueue(resource, checker);
   }
-  
+
   void Fetcher::enqueue( const OnMediaLocation &resource, const FileChecker &checker  )
   {
     _pimpl->enqueue(resource, checker);
   }
-  
+
   void Fetcher::addCachePath( const Pathname &cache_dir )
   {
     _pimpl->addCachePath(cache_dir);
   }
-  
+
   void Fetcher::reset()
   {
     _pimpl->reset();
