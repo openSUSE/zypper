@@ -463,6 +463,11 @@ Resolver::addIgnoreArchitectureItem (const PoolItem_Ref item)
     _ignoreArchitectureItem.push_back (item);
 }
 
+void
+Resolver::addIgnoreVendorItem (const PoolItem_Ref item)
+{
+    _ignoreVendorItem.push_back (item);
+}
 
 //---------------------------------------------------------------------------
 
@@ -650,7 +655,8 @@ Resolver::establishState( ResolverContext_Ptr context )
 				    _ignoreRequires,
 				    _ignoreObsoletes,
 				    _ignoreInstalledItem,
-				    _ignoreArchitectureItem);
+				    _ignoreArchitectureItem,
+				    _ignoreVendorItem);
     context->setForceResolve( _forceResolve );
     context->setEstablishContext( _establish_context );
     context->setPreferHighestVersion ( _preferHighestVersion );
@@ -775,7 +781,8 @@ Resolver::freshenState( ResolverContext_Ptr context,
 				    _ignoreRequires,
 				    _ignoreObsoletes,
 				    _ignoreInstalledItem,
-				    _ignoreArchitectureItem );
+				    _ignoreArchitectureItem,
+				    _ignoreVendorItem);
     context->setForceResolve( _forceResolve );
     context->setEstablishContext( _establish_context );
     context->setPreferHighestVersion( _preferHighestVersion );
@@ -900,7 +907,8 @@ Resolver::resolveDependencies (const ResolverContext_Ptr context)
 						     ignoreRequires,
 						     _ignoreObsoletes,
 						     _ignoreInstalledItem,
-						     _ignoreArchitectureItem);
+						     _ignoreArchitectureItem,
+						     _ignoreVendorItem);
     initial_queue->context()->setForceResolve( _forceResolve );
     initial_queue->context()->setEstablishContext( _establish_context );
     initial_queue->context()->setPreferHighestVersion( _preferHighestVersion );
@@ -1124,6 +1132,8 @@ Resolver::undo(void)
     _ignoreInstalledItem.clear();
     // Ignore the architecture of the item
     _ignoreArchitectureItem.clear();
+    // Ignore the vendor of the item
+    _ignoreVendorItem.clear();
 
 
     return;

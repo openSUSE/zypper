@@ -203,14 +203,23 @@ typedef map<string, PoolItem_Ref> FindMap;
 struct FindProviders
 {
     FindMap providers;		// the best providers which matched
-
-    FindProviders ()
+    PoolItem forItem;
+    bool otherVendorFound;
+    FindProviders (PoolItem item)
+	:forItem(item),
+	 otherVendorFound(false)
     { }
 
     bool operator()( const CapAndItem & cai )
     {
 	PoolItem provider( cai.item );
-	if ( provider.status().isToBeUninstalled() ) {
+	if ( provider->vendor() != forItem->vendor() )
+	{
+	    MIL << "Discarding '" << provider << "' from vendor '"
+		<< provider->vendor() << "' different to uninstalled '"
+		<< forItem->vendor() << "' vendor." << endl;
+	    otherVendorFound = true;
+	} else if ( provider.status().isToBeUninstalled() ) {
 	    MIL << "  IGNORE relation match (package is tagged to delete): " << cai.cap << " ==> " << provider << endl;
 	}
 	else {
@@ -365,8 +374,8 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
 	if (cand_it == candidatemap.end()						// not in map yet
 	    || (cand_it->second->arch().compare( candidate->arch() ) < 0)		// or the new has better architecture
 	    || ((cand_it->second->arch().compare( candidate->arch() ) == 0)		// or the new has the same architecture
-		&& (cand_it->second->edition().compare( candidate->edition() ) < 0) 	//   and a better edition (-> 157501)
-                && (cand_it->second->vendor() == candidate->vendor() ) ) )//   and same vendor
+		&& (cand_it->second->edition().compare( candidate->edition() ) < 0)) 	//   and a better edition (-> 157501)
+	    )
 	{
 	    candidatemap[installed] = candidate;				// put it in !
 	}
@@ -533,7 +542,7 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
       CapFactory factory;
       Capability installedCap = factory.parse( installed->kind(), installed->name(), Rel::GE, installed->edition() );
 
-      FindProviders info;
+      FindProviders info(installed);
 
       invokeOnEach( _pool.byCapabilityIndexBegin( installed->name(), dep ),
 		    _pool.byCapabilityIndexEnd( installed->name(), dep ),
@@ -553,11 +562,15 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
 
       switch ( info.providers.size() ) {
       case 0:
-	MIL << " ==> (dropped)" << endl;
-	// wait untill splits are processed. Might be a split obsoletes
-	// this one (i.e. package replaced but not provided by new one).
-	// otherwise it's finaly dropped.
-	probably_dropped = true;
+	  if (info.otherVendorFound) {
+	      MIL << " only resolvable with other vendor found ==> do nothing" << endl;
+	  } else {
+	      MIL << " ==> (dropped)" << endl;
+	      // wait untill splits are processed. Might be a split obsoletes
+	      // this one (i.e. package replaced but not provided by new one).
+	      // otherwise it's finaly dropped.
+	      probably_dropped = true;
+	  }
 	break;
       case 1:
         addProvided[installed] = providers;

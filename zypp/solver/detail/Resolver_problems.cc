@@ -119,6 +119,8 @@ typedef struct {
     ItemCapabilityMap provideAndLockMap;
     // A map of PoolItems which provides a capability but have another architecture
     ItemCapabilityMap provideAndOtherArchMap;
+    // A map of PoolItems which provides a capability but have another vendor
+    ItemCapabilityMap provideAndOtherVendorMap;
     // A map of conflicting Items
     ConflictMap conflictMap;
 } ResItemCollector;
@@ -195,8 +197,21 @@ collector_cb (ResolverInfo_Ptr info, void *data)
 	    collector->provideAndOtherArchMap.insert (make_pair( misc_info->other(), misc_info->capability()));
 	}
     }
-    
-
+    // Collecting items which are providing requirements but they
+    // have another vendor
+    if (info->type() == RESOLVER_INFO_TYPE_OTHER_VENDOR_PROVIDER) {
+	ResolverInfoMisc_constPtr misc_info = dynamic_pointer_cast<const ResolverInfoMisc>(info);
+	// does entry already exists ?
+	ItemCapabilityMap::iterator pos = find_if (collector->provideAndOtherVendorMap.begin(),
+						   collector->provideAndOtherVendorMap.end(),
+						   cap_equals<PoolItem_Ref, Capability>(misc_info->capability()));
+	
+	if (pos == collector->provideAndOtherVendorMap.end()) {
+	    _XDEBUG ("Inserting " << misc_info->capability() << "/" <<  misc_info->other()
+		     << " into provideAndOtherVendorMap map");
+	    collector->provideAndOtherVendorMap.insert (make_pair( misc_info->other(), misc_info->capability()));
+	}
+    }    
     // Collecting all conflicting Items
     if (info->type() == RESOLVER_INFO_TYPE_CONFLICT_UNINSTALLABLE
 	|| info->type() == RESOLVER_INFO_TYPE_CONFLICT_CANT_INSTALL) {
@@ -662,6 +677,14 @@ Resolver::problems (const bool ignoreValidSolution) const
 			    problem->addSolution (new ProblemSolutionIgnoreArchitecture (problem, it->first));
 			}
 		    }
+		    // Searching for another item which provides this requires BUT has another vendor
+		    for (ItemCapabilityMap::const_iterator it = collector.provideAndOtherVendorMap.begin();
+			 it != collector.provideAndOtherVendorMap.end(); ++it) {
+			if (it->second.matches (misc_info->capability()) == CapMatch::yes) {
+			    // ignoring vendor
+			    problem->addSolution (new ProblemSolutionIgnoreVendor (problem, it->first));
+			}
+		    }		    
 		    // Searching for another item which provides this requires BUT has been set to be kept
 		    for (ItemCapabilityMap::const_iterator it = collector.provideAndKeptMap.begin();
 			 it != collector.provideAndKeptMap.end(); ++it) {

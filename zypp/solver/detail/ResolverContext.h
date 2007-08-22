@@ -99,6 +99,8 @@ class ResolverContext : public base::ReferenceCounted, private base::NonCopyable
     PoolItemList _ignoreInstalledItem;
     // Ignore the architecture of the item
     PoolItemList _ignoreArchitectureItem;
+    // Ignore the vendor of the item
+    PoolItemList _ignoreVendorItem;    
 
     // Items which has been selected NOT by the solver
     // This will be stored while a solver run in order to save time
@@ -166,19 +168,22 @@ class ResolverContext : public base::ReferenceCounted, private base::NonCopyable
 			       const IgnoreMap ignoreRequires,
 			       const IgnoreMap ignoreObsoletes,
 			       const PoolItemList ignoreInstalledItem,
-			       const PoolItemList ignoreArchitectureItem)
+			       const PoolItemList ignoreArchitectureItem,
+			       const PoolItemList ignoreVendorItem)
 	{_ignoreConflicts = ignoreConflicts;
 	_ignoreRequires = ignoreRequires;
 	_ignoreObsoletes = ignoreObsoletes;
 	_ignoreInstalledItem = ignoreInstalledItem;
-	_ignoreArchitectureItem = ignoreArchitectureItem;}
+	_ignoreArchitectureItem = ignoreArchitectureItem;
+	_ignoreVendorItem = ignoreVendorItem;
+	}
 
     const IgnoreMap getIgnoreConflicts() const { return _ignoreConflicts; }
     const IgnoreMap getIgnoreRequires() const { return _ignoreRequires; }
     const IgnoreMap getIgnoreObsoletes() const { return _ignoreObsoletes; }    
     const PoolItemList getIgnoreInstalledItem() const { return _ignoreInstalledItem; }
     const PoolItemList getIgnoreArchitectureItem() const { return _ignoreArchitectureItem; }
-
+    const PoolItemList getIgnoreVendorItem() const { return _ignoreVendorItem; }
     
     void setForceResolve (const bool force) { _forceResolve = force; }
     const bool forceResolve() { return _forceResolve; }

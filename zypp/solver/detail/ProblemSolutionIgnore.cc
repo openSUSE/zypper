@@ -42,6 +42,7 @@ namespace zypp
 IMPL_PTR_TYPE(ProblemSolutionIgnoreConflicts);
 IMPL_PTR_TYPE(ProblemSolutionIgnoreRequires);
 IMPL_PTR_TYPE(ProblemSolutionIgnoreArchitecture);
+IMPL_PTR_TYPE(ProblemSolutionIgnoreVendor);	
 IMPL_PTR_TYPE(ProblemSolutionIgnoreInstalled);	
 
 //---------------------------------------------------------------------------
@@ -78,6 +79,19 @@ ProblemSolutionIgnoreArchitecture::ProblemSolutionIgnoreArchitecture( ResolverPr
 	_details = str::form(_("%s provides this dependency, but would change the architecture of the installed item"),
 			    ResolverInfo::toString (item).c_str());
 	addAction ( new InjectSolutionAction (item, ARCHITECTURE));
+}
+
+ProblemSolutionIgnoreVendor::ProblemSolutionIgnoreVendor( ResolverProblem_Ptr parent,
+							  PoolItem_Ref item)
+    : ProblemSolution (parent, "", "")
+{
+        // TranslatorExplanation %s = name of package, patch, selection ...
+	_description = str::form(_("Install %s although it would change the vendor"),
+				 item->name().c_str());
+	// TranslatorExplanation %s = name of package, patch, selection ...	
+	_details = str::form(_("%s provides this dependency, but would change the vendor of the installed item"),
+			    ResolverInfo::toString (item).c_str());
+	addAction ( new InjectSolutionAction (item, VENDOR));
 }
 	
 ProblemSolutionIgnoreConflicts::ProblemSolutionIgnoreConflicts( ResolverProblem_Ptr parent,

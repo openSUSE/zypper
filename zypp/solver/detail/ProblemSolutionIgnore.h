@@ -81,7 +81,18 @@ namespace zypp
 	     **/
 	    ProblemSolutionIgnoreArchitecture( ResolverProblem_Ptr parent,
 					       PoolItem_Ref item);
-	};	
+	};
+
+	class ProblemSolutionIgnoreVendor : public ProblemSolution
+	{
+	public:
+
+	    /**
+	     * Constructor.
+	     **/
+	    ProblemSolutionIgnoreVendor( ResolverProblem_Ptr parent,
+					 PoolItem_Ref item);
+	};		
 
 	class ProblemSolutionIgnoreObsoletes : public ProblemSolution
 	{

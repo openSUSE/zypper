@@ -81,6 +81,7 @@ static struct {
     { RIT(NOT_INSTALLABLE_PROVIDER),	"p provides c but is uninstallable" },
     { RIT(LOCKED_PROVIDER),		"p provides c but is locked" },
     { RIT(OTHER_ARCH_PROVIDER),		"p provides c but has other architecture" },
+    { RIT(OTHER_VENDOR_PROVIDER),	"p provides c but has other vendor" },    
     { RIT(CANT_SATISFY),		"Can't satisfy requirement c" },
 	// from QueueItemUninstall
     { RIT(UNINSTALL_TO_BE_INSTALLED),	"p is to-be-installed, so it won't be unlinked." },

@@ -105,7 +105,7 @@ namespace zypp
 
 
 	/**
-	 * Type of ignoring dependencies and architectures
+	 * Type of ignoring dependencies, architectures and vendor
 	 **/
 
 	typedef enum
@@ -114,7 +114,8 @@ namespace zypp
 	    CONFLICTS,
 	    OBSOLETES,
 	    INSTALLED,
-	    ARCHITECTURE
+	    ARCHITECTURE,
+	    VENDOR
 	} InjectSolutionKind;
 
 

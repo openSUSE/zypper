@@ -453,7 +453,25 @@ ResolverInfoMisc::message (void) const
 			     cap_str.c_str());
 	}
 	break;
-	
+
+	//-------------------
+	// p provides c but has other vendor
+
+	case RESOLVER_INFO_TYPE_OTHER_VENDOR_PROVIDER: {
+	    // affected() = requirer of capability
+	    // _capability = provided by other()
+	    // other() = provider of capability
+	    // other_capability() = - empty -
+
+	    string other_str = ResolverInfo::toString(other());
+	    string cap_str = ResolverInfo::toString (_capability);
+	    // Translator: 1.%s = name of package,patch,...; 2.%s = dependency; 3.%s = vendor ID
+	    msg = str::form (_("%s provides %s, but has another vendor (%s)."),
+			     other_str.c_str(),
+			     cap_str.c_str(),
+			     (other()->vendor()).c_str());
+	}
+	break;
 
 	//-------------------
 	// Can't satisfy requirement

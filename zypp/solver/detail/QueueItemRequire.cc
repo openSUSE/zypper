@@ -216,11 +216,31 @@ struct RequireProcess
 	    }
 	}
 
+	// checking vendor
+	bool vendorFit = true;
+	if ( provider
+	     && upgrades
+	     && provider->vendor() != upgrades->vendor()) {
+	    // checking if there is already an ignore
+	    MIL << "provider " << provider << " has ANOTHER vendor '" << provider->vendor() << "' than the updated item "
+		<< upgrades << endl;
+	    PoolItemList ignore = _context->getIgnoreVendorItem();
+	    PoolItemList::iterator it;
+	    for (it = ignore.begin(); it != ignore.end(); ++it) {
+		if (provider == *it) break;
+	    }
+	    if (it != ignore.end()) {
+		MIL << " ---> will be ignored " << endl;
+	    } else {
+		vendorFit = false;
+	    }
+	}
+
 	if (! (status.isToBeUninstalled() || status.isImpossible())
 	    && ! _context->isParallelInstall( provider )
 	    && _context->itemIsPossible( provider )
 	    && ! provider.status().isLocked()
-            && ( (!provider || !upgrades) || (provider->vendor() == upgrades->vendor()) )
+            && vendorFit
 	    && ! (provider.status().isKept()
 		  &&provider.status().isByUser())
 	    ) {
@@ -317,12 +337,17 @@ struct NoInstallableProviders
 	} else if (provider.status().isKept() && provider.status().isByUser()) {
 	    misc_info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_KEEP_PROVIDER, requirer, RESOLVER_INFO_PRIORITY_VERBOSE, match);
 	    misc_info->setOtherPoolItem (provider);	    
- 	} else	if (provider->arch().compatibleWith( context->architecture() )) {
-	    misc_info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_OTHER_ARCH_PROVIDER,
+ 	} else	if (provider->vendor() != requirer->vendor()) {
+	    misc_info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_OTHER_VENDOR_PROVIDER,
 								   requirer, RESOLVER_INFO_PRIORITY_VERBOSE, match);
 	    misc_info->setOtherPoolItem (provider);
 	}
-
+	else if (provider->arch().compatibleWith( context->architecture() )) {
+	    misc_info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_OTHER_ARCH_PROVIDER,
+								   requirer, RESOLVER_INFO_PRIORITY_VERBOSE, match);
+	    misc_info->setOtherPoolItem (provider);
+	} 
+	
 	if (misc_info != NULL) {
 	    context->addInfo (misc_info);
 	}
