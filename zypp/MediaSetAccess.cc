@@ -152,7 +152,9 @@ IMPL_PTR_TYPE(MediaSetAccess);
           else if ( user == media::MediaChangeReport::IGNORE )
           {
             DBG << "Skipping" << endl;
-            ZYPP_THROW ( SkipRequestException("User-requested skipping of a file") );
+	    SkipRequestException nexcp("User-requested skipping of a file");
+	    nexcp.remember(excp);
+	    ZYPP_THROW(nexcp);
           }
           else if ( user == media::MediaChangeReport::EJECT )
           {
@@ -244,11 +246,11 @@ IMPL_PTR_TYPE(MediaSetAccess);
           }
 
           // request media change, if the media is changeable and this is
-          // not just a check, otherwise just abort 
+          // not just a check, otherwise just abort
           if (checkonly || !media_mgr.isChangeable(media))
             user = media::MediaChangeReport::ABORT;
           else
-            user = 
+            user =
               report->requestMedia (
                 Repository::noRepository,
                 media_nr,
@@ -266,8 +268,10 @@ IMPL_PTR_TYPE(MediaSetAccess);
           else if ( user == media::MediaChangeReport::IGNORE )
           {
             DBG << "Skipping" << endl;
-            ZYPP_THROW ( SkipRequestException("User-requested skipping of a file") );
-          }
+	    SkipRequestException nexcp("User-requested skipping of a file");
+	    nexcp.remember(excp);
+	    ZYPP_THROW(nexcp);
+	  }
           else if ( user == media::MediaChangeReport::EJECT )
           {
             DBG << "Eject: try to release" << endl;
@@ -383,7 +387,7 @@ IMPL_PTR_TYPE(MediaSetAccess);
           }
 
 
-          // request media change, if the media is changeable, otherwise just abort 
+          // request media change, if the media is changeable, otherwise just abort
           if (media_mgr.isChangeable(_media))
             user =
               report->requestMedia(
