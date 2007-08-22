@@ -11,6 +11,11 @@ Tue Aug 21 13:47:09 CEST 2007 - tgoettlicher@suse.de
 - r6787 
 
 -------------------------------------------------------------------
+Mon Aug 20 22:50:14 CEST 2007 - mls@suse.de
+
+- fixed changelog ordering
+
+-------------------------------------------------------------------
 Mon Aug 20 14:16:20 CEST 2007 - kkaempf@suse.de
 
 - fix first column (i/v) of 'search' output
@@ -47,7 +52,6 @@ Thu Aug 16 23:46:15 CEST 2007 - kkaempf@suse.de
 - r6722, version 0.8.12
 
 -------------------------------------------------------------------
->>>>>>> .r6787
 Thu Aug 16 13:10:44 CEST 2007 - jkupec@suse.cz
 
 - more comprehensive message after adding a repository
@@ -203,6 +207,12 @@ Fri Aug  3 17:17:20 CEST 2007 - dmacvicar@suse.de
 - 0.8.7
 
 -------------------------------------------------------------------
+Fri Aug  3 16:33:09 CEST 2007 - dmacvicar@suse.de
+
+- better error handling. remove duplicated libzypp code.
+  Let libzypp probe the urls for us.
+
+-------------------------------------------------------------------
 Fri Aug  3 13:56:19 CEST 2007 - tgoettlicher@suse.de
 
 - removed installnotify from xml output
@@ -225,12 +235,6 @@ Thu Aug  2 18:44:07 CEST 2007 - dmacvicar@suse.de
 
 - added xml output in terse mode
 - r6406 
-
--------------------------------------------------------------------
-Fri Aug  3 16:33:09 CEST 2007 - dmacvicar@suse.de
-
-- better error handling. remove duplicated libzypp code.
-  Let libzypp probe the urls for us.
 
 -------------------------------------------------------------------
 Thu Aug  2 16:10:56 CEST 2007 - tgoettlicher@suse.de
