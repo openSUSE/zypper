@@ -1300,10 +1300,16 @@ void MediaHandler::getDirInfo( std::list<std::string> & retlist,
   {
 #endif
 
-  // readdir
+    // readdir
     int res = readdir( retlist, info.path(), dots );
-  if ( res )
-    ZYPP_THROW(MediaSystemException(url(), "readdir failed"));
+    if ( res )
+    {
+      MediaSystemException nexcpt(url(), "readdir failed");
+#if NONREMOTE_DIRECTORY_YAST
+      nexcpt.remember(excpt_r);
+#endif
+      ZYPP_THROW(nexcpt);
+    }
 
 #if NONREMOTE_DIRECTORY_YAST
   }
@@ -1338,10 +1344,16 @@ void MediaHandler::getDirInfo( filesystem::DirContent & retlist,
   {
 #endif
 
-  // readdir
-  int res = readdir( retlist, info.path(), dots );
-  if ( res )
-    ZYPP_THROW(MediaSystemException(url(), "readdir failed"));
+    // readdir
+    int res = readdir( retlist, info.path(), dots );
+    if ( res )
+    {
+	MediaSystemException nexcpt(url(), "readdir failed");
+#if NONREMOTE_DIRECTORY_YAST
+	nexcpt.remember(excpt_r);
+#endif
+	ZYPP_THROW(nexcpt);
+    }
 #if NONREMOTE_DIRECTORY_YAST
   }
 #endif
