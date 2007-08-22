@@ -78,7 +78,9 @@ namespace zypp
       {
         ZYPP_CAUGHT(e);
         ERR << "Unable to parse iso filename source media url" << std::endl;
-        ZYPP_THROW(MediaBadUrlException(_url));
+	MediaBadUrlException ne(_url);
+	ne.remember(e);
+	ZYPP_THROW(ne);
       }
       if( !src.isValid())
       {
@@ -162,10 +164,13 @@ namespace zypp
         {
           ZYPP_CAUGHT(e2);
         }
-        ZYPP_THROW(MediaMountException(
+
+	MediaMountException e3(
           "Unable to find iso filename on source media",
           _url.asString(), attachPoint().asString()
-        ));
+        );
+	e3.remember(e1);
+	ZYPP_THROW(e3);
       }
 
       Pathname isofile = manager.localPath(_parentId, _isofile);
@@ -288,7 +293,7 @@ namespace zypp
     bool MediaISO::getDoesFileExist( const Pathname & filename ) const
     {
       return MediaHandler::getDoesFileExist( filename );
-    }    
+    }
 
     //////////////////////////////////////////////////////////////////
   } // namespace media
