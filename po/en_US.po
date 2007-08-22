@@ -3008,7 +3008,7 @@ msgstr ""
 #: ../zypp/solver/detail/Resolver_problems.cc:871
 #, c-format
 msgid "Requirememt %s cannot be fulfilled."
-msgstr ""
+msgstr "Requirement %s cannot be fulfilled."
 
 #: ../zypp/solver/detail/ProblemSolutionIgnore.cc:54
 msgid "Ignore this requirement just here"
