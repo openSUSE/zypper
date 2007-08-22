@@ -105,7 +105,7 @@ namespace zypp {
      * longer needed.
      *
      * The temporary file is per default created in '/var/tmp' and named
-     ' TmpFile.XXXXXX', with XXXXXX replaced by a string which makes the
+     * 'TmpFile.XXXXXX', with XXXXXX replaced by a string which makes the
      * name unique. Different location and file prefix may be passed to
      * the ctor. TmpFile is created with mode 0600.
      *
@@ -150,7 +150,7 @@ namespace zypp {
      * delete it when no longer needed.
      *
      * The temporary directory is per default created in '/var/tmp' and
-     ' named TmpDir.XXXXXX', with XXXXXX replaced by a string which makes
+     * named 'TmpDir.XXXXXX', with XXXXXX replaced by a string which makes
      * the  name unique. Different location and file prefix may be passed
      * to the ctor. TmpDir is created with mode 0700.
      *
