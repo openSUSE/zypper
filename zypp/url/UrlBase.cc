@@ -23,13 +23,17 @@
 
 #include <iostream>
 
+// in the Estonian locale, a-z excludes t, for example. #302525
+// http://en.wikipedia.org/wiki/Estonian_alphabet
+#define a_zA_Z "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+
 // ---------------------------------------------------------------
 /*
 ** authority = //[user [:password] @ ] host [:port]
 **
 ** host      = hostname | IPv4 | "[" IPv6-IP "]" | "[v...]"
 */
-#define RX_VALID_SCHEME    "^[a-zA-Z][a-zA-Z0-9\\.+-]*$"
+#define RX_VALID_SCHEME    "^[" a_zA_Z "][" a_zA_Z "0-9\\.+-]*$"
 
 #define RX_VALID_PORT      "^[0-9]{1,5}$"
 
@@ -269,14 +273,14 @@ namespace zypp
       // n=no  (don't encode 2. slash if authority present)
       config("path_encode_slash2", "n");
 
-      config("rx_username",     "^([a-zA-Z0-9!$&'\\(\\)*+=,;~\\._-]|%[a-fA-F0-9]{2})+$");
-      config("rx_password",     "^([a-zA-Z0-9!$&'\\(\\)*+=,:;~\\._-]|%[a-fA-F0-9]{2})+$");
+      config("rx_username",     "^([" a_zA_Z "0-9!$&'\\(\\)*+=,;~\\._-]|%[a-fA-F0-9]{2})+$");
+      config("rx_password",     "^([" a_zA_Z "0-9!$&'\\(\\)*+=,:;~\\._-]|%[a-fA-F0-9]{2})+$");
 
-      config("rx_pathname",     "^([a-zA-Z0-9!$&'\\(\\)*+=,:@/~\\._-]|%[a-fA-F0-9]{2})+$");
-      config("rx_pathparams",   "^([a-zA-Z0-9!$&'\\(\\)*+=,:;@/~\\._-]|%[a-fA-F0-9]{2})+$");
+      config("rx_pathname",     "^([" a_zA_Z "0-9!$&'\\(\\)*+=,:@/~\\._-]|%[a-fA-F0-9]{2})+$");
+      config("rx_pathparams",   "^([" a_zA_Z "0-9!$&'\\(\\)*+=,:;@/~\\._-]|%[a-fA-F0-9]{2})+$");
 
-      config("rx_querystr",     "^([a-zA-Z0-9!$&'\\(\\)*+=,:;@/?~\\._-]|%[a-fA-F0-9]{2})+$");
-      config("rx_fragment",     "^([a-zA-Z0-9!$&'\\(\\)*+=,:;@/?~\\._-]|%[a-fA-F0-9]{2})+$");
+      config("rx_querystr",     "^([" a_zA_Z "0-9!$&'\\(\\)*+=,:;@/?~\\._-]|%[a-fA-F0-9]{2})+$");
+      config("rx_fragment",     "^([" a_zA_Z "0-9!$&'\\(\\)*+=,:;@/?~\\._-]|%[a-fA-F0-9]{2})+$");
     }
 
 

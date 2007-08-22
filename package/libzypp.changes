@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Aug 22 18:58:44 CEST 2007 - mvidner@suse.cz
+
+- Do not use "a-z" in regexes. Fixes "Invalid Url scheme 'http'" in
+  the Estonian locale (#302525).
+
+-------------------------------------------------------------------
 Wed Aug 22 17:59:39 CEST 2007 - aschnell@suse.de
 
 - added remembering of exception history at various places
