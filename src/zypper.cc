@@ -22,6 +22,7 @@
 
 #include <zypp/base/Logger.h>
 #include <zypp/repo/RepoException.h>
+#include <zypp/zypp_detail/ZYppReadOnlyHack.h>
 
 #include "zypper.h"
 #include "zypper-sources.h"
@@ -719,8 +720,8 @@ int one_command(int argc, char **argv)
 
   // here come commands that need the lock
   try {
-//    if (command == ZypperCommand::LIST_REPOS)
-//      zypp_readonly_hack::IWantIt (); // #247001
+    if (command == ZypperCommand::LIST_REPOS)
+      zypp_readonly_hack::IWantIt (); // #247001, #302152
 
     God = zypp::getZYpp();
   }

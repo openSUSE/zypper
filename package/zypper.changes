@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Aug 23 10:22:14 CEST 2007 - mvidner@suse.cz
+
+- Re-enabled the read-only lock for service-list (#302152).
+- 0.8.16
+
+-------------------------------------------------------------------
 Tue Aug 21 15:07:29 CEST 2007 - duncan@suse.de
 
 - fix invalid capability creation (#301690)
