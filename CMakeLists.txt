@@ -65,6 +65,7 @@ SET (CPACK_SOURCE_IGNORE_FILES
 "\\\\.#"
 "/#"
 "/build/"
+"/_build/"
 "/\\\\.git/"
 # used before
 "/CVS/"
