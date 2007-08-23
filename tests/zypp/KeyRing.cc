@@ -28,6 +28,8 @@ void keyring_test( const string &dir )
 {
   PublicKey key( Pathname(dir) + "public.asc" );
   
+  
+
  /** 
   * scenario #1
   * import a not trusted key
@@ -40,7 +42,7 @@ void keyring_test( const string &dir )
     // base sandbox for playing
     TmpDir tmp_dir;
     KeyRing keyring( tmp_dir.path() );
-    
+
     BOOST_CHECK_EQUAL( keyring.publicKeys().size(), (unsigned) 0 );
     BOOST_CHECK_EQUAL( keyring.trustedPublicKeys().size(), (unsigned) 0 );
   
@@ -189,6 +191,18 @@ void keyring_test( const string &dir )
   //keyring.importKey( key, true );
   //BOOST_CHECK_EQUAL( receiver._trusted_key_added_called, true );
   //BOOST_CHECK_EQUAL( keyring.trustedPublicKeys().size(), 1 );
+
+  /* check signature id can be extracted */
+  {
+    KeyRingTestReceiver keyring_callbacks;
+    KeyRingTestSignalReceiver receiver;
+    // base sandbox for playing
+    TmpDir tmp_dir;
+    KeyRing keyring( tmp_dir.path() );
+    
+    BOOST_CHECK_EQUAL( keyring.readSignatureKeyId( Pathname(dir) + "repomd.xml.asc" ), "BD61D89BD98821BE" );
+    BOOST_CHECK_EQUAL( keyring.readSignatureKeyId(Pathname()), "" );
+  }
 }
 
 test_suite*
