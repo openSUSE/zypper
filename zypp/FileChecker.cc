@@ -69,15 +69,20 @@ namespace zypp
 
   void CompositeFileChecker::operator()(const Pathname &file ) const
   {
+    MIL << _checkers.size() << " checkers" << endl;
     for ( list<FileChecker>::const_iterator it = _checkers.begin(); it != _checkers.end(); ++it )
-    {
+    { 
+      MIL << "checking..." << endl;
       (*it)(file);
     }
   }
   
   void CompositeFileChecker::add( const FileChecker &checker )
   {
+    //MIL << "||# " << _checkers.size() << endl;
     _checkers.push_back(checker);
+    //MIL << "||* " << _checkers.size() << endl;
+    
   }
 
   SignatureFileChecker::SignatureFileChecker( const Pathname &signature )

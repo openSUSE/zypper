@@ -145,6 +145,8 @@ namespace zypp
      * \throws FileCheckException if validation fails
      */
      void operator()( const Pathname &file ) const;
+
+     int checkersSize() const { return _checkers.size(); }
    private:
      std::list<FileChecker> _checkers;
    };

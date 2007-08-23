@@ -81,14 +81,16 @@ namespace zypp
     CompositeFileChecker composite;
     composite.add(ChecksumFileChecker(resource.checksum()));
     composite.add(checker);
-    enqueue(resource, composite);
+    FetcherJob job(resource);
+    job.checkers = composite;
+    _resources.push_back(job);
   }
 
   void Fetcher::Impl::enqueue( const OnMediaLocation &resource, const FileChecker &checker )
   {
     FetcherJob job(resource);
     job.checkers.add(checker);
-    _resources.push_back(resource);
+    _resources.push_back(job);
   }
 
   void Fetcher::Impl::reset()
@@ -189,6 +191,7 @@ namespace zypp
       Pathname localfile = dest_dir + (*it_res).location.filename();
       // call the checker function
       try {
+       MIL << "Checking " << localfile << endl;
        (*it_res).checkers(localfile);
       }
       catch ( const FileCheckException &e )
