@@ -260,7 +260,8 @@ class ResolverContext : public base::ReferenceCounted, private base::NonCopyable
 			   const PoolItem_Ref who,
 			   const Dep & capKind,
 			   bool *unneeded = NULL,
-			   bool *installed = NULL);
+			   bool *installed = NULL,
+			   const bool installInfoFlag = false);
     /**
      *\return \c true if the requirement is already fulfilled.
      *either by an installed item or the requirement is unneeded.

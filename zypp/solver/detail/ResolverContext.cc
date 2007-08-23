@@ -1506,14 +1506,16 @@ struct RequirementMet
     bool *installed;
     const PoolItem_Ref whoNeeds;
     const Dep cap;
+    const bool installInfoFlag;
 
-    RequirementMet (ResolverContext_Ptr ctx, bool *inst, const PoolItem_Ref who, const Dep & capKind)
+    RequirementMet (ResolverContext_Ptr ctx, bool *inst, const PoolItem_Ref who, const Dep & capKind, const bool instFlag)
 	: context (ctx)
 	, flag (false)
 	, unneeded( false )
 	, installed( inst )
 	, whoNeeds( who )
 	, cap( capKind )
+	, installInfoFlag( instFlag )
     { }
 
 
@@ -1541,6 +1543,8 @@ struct RequirementMet
 		// are reverse dependencies
 		info = new ResolverInfoNeededBy (whoNeeds);
 		info->addRelatedPoolItem (provider);
+		if (installInfoFlag)
+		    info->setInitialInstallation (true);
 	    }
 	    info->setCapability (match, cap);
 	    context->addInfo (info);	    
@@ -1562,9 +1566,10 @@ bool
 ResolverContext::requirementIsMet (const Capability & capability,
 				   const PoolItem_Ref who,
 				   const Dep & capKind,
-				   bool *unneeded, bool *installed)
+				   bool *unneeded, bool *installed,
+				   const bool installInfoFlag)
 {
-    RequirementMet info (this, installed, who, capKind);
+    RequirementMet info (this, installed, who, capKind, installInfoFlag);
 
     //    world()->foreachProviding (capability, requirement_met_cb, (void *)&info);
 
