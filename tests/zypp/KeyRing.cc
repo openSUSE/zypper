@@ -201,7 +201,9 @@ void keyring_test( const string &dir )
     KeyRing keyring( tmp_dir.path() );
     
     BOOST_CHECK_EQUAL( keyring.readSignatureKeyId( Pathname(dir) + "repomd.xml.asc" ), "BD61D89BD98821BE" );
-    BOOST_CHECK_EQUAL( keyring.readSignatureKeyId(Pathname()), "" );
+    BOOST_CHECK_THROW( keyring.readSignatureKeyId(Pathname()), Exception );
+    TmpFile tmp;
+    BOOST_CHECK_EQUAL( keyring.readSignatureKeyId(tmp.path()), "" );
   }
 }
 

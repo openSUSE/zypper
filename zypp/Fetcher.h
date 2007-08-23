@@ -82,7 +82,7 @@ namespace zypp
     *
     */
     void enqueue( const OnMediaLocation &resource,
-                  const FileChecker &checker = NullFileChecker() );
+                  const FileChecker &checker = FileChecker() );
     
     /**
     * Enqueue a object for transferal, they will not
@@ -96,7 +96,7 @@ namespace zypp
     * \todo FIXME implement checker == operator to avoid this.
     */
     void enqueueDigested( const OnMediaLocation &resource,
-                          const FileChecker &checker = NullFileChecker() );
+                          const FileChecker &checker = FileChecker() );
     
     /**
     * adds a directory to the list of directories

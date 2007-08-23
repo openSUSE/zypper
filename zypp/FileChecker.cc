@@ -29,6 +29,7 @@ namespace zypp
 
   void ChecksumFileChecker::operator()( const Pathname &file ) const
   {
+    MIL << "checking " << file << " file against checksum '" << _checksum << "'" << endl;
     callback::SendReport<DigestReport> report;
     CheckSum real_checksum( _checksum.type(), filesystem::checksum( file, _checksum.type() ));
     
@@ -64,16 +65,24 @@ namespace zypp
 
   void NullFileChecker::operator()(const Pathname &file ) const
   {
+    MIL << "+ null check on " << file << endl;
     return;
   }
 
   void CompositeFileChecker::operator()(const Pathname &file ) const
   {
-    MIL << _checkers.size() << " checkers" << endl;
+    //MIL << _checkers.size() << " checkers" << endl;
     for ( list<FileChecker>::const_iterator it = _checkers.begin(); it != _checkers.end(); ++it )
-    { 
-      MIL << "checking..." << endl;
-      (*it)(file);
+    {
+      if ( *it )
+      {
+        //MIL << "+ chk" << endl;
+        (*it)(file);
+      }
+      else
+      {
+        ERR << "Invalid checker" << endl;
+      }
     }
   }
   

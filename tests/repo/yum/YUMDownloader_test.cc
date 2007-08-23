@@ -7,11 +7,11 @@
 #include <boost/test/parameterized_test.hpp>
 #include <boost/test/unit_test_log.hpp>
 
+#include "zypp/base/Logger.h"
 #include "zypp/Url.h"
 #include "zypp/PathInfo.h"
 #include "zypp/TmpPath.h"
 #include "zypp/repo/yum/Downloader.h"
-
 
 using std::cout;
 using std::endl;
@@ -21,8 +21,13 @@ using namespace boost::unit_test;
 
 using namespace zypp::repo;
 
+#include "tests/zypp/KeyRingTestReceiver.h"
+
 void yum_download_test(const string &dir)
 {
+  KeyRingTestReceiver keyring_callbacks;
+  keyring_callbacks.answerTrustKey(true);
+
   Pathname p = dir + "/10.2-updates-subset";
   Url url("dir:" + p.asString());
   MediaSetAccess media(url);

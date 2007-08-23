@@ -13,6 +13,7 @@
 #include "zypp/TmpPath.h"
 #include "zypp/repo/susetags/Downloader.h"
 
+#include "tests/zypp/KeyRingTestReceiver.h"
 
 using std::cout;
 using std::endl;
@@ -24,6 +25,9 @@ using namespace zypp::repo;
 
 void susetags_download_test(const string &dir)
 {
+  KeyRingTestReceiver keyring_callbacks;
+  keyring_callbacks.answerTrustKey(true);
+
   Pathname p = dir + "/stable-x86-subset";
   Url url("dir:" + p.asString());
   MediaSetAccess media(url);
@@ -77,6 +81,9 @@ void susetags_download_test(const string &dir)
 
 void susetags_gz_download_test(const string &dir)
 {
+  KeyRingTestReceiver keyring_callbacks;
+  keyring_callbacks.answerTrustKey(true);
+
   Pathname p = dir + "/stable-x86-subset-gz";
   Url url("dir:" + p.asString());
   MediaSetAccess media(url);

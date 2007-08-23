@@ -534,7 +534,10 @@ namespace zypp
 
   string KeyRing::Impl::readSignatureKeyId(const Pathname &signature )
   {
-    MIL << "Deetermining key id if signature " << signature << endl;
+    if ( ! PathInfo(signature).isFile() )
+      ZYPP_THROW(Exception("Signature file " + signature.asString() + " not found"));
+
+    MIL << "Determining key id if signature " << signature << endl;
     // HACK create a tmp keyring with no keys
     TmpDir dir(_base_dir, "fake-keyring");
     TmpFile fakeData(_base_dir, "fake-data");
@@ -574,7 +577,17 @@ namespace zypp
           id = what[1];
         //dumpRegexpResults(what);
       }
+      else
+      {
+        MIL << "'" << line << "'" << endl;
+      }
     }
+
+    if ( count == 0 )
+    {
+      MIL << "no output" << endl;
+    }
+
     MIL << "Determined key id [" << id << "] for signature " << signature << endl;
     prog.close();
     return id;
