@@ -30,12 +30,12 @@ Wed Aug 22 16:52:09 CEST 2007 - schubi@suse.de
   proper errmessage.
 - Testcase : solution-tests/vendor-test.xml
 - r 6812
+- 3.18.4
 
 -------------------------------------------------------------------
-Tue Aug 21 15:59:48 CEST 2007 - dmacvicar@suse.de
+Tue Aug 21 15:38:08 CEST 2007 - dmacvicar@suse.de
 
-- Don't download files listed in tag HASH (#300982)
-- 3.18.4
+- ignore HASH key for download (#300982)
 
 -------------------------------------------------------------------
 Tue Aug 21 15:17:23 CEST 2007 - schubi@suse.de
