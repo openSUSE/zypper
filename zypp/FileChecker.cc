@@ -103,6 +103,12 @@ namespace zypp
   void SignatureFileChecker::operator()(const Pathname &file ) const
   {
     ZYpp::Ptr z = getZYpp();
+
+    if ( ! PathInfo(_signature).isExist())
+    {
+      ZYPP_THROW(FileCheckException("Signature " + _signature.asString() + " not found."));
+    }
+
     MIL << "checking " << file << " file validity using digital signature.." << endl;
     bool valid = z->keyRing()->verifyFileSignatureWorkflow( file, string(), _signature);
     if (!valid)
