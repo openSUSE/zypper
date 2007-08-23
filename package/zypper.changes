@@ -2,6 +2,7 @@
 Thu Aug 23 10:22:14 CEST 2007 - mvidner@suse.cz
 
 - Re-enabled the read-only lock for service-list (#302152).
+- Corrected cache paths in the man page (#302662).
 - 0.8.16
 
 -------------------------------------------------------------------
