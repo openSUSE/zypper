@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Thu Aug 23 17:21:55 CEST 2007 - mvidner@suse.cz
+
+- Shell stopped working at all; fixed (#301666).
+
+-------------------------------------------------------------------
 Thu Aug 23 10:22:14 CEST 2007 - mvidner@suse.cz
 
 - Re-enabled the read-only lock for service-list (#302152).

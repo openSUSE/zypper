@@ -1491,7 +1491,7 @@ void command_shell ()
     {
       try
       {
-        ZypperCommand command(command_str);
+	command = ZypperCommand(command_str);
         if (command == ZypperCommand::SHELL_QUIT)
           loop = false;
         else if (command == ZypperCommand::SHELL)
