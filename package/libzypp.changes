@@ -32,7 +32,7 @@ Wed Aug 22 16:52:09 CEST 2007 - schubi@suse.de
 - r 6812
 
 -------------------------------------------------------------------
-Tue Aug 21 15:59:48 CEST 2007 - duncan@suse.de
+Tue Aug 21 15:59:48 CEST 2007 - dmacvicar@suse.de
 
 - Don't download files listed in tag HASH (#300982)
 - 3.18.4
