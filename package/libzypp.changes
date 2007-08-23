@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Thu Aug 23 13:51:41 CEST 2007 - schubi@suse.de
+
+- Do not strip resolvables which have the same name but different kind 
+  (ResolverInfo*)
+- Flag info NEEDEDBY correctly if it will be used by freshen/supplement
+- r 6830 
+
+-------------------------------------------------------------------
 Wed Aug 22 18:58:44 CEST 2007 - mvidner@suse.cz
 
 - Do not use "a-z" in regexes. Fixes "Invalid Url scheme 'http'" in
