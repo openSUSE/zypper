@@ -41,6 +41,16 @@ static void migrate_sources( const Options &opt )
   
   Pathname source_p = opt.root + opt.sources_dir;
   
+  if ( string(getenv("YAST_IS_RUNNING")) == "instsys" )
+  {
+    MIL << "YaST is running in instsys. Not migrating old sources. YaST will do it." << endl;
+    return;
+  }
+  else
+  {
+    MIL << "YaST not running in instsys." << endl;
+  }
+
   if ( ! PathInfo(source_p).isExist() )
   {
     cout << "No sources to migrate." << endl;
