@@ -69,7 +69,7 @@ ResolverInfoNeededBy::dumpOn( std::ostream & os ) const
 	    break;
 	case Dep::FRESHENS_e:
 	    // Translator: all.%s = name of package,patch,...
-	    os << str::form (_("%s is freshened by %s"),
+	    os << str::form (_("%s will be evaluated for installation (freshened) by %s"),
 			     affected_str.str().c_str(),
 			     itemsToString(true).c_str());
 	    break;
@@ -119,7 +119,7 @@ ResolverInfoNeededBy::message( ) const
 	    break;
 	case Dep::FRESHENS_e:
 	    // Translator: all.%s = name of package,patch,...
-	    ret = str::form (_("%s is freshened by %s"),
+	    ret = str::form (_("%s will be evaluated for installation (freshened) by %s"),
 			     affected_str.c_str(),
 			     itemsToString(false).c_str());
 	    break;
