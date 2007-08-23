@@ -258,7 +258,7 @@ ResolverInfo::isAbout (PoolItem_Ref item) const
     if (!_affected)
 	return false;
 
-    return _affected->name() == item->name();
+    return _affected->name() == item->name() && _affected->kind() == item->kind();
 }
   
 ///////////////////////////////////////////////////////////////////
