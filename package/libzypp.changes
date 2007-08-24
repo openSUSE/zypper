@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Fri Aug 24 11:52:27 CEST 2007 - duncan@suse.de
+
+- don't run source migration if yast is running in
+  intsys mode (#297136)
+- signature and checksum verification fixes. Still pending
+  problem ZYpp getting no output from gpg when running from zypper.
+  (#302059)	
+
+-------------------------------------------------------------------
 Thu Aug 23 13:51:41 CEST 2007 - schubi@suse.de
 
 - Do not strip resolvables which have the same name but different kind 
