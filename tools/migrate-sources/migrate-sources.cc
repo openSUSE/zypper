@@ -35,12 +35,6 @@ struct Options
 
 static void migrate_sources( const Options &opt )
 {
-  zypp::zypp_readonly_hack::IWantIt();
-  ZYpp::Ptr Z = zypp::getZYpp();
-  RepoManager manager;
-  
-  Pathname source_p = opt.root + opt.sources_dir;
-  
   if ( string(getenv("YAST_IS_RUNNING")) == "instsys" )
   {
     MIL << "YaST is running in instsys. Not migrating old sources. YaST will do it." << endl;
@@ -50,6 +44,12 @@ static void migrate_sources( const Options &opt )
   {
     MIL << "YaST not running in instsys." << endl;
   }
+
+  zypp::zypp_readonly_hack::IWantIt();
+  ZYpp::Ptr Z = zypp::getZYpp();
+  RepoManager manager;
+  
+  Pathname source_p = opt.root + opt.sources_dir;
 
   if ( ! PathInfo(source_p).isExist() )
   {
