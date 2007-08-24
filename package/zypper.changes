@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Fri Aug 24 08:48:07 CEST 2007 - mvidner@suse.cz
+
+- Help now works in the shell (by Dominique Leuenberger, #299818).
+
+-------------------------------------------------------------------
 Thu Aug 23 17:21:55 CEST 2007 - mvidner@suse.cz
 
 - Shell stopped working at all; fixed (#301666).

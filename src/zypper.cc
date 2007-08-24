@@ -78,6 +78,29 @@ Url make_url (const string & url_s) {
 }
 
 bool ghelp = false;
+  static string help_commands = _(
+    "  Commands:\n"
+    "\thelp, ?\t\t\tHelp\n"
+    "\tshell, sh\t\tAccept multiple commands at once\n"
+    "\tinstall, in\t\tInstall packages or resolvables\n"
+    "\tremove, rm\t\tRemove packages or resolvables\n"
+    "\tsearch, se\t\tSearch for packages matching a pattern\n"
+    "\trepos, lr\t\tList all defined repositories.\n"
+    "\taddrepo, ar\t\tAdd a new repository\n"
+    "\tremoverepo, rr\t\tRemove specified repository\n"
+    "\trenamerepo, nr\t\tRename specified repository\n"
+    "\tmodifyrepo, mr\t\tModify specified repository\n"
+    "\trefresh, ref\t\tRefresh all repositories\n"
+    "\tpatch-check, pchk\tCheck for patches\n"
+    "\tpatches, pch\t\tList patches\n"
+    "\tlist-updates, lu\tList updates\n"
+    "\txml-updates, xu\t\tList updates and patches in xml format\n"
+    "\tupdate, up\t\tUpdate installed resolvables with newer versions.\n"
+    "\tinfo, if\t\tShow full information for packages\n"
+    "\tpatch-info\t\tShow full information for patches\n"
+    "\tsource-install, si\tInstall a source package\n"
+    "");
+
 
 /*
  * parses global options, returns the command
@@ -119,29 +142,6 @@ void process_globals(int argc, char **argv)
     "\t--non-interactive, -n\tDon't ask anything, use default answers automatically.\n"
     "\t--no-gpg-checks\t\tIgnore GPG check failures and continue.\n"
     "\t--root, -R <dir>\tOperate on a different root directory.\n");
-
-  static string help_commands = _(
-    "  Commands:\n"
-    "\thelp\t\t\tHelp\n"
-    "\tshell, sh\t\tAccept multiple commands at once\n"
-    "\tinstall, in\t\tInstall packages or resolvables\n"
-    "\tremove, rm\t\tRemove packages or resolvables\n"
-    "\tsearch, se\t\tSearch for packages matching a pattern\n"
-    "\trepos, lr\t\tList all defined repositories.\n"
-    "\taddrepo, ar\t\tAdd a new repository\n"
-    "\tremoverepo, rr\t\tRemove specified repository\n"
-    "\trenamerepo, nr\t\tRename specified repository\n"
-    "\tmodifyrepo, mr\t\tModify specified repository\n"
-    "\trefresh, ref\t\tRefresh all repositories\n"
-    "\tpatch-check, pchk\tCheck for patches\n"
-    "\tpatches, pch\t\tList patches\n"
-    "\tlist-updates, lu\tList updates\n"
-    "\txml-updates, xu\t\tList updates and patches in xml format\n"
-    "\tupdate, up\t\tUpdate installed resolvables with newer versions.\n"
-    "\tinfo, if\t\tShow full information for packages\n"
-    "\tpatch-info\t\tShow full information for patches\n"
-    "\tsource-install, si\tInstall a source package\n"
-    "");
 
   if (gopts.count("rug-compatible"))
     gSettings.is_rug_compatible = true;
@@ -256,7 +256,7 @@ int one_command(int argc, char **argv)
 
   if (command == ZypperCommand::HELP)
   {
-    //cout << help_global_options << endl << help_commands;
+    cout << help_commands;
   }
   else if (command == ZypperCommand::INSTALL) {
     static struct option install_options[] = {

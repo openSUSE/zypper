@@ -73,7 +73,7 @@ ZypperCommand::Command ZypperCommand::parse(const std::string & strval_r)
     _table["patches"] = _table["pch"] = ZypperCommand::SHOW_PATCHES_e;
     _table["xml-updates"] = _table["xu"] = ZypperCommand::XML_LIST_UPDATES_PATCHES_e;
 
-    _table["help"] = ZypperCommand::HELP_e;
+    _table["help"] = _table["?"] = ZypperCommand::HELP_e;
     _table["shell"] = _table["sh"] = ZypperCommand::SHELL_e;
     _table["quit"] = _table["exit"] = _table["\004"] = ZypperCommand::SHELL_QUIT_e;
     _table["NONE"] = _table["none"] = _table[""] = ZypperCommand::NONE_e;
