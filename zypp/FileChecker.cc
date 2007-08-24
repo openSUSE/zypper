@@ -113,7 +113,7 @@ namespace zypp
   {
     ZYpp::Ptr z = getZYpp();
 
-    if ( ! PathInfo(_signature).isExist())
+    if ( (! PathInfo(_signature).isExist()) && (!_signature.empty()))
     {
       ZYPP_THROW(FileCheckException("Signature " + _signature.asString() + " not found."));
     }
