@@ -527,7 +527,7 @@ XMLFilesBackend::writeFlagsInFile( const std::string &filename, const std::set<s
   }
   catch( std::exception &e )
   {
-    ZYPP_THROW (Exception( "Can't write flags to store") );
+    ZYPP_THROW(Exception("Can't write flags to store"));
   }
   updateTimestamp();
 }
@@ -672,7 +672,8 @@ std::list<ResObject::Ptr> XMLFilesBackend::resolvablesFromFile( std::string file
       break;
     }
     }
-    catch (const Exception & excpt_r) {
+    catch (const Exception & excpt_r)
+    {
 	ZYPP_CAUGHT( excpt_r );
 	WAR << "Skipping invalid patch file " << file_path << endl;
     }
@@ -872,7 +873,9 @@ XMLFilesBackend::createPatch( const zypp::parser::xmlstore::XMLPatchData & parse
   catch (const Exception & excpt_r)
   {
     ZYPP_CAUGHT(excpt_r);
-    ZYPP_THROW(Exception("Cannot create patch object"));
+    Exception nexcpt("Cannot create patch object");
+    nexcpt.remember(excpt_r);
+    ZYPP_THROW(nexcpt);
   }
   return 0L;
 }
@@ -909,7 +912,9 @@ XMLFilesBackend::createAtom( const zypp::parser::xmlstore::XMLPatchAtomData & pa
   catch (const Exception & excpt_r)
   {
     ZYPP_CAUGHT(excpt_r);
-    ZYPP_THROW(Exception("Cannot create atom object"));
+    Exception nexcpt("Cannot create atom object");
+    nexcpt.remember(excpt_r);
+    ZYPP_THROW(nexcpt);
   }
   return 0L;
 }
@@ -946,7 +951,9 @@ XMLFilesBackend::createMessage( const zypp::parser::xmlstore::XMLPatchMessageDat
   catch (const Exception & excpt_r)
   {
     ZYPP_CAUGHT(excpt_r);
-    ZYPP_THROW(Exception("Cannot create message object"));
+    Exception nexcpt("Cannot create message object");
+    nexcpt.remember(excpt_r);
+    ZYPP_THROW(nexcpt);
   }
   return 0L;
 }
@@ -985,7 +992,9 @@ XMLFilesBackend::createScript(const zypp::parser::xmlstore::XMLPatchScriptData &
   catch (const Exception & excpt_r)
   {
     ZYPP_CAUGHT(excpt_r);
-    ZYPP_THROW(Exception("Cannot create script object"));
+    Exception nexcpt("Cannot create script object");
+    nexcpt.remember(excpt_r);
+    ZYPP_THROW(nexcpt);
   }
   catch (const std::exception & excpt_r)
   {
@@ -1005,7 +1014,9 @@ XMLFilesBackend::createLanguage( const zypp::parser::xmlstore::XMLLanguageData &
   catch (const Exception & excpt_r)
   {
     ZYPP_CAUGHT(excpt_r);
-    ZYPP_THROW(Exception("Cannot create language object"));
+    Exception nexcpt("Cannot create language object");
+    nexcpt.remember(excpt_r);
+    ZYPP_THROW(nexcpt);
   }
   return 0L;
 }
@@ -1053,7 +1064,10 @@ XMLFilesBackend::createProduct( const zypp::parser::xmlstore::XMLProductData & p
       }
       catch ( const Exception &e )
       {
-        ZYPP_THROW(Exception("Error parsing update url: " + e.msg()));
+	ZYPP_CAUGHT(e);
+	Exception ne("Error parsing update url: " + e.msg());
+	ne.remember(e);
+	ZYPP_THROW(ne);
       }
     }
 
@@ -1068,7 +1082,10 @@ XMLFilesBackend::createProduct( const zypp::parser::xmlstore::XMLProductData & p
       }
       catch ( const Exception &e )
       {
-        ZYPP_THROW(Exception("Error parsing extra url: " + e.msg()));
+	ZYPP_CAUGHT(e);
+	Exception ne("Error parsing extra url: " + e.msg());
+	ne.remember(e);
+	ZYPP_THROW(ne);
       }
     }
 
@@ -1083,7 +1100,10 @@ XMLFilesBackend::createProduct( const zypp::parser::xmlstore::XMLProductData & p
       }
       catch ( const Exception &e )
       {
-        ZYPP_THROW(Exception("Error parsing optional url: " + e.msg()));
+	ZYPP_CAUGHT(e);
+	Exception ne("Error parsing optional url: " + e.msg());
+	ne.remember(e);
+	ZYPP_THROW(ne);
       }
     }
 
@@ -1150,7 +1170,9 @@ XMLFilesBackend::createProduct( const zypp::parser::xmlstore::XMLProductData & p
   catch (const Exception & excpt_r)
   {
     ZYPP_CAUGHT(excpt_r);
-    ZYPP_THROW(Exception("Cannot create product object"));
+    Exception nexcpt("Cannot create product object");
+    nexcpt.remember(excpt_r);
+    ZYPP_THROW(nexcpt);
   }
   return 0L;
 }
@@ -1192,7 +1214,9 @@ XMLFilesBackend::createPattern( const zypp::parser::xmlstore::XMLPatternData & p
   catch (const Exception & excpt_r)
   {
     ZYPP_CAUGHT(excpt_r);
-    ZYPP_THROW(Exception("Cannot create installation pattern object"));
+    Exception nexcpt("Cannot create installation pattern object");
+    nexcpt.remember(excpt_r);
+    ZYPP_THROW(nexcpt);
   }
   return 0L;
 }
@@ -1233,7 +1257,9 @@ XMLFilesBackend::createSelection( const zypp::parser::xmlstore::XMLPatternData &
   catch (const Exception & excpt_r)
   {
     ZYPP_CAUGHT(excpt_r);
-    ZYPP_THROW(Exception("Cannot create installation selection object"));
+    Exception nexcpt("Cannot create installation selection object");
+    nexcpt.remember(excpt_r);
+    ZYPP_THROW(nexcpt);
   }
   return 0L;
 }
