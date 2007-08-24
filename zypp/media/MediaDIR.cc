@@ -28,7 +28,7 @@ namespace zypp {
     //	CLASS NAME : MediaDIR
     //
     ///////////////////////////////////////////////////////////////////
-    
+
     ///////////////////////////////////////////////////////////////////
     //
     //
@@ -84,7 +84,7 @@ namespace zypp {
 	else
 	{
           ZYPP_THROW(MediaBadUrlException(url(),
-            "Specified path '" + url().getPathName() + "' is and not allowed as media source"
+            "Specified path '" + url().getPathName() + "' is not allowed as media source"
 	  ));
 	}
       }
@@ -178,7 +178,7 @@ namespace zypp {
     bool MediaDIR::getDoesFileExist( const Pathname & filename ) const
     {
       return MediaHandler::getDoesFileExist( filename );
-    }    
-    
+    }
+
   } // namespace media
 } // namespace zypp
