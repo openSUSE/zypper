@@ -66,8 +66,9 @@ DigestCallbacks digest_callbacks;
  */
 Url make_url (const string & url_s) {
   Url u;
+
   try {
-    u = Url (url_s);
+    u = Url( (url_s[0] == '/') ? string("dir:") + url_s : url_s );
   }
   catch ( const Exception & excpt_r ) {
     ZYPP_CAUGHT( excpt_r );
