@@ -43,7 +43,7 @@ namespace zypp
       }
       else
       {
-        ZYPP_THROW(FileCheckException("No checksum available"));
+        ZYPP_THROW( FileCheckException( "No checksum available for " + file.basename() ) );
       }
     }
     else
@@ -57,7 +57,7 @@ namespace zypp
         }
         else
         {
-          ZYPP_THROW(FileCheckException("Wrong checksum"));
+          ZYPP_THROW( FileCheckException( "Wrong checksum for "  + file.basename() ) );
         }
       }
     }
@@ -119,9 +119,9 @@ namespace zypp
     }
 
     MIL << "checking " << file << " file validity using digital signature.." << endl;
-    bool valid = z->keyRing()->verifyFileSignatureWorkflow( file, string(), _signature);
+    bool valid = z->keyRing()->verifyFileSignatureWorkflow( file, file.basename(), _signature);
     if (!valid)
-      ZYPP_THROW(FileCheckException("Signature verification failed"));
+      ZYPP_THROW( FileCheckException( "Signature verification failed for "  + file.basename() ) );
   }
 
   /******************************************************************
