@@ -11,6 +11,7 @@
 */
 #include <iostream>
 #include "zypp/base/Logger.h"
+#include "zypp/ZConfig.h"
 
 #include "zypp/parser/susetags/PackagesFileReader.h"
 #include "zypp/parser/susetags/FileReaderBaseImpl.h"
@@ -36,9 +37,12 @@ namespace zypp
       /** PackagesFileReader implementation. */
       class PackagesFileReader::Impl : public BaseImpl
       {
+	private:
+	  Arch _sysarch;
 	public:
 	  Impl( const PackagesFileReader & parent_r )
 	  : BaseImpl( parent_r )
+	  , _sysarch( ZConfig::instance().systemArchitecture() )
 	  {}
 
 	  virtual ~Impl()
@@ -91,13 +95,25 @@ namespace zypp
 	    }
 	    else
 	    {
-	      ++_c_pkg;
-	      _data = _pkgData = new data::Package;
+	      Arch pkgarch( words[3] );
+	      if ( pkgarch.compatibleWith( _sysarch ) )
+	      {
+	        ++_c_pkg;
+	        _data = _pkgData = new data::Package;
+	        _data->arch = Arch( words[3] );
+	      }
+	      else
+	      {
+		_data = _pkgData = 0;
+	      }
 	      _srcpkgData = 0;
-	      _data->arch = Arch( words[3] );
 	    }
-	    _data->name    = words[0];
-	    _data->edition = Edition( words[1],words[2] );
+
+	    if (_data)
+	    {
+	      _data->name    = words[0];
+	      _data->edition = Edition( words[1],words[2] );
+	    }
 	  }
 
 	  /** Consume =Cks:. */
