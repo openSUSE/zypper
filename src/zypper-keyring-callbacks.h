@@ -108,7 +108,7 @@ namespace zypp {
               % file % keyid % keyname % fingerprint << endl;
           cerr << boost::format(
               _("Warning: Ignoring failed signature verification for %s"
-                " with public key id %s, %s, fingerprint %s!"
+                " with public key id %s, %s, fingerprint %s!"			// FIXME: LINEBREAK!
                 " Double-check this is not caused by some malicious"
                 " changes in the file!"))
               %file % keyid % keyname % fingerprint << endl;
@@ -117,8 +117,8 @@ namespace zypp {
 
         std::string question = boost::str(boost::format(
             _("Signature verification failed for %s"
-              " with public key id %s, %s, fingerprint %s."
-              " Warning: This might be caused by a malicious change in the file!"
+              " with public key id %s, %s, fingerprint %s."			// FIXME: LINEBREAK!
+              " Warning: This might be caused by a malicious change in the file!"			// FIXME: LINEBREAK!
               " Continuing is risky! Continue anyway?"))
             % file % keyid % keyname % fingerprint);
         return read_bool_answer(question, false);
@@ -157,7 +157,7 @@ namespace zypp {
 
 	std::string question = boost::str(boost::format(
 	    _("Digest verification failed for %s. Expected %s, found %s."))
-	    % file % requested % found) + " " + _("Continue?");
+	    % file.basename() % requested % found) + " " + _("Continue?");
         return read_bool_answer(question, false);
       }
     };
