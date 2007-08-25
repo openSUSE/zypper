@@ -59,13 +59,28 @@ msgstr "Megbízik a következő kulcsazonosítóban: %s, %s, ujjlenyomat: %s?"
 
 #: ../src/zypper-keyring-callbacks.h:110
 #, c-format
-msgid "Warning: Ignoring failed signature verification for %s with public key id %s, %s, fingerprint %s! Double-check this is not caused by some malicious changes in the file!"
-msgstr "Figyelem! A(z) %s meghiúsult aláírás-ellenőrzése (nyilvános kulcsazonosító: %s, %s; ujjlenyomat: %s) figyelmen kívül marad. Ellenőrizze, hogy ezt nem a fájl ártó szándékú módosítása okozta."
+msgid "Warning: Ignoring failed signature verification for %s with public key id %s, %s, fingerprint %s!"
+msgstr "Figyelem! A(z) %s meghiúsult aláírás-ellenőrzése (nyilvános kulcsazonosító: %s, %s; ujjlenyomat: %s) figyelmen kívül marad."
+
+#: ../src/zypper-keyring-callbacks.h:110
+#, c-format
+msgid "Double-check this is not caused by some malicious changes in the file!"
+msgstr "Ellenőrizze, hogy ezt nem a fájl ártó szándékú módosítása okozta."
 
 #: ../src/zypper-keyring-callbacks.h:119
 #, c-format
-msgid "Signature verification failed for %s with public key id %s, %s, fingerprint %s. Warning: this might be caused by a malicious change in the file! Continuing is risky! Continue anyway?"
-msgstr "A(z) %s aláírás-ellenőrzése meghiúsult (nyilvános kulcsazonosító: %s, %s; ujjlenyomat: %s). Figyelem: ezt a fájl ártó szándékú módosítása is okozhatta! A folytatás kockázatos. Mindenképp folytatja?"
+msgid "Signature verification failed for %s with public key id %s, %s, fingerprint %s."
+msgstr "A(z) %s aláírás-ellenőrzése meghiúsult (nyilvános kulcsazonosító: %s, %s; ujjlenyomat: %s)."
+
+#: ../src/zypper-keyring-callbacks.h:119
+#, c-format
+msgid "Warning: this might be caused by a malicious change in the file!"
+msgstr "Figyelem: ezt a fájl ártó szándékú módosítása is okozhatta!"
+
+#: ../src/zypper-keyring-callbacks.h:119
+#, c-format
+msgid "Continuing is risky! Continue anyway?"
+msgstr "A folytatás kockázatos. Mindenképp folytatja?"
 
 #: ../src/zypper-keyring-callbacks.h:133
 #, c-format

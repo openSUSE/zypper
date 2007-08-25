@@ -55,12 +55,27 @@ msgstr "Kas soovid usaldada võtit, mille id on %s, %s, ja sõrmejälg %s"
 
 #: ../src/zypper-keyring-callbacks.h:110
 #, c-format
-msgid "Warning: Ignoring failed signature verification for %s with public key id %s, %s, fingerprint %s! Double-check this is not caused by some malicious changes in the file!"
+msgid "Warning: Ignoring failed signature verification for %s with public key id %s, %s, fingerprint %s!"
+msgstr ""
+
+#: ../src/zypper-keyring-callbacks.h:110
+#, c-format
+msgid "Double-check this is not caused by some malicious changes in the file!"
 msgstr ""
 
 #: ../src/zypper-keyring-callbacks.h:119
 #, c-format
-msgid "Signature verification failed for %s with public key id %s, %s, fingerprint %s. Warning: this might be caused by a malicious change in the file! Continuing is risky! Continue anyway?"
+msgid "Signature verification failed for %s with public key id %s, %s, fingerprint %s."
+msgstr ""
+
+#: ../src/zypper-keyring-callbacks.h:119
+#, c-format
+msgid "Warning: this might be caused by a malicious change in the file!"
+msgstr ""
+
+#: ../src/zypper-keyring-callbacks.h:119
+#, c-format
+msgid "Continuing is risky! Continue anyway?"
 msgstr ""
 
 #: ../src/zypper-keyring-callbacks.h:133

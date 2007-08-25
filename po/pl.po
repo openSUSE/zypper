@@ -55,13 +55,28 @@ msgstr "Czy ufać kluczowi: id: %s, %s, odcisk: %s"
 
 #: ../src/zypper-keyring-callbacks.h:110
 #, c-format
-msgid "Warning: Ignoring failed signature verification for %s with public key id %s, %s, fingerprint %s! Double-check this is not caused by some malicious changes in the file!"
-msgstr "Uwaga: zignorowano nieudaną weryfikację sygnatury dla %s. ID klucza: %s, %s odcisk: %s. Proszę jeszcze raz skontrolować czy nie jest to spowodowane przez niebezpieczne zmiany w pliku."
+msgid "Warning: Ignoring failed signature verification for %s with public key id %s, %s, fingerprint %s!"
+msgstr "Uwaga: zignorowano nieudaną weryfikację sygnatury dla %s. ID klucza: %s, %s odcisk: %s."
+
+#: ../src/zypper-keyring-callbacks.h:110
+#, c-format
+msgid "Double-check this is not caused by some malicious changes in the file!"
+msgstr "Proszę jeszcze raz skontrolować czy nie jest to spowodowane przez niebezpieczne zmiany w pliku."
 
 #: ../src/zypper-keyring-callbacks.h:119
 #, c-format
-msgid "Signature verification failed for %s with public key id %s, %s, fingerprint %s. Warning: this might be caused by a malicious change in the file! Continuing is risky! Continue anyway?"
-msgstr "Nieudana weryfikacja sygnatury dla %s. ID klucza: %s, %s, odcisk: %s. Uwaga: to może być spowodowane przez niebezpieczne zmiany w pliku. Kontynuacja wiąże się z ryzykiem. Kontynuować?"
+msgid "Signature verification failed for %s with public key id %s, %s, fingerprint %s."
+msgstr "Nieudana weryfikacja sygnatury dla %s. ID klucza: %s, %s, odcisk: %s."
+
+#: ../src/zypper-keyring-callbacks.h:119
+#, c-format
+msgid "Warning: this might be caused by a malicious change in the file!"
+msgstr "Uwaga: to może być spowodowane przez niebezpieczne zmiany w pliku"
+
+#: ../src/zypper-keyring-callbacks.h:119
+#, c-format
+msgid "Continuing is risky! Continue anyway?"
+msgstr "Kontynuacja wiąże się z ryzykiem. Kontynuować?"
 
 #: ../src/zypper-keyring-callbacks.h:133
 #, c-format
