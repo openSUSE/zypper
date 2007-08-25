@@ -382,7 +382,7 @@ namespace zypp
 		 pos != std::string::npos;
 		 pos = value.find("%a") )
 	    {
-	      value.replace( pos, 2, ZConfig::instance().systemArchitecture().asString() );
+	      value.replace( pos, 2, sysarch.asString() );
 	    }
 	    try
 	    {
