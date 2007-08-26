@@ -10,6 +10,7 @@
  * Implementation of primary.xml.gz file reader.
  */
 #include "zypp/base/Logger.h"
+#include "zypp/ZConfig.h"
 
 #include "zypp/parser/xml/Reader.h"
 #include "zypp/data/ResolvableData.h"
@@ -87,6 +88,11 @@ namespace zypp
      * Progress reporting object.
      */
     ProgressData _ticks;
+
+    /**
+     * system architecture, to filter out incompatible packages
+     */
+    Arch _sysarch;
   };
   ///////////////////////////////////////////////////////////////////////////
 
@@ -97,6 +103,7 @@ namespace zypp
       const ProgressData::ReceiverFnc & progress)
     :
       _callback(callback)
+    , _sysarch( ZConfig::instance().systemArchitecture() )
   {
     _ticks.sendTo(progress);
 
@@ -126,7 +133,7 @@ namespace zypp
         return true;
       }
 
-      // xpath: /metdata/package (+)
+      // xpath: /metadata/package (+)
       if (reader_r->name() == "package")
       {
         tag(tag_package);
@@ -139,12 +146,14 @@ namespace zypp
 
     else if ( reader_r->nodeType() == XML_READER_TYPE_END_ELEMENT )
     {
-      // xpath: /metdata/package (+)
+      // xpath: /metadata/package (+)
       if (reader_r->name() == "package")
       {
-        if (_package && _callback)
+        if (_package && _callback
+	    && _package->arch.compatibleWith( _sysarch ))
+	{
           _callback(handoutPackage());
-
+	}
         if (!_ticks.incr())
           ZYPP_THROW(AbortRequestException());
 
