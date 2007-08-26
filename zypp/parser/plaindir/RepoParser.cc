@@ -136,7 +136,10 @@ data::Package_Ptr makePackageDataFromHeader( const RpmHeader::constPtr header,
 //    TranslatedText delnotify;
 //    RecordId  repository;
 
-//       Location repositoryLocation;
+//      Location repositoryLocation;
+
+  pkg->repositoryLocation = location;
+
 //       std::string group;
 //       std::set<std::string> keywords;
 //       Changelog changelog;
