@@ -1,4 +1,16 @@
 -------------------------------------------------------------------
+Sun Aug 26 15:49:27 CEST 2007 - kkaempf@suse.de
+
+- pass location to plaindir package (#303751)
+- Add name of file in question to checksum/signature related
+  exceptions.
+- pass basename of file to verifyFileSignatureWorkflow (instead of
+  empty string).
+- filter out incompatible architectures when parsing sustags
+  repos (first half of #301286)
+- r 6882
+
+-------------------------------------------------------------------
 Fri Aug 24 11:52:27 CEST 2007 - duncan@suse.de
 
 - don't run source migration if yast is running in
