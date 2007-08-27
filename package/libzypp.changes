@@ -1,4 +1,16 @@
 -------------------------------------------------------------------
+Mon Aug 27 23:52:41 CEST 2007 - dmacvicar@suse.de
+
+- following behaviour for setPartitions
+  - if they are not set, they are detected
+  - if they are set, that value is used.
+  - if value set or detected is empty, all disk usage
+    information is read. Otherwise just values in those
+    mount points.
+    Should work for installation as long as detectPartitions
+    is empty at installation.(#293039)
+
+-------------------------------------------------------------------
 Mon Aug 27 17:08:41 CEST 2007 - kkaempf@suse.de
 
 - Add ZConfig::overrideSystemArchitecture() to override zypp arch
