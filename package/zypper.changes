@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Mon Aug 27 15:10:43 CEST 2007 - jkupec@suse.cz
+
+- translations update
+- mark [y/n] for translation (#304650)
+- r6894
+
+-------------------------------------------------------------------
 Fri Aug 24 08:48:07 CEST 2007 - mvidner@suse.cz
 
 - Help now works in the shell (by Dominique Leuenberger, #299818).
