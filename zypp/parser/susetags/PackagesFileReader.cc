@@ -95,25 +95,13 @@ namespace zypp
 	    }
 	    else
 	    {
-	      Arch pkgarch( words[3] );
-	      if ( pkgarch.compatibleWith( _sysarch ) )
-	      {
-	        ++_c_pkg;
-	        _data = _pkgData = new data::Package;
-	        _data->arch = Arch( words[3] );
-	      }
-	      else
-	      {
-		_data = _pkgData = 0;
-	      }
+	      ++_c_pkg;
+	      _data = _pkgData = new data::Package;
 	      _srcpkgData = 0;
+	      _data->arch = Arch( words[3] );
 	    }
-
-	    if (_data)
-	    {
-	      _data->name    = words[0];
-	      _data->edition = Edition( words[1],words[2] );
-	    }
+	    _data->name    = words[0];
+	    _data->edition = Edition( words[1],words[2] );
 	  }
 
 	  /** Consume =Cks:. */
@@ -364,7 +352,11 @@ namespace zypp
 	  if ( _pimpl->hasPackage() )
 	  {
 	    if ( _pkgConsumer )
-	      _pkgConsumer( _pimpl->handoutPackage() );
+	    {
+	      data::Package_Ptr ptr = _pimpl->handoutPackage();
+	      if (ptr && ptr->arch.compatibleWith( _sysarch ))
+		_pkgConsumer( ptr );
+	    }
 	  }
 	  else if ( _pimpl->hasSourcepackage() )
 	  {
@@ -422,7 +414,11 @@ namespace zypp
 	if ( _pimpl->hasPackage() )
 	{
 	  if ( _pkgConsumer )
-	    _pkgConsumer( _pimpl->handoutPackage() );
+	  {
+	    data::Package_Ptr ptr = _pimpl->handoutPackage();
+	    if (ptr && ptr->arch.compatibleWith( _sysarch ))
+	      _pkgConsumer( ptr );
+	  }
 	}
 	else if ( _pimpl->hasSourcepackage() )
 	{
