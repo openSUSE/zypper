@@ -47,10 +47,6 @@ namespace zypp
 	  {
             _mounts = getZYpp()->getPartitions();
             
-            // try to detect partitions if empty
-            if (_mounts.empty() )
-              _mounts =  DiskUsageCounter::detectMountPoints();
-            
             for ( DiskUsageCounter::MountPointSet::const_iterator it = _mounts.begin();
                   it != _mounts.end();
                   ++ it )

@@ -133,7 +133,6 @@ namespace zypp
     , _target(0)
     , _resolver( new Resolver(_pool.accessor()) )
     , _architecture( defaultArchitecture() )
-    , _disk_usage()
     {
       MIL << "libzypp: " << VERSION << " built " << __DATE__ << " " <<  __TIME__ << endl;
       MIL << "defaultTextLocale: '" << _textLocale << "'" << endl;
@@ -180,13 +179,21 @@ namespace zypp
     }
 
     DiskUsageCounter::MountPointSet ZYppImpl::diskUsage()
-    { return _disk_usage.disk_usage(pool()); }
+    { return _disk_usage->disk_usage(pool()); }
 
     void ZYppImpl::setPartitions(const DiskUsageCounter::MountPointSet &mp)
-    { _disk_usage.setMountPoints(mp); }
+    {
+      _disk_usage.reset(new DiskUsageCounter());
+      _disk_usage->setMountPoints(mp);
+    }
 
     DiskUsageCounter::MountPointSet ZYppImpl::getPartitions() const
-    { return _disk_usage.getMountPoints(); }
+    {
+      if (_disk_usage)
+        return _disk_usage->getMountPoints();
+      else
+        return DiskUsageCounter::detectMountPoints();
+    }
 
     //------------------------------------------------------------------------
     // target

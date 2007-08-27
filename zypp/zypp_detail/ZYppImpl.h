@@ -164,7 +164,7 @@ namespace zypp
       /** */
       Pathname _home_path;
       /** defined mount points, used for disk usage counting */
-      DiskUsageCounter _disk_usage;
+      shared_ptr<DiskUsageCounter> _disk_usage;
     };
     ///////////////////////////////////////////////////////////////////
 
