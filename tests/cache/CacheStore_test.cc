@@ -27,6 +27,8 @@
 #include "zypp/Pattern.h"
 #include "zypp/Product.h"
 #include "zypp/Patch.h"
+#include "zypp/DiskUsageCounter.h"
+#include "zypp/ZYppFactory.h"
 #include "zypp/ZConfig.h"
 
 #include "zypp/detail/ImplConnect.h"
