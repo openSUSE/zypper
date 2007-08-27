@@ -1,4 +1,16 @@
 -------------------------------------------------------------------
+Mon Aug 27 15:53:52 CEST 2007 - schubi@suse.de
+
+-The solver generate an establish call for all
+ resolvables which has filesystemcaps if there is not a valid result from a
+ former solver run available. This covers:
+ * Initial solver run
+ * Changing of filesystem whithin a workflow, cause the solver results will
+   be reset if the filesystem dependencies have been changed
+ Bug 271912
+- r 6951 
+
+-------------------------------------------------------------------
 Sun Aug 26 15:49:27 CEST 2007 - kkaempf@suse.de
 
 - pass location to plaindir package (#303751)
