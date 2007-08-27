@@ -297,7 +297,7 @@ void cache_write_yum_test(const string &dir)
   ResStore dbres = get_resolvables( alias, tmpdir);;;
   //read_resolvables( alias, tmpdir, std::inserter(dbres, dbres.end()));
   MIL << dbres.size() << " resolvables" << endl;
-  BOOST_CHECK_EQUAL( dbres.size(), (unsigned)48);
+  BOOST_CHECK_EQUAL( dbres.size(), (unsigned)35);
 
   bool found_glabels_i586 = false;
   for ( ResStore::const_iterator it = dbres.begin();
@@ -422,7 +422,8 @@ init_unit_test_suite( int argc, char *argv[] )
   mounts.insert( DiskUsageCounter::MountPoint("/foo") );
   mounts.insert( DiskUsageCounter::MountPoint("/bar") );
   getZYpp()->setPartitions(mounts);
-  
+  getZYpp()->setArchitecture(Arch("i686"));
+
   test->add(BOOST_PARAM_TEST_CASE(&cache_write_susetags_normal_test,
                                  (std::string const*)params, params+1));
   test->add(BOOST_PARAM_TEST_CASE(&cache_write_susetags_gz_test,
