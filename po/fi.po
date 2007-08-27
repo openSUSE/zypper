@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-07-19 15:00+0200\n"
-"PO-Revision-Date: 2007-07-28 16:45+0300\n"
+"POT-Creation-Date: 2007-08-17 15:18+0200\n"
+"PO-Revision-Date: 2007-08-25 15:22+0300\n"
 "Last-Translator: Jyri Palokangas <jmp@opensuse.fi>\n"
 "Language-Team: Suomi <fi@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -37,7 +37,7 @@ msgstr "Lisätäänkö avain %s luotettuihin?"
 
 #: ../src/zypper-keyring-callbacks.h:66
 #, c-format
-msgid "Warnging: Accepting file %s signed with an unknown key %s."
+msgid "Warning: Accepting file %s signed with an unknown key %s."
 msgstr "Varoitus: Hyväksyttiin tiedosto %s, joka on allekirjoitettu tuntemattomalla avaimella %s."
 
 #: ../src/zypper-keyring-callbacks.h:73
@@ -57,28 +57,13 @@ msgstr "Luotetaanko avaimeen %s, %s, tunnus %s"
 
 #: ../src/zypper-keyring-callbacks.h:110
 #, c-format
-msgid "Warning: Ignoring failed signature verification for %s with public key id %s, %s, fingerprint %s!"
-msgstr "Varoitus: %s ei läpäissyt aitoustarkistusta julkisella avaimella %s, %s, tunniste %s!"
-
-#: ../src/zypper-keyring-callbacks.h:110
-#, c-format
-msgid "Double-check this is not caused by some malicious changes in the file!"
-msgstr "Tämä ei johdu pahanlaatuisesista muutoksista tiedostossa!."
+msgid "Warning: Ignoring failed signature verification for %s with public key id %s, %s, fingerprint %s! Double-check this is not caused by some malicious changes in the file!"
+msgstr "Varoitus: %s ei läpäissyt aitoustarkistusta julkisella avaimella %s, %s, tunniste %s! Tämä ei johdu pahanlaatuisista muutoksista tiedostossa!"
 
 #: ../src/zypper-keyring-callbacks.h:119
 #, c-format
-msgid "Signature verification failed for %s with public key id %s, %s, fingerprint %s."
-msgstr "%s ei läpäissyt aitoustarkistusta julkisella avaimella %s, %s, tunniste %s."
-
-#: ../src/zypper-keyring-callbacks.h:119
-#, c-format
-msgid "Warning: this might be caused by a malicious change in the file!"
-msgstr "Varoitus: Tämä saattaajohtua pahanaaltuisista muutoksista tiedostossa ja jatkaminen on riskialtista!"
-
-#: ../src/zypper-keyring-callbacks.h:119
-#, c-format
-msgid "Continuing is risky! Continue anyway?"
-msgstr "Jatketaanko silti?"
+msgid "Signature verification failed for %s with public key id %s, %s, fingerprint %s. Warning: This might be caused by a malicious change in the file! Continuing is risky! Continue anyway?"
+msgstr "%s ei läpäissyt aitoustarkistusta julkisella avaimella %s, %s, tunniste %s. Varoitus: Tämä saattaa johtua pahanlaatuisista muutoksista tiedostossa ja jatkaminen saattaa johtaa ongelmiin! Jatketaanko silti?"
 
 #: ../src/zypper-keyring-callbacks.h:133
 #, c-format
@@ -87,7 +72,7 @@ msgstr "Ei koostetta tiedostolle %s."
 
 #. there are resolvables to install/uninstall
 #: ../src/zypper-keyring-callbacks.h:133 ../src/zypper-keyring-callbacks.h:141
-#: ../src/zypper-keyring-callbacks.h:160 ../src/zypper-misc.cc:922
+#: ../src/zypper-keyring-callbacks.h:160 ../src/zypper-misc.cc:1369
 msgid "Continue?"
 msgstr "Jatketaanko?"
 
@@ -104,210 +89,194 @@ msgstr "Jätettiin huomioimatta epäonnistunut %s koostetarkistus (odotettiin %s
 #: ../src/zypper-keyring-callbacks.h:159
 #, c-format
 msgid "Digest verification failed for %s. Expected %s, found %s."
-msgstr "%s koostetarkistus epäonnistui. Odotetttiin %s, saatiin %s."
+msgstr "%s koostetarkistus epäonnistui. Odotettiin %s, saatiin %s."
 
-#: ../src/zypper-misc.cc:33
+#: ../src/zypper-misc.cc:41
 msgid "Initializing Target"
 msgstr "Alustetaan kohdetta"
 
+#: ../src/zypper-misc.cc:270
+#, c-format
+msgid "Cannot parse capability '%s'."
+msgstr "Ei voitu koostaa päiväystä '%s'."
+
 #. TranslatorExplanation e.g. "package 'pornview' not found"
-#: ../src/zypper-misc.cc:148
+#: ../src/zypper-misc.cc:294
 #, c-format
 msgid "%s '%s' not found"
 msgstr "%s '%s' Ei löytynyt"
 
-#: ../src/zypper-misc.cc:157
+#: ../src/zypper-misc.cc:303
 #, c-format
 msgid "skipping %s '%s' (already installed)"
 msgstr "Ohitettiin %s '%s' (on jo asennettu)"
 
-#: ../src/zypper-misc.cc:163
+#: ../src/zypper-misc.cc:309
 #, c-format
 msgid "Failed to add '%s' to the list of packages to be installed."
-msgstr "Kohteen '%s' merkitseminen asennettavaksi epäonnistui"
+msgstr "Kohteen '%s' merkitseminen asennettavaksi epäonnistui."
 
-#: ../src/zypper-misc.cc:183
+#: ../src/zypper-misc.cc:329
 #, c-format
 msgid "Failed to add '%s' to the list of packages to be removed."
 msgstr "Kohteen '%s' merkitseminen poistettavaksi epäonnistui."
 
 #. TranslatorExplanation These are reasons for various failures.
-#: ../src/zypper-misc.cc:209 ../src/zypper-callbacks.h:37
+#: ../src/zypper-misc.cc:355 ../src/zypper-callbacks.h:41
 msgid "Not found"
 msgstr "Ei löytynyt"
 
-#: ../src/zypper-misc.cc:229 ../src/zypper-misc.cc:297
+#: ../src/zypper-misc.cc:421 ../src/zypper-misc.cc:493
 msgid "Problem: "
 msgstr "Ongelma: "
 
 #. TranslatorExplanation %d is the solution number
-#: ../src/zypper-misc.cc:242
+#: ../src/zypper-misc.cc:434
 #, c-format
 msgid " Solution %d: "
 msgstr " Ratkaisu %d: "
 
 #. input prompt
-#: ../src/zypper-misc.cc:254
+#: ../src/zypper-misc.cc:446
 msgid "number, (r)etry or (c)ancel> "
 msgstr "numero, y(r)itä uudelleen tai k(e)skeytä> "
 
 #. translators: corresponds to (r)etry
-#: ../src/zypper-misc.cc:262
+#: ../src/zypper-misc.cc:454
 msgid "r"
 msgstr "r"
 
 #. translators: corresponds to (c)ancel
-#: ../src/zypper-misc.cc:265
+#: ../src/zypper-misc.cc:457
 msgid "c"
 msgstr "e"
 
-#: ../src/zypper-misc.cc:271
+#: ../src/zypper-misc.cc:463
 #, c-format
 msgid "Applying solution %s"
 msgstr "Ratkaistaan %s"
 
-#: ../src/zypper-misc.cc:294
+#: ../src/zypper-misc.cc:486
 #, c-format
 msgid "%s Problems:"
 msgstr "%s ongelmat:"
 
-#. nothing to do;
-#: ../src/zypper-misc.cc:323
-msgid "Summary:"
-msgstr "Yhteenveto:"
+#: ../src/zypper-misc.cc:489
+msgid "Specified capability not found"
+msgstr "Annettua määritystä ei löydetty"
 
-#: ../src/zypper-misc.cc:346
-msgid "<install>   "
-msgstr "<asenna>   "
-
-#: ../src/zypper-misc.cc:348
-msgid "<uninstall> "
-msgstr "<poista>   "
-
-#: ../src/zypper-misc.cc:353
+#: ../src/zypper-misc.cc:620 ../src/zypper-misc.cc:622
 msgid "Nothing to do."
 msgstr "Ei mitään tehtävää."
 
-#: ../src/zypper-misc.cc:422
+#: ../src/zypper-misc.cc:736
 #, c-format
-msgid "Repository '%s' not cached. Caching..."
-msgstr "Asennuslähdettä '%s' ei löydy välimuistista. Noudetaan..."
+msgid "Overall download size: %s."
+msgstr "Ladattava määrä yhteensä: %s."
 
-#. TranslatorExplanation speaking of a repository
-#: ../src/zypper-misc.cc:427
+#. TrasnlatorExplanation %s will be substituted by a byte count e.g. 212 K
+#: ../src/zypper-misc.cc:740
 #, c-format
-msgid "Reading repository %s..."
-msgstr "Luetaan asennuslähdettä %s..."
+msgid "After the operation, additional %s will be used."
+msgstr "Operaation jälkeen tilaa on %s vähemmän."
 
-#: ../src/zypper-misc.cc:431
+#. TrasnlatorExplanation %s will be substituted by a byte count e.g. 212 K
+#: ../src/zypper-misc.cc:748
 #, c-format
-msgid "(%d resolvables found)"
-msgstr "(löydettiin %d osaa)"
+msgid "After the operation, %s will be freed."
+msgstr "Operaation jälkeen tilaa on %s enemmän."
 
-#: ../src/zypper-misc.cc:439
+#: ../src/zypper-misc.cc:795
 #, c-format
-msgid "Problem loading data from '%s'"
-msgstr "Ongelma ladattaessa tietoja '%s'"
+msgid "%s items locked"
+msgstr "%s kohdetta lukittu"
 
-#: ../src/zypper-misc.cc:442
-#, c-format
-msgid "Resolvables from '%s' not loaded because of error."
-msgstr "Virheen vuoksi '%s' ei ladattu osia."
-
-#: ../src/zypper-misc.cc:450
-msgid "Reading RPM database..."
-msgstr "Luetaan RPM-tietokantaa..."
-
-#: ../src/zypper-misc.cc:455
-#, c-format
-msgid "(%s resolvables)"
-msgstr "(%s osaa)"
-
-#: ../src/zypper-misc.cc:464
+#: ../src/zypper-misc.cc:796
 msgid "Establishing status of aggregates"
 msgstr "Muodostetaan yhdistettyjen kohteiden tiloja"
 
-#: ../src/zypper-misc.cc:472
+#: ../src/zypper-misc.cc:804
 msgid "Resolving dependencies..."
 msgstr "Ratkaistaan riippuvuuksia..."
 
-#: ../src/zypper-misc.cc:497
+#: ../src/zypper-misc.cc:829
 #, c-format
 msgid "%d patches needed (%d security patches)"
 msgstr "%d paikkausta (%d tietoturvapaikkausta)"
 
-#: ../src/zypper-misc.cc:506 ../src/zypper-info.cc:148
+#: ../src/zypper-misc.cc:838 ../src/zypper-info.cc:148
 msgid "Installed"
 msgstr "Asennettu"
 
-#: ../src/zypper-misc.cc:506 ../src/zypper-info.cc:148
+#: ../src/zypper-misc.cc:838 ../src/zypper-info.cc:148
 msgid "Uninstalled"
 msgstr "Poistettiin"
 
-#: ../src/zypper-misc.cc:508 ../src/zypper-info.cc:150
+#: ../src/zypper-misc.cc:840 ../src/zypper-info.cc:150
 msgid "No Longer Applicable"
 msgstr "Ei enää käyttökelpoinen"
 
-#: ../src/zypper-misc.cc:508 ../src/zypper-info.cc:150
+#: ../src/zypper-misc.cc:840 ../src/zypper-info.cc:150
 msgid "Not Applicable"
 msgstr "Ei käyttökelpoinen"
 
-#: ../src/zypper-misc.cc:510 ../src/zypper-info.cc:152
+#: ../src/zypper-misc.cc:842 ../src/zypper-info.cc:152
 msgid "Applied"
 msgstr "Käytettiin"
 
-#: ../src/zypper-misc.cc:510 ../src/zypper-info.cc:152
+#: ../src/zypper-misc.cc:842 ../src/zypper-info.cc:152
 msgid "Not Needed"
 msgstr "Ei tarvita"
 
-#: ../src/zypper-misc.cc:512 ../src/zypper-info.cc:154
+#: ../src/zypper-misc.cc:844 ../src/zypper-info.cc:154
 msgid "Broken"
 msgstr "Rikki"
 
-#: ../src/zypper-misc.cc:512 ../src/zypper-info.cc:154
+#: ../src/zypper-misc.cc:844 ../src/zypper-info.cc:154
 msgid "Needed"
 msgstr "Tarvitaan"
 
 #. if ResStatus interface changes
-#: ../src/zypper-misc.cc:514
+#: ../src/zypper-misc.cc:846
 msgid "error"
 msgstr "virhe"
 
-#: ../src/zypper-misc.cc:543 ../src/zypper-misc.cc:627
-#: ../src/zypper-misc.cc:767 ../src/zypper-info.cc:92
+#: ../src/zypper-misc.cc:875 ../src/zypper-misc.cc:995
+#: ../src/zypper-misc.cc:1144 ../src/zypper-info.cc:92
 msgid "Catalog: "
 msgstr "Luettelo: "
 
-#: ../src/zypper-misc.cc:543 ../src/zypper-misc.cc:627
-#: ../src/zypper-misc.cc:767 ../src/zypper-info.cc:92
+#: ../src/zypper-misc.cc:875 ../src/zypper-misc.cc:995
+#: ../src/zypper-misc.cc:1144 ../src/zypper-info.cc:92
 msgid "Repository: "
 msgstr "Asennuslähde: "
 
-#: ../src/zypper-misc.cc:544 ../src/zypper-misc.cc:628
-#: ../src/zypper-misc.cc:772 ../src/zypper-sources.cc:81
-#: ../src/zypper-search.h:247
+#: ../src/zypper-misc.cc:876 ../src/zypper-misc.cc:996
+#: ../src/zypper-misc.cc:1150 ../src/zypper-sources.cc:310
+#: ../src/zypper-search.h:272
 msgid "Name"
 msgstr "Nimi"
 
-#: ../src/zypper-misc.cc:544 ../src/zypper-misc.cc:628
-#: ../src/zypper-misc.cc:772 ../src/zypper-search.h:247
+#. best_effort does not know version or arch yet
+#: ../src/zypper-misc.cc:876 ../src/zypper-misc.cc:996
+#: ../src/zypper-misc.cc:1152 ../src/zypper-search.h:272
 msgid "Version"
 msgstr "Versio"
 
-#: ../src/zypper-misc.cc:544 ../src/zypper-misc.cc:628
+#: ../src/zypper-misc.cc:876 ../src/zypper-misc.cc:996
 msgid "Category"
 msgstr "Luokka"
 
-#: ../src/zypper-misc.cc:544 ../src/zypper-misc.cc:628
-#: ../src/zypper-sources.cc:79
+#: ../src/zypper-misc.cc:876 ../src/zypper-misc.cc:996
+#: ../src/zypper-sources.cc:308
 msgid "Status"
 msgstr "Tila"
 
-#: ../src/zypper-misc.cc:570
+#: ../src/zypper-misc.cc:902
 msgid "No needed patches found."
 msgstr "Ei löydetty paikattavaa."
 
-#: ../src/zypper-misc.cc:662
+#: ../src/zypper-misc.cc:1030
 msgid ""
 "WARNING: These are only the updates affecting the updater itself.\n"
 "There are others available too.\n"
@@ -315,241 +284,450 @@ msgstr ""
 "VAROITUS: Nämä ovat ainoastaan itse päivitystoimintoon vaikuttavia päivityksiä.\n"
 "Myös muita päivityksiä on saatavilla.\n"
 
-#: ../src/zypper-misc.cc:672 ../src/zypper-misc.cc:795
+#: ../src/zypper-misc.cc:1040 ../src/zypper-misc.cc:1186
 msgid "No updates found."
 msgstr "Ei päivitettävää."
 
 #. TranslatorExplanation S stands for Status
 #. TranslatorExplanation S as Status
-#: ../src/zypper-misc.cc:766 ../src/zypper-search.h:234
+#: ../src/zypper-misc.cc:1142 ../src/zypper-search.h:259
 msgid "S"
 msgstr "T"
 
 #. TranslatorExplanation This is Bundle in as used in rug.
-#: ../src/zypper-misc.cc:769 ../src/zypper-search.h:243
+#: ../src/zypper-misc.cc:1147 ../src/zypper-search.h:268
 msgid "Bundle"
 msgstr "Nippu"
 
-#: ../src/zypper-misc.cc:772 ../src/zypper-search.h:247
+#: ../src/zypper-misc.cc:1152 ../src/zypper-search.h:272
 msgid "Arch"
 msgstr "Arkkitehtuuri"
 
 #. Skipping a patch because it is interactive and
 #. --skip-interactive is requested. %s is a name of a
 #. patch
-#: ../src/zypper-misc.cc:866
+#: ../src/zypper-misc.cc:1310
 #, c-format
 msgid "WARNING: %s is interactive, skipped."
 msgstr "VAROITUS: %s on vuorovaikutteinen, ohitetaan."
 
-#: ../src/zypper-misc.cc:926
+#: ../src/zypper-misc.cc:1373
 msgid "committing"
 msgstr "suoritetaan"
 
-#: ../src/zypper-misc.cc:944
+#: ../src/zypper-misc.cc:1391
 msgid ""
-"Package integrity check failed. This may be a problem with repository or media. Try one of the following:\n"
+"The package integrity check failed. This may be a problem with the repository or media. Try one of the following:\n"
 "\n"
 "- just retry previous command\n"
-"- refresh repositories using 'zypper refresh'\n"
-"- use another installation media (if e.g. damaged)\n"
+"- refresh the repositories using 'zypper refresh'\n"
+"- use another installation medium (if e.g. damaged)\n"
 "- use another repository"
 msgstr ""
 "Paketin aitoustarkistus epäonnistui. Tämä voi olla merkki asennuslähteen tai tietovälineen ongelmasta. Yritä seuraavia keinoja:\n"
 "\n"
 "- Kokeile uudelleen edellistä komentoa\n"
-"- Päivitä asennuslähteet komenolla 'zypper refresh'\n"
+"- Päivitä asennuslähteet komennolla 'zypper refresh'\n"
 "- käytä jotakin toista tietovälinettä (nykyinen voi olla esim. vaurioitunut)\n"
 "- käytä jotakin toista asennuslähdettä"
 
-#: ../src/zypper-misc.cc:962
-msgid "WARNING: One of installed patches requires reboot of your machine. Please, do it as soon as possible."
+#: ../src/zypper-misc.cc:1411
+msgid "One of installed patches requires reboot of your machine. Please, do it as soon as possible."
+msgstr "Jokin asennetuista päivityksistä edellyttää tietokoneen uudelleenkäynnistämistä. Käynnistä tietokone uudelleen mahdollisimman pian."
+
+#: ../src/zypper-misc.cc:1414
+msgid "WARNING: One of installed patches requires a reboot of your machine. Please do it as soon as possible."
 msgstr "VAROITUS: Jokin asennetuista päivityksistä edellyttää tietokoneen uudelleenkäynnistämistä. Käynnistä tietokone uudelleen mahdollisimman pian."
 
-#: ../src/zypper-misc.cc:965
-msgid "WARNING: One of installed patches affects the package manager itself, thus it requires restart before executing next operations."
+#: ../src/zypper-misc.cc:1420
+msgid "WARNING: One of installed patches affects the package manager itself, thus it requires its restart before executing any further operations."
 msgstr "VAROITUS: Jokin asennetuista korjauksista vaikuttaa itse paketinhallintasovellukseen. Tästä syystä paketinhallintasovellus on käynnistettävä uudelleen ennen seuraavien toimintojen tekemistä."
 
-#. TranslatorExplanation The first %s is name of the resolvable, the second is its kind (e.g. 'zypper package')
-#: ../src/zypper-misc.cc:989
+#: ../src/zypper-misc.cc:1446
 #, c-format
 msgid "Automatically agreeing with %s %s license."
 msgstr "%s %s lisenssi hyväksyttiin automaattisesti."
 
-#: ../src/zypper-misc.cc:1002 ../src/zypper-misc.cc:1027
-msgid "license"
-msgstr "käyttöoikeussopimus"
+#: ../src/zypper-misc.cc:1457
+#, c-format
+msgid "%s %s license:"
+msgstr "%s %s käyttöoikeussopimus:"
 
-#: ../src/zypper-misc.cc:1005
+#: ../src/zypper-misc.cc:1461
 msgid "In order to install this package, you must agree to terms of the above licencse. Continue?"
 msgstr "Tämän paketin asentaminen edellyttää, että hyväksyt yllä olevan käyttöoikeussopimuksen ehdot. Haluatko jatkaa?"
 
-#: ../src/zypper-misc.cc:1015
-msgid "Aborting installation due to the need of license(s) confirmation."
-msgstr "Keskeytetään asennus käyttöoikeussopimuksen vahvistamisen pakollisuuden johdosta."
+#: ../src/zypper-misc.cc:1472
+msgid "Aborting installation due to the need for license(s) confirmation."
+msgstr "Keskeytetään asennus, koska jokin paketti vaatii käyttöoikeussopimuksen vahvistamista."
 
-#: ../src/zypper-misc.cc:1017
-msgid "Please, restart the operation in interactive mode and confirm agreement with required license(s)."
-msgstr "Käynnistä toiminto vuorovaikutteisessa tilassa ja vahvista tarvittavien käyttöoikeussopimusten hyväksyminen."
+#. TranslatorExplanation Don't translate the '--auto-agree-with-licenses',
+#. it is a command line option
+#: ../src/zypper-misc.cc:1476
+msgid "Please, restart the operation in interactive mode and confirm your agreement with required license(s), or use the --auto-agree-with-licenses option."
+msgstr "Käynnistä toiminto vuorovaikutteisessa tilassa ja vahvista tarvittavien käyttöoikeussopimusten hyväksyminen, tai käytä --auto-agree-with-licences -valintaa."
 
-#: ../src/zypper-misc.cc:1024
-msgid "Aborting installation due to user disagreement with "
-msgstr "Keskeytetään asennus, koska käyttäjä ei hyväksynyt:"
+#: ../src/zypper-misc.cc:1487
+#, c-format
+msgid "Aborting installation due to user disagreement with %s %s license."
+msgstr "Keskeytetään asennus, koska käyttäjä ei hyväksynyt %s %s käyttöoikeussopimusta."
+
+#: ../src/zypper-misc.cc:1557
+#, c-format
+msgid "Installing source package %s-%s"
+msgstr "Asennetaan lähdekoodipaketti %s-%s"
+
+#: ../src/zypper-misc.cc:1565
+#, c-format
+msgid "Source package %s-%s successfully installed."
+msgstr "Lähdekoodipaketti %s-%s asennettiin onnistuneesti."
+
+#: ../src/zypper-misc.cc:1571
+#, c-format
+msgid "Problem installing source package %s-%s:"
+msgstr "Virhe asennettaessa lähdekoodipakettia %s-%s:"
+
+#: ../src/zypper-misc.cc:1579
+#, c-format
+msgid "Source package '%s' not found."
+msgstr "Lähdekoodipakettia '%s' ei löydetty."
 
 #: ../src/zypper-sources.cc:48
 #, c-format
-msgid "Checking whether to refresh metadata for %s."
+msgid "Checking whether to refresh metadata for %s"
 msgstr "Tarkistetaan tarvitseeko %s metatietoja päivittää."
 
-# kpowersave.cpp: tooltip
-#: ../src/zypper-sources.cc:80
-msgid "Enabled"
-msgstr "Käytä"
+#: ../src/zypper-sources.cc:57
+#, c-format
+msgid "Refreshing '%s'"
+msgstr "Päivitetään '%s'"
 
-#: ../src/zypper-sources.cc:80
+#: ../src/zypper-sources.cc:59
+msgid "(forced)"
+msgstr "(pakotettu)"
+
+#: ../src/zypper-sources.cc:64
+#, c-format
+msgid "Repository '%s' is up to date."
+msgstr "Asennuslähde '%s' on ajantasalla."
+
+#: ../src/zypper-sources.cc:76
+msgid "Forcing raw metadata refresh"
+msgstr "Pakotetaan metatietojen päivitys"
+
+#: ../src/zypper-sources.cc:84
+#, c-format
+msgid "Problem downloading files from '%s'."
+msgstr "Ongelma ladattaessa tietoja kohteesta '%s'."
+
+#: ../src/zypper-sources.cc:85
+msgid "Please, see the above error message to for a hint."
+msgstr "Tarkista ylläoleva virheviesti."
+
+#: ../src/zypper-sources.cc:92
+#, c-format
+msgid "No URLs defined for '%s'."
+msgstr "'%s':lle ei ole määritelty URL-osoitteita"
+
+#. TranslatorExplanation the first %s is a .repo file path
+#: ../src/zypper-sources.cc:96
+#, c-format
+msgid "Please, add one or more base URL (baseurl=URL) entries to %s for repository '%s'."
+msgstr "Aseta vähintään yksi URL (baseurl=URL) tiedostoon %s asennuslähteelle '%s'."
+
+#: ../src/zypper-sources.cc:104
+msgid "No alias defined this repository."
+msgstr "Tälle alias-nimelle ei ole määritelty asennuslähteitä."
+
+#: ../src/zypper-sources.cc:112
+#, c-format
+msgid "Repository '%s' is invalid."
+msgstr "Asennuslähde '%s' on virheellinen."
+
+#: ../src/zypper-sources.cc:113
+msgid "Please, check if the URLs defined for this repository are pointing to a valid repository."
+msgstr "Tarkista että asennuslähteen URL-osoitteen osoittavat kelvolliseen asennuslähteeseen."
+
+#: ../src/zypper-sources.cc:121
+#, c-format
+msgid "Error downloading metadata for '%s':"
+msgstr "Ongelma ladattaessa metatietoja '%s'."
+
+#: ../src/zypper-sources.cc:148
+msgid "Forcing building of repository cache"
+msgstr "Pakotetaan asennuslähteen välimuistin rakentaminen"
+
+#: ../src/zypper-sources.cc:161
+#, c-format
+msgid "Error parsing metadata for '%s':"
+msgstr "Virhe asennuslähteen '%s' metatietojen koostamisessa:"
+
+#. TranslatorExplanation Don't translate the URL unless it is translated, too
+#: ../src/zypper-sources.cc:163
+msgid "This may be caused by invalid metadata in the repository, or by a bug in the metadata parser. In the latter case, or if in doubt, please, file a bug report by folowing instructions at http://en.opensuse.org/Zypper#Troubleshooting"
+msgstr "Tämä voi johtua virheellisistä metatiedoista asennuslähteessä tai metatietojen koostajan ohjelmointivirheestä. Jos epäilet jälkimmäistä, niin lähetä virheraportti näiden ohjeiden mukaisesti: http://en.opensuse.org/Zypper#Troubleshooting"
+
+#: ../src/zypper-sources.cc:177
+#, c-format
+msgid "Repository metadata for '%s' not found in local cache."
+msgstr "Asennuslähteen '%s' metatietoja ei löytynyt paikallisesta välimuistista."
+
+#: ../src/zypper-sources.cc:185
+msgid "Error building the cache database:"
+msgstr "Virhe välimuistitietokannan rakennuksessa:"
+
+#: ../src/zypper-sources.cc:215
+#, c-format
+msgid "Repository '%s' not found."
+msgstr "Ei löydetty asennuslähdettä '%s'."
+
+#: ../src/zypper-sources.cc:221
+#, c-format
+msgid "Error reading repository description file for '%s'."
+msgstr "Virhe luettaessa asennuslähteen kuvaustiedostoa kohteesta '%s'."
+
+#: ../src/zypper-sources.cc:223
+msgid "Reason: "
+msgstr "Syy: "
+
+#: ../src/zypper-sources.cc:250
+#, c-format
+msgid "Disabling repository '%s' because of the above error."
+msgstr "Poistettiin asennuslähde '%s' käytöstä ylläolevien virheiden vuoksi."
+
+#: ../src/zypper-sources.cc:268
+#, c-format
+msgid "Repository '%s' is out-of-date. You can run 'zypper refresh' as root to update it."
+msgstr "Asennuslähde '%s' ei ole ajantasalla. Suorita 'zypper refresh' pääkäyttäjänä päivittääksesi sen."
+
+# kpowersave.cpp: tooltip
+#. TranslatorExplanation used as e.g. "Enabled: Yes"
+#: ../src/zypper-sources.cc:309 ../src/zypper-sources.cc:681
+msgid "Enabled"
+msgstr "Käytössä"
+
+#: ../src/zypper-sources.cc:309
 msgid "Refresh"
 msgstr "Päivitä"
 
-#: ../src/zypper-sources.cc:81 ../src/zypper-search.h:245
+#: ../src/zypper-sources.cc:310 ../src/zypper-search.h:270
 msgid "Type"
 msgstr "Tyyppi"
 
-#: ../src/zypper-sources.cc:97
+#: ../src/zypper-sources.cc:326
 msgid "Active"
 msgstr "Käytössä"
 
-#: ../src/zypper-sources.cc:97
+#: ../src/zypper-sources.cc:326
 msgid "Disabled"
 msgstr "Poistettu käytöstä"
 
-#: ../src/zypper-sources.cc:103 ../src/zypper-sources.cc:104
+#: ../src/zypper-sources.cc:331 ../src/zypper-sources.cc:332
+#: ../src/zypper-sources.cc:681 ../src/zypper-sources.cc:683
 #: ../src/zypper-info.cc:160 ../src/zypper-info.cc:166
 #: ../src/zypper-info.cc:168
 msgid "Yes"
 msgstr "Kyllä"
 
-#: ../src/zypper-sources.cc:103 ../src/zypper-sources.cc:104
+#: ../src/zypper-sources.cc:331 ../src/zypper-sources.cc:332
+#: ../src/zypper-sources.cc:681 ../src/zypper-sources.cc:683
 #: ../src/zypper-info.cc:160 ../src/zypper-info.cc:166
 #: ../src/zypper-info.cc:168
 msgid "No"
 msgstr "Ei"
 
-#: ../src/zypper-sources.cc:123
-msgid "No repositories defined. Use 'zypper addrepo' command to add one or more repositories."
+#: ../src/zypper-sources.cc:350
+msgid "No repositories defined. Use the 'zypper addrepo' command to add one or more repositories."
 msgstr "Asennuslähteitä ei ole määritelty. Käytä 'zypper addrepo' -komentoa lisätäksesi yhden tai useamman asennuslähteen."
 
-#: ../src/zypper-sources.cc:144
+#: ../src/zypper-sources.cc:383 ../src/zypper-sources.cc:449
 msgid "Error reading repositories:"
 msgstr "Virhe luettaessa asennuslähdettä:"
 
-#: ../src/zypper-sources.cc:169
+#: ../src/zypper-sources.cc:405
+#, c-format
+msgid "Can't open %s for writing. Maybe you don't have write permissions?"
+msgstr "Tiedostoon %s ei voitu kirjoittaa. Tarkista, että sinulla on kirjoitusoikeudet."
+
+#: ../src/zypper-sources.cc:413
+#, c-format
+msgid "Repositories have been successfully exported to %s."
+msgstr "Asennuslähteet on onnistuneesti viety %s."
+
+#: ../src/zypper-sources.cc:505
 #, c-format
 msgid "Skipping disabled repository '%s'"
 msgstr "Ohitettiin käytöstäpoistettu asennuslähde '%s'"
 
-#: ../src/zypper-sources.cc:177
-msgid "Refreshing "
-msgstr "Päivitetään "
-
-#. ! \todo progress reporting
-#: ../src/zypper-sources.cc:180
-msgid "Creating repository cache..."
-msgstr "Luodaan asennuslähteen välimuistia..."
-
-#: ../src/zypper-sources.cc:183
-msgid "DONE"
-msgstr "VALMIS"
-
-#: ../src/zypper-sources.cc:187
-#, c-format
-msgid "Error reading repository '%s':"
-msgstr "Virhe luettaessa asennuslähdettä '%s':"
-
-#: ../src/zypper-sources.cc:189
+#: ../src/zypper-sources.cc:541
 #, c-format
 msgid "Skipping repository '%s' because of the above error."
 msgstr "Ohitettiin asennuslähde '%s' ylläolevien virheiden vuoksi."
 
-#: ../src/zypper-sources.cc:201
+#: ../src/zypper-sources.cc:554
+#, c-format
+msgid "Repository '%s' not found by its alias or number."
+msgstr "Asennuslähdettä '%s' ei löydy alias-nimen tai numeron perusteella."
+
+#: ../src/zypper-sources.cc:559
+msgid "Use 'zypper repos' to get the list of defined repositories."
+msgstr "Käytä 'zypper repos' saadaksesi listan määritellyistä asennuslähteistä"
+
+#: ../src/zypper-sources.cc:566
+msgid "Specified repositories are not enabled or defined."
+msgstr "Annetut asennuslähteet eivät ole käytössä tai niitä ei ole määritelty"
+
+#: ../src/zypper-sources.cc:568
+msgid "There are no enabled repositories defined."
+msgstr "Yhtään käytössäolevaa asennuslähdettä ei ole määritelty."
+
+#: ../src/zypper-sources.cc:571
+msgid "Use 'zypper addrepo' or 'zypper modifyrepo' commands to add or enable repositories."
+msgstr "Käytä 'zypper addrepo' -komentoa lisätäksesi uuden asennuslähteen tai 'zypper modifyrepo' -komentoa ottaaksesi jonkin käytöstä poistettu käyttöön."
+
+#: ../src/zypper-sources.cc:575
 msgid "Could not refresh the repositories because of errors."
 msgstr "Asennuslähdettä ei voitu päivittää virheiden vuoksi."
 
-#: ../src/zypper-sources.cc:203
-msgid "Some of the repositories have not been refreshed because of error."
+#: ../src/zypper-sources.cc:577
+msgid "Some of the repositories have not been refreshed because of an error."
 msgstr "Jotain asennuslähteistä ei ole päivitetty virheiden vuoksi."
 
-#: ../src/zypper-sources.cc:205
+#: ../src/zypper-sources.cc:579
+msgid "Specified repositories have been refreshed."
+msgstr "Määritellyt asennuslähteet on päivitetty."
+
+#: ../src/zypper-sources.cc:581
 msgid "All repositories have been refreshed."
-msgstr "Kaikki järjestelmän lähteet on päivitetty."
+msgstr "Kaikki järjestelmän asennuslähteet päivitettiin."
 
-#: ../src/zypper-sources.cc:235
+#: ../src/zypper-sources.cc:623
+msgid "This is a changeable read-only media (CD/DVD), disabling autorefresh."
+msgstr "Tämä on vaihdettava, ei kirjoitettavissa oleva asennusmedia (CD/DVD). Poistetaan automaattinen päivitys."
+
+#: ../src/zypper-sources.cc:636
 #, c-format
-msgid "Adding repository '%s'."
-msgstr "Lisätään asennuslähdettä '%s'."
+msgid "Repository named '%s' already exists. Please, use another alias."
+msgstr "Asennuslähde '%s' on jo määritelty. Valitse toinen alias-nimi."
 
-#: ../src/zypper-sources.cc:244
-msgid "Problem transfering repository data from specified URL."
-msgstr "Ongelma siirrettäessä asennuslähteen tietoja määritellystä URL-osoitteesta."
+#: ../src/zypper-sources.cc:644
+msgid "Can't find a valid repository at given location:"
+msgstr "Ei löydetty asennuslähteitä annetusta sijainnista:"
 
-#: ../src/zypper-sources.cc:250
-msgid "Problem parsing repository data."
-msgstr "Ongelma jäsennettäessä asennuslähteiden tietoja."
+#: ../src/zypper-sources.cc:645
+msgid "Could not determine the type of the repository. Please, check if the defined URLs (see below) point to a valid repository:"
+msgstr "Asennuslähteen tyyppiä ei voitu päätellä automaattisesti. Tarkista seuraavat olevat URL-osoitteet: "
 
-#: ../src/zypper-sources.cc:267
+#: ../src/zypper-sources.cc:656
+msgid "Problem transferring repository data from specified URL:"
+msgstr "Ongelma siirrettäessä asennuslähteen tietoja määritellystä URL-osoitteesta:"
+
+#: ../src/zypper-sources.cc:657
+msgid "Please, check whether the specified URL is accessible."
+msgstr "Tarkista, että määritelty URL on saatavissa."
+
+#: ../src/zypper-sources.cc:664
+msgid "Unknown problem when adding repository:"
+msgstr "Tunnistamaton ongelma lisättäessä asennuslähdettä:."
+
+#: ../src/zypper-sources.cc:668
 #, c-format
-msgid "Repository '%s' successfully added:"
-msgstr "Asennuslähde '%s' lisättiin onnistuneesti:"
+msgid "Repository '%s' successfully added"
+msgstr "Asennuslähde '%s' lisättiin onnistuneesti"
 
-#: ../src/zypper-sources.cc:297
-msgid "Zypper happy! Detected repository type matches the one specified in the --type option."
-msgstr "Zypper iloitsee! Asennuslähde tunnistettiin yhdeksi --type -asetuksen tyypeistä"
+#. TranslatorExplanation used as e.g. "Autorefresh: Yes"
+#: ../src/zypper-sources.cc:683
+msgid "Autorefresh"
+msgstr "Automaattinen päivitys"
 
-#: ../src/zypper-sources.cc:303
+#: ../src/zypper-sources.cc:691
 #, c-format
-msgid "Warning! Overriding detected repository type '%s' with manually specified '%s'."
-msgstr "Varoitus! Käytetään tunnistettua asennuslähteen tyyppiä '%s' manuaalisesti määritellyn '%s' sijasta."
+msgid "Reading data from '%s' media"
+msgstr "Luetaan tietoja medialta '%s'"
 
-#: ../src/zypper-sources.cc:315
+#: ../src/zypper-sources.cc:697
 #, c-format
-msgid "Unknown repository type '%s'. Using detected type '%s' instead."
-msgstr "Tuntematon asennuslähteen tyyppi '%s'. Käytetään tunnistettua '%s'."
+msgid "Problem reading data from '%s' media"
+msgstr "Ongelma ladattaessa tietoja '%s'"
 
-#: ../src/zypper-sources.cc:415
+#: ../src/zypper-sources.cc:698
+msgid "Please, check if your installation media is valid and readable."
+msgstr "Tarkista, että asennusmedia on oikeellinen ja luettavissa."
+
+#: ../src/zypper-sources.cc:792
 #, c-format
 msgid "Repository %s has been removed."
 msgstr "Asennuslähde %s poistettiin."
 
-#: ../src/zypper-sources.cc:467
+#: ../src/zypper-sources.cc:844
 #, c-format
 msgid "Repository %s renamed to %s"
 msgstr "Asennuslähde %s nimettiin %s"
 
-#: ../src/zypper-sources.cc:472 ../src/zypper-sources.cc:549
+#: ../src/zypper-sources.cc:849 ../src/zypper-sources.cc:926
 #, c-format
 msgid "Repository %s not found."
 msgstr "Asennuslähdettä %s ei löydy."
 
-#: ../src/zypper-sources.cc:477 ../src/zypper-sources.cc:554
+#: ../src/zypper-sources.cc:854 ../src/zypper-sources.cc:931
 msgid "Error while modifying the repository:"
 msgstr "Virhe muunnettaessa asennuslähdettä:"
 
-#: ../src/zypper-sources.cc:479 ../src/zypper-sources.cc:556
+#: ../src/zypper-sources.cc:856 ../src/zypper-sources.cc:933
 #, c-format
 msgid "Leaving repository %s unchanged."
 msgstr "Asennuslähdettä %s ei muutettu."
 
-#: ../src/zypper-sources.cc:493
+#: ../src/zypper-sources.cc:870
 #, c-format
 msgid "%s used together with %s, which contradict each other. This property will be left unchanged."
 msgstr "Käytettäessä %s yhdessä %s kumoavat toisensa. Tämä ominaisuus jätetään jätetään muuttamatta."
 
-#: ../src/zypper-sources.cc:544
+#: ../src/zypper-sources.cc:921
 #, c-format
 msgid "Repository %s has been sucessfully modified."
 msgstr "Asennuslähdettä %s muunnettiin onnistuneesti."
 
+#: ../src/zypper-sources.cc:969
+#, c-format
+msgid "Retrieving repository '%s' data..."
+msgstr "Luetaan asennuslähteen '%s' tietoja..."
+
+#: ../src/zypper-sources.cc:976
+#, c-format
+msgid "Repository '%s' not cached. Caching..."
+msgstr "Asennuslähdettä '%s' ei löydy välimuistista. Noudetaan..."
+
+#: ../src/zypper-sources.cc:983 ../src/zypper-sources.cc:1002
+#, c-format
+msgid "Problem loading data from '%s'"
+msgstr "Ongelma ladattaessa tietoja '%s'"
+
+#: ../src/zypper-sources.cc:984 ../src/zypper-sources.cc:1004
+#, c-format
+msgid "Resolvables from '%s' not loaded because of error."
+msgstr "Virheen vuoksi '%s' ei ladattu osia."
+
+#: ../src/zypper-sources.cc:991
+#, c-format
+msgid "(%d resolvables found)"
+msgstr "(löydettiin %d osaa)"
+
+#: ../src/zypper-sources.cc:1003
+msgid "Try 'zypper refresh', or even remove /var/cache/zypp/zypp.db before doing so."
+msgstr "Kokeile 'zypper refresh' tai poista jopa /var/cache/zypp/zypp.db ennen asennuslähteen päivitystä."
+
+#: ../src/zypper-sources.cc:1015
+msgid "Reading RPM database..."
+msgstr "Luetaan RPM-tietokantaa..."
+
+#: ../src/zypper-sources.cc:1022
+#, c-format
+msgid "(%s resolvables)"
+msgstr "(%s osaa)"
+
 #. list name, exact match
-#: ../src/zypper-sources.cc:637
+#: ../src/zypper-sources.cc:1110
 msgid ""
 "ZENworks Management Daemon is running.\n"
 "WARNING: this command will not synchronize changes.\n"
@@ -560,7 +738,7 @@ msgstr ""
 "Käytä rug tai yast -työkaluja siihen.\n"
 
 #: ../src/zypp-checkpatches.cc:125
-msgid "The updater could not access the package manager engine. This usually happens when you have another application (like YaST) using it at the same time. Please close other applications and check again for updates."
+msgid "The updater could not access the package manager engine. This usually happens when you have another application (like YaST) using it at the same time. Please close the other applications and check again for updates."
 msgstr "Päivitin ei saanut yhteyttä pakettienhallinnan taustajärjestelmään. Tämä yleensä johtuu siitä, että jokin toinen sovellus (kuten YaST) käyttää taustajärjestelmää samanaikaisesti. Sulje muut pakettienhallintasovellukset ja tarkista päivitykset uudelleen."
 
 #: ../src/zypp-checkpatches.cc:185
@@ -577,13 +755,49 @@ msgid "There are no update repositories defined. Please add one or more update r
 msgstr "Päivityslähteitä ei ole määritetty. Lisää ainakin yksi päivityslähde, jos haluat saada tiedot uusista päivityksistä."
 
 #. TranslatorExplanation don't translate letters in parentheses!! (yet)
-#: ../src/zypper-callbacks.cc:53
+#: ../src/zypper-callbacks.cc:83
 msgid "(A)bort, (R)etry, (I)gnore?"
 msgstr "(K)eskeytä, (Y)ritä uudelleen, (O)hita?"
 
-#: ../src/zypper-callbacks.cc:87
+#: ../src/zypper-callbacks.cc:117
 msgid "Invalid answer. Choose letter a, r, or i."
 msgstr "Virheellinen vastaus. Valitse jokin seuraavista kirjaimista: a, r, i."
+
+#. TranslatorExplanation This is a Lowercase 'y' for "yes" used as an
+#. answer in y/n prompts. Translate to the same letter as you translated
+#. it in the "[y/n]" string!.
+#: ../src/zypper-callbacks.cc:148 ../src/zypper-callbacks.cc:165
+#: ../src/zypper-callbacks.cc:171
+msgid "y"
+msgstr "k"
+
+#. TranslatorExplanation Uppercase 'Y' for "yes" used as an
+#. answer in y/n prompts. Translate to the same letter as you translated
+#. it in the "[y/n]" string!.
+#: ../src/zypper-callbacks.cc:152 ../src/zypper-callbacks.cc:171
+msgid "Y"
+msgstr "K"
+
+#. TranslatorExplanation Lowercase 'n' for "no" used as an
+#. answer in y/n prompts. Translate to the same letter as you translated
+#. it in the "[y/n]" string!.
+#: ../src/zypper-callbacks.cc:156 ../src/zypper-callbacks.cc:165
+#: ../src/zypper-callbacks.cc:173
+msgid "n"
+msgstr "e"
+
+#. TranslatorExplanation Uppercase 'N' for "no" used as an
+#. answer in y/n prompts. Translate to the same letter as you translated
+#. it in the "[y/n]" string!.
+#: ../src/zypper-callbacks.cc:160 ../src/zypper-callbacks.cc:173
+msgid "N"
+msgstr "E"
+
+#. TranslatorExplanation Example: Invalid answer 'x', enter 'y' or 'n':
+#: ../src/zypper-callbacks.cc:164
+#, c-format
+msgid "Invalid answer '%s', enter '%s' or '%s':"
+msgstr "Virheellinen vastaus '%s'. Valitse '%s' tai '%s':"
 
 #: ../src/zypper-getopt.cc:56
 msgid "Unknown option "
@@ -686,35 +900,61 @@ msgstr "Tarjoaa:"
 msgid "Requires:"
 msgstr "Vaatii:"
 
-#: ../src/zypper-search.cc:45
-msgid "No repositories configured. Please, add at least one repository using 'zypper addrepo' command before using search."
-msgstr "Asennuslähteitä ei ole määritelty. Lisää vähintään yksi asennuslähde 'zypper addrepo' -komennolla ennen etsimistä."
+#: ../src/zypper-search.cc:42
+msgid "No repositories configured. Please add at least one repository using 'zypper addrepo' command before using the search."
+msgstr "Asennuslähteitä ei ole määritelty. Lisää vähintään yksi asennuslähde 'zypper addrepo' -komennolla ennen hakua."
 
-#: ../src/zypper-search.cc:108
+#: ../src/zypper-search.cc:182
 msgid "Pre-caching installed resolvables matching given search criteria... "
 msgstr "Tallennettaan välimuistiin asennettuja osia, jotka vastaavat hakuehtoja..."
 
-#: ../src/zypper-search.cc:117
+#: ../src/zypper-search.cc:191
 msgid " out of ("
 msgstr "/"
 
-#: ../src/zypper-search.cc:118
+#: ../src/zypper-search.cc:192
 msgid "cached."
 msgstr "tallennettu välimuistiin."
 
-#: ../src/zypper-search.cc:217
+#: ../src/zypper-search.cc:293
 msgid " is not a valid regular expression: \""
 msgstr " ei ole kelvollinen säännöllinen lause: \""
 
-#: ../src/zypper-search.cc:219
+#: ../src/zypper-search.cc:295
 msgid "This is a bug, please file a bug report against zypper."
 msgstr "Tämä on ohjelmavirhe. Tee ilmoitus zypper-ohjelmavirheestä."
 
-#: ../src/zypper.cc:84 ../src/zypper.cc:763
+#: ../src/zypper.cc:73 ../src/zypper.cc:887
 msgid "Given URL is invalid."
 msgstr "Verkko-osoite ei kelpaa."
 
-#: ../src/zypper.cc:91
+#: ../src/zypper.cc:110
+msgid ""
+"  Options:\n"
+"\t--help, -h\t\tHelp.\n"
+"\t--version, -V\t\tOutput the version number.\n"
+"\t--quiet, -q\t\tSuppress normal output, print only error messages.\n"
+"\t--verbose, -v\t\tIncrease verbosity.\n"
+"\t--terse, -t\t\tTerse output for machine consumption.\n"
+"\t--table-style, -s\tTable style (integer).\n"
+"\t--rug-compatible, -r\tTurn on rug compatibility.\n"
+"\t--non-interactive, -n\tDon't ask anything, use default answers automatically.\n"
+"\t--no-gpg-checks\t\tIgnore GPG check failures and continue.\n"
+"\t--root, -R <dir>\tOperate on a different root directory.\n"
+msgstr ""
+"  Valinnat:\n"
+"\t--help, -h\t\tOhje\n"
+"\t--version, -V\t\tNäyttää version\n"
+"\t--quiet, -q\t\tTulostaa ainoastaan virheet.\n"
+"\t--verbose, -v\t\tKasvattaa näytettävän tiedon määrää\n"
+"\t--terse, -t\t\tMinimoi näytettävän tiedon määrän\n"
+"\t--table-style, -s\tTaulukon tyyppi (kokonaisluku)\n"
+"\t--rug-compatible, -r\tOttaa rug-yhteensopivuustilan käyttöön.\n"
+"\t--non-interactive\tÄlä kysy mitään, käytä oletus vastausta automaattisesti. (kehityksen alla)\n"
+"\t--no-gpg-checks\t\tJätä GPG-tarkistuksen virheet huomioimatta ja jatka.\n"
+"\t--root, -R <dir>\tToimi eri juuri-hakemiston alla\n"
+
+#: ../src/zypper.cc:123
 msgid ""
 "  Commands:\n"
 "\thelp\t\t\tHelp\n"
@@ -735,6 +975,7 @@ msgid ""
 "\tupdate, up\t\tUpdate installed resolvables with newer versions.\n"
 "\tinfo, if\t\tShow full information for packages\n"
 "\tpatch-info\t\tShow full information for patches\n"
+"\tsource-install, si\tInstall a source package\n"
 msgstr ""
 "  Komennot:\n"
 "\thelp\t\t\tOhje\n"
@@ -742,58 +983,34 @@ msgstr ""
 " \tinstall, in\t\tAsenna paketteja tai muita osia\n"
 " \tremove, rm\t\tPoista paketteja tai muita osia\n"
 " \tsearch, se\t\tHae ohjelmistoryhmiä vastaavia paketteja\n"
-" \tservice-list, sl\tNäytä luettelo palveluista, kutsutaan myös asennuslähteiksi\n"
-" \tservice-add, sa\t\tLisää uusi palvelu\n"
-" \tservice-delete, sd\tPoista palvelu\n"
-" \tservice-rename, sr\tNimeä palvelu uudelleen\n"
+" \trepos, lr\t\tNäytä luettelo asennuslähteistä\n"
+" \taddrepo, ar\t\tLisää uusi asennuslähde\n"
+" \tremoverepo, rr\t\tPoista asennuslähde\n"
+" \trenamerepo, nr\t\tNimeä asennuslähde uudelleen\n"
 " \trefresh, ref\t\tPäivitä kaikki asennuslähteet\n"
 " \tpatch-check, pchk\tTarkista saatavilla olevat päivitykset\n"
 " \tpatches, pch\t\tNäytä luettelo korjauksista\n"
 " \tlist-updates, lu\tNäytä päivitysten luettelo\n"
+" \txml-updates, xu\t\tNäytä päivitykset xml-muodossa\n"
 " \tupdate, up\t\tPäivitä paketit\n"
 " \tinfo, if\t\tNäytä pakettien täydet tiedot\n"
 " \tpatch-info\t\tNäytä korjausten täydet tiedot\n"
+" \tsource-install, si\tAsenna lähdekoodipaketti\n"
 
-#: ../src/zypper.cc:142
-msgid ""
-"  Options:\n"
-"\t--help, -h\t\tHelp.\n"
-"\t--version, -V\t\tOutput the version number.\n"
-"\t--quiet, -q\t\tSuppress normal output, print only error messages.\n"
-"\t--verbose, -v\t\tIncrease verbosity.\n"
-"\t--terse, -t\t\tTerse output for machine consumption.\n"
-"\t--table-style, -s\tTable style (integer).\n"
-"\t--rug-compatible, -r\tTurn on rug compatibility.\n"
-"\t--non-interactive\tDon't ask anything, use default answers automatically.\n"
-"\t--no-gpg-checks\t\tIgnore GPG check failures and continue.\n"
-"\t--root, -R <dir>\tOperate on a different root directory.\n"
-msgstr ""
-"  Valinnat:\n"
-"\t--help, -h\t\tOhje\n"
-"\t--version, -V\t\tNäyttää version\n"
-"\t--quiet, -q\t\tTulostaa ainoastaan virheet.\n"
-"\t--verbose, -v\t\tKasvattaa näytettävän tiedon määrää\n"
-"\t--terse, -t\t\tMinimoi näytettävän tiedon määrän\n"
-"\t--table-style, -s\tTaulukon tyyppi (kokonaisluku)\n"
-"\t--rug-compatible, -r\tOttaa rug-yhteensopivuustilan käyttöön.\n"
-"\t--non-interactive\tÄlä kysy mitään, käytä oletus vastausta automaattisesti. (kehityksen alla)\n"
-"\t--no-gpg-checks\t\tJätä GPG-tarkistuksen virheet huomiomatta ja jatka.\n"
-"\t--root, -R <dir>\tToimi eri juuri-hakemiston alla\n"
-
-#: ../src/zypper.cc:162
+#: ../src/zypper.cc:164
 #, c-format
 msgid "Verbosity: %d"
 msgstr "Sanallisuus: %d"
 
-#: ../src/zypper.cc:168
+#: ../src/zypper.cc:170
 msgid "Entering non-interactive mode."
 msgstr "Siirrytään ei-vuorovaikutteinen -tilaan."
 
-#: ../src/zypper.cc:174
+#: ../src/zypper.cc:176
 msgid "Entering no-gpg-checks mode."
-msgstr "Siirrytän ei tarkisteta GPG-avaimia -tilaan."
+msgstr "Siirrytään ei tarkisteta GPG-avaimia -tilaan."
 
-#: ../src/zypper.cc:184
+#: ../src/zypper.cc:186
 msgid "Invalid table style "
 msgstr "Virheellinen taulukon tyyli "
 
@@ -801,219 +1018,250 @@ msgstr "Virheellinen taulukon tyyli "
 msgid "Try -h for help."
 msgstr "Saat ohjeita valitsimella -h."
 
-#: ../src/zypper.cc:248
+#: ../src/zypper.cc:281
 msgid ""
-"  Repository options:\n"
-"\t--disable-repositories, -D\t\tDo not read data from defined repositories.\n"
-"\t--repo <URI|.repo>\t\tRead additional repository\n"
-msgstr ""
-"  Asennuslähteen valinnat:\n"
-"\t--disable-repositories, -D\t\tÄlä lue tietoja määritellyistä asennuslähteistä.\n"
-"\t--repo <URI|.repo>\t\tLue tiedot lisälähteestä\n"
-
-#. ! \todo preserve for rug comp.  "\t--disable-system-sources, -D\t\tDo not read the system sources\n"
-#. ! \todo preserve for rug comp.  "\t--source, -S\t\tRead additional source\n"
-#: ../src/zypper.cc:255
-msgid ""
-"  Target options:\n"
-"\t--disable-system-resolvables, -T\t\tDo not read system installed resolvables\n"
-msgstr ""
-"  Kohdevalinnat:\n"
-"\t--disable-system-resolvables, -T\t\tÄlä lue järjestelmään asennettuja muita osia\n"
-
-#: ../src/zypper.cc:274
-msgid ""
-"install [options] <name> ...\n"
+"install (in) [options] <capability> ...\n"
 "\n"
-"'install' - Install resolvabe(s) with specified name(s).\n"
+"Install resolvables with specified capabilities. A capability is NAME[OP<VERSION>], where OP is one of <, <=, =, >=, >.\n"
 "\n"
 "  Command options:\n"
-"\t--catalog,-c\t\t\tOnly from this catalog (under development)\n"
-"\t--type,-t <resolvable_type>\tType of resolvable (default: package)\n"
-"\t--no-confirm,-y\t\t\tDo not require user confirmation to proceed with installation\n"
-"\t--auto-agree-with-licenses,-l\tAutomatically say 'yes' to third party license confirmation prompt.\n"
-"\t\t\t\t\tSee man zypper for more details.\n"
+"-r, --repo <alias>              Install resolvables only from repository specified by alias.\n"
+"-t, --type <type>               Type of resolvable (package, patch, pattern, product) (default: package)\n"
+"-n, --name                      Select resolvables by plain name, not by capability\n"
+"-l, --auto-agree-with-licenses  Automatically say 'yes' to third party license confirmation prompt.\n"
+"                                See 'man zypper' for more details.\n"
+"    --debug-solver              Create solver test case for debugging\n"
 msgstr ""
-"install [asetukset] <nimi> ...\n"
+"install (in) [valinnat] <määritys> ...\n"
 "\n"
-"'install' - Asentaa määritellyt osat.\n"
+"Asentaa järjestelmään paketteja annettujen määritysten perusteella. Määritys on muotoa NIMI[OP<VERSIO>], jossa OP on jokin seuraavista <, <=, =, >=, >.\n"
 "\n"
-"  Komennon valinnat:\n"
-"\t--catalog,-c\t\t\tAinoastaan määritellystä luettelosta(Kehityksessä)\n"
-"\t--type,-t <resolvable_type>\tOsan tyyppi (oletuksena: package)\n"
-"\t--no-confirm,-y\t\t\tÄlä edellytä käyttäjän varmistuksia asennuksen yhteydessä\n"
-"\t--auto-agree-with-licenses,-l\tHyväksy kolmannen osapuolen käyttöehtosopimukset automaattisesti.\n"
-"\t\t\t\t\tLisää tietoja: man zypper\n"
+"  Valinnat:\n"
+"-r, --repo <alias>              Asenna paketit määritellystä asennuslähteestä.\n"
+"-t, --type <type>               Määrittelyn tyyppi (package, patch, pattern, product) (oletus: package)\n"
+"-n, --name                      Valitse paketit ainoastaan nimen perusteella\n"
+"-l, --auto-agree-with-licenses  Vastaa automaattisesti 'kyllä' kolmannen osapuolen käyttöehtosopimuksiin.\n"
+"                                Katso lisätietoja zypper-komennon manuaalista (man zypper).\n"
+"    --debug-solver              Luo ratkaisintesti (debug)\n"
 
-#: ../src/zypper.cc:295
+#: ../src/zypper.cc:310
 msgid ""
-"remove [options] <name> ...\n"
+"remove (rm) [options] <capability> ...\n"
 "\n"
-"'remove' - Remove resolvabe(s) with specified name(s).\n"
+"Remove resolvables with specified capabilities. A capability is NAME[OP<VERSION>], where OP is one of <, <=, =, >=, >.\n"
 "\n"
 "  Command options:\n"
-"\t--type,-t <resolvable_type>\tType of resolvable (default: package)\n"
-"\t--no-confirm,-y\t\t\tDo not require user confirmation\n"
+"-r, --repo <alias> Operate only with resolvables from repository specified by alias.\n"
+"-t, --type <type>  Type of resolvable (package, patch, pattern, product) (default: package)\n"
+"-n, --name         Select resolvables by plain name, not by capability\n"
+"    --debug-solver Create solver test case for debugging\n"
 msgstr ""
-"remove [valinnat] <name> ...\n"
+"remove (rm) [valinnat] <määritys> ...\n"
 "\n"
-"'remove' - Poistaa määritellyt osat\n"
+"Poistaa järjestelmästä paketteja annettujen määritysten perusteella. Määritys on muotoa NIMI[OP<VERSIO>], jossa OP on jokin seuraavista <, <=, =, >=, >.\n"
 "\n"
-"  Komennon valinnat:\n"
-"\t--type,-t <resolvable_type>\tOsan tyyppi (oletuksena: package)\n"
-"\t--no-confirm,-y\t\t\tÄlä edellytä käyttäjän varmistusta\n"
+"  Valinnat:\n"
+"-r, --repo <alias> Poista ainoastaan paketit, jotka ovat määritellystä asennuslähteestä.\n"
+"-t, --type <type>  Määrittelyn tyyppi (package, patch, pattern, product) (oletus: package)\n"
+"-n, --name         Poista paketit ainoastaan nimen perusteella\n"
+"    --debug-solver Luo ratkaisintesti (debug)\n"
 
-#: ../src/zypper.cc:315
+#: ../src/zypper.cc:329
+msgid ""
+"source-install (si) <name> ...\n"
+"\n"
+"Install source packages specified by their names.\n"
+"\n"
+"This command has no additional options.\n"
+msgstr ""
+"source-install (si) <name> ...\n"
+"\n"
+"Asentaa määritellyt lähdekoodipaketit.\n"
+"\n"
+"Tällä komennolla ei ole valitsimia.\n"
+
+#: ../src/zypper.cc:349
 msgid ""
 "addrepo (ar) [options] <URI> <alias>\n"
 "\n"
-"Add repository specified by URI to the system and assing specified alias to it.\n"
+"Add repository specified by URI to the system and assing the specified alias to it.\n"
+"\n"
 "  Command options:\n"
-"\t--repo,-r <FILE.repo>\tRead the URL and alias from a file\n"
-"\t\t\t\t(even remote)\n"
-"\t--type,-t <TYPE>\tType of repository (YaST, YUM, or Plaindir)\n"
-"\t--disabled,-d\t\tAdd the repository as disabled\n"
-"\t--no-refresh,-n\t\tAdd the repository with auto-refresh disabled\n"
+"-r, --repo <FILE.repo>  Read the URL and alias from a file (even remote)\n"
+"-t, --type <TYPE>       Type of repository (yast2, rpm-md, or plaindir)\n"
+"-d, --disabled          Add the repository as disabled\n"
+"-n, --no-refresh        Add the repository with auto-refresh disabled\n"
 msgstr ""
 "addrepo (ar) [valinnat] <URI> <alias>\n"
 "\n"
-"Lisää URL-osoitteella määritelty asennuslähde järjestelmään.\n"
+"Lisää URL-osoitteella ja alias-nimellä määritellyn asennuslähteen järjestelmään.\n"
 "  Komennon valinnat:\n"
-" \t--repo,-r <TIEDOSTO.repo>\tLue verkko-osoite ja alias tiedostosta\n"
-" \t\t\t\t(myös etä)\n"
-" \t--type,-t <TYYPPI>\tAsennuslähteen tyyppi (YaST, YUM tai Plaindir)\n"
-" \t--disabled,-d\t\tLisää asennuslähde poistettuna käytöstä\n"
-" \t--no-refresh,-n\t\tÄlä päivitä metatietoja automaattisesti\n"
+"-t, --repo <TIEDOSTO.repo>  Lue verkko-osoite ja alias tiedostosta(myös etä)\n"
+"-t, --type <TYYPPI>         Asennuslähteen tyyppi (YaST, YUM tai Plaindir)\n"
+"-d, --disabled              Lisää asennuslähde poistettuna käytöstä\n"
+"-n, --no-refresh            Älä päivitä metatietoja automaattisesti\n"
 
-#: ../src/zypper.cc:334
+#: ../src/zypper.cc:368
 msgid ""
 "repos (lr)\n"
 "\n"
 "List all defined repositories.\n"
-"This command has no additional options.\n"
-msgstr ""
-"repos (lr)\n"
 "\n"
-"Listaa määritellyt asennuslähteet.\n"
-"Tällä komennolla ei ole valitsimia.\n"
+"  Command options:\n"
+"-e, --export <FILE.repo>  Export all defined repositories as a single local .repo file\n"
+msgstr ""
+"repos (lr) [valinnat]\n"
+"\n"
+"Näyttää listan määritellyistä asennuslähteistä.\n"
+"\n"
+"  Valinnat:\n"
+"-e, --export <TIEDOSTO.repo>  Vie järjestelmän kaikki asennuslähteet yksittäiseen .repo-tiedostoon\n"
 
-#: ../src/zypper.cc:350
+#: ../src/zypper.cc:385
 msgid ""
 "removerepo (rr) [options] <alias|URL>\n"
 "\n"
 "Remove repository specified by alias or URL.\n"
+"\n"
 "  Command options:\n"
-"\t--loose-auth\tIgnore user authentication data in the URL\n"
-"\t--loose-query\tIgnore query string in the URL\n"
+"    --loose-auth\tIgnore user authentication data in the URL\n"
+"    --loose-query\tIgnore query string in the URL\n"
 msgstr ""
 "removerepo (rr) [valinnat] <alias|URL>\n"
 "\n"
-"Poistaa URL-ositteella tai aliaksella määritellyn asennuslähteen.\n"
-"  Komennon valinnat:\n"
-"\t--loose-auth\tJätä URL-ositteen käyttäjän tunnistautimistiedot huomioimatta.\n"
-"\t--loose-query\tJätä URL-osoitteen kyselyjono huomioimatta.\n"
+"Poistaa URL-osoitteella tai aliaksella määritellyn asennuslähteen.\n"
+"  Valinnat:\n"
+"--loose-auth    Jätä URL-osoitteen käyttäjän tunnistautumistiedot huomioimatta.\n"
+"--loose-query   Jätä URL-osoitteen kyselyjono huomioimatta.\n"
 
-#: ../src/zypper.cc:366
+#: ../src/zypper.cc:401
 msgid ""
 "renamerepo [options] <alias> <new-alias>\n"
 "\n"
 "Assign new alias to the repository specified by alias.\n"
+"\n"
 "This command has no additional options.\n"
 msgstr ""
-"renamerepo [valinnat] <URI|alias> <new-alias>\n"
+"renamerepo <URI|alias> <new-alias>\n"
 "\n"
-"Määrittelee uuden aliaksen asennuslähteelle."
+"Määrittelee uuden aliaksen asennuslähteelle.\n"
+"\n"
 "Tällä komennolla ei ole valitsimia.\n"
 
-#: ../src/zypper.cc:384
+#: ../src/zypper.cc:419
 msgid ""
 "modifyrepo (mr) <options> <alias>\n"
 "\n"
 "Modify properties of the repository specified by alias.\n"
-"\t--disable,-d\t\tDisable the repository (but don't remove it)\n"
-"\t--enable,-e\t\tEnable a disabled repository\n"
-"\t--enable-autorefresh,-a\tEnable auto-refresh of the repository\n"
-"\t--disable-autorefresh\tDisable auto-refresh of the repository\n"
+"\n"
+"  Command options:\n"
+"-d, --disable             Disable the repository (but don't remove it)\n"
+"-e, --enable              Enable a disabled repository\n"
+"-a, --enable-autorefresh  Enable auto-refresh of the repository\n"
+"    --disable-autorefresh Disable auto-refresh of the repository\n"
 msgstr ""
 "modifyrepo (mr) <valinnat> <alias>\n"
 "\n"
-"Muokkaa URL-osoitteella tai aliaksella määritellyn asennuslähteen valintoja.\n"
-"\t--disable,-d\t\tPoista käytöstä (mutta älä poista asennuslähdettä)\n"
-"\t--enable,-e\t\tOttaa käytöstäpoistetun asennuslähteen käyttöön\n"
-"\t--enable-autorefresh,-a\tAsettaa automaattisen päivityksen päälle\n"
-"\t--disable-autorefresh\tPoistaa automaattisen päivityksen käytöstä\n"
+"Muokkaa alias-nimellä määritellyn asennuslähteen tietoja.\n"
+"-d, --disable             Poista käytöstä (mutta älä poista asennuslähdettä)\n"
+"-e, --enable              Ottaa käytöstäpoistetun asennuslähteen käyttöön\n"
+"-a, --enable-autorefresh  Asettaa automaattisen päivityksen päälle\n"
+"    --disable-autorefresh Poistaa automaattisen päivityksen käytöstä\n"
 
-#: ../src/zypper.cc:401
+#: ../src/zypper.cc:442
 msgid ""
-"refresh\n"
+"refresh (ref) [alias|#] ...\n"
 "\n"
-"Refresh all installation sources found in the system.\n"
+"Refresh repositories specified by their alias or number. If none are specified, all enabled repositories will be refreshed.\n"
 "\n"
-"This command has no additional options.\n"
+"  Command options:\n"
+"-f, --force             Force a complete refresh\n"
+"-b, --force-build       Force rebuild of the database\n"
+"-d, --force-download    Force download of raw metadata\n"
+"-B, --build-only        Only build the database, don't download metadata.\n"
+"-D, --download-only     Only download raw metadata, don't build the database\n"
 msgstr ""
-"refresh\n"
+"refresh (ref) [valinnat] [alias|#] ...\n"
 "\n"
-"Päivittää järjestelmän kaikki asennuslähteet.\n"
+"Päivittää alias-nimellä tai numerolla määritellyn asennuslähteen. Jos asennuslähteitä ei määritelty, kaikki päivitetään.\n"
 "\n"
-"Tällä komennolla ei ole valitsimia.\n"
+"  Valinnat:\n"
+"-f, --force             Pakota täydellinen päivitys\n"
+"-b, --force-build       Pakota tietokannan uudelleenrakennus\n"
+"-d, --force-download    Pakota hakemaan metatiedot uudelleen\n"
+"-B, --build-only        Rakenna ainoastaan tietokanta uudelleen. Älä nouda metatietoja uudelleen\n"
+"-D, --download-only     Nouda ainoastaan metatiedot uudelleen, älä uudelleenrakenna tietokantaa\n"
 
-#: ../src/zypper.cc:416
+#: ../src/zypper.cc:467
 msgid ""
 "list-updates [options]\n"
 "\n"
 "List all available updates\n"
 "\n"
 "  Command options:\n"
-"\t--type,-t <resolvable_type>\tType of resolvable (default: patch)\n"
+"-t, --type <type>   Type of resolvable (package, patch, pattern, product) (default: patch)\n"
+"-r, --repo <alias>  List only updates from the repository specified by the alias.\n"
+"    --best-effort   Do a 'best effort' approach to update, updates to a lower than latest-and-greatest version are also acceptable.\n"
 msgstr ""
 "list-updates [valinnat]\n"
 "\n"
-"Näyttää asennettavissa olevat päivitykset\n"
+"Näytä saatavilla olevat päivitykset\n"
 "\n"
-"  Komennon valinnat:\n"
-"\t--type,-t <tyyppi>\tOsan tyyppi (oletksena: patch)\n"
+"  Valinnat:\n"
+"-t, --type <tyyppi> Määrittelyn tyyppi (package, patch, pattern, product) (oletus: patch)\n"
+"-r, --repo <alias>  Näytä ainoastaan määritellyn asennuslähteen päivitykset.\n"
+"    --best-effort   Mahdollistaa myös pakettien päivittämisen vanhempaan versioon.\n"
 
-#: ../src/zypper.cc:435
+#: ../src/zypper.cc:494
 msgid ""
-"'update' - Update all installed resolvables with newer versions, where applicable.\n"
+"update (up) [options]\n"
+"\n"
+"Update all installed resolvables with newer versions, where applicable.\n"
 "\n"
 "  Command options:\n"
 "\n"
-"\t--type,-t <resolvable_type>\tType of resolvable (default: patch)\n"
-"\t--no-confirm,-y\t\t\tDo not require user confirmation\n"
-"\t--skip-interactive\t\tSkip interactive updates\n"
-"\t--auto-agree-with-licenses,-l\tAutomatically say 'yes' to third party license confirmation prompt.\n"
-"\t\t\t\t\tSee man zypper for more details.\n"
+"-t, --type <type>               Type of resolvable (package, patch, pattern, product) (default: patch)\n"
+"-r, --repo <alias>              Limit updates to the repository specified by the alias.\n"
+"    --skip-interactive          Skip interactive updates\n"
+"-l, --auto-agree-with-licenses  Automatically say 'yes' to third party license confirmation prompt.\n"
+"                                See man zypper for more details.\n"
+"    --best-effort               Do a 'best effort' approach to update, updates to a lower than latest-and-greatest version are also acceptable\n"
+"    --debug-solver              Create solver test case for debugging\n"
 msgstr ""
-"'update' - Päivittää asennetut osat uudemmiksi, jos mahdollista.\n"
+"update (up) [valinnat]\n"
 "\n"
-"  Komennon valinnat:\n"
+"Päivittää paketit uudempiin versioihin, jos mahdollista.\n"
 "\n"
-"\t--type,-t <tyyppi>\tPäivityksen tyyppi (oletuksena: patch)\n"
-"\t--no-confirm,-y\t\t\tÄlä edellyt' käyttäjän vahvistusta\n"
-"\t--skip-interactive\t\tOhita vuorovaikutteiset päivitykset\n"
-"\t--auto-agree-with-licenses,-l\tHyväksy kolmannen osapuolen käyttöehtosopimukset automaattisesti.\n"
-"\t\t\t\t\tLisää tietoja: man zypper\n"
+"  Valinnat:\n"
+"\n"
+"-t, --type <tyyppi>             Määrittelyn tyyppi (package, patch, pattern, product) (oletus: patch)\n"
+"-r, --repo <alias>              Päivittää ainoastaan tietyn asennuslähteen paketit.\n"
+"    --skip-interactive          Ohita vuorovaikutteiset päivitykset\n"
+"-l, --auto-agree-with-licenses  Vastaa automaattisesti 'kyllä' kolmannen osapuolen käyttöehtosopimuksiin.\n"
+"                                Katso lisätietoja zypper-komennon manuaalista (man zypper).\n"
+"    --best-effort               Mahdollistaa myös pakettien päivittämisen vanhempaan versioon.\n"
+"    --debug-solver              Luo ratkaisintesti (debug)\n"
 
-#: ../src/zypper.cc:465
+#: ../src/zypper.cc:533
 msgid ""
 "search [options] [querystring...]\n"
 "\n"
-"'search' - Search for packages matching given search strings\n"
+"Search for packages matching given search strings\n"
 "\n"
 "  Command options:\n"
-"    --match-all            Search for a match to all search strings (default)\n"
-"    --match-any            Search for a match to any of the search strings\n"
-"    --match-substrings     Matches for search strings may be partial words (default)\n"
-"    --match-words          Matches for search strings may only be whole words\n"
+"    --match-all            Search for a match with all search strings (default)\n"
+"    --match-any            Search for a match with any of the search strings\n"
+"    --match-substrings     Matches with search strings may be partial words (default)\n"
+"    --match-words          Matches with search strings may only be whole words\n"
 "    --match-exact          Searches for an exact package name\n"
 "-d, --search-descriptions  Search also in package summaries and descriptions.\n"
 "-c, --case-sensitive       Perform case-sensitive search.\n"
 "-i, --installed-only       Show only packages that are already installed.\n"
 "-u, --uninstalled-only     Show only packages that are not currently installed.\n"
-"-t, --type                 Search only for packages of the specified type.\n"
+"-t, --type <type>          Search only for packages of the specified type.\n"
+"-r, --repo <alias>         Search only in the repository specified by the alias.\n"
 "    --sort-by-name         Sort packages by name (default).\n"
-"    --sort-by-catalog      Sort packages by catalog (source).\n"
+"    --sort-by-repo         Sort packages by repository.\n"
 "\n"
 "* and ? wildcards can also be used within search strings.\n"
 msgstr ""
@@ -1021,114 +1269,137 @@ msgstr ""
 "\n"
 "'search' - Hakee paketteja hakulauseen perusteella\n"
 "\n"
-"  Komennon valinnat:\n"
+"  Valinnat:\n"
 "    --match-all            Hae kaikkien hakumerkkijonojen vastaavuuksia (oletusarvo)\n"
 "    --match-any            Hae vastaavuutta mille tahansa hakumerkkijonolle\n"
-"    --match-substrings     Hakumerkkijonojen vastaavuudet voivat olla osoittaisia sanoja (oletusarvo)\n"
+"    --match-substrings     Hakumerkkijonojen vastaavuudet voivat olla osittaisia sanoja (oletusarvo)\n"
 "    --match-words          Hakumerkkijonojen vastaavuudet voivat olla kokonaisia sanoja\n"
 "    --match-exact          Hakee tiettyä tarkkaa paketin nimeä\n"
 "-d, --search-descriptions  Hakee myös pakettien yhteenvedoista ja kuvauksista.\n"
 "-c, --case-sensitive       Suorittaa haun, jossa kirjainkoko on merkitsevä.\n"
 "-i, --installed-only       Näin vain jo asennetut paketit.\n"
 "-u, --uninstalled-only     Näytä vain paketit, joita ei ole tällä hetkellä asennettu.\n"
-"-t, --type                 Näytä vain tietyn tyyppiset paketit.\n"
+"-t, --type <tyyppi>        Näytä vain tietyn tyyppiset paketit.\n"
+"-r, --repo <alias>         Näytä ainoastaan tietyn asennuslähteen paketit.\n"
 "    --sort-by-name         Lajittele paketit nimen mukaan (oletusarvo).\n"
 "    --sort-by-catalog      Lajittele paketit luettelon (lähteen) mukaan.\n"
 "\n"
 "Voit käyttää jokerimerkkejä (* ja ?) hakulauseessa.\n"
 
-#: ../src/zypper.cc:493
+#: ../src/zypper.cc:565
 msgid ""
 "patch-check\n"
 "\n"
 "Check for available patches\n"
 "\n"
-"This command has no additional options.\n"
+"  Command options:\n"
+"\n"
+"-r, --repo <alias>  Check for patches only in the repository specified by the alias.\n"
 msgstr ""
 "patch-check\n"
 "\n"
-"Hakee saatavilla olevat paikkaukset\n"
-" \n"
-"Tällä komennolla ei ole valitsimia.\n"
+"Tarkistaa saatavillaolevat paikkaukset\n"
+"\n"
+"  Valinnat:\n"
+"\n"
+"-r, --repo <alias>  Tarkista ainoastaan tietyn asennuslähteen paikkaukset.\n"
 
-#: ../src/zypper.cc:507
+#: ../src/zypper.cc:584
 msgid ""
 "patches\n"
 "\n"
 "List all available patches\n"
 "\n"
-"This command has no additional options.\n"
+"  Command options:\n"
+"\n"
+"-r, --repo <alias>  Check for patches only in the repository specified by the alias.\n"
 msgstr ""
 "patches\n"
 "\n"
-"Näyttää luettelon kaikista saatavilla olevista paikkauksista\n"
-" \n"
-"Tällä komennolla ei ole valitsimia.\n"
+"Listaa saatavillaolevat paikkaukset\n"
+"\n"
+"  Valinnat:\n"
+"\n"
+"-r, --repo <alias>  Tarkista ainoastaan tietyn asennuslähteen paikkaukset.\n"
 
-#: ../src/zypper.cc:521
+#: ../src/zypper.cc:603
 msgid ""
 "info <name> ...\n"
 "\n"
-"'info' -- Show full information for packages\n"
+"Show full information for packages\n"
 "\n"
-"This command has no additional options.\n"
+"  Command options:\n"
+"\n"
+"-r, --repo <alias>  Work only with the repository specified by the alias.\n"
 msgstr ""
-"info <nimi> ...\n"
+"info [valinnat] <nimi> ...\n"
 "\n"
-"'info' -- Näyttää paketin tiedot\n"
+"Näyttää paketin tiedot\n"
 "\n"
-"Tällä komennolla ei ole valitsimia.\n"
+"-r, --repo <alias>  Käytä ainoastaan määriteltyä asennuslähdettä.\n"
 
-#: ../src/zypper.cc:535
+#: ../src/zypper.cc:621
 msgid ""
 "patch-info <patchname> ...\n"
 "\n"
-"'patch-info' -- Show detailed information for patches\n"
+"Show detailed information for patches\n"
 "\n"
-"This command has no additional options.\n"
+"This is a rug compatibility alias for 'zypper info -t patch'\n"
 msgstr ""
 "patch-info <korjaus> ...\n"
 "\n"
-"'patch-info' -- Näyttää paikkauksen yksityiskohtaiset tiedot\n"
+"Näyttää paikkauksen yksityiskohtaiset tiedot\n"
 "\n"
-"Tällä komennolla ei ole valitsimia.\n"
+"Tämä on ainoastaan rug-yhteensopivuuden takia ja sama kuin: 'zypper info -t patch'\n"
 
-#: ../src/zypper.cc:549
+#: ../src/zypper.cc:635
 msgid ""
 "moo\n"
 "\n"
-"'moo' - Show an animal\n"
+"Show an animal\n"
 "\n"
 "This command has no additional options.\n"
 msgstr ""
 "moo\n"
 "\n"
-"'moo' - Näyttää lehmän\n"
+"Näyttää eläimen\n"
 "\n"
 "Tällä komennolla ei ole valitsimia.\n"
 
-#: ../src/zypper.cc:567
+#: ../src/zypper.cc:650
+msgid ""
+"xml-updates\n"
+"\n"
+"Show updates and patches in xml format\n"
+"\n"
+"  Command options:\n"
+"-r, --repo <alias>  Work only with updates from repository specified by alias.\n"
+msgstr ""
+"xml-updates\n"
+"\n"
+"Näyttää päivitykset xml-muodossa\n"
+"\n"
+"  Valinnat:\n"
+"-r, --repo <alias>  Käytä ainoastaan määriteltyä asennuslähdettä.\n"
+
+#: ../src/zypper.cc:670
 msgid "Non-option program arguments: "
 msgstr "Ei-valinnaiset ohjelman valinnat "
 
-#: ../src/zypper.cc:579
-msgid "Ignoring --terse (provided only for rug compatibility)"
-msgstr "Jätetään --terse huomioimatta (vain rug-yhteensopivuuden takia)"
-
-#: ../src/zypper.cc:588
-msgid "Repositories disabled, using database of installed packages only."
+#: ../src/zypper.cc:693
+msgid "Repositories disabled, using the database of installed packages only."
 msgstr "Asennuslähteet poistettu käytöstä. Käytetään asennettujen pakettien tietokantaa."
 
-#: ../src/zypper.cc:600
+#: ../src/zypper.cc:705
 msgid "Ignoring installed resolvables..."
 msgstr "Ohitetaan asennettuja osia..."
 
-#: ../src/zypper.cc:625
-msgid "A ZYpp transaction is already in progress.This means, there is another application using libzypp library forpackage management running. All such applications must be closed beforeusing this command."
+#: ../src/zypper.cc:730
+msgid "A ZYpp transaction is already in progress. This means, there is another application using the libzypp library for package management running. All such applications must be closed before using this command."
 msgstr "ZYpp tapahtuma on jo käynnissä. Tämä tarkoittaa, että jokin toinen käynnissäoleva ohjelma käyttää libzypp-kirjastoa pakettienhallintaan. Muut libzypp-kirjastoa käyttävät ohjelmat on suljettava ennen tämän komennon käyttöä."
 
 #. TranslatorExplanation this is a hedgehog, paint another animal, if you want
-#: ../src/zypper.cc:644
+#: ../src/zypper.cc:755
 msgid ""
 "   \\\\\\\\\\\n"
 "  \\\\\\\\\\\\\\__o\n"
@@ -1138,155 +1409,211 @@ msgstr ""
 "  \\\\\\\\\\\\\\__o\n"
 "__\\\\\\\\\\\\\\'/_"
 
-#: ../src/zypper.cc:672 ../src/zypper.cc:737 ../src/zypper.cc:808
-#: ../src/zypper.cc:848
+#: ../src/zypper.cc:783 ../src/zypper.cc:861 ../src/zypper.cc:932
+#: ../src/zypper.cc:972
 msgid "Root privileges are required for modifying system repositories."
-msgstr "Järjestelmän lähteiden muokkaaminen vaatii pääkäyttäjän oikeudet."
+msgstr "Järjestelmän asennuslähteiden muokkaaminen vaatii pääkäyttäjän oikeudet."
 
-#: ../src/zypper.cc:696 ../src/zypper.cc:814
+#: ../src/zypper.cc:810 ../src/zypper.cc:938
 msgid "Too few arguments. At least URL and alias are required."
 msgstr "Liian vähän valintoja. Määrittele vähintään URL-osoite ja alias."
 
-#: ../src/zypper.cc:743
+#: ../src/zypper.cc:842
+msgid "Specified type is not a valid repository type:"
+msgstr "Virheellinen asennuslähteen tyyppi:"
+
+#: ../src/zypper.cc:843
+msgid "See 'zypper -h addrepo' or man zypper to get a list of known repository types."
+msgstr "Tarkista 'zypper -h addrepo' tai 'man zypper' saadaksesi listan tunnetuista asennuslähteen tyypeistä"
+
+#: ../src/zypper.cc:867
 msgid "Required argument missing."
 msgstr "Tarvittava valinta puuttuu."
 
-#: ../src/zypper.cc:756
+#: ../src/zypper.cc:880
 msgid "Repository not found by alias, trying delete by URL..."
 msgstr "Aliaksella määriteltyä asennuslähdettä ei löydy. Kokeile poistaa URL-osoitteen perusteella."
 
-#: ../src/zypper.cc:789
+#: ../src/zypper.cc:913
 msgid "Repository not found by given alias or URL."
 msgstr "Määriteltyä asennuslähdettä ei löydy."
 
-#: ../src/zypper.cc:854
+#: ../src/zypper.cc:978
 msgid "Alias is a required argument."
 msgstr "Alias on pakollinen valinta."
 
-#: ../src/zypper.cc:876
+#: ../src/zypper.cc:1000
 msgid "Root privileges are required for refreshing system repositories."
-msgstr "Järjestelmän lähteiden päivittämiseen vaaditaan pääkäyttäjän oikeudet."
+msgstr "Järjestelmän asennuslähteiden päivittämiseen vaaditaan pääkäyttäjän oikeudet."
 
-#: ../src/zypper.cc:912
+#: ../src/zypper.cc:1037
 msgid "Root privileges are required for installing or uninstalling packages."
 msgstr "Pakettien asentamiseen tai poistamiseen vaaditaan pääkäyttäjän oikeudet."
 
-#: ../src/zypper.cc:920 ../src/zypper.cc:1070 ../src/zypper.cc:1123
+#: ../src/zypper.cc:1051 ../src/zypper.cc:1259 ../src/zypper.cc:1332
 #, c-format
 msgid "Unknown resolvable type: %s"
 msgstr "Tuntematon tyyppi: %s"
 
-#: ../src/zypper.cc:936
+#: ../src/zypper.cc:1069
 msgid "Warning: No repositories defined. Operating only with the installed resolvables. Nothing can be installed."
 msgstr "Varoitus: Asennuslähteitä ei ole määritelty. Käytetään ainoastaan asennettuja osia. Mitään ei voida asentaa."
 
-#: ../src/zypper.cc:984
+#: ../src/zypper.cc:1089 ../src/zypper.cc:1357
+msgid "Generating solver test case..."
+msgstr "Luodaan asennuslähteen ratkaisintestiä..."
+
+#: ../src/zypper.cc:1091 ../src/zypper.cc:1359
+msgid "Solver test case generated successfully."
+msgstr "Ratkaisintesti luotiin onnistuneesti."
+
+#: ../src/zypper.cc:1094 ../src/zypper.cc:1361
+msgid "Error creating the solver test case."
+msgstr "Virhe ratkaisintestin luonnissa."
+
+#: ../src/zypper.cc:1116
+msgid "Source package name is a required argument."
+msgstr "Lähdekoodipaketin nimi on pakollinen valinta"
+
+#: ../src/zypper.cc:1155
 msgid "Unknown resolvable type "
 msgstr "Tuntematon tyyppi "
 
-#: ../src/zypper.cc:1003
+#: ../src/zypper.cc:1183
 msgid "No resolvables found."
 msgstr "Ei löytynyt."
 
-#: ../src/zypper.cc:1112
+#. 'rug' is the name of a program and must not be translated
+#. 'best-effort' is a program parameter and can not be translated
+#: ../src/zypper.cc:1269 ../src/zypper.cc:1342
+msgid "Running as 'rug', can't do 'best-effort' approach to update."
+msgstr "'best-effort'-ratkaisumalli ei ole käytettävissä rug-yhteensopivuustilassa."
+
+#: ../src/zypper.cc:1315
 msgid "Root privileges are required for updating packages."
 msgstr "Pakettien päivittämiseen vaaditaan pääkäyttäjän oikeudet."
 
-#: ../src/zypper.cc:1169
-msgid "Please file a bug report about this."
-msgstr "Tee virheilmoitus tästä viasta."
-
-#. remember not to translate the URL
-#. unless you translate the actual page :)
-#: ../src/zypper.cc:1172
-msgid "See http://en.opensuse.org/Zypper#Troubleshooting for instructions."
-msgstr "Ohjeita on sivulla http://en.opensuse.org/Zypper#Troubleshooting."
-
-#: ../src/zypper.cc:1187
+#: ../src/zypper.cc:1411
 msgid "Unexpected exception."
 msgstr "Odottamaton poikkeus."
 
-#: ../src/zypper.cc:1269
+#: ../src/zypper.cc:1497
 msgid "You already are running zypper's shell."
 msgstr "Olet jo zypperin komentokehoitteessa."
 
-#: ../src/zypper-command.cc:90
+#: ../src/zypper-utils.cc:44
+msgid "Please file a bug report about this."
+msgstr "Tee virheilmoitus tästä viasta."
+
+#. TranslatorExplanation remember not to translate the URL
+#. unless you translate the actual page :)
+#: ../src/zypper-utils.cc:47
+msgid "See http://en.opensuse.org/Zypper#Troubleshooting for instructions."
+msgstr "Ohjeita on sivulla http://en.opensuse.org/Zypper#Troubleshooting."
+
+#: ../src/zypper-command.cc:92
 #, c-format
 msgid "Unknown command '%s'"
 msgstr "Tuntematon komento '%s'"
 
 # error box title
-#: ../src/zypper-callbacks.h:37
+#: ../src/zypper-callbacks.h:41
 msgid "I/O error"
 msgstr "I/O-virhe"
 
-#: ../src/zypper-callbacks.h:37
+#: ../src/zypper-callbacks.h:41
 msgid "Invalid object"
 msgstr "Epäkelpo objekti."
 
-#: ../src/zypper-media-callbacks.h:53
+#: ../src/zypper-media-callbacks.h:47
+#, c-format
+msgid "Please insert media [%s] # %d and type 'y' to continue or 'n' to cancel the operation."
+msgstr "Aseta media [%s] # %d ja kirjoita 'k' jatkaaksesi tai 'e' peruuttaaksesi toiminnon."
+
+#: ../src/zypper-media-callbacks.h:63 ../src/zypper-media-callbacks.h:69
 msgid "Downloading: "
 msgstr "Ladataan: "
 
 #. TranslatorExplanation This text is a progress display label e.g. "Downloading delta [42%]"
-#: ../src/zypper-source-callbacks.h:95 ../src/zypper-source-callbacks.h:102
+#: ../src/zypper-source-callbacks.h:97 ../src/zypper-source-callbacks.h:104
 msgid "Downloading delta"
 msgstr "Ladataan muunnosta"
 
 #. TranslatorExplanation This text is a progress display label e.g. "Applying delta [42%]"
-#: ../src/zypper-source-callbacks.h:123 ../src/zypper-source-callbacks.h:129
+#: ../src/zypper-source-callbacks.h:125 ../src/zypper-source-callbacks.h:131
 msgid "Applying delta"
 msgstr "Muunnetaan"
 
-#: ../src/zypper-source-callbacks.h:150
+#: ../src/zypper-source-callbacks.h:152
 msgid "Downloading patch rpm"
 msgstr "Ladataan korjaus rpm"
 
 #. TranslatorExplanation This text is a progress display label e.g. "Applying patch rpm [42%]"
-#: ../src/zypper-source-callbacks.h:157
+#: ../src/zypper-source-callbacks.h:159
 msgid "Applying patch rpm"
 msgstr "Otetaan korjaus rpm käyttöön"
 
-#: ../src/zypper-source-callbacks.h:177
+#: ../src/zypper-source-callbacks.h:179
 #, c-format
 msgid "Downloading %s %s-%s.%s"
 msgstr "Ladataan %s %s-%s.%s"
 
 #. TranslatorExplanation %s is package size like "5.6 M"
-#: ../src/zypper-source-callbacks.h:188
+#: ../src/zypper-source-callbacks.h:190
 #, c-format
 msgid "(%s unpacked)"
 msgstr "(%s purettuna)"
 
 #. TranslatorExplanation This text is a progress display label e.g. "Downloading [42%]"
-#: ../src/zypper-source-callbacks.h:197
+#: ../src/zypper-source-callbacks.h:199
 msgid "Downloading"
 msgstr "Ladataan"
 
 #. TranslatorExplanation speaking of a script
-#: ../src/zypper-rpm-callbacks.h:56
+#: ../src/zypper-rpm-callbacks.h:63
 #, c-format
 msgid "Running: %s  (%s, %s)"
 msgstr "Suoritetaan: %s  (%s, %s)"
 
-#: ../src/zypper-rpm-callbacks.h:110
+#: ../src/zypper-rpm-callbacks.h:117
 msgid "Reading installed packages"
 msgstr "Luetaan asennettuja paketteja"
 
-#: ../src/zypper-rpm-callbacks.h:133
+#. TranslatorExplanation This text is a progress display label e.g. "Removing [42%]"
+#: ../src/zypper-rpm-callbacks.h:140 ../src/zypper-rpm-callbacks.h:146
+msgid "Removing "
+msgstr "Poistetaan "
+
+#: ../src/zypper-rpm-callbacks.h:152
 #, c-format
-msgid "Removing: %s-%s"
-msgstr "Poistetaan: %s-%s"
+msgid "Removal of %s failed:"
+msgstr "%s poisto epäonnistui:"
 
-#: ../src/zypper-rpm-callbacks.h:193
-msgid "Will retry more aggressively."
-msgstr "Yritetään uudelleen agressiivisemmin"
+#. TranslatorExplanation --nodeps and --force are options of the rpm command, don't translate
+#: ../src/zypper-rpm-callbacks.h:167
+msgid "(with --nodeps)"
+msgstr "(--nodeps)"
 
-#: ../src/zypper-search.h:237
+#: ../src/zypper-rpm-callbacks.h:167
+msgid "(with --nodeps --force)"
+msgstr "(--nodeps --force)"
+
+#. TranslatorExplanation This text is a progress display label e.g. "Installing [42%]"
+#: ../src/zypper-rpm-callbacks.h:181 ../src/zypper-rpm-callbacks.h:191
+#, c-format
+msgid "Installing: %s-%s"
+msgstr "Asennetaan %s-%s"
+
+#: ../src/zypper-rpm-callbacks.h:212
+#, c-format
+msgid "Installation of %s failed:"
+msgstr "%s asennus epäonnistui:"
+
+#: ../src/zypper-search.h:262
 msgid "Catalog"
 msgstr "Luettelo"
 
-#: ../src/zypper-search.h:239
+#: ../src/zypper-search.h:264
 msgid "Repository"
 msgstr "Asennuslähde"
 
