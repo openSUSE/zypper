@@ -306,6 +306,14 @@ namespace zypp
 
   bool PatchFileReader::Impl::consumeAtomsNode(Reader & reader_r)
   {
+    /*
+       Implementation note:
+
+       !!! do _NOT_ filter out incompatible architectures of atoms !!!
+
+       See https://bugzilla.novell.com/show_bug.cgi?id=300569#c11
+     */
+
     // consumePackageNode
     if (isBeingProcessed(tag_package) && consumePackageNode(reader_r))
       return true;
@@ -401,6 +409,14 @@ namespace zypp
 
   bool PatchFileReader::Impl::consumePackageNode(Reader & reader_r)
   {
+    /*
+       Implementation note:
+
+       !!! do _NOT_ filter out incompatible architectures of atoms !!!
+
+       See https://bugzilla.novell.com/show_bug.cgi?id=300569#c11
+     */
+
     if (isBeingProcessed(tag_patchrpm) && consumePatchrpmNode(reader_r))
       return true;
     else if (isBeingProcessed(tag_deltarpm) && consumeDeltarpmNode(reader_r))
