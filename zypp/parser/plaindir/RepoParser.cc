@@ -121,7 +121,13 @@ data::Package_Ptr makePackageDataFromHeader( const RpmHeader::constPtr header,
   pkg->deps[Dep::OBSOLETES]   = header->tag_obsoletes( filerequires );
   pkg->deps[Dep::ENHANCES]    = header->tag_enhances( filerequires );
   pkg->deps[Dep::SUPPLEMENTS] = header->tag_supplements( filerequires );
-  
+  pkg->vendor                 = header->tag_vendor();
+  pkg->installedSize          = header->tag_size();
+  pkg->buildTime              = header->tag_buildtime();
+  pkg->summary                = (TranslatedText)header->tag_summary();
+  pkg->description            = (TranslatedText)header->tag_description();
+  pkg->licenseToConfirm       = (TranslatedText)header->tag_license();
+
 //   Dependencies deps;
   
 //    RecordId shareDataWith;
