@@ -5,8 +5,9 @@ Mon Aug 27 17:08:41 CEST 2007 - kkaempf@suse.de
   from external, e.g. for the testcases
 - Honor ZYPP_CONF environment variable to override the buit-in
   /etc/zypp/zypp.conf
-- Part of Bug 301286
-- rev 6905
+- Check architecture at handout() to prevent NULL ptr reference.
+- Bug 301286
+- rev 6908
 
 -------------------------------------------------------------------
 Mon Aug 27 15:53:52 CEST 2007 - schubi@suse.de
