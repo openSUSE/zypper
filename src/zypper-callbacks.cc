@@ -126,7 +126,8 @@ int read_action_ari (int default_action) {
 bool read_bool_answer(const string & question, bool default_answer)
 {
   if (!gSettings.machine_readable)
-  	cout << CLEARLN << question << " [y/n]: " << flush;
+  	cout << CLEARLN << question
+  	<< " [" << _("y") << "/" << _("n") << "]: " << flush;
 
   // non-interactive mode: print the answer for convenience and return default
   if (gSettings.non_interactive)
@@ -143,20 +144,18 @@ bool read_bool_answer(const string & question, bool default_answer)
   bool been_here_before = false;
   while (stm.good ()
     // TranslatorExplanation This is a Lowercase 'y' for "yes" used as an
-    // answer in y/n prompts. Translate to the same letter as you translated
-    // it in the "[y/n]" string!.
+    // answer in y/n prompts. This letter will appear in the "Question [y/n]"
+    // prompts and will be expected as a possible answer.
     && c != _("y")
     // TranslatorExplanation Uppercase 'Y' for "yes" used as an
-    // answer in y/n prompts. Translate to the same letter as you translated
-    // it in the "[y/n]" string!.
+    // answer in y/n prompts.
     && c != _("Y")
     // TranslatorExplanation Lowercase 'n' for "no" used as an
-    // answer in y/n prompts. Translate to the same letter as you translated
-    // it in the "[y/n]" string!.
+    // answer in y/n prompts. This letter will appear in the "Question [y/n]"
+    // prompts and will be expected as a possible answer.
     && c != _("n")
     // TranslatorExplanation Uppercase 'N' for "no" used as an
-    // answer in y/n prompts. Translate to the same letter as you translated
-    // it in the "[y/n]" string!.
+    // answer in y/n prompts.
     && c != _("N"))
   {
     if (been_here_before)
