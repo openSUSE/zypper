@@ -37,12 +37,9 @@ namespace zypp
       /** PackagesFileReader implementation. */
       class PackagesFileReader::Impl : public BaseImpl
       {
-	private:
-	  Arch _sysarch;
 	public:
 	  Impl( const PackagesFileReader & parent_r )
 	  : BaseImpl( parent_r )
-	  , _sysarch( ZConfig::instance().systemArchitecture() )
 	  {}
 
 	  virtual ~Impl()
@@ -316,6 +313,7 @@ namespace zypp
       //	METHOD TYPE : Ctor
       //
       PackagesFileReader::PackagesFileReader()
+      : _sysarch( ZConfig::instance().systemArchitecture() )
       {}
 
       ///////////////////////////////////////////////////////////////////

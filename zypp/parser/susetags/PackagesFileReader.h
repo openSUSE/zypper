@@ -45,6 +45,8 @@ namespace zypp
       /** */
       class PackagesFileReader : public FileReaderBase
       {
+	private:
+	  Arch _sysarch;
 	public:
 	  typedef function<void(const data::Package_Ptr &)> PkgConsumer;
 	  typedef function<void(const data::SrcPackage_Ptr &)> SrcPkgConsumer;
