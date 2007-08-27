@@ -41,7 +41,11 @@ namespace zypp
           autolock_untrustedvendor(false)
       {
         MIL << "ZConfig singleton created." << endl;
-        Pathname confpath("/etc/zypp/zypp.conf");
+
+	// ZYPP_CONF might override /etc/zypp/zypp.conf
+
+        const char *env_confpath = getenv( "ZYPP_CONF" );
+        Pathname confpath( env_confpath ? env_confpath : "/etc/zypp/zypp.conf" );
         if ( PathInfo(confpath).isExist())
         {
           InputStream is(confpath);
@@ -49,7 +53,7 @@ namespace zypp
         }
         else
         {
-          MIL << "No /etc/zypp/zypp.conf" << endl;
+          MIL << confpath << " not found, using defaults instead." << endl;
         }
         
         for ( IniDict::section_const_iterator sit = dict.sectionsBegin(); 
@@ -163,8 +167,22 @@ namespace zypp
   //
   Arch ZConfig::systemArchitecture() const
   {
+    // get architecture from ZYpp() if not overriden,
+    //  ZYpp() knows how to retrieve the client arch and check cpu flags
     return ( (_pimpl->cfg_arch == Arch()) ?
         getZYpp()->architecture() : _pimpl->cfg_arch );
+  }
+
+  ///////////////////////////////////////////////////////////////////
+  //
+  //	METHOD NAME : ZConfig::overrideSystemArchitecture
+  //	METHOD TYPE : void
+  //
+  void ZConfig::overrideSystemArchitecture(const Arch & arch)
+  {
+     WAR << "Overriding system architecture with " << arch << endl;
+     _pimpl->cfg_arch = arch;
+     getZYpp()->setArchitecture( arch );
   }
 
   ///////////////////////////////////////////////////////////////////

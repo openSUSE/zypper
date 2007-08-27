@@ -33,6 +33,9 @@ namespace zypp
    * Use it to avoid hardcoded values and calls to getZYpp() just
    * to retrieve some value like architecture, languages or tmppath.
    *
+   * It reads /etc/zypp/zypp.conf, the filename can be overridden by
+   * setting the ZYPP_CONF environment variable to a different file.
+   *
    * \ingroup Singleton
   */
   class ZConfig : private base::NonCopyable
@@ -42,8 +45,14 @@ namespace zypp
       static ZConfig & instance();
 
     public:
-      /** The system architecture. */
+      /** The zypp system architecture. */
       Arch systemArchitecture() const;
+
+      /** Override the zypp system architecture, useful for test scenarious.
+	  This should be used for testing/debugging only since the Target backend
+	  won't be able to install incompatible packages !!
+          DONT use for normal application unless you know what you're doing. */
+      void overrideSystemArchitecture( const Arch & );
 
       /** The prefered locale for translated labels, descriptions,
        *  descriptions, etc. passed to the UI.

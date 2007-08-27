@@ -27,8 +27,7 @@
 #include "zypp/Pattern.h"
 #include "zypp/Product.h"
 #include "zypp/Patch.h"
-
-#include "zypp/ZYppFactory.h"
+#include "zypp/ZConfig.h"
 
 #include "zypp/detail/ImplConnect.h"
 
@@ -409,6 +408,8 @@ init_unit_test_suite( int argc, char *argv[] )
     datadir = argv[1];
   }
 
+  ZConfig::instance().overrideSystemArchitecture( Arch( "i686" ) );
+
   test_suite* test= BOOST_TEST_SUITE("CacheStore");
 
   std::string const params[] = { datadir };
@@ -422,7 +423,6 @@ init_unit_test_suite( int argc, char *argv[] )
   mounts.insert( DiskUsageCounter::MountPoint("/foo") );
   mounts.insert( DiskUsageCounter::MountPoint("/bar") );
   getZYpp()->setPartitions(mounts);
-  getZYpp()->setArchitecture(Arch("i686"));
 
   test->add(BOOST_PARAM_TEST_CASE(&cache_write_susetags_normal_test,
                                  (std::string const*)params, params+1));

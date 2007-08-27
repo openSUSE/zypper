@@ -1,4 +1,14 @@
 -------------------------------------------------------------------
+Mon Aug 27 17:08:41 CEST 2007 - kkaempf@suse.de
+
+- Add ZConfig::overrideSystemArchitecture() to override zypp arch
+  from external, e.g. for the testcases
+- Honor ZYPP_CONF environment variable to override the buit-in
+  /etc/zypp/zypp.conf
+- Part of Bug 301286
+- rev 6905
+
+-------------------------------------------------------------------
 Mon Aug 27 15:53:52 CEST 2007 - schubi@suse.de
 
 -The solver generate an establish call for all
@@ -8,7 +18,7 @@ Mon Aug 27 15:53:52 CEST 2007 - schubi@suse.de
  * Changing of filesystem whithin a workflow, cause the solver results will
    be reset if the filesystem dependencies have been changed
  Bug 271912
-- r 6951 
+- r 6901 
 
 -------------------------------------------------------------------
 Sun Aug 26 15:49:27 CEST 2007 - kkaempf@suse.de

@@ -12,6 +12,7 @@
 #include "zypp/ZYpp.h"
 #include "zypp/ZYppFactory.h"
 #include "zypp/TmpPath.h"
+#include "zypp/ZConfig.h"
 
 #include "zypp/cache/CacheStore.h"
 #include "zypp/data/ResolvableData.h"
@@ -70,6 +71,8 @@ init_unit_test_suite( int argc, char *argv[] )
   {
     datadir = argv[1];
   }
+
+  ZConfig::instance().overrideSystemArchitecture( Arch( "i686" ) );
   
   test_suite* test= BOOST_TEST_SUITE("CacheStore");
   

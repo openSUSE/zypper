@@ -6,6 +6,7 @@
 #include "zypp/base/Logger.h"
 #include "zypp/Arch.h"
 #include "zypp/TmpPath.h"
+#include "zypp/ZConfig.h"
 #include "zypp/cache/CacheInitializer.h"
 #include "zypp/cache/sqlite3x/sqlite3x.hpp"
 
@@ -59,6 +60,7 @@ void cacheinit_test()
 test_suite*
 init_unit_test_suite( int, char* [] )
 {
+    ZConfig::instance().overrideSystemArchitecture( Arch( "i686" ) );
     test_suite* test= BOOST_TEST_SUITE( "CacheInit" );
     test->add( BOOST_TEST_CASE( &cacheinit_test ), 0 /* expected zero error */ );
     return test;
