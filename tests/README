@@ -1,3 +1,7 @@
 
 You can find here unit tests for lot of zypp classes.
 
+run 
+ctest .
+
+or the binary itself to run just one test 
