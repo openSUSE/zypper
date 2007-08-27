@@ -34,6 +34,7 @@
 #include "zypp/ZYppFactory.h"
 #include "zypp/SystemResObject.h"
 #include "zypp/solver/detail/ResolverInfoNeededBy.h"
+#include "zypp/capability/FilesystemCap.h"
 
 
 /////////////////////////////////////////////////////////////////////////
@@ -837,6 +838,26 @@ Resolver::freshenPool (bool resetAfterSolve)
 
 //---------------------------------------------------------------------------
 
+struct FileSystemEstablishItem
+{
+    Resolver & resolver;
+    
+    FileSystemEstablishItem (Resolver & r)
+	: resolver (r)
+    { }
+
+    // items with filecaps has to be evaluate again via establish
+
+    bool operator()( const CapAndItem & cai )
+    {
+	_XDEBUG( "QueueItemInstall::FileSystemEstablishItem (" << cai.item << ", " << cai.cap << ")");
+	resolver.addPoolItemToEstablish (cai.item);
+	return true;
+    }
+};
+
+
+
 bool
 Resolver::resolveDependencies (const ResolverContext_Ptr context)
 {
@@ -885,7 +906,14 @@ Resolver::resolveDependencies (const ResolverContext_Ptr context)
 
 	the_world = local_multiworld;
     }
-#endif
+#endif    
+
+    // Checking if we have to make additional establish concerning filesystem capabilities
+    FileSystemEstablishItem establish(*this);
+    Dep dep( Dep::SUPPLEMENTS);
+    invokeOnEach( pool().byCapabilityIndexBegin( "filesystem()", dep ), // begin()
+			  pool().byCapabilityIndexEnd( "filesystem()", dep ),   // end()
+			  functor::functorRef<bool,CapAndItem>( establish ) );
 
     // create initial_queue
 
