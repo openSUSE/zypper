@@ -167,8 +167,10 @@ namespace zypp
     importKey( key.path(), trusted ? trustedKeyRing() : generalKeyRing() );
     
     if ( trusted )
+    {
+      MIL << "emitting signal to rpm to import key" << endl;;
       emitSignal->trustedKeyAdded( key );
-    
+    }
   }
 
   void KeyRing::Impl::deleteKey( const string &id, bool trusted)
