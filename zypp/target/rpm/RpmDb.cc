@@ -456,7 +456,7 @@ void RpmDb::initDatabase( Pathname root_r, Pathname dbPath_r )
 
   MIL << "Syncronizing keys with zypp keyring" << endl;
   // we do this one by one now.
-  //importZyppKeyRingTrustedKeys();
+  importZyppKeyRingTrustedKeys();
   exportTrustedKeysInZyppKeyRing();
 
   // Close the database in case any write acces (create/convert)
@@ -884,6 +884,40 @@ void RpmDb::doRebuildDatabase(callback::SendReport<RebuildDBReport> & report)
   {
     report->progress( 100, root() + dbPath() ); // 100%
   }
+}
+
+void RpmDb::importZyppKeyRingTrustedKeys()
+{
+  MIL << "Importing zypp trusted keyring" << std::endl;
+
+  std::list<PublicKey> rpm_keys = pubkeys();
+
+  std::list<PublicKey> zypp_keys;
+
+  zypp_keys = getZYpp()->keyRing()->trustedPublicKeys();
+
+  for ( std::list<PublicKey>::const_iterator it = zypp_keys.begin(); it != zypp_keys.end(); ++it)
+    {
+      // we find only the left part of the long gpg key, as rpm does not support long ids
+      std::list<PublicKey>::iterator ik = find( rpm_keys.begin(), rpm_keys.end(), (*it));
+      if ( ik != rpm_keys.end() )
+        {
+          MIL << "Key " << (*it).id() << " (" << (*it).name() << ") is already in rpm database." << std::endl;
+        }
+      else
+        {
+          // now import the key in rpm
+          try
+            {
+              importPubkey((*it).path());
+              MIL << "Trusted key " << (*it).id() << " (" << (*it).name() << ") imported in rpm database." << std::endl;
+            }
+          catch (RpmException &e)
+            {
+              ERR << "Could not import key " << (*it).id() << " (" << (*it).name() << " from " << (*it).path() << " in rpm database" << std::endl;
+            }
+        }
+    }
 }
 
 void RpmDb::exportTrustedKeysInZyppKeyRing()
