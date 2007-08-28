@@ -274,16 +274,6 @@ XMLFilesBackend::isBackendInitialized() const
   bool nmthere = exists(dirForNamedFlags());
   ok = ok && nmthere;
 
-  Pathname sourcesdir = d->root + ZYPP_DB_DIR + "/sources";
-  bool srcthere = PathInfo(sourcesdir).isExist();
-  ok = ok && srcthere;
-
-  if (srcthere && fixperms)
-  {
-    MIL << "Making " << sourcesdir << " not readable by others (0700)" << std::endl;
-    filesystem::chmod( sourcesdir, 0700);
-  }
-
   return ok;
 }
 
@@ -328,13 +318,6 @@ XMLFilesBackend::initBackend()
     ZYPP_THROW(Exception("Cannot create directory " + namedflags.asString()));
   else
     MIL << "Created " << namedflags.asString() << std::endl;
-
-  // create dir for source list
-  Pathname source_p = d->root + Pathname(ZYPP_DB_DIR) + Pathname("/sources/");
-  if (0 != assert_dir(source_p, 0700))
-    ZYPP_THROW(Exception("Cannot create directory " + source_p.asString()));
-  else
-    MIL << "Created " << source_p.asString() << std::endl;
 }
 
 void XMLFilesBackend::setRandomFileNameEnabled( bool enabled )
