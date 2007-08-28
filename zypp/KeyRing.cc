@@ -540,7 +540,6 @@ namespace zypp
     MIL << "Determining key id if signature " << signature << endl;
     // HACK create a tmp keyring with no keys
     TmpDir dir(_base_dir, "fake-keyring");
-    TmpFile fakeData(_base_dir, "fake-data");
 
     const char* argv[] =
     {
@@ -554,9 +553,7 @@ namespace zypp
       "1",
       "--homedir",
       dir.path().asString().c_str(),
-      "--verify",
       signature.asString().c_str(),
-      fakeData.path().asString().c_str(),
       NULL
     };
 

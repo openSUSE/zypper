@@ -193,6 +193,13 @@ void keyring_test( const string &dir )
   //BOOST_CHECK_EQUAL( keyring.trustedPublicKeys().size(), 1 );
 
   /* check signature id can be extracted */
+  
+}
+
+void keyring_signature_test( const string &dir )
+{
+  PublicKey key( Pathname(dir) + "public.asc" );
+
   {
     KeyRingTestReceiver keyring_callbacks;
     KeyRingTestSignalReceiver receiver;
@@ -204,6 +211,11 @@ void keyring_test( const string &dir )
     BOOST_CHECK_THROW( keyring.readSignatureKeyId(Pathname()), Exception );
     TmpFile tmp;
     BOOST_CHECK_EQUAL( keyring.readSignatureKeyId(tmp.path()), "" );
+
+    keyring.importKey(key);
+
+    BOOST_CHECK(keyring.verifyFileSignature( Pathname(dir) + "repomd.xml", Pathname(dir) + "repomd.xml.asc"));
+    BOOST_CHECK( ! keyring.verifyFileSignature( Pathname(dir) + "repomd.xml.corrupted", Pathname(dir) + "repomd.xml.asc"));
   }
 }
 
@@ -228,6 +240,8 @@ init_unit_test_suite( int argc, char* argv[] )
     //set_log_stream( std::cout );
   test_suite* test= BOOST_TEST_SUITE( "PublicKeyTest" );
   test->add(BOOST_PARAM_TEST_CASE( &keyring_test,
+                              (std::string const*)params, params+1));
+  test->add(BOOST_PARAM_TEST_CASE( &keyring_signature_test,
                               (std::string const*)params, params+1));
   return test;
 }
