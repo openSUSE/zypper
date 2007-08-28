@@ -21,6 +21,7 @@
 #include <boost/logic/tribool.hpp>
 
 #include <zypp/base/Logger.h>
+#include "zypp/base/UserRequestException.h"
 #include <zypp/repo/RepoException.h>
 #include <zypp/zypp_detail/ZYppReadOnlyHack.h>
 
@@ -1427,6 +1428,13 @@ int safe_one_command(int argc, char **argv)
     ret = one_command (argc, argv);
     command = ZypperCommand::NONE;
   }
+  catch (const AbortRequestException & ex)
+  {
+    ZYPP_CAUGHT(ex);
+
+    //cerr << _("User requested to abort.") << endl;
+    cerr << ex.asUserString() << endl;
+  }
   catch (const Exception & ex) {
     ZYPP_CAUGHT(ex);
 
@@ -1434,7 +1442,6 @@ int safe_one_command(int argc, char **argv)
     cerr << ex.asUserString() << endl;
    	report_a_bug(cerr);
   }
-
 	if ( gSettings.machine_readable )
   	cout << "</stream>" << endl;
 
