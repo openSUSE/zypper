@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Tue Aug 28 18:51:18 CEST 2007 - dmacvicar@suse.de
+
+- (#302379) allows to skip packages and abort
+
+-------------------------------------------------------------------
 Tue Aug 28 17:51:43 CEST 2007 - mvidner@suse.cz
 
 - "help foo" now works like "foo --help" (by Dominique Leuenberger, #299818).
@@ -21,7 +26,7 @@ Tue Aug 28 15:02:00 CEST 2007 - kkaempf@suse.de
 - rev 6933
 
 -------------------------------------------------------------------
-Tue Aug 28 12:50:27 CEST 2007 - duncan@suse.de
+Tue Aug 28 12:50:27 CEST 2007 - dmacvicar@suse.de
 
 - a init target at refresh to have keys available
   (#304672) 
@@ -52,7 +57,7 @@ Thu Aug 23 10:22:14 CEST 2007 - mvidner@suse.cz
 - 0.8.16
 
 -------------------------------------------------------------------
-Tue Aug 21 15:07:29 CEST 2007 - duncan@suse.de
+Tue Aug 21 15:07:29 CEST 2007 - dmacvicar@suse.de
 
 - fix invalid capability creation (#301690)
 - 0.8.15 
