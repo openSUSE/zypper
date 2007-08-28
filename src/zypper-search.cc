@@ -5,6 +5,8 @@
 #include "zypper-misc.h"
 
 #include <zypp/base/Algorithm.h>
+#include <zypp/RepoManager.h>
+#include <zypp/RepoInfo.h>
 
 using namespace std;
 using namespace boost;
@@ -23,6 +25,35 @@ ZyppSearchOptions::ZyppSearchOptions()
   , _case_sensitive(false)
 {
   // _kinds stays empty
+
+  // check for disabled repos and limit list of repos accordingly.
+  //   "-r/--repo" will override this
+  try {
+    RepoManager manager;
+    std::list<zypp::RepoInfo> known_repos = manager.knownRepositories();
+    std::list<zypp::RepoInfo>::const_iterator it_r;
+    for (it_r = known_repos.begin(); it_r != known_repos.end(); ++it_r)
+    {
+      if (!it_r->enabled()) {
+	break;
+      }
+    }
+    if (it_r != known_repos.end())	// loop ended prematurely -> one of the repos is disabled
+    {
+      clearRepos();
+      for (it_r = known_repos.begin(); it_r != known_repos.end(); ++it_r)
+      {
+	if (it_r->enabled()) {
+	  addRepo( it_r->alias() );			// explicitly list enabled repos
+        }
+      }
+    }
+  }
+  catch ( const Exception & excpt_r )
+  {
+    ZYPP_CAUGHT( excpt_r );
+    cerr << "Checking for disabled repositories failed" << endl;
+  }
 }
 
 void ZyppSearchOptions::resolveConflicts() {

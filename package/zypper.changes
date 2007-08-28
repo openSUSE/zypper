@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Aug 28 18:53:01 CEST 2007 - kkaempf@suse.de
+
+- Don't search disabled repos, override with --repo (#304653)
+- r 6945
+
+-------------------------------------------------------------------
 Tue Aug 28 18:51:18 CEST 2007 - dmacvicar@suse.de
 
 - (#302379) allows to skip packages and abort
