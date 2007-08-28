@@ -617,9 +617,13 @@ namespace zypp
   ////////////////////////////////////////////////////////////////////////////
 
   void RepoManager::cleanMetadata( const RepoInfo &info,
-                                   const ProgressData::ReceiverFnc & progress )
+                                   const ProgressData::ReceiverFnc & progressfnc )
   {
+    ProgressData progress(100);
+    progress.sendTo(progressfnc);
+
     filesystem::recursive_rmdir(rawcache_path_for_repoinfo(_pimpl->options, info));
+    progress.toMax();
   }
 
   void RepoManager::buildCache( const RepoInfo &info,
@@ -1062,11 +1066,12 @@ namespace zypp
           }
         }
 
-        CombinedProgressData subprogrcv(progress);
-        
+        CombinedProgressData subprogrcv(progress, 70);
+        CombinedProgressData cleansubprogrcv(progress, 30);
         // now delete it from cache
         cleanCache( todelete, subprogrcv);
-
+        // now delete metadata (#301037)
+        cleanMetadata( todelete, cleansubprogrcv);
         MIL << todelete.alias() << " sucessfully deleted." << endl;
         return;
       } // else filepath is empty
