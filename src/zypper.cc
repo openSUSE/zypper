@@ -1003,6 +1003,8 @@ int one_command(int argc, char **argv)
       return ZYPPER_EXIT_ERR_PRIVILEGES;
     }
 
+    // need gpg keys when downloading (#304672)
+    cond_init_target();
     refresh_repos(arguments);
   }
 
