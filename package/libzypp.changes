@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue Aug 28 18:48:26 CEST 2007 - dmacvicar@suse.de
+
+- (#297001) - libzypp: can't skip broken packages
+- re enable importing zypp keyring from rpm.(#302379)
+- 3.19.1
+
+-------------------------------------------------------------------
 Tue Aug 28 17:30:30 CEST 2007 - kkaempf@suse.de
 
 - rename ResolvableQuery::iterateResolvablesByKindsAndStrings
@@ -11,7 +18,7 @@ Tue Aug 28 17:30:30 CEST 2007 - kkaempf@suse.de
 - rev 6935
 
 -------------------------------------------------------------------
-Tue Aug 28 11:27:53 CEST 2007 - duncan@suse.de
+Tue Aug 28 11:27:53 CEST 2007 - dmacvicar@suse.de
 
 - real fix for reading signature ids. (#390535).  
 - delete metadata when removing repo (#301037).
@@ -64,7 +71,7 @@ Sun Aug 26 15:49:27 CEST 2007 - kkaempf@suse.de
 - r 6882
 
 -------------------------------------------------------------------
-Fri Aug 24 11:52:27 CEST 2007 - duncan@suse.de
+Fri Aug 24 11:52:27 CEST 2007 - dmacvicar@suse.de
 
 - don't run source migration if yast is running in
   intsys mode (#297136)
@@ -608,7 +615,7 @@ Wed Jul 18 12:38:55 CEST 2007 - ma@suse.de
 - revision 6058
 
 -------------------------------------------------------------------
-Wed Jul 18 14:16:59 CEST 2007 - duncan@suse.de
+Wed Jul 18 14:16:59 CEST 2007 - dmacvicar@suse.de
 
 - allow / in alias (#292628)
 
