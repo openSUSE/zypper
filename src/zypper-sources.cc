@@ -714,7 +714,7 @@ int add_repo(RepoInfo & repo)
   {
     cout_n << ( repo.enabled() ? "[x]" : "[ ]" );
     cout_n << ( repo.autorefresh() ? "* " : "  " );
-    cout_n << repo.alias() << " (" << *repo.baseUrlsBegin() << ")" << endl;
+    cout_n << repo.name() << " (" << *repo.baseUrlsBegin() << ")" << endl;
   }
   else
   {

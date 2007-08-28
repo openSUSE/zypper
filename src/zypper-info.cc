@@ -90,7 +90,7 @@ Copy and modify /usr/share/vim/current/gvimrc to ~/.gvimrc if needed.
 void printPkgInfo(const PoolItem & pool_item, const PoolItem & ins_pool_item) {
 
   cout << (gSettings.is_rug_compatible ? _("Catalog: ") : _("Repository: "))
-       << pool_item.resolvable()->repository().info().alias() << endl;
+       << pool_item.resolvable()->repository().info().name() << endl;
   cout << _("Name: ") << pool_item.resolvable()->name() << endl;
   cout << _("Version: ") << pool_item.resolvable()->edition().asString() << endl;
   cout << _("Arch: ") << pool_item.resolvable()->arch().asString() << endl;

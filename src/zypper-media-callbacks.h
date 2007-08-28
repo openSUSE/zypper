@@ -45,7 +45,7 @@ namespace ZmartRecipients
       // TranslatorExplanation translate letters 'y' and 'n' the same as you translated the [y/n] prompt. 
       std::string request = boost::str(boost::format(
           _("Please insert media [%s] # %d and type 'y' to continue or 'n' to cancel the operation."))
-          % repo.info().alias() % mediumNr);
+          % repo.info().name() % mediumNr);
       if (read_bool_answer(request, false))
         return MediaChangeReport::RETRY; 
       else
