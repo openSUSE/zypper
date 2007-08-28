@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue Aug 28 17:40:25 CEST 2007 - kkaempf@suse.de
+
+- support "-r" (limit to repo) on search (#305384)
+- rev 6937
+- version 0.8.17
+
+-------------------------------------------------------------------
 Tue Aug 28 15:02:00 CEST 2007 - kkaempf@suse.de
 
 - allow for multiple types when searching, default to '-t package'.

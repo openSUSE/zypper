@@ -49,6 +49,7 @@ public:
   bool searchDescriptions() const { return _search_descriptions; }
   bool caseSensitive() const { return _case_sensitive; }
   const std::vector<zypp::Resolvable::Kind> & kinds() const { return _kinds; }
+  const std::vector<std::string> & repos() const { return _repos; }
 
   void setInstalledFilter(const InsFilter ifilter) { _ifilter =  ifilter; }
   void setMatchAll(const bool match_all = true) { _match_all = match_all; }
@@ -57,8 +58,14 @@ public:
   void setMatchExact(const bool match_exact = true) { _match_exact = match_exact; }
   void setSearchDescriptions(const bool search_descriptions = true) { _search_descriptions = search_descriptions; }
   void setCaseSensitive(const bool case_sensitive = true) { _case_sensitive = case_sensitive; }
+  // reset list of to-be-matched resolvable kinds
   void clearKinds( ) { _kinds.clear(); }
+  // add a resolvable kind to match
   void addKind( const zypp::Resolvable::Kind & kind ) { _kinds.push_back( kind ); }
+  // reset list of to-be-matched repository aliases
+  void clearRepos( ) { _repos.clear(); }
+  // add a repository alias to match
+  void addRepo( const std::string & repo ) { _repos.push_back( repo ); }
 
 private:
   InsFilter _ifilter;
@@ -68,6 +75,7 @@ private:
   bool _search_descriptions;
   bool _case_sensitive;
   std::vector <zypp::Resolvable::Kind> _kinds;
+  std::vector <std::string> _repos;
 };
 
 struct GenericStringHash {

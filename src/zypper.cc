@@ -1167,6 +1167,14 @@ int one_command(int argc, char **argv)
       options.addKind( ResTraits<Package>::kind );
     }
 
+    if (copts.count("repo") > 0) {
+      options.clearRepos();
+      std::list<std::string>::const_iterator it;
+      for (it = copts["repo"].begin(); it != copts["repo"].end(); ++it) {
+        options.addRepo( *it );
+      }
+    }
+
     options.resolveConflicts();
 
     int initret = init_repos();

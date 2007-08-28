@@ -99,17 +99,7 @@ ZyppSearch::invokeOnEachSearched(_Filter filter_r, _PoolCallback pool_cb, _Cache
       {
         // search cache on ALL or UNINSTALLED by TYPE
 
-	if (_qstrings.empty())
-        {
-	  std::vector<zypp::Resolvable::Kind>::const_iterator it;
-	  for (it = _options.kinds().begin(); it != _options.kinds().end(); ++it) {
-	    _query.iterateResolvablesByKind( *it, cache_cb );
-	  }
-        }
-	else
-        {
-          _query.iterateResolvablesByKindsAndStrings( _options.kinds(), _qstrings, (_options.matchExact() ? cache::MATCH_EXACT : cache::MATCH_SUBSTRING)|cache::MATCH_NAME, cache_cb );
-        }
+        _query.iterateResolvablesByKindsAndStringsAndRepos( _options.kinds(), _qstrings, (_options.matchExact() ? cache::MATCH_EXACT : cache::MATCH_SUBSTRING)|cache::MATCH_NAME, _options.repos(), cache_cb );
       }
       catch ( const Exception & excpt_r )
       {
@@ -150,7 +140,7 @@ ZyppSearch::invokeOnEachSearched(_Filter filter_r, _PoolCallback pool_cb, _Cache
       {
         // search cache on ALL or UNINSTALLED by Kind AND Name
 
-        _query.iterateResolvablesByKindsAndStrings( kinds, _qstrings, cache::MATCH_EXACT|cache::MATCH_NAME, cache_cb );
+        _query.iterateResolvablesByKindsAndStringsAndRepos( kinds, _qstrings, cache::MATCH_EXACT|cache::MATCH_NAME, _options.repos(), cache_cb );
       }
       catch ( const Exception & excpt_r )
       {
@@ -185,7 +175,7 @@ ZyppSearch::invokeOnEachSearched(_Filter filter_r, _PoolCallback pool_cb, _Cache
       {
         // search cache on ALL or UNINSTALLED by WILD NAME
 
-        _query.iterateResolvablesByKindsAndStrings( kinds, _qstrings, cache::MATCH_SUBSTRING|cache::MATCH_NAME, cache_cb );
+        _query.iterateResolvablesByKindsAndStringsAndRepos( kinds, _qstrings, cache::MATCH_SUBSTRING|cache::MATCH_NAME, _options.repos(), cache_cb );
       }
       catch ( const Exception & excpt_r )
       {
