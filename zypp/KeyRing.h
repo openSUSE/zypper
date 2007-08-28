@@ -166,7 +166,7 @@ namespace zypp
     
     /**
      * Follows a signature verification interacting with the user.
-     * The boolr eturned depends on user desicion to trust or not.
+     * The bool returned depends on user decision to trust or not.
      */
     bool verifyFileSignatureWorkflow( const Pathname &file, const std::string filedesc, const Pathname &signature);
     bool verifyFileSignature( const Pathname &file, const Pathname &signature);
