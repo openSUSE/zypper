@@ -1,7 +1,8 @@
 -------------------------------------------------------------------
 Tue Aug 28 11:27:53 CEST 2007 - duncan@suse.de
 
-- real fix for reading signature ids. #390535.  
+- real fix for reading signature ids. (#390535).  
+- delete metadata when removing repo (#301037).
 
 -------------------------------------------------------------------
 Mon Aug 27 23:52:41 CEST 2007 - dmacvicar@suse.de
