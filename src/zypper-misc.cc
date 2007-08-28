@@ -600,12 +600,14 @@ int show_summary()
           retv = ZYPPER_EXIT_INF_RESTART_NEEDED;
       }
 
-      if ( it->status().isToBeInstalled() )
+      if ( it->status().isToBeInstalled()
+	   && it->resolvable()->kind() != ResTraits<Atom>::kind )
       {
         DBG << "<install>   ";
         to_be_installed[it->resolvable()->kind()].insert(it->resolvable());
       }
-      if ( it->status().isToBeUninstalled() )
+      if ( it->status().isToBeUninstalled()
+	   && it->resolvable()->kind() != ResTraits<Atom>::kind )
       {
         DBG << "<uninstall> ";
         to_be_removed[it->resolvable()->kind()].insert(it->resolvable());
